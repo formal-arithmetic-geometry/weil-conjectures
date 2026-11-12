@@ -66,7 +66,6 @@ private theorem open_comparison_paste
   rw [ht, ← Category.assoc, hl]
   simp only [Category.assoc]
 
-set_option profiler true in
 /-- Scalar transport of the base-derived tensor comparison to the ordinary pullback.
 This statement concerns arbitrary complexes, without K-flatness or derived counits.
 
@@ -165,8 +164,7 @@ theorem exists_singleComplexOpen_ordinary_comparison
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
   have ht' : F₀.map k₀ ≫ F₀.map (H₀.map β) ≫ ν.hom.app W = r ≫ F.map k := ht
   have hl' : F₀.map (M.localizedComparison i) ≫ r =
-      l.hom ≫ F.map (N.localizedComparison i) := by
-    exact hl
+      l.hom ≫ F.map (N.localizedComparison i) := hl
   refine ⟨l, ?_⟩
   change F₀.map (M.localizedComparison i ≫ k₀) ≫
       F₀.map (H₀.map β) ≫ ν.hom.app W =

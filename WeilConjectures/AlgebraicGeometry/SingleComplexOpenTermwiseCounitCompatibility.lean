@@ -103,6 +103,81 @@ private theorem counit_square_of_normalized
   rw [hε, h, ← hδ]
   simp only [Category.assoc]
 
+-- Normalize the localization factors before specializing to sheaves on schemes.
+private theorem termwise_counit_square
+    {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
+    [Abelian C] [Abelian D] [Abelian B] [Abelian E]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    [HasDerivedCategory.{w} B] [HasDerivedCategory.{w} E]
+    (F : C ⥤ D) (G : D ⥤ E) (R : C ⥤ B) (J : B ⥤ E)
+    [F.Additive] [G.Additive] [R.Additive] [J.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    (LJ : DerivedCategory B ⥤ DerivedCategory E)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (δ : DerivedCategory.Qh ⋙ LJ ⟶ J.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (e : F ⋙ G ≅ R ⋙ J) (P : CochainComplex C ℤ)
+    (θ : LJ.obj (R.mapDerivedCategory.obj (DerivedCategory.Q.obj P)) ⟶
+      G.mapDerivedCategory.obj (L.obj (DerivedCategory.Q.obj P)))
+    (h : θ ≫ G.mapDerivedCategory.map
+          (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P)) ≫
+        G.mapDerivedCategoryFactorsh.hom.app
+          ((F.mapHomotopyCategory (.up ℤ)).obj
+            ((HomotopyCategory.quotient C (.up ℤ)).obj P)) ≫
+        DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+            (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm).hom.app
+              ((HomotopyCategory.quotient C (.up ℤ)).obj P)) =
+      LJ.map (R.mapDerivedCategoryFactorsh.hom.app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj P)) ≫
+        δ.app ((R.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient C (.up ℤ)).obj P))) :
+    LJ.map (R.mapDerivedCategoryFactors.inv.app P) ≫ θ ≫
+        G.mapDerivedCategory.map
+          (L.map ((DerivedCategory.quotientCompQhIso C).inv.app P) ≫
+            ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫
+            DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+            (DerivedCategory.quotientCompQhIso D).hom.app
+              ((F.mapHomologicalComplex (.up ℤ)).obj P)) =
+      LJ.map ((DerivedCategory.quotientCompQhIso B).inv.app
+          ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        δ.app ((HomotopyCategory.quotient B (.up ℤ)).obj
+          ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        DerivedCategory.Qh.map ((J.mapHomotopyCategoryFactors (.up ℤ)).hom.app
+          ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        (DerivedCategory.quotientCompQhIso E).hom.app
+          ((J.mapHomologicalComplex (.up ℤ)).obj
+            ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.inv (.up ℤ)).app P) ≫
+        G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
+  refine counit_square_of_normalized (F := G.mapDerivedCategory)
+    (termwise_counit_transport F L ε P)
+    (termwise_counit_transport J LJ δ ((R.mapHomologicalComplex (.up ℤ)).obj P)) ?_
+  have hf := congrArg Iso.hom (termwise_exact_factors R P)
+  change R.mapDerivedCategoryFactorsh.hom.app
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
+      R.mapDerivedCategoryFactors.hom.app P at hf
+  rw [hf] at h
+  have h' := cancel_counit_factors
+    (LJ.mapIso (R.mapDerivedCategoryFactors.app P)) θ
+    (G.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P)))
+    (G.mapDerivedCategoryFactorsh.app
+      ((F.mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient C (.up ℤ)).obj P)))
+    (DerivedCategory.Qh.mapIso
+      ((Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm).app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj P)))
+    (δ.app ((HomotopyCategory.quotient B (.up ℤ)).obj
+      ((R.mapHomologicalComplex (.up ℤ)).obj P))) h
+  have htarget := congrArg Iso.inv
+    (termwise_exact_factors G ((F.mapHomologicalComplex (.up ℤ)).obj P))
+  exact h'.trans (congrArg₂ (fun x y ↦
+    δ.app ((HomotopyCategory.quotient B (.up ℤ)).obj
+      ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫ x ≫ y)
+    (termwise_homotopy_square_inv e P) htarget)
+
 set_option profiler true in
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
@@ -165,55 +240,14 @@ theorem singleComplexOpen_termwise_counit_compatibility
     Functor.preservesZeroMorphisms_of_additive _
   let : (Scheme.Modules.tensorPullback g' ⋙ schemeOpenRestriction X' U').PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_additive _
-  have h := open_pinned_counit_homotopy_restriction g' U U' j hj
-    ((HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)
   dsimp only [singleComplexOpenTensorRestrictionMap]
-  refine counit_square_of_normalized
-    (F := (schemeOpenRestriction X' U').mapDerivedCategory)
-    (termwise_counit_transport (Scheme.Modules.tensorPullback g')
-      (derivedPullback g') (counit g') P)
-    (termwise_counit_transport (Scheme.Modules.tensorPullback j)
-      (derivedPullback j) (counit j)
-      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ?_
-  have hf : (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app
+  exact termwise_counit_square
+    (Scheme.Modules.tensorPullback g') (schemeOpenRestriction X' U')
+    (schemeOpenRestriction X U) (Scheme.Modules.tensorPullback j)
+    (derivedPullback g') (derivedPullback j) (counit g') (counit j)
+    (openPinnedTensorRestrictionIso g' U U' j hj) P _
+    (open_pinned_counit_homotopy_restriction g' U U' j hj
       ((HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) =
-      (schemeOpenRestriction X U).mapDerivedCategoryFactors.hom.app P := by
-    exact congrArg Iso.hom (termwise_exact_factors (schemeOpenRestriction X U) P)
-  have h := h.trans (congrArg (fun k ↦ (derivedPullback j).map k ≫
-    (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P))) hf)
-  have h' := cancel_counit_factors
-    ((derivedPullback j).mapIso ((schemeOpenRestriction X U).mapDerivedCategoryFactors.app P))
-    (singleComplexRestrictedCoefficient g' (DerivedCategory.Q.obj P)
-      ((derivedPullback g').obj (DerivedCategory.Q.obj P)) (𝟙 _) U U' j hj)
-    ((schemeOpenRestriction X' U').mapDerivedCategory.map
-      ((counit g').app ((HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)))
-    ((schemeOpenRestriction X' U').mapDerivedCategoryFactorsh.app
-      (((Scheme.Modules.tensorPullback g').mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)))
-    (DerivedCategory.Qh.mapIso
-      ((openPinnedHomotopyTensorRestrictionIso g' U U' j hj).app
-        ((HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)))
-    ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)))
-    h
-  have htarget := congrArg Iso.inv
-    (termwise_exact_factors (schemeOpenRestriction X' U')
-      (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))
-  have hβ : DerivedCategory.Qh.map
-      ((openPinnedHomotopyTensorRestrictionIso g' U U' j hj).inv.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (openPinnedTensorRestrictionIso g' U U' j hj).inv (.up ℤ)).app P) := by
-    exact termwise_homotopy_square_inv (openPinnedTensorRestrictionIso g' U U' j hj) P
-  exact h'.trans (congrArg₂ (fun x y =>
-    (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ≫ x ≫ y)
-    hβ htarget)
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P))
 
 end AlgebraicGeometry

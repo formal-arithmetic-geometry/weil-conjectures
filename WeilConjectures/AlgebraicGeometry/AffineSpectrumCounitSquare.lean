@@ -58,7 +58,6 @@ private theorem affine_counit_inverse_square
   rw [← h]
   simp only [Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
 
-set_option profiler true in
 /-- The inverse pullback counits commute with the canonical affine coordinate comparison.
 This is an equation of derived morphisms, independent of f, g, z0 and stalk cohomology.
 
