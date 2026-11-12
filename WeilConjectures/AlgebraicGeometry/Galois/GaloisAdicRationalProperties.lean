@@ -1132,7 +1132,6 @@ private theorem rational_abelian :
     ⟨fun J ↦ Adjunction.hasLimitsOfShape_of_equivalence (d.eR E).functor⟩
   exact ⟨abelianOfEquivalence (d.eR E).functor⟩
 
-set_option profiler true in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem rational_tensor_from_integral
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d)
@@ -1147,7 +1146,6 @@ private theorem rational_tensor_from_integral
   intro F
   exact (hcanon.localization E F).imp fun _ h ↦ h.1
 
-set_option profiler true in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem rational_unit_from_integral
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d)
