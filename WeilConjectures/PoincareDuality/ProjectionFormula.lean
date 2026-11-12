@@ -433,7 +433,6 @@ private lemma isIso_homMk_of_isIso {C : Type*} [Category* C] {P : ObjectProperty
   have : IsIso (P.ι.map (P.homMk g)) := ‹IsIso g›
   isIso_of_fully_faithful P.ι _
 
-set_option maxHeartbeats 1000000 in
 -- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
 constructible `ℚ̄_ℓ`-complexes: the proper projection formula (blueprint
@@ -831,7 +830,6 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
 constructible `𝒪_E`-complexes: the proper projection formula (blueprint
