@@ -96,7 +96,8 @@ private theorem product_shift_square {A : Type*} [Category A] [Abelian A]
   intro n
   simp only [Category.assoc, ← Functor.map_comp]
   erw [hp, ← Category.assoc, Limits.Pi.map_π, Category.assoc]
-  rw [Limits.Pi.map_π, (shiftFunctor (CochainComplex A ℤ) m).map_comp]
+  erw [Limits.Pi.map_π]
+  rw [(shiftFunctor (CochainComplex A ℤ) m).map_comp]
   rw [← Category.assoc _ _ ((q.app (op n))⟦m⟧'), hr]
   simp only [Category.assoc]
   rw [Limits.Pi.map_π_assoc, h]
@@ -181,7 +182,6 @@ def IntegralComparisonPullbackGeneratorEquation {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((κ n).hom.f i).val.app (op U)
           (coefficientEvaluationSection l E Y (C.X i) n (op U) x))
 
-set_option profiler true in
 /-- Finite generator normalization fixes the signed Roos shift square.
 
 Source: Stacks 03EL, 014E and 0941; step 2 and the signed coordinate calculation
