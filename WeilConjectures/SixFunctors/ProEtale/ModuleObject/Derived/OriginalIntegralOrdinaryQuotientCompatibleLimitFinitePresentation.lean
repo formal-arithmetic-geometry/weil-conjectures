@@ -273,9 +273,6 @@ private theorem local_limit
     (hz k)
   simpa only [Mod.comp_hom', ← Category.assoc, Sheaf.unitHomEval_comp, ha] using hh
 
-set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
--- Elaborating the pullback comparison and sheaf gluing exceeds the default heartbeat limit.
 /-- Convergence of individual sections of a finitely presented integral module.
 Source: Hemo--Richarz--Scholbach, Proposition 5.1; Bhatt--Scholze, Section 6.1.
 (blueprint: lem-sp-original-integral-ordinary-quotient-compatible-limit-finite-presentation).
@@ -324,10 +321,11 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_finitePresentation
   let Λ := Profinite.padicIntegersRingObj ell E
   obtain ⟨ι, D, hD, g, hg⟩ := Scheme.exists_isWContractibleRing_cover U.unop.left
   have (i : ι) : IsWContractibleRing (D i) := hD i
-  have (i : ι) : WeaklyEtale (g i) :=
+  have hg' (i : ι) : WeaklyEtale (g i) :=
     Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg ⟨i⟩
   let w (i : ι) : Spec (D i) ⟶ Y := g i ≫ U.unop.hom
-  have (i : ι) : WeaklyEtale (w i) := inferInstanceAs (WeaklyEtale (g i ≫ U.unop.hom))
+  have (i : ι) : WeaklyEtale (w i) :=
+    MorphismProperty.comp_mem @WeaklyEtale (g i) U.unop.hom (hg' i) U.unop.prop
   let W (i : ι) : Y.ProEt :=
     (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (w i))).obj
       (ProEt.mk (𝟙 (Spec (D i))))
@@ -364,7 +362,9 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_finitePresentation
         (N.X.obj.map (a i).op (b m)) =
       (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app (Opposite.op (W i))
         (N.X.obj.map (a i).op (b n))
-    rw [NatTrans.naturality_apply, NatTrans.naturality_apply, hb n m hnm]
+    let q := (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom
+    rw [NatTrans.naturality_apply q (a i).op, NatTrans.naturality_apply q (a i).op,
+      hb n m hnm]
   choose x hx using hlocal
   have hmatch : Presieve.Arrows.Compatible (N.X.obj ⋙ forget Ab.{u + 1}) a x := by
     intro i j V f g hfg
@@ -374,8 +374,9 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_finitePresentation
         (N.X.obj.map f.op (x i)) =
       (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app (Opposite.op V)
         (N.X.obj.map g.op (x j))
-    rw [NatTrans.naturality_apply, NatTrans.naturality_apply, hx, hx,
-      ← NatTrans.naturality_apply, ← NatTrans.naturality_apply]
+    let q := (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom
+    rw [NatTrans.naturality_apply q f.op, NatTrans.naturality_apply q g.op, hx i n,
+      hx j n, NatTrans.naturality_apply q (a i).op, NatTrans.naturality_apply q (a j).op]
     simp only [← Functor.map_comp_apply, ← CategoryTheory.op_comp, hfg]
   have hs : Presieve.IsSheaf (ProEt.topology Y) (N.X.obj ⋙ forget Ab.{u + 1}) :=
     (isSheaf_iff_isSheaf_of_type _ _).mp
@@ -396,7 +397,8 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_finitePresentation
       ((cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app U z) =
     Q.X.obj.map (a i).op
       ((cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app U (b n))
-  rw [← NatTrans.naturality_apply, ← NatTrans.naturality_apply, hz]
+  let q := (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom
+  rw [← NatTrans.naturality_apply q (a i).op, ← NatTrans.naturality_apply q (a i).op, hz]
   exact hx i n
 
 end AlgebraicGeometry.ProEtale.CondensedRing
