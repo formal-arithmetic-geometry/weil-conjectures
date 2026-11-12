@@ -90,6 +90,16 @@ private theorem right_unit_of_left (ε : F.obj (𝟙_ B) ≅ 𝟙_ D) (P : B)
 
 end BraidedComparison
 
+-- Resolve totalization directly from coproducts, without searching through shifted complexes.
+private instance ordinaryTensorHasTotalForSymmetry (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :
+    HomologicalComplex.HasMapBifunctor P Q (ordinaryTensorBifunctor l Y) (.up ℤ) :=
+  fun _ ↦ HasColimitsOfShape.has_colimit _
+
+private instance ordinaryGradedHasTensorForSymmetry (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    (P Q : GradedObject ℤ (ProEtale.AdicSheaf l Y)) : GradedObject.HasTensor P Q :=
+  fun _ ↦ HasColimitsOfShape.has_colimit _
+
 attribute [local irreducible] Functor.mapDerivedCategory
   nativeWeilRingedMonoidal nativeWeilRingedSymmetric nativeWeilRingedTensorModel
   Functor.mapDerivedCategoryFactors DerivedCategory DerivedCategory.Q
@@ -346,8 +356,10 @@ theorem native_weil_tensor_ringed_unit_symmetry_representatives
     · simpa only [n, n', Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
         Category.assoc] using native_weil_tensor_ringed_swap_localization
           k₀ l X T adj e he chain hchain b A SB TB βB cB swap hsigned P Q hP hQ
-    · have hb := hβ Qc Pc hQc hPc
-      rw [← hmodels Pc Qc hPc hQc, ← hmodels Qc Pc hQc hPc] at hb
+    · have hb : (β_ (DerivedCategory.Q.obj Pc) (DerivedCategory.Q.obj Qc)).hom ≫
+          (ordinaryModel Pc Qc hPc).hom =
+            (ordinaryModel Qc Pc hQc).hom ≫ DerivedCategory.Q.map (swap Qc Pc).hom := by
+        simpa only [hmodels Pc Qc hPc hQc, hmodels Qc Pc hQc hPc] using hβ Qc Pc hQc hPc
       have hnat := BraidedCategory.braiding_naturality aP.hom aQ.hom
       simp only [o, o', Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
         CoefficientClosedStructure.tensor, tensor_map, Category.assoc]
