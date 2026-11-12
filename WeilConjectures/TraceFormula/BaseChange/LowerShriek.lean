@@ -180,6 +180,19 @@ variable {S : Type u} [Field S] [Fact (ringChar S).Prime] [Fact (ringChar S ≠ 
   {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D}
 
 set_option profiler true in
+private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_comp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq a c b d) (K : Dᵇc(D.left)⟦Λ⟧) :
+    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
+      (leftDerivedUpperStarComp Λ c.left d.left).inv.app K.obj ≫
+        eqToHom (congrArg (fun t ↦ L((t)^*⟦Λ⟧).obj K.obj)
+          (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
+        (leftDerivedUpperStarComp Λ a.left b.left).hom.app K.obj := by
+  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    ℓ Λ sq K).trans
+      (pullbackSquareComparison_hom_app Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ K.obj)
+
+set_option profiler true in
 omit [Fact ℓ.Prime] in
 /-- On the ambient derived categories, the pullback comparison of a commutative square
 `a ≫ b = c ≫ d` is `L(c ≫ d)^* = L(a ≫ b)^*` between the composition isomorphisms. -/
@@ -191,10 +204,7 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq [Fact ℓ.Prim
         eqToHom (congrArg (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj)
           (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
         (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).hom.app K.obj := by
-  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-    ℓ (Profinite.padicAlgClRingObj ℓ) sq K).trans
-      (pullbackSquareComparison_hom_app (Profinite.padicAlgClRingObj ℓ)
-        ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ K.obj)
+  exact boundedConstructiblePullbackSquareComparison_hom_app_hom_comp ℓ _ sq K
 
 end SquareComparison
 
