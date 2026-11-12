@@ -380,21 +380,10 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
     let actual ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type
-    let mut work := #[(actual, target, "eq")]
-    let mut differences := 0
-    for _ in [:1000] do
-      if work.isEmpty || differences >= 20 then break
-      let (a, b, path) := work.back!
-      work := work.pop
-      let a := a.consumeMData
-      let b := b.consumeMData
-      if a == b then continue
-      if a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
-        Lean.logInfo m!"difference {path}: {a.getAppFn} / {b.getAppFn}"
-        differences := differences + 1
-      else
-        for i in [:a.getAppNumArgs] do
-          work := work.push (a.getAppArgs[i]!, b.getAppArgs[i]!, path ++ "." ++ toString i)
+    for i in [0, 2, 1] do
+      Lean.logInfo m!"comparing equality argument {i}"
+      let matched ← Lean.Meta.isDefEq actual.getAppArgs[i]! target.getAppArgs[i]!
+      Lean.logInfo m!"comparison {i}: {matched}"
   exact final
 
 end WeilConjectures
