@@ -129,8 +129,7 @@ private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
   rw [ProEtale.VaryingRing.square_symm]
   exact ProEtale.VaryingRing.evalPMate_isIso R q f n
 
-set_option maxHeartbeats 1000000 in
--- Comparing the derived functors in the two coefficient coordinates needs extra elaboration steps.
+set_option trace.profiler true in
 /-- An ordinary invertible evaluation mate for strict integral systems has an
 invertible canonical right-derived mate for the actual integral pullback models.
 Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7
