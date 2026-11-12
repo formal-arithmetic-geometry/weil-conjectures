@@ -99,7 +99,6 @@ lemma _root_.WithBot.ENat.eq_one_of_add_one_eq_two {d : WithBot ℕ∞} (h : d +
 
 variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ C.Z)
 
-set_option maxHeartbeats 1600000 in
 -- The computation of the iterated pullbacks through the chart is a long chain of rewrites.
 /-- **The punctured trait is the spectrum of the fraction field of a strictly henselian
 trait** (blueprint `det-tf-transverse-corner-constant`, the punctured trait). For a geometric
