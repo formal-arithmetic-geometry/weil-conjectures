@@ -59,6 +59,7 @@ private theorem wedgeMul_wedge {R M : Type v} [CommRing R] [AddCommGroup M]
   exact ExteriorAlgebra.ιMulti_mul_ιMulti a c
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Scheme scalar identifications and the two span inductions need extra elaboration fuel.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
