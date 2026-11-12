@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import
   WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
 
@@ -193,8 +194,12 @@ universe u
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {T X : Scheme.{u}}
 
+-- The generic instance search behind every `L(-)` in the statements below is slow.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 -- the instances of the general lemma are found for each of the categories of module objects
-set_option profiler true in
 /-- **Naturality of derived trivializations of pullbacks**: let `g : T ⟶ X`, `F_X : X ⟶ X`,
 `F_T : T ⟶ T` with `g ≫ F_X = F_T ≫ g`, and trivializations `κ_X : F_X^* ≅ 𝟭`,
 `κ_T : F_T^* ≅ 𝟭` of the pullbacks of module objects compatible with `g^*`. Then the derived
