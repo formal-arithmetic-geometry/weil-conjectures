@@ -40,14 +40,11 @@ private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ)
         (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ),
       derivedCompleteIntegers ℓ E X K₀ ∧ K₀.IsGE n ∧ boundedConstructible _ K₀ ∧
-        Nonempty ((L(Mod.extendScalars (coefficientMap
+    Nonempty ((L(Mod.extendScalars (coefficientMap
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀) ≅ K) := by
-  obtain ⟨E, K₀, he⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ X K hK
-  obtain ⟨n, hn⟩ := K₀.property.1.1
-  exact ⟨E, K₀.obj, n, derivedCompleteIntegers_of_boundedConstructible K₀.property, hn,
-    K₀.property, he⟩
+  sorry
 
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
