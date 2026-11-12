@@ -45,6 +45,8 @@ theorem finiteBoundary_source_endpoint
   apply congrArg S.map
   rw [← Iso.app_inv k.coefficientForget, Iso.eq_comp_inv]
   apply constantAb_ext_one
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
   let U := op (Scheme.ProEt.mk (𝟙 T))
   let z := (toSheafify (Scheme.ProEt.topology T)
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
@@ -60,6 +62,6 @@ theorem finiteBoundary_source_endpoint
     (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
   have ha := k.coefficient_one n U x (hx.trans hx')
   have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
-  exact ha.trans ((hi.trans (Int.cast_one _)).symm)
+  exact ha.trans ((hi.trans Int.cast_one).symm)
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
