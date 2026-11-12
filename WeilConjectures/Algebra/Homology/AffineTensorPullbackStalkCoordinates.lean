@@ -105,7 +105,6 @@ def affineTensorPullbackHomologyStalkIso
     (s.mapIso (affineTensorPullbackHomologySheafIso A A' φ M i)).toLinearEquiv.toAddEquiv
 
 
-set_option maxHeartbeats 600000 in
 -- Matching the explicit sheaf and native scheme-module functors needs extra heartbeats.
 /-- Affine localization identifies the base-change coordinate with the stalk map
 of the inverse ordinary pullback counit.  This is the geometric localization
