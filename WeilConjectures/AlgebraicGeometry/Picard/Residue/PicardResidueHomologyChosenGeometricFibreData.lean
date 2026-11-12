@@ -36,6 +36,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap structureSheafAb structureSheafCohomologyPullback
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The dependent family of derived-category maps requires extra elaboration heartbeats.
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain

@@ -75,6 +75,7 @@ private theorem singlePullback_naturality
 end Modules
 end
 
+set_option profiler true in
 set_option maxRecDepth 2048 in
 attribute [local irreducible] Modules.tensorPullback picardDirectImageUnitMorphism in
 set_option cleanup.letToHave false in
