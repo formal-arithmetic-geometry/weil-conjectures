@@ -245,6 +245,7 @@ private theorem canonical_q_local_adjunct
   rw [canonical_local_adjunct Λ _ D canonical hcanonical cF]
   rw [unitPullEndpoint_eq Λ Y cF]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Compare the canonical adjunct and the monoidal endpoint before specializing coefficients.
 private theorem canonical_p2_local_adjunct
@@ -264,6 +265,7 @@ private theorem canonical_p2_local_adjunct
   rw [canonical_local_adjunct Λ _ D canonical hcanonical cF]
   rw [native_p2_endpoint Λ Y cF]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 2000000 in
 -- Concrete coefficient conversions cross the named derived functor interfaces.
 /-- A normalized completed adjunct comes from its local section class, and this
