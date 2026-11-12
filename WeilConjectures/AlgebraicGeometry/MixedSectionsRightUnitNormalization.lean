@@ -71,6 +71,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The chosen comparison expands sheaf and localization instances.
 private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -103,6 +104,7 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   simpa only [mixedGlobalSectionsDirectImageIso, CategoryTheory.Functor.map_id,
     Category.id_comp] using hc
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The statement expands sheaf, scalar, and localization instances.
 /-- The right path becomes the iterated scalar-factor path before any unit cancellation.
