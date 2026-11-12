@@ -356,8 +356,6 @@ private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
   rw [ringTransportInverse_wedge]
   exact ModuleCat.exteriorPower.map_mk (openSectionTransportIso M U V).hom a
 
-set_option profiler true in
--- The comparison unfolds section modules and their transported scalar actions.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Component isomorphisms and their naturality for the exterior presheaf pullback.

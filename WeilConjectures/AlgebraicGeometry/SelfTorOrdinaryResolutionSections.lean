@@ -31,8 +31,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option profiler true in
--- Comparing the two lifts requires elaboration of restricted tensor complexes.
 /-- Affine tensor-resolution homology computes the sections of the ordinary total tensor
 with a global K-flat resolution. This is a statement entirely about complexes and homology;
 no derived tensor or existence of algebraic resolution lifts occurs in its conclusion.
@@ -129,7 +127,8 @@ theorem exists_selfTor_ordinary_resolution_sections
     I J φ P R ψ a₀ a k₀ k hψ hlift.2.1 ha hlift.2.2.1 hk
   have heq := H.homologyMap_eq n
   intro e x
-  exact (hlift.2.2.2 x).trans (congrArg (fun k ↦ c V (e.hom (k x))) heq)
+  exact (hlift.2.2.2 x).trans
+    (congrArg (fun y ↦ c V (e.hom y)) (ConcreteCategory.congr_hom heq x))
 
 
 end AlgebraicGeometry

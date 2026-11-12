@@ -217,8 +217,6 @@ private theorem exists_nonpositive_flat_quasiIso (Y : Scheme.{u})
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
--- Total tensor and the bounded replacement involve large module-category instance terms.
 /-- The ordinary affine tensor comparison is compatible with one augmented algebraic
 comparison for each basic inclusion. Independence of the supplied comparison is not
 part of this statement.
@@ -316,9 +314,9 @@ theorem exists_selfTor_ordinary_localized_comparisons
   have hI : ∀ x ∈ I, φ x ∈ J := by
     intro x hx
     exact i.ker.ideal_le_comap_ideal h hx
-  rcases exists_quotient_resolution_tensor_comparison A C I J φ hI PU PV with
-    ⟨ψ, a, k, hlift⟩
-  refine ⟨ψ, a, k, hlift.1, hlift.2.1, hlift.2.2, ?_⟩
+  refine (exists_quotient_resolution_tensor_comparison A C I J φ hI PU PV).imp
+    fun ψ ↦ Exists.imp fun a ↦ Exists.imp fun k hlift ↦ ?_
+  refine ⟨hlift.1, hlift.2.1, hlift.2.2, ?_⟩
   intro e' x
   have hn := hd V U h hbasic ψ a k hlift.1 hlift.2.1 hlift.2.2 x
   have hs := PresheafOfModules.naturality_apply e.hom.val (homOfLE h).op (d U x)
