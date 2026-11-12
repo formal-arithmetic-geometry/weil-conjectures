@@ -50,6 +50,23 @@ theorem mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} {_ : Category C₁} 
     simp
   simp [this]
 
+/-- Transporting an exact functor's localization factor gives the factor of the equal functor.
+Source: Stacks 05RU. -/
+private theorem reductionSystemFactorOfIso_mapDerived
+    {C₁ C₂ : Type*} {_ : Category C₁} {_ : Abelian C₁} {_ : HasDerivedCategory C₁}
+    {_ : Category C₂} {_ : Abelian C₂} {_ : HasDerivedCategory C₂}
+    (F G : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (hFG : F = G) (h : F.mapDerivedCategory = G.mapDerivedCategory)
+    (K : CochainComplex C₁ ℤ) :
+    (reductionSystemFactorOfIso DerivedCategory.Q DerivedCategory.Q
+      (F.mapHomologicalComplex (.up ℤ)) (G.mapHomologicalComplex (.up ℤ))
+      F.mapDerivedCategory G.mapDerivedCategory
+      (NatIso.mapHomologicalComplex (eqToIso hFG) (.up ℤ)) (eqToIso h)
+      F.mapDerivedCategoryFactors).hom.app K = G.mapDerivedCategoryFactors.hom.app K := by
+  rw [reductionSystemFactorOfIso_hom]
+  exact mapDerivedCategoryFactors_congr F G hFG h K
+
 
 /-- The localization factor transported along an equality of derived functors.
 Source: Stacks 05RU. -/
@@ -190,9 +207,7 @@ theorem unary_model_core {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     have hsys : (systemFactor l E g).hom.app ((R[Y]).obj P.obj) =
         (integralComparisonSequencePullback l E g).mapDerivedCategoryFactors.hom.app
           ((R[Y]).obj P.obj) := by
-      rw [systemFactor, reductionSystemFactorOfIso_hom]
-      dsimp only [systemQ, rawSystemFactor]
-      exact mapDerivedCategoryFactors_congr
+      exact reductionSystemFactorOfIso_mapDerived
         (C₁ := coefficientSequenceModules l E Y) (C₂ := coefficientSequenceModules l E X)
         _ _ (inverse_eq l E g) (derived_eq l E g) _
     have hfac := reductionFactorOfIso_mapDerived (podReindexingFunctor l E g none)
