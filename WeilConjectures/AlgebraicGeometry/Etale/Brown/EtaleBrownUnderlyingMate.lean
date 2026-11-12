@@ -139,14 +139,12 @@ set_option profiler true in
 private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
-    (R : StrictEtaleBrownRealization O t W P) :
+    (R : StrictEtaleBrownRealizationData O t W P)
+    (hR : StrictEtaleBrownRealizationCoherence O t W P R) :
     ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
       (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x := by
-  rcases R with ⟨R, hR⟩
-  rcases R with @⟨ordinaryAdditive, derived, factors, equivalence,
-    ordinaryRestriction, restriction, scalar⟩
-  exact @hR.1
+      HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x :=
+  hR.1
 
 private theorem brown_underlying_right_section
     (O : Type (u + 1)) [CommRing O] (t : O)
@@ -201,8 +199,9 @@ theorem etaleBrownOrdinaryRestrictionCube
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
     (.mk _ _ _ _ (A.restrictInverse h).hom))
   have ho := brown_underlying_cube O t g A h M
-  have hrW := brown_underlying_restriction_section O t W PW RW h ((A.right m).obj M)
-  have hrV := brown_underlying_restriction_section O t V PV RV h M
+  have hrW := brown_underlying_restriction_section O t W PW RW.val RW.property h
+    ((A.right m).obj M)
+  have hrV := brown_underlying_restriction_section O t V PV RV.val RV.property h M
   have hrgm := brown_underlying_right_section O t g m A PW PV B RV RW (rg m) M
   have hrgn := brown_underlying_right_section O t g n A PW PV B RV RW (rg n)
   ext U x
