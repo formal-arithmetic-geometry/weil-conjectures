@@ -196,15 +196,13 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit
     (h := by rw [← sq₁.w])
   have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
     ((leftDerivedUpperStarId Λ S).hom.app K)
-  calc
-    _ = _ := congrArg (fun z ↦
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hs
-    _ = _ := congrArg (fun z ↦
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hc
-    _ = _ := congrArg (fun z ↦ z ≫ C) hn
-    _ = _ := congrArg (fun z ↦
+  change
+    (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫
+        (pullbackSquareComparison Λ sq₁).hom.app K ≫ C =
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
-        ((leftDerivedUpperStarId Λ S).hom.app K)) ≫ z ≫ C) hw
+        ((leftDerivedUpperStarId Λ S).hom.app K)) ≫
+        (pullbackSquareComparison Λ w).hom.app K ≫ C
+  simp only [hs, hc, hn, hw, Category.assoc]
 
 lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
     {p₂ : P ⟶ Y} {aY : Y ⟶ S}
@@ -225,13 +223,14 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
     (h := by rw [← sq₂.w])
   have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
     ((leftDerivedUpperStarId Λ S).hom.app K)
-  calc
-    _ = _ := congrArg (fun z ↦
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hs
-    _ = _ := congrArg (fun z ↦
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hc
-    _ = _ := by
-      simpa using congrArg (fun z ↦ z ≫ C) hn
+  change
+    (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫
+        (pullbackSquareComparison Λ sq₂).hom.app K ≫ C =
+      L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
+        ((leftDerivedUpperStarId Λ S).hom.app K) ≫
+        (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _
+  simp only [hs, hc, hn, Category.assoc]
+  simp
 
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
