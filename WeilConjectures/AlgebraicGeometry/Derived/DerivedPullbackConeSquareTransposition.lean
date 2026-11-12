@@ -92,8 +92,6 @@ private theorem cone_precompose
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 /-- Transpose a specified cone-square through derived pullback/direct image.
 This is independent of open covers and of base-change comparison maps.
 Source: Stacks Project, Cohomology, Tags 06YI and 06YJ (K-flat computations),
@@ -195,13 +193,11 @@ theorem derivedPullback_cone_square_transposition
     DerivedCategory.Q.mapIso (CochainComplex.mappingCone.mapHomologicalComplexIso p E).symm ≪≫
       e _ hconeP ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map c)), ?_, ?_, ?_⟩
   · have hh := he P hP A' (x ≫ α)
-    simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
-    convert hh using 2
+    simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] using hh
   · have hh := he Q hQ B' (y ≫ β)
-    simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
-    convert hh using 2
+    simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] using hh
   · rw [htrans, Functor.map_comp]
     have h := he _ hconeP (CochainComplex.mappingCone t')
       (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
@@ -210,9 +206,8 @@ theorem derivedPullback_cone_square_transposition
     rw [hcone]
     have hh := congrArg (fun k ↦ DerivedCategory.Q.map
       (CochainComplex.mappingCone.mapHomologicalComplexIso p E).inv ≫ k) h
-    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
+    simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
       Functor.map_comp, Adjunction.homEquiv_naturality_left_symm, Category.assoc,
-      adj₀, E, L, c, F, G] at hh ⊢
-    convert hh using 2
+      adj₀, E, L, c, F, G] using hh
 
 end AlgebraicGeometry
