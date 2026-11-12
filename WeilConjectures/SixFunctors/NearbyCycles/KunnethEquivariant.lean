@@ -155,7 +155,8 @@ lemma δ_comp_pullbackSquareComparison_id (h₁ : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f
         (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
           L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B)) =
       (leftDerivedUpperStarId Λ Z).hom.app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) := by
-  rw [Category.assoc, tensorHom_comp_tensorHom]
+  rw [Category.assoc]
+  rw [tensorHom_comp_tensorHom]
   rw [pullbackSquareComparison_id_hom_app_comp_map Λ f₁ h₁ A]
   rw [pullbackSquareComparison_id_hom_app_comp_map Λ f₂ h₂ B]
   rw [δ_leftDerivedUpperStarId]
