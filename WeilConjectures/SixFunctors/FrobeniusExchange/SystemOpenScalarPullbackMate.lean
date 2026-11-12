@@ -111,7 +111,7 @@ private theorem mate_eq_of_factorization
     ← Functor.map_comp_assoc, ← Adjunction.homEquiv_unit, h₁, h₃]
   simp only [Category.assoc]
   rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Category.assoc, i.inv_hom_id,
-    Functor.map_id, Category.comp_id, reassoc_of% h₅, hk]
+    Category.comp_id, reassoc_of% h₅, hk]
 
 section Ordinary
 
@@ -210,10 +210,22 @@ private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X �
       (sequenceQuotient l E) j)
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
     (openRestrictionMate_isIso l E L ι j)
+  have he :
+      (mateEquiv
+        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
+        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
+          (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv) =
+      (mateEquiv
+        (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
+          (sequenceQuotient l L) j)
+        (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
+          (sequenceQuotient l E) j)
+        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
+        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
+          (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv) := rfl
   unfold sequenceRestrictionPullbackInv
-  dsimp only [TwoSquare.mk, integralComparisonSequenceDirectImage,
-    AlgebraicGeometry.ProEtale.VaryingRing.push] at h ⊢
-  convert h using 1
+  rw [he]
+  exact h
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
 private theorem normalizedAdjointComparison_choose_eq
