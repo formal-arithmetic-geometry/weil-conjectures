@@ -133,10 +133,10 @@ theorem affine_algebra_derived_unit_homology_factorization
     let := hlim
     let := hcolim
     let underived : R ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
-      NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
-        intros
-        simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-        rfl)
+      NatIso.ofComponents (fun _ ↦
+        (SheafOfModules.fullyFaithfulForget _).preimageIso
+          (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by intros; ext x; rfl)))
+        (by intros; ext U x; rfl)
     let comparison : RD ⋙ T.rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
       Functor.isoWhiskerLeft RD T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
         (Functor.rightDerivedFunctorCompMapDerivedCategoryIso R T).symm ≪≫

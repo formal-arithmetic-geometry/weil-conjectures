@@ -83,7 +83,6 @@ private theorem conormal_wedge_coordinate_restrict
   rw [hz] at hs
   exact hs
 
-set_option trace.profiler true in
 -- Keep the nested derived tensor and chart identifications folded during elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
