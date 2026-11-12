@@ -306,7 +306,6 @@ private noncomputable def sliceTransport
     rw [sliceNat e.hom t V v, sliceNat e.hom a V v, sliceNat e.hom b V v]
     exact I.moduleSMul M Z a b t h V ((e.hom.app Z).hom.app V v)
 
-set_option maxHeartbeats 1000000 in
 -- The graph equations compare several composed underlying-sheaf functors.
 private noncomputable def sliceScalarSection
     {R₀ R₁ S : Sheaf J CommRingCat.{u}} (d : R₀ ≅ R₁)
@@ -475,7 +474,6 @@ private noncomputable def sliceTensorRaw {R S : Sheaf J CommRingCat.{u}}
   rw [sliceChangeMap_tmul, sliceChangeMap_tmul]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- The two graph presentations are compared on preserved products of section sheaves.
 @[irreducible] private noncomputable def sliceRingHom
     {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)} [PreservesFiniteLimits L]
