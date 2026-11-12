@@ -102,6 +102,19 @@ lemma coe_kummerTateEquiv_apply (d : JacobianTorsionDatum p l) (hl : (l : K) ≠
       d.kummerEquiv hl n (x.1 n) :=
   rfl
 
+/-- `lim_n H¹(C, μ_{lⁿ})` is the plain inverse limit: the torsion condition built into
+`AlgebraicGeometry.Scheme.h1RootsOfUnityLimit` holds for every family, since
+`H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` is killed by `lⁿ`. -/
+lemma mem_h1RootsOfUnityLimit_iff (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0)
+    {t : ∀ n : ℕ, Sheaf.H (p.geometricFiber.rootsOfUnitySheaf (l ^ n)) 1} :
+    t ∈ p.geometricFiber.h1RootsOfUnityLimit l ↔
+      ∀ n, Sheaf.H.map (p.geometricFiber.rootsOfUnityPowMap l (pow_succ l n).symm) 1
+        (t (n + 1)) = t n :=
+  AddCommGroup.torsionInverseLimit.mem_iff_of_forall_pow_zsmul_eq_zero fun n x ↦ by
+    refine (d.kummerEquiv hl n).injective (Subtype.ext ?_)
+    rw [map_zsmul, map_zero]
+    exact (d.kummerEquiv hl n x).2
+
 /-- The Galois action on `lim_n H¹(C, μ_{lⁿ})`: restricting a compatible family levelwise
 along the automorphism `σ_C = 𝟙 × Spec σ` of `C` gives a compatible family. -/
 lemma restrictMuH_mem_h1RootsOfUnityLimit (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0)

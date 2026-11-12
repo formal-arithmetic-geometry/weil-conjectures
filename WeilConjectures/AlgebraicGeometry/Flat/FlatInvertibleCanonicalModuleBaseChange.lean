@@ -25,6 +25,16 @@ universe u w
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
+/-- The pullback `g^*` of modules along a morphism of schemes is additive, being a left adjoint
+(`AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackAdjunction`). -/
+theorem tensorPullback_additive {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    (tensorPullback g).Additive := by
+  let : (tensorPullback g).IsLeftAdjoint := ⟨_, nonempty_tensorPullbackAdjunction g⟩
+  exact rightExactFunctor_le_additiveFunctor _ _ _
+    (by rw [rightExactFunctor_iff]; infer_instance)
+
+attribute [local instance] tensorPullback_additive
+
 /-- Blueprint `lemma-coherent-base-change-invertible-sheaves--2`: derived base change for a line
 bundle with the pulled-back line bundle as target.
 
@@ -37,15 +47,14 @@ comparison `c : Lg'^* ℒ ⟶ g'^* ℒ`, which is itself an isomorphism since `�
 
 Proof: `AlgebraicGeometry.exists_isIso_canonicalModuleBaseChange_of_isFlatOver` applies, since
 `ℒ` is flat over `S`; the comparison `c` is invertible by flatness of `ℒ` over `𝒪_X`. The
-additivity hypothesis on `g'^*` always holds (it is a left adjoint), see the proof of
-`AlgebraicGeometry.Scheme.Modules.isIso_derivedBaseChange_of_flat_invertible`. -/
+functor `g'^*` is additive since it is a left adjoint. -/
 theorem exists_isIso_canonicalModuleBaseChange_of_isInvertible
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X S X' S' : Scheme.{u}} (f : X ⟶ S)
     [QuasiCompact f] [IsSeparated f] [Flat f]
     (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')
-    (sq : IsPullback g' f' f g) [(Scheme.Modules.tensorPullback g').Additive]
+    (sq : IsPullback g' f' f g)
     (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :
     ∃ c : (AlgebraicGeometry.derivedPullback g').obj ((DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) ⟶
