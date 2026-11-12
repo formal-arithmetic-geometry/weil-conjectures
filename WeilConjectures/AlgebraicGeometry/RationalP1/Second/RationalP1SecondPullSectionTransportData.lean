@@ -232,6 +232,7 @@ private theorem pullTwist_naturality
   have h := (nativePullTwistNatIso Λ f LS LX e).hom.naturality m
   simpa only [← Iso.app_hom, nativePullTwistNatIso_app, Functor.comp_map] using h
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The explicit categorical calculation shares the native tensor structures throughout.
 private theorem pullTwist_section
@@ -283,6 +284,7 @@ private theorem pullTwist_section
   simpa only [Functor.map_comp, Category.assoc, tracePull] using ht
 
 set_option linter.unusedVariables false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The calculation below is elaborated with the native tensor instances of this section.
 private theorem second_pull_section_transport_data_aux
