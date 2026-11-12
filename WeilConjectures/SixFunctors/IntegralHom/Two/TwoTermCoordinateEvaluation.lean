@@ -122,7 +122,12 @@ theorem twoTermCoordinate_isIso
         (f.val.app U (generator Y R H Q a b j hab U v z)) x =
         (b * p).negOnePow • generator Y R I Q (p + a) b (p + j) (by omega) U
           (evaluate Y R P I a p U v x) z := by
-    simpa only [generator_transport] using hf a b hab p U v z x
+    have hh := hf a b hab p U v z x
+    rw [TwoTermCoordinates.generator_transport Y R (homComplex (R := R) P I) Q
+      a b j hab U v z] at hh
+    rw [TwoTermCoordinates.generator_transport Y R I Q (p + a) b (p + j)
+      (by omega) U (evaluate Y R P I a p U v x) z] at hh
+    exact hh
   have he : f ≫ (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom =
       (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom := by
     apply totalTensor_hom_ext Y R H Q _ j
@@ -133,7 +138,8 @@ theorem twoTermCoordinate_isIso
       obtain rfl : a = j + 1 := by omega
       apply biprod.hom_ext
       · refine twoTermCoordinate_component_ext Y R (H.X (j + 1)) (Q.X (-1)) _ _ _ P I
-          (j + 1) _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+          (j + 1) (CochainComplex.ιMapBifunctor H Q (ordinaryTensor Y R) (j + 1) (-1) j hab) f
+          (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
           (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
           (π := biprod.fst) ?_
         intro p U v z x
@@ -147,7 +153,8 @@ theorem twoTermCoordinate_isIso
         rw [localEvaluation_π]
         simp
       · refine twoTermCoordinate_component_ext Y R (H.X (j + 1)) (Q.X (-1)) _ _ _ P I
-          j _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+          j (CochainComplex.ιMapBifunctor H Q (ordinaryTensor Y R) (j + 1) (-1) j hab) f
+          (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
           (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
           (π := biprod.snd) ?_
         intro p U v z x
@@ -163,7 +170,8 @@ theorem twoTermCoordinate_isIso
         subst a
         apply biprod.hom_ext
         · refine twoTermCoordinate_component_ext Y R (H.X j) (Q.X 0) _ _ _ P I
-            (j + 1) _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+            (j + 1) (CochainComplex.ιMapBifunctor H Q (ordinaryTensor Y R) j 0 j hab) f
+            (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
             (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
             (π := biprod.fst) ?_
           intro p U v z x
@@ -174,7 +182,8 @@ theorem twoTermCoordinate_isIso
           rw [generator_zero_fst]
           simp only [map_zero, LinearMap.zero_apply, smul_zero]
         · refine twoTermCoordinate_component_ext Y R (H.X j) (Q.X 0) _ _ _ P I
-            j _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+            j (CochainComplex.ιMapBifunctor H Q (ordinaryTensor Y R) j 0 j hab) f
+            (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
             (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
             (π := biprod.snd) ?_
           intro p U v z x
