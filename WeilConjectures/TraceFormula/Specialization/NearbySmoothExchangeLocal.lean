@@ -71,14 +71,12 @@ theorem isIso_baseChangeMap_app_paste_iff (sq₁ : CommSq g' f' f g) (sq₂ : Co
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) [IsIso (baseChangeMap Λ sq₂)] (M : 𝔻(X)) :
     IsIso ((baseChangeMap Λ sq).app M) ↔
       IsIso ((L((h)^*⟦Λ⟧)).map ((baseChangeMap Λ sq₁).app M)) := by
-  have hp := pullbackSquareComparison_paste Λ sq₁ sq₂ sq
-  have key := Adjunction.isIso_exchangeRight_app_paste_iff (G := L((h ≫ g)^*⟦Λ⟧))
-    (G' := L((h' ≫ g')^*⟦Λ⟧)) (G₁ := L((g)^*⟦Λ⟧)) (G₁' := L((g')^*⟦Λ⟧))
-    (G₂ := L((h)^*⟦Λ⟧)) (G₂' := L((h')^*⟦Λ⟧)) (derivedUpperStarLowerStarAdjunction Λ f)
+  have key := Adjunction.isIso_exchangeRight_app_paste_iff
+    (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (derivedUpperStarLowerStarAdjunction Λ f'')
     (pullbackSquareComparison Λ sq₁) (pullbackSquareComparison Λ sq₂)
     (pullbackSquareComparison Λ sq) (leftDerivedUpperStarComp Λ h g)
-    (leftDerivedUpperStarComp Λ h' g') hp ‹_› M
+    (leftDerivedUpperStarComp Λ h' g') (pullbackSquareComparison_paste Λ sq₁ sq₂ sq) ‹_› M
   have e : baseChangeMap Λ sq = Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction Λ f)
       (derivedUpperStarLowerStarAdjunction Λ f'') (pullbackSquareComparison Λ sq) := rfl
   have e₁ : baseChangeMap Λ sq₁ = Adjunction.exchangeRight
