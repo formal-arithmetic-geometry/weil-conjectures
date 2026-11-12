@@ -313,6 +313,7 @@ variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the construction combines the Galois action with the neighbourhood of a compatible point
 set_option synthInstance.maxHeartbeats 200000 in
