@@ -243,9 +243,8 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     have hl : l ≫ sliceSpecialMap (traitSliceCoord k') hRM hcoord_a = pullback.fst _ _ := by
       dsimp [l]
       simp
-    rw [← hl]
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
-      ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)
+      ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hl).app _)
 
 /-- **The base case of the finite-support step** (blueprint `sk-prop-tf-nearby-duality-foundation`,
 "This also supplies the base case `n = 0`"): if the special fibre `X'` has finitely many points,
