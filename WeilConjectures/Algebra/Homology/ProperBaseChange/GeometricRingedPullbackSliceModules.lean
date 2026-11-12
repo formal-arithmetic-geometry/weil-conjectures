@@ -275,36 +275,23 @@ private noncomputable def sliceTransport
       I.ringOne Z a h V ((e.hom.app Z).hom.app V v)
   moduleAdd := by
     intro M Z a b t h V v
-    change (I.moduleUnderlying.inv.app M).hom.app V
-      ((e.hom.app _).hom.app V ((L.map t).hom.app V v)) =
-        (show (I.modules.obj M).val.obj V from
-          (I.moduleUnderlying.inv.app M).hom.app V
-            ((e.hom.app _).hom.app V ((L.map a).hom.app V v))) +
-        (show (I.modules.obj M).val.obj V from
-          (I.moduleUnderlying.inv.app M).hom.app V
-            ((e.hom.app _).hom.app V ((L.map b).hom.app V v)))
-    rw [sliceNat e.hom t V v, sliceNat e.hom a V v, sliceNat e.hom b V v]
-    exact I.moduleAdd M Z a b t h V ((e.hom.app Z).hom.app V v)
-
+    simpa only [Iso.trans_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv,
+      NatTrans.comp_app, Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
+      types_comp_apply, sliceNat] using
+      I.moduleAdd M Z a b t h V ((e.hom.app Z).hom.app V v)
   moduleZero := by
     intro M Z a h V v
-    change (I.moduleUnderlying.inv.app M).hom.app V
-      ((e.hom.app _).hom.app V ((L.map a).hom.app V v)) =
-        (0 : (I.modules.obj M).val.obj V)
-    rw [sliceNat e.hom a V v]
-    exact I.moduleZero M Z a h V ((e.hom.app Z).hom.app V v)
-
+    simpa only [Iso.trans_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv,
+      NatTrans.comp_app, Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
+      types_comp_apply, sliceNat] using
+      I.moduleZero M Z a h V ((e.hom.app Z).hom.app V v)
   moduleSMul := by
     intro M Z a b t h V v
-    change (I.moduleUnderlying.inv.app M).hom.app V
-      ((e.hom.app _).hom.app V ((L.map t).hom.app V v)) =
-        (show S.obj.obj V from
-          I.ringUnderlying.hom.hom.app V ((e.hom.app _).hom.app V ((L.map a).hom.app V v))) •
-        (show (I.modules.obj M).val.obj V from
-          (I.moduleUnderlying.inv.app M).hom.app V
-            ((e.hom.app _).hom.app V ((L.map b).hom.app V v)))
-    rw [sliceNat e.hom t V v, sliceNat e.hom a V v, sliceNat e.hom b V v]
-    exact I.moduleSMul M Z a b t h V ((e.hom.app Z).hom.app V v)
+    simpa only [Iso.trans_hom, Iso.app_hom, Iso.trans_inv,
+      Functor.isoWhiskerLeft_inv, Iso.symm_inv, NatTrans.comp_app,
+      Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
+      types_comp_apply, sliceNat] using
+      I.moduleSMul M Z a b t h V ((e.hom.app Z).hom.app V v)
 
 -- The graph equations compare several composed underlying-sheaf functors.
 private noncomputable def sliceScalarSection
@@ -824,12 +811,14 @@ theorem geometric_ringed_pullback_slice_modules
   let := fA.leftExact
   obtain ⟨RIA, ⟨IA⟩⟩ := algebraic_image (elementTopology A) (elementTopology B)
     fA.inverse fA.direct fA.adj (presentationElementRing RY A)
+  trace "slice: algebraic_image complete"
   have : PreservesFiniteLimits (elementSheafPullback A) := by
     rw [← y.localization_inverse]
     exact y.localization.leftExact
   let P := sliceComposite (elementSheafPullback A) fA.inverse (sliceRestriction RY A) IA
   let Q := sliceTransport a
     (sliceComposite f.inverse (elementSheafPullback B) I (sliceRestriction RI B))
+  trace "slice: composites complete"
   let d := sliceRingHom P Q
   have hd : (sheafCompose (elementTopology B)
       (CategoryTheory.forget CommRingCat.{u})).map d =
@@ -846,6 +835,7 @@ theorem geometric_ringed_pullback_slice_modules
       (sheafCompose (elementTopology B)
         (CategoryTheory.forget CommRingCat.{u})).map d = Q.ringUnderlying.hom := by
     rw [hd, Iso.hom_inv_id_assoc]
+  trace "slice: ring comparison complete"
   have hca : IA.ringUnderlying.hom ≫
       (sheafCompose (elementTopology B)
         (CategoryTheory.forget CommRingCat.{u})).map ca = fA.ringMap := by
@@ -863,7 +853,9 @@ theorem geometric_ringed_pullback_slice_modules
           ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c) = fA.ringMap
     rw [Category.comp_id, Category.assoc, ← Functor.map_comp, hc]
     exact hr.symm
+  trace "slice: structural map complete"
   obtain ⟨b, hb⟩ := sliceModuleComparison P Q (@asIso _ _ _ _ d hdi) hd'
+  trace "slice: module comparison complete"
   have hb' (M : ringedSiteModules.{u} (localCoefficientRings RY)) :
       (toSheaf (localCoefficientRings RIA) ⋙
         sheafCompose (elementTopology B) (CategoryTheory.forget AddCommGrpCat.{u})).map
@@ -883,9 +875,11 @@ theorem geometric_ringed_pullback_slice_modules
       Category.assoc] at ht
     erw [Category.id_comp, Category.comp_id] at ht
     exact ht
+  trace "slice: underlying module comparison complete"
   choose e he using fun M : ringedSiteModules.{u} (localCoefficientRings RY) ↦
     sliceTensorComparison c B (@asIso _ _ _ _ d hdi) ca rfl
       (P.modules.obj M) (I.modules.obj M) (b.app M)
+  trace "slice: tensor comparison complete"
   refine ⟨RIA, IA, ca, hca, e, ?_, ?_⟩
   · intro M N h
     apply sliceScalar_ext ca (P.modules.obj M)
