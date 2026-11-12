@@ -408,6 +408,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {i : Z ⟶ P} {i' : Z' ⟶ P'} [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- the proof elaborates two triangles and several base change maps of the derived categories
 /-- **The base change map of a closed exceptional inverse image along a field extension is an

@@ -289,6 +289,7 @@ section PullbackIhom
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ ℓ)] [Fact (ringChar k₂).Prime]
   [Fact (ringChar k₂ ≠ ℓ)]
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- unifying the lax monoidal structures of `Dᵇc` and of the ambient derived category is slow
 /-- The comparison of internal homs of the pullback on bounded constructible complexes is that of
