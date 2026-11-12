@@ -45,7 +45,7 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap b X))]
   {T X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The restricted base change map with coefficients `Λ₃` is invertible at `Lε^* K` as soon as
 it is invertible at `T_b (T_a (Lε^* K₀))` for some `K₀` with `T_b (T_a K₀) ≅ K`. -/
 lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
@@ -63,9 +63,9 @@ lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
     IsIso ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
       (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
       (pullbackSquareComparison Λ₃ sq)).app ((L((ε)^*⟦Λ₃⟧)).obj K))) := by
-  let e₀ := leftDerivedUpperStarExtendScalarsExtendScalarsIso a b ε K₀
-  let eK := (L((ε)^*⟦Λ₃⟧)).mapIso e.some
-  exact isIso_map_app_of_iso (baseChangeMap Λ₃ sq) (L((i)^*⟦Λ₃⟧)) (e₀.symm ≪≫ eK) h
+  refine isIso_map_app_of_iso _ _ ?_ h
+  exact (leftDerivedUpperStarExtendScalarsExtendScalarsIso a b ε K₀).symm ≪≫
+    Functor.mapIso _ e.some
 
 end Generic
 
