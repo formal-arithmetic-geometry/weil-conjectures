@@ -233,7 +233,7 @@ theorem mixedSections_left_unit_normalization
     (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
     (mixedGlobalSectionsDirectImageIso g).hom (Df.rightDerivedFunctorUnit.app K) hg₀
   have hf := mixedSections_unit f K
-  refine finish_unit_paste (schemeGlobalScalarRestriction g) p
+  have h := finish_unit_paste (schemeGlobalScalarRestriction g) _
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
     (Sg.mapDerivedCategoryFactorsh.inv.app
       ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
@@ -241,10 +241,10 @@ theorem mixedSections_left_unit_normalization
     ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))
     ((mixedGlobalSectionsDirectImageIso f).hom.app F)
     (Sf.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K))
-    ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K)) ?_ hf
+    ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K)) hg hf
   dsimp only [p]
   rw [← Functor.map_comp]
   erw [he]
-  exact hg
+  exact h
 
 end AlgebraicGeometry
