@@ -104,10 +104,118 @@ private theorem tensor_square_pasting
   rw [reassoc_of% hL]
   rw [hν]
 
-set_option maxHeartbeats 1600000 in
--- Compare the concrete total tensors through their map APIs.
-set_option synthInstance.maxHeartbeats 200000 in
--- Synthesis compares the existing ordinary and ringed cochain tensor instances.
+-- Normalize the total tensor map before specializing to the native comparison maps.
+private theorem coefficientTotalTensor_map_tensorHom
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u})
+    {P P' Q Q' : CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ}
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    (coefficientTotalTensor.{u, u, u} J R).map (X := (P, Q)) (Y := (P', Q')) (f, g) =
+      f ⊗ₘ g := by
+  exact RingedForgetTensorTransposition.tensor_map₂_eq f g
+
+private theorem nativeRingedAssociatorComponent_normalize
+    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))]
+    {T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
+      ProEtaleWeilSheaf k₀ l X}
+    [T.Additive] [∀ P, (T.obj P).Additive]
+    [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
+    (D : NativeWeilTensorRingedAssociatorChainData k₀ l X T)
+    (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+    (a : nativeTensorComplex T (nativeTensorComplex T P Q) N ⟶
+      nativeTensorComplex T P (nativeTensorComplex T Q N)) :
+    letI := SheafOfModules.isMonoidal_W_independentCoefficients D.b.R
+    letI := SheafOfModules.monoidalCategory D.b.R
+    let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
+    (∀ n, (E.map a ≫ (nativeRingedTripleRight D.b T D.adj D.A P Q N).hom).f n =
+      ((nativeRingedTripleLeft D.b T D.adj D.A P Q N).hom ≫
+        (α_ (E.obj P) (E.obj Q) (E.obj N)).hom).f n) →
+    E.map a ≫ (D.A.chain (nativeTensorComplex T Q N) P).hom ≫
+        (E.obj P ◁ (D.A.chain N Q).hom) =
+      (D.A.chain N (nativeTensorComplex T P Q)).hom ≫
+        ((D.A.chain Q P).hom ▷ E.obj N) ≫
+          (α_ (E.obj P) (E.obj Q) (E.obj N)).hom := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.R
+  let := SheafOfModules.monoidalCategory D.b.R
+  let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
+  dsimp only
+  intro hsquare
+  have hs : E.map a ≫ (nativeRingedTripleRight D.b T D.adj D.A P Q N).hom =
+      (nativeRingedTripleLeft D.b T D.adj D.A P Q N).hom ≫
+        (α_ (E.obj P) (E.obj Q) (E.obj N)).hom :=
+    HomologicalComplex.hom_ext _ _ hsquare
+  simpa only [nativeRingedTripleLeft, nativeRingedTripleRight, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, coefficientTotalTensor_map_tensorHom,
+    id_tensorHom, tensorHom_id, Category.assoc] using hs
+
+-- Keep the chain map abstract while pasting the comparison squares.
+private theorem nativeChainForget_transport_map
+    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))]
+    {T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
+      ProEtaleWeilSheaf k₀ l X}
+    [T.Additive] [∀ P, (T.obj P).Additive]
+    [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
+    (D : NativeWeilTensorRingedAssociatorChainData k₀ l X T)
+    (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+    (a : nativeTensorComplex T (nativeTensorComplex T P Q) N ⟶
+      nativeTensorComplex T P (nativeTensorComplex T Q N)) :
+    letI : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
+      Mod.monoidalCategoryCochainComplex
+    let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
+    let U := nativeChainForgetU (T := T)
+    (∀ n, (E.map a ≫ (nativeRingedTripleRight D.b T D.adj D.A P Q N).hom).f n =
+      ((nativeRingedTripleLeft D.b T D.adj D.A P Q N).hom ≫
+        (α_ (E.obj P) (E.obj Q) (E.obj N)).hom).f n) →
+    U.map a ≫ (nativeChainForgetC D P (nativeTensorComplex T Q N)).hom ≫
+        (U.obj P ◁ (nativeChainForgetC D Q N).hom) =
+      (nativeChainForgetC D (nativeTensorComplex T P Q) N).hom ≫
+        ((nativeChainForgetC D P Q).hom ▷ U.obj N) ≫
+          (α_ (U.obj P) (U.obj Q) (U.obj N)).hom := by
+  classical
+  let mO : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
+    Mod.monoidalCategoryCochainComplex
+  let := mO.toMonoidalCategoryStruct
+  let mB : MonoidalCategory (CochainComplex
+      (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R) ℤ) := inferInstance
+  let := mB.toMonoidalCategoryStruct
+  let mA : MonoidalCategory (CochainComplex
+      (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.K D.b.Q) ℤ) := inferInstance
+  let := mA.toMonoidalCategoryStruct
+  let d := Classical.choice (native_ordinary_ringed_tensor_underived_data D.b)
+  let o := Classical.choice (native_ordinary_ringed_tensor_chain_comparison D.b D.κ D.hκ d)
+  let r := Classical.choice (native_ringed_forget_tensor_chain_comparison D.b)
+  let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
+  let F := D.b.forget.mapHomologicalComplex (.up ℤ)
+  let G := D.b.ordinary.functor.mapHomologicalComplex (.up ℤ)
+  let U := nativeChainForgetU (T := T)
+  dsimp only
+  intro hsquare
+  have ha := nativeRingedAssociatorComponent_normalize D P Q N a hsquare
+  refine tensor_square_pasting
+    (C := CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+    (B := CochainComplex
+      (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R) ℤ)
+    (A := CochainComplex
+      (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.K D.b.Q) ℤ)
+    (O := CochainComplex
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
+    E U F G r.tensor o.tensor
+    (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
+    (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
+    (hb := ?_) (hμ := ?_) (hν := ?_) P Q N a ?_
+  · intro P Q
+    exact native_weil_tensor_ringed_binary_chain_square D d o r P Q
+  · exact r.associativity
+  · intro X Y Z
+    exact o.associativity X Y Z
+  · exact ha
+
 /-- The ringed associator square, after one outer homogeneous inclusion, transports
 through the ordinary comparison and the signed balanced tensor quotient.
 Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT.
@@ -133,48 +241,13 @@ theorem nativeChainForgetComponent_transport
     (hsquare : ∀ n : ℤ, nativeRingedAssociatorComponent D P Q N n)
     (n p q : ℤ) (h : p + q = n) :
     nativeChainForgetComponent D P Q N n p q h := by
-  classical
-  let : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
-    Mod.monoidalCategoryCochainComplex
-  let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.R
-  let := SheafOfModules.monoidalCategory D.b.R
-  let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.Q
-  let := SheafOfModules.monoidalCategory D.b.Q
-  obtain ⟨d⟩ := native_ordinary_ringed_tensor_underived_data D.b
-  obtain ⟨o⟩ := native_ordinary_ringed_tensor_chain_comparison D.b D.κ D.hκ d
-  obtain ⟨r⟩ := native_ringed_forget_tensor_chain_comparison D.b
-  let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
-  let F := D.b.forget.mapHomologicalComplex (.up ℤ)
-  let G := D.b.ordinary.functor.mapHomologicalComplex (.up ℤ)
-  let U := nativeChainForgetU (T := T)
-  have ha : E.map (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ≫
-        (D.A.chain (nativeTensorComplex T Q N) P).hom ≫
-          (E.obj P ◁ (D.A.chain N Q).hom) =
-      (D.A.chain N (nativeTensorComplex T P Q)).hom ≫
-        ((D.A.chain Q P).hom ▷ E.obj N) ≫
-          (α_ (E.obj P) (E.obj Q) (E.obj N)).hom := by
-    have hs : E.map (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ≫
-          (nativeRingedTripleRight D.b T D.adj D.A P Q N).hom =
-        (nativeRingedTripleLeft D.b T D.adj D.A P Q N).hom ≫
-          (α_ (E.obj P) (E.obj Q) (E.obj N)).hom := by
-      apply HomologicalComplex.hom_ext
-      exact hsquare
-    simp only [nativeRingedTripleLeft, nativeRingedTripleRight, Iso.trans_hom,
-      Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom] at hs
-    dsimp only [coefficientTotalTensor] at hs
-    erw [RingedForgetTensorTransposition.tensor_map₂_eq,
-      RingedForgetTensorTransposition.tensor_map₂_eq] at hs
-    simpa only [tensor_map, id_tensorHom, tensorHom_id, Category.assoc] using hs
-  have hc := tensor_square_pasting E U F G r.tensor o.tensor
-    (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
-    (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
-    (native_weil_tensor_ringed_binary_chain_square D d o r)
-    r.associativity o.associativity P Q N
-    (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ha
+  have hc := nativeChainForget_transport_map D P Q N
+    (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom hsquare
+  have hn := congrArg (fun f ↦ f.f n) hc
+  dsimp only [nativeChainForgetComponent]
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
       (HomologicalComplex.ιMapBifunctor N (Q.mapBifunctor P T) T
-        (.up ℤ) p q n h) ≫ f.f n) hc
+        (.up ℤ) p q n h) ≫ f) hn
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
