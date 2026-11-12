@@ -170,8 +170,9 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
     finiteOrdinaryIntegralTensorModel l X A C E =
       finiteOrdinaryRawIntegralModel l X A E ≪≫
         finiteOrdinaryCoefficientIntegralModel l X A C E := by
-  dsimp only [finiteOrdinaryIntegralTensorModel, finiteOrdinaryRawIntegralModel,
-    finiteOrdinaryCoefficientIntegralModel]
+  unfold finiteOrdinaryIntegralTensorModel finiteOrdinaryRawIntegralModel
+    finiteOrdinaryCoefficientIntegralModel
+  dsimp only
   exact iso_factor_six _ _ _ _ _ _
 
 /-- The ordinary finite closure comparison has the prescribed integral tensor map.
