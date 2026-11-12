@@ -116,6 +116,7 @@ private theorem forward_associativity_of_inverse
 attribute [local irreducible] SheafOfModules.monoidalCategory Mod.monoidalCategoryStruct
 attribute [local implicit_reducible] Mod.monoidalCategory Monoidal.induced
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Compare the abstract native and ringed total-tensor instances through their APIs.
 private theorem ordinary_coherence_of_inverse_associativity
