@@ -895,7 +895,9 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     rfl
   rw [hcombine]
   simp only [← PresheafOfModules.map_comp_apply, ← op_comp]
-  exact congrArg (fun k ↦ N.val.map k.op m)
+  exact congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
+      (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
+    N.val.map k.op m)
     (site_identity p (congrArg Sigma.fst e) V.unop)
 
 set_option backward.isDefEq.respectTransparency true in
