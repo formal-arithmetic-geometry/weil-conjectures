@@ -120,17 +120,16 @@ theorem kFlat_pullback_adjunction_comparison
     have := hεP P hP
     exact (uT.app ((E.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
       (asIso (ε.app (q.obj P))).symm ≪≫ (derivedPullback g).mapIso (uS.app P)
+  let A := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
   refine ⟨hL g, e, ?_⟩
   intro P hP I α
-  let ac := (Classical.choose
-    (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex (.up ℤ)
+  let ac := A.mapHomologicalComplex (.up ℤ)
   let a := (ac.homEquiv _ _).symm α
   apply (cancel_epi (e P hP).inv).1
   simp only [Iso.inv_hom_id_assoc]
   apply ((relativeMVAdj g).homEquiv _ _).injective
   rw [Equiv.apply_symm_apply]
-  let ah := (Classical.choose
-    (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomotopyCategory (.up ℤ)
+  let ah := A.mapHomotopyCategory (.up ℤ)
   let η := (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit
   have h : (relativeMVAdj g).homEquiv _ _
       (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) =
