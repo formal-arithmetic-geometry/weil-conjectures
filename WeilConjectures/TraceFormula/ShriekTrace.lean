@@ -340,24 +340,15 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
   have n₄ := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.naturality
     (lowerShriekDualizingComplexTrace ℓ h)
   simp only [Functor.comp_map] at n₁ n₃ n₄
-  rw [reassoc_of% n₁, reassoc_of% n₂, reassoc_of% n₃, ← Functor.map_comp, T₁]
+  simp only [reassoc_of% n₁, reassoc_of% n₂, reassoc_of% n₃]
+  simp only [← (boundedConstructibleLowerShriek ℓ Δb).map_comp
+    ((boundedConstructibleLowerShriek ℓ f).map (lowerShriekDualizingComplexTrace ℓ dc))
+    (lowerShriekDualizingComplexTrace ℓ f), T₁]
   simp only [Functor.map_comp, Category.assoc]
-  have n₄' : (boundedConstructibleLowerShriek ℓ b).map
-      ((boundedConstructibleLowerShriek ℓ ιb).map
-        (lowerShriekDualizingComplexTrace ℓ h)) ≫
-      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.app (dualizingComplex' ℓ Fb) ≫
-      (boundedConstructibleLowerShriek ℓ Δb).map
-        (lowerShriekDualizingComplexTrace ℓ db) =
-      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.app
-          ((boundedConstructibleLowerShriek ℓ h).obj
-            (dualizingComplex' ℓ Fc)) ≫
-        (boundedConstructibleLowerShriek ℓ Δb).map
-          ((boundedConstructibleLowerShriek ℓ db).map
-            (lowerShriekDualizingComplexTrace ℓ h)) ≫
-        (boundedConstructibleLowerShriek ℓ Δb).map
-          (lowerShriekDualizingComplexTrace ℓ db) := by
-    rw [← Category.assoc, n₄, Category.assoc]
-  rw [n₄', ← Functor.map_comp _ ((boundedConstructibleLowerShriek ℓ db).map _), T₂]
+  simp only [reassoc_of% n₄]
+  simp only [← (boundedConstructibleLowerShriek ℓ Δb).map_comp
+    ((boundedConstructibleLowerShriek ℓ db).map (lowerShriekDualizingComplexTrace ℓ h))
+    (lowerShriekDualizingComplexTrace ℓ db), T₂]
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, Iso.trans_hom, Iso.symm_hom,
     eqToIso.hom, NatTrans.comp_app, eqToHom_app, Functor.map_comp, Category.assoc]
   simp only [lowerShriekComp_hom_app_map_inv_app_assoc, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ

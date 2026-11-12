@@ -54,7 +54,7 @@ lemma Adjunction.homEquiv_symm_comp_conjugateIsoEquiv {C₁ C₂ C₃ C₄ : Typ
   rw [Equiv.symm_apply_eq, e.homEquiv_naturality_right]
   have hm := (a.homEquiv M P).apply_symm_apply (m ≫ v)
   rw [← Category.assoc, ← Category.assoc, ← hm, ← a.homEquiv_naturality_right,
-    ← b.homEquiv_naturality_left, Category.assoc,
+    ← b.homEquiv_naturality_left, ← Category.assoc,
     homEquiv_homEquiv_comp_conjugateIsoEquiv_app]
 
 end CategoryTheory
