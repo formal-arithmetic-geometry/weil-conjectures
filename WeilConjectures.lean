@@ -22664,6 +22664,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarFiniteType
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.ProjectionPullback
@@ -23726,6 +23727,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClDerivedIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClUnderived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicIntegersFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteCondensed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteExtend
