@@ -73,6 +73,8 @@ end General
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
+set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- **The generic-slicing step with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"): if the generic-slicing step holds with
