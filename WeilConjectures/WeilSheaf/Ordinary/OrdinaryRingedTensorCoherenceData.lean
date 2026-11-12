@@ -94,10 +94,10 @@ structure OrdinaryRingedTensorChainComparison
         (.up ℤ) p q n hpq) ≫
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
-      (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
+      (by exact (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
         RingedForgetTensorTransposition.tensorSummand J R
           ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)
+          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
   associativity (P Q N : CochainComplex (ProEtale.AdicSheaf l
       Y) ℤ) :
     let G := E.functor.mapHomologicalComplex (.up ℤ)
