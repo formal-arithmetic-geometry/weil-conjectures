@@ -135,9 +135,14 @@ private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
     (e.hom.app P) (e.hom.app Q) p q k hpq (op V)
     (coefficientIntegralScalarUnitSection l E W n (P.X p) (op V) x)
     (coefficientIntegralScalarUnitSection l E W n (Q.X q) (op V) y)
-  conv at hm =>
-    rhs
-    simp only [e, evaluation_reducedUnitSection]
+  have hm' := hm.trans (congrArg₂
+    (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n)
+      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj (G.obj P))
+      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj (G.obj Q))
+      p q k hpq (op V))
+    (evaluation_reducedUnitSection l E W n P p (op V) x)
+    (evaluation_reducedUnitSection l E W n Q q (op V) y))
   have hi := coefficientEvaluationTensorIso_inv_generator l E W n
     (G.obj P) (G.obj Q) p q k hpq (op V)
     (reducedUnitSection l E W n (P.X p) (op V) x)
@@ -145,7 +150,7 @@ private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
   exact (congrArg (fun s ↦ (c.inv.f k).val.app (op V)
     ((b.f k).val.app (op V) ((a.hom.f k).val.app (op V) s))) hcancel).trans
       ((congrArg (fun s ↦ (c.inv.f k).val.app (op V) ((b.f k).val.app (op V) s)) hs).trans
-        ((congrArg ((c.inv.f k).val.app (op V)) hm).trans hi))
+        ((congrArg ((c.inv.f k).val.app (op V)) hm').trans hi))
 
 set_option profiler true in
 private theorem strictMap_reducedUnit_generator (W : Scheme.{u})
