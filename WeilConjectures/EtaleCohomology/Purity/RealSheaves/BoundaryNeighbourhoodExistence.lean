@@ -369,7 +369,9 @@ lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.ra
         (σ * σF * σ⁻¹) x) := by
   let _ := Fintype.ofFinite K
   let : MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
-  let : MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) := inferInstance
+  let : MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) :=
+    (Ideal.pointwiseDistribMulAction (M := Gal(Ω/C.functionField))
+      (R := integralClosure Γ(C, c.W) Ω)).toMulAction
   obtain ⟨σ, n, hσ, hQ⟩ := exists_boundaryChart_galois_compatible j x c
   refine ⟨σ, n, mem_weilGroup_of_forall_genericEmb j sU GU σ n hσ, ?_⟩
   have : (σ • c.point).IsMaximal := by
