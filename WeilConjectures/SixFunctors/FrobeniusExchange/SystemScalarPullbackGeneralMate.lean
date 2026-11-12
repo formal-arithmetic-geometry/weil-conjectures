@@ -379,9 +379,10 @@ theorem derivedMate_app_of_transpose
     Adjunction.homEquiv_naturality_right, adjunctionMate_transpose, h₁]
   rw [← cancel_mono (R₂.mapDerivedCategoryFactors.hom.app
     ((G.mapHomologicalComplex (.up ℤ)).obj K))]
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc]
+  erw [Iso.inv_hom_id_app, Category.comp_id]
   rw [hQd K, F.mapDerivedCategory.map_comp, Category.assoc,
-    ← F.mapDerivedCategory.map_comp_assoc _ (R₁.mapDerivedCategoryFactors.inv.app K),
+    ← F.mapDerivedCategory.map_comp_assoc (R₁.mapDerivedCategoryFactors.inv.app K),
     Iso.inv_hom_id_app, F.mapDerivedCategory.map_id, Category.id_comp,
     F.mapDerivedCategoryFactors_hom_naturality_assoc]
   rw [Functor.map_comp]
@@ -611,7 +612,8 @@ private theorem systemScalarModel_transpose_counit (W : Scheme.{u})
         (sequenceRestriction l E L ι W).mapDerivedCategoryFactors.inv.app
           ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) := by
   have h := A.transpose P _ (𝟙 ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P))
-  simpa only [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id] using h
+  erw [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id] at h
+  exact h
 
 set_option profiler true in
 -- the derived mate comparison unfolds several large adjunction composites
@@ -701,12 +703,12 @@ theorem systemScalarPullback_eq_mate_general {X B : Scheme.{u}} (j : X ⟶ B)
     ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P) h1 ?_
     (S.hom.app (DerivedCategory.Q.obj P)) hS'
   rw [AX.transpose]
-  apply congrArg (fun f ↦ DerivedCategory.Q.map f ≫
-    (sequenceRestriction l E L ι X).mapDerivedCategoryFactors.inv.app
-      (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K))
-  exact Functor.cochain_mate_transpose_of_unit_eq
+  have ho := Functor.cochain_mate_transpose_of_unit_eq
     (integralComparisonSequencePullback l E j) (integralComparisonSequencePullback l L j)
     oB AB.ordinaryAdj oX AX.ordinaryAdj hoB hoX q a.hom ha P
+  exact congrArg (fun f ↦ DerivedCategory.Q.map f ≫
+    (sequenceRestriction l E L ι X).mapDerivedCategoryFactors.inv.app
+      (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K)) ho
 
 
 
@@ -924,6 +926,33 @@ theorem eqToIso_hom_app_val_app_heq {C : Type*} [Category C] (K : Type u) [Field
   subst h
   rfl
 
+/-- Evaluation preserves the property of being the identity on underlying sections. -/
+private theorem sequenceEvaluation_map_heq (W : Scheme.{u}) (n : ℕ)
+    {M M' : coefficientSequenceModules l E W} (g : M ⟶ M')
+    (h : ∀ U (x : M.val.obj U), HEq ((g.val.app U) x) x)
+    (U : W.ProEtᵒᵖ) (x : ((coefficientSequenceEvaluation l E W n).obj M).val.obj U) :
+    HEq ((((coefficientSequenceEvaluation l E W n).map g).val.app U) x) x :=
+  h (op (n, U.unop)) x
+
+/-- Direct image preserves the property of being the identity on underlying sections. -/
+private theorem directImage_map_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A]
+    {M M' : proEtaleRingModules X (proEtaleConstantRing X A)} (g : M ⟶ M')
+    (h : ∀ U (x : M.val.obj U), HEq ((g.val.app U) x) x)
+    (U : Y.ProEtᵒᵖ) (x : ((proEtaleConstantModuleDirectImage f A).obj M).val.obj U) :
+    HEq ((((proEtaleConstantModuleDirectImage f A).map g).val.app U) x) x :=
+  h ((proEtaleBaseChange f).op.obj U) x
+
+/-- Scalar restriction preserves the property of being the identity on sections. -/
+private theorem normalizedRestrictScalars_map_heq {W : Scheme.{u}} {n : ℕ}
+    {M M' : normalizedDVRModules l L W n} (g : M ⟶ M')
+    (h : ∀ U (x : M.val.obj U), HEq ((g.val.app U) x) x)
+    (U : W.ProEtᵒᵖ)
+    (x : ((proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)).obj
+      M).val.obj U) :
+    HEq ((((proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)).map
+      g).val.app U) x) x := h U x
+
 /-- Evaluating the inverse restriction comparison still gives the identity on sections. -/
 private theorem sequenceScalarPullbackRight_inv_evaluation_heq
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (N : coefficientSequenceModules l L X)
@@ -933,8 +962,8 @@ private theorem sequenceScalarPullbackRight_inv_evaluation_heq
         ((integralComparisonSequenceDirectImage l L f).obj N))).val.obj U) :
     HEq ((((coefficientSequenceEvaluation l E Y n).map
       ((sequenceScalarPullbackRight l E L ι f).inv.app N)).val.app U).hom x) x :=
-  (heq_of_eq (sequenceEvaluation_map_val_app l E Y n _ U x)).trans
-    (heq_of_eq (sequenceScalarPullbackRight_inv_app l E L ι f N _ x))
+  sequenceEvaluation_map_heq l E Y n _
+    (fun V y ↦ heq_of_eq (sequenceScalarPullbackRight_inv_app l E L ι f N V y)) U x
 
 /-- The finite direct-image restriction comparison is the identity on sections. -/
 private theorem coefficientDirectImageComparison_app_heq
@@ -1008,14 +1037,11 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
   apply sheafOfModules_comp_three_eq_of_heq
   · exact sequenceScalarPullbackRight_inv_evaluation_heq l E L ι f n N
   · exact pdE _
-  · intro W x
-    rw [directImage_map_val_app]
-    exact heq_apply_of_heq_id _ (hρX N _) rfl rfl x
+  · exact directImage_map_heq f _ (ρX.app N)
+      (fun U x ↦ heq_apply_of_heq_id _ (hρX N U) rfl rfl x)
   · intro W x
     exact heq_apply_of_heq_id _ (hρY _ W) rfl rfl x
-  · intro W x
-    rw [normalizedRestrictScalars_map_val_app]
-    exact pdL N W x
+  · exact normalizedRestrictScalars_map_heq l E L ι (dL.app N) (pdL N)
   · exact coefficientDirectImageComparison_app_heq f (integralScalarQuotientMap l E L ι n) _
 
 end OrdinaryCube
