@@ -259,8 +259,7 @@ private theorem nativeReductionMonoidal
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
   have hcore' : ∃ core : F.CoreMonoidal, ∀ X Z,
-      (core.μIso X Z).inv = F.map (e.inv.app (X, Z)) ≫
-        m.mu.hom.app (X, Z) ≫ f.hom.app (F.obj X, F.obj Z) := by
+      (core.μIso X Z).hom = (mu.inv.app (X, Z)) := by
     sorry
   obtain ⟨core, hcore⟩ := hcore'
   refine ⟨core, ?_⟩
