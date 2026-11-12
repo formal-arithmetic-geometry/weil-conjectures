@@ -94,7 +94,6 @@ theorem kFlat_pullback_adjunction_comparison
           (e P hP).hom ≫ ((relativeMVAdj g).homEquiv _ _).symm
             (DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I) := by
   classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf, moduleRings] at *
   let : HasDerivedCategory.{w} S.Modules := d S
   let : HasDerivedCategory.{w} S'.Modules := d S'
   let hL := @Classical.choose _ _ (@exists_derivedPullbackComposition.{u, w} d)
