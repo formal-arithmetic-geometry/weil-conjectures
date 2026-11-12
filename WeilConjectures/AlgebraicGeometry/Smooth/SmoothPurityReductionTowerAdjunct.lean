@@ -203,6 +203,7 @@ private theorem ordinary_reduction_isIso
     ((level n).app X) ((level m).app X)
   intro U x
   have ht := transition X h U 1 x
-  simpa only [map_one, spStrictTransitionSection, spReductionGenerator, Iso.app_inv] using ht
+  simp only [map_one, spStrictTransitionSection, spReductionGenerator] at ht
+  exact ht
 
 end AlgebraicGeometry.ProEtale

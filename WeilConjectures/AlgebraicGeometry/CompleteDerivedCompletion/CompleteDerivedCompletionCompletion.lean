@@ -475,7 +475,6 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         (fun _ ↦ scalar l E T)).map (homOfLE (Nat.le_succ n)).op).app (P.X j) = _
       rw [Functor.ofOpSequence_map_homOfLE_succ]
       rfl
-    have hY : Y.map (homOfLE (Nat.le_succ n)).op = 𝟙 P := rfl
     have hn := e.hom.naturality (homOfLE (Nat.le_succ n)).op
     have hc : (levelConeTower f).map (homOfLE (Nat.le_succ n)).op ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n := by
@@ -487,8 +486,7 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         erw [Category.comp_id, Category.id_comp]
         exact hX
       · change (Y.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ 𝟙 P
-        erw [Category.comp_id, Category.id_comp]
-        exact hY
+        erw [Category.comp_id]
     change _ ≫ (e.hom.app (op n) ≫ (c n).hom) =
       (e.hom.app (op (n + 1)) ≫ (c (n + 1)).hom) ≫ _
     calc
