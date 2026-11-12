@@ -84,7 +84,17 @@ theorem isIso_dualComparison_rightDerivedLowerStar
 composite of `Rf_* δ_K : Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K` and the exchange
 `c_{𝔻_X K} : Rf_* 𝔻_X (𝔻_X K) ≅ 𝔻_Y Rf_* (𝔻_X K)` equals the composite of
 `δ_{Rf_* K} : Rf_* K ⟶ 𝔻_Y 𝔻_Y Rf_* K` and `𝔻_Y` applied to the exchange
-`c_K : Rf_* 𝔻_X K ≅ 𝔻_Y Rf_* K`.
+`c_K : Rf_* 𝔻_X K ≅ 𝔻_Y Rf_* K`, that is, the square
+```
+            Rf_* δ_K
+  Rf_* K ─────────────▶ Rf_* 𝔻_X 𝔻_X K
+     │                        │
+     │ δ_{Rf_* K}             │ c_{𝔻_X K}
+     ▼                        ▼
+  𝔻_Y 𝔻_Y Rf_* K ──────▶ 𝔻_Y Rf_* 𝔻_X K
+             𝔻_Y c_K
+```
+commutes.
 
 Here `𝔻 = RHom(-, ω)` is written `(ihom -).obj ω`, `δ` is
 `CategoryTheory.MonoidalClosed.toIhomIhom` (`AlgebraicGeometry.Etale.verdierDualDoubleDual_app`),

@@ -10340,6 +10340,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleC
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleRestrictScalars
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheafPi
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheafPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedExtensionZeroBaseChange
@@ -18341,6 +18342,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersModPowResidueField
 public import WeilConjectures.NumberTheory.Padics.IntegersModPowTransition
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.NumberTheory.Padics.IntegersPadicIntBasis
 public import WeilConjectures.NumberTheory.Padics.IntegersProfiniteTower
 public import WeilConjectures.NumberTheory.Padics.IntegersResidueField
 public import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
@@ -18353,6 +18355,7 @@ public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.Padics.NonunitCoefficientStages
 public import WeilConjectures.NumberTheory.Padics.OrdinaryExceptionalCtfPreservation
 public import WeilConjectures.NumberTheory.Padics.PadicIntegersIntegralClosure
+public import WeilConjectures.NumberTheory.Padics.RankOneCriterion
 public import WeilConjectures.NumberTheory.Padics.ResidueTorAmplitudeTest
 public import WeilConjectures.NumberTheory.Padics.ULiftAdicComplete
 public import WeilConjectures.NumberTheory.Padics.ULiftDiscreteValuationRing
@@ -22264,6 +22267,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHCup
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHCupPerfect
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantSheafLeg
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicHTopDegree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicProjectionFormulaAux
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafForgetAb
@@ -22501,6 +22505,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.SplitCovering
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldCohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldSheafCohomologyLocalization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldSheafColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubobjectStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TensorLeftInvertible

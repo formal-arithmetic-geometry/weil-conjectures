@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheafPi
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicHTopDegree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldCohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldSheafCohomologyLocalization
 
 /-!
 # Top-degree cohomology with coefficients `𝒪_E` and `E`
@@ -32,13 +32,17 @@ the algebraically closed `k`).
 
 ## Implementation notes
 
-Both statements are left with `sorry`. The blueprint proof passes from the finite stages
-`𝒪_E/ϖⁿ`, where the trace isomorphism is
-`Etale.TateOrientation.bijective_untwistedTraceMap_comp_cohomologyAddEquivCompactSupport`,
-to `𝒪_E` by the Milnor sequence, and to `E` by inverting `ℓ`. This needs the comparison of the
-pro-étale cohomology of the constant sheaves `𝒪_E/ϖⁿ` with the étale cohomology groups
-`Hom(Λ_X, Λ_X[2d])` of `D(X_ét, Λ)` used at the finite stage, which is not available in this
-form.
+The finite stages are `ℤ/ℓᵐ`: by the trace isomorphism, `H^{2d}(X_proét, ℤ/ℓᵐ)` has `ℓᵐ`
+elements (`AlgebraicGeometry.ProEtale.nat_card_finiteAdicH_two_mul`), and the Bockstein and
+Milnor sequences give `H^{2d}(X_proét, ℤ_ℓ) ≅ ℤ_ℓ`
+(`AlgebraicGeometry.ProEtale.nonempty_linearEquiv_integralAdicH_two_mul`). As `𝒪_E ≅ ℤ_ℓʳ` as
+topological groups (`PadicAlgCl.exists_continuousAddEquiv_integers`) and cohomology commutes
+with finite products, `H^{2d}(X_proét, 𝒪_{E,X}) ≅ ℤ_ℓʳ ≅ 𝒪_E`. Inverting `ℓ` gives the case of
+`E` (`AlgebraicGeometry.ProEtale.nonempty_addEquiv_H_padicSubfieldSheaf_of_addEquiv`).
+
+The isomorphisms obtained this way are not the trace maps: they depend on a choice of a
+`ℤ_ℓ`-basis of `𝒪_E` and of generators. A pro-étale trace map, whose bijectivity would be the
+blueprint statement proper, is not available in the repository.
 -/
 
 @[expose] public section
@@ -59,21 +63,37 @@ include a
 /-- Blueprint `theorem-trace-isomorphism-top-degree--5` (the trace isomorphism with integral
 coefficients), in existential form: for `X` smooth, proper and geometrically connected of pure
 dimension `d` over the algebraically closed `k` and `ℓ` invertible in `k`,
-`H^{2d}(X_proét, 𝒪_{E,X}) ≅ 𝒪_E(-d) ≅ 𝒪_E` as abelian groups. Not proved here (see the module
-docstring). -/
+`H^{2d}(X_proét, 𝒪_{E,X}) ≅ 𝒪_E(-d) ≅ 𝒪_E` as abelian groups.
+
+The isomorphism is not the trace map, which is not available on pro-étale cohomology in the
+repository; it is `H^{2d}(X_proét, 𝒪_{E,X}) ≅ H^{2d}(X_proét, ℤ_ℓ)ʳ ≅ ℤ_ℓʳ ≅ 𝒪_E` for a
+`ℤ_ℓ`-basis of `𝒪_E` (see the module docstring). -/
 theorem nonempty_addEquiv_H_padicIntegersSheaf_two_mul :
     letI := normedFieldOfAlgebra l E
     Nonempty (Sheaf.H (continuousMapAbSheaf X (integers l E)) (2 * d) ≃+ integers l E) := by
-  sorry
+  let := normedFieldOfAlgebra l E
+  have hl : (l : k) ≠ 0 := CharP.cast_ne_zero_of_ne_of_prime k
+    (Fact.out : l.Prime) (Fact.out : ringChar k ≠ l)
+  obtain ⟨r, ⟨e⟩⟩ := exists_continuousAddEquiv_integers l E
+  obtain ⟨φ⟩ := nonempty_linearEquiv_integralAdicH_two_mul a d l hl
+  exact ⟨(Sheaf.H.mapAddEquiv (continuousSheafMapIso X e) (2 * d)).trans <|
+    (continuousSheafPiHAddEquiv X (2 * d)).trans <|
+      (AddEquiv.piCongrRight fun _ ↦ φ.toAddEquiv).trans e.toAddEquiv.symm⟩
 
 /-- Blueprint `theorem-trace-isomorphism-top-degree--7` (the trace isomorphism with coefficients
 in a finite extension `E` of `ℚ_ℓ`), in existential form: for `X` smooth, proper and
 geometrically connected of pure dimension `d` over the algebraically closed `k` and `ℓ`
-invertible in `k`, `H^{2d}(X_proét, E_X) ≅ E(-d) ≅ E` as abelian groups. Not proved here (see
-the module docstring). -/
+invertible in `k`, `H^{2d}(X_proét, E_X) ≅ E(-d) ≅ E` as abelian groups.
+
+As `E_X = 𝒪_{E,X}[1/ℓ]`, this is the localization at `ℓ` of
+`AlgebraicGeometry.ProEtale.nonempty_addEquiv_H_padicIntegersSheaf_two_mul`. The isomorphism is
+not the trace map, which is not available on pro-étale cohomology in the repository. -/
 theorem nonempty_addEquiv_H_padicSubfieldSheaf_two_mul :
     letI := normedFieldOfAlgebra l E
     Nonempty (Sheaf.H (continuousMapAbSheaf X E) (2 * d) ≃+ E) := by
-  sorry
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated a
+  obtain ⟨ψ⟩ := nonempty_addEquiv_H_padicIntegersSheaf_two_mul a d l E
+  exact nonempty_addEquiv_H_padicSubfieldSheaf_of_addEquiv X l E (2 * d) ψ
 
 end AlgebraicGeometry.ProEtale
