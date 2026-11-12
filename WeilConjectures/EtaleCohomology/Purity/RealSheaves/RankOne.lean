@@ -215,7 +215,7 @@ theorem exists_pow_eq_one_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
     { toFun g := .ofAdd (lam g)
       map_one' := by simp [hlam_one]
       map_mul' g h := by simp [hlam_mul, ofAdd_add] }
-  have ha : Continuous a := by
+  have hacont : Continuous a := by
     refine continuous_of_continuousAt_one a ?_
     rw [ContinuousAt, map_one]
     have hχN : Filter.Tendsto (fun g : W.geometric ↦ (χ g : PadicAlgCl l) ^ N - 1)
@@ -230,7 +230,7 @@ theorem exists_pow_eq_one_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
       rw [dist_zero_right] at hg ⊢
       exact (hlam_norm g).trans_lt hg
     exact (continuous_ofAdd.tendsto 0).comp hlam
-  have h1 := W.eq_one_of_conj_invariant_of_finiteDimensional (l := l) a ha fun g h hgh ↦ by
+  have h1 := W.eq_one_of_conj_invariant_of_finiteDimensional (l := l) a hacont fun g h hgh ↦ by
     simp [a, hlam_conj g h hgh]
   refine ⟨N, Nat.pos_of_ne_zero hN0, fun g ↦ ?_⟩
   have hlam0 : lam g = 0 := congrArg (fun φ ↦ (φ g).toAdd) h1
