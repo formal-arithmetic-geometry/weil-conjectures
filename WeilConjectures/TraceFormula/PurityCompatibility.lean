@@ -101,6 +101,7 @@ noncomputable def prodUpperShriekBaseChangeUnit :
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- elaborating the composites of the six functors on `Dᵇc` is slow
 /-- The exceptional Künneth map `α : Lp_X^* M ⊗ Lp_Y^* ω_Y ⟶ Rp_X^! M` factors as the exceptional
 base change map of the product square at the unit, `Lp_Y^* ω_Y ⟶ Rp_X^! ℚ̄_ℓ`, followed by the
