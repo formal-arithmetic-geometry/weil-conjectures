@@ -113,7 +113,7 @@ theorem isomorphismOrdinaryFiniteAugmentation
       (N.val.map ((proEtaleBaseChange g).map c).op
         (integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x))) =
       integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x) := by
-    exact mapCompIdApply N.val _ _ ht _
+    exact mapCompIdApply N.val.presheaf _ _ ht _
   erw [hv]
   have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
   have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
