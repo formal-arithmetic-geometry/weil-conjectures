@@ -399,13 +399,12 @@ theorem scalar_chern_local_factorization
       _ (family.integral E).Rq (family.rational E).Rq (family.toRational E).q.square
       ((family.toRational E).units Y) ((family.toRational E).units (ProjectiveLine Y))
       (family.toRational E).lineP hi
+    refine Eq.trans ?_ (canonical_q_local_adjunct (coefficient l (some E)).X Y
+      (family.rational E).Rq (family.rational E).q_canonical (family.rational E).q_unit
+      _ (scalarQLocalChern l E Y r z))
     unfold scalarQChern scalarQLocalChern
     dsimp only
-    simp only [coefficient, line]
-    exact (congrArg (fun c ↦ c ≫ (eqToIso (family.rational E).q_canonical).hom.app _) hq).trans
-      (canonical_q_local_adjunct _ Y (family.rational E).Rq
-        (family.rational E).q_canonical (family.rational E).q_unit _ _)
-
+    exact congrArg (fun c ↦ c ≫ (eqToIso (family.rational E).q_canonical).hom.app _) hq
   · have hreal := realize_local_regular_adjunct l _ hP r.t₂.toPresentation
       r.eW r.eP family.zl.R₂ family.zl.p₂_canonical family.zl.p₂_unit r.p₂_square b hb w hw
     have hi := extend_local_adjunct_of_eq (integralMap l E) _ family.zl.R₂
@@ -416,13 +415,11 @@ theorem scalar_chern_local_factorization
       _ (family.integral E).R₂ (family.rational E).R₂ (family.toRational E).p₂.square
       ((family.toRational E).units (ProjectiveLine Y))
       ((family.toRational E).units (diagonalSurface Y)) (family.toRational E).lineW hi
-    unfold scalarP2Chern scalarP2LocalChern
+    refine Eq.trans ?_ (canonical_p2_local_adjunct (coefficient l (some E)).X Y
+      (family.rational E).R₂ (family.rational E).p₂_canonical (family.rational E).p₂_unit
+      _ (scalarP2LocalChern l E Y r w))
+    unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
     dsimp only
-    simp only [coefficient, line]
-    unfold secondDiagramPushIso
-    exact (congrArg (fun c ↦ c ≫ (eqToIso (family.rational E).p₂_canonical).hom.app _) hq).trans
-      (canonical_p2_local_adjunct _ Y (family.rational E).R₂
-        (family.rational E).p₂_canonical (family.rational E).p₂_unit _ _)
-
+    exact congrArg (fun c ↦ c ≫ (eqToIso (family.rational E).p₂_canonical).hom.app _) hq
 
 end AlgebraicGeometry.ProEtale.RationalP1
