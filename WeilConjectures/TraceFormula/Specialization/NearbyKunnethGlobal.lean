@@ -13,6 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-!
 
@@ -66,6 +67,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -356,7 +358,6 @@ lemma isIso_of_square {C : Type*} [Category C] {W X₁ X₂ X₃ Y₁ Y₂ : C} 
   have : IsIso (b ≫ c) := IsIso.of_isIso_comp_left a _
   exact IsIso.of_isIso_comp_left b c
 
-set_option maxHeartbeats 1600000 in
 set_option trace.profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step, abstractly**: for the product `P` over the trait of models `M`,
@@ -437,7 +438,6 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 1600000 in
 set_option trace.profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
