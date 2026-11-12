@@ -94,12 +94,14 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
         (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)) =
       ((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')
         (unrestrictedIntegralTensorSection l E W n M (op V') 1 (M.val.map i.op z)) := by
+  let e := (pullbackTensorReductionEvaluation l E W n).hom.app M
+  dsimp only [Functor.comp_obj, coefficientSequenceEvaluation, SheafOfModules.pushforward] at e
   have h1 := pushforward_hom_naturality_apply
     (F := CategoryTheory.Prod.sectR n W.ProEt)
     (M := ((unrestrictedIntegralReductionFunctor l E W n).obj M).val)
     (N := ((pullbackTensorOrdinaryReduction l E W).obj M).val)
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom
-    ((pullbackTensorReductionEvaluation l E W n).hom.app M).val i
+    e.val i
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)
   have h2 := PresheafOfModules.naturality_apply
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val i.op z
