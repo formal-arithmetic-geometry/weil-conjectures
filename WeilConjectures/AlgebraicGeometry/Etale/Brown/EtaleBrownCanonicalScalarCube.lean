@@ -31,6 +31,38 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
+private lemma mateEquiv_app_cube_converse_of_eq
+    {DY DX DY' DX' EY EX EY' EX' : Type*}
+    [Category* DY] [Category* DX] [Category* DY'] [Category* DX']
+    [Category* EY] [Category* EX] [Category* EY'] [Category* EX']
+    {Lf : DY ⥤ DX} {Rf : DX ⥤ DY} {Lf' : DY' ⥤ DX'} {Rf' : DX' ⥤ DY'}
+    {Mf : EY ⥤ EX} {Sf : EX ⥤ EY} {Mf' : EY' ⥤ EX'} {Sf' : EX' ⥤ EY'}
+    (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (bf : Mf ⊣ Sf) (bf' : Mf' ⊣ Sf')
+    {Gr : DY ⥤ DY'} {Hr : DX ⥤ DX'} {Gs : EY ⥤ EY'} {Hs : EX ⥤ EX'}
+    {PY : DY ⥤ EY} {PX : DX ⥤ EX} {PY' : DY' ⥤ EY'} {PX' : DX' ⥤ EX'}
+    (σr : Gr ⋙ Lf' ⟶ Lf ⋙ Hr) (σs : Gs ⋙ Mf' ⟶ Mf ⋙ Hs)
+    (αf : PY ⋙ Mf ⟶ Lf ⋙ PX) (αf' : PY' ⋙ Mf' ⟶ Lf' ⋙ PX')
+    (αg : PY ⋙ Gs ⟶ Gr ⋙ PY') (αg' : PX ⋙ Hs ⟶ Hr ⋙ PX')
+    (sr : Rf ⋙ Gr ⟶ Hr ⋙ Rf') (ss : Sf ⋙ Gs ⟶ Hs ⋙ Sf')
+    (sf : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (sf₀ : Rf ⋙ PY ⟶ PX ⋙ Sf)
+    (hσr : mateEquiv af af' (.mk _ _ _ _ σr) = .mk _ _ _ _ sr)
+    (hσs : mateEquiv bf bf' (.mk _ _ _ _ σs) = .mk _ _ _ _ ss)
+    (hαf : mateEquiv af bf (.mk _ _ _ _ αf) = .mk _ _ _ _ sf₀)
+    (hαf' : mateEquiv af' bf' (.mk _ _ _ _ αf') = .mk _ _ _ _ sf)
+    (h : ∀ K, αg.app (Rf.obj K) ≫ PY'.map (sr.app K) ≫ sf.app (Hr.obj K) =
+      Gs.map (sf₀.app K) ≫ ss.app (PX.obj K) ≫ Sf'.map (αg'.app K)) (M : DY) :
+    Mf'.map (αg.app M) ≫ αf'.app (Gr.obj M) ≫ PX'.map (σr.app M) =
+      σs.app (PY.obj M) ≫ Hs.map (αf.app M) ≫ αg'.app (Lf.obj M) := by
+  apply mateEquiv_app_cube_converse af af' bf bf' σr σs αf αf' αg αg' ?_ M
+  intro K
+  change αg.app (Rf.obj K) ≫ PY'.map
+      ((mateEquiv af af' (.mk _ _ _ _ σr)).app K) ≫
+      (mateEquiv af' bf' (.mk _ _ _ _ αf')).app (Hr.obj K) =
+    Gs.map ((mateEquiv af bf (.mk _ _ _ _ αf)).app K) ≫
+      (mateEquiv bf bf' (.mk _ _ _ _ σs)).app (PX.obj K) ≫ Sf'.map (αg'.app K)
+  rw [hσr, hαf', hαf, hσs]
+  exact h K
+
 -- Compare four independently normalized adjunctions.
 set_option profiler true in
 set_option maxHeartbeats 1600000 in
@@ -131,22 +163,18 @@ theorem strictEtaleBrownCanonicalScalarCube
     exact ((mateEquiv _ _).apply_symm_apply _)
   have hc := strictEtaleBrownCanonicalRestrictionCube O t g A PW PV B RV RW rg hinverse h
   intro Y
-  apply mateEquiv_app_cube_converse (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
-    τ (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
-    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv ?_ Y
-  intro X
-  change pn.inv.app _ ≫ (RV.derived n).map
-      ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-        (.mk _ _ _ _ τ)).app X) ≫
-      (mateEquiv (PV.scalar h).derivedAdj av (.mk _ _ _ _ (RV.scalar h).inv)).app _ =
-    _ ≫ (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)).app _ ≫ _
   have hr : (mateEquiv (PV.scalar h).derivedAdj av
       (.mk _ _ _ _ (RV.scalar h).inv)) = .mk _ _ _ _ (RV.val.restriction h).hom :=
     RV.property.2.2 h
   have hw : (mateEquiv (PW.scalar h).derivedAdj an
       (.mk _ _ _ _ (RW.scalar h).inv)) = .mk _ _ _ _ (RW.val.restriction h).hom :=
     RW.property.2.2 h
-  simpa only [pn, pm, ht, hr, hw, hs] using hc X
+  exact mateEquiv_app_cube_converse_of_eq
+    (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
+    τ (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
+    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv
+    δ.hom (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom
+    (RV.val.restriction h).hom (RW.val.restriction h).hom
+    ht hs hw hr (fun X ↦ hc X) Y
 
 end AlgebraicGeometry
