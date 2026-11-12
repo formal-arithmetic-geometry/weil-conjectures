@@ -80,8 +80,10 @@ private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
   refine ⟨?_⟩
   intro X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂' φ₁ φ₂ qM gM qN gN hM hN hpb hP hgen hX hY hZ b hb
     m₁ m₂ hle h₁ h₂ eM heM eN heN A B hA hB
-  obtain ⟨E, A₀, B₀, ⟨eA⟩, ⟨eB⟩⟩ :=
-    ProEtale.exists_derivedExtendScalars_iso_integralModel_pair X Y ℓ ⟨A, hA⟩ ⟨B, hB⟩
+  have hmodels := ProEtale.exists_derivedExtendScalars_iso_integralModel_pair X Y ℓ ⟨A, hA⟩ ⟨B, hB⟩
+  rcases hmodels with ⟨E, A₀, B₀, eA, eB⟩
+  rcases eA with ⟨eA⟩
+  rcases eB with ⟨eB⟩
   let s := baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
     (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k'))
   have h₀ : IsIso (L((s)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).map
