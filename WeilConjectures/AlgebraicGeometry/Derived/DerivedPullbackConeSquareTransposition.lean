@@ -94,6 +94,10 @@ local instance coneSquare_hasBinaryBiproducts (S : Scheme.{u}) :
     HasBinaryBiproducts (SheafOfModules.{u} (moduleRings S.toRingedSpace)) :=
   inferInstance
 
+local instance coneSquare_hasHomology (S : Scheme.{u})
+    (K : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) (i : ℤ) :
+    K.HasHomology i := inferInstance
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
