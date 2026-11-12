@@ -454,7 +454,8 @@ theorem native_forget_normalized_binary_models
           P T (chain T P).hom p q n hpq
         exact (hchain T P q p n hqp).trans (Category.id_comp _)
       simp only [HomologicalComplex.comp_f]
-      rw [← Category.assoc, hi, Linear.units_smul_comp, hψ' q p n hqp]
+      rw [← Category.assoc, hi, Linear.units_smul_comp]
+      simp only [hψ' q p n hqp]
       rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
       change (p * q).negOnePow • _ = (q * p).negOnePow • _
       rw [mul_comm q p]
