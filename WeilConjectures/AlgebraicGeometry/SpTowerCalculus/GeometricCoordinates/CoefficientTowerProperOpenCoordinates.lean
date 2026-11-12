@@ -153,6 +153,7 @@ private noncomputable def graphPushIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (SemilinearProperOpen.coefficientMap_forget_eq (graphRings l E) (graphTransitions l E) f)
 
 -- Keep the adjacent maps abstract until the equality transport is performed once.
+set_option profiler true in
 set_option maxHeartbeats 900000 in
 -- The section pins compare functors on large coefficient-system categories.
 private structure OrdinaryModel
@@ -202,6 +203,7 @@ private structure OrdinaryModel
 
 attribute [local instance] OrdinaryModel.additive OrdinaryModel.inverseAdditive
 
+set_option profiler true in
 set_option maxHeartbeats 900000 in
 -- Equality transport identifies the full coefficient-system presentation.
 private noncomputable def ordinaryModel
