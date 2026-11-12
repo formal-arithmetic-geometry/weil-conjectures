@@ -259,11 +259,13 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
       (F.mapDerivedCategory.obj K) (F.mapDerivedCategory.obj L)
       (P x) I inferInstance eP.symm eI
     obtain ⟨eR⟩ := derivedInternalHom_restrict_open X.toRingedSpace V K L
+    let eRI := eR.symm ≪≫ eHom
+    let eHomology := (DerivedCategory.homologyFunctor D n).mapIso eRI
+    let eFactors := (DerivedCategory.homologyFunctorFactors D n).app
+      (homComplex (R := X.toRingedSpace.sheaf.over V) (P x) I)
+    let eTotal := (F.mapDerivedCategoryHomologyFunctorIso n).app _ ≪≫ eHomology ≪≫ eFactors
     exact (SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over V)).prop_of_iso
-      (((F.mapDerivedCategoryHomologyFunctorIso n).app _) ≪≫
-        (DerivedCategory.homologyFunctor D n).mapIso (eR.symm ≪≫ eHom) ≪≫
-        ((DerivedCategory.homologyFunctorFactors D n).app
-          (homComplex (R := X.toRingedSpace.sheaf.over V) (P x) I))).symm hPI
+      eTotal.symm hPI
   have : ∀ x : X, (H.over (U x)).IsQuasicoherent := hlocal
   apply SheafOfModules.IsQuasicoherent.of_coversTop H U
   apply (Opens.coversTop_iff _ U).mpr
