@@ -101,6 +101,7 @@ private theorem unitComparison (t : Y ⟶ X) :
     (Opens.map t.base) (ModuleCat.{w} k) (Opens.grothendieckTopology X)
       (Opens.grothendieckTopology Y) (Opposite.op ⊤)).symm
 
+set_option maxHeartbeats 400000 in
 set_option profiler true in
 -- Normalize the inverse-image functor before applying monoidal coherence.
 /-- Compatibility of the first tensor transport with exact inverse image.
@@ -144,6 +145,7 @@ theorem scalarExtCup_inverseImage_first (t : Y ⟶ X)
   rw [rightUnitTransport a, Abelian.Ext.mapExactFunctor_comp,
     Abelian.Ext.mapExactFunctor_mk₀, rightUnitTransport]
   simp only [Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀]
+  trace_state
   congr 2
   congr 1
   let adj := (Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
