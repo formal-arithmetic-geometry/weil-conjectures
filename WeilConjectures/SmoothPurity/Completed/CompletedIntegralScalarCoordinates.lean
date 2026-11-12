@@ -87,24 +87,26 @@ theorem integralOrdinaryScalar_coordinates :
       AddCommGrpCat.{u + 1} := integralCoefficientAbLocallyBijective.{u, u} Y
   let := ι.toAlgebra
   let φ := integralCompletedScalarMap l E L ι Y
+  let F : integralTowerModules l E Y ⥤ integralTowerModules l L Y :=
+    SheafOfModules.changeOfRingsFunctor φ
   obtain ⟨hobj, hmap, -⟩ := (integralOrdinaryScalarWitness l E L ι Y).choose_spec
-  have hOC : integralOrdinaryScalar l E L ι Y = SheafOfModules.changeOfRingsFunctor φ :=
+  have hOC : integralOrdinaryScalar l E L ι Y = F :=
     CategoryTheory.Functor.ext hobj fun _ _ f ↦ hmap f
   -- Work with the standard tensor functor throughout the coordinate identities.
   rw [hOC]
-  have : (SheafOfModules.changeOfRingsFunctor φ).Additive := by
+  have : F.Additive := by
     rw [← hOC]
     infer_instance
   have hobj₀ (M : integralTowerModules l E Y) :
-      (SheafOfModules.changeOfRingsFunctor φ).obj M = SheafOfModules.changeOfRings φ M := rfl
+      F.obj M = SheafOfModules.changeOfRings φ M := rfl
   have hmap₀ {M N : integralTowerModules l E Y} (f : M ⟶ N) :
-      (SheafOfModules.changeOfRingsFunctor φ).map f =
+      F.map f =
         eqToHom (hobj₀ M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
           eqToHom (hobj₀ N).symm := by
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     rfl
   obtain ⟨-, -, hO⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
-  obtain ⟨a, ha⟩ := hO (SheafOfModules.changeOfRingsFunctor φ) hobj₀ (fun f ↦ hmap₀ f)
+  obtain ⟨a, ha⟩ := hO F hobj₀ (fun f ↦ hmap₀ f)
   obtain ⟨d, Φ, κ, hκ, hκc, -, b, hb, hbasis, htrace, -⟩ :=
     integralCompletedScalarMap_frobeniusSystem_trace l E L ι Y
   obtain ⟨e⟩ := completedIntegralFiniteFree.{u, u} l E Y L ι φ
@@ -120,7 +122,7 @@ theorem integralOrdinaryScalar_coordinates :
     have h := ha M _ (𝟙 _) U m
     simpa only [eqToHom_refl, Category.id_comp, Adjunction.homEquiv_id] using h
   refine ⟨d, b, a, fun j ↦ Functor.whiskerRight (Functor.whiskerLeft
-    (SheafOfModules.changeOfRingsFunctor φ) (σ j)) _ ≫ εF, hb, ?_, ?_⟩
+    F (σ j)) _ ≫ εF, hb, ?_, ?_⟩
   · intro i j M
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
     apply SheafOfModules.hom_ext
