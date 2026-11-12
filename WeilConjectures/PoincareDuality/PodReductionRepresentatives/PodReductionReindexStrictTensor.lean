@@ -50,6 +50,14 @@ set_option hygiene false in
 local notation "S[" W "]" => coefficientTotalTensor.{u, u + 1, u}
   (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
 
+/-- The inverse-image unit as a section at the pulled-back object. -/
+private def inverseImageUnitSection {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (M : coefficientSequenceModules l E Y) (V : ℕ × Y.ProEt) (s : M.val.obj (op V)) :
+    ((integralComparisonSequencePullback l E g).obj M).val.obj
+      (op ((pullbackTensorSequenceBase g).obj V)) :=
+  ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app
+    M).val.app (op V) s
+
 /-- The inverse-image transpose evaluates a map on the unit section.
 Source: Stacks 03D2. -/
 theorem inverseImage_homEquiv_apply {X Y : Scheme.{u}} (g : X ⟶ Y)
@@ -95,10 +103,9 @@ private theorem inverseImage_reduction_total_hom_ext {X Y : Scheme.{u}}
       (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U)))
       (y : (Q.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
       let V := (n, (proEtaleIsoPostcompose g).obj U)
-      let s := ((Adjunction.ofIsRightAdjoint
-        (integralComparisonSequenceDirectImage l E g)).unit.app
-          ((pullbackTensorOrdinaryReduction l E Y).obj (((T[Y]).obj (P, Q)).X k))).val.app
-            (op V) (reducedUnitSection l E Y n _ (op V.2)
+      let s := inverseImageUnitSection l E g
+        ((pullbackTensorOrdinaryReduction l E Y).obj (((T[Y]).obj (P, Q)).X k)) V
+          (reducedUnitSection l E Y n _ (op V.2)
               (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
                 (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y))
       N.val.map (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
@@ -124,9 +131,9 @@ private theorem generators_unitSection {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
       (((integralComparisonSequencePullback l E g).obj
           ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i))).val.map
         (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
-        (integralComparisonSequenceGenerator.{u, u} l E g
-          ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i)) n
-          ((proEtaleIsoPostcompose g).obj U)
+        (inverseImageUnitSection l E g
+          ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i))
+          (n, (proEtaleIsoPostcompose g).obj U)
           (reducedUnitSection l E Y n (P.X i)
             (op ((proEtaleIsoPostcompose g).obj U)) x))) =
       reducedUnitSection l E X n (((F[g]).obj P).X i) (op U) x := by
@@ -197,22 +204,21 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   let V := (n, (proEtaleIsoPostcompose g).obj U)
   let V' := (pullbackTensorSequenceBase g).obj V
   let c := (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
-  let η := (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit
   let res := (((S[X]).obj ((R[X]).obj ((F[g]).obj P),
     (R[X]).obj ((F[g]).obj Q))).X k).val.map c
   let m := (((S[X]).map (Prod.mkHom βP.hom βQ.hom)).f k).val.app (op V')
   let a := (((systemChain l E g).hom.app ((R[Y]).obj P, (R[Y]).obj Q)).f k).val.app (op V')
   let x₀ := reducedUnitSection l E Y n (P.X p) (op V.2) x
   let y₀ := reducedUnitSection l E Y n (Q.X q) (op V.2) y
-  let uP := (η.app (((R[Y]).obj P).X p)).val.app (op V) x₀
-  let uQ := (η.app (((R[Y]).obj Q).X q)).val.app (op V) y₀
+  let uP := inverseImageUnitSection l E g (((R[Y]).obj P).X p) V x₀
+  let uQ := inverseImageUnitSection l E g (((R[Y]).obj Q).X q) V y₀
   have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k) V
     (reducedUnitSection l E Y n _ (op V.2)
       (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
         (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y))
   have e2 := strictMap_reducedUnit_generator l E Y P Q n p q k hpq V.2 x y
   have e12 := e1.trans (congrArg
-    ((η.app (((S[Y]).obj ((R[Y]).obj P, (R[Y]).obj Q)).X k)).val.app (op V)) e2)
+    (inverseImageUnitSection l E g (((S[Y]).obj ((R[Y]).obj P, (R[Y]).obj Q)).X k) V) e2)
   have hL1 := congrArg (fun z ↦ res (m (a z))) e12
   trace "PH199: strict map evaluated"
   have e3 := systemChain_generator l E g ((R[Y]).obj P) ((R[Y]).obj Q)
@@ -222,11 +228,13 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have e4 := coefficientTotalTensor_map_tensorGenerator.{u, u + 1, u}
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     βP.hom βQ.hom p q k hpq (op V') uP uQ
+  trace "PH199: tensor map prepared"
   have hL3 := congrArg res e4
   have hL4 := coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
     (coefficientSequenceCommRingSheaf l E X) ((R[X]).obj ((F[g]).obj P))
     ((R[X]).obj ((F[g]).obj Q)) p q k hpq c
     ((βP.hom.f p).val.app (op V') uP) ((βQ.hom.f q).val.app (op V') uQ)
+  trace "PH199: restriction formula prepared"
   have rP := (PresheafOfModules.naturality_apply (βP.hom.f p).val c uP).symm.trans
     (generators_unitSection l E g P βP hβP n p U x)
   have rQ := (PresheafOfModules.naturality_apply (βQ.hom.f q).val c uQ).symm.trans
@@ -235,14 +243,15 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     ((R[X]).obj ((F[g]).obj P)) ((R[X]).obj ((F[g]).obj Q)) p q k hpq (op (n, U)))
     rP rQ
+  trace "PH199: scalar normalization prepared"
   have hL := hL1.trans (hL2.trans (hL3.trans (hL4.trans hL5)))
   have rT := generators_unitSection l E g ((T[Y]).obj (P, Q)) βT hβT n k U
     (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y)
   let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
     (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y
-  let s := (η.app ((pullbackTensorOrdinaryReduction l E Y).obj
-    (((T[Y]).obj (P, Q)).X k))).val.app (op V) (reducedUnitSection l E Y n _ (op V.2) z)
+  let s := inverseImageUnitSection l E g ((pullbackTensorOrdinaryReduction l E Y).obj
+    (((T[Y]).obj (P, Q)).X k)) V (reducedUnitSection l E Y n _ (op V.2) z)
   have hNat := PresheafOfModules.naturality_apply
     (βT.hom.f k ≫ ((R[X]).map t.hom).f k ≫
       (tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val c s
