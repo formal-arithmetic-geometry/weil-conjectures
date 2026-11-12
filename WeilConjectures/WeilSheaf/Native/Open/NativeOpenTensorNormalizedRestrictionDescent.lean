@@ -258,6 +258,7 @@ private def restrictionInput
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- This assembly combines totalization, localization and the fixed-model square.
 private theorem restrictionAbstract
     (E : ProEtaleWeilSheaf k₀ l U ⥤ ProEtaleWeilSheaf k₀ l Z)
