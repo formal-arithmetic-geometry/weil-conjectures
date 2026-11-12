@@ -94,6 +94,25 @@ private theorem unitQ_eq {C D : Type*} [Category C] [Category D] [Abelian C] [Ab
   erw [quotient_inv, Category.id_comp, quotient_hom,
     F.rightDerivedFunctor.map_id, Category.comp_id]
 
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem squareForward_compUnitQ_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive] (I : CochainComplex C ℤ) :
+    (Functor.rightDerivedFunctorCompUnit F G).app
+        ((HomotopyCategory.quotient C (.up ℤ)).obj I) =
+      G.rightDerivedFunctorUnitQ ((F.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        G.rightDerivedFunctor.map (F.rightDerivedFunctorUnitQ I) := by
+  rw [unitQ_eq, unitQ_eq]
+  simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app, DerivedCategory.Qh.map_id]
+  rfl
+
 set_option profiler true in
 private theorem square_unitQ {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
@@ -110,29 +129,20 @@ private theorem square_unitQ {X S Z T : Scheme.{u}}
       (schemeDerivedDirectImage g).map ((pushforward k).rightDerivedFunctorUnitQ I) := by
   have hh := congr_app (normalizedDirectImageSquare_unit f k g v h)
     ((HomotopyCategory.quotient _ (.up ℤ)).obj I)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    squareForward_compUnitQ_app, NatTrans.mapHomotopyCategory_app,
+    HomotopyCategory.quotient_obj_as] at hh
   rw [square_mate_eq]
-  erw [unitQ_eq, unitQ_eq, unitQ_eq, unitQ_eq]
-  simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-    Iso.trans_hom, Iso.symm_hom, eqToIso.hom, Category.assoc,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app,
-    NatTrans.mapHomotopyCategory_app, HomotopyCategory.quotient_obj_as] at hh ⊢
-  erw [DerivedCategory.Qh.map_id, Category.id_comp] at hh
-  conv_rhs at hh =>
-    slice 2 2
-    erw [DerivedCategory.Qh.map_id]
-  erw [Category.id_comp] at hh
-  have he : (NatTrans.mapHomologicalComplex
-      ((pushforwardComp v f).hom ≫ (pushforwardCongr h).hom ≫
-        (pushforwardComp k g).inv) (.up ℤ)).app I =
-      (NatTrans.mapHomologicalComplex
-        ((pushforwardCongr h).hom ≫ (pushforwardComp k g).inv) (.up ℤ)).app I := by
-    rfl
-  rw [he]
-  convert hh using 1 <;> first
-  | rfl
-  | (erw [Category.id_comp]; rfl)
+  simpa only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
+    Category.assoc] using hh
+
+private theorem squareForward_inverseOpenUnitQ_eq {X S : Scheme.{u}} (f : X ⟶ S) :
+    RingedSpace.inverseOpenUnitQ f.toLRSHom.toShHom =
+      localComplexUnit (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
+        RingedSpace.localAbelianSections S.toRingedSpace)
+        (RingedSpace.localSectionsEnoughKInjectives X.toRingedSpace) := by
+  unfold RingedSpace.inverseOpenUnitQ localComplexUnit
+  rfl
 
 set_option profiler true in
 private theorem sections_unit {X S : Scheme.{u}} (f : X ⟶ S)
@@ -161,9 +171,7 @@ private theorem sections_unit {X S : Scheme.{u}} (f : X ⟶ S)
   have hstd := NatTrans.congr_app
     (RingedSpace.sectionStandardDirectImageIso_fac f.toLRSHom.toShHom)
       ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-  change (localComplexUnit (D ⋙ F)
-    (RingedSpace.localSectionsEnoughKInjectives X.toRingedSpace)).app K ≫ _ = _
-  rw [localComplexUnit_app_eq, unitQ_eq]
+  rw [squareForward_inverseOpenUnitQ_eq, localComplexUnit_app_eq, unitQ_eq]
   dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hfac hstd
   erw [reassoc_of% hfac]
   simp only [RingedSpace.localLerayCompositeUnit, NatTrans.comp_app,
@@ -534,6 +542,25 @@ private theorem injectiveComparison_transport {Z T : Scheme.{u}} (k : Z ⟶ T)
   subst U
   simp only [eqToHom_refl, Category.id_comp]
 
+private theorem squareForward_injective_transport {X S Z T : Scheme.{u}}
+    (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
+    (G : Z.Modules) (J : InjectiveResolution G) (q : ℕ) (V : S.Opens) :
+    HomologicalComplex.homologyMap
+        (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex
+          (.up ℤ)).map ((NatTrans.mapHomologicalComplex
+            (pushforwardComp v f ≪≫ pushforwardCongr h ≪≫ (pushforwardComp k g).symm).hom
+              (.up ℤ)).app J.cochainComplex)) (q : ℤ) ≫
+      (squareInjectiveLocalComparison k G q (g ⁻¹ᵁ V) J
+        (k ⁻¹ᵁ (g ⁻¹ᵁ V)) rfl).hom =
+      (squareInjectiveLocalComparison k G q (g ⁻¹ᵁ V) J
+        (v ⁻¹ᵁ (f ⁻¹ᵁ V)) (by
+          rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h])).hom := by
+  rw [square_sections_transport]
+  change (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℤ) (q : ℤ)).map
+    (eqToHom _) ≫ _ = _
+  rw [eqToHom_map]
+  exact injectiveComparison_transport k G q (g ⁻¹ᵁ V) J _ _
+
 set_option profiler true in
 private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
@@ -616,13 +643,7 @@ private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
       rfl
     _ = d ≫ (squareInjectiveLocalComparison k G q (g ⁻¹ᵁ V) J
         (k ⁻¹ᵁ (g ⁻¹ᵁ V)) rfl).hom := by rw [injective_unit_inverse]
-    _ = _ := by
-      dsimp only [d]
-      rw [square_sections_transport]
-      change (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℤ) (q : ℤ)).map
-        (eqToHom _) ≫ _ = _
-      rw [eqToHom_map]
-      exact injectiveComparison_transport k G q (g ⁻¹ᵁ V) J _ _
+    _ = _ := squareForward_injective_transport f k g v h G J q V
 
 end Helpers
 
