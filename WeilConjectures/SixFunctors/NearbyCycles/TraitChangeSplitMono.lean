@@ -85,8 +85,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' Y Y' : Scheme.{u}} {M : NearbyCycles
   {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 -- the coefficient changes of the base change morphism are matched against large types
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 open PadicAlgCl in
 /-- **Split pullback exchanges from the integral case** (the mechanism of SGA 4½,
 [Th. finitude], Lemme 3.4, for `ℚ̄_ℓ`-coefficients). Let `φ : M ⟶ N` be a morphism of models
@@ -117,6 +115,12 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
         (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) φ.commSq_j)).app
           ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) :
     IsSplitMono ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) := by
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) := inferInstance
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E.1) Y))) := inferInstance
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))) := inferInstance
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
   have hE := isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E φ.commSq_j M.i
     ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀ hn₀ (by
