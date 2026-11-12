@@ -292,7 +292,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         cartierProRootMap (diagonalResidue.{u} l n) (l ^ (n + 1))
           (cartierResidue_cast l (n + 1)) (diagonalSurface Y)
           (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n) := by
-  run_tac do Lean.logInfo m!"PH302 have hr := finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 have hr := finiteBoundary_rootMap l (ULift.(u) (Padic l)) c n {← IO.monoMsNow}"
   have hr := finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n
   rw [← hr]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
@@ -328,7 +328,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule
   run_tac do Lean.logInfo m!"PH302 have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x {← IO.monoMsNow}"
   have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x' hx
-  run_tac do Lean.logInfo m!"PH302 have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 have he := finiteScalarForgetIso_section l (ULift.(u) (Padic l)) c n {← IO.monoMsNow}"
   have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n
     (lineModule l (ULift.{u} (Padic l)) c) U _ _ hf
   run_tac do Lean.logInfo m!"PH302 have hu : η.val.app (op (n, U.unop)) x = {← IO.monoMsNow}"
@@ -337,7 +337,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (coefficientSystemMap l (ULift.{u} (Padic l)) T)
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  run_tac do Lean.logInfo m!"PH302 let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 let v : ((SpTowerShriek.ev l (ULift.(u) (Padic l)) T n).obj {← IO.monoMsNow}"
   let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
       (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
     ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
@@ -593,15 +593,15 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   let z := (toSheafify (Scheme.ProEt.topology T)
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
       (ULift.up 1)
-  run_tac do Lean.logInfo m!"PH302 let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 let x' := (finiteQuotient l (ULift.(u) (Padic l)) T n).hom.app U z {← IO.monoMsNow}"
   let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z
   run_tac do Lean.logInfo m!"PH302 let x := ((evalIso l T r n).inv.app {← IO.monoMsNow}"
   let x := ((evalIso l T r n).inv.app
     (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
-  run_tac do Lean.logInfo m!"PH302 have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 have hq := (finiteQuotient_existsUnique l (ULift.(u) (Padic l)) T n).exists {← IO.monoMsNow}"
   have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists.choose_spec
       U (ULift.up 1)
-  run_tac do Lean.logInfo m!"PH302 have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 have hx' : HEq x' (1 : (systemRing l (ULift.(u) (Padic l)) T).obj.obj {← IO.monoMsNow}"
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
@@ -618,7 +618,7 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     rfl
   run_tac do Lean.logInfo m!"PH302 have ht := (hi (a.coefficient.hom.hom.app U x)).trans ha {← IO.monoMsNow}"
   have ht := (hi (a.coefficient.hom.hom.app U x)).trans ha
-  run_tac do Lean.logInfo m!"PH302 have hs := siteIntegralGenerator_section (diagonalResidue.{u} l n) T (ULift {← IO.monoMsNow}"
+  run_tac do Lean.logInfo m!"PH302 have hs := siteIntegralGenerator_section (diagonalResidue.(u) l n) T (ULift {← IO.monoMsNow}"
   have hs := siteIntegralGenerator_section (diagonalResidue.{u} l n) T (ULift.up 1)
   run_tac do Lean.logInfo m!"PH302 change (((diagonalFiniteForgetIso l n T).inv.app {← IO.monoMsNow}"
   change (((diagonalFiniteForgetIso l n T).inv.app
