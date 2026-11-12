@@ -78,6 +78,26 @@ private noncomputable def kFlat_pullback_adjunction_comparison_iso
   exact (uT.app (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
     (asIso (ε.app (q.obj P))).symm ≪≫ (derivedPullback g).mapIso (uS.app P)
 
+private theorem kFlat_pullback_adjunction_comparison_iso_hom
+    {S S' : Scheme.{u}} (g : S' ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
+    [hL : (Scheme.Modules.tensorPullback g).Additive]
+    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
+      (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
+    [hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))] :
+    (kFlat_pullback_adjunction_comparison_iso g ε P hεP).hom =
+      (DerivedCategory.quotientCompQhIso
+        (SheafOfModules.{u} (moduleRings S'.toRingedSpace))).inv.app
+          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≫
+        (asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).inv ≫
+        (derivedPullback g).map
+          (DerivedCategory.quotientCompQhIso
+            (SheafOfModules.{u} (moduleRings S.toRingedSpace))).hom.app P := by
+  rfl
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
@@ -169,8 +189,9 @@ theorem kFlat_pullback_adjunction_comparison
   rw [ha] at h
   change ((relativeMVAdj g).homEquiv _ _)
     (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) = _ at h
-  dsimp only [e, kFlat_pullback_adjunction_comparison_iso, Iso.trans_inv, Iso.symm_inv,
-    Functor.mapIso_inv, asIso_inv]
+  let hεP_inst : IsIso (ε.app (q.obj P)) := hεP P hP
+  dsimp only [e]
+  rw [kFlat_pullback_adjunction_comparison_iso_hom]
   simp only [Category.assoc]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality a]
   rw [Adjunction.homEquiv_naturality_left]
