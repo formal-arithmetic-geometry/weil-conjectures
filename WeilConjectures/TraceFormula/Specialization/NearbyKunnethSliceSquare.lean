@@ -75,7 +75,7 @@ private lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
 attribute [local instance] sliceSquare_hasTensorFour sliceSquare_hasGoodTensorLeft
   sliceSquare_hasGoodTensorRight
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
