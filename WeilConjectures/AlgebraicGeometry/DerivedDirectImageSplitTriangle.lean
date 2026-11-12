@@ -112,6 +112,7 @@ private lemma directImageComparison_naturality (g : X ⟶ Y)
     Iso.inv_hom_id_assoc, ← Category.assoc, ← h, Category.assoc,
     Iso.inv_hom_id, Category.comp_id]
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Cone comparison identities elaborate through the module-sheaf instances.
 set_option backward.defeqAttrib.useBackward true in
@@ -141,6 +142,7 @@ private lemma directImage_boundary {X Y : RingedSpace.{u}}
     erw [← Category.assoc, ← Functor.map_comp, ← hδ, Functor.map_comp, Category.assoc]
   simp [moduleDirectImageLocalizedShiftIso]
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- Naturality and cancellation involve several nested derived and shift functors.
 set_option backward.defeqAttrib.useBackward true in
