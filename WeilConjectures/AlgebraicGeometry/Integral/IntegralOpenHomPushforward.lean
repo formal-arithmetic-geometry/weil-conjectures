@@ -26,8 +26,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- The unbounded derived comparisons elaborate several functor structures.
 /-- Internal Hom out of open extension by zero is open direct image of internal
 Hom into the open restriction. All coefficients are the identified completed rings.
 Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN
@@ -125,20 +123,10 @@ theorem integralOpen_homPushforward
   let hW := RingedHomUniverses.hom.{u + 1, u, u + 1}
     ((ProEt.topology T).over W) (R.over W) (Q.functor.obj P)
   let hq : hU ⋙ Q.functor ≅ Q.functor ⋙ hW :=
-    NatIso.ofComponents (fun N ↦ γ.app (op P, N)) (by
-      intro N N' f
-      have hn := γ.hom.naturality ((𝟙 (op P), f) : (op P, N) ⟶ (op P, N'))
-      change Q.functor.map
-          ((derivedInternalHomOfUniverses.{u + 1, u, u + 1}
-            (ProEt.topology U) S).map (𝟙 (op P), f)) ≫ γ.hom.app (op P, N') =
-        γ.hom.app (op P, N) ≫
-          (derivedInternalHomOfUniverses.{u + 1, u, u + 1}
-            ((ProEt.topology T).over W) (R.over W)).map
-              ((Q.functor.op.map (𝟙 (op P)), Q.functor.map f) :
-                (op (Q.functor.obj P), Q.functor.obj N) ⟶
-                  (op (Q.functor.obj P), Q.functor.obj N')) at hn
-      rw [Q.functor.op.map_id] at hn
-      exact hn)
+    (Functor.curry.mapIso γ).app (op P) ≪≫
+      (Functor.curryObjProdComp Q.functor.op Q.functor
+        (derivedInternalHomOfUniverses.{u + 1, u, u + 1}
+          ((ProEt.topology T).over W) (R.over W))).app (op P)
   exact ⟨((Functor.curry.obj (derivedInternalHomOfUniverses.{
       u + 1, u, u + 1} (ProEt.topology T) R)).mapIso (eJ.app P).op).symm ≪≫
     eh ≪≫ Functor.isoWhiskerRight er (hW ⋙ Q.inverse ⋙ d.push j) ≪≫
