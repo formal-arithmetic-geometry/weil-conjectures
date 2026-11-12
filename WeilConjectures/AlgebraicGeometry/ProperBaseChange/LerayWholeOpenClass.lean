@@ -83,7 +83,8 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
   let k : P.cycles ⟶ (SheafOfModules.forget.{u} Y.ringCatSheaf).obj (K.cycles n) :=
     (P.isoCyclesOfIsLimit (KernelFork.mapIsLimit _ (K.sc n).cyclesIsKernel
       (SheafOfModules.forget.{u} Y.ringCatSheaf))).inv
-  let c : (P.map E).cycles ⟶ (K.cycles n).presheaf.obj (op ⊤) :=
+  let c : (P.map E).cycles ⟶
+      E.obj ((SheafOfModules.forget.{u} Y.ringCatSheaf).obj (K.cycles n)) :=
     (P.mapCyclesIso E).hom ≫ E.map k
   let t : (P.map E).cycles := ((S.sc n).mapCyclesIso U).inv s
   have hi : c ≫ Hom.app (K.iCycles n) ⊤ = (P.map E).iCycles := by
