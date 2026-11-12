@@ -36,15 +36,8 @@ def normalizedInverseHomComparison
     {A B : Type*} [Category A] [Category B] (E : B ≌ A)
     (HA : Aᵒᵖ × A ⥤ A) (HB : Bᵒᵖ × B ⥤ B)
     (h : HB ⋙ E.functor ≅ E.functor.op.prod E.functor ⋙ HA) :
-    HA ⋙ E.inverse ≅ E.inverse.op.prod E.inverse ⋙ HB := by
-  let e : (E.inverse.op.prod E.inverse) ⋙ (E.functor.op.prod E.functor) ≅
-      𝟭 (Aᵒᵖ × A) := NatIso.prod (NatIso.op E.counitIso.symm) E.counitIso
-  exact (Functor.leftUnitor (HA ⋙ E.inverse)).symm ≪≫
-    Functor.isoWhiskerRight e.symm (HA ⋙ E.inverse) ≪≫
-    Functor.isoWhiskerLeft (E.inverse.op.prod E.inverse)
-      (Functor.isoWhiskerRight h.symm E.inverse) ≪≫
-    Functor.isoWhiskerLeft ((E.inverse.op.prod E.inverse) ⋙ HB) E.unitIso.symm ≪≫
-    (Functor.rightUnitor _)
+    HA ⋙ E.inverse ≅ E.inverse.op.prod E.inverse ⋙ HB :=
+  HomComparison.inverseHomComparison E HA HB h
 
 /-- The specified forward ordinary Hom comparison of a Frobenius model.
 Source: the model's Hom naturality
@@ -113,8 +106,48 @@ private theorem forward_associativity_of_inverse
   simp only [Iso.inv_hom_id_app_assoc, reassoc_of% hr]
   erw [hl, Category.comp_id]
 
+-- Lift and reverse associativity with abstract tensor instances before specializing them.
+private theorem ordinary_chain_forward_associativity
+    {B : Type*} [Category B] [Preadditive B] [HasZeroObject B]
+    [MonoidalCategory B] [MonoidalPreadditive B]
+    [∀ (X Y : GradedObject ℤ B), X.HasTensor Y]
+    [∀ X, PreservesColimit (Functor.empty.{0} B) ((curriedTensor B).obj X)]
+    [∀ X, PreservesColimit (Functor.empty.{0} B) ((curriedTensor B).flip.obj X)]
+    [∀ (W X Y Z : GradedObject ℤ B), GradedObject.HasTensor₄ObjExt W X Y Z]
+    [∀ (X Y Z : GradedObject ℤ B), GradedObject.HasGoodTensor₁₂Tensor X Y Z]
+    [∀ (X Y Z : GradedObject ℤ B), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
+    {A : Type*} [Category A] [Preadditive A] [HasZeroObject A]
+    [MonoidalCategory A] [MonoidalPreadditive A]
+    [∀ (X Y : GradedObject ℤ A), X.HasTensor Y]
+    [∀ X, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).obj X)]
+    [∀ X, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).flip.obj X)]
+    [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z]
+    [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X Y Z]
+    [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
+    (F : B ⥤ A) [F.Additive]
+    (ν : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
+    (δ : MonoidalCategory.tensor (CochainComplex B ℤ) ⋙ F.mapHomologicalComplex (.up ℤ) ≅
+      ((F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ))) ⋙
+        MonoidalCategory.tensor (CochainComplex A ℤ))
+    (hδ : ∀ (P Q : CochainComplex B ℤ) (p q n : ℤ) (h : p + q = n),
+      F.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ (δ.hom.app (P, Q)).f n =
+        ν.hom.app (P.X p, Q.X q) ≫
+          HomologicalComplex.ιTensorObj ((F.mapHomologicalComplex (.up ℤ)).obj P)
+            ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
+    (hν : ∀ X Y Z : B,
+      (ν.inv.app (X, Y) ▷ F.obj Z) ≫ ν.inv.app (X ⊗ Y, Z) ≫ F.map (α_ X Y Z).hom =
+        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom ≫
+          (F.obj X ◁ ν.inv.app (Y, Z)) ≫ ν.inv.app (X, Y ⊗ Z))
+    (P Q N : CochainComplex B ℤ) :
+    let G := F.mapHomologicalComplex (.up ℤ)
+    G.map (α_ P Q N).hom ≫ δ.hom.app (P, Q ⊗ N) ≫
+        (G.obj P ◁ δ.hom.app (Q, N)) =
+      δ.hom.app (P ⊗ Q, N) ≫ (δ.hom.app (P, Q) ▷ G.obj N) ≫
+        (α_ (G.obj P) (G.obj Q) (G.obj N)).hom := by
+  exact forward_associativity_of_inverse (F.mapHomologicalComplex (.up ℤ)) δ P Q N
+    (RingedForgetTensorTransposition.chain_inverse_associativity F ν δ hδ hν P Q N)
+
 attribute [local irreducible] SheafOfModules.monoidalCategory Mod.monoidalCategoryStruct
-  Mod.monoidalCategoryCochainComplex
 attribute [local implicit_reducible] Mod.monoidalCategory Monoidal.induced
 
 -- Compare the abstract native and ringed total-tensor instances through their APIs.
@@ -181,10 +214,7 @@ private theorem ordinary_coherence_of_inverse_associativity
       Preadditive.zsmul_comp, Category.assoc, ht, ← Category.assoc, hd]
     rfl
   · intro P Q N
-    let G := E.functor.mapHomologicalComplex (.up ℤ)
-    have h := RingedForgetTensorTransposition.chain_inverse_associativity
-      E.functor ν τ ht ha P Q N
-    exact forward_associativity_of_inverse G τ P Q N h
+    exact ordinary_chain_forward_associativity E.functor ν τ ht ha P Q N
 
 attribute [local irreducible] ProEtale.NativeFrobenius.equivalence
 
