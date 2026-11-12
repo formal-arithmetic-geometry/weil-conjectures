@@ -283,7 +283,9 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (Profinite.padicAlgClRingObj ℓ) A hA
   ph112_remaining "PH112 constructible"
   -- Direct elimination keeps the large dependent types in their original form.
-  refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC).elim fun E hE ↦ ?_
+  refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB
+    (by convert (config := {closePre := false}) eB using 3)
+    (by cast_proofs hC)).elim fun E hE ↦ ?_
   refine hE.elim fun K₀ hK₀ ↦ ?_
   refine hK₀.elim fun e htors ↦ ?_
   ph112_remaining "PH112 integral model"
@@ -297,7 +299,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
         (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
-      A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
+      A (by cast_proofs hC) E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   ph112_remaining "PH112 finite layer ready"
   have result := exists_subgroup_pullbackExchange_of_galois_average
     (Λ := Profinite.padicAlgClRingObj ℓ)
