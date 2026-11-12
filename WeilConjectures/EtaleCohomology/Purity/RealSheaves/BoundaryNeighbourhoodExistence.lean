@@ -258,6 +258,45 @@ lemma geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_pow [Fintype K] (n : ℕ)
       Nat.card_eq_fintype_card]
   rw [← h, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow, AlgEquiv.aut_inv,
     AlgEquiv.symm_apply_apply]
+
+/-- A Galois lift of a Frobenius power makes a boundary chart compatible with its geometric
+residue point. -/
+lemma exists_boundaryChart_galois_compatible (x : C.finitePoints)
+    (c : BoundaryChart (C ↘ Spec (.of K)) j x.1) :
+    ∃ (σ : Gal(Ω/C.functionField)) (n : ℕ),
+      (∀ y, σ (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j
+        (letI := Fintype.ofFinite K
+         (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n) y)) ∧
+      ∀ a : Γ(C, c.W), ∃ b ∈ σ • c.point, (b : Ω) =
+        genericEmb (U ↘ Spec (.of K)) j ((C ↘ Spec (.of K)).geometricFiberPointEmb x
+          (sectionsResidue x c.mem a)) - algebraMap Γ(C, c.W) Ω a := by
+  let _ := Fintype.ofFinite K
+  have hW := c.isAffineOpen
+  have : IsDedekindDomain Γ(C, c.W) := isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
+  have hε₀ : (genericEmb (U ↘ Spec (.of K)) j).comp (algebraMap K (AlgebraicClosure K)) =
+      (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
+    rw [genericEmb_comp_algebraMap, genericStructHom_eq j hW]
+  obtain ⟨ι₀, hι₀k, hι₀⟩ := exists_residueField_emb_compatible hW c.point x c.mem _ hε₀
+  have : Finite (C.residueField x.1) := C.mem_finitePoints.1 x.2
+  obtain ⟨i, hi⟩ := FiniteField.exists_apply_eq_pow_card_pow_of_comp_eq
+    ((C ↘ Spec (.of K)).residueFieldAlgebraMap x.1)
+    (hι₀k.trans (Scheme.Hom.geometricFiberPointEmb_comp_residueFieldAlgebraMap _ x).symm)
+  let := ((C ↘ Spec (.of K)).residueFieldAlgebraMap x.1).toAlgebra
+  have : Module.Finite K (C.residueField x.1) := Module.Finite.of_finite
+  have hE : Nat.card (C.residueField x.1) =
+      Fintype.card K ^ Module.finrank K (C.residueField x.1) := by
+    rw [Module.natCard_eq_pow_finrank (K := K), Nat.card_eq_fintype_card]
+  obtain ⟨n, -, hn⟩ := FiniteField.exists_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_eq K
+    (AlgebraicClosure K) Module.finrank_pos hE ι₀ i
+  obtain ⟨σ, hσ⟩ := exists_galois_genericEmb j hW
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n)
+  refine ⟨σ, n, hσ, fun a ↦ ?_⟩
+  obtain ⟨b₀, hb₀, hb₀'⟩ := hι₀ a
+  refine ⟨σ • b₀, Ideal.smul_mem_pointwise_smul σ b₀ c.point hb₀, ?_⟩
+  change σ (b₀ : Ω) = _
+  rw [hb₀', map_sub, hσ, hn, ← hi,
+    IsScalarTower.algebraMap_apply Γ(C, c.W) C.functionField Ω, AlgEquiv.commutes]
+
 section Weil
 
 variable [IsCurve (U ↘ Spec (.of K))] [GeometricallyConnected (U ↘ Spec (.of K))]
@@ -313,10 +352,46 @@ variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-set_option maxHeartbeats 1600000 in
--- the construction combines the Galois action with the neighbourhood of a compatible point
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
+omit [IsCurve (U ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] in
+/-- A compatible Galois conjugate of a chart gives a boundary neighbourhood for the conjugated
+Frobenius lift. -/
+lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.range j.base)
+    (c : BoundaryChart (C ↘ Spec (.of K)) j x.1) (σF : Gal(Ω/C.functionField))
+    (hσF : σF • c.point = c.point)
+    (hFk : ∀ y, σF (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j
+      (letI := Fintype.ofFinite K
+       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^
+        (C ↘ Spec (.of K)).degreeOver x.1) y)) :
+    ∃ (σ : Gal(Ω/C.functionField)) (n : ℤ),
+      (genericGaloisMap j sU GU σ, Multiplicative.ofAdd n) ∈
+        weilGroup (U ↘ Spec (.of K)) sU GU ∧
+      Nonempty (BoundaryNeighbourhood (K := K) j ((σ • c.point).inertia Gal(Ω/C.functionField))
+        (σ * σF * σ⁻¹) x) := by
+  let _ := Fintype.ofFinite K
+  let : MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
+  let : MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) :=
+    (Ideal.pointwiseDistribMulAction (M := Gal(Ω/C.functionField))
+      (R := integralClosure Γ(C, c.W) Ω)).toMulAction
+  obtain ⟨σ, n, hσ, hQ⟩ := exists_boundaryChart_galois_compatible j x c
+  refine ⟨σ, n, mem_weilGroup_of_forall_genericEmb j sU GU σ n hσ, ?_⟩
+  have : (σ • c.point).IsMaximal := by
+    rw [Ideal.pointwise_smul_eq_comap]
+    exact Ideal.comap_isMaximal_of_surjective _
+      (MulSemiringAction.toRingEquiv _ _ σ⁻¹).surjective
+  set Φ := FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)
+  have hσinv (y : AlgebraicClosure K) : σ⁻¹ (genericEmb (U ↘ Spec (.of K)) j y) =
+      genericEmb (U ↘ Spec (.of K)) j ((Φ ^ n)⁻¹ y) := by
+    have h := hσ ((Φ ^ n)⁻¹ y)
+    rw [← AlgEquiv.mul_apply (Φ ^ n), mul_inv_cancel, AlgEquiv.one_apply] at h
+    rw [← h, ← AlgEquiv.mul_apply, inv_mul_cancel, AlgEquiv.one_apply]
+  refine nonempty_boundaryNeighbourhood_of_compatible j hz c x rfl (σ • c.point) hQ
+    (σ * σF * σ⁻¹) ?_ ?_
+  · change (σ * σF * σ⁻¹) • (σ • c.point) = σ • c.point
+    rw [mul_smul, mul_smul, inv_smul_smul, hσF]
+  · intro y
+    rw [AlgEquiv.mul_apply, AlgEquiv.mul_apply, hσinv, hFk, hσ, ← AlgEquiv.mul_apply,
+      ← AlgEquiv.mul_apply, (Commute.pow_pow_self Φ n _).eq, mul_assoc, mul_inv_cancel, mul_one]
+
 omit [IsCurve (U ↘ Spec (.of K))] in
 /-- **Strictly henselian neighbourhoods of boundary points exist** (blueprint
 `lem-wf-boundary-stalk-invariants`). For a boundary point `z` with closed point `x`, there is
@@ -334,66 +409,17 @@ theorem exists_boundaryNeighbourhood_conj (z : ↥((Set.range j.base)ᶜ)) (x : 
         ((σ • (boundaryChart (p := C ↘ Spec (.of K)) j z).point).inertia
           Gal(Ω/C.functionField))
         (σ * boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU τ GC z * σ⁻¹) x) := by
-  let _ := Fintype.ofFinite K
-  have hσF := boundaryFrobeniusLift_mem_stabilizer (p := C ↘ Spec (.of K)) j sU GU τ GC z
-  have hwF := mem_weilGroup_boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU
-    (comp_over j _) τ GC z
-  have hFk := genericEmb_galois j sU GU _ _ hwF
   obtain ⟨z, hz⟩ := z
   obtain ⟨x, hxf⟩ := x
   simp only at hx
   subst hx
-  obtain ⟨c, hc⟩ : ∃ c, boundaryChart (p := C ↘ Spec (.of K)) j ⟨x, hz⟩ = c := ⟨_, rfl⟩
-  rw [hc] at hσF ⊢
-  have hW := c.isAffineOpen
-  have hxW : x ∈ c.W := c.mem
-  have : IsDedekindDomain Γ(C, c.W) := isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
-  -- the embedding `ι₀ : κ(x) ↪ k̄` induced by `Q_z`
-  have hε₀ : (genericEmb (U ↘ Spec (.of K)) j).comp (algebraMap K (AlgebraicClosure K)) =
-      (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
-    rw [genericEmb_comp_algebraMap, genericStructHom_eq j hW]
-  obtain ⟨ι₀, hι₀k, hι₀⟩ := exists_residueField_emb_compatible hW c.point ⟨x, hxf⟩ hxW _ hε₀
-  -- the embedding of `x̄` is `Φⁿ ∘ ι₀`
-  have : Finite (C.residueField x) := C.mem_finitePoints.1 hxf
-  obtain ⟨i, hi⟩ := FiniteField.exists_apply_eq_pow_card_pow_of_comp_eq
-    ((C ↘ Spec (.of K)).residueFieldAlgebraMap x)
-    (hι₀k.trans (Scheme.Hom.geometricFiberPointEmb_comp_residueFieldAlgebraMap _ ⟨x, hxf⟩).symm)
-  let := ((C ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra
-  have : Module.Finite K (C.residueField x) := Module.Finite.of_finite
-  have hE : Nat.card (C.residueField x) =
-      Fintype.card K ^ Module.finrank K (C.residueField x) := by
-    rw [Module.natCard_eq_pow_finrank (K := K), Nat.card_eq_fintype_card]
-  obtain ⟨n, -, hn⟩ := FiniteField.exists_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_eq K
-    (AlgebraicClosure K) Module.finrank_pos hE ι₀ i
-  -- an element `σ` acting on `k̄` as `Φⁿ`
-  set Φ := FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)
-  obtain ⟨σ₁, hσ₁⟩ := exists_galois_genericEmb j hW Φ
-  have hσ (m : ℕ) (y : AlgebraicClosure K) : (σ₁ ^ m) (genericEmb (U ↘ Spec (.of K)) j y) =
-      genericEmb (U ↘ Spec (.of K)) j ((Φ ^ m) y) := by
-    induction m generalizing y with
-    | zero => rfl
-    | succ m ih => rw [pow_succ', AlgEquiv.mul_apply, ih, hσ₁, pow_succ', AlgEquiv.mul_apply]
-  refine ⟨σ₁ ^ n, n, mem_weilGroup_of_forall_genericEmb j sU GU _ n (hσ n), ?_⟩
-  -- the conjugate point
-  have : (σ₁ ^ n • c.point).IsMaximal := by
-    rw [Ideal.pointwise_smul_eq_comap]
-    exact Ideal.comap_isMaximal_of_surjective _
-      (MulSemiringAction.toRingEquiv _ _ (σ₁ ^ n)⁻¹).surjective
-  have hσinv (y : AlgebraicClosure K) : (σ₁ ^ n)⁻¹ (genericEmb (U ↘ Spec (.of K)) j y) =
-      genericEmb (U ↘ Spec (.of K)) j ((Φ ^ n)⁻¹ y) := by
-    have h := hσ n ((Φ ^ n)⁻¹ y)
-    rw [← AlgEquiv.mul_apply (Φ ^ n), mul_inv_cancel, AlgEquiv.one_apply] at h
-    rw [← h, ← AlgEquiv.mul_apply, inv_mul_cancel, AlgEquiv.one_apply]
-  refine nonempty_boundaryNeighbourhood_of_compatible j hz c ⟨x, hxf⟩ rfl _ (fun a ↦ ?_) _ ?_ ?_
-  · obtain ⟨b₀, hb₀, hb₀'⟩ := hι₀ a
-    refine ⟨σ₁ ^ n • b₀, Ideal.smul_mem_pointwise_smul _ _ _ hb₀, ?_⟩
-    rw [integralClosure.coe_smul, hb₀', smul_sub, AlgEquiv.smul_def, AlgEquiv.smul_def, hσ n, hn,
-      ← hi, IsScalarTower.algebraMap_apply Γ(C, c.W) C.functionField Ω, AlgEquiv.commutes]
-  · rw [MulAction.mem_stabilizer_iff, mul_smul, mul_smul, inv_smul_smul,
-      MulAction.mem_stabilizer_iff.1 hσF]
-  · intro y
-    rw [AlgEquiv.mul_apply, AlgEquiv.mul_apply, hσinv, hFk, hσ n, ← AlgEquiv.mul_apply,
-      ← AlgEquiv.mul_apply, (Commute.pow_pow_self Φ n _).eq, mul_assoc, mul_inv_cancel, mul_one]
+  exact nonempty_boundaryChart_conjugate j sU GU ⟨x, hxf⟩ hz
+    (boundaryChart (p := C ↘ Spec (.of K)) j ⟨x, hz⟩)
+    (boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU τ GC ⟨x, hz⟩)
+    (boundaryFrobeniusLift_mem_stabilizer (p := C ↘ Spec (.of K)) j sU GU τ GC ⟨x, hz⟩)
+    (genericEmb_galois j sU GU _ _
+      (mem_weilGroup_boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU
+        (comp_over j _) τ GC ⟨x, hz⟩))
 
 end Weil
 
