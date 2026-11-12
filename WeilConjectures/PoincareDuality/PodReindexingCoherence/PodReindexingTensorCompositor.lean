@@ -347,6 +347,8 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingComplexFunctor l E h s).map (cg.tensorChain P L).hom ≫
           (ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
             ((podReindexingComplexFunctor l E g s).obj L)).hom := by
+  let c := cgh.tensorChain P L
+  apply (cancel_epi c.inv).1
   sorry
 
 set_option maxHeartbeats 8000000 in
