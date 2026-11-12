@@ -25,7 +25,6 @@ direct consequence of Mathlib's `LieModule.isNilpotent_iff_forall'`.
 ## Blueprint
 
 `LieSubalgebra.exists_forall_apply_eq_zero_and_isNilpotent` implements `lem-wf-engel-matrix`.
-`LieSubalgebra.exists_basis_toMatrix_apply_eq_zero_of_le` implements `lemma-engel-s-theorem--2`.
 -/
 
 @[expose] public section
@@ -53,10 +52,10 @@ theorem exists_forall_apply_eq_zero_and_isNilpotent [Nontrivial M]
   obtain ⟨⟨v, hv⟩, hv0⟩ := exists_ne (0 : maxTrivSubmodule k A M)
   refine ⟨v, fun h ↦ hv0 (Subtype.ext h), fun X hX ↦ ?_⟩
   exact (mem_maxTrivSubmodule k A M v).mp hv ⟨X, hX⟩
-/-- **Engel's theorem, triangular form.** Let `A` be a Lie algebra of nilpotent endomorphisms of
-a finite-dimensional vector space `M`. Then there is a basis of `M` in which every element of `A`
-is strictly upper triangular: its matrix entries on and below the diagonal vanish.
-(blueprint: `lemma-engel-s-theorem--2`) -/
+
+/-- **Engel's theorem, triangular form.** If `A` is a Lie algebra of nilpotent endomorphisms of a
+finite-dimensional vector space `M`, then there is a basis of `M` in which every element of `A`
+is strictly upper triangular. -/
 theorem exists_basis_toMatrix_apply_eq_zero_of_le (A : LieSubalgebra k (Module.End k M))
     (hA : ∀ X ∈ A, IsNilpotent X) :
     ∃ b : Module.Basis (Fin (Module.finrank k M)) k M,
@@ -112,6 +111,5 @@ theorem exists_basis_toMatrix_apply_eq_zero_of_le (A : LieSubalgebra k (Module.E
   rw [LinearMap.toMatrix_apply]
   by_contra hne
   exact not_lt.mpr hij (hmem (Finsupp.mem_support_iff.mpr hne))
-
 
 end LieSubalgebra
