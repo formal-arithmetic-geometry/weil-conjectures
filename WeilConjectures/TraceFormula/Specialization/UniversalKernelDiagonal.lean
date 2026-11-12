@@ -49,7 +49,6 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (x : RationalPoint X)
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- the ambient identity is transported to the bounded constructible forms of the objects
 /-- The restriction of the Künneth map `Π_{K,L}` to the diagonal is the lax tensor map `μ_X` of
@@ -96,13 +95,17 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
     change deformationDiagGeneric X x.left.ker k' ≫
       deformationProdFstGeneric X x.left.ker X x.left.ker k' = 𝟙 _
     apply pullback.hom_ext <;>
-      simp [deformationDiagGeneric, deformationProdFstGeneric, deformationDiagTotal]
+      simp only [deformationDiagGeneric, deformationProdFstGeneric, deformationDiagTotal,
+        Category.assoc, pullback.map_fst, pullback.map_snd, pullback.lift_fst,
+        Category.comp_id, Category.id_comp, pullback.lift_fst_assoc]
   have hgen₂ : (deformationDiagModelHom X x.left.ker k').generic ≫
       (deformationProdSndModelHom X x.left.ker X x.left.ker k').generic = 𝟙 _ := by
     change deformationDiagGeneric X x.left.ker k' ≫
       deformationProdSndGeneric X x.left.ker X x.left.ker k' = 𝟙 _
     apply pullback.hom_ext <;>
-      simp [deformationDiagGeneric, deformationProdSndGeneric, deformationDiagTotal]
+      simp only [deformationDiagGeneric, deformationProdSndGeneric, deformationDiagTotal,
+        Category.assoc, pullback.map_fst, pullback.map_snd, pullback.lift_snd,
+        Category.comp_id, Category.id_comp, pullback.lift_snd_assoc]
   have hmapU : ∀ {A B : Dᵇc((deformationSpecialFibre X x.left.ker k' ⨯
       deformationSpecialFibre X x.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : A ⟶ B),
       ((boundedConstructibleUpperStar _ ℓ (diag (deformationSpecialFibre X x.left.ker k'))).map
@@ -128,7 +131,6 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
 
 variable (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- matching the abstract statements against the concrete functors
 /-- **Nearby cycles of the universal kernel**, second identity (blueprint
@@ -178,6 +180,11 @@ theorem universalKernelSpecialization_comp_evaluationKernel
       (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
       (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k'))
   unfold universalKernelSpecialization evaluationKernel
-  apply_by_match CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange [hχ := hχ, hρ := hρ]
+  exact CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange
+    (SP := specializationProd k' x) (SX := specialization k' x)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+      (diag (deformationSpecialFibre X x.left.ker k')))
+    _ (Correspondence.IsContractingAt.diagPushforwardExchange ℓ X k' x) hχ _ _ _ _ hρ
 
 end AlgebraicGeometry.ProEtale.CondensedRing
