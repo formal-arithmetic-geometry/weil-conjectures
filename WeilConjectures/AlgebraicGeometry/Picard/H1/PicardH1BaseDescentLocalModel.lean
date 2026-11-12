@@ -38,7 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 300000 in
+set_option maxHeartbeats 220000 in
 set_option profiler true in
 -- Comparing the derived direct-image expressions and localized module instances is expensive.
 /-- Construct the local finite-free model and its degree-one comparison square, without
