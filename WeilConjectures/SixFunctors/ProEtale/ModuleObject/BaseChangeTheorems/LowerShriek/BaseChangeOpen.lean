@@ -217,7 +217,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
   have hn := (boundedConstructibleLowerStarId ℓ Y').hom.naturality
     ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
       (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq)).hom.app K)
-  simp only [Compactification.ofIsOpenImmersion, Compactification.overG,
+  dsimp only [Compactification.ofIsOpenImmersion, Compactification.overG,
     Compactification.overObj] at hn ⊢
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app, Category.comp_id, Functor.comp_obj,
