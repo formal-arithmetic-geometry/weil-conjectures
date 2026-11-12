@@ -71,7 +71,7 @@ private theorem counit_tensor_pasting
   rw [hX, hY]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% h]
-  simp only [← QX.map_comp, Category.assoc]
+  simp only [← QX.map_comp]
   rw [ho]
   have hn := α.naturality tY
   dsimp only [Functor.comp_map] at hn
@@ -102,7 +102,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.mapDerivedCategory
 -- Normalize the inverse scalar mate, retaining ordinary restriction factors.
-set_option profiler true in
 -- Naturality compares the four derived functors with their homotopy models.
 private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -186,7 +185,7 @@ private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [Functor.comp_map] at hn ho
   have h := counit_restriction_pasting (residueExchangeRestriction ℓ E X)
     _ _ _ _ _ _ _ _ _ _ _ _ _ hmi ho hn.symm hq
-  simp only [pH, Functor.comp_map, Functor.map_comp, Category.assoc] at h
+  simp only [pH, Category.assoc] at h
   simp only [Functor.map_comp, Category.assoc]
   erw [h]
 
@@ -218,7 +217,6 @@ private theorem tensor_counit_app (T : Scheme.{u})
 
 set_option linter.unusedVariables false in
 -- Preserve the original public statement, including its auxiliary SX let.
-set_option profiler true in
 -- The counit calculation compares several composed concrete module functors.
 /-- The scalar pull square, followed by the tensor-presentation counit on X,
 computes the ordinary pullback model map. No derived tensor comparison occurs.
