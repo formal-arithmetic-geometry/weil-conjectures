@@ -121,6 +121,29 @@ private theorem trace_bijective_of_projection
   exact (show (fun α ↦ α ≫ c ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K).hom)) = e
     from funext he) ▸ e.bijective
 
+private theorem trace_naturality_of_counit
+    {C D : Type*} [Category* C] [Category* D]
+    (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    (R : C ⥤ D) (hR : ∀ E, P E → Q (R.obj E))
+    (a : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (adj : Q.lift (P.ι ⋙ R) (fun E ↦ hR E.obj E.property) ⊣ a)
+    (c : H ⋙ R ⟶ R.op.prod R ⋙ J)
+    (L L' : P.FullSubcategory) (K K' : Q.FullSubcategory)
+    (g : L' ⟶ L) (h : K ⟶ K') :
+    R.map (H.map (g.hom.op ×ₘ (a.map h).hom)) ≫
+        c.app (op L'.obj, (a.obj K').obj) ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K').hom) =
+      (c.app (op L.obj, (a.obj K).obj) ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K).hom)) ≫
+        J.map ((R.map g.hom).op ×ₘ h.hom) := by
+  have hn := c.naturality (g.hom.op ×ₘ (a.map h).hom)
+  dsimp only [Functor.comp_map, Functor.prod_map, Functor.op_map] at hn
+  rw [← Category.assoc, hn, Category.assoc, ← J.map_comp,
+    Category.assoc, ← J.map_comp]
+  congr 2
+  apply Prod.ext
+  · simp
+  · exact congrArg (fun z ↦ z.hom) (adj.counit.naturality h)
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option trace.profiler true in
@@ -205,17 +228,11 @@ theorem qcqsSheafRHomAdjunction (X Y : Scheme.{u₁})
             (𝟙 _ ×ₘ (adj.counit.app K).hom)))) := by
   constructor
   · intro L L' K K' g h
-    let HX := derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf
-    let HY := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
-    have hn := c.naturality (g.hom.op ×ₘ (a.map h).hom)
-    dsimp only [Functor.comp_map, Functor.prod_map, Functor.op_map] at hn
-    rw [← Category.assoc, hn, Category.assoc, ← HY.map_comp,
-      Category.assoc, ← HY.map_comp]
-    congr 2
-    apply Prod.ext
-    · simp
-    · have he := congrArg (fun z ↦ z.hom) (adj.counit.naturality h)
-      exact he
+    exact trace_naturality_of_counit
+      (derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf)
+      (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)
+      (schemeDerivedQCohProperty X) (schemeDerivedQCohProperty Y)
+      (schemeDerivedDirectImage f) hpres a adj c L L' K K' g h
   · intro L K
     let HX := derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf
     let HY := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
