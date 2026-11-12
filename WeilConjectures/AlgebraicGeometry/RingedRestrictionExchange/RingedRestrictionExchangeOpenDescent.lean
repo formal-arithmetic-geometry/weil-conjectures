@@ -873,20 +873,17 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
           ((proEtaleBaseChange p).obj V.unop)).op m))
     change (db.hom.app N).val.app V _ = _ at hdb
     erw [hdb]
+    let comp := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+      p (𝟙 T)).hom.app V.unop
+    let idT := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop
+    let idP := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+      ((proEtaleBaseChange p).obj V.unop)
     set_option backward.isDefEq.respectTransparency false in
     have hcombine :
-        N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-            p (𝟙 T)).hom.app V.unop).op
-          (N.val.map ((proEtaleBaseChange p).map
-            ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
-            (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-              ((proEtaleBaseChange p).obj V.unop)).op m)) =
-        N.val.map (((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-            p (𝟙 T)).hom.app V.unop) ≫
-          (proEtaleBaseChange p).map
-            ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop) ≫
-          (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-            ((proEtaleBaseChange p).obj V.unop)).op m := by
+        N.val.map comp.op
+          (N.val.map ((proEtaleBaseChange p).map idT).op
+            (N.val.map idP.op m)) =
+        N.val.map (comp ≫ (proEtaleBaseChange p).map idT ≫ idP).op m := by
       simp only [op_comp, PresheafOfModules.map_comp_apply]
       rfl
     rw [hcombine]
