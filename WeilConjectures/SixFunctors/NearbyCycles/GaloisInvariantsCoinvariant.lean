@@ -195,7 +195,7 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso (a : ℤ
         (Adjunction.derivedUnitRetraction K a hK (T.complexTrace Λ hd K hc) ≫
           (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app
             (DerivedCategory.Q.obj K)) ≫ R((ginf)_*⟦Λ⟧).map (L((ginf)^*⟦Λ⟧).map e.hom) := by
-    rw [← reassoc_of% hn]
+    simp only [Category.assoc, hn]
   let E := (R((ginf)_*⟦Λ⟧).mapIso (L((ginf)^*⟦Λ⟧).mapIso e))
   rw [h]
   exact map_iso_inv_comp_map_eq_of_map_comp_eq G E φ key
