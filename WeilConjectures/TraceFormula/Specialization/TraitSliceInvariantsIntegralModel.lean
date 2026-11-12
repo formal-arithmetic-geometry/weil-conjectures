@@ -47,28 +47,9 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
--- Share the tensor instances used by every derived pullback and extension of scalars.
-private instance integralModelTensorFour (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt P Q S U := by
-  infer_instance
-
-private instance integralModelTensorAssocLeft (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor P Q S := by
-  infer_instance
-
-private instance integralModelTensorAssocRight (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ P Q S := by
-  infer_instance
-
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option profiler true in
+set_option trace.profiler true in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
@@ -200,7 +181,9 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
                 (baseChangeGaloisModel hM b hb v hv).generic)).leftDerivedFunctor.obj
                   K₀.obj))) := by
   have : IsNoetherian M.total := hM.isTraitModel.isNoetherian_total
-  obtain ⟨E, B₀, ⟨e₀⟩⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB
+  refine (exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB).elim fun E hE ↦ ?_
+  refine hE.elim fun B₀ he₀ ↦ ?_
+  refine he₀.elim fun e₀ ↦ ?_
   have hK₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
     (baseChangeGaloisModel hM b hb v hv).j _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
