@@ -96,7 +96,7 @@ private theorem exists_homology_comparison_of_counit
     (p : CochainComplex C ℤ → Prop)
     (hε : ∀ K, p K → IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj
       ((O.mapHomologicalComplex (.up ℤ)).obj K)))) :
-    ∃ t : ∀ K, p K →
+    ∃ t : ∀ (K : CochainComplex C ℤ) (_hK : p K),
         ((R.mapHomologicalComplex (.up ℤ)).obj K).homology 0 ≅
           (O.mapDerivedCategory ⋙ L ⋙ DerivedCategory.homologyFunctor B 0 ⋙ Γ).obj
             (DerivedCategory.Q.obj K),
