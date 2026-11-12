@@ -245,7 +245,6 @@ section Devissage
 variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
   {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
 
-set_option profiler true in
 omit [IsOpenImmersion j'] in
 /-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be a quasi-compact open immersion with
 closed complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*`
@@ -333,9 +332,7 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
     (ihomUpperStarComparison_naturality Λ gZ K _) ?_ hφ₁ hU
   -- the third term is `Rj'_*` of an object, and `Lj'^*` kills the first one
   let ebc := @asIso _ _ _ _ _ hbc
-  let eB := (ihom (gStar.obj K)).mapIso
-      ebc ≪≫
-    ihomRightDerivedLowerStarIso Λ j' _ _
+  let eB := (ihom (gStar.obj K)).mapIso ebc ≪≫ ihomRightDerivedLowerStarIso Λ j' _ _
   have hz₀ : IsZero (jStar.obj ((ihom K).obj (C⟦(-1 : ℤ)⟧))) :=
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
       hij.symm.disjoint _).of_iso (jStar.mapIso ((ihom K).mapIso
