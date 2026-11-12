@@ -147,7 +147,8 @@ theorem operationCore_exists
     (IX.map (adj.homEquiv K N v))).trans ?_
   dsimp only [sfFiniteOperationsHomEquiv, sfFiniteOperationsRealization,
     Functor.comp_map, Functor.comp_obj] at hh
-  simpa only [Functor.map_comp, Category.assoc] using hh
+  simp only [Functor.map_comp, Category.assoc] at hh ⊢
+  exact hh
 
 /-- The normalized Hom formula for the core operation.
 (blueprint: lem-sf-exceptional-finite-scalar-operation-normalization) -/
