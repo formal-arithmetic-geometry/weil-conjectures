@@ -199,6 +199,14 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
+  let : Abelian (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+  let : Abelian (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj Λ X')) := inferInstance
+  let : HasDerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+  let : HasDerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj Λ X')) := inferInstance
   let : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) := inferInstance
   let : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
@@ -215,7 +223,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
           (N.galoisLayerAction_one Λ h L' _)
     have h2 : (N.galoisLayerAut h Ω σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) =
         𝟙 _ := eq_id_of_intertwining_of_epi_aux L((𝟙 X')^*⟦Λ⟧) _ _ _ hc h1
-    exact eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality Λ _ g)
+    exact eq_id_of_naturality_of_iso (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
+      _ (fun g ↦ Hom.autAction_naturality Λ _ g)
       ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
   · obtain ⟨r, hr, havg⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
     have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
