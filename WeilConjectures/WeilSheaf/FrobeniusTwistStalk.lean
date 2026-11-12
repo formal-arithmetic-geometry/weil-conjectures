@@ -135,7 +135,8 @@ noncomputable def stalkAtSpecFrobeniusPowEquiv
         (specGeometricFrobenius k₀ ^ N).asIso.hom ≫ (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t) :
     (F.stalkAt _ N ht').Equiv (F.stalkAt t N ht) :=
   have hg : (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t =
-      ((specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom := by
+      ((specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t) ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom := by
     rw [pow_zero]
     exact (Category.comp_id _).symm
   have := F.isIso_globalSectionsTransport_frobeniusPowStr 0 hg
