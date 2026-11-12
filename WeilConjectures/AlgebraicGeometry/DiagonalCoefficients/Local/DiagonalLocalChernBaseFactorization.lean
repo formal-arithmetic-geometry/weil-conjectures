@@ -210,7 +210,6 @@ private theorem map_naturality_postcomp
   simp only [Functor.map_comp, Category.assoc]
   rw [← h]
 
-set_option profiler true in
 private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

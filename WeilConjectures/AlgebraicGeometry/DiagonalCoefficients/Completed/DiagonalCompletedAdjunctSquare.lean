@@ -301,7 +301,6 @@ private theorem map_comp_naturality_square
   simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using
     congrArg (fun k ↦ U.map a ≫ k) (σ.naturality f)
 
-set_option profiler true in
 /-- Realizing the normalized completed adjunct gives the condensed adjunct of the local arrow.
 Source: diagonal tower coefficient changes (1), and diagonal tower trace proof (1).
 (blueprint: lem-diagonal-completed-adjunct-square).
