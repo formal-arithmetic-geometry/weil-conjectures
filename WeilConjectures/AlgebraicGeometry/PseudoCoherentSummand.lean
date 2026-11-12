@@ -106,8 +106,6 @@ private theorem summand_affine_finiteFree_model (S : Scheme.{u}) (U : S.Opens)
 
 
 
-set_option maxHeartbeats 400000 in
--- Affine-site functor comparisons and local model witnesses require extra elaboration budget.
 /-- If a pseudo-coherent object of `D(𝒪_X)` is isomorphic to a binary biproduct,
 both summands are pseudo-coherent. Source: Stacks Project, Cohomology of Sheaves,
 Tag 08CE, with More on Algebra, Tag 064X (blueprint: lem-pc-pseudo-coherent-summand).
@@ -138,6 +136,13 @@ theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u})
     (hK : IsPseudoCoherent X K) :
     IsPseudoCoherent X L ∧ IsPseudoCoherent X M := by
   classical
+  -- Share the site instances across the affine restriction and both summand models.
+  have : ∀ U : X.Opens,
+      HasSheafify ((Opens.grothendieckTopology X.toRingedSpace).over U)
+        AddCommGrpCat.{u} := inferInstance
+  have : ∀ U : X.Opens,
+      ((Opens.grothendieckTopology X.toRingedSpace).over U).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   obtain ⟨e⟩ := h
   have local_models (x : X) :
       (∃ U : X.Opens, x ∈ U ∧
@@ -170,14 +175,9 @@ theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u})
     have hfV (i : ℤ) : ∃ r : ℕ, Nonempty (PV.X i ≅ SheafOfModules.free
         (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin r))) := by
       obtain ⟨r, ⟨ei⟩⟩ := hf i
-      let ef : F.obj (SheafOfModules.free
-          (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r))) ≅
-          SheafOfModules.free
-            (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin r)) :=
-        (asIso (sigmaComparison F (fun _ : ULift.{u} (Fin r) ↦
-          SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)))).symm ≪≫
-            Sigma.mapIso (fun _ ↦ SheafOfModules.overMapUnitIso
-              (R := moduleRings X.toRingedSpace) (homOfLE hVU))
+      let ef := (SheafOfModules.mapFreeIso F (ULift.{u} (Fin r))
+        (SheafOfModules.overMapUnitIso
+          (R := moduleRings X.toRingedSpace) (homOfLE hVU)).symm).symm
       exact ⟨r, ⟨F.mapIso ei ≪≫ ef⟩⟩
     have : PreservesFiniteLimits (H ⋙ F) := comp_preservesFiniteLimits _ _
     have : PreservesFiniteColimits (H ⋙ F) := comp_preservesFiniteColimits _ _
