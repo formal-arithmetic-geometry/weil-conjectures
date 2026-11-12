@@ -777,7 +777,6 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward false in
-set_option profiler true in
 set_option maxHeartbeats 1300000 in
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
 private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
@@ -840,7 +839,8 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let f := da.hom.app N ≫ t.hom.app N
   let g := u ≫ v ≫ db.hom.app N
   have hfg : f = g := by
-    apply SheafOfModules.hom_ext
+    set_option profiler true in
+      apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
     apply ConcreteCategory.hom_ext
@@ -905,7 +905,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app]
   rw [← Category.assoc, h]
-  simp
+  simp [u, v]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
