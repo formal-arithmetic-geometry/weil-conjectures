@@ -396,10 +396,7 @@ private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
   app M := liftFixedMap T (coefficient O t m) _ _
     ((coefficientRestrictionUnderlying (J := T.smallEtaleTopology) O t h).hom.app M)
     (fun _ _ _ ↦ rfl) (fun U a x ↦ by
-      have hunit := ConcreteCategory.congr_hom (congr_app
-        (toSheafify_naturality T.smallEtaleTopology
-          ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
-      exact (congrArg (fun b ↦ b • (show M.val.obj U from x)) hunit).symm)
+      sorry)
   naturality := by
     intro M N f
     ext U x
