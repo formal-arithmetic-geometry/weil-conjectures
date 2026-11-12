@@ -390,14 +390,11 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
         exceptionalKunnethMap ℓ (Y := U) M := by
     rw [hα, exceptionalKunnethSourceRestrictionIso_hom]
     simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
-  have key := map_curry_comp
+  simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing]
+  refine map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
-    (swapEvPairing (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (prod.snd : X ⨯ Y ⟶ Y)) (exceptionalKunnethMap ℓ (Y := Y) M) N)
-    (swapEvPairing (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-      (prod.snd : X ⨯ U ⟶ U)) (exceptionalKunnethMap ℓ (Y := U) M)
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N))
-    ((prodMapUpperStarSndIso ℓ j).app N) _ _
+    _ _ ((prodMapUpperStarSndIso ℓ j).app N) _ _ ?_
+  simpa only [kunnethVerdierSourceRestrictionIso_hom, verdierDualUpperStarIso_hom] using
     (μ_map_swapEvPairing
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y))
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
@@ -408,11 +405,6 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
       ((prodMapUpperStarFstIso ℓ j).hom.app M) (dualizingComplexUpperStarIso ℓ j).hom
       (exceptionalKunnethTargetRestrictionIso ℓ j M).hom (exceptionalKunnethMap ℓ (Y := Y) M)
       (exceptionalKunnethMap ℓ (Y := U) M) hα' N)
-  simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierSourceRestrictionIso_hom,
-    verdierDualUpperStarIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing, Category.assoc]
-  simp only [Category.assoc] at key
-  dsimp only [Functor.comp_obj, Functor.comp_map, verdierDual] at key ⊢
-  cast_proofs key
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
