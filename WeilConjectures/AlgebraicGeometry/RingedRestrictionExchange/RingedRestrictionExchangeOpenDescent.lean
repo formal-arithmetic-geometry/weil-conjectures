@@ -611,6 +611,27 @@ private theorem direct_transport {A B : Scheme.{u}}
   rw [PresheafOfModules.map_id]
   rfl
 
+private theorem direct_transport_inv {A B : Scheme.{u}}
+    {R : Sheaf (ProEt.topology B) CommRingCat.{u + 1}}
+    {S : Sheaf (ProEt.topology A) CommRingCat.{u + 1}}
+    {z w : RingedArrow A B R S} (e : z = w)
+    (N : proEtaleRingModules A S) (V : B.ProEt)
+    (m : ((arrowPush w).obj N).val.obj (op V)) :
+    ((eqToIso (congrArg arrowPush e)).inv.app N).val.app (op V) m =
+      N.val.map ((eqToIso (congrArg arrowBase e)).hom.app V).op m := by
+  cases e
+  change m = N.val.map (𝟙 _) m
+  rw [PresheafOfModules.map_id]
+  rfl
+
+private theorem iso_trans_symm_eq_of_hom_comp {A : Type*} [Category A]
+    {W X Y Z : A} (a : W ≅ X) (t : X ≅ Y) (b : Z ≅ Y) (d : W ≅ Z)
+    (h : a.hom ≫ t.hom = d.hom ≫ b.hom) : a ≪≫ t ≪≫ b.symm = d := by
+  apply Iso.ext
+  change a.hom ≫ t.hom ≫ b.inv = d.hom
+  rw [← Category.assoc, h]
+  simp
+
 private theorem identityDirect_hom_sections (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
     (N : proEtaleRingModules Z R) (V : Z.ProEt)
@@ -775,185 +796,6 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
   erw [← R.map_comp_assoc, Iso.inv_hom_id_app, R.map_id, Category.id_comp]
   exact Category.id_comp _
 
-private theorem identity_square_conjugate_section_value {P T : Scheme.{u}} (p : P ⟶ T)
-    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology P) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage p CommRingCat.{u + 1}).obj R ≅ S)
-    (a : proEtaleRingModulePullback (𝟙 P ≫ p) R S
-        (proEtaleRingCompositeCoefficients (𝟙 P) p R S S c
-          (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)) ≅
-      proEtaleRingModulePullback p R S c ⋙ proEtaleRingModulePullback (𝟙 P) S S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-    (b : proEtaleRingModulePullback (p ≫ 𝟙 T) R S
-        (proEtaleRingCompositeCoefficients p (𝟙 T) R R S
-          (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c) ≅
-      proEtaleRingModulePullback (𝟙 T) R R
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) ⋙
-          proEtaleRingModulePullback p R S c)
-    (e : (⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients p (𝟙 T) R R S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩ : RingedArrow P T R S) =
-      ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients (𝟙 P) p R S S c
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩)
-    (ha : ExchangeModuleCompositionNormalized (𝟙 P) p R S S c
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId S) a)
-    (hb : ExchangeModuleCompositionNormalized p (𝟙 T) R R S
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c b)
-    (N : proEtaleRingModules P S) (V : T.ProEtᵒᵖ) (m : _) :
-    let ah := (proEtaleRingModuleAdjunction p R S c).comp
-      (proEtaleRingModuleAdjunction (𝟙 P) S S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-    let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
-      (proEtaleRingModuleAdjunction p R S c)
-    let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
-      (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
-    let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
-      p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
-    let da := conjugateIsoEquiv ah (arrowAdj z) a
-    let db := conjugateIsoEquiv ab (arrowAdj w) b
-    let t := (eqToIso (congrArg arrowPush e)).symm
-    let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
-    let v := (identityDirect T R).inv.app
-      ((proEtaleRingModuleDirectImage p R S c).obj N)
-    let f := da.hom.app N ≫ t.hom.app N
-    let g := u ≫ v ≫ db.hom.app N
-    f.val.app V m = g.val.app V m := by
-  dsimp only
-  let ah := (proEtaleRingModuleAdjunction p R S c).comp
-    (proEtaleRingModuleAdjunction (𝟙 P) S S
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-  let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
-    (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
-    (proEtaleRingModuleAdjunction p R S c)
-  let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
-    (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
-  let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
-    p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
-  let da := conjugateIsoEquiv ah (arrowAdj z) a
-  let db := conjugateIsoEquiv ab (arrowAdj w) b
-  let t := (eqToIso (congrArg arrowPush e)).symm
-  let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
-  let v := (identityDirect T R).inv.app
-    ((proEtaleRingModuleDirectImage p R S c).obj N)
-  let f := da.hom.app N ≫ t.hom.app N
-  let g := u ≫ v ≫ db.hom.app N
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
-    ModuleCat.comp_apply]
-  change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
-    (db.hom.app N).val.app V (v.val.app V (u.val.app V m))
-  have hda := ha N V.unop m
-  change (da.hom.app N).val.app V m = _ at hda
-  rw [hda]
-  have htr := direct_transport e.symm N V.unop
-    (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-      (𝟙 P) p).hom.app V.unop).op m)
-  change (t.hom.app N).val.app V
-      (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-        (𝟙 P) p).hom.app V.unop).op m) = _ at htr
-  rw [htr]
-  have hidP := identityDirect_hom_sections P S N ((proEtaleBaseChange p).obj V.unop) m
-  change (((proEtaleRingModuleDirectImage p R S c).map
-    ((identityDirect P S).hom.app N)).val.app V) m = _ at hidP
-  rw [hidP]
-  have hidT := identityDirect_inv_sections T R
-    ((proEtaleRingModuleDirectImage p R S c).obj N) V.unop
-    (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-      ((proEtaleBaseChange p).obj V.unop)).op m)
-  rw [hidT]
-  have hdb := hb N V.unop
-    (N.val.map ((proEtaleBaseChange p).map
-      ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
-      (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-        ((proEtaleBaseChange p).obj V.unop)).op m))
-  change (db.hom.app N).val.app V _ = _ at hdb
-  erw [hdb]
-  let comp := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-    p (𝟙 T)).hom.app V.unop
-  let idT := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop
-  let idP := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-    ((proEtaleBaseChange p).obj V.unop)
-  have hcombine :
-      N.val.map comp.op
-        (N.val.map ((proEtaleBaseChange p).map idT).op
-          (N.val.map idP.op m)) =
-      N.val.map (comp ≫ (proEtaleBaseChange p).map idT ≫ idP).op m := by
-    simp only [op_comp, PresheafOfModules.map_comp_apply]
-    rfl
-  rw [hcombine]
-  simp only [← PresheafOfModules.map_comp_apply, ← op_comp]
-  exact congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
-      (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
-    N.val.map k.op m)
-    (site_identity p (congrArg Sigma.fst e) V.unop)
-
-private theorem identity_square_conjugate_sections {P T : Scheme.{u}} (p : P ⟶ T)
-    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology P) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage p CommRingCat.{u + 1}).obj R ≅ S)
-    (a : proEtaleRingModulePullback (𝟙 P ≫ p) R S
-        (proEtaleRingCompositeCoefficients (𝟙 P) p R S S c
-          (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)) ≅
-      proEtaleRingModulePullback p R S c ⋙ proEtaleRingModulePullback (𝟙 P) S S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-    (b : proEtaleRingModulePullback (p ≫ 𝟙 T) R S
-        (proEtaleRingCompositeCoefficients p (𝟙 T) R R S
-          (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c) ≅
-      proEtaleRingModulePullback (𝟙 T) R R
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) ⋙
-          proEtaleRingModulePullback p R S c)
-    (e : (⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients p (𝟙 T) R R S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩ : RingedArrow P T R S) =
-      ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients (𝟙 P) p R S S c
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩)
-    (ha : ExchangeModuleCompositionNormalized (𝟙 P) p R S S c
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId S) a)
-    (hb : ExchangeModuleCompositionNormalized p (𝟙 T) R R S
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c b)
-    (N : proEtaleRingModules P S) :
-    let ah := (proEtaleRingModuleAdjunction p R S c).comp
-      (proEtaleRingModuleAdjunction (𝟙 P) S S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-    let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
-      (proEtaleRingModuleAdjunction p R S c)
-    let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
-      (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
-    let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
-      p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
-    let da := conjugateIsoEquiv ah (arrowAdj z) a
-    let db := conjugateIsoEquiv ab (arrowAdj w) b
-    let t := (eqToIso (congrArg arrowPush e)).symm
-    da.hom.app N ≫ t.hom.app N =
-      (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N) ≫
-        (identityDirect T R).inv.app
-          ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N := by
-  dsimp only
-  let ah := (proEtaleRingModuleAdjunction p R S c).comp
-    (proEtaleRingModuleAdjunction (𝟙 P) S S
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-  let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
-    (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
-    (proEtaleRingModuleAdjunction p R S c)
-  let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
-    (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
-  let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
-    p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
-  let da := conjugateIsoEquiv ah (arrowAdj z) a
-  let db := conjugateIsoEquiv ab (arrowAdj w) b
-  let t := (eqToIso (congrArg arrowPush e)).symm
-  let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
-  let v := (identityDirect T R).inv.app
-    ((proEtaleRingModuleDirectImage p R S c).obj N)
-  let f := da.hom.app N ≫ t.hom.app N
-  let g := u ≫ v ≫ db.hom.app N
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro V
-  apply ConcreteCategory.hom_ext
-  intro m
-  change f.val.app V m = g.val.app V m
-  exact identity_square_conjugate_section_value p R S c a b e ha hb N V m
-
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward false in
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
@@ -1006,28 +848,57 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let da := conjugateIsoEquiv ah (arrowAdj z) a
   let db := conjugateIsoEquiv ab (arrowAdj w) b
   let t := (eqToIso (congrArg arrowPush e)).symm
-  have hc := conjugate_square_transport e ah ab a b
-  rw [hc]
-  apply Iso.ext
+  rw [conjugate_square_transport e ah ab a b]
+  apply iso_trans_symm_eq_of_hom_comp
   apply NatTrans.ext
   funext N
-  let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
-  let v := (identityDirect T R).inv.app
-    ((proEtaleRingModuleDirectImage p R S c).obj N)
-  let f := da.hom.app N ≫ t.hom.app N
-  let g := u ≫ v ≫ db.hom.app N
-  have hfg : f = g := by
-    simpa only [f, g] using
-      (identity_square_conjugate_sections p R S c a b e ha hb N)
-  have h : da.hom.app N ≫ t.hom.app N = u ≫ v ≫ db.hom.app N := by
-    simpa only [f, g] using hfg
-  change da.hom.app N ≫ t.hom.app N ≫ db.inv.app N = _
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app]
-  rw [← Category.assoc, h]
-  simp [u, v]
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
+    Category.assoc, Category.id_comp]
+  ext V m
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply]
+  have hda := ha N V.unop m
+  change (da.hom.app N).val.app V m = _ at hda
+  rw [hda]
+  rw [direct_transport_inv]
+  have hidP := identityDirect_hom_sections P S N ((proEtaleBaseChange p).obj V.unop) m
+  change (((proEtaleRingModuleDirectImage p R S c).map
+    ((identityDirect P S).hom.app N)).val.app V) m = _ at hidP
+  rw [hidP]
+  have hidT := identityDirect_inv_sections T R
+    ((proEtaleRingModuleDirectImage p R S c).obj N) V.unop
+    (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+      ((proEtaleBaseChange p).obj V.unop)).op m)
+  rw [hidT]
+  have hdb := hb N V.unop
+    (N.val.map ((proEtaleBaseChange p).map
+      ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
+      (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+        ((proEtaleBaseChange p).obj V.unop)).op m))
+  change (db.hom.app N).val.app V _ = _ at hdb
+  erw [hdb]
+  let comp := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+    p (𝟙 T)).hom.app V.unop
+  let idT := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop
+  let idP := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+    ((proEtaleBaseChange p).obj V.unop)
+  set_option backward.isDefEq.respectTransparency false in
+  have hcombine :
+      N.val.map comp.op
+        (N.val.map ((proEtaleBaseChange p).map idT).op
+          (N.val.map idP.op m)) =
+      N.val.map (comp ≫ (proEtaleBaseChange p).map idT ≫ idP).op m := by
+    simp only [op_comp, PresheafOfModules.map_comp_apply]
+    rfl
+  rw [hcombine]
+  simp only [← PresheafOfModules.map_comp_apply, ← op_comp]
+  exact congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
+      (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
+    N.val.map k.op m)
+    (site_identity p (congrArg Sigma.fst e) V.unop)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
