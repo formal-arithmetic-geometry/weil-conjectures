@@ -319,6 +319,76 @@ private theorem exceptionalLevelRealization_equivalence
 
 attribute [local instance] exceptionalForget exceptionalLevelRealization_equivalence
 
+set_option trace.profiler true in
+/-- The scalar action of a realized module is the action of the corresponding constant section. -/
+private theorem exceptionalLevelRealization_smul
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [HasWeakSheafify J RingCat.{u + 1}] [HasWeakSheafify J CommRingCat.{u + 1}]
+    [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
+    [J.PreservesSheafification (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
+    (O : Type (u + 1)) [CommRing O] (ell : O) (n : ℕ)
+    (M : coefficientLevelModules (J := J) O ell n) (U : Cᵒᵖ)
+    (c : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) (x : M.val.obj U) :
+    (show M.val.obj U from
+      c • (show ((exceptionalLevelRealization J O ell n).obj M).obj.obj U from x)) =
+      (toSheafify J ((Functor.const Cᵒᵖ).obj
+        (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U c • x := by
+  change (((constantCommuteCompose J
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app
+      (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))).hom.app U
+        ((toSheafify J ((Functor.const Cᵒᵖ).obj
+          (RingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U c)) • x = _
+  rw [constantRingScalar]
+
+set_option trace.profiler true in
+/-- A sectionwise linear isomorphism of underlying sheaves lifts uniquely to module sheaves. -/
+private theorem exceptionalModuleSheafIso_existsUnique
+    {C D : Type*} [Category C] [Category D] (J : GrothendieckTopology C)
+    (A : Type (u + 1)) [CommRing A] (F G : D ⥤ Sheaf J (ModuleCat.{u + 1} A))
+    (β : F ⋙ sheafCompose J (CategoryTheory.forget (ModuleCat.{u + 1} A)) ≅
+      G ⋙ sheafCompose J (CategoryTheory.forget (ModuleCat.{u + 1} A)))
+    (hadd : ∀ M U (x y : (F.obj M).obj.obj U),
+      (β.hom.app M).hom.app U (x + y) =
+        (show (G.obj M).obj.obj U from (β.hom.app M).hom.app U x) +
+          (show (G.obj M).obj.obj U from (β.hom.app M).hom.app U y))
+    (hsmul : ∀ M U (c : A) (x : (F.obj M).obj.obj U),
+      (β.hom.app M).hom.app U (c • x) =
+        c • (show (G.obj M).obj.obj U from (β.hom.app M).hom.app U x)) :
+    ∃! e : F ≅ G, ∀ M U (x : (F.obj M).obj.obj U),
+      (e.hom.app M).hom.app U x = (β.hom.app M).hom.app U x := by
+  let γ : F ⟶ G := {
+    app := fun M ↦ { hom := {
+      app := fun U ↦ ModuleCat.ofHom {
+        toFun := fun x ↦ (β.hom.app M).hom.app U x
+        map_add' := hadd M U
+        map_smul' := hsmul M U }
+      naturality := by
+        intro U V f
+        ext x
+        exact congrArg (fun k ↦ k x) ((β.hom.app M).hom.naturality f) } }
+    naturality := by
+      intro M N f
+      ext U x
+      exact congrArg (fun k ↦ k.hom.app U x) (β.hom.naturality f) }
+  have hγ (M) : IsIso (γ.app M) := by
+    have hpoint (U) : IsIso ((γ.app M).hom.app U) := by
+      rw [ConcreteCategory.isIso_iff_bijective]
+      exact ConcreteCategory.bijective_of_isIso ((β.hom.app M).hom.app U)
+    have : IsIso ((sheafToPresheaf J _).map (γ.app M)) :=
+      NatIso.isIso_of_isIso_app (γ.app M).hom
+    exact isIso_of_reflects_iso (γ.app M) (sheafToPresheaf J _)
+  have : IsIso γ := NatIso.isIso_of_isIso_app γ
+  refine ⟨asIso γ, ?_, ?_⟩
+  · intro M U x
+    rfl
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    apply funext
+    intro M
+    ext U x
+    exact he M U x
+
 section
 variable (O : Type (u + 1)) [CommRing O] (ell : O) (W : Scheme.{u})
   (S : CoefficientSystemOrdinaryImage (J := W.smallEtaleTopology)
@@ -498,60 +568,14 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
   let G := exceptionalLevelRealization (Scheme.ProEt.topology W) O ell n ⋙
     ProEtale.comparisonLowerStar (ModuleCat.{u + 1}
       (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))) W
-  let γ : F ⟶ G := {
-    app := fun M ↦ { hom := {
-      app := fun U ↦ ModuleCat.ofHom
-        (X := (F.obj M).obj.obj U) (Y := (G.obj M).obj.obj U) {
-        toFun := fun x ↦ (β.hom.app M).hom.app U x
-        map_add' := fun x y ↦ hadd M U x y
-        map_smul' := by
-          intro c x
-          change (β.hom.app M).hom.app U
-            (((constantCommuteCompose W.smallEtaleTopology
-              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app
-                (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))).hom.app U
-                  ((toSheafify W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).obj
-                    (RingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U
-                      c) •
-                (show (R.obj M).val.obj U from x)) =
-            (((constantCommuteCompose (Scheme.ProEt.topology W)
-              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app
-                (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))).hom.app
-                  ((Scheme.toProEt W).op.obj U)
-                    ((toSheafify (Scheme.ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).obj
-                      (RingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app
-                        ((Scheme.toProEt W).op.obj U)
-                          c)) •
-              (show M.val.obj ((Scheme.toProEt W).op.obj U) from
-                (β.hom.app M).hom.app U x)
-          rw [constantRingScalar, constantRingScalar]
-          exact hsmul M U c x }
-      naturality := by
-        intro U V f
-        ext x
-        exact congrArg (fun k ↦ k x) ((β.hom.app M).hom.naturality f) } }
-    naturality := by
-      intro M N f
-      ext U x
-      exact congrArg (fun k ↦ k.hom.app U x) (β.hom.naturality f) }
-  have hγ (M) : IsIso (γ.app M) := by
-    have hpoint (U) : IsIso ((γ.app M).hom.app U) := by
-      rw [ConcreteCategory.isIso_iff_bijective]
-      exact ConcreteCategory.bijective_of_isIso ((β.hom.app M).hom.app U)
-    have : IsIso ((sheafToPresheaf W.smallEtaleTopology _).map (γ.app M)) :=
-      NatIso.isIso_of_isIso_app (γ.app M).hom
-    exact isIso_of_reflects_iso (γ.app M) (sheafToPresheaf W.smallEtaleTopology _)
-  have : IsIso γ := NatIso.isIso_of_isIso_app γ
-  refine ⟨asIso γ, ?_, ?_⟩
-  · intro M U x
-    rfl
-  · intro e he
-    apply Iso.ext
-    apply NatTrans.ext
-    apply funext
-    intro M
-    ext U x
-    exact he M U x
+  refine exceptionalModuleSheafIso_existsUnique W.smallEtaleTopology
+    (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) F G β hadd ?_
+  intro M U c x
+  exact (congrArg (fun z ↦ (β.hom.app M).hom.app U z)
+    (exceptionalLevelRealization_smul W.smallEtaleTopology O ell n (R.obj M) U c x)).trans
+      ((hsmul M U c x).trans
+        (exceptionalLevelRealization_smul (Scheme.ProEt.topology W) O ell n M
+          ((Scheme.toProEt W).op.obj U) c ((β.hom.app M).hom.app U x)).symm)
 
 private def exceptionalSiteInverse (n : ℕ) :
     (S.lift n).modules ⋙ exceptionalLevelRealization (Scheme.ProEt.topology W) O ell n ≅
@@ -861,7 +885,12 @@ theorem exceptionalSiteOriginComparison_core
           (PX.scalar h).derived.map em.hom ≫ g ≫ en.inv := by
         apply exceptional_transpose_conjugate (PX.scalar h).derivedAdj em en _ g
         dsimp only [Functor.comp_obj] at hg ⊢
-        simpa only [hg, Category.assoc] using I.inverseTransition h M
+        have ht := I.inverseTransition h M
+        change (PX.transition h).app (I.system.inverse.obj M) ≫
+            (PX.scalar h).restriction.map en.hom = em.hom ≫
+            (I.level m).inverse.map ((PE.transition h).app M) ≫
+            (I.restrictedInverse h).hom.app ((PE.evaluation n).obj M) at ht
+        simpa only [hg, Category.assoc] using ht
       rw [he]
       dsimp only [g]
       infer_instance
