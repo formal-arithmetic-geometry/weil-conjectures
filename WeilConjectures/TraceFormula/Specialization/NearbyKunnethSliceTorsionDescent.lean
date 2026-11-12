@@ -181,8 +181,11 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
       T₀ hT f₁ (𝟙 Z ≫ f₂) hA₂ hB₂)
   have hC := ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
     T₀ M₁.ε hA₂
-  obtain ⟨r, hr, hco⟩ := exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor M₁
+  have hret := exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor M₁
     resM Ω T₀ hp _ hC μs id (fun L' σ ↦ ⟨σ.liftNormal Ω, fun x ↦ σ.liftNormal_commutes Ω x⟩)
+  let r := hret.choose
+  have hr := hret.choose_spec.1
+  have hco := hret.choose_spec.2
   have hB₁GE := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) B a
   have hB₂GE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 Y) _ a hB₁GE
   have hNGE := @isGE_nearbyCycles_obj Λ _ _ _ _ N _ a hB₂GE
