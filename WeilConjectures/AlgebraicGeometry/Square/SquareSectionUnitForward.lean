@@ -111,6 +111,7 @@ private theorem squareForward_compUnitQ_app
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, DerivedCategory.Qh.map_id]
+  erw [Category.id_comp]
   rfl
 
 set_option profiler true in
@@ -133,8 +134,11 @@ private theorem square_unitQ {X S Z T : Scheme.{u}}
     squareForward_compUnitQ_app, NatTrans.mapHomotopyCategory_app,
     HomotopyCategory.quotient_obj_as] at hh
   rw [square_mate_eq]
-  simpa only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
-    Category.assoc] using hh
+  simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
+    Category.assoc] at hh ⊢
+  convert hh using 1 <;> first
+  | rfl
+  | (erw [Category.id_comp]; rfl)
 
 private theorem squareForward_inverseOpenUnitQ_eq {X S : Scheme.{u}} (f : X ⟶ S) :
     RingedSpace.inverseOpenUnitQ f.toLRSHom.toShHom =
@@ -319,8 +323,8 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (TopologicalSpace.Opens.map f.base).op
   let I := RingedSpace.topEdgeResolution X.toRingedSpace K
   let r := RingedSpace.topEdgeResolutionIso X.toRingedSpace K
-  let : I.IsKInjective := inferInstanceAs
-    (RingedSpace.topEdgeResolution X.toRingedSpace K).IsKInjective
+  have : I.IsKInjective := CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u}
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (DerivedCategory.Q.objPreimage K)
   obtain ⟨b, hb⟩ := RingedSpace.exists_complex_map_into_kInjective B I (a ≫ r.inv)
   have hp := cochainSectionUnit_model P
     (RingedSpace.localSectionsEnoughKInjectives X.toRingedSpace) q B I b
@@ -542,6 +546,65 @@ private theorem injectiveComparison_transport {Z T : Scheme.{u}} (k : Z ⟶ T)
   subst U
   simp only [eqToHom_refl, Category.id_comp]
 
+private theorem squareForward_sections_unit_map {X S Z T : Scheme.{u}}
+    (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
+    (I : CochainComplex Z.Modules ℤ) (K : schemeDerivedCategory Z)
+    (a : DerivedCategory.Q.obj I ⟶ K) (q : ℤ) (V : S.Opens) :
+    let e := (NatTrans.mapHomologicalComplex
+      (pushforwardComp v f ≪≫ pushforwardCongr h ≪≫ (pushforwardComp k g).symm).hom
+        (.up ℤ)).app I
+    let t := (pushforward k).rightDerivedFunctorUnitQ I ≫ (schemeDerivedDirectImage k).map a
+    directImageSectionUnitAt f q V
+        (((pushforward v).mapHomologicalComplex (.up ℤ)).obj I) ≫
+      ((RingedSpace.localHypercohomologyPresheaf S.toRingedSpace q).map
+        ((schemeDerivedDirectImage f).map
+          ((pushforward v).rightDerivedFunctorUnitQ I ≫ (schemeDerivedDirectImage v).map a) ≫
+          (derivedSquareRightComparison f k g v h).hom.app K)).app (op V) =
+      HomologicalComplex.homologyMap
+          (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex
+            (.up ℤ)).map e) q ≫
+        directImageSectionUnitAt g q V
+          (((pushforward k).mapHomologicalComplex (.up ℤ)).obj I) ≫
+        ((RingedSpace.localHypercohomologyPresheaf S.toRingedSpace q).map
+          ((schemeDerivedDirectImage g).map t)).app (op V) := by
+  dsimp only
+  let A := ((pushforward f).mapHomologicalComplex (.up ℤ)).obj
+    (((pushforward v).mapHomologicalComplex (.up ℤ)).obj I)
+  let B := ((pushforward k).mapHomologicalComplex (.up ℤ)).obj I
+  let e := (NatTrans.mapHomologicalComplex
+    (pushforwardComp v f ≪≫ pushforwardCongr h ≪≫ (pushforwardComp k g).symm).hom
+      (.up ℤ)).app I
+  let t := (pushforward k).rightDerivedFunctorUnitQ I ≫ (schemeDerivedDirectImage k).map a
+  let H := RingedSpace.localHypercohomologyPresheaf S.toRingedSpace q
+  let d := HomologicalComplex.homologyMap
+    (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex
+      (.up ℤ)).map e) q
+  have hs := square_unitQ_map f k g v h I K a
+  calc
+    _ = cochainLocalSectionUnitAt S q V A ≫
+        (H.map ((pushforward f).rightDerivedFunctorUnitQ
+          (((pushforward v).mapHomologicalComplex (.up ℤ)).obj I) ≫
+          (schemeDerivedDirectImage f).map
+            ((pushforward v).rightDerivedFunctorUnitQ I ≫
+              (schemeDerivedDirectImage v).map a) ≫
+          (derivedSquareRightComparison f k g v h).hom.app K)).app (op V) := by
+      rw [sections_unitAt]
+      simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
+    _ = cochainLocalSectionUnitAt S q V A ≫
+        (H.map (DerivedCategory.Q.map e ≫
+          (pushforward g).rightDerivedFunctorUnitQ B ≫
+          (schemeDerivedDirectImage g).map t)).app (op V) := by rw [hs]
+    _ = d ≫ directImageSectionUnitAt g q V B ≫
+        (H.map ((schemeDerivedDirectImage g).map t)).app (op V) := by
+      rw [sections_unitAt]
+      simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
+      have hn := congrArg
+        (fun z ↦ z ≫ (H.map ((pushforward g).rightDerivedFunctorUnitQ B)).app (op V) ≫
+          (H.map ((schemeDerivedDirectImage g).map t)).app (op V))
+        (cochainLocalSectionUnitAt_naturality S q V e).symm
+      simp only [Category.assoc] at hn
+      convert hn using 1 <;> rfl
+
 private theorem squareForward_injective_transport {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (G : Z.Modules) (J : InjectiveResolution G) (q : ℕ) (V : S.Opens) :
@@ -586,8 +649,6 @@ private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
         rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h])).hom := by
   dsimp only
   let I := J.cochainComplex
-  let A := ((pushforward f).mapHomologicalComplex (.up ℤ)).obj
-    (((pushforward v).mapHomologicalComplex (.up ℤ)).obj I)
   let B := ((pushforward k).mapHomologicalComplex (.up ℤ)).obj I
   let e := (NatTrans.mapHomologicalComplex
     (pushforwardComp v f ≪≫ pushforwardCongr h ≪≫ (pushforwardComp k g).symm).hom
@@ -605,34 +666,13 @@ private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
   let d := HomologicalComplex.homologyMap
     (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex
       (.up ℤ)).map e) (q : ℤ)
-  have hs := square_unitQ_map f k g v h I K a
   have hu := sections_to_inverseAt g (q : ℤ) V B
     ((schemeDerivedDirectImage k).obj K) t
   calc
-    _ = cochainLocalSectionUnitAt S (q : ℤ) V A ≫
-        (H.map ((pushforward f).rightDerivedFunctorUnitQ
-          (((pushforward v).mapHomologicalComplex (.up ℤ)).obj I) ≫
-          (schemeDerivedDirectImage f).map
-            ((pushforward v).rightDerivedFunctorUnitQ I ≫
-              (schemeDerivedDirectImage v).map a) ≫
-          (derivedSquareRightComparison f k g v h).hom.app K)).app (op V) ≫ L ≫ C := by
-      rw [sections_unitAt]
-      simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
-      rfl
-    _ = cochainLocalSectionUnitAt S (q : ℤ) V A ≫
-        (H.map (DerivedCategory.Q.map e ≫
-          (pushforward g).rightDerivedFunctorUnitQ B ≫
-          (schemeDerivedDirectImage g).map t)).app (op V) ≫ L ≫ C := by rw [hs]
     _ = d ≫ directImageSectionUnitAt g (q : ℤ) V B ≫
         (H.map ((schemeDerivedDirectImage g).map t)).app (op V) ≫ L ≫ C := by
-      rw [sections_unitAt]
-      simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
-      have hn := congrArg
-        (fun z ↦ z ≫ (H.map ((pushforward g).rightDerivedFunctorUnitQ B)).app (op V) ≫
-          (H.map ((schemeDerivedDirectImage g).map t)).app (op V) ≫ L ≫ C)
-        (cochainLocalSectionUnitAt_naturality S (q : ℤ) V e).symm
-      simp only [Category.assoc] at hn
-      convert hn using 1 <;> rfl
+      have hs := squareForward_sections_unit_map f k g v h I K a (q : ℤ) V
+      simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ L ≫ C) hs
     _ = d ≫ cochainLocalSectionUnitAt T (q : ℤ) (g ⁻¹ᵁ V) B ≫
         (H'.map t).app (op (g ⁻¹ᵁ V)) := by
       exact congrArg (fun z ↦ d ≫ z) hu
