@@ -34,6 +34,25 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
+-- Share the graded tensor instances used by each derived scalar extension.
+local instance padicAlgClIff_hasTensor₄ObjExt (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A B C D : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+
+local instance padicAlgClIff_hasGoodTensor₁₂Tensor (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+
+local instance padicAlgClIff_hasGoodTensorTensor₂₃ (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
