@@ -111,6 +111,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel
   transport_exact h₁
 
 -- the statement involves several large derived functor objects
+set_option profiler true in
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles at an
 integral model. Under the hypotheses of
