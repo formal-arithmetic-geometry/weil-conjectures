@@ -575,21 +575,20 @@ private noncomputable def rawIso (M : Modules.{t, u} X R) :
 private theorem rawIso_apply (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
     (s : S.obj.obj U) (x : M.val.obj U) :
     (rawIso X R S c M).hom.app U (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x) =
-      (s : (coefficient X R S c).val.obj U) ⊗ₜ[R.obj.obj U] x := rfl
+      s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x := rfl
 
 private theorem sheafification_map_unit_section
     (A : Sheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)})
     (P Q : PresheafOfModules.{max u (t + 1)} A.obj) (f : P ⟶ Q)
     (U : X.ProEtᵒᵖ) (x : P.obj U) :
     (((PresheafOfModules.sheafification.{max u (t + 1)} (𝟙 A.obj)).map f).val.app U)
-        (((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app P).app U x) =
+        (((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app P).app
+          U x) =
       ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app Q).app U
         (f.app U x) := by
   have h := congrArg (fun g ↦ g.app U x)
     ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.naturality f)
-  simpa only [Functor.id_map, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    Functor.comp_map, SheafOfModules.forget, PresheafOfModules.restrictScalars_map_app,
-    ModuleCat.restrictScalars.map_apply] using h.symm
+  exact h.symm
 
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in
@@ -643,15 +642,15 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
     exact congrArg (fun f ↦ f.val.app U
       ((adj.unit.app ((PresheafOfModules.restrictScalars.{max u (t + 1)} α.hom).obj P)).app U
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))) e.hom_inv_id
-  simp only [coefficientIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+  simp only [coefficientIso, pair, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  refine congrArg ((SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
+    (R := R) (coefficient X R S c) M).inv.val.app U) ?_
   erw [hei]
   have hn := sheafification_map_unit_section X A _ _ (rawIso X R S c M).hom U
     (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x)
   rw [rawIso_apply] at hn
-  dsimp only [pair]
-  exact congrArg ((SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
-    (R := R) (coefficient X R S c) M).inv.val.app U) hn
+  exact hn
 
 section Levels
 
@@ -811,8 +810,7 @@ private theorem reductionUnit_section (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p
   (scalarReductionExtension_adjunction l E X n).choose_spec M V x
 
 private theorem normalized_beta_scalar (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
-    (n : ℕ)
-    (P Q : CochainComplex (scalarReductionSource l E X) ℤ)
+    (n : ℕ) (P Q : CochainComplex (scalarReductionSource l E X) ℤ)
     (beta : ((totalTensor.{t, u} X (S X l E n)).obj ((F X l E n).obj P)).obj
       ((F X l E n).obj Q) ⟶
       (F X l E n).obj (((totalTensor.{t, u} X (B X l E)).obj P).obj Q))
