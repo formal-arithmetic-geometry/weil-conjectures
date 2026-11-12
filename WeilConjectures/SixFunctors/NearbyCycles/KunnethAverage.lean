@@ -107,7 +107,7 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
       (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ ?_
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
     (fun i ↦ (σP i).autAction Λ _) (fun i ↦ (σP i).autAction Λ _)
-    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ havgP
+    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ ?_
   · have e := congrArg L((e₁')^*⟦Λ⟧).map hrM
     simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at e
     simp only [Category.assoc, reassoc_of% e, Iso.hom_inv_id_app]
@@ -119,5 +119,6 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
     exact h
   · simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp,
       ← CategoryTheory.Functor.map_nsmul, havgM, CategoryTheory.Functor.map_sum]
+  · cast_proofs havgP
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
