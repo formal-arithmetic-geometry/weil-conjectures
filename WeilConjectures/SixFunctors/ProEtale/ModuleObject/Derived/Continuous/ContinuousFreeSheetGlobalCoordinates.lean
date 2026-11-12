@@ -552,6 +552,7 @@ attribute [local irreducible] continuousRingModuleEquivalence continuousRingRegu
   upperStar upperStarComp comapUpperStarIso pullIso Mod.extendScalars Mod.extendRestrictAdjunction
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Combining the encoded frame maps requires large categorical instance conversions.
 private theorem freeCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
