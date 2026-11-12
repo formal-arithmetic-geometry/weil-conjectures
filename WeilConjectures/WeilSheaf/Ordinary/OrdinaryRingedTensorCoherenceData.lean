@@ -94,7 +94,12 @@ structure OrdinaryRingedTensorChainComparison
         (.up ℤ) p q n hpq) ≫
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
-      (by exact (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
+      (by
+        change E.functor.obj (((ordinaryTensorBifunctor l Y).obj (P.X p)).obj (Q.X q)) ⟶
+          ((coefficientTotalTensor J R).obj
+            (((E.functor.mapHomologicalComplex (.up ℤ)).obj Q),
+              ((E.functor.mapHomologicalComplex (.up ℤ)).obj P))).X n
+        exact (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
         RingedForgetTensorTransposition.tensorSummand J R
           ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
           ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
