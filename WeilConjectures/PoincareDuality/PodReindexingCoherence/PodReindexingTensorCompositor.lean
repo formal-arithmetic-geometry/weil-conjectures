@@ -369,24 +369,47 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingRing l E Z s) ((podReindexingComplexFunctor l E (h ≫ g) s).obj P)
         ((podReindexingComplexFunctor l E (h ≫ g) s).obj L) p q n hpq U x y) = z :=
     hi.symm.trans hcancel
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rw [hi']
-  dsimp only [z]
-  simp only [cgh.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
-  simp only [k.degree, k.degree]
-  simp only [eq_of_heq (k.sections (P.X p) U.unop x),
-    eq_of_heq (k.sections (L.X q) U.unop y)]
-  simp only [k.degree]
-  simp only [eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z)]
-  dsimp only [z]
-  simp only [generator_restrict]
-  change _ = ((ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
+  let m := (((total l E Z s).map
+    (Prod.mkHom (k.complex P).hom (k.complex L).hom)).f n).val.app U
+  let a := ((k.complex ((total l E Y s).obj (P, L))).hom.f n).val.app U
+  let b := ((cg.tensorChain P L).hom.f n).val.app
+    (op ((proEtaleIsoPostcompose h).obj U.unop))
+  let d := ((ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
     ((podReindexingComplexFunctor l E g s).obj L)).hom.f n).val.app U
-      (((cg.tensorChain P L).hom.f n).val.app
-        (op ((proEtaleIsoPostcompose h).obj U.unop)) _)
-  simp only [cg.tensorChain_pure, ch.tensorChain_pure]
-  rfl
+  let xp := (P.X p).val.map ((siteComp g h).inv.app U.unop).op x
+  let yq := (L.X q).val.map ((siteComp g h).inv.app U.unop).op y
+  have hx : ((k.complex P).hom.f p).val.app U x = xp :=
+    (congrArg (fun m ↦ m.val.app U x) (k.degree P p)).trans
+      (eq_of_heq (k.sections (P.X p) U.unop x))
+  have hy : ((k.complex L).hom.f q).val.app U y = yq :=
+    (congrArg (fun m ↦ m.val.app U y) (k.degree L q)).trans
+      (eq_of_heq (k.sections (L.X q) U.unop y))
+  have hz : a z = (((total l E Y s).obj (P, L)).X n).val.map
+      ((siteComp g h).inv.app U.unop).op z :=
+    (congrArg (fun m ↦ m.val.app U z)
+      (k.degree ((total l E Y s).obj (P, L)) n)).trans
+      (eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z))
+  have hleft := (congrArg (fun v ↦ m v)
+    (cgh.tensorChain_pure P L p q n hpq U.unop x y)).trans
+      ((ScalarHomTensor.tensor_generator_map (J := ProEt.topology Z)
+        (R := podReindexingRing l E Z s) (k.complex P).hom (k.complex L).hom
+          p q n hpq U x y).trans
+        (congrArg₂ (fun x y ↦ coefficientTensorGenerator.{u, u + 1, u}
+          (ProEt.topology Z) (podReindexingRing l E Z s)
+          ((podReindexingComplexFunctor l E h s).obj
+            ((podReindexingComplexFunctor l E g s).obj P))
+          ((podReindexingComplexFunctor l E h s).obj
+            ((podReindexingComplexFunctor l E g s).obj L)) p q n hpq U x y) hx hy))
+  have hright := (congrArg (fun v ↦ d (b v))
+    (hz.trans (generator_restrict l E Y s P L p q n hpq
+      ((siteComp g h).inv.app U.unop).op x y))).trans
+      ((congrArg (fun v ↦ d v)
+        (cg.tensorChain_pure P L p q n hpq
+          ((proEtaleIsoPostcompose h).obj U.unop) xp yq)).trans
+        (ch.tensorChain_pure ((podReindexingComplexFunctor l E g s).obj P)
+          ((podReindexingComplexFunctor l E g s).obj L) p q n hpq U.unop xp yq))
+  exact (congrArg (fun v ↦ m (((cgh.tensorChain P L).hom.f n).val.app U v)) hi').trans
+    (hleft.trans (hright.symm.trans (congrArg (fun v ↦ d (b (a v))) hi').symm))
 
 set_option maxHeartbeats 8000000 in
 -- Paste the three tensor models across the exact-functor factorization maps.
