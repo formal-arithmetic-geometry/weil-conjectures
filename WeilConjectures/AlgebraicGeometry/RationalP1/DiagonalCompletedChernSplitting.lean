@@ -70,8 +70,10 @@ private theorem completed_line_shift_complete (l : ℕ) [Fact l.Prime] (S : Sche
   intro V hV
   let e := Iso.homCongr (Iso.refl V)
     ((G.commShiftIso (2 : ℤ)).app (DiagonalTrace.completedLine l S))
-  have := hshift V hV
-  exact e.injective.subsingleton
+  constructor
+  intro a b
+  apply e.injective
+  exact @Subsingleton.elim _ (hshift V hV) (e a) (e b)
 
 -- The derived biproduct structure on completed coefficients is found by unfolding.
 /-- A normalized completed Chern adjunct is the second component of a splitting.

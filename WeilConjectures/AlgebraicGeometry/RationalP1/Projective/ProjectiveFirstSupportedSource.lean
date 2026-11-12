@@ -213,6 +213,6 @@ theorem first_supported_source
     (CondensedRing.lowerStar Λ (firstProjection Y)) d.R₁ (source Λ Y)) ≫ _ = _
   rw [Category.assoc, canonical_diagram_single]
   simpa only [derivedAdj, firstPushSectionIso, supportedUnitIso,
-    moduleObjectDerivedPushforward, unit, source, id, Functor.id_obj] using hc
+    moduleObjectDerivedPushforward, unit, source, id, Functor.id_obj, Iso.app_hom] using hc
 
 end AlgebraicGeometry.ProEtale.RationalP1
