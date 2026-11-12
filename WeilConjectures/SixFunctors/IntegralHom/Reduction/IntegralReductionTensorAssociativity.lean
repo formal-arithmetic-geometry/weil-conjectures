@@ -193,14 +193,15 @@ private theorem normalizedBeta_inv_generator (n : ℕ)
     ∀ (i j k : ℤ) (hij : i + j = k) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
       (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
       ((inv beta).f (i + j)).val.app U
-        (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-          i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-            ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) =
-      (reductionUnit l E Y D hl n
-        ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X (i + j))).val.app U
-        (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)  := by
+        ((reductionUnit l E Y D hl n
+          ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
+            (i + j))).val.app U
+          (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) =
+      totalPair Y (integralCoefficientCommRingSheaf l E Y n)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
+          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)  := by
   intro i j k hij U x y
   subst k
   have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
