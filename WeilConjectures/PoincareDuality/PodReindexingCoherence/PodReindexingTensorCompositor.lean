@@ -356,6 +356,19 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     (n := n)
     (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
   intro p q hpq U x y
+  let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+    (podReindexingRing l E Y s) P L p q n hpq
+      (op ((proEtaleIsoPostcompose (h ≫ g)).obj U.unop)) x y
+  have hcancel := congrArg (fun a ↦ (a.f n).val.app U z)
+    (cgh.tensorChain P L).hom_inv_id
+  have hi := congrArg
+    (fun z ↦ (((cgh.tensorChain P L).inv.f n).val.app U) z)
+    (cgh.tensorChain_pure P L p q n hpq U.unop x y)
+  have hi' : (((cgh.tensorChain P L).inv.f n).val.app U)
+      (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Z)
+        (podReindexingRing l E Z s) ((podReindexingComplexFunctor l E (h ≫ g) s).obj P)
+        ((podReindexingComplexFunctor l E (h ≫ g) s).obj L) p q n hpq U x y) = z :=
+    hi.symm.trans hcancel
   sorry
 
 set_option maxHeartbeats 8000000 in
