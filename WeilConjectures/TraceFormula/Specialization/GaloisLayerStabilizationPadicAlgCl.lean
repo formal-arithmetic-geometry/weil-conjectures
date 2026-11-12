@@ -91,6 +91,7 @@ lemma quasiSeparated_galoisLayer_j [QuasiSeparated N.j] (L' : Type u) [Field L']
 
 variable (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
+set_option profiler true in
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**. Let `C` be a
 `ℚ̄_ℓ`-complex whose restriction `Lε^* C` to the noetherian generic fibre is bounded constructible.
 Assume that for every finite subextension `E ⊆ ℚ̄_ℓ` and every bounded constructible
@@ -188,7 +189,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
   clear hK₀ hL' hc hgn hres hC i₁ i₂ i₃ i₄ i₅ i₆ i₇ i₈ i₉ i₁₀ i₁₁ i₁₂
   revert C E K₀ L' n hn h₃ e' hgen
   normalize_precoherent
-  intro C E K₀ L' n hn h₃ e' hgen
+  intro C E K₀ e' L' n hn h₃ hgen
   exact hgen e' h₃
 
 end NearbyCyclesModel
