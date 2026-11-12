@@ -208,7 +208,6 @@ private theorem tensorCounit_resolution_transfer
   rw [tensorHom_comp_tensorHom_assoc, hA, hB, ← tensorHom_comp_tensorHom_assoc, hν]
   exact (reassoc_of% heq) v
 
-set_option profiler true in
 /-- The shared pullback counit is compatible with the localization tensor maps,
 without a K-flatness assumption on either argument. The chain comparison is
 specified on every tensor summand, so its underlying map is uniquely determined.
@@ -337,8 +336,7 @@ theorem tensorCounit_coordinateEquation
   exact tensorCounit_resolution_transfer
     (modelMap_natural X P0 G0 P G r s)
     (hε _ _ t)
-    (by simpa only [Functor.map_comp] using
-      congrArg (fun f ↦ DerivedCategory.Q.{w}.map f) hchain)
+    (by rw [← Functor.map_comp, hchain, Functor.map_comp])
     (hτ.2 _ _ _ _ (DerivedCategory.Q.map r) (DerivedCategory.Q.map s))
     (hε _ _ r) (hε _ _ s)
     (modelMap_natural T (F.obj P0) (F.obj G0) (F.obj P) (F.obj G) (F.map r) (F.map s))
