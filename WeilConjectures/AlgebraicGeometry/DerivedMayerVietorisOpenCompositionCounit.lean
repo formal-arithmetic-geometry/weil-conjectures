@@ -55,6 +55,7 @@ private theorem counit_transport
   simpa [m, n] using he
 
 set_option maxHeartbeats 700000 in
+set_option trace.profiler true in
 -- The diagram chase elaborates several specialized derived-category interfaces.
 /-- On a K-injective complex on the inverse-image open, restricting the normalized
 composition comparison and then applying the base-open counit agrees with first
