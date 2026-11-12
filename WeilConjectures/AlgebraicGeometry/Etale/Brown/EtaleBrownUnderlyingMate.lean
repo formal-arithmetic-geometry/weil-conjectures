@@ -144,7 +144,8 @@ private theorem brown_underlying_restriction_section
     ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
       (U : W.Etaleᵒᵖ) (x : M.val.obj U),
       HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x :=
-  hR.1
+  match hR with
+  | ⟨h, _⟩ => h
 
 private theorem brown_underlying_right_section
     (O : Type (u + 1)) [CommRing O] (t : O)
