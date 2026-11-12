@@ -24,6 +24,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 attribute [local implicit_reducible] spCoefficientCommRings
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Matching the concrete evaluation and restriction presentations needs extra reduction.
 /-- Source endpoint transport.  This is the coefficient-one calculation: the
 finite quotient followed by the restricted evaluation comparison is the

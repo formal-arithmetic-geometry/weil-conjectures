@@ -24,6 +24,7 @@ attribute [local irreducible] SemilinearSections.scalarExtensionSection
   cartierProRootMap
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Converting the concrete sheaf module presentations requires extra reduction.
 /-- Target endpoint transport.  The finite root map, the inverse line
 comparison, the inverse restriction comparison and the coefficient lineForget
