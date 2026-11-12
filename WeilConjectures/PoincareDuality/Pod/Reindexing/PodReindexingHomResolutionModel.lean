@@ -1234,12 +1234,13 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
       intro L M
       have : (I₀.obj M).IsKInjective :=
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u+1} _ M
-      exact RingedHomUniverses.ordinaryComparison_isIso (ProEt.topology Y) R L (I₀.obj M))
+      exact RingedHomUniverses.ordinaryComparison_isIso.{u+1,u,u+1,u+2}
+        (ProEt.topology Y) R L (I₀.obj M))
     (by
       intro L M
       have : CochainComplex.IsKInjective (FC.obj (I₀.obj M)) := hFI _
         (CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u+1} _ M)
-      exact RingedHomUniverses.ordinaryComparison_isIso (ProEt.topology X) S
+      exact RingedHomUniverses.ordinaryComparison_isIso.{u+1,u,u+1,u+2} (ProEt.topology X) S
         (FC.obj L) (FC.obj (I₀.obj M)))
   refine ⟨fun K I _ ↦ γ.app (op K, I), δ, ?_, ?_, ?_, ?_⟩
   · intro K I hI r p
@@ -1378,8 +1379,7 @@ theorem podReindexing_hom_resolution_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
                 (((podReindexingDerivedFactors l E g s).app K).op.prod
                   ((podReindexingDerivedFactors l E g s).app I).symm)).hom) := by
   obtain ⟨σ, η, hσ, hη⟩ := podReindexing_tensor_hom_data l E g s
-  obtain ⟨χ, δ, hχπ, hχnat, hχq, hδ⟩ :=
-    podReindexing_derived_hom_data l E g s η hη
-  exact ⟨σ, η, χ, δ, hσ, hη, hχπ, hχnat, hχq, hδ⟩
+  obtain ⟨χ, δ, hχ⟩ := podReindexing_derived_hom_data l E g s η hη
+  exact ⟨σ, η, χ, δ, hσ, hη, hχ⟩
 
 end WeilConjectures
