@@ -67,7 +67,6 @@ attribute [local irreducible] IntegralSourceBoundary IntegralTargetBoundary
   IntegralComponent IntegralScalarFormula nativeScalarComponent
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Compare the cached finite-stage types without unfolding their constructions.
 /-- Move one normalized integral component to its canonical common scalar stage.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
