@@ -54,33 +54,26 @@ open Scheme
 
 attribute [local instance] boundedConstructibleBraiding
 
-/-- The factorization through purity is a calculation with an adjunction and the naturality
-of the projection formula. Keeping the functors abstract avoids unfolding the six functors
-during the calculation. -/
+/-- The calculation of the adjoint factorization uses only braiding and the naturality of
+the projection formula. Keeping the functor abstract avoids unfolding the six functors. -/
 private lemma exceptionalKunnethMap_factorization_aux
     {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] [MonoidalCategory 𝒞]
-    [MonoidalCategory 𝒟] [BraidedCategory 𝒟] (F : 𝒟 ⥤ 𝒞) {G : 𝒞 ⥤ 𝒟}
-    (adj : F ⊣ G) (M : 𝒞) (A : 𝒟) {W : 𝒟} (t : W ⟶ G.obj (𝟙_ 𝒞))
+    [MonoidalCategory 𝒟] [BraidedCategory 𝒟] (F : 𝒟 ⥤ 𝒞)
+    (M : 𝒞) (A : 𝒟) {W U : 𝒟} (t : W ⟶ U)
     (pW : F.obj W ⊗ M ⟶ F.obj (W ⊗ A))
-    (pU : F.obj (G.obj (𝟙_ 𝒞)) ⊗ M ⟶ F.obj (G.obj (𝟙_ 𝒞) ⊗ A))
+    (pU : F.obj U ⊗ M ⟶ F.obj (U ⊗ A))
     [IsIso pW] [IsIso pU]
     (hp : (F.map t ▷ M) ≫ pU = pW ≫ F.map (t ▷ A))
     {T₁ T₂ : 𝒞} (b : F.obj W ⟶ T₁) (c : T₁ ⟶ T₂) (e : T₂ ⟶ 𝟙_ 𝒞)
-    (ht : (adj.homEquiv _ _).symm t = b ≫ c ≫ e) :
-    adj.homEquiv _ _
-        (F.map (β_ A W).hom ≫ inv pW ≫ (b ▷ M) ≫ (c ▷ M) ≫ (e ▷ M) ≫ (λ_ M).hom) =
-      (A ◁ t) ≫ adj.homEquiv _ _
-        (F.map (β_ A (G.obj (𝟙_ 𝒞))).hom ≫ inv pU ≫
-          (adj.counit.app (𝟙_ 𝒞) ▷ M) ≫ (λ_ M).hom) := by
+    (q : F.obj U ⟶ 𝟙_ 𝒞) (ht : F.map t ≫ q = b ≫ c ≫ e) :
+    F.map (β_ A W).hom ≫ inv pW ≫ (b ▷ M) ≫ (c ▷ M) ≫ (e ▷ M) ≫ (λ_ M).hom =
+      F.map (A ◁ t) ≫ F.map (β_ A U).hom ≫ inv pU ≫ (q ▷ M) ≫ (λ_ M).hom := by
   have hPF : F.map (t ▷ A) ≫ inv pU = inv pW ≫ (F.map t ▷ M) := by
     rw [IsIso.comp_inv_eq, Category.assoc, IsIso.eq_inv_comp]
     exact hp.symm
-  have ht' := (adj.homEquiv_counit (g := t)).symm.trans ht
-  rw [← adj.homEquiv_naturality_left]
-  congr 1
   rw [← F.map_comp_assoc, BraidedCategory.braiding_naturality_right, F.map_comp_assoc,
     reassoc_of% hPF]
-  conv_rhs => rw [← comp_whiskerRight_assoc, ht']
+  conv_rhs => rw [← comp_whiskerRight_assoc, ht]
   simp only [comp_whiskerRight, Category.assoc]
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -152,24 +145,34 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
       Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Category.assoc]
     congr 1
     simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
-  unfold exceptionalKunnethMap exceptionalKunnethAdjoint upperShriekUnitTensorMap
-  have h := exceptionalKunnethMap_factorization_aux
-    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X))
-    (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)) M
-    ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
-    (prodUpperShriekBaseChangeUnit ℓ)
-    (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
-      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-        (dualizingComplex' ℓ Y))).app M)
-    (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
-      ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M)
-    (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _
-      (prodUpperShriekBaseChangeUnit ℓ) M)
-    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
-    ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv hx
-  exact h
+  have hx' := ((boundedConstructibleUpperShriekAdjunction ℓ
+    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_counit
+      (g := prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y))).symm.trans hx
+  have key : exceptionalKunnethAdjoint ℓ (Y := Y) M =
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
+        ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
+          prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y)) ≫
+        ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv
+          _ _).symm (upperShriekUnitTensorMap ℓ (prod.fst : X ⨯ Y ⟶ X) M) := by
+    rw [upperShriekUnitTensorMap, Equiv.symm_apply_apply]
+    unfold exceptionalKunnethAdjoint
+    exact exceptionalKunnethMap_factorization_aux
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)) M
+      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
+      (prodUpperShriekBaseChangeUnit ℓ)
+      (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+          (dualizingComplex' ℓ Y))).app M)
+      (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M)
+      (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _
+        (prodUpperShriekBaseChangeUnit ℓ) M)
+      ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
+      ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
+        ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
+      ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).counit.app (𝟙_ _)) hx'
+  rw [exceptionalKunnethMap, key, Adjunction.homEquiv_naturality_left, Equiv.apply_symm_apply]
 
 /-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
 `Y` be smooth over `k`. The exceptional Künneth map
