@@ -101,11 +101,15 @@ theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) 
                         ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app
                           (Opposite.op ⊤) σ)) = τ := by
   classical
-  obtain ⟨U, hwU, m, q, d, b, hp, hb, hbd, c, hcycles⟩ :=
+  obtain ⟨U, hwU, m, q, d, b, hrest⟩ :=
     picard_h1_base_descent_cycle_presentation f Xi fi ui hui hO hOi L W k w s hw hLi hLs hH
   let A := Γ(W, U)
   let p : Ideal A := RingHom.ker (W.evaluation U w hwU).hom
+  obtain ⟨hp, hrest⟩ := hrest
   let : p.IsPrime := hp
+  obtain ⟨hb, hrest⟩ := hrest
+  obtain ⟨hbd, hrest⟩ := hrest
+  obtain ⟨c, hcycles⟩ := hrest
   obtain ⟨r, hr, hbr, _, _⟩ :=
     (Module.finiteFreeMap_residue_localization m q b p).1 hb
   let B := Localization.Away r
