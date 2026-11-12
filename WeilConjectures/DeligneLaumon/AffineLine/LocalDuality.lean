@@ -353,7 +353,8 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     simp [Scheme.Hom.residueCard, q, d]
   rw [← hqd]
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
-    (F.dual hF)).stalk s) Ψ.toLinearEquiv S₅ ψ (q ^ d) hΨ' a b
+    (F.dual hF)).stalk s) Ψ.toLinearEquiv
+    ((FrobeniusModule.rescaleOneEquiv ((H.dual hH).stalk zf)).trans S₅) ψ (q ^ d) hΨ' a b
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
