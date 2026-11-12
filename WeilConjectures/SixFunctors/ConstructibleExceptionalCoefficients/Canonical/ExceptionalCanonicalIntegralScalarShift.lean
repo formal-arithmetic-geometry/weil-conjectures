@@ -202,18 +202,6 @@ theorem finiteTorIntegralShift_compatibility
   unfold finiteTorIntegralShift
   exact hc
 
-private theorem finiteTorIntegralShift_compatibility_cached
-    (l : ℕ) [Fact l.Prime]
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
-    letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
-    letI := constructionInclusionShift l Ω T (.integral E)
-    letI := finiteTorIntegralShift l Ω E T
-    NatTrans.CommShift (show PurCompactSupport.finiteTorIntegralInclusion l E.carrier T ⋙
-      (sfIntegralConstructible l E.carrier T).ι ≅
-        RingStage.inclusion.{u, v} l Ω T (.integral E) from Iso.refl _).hom ℤ :=
-  finiteTorIntegralShift_compatibility l Ω E T
-
 /-- The shift on an integral scalar functor induced by its specified ordinary realization.
 This is an actual fully faithful lift of the ambient scalar shift, independent of any
 shift stored in the scalar record. Source: Zheng, Construction 6.2, and the canonical
@@ -347,8 +335,8 @@ theorem canonical_integral_scalar_square
   letI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
   let rF : IE ⋙ IY ≅ IX := Iso.refl _
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
-  letI := finiteTorIntegralShift_compatibility_cached l Ω E T
-  letI := finiteTorIntegralShift_compatibility_cached l Ω L T
+  letI := finiteTorIntegralShift_compatibility l Ω E T
+  letI := finiteTorIntegralShift_compatibility l Ω L T
   have restrictionData := restriction_iso IX IY JX JY IE IL S.functor SI O B
     (C₁ := C.{u, v} l Ω T (.integral E))
     (C₂ := sfIntegralConstructibleCategory l E.carrier T)
