@@ -68,6 +68,7 @@ variable {A B A' B' : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCom
   [LocallyOfFiniteType B'.hom] [QuasiCompact B'.hom] [IsSeparated B'.hom]
   {f : A ⟶ B} {g : B' ⟶ B} {f' : A' ⟶ B'} {g' : A' ⟶ A}
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of module objects are found for the ambient lemma
 /-- **Weakly étale base change on bounded constructible complexes**: for a commutative square
