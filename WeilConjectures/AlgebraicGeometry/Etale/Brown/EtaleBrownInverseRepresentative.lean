@@ -52,7 +52,6 @@ abbrev strictEtaleBrownOrdinaryInverse
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)).symm
       (.mk _ _ _ _ R.val.ordinaryRight.hom))
 
-set_option maxHeartbeats 1600000 in
 -- The transpose compares all four realization factors.
 /-- The inverse Brown comparison is the exact localization of its ordinary mate.
 Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.

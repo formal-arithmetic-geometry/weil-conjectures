@@ -81,7 +81,6 @@ theorem strictEtaleBrownCanonicalRestriction_rep
     (B.level m).inverseFactors (B.level n).inverseFactors
     (PV.scalar h).restrictionFactors (A.restrictInverse h)).choose_spec K
 
-set_option maxHeartbeats 1600000 in
 -- Transposing the scalar adjunction exposes several localization factors.
 /-- The tensor comparison is the scalar mate of the exact restriction square.
 Source: Zheng, Construction 4.1; Stacks 06YY and 07A4.
