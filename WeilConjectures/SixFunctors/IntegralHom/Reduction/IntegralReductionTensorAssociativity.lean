@@ -41,12 +41,14 @@ private theorem transportedTensorComparison_square
     (hr : r' = r ≫ e.hom.app (X, Z)) (hs : s' = s.hom ≫ f.hom.app (X', Z'))
     (εX : F.obj X ⟶ X') (εZ : F.obj Z ⟶ Z') (ε : F.obj A ⟶ H)
     (b : B ⟶ H) (k : H ⟶ B) (hk : b ≫ k = 𝟙 B)
-    (h : F.map r ≫ mu.hom.app (X, Z) ≫ S.map (Prod.mkHom εX εZ) ≫ s.inv ≫ b = ε) :
+    (h : F.map r ≫ mu.hom.app (X, Z) ≫ S.map (Prod.mkHom εX εZ) ≫ s.inv ≫ b = ε)
+    (εX' : F.obj X ⟶ X') (εZ' : F.obj Z ⟶ Z') (ε' : F.obj A ⟶ H)
+    (hεX : εX' = εX) (hεZ : εZ' = εZ) (hε : ε' = ε) :
     F.map r' ≫
         (Functor.isoWhiskerRight e.symm F ≪≫ mu ≪≫
           Functor.isoWhiskerLeft (F.prod F) f).hom.app (X, Z) ≫
-        S'.map (Prod.mkHom εX εZ) = ε ≫ k ≫ s' := by
-  rw [hr, hs]
+        S'.map (Prod.mkHom εX' εZ') = ε' ≫ k ≫ s' := by
+  rw [hεX, hεZ, hε, hr, hs]
   dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.prod_obj]
@@ -371,10 +373,6 @@ private theorem nativeReductionMonoidal
             e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) := by
         rw [hTR']
         exact hrepR.symm
-      rw [finiteCochainModel_reductionCounit l E Y D hl n P hP,
-        finiteCochainModel_reductionCounit l E Y D hl n Q hQ,
-        finiteCochainModel_reductionCounit l E Y D hl n _
-        (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
       let cS := (TS.iso J S AS _ _ hEP hEQ).hom
@@ -399,7 +397,11 @@ private theorem nativeReductionMonoidal
           (m.target.representative.app (⟨_, hEP⟩, ⟨_, hEQ⟩)) cS hcr hcs
           εP εQ (reductionCounit l E Y D hl n _)
           (DerivedCategory.Q.map beta) (DerivedCategory.Q.map (κ.hom.app (P, Q)))
-          hcan hnorm)
+          hcan hnorm (D'.ε.app P) (D'.ε.app Q) (D'.ε.app _)
+          (finiteCochainModel_reductionCounit l E Y D hl n P hP)
+          (finiteCochainModel_reductionCounit l E Y D hl n Q hQ)
+          (finiteCochainModel_reductionCounit l E Y D hl n _
+            (coefficientTotalTensor_isKFlat J R P Q hP hQ)))
   refine ⟨core, ?_⟩
   intro X Z
   have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
