@@ -137,11 +137,12 @@ theorem schemeMV_restriction_chain_quotient_transport
   simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    schemeMV_quotient_factor_inv_map, Category.id_comp, Category.comp_id]
+    schemeMV_quotient_factor_inv_map, Functor.comp_obj, Functor.mapHomotopyCategory_obj,
+    HomotopyCategory.quotient_obj_as, Category.id_comp, Category.comp_id]
   change (schemeMVHomotopyOpenRestriction h W).hom.app
       ((HomotopyCategory.quotient _ _).obj I) = _ at hr
   rw [hr]
-  simp only [schemeMV_quotient_factor_inv_map, Category.comp_id] at hy
+  simp only [schemeMV_quotient_factor_inv_map, Functor.comp_obj, Category.comp_id] at hy
   exact schemeMV_transport_restriction_chain LY.mapDerivedCategory
     (RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom).rightDerivedFunctor
     ((DerivedCategory.quotientCompQhIso _).app
