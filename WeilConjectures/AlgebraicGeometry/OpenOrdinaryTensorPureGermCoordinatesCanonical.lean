@@ -137,7 +137,6 @@ private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toSch
   rw [he]
   rfl
 
-set_option profiler true in
 /-- The unit-scalar section-germ generator equation for the pinned comparison.
 
 Expand the tensor-stalk and pinned restriction maps on a section germ. Their
