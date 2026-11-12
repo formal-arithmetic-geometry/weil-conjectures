@@ -140,6 +140,12 @@ theorem strictEtaleBrownCanonicalScalarCube
       (mateEquiv (PV.scalar h).derivedAdj av (.mk _ _ _ _ (RV.scalar h).inv)).app _ =
     _ ≫ (mateEquiv an av (.mk _ _ _ _
       (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)).app _ ≫ _
-  simpa only [pn, pm, ht, RV.property.2.2 h, RW.property.2.2 h, hs] using hc X
+  have hr : (mateEquiv (PV.scalar h).derivedAdj av
+      (.mk _ _ _ _ (RV.scalar h).inv)) = .mk _ _ _ _ (RV.val.restriction h).hom :=
+    RV.property.2.2 h
+  have hw : (mateEquiv (PW.scalar h).derivedAdj an
+      (.mk _ _ _ _ (RW.scalar h).inv)) = .mk _ _ _ _ (RW.val.restriction h).hom :=
+    RW.property.2.2 h
+  simpa only [pn, pm, ht, hr, hw, hs] using hc X
 
 end AlgebraicGeometry
