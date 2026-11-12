@@ -133,7 +133,6 @@ private lemma comparison_boundary_of_epi
   rw [Category.assoc, hM, eM.inv_hom_id_assoc]
   exact hδ.symm
 
-set_option profiler true in
 -- Cone comparison identities elaborate through the module-sheaf instances.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -173,7 +172,6 @@ private lemma directImage_boundary {X Y : RingedSpace.{u}}
         (CochainComplex.mappingCone.map_δ S.f (moduleDirectImage g)).symm
     _ = _ := Q.map_comp_assoc _ _ _
 
-set_option profiler true in
 -- Naturality and cancellation involve several nested derived and shift functors.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
