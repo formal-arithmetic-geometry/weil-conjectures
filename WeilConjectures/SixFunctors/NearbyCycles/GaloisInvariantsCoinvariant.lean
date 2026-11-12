@@ -101,7 +101,6 @@ variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : Galoi
     (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
   (hc : ∀ n, IsColimit (T.moduleCocone Λ (K.X n)))
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors of the tower are large terms
 /-- **The derived trace projector is the projector onto the invariants, after any continuous
 additive functor.** Let `R` be the retraction of the derived unit `K ⟶ Rg_{∞*} Lg_∞^* K` induced by
@@ -138,7 +137,6 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant (a : ℤ) [K.Is
   rw [G.map_comp, G.map_comp, Category.assoc, Category.assoc, key, ← G.map_comp_assoc,
     Iso.inv_hom_id, G.map_id, Category.id_comp]
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors of the tower are large terms
 /-- `GaloisTower.map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant` for an object `C ≅ K`
 of the derived category, with the transported retraction
@@ -190,7 +188,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option maxHeartbeats 1600000 in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (SGA 4½, [Th. finitude],
 Lemme 3.4; torsion coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
