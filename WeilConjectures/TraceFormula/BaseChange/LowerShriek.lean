@@ -179,6 +179,7 @@ variable {S : Type u} [Field S] [Fact (ringChar S).Prime] [Fact (ringChar S ≠ 
   [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
   {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D}
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- the objects of the bounded constructible and of the ambient derived categories are compared
 omit [Fact ℓ.Prime] in
