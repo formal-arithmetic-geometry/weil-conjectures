@@ -163,19 +163,18 @@ theorem exists_affineSpectrum_tensor_generator_coordinates
         eD d ⊗ₜ[A0, (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
           (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
           (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by
-  dsimp only
-  let z := X'.isoSpec.inv z0
+  intro z P0 Pg j S0 F F0 alpha _ _ _ _ _ _ _ _ _ _ R0 A0 B0 D0 Q Q0 V0 H
   let hA : g' z = X.isoSpec.inv ((Spec.map g'.appTop) z0) :=
     (congrArg (fun k : Spec Γ(X', ⊤) ⟶ X ↦ k z0)
       (Scheme.isoSpec_inv_naturality g')).symm
   let eA := canonicalSpectrumStalkEquiv X (g' z) ((Spec.map g'.appTop) z0) hA
   let eD := canonicalSpectrumStalkEquiv X' z z0 rfl
-  obtain ⟨eR, eB, hR, hB, hD⟩ :=
-    exists_canonicalSpectrum_stalk_ring_coordinates f f' g g' sq sq0 z0
-  obtain ⟨q, hq⟩ :=
-    exists_canonicalSpectrum_tensor_generator_formula f f' g g' sq sq0 z0 P
-  refine ⟨eR, eA, eB, eD, q, hR, hB, hD, ?_⟩
-  unfold affineSpectrumTensorAdditiveIso
-  exact hq
+  refine (exists_canonicalSpectrum_stalk_ring_coordinates f f' g g' sq sq0 z0).elim
+    fun eR hR ↦ ?_
+  refine hR.elim fun eB hR ↦ ?_
+  refine (exists_canonicalSpectrum_tensor_generator_formula f f' g g' sq sq0 z0 P).elim
+    fun q hq ↦ ?_
+  refine ⟨eR, eA, eB, eD, q, hR.1, hR.2.1, hR.2.2, ?_⟩
+  simpa only [H, affineSpectrumTensorAdditiveIso] using hq
 
 end AlgebraicGeometry.SingleComplexBaseChange
