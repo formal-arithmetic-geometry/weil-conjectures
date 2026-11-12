@@ -200,7 +200,7 @@ lemma specialIdExchange_comp_pullbackExchange_square (ψ : N.Hom M c (𝟙 S))
   have h₃ : L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).hom.app ((P.nearbyCycles Λ).obj C)) ≫
       L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).inv.app ((P.nearbyCycles Λ).obj C)) =
       𝟙 _ :=
-    ((leftDerivedUpperStarId Λ Sc).app ((P.nearbyCycles Λ).obj C)).map_hom_inv_id _
+    ((leftDerivedUpperStarId Λ Sc).app ((P.nearbyCycles Λ).obj C)).hom_inv_id_map _
   exact specialIdExchange_square_aux h₀ ha hb' hl hr (Iso.hom_inv_id_app _ _) h₃ hn h₁ rfl
 
 end AmbientShrink
@@ -248,6 +248,8 @@ private lemma boundedConstructibleNearbyCycles_map_hom''' {X X' : Scheme.{u}}
       (N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map f.hom :=
   rfl
 
+omit [Fact (ringChar kS).Prime] [Fact (ringChar kS ≠ ℓ)]
+  [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] in
 private lemma boundedConstructibleNearbyCycles_map_shrinkSquare_hom
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hb : sb.left ≫ π = c ≫ j.left) (A : Dᵇc(Zc.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -258,6 +260,8 @@ private lemma boundedConstructibleNearbyCycles_map_shrinkSquare_hom
           (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) c j.left).hom.app A.obj) := by
   rw [boundedConstructibleNearbyCycles_map_hom''', boundedConstructibleShrinkSquareIso_hom_hom]
 
+omit [Fact (ringChar kX).Prime] [Fact (ringChar kX ≠ ℓ)]
+  [LocallyOfFiniteType Zc.hom] [QuasiCompact Zc.hom] [IsSeparated Zc.hom] in
 private lemma boundedConstructiblePullbackExchange_app_upperStarOfMap_hom
     (s : N.Hom P' sb.left j'.left)
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
