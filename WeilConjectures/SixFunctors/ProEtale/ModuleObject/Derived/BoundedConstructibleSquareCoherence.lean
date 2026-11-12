@@ -318,7 +318,9 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₁).obj A)
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B)
   conv_lhs => rw [← Category.assoc]
-  conv_lhs => rw [h_tensor]
+  conv_lhs =>
+    lhs
+    rw [h_tensor]
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
   have h_coherence₁ := boundedConstructibleUpperStarComp_square_coherence_comp
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
