@@ -115,7 +115,6 @@ lemma isIso_kunnethMap_leftDerivedUpperStar_id {X₀ Y₀ Z₀ X₀' Y₀' Z₀'
     ((leftDerivedUpperStarId Λ Y₀).app _ ≪≫ (leftDerivedUpperStarId Λ Y₀).app _ ≪≫
       (leftDerivedUpperStarId Λ Y₀).app _) h
 
-set_option maxHeartbeats 400000 in
 set_option trace.profiler true in
 -- the Künneth maps of the three product configurations are large terms
 /-- **The Künneth map descends along a Galois slice** (blueprint
@@ -158,7 +157,10 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
   have hT : IsField T₀ := Field.toIsField T₀
   -- the square along `ψ`
   have sqψ := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange' Λ φ₁ φ₂ μ₁ (ψP.comp φ₂)
-    ψM (Hom.id N) ψP htotψ hgenψ (by simp) (by simp) (by simp) hsψ (by simp) (by simp) A B
+    ψM (Hom.id N) ψP htotψ hgenψ
+    (Category.comp_id _) (Category.comp_id _)
+    ((Category.comp_id _).trans (Category.id_comp _).symm) hsψ
+    (Category.comp_id _) (Category.comp_id _) A B
     ?iM ?iN ?iP (𝟭 _)
   case iM => cast_proofs hψM A
   case iN => infer_instance
