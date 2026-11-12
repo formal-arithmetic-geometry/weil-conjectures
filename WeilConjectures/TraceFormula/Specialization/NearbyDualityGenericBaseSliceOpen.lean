@@ -308,8 +308,13 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
         (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
       N.unit _ ≫ (N.nearbyCycles _).map
         (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
-    rw [← Category.assoc, φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)]
-    simp
+    have hu0 : L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+        (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
+        (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
+          (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+            (Profinite.padicAlgClRingObj ℓ) f).inv := by
+      transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
+    rw [← Category.assoc, hu0, Iso.inv_hom_id_assoc]
   simpa only [hM, hN, hf', hf] using hu
 
 
