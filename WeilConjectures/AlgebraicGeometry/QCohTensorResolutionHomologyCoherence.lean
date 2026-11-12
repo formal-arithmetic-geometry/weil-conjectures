@@ -44,7 +44,6 @@ noncomputable def tensorResolutionNormalizedRestrictHomologyIso {X Y : Scheme.{u
     (tensorResolutionRestrictionTotalIso j E F)
 
 -- Tensor-resolution comparisons require substantial definitional reduction.
-set_option profiler true in
 /-- Nested chart restriction is compatible with normalized tensor homology. -/
 theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
     (Y : Scheme.{u}) (V U : Y.affineOpens) (h : V.1 ≤ U.1)
@@ -94,16 +93,8 @@ theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
   dsimp only [HomologicalComplex.homologyFunctor]
   rw [Functor.map_comp]
   rw [Category.assoc]
-  change R.map ((A.sc i).mapHomologyIso RU).inv ≫
-    R.map (HomologicalComplex.homologyMap
-      (tensorResolutionRestrictionTotalIso U.2.fromSpec E F).hom i) ≫ _ = _
   have h₁' := congrArg (fun f ↦ R.map ((A.sc i).mapHomologyIso RU).inv ≫ f) h₁
   refine h₁'.trans ?_
-  change R.map ((A.sc i).mapHomologyIso RU).inv ≫
-    (((A.sc i).map RU).mapHomologyIso R).inv ≫
-      ShortComplex.homologyMap ((A.sc i).mapNatTrans
-        (tensorResolutionChartRestrictionIso Y V U h).hom) ≫ _ = _
-  rw [reassoc_of% h₂]
-  rfl
+  simpa only [Category.assoc] using h₂
 
 end AlgebraicGeometry
