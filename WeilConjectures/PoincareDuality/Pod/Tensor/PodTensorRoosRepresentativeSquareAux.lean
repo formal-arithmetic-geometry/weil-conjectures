@@ -381,10 +381,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     let target := (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)).consumeMData
     let actual :=
       (← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type).consumeMData
+    Lean.logInfo m!"remaining initially: {← Lean.getRemainingHeartbeats}"
     for i in ([0, 2, 1] : List Nat) do
       Lean.logInfo m!"comparing equality argument {i}"
       let matched ← Lean.Meta.isDefEq actual.getAppArgs[i]! target.getAppArgs[i]!
-      Lean.logInfo m!"comparison {i}: {matched}"
+      Lean.logInfo m!"comparison {i}: {matched}; remaining: {← Lean.getRemainingHeartbeats}"
+    Lean.logInfo m!"full comparison: {← Lean.Meta.isDefEq actual target}"
   exact final
 
 end WeilConjectures
