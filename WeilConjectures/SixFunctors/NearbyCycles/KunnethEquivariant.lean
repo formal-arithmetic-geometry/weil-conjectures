@@ -43,6 +43,23 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
+-- Share the graded tensor existence proofs used in each derived pullback. Reconstructing these
+-- colimit-preservation instances for every occurrence of `L((f)^*⟦Λ⟧)` is expensive.
+private theorem kunnethHasTensor₄ObjExt (W : Scheme.{u})
+    (K L M N : GradedObject ℤ (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W))) : GradedObject.HasTensor₄ObjExt K L M N := inferInstance
+
+private theorem kunnethHasGoodTensor₁₂Tensor (W : Scheme.{u})
+    (K L M : GradedObject ℤ (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W))) : GradedObject.HasGoodTensor₁₂Tensor K L M := inferInstance
+
+private theorem kunnethHasGoodTensorTensor₂₃ (W : Scheme.{u})
+    (K L M : GradedObject ℤ (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W))) : GradedObject.HasGoodTensorTensor₂₃ K L M := inferInstance
+
+attribute [local instance] kunnethHasTensor₄ObjExt kunnethHasGoodTensor₁₂Tensor
+  kunnethHasGoodTensorTensor₂₃
+
 /-- The comultiplication of `L(𝟙 W)^*` is compatible with the identity isomorphism
 `L(𝟙 W)^* ≅ 𝟭`. -/
 lemma δ_leftDerivedUpperStarId (W : Scheme.{u})
