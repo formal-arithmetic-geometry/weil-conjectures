@@ -102,6 +102,7 @@ private theorem derivedUnit_transport
   simp
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem derivedUnit_square
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -187,6 +188,7 @@ private theorem realized_arrow_transport
   exact h
 
 set_option maxHeartbeats 700000 in
+set_option trace.profiler true in
 -- Assemble the independent tower, completed, and condensed comparison diagrams.
 /-- Whole-system pullback is preserved by the specified completed realizations.
 
