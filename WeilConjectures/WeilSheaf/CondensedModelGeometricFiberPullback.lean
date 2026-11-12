@@ -280,12 +280,11 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
           ((adicLowerStarCompCondensedModIso l e.inv).inv.app x) := by
     apply (cancel_mono ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
       ((adicLowerStarCompCondensedModIso l e.inv).hom.app x))).mp
-    rw [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id,
-      Category.comp_id]
-    exact adicSheafEquivCondensedMod_map_unit_comp l e x
+    simpa only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id,
+      Category.comp_id] using adicSheafEquivCondensedMod_map_unit_comp l e x
   rw [CategoryTheory.mateEquiv_symm_natTrans_app]
   rw [← Functor.map_comp_assoc]
-  rw [h, Functor.map_comp]
+  rw [h]
   simp
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
