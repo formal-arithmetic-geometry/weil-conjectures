@@ -108,7 +108,6 @@ private theorem model_inv (W : Scheme.{u})
 attribute [local irreducible] podReindexingHomModel podReindexingCoefficient
   Padic Padic.coefficientExtensionIntegers
 
-set_option profiler true in
 -- The explicit model transports require many dependent functor-map equalities.
 /-- The left route of the source-shift square on localized Hom models.
 
@@ -277,7 +276,9 @@ theorem source_left_normalization
       ((complexShift l E g s a).inv.app P).op).app KI) ≫
       Q.map eX.inv ≫ (Q.commShiftIso (-a)).hom.app (hom l E X s KP KI) := by
     rw [hs']
-    exact source_model_tail (D := podReindexingDerived l E X s) (shiftFunctor _ (-a)) H
+    simpa only [Category.assoc, sourceModelOutput, Functor.mapIso_hom, Iso.trans_hom,
+      Iso.prod_hom, Iso.op_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv] using
+      source_model_tail (D := podReindexingDerived l E X s) (shiftFunctor _ (-a)) H
       (K := Q.obj KI) (L := Q.obj KP) (M := M) (R := M⟦a⟧) (f.app I)
       (Q.map ((complexShift l E g s a).inv.app P))
       ((f.hom.app P)⟦a⟧' ≫ (Q.commShiftIso a).inv.app KP) (f.inv.app P)
@@ -292,7 +293,7 @@ theorem source_left_normalization
   have hnat := c.derived.hom.naturality
     (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
       (𝟙 ((podReindexingQ l E Y s).obj I)))
-  obtain ⟨_, hmodel⟩ := c.derived_model (P⟦a⟧) I inferInstance
+  have hmodel := (c.derived_model (P⟦a⟧) I inferInstance).choose_spec
   change F.map ((podReindexingDerivedHom l E Y s).map
       (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
         (𝟙 ((podReindexingQ l E Y s).obj I)))) ≫

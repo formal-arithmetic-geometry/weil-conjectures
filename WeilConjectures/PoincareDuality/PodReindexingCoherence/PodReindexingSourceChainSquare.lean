@@ -187,8 +187,6 @@ private lemma source_chain_leftFormula
   exact hy.trans hs
 
 
-set_option profiler true in
--- The degreewise sheaf, presheaf, and linear-map extensionality needs extra elaboration fuel.
 /-- The signed source reindexings commute with the fixed sectionwise chain comparison.
 Source: Stacks 0A8X, 08JA and blueprint dual-Tate compatibility, Step 4.
 Proof: project to every source degree and evaluate the resulting local Hom family.
@@ -225,7 +223,7 @@ theorem source_chain_square
   apply homComplex_hom_ext
   intro p q hpq
   simp only [HomologicalComplex.comp_f, Category.assoc,
-    CochainComplex.shiftFunctor_map_f', complexShift_hom_f, Category.id_comp]
+    CochainComplex.shiftFunctor_map_f', complexShift_hom_f]
   rw [source_complexShift_projection, hX, Linear.comp_units_smul]
   exact source_chain_leftFormula l E g s SX SY TX TY c P I a eY hY r p q hpq
 
