@@ -215,7 +215,8 @@ theorem picardDirectImageUnitMorphism_pullback
     have hn := congrArg (fun q ↦
       (derivedPullback p').map (Modules.canonicalSinglePullbackMap i V) ≫ q) hsingle
     with_reducible
-      simpa only [H, P, Functor.map_comp, Category.assoc] using hn
+      simpa only [H, P, V, V', Scheme.ringCatSheaf, Modules.pullback,
+        Functor.map_comp, Category.assoc] using hn
   let : SheafOfModules.IsInvertible.{v, v, v} V := SheafOfModules.instIsInvertibleUnit.{v, v, v}
   let : SheafOfModules.IsInvertible.{v, v, v} V' := SheafOfModules.instIsInvertibleUnit.{v, v, v}
   let : SheafOfModules.IsInvertible.{v, v, v} ((Modules.pullback i).obj V) :=

@@ -40,7 +40,7 @@ private theorem exists_compatible_family
     {ι A E : Type*} {B : ι → Type*} {P Q : A → ι → Prop}
     {R : E → (i : ι) → B i → Prop}
     (hA : ∃ a, ∀ i, P a i ∧ Q a i) (hE : ∃ e, ∀ i, ∃ b, R e i b) :
-    ∃ a e (b : ∀ i, B i), ∀ i, P a i ∧ Q a i ∧ R e i (b i) := by
+    ∃ (a : A) (e : E) (b : ∀ i, B i), ∀ i, P a i ∧ Q a i ∧ R e i (b i) := by
   obtain ⟨a, ha⟩ := hA
   obtain ⟨e, he⟩ := hE
   exact ⟨a, e, fun i ↦ Classical.choose (he i),
