@@ -53,45 +53,46 @@ open Scheme
 -- Public restatements of the shortcut instances of `ShortcutInstances`, which is imported
 -- privately (a public import would be re-exported to every dependent and change its instance
 -- resolution); the local instance attribute needs them in the exported view (theorem headers).
-theorem hasTensor₄ObjExt_mod' (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+theorem hasTensor₄ObjExt_kunnethGaloisLayer
+    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
   hasTensor₄ObjExt_mod T R X₁ X₂ X₃ X₄
 
-theorem hasGoodTensor₁₂Tensor_mod' (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+theorem hasGoodTensor₁₂Tensor_kunnethGaloisLayer
+    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
   hasGoodTensor₁₂Tensor_mod T R X₁ X₂ X₃
 
-theorem hasGoodTensorTensor₂₃_mod' (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+theorem hasGoodTensorTensor₂₃_kunnethGaloisLayer
+    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
   hasGoodTensorTensor₂₃_mod T R X₁ X₂ X₃
 
-theorem hasColimitsOfShape_int_mod' (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
+theorem hasColimitsOfShape_int_kunnethGaloisLayer
+    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] :
     HasColimitsOfShape ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :=
   hasColimitsOfShape_int_mod T R
 
-theorem preservesColimitsOfShape_int_curriedTensor_obj_mod' (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+theorem preservesColimitsOfShape_int_curriedTensor_obj_kunnethGaloisLayer
+    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
     PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) :=
   preservesColimitsOfShape_int_curriedTensor_obj_mod T R M
 
-theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_mod' (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+theorem preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethGaloisLayer
+    (T : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
     PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
   preservesColimitsOfShape_int_curriedTensor_flip_obj_mod T R M
 
-attribute [local instance] hasTensor₄ObjExt_mod' hasGoodTensor₁₂Tensor_mod'
-  hasGoodTensorTensor₂₃_mod' hasColimitsOfShape_int_mod'
-  preservesColimitsOfShape_int_curriedTensor_obj_mod'
-  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod'
+attribute [local instance] hasTensor₄ObjExt_kunnethGaloisLayer
+  hasGoodTensor₁₂Tensor_kunnethGaloisLayer hasGoodTensorTensor₂₃_kunnethGaloisLayer
+  hasColimitsOfShape_int_kunnethGaloisLayer
+  preservesColimitsOfShape_int_curriedTensor_obj_kunnethGaloisLayer
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_kunnethGaloisLayer
 
 variable {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}

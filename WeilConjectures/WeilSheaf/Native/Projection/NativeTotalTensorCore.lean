@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareState
 public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 
 /-! # The totalized native pullback tensor square -/
 
