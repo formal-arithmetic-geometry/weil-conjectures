@@ -157,7 +157,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
   let K : DerivedCategory (Mod (Sheaf (ProEt.topology N.generic) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) N.generic)) :=
     L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C
-  have := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
+  letI : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K) :=
+    isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     K
   have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
