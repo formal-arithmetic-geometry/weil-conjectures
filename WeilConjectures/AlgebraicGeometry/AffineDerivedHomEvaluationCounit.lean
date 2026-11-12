@@ -52,6 +52,22 @@ private theorem transportEvaluation
   rw [adj.counit.naturality_assoc q.inv]
   simp [q.inv_hom_id]
 
+private theorem transportEvaluationFromRepresentatives
+    {C A D : Type*} [Category C] [Category A] [Category D]
+    (Q : D ⥤ C) [Q.EssSurj] {ρ : A ⥤ C} {F G : C ⥤ C}
+    (p : F ⟶ G) (ι : G ≅ 𝟭 C)
+    (h : ∃ (R : C ⥤ A) (L : A ⥤ C) (_e : L ≅ ρ) (adj : L ⊣ R),
+      ∀ (j : G ≅ 𝟭 C) (K : D), ∃ d : L.obj (R.obj (Q.obj K)) ≅ F.obj (Q.obj K),
+        d.hom ≫ p.app (Q.obj K) ≫ j.hom.app (Q.obj K) = adj.counit.app (Q.obj K)) :
+    ∃ (R : C ⥤ A) (adj : ρ ⊣ R) (j : G ≅ 𝟭 C), ∀ K : C,
+      ∃ d : ρ.obj (R.obj K) ≅ F.obj K,
+        d.hom ≫ p.app K ≫ j.hom.app K = adj.counit.app K := by
+  obtain ⟨R, L, e, adj, h⟩ := h
+  refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
+  intro K
+  obtain ⟨d, hd⟩ := h ι (Q.objPreimage K)
+  exact transportEvaluation adj e p ι (Q.objObjPreimageIso K) d hd
+
 private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))]
@@ -114,29 +130,9 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
       ∃ d : L.obj (R.obj (DerivedCategory.Q.obj K)) ≅ B.obj (op M, DerivedCategory.Q.obj K),
         d.hom ≫ p.app (DerivedCategory.Q.obj K) ≫ ι.hom.app (DerivedCategory.Q.obj K) =
           adj.counit.app (DerivedCategory.Q.obj K) := by
-  intro C A S B U M p
-  have h := exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
-  let H₀ := h.choose
-  have h₀ := h.choose_spec
-  have hH₀ : H₀.Additive := h₀.choose
-  have h₁ := h₀.choose_spec
-  let iH := h₁.choose
-  have h₂ := h₁.choose_spec
-  let adj₀ := h₂.choose
-  have h₃ := h₂.choose_spec
-  have h_eval := h₃.1
-  let R := h₃.2.choose
-  have h₄ := h₃.2.choose_spec
-  let β := h₄.choose
-  have h₅ := h₄.choose_spec
-  let L := h₅.choose
-  have h₆ := h₅.choose_spec
-  let t := h₆.choose
-  have h₇ := h₆.choose_spec
-  let adj := h₇.choose
-  have h₈ := h₇.choose_spec
-  have hR := h₈.1
-  have h_counit := h₈.2.2.2
+  obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
+    exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
+  let _ := hH₀
   refine ⟨R, L, affineScalarLocalizationIso.{u, wY, wA} f L t, adj, ?_⟩
   intro ι K
   exact affine_derivedHom_localized_evaluation.{u, wY, wA}
@@ -195,35 +191,13 @@ theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
             (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op, 𝟙 K) ≫
         ι.hom.app K = adjH.counit.app K := by
-  have h := exists_affine_localizedEvaluation.{u, wY, wA} f
-  let R := h.choose
-  have h₀ := h.choose_spec
-  let L := h₀.choose
-  have h₁ := h₀.choose_spec
-  let e := h₁.choose
-  have h₂ := h₁.choose_spec
-  let adj := h₂.choose
-  have h_eval := h₂.choose_spec
-  let ι := Classical.choice (derivedInternalHom_unit_iso.{u, wY} Y)
-  refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
-  intro K
-  let Kc : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ :=
-    DerivedCategory.Q.objPreimage K
-  let q : DerivedCategory.Q.obj Kc ≅ K := DerivedCategory.Q.objObjPreimageIso K
-  let d₀ := (h_eval ι Kc).choose
-  have hd₀ := (h_eval ι Kc).choose_spec
-  let F := (Functor.curry.obj
-    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj
-      (op ((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-          ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))))
-  let p := (Functor.curry.obj
-    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).map
-      (((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
-          (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)
-  change d₀.hom ≫ p.app (DerivedCategory.Q.obj Kc) ≫
-    ι.hom.app (DerivedCategory.Q.obj Kc) = adj.counit.app (DerivedCategory.Q.obj Kc) at hd₀
-  exact transportEvaluation adj e p ι q d₀ hd₀
+  exact transportEvaluationFromRepresentatives DerivedCategory.Q
+    ((Functor.curry.obj
+      (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).map
+        (((DerivedCategory.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
+            (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op))
+    (Classical.choice (derivedInternalHom_unit_iso.{u, wY} Y))
+    (exists_affine_localizedEvaluation.{u, wY, wA} f)
 
 end AlgebraicGeometry
