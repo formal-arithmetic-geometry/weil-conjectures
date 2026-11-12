@@ -332,7 +332,7 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X âŸ¶ Y) (Î
         match e with
         | .app f x => s!"({tree f (d - 1)} {tree x (d - 1)})"
         | .const n _ => n.toString
-        | .fvar n => n.toString
+        | .fvar _ => "fvar"
         | .sort _ => "Sort"
         | _ => "other"
     Lean.logInfo m!"TREE {tree t 18}"
