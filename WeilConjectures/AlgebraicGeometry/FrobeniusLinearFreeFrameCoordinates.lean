@@ -48,6 +48,7 @@ private theorem frobenius_expansion
   rw [hf, map_smul, Pi.smul_apply, smul_eq_mul, mul_comm]
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Checking the tensor-section coercions requires a larger kernel budget.
 /-- A specified finite free frame gives a natural Frobenius matrix on the etale slice.
 

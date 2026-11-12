@@ -68,6 +68,7 @@ private theorem restrict_stalk_surjective
   rw [hn, hs', hs]
 
 set_option maxHeartbeats 700000 in
+set_option profiler true in
 -- Comparing restricted internal-Hom and exterior sheaf objects takes additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The alternating Yoneda products give a surjection from the exterior sheaf to

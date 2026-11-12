@@ -47,6 +47,7 @@ private noncomputable def soleFactorIso {B : Type u} [Category B]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The dependent product projections and sheaf functors need extra elaboration steps.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The single-source Hom comparison is natural in both the sheaf and the complex.
