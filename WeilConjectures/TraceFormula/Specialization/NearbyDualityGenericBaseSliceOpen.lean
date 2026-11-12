@@ -630,11 +630,13 @@ lemma Hom.liftExchange_zeroTwistSpecializationMap (φ : N.Hom M f f')
         (boundedConstructibleTateTwistZeroUpperStarIso ℓ (X := X) (Y := Y) f n).inv := by
   subst hβ
   apply ObjectProperty.hom_ext
-  simpa only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, liftExchange_app_hom, boundedConstructibleNearbyCycles_map_hom'',
-    boundedConstructibleTateTwistZeroUpperStarIso, ObjectProperty.isoMk_inv,
-    zeroTwistSpecializationMap]
-    using φ.pullbackExchange_ambientZeroTwistSpecializationMap (ℓ := ℓ) n
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
+    ObjectProperty.homMk_hom, liftExchange_app_hom, boundedConstructibleNearbyCycles_map_hom'']
+  unfold boundedConstructibleTateTwistZeroUpperStarIso zeroTwistSpecializationMap
+  rw [ObjectProperty.isoMk_inv, ObjectProperty.homMk_hom, ObjectProperty.homMk_hom,
+    ObjectProperty.isoMk_inv, ObjectProperty.homMk_hom, ObjectProperty.homMk_hom]
+  transport_exact φ.pullbackExchange_ambientZeroTwistSpecializationMap (ℓ := ℓ) n
 
 /-- **The twist isomorphisms `κ` and the pullback exchange** on bounded constructible complexes:
 for a morphism of models `φ : N ⟶ M` and an exchange `β` given as equal to the restriction of the
