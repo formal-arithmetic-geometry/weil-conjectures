@@ -296,16 +296,17 @@ private lemma boundedConstructibleSpecialIdExchange_square
           (boundedConstructibleShrinkSquareIso ℓ hb A).hom =
       (r.boundedConstructiblePullbackExchange ℓ hM hP).app A ≫
         ρψ.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A) := by
-  refine fullSubcategory_square_of_hom ?_ ?_ ?_ ?_ ?_
-    (specialIdExchange_comp_pullbackExchange_square
-      (Profinite.padicAlgClRingObj ℓ) ψ r s πc hb htot hgen A.obj)
-  · exact (boundedConstructibleUpperStar_map_hom _ _ j' (ρc.app A)).trans
-      (congrArg (L((j'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map) (hρc A))
-  · exact boundedConstructiblePullbackExchange_app_upperStarOfMap_hom s hN hP' A
-  · exact boundedConstructibleNearbyCycles_map_shrinkSquare_hom hN hb A
-  · exact r.boundedConstructiblePullbackExchange_app_hom ℓ hM hP A
-  · transport_exact hρψ
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A)
+  refine fullSubcategory_square_of_hom
+    ((boundedConstructibleUpperStar_map_hom _ _ j' (ρc.app A)).trans
+      (congrArg (L((j'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map) (hρc A)))
+    (boundedConstructiblePullbackExchange_app_upperStarOfMap_hom
+      (Zc := Zc) (π := π) (sb := sb) (j' := j') s hN hP' A)
+    (boundedConstructibleNearbyCycles_map_shrinkSquare_hom
+      (c := c) (j := j) (sb := sb) (π := π) hN hb A)
+    (r.boundedConstructiblePullbackExchange_app_hom ℓ (f := j) (f' := j') hM hP A)
+    (hρψ ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A)) ?_
+  transport_exact specialIdExchange_comp_pullbackExchange_square
+    (Profinite.padicAlgClRingObj ℓ) ψ r s πc hb htot hgen A.obj
 
 end BoundedConstructibleShrink
 
