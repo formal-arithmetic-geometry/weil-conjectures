@@ -81,9 +81,7 @@ private theorem strictlyPerfect_overEquiv_isKFlat (S : Scheme.{u}) (U : S.Opens)
     infer_instance
   exact CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat C hbounded hflat B hB
 
-set_option maxHeartbeats 600000 in
 set_option trace.profiler true in
--- The residue and over-site comparisons involve several chosen derived localizations.
 /-- Termwise residue stalk homology of strictly perfect localized complexes agrees
 naturally with localized derived residue homology. The comparisons are simultaneous
 for all strictly perfect complexes and all their chain maps.
@@ -142,6 +140,13 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
           (t P hP).hom ≫ (localizedResidueHomology S U x).map (DerivedCategory.Q.map α) :=
   by
     classical
+    let C := SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)
+    let A := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
+    let B := SheafOfModules.{u}
+      (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace)
+    let : Abelian C := inferInstanceAs (Abelian C)
+    let : Abelian A := inferInstanceAs (Abelian A)
+    let : Abelian B := inferInstanceAs (Abelian B)
     let O := (Scheme.Modules.overEquiv U).functor
     have : O.Additive := Functor.additive_of_preserves_binary_products _
     have : (ModuleCat.extendScalars (IsLocalRing.residue
@@ -158,9 +163,6 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
           intro M N
           simp only [Functor.comp_map]
           rw [Functor.map_zero, Functor.map_zero, Functor.map_zero] }
-    let A := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
-    let B := SheafOfModules.{u}
-      (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace)
     let : HasDerivedCategory.{u + 1} U.toScheme.Modules := HasDerivedCategory.standard _
     let : HasDerivedCategory.{u + 1} A := HasDerivedCategory.standard _
     let : HasDerivedCategory.{u + 1} B := HasDerivedCategory.standard _
