@@ -341,12 +341,16 @@ lemma map_relativePullback_app_comp_baseChange_app {p : X'a ⟶ X} {t : X'a ⟶ 
         ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
           hT.toCommSq).hom.app M) := by
   exact relativePullback_baseChange_aux
+    (G := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
+    (S := boundedConstructibleLowerShriek ℓ f'') (S' := boundedConstructibleLowerShriek ℓ f')
+    (U := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hQ)
     ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ r).unit.app M)
     ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ t).unit.app _)
     ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hT).app _)
-    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-      hT.toCommSq).hom.app M)
+    ((boundedConstructibleLowerShriek ℓ t).map
+      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+        hT.toCommSq).hom.app M))
     ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f'').app _)
     ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ t f').inv.app _)
     ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ t f').inv.app _) _ _ _ _
@@ -563,19 +567,20 @@ theorem weilLowerShriekFrobeniusComparison_comp (aX bX abX : X ⟶ X) (aY bY abY
     (rb ≫ f'b)).map (boundedConstructibleUpperStarComp_relativeFrobenius_aux ℓ ra hT.toCommSq pb K)
   simp only [Functor.map_comp
     (self := boundedConstructibleLowerShriek ℓ (rb ≫ f'b))] at hR6
-  exact frobeniusComparison_comp_aux (E := Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (eqToHom_refl _ _)
-    (by rw [eqToHom_refl, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id])
-    (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])
-    (by rw [eqToHom_refl, CategoryTheory.Functor.map_id])
-    ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqa).naturality
-      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ rb pb).inv.app K))
-    (map_relativePullback_app_comp_baseChange_app ℓ hT hQ
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ pb).obj K))
-    (Functor.map_comp _ _ _)
-    ((relativePullback ℓ ra (t ≫ f'ab) (rb ≫ f'b) hrfa).naturality _)
-    ((relativePullback ℓ (ra ≫ t) f'ab (rb ≫ f'b) hrfab).naturality _)
-    (relativePullback_comp_app ℓ ra t f'ab (t ≫ f'ab) (rb ≫ f'b) rfl hrfa _) hR6
+  refine frobeniusComparison_comp_aux (E := Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ hR6
+  · exact eqToHom_refl _ _
+  · rw [eqToHom_refl, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+  · rw [eqToHom_refl, CategoryTheory.Functor.map_id]
+  · rw [eqToHom_refl, CategoryTheory.Functor.map_id]
+  · exact (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqa).naturality
+      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ rb pb).inv.app K)
+  · exact map_relativePullback_app_comp_baseChange_app ℓ hT hQ
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ pb).obj K)
+  · exact Functor.map_comp _ _ _
+  · exact (relativePullback ℓ ra (t ≫ f'ab) (rb ≫ f'b) hrfa).naturality _
+  · exact (relativePullback ℓ (ra ≫ t) f'ab (rb ≫ f'b) hrfab).naturality _
+  · exact relativePullback_comp_app ℓ ra t f'ab (t ≫ f'ab) (rb ≫ f'b) rfl hrfa _
 
 end Composition
 end AlgebraicGeometry.ProEtale.CondensedRing
