@@ -74,8 +74,6 @@ lemma classTest_kunnethVerdierMap :
 
 end Test
 
-set_option maxHeartbeats 2000000 in
--- the adjunctions of bounded constructible complexes are unfolded in the defeq checks
 /-- The left projection morphism of a proper morphism after a unit. -/
 lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom]
     [QuasiCompact A.hom] [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
@@ -91,7 +89,10 @@ lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOf
         ((boundedConstructibleUpperStar _ ℓ g).obj (M ⊗ W)) ≫
       (boundedConstructibleLowerShriek ℓ g).map
         (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ g) M W) :=
-  Verdier.leftProjection_unit_app _ _ _ _
+  Verdier.leftProjection_unit_app (boundedConstructibleUpperStar _ ℓ g)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g)
+    (boundedConstructibleExceptionalProjection ℓ g)
     (fun T M ↦ upperStar_map_exceptionalProjection_comp_counit ℓ g T M)
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
     (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M W
