@@ -154,22 +154,32 @@ theorem homComplex_shift_right
       π X.1.unop (X.2⟦n⟧) l p (p + l) rfl =
       ((n.negOnePow • ((F.obj X.1).obj X.2).d (k + n) (l + n)) ≫
         (e X.1.unop X.2 l).hom) ≫ π X.1.unop (X.2⟦n⟧) l p (p + l) rfl
-    rw [Category.assoc,
-      hd X.1.unop (X.2⟦n⟧) k l p (p + l) (p + k) (p + 1)
-        hkl' rfl rfl (by omega),
-      Preadditive.comp_sub]
+    conv_lhs =>
+      rw [Category.assoc]
+      rhs
+      rw [hd X.1.unop (X.2⟦n⟧) k l p (p + l) (p + k) (p + 1)
+        hkl' rfl rfl (by omega)]
+    conv_lhs => rw [Preadditive.comp_sub]
     conv_lhs =>
       rhs
       rw [Linear.comp_units_smul]
     conv_lhs =>
       lhs
-      rw [← Category.assoc, he X.1.unop X.2 k p (p + k) rfl]
+      rw [← Category.assoc]
+      lhs
+      rw [he X.1.unop X.2 k p (p + k) rfl]
     conv_lhs =>
       rhs
       rhs
-      rw [← Category.assoc, he X.1.unop X.2 k (p + 1) (p + l) (by omega)]
+      rw [← Category.assoc]
+      lhs
+      rw [he X.1.unop X.2 k (p + 1) (p + l) (by omega)]
     conv_rhs =>
-      rw [Category.assoc, he X.1.unop X.2 l p (p + l) rfl, Linear.units_smul_comp]
+      rw [Category.assoc]
+      rhs
+      rw [he X.1.unop X.2 l p (p + l) rfl]
+    conv_rhs =>
+      rw [Linear.units_smul_comp]
       rhs
       rw [hd X.1.unop X.2 (k + n) (l + n) p ((p + l) + n) ((p + k) + n) (p + 1)
           (by omega) (by omega) (by omega) (by omega)]
@@ -177,10 +187,9 @@ theorem homComplex_shift_right
     dsimp only [CochainComplex.shiftFunctor_obj_X']
     conv_lhs =>
       lhs
-      congr
-      · skip
-      · rw [homObjMap_units_smul_right (R := R) (𝟙 (X.1.unop.X p))
-          (X.2.d ((p + k) + n) ((p + l) + n)) n.negOnePow]
+      rhs
+      rw [homObjMap_units_smul_right (R := R) (𝟙 (X.1.unop.X p))
+        (X.2.d ((p + k) + n) ((p + l) + n)) n.negOnePow]
     conv_lhs =>
       lhs
       rw [Linear.comp_units_smul]
@@ -205,13 +214,20 @@ theorem homComplex_shift_right
         ((F.map f.1).app (X.2⟦n⟧) ≫ (F.obj Y.1).map (f.2⟦n⟧')).f k) ≫
         π Y.1.unop (Y.2⟦n⟧) k p (p + k) rfl
     conv_lhs =>
-      rw [Category.assoc, he Y.1.unop Y.2 k p (p + k) rfl,
-        hmap X.1.unop Y.1.unop X.2 Y.2 f.1.unop f.2 (k + n) p ((p + k) + n)
-          (by omega)]
+      rw [Category.assoc]
+      rhs
+      rw [he Y.1.unop Y.2 k p (p + k) rfl]
+    conv_lhs =>
+      rw [hmap X.1.unop Y.1.unop X.2 Y.2 f.1.unop f.2 (k + n) p ((p + k) + n)
+        (by omega)]
     conv_rhs =>
-      rw [Category.assoc,
-        hmap X.1.unop Y.1.unop (X.2⟦n⟧) (Y.2⟦n⟧) f.1.unop (f.2⟦n⟧') k p (p + k) rfl,
-        ← Category.assoc, he X.1.unop X.2 k p (p + k) rfl]
+      rw [Category.assoc]
+      rhs
+      rw [hmap X.1.unop Y.1.unop (X.2⟦n⟧) (Y.2⟦n⟧) f.1.unop (f.2⟦n⟧') k p (p + k) rfl]
+    conv_rhs =>
+      rw [← Category.assoc]
+      lhs
+      rw [he X.1.unop X.2 k p (p + k) rfl]
     rfl
 
 end CategoryTheory
