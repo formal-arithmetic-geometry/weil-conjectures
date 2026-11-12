@@ -600,25 +600,27 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
   have := isIso_exchange_triangleShriekTriangle ℓ T''
   have n₁ := compIso_triangleShriekTriangle_naturality ℓ φ₁
   have n₂ := compIso_triangleShriekTriangle_naturality ℓ φ₂
-  refine Iso.trans_symm_eq_of_comm ((𝔽).compIso (triangleShriekTriangle T₀))
-    ((𝔽).compIso (triangleShriekTriangle T)) ((𝔽).compIso (triangleShriekTriangle T''))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (Compactification.Triangle.overCfg T₀) (Compactification.Triangle.overCfg T''))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T''))
-    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf
-      T''.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg
-      T''.cg))
-    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf
-      T''.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
-      T''.cg))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T))
-    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf
-      T₀.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
-      T₀.cg)) n₁ n₂ ?_ ?_
+  let hcf₀ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T₀.cf
+  let hcf₁ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf T''.cf
+  let hcf₂ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf
+  let hcg₀ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T₀.cg
+  let hcg₁ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg
+  let hcg₂ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg
+  let hcfg₀ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+    (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
+  let hcfg₁ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+    (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
+  let hcfg₂ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+    (Compactification.Triangle.overCfg T₀) (Compactification.Triangle.overCfg T'')
+  let hcfg₃ := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+    (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T'')
+  let a₀ := (𝔽).compIso (triangleShriekTriangle T₀)
+  let a := (𝔽).compIso (triangleShriekTriangle T)
+  let a'' := (𝔽).compIso (triangleShriekTriangle T'')
+  let u₀ := NatIso.hcomp hcf₁ hcg₁
+  let u := NatIso.hcomp hcf₂ hcg₂
+  let v := NatIso.hcomp hcf₀ hcg₀
+  refine Iso.trans_symm_eq_of_comm a₀ a a'' hcfg₂ hcfg₃ u₀ u hcfg₀ hcfg₁ v n₁ n₂ ?_ ?_
   · exact congrArg Iso.hom
       ((boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
           (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
@@ -626,22 +628,11 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
         (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
           (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
           (Compactification.Triangle.overCfg T'')).symm)
-  · have hcf := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-      T.cf T₀.cf T''.cf
-    have hcg := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-      T.cg T₀.cg T''.cg
-    have hcf' :
-        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T₀.cf).hom ≫
-            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf T''.cf).hom =
-          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf).hom := by
-      simpa only [Iso.trans_hom] using congrArg Iso.hom hcf
-    have hcg' :
-        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T₀.cg).hom ≫
-            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg).hom =
-          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg).hom := by
-      simpa only [Iso.trans_hom] using congrArg Iso.hom hcg
-    exact (NatTrans.exchange _ _ _ _).symm.trans
-      (congrArg₂ NatTrans.hcomp hcf' hcg')
+  · exact (NatTrans.exchange _ _ _ _).symm.trans (congrArg₂ NatTrans.hcomp
+      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+        T.cf T₀.cf T''.cf))
+      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+        T.cg T₀.cg T''.cg)))
 
 end AnyTriangle
 
