@@ -51,22 +51,25 @@ elab "ph112_remaining" label:str : tactic => do
 
 -- Derived pullbacks repeatedly need these graded tensor colimit facts. Prove them once
 -- for a general coefficient ring, before specializing to the concrete Galois models.
-private lemma gradedTensorFour_condensedModules (T : Scheme.{u})
+/-- Fourfold graded tensor compatibility for modules over a condensed coefficient ring. -/
+lemma gradedTensorFour_condensedModules (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (W X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))) : GradedObject.HasTensor₄ObjExt W X Y Z := inferInstance
 
-private lemma gradedTensorLeft_condensedModules (T : Scheme.{u})
+/-- Left-associated graded tensor products preserve the defining coproducts. -/
+lemma gradedTensorLeft_condensedModules (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))) : GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
 
-private lemma gradedTensorRight_condensedModules (T : Scheme.{u})
+/-- Right-associated graded tensor products preserve the defining coproducts. -/
+lemma gradedTensorRight_condensedModules (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))) : GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
 
-attribute [local instance 2000] gradedTensorFour_condensedModules gradedTensorLeft_condensedModules
+attribute [local instance] gradedTensorFour_condensedModules gradedTensorLeft_condensedModules
   gradedTensorRight_condensedModules
 
 /-- Constructibility of a derived pullback passes to any further factorization. -/
@@ -203,7 +206,6 @@ lemma baseChangeToGaloisModel_comp_generic :
   exact (baseChangeToGaloisLayer_generic_fst_fst_assoc hM b hb v hv _).trans
     (pullback.lift_fst _ _ _)
 
-set_option trace.profiler true in
 /-- **The slicing exchange is the inclusion of the invariants, given the cartesian step**: if the
 pullback exchange of the cartesian part `χ : N'' ⟶ M` of the base change is invertible at `A`
 (`hM1`) and `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space, a subgroup `V` of
