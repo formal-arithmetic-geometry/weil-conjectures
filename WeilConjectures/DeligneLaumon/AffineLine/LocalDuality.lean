@@ -410,6 +410,77 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     show WeilSheaf.directImage (k₀ := k₀) (l := l) j = WeilSheaf.lowerStar j from rfl]
   exact exists_linearEquiv_dual_stalk_higherDirectImage_core j F hF s hsU
 
+private theorem exact_boundary_of_triangle
+    (T : Triangle (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
+    (hT : T ∈ distTriang (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
+    (U R : ℤ → FrobeniusModule.{u, 0} (PadicAlgCl l))
+    (EU : ∀ r, (T.obj₁.cohomologyFrobeniusModule r).Equiv (U r))
+    (EZ : ∀ r, (T.obj₃.cohomologyFrobeniusModule r).Equiv (R r))
+    (hZ : ∀ r, r ≠ 0 → Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier) :
+    (∃ (δ : (R 0).carrier →ₗ[PadicAlgCl l] (U 1).carrier)
+        (g : (U 1).carrier →ₗ[PadicAlgCl l]
+          (T.obj₂.cohomologyFrobeniusModule 1).carrier),
+        Function.Exact δ g ∧ Function.Surjective g ∧
+          (∀ x, δ ((R 0).frobenius x) = (U 1).frobenius (δ x)) ∧
+          ∀ x, g ((U 1).frobenius x) =
+            (T.obj₂.cohomologyFrobeniusModule 1).frobenius (g x)) ∧
+      ∃ h : (U 0).carrier →ₗ[PadicAlgCl l]
+          (T.obj₂.cohomologyFrobeniusModule 0).carrier,
+        Function.Injective h ∧ ∀ x, h ((U 0).frobenius x) =
+          (T.obj₂.cohomologyFrobeniusModule 0).frobenius (h x) := by
+  refine ⟨⟨(EU 1).toLinearEquiv.toLinearMap ∘ₗ WeilComplex.cohomologyδ T 0 1 rfl ∘ₗ
+      (EZ 0).toLinearEquiv.symm.toLinearMap,
+    WeilComplex.cohomologyMap T.mor₁ 1 ∘ₗ (EU 1).toLinearEquiv.symm.toLinearMap, ?_, ?_, ?_, ?_⟩,
+    WeilComplex.cohomologyMap T.mor₁ 0 ∘ₗ (EU 0).toLinearEquiv.symm.toLinearMap, ?_, ?_⟩
+  · intro y
+    have hex := WeilComplex.exact_cohomologyδ_right T 0 1 rfl hT ((EU 1).toLinearEquiv.symm y)
+    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm y) = 0 ↔
+      ∃ x, (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
+        ((EZ 0).toLinearEquiv.symm x)) = y
+    rw [hex]
+    constructor
+    · rintro ⟨x, hx⟩
+      refine ⟨(EZ 0).toLinearEquiv x, ?_⟩
+      rw [LinearEquiv.symm_apply_apply, hx, LinearEquiv.apply_symm_apply]
+    · rintro ⟨x, hx⟩
+      refine ⟨(EZ 0).toLinearEquiv.symm x, ?_⟩
+      rw [← hx, LinearEquiv.symm_apply_apply]
+  · intro z
+    have := hZ 1 one_ne_zero
+    obtain ⟨x, hx⟩ := (WeilComplex.exact_cohomologyMap T 1 hT z).1 (Subsingleton.elim _ _)
+    refine ⟨(EU 1).toLinearEquiv x, ?_⟩
+    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm
+      ((EU 1).toLinearEquiv x)) = z
+    rw [LinearEquiv.symm_apply_apply, hx]
+  · intro x
+    change (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
+        ((EZ 0).toLinearEquiv.symm ((R 0).frobenius x))) =
+      (U 1).frobenius ((EU 1).toLinearEquiv
+        (WeilComplex.cohomologyδ T 0 1 rfl ((EZ 0).toLinearEquiv.symm x)))
+    erw [(EZ 0).symm_map_frobenius x, WeilComplex.cohomologyδ_frobenius, (EU 1).map_frobenius]
+    rfl
+  · intro x
+    change WeilComplex.cohomologyMap T.mor₁ 1
+        ((EU 1).toLinearEquiv.symm ((U 1).frobenius x)) =
+      (T.obj₂.cohomologyFrobeniusModule 1).frobenius
+        (WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm x))
+    erw [(EU 1).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
+    rfl
+  · refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+    change WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x) = 0 at hx
+    obtain ⟨z, hz⟩ := (WeilComplex.exact_cohomologyδ_right T (-1) 0 (by norm_num) hT _).1 hx
+    have := hZ (-1) (by norm_num)
+    rw [Subsingleton.elim z 0, map_zero] at hz
+    have := congrArg (EU 0).toLinearEquiv hz
+    rwa [LinearEquiv.apply_symm_apply, map_zero, eq_comm] at this
+  · intro x
+    change WeilComplex.cohomologyMap T.mor₁ 0
+        ((EU 0).toLinearEquiv.symm ((U 0).frobenius x)) =
+      (T.obj₂.cohomologyFrobeniusModule 0).frobenius
+        (WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x))
+    erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
+    rfl
+
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
