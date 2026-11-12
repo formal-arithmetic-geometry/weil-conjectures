@@ -41,8 +41,7 @@ private theorem isoPullbackAdditiveStalkIso_smul
   rw [Scheme.Modules.restrictStalkNatIso_inv_smul, map_smul]
   rfl
 
-set_option maxHeartbeats 500000 in
-set_option trace.profiler true in
+set_option profiler true in
 -- Identifying the complex composition factors reduces several stalk functor types.
 /-- Scalar compatibility of the fixed additive comparison; this assertion does not involve
 input-complex coordinates or the coefficient-one equation.
@@ -147,14 +146,14 @@ theorem canonicalSpectrum_tensor_comparison_smul
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0).inv.f k
   change e (c (b (a (d • t)))) =
     canonicalSpectrumStalkEquiv X' z z0 rfl d • e (c (b (a t)))
-  rw [map_smul]
-  rw [show b (d • a t) = (j.stalkMap z0).hom d •
-    (show (S0.obj ((Scheme.Modules.tensorPullback j).obj (Pg.X k))) from b (a t)) from
-      isoPullbackAdditiveStalkIso_smul j z0 (Pg.X k) d (a t)]
-  rw [map_smul, map_smul]
-  congr 1
-  simp only [canonicalSpectrumStalkEquiv, eqToIso_refl, Iso.refl_trans]
-  rfl
+  have hb := isoPullbackAdditiveStalkIso_smul j z0 (Pg.X k) d (a t)
+  have hd : (j.stalkMap z0).hom d = canonicalSpectrumStalkEquiv X' z z0 rfl d := by
+    simp only [canonicalSpectrumStalkEquiv, eqToIso_refl, Iso.refl_trans]
+    rfl
+  exact (congrArg (fun v ↦ e (c (b v))) (map_smul a d t)).trans
+    ((congrArg (fun v ↦ e (c v)) hb).trans
+      ((congrArg e (map_smul c _ _)).trans
+        ((map_smul e _ _).trans (congrArg (fun r ↦ r • e (c (b (a t)))) hd))))
 
 
 end AlgebraicGeometry.SingleComplexBaseChange
