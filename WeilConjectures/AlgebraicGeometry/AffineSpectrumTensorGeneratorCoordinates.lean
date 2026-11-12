@@ -81,7 +81,6 @@ def affineSpectrumTensorAdditiveIso
         (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0).symm
   H
 
-set_option maxHeartbeats 500000 in
 -- Comparing the fixed stalk complexes unfolds many colimit and scalar-transport types.
 set_option linter.unusedVariables false in
 /-- Affine stalk coordinates and the formula for the canonical additive comparison
