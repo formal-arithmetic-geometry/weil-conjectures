@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRingedTensorChainComparison
 public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComparison
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedUnderivedBinarySquare
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 
 /-! # The binary square for normalized native tensor complexes -/
 
@@ -123,18 +124,8 @@ theorem native_weil_tensor_ringed_binary_chain_square
   have ht := D.b.square.hom.naturality
     (HomologicalComplex.ιMapBifunctor Q P T (.up ℤ) p q n hpq)
   dsimp only [Functor.comp_map] at ht
-  have hi : RingedForgetTensorTransposition.tensorSummand D.b.K D.b.Q
-      (F.obj (E.obj P)) (F.obj (E.obj Q)) q p n hqp ≫
-        (τ.hom.app P ⊗ₘ τ.hom.app Q).f n =
-      (D.b.square.hom.app (P.X q) ⊗ₘ D.b.square.hom.app (Q.X p)) ≫
-        RingedForgetTensorTransposition.tensorSummand D.b.K D.b.Q
-          (G.obj (U.obj P)) (G.obj (U.obj Q)) q p n hqp := by
-    change HomologicalComplex.ιTensorObj _ _ q p n hqp ≫ _ = _
-    rw [MonoidalCategory.tensorHom_def, HomologicalComplex.comp_f]
-    erw [CochainComplex.Monoidal.ι_whiskerRight_assoc,
-      CochainComplex.ιTensorObj_whiskerLeft_f]
-    rw [← MonoidalCategory.tensorHom_def_assoc]
-    rfl
+  have hi := CochainComplex.ιTensorObj_tensorHom_f
+    (τ.hom.app P) (τ.hom.app Q) q p n hqp
   exact binaryChainSquare_of_summands D.b.forget D.b.ordinary.functor
     ((p * q).negOnePow : ℤ) hs hr hc ho ht hi hb
 
