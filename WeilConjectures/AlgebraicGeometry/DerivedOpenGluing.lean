@@ -28,29 +28,15 @@ namespace AlgebraicGeometry
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-private theorem derivedOpenGluing_overFunctor_additive
-    {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (U : C)
-    [Preadditive (SheafOfModules.{u} R)] [Preadditive (SheafOfModules.{u} (R.over U))] :
-    (SheafOfModules.overFunctor.{u} R U).Additive :=
-  Functor.additive_of_preserves_binary_products _
-
-private theorem derivedOpenGluing_overMap_additive
-    {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
-    {U V : C} (i : U ⟶ V)
-    [Preadditive (SheafOfModules.{u} (R.over U))]
-    [Preadditive (SheafOfModules.{u} (R.over V))] :
-    (SheafOfModules.overMap.{u} R i).Additive :=
-  Functor.additive_of_preserves_binary_products _
-
-private theorem derivedOpenGluing_equivalence_additive
+private theorem derivedOpenGluing_additive_of_preservesFiniteLimits
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-    [HasBinaryProducts C] [HasZeroObject C] (e : C ≌ D) :
-    e.functor.Additive :=
+    [HasFiniteProducts C] [HasZeroObject C] (F : C ⥤ D) [PreservesFiniteLimits F] :
+    F.Additive :=
   Functor.additive_of_preserves_binary_products _
 
--- Infer additivity componentwise, without searching for products of composite functors.
-attribute [local instance] derivedOpenGluing_overFunctor_additive
-  derivedOpenGluing_overMap_additive derivedOpenGluing_equivalence_additive
+-- Use finite-limit preservation directly, avoiding the circular search through additivity
+-- when inferring preservation of binary products and zero morphisms separately.
+attribute [local instance] derivedOpenGluing_additive_of_preservesFiniteLimits
 
 private theorem compatible_composites
     {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
