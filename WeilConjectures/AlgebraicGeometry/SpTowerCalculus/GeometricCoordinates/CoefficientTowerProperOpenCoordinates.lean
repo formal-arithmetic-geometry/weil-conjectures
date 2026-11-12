@@ -183,10 +183,12 @@ private structure OrdinaryModel
   horizontal : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : SS l E X (σ X))
     {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
     (x : ((EE l E Y (σ Y) m).obj ((push f).obj M)).val.obj V),
-    ((evalP f n).hom.app M).val.app V
-        (SpTowerShriek.HS l E Y (σ Y) h ((push f).obj M) V x) =
+    SpTowerShriek.pushSection (SpTowerShriek.R l E n) f ((EE l E X (σ X) n).obj M) V
+      (((evalP f n).hom.app M).val.app V
+        (SpTowerShriek.HS l E Y (σ Y) h ((push f).obj M) V x)) =
       SpTowerShriek.HS l E X (σ X) h M (SpTowerShriek.chart f V)
-        (((evalP f m).hom.app M).val.app V x)
+        (SpTowerShriek.pushSection (SpTowerShriek.R l E m) f ((EE l E X (σ X) m).obj M) V
+          (((evalP f m).hom.app M).val.app V x))
   comparison : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : SS l E X (σ X) ⥤ SS l E Y (σ Y)) (_d : G ≅ push f),
     (presentation X).inverse ⋙ G ⋙ (presentation Y).functor ≅
