@@ -328,7 +328,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsTensorComplexFunctor,
     integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
     podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-    ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj] at *
+    ObjectProperty.ι_obj, ObjectProperty.lift, ObjectProperty.lift_obj_obj] at *
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
@@ -336,7 +336,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsTensorComplexFunctor,
     integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
     podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-    ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj] at hs
+    ObjectProperty.ι_obj, ObjectProperty.lift, ObjectProperty.lift_obj_obj] at hs
   let a := (podOrdinaryReindex l E g).map
     ((integralCompletedTensorComparison l E Y).hom.app (P, Q))
   let b := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app
@@ -392,6 +392,8 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
   have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
+  dsimp only [a, b, eP, eQ, e, Iso.app, podOrdinaryReindex, podGoodReindex,
+    ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj] at cancelTower
   have cancelHs := cancelTower hs
   trace "normalization supplied"
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
