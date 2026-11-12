@@ -209,7 +209,56 @@ theorem sectionInvariantEtaleIso_sectionInvariantIso [QuasiCompact g] [QuasiComp
     (sectionInvariantEtaleIso Λ e g g' hg s s' hs).hom ≫ (D.sectionInvariantIso Λ aB).hom =
       (D'.sectionInvariantIso Λ aB).hom ≫
         (sectionInvariantEtaleIso Λ ψ N.proj N'.proj hπ N.zeroSection N'.zeroSection hz).hom := by
-  sorry
+  have := quasiSeparatedSpace_of_quasiSeparated aB
+  have := D.isIso_dualizingComplexBaseChangeMap Λ D.isPullback_oneFibre
+  have := D.isIso_dualizingComplexBaseChangeMap Λ D.isPullback_zeroFibre
+  have := D'.isIso_dualizingComplexBaseChangeMap Λ D'.isPullback_oneFibre
+  have := D'.isIso_dualizingComplexBaseChangeMap Λ D'.isPullback_zeroFibre
+  -- the étale identifications commute with restriction to `t = 1` and `t = 0`
+  have c₁ := sectionInvariantEtaleIso_baseChange Λ E D.proj D'.proj hE
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) g g' D.oneFibre D'.oneFibre
+    D.isPullback_oneFibre D'.isPullback_oneFibre e hg h₁.symm D.sect D'.sect hsect s s' hs
+    D.comp_oneFibre D'.comp_oneFibre
+  have c₀ := sectionInvariantEtaleIso_baseChange Λ E D.proj D'.proj hE
+    (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B) N.proj N'.proj D.zeroFibre D'.zeroFibre
+    D.isPullback_zeroFibre D'.isPullback_zeroFibre ψ hπ h₀.symm D.sect D'.sect hsect
+    N.zeroSection N'.zeroSection hz D.comp_zeroFibre D'.comp_zeroFibre
+  change _ = _ ≫ (sectionInvariantEtaleIso Λ ψ N.proj N'.proj hπ N.zeroSection N'.zeroSection
+    hz).hom at c₀
+  let ηE := sectionInvariantEtaleIso Λ E D.proj D'.proj hE D.sect D'.sect hsect
+  let ηe := sectionInvariantEtaleIso Λ e g g' hg s s' hs
+  let κ := D.familyObjectIso Λ aB (D.oneFibreIso Λ)
+  -- the comparison of `D` transported along the étale identifications is the one of `D'`
+  have hκ : ηE ≪≫ κ ≪≫ (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).mapIso ηe.symm =
+      D'.familyObjectIso Λ aB (D'.oneFibreIso Λ) := by
+    refine D'.eq_familyObjectIso Λ aB _ _ ?_
+    have n := (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) _ _
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).hom.naturality ηe.inv
+    simp only [Functor.comp_map, Functor.id_map] at n
+    have hn := D.leftDerivedUpperStar_map_familyObjectIso_hom_comp Λ aB (D.oneFibreIso Λ)
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Functor.map_comp,
+      Category.assoc, n]
+    rw [reassoc_of% hn]
+    change (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).map ηE.hom ≫
+      (sectionInvariantBaseChangeIso Λ D.isPullback_oneFibre D.sect s D.comp_oneFibre).hom ≫
+        ηe.inv = _
+    rw [reassoc_of% c₁]
+    simp [oneFibreIso, ηe]
+  have k₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).map
+        ηE.inv ≫ (sectionInvariantBaseChangeIso Λ D'.isPullback_zeroFibre D'.sect N'.zeroSection
+          D'.comp_zeroFibre).hom ≫
+        (sectionInvariantEtaleIso Λ ψ N.proj N'.proj hπ N.zeroSection N'.zeroSection hz).hom =
+      (sectionInvariantBaseChangeIso Λ D.isPullback_zeroFibre D.sect N.zeroSection
+        D.comp_zeroFibre).hom := by
+    rw [← c₀, ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+      Category.id_comp]
+  have n := (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) _ _
+    (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) B)).inv.naturality ηe.hom
+  simp only [Functor.comp_map, Functor.id_map] at n
+  simp only [sectionInvariantIso, sectionInvariantIsoOfFibreIso, ← hκ, zeroFibreIso, Iso.trans_hom,
+    Iso.symm_hom, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Iso.symm_inv, Functor.map_comp,
+    Category.assoc, k₀]
+  rw [reassoc_of% n]
 
 end Scheme.Hom.DeformationToNormalConeData
 
