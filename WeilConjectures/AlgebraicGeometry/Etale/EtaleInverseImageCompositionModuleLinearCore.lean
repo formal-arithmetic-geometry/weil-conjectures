@@ -248,6 +248,79 @@ private theorem comparison_forget_of_units
   exact (paste_rectangle a (d.hom.app N) (r.map e.hom) (r'.map e.hom)
     (d.hom.app (l'.obj G)) (b'.unit.app G) (d.hom.naturality e.hom) he).trans hm.symm
 
+/-- Forget the left comparison using the module and sheaf mate equations on arbitrary sites. -/
+private theorem pushforward_left_comparison_forget
+    {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+    (J₁ : GrothendieckTopology C₁) (J₂ : GrothendieckTopology C₂)
+    (J₃ : GrothendieckTopology C₃) (f : C₁ ⥤ C₂) (g : C₂ ⥤ C₃) (h : C₁ ⥤ C₃)
+    [f.IsContinuous J₁ J₂] [g.IsContinuous J₂ J₃] [h.IsContinuous J₁ J₃]
+    (S₁ : Sheaf J₁ RingCat.{u + 1}) (S₂ : Sheaf J₂ RingCat.{u + 1})
+    (S₃ : Sheaf J₃ RingCat.{u + 1})
+    (φ : S₁ ⟶ (f.sheafPushforwardContinuous RingCat J₁ J₂).obj S₂)
+    (ψ : S₂ ⟶ (g.sheafPushforwardContinuous RingCat J₂ J₃).obj S₃)
+    (χ : S₁ ⟶ (h.sheafPushforwardContinuous RingCat J₁ J₃).obj S₃)
+    (L₁ : SheafOfModules.{u + 1} S₁ ⥤ SheafOfModules.{u + 1} S₂)
+    (L₂ : SheafOfModules.{u + 1} S₂ ⥤ SheafOfModules.{u + 1} S₃)
+    (L₃ : SheafOfModules.{u + 1} S₁ ⥤ SheafOfModules.{u + 1} S₃)
+    (l₁ : Sheaf J₁ AddCommGrpCat.{u + 1} ⥤ Sheaf J₂ AddCommGrpCat.{u + 1})
+    (l₂ : Sheaf J₂ AddCommGrpCat.{u + 1} ⥤ Sheaf J₃ AddCommGrpCat.{u + 1})
+    (l₃ : Sheaf J₁ AddCommGrpCat.{u + 1} ⥤ Sheaf J₃ AddCommGrpCat.{u + 1})
+    (a : L₁ ⋙ L₂ ⊣ SheafOfModules.pushforward ψ ⋙ SheafOfModules.pushforward φ)
+    (a' : L₃ ⊣ SheafOfModules.pushforward χ)
+    (b : l₁ ⋙ l₂ ⊣ g.sheafPushforwardContinuous AddCommGrpCat J₂ J₃ ⋙
+      f.sheafPushforwardContinuous AddCommGrpCat J₁ J₂)
+    (b' : l₃ ⊣ h.sheafPushforwardContinuous AddCommGrpCat J₁ J₃)
+    (e₁ : L₁ ⋙ SheafOfModules.toSheaf S₂ ≅ SheafOfModules.toSheaf S₁ ⋙ l₁)
+    (e₂ : L₂ ⋙ SheafOfModules.toSheaf S₃ ≅ SheafOfModules.toSheaf S₂ ⋙ l₂)
+    (e₃ : L₃ ⋙ SheafOfModules.toSheaf S₃ ≅ SheafOfModules.toSheaf S₁ ⋙ l₃)
+    (d : SheafOfModules.pushforward χ ≅
+      SheafOfModules.pushforward ψ ⋙ SheafOfModules.pushforward φ)
+    (c : L₁ ⋙ L₂ ≅ L₃)
+    (δ : h.sheafPushforwardContinuous AddCommGrpCat J₁ J₃ ≅
+      g.sheafPushforwardContinuous AddCommGrpCat J₂ J₃ ⋙
+        f.sheafPushforwardContinuous AddCommGrpCat J₁ J₂)
+    (γ : l₁ ⋙ l₂ ≅ l₃)
+    (hd : ∀ F, (SheafOfModules.toSheaf S₁).map (d.hom.app F) =
+      δ.hom.app ((SheafOfModules.toSheaf S₃).obj F))
+    (hu : ∀ G, a.unit.app G ≫
+      (SheafOfModules.pushforward ψ ⋙ SheafOfModules.pushforward φ).map (c.hom.app G) =
+      a'.unit.app G ≫ d.hom.app (L₃.obj G))
+    (hc : ∀ G F (k : (L₁ ⋙ L₂).obj G ⟶ F),
+      (SheafOfModules.toSheaf S₁).map (a.homEquiv G F k) =
+      b.homEquiv ((SheafOfModules.toSheaf S₁).obj G) ((SheafOfModules.toSheaf S₃).obj F)
+        (l₂.map (e₁.inv.app G) ≫ e₂.inv.app (L₁.obj G) ≫ (SheafOfModules.toSheaf S₃).map k))
+    (he : ∀ G, (SheafOfModules.toSheaf S₁).map (a'.unit.app G) ≫
+      (h.sheafPushforwardContinuous AddCommGrpCat J₁ J₃).map (e₃.hom.app G) =
+      b'.unit.app ((SheafOfModules.toSheaf S₁).obj G))
+    (hm : ∀ G, b.unit.app G ≫
+      (g.sheafPushforwardContinuous AddCommGrpCat J₂ J₃ ⋙
+        f.sheafPushforwardContinuous AddCommGrpCat J₁ J₂).map (γ.hom.app G) =
+      b'.unit.app G ≫ δ.hom.app (l₃.obj G)) (G : SheafOfModules.{u + 1} S₁) :
+    (SheafOfModules.toSheaf S₃).map (c.hom.app G) ≫ e₃.hom.app G =
+      e₂.hom.app (L₁.obj G) ≫ l₂.map (e₁.hom.app G) ≫
+        γ.hom.app ((SheafOfModules.toSheaf S₁).obj G) := by
+  let U := SheafOfModules.toSheaf.{u + 1} S₁
+  let V := SheafOfModules.toSheaf.{u + 1} S₃
+  let ec := e₂.app (L₁.obj G) ≪≫ l₂.mapIso (e₁.app G)
+  have hmap : U.map (a.homEquiv G (L₃.obj G) (c.hom.app G)) =
+      U.map (a'.unit.app G) ≫ U.map (d.hom.app (L₃.obj G)) :=
+    map_homEquiv_of_unit U a G (L₃.obj G) (c.hom.app G)
+      (a'.unit.app G) (d.hom.app (L₃.obj G)) (hu G)
+  have hmap' : U.map (a'.unit.app G) ≫ U.map (d.hom.app (L₃.obj G)) =
+      U.map (a'.unit.app G) ≫ δ.hom.app (V.obj (L₃.obj G)) :=
+    congrArg (fun k ↦ U.map (a'.unit.app G) ≫ k) (hd (L₃.obj G))
+  have hc' : b.homEquiv (U.obj G) (V.obj (L₃.obj G)) (ec.inv ≫ V.map (c.hom.app G)) =
+      U.map (a'.unit.app G) ≫ δ.hom.app (V.obj (L₃.obj G)) := by
+    change b.homEquiv (U.obj G) (V.obj (L₃.obj G))
+      ((l₂.map (e₁.inv.app G) ≫ e₂.inv.app (L₁.obj G)) ≫ V.map (c.hom.app G)) = _
+    rw [Category.assoc]
+    exact (hc G (L₃.obj G) (c.hom.app G)).symm.trans (hmap.trans hmap')
+  have hh : V.map (c.hom.app G) ≫ e₃.hom.app G = ec.hom ≫ γ.hom.app (U.obj G) :=
+    comparison_forget_of_units b b' δ γ (U.obj G) ec (e₃.app G)
+      (V.map (c.hom.app G)) (U.map (a'.unit.app G)) hc' (he G) (hm (U.obj G))
+  exact hh.trans (Category.assoc (e₂.hom.app (L₁.obj G)) (l₂.map (e₁.hom.app G))
+    (γ.hom.app (U.obj G)))
+
 /-- Maps of constant ring sheaves agreeing on constant sections respect pullback pasting. -/
 private theorem constantSheaf_composition_map
     {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
@@ -574,29 +647,8 @@ theorem etaleInverseImageCompositionModuleLinearCore
   · intro F
     ext W x
     rfl
-  · intro G
-    let ec := eV.app (LU.obj G) ≪≫ lv.mapIso (eU.app G)
-    have hc : (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
-        (ec.inv ≫ UZ.map (c.hom.app G)) =
-        UX.map (aUV.unit.app G) ≫ d0.hom.app (UZ.obj (LUV.obj G)) := by
-      change (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
-        ((lv.map (eU.inv.app G) ≫ eV.inv.app (LU.obj G)) ≫ UZ.map (c.hom.app G)) = _
-      rw [Category.assoc]
-      have hmap : UX.map ((aU.comp aV).homEquiv G (LUV.obj G) (c.hom.app G)) =
-          UX.map (aUV.unit.app G) ≫ UX.map (d.hom.app (LUV.obj G)) :=
-        map_homEquiv_of_unit UX (aU.comp aV) G (LUV.obj G) (c.hom.app G)
-          (aUV.unit.app G) (d.hom.app (LUV.obj G)) (hu G)
-      have hmap' : UX.map (aUV.unit.app G) ≫ UX.map (d.hom.app (LUV.obj G)) =
-          UX.map (aUV.unit.app G) ≫ d0.hom.app (UZ.obj (LUV.obj G)) :=
-        congrArg (fun k : UX.obj ((SheafOfModules.pushforward chi).obj (LUV.obj G)) ⟶
-            UX.obj ((SheafOfModules.pushforward psi ⋙
-              SheafOfModules.pushforward phi).obj (LUV.obj G)) ↦
-          UX.map (aUV.unit.app G) ≫ k) (hd (LUV.obj G))
-      exact (hcomp G (LUV.obj G) (c.hom.app G)).symm.trans (hmap.trans hmap')
-    have hh : UZ.map (c.hom.app G) ≫ eUV.hom.app G = ec.hom ≫ c0.hom.app (UX.obj G) :=
-      comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
-        (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
-    exact hh.trans (Category.assoc (eV.hom.app (LU.obj G)) (lv.map (eU.hom.app G))
-      (c0.hom.app (UX.obj G)))
+  · exact pushforward_left_comparison_forget JX JY JZ f g h SX SY SZ phi psi chi
+      LU LV LUV lu lv luv (aU.comp aV) aUV (au.comp av) auv eU eV eUV d c d0 c0
+      hd hu hcomp hunit hmate
 
 end AlgebraicGeometry
