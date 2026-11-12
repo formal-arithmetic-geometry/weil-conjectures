@@ -663,7 +663,7 @@ theorem compactSupportExchangeOfCompactification_comp_app
     (compactSupportExchangeOfCompactification ℓ hM hS (comp_toPoint ι) (comp_toPoint ι') ψ a ha)
     (heq_of_eq (compactSupportExchangeOfCompactification_eq_lift (ι₃ := ι) (ι₃' := ι') ℓ hM hS ψ a
       ha)) (fun M ↦ ?_) K
-  · exact h
+  · cast_proofs h
   refine ⟨((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j ι).hom.app M).hom ≫
       D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
         ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app M).hom,
