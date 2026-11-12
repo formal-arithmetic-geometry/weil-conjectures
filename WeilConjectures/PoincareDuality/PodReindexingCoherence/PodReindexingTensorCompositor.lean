@@ -369,6 +369,9 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingRing l E Z s) ((podReindexingComplexFunctor l E (h ≫ g) s).obj P)
         ((podReindexingComplexFunctor l E (h ≫ g) s).obj L) p q n hpq U x y) = z :=
     hi.symm.trans hcancel
+  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
+  rw [hi']
   sorry
 
 set_option maxHeartbeats 8000000 in
