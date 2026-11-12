@@ -351,8 +351,8 @@ theorem tensorCounit_coordinateEquation
   exact tensorCounit_resolution_transfer
     (modelMap_natural X P0 G0 P G r s)
     (hε _ _ t)
-    (by simpa only [Functor.map_comp] using congrArg
-      (fun f ↦ (DerivedCategory.Q.{w}
+    (by simpa only [Functor.map_comp] using
+      congrArg (fun f ↦ (DerivedCategory.Q.{w}
         (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).map f) hchain)
     (hτ.2 _ _ _ _ (DerivedCategory.Q.map r) (DerivedCategory.Q.map s))
     (hε _ _ r) (hε _ _ s)
