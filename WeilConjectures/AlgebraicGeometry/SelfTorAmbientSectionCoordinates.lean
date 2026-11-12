@@ -30,7 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
 /-- Algebraic self-Tor gives linear coordinates on the affine sections of the
 ambient tensor homology, compatible with augmented resolution comparisons.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG and Tag 00LS.
@@ -132,7 +131,7 @@ theorem exists_selfTor_ambient_section_coordinates
   have heq := H.homologyMap_eq n
   intro e q x
   have hnat := hc₀ ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)
-  simp only [c, LinearEquiv.trans_apply, CategoryTheory.Iso.toLinearEquiv_apply]
+  simp only [c]
   change _ = d V
     ((R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).hom
       ((R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv

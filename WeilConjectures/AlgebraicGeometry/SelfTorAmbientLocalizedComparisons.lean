@@ -35,7 +35,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 
-set_option trace.profiler true in
 /-- Ambient affine coordinates compatible with one localized resolution comparison for each
 basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts.
 Source: Stacks Project, Tag 08DX(2), with Tags 06YG and 00LS(1).
@@ -109,6 +108,7 @@ theorem exists_selfTor_ambient_localized_comparisons
   classical
   let := SheafOfModules.monoidalCategory Y.sheaf
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  -- Reuse the abelian structure instead of synthesizing it at each comparison step.
   let : Abelian C := inferInstance
   let N := (CochainComplex.singleFunctor C 0).obj B
   obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
