@@ -319,7 +319,6 @@ private theorem exceptionalLevelRealization_equivalence
 
 attribute [local instance] exceptionalForget exceptionalLevelRealization_equivalence
 
-set_option trace.profiler true in
 /-- The scalar action of a realized module is the action of the corresponding constant section. -/
 private theorem exceptionalLevelRealization_smul
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
@@ -340,7 +339,6 @@ private theorem exceptionalLevelRealization_smul
           (RingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U c)) • x = _
   rw [constantRingScalar]
 
-set_option trace.profiler true in
 /-- A sectionwise linear isomorphism of underlying sheaves lifts uniquely to module sheaves. -/
 private theorem exceptionalModuleSheafIso_existsUnique
     {C D : Type*} [Category C] [Category D] (J : GrothendieckTopology C)
@@ -394,7 +392,6 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O) (W : Scheme.{u})
   (S : CoefficientSystemOrdinaryImage (J := W.smallEtaleTopology)
     (K := Scheme.ProEt.topology W) O ell _ _ (Scheme.proEtaleSiteComparison W))
 
-set_option trace.profiler true in
 -- Lift the underlying right-adjoint comparison using the counit's linearity.
 private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     ∃! e : S.right n ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n ≅
@@ -406,6 +403,7 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
         (U : W.Etaleᵒᵖ) (x : ((S.right n).obj M).val.obj U),
         (e.hom.app M).hom.app U x =
           ((S.rightUnderlying n).hom.app M).hom.app U x := by
+  -- Share these instances between the realization functors and their scalar-action formulas.
   have : HasWeakSheafify W.smallEtaleTopology RingCat.{u + 1} := inferInstance
   have : HasWeakSheafify (Scheme.ProEt.topology W) RingCat.{u + 1} := inferInstance
   have : W.smallEtaleTopology.PreservesSheafification
@@ -725,7 +723,6 @@ private theorem exceptional_transpose_conjugate
   simpa only [Category.assoc, ← G.map_comp, eY.inv_hom_id, G.map_id,
     Category.comp_id] using h
 
-set_option trace.profiler true in
 -- Assemble the derived comparison and all evaluation and scalar-mate clauses.
 /-- The site comparison core, before the final evaluation-origin projection.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.
