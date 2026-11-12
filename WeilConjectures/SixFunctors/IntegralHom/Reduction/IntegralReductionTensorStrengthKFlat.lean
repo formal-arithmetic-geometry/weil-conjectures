@@ -326,7 +326,7 @@ private theorem reductionNat_app
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (reductionNat l E X D hl n).app P = reductionCounit l E X D hl n P := rfl
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionCounit_isIso
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -336,7 +336,7 @@ private theorem reductionCounit_isIso
   unfold reductionCounit
   infer_instance
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem restrictionComparison_eq
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
@@ -463,7 +463,7 @@ private noncomputable def coefficientIso (M : Modules.{t, u} X R) :
     (SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
       (R := R) (coefficient X R S c) M).symm
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Compare the scalar and module sheafifications explicitly.
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in
@@ -536,7 +536,7 @@ private noncomputable def levelIso (n : ℕ) (M : scalarReductionSource l E X) :
     (eqToIso ((scalarReductionExistence.{t, u} l E X n).choose_spec.choose M)) ≪≫
     coefficientIso X (base X l E) (level X l E n) (projection X l E n) M
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Total tensor comparison types require unfolding the coefficient wrappers.
 private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
     (U : X.ProEtᵒᵖ) (s : (level X l E n).obj.obj U) (x : M.val.obj U) :
@@ -661,7 +661,7 @@ private theorem beta_scalar (n : ℕ)
   erw [totalPair_smul_right, map_smul, hbeta]
   exact (reduction_smul X l E n _ V s _).symm
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- The unit normalization crosses the finite coefficient wrappers.
 private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
     {V W : X.ProEtᵒᵖ} (i : V ⟶ W) (x : M.val.obj V) :
@@ -981,7 +981,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   completedIntegralCommRingSheafUnrestricted integralCoefficientCommRingSheaf
   integralCoefficientSheaf
 
-set_option maxHeartbeats 16000000 in
+set_option profiler true in
 -- Keep the coefficient wrappers folded while elaborating the comparison squares.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
 This is a one-level calculation: no consecutive quotient map occurs in it.
@@ -1244,7 +1244,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-set_option maxHeartbeats 16000000 in
+set_option profiler true in
 -- Elaborating the normalized contraction retains independent coefficient universes.
 /-- The normalized reduction tensor mate is invertible on K-flat representatives.
 Source: Stacks 03CZ, 06YY, 07A4; integral Hom reduction, paragraphs 1--2.
