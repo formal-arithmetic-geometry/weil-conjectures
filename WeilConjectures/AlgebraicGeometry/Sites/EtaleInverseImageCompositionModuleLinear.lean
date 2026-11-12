@@ -24,6 +24,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The dependent core application exceeds the default heartbeat limit.
 set_option backward.defeqAttrib.useBackward true in
