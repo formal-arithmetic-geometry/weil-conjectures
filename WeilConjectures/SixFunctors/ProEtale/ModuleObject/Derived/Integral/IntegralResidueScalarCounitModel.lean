@@ -49,6 +49,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.mapDerivedCategory
 -- Normalize the inverse scalar mate, retaining ordinary restriction factors.
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Naturality compares the four derived functors with their homotopy models.
 private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -183,6 +184,7 @@ private theorem tensor_counit_app (T : Scheme.{u})
 
 set_option linter.unusedVariables false in
 -- Preserve the original public statement, including its auxiliary SX let.
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The counit calculation compares several composed concrete module functors.
 /-- The scalar pull square, followed by the tensor-presentation counit on X,
