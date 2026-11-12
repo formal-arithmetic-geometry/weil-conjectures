@@ -158,15 +158,20 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk, hΦ])
   have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
       r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
+    let b : Ideal.inertiaInvariants C.functionField Q := ε (r a)
+    have hεr : r b = r a := RingHom.congr_fun hrε (r a)
     have h0 : r (a - ε (r a)) = 0 := by
+      change r (a - b) = 0
       calc
-        r (a - ε (r a)) = r a - r (ε (r a)) := map_sub r _ _
-        _ = 0 := by rw [RingHom.congr_fun hrε, sub_self]
+        r (a - b) = r a - r b := r.map_sub _ _
+        _ = 0 := by rw [hεr, sub_self]
     have h1 : ¬ IsUnit (Ideal.inertiaInvariantsMap C.functionField Q hσF (a - ε (r a))) :=
       fun hu ↦ (hr _).1 h0 (Ideal.isUnit_of_isUnit_inertiaInvariantsMap hσF hu)
     have h2 : r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
         Ideal.inertiaInvariantsMap C.functionField Q hσF (ε (r a))) = 0 := by
-      rw [← map_sub]
+      change r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
+        Ideal.inertiaInvariantsMap C.functionField Q hσF b) = 0
+      rw [← (Ideal.inertiaInvariantsMap C.functionField Q hσF).map_sub]
       exact (hr _).2 h1
     exact (sub_eq_zero.1 ((RingHom.map_sub r _ _).symm.trans h2)).trans
       ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
@@ -270,8 +275,13 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   have ht : (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
       (closedPoint (AlgebraicClosure K)) =
         closedPoint (Ideal.inertiaInvariants C.functionField Q) := by
-    rw [htl]
-    exact specMap_closedPoint_of_forall_eq_zero_iff r hr
+    calc
+      (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
+          (closedPoint (AlgebraicClosure K)) =
+          (Spec.map (CommRingCat.ofHom r)) (closedPoint (AlgebraicClosure K)) :=
+        congrArg (fun f => f (closedPoint (AlgebraicClosure K))) htl
+      _ = closedPoint (Ideal.inertiaInvariants C.functionField Q) :=
+        specMap_closedPoint_of_forall_eq_zero_iff r hr
   -- the punctured neighbourhood
   obtain ⟨e', he'⟩ := exists_iso_pullback_geometricFiberMap hW Q x hxW j c.ϖ (c.opensRange_inf hz)
     c.ϖ_mem (c.ϖ_ne_zero hz) h hhproj
