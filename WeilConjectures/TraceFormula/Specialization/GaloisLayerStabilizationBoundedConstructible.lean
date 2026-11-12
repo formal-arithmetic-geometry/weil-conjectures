@@ -117,7 +117,6 @@ private lemma isIso_card_nsmul_derived_padicAlgClRingObj
   isIso_nsmul_id_derived_padicAlgClRingObj ℓ X hn K
 
 -- the statement involves several large derived functor objects
-set_option profiler true in
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles at an
 integral model. Under the hypotheses of
@@ -160,16 +159,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel h Ω ℓ hdeg C hC E
     K₀ e htors).elim fun L' hL' ↦ ⟨L', ?_⟩
-  let F : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology N.generic) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) N.generic)) :=
-    L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
-  let K := F.obj C
-  letI : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K) :=
+  let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
+  letI : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K.obj) :=
     isIso_card_nsmul_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
-    K
+    K.obj
   have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
     ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app C).symm
   have hstab := (NatTrans.isIso_app_iff_of_iso
@@ -219,7 +213,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_forall
           ∑ τ : L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField,
             (N.galoisLayerAut h Ω (τ.liftNormal Ω)).autAction (Profinite.padicAlgClRingObj ℓ)
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
-  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel N.generic ℓ ⟨_, hC⟩
+  let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
+  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel N.generic ℓ K
   exact N.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel h Ω ℓ hdeg C hC E K₀ e
     (htors E K₀.obj K₀.property)
 
