@@ -323,7 +323,8 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
         ((leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
           (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
             (Profinite.padicAlgClRingObj ℓ) f).inv) := by
-      rw [← Category.assoc, φ.map_unit_comp_pullbackExchange_app]
+      rw [← Category.assoc,
+        φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)]
     _ = N.unit _ ≫ (N.nearbyCycles _).map
         (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv := by
       rw [← hf''']
