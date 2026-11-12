@@ -30,10 +30,11 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 private theorem tensorComparison_binaryMate
     {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D]
-    (F : C ⥤ D) (μ : tensor C ⋙ F ≅ (F.prod F) ⋙ tensor D)
+    (F : C ⥤ D) (μ : MonoidalCategory.tensor C ⋙ F ≅
+      (F.prod F) ⋙ MonoidalCategory.tensor D)
     {P Q H I : C} {H' : D} (f : Q ⟶ H) (h : F.obj H ⟶ H')
     (ev : H ⊗ P ⟶ I) (ev' : H' ⊗ F.obj P ⟶ F.obj I)
-    (he : μ.hom.app (H, P) ≫ (tensor D).map (h, 𝟙 (F.obj P)) ≫ ev' = F.map ev) :
+    (he : μ.hom.app (H, P) ≫ (MonoidalCategory.tensor D).map (h, 𝟙 (F.obj P)) ≫ ev' = F.map ev) :
     μ.hom.app (Q, P) ≫ ((F.map f ≫ h) ⊗ₘ 𝟙 (F.obj P)) ≫ ev' =
       F.map ((f ⊗ₘ 𝟙 P) ≫ ev) := by
   have hn := μ.hom.naturality (show (Q, P) ⟶ (H, P) from (f, 𝟙 P))
@@ -278,7 +279,8 @@ private theorem binary_square
     (b.square.hom.app I)
     (b.underived.tensor.hom.app (b.native.functor.obj Q, b.native.functor.obj P) ≫
       (b.square.hom.app Q ⊗ₘ b.square.hom.app P))
-    (by simpa only [Iso.trans_inv, Functor.mapIso_inv, Category.assoc] using hv)
+    (by simpa only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv,
+      Category.assoc, Functor.comp_obj, Functor.uncurry_obj_obj, I] using hv)
 
 
 set_option profiler true in
@@ -317,7 +319,7 @@ private theorem underived_swap_square
     b.square.hom.app ((T.obj Q).obj P) ≫ O.map (U.map s.hom) at hn
   apply (Iso.cancel_iso_hom_left (O.mapIso (e.app (Q, P))) _ _).mp
   apply (Iso.cancel_iso_hom_left (b.square.app ((T.obj Q).obj P)) _ _).mp
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.mapIso_hom, Iso.app_hom, Functor.map_comp, Category.assoc]
   rw [← O.map_comp_assoc, Iso.hom_inv_id_app, O.map_id, Category.id_comp]
   rw [← reassoc_of% hn, ← h₁, ← b.forget.map_comp_assoc, hs]
   simp only [b.forget.map_comp, Category.assoc]
