@@ -114,6 +114,7 @@ private theorem forward_associativity_of_inverse
   erw [hl, Category.comp_id]
 
 attribute [local irreducible] SheafOfModules.monoidalCategory Mod.monoidalCategoryStruct
+  Mod.monoidalCategoryCochainComplex
 attribute [local implicit_reducible] Mod.monoidalCategory Monoidal.induced
 
 -- Compare the abstract native and ringed total-tensor instances through their APIs.
