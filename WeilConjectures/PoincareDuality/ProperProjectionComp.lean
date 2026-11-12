@@ -29,6 +29,29 @@ universe u
 open CategoryTheory MonoidalCategory Functor.OplaxMonoidal
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
+
+namespace CategoryTheory.Adjunction
+
+/-- Transport the projection morphism to a composite adjunction and expand its two factors. -/
+lemma projectionMorphism_eq_of_iso_comp
+    {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+    [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory C₃]
+    {F : C₃ ⥤ C₁} {G : C₁ ⥤ C₃} {F₁ : C₂ ⥤ C₁} {G₁ : C₁ ⥤ C₂}
+    {F₂ : C₃ ⥤ C₂} {G₂ : C₂ ⥤ C₃}
+    [F.OplaxMonoidal] [F₁.OplaxMonoidal] [F₂.OplaxMonoidal]
+    (a : F ⊣ G) (a₁ : F₁ ⊣ G₁) (a₂ : F₂ ⊣ G₂) (e : F ≅ F₂ ⋙ F₁)
+    (he : ∀ K M, δ F K M ≫ (e.hom.app K ⊗ₘ e.hom.app M) =
+      e.hom.app (K ⊗ M) ≫ δ (F₂ ⋙ F₁) K M) (A : C₁) (B : C₃) :
+    a.projectionMorphism A B =
+      (conjugateIsoEquiv (a₂.comp a₁) a e).inv.app A ▷ B ≫
+        a₂.projectionMorphism (G₁.obj A) B ≫
+        G₂.map (a₁.projectionMorphism A (F₂.obj B)) ≫
+        (conjugateIsoEquiv (a₂.comp a₁) a e).hom.app _ ≫ G.map (A ◁ e.inv.app B) := by
+  rw [projectionMorphism_eq_of_iso a (a₂.comp a₁) e he, projectionMorphism_comp]
+  simp only [Category.assoc]
+
+end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -44,8 +67,6 @@ lemma δ_leftDerivedUpperStar {W V : Scheme.{u}} (h : W ⟶ V)
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
--- unfolding the comultiplication of the derived pullback built from `leftDerivedUpperStarTensor`
 /-- The composition isomorphism of the derived pullbacks is compatible with the comultiplications,
 in the form used by `CategoryTheory.Adjunction.projectionMorphism_eq_of_iso`. -/
 lemma leftDerivedUpperStarComp_δ
@@ -55,11 +76,11 @@ lemma leftDerivedUpperStarComp_δ
         ((leftDerivedUpperStarComp Λ f g).hom.app K ⊗ₘ (leftDerivedUpperStarComp Λ f g).hom.app M) =
       (leftDerivedUpperStarComp Λ f g).hom.app (K ⊗ M) ≫
         δ (L((g)^*⟦Λ⟧) ⋙ L((f)^*⟦Λ⟧)) K M := by
+  rw [Functor.OplaxMonoidal.comp_δ]
+  simp only [δ_leftDerivedUpperStar, Category.assoc]
   exact leftDerivedUpperStarTensor_comp Λ f g K M
 
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
--- matching the conjugate of the composite adjunction
 /-- **The proper projection morphism of a composite** (blueprint `prop-sf-pf-coherence`,
 composition clause, for the pullback–pushforward adjunctions). -/
 lemma properProjectionMorphism_comp
@@ -72,10 +93,9 @@ lemma properProjectionMorphism_comp
         (R((g)_*⟦Λ⟧)).map (properProjectionMorphism Λ f A ((L((g)^*⟦Λ⟧)).obj B)) ≫
         (rightDerivedLowerStarComp Λ f g).hom.app _ ≫
         (R((f ≫ g)_*⟦Λ⟧)).map (A ◁ (leftDerivedUpperStarComp Λ f g).inv.app B) :=
-  (Adjunction.projectionMorphism_eq_of_iso _
-    ((derivedUpperStarLowerStarAdjunction Λ g).comp (derivedUpperStarLowerStarAdjunction Λ f))
-    (leftDerivedUpperStarComp Λ f g) (leftDerivedUpperStarComp_δ Λ f g) A B).trans
-    (by rw [Adjunction.projectionMorphism_comp, Category.assoc]; rfl)
+  Adjunction.projectionMorphism_eq_of_iso_comp (derivedUpperStarLowerStarAdjunction Λ (f ≫ g))
+    (derivedUpperStarLowerStarAdjunction Λ f) (derivedUpperStarLowerStarAdjunction Λ g)
+    (leftDerivedUpperStarComp Λ f g) (leftDerivedUpperStarComp_δ Λ f g) A B
 
 section Open
 
