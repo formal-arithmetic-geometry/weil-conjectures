@@ -61,6 +61,7 @@ noncomputable def etaleRestrict (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) :
   map_zero' := by simp
   map_add' φ ψ := by simp [Preadditive.add_comp, Preadditive.comp_add]
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in

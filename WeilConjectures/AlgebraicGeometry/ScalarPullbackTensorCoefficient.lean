@@ -46,6 +46,7 @@ private theorem scalar_pushforward_tensor (t : Y ⟶ X) (A B : KSheaf Y k) :
     (Opens.map t.base) (ModuleCat.{w} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y) A B U
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Tensor comparison rewrites need extra heartbeats to infer the sheaf module instances.
 /-- The scalar tensor coefficient commutes with the normalized module pullback
