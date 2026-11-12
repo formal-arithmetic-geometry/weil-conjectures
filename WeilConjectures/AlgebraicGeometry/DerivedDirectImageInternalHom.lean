@@ -170,6 +170,7 @@ end TensorHomAdjunction
 
 
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Elaborating the derived tensor witnesses requires additional heartbeats.
 /-- The natural internal-Hom comparison for `Rf_*`, specified as the mate of evaluation.
