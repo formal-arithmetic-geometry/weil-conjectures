@@ -242,7 +242,6 @@ lemma isIso_derivedPushPullExtendScalarsHom_integersModPow (n : ℕ)
       Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) m
   infer_instance
 
-set_option maxHeartbeats 1600000 in
 -- the retraction is matched against the large types of the reductions
 /-- **Existence of invariant torsion retractions**: the reduction modulo `ℓⁿ` of the unit
 `K ⟶ Rg_* Lg^* K` has a retraction invariant under the reductions of the Galois action. -/

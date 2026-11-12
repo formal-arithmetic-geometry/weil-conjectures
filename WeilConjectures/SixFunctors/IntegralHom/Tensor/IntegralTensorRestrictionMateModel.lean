@@ -239,7 +239,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
   (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (n : ℕ)
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private def reductionNat :
     DerivedCategory.Q ⋙ scalarReductionDerivedExtension l E X n ⟶
@@ -256,7 +255,6 @@ private def reductionNat :
       ((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ))
       (DerivedCategory.quotientCompQhIso _).hom
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionNat_app
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
@@ -319,7 +317,6 @@ private theorem restrictionComparison_eq
   exact congrArg₂ (fun f g ↦ (scalarReductionDerivedRestriction l E X n).map f ≫ g)
     hc hf.symm
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem unit_compatibility
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -399,7 +396,6 @@ private noncomputable def coefficientIso (M : Modules.{u, u} X R) :
     (SheafOfModules.tensorObjIsoSheafification.{u, u + 1, u + 1}
       (R := R) (coefficient X R S c) M).symm
 
-set_option maxHeartbeats 800000 in
 -- Compare the scalar and module sheafifications explicitly.
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in

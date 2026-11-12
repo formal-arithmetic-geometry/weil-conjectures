@@ -501,7 +501,6 @@ private theorem finiteDerivedOpen_native
       Functor.mapDerivedCategoryNatIso_symm, proEtaleCoefficientRestrictScalars,
       proEtaleConstantRingMap]
 
-set_option maxHeartbeats 2000000 in
 -- Pasting compares the chosen derived proper/open functor models.
 private theorem finiteRestriction_native
     (l : ℕ) [Fact l.Prime]
@@ -631,7 +630,6 @@ private theorem mate_whisker
   rw [← reassoc_of% hg]
   simp
 
-set_option maxHeartbeats 2000000 in
 -- Normalizing the two presentations expands their derived scalar functor models.
 /-- The finite ringed presentation and the intrinsic constant-ring presentation give
 exactly the same scalar mate after the canonical presentation isomorphisms.
