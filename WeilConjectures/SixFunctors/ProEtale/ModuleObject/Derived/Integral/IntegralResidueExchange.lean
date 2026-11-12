@@ -108,7 +108,6 @@ instance fact_isNilpotent_natCast_integralResidue :
     rw [pow_one]
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))⟩⟩
 
-set_option profiler true in
 /-- Derived coefficient reduction compares integral exchange to residue exchange.
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3), using the
 two-term finite free resolution of O_E/ℓ over O_E

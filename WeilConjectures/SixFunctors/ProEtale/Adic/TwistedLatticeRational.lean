@@ -380,7 +380,6 @@ lemma adicLowerStarRestrictPadicIntIso_inv_app_hom_app_apply (B : AdicSheaf l V)
   rfl
 
 set_option maxRecDepth 20000 in
-set_option profiler true in
 -- The sections of composites of sheaf morphisms are unfolded.
 /-- The adjoint of the trivialisation, restricted to `ℤ_ℓ`-modules, as a morphism of abelian
 sheaves. -/
@@ -441,6 +440,7 @@ lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
   have := congrArg (padicIntToPadicAlgCl l) key
   rw [map_sum] at this
   simp only [RingHom.map_mul] at this
+  -- Pass the additive hom explicitly to avoid searching for a homomorphism class.
   refine (map_sum (locallyFiniteFunctionsEval (l := l) w).toAddMonoidHom _ _).trans ?_
   exact this
 
