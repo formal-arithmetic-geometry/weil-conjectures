@@ -209,7 +209,6 @@ private theorem abstractCycle_naturality
       (termIso_map W U p φ 1 x.val).symm
     _ = _ := (abstractCycle_i W U p C (affineResidueCycleMap φ x)).symm
 
-set_option trace.profiler true in
 -- The statement compares tensor-product and quotient module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -240,6 +239,7 @@ theorem affine_residue_quotient_homology_naturality :
   dsimp only
   refine ⟨quotientIso W U p, ?_⟩
   intro K C φ
+  -- Work on cycle classes without substituting through the quotient structures.
   refine (affineResidueCycleClass_surjective_kernel W U p K).1.forall.2 ?_
   intro x
   calc
