@@ -102,6 +102,13 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       hhalg, hσε, ← Category.assoc, hhalg]
 
 -- Select the pointwise action directly; searching through the integral-closure actions is costly.
+noncomputable local instance boundaryIdealMulSemiringActionConstruction {W : C.Opens}
+    [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] :
+    MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, W) Ω) := by
+  letI : SMulCommClass Gal(Ω/C.functionField) Γ(C, W) Ω :=
+    AlgEquiv.smulCommClass_of_isScalarTower Γ(C, W) C.functionField Ω
+  infer_instance
+
 noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens}
     [Algebra Γ(C, W) Ω] :
     MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
