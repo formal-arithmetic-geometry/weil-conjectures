@@ -203,6 +203,7 @@ private theorem tensor_homology_iso_of_resolutions
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Total tensor and the bounded replacement involve large module-category instance terms.
 /-- The ordinary affine tensor comparison is compatible with one augmented algebraic

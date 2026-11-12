@@ -320,6 +320,7 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
           (fun i ↦ M.val.map f (a i)) :=
   (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The comparison unfolds section modules and their transported scalar actions.
 set_option backward.isDefEq.respectTransparency false in

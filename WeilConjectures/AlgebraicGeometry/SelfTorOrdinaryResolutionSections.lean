@@ -31,6 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the two lifts requires elaboration of restricted tensor complexes.
 /-- Affine tensor-resolution homology computes the sections of the ordinary total tensor
