@@ -88,7 +88,6 @@ private theorem normalized_square
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
 -- Elaborating the mapped normalization equations unfolds nested derived tensor sources.
 /-- The restricted and original stalk comparison arrows are isomorphic after
 forgetting scalars, for any coordinates of the canonical restricted coefficient.

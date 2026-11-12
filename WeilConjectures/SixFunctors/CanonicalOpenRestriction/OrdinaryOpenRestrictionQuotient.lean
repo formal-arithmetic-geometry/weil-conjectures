@@ -61,7 +61,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
   (o : Operations l E j)
 
-set_option maxHeartbeats 400000 in
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
 /-- Ordinary strict quotient restriction and its finite adjunction normalization.
 Source: Stacks, Modules on Sites, Tags 03DJ and 0E8I; Cohomology on Sites, Tag 0941.

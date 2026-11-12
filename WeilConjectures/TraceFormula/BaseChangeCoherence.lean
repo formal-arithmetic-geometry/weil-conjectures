@@ -223,7 +223,6 @@ lemma Adjunction.map_unit_app_comp_exchangeRight_app {A B A' B' : Type*} [Catego
   erw [af.left_triangle_components]
   simp
 
-set_option maxHeartbeats 1000000 in
 -- the `erw` steps unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **`Ex_!` is compatible with the units of `Lf^* ⊣ Rf_!`** for proper vertical maps:
 `Lg^*(η_f) ≫ Ex_! = η_{f'} ≫ Rf'_!(θ_sq)` with `θ_sq : Lg^* Lf'^* ≅ Lf^* Lg'^*`. -/

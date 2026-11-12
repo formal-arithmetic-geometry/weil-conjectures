@@ -307,7 +307,6 @@ lemma comps_homEquiv_regularBiproductTriv (hγ : IsIntegralCocycle f γ) (U : V.
     padicIntSheafToAdicConstantSheaf_eq]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- The defeq checks unfold the sections of composites of sheaf morphisms.
 /-- **The coordinates of the trivialisation modulo `ℓᵏ`**: for a section `s` of the lattice over
 `T'`, the `j`-th coordinate of its pullback to `T' ×_T V` is, modulo `ℓᵏ`, the `j`-th coordinate

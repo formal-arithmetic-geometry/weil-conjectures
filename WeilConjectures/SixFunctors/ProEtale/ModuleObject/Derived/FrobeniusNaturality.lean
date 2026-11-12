@@ -219,7 +219,6 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
       (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M,
     upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
 which the prime `p` vanishes, the derived trivializations `L(F_X)^* ≅ 𝟭`, `L(F_T)^* ≅ 𝟭` of

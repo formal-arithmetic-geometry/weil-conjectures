@@ -66,9 +66,7 @@ private def kIsoParam (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   homParam l Y (WeilFrobeniusAction.topology Y) (ProEtale.NativeFrobenius.ring Y l)
     (ProEtale.NativeFrobenius.equivalence Y l).symm (kIso l Y H)
 
-set_option maxHeartbeats 1600000 in
 -- Explicit native and small-site module comparisons require substantial elaboration.
-set_option synthInstance.maxHeartbeats 200000 in
 -- Coefficient and site universes differ in the two module models.
 private theorem comparison_pure (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : ProEtale.AdicModuleHomComparisonCore l Y) :

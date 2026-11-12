@@ -29,7 +29,6 @@ private lemma homObjMap_section_component
         ((SheafOfModules.overFunctor _ U).map s).val.app W := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Projection comparisons involve several composed functors and chosen product objects.
 /-- The shifted section Hom-complex comparison in the homotopy category is natural.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).

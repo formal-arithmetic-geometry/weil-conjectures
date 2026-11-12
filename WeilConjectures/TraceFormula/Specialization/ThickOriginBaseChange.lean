@@ -53,7 +53,6 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Base change along universal homeomorphisms on the ambient derived categories**: for a
 cartesian square `g' ≫ p = p' ≫ g` of schemes with `g` a universal homeomorphism, the base change

@@ -73,7 +73,6 @@ theorem isUnit_ringChar_pow_integersResidueField (n : ℕ) :
   exact (Fact.out : ringChar k' ≠ ℓ)
     ((Nat.prime_dvd_prime_iff_eq Fact.out Fact.out).1 hℓ).symm
 
-set_option maxHeartbeats 1000000 in
 -- the instantiation of the descent lemma at the Galois-layer models is a large term
 /-- **Galois descent along a generic slice trait** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the

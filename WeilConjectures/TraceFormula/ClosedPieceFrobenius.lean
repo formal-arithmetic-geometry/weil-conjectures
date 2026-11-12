@@ -178,7 +178,6 @@ variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶
 
 namespace WeilBoundedConstructible
 
-set_option maxHeartbeats 1000000 in
 -- matching the composites of the restricted `ℚ̲̄_ℓ`-pullbacks is expensive
 omit [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦZ.left] in
 /-- The pullback square of the closed piece on compactly supported cohomology: for
@@ -227,7 +226,6 @@ noncomputable def closedPieceFrobeniusCoeff (hi : ΦZ ≫ i = i ≫ Φ)
     ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom)
 
-set_option maxHeartbeats 1000000 in
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦZ.left] in
 /-- The operator `E_Z` of the closed piece is `RΓ_c(X, ψ_Z) ∘ Φ^♯` on `RΓ_c(X, Ri_* Li^* K)`. -/
@@ -249,7 +247,6 @@ lemma compactFrobeniusClosedPiece_eq (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
     ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom)
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported Frobenius of the triangle unfolds to long composites
 omit [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦZ.left]
   [IsUniversalHomeomorphism ΦZ.left] [IsClosedImmersion i.left] in

@@ -62,7 +62,6 @@ instance scalarExtensionAdditive (φ : R ⟶ B) : (extension φ).Additive where
       PresheafOfModules.add_app, ModuleCat.hom_add, LinearMap.add_apply]
     exact SheafOfModules.scalarExtensionSection_add φ N U s _ _
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the tensor and Hom comparison through their explicit site instances.
 private theorem scalar_intertwines (φ : R ⟶ B)
     (s : (R.obj ⋙ forget CommRingCat).sections) :
@@ -167,7 +166,6 @@ private theorem tensorUnitTransport {D : Type*} [Category D] [MonoidalCategory D
     ← hj, reassoc_of% hu]
   exact hf
 
-set_option maxHeartbeats 2000000 in
 -- Transport the two tensor constructions and their unit constraints.
 private theorem extensionTensorIso_unit (φ : R ⟶ B) (M : Modules R) :
     let := SheafOfModules.monoidalCategory R

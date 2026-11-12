@@ -58,7 +58,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
 
-set_option maxHeartbeats 1000000 in
 -- unifying the tensor products of the monoidal structure of `Lf^*` unfolds the derived categories
 /-- **Extension of scalars and the monoidal structure of the derived pullback**: with
 `T = L(Ext_a)`, its tensor comparison `m` and `P : Lf^* ⋙ T ≅ T ⋙ Lf^*`, the square
@@ -131,7 +130,6 @@ noncomputable def extendScalarsComparisonOfFlat (M : NearbyCyclesModel X X')
 variable {Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
-set_option maxHeartbeats 4000000 in
 -- the comparison of the pasted squares with the pullback exchanges unfolds the nearby cycles
 set_option maxRecDepth 10000 in
 /-- **The pullback exchange under a flat change of coefficients**: for a morphism of models
@@ -183,7 +181,6 @@ theorem Hom.extendScalars_map_pullbackExchange_app_of_flat (φ : M.Hom N f f')
   unfold extendScalarsComparisonOfFlat
   convert key using 2 <;> rfl
 
-set_option maxHeartbeats 1000000 in
 -- the comparison with the lax tensor maps of nearby cycles unfolds the derived categories
 set_option maxRecDepth 10000 in
 /-- **The lax tensor map of nearby cycles under a flat change of coefficients**: with
@@ -231,7 +228,6 @@ lemma isIso_extendScalarsComparisonOfFlat (M : NearbyCyclesModel X X')
 variable {Z Z' : Scheme.{u}} {P : NearbyCyclesModel Z Z'}
   {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 1000000 in
 -- the composite of the squares is matched against the Künneth maps
 /-- **The Künneth map of nearby cycles under a flat change of coefficients**, as a commutative
 square: with `T = L(Ext_a)`, its tensor comparison `m`, the (Pull) isomorphisms `P` and the
@@ -269,7 +265,6 @@ theorem extendScalars_map_kunnethMap_of_flat (φ₁ : P.Hom M f₁ f₁') (φ₂
       (extendScalars_map_tensorMap_of_flat a P _ _) (tensorMap_natural Λ' P _ _))).trans
     (Category.assoc _ _ _).symm
 
-set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map of nearby cycles under a flat change of coefficients**: for `a : Λ ⟶ Λ'` with
 derived extension of scalars `T = L(Ext_a)`, if the comparisons `ρ : T Rj_* ⟶ Rj_* T`
@@ -298,7 +293,6 @@ theorem nonempty_arrowIso_map_kunnethMap_of_flat (φ₁ : P.Hom M f₁ f₁') (�
   have k := nonempty_arrowIso_of_comp_eq h (by infer_instance) (by infer_instance)
   exact k
 
-set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map under a flat change of coefficients**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_kunnethMap_of_flat`, for every `h : W ⟶ Z'`,

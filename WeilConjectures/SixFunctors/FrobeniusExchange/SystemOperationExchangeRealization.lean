@@ -719,7 +719,6 @@ section MateNormalization
 attribute [local irreducible] integralComparisonSequenceDirectImage coefficientSequenceEvaluation
   proEtaleConstantModuleDirectImage
 
-set_option maxHeartbeats 2000000 in
 -- The coefficient-category and chosen-adjoint transports need a larger elaboration budget.
 private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) :

@@ -33,7 +33,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   nativeRingedAssociatorComplex nativeRingedTripleLeft nativeRingedTripleRight
   nativeWeilRingedTensorComplexModel
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the explicit binary comparison without unfolding localization structures.
 /-- The inverse native binary model square under ordinary canonical normalization.
 Source: Stacks 06YU, 0FPT

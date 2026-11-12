@@ -105,7 +105,6 @@ attribute [instance] NativeWeilTensorRingedBridge.categoryC
 
 -- Keep this projection with the record: compiling the bridge must check that its
 -- retained coherence supplies actual ordinary symmetry, before any consumer uses it.
-set_option maxHeartbeats 1200000 in
 -- The concrete sheaf tensor instances require additional elaboration fuel.
 private theorem bridge_ordinary_tensor_symmetry
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]

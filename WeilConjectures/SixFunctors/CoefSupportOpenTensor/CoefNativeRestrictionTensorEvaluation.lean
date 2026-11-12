@@ -155,7 +155,6 @@ private theorem eval_pullSection {X Z : Scheme.{u}} (j : X ⟶ Z) (n : ℕ)
   exact raw_eval_pullSection (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) j n M V x
 
-set_option maxHeartbeats 300000 in
 -- Compare the two native coefficient-ring presentations in the section calculations.
 private theorem ordinary_restriction_square {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]

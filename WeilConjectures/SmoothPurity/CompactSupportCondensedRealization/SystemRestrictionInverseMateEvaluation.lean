@@ -249,7 +249,6 @@ private theorem res_section_type_general
     (((SemilinearSections.res a).obj M).val.obj U : Type ringSize) =
       (M.val.obj U : Type ringSize) := rfl
 
-set_option maxHeartbeats 400000 in
 -- Elaborate the six normalized section maps and their adjunction mate cube together.
 /-- The inverse mate of normalized scalar restriction commutes with geometric pullback
 at every coefficient level. Source: blueprint sk-thm-purity-transport, Step 10;

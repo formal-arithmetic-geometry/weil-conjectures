@@ -335,7 +335,6 @@ private theorem total_exchange_closed_arrow
   exact Nonempty.map2 Iso.trans (totalDerivedExchange_exact_comparisonFor Λ sq K)
     ⟨arrow_of_eq (congr_app (exactExchange_eq_closed Λ sq) K)⟩
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the twelve derived functors and four derived adjunctions is slow.
 -- Cache successive specializations to keep kernel conversions between the abstract
 -- cube and the concrete derived functors small.

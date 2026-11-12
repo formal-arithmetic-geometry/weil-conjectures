@@ -98,7 +98,6 @@ def nativeRingRestrictionSquare {R S : PurCompactSupport.Coefficients.{u}}
       (R.ring V) (S.ring V) (R.ring U) (S.ring U)
       (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv
 
-set_option maxHeartbeats 800000 in
 -- The concrete coefficient functors require elaborating the site and ring transports.
 /-- Natural ring diagrams transport the restriction/direct-image cube.
 The source and target coefficient systems are arbitrary. Only their ordinary ring

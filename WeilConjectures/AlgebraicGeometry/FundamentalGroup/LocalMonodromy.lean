@@ -43,7 +43,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- **`Q - 1` kills the local monodromy of a Frobenius-invariant torsor.** Let `E` be an
 automorphism of `C`, restricting to `U`, fixing `z ∈ C ∖ U` and semilinear over an automorphism

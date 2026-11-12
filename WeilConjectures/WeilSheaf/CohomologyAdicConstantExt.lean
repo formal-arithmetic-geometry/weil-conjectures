@@ -250,7 +250,6 @@ lemma cocycleFrobenius_comp_d (n m : ℕ)
   simp only [ConcreteCategory.comp_apply] at h
   exact h
 
-set_option maxHeartbeats 1600000 in
 -- the pushforward of the underlying abelian sheaf is only definitionally that of the sheaf
 /-- The Frobenius of the global sections of the terms of `I` on the cocycles `ℤ ⟶ Iⁿ` is
 `f ↦ (ℤ ⟶ Fr⁻¹_* ℤ) ≫ Fr⁻¹_* f ≫ φ`, `φ` the structure isomorphism of `Iⁿ`. -/

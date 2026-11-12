@@ -298,7 +298,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence at one
 boundary point.

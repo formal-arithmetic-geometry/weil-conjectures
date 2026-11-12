@@ -745,7 +745,6 @@ instance normalizedRestrictScalars_preservesFiniteColimits (W : Scheme.{u}) (n :
       (proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)) :=
   proEtaleCoefficientRestrictScalars_preservesFiniteColimits _ _
 
-set_option maxHeartbeats 2000000 in
 -- comparing the semilinear-system presentation with the sequence-site presentation
 /-- The scalar evaluation square of the normalized finite evaluation is the localization of
 an identity-on-sections ordinary restriction-evaluation square. -/

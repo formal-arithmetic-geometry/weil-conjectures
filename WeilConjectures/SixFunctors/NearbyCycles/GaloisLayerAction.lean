@@ -297,7 +297,6 @@ lemma pullbackSquareComparison_hom_app_of_eq_id_right (p' : X ⟶ Y) (g : Y ⟶ 
   subst h
   exact pullbackSquareComparison_hom_app_comp_id_right Λ p' g sq A
 
-set_option maxHeartbeats 400000 in
 -- the derived pullbacks are large terms
 /-- The identity isomorphism `L(t)^* ≅ 𝟭` for an endomorphism `t = 𝟙 Z`: the transport of
 `leftDerivedUpperStarId` along the equality. -/
@@ -332,7 +331,6 @@ namespace NearbyCyclesModel
 
 variable {X X' : Scheme.{u}}
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The pullback exchange of an endomorphism of a model with identity total component** is the
 unit transport along its generic component `s`: `α_φ(A) = I(Ψ A) ≫ Li^*(u_s(A)) ≫ Ψ(I⁻¹(A))`

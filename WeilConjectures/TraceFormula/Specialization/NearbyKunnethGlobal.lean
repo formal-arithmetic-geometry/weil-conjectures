@@ -210,7 +210,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 1000000 in
 -- the pushforward exchange of the model of the geometric generic fibre is slow to unify
 /-- **The proper exchange for the structure morphism** (blueprint
 `det-sp-nearby-cycles-exchanges` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
@@ -282,7 +281,6 @@ lemma nonempty_upperStar_obj_iso_comp {W T V : Scheme.{u}} {a : W ⟶ T} {b : T 
 variable {X Y Z X' Y' Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 400000 in
 -- the monoidal structure of the derived categories of module objects is slow to unify
 /-- If the identifications `ε` of `M` and `N` factor through the total spaces, the external
 product `Lφ₁^* Lε_M^* A ⊗ Lφ₂^* Lε_N^* B` on the geometric generic fibre of `P` is the pullback

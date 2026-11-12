@@ -50,8 +50,6 @@ attribute [local irreducible] HasDerivedCategory.standard integralOrdinaryScalar
 attribute [local implicit_reducible] tensor integralOperationsTensorTowerFunctor
   integralOperationsRoosFunctor NatIso.mapHomologicalComplex
 
-set_option maxHeartbeats 800000 in
--- Converting the strict quotient normalizations needs extra elaboration heartbeats.
 /-- Apply Roos naturality to the strict quotient tensor calculation.
 Source: Stacks 07A4 and 0941; naturality of the two-coordinate Roos construction.
 (blueprint: lem-pur-scalar-tensor-roos-quotient-chain).

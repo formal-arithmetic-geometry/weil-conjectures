@@ -462,7 +462,6 @@ private theorem globalMap_quasiIso
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 300000 in
 -- Naturality compares several composites through product functors and localization.
 /-- Natural K-injective models for the internal Hom, its full derived global sections,
 and all of its hypercohomology groups. The third comparison identifies the ordinary

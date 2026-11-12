@@ -178,7 +178,6 @@ private theorem normalizedAdjointComparison_choose_eq
   ((normalizedAdjointComparison F G R T adj₁ adj₂ e).choose_spec.2 _
     (fun X ↦ unit_conjugateEquiv_symm adj₂ adj₁ e.inv X)).symm
 
-set_option maxHeartbeats 1000000 in
 -- elaborating the mate of the restriction adjunction is slow
 /-- The ordinary scalar/pullback comparison is the scalar mate of the
 restriction/pullback comparison. -/

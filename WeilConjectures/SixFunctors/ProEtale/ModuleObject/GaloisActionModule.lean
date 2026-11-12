@@ -168,7 +168,6 @@ variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (L' : Type u) [Field L'] [Algebra L L']
   [FiniteDimensional L L'] [IsGalois L L']
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The pullback exchange of a finite Galois layer is split by the averaged action on nearby
 cycles**: if multiplication by `|Γ|` is invertible on `Lε^* C`, the pullback exchange `α` of

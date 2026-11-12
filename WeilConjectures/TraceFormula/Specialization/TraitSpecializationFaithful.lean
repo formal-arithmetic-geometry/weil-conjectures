@@ -104,7 +104,6 @@ section Point
 
 variable (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
 
-set_option synthInstance.maxHeartbeats 80000 in
 -- the ring structure on `End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is found by a long instance search
 /-- The endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are `H⁰(Spec k, ℚ̄_ℓ)`, the continuous
 functions on the one-point space `Spec k` with values in a finite subextension of

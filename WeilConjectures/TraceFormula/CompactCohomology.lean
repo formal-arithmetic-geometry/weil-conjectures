@@ -219,7 +219,6 @@ lemma weilCompactCohomology_obj_str (K : WeilBoundedConstructible ℓ Φ) :
           K.str :=
   weilLowerShriekOfFrobenius_obj_str ℓ _ _ _ _ _ _ _ K
 
-set_option maxHeartbeats 1000000 in
 -- the rewrites unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **The Frobenius comparison of `RΓ_c` is the pullback along `Φ`** (blueprint
 `lem-trf-frobenius-operator-compact-description`): for the trivial square of the structure
@@ -618,7 +617,6 @@ lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
     ← compactPullback_app_congr ℓ hrp, compactPullback_comp_app]
   simp only [Category.assoc]
 
-set_option maxHeartbeats 1000000 in
 -- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
 /-- **The Leray isomorphism for Weil objects** (blueprint `lem-trf-weil-shriek-operator-fibres`,
 the global operators): the compactly supported cohomology of `Rf_! K` is that of `K`,
@@ -645,7 +643,6 @@ variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.h
   {i : Z ⟶ X} (hi : ΦZ ≫ i = i ≫ ΦX) {y : RationalPoint Y} (hy : y ≫ ΦY = y)
   (hZ : IsPullback i (toPoint Z) f y)
 
-set_option maxHeartbeats 1000000 in
 -- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
 omit [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left] in
 include hZ in

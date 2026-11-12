@@ -75,7 +75,6 @@ def pullTwistIso
   unfold internalMonoidal internalTensorBundle nativeTensorBundle
   exact ((traceTensorComparison Λ f).app A).app T
 
-set_option maxHeartbeats 800000 in
 -- The comparisons cross the fixed native and bundled derived tensor interfaces.
 /-- The comparison p1*M ≅ p2*M for M=q*K(1)[2], with no freely chosen map data.
 Source: rational projective-line triangle calculation, Second identity
@@ -109,7 +108,6 @@ def secondPullComparison
       b ≪≫
     (pullTwistIso Λ (secondProjection Y) _ _ (secondLineComparison l c k p hpl Y) a).symm
 
-set_option maxHeartbeats 800000 in
 -- The comparisons cross the fixed native and bundled derived tensor interfaces.
 /-- Forward p2 projection, followed by the canonical change from p2*M to p1*M.
 This map has no diagonal class, trace, inverse projection, or invertibility hypothesis.

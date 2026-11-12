@@ -230,7 +230,6 @@ theorem map_unit_comp_derivedPushPullExtendScalarsHom {X Y : Scheme.{u}} (q : Y 
   map_unit_comp_mateEquiv_app_comp (derivedUpperStarLowerStarAdjunction Λ q)
     (derivedUpperStarLowerStarAdjunction Λ' q) (derivedUpperStarExtendScalarsIso a q) K
 
-set_option maxHeartbeats 400000 in
 -- the composites of derived functors with coefficients `Λ'` are slow to unify
 /-- **Extension of scalars commutes with the derived unit transport**: for `s : G ⟶ G'` with
 `s ≫ p = p₁` and `s ≫ q = q₁`, the comparisons `derivedPushPullExtendScalarsHom` intertwine `T`

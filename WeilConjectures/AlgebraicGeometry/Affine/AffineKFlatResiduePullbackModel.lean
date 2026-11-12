@@ -53,7 +53,6 @@ private noncomputable def mapComplexComparison
         ((R.mapHomologicalComplex (.up ℤ)).obj ((S.mapHomologicalComplex (.up ℤ)).obj F)) :=
   (NatIso.mapHomologicalComplex α (.up ℤ)).app F
 
-set_option maxHeartbeats 400000 in
 -- The natural comparisons involve several composed functors on sheaves and complexes.
 /-- A supplied K-flat affine module model computes the ambient derived residue pullback
 as an object, before taking any cohomology or dimensions. The scalar field is transported

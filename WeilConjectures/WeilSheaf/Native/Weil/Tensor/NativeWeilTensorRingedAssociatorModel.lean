@@ -54,7 +54,6 @@ attribute [local irreducible] nativeWeilRingedMonoidal nativeRingedTensorCompari
 
 -- The four explicit tensor models require extra elaboration steps, without unfolding
 -- the localization or monoidal structures protected by the local irreducibility API.
-set_option maxHeartbeats 800000 in
 -- Elaborate the four model squares while keeping localization definitions folded.
 /-- The explicit native binary models identify the transported derived associator
 with the localization of the explicit chain associator.

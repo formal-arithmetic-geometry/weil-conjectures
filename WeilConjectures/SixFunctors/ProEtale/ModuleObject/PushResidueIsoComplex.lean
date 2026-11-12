@@ -173,7 +173,6 @@ lemma mateEquiv_pullIsoInvHomotopy_app_quotient
   simp only [Functor.map_comp]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories of module objects is slow
 /-- **The derived (Push) comparison on complexes**, for an arbitrary coefficient change: through
 the units of the right derived pushforwards and the counits of the derived extensions of scalars,

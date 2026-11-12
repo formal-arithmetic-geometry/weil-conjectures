@@ -73,7 +73,6 @@ private theorem extensionTransitions
   exact OpenSemilinearTensor.openScalarTransitionCompatibility
     l E j o AX AU o.openSystems.restrictionSections tensor M h
 
-set_option maxHeartbeats 400000 in
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
 /-- Assemble the normalized finite extension tensor comparisons as a strict-system iso.
 Source: Stacks 03DJ, 0E8I and 0941

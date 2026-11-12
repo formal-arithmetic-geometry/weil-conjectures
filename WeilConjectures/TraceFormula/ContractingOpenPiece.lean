@@ -161,7 +161,6 @@ namespace Correspondence
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
   (x : RationalPoint X)
 
-set_option maxHeartbeats 400000 in
 -- Matching the unfolded `pointOpenRestriction` against the triangle identity requires unifying
 -- several presentations of the same objects of `Dᵇc`, which is slow.
 /-- **The open piece coefficient and the counit** (blueprint `prop-trf-trace-class-additivity`,

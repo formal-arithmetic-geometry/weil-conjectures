@@ -118,7 +118,6 @@ private theorem integral_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
     (show _ ≃ᵢ _ from ⟨t.toEquiv, ht⟩).symm.continuous
   exact ⟨F, ⟨coefficientMonIso t ht.continuous hti⟩⟩
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the inherited derived functors and full-subcategory structures needs this budget.
 /-- Integral proper base change on the localizing closure of bounded constructibles.
 Source: blueprint main-20261015, sk-thm-sf-pf-adic-base-change

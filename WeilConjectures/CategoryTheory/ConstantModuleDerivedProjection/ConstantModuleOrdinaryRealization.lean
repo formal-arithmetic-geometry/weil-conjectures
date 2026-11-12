@@ -79,7 +79,6 @@ private def scalarSection
     (constantCommuteCompose J (forget CommRingCat.{max u v})).inv.app (CommRingCat.of B)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Compare the commutative-ring and ring sheafification units.
 private theorem restriction_scalar (M : Modules J A) (U : Cᵒᵖ) (a : A)
     (x : M.val.obj U) :
