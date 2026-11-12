@@ -279,8 +279,10 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     let target ← Lean.Elab.Tactic.getMainTarget
     let some h := (← Lean.getLCtx).findFromUserName? `hs | throwError "missing hs"
     for (label, ty) in [("target", target), ("hs", h.type)] do
+      let ty ← Lean.Meta.whnf (← Lean.instantiateMVars ty)
       for i in [1, 2] do
-        let side := ty.getAppArgs[i]!
+        let side := ty.consumeMData.getAppArgs[i]!
+        let side := side.consumeMData
         Lean.logInfo m!"{label} side {i} head: {repr side.getAppFn}"
         Lean.logInfo m!"{label} side {i} action: {repr side.getAppArgs[3]!}"
   exact hs.trans hm
