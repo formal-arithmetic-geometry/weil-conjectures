@@ -360,6 +360,7 @@ lemma isIso_of_square {C : Type*} [Category C] {W X₁ X₂ X₃ Y₁ Y₂ : C} 
   exact IsIso.of_isIso_comp_left b c
 
 -- the composite square identifying the direct image of the Künneth map has large terms
+set_option profiler true in
 /-- **The global-sections step, abstractly**: for the product `P` over the trait of models `M`,
 `N` of finite type, with projections compatible with the structure morphisms to `Spec Ω`, the
 direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map to the point `Spec k'` is an isomorphism
@@ -404,7 +405,9 @@ theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
     (hgen.trans (Category.comp_id _).symm)
     ((special_comp_hom_snd hN hpb hP).trans (Category.comp_id _).symm)
     (L((M.ε)^*⟦Λ⟧).obj A) (L((N.ε)^*⟦Λ⟧).obj B)
-  exact isIso_of_square sq inferInstance hκs hT (Functor.map_isIso _ _) hχP
+  have key := isIso_of_square sq inferInstance (by cast_proofs hκs) (by cast_proofs hT)
+    (Functor.map_isIso _ _) (by cast_proofs hχP)
+  cast_proofs key
 
 end GlobalAbstract
 
@@ -439,6 +442,7 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 -- the composite square identifying the direct image of the Künneth map has large terms
+set_option profiler true in
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧` of
@@ -551,14 +555,14 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
     have h₃ := h₂ (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
         nonempty_upperStar_obj_iso_comp _ heM A⟩
-    exact_mod_proofs h₃
+    cast_proofs h₃
   · have h₁ := fun C₀ hC₀ ↦
       IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hN C₀ hC₀
     have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
     have h₃ := h₂ (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
         nonempty_upperStar_obj_iso_comp _ heN B⟩
-    exact_mod_proofs h₃
+    cast_proofs h₃
   · have hqP' : IsProper (φ₁.total ≫ qM) := hqP
     have h₁ := fun C₀ hC₀ ↦
       IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hP C₀ hC₀
@@ -569,12 +573,12 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
         L((φ₂.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
           (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))
       (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
-    exact_mod_proofs h₃
+    cast_proofs h₃
   -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
-  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
+  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
       (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
       (isPullback_special hM hN hpb hP) _ hΨA' _ hΨB'
-  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
+  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
       (Y := Over.mk gN)
       (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
       (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen) _ hA' _ hB'
