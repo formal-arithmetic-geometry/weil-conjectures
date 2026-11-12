@@ -107,6 +107,7 @@ theorem isZero_specializationDefect_polyAffine_zero
       (Profinite.padicAlgClRingObj ℓ) L₀.obj ⟶ 0) this)).1
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The elaboration of the support condition needs more than the default heartbeats.
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`, after
 the generic vanishing and the Noether normalisation: let `ψ` be an automorphism of `𝔸^{N+2}_k`,
