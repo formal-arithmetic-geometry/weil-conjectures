@@ -46,8 +46,7 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {ℓ} {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-set_option trace.profiler true in
-set_option maxHeartbeats 0 in
+set_option profiler true in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The core of `class_pushforward`: the two ways of transporting `Rp₁'_! (Lp₂'^* K' ⊗ Rb_! 𝟙)`
 to `Rf_* Rc₁_! Lc₂^* K` agree. -/
@@ -100,7 +99,12 @@ theorem class_pushforward_core :
     Category.comp_id, Functor.comp_map, Category.assoc]
   simp only [curriedTensor_obj_map, MonoidalCategory.whiskerLeft_comp, Functor.map_comp,
     Category.assoc]
-  conv_rhs => rw [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc]
+  conv_rhs =>
+    rw [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc
+      (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map P.f P.f))
+      ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _))]
   simp only [← Functor.map_comp (boundedConstructibleLowerStar ℓ P.f)]
   conv_rhs => rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.naturality]
   simp only [← Category.assoc]
@@ -138,7 +142,7 @@ theorem class_pushforward_core :
         ((boundedConstructibleUpperStarComp _ ℓ c.support (prod.map P.f P.f)).hom.app _ ▷ _) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
           (prod.map P.f P.f)).hom.app _ := by
-    rw [reassoc_of% hc]
+    rewrite [reassoc_of% hc]
     simp
   conv_rhs => rw [Functor.map_comp₃_assoc_of_eq
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]

@@ -44,8 +44,7 @@ section EvaluationExchange
 variable (ℓ) {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
 
-set_option trace.profiler true in
-set_option maxHeartbeats 3000000 in
+set_option profiler true in
 -- composite functors on bounded constructible complexes are unfolded
 /-- **Exchange of the evaluation kernels** along a proper morphism `f` (blueprint
 `lem-trf-trace-map-exchange`, (1)): with `q = f × f` and `K' = Rf_* K`,
@@ -60,9 +59,9 @@ theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsPrope
           (dualizingComplex' ℓ X)) hΔ) ≫
         (boundedConstructibleLowerStarComp ℓ f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
         (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ f) := by
-  rw [kernelPushforward, Category.assoc, IsIso.inv_comp_eq, prodLowerStarExternalProduct,
+  rewrite [kernelPushforward, Category.assoc, IsIso.inv_comp_eq, prodLowerStarExternalProduct,
     evaluationKernel, evaluationKernel]
-  rw [Adjunction.homEquiv_comp_map_comp,
+  rewrite [Adjunction.homEquiv_comp_map_comp,
     ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left,
     homEquiv_comp_lowerStarComp_hom_app_assoc, homEquiv_comp_eqToHom_of_eq_assoc,
     homEquiv_comp_lowerStarComp_inv_app_assoc, ← Adjunction.homEquiv_naturality_right]
@@ -74,12 +73,12 @@ theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsPrope
         (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
         lowerStarDualizingComplexTrace ℓ f :=
     MonoidalClosed.whiskerLeft_curry_ihom_ev_app _ _ _
-  rw [diagUpperStarExternalProductIso_hom_naturality_right_assoc]
+  rewrite [diagUpperStarExternalProductIso_hom_naturality_right_assoc]
   refine (congrArg (fun t ↦ (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y)).homEquiv
     _ _ ((diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
       ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K))).hom ≫ t))
         hu).trans ?_
-  rw [upperStarComp_inv_app_comp_prodUpperStarCounit_assoc ℓ f K (verdierDual ℓ K)
+  rewrite [upperStarComp_inv_app_comp_prodUpperStarCounit_assoc ℓ f K (verdierDual ℓ K)
     hΔ]
   apply congrArg ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y)).homEquiv _
     (dualizingComplex' ℓ Y))
