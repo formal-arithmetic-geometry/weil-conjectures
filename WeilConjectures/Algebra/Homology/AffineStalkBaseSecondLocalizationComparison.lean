@@ -214,7 +214,6 @@ private theorem equalCoefficientComplexIso_tmul
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option profiler true in
 /-- Localize only the base and second factor of an already stalk-localized input.
 Source: Stacks Project, Tag 0DJ8, base and second-factor part of the localization
 identity; Tag 06Y6.
@@ -402,7 +401,9 @@ theorem exists_affineStalkBaseSecondLocalizationComparison
       ((equalCoefficientComplexIso_tmul Aq D φ₁ ρ hcoeff Q j 1 _).trans (hτ j x).symm)
   have hσ : β.inv ≫ τ.hom = δ.hom := (β.inv_comp_eq).2 hchain.symm
   exact (congrArg
-    (fun t ↦ m.localizedComparison i ≫ HomologicalComplex.homologyMap t i) hσ).trans
+    (fun t ↦ (@ModuleCat.BaseDerivedTensorCohomologyModel.localizedComparison
+      R Aq R' _ _ _ _ _ hRorig hBorig Q D _ _ m i) ≫
+        HomologicalComplex.homologyMap t i) hσ).trans
     ((congrArg (fun t ↦ t ≫ HomologicalComplex.homologyMap δ.hom i) he₀.symm).trans
       ((Category.assoc _ _ _).trans
         ((congrArg (fun t ↦ e₀.hom ≫ t) hloc).trans (Category.assoc _ _ _).symm)))
