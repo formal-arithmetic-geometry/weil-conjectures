@@ -66,6 +66,23 @@ private theorem changeCoordinates_comp
   rw [Category.assoc, ← F'.map_comp]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
+private theorem map_paste_cancel
+    {C D : Type*} [Category C] [Category D] (P : C ⥤ D)
+    {U U' V W : C} {A B T R : D} (ρ : U ≅ U')
+    (s : A ⟶ B) (t : B ⟶ T) (u : T ⟶ P.obj V) (v : B ⟶ P.obj U)
+    (b : U ⟶ V) (c : V ⟶ W) (p : A ⟶ R) (q : R ⟶ P.obj U') (r : U' ⟶ W)
+    (hn : t ≫ u = v ≫ P.map b)
+    (hp : s ≫ v = p ≫ q ≫ P.map ρ.inv)
+    (hj : b ≫ c = ρ.hom ≫ r) :
+    (s ≫ t) ≫ u ≫ P.map c = p ≫ q ≫ P.map r := by
+  simp only [Category.assoc]
+  rw [← Category.assoc t, hn]
+  simp only [Category.assoc]
+  rw [← Category.assoc s, hp]
+  simp only [Category.assoc]
+  rw [← P.map_comp, ← P.map_comp, hj]
+  simp only [Iso.inv_hom_id_assoc]
+
 include K₀ hl
 -- The existing statement retains the geometric hypotheses of its source.
 set_option linter.unusedSectionVars false in
@@ -121,9 +138,7 @@ theorem qcqsCompactSupport_strictReductionData :
   let Ps := ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) c.g
   let β : image (completed l E) c ⋙ SY.reduction ⟶ SX.reduction ⋙ Js ⋙ Ps :=
-    (Functor.associator J P SY.reduction).hom ≫
-      Functor.whiskerLeft J βP ≫ (Functor.associator J SZ.reduction Ps).inv ≫
-      Functor.whiskerRight βJ Ps ≫ (Functor.associator SX.reduction Js Ps).hom
+    Functor.whiskerLeft J βP ≫ Functor.whiskerRight βJ Ps
   refine ⟨SX, SY, β, ?_⟩
   intro K n
   have := sfIntrinsicExtensionByZero_additive c.i
@@ -152,30 +167,16 @@ theorem qcqsCompactSupport_strictReductionData :
         Pn.map (eJ.hom.app (SX.reduction.obj K)) =
       ρY.hom.app ((image (completed l E) c).obj K) ≫
         (comparison a c).app K ≫ (image A c).map (ρX.inv.app K) := by
-    dsimp only [β, NatTrans.comp_app, Functor.whiskerLeft_app,
-      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app]
-    simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
-    change evY.map (βP.app (J.obj K)) ≫
-      evY.map (Ps.map (βJ.app K)) ≫ eP.hom.app (Js.obj (SX.reduction.obj K)) ≫
-        Pn.map (eJ.hom.app (SX.reduction.obj K)) = _
-    rw [← Category.assoc (evY.map (Ps.map (βJ.app K)))]
-    erw [hn]
-    simp only [Category.assoc]
-    rw [← Category.assoc (evY.map (βP.app (J.obj K)))]
-    erw [hP (J.obj K) n]
-    change (ρY.hom.app (P.obj (J.obj K)) ≫ (properComparison a c.g).app (J.obj K) ≫
-        Pn.map (ρZ.inv.app (J.obj K))) ≫
-      Pn.map (evZ.map (βJ.app K)) ≫ Pn.map (eJ.hom.app (SX.reduction.obj K)) = _
-    rw [Category.assoc, Category.assoc, ← Pn.map_comp_assoc, ← Pn.map_comp]
-    simp only [Category.assoc]
-    erw [hJ K n]
-    change ρY.hom.app (P.obj (J.obj K)) ≫ (properComparison a c.g).app (J.obj K) ≫
-      Pn.map (ρZ.inv.app (J.obj K) ≫ ρZ.hom.app (J.obj K) ≫
-        (openComparison a c.i).app K ≫ Jn.map (ρX.inv.app K)) = _
-    simp only [Iso.inv_hom_id_app_assoc, Functor.map_comp]
+    dsimp only [β, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    rw [evY.map_comp]
+    have h := map_paste_cancel Pn (ρZ.app (J.obj K))
+      (evY.map (βP.app (J.obj K))) (evY.map (Ps.map (βJ.app K)))
+      (eP.hom.app (Js.obj (SX.reduction.obj K))) (eP.hom.app (SZ.reduction.obj (J.obj K)))
+      (evZ.map (βJ.app K)) (eJ.hom.app (SX.reduction.obj K))
+      (ρY.hom.app (P.obj (J.obj K))) ((properComparison a c.g).app (J.obj K))
+      ((openComparison a c.i).app K ≫ Jn.map (ρX.inv.app K)) hn (hP (J.obj K) n) (hJ K n)
     rw [comparison_factorization a c K]
-    simp only [Category.assoc]
-    rfl
+    simpa only [Functor.map_comp, Category.assoc] using h
   have ht :
       (Functor.isoWhiskerLeft SX.reduction (compactSupportSystemEvaluation l E c n) ≪≫
         Functor.isoWhiskerRight (SX.reductionEvaluation n)
