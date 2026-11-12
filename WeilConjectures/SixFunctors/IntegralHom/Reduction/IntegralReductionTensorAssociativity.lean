@@ -342,17 +342,21 @@ private theorem nativeReductionMonoidal
       exact h
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  have hb := normalizedBeta_eq l E Y D hl n
+  simp only [reductionExtension_eq_scalarExtension] at hb
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hb
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
       run_tac Lean.logInfo "PH324: before normalization"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
+      simp only [reductionExtension_eq_scalarExtension] at beta hbeta hgen hEP hEQ hnorm
+      dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at beta hgen
       let := hbeta
-      simp only [reductionExtension_eq_scalarExtension] at beta hgen ⊢
       run_tac Lean.logInfo "PH324: before normalizedBeta_eq"
       have hbκ : (asIso beta).symm = κ.app (P, Q) := by
         rw [hc P Q]
-        exact normalizedBeta_eq l E Y D hl n P Q beta hgen
+        exact hb P Q beta hgen
       run_tac Lean.logInfo "PH324: before representative square"
       refine ⟨hEP, hEQ, ?_⟩
       have hrepR := nativeIso_representative Y R a P Q hP hQ
