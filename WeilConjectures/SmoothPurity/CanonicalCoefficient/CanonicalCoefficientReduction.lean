@@ -213,7 +213,6 @@ def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopolo
       (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q))
     (CoefficientClosedStructure.comparison S T)
 
-set_option profiler true in
 theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
@@ -236,25 +235,19 @@ theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : Grothendieck
   intro P L N φ
   obtain ⟨ψ, hψ, he⟩ := source P L N φ
   refine ⟨ψ, hψ, ?_⟩
+  let x := DerivedCategory.Q.map φ ≫
+    (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv
   change (M.comparison.hom.app (P, L) ≫
     (CoefficientClosedStructure.comparison S T).hom.app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj L.obj)) ≫
-    (T.transpose _ _ _).symm
-      (DerivedCategory.Q.map φ ≫ (coefficientHomResolutionIso.{r, c, v, w}
-        J R L.obj N).inv) = _
-  rw [Category.assoc]
+    (T.transpose _ _ _).symm x = _
   have ht : (CoefficientClosedStructure.comparison S T).hom.app
         (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj L.obj) ≫
-      (T.transpose _ _ _).symm
-        (DerivedCategory.Q.map φ ≫
-          (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) =
-    (S.transpose _ _ _).symm
-        (DerivedCategory.Q.map φ ≫
-          (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) := by
+      (T.transpose _ _ _).symm x = (S.transpose _ _ _).symm x := by
     apply (S.transpose _ _ _).injective
     rw [CoefficientClosedStructure.comparison_transpose, Equiv.apply_symm_apply,
       Equiv.apply_symm_apply]
-  rw [ht]
+  rw [Category.assoc, ht]
   exact he
 
 /-- Change the tensor model by the same adjoint comparison, retaining ordinary uncurrying. -/
