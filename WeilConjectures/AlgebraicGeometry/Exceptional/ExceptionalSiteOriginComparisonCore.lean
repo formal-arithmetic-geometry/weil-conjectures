@@ -406,6 +406,12 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
         (U : W.Etaleᵒᵖ) (x : ((S.right n).obj M).val.obj U),
         (e.hom.app M).hom.app U x =
           ((S.rightUnderlying n).hom.app M).hom.app U x := by
+  have : HasWeakSheafify W.smallEtaleTopology RingCat.{u + 1} := inferInstance
+  have : HasWeakSheafify (Scheme.ProEt.topology W) RingCat.{u + 1} := inferInstance
+  have : W.smallEtaleTopology.PreservesSheafification
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := exceptionalForget _
+  have : (Scheme.ProEt.topology W).PreservesSheafification
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := exceptionalForget _
   let L : Sheaf W.smallEtaleTopology (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology W) (Type (u + 1)) :=
     Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt W)
@@ -561,9 +567,13 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
       ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
         ((adj.unit.app T).hom.app U z)) = _ at hc'
     have hs := hc'.trans hconst
-    rw [hs]
-    exact (((S.levelAdj n).counit.app M).val.app
-      ((Scheme.toProEt W).op.obj U)).hom.map_smul _ _
+    let f := ((S.levelAdj n).counit.app M).val.app ((Scheme.toProEt W).op.obj U)
+    let y : (I.modules.obj (R.obj M)).val.obj ((Scheme.toProEt W).op.obj U) :=
+      (I.moduleUnderlying.inv.app (R.obj M)).hom.app ((Scheme.toProEt W).op.obj U)
+        ((L.map b).hom.app ((Scheme.toProEt W).op.obj U) ((adj.unit.app T).hom.app U z))
+    exact (f.hom.map_smul _ y).trans
+      (congrArg (fun c : (coefficientQuotientSheaf (J := Scheme.ProEt.topology W)
+        O ell n).obj.obj ((Scheme.toProEt W).op.obj U) ↦ c • f y) hs)
   let F := R ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n
   let G := exceptionalLevelRealization (Scheme.ProEt.topology W) O ell n ⋙
     ProEtale.comparisonLowerStar (ModuleCat.{u + 1}
