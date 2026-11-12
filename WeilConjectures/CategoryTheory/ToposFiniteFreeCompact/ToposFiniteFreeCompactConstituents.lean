@@ -1068,8 +1068,8 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
   rw [c.underlyingB, Iso.inv_hom_id_app_assoc]
   have hn := f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)
   dsimp only [Functor.comp_map] at hn
-  simp only [← reassoc_of% hn]
-  simp only [g.restrictionFormula]
+  erw [← reassoc_of% hn]
+  rw [g.restrictionFormula]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   rfl
 
