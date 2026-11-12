@@ -57,7 +57,7 @@ lemma CategoryTheory.Functor.whiskerLeft_comp_whiskerRight_comp_aux {A B A' B' :
     Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.assoc, Functor.comp_obj]
-  rw [← reassoc_of% hn]
+  rw [reassoc_of% hn]
   rw [hθ']
   rw [Category.comp_id]
   rw [hE']
@@ -217,12 +217,14 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
   have hn := (boundedConstructibleLowerStarId ℓ Y').hom.naturality
     ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
       (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq)).hom.app K)
+  simp only [Compactification.ofIsOpenImmersion, Compactification.overG,
+    Compactification.overObj] at hn ⊢
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app, Category.comp_id, Functor.comp_obj,
     Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.assoc, Functor.comp_obj]
-  rw [← reassoc_of% hn]
+  rw [reassoc_of% hn]
   rw [hθ']
   rw [Category.comp_id]
   rw [hE']
