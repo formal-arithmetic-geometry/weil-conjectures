@@ -165,9 +165,9 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
   have hlocal (x : X) : (H.over (U x)).IsQuasicoherent := by
     let V := U x
     let J := (Opens.grothendieckTopology X.toRingedSpace).over V
-    have : HasWeakSheafify J AddCommGrpCat.{u} := inferInstance
+    have : HasSheafify J AddCommGrpCat.{u} := inferInstance
     have : J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
-    have : ∀ W, HasWeakSheafify (J.over W) AddCommGrpCat.{u} := inferInstance
+    have : ∀ W, HasSheafify (J.over W) AddCommGrpCat.{u} := inferInstance
     have : ∀ W, (J.over W).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
     let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)
     let : Category.{w} (@DerivedCategory (SheafOfModules.{u}

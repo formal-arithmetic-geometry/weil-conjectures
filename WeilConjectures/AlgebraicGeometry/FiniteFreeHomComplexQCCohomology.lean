@@ -63,9 +63,9 @@ theorem finiteFree_homComplex_qc_cohomology
     ((homComplex (R := X.toRingedSpace.sheaf.over U) E I).homology n).IsQuasicoherent := by
   classical
   let J := (Opens.grothendieckTopology X.toRingedSpace).over U
-  have : HasWeakSheafify J AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify J AddCommGrpCat.{u} := inferInstance
   have : J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
-  have : ∀ V, HasWeakSheafify (J.over V) AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, HasSheafify (J.over V) AddCommGrpCat.{u} := inferInstance
   have : ∀ V, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   let A := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
   have transport {K L : CochainComplex A ℤ} (e : K ≅ L)

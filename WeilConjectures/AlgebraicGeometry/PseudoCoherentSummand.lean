@@ -139,10 +139,10 @@ theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u})
     IsPseudoCoherent X L ∧ IsPseudoCoherent X M := by
   classical
   have : ∀ U : X.Opens,
-      HasWeakSheafify ((TopologicalSpace.Opens.grothendieckTopology X.toRingedSpace).over U)
+      HasSheafify ((Opens.grothendieckTopology X.toRingedSpace).over U)
         AddCommGrpCat.{u} := inferInstance
   have : ∀ U : X.Opens,
-      ((TopologicalSpace.Opens.grothendieckTopology X.toRingedSpace).over U).WEqualsLocallyBijective
+      ((Opens.grothendieckTopology X.toRingedSpace).over U).WEqualsLocallyBijective
         AddCommGrpCat.{u} := inferInstance
   obtain ⟨e⟩ := h
   have local_models (x : X) :
