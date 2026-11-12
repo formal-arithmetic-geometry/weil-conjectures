@@ -98,14 +98,19 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let C := ((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
     forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+  let D := ((RingedSpace.openModuleSections Z.toRingedSpace (h ⁻¹ᵁ V)).mapHomologicalComplex
+    (ComplexShape.up ℕ)).obj I.cocomplex
+  let C' := ((RingedSpace.globalSectionsFunctor (h ⁻¹ᵁ V).toScheme.toRingedSpace ⋙
+    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+      R.resolution.cocomplex
   let a := (forget₂ _ AddCommGrpCat.{u}).map
     (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p).hom
-  let b := (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso
+  let b : _ ⟶ H.obj C := (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso
     (forget₂ _ AddCommGrpCat.{u})).inv
   let a' := (forget₂ _ AddCommGrpCat.{u}).map
     (R.resolution.isoRightDerivedObj
       (RingedSpace.globalSectionsFunctor (h ⁻¹ᵁ V).toScheme.toRingedSpace) p).hom
-  let b' := (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
+  let b' : _ ⟶ H.obj C' := (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
     (forget₂ _ AddCommGrpCat.{u})).inv
   let t := fun W : Y.Opens ↦
     (((((SheafOfModules.forget Y.ringCatSheaf).mapHomologicalComplex
@@ -114,13 +119,15 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
           (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op W))).hom ≫
     ((PresheafOfModules.toPresheaf Y.ringCatSheaf.obj).map
       (sectionCohomologyTheta L p)).app (op W)
-  let rZ := (NatTrans.mapHomologicalComplex
+  let t0 : H.obj C ⟶ (L.homology p).presheaf.obj (op ⊤) := t ⊤
+  let tV : H.obj D ⟶ (L.homology p).presheaf.obj (op V) := t V
+  let rZ : C ⟶ D := (NatTrans.mapHomologicalComplex
     (Functor.whiskerLeft (SheafOfModules.forget Z.ringCatSheaf ⋙
       PresheafOfModules.toPresheaf Z.ringCatSheaf.obj)
       ((CategoryTheory.evaluation Z.Opensᵒᵖ AddCommGrpCat.{u}).map
         (homOfLE (show h ⁻¹ᵁ V ≤ ⊤ from le_top)).op))
     (ComplexShape.up ℕ)).app I.cocomplex
-  let rY := (NatTrans.mapHomologicalComplex
+  let rY : C ⟶ D := (NatTrans.mapHomologicalComplex
     (Functor.whiskerLeft (SheafOfModules.forget Y.ringCatSheaf ⋙
       PresheafOfModules.toPresheaf Y.ringCatSheaf.obj)
       ((CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).map
@@ -131,25 +138,25 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
       a ≫ b ≫ H.map rY :=
     (restrictedResolution_cohomology I (h ⁻¹ᵁ V) R p).trans
       (congrArg (fun q ↦ a ≫ b ≫ H.map q) hrmap)
-  have hn : H.map rY ≫ t V = t ⊤ ≫
+  have hn : H.map rY ≫ tV = t0 ≫
       (L.homology p).presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op :=
     (sectionClass_restriction L V p).trans (Category.assoc _ _ _).symm
   let r := (L.homology p).presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op
-  have hid : H.map (𝟙 C) ≫ t ⊤ = t ⊤ :=
-    (congrArg (fun q ↦ q ≫ t ⊤) (H.map_id C)).trans (Category.id_comp _)
+  have hid : H.map (𝟙 C) ≫ t0 = t0 :=
+    (congrArg (fun q ↦ q ≫ t0) (H.map_id C)).trans (Category.id_comp _)
   unfold resolutionSectionClass
   dsimp only
   simp only [Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id]
-  change (a ≫ b ≫ H.map (𝟙 C) ≫ t ⊤) ≫ r =
-    moduleCohomologyRestriction (h ⁻¹ᵁ V) G p ≫ a' ≫ b' ≫ H.map R.sections.hom ≫ t V
+  change (a ≫ b ≫ H.map (𝟙 C) ≫ t0) ≫ r =
+    moduleCohomologyRestriction (h ⁻¹ᵁ V) G p ≫ a' ≫ b' ≫ H.map R.sections.hom ≫ tV
   calc
-    (a ≫ b ≫ H.map (𝟙 C) ≫ t ⊤) ≫ r = (a ≫ b ≫ t ⊤) ≫ r :=
+    (a ≫ b ≫ H.map (𝟙 C) ≫ t0) ≫ r = (a ≫ b ≫ t0) ≫ r :=
       congrArg (fun q ↦ (a ≫ b ≫ q) ≫ r) hid
-    _ = a ≫ b ≫ (t ⊤ ≫ r) := by simp only [Category.assoc]
-    _ = a ≫ b ≫ H.map rY ≫ t V := congrArg (fun q ↦ a ≫ b ≫ q) hn.symm
-    _ = (a ≫ b ≫ H.map rY) ≫ t V := by simp only [Category.assoc]
+    _ = a ≫ b ≫ (t0 ≫ r) := by simp only [Category.assoc]
+    _ = a ≫ b ≫ H.map rY ≫ tV := congrArg (fun q ↦ a ≫ b ≫ q) hn.symm
+    _ = (a ≫ b ≫ H.map rY) ≫ tV := by simp only [Category.assoc]
     _ = (moduleCohomologyRestriction (h ⁻¹ᵁ V) G p ≫ a' ≫ b' ≫
-        H.map R.sections.hom) ≫ t V := congrArg (fun q ↦ q ≫ t V) hr.symm
+        H.map R.sections.hom) ≫ tV := congrArg (fun q ↦ q ≫ tV) hr.symm
     _ = _ := by simp only [Category.assoc]
 
 set_option profiler true in
