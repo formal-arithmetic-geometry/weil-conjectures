@@ -246,8 +246,8 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
   let Λ := Profinite.padicAlgClRingObj ℓ
   let c := h.genericSliceBaseMap (traitSliceCoord k') hb
   let A0 := (L((𝟙 X₁.left)^*⟦Λ⟧).obj A)
-  let Ac := (L(c^*⟦Λ⟧).obj A)
-  let Acc := (L(c^*⟦Λ⟧).obj A0)
+  let Ac := (L((c)^*⟦Λ⟧).obj A)
+  let Acc := (L((c)^*⟦Λ⟧).obj A0)
   have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA
   have hM := h.isTraitModelOver
   have hD := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ)
