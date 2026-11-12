@@ -184,8 +184,9 @@ private structure OrdinaryModel
   horizontal : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : SS l E X (σ X))
     {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
     (x : ((EE l E Y (σ Y) m).obj ((push f).obj M)).val.obj V),
-    ((evalP f n).hom.app M).val.app V
-        (SpTowerShriek.HS l E Y (σ Y) h ((push f).obj M) V x) =
+    SpTowerShriek.pushSection (SpTowerShriek.R l E n) f ((EE l E X (σ X) n).obj M) V
+      (((evalP f n).hom.app M).val.app V
+        (SpTowerShriek.HS l E Y (σ Y) h ((push f).obj M) V x)) =
       SpTowerShriek.HS l E X (σ X) h M (SpTowerShriek.chart f V)
         (SpTowerShriek.pushSection (SpTowerShriek.R l E m) f ((EE l E X (σ X) m).obj M) V
           (((evalP f m).hom.app M).val.app V x))
@@ -205,20 +206,23 @@ private structure OrdinaryModel
 attribute [local instance] OrdinaryModel.additive OrdinaryModel.inverseAdditive
 
 set_option profiler true in
-private theorem ordinaryPushHorizontal {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M : SS l E X (σgraph l E X)) {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
-    (x : ((EE l E Y (σgraph l E Y) m).obj
-      ((VaryingRing.push (graphRings l E) (graphTransitions l E) f).obj M)).val.obj V) :
-    ((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app V
-        (SpTowerShriek.HS l E Y (σgraph l E Y) h
-          ((VaryingRing.push (graphRings l E) (graphTransitions l E) f).obj M) V x) =
-      SpTowerShriek.HS l E X (σgraph l E X) h M (SpTowerShriek.chart f V)
-        (SpTowerShriek.pushSection (SpTowerShriek.R l E m) f
-          ((EE l E X (σgraph l E X) m).obj M) V
-          (((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f m).hom.app M).val.app
-            V x)) := by
-  exact SpTowerShriek.canonicalPushHorizontal
-    (graphRings l E) (graphTransitions l E) f M h V x
+private theorem ordinaryPushHorizontal (A : ℕ → Type u) [∀ n, CommRing (A n)]
+    (φ : ∀ n, CommRingCat.of (ULift.{u + 1} (A (n + 1))) ⟶
+      CommRingCat.of (ULift.{u + 1} (A n))) :
+    let C : ℕ → CommRingCat.{u + 1} := fun n ↦ CommRingCat.of (ULift.{u + 1} (A n))
+    ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : VaryingRing.Modules C φ X)
+      {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
+      (x : ((VaryingRing.eval C φ Y m).obj ((VaryingRing.push C φ f).obj M)).val.obj V),
+      SpTowerShriek.pushSection (A n) f ((VaryingRing.eval C φ X n).obj M) V
+        (((VaryingRing.moduleEvalP C φ f n).hom.app M).val.app V
+          (SpTowerShriek.transitionValue (ProEt.topology Y) (VaryingRing.coefficients C Y)
+            (VaryingRing.coefficientTransition C φ Y) h ((VaryingRing.push C φ f).obj M) V x)) =
+        SpTowerShriek.transitionValue (ProEt.topology X) (VaryingRing.coefficients C X)
+          (VaryingRing.coefficientTransition C φ X) h M (SpTowerShriek.chart f V)
+          (SpTowerShriek.pushSection (A m) f ((VaryingRing.eval C φ X m).obj M) V
+            (((VaryingRing.moduleEvalP C φ f m).hom.app M).val.app V x)) := by
+  intro C X Y f M m n h V x
+  exact SpTowerShriek.canonicalPushHorizontal C φ f M h V x
 
 set_option profiler true in
 private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -259,7 +263,7 @@ private noncomputable def ordinaryModel
     push := fun f ↦ VaryingRing.push (graphRings l E) (graphTransitions l E) f
     evalP := fun f n ↦ VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n
     horizontal := fun {X Y} f M {m n} h V x ↦
-      ordinaryPushHorizontal l E f M h V x
+      ordinaryPushHorizontal (SpTowerShriek.R l E) (graphTransitions l E) f M h V x
     comparison := fun f G d ↦
       Functor.leftUnitor _ ≪≫ Functor.rightUnitor _ ≪≫ d ≪≫ (graphPushIso l E f).symm
     comparison_sections := fun f G d M n V ↦ ordinaryComparisonSections l E f G d M n V }
