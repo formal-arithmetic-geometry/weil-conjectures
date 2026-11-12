@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicIntegers
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicIntegers
 
 /-!
 # Integral models in the ambient derived category
@@ -50,8 +50,10 @@ private theorem derivedCompleteIntegers_boundedConstructible_aux (ℓ : ℕ) [Fa
     derivedCompleteIntegers ℓ E X K₀.obj :=
   derivedCompleteIntegers_of_boundedConstructible K₀.property
 
-private theorem exists_isGE_boundedConstructible_aux {R : Type*} [Preadditive R]
-    {K₀ : BoundedConstructible R} : ∃ n : ℤ, K₀.obj.IsGE n :=
+private theorem exists_isGE_boundedConstructible_aux (ℓ : ℕ) [Fact ℓ.Prime]
+    {X : Scheme.{u}} {E : FiniteIntermediateField ℓ}
+    {K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)} :
+    ∃ n : ℤ, K₀.obj.IsGE n :=
   K₀.property.1.1
 
 private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.Prime]
@@ -69,7 +71,7 @@ private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.P
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀.obj) ≅ K) := by
-  obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux (K₀ := K₀)
+  obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux ℓ (K₀ := K₀)
   exact ⟨n, derivedCompleteIntegers_boundedConstructible_aux ℓ, hn, K₀.property, he⟩
 
 private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ) [Fact ℓ.Prime]
