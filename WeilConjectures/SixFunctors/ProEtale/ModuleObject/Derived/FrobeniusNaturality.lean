@@ -219,15 +219,10 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
           (Functor.leftDerivedFunctorIdIso κT).hom.app (L((g)^*⟦Λ⟧).obj M) := by
   rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
   rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
-  rw [Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
-    (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
-    (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M]
-  rw [upperStarCongr]
-  rw [cancel_mono ((Functor.leftDerivedFunctorIdIso κT).hom.app
-    (L((g)^*⟦Λ⟧).obj M))]
-  rw [cancel_mono ((Functor.leftDerivedFunctorFactorIso (upperStarComp Λ FT g)).hom.app M)]
-  simpa only using (Functor.leftDerivedFunctorNatIso_eqToIso_hom_app
-    (A := (g ≫ FX)^*⟦Λ⟧) (B := (FT ≫ g)^*⟦Λ⟧) (by rw [h]) M)
+  simpa only [upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app] using
+    (Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
+      (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
+      (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M)
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
