@@ -207,12 +207,12 @@ theorem representative_uncurry_evaluation
       (coefficientTotalTensor.{u, t + 1, t} J R).map_id (P, L)
     rw [htensor] at hn
     simp only [op_id] at hn
-    erw [Functor.map_id, NatTrans.id_app] at hn
+    erw [CategoryTheory.Functor.map_id, NatTrans.id_app] at hn
     simp only [Category.id_comp] at hn
     change (chainEquiv.{t + 1, t, u} J R P L _).symm φ' =
       (chainEquiv.{t + 1, t, u} J R P L I).symm φ ≫ r at hn
     rw [hn] at hsquare
-    simp only [Functor.map_comp, Category.assoc] at hsquare
+    simp only [CategoryTheory.Functor.map_comp, Category.assoc] at hsquare
     have hr : DerivedCategory.Q.map r ≫
         coefficientHomResolutionInverse.{u, t + 1, t, (max u (t + 1)) + 1} J R I = 𝟙 _ := by
       exact (augmentationIso.{t + 1, t, u, (max u (t + 1)) + 1} J R I).hom_inv_id
@@ -220,7 +220,7 @@ theorem representative_uncurry_evaluation
     change _ ≫ (S.transpose _ _ _).symm
       (DerivedCategory.Q.map φ' ≫ (coefficientHomResolutionIso J R L I).inv) = _ at hsquare
     dsimp only [φ'] at hsquare
-    erw [Functor.map_comp] at hsquare
+    erw [CategoryTheory.Functor.map_comp] at hsquare
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
       simpa only [Category.assoc, homModelMap, r] using hsquare
