@@ -96,6 +96,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The two chosen construction witnesses have large specifications; keep them folded.
 /-- The inverse limit of finite clopen stages is naturally the component-site scheme.
 Its topological space is the subspace pullback, its structure sheaf is the inverse
