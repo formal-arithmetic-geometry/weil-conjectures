@@ -25,19 +25,24 @@ namespace AlgebraicGeometry
 
 -- Perform the naturality paste before specializing the objects to derived sheaves.
 private theorem paste_unit_naturality
-    {C D E : Type*} [Category C] [Category D] [Category E]
-    (G : C ⥤ D) (H : D ⥤ E) (T : C ⥤ E) (c : G ⋙ H ⟶ T)
-    {A B : C} {U : D} {P Q : E}
-    {a : U ⟶ G.obj A} (t : A ⟶ B)
-    {η : P ⟶ H.obj U} {b : P ⟶ Q} {x : Q ⟶ T.obj A}
-    (hg : η ≫ H.map a ≫ c.app A = b ≫ x) :
-    (η ≫ H.map (a ≫ G.map t)) ≫ c.app B = b ≫ x ≫ T.map t := by
+    {C D A E : Type*} [Category C] [Category D] [Category A] [Category E]
+    (G : C ⥤ D) (H : D ⥤ E) (J : C ⥤ A) (S : A ⥤ E) (c : G ⋙ H ⟶ J ⋙ S)
+    {X Y : C} {U : D} {P : E} {B F L : A}
+    {a : U ⟶ G.obj X} (t : X ⟶ Y)
+    {η : P ⟶ H.obj U} {b : P ⟶ S.obj B}
+    {u : B ⟶ J.obj X} {v : J.obj Y ⟶ F} {d : B ⟶ L} {q : L ⟶ F}
+    (hg : η ≫ H.map a ≫ c.app X = b ≫ S.map u)
+    (hf : u ≫ J.map t ≫ v = d ≫ q) :
+    (η ≫ H.map (a ≫ G.map t)) ≫ c.app Y ≫ S.map v =
+      b ≫ S.map d ≫ S.map q := by
   simp only [Functor.map_comp, Category.assoc]
   have hn := c.naturality t
   simp only [Functor.comp_map] at hn
   rw [hn]
   simp only [← Category.assoc] at hg ⊢
   rw [hg]
+  simp only [Category.assoc]
+  rw [← S.map_comp, ← S.map_comp, hf, S.map_comp]
 
 -- Keep the derived functors abstract while pasting units. The explicit source
 -- equality transports the first Leray equation without unfolding localization choices.
@@ -224,7 +229,6 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
-  let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   have he := (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
@@ -236,23 +240,11 @@ theorem mixedSections_left_unit_normalization
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
-  have hg := paste_unit_naturality (schemeDerivedDirectImage g)
-    (schemeDerivedGlobalSections Z)
-    (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
-    (mixedGlobalSectionsDirectImageIso g).hom (Df.rightDerivedFunctorUnit.app K) hg₀
   have hf := mixedSections_unit f K
-  have h := finish_unit_paste
-    (A := (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj
-      ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
-    (schemeGlobalScalarRestriction g) _
-    ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
-    (Sg.mapDerivedCategoryFactorsh.inv.app
-      ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
-    (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K))
-    ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))
-    ((mixedGlobalSectionsDirectImageIso f).hom.app F)
-    (Sf.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K))
-    ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K)) hg hf
+  have h := paste_unit_naturality (schemeDerivedDirectImage g)
+    (schemeDerivedGlobalSections Z) (schemeDerivedGlobalSections Y)
+    (schemeGlobalScalarRestriction g) (mixedGlobalSectionsDirectImageIso g).hom
+    (Df.rightDerivedFunctorUnit.app K) hg₀ hf
   dsimp only [p]
   rw [← Functor.map_comp]
   erw [he]
