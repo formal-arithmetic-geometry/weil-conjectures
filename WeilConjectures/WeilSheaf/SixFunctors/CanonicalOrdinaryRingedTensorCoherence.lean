@@ -150,6 +150,42 @@ private theorem ordinary_chain_forward_associativity
 attribute [local irreducible] SheafOfModules.monoidalCategory Mod.monoidalCategoryStruct
 attribute [local implicit_reducible] Mod.monoidalCategory Monoidal.induced
 
+-- Specialize the chain coherence before constructing the signed ordinary comparison.
+private theorem ordinary_chain_associativity_comparison
+    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u + 1})
+    (F : ProEtale.AdicSheaf l Y ⥤ RingedTensorModules.{u + 1, u + 1, u + 1} J R)
+    [F.Additive] :
+    letI := SheafOfModules.isMonoidal_W_independentCoefficients R
+    letI := SheafOfModules.monoidalCategory R
+    ∀ (ν : MonoidalCategory.tensor (ProEtale.AdicSheaf l Y) ⋙ F ≅
+        F.prod F ⋙ MonoidalCategory.tensor _)
+      (τ : MonoidalCategory.tensor (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) ⋙
+          F.mapHomologicalComplex (.up ℤ) ≅
+        (F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ)) ⋙
+          MonoidalCategory.tensor _),
+      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
+        (p q n : ℤ) (h : p + q = n),
+        F.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ (τ.hom.app (P, Q)).f n =
+          ν.hom.app (P.X p, Q.X q) ≫ HomologicalComplex.ιTensorObj
+            ((F.mapHomologicalComplex (.up ℤ)).obj P)
+            ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h) →
+      (∀ P Q N : ProEtale.AdicSheaf l Y,
+        (ν.inv.app (P, Q) ▷ F.obj N) ≫ ν.inv.app (P ⊗ Q, N) ≫ F.map (α_ P Q N).hom =
+          (α_ (F.obj P) (F.obj Q) (F.obj N)).hom ≫
+            (F.obj P ◁ ν.inv.app (Q, N)) ≫ ν.inv.app (P, Q ⊗ N)) →
+      ∀ P Q N : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
+        let G := F.mapHomologicalComplex (.up ℤ)
+        G.map (α_ P Q N).hom ≫ τ.hom.app (P, Q ⊗ N) ≫
+            (G.obj P ◁ τ.hom.app (Q, N)) =
+          τ.hom.app (P ⊗ Q, N) ≫ (τ.hom.app (P, Q) ▷ G.obj N) ≫
+            (α_ (G.obj P) (G.obj Q) (G.obj N)).hom := by
+  let _ := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let _ := SheafOfModules.monoidalCategory R
+  intro ν τ ht ha P Q N
+  exact ordinary_chain_forward_associativity F ν τ ht ha P Q N
+
 -- Compare the abstract native and ringed total-tensor instances through their APIs.
 private theorem ordinary_coherence_of_inverse_associativity
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
@@ -214,7 +250,7 @@ private theorem ordinary_coherence_of_inverse_associativity
       Preadditive.zsmul_comp, Category.assoc, ht, ← Category.assoc, hd]
     rfl
   · intro P Q N
-    exact ordinary_chain_forward_associativity E.functor ν τ ht ha P Q N
+    exact ordinary_chain_associativity_comparison l Y J R E.functor ν τ ht ha P Q N
 
 attribute [local irreducible] ProEtale.NativeFrobenius.equivalence
 
