@@ -78,7 +78,9 @@ private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.P
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀.obj) ≅ K) := by
-  obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
+  let hGE := exists_isGE_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
+  let n := hGE.choose
+  have hn := hGE.choose_spec
   refine ⟨n, ?_, hn, boundedConstructible_obj_aux ℓ (X := X) (E := E) (K₀ := K₀), he⟩
   exact derivedCompleteIntegers_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
 
