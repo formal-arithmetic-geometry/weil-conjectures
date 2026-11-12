@@ -81,6 +81,29 @@ private theorem roof_formula_cancel {C : Type*} [Category C] {A B I J K : C}
     (rI.hom ≫ b ≫ inv mu ≫ rJ.inv) ≫ rJ.hom ≫ mu = rI.hom ≫ b := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id, Category.comp_id]
 
+private def restrictedRoof_comparison {X Z : Scheme.{u}} (v : Z ⟶ X)
+    {G : Z.Modules} (J : InjectiveResolution G) (U : X.Opens)
+    (R' : RestrictedResolutionSections J (v ⁻¹ᵁ U)) :
+    ((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        (((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex) ≅
+      ((pushforward (v.resLE U (v ⁻¹ᵁ U) le_rfl)).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj R'.resolution.cocomplex :=
+  (NatIso.mapHomologicalComplex
+    (pushforwardRestrictIso (coefficient_restriction_pullback v U))
+    (ComplexShape.up ℕ)).app J.cocomplex ≪≫
+      ((pushforward (v.resLE U (v ⁻¹ᵁ U) le_rfl)).mapHomologicalComplex
+        (ComplexShape.up ℕ)).mapIso R'.comparison.symm
+
+private theorem roof_denominator_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (r : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) (s : r ⋙ G ≅ H)
+    {K L : C} {M : D} {Q : E} (c : r.obj K ≅ M) (a : Q ≅ G.obj M)
+    (rho : Q ⟶ H.obj K) (ell : K ⟶ L)
+    (hs : G.map c.hom ≫ a.inv ≫ rho = s.hom.app K) :
+    (a.hom ≫ G.map (c.inv ≫ r.map ell)) ≫ s.hom.app L = rho ≫ H.map ell :=
+  roof_denominator G c a rho (s.hom.app K) (s.hom.app L)
+    (r.map ell) (H.map ell) hs (s.hom.naturality ell)
+
 private theorem coefficientData_roof_formula {X Y : Scheme.{u}} {v : X ⟶ Y}
     {F : SheafOfModules.{u} Y.ringCatSheaf} {G : SheafOfModules.{u} X.ringCatSheaf}
     {φ : F ⟶ (pushforward v).obj G} (D : ModuleCohomologyFMapData v F G φ) (q : ℕ) :
@@ -183,8 +206,7 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
   let bc := pushforwardRestrictIso (coefficient_restriction_pullback v U)
   let c : rC.obj (((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj
       J.cocomplex) ≅ P.obj R'.resolution.cocomplex :=
-    (NatIso.mapHomologicalComplex bc (ComplexShape.up ℕ)).app J.cocomplex ≪≫
-      P.mapIso R'.comparison.symm
+    restrictedRoof_comparison v J U R'
   let lambda : P.obj R'.resolution.cocomplex ⟶ rC.obj L := c.inv ≫ rC.map ell
   let betaU := R.comparison.hom ≫ rC.map beta
   let a := pushforward_sections_iso (v.resLE U (v ⁻¹ᵁ U) le_rfl) R'.resolution.cocomplex
@@ -212,7 +234,7 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
       restrictedDirectImageMap v φ U ≫
         (pushforward (v.resLE U (v ⁻¹ᵁ U) le_rfl)).map (R'.resolution.ι.f 0) ≫
         lambda.f 0 := by
-    dsimp only [betaU, lambda, c]
+    dsimp only [betaU, lambda, c, restrictedRoof_comparison]
     simp only [HomologicalComplex.comp_f, Iso.trans_inv, Functor.mapIso_inv,
       Iso.symm_inv]
     change R.resolution.ι.f 0 ≫ R.comparison.hom.f 0 ≫ r.map (beta.f 0) =
@@ -242,13 +264,8 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
       cS.hom.app (((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj
         J.cocomplex) := restriction_pushforward_sections v J U R'
   have hden : (a.hom ≫ ΓU.map lambda) ≫ cS.hom.app L =
-      R'.sections.hom ≫ Γ.map ell := by
-    have hn : ΓU.map (rC.map ell) ≫ cS.hom.app L =
-        cS.hom.app (((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj
-          J.cocomplex) ≫ Γ.map ell := cS.hom.naturality ell
-    exact roof_denominator ΓU c a R'.sections.hom
-      (cS.hom.app (((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj
-        J.cocomplex)) (cS.hom.app L) (rC.map ell) (Γ.map ell) hsec hn
+      R'.sections.hom ≫ Γ.map ell :=
+    roof_denominator_naturality rC ΓU Γ cS c a R'.sections.hom ell hsec
   have hnum : ΓU.map betaU ≫ cS.hom.app L = R.sections.hom ≫ Γ.map beta := by
     have hn : ΓU.map (rC.map beta) ≫ cS.hom.app L =
         cS.hom.app I.cocomplex ≫ Γ.map beta := cS.hom.naturality beta

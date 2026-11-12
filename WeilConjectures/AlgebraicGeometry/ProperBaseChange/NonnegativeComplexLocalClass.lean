@@ -35,6 +35,28 @@ private theorem map_comp_through {C D : Type*} [Category C] [Category D]
   rw [← F.map_comp, hf]
   simp only [F.map_comp, ← Category.assoc, hk]
 
+private theorem mapExtend_comp_component
+    {C D E T : Type*} [Category C] [Category D] [Category E] [Category T]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian T]
+    (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ T) [F.Additive] [G.Additive] [H.Additive]
+    (L : CochainComplex C ℕ) (q : ℕ) :
+    let B := (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj L
+    let Γ := (F ⋙ G) ⋙ H
+    let A := (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj L
+    (A.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).inv ≫
+        (L.mapExtendIso ComplexShape.embeddingUpNat Γ).inv.f (q : ℤ) ≫
+        H.map (G.map ((L.mapExtendIso ComplexShape.embeddingUpNat F).hom.f (q : ℤ))) ≫
+        H.map (G.map (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom) =
+      𝟙 (A.X q) := by
+  intro B Γ A
+  have hr : ComplexShape.embeddingUpNat.r (q : ℤ) = some q :=
+    ComplexShape.embeddingUpNat.r_f q
+  dsimp only [HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents,
+    HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
+  erw [HomologicalComplex.mapExtendX_hom_eq L Γ hr,
+    HomologicalComplex.mapExtendX_hom_eq L F hr]
+  simp only [eqToIso.hom, eqToIso.inv, eqToHom_map, eqToHom_trans, eqToHom_refl]
+
 set_option profiler true in
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
@@ -99,6 +121,10 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
         ((RingedSpace.localAbelianSections Y.toRingedSpace).map d.hom).app (op V) := by
   intro P E Γ B a J d
   let F := RingedSpace.localAbelianSections Y.toRingedSpace
+  let : F.Additive := inferInstanceAs
+    (RingedSpace.localAbelianSections Y.toRingedSpace).Additive
+  let : P.Additive := inferInstanceAs (D ⋙ F).Additive
+  let : Γ.Additive := inferInstanceAs (P ⋙ E).Additive
   let I := L.extend ComplexShape.embeddingUpNat
   let A := (P.mapHomologicalComplex (.up ℤ)).obj I
   let C := (Γ.mapHomologicalComplex (.up ℕ)).obj L
@@ -152,14 +178,7 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
         (L.mapExtendIso ComplexShape.embeddingUpNat Γ).inv.f (q : ℤ) ≫
         E.map (F.map ((L.mapExtendIso ComplexShape.embeddingUpNat D).hom.f (q : ℤ))) ≫
         E.map (F.map (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom) =
-      𝟙 (C.X q) := by
-    have hr : ComplexShape.embeddingUpNat.r (q : ℤ) = some q :=
-      ComplexShape.embeddingUpNat.r_f q
-    dsimp only [HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents,
-      HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
-    erw [HomologicalComplex.mapExtendX_hom_eq L Γ hr,
-      HomologicalComplex.mapExtendX_hom_eq L D hr]
-    simp only [eqToIso.hom, eqToIso.inv, eqToHom_map, eqToHom_trans, eqToHom_refl]
+      𝟙 (C.X q) := mapExtend_comp_component D F E L q
   have hcycles : z ≫ E.map k ≫ E.map (F.map zD) = zM := by
     apply (cancel_mono (E.map (F.map (B.iCycles q)))).1
     have hh : k ≫ F.map zD ≫ F.map (B.iCycles q) =
