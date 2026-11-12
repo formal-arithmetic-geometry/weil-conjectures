@@ -168,6 +168,17 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
+private theorem integral_totalPair_eq_generator
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      CommRingCat.{max u (t + 1)})
+    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ)
+    (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+    (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    totalPair Y R P Q i j U x y =
+      coefficientTensorGenerator.{u, t + 1, t}
+        (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
+  rfl
+
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem normalizedBeta_inv_generator (n : ℕ)
@@ -244,7 +255,8 @@ private theorem normalizedBeta_eq (n : ℕ)
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
-    simpa only [CoefficientScalarTensorGenerators, coefficientIntegralScalarUnitSection, totalPair] using
+    simpa only [CoefficientScalarTensorGenerators, coefficientIntegralScalarUnitSection,
+      integral_totalPair_eq_generator] using
       (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j (i + j) rfl U x y)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
