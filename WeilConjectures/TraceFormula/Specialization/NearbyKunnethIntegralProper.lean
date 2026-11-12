@@ -90,12 +90,14 @@ theorem isIso_kunnethMap_padicIntegers_of_isProper [IsNoetherian X] [IsNoetheria
     IsIso (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A B) := by
   have : TopologicalSpace.NoetherianSpace X := inferInstance
   have : TopologicalSpace.NoetherianSpace Y := inferInstance
-  have : QuasiCompact M.j := hM.isTraitModel.quasiCompact_j
-  have : QuasiSeparated M.j := hM.isTraitModel.quasiSeparated_j
-  have : QuasiCompact N.j := hN.isTraitModel.quasiCompact_j
-  have : QuasiSeparated N.j := hN.isTraitModel.quasiSeparated_j
-  have : QuasiCompact P.j := hP.isTraitModel.quasiCompact_j
-  have : QuasiSeparated P.j := hP.isTraitModel.quasiSeparated_j
+  have hqc : QuasiCompact (traitGenericPoint k') := inferInstance
+  have hqs : QuasiSeparated (traitGenericPoint k') := inferInstance
+  have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip hqc
+  have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip hqs
+  have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip hqc
+  have : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip hqs
+  have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip hqc
+  have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip hqs
   -- bounds below of `A`, `B` and of their external product
   have ha : A.IsGE hA.1.1.choose := hA.1.1.choose_spec
   have ha' : B.IsGE hB.1.1.choose := hB.1.1.choose_spec
