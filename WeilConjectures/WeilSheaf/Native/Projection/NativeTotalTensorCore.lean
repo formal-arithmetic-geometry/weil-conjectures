@@ -80,8 +80,6 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
--- Profiling at 400000 heartbeats passes the sheaf square and naturality (21s);
--- reserve the cumulative budget needed to close the final summand calculation.
 include hmu hsheaf in
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma projection_totalTensorSquare_of_sheaf
