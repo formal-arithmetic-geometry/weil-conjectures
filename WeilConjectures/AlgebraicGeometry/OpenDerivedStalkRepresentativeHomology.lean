@@ -165,7 +165,6 @@ private theorem additive_stalk_representative_homology
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
     Iso.app_inv, Functor.comp_map] using h
 
-set_option profiler true in
 /-- On a complex, the constructed derived comparison is homology of the inverse
 additive restriction-stalk map, conjugated by the exact forgetful comparisons.
 
