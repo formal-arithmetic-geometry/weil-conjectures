@@ -302,6 +302,32 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
   have he := hcomplexa.2.2
   let e := he.some
   choose F₀ hF₀ using hterms
+  have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
+      (M : Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+        (condensedRingObj (Λ) N.generic)),
+      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := fun j M ↦ by
+    have hc : Fintype.card ((galoisTower Ω h).Γ j) = Module.finrank L j := by
+      change Fintype.card (j ≃ₐ[L] j) = _
+      rw [← Nat.card_eq_fintype_card, IsGalois.card_aut_eq_finrank]
+    rw [hc]
+    exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
+      (hp j) M
+  have hdZ : ∀ (j : FiniteGaloisIntermediateField L Ω)
+      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+        (condensedRingObj (Λ) Z)),
+      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := fun j M ↦ by
+    have hc : Fintype.card ((galoisTower Ω h).Γ j) = Module.finrank L j := by
+      change Fintype.card (j ≃ₐ[L] j) = _
+      rw [← Nat.card_eq_fintype_card, IsGalois.card_aut_eq_finrank]
+    rw [hc]
+    exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
+      (hp j) M
+  have hc := fun n ↦ isColimitModuleCocone_galoisTower Ω h T₀ (K.X n)
+    (essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some)
+  have hcab := fun n ↦ (nonempty_isColimit_galoisUpperLowerCocone (Ω := Ω) h (K.X n).X
+    (essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some)).some
+  have hK := fun n ↦
+    rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
