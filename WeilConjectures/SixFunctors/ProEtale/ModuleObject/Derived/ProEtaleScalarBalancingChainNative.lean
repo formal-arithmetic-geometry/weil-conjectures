@@ -221,8 +221,6 @@ private lemma balancingPull_projection
   rw [balancingPull_unit, whiskerLeft_comp_assoc, Mod.whiskerLeft_extendUnitHom_smul']
   rw [MonoidalCategory.tensorHom_def, Category.assoc]
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- Identify the scalar-first map on the entire tensor projection.
 private lemma balancingIso_scalar
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
@@ -271,7 +269,6 @@ private lemma balancingIso_scalar
     Iso.hom_inv_id_app_assoc (comapUpperStarIso a f)] at h'
   exact h'
 
-set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The proof compares several presentations of the degree-zero coefficient total.
 /-- Ordinary condensed scalar balancing, its transported scalar action and chain normalization.
