@@ -106,9 +106,7 @@ theorem isZero_specializationDefect_polyAffine_zero
     hP _ _ (0 : specializationDefect (polyAffine k 1) (polyAffineHyperplane k 0) k'
       (Profinite.padicAlgClRingObj ℓ) L₀.obj ⟶ 0) this)).1
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- The elaboration of the support condition needs more than the default heartbeats.
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`, after
 the generic vanishing and the Noether normalisation: let `ψ` be an automorphism of `𝔸^{N+2}_k`,
 `v : 𝔸^{N+2}_k ⟶ ℙ¹_{𝔸^{N+1}_k}` the composite of `ψ` and the compactification of `X₀`, and
@@ -206,22 +204,17 @@ theorem isZero_specializationDefect_of_isFinite (N : ℕ)
     rw [range_centreSpecialFibreMap v H k', Set.mem_preimage, ← Category.assoc,
       Scheme.Hom.comp_apply, h₂, range_polyAffineChart, Set.mem_compl_iff]
     exact h₁
-  obtain ⟨x, hxy⟩ := Set.mem_range.mp hyv
+  rcases hyv with ⟨x, hxy⟩
   by_cases hx : constantSpecialFibreProj k' (centre _ _) x ∈ U
   · -- over `U` the defect vanishes
-    obtain ⟨x', hx'⟩ : x ∈ Set.range ((constantSpecialFibreProj k'
-        (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι.base := by
-      rw [Scheme.Opens.range_ι]
-      exact hx
     refine ⟨_, ((constantSpecialFibreProj k'
       (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι ≫
-      (centreSpecialFibreMap v H k').left, inferInstance, ⟨x', by
-        rw [Scheme.Hom.comp_apply, hx', hxy]⟩, ?_⟩
+      (centreSpecialFibreMap v H k').left, inferInstance, ⟨⟨x, hx⟩, hxy⟩, ?_⟩
     exact (hU.of_iso ((L((((constantSpecialFibreProj k'
       (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι)^*⟦Λ⟧)).mapIso
       e₁.symm)).of_iso ((leftDerivedUpperStarComp Λ _ _).app C)
   · -- outside `U`, the point lies over `a`
-    obtain ⟨s, hs⟩ := hY ⟨_, hx, rfl⟩
+    rcases hY ⟨_, hx, rfl⟩ with ⟨s, hs⟩
     refine absurd ?_ hy₂
     rw [← hxy, range_centreSpecialFibreMap_eq_preimage, range_centreMap]
     refine ⟨s, ?_⟩
