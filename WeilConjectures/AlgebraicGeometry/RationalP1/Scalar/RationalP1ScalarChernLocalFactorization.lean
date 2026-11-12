@@ -415,7 +415,8 @@ theorem scalar_chern_local_factorization
       ((family.toIntegral E).units Y) ((family.toIntegral E).units (ProjectiveLine Y))
       (family.toIntegral E).lineP hreal
     have hq := extend_local_adjunct_of_eq (padicIntegersRingObjToContinuousMapRingObj l E)
-      (ProjectiveLine Y ↘ Y) (family.integral E).Rq (family.rational E).Rq (family.toRational E).q.square
+      (ProjectiveLine Y ↘ Y) (family.integral E).Rq (family.rational E).Rq
+      (family.toRational E).q.square
       ((family.toRational E).units Y) ((family.toRational E).units (ProjectiveLine Y))
       (family.toRational E).lineP hi
     have hfinal := canonical_local_adjunct_of_eq
@@ -430,7 +431,8 @@ theorem scalar_chern_local_factorization
       ((family.toIntegral E).units (ProjectiveLine Y))
       ((family.toIntegral E).units (diagonalSurface Y)) (family.toIntegral E).lineW hreal
     have hq := extend_local_adjunct_of_eq (padicIntegersRingObjToContinuousMapRingObj l E)
-      (secondProjection Y) (family.integral E).R₂ (family.rational E).R₂ (family.toRational E).p₂.square
+      (secondProjection Y) (family.integral E).R₂ (family.rational E).R₂
+      (family.toRational E).p₂.square
       ((family.toRational E).units (ProjectiveLine Y))
       ((family.toRational E).units (diagonalSurface Y)) (family.toRational E).lineW hi
     have hfinal := canonical_local_adjunct_of_eq
@@ -439,7 +441,7 @@ theorem scalar_chern_local_factorization
       (scalarP2UnitIso _ Y).hom (native_p2_endpoint _ Y) hq
     unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
     dsimp only
-    simpa only [coefficient, line, secondProjection, diagonalSurface, Modules,
+    simpa only [coefficient, line, secondProjection, diagonalSurface, Modules, id_eq,
       moduleObjectDerivedPushforward, derivedLower] using hfinal
 
 end AlgebraicGeometry.ProEtale.RationalP1
