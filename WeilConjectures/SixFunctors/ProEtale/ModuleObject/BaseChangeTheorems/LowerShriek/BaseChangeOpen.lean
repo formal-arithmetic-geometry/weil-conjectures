@@ -182,7 +182,6 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
   exact boundedConstructibleBaseChange_id ℓ
 
-set_option profiler true in
 -- the identification of the trivial compactification of `f` with `f` unfolds the functors
 /-- **`Ex_!` for open immersions**, on the trivial compactifications: the compact-support exchange
 map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R(𝟙)_* ≅ 𝟭` and the
@@ -208,26 +207,26 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
     rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange_ofIsOpenImmersion_eq ℓ sq]
     simp [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso]
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChange_eq]
-  ext K
-  have hE' := congr_app (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ
-      (f := f) (f' := f') (g := g))
-    ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
-      (Compactification.ofIsOpenImmersion f.left).overI).obj K)
-  have hθ' := congr_app hb K
-  have hn := (boundedConstructibleLowerStarId ℓ Y').hom.naturality
-    ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
-      (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq)).hom.app K)
-  dsimp only [Compactification.ofIsOpenImmersion, Compactification.overG,
-    Compactification.overObj] at hn ⊢
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app, Category.comp_id, Functor.comp_obj,
-    Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
-  simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.assoc, Functor.comp_obj]
-  rw [reassoc_of% hn]
-  rw [hθ']
-  rw [Category.comp_id]
-  rw [hE']
+  simpa only [Functor.comp_obj] using
+    (Functor.whiskerLeft_comp_whiskerRight_comp_aux
+      (jS := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        (Compactification.ofIsOpenImmersion f.left).overI)
+      (P := boundedConstructibleLowerStar ℓ
+        (Compactification.ofIsOpenImmersion f.left).overG)
+      (G := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+      (G' := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
+      (jS' := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        (Compactification.ofIsOpenImmersion f'.left).overI)
+      (P' := boundedConstructibleLowerStar ℓ
+        (Compactification.ofIsOpenImmersion f'.left).overG)
+      (boundedConstructibleLowerStarId ℓ Y) (boundedConstructibleLowerStarId ℓ Y')
+      (E := boundedConstructibleBaseChange ℓ
+        (isPullback_ofIsOpenImmersion_overG (f := f) (f' := f') (g := g)).toCommSq)
+      (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ)
+      (β := boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+        (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq))
+      (θ := boundedConstructibleOpenImmersionLowerShriekBaseChange'
+        (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) hb)
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and
 `Rf'_! ≅ f'_!`, the compact-support base change of a cartesian square with `f` and `f'` open
