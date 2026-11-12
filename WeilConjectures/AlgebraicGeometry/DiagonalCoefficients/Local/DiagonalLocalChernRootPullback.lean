@@ -88,7 +88,6 @@ private theorem constantPushforward_map_heq (A : Type u) [CommRing A]
   cases h
   exact (pushforward_map_apply A f a U x).symm
 
-set_option profiler true in
 -- Compare the scalar-extension root section with its normalized finite evaluation.
 private theorem normalizedRootSection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
@@ -139,7 +138,7 @@ private theorem normalizedRootSection
       (Scheme.tateFiniteTensor T l (FiniteRing l (ULift.{u} (Padic l)) n) n
         (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1) hz))
 
--- Transport an arbitrary module morphism, without unfolding a Chern-line module.
+-- Transport a module morphism before specializing to Chern-line modules.
 private theorem varyingPush_adjoint_section
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
     {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)
@@ -170,7 +169,6 @@ private theorem varyingPush_adjoint_section
     ((α.val.app (op (n, U.unop))) x)
   exact (d.varyingPush_sections N n U _).trans (hα.trans hp.symm)
 
-set_option profiler true in
 -- Compare the line sections in the two scalar restrictions and finite evaluations.
 private theorem horizontal_varying_root_square
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
@@ -217,12 +215,11 @@ private theorem horizontal_varying_root_square
       d.line.iso.hom n U x) := by
     exact (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).trans hv
   dsimp only [x, N, y] at hx'
-  have hn := d.line.normalization n U 1 z
-  rw [← hinput, map_one] at hn
+  have heval := d.line.normalization n U 1 z
+  rw [← hinput, map_one] at heval
   have hmap := constantPushforward_map_heq (SpTowerShriek.R l (ULift.{u} (Padic l)) n) hX
     (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx'
-  rw [← hmap] at hn
-  have heval := hn
+  rw [← hmap] at heval
   let z' := (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
