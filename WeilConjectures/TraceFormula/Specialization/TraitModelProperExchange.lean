@@ -145,9 +145,10 @@ variable {X X' X₁ X₁' Z Z' Z₁ Z₁' : Scheme.{u}} {M : NearbyCyclesModel X
   {f₀ : Z ⟶ X} {f₀' : Z' ⟶ X'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'} {k₀ : Z ⟶ Z₁}
   {k₀' : Z' ⟶ Z₁'} {e : Z₁ ⟶ X₁} {e' : Z₁' ⟶ X₁'}
 
-/-- In a square of exchanges, invertibility of the other five maps implies invertibility
-of the pullback of the remaining pushforward exchange. -/
-lemma Hom.isIso_map_pushforwardExchange_app_of_square (φ₀ : P.Hom M f₀ f₀')
+/-- In a square of exchanges whose pullback along `e'` reflects isomorphisms, invertibility
+of the other five maps implies invertibility of the remaining pushforward exchange. -/
+lemma Hom.isIso_pushforwardExchange_app_of_square [L((e')^*⟦Λ⟧).ReflectsIsomorphisms]
+    (φ₀ : P.Hom M f₀ f₀')
     (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k₀ k₀') (φ₁ : P₁.Hom M₁ e e')
     (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)
     (hgen : φ₀.generic ≫ ψ.generic = ψ'.generic ≫ φ₁.generic) (hb : f₀ ≫ g = k₀ ≫ e)
@@ -159,7 +160,7 @@ lemma Hom.isIso_map_pushforwardExchange_app_of_square (φ₀ : P.Hom M f₀ f₀
     (hα₁ : IsIso ((φ₁.pullbackExchange Λ).app (R((g)_*⟦Λ⟧).obj A)))
     (hbc : IsIso ((baseChangeMap Λ ⟨hb⟩).app A))
     (hχ' : IsIso ((ψ'.pushforwardExchange Λ).app (L((f₀)^*⟦Λ⟧).obj A))) :
-    IsIso (L((e')^*⟦Λ⟧).map ((ψ.pushforwardExchange Λ).app A)) := by
+    IsIso ((ψ.pushforwardExchange Λ).app A) := by
   have key := pushforwardExchange_square_aux
     (derivedUpperStarLowerStarAdjunction Λ g) (derivedUpperStarLowerStarAdjunction Λ k₀)
     (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ k₀')
@@ -176,8 +177,9 @@ lemma Hom.isIso_map_pushforwardExchange_app_of_square (φ₀ : P.Hom M f₀ f₀
       (baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A)) := by
     rw [key]
     exact IsIso.comp_isIso' hα₁ (IsIso.comp_isIso' (Functor.map_isIso _ _) hχ')
-  exact IsIso.of_isIso_comp_right _ ((baseChangeMap Λ ⟨hs⟩).app _ ≫
+  have := IsIso.of_isIso_comp_right _ ((baseChangeMap Λ ⟨hs⟩).app _ ≫
     R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A))
+  exact isIso_of_reflects_iso _ L((e')^*⟦Λ⟧)
 
 end Square
 
@@ -229,22 +231,19 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
       exact IsPullback.of_id_fst
     exact isIso_baseChangeMap_of_weaklyEtale 𝐐 hsq
   -- the proper exchange of the model of the geometric generic fibre is invertible
-  have hC₀ : boundedConstructible _ (L((e)^*⟦𝐐⟧).obj A) :=
-    boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ e _ hA
+  have hC₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme 𝐐 e A hA
   have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) (L((e)^*⟦𝐐⟧).obj A) hC₀
-  have iso : L((M.ε)^*⟦𝐐⟧).obj A ≅ L((M.j)^*⟦𝐐⟧).obj (L((e)^*⟦𝐐⟧).obj A) :=
+  have iso :=
     (eqToIso (congrArg (fun f : M.generic ⟶ X.left ↦ L((f)^*⟦𝐐⟧)) he.symm)).app A ≪≫
       (leftDerivedUpperStarComp 𝐐 M.j e).app A
   have hχgen : IsIso ((hM.toTraitGeneric.pushforwardExchange 𝐐).app (L((M.ε)^*⟦𝐐⟧).obj A)) :=
     NatTrans.isIso_app_of_iso' _ iso
-  have : IsIso (L((𝟙 (point k').left)^*⟦𝐐⟧).map ((h.toTrait.pushforwardExchange 𝐐).app A)) :=
-    Hom.isIso_map_pushforwardExchange_app_of_square 𝐐 (toGenericSelfHom M) h.toTrait
-      hM.toTraitGeneric (traitGenericModelHom k k')
-      (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs A
-      (by infer_instance) (by infer_instance) (by infer_instance) pbc hχgen
   have : L((𝟙 (point k').left)^*⟦𝐐⟧).IsEquivalence :=
     Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 _).symm
-  exact isIso_of_reflects_iso _ L((𝟙 (point k').left)^*⟦𝐐⟧)
+  exact Hom.isIso_pushforwardExchange_app_of_square 𝐐 (toGenericSelfHom M) h.toTrait
+    hM.toTraitGeneric (traitGenericModelHom k k')
+    (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs A
+    (by infer_instance) (by infer_instance) (by infer_instance) pbc hχgen
 
 /-- **Proper exchange for a proper trait model over the base**: if `X` is proper over `k`, the
 total space of the trait model `M` over the base is proper over the trait and its geometric
