@@ -524,7 +524,6 @@ private lemma boundedConstructibleNearbyCycles_map_hom'' {X X' : Scheme.{u}}
   rfl
 
 -- the motive checks of the rewrites in the proof take a few seconds each on the large goal
-set_option profiler true in
 /-- **The square law of the pullback exchanges** on bounded constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_square`), for a commutative square of morphisms of
 models `φ₀ : M₂ ⟶ M`, `ψ : M ⟶ M_c`, `ψ' : M₂ ⟶ M₂,c`, `φ₁ : M₂,c ⟶ M_c` in which `ψ` and `ψ'`
@@ -573,14 +572,6 @@ lemma boundedConstructiblePullbackExchange_square (φ₀ : M₂.Hom M c p)
           A).hom := by
   subst hα hαc
   apply ObjectProperty.hom_ext
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    boundedConstructibleUpperStarOfMap_map, ObjectProperty.homMk_hom,
-    boundedConstructibleUpperStar_map_hom, liftExchange_app_hom, liftExchange_app_hom,
-    Hom.boundedConstructiblePullbackExchange_app_hom,
-    Hom.boundedConstructiblePullbackExchange_app_hom,
-    boundedConstructibleUpperStarSquareIso_hom_hom, boundedConstructibleNearbyCycles_map_hom'',
-    boundedConstructibleUpperStarSquareIso_hom_hom]
   exact pullbackExchange_square' ℓ φ₀ ψ ψ' φ₁ htot hgen hb hs A.obj
 
 end SquareExchange
