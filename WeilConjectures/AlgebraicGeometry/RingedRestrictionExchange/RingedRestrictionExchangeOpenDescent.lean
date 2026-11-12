@@ -778,7 +778,6 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward false in
 set_option profiler true in
-set_option maxHeartbeats 1300000 in
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
 private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
