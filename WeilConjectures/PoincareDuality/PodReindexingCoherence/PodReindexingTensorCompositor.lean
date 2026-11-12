@@ -373,7 +373,11 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
   rw [hi']
   clear hcancel hi hi'
-  trace_state
+  have hcg' := congrArg
+    (fun v ↦ (((total l E Z s).map
+      (Prod.mkHom (k.complex P).hom (k.complex L).hom)).f n).val.app U v)
+    (cgh.tensorChain_pure P L p q n hpq U.unop x y)
+  rw [hcg']
   sorry
 
 set_option maxHeartbeats 8000000 in
