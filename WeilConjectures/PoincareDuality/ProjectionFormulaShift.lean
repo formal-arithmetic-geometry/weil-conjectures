@@ -26,6 +26,8 @@ universe u
 open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
+
+-- Reuse the tensor and colimit instances when elaborating composite derived functors.
 open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -114,7 +116,7 @@ noncomputable def exceptionalProjectionMorphismOfCompactificationNatTrans
   app B := exceptionalProjectionMorphismOfCompactification Λ c K B
   naturality _ _ h := exceptionalProjectionMorphismOfCompactification_natural_right Λ c K h
 
-set_option trace.profiler true in
+set_option synthInstance.maxSize 4096 in
 /-- **The exceptional projection morphism commutes with the shifts** in its second variable. -/
 instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
