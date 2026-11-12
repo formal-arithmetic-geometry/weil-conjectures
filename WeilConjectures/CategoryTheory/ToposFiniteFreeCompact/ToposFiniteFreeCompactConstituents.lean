@@ -1050,6 +1050,7 @@ def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
 section
 omit [Module.Finite A B] [Module.Free A B]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
