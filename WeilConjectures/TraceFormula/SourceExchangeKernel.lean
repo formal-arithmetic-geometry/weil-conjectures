@@ -127,6 +127,6 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
   dsimp only [externalProduct, verdierDual, dualizingComplex, dualizingComplex', toPoint,
     tensorLeft, Functor.comp_obj, Functor.id_obj, curriedTensor_obj_obj,
     curriedTensor_obj_map] at htransport ⊢
-  exact htransport
+  convert! htransport using 1 <;> (congr 1 <;> rfl)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
