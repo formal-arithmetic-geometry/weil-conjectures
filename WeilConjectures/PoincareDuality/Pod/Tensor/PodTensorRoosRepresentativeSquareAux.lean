@@ -349,9 +349,22 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     isoReductionIntegralComplex, podGoodReindex, integralOperationsRoosFunctor,
     Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj,
     ObjectProperty.lift_obj_obj] at a b eP eQ e
-  have cancel := podTensorRepresentative_cancel (integralCompletedTensor l E X)
+  have cancelCore := podTensorRepresentative_cancel
+    (C := DerivedCategory (scalarReductionSource l E X))
+    (D := DerivedCategory (scalarReductionSource l E X))
+    (J := CochainComplex (scalarReductionSource l E X) ℤ)
+    (K := ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E X) ℤ)
+    (integralCompletedTensor l E X)
     (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
     (DerivedCategory.Q (C := scalarReductionSource l E X))
+    (P := (isoReductionIntegralInverse l E g).mapDerivedCategory.obj
+      (DerivedCategory.Q.obj P.obj))
+    (Q := (isoReductionIntegralInverse l E g).mapDerivedCategory.obj
+      (DerivedCategory.Q.obj Q.obj))
+    (P' := DerivedCategory.Q.obj
+      (((isoReductionIntegralInverse l E g).mapHomologicalComplex (.up ℤ)).obj P.obj))
+    (Q' := DerivedCategory.Q.obj
+      (((isoReductionIntegralInverse l E g).mapHomologicalComplex (.up ℤ)).obj Q.obj))
     (A := (podOrdinaryReindex l E g).obj ((integralCompletedTensor l E Y).obj
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)))
     (B := (podOrdinaryReindex l E g).obj (DerivedCategory.Q.obj (integralOperationsRoos
@@ -367,7 +380,13 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (W := (isoReductionIntegralComplex l E g).obj
       (integralOperationsRoos
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
-    eP eQ e
+  trace "cancel core"
+  have cancelP := cancelCore eP
+  trace "cancel P"
+  have cancelQ := cancelP eQ
+  trace "cancel Q"
+  have cancel := cancelQ e
+  trace "cancel e"
   have cancel' := cancel
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
