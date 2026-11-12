@@ -370,6 +370,10 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
           (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
             (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius x =
           ((H.dual hH).stalk zf).frobenius x := by
+      change (((H.dual hH).stalk zf).rescale
+          (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
+            (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobeniusEnd x =
+        ((H.dual hH).stalk zf).frobeniusEnd x
       rw [FrobeniusModule.frobeniusEnd_rescale_apply hc0, hone, one_smul]
     rw [hrescale]
     exact hΨ'
