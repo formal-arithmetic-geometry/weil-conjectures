@@ -70,11 +70,12 @@ theorem scalarCompNormalization
           (Functor.mapHomotopyCategoryCompIso
             (Iso.refl (Mod.extendScalars φ ⋙ Mod.extendScalars ψ)) (.up ℤ)).inv.app K) := by
   erw [scalarCompNormalization_comparison (Mod.extendScalarsComp φ ψ).symm (.up ℤ) K]
-  simpa only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-    Functor.map_id, Category.comp_id] using
-    congrArg (fun f ↦ f ≫ DerivedCategory.Qh.map
+  have h := congrArg (fun f ↦ f ≫ DerivedCategory.Qh.map
       ((Functor.mapHomotopyCategoryCompIso (Mod.extendScalarsComp φ ψ).symm (.up ℤ)).inv.app K))
       (Mod.derivedExtendScalarsCompIso_hom_app_comp_counit φ ψ K)
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] at h
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at h
+  exact h
 
 
 end AlgebraicGeometry.ProEtale.CondensedRing
