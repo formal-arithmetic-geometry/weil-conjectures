@@ -146,6 +146,7 @@ theorem isIso_map_map_nearbyDualityMap_iff_of_isOpenImmersion {E : Type*} [Categ
 
 end OpenRestriction
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the triangles of the duality map live on large derived categories
 /-- **Finite support of the cone of the duality map, from the generic slices** (blueprint
