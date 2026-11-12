@@ -186,7 +186,9 @@ theorem representative_uncurry_evaluation
     let φ' : P ⟶ homComplex (R := R) L
         ((coefficientHomResolution.{u, t + 1, t} J R).obj I) :=
       φ ≫ ((homComplexFunctor (R := R)).obj (op L)).map r
-    obtain ⟨ψ, hψ, hsquare⟩ := T.uncurry_model ⟨P, hP⟩ ⟨L, hL⟩ I φ'
+    have huncurry : CoefficientTensorUncurryModel J R S T.comparison :=
+      T.uncurry_model
+    obtain ⟨ψ, hψ, hsquare⟩ := huncurry ⟨P, hP⟩ ⟨L, hL⟩ I φ'
     have hψeq : ψ = (chainEquiv.{t + 1, t, u} J R P L
         ((coefficientHomResolution.{u, t + 1, t} J R).obj I)).symm φ' := by
       apply total_generator_ext Y R
