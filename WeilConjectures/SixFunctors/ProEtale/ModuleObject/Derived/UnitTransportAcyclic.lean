@@ -60,7 +60,7 @@ lemma comp_eq_comp_of_app_naturality {C D : Type*} [Category C] [Category D]
     (e' : Q₀ ⟶ Q₁) (u' : Q₁ ⟶ Q₂) (r' : Q₂ ⟶ G.obj X) (x : P₁ ⟶ Q₁)
     (h : u ≫ r ≫ τ.app X = x ≫ u' ≫ r') (hq : w ≫ e' = e ≫ x) :
     e ≫ u ≫ r ≫ F.map f ≫ τ.app Y = w ≫ e' ≫ u' ≫ r' ≫ G.map f := by
-  rw [← τ.naturality, reassoc_of% h, reassoc_of% hq]
+  rw [τ.naturality, reassoc_of% h, reassoc_of% hq]
 
 end CategoryTheory
 
@@ -120,7 +120,7 @@ theorem derivedUnitIso_hom_comp_derivedUnitTransport {X Y Y' : Scheme.{u}} (s : 
     (leftDerivedUpperStarComp_hom_app_Qh_fac Λ s g)
     (fun M ↦ ((upperStarLowerStarAdjunction Λ s).mapHomotopyCategory (.up ℤ)).derivedη_fac_app
       (HomotopyCategory.quasiIso _ _) _ _ M) ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-  rw [unitTransportHomotopyCompatible Λ s g,
+  simp only [unitTransportHomotopyCompatible Λ s g,
     unitTransport_mapHomotopyCategory_app_quotient] at h
   rw [derivedUnitTransport_rfl]
   change _ ≫ (derivedUnitTransportNatTrans Λ s g g).app (DerivedCategory.Q.obj K) = _
