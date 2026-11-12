@@ -158,9 +158,7 @@ lemma leftDerivedUpperStarComp_inv_congr_comp_hom_naturality {T S S' R : Scheme.
   simp only [Functor.comp_obj, Functor.comp_map] at n₁ n₃
   rw [reassoc_of% n₁, reassoc_of% n₂, n₃, Category.assoc, Category.assoc]
 
-
 omit [Finite Λ] in
-set_option profiler true in
 /-- The compatibility of base change with section isomorphisms transports across an
 isomorphism to a complex of étale origin. -/
 lemma leftDerivedUpperStar_map_comp_compSectionIso_of_iso {B B' P P' : Scheme.{u}}
@@ -297,8 +295,6 @@ theorem eq_proEtaleFamilyObjectIso
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] at h
   exact (cancel_mono _).1 h
 
-set_option profiler true in
--- the proof chases a long diagram of naturality squares between derived categories
 /-- Blueprint `prop-pur-dnc-family-constancy` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
 with base change `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B`. The restriction of the constancy comparison,
 `Lv₁^* κ : Lv₁^* F ≅ Lv₁^* La^* 𝒞(g, s) ≅ La'^* Lu^* 𝒞(g, s)`, restricts at `t = 1` to the
