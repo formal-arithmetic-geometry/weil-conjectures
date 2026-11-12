@@ -210,13 +210,13 @@ theorem derivedPullback_cone_square_transposition
       (R := schemeDerivedDirectImage g) (adj := relativeMVAdj g)
       (e := e P hP) (i := DerivedCategory.Q.map x)
       (f := DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app A')
-    simpa only [Functor.map_comp, ac, adj₀, E, L] using hh
+    simpa only [Functor.map_comp, Category.assoc, ac, adj₀, E, L] using hh
   · have hh := he Q hQ B' (y ≫ β)
     apply iso_comp_homEquiv (L := derivedPullback g)
       (R := schemeDerivedDirectImage g) (adj := relativeMVAdj g)
       (e := e Q hQ) (i := DerivedCategory.Q.map y)
       (f := DerivedCategory.Q.map β ≫ (schemeMVDirectImageLocalization g).app B')
-    simpa only [Functor.map_comp, ac, adj₀, E, L] using hh
+    simpa only [Functor.map_comp, Category.assoc, ac, adj₀, E, L] using hh
   · rw [htrans, Functor.map_comp]
     have h := he _ hconeP (CochainComplex.mappingCone t')
       (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
