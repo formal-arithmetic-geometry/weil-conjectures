@@ -268,7 +268,11 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
         (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
         (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
-  refine CategoryTheory.mateEquiv_eq_of_unit _ _ _ _ fun x ↦ ?_
+  refine CategoryTheory.mateEquiv_eq_of_unit
+    (adj₁ := (adicLowerStarEquivalence l e).symm.toAdjunction)
+    (adj₂ := CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
+    (α := TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv)
+    (γ := TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom) fun x ↦ ?_
   rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
     ← Functor.map_comp, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
