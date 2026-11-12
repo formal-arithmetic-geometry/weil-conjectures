@@ -211,7 +211,6 @@ private theorem representative_square_after_injective
       ((a.adjunction (DerivedCategory.Q.obj P)).leftAdjointUniq
         (S.adjunction (DerivedCategory.Q.obj P))).hom.app (DerivedCategory.Q.obj Q)) ≫ f =
       (DerivedCategory.Q.map s ≫ T.comparison.hom.app (⟨Q, hQ⟩, ⟨P, hP⟩)) ≫ f := by
-  letI := derivedCategory.{t, u} Y R
   classical
   have : I.IsKInjective := hI
   have : (homComplex (R := R) P I).IsKInjective :=
@@ -219,12 +218,21 @@ private theorem representative_square_after_injective
   have : IsIso (homModelMap.{t, u} Y R P I) := homModelMap_isIso Y R P I hI
   let ξ := S.transpose (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)
     (DerivedCategory.Q.obj I) f
-  obtain ⟨q, hf⟩ := derived_map_surjective Q (homComplex (R := R) P I)
+  have hqex := derived_map_surjective Q (homComplex (R := R) P I)
     (ξ ≫ inv (homModelMap.{t, u} Y R P I))
+  let q := hqex.choose
+  have hf : DerivedCategory.Q.map q = ξ ≫ inv (homModelMap.{t, u} Y R P I) :=
+    hqex.choose_spec
   have hq : DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I = ξ := by
     rw [hf, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-  obtain ⟨b, hb, hba⟩ := a.evaluation P I Q hP hQ hI q
-  obtain ⟨v, hv, hvs⟩ := representative_uncurry_evaluation Y R S T Q P I hQ hP q
+  have hbex := a.evaluation P I Q hP hQ hI q
+  let b := hbex.choose
+  have hb := hbex.choose_spec.1
+  have hba := hbex.choose_spec.2
+  have hvex := representative_uncurry_evaluation Y R S T Q P I hQ hP q
+  let v := hvex.choose
+  have hv := hvex.choose_spec.1
+  have hvs := hvex.choose_spec.2
   have hbv : b = s ≫ v :=
     signed_evaluation_comp_exchange Y R P Q I s hs q b hb v hv
   have hba' : a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫
