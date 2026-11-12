@@ -84,6 +84,17 @@ private lemma brown_scalarPullback_mate
   rw [← he]
   exact (mateEquiv _ _).apply_symm_apply _
 
+set_option profiler true in
+private lemma brown_realization_scalar_mate
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealization O t W P)
+    {m n : ℕ} (h : m ≤ n) :
+    mateEquiv (P.scalar h).derivedAdj
+        (Adjunction.ofIsRightAdjoint
+          (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h)))
+        (.mk _ _ _ _ (R.scalar h).inv) = .mk _ _ _ _ (R.val.restriction h).hom :=
+  R.property.2.2 h
+
 -- Compare four independently normalized adjunctions.
 set_option profiler true in
 /-- The scalar mate of the exact ordinary restriction square respects normalized
@@ -165,10 +176,10 @@ theorem strictEtaleBrownCanonicalScalarCube
   intro Y
   have hr : (mateEquiv (PV.scalar h).derivedAdj av
       (.mk _ _ _ _ (RV.scalar h).inv)) = .mk _ _ _ _ (RV.val.restriction h).hom :=
-    RV.property.2.2 h
+    brown_realization_scalar_mate O t V PV RV h
   have hw : (mateEquiv (PW.scalar h).derivedAdj an
       (.mk _ _ _ _ (RW.scalar h).inv)) = .mk _ _ _ _ (RW.val.restriction h).hom :=
-    RW.property.2.2 h
+    brown_realization_scalar_mate O t W PW RW h
   exact mateEquiv_app_cube_converse_of_eq
     (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
     (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
