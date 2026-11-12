@@ -266,6 +266,7 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
   trace "PH329: simplified naturality"
   let α := (τ.pullbackExchange Λ).app C
+  let F := L((f')^*⟦Λ⟧)
   let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
   let H := DerivedCategory.homologyFunctor A
   trace "PH329: specialized homology functors"
@@ -274,10 +275,16 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   trace "PH329: specialized conservativity"
   with_reducible
     have key₀ := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
-      L((f')^*⟦Λ⟧) Ψ₂Ω H (fun g hg ↦ hcons g hg)
+      F Ψ₂Ω
+  trace "PH329: specialized functors"
+  with_reducible
+    have key₁ := key₀ H
+  trace "PH329: matched homology functors"
+  with_reducible
+    have key₂ := key₁ (fun g hg ↦ hcons g hg)
   trace "PH329: specialized abstract categories"
   with_reducible
-    have key := key₀ α α₁ r₁ hr₁ α₂ r₂ hr₂
+    have key := key₂ α α₁ r₁ hr₁ α₂ r₂ hr₂
       cA cB cB' I' _ _ _ hnat hIA β hsq
       (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
       (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
