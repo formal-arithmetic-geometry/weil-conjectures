@@ -244,7 +244,6 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
-set_option profiler true in
 -- the `erw` step unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
 its structure morphism. -/
@@ -259,7 +258,7 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ a).inv.app (𝟙_ _) ≫
         ((boundedConstructibleUpperShriekAdjunction ℓ a).homEquiv _ _).symm α =
       α ≫ (upperShriekUnitIsoOfEqId ℓ a ha).hom := by
-  subst ha
+  subst a
   have h := homEquiv_comp_conjugateEquiv_app
     (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
