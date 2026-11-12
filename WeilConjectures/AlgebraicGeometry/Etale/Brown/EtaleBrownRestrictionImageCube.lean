@@ -249,6 +249,29 @@ private theorem normalized_full_cube
     _ _ _ _ _ _ hN hS a.hom d.hom hA hD hc
 
 end FullCube
+
+set_option profiler true in
+-- Expose the localization equation without unfolding the whole coherence package.
+private theorem brown_restriction_factors
+    (O : Type (u + 1)) [CommRing O] (t : O) (V : Scheme.{u})
+    (P : StrictEtaleEvaluation V O t) (R : StrictEtaleBrownRealization O t V P)
+    {m n : ℕ} (h : m ≤ n) :
+    let := R.val.ordinaryAdditive
+    ∀ I : CochainComplex (strictEtaleLevel V O t m) ℤ,
+      (R.val.restriction h).hom.app (DerivedCategory.Q.obj I) ≫
+          (Sheaf.derivedRestrictScalars V.smallEtaleTopology
+            (strictEtaleBrownRingMap O t h)).map ((R.val.factors m).hom.app I) ≫
+          (Sheaf.restrictScalars V.smallEtaleTopology
+            (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
+              (((strictEtaleBrownConstant O t V m).mapHomologicalComplex (.up ℤ)).obj I) =
+        (R.val.derived n).map ((P.scalar h).restrictionFactors.hom.app I) ≫
+          (R.val.factors n).hom.app
+            (((coefficientRestriction (J := V.smallEtaleTopology) O t h).mapHomologicalComplex
+              (.up ℤ)).obj I) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex (R.val.ordinaryRestriction h) (.up ℤ)).hom.app I) :=
+  R.property.2.1 h
+
 set_option profiler true in
 /-- Exact scalar restriction commutes with the normalized Brown image square.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E.
@@ -325,7 +348,7 @@ theorem etaleBrownRestrictionImageCube
     (brown_image_normalized O t g A PW PV B RV RW rg n)
     (hδ.symm ▸ geometric_restriction_normalized (strictEtaleBrownRingMap O t h) g)
     (RV.val.ordinaryRestriction h) (RW.val.ordinaryRestriction h)
-    (RV.property.2.1 h) (RW.property.2.1 h)
+    (brown_restriction_factors O t V PV RV h) (brown_restriction_factors O t W PW RW h)
     (etaleBrownOrdinaryRestrictionCube O t g A PW PV B RV RW rg h)
 
 end AlgebraicGeometry
