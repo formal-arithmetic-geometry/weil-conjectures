@@ -131,7 +131,7 @@ private theorem localized_cone_square_transposition
     {Rd : DerivedCategory E' ⥤ DerivedCategory E} (adj : Ld ⊣ Rd)
     (η : R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ Rd)
     (K : CochainComplex E ℤ → Prop)
-    (e : ∀ P, K P → DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P) ≅
+    (e : ∀ P (_ : K P), DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P) ≅
       Ld.obj (DerivedCategory.Q.obj P))
     (he : ∀ P (hP : K P) I (α : P ⟶ (R.mapHomologicalComplex (.up ℤ)).obj I),
       DerivedCategory.Q.map (((adj₀.mapHomologicalComplex (.up ℤ)).homEquiv _ _).symm α) =
@@ -265,6 +265,8 @@ theorem derivedPullback_cone_square_transposition
   obtain ⟨hL, e, he⟩ := kFlat_pullback_adjunction_comparison g
   obtain ⟨P, Q, p, x, y, hc, hP, hQ, hx, hy⟩ := replacement S A B t
   exact localized_cone_square_transposition
+    (E := SheafOfModules.{u} (moduleRings S.toRingedSpace))
+    (E' := SheafOfModules.{u} (moduleRings S'.toRingedSpace))
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g))
     (relativeMVAdj g) (schemeMVDirectImageLocalization g)
     (CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf)) e he
