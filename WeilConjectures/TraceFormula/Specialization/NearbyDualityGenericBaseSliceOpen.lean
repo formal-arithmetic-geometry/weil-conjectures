@@ -303,9 +303,32 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
   have hf : (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv =
       (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
     rw [leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
-  rw [hM, hN, hf', hf]
-  refine (congrArg (_ ≫ ·) ?_).trans (Iso.inv_hom_id_assoc _ _)
-  transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
+  have hM' := congrArg (fun z ↦ (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
+    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map z ≫
+      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hM
+  have hN' := congrArg (fun z ↦ z ≫
+    (N.nearbyCycles _).map (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv) hN
+  have hf'' := congrArg (fun z ↦ z ≫
+    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hf'
+  have hf''' := congrArg (fun z ↦ N.unit _ ≫ (N.nearbyCycles _).map z) hf
+  calc
+    _ = (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
+        L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+          (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) := hM'
+    _ = (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
+        L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+          (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) := hf''
+    _ = (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
+        ((leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
+          (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+            (Profinite.padicAlgClRingObj ℓ) f).inv) := by
+      rw [← Category.assoc, φ.map_unit_comp_pullbackExchange_app]
+    _ = N.unit _ ≫ (N.nearbyCycles _).map
+        (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv := by
+      rw [← hf''']
+      simp
+    _ = _ := hN'.symm
 
 -- the shifts of the derived categories of module objects unfold deeply
 /-- The specialization map of `ℚ̄_ℓ(0)[n]` is the shift of that of `ℚ̄_ℓ(0)`
