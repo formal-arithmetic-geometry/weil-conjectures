@@ -110,6 +110,7 @@ private theorem baseChange_naturality
 
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Tensor representative transport needs additional instance and equality elaboration.
 /-- The canonical base-change map for a relatively flat bounded-above complex is
 invertible. `P` is a K-flat representative of `E` (`e`), so the total tensor complex
