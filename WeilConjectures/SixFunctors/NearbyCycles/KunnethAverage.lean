@@ -61,6 +61,7 @@ local instance (priority := 10000) kunnethTensorRightColimit (T : Scheme.{u})
     Limits.PreservesColimit V ((curriedTensor _).flip.obj M) := by
   infer_instance
 
+set_option trace.profiler true in
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
