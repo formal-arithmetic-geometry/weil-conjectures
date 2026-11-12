@@ -324,9 +324,17 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
         ((integralCompletedTensor l E Y).obj
           (DerivedCategory.Q.obj P.obj,DerivedCategory.Q.obj Q.obj)) ≫
       ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom := by
+  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
+    podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj] at *
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
+  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
+    podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj] at hs
   let a := (podOrdinaryReindex l E g).map
     ((integralCompletedTensorComparison l E Y).hom.app (P, Q))
   let b := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app
@@ -353,7 +361,8 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (U := (podReindexTower l E g).obj
       ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))
     (V := (integralOperationsTensorTowerFunctor l E X).obj
-      (((podGoodReindex l E g D).obj P).obj, ((podGoodReindex l E g D).obj Q).obj))
+      (((isoReductionIntegralInverse l E g).mapHomologicalComplex (.up ℤ)).obj P.obj,
+        ((isoReductionIntegralInverse l E g).mapHomologicalComplex (.up ℤ)).obj Q.obj))
     (W := (isoReductionIntegralComplex l E g).obj
       (integralOperationsRoos
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
