@@ -53,8 +53,6 @@ noncomputable def integralScalarSMul (x : Padic.coefficientExtensionIntegers l L
     (R := completedIntegralCommRingSheafUnrestricted l L Y)
     (fun V ↦ integralScalarConstant l L Y V x) (fun g ↦ integralScalarConstant_map l L Y g x)
 
-set_option maxHeartbeats 1000000 in
--- The `erw` transport across `integralOrdinaryScalar = changeOfRingsFunctor` is slow.
 /-- Coordinates for the completed coefficient extension: the extension ⊣ restriction
 adjunction `Ord ⊣ Res`, an `𝒪_E`-basis `b` of `𝒪_L`, and coordinate maps `π j` with
 `π j ∘ ι i = δ i j` and `∑ j, ι j ∘ π j = 1`, where `ι i = Res (b i •) ∘ unit`.
@@ -88,11 +86,25 @@ theorem integralOrdinaryScalar_coordinates :
       AddCommGrpCat.{u + 1} := integralCoefficientAbLocallyBijective.{u, u} Y
   let := ι.toAlgebra
   let φ := integralCompletedScalarMap l E L ι Y
+  let F : integralTowerModules l E Y ⥤ integralTowerModules l L Y :=
+    SheafOfModules.changeOfRingsFunctor.{u, u + 1} φ
   obtain ⟨hobj, hmap, -⟩ := (integralOrdinaryScalarWitness l E L ι Y).choose_spec
-  have hOC : integralOrdinaryScalar l E L ι Y = SheafOfModules.changeOfRingsFunctor φ :=
+  have hOC : integralOrdinaryScalar l E L ι Y = F :=
     CategoryTheory.Functor.ext hobj fun _ _ f ↦ hmap f
+  -- Work with the standard tensor functor throughout the coordinate identities.
+  rw [hOC]
+  have : F.Additive := by
+    rw [← hOC]
+    infer_instance
+  have hobj₀ (M : integralTowerModules l E Y) :
+      F.obj M = SheafOfModules.changeOfRings φ M := rfl
+  have hmap₀ {M N : integralTowerModules l E Y} (f : M ⟶ N) :
+      F.map f = eqToHom (hobj₀ M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
+        eqToHom (hobj₀ N).symm := by
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
   obtain ⟨-, -, hO⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
-  obtain ⟨a, ha⟩ := hO (integralOrdinaryScalar l E L ι Y) hobj hmap
+  obtain ⟨a, ha⟩ := hO F hobj₀ (fun f ↦ hmap₀ f)
   obtain ⟨d, Φ, κ, hκ, hκc, -, b, hb, hbasis, htrace, -⟩ :=
     integralCompletedScalarMap_frobeniusSystem_trace l E L ι Y
   obtain ⟨e⟩ := completedIntegralFiniteFree.{u, u} l E Y L ι φ
@@ -102,58 +114,23 @@ theorem integralOrdinaryScalar_coordinates :
     (R := completedIntegralCommRingSheafUnrestricted l L Y) (fun V ↦ (Φ.data V).dual j)
     (fun g ↦ Φ.dual_naturality j g)
   have hu (M : integralTowerModules l E Y) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (m : M.val.obj U) : (a.unit.app M).val.app U m = (eqToHom (hobj M).symm).val.app U
-        ((SheafOfModules.toChangeOfRings (φ := φ) M).app U
-          (ModuleCat.FrobeniusData.tmulExt (φ.hom.app U).hom (M.val.obj U) 1 m)) := by
-    have h := ha M _ (eqToHom (hobj M).symm) U m
-    rw [eqToHom_trans, eqToHom_refl] at h
-    erw [Adjunction.homEquiv_id] at h
-    exact h
-  have hcancel (M : integralTowerModules l E Y) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (y : (SheafOfModules.changeOfRings φ M).val.obj U) :
-      (eqToHom (hobj M)).val.app U ((eqToHom (hobj M).symm).val.app U y) = y := by
-    have h := eqToHom_trans (hobj M).symm (hobj M)
-    rw [eqToHom_refl] at h
-    exact congrArg (fun g ↦ g.val.app U y) h
-  let R₀ := SheafOfModules.restrictScalars ((sheafCompose
-    (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)
-  have hswap (τ : 𝟭 (integralTowerModules l L Y) ⟶ 𝟭 (integralTowerModules l L Y))
-      {X X' : integralTowerModules l L Y} (h : X = X') :
-      τ.app X ≫ eqToHom h = eqToHom h ≫ τ.app X' :=
-    (τ.naturality (eqToHom h)).symm
-  have hg (M : integralTowerModules l E Y) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (m : M.val.obj U) : (a.unit.app M ≫ R₀.map (eqToHom (hobj M))).val.app U m =
+      (m : M.val.obj U) : (a.unit.app M).val.app U m =
         (SheafOfModules.toChangeOfRings (φ := φ) M).app U
-          (ModuleCat.FrobeniusData.tmulExt (φ.hom.app U).hom (M.val.obj U) 1 m) :=
-    (congrArg ((eqToHom (hobj M)).val.app U) (hu M U m)).trans (hcancel M U _)
-  have hconj (τ : 𝟭 (integralTowerModules l L Y) ⟶ 𝟭 (integralTowerModules l L Y))
-      {X X' : integralTowerModules l L Y} (h : X = X') :
-      τ.app X = (eqToHom h ≫ τ.app X') ≫ eqToHom h.symm := by
-    subst h
-    simp
-  refine ⟨d, b, a, fun j ↦ Functor.whiskerRight (Functor.whiskerLeft
-    (integralOrdinaryScalar l E L ι Y) (σ j)) _ ≫ Functor.whiskerRight (eqToHom hOC) _ ≫ εF,
-    hb, ?_, ?_⟩
+          (ModuleCat.FrobeniusData.tmulExt (φ.hom.app U).hom (M.val.obj U) 1 m) := by
+    have h := ha M (F.obj M) (𝟙 (F.obj M)) U m
+    rw [eqToHom_refl, Category.id_comp, Adjunction.homEquiv_id] at h
+    exact h
+  refine ⟨d, b, a,
+    fun j ↦ Functor.whiskerRight (Functor.whiskerLeft F (σ j)) _ ≫ εF, hb, ?_, ?_⟩
   · intro i j M
-    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app, eqToHom_app]
-    have key : R₀.map ((integralScalarSMul l L Y (b i)).app
-          ((integralOrdinaryScalar l E L ι Y).obj M)) ≫
-        R₀.map ((σ j).app ((integralOrdinaryScalar l E L ι Y).obj M)) ≫
-          R₀.map (eqToHom (hobj M)) =
-        R₀.map (eqToHom (hobj M)) ≫ R₀.map ((integralScalarSMul l L Y (b i)).app _) ≫
-          R₀.map ((σ j).app _) := by
-      simp only [← Functor.map_comp]
-      rw [hswap, ← Category.assoc, hswap, Category.assoc]
-      rfl
-    rw [reassoc_of% key, ← Category.assoc]
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro m
-    refine (Φ.unit_smul_smul_counitHom_val_app e.symm M _ (hg M)
+    refine (Φ.unit_smul_smul_counitHom_val_app e.symm M _ (hu M)
       (fun V ↦ integralScalarConstant l L Y V (b i)) (fun g ↦ integralScalarConstant_map l L Y g _)
       (fun V ↦ (Φ.data V).dual j) (fun g ↦ Φ.dual_naturality j g) U m).trans ?_
     have htr : (Φ.data U).trace ((Φ.data U).dual j * (Φ.data U).basis i) =
@@ -166,7 +143,7 @@ theorem integralOrdinaryScalar_coordinates :
     · exact one_smul _ m
     · exact zero_smul _ m
   · intro M
-    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app, eqToHom_app,
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Category.assoc]
     have hsmb (j : Fin d) : integralScalarSMul l L Y (b j) = SheafOfModules.smulSections
         (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -178,28 +155,7 @@ theorem integralOrdinaryScalar_coordinates :
         rw [← hκc, ← hbasis]
       unfold integralScalarSMul
       congr 1
-    have hterm (j : Fin d) : R₀.map ((σ j).app ((integralOrdinaryScalar l E L ι Y).obj M)) ≫
-        R₀.map (eqToHom (hobj M)) ≫ εF.app M ≫ a.unit.app M ≫
-          R₀.map ((integralScalarSMul l L Y (b j)).app ((integralOrdinaryScalar l E L ι Y).obj M)) =
-        R₀.map (eqToHom (hobj M)) ≫ (R₀.map ((σ j).app _) ≫ Φ.counitHom e.symm M ≫
-          (a.unit.app M ≫ R₀.map (eqToHom (hobj M))) ≫
-            R₀.map ((integralScalarSMul l L Y (b j)).app _)) ≫
-          R₀.map (eqToHom (hobj M).symm) := by
-      have h2 := hconj (integralScalarSMul l L Y (b j)) (hobj M)
-      have h1 : R₀.map ((σ j).app ((integralOrdinaryScalar l E L ι Y).obj M)) ≫
-          R₀.map (eqToHom (hobj M)) = R₀.map (eqToHom (hobj M)) ≫
-            R₀.map ((σ j).app _) := by
-        rw [← R₀.map_comp, ← R₀.map_comp, hswap]
-        rfl
-      erw [reassoc_of% h1, h2]
-      rw [R₀.map_comp, R₀.map_comp]
-      simp only [Category.assoc]
-      rfl
-    rw [Finset.sum_congr rfl fun j _ ↦ hterm j, ← Preadditive.comp_sum, ← Preadditive.sum_comp]
     simp only [hsmb]
-    rw [Φ.sum_smul_counitHom_unit_smul e.symm M _ (hg M)]
-    erw [Category.id_comp]
-    rw [← Functor.map_comp, eqToHom_trans, eqToHom_refl, CategoryTheory.Functor.map_id]
-    rfl
+    exact Φ.sum_smul_counitHom_unit_smul e.symm M _ (hu M)
 
 end WeilConjectures
