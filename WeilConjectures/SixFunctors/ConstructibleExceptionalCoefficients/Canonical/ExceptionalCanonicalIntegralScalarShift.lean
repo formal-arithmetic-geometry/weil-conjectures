@@ -156,6 +156,18 @@ private theorem ordinaryComparison_shift
   rw [Iso.hom_inv_id_app_assoc]
   simp only [Functor.commShiftIso_comp_hom_app, Category.assoc]
 
+private theorem ordinaryComparison_shift_cached
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (W : Scheme.{u}) (E L : Index l Ω) (h : E ≤ L) :
+    letI : (sfConstructibleIntegralScalarExtension 0 l
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω E)
+      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) W).CommShift ℤ :=
+      GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω W E L h
+    NatTrans.CommShift (ordinaryComparison l (Coefficient.{u} l Ω E)
+      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) W).hom ℤ :=
+  ordinaryComparison_shift l Ω W E L h
+
 end WeilConjectures
 
 attribute [local irreducible] WeilConjectures.finiteTorConstructibleIntegral
@@ -357,7 +369,7 @@ theorem canonical_integral_scalar_square
   let eO := e₀
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
-  letI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
+  letI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift_cached l Ω T a b h
   let rF : IE ⋙ IY ≅ IX := Iso.refl _
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
   letI := finiteTorIntegralShift_compatibility_cached l Ω E T
