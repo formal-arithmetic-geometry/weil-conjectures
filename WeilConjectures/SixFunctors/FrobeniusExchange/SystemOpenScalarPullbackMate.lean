@@ -159,8 +159,7 @@ private theorem openRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     intro U
     have key := openRestrictionMate_app_apply l E L ι j M U
     refine ⟨fun x y hxy ↦ ?_, fun y ↦ ⟨y, key y⟩⟩
-    rw [key, key] at hxy
-    exact hxy
+    exact (key x).symm.trans (hxy.trans (key y))
   exact NatIso.isIso_of_isIso_app _
 
 end OpenRestriction
@@ -188,8 +187,7 @@ private theorem sequenceOpenRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ 
     intro U
     have key := openRestrictionMate_app_apply l E L ι j M U
     refine ⟨fun x y hxy ↦ ?_, fun y ↦ ⟨y, key y⟩⟩
-    rw [key, key] at hxy
-    exact hxy
+    exact (key x).symm.trans (hxy.trans (key y))
   exact NatIso.isIso_of_isIso_app _
 
 -- elaborating the mate of the restriction adjunction is slow
