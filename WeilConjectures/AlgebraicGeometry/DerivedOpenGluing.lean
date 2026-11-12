@@ -26,8 +26,45 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem derivedOpenGluing_additive_of_preservesFiniteLimits
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasFiniteProducts C] [HasZeroObject C] [HasZeroObject D]
+    (F : C ⥤ D) [PreservesFiniteLimits F] :
+    F.Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+/-- Restriction to an open subscheme is additive for the chosen preadditive structures. -/
+theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.Opens)
+    [Preadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U)).Additive := by
+  apply derivedOpenGluing_additive_of_preservesFiniteLimits
+
+/-- Restriction between open subschemes is additive for the chosen preadditive structures. -/
+theorem derivedOpenGluing_overlap_additive (X : Scheme.{u})
+    (U V : X.Opens) (i : V ⟶ U)
+    [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    [Preadditive (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] :
+    (Equivalence.inverse
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U) ⋙
+      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))
+        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv V)).Additive := by
+  apply derivedOpenGluing_additive_of_preservesFiniteLimits
+
+-- Package the preservation proofs once for each restriction, rather than searching through
+-- binary products and zero morphisms again at every occurrence of a composite functor.
+attribute [local instance] derivedOpenGluing_restriction_additive derivedOpenGluing_overlap_additive
 
 private theorem compatible_composites
     {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
@@ -48,10 +85,6 @@ private theorem compatible_composites
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
--- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 500000 in
--- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Derived complexes and compatible morphisms glue across a two-open cover of a scheme.
 D(O_X), D(O_U), D(O_V), D(O_(U ∩ V)) are `schemeDerivedCategory` of `X`, `U.toScheme`,
 `V.toScheme`, `(U ⊓ V).toScheme`. Restriction from X to an open W is restriction to the
