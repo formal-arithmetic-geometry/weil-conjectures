@@ -136,6 +136,7 @@ private lemma supportCompactSupportExchange_component_identity
               eqToHom (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
                 ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)))
                   (hc.componentSpecialLift_comp_d_deformation k' F j hb))) := by
+  rw [diagPushforwardExchange]
   have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
     (ℓ := ℓ) (isTraitModel_deformationModel B _ k') (deformationModel_exists_comp_ε B _ k')
   have hN := (deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
@@ -154,12 +155,8 @@ private lemma supportCompactSupportExchange_component_identity
   have : IsProper ((j ≫ F.d) ≫ diag X).left := by rw [Over.comp_left]; infer_instance
   have hphg : ((j ≫ F.ι).left ≫ (supportClosureι c).left) ≫
       (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
-        (supportClosureMap c ≫ Limits.prod.snd)).left = ((j ≫ F.d) ≫ diag X).left := by
-    rw [Category.assoc, ← Over.comp_left, ← Over.comp_left,
-      show supportClosureι c ≫ Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
-        (supportClosureMap c ≫ Limits.prod.snd) = c.support by
-          rw [prodLift_supportClosureMap, supportClosureι_map],
-      Category.assoc, F.isPullback.w, ← Category.assoc]
+        (supportClosureMap c ≫ Limits.prod.snd)).left = ((j ≫ F.d) ≫ diag X).left :=
+    (componentPointModelHom_comp_diag_left (F := F) j).symm
   have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (((j ≫ F.ι) ≫ supportClosureι c) ≫ Limits.prod.lift
