@@ -268,9 +268,41 @@ theorem affineCoordinateHomotopyComparison_hom_app
         ((affineCoordinateComplexComparison a b φ p hp).hom.app M) := by
   rfl
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Evaluating the nested termwise functors needs more elaboration heartbeats.
+private theorem perfectHomTensorComplexComp_hom_app_f {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) (n : ℤ) :
+    ((perfectHomTensorComplexComp f g).hom.app K).f n =
+      (perfectHomTensorComp f g).hom.app (K.X n) := by
+  rw [perfectHomTensorComplexComp]
+  exact Functor.mapHomologicalComplexCompIso_hom_app_f _ _ _ _
+
+private theorem affineCoordinateComplex_map_f (a : AffineComparisonCoordinate.{u, w})
+    {M N : CochainComplex (ModuleCat.{u} a.A) ℤ} (f : M ⟶ N) (n : ℤ) :
+    ((affineCoordinateComplex a).map f).f n = (affineCoordinateModules a).map (f.f n) := rfl
+
+private theorem affineCoordinateComplexComparison_comp_hom
+    (a b c : AffineComparisonCoordinate.{u, w})
+    (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)
+    (hp : b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom)
+    (hq : c.σ.hom ≫ q = Spec.map (CommRingCat.ofHom ψ) ≫ b.σ.hom)
+    (hs : c.σ.hom ≫ (q ≫ p) = Spec.map (CommRingCat.ofHom (ψ.comp φ)) ≫ a.σ.hom)
+    (M : CochainComplex (ModuleCat.{u} a.A) ℤ) :
+    (perfectHomTensorComplex q).map
+        ((affineCoordinateComplexComparison a b φ p hp).hom.app M) ≫
+        (affineCoordinateComplexComparison b c ψ q hq).hom.app
+          (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M) =
+      (perfectHomTensorComplexComp q p).hom.app ((affineCoordinateComplex a).obj M) ≫
+        (affineCoordinateComplexComparison a c (ψ.comp φ) (q ≫ p) hs).hom.app M ≫
+        (affineCoordinateComplex c).map
+          ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp φ ψ) (.up ℤ)).hom.app M) := by
+  let := perfectHomTensorAdditive q
+  ext n : 1
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    affineCoordinateComplexComparison_hom_f, perfectHomTensorComplexComp_hom_app_f,
+    affineCoordinateComplex_map_f, NatIso.mapHomologicalComplex_hom_app_f]
+  simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] using congrArg Iso.hom
+    (affineCoordinateTensorComparison_comp a b c φ ψ p q hp hq hs (M.X n))
+
 /-- The same composition equation on concrete homotopy models.
 Source: Stacks Project, Tags 01I9, 08DW and 0D5S.
 (blueprint: lem-pc-affine-coordinate-tensor-comparison).
@@ -305,17 +337,6 @@ theorem affineCoordinateHomotopyComparison_comp
     perfectHomTensorHomotopyComp_hom_app q p ((affineCoordinateComplex a).obj M)]
   rw [← π.map_comp, ← π.map_comp, ← π.map_comp]
   apply congrArg π.map
-  ext n : 1
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    affineCoordinateComplexComparison_hom_f]
-  change (Scheme.Modules.tensorPullback q).map
-      ((affineCoordinateTensorComparison a b φ p hp).hom.app (M.X n)) ≫
-      (affineCoordinateTensorComparison b c ψ q hq).hom.app
-        ((ModuleCat.extendScalars φ).obj (M.X n)) =
-    (perfectHomTensorComp q p).hom.app ((affineCoordinateModules a).obj (M.X n)) ≫
-      (affineCoordinateTensorComparison a c (ψ.comp φ) (q ≫ p) hs).hom.app (M.X n) ≫
-      (affineCoordinateModules c).map ((ModuleCat.extendScalarsComp φ ψ).hom.app (M.X n))
-  simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] using congrArg Iso.hom
-    (affineCoordinateTensorComparison_comp a b c φ ψ p q hp hq hs (M.X n))
+  exact affineCoordinateComplexComparison_comp_hom a b c φ ψ p q hp hq hs M
 
 end AlgebraicGeometry
