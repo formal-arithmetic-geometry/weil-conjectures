@@ -86,7 +86,6 @@ variable (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
   [IsOpenImmersion j.left]
 
-set_option profiler true in
 /-- **Additivity of trace classes along the curve pieces** (blueprint
 `prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the
 Frobenius graph; `sk-i-additivity`): for a rational point `x` fixed by `Φ_m`, `m ≥ 1`, with
