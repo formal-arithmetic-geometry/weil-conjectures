@@ -243,7 +243,6 @@ noncomputable local instance category_derived_X' :
     Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X'))) := inferInstance
 
-set_option profiler true in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (SGA 4½, [Th. finitude],
 Lemme 3.4; torsion coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
@@ -279,6 +278,91 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
+  let Λ := Profinite.continuousMapRingObj T₀
+  let g := pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
+  let F₁ := R((N.j)_*⟦Λ⟧)
+  let F₂ := L((N.i)^*⟦Λ⟧)
+  let κ := N.galoisLayerExchangeIso h Ω Λ C
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) := inferInstance
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj Λ X'))) := inferInstance
+  letI : Category (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z)) := inferInstance
+  let C₀ := L((N.ε)^*⟦Λ⟧).obj C
+  have hC₀ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) N.generic
+      ((finiteCoefficientDerivedEquivalence N.generic T₀).functor.obj C₀) := hC
+  let hcomplex := extract_complex_of_plusEtaleOrigin T₀ C₀ hC₀
+  let K := hcomplex.choose
+  have hcomplexK := hcomplex.choose_spec
+  let a := hcomplexK.choose
+  have hcomplexa := hcomplexK.choose_spec
+  have hKa := hcomplexa.1
+  have hterms := hcomplexa.2.1
+  have he := hcomplexa.2.2
+  let e := he.some
+  choose F₀ hF₀ using hterms
+  have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
+      (M : Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+        (condensedRingObj (Λ) N.generic)),
+      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := fun j M ↦ by
+    have hc : Fintype.card ((galoisTower Ω h).Γ j) = Module.finrank L j := by
+      change Fintype.card (j ≃ₐ[L] j) = _
+      rw [← Nat.card_eq_fintype_card, IsGalois.card_aut_eq_finrank]
+    rw [hc]
+    exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
+      (hp j) M
+  have hdZ : ∀ (j : FiniteGaloisIntermediateField L Ω)
+      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+        (condensedRingObj (Λ) Z)),
+      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := fun j M ↦ by
+    have hc : Fintype.card ((galoisTower Ω h).Γ j) = Module.finrank L j := by
+      change Fintype.card (j ≃ₐ[L] j) = _
+      rw [← Nat.card_eq_fintype_card, IsGalois.card_aut_eq_finrank]
+    rw [hc]
+    exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
+      (hp j) M
+  have hc := fun n ↦ isColimitModuleCocone_galoisTower Ω h T₀ (K.X n)
+    (essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some)
+  have hcab := fun n ↦ (nonempty_isColimit_galoisUpperLowerCocone (Ω := Ω) h (K.X n).X
+    (essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some)).some
+  have hK := fun n ↦
+    rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
+  have hα := Hom.pullbackExchange_app_of_total_eq_id (Λ) N
+    (g) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  have hlift : ∀ (j : FiniteGaloisIntermediateField L Ω) (b : (galoisTower Ω h).Γ j), ∃ k,
+      pullbackAction h _ specGaloisAction_comp (act k) ≫ (galoisTower Ω h).π j =
+        (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := fun j b ↦ by
+    obtain ⟨k, hk⟩ := hact j b
+    refine ⟨k, ?_⟩
+    have hres : (act k).restrictNormal j = b := by
+      ext x
+      exact (AlgEquiv.restrictNormal_commutes (act k) (j : IntermediateField L Ω) x).trans (hk x)
+    have := pullbackAction_comp_galoisLevelProjection h j (act k)
+    rw [hres] at this
+    exact this
+  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction K a hK
+    ((galoisTower Ω h).complexTrace (Λ) hd K hc)
+    (CondensedRing.upperStarLowerStarAdjunction (Λ)
+      (g))
+    ((galoisTower Ω h).unit_comp_complexTrace (Λ) hd K hc)
+  have hRC : (CondensedRing.derivedUpperStarLowerStarAdjunction (Λ)
+      (g)).unit.app
+        (L((N.ε)^*⟦Λ⟧).obj C) ≫
+      (R((g)_*⟦
+          Λ⟧).map
+        (L((g)^*⟦
+          Λ⟧).map e.inv) ≫
+        Adjunction.derivedUnitRetraction K a hK
+          ((galoisTower Ω h).complexTrace (Λ) hd K hc) ≫
+          e.hom) = 𝟙 _ :=
+    unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Λ)
+        (g)) e
+      (Adjunction.derivedUnitRetraction K a hK
+        ((galoisTower Ω h).complexTrace (Λ) hd K hc)) hadj
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
