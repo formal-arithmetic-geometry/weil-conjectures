@@ -24,7 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
-local instance cechPullbackHasSheafCompose {C : Type u} [SmallCategory C]
+local instance (priority := 20000) cechPullbackHasSheafCompose {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
 
