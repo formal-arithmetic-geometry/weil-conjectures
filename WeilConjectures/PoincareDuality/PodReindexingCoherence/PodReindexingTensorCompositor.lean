@@ -411,8 +411,50 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
   exact (congrArg (fun v ↦ m (((cgh.tensorChain P L).hom.f n).val.app U v)) hi').trans
     (hleft.trans (hright.symm.trans (congrArg (fun v ↦ d (b (a v))) hi').symm))
 
-set_option profiler true in
-set_option maxHeartbeats 8000000 in
+/-- Paste the representative equations in an abstract category before specializing to sheaves. -/
+private theorem tensor_compositor_paste {C : Type*} [Category C]
+    {A₀ A B D B' D' T H F G K U V W M N S D₁ : C}
+    (u : A₀ ⟶ A) [Epi u] (t : D ⟶ D') [Mono t]
+    (c : A ⟶ B) (d : B ⟶ D) (k : A ⟶ V) (g : V ⟶ W) (h : W ⟶ D)
+    (a : A₀ ⟶ T) (qH : T ⟶ H) (rH : H ⟶ B') (vA : B ⟶ B')
+    (vK : B' ⟶ D') (qT : H ⟶ U) (rZ : U ⟶ D')
+    (qk : T ⟶ K) (qG : K ⟶ S) (qh : S ⟶ U)
+    (k₀ : A₀ ⟶ F) (e : F ⟶ G) (f : G ⟶ K) (r : F ⟶ V)
+    (vE : D ⟶ D₁) (vF : D₁ ⟶ D') (gE : W ⟶ N) (h' : N ⟶ D₁)
+    (gq : G ⟶ M) (gr : M ⟶ N) (f' : M ⟶ S)
+    (hs : d ≫ t = vA ≫ vK)
+    (hc : u ≫ c ≫ vA = a ≫ qH ≫ rH)
+    (hr : qT ≫ rZ = rH ≫ vK)
+    (hchain : qH ≫ qT = qk ≫ qG ≫ qh)
+    (hk : k₀ ≫ e ≫ f = a ≫ qk)
+    (hnat : u ≫ k = k₀ ≫ r)
+    (ht : t = vE ≫ vF)
+    (hn : gE ≫ h' = h ≫ vE)
+    (ha : r ≫ g ≫ gE = e ≫ gq ≫ gr)
+    (hb : gr ≫ h' ≫ vF = f' ≫ qh ≫ rZ)
+    (hf : gq ≫ f' = f ≫ qG) :
+    c ≫ d = k ≫ g ≫ h := by
+  apply (cancel_epi u).1
+  apply (cancel_mono t).1
+  simp only [Category.assoc]
+  slice_lhs 3 4 => exact hs
+  slice_lhs 1 3 => exact hc
+  simp only [Category.assoc]
+  slice_lhs 3 4 => exact hr.symm
+  slice_lhs 2 3 => exact hchain
+  simp only [Category.assoc]
+  slice_lhs 1 2 => exact hk.symm
+  simp only [Category.assoc]
+  slice_rhs 1 2 => exact hnat
+  simp only [Category.assoc]
+  rw [ht]
+  slice_rhs 4 5 => exact hn.symm
+  slice_rhs 2 4 => exact ha
+  simp only [Category.assoc]
+  slice_rhs 4 6 => exact hb
+  slice_rhs 3 4 => exact hf
+  simp only [Category.assoc]
+
 -- Paste the three tensor models across the exact-functor factorization maps.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -513,31 +555,10 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
   have hkNat := k.derived.hom.naturality rY
   change H.map rY ≫ k.derived.hom.app _ =
     k.derived.hom.app _ ≫ G.map (F.map rY) at hkNat
-  apply (cancel_epi (H.map rY)).1
-  apply (cancel_mono t).1
-  simp only [Category.assoc]
-  slice_lhs 3 4 => exact hs
-  slice_lhs 1 3 => exact hc
-  simp only [Category.assoc]
-  slice_lhs 3 4 => rw [← hr]
-  slice_lhs 2 3 => exact hchain
-  simp only [Category.assoc]
-  slice_lhs 1 2 => rw [← hk]
-  simp only [Category.assoc]
-  slice_rhs 1 2 => exact hkNat
-  simp only [Category.assoc]
-  change _ = k.derived.hom.app _ ≫ G.map (F.map rY) ≫
-    G.map (cg.tensor.hom.app _) ≫ ch.tensor.hom.app _ ≫ t
-  erw [ht']
-  slice_rhs 4 5 => erw [← hn]
-  slice_rhs 2 4 => exact hga
-  simp only [Category.assoc]
-  slice_rhs 4 6 => exact hb
-  slice_rhs 3 4 => exact hf
-  simp only [Category.assoc]; with_unfolding_all rfl
+  exact tensor_compositor_paste (H.map rY) t
+    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+    hs hc hr hchain hk hkNat ht' hn hga hb hf
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The representative argument involves three exact derived functors.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
