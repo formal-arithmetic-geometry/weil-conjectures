@@ -202,8 +202,6 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 set_option profiler true in
-set_option maxHeartbeats 500000 in
--- The fixed resolution comparisons require several large definitional identifications.
 /-- The kernel/cokernel resolution edge has the fixed local-class description.
 Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
 construction and local Leray comparison; Tag 079W, normalization by the derived unit.
@@ -267,14 +265,14 @@ theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ
         ((schemeDerivedDirectImage g).obj K) ≫ F.map d.hom =
       l.hom ≫ b.hom ≫ ShortComplex.leftExactHomologyEdge F (J.sc q) := by
     simpa only [Iso.trans_hom, Category.assoc] using
-      iso_source (l ≪≫ b)
+      iso_source (C := (Opens S)ᵒᵖ ⥤ AddCommGrpCat.{u}) (l ≪≫ b)
         (RingedSpace.topEdgeLocalClass S.toRingedSpace q
           ((schemeDerivedDirectImage g).obj K)) (F.map d.hom)
         (ShortComplex.leftExactHomologyEdge F (J.sc q))
         (by simpa only [Iso.trans_inv, Category.assoc] using hd)
   have hc' : ShortComplex.leftExactHomologyEdge G (I.sc q) ≫ G.map c.inv =
       a.inv ≫ RingedSpace.topEdgeLocalClass T.toRingedSpace q K := by
-    exact iso_target (G.mapIso c)
+    exact iso_target (C := (Opens T)ᵒᵖ ⥤ AddCommGrpCat.{u}) (G.mapIso c)
       (a.inv ≫ RingedSpace.topEdgeLocalClass T.toRingedSpace q K)
       (ShortComplex.leftExactHomologyEdge G (I.sc q))
       (by simpa only [Functor.mapIso_hom, Category.assoc] using hc)
@@ -296,7 +294,7 @@ theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ
     change F.map (d.hom ≫ ShortComplex.leftExactHomologyEdge D (I.sc q) ≫
       D.map c.inv) = _
     simp only [Functor.map_comp]
-  have hp := paste_edges l.hom b.hom m
+  have hp := paste_edges (C := (Opens S)ᵒᵖ ⥤ AddCommGrpCat.{u}) l.hom b.hom m
     (RingedSpace.topEdgeLocalClass S.toRingedSpace q ((schemeDerivedDirectImage g).obj K))
     (F.map d.hom) (ShortComplex.leftExactHomologyEdge F (J.sc q))
     (F.map (ShortComplex.leftExactHomologyEdge D (I.sc q))) (F.map (D.map c.inv))

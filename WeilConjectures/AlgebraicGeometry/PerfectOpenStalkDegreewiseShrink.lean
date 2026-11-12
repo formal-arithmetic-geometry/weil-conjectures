@@ -68,8 +68,6 @@ private theorem conjugate_map
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Nested restriction comparisons require additional elaboration heartbeats.
 /-- A degreewise family already defined near x becomes a chain map after shrinking
 if its stalk commutes with the differentials. The second conclusion records the
 stalks of the restricted components in the original comparison coordinates.
@@ -168,72 +166,39 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
   let hVW := hVZ.trans hZW
   let hVU := hVW.trans hWU
   let B := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVW)
-  let D := NatIso.mapHomologicalComplex
-    (restriction_comp_iso X U W V hWU hVW) (.up ℤ)
-  let C := D.symm
-  let k := fun n : ℤ ↦ (C.app P).hom.f n ≫ B.map (g n) ≫ (C.app Q).inv.f n
-  obtain ⟨c₀, c, hc₀, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
-    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) V hxV hVW hVU
-  let c' := NatIso.mapHomologicalComplex c (.up ℤ)
-  let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
-  let eV := Functor.isoWhiskerRight C S ≪≫
-    Functor.associator R (B.mapHomologicalComplex (.up ℤ)) S ≪≫
-    Functor.isoWhiskerLeft R c' ≪≫ e
-  have heV : eV = Functor.mapHomologicalComplexCompIso
-      (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ) := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext M
-    apply HomologicalComplex.hom_ext
-    intro n
-    simp only [eV, c', C, D, e, S, Iso.trans_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom,
-      Functor.whiskerLeft_app, Functor.associator_hom_app, Iso.symm_hom,
-      Functor.mapHomologicalComplexCompIso_hom_app_f, NatIso.mapHomologicalComplex_hom_app_f,
-      NatIso.mapHomologicalComplex_inv_app_f, Functor.mapHomologicalComplex_map_f,
-      restriction_comp_iso, NatIso.ofComponents_inv_app, Iso.refl_inv]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, HomologicalComplex.id_f, Category.id_comp]
-    have h := hc (M.X n)
-    rw [hc₀] at h
-    erw [CategoryTheory.Functor.map_id, Category.id_comp] at h
-    exact h.symm
+  -- Restriction is strictly compatible with composition, degree by degree.
+  let k := fun n : ℤ ↦ B.map (g n)
   refine ⟨V, hxV, hV, hVW, hVU, k, ?_, ?_⟩
   · intro n
     by_cases hn : n ∈ Finset.Icc a b
     · have heq := restrict_eq_of_le X hZW hVZ (f n) (t n) (hZ n hn)
-      have hc := congrArg
-        (fun z ↦ (C.app P).hom.f n ≫ z ≫ (C.app Q).inv.f (n + 1)) heq
-      dsimp [f, t] at hc
-      simp only [Functor.map_comp, Category.assoc] at hc
-      have hQ := (C.app Q).inv.comm n (n + 1)
-      have hP' := (C.app P).hom.comm n (n + 1)
-      simp only [Functor.mapHomologicalComplex_obj_d, Functor.comp_map] at hQ hP'
-      dsimp only [k]
-      simp only [Functor.mapHomologicalComplex_obj_d, Category.assoc]
-      rw [hQ]
-      simp only [R, Functor.mapHomologicalComplex_obj_d] at hc
-      exact hc.trans (by
-        simpa only [B, Category.assoc, Iso.app_hom, Iso.app_inv] using congrArg
-          (fun z ↦ z ≫ B.map (g (n + 1)) ≫ (C.app Q).inv.f (n + 1)) hP')
+      change B.map (g n) ≫ B.map (A.map (Q.d n (n + 1))) =
+        B.map (A.map (P.d n (n + 1))) ≫ B.map (g (n + 1))
+      exact (B.map_comp _ _).symm.trans (heq.trans (B.map_comp _ _))
     · have hz : IsZero (P.X n) := hsupport n (by
         simp only [Finset.mem_Icc, not_and_or, not_le] at hn
         exact hn)
       exact ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
         (homOfLE hVU)).map_isZero hz).eq_of_src _ _
   · intro n
-    let ev := HomologicalComplex.eval
-      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) (.up ℤ) n
-    let eu := HomologicalComplex.eval (ModuleCat.{u} (X.presheaf.stalk x)) (.up ℤ) n
-    have hc := conjugate_map B (openModuleStalkFunctor X V ⟨x, hxV⟩)
-      (openModuleStalkFunctor X W ⟨x, hxW⟩) c
-      (ev.mapIso (C.app P)) (ev.mapIso (C.app Q)) (g n)
-      (eu.mapIso (e.app P)) (eu.mapIso (e.app Q))
-    dsimp [ev, eu] at hc
-    rw [← heV]
-    dsimp [eV, c', R, k]
-    simp only [Category.assoc] at hc ⊢
-    erw [Category.id_comp, Category.id_comp]
-    exact hc
+    obtain ⟨c₀, c, hc₀, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
+      (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) V hxV hVW hVU
+    let eW := openModuleStalkRestrictionComparison X U W hWU x hxU hxW
+    let eV := openModuleStalkRestrictionComparison X U V hVU x hxU hxV
+    have he (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :
+        eV.hom.app M = c.hom.app (A.obj M) ≫ eW.hom.app M := by
+      have h := hc M
+      rw [hc₀] at h
+      simpa only [Functor.map_id, Category.id_comp] using h
+    change (openModuleStalkFunctor X V ⟨x, hxV⟩).map (B.map (g n)) =
+      eV.hom.app (P.X n) ≫ eW.inv.app (P.X n) ≫
+        (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫
+          eW.hom.app (Q.X n) ≫ eV.inv.app (Q.X n)
+    apply (cancel_mono (eV.hom.app (Q.X n))).1
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [he (P.X n), he (Q.X n)]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+    exact (c.hom.naturality_assoc (g n) (eW.hom.app (Q.X n)))
 
 end
 end AlgebraicGeometry.Scheme
