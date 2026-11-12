@@ -1050,7 +1050,6 @@ def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
 section
 omit [Module.Finite A B] [Module.Free A B]
 
-set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
@@ -1066,11 +1065,11 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
   change _ = h.liftA.moduleUnderlying.hom.app ((res A B Z.toSite).obj M) ≫
     h.liftB.moduleUnderlying.inv.app M ≫
       (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
-  erw [c.underlyingB, Iso.inv_hom_id_app_assoc]
+  rw [c.underlyingB, Iso.inv_hom_id_app_assoc]
   have hn := f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)
   dsimp only [Functor.comp_map] at hn
-  erw [← reassoc_of% hn]
-  erw [g.restrictionFormula]
+  rw [← reassoc_of% hn]
+  rw [g.restrictionFormula]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   rfl
 
