@@ -244,6 +244,7 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
+set_option profiler true in
 -- the `erw` step unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
 its structure morphism. -/
