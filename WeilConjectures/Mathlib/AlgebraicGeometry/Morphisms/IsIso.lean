@@ -98,7 +98,6 @@ lemma Scheme.Hom.isIso_restrict_maximalIsomorphismOpen :
     IsIso (q ∣_ q.maximalIsomorphismOpen) :=
   q.restrict_maximalOpen (MorphismProperty.isomorphisms Scheme)
 
-set_option maxHeartbeats 400000 in
 -- Unfolding the double restriction `q ∣_ W ∣_ (W.ι ⁻¹ᵁ V)` against `q ∣_ V` exceeds the
 -- default heartbeat limit.
 /-- **A target-local property restricts to smaller opens**: if `q ∣_ W` satisfies a
