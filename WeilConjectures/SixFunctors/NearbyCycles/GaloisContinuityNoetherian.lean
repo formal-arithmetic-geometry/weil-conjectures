@@ -79,8 +79,6 @@ lemma restrictNormal_eq_one_of_forall_apply_eq (L' : FiniteGaloisIntermediateFie
   AlgEquiv.ext fun x ↦
     (algebraMap L' Ω).injective ((AlgEquiv.restrictNormal_commutes σ L' x).trans (hσ x))
 
-set_option profiler true in
-set_option maxHeartbeats 1600000 in
 -- matching the derived functors of the Galois layer with those of the field tower (as in
 -- `exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`)
 /-- **Continuity of the Galois action on a noetherian cohomology sheaf of nearby cycles**
