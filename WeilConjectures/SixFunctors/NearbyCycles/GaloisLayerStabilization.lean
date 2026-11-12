@@ -115,7 +115,7 @@ private lemma stabilization_of_equivariant_iso_aux {DX DM DT DS : Type*}
     (c₀ : L₀ ≅ L₀ ⋙ L₀) (c₁ : Lfg ≅ Lg ⋙ Lf) (A : DX)
     (hx : αχ.app A ≫ Ψ.map (c₀.hom.app A) =
       c₁.hom.app (ΨM.obj A) ≫ Lf.map (αψ.app A) ≫ αρ.app (L₀.obj A))
-    [IsIso (αρ.app (L₀.obj A))]
+    (hiso : IsIso (αρ.app (L₀.obj A)))
     {G ι : Type*} (H : Set G) (π : G → ι) (lift : ι → G) (hlift : ∀ i, π (lift i) = i)
     (s : Finset ι) (n : ℕ) (act₁ : ι → (Ψ₁.obj (L₀.obj A) ⟶ Ψ₁.obj (L₀.obj A)))
     (act : G → ∀ C, Ψ.obj C ⟶ Ψ.obj C)
@@ -264,12 +264,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ((N.galoisLayerHom h L').pullbackExchange Λ)
     ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
-    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx
+    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab
     (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift Finset.univ _
     (fun τ ↦ N.galoisLayerAction Λ h L' τ (L((𝟙 X)^*⟦Λ⟧).obj C))
     (N.galoisLayerAction Λ h Ω)
     (fun σ _ _ g ↦ N.galoisLayerAction_naturality Λ h Ω σ g) ?_
-    (N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C)
+    (@exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ _ _ X X' N L _ h L'
+      _ _ _ _ C (by assumption))
     (fun σ ↦ N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       (L((𝟙 X)^*⟦Λ⟧).obj C))
   intro σ hσ
