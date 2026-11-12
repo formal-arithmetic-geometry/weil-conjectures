@@ -511,7 +511,8 @@ instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) 
     have e : Spec.mapMulEquiv χ ≫ subgroupSchemeHom hIJ = ⁅a', b'⁆ :=
       (ht _).1 (by
         beta_reduce at hc' ⊢
-        rw [← Category.assoc, hc', hγ])
+        rw [← Category.assoc, hc']
+        exact hγ)
     rw [mapMulEquiv_comp_subgroupSchemeHom, ← hψ] at e
     have e' : χ.ofConv.comp (Ideal.Quotient.factorₐ k hIJ) = ψ := by
       simpa using congrArg ofConv (Spec.mapMulEquiv.injective e)
@@ -521,7 +522,7 @@ instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) 
     sSup_le fun J ⟨hJ, hIJ, hc⟩ ↦ hkill J hIJ hc
   refine ⟨t ≫ Spec.mapMulEquiv (toConv (Ideal.Quotient.liftₐ (derivedIdeal I)
     (ψ.comp (Ideal.Quotient.mkₐ k I)) fun j hj ↦ hker hj)), ?_⟩
-  rw [Category.assoc, mapMulEquiv_comp_subgroupSchemeHom, hγ]
+  rw [Category.assoc, mapMulEquiv_comp_subgroupSchemeHom, ← commutatorElement_def, hγ]
   congr 1
   rw [← hψ]
   congr 1
