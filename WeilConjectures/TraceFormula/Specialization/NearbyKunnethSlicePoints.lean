@@ -53,6 +53,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the restricted Künneth maps are large terms
 /-- **The non-closed points are reached by generic slices**: under the generic-slicing step in
