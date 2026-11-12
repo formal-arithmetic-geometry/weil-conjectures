@@ -17,11 +17,45 @@ Source: Stacks 06YY, 07A4 and 0FPT; integral Hom reduction, paragraphs 1--2.
 
 @[expose] public section
 set_option autoImplicit false
-set_option synthInstance.maxSize 4096
 
 universe d t u
 open CategoryTheory CategoryTheory.MonoidalCategory
 namespace CategoryTheory
+
+private theorem reduction_iso_inv_section_of_hom_section
+    {C : Type*} [Category C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {P Q : CochainComplex (SheafOfModules.{u} R) ℤ} (e : P ≅ Q)
+    (k : ℤ) (U : Cᵒᵖ) (x : (P.X k).val.obj U) (y : (Q.X k).val.obj U)
+    (h : (e.hom.f k).val.app U x = y) : (e.inv.f k).val.app U y = x := by
+  rw [← h]
+  exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
+
+private theorem transportedTensorComparison_square
+    {C D : Type*} [Category C] [Category D]
+    {T T' : C × C ⥤ C} {S S' : D × D ⥤ D} (F : C ⥤ D)
+    (e : T ≅ T') (f : S ≅ S') (mu : T ⋙ F ≅ F.prod F ⋙ S)
+    {X Z A : C} {X' Z' B H : D}
+    (r : A ⟶ T.obj (X, Z)) (r' : A ⟶ T'.obj (X, Z))
+    (s : B ≅ S.obj (X', Z')) (s' : B ⟶ S'.obj (X', Z'))
+    (hr : r' = r ≫ e.hom.app (X, Z)) (hs : s' = s.hom ≫ f.hom.app (X', Z'))
+    (εX : F.obj X ⟶ X') (εZ : F.obj Z ⟶ Z') (ε : F.obj A ⟶ H)
+    (b : B ⟶ H) (k : H ⟶ B) (hk : b ≫ k = 𝟙 B)
+    (h : F.map r ≫ mu.hom.app (X, Z) ≫ S.map (Prod.mkHom εX εZ) ≫ s.inv ≫ b = ε) :
+    F.map r' ≫
+        (Functor.isoWhiskerRight e.symm F ≪≫ mu ≪≫
+          Functor.isoWhiskerLeft (F.prod F) f).hom.app (X, Z) ≫
+        S'.map (Prod.mkHom εX εZ) = ε ≫ k ≫ s' := by
+  rw [hr, hs]
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.prod_obj]
+  simp only [Functor.map_comp, Category.assoc]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id,
+    Category.id_comp]
+  rw [← f.hom.naturality]
+  have hh := congrArg (fun z ↦ z ≫ k ≫ s.hom ≫ f.hom.app (X', Z')) h
+  simpa only [Category.assoc, reassoc_of% hk, Category.id_comp,
+    Iso.inv_hom_id_assoc] using hh
 
 private theorem nativeScalarTensorStrength_transpose
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
@@ -168,8 +202,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem normalizedBeta_eq (n : ℕ)
@@ -196,22 +229,13 @@ private theorem normalizedBeta_eq (n : ℕ)
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
-    have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
-      (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
-      (asIso beta).hom_inv_id
-    change ((inv beta).f (i + j)).val.app U
-      ((beta.f (i + j)).val.app U _) = _ at hh
-    rw [hbeta] at hh
+    have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
+      (hbeta i j U x y)
     with_unfolding_all exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
-set_option trace.profiler true in
-set_option maxHeartbeats 6400000 in
+set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem nativeReductionMonoidal
@@ -324,36 +348,14 @@ private theorem nativeReductionMonoidal
           rw [← hbκ]
           exact (asIso beta).hom_inv_id
         rw [hh, CategoryTheory.Functor.map_id]
-      have hnat := f.hom.naturality (Prod.mkHom εP εQ)
-      let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
-        m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-          m.target.tensor.map (Prod.mkHom εP εQ)
-      calc
-        _ = G ≫ f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
-          with_unfolding_all
-            rw [hcr]
-            dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
-              F, integralDerivedReduction, G, AS, CoefficientClosedStructure.tensor,
-              CategoryTheory.Functor.prod_obj, mu, Iso.trans_hom, Iso.symm_hom,
-              Functor.isoWhiskerRight_hom,
-              Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
-              Functor.whiskerLeft_app]
-            simp only [Functor.map_comp, Category.assoc]
-            simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-            erw [← hnat, Category.comp_id]
-        _ = G ≫ m.target.representative.inv.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫ cS := by
-          rw [hcs]
-          simp only [Iso.inv_hom_id_app_assoc]
-          rfl
-        _ = reductionCounit l E Y D hl n _ ≫
-            DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫ cS := by
-          have hh := congrArg (fun z ↦ z ≫
-            DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫ cS) hnorm
-          with_unfolding_all
-            simpa only [F, G, εP, εQ, J, R, completedIntegralCommRingSheaf,
-              totalTensor, coefficientTotalTensor, ordinaryTensor,
-              CategoryTheory.Functor.uncurry_obj_obj, Category.assoc,
-              reassoc_of% hcan, Category.id_comp] using hh)
+      with_unfolding_all
+        exact transportedTensorComparison_square F e f m.mu
+          (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))
+          (TR.iso J R AR P Q hP hQ).hom
+          (m.target.representative.app (⟨_, hEP⟩, ⟨_, hEQ⟩)) cS hcr hcs
+          εP εQ (reductionCounit l E Y D hl n _)
+          (DerivedCategory.Q.map beta) (DerivedCategory.Q.map (κ.hom.app (P, Q)))
+          hcan hnorm)
   refine ⟨core, ?_⟩
   intro X Z
   have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
