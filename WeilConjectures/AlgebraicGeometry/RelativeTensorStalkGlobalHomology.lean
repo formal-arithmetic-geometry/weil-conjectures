@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # RelativeTensorStalkGlobalHomology
 

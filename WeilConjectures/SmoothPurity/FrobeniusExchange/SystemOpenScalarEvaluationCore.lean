@@ -40,24 +40,24 @@ theorem openScalar_mate_pasting
     (ρX : rX ⋙ eA ⟶ eA' ⋙ rfX) (ρZ : rZ ⋙ eB ⟶ eB' ⋙ rfZ)
     (q : rZ ⋙ jE ⟶ jL ⋙ rX) (φ : rfX ⋙ JfE ⟶ JfL ⋙ rfZ)
     (hcube : ∀ M : B', eA.map (q.app M) ≫ ρX.app (jL.obj M) ≫ rfX.map (pL.app M) ≫
-      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).natTrans.app (eB'.obj M) =
+      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).app (eB'.obj M) =
         pE.app (rZ.obj M) ≫ jfE.map (ρZ.app M))
     (N : A) :
-    sZ.map (((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)).natTrans.app N) ≫
-        ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)).natTrans.app (JE.obj N) =
-      ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)).natTrans.app (eA.obj N) ≫
-        JfL.map (((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)).natTrans.app N) ≫
-        ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)).natTrans.app (SX.obj N) ≫
+    sZ.map (((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)).app N) ≫
+        ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)).app (JE.obj N) =
+      ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)).app (eA.obj N) ≫
+        JfL.map (((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)).app N) ≫
+        ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)).app (SX.obj N) ≫
         eB'.map (((mateEquiv adjJE adjJL).symm
-          ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))).natTrans.app N) := by
-  let δE := ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)).natTrans
-  let δL := ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)).natTrans
-  let βX := ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)).natTrans
-  let βZ := ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)).natTrans
-  let α := ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)).natTrans
+          ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))).app N) := by
+  let δE := ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE))
+  let δL := ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL))
+  let βX := ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX))
+  let βZ := ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ))
+  let α := ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ))
   let SP := (mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q)
-  let γ := ((mateEquiv adjJE adjJL).symm SP).natTrans
-  let ψ := (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).natTrans
+  let γ := ((mateEquiv adjJE adjJL).symm SP)
+  let ψ := (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ))
   let M := SZ.obj (JE.obj N)
   have uδE : eA.map (adjJE.unit.app N) ≫ pE.app (JE.obj N) =
       adjfE.unit.app (eA.obj N) ≫ jfE.map (δE.app N) :=
@@ -75,9 +75,9 @@ theorem openScalar_mate_pasting
       τZ.unit.app (JfE.obj (eA.obj N)) ≫ rfZ.map (α.app (eA.obj N)) :=
     unit_mateEquiv_symm τX τZ (TwoSquare.mk _ _ _ _ φ) (eA.obj N)
   have uSP : jE.map (σZ.unit.app (JE.obj N)) ≫ q.app M =
-      σX.unit.app (jE.obj (JE.obj N)) ≫ rX.map (SP.natTrans.app (JE.obj N)) :=
+      σX.unit.app (jE.obj (JE.obj N)) ≫ rX.map (SP.app (JE.obj N)) :=
     unit_mateEquiv_symm σZ σX (TwoSquare.mk _ _ _ _ q) (JE.obj N)
-  have uγ : SX.map (adjJE.unit.app N) ≫ SP.natTrans.app (JE.obj N) =
+  have uγ : SX.map (adjJE.unit.app N) ≫ SP.app (JE.obj N) =
       adjJL.unit.app (SX.obj N) ≫ jL.map (γ.app N) :=
     unit_mateEquiv_symm adjJE adjJL SP N
   have uψ (c : a') : rfX.map (adjfL.unit.app c) ≫ ψ.app (JfL.obj c) =
@@ -152,21 +152,21 @@ theorem openScalar_mate_pasting_of_eq
     {ρX : rX ⋙ eA ⟶ eA' ⋙ rfX} {ρZ : rZ ⋙ eB ⟶ eB' ⋙ rfZ}
     {q : rZ ⋙ jE ⟶ jL ⋙ rX} {φ : rfX ⋙ JfE ⟶ JfL ⋙ rfZ}
     (hcube : ∀ M : B', eA.map (q.app M) ≫ ρX.app (jL.obj M) ≫ rfX.map (pL.app M) ≫
-      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).natTrans.app (eB'.obj M) =
+      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).app (eB'.obj M) =
         pE.app (rZ.obj M) ≫ jfE.map (ρZ.app M))
     {δE : eA ⋙ JfE ⟶ JE ⋙ eB}
-    (hδE : δE = ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)).natTrans)
+    (hδE : δE = ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)))
     {δL : eA' ⋙ JfL ⟶ JL ⋙ eB'}
-    (hδL : δL = ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)).natTrans)
+    (hδL : δL = ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)))
     {βX : eA ⋙ sX ⟶ SX ⋙ eA'}
-    (hβX : βX = ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)).natTrans)
+    (hβX : βX = ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)))
     {βZ : eB ⋙ sZ ⟶ SZ ⋙ eB'}
-    (hβZ : βZ = ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)).natTrans)
+    (hβZ : βZ = ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)))
     {α : JfE ⋙ sZ ⟶ sX ⋙ JfL}
-    (hα : α = ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)).natTrans)
+    (hα : α = ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)))
     {γ : SX ⋙ JL ⟶ JE ⋙ SZ}
     (hγ : γ = ((mateEquiv adjJE adjJL).symm
-      ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))).natTrans)
+      ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))))
     (N : A) :
     sZ.map (δE.app N) ≫ βZ.app (JE.obj N) =
       α.app (eA.obj N) ≫ JfL.map (βX.app N) ≫ δL.app (SX.obj N) ≫ eB'.map (γ.app N) := by
@@ -205,21 +205,21 @@ theorem openScalar_evaluation_of_cube
     (ρX : rX ⋙ eA ⟶ eA' ⋙ rfX) (ρZ : rZ ⋙ eB ⟶ eB' ⋙ rfZ)
     (q : rZ ⋙ jE ⟶ jL ⋙ rX) (φ : rfX ⋙ JfE ⟶ JfL ⋙ rfZ)
     (hcube : ∀ M : B', eA.map (q.app M) ≫ ρX.app (jL.obj M) ≫ rfX.map (pL.app M) ≫
-      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).natTrans.app (eB'.obj M) =
+      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).app (eB'.obj M) =
         pE.app (rZ.obj M) ≫ jfE.map (ρZ.app M))
     (δE : eA ⋙ JfE ⟶ JE ⋙ eB) [IsIso δE]
-    (hδE : δE = ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)).natTrans)
+    (hδE : δE = ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)))
     (δL : eA' ⋙ JfL ⟶ JL ⋙ eB') [IsIso δL]
-    (hδL : δL = ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)).natTrans)
+    (hδL : δL = ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)))
     (εX : SX ⋙ eA' ≅ eA ⋙ sX)
-    (hεX : εX.inv = ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)).natTrans)
+    (hεX : εX.inv = ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)))
     (εZ : SZ ⋙ eB' ≅ eB ⋙ sZ)
-    (hεZ : εZ.inv = ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)).natTrans)
+    (hεZ : εZ.inv = ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)))
     (α : JfE ⋙ sZ ⟶ sX ⋙ JfL)
-    (hα : α = ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)).natTrans)
+    (hα : α = ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)))
     (γ : SX ⋙ JL ⟶ JE ⋙ SZ) [IsIso γ]
     (hγ : γ = ((mateEquiv adjJE adjJL).symm
-      ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))).natTrans)
+      ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))))
     (N : A) :
     let uE := (asIso δE).symm
     let uL := (asIso δL).symm
@@ -249,7 +249,7 @@ theorem scalarSystems_evaluation_inv_eq_mate {C : Type c} [Category.{v} C]
     (d.evaluation n).inv = ((mateEquiv d.scalar.adjunction (d.levels n).adjunction).symm
       (TwoSquare.mk _ _ _ _
         (SemilinearSections.restrictionEvaluation.{c, v, max c v r}
-          J B τ F σ α hα n).hom)).natTrans := by
+          J B τ F σ α hα n).hom)) := by
   ext M
   apply ((d.levels n).adjunction.homEquiv _ _).injective
   have h := d.transpose_evaluation n M _ (𝟙 _)
@@ -265,12 +265,12 @@ theorem isoInv_leftAdjointUniq_eq_mate {C D C' D' : Type*} [Category C] [Categor
     [Category C'] [Category D'] {L L' : C ⥤ D} {R : D ⥤ C} {l l' : C' ⥤ D'} {r : D' ⥤ C'}
     {G : C ⥤ C'} {H : D ⥤ D'} (a : L ⊣ R) (b : L' ⊣ R) (c : l ⊣ r) (c' : l' ⊣ r)
     (ev : L' ⋙ H ≅ G ⋙ l) (w : TwoSquare R H G r)
-    (hev : ev.inv = ((mateEquiv b c).symm w).natTrans) :
+    (hev : ev.inv = ((mateEquiv b c).symm w)) :
     (Functor.isoWhiskerRight (a.leftAdjointUniq b) H ≪≫ ev ≪≫
       Functor.isoWhiskerLeft G (c.leftAdjointUniq c')).inv =
-      ((mateEquiv a c').symm w).natTrans := by
+      ((mateEquiv a c').symm w) := by
   have hw : (mateEquiv a c').symm w = TwoSquare.mk _ _ _ _
-      (Functor.whiskerLeft G (c'.leftAdjointUniq c).hom ≫ ((mateEquiv b c).symm w).natTrans ≫
+      (Functor.whiskerLeft G (c'.leftAdjointUniq c).hom ≫ ((mateEquiv b c).symm w) ≫
         Functor.whiskerRight (a.leftAdjointUniq b).inv H) := by
     apply (mateEquiv a c').injective
     rw [Equiv.apply_symm_apply, mateEquiv_leftAdjointUniq, Equiv.apply_symm_apply]
@@ -285,7 +285,7 @@ theorem inverseMate_heq_cast {X : Sort*} {C D C' D' : Type*} [Category C] [Categ
     {G : C ⥤ C'} {H : D ⥤ D'} {φ₁ φ₂ : X} (h : φ₁ = φ₂) (a : L ⊣ Rf φ₁)
     (b : L ⊣ Rf φ₂)
     (hab : HEq a b) (c : l ⊣ r) (w : TwoSquare (Rf φ₁) H G r) :
-    ∃ w' : TwoSquare (Rf φ₂) H G r, HEq w'.natTrans w.natTrans ∧
+    ∃ w' : TwoSquare (Rf φ₂) H G r, HEq w' w ∧
       (mateEquiv a c).symm w = (mateEquiv b c).symm w' := by
   subst h
   obtain rfl := eq_of_heq hab
@@ -313,7 +313,7 @@ theorem systemScalarFiniteEvaluation_inv_eq_mate (l : ℕ) [Fact l.Prime]
         (coefficientSequenceDerivedEvaluation l L W n)
         (coefficientSequenceDerivedEvaluation l E W n)
         (pbcDerivedRestrict (scalarRingMap (integralScalarQuotientMap l E L ι n) W)),
-      HEq ρ.natTrans (SemilinearSections.restrictionEvaluation (ProEt.topology W)
+      HEq ρ (SemilinearSections.restrictionEvaluation (ProEt.topology W)
         (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
         (integralCoefficientCommRingSheaf l L W) (coefficientSequenceCommRingTransition l L W)
         (integralScalarQuotientSheafMap l E L ι W)
@@ -322,7 +322,7 @@ theorem systemScalarFiniteEvaluation_inv_eq_mate (l : ℕ) [Fact l.Prime]
         ((mateEquiv (finiteEvaluationSystemScalarAdjunction l E L ι W)
           (pbcDerivedScalarAdjunction
             (scalarRingMap (integralScalarQuotientMap l E L ι n) W))).symm
-          ρ).natTrans := by
+          ρ) := by
   obtain ⟨w', hw', he⟩ := inverseMate_heq_cast (fun φ ↦ SemilinearSections.resD φ)
     (scalarSystemMap_eq l E L ι W)
     (by rw [scalarSystemMap_eq]; exact finiteEvaluationSystemScalarAdjunction l E L ι W)
@@ -334,7 +334,7 @@ theorem systemScalarFiniteEvaluation_inv_eq_mate (l : ℕ) [Fact l.Prime]
       (integralScalarQuotientSheafMap l E L ι W) (scalarQuotient_compatible l E L ι W) n).hom)
   exact ⟨w', hw', (isoInv_leftAdjointUniq_eq_mate _ _ _ _ _ _
     (scalarSystems_evaluation_inv_eq_mate _ _ _ _ _ _ _ _ n)).trans
-      (congrArg TwoSquare.natTrans he)⟩
+      (he)⟩
 
 end FiniteEvaluationMate
 
@@ -429,7 +429,7 @@ private theorem systemScalarPullback_eq_mate_of_models (l : ℕ) [Fact l.Prime]
       sequenceRestriction l E L ι B ⋙ integralComparisonSequencePullback l E j)
     (a : integralComparisonSequencePullback l E j ⋙ MX.E ≅
       MB.E ⋙ integralComparisonSequencePullback l L j)
-    (ha : a.hom = ((mateEquiv oB oX).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans)
+    (ha : a.hom = ((mateEquiv oB oX).symm (TwoSquare.mk _ _ _ _ q.inv)))
     (S : integralComparisonDerivedSequencePullback l E j ⋙ MX.T ≅
       MB.T ⋙ integralComparisonDerivedSequencePullback l L j)
     (hS : ∀ (P : CochainComplex (coefficientSequenceModules l E B) ℤ),
@@ -445,7 +445,7 @@ private theorem systemScalarPullback_eq_mate_of_models (l : ℕ) [Fact l.Prime]
         (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app
           ((MB.E.mapHomologicalComplex (.up ℤ)).obj P)) :
     S.hom = ((mateEquiv σB σX).symm (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso q).inv)).natTrans := by
+        (Functor.mapDerivedCategorySquareIso q).inv)) := by
   subst hAB hAX
   obtain rfl := eq_of_heq hσB
   obtain rfl := eq_of_heq hσX
@@ -564,7 +564,7 @@ private theorem systemScalarPullback_hom_eq_finiteMate (l : ℕ) [Fact l.Prime]
       ((mateEquiv (finiteEvaluationSystemScalarAdjunction l E L ι B)
         (finiteEvaluationSystemScalarAdjunction l E L ι X)).symm (TwoSquare.mk _ _ _ _
           (Functor.mapDerivedCategorySquareIso
-            (asIso (sequenceRestrictionPullbackInv l E L ι j)).symm).inv)).natTrans := by
+            (asIso (sequenceRestrictionPullbackInv l E L ι j)).symm).inv)) := by
   exact systemScalarPullback_eq_mate_of_models l E L ι j
     (finiteEvaluationSystemScalarModel_exists l E L ι B).choose
     (finiteEvaluationSystemScalarModel_exists l E L ι X).choose _ _
@@ -601,7 +601,7 @@ private theorem systemOpenScalarInv_eq_iteratedMate (l : ℕ) [Fact l.Prime]
         (finiteEvaluationSystemScalarAdjunction l E L ι X)).symm (TwoSquare.mk _ _ _ _
           (Functor.mapDerivedCategorySquareIso
             (@asIso _ _ _ _ (sequenceRestrictionPullbackInv l E L ι j)
-              (sequenceRestrictionPullbackInv_isIso l E L ι j)).symm).inv))).natTrans := by
+              (sequenceRestrictionPullbackInv_isIso l E L ι j)).symm).inv))) := by
   unfold systemOpenScalarInv
   rw [systemScalarPullback_hom_eq_finiteMate l E L ι j]
   rfl
@@ -628,12 +628,12 @@ private theorem systemOpenScalarInv_finiteEvaluation_of_cube
         (coefficientSequenceDerivedEvaluation l L Z n)
         (coefficientSequenceDerivedEvaluation l E Z n)
         (pbcDerivedRestrict (scalarRingMap (integralScalarQuotientMap l E L ι n) Z))),
-      HEq ρX.natTrans (SemilinearSections.restrictionEvaluation (ProEt.topology X)
+      HEq ρX (SemilinearSections.restrictionEvaluation (ProEt.topology X)
         (integralCoefficientCommRingSheaf l E X) (coefficientSequenceCommRingTransition l E X)
         (integralCoefficientCommRingSheaf l L X) (coefficientSequenceCommRingTransition l L X)
         (integralScalarQuotientSheafMap l E L ι X)
         (scalarQuotient_compatible l E L ι X) n).hom →
-      HEq ρZ.natTrans (SemilinearSections.restrictionEvaluation (ProEt.topology Z)
+      HEq ρZ (SemilinearSections.restrictionEvaluation (ProEt.topology Z)
         (integralCoefficientCommRingSheaf l E Z) (coefficientSequenceCommRingTransition l E Z)
         (integralCoefficientCommRingSheaf l L Z) (coefficientSequenceCommRingTransition l L Z)
         (integralScalarQuotientSheafMap l E L ι Z)
@@ -642,7 +642,7 @@ private theorem systemOpenScalarInv_finiteEvaluation_of_cube
           ((Functor.mapDerivedCategorySquareIso
             (@asIso _ _ _ _ (sequenceRestrictionPullbackInv l E L ι j)
               (sequenceRestrictionPullbackInv_isIso l E L ι j)).symm).inv.app M) ≫
-        ρX.natTrans.app ((integralComparisonDerivedSequencePullback l L j).obj M) ≫
+        ρX.app ((integralComparisonDerivedSequencePullback l L j).obj M) ≫
         (pbcDerivedRestrict (scalarRingMap (integralScalarQuotientMap l E L ι n) X)).map
           ((systemPullEvaluation l L j n).inv.app M) ≫
         ((mateEquiv (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
@@ -650,12 +650,12 @@ private theorem systemOpenScalarInv_finiteEvaluation_of_cube
           (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
             (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j)))
           (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
-            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom)).natTrans.app
+            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom)).app
           ((coefficientSequenceDerivedEvaluation l L Z n).obj M) =
         (systemPullEvaluation l E j n).inv.app
           ((SemilinearSections.resD (integralComparisonSequenceScalarMap l E L ι Z)).obj M) ≫
         (sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) j).mapDerivedCategory.map
-          (ρZ.natTrans.app M)) :
+          (ρZ.app M)) :
     let uE :=
       letI := systemOpenEvaluationInv_isIso l E j n
       (asIso (systemOpenEvaluationInv l E j n)).symm
@@ -669,7 +669,7 @@ private theorem systemOpenScalarInv_finiteEvaluation_of_cube
           (scalarRingMap (integralScalarQuotientMap l E L ι n) Z))).symm
         (TwoSquare.mk _ _ _ _
           ((Functor.mapDerivedCategorySquareIso
-            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom))).natTrans
+            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom)))
     (uL.hom.app ((integralComparisonDerivedSequenceScalar l E L ι X).obj N)) ≫
         (sfIntrinsicExtensionByZero j
           (Padic.coefficientExtensionRing l L (n + 1))).mapDerivedCategory.map
@@ -743,7 +743,7 @@ theorem systemOpenScalarInv_finiteEvaluation_core
           (scalarRingMap (integralScalarQuotientMap l E L ι n) Z))).symm
         (TwoSquare.mk _ _ _ _
           ((Functor.mapDerivedCategorySquareIso
-            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom))).natTrans
+            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom)))
     (uL.hom.app ((integralComparisonDerivedSequenceScalar l E L ι X).obj N)) ≫
         (sfIntrinsicExtensionByZero j
           (Padic.coefficientExtensionRing l L (n + 1))).mapDerivedCategory.map

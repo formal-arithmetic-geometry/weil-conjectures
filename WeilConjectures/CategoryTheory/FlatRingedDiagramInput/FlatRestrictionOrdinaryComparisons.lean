@@ -357,7 +357,7 @@ private theorem adjunct_mate
     aR.unit.app (rV.obj M) ≫ FR.map (b.inv.app M) at h
   rw [aR.homEquiv_unit, FR.map_comp, ← Category.assoc, ← h, Category.assoc]
   have hd : d.app (LS.obj M) ≫ FR.map (rU.map t) =
-      rV.map (FS.map t) ≫ d.app N := d.natTrans.naturality t |>.symm
+      rV.map (FS.map t) ≫ d.app N := d.naturality t |>.symm
   rw [hd]
   rw [aS.homEquiv_unit, rV.map_comp, Category.assoc]
 

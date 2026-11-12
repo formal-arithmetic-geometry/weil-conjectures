@@ -63,7 +63,7 @@ theorem openExchangeDerivedUnit
     let P := lowerStar K p;
     let bc := @asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap K sq);
     let χ := (mateEquiv (upperStarLowerStarAdjunction K q)
-      (upperStarLowerStarAdjunction K p) (TwoSquare.mk _ _ _ _ bc.inv)).natTrans;
+      (upperStarLowerStarAdjunction K p) (TwoSquare.mk _ _ _ _ bc.inv));
     let Γ := openImmersionLowerShriekLowerStarExchange K sq;
     I.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app L) ≫
         Γ.app (DerivedCategory.Qh.obj L) ≫

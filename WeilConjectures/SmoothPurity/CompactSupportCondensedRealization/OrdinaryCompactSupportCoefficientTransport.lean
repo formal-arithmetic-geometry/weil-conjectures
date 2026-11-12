@@ -520,11 +520,11 @@ without requiring coefficient restriction to preserve K-injectives. -/
   have he : IsIso (mateEquiv
       (SemilinearProperOpen.ordinaryAdj (quotientRings l F) (quotientMaps l F) f)
       (SemilinearProperOpen.ordinaryAdj (quotientRings l E) (quotientMaps l E) f)
-      (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ e.hom)) := by
     have hm : (mateEquiv
         (SemilinearProperOpen.ordinaryAdj (quotientRings l F) (quotientMaps l F) f)
         (SemilinearProperOpen.ordinaryAdj (quotientRings l E) (quotientMaps l E) f)
-        (TwoSquare.mk _ _ _ _ e.hom)).natTrans =
+        (TwoSquare.mk _ _ _ _ e.hom)) =
         (systemRestrictionPush_existsUnique l E F i f).choose.inv := by
       dsimp only [e, asIso_hom]
       unfold systemRestrictionPullInv
@@ -614,6 +614,6 @@ def systemProjection {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
   ((mateEquiv (systemScalarData l E F i X).scalar.adjunction
     (systemScalarData l E F i Y).scalar.adjunction).symm
       (TwoSquare.mk _ (systemSupport l F c) (systemSupport l E c) _
-        (systemSupportRestriction l E F i c).hom)).natTrans
+        (systemSupportRestriction l E F i c).hom))
 
 end WeilConjectures.CompactSupportCondensedRealization

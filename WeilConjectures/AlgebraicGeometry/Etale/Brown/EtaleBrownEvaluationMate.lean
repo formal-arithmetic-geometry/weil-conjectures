@@ -30,7 +30,7 @@ variable {O : Type (u + 1)} [CommRing O] {t : O}
 
 private theorem open_evaluation_mate (n : ℕ) :
     ((mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)).symm
-      (.mk _ _ _ _ (S.openDerived.inverseEvaluation n).hom)).natTrans =
+      (.mk _ _ _ _ (S.openDerived.inverseEvaluation n).hom)) =
     (S.openDerivedEvaluation n).inv := by
   apply Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso _ (.up ℤ))
@@ -56,7 +56,7 @@ private theorem open_evaluation_mate (n : ℕ) :
       have hh := unit_mateEquiv S.val.openAdjunction (S.val.levelOpenAdjunction n)
         (.mk _ _ _ _ (S.val.openEvaluation n).inv) (K.X i)
       change _ ≫ ((mateEquiv S.val.openAdjunction (S.val.levelOpenAdjunction n)
-        (.mk _ _ _ _ (S.val.openEvaluation n).inv)).natTrans).app _ = _ at hh
+        (.mk _ _ _ _ (S.val.openEvaluation n).inv))).app _ = _ at hh
       rw [← S.property.2.1 n] at hh
       exact hh.symm) P
   let U := (S.PZ.evaluation n).map (S.val.openFactors.hom.app P) ≫
@@ -84,7 +84,7 @@ private theorem open_evaluation_mate (n : ℕ) :
 
 private theorem proper_evaluation_mate (n : ℕ) :
     (mateEquiv (S.PZ.derivedAdj n) (S.PY.derivedAdj n)
-      (.mk _ _ _ _ (B.properInsertionMate n).hom)).natTrans =
+      (.mk _ _ _ _ (B.properInsertionMate n).hom)) =
     (S.properDerived.directEvaluation n).inv := by
   rw [B.properInsertionMate_def]
   rw [iterated_mateEquiv_conjugateEquiv
@@ -115,40 +115,40 @@ and the defining composite is precisely `S.evaluation n`. This proves equality o
 natural transformations on all derived inputs, without a boundedness restriction. -/
 theorem etaleBrownEvaluationMate (n : ℕ) :
     (mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)
-      (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)).natTrans =
+      (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)) =
         (S.openDerived.inverseEvaluation n).hom ∧
     (mateEquiv (S.PX.derivedAdj n) (S.PY.derivedAdj n)
-      (.mk _ _ _ _ (B.leftExtension n).inv)).natTrans = (S.evaluation n).inv := by
+      (.mk _ _ _ _ (B.leftExtension n).inv)) = (S.evaluation n).inv := by
   constructor
   · apply (mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)).symm.injective
     rw [Equiv.symm_apply_apply]
     exact (open_evaluation_mate (S := S) n).symm
   · have ho : (mateEquiv (S.PX.derivedAdj n) (S.PZ.derivedAdj n)
-        (.mk _ _ _ _ (B.openInsertion n).inv)).natTrans =
+        (.mk _ _ _ _ (B.openInsertion n).inv)) =
         (S.openDerivedEvaluation n).inv := by
       have hh := B.openInsertion_conjugate n
       rw [← iterated_mateEquiv_conjugateEquiv (S.PX.derivedAdj n)
         (S.PZ.derivedAdj n) (S.levelDerivedOpenAdjunction n) S.derivedOpenAdjunction] at hh
       have he := congrArg (fun z ↦
         ((mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)).symm
-          (.mk _ _ _ _ z)).natTrans) hh
+          (.mk _ _ _ _ z))) hh
       simpa only [Equiv.symm_apply_apply] using he.trans (open_evaluation_mate n)
     let α := TwoSquare.mk _ _ _ _ (B.openInsertion n).inv
     let β := TwoSquare.mk _ _ _ _ (B.properInsertionMate n).hom
-    have hh := congrArg TwoSquare.natTrans
+    have hh := 
       (mateEquiv_vcomp (S.PX.derivedAdj n) (S.PZ.derivedAdj n) (S.PY.derivedAdj n) α β)
-    have he : (B.leftExtension n).inv = (α ≫ₕ β).natTrans := by
+    have he : (B.leftExtension n).inv = (α ≫ₕ β) := by
       rw [B.leftExtension_def]
       simp [TwoSquare.hComp, α, β]
     rw [he]
-    change (mateEquiv (S.PX.derivedAdj n) (S.PY.derivedAdj n) (α ≫ₕ β)).natTrans = _
+    change (mateEquiv (S.PX.derivedAdj n) (S.PY.derivedAdj n) (α ≫ₕ β)) = _
     rw [hh]
     apply NatTrans.ext
     funext K
     simp only [TwoSquare.vComp_app]
     change (S.properDerived.level n).direct.map
-      ((mateEquiv (S.PX.derivedAdj n) (S.PZ.derivedAdj n) α).natTrans.app K) ≫
-      (mateEquiv (S.PZ.derivedAdj n) (S.PY.derivedAdj n) β).natTrans.app
+      ((mateEquiv (S.PX.derivedAdj n) (S.PZ.derivedAdj n) α).app K) ≫
+      (mateEquiv (S.PZ.derivedAdj n) (S.PY.derivedAdj n) β).app
         (S.derivedOpen.obj K) = _
     rw [ho, proper_evaluation_mate B n]
     simp [StrictEtaleCompactSupport.evaluation]

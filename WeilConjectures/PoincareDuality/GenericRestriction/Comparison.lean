@@ -66,12 +66,12 @@ noncomputable def ihomUpperStarComparison {W X : Scheme.{u}} (g : W ⟶ X)
       (condensedRingObj Λ X))) :
     (L((g)^*⟦Λ⟧)).obj ((ihom K).obj M) ⟶
       (ihom ((L((g)^*⟦Λ⟧)).obj K)).obj ((L((g)^*⟦Λ⟧)).obj M) :=
-  (ihomComparison L((g)^*⟦Λ⟧) K).natTrans.app M
+  (ihomComparison L((g)^*⟦Λ⟧) K).app M
 
 lemma ihomUpperStarComparison_eq {W X : Scheme.{u}} (g : W ⟶ X)
     (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    ihomUpperStarComparison Λ g K M = (ihomComparison L((g)^*⟦Λ⟧) K).natTrans.app M :=
+    ihomUpperStarComparison Λ g K M = (ihomComparison L((g)^*⟦Λ⟧) K).app M :=
   rfl
 
 /-- The comparison `ρ_g(K, M)` is natural in `M`. -/
@@ -83,7 +83,7 @@ lemma ihomUpperStarComparison_naturality {W X : Scheme.{u}} (g : W ⟶ X)
       (condensedRingObj Λ X))} (φ : M ⟶ M') :
     (L((g)^*⟦Λ⟧)).map ((ihom K).map φ) ≫ ihomUpperStarComparison Λ g K M' =
       ihomUpperStarComparison Λ g K M ≫ (ihom ((L((g)^*⟦Λ⟧)).obj K)).map ((L((g)^*⟦Λ⟧)).map φ) :=
-  (ihomComparison L((g)^*⟦Λ⟧) K).natTrans.naturality φ
+  (ihomComparison L((g)^*⟦Λ⟧) K).naturality φ
 
 /-- The comparison `ρ_g(K, M)` is an isomorphism if and only if `ρ_g(K, M')` is, for `M ≅ M'`. -/
 lemma isIso_ihomUpperStarComparison_iff_of_iso_right {W X : Scheme.{u}} (g : W ⟶ X)

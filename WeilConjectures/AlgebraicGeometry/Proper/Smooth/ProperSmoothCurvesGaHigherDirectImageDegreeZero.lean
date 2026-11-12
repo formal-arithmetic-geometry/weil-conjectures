@@ -235,8 +235,8 @@ theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux
       (∀ (U : S.Etale) (a : Γ(U.left, ⊤))
         (e : Γ((Scheme.Modules.tensorPullback U.hom).obj E, ⊤)),
         F.hom.app (op U)
-            ((((Scheme.Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-          (((Scheme.Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+            ((((Scheme.Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+          (((Scheme.Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
             (F.hom.app (op U) e)) ∧
       ∃ e : (DerivedCategory.homologyFunctor _ 0).obj
             ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor.obj

@@ -162,7 +162,7 @@ lemma pullbackExchange_endo_aux {DX DG DT DS : Type*} [Category DX] [Category DG
     (hE : ∀ A, cE.app A = d.inv.app A ≫ Lε.map (I₀.inv.app A))
     (α : (Lε ⋙ Rj ⋙ Li) ⋙ L' ⟶ L₀ ⋙ Lε ⋙ Rj ⋙ Li)
     (hα : α = Functor.whiskerLeft (Lε ⋙ Rj) cI.hom ≫ Functor.whiskerRight
-      (Functor.whiskerLeft Lε (mateEquiv aj aj θ).natTrans ≫ Functor.whiskerRight cE Rj) Li)
+      (Functor.whiskerLeft Lε (mateEquiv aj aj θ) ≫ Functor.whiskerRight cE Rj) Li)
     (A : DX) :
     α.app A = I'.hom.app (Li.obj (Rj.obj (Lε.obj A))) ≫
       Li.map (Rj.map (as.unit.app (Lε.obj A)) ≫

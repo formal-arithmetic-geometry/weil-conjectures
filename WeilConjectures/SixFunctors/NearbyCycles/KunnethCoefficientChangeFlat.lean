@@ -94,14 +94,14 @@ lemma extendScalars_map_lowerStarTensorMap'_of_flat {U T : Scheme.{u}} (j : U �
     (Mod.extendScalars (coefficientMap a T)).leftDerivedFunctor.map
         (lowerStarTensorMap' Λ j A B) ≫
         ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ j)
-      (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).inv).natTrans).app (A ⊗ B) ≫
+      (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).inv)).app (A ⊗ B) ≫
         R((j)_*⟦Λ'⟧).map (((derivedExtendScalarsTensorIso a U).hom.app A).app B) =
       ((derivedExtendScalarsTensorIso a T).hom.app (R((j)_*⟦Λ⟧).obj A)).app
           (R((j)_*⟦Λ⟧).obj B) ≫
         (((mateEquiv (derivedUpperStarLowerStarAdjunction Λ j)
-      (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).inv).natTrans).app A ⊗ₘ
+      (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).inv)).app A ⊗ₘ
           ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ j)
-      (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).inv).natTrans).app B) ≫
+      (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).inv)).app B) ≫
         lowerStarTensorMap' Λ' j _ _ :=
   Adjunction.map_homEquiv_comp_mateEquiv_app (derivedUpperStarLowerStarAdjunction Λ j)
     (derivedUpperStarLowerStarAdjunction Λ' j) (derivedPullIso a j).symm
@@ -125,7 +125,7 @@ noncomputable def extendScalarsComparisonOfFlat (M : NearbyCyclesModel X X')
       (M.nearbyCycles Λ').obj ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj A) :=
   (derivedPullIso a M.i).hom.app _ ≫
     L((M.i)^*⟦Λ'⟧).map (((mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv).natTrans).app _ ≫
+      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv)).app _ ≫
       R((M.j)_*⟦Λ'⟧).map ((derivedPullIso a M.ε).hom.app A))
 
 variable {Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
@@ -164,21 +164,21 @@ theorem Hom.extendScalars_map_pullbackExchange_app_of_flat (φ : M.Hom N f f')
   have key := map_exchange_comp_eq (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (pullbackSquareComparison Λ φ.commSq_ε).hom
     (pullbackSquareComparison Λ' φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' N.j)
       (derivedUpperStarLowerStarAdjunction Λ' M.j)
-      (pullbackSquareComparison Λ' φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ' φ.commSq_j).hom)
     (pullbackSquareComparison Λ' φ.commSq_ε).hom
     (derivedPullIso a f') (derivedPullIso a N.i)
     (derivedPullIso a M.i) (derivedPullIso a φ.total)
     (derivedPullIso a φ.generic) (derivedPullIso a N.ε)
     (derivedPullIso a M.ε) (derivedPullIso a f)
     ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
-      (derivedUpperStarLowerStarAdjunction Λ' N.j) (derivedPullIso a N.j).inv).natTrans)
+      (derivedUpperStarLowerStarAdjunction Λ' N.j) (derivedPullIso a N.j).inv))
     ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv).natTrans)
+      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv))
     hi hβ hε (φ.pullbackExchange Λ) rfl (φ.pullbackExchange Λ') rfl A
   unfold extendScalarsComparisonOfFlat
   convert key using 2 <;> rfl
@@ -201,7 +201,7 @@ theorem extendScalars_map_tensorMap_of_flat (M : NearbyCyclesModel X X')
         M.tensorMap Λ' _ _ := by
   have key := map_laxComp_comp_eq (derivedPullIso a M.ε)
     (derivedPullIso a M.i) ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv).natTrans)
+      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv))
     (Functor.LaxMonoidal.μ L((M.ε)^*⟦Λ⟧)) (Functor.LaxMonoidal.μ L((M.ε)^*⟦Λ'⟧))
     (lowerStarTensorMap' Λ M.j) (lowerStarTensorMap' Λ' M.j)
     (Functor.LaxMonoidal.μ L((M.i)^*⟦Λ⟧)) (Functor.LaxMonoidal.μ L((M.i)^*⟦Λ'⟧))
@@ -222,7 +222,7 @@ lemma isIso_extendScalarsComparisonOfFlat (M : NearbyCyclesModel X X')
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
     (h : IsIso (((mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv).natTrans).app
+      (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv)).app
         (L((M.ε)^*⟦Λ⟧).obj A))) :
     IsIso (M.extendScalarsComparisonOfFlat a A) := by
   rw [extendScalarsComparisonOfFlat]

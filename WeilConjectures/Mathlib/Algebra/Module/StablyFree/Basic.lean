@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Module.StablyFree.Basic
 public import Mathlib.RingTheory.Finiteness.Prod
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.Basis.Prod
 
 /-!
 # Stably free modules and short exact sequences

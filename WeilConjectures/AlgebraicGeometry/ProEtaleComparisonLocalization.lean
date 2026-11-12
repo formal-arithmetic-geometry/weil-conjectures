@@ -41,7 +41,7 @@ private theorem mate_localization_eq
         (ModuleCat.{u + 1} Λ) V.hom inferInstance)
       (AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction
         (ModuleCat.{u + 1} Λ) V.hom V.prop)
-      (comparisonLowerStarLocalizationIso X Λ V).hom).natTrans =
+      (comparisonLowerStarLocalizationIso X Λ V).hom) =
     (AlgebraicGeometry.ProEtale.lowerStarCompComparisonLowerStarIso
       V.hom (ModuleCat.{u + 1} Λ)).hom := by
   apply NatTrans.ext
@@ -90,7 +90,7 @@ private theorem leftMate_localization_isIso
     IsIso ((mateEquiv
       (AlgebraicGeometry.ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
       (AlgebraicGeometry.ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) V.left)).symm
-      (comparisonLowerStarLocalizationIso X Λ V).hom).natTrans := by
+      (comparisonLowerStarLocalizationIso X Λ V).hom) := by
   let adjX := AlgebraicGeometry.ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X
   let adjV := AlgebraicGeometry.ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) V.left
   let adjE := AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction
@@ -101,17 +101,16 @@ private theorem leftMate_localization_isIso
     V.hom (ModuleCat.{u + 1} Λ)
   have hb : mateEquiv adjP adjE (comparisonLowerStarLocalizationIso X Λ V).hom =
       TwoSquare.mk _ _ _ _ δ.hom := by
-    apply TwoSquare.ext
-    intro F
+    refine NatTrans.ext (funext fun F ↦ ?_)
     exact congr_app (mate_localization_eq X Λ V) F
   have hb' := congrArg (mateEquiv adjP adjE).symm hb
   simp only [Equiv.symm_apply_apply] at hb'
   have heq := iterated_mateEquiv_conjugateEquiv_symm adjX adjV adjE adjP
     (TwoSquare.mk _ _ _ _ δ.hom)
   rw [← hb'] at heq
-  have heq' := congrArg TwoSquare.natTrans heq
+  have heq' := heq
   change ((mateEquiv adjX adjV).symm
-      (comparisonLowerStarLocalizationIso X Λ V).hom).natTrans =
+      (comparisonLowerStarLocalizationIso X Λ V).hom) =
     (conjugateEquiv (adjX.comp adjP) (adjE.comp adjV)).symm δ.hom at heq'
   rw [heq']
   infer_instance
@@ -139,7 +138,7 @@ theorem comparison_counit_restriction_isIso
   let adjX := AlgebraicGeometry.ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X
   let adjV := AlgebraicGeometry.ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) V.left
   let β := comparisonLowerStarLocalizationIso X Λ V
-  let α := ((mateEquiv adjX adjV).symm β.hom).natTrans
+  let α := ((mateEquiv adjX adjV).symm β.hom)
   have : IsIso α := leftMate_localization_isIso X Λ V
   have : IsIso (adjV.counit.app
       ((AlgebraicGeometry.ProEtale.localizationRestriction

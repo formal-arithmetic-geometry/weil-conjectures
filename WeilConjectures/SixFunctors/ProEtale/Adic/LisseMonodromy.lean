@@ -187,15 +187,15 @@ lemma monoLinear_trans {y z w : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fi
 an automorphism `g` of the fibre functor acts by transport along the path `g`. -/
 noncomputable def rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) :
     Representation (PadicAlgCl l) (Aut (fiber t)) (StalkSpace t G) where
-  toFun g := M.monoLinear g G
+  toFun g := M.monoLinear g.asIso G
   map_one' := LinearMap.ext fun v ↦ M.monoLinear_refl t G v
   map_mul' g h := LinearMap.ext fun v ↦ by
-    rw [Aut.Aut_mul_def, M.monoLinear_trans]
+    rw [Aut.mul_asIso, M.monoLinear_trans]
     rfl
 
 /-- The monodromy representation acts by transport. -/
 lemma rep_apply (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) (g : Aut (fiber t))
-    (v : StalkSpace t G) : M.rep t G g v = M.monoLinear g G v :=
+    (v : StalkSpace t G) : M.rep t G g v = M.monoLinear g.asIso G v :=
   rfl
 
 /-- The monodromy at the base point `t` is an equivalence onto continuous finite-dimensional
@@ -228,7 +228,7 @@ lemma rep_naturality (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom (M.rep t G g v) =
       M.rep t H g (((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom v) := by
   have h := congrArg (fun ψ ↦ ((WeilCoefficients.toModuleCat l).map ψ).hom v)
-    ((M.mono g).hom.naturality f)
+    ((M.mono g.asIso).hom.naturality f)
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h.symm
 

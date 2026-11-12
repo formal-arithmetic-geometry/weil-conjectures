@@ -30,9 +30,9 @@ private theorem globalExtension_scalar
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     (ringFamilyGlobalExtension O).map (ringedKoszulScalar
         (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))
-        (ringTensorCechSection (ringFamilyGlobalRing O) s)) ≫
+        (ringTensorCechSection (ringFamilyGlobalRing O) s)).asHom ≫
         ringFamilyGlobalExtensionUnit O =
-      ringFamilyGlobalExtensionUnit O ≫ ringedKoszulScalar O s := by
+      ringFamilyGlobalExtensionUnit O ≫ (ringedKoszulScalar O s).asHom := by
   let a := PresheafOfModules.pullbackPushforwardAdjunction (ringFamilyGlobalEvaluation O)
   let b := PresheafOfModules.sheafificationAdjunction
     (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)
@@ -69,10 +69,10 @@ private theorem globalExtension_localization
   let d := localizationSheafCocone O s
   let eunit := asIso (ringFamilyGlobalExtensionUnit O)
   let F := Functor.ofSequence (X := fun _ : ℕ ↦ ringComplexUnit (ringFamilyGlobalRing O))
-    (fun _ ↦ ringedKoszulScalar R t)
+    (fun _ ↦ (ringedKoszulScalar R t).asHom)
   let G := Functor.ofSequence (X := fun _ : ℕ ↦
     SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
-      (fun _ ↦ ringedKoszulScalar O s)
+      (fun _ ↦ (ringedKoszulScalar O s).asHom)
   let τ : F ⋙ L ⟶ G := NatTrans.ofSequence (fun _ ↦ eunit.hom) (by
     intro n
     simp only [F, G, Functor.comp_map, Functor.ofSequence_map_homOfLE_succ]
@@ -87,15 +87,15 @@ private theorem globalExtension_localization
   have hleg : L.map (localizationSheafMap R t 1) ≫ loc.hom =
       eunit.hom ≫ localizationSheafMap O s 1 :=
     hc.comp_coconePointUniqueUpToIso_hom hd 0
-  have hsrc : ringedKoszulScalar R t ≫ localizationSheafMap R t 1 =
+  have hsrc : (ringedKoszulScalar R t).asHom ≫ localizationSheafMap R t 1 =
       ringedSectionLocalizationUnit R t := by
     rw [localizationSheafMap_step, localizationSheafMap_zero]
-  have htgt : ringedKoszulScalar O s ≫ localizationSheafMap O s 1 =
+  have htgt : (ringedKoszulScalar O s).asHom ≫ localizationSheafMap O s 1 =
       ringedSectionLocalizationUnit O s := by
     rw [localizationSheafMap_step, localizationSheafMap_zero]
   rw [← hsrc, L.map_comp, Category.assoc, hleg, ← Category.assoc]
-  rw [show L.map (ringedKoszulScalar R t) ≫ eunit.hom =
-    eunit.hom ≫ ringedKoszulScalar O s from globalExtension_scalar O s]
+  rw [show L.map (ringedKoszulScalar R t).asHom ≫ eunit.hom =
+    eunit.hom ≫ (ringedKoszulScalar O s).asHom from globalExtension_scalar O s]
   rw [Category.assoc, htgt]
   rfl
 

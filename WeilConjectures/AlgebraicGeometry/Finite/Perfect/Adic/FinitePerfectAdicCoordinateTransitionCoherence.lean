@@ -44,11 +44,11 @@ private theorem comparison_coefficients_eq (Z : Scheme.{t})
     have hm := ProEtale.comparison_restrict_mate Z q
     have hs := congrArg
       (fun z ↦ ((mateEquiv (ProEtale.comparisonAdjunction (ModuleCat.{t + 1} S) Z)
-        (ProEtale.comparisonAdjunction (ModuleCat.{t + 1} R) Z)).symm z).natTrans)
+        (ProEtale.comparisonAdjunction (ModuleCat.{t + 1} R) Z)).symm z))
       (congrArg (fun z ↦ TwoSquare.mk _ _ _ _ z) hm)
     simpa only [Equiv.symm_apply_apply, normalizationPullbackMate,
       ProEtale.comparisonAdjunction, ProEtale.comparisonLowerStar,
-      ProEtale.comparisonUpperStar, Sheaf.restrictScalars, TwoSquare.natTrans,
+      ProEtale.comparisonUpperStar, Sheaf.restrictScalars,
       TwoSquare.mk] using hs.symm
   apply Iso.ext
   simp only [localIsomorphismComparisonCoefficients, he,

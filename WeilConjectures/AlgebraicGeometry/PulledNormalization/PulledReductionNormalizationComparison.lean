@@ -365,9 +365,9 @@ private theorem exactMateRepresentative
       H.mapDerivedCategory ⋙ R₂.mapDerivedCategory)
     (hβD : βD = (Functor.mapDerivedCategorySquareIso β).hom)
     (ι : G ⋙ L₂ ⟶ L₁ ⋙ H)
-    (hι : ι = ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans)
+    (hι : ι = ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β.hom)))
     (μ : G.mapDerivedCategory ⋙ LD₂ ⟶ LD₁ ⋙ H.mapDerivedCategory)
-    (hμ : μ = ((mateEquiv ad₁ ad₂).symm (TwoSquare.mk _ _ _ _ βD)).natTrans)
+    (hμ : μ = ((mateEquiv ad₁ ad₂).symm (TwoSquare.mk _ _ _ _ βD)))
     (P : CochainComplex C ℤ) :
     μ.app (DerivedCategory.Q.obj P) ≫ H.mapDerivedCategory.map (e₁ P) ≫
         H.mapDerivedCategoryFactors.hom.app ((L₁.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -1459,10 +1459,10 @@ private def ordinaryMate :
     (TwoSquare.mk (reductionRestrict Y aY) (proEtaleRingModulePullback g SV SU cS)
       (proEtaleRingModulePullback g RV RU cR) (reductionRestrict X aX)
       (proEtaleRingRestrictionPullbackInv g RV SV RU SU aY aX cR cS comm))
-  have : IsIso m.natTrans := by
+  have : IsIso m := by
     with_unfolding_all
       exact OrderedExchange.scalarPull_isIso g RV SV RU SU aY aX cR cS comm
-  exact asIso m.natTrans
+  exact asIso m
 
 attribute [local irreducible] ordinaryMate
 
@@ -1471,7 +1471,7 @@ private theorem ordinaryMate_hom :
       ((mateEquiv (pbcScalarAdjunction aY) (pbcScalarAdjunction aX)).symm
         (TwoSquare.mk (reductionRestrict Y aY) (proEtaleRingModulePullback g SV SU cS)
           (proEtaleRingModulePullback g RV RU cR) (reductionRestrict X aX)
-          (proEtaleRingRestrictionPullbackInv g RV SV RU SU aY aX cR cS comm))).natTrans := by
+          (proEtaleRingRestrictionPullbackInv g RV SV RU SU aY aX cR cS comm))) := by
   unfold ordinaryMate
   rfl
 

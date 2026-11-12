@@ -64,7 +64,7 @@ private def scalarTranspose
     (ax : Sx ⊣ Rx) (ay : Sy ⊣ Ry)
     {P₀ : C₀ ⥤ D₀} {P₁ : C₁ ⥤ D₁}
     (r : Rx ⋙ P₀ ⟶ P₁ ⋙ Ry) : P₀ ⋙ Sy ⟶ Sx ⋙ P₁ :=
-  ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ r)).natTrans
+  ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ r))
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem scalarTranspose_app
@@ -81,7 +81,7 @@ private theorem scalarTranspose_app
   apply (ay.homEquiv _ _).injective
   erw [Equiv.apply_symm_apply]
   simpa only [Adjunction.homEquiv_unit, scalarTranspose, TwoSquare.mk,
-    TwoSquare.natTrans, Functor.id_obj, Functor.comp_obj] using
+    Functor.id_obj, Functor.comp_obj] using
     (unit_mateEquiv_symm ax ay (TwoSquare.mk _ _ _ _ r) K).symm
 
 private theorem scalar_transport_paste
@@ -207,7 +207,6 @@ private theorem compactSiteIso_factors
     Functor.mapIso_hom, asIso_hom, Functor.map_comp,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Category.id_comp, Category.comp_id, Category.assoc]
-  try dsimp only [Functor.comp_obj]
   simp only [sfIntrinsicCompactSupport, Functor.comp_map]
   try simp only [
     (Etale.lowerStar
@@ -221,7 +220,6 @@ private theorem compactSiteIso_factors
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory.map_id,
     Category.id_comp]
   try simp only [← (sfIntrinsicDerivedEquivalence Y A).functor.map_comp_assoc]
-  try simp only [DerivedCategory.Plus.ι.map_comp, Category.assoc]
   erw [hn, he]
   try simp only [(sfIntrinsicDerivedEquivalence Y A).functor.map_comp, Category.assoc]
   erw [reassoc_of% hd]

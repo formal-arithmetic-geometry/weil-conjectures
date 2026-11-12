@@ -40,10 +40,10 @@ theorem nonempty_equiv_stalkAt_of_eq {X : Scheme.{u}} [X.Over (Spec (CommRingCat
     (G : WeilSheaf k₀ l X)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m m' : ℕ} (h : m = m')
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').hom =
-      (specGeometricFrobenius k₀ ^ m').hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hs' : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').asIso.hom =
+      (specGeometricFrobenius k₀ ^ m').asIso.hom ≫ s) :
     Nonempty ((G.stalkAt s m hs).Equiv (G.stalkAt s m' hs')) := by
   subst h
   exact ⟨.refl _⟩
@@ -74,15 +74,15 @@ theorem nonempty_equiv_stalk_directImage {U X : Scheme.{u}} [U.Over (Spec (CommR
     (U ↘ Spec (CommRingCat.of k₀)) y
   have ht' : (s ≫ Scheme.Hom.geometricFiberMap j hj) ≫
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (U ↘ Spec (CommRingCat.of k₀)).degreeOver y.1).hom =
-      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver y.1).hom ≫
+        (U ↘ Spec (CommRingCat.of k₀)).degreeOver y.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver y.1).asIso.hom ≫
         (s ≫ Scheme.Hom.geometricFiberMap j hj) := by
     rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
       ← Category.assoc, ht, Category.assoc]
   have ht'' : (s ≫ Scheme.Hom.geometricFiberMap j hj) ≫
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom =
-      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom ≫
+        (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).asIso.hom ≫
         (s ≫ Scheme.Hom.geometricFiberMap j hj) := hdeg ▸ ht'
   -- the stalk of `j^* j_* F` at `y` is the stalk of `j_* F` at `s ≫ j̄`
   have : IsIso (𝟙 _ : (Scheme.Hom.geometricFiberMap j hj)^*[WeilCoefficients.{u} l].obj

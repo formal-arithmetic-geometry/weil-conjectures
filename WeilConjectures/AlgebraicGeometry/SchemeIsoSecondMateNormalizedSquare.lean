@@ -65,7 +65,7 @@ private theorem source_iso_mate_comparison
     (hq : ∀ Z : T, q.app (a.obj Z) ≫ D'.map (ψ.hom.app Z) ≫
       adjb.counit.app Z = adja.counit.app Z)
     (hα : ∀ E : C, q.app (H.obj E) ≫ D'.map (σ.hom.app E) ≫
-      β.natTrans.app (L.obj E) = α.natTrans.app E ≫ G.map (k.app E)) (K : S) :
+      β.app (L.obj E) = α.app E ≫ G.map (k.app E)) (K : S) :
     σ.hom.app (A.obj K) ≫ H'.map (φ.hom.app K) ≫
         (mateEquiv adjB adjb β).app K =
       M.map ((mateEquiv adjA adja α).app K) ≫ ψ.hom.app (G.obj K) := by
@@ -81,7 +81,7 @@ private theorem source_iso_mate_comparison
   simp only [Functor.map_comp, Category.assoc]
   rw [hn]
   rw [← Category.assoc (D'.map (H'.map (φ.hom.app K))),
-    ← Functor.comp_map, β.natTrans.naturality]
+    ← Functor.comp_map, β.naturality]
   simp only [Functor.comp_map, Functor.comp_obj, Category.assoc]
   rw [reassoc_of% hα]
   rw [← G.map_comp_assoc, ← G.map_comp, Category.assoc (k.app (A.obj K)), hk]

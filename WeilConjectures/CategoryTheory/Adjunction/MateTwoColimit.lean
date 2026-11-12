@@ -68,7 +68,7 @@ lemma _root_.CategoryTheory.map_mateEquiv_mk_natTrans_app_comp_counit {A B C' D'
     [Category A] [Category B] [Category C'] [Category D'] {G' : A ⥤ C'} {H : B ⥤ D'}
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C' ⥤ D'} {R₂ : D' ⥤ C'} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (e : G' ⋙ L₂ ⟶ L₁ ⋙ H) (d : B) :
-    L₂.map ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e)).natTrans.app d) ≫
+    L₂.map ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e)).app d) ≫
         adj₂.counit.app (H.obj d) =
       e.app (R₁.obj d) ≫ H.map (adj₁.counit.app d) :=
   mateEquiv_counit adj₁ adj₂ _ d
@@ -97,10 +97,10 @@ lemma iso_hom_app_comp_mateEquiv_app
         (α j).hom.app ((c₁.T h).obj X) ≫ GΩ.map ((c₁.iso h).hom.app X))
     {i j : I} (h : i ≤ j) (k : C₂ i) :
     (c₁.iso h).hom.app ((R i).obj k) ≫
-        (mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).natTrans.app k =
+        (mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).app k =
       (c₁.Φ j).map ((mateEquiv (adj i) (adj j)
-          (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans.app k) ≫
-        (mateEquiv (adj j) adjΩ (TwoSquare.mk _ _ _ _ (α j).inv)).natTrans.app
+          (TwoSquare.mk _ _ _ _ (αT h).inv)).app k) ≫
+        (mateEquiv (adj j) adjΩ (TwoSquare.mk _ _ _ _ (α j).inv)).app
           ((c₂.T h).obj k) ≫
         RΩ.map ((c₂.iso h).hom.app k) := by
   apply (adjΩ.homEquiv _ _).symm.injective
@@ -121,7 +121,7 @@ lemma _root_.CategoryTheory.homEquiv_symm_map_comp_mateEquiv_mk_natTrans_app
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C' ⥤ D'} {R₂ : D' ⥤ C'} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (e : G' ⋙ L₂ ⟶ L₁ ⋙ H) {X : A} {d : B} (v : X ⟶ R₁.obj d) :
     (adj₂.homEquiv _ _).symm
-        (G'.map v ≫ (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e)).natTrans.app d) =
+        (G'.map v ≫ (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e)).app d) =
       e.app X ≫ H.map ((adj₁.homEquiv _ _).symm v) := by
   rw [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
     map_mateEquiv_mk_natTrans_app_comp_counit, ← Functor.comp_map]
@@ -133,12 +133,12 @@ equal after composing with the mate of `α l` already have equal images under `c
 `c₂` satisfies (Hom) injectivity and the transition mates are isomorphisms. -/
 lemma map_eq_map_of_map_comp_mateEquiv_eq (hc₂ : c₂.HomInj)
     (hT : ∀ ⦃i j⦄ (h : i ≤ j),
-      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans)
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)))
     {l : I} {X : C₁ l} {z : C₂ l} (v₁ v₂ : X ⟶ (R l).obj z)
     (hv : (c₁.Φ l).map v₁ ≫
-        (mateEquiv (adj l) adjΩ (TwoSquare.mk _ _ _ _ (α l).inv)).natTrans.app z =
+        (mateEquiv (adj l) adjΩ (TwoSquare.mk _ _ _ _ (α l).inv)).app z =
       (c₁.Φ l).map v₂ ≫
-        (mateEquiv (adj l) adjΩ (TwoSquare.mk _ _ _ _ (α l).inv)).natTrans.app z) :
+        (mateEquiv (adj l) adjΩ (TwoSquare.mk _ _ _ _ (α l).inv)).app z) :
     (c₁.Φ l).map v₁ = (c₁.Φ l).map v₂ := by
   have hv' := congrArg (adjΩ.homEquiv _ _).symm hv
   rw [homEquiv_symm_map_comp_mateEquiv_mk_natTrans_app,
@@ -147,7 +147,7 @@ lemma map_eq_map_of_map_comp_mateEquiv_eq (hc₂ : c₂.HomInj)
   have := hT h
   have hT₁ : (c₁.T h).map v₁ = (c₁.T h).map v₂ := by
     rw [← cancel_mono ((mateEquiv (adj l) (adj l')
-      (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans.app z)]
+      (TwoSquare.mk _ _ _ _ (αT h).inv)).app z)]
     apply ((adj l').homEquiv _ _).symm.injective
     rw [homEquiv_symm_map_comp_mateEquiv_mk_natTrans_app,
       homEquiv_symm_map_comp_mateEquiv_mk_natTrans_app, hl']
@@ -162,17 +162,17 @@ lemma exists_comp_mateEquiv_app_eq_of_stage
         (α j).hom.app ((c₁.T h).obj X) ≫ GΩ.map ((c₁.iso h).hom.app X))
     (hc₂ : c₂.HomSurj)
     (hT : ∀ ⦃i j⦄ (h : i ≤ j),
-      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans)
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)))
     {j : I} (x : C₁ j) (y : C₂ j) (f : (c₁.Φ j).obj x ⟶ RΩ.obj ((c₂.Φ j).obj y)) :
     ∃ f₀ : (c₁.Φ j).obj x ⟶ (c₁.Φ j).obj ((R j).obj y),
-      f₀ ≫ (mateEquiv (adj j) adjΩ (TwoSquare.mk _ _ _ _ (α j).inv)).natTrans.app y = f := by
+      f₀ ≫ (mateEquiv (adj j) adjΩ (TwoSquare.mk _ _ _ _ (α j).inv)).app y = f := by
   obtain ⟨l, h, h', u, hu⟩ :=
     hc₂ j j ((G j).obj x) y ((α j).hom.app x ≫ (adjΩ.homEquiv _ _).symm f)
   have := hT h
   refine ⟨(c₁.iso h).inv.app x ≫
     (c₁.Φ l).map ((adj l).homEquiv _ _ ((αT h).inv.app x ≫ u)) ≫
     inv ((c₁.Φ l).map ((mateEquiv (adj j) (adj l)
-      (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans.app y)) ≫
+      (TwoSquare.mk _ _ _ _ (αT h).inv)).app y)) ≫
     (c₁.iso h).hom.app ((R j).obj y), (adjΩ.homEquiv _ _).symm.injective ?_⟩
   rw [Category.assoc, Category.assoc, Category.assoc,
     iso_hom_app_comp_mateEquiv_app adj adjΩ α αT hcocycle, IsIso.inv_hom_id_assoc,
@@ -193,10 +193,10 @@ lemma exists_comp_mateEquiv_app_eq [IsDirected I (· ≤ ·)]
         (α j).hom.app ((c₁.T h).obj X) ≫ GΩ.map ((c₁.iso h).hom.app X))
     (hc₁ : c₁.EssSurjObj) (hc₂ : c₂.HomSurj)
     (hT : ∀ ⦃i j⦄ (h : i ≤ j),
-      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans)
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)))
     {i : I} (k : C₂ i) {d : D₁} (f : d ⟶ RΩ.obj ((c₂.Φ i).obj k)) :
     ∃ f₀ : d ⟶ (c₁.Φ i).obj ((R i).obj k),
-      f₀ ≫ (mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).natTrans.app k = f := by
+      f₀ ≫ (mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).app k = f := by
   obtain ⟨j₀, x₀, ⟨e⟩⟩ := hc₁ d
   obtain ⟨j, hij, hj₀⟩ := directed_of (· ≤ ·) i j₀
   obtain ⟨f₀, hf₀⟩ := exists_comp_mateEquiv_app_eq_of_stage adj adjΩ α αT hcocycle hc₂ hT
@@ -204,7 +204,7 @@ lemma exists_comp_mateEquiv_app_eq [IsDirected I (· ≤ ·)]
     ((c₁.iso hj₀).hom.app x₀ ≫ e.hom ≫ f ≫ RΩ.map ((c₂.iso hij).inv.app k))
   have := hT hij
   refine ⟨e.inv ≫ (c₁.iso hj₀).inv.app x₀ ≫ f₀ ≫ inv ((c₁.Φ j).map ((mateEquiv (adj i) (adj j)
-    (TwoSquare.mk _ _ _ _ (αT hij).inv)).natTrans.app k)) ≫ (c₁.iso hij).hom.app ((R i).obj k), ?_⟩
+    (TwoSquare.mk _ _ _ _ (αT hij).inv)).app k)) ≫ (c₁.iso hij).hom.app ((R i).obj k), ?_⟩
   simp only [Category.assoc]
   rw [iso_hom_app_comp_mateEquiv_app adj adjΩ α αT hcocycle, IsIso.inv_hom_id_assoc,
     reassoc_of% hf₀]
@@ -217,18 +217,18 @@ lemma isIso_mateEquiv_app_of_isFilteredTwoColimit [IsDirected I (· ≤ ·)]
       (α i).hom.app X = (c₂.iso h).inv.app ((G i).obj X) ≫ (c₂.Φ j).map ((αT h).hom.app X) ≫
         (α j).hom.app ((c₁.T h).obj X) ≫ GΩ.map ((c₁.iso h).hom.app X))
     (hT : ∀ ⦃i j⦄ (h : i ≤ j),
-      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans)
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)))
     {i : I} (k : C₂ i) :
-    IsIso ((mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).natTrans.app k) := by
+    IsIso ((mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).app k) := by
   obtain ⟨s, hs⟩ := exists_comp_mateEquiv_app_eq adj adjΩ α αT hcocycle hc₁.essSurjObj
     hc₂.homSurj hT k (𝟙 _)
   obtain ⟨l, h, h', w, hw⟩ := hc₁.homSurj i i _ _
-    ((mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).natTrans.app k ≫ s)
+    ((mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).app k ≫ s)
   have := hT h
   have hm : (c₁.Φ l).map (w ≫ (mateEquiv (adj i) (adj l)
-        (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans.app k) =
+        (TwoSquare.mk _ _ _ _ (αT h).inv)).app k) =
       (c₁.Φ l).map ((mateEquiv (adj i) (adj l)
-        (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans.app k) := by
+        (TwoSquare.mk _ _ _ _ (αT h).inv)).app k) := by
     apply map_eq_map_of_map_comp_mateEquiv_eq adj adjΩ α αT hc₂.homInj hT
     rw [← cancel_epi ((c₁.iso h).inv.app _), ← cancel_mono (RΩ.map ((c₂.iso h).hom.app k))]
     simp only [Category.assoc, Functor.map_comp]
@@ -236,7 +236,7 @@ lemma isIso_mateEquiv_app_of_isFilteredTwoColimit [IsDirected I (· ≤ ·)]
     simp
   have hw₁ : (c₁.Φ l).map w = 𝟙 _ := by
     rw [← cancel_mono ((c₁.Φ l).map ((mateEquiv (adj i) (adj l)
-      (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans.app k)), ← Functor.map_comp, hm,
+      (TwoSquare.mk _ _ _ _ (αT h).inv)).app k)), ← Functor.map_comp, hm,
       Category.id_comp]
   refine ⟨⟨s, ?_, hs⟩⟩
   rw [hw, hw₁]
@@ -251,9 +251,9 @@ theorem isIso_mateEquiv_of_isFilteredTwoColimit [IsDirected I (· ≤ ·)]
       (α i).hom.app X = (c₂.iso h).inv.app ((G i).obj X) ≫ (c₂.Φ j).map ((αT h).hom.app X) ≫
         (α j).hom.app ((c₁.T h).obj X) ≫ GΩ.map ((c₁.iso h).hom.app X))
     (hT : ∀ ⦃i j⦄ (h : i ≤ j),
-      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)).natTrans)
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (αT h).inv)))
     (i : I) :
-    IsIso (mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)).natTrans := by
+    IsIso (mateEquiv (adj i) adjΩ (TwoSquare.mk _ _ _ _ (α i).inv)) := by
   have (k : C₂ i) := isIso_mateEquiv_app_of_isFilteredTwoColimit adj adjΩ α αT hc₁ hc₂
     hcocycle hT k
   exact NatIso.isIso_of_isIso_app _

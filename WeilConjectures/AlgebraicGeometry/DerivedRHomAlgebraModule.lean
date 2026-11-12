@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.HomComplexSingleNatural
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Derived internal Hom with its algebra module structure

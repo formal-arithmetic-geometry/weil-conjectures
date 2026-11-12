@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.Localization.Submodule

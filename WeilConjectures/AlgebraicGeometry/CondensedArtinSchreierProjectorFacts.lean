@@ -78,7 +78,7 @@ finite character calculation identifies the image of the pulled-back projector w
 the coefficient module by evaluation on the zero coordinate. That coordinate is the
 adjunction counit, so the preserved-image comparison gives the asserted counit map. -/
 theorem condensedArtinSchreierProjector_evaluation (ψ : AddChar k (MonObj.Γ Λ)) :
-    IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+    IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
         (Mod.regular (condensedRingObj Λ A))) := by
   classical
@@ -86,31 +86,32 @@ theorem condensedArtinSchreierProjector_evaluation (ψ : AddChar k (MonObj.Γ Λ
   let : (CondensedRing.upperStar Λ q).Linear (MonObj.Γ Λ) :=
     condensedModulePullback_linear Λ q
   have := condensedArtinSchreierChart_isIso Λ k
-  have he : (CondensedRing.upperStar Λ q).map (e ψ) =
+  have he : (CondensedRing.upperStar Λ q).map (e ψ).asHom =
       ∑ a : k, (⅟(Fintype.card k : MonObj.Γ Λ) * ψ (-a)) •
-        (CondensedRing.upperStar Λ q).map (τ a) := by
-    rw [condensedArtinSchreierProjector_eq_sum, CategoryTheory.Functor.map_sum]
+        (CondensedRing.upperStar Λ q).map (τ a).asHom := by
+    rw [condensedArtinSchreierProjector_eq_sum, End.sum_asHom, CategoryTheory.Functor.map_sum]
     apply Finset.sum_congr rfl
     intro a _
-    exact CategoryTheory.Functor.map_smul F _ _
-  have hi : IsIso (image.ι ((CondensedRing.upperStar Λ q).map (e ψ)) ≫ ρ 0) := by
+    rw [End.smul_asHom, CategoryTheory.Functor.map_smul]
+  have hi : IsIso (image.ι ((CondensedRing.upperStar Λ q).map (e ψ).asHom) ≫ ρ 0) := by
     rw [he]
     exact characterProjector_reindexed_evaluation_isIso ρ (Fintype.card k)
       (Fintype.equivFin k).symm (condensedArtinSchreierChart_isIso Λ k)
-      (fun a ↦ (CondensedRing.upperStar Λ q).map (τ a))
+      (fun a ↦ (CondensedRing.upperStar Λ q).map (τ a).asHom)
       (condensedArtinSchreierChart_translation Λ k) ψ
-  have hh : (CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+  have hh : (CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
         (Mod.regular (condensedRingObj Λ A)) =
-      (PreservesImage.iso F (e ψ)).inv ≫
-        (image.ι ((CondensedRing.upperStar Λ q).map (e ψ)) ≫ ρ 0) := by
+      (PreservesImage.iso F (e ψ).asHom).inv ≫
+        (image.ι ((CondensedRing.upperStar Λ q).map (e ψ).asHom) ≫ ρ 0) := by
     rw [← Category.assoc, PreservesImage.inv_comp_image_ι_map,
       condensedArtinSchreierChart_zero]
   rw [hh]
   infer_instance
 
 omit [Invertible (Fintype.card k : MonObj.Γ Λ)] in
-private theorem translation_add (a b : k) : τ a ≫ τ b = τ (a + b) := by
+private theorem translation_add (a b : k) :
+    (τ a).asHom ≫ (τ b).asHom = (τ (a + b)).asHom := by
   let := condensedArtinSchreierPullback_reflectsIsomorphisms Λ k
   let := Functor.faithful_of_preservesEqualizers_of_reflectsIsomorphisms F
   have := condensedArtinSchreierChart_isIso Λ k
@@ -137,24 +138,27 @@ The deck operators preserve multiplication and constants. Apply the generic char
 product calculation using the module category's bilinear tensor product, and identify
 the normalized average with the actual defining projector. -/
 theorem condensedArtinSchreierProjector_products (ψ ψ' : AddChar k (MonObj.Γ Λ)) :
-    (((image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫ Functor.LaxMonoidal.μ G
+    (((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫ Functor.LaxMonoidal.μ G
       (Mod.regular (condensedRingObj Λ A)) (Mod.regular (condensedRingObj Λ A)) ≫
-      (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫ e (ψ * ψ') =
-        (image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫ Functor.LaxMonoidal.μ G
+      (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
+        (e (ψ * ψ')).asHom =
+        (image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫ Functor.LaxMonoidal.μ G
       (Mod.regular (condensedRingObj Λ A)) (Mod.regular (condensedRingObj Λ A)) ≫
           (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ∧
-      Functor.LaxMonoidal.ε G ≫ e 1 = Functor.LaxMonoidal.ε G := by
+      Functor.LaxMonoidal.ε G ≫ (e 1).asHom = Functor.LaxMonoidal.ε G := by
   classical
   let := Mod.linearOfRingHom (MonObj.Γ.mapFunctor (upperStarFromPoint A) (R := Λ))
   let := Mod.monoidalLinearOfRingHom
     (MonObj.Γ.mapFunctor (upperStarFromPoint A) (R := Λ))
-  exact projector_products_of_average τ (translation_add Λ k)
+  exact projector_products_of_average (fun a ↦ (τ a).asHom) (translation_add Λ k)
     (Functor.LaxMonoidal.μ G
       (Mod.regular (condensedRingObj Λ A)) (Mod.regular (condensedRingObj Λ A)) ≫
       (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A)))
     (Functor.LaxMonoidal.ε G)
     (fun a ↦ (condensedArtinSchreierTranslation_algebra Λ k a).1)
-    (fun a ↦ (condensedArtinSchreierTranslation_algebra Λ k a).2) e
-    (condensedArtinSchreierProjector_eq_sum Λ k) ψ ψ'
+    (fun a ↦ (condensedArtinSchreierTranslation_algebra Λ k a).2) (fun χ ↦ (e χ).asHom)
+    (fun χ ↦ by
+      simpa only [End.sum_asHom, End.smul_asHom] using
+        congrArg End.asHom (condensedArtinSchreierProjector_eq_sum Λ k χ)) ψ ψ'
 
 end AlgebraicGeometry.ProEtale

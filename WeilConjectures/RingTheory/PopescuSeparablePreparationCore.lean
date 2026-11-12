@@ -127,7 +127,8 @@ theorem exists_popescu_separable_preparation_core
     apply Ideal.span_le.mpr
     rintro p ⟨i, rfl⟩
     change ev (popescuPolynomialRelations d n a i) = 0
-    simpa [ev, popescuPolynomialRelations, smul_eq_mul] using
+    simp only [popescuPolynomialRelations, map_sub, map_pow, map_sum, map_mul]
+    simpa [ev, smul_eq_mul] using
       sub_eq_zero.mpr (hcoeff i).symm
   let gk : B →ₐ[k] Λ := Ideal.Quotient.liftₐ I ev hev
   have hg : gk.comp f = φ := by

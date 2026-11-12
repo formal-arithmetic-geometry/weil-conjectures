@@ -691,7 +691,7 @@ private theorem firstTraceExchange_eq
       (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
           (ProjectiveLine Y ↘ Y))
         (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (firstProjection Y))
-        (TwoSquare.mk _ _ _ _ t)).natTrans.app T ≫
+        (TwoSquare.mk _ _ _ _ t)).app T ≫
         (CondensedRing.lowerStar Λ (firstProjection Y)).rightDerivedFunctor.map e.hom) hc
   unfold firstTraceExchange derivedExchange
   rw [Adjunction.exchangeRight_eq_mateEquiv]
@@ -1024,7 +1024,7 @@ private theorem oppositeExchange_eq
       (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
           (ProjectiveLine Y ↘ Y))
         (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (firstProjection Y))
-        (TwoSquare.mk _ _ _ _ t)).natTrans) (congrArg Iso.hom hc)
+        (TwoSquare.mk _ _ _ _ t))) (congrArg Iso.hom hc)
   unfold derivedExchange condensedAmbientExchange
   rw [Adjunction.exchangeRight_eq_mateEquiv]
   coefficient_finish hh

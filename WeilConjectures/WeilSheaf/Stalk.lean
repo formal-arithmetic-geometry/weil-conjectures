@@ -139,7 +139,7 @@ second is the stalk at `s` of the iterated Weil structure `φ_m : (Frᵐ)^* F �
 (`AlgebraicGeometry.WeilSheaf.frobeniusPowIso`). -/
 noncomputable def stalkObjFrobeniusPowIso (m : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    F.stalkObj (s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom) ≅
+    F.stalkObj (s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom) ≅
       F.stalkObj s :=
   (Sheaf.Γ _ _).mapIso ((ProEtale.upperStarComp _ _ _).app F.obj.carrier.X ≪≫
     (s)^*[_].mapIso ((ProEtale.upperStarIsoLowerStarInv _ _).app F.obj.carrier.X ≪≫
@@ -151,9 +151,9 @@ pullback along `s` followed by the pullback along `σᵐ`, which does not change
 (`AlgebraicGeometry.ProEtale.globalSectionsUpperStarIso`). -/
 noncomputable def stalkObjSpecFrobeniusPowIso (m : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    F.stalkObj ((specGeometricFrobenius k₀ ^ m).hom ≫ s) ≅ F.stalkObj s :=
+    F.stalkObj ((specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) ≅ F.stalkObj s :=
   (Sheaf.Γ _ _).mapIso ((ProEtale.upperStarComp _ _ _).app F.obj.carrier.X) ≪≫
-    (ProEtale.globalSectionsUpperStarIso _ (specGeometricFrobenius k₀ ^ m)).app _
+    (ProEtale.globalSectionsUpperStarIso _ (specGeometricFrobenius k₀ ^ m).asIso).app _
 
 /-- The stalk `F_s` of a Weil sheaf at a geometric point `s` with `s ≫ Frᵐ = σᵐ ≫ s`, with its
 Frobenius, the composite
@@ -168,8 +168,8 @@ of `AlgebraicGeometry.WeilSheaf.stalkObjSpecFrobeniusPowIso` inverted and
 field with `qᵐ` elements this is the local Frobenius relative to that field. -/
 noncomputable def stalkAt
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   have := F.finiteDimensional_stalkObj s
   { carrier := (WeilCoefficients.toModuleCat l).obj (F.stalkObj s)
@@ -485,7 +485,8 @@ noncomputable def globalSections [QuasiCompact (X ↘ Spec (CommRingCat.of k₀)
       ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier.X)
     frobenius := WeilCoefficients.linearEquivOfIso
       (((ProEtale.globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app F.obj.carrier.X).symm ≪≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app
+          F.obj.carrier.X).symm ≪≫
         (Sheaf.Γ _ _).mapIso ((ProEtale.AdicSheaf.forget _).mapIso F.obj.str)) }
 
 end GlobalSections

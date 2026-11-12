@@ -477,9 +477,9 @@ variable {T} in
 traces of a chain-level representative of `V` on the matrix complex `L` of a matrix model. -/
 lemma MatrixModel.trace_eq (m : T.MatrixModel c) (V : c.pt ⟶ c.pt) (G : m.L.complex ⟶ m.L.complex)
     (hG : DerivedCategory.Q.map G = m.iso.hom ≫ V ≫ m.iso.inv) :
-    MonoidalCategory.trace V = algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
+    MonoidalCategory.trace V = (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
       (∑ i ∈ Finset.Icc m.lo m.hi,
-        (i.negOnePow : ℤ) • LinearMap.trace R (m.L.complex.X i) (G.f i).hom) :=
+        (i.negOnePow : ℤ) • LinearMap.trace R (m.L.complex.X i) (G.f i).hom)).asHom :=
   DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace m.L.complex G _
     (fun _ hi ↦ m.L.isZero_complex_X (m.r_eq_zero hi)) (fun _ ↦ inferInstance)
     (fun _ ↦ inferInstance) c.pt V m.iso.symm (by rw [Iso.symm_hom, hG, Iso.inv_hom_id_assoc])
@@ -494,9 +494,9 @@ lemma MatrixModel.trace_f_eq (m : T.MatrixModel c) {f : ∀ n, T.obj n ⟶ T.obj
     {V : c.pt ⟶ c.pt} (hV : T.IsLift c f V) (G : m.L.complex ⟶ m.L.complex)
     (hG : DerivedCategory.Q.map G = m.iso.hom ≫ V ≫ m.iso.inv) (n : ℕ) :
     MonoidalCategory.trace (f n) =
-      algebraMap (A n) (End (𝟙_ (DerivedCategory (ModuleCat.{u} (A n)))))
+      (algebraMap (A n) (End (𝟙_ (DerivedCategory (ModuleCat.{u} (A n)))))
         (π n (∑ i ∈ Finset.Icc m.lo m.hi,
-          (i.negOnePow : ℤ) • LinearMap.trace R (m.L.complex.X i) (G.f i).hom)) := by
+          (i.negOnePow : ℤ) • LinearMap.trace R (m.L.complex.X i) (G.f i).hom))).asHom := by
   rw [MatrixComplex.map_sum_negOnePow_trace (π n) (m.L_map n) G]
   exact DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace _ _ _
     (fun _ hi ↦ (m.level n).M.isZero_complex_X (m.r_eq_zero hi)) (fun _ ↦ inferInstance)
@@ -513,9 +513,10 @@ include hπ hker hcomplete hsep hc in
 theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
     {V : c.pt ⟶ c.pt} (hV : T.IsLift c f V) :
     ∃ r : R,
-      MonoidalCategory.trace V = algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r ∧
+      MonoidalCategory.trace V = (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
+        r).asHom ∧
       ∀ n, MonoidalCategory.trace (f n) =
-        algebraMap (A n) (End (𝟙_ (DerivedCategory (ModuleCat.{u} (A n))))) (π n r) := by
+        (algebraMap (A n) (End (𝟙_ (DerivedCategory (ModuleCat.{u} (A n))))) (π n r)).asHom := by
   obtain ⟨m⟩ := T.nonempty_matrixModel hπ hker hcomplete hsep hc
   have := m.L.isStrictlyLE_complex m.hi m.r_hi
   obtain ⟨G, hG⟩ := DerivedCategory.Q_map_surjective_of_projective m.L.complex m.L.complex m.hi
@@ -537,7 +538,7 @@ theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible
   obtain ⟨G', hG'⟩ := DerivedCategory.Q_map_surjective_of_projective m.L.complex m.L.complex
     m.hi (m.iso.hom ≫ V' ≫ m.iso.inv)
   rw [m.trace_eq V G hG, m.trace_eq V' G' hG']
-  congr 1
+  congr 2
   refine MatrixComplex.eq_of_forall_π hsep fun n ↦ ?_
   rw [MatrixComplex.map_sum_negOnePow_trace (π n) (m.L_map n) G,
     MatrixComplex.map_sum_negOnePow_trace (π n) (m.L_map n) G']

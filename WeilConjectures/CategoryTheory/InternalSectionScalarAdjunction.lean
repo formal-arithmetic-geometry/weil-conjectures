@@ -121,11 +121,11 @@ private theorem inverseMate_isIso
     {L : A ⥤ B} {U : B ⥤ A} {F : D ⥤ E} {V : E ⥤ D}
     {G : A ⥤ D} {H : B ⥤ E} [G.IsEquivalence] [H.IsEquivalence]
     (adj : L ⊣ U) (adj' : F ⊣ V) (β : U ⋙ G ≅ H ⋙ V) :
-    IsIso (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans) := by
-  let α := ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+    IsIso (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ β.hom))) := by
+  let α := ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ β.hom))
   let βop : TwoSquare H.op U.op V.op G.op := TwoSquare.mk _ _ _ _ (NatTrans.op β.hom)
   have hi := isIso_mateEquiv_of_isEquivalence adj.op adj'.op βop
-  have he : (NatTrans.op α) = (mateEquiv adj.op adj'.op βop).natTrans := by
+  have he : (NatTrans.op α) = (mateEquiv adj.op adj'.op βop) := by
     ext X
     simp [α, βop, mateEquiv]
   have : IsIso (NatTrans.op α) := by rw [he]; exact hi
@@ -273,7 +273,7 @@ private noncomputable def scalarExtensionIso
   let α : (sectionModuleEquivalence.{u, c, v} J R).functor ⋙ s.extension ⟶
       Mod.extendScalars a ⋙ (sectionModuleEquivalence.{u, c, v} J S).functor :=
     ((mateEquiv (Mod.extendRestrictAdjunction a) s.ordinaryAdjunction).symm
-    (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u, c, v} (C := C) J a).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u, c, v} (C := C) J a).hom))
   have : IsIso α := inverseMate_isIso
     (Mod.extendRestrictAdjunction a) s.ordinaryAdjunction
     (scalarRestrictionIso.{u, c, v} (C := C) J a)

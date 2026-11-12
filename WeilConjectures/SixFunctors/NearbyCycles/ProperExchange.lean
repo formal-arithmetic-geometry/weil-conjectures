@@ -62,7 +62,7 @@ noncomputable def lowerStarExchange :
     (derivedUpperStarLowerStarAdjunction Λ φ.total)
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom)).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom))
 
 /-- The comparison `Rj_{N*} Rg_* ⟶ Rt_* Rj_{M*}` is invertible: it is the conjugate of the
 pullback comparison `Lt^* Lj_M^* ≅ Lj_N^* Lg^*`

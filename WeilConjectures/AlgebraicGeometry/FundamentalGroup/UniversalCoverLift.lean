@@ -97,7 +97,7 @@ noncomputable def liftPathHom (t : Spec (.of K) ⟶ Y) {η : Spec (.of Ω) ⟶ Y
 instance (t : Spec (.of K) ⟶ Y) {η : Spec (.of Ω) ⟶ Y} (ξ : Spec (.of Ω) ⟶ cover t)
     (hξ : ξ ≫ proj t = η) : IsIso (liftPathHom t ξ hξ) := by
   obtain ⟨τ⟩ := nonempty_iso_of_fiberFunctor (fiber η) (fiber t)
-  have : IsIso (liftPathHom t ξ hξ ≫ τ.hom) := FibreFunctor.end_isIso (fiber t) _
+  have : IsIso (liftPathHom t ξ hξ ≫ τ.hom) := FibreFunctor.end_isIso (fiber t) (.of _)
   exact IsIso.of_isIso_comp_right _ τ.hom
 
 /-- **The path of a lift.** A lift `ξ : Spec Ω ⟶ Ỹ_t` of a geometric point `η` defines a path

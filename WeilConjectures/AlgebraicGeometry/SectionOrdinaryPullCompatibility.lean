@@ -52,8 +52,8 @@ private theorem mate_of_unit
     (q : L₁ ⋙ H ≅ G ⋙ L₂) (r : R₁ ⋙ G ⟶ H ⋙ R₂)
     (h : ∀ X, G.map (a₁.unit.app X) ≫ r.app (L₁.obj X) ≫ R₂.map (q.hom.app X) =
       a₂.unit.app (G.obj X)) :
-    (mateEquiv a₁ a₂ q.inv).natTrans = r := by
-  have he : q.inv = ((mateEquiv a₁ a₂).symm r).natTrans := by
+    (mateEquiv a₁ a₂ q.inv) = r := by
+  have he : q.inv = ((mateEquiv a₁ a₂).symm r) := by
     apply NatTrans.ext
     funext X
     apply (a₂.homEquiv _ _).injective
@@ -77,27 +77,26 @@ private theorem paste_mate
     (p : (R₃ ⋙ R₁) ⋙ G ≅ K ⋙ (R₄ ⋙ R₂))
     (hq : ∀ X, q.inv.app X = L₄.map (q₁.inv.app X) ≫ q₃.inv.app (L₁.obj X))
     (hp : ∀ Z, p.hom.app Z = p₁.hom.app (R₃.obj Z) ≫ R₂.map (p₃.hom.app Z))
-    (h₁ : (mateEquiv a₁ a₂ q₁.inv).natTrans = p₁.hom)
-    (h₃ : (mateEquiv a₃ a₄ q₃.inv).natTrans = p₃.hom) :
-    (mateEquiv (a₁.comp a₃) (a₂.comp a₄) q.inv).natTrans = p.hom := by
+    (h₁ : (mateEquiv a₁ a₂ q₁.inv) = p₁.hom)
+    (h₃ : (mateEquiv a₃ a₄ q₃.inv) = p₃.hom) :
+    (mateEquiv (a₁.comp a₃) (a₂.comp a₄) q.inv) = p.hom := by
   have hv : TwoSquare.vComp q₁.inv q₃.inv = q.inv := by
-    apply TwoSquare.ext
-    intro X
-    simp only [TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app,
+    refine NatTrans.ext (funext fun X ↦ ?_)
+    simp only [TwoSquare.vComp, NatTrans.comp_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Category.id_comp, Category.comp_id]
     exact (hq X).symm
   have hh := mateEquiv_hcomp a₁ a₂ a₃ a₄ q₁.inv q₃.inv
   rw [hv] at hh
-  change (mateEquiv (a₁.comp a₃) (a₂.comp a₄) q.inv).natTrans =
-    TwoSquare.hComp (mateEquiv a₃ a₄ q₃.inv).natTrans
-      (mateEquiv a₁ a₂ q₁.inv).natTrans at hh
+  change (mateEquiv (a₁.comp a₃) (a₂.comp a₄) q.inv) =
+    TwoSquare.hComp (mateEquiv a₃ a₄ q₃.inv)
+      (mateEquiv a₁ a₂ q₁.inv) at hh
   rw [h₁, h₃] at hh
   rw [hh]
   apply NatTrans.ext
   funext Z
-  simp only [TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.id_comp, Category.comp_id]
@@ -173,7 +172,7 @@ variable
 private theorem scalar_mate (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (s : SectionScalarComparison a T) (hs : SectionScalarNormalized a T s) :
     (mateEquiv (Mod.extendRestrictAdjunction (coefficientMap a T))
-      s.pair.ordinaryAdjunction s.ordinary.inv).natTrans = s.restriction.hom := by
+      s.pair.ordinaryAdjunction s.ordinary.inv) = s.restriction.hom := by
   let ER := (ModuleRingedComparison.equivalence Λ T).functor
   let φ := sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)
   have hu (M : Modules Λ T) (U : T.ProEtᵒᵖ) (x : M.X.obj.obj U) :
@@ -260,16 +259,16 @@ theorem section_ordinary_pull_compatibility (a : Λ ⟶ Λ') [IsMonHom a]
             ModuleRingedComparison.pushforward Λ f) :=
     paste_iso sX.restriction p
   have hq : (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f)
-      (ModuleRingedComparison.adjunction Λ f) q.inv).natTrans = p.hom :=
+      (ModuleRingedComparison.adjunction Λ f) q.inv) = p.hom :=
     (InternalModuleOperations.upperComparison_existsUnique Λ f).exists.choose_spec
   have hq' : (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ' f)
-      (ModuleRingedComparison.adjunction Λ' f) q'.inv).natTrans = p'.hom :=
+      (ModuleRingedComparison.adjunction Λ' f) q'.inv) = p'.hom :=
     (InternalModuleOperations.upperComparison_existsUnique Λ' f).exists.choose_spec
   have h02 : (mateEquiv
       ((CondensedRing.upperStarLowerStarAdjunction Λ f).comp
         (Mod.extendRestrictAdjunction (coefficientMap a X)))
       ((ModuleRingedComparison.adjunction Λ f).comp sX.pair.ordinaryAdjunction)
-      q02.inv).natTrans = p02.hom := by
+      q02.inv) = p02.hom := by
     apply paste_mate (CondensedRing.upperStarLowerStarAdjunction Λ f)
       (ModuleRingedComparison.adjunction Λ f)
       (Mod.extendRestrictAdjunction (coefficientMap a X)) sX.pair.ordinaryAdjunction

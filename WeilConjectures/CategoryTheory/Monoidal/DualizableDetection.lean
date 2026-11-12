@@ -43,7 +43,7 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [Mon
 with internal homs.** -/
 theorem isDualizable_of_isDualizable_map (G : ∀ i, C ⥤ D i) [∀ i, (G i).Monoidal]
     (hG : ∀ ⦃Y Z : C⦄ (f : Y ⟶ Z), (∀ i, IsIso ((G i).map f)) → IsIso f) {X : C}
-    [∀ i, IsIso (ihomComparison (G i) X).natTrans] (hX : ∀ i, IsDualizable ((G i).obj X)) :
+    [∀ i, IsIso (ihomComparison (G i) X)] (hX : ∀ i, IsDualizable ((G i).obj X)) :
     IsDualizable X := by
   rw [isDualizable_iff_isIso_ihomUnitTensorToIhom]
   refine hG _ fun i ↦ ?_

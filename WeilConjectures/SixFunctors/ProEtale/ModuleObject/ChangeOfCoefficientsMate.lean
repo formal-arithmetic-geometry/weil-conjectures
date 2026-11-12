@@ -243,7 +243,7 @@ lemma isMateSquare_derivedOpenImmersionShriekIso_derivedPullIso :
     (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm.inv
     (TwoSquare.mk _ _ _ _ ((mateEquiv (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j)
       (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j)
-      (TwoSquare.mk _ _ _ _ (derivedOpenImmersionShriekIso a j).inv)).natTrans ≫
+      (TwoSquare.mk _ _ _ _ (derivedOpenImmersionShriekIso a j).inv)) ≫
         Functor.whiskerLeft _
           (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ' j).symm.hom))
   have h₂ := mateEquiv_comp_whiskerLeft

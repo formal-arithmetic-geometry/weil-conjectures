@@ -181,6 +181,6 @@ noncomputable def siteComparisonEvaluationHom
           ((comparisonUpperStar A X).mapDerivedCategory.obj M) :=
   let F := (comparisonUpperStar A X).mapDerivedCategory
   let : F.Monoidal := siteComparisonDerivedMonoidal A X
-  (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M
+  (Functor.LaxMonoidal.ihomComparison F K).app M
 
 end AlgebraicGeometry.ProEtale

@@ -546,11 +546,11 @@ private theorem raw_smul (h : CbcOpenRingSquare W cR cB φ ψ)
     (M : reductionModules W.left C) (V : T.ProEtᵒᵖ)
     (r : (reductionModuleRing T R).obj.obj V)
     (z : (openPresheaf W cR ((reductionRestrict W.left ψ).obj M)).obj V) :
-    (((openPresheaf W cR ((reductionRestrict W.left ψ).obj M)).obj V).smul r).hom z =
+    (((openPresheaf W cR ((reductionRestrict W.left ψ).obj M)).obj V).smul r).asHom.hom z =
     ((((PresheafOfModules.restrictScalars
       ((sheafCompose (ProEt.topology T)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ).hom).obj
-          (openPresheaf W cB M)).obj V).smul r).hom z := by
+          (openPresheaf W cB M)).obj V).smul r).asHom.hom z := by
   let z' : DirectSum (V.unop ⟶ W) (fun a ↦
       M.val.obj (op ((cbcSliceFunctor T W).obj (Over.mk a)))) := z
   apply DFinsupp.ext

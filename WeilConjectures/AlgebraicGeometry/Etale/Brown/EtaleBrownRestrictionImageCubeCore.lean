@@ -100,8 +100,8 @@ private theorem right_mate_transpose
     {K : C ⥤ D} {S : D ⥤ C} (b : K ⊣ S)
     {X : A ⥤ C} {Y : B₀ ⥤ D} (χ : TwoSquare X L K Y)
     (P : A) (N : B₀) (f : L.obj P ⟶ N) :
-    b.homEquiv _ _ (χ.natTrans.app P ≫ Y.map f) =
-      X.map (a.homEquiv P N f) ≫ (mateEquiv a b χ).natTrans.app N := by
+    b.homEquiv _ _ (χ.app P ≫ Y.map f) =
+      X.map (a.homEquiv P N f) ≫ (mateEquiv a b χ).app N := by
   have hh := adjunctionMate_transpose a b (mateEquiv a b χ) P N f
   rw [Equiv.symm_apply_apply] at hh
   exact hh
@@ -110,9 +110,9 @@ private theorem right_mate_transport
     {L L' : A ⥤ B₀} {R : B₀ ⥤ A} (a : L ⊣ R) (e : L ≅ L')
     {K K' : C ⥤ D} {S : D ⥤ C} (b : K ⊣ S) (f : K ≅ K')
     (X : A ⥤ C) (Y : B₀ ⥤ D) (χ : X ⋙ K' ⟶ L' ⋙ Y) :
-    (mateEquiv (a.ofNatIsoLeft e) (b.ofNatIsoLeft f) (.mk _ _ _ _ χ)).natTrans =
+    (mateEquiv (a.ofNatIsoLeft e) (b.ofNatIsoLeft f) (.mk _ _ _ _ χ)) =
       (mateEquiv a b (.mk _ _ _ _
-        (Functor.whiskerLeft X f.hom ≫ χ ≫ Functor.whiskerRight e.inv Y))).natTrans := by
+        (Functor.whiskerLeft X f.hom ≫ χ ≫ Functor.whiskerRight e.inv Y))) := by
   ext N
   simp only [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
@@ -177,7 +177,7 @@ private theorem mate_right_normalized
       adg.homEquiv _ _ (lf.hom.app P ≫ DerivedCategory.Q.map k) =
         DerivedCategory.Q.map ((ag.mapHomologicalComplex (.up ℤ)).homEquiv P I k) ≫ v.app I)
     (β : e ⋙ l ≅ f ⋙ j) (α : g ⋙ e ⟶ j ⋙ r)
-    (hβ : (mateEquiv a ag (.mk _ _ _ _ β.hom)).natTrans = α)
+    (hβ : (mateEquiv a ag (.mk _ _ _ _ β.hom)) = α)
     (χ : ed ⋙ ld ≅ fd ⋙ jd)
     (hχ : ∀ P, χ.hom.app (DerivedCategory.Q.obj P) ≫
         jd.map (ff.hom.app P) ≫ jf.hom.app ((f.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -185,7 +185,7 @@ private theorem mate_right_normalized
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex β (.up ℤ)).hom.app P))
     (I : CochainComplex D ℤ) :
     ed.map (u.app I) ≫
-        (mateEquiv ad adg (.mk _ _ _ _ χ.hom)).natTrans.app (DerivedCategory.Q.obj I) ≫
+        (mateEquiv ad adg (.mk _ _ _ _ χ.hom)).app (DerivedCategory.Q.obj I) ≫
         rd.map (jf.hom.app I) =
       ef.hom.app ((g.mapHomologicalComplex (.up ℤ)).obj I) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex α (.up ℤ)).app I) ≫
@@ -229,7 +229,7 @@ private theorem mate_right_normalized
       exact Equiv.apply_symm_apply _ _
     erw [hi] at hh
     simpa only [CategoryTheory.Functor.map_id, Category.id_comp, Functor.id_obj,
-      TwoSquare.mk, TwoSquare.natTrans] using hh
+      TwoSquare.mk] using hh
   rw [ho]
 
 end NormalizedMate
@@ -470,7 +470,7 @@ private theorem geometric_restriction_normalized
       (Etale.upperStarLowerStarAdjunction
       (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryRightDerivedAdjunction
       (.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
-        (Etale.upperStarRestrictScalarsIsoSheaf φ g)).hom)).natTrans =
+        (Etale.upperStarRestrictScalarsIsoSheaf φ g)).hom)) =
         Etale.scalarRestrictionDirectImageMap φ g := by
     rw [geometric_exact_adjunction, geometric_exact_adjunction, right_mate_transport]
     rfl
@@ -522,7 +522,7 @@ private theorem coefficient_restriction_normalized :
     ∃ β : (PW.scalar h).restriction ⋙ (B.level n).inverse ≅
       (B.level m).inverse ⋙ (PV.scalar h).restriction,
     (mateEquiv (B.level m).adjunction (B.level n).adjunction
-      (.mk _ _ _ _ β.hom)).natTrans = (B.restrictedDirect h).inv ∧
+      (.mk _ _ _ _ β.hom)) = (B.restrictedDirect h).inv ∧
     ∀ K : CochainComplex (strictEtaleLevel W O t m) ℤ,
       β.hom.app (DerivedCategory.Q.obj K) ≫
         (PV.scalar h).restriction.map ((B.level m).inverseFactors.hom.app K) ≫
@@ -545,7 +545,7 @@ private theorem coefficient_restriction_normalized :
     (B.level m).inverseFactors (B.level n).inverseFactors
     (PV.scalar h).restrictionFactors (A.restrictInverse h)
   let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ β.hom)).natTrans
+    (.mk _ _ _ _ β.hom))
   have hτ : τ = (B.derivedTensor h).inv := by
     apply hom_ext_flat W.smallEtaleTopology n
     intro P hk hf
@@ -601,20 +601,20 @@ private theorem coefficient_restriction_normalized :
     exact hh'
   refine ⟨β, ?_, hβ⟩
   have ht : (mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-      (.mk _ _ _ _ (B.derivedTensor h).inv)).natTrans = β.hom := by
+      (.mk _ _ _ _ (B.derivedTensor h).inv)) = β.hom := by
     rw [← hτ]
-    exact congrArg TwoSquare.natTrans (Equiv.apply_symm_apply _ _)
+    exact (Equiv.apply_symm_apply _ _)
   have hc : conjugateEquiv
       ((PW.scalar h).derivedAdj.comp (B.level m).adjunction)
       ((B.level n).adjunction.comp (PV.scalar h).derivedAdj)
       (B.derivedTensor h).inv =
       (mateEquiv (B.level m).adjunction (B.level n).adjunction
-        (.mk _ _ _ _ β.hom)).natTrans := by
+        (.mk _ _ _ _ β.hom)) := by
     rw [← iterated_mateEquiv_conjugateEquiv
       (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
       (B.level n).adjunction (B.level m).adjunction]
     exact congrArg (fun z ↦ (mateEquiv
-      (B.level m).adjunction (B.level n).adjunction z).natTrans) ht
+      (B.level m).adjunction (B.level n).adjunction z)) ht
   rw [← hc]
   exact congrArg Iso.inv (brown_scalar_conjugate
     (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
@@ -629,7 +629,7 @@ private theorem coefficient_right_normalized :
       (PV.scalar h).restriction (PW.scalar h).restriction
       (PV.scalar h).restrictionFactors (PW.scalar h).restrictionFactors
       (mateEquiv (A.levelAdj m) (A.levelAdj n)
-        (.mk _ _ _ _ (A.restrictInverse h).hom)).natTrans
+        (.mk _ _ _ _ (A.restrictInverse h).hom))
       (B.restrictedDirect h).inv := by
   obtain ⟨β, hm, hβ⟩ := coefficient_restriction_normalized O t g A PW PV B h
   intro I

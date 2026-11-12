@@ -56,7 +56,7 @@ private lemma unit_of_mate
     {F : C ⥤ D} {G : D ⥤ C} {F' : C' ⥤ D'} {G' : D' ⥤ C'}
     (a : F ⊣ G) (b : F' ⊣ G') {U : C ⥤ C'} {V : D ⥤ D'}
     (β : U ⋙ F' ⟶ F ⋙ V) (τ : G ⋙ U ⟶ V ⋙ G')
-    (h : (mateEquiv a b β).natTrans = τ) (K : C) :
+    (h : (mateEquiv a b β) = τ) (K : C) :
     b.unit.app (U.obj K) ≫ G'.map (β.app K) =
       U.map (a.unit.app K) ≫ τ.app (F.obj K) := by
   rw [← h]
@@ -317,7 +317,7 @@ private lemma restriction_mate (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (mateEquiv (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (Etale.openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
-      (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} Λ) j).hom).natTrans =
+      (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} Λ) j).hom) =
       (lowerStarCompComparisonLowerStarIso j (ModuleCat.{u + 1} Λ)).hom := by
   ext F : 2
   apply Sheaf.hom_ext
@@ -345,7 +345,7 @@ private lemma comparison_restriction_mate (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
       (comparisonAdjunction (ModuleCat.{u + 1} Λ) U)
-      (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom).natTrans =
+      (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom) =
       Functor.whiskerLeft (comparisonLowerStar (ModuleCat.{u + 1} Λ) X)
         (Etale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} Λ) j).hom ≫
       (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} Λ) j).hom ≫
@@ -355,25 +355,24 @@ private lemma comparison_restriction_mate (Λ : Type (u + 1)) [CommRing Λ]
   let A := ModuleCat.{u + 1} Λ
   apply (mateEquiv (upperStarLowerStarAdjunction A j)
     (Etale.upperStarLowerStarAdjunction A j)).injective
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
-  change (mateEquiv _ _ (mateEquiv _ _ _)).natTrans = _
+  change (mateEquiv _ _ (mateEquiv _ _ _)) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   have h := mateEquiv_leftAdjointUniq (upperStarLowerStarAdjunction A j)
     (openImmersionRestrictionLowerStarAdjunction A j)
     (Etale.upperStarLowerStarAdjunction A j)
     (Etale.openImmersionRestrictionLowerStarAdjunction A j)
     (TwoSquare.mk _ _ _ _ (comparisonLowerStarOpenImmersionRestrictionIso A j).hom)
-  have hh := congrArg TwoSquare.natTrans h
+  have hh := h
   change (mateEquiv (upperStarLowerStarAdjunction A j)
     (Etale.upperStarLowerStarAdjunction A j)
     (Functor.whiskerLeft (comparisonLowerStar A X)
         (Etale.upperStarIsoOpenImmersionRestriction A j).hom ≫
       (comparisonLowerStarOpenImmersionRestrictionIso A j).hom ≫
       Functor.whiskerRight (upperStarIsoOpenImmersionRestriction A j).inv
-        (comparisonLowerStar A U))).natTrans = _ at hh
+        (comparisonLowerStar A U))) = _ at hh
   rw [restriction_mate] at hh
   change _ = (mateEquiv (upperStarLowerStarAdjunction A j)
-    (Etale.upperStarLowerStarAdjunction A j) _).natTrans
+    (Etale.upperStarLowerStarAdjunction A j) _)
   rw [hh]
   exact Equiv.apply_symm_apply _ _
 
@@ -383,7 +382,7 @@ private lemma comparison_extension_mate (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (mateEquiv (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
-      (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j).inv).natTrans =
+      (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j).inv) =
       (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom := by
   let A := ModuleCat.{u + 1} Λ
   have hh := conjugate_comp_transport
@@ -395,8 +394,7 @@ private lemma comparison_extension_mate (Λ : Type (u + 1)) [CommRing Λ]
     (comparisonLowerStarOpenImmersionRestrictionIso A j).hom
     (conjugate_inverse _ _ _)
   apply (mateEquiv (comparisonAdjunction A X) (comparisonAdjunction A U)).injective
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
-  change (mateEquiv _ _ (mateEquiv _ _ _)).natTrans = _
+  change (mateEquiv _ _ (mateEquiv _ _ _)) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   exact hh.trans (comparison_restriction_mate Λ j).symm
 
