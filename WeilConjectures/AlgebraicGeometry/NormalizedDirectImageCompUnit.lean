@@ -59,10 +59,9 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
-  have h := (Classical.choose_spec (RingedSpace.exists_derivedModuleDirectImageComposition
-    s.toLRSHom.toShHom t.toLRSHom.toShHom)) K
   rw [compUnit_app]
-  exact h
+  exact Classical.choose_spec (RingedSpace.exists_derivedModuleDirectImageComposition
+    s.toLRSHom.toShHom t.toLRSHom.toShHom) K
 
 
 end AlgebraicGeometry
