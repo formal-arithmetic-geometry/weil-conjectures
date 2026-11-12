@@ -267,8 +267,7 @@ private theorem scalar_insertion_ext (n : ℕ)
   apply congrArg ((strictEtaleSetAdjunction g).homEquiv _ _)
   exact he
 
-set_option profiler true in
-set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
 private theorem ordinary_evaluation
     {DA : CoefficientDerivedImage A.inverse A.rightSystem A.systemAdj}
