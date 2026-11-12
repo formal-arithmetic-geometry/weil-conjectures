@@ -49,6 +49,7 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
@@ -186,6 +187,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     hφ'
 
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
