@@ -85,6 +85,8 @@ attribute [local instance] scalarData_extensionAdditive scalarData_restrictionAd
   scalarData_extensionLimits scalarData_extensionColimits
   scalarData_restrictionLimits scalarData_restrictionColimits
 
+set_option profiler true in
+set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
 termwise on every complex, and their adjunction unit is the localized termwise unit.
@@ -121,6 +123,8 @@ Proof: exactness supplies both total-derived comparisons with the termwise
 localization. The latter has its canonical shifts and preserves triangles.
 Its comparison components are isomorphisms on every complex. The unit formula
 is the component formula for the localization of the ordinary adjunction. -/
+set_option profiler true in
+set_option maxHeartbeats 1000000 in
 theorem derived_scalar_data : DerivedScalarData l E T := by
   refine ⟨⟨(ordinaryExtension l E T).leftDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨(ordinaryRestriction l E T).rightDerivedFunctorIsoMapDerivedCategory⟩,
