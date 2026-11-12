@@ -261,18 +261,17 @@ private theorem reductionNat_app
     (reductionNat l E X D hl n).app P = reductionCounit l E X D hl n P := rfl
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionCounit_isIso
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) P) :
     IsIso (reductionCounit l E X D hl n P) := by
-  have := integralDerivedReduction_counit_isIso l E X D hl n P hP
   unfold reductionCounit
-  infer_instance
+  exact IsIso.comp_isIso' (Functor.map_isIso _ _)
+    (IsIso.comp_isIso' (integralDerivedReduction_counit_isIso l E X D hl n P hP)
+      (IsIso.comp_isIso' (Functor.map_isIso _ _) inferInstance))
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem restrictionComparison_eq
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
@@ -594,22 +593,21 @@ private theorem beta_scalar (n : ℕ)
   exact (reduction_smul X l E n _ V s _).symm
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 -- The unit normalization crosses the finite coefficient wrappers.
 private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
     {V W : X.ProEtᵒᵖ} (i : V ⟶ W) (x : M.val.obj V) :
     ((scalarReductionExtension l E X n).obj M).val.map i
         (sfReductionTensor l E X n M V 1 x) =
       sfReductionTensor l E X n M W 1 (M.val.map i x) := by
-  have h := PresheafOfModules.naturality_apply
-    (((scalarReductionExtension_adjunction l E X n).choose.unit.app M).val) i x
   have hu (W : X.ProEtᵒᵖ) (y : M.val.obj W) :
       (((scalarReductionExtension_adjunction l E X n).choose.unit.app M).val.app W y) =
         sfReductionTensor l E X n M W 1 y :=
     (scalarReductionExtension_adjunction l E X n).choose_spec M W y
-  change _ = _ at h
-  rw [hu, hu] at h
-  exact h.symm
+  exact (congrArg (((scalarReductionExtension l E X n).obj M).val.map i)
+    (hu V x).symm).trans
+      ((PresheafOfModules.naturality_apply
+        ((scalarReductionExtension_adjunction l E X n).choose.unit.app M).val i x).symm.trans
+          (hu W (M.val.map i x)))
 
 private theorem beta_restricted (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -913,7 +911,6 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   integralCoefficientSheaf
 
 set_option profiler true in
-set_option maxHeartbeats 16000000 in
 -- Keep the coefficient wrappers folded while elaborating the comparison squares.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
 This is a one-level calculation: no consecutive quotient map occurs in it.
@@ -1033,7 +1030,9 @@ theorem restrictionTensor_mate_model
   have hZ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
   have normZ := m.normalization P Z hP hZ₀
   obtain ⟨hFP, hFZ, betaZ₀, hiZ₀, hbZ, hnZ⟩ := normZ
-  obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := m.normalization P Q hP hQ
+  have hQ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Q := hQ
+  have normQ := m.normalization P Q hP hQ₀
+  obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := normQ
   let betaZ : T'.obj (F.obj Z) ⟶ F.obj (TP.obj Z) := betaZ₀
   let betaQ : T'.obj (F.obj Q) ⟶ F.obj (TP.obj Q) := betaQ₀
   have hiZ : IsIso betaZ := hiZ₀
