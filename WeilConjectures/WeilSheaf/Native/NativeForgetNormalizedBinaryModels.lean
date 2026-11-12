@@ -213,7 +213,7 @@ theorem native_forget_normalized_binary_models
         (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
           (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
           (.up ℤ) q p n hqp := by
-      simp only [V, flip, nativeOpenTensorInsertion, Iso.trans_hom,
+      dsimp only [V, flip, nativeOpenTensorInsertion, Iso.trans_hom,
         HomologicalComplex.comp_f, Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
       rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
       simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
