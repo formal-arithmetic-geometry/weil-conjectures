@@ -40,7 +40,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
+set_option profiler true in
 -- The five model comparisons involve nested monoidal and cohomology functors.
 /-- The comparison is a morphism of exact five-term cohomology sequences.
 No component is assumed or asserted to be invertible.
@@ -140,7 +140,7 @@ theorem exists_localizedTensorComparison_triangle_five_term_diagram
     d₂ (HomologicalComplex.homologyMap (F.map f ▷ N) (i + 1))
   have hD : D.Exact := tensorConeTriangle_five_term_exact
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))) f N i
-  let φ : S ⟶ D := ComposableArrows.homMk₄
+  let φ : S ⟶ D := ComposableArrows.homMk₄ (f := S) (g := D)
     (cmp P₁ mP₁ i) (cmp P₂ mP₂ i) (cmp P₃ mP₃ i)
     (cmp P₁ mP₁ (i + 1)) (cmp P₂ mP₂ (i + 1)) w₀ w₁ w₂ w₃
   have transport (P V : CochainComplex (ModuleCat.{u} A) ℤ)
