@@ -151,7 +151,6 @@ noncomputable def twistSpecializationMap
   L((M.i)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app W ≫
     R((M.j)_*⟦Λ⟧).map e.inv)
 
-set_option profiler true in
 attribute [local instance] DerivedCategory.braidedCategory' in
 /-- **Nearby cycles commute with twists by dualizable objects**: for a dualizable `W` on the total
 space and `e : Lε^* T ≅ Lj^* W`, the lax tensor map `Ψ A ⊗ Ψ T ⟶ Ψ (A ⊗ T)`, precomposed with
