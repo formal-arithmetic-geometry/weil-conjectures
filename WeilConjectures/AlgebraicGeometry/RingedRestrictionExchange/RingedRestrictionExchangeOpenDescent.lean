@@ -840,10 +840,10 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let g := u ≫ v ≫ db.hom.app N
   have hfg : f = g := by
     apply SheafOfModules.hom_ext
-    set_option profiler true in
-      apply PresheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
     intro V
-    apply ConcreteCategory.hom_ext
+    set_option profiler true in
+      apply ConcreteCategory.hom_ext
     intro m
     simp only [f, g, SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
