@@ -53,7 +53,7 @@ variable {X₁ X₁' X₂ X₂' : Scheme.{u}} {N₁ : NearbyCyclesModel X₁ X�
   [Algebra L₂ Ω₂] {l : L₁ →+* L₂} {ω : Ω₁ →+* Ω₂}
   {hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l}
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the statement involves several large derived functor objects
 /-- **Change of trait from the change of Galois layers** (SGA 4½, [Th. finitude], proof of 3.7,
 3.8), for coefficients `Λ = C(-, T₀)` with `T₀` finite discrete in which the degrees of the finite
