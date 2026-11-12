@@ -75,6 +75,33 @@ private theorem productIso_pi {A : Type*} [Category A] [Abelian A]
     ← PreservesProduct.iso_hom, Iso.inv_hom_id_assoc]
   exact Limits.Pi.mapIso_hom_π e n
 
+private theorem product_shift_square {A : Type*} [Category A] [Abelian A]
+    [HasCountableProducts A] (m : ℤ)
+    {C D Cm Dm T : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (q : C ⟶ D) (qm : Cm ⟶ Dm) (a : Cm ⟶ T)
+    (p : (∏ᶜ fun n : ℕ ↦ Dm.obj (op n)) ⟶ (∏ᶜ fun n : ℕ ↦ D.obj (op n))⟦m⟧)
+    (r : (∏ᶜ fun n : ℕ ↦ T.obj (op n)) ⟶ (∏ᶜ fun n : ℕ ↦ C.obj (op n))⟦m⟧)
+    (s : ∀ n : ℕ, Dm.obj (op n) ⟶ (D.obj (op n))⟦m⟧)
+    (t : ∀ n : ℕ, T.obj (op n) ⟶ (C.obj (op n))⟦m⟧)
+    (hp : ∀ n, p ≫ (Limits.Pi.π (fun n ↦ D.obj (op n)) n)⟦m⟧' =
+      Limits.Pi.π (fun n ↦ Dm.obj (op n)) n ≫ s n)
+    (hr : ∀ n, r ≫ (Limits.Pi.π (fun n ↦ C.obj (op n)) n)⟦m⟧' =
+      Limits.Pi.π (fun n ↦ T.obj (op n)) n ≫ t n)
+    (h : ∀ n, qm.app (op n) ≫ s n = a.app (op n) ≫ t n ≫ (q.app (op n))⟦m⟧') :
+    Limits.Pi.map (fun n ↦ qm.app (op n)) ≫ p =
+      Limits.Pi.map (fun n ↦ a.app (op n)) ≫ r ≫
+        (Limits.Pi.map (fun n ↦ q.app (op n)))⟦m⟧' := by
+  apply ProductShift.productShift_hom_ext
+    (fun n ↦ (evaluation ℕᵒᵖ (CochainComplex A ℤ)).obj (op n)) D m
+  intro n
+  simp only [Category.assoc, ← Functor.map_comp]
+  erw [hp, ← Category.assoc, Limits.Pi.map_π, Category.assoc]
+  erw [Limits.Pi.map_π]
+  rw [(shiftFunctor (CochainComplex A ℤ) m).map_comp]
+  rw [← Category.assoc _ _ ((q.app (op n))⟦m⟧'), hr]
+  simp only [Category.assoc]
+  rw [Limits.Pi.map_π_assoc, h]
+
 private theorem roos_square {A : Type*} [Category A] [Abelian A]
     [HasCountableProducts A] (m : ℤ)
     {C D Cm Dm T : ℕᵒᵖ ⥤ CochainComplex A ℤ}
@@ -155,8 +182,6 @@ def IntegralComparisonPullbackGeneratorEquation {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((κ n).hom.f i).val.app (op U)
           (coefficientEvaluationSection l E Y (C.X i) n (op U) x))
 
-set_option maxHeartbeats 12000000 in
--- Elaborating the finite-generator reindexing requires large coefficient-functor comparisons.
 /-- Finite generator normalization fixes the signed Roos shift square.
 
 Source: Stacks 03EL, 014E and 0941; step 2 and the signed coordinate calculation
@@ -250,11 +275,9 @@ theorem integralComparisonPullbackGenerator_shift {X Y : Scheme.{u}} (f : X ⟶ 
         integralComparisonSequenceRoosFunctor l E X).commShiftIso m).hom.app C =
       integralOperationsRoosFunctor.map (K.map a) ≫
         ((K ⋙ integralOperationsRoosFunctor).commShiftIso m).hom.app D := by
-    change (K ⋙ integralOperationsRoosFunctor).map
-        (R.map ((B.commShiftIso m).hom.app C)) ≫
-        ((R ⋙ K ⋙ integralOperationsRoosFunctor).commShiftIso m).hom.app (B.obj C) = _
-    rw [Functor.commShiftIso_comp_hom_app]
-    simp only [Functor.comp_map, a, Functor.map_comp, Category.assoc]
+    dsimp only [integralComparisonSequenceRoosFunctor, integralComparisonSequenceRoosShift]
+    simp only [Functor.commShiftIso_comp_hom_app, Functor.comp_map, a,
+      Functor.map_comp, Category.assoc]
     rfl
   have hproduct :
       Limits.Pi.map (fun n ↦ qm.hom.app (op n)) ≫
@@ -262,34 +285,22 @@ theorem integralComparisonPullbackGenerator_shift {X Y : Scheme.{u}} (f : X ⟶ 
         Limits.Pi.map (fun n ↦ (K.map a).app (op n)) ≫
           (ProductShift.productShiftIso (RoosShift.levelFunctor K) D m).hom ≫
             (Limits.Pi.map (fun n ↦ q.hom.app (op n)))⟦m⟧' := by
-    apply ProductShift.productShift_hom_ext
-      (fun n ↦ RoosShift.levelFunctor (integralOperationsPullbackTowerFunctor l E f) n) P m
-    intro n
-    simp only [Category.assoc, ← Functor.map_comp]
-    have hp : (IntegralCompletedComparison.productShift l E f P m).hom ≫
-        (Limits.Pi.π (fun n ↦
-          ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n)) n)⟦m⟧' =
-        Limits.Pi.π (fun n ↦
-          ((integralOperationsPullbackTowerFunctor l E f).obj (P⟦m⟧)).obj (op n)) n ≫
-            (IntegralCompletedComparison.levelShift l E f P m n).hom := by
+    refine product_shift_square m q.hom qm.hom (K.map a) _ _
+      (fun n ↦ (IntegralCompletedComparison.levelShift l E f P m n).hom)
+      (fun n ↦ ((RoosShift.levelFunctor K n).commShiftIso m).hom.app D) ?_ ?_ ?_
+    · intro n
       unfold IntegralCompletedComparison.productShift
       exact productIso_pi m (fun n ↦ IntegralCompletedComparison.levelShift l E f P m n) n
-    erw [hp, ← Category.assoc, Limits.Pi.map_π, Category.assoc]
-    erw [Limits.Pi.map_π]
-    rw [(shiftFunctor (CochainComplex (scalarReductionSource l E X) ℤ) m).map_comp]
-    rw [← Category.assoc _ _ ((q.hom.app (op n))⟦m⟧'),
-      ProductShift.productShiftIso_π]
-    simp only [Category.assoc]
-    erw [Limits.Pi.map_π_assoc]
-    apply congrArg (fun z ↦ Limits.Pi.π _ n ≫ z)
-    apply HomologicalComplex.hom_ext
-    intro i
-    simp only [HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f']
-    change (qm.hom.app (op n)).f i ≫ 𝟙 _ =
-      (a.f i).app (op n) ≫ 𝟙 _ ≫ (q.hom.app (op n)).f (i + m)
-    erw [ha]
-    erw [Category.comp_id, Category.id_comp, Category.id_comp]
-    exact hlevel n i
+    · exact ProductShift.productShiftIso_π (RoosShift.levelFunctor K) D m
+    · intro n
+      apply HomologicalComplex.hom_ext
+      intro i
+      simp only [HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f']
+      change (qm.hom.app (op n)).f i ≫ 𝟙 _ =
+        (a.f i).app (op n) ≫ 𝟙 _ ≫ (q.hom.app (op n)).f (i + m)
+      erw [ha]
+      erw [Category.comp_id, Category.id_comp, Category.id_comp]
+      exact hlevel n i
   erw [hsource, Category.assoc]
   refine roos_square m q.hom qm.hom (K.map a) _ _ _ _ hproduct ?_ ?_ ?_ ?_
   · intro j
