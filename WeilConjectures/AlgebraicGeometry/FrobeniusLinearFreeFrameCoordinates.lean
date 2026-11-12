@@ -80,18 +80,18 @@ private theorem frobenius_coordinates_of_linear_coordinates
     (henat : ∀ (W : S.Etale) (h : W ⟶ V) (m : G.obj (op V)) (i : Fin n),
       e W h (G.map h.op m) i = h.left.appTop (e V (𝟙 V) m i)) :
   ∃ (e : ∀ (W : S.Etale), (W ⟶ V) →
-        (G.obj (op W)) ≃+ (Fin n → Γ(W.left, ⊤)))
+        G.obj (op W) ≃+ (Fin n → Γ(W.left, ⊤)))
       (a : Fin n → Fin n → Γ(V.left, ⊤)),
       (∀ (W : S.Etale) (h : W ⟶ V)
-        (m : (G.obj (op V))) (i : Fin n),
+        (m : G.obj (op V)) (i : Fin n),
         e W h (G.map h.op m) i =
           h.left.appTop (e V (𝟙 V) m i)) ∧
       (∀ (W : S.Etale) (h : W ⟶ V)
-        (m : (G.obj (op W))) (i : Fin n),
+        (m : G.obj (op W)) (i : Fin n),
         e W h (F.app (op W) m) i =
           ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p) := by
   classical
-  let v : Fin n → (G.obj (op V)) :=
+  let v : Fin n → G.obj (op V) :=
     fun j ↦ (e V (𝟙 V)).symm (Pi.single j 1)
   let a : Fin n → Fin n → Γ(V.left, ⊤) :=
     fun i j ↦ e V (𝟙 V) (F.app (op V) (v j)) i
@@ -102,8 +102,6 @@ private theorem frobenius_coordinates_of_linear_coordinates
     (F.app (op V)).hom (F.app (op W)).hom (henat W h)
     (fun s ↦ congrArg (fun f ↦ f s) (F.naturality h.op)) (hF W) m i
 
-
-set_option profiler true in
 /-- A specified finite free frame gives a natural Frobenius matrix on the etale slice.
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
@@ -151,7 +149,9 @@ theorem frobenius_linear_free_frame_coordinates
           ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p) := by
   obtain ⟨e, henat⟩ := exists_natural_tensor_free_frame_coordinates S E V n α
   exact frobenius_coordinates_of_linear_coordinates p S
-    (Modules.etaleTensorSectionsSheaf E).obj (instModules := fun W ↦ inferInstance)
+    (Modules.etaleTensorSectionsSheaf E).obj
+    (instModules := fun W ↦ (inferInstance :
+      Module Γ(W.left, ⊤) Γ((Modules.tensorPullback W.hom).obj E, ⊤)))
     F.hom hF V n e henat
 
 end AlgebraicGeometry.Scheme

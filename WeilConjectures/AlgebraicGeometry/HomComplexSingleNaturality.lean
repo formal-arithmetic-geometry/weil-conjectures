@@ -150,7 +150,6 @@ private theorem single_hom_functor_iso (Y : Scheme.{u})
   exact h
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The single-source Hom comparison is natural in both the sheaf and the complex.
 

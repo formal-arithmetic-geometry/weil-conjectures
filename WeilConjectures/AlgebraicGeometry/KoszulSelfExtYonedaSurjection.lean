@@ -104,7 +104,6 @@ private theorem exterior_dual_stalk_surjection
   simpa only [Iso.refl_hom, Category.comp_id] using
     stalk_surjective_iso_comp a q (Iso.refl _) z hqs
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The alternating Yoneda products give a surjection from the exterior sheaf to
 self Ext on the Koszul-regular open. This asserts generation, not injectivity.
