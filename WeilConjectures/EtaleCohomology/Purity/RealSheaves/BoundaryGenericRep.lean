@@ -132,7 +132,6 @@ theorem genericStalkEquiv_fundamentalRep_of_deg_zero
   rw [genericStalkEquiv_apply B₀ ξ hξ, genericStalkEquiv_apply B₀ ξ hξ]
   exact e.symm
 
-set_option maxHeartbeats 400000 in
 -- the anonymous constructor of the Weil group element is checked against the carrier slowly
 /-- **Galois elements of degree `n` act through the Weil structure.** If the image
 `w = (ρ(σ), n)` of `σ ∈ Gal(Ω / k(C))` lies in the Weil group (for instance a residue Frobenius
