@@ -195,6 +195,9 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
       _ = _ := by
         rw [inverseImageReductionProduct, Pi.lift_comp_π]
         ext i U x
+        change ((q.hom.app (op n)).f i).val.app U
+          ((a.f i ≫ limit.π (T.X i) (op n)).val.app U x) = _
+        rw [ha]
         let V := (proEtaleIsoPostcompose h).obj U.unop
         let t := unrestrictedIntegralTensorSection l E W n (P.X i) (op V) 1 x
         let y := integralComparisonSequenceSection l E W (C.X i) n (op V)
@@ -221,12 +224,6 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
         have hqy := hq n i V y
         rw [hy, hk] at hqy
         have hbx := hb n i (op V) x
-        have e1 : ((a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n))
-            (.up ℤ)).app T) ≫ q.hom.app (op n)).f i =
-            (c.f i).app (op n) ≫ (q.hom.app (op n)).f i := by
-          rw [HomologicalComplex.comp_f, ← ha]
-          rfl
-        rw [e1]
         refine Eq.trans ?_ hθ.symm
         refine Eq.trans ?_ (hn.trans (congrArg
           ((((integralOperationsPullbackLevel l E h n).obj P).X i).val.map
@@ -244,8 +241,7 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
           (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
             i (i - 1) (by omega)) ≫
           (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) := by
-        rw [hi2 i]
-        simp
+        rw [hi2 i, comp_zero, zero_comp]
       _ = _ := by
         simp only [HomologicalComplex.comp_f, Category.assoc, hsecond i]
 
