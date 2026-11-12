@@ -405,8 +405,12 @@ theorem scalar_chern_local_factorization
     simpa only [map_natCast] using hY.map (ProjectiveLine Y ↘ Y).appTop.hom
   have hW : IsUnit (l : Γ(diagonalSurface Y, ⊤)) := by
     simpa only [map_natCast] using hP.map (secondProjection Y).appTop.hom
-  obtain ⟨z, hz⟩ := completed_local_chern_exists l r.tq.toPresentation hP
-  obtain ⟨w, hw⟩ := completed_local_chern_exists l r.t₂.toPresentation hW
+  have ez := completed_local_chern_exists l r.tq.toPresentation hP
+  have ew := completed_local_chern_exists l r.t₂.toPresentation hW
+  let z := ez.choose
+  let w := ew.choose
+  have hz := ez.choose_spec
+  have hw := ew.choose_spec
   refine ⟨z, w, hz, hw, ?_, ?_⟩
   · have hreal := realize_local_regular_adjunct l (ProjectiveLine Y ↘ Y) hY r.tq.toPresentation
       r.eP r.eY family.zl.Rq family.zl.q_canonical family.zl.q_unit r.q_square a ha z hz
