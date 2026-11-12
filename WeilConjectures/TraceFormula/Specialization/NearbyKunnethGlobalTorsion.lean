@@ -10,7 +10,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.OrdinaryKunnethResidueField
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidalTorsion
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
-public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
+import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.Tactic.TransportExact
 
 /-!

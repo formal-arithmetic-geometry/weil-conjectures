@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Subcategory
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Comp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Global
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Smooth

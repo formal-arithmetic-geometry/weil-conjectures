@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraStr
-public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
+import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsComm
 public import WeilConjectures.WeilSheaf.CohomologyProEtale

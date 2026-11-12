@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangePadicAlgCl
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 

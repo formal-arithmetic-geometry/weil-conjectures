@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ResidueFieldBaseChangeLift
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerStabilization
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegral

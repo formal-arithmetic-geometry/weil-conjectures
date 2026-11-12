@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.WeilSheaf.StalkTensor
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Hom
+import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Hom
 
 /-!
 # Stalks of the internal hom out of a lisse Weil sheaf

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidueIff
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedPointsDetection
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobalTorsion

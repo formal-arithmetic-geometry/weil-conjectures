@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionSquares
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionSpecial
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionExchange
