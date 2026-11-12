@@ -230,7 +230,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
   rewrite [P.baseChange_eq_pfBaseChange,
     P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
-  ext K : 1
+  refine NatTrans.ext (funext fun K ↦ ?_)
   exact congr_app key K
 
 variable {P}
