@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeNaturality
 public import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorComparison
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
@@ -41,40 +42,8 @@ private theorem baseChangeMap_naturality
     (derivedPullback g).map ((schemeDerivedDirectImage f).map φ) ≫
         schemeDerivedBaseChangeMap f f' g g' h F =
       schemeDerivedBaseChangeMap f f' g g' h E ≫
-        (schemeDerivedDirectImage f').map ((derivedPullback g').map φ) := by
-  let adj (k : X' ⟶ S') := Classical.choose (exists_schemeDerivedAdjunction k
-    (hAdd := (Classical.choose exists_derivedPullbackComposition) k)
-    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) k)
-    ((Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) k))
-  let adjf := Classical.choose (exists_schemeDerivedAdjunction f
-    (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
-    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
-    ((Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) f))
-  let comp : ∀ {Y Z W : Scheme.{uAH}} (k : Y ⟶ Z) (l : Z ⟶ W),
-      derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=
-    fun k l ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition)))) k l
-  let t : derivedPullback g ⋙ derivedPullback f' ⟶
-      derivedPullback f ⋙ derivedPullback g' :=
-    (comp f' g).hom ≫
-      (eqToIso (congrArg (fun k ↦ derivedPullback k) h.symm)).hom ≫ (comp g' f).inv
-  let q : schemeDerivedDirectImage f ⋙ derivedPullback g ⋙ derivedPullback f' ⟶
-      𝟭 (schemeDerivedCategory X) ⋙ derivedPullback g' :=
-    Functor.whiskerLeft (schemeDerivedDirectImage f) t ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight adjf.counit (derivedPullback g')
-  have hq := q.naturality φ
-  dsimp only [Functor.comp_map, Functor.id_map] at hq
-  unfold schemeDerivedBaseChangeMap
-  change _ ≫ (adj f').homEquiv _ _ _ = (adj f').homEquiv _ _ _ ≫ _
-  rw [← (adj f').homEquiv_naturality_left,
-    ← (adj f').homEquiv_naturality_right]
-  apply congrArg ((adj f').homEquiv _ _)
-  dsimp only [q, t, eqToIso, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.associator_inv_app, Functor.leftUnitor_hom_app] at hq
-  simpa only [Category.id_comp, Category.comp_id, Category.assoc, eqToHom_app] using hq
+    (schemeDerivedDirectImage f').map ((derivedPullback g').map φ) :=
+  schemeDerivedBaseChangeMap_naturality f f' g g' h φ
 
 /-- Over affine bases, global derived Hom out of a perfect complex commutes with
 Tor-independent base change in D(R'). The comparison is the extension/restriction adjoint of
