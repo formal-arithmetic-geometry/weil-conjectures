@@ -104,6 +104,7 @@ private theorem tensor_square_pasting
   rw [reassoc_of% hL]
   rw [hν]
 
+-- Normalize the total tensor map before specializing to the native comparison maps.
 private theorem coefficientTotalTensor_map_tensorHom
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
@@ -149,7 +150,7 @@ private theorem nativeRingedAssociatorComponent_normalize
     Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, coefficientTotalTensor_map_tensorHom,
     id_tensorHom, tensorHom_id, Category.assoc] using hs
 
-set_option profiler true in
+-- Keep the chain map abstract while pasting the comparison squares.
 private theorem nativeChainForget_transport_map
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}
@@ -195,8 +196,7 @@ private theorem nativeChainForget_transport_map
   let U := nativeChainForgetU (T := T)
   dsimp only
   intro hsquare
-  have ha := nativeRingedAssociatorComponent_normalize D P Q N
-    a hsquare
+  have ha := nativeRingedAssociatorComponent_normalize D P Q N a hsquare
   refine tensor_square_pasting
     (C := CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (B := CochainComplex
@@ -208,8 +208,7 @@ private theorem nativeChainForget_transport_map
     E U F G r.tensor o.tensor
     (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
     (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
-    (hb := ?_) (hμ := ?_) (hν := ?_) P Q N
-    a ?_
+    (hb := ?_) (hμ := ?_) (hν := ?_) P Q N a ?_
   · intro P Q
     exact native_weil_tensor_ringed_binary_chain_square D d o r P Q
   · exact r.associativity
@@ -217,7 +216,6 @@ private theorem nativeChainForget_transport_map
     exact o.associativity X Y Z
   · exact ha
 
-set_option profiler true in
 /-- The ringed associator square, after one outer homogeneous inclusion, transports
 through the ordinary comparison and the signed balanced tensor quotient.
 Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT.
