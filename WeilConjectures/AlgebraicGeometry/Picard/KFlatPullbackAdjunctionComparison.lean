@@ -127,9 +127,9 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
   exact congrArg q.map ((ac.homEquiv P I).apply_symm_apply α)
 
 private theorem kFlat_pullback_adjunction_comparison_naturality
+    [d : ∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {S S' : Scheme.{u}} (g : S' ⟶ S)
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
     [hL : (Scheme.Modules.tensorPullback g).Additive]
     (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
       (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
@@ -148,6 +148,8 @@ private theorem kFlat_pullback_adjunction_comparison_naturality
             (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
               (.up ℤ)).homEquiv _ _).symm α)) =
       DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I := by
+  let : HasDerivedCategory.{w} S.Modules := d S
+  let : HasDerivedCategory.{w} S'.Modules := d S'
   let q := HomotopyCategory.quotient
     (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
   let q' := HomotopyCategory.quotient
