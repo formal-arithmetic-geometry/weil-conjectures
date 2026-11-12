@@ -181,33 +181,32 @@ private theorem brown_underlying_restriction_section
   run_tac
     let a ← Lean.Meta.getLocalDeclFromUserName `hR
     let b ← Lean.Meta.getLocalDeclFromUserName `hR'
-    let count ← IO.mkRef (0 : Nat)
-    let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
-      if fuel == 0 || a == b || (← count.get) >= 12 then return
-      let unfoldHead (e : Lean.Expr) : Lean.MetaM Lean.Expr :=
-        if e.isAppOf ``StrictEtaleBrownRealizationCoherence ||
-            e.isAppOf ``brown_underlying_localization_coherence ||
-            e.isAppOf ``brown_underlying_scalar_coherence then Lean.Meta.whnf e else pure e
-      let a ← unfoldHead a
-      let b ← unfoldHead b
-      if a == b then return
-      match fuel, a, b with
-      | k + 1, .app .., .app .. =>
+    let mut pending := #[(a.type, b.type)]
+    let mut count := 0
+    for _ in [:2000] do
+      if pending.isEmpty || count >= 12 then break
+      let (a, b) := pending.back!
+      pending := pending.pop
+      if a == b then continue
+      let a ← if a.isAppOf ``StrictEtaleBrownRealizationCoherence then
+        Lean.Meta.whnf a else pure a
+      let b ← if b.isAppOf ``brown_underlying_localization_coherence ||
+          b.isAppOf ``brown_underlying_scalar_coherence then
+        Lean.Meta.whnf b else pure b
+      if a == b then continue
+      match a, b with
+      | .app .., .app .. =>
         if a.getAppFn == b.getAppFn && a.getAppNumArgs == b.getAppNumArgs then
-          for (x, y) in a.getAppArgs.zip b.getAppArgs do diff k x y
+          pending := pending ++ a.getAppArgs.zip b.getAppArgs
         else
-          count.modify (· + 1)
+          count := count + 1
           Lean.logInfo m!"coherence difference: {a} versus {b}"
-      | k + 1, .forallE _ a₁ a₂ _, .forallE _ b₁ b₂ _ =>
-        diff k a₁ b₁
-        diff k a₂ b₂
-      | k + 1, .lam _ a₁ a₂ _, .lam _ b₁ b₂ _ =>
-        diff k a₁ b₁
-        diff k a₂ b₂
-      | _, _, _ =>
-        count.modify (· + 1)
+      | .forallE _ a₁ a₂ _, .forallE _ b₁ b₂ _
+      | .lam _ a₁ a₂ _, .lam _ b₁ b₂ _ =>
+        pending := pending ++ #[(a₁, b₁), (a₂, b₂)]
+      | _, _ =>
+        count := count + 1
         Lean.logInfo m!"coherence difference: {a} versus {b}"
-    diff 30 a.type b.type
   exact @hR'.1
 
 private theorem brown_underlying_right_section
