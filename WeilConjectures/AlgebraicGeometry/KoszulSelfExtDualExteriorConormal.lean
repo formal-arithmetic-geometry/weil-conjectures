@@ -69,7 +69,6 @@ private theorem restrict_stalk_surjective
       f.stalkLinearMap z.1 ((e.hom.app M) s') at hn
   rw [hn, hs', hs]
 
-set_option maxHeartbeats 600000 in
 -- Comparing the restricted exterior sheaves and their internal duals needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The Koszul Hom calculation identifies self Ext with the internal dual of the
