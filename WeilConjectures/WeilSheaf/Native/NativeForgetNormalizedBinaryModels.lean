@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedForgetful
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
+import all WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRestrictionTensor
 import WeilConjectures.WeilSheaf.Category
@@ -84,6 +85,12 @@ private theorem map_normalization
   simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.comp_obj,
     Category.comp_id, ← F.map_comp, h]
 
+private theorem signed_composition_cancel
+    {C : Type*} [Category* C] [Preadditive C] {A B D E : C}
+    (s : ℤˣ) (hs : s * s = 1) {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} {d : A ⟶ E}
+    (h : a ≫ b ≫ c = s • d) : a ≫ (s • b) ≫ c = d := by
+  rw [Linear.units_smul_comp, Linear.comp_units_smul, h, smul_smul, hs, one_smul]
+
 private theorem map_flip_total_insertion
     {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive B]
     (F : A ⥤ A ⥤ A) [F.PreservesZeroMorphisms]
@@ -103,6 +110,42 @@ private theorem map_flip_total_insertion
   rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
   simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
   rfl
+
+private theorem normalized_binary_uncurry_eq
+    {A : Type*} [Category* A] [Abelian A]
+    [HasCountableProducts A] [HasCountableCoproducts A]
+    {F : A ⥤ A ⥤ A} [F.Additive] [∀ X, (F.obj X).Additive]
+    {H : Aᵒᵖ ⥤ A ⥤ A} [H.Additive] [∀ X, (H.obj X).Additive]
+    (a : F ⊣₂ H) (P T I : CochainComplex A ℤ)
+    (j ψ : CochainComplex.mapBifunctor P T F.flip ⟶ I)
+    (hψ : ∀ (p q n : ℤ) (hpq : p + q = n),
+      HomologicalComplex.ιMapBifunctor P T F.flip (.up ℤ) p q n hpq ≫ ψ.f n =
+        (p * q).negOnePow •
+          ((F.obj (T.X q)).map
+              ((DerivedNativeTensorProof.internalHomEquiv a T I P
+                ((HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).inv ≫ j)).f p ≫
+                CochainComplex.bifunctorHomπ H T I p q n (by omega)) ≫
+            (a.adj (T.X q)).counit.app (I.X n))) : ψ = j := by
+  let θ := (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).inv ≫ j
+  have hθ : (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).hom ≫ θ = j := by
+    simp [θ]
+  rw [← hθ]
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  change p + q = n at hpq
+  have hqp : q + p = n := by omega
+  have hu := DerivedNativeTensorProof.internalHomEquiv_f_π a θ p q n hqp
+  have hv := congrArg ((a.adj (T.X q)).homEquiv (P.X p) (I.X n)).symm hu
+  simp only [DerivedNativeTensorProof.curry, Adjunction.homAddEquiv_apply,
+    Equiv.symm_apply_apply] at hv
+  rw [hψ p q n hpq]
+  simp only [HomologicalComplex.comp_f, ← Category.assoc]
+  rw [HomologicalComplex.ι_mapBifunctorFlipIso_hom,
+    Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
+  change (p * q).negOnePow • _ = (q * p).negOnePow • _
+  rw [mul_comm q p]
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
@@ -125,7 +168,7 @@ private theorem normalized_binary_forget_chain
             (chain P T).hom.f n =
           (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
             (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-            (.up ℤ) q p n (by omega) := by
+            (.up ℤ) q p n (by change q + p = n; omega) := by
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)
   obtain ⟨chain, hchain⟩ := native_weil_tensor_chain k₀ l X
@@ -274,30 +317,13 @@ theorem native_forget_normalized_binary_models
   refine ⟨c, ?_, ?_⟩
   · intro p q n hpq
     have hqp : q + p = n := by omega
-    have hv : U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-          (chain P T).hom.f n =
-        (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
-          (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-          (.up ℤ) q p n hqp := by
-      exact hchain P T p q n hpq
     have hk := hκ (V.obj T) (V.obj P) q p n hqp hpq
-    have hc : Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
-        (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-          (chain P T).hom.f n).hom ≫
-        ((κ (V.obj T) (V.obj P)).hom.f n).hom =
-          Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
-            (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom := by
-      change Mod.tensorπ ((V.obj P).X p) ((V.obj T).X q) ≫
-          (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-            (chain P T).hom.f n).hom ≫
-          ((κ (V.obj T) (V.obj P)).hom.f n).hom =
-        Mod.tensorObjπ ((V.obj P).X p) ((V.obj T).X q) ≫
-          (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom
-      rw [hv]
-      have hk' := congrArg (fun z ↦ (q * p).negOnePow • z) hk
-      simp only [smul_smul, Int.units_mul_self, one_smul] at hk'
-      simpa only [Units.smul_def, Mod.zsmul_hom, Preadditive.zsmul_comp,
-        Preadditive.comp_zsmul, Category.assoc] using hk'
+    have hc := signed_composition_cancel (q * p).negOnePow
+      (Int.units_mul_self _) hk
+    have hv := congrArg (fun f ↦ f.hom) (hchain P T p q n hpq)
+    simp only [Mod.comp_hom', Units.smul_def, Mod.zsmul_hom] at hv
+    simp only [Units.smul_def] at hc
+    rw [← hv] at hc
     simpa only [c, Iso.trans_hom, HomologicalComplex.comp_f, Mod.comp_hom',
       Category.assoc] using hc
   · let C := nativeDerivedClosedComparison k₀ l X
@@ -307,15 +333,7 @@ theorem native_forget_normalized_binary_models
     have hC : C.Compatible := by
       unfold C nativeDerivedClosedComparison
       exact (native_closed_forgetful k₀ l X).2.2.2.2.choose_spec
-    let a : nativeTensorBifunctor k₀ l X ⊣₂ ihomBifunctor k₀ l X :=
-      { adj := tensorIhomAdjunction k₀ l X
-        unit_whiskerRight_map := by
-          intro A B f
-          apply NatTrans.ext
-          funext Q
-          exact (unit_conjugateEquiv_symm (tensorIhomAdjunction k₀ l X B)
-            (tensorIhomAdjunction k₀ l X A)
-            ((ihomBifunctor k₀ l X).map f.op) Q).symm }
+    let a := nativeTensorParametrizedAdjunction k₀ l X
     let N := ((nativeTensorTotal k₀ l X).obj P).obj T
     obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective N
     let θ := (HomologicalComplex.mapBifunctorFlipIso T P
@@ -323,27 +341,7 @@ theorem native_forget_normalized_binary_models
     let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
     obtain ⟨ψ, hψ, hloc⟩ := (native_normalized_tensor_models k₀ l X).choose_spec.2
       P T I hP hT hI φ
-    have hψj : ψ = j := by
-      have hθ : (HomologicalComplex.mapBifunctorFlipIso T P
-          (nativeTensorBifunctor k₀ l X) (.up ℤ)).hom ≫ θ = j := by
-        simp [θ]
-      rw [← hθ]
-      apply HomologicalComplex.hom_ext
-      intro n
-      apply HomologicalComplex.mapBifunctor.hom_ext
-      intro p q hpq
-      change p + q = n at hpq
-      have hqp : q + p = n := by omega
-      have hu := DerivedNativeTensorProof.internalHomEquiv_f_π a θ p q n hqp
-      have hv := congrArg ((a.adj (T.X q)).homEquiv (P.X p) (I.X n)).symm hu
-      simp only [DerivedNativeTensorProof.curry, Adjunction.homAddEquiv_apply,
-        Equiv.symm_apply_apply] at hv
-      rw [hψ p q n hpq]
-      simp only [HomologicalComplex.comp_f, ← Category.assoc]
-      rw [HomologicalComplex.ι_mapBifunctorFlipIso_hom,
-        Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
-      change (p * q).negOnePow • _ = (q * p).negOnePow • _
-      rw [mul_comm q p]
+    have hψj : ψ = j := normalized_binary_uncurry_eq a P T I j ψ hψ
     subst ψ
     obtain ⟨hUI, χ, hχ, hs⟩ := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
