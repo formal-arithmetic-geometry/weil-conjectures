@@ -580,7 +580,6 @@ variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   {T : NearbyCyclesModel (point k).left (point k').left}
   (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
-set_option profiler true in
 /-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
 `det-nearby-exchange-maps`, compatibility of `ν` with composition): for open immersions of models
 `φ : N ⟶ M` over `j`, `j'` and `ψ : M ⟶ P` over `ι`, `ι'`, with `P` proper over the base with
@@ -608,6 +607,7 @@ theorem compactSupportExchangeOfCompactification_comp_app
         ((φ.boundedConstructibleLowerShriekExchange ℓ hN hM).app K) ≫
       (compactSupportExchangeOfCompactification ℓ hM hS (comp_toPoint ι) (comp_toPoint ι') ψ a
         ha).app ((boundedConstructibleLowerShriek ℓ j).obj K) := by
+  -- Fix the functors before elaborating the lifted isomorphisms and compatibility identities.
   have h := CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq
     (PC := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))
     (PC' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left))
