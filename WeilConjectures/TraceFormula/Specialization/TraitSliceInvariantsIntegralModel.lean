@@ -48,7 +48,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme PadicAlgCl
 
 -- Tensoring preserves each colimit directly, avoiding repeated searches through adjoints.
-private noncomputable instance (priority := 2000) integralModelTensorLeftPreservesColimit
+noncomputable local instance (priority := 2000) integralModelTensorLeftPreservesColimit
     {J : Type} [SmallCategory J] (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
@@ -56,7 +56,7 @@ private noncomputable instance (priority := 2000) integralModelTensorLeftPreserv
     PreservesColimit F (MonoidalCategory.tensorLeft P) := by
   infer_instance
 
-private noncomputable instance (priority := 2000) integralModelTensorRightPreservesColimit
+noncomputable local instance (priority := 2000) integralModelTensorRightPreservesColimit
     {J : Type} [SmallCategory J] (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
@@ -66,7 +66,7 @@ private noncomputable instance (priority := 2000) integralModelTensorRightPreser
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option trace.profiler true in
+set_option profiler true in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
@@ -224,7 +224,7 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
       (integersResidueField ℓ E.1)⟧).obj ((Mod.extendScalars (coefficientMap
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj
           B₀.obj))
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ (by exact_mod_proofs hred))
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hred)
   refine (boundedConstructible _).prop_of_iso
     (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
       (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
