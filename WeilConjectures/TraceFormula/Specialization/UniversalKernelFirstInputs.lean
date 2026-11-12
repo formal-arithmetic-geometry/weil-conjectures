@@ -39,6 +39,39 @@ attribute [local instance] boundedConstructibleBraiding
 
 attribute [local instance] specializationLaxMonoidal specializationProdLaxMonoidal
 
+namespace NearbyCyclesModel
+
+/-- The restricted pullback exchange respects the lax monoidal tensor maps. Keeping the models
+abstract here avoids rewriting tensor maps after substituting the deformation models. -/
+lemma Hom.boundedConstructiblePullbackExchange_lax_tensor
+    {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k] [Field k']
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    {X' Y' : Over (Spec (.of k'))}
+    [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+    [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+    {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
+    {j : Y ⟶ X} {j' : Y' ⟶ X'} (φ : N.Hom M j.left j'.left)
+    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((φ.boundedConstructiblePullbackExchange ℓ hN hM).app A ⊗ₘ
+        (φ.boundedConstructiblePullbackExchange ℓ hN hM).app B) ≫
+        Functor.LaxMonoidal.μ (boundedConstructibleNearbyCycles hN) _ _ ≫
+          (boundedConstructibleNearbyCycles hN).map (Functor.LaxMonoidal.μ
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) A B) =
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j')
+          _ _ ≫ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
+          (Functor.LaxMonoidal.μ (boundedConstructibleNearbyCycles hM) A B) ≫
+        (φ.boundedConstructiblePullbackExchange ℓ hN hM).app (A ⊗ B) := by
+  rw [boundedConstructibleNearbyCycles_μ, boundedConstructibleNearbyCycles_μ]
+  exact φ.boundedConstructiblePullbackExchange_tensor hN hM A B
+
+end NearbyCyclesModel
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Algebra k k']
@@ -75,9 +108,6 @@ noncomputable abbrev specializationSndExchange :
       (isTraitModel_deformationModel X x.left.ker k')
       (deformationModel_exists_comp_ε X x.left.ker k'))
 
-set_option maxHeartbeats 1000000 in
-set_option profiler true in
--- the lax tensor maps of the restricted nearby cycles are matched against the ambient ones
 /-- **The pullback exchange of the second projection is monoidal**, in the lax form:
 `(α ⊗ α) ≫ μ ≫ Sp(μ) = μ ≫ p_{2s}^*(μ) ≫ α`. -/
 lemma specializationSndExchange_tensor (K N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -92,7 +122,7 @@ lemma specializationSndExchange_tensor (K N : Dᵇc(X.left)⟦Profinite.padicAlg
           (Functor.LaxMonoidal.μ (specialization k' x) K N) ≫
         (specializationSndExchange k' x).app (K ⊗ N) := by
   have h :=
-    NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange_tensor
+    NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange_lax_tensor
       (deformationProdSndModelHom X x.left.ker X x.left.ker k')
     (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
       (deformationProdModel X x.left.ker X x.left.ker k')
@@ -101,8 +131,6 @@ lemma specializationSndExchange_tensor (K N : Dᵇc(X.left)⟦Profinite.padicAlg
     ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
       (isTraitModel_deformationModel X x.left.ker k')
       (deformationModel_exists_comp_ε X x.left.ker k')) K N
-  rw [← NearbyCyclesModel.boundedConstructibleNearbyCycles_μ,
-    ← NearbyCyclesModel.boundedConstructibleNearbyCycles_μ] at h
   transport_exact h
 
 /-- The duality map `δ_K` of the specialization is the adjoint of `θ ∘ Sp(ev) ∘ μ`. -/
