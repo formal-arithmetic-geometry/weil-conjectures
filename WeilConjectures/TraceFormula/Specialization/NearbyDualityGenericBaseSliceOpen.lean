@@ -523,7 +523,6 @@ private lemma boundedConstructibleNearbyCycles_map_hom'' {X X' : Scheme.{u}}
       (N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map f.hom :=
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the motive checks of the rewrites in the proof take a few seconds each on the large goal
 /-- **The square law of the pullback exchanges** on bounded constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_square`), for a commutative square of morphisms of
@@ -609,7 +608,6 @@ noncomputable def boundedConstructibleTateTwistZeroUpperStarIso (f : Y.left ⟶ 
         (boundedConstructibleTateTwist ℓ X 0 n) ≅ boundedConstructibleTateTwist ℓ Y 0 n :=
   ObjectProperty.isoMk _ (tateTwistZeroShiftUpperStarIso ℓ f n)
 
-set_option maxHeartbeats 1000000 in
 -- the motive checks of the rewrites in the proof take a few seconds each
 /-- **The pullback exchange and the specialization maps of `ℚ̄_ℓ(0)[n]`** on bounded
 constructible complexes
