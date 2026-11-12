@@ -150,6 +150,7 @@ lemma weilUpperStarComparison_hom_app_eq {Φ : X ⟶ X} {ΦU : U ⟶ U} (hj : Φ
         sq).hom.app K := by
   rw [weilUpperStarComparison_hom_app, boundedConstructiblePullbackSquareComparison_hom_app]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the rewriting slow
 /-- **The extension by zero commutes with the pullbacks along the Frobenii** (blueprint
