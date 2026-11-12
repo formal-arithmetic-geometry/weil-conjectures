@@ -21,11 +21,12 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance 2000] schemeOpenRestriction_additive
+  schemeOpenRestriction_preservesFiniteLimits schemeOpenRestriction_preservesFiniteColimits
+  schemeOpenOverlapRestriction_additive schemeOpenOverlapRestriction_preservesFiniteLimits
+  schemeOpenOverlapRestriction_preservesFiniteColimits
 
-set_option diagnostics true in
--- Elaborating the derived restriction comparisons needs this larger budget.
+set_option profiler true in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Glue derived objects and compatible maps on the union, using ambient relative
