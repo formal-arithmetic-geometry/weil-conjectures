@@ -77,8 +77,6 @@ private theorem tensorNormalization_flat_onSite
   intro P Q _ _ _ _
   exact (hn P Q).symm
 
-set_option profiler true in
--- The derived-instance conversions require additional kernel heartbeats.
 /-- The inverse exceptional tensorator is the ordinary scalar tensor comparison.
 Source: Stacks 07A4 and blueprint thm-coef-finite-hom, evaluation paragraph
 (blueprint: lem-coef-finite-hom-scalar-tensor-normalization).

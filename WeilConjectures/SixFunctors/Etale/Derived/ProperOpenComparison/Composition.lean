@@ -117,7 +117,6 @@ variable {X T₁ T₂ T₃ : Scheme.{u}} (u : T₁ ⟶ T₂) (v : T₂ ⟶ T₃)
   (j₃ : X ⟶ T₃) [IsProper u] [IsProper v] [IsOpenImmersion j₁] [IsOpenImmersion j₂]
   [IsOpenImmersion j₃] (h₁ : j₁ ≫ u = j₂) (h₂ : j₂ ≫ v = j₃)
 
-set_option profiler true in
 /-- Blueprint `lem-weil-pbc-proper-open-comparison-composition`: Composition of proper-open
 comparison maps. For proper `u : T₁ ⟶ T₂`, `v : T₂ ⟶ T₃` and open immersions `jᵢ : X ⟶ Tᵢ` with
 `j₁ ≫ u = j₂`, `j₂ ≫ v = j₃`,

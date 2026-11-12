@@ -86,6 +86,24 @@ private theorem map_heq {C D : Type*} [Category C] [Category D]
   subst A' B'
   exact heq_of_eq (congrArg F.map (eq_of_heq h))
 
+private theorem stageScalarArrow_heq
+    {I : Type*} [Preorder I] [IsDirectedOrder I]
+    {C D : I → Type*} [∀ i, Category (C i)] [∀ i, Category (D i)]
+    {S : StageSystem C} {T : StageSystem D} (F : S.Morphism T)
+    {i j : I} (h : i ≤ j) {x : C i} {y : C j} {u : D i} {v w : D j}
+    (eY : (S.T h).obj x = y) (eX : (T.T h).obj u = v)
+    (hobj : (F.Φ i).obj x = u) (hobjL : (F.Φ j).obj y = w)
+    {f : v ⟶ w} (hβ : HEq ((F.β h).hom.app x) f) :
+    HEq (F.functor.map
+      ((S.isoToStage ((S.ι i).obj x) h).hom ≫ (S.ι j).map (eqToHom eY)))
+      (((T.isoToStage ((T.ι i).obj u) h).hom ≫ (T.ι j).map (eqToHom eX)) ≫
+        (T.ι j).map f) := by
+  subst u y v w
+  have hf := eq_of_heq hβ
+  subst f
+  simp only [eqToHom_refl, Functor.map_id, Category.comp_id]
+  rw [map_isoToStage]
+
 set_option profiler true in
 -- Stage descent transports several dependent category presentations.
 /-- Pullback of a literal coefficient arrow is the localized integral scalar map,
@@ -138,15 +156,6 @@ theorem commonStageIntegralScalarArrow (l : ℕ) [Fact l.Prime]
               (coefficientInclusion l Ω E L h) g K).hom)) := by
   obtain ⟨hc, he⟩ := commonStagePullbackNormalizedDescent l Ω g
   rw [he]
-  simp only [Functor.map_comp, eqToHom_map, comp_eqToHom_heq_iff]
-  rw [map_isoToStage]
-  change HEq
-    (((stageSystem l Ω X).isoToStage
-      ⟨E, (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).obj
-        ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) Y).obj K)⟩ h).hom ≫
-      ((stageSystem l Ω X).ι L).map
-        ((commonStagePullbackTransition l Ω g h).hom.app
-          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) Y).obj K))) _
   have hobj :
       (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).obj
         ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) Y).obj K) =
@@ -190,20 +199,6 @@ theorem commonStageIntegralScalarArrow (l : ℕ) [Fact l.Prime]
     exact ((rationalPullbackScalarComparison_existsUnique l
         (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
         (coefficientInclusion l Ω E L h) g).exists.choose_spec _)
-  have eA := (congrArg ((stageSystem l Ω X).T h).obj hobj).trans
-    eX
-  have eB := (congrArg
-      (rationalDerivedPullback l (Coefficient.{u} l Ω L) g).obj
-      eY).trans hobjL
-  have hm := map_heq (inclusion (l := l) (Ω := Ω) (Y := X) L) eA eB hβ
-  erw [Category.assoc]
-  apply heq_comp
-    (congrArg ((stageSystem l Ω X).ι E).obj hobj)
-    (congrArg ((stageSystem l Ω X).ι L).obj
-      (congrArg ((stageSystem l Ω X).T h).obj hobj))
-    (congrArg ((stageSystem l Ω X).ι L).obj eB)
-  · exact isoToStage_heq _
-      (congrArg ((stageSystem l Ω X).ι E).obj hobj) h h
-  · exact hm.trans (eqToHom_comp_heq _ _).symm
+  exact stageScalarArrow_heq ⟨_, _, hc⟩ h eY eX hobj hobjL hβ
 
 end WeilConjectures.AdicQbarRealization
