@@ -385,194 +385,6 @@ private theorem constantRingScalar
   rw [hi, CategoryTheory.Functor.map_id]
   exact congrArg (fun f ↦ f.app U a) h
 
-section
-
-variable (O : Type (u + 1)) [CommRing O] (ell : O)
-  {X Y : Scheme.{u}} (g : X ⟶ Y) (A : StrictEtaleOrdinaryImage O ell g) (n : ℕ)
-
--- Keep the graph calculations independent of the integral coefficient presentation.
-set_option profiler true in
-private theorem finiteRightUnderlying_unit
-    (M : strictEtaleLevel X O ell n) (T : Sheaf Y.smallEtaleTopology (Type (u + 1)))
-    (a : T ⟶ (coefficientUnderlying (J := Y.smallEtaleTopology) O ell n).obj
-      ((A.right n).obj M)) (U : Y.Etaleᵒᵖ) (z : T.obj.obj U) :
-    ((A.rightUnderlying n).hom.app M).hom.app U (a.hom.app U z) =
-      ((A.levelAdj n).counit.app M).val.app
-        ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U)
-        (((A.lift n).moduleUnderlying.inv.app ((A.right n).obj M)).hom.app
-          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U)
-          (((Scheme.etaleSetPullback g).map a).hom.app
-            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U)
-            (((strictEtaleSetAdjunction g).unit.app T).hom.app U z))) := by
-  let p := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g
-  let L := Scheme.etaleSetPullback g
-  let adj := strictEtaleSetAdjunction g
-  let Q := coefficientUnderlying (J := Y.smallEtaleTopology) O ell n
-  let I := A.lift n
-  let R := A.right n
-  let β := A.rightUnderlying n
-  let V := coefficientUnderlying (J := X.smallEtaleTopology) O ell n
-  have hβ (M) : β.hom.app M = adj.homEquiv _ _
-      (I.moduleUnderlying.inv.app (R.obj M) ≫
-        V.map ((A.levelAdj n).counit.app M)) := by
-    have hc : (A.levelAdj n).homEquiv (R.obj M) M
-        ((A.levelAdj n).counit.app M) = 𝟙 _ := by
-      rw [← Adjunction.homEquiv_symm_id]
-      exact ((A.levelAdj n).homEquiv (R.obj M) M).apply_symm_apply _
-    have h := A.levelTranspose n (R.obj M) M
-      ((A.levelAdj n).counit.app M)
-    change (A.levelAdj n).homEquiv (R.obj M) M
-      ((A.levelAdj n).counit.app M) = 𝟙 _ at hc
-    change Q.map ((A.levelAdj n).homEquiv (R.obj M) M
-      ((A.levelAdj n).counit.app M)) ≫ β.hom.app M = _ at h
-    rw [hc, Q.map_id, Category.id_comp] at h
-    exact h
-  rw [hβ, Adjunction.homEquiv_unit]
-  have h := congrArg (fun f ↦ f.hom.app U z) (adj.unit.naturality a)
-  change (adj.unit.app (Q.obj (R.obj M))).hom.app U (a.hom.app U z) =
-    (L.map a).hom.app (p.op.obj U)
-      ((adj.unit.app T).hom.app U z) at h
-  exact congrArg (fun x ↦
-    ((A.levelAdj n).counit.app M).val.app (p.op.obj U)
-      ((I.moduleUnderlying.inv.app (R.obj M)).hom.app
-        (p.op.obj U) x)) h
-
-set_option profiler true in
-private theorem finiteRightUnderlying_add
-    (M : strictEtaleLevel X O ell n) (U : Y.Etaleᵒᵖ) (x y : ((A.right n).obj M).val.obj U) :
-      ((A.rightUnderlying n).hom.app M).hom.app U (x + y) =
-        (show M.val.obj
-            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
-          ((A.rightUnderlying n).hom.app M).hom.app U x) +
-        (show M.val.obj
-            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
-          ((A.rightUnderlying n).hom.app M).hom.app U y) := by
-  let p := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g
-  let adj := strictEtaleSetAdjunction g
-  let Q := coefficientUnderlying (J := Y.smallEtaleTopology) O ell n
-  let I := A.lift n
-  let R := A.right n
-  let β := A.rightUnderlying n
-  have hunit := finiteRightUnderlying_unit O ell g A n
-  let Tmod := Q.obj (R.obj M)
-  let T := (CategoryTheory.MonoidalCategory.tensorObj Tmod Tmod)
-  let a : T ⟶ Tmod := CartesianMonoidalCategory.fst Tmod Tmod
-  let b : T ⟶ Tmod := CartesianMonoidalCategory.snd Tmod Tmod
-  let t : T ⟶ Tmod := ⟨{
-    app := fun Y ↦ ↾fun z ↦
-      (show (R.obj M).val.obj Y from z.1) +
-        (show (R.obj M).val.obj Y from z.2)
-    naturality := by
-      intro Y Z f
-      ext z
-      exact ((R.obj M).val.map f).hom.map_add z.1 z.2 |>.symm }⟩
-  have h := I.moduleAdd (R.obj M) T a b t (fun _ _ ↦ rfl)
-    (p.op.obj U) ((adj.unit.app T).hom.app U (x, y))
-  have ha := hunit M T a U (x, y)
-  have hb := hunit M T b U (x, y)
-  have ht := hunit M T t U (x, y)
-  change (β.hom.app M).hom.app U (x + y) = _ at ht
-  change (β.hom.app M).hom.app U x = _ at ha
-  change (β.hom.app M).hom.app U y = _ at hb
-  dsimp only [id] at h
-  let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
-  exact ht.trans ((congrArg ε h).trans
-    ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
-
-set_option profiler true in
-private theorem finiteRightUnderlying_smul
-    (M : strictEtaleLevel X O ell n) (U : Y.Etaleᵒᵖ)
-    (q : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) (x : ((A.right n).obj M).val.obj U) :
-      ((A.rightUnderlying n).hom.app M).hom.app U
-        ((toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
-          (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U q • x) =
-      (toSheafify (X.smallEtaleTopology) ((Functor.const X.Etaleᵒᵖ).obj
-        (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app
-          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) q •
-        (show M.val.obj
-            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
-          ((A.rightUnderlying n).hom.app M).hom.app U x) := by
-  let p := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g
-  let L := Scheme.etaleSetPullback g
-  let adj := strictEtaleSetAdjunction g
-  let Q := coefficientUnderlying (J := Y.smallEtaleTopology) O ell n
-  let I := A.lift n
-  let R := A.right n
-  let β := A.rightUnderlying n
-  have hunit := finiteRightUnderlying_unit O ell g A n
-  let Tmod := Q.obj (R.obj M)
-  let S := (constantSheaf Y.smallEtaleTopology (Type (u + 1))).obj PUnit
-  let T := CategoryTheory.MonoidalCategory.tensorObj S Tmod
-  let a : T ⟶ _ := CartesianMonoidalCategory.fst S Tmod ≫
-    coefficientConstantSection (J := Y.smallEtaleTopology)
-      O ell n q
-  let b : T ⟶ Tmod := CartesianMonoidalCategory.snd S Tmod
-  let t : T ⟶ Tmod := ⟨{
-    app := fun U₀ ↦ ↾fun z ↦
-      (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
-        O ell n).obj.obj U₀
-          from a.hom.app U₀ z) • (show (R.obj M).val.obj U₀ from z.2)
-    naturality := by
-      intro U₀ Z f
-      ext z
-      have hn := congrArg (fun k ↦ k z) (a.hom.naturality f).symm
-      change (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
-        O ell n).obj.map f
-          (a.hom.app U₀ z) = a.hom.app Z (T.obj.map f z) at hn
-      symm
-      change (R.obj M).val.map f
-        ((show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
-          O ell n).obj.obj U₀
-            from a.hom.app U₀ z) • (show (R.obj M).val.obj U₀ from z.2)) =
-        (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
-          O ell n).obj.obj Z
-            from a.hom.app Z (T.obj.map f z)) •
-              (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)
-      rw [(R.obj M).val.map_smul]
-      exact congrArg (fun c : (coefficientQuotientSheaf
-        (J := Y.smallEtaleTopology) O ell n).obj.obj Z ↦
-          c • (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)) hn }⟩
-  let z : T.obj.obj U :=
-    ((toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
-      (PUnit.{u + 2} : Type (u + 1)))).app U PUnit.unit, x)
-  have ha : a.hom.app U z =
-      (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
-        (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U q :=
-    constantSection_apply Y.smallEtaleTopology _ q U z.1
-  have h := I.moduleSMul (R.obj M) T a b t (fun _ _ ↦ rfl)
-    (p.op.obj U) ((adj.unit.app T).hom.app U z)
-  have hc : L.map a ≫ I.ringUnderlying.hom =
-      L.map (CartesianMonoidalCategory.fst S Tmod) ≫ A.singleton.hom ≫
-        coefficientConstantSection (J := X.smallEtaleTopology)
-          O ell n q := by
-    dsimp only [a]
-    rw [L.map_comp, Category.assoc, A.constants]
-  have hc' := congrArg (fun f ↦ f.hom.app (p.op.obj U)
-    ((adj.unit.app T).hom.app U z)) hc
-  have ht := hunit M T t U z
-  have hb := hunit M T b U z
-  change (β.hom.app M).hom.app U
-    ((show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
-      O ell n).obj.obj U
-        from a.hom.app U z) • x) = _ at ht
-  change (β.hom.app M).hom.app U x = _ at hb
-  rw [ha] at ht
-  dsimp only [id] at h
-  have hconst := constantSection_apply (X.smallEtaleTopology)
-    (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) q (p.op.obj U)
-    ((A.singleton.hom).hom.app (p.op.obj U)
-      ((L.map (CartesianMonoidalCategory.fst S Tmod)).hom.app
-        (p.op.obj U) ((adj.unit.app T).hom.app U z)))
-  change (I.ringUnderlying.hom).hom.app (p.op.obj U)
-    ((L.map a).hom.app (p.op.obj U)
-      ((adj.unit.app T).hom.app U z)) = _ at hc'
-  have hs := hc'.trans hconst
-  let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
-  exact ht.trans ((congrArg ε h).trans
-    ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
-
-end
-
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
   (A : StrictEtaleOrdinaryImage (integralExceptionalIntegers l E)
     (integralExceptionalUniformizer l E) g)
@@ -601,12 +413,157 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
   let := integralExceptionalEtaleForget Y
   let := integralExceptionalEtaleForget X
   let p := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g
+  let L := Scheme.etaleSetPullback g
+  let adj := strictEtaleSetAdjunction g
+  let Q := coefficientUnderlying (J := Y.smallEtaleTopology)
+    (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n
+  let V := coefficientUnderlying (J := X.smallEtaleTopology)
+    (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n
+  let I := A.lift n
   let R := A.right n
   let β := A.rightUnderlying n
-  have hadd := finiteRightUnderlying_add (integralExceptionalIntegers l E)
-    (integralExceptionalUniformizer l E) g A n
-  have hsmul := finiteRightUnderlying_smul (integralExceptionalIntegers l E)
-    (integralExceptionalUniformizer l E) g A n
+  have hβ (M) : β.hom.app M = adj.homEquiv _ _
+      (I.moduleUnderlying.inv.app (R.obj M) ≫
+        V.map ((A.levelAdj n).counit.app M)) := by
+    have hc : (A.levelAdj n).homEquiv (R.obj M) M
+        ((A.levelAdj n).counit.app M) = 𝟙 _ := by
+      rw [← Adjunction.homEquiv_symm_id]
+      exact ((A.levelAdj n).homEquiv (R.obj M) M).apply_symm_apply _
+    have h := A.levelTranspose n (R.obj M) M
+      ((A.levelAdj n).counit.app M)
+    change (A.levelAdj n).homEquiv (R.obj M) M
+      ((A.levelAdj n).counit.app M) = 𝟙 _ at hc
+    change Q.map ((A.levelAdj n).homEquiv (R.obj M) M
+      ((A.levelAdj n).counit.app M)) ≫ β.hom.app M = _ at h
+    rw [hc, Q.map_id, Category.id_comp] at h
+    exact h
+  have hunit (M) (T : Sheaf Y.smallEtaleTopology (Type (u + 1)))
+      (a : T ⟶ Q.obj (R.obj M)) (U : Y.Etaleᵒᵖ) (z : T.obj.obj U) :
+      (β.hom.app M).hom.app U (a.hom.app U z) =
+      ((A.levelAdj n).counit.app M).val.app (p.op.obj U)
+        ((I.moduleUnderlying.inv.app (R.obj M)).hom.app (p.op.obj U)
+          ((L.map a).hom.app (p.op.obj U)
+            ((adj.unit.app T).hom.app U z))) := by
+    rw [hβ, Adjunction.homEquiv_unit]
+    have h := congrArg (fun f ↦ f.hom.app U z) (adj.unit.naturality a)
+    change (adj.unit.app (Q.obj (R.obj M))).hom.app U (a.hom.app U z) =
+      (L.map a).hom.app (p.op.obj U)
+        ((adj.unit.app T).hom.app U z) at h
+    exact congrArg (fun x ↦
+      ((A.levelAdj n).counit.app M).val.app (p.op.obj U)
+        ((I.moduleUnderlying.inv.app (R.obj M)).hom.app
+          (p.op.obj U) x)) h
+  have hadd (M) (U : Y.Etaleᵒᵖ) (x y : (R.obj M).val.obj U) :
+      (β.hom.app M).hom.app U (x + y) =
+        (show M.val.obj (p.op.obj U) from
+          (β.hom.app M).hom.app U x) +
+        (show M.val.obj (p.op.obj U) from
+          (β.hom.app M).hom.app U y) := by
+    let Tmod := Q.obj (R.obj M)
+    let T := (CategoryTheory.MonoidalCategory.tensorObj Tmod Tmod)
+    let a : T ⟶ Tmod := CartesianMonoidalCategory.fst Tmod Tmod
+    let b : T ⟶ Tmod := CartesianMonoidalCategory.snd Tmod Tmod
+    let t : T ⟶ Tmod := ⟨{
+      app := fun Y ↦ ↾fun z ↦
+        (show (R.obj M).val.obj Y from z.1) +
+          (show (R.obj M).val.obj Y from z.2)
+      naturality := by
+        intro Y Z f
+        ext z
+        exact ((R.obj M).val.map f).hom.map_add z.1 z.2 |>.symm }⟩
+    have h := I.moduleAdd (R.obj M) T a b t (fun _ _ ↦ rfl)
+      (p.op.obj U) ((adj.unit.app T).hom.app U (x, y))
+    have ha := hunit M T a U (x, y)
+    have hb := hunit M T b U (x, y)
+    have ht := hunit M T t U (x, y)
+    change (β.hom.app M).hom.app U (x + y) = _ at ht
+    change (β.hom.app M).hom.app U x = _ at ha
+    change (β.hom.app M).hom.app U y = _ at hb
+    dsimp only [id] at h
+    let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
+    exact ht.trans ((congrArg ε h).trans
+      ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
+  have hsmul (M) (U : Y.Etaleᵒᵖ) (q : integralExceptionalQuotientRing l E n)
+      (x : (R.obj M).val.obj U) :
+      (β.hom.app M).hom.app U
+        ((toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
+          (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app U q • x) =
+      (toSheafify (X.smallEtaleTopology) ((Functor.const X.Etaleᵒᵖ).obj
+        (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app
+          (p.op.obj U) q •
+        (show M.val.obj (p.op.obj U) from
+          (β.hom.app M).hom.app U x) := by
+    let Tmod := Q.obj (R.obj M)
+    let S := (constantSheaf Y.smallEtaleTopology (Type (u + 1))).obj PUnit
+    let T := CategoryTheory.MonoidalCategory.tensorObj S Tmod
+    let a : T ⟶ _ := CartesianMonoidalCategory.fst S Tmod ≫
+      coefficientConstantSection (J := Y.smallEtaleTopology)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n q
+    let b : T ⟶ Tmod := CartesianMonoidalCategory.snd S Tmod
+    let t : T ⟶ Tmod := ⟨{
+      app := fun U₀ ↦ ↾fun z ↦
+        (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
+          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U₀
+            from a.hom.app U₀ z) • (show (R.obj M).val.obj U₀ from z.2)
+      naturality := by
+        intro U₀ Z f
+        ext z
+        have hn := congrArg (fun k ↦ k z) (a.hom.naturality f).symm
+        change (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
+          (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.map f
+            (a.hom.app U₀ z) = a.hom.app Z (T.obj.map f z) at hn
+        symm
+        change (R.obj M).val.map f
+          ((show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
+            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U₀
+              from a.hom.app U₀ z) • (show (R.obj M).val.obj U₀ from z.2)) =
+          (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
+            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj Z
+              from a.hom.app Z (T.obj.map f z)) •
+                (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)
+        rw [(R.obj M).val.map_smul]
+        exact congrArg (fun c : (coefficientQuotientSheaf
+          (J := Y.smallEtaleTopology) (integralExceptionalIntegers l E)
+          (integralExceptionalUniformizer l E) n).obj.obj Z ↦
+            c • (show (R.obj M).val.obj Z from (R.obj M).val.map f z.2)) hn }⟩
+    let z : T.obj.obj U :=
+      ((toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
+        (PUnit.{u + 2} : Type (u + 1)))).app U PUnit.unit, x)
+    have ha : a.hom.app U z =
+        (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
+          (CommRingCat.of (integralExceptionalQuotientRing l E n)))).app U q :=
+      constantSection_apply Y.smallEtaleTopology _ q U z.1
+    have h := I.moduleSMul (R.obj M) T a b t (fun _ _ ↦ rfl)
+      (p.op.obj U) ((adj.unit.app T).hom.app U z)
+    have hc : L.map a ≫ I.ringUnderlying.hom =
+        L.map (CartesianMonoidalCategory.fst S Tmod) ≫ A.singleton.hom ≫
+          coefficientConstantSection (J := X.smallEtaleTopology)
+            (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n q := by
+      dsimp only [a]
+      rw [L.map_comp, Category.assoc, A.constants]
+    have hc' := congrArg (fun f ↦ f.hom.app (p.op.obj U)
+      ((adj.unit.app T).hom.app U z)) hc
+    have ht := hunit M T t U z
+    have hb := hunit M T b U z
+    change (β.hom.app M).hom.app U
+      ((show (coefficientQuotientSheaf (J := Y.smallEtaleTopology)
+        (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n).obj.obj U
+          from a.hom.app U z) • x) = _ at ht
+    change (β.hom.app M).hom.app U x = _ at hb
+    rw [ha] at ht
+    dsimp only [id] at h
+    have hconst := constantSection_apply (X.smallEtaleTopology)
+      (integralExceptionalQuotientRing l E n) q (p.op.obj U)
+      ((A.singleton.hom).hom.app (p.op.obj U)
+        ((L.map (CartesianMonoidalCategory.fst S Tmod)).hom.app
+          (p.op.obj U) ((adj.unit.app T).hom.app U z)))
+    change (I.ringUnderlying.hom).hom.app (p.op.obj U)
+      ((L.map a).hom.app (p.op.obj U)
+        ((adj.unit.app T).hom.app U z)) = _ at hc'
+    have hs := hc'.trans hconst
+    let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
+    exact ht.trans ((congrArg ε h).trans
+      ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
   let F := R ⋙ integralExceptionalEtaleRealization l E Y n
   let G := integralExceptionalEtaleRealization l E X n ⋙
     Etale.lowerStar (ModuleCat.{u + 1}
