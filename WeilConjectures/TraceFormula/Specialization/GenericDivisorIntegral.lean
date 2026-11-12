@@ -125,8 +125,10 @@ private lemma isGE_upperStar_lowerShriek_extendScalars
     (n : ℤ) [((L((f)^*⟦Λ⟧)).obj (D((o)_!open⟦Λ⟧).obj K)).IsGE n] :
     ((L((f)^*⟦Λ'⟧)).obj (D((o)_!open⟦Λ'⟧).obj
       ((L(Mod.extendScalars (coefficientMap a U))).obj K))).IsGE n := by
-  have := isGE_leftDerivedFunctor_extendScalars_obj a
-    ((L((f)^*⟦Λ⟧)).obj (D((o)_!open⟦Λ⟧).obj K)) n
+  have : ((L((f)^*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a Y))).obj
+      (D((o)_!open⟦Λ⟧).obj K)).IsGE n :=
+    isGE_leftDerivedFunctor_extendScalars_obj a
+      ((L((f)^*⟦Λ⟧)).obj (D((o)_!open⟦Λ⟧).obj K)) n
   exact DerivedCategory.TStructure.t.isGE_of_iso
     ((derivedUpperStarExtendScalarsIso a f).app (D((o)_!open⟦Λ⟧).obj K) ≪≫
       (L((f)^*⟦Λ'⟧)).mapIso ((derivedOpenImmersionShriekIso a o).app K)) n
@@ -230,6 +232,7 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
           (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀))) n := by
     have hn' := isGE_upperStar_lowerShriek_extendScalars
       (padicIntegersRingObjToContinuousMapRingObj ℓ E) o M.ε K₀ n
+    dsimp only [DerivedCategory.IsGE] at hn'
     transport_mod_proofs hn'
   have hφ₂ := isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E M.j
     (n := n) (K := (L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj
