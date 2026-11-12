@@ -218,11 +218,29 @@ theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : Grothendieck
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]
     (S T : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
-    (M : CoefficientTensorModels.{r, c, v, w} J R S) :
+    (M : CoefficientTensorModels.{r, c, v, w} J R S)
+    (u : ∀ (P L : ObjectProperty.FullSubcategory
+        (CochainComplex.IsKFlatIndependentCoefficients.{c, v, max c v r}
+          (J := J) (R := R))),
+      ∀ (N : CochainComplex (SheafOfModules.{max c v r}
+        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ),
+      ∀ (φ : P.1 ⟶ homComplex.{c, v, max c v r, max c v r} (R := R) L.1
+          ((coefficientHomResolution.{r, c, v} J R).obj N)),
+      ∃ ψ : (coefficientTotalTensor.{r, c, v} J R).obj (P.1, L.1) ⟶
+          (coefficientHomResolution.{r, c, v} J R).obj N,
+        ((∀ (p q k : ℤ) (h : p + q = k) (h' : q + p = k) (U : Cᵒᵖ)
+          (x : (P.1.X p).val.obj U) (y : (L.1.X q).val.obj U),
+          (ψ.f k).val.app U (coefficientTensorGenerator.{r, c, v} J R P.1 L.1 p q k h U x y) =
+            coefficientHomSectionEvaluation.{r, c, v} J R P.1 L.1 N φ p q k h' U x y) ∧
+        M.comparison.hom.app (P, L) ≫
+          (S.transpose (DerivedCategory.Q.obj P.1) (DerivedCategory.Q.obj L.1)
+            (DerivedCategory.Q.obj N)).symm
+              (DerivedCategory.Q.map φ ≫
+                (coefficientHomResolutionIso.{r, c, v, w} J R L.1 N).inv) =
+          DerivedCategory.Q.map ψ ≫ coefficientHomResolutionInverse.{r, c, v, w} J R N)) :
     CoefficientTensorUncurryModel.{r, c, v, w} J R T
       (tensorModelsComparison J R S T M) := by
   intro P L N φ
-  let u := M.uncurry_model
   obtain ⟨ψ, hψ, he⟩ := u P L N φ
   refine ⟨ψ, hψ, ?_⟩
   change (M.comparison.hom.app (P, L) ≫
@@ -257,7 +275,7 @@ def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (M : CoefficientTensorModels.{r, c, v, w} J R S) :
     CoefficientTensorModels.{r, c, v, w} J R T where
   comparison := tensorModelsComparison J R S T M
-  uncurry_model := tensorModelsUncurryModel J R S T M
+  uncurry_model := tensorModelsUncurryModel J R S T M M.uncurry_model
 
 /-- Fixed normalized closed structures, with the old representative models transported
 by the uniquely evaluation-preserving comparison. -/
