@@ -50,6 +50,23 @@ theorem mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} {_ : Category C₁} 
     simp
   simp [this]
 
+/-- Transporting an exact functor's localization factor gives the factor of the equal functor.
+Source: Stacks 05RU. -/
+private theorem reductionSystemFactorOfIso_mapDerived
+    {C₁ C₂ : Type*} {_ : Category C₁} {_ : Abelian C₁} {_ : HasDerivedCategory C₁}
+    {_ : Category C₂} {_ : Abelian C₂} {_ : HasDerivedCategory C₂}
+    (F G : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (hFG : F = G) (h : F.mapDerivedCategory = G.mapDerivedCategory)
+    (K : CochainComplex C₁ ℤ) :
+    (reductionSystemFactorOfIso DerivedCategory.Q DerivedCategory.Q
+      (F.mapHomologicalComplex (.up ℤ)) (G.mapHomologicalComplex (.up ℤ))
+      F.mapDerivedCategory G.mapDerivedCategory
+      (NatIso.mapHomologicalComplex (eqToIso hFG) (.up ℤ)) (eqToIso h)
+      F.mapDerivedCategoryFactors).hom.app K = G.mapDerivedCategoryFactors.hom.app K := by
+  rw [reductionSystemFactorOfIso_hom]
+  exact mapDerivedCategoryFactors_congr F G hFG h K
+
 
 /-- The localization factor transported along an equality of derived functors.
 Source: Stacks 05RU. -/
@@ -136,7 +153,6 @@ set_option quotPrecheck false in
 set_option hygiene false in
 local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 
-set_option maxHeartbeats 2000000 in
 -- The representative assembles several large localized and sectionwise comparisons.
 /-- The whole-system reduction mate has an ordinary quotient representative.
 Source: blueprint dual-Tate compatibility Steps 1, 2 and 4; Stacks 03EL, 07A6, 0941.
@@ -175,10 +191,12 @@ theorem unary_model_core {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     simp only [Iso.trans_hom, HomologicalComplex.comp_f, Functor.mapIso_hom, Iso.app_hom,
       Iso.symm_hom, NatIso.mapHomologicalComplex_hom_app_f, SheafOfModules.comp_val,
       PresheafOfModules.comp_app]
-    rw [ConcreteCategory.comp_apply]
-    refine (congrArg (fun z ↦ ((((pullbackTensorOrdinaryReduction l E X).mapHomologicalComplex
-      (.up ℤ)).map (e₀.app P.obj).inv).f i).val.app (op (n, U)) z)
-      (reindexNormalized_tensor l E g MY MX b hb (P.obj.X i) n U a x)).trans ?_
+    simp only [ConcreteCategory.comp_apply]
+    have ht := reindexNormalized_tensor l E g MY MX b hb (P.obj.X i) n U a x
+    have ht' := congrArg (fun z ↦
+      ((((pullbackTensorOrdinaryReduction l E X).mapHomologicalComplex
+        (.up ℤ)).map (e₀.app P.obj).inv).f i).val.app (op (n, U)) z) ht
+    refine ht'.trans ?_
     simp only [Functor.mapHomologicalComplex_map_f, Iso.app_inv, e₀,
       NatIso.mapHomologicalComplex_inv_app_f, eqToIso.inv, eqToHom_app]
     exact reductionEvaluation_eqToHom l E X
@@ -188,16 +206,15 @@ theorem unary_model_core {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     have hsys : (systemFactor l E g).hom.app ((R[Y]).obj P.obj) =
         (integralComparisonSequencePullback l E g).mapDerivedCategoryFactors.hom.app
           ((R[Y]).obj P.obj) := by
-      rw [systemFactor, reductionSystemFactorOfIso_hom]
-      exact mapDerivedCategoryFactors_congr _ _ (inverse_eq l E g) (derived_eq l E g) _
+      exact reductionSystemFactorOfIso_mapDerived
+        (C₁ := coefficientSequenceModules l E Y) (C₂ := coefficientSequenceModules l E X)
+        _ _ (inverse_eq l E g) (derived_eq l E g) _
     have hfac := reductionFactorOfIso_mapDerived (podReindexingFunctor l E g none)
       (isoReductionIntegralInverse l E g) (podOrdinaryReindex l E g) hF h rfl P.obj
     have hfac2 : (factor l E g h).hom.app P.obj ≫ _ = _ := hfac
-    have hfac3 := congrArg (· ≫ DerivedCategory.Q.map
-      ((NatIso.mapHomologicalComplex (eqToIso hF) (.up ℤ)).inv.app P.obj)) hfac2
-    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, eqToHom_refl,
-      Category.id_comp] at hfac3
-    erw [CategoryTheory.Functor.map_id, Category.comp_id] at hfac3
+    simp only [eqToHom_refl, Category.id_comp] at hfac2
+    have hfac3 := (Iso.eq_comp_inv
+      ((DerivedCategory.Q (C := scalarReductionSource l E X)).mapIso (e₀.app P.obj))).2 hfac2
     have key := congrArg (fun z ↦ A.reduction.hom.app (DerivedCategory.Q.obj P.obj) ≫ z ≫
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex b (.up ℤ)).hom.app P.obj)) hn
     simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
