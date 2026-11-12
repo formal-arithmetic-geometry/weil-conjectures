@@ -197,9 +197,9 @@ noncomputable def adicGlobalSectionsFrobeniusIso :
       WeilSheaf.frobeniusPullback k₀ l X ⋙ adicGlobalSections k₀ l X :=
   NatIso.ofComponents
     (fun M ↦ ((globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app M.X).symm)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app M.X).symm)
     (fun f ↦ (globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality f.hom)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality f.hom)
 
 section Connected
 

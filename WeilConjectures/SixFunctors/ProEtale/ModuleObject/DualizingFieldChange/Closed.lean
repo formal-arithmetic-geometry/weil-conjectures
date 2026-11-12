@@ -238,7 +238,7 @@ noncomputable def upperShriekBaseChangeOfMap (sqf : IsPullback πZ f'.left f.lef
       boundedConstructibleUpperStarOfMap ℓ πP ⋙ boundedConstructibleUpperShriek ℓ f' :=
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sqf
   (mateEquiv (lowerStarUpperShriekAdjunction ℓ f) (lowerStarUpperShriekAdjunction ℓ f')
-    (inv (boundedConstructibleBaseChangeOfMap ℓ sqf.toCommSq))).natTrans
+    (inv (boundedConstructibleBaseChangeOfMap ℓ sqf.toCommSq)))
 
 /-- `ProEtale.CondensedRing.upperShriekBaseChangeOfMap` is the mate of the inverse of the proper
 base change isomorphism. -/

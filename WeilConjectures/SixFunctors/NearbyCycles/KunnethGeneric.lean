@@ -251,10 +251,10 @@ lemma isIso_map_kunnethMap_iff_toGeneric (φ₁ : P.Hom M f₁ f₁') (φ₂ : P
     (pullbackSquareComparison Λ φ₁.commSq_i).hom (pullbackSquareComparison Λ φ₂.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
       (derivedUpperStarLowerStarAdjunction Λ P.j)
-      (pullbackSquareComparison Λ φ₁.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ₁.commSq_j).hom)
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ P.j)
-      (pullbackSquareComparison Λ φ₂.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ₂.commSq_j).hom)
     (pullbackSquareComparison Λ φ₁.commSq_ε).hom (pullbackSquareComparison Λ φ₂.commSq_ε).hom
     (pullbackSquareComparison Λ φ₁.toGeneric.commSq_ε).hom
     (pullbackSquareComparison Λ φ₂.toGeneric.commSq_ε).hom

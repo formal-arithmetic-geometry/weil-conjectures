@@ -220,6 +220,12 @@ theorem roosAdditiveComparison_isIso (F : A ⥤ B) [F.Additive]
   set_option backward.defeqAttrib.useBackward true in
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
+    have : PreservesLimitsOfShape (Discrete ℕ)
+        (F.mapHomologicalComplex (ComplexShape.up ℤ)) := by
+      apply HomologicalComplex.preservesLimitsOfShape_of_eval
+      intro n
+      exact inferInstanceAs (PreservesLimitsOfShape (Discrete ℕ)
+        (HomologicalComplex.eval A (ComplexShape.up ℤ) n ⋙ F))
     have : IsIso (roosProductComparison F X) := by
       dsimp only [roosProductComparison]
       infer_instance

@@ -21,6 +21,7 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Module and abelian evaluation cohomology on a ringed site

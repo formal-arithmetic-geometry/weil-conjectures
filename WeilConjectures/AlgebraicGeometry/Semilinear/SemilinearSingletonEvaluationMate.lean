@@ -163,18 +163,18 @@ private theorem mate_isIso_transfer
 private theorem mate_transpose_identity
     {E : X ⥤ Y} {F : X ⥤ Z} {R : Z ⥤ Y} {L : Y ⥤ X} {S : Y ⥤ Z}
     (a : L ⊣ E) (b : S ⊣ R) (τ : E ⟶ F ⋙ R) (P : Y) :
-    ((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P =
+    ((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).app P =
       (b.homEquiv _ _).symm (a.unit.app P ≫ τ.app (L.obj P)) := by
   apply (b.homEquiv P (F.obj (L.obj P))).injective
   change (b.homEquiv P (F.obj (L.obj P)))
-      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P) =
+      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).app P) =
     (b.homEquiv P (F.obj (L.obj P)))
       ((b.homEquiv P (F.obj (L.obj P))).symm (a.unit.app P ≫ τ.app (L.obj P)))
   rw [Equiv.apply_symm_apply]
   have he := adjunctionMate_transpose a b (TwoSquare.mk E F (𝟭 Y) R τ)
     P (L.obj P) (𝟙 _)
   change (b.homEquiv P (F.obj (L.obj P)))
-      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P ≫
+      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).app P ≫
         F.map (𝟙 (L.obj P))) =
     (𝟭 Y).map (a.homEquiv P (L.obj P) (𝟙 _)) ≫ τ.app (L.obj P) at he
   erw [F.map_id, Category.comp_id, Adjunction.homEquiv_id, Functor.id_map] at he
@@ -186,7 +186,7 @@ private theorem transfer_from_mate
     (a₀ : L₀ ⊣ E) (a : L ⊣ E) (b₀ : S₀ ⊣ R) (b : S ⊣ R)
     (τ : E ⟶ F ⋙ R) (P : Y)
     (hk : IsIso (((mateEquiv a₀ b₀).symm
-      (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P)) :
+      (TwoSquare.mk E F (𝟭 Y) R τ)).app P)) :
     IsIso ((b.homEquiv _ _).symm (a.unit.app P ≫ τ.app (L.obj P))) := by
   have hk₀ : IsIso ((b₀.homEquiv _ _).symm
       (a₀.unit.app P ≫ τ.app (L₀.obj P))) := by

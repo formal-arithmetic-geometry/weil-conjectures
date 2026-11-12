@@ -57,7 +57,7 @@ noncomputable def squareUpperStarHomotopy (sq : CommSq g' f' f g) :
 isomorphism `AlgebraicGeometry.Etale.squareUpperStarIso` applied degreewise. -/
 lemma squareUpperStarHomotopy_app_quotient_obj (sq : CommSq g' f' f g)
     (M : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ) :
-    (squareUpperStarHomotopy A sq).natTrans.app ((HomotopyCategory.quotient _ _).obj M) =
+    (squareUpperStarHomotopy A sq).app ((HomotopyCategory.quotient _ _).obj M) =
       (HomotopyCategory.quotient _ _).map
         ((NatTrans.mapHomologicalComplex (squareUpperStarIso A sq).hom _).app M) := by
   have h (F : Sheaf Y.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A)
@@ -79,16 +79,16 @@ lemma mateEquiv_squareUpperStarHomotopy_app_quotient_obj (sq : CommSq g' f' f g)
     (M : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) :
     (mateEquiv ((upperStarLowerStarAdjunction A f).mapHomotopyCategory (.up ℤ))
         ((upperStarLowerStarAdjunction A f').mapHomotopyCategory (.up ℤ))
-        (squareUpperStarHomotopy A sq)).natTrans.app ((HomotopyCategory.quotient _ _).obj M) =
+        (squareUpperStarHomotopy A sq)).app ((HomotopyCategory.quotient _ _).obj M) =
       (HomotopyCategory.quotient _ _).map
         ((NatTrans.mapHomologicalComplex (baseChangeMap A sq) _).app M) := by
   have hmate (K : HomotopyCategory (Sheaf X.smallEtaleTopology A) (.up ℤ)) :
       (mateEquiv ((upperStarLowerStarAdjunction A f).mapHomotopyCategory (.up ℤ))
         ((upperStarLowerStarAdjunction A f').mapHomotopyCategory (.up ℤ))
-        (squareUpperStarHomotopy A sq)).natTrans.app K =
+        (squareUpperStarHomotopy A sq)).app K =
       ((upperStarLowerStarAdjunction A f').mapHomotopyCategory (.up ℤ)).unit.app _ ≫
         ((f')_*[A].mapHomotopyCategory (.up ℤ)).map
-          ((squareUpperStarHomotopy A sq).natTrans.app _) ≫
+          ((squareUpperStarHomotopy A sq).app _) ≫
         ((f')_*[A].mapHomotopyCategory (.up ℤ)).map (((g')^*[A].mapHomotopyCategory (.up ℤ)).map
           (((upperStarLowerStarAdjunction A f).mapHomotopyCategory (.up ℤ)).counit.app K)) := by
     simp [mateEquiv_apply]
@@ -128,11 +128,11 @@ lemma derivedSquareUpperStarIso_hom_app_Qh_obj (sq : CommSq g' f' f g)
         (g')^*[A].leftDerivedFunctorCounit.app (((f)^*[A].mapHomotopyCategory (.up ℤ)).obj N) =
       L((f')^*[A]).map ((g)^*[A].leftDerivedFunctorCounit.app N) ≫
         (f')^*[A].leftDerivedFunctorCounit.app (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj N) ≫
-        Qh.map ((squareUpperStarHomotopy A sq).natTrans.app N) := by
+        Qh.map ((squareUpperStarHomotopy A sq).app N) := by
   have key : Functor.mapHomotopyCategoryCompHom (f)^*[A] (g')^*[A] (g' ≫ f)^*[A]
       (upperStarComp A g' f) N =
     Functor.mapHomotopyCategoryCompHom (g)^*[A] (f')^*[A] (g' ≫ f)^*[A]
-      (upperStarComp A f' g (g' ≫ f) sq.w) N ≫ (squareUpperStarHomotopy A sq).natTrans.app N := by
+      (upperStarComp A f' g (g' ≫ f) sq.w) N ≫ (squareUpperStarHomotopy A sq).app N := by
     simp only [Functor.mapHomotopyCategoryCompHom, squareUpperStarHomotopy, NatTrans.comp_app,
       Category.assoc, Iso.inv_hom_id_app_assoc]
     rw [← NatTrans.comp_app_assoc, ← NatTrans.mapHomotopyCategory_comp, squareUpperStarIso,

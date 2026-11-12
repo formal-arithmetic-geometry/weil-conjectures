@@ -78,7 +78,6 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 variable (Y₀ : Over (Spec (.of D.k₀)))
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
-attribute [local implicit_reducible] CategoryTheory.Aut
 
 section
 

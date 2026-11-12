@@ -41,9 +41,8 @@ private theorem mate_whisker
         (Functor.whiskerRight t L₂ ≫ a ≫ Functor.whiskerLeft L₁ b) =
       Functor.whiskerLeft R₁ t ≫ mateEquiv adj₁ adj₂ a ≫
         Functor.whiskerRight b R₂ := by
-  apply TwoSquare.ext
-  intro X
-  dsimp [mateEquiv, TwoSquare.natTrans]
+  refine NatTrans.ext (funext fun X ↦ ?_)
+  dsimp [mateEquiv]
   simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
   have ht := adj₂.unit.naturality (t.app (R₁.obj X))
   dsimp at ht
@@ -66,8 +65,8 @@ private theorem unmate_paste
       ((mateEquiv adj₁ lev₁ ξ).vComp (mateEquiv lev₁ lev₂ β)).whiskerRight u) :
     (α.hComp ζ).whiskerBottom v = (ξ.hComp β).whiskerTop u := by
   apply (mateEquiv adj₁ lev₂).injective
-  have h₁ := mate_whisker adj₁ lev₂ (α.hComp ζ).natTrans (𝟙 _) v
-  have h₂ := mate_whisker adj₁ lev₂ (ξ.hComp β).natTrans u (𝟙 _)
+  have h₁ := mate_whisker adj₁ lev₂ (α.hComp ζ) (𝟙 _) v
+  have h₂ := mate_whisker adj₁ lev₂ (ξ.hComp β) u (𝟙 _)
   have e₁ : mateEquiv adj₁ lev₂ ((α.hComp ζ).whiskerBottom v) =
       (mateEquiv adj₁ lev₂ (α.hComp ζ)).whiskerLeft v := by
     simpa only [Functor.whiskerRight_id', Functor.whiskerLeft_id',
@@ -269,7 +268,7 @@ private def levelBetaInv (n : ℕ) {V W S T : Scheme.{u}}
         (StrictTower.modulePullback (R n) p).mapDerivedCategory :=
   ((mateEquiv (levelJAdj R i n) (levelJAdj R b n)).symm
     (Functor.mapDerivedCategorySquareIso
-      (StrictTower.moduleSquareG (R n) a b i p h)).inv).natTrans
+      (StrictTower.moduleSquareG (R n) a b i p h)).inv)
 
 private theorem betaInv_mate {V W S T : Scheme.{u}}
     (a : V ⟶ S) (b : V ⟶ W) (i : S ⟶ T) (p : W ⟶ T)
@@ -308,14 +307,13 @@ private theorem evalBetaInv (n : ℕ) {V W S T : Scheme.{u}}
     (by
       rw [betaInv_mate]
       simp only [levelBetaInv, evalJInv, Equiv.apply_symm_apply]
-      apply TwoSquare.ext
-      intro M
+      refine NatTrans.ext (funext fun M ↦ ?_)
       simpa only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
         TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
         Functor.whiskerRight_app, Functor.associator_hom_app,
         Functor.associator_inv_app, Category.id_comp, Category.comp_id,
         Category.assoc] using evalG_square_inv R φ n a b i p h M)
-  have he := congrArg (fun w ↦ w.natTrans.app N) hc
+  have he := congrArg (fun w ↦ w.app N) hc
   simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -425,14 +423,13 @@ private theorem strictEvalBetaInv (n : ℕ) {V W S T : Scheme.{u}}
     (by
       rw [strictBetaInv_mate, strictOpen_mate, strictOpen_mate]
       simp only [levelBetaInv, Equiv.apply_symm_apply]
-      apply TwoSquare.ext
-      intro M
+      refine NatTrans.ext (funext fun M ↦ ?_)
       simpa only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
         TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
         Functor.whiskerRight_app, Functor.associator_hom_app,
         Functor.associator_inv_app, Category.id_comp, Category.comp_id,
         Category.assoc] using strictSquareInv_eval R n a b i p h M)
-  have he := congrArg (fun w ↦ w.natTrans.app N) hc
+  have he := congrArg (fun w ↦ w.app N) hc
   simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,

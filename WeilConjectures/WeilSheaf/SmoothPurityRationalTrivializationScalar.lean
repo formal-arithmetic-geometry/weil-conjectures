@@ -45,7 +45,7 @@ variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime]
 /-- The rational root trivialization along the semilinear structure is multiplied
 by the cardinality of the ground field, just as the integral root trivialization. -/
 lemma purityRationalTateTrivialization_comp_specGeometricFrobenius_hom :
-    (purityRationalTateTrivialization g (f ≫ (specGeometricFrobenius k).hom) ℓ hζ hζ').hom =
+    (purityRationalTateTrivialization g (f ≫ (specGeometricFrobenius k).asIso.hom) ℓ hζ hζ').hom =
       (Nat.card k : ℤ) • (purityRationalTateTrivialization g f ℓ hζ hζ').hom := by
   apply purityChangeCoefficientTrivialization_hom_zsmul
   simp only [Iso.trans_hom,

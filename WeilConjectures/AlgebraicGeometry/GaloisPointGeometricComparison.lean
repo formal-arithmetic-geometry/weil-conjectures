@@ -269,7 +269,7 @@ lemma galoisPointSheafFiberIso_presheafFiberAct
             ((pointSmallEtale (specAlgebraMap K Ω)).toPresheafFiber X x F.obj z))) =
       (pointSmallEtale (specAlgebraMap K Ω)).toPresheafFiber X x' F.obj z := by
   obtain ⟨y, rfl⟩ := exists_specAlgebraMapOverHom_comp_eq (Ks := Ks) x
-  have h : specAlgebraMapOverHom K Ks Ω ≫ ((galoisPointAct K Ks σ).app X (ULift.up y)).down =
+  have h : specAlgebraMapOverHom K Ks Ω ≫ ((galoisPointAct K Ks σ).asHom.app X (ULift.up y)).down =
       x' := by
     apply Over.OverMorphism.ext
     rw [hx]

@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Projective space over a base scheme

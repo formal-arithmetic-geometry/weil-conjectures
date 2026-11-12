@@ -16,6 +16,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 import WeilConjectures.AlgebraicGeometry.MaximalIdealDifferentialCotangentDimension
 import WeilConjectures.AlgebraicGeometry.RegularMaximalJacobianPresentation
+public import Mathlib.Algebra.Module.SpanRankOperations
 
 /-!
 # Smoothness at a maximal ideal from a differential dimension bound

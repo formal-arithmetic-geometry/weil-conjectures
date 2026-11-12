@@ -106,7 +106,7 @@ private theorem normalizedOpenSystems :
       (coefficientSequenceTopology (J.over U)) (coefficientSequenceTopology J) :=
     openSite_continuous J U
   have hi (n : ℕ) :
-      IsIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom).natTrans := by
+      IsIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom) := by
     apply WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (J.over U) J (Over.forget U)
       (ring.{max c v, v, max c v r} (coefficientSequenceTopology (J.over U))
@@ -122,7 +122,7 @@ private theorem normalizedOpenSystems :
       (evaluation_ring.{c, v, max c v r} J B₀ τ₀ n) (𝟙 _)
       O.extension _ O.ordinaryAdjunction (a n) (δ n)
   let ι (n : ℕ) :=
-    (asIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom).natTrans).symm
+    (asIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom)).symm
   refine ⟨{ O with
     extensionEvaluation := ι
     restrictionEvaluation := δ
@@ -136,8 +136,8 @@ private theorem normalizedOpenSystems :
     rw [reassoc_of% h, ← Functor.map_comp]
     change (a n).unit.app _ ≫
       (SheafOfModules.localizedSystemRestriction.{c, v, r} (B₀ n) U).map
-        ((asIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom).natTrans).hom.app M ≫
-          (asIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom).natTrans).inv.app M) = _
+        ((asIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom)).hom.app M ≫
+          (asIso ((mateEquiv O.ordinaryAdjunction (a n)).symm (δ n).hom)).inv.app M) = _
     rw [Iso.hom_inv_id_app]
     erw [(SheafOfModules.localizedSystemRestriction.{c, v, r} (B₀ n) U).map_id,
       Category.comp_id]

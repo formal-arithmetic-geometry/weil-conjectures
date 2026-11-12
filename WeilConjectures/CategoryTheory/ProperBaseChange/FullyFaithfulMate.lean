@@ -38,13 +38,13 @@ theorem isIso_mateEquiv_of_fullyFaithful_of_essImage
     (hG : G.FullyFaithful) (hH : H.FullyFaithful)
     (α : G ⋙ L₂ ≅ L₁ ⋙ H)
     (himage : ∀ d, G.essImage (R₂.obj (H.obj d))) :
-    IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).natTrans := by
+    IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)) := by
   suffices ∀ d, IsIso
-      ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).natTrans.app d) by
+      ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).app d) by
     exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ this
   intro d
   obtain ⟨t, ⟨e⟩⟩ := himage d
-  let β := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).natTrans
+  let β := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom))
   let f : R₁.obj d ⟶ t := hG.preimage (β.app d ≫ e.inv)
   have hf : IsIso f := by
     apply isIso_of_yoneda_map_bijective

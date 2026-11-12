@@ -306,7 +306,6 @@ theorem etaleSliceRestriction_comp_aux {V W : X.Etale} (f : V ⟶ W)
     (Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} B) f.left
       (show Etale f.left by infer_instance)).hom.app
       ((Etale.localizationRestriction (ModuleCat.{u + 1} B) W.hom W.prop).obj F) := by
-  try simp only [← Functor.map_comp, Category.assoc]
   have hf := (Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} B) f.left
     (show Etale f.left by infer_instance)).hom.naturality
     ((etaleSliceRestrictionIso X B W).hom.app F ≫
@@ -327,7 +326,6 @@ theorem etaleSliceRestriction_comp_aux {V W : X.Etale} (f : V ⟶ W)
   dsimp only [Functor.comp_obj, NatTrans.comp_app,
     ObjectProperty.FullSubcategory.comp_hom, NatIso.ofComponents_hom_app,
     ObjectProperty.isoMk_hom, ObjectProperty.homMk_hom, Iso.refl_hom]
-  try simp only [Category.id_comp, Category.comp_id]
   simp only [ObjectProperty.isoMk_hom, NatIso.ofComponents_hom_app, Iso.refl_hom,
     Category.id_comp, Category.comp_id]
   dsimp only [ObjectProperty.homMk_hom, NatIso.ofComponents_hom_app, Iso.refl_hom,

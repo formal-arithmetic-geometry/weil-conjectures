@@ -208,7 +208,8 @@ private theorem separated (R : Type u) [CommRing R] [Ring.AbsolutelyFlat R] :
         exact le_rfl
     rw [← heq]
     exact PrimeSpectrum.isClopen_basicOpen_of_mul_add _ _ he (by ring)
-  apply totallySeparatedSpace_of_t0_of_basis_clopen
+  suffices ZeroDimensionalSpace (PrimeSpectrum R) from inferInstance
+  rw [zeroDimensionalSpace_iff_isTopologicalBasis_isClopen]
   apply PrimeSpectrum.isTopologicalBasis_basic_opens.of_isOpen_of_subset
   · exact fun _ h ↦ h.isOpen
   · rintro _ ⟨r, rfl⟩

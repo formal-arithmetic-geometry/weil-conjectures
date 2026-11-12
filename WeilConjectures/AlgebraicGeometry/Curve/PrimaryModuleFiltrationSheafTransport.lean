@@ -107,7 +107,7 @@ theorem exists_sheaf_filtration_of_invariant_primary_chain
   have hidxn : idx n = Fin.last n := Fin.ext (Nat.min_self n)
   refine ⟨F, ?_, ?_, ?_⟩
   · apply primaryAssociatedSheaf_zero K Ks H Ω C T e R (A (idx 0))
-    exact hidx0 ▸ hzero
+    simpa only [hidx0] using hzero
   · intro a ha
     let b : Fin n := ⟨a, ha⟩
     have hidxa : idx a = b.castSucc := Fin.ext (Nat.min_eq_left ha.le)

@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeMatrix
 public import WeilConjectures.Algebra.Homology.ShortComplex.SplitHomology
 public import WeilConjectures.LinearAlgebra.Matrix.SplitFactorization
 public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Free cohomology of complexes of free modules with split differentials

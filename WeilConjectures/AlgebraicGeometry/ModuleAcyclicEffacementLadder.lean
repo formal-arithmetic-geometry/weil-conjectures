@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.AlgebraicGeometry.ModuleValuedInjectiveCohomology
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import Mathlib.Algebra.Category.Grp.Zero
 
 @[expose] public section
 universe u

@@ -56,11 +56,12 @@ noncomputable def fieldExtendScalarsToAdicFrobeniusIso :
       FieldWeilSheaf.frobeniusPullback k₀ Λ X ⋙
         fieldExtendScalarsToAdic he hc (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm ≪≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm ≪≫
     (fieldUpperStarCompExtendScalarsToAdicIso he hc
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).symm ≪≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).symm ≪≫
     Functor.isoWhiskerRight
-      (fieldUpperStarIsoLowerStarInv Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius) _
+      (fieldUpperStarIsoLowerStarInv Λ
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso) _
 
 /-- The extension of scalars `ℚ̄_ℓ ⊗_Λ -` of pro-étale Weil sheaves. -/
 noncomputable def ProEtaleFieldWeilSheaf.extendScalarsToAdic :

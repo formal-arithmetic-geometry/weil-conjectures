@@ -35,7 +35,7 @@ private def graphTriangle
   let sq : IsPullback s (𝟙 X) v a :=
     IsPullback.of_vert_isIso_mono ⟨by simpa using h⟩
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sq
-  (F.exchange s (𝟙 X) v a sq.w).natTrans ≫
+  (F.exchange s (𝟙 X) v a sq.w) ≫
     Functor.whiskerRight (F.shId X).hom (F.pf a) ≫ (Functor.leftUnitor _).hom
 
 private theorem graphTriangle_proper_square
@@ -49,7 +49,7 @@ private theorem graphTriangle_proper_square
     let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sq
     (graphTriangle F s v a hv).app M ≫ (F.pfComp' a' r a ha).hom.app M =
       (F.sh v).map ((F.pfComp' s' q s hs).hom.app M) ≫
-        (F.exchange q v' v r sq.w).natTrans.app ((F.pf s').obj M) ≫
+        (F.exchange q v' v r sq.w).app ((F.pf s').obj M) ≫
         (F.pf r).map ((graphTriangle F s' v' a' hv').app M) := by
   let st : IsPullback s (𝟙 X) v a :=
     IsPullback.of_vert_isIso_mono ⟨by simpa using hv⟩
@@ -92,9 +92,9 @@ private theorem graphTriangle_open_square
     (F.shComp' v b e he).hom.app ((F.pf s).obj M) ≫
         (F.sh b).map ((graphTriangle F s v a hv).app M) ≫
         (F.sh b).map ((F.pfComp' a' r a ha).hom.app M) ≫
-        (F.exchange r b' b R sqb.w).natTrans.app ((F.pf a').obj M) =
+        (F.exchange r b' b R sqb.w).app ((F.pf a').obj M) =
       (F.sh e).map ((F.pfComp' s' q s hs).hom.app M) ≫
-        (F.exchange q e' e R sqe.w).natTrans.app
+        (F.exchange q e' e R sqe.w).app
           ((F.pf s').obj M) ≫
         (F.pf R).map
           ((F.shComp' v' b' e' he').hom.app ((F.pf s').obj M) ≫
@@ -117,7 +117,7 @@ private theorem graphTriangle_open_square
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
     Functor.map_id, Category.comp_id] at hp'
   simp only [Functor.comp_obj, CategoryTheory.Functor.map_id, Category.comp_id] at hp'
-  have hn := (F.exchange r b' b R sqb.w).natTrans.naturality
+  have hn := (F.exchange r b' b R sqb.w).naturality
     ((graphTriangle F s' v' a' hv').app M)
   dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hn
   have hc := (F.shComp' v b e he).hom.naturality
@@ -189,12 +189,12 @@ private theorem graph_open_exchange
     (sq : IsPullback t l r b) :
     let := CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := unboundedFormalism A) sq
-    ((unboundedFormalism A).exchange t l r b sq.w).natTrans =
+    ((unboundedFormalism A).exchange t l r b sq.w) =
       openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange
     (F := unboundedFormalism A) sq
   dsimp only [ExchangeFormalism.exchange, openImmersionLowerShriekLowerStarExchange]
-  have hh : inv ((unboundedFormalism A).baseChange t l r b sq.w).natTrans =
+  have hh : inv ((unboundedFormalism A).baseChange t l r b sq.w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) sq).inv := by
     apply IsIso.inv_eq_of_hom_inv_id

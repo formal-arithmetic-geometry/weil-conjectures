@@ -136,7 +136,7 @@ structure OrdinaryScalarComparison where
         (rho X).map ((moduleAdj R φ f).counit.app N)
   /-- The orientation is d = mate of the inverse of b. -/
   mate : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
-    (mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f) (b f).inv).natTrans = (d f).hom
+    (mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f) (b f).inv) = (d f).hom
   /-- Ordinary open-extension comparison a. -/
   a : ∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j],
     extension R φ j ⋙ rho X ≅ rho U ⋙ StrictTower.towerJ B j

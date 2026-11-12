@@ -664,7 +664,7 @@ def finiteHomSiteBeta {n m : ℕ} (h : m ≤ n) :
   ((mateEquiv (Adjunction.ofIsRightAdjoint
       (Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteHomQuotient l E h)))
     ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction h)).symm
-    (TwoSquare.mk _ _ _ _ (finiteHomNuDerivedRestriction l E X h).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (finiteHomNuDerivedRestriction l E X h).inv))
 
 private instance finiteHomEncoding_additive (T : Scheme.{u}) (B : Type u) [CommRing B] :
     (Scheme.proEtaleModuleRestriction T B).Additive where
@@ -814,8 +814,8 @@ private theorem transferLeftMate
       β.hom.app (M.obj X) = T.map (b.unit.app X))
     (ht : ∀ X, γ.hom.app (R.obj X) ≫ T.map (τ.app X) =
       τ'.app X ≫ V.map (δ.hom.app X) ≫ β.hom.app (P.obj X))
-    [IsIso (((mateEquiv a c).symm (TwoSquare.mk _ _ _ _ τ')).natTrans)] :
-    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)).natTrans) := by
+    [IsIso (((mateEquiv a c).symm (TwoSquare.mk _ _ _ _ τ')))] :
+    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ))) := by
   apply (NatTrans.isIso_iff_isIso_app _).2
   intro X
   have he := AlgebraicGeometry.ProEtale.left_mate_normalization a b a c
@@ -827,11 +827,11 @@ private theorem transferLeftMate
       rw [CategoryTheory.Functor.map_id, Category.id_comp]
       exact ht Y) X
   have hi : IsIso (K.map (γ.hom.app X) ≫ α.app (N.obj X) ≫
-      S.map (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)).natTrans.app X)) := by
+      S.map (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)).app X)) := by
     rw [← he]
     infer_instance
   have : IsIso (S.map
-      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)).natTrans.app X)) :=
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)).app X)) :=
     (isIso_comp_left_iff _ _).1 ((isIso_comp_left_iff _ _).1 hi)
   exact isIso_of_reflects_iso _ S
 
@@ -841,7 +841,7 @@ private theorem leftMateUnit
     (a : L ⊣ R) (b : L' ⊣ R') (T : A ⥤ C) (S : B ⥤ D)
     (e : R ⋙ T ≅ S ⋙ R') (X : A) :
     b.unit.app (T.obj X) ≫ R'.map
-        (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans.app X) ≫
+        (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).app X) ≫
       e.inv.app (L.obj X) = T.map (a.unit.app X) := by
   have h := unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ e.hom) X
   have ht := congrArg (fun z ↦ z ≫ e.inv.app (L.obj X)) h
@@ -932,12 +932,12 @@ private theorem finiteHomEquivalenceLeftMate_isIso
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     {G : A ⥤ C} {H : B ⥤ D} [G.IsEquivalence] [H.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (τ : R ⋙ G ≅ H ⋙ R') :
-    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ.hom)).natTrans) := by
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ.hom)).natTrans
+    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ.hom))) := by
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ.hom))
   let τop : TwoSquare H.op R.op R'.op G.op :=
     TwoSquare.mk _ _ _ _ (NatTrans.op τ.hom)
   have hi := isIso_mateEquiv_of_isEquivalence a.op b.op τop
-  have he : NatTrans.op α = (mateEquiv a.op b.op τop).natTrans := by
+  have he : NatTrans.op α = (mateEquiv a.op b.op τop) := by
     ext X
     simp [α, τop, mateEquiv]
   have : IsIso (NatTrans.op α) := by rw [he]; exact hi
@@ -956,7 +956,7 @@ private def finiteHomScalarEncodingMate {n m : ℕ} (h : m ≤ n) :
     ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction h)
     (Adjunction.ofIsRightAdjoint
       (Sheaf.derivedRestrictScalars (ProEt.topology X) (finiteHomQuotient l E h)))).symm
-    (TwoSquare.mk _ _ _ _ (finiteHomDerivedEncodingRestriction l E X h).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (finiteHomDerivedEncodingRestriction l E X h).hom))
 
 private instance finiteHomScalarEncodingMate_isIso {n m : ℕ} (h : m ≤ n) :
     IsIso (finiteHomScalarEncodingMate l E X h) :=
@@ -993,7 +993,7 @@ factors and reflect isomorphisms through the derived encoding equivalence. -/
   let δ := (finiteHomNuDerivedEncoded l E X m).symm
   have : IsIso (((mateEquiv a c).symm
       (TwoSquare.mk _ _ _ _
-        (ProEtale.pbcDerivedComparisonRestrict X (finiteHomQuotient l E h)).inv)).natTrans) :=
+        (ProEtale.pbcDerivedComparisonRestrict X (finiteHomQuotient l E h)).inv))) :=
     ProEtale.pbcComparisonReductionMap_isIso X (finiteHomQuotient l E h)
   exact transferLeftMate a b c T S α β γ δ
     (finiteHomNuDerivedRestriction l E X h).inv

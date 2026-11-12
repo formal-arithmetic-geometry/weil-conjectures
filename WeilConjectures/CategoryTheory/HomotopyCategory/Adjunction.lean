@@ -604,10 +604,10 @@ with respect to the induced adjunctions `Adjunction.mapHomotopyCategoryPlus`: bo
 degreewise on complexes. -/
 lemma mapHomotopyCategoryPlus_mateEquiv_app (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' G') (K : HomotopyCategory.Plus C₁) :
-    (NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app K =
+    (NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ)).app K =
       adj'.mapHomotopyCategoryPlus.unit.app (G.mapHomotopyCategoryPlus.obj
           (R.mapHomotopyCategoryPlus.obj K)) ≫
-        R'.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app
+        R'.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus σ).app
           (R.mapHomotopyCategoryPlus.obj K)) ≫
         R'.mapHomotopyCategoryPlus.map (G'.mapHomotopyCategoryPlus.map
           (adj.mapHomotopyCategoryPlus.counit.app K)) := by

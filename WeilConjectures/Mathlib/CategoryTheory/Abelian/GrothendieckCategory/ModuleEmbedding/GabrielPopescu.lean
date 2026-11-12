@@ -116,7 +116,8 @@ lemma surjectivity_of_isSeparator {G : C} (hG : IsSeparator G) {κ : Cardinal.{v
   have : U.Faithful := (isSeparator_iff_faithful_preadditiveCoyonedaObj G).1 hG
   have : U.Full := GabrielPopescu.full G hG
   have := GabrielPopescu.preservesFiniteLimits G hG
-  have hR : HasCardinalLT (End G)ᵐᵒᵖ κ := hEnd.of_injective _ MulOpposite.unop_injective
+  have hR : HasCardinalLT (End G)ᵐᵒᵖ κ := hEnd.of_injective (fun x : (End G)ᵐᵒᵖ ↦ x.unop.asHom)
+    (fun _ _ h ↦ MulOpposite.unop_injective (End.ext h))
   -- the comparison map `colim (Y ⋙ U) ⟶ U c.pt`
   let φ : colimit (Y ⋙ U) ⟶ U.obj c.pt := colimit.desc _ (U.mapCocone c)
   have : Mono φ := mono_colimitDesc_preadditiveCoyonedaObj hSub hc

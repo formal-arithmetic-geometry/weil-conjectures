@@ -105,8 +105,8 @@ theorem isConstructibleSheaf_of_forget₂_iso_frobeniusLinear_kernel
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e))
     (N : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p))))
     (eN : (sheafCompose S.smallEtaleTopology

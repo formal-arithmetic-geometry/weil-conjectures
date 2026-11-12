@@ -203,7 +203,7 @@ theorem geometricFiberProjUpperStarModelFrobeniusIso_eq :
   upperStarComp_symm_trans_isoWhiskerRight_eq_isoWhiskerLeft_trans Λ f.geometricFiberProj
     (f.geometricFiber.iterateFrobenius (FiniteField.ringChar_prime k)
       f.isOfCharacteristic_geometricFiber (FiniteField.frobeniusExponent k))
-    f.geometricGaloisFrobenius.hom f.geometricFiberFrobenius
+    f.geometricGaloisFrobenius.asIso.hom f.geometricFiberFrobenius
     (X₀.iterateFrobenius (FiniteField.ringChar_prime k) (Scheme.isOfCharacteristic_of_hom_spec f)
       (FiniteField.frobeniusExponent k))
     (upperStarIterateFrobeniusIso Λ (FiniteField.ringChar_prime k)
@@ -245,7 +245,7 @@ the scheme Frobenius `Φ` of the geometric fibre, along the identification `Φ^*
 (`AlgebraicGeometry.ProEtale.CondensedRing.upperStarGeometricFiberFrobeniusIso`): a Weil object
 `(K, Fr_X^* K ≅ K)` becomes `(K, Φ^* K ≅ Fr_X^* K ≅ K)`. -/
 noncomputable def geometricFiberFrobeniusTransport :
-    Endofunctor.IsoAlgebra (upperStar Λ f.geometricGaloisFrobenius.hom) ⥤
+    Endofunctor.IsoAlgebra (upperStar Λ f.geometricGaloisFrobenius.asIso.hom) ⥤
       Endofunctor.IsoAlgebra (upperStar Λ f.geometricFiberFrobenius) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (Functor.leftUnitor _ ≪≫
     upperStarGeometricFiberFrobeniusIso Λ f ≪≫ (Functor.rightUnitor _).symm)

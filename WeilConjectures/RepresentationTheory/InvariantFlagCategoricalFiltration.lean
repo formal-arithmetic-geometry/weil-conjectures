@@ -101,7 +101,7 @@ theorem exists_categorical_filtration_of_invariant_flag
   let ι (i : ℕ) : W i ⟶ W (i + 1) :=
     Rep.ofHom ⟨Submodule.inclusion (hle i), fun _ ↦ rfl⟩
   have hzero : IsZero (W 0) := by
-    apply (Rep.isZero_iff (ZMod ℓ) P (W 0)).mpr
+    apply (Rep.isZero_iff (W 0)).mpr
     change Subsingleton (B 0)
     have : B 0 = ⊥ := by simpa [B] using h0
     rw [this]

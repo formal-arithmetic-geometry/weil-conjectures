@@ -68,7 +68,8 @@ theorem exists_isClosedImmersion_connectedSpace_pullback {k₀ : Type u} [Field 
     ∃ (C : Scheme.{u}) (i : C ⟶ f.geometricFiber), IsClosedImmersion i ∧ IsAffine C ∧
       SmoothOfRelativeDimension 1 (i ≫ f.geometricFiberToAlgebraicClosure) ∧
       ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧ ConnectedSpace ↑(pullback π i) ∧
-      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C, φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).hom := by
+      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
+        φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom := by
   classical
   let := Fintype.ofFinite k₀
   obtain ⟨R, _, _, eR, heR⟩ := exists_iso_Spec_of_isAffine f
@@ -127,7 +128,7 @@ theorem exists_isClosedImmersion_connectedSpace_pullback {k₀ : Type u} [Field 
   -- the Frobenius
   obtain ⟨m, hm, hJm⟩ :=
     hJfg.exists_map_pow_eq _ (exists_geometricFrobeniusTensor_pow_apply_eq_self k₀ R)
-  obtain ⟨Φ, hΦ⟩ := exists_iso_comp_eq_of_map_eq e (f.geometricGaloisFrobenius ^ m) _
+  obtain ⟨Φ, hΦ⟩ := exists_iso_comp_eq_of_map_eq e (f.geometricGaloisFrobenius ^ m).asIso _
     (f.geometricGaloisFrobenius_pow_hom_comp_geometricFiberIsoSpec_hom eR heR m) J hJm
   have he : e.inv ≫ f.geometricFiberToAlgebraicClosure =
       Spec.map (CommRingCat.ofHom (algebraMap K A)) := by

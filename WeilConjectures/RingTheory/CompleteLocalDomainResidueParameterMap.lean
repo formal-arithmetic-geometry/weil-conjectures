@@ -18,6 +18,8 @@ import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 import Mathlib.RingTheory.LocalRing.Quotient
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.MvPowerSeries.Inverse
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Residue-preserving parameter maps for complete local domains

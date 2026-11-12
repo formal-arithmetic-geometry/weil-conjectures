@@ -315,7 +315,7 @@ theorem adjunctionSquare
         R'.map (α.hom.app M) = b.unit.app (F.obj M)) ∧
       (∀ N, G.map (a.counit.app N) = α.hom.app (R.obj N) ≫
         L'.map (β.hom.app N) ≫ b.counit.app (G.obj N)) := by
-  let δ : F ⋙ L' ⟶ L ⋙ G := ((mateEquiv a b).symm β.hom).natTrans
+  let δ : F ⋙ L' ⟶ L ⋙ G := ((mateEquiv a b).symm β.hom)
   have hu (M : A) : F.map (a.unit.app M) ≫ β.hom.app (L.obj M) =
       b.unit.app (F.obj M) ≫ R'.map (δ.app M) :=
     unit_mateEquiv_symm a b β.hom M

@@ -54,10 +54,10 @@ private theorem rightMate_transport
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
     {G G' : A ⥤ C} {H H' : B ⥤ D}
     (hG : G = G') (hH : H = H') (e : L₁ ⋙ H' ≅ G' ⋙ L₂)
-    (hi : IsIso (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ e.inv)).natTrans) :
+    (hi : IsIso (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ e.inv))) :
     IsIso (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _
       (Functor.isoWhiskerLeft L₁ (eqToIso hH) ≪≫ e ≪≫
-        Functor.isoWhiskerRight (eqToIso hG).symm L₂).inv)).natTrans := by
+        Functor.isoWhiskerRight (eqToIso hG).symm L₂).inv)) := by
   subst G' H'
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.refl_symm,
     Functor.isoWhiskerRight_refl, Iso.refl_trans, Iso.trans_refl] using hi
@@ -116,7 +116,7 @@ theorem sfRationalDirectImageCoefficientCompatibility
             Y)
         (a : ∀ E, L.Φ E ⊣ R E),
         ∀ {E F : Index l Ω} (h : E ≤ F),
-          IsIso ((mateEquiv (a E) (a F) (TwoSquare.mk _ _ _ _ (L.β h).inv)).natTrans) := by
+          IsIso ((mateEquiv (a E) (a F) (TwoSquare.mk _ _ _ _ (L.β h).inv))) := by
   obtain ⟨b, hb, hcoh⟩ := commonStagePullback_comparison_data l Ω f
   let L : (stageSystem l Ω Y).Morphism (stageSystem l Ω X) :=
     { Φ := fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) f

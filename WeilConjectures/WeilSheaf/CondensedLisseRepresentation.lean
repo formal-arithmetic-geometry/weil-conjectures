@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 public import Mathlib.CategoryTheory.Monad.Comonadicity
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevel
 

@@ -48,7 +48,7 @@ def adicDerivedBaseChange (l : ℕ) [Fact l.Prime]
   (mateEquiv
     (adicUpperStarLowerStarAdjunction l p).mapDerivedCategoryRightDerivedAdjunction
     (adicUpperStarLowerStarAdjunction l p').mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (adicDerivedPullSquare l sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (adicDerivedPullSquare l sq).hom))
 
 end ProEtale
 

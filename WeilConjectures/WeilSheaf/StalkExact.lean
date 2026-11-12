@@ -50,8 +50,8 @@ instance preservesHomology_stalkFunctor
 /-- The stalks of an exact sequence of Weil sheaves form an exact sequence. -/
 theorem range_stalkAtMap_eq_ker {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     LinearMap.range (stalkAtMap s m hs S.f) = LinearMap.ker (stalkAtMap s m hs S.g) := by
   have h := (hS.map (stalkFunctor k₀ l s))
   rw [ShortComplex.moduleCat_exact_iff] at h

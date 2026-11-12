@@ -46,7 +46,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (Φ : Point.
 
 /-- The endomorphism of the point `Φ` given by the action of `σ` on its fibre functor. -/
 def actHom (σ : G) : Φ ⟶ Φ :=
-  ⟨act σ⟩
+  ⟨(act σ).asHom⟩
 
 /-- The action of `σ` on the fibre of a presheaf: `[X, x, t] ↦ [X, σ • x, t]`. -/
 noncomputable def presheafFiberAct (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) :
@@ -57,23 +57,23 @@ noncomputable def presheafFiberAct (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) 
 lemma toPresheafFiber_presheafFiberAct (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) (X : C)
     (x : Φ.fiber.obj X) :
     Φ.toPresheafFiber X x P ≫ Φ.presheafFiberAct act P σ =
-      Φ.toPresheafFiber X ((act σ).app X x) P := by
+      Φ.toPresheafFiber X ((act σ).asHom.app X x) P := by
   simp [presheafFiberAct, actHom]
 
 lemma toPresheafFiber_presheafFiberAct_apply (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) (X : C)
     (x : Φ.fiber.obj X) (t : P.obj (op X)) :
     (Φ.presheafFiberAct act P σ).hom (Φ.toPresheafFiber X x P t) =
-      Φ.toPresheafFiber X ((act σ).app X x) P t :=
+      Φ.toPresheafFiber X ((act σ).asHom.app X x) P t :=
   congr($(Φ.toPresheafFiber_presheafFiberAct act P σ X x).hom t)
 
 lemma act_mul_app (σ τ : G) (X : C) (x : Φ.fiber.obj X) :
-    (act (σ * τ)).app X x = (act σ).app X ((act τ).app X x) := by
-  rw [map_mul, End.mul_def]
+    (act (σ * τ)).asHom.app X x = (act σ).asHom.app X ((act τ).asHom.app X x) := by
+  rw [map_mul, End.mul_asHom]
   rfl
 
 @[simp]
-lemma act_one_app (X : C) (x : Φ.fiber.obj X) : (act 1).app X x = x := by
-  rw [map_one, End.one_def]
+lemma act_one_app (X : C) (x : Φ.fiber.obj X) : (act 1).asHom.app X x = x := by
+  rw [map_one, End.one_asHom]
   rfl
 
 /-- The fibre of a presheaf, with its action of `G`. -/
@@ -81,13 +81,15 @@ noncomputable abbrev presheafFiberAction (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) :
     Action AddCommGrpCat.{w} G where
   V := Φ.presheafFiber.obj P
   ρ :=
-    { toFun σ := Φ.presheafFiberAct act P σ
+    { toFun σ := .of <| Φ.presheafFiberAct act P σ
       map_one' := by
+        apply End.ext
         refine Φ.presheafFiber_hom_ext fun X x ↦ ?_
-        rw [toPresheafFiber_presheafFiberAct, act_one_app, End.one_def, Category.comp_id]
+        rw [toPresheafFiber_presheafFiberAct, act_one_app, End.one_asHom, Category.comp_id]
       map_mul' σ τ := by
+        apply End.ext
         refine Φ.presheafFiber_hom_ext fun X x ↦ ?_
-        rw [toPresheafFiber_presheafFiberAct, End.mul_def, toPresheafFiber_presheafFiberAct_assoc,
+        rw [toPresheafFiber_presheafFiberAct, End.mul_asHom, toPresheafFiber_presheafFiberAct_assoc,
           toPresheafFiber_presheafFiberAct, act_mul_app] }
 
 @[simp]
@@ -97,7 +99,7 @@ lemma presheafFiberAction_V (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) :
 
 @[simp]
 lemma presheafFiberAction_ρ (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) :
-    (Φ.presheafFiberAction act P).ρ σ = Φ.presheafFiberAct act P σ :=
+    (Φ.presheafFiberAction act P).ρ σ = .of (Φ.presheafFiberAct act P σ) :=
   rfl
 
 /-- The fibre functor on abelian sheaves, with the action of `G` on the fibres. -/
@@ -118,14 +120,15 @@ variable (M : Action AddCommGrpCat.{w} G)
 
 /-- The `G`-equivariant maps `Φ.fiber.obj X → M`. -/
 def equivariantMaps (X : C) : AddSubgroup (Φ.fiber.obj X → M.V) where
-  carrier := {f | ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).app X x) = (M.ρ σ).hom (f x)}
+  carrier := {f | ∀ (σ : G) (x : Φ.fiber.obj X),
+    f ((act σ).asHom.app X x) = (M.ρ σ).asHom.hom (f x)}
   zero_mem' σ x := by simp
   add_mem' {f g} hf hg σ x := by simp [hf σ x, hg σ x]
   neg_mem' {f} hf σ x := by simp [hf σ x]
 
 lemma mem_equivariantMaps {X : C} (f : Φ.fiber.obj X → M.V) :
     f ∈ Φ.equivariantMaps act M X ↔
-      ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).app X x) = (M.ρ σ).hom (f x) :=
+      ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).asHom.app X x) = (M.ρ σ).asHom.hom (f x) :=
   Iff.rfl
 
 
@@ -191,7 +194,7 @@ lemma isSheaf_equivariantPresheaf : Presheaf.IsSheaf J (Φ.equivariantPresheaf a
     key _ _ _ _ (hy _)
   let t : (Φ.equivariantPresheaf act M ⋙ forget AddCommGrpCat.{w}).obj (op X) :=
     ⟨fun x ↦ (s (f x) (hf x)).1 (y x), fun σ x ↦ by
-      have := hval (hf x) ((act σ).app _ (y x))
+      have := hval (hf x) ((act σ).asHom.app _ (y x))
       rw [← NatTrans.naturality_apply, hy] at this
       dsimp only
       rw [this, (s (f x) (hf x)).2 σ (y x)]⟩
@@ -293,7 +296,8 @@ noncomputable def fromEquivariantSheaf (M : Action AddCommGrpCat.{w} G) :
     change Φ.toPresheafFiber X x _ ≫ Φ.presheafFiberAct act _ σ ≫
         Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) =
       Φ.toPresheafFiber X x _ ≫
-        Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) ≫ M.ρ σ
+        Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) ≫
+          (M.ρ σ).asHom
     rw [toPresheafFiber_presheafFiberAct_assoc,
       Φ.toPresheafFiber_presheafFiberDesc _ (Φ.evalEquivariantMaps_w act M),
       Φ.toPresheafFiber_presheafFiberDesc_assoc _ (Φ.evalEquivariantMaps_w act M)]
@@ -372,7 +376,8 @@ variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrp
 
 /-- `G` acts trivially on the fibre of a constant sheaf. -/
 lemma sheafFiberAction_constantSheaf_ρ (A : AddCommGrpCat.{w}) (σ : G) :
-    ((Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A)).ρ σ = 𝟙 _ := by
+    ((Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A)).ρ σ = .of (𝟙 _) := by
+  apply End.ext
   change Φ.presheafFiberAct act (CategoryTheory.sheafify J ((Functor.const Cᵒᵖ).obj A)) σ = 𝟙 _
   rw [← cancel_epi (Φ.presheafFiber.map (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj A))),
     presheafFiber_map_presheafFiberAct, presheafFiberAct_const, Category.id_comp,

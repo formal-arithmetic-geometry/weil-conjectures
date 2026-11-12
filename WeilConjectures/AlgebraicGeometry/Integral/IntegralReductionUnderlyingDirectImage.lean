@@ -35,7 +35,7 @@ private theorem inverseMate_eq_of_unit
     (r : R ⋙ G ⟶ H ⋙ R') (b : G ⋙ L' ≅ L ⋙ H)
     (hb : ∀ M, G.map (adj.unit.app M) ≫ r.app (L.obj M) =
       adj'.unit.app (G.obj M) ≫ R'.map (b.hom.app M)) :
-    ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ r)).natTrans = b.hom := by
+    ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ r)) = b.hom := by
   ext M
   apply (adj'.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit]
@@ -52,7 +52,7 @@ private theorem reductionPullback_isIso
     (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U n))
     (CondensedRing.derivedComapUpperStarIso
       (DerivedNakayama.reductionRing l E (n + 1)) j).inv b hb
-  change IsIso (((mateEquiv _ _).symm (TwoSquare.mk _ _ _ _ _)).natTrans)
+  change IsIso (((mateEquiv _ _).symm (TwoSquare.mk _ _ _ _ _)))
   rw [h]
   infer_instance
 

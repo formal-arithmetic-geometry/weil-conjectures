@@ -54,7 +54,8 @@ lemma mateEquiv_sheafExtendScalarsCompUpperStarIso_inv :
         (sheafExtendScalarsCompUpperStarIso φ g).inv =
       upperStarRestrictScalars φ g := by
   rw [upperStarRestrictScalars, Equiv.eq_symm_apply]
-  ext1
+  apply NatTrans.ext
+  funext G
   rw [iterated_mateEquiv_conjugateEquiv]
   have h0 : conjugateEquiv ((sheafExtendScalarsAdjunction φ Y).comp
       (upperStarLowerStarAdjunction _ g))
@@ -65,7 +66,6 @@ lemma mateEquiv_sheafExtendScalarsCompUpperStarIso_inv :
     simp only [sheafExtendScalarsCompUpperStarIso, Adjunction.leftAdjointUniq,
       Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom, Iso.refl_hom]
     exact (conjugateEquiv _ _).apply_symm_apply _
-  rename_i G
   have h1 := NatTrans.congr_app h0 G
   simp only [conjugateEquiv_apply_app] at h1 ⊢
   simpa [Adjunction.ofNatIsoRight, lowerStarCompRestrictScalarsIso] using h1

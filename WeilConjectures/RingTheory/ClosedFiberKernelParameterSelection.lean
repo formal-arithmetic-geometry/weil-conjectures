@@ -9,6 +9,7 @@ module
 public import WeilConjectures.RingTheory.FormallySmoothAdic
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
