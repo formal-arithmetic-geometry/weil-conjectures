@@ -85,9 +85,12 @@ theorem finiteBoundary_target_endpoint
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
   trace "target: scalar unit complete"
-  let v := η.val.app (op (n, U.unop)) x
+  let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
+      (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
+    η.val.app (op (n, U.unop)) x
   trace "target: scalar section named"
-  let w := (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
+  let w : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U :=
+    (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   trace "target: restricted section named"
   have hw : HEq w v := by
     dsimp only [w, e]
