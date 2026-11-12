@@ -190,13 +190,6 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
   obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   rfl
 
-/-- Pullback along the map between trivial compactifications is the original pullback. -/
-lemma boundedConstructibleUpperStar_ofIsProperBaseChangeHom (sq : IsPullback g' f' f g) :
-    boundedConstructibleUpperStar Λ ℓ (ofIsProperBaseChangeHom sq) =
-      boundedConstructibleUpperStar Λ ℓ g' := by
-  unfold boundedConstructibleUpperStar
-  rfl
-
 set_option profiler true in
 /-- The compact-support exchange map of `P` of the trivial compactifications of the proper `f`
 and `f'` is the base change `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of `P` of the square of their
@@ -231,7 +224,10 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   rewrite [P.baseChange_eq_pfBaseChange,
     P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
   refine NatTrans.ext (funext fun K ↦ ?_)
-  exact congr_app key K
+  have hK := congr_app key K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj] at hK ⊢
+  exact hK
 
 variable {P}
 
