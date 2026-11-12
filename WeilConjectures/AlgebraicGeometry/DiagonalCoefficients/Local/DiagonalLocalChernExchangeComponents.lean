@@ -108,6 +108,26 @@ private theorem adjunct_sum_factor
     adj.homEquiv_naturality_left]
   simp only [Preadditive.add_comp, Category.assoc]
 
+private theorem exchange_components_finish
+    {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    {L : B ⥤ A} {R R₀ : A ⥤ B} {L' : B' ⥤ A'} {R' R₀' : A' ⥤ B'}
+    {G : B ⥤ B'} {H : A ⥤ A'} (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (θ : G ⋙ L' ≅ L ⋙ H) (i : R₀ ≅ R) (i' : R₀' ≅ R')
+    {M : B} {K : A} {T : A'} (a : L.obj M ⟶ K) (t : H.obj K ⟶ T)
+    [Preadditive B'] [Preadditive A']
+    {A₀ B₀ V : B'} {T₀ : A'} {c : A₀ ⟶ B₀} {γ : B₀ ⟶ V}
+    (v : L'.obj V ⟶ T₀) (a₀ : L'.obj B₀ ⟶ T₀)
+    (hlocal : θ.hom.app M ≫ H.map a ≫ t = L'.map (c ≫ γ) ≫ v + L'.map c ≫ a₀)
+    [L'.Additive] :
+    G.map (adj.homEquiv _ _ a ≫ i.inv.app K) ≫
+        (G.map (i.hom.app K) ≫ (Adjunction.exchangeRight adj adj' θ).app K ≫
+          i'.inv.app (H.obj K)) ≫ R₀'.map t =
+      (c ≫ γ) ≫ (adj'.homEquiv _ _ v ≫ i'.inv.app T₀) +
+        c ≫ (adj'.homEquiv _ _ a₀ ≫ i'.inv.app T₀) := by
+  rw [conjugated_exchange_adjunct]
+  exact (congrArg (fun x ↦ adj'.homEquiv _ _ x ≫ i'.inv.app T₀) hlocal).trans
+    (adjunct_sum_factor (L := L') adj' i' c γ v a₀)
+
 set_option linter.unusedVariables false in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base.
@@ -225,12 +245,8 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
         exact map_comp_factor L' c.derived γ v _ hbase
   refine ⟨c.derived ≫ γ, adj'.homEquiv _ _ v ≫ (eqToIso canonical').inv.app _, ?_⟩
   unfold modelLocalAdjunct modelExchange derivedExchange
-  rw [conjugated_exchange_adjunct (adj := adj) (adj' := adj') (θ := θ)
-    (i := eqToIso canonical) (i' := eqToIso canonical')
-    (a := cF.derived ≫ eX.localChern l X z) (t := line.shift)]
-  refine (congrArg (fun a ↦ adj'.homEquiv _ _ a ≫
-    (eqToIso canonical').inv.app _) hlocal).trans ?_
-  exact adjunct_sum_factor (L := derivedUpper Λ f') adj' (eqToIso canonical') c.derived γ v
-    (cF'.derived ≫ eX'.localChern l X' z')
+  exact exchange_components_finish adj adj' θ (eqToIso canonical) (eqToIso canonical')
+    (cF.derived ≫ eX.localChern l X z) line.shift v
+    (cF'.derived ≫ eX'.localChern l X' z') hlocal
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
