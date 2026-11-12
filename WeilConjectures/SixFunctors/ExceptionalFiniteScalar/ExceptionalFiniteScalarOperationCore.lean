@@ -59,6 +59,7 @@ abbrev OperationCore
 
 set_option maxRecDepth 4096 in
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Elaborating the normalized Hom transport unfolds several derived coefficient equivalences.
 /-- Construction of the core from the existing finite exceptional operations theorem.
 Retain its normalized Hom formula while transporting the right realization back
