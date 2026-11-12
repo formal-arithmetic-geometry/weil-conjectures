@@ -164,7 +164,8 @@ private theorem square_unit_mid_to_pre {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
   simp only [← Functor.map_comp]
   have hb := βp.hom_inv_id_app_assoc M (βq.hom.app M ≫ (T q).map (θj.hom.app M))
   rw [hb]
-  simpa only [square_unit_mid_statement, βq, aj, aq, H, T, cQ] using hmid
+  simpa only [Category.assoc, Functor.map_comp, square_unit_mid_statement,
+    βq, aj, aq, H, T, cQ] using hmid
 
 private theorem square_unit_mid_proof {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) : square_unit_mid_statement k U M := by
