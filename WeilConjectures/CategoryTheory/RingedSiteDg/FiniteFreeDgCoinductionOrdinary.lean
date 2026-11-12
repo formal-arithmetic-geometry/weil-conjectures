@@ -225,14 +225,12 @@ theorem finiteFreeDgExtension_unit (A : Algebra O) (M : Complex O) :
       (ρ_ M).inv ≫ (M ◁ (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) := by
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem right_action_assoc {A : Algebra O} (M : Module A) :
     (action M ▷ A.X) ≫ action M =
       (α_ ((underlying A).obj M) A.X A.X).hom ≫
         (((underlying A).obj M) ◁ (MonObj.mul : A.X ⊗ A.X ⟶ A.X)) ≫ action M := by
   exact congrArg Quiver.Hom.unmop (ModObj.assoc_flip M.X)
-set_option maxHeartbeats 800000 in
 -- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem right_action_unit {A : Algebra O} (M : Module A) :
     (((underlying A).obj M) ◁ (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) ≫ action M =
@@ -250,7 +248,6 @@ private theorem liftUnderlying_eval {A : Algebra O}
     (liftUnderlying core M N f ▷ A.X) ≫ core.evaluation N = action M ≫ f :=
   ((core.hom_universal N ((underlying A).obj M)).surjective (action M ≫ f)).choose_spec
 
-set_option maxHeartbeats 800000 in
 -- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem liftUnderlying_linear {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Module A) (N : Complex O)
@@ -271,7 +268,6 @@ private def evaluationOne {A : Algebra O}
     (((underlying A).obj (core.coinduction.obj N)) ◁
       (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) ≫ core.evaluation N
 
-set_option maxHeartbeats 800000 in
 -- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem liftUnderlying_evaluationOne {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Module A) (N : Complex O)
@@ -281,7 +277,6 @@ private theorem liftUnderlying_evaluationOne {A : Algebra O}
   rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc,
     liftUnderlying_eval, reassoc_of% (right_action_unit M), Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem action_evaluationOne {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (N : Complex O) :
@@ -423,7 +418,6 @@ private theorem finiteFreeDualizable (A : Algebra O)
   obtain ⟨r, ⟨e⟩⟩ := finiteFree n
   exact (finiteCopiesDualizable r).of_iso e.symm
 
-set_option maxHeartbeats 800000 in
 -- The representing evaluation and monoidal-opposite transports need a larger budget.
 /-- Ordinary finite-free coinduction with its representing evaluation and tensor-dual map.
 
