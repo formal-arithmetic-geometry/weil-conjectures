@@ -23,33 +23,6 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-private theorem mixedSections_natTrans_app_heq
-    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
-    (α : F ⟶ G) {K L : C} (h : K = L) : HEq (α.app K) (α.app L) := by
-  subst L
-  rfl
-
--- Perform the naturality paste before specializing the objects to derived sheaves.
-private theorem paste_unit_naturality
-    {C D A E : Type*} [Category C] [Category D] [Category A] [Category E]
-    (G : C ⥤ D) (H : D ⥤ E) (J : C ⥤ A) (S : A ⥤ E) (c : G ⋙ H ⟶ J ⋙ S)
-    {X Y : C} {U : D} {P : E} {B F L : A}
-    {a : U ⟶ G.obj X} (t : X ⟶ Y)
-    {η : P ⟶ H.obj U} {b : P ⟶ S.obj B}
-    {u : B ⟶ J.obj X} {v : J.obj Y ⟶ F} {d : B ⟶ L} {q : L ⟶ F}
-    (hg : η ≫ H.map a ≫ c.app X = b ≫ S.map u)
-    (hf : u ≫ J.map t ≫ v = d ≫ q) :
-    (η ≫ H.map (a ≫ G.map t)) ≫ c.app Y ≫ S.map v =
-      b ≫ S.map d ≫ S.map q := by
-  simp only [Functor.map_comp, Category.assoc]
-  have hn := c.naturality t
-  simp only [Functor.comp_map] at hn
-  rw [← Category.assoc (H.map (G.map t)) (c.app Y), hn]
-  simp only [← Category.assoc] at hg ⊢
-  rw [hg]
-  simp only [Category.assoc]
-  rw [← S.map_comp, ← S.map_comp, hf, S.map_comp]
-
 -- Keep the derived functors abstract while pasting units. The explicit source
 -- equality transports the first Leray equation without unfolding localization choices.
 private theorem generic_first_layer
@@ -152,18 +125,37 @@ private noncomputable abbrev mixedSectionsSheafAbelian (T : TopCat.{u})
 
 attribute [local instance 2000] mixedSectionsSheafAbelian
 
--- Reuse the source-object equality in both the unit component and its dependent type.
-private theorem mixedSections_moduleDirectImage_comp_obj
-    {X Y Z : RingedSpace.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X)) (.up ℤ)) :
-    ((RingedSpace.moduleDirectImage (f ≫ g)).mapHomotopyCategory (.up ℤ)).obj K =
-      ((RingedSpace.moduleDirectImage g).mapHomotopyCategory (.up ℤ)).obj
-        (((RingedSpace.moduleDirectImage f).mapHomotopyCategory (.up ℤ)).obj K) := by
-  rfl
+-- Keep the composition identification available without unfolding both pushforward functors.
+private theorem mixedSections_moduleDirectImage_comp
+    {X Y Z : RingedSpace.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    RingedSpace.moduleDirectImage (f ≫ g) =
+      RingedSpace.moduleDirectImage f ⋙ RingedSpace.moduleDirectImage g := rfl
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
+
+-- Expose the chosen composition-unit equation with its two source objects kept separate.
+private theorem mixedSections_comp_unit_heq
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
+    HEq ((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫
+      (schemeNormalizedDirectImageCompIso f g).inv.app (DerivedCategory.Qh.obj K))
+      ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+          (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj K) ≫
+        (schemeDerivedDirectImage g).map
+          ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K)) := by
+  apply heq_of_eq
+  exact (Classical.choose_spec
+    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
+      X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› X)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Y)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
+      f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
 
 private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : HomotopyCategory
@@ -243,40 +235,39 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
-  have he := (Classical.choose_spec
-    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
-      X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› X)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Y)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
-      f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
+  let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
+  have he := mixedSections_comp_unit_heq f g K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
+  have hA : DerivedCategory.Qh.obj ((HZ.mapHomotopyCategory (.up ℤ)).obj
+        ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K))) =
+      (Sg.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj
+        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) := by
+    rfl
+  have hp := generic_first_layer Df Dg Dfg HY HZ Sg
+    (mixedSections_moduleDirectImage_comp f.toLRSHom.toShHom g.toLRSHom.toShHom) e
+    (mixedGlobalSectionsDirectImageIso g) K he hA (heq_of_eq hg₀)
+  have hg : p ≫ (mixedGlobalSectionsDirectImageIso g).hom.app
+        ((schemeDerivedDirectImage f).obj F) =
+      Sg.mapDerivedCategoryFactorsh.inv.app
+        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
+      (schemeGlobalScalarRestriction g).map
+        (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
+      (schemeGlobalScalarRestriction g).map
+        ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
+    apply eq_of_heq
+    dsimp only [p, F, HY, HZ, Df, Dfg, Sg, schemeDerivedGlobalSections,
+      schemeGlobalScalarRestriction, schemeDerivedDirectImage,
+      RingedSpace.derivedModuleDirectImage] at hp ⊢
+    simpa only [Category.assoc] using hp
   have hf := mixedSections_unit f K
-  have h := paste_unit_naturality (schemeDerivedDirectImage g)
-    (schemeDerivedGlobalSections Z) (schemeDerivedGlobalSections Y)
-    (schemeGlobalScalarRestriction g) (mixedGlobalSectionsDirectImageIso g).hom
-    (Df.rightDerivedFunctorUnit.app K) hg₀ hf
-  dsimp only [p]
-  rw [← Functor.map_comp]
-  erw [he]
-  have hK : (Dfg.mapHomotopyCategory (.up ℤ)).obj K =
-      ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj
-        ((Df.mapHomotopyCategory (.up ℤ)).obj K) :=
-    mixedSections_moduleDirectImage_comp_obj f.toLRSHom.toShHom g.toLRSHom.toShHom K
-  dsimp only [HZ, schemeDerivedGlobalSections] at h ⊢
-  convert h using 1
-  · simp only [hK, F]
-  · apply eq_of_heq
-    apply CategoryTheory.heq_comp
-      (congrArg (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj hK) rfl rfl
-    · apply CategoryTheory.heq_comp
-        (congrArg (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj hK)
-        (congrArg (DerivedCategory.Qh ⋙ HZ.rightDerivedFunctor).obj hK) rfl
-      · exact mixedSections_natTrans_app_heq HZ.rightDerivedFunctorUnit hK
-      · rfl
-    · rfl
+  exact finish_unit_paste (schemeGlobalScalarRestriction g) p
+    ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
+    (Sg.mapDerivedCategoryFactorsh.inv.app
+      ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
+    (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K))
+    ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K))
+    ((mixedGlobalSectionsDirectImageIso f).hom.app F)
+    (Sf.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K))
+    ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K)) hg hf
 
 end AlgebraicGeometry
