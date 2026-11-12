@@ -1425,7 +1425,6 @@ private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D �
   rw [← hc]
   simp
 
-set_option profiler true in
 /-- The pullback comparisons are compatible with one further transition.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
 private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
@@ -1441,9 +1440,9 @@ private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCatego
         ((rationalDerivedPullback l (Coefficient.{u} l Ω K.stage) g).obj K.obj) ≫
       (commonStagePullbackComparison l Ω g K M (h.trans k)).hom := by
   have hd := commonStagePullback_comparison_data l Ω g
-  let b := hd.choose
-  have hb := hd.choose_spec.1
-  have hcoh := hd.choose_spec.2
+  let b := @hd.choose
+  have hb := @hd.choose_spec.1
+  have hcoh := @hd.choose_spec.2
   have h1 : (b h).hom.app K.obj = (commonStagePullbackComparison l Ω g K L h).hom :=
     eq_of_heq (hb h K.obj).1
   have h2 : (b (h.trans k)).hom.app K.obj =
