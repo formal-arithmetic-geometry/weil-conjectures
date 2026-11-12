@@ -35,7 +35,6 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
 set_option profiler true in
--- Extensionality unfolds the cochain comparison components and needs extra heartbeats.
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
 Lemma 4.10, p. 23; Stacks 03D2 and 0941
@@ -81,8 +80,6 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
-  simpa only [integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
-    HomologicalComplex.comp_f] using
-    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
 
 end WeilConjectures.IntegralSystemRealization
