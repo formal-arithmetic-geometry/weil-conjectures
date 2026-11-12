@@ -209,7 +209,8 @@ noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
 ```
 the unit of `La_X^* ⊣ Ra_{X*}`, the unit isomorphism of the monoidal functor `La_X^*`, the
 identification `Ra_{X!} ≅ Ra_{X*}` for the proper `a_X`, and the adjoint `α^♭` of `α` for
-`Ra_{X!} ⊣ Ra_X^!` (blueprint `def-trf-integration`). -/
+`Ra_{X!} ⊣ Ra_X^!` (blueprint `def-trf-integration`,
+`definition-trace-class-local-terms--2`). -/
 noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   haveI : IsProper (toPoint X).left := by
@@ -235,7 +236,8 @@ lemma integral_add [IsProper X.hom] (α β : BorelMooreSection ℓ X) :
 
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
 /-- The *local term* `LT_B(α) = ∫_B j^* α` of a Borel–Moore section along an open and closed
-subscheme `j : B ⟶ X` proper over `s` (blueprint `def-trf-local-term`). -/
+subscheme `j : B ⟶ X` proper over `s` (blueprint `def-trf-local-term`,
+`definition-trace-class-local-terms--3`). -/
 noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     [IsProper U.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
