@@ -222,7 +222,10 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
     Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.assoc, Functor.comp_obj]
-  rw [reassoc_of% hn, hθ', Category.comp_id, hE']
+  rw [reassoc_of% hn]
+  rw [hθ']
+  rw [Category.comp_id]
+  rw [hE']
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and
 `Rf'_! ≅ f'_!`, the compact-support base change of a cartesian square with `f` and `f'` open
