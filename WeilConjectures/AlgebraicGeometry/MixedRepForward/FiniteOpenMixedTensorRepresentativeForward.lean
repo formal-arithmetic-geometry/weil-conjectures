@@ -77,7 +77,6 @@ local notation "ShX" => Sheaf (Scheme.ProEt.topology X) (ModuleCat A)
 local notation "ShU" => Sheaf (Scheme.ProEt.topology U) (ModuleCat A)
 local notation "pull" => (j)^*[ModuleCat A]
 
-set_option maxHeartbeats 1000000 in
 -- Checking the concrete native sheaf tensor instances requires a larger kernel budget.
 /-- The published comparison satisfies its forward counit square on arbitrary complexes.
 
