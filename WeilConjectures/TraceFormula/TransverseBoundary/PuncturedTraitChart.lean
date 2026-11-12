@@ -250,8 +250,10 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
       Iso.op_hom, Scheme.Spec_map, Quiver.Hom.unop_op, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
     simp only [hcancel]
-    rw [hnat]
-    rw [hnat]
+    have hnat_fm := hnat (CommRingCat.ofHom fm)
+    rw [hnat_fm]
+    have hnat_eK := hnat eK.symm.toRingEquiv.toCommRingCatIso.op
+    rw [hnat_eK]
     congr 2
     exact (IsLocalization.map_eq (S := Localization.Away (ρ.hom t)) (Q := Sm)
       (Submonoid.le_comap_map _) (ρ.hom t)).trans (eK.symm.commutes π).symm
