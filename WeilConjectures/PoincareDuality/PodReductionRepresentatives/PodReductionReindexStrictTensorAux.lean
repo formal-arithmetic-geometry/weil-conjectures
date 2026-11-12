@@ -92,6 +92,7 @@ theorem reductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     NatIso.mapHomologicalComplex_inv_app_f]
   exact Category.id_comp _
 
+set_option profiler true in
 /-- Maps out of the ordinary reduction of a degree of a total tensor are determined by the
 reductions of unit-inserted pure tensors at every level.
 Source: Stacks 03EK, 06YY and 0941. -/
@@ -114,15 +115,31 @@ theorem reduction_total_hom_ext (W : Scheme.{u})
             (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
               (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y)))) :
     h₁ = h₂ := by
+  let M : integralTowerModules l E W :=
+    (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)).X k)
   have hn (n : ℕ) : (coefficientSequenceEvaluation l E W n).map h₁ =
       (coefficientSequenceEvaluation l E W n).map h₂ := by
-    rw [← cancel_epi ((pullbackTensorReductionEvaluation l E W n).hom.app _)]
-    apply ((pullbackTensorFiniteAdjunction l E W n).homEquiv _ _).injective
+    let R := (coefficientSequenceEvaluation l E W n).obj N
+    let f₁ : M ⟶ (scalarReductionRestriction l E W n).obj R :=
+      (pullbackTensorFiniteAdjunction l E W n).homEquiv M R
+        ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
+          (coefficientSequenceEvaluation l E W n).map h₁)
+    let f₂ : M ⟶ (scalarReductionRestriction l E W n).obj R :=
+      (pullbackTensorFiniteAdjunction l E W n).homEquiv M R
+        ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
+          (coefficientSequenceEvaluation l E W n).map h₂)
+    rw [← cancel_epi ((pullbackTensorReductionEvaluation l E W n).hom.app M)]
+    apply ((pullbackTensorFiniteAdjunction l E W n).homEquiv M R).injective
+    change f₁ = f₂
     refine StrictTensorAugmentation.total_hom_ext l E W P Q k
-      ((scalarReductionRestriction l E W n).obj ((coefficientSequenceEvaluation l E W n).obj N)) ?_
+      ((scalarReductionRestriction l E W n).obj R) (f := f₁) (g := f₂) ?_
     intro p q hpq V x y
-    rw [ordinaryReduction_homEquiv_apply, ordinaryReduction_homEquiv_apply]
-    exact h n p q hpq V.unop x y
+    let z : M.val.obj V := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq V x y
+    have e₁ := ordinaryReduction_homEquiv_apply l E W n M N h₁ V z
+    have e₂ := ordinaryReduction_homEquiv_apply l E W n M N h₂ V z
+    exact e₁.trans ((h n p q hpq V.unop x y).trans e₂.symm)
   apply SheafOfModules.hom_ext
   ext ⟨n, V⟩ r
   exact congrArg (fun f ↦ f.val.app (op V) r) (hn n)
