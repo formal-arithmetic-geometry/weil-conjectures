@@ -58,7 +58,6 @@ private theorem evaluationSection_zsmul
   unfold coefficientEvaluationSection
   apply ab_eqToHom_zsmul
 
-set_option profiler true in
 private theorem signedTotal_generator
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}]
@@ -74,7 +73,6 @@ private theorem signedTotal_generator
         ((add_comm q p).trans h) U y x :=
   (pullbackTensorSignedTotal_existsUnique J R P Q).exists.choose_spec p q k h U x y
 
-set_option profiler true in
 private theorem evaluation_signed_section
     (n : ℕ) (P Q : CochainComplex (coefficientSequenceModules l E X) ℤ)
     (p q k : ℤ) (hpq : p + q = k) (U : X.ProEtᵒᵖ)
@@ -108,7 +106,6 @@ private theorem evaluation_signed_section
   simpa only [Units.smul_def] using (signedTotal_generator (ProEt.topology X)
     (integralCoefficientCommRingSheaf l E X n) _ _ p q k hpq U _ _).symm
 
-set_option profiler true in
 -- Keep coefficient-site transport abstract during the pure-section calculation.
 private theorem evaluation_signed
     (n : ℕ) (P Q : CochainComplex (coefficientSequenceModules l E X) ℤ) :
@@ -199,7 +196,6 @@ private theorem restrictedLevel_natural
         ((coefficientSequenceEvaluation l E X n).map (b.f k))
   exact (eqToIso (coefficientSequenceRestriction_evaluation l E X n)).hom.naturality (b.f k)
 
-set_option profiler true in
 private theorem tensorTowerLevel_def
     (P Q : CochainComplex (integralTowerModules l E X) ℤ) (n : ℕ) :
     pullbackTensorTensorTowerLevel l E X P Q n =
@@ -214,7 +210,6 @@ private theorem tensorTowerLevel_def
   unfold pullbackTensorTensorTowerLevel
   rfl
 
-set_option profiler true in
 -- Assemble the three finite comparison squares without unfolding their choices.
 /-- Coherent signed total interchange commutes with the prescribed strict tower comparison.
 Source: Stacks 07A4 and 0941
@@ -269,6 +264,7 @@ theorem coefficientTensorTower_signed_square
         (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).map b)).app
           (op n) ≫ (pullbackTensorTensorTowerLevel l E X Q P n).hom =
       (pullbackTensorTensorTowerLevel l E X P Q n).hom ≫ S.map d := by
+    -- Keep the chosen comparisons folded during kernel checking.
     rw [tensorTowerLevel_def, tensorTowerLevel_def]
     dsimp only [Iso.trans_hom, Functor.mapIso_hom]
     change _ ≫ (pullbackTensorRestrictedLevel l E X (B.obj (G.obj Q, G.obj P)) n).hom ≫
