@@ -271,6 +271,13 @@ private theorem restrictionInverseSection (l : ℕ) [Fact l.Prime] (T : Scheme.{
     HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x := by
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
+
+private theorem evalIso_inv_app (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
+    ((evalIso l T r n).inv.app M).hom.app U = eqToHom (r.underlying M n U).symm := by
+  rfl
+
 -- Converting the three concrete sheaf module presentations requires extra reduction.
 set_option profiler true in
 private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
@@ -314,6 +321,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     AddCommGrpCat.comp_apply]
   let T := diagonalSurface Y
+  rw [evalIso_inv_app l T r n (lineModule l (ULift.{u} (Padic l)) c) U]
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
@@ -334,10 +342,9 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
         (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
   let w : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U :=
-    ((evalIso l T r n).inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  have hw : HEq w v := by
-    dsimp only [w, evalIso]
-    exact restrictionInverseSection l T r n (lineModule l (ULift.{u} (Padic l)) c) U v
+    (eqToHom (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm) v
+  have hw : HEq w v := finiteBoundary_cast_heq
+    (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm v
   dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
@@ -584,23 +591,21 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   erw [diagonalForget_section]
   let T := diagonalSurface Y
   let U := op (Scheme.ProEt.mk (𝟙 T))
+  rw [evalIso_inv_app l T r n (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U]
   let z := (toSheafify (Scheme.ProEt.topology T)
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
       (ULift.up 1)
   let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z
   let x : ((r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T))).obj
       (op n)).obj.obj U :=
-    ((evalIso l T r n).inv.app
-      (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
+    (eqToHom (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm) x'
   have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists.choose_spec
       U (ULift.up 1)
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
-  have hx : HEq x x' := by
-    dsimp only [x, evalIso]
-    exact restrictionInverseSection l T r n
-      (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U x'
+  have hx : HEq x x' := finiteBoundary_cast_heq
+    (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
   have ha := a.coefficient_one U x (hx.trans hx')
   have hi (y : ((diagonalForget l T).obj ((diagonalFiniteToPadic l n T).obj
       (geoCartierConstant (diagonalResidue.{u} l n) T))).obj.obj U) :
