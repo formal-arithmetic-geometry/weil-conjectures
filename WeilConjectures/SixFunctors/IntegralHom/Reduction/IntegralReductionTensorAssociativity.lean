@@ -328,8 +328,8 @@ private theorem normalizedReductionComparison_square
     totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
   run_tac Lean.Elab.Tactic.withMainContext do
-    let mut a := (← Lean.Meta.getLocalDeclFromUserName `hs).type
-    let mut b ← Lean.Elab.Tactic.getMainTarget
+    let mut a ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `hs).type
+    let mut b ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
     for _ in [:64] do
       if a != b then
         match a, b with
@@ -345,9 +345,6 @@ private theorem normalizedReductionComparison_square
         | _, _ => pure ()
     Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
     Lean.logInfo m!"PH324 heads: {repr a.getAppFn}\nversus: {repr b.getAppFn}"
-  dsimp only [scalarReductionSourceDerived, scalarReductionTargetDerived,
-    integralReductionSourceHasDerivedCategory, integralReductionTargetHasDerivedCategory,
-    coefficientFiniteHasDerived, derivedCategory] at hs ⊢
   with_unfolding_all exact hs
 
 set_option profiler true in
