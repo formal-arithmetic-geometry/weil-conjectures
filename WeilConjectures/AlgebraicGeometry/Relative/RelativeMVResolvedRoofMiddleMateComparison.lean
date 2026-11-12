@@ -194,7 +194,7 @@ theorem relativeMV_resolved_roof_middle_mate_comparison
       (DerivedCategory.Q.map wU) (DerivedCategory.Q.map wV) hp hq ha
   have hmates := relativeMV_pair_mates adj i j eU eV eU' eV' (b U).hom (b V).hom
   dsimp only [wU, wV] at hU hV hroof
-  rw [hU, hV] at hroof
+  simp only [hU, hV] at hroof
   apply (cancel_mono ((schemeDerivedDirectImage g).map j.hom ≫
     ((schemeDerivedDirectImage g).mapBiprod (H'.obj JU) (H'.obj JV)).hom)).mp
   simpa only [Category.assoc, e₂, e₂'] using hroof.trans hmates.symm
