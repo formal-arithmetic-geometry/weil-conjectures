@@ -277,20 +277,22 @@ private noncomputable def sliceTransport
     intro M Z a b t h V v
     simpa only [Iso.trans_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv,
       NatTrans.comp_app, Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
-      types_comp_apply, sliceNat] using
+      types_comp_apply, sliceNat e.hom t V v, sliceNat e.hom a V v,
+      sliceNat e.hom b V v] using
       I.moduleAdd M Z a b t h V ((e.hom.app Z).hom.app V v)
   moduleZero := by
     intro M Z a h V v
     simpa only [Iso.trans_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv,
       NatTrans.comp_app, Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
-      types_comp_apply, sliceNat] using
+      types_comp_apply, sliceNat e.hom a V v] using
       I.moduleZero M Z a h V ((e.hom.app Z).hom.app V v)
   moduleSMul := by
     intro M Z a b t h V v
     simpa only [Iso.trans_hom, Iso.app_hom, Iso.trans_inv,
       Functor.isoWhiskerLeft_inv, Iso.symm_inv, NatTrans.comp_app,
       Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
-      types_comp_apply, sliceNat] using
+      types_comp_apply, sliceNat e.hom t V v, sliceNat e.hom a V v,
+      sliceNat e.hom b V v] using
       I.moduleSMul M Z a b t h V ((e.hom.app Z).hom.app V v)
 
 -- The graph equations compare several composed underlying-sheaf functors.
@@ -809,8 +811,13 @@ theorem geometric_ringed_pullback_slice_modules
   let B := f.inverse.obj A
   let := f.leftExact
   let := fA.leftExact
-  obtain ⟨RIA, ⟨IA⟩⟩ := algebraic_image (elementTopology A) (elementTopology B)
-    fA.inverse fA.direct fA.adj (presentationElementRing RY A)
+  have hIA : ∃ RIA : Sheaf (elementTopology B) CommRingCat.{u},
+      Nonempty (AlgebraicInverseImage fA.inverse (presentationElementRing RY A) RIA) :=
+    algebraic_image (elementTopology A) (elementTopology B)
+      fA.inverse fA.direct fA.adj (presentationElementRing RY A)
+  let RIA : Sheaf (elementTopology B) CommRingCat.{u} := hIA.choose
+  let IA : AlgebraicInverseImage fA.inverse (presentationElementRing RY A) RIA :=
+    Classical.choice hIA.choose_spec
   trace "slice: algebraic_image complete"
   have : PreservesFiniteLimits (elementSheafPullback A) := by
     rw [← y.localization_inverse]
@@ -854,7 +861,9 @@ theorem geometric_ringed_pullback_slice_modules
     rw [Category.comp_id, Category.assoc, ← Functor.map_comp, hc]
     exact hr.symm
   trace "slice: structural map complete"
-  obtain ⟨b, hb⟩ := sliceModuleComparison P Q (@asIso _ _ _ _ d hdi) hd'
+  have hcomp := sliceModuleComparison P Q (@asIso _ _ _ _ d hdi) hd'
+  let b := hcomp.choose
+  have hb := hcomp.choose_spec
   trace "slice: module comparison complete"
   have hb' (M : ringedSiteModules.{u} (localCoefficientRings RY)) :
       (toSheaf (localCoefficientRings RIA) ⋙
