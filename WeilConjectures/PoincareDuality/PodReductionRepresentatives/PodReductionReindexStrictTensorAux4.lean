@@ -94,7 +94,7 @@ private theorem sequenceEvaluation_hom_naturality (W : Scheme.{u}) (n : ℕ)
   dsimp only [coefficientSequenceEvaluation, SheafOfModules.pushforward] at f
   exact pushforward_hom_naturality_apply
     (F := CategoryTheory.Prod.sectR n W.ProEt) (M := M.val) (N := N.val)
-    (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom f.val i z
+    _ f.val i z
 
 set_option profiler true in
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
@@ -120,7 +120,7 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
   have h4 := congrArg
     (sequenceEvaluation_hom_apply l E W n
       ((pullbackTensorReductionEvaluation l E W n).hom.app M) V') h3
-  exact h1.trans h4
+  simpa only [sequenceEvaluation_hom_apply] using h1.trans h4
 
 
 set_option profiler true in
