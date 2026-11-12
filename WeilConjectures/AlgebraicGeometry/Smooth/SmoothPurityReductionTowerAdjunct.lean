@@ -136,7 +136,7 @@ private theorem scalar_adjunct_isIso_of_generators (hd : d = a ≫ b)
     (t : N ⟶ (restrictScalars ((sheafCompose J
       (forget₂ CommRingCat.{r} RingCat.{r})).map b)).obj M)
     (ht : ∀ U x,
-      t.val.app U (en.inv.val.app U (systemModelTmul A.model X U 1 x)) =
+      (t.val.app U (en.inv.val.app U (systemModelTmul A.model X U 1 x)) : M.val.obj U) =
         em.inv.val.app U (systemModelTmul D.model X U 1 x)) :
     IsIso ((B.ordinaryAdj.homEquiv N M).symm t) := by
   apply scalar_adjunct_isIso hd A B D X N M en em t
@@ -201,6 +201,6 @@ private theorem ordinary_reduction_isIso
     ((level n).app X) ((level m).app X)
   intro U x
   have ht := transition X h U 1 x
-  simpa only [map_one, spStrictTransitionSection, spReductionGenerator] using ht
+  simpa only [map_one, spStrictTransitionSection, spReductionGenerator, Iso.app_inv] using ht
 
 end AlgebraicGeometry.ProEtale

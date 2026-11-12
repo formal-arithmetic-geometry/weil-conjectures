@@ -436,7 +436,7 @@ private theorem principal_coneIso_inr
     (a : K ≅ K') (b : L ≅ L') (h : f ≫ b.hom = a.hom ≫ g) :
     CochainComplex.mappingCone.inr f ≫ (coneIso f g a b h).hom =
       b.hom ≫ CochainComplex.mappingCone.inr g :=
-  (CochainComplex.mappingCone.triangleMap f g a.hom b.hom h).comm₂.symm
+  (CochainComplex.mappingCone.triangleMap f g a.hom b.hom h).comm₂
 
 set_option profiler true in
 private theorem strictPrincipalLevels (T : Scheme.{u})
@@ -461,8 +461,8 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
   have hf (n : ℕ) : f.app (op n) = (μ ^ (n + 1)).asHom := power_on_complex l E T P n
   let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1)).asHom
     (Iso.refl P) (Iso.refl P) (by
-      simp only [Iso.refl_hom]
-      exact hf n)
+      rw [hf n]
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp])
   let b (n : ℕ) := e.app (op n) ≪≫ c n
   refine ⟨b, ?_, ?_⟩
   · intro n
@@ -482,8 +482,10 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
           (f.naturality (homOfLE (Nat.le_succ n)).op).symm ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n
       apply coneIso_natural
-      · simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using hX
-      · simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using hY
+      · rw [hX]
+        simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      · rw [hY]
+        simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
     change _ ≫ (e.hom.app (op n) ≫ (c n).hom) =
       (e.hom.app (op (n + 1)) ≫ (c (n + 1)).hom) ≫ _
     calc
