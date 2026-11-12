@@ -190,12 +190,10 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q) := by
   apply HomologicalComplex.hom_ext
   intro k
+  simp only [HomologicalComplex.comp_f]
   apply inverseImage_reduction_total_hom_ext l E g P Q k
   intro n p q hpq U x y
-  change (((S[X]).obj ((R[X]).obj ((F[g]).obj P), (R[X]).obj ((F[g]).obj Q))).X k).val.map _
-    ((((S[X]).map (Prod.mkHom βP.hom βQ.hom)).f k).val.app _
-      ((((systemChain l E g).hom.app ((R[Y]).obj P, (R[Y]).obj Q)).f k).val.app _
-        ((((I[g]).map (tensorReductionStrictMap l E Y P Q)).f k).val.app _ _))) = _
+  simp only [sheafOfModules_comp_apply]
   trace "PH199: composition evaluated"
   have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k)
     (n, (proEtaleIsoPostcompose g).obj U)
