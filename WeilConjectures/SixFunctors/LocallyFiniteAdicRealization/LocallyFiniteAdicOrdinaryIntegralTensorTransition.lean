@@ -172,8 +172,8 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
         finiteOrdinaryCoefficientIntegralModel l X A C E := by
   unfold finiteOrdinaryIntegralTensorModel finiteOrdinaryRawIntegralModel
     finiteOrdinaryCoefficientIntegralModel
-  dsimp only
-  exact iso_factor_six _ _ _ _ _ _
+  apply Iso.ext
+  simp only [Iso.trans_hom, Category.assoc]
 
 /-- The ordinary finite closure comparison has the prescribed integral tensor map.
 
