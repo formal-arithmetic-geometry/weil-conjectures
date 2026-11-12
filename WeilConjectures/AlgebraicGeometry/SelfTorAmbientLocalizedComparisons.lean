@@ -108,12 +108,12 @@ theorem exists_selfTor_ambient_localized_comparisons
   classical
   let := SheafOfModules.monoidalCategory Y.sheaf
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  have : Abelian C := inferInstance
+  let : Abelian C := inferInstance
   let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
   let N := (CochainComplex.singleFunctor C 0).obj B
   obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
   have : QuasiIso q := hq
-  have : K.HasMapBifunctor N (curriedTensor C) := inferInstance
+  let : K.HasMapBifunctor N (curriedTensor C) := inferInstance
   obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y
     ((Functor.const (Discrete PUnit.{1})).obj K)
     ((Functor.const (Discrete PUnit.{1})).obj N) (fun _ ↦ hK)
