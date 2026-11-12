@@ -176,7 +176,6 @@ private noncomputable abbrev cochainMap
             c (Fin.contractNth k (· * ·) g))
       simp [map_add, map_sum, map_zsmul, Rep.hom_comm_apply])
 
-set_option profiler true in
 /-- Continuous inhomogeneous cochains carry a short exact sequence of discrete continuous
 representations to a short exact sequence of complexes. The equivalences `e` identify
 complex terms with continuous maps, and specify both differentials and postcomposition maps.
@@ -226,6 +225,7 @@ theorem continuousCochains_shortExact
               (-1 : ℤ) ^ (k.val + 1) • e j n f (Fin.contractNth k (· * ·) g)) := by
   classical
   intro hS
+  -- Destruct the abelian structure before introducing the dependent cochain data.
   let F := ObjectProperty.ι (fun M : Rep.{w} A G ↦
     ∀ m : M.V, IsOpen {g : G | M.ρ g m = m}) ⋙
     forget₂ (Rep.{w} A G) (ModuleCat.{w} A)
