@@ -242,6 +242,7 @@ private theorem representative_square_after_injective
     _ = _ := by rw [Category.assoc, hvs']
 
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] totalPair pair projection evaluate in
