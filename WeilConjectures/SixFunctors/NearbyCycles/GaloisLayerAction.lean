@@ -181,7 +181,6 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 400000 in
 -- the conjugates of the composition isomorphisms of derived pullbacks are large terms
 /-- **Associativity of the composition isomorphisms of derived pushforwards**: the two ways of
 identifying `R(a ≫ b ≫ c)_*` with `Ra_* ⋙ Rb_* ⋙ Rc_*` agree. It is the conjugate of the
@@ -245,7 +244,6 @@ lemma derivedUnitTransport_eq_conjugate {G G' T S : Scheme.{u}} (s : G ⟶ G') {
   subst hp hq
   exact Category.comp_id _
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The unit transport of a composite**: the unit transport along `s` of `R(g' ≫ j)_*
 L(g' ≫ ε)^*` is `Rj_*` of the unit transport along `s` of `Rg'_* Lg'^*` at `Lε^* A`, up to the
@@ -358,7 +356,6 @@ lemma Hom.pullbackExchange_app_eq_derivedUnitTransport (M : NearbyCyclesModel X 
   · exact fun A ↦ pullbackSquareComparison_hom_app_of_eq_id_right Λ φ.generic M.ε hq φ.commSq_ε A
   · rfl
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The action of an endomorphism of a model with identity total component** on the nearby
 cycles is `Li^*` of the unit transport along its generic component. -/
@@ -374,7 +371,6 @@ lemma Hom.autAction_eq_derivedUnitTransport (M : NearbyCyclesModel X X')
 variable (N : NearbyCyclesModel X X') {L : Type u} [Field L] (h : N.generic ⟶ Spec (.of L))
   (L' : Type u) [Field L'] [Algebra L L']
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The Galois action on the nearby cycles of a finite Galois layer** is, through the
 canonical isomorphism `κ` (`NearbyCyclesModel.galoisLayerExchangeIso`), `Li^* Rj_*` of the unit
@@ -420,7 +416,6 @@ lemma galoisLayerAut_autAction (σ : L' ≃ₐ[L] L')
 
 variable [FiniteDimensional L L'] [IsGalois L L']
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The pullback exchange of a finite Galois layer is split by the averaged action on nearby
 cycles**: if multiplication by `|Γ|` is invertible on `Lε^* C` and the unit transports along
