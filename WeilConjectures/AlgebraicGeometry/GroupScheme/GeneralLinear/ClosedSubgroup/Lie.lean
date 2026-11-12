@@ -189,9 +189,7 @@ theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.I
   have hmem : q₀ ∈ GrpObj.pointsKer (subgroupScheme J) (GrpObj.aug₁ (k := k)) := by
     rw [GrpObj.mem_pointsKer]
     apply (cancel_mono (subgroupSchemeHom h)).1
-    rw [MonObj.one_comp]
-    change (_ ≫ q₀) ≫ subgroupSchemeHom h = 1
-    rw [Category.assoc, hq₀]
+    rw [MonObj.one_comp, points.map, Category.assoc, hq₀]
     exact GrpObj.mem_pointsKer.1 p.2
   exact ⟨⟨q₀, hmem⟩, Subtype.ext hq₀⟩
 
