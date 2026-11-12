@@ -109,7 +109,7 @@ private theorem adjunct_sum_factor
   simp only [Preadditive.add_comp, Category.assoc]
 
 set_option linter.unusedVariables false in
--- The whole-system normalization and derived mate calculation need extra heartbeats.
+set_option profiler true in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base.
 
