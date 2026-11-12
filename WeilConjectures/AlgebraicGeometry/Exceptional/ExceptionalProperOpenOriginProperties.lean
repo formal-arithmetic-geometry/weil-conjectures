@@ -228,7 +228,6 @@ private theorem etale_level_support_bound (n : ℕ) M (a : ℤ) (hM : M.IsGE a) 
   exact exactDerivedAdjunction_isGE (S.properImage.lift n).modules _
     (S.properDerived.level n).inverseFactors (S.properDerived.level n).adjunction _ a
 
-set_option maxHeartbeats 400000 in
 -- The cube has eight derived categories; allow elaboration of its concrete instances.
 private theorem proper_evaluation
     (P : ExceptionalProCompactSupport O ell c

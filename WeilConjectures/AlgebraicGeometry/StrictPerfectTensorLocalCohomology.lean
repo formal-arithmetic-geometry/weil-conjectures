@@ -76,7 +76,6 @@ private theorem coherent_homology_of_coherent_terms (Y : Scheme.{u})
     (hc ((ComplexShape.up ℤ).prev i)) hk).2
   exact hclosure.2.2.2.2 _ _ S.homologyIsoCokernelLift.symm hh
 
-set_option maxHeartbeats 400000 in
 -- Transport through open-site and derived equivalences needs extra elaboration heartbeats;
 -- the file still compiles within the single-file wall-clock limit.
 /-- A strictly perfect representative on one open computes the restricted tensor

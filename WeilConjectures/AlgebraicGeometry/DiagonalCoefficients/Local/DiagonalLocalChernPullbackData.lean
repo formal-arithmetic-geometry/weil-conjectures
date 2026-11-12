@@ -307,7 +307,6 @@ abbrev LocalChernPullbackData.completedSquare (l : ℕ) [Fact l.Prime]
     (d : LocalChernPullbackData l hX p p') :=
   Functor.mapDerivedCategorySquareIso d.completedOrdinary
 
-set_option maxHeartbeats 1200000 in
 -- Instantiate the normalized endpoint theorem with both independent presentations.
 /-- Normalized scalar pullback squares and the whole derived-limit mate exist.
 

@@ -89,7 +89,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 500000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 set_option synthInstance.maxSize 4096 in
 /-- Closed direct image carries a source whose internal Hom preserves colimits to a

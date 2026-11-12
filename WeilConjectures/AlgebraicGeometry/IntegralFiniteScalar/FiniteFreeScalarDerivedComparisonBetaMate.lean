@@ -105,7 +105,6 @@ private theorem scalar_projection
   exact (tensorHom_comp_whiskerLeft e.hom (𝟙 _) (adj.counit.app K)).trans
     (by rw [Category.id_comp])
 
-set_option maxHeartbeats 500000 in
 -- Instantiating the generic mate calculation compares large derived-functor interfaces.
 /--
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/

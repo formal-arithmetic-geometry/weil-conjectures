@@ -85,7 +85,6 @@ private theorem computation_naturality
   simp only [Iso.app_hom]
   rw [DerivedCategory.quotientCompQhIso_hom_naturality]
 
-set_option maxHeartbeats 400000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 private theorem open_comparison_naturality (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

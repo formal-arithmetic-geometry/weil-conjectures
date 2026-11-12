@@ -516,7 +516,6 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
     (K := V.smallEtaleTopology) O t _ _ _ A PW PV)
   {m n : ℕ} (h : m ≤ n)
 
-set_option maxHeartbeats 1600000 in
 -- Compare the normalized scalar mate on flat representatives.
 private theorem coefficient_restriction_normalized :
     ∃ β : (PW.scalar h).restriction ⋙ (B.level n).inverse ≅
@@ -649,7 +648,6 @@ private theorem coefficient_right_normalized :
 
 end CoefficientRestriction
 
-set_option maxHeartbeats 1600000 in
 -- Check the Brown unit equation independently of the cube.
 private theorem brown_image_normalized
     (O : Type (u + 1)) [CommRing O] (t : O)

@@ -34,7 +34,6 @@ private theorem app_eq_of_iso {C D : Type*} [Category* C] [Category* D]
   apply (cancel_epi (F.map i.hom)).1
   rw [α.naturality, ρ.naturality, h]
 
-set_option maxHeartbeats 800000 in
 -- Type-checking the concrete derived and sheaf category interfaces needs extra heartbeats.
 /--
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/

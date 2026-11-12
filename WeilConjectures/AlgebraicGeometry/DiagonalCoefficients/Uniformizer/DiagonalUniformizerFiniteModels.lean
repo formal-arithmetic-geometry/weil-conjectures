@@ -193,7 +193,6 @@ private theorem finiteSource_of_pushSquare
     ((sheafCompose (Scheme.ProEt.topology (ProjectiveLine Y))
       (forget₂ (ModuleCat.{u + 1} A) Ab.{u + 1})).map eP.unitIso.hom)).symm
 
-set_option maxHeartbeats 400000 in
 -- Elaboration of the dependent realization witnesses exceeds the default heartbeat budget.
 set_option linter.unusedVariables false in
 /-- Finite coefficient models, endpoints and direct-image squares, without any

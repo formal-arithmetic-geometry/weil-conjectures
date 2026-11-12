@@ -419,7 +419,6 @@ private theorem coefficient_derivedIso_eq
           q.iso.hom := by
   rfl
 
-set_option maxHeartbeats 1200000 in
 -- Instantiate the exact cone diagram on the normalized completed endpoints.
 /-- The coefficient-unit cone is preserved by the normalized whole-tower comparison.
 
