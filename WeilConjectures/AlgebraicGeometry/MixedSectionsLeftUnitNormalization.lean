@@ -169,6 +169,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
+set_option profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
@@ -216,7 +217,6 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
-  clear_value K
   have he := (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
