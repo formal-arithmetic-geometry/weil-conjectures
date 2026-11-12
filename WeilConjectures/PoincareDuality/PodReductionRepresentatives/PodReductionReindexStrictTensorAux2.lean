@@ -55,13 +55,6 @@ theorem sheafOfModules_natIso_inv_hom_apply {C : Type*} [Category C]
     (s : (F.obj X).val.obj U) : (e.inv.app X).val.app U ((e.hom.app X).val.app U s) = s :=
   sheafOfModules_inv_hom_apply (e.app X) U s
 
-private theorem cochainHom_eq_apply {C : Type*} [Category C]
-    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
-    {A B : CochainComplex (SheafOfModules.{u + 1} R) ℤ}
-    {f g : A ⟶ B} (h : f = g) (k : ℤ) (U : Cᵒᵖ) (s : (A.X k).val.obj U) :
-    (f.f k).val.app U s = (g.f k).val.app U s :=
-  congrArg (fun φ ↦ (φ.f k).val.app U s) h
-
 /-- The ordinary unit section is the reduction of `1 ⊗ x`.
 Source: Stacks 06YY. -/
 theorem scalarUnitSection_eq (W : Scheme.{u}) (n : ℕ)
@@ -69,6 +62,17 @@ theorem scalarUnitSection_eq (W : Scheme.{u}) (n : ℕ)
     coefficientIntegralScalarUnitSection l E W n M U x =
       unrestrictedIntegralTensorSection l E W n M U 1 x :=
   finiteAdjunction_unit_apply l E W n M U x
+
+private theorem tensorReductionStrictMap_section (W : Scheme.{u})
+    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (k : ℤ) (V : W.ProEt)
+    (s : (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj
+      ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))).X k |>.val.obj
+          (op (n, V))) :
+    ((tensorReductionStrictMap l E W P Q).f k).val.app (op (n, V)) s =
+      ((tensorReductionFiniteComponent l E W P Q n).f k).val.app (op V) s :=
+  congrArg (fun φ ↦ (φ.f k).val.app (op V) s)
+    (tensorReductionStrictMap_component l E W P Q n)
 
 set_option profiler true in
 -- The finite component unfolds four transported tensor comparisons.
@@ -93,14 +97,7 @@ theorem strictMap_generator (W : Scheme.{u})
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
         (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y)) := by
-  trace "PH199: proof started"
-  have hc := cochainHom_eq_apply (tensorReductionStrictMap_component l E W P Q n) k (op V)
-    (((pullbackTensorReductionEvaluation l E W n).hom.app _).val.app (op V)
-        (unrestrictedIntegralTensorSection l E W n _ (op V) 1
-          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
-            (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y)))
-  trace "PH199: component evaluated"
-  refine hc.trans ?_
+  rw [tensorReductionStrictMap_section]
   trace "PH199: component applied"
   unfold tensorReductionFiniteComponent
   dsimp only
