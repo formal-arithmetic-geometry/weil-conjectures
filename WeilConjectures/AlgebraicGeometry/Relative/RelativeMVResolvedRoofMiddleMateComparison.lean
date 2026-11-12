@@ -27,9 +27,6 @@ attribute [local instance 2000] schemeMVModuleAbelian
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh RingedSpace.moduleDirectImage
 
-set_option maxHeartbeats 900000 in
-set_option profiler true in
-set_option trace.profiler true in
 -- The middle-vertex type contains fixed complex and derived functor comparisons.
 /-- The diagonal middle component of the normalized resolved row roof has the
 specified mate comparison. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T.
@@ -188,10 +185,11 @@ theorem relativeMV_resolved_roof_middle_mate_comparison
       (Functor.whiskerLeft Ff' η) JU JV
   have hroof := relativeMV_roof_pair (schemeDerivedDirectImage g) i j z t
     (η.app (Ff'.obj (JU ⊞ JV))) (η.app (Ff'.obj JU)) (η.app (Ff'.obj JV))
-    (DerivedCategory.Q.map u.τ₂) pU pV (DerivedCategory.Q.map v.τ₂) qU qV hp hq ha
+    (DerivedCategory.Q.map u.τ₂) (DerivedCategory.Q.map (Ff.map rU))
+      (DerivedCategory.Q.map (Ff.map rV)) (DerivedCategory.Q.map v.τ₂)
+      (DerivedCategory.Q.map wU) (DerivedCategory.Q.map wV) hp hq ha
   have hmates := relativeMV_pair_mates adj i j eU eV eU' eV' (b U).hom (b V).hom
-  change pU ≫ inv qU ≫ η.app (Ff'.obj JU) = _ at hU
-  change pV ≫ inv qV ≫ η.app (Ff'.obj JV) = _ at hV
+  dsimp only [wU, wV, T, H, Ff, Ff', F, G, c, JU, J, sU, L] at hU hV hroof
   rw [hU, hV] at hroof
   apply (cancel_mono ((schemeDerivedDirectImage g).map j.hom ≫
     ((schemeDerivedDirectImage g).mapBiprod (H'.obj JU) (H'.obj JV)).hom)).mp
