@@ -270,7 +270,7 @@ private lemma podTensorRepresentative_cancel {C D J K : Type*}
   simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
     ← prod_id', T.map_id, Category.id_comp]
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The representative square, assembled from the strict Roos normalization and the
 adjunction calculation of the canonical completed comparison.
 Source: blueprint lem-pod-tensor-roos-representative-square. -/
@@ -335,7 +335,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   dsimp only [podOrdinaryReindex, integralOperationsTensorOnGood,
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
     Functor.comp_obj, Functor.prod_obj] at a b
-  exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
+  have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
     (DerivedCategory.Q (C := scalarReductionSource l E X))
     (U := (podReindexTower l E g).obj
@@ -352,7 +352,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
-    _ τ (podTensorReindexAt_tower l E g D hD P Q τ) hs _).trans
-      (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
+    _ τ (podTensorReindexAt_tower l E g D hD P Q τ) hs
+    ((integralCompletedTensor l E X).map
+      (Prod.mkHom
+        ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
+        ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))))
+  exact finish.trans
+    (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
 
 end WeilConjectures
