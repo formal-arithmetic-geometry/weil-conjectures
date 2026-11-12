@@ -89,7 +89,7 @@ private theorem tensorHom_counit_evaluation
   have hn := he _ _ P P Q Q (adj.counit.app (H.obj (op P, Q))) (𝟙 P) (𝟙 Q) (𝟙 _)
   have hid : H.map ((𝟙 P).op, 𝟙 Q) = 𝟙 (H.obj (op P, Q)) := H.map_id (op P, Q)
   erw [hid, Category.comp_id, Category.comp_id, Category.comp_id] at hn
-  rw [Adjunction.homEquiv_counit, F.map_id, Category.id_comp, hn,
+  erw [Adjunction.homEquiv_counit, F.map_id, Category.id_comp, hn,
     ← adj.homEquiv_naturality_right]
   exact congrArg (adj.homEquiv _ Q)
     (tensor_evaluation_interchange
@@ -178,7 +178,7 @@ private theorem tensorHom_pullback_evaluation
   rw [he, hb]
   have hn := τ.inv.naturality (X := (A, P)) (Y := (E, P)) (t, 𝟙 P)
   dsimp only [Functor.comp_map, Functor.prod_map, tensor] at hn
-  rw [Functor.map_id] at hn
+  rw [F.map_id] at hn
   simp only [Category.assoc]
   rw [reassoc_of% hn, ← F.map_comp, ht]
 
@@ -285,7 +285,7 @@ theorem mixedInternalHom_baseChange_exchange
         L.map (schemeDerivedTensorHomEquiv Y _ _ _ (𝟙 _)) :=
     (schemeDerivedTensorHomEquiv Y' _ _ _).apply_symm_apply _
   have hq := tensorPairing_naturality (pullback.snd f g) a (𝟙 (L'.obj M))
-  erw [Functor.map_id] at hq
+  erw [CategoryTheory.Functor.map_id] at hq
   have hl := tensorHom_directImage_evaluation (H Y') R'
     (schemeDerivedTensorHomEquiv Y') (schemeHomTensorHom_naturality Y') a
     ((c (pullback.snd f g)).app (op (L'.obj M), L'.obj N))
