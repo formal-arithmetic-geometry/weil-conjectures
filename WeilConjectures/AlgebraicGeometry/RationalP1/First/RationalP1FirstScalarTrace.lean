@@ -276,8 +276,7 @@ private theorem ordinary_endpoint_square
 
 end OrdinaryEndpointSquare
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
+set_option trace.profiler true in
 -- Identify the two exact-derived composition paths on a single module.
 private theorem derivedPull_single
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -297,15 +296,19 @@ private theorem derivedPull_single
           ((CondensedRing.pullIso a f).hom.app M) := by
   apply (cancel_epi (((CondensedRing.upperStar Λ f).leftDerivedFunctorCompIso
     (Mod.extendScalars (coefficientMap a X))).hom.app _)).1
-  rw [derivedPull_eq_path]
+  rw [derivedPull_eq_path a f]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
     Iso.hom_inv_id_app_assoc]
-  rw [Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj]
-  rw [Functor.leftDerivedFunctorNatIso_hom_app_singleFunctor_obj]
-  rw [reassoc_of% (Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj _ _ _)]
+  rw [Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
+    (Mod.extendScalars (coefficientMap a S)) (CondensedRing.upperStar Λ' f) M]
+  rw [Functor.leftDerivedFunctorNatIso_hom_app_singleFunctor_obj
+    (CondensedRing.upperStar Λ f ⋙ Mod.extendScalars (coefficientMap a X))
+    (Mod.extendScalars (coefficientMap a S) ⋙ CondensedRing.upperStar Λ' f)
+    (CondensedRing.pullIso a f) M]
+  rw [reassoc_of% (Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
+    (CondensedRing.upperStar Λ f) (Mod.extendScalars (coefficientMap a X)) M)]
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
+set_option trace.profiler true in
 -- Normalize both scalar endpoints and paste the exact single comparisons.
 private theorem endpoint_pull_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
