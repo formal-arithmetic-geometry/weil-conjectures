@@ -87,6 +87,7 @@ variable (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.of k))}
   [IsOpenImmersion j.left]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- unifying the curve pieces of `K` with the general open–closed triangle is expensive
 /-- **Additivity of trace classes along the curve pieces** (blueprint
 `prop-trf-trace-class-additivity`, item 2; `lem-trf-trace-triangle-compatibility` for the

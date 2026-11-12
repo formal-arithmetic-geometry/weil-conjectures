@@ -51,6 +51,7 @@ variable {S P W V : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompa
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the pasting identities are checked against the six-functor definitions
 /-- The compact-support base changes of the product squares of `X` and `Y` (here abstract
 cartesian squares over a base `S`) are compatible along a proper `f : X ⟶ Y`: pasting the
