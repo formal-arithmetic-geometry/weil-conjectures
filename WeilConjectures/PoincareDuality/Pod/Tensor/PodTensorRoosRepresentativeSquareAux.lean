@@ -378,8 +378,9 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsCommHasDerivedCategory] at finish hc ⊢
   have final := finish.trans hc
   run_tac Lean.Elab.Tactic.withMainContext do
-    let target ← Lean.Elab.Tactic.getMainTarget
-    let actual ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type
+    let target := (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)).consumeMData
+    let actual :=
+      (← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type).consumeMData
     for i in ([0, 2, 1] : List Nat) do
       Lean.logInfo m!"comparing equality argument {i}"
       let matched ← Lean.Meta.isDefEq actual.getAppArgs[i]! target.getAppArgs[i]!
