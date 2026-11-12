@@ -210,12 +210,7 @@ theorem representative_uncurry_evaluation
     change (chainEquiv.{t + 1, t, u} J R P L _).symm φ' =
       (chainEquiv.{t + 1, t, u} J R P L I).symm φ ≫ r at hn
     rw [hn] at hsquare
-    have hmap : DerivedCategory.Q.map
-        ((chainEquiv.{t + 1, t, u} J R P L I).symm φ ≫ r) =
-        DerivedCategory.Q.map ((chainEquiv.{t + 1, t, u} J R P L I).symm φ) ≫
-          DerivedCategory.Q.map r := DerivedCategory.Q.map_comp _ _
-    rw [hmap] at hsquare
-    simp only [Category.assoc] at hsquare
+    simp only [Functor.map_comp, Category.assoc] at hsquare
     have hr : DerivedCategory.Q.map r ≫
         coefficientHomResolutionInverse.{u, t + 1, t, (max u (t + 1)) + 1} J R I = 𝟙 _ := by
       exact (augmentationIso.{t + 1, t, u, (max u (t + 1)) + 1} J R I).hom_inv_id
