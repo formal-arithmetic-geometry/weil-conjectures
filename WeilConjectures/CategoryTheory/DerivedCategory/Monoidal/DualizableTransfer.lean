@@ -229,7 +229,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [∀ j, PreservesColimitsOfShape
     (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G]
   {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ G)
-  [∀ X : C, IsIso (ihomComparison G X).natTrans]
+  [∀ X : C, IsIso (ihomComparison G X)]
 
 local instance instHasColimitsOfSize_monoidalDualizableTransfer_2
     : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
@@ -245,7 +245,7 @@ include adj in
 /-- The functor induced by `G` on cochain complexes commutes with internal hom complexes: its
 left adjoint satisfies the projection formula degreewise. -/
 lemma isIso_ihomComparison_mapHomologicalComplex (P : CochainComplex C ℤ) :
-    IsIso (ihomComparison (G.mapHomologicalComplex (.up ℤ)) P).natTrans := by
+    IsIso (ihomComparison (G.mapHomologicalComplex (.up ℤ)) P) := by
   have (X : C) : IsIso (Functor.Monoidal.projectionMap adj X) :=
     Functor.Monoidal.isIso_projectionMap_of_isIso_ihomComparison adj X
   have := adj.leftAdjoint_preservesColimits
@@ -272,7 +272,7 @@ noncomputable def DualizabilityDatum.map {P : CochainComplex C ℤ} (d : Dualiza
   have := d.quasiIso_i
   let c (Y : CochainComplex C ℤ) : G'.obj (internalHomObj P Y) ⟶
       internalHomObj (G'.obj P) (G'.obj Y) :=
-    (ihomComparison G' P).natTrans.app Y
+    (ihomComparison G' P).app Y
   exact
   { I₁ := G'.obj d.I₁
     I := G'.obj d.I

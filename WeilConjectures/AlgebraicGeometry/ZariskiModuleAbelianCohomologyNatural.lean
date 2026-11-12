@@ -17,6 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Natural comparison of module and abelian cohomology
 

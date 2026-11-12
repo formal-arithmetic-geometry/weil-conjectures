@@ -82,11 +82,12 @@ lemma homologyUnitEndRingHom_injective :
   have h₂ := (RingEquiv.injective (asIso (Functor.LaxMonoidal.ε
     (DerivedCategory.Qh (C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))))).symm.conjRingEquiv) h₁
+  apply End.ext
   exact Functor.map_injective (HomologicalComplex.single
     (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
       (ComplexShape.up ℤ) 0 ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙
-        DerivedCategory.Qh) h₂
+        DerivedCategory.Qh) (congrArg End.asHom h₂)
 
 end Injective
 
@@ -259,8 +260,9 @@ the iterate `(K, φ^{(n+1)})`, a Weil object for the model Frobenius
 `Φ_X = (e_X^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
 theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
-    homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
-        (weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
+    (homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
+        (weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2
+          ((weilLowerShriek ℓ eX eY hf).obj K))).asHom =
       trace ((weilUpperStar ℓ ΦZ _ i hi).obj
         ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).compactFrobenius := by
@@ -332,9 +334,10 @@ theorem weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre [IsPrope
   let _ : Fintype {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
   refine homologyUnitEndRingHom_injective ℓ
     (point (AlgebraicClosure k)) ?_
+  apply End.ext
   rw [homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek ℓ hf y hi hZ K,
     ← WeilBoundedConstructible.globalOperator_one, htf, finsum_eq_sum_of_fintype, map_sum,
-    ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
+    End.sum_asHom, ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
   refine Finset.sum_congr rfl fun z _ ↦ ?_
   rw [WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar hi,
     WeilBoundedConstructible.trace_stalkFrobenius_one _ _ _ (by

@@ -77,7 +77,7 @@ theorem compactSupportRawDirectNormalization
     (ProEtale.VaryingRing.coefficients R Z n)
     (ProEtale.StrictTower.constantRingIso (R n) g)
   have hm : (mateEquiv a b (TwoSquare.mk _ _ _ _
-      (ProEtale.VaryingRing.moduleEvalG R q g n).inv)).natTrans =
+      (ProEtale.VaryingRing.moduleEvalG R q g n).inv)) =
         (ProEtale.VaryingRing.moduleEvalP R q g n).hom := by
     have hi := ProEtale.VaryingRing.inverseMateEqOfUnit a b
       (ProEtale.VaryingRing.eval R q Y n) (ProEtale.VaryingRing.eval R q Z n)

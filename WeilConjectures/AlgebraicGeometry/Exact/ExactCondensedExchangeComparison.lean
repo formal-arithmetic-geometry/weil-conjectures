@@ -43,7 +43,7 @@ Source: blueprint rational proper-base-change proof, exact derived factorization
       (Profinite.padicAlgClRingObj l) p').mapDerivedCategoryRightDerivedAdjunction
     (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso
-        (NativeEncoding.condensedPullbackSquare l sq)).hom)).natTrans
+        (NativeEncoding.condensedPullbackSquare l sq)).hom))
 
 /-- The ordinary condensed pullback square for an arbitrary commutative coefficient.
 Source: canonical pullback compositors in the rational base-change argument.
@@ -74,17 +74,17 @@ Source: blueprint rational proper-base-change proof, exact derived factorization
       Λ p').mapDerivedCategoryRightDerivedAdjunction
     (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso
-        (condensedPullbackSquareFor Λ sq)).hom)).natTrans
+        (condensedPullbackSquareFor Λ sq)).hom))
 
 private theorem transported_mate_id
     {C D : Type*} [Category C] [Category D]
     {F F' : C ⥤ D} {R : D ⥤ C} (a : F ⊣ R) (e : F' ≅ F) :
     (mateEquiv (a.ofNatIsoLeft e.symm) a
-      (TwoSquare.mk (𝟭 C) F' F (𝟭 D) e.inv)).natTrans = 𝟙 R := by
+      (TwoSquare.mk (𝟭 C) F' F (𝟭 D) e.inv)) = 𝟙 R := by
   apply NatTrans.ext
   funext N
   simp only [mateEquiv_apply, Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app,
-    TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj, Functor.id_obj,
+    TwoSquare.mk, Functor.comp_obj, Functor.id_obj,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
     Functor.id_map, Functor.comp_map, Iso.symm_inv, Category.id_comp, Category.comp_id,
@@ -111,7 +111,7 @@ private theorem total_mate_id
     (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f)
       (CondensedRing.upperStarLowerStarAdjunction Λ f).mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk (𝟭 _) _ _ (𝟭 _)
-        (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).inv)).natTrans =
+        (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).inv)) =
       𝟙 (CondensedRing.moduleObjectDerivedPushforward Λ f) := by
   rw [total_adjunction_eq]
   exact transported_mate_id _ _
@@ -349,19 +349,19 @@ private theorem identity_mate_cube
     (hc : ∀ N : A,
       K'.map (pG.inv.app N) ≫ pK.inv.app (G.obj N) ≫ θ.app N =
         θ'.app N ≫ H'.map (pF.inv.app N) ≫ pH.inv.app (F.obj N))
-    (hF : (mateEquiv a a' (TwoSquare.mk (𝟭 A) F F' (𝟭 B) pF.inv)).natTrans = 𝟙 R)
-    (hK : (mateEquiv b b' (TwoSquare.mk (𝟭 C) K K' (𝟭 D) pK.inv)).natTrans = 𝟙 S)
+    (hF : (mateEquiv a a' (TwoSquare.mk (𝟭 A) F F' (𝟭 B) pF.inv)) = 𝟙 R)
+    (hK : (mateEquiv b b' (TwoSquare.mk (𝟭 C) K K' (𝟭 D) pK.inv)) = 𝟙 S)
     (E : B) :
-    (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans.app E ≫ S.map (pH.hom.app E) =
+    (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).app E ≫ S.map (pH.hom.app E) =
       pG.hom.app (R.obj E) ≫
-        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ θ')).natTrans.app E := by
+        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ θ')).app E := by
   have h := exchangeMate_cube a b a' b' (𝟭 A) (𝟭 B) (𝟭 C) (𝟭 D)
     pF pG pH pK θ θ' (by simpa only [Functor.id_obj, Functor.id_map] using hc) E
   have h₁ := congr_app hF E
   have h₂ := congr_app hK (H.obj E)
-  simp only [Functor.id_obj, Functor.id_map, TwoSquare.natTrans] at h h₁ h₂
+  simp only [Functor.id_obj, Functor.id_map] at h h₁ h₂
   rw [h₁, h₂] at h
-  simpa only [TwoSquare.natTrans, Functor.comp_obj, Functor.id_obj,
+  simpa only [Functor.comp_obj, Functor.id_obj,
     NatTrans.id_app, CategoryTheory.Functor.map_id,
     Category.assoc, Category.id_comp, Category.comp_id] using h
 
@@ -376,12 +376,12 @@ private theorem identity_mate_forward_cube
     (hc : ∀ N : A,
       pK.hom.app (G.obj N) ≫ K'.map (pG.hom.app N) ≫ θ'.app N =
         θ.app N ≫ pH.hom.app (F.obj N) ≫ H'.map (pF.hom.app N))
-    (hF : (mateEquiv a a' (TwoSquare.mk (𝟭 A) F F' (𝟭 B) pF.inv)).natTrans = 𝟙 R)
-    (hK : (mateEquiv b b' (TwoSquare.mk (𝟭 C) K K' (𝟭 D) pK.inv)).natTrans = 𝟙 S)
+    (hF : (mateEquiv a a' (TwoSquare.mk (𝟭 A) F F' (𝟭 B) pF.inv)) = 𝟙 R)
+    (hK : (mateEquiv b b' (TwoSquare.mk (𝟭 C) K K' (𝟭 D) pK.inv)) = 𝟙 S)
     (E : B) :
-    (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans.app E ≫ S.map (pH.hom.app E) =
+    (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).app E ≫ S.map (pH.hom.app E) =
       pG.hom.app (R.obj E) ≫
-        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ θ'')).natTrans.app E := by
+        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ θ'')).app E := by
   subst θ''
   exact identity_mate_cube a b a' b' pF pG pH pK θ θ'
     (fun N ↦ inverse_functor_square pG pK pF pH θ θ' N (hc N)) hF hK E
@@ -397,12 +397,12 @@ private theorem arrow_of_mate_forward_cube
     (hc : ∀ N : A,
       pK.hom.app (G.obj N) ≫ K'.map (pG.hom.app N) ≫ θ'.app N =
         θ.app N ≫ pH.hom.app (F.obj N) ≫ H'.map (pF.hom.app N))
-    (hF : (mateEquiv a a' (TwoSquare.mk (𝟭 A) F F' (𝟭 B) pF.inv)).natTrans = 𝟙 R)
-    (hK : (mateEquiv b b' (TwoSquare.mk (𝟭 C) K K' (𝟭 D) pK.inv)).natTrans = 𝟙 S)
+    (hF : (mateEquiv a a' (TwoSquare.mk (𝟭 A) F F' (𝟭 B) pF.inv)) = 𝟙 R)
+    (hK : (mateEquiv b b' (TwoSquare.mk (𝟭 C) K K' (𝟭 D) pK.inv)) = 𝟙 S)
     (E : B)
     (τ : R ⋙ G ⟶ H ⋙ S) (τ' : R ⋙ G' ⟶ H' ⋙ S)
-    (hτ : (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans = τ)
-    (hτ' : (mateEquiv a' b' (TwoSquare.mk _ _ _ _ θ'')).natTrans = τ') :
+    (hτ : (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)) = τ)
+    (hτ' : (mateEquiv a' b' (TwoSquare.mk _ _ _ _ θ'')) = τ') :
     Nonempty (Arrow.mk (τ.app E) ≅ Arrow.mk (τ'.app E)) := by
   have h := identity_mate_forward_cube a b a' b' pF pG pH pK θ θ' θ'' hθ hc hF hK E
   rw [hτ, hτ'] at h
@@ -423,7 +423,7 @@ private theorem exactExchangeFor_eq
       Λ p').mapDerivedCategoryRightDerivedAdjunction
     (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso
-        (condensedPullbackSquareFor Λ sq)).hom)).natTrans
+        (condensedPullbackSquareFor Λ sq)).hom))
  := by
   delta exactCondensedExchangeFor
   rfl
@@ -440,7 +440,7 @@ private theorem totalExchangeFor_eq
         (CondensedRing.derivedUpperStarLowerStarAdjunction
           Λ p')
         (TwoSquare.mk _ _ _ _ (CondensedRing.moduleObjectDerivedPullbackSquareComparison
-          Λ sq).hom)).natTrans := by
+          Λ sq).hom)) := by
   rfl
 
 attribute [local irreducible] CondensedRing.moduleObjectDerivedExchange

@@ -62,7 +62,7 @@ include zero complexes and empty sites and use no boundedness assumption. -/
 theorem derived_principal_normalization
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) a).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
         Padic.coefficientExtensionUniformizer l E * a.down s)
     (hs : ∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),
       DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M =

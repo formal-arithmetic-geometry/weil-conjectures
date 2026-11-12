@@ -43,9 +43,9 @@ replacing `B` by `Bt` in both squares (through `e`) and `B''` by `Bt''` (through
 composing vertically gives the vertical composite of `a` and `b` followed by `e''`. -/
 lemma vComp_conj (a : TwoSquare T L R B) (b : TwoSquare B L' R'' B'') (e : B ≅ Bt)
     (e'' : B'' ≅ Bt'') :
-    TwoSquare.vComp (T := T) (B := Bt) (a.natTrans ≫ whiskerLeft L e.hom)
-        (whiskerRight e.inv R'' ≫ b.natTrans ≫ whiskerLeft L' e''.hom) =
-      (TwoSquare.vComp a b).natTrans ≫ whiskerLeft (L ⋙ L') e''.hom := by
+    TwoSquare.vComp (T := T) (B := Bt) (a ≫ whiskerLeft L e.hom)
+        (whiskerRight e.inv R'' ≫ b ≫ whiskerLeft L' e''.hom) =
+      (TwoSquare.vComp a b) ≫ whiskerLeft (L ⋙ L') e''.hom := by
   ext X
   simp [vComp, ← Functor.map_comp_assoc]
 
@@ -69,9 +69,9 @@ by `e''`, is the whiskered vertical composite of the conjugated squares. -/
 lemma whiskerLeft_whiskerRight_vComp_conj (a : TwoSquare T L R B) (b : TwoSquare B L' R'' B'')
     (e : B ≅ Bt) (e'' : B'' ≅ Bt'') (α : L ⋙ L' ⟶ L'') (β : R''' ⟶ R ⋙ R'')
     (s : TwoSquare T L'' R''' B'') (hs : s = ((TwoSquare.vComp a b).whiskerLeft α).whiskerRight β) :
-    s.natTrans ≫ whiskerLeft L'' e''.hom =
-      ((TwoSquare.vComp (T := T) (B := Bt) (a.natTrans ≫ whiskerLeft L e.hom)
-        (whiskerRight e.inv R'' ≫ b.natTrans ≫ whiskerLeft L' e''.hom)).whiskerLeft
+    s ≫ whiskerLeft L'' e''.hom =
+      ((TwoSquare.vComp (T := T) (B := Bt) (a ≫ whiskerLeft L e.hom)
+        (whiskerRight e.inv R'' ≫ b ≫ whiskerLeft L' e''.hom)).whiskerLeft
           α).whiskerRight β := by
   subst hs
   rw [vComp_conj]

@@ -258,7 +258,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
       (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
     let Λ := ULift.{u + 1} (ZMod r)
     let fo := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
-    let e := (asIso (upperStarForget₂ Λ ι).natTrans).symm
+    let e := (asIso (upperStarForget₂ Λ ι)).symm
     refine ⟨fun c₁ c₂ ↦ ?_⟩
     suffices ∀ c : Sheaf.H ((sheafCompose _ fo).obj ((ι)^*[ModuleCat.{u + 1} Λ].obj I)) 1,
         c = 0 by rw [this c₁, this c₂]
@@ -366,7 +366,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
       have := Etale.subsingleton_H_projectiveLine_closedFibre_of_injective A r
         (Injective.under F) (n + 1) n.succ_pos
       exact ⟨fun a b ↦ (bijective_sheafHMap_hom
-        ((asIso (upperStarForget₂ Λ ι).natTrans).app (Injective.under F)) _).1
+        ((asIso (upperStarForget₂ Λ ι)).app (Injective.under F)) _).1
           (@Subsingleton.elim _ this _ _)⟩
     refine ⟨?_, fun η ↦ ?_⟩
     · rw [injective_iff_map_eq_zero]

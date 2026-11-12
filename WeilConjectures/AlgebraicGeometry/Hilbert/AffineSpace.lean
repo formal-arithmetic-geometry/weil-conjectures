@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # The Hilbert functor of points of an affine space

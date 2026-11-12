@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-!
 # Finite coefficients on the small pro-etale site

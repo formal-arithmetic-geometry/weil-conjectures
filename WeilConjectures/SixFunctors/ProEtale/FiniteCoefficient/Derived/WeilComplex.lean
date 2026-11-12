@@ -195,7 +195,7 @@ underlying complexes commuting with the `φ`s. It comes with the forgetful funct
 This is a category of pairs over `Dctf(X, A)`, not a triangulated category of Weil sheaves such
 as `AlgebraicGeometry.WeilComplex`. -/
 abbrev GeometricFiberStrictWeilComplex : Type _ :=
-  StrictWeilComplex A f.geometricGaloisFrobenius
+  StrictWeilComplex A (f.geometricGaloisFrobenius).asIso
 
 section HomGroups
 

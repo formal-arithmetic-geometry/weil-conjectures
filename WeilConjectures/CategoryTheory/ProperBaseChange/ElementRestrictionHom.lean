@@ -72,6 +72,8 @@ import WeilConjectures.CategoryTheory.Ringed.RingedEquivalenceModuleHom
 import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Auxiliary ringed presentation comparisons -/
 

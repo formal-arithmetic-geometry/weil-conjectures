@@ -91,14 +91,14 @@ private theorem mate_of_unit
     (α : F ⋙ L' ⟶ L ⋙ G) (β : R ⋙ F ⟶ G ⋙ R')
     (h : ∀ P, b.homEquiv _ _ (α.app P) =
       F.map (a.unit.app P) ≫ β.app (L.obj P)) :
-    (mateEquiv a b (.mk _ _ _ _ α)).natTrans = β := by
+    (mateEquiv a b (.mk _ _ _ _ α)) = β := by
   apply (mateEquiv a b).symm.injective
   rw [Equiv.symm_apply_apply]
   apply NatTrans.ext
   funext P
   apply (b.homEquiv _ _).injective
   change b.homEquiv _ _ (α.app P) = b.homEquiv _ _
-    ((((mateEquiv a b).symm (.mk _ _ _ _ β)).natTrans).app P)
+    ((((mateEquiv a b).symm (.mk _ _ _ _ β))).app P)
   exact (h P).trans (unit_mateEquiv_symm a b (.mk _ _ _ _ β) P)
 
 private theorem scalar_inverse_mate
@@ -111,7 +111,7 @@ private theorem scalar_inverse_mate
     (hc : conjugateIsoEquiv (am.comp b) (a.comp an) γ = δ)
     (hβ : ∀ P, am.homEquiv _ _ (β.hom.app P) =
       RA.map (an.unit.app P) ≫ δ.inv.app (Fn.obj P)) :
-    (mateEquiv a b (.mk _ _ _ _ γ.inv)).natTrans = β.hom := by
+    (mateEquiv a b (.mk _ _ _ _ γ.inv)) = β.hom := by
   apply (mateEquiv an am).injective
   have hh := iterated_mateEquiv_conjugateEquiv a b am an
     (.mk _ _ _ _ γ.inv)
@@ -147,12 +147,12 @@ theorem etaleBrownOpenScalarTransport_exists
           c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
           (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
             c.i).rightDerivedFunctorIsoMapDerivedCategory)
-        (.mk _ _ _ _ (jo n).inv)).natTrans = (ro n).inverse.inv)
+        (.mk _ _ _ _ (jo n).inv)) = (ro n).inverse.inv)
     {m n : ℕ} (h : m ≤ n) :
     ∃ op : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅
       S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived,
     (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-      (.mk _ _ _ _ op.hom)).natTrans = (S.openDerived.derivedTensor h).inv := by
+      (.mk _ _ _ _ op.hom)) = (S.openDerived.derivedTensor h).inv := by
   have _normalizedOpenComparison := hjo
   -- Conjugate the restriction/inverse-image isomorphism along composite adjunctions.
   let op := (conjugateIsoEquiv
@@ -173,9 +173,9 @@ theorem etaleBrownOpenScalarTransport_exists
   apply (mateEquiv (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj).injective
   change (mateEquiv (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
     (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-      (.mk _ _ _ _ op.hom))).natTrans =
+      (.mk _ _ _ _ op.hom))) =
     (mateEquiv (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
-      (.mk _ _ _ _ (S.openDerived.derivedTensor h).inv)).natTrans
+      (.mk _ _ _ _ (S.openDerived.derivedTensor h).inv))
   rw [hi, iterated_mateEquiv_conjugateEquiv]
   exact congrArg Iso.hom ((conjugateIsoEquiv
     ((S.levelDerivedOpenAdjunction n).comp (S.PZ.scalar h).derivedAdj)

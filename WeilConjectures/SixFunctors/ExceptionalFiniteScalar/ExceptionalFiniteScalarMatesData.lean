@@ -259,7 +259,7 @@ def leftScalarMap {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
       pbcDerivedExtend (proEtaleConstantRingMap (T := X) a) ⋙ sfIntrinsicCompactSupport c B :=
   ((mateEquiv (pbcDerivedScalarAdjunction (proEtaleConstantRingMap (T := X) a))
     (pbcDerivedScalarAdjunction (proEtaleConstantRingMap (T := Y) a))).symm
-      (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c a).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c a).hom))
 
 /-- Literal full-subcategory restriction of the ambient scalar extension.
 Source: Stacks 06YY and 09AL; finite scalar construction, step 2
@@ -386,7 +386,7 @@ structure EtaleMates {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [
     Etale.scalarExtension a Y ⋙ (etaleExceptional B c)
   b_normalized : b.hom =
     (mateEquiv (etaleAdjunction A c) (etaleAdjunction B c)
-      (TwoSquare.mk _ _ _ _ q.inv)).natTrans
+      (TwoSquare.mk _ _ _ _ q.inv))
   projection :
     Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
         Etale.scalarExtension a Y ⋙ Sheaf.derivedRestrictScalars Y.smallEtaleTopology a ≅

@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-!
 # Restricting a constant ring sheaf to its constant scalars

@@ -106,7 +106,7 @@ private noncomputable def interchangeRestrictionNatTrans
       (leftDerivedUpperStarIsoMapDerivedCategory Λ c.obj.obj.g))
     ((derivedUpperStarLowerStarAdjunction Λ p).ofNatIsoLeft
       (leftDerivedUpperStarIsoMapDerivedCategory Λ p))
-    (TwoSquare.mk _ _ _ _ (compositionInterchangePullback Λ p i c).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (compositionInterchangePullback Λ p i c).hom))
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem interchangeRestrictionNatTrans_app

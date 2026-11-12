@@ -110,11 +110,12 @@ noncomputable def geometricFrobenius (D : WeilConjectures.FiniteFieldDatum.{u})
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] :
     Aut (D.geometricFiber Y₀).left :=
   letI := Fintype.ofFinite D.k₀
-  { hom := D.galoisMap Y₀.hom (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
-    inv := D.galoisMap Y₀.hom
-      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).symm
-    hom_inv_id := (D.galoisMap_inverse Y₀.hom _).1
-    inv_hom_id := (D.galoisMap_inverse Y₀.hom _).2 }
+  Aut.of
+    { hom := D.galoisMap Y₀.hom (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
+      inv := D.galoisMap Y₀.hom
+        (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).symm
+      hom_inv_id := (D.galoisMap_inverse Y₀.hom _).1
+      inv_hom_id := (D.galoisMap_inverse Y₀.hom _).2 }
 
 /-- The map fixes the model and is semilinear over the closure, with the stated coefficient
 automorphism. These identities also make it a morphism over the finite base.

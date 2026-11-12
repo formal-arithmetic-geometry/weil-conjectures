@@ -93,7 +93,7 @@ theorem closed_embedding_restriction_transport_square
   obtain ⟨T, S, ⟨a⟩, ⟨r⟩⟩ := embedding_pushforward_transport i hi Y e
   let α := (mateEquiv A B).symm
     (TwoSquare.mk _ S.functor T.functor _ r.hom)
-  have : IsIso α.natTrans := isIso_inverseMate_of_equivalences A B r
+  have : IsIso α := isIso_inverseMate_of_equivalences A B r
   let qY := sheafToPresheaf (Opens.grothendieckTopology Y) (Type (u + 1)) ⋙
     (evaluation (Opens Y)ᵒᵖ (Type (u + 1))).obj (op ⊤)
   let b := (a.app (R.obj (L.obj G))) ≪≫

@@ -105,7 +105,7 @@ lemma leftDerivedUpperStar_map_counit_derivedOpenImmersionLowerShriek
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
     (TwoSquare.mk _ _ _ _ (derivedOpenImmersionLowerShriekBaseChangeIso _ hsq).hom) T
   rw [mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso] at h
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at h
+  dsimp only [TwoSquare.mk] at h
   rw [h, Iso.inv_hom_id_app_assoc]
 
 end BaseChange

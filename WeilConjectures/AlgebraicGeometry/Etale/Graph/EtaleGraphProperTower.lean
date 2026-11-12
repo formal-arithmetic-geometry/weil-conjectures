@@ -237,7 +237,7 @@ theorem etaleGraph_proper_tower
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm
       (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)
-        psq.toCommSq).hom)).natTrans)]
+        psq.toCommSq).hom)))]
     (M : DerivedCategoryModule A X') :
     let ba := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance
     let j'a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c'.i
@@ -250,11 +250,11 @@ theorem etaleGraph_proper_tower
     let sumEx := ((mateEquiv
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       ba).symm (TwoSquare.mk _ _ _ _
-        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) psq.toCommSq).hom)).natTrans
+        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) psq.toCommSq).hom))
     let gam := (mateEquiv
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c'.g)
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-      (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans
+      (TwoSquare.mk _ _ _ _ (inv sumEx)))
     let dv := (rightDerivedLowerShriekIso A
       (HasCompactification.compactification v)).symm ≪≫
       canonicalEtaleCompactSupportComparison A v (HasCompactification.compactification v)
@@ -294,11 +294,11 @@ theorem etaleGraph_proper_tower
   let sumEx := ((mateEquiv
     (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
     ba).symm (TwoSquare.mk _ _ _ _
-      (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) psq.toCommSq).hom)).natTrans
+      (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) psq.toCommSq).hom))
   let gam := (mateEquiv
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c'.g)
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-    (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans
+    (TwoSquare.mk _ _ _ _ (inv sumEx)))
   let dv := (rightDerivedLowerShriekIso A
     (HasCompactification.compactification v)).symm ≪≫
     canonicalEtaleCompactSupportComparison A v (HasCompactification.compactification v)

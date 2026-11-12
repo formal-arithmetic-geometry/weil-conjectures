@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.Functor
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 public import WeilConjectures.Algebra.Homology.BilinearHomComplex
 public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import WeilConjectures.AlgebraicGeometry.RestrictedCoefficientHom

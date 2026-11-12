@@ -55,7 +55,7 @@ comparison `G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` of internal homs followed by 
 lemma nearbyDualityMap_eq_ihomComparison (G : C ⥤ D) [G.LaxMonoidal] {W : C} {W' : D}
     (e : G.obj W ⟶ W') (X : C) :
     nearbyDualityMap (Functor.LaxMonoidal.μ G) e X =
-      (Functor.LaxMonoidal.ihomComparison G X).natTrans.app W ≫ (ihom (G.obj X)).map e := by
+      (Functor.LaxMonoidal.ihomComparison G X).app W ≫ (ihom (G.obj X)).map e := by
   apply uncurry_injective
   rw [uncurry_nearbyDualityMap, uncurry_natural_right, uncurry_eq, Category.assoc,
     Functor.LaxMonoidal.ihomComparison_ev_assoc]

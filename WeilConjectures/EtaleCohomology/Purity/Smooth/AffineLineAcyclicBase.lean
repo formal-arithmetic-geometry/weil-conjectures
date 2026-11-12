@@ -45,7 +45,7 @@ lemma CategoryTheory.unit_comp_app_of_eq_mateEquiv {C D C' D' : Type*} [Category
     [Category* D] [Category* C'] [Category* D'] {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : C' ⥤ D'}
     {R₂ : D' ⥤ C'} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (G : C ⥤ C') (H : D ⥤ D')
     (α : G ⋙ L₂ ⟶ L₁ ⋙ H) (β : R₁ ⋙ G ⟶ H ⋙ R₂)
-    (hβ : ∀ K, β.app K = (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α)).natTrans.app K)
+    (hβ : ∀ K, β.app K = (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α)).app K)
     (c : C) :
     G.map (adj₁.unit.app c) ≫ β.app (L₁.obj c) = adj₂.unit.app (G.obj c) ≫ R₂.map (α.app c) := by
   rw [hβ]

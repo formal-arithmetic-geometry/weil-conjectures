@@ -415,10 +415,10 @@ private theorem ordinaryEvaluation_mate
     (mateEquiv (adj.whiskerRight ℕᵒᵖ) adj
       (TwoSquare.mk ((CategoryTheory.evaluation ℕᵒᵖ C).obj n)
         ((Functor.whiskeringRight ℕᵒᵖ C B).obj L) L
-        ((CategoryTheory.evaluation ℕᵒᵖ B).obj n) (𝟙 _))).natTrans =
+        ((CategoryTheory.evaluation ℕᵒᵖ B).obj n) (𝟙 _))) =
       𝟙 (((Functor.whiskeringRight ℕᵒᵖ B C).obj R) ⋙ (CategoryTheory.evaluation ℕᵒᵖ C).obj n) := by
   ext M
-  simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, NatTrans.id_app,
@@ -461,7 +461,7 @@ private theorem evaluationComparison_mate
           ((CategoryTheory.evaluation ℕᵒᵖ B).obj n) ≪≫
           Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
           (Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).symm).inv
-        )).natTrans := by
+        )) := by
   let F := (Functor.whiskeringRight ℕᵒᵖ B C).obj G
   let EU := (CategoryTheory.evaluation ℕᵒᵖ B).obj n
   let EV := (CategoryTheory.evaluation ℕᵒᵖ C).obj n
@@ -493,7 +493,7 @@ private theorem evaluationComparison_mate
   rw [hm]
   exact congrArg (fun k ↦ (mateEquiv
     (adj.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-    adj.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ k)).natTrans)
+    adj.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ k)))
     (evaluationSquare_inverse P n)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -503,7 +503,7 @@ private theorem towerPushEvaluation_mate (n : ℕ) :
       (mateEquiv (d.towerAdjunction f)
         (proEtaleRingDerivedAdjunction f (d.completedRing V) (d.completedRing U)
           (d.integralRingIso f))
-        (TwoSquare.mk _ _ _ _ (stratumTowerEvaluationIso d f n).inv)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (stratumTowerEvaluationIso d f n).inv)) := by
   exact evaluationComparison_mate
     (proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
       (d.integralRingIso f))
@@ -710,25 +710,24 @@ theorem completedOrdinaryReductionPullbackInv_isIso (n : ℕ) :
   let α := TwoSquare.mk _ _ _ _ b
   have hm : mateEquiv az ar α = TwoSquare.mk _ _ _ _ c.hom := by
     rw [← Equiv.eq_symm_apply]
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     simp only [α, b, mateEquiv_symm_apply, proEtaleRingRestrictionPullbackInv,
       proEtaleRingRestrictionPullbackApp, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
       Category.id_comp]
     simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-    dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+    dsimp only [Functor.comp_obj]
     simp only [Category.id_comp]
     exact (Category.comp_id _).symm
   let γ := (mateEquiv av au).symm α
   have hγ : mateEquiv av au γ = α := (mateEquiv av au).apply_symm_apply α
-  have : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
+  have : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ) := by
     rw [← iterated_mateEquiv_conjugateEquiv av au ar az γ, hγ, hm]
     change IsIso c.hom
     infer_instance
-  change IsIso γ.natTrans
-  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ.natTrans
+  change IsIso γ
+  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ
 
 attribute [instance] completedOrdinaryReductionPullbackInv_isIso
 
@@ -782,7 +781,7 @@ private theorem restrictionPullback_unit
       ((proEtaleRingModuleAdjunction f SV SU cS).unit.app N) ≫
         (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
           (proEtaleRingModuleAdjunction f RV RU cR)
-          (TwoSquare.mk _ _ _ _ σ)).natTrans.app _ = _ at h
+          (TwoSquare.mk _ _ _ _ σ)).app _ = _ at h
   rw [hm] at h
   have hz := congrArg (fun k ↦ k.val.app W z) h
   change (δ.hom.app ((proEtaleRingModulePullback f SV SU cS).obj N)).val.app W
@@ -926,7 +925,7 @@ private theorem towerProjection_completion (K : d.derived U) :
   have hp : (mateEquiv a b
       (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso f).hom)).app K =
       d.towerProjection f K := by
-    simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans,
+    simp only [mateEquiv_apply, TwoSquare.mk,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp]
@@ -937,11 +936,11 @@ private theorem towerProjection_completion (K : d.derived U) :
   rw [hp] at hm
   have hu := unit_mateEquiv ax ay chi K
   have hi := iterated_mateEquiv_conjugateEquiv a b ay ax e
-  change (mateEquiv ax ay chi).natTrans = (d.directImageRlimIso f).hom at hi
+  change (mateEquiv ax ay chi) = (d.directImageRlimIso f).hom at hi
   change (d.push f).map (ax.unit.app K) ≫
-      (mateEquiv ax ay chi).natTrans.app ((d.derivedConstantTower U).obj K) =
+      (mateEquiv ax ay chi).app ((d.derivedConstantTower U).obj K) =
     ay.unit.app ((d.push f).obj K) ≫
-      (completedRlim V (d.completedRing V)).map (chi.natTrans.app K) at hu
+      (completedRlim V (d.completedRing V)).map (chi.app K) at hu
   rw [hi] at hu
   dsimp only [AdicCoefficientDatum.completionUnit]
   rw [Category.assoc, ← Functor.map_comp, hm, Functor.map_comp,
@@ -1051,7 +1050,7 @@ private theorem towerProjection_evaluation (K : d.derived U) (n : ℕ) :
         (completedReductionTower U d).map (a.counit.app K))) =
     EV.map (d.towerProjection f K) ≫
       (mateEquiv (d.towerAdjunction f) a
-        (TwoSquare.mk _ _ _ _ (stratumTowerEvaluationIso d f n).inv)).natTrans.app _ at hm
+        (TwoSquare.mk _ _ _ _ (stratumTowerEvaluationIso d f n).inv)).app _ at hm
   rw [← towerPushEvaluation_mate] at hm
   apply (cancel_mono (δ.hom.app ((d.reduction U n).obj K))).mp
   dsimp only [AdicCoefficientDatum.towerPushReductionEvaluation]

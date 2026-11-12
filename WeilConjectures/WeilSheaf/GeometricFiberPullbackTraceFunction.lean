@@ -51,13 +51,13 @@ lemma adicUpperStarCongr_hom_app_congr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (e e'
 lemma geometricFiberPullback_str_hom_comp_carrierIso_hom {H : AdicSheaf l X}
     (hH : IsAdicLisseSheaf H) :
     (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app
           (geometricFiberPullback (k₀ := k₀) hH).obj.carrier ≫
         (geometricFiberPullback (k₀ := k₀) hH).obj.str.hom ≫
           (geometricFiberPullbackObjCarrierIso hH).hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map
           (geometricFiberPullbackObjCarrierIso hH).hom ≫
-        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv.app H ≫
         (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
           (X ↘ Spec (CommRingCat.of k₀)))).hom.app H := by

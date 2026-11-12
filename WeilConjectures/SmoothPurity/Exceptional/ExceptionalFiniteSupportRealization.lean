@@ -45,7 +45,7 @@ private theorem supportRightMate
     ∃! e : R ⋙ F ≅ G ⋙ R', ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
       b.homEquiv _ _ (α.hom.app M ≫ G.map h) =
         F.map (a.homEquiv _ _ h) ≫ e.hom.app N := by
-  let β := (mateEquiv a b α.hom).natTrans
+  let β := (mateEquiv a b α.hom)
   have : IsIso β := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful a b F G α
   let e := asIso β
   have he : ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
@@ -68,7 +68,7 @@ private theorem supportLeftMate
     ∃! e : L ⋙ G ≅ F ⋙ L', ∀ (M : C) (N : D) (h : L.obj M ⟶ N),
       b.homEquiv _ _ (e.inv.app M ≫ G.map h) =
         F.map (a.homEquiv _ _ h) ≫ β.hom.app N := by
-  let α := ((mateEquiv a b).symm β.hom).natTrans
+  let α := ((mateEquiv a b).symm β.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences a b β
   let e := (asIso α).symm
   have he : ∀ (M : C) (N : D) (h : L.obj M ⟶ N),

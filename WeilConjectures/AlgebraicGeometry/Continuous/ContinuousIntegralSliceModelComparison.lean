@@ -276,12 +276,12 @@ private def pullRightIso {X Z : Scheme.{u}} (h : Z ⟶ X) (A : Type u)
       change AddCommGrpCat.Hom.hom ((N.val.obj ((proEtaleBaseChange h).op.obj W)).smul
           ((coefficientIso h A c).hom.hom.app ((proEtaleBaseChange h).op.obj W)
             (((proEtaleSheafAdjunction h CommRingCat.{u + 1}).unit.app B).hom.app W
-              (c.inv.hom.app W a)))) n =
+              (c.inv.hom.app W a)))).asHom n =
         AddCommGrpCat.Hom.hom ((N.val.obj ((proEtaleBaseChange h).op.obj W)).smul
           ((continuousCoefficientInverseImageMap h A).hom.app
             ((proEtaleBaseChange h).op.obj W)
               (((proEtaleSheafAdjunction h CommRingCat.{u + 1}).unit.app
-                (latticeCoefficientSheaf X A)).hom.app W a))) n
+                (latticeCoefficientSheaf X A)).hom.app W a))).asHom n
       have hc' := congrArg (fun k ↦ k.hom.app W (c.inv.hom.app W a))
         (coefficientAdjunct h A c)
       change (coefficientIso h A c).hom.hom.app ((proEtaleBaseChange h).op.obj W)
@@ -293,7 +293,7 @@ private def pullRightIso {X Z : Scheme.{u}} (h : Z ⟶ X) (A : Type u)
       rw [hc']
       exact congrArg
         (fun r ↦ AddCommGrpCat.Hom.hom
-          ((N.val.obj ((proEtaleBaseChange h).op.obj W)).smul r) n) hq.symm
+          ((N.val.obj ((proEtaleBaseChange h).op.obj W)).smul r).asHom n) hq.symm
     · intro W W' f
       ext n
       rfl
@@ -388,13 +388,13 @@ private def modelRightIso {X Z : Scheme.{u}} (h : Z ⟶ X) (A : Type u)
         ((coefficientIso h A c).hom.hom.app (op ((proEtaleBaseChange h).obj V))
           (((proEtaleSheafAdjunction h CommRingCat.{u + 1}).unit.app
             (pbcAdicCompletion X d)).hom.app (op V)
-              (pbcCompletedSection X d (op V) a)))) n =
+              (pbcCompletedSection X d (op V) a)))).asHom n =
       AddCommGrpCat.Hom.hom ((N.val.obj (op ((proEtaleBaseChange h).obj V))).smul
         ((continuousCoefficientConstantMap Z A).hom.app
           (op ((proEtaleBaseChange h).obj V))
             ((toSheafify (ProEt.topology Z)
               ((Functor.const Z.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app
-                (op ((proEtaleBaseChange h).obj V)) (s.symm a)))) n
+                (op ((proEtaleBaseChange h).obj V)) (s.symm a)))).asHom n
     rw [hh, constants_unit]
     rfl
   · intro N N' f

@@ -16,6 +16,7 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Derived comparison for the relative tensor complexes
 

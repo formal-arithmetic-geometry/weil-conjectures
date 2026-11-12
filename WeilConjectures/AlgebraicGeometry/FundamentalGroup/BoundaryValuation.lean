@@ -232,7 +232,7 @@ theorem inertia_apply_eq_of_pow_eq (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [
   let ι : F →+* Ω := algebraMap F Ω
   -- a primitive `N`-th root of unity of `k`, in `Γ(C, W)` and in `Ω`
   have : NeZero (N : k) := ⟨hN⟩
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   let κ : k →+* F := (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp
     (p.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
   let lR : k →+* Γ(C, c.W) := (C.presheaf.map (homOfLE (le_top : c.W ≤ ⊤)).op).hom.comp

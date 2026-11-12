@@ -37,7 +37,7 @@ private theorem conjugate_pushHom
     (e : F₂ ⋙ R₂ ≅ R₁ ⋙ F₁) (θ : F₁ ⋙ L₂ ≅ L₁ ⋙ F₂)
     (hθ : θ.hom = Adjunction.pushHomOfComapIso a₁ a₂ e) :
     conjugateEquiv (a₁.comp b₂) (b₁.comp a₂) θ.hom =
-      (mateEquiv b₂ b₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
+      (mateEquiv b₂ b₁ (TwoSquare.mk _ _ _ _ e.inv)) := by
   have hm : mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ θ.hom) =
       TwoSquare.mk _ _ _ _ e.inv := by
     rw [hθ]
@@ -59,7 +59,7 @@ private theorem mate_adjunct
   have hu := unit_mateEquiv adj adj' s M
   dsimp only [Functor.id_obj] at hu
   rw [← Category.assoc, ← hu, Category.assoc]
-  have hn := (mateEquiv adj adj' s).natTrans.naturality v
+  have hn := (mateEquiv adj adj' s).naturality v
   dsimp only [Functor.comp_map] at hn
   rw [← hn, ← Category.assoc, ← G.map_comp]
 
@@ -71,7 +71,7 @@ private theorem scalar_projection
     (adj : L ⊣ R) (adj' : L' ⊣ R')
     (s : L' ⋙ V' ≅ V ⋙ L) (θ : L ⋙ E' ≅ E ⋙ L')
     (d : R' ⋙ V ≅ V' ⋙ R)
-    (hd : d.hom = (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).natTrans)
+    (hd : d.hom = (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)))
     {BY : A} {BX : C} (βY : tensorLeft BY ≅ E ⋙ V) (βX : tensorLeft BX ≅ E' ⋙ V')
     (μ : ∀ M N : A, L.obj (M ⊗ N) ⟶ L.obj M ⊗ L.obj N) (e : L.obj BY ≅ BX)
     (hpull : ∀ M : A,
@@ -85,7 +85,7 @@ private theorem scalar_projection
     (θ.inv.app (R.obj K) ≫ E'.map (adj.counit.app K))
   change adj.homEquiv _ _
       (s.inv.app (E.obj (R.obj K)) ≫ V'.map _) =
-    V.map _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).natTrans.app
+    V.map _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).app
       (E'.obj K) at ht
   rw [hd]
   slice_lhs 2 3 => rw [← ht]
@@ -148,7 +148,7 @@ theorem finiteFreeScalarDerivedComparison_beta_mate
   let d := derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f
   have hd : (restrictionPush D a f).hom =
       (mateEquiv (geometricAdjunction Λ' f) (geometricAdjunction Λ f)
-        (TwoSquare.mk _ _ _ _ d.inv)).natTrans :=
+        (TwoSquare.mk _ _ _ _ d.inv)) :=
     conjugate_pushHom (scalarAdjunction a Y) (scalarAdjunction a X)
       (geometricAdjunction Λ f) (geometricAdjunction Λ' f) d (D.theta a f)
       (D.thetaNormalization a f)

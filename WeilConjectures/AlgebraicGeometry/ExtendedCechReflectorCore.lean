@@ -233,7 +233,7 @@ private def derivedHomUnitIso
     let e := DerivedCategory.Q.objObjPreimageIso E
     dsimp only [ringedDerivedHomUnit]
     repeat' apply IsIso.comp_isIso'
-    all_goals first | infer_instance | skip
+    all_goals try infer_instance
     change IsIso ((derivedInternalHom J O).mapIso ((Iso.refl _).prod e)).hom
     infer_instance
   refine NatIso.ofComponents (fun E ↦ @asIso _ _ _ _ (ringedDerivedHomUnit O E)

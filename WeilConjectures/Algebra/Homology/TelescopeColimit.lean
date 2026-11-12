@@ -14,6 +14,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 import WeilConjectures.Algebra.Homology.TelescopeShiftMono
+public import Mathlib.Algebra.Homology.ShortComplex.Abelian
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
 # Telescope comparison for complexes of sheaves of modules

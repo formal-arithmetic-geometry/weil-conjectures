@@ -61,7 +61,7 @@ theorem artinSchreierCover_affineLine (k : Type u) [Field k] (p : ℕ) [Fact p.P
       ∃ σ : Multiplicative (ZMod p) →* Aut
           (artinSchreierCover p (AffineSpace PUnit (Spec (CommRingCat.of k)))
             (AffineSpace.coord (Spec (CommRingCat.of k)) PUnit.unit)),
-        (∀ a : ZMod p, (σ (Multiplicative.ofAdd a)).hom.left.appTop
+        (∀ a : ZMod p, (σ (Multiplicative.ofAdd a)).asIso.hom.left.appTop
             (artinSchreierCoverCoordinate p (AffineSpace PUnit (Spec (.of k)))
               (AffineSpace.coord (Spec (.of k)) PUnit.unit)) =
           artinSchreierCoverCoordinate p (AffineSpace PUnit (Spec (.of k)))
@@ -69,7 +69,7 @@ theorem artinSchreierCover_affineLine (k : Type u) [Field k] (p : ℕ) [Fact p.P
             (a.val : Γ((artinSchreierCover p (AffineSpace PUnit (Spec (.of k)))
               (AffineSpace.coord (Spec (.of k)) PUnit.unit)).left, ⊤))) ∧
         ∀ a : ZMod p,
-          e.inv ≫ (σ (Multiplicative.ofAdd a)).hom.left ≫ e.hom =
+          e.inv ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ e.hom =
             AffineSpace.translation (fun _ : PUnit.{u + 1} ↦
               (Scheme.ΓSpecIso (.of k)).inv.hom (a.val : k)) := by
   -- Construct the maps using the polynomial quotient and the pullback.
@@ -211,7 +211,7 @@ theorem artinSchreierCover_affineLine (k : Type u) [Field k] (p : ℕ) [Fact p.P
   · exact AffineSpace.homOfVector_appTop_coord _ _ _
   · exact hg₀fst
   · intro a
-    change g ≫ (σ (Multiplicative.ofAdd a)).hom.left ≫ f = _
+    change g ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ f = _
     have hgc : g.appTop c = x := by
       have h := congrArg (fun m : A ⟶ A ↦ m.appTop x) hf
       simpa only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
@@ -221,7 +221,7 @@ theorem artinSchreierCover_affineLine (k : Type u) [Field k] (p : ℕ) [Fact p.P
     · rw [Category.assoc, Category.assoc]
       rw [show f ≫ A ↘ Spec (.of k) = π ≫ A ↘ Spec (.of k) from
         AffineSpace.homOfVector_over _ _]
-      rw [← Category.assoc (σ (Multiplicative.ofAdd a)).hom.left,
+      rw [← Category.assoc (σ (Multiplicative.ofAdd a)).asIso.hom.left,
         Over.w, ← Category.assoc]
       change (g₀ ≫ pullback.fst _ _) ≫ (A ↘ Spec (.of k)) = _
       rw [hg₀fst, AffineSpace.artinSchreierMap_over, AffineSpace.translation_over]

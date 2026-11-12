@@ -164,7 +164,7 @@ lemma isZero_upperStar_verdierDual_lowerStar :
   exact (isZero_ihom_obj_of_isZero
     (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j x hjx A) _).of_iso
     (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)
-      ((boundedConstructibleLowerStar ℓ x).obj A)).natTrans.app _))
+      ((boundedConstructibleLowerStar ℓ x).obj A)).app _))
 
 /-- The tensor product of the open piece with the dual of the closed piece vanishes:
 `j_! B ⊗ D_X (Rx_* A) = 0`, by the projection formula for `j_!` and

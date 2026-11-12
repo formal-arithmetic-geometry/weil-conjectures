@@ -38,7 +38,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 lemma ihom_obj_str [Fact (ringChar k₀ ≠ l)] (A B : ProEtaleWeilSheaf k₀ l X) :
     (ihom k₀ l X A B).obj.str =
-      (adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+      (adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
           A.carrier).inv.app B.carrier ≫
         (Mod.ihomMap A.str.inv).app _ ≫ (AdicSheaf.ihom A.carrier).map B.obj.str :=
   rfl
@@ -51,12 +51,12 @@ noncomputable def ihomAdicConstantIso (B : ProEtaleWeilSheaf k₀ l X) :
     ihom k₀ l X (adicConstant k₀ l X) B ≅ B :=
   IsoAlgebra.isoMk (Mod.ihomRegularIso.app B.carrier) (by
     have h := map_ihomRegularIso_inv_app_comp_adicLowerStarCompIhomIso_inv_app l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm B.carrier
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm B.carrier
     have hs : (adicConstant k₀ l X).str =
-        adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm :=
+        adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm :=
       Iso.ext rfl
     have h' : (adicLowerStarCompIhomIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
           (adicConstant k₀ l X).carrier).inv.app B.carrier ≫
         (Mod.ihomMap (adicConstant k₀ l X).str.inv).app
           ((WeilSheaf.frobeniusPullback k₀ l X).obj B.carrier) =
@@ -81,7 +81,7 @@ noncomputable def ihomMapIsoLeft {A A' : ProEtaleWeilSheaf k₀ l X} (φ : A ≅
     (B : ProEtaleWeilSheaf k₀ l X) : ihom k₀ l X A' B ≅ ihom k₀ l X A B :=
   IsoAlgebra.isoMk ((Mod.ihomMapIso ((IsoAlgebra.forget _).mapIso φ)).app B.carrier) (by
     have h := adicLowerStarCompIhomIso_inv_app_comp_ihomMap l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv φ.hom.hom.f B.carrier
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv φ.hom.hom.f B.carrier
     have hφ : A.str.inv ≫ (WeilSheaf.frobeniusPullback k₀ l X).map φ.hom.hom.f =
         φ.hom.hom.f ≫ A'.str.inv := by
       rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
@@ -156,7 +156,7 @@ noncomputable def ihomConstantTwistLeftIso (A B : ProEtaleWeilSheaf k₀ l X) (b
         _ ≫ 𝟙 ((AdicSheaf.ihom A.carrier).obj B.carrier)
       rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
         reassoc_of% (AdicSheaf.smul_comp _ ((adicLowerStarCompIhomIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.app
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv A.carrier).inv.app
             B.carrier))]
       simp only [Category.assoc]
       rfl)
@@ -175,7 +175,7 @@ noncomputable def ihomConstantTwistRightIso (A B : ProEtaleWeilSheaf k₀ l X) (
         _ ≫ 𝟙 ((AdicSheaf.ihom A.carrier).obj B.carrier)
       rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
         reassoc_of% (AdicSheaf.smul_comp _ ((adicLowerStarCompIhomIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.app
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv A.carrier).inv.app
             B.carrier)),
         reassoc_of% (AdicSheaf.smul_comp _ ((Mod.ihomMap A.str.inv).app
           ((WeilSheaf.frobeniusPullback k₀ l X).obj B.carrier))), Functor.map_comp]

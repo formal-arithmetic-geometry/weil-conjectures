@@ -123,7 +123,7 @@ theorem rightMate_pasting
       (Functor.whiskerLeft F γ ≫ Functor.whiskerRight β K)).app Z =
       G.map ((rightMate L₁ R₁ L₂ R₂ a₁ a₂ β).app Z) ≫
         (rightMate L₂ R₂ L₃ R₃ a₂ a₃ γ).app (H.obj Z) := by
-  have h := congrArg (fun t ↦ t.natTrans.app Z)
+  have h := congrArg (fun t ↦ t.app Z)
     (mateEquiv_vcomp a₁ a₂ a₃
       (TwoSquare.mk _ _ _ _ β) (TwoSquare.mk _ _ _ _ γ))
   simpa [rightMate, mateEquiv, TwoSquare.hComp, TwoSquare.vComp,

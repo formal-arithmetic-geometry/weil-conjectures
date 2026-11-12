@@ -200,9 +200,9 @@ private theorem deck_cover {X : Scheme.{u}} (Y : Over X)
     (σ : Multiplicative G →* Aut Y)
     (htrans : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
       (s t : Spec (.of Ω) ⟶ Y.left), s ≫ Y.hom = t ≫ Y.hom →
-        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).hom.left) :
+        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left) :
     ∀ z : (pullback Y.hom Y.hom : Scheme.{u}), ∃ a : G,
-      z ∈ Set.range (pullback.lift (σ (Multiplicative.ofAdd a)).hom.left (𝟙 Y.left)
+      z ∈ Set.range (pullback.lift (σ (Multiplicative.ofAdd a)).asIso.hom.left (𝟙 Y.left)
         (by simp)) := by
   intro z
   let t := (pullback Y.hom Y.hom : Scheme.{u}).algClosurePoint z
@@ -210,7 +210,7 @@ private theorem deck_cover {X : Scheme.{u}} (Y : Over X)
     (by simp only [Category.assoc, pullback.condition])
   refine ⟨a, (t ≫ pullback.snd _ _) (IsLocalRing.closedPoint _), ?_⟩
   have he : t = (t ≫ pullback.snd _ _) ≫
-      pullback.lift (σ (Multiplicative.ofAdd a)).hom.left (𝟙 Y.left)
+      pullback.lift (σ (Multiplicative.ofAdd a)).asIso.hom.left (𝟙 Y.left)
         (by simp) := by
     apply pullback.hom_ext
     · simpa only [Category.assoc, pullback.lift_fst] using ha
@@ -221,7 +221,7 @@ private theorem deck_cover {X : Scheme.{u}} (Y : Over X)
 private theorem condensedPull_eq_deck
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (Y : Over X) (h : Y ⟶ Y) :
-    condensedPull Λ h = regularDeckEnd Λ Y.hom h.left (Over.w h) := by
+    condensedPull Λ h = (regularDeckEnd Λ Y.hom h.left (Over.w h)).asHom := by
   unfold condensedPull regularDeckEnd
   congr 2
   apply Mod.regular_hom_ext
@@ -321,16 +321,16 @@ private theorem deck_detect
     (σ : Multiplicative G →* Aut Y)
     (htrans : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
       (s t : Spec (.of Ω) ⟶ Y.left), s ≫ Y.hom = t ≫ Y.hom →
-        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).hom.left)
+        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left)
     {Q : Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (ProEtale.condensedRingObj Λ Y.left)}
     (k : Q ⟶ (upperStar Λ Y.hom).obj
       ((lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left)))
     (hk : ∀ a, k ≫ (upperStar Λ Y.hom).map
-      (condensedPull Λ (σ (Multiplicative.ofAdd a)).hom) ≫
+      (condensedPull Λ (σ (Multiplicative.ofAdd a)).asIso.hom) ≫
         (upperStarLowerStarAdjunction Λ Y.hom).counit.app (condensedUnit Λ Y.left) = 0) :
     k = 0 := by
-  let t : G → (Y ⟶ Y) := fun a ↦ (σ (Multiplicative.ofAdd a)).hom
+  let t : G → (Y ⟶ Y) := fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom
   have hcover : ∀ z : (pullback Y.hom Y.hom : Scheme.{u}), ∃ a,
       z ∈ Set.range (pullback.lift (t a).left (𝟙 Y.left) (by simp)) :=
     deck_cover Y G σ htrans
@@ -352,24 +352,24 @@ private theorem deck_evaluation_add
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (Y : Over X)
     (G : Type u) [AddCommGroup G] (σ : Multiplicative G →* Aut Y) (a b : G) :
-    (upperStar Λ Y.hom).map (condensedPull Λ (σ (Multiplicative.ofAdd a)).hom) ≫
-      (upperStar Λ Y.hom).map (condensedPull Λ (σ (Multiplicative.ofAdd b)).hom) ≫
+    (upperStar Λ Y.hom).map (condensedPull Λ (σ (Multiplicative.ofAdd a)).asIso.hom) ≫
+      (upperStar Λ Y.hom).map (condensedPull Λ (σ (Multiplicative.ofAdd b)).asIso.hom) ≫
       (upperStarLowerStarAdjunction Λ Y.hom).counit.app (condensedUnit Λ Y.left) =
-    (upperStar Λ Y.hom).map (condensedPull Λ (σ (Multiplicative.ofAdd (a + b))).hom) ≫
+    (upperStar Λ Y.hom).map (condensedPull Λ (σ (Multiplicative.ofAdd (a + b))).asIso.hom) ≫
       (upperStarLowerStarAdjunction Λ Y.hom).counit.app (condensedUnit Λ Y.left) := by
   simp only [condensedPull_eq_deck]
   dsimp only [condensedUnit]
-  rw [deck_counit Λ Y.hom (σ (Multiplicative.ofAdd b)).hom.left
-    (Over.w (σ (Multiplicative.ofAdd b)).hom),
-    deck_counit Λ Y.hom (σ (Multiplicative.ofAdd (a + b))).hom.left
-      (Over.w (σ (Multiplicative.ofAdd (a + b))).hom)]
-  rw [regularDeckEnd_evaluation Λ Y.hom (σ (Multiplicative.ofAdd a)).hom.left
-    (Over.w (σ (Multiplicative.ofAdd a)).hom) Y.hom
-    (σ (Multiplicative.ofAdd b)).hom.left (Over.w (σ (Multiplicative.ofAdd b)).hom)]
-  have hab : (σ (Multiplicative.ofAdd b)).hom.left ≫
-      (σ (Multiplicative.ofAdd a)).hom.left =
-      (σ (Multiplicative.ofAdd (a + b))).hom.left := by
-    change _ = (σ (Multiplicative.ofAdd a * Multiplicative.ofAdd b)).hom.left
+  rw [deck_counit Λ Y.hom (σ (Multiplicative.ofAdd b)).asIso.hom.left
+    (Over.w (σ (Multiplicative.ofAdd b)).asIso.hom),
+    deck_counit Λ Y.hom (σ (Multiplicative.ofAdd (a + b))).asIso.hom.left
+      (Over.w (σ (Multiplicative.ofAdd (a + b))).asIso.hom)]
+  rw [regularDeckEnd_evaluation Λ Y.hom (σ (Multiplicative.ofAdd a)).asIso.hom.left
+    (Over.w (σ (Multiplicative.ofAdd a)).asIso.hom) Y.hom
+    (σ (Multiplicative.ofAdd b)).asIso.hom.left (Over.w (σ (Multiplicative.ofAdd b)).asIso.hom)]
+  have hab : (σ (Multiplicative.ofAdd b)).asIso.hom.left ≫
+      (σ (Multiplicative.ofAdd a)).asIso.hom.left =
+      (σ (Multiplicative.ofAdd (a + b))).asIso.hom.left := by
+    change _ = (σ (Multiplicative.ofAdd a * Multiplicative.ofAdd b)).asIso.hom.left
     rw [map_mul]
     rfl
   exact deck_projection_congr Λ Y.hom hab _ _
@@ -435,10 +435,10 @@ theorem condensed_character_image_evaluation_mono
     (hq : IsUnit (Fintype.card G : MonObj.Γ Λ))
     (htrans : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
       (s t : Spec (.of Ω) ⟶ Y.left), s ≫ Y.hom = t ≫ Y.hom →
-        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).hom.left) :
+        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left) :
     Mono ((ProEtale.CondensedRing.upperStar Λ Y.hom).map
         (image.ι (condensedProjector Λ G Y
-          (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ)) ≫
+          (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom) ≫
       (ProEtale.CondensedRing.upperStarLowerStarAdjunction Λ Y.hom).counit.app
         (condensedUnit Λ Y.left)) := by
   classical
@@ -450,13 +450,15 @@ theorem condensed_character_image_evaluation_mono
   let := ProEtale.linear_lowerStar Λ Y.hom
   let := ProEtale.condensedModulePullback_linear Λ Y.hom
   let F := upperStar Λ Y.hom
-  let e := condensedProjector Λ G Y (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ
+  let e := (condensedProjector Λ G Y
+    (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom
   let ε := (upperStarLowerStarAdjunction Λ Y.hom).counit.app (condensedUnit Λ Y.left)
   have he : F.map e = ∑ a : G,
       (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-a)) •
-        F.map (condensedPull Λ (σ (Multiplicative.ofAdd a)).hom) := by
+        F.map (condensedPull Λ (σ (Multiplicative.ofAdd a)).asIso.hom) := by
     dsimp only [e]
     unfold condensedProjector
+    simp only [End.sum_asHom]
     rw [Functor.map_sum]
     apply Finset.sum_congr rfl
     intro a _

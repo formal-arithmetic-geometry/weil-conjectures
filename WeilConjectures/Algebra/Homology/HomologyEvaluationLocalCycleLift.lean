@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 @[expose] public section
 set_option autoImplicit false

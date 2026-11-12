@@ -297,9 +297,9 @@ theorem integralPullEvaluation_quotientSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
   let δ₀ := ((mateEquiv
     (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
     (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-      (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans
+      (TwoSquare.mk _ _ _ _ r₀.inv))
   let δ := ((mateEquiv (finiteAdj l E f n) (finiteAdj l E f (n + 1))).symm
-    (TwoSquare.mk _ _ _ _ r.inv)).natTrans
+    (TwoSquare.mk _ _ _ _ r.inv))
   let α (k : ℕ) : I.mapDerivedCategory ⋙ (V X k).mapDerivedCategory ⟶
       (V Y k).mapDerivedCategory ⋙ (F k).mapDerivedCategory :=
     (pullbackTensorDerivedEvaluation l E f k).hom

@@ -87,8 +87,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- Isomorphic Weil sheaves have stalks with the same Frobenius trace. -/
 theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     LinearMap.trace (PadicAlgCl l) _ (G.stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd := by
   obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso s m hs e
@@ -100,8 +100,8 @@ section `ℚ̄_ℓ ⟶ Γ(Spec k̄, s^* ℚ̄_ℓ)` is an isomorphism
 (`AlgebraicGeometry.ProEtale.isIso_unitSection`). -/
 theorem WeilSheaf.finrank_stalkAt_adicConstant
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).stalkAt s m hs).carrier =
       1 := by
   let e₁ : (WeilCoefficients.toModuleCat l).obj (𝟙_ (WeilCoefficients.{u} l)) ≃ₗ[PadicAlgCl l]
@@ -119,8 +119,8 @@ variable (k₀ l) in
 /-- The Frobenius of every stalk of the constant Weil sheaf has trace `1`. -/
 theorem WeilSheaf.trace_frobeniusEnd_stalkAt_adicConstant
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     LinearMap.trace (PadicAlgCl l) _ ((WeilSheaf.adicConstant k₀ l X).stalkAt s m hs).frobeniusEnd =
       1 := by
   rw [FrobeniusModule.frobeniusEnd, WeilSheaf.adicConstant_stalkAt_frobenius,

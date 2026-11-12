@@ -276,7 +276,7 @@ theorem exists_kummerElement [NeZero (N : k)] [HasEnoughRootsOfUnity k N] {ξ : 
       ∀ σ : Gal(Ω/C.functionField), σ x =
         algebraMap C.functionField Ω (p.functionFieldConstants ξ) ^ (T.galoisCharacter j σ).val *
           x := by
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   set ι : k →+* Ω := (algebraMap C.functionField Ω).comp p.functionFieldConstants
   have hζ : IsPrimitiveRoot (ι ζk) N := hζk.map_of_injective ι.injective
   obtain ⟨x₀, hx₀, hx₀σ⟩ := T.exists_kummer_element (T.genericFiberPoint j) hζ

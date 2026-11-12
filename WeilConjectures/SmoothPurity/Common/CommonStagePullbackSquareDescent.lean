@@ -98,44 +98,44 @@ theorem commonStagePullbackSquare_existsUnique
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
     (b : ∀ E : Index l Ω,
       rationalDerivedPullback l (Coefficient.{u} l Ω E) f ⋙
-        rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.hom ≅
-      rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom ⋙
+        rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.asIso.hom ≅
+      rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.asIso.hom ⋙
         rationalDerivedPullback l (Coefficient.{u} l Ω E) f)
     (hb : ∀ {E L : Index l Ω} (w : E ≤ L)
       (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω X E),
       ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T w).map
           ((b E).hom.app K) ≫
         (commonStagePullbackTransition l Ω f w).hom.app
-          ((rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom).obj K) ≫
+          ((rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.asIso.hom).obj K) ≫
         (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).map
-          ((commonStagePullbackTransition l Ω eX.hom w).hom.app K) =
-      ((commonStagePullbackTransition l Ω eY.hom w).hom.app
+          ((commonStagePullbackTransition l Ω eX.asIso.hom w).hom.app K) =
+      ((commonStagePullbackTransition l Ω eY.asIso.hom w).hom.app
           ((rationalDerivedPullback l (Coefficient.{u} l Ω E) f).obj K) ≫
-        (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.hom).map
+        (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.asIso.hom).map
           ((commonStagePullbackTransition l Ω f w).hom.app K)) ≫
         (b L).hom.app (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T w).obj K)) :
-    ∃! d : commonStageDerivedPullback l Ω f ⋙ commonStageDerivedPullback l Ω eY.hom ≅
-        commonStageDerivedPullback l Ω eX.hom ⋙ commonStageDerivedPullback l Ω f,
+    ∃! d : commonStageDerivedPullback l Ω f ⋙ commonStageDerivedPullback l Ω eY.asIso.hom ≅
+        commonStageDerivedPullback l Ω eX.asIso.hom ⋙ commonStageDerivedPullback l Ω f,
       ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω X,
         HEq (d.hom.app K)
           ((GeneralAlgebraicallyClosedCoefficients.inclusion
             (l := l) (Ω := Ω) (Y := Y) K.stage).map ((b K.stage).hom.app K.obj)) := by
   classical
   obtain ⟨hf, ef⟩ := commonStagePullbackNormalizedDescent l Ω f
-  obtain ⟨hx, ex⟩ := commonStagePullbackNormalizedDescent l Ω eX.hom
-  obtain ⟨hy, ey⟩ := commonStagePullbackNormalizedDescent l Ω eY.hom
+  obtain ⟨hx, ex⟩ := commonStagePullbackNormalizedDescent l Ω eX.asIso.hom
+  obtain ⟨hy, ey⟩ := commonStagePullbackNormalizedDescent l Ω eY.asIso.hom
   let Mf : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).Morphism
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y) :=
     ⟨fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) f,
       commonStagePullbackTransition l Ω f, hf⟩
   let Mx : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).Morphism
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X) :=
-    ⟨fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom,
-      commonStagePullbackTransition l Ω eX.hom, hx⟩
+    ⟨fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.asIso.hom,
+      commonStagePullbackTransition l Ω eX.asIso.hom, hx⟩
   let My : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).Morphism
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y) :=
-    ⟨fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.hom,
-      commonStagePullbackTransition l Ω eY.hom, hy⟩
+    ⟨fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.asIso.hom,
+      commonStagePullbackTransition l Ω eY.asIso.hom, hy⟩
   let τ : (Mf.comp My).Hom (Mx.comp Mf) := {
     τ := fun E ↦ (b E).hom
     comm := by

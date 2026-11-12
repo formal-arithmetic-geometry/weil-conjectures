@@ -54,13 +54,12 @@ variable {Y Y' : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 by a morphism `f : Y' ⟶ Y` (`AlgebraicGeometry.Scheme.FiniteEtale.pullbackPathIso`). -/
 noncomputable def pullbackPathHom (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') :
     Aut (fiber y) →* Aut (fiber (y ≫ f)) where
-  toFun σ := pullbackPathIso f σ
-  map_one' := pullbackPathIso_refl f y
-  map_mul' σ τ := by
-    rw [Aut.Aut_mul_def, Aut.Aut_mul_def, pullbackPathIso_trans]
+  toFun σ := Aut.of (pullbackPathIso f σ.asIso)
+  map_one' := Aut.ext (pullbackPathIso_refl f y)
+  map_mul' σ τ := Aut.ext (pullbackPathIso_trans f τ.asIso σ.asIso)
 
 lemma pullbackPathHom_apply (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') (σ : Aut (fiber y)) :
-    pullbackPathHom f y σ = pullbackPathIso f σ :=
+    pullbackPathHom f y σ = Aut.of (pullbackPathIso f σ.asIso) :=
   rfl
 
 open PreGaloisCategory in
@@ -75,7 +74,8 @@ lemma continuous_pullbackPathHom (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') :
       (autEmbedding_isClosedEmbedding (fiber y)).continuous
   exact ((continuous_of_discreteTopology (β := Aut ((fiber (y ≫ f)).obj P))
     (f := fun a : Aut ((fiber y).obj ((pullback f).obj P)) ↦
-      ((pullbackFiberIso f y).app P).symm ≪≫ a ≪≫ (pullbackFiberIso f y).app P)).comp hc).congr
+      Aut.of (((pullbackFiberIso f y).app P).symm ≪≫ a.asIso ≪≫
+        (pullbackFiberIso f y).app P))).comp hc).congr
     fun σ ↦ rfl
 
 open PreGaloisCategory in
@@ -85,14 +85,14 @@ automorphisms of the fibre functor at `y` act transitively on the fibre of `P` a
 `pullbackPathHom`. -/
 lemma exists_pullbackPathHom_apply_eq [ConnectedSpace Y'] (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y')
     (P : Y.FiniteEtale) [IsConnected ((pullback f).obj P)] (a b : (fiber (y ≫ f)).obj P) :
-    ∃ τ : Aut (fiber y), (pullbackPathHom f y τ).hom.app P a = b := by
+    ∃ τ : Aut (fiber y), (pullbackPathHom f y τ).asIso.hom.app P a = b := by
   have key (a' : (fiber y).obj ((pullback f).obj P)) :
-      ∃ τ : Aut (fiber y), τ.hom.app _ a' = (pullbackFiberIso f y).inv.app P b :=
+      ∃ τ : Aut (fiber y), τ.asIso.hom.app _ a' = (pullbackFiberIso f y).inv.app P b :=
     MulAction.exists_smul_eq _ a' _
   obtain ⟨τ, hτ⟩ := key ((pullbackFiberIso f y).inv.app P a)
   refine ⟨τ, ?_⟩
-  have h : (pullbackPathHom f y τ).hom.app P a = (pullbackFiberIso f y).hom.app P
-      (τ.hom.app _ ((pullbackFiberIso f y).inv.app P a)) := rfl
+  have h : (pullbackPathHom f y τ).asIso.hom.app P a = (pullbackFiberIso f y).hom.app P
+      (τ.asIso.hom.app _ ((pullbackFiberIso f y).inv.app P a)) := rfl
   rw [h, hτ]
   exact ConcreteCategory.congr_hom ((pullbackFiberIso f y).inv_hom_id_app P) b
 

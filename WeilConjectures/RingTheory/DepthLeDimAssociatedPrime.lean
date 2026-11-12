@@ -15,6 +15,7 @@ import WeilConjectures.RingTheory.DepthQuotSMulTop
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Mathlib.RingTheory.Regular.IsSMulRegular
+public import Mathlib.RingTheory.Nakayama
 
 /-!
 # Depth is bounded by the dimension at an associated prime
