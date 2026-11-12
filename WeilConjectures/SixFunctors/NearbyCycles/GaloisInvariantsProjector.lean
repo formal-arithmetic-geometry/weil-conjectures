@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
-import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariantTensor
+import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariant
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
@@ -136,11 +136,11 @@ coinvariant universal property. -/
 lemma map_retraction_comp_eq_of_coinvariant {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {P Q : C} (α : P ⟶ Q) (r : Q ⟶ P) (hr : α ≫ r = 𝟙 P)
     {ι : Type*} (ρ : ι → (Q ⟶ Q)) (hinv : ∀ k, ρ k ≫ (r ≫ α) = r ≫ α)
-    {r' : Q ⟶ P}
-    (hproj : ∀ {W : D} (φ : F.obj Q ⟶ W),
+    (hproj : ∃ r' : Q ⟶ P, ∀ {W : D} (φ : F.obj Q ⟶ W),
       (∀ k, F.map (ρ k) ≫ φ = φ) → F.map (r' ≫ α) ≫ φ = φ)
     {W : D} (φ : F.obj Q ⟶ W) (hφ : ∀ k, F.map (ρ k) ≫ φ = φ) :
     F.map (r ≫ α) ≫ φ = φ := by
+  obtain ⟨r', hproj⟩ := hproj
   have he := hproj (F.map (r ≫ α)) fun k ↦ by rw [← F.map_comp, hinv]
   rw [← F.map_comp, Category.assoc, ← Category.assoc α r α, hr, Category.id_comp] at he
   rw [← he]
@@ -350,6 +350,31 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
 
+/-- The Galois-layer exchange is the derived unit transported through its comparison
+isomorphisms. -/
+lemma galoisLayerProjectorFactorization
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have := hasTensor₄ObjExt_mod.{u}
+  have := hasGoodTensor₁₂Tensor_mod.{u}
+  have := hasGoodTensorTensor₂₃_mod.{u}
+  have := hasColimitsOfShape_int_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  dsimp only [galoisLayer, galoisLayerExchangeIso, Functor.comp_map, Functor.mapIso_hom,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]
+  simpa only [Functor.map_comp] using hα
+
 set_option profiler true in
 -- matching the objects of the Galois layer with the unfolded composite of derived functors
 -- (`κ`, `α`) is a large defeq check
@@ -393,7 +418,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C)
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
     (N.galoisLayerExchangeIso h Ω Λ C) _ R
-    (pullbackExchange_galoisLayerHom_app_eq_comp_unit Λ N h Ω C) hR
+    (galoisLayerProjectorFactorization Λ N h Ω C) hR
     (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
@@ -483,16 +508,17 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  obtain ⟨r, hr₁, hr₂⟩ :=
-    exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin T₀ N h Ω hp C hC
-  refine ⟨r, hr₁, hr₂, fun {Z} f' q W φ κ S hS hφ ↦ ?_⟩
-  obtain ⟨r', _, hproj⟩ :=
-    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant T₀ N h Ω hp C hC f' S hS
+  refine Exists.imp (fun r hr ↦ ⟨hr.1, hr.2, ?_⟩)
+    (exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin T₀ N h Ω hp C hC)
+  intro Z f' q W φ κ S hS hφ
   exact map_retraction_comp_eq_of_coinvariant
     (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q)
-    _ r hr₁
+    _ r hr.1
     (fun k ↦ N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω (S k)
       (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
-    (fun k ↦ (hr₂ (S k)).1) (r' := r') (hproj q) φ hφ
+    (fun k ↦ (hr.2 (S k)).1)
+    (Exists.imp (fun _ hr' ↦ hr'.2 q)
+      (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant T₀ N h Ω hp C hC f' S hS))
+    φ hφ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
