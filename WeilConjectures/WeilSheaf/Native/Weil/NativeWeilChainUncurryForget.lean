@@ -74,7 +74,7 @@ theorem native_weil_chain_uncurry_forget
     (N.chain P Q).inv ≫ (UC₀).map ψ = ψ' := by
   dsimp only
   intro c hc φ ψ ψ' hψ hψ'
-  refine HomologicalComplex.hom_ext (fun n => ?_)
+  refine HomologicalComplex.hom_ext _ _ (fun n => ?_)
   refine HomologicalComplex.mapBifunctor.hom_ext (K₁ := P) (K₂ := Q) (fun p q hpq => ?_)
   have hi : HomologicalComplex.ιMapBifunctor ((UC).obj P) ((UC).obj Q)
         (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
