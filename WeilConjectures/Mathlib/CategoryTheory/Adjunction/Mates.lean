@@ -168,6 +168,7 @@ lemma Adjunction.map_unit_app_comp_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K 
     ← R.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
   exact adj.unit_naturality φ
 
+
 instance Adjunction.isIso_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K)
     [IsIso (mateEquiv adj adj α.hom).natTrans] [IsIso φ] : IsIso (adj.liftAlgebraStr α φ) := by
   dsimp [liftAlgebraStr]
@@ -443,6 +444,7 @@ theorem conjugateIsoEquiv_symm_spec (α : L₁ ≅ L₂) :
     refine (conjugateEquiv_eq_of_unit adj₁ adj₂ α.inv β.hom fun a ↦ ?_).symm
     rw [← hβ a, Category.assoc, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
       Functor.map_id, Category.comp_id]
+
 
 end ConjugateUnit
 

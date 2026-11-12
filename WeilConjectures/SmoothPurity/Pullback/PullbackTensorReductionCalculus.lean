@@ -136,7 +136,7 @@ private theorem representative_associativity
       S.map (Prod.mkHom p.inv (S.map (Prod.mkHom q.inv r.inv))) ≫
       S.map (Prod.mkHom (𝟙 P₁) y.inv) := by
     simp only [← S.map_comp, prod_comp, Iso.inv_hom_id_assoc,
-      Iso.map_inv_hom_id_assoc, Category.id_comp, Category.comp_id]
+      Iso.inv_hom_id_map_assoc, Category.id_comp, Category.comp_id]
   have hr : S.map (Prod.mkHom w.inv r.inv) ≫
       S.map (Prod.mkHom (w.hom ≫ F.map i.hom ≫ (μ M N).hom ≫
         S.map (Prod.mkHom p.inv q.inv) ≫ x.inv) (𝟙 P₃)) ≫
@@ -154,7 +154,7 @@ private theorem representative_associativity
       (μ A P).hom ≫ S.map (Prod.mkHom (F.map i.hom) (𝟙 (F.obj P))) := by
     simpa only [Functor.map_id] using hn i.hom (𝟙 P)
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_map_assoc]
   rw [reassoc_of% hj, reassoc_of% hl, reassoc_of% hr, ← reassoc_of% hi,
     reassoc_of% (hc M N P), ← reassoc_of% (hβ p.inv q.inv r.inv)]
 

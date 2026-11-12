@@ -280,13 +280,13 @@ theorem restrictionDescent
               Pi.π (fun n : ℕ ↦ (T.obj P).obj (op n)) n =
             ((IntegralOnSlice.augmentation l E W none).app P).app (op n) := by
           erw [← Category.assoc, IntegralAmbient.roosUnit_fst]
-          exact Pi.lift_π _ _
+          exact Pi.lift_comp_π _ _
         have hθ : IntegralOnSlice.roosUnit l E V none (G.obj P) ≫
             CochainComplex.mappingCocone.fst (scalarRoosBoundary (U.obj (G.obj P))) ≫
               Pi.π (fun n : ℕ ↦ (U.obj (G.obj P)).obj (op n)) n =
             ((IntegralOnSlice.augmentation l E V none).app (G.obj P)).app (op n) := by
           erw [← Category.assoc, IntegralAmbient.roosUnit_fst]
-          exact Pi.lift_π _ _
+          exact Pi.lift_comp_π _ _
         erw [hγ, hθ, Category.id_comp]
         exact hτ P n
       · intro i

@@ -189,12 +189,10 @@ lemma LinearMap.finrank_range_baseChange_baseChange (h : X →ₗ[A] Y) :
   let eY := AlgebraTensorModule.cancelBaseChange A R L L Y
   have hc : eY.toLinearMap ∘ₗ (h.baseChange R).baseChange L = h.baseChange L ∘ₗ eX.toLinearMap := by
     refine LinearMap.ext fun x ↦ ?_
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => rw [map_add, map_add, hx, hy]
     | tmul l y =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | add y y' hy hy' =>
         rw [tmul_add, map_add, map_add, hy, hy']
       | tmul r x =>
@@ -329,16 +327,14 @@ theorem bijective_homologyBaseChange_of_finrank_eq [IsReduced A] [Module.Finite 
   let c₃ := (AlgebraTensorModule.cancelBaseChange A R K K S.X₃).symm
   have hA (w : K ⊗[A] Z) : (LinearMap.ker gR).subtype.lTensor K (eJ.lTensor K (cZ w)) =
       c₂ (Z.subtype.lTensor K w) := by
-    induction w using TensorProduct.induction_on with
-    | zero => simp
+    induction w using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul k z =>
       simp only [cZ, c₂, AlgebraTensorModule.cancelBaseChange_symm_tmul, LinearMap.lTensor_tmul,
         LinearEquiv.lTensor_tmul]
       rfl
   have hB (v : K ⊗[A] S.X₂) : gR.lTensor K (c₂ v) = c₃ (S.g.hom.lTensor K v) := by
-    induction v using TensorProduct.induction_on with
-    | zero => simp
+    induction v using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul k x =>
       simp only [c₂, c₃, gR, AlgebraTensorModule.cancelBaseChange_symm_tmul,

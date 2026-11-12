@@ -73,8 +73,7 @@ private def linearExtensionCounit (t : A) (F : C ⥤ D) (G : D ⥤ C)
   NatIso.ofComponents
     (fun K ↦ (ScalarLocalization.localization A C t).mapIso (e.app K.obj)) (by
       intro K M f
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         change (linearExtension t G).map ((linearExtension t F).map (a ⊗ₜ[A] f)) ≫
             (ScalarLocalization.localization A C t).map (e.hom.app M.obj) =

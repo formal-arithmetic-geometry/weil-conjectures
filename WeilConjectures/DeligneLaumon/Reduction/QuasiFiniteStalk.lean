@@ -146,7 +146,7 @@ theorem _root_.FrobeniusModule.trace_pow_eq_sum_of_equiv {K : Type} [Field K] [C
         LinearMap.trace K (B x).carrier ((B x).frobeniusEnd ^ (n / e x)) else 0 := by
   have hdn : d * n ≠ 0 := mul_ne_zero hd hn
   have h := E.trace_frobeniusEnd_pow (d * n)
-  rw [h₁ _ hdn, h₂ _ hdn, if_pos (dvd_mul_right d n),
+  rw [h₁ _ hdn, h₂ _ hdn, ite_eq_left (dvd_mul_right d n),
     Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero hd)] at h
   have hdK : (d : K) ≠ 0 := Nat.cast_ne_zero.2 hd
   refine mul_left_cancel₀ hdK (h.symm.trans ?_)

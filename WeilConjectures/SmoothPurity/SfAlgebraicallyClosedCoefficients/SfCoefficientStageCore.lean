@@ -183,7 +183,7 @@ private theorem ordinary_comp_commShift :
     (integralOrdinaryScalarComp l E L i Y M j)
   change NatTrans.CommShift
     ((Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L i Y)
-      (integralOrdinaryScalar l L M j Y)).inv ≫
+      (integralOrdinaryScalar l L M j Y)).hom ≫
       (Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L i Y M j)).hom) ℤ
   infer_instance
 
@@ -315,6 +315,10 @@ attribute [local irreducible] ScalarLocalization.category sfRationalTriangulatio
   sfIntegralScalarComp sfIntegralScalarUnit sfIntegralOrdinaryComparison
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion
   coefficientInclusion_laws)
+
+-- Match the transported field and module structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

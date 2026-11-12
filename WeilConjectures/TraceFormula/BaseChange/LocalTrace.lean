@@ -53,10 +53,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   (hxk : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))
   (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x)
 
-instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
+instance instFactPrimeRingCharAlgebraicClosure_localTrace
+    : Fact (ringChar (AlgebraicClosure k)).Prime :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
 
-instance : Fact (ringChar (AlgebraicClosure k) ≠ ℓ) :=
+instance instFactNeNatRingCharAlgebraicClosure_localTrace
+    : Fact (ringChar (AlgebraicClosure k) ≠ ℓ) :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]

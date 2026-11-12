@@ -77,6 +77,7 @@ lemma pullSec_presheaf_map (y : Z ⟶ X) {N : X.Modules} {V V' : X.Opens} (s : �
   rw [pullSec, pullbackUnitApp_presheaf_map, presheaf_map_map_apply]
   rfl
 
+
 lemma app_pullSec (y : Z ⟶ X) {M N : X.Modules} (φ : M ⟶ N) {V : X.Opens} (s : Γ(M, V))
     {O : Z.Opens} (hO : O ≤ y ⁻¹ᵁ V) :
     ((pullback y).map φ).app O (pullSec y s hO) = pullSec y (φ.app V s) hO := by
@@ -97,6 +98,7 @@ lemma pullSec_neg (y : Z ⟶ X) {N : X.Modules} {V : X.Opens} (s : Γ(N, V))
     {O : Z.Opens} (hO : O ≤ y ⁻¹ᵁ V) :
     pullSec y (-s) hO = -pullSec y s hO := by
   simp only [pullSec, map_neg]
+
 
 /-- Pulling back sections twice is pulling back along the composite, up to `pullbackComp`. -/
 lemma pullbackComp_hom_app_pullSec (g : Z' ⟶ Z) (y : Z ⟶ X) {N : X.Modules} {V : X.Opens}
@@ -571,6 +573,7 @@ noncomputable def restrictGlue (U : I) :
 lemma restrictGlue_app (U : I) {V : S.Opens} (s : Γ(descentGlue D, V)) :
     (restrictGlue ι w D U).app V s = restrictGlueSections ι w U V s :=
   rfl
+
 
 variable (D) in
 /-- The comparison morphism from the restriction to `Y U` of `descentGlue D` to the module of

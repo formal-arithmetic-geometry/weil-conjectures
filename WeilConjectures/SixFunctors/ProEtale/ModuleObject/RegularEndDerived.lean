@@ -156,14 +156,14 @@ lemma padicIntegersRingObjMulLeft_add (a b : PadicAlgCl.integers ℓ E.1) :
       padicIntegersRingObjMulLeft ℓ E.1 a + padicIntegersRingObjMulLeft ℓ E.1 b := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   ext S x
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ add_mul a b (x.down s))
+  exact ULift.ext (ContinuousMap.ext fun s ↦ add_mul a b (x.down s))
 
 /-- The multiplication by `1` on `𝒪̲_E` is the identity. -/
 lemma padicIntegersRingObjMulLeft_one :
     padicIntegersRingObjMulLeft.{u} ℓ E.1 1 = 𝟙 _ := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   ext S x
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ one_mul (x.down s))
+  exact ULift.ext (ContinuousMap.ext fun s ↦ one_mul (x.down s))
 
 /-- The multiplication by a constant on `𝒪̲_E`, as an additive map in the constant. -/
 noncomputable def padicIntegersRingObjMulLeftAddHom :

@@ -109,7 +109,7 @@ private theorem roos_product_comparison_formula
       roosProductComparison F M := by
   apply Pi.hom_ext
   intro n
-  simp only [roosProductComparison, piComparison, Pi.lift_π,
+  simp only [roosProductComparison, piComparison, Pi.lift_comp_π,
     eqToHom_refl, Category.comp_id]
   change (F.mapHomologicalComplex (.up ℤ)).map
       (Pi.π (fun k : ℕ ↦ M.asFunctor.obj (op k)) n) =
@@ -117,7 +117,7 @@ private theorem roos_product_comparison_formula
       (Pi.π (fun j : ℕ ↦ M.asFunctor.obj (op j)) k))) ≫
         Pi.π (fun k : ℕ ↦ (F.mapHomologicalComplex (.up ℤ)).obj
           (M.asFunctor.obj (op k))) n
-  rw [Pi.lift_π]
+  rw [Pi.lift_comp_π]
 
 private theorem roos_iso_unique
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]

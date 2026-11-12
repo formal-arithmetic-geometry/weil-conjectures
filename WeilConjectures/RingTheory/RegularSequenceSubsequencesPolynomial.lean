@@ -48,7 +48,7 @@ private lemma coeff_mem_prefix_iff {R : Type u} [CommRing R]
     (p : MvPolynomial (Fin r) R) :
     p ∈ Ideal.ofList ((List.ofFn (fun j ↦ MvPolynomial.C (f j) * MvPolynomial.X j)).take i) ↔
       ∀ E : Fin r →₀ ℕ,
-        MvPolynomial.coeff E p ∈ Ideal.span (f '' {j : Fin r | j.val < i ∧ E j ≠ 0}) := by
+        AddMonoidAlgebra.coeff p E ∈ Ideal.span (f '' {j : Fin r | j.val < i ∧ E j ≠ 0}) := by
   rw [ofList_take_ofFn _ _ hi]
   have h := (MvPolynomial.ideal_coefficients_monomial r i hr hi
     (fun j ↦ f (Fin.castLE hi j)) p).1
@@ -99,7 +99,7 @@ private lemma polynomial_step_iff {R : Type u} [CommRing R]
           MvPolynomial.X j)).take i.val) := by
       apply (hm _).mpr
       intro D
-      rw [mul_assoc, MvPolynomial.X, MvPolynomial.monomial_mul, one_mul,
+      rw [mul_assoc, MvPolynomial.X, MvPolynomial.monomial_mul_monomial, one_mul,
         MvPolynomial.C_mul_monomial, MvPolynomial.coeff_monomial]
       split_ifs with hd
       · subst D
@@ -113,7 +113,7 @@ private lemma polynomial_step_iff {R : Type u} [CommRing R]
     have he := (hm _).mp hp (Finsupp.single i 1 + E)
     rw [mul_assoc, MvPolynomial.coeff_C_mul, MvPolynomial.coeff_X_mul,
       prefix_support_shift f i E] at he
-    exact h E (MvPolynomial.coeff E p) he
+    exact h E (AddMonoidAlgebra.coeff p E) he
 
 private lemma weak_polynomial_iff {R : Type u} [CommRing R]
     (r : ℕ) (f : Fin r → R) :

@@ -85,7 +85,7 @@ def inverseRestriction (T : Scheme.{u}) :
   Functor.isoWhiskerRight
     (Functor.mapDerivedCategoryCompIso
       (Mod.comap (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) T))
-      (Mod.comap (padicIntegersToPadicSubfield T l E))).symm
+      (Mod.comap (padicIntegersToPadicSubfield T l E)))
     (P.integralEquivalence T).inverse.mapDerivedCategory ≪≫
       IndependentDerivedCube.localizedSquare
         (F := Mod.comap (coefficientMap

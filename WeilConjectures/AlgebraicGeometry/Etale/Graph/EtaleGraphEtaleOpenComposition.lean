@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphChosenComparisons
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphCoherence
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 import WeilConjectures.AlgebraicGeometry.Etale.Support.EtaleSupportSumCompositor
@@ -209,7 +211,7 @@ private lemma support_compositor_global
       (d.comp (k.ofComp d)) k (HasCompactification.compactification (e ≫ v)))
   have hg := NatTrans.congr_app (unboundedEtaleLowerShriekCompIso_tower A e v d
     (k.ofComp d)) M
-  simp only [NatTrans.comp_app, NatTrans.hcomp] at hg
+  simp only [NatTrans.comp_app, NatTrans.hcomp_app] at hg
   rw [hg, ← Category.assoc, ← (rightDerivedLowerShriekIso A d).hom.naturality]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   have htM := NatTrans.congr_app ht M
@@ -254,7 +256,7 @@ theorem graph_etale_open_composition
         (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j))).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     Functor.isoWhiskerRight (graphChosenEtaleComparison A v)
         (rightDerivedLowerShriek (ModuleCat.{u + 1} A) j) ≪≫
       Functor.isoWhiskerLeft
@@ -276,7 +278,7 @@ theorem graph_etale_open_composition
         (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j))).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _) = σ := by
+        (Functor.mapDerivedCategoryCompIso _ _).symm) = σ := by
     apply (conjugateIsoEquiv _ _).injective
     rw [Equiv.apply_symm_apply]
     apply Iso.ext

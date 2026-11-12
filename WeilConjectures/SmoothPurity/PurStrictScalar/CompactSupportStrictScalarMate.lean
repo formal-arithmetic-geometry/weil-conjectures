@@ -34,7 +34,6 @@ attribute [local irreducible] AlgebraicGeometry.ProEtale.VaryingRing.exactAdj
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.rightDerivedFunctor
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory
-  CategoryTheory.Functor.mapDerivedCategoryCompIso
 attribute [local irreducible] CategoryTheory.Limits.limit
 attribute [local irreducible] AlgebraicGeometry.Scheme.pbcScalarAdjunction
   AlgebraicGeometry.Scheme.pbcDerivedScalarAdjunction

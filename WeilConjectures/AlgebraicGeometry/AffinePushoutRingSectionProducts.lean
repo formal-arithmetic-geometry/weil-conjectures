@@ -99,8 +99,7 @@ theorem affinePushoutSection_products [IsAffineHom f]
           (l.map fun x ↦ (b.hom.app (op W)).hom x.1 *
             affinePushoutSectionDelta f B t V x.2).sum := by
     intro y
-    induction y using TensorProduct.induction_on with
-    | zero => exact ⟨[], by simp⟩
+    induction y using TensorProduct.inductionOn with
     | tmul d a =>
       refine ⟨[(a, d)], ?_⟩
       rw [hp]

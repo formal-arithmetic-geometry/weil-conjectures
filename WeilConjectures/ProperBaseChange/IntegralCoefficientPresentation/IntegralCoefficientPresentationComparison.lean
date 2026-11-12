@@ -95,9 +95,9 @@ def derivedSquare {T : Scheme.{u}}
     (r : pbcRestrict b.hom ⋙ pbcRestrict π ≅ pbcRestrict ρ ⋙ pbcRestrict e.hom) :
     pbcDerivedRestrict b.hom ⋙ pbcDerivedRestrict π ≅
       pbcDerivedRestrict ρ ⋙ pbcDerivedRestrict e.hom :=
-  (Functor.mapDerivedCategoryCompIso (pbcRestrict b.hom) (pbcRestrict π)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (pbcRestrict b.hom) (pbcRestrict π) ≪≫
     Functor.mapDerivedCategoryNatIso r ≪≫
-      Functor.mapDerivedCategoryCompIso (pbcRestrict ρ) (pbcRestrict e.hom)
+      (Functor.mapDerivedCategoryCompIso (pbcRestrict ρ) (pbcRestrict e.hom)).symm
 
 /-- The finite comparison after restriction to the completed coefficient ring.
 Source: Bhatt--Scholze, Section 6.5; Stacks 06YY
@@ -402,13 +402,13 @@ private theorem roos_transport
   refine ⟨z, hz, ?_, ?_⟩
   · apply Pi.hom_ext
     intro n
-    rw [Category.assoc, hz, ← Category.assoc, ← F.map_comp, Pi.lift_π, hci,
-      Pi.lift_π]
+    rw [Category.assoc, hz, ← Category.assoc, ← F.map_comp, Pi.lift_comp_π, hci,
+      Pi.lift_comp_π]
   · have hs : F.map (towerProductShift tQ) ≫ z.hom = z.hom ≫ towerProductShift tP := by
       apply Pi.hom_ext
       intro n
-      simp only [Category.assoc, hz, towerProductShift, Pi.lift_π]
-      rw [← Category.assoc, ← F.map_comp, Pi.lift_π, F.map_comp, Category.assoc,
+      simp only [Category.assoc, hz, towerProductShift, Pi.lift_comp_π]
+      rw [← Category.assoc, ← F.map_comp, Pi.lift_comp_π, F.map_comp, Category.assoc,
         hti, ← Category.assoc, ← hz]
       exact Category.assoc _ _ _
     simp only [towerTransitionEndomorphism, F.map_sub, F.map_id,
@@ -849,10 +849,10 @@ theorem comparison :
       change (pbcRestrict e.hom).mapDerivedCategory.Additive
       infer_instance
     have di : pbcDerivedRestrict e.hom ⋙ pbcDerivedRestrict e.inv ≅ 𝟭 _ :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso i ≪≫ Functor.mapDerivedCategoryIdIso _
     have dj : pbcDerivedRestrict e.inv ⋙ pbcDerivedRestrict e.hom ≅ 𝟭 _ :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso j ≪≫ Functor.mapDerivedCategoryIdIso _
     refine ⟨hf, hg, inferInstance, inferInstance, inferInstance, inferInstance,
       ⟨i⟩, ⟨j⟩, inferInstance, inferInstance, ⟨di⟩, ⟨dj⟩, ?_, ?_, ?_⟩

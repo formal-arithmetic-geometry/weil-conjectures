@@ -44,8 +44,6 @@ attribute [local implicit_reducible] integralOperationsTensorLevel
   integralOperationsTensorComposite SheafOfModules.restrictScalars podGoodReindex
   podShiftTower Functor.ofOpSequence Functor.ofSequence
 attribute [local implicit_reducible] Functor.map₂HomologicalComplex
-  Functor.mapHomologicalComplex
-  CochainComplex.shiftFunctor
 attribute [local implicit_reducible] isoSectionwiseModuleInverseImage
   SheafOfModules.pushforward PresheafOfModules.pushforward
   PresheafOfModules.pushforward₀ PresheafOfModules.pushforward₀Obj

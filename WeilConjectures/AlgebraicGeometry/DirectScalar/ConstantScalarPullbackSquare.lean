@@ -375,13 +375,13 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
 private noncomputable abbrev tripleComparison :
     (L ⋙ M ⋙ N).mapDerivedCategory ≅
       L.mapDerivedCategory ⋙ M.mapDerivedCategory ⋙ N.mapDerivedCategory :=
-  Functor.mapDerivedCategoryCompIso (L ⋙ M) N ≪≫
-    isoWhiskerRight (Functor.mapDerivedCategoryCompIso L M) N.mapDerivedCategory
+  (Functor.mapDerivedCategoryCompIso (L ⋙ M) N).symm ≪≫
+    isoWhiskerRight (Functor.mapDerivedCategoryCompIso L M).symm N.mapDerivedCategory
 
 private lemma tripleComparison_hom :
     (tripleComparison L M N).hom =
-      (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).hom ≫
-        Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryCompIso M N).hom :=
+      (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).inv ≫
+        Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryCompIso M N).inv :=
   (Functor.mapDerivedCategoryCompIso_assoc L M N).symm
 
 variable {L M N}
@@ -401,8 +401,8 @@ private lemma tripleComparison_right (e : L ⋙ M ≅ L' ⋙ M') :
   simp only [Iso.trans_hom, Iso.symm_hom,
     isoWhiskerRight_hom, Functor.whiskerRight_comp, Category.assoc]
   rw [← reassoc_of% (Functor.whiskerRight_comp
-    (Functor.mapDerivedCategoryCompIso L M).hom
-    (Functor.mapDerivedCategoryCompIso L M).inv N.mapDerivedCategory), Iso.hom_inv_id]
+    (Functor.mapDerivedCategoryCompIso L M).inv
+    (Functor.mapDerivedCategoryCompIso L M).hom N.mapDerivedCategory), Iso.inv_hom_id]
   simp only [Functor.whiskerRight_id', Category.id_comp]
   rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e N)]
 
@@ -422,8 +422,8 @@ private lemma tripleComparison_left (e : M ⋙ N ≅ M'' ⋙ N') :
   dsimp only [Functor.mapDerivedCategorySquareIso]
   simp only [Iso.trans_hom, Iso.symm_hom, Functor.whiskerLeft_comp, Category.assoc]
   rw [← reassoc_of% (Functor.whiskerLeft_comp L.mapDerivedCategory
-    (Functor.mapDerivedCategoryCompIso M N).hom
-    (Functor.mapDerivedCategoryCompIso M N).inv), Iso.hom_inv_id]
+    (Functor.mapDerivedCategoryCompIso M N).inv
+    (Functor.mapDerivedCategoryCompIso M N).hom), Iso.inv_hom_id]
   simp only [Functor.whiskerLeft_id', Category.id_comp]
   rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft L e)]
 

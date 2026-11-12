@@ -231,9 +231,9 @@ private theorem square_fac {R : X₀ ⥤ X₁} {S : Y₀ ⥤ Y₁}
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R G).inv.app
     (DerivedCategory.Q.obj P))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
 
 variable (Rh : X₀ ⥤ X₁) (Rk : X₁ ⥤ X₂) (Rc : X₀ ⥤ X₂)

@@ -73,7 +73,7 @@ private theorem tensor_composition_associativity
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     Iso.symm_hom, Functor.associator_inv_app, Category.id_comp] at h
   unfold tensorSectionsComp
-  convert h using 1 <;> rfl
+  convert h using 1
 
 /-- Move an inverse composition comparison across the other composition comparison.
 Source: Stacks 03DR, equation-quasi-coherent-presheaf. This follows by cancelling

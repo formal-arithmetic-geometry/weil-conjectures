@@ -54,7 +54,7 @@ noncomputable def localIsomorphismRestrictionComp {V W : X.Etale} (f : V ⟶ W) 
       (Etale.upperStar (ModuleCat.{u + 1} B) f.left).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso
     (Etale.upperStarComp (ModuleCat.{u + 1} B) f.left W.hom V.hom f.w.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 variable {X B}
 
@@ -115,7 +115,7 @@ private theorem restrictionTriangle_assoc {Y Z T S : Scheme.{u}}
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
     at hwr hwl ha
   simp only [restrictionTriangle, Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc]
+    Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hwr, ← reassoc_of% hwl]
   rw [← ha, reassoc_of% hm]
 
@@ -162,7 +162,7 @@ private theorem restrictionTriangle_id (V : X.Etale)
   change (Functor.mapDerivedCategoryNatIso
     (Etale.upperStarComp (ModuleCat.{u + 1} B) (𝟙 V.left) V.hom V.hom _)).hom.app K ≫
       (Functor.mapDerivedCategoryCompIso F (Etale.upperStar
-        (ModuleCat.{u + 1} B) (𝟙 V.left))).hom.app K ≫
+        (ModuleCat.{u + 1} B) (𝟙 V.left))).inv.app K ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app (F.mapDerivedCategory.obj K) ≫
       (Functor.mapDerivedCategoryIdIso _).hom.app (F.mapDerivedCategory.obj K) = _
   rw [hu, ← reassoc_of% hwl]
@@ -298,10 +298,10 @@ noncomputable def localIsomorphismComparisonCoefficients (q : R →+* S) :
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ≅
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} S) X).mapDerivedCategory ⋙
         normalizationRestrict (ProEt.topology X) q :=
-  (Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryCompIso
     (sheafCompose X.smallEtaleTopology
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))
-    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X)).symm ≪≫
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X) ≪≫
   Functor.mapDerivedCategoryNatIso
     (F := sheafCompose X.smallEtaleTopology
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ⋙
@@ -316,10 +316,10 @@ noncomputable def localIsomorphismComparisonCoefficients (q : R →+* S) :
       ProEtale.comparisonUpperStar (ModuleCat.{u + 1} S) X ⋙
         sheafCompose (ProEt.topology X)
           (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) ≪≫
-  Functor.mapDerivedCategoryCompIso
+  (Functor.mapDerivedCategoryCompIso
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} S) X)
     (sheafCompose (ProEt.topology X)
-      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))
+      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))).symm
 
 /-- The canonical pro-etale restriction/coefficients interchange, again the localization
 of the specified mate. Source: Stacks Tags 098K and 03DA
@@ -330,10 +330,10 @@ noncomputable def localIsomorphismProEtaleCoefficients (q : R →+* S) :
       (ProEtale.upperStar (ModuleCat.{u + 1} S) f).mapDerivedCategory ⋙
         normalizationRestrict (ProEt.topology Y) q :=
   letI := ProEt.isContinuous_overPullback f
-  (Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryCompIso
     (sheafCompose (ProEt.topology X)
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))
-    (ProEtale.upperStar (ModuleCat.{u + 1} R) f)).symm ≪≫
+    (ProEtale.upperStar (ModuleCat.{u + 1} R) f) ≪≫
   Functor.mapDerivedCategoryNatIso
     (F := sheafCompose (ProEt.topology X)
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ⋙
@@ -349,10 +349,10 @@ noncomputable def localIsomorphismProEtaleCoefficients (q : R →+* S) :
       ProEtale.upperStar (ModuleCat.{u + 1} S) f ⋙
         sheafCompose (ProEt.topology Y)
           (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) ≪≫
-  Functor.mapDerivedCategoryCompIso
+  (Functor.mapDerivedCategoryCompIso
     (ProEtale.upperStar (ModuleCat.{u + 1} S) f)
     (sheafCompose (ProEt.topology Y)
-      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))
+      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))).symm
 
 /-- Combined canonical coefficient interchange for comparison and local restriction.
 Source: Stacks Tags 099R and 098K

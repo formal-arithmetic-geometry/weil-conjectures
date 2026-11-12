@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurStrictScalar.ConstantCompletedOrdinaryAssociativity
 import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 import WeilConjectures.SmoothPurity.PurStrictScalar.CompletedScalarAssociatorLocalization
@@ -65,18 +67,20 @@ private theorem exact_associator_factors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits J] [PreservesFiniteColimits J]
     (e : F ⋙ G ≅ J) (P : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
       J.mapDerivedCategoryFactors.hom.app P =
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors F G P]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  rfl
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  rw [Functor.mapDerivedCategoryNatIso_fac,
+    Functor.mapDerivedCategoryCompIso_hom_app_Q_obj]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp]
+  congr 3
+  ext n
+  simp [Functor.mapHomologicalComplexCompIso]
 
 private theorem model_naturality
     {A B : Type*} [Category A] [Category B]

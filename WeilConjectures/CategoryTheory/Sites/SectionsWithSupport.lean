@@ -276,7 +276,7 @@ instance mono_sigmaYonedaMap {U V : C} (p : U ⟶ V) [Mono p] (a : A) :
     have hh : ∃ g' : W.unop ⟶ U, g' ≫ p = g ≫ p := ⟨g, rfl⟩
     have hg : hh.choose = g := (cancel_mono p).1 hh.choose_spec
     simp only [sigmaYonedaMap_app, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
-      Cofan.mk_pt, Cofan.mk_ι_app, colimit.ι_desc, dif_pos hh, hg]
+      Cofan.mk_pt, Cofan.mk_ι_app, colimit.ι_desc, dite_eq_left hh, hg]
     exact (comp_id _).symm
   exact NatTrans.mono_of_mono_app _
 
@@ -374,6 +374,7 @@ lemma Sheaf.pairRightDerivedTriangle_obj_distinguished (p : Arrow C) [Mono p.hom
     (K : Plus (Sheaf J A)) :
     (Sheaf.pairRightDerivedTriangle J A p).obj K ∈ distTriang _ :=
   ShortComplex.rightDerivedTriangle_obj_distinguished _ K
+
 
 /-- The functoriality of the triangle of a pair in morphisms of pairs `p ⟶ q`. -/
 noncomputable def Sheaf.pairRightDerivedTriangleMap {p q : Arrow C} [Mono p.hom] [Mono q.hom]

@@ -86,8 +86,7 @@ theorem moduleBaseChangeAcrossPushout
     { eadd with
       map_smul' := fun r t ↦ by
         change eadd (r • t) = r • eadd t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul y x =>
           rw [smul_tmul', eadd_tmul, eadd_tmul]
           change algebraMap R S (r * y) • q x =

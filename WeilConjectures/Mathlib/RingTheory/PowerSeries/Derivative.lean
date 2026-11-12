@@ -34,15 +34,15 @@ variable {R S : Type*} [CommSemiring R] [CommSemiring S]
 
 /-- The formal derivative commutes with the coefficientwise map along a ring homomorphism. -/
 theorem map_derivative (φ : R →+* S) (f : R⟦X⟧) :
-    map φ (derivative R f) = derivative S (map φ f) := by
+    map φ (derivative (R := R) f) = derivative (R := S) (map φ f) := by
   ext n
   simp [coeff_derivative]
 
 /-- The logarithmic derivative of a finite product is the sum of the logarithmic derivatives of
 the factors: if `X fᵢ' = aᵢ fᵢ` for all `i ∈ s`, then `X (∏ fᵢ)' = (∑ aᵢ) ∏ fᵢ`. -/
 theorem X_mul_derivative_prod {R : Type*} [CommRing R] {ι : Type*} {f a : ι → R⟦X⟧}
-    (s : Finset ι) (h : ∀ i ∈ s, X * derivative R (f i) = a i * f i) :
-    X * derivative R (∏ i ∈ s, f i) = (∑ i ∈ s, a i) * ∏ i ∈ s, f i := by
+    (s : Finset ι) (h : ∀ i ∈ s, X * derivative (R := R) (f i) = a i * f i) :
+    X * derivative (R := R) (∏ i ∈ s, f i) = (∑ i ∈ s, a i) * ∏ i ∈ s, f i := by
   classical
   induction s using Finset.induction_on with
   | empty => simp
@@ -56,7 +56,7 @@ theorem X_mul_derivative_prod {R : Type*} [CommRing R] {ι : Type*} {f a : ι �
 /-- The logarithmic derivative of `P = ∏ (1 - c X)` is the generating series of the power sums:
 `-X P' = P ∑_{n ≥ 1} pₙ Xⁿ` with `pₙ = ∑ cⁿ`. -/
 theorem neg_X_mul_derivative_prod_one_sub_C_mul_X {R : Type*} [CommRing R] (s : Multiset R) :
-    -(X * d⁄dX R (s.map fun c ↦ 1 - C c * X).prod) =
+    -(X * d⁄dX (s.map fun c ↦ 1 - C c * X).prod) =
       (s.map fun c ↦ 1 - C c * X).prod *
         mk fun n ↦ if n = 0 then 0 else (s.map (· ^ n)).sum := by
   induction s using Multiset.induction_on with
@@ -98,9 +98,9 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
       simp
   set G := P⁻¹
   have hPG : P * G = 1 := PowerSeries.mul_inv_cancel _ (by simp [hP])
-  have hG : X * d⁄dX ℂ G = G * S := by
+  have hG : X * d⁄dX G = G * S := by
     rw [derivative_inv']
-    calc X * (-G ^ 2 * d⁄dX ℂ P) = G ^ 2 * -(X * d⁄dX ℂ P) := by ring
+    calc X * (-G ^ 2 * d⁄dX P) = G ^ 2 * -(X * d⁄dX P) := by ring
       _ = G ^ 2 * (P * S) := by rw [neg_X_mul_derivative_prod_one_sub_C_mul_X]
       _ = G * S * (P * G) := by ring
       _ = G * S := by rw [hPG, mul_one]
@@ -117,7 +117,7 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
       · have hi : p.1 < k + 1 := by
           have := Finset.mem_antidiagonal.1 hp
           omega
-        simp only [S, coeff_mk, if_neg h0]
+        simp only [S, coeff_mk, ite_eq_right h0]
         exact mul_nonneg (ih p.1 hi) (hs p.2 (Nat.pos_of_ne_zero h0))
     have hk : coeff (k + 1) G = (((k + 1 : ℕ) : ℝ)⁻¹ : ℝ) *
         ∑ p ∈ Finset.antidiagonal (k + 1), coeff p.1 G * coeff p.2 S := by
@@ -130,8 +130,8 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
 /-- The logarithmic derivative of the inverse of an invertible power series over a field is the
 negative of its logarithmic derivative: if `X f' = a f`, then `X (f⁻¹)' = -a f⁻¹`. -/
 theorem X_mul_derivative_inv {K : Type*} [Field K] {f a : K⟦X⟧}
-    (h : X * d⁄dX K f = a * f) (hf : constantCoeff f ≠ 0) :
-    X * d⁄dX K f⁻¹ = -a * f⁻¹ := by
+    (h : X * d⁄dX f = a * f) (hf : constantCoeff f ≠ 0) :
+    X * d⁄dX f⁻¹ = -a * f⁻¹ := by
   have hmul : f * f⁻¹ = 1 := PowerSeries.mul_inv_cancel _ hf
   rw [derivative_inv']
   linear_combination (-(f⁻¹ ^ 2)) * h + (-a * f⁻¹) * hmul

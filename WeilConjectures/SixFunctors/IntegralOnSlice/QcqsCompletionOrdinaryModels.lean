@@ -377,7 +377,7 @@ private theorem derived_equivalence
     e'.inverse.mapDerivedCategory
   let k : (f ⋙ e'.functor.mapDerivedCategory) ⋙ e'.inverse.mapDerivedCategory ≅ f :=
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft f
-      ((Functor.mapDerivedCategoryCompIso e'.functor e'.inverse).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso e'.functor e'.inverse ≪≫
         Functor.mapDerivedCategoryNatIso e'.unitIso.symm ≪≫ Functor.mapDerivedCategoryIdIso B)
       ≪≫ f.rightUnitor
   have : Functor.HasRightKanExtension q

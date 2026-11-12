@@ -63,7 +63,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.ProEtale
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
-  CategoryTheory.Functor.rightDerivedFunctorPlus
   CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory
   CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorIso
   CategoryTheory.Functor.mapDerivedCategorySingleFunctor

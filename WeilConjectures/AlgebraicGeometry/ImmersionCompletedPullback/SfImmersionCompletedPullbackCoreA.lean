@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
@@ -374,12 +376,12 @@ Source: localization Step 6, Step 2
 def towerEvaluationIso (n : ℕ) :=
   (Functor.mapDerivedCategoryCompIso ((pbcIntegralDatum l E).towerModulePull f)
     (reductionTowerEvaluation Y
-      (reductionModuleRing Y ((pbcIntegralDatum l E).completedRing Y)) n)).symm ≪≫
+      (reductionModuleRing Y ((pbcIntegralDatum l E).completedRing Y)) n)) ≪≫
     Functor.mapDerivedCategoryNatIso (eqToIso (moduleTowerEvaluation_eq l E f n)) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (reductionTowerEvaluation X
         (reductionModuleRing X ((pbcIntegralDatum l E).completedRing X)) n)
-      (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f))
+      (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f))).symm
 
 /-- The actual finite projection from the pulled-back strict quotient tower limit.
 Source: localization Step 6, Steps 4 and 5

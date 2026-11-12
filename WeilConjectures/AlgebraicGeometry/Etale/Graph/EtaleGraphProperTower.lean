@@ -246,7 +246,7 @@ theorem etaleGraph_proper_tower
       (j'a.comp ba)).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) c'.i b r hr) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     let sumEx := ((mateEquiv
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       ba).symm (TwoSquare.mk _ _ _ _
@@ -290,7 +290,7 @@ theorem etaleGraph_proper_tower
     (j'a.comp ba)).symm
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) c'.i b r hr) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
   let sumEx := ((mateEquiv
     (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
     ba).symm (TwoSquare.mk _ _ _ _

@@ -83,6 +83,8 @@ variable (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] Scheme.residueField Padic ScalarLocalization.composition
   commonStageTensorComparison commonStagePullbackComparison
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Rational comparison naturality implies naturality of the prescribed common-stage class.
 
 Source: recorded blueprint, derived-pullback-tensor-hom, common-stage passage;

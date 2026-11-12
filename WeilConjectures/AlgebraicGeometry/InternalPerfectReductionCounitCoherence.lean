@@ -12,6 +12,8 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 public import WeilConjectures.CategoryTheory.ModuleObjects.CounitComposition.InternalScalarExtensionCounitComposition
 public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Homotopy-level counit coherence for the perfect reduction tower -/
 

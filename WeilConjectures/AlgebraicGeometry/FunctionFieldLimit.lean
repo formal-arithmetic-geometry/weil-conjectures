@@ -117,6 +117,7 @@ noncomputable def affineOpensDiagramι :
 
 lemma functionFieldCone_pt : X.functionFieldCone.pt = Spec X.functionField := rfl
 
+
 /-- The canonical morphism `Spec K ⟶ X` factors through every `Spec Γ(X, U) ⟶ X`. -/
 lemma fromSpecFunctionField_eq_functionFieldCone_comp (U : X.NonemptyAffineOpens) :
     X.fromSpecFunctionField =

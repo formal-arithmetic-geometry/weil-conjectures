@@ -649,6 +649,12 @@ private theorem koszul_to_constant_completion
   let J := completedCechTopology T
   let B := ConstantCompletion.coefficients J A d.ideal true
   let I := ConstantCompletion.kernelIdeal (ConstantCompletion.projection J A d.ideal 0)
+  let : ∀ U : completedCechSite T, HasDerivedCategory.{t + 2}
+      (SheafOfModules.{t + 1} (siteModuleRings ((completedCechRing T d).over U))) :=
+    fun _ ↦ HasDerivedCategory.standard _
+  let : ∀ U : completedCechSite T, HasDerivedCategory.{t + 2}
+      (SheafOfModules.{t + 1} (siteModuleRings (B.over U))) :=
+    fun _ ↦ HasDerivedCategory.standard _
   obtain ⟨_, _, hT, hμ, _⟩ :=
     ConstantCompletion.koszul_quotient_reflector J A d.ideal true r a ha
   obtain ⟨D, hD⟩ := ringIdealReflectorTransport β I r

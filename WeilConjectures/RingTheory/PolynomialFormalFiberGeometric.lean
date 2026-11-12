@@ -49,7 +49,7 @@ private theorem coefficient_generic_fiber_regular
   let C := AdicCompletion (IsLocalRing.maximalIdeal T) T
   have : IsNoetherianRing C := AdicCompletion.isNoetherianRing _
   have hlocal : IsLocalHom (algebraMap A T) := by
-    apply ((IsLocalRing.local_hom_TFAE _).out 0 4).mpr
+    apply ((IsLocalRing.local_hom_TFAE _).out 1 5).mpr
     rw [IsScalarTower.algebraMap_eq A (Polynomial A) T, ← Ideal.comap_comap]
     rw [show (IsLocalRing.maximalIdeal T).comap
       (algebraMap (Polynomial A) T) = q from

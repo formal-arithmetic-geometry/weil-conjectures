@@ -128,7 +128,7 @@ end Transport
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  sfIntrinsicDerivedEquivalence
 
 private theorem derived_realization_mate
     (A : Type u) [CommRing A] [Finite A]
@@ -182,7 +182,7 @@ private theorem derived_pullback_compositor_square
     EX.functor.mapDerivedCategory.map
         ((Functor.mapDerivedCategoryNatIso
             (upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1} A)) f g) ≪≫
-          Functor.mapDerivedCategoryCompIso Lg Lf).hom.app M) ≫
+          (Functor.mapDerivedCategoryCompIso Lg Lf).symm).hom.app M) ≫
       (Functor.mapDerivedCategorySquareIso lf).hom.app (Lg.mapDerivedCategory.obj M) ≫
       (sfIntrinsicPullback A f).mapDerivedCategory.map
         ((Functor.mapDerivedCategorySquareIso lg).hom.app M) =
@@ -235,7 +235,7 @@ private theorem fixed_conjugate_exact
         ).mapDerivedCategoryRightDerivedAdjunction
       (Functor.mapDerivedCategoryNatIso
           (upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1} A)) f g) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom := by
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom := by
   rw [exactProEtaleAdjunction_eq, exactProEtaleAdjunction_eq, exactProEtaleAdjunction_eq]
   ext K
   simp [conjugateEquiv_apply_app, leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
@@ -290,7 +290,7 @@ theorem sfIntrinsicConjugateComparisonTransport
     (derived_realization_mate A g) (derived_realization_mate A f)
     (derived_realization_mate A (f ≫ g))
     (Functor.mapDerivedCategoryNatIso (upperStarComp B f g) ≪≫
-      Functor.mapDerivedCategoryCompIso Lg Lf)
+      (Functor.mapDerivedCategoryCompIso Lg Lf).symm)
     (sfIntrinsicDerivedPullbackComp A f g)
     (derived_pullback_compositor_square A f g) J
   rw [← fixed_conjugate_exact A f g] at h

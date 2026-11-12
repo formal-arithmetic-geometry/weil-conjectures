@@ -175,6 +175,14 @@ theorem ringedSite_overMap_colimits
 
 attribute [local irreducible] derivedInternalHom homComplexFunctor
 
+local instance {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u})
+    [h : ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).over U))] (U : C) :
+    HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) :=
+  h U
+
 /-- Derived internal Hom commutes naturally with slice restriction, compatibly
 with successive restrictions. The comparison for V to U, followed by transport
 along the canonical derived overFunctorMap, equals direct restriction to V.
@@ -228,16 +236,16 @@ theorem ringedInternalHom_restriction
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) V).mapDerivedCategory.obj M))
     (((((Functor.mapDerivedCategoryCompIso (SheafOfModules.overFunctor.{u} ((sheafCompose J
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U) (SheafOfModules.overMap.{u} ((sheafCompose J
-    (forget₂ CommRingCat.{u} RingCat.{u})).obj R) f)).symm ≪≫ Functor.mapDerivedCategoryNatIso
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj R) f)) ≪≫ Functor.mapDerivedCategoryNatIso
     (SheafOfModules.overFunctorMap ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
     f))).inv.app L).op, (((Functor.mapDerivedCategoryCompIso (SheafOfModules.overFunctor.{u}
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U) (SheafOfModules.overMap.{u}
-    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) f)).symm ≪≫
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) f)) ≪≫
     Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap ((sheafCompose J (forget₂
     CommRingCat.{u} RingCat.{u})).obj R) f))).hom.app M) =
     (((Functor.mapDerivedCategoryCompIso (SheafOfModules.overFunctor.{u} ((sheafCompose J (forget₂
     CommRingCat.{u} RingCat.{u})).obj R) U) (SheafOfModules.overMap.{u} ((sheafCompose J (forget₂
-    CommRingCat.{u} RingCat.{u})).obj R) f)).symm ≪≫ Functor.mapDerivedCategoryNatIso
+    CommRingCat.{u} RingCat.{u})).obj R) f)) ≪≫ Functor.mapDerivedCategoryNatIso
     (SheafOfModules.overFunctorMap ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
     f))).hom.app ((derivedInternalHom.{u, w} J R).obj (op L, M)) ≫
     (e V).hom.app (op L, M) := by

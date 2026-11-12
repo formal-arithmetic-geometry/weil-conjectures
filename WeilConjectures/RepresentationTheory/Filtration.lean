@@ -245,11 +245,11 @@ theorem append (A : Subrepresentation ρ) {ι₁ ι₂ : Type*} {P₁ : ι₁ �
     Subrepresentation.map A.subtype (F₁ ⟨n, by omega⟩) else
     Subrepresentation.comap A.mkQ (F₂ ⟨min (n - m₁) m₂, by omega⟩)
   have hG₁ (n : ℕ) (hn : n ≤ m₁) :
-      G n = Subrepresentation.map A.subtype (F₁ ⟨n, by omega⟩) := dif_pos hn
+      G n = Subrepresentation.map A.subtype (F₁ ⟨n, by omega⟩) := dite_eq_left hn
   have hG₂ (n : ℕ) (hn₁ : m₁ ≤ n) (hn₂ : n ≤ m₁ + m₂) :
       G n = Subrepresentation.comap A.mkQ (F₂ ⟨n - m₁, by omega⟩) := by
     rcases hn₁.lt_or_eq with hn₁ | rfl
-    · rw [show G n = _ from dif_neg (by omega)]
+    · rw [show G n = _ from dite_eq_right (by omega)]
       congr 2
       ext
       exact min_eq_left (by omega)

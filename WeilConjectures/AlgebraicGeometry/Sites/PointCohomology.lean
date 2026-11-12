@@ -327,7 +327,7 @@ private lemma eq_zero_of_finite_of_add_mem {S : Set (ULift.{u + 1} ℤ)} (hS : S
     (fun n m hnm ↦ ?_) hmem)
   have hd : ((n : ℤ) + 1) * a.down = ((m : ℤ) + 1) * a.down := by
     simpa using congrArg ULift.down hnm
-  have ha' : a.down ≠ 0 := fun h' ↦ h (ULift.ext _ _ h')
+  have ha' : a.down ≠ 0 := fun h' ↦ h (ULift.ext h')
   exact_mod_cast add_right_cancel (mul_right_cancel₀ ha' hd)
 
 open Algebra.TensorProduct TensorProduct in

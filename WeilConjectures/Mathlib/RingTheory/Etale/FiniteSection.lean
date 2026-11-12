@@ -112,8 +112,7 @@ theorem exists_etale_algHom_tensor_comp_eq [Module.Finite A B] [Algebra.Etale B 
     let := φ.toAlgebra
     apply RingHom.ext
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a₁ b =>
       rw [RingHom.comp_apply, PointsOver.tensor_tmul, hB₁C₁]
       have : (a₁ ⊗ₜ[A] b) ⊗ₜ[B] (1 : C) = algebraMap A₁ C₁ a₁ * algebraMap B C₁ b := by
@@ -202,8 +201,7 @@ theorem exists_etale_algHom_tensor_comp_eq [Module.Finite A B] [Algebra.Etale B 
       Algebra.TensorProduct.map (IsScalarTower.toAlgHom A A₁ A₁') (AlgHom.id A B)
     have hκf : ∀ x : B₁, κ (algebraMap B₁ (A₁' ⊗[A₁] B₁) x) = f x := by
       intro x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul a₁ b =>
         change κ (1 ⊗ₜ[A₁] (a₁ ⊗ₜ[A] b)) = _
         rw [Algebra.TensorProduct.cancelBaseChange_tmul, Algebra.smul_def, mul_one]

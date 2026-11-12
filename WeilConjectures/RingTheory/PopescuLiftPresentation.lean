@@ -286,10 +286,10 @@ theorem exists_popescu_lift_preparation (R : Type a) (Cbar : Type c)
   · intro k l
     by_cases hl : l ∈ E (pick k)
     · simp [d, hl]
-    · simpa only [d, if_neg hl] using hrel (pick k) l
+    · simpa only [d, ite_eq_right hl] using hrel (pick k) l
   · intro k l hl j
-    exact if_pos hl
+    exact ite_eq_left hl
   · intro k l hl
-    exact if_pos hl
+    exact ite_eq_left hl
 
 end Algebra

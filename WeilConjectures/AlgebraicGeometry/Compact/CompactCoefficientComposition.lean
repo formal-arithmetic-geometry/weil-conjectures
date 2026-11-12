@@ -94,7 +94,7 @@ private theorem comparison_unit
   exact (Equiv.ofBijective _ (N.universal _)).apply_symm_apply _
 
 attribute [local implicit_reducible] Functor.mapDerivedCategoryPlus
-attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctorPlus
+attribute [local irreducible] Functor.mapDerivedCategory
   Functor.rightDerivedFunctor
 attribute [local implicit_reducible] derivedPlusFormalism
 attribute [local irreducible] compactSupportCoefficientRestrictionPlus

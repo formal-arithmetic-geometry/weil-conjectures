@@ -197,11 +197,11 @@ theorem derivedPullback_cone_square_transposition
   · have hh := he P hP A' (x ≫ α)
     simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
       Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
-    convert hh using 2; rfl
+    convert hh using 2
   · have hh := he Q hQ B' (y ≫ β)
     simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
       Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
-    convert hh using 2; rfl
+    convert hh using 2
   · rw [htrans, Functor.map_comp]
     have h := he _ hconeP (CochainComplex.mappingCone t')
       (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
@@ -213,6 +213,6 @@ theorem derivedPullback_cone_square_transposition
     simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
       Functor.map_comp, Adjunction.homEquiv_naturality_left_symm, Category.assoc,
       adj₀, E, L, c, F, G] at hh ⊢
-    convert hh using 2; rfl
+    convert hh using 2
 
 end AlgebraicGeometry

@@ -99,4 +99,5 @@ theorem exists_isIdempotentElem_span_range_sub [EssFiniteType R S] [FormallyUnra
   · simpa using (Ideal.neg_mem_iff _).2 (Ideal.subset_span ⟨s, rfl⟩ :
       f s - g s ∈ Ideal.span (Set.range fun s ↦ f s - g s))
 
+
 end Algebra.FormallyUnramified

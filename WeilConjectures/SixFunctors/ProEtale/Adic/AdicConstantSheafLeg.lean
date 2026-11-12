@@ -100,7 +100,7 @@ lemma padicIntegersSheafMulOfLE_comp_adicConstantSheafLeg (o : integers l F.1) (
         ((weilSmulNatTrans l X (ULift.up (((l : PadicAlgCl l) ^ n)⁻¹ *
           algebraMap (integers l F.1) (PadicAlgCl l) o))).app (adicConstantSheaf l X)) := by
   ext U f
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
   change ((adicConstantSheafLeg X l F n).hom.app U _).down.1 x =
     (((l : PadicAlgCl l) ^ n)⁻¹ * algebraMap (integers l F.1) (PadicAlgCl l) o) *
       ((adicConstantSheafLeg X l E 0).hom.app U f).down.1 x

@@ -95,6 +95,7 @@ theorem preservesFiniteLimits_comparisonCoefficientPullback_type (T : Scheme.{u}
   apply Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
     (Scheme.toProEt T) (Type (u + 1)) T.smallEtaleTopology (Scheme.ProEt.topology T)
 
+
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.Scheme

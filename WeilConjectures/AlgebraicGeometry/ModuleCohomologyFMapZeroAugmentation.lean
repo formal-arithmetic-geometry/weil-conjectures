@@ -125,7 +125,7 @@ theorem ModuleCohomologyFMapData.map_zero_augmentation {X Y : Scheme.{u}} {h : X
       apply (cancel_mono (HomologicalComplex.iCycles _ 0)).1
       simp only [Category.assoc, HomologicalComplex.cyclesMap_i,
         InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc]
-      dsimp [b, μ]
+      dsimp only [b, μ, HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
       rw [ha', Category.id_comp]
       rw [InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc]
       change ΓY.map (D.J.ι.f 0) ≫ ΓY.map (D.β.f 0) =

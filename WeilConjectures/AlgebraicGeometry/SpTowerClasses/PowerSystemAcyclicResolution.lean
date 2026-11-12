@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.PowerSystemOrdinaryCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
@@ -228,7 +230,6 @@ private def pointwise_precomp_full
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, p]
   simp only [Category.id_comp]
-  exact (Category.id_comp _).symm
 
 private def pointwise_change_iso
     {C D H : Type*} [Category C] [Category D] [Category H]
@@ -249,8 +250,7 @@ private def pointwise_change_iso
   refine Cone.ext (Iso.refl _) ?_
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
-  simp only [Comma.mapRightIso_functor_obj_hom, Functor.const_obj_obj, Iso.symm_hom,
-    Functor.map_comp, Category.id_comp]
+  simp only [Functor.map_comp, Category.id_comp]
   change ((L.map X.hom ≫ L.map (i.inv.app X.right)) ≫ α.app X.right) ≫
       j.hom.app X.right = _
   exact (Category.assoc _ _ _).trans (Category.assoc _ _ _)

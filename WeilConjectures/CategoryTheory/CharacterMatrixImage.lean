@@ -33,7 +33,7 @@ private theorem character_column_row
           r (Ring.inverse (Fintype.card G : S) * χ (-a))) = 𝟙 R := by
   classical
   rw [Preadditive.comp_sum]
-  simp only [← Category.assoc, Pi.lift_π]
+  simp only [← Category.assoc, Pi.lift_comp_π]
   have he (a : G) : χ a * (Ring.inverse (Fintype.card G : S) * χ (-a)) =
       Ring.inverse (Fintype.card G : S) := by
     rw [mul_left_comm, ← χ.map_add_eq_mul, add_neg_cancel,
@@ -58,7 +58,7 @@ private theorem character_matrix_factorization
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   apply Pi.hom_ext
   intro a
-  simp only [Category.assoc, Pi.lift_π, Preadditive.comp_sum,
+  simp only [Category.assoc, Pi.lift_comp_π, Preadditive.comp_sum,
     Preadditive.sum_comp]
   rw [he a]
   apply Finset.sum_congr rfl
@@ -104,7 +104,7 @@ theorem characterMatrix_image_evaluation_isIso
   let i : R ≅ image e := image.isoStrongEpiMono row col hp
   have hi : i.hom ≫ (image.ι e ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0) = 𝟙 R := by
     rw [← Category.assoc, image.isoStrongEpiMono_hom_comp_ι]
-    simp only [col, Category.assoc, Iso.inv_hom_id_assoc, Pi.lift_π,
+    simp only [col, Category.assoc, Iso.inv_hom_id_assoc, Pi.lift_comp_π,
       χ.map_zero_eq_one, map_one]
     rfl
   have : IsIso (i.hom ≫ (image.ι e ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0)) := by

@@ -85,7 +85,8 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance instEssentiallySmallEtale_integralCoefficients
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
@@ -368,7 +369,7 @@ noncomputable def derivedRestrictScalarsQuotientPowSuccIso (n : ℕ) :
     derivedRestrictScalars (quotientPowSuccFactor I n) X ⋙
         derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 2))) X ≅
       derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (Sheaf.restrictScalarsCompIso X.smallEtaleTopology _ _ _ (by ext; rfl))
 

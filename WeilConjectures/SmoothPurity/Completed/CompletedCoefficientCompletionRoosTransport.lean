@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCompletedCoefficientTransportSupplement
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSupplement
 public import WeilConjectures.SmoothPurity.Sf.SfDerivedComplete
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.IntegralCoefficientPresentationComparison
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSupplement
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
@@ -231,7 +233,7 @@ private theorem pbcNormalizedRoos
         (((pbcExtend (pbcAdicProjection T d n)).mapHomologicalComplex (.up ℤ)).obj C))
     he (hv n) (hb n) hn hunit'
   dsimp only [Functor.id_map, Iso.trans_hom, completedRlimRoosProjection]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   exact hcoord
 
 private def testDatum (p : ℕ) (hp : p.Prime) : FiniteFieldDatum.{0} := by
@@ -327,7 +329,29 @@ private theorem sectionTransitionAdjoint
     (DerivedCategory.Q.map (integralTowerTransition l E X D hl P n)) h
   have hf := congrArg (fun f ↦ DerivedCategory.Q.map f)
     (transition_eq l E X D hl P n)
-  simpa only [normalizedDVRKFlatComparison, sfReductionRepresentativeComparison] using
+  have hcmp (m : ℕ) : normalizedDVRKFlatComparison.{u, u} l E X m P =
+      sfReductionRepresentativeComparison l E X m P := by
+    have hfac := (scalarReductionRestriction l E X m).mapDerivedCategoryFactorsh_hom_app
+      (unrestrictedTowerFiniteComplex l E X m P)
+    change (scalarReductionRestriction l E X m).mapDerivedCategoryFactorsh.hom.app
+        (((scalarReductionExtension l E X m).mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = _ at hfac
+    unfold normalizedDVRKFlatComparison sfReductionRepresentativeComparison
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at hfac ⊢
+    erw [(scalarReductionDerivedExtension l E X m).map_id, DerivedCategory.Qh.map_id,
+      Category.id_comp, Category.comp_id]
+    erw [(scalarReductionRestriction l E X m).mapDerivedCategory.map_id,
+      DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id] at hfac
+    dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
+      Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at hfac ⊢
+    erw [Category.comp_id] at hfac
+    erw [Category.comp_id, cast_eq]
+    exact congrArg (fun f ↦ (scalarReductionDerivedRestriction l E X m).map
+      ((scalarReductionCounit l E X m).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ f) hfac.symm
+  simpa only [hcmp] using
     h'.trans (congrArg
       (fun f ↦ normalizedDVRKFlatComparison.{u, u} l E X (n + 1) P ≫ f) hf)
 
@@ -482,7 +506,7 @@ private theorem sfPbcComparison_step
   have ht := congrArg (fun e ↦
     (Functor.mapDerivedCategoryCompIso (pbcRestrict (coefficientStep.{u, u} l E T n))
       (pbcRestrict
-        (completedIntegralCommRingProjectionUnrestricted l E T (n + 1)))).symm ≪≫
+        (completedIntegralCommRingProjectionUnrestricted l E T (n + 1)))) ≪≫
       Functor.mapDerivedCategoryNatIso e)
     (sfPbcCompositor
       (completedIntegralCommRingProjectionUnrestricted l E T (n + 1))
@@ -510,7 +534,7 @@ private theorem sfPbcComparison_step
         pbcRestrict_limits _
       let : PreservesFiniteColimits (pbcRestrict (coefficientStep.{u, u} l E T n)) :=
         pbcRestrict_colimits _
-      exact eq_of_heq (exactDerivedComp_heq _ _ _ _ hr.symm rfl)
+      exact congrArg Iso.symm (eq_of_heq (exactDerivedComp_heq _ _ _ _ hr.symm rfl))
   have hd : pbcDerivedRestrict (coefficientStep.{u, u} l E T n) =
       normalizedDVRRes.{u, u} l E T n.le_succ := by
     let : PreservesFiniteLimits (pbcRestrict (coefficientStep.{u, u} l E T n)) :=
@@ -661,7 +685,7 @@ theorem completedCoefficientCompletionRoosTransport
   let : F.IsTriangulated := by dsimp only [F]; infer_instance
   let : F.Additive := by dsimp only [F]; infer_instance
   let round : H ⋙ F ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso (pbcRestrict c.inv) (pbcRestrict c.hom)).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (pbcRestrict c.inv) (pbcRestrict c.hom)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (pbcRestrictComp c.hom c.inv (𝟙 _) c.hom_inv_id ≪≫ restrictId _) ≪≫
       Functor.mapDerivedCategoryIdIso _
@@ -716,6 +740,6 @@ theorem completedCoefficientCompletionRoosTransport
   refine ⟨p', δ', hδ', ?_⟩
   apply Pi.hom_ext
   intro n
-  simpa only [Category.assoc, Pi.lift_π, H, J, pbcDerivedRestrict] using hu' n
+  simpa only [Category.assoc, Pi.lift_comp_π, H, J, pbcDerivedRestrict] using hu' n
 
 end WeilConjectures

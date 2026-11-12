@@ -8,7 +8,46 @@ module
 public import WeilConjectures.AlgebraicGeometry.Native.NativeDerivedBaseChange
 public import WeilConjectures.AlgebraicGeometry.Native.NativeModuleConstructibilityComparison
 public import WeilConjectures.AlgebraicGeometry.NativeEncoding.NativeAdicEncodingCore
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import Mathlib.RingTheory.Ideal.Quotient.Index
+public import WeilConjectures.Topology.ProfiniteCondensedRing
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.CategoryTheory.SheafTensor
+public import WeilConjectures.CategoryTheory.SheafTensorStructure
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.PresheafTensorInternalHom
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Sites.Localization
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleBaseChange
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicIntegersInvertEll
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRationalPushforward
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRationalExchange
 import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 import WeilConjectures.AlgebraicGeometry.Exact.ExactCondensedExchangeComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
@@ -16,6 +55,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdic
 import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedForgetMate
 import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 import WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
 
 /-! # Comparison of native exchange with the restricted condensed exchange
 
@@ -206,7 +246,7 @@ attribute [local irreducible] upperStarFromPoint Mod.monoidalClosed
   Mod.monoidalCategoryStruct DerivedCategory HasDerivedCategory.standard
   Functor.rightDerivedFunctor Functor.mapDerivedCategory
   Functor.leftDerivedFunctor Mod.monoidalCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem ordinary_mate (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

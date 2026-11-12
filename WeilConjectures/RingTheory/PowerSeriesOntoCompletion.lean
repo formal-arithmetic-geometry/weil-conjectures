@@ -103,13 +103,13 @@ theorem exists_surjective_toAdicCompletion {R : Type u} [CommRing R] (n : ℕ)
       rw [coeff_truncTotal_eq_ite, MvPolynomial.coeff_sum]
       change (if d.degree < m then (P d.degree).coeff d else 0) = _
       by_cases hm : d.degree < m
-      · rw [if_pos hm]
+      · rw [ite_eq_left hm]
         symm
         apply Finset.sum_eq_single d.degree
         · intro k hk hkd
           exact (hP k).coeff_eq_zero (Ne.symm hkd)
         · simp [hm]
-      · rw [if_neg hm]
+      · rw [ite_eq_right hm]
         symm
         apply Finset.sum_eq_zero
         intro k hk
@@ -148,7 +148,7 @@ theorem exists_surjective_toAdicCompletion {R : Type u} [CommRing R] (n : ℕ)
     rw [hΦ, AdicCompletion.evalₐ_of]
     have hX : truncTotal m (X i : MvPowerSeries (Fin n) R) =
         if 1 < m then MvPolynomial.X i else 0 := by
-      by_cases hm : 1 < m <;> simp only [hm, if_true, if_false]
+      by_cases hm : 1 < m <;> simp only [hm, ite_true, ite_false]
       · ext d
         by_cases hd : d = Finsupp.single i 1
         · subst d
@@ -174,7 +174,7 @@ theorem exists_surjective_toAdicCompletion {R : Type u} [CommRing R] (n : ℕ)
     rw [hΦ, AdicCompletion.evalₐ_of]
     have hC : truncTotal m (C r : MvPowerSeries (Fin n) R) =
         if 0 < m then MvPolynomial.C r else 0 := by
-      by_cases hm : 0 < m <;> simp only [hm, if_true, if_false]
+      by_cases hm : 0 < m <;> simp only [hm, ite_true, ite_false]
       · ext d
         by_cases hd : d = 0
         · subst d

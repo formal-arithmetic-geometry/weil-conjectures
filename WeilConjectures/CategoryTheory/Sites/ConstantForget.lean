@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Basic
-public import Mathlib.Data.Finite.Prod
-public import Mathlib.Data.Finite.Sum
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sum
 public import Mathlib.Data.Fintype.Prod
 public import Mathlib.Data.Fintype.Sum
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf

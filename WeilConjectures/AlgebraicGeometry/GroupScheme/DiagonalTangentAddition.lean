@@ -34,17 +34,17 @@ private theorem homOfDerivation_add_of_coefficients {S : Scheme.{u}} (X : Over S
     (h : ∀ {V : (TopologicalSpace.Opens X.left)ᵒᵖ} (a : Γ(X.left, V.unop)),
       D₃.d a = D₁.d a + D₂.d a) :
     homOfDerivation X g D₃ = homOfDerivation X g D₁ + homOfDerivation X g D₂ := by
-  have hdesc : (PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D₃ =
-      (PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D₁ +
-        (PresheafOfModules.DifferentialsConstruction.isUniversal' _).desc D₂ := by
-    apply (PresheafOfModules.DifferentialsConstruction.isUniversal' _).postcomp_injective
+  have hdesc : (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).desc D₃ =
+      (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).desc D₁ +
+        (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).desc D₂ := by
+    apply (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).postcomp_injective
     ext V a
-    have h₁ := PresheafOfModules.Derivation.congr_d
-      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₁) a
-    have h₂ := PresheafOfModules.Derivation.congr_d
-      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₂) a
-    have h₃ := PresheafOfModules.Derivation.congr_d
-      ((PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₃) a
+    have h₁ := PresheafOfModulesOfCommRing.Derivation.congr_d
+      ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₁) a
+    have h₂ := PresheafOfModulesOfCommRing.Derivation.congr_d
+      ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₂) a
+    have h₃ := PresheafOfModulesOfCommRing.Derivation.congr_d
+      ((PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₃) a
     exact h₃.trans ((h a).trans (congrArg₂ (· + ·) h₁.symm h₂.symm))
   let sh := PresheafOfModules.sheafificationAdjunction (𝟙 X.left.ringCatSheaf.obj)
   have := sh.left_adjoint_additive

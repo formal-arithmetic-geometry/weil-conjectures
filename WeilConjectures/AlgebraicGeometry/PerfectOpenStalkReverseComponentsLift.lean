@@ -119,28 +119,29 @@ theorem exists_perfect_open_stalk_reverse_components_lift
   · intro i j hij
     by_cases hi : a ≤ i ∧ i ≤ b
     · by_cases hj : a ≤ j ∧ j ≤ b
-      · simp only [k', dif_pos hi, dif_pos hj, if_neg hij]
-      · simp only [k', dif_pos hi, dif_neg hj]
-    · simp only [k', dif_neg hi]
+      · simp only [k', dite_eq_left hi, dite_eq_left hj, ite_eq_right hij]
+      · simp only [k', dite_eq_left hi, dite_eq_right hj]
+    · simp only [k', dite_eq_right hi]
   · intro i j
     by_cases hi : a ≤ i ∧ i ≤ b
     · by_cases hj : a ≤ j ∧ j ≤ b
       · by_cases hij : (ComplexShape.up ℤ).Rel j i
-        · simpa only [k', dif_pos hi, dif_pos hj, if_pos hij] using hk i j hi hj
-        · simp only [k', dif_pos hi, dif_pos hj, if_neg hij,
+        · simpa only [k', dite_eq_left hi, dite_eq_left hj, ite_eq_left hij] using hk i j hi hj
+        · simp only [k', dite_eq_left hi, dite_eq_left hj, ite_eq_right hij,
             Functor.map_zero, hzero i j hij, zero_comp, comp_zero]
       · have hz := hbound j (by omega)
         have hz' := (openModuleStalkFunctor X V ⟨x, hxV⟩).map_isZero
           ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
             (homOfLE hVU)).map_isZero hz)
         have hh : h i j = 0 := hz'.eq_of_tgt _ _
-        simp only [k', dif_pos hi, dif_neg hj, Functor.map_zero, hh, zero_comp, comp_zero]
+        simp only [k', dite_eq_left hi, dite_eq_right hj, Functor.map_zero, hh, zero_comp,
+          comp_zero]
     · have hz := hbound i (by omega)
       have hz' := (openModuleStalkFunctor X V ⟨x, hxV⟩).map_isZero
         ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
           (homOfLE hVU)).map_isZero hz)
       have hh : h i j = 0 := hz'.eq_of_src _ _
-      simp only [k', dif_neg hi, Functor.map_zero, hh, zero_comp, comp_zero]
+      simp only [k', dite_eq_right hi, Functor.map_zero, hh, zero_comp, comp_zero]
 
 end
 end AlgebraicGeometry.Scheme

@@ -68,4 +68,5 @@ lemma isIso_of_isIso_map_rightAdjoint {c : C} (t : F.obj c ⟶ F.obj c) [IsIso (
     exact (Category.comp_id _).symm
   exact ⟨x, inj _ _ (by rw [Category.assoc, hx, Category.id_comp, Category.comp_id]), hx⟩
 
+
 end CategoryTheory.Adjunction

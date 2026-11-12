@@ -69,11 +69,11 @@ private def restrictedTensorPresheafIso (φ : R ⟶ S)
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
-      change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =
+      change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom]
+        (show M.val.obj W from M.val.map f m) =
         changeOfRingsMap φ M f (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)
       exact (Classical.choose_spec (exists_changeOfRingsMap φ M f) s m).symm
 

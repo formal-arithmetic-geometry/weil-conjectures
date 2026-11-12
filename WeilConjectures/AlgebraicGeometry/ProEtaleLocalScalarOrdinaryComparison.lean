@@ -571,8 +571,7 @@ private def sliceTensorPresheafIso :
     intro W W' f
     apply ModuleCat.hom_ext
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       change

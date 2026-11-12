@@ -115,6 +115,7 @@ noncomputable def coefficientProEtaleModuleDirectImage {X Y : Scheme.{t}} (f : X
     ⟨Functor.whiskerRight (coefficientProEtaleDirectRingMap f A).hom
       (forget₂ CommRingCat.{max r (t + 1)} RingCat.{max r (t + 1)})⟩
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The module Kan extension and sheafification supply the left adjoint in the
 independent coefficient universe.
 Source: Stacks Tags 00VC and 03D2 (auxiliary; not a blueprint node).

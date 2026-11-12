@@ -151,11 +151,13 @@ noncomputable def subcomplexι : subcomplex N ⟶ L :=
 lemma subcomplexι_f_apply (n : ℤ) (x : (subcomplex N).X n) :
     (subcomplexι N).f n x = ((show N.N n from x) : L.X n) := rfl
 
+
 lemma injective_subcomplexι_f (n : ℤ) : Function.Injective ((subcomplexι N).f n) :=
   Subtype.val_injective
 
 lemma range_subcomplexι_f (n : ℤ) : LinearMap.range ((subcomplexι N).f n).hom = N.N n :=
   Submodule.range_subtype _
+
 
 /-- The inclusion of subcomplexes defined by families `N ≤ N'`. -/
 noncomputable def subcomplexMap {N N' : L.SubcomplexFamily} (h : N ≤ N') :
@@ -221,8 +223,7 @@ lemma range_ιTensorObj_le (p q j : ℤ) (h : p + q = j) :
     LinearMap.range (HomologicalComplex.ιTensorObj L F p q j h).hom ≤
       tensorFiniteSubmodule L F j := by
   rintro _ ⟨z, rfl⟩
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simpa using add_mem hz hz'
   | tmul l f =>
     let N := SubcomplexFamily.span l

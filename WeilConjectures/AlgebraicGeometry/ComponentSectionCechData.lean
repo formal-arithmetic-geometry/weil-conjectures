@@ -126,9 +126,9 @@ private theorem exists_cech_of_component_frame_cover
     intro a b c
     by_cases hbc : b = c
     · subst c
-      simp only [g, if_pos rfl, Units.val_one, map_one, one_smul]
-    · simpa only [g, if_neg hbc] using (hex b c).choose_spec a
-  have hid : ∀ b, g b b = 1 := fun b ↦ by simp only [g, if_pos rfl]
+      simp only [g, ite_eq_left rfl, Units.val_one, map_one, one_smul]
+    · simpa only [g, ite_eq_right hbc] using (hex b c).choose_spec a
+  have hid : ∀ b, g b b = 1 := fun b ↦ by simp only [g, ite_eq_left rfl]
   refine ⟨g, hid, ?_, ?_, hg, ?_⟩
   · intro b c W hb hc
     by_cases hbc : b = c

@@ -143,7 +143,7 @@ theorem baseLocalization_naturality (S : Submonoid R) [IsLocalization S Rp] (i :
     have hd := congrArg (fun t ↦ t.app
       (((ModuleCat.restrictScalars.{u} (algebraMap R Rp)).mapHomotopyCategory
         (.up ℤ)).obj X)) hδ
-    dsimp at hd
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hd
     dsimp only [T]
     simp only [Category.id_comp]
     rw [← δ.naturality_assoc]

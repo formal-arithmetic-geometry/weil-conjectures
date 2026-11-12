@@ -167,7 +167,7 @@ private theorem pullback_unit_comp_eq
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) (ev : U ⟶ T)
     (h : ev = e ≫ v) :
     (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) e v ev h) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom.app (constantComplex A T) ≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app (constantComplex A T) ≫
       (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map
         (etaleSumPullbackUnitIso A v).hom ≫ (etaleSumPullbackUnitIso A e).hom =
       (etaleSumPullbackUnitIso A ev).hom := by
@@ -189,13 +189,13 @@ private theorem pullback_unit_square
   have h₂ := pullback_unit_comp_eq A w' e (w' ≫ e) rfl
   have hh : exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq =
       (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A)
-        e' w (w' ≫ e) sq.w) ≪≫ Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        e' w (w' ≫ e) sq.w) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm).symm ≪≫
       unboundedEtaleUpperStarCompIso A w' e := by
     ext K
     simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,
       Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
       unboundedEtaleUpperStarCompIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
-      NatTrans.comp_app, Category.assoc]
+      Iso.symm_inv, NatTrans.comp_app, Category.assoc]
   rw [hh]
   simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
   rw [h₁]
@@ -382,7 +382,7 @@ theorem etaleSumRightAdjoint_comp
   rw [hc] at h
   simp only [etaleSumRightAdjointIso, support_iso_chosen,
     etaleSumRightAdjointCompIso]
-  convert h using 1 <;> rfl
+  convert h using 1
 
 /-- The identity normalization uses the canonical identity comparison.
 Source: blueprint Step 1; Stacks Tag 0F7K
@@ -450,7 +450,7 @@ theorem etaleSumRightAdjoint_baseChange
         (constantComplex A X) := by
     simp only [etaleSumRightAdjointIso, support_iso_chosen]
     unfold EtaleSupportExchange.rightAdjointIso at h
-    convert h using 1 <;> rfl
+    convert h using 1
   rw [baseChange_eq]
   simp only [etaleSumRightAdjointUnitIso, Iso.trans_hom, Iso.app_hom,
     Functor.map_comp, Category.assoc]

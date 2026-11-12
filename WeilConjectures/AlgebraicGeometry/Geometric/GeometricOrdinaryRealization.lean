@@ -301,9 +301,9 @@ def geometryPullEvaluation (n : ℕ) :
       e.{c, v, max c v r} J B τ n ⋙
         derivedExact.{c, v, max c v r, c, v} J J' (B n) (O.coefficients n)
           (O.inverseImage n).modules :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (O.ordinaryPullEvaluation n) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Add the chosen target calculus and canonical unbounded derived adjunction.
 All ordinary data are retained verbatim; the two resolution instances are supplied separately.

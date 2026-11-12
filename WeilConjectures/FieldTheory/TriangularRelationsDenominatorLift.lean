@@ -62,7 +62,7 @@ private theorem exists_scalar_denominator_lifts
   refine ⟨h, r, hh, ?_⟩
   intro c hc z hzx hzt
   have ht : h = s c * t c := by
-    simpa only [t, dif_pos hc] using (hdiv c hc).choose_spec
+    simpa only [t, dite_eq_left hc] using (hdiv c hc).choose_spec
   have hteval : MvPolynomial.aeval x h =
       MvPolynomial.aeval x (s c) * MvPolynomial.aeval x (t c) := by rw [ht, map_mul]
   have hseval : MvPolynomial.aeval x (s c) ≠ 0 := by

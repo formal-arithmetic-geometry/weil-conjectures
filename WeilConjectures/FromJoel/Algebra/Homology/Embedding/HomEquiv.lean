@@ -62,7 +62,7 @@ lemma f_eq {i' : ι'} {i : ι} (hi : e.f i = i') :
   have hi' : ∃ k, e.f k = i' := ⟨i, hi⟩
   have : hi'.choose = i := e.injective_f (by rw [hi'.choose_spec, hi])
   dsimp [f]
-  rw [dif_pos ⟨i, hi⟩]
+  rw [dite_eq_left ⟨i, hi⟩]
   subst this
   rfl
 
@@ -128,6 +128,7 @@ lemma mono_descExtend_f_iff :
 lemma epi_descExtend_f_iff :
     Epi ((e.descExtend φ hφ).f i') ↔ Epi (φ.f i) :=
   (MorphismProperty.epimorphisms C).arrow_mk_iso_iff (e.descExtendfArrowIso φ hφ hi)
+
 
 end
 

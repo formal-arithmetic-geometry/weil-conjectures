@@ -106,7 +106,7 @@ private theorem principalCechRowToTerms_differential
         change _ = p.negOnePow •
           principalCechRowToTerms r f F p (q + 1) (n + 1) (by omega)
             (((principalCechColumnFunctor r f p).obj F).d q (q + 1) x) J
-        simp only [principalCechRowToTerms_apply, dif_pos h]
+        simp only [principalCechRowToTerms_apply, dite_eq_left h]
         have hs : ((J.val.card - 1 : ℕ) : ℤ) = p := by
           have := J.property.card_pos
           omega
@@ -137,13 +137,13 @@ private theorem principalCechRowToTerms_differential
       · change _ = p.negOnePow •
           principalCechRowToTerms r f F p (q + 1) (n + 1) (by omega)
             (((principalCechColumnFunctor r f p).obj F).d q (q + 1) x) J
-        simp only [principalCechRowToTerms_apply, dif_neg h, map_zero, smul_zero]
+        simp only [principalCechRowToTerms_apply, dite_eq_right h, map_zero, smul_zero]
     · change _ = principalCechRowToTerms r f F (p + 1) q (n + 1) (by omega)
         (((principalCechHorizontal r f p).app F).f q x) J
       by_cases h : (J.val.card : ℤ) = (p + 1) + 1
-      · simp only [principalCechRowToTerms_apply, dif_pos h]
+      · simp only [principalCechRowToTerms_apply, dite_eq_left h]
         have hc := congrArg (fun k ↦ k.f q)
-          (Limits.Pi.lift_π (fun S : principalCechRowIndex r (p + 1) ↦
+          (Limits.Pi.lift_comp_π (fun S : principalCechRowIndex r (p + 1) ↦
             ∑ j : S.val.val,
               if hn : (S.val.val.erase j.val).Nonempty then
                 ((-1 : ℤ) ^ (S.val.val.filter (fun k ↦ k < j.val)).card) •
@@ -172,7 +172,7 @@ private theorem principalCechRowToTerms_differential
           have he : ((J.val.erase j.val).card : ℤ) = p + 1 := by
             have := Finset.card_erase_add_one j.property
             omega
-          rw [dif_pos he]
+          rw [dite_eq_left he]
           simp only [HomologicalComplex.zsmul_f_apply,
             HomologicalComplex.comp_f]
           rw [module_zsmul_apply]
@@ -193,7 +193,7 @@ private theorem principalCechRowToTerms_differential
         next hn =>
           simp only [HomologicalComplex.zero_f_apply]
           erw [map_zero]
-      · simp only [principalCechRowToTerms_apply, dif_neg h]
+      · simp only [principalCechRowToTerms_apply, dite_eq_right h]
         apply Finset.sum_eq_zero
         intro j _
         split
@@ -201,7 +201,7 @@ private theorem principalCechRowToTerms_differential
           have he : ((J.val.erase j.val).card : ℤ) ≠ p + 1 := by
             have := Finset.card_erase_add_one j.property
             omega
-          rw [dif_neg he]
+          rw [dite_eq_right he]
           erw [map_zero, map_zero, smul_zero]
         next hn => rfl
 

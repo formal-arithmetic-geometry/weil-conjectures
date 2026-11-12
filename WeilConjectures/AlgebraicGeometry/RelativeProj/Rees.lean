@@ -72,8 +72,7 @@ theorem reesGrading.isGradedBaseChangeAlong_hom (φ : A →+* B) (hφ : φ.Flat)
       reesCoeff J n (f.liftBaseChange B x) =
         Algebra.TensorProduct.rid A B B ((reesCoeff I n).lTensor B x) := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul c F =>
       simp only [LinearMap.liftBaseChange_tmul, map_smul, LinearMap.lTensor_tmul,
         Algebra.TensorProduct.rid_tmul]

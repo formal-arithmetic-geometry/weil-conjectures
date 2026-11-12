@@ -69,7 +69,7 @@ theorem isN1_of_finite_maximal (B : Type u) (L : Type v) [CommRing B] [IsDomain 
     refine ⟨C m', Finset.mem_image_of_mem C (Finset.mem_univ _), fun q _ hq ↦ ?_⟩
     have : Algebra.IsIntegral B (C m') := le_integralClosure_iff_isIntegral.mp (hCi m')
     obtain ⟨Q, hqQ, hQ, hQm⟩ :=
-      Ideal.exists_ideal_over_prime_of_isIntegral m q (by rw [hq]; exact hpm)
+      Ideal.exists_ideal_over_prime_of_isIntegral m q (by rw [Ideal.under_def, hq]; exact hpm)
     have : IsIntegrallyClosed (Localization.AtPrime Q) := hCn m' Q hQm
     have hd : Disjoint (Q.primeCompl : Set (C m')) q :=
       Set.disjoint_left.mpr fun x hx hxq ↦ hx (hqQ hxq)
@@ -115,7 +115,7 @@ theorem isN1_of_finite_of_isGRing (A : Type u) (B : Type v) (L : Type*) [CommRin
   refine isN1_of_finite_maximal B L ?_ fun m _ ↦ ?_
   · refine (Algebra.QuasiFinite.finite_primesOver (R := A) (S := B) (maximalIdeal A)).subset ?_
     intro m (hm : m.IsMaximal)
-    have : (m.under A).IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal m
+    have : (m.under A).IsMaximal := inferInstance
     exact ⟨hm.isPrime, ⟨(IsLocalRing.eq_maximalIdeal this).symm⟩⟩
   · have := IsLocalization.isNoetherianRing m.primeCompl (Localization.AtPrime m) inferInstance
     exact isN1_of_isAnalyticallyUnramified _ _

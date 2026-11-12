@@ -8,12 +8,14 @@ module
 
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.HigherDirectImagePresheaf
 import WeilConjectures.Topology.RestrictInjectiveResolution
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Vanishing of higher direct image on an affine neighbourhood basis
 

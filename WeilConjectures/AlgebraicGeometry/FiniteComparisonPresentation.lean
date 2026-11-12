@@ -576,7 +576,7 @@ private local instance constantModel_bounded_iso
     classical
     have hh := h.2 q
     have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-    simp only [IsConstantModelConstructible, if_pos hX] at hh ⊢
+    simp only [IsConstantModelConstructible, ite_eq_left hX] at hh ⊢
     exact constantConstructible_iso B X ((DerivedCategory.homologyFunctor _ q).mapIso e) hh
 
 end AlgebraicGeometry.ProEtale

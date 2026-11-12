@@ -142,8 +142,7 @@ theorem exists_comparison_map_finite_stage
       rw [show μB b = Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) B₀) b from
         RingHom.congr_fun hμB b]
       clear hleft
-      induction b using TensorProduct.induction_on with
-      | zero => simp
+      induction b using TensorProduct.inductionOn with
       | tmul a b => simp [μC, φiP, φi, Algebra.TensorProduct.map_tmul]
       | add b c hb hc => simpa only [map_add] using congrArg₂ (· + ·) hb hc
     · apply RingHom.ext

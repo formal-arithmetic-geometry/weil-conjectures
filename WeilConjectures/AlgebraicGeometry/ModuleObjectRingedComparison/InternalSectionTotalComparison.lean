@@ -471,7 +471,8 @@ def ordinaryTensorIso (M N : Internal Λ X) :
     (equivalence Λ X).functor.obj (M ⊗ N) ≅
       ((sectionTensor Λ X).obj ((equivalence Λ X).functor.obj M)).obj
         ((equivalence Λ X).functor.obj N) :=
-  ordinaryTensorIsoForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X) M N
+  ordinaryTensorIsoForSite (hcomm := isCommMonObj_condensedRingObj Λ X)
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X) M N
 
 /-- The existing total-complex comparison, pinned on every summand by the
 ordinary tensor comparison and hence on every local pure tensor.
@@ -482,7 +483,8 @@ def complexTensorIso (P Q : CochainComplex (Internal Λ X) ℤ) :
       (CochainComplex.mapBifunctor P Q (curriedTensor (Internal Λ X))) ≅
     CochainComplex.mapBifunctor ((complexForward Λ X).obj P)
       ((complexForward Λ X).obj Q) (sectionTensor Λ X) :=
-  ordinaryComplexTensorIsoForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X) P Q
+  ordinaryComplexTensorIsoForSite (hcomm := isCommMonObj_condensedRingObj Λ X)
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X) P Q
 
 attribute [local irreducible] ordinaryTensorIso
 

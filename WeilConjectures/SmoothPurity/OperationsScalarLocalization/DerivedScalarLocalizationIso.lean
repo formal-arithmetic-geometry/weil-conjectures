@@ -59,8 +59,8 @@ theorem iso_existsUnique
     exact ((conj_eqToHom_iff_heq _ _ (hF K) (hG K)).1 rfl)
   have hn (K L : ScalarLocalization R C t) (f : K ⟶ L) :
       F.map f ≫ (a L).hom = (a K).hom ≫ G.map f := by
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    change Localization.Away t ⊗[R] (K.obj ⟶ L.obj) at f
+    induction f using TensorProduct.inductionOn with
     | tmul z f =>
       have h₁ := heq_comp (hF K) (hF L) (hG L) (mF K.obj L.obj f z) (ha L)
       have h₂ := heq_comp (hF K) (hG K) (hG L) (ha K) (mG K.obj L.obj f z)

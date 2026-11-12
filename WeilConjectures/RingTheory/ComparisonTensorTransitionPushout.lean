@@ -42,8 +42,7 @@ private theorem canonical_tensor_comparison_pushout
     let : IsScalarTower D₀ E₀ E₁ := .of_algebraMap_eq fun _ ↦ rfl
     let : IsScalarTower D₀ D₁ E₁ := .of_algebraMap_eq fun a ↦ by
       change mE (d₀ a) = d₁ (mD a)
-      induction a using TensorProduct.induction_on with
-      | zero => simp
+      induction a using TensorProduct.inductionOn with
       | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
       | tmul s a => rfl
     Algebra.IsPushout D₀ E₀ D₁ E₁ := by
@@ -64,8 +63,7 @@ private theorem canonical_tensor_comparison_pushout
   have square : d₁.comp mD = mE.comp d₀ := by
     apply RingHom.ext
     intro a
-    induction a using TensorProduct.induction_on with
-    | zero => simp
+    induction a using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul s a => rfl
   let : IsScalarTower D₀ E₀ E₁ := .of_algebraMap_eq fun _ ↦ rfl
@@ -91,8 +89,7 @@ private theorem canonical_tensor_comparison_pushout
       (Algebra.TensorProduct.cancelBaseChange R S T T A)
     apply RingHom.ext
     intro a
-    induction a using TensorProduct.induction_on with
-    | zero => simp
+    induction a using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul s a =>
       change (Algebra.TensorProduct.cancelBaseChange R S T T A)
@@ -105,8 +102,7 @@ private theorem canonical_tensor_comparison_pushout
       (Algebra.TensorProduct.cancelBaseChange R S T T B)
     apply RingHom.ext
     intro a
-    induction a using TensorProduct.induction_on with
-    | zero => simp
+    induction a using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul s b =>
       change (Algebra.TensorProduct.cancelBaseChange R S T T B)
@@ -244,8 +240,7 @@ theorem comparison_tensor_transition_isPushout
   let : IsScalarTower Bj Cj Ck := .of_algebraMap_eq fun _ ↦ rfl
   let : IsScalarTower Bj Bk Ck := .of_algebraMap_eq fun z ↦ by
     change e (φj z) = φk (b z)
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul s a => rfl
   let : Algebra.IsPushout Bj Cj Bk Ck := canonical_tensor_comparison_pushout t φ₀
@@ -333,8 +328,7 @@ theorem comparison_tensor_transition_isPushout
     apply RingHom.ext
     intro z
     obtain ⟨z, rfl⟩ := (d k).symm.surjective z
-    induction z using TensorProduct.induction_on with
-    | zero => simp [δ']
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
     | tmul b q =>
       change δ (c k ((α.app k).hom ((d k).symm (b ⊗ₜ[P] q)))) =
@@ -365,8 +359,7 @@ theorem comparison_tensor_transition_isPushout
     rw [h', hck a, hδφ]
     rfl
   obtain ⟨z, rfl⟩ := (Algebra.IsPushout.equiv Bj Cj Bk Ck).surjective z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
   | tmul a b =>
     change h.hom ((c k).symm ((Algebra.IsPushout.equiv Bj Cj Bk Ck) (a ⊗ₜ[Bj] b))) =

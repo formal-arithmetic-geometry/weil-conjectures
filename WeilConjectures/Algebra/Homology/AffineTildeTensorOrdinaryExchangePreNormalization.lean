@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
 
 
@@ -152,7 +154,10 @@ private theorem ordinary_exchange_transport
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 local instance preNormTildeAdditive (A : Type u) [CommRing A] :
-    (affinePushforwardTilde A).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde A).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of A) f g
 local instance preNormPushforwardAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.pushforward f).Additive := ⟨fun {_ _} {_ _} ↦ rfl⟩
 local instance preNormPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -178,7 +183,7 @@ Naturality of the right-derived unit then moves the inverse tensor/tilde compari
 to the final direct image. This proves the displayed equation before cancellation
 against the invertible derived pullback counit; no such invertibility is assumed
 here. Zero complexes and zero rings use the same generator calculation. -/
-theorem affineTildeTensorOrdinaryExchange_preNormalization
+private theorem affineTildeTensorOrdinaryExchange_preNormalization_private
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]
     (M : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -218,9 +223,9 @@ theorem affineTildeTensorOrdinaryExchange_preNormalization
     let : (ModuleCat.extendScalars.{u, u, u} φ).Additive :=
       ModuleCat.baseDerivedTensor_extendScalars_additive _
     let : (affinePushforwardTilde A).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+      by constructor; intro M N f g; exact tilde.map_add (R := .of A) f g
     let : (affinePushforwardTilde D).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+      by constructor; intro M N f g; exact tilde.map_add (R := .of D) f g
     let : (E ⋙ F').PreservesZeroMorphisms :=
       ⟨fun _ _ ↦ by
         rw [Functor.comp_map, E.map_zero]
@@ -262,5 +267,10 @@ theorem affineTildeTensorOrdinaryExchange_preNormalization
       (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M))
     (affineBaseChangeTildeComplexIso A D φ M).inv
     (affineTildeTensorOrdinaryExchange_preNormalization_chain R A B D M φ ψ hw k hk)
+
+/-- Public export of the private `affineTildeTensorOrdinaryExchange_preNormalization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias affineTildeTensorOrdinaryExchange_preNormalization :=
+  affineTildeTensorOrdinaryExchange_preNormalization_private
 
 end AlgebraicGeometry

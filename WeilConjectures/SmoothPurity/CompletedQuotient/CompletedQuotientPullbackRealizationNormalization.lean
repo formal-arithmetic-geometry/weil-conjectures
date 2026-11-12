@@ -56,7 +56,7 @@ attribute [local implicit_reducible] value expression IntegralCoherence.value sc
   pullbackTensorSequenceDerived
   integralComparisonDerivedSequencePullback
   scalarReductionExtension unrestrictedIntegralReductionFunctor integralOperationsGoodLocalization
-  Functor.mapHomologicalComplex HomologicalComplex.asFunctor
+  HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
   pullbackTensorOrdinaryReduction integralOperationsRoosFunctor
   integralOperationsPullbackOnGood integralComparisonRoosBridge

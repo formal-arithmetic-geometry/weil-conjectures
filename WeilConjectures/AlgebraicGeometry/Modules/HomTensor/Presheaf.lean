@@ -26,6 +26,13 @@ namespace PresheafOfModules
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
   (M P : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
 
+local instance localInst_Presheaf_1 (N : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat))
+    {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R.obj Y)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
+        (N.obj Y)) :=
+  inferInstanceAs (Module (R.obj Y) (N.obj Y))
+
 /-- The morphism `Hom(M, R) ⊗ P ⟶ Hom(M, P)` of presheaves of modules, sending `φ ⊗ p` to
 `m ↦ φ(m) • p`. -/
 noncomputable def dualTensorHom : homObj M (unit _) ⊗ P ⟶ homObj M P :=
@@ -61,8 +68,7 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
     rfl
   have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
       ∃ φ : (homObj M (unit _)).obj (op U), t = φ ⊗ₜ p₀ := by
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+    induction t using TensorProduct.inductionOn with
     | tmul φ p =>
       obtain ⟨a, rfl⟩ := hp₀ p
       exact ⟨a • φ, (TensorProduct.smul_tmul _ _ _).symm⟩
@@ -84,7 +90,7 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
   · refine ⟨(ψ ≫ φ₀) ⊗ₜ p₀, hom_ext fun V ↦ ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)⟩
     rw [dualTensorHom_app_tmul_app_apply]
     obtain ⟨r, hr⟩ := hgen V (ψ.app V m)
-    change (φ₀.app V (ψ.app V m)) • _ = _
+    change (show R.obj (op V.unop.left) from φ₀.app V (ψ.app V m)) • _ = _
     rw [hr, hφ₀]
 
 variable {M P} in
@@ -143,8 +149,7 @@ lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [Dec
   -- Every element of `Hom(M, R) ⊗ P` over `U` is `∑ i, c i ⊗ pᵢ`.
   have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
       ∃ p : ι → P.obj (op U), t = ∑ i, c' i ⊗ₜ p i := by
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+    induction t using TensorProduct.inductionOn with
     | tmul φ q =>
       refine ⟨fun i ↦ a φ i • q, ?_⟩
       conv_lhs => rw [hdual φ]

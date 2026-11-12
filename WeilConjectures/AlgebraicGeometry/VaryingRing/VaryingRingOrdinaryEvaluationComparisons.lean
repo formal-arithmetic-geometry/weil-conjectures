@@ -190,9 +190,9 @@ def ordinaryOpenEvaluation (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     extension R φ j ⋙ eval R φ X n ≅ eval R φ U n ⋙ StrictTower.moduleJ (R n) j :=
   ordinaryRecoverSingleIso _ _
-    (Functor.mapDerivedCategoryCompIso (extension R φ j) (eval R φ X n) ≪≫
+    ((Functor.mapDerivedCategoryCompIso (extension R φ j) (eval R φ X n)).symm ≪≫
       evalJ R φ j n ≪≫
-      (Functor.mapDerivedCategoryCompIso (eval R φ U n) (StrictTower.moduleJ (R n) j)).symm)
+      Functor.mapDerivedCategoryCompIso (eval R φ U n) (StrictTower.moduleJ (R n) j))
 
 /-- The actual open comparison, obtained from ordinary evaluation and degree zero.
 Source: Stacks 03DI (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/

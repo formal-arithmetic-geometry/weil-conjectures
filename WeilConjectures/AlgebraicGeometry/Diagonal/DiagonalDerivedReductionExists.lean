@@ -266,7 +266,7 @@ private theorem integerUnit_mono (W : Scheme.{u}) (n : ℕ) (hn : n ≠ 0) :
     rw [AddCommGrpCat.mono_iff_injective]
     intro x y h
     change n • x = n • y at h
-    exact ULift.ext _ _ (nsmul_right_injective hn (congrArg ULift.down h))
+    exact ULift.ext (nsmul_right_injective hn (congrArg ULift.down h))
   have hm' : Mono (n • 𝟙 ((constantSheaf (Scheme.ProEt.topology W)
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) := by
     have : Mono ((Functor.const W.ProEtᵒᵖ).map

@@ -256,7 +256,12 @@ private lemma ResolutionSES.chainA {R : Type u} [CommRing R]
     (E : ResolutionSES.{u, max u v₁} R) (n : ℕ) :
     (E.dB n).comp (LinearMap.inl R _ _) =
       (LinearMap.inl R _ _).comp (E.dA n) := by
-  ext x <;> simp [dA, dB, μ, stage, next, ki, ResolutionSES.η]
+  apply LinearMap.ext
+  intro x
+  change ((E.stage (n + 1)).μ (x, 0)).val =
+    (((E.stage (n + 1)).η x).val, 0)
+  simp only [μ, LinearMap.coprod_apply, LinearMap.comp_apply, map_zero, add_zero]
+  rfl
 
 private lemma ResolutionSES.chainC {R : Type u} [CommRing R]
     (E : ResolutionSES.{u, max u v₁} R) (n : ℕ) :

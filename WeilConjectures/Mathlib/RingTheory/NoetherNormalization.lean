@@ -78,7 +78,7 @@ theorem ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial {K B : Type*} [Field K
   have : FaithfulSMul (MvPolynomial (Fin d) K) B :=
     (faithfulSMul_iff_algebraMap_injective _ _).mpr hg
   rw [ringKrullDim_eq_of_isIntegral (MvPolynomial (Fin d) K) B,
-    MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_isField
+    MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_isField
       (Field.toIsField K)]
   simp
 
@@ -118,6 +118,7 @@ theorem exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one
   let e := MvPolynomial.uniqueAlgEquiv K (Fin 1)
   exact ⟨g.comp e.symm.toAlgHom, hg.comp e.symm.injective,
     RingHom.Finite.comp hfin (RingHom.Finite.of_surjective _ e.symm.surjective)⟩
+
 
 /-- A proper closed subset of an irreducible affine variety has strictly smaller dimension: for a
 finitely generated domain `A` over a field and a nonzero prime `P` of `A`,
@@ -438,7 +439,7 @@ theorem ringKrullDim_tensorProduct_of_finiteType (k A K : Type*) [Field k] [Comm
     have : FaithfulSMul (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) :=
       (faithfulSMul_iff_algebraMap_injective _ _).mpr hφ
     have : Algebra.IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) := by
-      refine ⟨fun z ↦ z.induction_on isIntegral_zero (fun a x ↦ ?_) fun _ _ ↦ .add⟩
+      refine ⟨fun z ↦ z.inductionOn (fun a x ↦ ?_) fun _ _ ↦ .add⟩
       have ha : IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (a ⊗ₜ[k] (1 : K)) :=
         (Algebra.IsIntegral.isIntegral (R := MvPolynomial (Fin n) k) a).map_of_comp_eq
           Algebra.TensorProduct.includeLeftRingHom Algebra.TensorProduct.includeLeftRingHom
@@ -451,7 +452,7 @@ theorem ringKrullDim_tensorProduct_of_finiteType (k A K : Type*) [Field k] [Comm
     rw [ringKrullDim_eq_of_isIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K),
       ringKrullDim_eq_of_ringEquiv ((Algebra.TensorProduct.comm k _ K).toRingEquiv.trans
         (MvPolynomial.algebraTensorAlgEquiv k K).toRingEquiv),
-      MvPolynomial.ringKrullDim_of_isNoetherianRing,
+      MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
       ringKrullDim_eq_zero_of_isField (Field.toIsField K)]
     simp
 

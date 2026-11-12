@@ -97,6 +97,7 @@ theorem existsUnique_comp_mkₐ_eq_of_forall_algHom {B : Type*} [CommRing B] [Al
   refine ⟨Ideal.Quotient.liftₐ J f hJ, by ext; simp, fun g hg ↦ ?_⟩
   exact Ideal.Quotient.algHom_ext k (by rw [hg]; ext; simp)
 
+
 open TensorProduct in
 /-- Blueprint `lem-wf-affine-product-reduced`: let `A` and `B` be reduced finitely generated
 algebras over an algebraically closed field `k`, the coordinate algebras of affine varieties `X`
@@ -115,8 +116,7 @@ theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) 
     (fun a ha ↦ eq_zero_of_forall_algHom_apply_eq_zero k A ha) fun φ ↦ ?_
   have key (ψ : B →ₐ[k] k) (t : A ⊗[k] B) :
       ψ (TensorProduct.lid k B (φ.toLinearMap.rTensor B t)) = lift φ ψ (fun _ _ ↦ .all _ _) t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a b => simp
     | add x y hx hy => simp [hx, hy]
   simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)
@@ -178,12 +178,12 @@ theorem MvPolynomial.exists_ne_zero_forall_eval_eq_zero {k σ ι : Type*} [Field
       fun q ⟨hq, hIq⟩ _ ↦ ?_⟩
     rw [← hrad]
     exact (Ideal.IsPrime.radical_le_iff hq).mpr hIq
-  have hheight := Ideal.height_le_card_of_mem_minimalPrimes_span (Set.finite_range f) hmin
+  have hheight := Ideal.height_le_ncard_of_mem_minimalPrimes_span (Set.finite_range f) hmin
   -- hence so does every maximal ideal, contradicting `dim k[σ] = Nat.card σ`
   have hdim : ringKrullDim (MvPolynomial σ k) ≤ (Nat.card ι : ℕ∞) := by
     refine (ringKrullDim_le_iff_isMaximal_height_le _).mpr fun m hm ↦ ?_
     obtain ⟨a, rfl⟩ := isMaximal_iff_eq_vanishingIdeal_singleton.mp hm
     rw [height_vanishingIdeal_singleton a 0]
     exact WithBot.coe_le_coe.mpr (hheight.trans (by exact_mod_cast Finite.card_range_le f))
-  rw [ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field, zero_add] at hdim
+  rw [ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_field, zero_add] at hdim
   exact absurd hdim (by exact_mod_cast hcard.not_ge)

@@ -82,6 +82,7 @@ theorem baseChange_w (hX : IsPullback a a' s p) (hY : IsPullback b b' s q)
     (u ≫ a') ≫ p = (v ≫ b') ≫ q := by
   rw [Category.assoc, Category.assoc, ← hX.w, ← hY.w, ← Category.assoc, ← Category.assoc, hW.w]
 
+
 /-- Base change preserves fibre products: if `XS` and `YS` are the base changes to `S` of `X` and
 `Y` along `s : S ⟶ T`, if `W = XS ×[S] YS` and if `P = X ×[T] Y`, then `W` is the base change of
 `P` to `S`.
@@ -123,6 +124,7 @@ theorem baseChange_prod {T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
     (hP : IsPullback c d p q) {s' : S ⟶ T'} {r : P ⟶ T'} :
     IsPullback (u ≫ a) (hP.lift (u ≫ a') (v ≫ b') (baseChange_w hX hY hW)) s' r :=
   (baseChange_pullback hX hY hW hP).of_isTerminal hT hT'
+
 
 end BaseChange
 

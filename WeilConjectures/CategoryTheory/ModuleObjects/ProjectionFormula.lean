@@ -256,6 +256,7 @@ noncomputable def modObj (M : C) [ModObj (S.obj B) M] : ModObj B (P.obj M) where
 
 lemma modObj_smul (M : C) [ModObj (S.obj B) M] : (pf.modObj B M).smul = pf.smul B M := rfl
 
+
 /-- The linearization `P_B : Mod C (S B) ⥤ Mod D B` of `P`: an `S B`-module object `M` is sent
 to `P M` with the `B`-action induced by the projection formula. -/
 noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B where
@@ -272,11 +273,13 @@ noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B where
 
 lemma mapModLeft_obj_X (M : Mod C (S.obj B)) : ((pf.mapModLeft B).obj M).X = P.obj M.X := rfl
 
+
 lemma mapModLeft_map_hom {M N : Mod C (S.obj B)} (f : M ⟶ N) :
     ((pf.mapModLeft B).map f).hom = P.map f.hom := rfl
 
 lemma mapModLeft_obj_smul (M : Mod C (S.obj B)) :
     γ[B,((pf.mapModLeft B).obj M).X] = pf.smul B M.X := rfl
+
 
 /-- The linearization of `P` commutes with the forgetful functors. -/
 lemma mapModLeft_comp_forget : pf.mapModLeft B ⋙ Mod.forget B = Mod.forget (S.obj B) ⋙ P := rfl
@@ -421,6 +424,7 @@ lemma rightModObj_smul (N : D) [ModObj B N] :
     (pf.rightModObj adj B N).smul = pf.rightSMul adj B N :=
   rfl
 
+
 /-- The linearization `G_B : Mod D B ⥤ Mod C (S B)` of a right adjoint `G` of `P`: a
 `B`-module object `N` is sent to `G N` with the `S B`-action induced by the mate of the
 projection formula. -/
@@ -448,6 +452,7 @@ lemma mapModRight_obj_smul (N : Mod D B) :
 /-- The linearization of `G` commutes with the forgetful functors. -/
 lemma mapModRight_comp_forget :
     pf.mapModRight adj B ⋙ Mod.forget (S.obj B) = Mod.forget B ⋙ G := rfl
+
 
 /-! ### The adjunction `P_B ⊣ G_B` -/
 
@@ -488,6 +493,7 @@ noncomputable def mapModAdjunction : pf.mapModLeft B ⊣ pf.mapModRight adj B :=
 lemma isLeftAdjoint_mapModLeft {G : D ⥤ C} (adj : P ⊣ G) : (pf.mapModLeft B).IsLeftAdjoint :=
   (pf.mapModAdjunction adj (B := B)).isLeftAdjoint
 
+
 end MapModRight
 
 end Functor.ProjectionFormula
@@ -514,6 +520,7 @@ lemma projectionFormula_theta (L N : D) :
     ← MonoidalCategory.whiskerLeft_comp_assoc]
   erw [adj.right_triangle_components]
   erw [MonoidalCategory.whiskerLeft_id, Category.id_comp]
+
 
 variable {B}
 

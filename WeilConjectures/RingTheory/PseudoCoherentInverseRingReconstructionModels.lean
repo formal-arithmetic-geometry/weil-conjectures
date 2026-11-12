@@ -5,9 +5,11 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRings
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.RingTheory.RingPseudoCoherent
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Mathlib.RingTheory.Nilpotent.Basic
@@ -364,8 +366,7 @@ private theorem scalar_unit_surjective
     Function.Surjective ((ModuleCat.extendRestrictScalarsAdj φ).unit.app P) := by
   let : Algebra A B := φ.toAlgebra
   intro x
-  induction x using TensorProduct.induction_on with
-  | zero => exact ⟨0, map_zero _⟩
+  induction x using TensorProduct.inductionOn with
   | tmul b p =>
     obtain ⟨a, rfl⟩ := hs b
     refine ⟨a • p, ?_⟩
@@ -597,7 +598,7 @@ private theorem bijective_of_nilpotent_scalarExtension
     (f : P ⟶ Q) [IsIso ((ModuleCat.extendScalars φ).map f)] : Function.Bijective f := by
   let F := ModuleCat.extendScalars.{u, u, max u v} φ
   have hfs : Function.Surjective f := surjective_of_nilpotent_scalarExtension φ hs hn P Q f
-    ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+    ((ModuleCat.epi_iff_surjective (F.map f)).1 inferInstance)
   obtain ⟨g, hg⟩ := Module.projective_lifting_property f.hom LinearMap.id hfs
   let g' : Q ⟶ P := ModuleCat.ofHom g
   have hgf : g' ≫ f = 𝟙 Q := by ext x; exact DFunLike.congr_fun hg x
@@ -1056,7 +1057,7 @@ private theorem surjective_tower_triangle
   let s : B.pt ⟶ B.pt := towerProductShift
     (fun n ↦ T.map (homOfLE n.le_succ).op)
   have hs (n : ℕ) : s ≫ B.proj n =
-      B.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op := Pi.lift_π _ _
+      B.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op := Pi.lift_comp_π _ _
   have hT (n : ℕ) (i : ℤ) : Epi ((T.map (homOfLE n.le_succ).op).f i) :=
     (ModuleCat.epi_iff_surjective _).2 (ht n i)
   let S := ShortComplex.mk _ _ (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hB s hs L)
@@ -1086,7 +1087,7 @@ private theorem surjective_tower_triangle
   have hE (n : ℕ) : E.hom ≫ Pi.π K₀ n = DerivedCategory.Q.map (B.proj n) :=
     hQFan.conePointUniqueUpToIso_hom_comp (productIsProduct K₀) ⟨n⟩
   have hπ (n : ℕ) : p ≫ Pi.π K₀ n =
-      DerivedCategory.Q.map (L.π.app (Opposite.op n)) := Pi.lift_π _ _
+      DerivedCategory.Q.map (L.π.app (Opposite.op n)) := Pi.lift_comp_π _ _
   have hi : DerivedCategory.Q.map S.f ≫ E.hom = p := by
     apply Pi.hom_ext
     intro n
@@ -1102,7 +1103,7 @@ private theorem surjective_tower_triangle
     intro n
     simp only [Category.assoc, hE, ← Functor.map_comp, hu, Functor.map_sub]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, hE, f₀]
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, hE, f₀]
     rw [Functor.map_comp, ← Category.assoc, hE]
   let δ := DerivedCategory.triangleOfSESδ hS
   refine ⟨E.inv ≫ δ, ?_⟩
@@ -1368,7 +1369,7 @@ theorem reconstruction_models :
         (χ n).inv.app (Eₙ n)) e he (Q.obj P) _ δP hδP E pE δ hE
     refine ⟨β, ?_⟩
     intro n
-    simpa only [Pi.lift_π_assoc, e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    simpa only [Pi.lift_comp_π_assoc, e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Category.assoc, c, NatTrans.ofOpSequence_app, Iso.app_inv] using hβ n
   obtain ⟨β, hβ⟩ := hβ
   have hscalar (n : ℕ) : ∃ γ : (M n).obj (Q.obj P) ≅

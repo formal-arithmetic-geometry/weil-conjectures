@@ -1251,7 +1251,7 @@ private theorem exact_of_componentwise
     (h : ∀ s : ShortComplex B, s.Exact ↔ ∀ n, (s.map (E n)).Exact)
     (e : ∀ n, F ⋙ E n ≅ T n ⋙ H n) :
     PreservesFiniteLimits F ∧ PreservesFiniteColimits F := by
-  apply ((Functor.exact_tfae F).out 1 3).mp
+  apply ((Functor.exact_tfae F).out 2 4).mp
   intro s hs
   apply (h (s.map F)).mpr
   intro n
@@ -1484,7 +1484,7 @@ Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
 def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G R φ (f ≫ g) ≅ G R φ g ⋙ G R φ f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp R φ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (pull R φ g) (pull R φ f)
+    (Functor.mapDerivedCategoryCompIso (pull R φ g) (pull R φ f)).symm
 
 /-- Proper direct-image composition is the conjugate of inverse-image composition.
 Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
@@ -2203,7 +2203,7 @@ def moduleJComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
 Source: Stacks 0F7D (blueprint: def-sp-varying-ring-operations). -/
 def jComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] : J R φ i ⋙ J R φ j ≅ J R φ (i ≫ j) :=
-  (Functor.mapDerivedCategoryCompIso (extension R φ i) (extension R φ j)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (extension R φ i) (extension R φ j) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleJComp R φ i j)
 
 /-- Identity extension with its canonical adjoint normalization.
@@ -2227,10 +2227,10 @@ def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     StrictTower.modulePullback_finiteLimits (R n) f
   letI : PreservesFiniteColimits (StrictTower.modulePullback (R n) f) :=
     StrictTower.modulePullback_finiteColimits (R n) f
-  (Functor.mapDerivedCategoryCompIso (pull R φ f) (eval R φ X n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (pull R φ f) (eval R φ X n) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleEvalG R φ f n) ≪≫
-      Functor.mapDerivedCategoryCompIso (eval R φ Y n)
-        (StrictTower.modulePullback (R n) f)
+      (Functor.mapDerivedCategoryCompIso (eval R φ Y n)
+        (StrictTower.modulePullback (R n) f)).symm
 
 /-- The ordinary exact-level adjunction, derived with its original unit.
 Source: Stacks 07A6 (blueprint: def-sp-varying-ring-operations). -/
@@ -2424,21 +2424,21 @@ private theorem square_fac
     change DerivedCategory.Q.map (𝟙 _) = _
     exact DerivedCategory.Q.map_id _
   rw [hi] at h₁
-  have h₁' : (mapDerivedCategoryCompIso H I).hom.app (DerivedCategory.Q.obj K) ≫
+  have h₁' : (mapDerivedCategoryCompIso H I).inv.app (DerivedCategory.Q.obj K) ≫
       I.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app K) ≫
       I.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj K) =
       (H ⋙ I).mapDerivedCategoryFactors.hom.app K := by
-    exact (congrArg (fun z ↦ (mapDerivedCategoryCompIso H I).hom.app
+    exact (congrArg (fun z ↦ (mapDerivedCategoryCompIso H I).inv.app
       (DerivedCategory.Q.obj K) ≫ I.mapDerivedCategory.map
         (H.mapDerivedCategoryFactors.hom.app K) ≫ z)
         (Category.comp_id (I.mapDerivedCategoryFactors.hom.app
           ((H.mapHomologicalComplex (.up ℤ)).obj K)))).symm.trans h₁
   rw [hf] at h₂
-  have h₂' : (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+  have h₂' : (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K := by
-    exact (congrArg (fun z ↦ (mapDerivedCategoryCompIso F G).hom.app
+    exact (congrArg (fun z ↦ (mapDerivedCategoryCompIso F G).inv.app
       (DerivedCategory.Q.obj K) ≫ G.mapDerivedCategory.map
         (F.mapDerivedCategoryFactors.hom.app K) ≫ z)
         (Category.comp_id (G.mapDerivedCategoryFactors.hom.app
@@ -2446,7 +2446,7 @@ private theorem square_fac
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
   rw [h₁', h₃, ← h₂']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem square_symm
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -2718,7 +2718,7 @@ private lemma exactDerivedMate_Qh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (u ⋙ f₂)) (.up ℤ)).hom.app X ≫
       (NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app X ≫
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app X)
-  dsimp at h₁ h₄
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h₁ h₄
   have h₂' : (exactAdj adj₂).unit.app
       (DerivedCategory.Qh.obj ((u.mapHomotopyCategory (.up ℤ)).obj X)) =
       DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app
@@ -2774,7 +2774,7 @@ private lemma exactDerivedMate_Qh
     (Functor.mapDerivedCategorySquareIso τ).hom.naturality _
   have k₄ := Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj τ
     ((f₁.mapHomotopyCategory (.up ℤ)).obj X)
-  dsimp at k₂
+  dsimp only [Functor.comp_obj, Functor.comp_map] at k₂
   have hR : u.mapDerivedCategoryFactorsh.inv.app X ≫
       u.mapDerivedCategory.map
         ((exactAdj adj₁).unit.app (DerivedCategory.Qh.obj X)) ≫

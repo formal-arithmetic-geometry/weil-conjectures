@@ -358,4 +358,5 @@ theorem quotientBaseChange_extendedIdeal_comap {A : Type u} [CommRing A]
   · rw [← hc]
     exact hw.trans (congrArg (Ideal.map (j.app U.1).hom) hs)
 
+
 end AlgebraicGeometry

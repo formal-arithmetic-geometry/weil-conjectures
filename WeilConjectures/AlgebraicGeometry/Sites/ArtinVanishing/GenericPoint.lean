@@ -71,8 +71,8 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_generic {K : Type u} [Field K
     have hdim := ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hinj hfin
     have htrm := Algebra.trdeg_eq_of_ringKrullDim_eq K (A ⧸ y.asIdeal) hdim
     have hlt := ringKrullDim_quotient_lt_of_finiteType K A y.asIdeal hne
-    rw [hdim, MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
-      at hlt
+    rw [hdim, MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
+      ringKrullDim_eq_zero_of_field] at hlt
     rw [← htr, htrm] at hs
     simp only [Nat.card_eq_fintype_card, Fintype.card_fin, zero_add] at hlt
     norm_cast at hs hlt
@@ -99,7 +99,7 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_generic {K : Type u} [Field K
     refine (IsHomeomorph.topologicalKrullDim_eq _
         (AffineSpace.SpecIso PUnit.{u + 1} (.of L)).hom.homeomorph.isHomeomorph).trans_le ?_
     refine (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _).trans_le ?_
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_field]
     simp
   have hcurve := (IsCurve.hasTorsionCohomologicalDimensionLE_of_isSepClosed
     (𝔸(PUnit.{u + 1}; Spec (.of L)) ↘ Spec (.of L))).2 inferInstance

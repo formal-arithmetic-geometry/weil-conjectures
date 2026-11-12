@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 import WeilConjectures.SixFunctors.PurCompactSupport.ScalarComplexAdjunctionNormalization

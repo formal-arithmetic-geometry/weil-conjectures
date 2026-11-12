@@ -189,7 +189,7 @@ private instance pointConstants_locallyInjective :
     · subst b
       exact (coherentTopology Profinite).superset_covering
         (fun _ _ _ ↦ rfl) ((coherentTopology Profinite).top_mem _)
-    · have : IsEmpty S.unop := ⟨fun x ↦ hab (ULift.ext a b (congrArg
+    · have : IsEmpty S.unop := ⟨fun x ↦ hab (ULift.ext (congrArg
         (fun t : ULift.{u + 1} C(S.unop, A) ↦ t.down x) h))⟩
       let U : PEmpty → Profinite.{u} := PEmpty.elim
       let incl : ∀ i, U i ⟶ S.unop := fun i ↦ i.elim

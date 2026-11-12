@@ -22,6 +22,7 @@ public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySuppl
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLinePowerFlat
 import WeilConjectures.Algebra.Homology.OrdinaryLineScalar.OrdinaryLineDerivedScalarComparison
+import all WeilConjectures.Algebra.Homology.OrdinaryLineScalar.OrdinaryLineScalarLineData
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedLineDerived
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteLocallyFreeLineModels
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSingleSupport
@@ -264,16 +265,9 @@ theorem integralCoefficientTwist_constructible (m : ℤ) :
     let hroot : (purTwistIntegralModule S ℓ E).IsFiniteLocallyFreeOfRank 1 :=
       (pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.1
     let hsmall : EssentiallySmall.{u + 1} S.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-    let hdc : ∀ R : Sheaf (ProEt.topology S) CommRingCat.{u + 1},
-        HasDerivedCategory.{u + 2}
-          (SheafOfModules.OrdinaryLineScalar.Modules.{u, u + 1} S R) :=
-      fun R ↦ inferInstance
-    let data := @SheafOfModules.OrdinaryLineScalar.exists_lineData.{u, u + 1, u + 2}
-      S hsmall hdc (completedIntegralCommRingSheafUnrestricted ℓ E S)
-        (purTwistIntegralModule S ℓ E) hroot
-    have h := @SheafOfModules.OrdinaryLineScalar.LineData.rank.{u, u + 1, u + 2}
-      S hsmall hdc (completedIntegralCommRingSheafUnrestricted ℓ E S)
-        (purTwistIntegralModule S ℓ E) data.some m
+    have h := @SheafOfModules.OrdinaryLineScalar.signed_power_rank.{u, u + 1}
+      S hsmall (completedIntegralCommRingSheafUnrestricted ℓ E S)
+        (purTwistIntegralModule S ℓ E) hroot m
     cases m <;> exact h
   obtain ⟨hred, hcomplete⟩ := completedLine_derived S ℓ E L hL D hℓ
   refine ⟨hcomplete, 0, 0, le_rfl, ?_⟩

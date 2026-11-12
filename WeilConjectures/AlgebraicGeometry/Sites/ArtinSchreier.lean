@@ -78,6 +78,7 @@ lemma artinSchreierAddHom_apply (h : (p : R) = 0) (x : R) :
     artinSchreierAddHom p h x = x ^ p - x :=
   rfl
 
+
 /-- `∏_{s ∈ 𝔽_p} (x - s) = xᵖ - x`. -/
 lemma prod_sub_zmodRingHom (h : (p : R) = 0) (x : R) :
     ∏ s : ZMod p, (x - zmodRingHomOfNatCastEqZero p h s) = x ^ p - x := by
@@ -225,6 +226,7 @@ lemma gaArtinSchreier_app_apply (U : X.Etaleᵒᵖ) (x : X.gaSheaf.obj.obj U) :
       (ULift.down (α := Γ(U.unop.left, ⊤)) x) ^ p - ULift.down (α := Γ(U.unop.left, ⊤)) x :=
   rfl
 
+
 /-- **`℘` is an epimorphism of étale sheaves**: every section `t` of `𝔾ₐ` is of the form
 `ωᵖ - ω` on the Artin–Schreier cover `Spec 𝒪[y]/(yᵖ - y - t)`.
 (blueprint: `lem-sc-as-sequence`) -/
@@ -240,7 +242,7 @@ theorem isLocallySurjective_gaArtinSchreier :
       ((ofArrows_mem_smallEtaleTopology_iff (fun _ : Unit ↦ g)).2 ?_)
     · rw [Sieve.ofArrows, Sieve.generate_le_iff]
       rintro _ _ ⟨⟩
-      exact ⟨ULift.up ω, ULift.ext _ _ hω⟩
+      exact ⟨ULift.up ω, ULift.ext hω⟩
     · simp only [Set.iUnion_const]
       exact Set.range_eq_univ.mpr hsurj.surj
 
@@ -373,7 +375,7 @@ lemma imageSieve_zmodToGaPresheaf_mem {U : X.Etale} (x : X.gaPresheaf.obj (op U)
     ((ofArrows_mem_smallEtaleTopology_iff g).2 ?_)
   · rw [Sieve.ofArrows, Sieve.generate_le_iff]
     rintro _ _ ⟨r⟩
-    refine ⟨ULift.up r, ULift.ext _ _ ?_⟩
+    refine ⟨ULift.up r, ULift.ext ?_⟩
     refine (X.zmodToGaPresheaf_app_apply p hp _ r).trans ?_
     change ((D r).ι ≫ U.hom).appTop (zmodRingHomOfNatCastEqZero p hp r) = (D r).ι.appTop u
     have h0 : (D r).ι.appTop (y r * (u - ρ r)) = 0 := by

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison
+public import Mathlib.Algebra.Homology.Localization
 
 /-! # Source transport on an injective representative
 
@@ -51,18 +52,19 @@ theorem smallModel_injectiveExchange_source_transport {X S : Scheme.{v}} (f : X 
       ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
     let H := (HomotopyCategory.Plus.quotient _).obj M
     let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
-      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Qh.obj H)
         (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
     let R := lowerStar AddCommGrpCat.{v + 1} f
     (smallModel_sourceInjectiveDirectImageIso f K J q).inv =
-      DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlusUnit.app H) ≫
+      (DerivedCategory.quotientCompQhIso _).inv.app
+        ((R.mapHomologicalComplex (.up ℤ)).obj M.obj) ≫
+      DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlusUnith.app H) ≫
       DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlus.map q'.inv) := by
   simp only [smallModel_sourceInjectiveDirectImageIso, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv, asIso_hom]
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryFactors,
-    DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
     Quotient.lift.isLift, NatIso.ofComponents.app, Iso.refl_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
 end AlgebraicGeometry.Etale

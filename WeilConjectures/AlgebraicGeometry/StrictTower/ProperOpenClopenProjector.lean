@@ -8,12 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenRingedModuleGluing
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.StrictTower.OpenBetaSourceFactorization
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenRingedModuleGluing
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The clopen section projector of a proper/open square
@@ -509,7 +511,7 @@ private theorem projector_lift_fac (K : CochainComplex A ℤ) :
 @[irreducible] private def projector_map :
     𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory :=
   (Functor.mapDerivedCategoryIdIso A).inv ≫ projector_lift F H p ≫
-    (Functor.mapDerivedCategoryCompIso F H).hom
+    (Functor.mapDerivedCategoryCompIso F H).inv
 
 private theorem projector_map_fac (K : CochainComplex A ℤ) :
     (projector_map F H p).app (DerivedCategory.Q.obj K) ≫
@@ -532,11 +534,11 @@ private theorem projector_map_fac (K : CochainComplex A ℤ) :
 
 private theorem projector_map_descent : ClopenProjectorDescent
     (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
+      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).hom) := by
   have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
-      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
+      (Functor.mapDerivedCategoryCompIso F H).hom = projector_lift F H p := by
     rw [projector_map]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id, Category.comp_id]
   rw [h]
   exact projector_lift_fac F H p
 
@@ -544,7 +546,7 @@ private theorem projector_map_descent_eq
     (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
     (he : projector_map F H p = e) : ClopenProjectorDescent
     (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
+      e ≫ (Functor.mapDerivedCategoryCompIso F H).hom) := by
   rw [← he]
   exact projector_map_descent F H p
 
@@ -578,7 +580,7 @@ private theorem projector_descent_of_restriction
       (exactAdj a).unit.app (F.mapDerivedCategory.obj M)) :
     ClopenProjectorDescent (𝟭 A) (F ⋙ H) p
       ((Functor.mapDerivedCategoryIdIso A).hom ≫ e ≫
-        (Functor.mapDerivedCategoryCompIso F H).inv) := by
+        (Functor.mapDerivedCategoryCompIso F H).hom) := by
   have := ht
   have hd := projector_restriction_descent F H a p (projector_map F H p) hp
     (projector_map_fac F H p)
@@ -595,7 +597,7 @@ private theorem projector_complement_zero
     (h : ∀ N, IsZero ((H ⋙ F).obj N)) (M : DerivedCategory D) :
     IsZero (F.mapDerivedCategory.obj (H.mapDerivedCategory.obj M)) := by
   have hz := (H ⋙ F).isZero_mapDerivedCategory_obj M (fun _ ↦ h _)
-  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).app M).symm
+  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).app M)
 
 private theorem intrinsic_projector_restriction {U X : Scheme.{u}}
     (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] (M : Derived B X) :
@@ -639,13 +641,12 @@ theorem clopenDerived_section_projector {U X C : Scheme.{u}}
       (𝟭 (Towers B X)) (towerPullback B s ⋙ towerJ B s) (clopenTowerPi B s)
       ((@Functor.mapDerivedCategoryIdIso (Towers B X) inferInstance
         (clopenTowerAbelian B X) (towers_hasDerivedCategory B X)).hom ≫ pi B s ≫
-        (@Functor.mapDerivedCategoryCompIso (Towers B X) (Towers B U) (Towers B X)
-          inferInstance inferInstance inferInstance
-          (clopenTowerAbelian B X) (clopenTowerAbelian B U) (clopenTowerAbelian B X)
-          (towers_hasDerivedCategory B X) (towers_hasDerivedCategory B U)
-          (towers_hasDerivedCategory B X) (towerPullback B s) (towerJ B s)
-          inferInstance inferInstance inferInstance
-          inferInstance inferInstance inferInstance).inv) ∧
+        (@Functor.mapDerivedCategoryCompIso
+          (Towers B X) inferInstance (clopenTowerAbelian B X) (towers_hasDerivedCategory B X)
+          (Towers B U) inferInstance (clopenTowerAbelian B U) (towers_hasDerivedCategory B U)
+          (Towers B X) inferInstance (clopenTowerAbelian B X) (towers_hasDerivedCategory B X)
+          (towerPullback B s) inferInstance inferInstance inferInstance
+          (towerJ B s) inferInstance inferInstance inferInstance).hom) ∧
     IsIso (openToR B s) ∧
     pi B s ≫ Functor.whiskerLeft (G B s) (openToR B s) =
       (adj B s).unit ∧

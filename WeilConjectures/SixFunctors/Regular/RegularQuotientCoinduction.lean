@@ -48,11 +48,11 @@ namespace WeilConjectures
 attribute [-instance] integralCoefficientAbSheafify integralCoefficientAbLocallyBijective
   scalarReductionSourceDerived scalarReductionTargetDerived
 
-local instance (T : Scheme.{u}) :
+local instance instHasSheafifyProEt_regularQuotientCoinduction (T : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, 0} T
 
-local instance (T : Scheme.{u}) :
+local instance instWEqualsLocallyBijective_regularQuotientCoinduction (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, 0} T
 

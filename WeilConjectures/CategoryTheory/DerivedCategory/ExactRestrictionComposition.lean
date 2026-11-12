@@ -30,7 +30,7 @@ Source: localization functoriality
 (auxiliary; not a blueprint node). -/
 def exactDerivedRestrictionComposition (η : S ⋙ R ≅ U) :
     S.mapDerivedCategory ⋙ R.mapDerivedCategory ≅ U.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso S R).symm ≪≫ mapDerivedCategoryNatIso η
+  mapDerivedCategoryCompIso S R ≪≫ mapDerivedCategoryNatIso η
 
 /-- Inverse localization comparisons respect composition of exact restrictions.
 Source: localization functoriality
@@ -45,16 +45,16 @@ theorem exactDerivedRestrictionComposition_inv_factors (η : S ⋙ R ≅ U)
       (exactDerivedRestrictionComposition S R U η).hom.app (DerivedCategory.Q.obj K) =
     DerivedCategory.Q.map ((NatIso.mapHomologicalComplex η (.up ℤ)).hom.app K) ≫
       U.mapDerivedCategoryFactors.inv.app K := by
-  have hi : (mapDerivedCategoryCompIso S R).inv.app (DerivedCategory.Q.obj K) ≫
+  have hi : (mapDerivedCategoryCompIso S R).hom.app (DerivedCategory.Q.obj K) ≫
       (S ⋙ R).mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategory.map (S.mapDerivedCategoryFactors.hom.app K) ≫
       R.mapDerivedCategoryFactors.hom.app ((S.mapHomologicalComplex (.up ℤ)).obj K) := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso S R).hom.app
+    apply (cancel_epi ((mapDerivedCategoryCompIso S R).inv.app
       (DerivedCategory.Q.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+    rw [Iso.inv_hom_id_app_assoc]
     exact (mapDerivedCategoryCompIso_hom_app_factors S R K).symm
   apply (cancel_mono (U.mapDerivedCategoryFactors.hom.app K)).mp
-  simp only [exactDerivedRestrictionComposition, Iso.trans_hom, Iso.symm_hom,
+  simp only [exactDerivedRestrictionComposition, Iso.trans_hom,
     NatTrans.comp_app, Category.assoc]
   rw [mapDerivedCategoryNatIso_fac, ← Category.assoc _ _
     (DerivedCategory.Q.map _), hi]
@@ -76,12 +76,12 @@ theorem exactDerivedRestrictionComposition_hom_factors (η : S ⋙ R ≅ U)
       R.mapDerivedCategory.map (S.mapDerivedCategoryFactors.hom.app K) ≫
         R.mapDerivedCategoryFactors.hom.app ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex η (.up ℤ)).hom.app K) := by
-  simp only [exactDerivedRestrictionComposition, Iso.trans_hom, Iso.symm_hom,
+  simp only [exactDerivedRestrictionComposition, Iso.trans_hom,
     NatTrans.comp_app, Category.assoc]
   rw [mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((mapDerivedCategoryCompIso S R).hom.app
+  apply (cancel_epi ((mapDerivedCategoryCompIso S R).inv.app
     (DerivedCategory.Q.obj K))).1
-  rw [Iso.hom_inv_id_app_assoc, mapDerivedCategoryCompIso_hom_app_factors_assoc S R K]
+  rw [Iso.inv_hom_id_app_assoc, mapDerivedCategoryCompIso_hom_app_factors_assoc S R K]
   rfl
 
 end CategoryTheory.Functor

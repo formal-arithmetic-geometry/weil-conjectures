@@ -73,10 +73,9 @@ theorem hypercohomologyLeftEdge_truncation (K : DerivedCategory.Plus B) (n : ℕ
       mapTriangulatedSpectralObject, Triangulated.SpectralObject.mapTriangulatedFunctor,
       Triangulated.TStructure.spectralObjectFunctor, Triangulated.TStructure.spectralObject,
       Triangulated.TStructure.ω₁]
-    simp only [Functor.map_id, NatTrans.hcomp_app, NatTrans.id_app,
-      Category.comp_id]
+    simp only [Functor.map_id, NatTrans.hcomp_app, NatTrans.id_app]
     dsimp
-    simp only [Category.id_comp]
+    simp only [Category.id_comp, Functor.map_id, Category.comp_id]
     change H.map (RG.map ((t.truncGEπ n).app K)) ≫
       CategoryTheory.inv (H.map (RG.map j)) = _
     rw [← Functor.map_inv, ← Functor.map_inv, ← Functor.map_comp, ← Functor.map_comp, hp]

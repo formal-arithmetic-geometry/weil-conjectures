@@ -147,6 +147,14 @@ private theorem ringedEquivalence_kFlat_image
     CochainComplex.IsKFlatIndependentCoefficients (R := S)
       ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
   classical
+  let : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r}
+        ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj S).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
   let := isMonoidal_W_independentCoefficients R
   let := isMonoidal_W_independentCoefficients S
   let := monoidalCategory R
@@ -157,6 +165,20 @@ private theorem ringedEquivalence_kFlat_image
   let := cochainModulesPreadditive S
   let A := KFlatFixedTensor.Modules R
   let B := KFlatFixedTensor.Modules S
+  let : HasCoproducts.{0} A := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasCoproducts.{0} B := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+        ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj S).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasFiniteCoproducts A := hasFiniteCoproducts_of_hasCoproducts (C := A)
+  let : HasFiniteCoproducts B := hasFiniteCoproducts_of_hasCoproducts (C := B)
   let FC := F.mapHomologicalComplex (.up ℤ)
   let τ : (Functor.postcompose₂.obj F).obj (curriedTensor A) ≅
       (((Functor.whiskeringLeft₂ B).obj F).obj F).obj (curriedTensor B) :=

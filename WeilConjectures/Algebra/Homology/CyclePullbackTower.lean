@@ -136,7 +136,7 @@ theorem tower_next (T : A ⥤ A) (π : T ⟶ 𝟭 A)
   · have h' : i + 1 ≤ N := by omega
     have hd : depth N i = depth N (i + 1) + 1 := by unfold depth; omega
     rw [hd]
-    simp only [tower, step, term, if_pos h']
+    simp only [tower, step, term, ite_eq_left h']
 
 /-- The current term is identified with the selected stage's current family. 
 (blueprint: def-pc-cycle-pullback-tower-data-stage3)
@@ -144,7 +144,7 @@ theorem tower_next (T : A ⥤ A) (π : T ⟶ 𝟭 A)
 theorem term_eq (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N i : ℤ) (hi : i ≤ N) :
     term T π F N i = (tower T π F N (depth N i)).current := by
-  simp only [term, if_pos hi]
+  simp only [term, ite_eq_left hi]
 
 /-- The chosen stage has the requested integer degree. 
 (blueprint: def-pc-cycle-pullback-tower-data-stage3)
@@ -184,7 +184,7 @@ noncomputable def augmentation (T : A ⥤ A) (π : T ⟶ 𝟭 A)
 theorem term_isZero (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N i : ℤ) (hi : N < i) (b : B) :
     IsZero ((term T π F N i).obj b) := by
-  simp only [term, if_neg (by omega : ¬ i ≤ N), zeroTerm, Functor.const_obj_obj]
+  simp only [term, ite_eq_right (by omega : ¬ i ≤ N), zeroTerm, Functor.const_obj_obj]
   exact isZero_zero A
 
 /-- The term property follows directly from the construction, without a resolution theorem. 
@@ -195,7 +195,7 @@ theorem term_mem (S : ObjectProperty A) (hzero : ∀ X : A, IsZero X → S X)
     (F : B ⥤ CochainComplex A ℤ) (N i : ℤ) (b : B) :
     S ((term T π F N i).obj b) := by
   by_cases hi : i ≤ N
-  · simp only [term, if_pos hi, depth, tower, step, Functor.comp_obj]
+  · simp only [term, ite_eq_left hi, depth, tower, step, Functor.comp_obj]
     exact hT _
   · exact hzero _ (term_isZero T π F N i (by omega) b)
 

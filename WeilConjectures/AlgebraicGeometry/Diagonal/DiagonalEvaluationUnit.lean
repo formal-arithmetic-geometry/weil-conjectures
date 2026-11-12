@@ -125,7 +125,7 @@ private theorem evaluationLeft_exact
           Sigma.ι (fun _ : n ⟶ m ↦ X) i ≫
             𝟙 (∐ fun _ : n ⟶ m ↦ X) ≫
               colimMap ((Functor.const (Discrete (n ⟶ m))).map f)
-        simp only [Category.comp_id, Category.id_comp, Sigma.ι_desc]
+        simp only [Category.comp_id, Category.id_comp, Sigma.ι_comp_desc]
         exact (ι_colimMap ((Functor.const (Discrete (n ⟶ m))).map f) (Discrete.mk i)).symm)
     exact preservesFiniteLimits_of_natIso e.symm
   exact ⟨fun J _ _ ↦
@@ -236,10 +236,9 @@ private theorem evaluationUnit_of_rightAdjoint
       Iso.inv_hom_id_app, G.mapDerivedCategory.map_id, Category.id_comp]
     change G.mapDerivedCategory.map (DerivedCategory.Q.map e) ≫
         G.mapDerivedCategoryFactors.hom.app _ ≫
-          (DerivedCategory.Q.map t ≫ 𝟙 _ ≫
+          (DerivedCategory.Q.map t ≫
             (DerivedCategory.singleFunctorIsoCompQ A 0).inv.app
               (G.obj (D.ordinary.E.obj S))) = _
-    simp only [Category.id_comp]
     erw [G.mapDerivedCategoryFactors_hom_naturality_assoc, ← DerivedCategory.Q.map_comp_assoc]
   have hq :
       ((Functor.mapHomologicalComplexIdIso A (.up ℤ)).inv.app K ≫
@@ -248,7 +247,8 @@ private theorem evaluationUnit_of_rightAdjoint
         (G.mapHomologicalComplex (.up ℤ)).map e ≫ t =
       (CochainComplex.singleFunctor A 0).map
         (ad.unit.app S ≫ U.map ((D.ordinary.π n).app S)) := by
-    ext i
+    apply HomologicalComplex.hom_ext
+    intro i
     by_cases hi : i = 0
     · subst i
       change ((𝟙 (K.X 0)) ≫ (diagonalEvaluationQuotient U ad D n).app (K.X 0)) ≫
@@ -274,11 +274,11 @@ private theorem evaluationUnit_of_rightAdjoint
   change η.app ((DerivedCategory.singleFunctor A 0).obj S) ≫
     G.mapDerivedCategory.map
       (D.T.map ((DerivedCategory.singleFunctorIsoCompQ A 0).hom.app S)) ≫
-    G.mapDerivedCategory.map (D.ε.app K ≫ DerivedCategory.Q.map e ≫
-      (DerivedCategory.singleFunctorIsoCompQ (ℕᵒᵖ ⥤ B) 0).inv.app (D.ordinary.E.obj S)) ≫
+    G.mapDerivedCategory.map (D.ε.app K) ≫
+    G.mapDerivedCategory.map (DerivedCategory.Q.map e) ≫
+    G.mapDerivedCategory.map
+      ((DerivedCategory.singleFunctorIsoCompQ (ℕᵒᵖ ⥤ B) 0).inv.app (D.ordinary.E.obj S)) ≫
     (G.mapDerivedCategorySingleFunctor 0).hom.app (D.ordinary.E.obj S) = _
-  rw [G.mapDerivedCategory.map_comp, G.mapDerivedCategory.map_comp]
-  simp only [Category.assoc]
   rw [hG]
   have hn := η.naturality ((DerivedCategory.singleFunctorIsoCompQ A 0).hom.app S)
   dsimp only [Functor.id_map, Functor.comp_map] at hn

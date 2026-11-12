@@ -133,7 +133,6 @@ private lemma singleComparison_hom {A B : Type*} [Category A] [Category B] [Abel
     Functor.associator_inv_app, DerivedCategory.Q_obj_single_obj,
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
   erw [Category.id_comp]
-  rfl
 
 omit [EnoughInjectives C] in
 /-- Let `G₁ : C ⥤ D`, `G₂ : D ⥤ E` and `G : C ⥤ E` be exact functors with an isomorphism
@@ -163,7 +162,8 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     let := comp_preservesFiniteLimits G₁ G₂
     let := comp_preservesFiniteColimits G₁ G₂
     have hc (A : C) :
-        (Functor.mapDerivedCategoryNatIso τ ≪≫ Functor.mapDerivedCategoryCompIso G₁ G₂).hom.app
+        (Functor.mapDerivedCategoryNatIso τ ≪≫
+            (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) ≫
           G₂.mapDerivedCategory.map ((G₁.mapDerivedCategorySingleFunctor 0).hom.app A) ≫
           (G₂.mapDerivedCategorySingleFunctor 0).hom.app (G₁.obj A) =
@@ -171,7 +171,7 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
           (DerivedCategory.singleFunctor E 0).map (τ.hom.app A) := by
       rw [singleComparison_hom G₁, singleComparison_hom G₂, singleComparison_hom G,
         Functor.map_comp]
-      simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+      simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
       simp only [← DerivedCategory.Q_obj_single_obj] at *
       erw [G₂.mapDerivedCategoryFactors.hom.naturality_assoc]
       have hf := Functor.mapDerivedCategoryCompIso_fac G₁ G₂
@@ -190,7 +190,6 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
         by_cases hi : i = 0
         · subst i
           simp [HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.single]
-          rfl
         · simp [HomologicalComplex.singleMapHomologicalComplex, hi]
       simp only [Functor.comp_map]
       rw [← DerivedCategory.Q.map_comp, hm, DerivedCategory.Q.map_comp]
@@ -212,12 +211,14 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     ext
     simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom]
     have : NatTrans.CommShift
-        (Functor.mapDerivedCategoryNatIso τ ≪≫ Functor.mapDerivedCategoryCompIso G₁ G₂).hom ℤ := by
+        (Functor.mapDerivedCategoryNatIso τ ≪≫
+          (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom ℤ := by
       dsimp only [Iso.trans_hom]
       infer_instance
     have hi (A : C) :
         (G.mapDerivedCategorySingleFunctor 0).inv.app A ≫
-          (Functor.mapDerivedCategoryNatIso τ ≪≫ Functor.mapDerivedCategoryCompIso G₁ G₂).hom.app
+          (Functor.mapDerivedCategoryNatIso τ ≪≫
+              (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) =
         (DerivedCategory.singleFunctor E 0).map (τ.hom.app A) ≫
           (G₂.mapDerivedCategorySingleFunctor 0).inv.app (G₁.obj A) ≫
@@ -232,7 +233,7 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
       simp only [Category.id_comp, Iso.inv_hom_id_app]
       erw [Category.comp_id]
     have h := ShiftedHom.map_naturality x.hom
-      (Functor.mapDerivedCategoryNatIso τ ≪≫ Functor.mapDerivedCategoryCompIso G₁ G₂).hom
+      (Functor.mapDerivedCategoryNatIso τ ≪≫ (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom
     simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀,
       ShiftedHom.map, Functor.map_comp, Category.assoc] at h ⊢
     have hh := congrArg (fun t ↦ (G.mapDerivedCategorySingleFunctor 0).inv.app A ≫ t ≫

@@ -45,7 +45,7 @@ lemma exact_free_of_surjective_kernelPair {K S T : Type u} (f g : K ⟶ S) (c : 
   let σ : T → S := fun t ↦ if h : ∃ s, c s = t then h.choose else s₀
   have hσ : ∀ s, c (σ (c s)) = c s := fun s ↦ by
     have h : ∃ s', c s' = c s := ⟨s, rfl⟩
-    simp only [σ, dif_pos h]
+    simp only [σ, dite_eq_left h]
     exact h.choose_spec
   choose k hk₁ hk₂ using fun s ↦ hK s (σ (c s)) (hσ s).symm
   refine ⟨Finsupp.mapDomain k x, ?_⟩

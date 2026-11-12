@@ -86,7 +86,7 @@ theorem finite_strict_henselian_algebra_etale_section
     change Sigma.ι (fun j ↦ Spec (.of (C j))) j ≫ Sigma.desc s ≫ p =
       Sigma.ι (fun j ↦ Spec (.of (C j))) j ≫
         sigmaSpec (fun j ↦ CommRingCat.of (C j)) ≫ iso.hom
-    rw [← Category.assoc, Sigma.ι_desc, ← Category.assoc, ι_sigmaSpec]
+    rw [← Category.assoc, Sigma.ι_comp_desc, ← Category.assoc, ι_sigmaSpec]
     exact hs j
   rw [Category.assoc, heq, IsIso.inv_hom_id]
 

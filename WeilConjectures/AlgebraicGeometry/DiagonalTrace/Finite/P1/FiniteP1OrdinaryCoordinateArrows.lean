@@ -57,7 +57,7 @@ def finiteP1CoordinateImage (n : ℕ)
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) (ProjectiveLine S) ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S))⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S))⟦(2 : ℤ)⟧) :
     finiteKummerUnit l E X n ⟶ finiteKummerLine l E X n :=
   (finiteKummerUnitCoordinate l E n e c).hom ≫
     (finiteOverRealization l E n e).map
@@ -72,7 +72,7 @@ def finiteP1LocalCoordinateImage (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)
     (b : Etale.ordinaryFiniteUnit (FiniteRing l E n) X ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) X)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) X)⟦(2 : ℤ)⟧) :
     finiteKummerUnit l E X n ⟶ finiteKummerLine l E X n :=
   (((DerivedCategory.singleFunctor _ 0).mapIso c.unit).symm ≪≫
       (SpTowerP1.nuSingle l E n X _).symm).hom ≫

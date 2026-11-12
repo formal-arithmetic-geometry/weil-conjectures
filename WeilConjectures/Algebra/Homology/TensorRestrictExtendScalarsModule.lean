@@ -55,12 +55,11 @@ theorem exists_tensorRestrictExtend_module_natural
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   | tmul m x =>
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    change TensorProduct A B N at x
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy =>
       simpa only [TensorProduct.tmul_add, map_add] using congrArg₂ (· + ·) hx hy
     | tmul b n =>

@@ -55,7 +55,7 @@ private def coneOfTriangle {A : Type*} [Category A]
     change (p ≫ towerTransitionEndomorphism
       (fun n ↦ F.map (homOfLE n.le_succ).op)) ≫ Pi.π _ n = 0 at hn
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Pi.lift_π, Preadditive.comp_sub, Category.assoc] at hn
+      Category.id_comp, Pi.lift_comp_π, Preadditive.comp_sub, Category.assoc] at hn
     erw [Category.id_comp]
     simpa only [Category.assoc] using (sub_eq_zero.mp hn))
 
@@ -82,7 +82,7 @@ private theorem coneOfTriangle_milnor {A : Type*} [Category A]
     intro n
     change Pretriangulated.towerShift hP ≫ P.proj n = _
     rw [Pretriangulated.towerShift, Fan.IsLimit.fac]
-    simp only [towerProductShift, Pi.lift_π]
+    simp only [towerProductShift, Pi.lift_comp_π]
     rfl
   rw [hp, ht]
   exact hT

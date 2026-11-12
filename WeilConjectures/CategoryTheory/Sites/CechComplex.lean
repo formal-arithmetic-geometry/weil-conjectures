@@ -74,16 +74,16 @@ noncomputable abbrev cechNerveMap {k m : ℕ} (y : Fin (m + 1) → ι)
 lemma cechNerveMap_π {k m : ℕ} (y : Fin (m + 1) → ι) (θ : Fin (k + 1) → Fin (m + 1))
     (l : Fin (k + 1)) :
     cechNerveMap U y θ ≫ Pi.π (fun l ↦ U (y (θ l))) l = Pi.π (fun l ↦ U (y l)) (θ l) :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 lemma cechNerveMap_id {k : ℕ} (y : Fin (k + 1) → ι) : cechNerveMap U y id = 𝟙 _ :=
-  Pi.hom_ext _ _ fun l ↦ by erw [Pi.lift_π, Category.id_comp]; rfl
+  Pi.hom_ext _ _ fun l ↦ by erw [Pi.lift_comp_π, Category.id_comp]; rfl
 
 lemma cechNerveMap_comp {k m p : ℕ} (y : Fin (p + 1) → ι) (θ : Fin (k + 1) → Fin (m + 1))
     (θ' : Fin (m + 1) → Fin (p + 1)) :
     cechNerveMap U y θ' ≫ cechNerveMap U (y ∘ θ') θ = cechNerveMap U y (θ' ∘ θ) :=
   Pi.hom_ext _ _ fun l ↦ by
-    erw [Category.assoc, Pi.lift_π, Pi.lift_π, Pi.lift_π]; rfl
+    erw [Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π, Pi.lift_comp_π]; rfl
 
 /-- Transport along an equality of tuples commutes with the projections. -/
 lemma eqToHom_cechNerveObj_π {k : ℕ} {y y' : Fin (k + 1) → ι} (h : y = y') (l : Fin (k + 1)) :
@@ -104,21 +104,21 @@ noncomputable def cechNerveCons {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U a
 lemma cechNerveCons_π_zero {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U a)
     {y : Fin (k + 1) → ι} (g : W ⟶ cechNerveObj U y) :
     cechNerveCons U lam g ≫ Pi.π (fun l ↦ U ((Fin.cons a y : Fin (k + 2) → ι) l)) 0 = lam :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 @[reassoc]
 lemma cechNerveCons_π_succ {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U a)
     {y : Fin (k + 1) → ι} (g : W ⟶ cechNerveObj U y) (l : Fin (k + 1)) :
     cechNerveCons U lam g ≫ Pi.π (fun l ↦ U ((Fin.cons a y : Fin (k + 2) → ι) l)) l.succ =
       g ≫ Pi.π _ l :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 lemma cechNerveCons_π_of_eq_zero {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U a)
     {y : Fin (k + 1) → ι} (g : W ⟶ cechNerveObj U y) (m : Fin (k + 2)) (hm : m = 0)
     (h : U ((Fin.cons a y : Fin (k + 2) → ι) m) = U a) :
     cechNerveCons U lam g ≫ Pi.π _ m ≫ eqToHom h = lam := by
   subst hm
-  rw [cechNerveCons, Pi.lift_π_assoc]
+  rw [cechNerveCons, Pi.lift_comp_π_assoc]
   exact Category.comp_id _
 
 lemma cechNerveCons_π_of_eq_succ {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U a)
@@ -126,7 +126,7 @@ lemma cechNerveCons_π_of_eq_succ {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U
     (hm : m = l.succ) (h : U ((Fin.cons a y : Fin (k + 2) → ι) m) = U (y l)) :
     cechNerveCons U lam g ≫ Pi.π _ m ≫ eqToHom h = g ≫ Pi.π _ l := by
   subst hm
-  rw [cechNerveCons, Pi.lift_π_assoc]
+  rw [cechNerveCons, Pi.lift_comp_π_assoc]
   exact Category.comp_id _
 
 /-- Forgetting the first factor of `U a ×_V U (y 0) ×_V ⋯ ×_V U (y k)` undoes
@@ -135,8 +135,9 @@ lemma cechNerveCons_cechNerveMap_succ {k : ℕ} {W : Over V} {a : ι} (lam : W �
     {y : Fin (k + 1) → ι} (g : W ⟶ cechNerveObj U y) :
     cechNerveCons U lam g ≫ cechNerveMap U (Fin.cons a y : Fin (k + 2) → ι) Fin.succ = g :=
   Pi.hom_ext _ _ fun l ↦ by
-    erw [Category.assoc, Pi.lift_π]
+    erw [Category.assoc, Pi.lift_comp_π]
     exact cechNerveCons_π_succ U lam g l
+
 
 variable (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
 
@@ -379,7 +380,7 @@ lemma cofree_cochain_face_eq {k : ℕ} (c : ((cechComplex U).obj (cofree P)).X k
   congr 1
   refine Pi.hom_ext _ _ fun l ↦ ?_
   rw [Category.assoc, Category.assoc, eqToHom_cechNerveObj_π U h, ← hG]
-  erw [Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc]
 
 /-- The Čech complex of the cofree presheaf is exact in positive degrees. -/
 theorem exactAt_cechComplex_cofree (q : ℕ) :
@@ -440,7 +441,7 @@ theorem exactAt_cechComplex_cofree (q : ℕ) :
       ext1
       simp only [Over.comp_left, Over.homMk_left, Category.assoc]
       rw [← Over.comp_left]
-      erw [Pi.lift_π]
+      erw [Pi.lift_comp_π]
   rw [e₀] at h₀
   simp only [e, Fin.val_succ, pow_succ, mul_neg_one, neg_smul, Finset.sum_neg_distrib,
     Fin.val_zero, pow_zero, one_smul] at h₀

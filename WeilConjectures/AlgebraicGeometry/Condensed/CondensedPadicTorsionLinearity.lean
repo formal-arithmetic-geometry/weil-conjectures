@@ -35,7 +35,7 @@ private theorem cyclic_unit_epi (X : Scheme.{u}) (N : ℕ) :
     obtain ⟨z, hz⟩ := ZMod.intCast_surjective x.down
     refine ⟨ULift.up z, ?_⟩
     change ULift.up (z : ZMod N) = x
-    exact ULift.ext _ _ hz
+    exact ULift.ext hz
   change Epi (Functor.LaxMonoidal.ε F ≫
     F.map η[AddCommGrpCat.of (ULift.{u + 1} (ZMod N))])
   infer_instance

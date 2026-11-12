@@ -69,8 +69,7 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
     apply le_antisymm
     · rintro _ ⟨z, rfl⟩
       obtain ⟨w, rfl⟩ := ht z
-      induction w using TensorProduct.induction_on with
-      | zero => simp only [map_zero]; exact Submodule.zero_mem _
+      induction w using TensorProduct.inductionOn with
       | tmul s t =>
         change a.app U.1 (tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
         rw [hp]
@@ -236,8 +235,7 @@ private theorem powerProduct_isZero_iff_affine_cover (X : Scheme.{u})
         intro z
         obtain ⟨w, rfl⟩ :=
           (Modules.quasiCoherent_tensor_product_affine_sections J F).2 _ U.1.2 |>.2 z
-        induction w using TensorProduct.induction_on with
-        | zero => simp
+        induction w using TensorProduct.inductionOn with
         | tmul a s =>
           rw [Modules.tensorSectionsMap_tmul, hm]
           exact Module.mem_annihilator.mp (h U.1 U.2
@@ -363,7 +361,7 @@ theorem coherent_support_vanishingIdeal_nilpotence
   intro U hU
   have hnt : n ⟨U, hU⟩ ≤ t := by
     have hm : U ∈ T := hfin.mem_toFinset.mpr hU
-    simpa only [dif_pos hU] using Finset.le_sup
+    simpa only [dite_eq_left hU] using Finset.le_sup
       (f := fun U ↦ if hU : U ∈ S then n ⟨U, hU⟩ else 0) hm
   have hr : (LinearMap.range (K.toModulesι.val.app (op U.1)).hom : Ideal Γ(X, U.1)) =
       K.ideal U := SetLike.coe_injective (K.range_toModulesι_app U)

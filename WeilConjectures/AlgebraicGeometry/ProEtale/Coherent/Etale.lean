@@ -362,4 +362,5 @@ instance Scheme.Etale.preregular (S : Scheme.{u}) : Preregular S.Etale := by
 lemma Scheme.Etale.precoherent (S : Scheme.{u}) : Precoherent S.Etale :=
   inferInstance
 
+
 end AlgebraicGeometry

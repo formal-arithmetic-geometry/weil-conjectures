@@ -204,6 +204,7 @@ theorem siteExtensionByZeroPresheaf_modules {J : GrothendieckTopology C}
         ((SheafOfModules.extensionByZeroPresheaf R W).obj G) := by
   rfl
 
+
 end
 
 /-- Sheaf extension by zero `j_{W!}`: on the site `(C, J)` (the precoverage form of

@@ -345,7 +345,7 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
       (∀ i ∈ s', f i ∈ S.map Γ) → ∃ g : ιw → (𝒟₁).Ω, ∀ i ∈ s', g i ∈ S ∧ Γ (g i) = f i := by
     intro S s' f hf
     refine ⟨fun i ↦ if h : f i ∈ S.map Γ then (Subfield.mem_map.1 h).choose else 0, fun i hi ↦ ?_⟩
-    simp only [dif_pos (hf i hi)]
+    simp only [dite_eq_left (hf i hi)]
     exact (Subfield.mem_map.1 (hf i hi)).choose_spec
   have hcoord : v₂ ((𝒟₂).a x₂ - Γ ((𝒟₁).a x₁)) < 1 := by
     have hΓa : Γ ((𝒟₁).a x₁) = (𝒟₂).a (H.ψ x₁) := RingHom.congr_fun H.ΩMap_comp_a x₁
@@ -401,9 +401,9 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
       have : S ^ (k + 1) - T ^ (k + 1) = S * (S ^ k - T ^ k) + T ^ k * (S - T) := by ring
       rw [this]
       refine lt_of_le_of_lt (v₂.map_add _ _) (max_lt ?_ ?_)
-      · rw [map_mul]; exact mul_lt_one_of_nonneg_of_lt_one_right hS zero_le ih
+      · rw [map_mul]; exact (mul_le_of_le_one_left zero_le hS).trans_lt ih
       · rw [map_mul, map_pow]
-        exact mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' hT _) zero_le hST
+        exact (mul_le_of_le_one_left zero_le (pow_le_one' hT _)).trans_lt hST
   have hres' : ∀ z ∈ L₂, v₂ z ≤ 1 → ∀ (s' : Finset ιw) (c' : ιw → (𝒟₂).Ω), (∀ i ∈ s', c' i ∈ K) →
       (∀ i ∈ s', v₂ (c' i) ≤ 1) → v₂ (z ^ p - ∑ i ∈ s', c' i * Γ (w i)) < 1 →
         ∀ i ∈ s', v₂ (c' i) < 1 := by
@@ -440,8 +440,8 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
       rw [hZp, ← Finset.sum_sub_distrib]
       refine v₂.map_sum_lt one_ne_zero fun k _ ↦ ?_
       rw [← mul_sub, map_mul, map_pow]
-      refine mul_lt_one_of_nonneg_of_lt_one_right
-        (pow_le_one' ((H.valuation_ΩMap_le_one_iff _).2 (hy k).2) _) zero_le ?_
+      refine (mul_le_of_le_one_left zero_le
+        (pow_le_one' ((H.valuation_ΩMap_le_one_iff _).2 (hy k).2) _)).trans_lt ?_
       refine hpowcong S (z ^ p) hS1 (by rw [map_pow]; exact pow_le_one' hz1 _) ?_ k
       rw [← v₂.map_neg, neg_sub]; exact hlt
     have h3 : v₂ ((𝒟₂).a x₂ - Z ^ p) < 1 := by

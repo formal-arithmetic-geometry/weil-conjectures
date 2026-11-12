@@ -31,7 +31,7 @@ private theorem height_maximal_eq_numVariables {k : Type u} [Field k] (n : ℕ)
   | zero =>
     have h := M.height_le_ringKrullDim_of_ne_top Ideal.IsPrime.ne_top'
     have hd : ringKrullDim (MvPolynomial (Fin 0) k) = 0 := by
-      simp only [ringKrullDim_of_isNoetherianRing, Nat.card_fin, Nat.cast_zero, add_zero]
+      simp only [ringKrullDim_of_isNoetherianRing_of_finite, Nat.card_fin, Nat.cast_zero, add_zero]
       exact ringKrullDimZero_iff_ringKrullDim_eq_zero.mp inferInstance
     rw [hd] at h
     simpa using h

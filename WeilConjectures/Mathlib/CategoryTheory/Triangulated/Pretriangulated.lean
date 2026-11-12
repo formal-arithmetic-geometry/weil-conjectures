@@ -281,4 +281,5 @@ theorem tr1_tr2_tr3 :
     fun u ↦ distinguished_cocone_triangle u, rotate_distinguished_triangle,
     fun _ _ h₁ h₂ a b w ↦ complete_distinguished_triangle_morphism _ _ h₁ h₂ a b w⟩
 
+
 end CategoryTheory.Pretriangulated

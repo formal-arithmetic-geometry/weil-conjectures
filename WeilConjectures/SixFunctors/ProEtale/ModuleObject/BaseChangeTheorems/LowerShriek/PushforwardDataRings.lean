@@ -116,7 +116,9 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_pushforwardData
     boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq =
       BoundedConstructiblePushforwardData.lowerShriekBaseChange
         (isIsoRefinementPushforward_padicAlgClPushforwardData ℓ k) sq := by
-  unfold boundedConstructibleLowerShriekBaseChange_padicAlgCl
+  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_def]
+  unfold boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+  simp only [boundedConstructibleBaseChange_def]
   rfl
 
 /-- The compact-support base change morphism of `E̲` is the one of its pushforward datum. -/
@@ -126,6 +128,8 @@ lemma boundedConstructibleLowerShriekBaseChange_eq_pushforwardData
       BoundedConstructiblePushforwardData.lowerShriekBaseChange
         (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E) sq := by
   unfold boundedConstructibleLowerShriekBaseChange
+  unfold ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+  simp only [ContinuousMapRingObj.boundedConstructibleBaseChange_def]
   rfl
 
 /-- The compact-support base change morphism of `𝒪̲_E` is the one of its pushforward datum. -/

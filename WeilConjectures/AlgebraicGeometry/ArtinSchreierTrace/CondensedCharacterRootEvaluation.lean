@@ -172,7 +172,7 @@ theorem condensedCharacterImage_rootEvaluation_isIso
   have he (a : G) : F.map P ≫ q.hom ≫ Pi.π (fun _ : G ↦ condensedUnit Λ T) a =
       ∑ b : G, (q.hom ≫ Pi.π (fun _ : G ↦ condensedUnit Λ T) b) ≫
         r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (a - b)) := by
-    simp only [q, asIso_hom, Pi.lift_π]
+    simp only [q, asIso_hom, Pi.lift_comp_π]
     change F.map P ≫ E a = ∑ b : G, E b ≫ r
       (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (a - b))
     simp only [P, condensedProjector, Functor.map_sum F, Functor.map_comp,
@@ -199,7 +199,7 @@ theorem condensedCharacterImage_rootEvaluation_isIso
     rw [Category.comp_id]
   have hm : image.ι (F.map P) ≫ q.hom ≫ Pi.π (fun _ : G ↦ condensedUnit Λ T) 0 =
       image.ι (F.map P) ≫ condensedEvaluation Λ x s (𝟙 _) := by
-    simp only [q, asIso_hom, Pi.lift_π, hzero]
+    simp only [q, asIso_hom, Pi.lift_comp_π, hzero]
   rw [hm] at hi
   have hh : condensedEvaluation Λ x s (image.ι P) =
       (PreservesImage.iso F P).inv ≫ image.ι (F.map P) ≫

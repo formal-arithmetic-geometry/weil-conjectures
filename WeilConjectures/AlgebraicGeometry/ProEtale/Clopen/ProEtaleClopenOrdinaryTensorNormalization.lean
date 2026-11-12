@@ -75,8 +75,7 @@ private theorem tensor_ext
       ((adj.unit.app (M.val ⊗ N.val)).app U z)) =
     g.val.app U ((SheafOfModules.tensorObjIsoSheafification M N).inv.val.app U
       ((adj.unit.app (M.val ⊗ N.val)).app U z))
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul x y => exact h U x y
   | add x y hx hy => simp only [map_add, hx, hy]
 

@@ -137,6 +137,12 @@ end
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
+local instance (I : Type) :
+    HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj (Discrete I)
+
 /-- The existing ordinary module-sheaf category.
 Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
 abbrev Modules := KFlatFixedTensor.Modules R

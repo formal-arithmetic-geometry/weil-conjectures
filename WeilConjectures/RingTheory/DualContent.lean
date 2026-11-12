@@ -90,5 +90,5 @@ theorem CommRingCat.map_eq_bot_iff_of_isPushout {A B C D : CommRingCat.{u}} {f :
   refine (Ideal.map_eq_bot_iff_le_ker _).trans (Iff.trans ?_
     ((Algebra.IsPushout.out (R := A) (S := C) (R' := B) (S' := D)).forall_apply_eq_zero_iff
       (k.restrictScalars A)))
-  simp only [SetLike.le_def, RingHom.mem_ker]
+  simp only [IsConcreteLE.le_iff, RingHom.mem_ker]
   rfl

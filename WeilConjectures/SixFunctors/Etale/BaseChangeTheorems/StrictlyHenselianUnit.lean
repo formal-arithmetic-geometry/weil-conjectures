@@ -206,7 +206,7 @@ noncomputable def Etale.freeSheafObjIsoOfIsTerminal {X : Scheme.{u}} {T : X.Etal
     (Equiv.toIso
       { toFun := fun _ ↦ PUnit.unit
         invFun := fun _ ↦ ULift.up (hT.from V.unop)
-        left_inv := fun x ↦ ULift.ext _ _ (hT.hom_ext _ _)
+        left_inv := fun x ↦ ULift.ext (hT.hom_ext _ _)
         right_inv := fun _ ↦ rfl })) (fun f ↦ by
     dsimp
     rw [Category.comp_id, ← Functor.map_comp]
@@ -390,7 +390,7 @@ lemma Etale.projective_upperStar_freeSheaf_etaleTerminal :
       ((t)^*[ModuleCat.{u + 1} Λ]).mapIso
         (Etale.freeSheafObjIsoOfIsTerminal Λ (Scheme.isTerminalEtaleTerminal R)).symm)
     ((constantSheafAdj _ _ isTerminalEtalePoint).map_projective _
-      (ModuleCat.projective_of_categoryTheory_projective ((ModuleCat.free Λ).obj PUnit)))
+      (ModuleCat.projective_of_free (Finsupp.basisSingleOne)))
 
 /-- Positive and negative degrees: for `L ≅ N[0]` in `D⁺(Spec Ω)`, the sheaf `R^q t_* L` on
 `Spec R` has no nonzero sections over `Spec R` when `q ≠ 0`. These sections are those of the

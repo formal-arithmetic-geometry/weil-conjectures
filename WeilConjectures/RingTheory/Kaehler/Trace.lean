@@ -73,6 +73,7 @@ lemma traceDerivForm_zero_right (X : Matrix m n R) :
     traceDerivForm D X (0 : Matrix n m R) = 0 := by
   simp [traceDerivForm]
 
+
 /-- **Leibniz rule** for `traceDerivForm`:
 `Tr(X D(YZ)) = Tr(XY D(Z)) + Tr(ZX D(Y))`. -/
 lemma traceDerivForm_mul_right (X : Matrix m n R) (Y : Matrix n p R) (Z : Matrix p m R) :
@@ -99,8 +100,8 @@ lemma traceDerivForm_scalar_right [DecidableEq m] (X : Matrix m m R) (c : R) :
     traceDerivForm D X (Matrix.scalar m c) = X.trace • D c := by
   simp only [traceDerivForm, scalar_apply, diagonal_apply, Matrix.trace, diag, Finset.sum_smul]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [Finset.sum_eq_single i (fun j _ hj ↦ by rw [if_neg hj, D.map_zero, smul_zero])
-    (fun h ↦ (h (Finset.mem_univ _)).elim), if_pos rfl]
+  rw [Finset.sum_eq_single i (fun j _ hj ↦ by rw [ite_eq_right hj, D.map_zero, smul_zero])
+    (fun h ↦ (h (Finset.mem_univ _)).elim), ite_eq_left rfl]
 
 /-- Conjugation invariance of `traceDerivForm` on commuting matrices: if `P Q = 1` and
 `A C = C A`, then `Tr(QCP · D(QAP)) = Tr(C · D(A))`. -/
@@ -282,5 +283,6 @@ lemma traceLin_smul_D (a c : B) :
 
 lemma traceLin_D (a : B) : traceLin D (KaehlerDifferential.D k B a) = traceDeriv D a 1 := by
   rw [← traceLin_smul_D, one_smul]
+
 
 end KaehlerDifferential

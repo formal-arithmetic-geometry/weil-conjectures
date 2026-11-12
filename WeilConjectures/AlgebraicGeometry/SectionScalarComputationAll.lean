@@ -33,6 +33,7 @@ private theorem map_id_cleanup_left
     F.map (𝟙 x) ≫ t ≫ 𝟙 y = t := by
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
+
 private theorem natTrans_app_eq_of_epi
     {A B : Type*} [Category A] [Category B] {F G : A ⥤ B}
     (θ₁ θ₂ : F ⟶ G) {P K : A} (f : K ⟶ P) [Epi (F.map f)]
@@ -73,6 +74,9 @@ private theorem resolution_properties_of_iso
         (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (Q.X n))) :
     CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
       (∀ n : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P.X n)) := by
+  have (I : Type w) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
@@ -155,25 +159,23 @@ theorem section_scalar_computation_all (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme
   let ED := (ModuleRingedComparison.derivedEquivalence Λ' T).functor
   let E := (extension a T).mapHomologicalComplex (.up ℤ)
   let ε : DerivedCategory.Q ⋙ D a T ⟶ E ⋙ DerivedCategory.Q :=
-    { app := fun K ↦ (scalarCounit a T).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-      naturality := fun _ _ f ↦ (scalarCounit a T).naturality
-        ((HomotopyCategory.quotient _ (.up ℤ)).map f) }
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso _).inv (D a T) ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) (scalarCounit a T) ≫
+      Functor.whiskerRight ((extension a T).mapHomotopyCategoryFactors (.up ℤ)).hom
+        DerivedCategory.Qh ≫
+      Functor.whiskerLeft E (DerivedCategory.quotientCompQhIso _).hom
   let ε' : DerivedCategory.Q ⋙ s.pair.derived ⟶
       s.pair.extension.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
-    { app := fun K ↦ s.pair.counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-      naturality := fun _ _ f ↦ s.pair.counit.naturality
-        ((HomotopyCategory.quotient _ (.up ℤ)).map f) }
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso _).inv s.pair.derived ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) s.pair.counit ≫
+      Functor.whiskerLeft (s.pair.extension.mapHomologicalComplex (.up ℤ))
+        (DerivedCategory.quotientCompQhIso _).hom
   have he (K : CochainComplex (Modules Λ T) ℤ) : compute a T K = ε.app K := by
-    unfold compute
-    change (D a T).map (𝟙 _) ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
-    exact map_id_cleanup (D a T) DerivedCategory.Qh _
+    rfl
   have he' (K : CochainComplex (ModuleRingedComparison.modules Λ T) ℤ) :
       SheafOfModules.scalarPairComplexComparison s.pair.extension s.pair.extension_additive
         s.pair.derived s.pair.counit K = ε'.app K := by
-    unfold SheafOfModules.scalarPairComplexComparison
-    change s.pair.derived.map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
-    exact map_id_cleanup_left s.pair.derived _
+    rfl
   let α := Functor.mapHomologicalComplexCompIso s.ordinary (.up ℤ) ≪≫
     (Functor.mapHomologicalComplexCompIso (Iso.refl
       ((ModuleRingedComparison.equivalence Λ T).functor ⋙ s.pair.extension)) (.up ℤ)).symm

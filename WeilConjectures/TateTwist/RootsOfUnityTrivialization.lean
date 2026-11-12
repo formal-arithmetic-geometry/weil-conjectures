@@ -187,12 +187,12 @@ lemma unitToRootsOfUnitySheaf_eq (f : U ⟶ Spec (.of K)) {N : ℕ} [NeZero N] {
     (hζ : ζ ^ N = 1) :
     unitToRootsOfUnitySheaf f hζ = (presheafToSheaf (ProEt.topology U) Ab.{u + 1}).map
       (unitToRootsOfUnityPresheaf f (rootsOfUnity.mkOfPowEq ζ hζ)) :=
-  dif_neg (NeZero.ne N)
+  dite_eq_right (NeZero.ne N)
 
 /-- For `N = 0`, `AlgebraicGeometry.ProEtale.unitToRootsOfUnitySheaf` is zero by definition. -/
 lemma unitToRootsOfUnitySheaf_of_eq_zero (f : U ⟶ Spec (.of K)) {ζ : K} (hζ : ζ ^ 0 = 1) :
     unitToRootsOfUnitySheaf f hζ = 0 :=
-  dif_pos rfl
+  dite_eq_left rfl
 
 /-- The map `ℤ ⟶ μ_N`, `a ↦ ζ ^ a`, is compatible with the power maps `μ_{m N} ⟶ μ_N`. -/
 lemma unitToRootsOfUnitySheaf_comp_rootsOfUnitySheafPow (f : U ⟶ Spec (.of K)) {N m : ℕ}
@@ -200,7 +200,7 @@ lemma unitToRootsOfUnitySheaf_comp_rootsOfUnitySheafPow (f : U ⟶ Spec (.of K))
     unitToRootsOfUnitySheaf f hζ' ≫ rootsOfUnitySheafPow U N m =
       unitToRootsOfUnitySheaf f hζ := by
   rcases Nat.eq_zero_or_pos (m * N) with hmN | hmN
-  · rw [unitToRootsOfUnitySheaf, dif_pos hmN, zero_comp]
+  · rw [unitToRootsOfUnitySheaf, dite_eq_left hmN, zero_comp]
     rcases Nat.eq_zero_or_pos N with rfl | hN
     · exact (unitToRootsOfUnitySheaf_of_eq_zero f hζ).symm
     · obtain rfl : m = 0 := by
@@ -324,7 +324,7 @@ lemma isLocallyInjective_cokernelToRootsOfUnityPresheaf (f : U ⟶ Spec (.of K))
       rintro ⟨c, hc⟩
       apply hab
       have hac : a = b + ((N : ℤ) • 𝟙 (𝟙_ (U.ProEtᵒᵖ ⥤ Ab.{u + 1}))).app V (ULift.up c) := by
-        refine ULift.ext _ _ ?_
+        refine ULift.ext ?_
         exact sub_eq_iff_eq_add'.1 hc
       rw [hac, map_add, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, cokernel.condition]
       simp

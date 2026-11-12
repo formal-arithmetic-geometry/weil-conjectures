@@ -28,6 +28,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearEvaluationDerivedAdjunction
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
+import WeilConjectures.CategoryTheory.ExactCube
 import WeilConjectures.AlgebraicGeometry.Constant.ConstantTowerSquareNormalization
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 
@@ -518,18 +519,18 @@ private theorem localizeTowerSquare_eq
       (G₁ := (Functor.whiskeringRight ℕᵒᵖ _ _).obj H)
       (G₂ := (Functor.whiskeringRight ℕᵒᵖ _ _).obj I)
       (termwiseSquareIso e) =
-    (Functor.mapDerivedCategoryCompIso
+    Functor.mapDerivedCategoryCompIso
       ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj G)).symm ≪≫
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj G) ≪≫
     Functor.mapDerivedCategoryNatIso
       (F := (Functor.whiskeringRight ℕᵒᵖ _ _).obj F ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj G)
       (G := (Functor.whiskeringRight ℕᵒᵖ _ _).obj H ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj I)
       ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       ((Functor.whiskeringRight ℕᵒᵖ _ _).obj H)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj I) := rfl
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj I)).symm := rfl
 
 private theorem towerSquare_localization (r : StrictTowerRingedSquare sq) :
     Functor.mapDerivedCategorySquareIso
@@ -588,7 +589,7 @@ private theorem derivedCube_nat
       Functor.whiskerRight (Functor.mapDerivedCategorySquareIso d).hom R₃.mapDerivedCategory := by
   apply NatTrans.ext
   funext M
-  exact AlgebraicGeometry.ProEtale.derivedCube qJ qH qG qI c d
+  exact Functor.exactDerivedCube qJ qH qG qI c d
     (fun N ↦ congrArg (fun z ↦ z.app N) hc) M
 
 
@@ -689,7 +690,6 @@ end AlgebraicGeometry.Scheme
 -- Keep localized comparison constructions folded while elaborating their equations.
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryCompIso
   Functor.mapDerivedCategoryNatIso
 namespace AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose
 

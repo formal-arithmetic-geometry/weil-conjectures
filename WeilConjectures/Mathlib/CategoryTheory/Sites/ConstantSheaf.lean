@@ -123,4 +123,5 @@ theorem bijective_constantSheafAdj_unit_comp {C : Type*} [Category* C]
       (constantSheafAdj J D hT).unit.app E ≫ φ.hom.app (Opposite.op T) :=
   ((constantSheafAdj J D hT).homEquiv E F).bijective
 
+
 end CategoryTheory

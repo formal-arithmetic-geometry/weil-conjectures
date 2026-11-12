@@ -145,6 +145,7 @@ theorem isRegularLocalRing_and_injective_h1Cotangent_of_isGeometricallyRegular
   have hδ : H1Cotangent.δ (ZMod p) k K x = 0 :=
     hcinj (hx'.trans (map_zero c).symm)
   obtain ⟨y, hy⟩ := (H1Cotangent.exact_map_δ (ZMod p) k K x).mp hδ
-  rw [← hy, Subsingleton.elim y 0, map_zero]
+  exact hy.symm.trans ((congrArg (H1Cotangent.map (ZMod p) k K K)
+    (Subsingleton.elim y 0)).trans (H1Cotangent.map (ZMod p) k K K).map_zero)
 
 end Algebra

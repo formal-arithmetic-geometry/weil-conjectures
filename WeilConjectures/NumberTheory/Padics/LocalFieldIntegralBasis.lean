@@ -110,10 +110,11 @@ theorem exists_integral_basis
       apply Subtype.ext
       simpa [Algebra.smul_def, IsScalarTower.algebraMap_apply A E F,
         hmap, c, y] using ha'.2.symm
-    have hc := congrArg b.repr heq
     have hc' : ∀ j, c j = b.repr y j := by
       intro j
-      simpa [Finsupp.single_apply] using congrArg (fun z ↦ z j) hc
+      calc
+        c j = b.repr (∑ k, c k • b k) j := (congrFun (b.repr_sum_self c) j).symm
+        _ = b.repr y j := congrArg (fun z : C ↦ b.repr z j) heq
     funext j
     exact congrArg (fun z : A ↦ (z : E)) (hc' j)
 

@@ -64,6 +64,21 @@ Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly)
 abbrev Modules := ringedSiteModules.{max u v w, max u v w, v, u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
+local instance (B : Modules.{u, v, w} R) {U V : Cᵒᵖ} (f : U ⟶ V) :
+    Module (R.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (B.val.obj V)) :=
+  inferInstanceAs (Module (R.obj.obj V) (B.val.obj V))
+
+local instance (B : Modules.{u, v, w} R) (U : Cᵒᵖ) (V : (Over U.unop)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
+      (𝟙_ (Modules.{u, v, w} R)).val).obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map V.unop.hom.op).hom).obj
+          (B.val.obj (op V.unop.left))) :=
+  inferInstanceAs (SMul (R.obj.obj (op V.unop.left)) (B.val.obj (op V.unop.left)))
+
 /-- The structure sheaf placed in degree zero.
 Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
 def unitComplex : CochainComplex (Modules.{u, v, w} R) ℤ :=
@@ -507,14 +522,14 @@ private theorem evaluationComponent_supported
     (p q n r : ℤ) (hpq : p + q = n) (hrq : r + q = 0) (hrn : r + n = p) :
     evaluationComponent R E F p q n r p hpq hrn =
       F.X p ◁ dualProjection R E q r hrq ≫ moduleEvaluation R (E.X r) (F.X p) := by
-  simp only [evaluationComponent, dif_pos hrq, eqToHom_refl,
+  simp only [evaluationComponent, dite_eq_left hrq, eqToHom_refl,
     SheafOfModules.homObjMap_id, Category.comp_id]
 
 private theorem evaluationComponent_zero
     (E F : CochainComplex (Modules.{u, v, w} R) ℤ)
     (p q n r t : ℤ) (hpq : p + q = n) (hrt : r + n = t) (hrq : r + q ≠ 0) :
     evaluationComponent R E F p q n r t hpq hrt = 0 := by
-  simp only [evaluationComponent, dif_neg hrq]
+  simp only [evaluationComponent, dite_eq_right hrq]
 
 attribute [local irreducible] evaluationComponent
 
@@ -582,7 +597,7 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
     dsimp only [inclusion, fromTotal]
     rw [HomologicalComplex.ι_mapBifunctorDesc]
     dsimp only [component]
-    rw [dif_pos (by simpa only [neg_neg] using r.property)]
+    rw [dite_eq_left (by simpa only [neg_neg] using r.property)]
     have hr : (⟨- -r.val, by simpa only [neg_neg] using r.property⟩ :
         ↥(Finset.Icc a b)) = r := by
       apply Subtype.ext
@@ -598,7 +613,7 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
     change p + q = n at hpq
     dsimp only [component]
     by_cases hq : -q ∈ Finset.Icc a b
-    · rw [dif_pos hq]
+    · rw [dite_eq_left hq]
       have hp : p = -q + n := by omega
       subst p
       dsimp only [toTotal]
@@ -617,7 +632,7 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
         intro hh h
         simp
       exact transport _ (neg_neg q).symm _ _
-    · rw [dif_neg hq]
+    · rw [dite_eq_right hq]
       have hzero : IsZero (D.X q) :=
         hbounded q (by
           simpa only [Finset.mem_Icc, not_and_or, not_le] using hq)

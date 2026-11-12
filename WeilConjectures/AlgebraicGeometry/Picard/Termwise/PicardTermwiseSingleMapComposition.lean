@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
 /-! # Composition of the canonical termwise single map
@@ -24,8 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-attribute [local implicit_reducible] CochainComplex.singleFunctors
-
 private theorem single_composition
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Preadditive A] [Preadditive B] [Preadditive C]
@@ -40,7 +40,7 @@ private theorem single_composition
       (HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).hom.app (F.obj N) ≫
       (CochainComplex.singleFunctor C 0).map (c.hom.app N) := by
   apply HomologicalComplex.to_single_hom_ext
-  simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+  simp [CochainComplex.singleFunctor,
     HomologicalComplex.singleMapHomologicalComplex,
     HomologicalComplex.single, Functor.mapHomologicalComplexCompIso,
     NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex,
@@ -118,8 +118,7 @@ attribute [local irreducible]
   Modules.tensorPullbackCompositionIso Modules.tensorPullback Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Modules.Hom DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
   HomologicalComplexUpToQuasiIso.Qh
 
 private theorem single_map_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
@@ -131,10 +130,11 @@ private theorem single_map_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Modules.tensorPullback f) (.up ℤ) 0).hom.app N)) := by
-  exact cancel_single_maps (DerivedCategory.singleFunctor
-    (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0) _ _
-    (((Classical.choose (Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (Modules.pullbackPushforwardAdjunction f)).app N)
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  simp only [picardTermwiseSingleMap, Modules.canonicalSinglePullbackMap, cast_eq,
+    Scheme.Modules, Scheme.ringCatSheaf, moduleRings,
+    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.comp_id, perfectHomTensorCounit]
 
 private theorem counit_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
     (K : CochainComplex Y.Modules ℤ) :

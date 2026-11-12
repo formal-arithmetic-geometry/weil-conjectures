@@ -63,7 +63,7 @@ theorem isSheaf_continuousCoefficientRingPresheaf :
   refine ⟨inferInstance, ?_⟩
   apply +allowSynthFailures equalizerCondition_yonedaPresheaf Profinite.toTopCat.{u} T
   intro Z B π hπ
-  exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 0 2).mp hπ)
+  exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 1 3).mp hπ)
     π.hom.hom.continuous
 
 /-- The condensed ring with sections C(S,T), with no Type 0 restriction.

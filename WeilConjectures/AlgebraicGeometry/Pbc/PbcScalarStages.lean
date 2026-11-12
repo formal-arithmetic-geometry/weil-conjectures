@@ -55,12 +55,12 @@ theorem mapDerivedCategory_compIso_assoc
     (h : isoWhiskerLeft r₂₃ c₀₁₂ ≪≫ c₀₂₃ =
       (associator _ _ _).symm ≪≫ isoWhiskerRight c₁₂₃ r₀₁ ≪≫ c₀₁₃) :
     isoWhiskerLeft r₂₃.mapDerivedCategory
-        ((mapDerivedCategoryCompIso r₁₂ r₀₁).symm ≪≫ mapDerivedCategoryNatIso c₀₁₂) ≪≫
-      ((mapDerivedCategoryCompIso r₂₃ r₀₂).symm ≪≫ mapDerivedCategoryNatIso c₀₂₃) =
+        ((mapDerivedCategoryCompIso r₁₂ r₀₁) ≪≫ mapDerivedCategoryNatIso c₀₁₂) ≪≫
+      ((mapDerivedCategoryCompIso r₂₃ r₀₂) ≪≫ mapDerivedCategoryNatIso c₀₂₃) =
     (associator _ _ _).symm ≪≫
-      isoWhiskerRight ((mapDerivedCategoryCompIso r₂₃ r₁₂).symm ≪≫
+      isoWhiskerRight ((mapDerivedCategoryCompIso r₂₃ r₁₂) ≪≫
         mapDerivedCategoryNatIso c₁₂₃) r₀₁.mapDerivedCategory ≪≫
-      ((mapDerivedCategoryCompIso r₁₃ r₀₁).symm ≪≫ mapDerivedCategoryNatIso c₀₁₃) := by
+      ((mapDerivedCategoryCompIso r₁₃ r₀₁) ≪≫ mapDerivedCategoryNatIso c₀₁₃) := by
   ext K
   have hD := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app K) h
   have hα : (associator r₂₃ r₁₂ r₀₁).symm = Iso.refl _ := by
@@ -73,34 +73,35 @@ theorem mapDerivedCategory_compIso_assoc
   have A := NatTrans.congr_app (mapDerivedCategoryCompIso_assoc r₂₃ r₁₂ r₀₁) K
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at WL WR A
   have WL' : (mapDerivedCategoryNatIso c₀₁₂).hom.app (r₂₃.mapDerivedCategory.obj K) =
-      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).inv.app K ≫
+      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).hom.app K ≫
         (mapDerivedCategoryNatIso (isoWhiskerLeft r₂₃ c₀₁₂)).hom.app K ≫
-        (mapDerivedCategoryCompIso r₂₃ r₀₂).hom.app K := by
-    rw [WL, Iso.inv_hom_id_app_assoc]
+        (mapDerivedCategoryCompIso r₂₃ r₀₂).inv.app K := by
+    rw [WL, Iso.hom_inv_id_app_assoc]
   have WR' : r₀₁.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₁₂₃).hom.app K) ≫
-      (mapDerivedCategoryCompIso r₁₃ r₀₁).inv.app K =
-      (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K ≫
+      (mapDerivedCategoryCompIso r₁₃ r₀₁).hom.app K =
+      (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K ≫
         (mapDerivedCategoryNatIso (isoWhiskerRight c₁₂₃ r₀₁)).hom.app K := by
-    rw [← cancel_mono ((mapDerivedCategoryCompIso r₁₃ r₀₁).hom.app K), Category.assoc,
-      Category.assoc, Iso.inv_hom_id_app]
+    rw [← cancel_mono ((mapDerivedCategoryCompIso r₁₃ r₀₁).inv.app K), Category.assoc,
+      Category.assoc, Iso.hom_inv_id_app]
     erw [Category.comp_id]
-    rw [WR, Iso.inv_hom_id_app_assoc]
-  have A' : (mapDerivedCategoryCompIso r₁₂ r₀₁).inv.app (r₂₃.mapDerivedCategory.obj K) ≫
-      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).inv.app K =
-      r₀₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₂₃ r₁₂).inv.app K) ≫
-        (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K := by
-    rw [← cancel_mono ((mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K),
-      Category.assoc, Category.assoc, Iso.inv_hom_id_app]
+    rw [WR, Iso.hom_inv_id_app_assoc]
+  have A' : (mapDerivedCategoryCompIso r₁₂ r₀₁).hom.app (r₂₃.mapDerivedCategory.obj K) ≫
+      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).hom.app K =
+      r₀₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₂₃ r₁₂).hom.app K) ≫
+        (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K := by
+    rw [← cancel_mono ((mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K),
+      Category.assoc, Category.assoc, Iso.hom_inv_id_app]
     erw [Category.comp_id]
     rw [← cancel_mono (r₀₁.mapDerivedCategory.map
-      ((mapDerivedCategoryCompIso r₂₃ r₁₂).hom.app K)), Category.assoc, Category.assoc, ← A]
+      ((mapDerivedCategoryCompIso r₂₃ r₁₂).inv.app K)), Category.assoc, Category.assoc, ← A]
     simp [← Functor.map_comp]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
     whiskerLeft_app, isoWhiskerRight_hom, whiskerRight_app, Functor.map_comp, Category.assoc]
   rw [WL', reassoc_of% WR']
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   erw [Category.id_comp]
   rw [reassoc_of% A', hD]
+
 
 end CategoryTheory.Functor
 
@@ -277,7 +278,7 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerLeft_unit
     [PreservesFiniteColimits r] [s.Additive] [PreservesFiniteLimits s]
     [PreservesFiniteColimits s] (e : s ≅ 𝟭 C₀) (c : r ⋙ s ≅ r)
     (hc : c = isoWhiskerLeft r e ≪≫ rightUnitor r) :
-    (mapDerivedCategoryCompIso r s).symm ≪≫ mapDerivedCategoryNatIso c =
+    (mapDerivedCategoryCompIso r s) ≪≫ mapDerivedCategoryNatIso c =
       isoWhiskerLeft r.mapDerivedCategory
         (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C₀) ≪≫
         rightUnitor r.mapDerivedCategory := by
@@ -290,20 +291,20 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerLeft_unit
   have U := NatTrans.congr_app (mapDerivedCategoryCompIso_comp_id r) K
   simp only [NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app] at WL U
   simp only [hρ, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
     rightUnitor_hom_app, NatTrans.id_app]
   have WL' : (mapDerivedCategoryNatIso (isoWhiskerLeft r e)).hom.app K =
-      (mapDerivedCategoryCompIso r s).hom.app K ≫
+      (mapDerivedCategoryCompIso r s).inv.app K ≫
         (mapDerivedCategoryNatIso e).hom.app (r.mapDerivedCategory.obj K) ≫
-        (mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K := by
-    rw [← reassoc_of% WL, Iso.hom_inv_id_app]
+        (mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K := by
+    rw [← reassoc_of% WL, Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  have U' : (mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K =
+  have U' : (mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K =
       (mapDerivedCategoryIdIso C₀).hom.app (r.mapDerivedCategory.obj K) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K), Iso.hom_inv_id_app, U]
+    rw [← cancel_epi ((mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K), Iso.inv_hom_id_app, U]
     rfl
   rw [WL', U']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   all_goals rfl
 
 theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_unit
@@ -313,7 +314,7 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_uni
     [PreservesFiniteColimits r] [s.Additive] [PreservesFiniteLimits s]
     [PreservesFiniteColimits s] (e : s ≅ 𝟭 C₁) (c : s ⋙ r ≅ r)
     (hc : c = isoWhiskerRight e r ≪≫ leftUnitor r) :
-    (mapDerivedCategoryCompIso s r).symm ≪≫ mapDerivedCategoryNatIso c =
+    (mapDerivedCategoryCompIso s r) ≪≫ mapDerivedCategoryNatIso c =
       isoWhiskerRight (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C₁)
         r.mapDerivedCategory ≪≫ leftUnitor r.mapDerivedCategory := by
   subst hc
@@ -325,21 +326,22 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_uni
   have U := NatTrans.congr_app (mapDerivedCategoryCompIso_id_comp r) K
   simp only [NatTrans.comp_app, whiskerRight_app, NatTrans.id_app] at WR U
   simp only [hl, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerRight_hom, whiskerRight_app,
+    Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom, whiskerRight_app,
     leftUnitor_hom_app, NatTrans.id_app, Functor.map_comp]
   have WR' : (mapDerivedCategoryNatIso (isoWhiskerRight e r)).hom.app K =
-      (mapDerivedCategoryCompIso s r).hom.app K ≫
+      (mapDerivedCategoryCompIso s r).inv.app K ≫
         r.mapDerivedCategory.map ((mapDerivedCategoryNatIso e).hom.app K) ≫
-        (mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K := by
-    rw [← reassoc_of% WR, Iso.hom_inv_id_app]
+        (mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K := by
+    rw [← reassoc_of% WR, Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  have U' : (mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K =
+  have U' : (mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K =
       r.mapDerivedCategory.map ((mapDerivedCategoryIdIso C₁).hom.app K) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K), Iso.hom_inv_id_app, U]
+    rw [← cancel_epi ((mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K), Iso.inv_hom_id_app, U]
     rfl
   rw [WR', U']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   all_goals rfl
+
 
 variable {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
 
@@ -419,6 +421,7 @@ theorem pbcReductionNormalization_id_right (φ : R ⟶ S) (ψ : S ⟶ S) (h : φ
     (pbcDerivedRestrictComp_id_right φ ψ h e he)
   rw [pbcReductionNormalization_hom_eq, H, Adjunction.leftAdjointIdIso_eq_symm]
   simp
+
 
 theorem pbcDerivedExtendIdIso_congr (ψ : R ⟶ R) (hψ : ψ = 𝟙 R) (e : pbcRestrict (𝟙 R) ≅ 𝟭 _)
     (he : ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -525,6 +528,7 @@ theorem pbcAmbientScalarComp_id_right (i : E →ₐ[Padic l] F)
     pbcReductionNormalization_congr _ _ _ _ h₁ _
       (congrArg (fun a ↦ pbcScalarCoefficientMap l E F a T) (AlgHom.id_comp i).symm),
     pbcReductionNormalization_id_right _ _ _ _ hc.1 K]
+
 
 variable [IsNoetherian T] [dim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
 variable [inv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
@@ -679,6 +683,7 @@ theorem pbcRationalScalarComp_assoc_of_eq (i : E →ₐ[Padic l] F) (j : F →�
   rw [eqToIso_refl, eqToIso_refl, eqToIso_refl, Iso.trans_refl, Iso.trans_refl, Iso.trans_refl,
     pbcRationalScalarComp_assoc, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app]
 
+
 end Fields
 
 section NestedFields
@@ -740,8 +745,8 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
       (fun i ↦ pbcRationalScalarExtension l E.val E.val i T dim.out inv.out)
       (pbcSubfieldInclusion_id l Ω E)) ≪≫
         pbcRationalScalarUnit l E.val T dim.out inv.out ≪≫
-          eqToIso (by unfold pbcStageTransition; rw [dif_pos rfl])
-  · exact eqToIso (by simp only [pbcStageTransition, dif_neg e])
+          eqToIso (by unfold pbcStageTransition; rw [dite_eq_left rfl])
+  · exact eqToIso (by simp only [pbcStageTransition, dite_eq_right e])
 
 /-- Balancing, conjugated by the specified tensor units, is the chosen associator.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
@@ -762,7 +767,7 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
 theorem pbcStageTransition_refl (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageTransition l Ω T (le_refl E) = 𝟭 _ := by
   unfold pbcStageTransition
-  rw [dif_pos rfl]
+  rw [dite_eq_left rfl]
 
 /-- The normalization at equal fields is the tensor unit.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
@@ -770,7 +775,7 @@ theorem pbcStageNormalization_refl (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageNormalization l Ω T (le_refl E) =
       pbcRationalScalarUnit l E.val T dim.out inv.out ≪≫
         eqToIso (pbcStageTransition_refl l Ω T E).symm := by
-  rw [pbcStageNormalization, dif_pos rfl]
+  rw [pbcStageNormalization, dite_eq_left rfl]
   exact Iso.refl_trans _
 
 /-- Normalized tensor balancing satisfies both units and the four-field pentagon.

@@ -47,6 +47,7 @@ theorem ModuleCat.isZero_ulift_of_finite {K : Type v} [Field K] [Infinite K]
       sub_smul, h, sub_self, smul_zero]
   exact ModuleCat.isZero_of_subsingleton M
 
+
 /-- The dual `V ↦ V^∨ = Module.Dual R V` as a contravariant functor on `R`-modules, sending a
 linear map to its transpose. -/
 @[simps]

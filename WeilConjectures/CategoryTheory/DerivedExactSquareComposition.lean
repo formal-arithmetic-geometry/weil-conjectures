@@ -30,12 +30,12 @@ private theorem exactSquare_fac
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
   have hc := mapDerivedCategoryCompIso_hom_app_factors R G K
-  have hi : (mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K) ≫
+  have hi : (mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K) ≫
       (R ⋙ G).mapDerivedCategoryFactors.hom.app K =
     G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+    apply (cancel_epi ((mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K))).mp
+    rw [Iso.inv_hom_id_app_assoc]
     exact hc.symm
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
@@ -118,9 +118,9 @@ private theorem exactSquare_comp_inverse
     (mapDerivedCategorySquareIso q₀₂).hom.app K ≫
       U₂.mapDerivedCategory.map
         ((mapDerivedCategoryNatIso cF ≪≫
-          mapDerivedCategoryCompIso F₀₁ F₁₂).hom.app K) =
+          (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom.app K) =
     (mapDerivedCategoryNatIso cG ≪≫
-        mapDerivedCategoryCompIso G₀₁ G₁₂).hom.app (U₀.mapDerivedCategory.obj K) ≫
+        (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom.app (U₀.mapDerivedCategory.obj K) ≫
       G₁₂.mapDerivedCategory.map
         ((mapDerivedCategorySquareIso q₀₁).hom.app K) ≫
       (mapDerivedCategorySquareIso q₁₂).hom.app
@@ -142,8 +142,8 @@ private theorem exactSquare_comp_inverse
   let a := mapDerivedCategorySquareIso q₀₂
   let b := mapDerivedCategorySquareIso q₀₁
   let c := mapDerivedCategorySquareIso q₁₂
-  let dF := mapDerivedCategoryNatIso cF ≪≫ mapDerivedCategoryCompIso F₀₁ F₁₂
-  let dG := mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂
+  let dF := mapDerivedCategoryNatIso cF ≪≫ (mapDerivedCategoryCompIso F₀₁ F₁₂).symm
+  let dG := mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm
   let τ₁ := a.hom ≫ whiskerRight dF.hom U₂.mapDerivedCategory
   let τ₂ := whiskerLeft U₀.mapDerivedCategory dG.hom ≫
     (associator _ _ _).inv ≫ whiskerRight b.hom G₁₂.mapDerivedCategory ≫
@@ -170,7 +170,7 @@ private theorem exactSquare_comp_inverse
         F₁₂.mapDerivedCategoryFactors.hom.app ((F₀₁.mapHomologicalComplex (.up ℤ)).obj X) =
       F₀₂.mapDerivedCategoryFactors.hom.app X ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex cF.hom (.up ℤ)).app X) := by
-      dsimp only [dF, Iso.trans_hom, NatTrans.comp_app]
+      dsimp only [dF, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
       rw [Category.assoc, mapDerivedCategoryCompIso_hom_app_factors,
         mapDerivedCategoryNatIso_fac]
     have hdG : dG.hom.app (DerivedCategory.Q.obj
@@ -182,7 +182,7 @@ private theorem exactSquare_comp_inverse
       G₀₂.mapDerivedCategoryFactors.hom.app ((U₀.mapHomologicalComplex (.up ℤ)).obj X) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex cG.hom (.up ℤ)).app
           ((U₀.mapHomologicalComplex (.up ℤ)).obj X)) := by
-      dsimp only [dG, Iso.trans_hom, NatTrans.comp_app]
+      dsimp only [dG, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
       rw [Category.assoc, mapDerivedCategoryCompIso_hom_app_factors,
         mapDerivedCategoryNatIso_fac]
     -- Normalize the left pasted square using the factorization of q₀₂.
@@ -243,11 +243,11 @@ private theorem exactSquare_comp_forward
     (K : DerivedCategory C₀) :
     U₂.mapDerivedCategory.map
         ((mapDerivedCategoryNatIso cF ≪≫
-          mapDerivedCategoryCompIso F₀₁ F₁₂).hom.app K) ≫
+          (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom.app K) ≫
       (mapDerivedCategorySquareIso q₁₂).hom.app (F₀₁.mapDerivedCategory.obj K) ≫
       G₁₂.mapDerivedCategory.map ((mapDerivedCategorySquareIso q₀₁).hom.app K) =
     (mapDerivedCategorySquareIso q₀₂).hom.app K ≫
-      (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂).hom.app
+      (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom.app
         (U₀.mapDerivedCategory.obj K) := by
   have hi (X : C₀) := square_reverse G₁₂ (q₀₂.app X)
     (q₁₂.app (F₀₁.obj X)) (q₀₁.app X)
@@ -285,7 +285,7 @@ theorem mapDerivedCategorySquareIso_comp
       U₂.map (cF.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X) ≫
         G₁₂.map (q₀₁.hom.app X) = q₀₂.hom.app X ≫ cG.hom.app (U₀.obj X)) :
     isoWhiskerRight
-        (mapDerivedCategoryNatIso cF ≪≫ mapDerivedCategoryCompIso F₀₁ F₁₂)
+        (mapDerivedCategoryNatIso cF ≪≫ (mapDerivedCategoryCompIso F₀₁ F₁₂).symm)
         U₂.mapDerivedCategory ≪≫
       (associator F₀₁.mapDerivedCategory F₁₂.mapDerivedCategory U₂.mapDerivedCategory ≪≫
         isoWhiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂) ≪≫
@@ -293,7 +293,7 @@ theorem mapDerivedCategorySquareIso_comp
         isoWhiskerRight (mapDerivedCategorySquareIso q₀₁) G₁₂.mapDerivedCategory ≪≫
         associator U₀.mapDerivedCategory G₀₁.mapDerivedCategory G₁₂.mapDerivedCategory) =
     mapDerivedCategorySquareIso q₀₂ ≪≫ isoWhiskerLeft U₀.mapDerivedCategory
-      (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂) := by
+      (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm) := by
   apply Iso.ext
   apply NatTrans.ext
   funext K

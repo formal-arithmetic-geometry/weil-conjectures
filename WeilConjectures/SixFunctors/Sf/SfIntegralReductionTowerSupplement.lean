@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.CategoryTheory.Functor.OfSequence
@@ -207,8 +209,7 @@ private theorem sfReductionTensor_hom_ext (n : ℕ)
     apply Sheaf.hom_ext
     apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
     ext U z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul s x => exact h U s x
     | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
   exact (cancel_epi e).1 he
@@ -265,12 +266,12 @@ noncomputable def sfReductionRepresentativeComparison (n : ℕ)
     (sfDerivedReductionRestricted l E X n).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
         (((sfReductionRestricted l E X n).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (scalarReductionDerivedRestriction.{u, u} l E X n).map
+  cast (by rfl) ((scalarReductionDerivedRestriction.{u, u} l E X n).map
       ((scalarReductionCounit.{u, u} l E X n).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
     (scalarReductionRestriction.{u, u} l E X n).mapDerivedCategoryFactorsh.hom.app
       (((scalarReductionExtension.{u, u} l E X n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
 
 /-- The reduction unit, normalized by the published tensor/restriction adjunction.
 Source: Stacks Tags 03CZ and 06YY

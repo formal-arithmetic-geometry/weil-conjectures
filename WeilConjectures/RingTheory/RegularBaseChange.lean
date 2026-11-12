@@ -77,7 +77,7 @@ theorem regular_base_change
     have : q.LiesOver p := ⟨rfl⟩
     let : Algebra (Localization.AtPrime p) (Localization.AtPrime q) :=
       Localization.AtPrime.algebraOfLiesOver p q
-    have : Localization.AtPrime.IsLiesOverAlgebra p q := inferInstance
+    have : IsScalarTower R (Localization.AtPrime p) (Localization.AtPrime q) := inferInstance
     have hp := hφ.2 p
     let e : q.Fiber (Λ ⊗[R] R') ≃ₐ[q.ResidueField]
         q.ResidueField ⊗[p.ResidueField] p.Fiber Λ :=

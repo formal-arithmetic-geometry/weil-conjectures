@@ -182,7 +182,7 @@ theorem completeLocalGenericFibre
   have : Module.Finite (Polynomial A₀) (Polynomial A) := polynomial_finite A₀ A
   let q₀ := q.comap (algebraMap (Polynomial A₀) (Polynomial A))
   have : q₀.IsMaximal :=
-    Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q
+    Ideal.isMaximal_under_of_isIntegral_of_isMaximal q
   have hq₀ : q₀.comap (Polynomial.C : A₀ →+* Polynomial A₀) =
       IsLocalRing.maximalIdeal A₀ := by
     change (q.comap (mapRingHom (algebraMap A₀ A))).comap C = _

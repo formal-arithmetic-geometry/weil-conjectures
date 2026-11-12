@@ -132,6 +132,7 @@ theorem coeff_zero_coweightFactor (hR : R.coeff 0 = 1) : (R.coweightFactor q w).
   exact coeff_zero_prod_map_normalize fun f hf =>
     coeff_zero_ne_zero_of_mem_normalizedFactors hR (Multiset.mem_of_mem_filter hf)
 
+
 /-- Splitting the irreducible factors of a normalized polynomial `R` according to any predicate
 gives a factorisation of `R` into two normalized rational polynomials. -/
 private lemma prod_filter_mul_prod_filter_not (hR : R.coeff 0 = 1) (P : ℚ[X] → Prop)
@@ -194,6 +195,7 @@ theorem weightFactor_dvd (hR : R.coeff 0 = 1) : R.weightFactor q w ∣ R :=
 /-- The complementary weight-`w` factor of a normalized rational polynomial divides it. -/
 theorem coweightFactor_dvd (hR : R.coeff 0 = 1) : R.coweightFactor q w ∣ R :=
   Dvd.intro_left _ (weightFactor_mul_coweightFactor hR)
+
 
 /-! ### The roots of the weight factor -/
 

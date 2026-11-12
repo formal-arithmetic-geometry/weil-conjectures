@@ -5,6 +5,10 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
 public import WeilConjectures.CategoryTheory.Projection.ProjectionFormulaBaseChangeNaturality
 import all Mathlib.CategoryTheory.Limits.HasLimits
@@ -568,7 +572,7 @@ theorem proEtaleMixedProjectionMate
     let eta (C : CochainComplex (proEtaleRingModules X S) ℤ) :
         DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj C) ⟶
           (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj C) :=
-      V.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj C)
+      V.rightDerivedFunctorUnitQ C
     a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
         proEtaleProjectionFormulaMate f R S c a b
           (DerivedCategory.Q.{u + 2}.obj I) (DerivedCategory.Q.{u + 2}.obj F) ≫
@@ -594,7 +598,7 @@ theorem proEtaleMixedProjectionMate
   let eta (C : CochainComplex (proEtaleRingModules X S) ℤ) :
       DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj C) ⟶
         VD.obj (DerivedCategory.Q.obj C) :=
-    V.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj C)
+    V.rightDerivedFunctorUnitQ C
   let hG := (proEtaleCanonicalTensorPullback f R S c a b).1 F hF
   let beta := proEtaleCanonicalTensorComparison f R S c a b
   let eps := (proEtaleRingDerivedPullbackFactors f R S c).hom
@@ -611,6 +615,13 @@ theorem proEtaleMixedProjectionMate
       eps.app ((V.mapHomologicalComplex (.up ℤ)).obj I) ≫
         DerivedCategory.Q.{u + 2}.map
           ((am.mapHomologicalComplex (.up ℤ)).counit.app I) := by
+    have heta : eta I =
+        V.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I) := by
+      simp only [eta, Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+        NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv]
+      erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id]
+    rw [heta]
     exact proEtale_cochain_counit f R S c I
   obtain ⟨D, q, hres⟩ := flat_resolution_functor Y R
   let P := D.obj A

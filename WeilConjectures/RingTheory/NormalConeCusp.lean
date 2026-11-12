@@ -68,7 +68,7 @@ lemma mk_sub_algebraMap_constantCoeff_mem_cusp (p : MvPolynomial (Fin 2) k) :
     by_contra! h
     have hm0 : m = 0 := Finsupp.ext fun i ↦ h i (Set.mem_univ i)
     subst hm0
-    rw [mem_support_iff, coeff_sub, coeff_C, if_pos rfl, ← constantCoeff_eq, sub_self] at hm
+    rw [mem_support_iff, coeff_sub, coeff_C, ite_eq_left rfl, ← constantCoeff_eq, sub_self] at hm
     exact hm rfl
   have := Ideal.mem_map_of_mem (Ideal.Quotient.mk
     (Ideal.span {(X 1 : MvPolynomial (Fin 2) k) ^ 2 - X 0 ^ 3})) hp
@@ -174,9 +174,9 @@ lemma coeff_aeval_cusp {H : MvPolynomial (Fin 2) k} {d : ℕ} (hH : H.IsHomogene
   simp_rw [hmon, Polynomial.coeff_C_mul_X_pow]
   rw [Finset.sum_eq_single m]
   · rw [degree_fin_two] at hm
-    rw [if_pos (by omega)]
+    rw [ite_eq_left (by omega)]
   · intro b hb hbm
-    rw [if_neg]
+    rw [ite_eq_right]
     intro h
     apply hbm
     have hb' : b.degree = d := by
@@ -228,9 +228,9 @@ theorem ker_cuspToReesQuot :
     by_contra hlt
     push Not at hlt
     have h := coeff_aeval_cusp k (homogeneousComponent_isHomogeneous m.degree P) m rfl
-    rw [coeff_homogeneousComponent, if_pos rfl] at h
+    rw [coeff_homogeneousComponent, ite_eq_left rfl] at h
     obtain ⟨q, hq⟩ := key m.degree
-    rw [hq, Polynomial.coeff_X_pow_mul', if_neg (by omega)] at h
+    rw [hq, Polynomial.coeff_X_pow_mul', ite_eq_right (by omega)] at h
     exact (mem_support_iff.1 hm) h.symm
   · rw [Ideal.span_le, Set.singleton_subset_iff]
     exact X_one_sq_mem_ker_cuspToReesQuot k

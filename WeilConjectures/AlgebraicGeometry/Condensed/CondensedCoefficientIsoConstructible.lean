@@ -95,9 +95,9 @@ private theorem constructible_iso {X : Scheme.{u}}
   classical
   unfold IsConstantModelConstructible at hM ⊢
   split at hM
-  · rw [if_pos ‹_›]
+  · rw [ite_eq_left ‹_›]
     exact stratified_iso e hM
-  · rw [if_neg ‹_›]
+  · rw [ite_eq_right ‹_›]
     exact fun U hU ↦ stratified_iso
       ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 
@@ -133,9 +133,9 @@ private theorem constructible_comap (φ : Λ' ⟶ Λ) [IsMonHom φ] [IsIso φ] (
   classical
   unfold IsConstantModelConstructible at hM ⊢
   split at hM
-  · rw [if_pos ‹_›]
+  · rw [ite_eq_left ‹_›]
     exact stratified_comap φ X M hM
-  · rw [if_neg ‹_›]
+  · rw [ite_eq_right ‹_›]
     intro U hU
     exact stratified_iso ((CondensedRing.comapUpperStarIso (Λ := Λ') (Λ' := Λ) φ U.ι).app M)
       (stratified_comap φ _ _ (hM U hU))

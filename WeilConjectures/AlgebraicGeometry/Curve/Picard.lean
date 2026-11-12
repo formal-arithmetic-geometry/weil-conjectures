@@ -37,12 +37,9 @@ the degree of divisors, and shows that principal divisors have degree zero.
 - `AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`: `Cl(C) ≅ Pic(C)` for a
   smooth integral curve (blueprint `lem-sc-divisor-class-curve`).
 - `AlgebraicGeometry.Scheme.picDegreeHom_toPic`: `deg 𝒪_C(D) = deg D`.
-- `AlgebraicGeometry.Scheme.degree_div_eq_zero`: principal divisors have degree zero.
 - `AlgebraicGeometry.Scheme.surjective_picDegreeHom`: the degree is surjective.
 - `AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom`:
   `Pic(C) ≅ ℤ × Pic⁰(C)` (blueprint `lem-sc-pic-proper-decomposition`).
-- `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_and_surjective_picDegreeHom`: the blueprint
-  subsection `det-def-pic`, its facts (P1) and (P2).
 
 ## Implementation notes
 

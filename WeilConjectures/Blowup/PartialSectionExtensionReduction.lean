@@ -301,6 +301,7 @@ lemma quasiCompact_pullback_fst_blowupMap [QuasiCompact p] :
   MorphismProperty.of_isPullback (P := @QuasiCompact)
     (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
 
+
 /-- The closed-image hypothesis of Conrad's Theorem 2.4 transports to the base-changed
 section: the range of `AlgebraicGeometry.baseChangeSection` is closed in the preimage of
 `π⁻¹(V)`. -/

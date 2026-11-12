@@ -442,6 +442,7 @@ lemma spectralSequence_page (r₀ r : ℤ) (hr : r₀ ≤ r) :
     (X.spectralSequence r₀).page r hr = (X.derivedIter (r - r₀).toNat).dComplex :=
   rfl
 
+
 /-! ### The `D`-objects of the iterated derived couples -/
 
 open Classical in

@@ -75,7 +75,7 @@ private theorem monomial_class {R : Type u} [CommRing R] {c : ℕ} (f : Fin c �
       rw [hx, hy, Finsupp.prod_add_index]
       · intro a ha; simp
       · intro a ha b₁ b₂; exact pow_add _ _ _
-    · rw [← one_mul (1 : R ⧸ J), ← MvPolynomial.monomial_mul, map_mul, hx', hy']
+    · rw [← one_mul (1 : R ⧸ J), ← MvPolynomial.monomial_mul_monomial, map_mul, hx', hy']
       exact associatedGraded_mul J _ _ x y
   have hsingle (j : Fin c) : P (Finsupp.single j 1) := by
     dsimp only [P]
@@ -162,7 +162,7 @@ private theorem homogeneous_lift {R : Type u} [CommRing R] {c : ℕ} (f : Fin c 
   ext d
   rw [MvPolynomial.coeff_map, MvPolynomial.coeff_homogeneousComponent]
   split_ifs with h
-  · simpa only [MvPolynomial.coeff_map] using congrArg (MvPolynomial.coeff d) hq
+  · simpa only [MvPolynomial.coeff_map] using congrArg (fun p ↦ p.coeff d) hq
   · rw [map_zero]
     exact (hp.coeff_eq_zero h).symm
 
@@ -185,7 +185,7 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem expansion_coeff {B : Type u} [CommRing B] {c : ℕ} (n : ℕ)
     (a : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n} →₀ B)
     (d : {d : Fin c →₀ ℕ // d.sum (fun _ k ↦ k) = n}) :
-    MvPolynomial.coeff d.val (a.sum (fun e b ↦ MvPolynomial.monomial e.val b)) = a d := by
+    AddMonoidAlgebra.coeff (a.sum (fun e b ↦ MvPolynomial.monomial e.val b)) d.val = a d := by
   classical
   simpa [Finsupp.sum, MvPolynomial.coeff_sum, MvPolynomial.coeff_monomial,
     Subtype.val_inj] using (fun h : a d = 0 ↦ h.symm)
@@ -205,7 +205,7 @@ private theorem component_map {R : Type u} [CommRing R] {c : ℕ} (f : Fin c →
     by_cases h : n = d.degree
     · subst n
       simp only [ite_true, hx', DirectSum.of_eq_same]
-    · simp only [if_neg h, map_zero, hx', DirectSum.of_eq_of_ne _ _ _ h]
+    · simp only [ite_eq_right h, map_zero, hx', DirectSum.of_eq_of_ne _ _ _ h]
   | add p q hp hq =>
     simp only [map_add, DirectSum.add_apply, hp, hq]
 
@@ -229,8 +229,8 @@ private theorem homogeneous_kernel {R : Type u} [CommRing R] {c : ℕ} (f : Fin 
         (Ideal.span (Set.range f) ^ (n + 1)))).mp hzero
   rw [← hqp]
   ext d
-  simpa only [MvPolynomial.coeff_map, MvPolynomial.coeff_zero] using
-    Ideal.Quotient.eq_zero_iff_mem.mpr (hrel n q hq hmem d)
+  rw [MvPolynomial.coeff_map]
+  exact Ideal.Quotient.eq_zero_iff_mem.mpr (hrel n q hq hmem d)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem bijective_of_relation {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
@@ -342,7 +342,7 @@ private theorem basis_of_bijective {R : Type u} [CommRing R] {c : ℕ} (f : Fin 
       rw [← expansion_map, ← expansion_map, hb']
       rw [expansion_map, ha, hp]
     ext d
-    simpa only [expansion_coeff] using congrArg (MvPolynomial.coeff d.val) he
+    simpa only [expansion_coeff] using congrArg (fun p ↦ p.coeff d.val) he
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem relation_of_zero_relation {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R)
@@ -369,12 +369,12 @@ private theorem relation_of_zero_relation {R : Type u} [CommRing R] {c : ℕ} (f
       obtain ⟨p, hp, he, hc⟩ := hx
       obtain ⟨q, hq, hf, hd⟩ := hy
       exact ⟨p + q, hp.add hq, by rw [map_add, he, hf],
-        fun d ↦ by rw [MvPolynomial.coeff_add]; exact J.add_mem (hc d) (hd d)⟩
+        fun d ↦ by rw [AddMonoidAlgebra.coeff_add]; exact J.add_mem (hc d) (hd d)⟩
   obtain ⟨q, hq, he, hc⟩ := hrep _ hmem
   have hh := hz n (p - q) (hp.sub hq) (by rw [map_sub, he, sub_self])
   intro d
   have hd : p.coeff d - q.coeff d ∈ J := by
-    simpa only [MvPolynomial.coeff_sub] using hh d
+    simpa only [AddMonoidAlgebra.coeff_sub, Finsupp.sub_apply] using hh d
   simpa only [sub_add_cancel] using J.add_mem hd (hc d)
 
 /-- A regular sequence has polynomial associated graded algebra, including the formula

@@ -495,7 +495,7 @@ theorem Monic.etale_aeval_pUnit (hP : P.Monic) (hdeg : 0 < P.natDegree) :
   let τA : L →ₐ[B] Q.Ring := { τ with commutes' := fun b ↦ congr($hτB b) }
   have hτA (p : R[X]) : τA (algebraMap R[X] L p) = σ p := hτ p
   refine Algebra.Etale.of_equiv (AlgEquiv.ofAlgHom (Q.lift x hx) τA ?_ ?_)
-  · refine AlgHom.coe_ringHom_injective (IsLocalization.ringHom_ext (Submonoid.powers
+  · refine AlgHom.toRingHom_injective (IsLocalization.ringHom_ext (Submonoid.powers
       (derivative P)) (Polynomial.ringHom_ext (fun r ↦ ?_) ?_))
     · simp only [RingHom.comp_apply, AlgHom.coe_toRingHom, AlgHom.comp_apply, AlgHom.id_apply]
       rw [hτA]

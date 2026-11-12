@@ -117,10 +117,10 @@ theorem quasiCompact_of_cover₂ {U W A B : Scheme.{u}} (j : U ⟶ W) (k₁ : A 
   rw [IsZariskiLocalAtTarget.iff_of_iSup_eq_top (P := @QuasiCompact) _
     (iSup_cond_opensRange_eq_top k₁ k₂ hcover)]
   rintro (_ | _)
-  · rw [cond_false, MorphismProperty.arrow_mk_iso_iff (P := @QuasiCompact)
+  · rw [Bool.cond_false, MorphismProperty.arrow_mk_iso_iff (P := @QuasiCompact)
       (morphismRestrictOpensRangeArrowIso j k₂ u₂ h₂)]
     infer_instance
-  · rw [cond_true, MorphismProperty.arrow_mk_iso_iff (P := @QuasiCompact)
+  · rw [Bool.cond_true, MorphismProperty.arrow_mk_iso_iff (P := @QuasiCompact)
       (morphismRestrictOpensRangeArrowIso j k₁ u₁ h₁)]
     infer_instance
 

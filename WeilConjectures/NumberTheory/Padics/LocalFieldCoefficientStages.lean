@@ -78,12 +78,12 @@ private theorem quotient_free_finite
   have hfinite : Module.Finite (R ⧸ I) (S ⧸ I.map (algebraMap R S)) :=
     Module.Finite.equiv e.symm.toLinearEquiv
   refine ⟨algebraMap _ _, fun _ ↦ rfl, ?_, ?_⟩
-  · convert hfree using 1 <;> first
+  · convert hfree using 1; first
     | rfl
     | exact congrArg (fun a : Algebra (R ⧸ I) (S ⧸ I.map (algebraMap R S)) ↦
         a.toModule) (toAlgebra_algebraMap (R := R ⧸ I)
           (S := S ⧸ I.map (algebraMap R S)))
-  · convert hfinite using 1 <;> first
+  · convert hfinite using 1; first
     | rfl
     | exact congrArg (fun a : Algebra (R ⧸ I) (S ⧸ I.map (algebraMap R S)) ↦
         a.toModule) (toAlgebra_algebraMap (R := R ⧸ I)

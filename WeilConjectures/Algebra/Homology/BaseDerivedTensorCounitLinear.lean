@@ -50,8 +50,7 @@ private theorem tensorLinearLift
   refine ⟨ofHom { toFun := f, map_add' := f.hom.map_add, map_smul' := ?_ }, ?_⟩
   · intro e x
     change f (e • x) = e • f x
-    induction e using TensorProduct.induction_on with
-    | zero => simpa only [RingHom.id_apply, zero_smul] using f.hom.map_zero
+    induction e using TensorProduct.inductionOn with
     | tmul a b =>
       have hb (y : M) :
           f ((Algebra.TensorProduct.includeRight b : A ⊗[R] B) • y) =

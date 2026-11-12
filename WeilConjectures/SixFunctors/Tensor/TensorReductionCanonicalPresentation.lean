@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientReductionUnitPresentation
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerRealizations
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Strict adjunction-normalized reduction presentations
 
@@ -35,7 +36,6 @@ attribute [local implicit_reducible] integralOperationsGoodLocalization
   integralOperationsGoodComplex
   coefficientIntegralTensorModelIso coefficientSystemTensorModelIso
   coefficientKFlatInclusion CoefficientTensorModels.iso
-  CategoryTheory.Functor.mapHomologicalComplex
   scalarReductionSourceDerived scalarReductionTargetDerived coefficientSequenceHasDerived
   coefficientFiniteHasDerived coefficientConstantTowerDerived
   unrestrictedIntegralReductionFunctor integralCoefficientSheaf integralCoefficientCommRingSheaf
@@ -137,20 +137,11 @@ private theorem limitUnit_natural (W : Scheme.{u})
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight U.mapDerivedCategoryFactors.inv F.rightDerivedFunctor ≫
     (Functor.associator _ _ _).hom
-  have hη (K : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
-      η.app K = F.rightDerivedFunctorUnit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) := by
-    have h₁ : (DerivedCategory.quotientCompQhIso (integralTowerModules l E W)).inv.app
-        ((F.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-    have h₂ : (DerivedCategory.quotientCompQhIso
-        (ℕᵒᵖ ⥤ integralTowerModules l E W)).hom.app K = 𝟙 _ := rfl
-    dsimp only [η, Functor.rightDerivedFunctorUnitQ]
-    erw [h₁, h₂, F.rightDerivedFunctor.map_id, Category.id_comp, Category.comp_id]
   have hθ (K : CochainComplex (coefficientSequenceModules l E W) ℤ) :
       θ.app K = pullbackTensorLimitUnit l E W K := by
     simp only [θ, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-      Functor.associator_inv_app, Category.id_comp, Category.comp_id, hη]
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id]
     rfl
   change DerivedCategory.Q.map (((U ⋙ F).mapHomologicalComplex (.up ℤ)).map f) ≫
     pullbackTensorLimitUnit l E W D = pullbackTensorLimitUnit l E W C ≫
@@ -225,6 +216,18 @@ theorem tensorReductionCanonicalPresentation (W : Scheme.{u})
   change DerivedCategory.Q.map (adj.homEquiv P.obj C a) ≫
     pullbackTensorLimitUnit l E W C = _
   rw [ha]
-  exact hz.symm
+  refine Eq.trans ?_ hz.symm
+  simp only [pullbackTensorLimitUnit]
+  have hq₁ (K : CochainComplex (integralTowerModules l E W) ℤ) :
+      (DerivedCategory.quotientCompQhIso (integralTowerModules l E W)).inv.app K = 𝟙 _ := rfl
+  have hq₂ (K : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
+      (DerivedCategory.quotientCompQhIso (ℕᵒᵖ ⥤ integralTowerModules l E W)).hom.app K =
+        𝟙 _ := rfl
+  simp only [Functor.rightDerivedFunctorUnitQ]
+  erw [hq₁, hq₂]
+  erw [(pullbackTensorConstantLimit l E W).rightDerivedFunctor.map_id]
+  erw [Category.comp_id]
+  erw [Category.id_comp]
+  rfl
 
 end WeilConjectures

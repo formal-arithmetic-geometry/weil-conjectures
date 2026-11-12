@@ -416,7 +416,7 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.AlgebraicGeometry.LisseLatticeClassSheaf
 import WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
@@ -452,7 +452,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Mathlib.Analysis.Normed.Field.WithAbs
 import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import Mathlib.GroupTheory.Coset.Defs
-import Mathlib.Topology.Algebra.Module.Equiv
+import Mathlib.Topology.Algebra.Module.Equiv.Basic
+import Mathlib.Topology.Algebra.Module.Equiv.Pi
+import Mathlib.Topology.Algebra.Module.Equiv.Prod
+import Mathlib.Topology.Algebra.Module.Equiv.Submodule
 import Mathlib.Topology.CompactOpen
 import Mathlib.LinearAlgebra.Basis.Defs
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
@@ -705,7 +708,7 @@ theorem isZero_higherDirectImage_rational_of_isProper_of_isNoetherian
           PadicAlgCl.norm_extends] }
   by_cases hn : d < 0
   · let : IsEmpty X := source_empty_of_geometric_fibers_empty p (fun y ↦ by
-      simpa only [if_pos hn] using hd y)
+      simpa only [ite_eq_left hn] using hd y)
     exact ((DerivedCategory.singleFunctor _ 0 ⋙
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor ⋙
         DerivedCategory.homologyFunctor _ q).map_isZero (module_zero_of_empty _ M))
@@ -713,7 +716,7 @@ theorem isZero_higherDirectImage_rational_of_isProper_of_isNoetherian
       (pullback p (Spec.map (CommRingCat.ofHom
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d.toNat : WithBot ℕ∞) := by
-    simpa only [if_neg hn] using hd y
+    simpa only [ite_eq_right hn] using hd y
   -- Glue ordinary integral models, then reuse the integral completeness/torsion/Milnor bound.
   have hM' := ((adicConstructibilityPredicateComparison ℓ X
     (Profinite.continuousMapRingObj E) (.continuous E)).1 M).mpr hM

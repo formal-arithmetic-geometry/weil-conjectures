@@ -114,8 +114,7 @@ theorem isHopfIdeal_of_forall {J : Ideal (CoordinateRing n k)}
         Algebra.TensorProduct.map q q (Coalgebra.comul a) := by
       rw [algHomMulEquiv_apply, evalAlgHom_map_genericUnit, ofConv_toConv,
         AlgHom.convMul_apply]
-      induction Coalgebra.comul (R := k) a using TensorProduct.induction_on with
-      | zero => simp
+      induction Coalgebra.comul (R := k) a using TensorProduct.inductionOn with
       | tmul x y =>
         change (q x ⊗ₜ[k] 1) * (1 ⊗ₜ[k] q y) = q x ⊗ₜ[k] q y
         rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]

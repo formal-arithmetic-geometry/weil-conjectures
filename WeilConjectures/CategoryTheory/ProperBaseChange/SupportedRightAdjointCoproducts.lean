@@ -80,20 +80,20 @@ theorem supportedRightAdjoint_preservesCoproduct
   have h₂ : t.hom₂ = 𝟙 (∐ M) := by
     apply Sigma.hom_ext
     intro s
-    simp only [t, coproductTriangle.desc_hom₂, Sigma.ι_desc, (hτ s).2.1]
+    simp only [t, coproductTriangle.desc_hom₂, Sigma.ι_comp_desc, (hτ s).2.1]
     change Sigma.ι M s = Sigma.ι M s ≫ 𝟙 (∐ M)
     rw [Category.comp_id]
   have h₃ : t.hom₃ = sigmaComparison (j ⋙ rj) M := by
     apply Sigma.hom_ext
     intro s
-    simp only [t, coproductTriangle.desc_hom₃, Sigma.ι_desc, (hτ s).2.2]
+    simp only [t, coproductTriangle.desc_hom₃, Sigma.ι_comp_desc, (hτ s).2.2]
     change (j ⋙ rj).map (Sigma.ι M s) =
       Sigma.ι (fun s ↦ (j ⋙ rj).obj (M s)) s ≫ sigmaComparison (j ⋙ rj) M
     exact (ι_comp_sigmaComparison (j ⋙ rj) M s).symm
   have h₁ : t.hom₁ = sigmaComparison (G ⋙ i) M := by
     apply Sigma.hom_ext
     intro s
-    simp only [t, coproductTriangle.desc_hom₁, Sigma.ι_desc, (hτ s).1]
+    simp only [t, coproductTriangle.desc_hom₁, Sigma.ι_comp_desc, (hτ s).1]
     change (G ⋙ i).map (Sigma.ι M s) =
       Sigma.ι (fun s ↦ (G ⋙ i).obj (M s)) s ≫ sigmaComparison (G ⋙ i) M
     exact (ι_comp_sigmaComparison (G ⋙ i) M s).symm

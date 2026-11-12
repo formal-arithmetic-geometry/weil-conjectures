@@ -331,7 +331,7 @@ private theorem derivedRestrictComp_symm {W : Scheme.{u}}
     {R₀ S₀ T₀ : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
     (φ : R₀ ⟶ S₀) (ψ : S₀ ⟶ T₀) (χ : R₀ ⟶ T₀) (hχ : φ ≫ ψ = χ) :
     Functor.mapDerivedCategoryNatIso (pbcRestrictComp φ ψ χ hχ).symm ≪≫
-        Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ) =
+        (Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ)).symm =
       (pbcDerivedRestrictComp φ ψ χ hχ).symm := by
   apply Iso.ext
   rw [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_symm]
@@ -403,7 +403,7 @@ private theorem derivedRestrictComp_factors {W : Scheme.{u}}
           (pbcRestrictComp φ ψ χ hχ).hom (.up ℤ)).app I) := by
   have hf := Functor.mapDerivedCategoryCompIso_hom_app_factors
     (pbcRestrict ψ) (pbcRestrict φ) I
-  simp only [pbcDerivedRestrictComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [pbcDerivedRestrictComp, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc, Functor.mapDerivedCategoryNatIso_fac, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   rw [← hf]

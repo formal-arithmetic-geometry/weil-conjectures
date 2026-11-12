@@ -23,6 +23,16 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+local instance instHasColimitsOfShape_derivedQCohDirectSumsAux (X : Scheme.{u}) (I : Type u) :
+    HasColimitsOfShape (Discrete I)
+      (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  have : HasColimitsOfShape (Discrete I) C := inferInstance
+  refine ⟨fun F ↦ ?_⟩
+  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
+
 /-- The ambient derived category of sheaves of modules has coproducts
 (blueprint: lem-pc-derived-ambient-has-coproducts). The proof chooses representatives
 for each derived object, forms the termwise coproduct complex, and applies

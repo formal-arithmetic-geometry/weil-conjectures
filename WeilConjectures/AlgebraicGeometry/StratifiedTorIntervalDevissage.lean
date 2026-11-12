@@ -237,7 +237,7 @@ private theorem torInterval_of_stratified
   classical
   have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   obtain ⟨S, hS⟩ : IsFiniteConstantStratified Λ X M := by
-    simpa only [IsConstantModelConstructible, if_pos hX] using hM
+    simpa only [IsConstantModelConstructible, ite_eq_left hX] using hM
   obtain ⟨O, Q, Z, o, a, q, z, ho, ha, hq, hz, hao, hqc, hqqc, hr, hzr,
     N, V, t, root, parent, left, right, le, re, leaf,
     hroot, hparent, hparent_lt, hl, hright, hcompact, hqs, himm, hchild,

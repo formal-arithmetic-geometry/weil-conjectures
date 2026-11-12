@@ -169,8 +169,7 @@ theorem secondLocalization_ordinary_square (hflat : (algebraMap B Bp).Flat) (i :
             obtain ⟨z, rfl⟩ := (CategoryTheory.Iso.toLinearEquiv
               ((HomologicalComplex.eval (ModuleCat.{u} B) (.up ℤ) j).mapIso
                 L.ordinaryIso)).surjective z
-            induction z using TensorProduct.induction_on with
-            | zero => simp
+            induction z using TensorProduct.inductionOn with
             | tmul c x =>
                 change B at c
                 change Q.X j at x

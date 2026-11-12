@@ -229,8 +229,7 @@ theorem pbc_localized_tstructure :
           dsimp only [Q, pbcRationalization, ScalarLocalization.localization,
             ScalarLocalization.category] at *
           generalize e.hom ≫ f ≫ d.inv = g
-          induction g using TensorProduct.induction_on with
-          | zero => rfl
+          induction g using TensorProduct.inductionOn with
           | tmul a g => rw [tA.zero' g hK hL, TensorProduct.tmul_zero]
           | add g g' hg hg' => rw [hg, hg', add_zero]
         calc

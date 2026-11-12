@@ -225,7 +225,7 @@ private theorem intrinsicDerivedSquare
         G.rightDerivedFunctor.map (L.mapDerivedCategoryFactors.inv.app I))).mp
     simp only [Category.assoc]
     rw [← Category.assoc, ← Category.assoc, h]
-    simp only [Functor.comp_obj, Category.assoc, Iso.map_inv_hom_id_assoc,
+    simp only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_map_assoc,
       Iso.inv_hom_id_app, cancelIso, Iso.inv_hom_id_assoc]
     exact Category.comp_id _
   refine ⟨e, hnorm, ?_⟩

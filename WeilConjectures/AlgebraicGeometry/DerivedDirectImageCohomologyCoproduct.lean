@@ -90,8 +90,8 @@ theorem derivedDirectImage_cohomology_coproduct
     have square : c ≫ r = l ≫ d := by
       apply Sigma.hom_ext
       intro i
-      simp only [c, l, d, r, Sigma.ι_desc_assoc, Sigma.ι_map_assoc,
-        Sigma.ι_desc, ← F.map_comp]
+      simp only [c, l, d, r, Sigma.ι_comp_desc_assoc, Sigma.ι_map_assoc,
+        Sigma.ι_comp_desc, ← F.map_comp]
       exact congrArg F.map (π.naturality (ι i))
     let ev := SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (Opposite.op U)
     have hl : IsIso (ev.map l) := hleft

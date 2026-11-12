@@ -734,7 +734,7 @@ private theorem sequenceExactLeftUnit
     (c : H ≅ F ⋙ G) (e : G ≅ 𝟭 D) (d : H ≅ F)
     (h : c ≪≫ Functor.isoWhiskerLeft F e ≪≫ Functor.rightUnitor F = d) :
     (Functor.mapDerivedCategoryNatIso c).hom ≫
-      (Functor.mapDerivedCategoryCompIso F G).hom ≫
+      (Functor.mapDerivedCategoryCompIso F G).inv ≫
       Functor.whiskerLeft F.mapDerivedCategory
         (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso D).hom =
       (Functor.mapDerivedCategoryNatIso d).hom := by
@@ -742,7 +742,7 @@ private theorem sequenceExactLeftUnit
   have hn := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e
   simp only [Functor.mapDerivedCategoryNatIso_trans] at ho
   simp only [Iso.trans_hom, Functor.whiskerLeft_comp]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F G).hom, ← hn, Category.assoc,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F G).inv, ← hn, Category.assoc,
     Functor.mapDerivedCategoryCompIso_comp_id]
   have hu : Functor.rightUnitor F = Iso.refl F := rfl
   simp only [hu] at ho
@@ -760,7 +760,7 @@ private theorem sequenceExactRightUnit
     (c : H ≅ G ⋙ F) (e : G ≅ 𝟭 C) (d : H ≅ F)
     (h : c ≪≫ Functor.isoWhiskerRight e F ≪≫ Functor.leftUnitor F = d) :
     (Functor.mapDerivedCategoryNatIso c).hom ≫
-      (Functor.mapDerivedCategoryCompIso G F).hom ≫
+      (Functor.mapDerivedCategoryCompIso G F).inv ≫
       Functor.whiskerRight
         (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom
         F.mapDerivedCategory = (Functor.mapDerivedCategoryNatIso d).hom := by
@@ -768,7 +768,7 @@ private theorem sequenceExactRightUnit
   have hn := Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F
   simp only [Functor.mapDerivedCategoryNatIso_trans] at ho
   simp only [Iso.trans_hom, Functor.whiskerRight_comp]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso G F).hom, ← hn, Category.assoc,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso G F).inv, ← hn, Category.assoc,
     Functor.mapDerivedCategoryCompIso_id_comp]
   have hu : Functor.leftUnitor F = Iso.refl F := rfl
   simp only [hu] at ho

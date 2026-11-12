@@ -60,7 +60,7 @@ private theorem principalOpenCech_component_injective
   rw [hα, hα] at h
   let S : {S : Finset (Fin r) // S.Nonempty} := ⟨{i}, Finset.singleton_nonempty i⟩
   have hcard : S.val.card = 1 := Finset.card_singleton i
-  rw [dif_pos hcard, dif_pos hcard] at h
+  rw [dite_eq_left hcard, dite_eq_left hcard] at h
   let e := modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S hcard n)))
   have hs := ConcreteCategory.congr_hom (e.hom.naturality
     (homOfLE (hls S hcard)).op) ((σ n).hom s)
@@ -226,7 +226,7 @@ theorem principalOpenCech_homology_mono_of_injective_terms
       1 < S.val.card → (τ (n - 1 + 1)).hom (T.d (n - 1) (n - 1 + 1) t) S = 0 := by
     rw [hn, ← ht]
     intro S hS
-    rw [hα, dif_neg (by omega)]
+    rw [hα, dite_eq_right (by omega)]
   obtain ⟨t', hsame, hs⟩ := reduce (n - 1) r t (by
     intro S hS
     have hcard : S.val.card ≤ r := by

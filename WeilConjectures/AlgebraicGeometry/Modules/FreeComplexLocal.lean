@@ -66,7 +66,7 @@ lemma exists_comp_eq_of_epi {M N : X.Modules} (p : M ⟶ N) [Epi p] {I : Type u}
     (φ : free (R := X.ringCatSheaf) I ⟶ N) : ∃ φ' : free I ⟶ M, φ' ≫ p = φ := by
   choose ψ hψ using fun i : I ↦ exists_comp_eq_of_epi_of_unit hx p (ιFree i ≫ φ)
   refine ⟨Sigma.desc ψ, Sigma.hom_ext _ _ fun i ↦ ?_⟩
-  rw [Sigma.ι_desc_assoc, hψ]
+  rw [Sigma.ι_comp_desc_assoc, hψ]
   rfl
 
 /-- On a scheme with a point `x` whose only open neighbourhood is the whole scheme, a morphism

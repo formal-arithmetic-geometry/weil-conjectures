@@ -167,12 +167,12 @@ theorem ordinaryEvaluation_over_component_identity (X : Scheme.{u}) (U : X.Opens
           (HomologicalComplex.singleObjXSelf (.up ℤ) 0
             (𝟙_ (localEvaluationModules X U))).hom)
       (F.XIsoOfEq (by omega : p = r + n)).hom _ _ hv hk
-    simp only [localEvaluationComponent, schemeOrdinaryEvaluationComponent, dif_pos h]
+    simp only [localEvaluationComponent, schemeOrdinaryEvaluationComponent, dite_eq_left h]
     dsimp only [homComplex]
     set_option backward.isDefEq.respectTransparency.types true in
       convert hc using 1 <;> congr 1
   · change _ ≫ _ ≫ L.map _ ≫ _ = _
-    simp only [localEvaluationComponent, schemeOrdinaryEvaluationComponent, dif_neg h,
+    simp only [localEvaluationComponent, schemeOrdinaryEvaluationComponent, dite_eq_right h,
       Functor.map_zero, zero_comp]
     simp only [comp_zero]
 end AlgebraicGeometry

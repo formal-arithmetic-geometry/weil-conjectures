@@ -60,7 +60,8 @@ theorem affinePointedNeighbourhoods_initial_and_final_op
       (ObjectProperty.ι
         (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)) := by
     apply Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful
-    rintro ⟨X, x⟩
+    intro n
+    induction n with | @mk X x
     cases X with | _ Y f
     obtain ⟨y, hy, rfl⟩ := Over.homMk_surjective x
     dsimp at y hy

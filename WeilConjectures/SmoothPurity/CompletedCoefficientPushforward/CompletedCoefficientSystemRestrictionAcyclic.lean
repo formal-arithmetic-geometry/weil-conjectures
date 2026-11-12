@@ -125,7 +125,7 @@ private theorem iterated_successor_sections
 end AbstractCoefficientSections
 
 private def modelRings (W : Scheme.{t}) :=
-  coefficientRings (J := ProEt.topology W)
+  coefficientRings.{t + 1, t, max u (t + 1)} (J := ProEt.topology W)
     (O := systemRing.{t, u} l E) (ell := systemUniformizer.{t, u} l E)
 
 private def sourceLeg (W : Scheme.{t}) (source : SystemRestrictionData l E W) (n : ℕ) :

@@ -25,6 +25,8 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 
 namespace PresheafOfModules
 
+export PresheafOfModulesOfCommRing (Derivation)
+
 variable {S : Cᵒᵖ ⥤ CommRingCat.{u}} {F : C ⥤ D} {R : Dᵒᵖ ⥤ CommRingCat.{u}}
   {M N P : PresheafOfModules.{v} (R ⋙ forget₂ _ _)} {φ : S ⟶ F.op ⋙ R}
 
@@ -37,7 +39,7 @@ lemma postcomp_comp (d : M.Derivation φ) (f : M ⟶ N) (g : N ⟶ P) :
 
 lemma Universal.desc_comp {d : M.Derivation φ} (hd : d.Universal) (d' : N.Derivation φ)
     (f : N ⟶ P) : hd.desc d' ≫ f = hd.desc (d'.postcomp f) :=
-  hd.postcomp_injective _ _ (by rw [postcomp_comp, Universal.fac, Universal.fac])
+  hd.postcomp_injective _ _ (by rw [postcomp_comp, hd.fac, hd.fac])
 
 end Derivation
 

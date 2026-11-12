@@ -86,9 +86,9 @@ private theorem boundedConstructible_iso
   have hk := hK.2 n
   unfold IsConstantModelConstructible at hk ⊢
   by_cases hqc : CompactSpace X ∧ QuasiSeparatedSpace X
-  · rw [if_pos hqc] at hk ⊢
+  · rw [ite_eq_left hqc] at hk ⊢
     exact hi eh hk
-  · rw [if_neg hqc] at hk ⊢
+  · rw [ite_eq_right hqc] at hk ⊢
     intro U hU
     exact hi ((upperStar Λ U.ι).mapIso eh) (hk U hU)
 

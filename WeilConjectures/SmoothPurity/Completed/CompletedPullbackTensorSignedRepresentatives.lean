@@ -42,7 +42,7 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
 namespace WeilConjectures
-attribute [local implicit_reducible] pullbackTensorSwap Functor.mapHomologicalComplex
+attribute [local implicit_reducible] pullbackTensorSwap 
   pullbackTensorSequenceDerived coefficientTotalTensor Functor.map₂HomologicalComplex
   pullbackTensorSequenceDirect
 attribute [local irreducible] HasDerivedCategory.standard

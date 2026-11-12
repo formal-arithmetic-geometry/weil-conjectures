@@ -385,7 +385,7 @@ theorem adicStratumCoverConservativity
     let e₂ := pullDerivedIso (G α U) (W α U) (adjW α U)
       (ConstantCompletion.completedMap (G α U) A I)
     have hi := (NatIso.isIso_map_iff (NatIso.hcomp e₁ e₂) f).mp (hf α U g hg)
-    exact (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso (P α) (Q α U)) f).mpr hi
+    exact (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso (P α) (Q α U)) f).mp hi
   obtain ⟨C, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle f
   apply (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1
   apply hzero

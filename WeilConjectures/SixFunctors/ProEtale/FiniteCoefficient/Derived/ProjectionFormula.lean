@@ -220,10 +220,10 @@ theorem hasProjectionFormulaOfCompactification_of_comparison [Etale.UpperStarPre
   -- `i_! K ≅ ν^* M₀` and `L ≅ ν^* L₀`
   let eM : D(ProEtale.openImmersionLowerShriek A c.i).obj K ≅ L(ν^*(c.Z)[A]).obj M₀ :=
     D(ProEtale.openImmersionLowerShriek A c.i).mapIso eK.symm ≪≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (openImmersionLowerShriekComparisonUpperStarIso A c.i).symm ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app K₀ ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K₀ ≪≫
       ((ν^*(c.Z)[A]).leftDerivedFunctorIsoMapDerivedCategory.app M₀).symm
   let eL' : L ≅ L(ν^*(Y)[A]).obj L₀ :=
     eL.symm ≪≫ ((ν^*(Y)[A]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm
@@ -272,10 +272,10 @@ theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite �
   -- `i_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `i_! K ⊗ᴸ Lg^* L` is
   have hML := plus_derivedTensor_leftDerivedUpperStar_of_comparison c.g
     (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapIso eK.symm ≪≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) c.i).symm ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app K₀ ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K₀ ≪≫
       ((ν^*(c.Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app _).symm)
     (eL.symm ≪≫
       ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm)

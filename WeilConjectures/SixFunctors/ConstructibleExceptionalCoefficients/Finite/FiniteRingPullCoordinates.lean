@@ -25,7 +25,7 @@ open CategoryTheory.Limits
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex PurCompactSupport.finite
+  sfIntrinsicDerivedEquivalence PurCompactSupport.finite
   sfIntrinsicPullback sfIntrinsicTransport sfIntrinsicExtensionByZero
 set_option backward.defeqAttrib.useBackward true
 
@@ -65,7 +65,7 @@ private theorem finite_pull_coordinate_comp_derived
     let B := ModuleCat.{w + 1} (ULift.{w + 1} A)
     let R := PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)
     let cf := Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp B h k) ≪≫
-      Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B k) (ProEtale.upperStar B h)
+      (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B k) (ProEtale.upperStar B h)).symm
     (finiteDerivedPullCoordinates l E n (h ≫ k)).hom.app K ≫
         (sfIntrinsicDerivedEquivalence X A).functor.map (cf.hom.app K) =
       (PurCompactSupport.geometricPullComposition R h k hc).hom.app
@@ -130,7 +130,7 @@ theorem finite_pull_triangle_coordinates
     let cf := Functor.mapDerivedCategoryNatIso
       (eqToIso (congrArg (fun t ↦ ProEtale.upperStar B t) w.symm) ≪≫
         ProEtale.upperStarComp B h k) ≪≫
-      Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B k) (ProEtale.upperStar B h)
+      (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B k) (ProEtale.upperStar B h)).symm
     (finiteDerivedPullCoordinates l E n j).hom.app K ≫
         (sfIntrinsicDerivedEquivalence X A).functor.map (cf.hom.app K) =
       (eqToIso (congrArg (fun t ↦ PurCompactSupport.pull R t) w.symm) ≪≫

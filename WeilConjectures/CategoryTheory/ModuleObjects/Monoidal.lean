@@ -178,6 +178,7 @@ lemma tensorObj_X : (M ⊗ N).X =
     coequalizer (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) :=
   rfl
 
+
 /-- The projection `M ⊗ N ⟶ M ⊗_R N`. -/
 noncomputable def tensorObjπ : M.X ⊗ N.X ⟶ (M ⊗ N).X :=
   coequalizer.π (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])

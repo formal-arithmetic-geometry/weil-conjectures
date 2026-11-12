@@ -54,7 +54,7 @@ lemma integersAct_add (U : X.ProEt) (f g : C(U.left, integers l E.1))
     (v : F.X.obj.obj (op U)) :
     integersAct E hι F U (f + g) v = integersAct E hι F U f v + integersAct E hι F U g v := by
   refine (congrArg (fun a ↦ sectionAct F a v) ?_).trans (add_sectionAct F _ _ v)
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
   change algebraMap _ (PadicAlgCl l) ((f + g) x) =
     algebraMap _ (PadicAlgCl l) (f x) + algebraMap _ (PadicAlgCl l) (g x)
   exact map_add _ _ _
@@ -66,7 +66,7 @@ lemma integersAct_nsmul (U : X.ProEt) (n : ℕ) (f : C(U.left, integers l E.1))
   | zero =>
     rw [zero_smul, zero_smul]
     refine (congrArg (fun a ↦ sectionAct F a v) ?_).trans (zero_sectionAct F v)
-    refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+    refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
     change algebraMap _ (PadicAlgCl l) ((0 : C(U.left, integers l E.1)) x) = 0
     exact map_zero _
   | succ n ih => rw [succ_nsmul, integersAct_add, ih, succ_nsmul]

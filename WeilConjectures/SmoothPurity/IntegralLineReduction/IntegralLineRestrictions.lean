@@ -134,7 +134,7 @@ private theorem complete_iff_unit (K : D.{u, u} l E X none) :
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hprime⟩
   obtain ⟨d, hd, _⟩ := PrincipalKoszulStrictReplacement.coefficient_datum l E
-  exact (roosIntrinsicCompletenessEquivalence p l (by omega) E X d hd K P e).out 0 4
+  exact (roosIntrinsicCompletenessEquivalence p l (by omega) E X d hd K P e).out 1 5
 
 private theorem comparison_isIso
     (hl : ∀ x : X, Invertible (l : X.residueField x))
@@ -197,7 +197,8 @@ private theorem finite_ordinary_constructible
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
       (R := R) G
   let := hf
-  let e : DerivedCategory.Q.obj P ≅ K :=
+  let e : (DerivedCategory.Q.obj P : DerivedCategory (scalarReductionTarget.{u, u} l E X n)) ≅
+      K :=
     asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso K
   let collapse := SheafOfModules.FlatSingleDerivedNormalization.collapse.{u + 1, u, u + 1} R M
   let a : DerivedCategory.Q.obj ((T.mapHomologicalComplex (.up ℤ)).obj P) ≅

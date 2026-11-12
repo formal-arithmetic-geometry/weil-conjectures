@@ -165,7 +165,7 @@ lemma sectionsLinearMap_injective_of_compactSpace (s : Fin r → F.X.obj.obj (op
   rw [injective_iff_map_eq_zero]
   intro a ha
   funext i
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
   obtain ⟨W, hW, hxW, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.1
     U.unop.left.isBasis_affineOpens) (show x ∈ (⊤ : U.unop.left.Opens) from trivial)
   let ιW := overOpensι (P := @WeaklyEtale) (fun _ _ ↦ inferInstance) U.unop W

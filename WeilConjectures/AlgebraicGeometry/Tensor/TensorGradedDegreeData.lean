@@ -59,7 +59,7 @@ private def kernelCofan {C : Type u} [Category C] [Abelian C]
     exact (KernelFork.isLimitMapConeEquiv _ _).symm (kernelIsKernel (f d.as))
   have hS : S.Exact := ShortComplex.exact_of_f_is_kernel _ hK
   let v : (∐ K) ⟶ B := Sigma.desc (fun d ↦ kernel.ι (f d) ≫ b d)
-  have hv (d : ℕ) : Sigma.ι K d ≫ v = kernel.ι (f d) ≫ b d := Sigma.ι_desc _ _
+  have hv (d : ℕ) : Sigma.ι K d ≫ v = kernel.ι (f d) ≫ b d := Sigma.ι_comp_desc _ _
   have (d : Discrete ℕ) : Mono (α.app d) := by
     change Mono (kernel.ι (f d.as))
     infer_instance

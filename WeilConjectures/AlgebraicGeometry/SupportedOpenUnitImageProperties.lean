@@ -123,7 +123,7 @@ private theorem direct_image_support
       ((Functor.mapDerivedCategoryCompIso
         (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V)
         (Equivalence.functor (C := SheafOfModules.{u}
-          ((moduleRings Y.toRingedSpace).over V)) (D := D) e)).app K)
+          ((moduleRings Y.toRingedSpace).over V)) (D := D) e)).symm.app K)
   obtain ⟨bc⟩ := schemeDerivedDirectImage_openRestriction f O
   have hout : IsZero ((schemeOpenRestriction X O).mapDerivedCategory.obj
       ((schemeDerivedDirectImage f).obj K)) := by
@@ -196,7 +196,7 @@ theorem supported_open_unit_image_properties
   let d := e.mapDerivedCategory
   let da : r.mapDerivedCategory ⋙ d.functor ⊣ G.rightDerivedFunctor :=
     a.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoLeft
-      (Functor.mapDerivedCategoryCompIso r e.functor)
+      (Functor.mapDerivedCategoryCompIso r e.functor).symm
   let ra : r.mapDerivedCategory ⊣ d.functor ⋙ G.rightDerivedFunctor :=
     (da.comp d.symm.toAdjunction).ofNatIsoLeft
       (Functor.associator _ _ _ ≪≫
@@ -206,7 +206,7 @@ theorem supported_open_unit_image_properties
   let c : (schemeDerivedDirectImage U.ι).obj (L.mapDerivedCategory.obj K.obj) ≅
       R.obj (r.mapDerivedCategory.obj K.obj) :=
     G.rightDerivedFunctor.mapIso
-      ((Functor.mapDerivedCategoryCompIso r e.functor).app K.obj) ≪≫ α.app _
+      ((Functor.mapDerivedCategoryCompIso r e.functor).symm.app K.obj) ≪≫ α.app _
   have : CompactSpace U := isCompact_iff_compactSpace.mp hU
   have : QuasiCompact U.ι := quasiCompact_of_compactSpace U.ι
   have hres : schemeDerivedQCohProperty U.toScheme (L.mapDerivedCategory.obj K.obj) := by

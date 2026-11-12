@@ -147,7 +147,7 @@ theorem finiteRing_constructibleDerived_origin (X : Scheme.{u})
         K.obj L.obj (hplus L)).1 h)⟩
   let e : P.ι ⋙ ProEtale.finiteCoefficientIntrinsicDerivedComparison X B ≅
       (P.ι ⋙ C.mapDerivedCategory) ⋙ R.mapDerivedCategory :=
-    Functor.isoWhiskerLeft P.ι (Functor.mapDerivedCategoryCompIso C R) ≪≫
+    Functor.isoWhiskerLeft P.ι (Functor.mapDerivedCategoryCompIso C R).symm ≪≫
       (Functor.associator _ _ _).symm
   refine ⟨Functor.Full.of_iso e.symm, Functor.Faithful.of_iso e.symm, ?_, ?_⟩
   · intro K
@@ -204,7 +204,7 @@ theorem finiteRing_constructibleDerived_origin (X : Scheme.{u})
         · exact (DerivedCategory.isGE_iff L c).mp hc i (lt_of_lt_of_le hi (min_le_left _ _))
         · exact (DerivedCategory.isLE_iff L d).mp hd i (lt_of_le_of_lt (le_max_right _ _) hi)
       refine ⟨⟨L, hLP⟩, ⟨?_⟩⟩
-      exact (Functor.mapDerivedCategoryCompIso C R).app L ≪≫
+      exact (Functor.mapDerivedCategoryCompIso C R).symm.app L ≪≫
         R.mapDerivedCategory.mapIso eL ≪≫ eJ
   · intro L a b
     have : C.Faithful := inferInstance

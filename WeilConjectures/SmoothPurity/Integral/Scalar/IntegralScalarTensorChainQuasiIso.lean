@@ -129,7 +129,7 @@ variable (l : ℕ) [Fact l.Prime]
 section Proofs
 
 attribute [local irreducible] SheafOfModules.unit CategoryTheory.Limits.limit
-attribute [local implicit_reducible] integralOperationsRoos Functor.mapHomologicalComplex
+attribute [local implicit_reducible] integralOperationsRoos
 attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   CategoryTheory.sheafCompose
 set_option backward.defeqAttrib.useBackward true

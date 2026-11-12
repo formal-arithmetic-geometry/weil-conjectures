@@ -351,6 +351,7 @@ lemma Stratification.Index.right_eq_sdiff {E : Finset A} [DecidableEq A]
   ext a
   rw [Finset.mem_sdiff, mem_right_iff]
 
+
 omit [CommRing A] in
 instance (E : Finset A) : Finite (Stratification.Index E) :=
   Finite.of_injective (β := ↥E.powerset)
@@ -595,6 +596,7 @@ lemma ProdStrata.mapsTo_map_specComap {E F : Finset A} (h : E ⊆ F) :
   simp only [mem_zeroLocus, SetLike.coe_subset_coe, comap_asIdeal,
     ← Ideal.map_le_iff_le_comap] at hp ⊢
   exact (map_ideal_le h).trans hp
+
 
 variable (A) in
 /-- The diagram whose colimit is the w-localization of `A`. -/

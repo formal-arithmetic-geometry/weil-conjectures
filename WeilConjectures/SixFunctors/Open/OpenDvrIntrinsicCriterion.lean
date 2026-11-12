@@ -96,7 +96,7 @@ theorem openDvrIntrinsicCriterion
   have hgen : d.ideal = Ideal.span {Padic.coefficientExtensionUniformizer l E} := by
     rw [← hd, Set.range_const]
   have hcomplete := (roosIntrinsicCompletenessEquivalence.{u, u} p l (by omega)
-    E T d hgen P Qgood e).out 0 4
+    E T d hgen P Qgood e).out 1 5
   change IsDerivedCompleteUnrestricted.{u, u} l E T P ↔
     IsIso ((IntegralOnSlice.completionUnit.{u, u} l E T none).app P) at hcomplete
   rw [hcomplete]

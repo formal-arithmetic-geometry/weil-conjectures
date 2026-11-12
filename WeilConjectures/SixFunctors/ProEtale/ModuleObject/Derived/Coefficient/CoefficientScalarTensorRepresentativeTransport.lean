@@ -24,6 +24,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Transport of scalar tensor representatives
 
@@ -66,6 +67,13 @@ private theorem resolving_of_iso
   let := SheafOfModules.monoidalCategory A
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients A
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients A
+  -- Supply the discrete colimits directly: unguided instance search times out here.
+  have (I : Type w) : HasColimitsOfShape (Discrete I) (SheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A)) :=
+    have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
   constructor
   · intro V hV n
     exact (hQ V hV n).of_iso (((curriedTensor _).map₂CochainComplex.obj V).mapIso e.symm)
@@ -192,8 +200,11 @@ theorem coefficientScalarTensorRepresentative_transport
       SheafOfModules.scalarPairComplexComparison d.b.extension d.b.extension_additive
         F d.b.counit K = ε.app K := by
     unfold SheafOfModules.scalarPairComplexComparison
-    change F.map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
-    rw [F.map_id, Category.id_comp, Category.comp_id]
+    have h₁ (K : CochainComplex (ModuleRingedComparison.modules R Z) ℤ) :
+        (DerivedCategory.quotientCompQhIso _).inv.app K = 𝟙 _ := rfl
+    have h₂ (K : CochainComplex (ModuleRingedComparison.modules S Z) ℤ) :
+        (DerivedCategory.quotientCompQhIso _).hom.app K = 𝟙 _ := rfl
+    erw [h₁, h₂, F.map_id, Category.id_comp, Category.comp_id]
   let δ : TR ⋙ E ⟶ E.prod E ⋙ TS :=
     { app := fun K ↦ HomologicalComplex.mapBifunctorComparison
         (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) K.1 K.2

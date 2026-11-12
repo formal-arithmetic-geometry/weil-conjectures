@@ -87,9 +87,10 @@ theorem exists_finiteType_affine_enlargement
   let j := Abelian.image.ι ψ
   have hqU : Mono (Q.map q) :=
     mono_of_mono_fac (by rw [← Functor.map_comp, Abelian.image.fac])
-  have : Epi (Q.map q) :=
-    inferInstanceAs (Epi ((SheafOfModules.pushforward
-      (F := Over.forget U) (𝟙 (R.over U))).map q))
+  have : Q.PreservesEpimorphisms :=
+    Functor.preservesEpimorphisms_of_adjunction
+      (SheafOfModules.overPushforwardOverAdj (R := R) U)
+  have : Epi (Q.map q) := Q.map_epi q
   have : IsIso (Q.map q) := isIso_of_mono_of_epi _
   let e : (Abelian.image ψ).over U ≅ G := (asIso (Q.map q)).symm ≪≫ α
   have hft : ((Abelian.image ψ).over U).IsFiniteType := by

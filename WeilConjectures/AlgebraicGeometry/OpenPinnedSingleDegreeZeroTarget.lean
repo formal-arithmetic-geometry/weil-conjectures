@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSource
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroApex
@@ -106,7 +108,8 @@ private theorem combine_restriction_square
     _ = _ := by rw [hy]; simp [Category.assoc]
 
 set_option maxHeartbeats 600000 in
--- Explicit mate and single-restriction comparisons require extra elaboration heartbeats.
+-- The remote check exhausted 200000 heartbeats at the final composition after the
+-- targeted source rewrite (22s); the original theorem used a 1000000 budget.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct the target comparison and prove mate compatibility from two
 independent ingredients: restriction of the pinned tensor counit and invariance
@@ -236,10 +239,15 @@ theorem open_pinned_single_degree_zero_target
         ((schemeDerivedDirectImage (f ∣_ V)).map s))
       (schemeDerivedBaseChangeMap (f ∣_ V) (f' ∣_ W) (g.resLE V W hWV) j hsq.w
         ((DerivedCategory.singleFunctor _ 0).obj H)) hb' hn hQc hy
-    rw [← openPinnedSingleDegreeZeroSourceIso_app f g V W hWV G] at h
-    simpa only [singleDegreeBaseChangeComposite, openPinnedSingleDegreeZeroCounit,
-      Functor.map_comp, hb₀, Category.assoc, R, Q, K, U, H,
-      singleDegreeBaseChangeSource, singleDegreeBaseChangeTarget, Functor.comp_obj] using h
+    conv at h =>
+      rhs
+      lhs
+      rw [← openPinnedSingleDegreeZeroSourceIso_app f g V W hWV G]
+    with_unfolding_all
+      simp only [singleDegreeBaseChangeComposite, openPinnedSingleDegreeZeroCounit, cast_eq,
+        Functor.map_comp, hb₀, Category.assoc, R, Q, K, U, H,
+        singleDegreeBaseChangeSource, singleDegreeBaseChangeTarget, Functor.comp_obj] at h ⊢
+      exact h
   simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app,
     Category.assoc, U, H] using

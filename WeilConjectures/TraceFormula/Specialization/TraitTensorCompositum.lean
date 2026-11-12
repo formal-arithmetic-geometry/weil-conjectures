@@ -66,8 +66,7 @@ noncomputable def traitTensorCompositum : IntermediateField Ω₁ Ω :=
 /-- The product map `Ω₁ ⊗_{R₁} R ⟶ Ω` takes values in the compositum `Ω₁(R)`. -/
 lemma traitTensorLift_mem_traitTensorCompositum (x : Ω₁ ⊗[R₁] R) :
     traitTensorLift R₁ R Ω₁ Ω x ∈ traitTensorCompositum R Ω₁ Ω := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul ω r =>
     rw [traitTensorLift_tmul]
     exact mul_mem (IntermediateField.algebraMap_mem _ ω) (subset_adjoin _ _ ⟨r, rfl⟩)

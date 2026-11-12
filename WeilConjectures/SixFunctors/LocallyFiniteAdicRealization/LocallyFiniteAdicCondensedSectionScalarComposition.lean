@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedIntegralModel
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleUnit
@@ -147,8 +149,7 @@ private theorem modTranspose
   rw [← Category.assoc, ← DerivedCategory.Qh.map_comp]
   rfl
 
-attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory CategoryTheory.Functor.mapHomologicalComplex in
+attribute [local implicit_reducible] HomotopyCategory in
 private theorem restrictionHomotopyFactors
     (w : φ ≫ ψ = χ) (K : HomotopyCategory (Mod C T) (.up ℤ)) :
     (comap φ).mapDerivedCategoryFactorsh.inv.app
@@ -163,15 +164,15 @@ private theorem restrictionHomotopyFactors
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hc
   erw [DerivedCategory.Qh.map_id, Category.comp_id] at hc
   have hi :
-      ((comap ψ).mapDerivedCategoryCompIso (comap φ)).inv.app
+      ((comap ψ).mapDerivedCategoryCompIso (comap φ)).hom.app
           (DerivedCategory.Qh.obj K) ≫
         (comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.hom.app K =
       (comap φ).mapDerivedCategory.map ((comap ψ).mapDerivedCategoryFactorsh.hom.app K) ≫
         (comap φ).mapDerivedCategoryFactorsh.hom.app
           (((comap ψ).mapHomotopyCategory (.up ℤ)).obj K) := by
-    apply (cancel_epi (((comap ψ).mapDerivedCategoryCompIso (comap φ)).hom.app
+    apply (cancel_epi (((comap ψ).mapDerivedCategoryCompIso (comap φ)).inv.app
       (DerivedCategory.Qh.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+    rw [Iso.inv_hom_id_app_assoc]
     exact hc.symm
   haveI : IsIso ((comap χ).mapDerivedCategoryFactorsh.hom.app K) := inferInstance
   apply (cancel_mono ((comap χ).mapDerivedCategoryFactorsh.hom.app K)).mp
@@ -209,8 +210,7 @@ private theorem ordinaryComp_unit (w : φ ≫ ψ = χ) (M : Mod C R) :
   rw [Adjunction.homEquiv_unit] at h₁'
   erw [reassoc_of% h₁']
   simpa only [Adjunction.homEquiv_unit, Category.assoc] using h₂
-attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory CategoryTheory.Functor.mapHomologicalComplex in
+attribute [local implicit_reducible] HomotopyCategory in
 private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     (P : HomotopyCategory (Mod C R) (.up ℤ)) :
     (((extendRestrictAdjunction φ).mapHomotopyCategory (.up ℤ)).comp
@@ -256,8 +256,7 @@ private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     Functor.mapHomologicalComplex_obj_X, Functor.id_obj] using
       congrArg (fun f ↦ f.hom) hh
 
-attribute [local implicit_reducible] HomotopyCategory
-  CategoryTheory.Functor.mapHomotopyCategory CategoryTheory.Functor.mapHomologicalComplex in
+attribute [local implicit_reducible] HomotopyCategory in
 private theorem exactModComp_eq
     [PreservesFiniteLimits (extendScalars φ)]
     [PreservesFiniteLimits (extendScalars ψ)]
@@ -340,7 +339,7 @@ private theorem compNatIso_refl
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     mapDerivedCategoryCompNatIso (Iso.refl (F ⋙ G)) =
-      (mapDerivedCategoryCompIso F G).symm := by
+      mapDerivedCategoryCompIso F G := by
   apply Iso.ext
   simp only [mapDerivedCategoryCompNatIso, Iso.trans_hom,
     mapDerivedCategoryNatIso_refl, Category.comp_id]
@@ -358,7 +357,7 @@ private theorem square_factor
     [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
     (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) :
     mapDerivedCategorySquareIso e = mapDerivedCategoryCompNatIso e ≪≫
-      mapDerivedCategoryCompIso G₁ G₂ := by
+      (mapDerivedCategoryCompIso G₁ G₂).symm := by
   simp only [mapDerivedCategorySquareIso, mapDerivedCategoryCompNatIso, Iso.trans_assoc]
 
 variable {A B C D E F : Type*}
@@ -409,25 +408,25 @@ private theorem exactSquare_composition
     (by intro N; simp) M
   simp only [compNatIso_refl, Iso.symm_hom] at h₂ h₃
   have h₂' : (mapDerivedCategoryCompNatIso δ).hom.app M =
-      (mapDerivedCategoryCompIso V R₁').hom.app (R₂.mapDerivedCategory.obj M) ≫
+      (mapDerivedCategoryCompIso V R₁').inv.app (R₂.mapDerivedCategory.obj M) ≫
         R₁'.mapDerivedCategory.map ((mapDerivedCategoryCompNatIso k₂).hom.app M) ≫
         (mapDerivedCategoryCompNatIso (F := W ⋙ R₂') (G := R₁')
           (isoWhiskerLeft W r')).hom.app M := by
-    rw [h₂, Iso.hom_inv_id_app_assoc]
+    rw [h₂, Iso.inv_hom_id_app_assoc]
   have h₃' :
       (mapDerivedCategoryCompNatIso (F := W ⋙ R₂') (G := R₁')
           (isoWhiskerLeft W r')).hom.app M ≫
-        (mapDerivedCategoryCompIso W R₃').hom.app M =
-      R₁'.mapDerivedCategory.map ((mapDerivedCategoryCompIso W R₂').hom.app M) ≫
+        (mapDerivedCategoryCompIso W R₃').inv.app M =
+      R₁'.mapDerivedCategory.map ((mapDerivedCategoryCompIso W R₂').inv.app M) ≫
         (mapDerivedCategoryCompNatIso r').hom.app (W.mapDerivedCategory.obj M) := by
     apply (cancel_epi (R₁'.mapDerivedCategory.map
-      ((mapDerivedCategoryCompIso W R₂').inv.app M))).mp
+      ((mapDerivedCategoryCompIso W R₂').hom.app M))).mp
     rw [← Category.assoc, h₃]
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
+    simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id,
       ← R₁'.mapDerivedCategory.map_comp_assoc, R₁'.mapDerivedCategory.map_id,
       Category.id_comp]
     exact Category.comp_id _
-  simp only [square_factor, Iso.trans_hom, NatTrans.comp_app]
+  simp only [square_factor, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [← Category.assoc, h₁]
   simp only [Category.assoc]
   rw [h₂']

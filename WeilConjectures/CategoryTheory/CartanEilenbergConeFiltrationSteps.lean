@@ -104,7 +104,7 @@ theorem coneFiltrationStep_props
           (HomologicalComplex.homotopyCofiber.inlX aug (m + 1) m rfl) := by
       intro m hm
       apply cone_factors_image
-      simpa only [coneFiltrationStep, if_pos hm, CochainComplex.mappingCone.inl,
+      simpa only [coneFiltrationStep, ite_eq_left hm, CochainComplex.mappingCone.inl,
         CochainComplex.HomComplex.Cochain.mk_v] using
         (le_sup_left : imageSubobject
           (HomologicalComplex.homotopyCofiber.inlX aug (m + 1) m rfl) ≤

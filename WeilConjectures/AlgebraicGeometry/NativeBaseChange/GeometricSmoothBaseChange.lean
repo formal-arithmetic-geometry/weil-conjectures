@@ -119,8 +119,6 @@ private theorem reflect_native_iso (l : ℕ) [Fact l.Prime]
   @isIso_of_reflects_iso _ _ _ _ _ _ f
     (nativeExchangeEncodingAt l Λ hΛ Y).mapDerivedCategory hf inferInstance
 
-attribute [local irreducible] CondensedRing.boundedConstructibleBaseChange
-
 /-- The base-change morphism attached to the rational `ℚ̄_ℓ`-preservation proof is the standard
 `ℚ̄_ℓ`-coefficient base-change morphism: both have the same functor data. -/
 private theorem baseChange_restriction_eq (l : ℕ) [Fact l.Prime] {k : Type u} [Field k]
@@ -136,6 +134,7 @@ private theorem baseChange_restriction_eq (l : ℕ) [Fact l.Prime] {k : Type u} 
     (sq : CommSq g' p' p g) :
     CondensedRing.boundedConstructibleBaseChangeOfPreserves (Profinite.padicAlgClRingObj l) l
       H sq = CondensedRing.boundedConstructibleBaseChange l sq := by
+  rw [CondensedRing.boundedConstructibleBaseChange_def]
   with_unfolding_all rfl
 
 /-- Smooth base change for the base-change morphism attached to any preservation proof for

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientScalars
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarEndpointComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -163,7 +165,7 @@ private def exactComp (R : A ⥤ B) (S : B ⥤ C) (T : A ⥤ C)
     [PreservesFiniteLimits S] [PreservesFiniteColimits S]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T] (r : R ⋙ S ≅ T) :
     R.mapDerivedCategory ⋙ S.mapDerivedCategory ≅ T.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso R S).symm ≪≫ Functor.mapDerivedCategoryNatIso r
+  Functor.mapDerivedCategoryCompIso R S ≪≫ Functor.mapDerivedCategoryNatIso r
 
 private lemma exactComp_hom_fac (R : A ⥤ B) (S : B ⥤ C) (T : A ⥤ C)
     [R.Additive] [S.Additive] [T.Additive]
@@ -176,11 +178,11 @@ private lemma exactComp_hom_fac (R : A ⥤ B) (S : B ⥤ C) (T : A ⥤ C)
       S.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
         S.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.hom (.up ℤ)).app K) := by
-  simp only [exactComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [exactComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   erw [Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R S).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R S).inv.app
     (DerivedCategory.Q.obj K))).1
-  erw [Iso.hom_inv_id_app_assoc,
+  erw [Iso.inv_hom_id_app_assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
 
 private lemma exactComp_fac (R : A ⥤ B) (S : B ⥤ C) (T : A ⥤ C)

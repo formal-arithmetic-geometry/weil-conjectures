@@ -38,13 +38,13 @@ private def eval (X : Scheme.{u}) (F : X.Modules) (x : X) :
 private theorem proj_map (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G) (x : X) :
     moduleCup_godementMap X f ≫ proj X G x =
       toSkyscraper (f.stalkLinearMap x ∘ₗ eval X F x) := by
-  simp only [moduleCup_godementMap, proj, CategoryTheory.Limits.Pi.lift_π, comp_toSkyscraper, eval,
-    LinearMap.comp_assoc]
+  simp only [moduleCup_godementMap, proj, CategoryTheory.Limits.Pi.lift_comp_π,
+    comp_toSkyscraper, eval, LinearMap.comp_assoc]
 
 private theorem proj_multiply (X : Scheme.{u}) (F : X.Modules) (x : X) :
     moduleCup_godementMultiply X F ≫ proj X F x =
       toSkyscraper (eval X F x ∘ₗ eval X (moduleCup_godementObject X F) x) := by
-  simp only [moduleCup_godementMultiply, proj, CategoryTheory.Limits.Pi.lift_π,
+  simp only [moduleCup_godementMultiply, proj, CategoryTheory.Limits.Pi.lift_comp_π,
     comp_toSkyscraper, eval, LinearMap.comp_assoc]
 
 private theorem eval_toSkyscraper (X : Scheme.{u}) (F : X.Modules) (x : X)

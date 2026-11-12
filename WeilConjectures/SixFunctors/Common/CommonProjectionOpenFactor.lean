@@ -425,6 +425,7 @@ private theorem openFactor_preserved
 
 end CoefficientCalculus
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the open projection factor and the final
 support identification, through the same canonical tensorator.
 

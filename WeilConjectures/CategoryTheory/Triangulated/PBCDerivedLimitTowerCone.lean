@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerCone
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 
-import Mathlib.Data.Countable.Basic
+import Mathlib.Basic.Countable.Basic
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Limit cone for a tower of complexes

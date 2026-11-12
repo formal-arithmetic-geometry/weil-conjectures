@@ -146,6 +146,7 @@ private theorem ordinaryRestrictionUnit (T : Scheme.{u}) (R : Type (u + 1)) [Com
   apply ModuleCat.CoextendScalars.ext
   apply LinearMap.ext
   intro r
+  change R at r
   let M := ((comparisonLowerStar (ModuleCat.{u + 1} R) T).obj X).obj.obj U
   let z : (ModuleCat.coextendScalars (RingHom.id R)).obj M := x
   change r • (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z) (1 : R) =

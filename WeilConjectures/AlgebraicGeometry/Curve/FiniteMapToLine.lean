@@ -131,7 +131,7 @@ theorem Algebra.exists_finite_formallyUnramified_away {k A K : Type*} [Field k] 
         PrimeSpectrum.comap (algebraMap k[X] A) '' (Algebra.unramifiedLocus k[X] A)ᶜ := by
       rw [hI]
       exact hle
-    have : P.asIdeal = ⊥ := Ideal.eq_bot_of_comap_eq_bot (congrArg PrimeSpectrum.asIdeal hPe)
+    have : P.asIdeal = ⊥ := Ideal.eq_bot_of_under_eq_bot (congrArg PrimeSpectrum.asIdeal hPe)
     obtain rfl : P = ⟨⊥, Ideal.isPrime_bot⟩ := PrimeSpectrum.ext this
     exact hP hbot
   obtain ⟨h, hhI, hh0⟩ := Set.not_subset.mp hIbot

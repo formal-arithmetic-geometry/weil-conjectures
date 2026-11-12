@@ -58,8 +58,7 @@ theorem smooth_quotient_fibre_finrank_add_le
   let e : P.toExtension.Cotangent ≃ₗ[MvPolynomial (Fin n) R] I.Cotangent := by
     let e₀ := Extension.cotangentEquivCotangentKer (P := P.toExtension)
     let e₁ := Ideal.Cotangent.equivOfEq P.toExtension.ker I hp
-    dsimp only [Generators.toExtension, Generators.Ring] at e₀ e₁
-    exact e₀.trans e₁
+    exact e₀ ≪≫ₗ e₁
   let eA : P.toExtension.Cotangent ≃ₗ[A] I.Cotangent :=
     e.extendScalarsOfSurjective P.algebraMap_surjective
   have hi : Function.Injective P.toExtension.cotangentComplex := by

@@ -85,7 +85,7 @@ def NormedField.unitBallSubring (k : Type*) [NormedField k] [IsUltrametricDist k
   carrier := {x | ‖x‖ ≤ 1}
   mul_mem' {x y} hx hy := by
     simp only [Set.mem_ofPred_eq, norm_mul] at *
-    exact mul_le_one₀ hx (norm_nonneg _) hy
+    exact (mul_le_of_le_one_left (norm_nonneg _) hx).trans hy
   one_mem' := by simp
   add_mem' {x y} hx hy := (IsUltrametricDist.norm_add_le_max x y).trans (max_le hx hy)
   zero_mem' := by simp

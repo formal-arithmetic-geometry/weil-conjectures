@@ -186,19 +186,19 @@ theorem isHomotopyLimit_of_triangles {G : ℕᵒᵖ ⥤ C} (c : Cone G) (m : ℤ
       rw [Preadditive.zsmul_comp, towerShift_proj]
       simp only [τ, tr, productTriangle.lift_hom₁, comp_hom₁, productTriangle.π_hom₁,
         Triangle.homMk_hom₁]
-      exact (Pi.lift_π _ _).trans (Preadditive.comp_zsmul _ _ _)
+      exact (Pi.lift_comp_π _ _).trans (Preadditive.comp_zsmul _ _ _)
   have hτ₂ : τ.hom₂ = towerShift (F := (Functor.const ℕᵒᵖ).obj c.pt) hPK :=
     Fan.IsLimit.hom_ext hPK _ _ fun n ↦ by
       rw [towerShift_proj]
       simp only [τ, tr, productTriangle.lift_hom₂, comp_hom₂, productTriangle.π_hom₂,
         Triangle.homMk_hom₂]
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
   have hτ₃ : τ.hom₃ = towerShift (F := G) hPG :=
     Fan.IsLimit.hom_ext hPG _ _ fun n ↦ by
       rw [towerShift_proj]
       simp only [τ, tr, productTriangle.lift_hom₃, comp_hom₃, productTriangle.π_hom₃,
         Triangle.homMk_hom₃]
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
   let φ : productTriangle T ⟶ productTriangle T :=
     Triangle.homMk _ _ (𝟙 _ - τ.hom₁) (𝟙 _ - τ.hom₂) (𝟙 _ - τ.hom₃)
       (by rw [Preadditive.comp_sub, Preadditive.sub_comp, comp_id, id_comp, τ.comm₁])

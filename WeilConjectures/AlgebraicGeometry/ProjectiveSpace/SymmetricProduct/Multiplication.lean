@@ -78,11 +78,11 @@ lemma mulCoeff_eq_coeff (a : ULift.{u} (Fin 2) → R) (b : ULift.{u} (Fin (k + 1
 lemma coeff_vecPoly (b : ULift.{u} (Fin (k + 1)) → R) (j : ULift.{u} (Fin (k + 1))) :
     (vecPoly b).coeff j.down = b j := by
   rw [vecPoly, finsetSum_coeff, Finset.sum_eq_single j]
-  · rw [coeff_C_mul_X_pow, if_pos rfl]
+  · rw [coeff_C_mul_X_pow, ite_eq_left rfl]
   · intro j' _ hj'
-    rw [coeff_C_mul_X_pow, if_neg]
+    rw [coeff_C_mul_X_pow, ite_eq_right]
     intro h
-    exact hj' (ULift.ext _ _ (Fin.ext h.symm))
+    exact hj' (ULift.ext (Fin.ext h.symm))
   · simp
 
 /-- A polynomial of degree at most `k` is `∑ⱼ bⱼ tʲ` for its vector of coefficients. -/
@@ -103,7 +103,7 @@ lemma span_range_mulCoeff (a : ULift.{u} (Fin 2) → R) (b : ULift.{u} (Fin (k +
     rintro _ ⟨⟨i⟩, rfl⟩
     fin_cases i
     · have h := coeff_mem_contentIdeal (C (a ⟨0⟩) * X + C (a ⟨1⟩)) 1
-      rwa [coeff_add, coeff_C_mul, coeff_X_one, coeff_C, if_neg one_ne_zero, mul_one,
+      rwa [coeff_add, coeff_C_mul, coeff_X_one, coeff_C, ite_eq_right one_ne_zero, mul_one,
         add_zero] at h
     · have h := coeff_mem_contentIdeal (C (a ⟨0⟩) * X + C (a ⟨1⟩)) 0
       rwa [coeff_add, coeff_C_mul, coeff_X_zero, mul_zero, zero_add, coeff_C_zero] at h
@@ -119,7 +119,7 @@ lemma span_range_mulCoeff (a : ULift.{u} (Fin 2) → R) (b : ULift.{u} (Fin (k +
   by_cases hc : c < k + 2
   · exact Ideal.subset_span ⟨⟨c, hc⟩, mulCoeff_eq_coeff a b c⟩
   · rw [← mulCoeff_eq_coeff, mulCoeff, Finset.sum_eq_zero fun j _ ↦ by
-      rw [if_neg (by omega), if_neg (by omega), add_zero]]
+      rw [ite_eq_right (by omega), ite_eq_right (by omega), add_zero]]
     exact zero_mem _
 
 /-- **Binary forms factor over an algebraically closed field.** Every nonzero polynomial `V` of
@@ -240,9 +240,9 @@ lemma surjective_bilinear_mulForm :
   set V : K[X] := ∑ c, C (v c) * X ^ (e c : ℕ)
   have hV (c : ι) : V.coeff (e c) = v c := by
     rw [finsetSum_coeff, Finset.sum_eq_single c]
-    · rw [coeff_C_mul_X_pow, if_pos rfl]
+    · rw [coeff_C_mul_X_pow, ite_eq_left rfl]
     · intro c' _ hc'
-      rw [coeff_C_mul_X_pow, if_neg]
+      rw [coeff_C_mul_X_pow, ite_eq_right]
       intro h
       exact hc' (e.injective (Fin.ext h).symm)
     · simp

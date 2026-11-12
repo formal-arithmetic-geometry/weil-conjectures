@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Square.SquareResolutionRoofModels
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareUnitMap
 import WeilConjectures.AlgebraicGeometry.Injective.InjectiveSectionUnitComparison
@@ -68,8 +70,8 @@ private theorem coefficient_augmentation {X Z : Scheme.{u}} (v : Z ⟶ X)
   simp only [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
     eqToIso_refl, Iso.refl_hom, HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso,
     eqToIso.inv, reassoc_of% hbeta, CochainComplex.single₀_obj_zero, Category.id_comp,
-    CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
-    CochainComplex.shiftFunctor_obj_X', HomologicalComplex.single_map_f_self, Iso.refl_inv,
+    CochainComplex.singleFunctor, Functor.comp_obj,
+    HomologicalComplex.single_map_f_self, Iso.refl_inv,
     HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents_inv_app,
     ↓reduceDIte, eqToHom_refl, Functor.map_comp, eqToHom_map, eqToIso.hom,
     eqToHom_trans_assoc, Category.assoc]

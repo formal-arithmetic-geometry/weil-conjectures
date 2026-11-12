@@ -45,7 +45,7 @@ variable {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E} [F.Additive] [G.Additive] [H.
 functors, through `D(F ⋙ G) ≅ D(F) ⋙ D(G)`. -/
 noncomputable def mapDerivedCategoryCompNatIso (γ : F ⋙ G ≅ H) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F G).symm ≪≫ mapDerivedCategoryNatIso γ
+  mapDerivedCategoryCompIso F G ≪≫ mapDerivedCategoryNatIso γ
 
 /-- The morphism of complexes `G (F K) ⟶ H K` given in each degree by the component of
 `γ : F ⋙ G ≅ H`. -/
@@ -68,7 +68,7 @@ lemma mapDerivedCategoryCompNatIso_hom_app_Q (γ : F ⋙ G ≅ H) (K : CochainCo
         DerivedCategory.Q.map (mapHomologicalComplexCompIsoHomOfIso γ K) := by
   have h := mapDerivedCategoryCompIso_fac F G K
   have h' := mapDerivedCategoryNatIso_fac γ K
-  simp only [mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [mapDerivedCategoryCompNatIso, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc, h', Functor.map_comp]
   rw [← h]
   simp

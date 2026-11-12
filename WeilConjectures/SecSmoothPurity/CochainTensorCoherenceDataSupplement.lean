@@ -349,91 +349,6 @@ private noncomputable def oneMap : rset R ⟶ rset R :=
 private noncomputable def unitSetIso :
     (mset A).obj (I.modules.obj (unit (base R))) ≅ rset A :=
   I.moduleUnderlying.app (unit (base R)) ≪≫ I.ringUnderlying
-private theorem basis (W : Dᵒᵖ) (a : A.obj.obj W) :
-    (show (I.modules.obj (unit (base R))).val.obj W from
-      (unitSetIso R A F I).inv.hom.app W a) = a •
-        (show (I.modules.obj (unit (base R))).val.obj W from
-          (unitSetIso R A F I).inv.hom.app W (1 : A.obj.obj W)) := by
-  change (show (I.modules.obj (unit (base R))).val.obj W from
-      (I.moduleUnderlying.inv.app (unit (base R))).hom.app W
-        (I.ringUnderlying.inv.hom.app W a)) = a •
-    (show (I.modules.obj (unit (base R))).val.obj W from
-      (I.moduleUnderlying.inv.app (unit (base R))).hom.app W
-        (I.ringUnderlying.inv.hom.app W (1 : A.obj.obj W)))
-  let T := rset R
-  let t := I.ringUnderlying.inv.hom.app W a
-  have ho := I.ringOne T (oneMap R) (fun _ _ ↦ rfl) W t
-  have he : (F.map (oneMap R)).hom.app W t =
-      I.ringUnderlying.inv.hom.app W (1 : A.obj.obj W) := by
-    have hh := congrArg (I.ringUnderlying.inv.hom.app W) ho
-    have hc := congrArg (fun k ↦ k.hom.app W ((F.map (oneMap R)).hom.app W t))
-      I.ringUnderlying.hom_inv_id
-    exact hc.symm.trans hh
-  have hs := I.moduleSMul (unit (base R)) T (𝟙 T) (oneMap R) (𝟙 T)
-    (fun U x ↦ (mul_one (show R.obj.obj U from x)).symm) W t
-  have hid : (F.map (𝟙 T)).hom.app W t = t :=
-    congrArg (fun f ↦ f.hom.app W t) (F.map_id T)
-  have ht := congrArg ((I.moduleUnderlying.inv.app (unit (base R))).hom.app W) hid
-  have hr := congrArg (fun v : (F.obj T).obj.obj W ↦
-    (I.ringUnderlying.hom.hom.app W v : A.obj.obj W) •
-      (show (I.modules.obj (unit (base R))).val.obj W from
-        (I.moduleUnderlying.inv.app (unit (base R))).hom.app W
-          ((F.map (oneMap R)).hom.app W t))) hid
-  have hs' := ht.symm.trans (hs.trans hr)
-  have he' := congrArg ((I.moduleUnderlying.inv.app (unit (base R))).hom.app W) he
-  have hs'' := hs'.trans (congrArg (fun v : (I.modules.obj (unit (base R))).val.obj W ↦
-    (I.ringUnderlying.hom.hom.app W t : A.obj.obj W) • v) he')
-  have hc := congrArg (fun k ↦ k.hom.app W a) I.ringUnderlying.inv_hom_id
-  change I.ringUnderlying.hom.hom.app W t = a at hc
-  exact hs''.trans (congrArg (fun r : A.obj.obj W ↦
-    r • (show (I.modules.obj (unit (base R))).val.obj W from
-      (I.moduleUnderlying.inv.app (unit (base R))).hom.app W
-        (I.ringUnderlying.inv.hom.app W (1 : A.obj.obj W)))) hc)
-@[no_expose]
-private noncomputable def unitIso : I.modules.obj (unit (base R)) ≅ unit (base A) := by
-  let eW (W : Dᵒᵖ) : A.obj.obj W ≃ₗ[A.obj.obj W]
-      (I.modules.obj (unit (base R))).val.obj W :=
-    { toEquiv := (((sheafToPresheaf K (Type u)).mapIso
-        (unitSetIso R A F I)).app W).toEquiv.symm
-      map_add' := by
-        intro a b
-        change (show (I.modules.obj (unit (base R))).val.obj W from
-          (unitSetIso R A F I).inv.hom.app W (a + b)) =
-            (show (I.modules.obj (unit (base R))).val.obj W from
-              (unitSetIso R A F I).inv.hom.app W a) +
-                (show (I.modules.obj (unit (base R))).val.obj W from
-                  (unitSetIso R A F I).inv.hom.app W b)
-        let v : (I.modules.obj (unit (base R))).val.obj W :=
-          (unitSetIso R A F I).inv.hom.app W (1 : A.obj.obj W)
-        have he := @Module.add_smul ((base A).obj.obj W)
-          ((I.modules.obj (unit (base R))).val.obj W) _ _
-          (ModuleCat.isModule ((I.modules.obj (unit (base R))).val.obj W)) a b v
-        exact (basis R A F I W (a + b)).trans (he.trans
-          (congrArg₂ (fun x y : (I.modules.obj (unit (base R))).val.obj W ↦ x + y)
-            (basis R A F I W a).symm (basis R A F I W b).symm))
-      map_smul' := by
-        intro a b
-        change (unitSetIso R A F I).inv.hom.app W (a * b) =
-          a • (show (I.modules.obj (unit (base R))).val.obj W from
-            (unitSetIso R A F I).inv.hom.app W b)
-        let v : (I.modules.obj (unit (base R))).val.obj W :=
-          (unitSetIso R A F I).inv.hom.app W (1 : A.obj.obj W)
-        let md := ModuleCat.isModule ((I.modules.obj (unit (base R))).val.obj W)
-        have he := @mul_smul ((base A).obj.obj W)
-          ((I.modules.obj (unit (base R))).val.obj W) _
-          md.toDistribMulAction.toMulAction.toSemigroupAction a b v
-        exact (basis R A F I W (a * b)).trans (he.trans
-          (congrArg (fun x : (I.modules.obj (unit (base R))).val.obj W ↦ a • x)
-            (basis R A F I W b).symm)) }
-  let ep : (unit (base A)).val ≅ (I.modules.obj (unit (base R))).val :=
-    PresheafOfModules.isoMk (fun W ↦ (eW W).toModuleIso) (by
-      intro W V f
-      apply ModuleCat.hom_ext
-      apply LinearMap.ext
-      intro a
-      exact congrArg (fun k ↦ k a) ((unitSetIso R A F I).inv.hom.naturality f))
-  exact ((fullyFaithfulForget (base A)).preimageIso (X := unit (base A))
-    (Y := I.modules.obj (unit (base R))) ep).symm
 @[no_expose]
 private noncomputable def isoOfHomEquiv
     {E : Type*} [Category E] (X Y : E) (e : ∀ H, (X ⟶ H) ≃ (Y ⟶ H))
@@ -581,37 +496,6 @@ private theorem unitor_pure
     M
   have hh := congrArg (fun f ↦ f.app W (r • m)) hc
   exact he.trans hh
-private theorem unitIso_hom_apply (W : Dᵒᵖ)
-    (m : (I.modules.obj (unit (base R))).val.obj W) :
-    (unitIso R A F I).hom.val.app W m = (unitSetIso R A F I).hom.hom.app W m := by
-  rfl
-
-@[no_expose]
-private noncomputable def pullbackUnitIso
-    (S : Sheaf K CommRingCat.{u}) (c : A ⟶ S) :
-    (CochainScalarConstruction.tensorFunctor c).obj (I.modules.obj (unit (base R))) ≅
-      unit (base S) :=
-  (CochainScalarConstruction.tensorFunctor c).mapIso (unitIso R A F I) ≪≫
-    scalarUnitIso A S c
-
-private theorem pullbackUnitIso_insertion
-    (S : Sheaf K CommRingCat.{u}) (c : A ⟶ S) (W : Dᵒᵖ)
-    (m : (I.modules.obj (unit (base R))).val.obj W) :
-    (pullbackUnitIso R A F I S c).hom.val.app W
-      ((CochainScalarConstruction.tensorUnit c (I.modules.obj (unit (base R)))).hom.app W m) =
-        (c.hom.app W).hom ((unitSetIso R A F I).hom.hom.app W m) := by
-  have hu := congrArg (fun k ↦ k.val.app W m)
-    ((CochainScalarConstruction.tensorAdjunction c).unit.naturality (unitIso R A F I).hom)
-  change (CochainScalarConstruction.tensorUnit c (unit (base A))).hom.app W
-      ((unitIso R A F I).hom.val.app W m) =
-    ((CochainScalarConstruction.tensorFunctor c).map (unitIso R A F I).hom).val.app W
-      ((CochainScalarConstruction.tensorUnit c (I.modules.obj (unit (base R)))).hom.app W m)
-    at hu
-  change (scalarUnitIso A S c).hom.val.app W
-    (((CochainScalarConstruction.tensorFunctor c).map (unitIso R A F I).hom).val.app W
-      ((CochainScalarConstruction.tensorUnit c (I.modules.obj (unit (base R)))).hom.app W m)) = _
-  rw [← hu, scalarUnitIso_insertion, unitIso_hom_apply]
-
 set_option maxHeartbeats 60000 in
 -- Bound the Hom-equivalence computation by its explicit underlying formula.
 private theorem scalarHom_ext

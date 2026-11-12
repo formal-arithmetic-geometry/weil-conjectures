@@ -24,6 +24,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 public import Mathlib.CategoryTheory.Presentable.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
+public import Mathlib.CategoryTheory.Limits.ConstructLimitMap
 
 /-!
 # Cofiltered limits of schemes with affine transition morphisms
@@ -2818,6 +2819,7 @@ lemma DescendsAtWithOpen.descendsAt {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt} {W
   obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, -, -⟩ := H
   exact ⟨Y, p, h, hp, hcpt, hqs, hsq⟩
 
+
 include hc in
 /-- (Implementation) A quasi-compact open of a scheme over the limit descends to a
 finite stage (Stacks Project Tag 01ZB). -/
@@ -5164,6 +5166,7 @@ theorem Scheme.exists_map_preimage_eq_map_preimage_of_isLimit [IsCofiltered I]
   refine ⟨l, h ≫ g, h ≫ g', ?_⟩
   rw [Functor.map_comp, Functor.map_comp, Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, hl]
 
+
 end ClosedImmersionDescent
 
 end AlgebraicGeometry
@@ -5190,6 +5193,7 @@ lemma IsConnected.of_forall_nonempty_hom_right {C : Type*} [Category* C]
   have : Nonempty C := ⟨X⟩
   zigzag_isConnected fun _ _ ↦ .trans (.of_hom (h _).some) (.of_inv (h _).some)
 
+
 variable {C : Type u₁} [Category.{v₁} C]
   {I : Type u₂} {I' : Type u₃} [Category.{v₂} I]
   [Category.{v₃} I']
@@ -5197,180 +5201,6 @@ variable {C : Type u₁} [Category.{v₁} C]
   {c : Cone D} {c' : Cone D'}
   (hc : IsLimit c) (hc' : IsLimit c')
   (f : c.pt ⟶ c'.pt)
-
-namespace ConstructLimitMap
-
-def Aux : ObjectProperty (Comma D D') :=
-  fun A ↦ c.π.app A.left ≫ A.hom = f ≫ c'.π.app A.right
-
-@[reassoc]
-lemma Aux.w (A : (Aux f).FullSubcategory) :
-    c.π.app A.obj.left ≫ A.obj.hom = f ≫ c'.π.app A.obj.right :=
-  A.property
-
-@[simps!]
-def Aux.projLeft : (Aux f).FullSubcategory ⥤ I :=
-  (Aux f).ι ⋙ Comma.fst _ _
-
-@[simps!]
-def Aux.projRight : (Aux f).FullSubcategory ⥤ I' :=
-  (Aux f).ι ⋙ Comma.snd _ _
-
-variable
-  [IsCofiltered I] [IsCofiltered I']
-  [∀ i : I', PreservesColimit D.op (yoneda.obj (D'.obj i))]
-
-/-! TODO: The following three proofs are very similar, unify them. -/
-
-include hc in
-lemma isCofiltered : IsCofiltered (Aux f).FullSubcategory := by
-  obtain ⟨i'⟩ := IsCofiltered.nonempty (C := I')
-  obtain ⟨a, p, hp⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app i')
-  have : Nonempty (Aux f).FullSubcategory := ⟨⟨a, i', p⟩, hp⟩
-  have : IsCofilteredOrEmpty (Aux f).FullSubcategory := by
-    refine ⟨?_, ?_⟩
-    · intro j₁ j₂
-      let l' := IsCofiltered.min j₁.obj.right j₂.obj.right
-      let lp₁ := IsCofiltered.minToLeft j₁.obj.right j₂.obj.right
-      let lp₂ := IsCofiltered.minToRight j₁.obj.right j₂.obj.right
-      obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc
-        (f ≫ c'.π.app (IsCofiltered.min j₁.obj.right j₂.obj.right))
-      obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
-        (q ≫ D'.map lp₁) j₁.obj.hom (by simp [reassoc_of% hq, Aux.w])
-      obtain ⟨ib, vb₁, vb₂, heqb⟩ := exists_eq_of_preservesColimit_yoneda hc
-        (q ≫ D'.map lp₂) j₂.obj.hom (by simp [reassoc_of% hq, Aux.w])
-      obtain ⟨i₀, il₀, ir₀, heq⟩ := IsCofiltered.cospan va₁ vb₁
-      refine ⟨⟨⟨i₀, l', D.map il₀ ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq, l']⟩, ?_, ?_, trivial⟩
-      · exact ObjectProperty.homMk ⟨il₀ ≫ va₂, lp₁, by simp [heqa]⟩
-      · exact ObjectProperty.homMk ⟨ir₀ ≫ vb₂, lp₂, by
-          dsimp
-          rw [← Functor.map_comp_assoc, heq]
-          simp [heqb]⟩
-    · intro j₁ j₂ u v
-      obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc
-        (f ≫ c'.π.app (IsCofiltered.eq u.hom.right v.hom.right))
-      obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
-        (q ≫ D'.map (IsCofiltered.eqHom _ _)) j₁.obj.hom (by simp [reassoc_of% hq, Aux.w])
-      obtain ⟨i₀, α, β, hα, hβ⟩ := IsCofiltered.bowtie u.hom.left (va₂ ≫ v.hom.left) (𝟙 _) va₂
-      refine ⟨⟨⟨i₀, IsCofiltered.eq u.hom.right v.hom.right,
-          D.map β ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq]⟩, ?_, ?_⟩
-      · refine ObjectProperty.homMk
-          ⟨β ≫ va₂, IsCofiltered.eqHom _ _, ?_⟩
-        simp [heqa]
-      · ext
-        · simp only [Category.comp_id] at hβ
-          subst hβ
-          simpa using hα
-        · simp [← IsCofiltered.eq_condition]
-  constructor
-
-include hc in
-lemma initial_projLeft : (Aux.projLeft f).Initial := by
-  constructor
-  intro i
-  have : Nonempty (CostructuredArrow (Aux.projLeft f) i) := by
-    obtain ⟨i'⟩ := IsCofiltered.nonempty (C := I')
-    obtain ⟨a, p, hp⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app i')
-    exact ⟨CostructuredArrow.mk
-      (Y := ⟨⟨IsCofiltered.min i a, i', D.map (IsCofiltered.minToRight _ _) ≫ p⟩, by
-        simp [Aux, hp]⟩)
-      (IsCofiltered.minToLeft _ _)⟩
-  refine zigzag_isConnected fun j₁ j₂ ↦ ?_
-  obtain ⟨i₁, l, r, hlr⟩ := IsCofiltered.cospan j₁.hom j₂.hom
-  obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc
-    (f ≫ c'.π.app (IsCofiltered.min j₁.left.obj.right j₂.left.obj.right))
-  let l' := IsCofiltered.min j₁.left.obj.right j₂.left.obj.right
-  let lp₁ := IsCofiltered.minToLeft j₁.left.obj.right j₂.left.obj.right
-  let lp₂ := IsCofiltered.minToRight j₁.left.obj.right j₂.left.obj.right
-  obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
-    (q ≫ D'.map lp₁) j₁.left.obj.hom (by simp [reassoc_of% hq, Aux.w])
-  obtain ⟨ib, vb₁, vb₂, heqb⟩ := exists_eq_of_preservesColimit_yoneda hc
-    (q ≫ D'.map lp₂) j₂.left.obj.hom (by simp [reassoc_of% hq, Aux.w])
-  obtain ⟨i₀, il₀, ir₀, heq₁, heq₂⟩ := IsCofiltered.bowtie va₁ vb₁ (va₂ ≫ j₁.hom) (vb₂ ≫ j₂.hom)
-  let middle : CostructuredArrow (Aux.projLeft f) i :=
-    CostructuredArrow.mk (Y := ⟨⟨i₀, l', D.map il₀ ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq, l']⟩)
-      (il₀ ≫ va₂ ≫ j₁.hom)
-  trans middle
-  · refine .of_inv ?_
-    refine CostructuredArrow.homMk ?_ ?_
-    · refine ObjectProperty.homMk ?_
-      refine .mk (il₀ ≫ va₂) lp₁ ?_
-      · dsimp [middle]
-        rw [← Functor.map_comp_assoc]
-        simp only [Functor.map_comp, Category.assoc]
-        rw [heqa]
-    · simp [middle]
-  · refine .of_hom ?_
-    refine CostructuredArrow.homMk ?_ ?_
-    · refine ObjectProperty.homMk ?_
-      refine .mk (ir₀ ≫ vb₂) lp₂ ?_
-      · dsimp [middle]
-        rw [← Functor.map_comp_assoc, heq₁]
-        simp [heqb]
-    · simp [middle, heq₂]
-
-include hc in
-lemma initial_projRight : (Aux.projRight f).Initial := by
-  refine ⟨fun i' ↦ ?_⟩
-  have : Nonempty (CostructuredArrow (Aux.projRight f) i') := by
-    obtain ⟨i, p, hp⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app i')
-    exact ⟨CostructuredArrow.mk (Y := ⟨Comma.mk i i' p, hp⟩) <| 𝟙 _⟩
-  refine zigzag_isConnected fun j₁ j₂ ↦ ?_
-  obtain ⟨l', lp₁, lp₂, hlp⟩ := IsCofiltered.cospan j₁.hom j₂.hom
-  obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app l')
-  obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
-    (q ≫ D'.map lp₁) j₁.left.obj.hom (by simp [reassoc_of% hq, Aux.w]; rfl)
-  obtain ⟨ib, vb₁, vb₂, heqb⟩ := exists_eq_of_preservesColimit_yoneda hc
-    (q ≫ D'.map lp₂) j₂.left.obj.hom (by simp [reassoc_of% hq, Aux.w]; rfl)
-  obtain ⟨i₀, il₀, ir₀, heq⟩ := IsCofiltered.cospan va₁ vb₁
-  let middle : CostructuredArrow (Aux.projRight f) i' :=
-    CostructuredArrow.mk (Y := ⟨⟨i₀, l', D.map il₀ ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq]⟩)
-      (lp₁ ≫ j₁.hom)
-  trans middle
-  · refine .of_inv ?_
-    refine CostructuredArrow.homMk ?_ ?_
-    · refine ObjectProperty.homMk ?_
-      refine .mk (il₀ ≫ va₂) lp₁ ?_
-      · dsimp [middle]
-        rw [← Functor.map_comp_assoc]
-        simp only [Functor.map_comp, Category.assoc]
-        rw [heqa]
-    · simp [middle]
-  · refine .of_hom ?_
-    refine CostructuredArrow.homMk ?_ ?_
-    · refine ObjectProperty.homMk ?_
-      refine .mk (ir₀ ≫ vb₂) lp₂ ?_
-      · dsimp [middle]
-        rw [← Functor.map_comp_assoc, heq]
-        simp [heqb]
-    · simp [middle, hlp]
-
-@[simps]
-def map : Aux.projLeft f ⋙ D ⟶ Aux.projRight f ⋙ D' where
-  app A := A.obj.hom
-
-end ConstructLimitMap
-
-variable
-  [IsCofiltered I] [IsCofiltered I']
-  [∀ i : I', PreservesColimit D.op (yoneda.obj (D'.obj i))]
-
-set_option linter.unusedSectionVars false in
-open ConstructLimitMap in
-include hc hc' in
-lemma Limits.exists_eq_isLimitMap_of_preservesColimit_yoneda :
-    ∃ (J : Type (max u₂ u₃ v₁))
-      (_ : Category.{max v₂ v₃} J) (_ : IsCofiltered J) (G : J ⥤ I) (G' : J ⥤ I')
-      (_ : G.Initial) (_ : G'.Initial) (g : G ⋙ D ⟶ G' ⋙ D'),
-      f = IsLimit.map (c.whisker _) ((Functor.Initial.isLimitWhiskerEquiv _ _).symm hc') g := by
-  have := initial_projRight hc f
-  have := initial_projLeft hc f
-  use (Aux f).FullSubcategory, inferInstance, isCofiltered hc f,
-    Aux.projLeft f, Aux.projRight f, inferInstance, inferInstance, map f
-  apply ((Functor.Initial.isLimitWhiskerEquiv _ _).symm hc').hom_ext
-  intro i'
-  rw [IsLimit.map_π]
-  apply i'.property.symm
 
 end CategoryTheory
 

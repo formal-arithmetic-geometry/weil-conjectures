@@ -38,7 +38,7 @@ theorem pointReductionQuotient_properties (l : ℕ) [Fact l.Prime]
       (AlgebraicGeometry.uniformizer_ne_zero l E)) (congrArg ULift.down hxy)
   · intro x
     obtain ⟨y, hy⟩ := Ideal.Quotient.mk_surjective x.down
-    exact ⟨ULift.up y, ULift.ext _ _ hy⟩
+    exact ⟨ULift.up y, ULift.ext hy⟩
   · intro x
     change ULift.up (Ideal.Quotient.mk _ x.down) = 0 ↔ _
     rw [ULift.ext_iff]
@@ -47,7 +47,7 @@ theorem pointReductionQuotient_properties (l : ℕ) [Fact l.Prime]
       Ideal.span_singleton_pow, Ideal.mem_span_singleton]
     constructor
     · rintro ⟨y, hy⟩
-      exact ⟨ULift.up y, ULift.ext _ _ hy.symm⟩
+      exact ⟨ULift.up y, ULift.ext hy.symm⟩
     · rintro ⟨y, hy⟩
       exact ⟨y.down, (congrArg ULift.down hy).symm⟩
 

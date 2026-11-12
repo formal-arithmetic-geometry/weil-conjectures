@@ -1359,6 +1359,10 @@ private theorem exists_adapted_resolution
   have : HasLimitsOfSize.{w, w} B := inferInstance
   have : HasFiniteProducts A := inferInstance
   have : HasFiniteProducts B := inferInstance
+  have (I : Type w) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{w} (ring R).obj) := PresheafOfModules.hasColimitsOfShape _ _
+  have (I : Type w) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{w} (ring R').obj) := PresheafOfModules.hasColimitsOfShape _ _
   have : HasFiniteCoproducts A := inferInstance
   have : HasFiniteCoproducts B := inferInstance
   let := isMonoidal_W_independentCoefficients R

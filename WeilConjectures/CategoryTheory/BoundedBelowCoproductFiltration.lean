@@ -109,11 +109,11 @@ private noncomputable def oneStep
 
 private theorem oneStep_top
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : p ≤ 0) :
-    (oneStep X).step p = ⊤ := if_pos hp
+    (oneStep X).step p = ⊤ := ite_eq_left hp
 
 private theorem oneStep_bot
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : ¬p ≤ 0) :
-    (oneStep X).step p = ⊥ := if_neg hp
+    (oneStep X).step p = ⊥ := ite_eq_right hp
 
 private theorem oneStep_finite
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) : (oneStep X).IsFinite := by
@@ -121,7 +121,7 @@ private theorem oneStep_finite
 
 private noncomputable def oneStepHom
     {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) :
-    FilteredObject.Hom ⟨X, oneStep X⟩ ⟨Y, oneStep Y⟩ where
+    WeilFilteredObject.Hom ⟨X, oneStep X⟩ ⟨Y, oneStep Y⟩ where
   hom := f
   preserves p := by
     change ∃ lift : (((oneStep X).step p) : C) ⟶ (((oneStep Y).step p) : C),
@@ -134,8 +134,8 @@ private noncomputable def oneStepHom
 
 private theorem oneStep_restriction_isIso
     {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) [IsIso f] (p : ℤ) :
-    IsIso (FilteredObject.restrictionSteps (oneStepHom f) p) := by
-  have hr : FilteredObject.restrictionSteps (oneStepHom f) p ≫
+    IsIso (WeilFilteredObject.restrictionSteps (oneStepHom f) p) := by
+  have hr : WeilFilteredObject.restrictionSteps (oneStepHom f) p ≫
       ((oneStep Y).step p).arrow = ((oneStep X).step p).arrow ≫ f :=
     Classical.choose_spec ((oneStepHom f).preserves p)
   by_cases hp : p ≤ 0
@@ -145,9 +145,9 @@ private theorem oneStep_restriction_isIso
     have hY : IsIso ((oneStep Y).step p).arrow := by
       rw [oneStep_top _ p hp]
       infer_instance
-    have : IsIso (FilteredObject.restrictionSteps (oneStepHom f) p ≫
+    have : IsIso (WeilFilteredObject.restrictionSteps (oneStepHom f) p ≫
         ((oneStep Y).step p).arrow) := by rw [hr]; infer_instance
-    exact IsIso.of_isIso_comp_right (FilteredObject.restrictionSteps (oneStepHom f) p)
+    exact IsIso.of_isIso_comp_right (WeilFilteredObject.restrictionSteps (oneStepHom f) p)
       ((oneStep Y).step p).arrow
   · have hX : IsZero (((oneStep X).step p) : C) := by
       rw [oneStep_bot _ p hp]
@@ -159,26 +159,26 @@ private theorem oneStep_restriction_isIso
 
 private theorem oneStep_graded_isIso
     {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) [IsIso f] (p : ℤ) :
-    IsIso (FilteredObject.gradedMapSteps (oneStepHom f) p) := by
+    IsIso (WeilFilteredObject.gradedMapSteps (oneStepHom f) p) := by
   let phi := oneStepHom f
   let iX := Subobject.ofLE ((oneStep X).step (p + 1)) ((oneStep X).step p)
     ((oneStep X).antitone_step (by omega))
   let iY := Subobject.ofLE ((oneStep Y).step (p + 1)) ((oneStep Y).step p)
     ((oneStep Y).antitone_step (by omega))
-  have hcomm : iX ≫ FilteredObject.restrictionSteps phi p =
-      FilteredObject.restrictionSteps phi (p + 1) ≫ iY := by
+  have hcomm : iX ≫ WeilFilteredObject.restrictionSteps phi p =
+      WeilFilteredObject.restrictionSteps phi (p + 1) ≫ iY := by
     apply (cancel_mono ((oneStep Y).step p).arrow).1
-    have h (r : ℤ) : FilteredObject.restrictionSteps phi r ≫
+    have h (r : ℤ) : WeilFilteredObject.restrictionSteps phi r ≫
         ((oneStep Y).step r).arrow = ((oneStep X).step r).arrow ≫ f :=
       Classical.choose_spec (phi.preserves r)
     dsimp [iX, iY]
     simp only [Category.assoc, Subobject.ofLE_arrow, h]
     rw [← Category.assoc, Subobject.ofLE_arrow]
-  have hmap : FilteredObject.gradedMapSteps phi p =
-      cokernel.map iX iY (FilteredObject.restrictionSteps phi (p + 1))
-        (FilteredObject.restrictionSteps phi p) hcomm := by
+  have hmap : WeilFilteredObject.gradedMapSteps phi p =
+      cokernel.map iX iY (WeilFilteredObject.restrictionSteps phi (p + 1))
+        (WeilFilteredObject.restrictionSteps phi p) hcomm := by
     apply (cancel_epi (cokernel.π iX)).1
-    exact (Classical.choose_spec (FilteredObject.exists_gradedMap_steps _ _ phi p)).trans
+    exact (Classical.choose_spec (WeilFilteredObject.exists_gradedMap_steps _ _ phi p)).trans
       (cokernel.π_desc _ _ _).symm
   have := oneStep_restriction_isIso f p
   have := oneStep_restriction_isIso f (p + 1)
@@ -234,11 +234,11 @@ theorem exists_boundedBelow_coproduct_filtration
           (K i))))
       (FT : DecreasingFiltration
         ((F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj S))
-      (phi : FilteredObject.Hom ⟨_, FS⟩ ⟨_, FT⟩),
+      (phi : WeilFilteredObject.Hom ⟨_, FS⟩ ⟨_, FT⟩),
       FS.IsFinite ∧ FT.IsFinite ∧
         phi.hom = Sigma.desc (fun i ↦
           (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)) ∧
-        ∀ p : ℤ, IsIso (FilteredObject.gradedMapSteps phi p) := by
+        ∀ p : ℤ, IsIso (WeilFilteredObject.gradedMapSteps phi p) := by
   obtain ⟨X, Y, T, hDX, hDY, hEX, hEY, eX, eY, hD, hE⟩ :=
     exists_coproduct_truncation_couple F I K S u a hK hS
   have hT (p r : ℤ) : IsIso (T.tE p r) := by

@@ -7,11 +7,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import WeilConjectures.AlgebraicGeometry.FormalCompletionPushforwardLimitAppBijective
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The proper pushforward comparison is invertible on inverse limits
 

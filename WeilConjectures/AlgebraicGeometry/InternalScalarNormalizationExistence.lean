@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.InternalScalarPullbackNormalizationData
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
 
@@ -113,7 +115,10 @@ theorem internal_section_scalar_normalization_exists (a : Λ ⟶ Λ') [IsMonHom 
   refine ⟨s, hr, ho, ?_⟩
   intro P hP hflat
   have he : e.hom.app (DerivedCategory.Q.obj P) ≫ εc.app P = compute a T P := by
-    rw [← hεh P, compute_eq_scalarCounit]
+    have hε := hεh P
+    change εh.app _ = LF.map (𝟙 _) ≫ εc.app P ≫ 𝟙 _ at hε
+    erw [LF.map_id, Category.id_comp, Category.comp_id] at hε
+    rw [← hε, compute_eq_scalarCounit]
     unfold e
     change (Functor.leftDerivedUnique LF (D a T) (scalarCounit a T) εh
       (HomotopyCategory.quasiIso (Modules Λ T) (.up ℤ))).hom.app

@@ -48,7 +48,7 @@ private theorem crossComponent_nat (X X' : Scheme.{v}) (f : X' ⟶ X)
         (pushforward f).map
           ((((alternatingCofaceMapComplex X'.Modules).obj A').extendXIso
             ComplexShape.embeddingUpNat (i := n) rfl).inv) := by
-  simp only [crossComponent, Nat.cast_nonneg, dif_pos, Int.toNat_natCast]
+  simp only [crossComponent, Nat.cast_nonneg, dite_eq_left, Int.toNat_natCast]
 
 private theorem crossComponent_comm (X X' : Scheme.{v}) (f : X' ⟶ X)
     (A : CosimplicialObject X.Modules) (A' : CosimplicialObject X'.Modules)

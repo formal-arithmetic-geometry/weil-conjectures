@@ -305,8 +305,7 @@ theorem flatIteratedScalarExtension_homology_square
     funext j
     apply AddCommGrpCat.hom_ext
     ext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul t x =>
       change tau.hom.f j ((1 : D) ⊗ₜ[E, k] (vE.f j (t ⊗ₜ[A, f] x))) =
         vD.f j (t ⊗ₜ[A, f] x)

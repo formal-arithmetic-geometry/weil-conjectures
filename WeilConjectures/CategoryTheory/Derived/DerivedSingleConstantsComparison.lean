@@ -31,33 +31,13 @@ private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category 
     (F : C ⥤ D) (H : D ⥤ E) [F.Additive] [H.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (X : C) :
-    (Functor.mapDerivedCategoryCompIso F H).hom.app
+    (Functor.mapDerivedCategoryCompIso F H).inv.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       H.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
       (H.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
     ((F ⋙ H).mapDerivedCategorySingleFunctor 0).hom.app X := by
-  simp only [Functor.mapDerivedCategorySingleFunctor, Iso.trans_hom,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  dsimp [DerivedCategory.singleFunctorIsoCompQ]
-  simp only [Functor.map_comp, CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp,
-    Category.assoc]
-  erw [H.mapDerivedCategoryFactors.hom.naturality_assoc]
-  erw [← Functor.mapDerivedCategoryCompIso_fac F H
-    ((CochainComplex.singleFunctor C 0).obj X)]
-  simp only [Functor.comp_map, Category.assoc]
-  congr 1
-  congr 1
-  congr 1
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  congr 1
-  apply HomologicalComplex.to_single_hom_ext
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Functor.map_comp,
-    Category.assoc, Iso.map_inv_hom_id_assoc,
-    Functor.mapHomologicalComplexCompIso_hom_app_f, Iso.refl_hom, NatTrans.id_app,
-    Functor.comp_obj, Functor.comp_map]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app,
+    Iso.inv_hom_id_app_assoc]
 
 /-- A derived natural isomorphism agrees with its coefficient map on a single object.
 Source: `mapDerivedCategoryNatIso_fac` and the definition of
@@ -122,15 +102,15 @@ theorem derived_single_constants_comparison
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     [PreservesFiniteLimits K] [PreservesFiniteColimits K]
     (e : F ⋙ H ≅ K) (X : C) :
-    ((Functor.mapDerivedCategoryCompIso F H).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F H ≪≫
         Functor.mapDerivedCategoryNatIso e).hom.app
           ((DerivedCategory.singleFunctor C 0).obj X) ≫
       (K.mapDerivedCategorySingleFunctor 0).hom.app X =
     H.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
       (H.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) ≫
       (DerivedCategory.singleFunctor E 0).map (e.hom.app X) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [single_nat, ← single_comp F H]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory.Functor

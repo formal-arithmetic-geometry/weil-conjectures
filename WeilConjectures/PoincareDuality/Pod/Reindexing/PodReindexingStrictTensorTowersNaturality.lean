@@ -46,7 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local instance 2001] integralOperationsFiniteHasMap
 attribute [local irreducible] SheafOfModules.monoidalCategory
 attribute [local implicit_reducible] integralOperationsTensorTowerFunctor
-  Functor.ofOpSequence Functor.ofSequence Functor.mapHomologicalComplex
+  Functor.ofOpSequence Functor.ofSequence
   integralOperationsTensorLevel integralOperationsRestrict integralOperationsTensorComposite
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj podGoodReindex isoSectionwiseModuleInverseImage

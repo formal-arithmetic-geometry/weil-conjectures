@@ -63,7 +63,7 @@ private theorem restrict_finiteFree_model (Y : Scheme.{u})
       CategoryTheory.Limits.comp_preservesFiniteLimits A F
     have : CategoryTheory.Limits.PreservesFiniteColimits (A ⋙ F) :=
       CategoryTheory.Limits.comp_preservesFiniteColimits A F
-    let e := (Functor.mapDerivedCategoryCompIso A F).symm ≪≫
+    let e := (Functor.mapDerivedCategoryCompIso A F) ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings Y.toRingedSpace) (homOfLE hVU))
     obtain ⟨j⟩ := he

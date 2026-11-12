@@ -105,7 +105,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso ProEtale.SemilinearProperOpen.pushComp
+  ProEtale.SemilinearProperOpen.pushComp
   pullbackTensorSequenceAdjunction ProEtale.SemilinearProperOpen.ordinaryAdj
   Adjunction.leftAdjointUniq Adjunction.ofNatIsoRight
 

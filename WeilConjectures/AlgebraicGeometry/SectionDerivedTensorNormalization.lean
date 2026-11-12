@@ -7,7 +7,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionTotalOplaxComparisonData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
 import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorCounit
 
@@ -83,15 +89,15 @@ def normalizationDerivedAssociator (T : Scheme.{u})
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedLeftUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (tensorUnit Λ T, M) ≅ M :=
-  @MonoidalCategoryStruct.leftUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
+  cast (by rfl) (@MonoidalCategoryStruct.leftUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The right unitor of the existing conjugate tensor.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
 def normalizationDerivedRightUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (M, tensorUnit Λ T) ≅ M :=
-  @MonoidalCategoryStruct.rightUnitor _ _
-    (Monoidal.transportStruct (derivedEquivalence Λ T)) M
+  cast (by rfl) (@MonoidalCategoryStruct.rightUnitor _ _
+    (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The regular-module unit comparison, obtained from localization and the ordinary unit.
 Source: Stacks 06YU (auxiliary; not a blueprint node). -/
@@ -478,7 +484,7 @@ private theorem unit_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (derivedPullback Λ f).map (DerivedRepresentativeSquare.regular Λ Y).hom ≫
         k ≫ (DerivedRepresentativeSquare.regular Λ X).inv) h
   dsimp only [tensorUnit] at h' ⊢
-  simp only [DerivedRepresentativeSquare.actualUnit, Category.assoc,
+  with_unfolding_all simp only [DerivedRepresentativeSquare.actualUnit, cast_eq, Category.assoc,
     ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
     Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id] at h'
   rw [regular_hom_eq] at h'
@@ -641,7 +647,7 @@ private theorem square_for_lax {C₁ C₂ D₁ D₂ : Type*}
     γ.inv.app (a ⊗ b) ≫ k ≫ (γ.inv.app a ⊗ₘ γ.inv.app b)) (h a b)
   simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.hom_inv_id_app,
     id_tensorHom_id, Category.comp_id, Iso.inv_hom_id_app_assoc,
-    Functor.Monoidal.map_μ_δ_assoc] at hh
+    Functor.Monoidal.μ_δ_map_assoc] at hh
   dsimp only [Functor.comp_obj] at hh
   change (d.app (Q₁.obj a)).app (Q₁.obj b) ≫ (γ.inv.app a ⊗ₘ γ.inv.app b) ≫ 𝟙 _ = _
   erw [Category.comp_id]
@@ -978,7 +984,8 @@ theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (tensor Λ T) (𝟙_ (DerivedCategory (internalModules Λ T))) (tensorUnit Λ T)
       (fun M N P ↦ α_ M N P) (fun M ↦ λ_ M) (fun M ↦ ρ_ M)
       (normalizationDerivedAssociator Λ T) (normalizationDerivedLeftUnitor Λ T)
-      (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom (𝟙 _)) ∧
+      (normalizationDerivedRightUnitor Λ T) (tensorComparison Λ T).hom
+        (cast (by rfl) (𝟙 (tensorUnit Λ T)))) ∧
     (∀ M N : DerivedCategory (internalModules Λ Y),
       (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫
           (tensorComparison Λ X).hom.app
@@ -1003,7 +1010,7 @@ theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((derivedEquivalence Λ X).functor.map
         (normalizationDerivedInternalUnit Λ f).hom =
       (derivedPullComparison Λ f).hom.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
-        normalizationDerivedSectionUnit Λ f) ∧
+        cast (by rfl) (normalizationDerivedSectionUnit Λ f)) ∧
     TensorConstraintCondition (derivedPullback Λ f) (tensor Λ Y) (tensor Λ X)
       (tensorUnit Λ Y) (tensorUnit Λ X)
       (normalizationDerivedAssociator Λ Y) (normalizationDerivedLeftUnitor Λ Y)

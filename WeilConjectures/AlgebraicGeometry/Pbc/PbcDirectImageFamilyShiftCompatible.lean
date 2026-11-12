@@ -22,6 +22,27 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe w u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+private theorem pbcAssocWhiskerShift
+    {C₁ C₂ C₃ D₁ D₂ D₃ : Type*}
+    [Category* C₁] [Category* C₂] [Category* C₃]
+    [Category* D₁] [Category* D₂] [Category* D₃]
+    [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
+    [HasShift D₁ ℤ] [HasShift D₂ ℤ] [HasShift D₃ ℤ]
+    {F : C₁ ⥤ C₂} {G : C₂ ⥤ C₃} {F' : D₁ ⥤ D₂} {G' : D₂ ⥤ D₃}
+    {I : C₁ ⥤ D₁} {J : C₂ ⥤ D₂} {K : C₃ ⥤ D₃}
+    [F.CommShift ℤ] [G.CommShift ℤ] [F'.CommShift ℤ] [G'.CommShift ℤ]
+    [I.CommShift ℤ] [J.CommShift ℤ] [K.CommShift ℤ]
+    (eF : F ⋙ J ≅ I ⋙ F') (eG : G ⋙ K ≅ J ⋙ G')
+    [NatTrans.CommShift eF.hom ℤ] [NatTrans.CommShift eG.hom ℤ] :
+    let e := Functor.associator F G K ≪≫ Functor.isoWhiskerLeft F eG ≪≫
+      (Functor.associator F J G').symm ≪≫ Functor.isoWhiskerRight eF G' ≪≫
+      Functor.associator I F' G'
+    NatTrans.CommShift e.hom ℤ ∧ NatTrans.CommShift e.inv ℤ := by
+  dsimp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv]
+  constructor <;> infer_instance
+
 private theorem leftShift_unique
     {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
     (F : C ⥤ D) (G : D ⥤ C) [G.CommShift ℤ] (adj : F ⊣ G)
@@ -310,9 +331,7 @@ private theorem integralPushShift_exists (f : X ⟶ Y)
       (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eI AF ≪≫
       Functor.associator _ _ _
   have : NatTrans.CommShift e3.hom ℤ := by
-    dsimp only [e3, Iso.trans_hom, Iso.symm_hom,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
-    infer_instance
+    exact (pbcAssocWhiskerShift eI eBF).1
   have := hS
   apply ScalarLocalization.cscAssocShift eBE eJ e3 b.hom bA.hom
   ext K
@@ -382,9 +401,10 @@ private theorem rationalBetaShift (f : X ⟶ Y)
       Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft I eF ≪≫
       (Functor.associator _ _ _).symm
   have : NatTrans.CommShift e3.hom ℤ := by
-    dsimp only [e3, Iso.trans_hom, Iso.symm_hom,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
-    infer_instance
+    simpa only [e3, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv, Category.assoc] using
+      (pbcAssocWhiskerShift eX.symm eF.symm).2
   apply ScalarLocalization.cscAssocShiftOfWhiskerLeft eE eY e3 bI.hom b.hom
   · intro K
     have hr := (pbcScalarDirectImage_rational l (pbcFiniteField.{u} l Ω E)

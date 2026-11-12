@@ -143,7 +143,7 @@ theorem picard_termwise_model_comparison
       picardTermwiseModelRestrictionIso,
       Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
       NatTrans.mapHomologicalComplex, Category.assoc]
-    simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Category.assoc]
     rfl
   · let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec

@@ -64,14 +64,14 @@ private theorem principalCechRowToTerms_naturality
             (g.f (n + 1 - (J.val.card : ℤ))) := by
         cases hd
         simp
-      simp only [principalCechRowToTerms_apply, dif_pos h]
+      simp only [principalCechRowToTerms_apply, dite_eq_left h]
       have hx := ConcreteCategory.congr_hom hc x
       simp only [ModuleCat.comp_apply] at hx
       erw [hx]
       exact (ConcreteCategory.congr_hom ht
         ((Limits.Pi.π (fun S : principalCechRowIndex r p ↦
           (principalCechSectionFunctor r f S.val.val).obj F) ⟨J, h⟩).f q x)).symm
-    · simp only [principalCechRowToTerms_apply, dif_neg h]
+    · simp only [principalCechRowToTerms_apply, dite_eq_right h]
       exact map_zero _
 
 /-- Graded regrouping commutes with maps acting columnwise on sections.

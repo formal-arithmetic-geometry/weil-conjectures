@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalClassEdgeMap
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSingleAdjunctionTranspose
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSectionPresheaf
 
@@ -223,6 +225,7 @@ theorem resolutionLocalClassEdge_single {T S : Scheme.{u}} (g : T ⟶ S) (q : �
   have hu : topEdgeSingleDirectImageMap g q M =
       DerivedCategory.Q.map t.inv ≫ F.complexDerivedUnit.app J := by
     unfold topEdgeSingleDirectImageMap
+    simp only [cast_eq]
     dsimp only [Functor.complexDerivedUnit, NatTrans.comp_app,
       Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app]

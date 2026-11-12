@@ -249,7 +249,7 @@ theorem exists_fs_adic_lift_over_finite_coefficient_map
     intro M hM
     let : M.IsMaximal := hM.2
     let : (M.comap (algebraMap C D)).IsMaximal :=
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal M
     have hMC : M.comap (algebraMap C D) = IsLocalRing.maximalIdeal C :=
       IsLocalRing.eq_maximalIdeal (inferInstance)
     have hM₀ : (M.comap ιA).comap (algebraMap A₀ A) =
@@ -258,7 +258,7 @@ theorem exists_fs_adic_lift_over_finite_coefficient_map
       exact IsLocalRing.maximalIdeal_comap γ
     let : (M.comap ιA).IsPrime := Ideal.comap_isPrime ιA M
     let : (M.comap ιA).IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_comap _
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under _
         (hM₀.symm ▸ IsLocalRing.maximalIdeal.isMaximal A₀)
     have hMA : M.comap ιA = IsLocalRing.maximalIdeal A :=
       IsLocalRing.eq_maximalIdeal (inferInstance)

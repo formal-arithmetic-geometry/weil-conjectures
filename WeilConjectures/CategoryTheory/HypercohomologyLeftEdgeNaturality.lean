@@ -52,12 +52,10 @@ theorem cochainHypercohomologyLeftEdge_naturality
   let H := DerivedCategory.Plus.homologyFunctor C n
   have hK : DerivedCategory.Plus.TStructure.t.IsGE (DerivedCategory.Plus.Q.obj K') 0 := by
     apply (DerivedCategory.Plus.isGE_ι_obj_iff _ 0).mp
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app K'.obj).symm 0
+    exact inferInstanceAs ((DerivedCategory.Q.obj K'.obj).IsGE 0)
   have hL : DerivedCategory.Plus.TStructure.t.IsGE (DerivedCategory.Plus.Q.obj L') 0 := by
     apply (DerivedCategory.Plus.isGE_ι_obj_iff _ 0).mp
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L'.obj).symm 0
+    exact inferInstanceAs ((DerivedCategory.Q.obj L'.obj).IsGE 0)
   let EK := ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).extendHomologyIso e
     (rfl : (n : ℤ) = n)
   let EL := ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj L).extendHomologyIso e
@@ -93,8 +91,7 @@ theorem cochainHypercohomologyLeftEdge_naturality
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     rw [DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality]
     simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
-  have hu := G.rightDerivedFunctorPlusUnit.naturality
-    ((HomotopyCategory.Plus.quotient B).map f')
+  have hu := G.rightDerivedFunctorPlusUnit.naturality f'
   have he := Abelian.SpectralObject.leftEdge_naturality
     (G.hypercohomologySpectralObjectFunctor.map (DerivedCategory.Plus.Q.map f')) (n : ℤ)
   have ht := (G.hypercohomologyLeftEdgeTargetIso n).hom.naturality

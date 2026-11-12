@@ -52,7 +52,7 @@ private theorem triangle_assoc
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hWL
   simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hWR
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hA
-  simp only [mapDerivedCategoryTriangleIso, Iso.trans_hom, NatTrans.comp_app,
+  simp only [mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hWL, reassoc_of% hm, hA, reassoc_of% hWR]
 

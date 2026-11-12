@@ -308,6 +308,7 @@ lemma _root_.CategoryTheory.Limits.mk_imageSubobject_arrow_comp_iso {X Y Z : C}
   congr 1
   simp
 
+
 /-- **The abutment of the first spectral sequence** of a first quadrant double complex `K`: the
 filtration of `Hⁿ(Tot K)` induced by the column filtration of the total complex, whose graded
 pieces are the `E∞`-terms. Its filtration is described by
@@ -334,6 +335,7 @@ lemma firstSpectralSequenceAbutment_filtration (n p : ℕ) :
       imageSubobject (HomologicalComplex.homologyMap
         (K.extendNat.columnFiltration.F p).arrow n ≫ (K.totalExtendNatHomologyIso n).hom) :=
   mk_imageSubobject_arrow_comp_iso _ _
+
 
 /-- **The abutment of the second spectral sequence** of a first quadrant double complex `K`
 (the first spectral sequence of `K.flip`): the filtration of `Hⁿ(Tot K)` induced by the row
@@ -366,6 +368,7 @@ lemma flipFirstSpectralSequenceAbutment_filtration (n p : ℕ) :
     exact mk_imageSubobject_arrow_comp_iso _ _
   rw [key _ _ (K.flip.firstSpectralSequenceAbutment_filtration n p)]
   simp only [Category.assoc, HomologicalComplex.homologyMapIso_hom]
+
 
 /-- **The first spectral sequence of a first quadrant double complex.** For a first quadrant
 double complex `K` in an abelian category, the filtration of the total complex by the columns
@@ -407,5 +410,6 @@ theorem exists_spectralSequence_flip {C : Type*} [Category* C] [Abelian C]
   obtain ⟨E, hE₂, hE⟩ := K.flip.exists_spectralSequence
   exact ⟨E, hE₂, hE.of_iso fun n ↦
     HomologicalComplex.homologyMapIso (K.totalFlipIso (ComplexShape.up ℕ)) n⟩
+
 
 end HomologicalComplex₂

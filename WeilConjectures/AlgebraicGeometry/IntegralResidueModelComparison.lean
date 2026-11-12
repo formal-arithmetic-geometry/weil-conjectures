@@ -89,7 +89,7 @@ private def residueDerivedComposite
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H) : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e
+  (Functor.mapDerivedCategoryCompIso F G) ≪≫ Functor.mapDerivedCategoryNatIso e
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
@@ -110,8 +110,8 @@ private def residueDerivedSquare
     (e : U ⋙ F ≅ G ⋙ V) :
     U.mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       G.mapDerivedCategory ⋙ V.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso G V
+  (Functor.mapDerivedCategoryCompIso U F) ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso G V).symm
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
@@ -697,7 +697,7 @@ theorem integral_residue_model_comparison (l : ℕ) [Fact l.Prime]
     exact (Scheme.fixedScalarProEtaleDerivedFactors X k
         ((H.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
       G.mapDerivedCategory.mapIso (H.mapDerivedCategoryFactors.app P).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso H G).symm.app (DerivedCategory.Q.obj P) ≪≫
+      (Functor.mapDerivedCategoryCompIso H G).app (DerivedCategory.Q.obj P) ≪≫
       HS.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso _)
   obtain ⟨_, _, β, _⟩ := (IntegralConstantCompletion.integral_constant_completion l E X).2.2.2 0
   exact ⟨d₀.app ((restriction l E X).obj K) ≪≫

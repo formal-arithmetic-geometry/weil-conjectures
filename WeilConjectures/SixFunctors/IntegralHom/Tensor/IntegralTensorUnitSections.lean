@@ -89,7 +89,6 @@ attribute [local implicit_reducible] homComplex totalTensor coefficientTotalTens
   evaluate projection
   homComplexπ moduleMonoidal coefficientUnit SheafOfModules.unit PresheafOfModules.unit
   CategoryTheory.Functor.map₂HomologicalComplex
-  CochainComplex.singleFunctors
 
 attribute [local irreducible] tensorUnitIso homComplexFunctor
   completedIntegralCoefficientSheafUnrestricted HasDerivedCategory.standard

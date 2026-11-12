@@ -7,9 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.TorsionControlledLocalCocycle
 import WeilConjectures.AlgebraicGeometry.TorsionControlledDescendedSourceComparisons
 import WeilConjectures.Topology.GlueSheavesOfModules
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraic descent with local formal comparisons
 

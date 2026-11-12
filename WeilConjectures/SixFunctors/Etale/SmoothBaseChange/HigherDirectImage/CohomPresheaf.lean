@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import
   WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
@@ -334,6 +336,33 @@ lemma Etale.derivedHomToHomology_app_apply
         (DerivedCategory.Plus.homologyFunctor _ 0).map β :=
   rfl
 
+/-- Pointwise formula for a left-whiskered natural transformation of presheaves of abelian
+groups (stated so that proofs can rewrite with it instead of unfolding). -/
+theorem Etale.whiskerLeft_app_apply {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {G H : D ⥤ AddCommGrpCat.{u + 1}} (α : G ⟶ H) (W : C) (g : (F ⋙ G).obj W) :
+    (Functor.whiskerLeft F α).app W g = α.app (F.obj W) g :=
+  rfl
+
+/-- Pointwise formula for `preadditiveYoneda.map`. -/
+theorem Etale.preadditiveYoneda_map_app_apply {C : Type*} [Category C] [Preadditive C]
+    {Y Z : C} (f : Y ⟶ Z) (W : Cᵒᵖ) (g : W.unop ⟶ Y) :
+    (preadditiveYoneda.map f).app W g = g ≫ f :=
+  rfl
+
+/-- Naturality of `Etale.derivedHomToHomology` in the complex. -/
+theorem Etale.derivedHomToHomology_naturality
+    {L L' : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : L ⟶ L') :
+    Functor.whiskerLeft (Etale.freeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
+        (preadditiveYoneda.map φ) ≫ Etale.derivedHomToHomology L' =
+      Etale.derivedHomToHomology L ≫ Functor.whiskerLeft (Etale.freeSheaf Λ X).op
+        (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ 0).map φ)) := by
+  ext W β
+  simp only [NatTrans.comp_app, ConcreteCategory.comp_apply]
+  rw [Etale.derivedHomToHomology_app_apply, Etale.whiskerLeft_app_apply,
+    Etale.whiskerLeft_app_apply, Etale.preadditiveYoneda_map_app_apply,
+    Etale.preadditiveYoneda_map_app_apply, Etale.derivedHomToHomology_app_apply,
+    CategoryTheory.Functor.map_comp, Category.assoc]
+
 /-- The sections map of a morphism of sheaves of `Λ`-modules, on the underlying presheaves of
 abelian groups. -/
 noncomputable abbrev Etale.sectionsMap {G G' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -344,6 +373,21 @@ noncomputable abbrev Etale.sectionsMap {G G' : Sheaf X.smallEtaleTopology (Modul
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G').obj :=
   ((sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map g).hom
+
+/-- `Etale.moduleFreeSheafSections` is `Etale.freeSheafSections` (the former is an abbreviation),
+stated as an equation so that proofs can rewrite instead of unfolding. -/
+theorem Etale.moduleFreeSheafSections_eq (G : Etale.ModuleSheaf Λ X) :
+    Etale.moduleFreeSheafSections Λ G = Etale.freeSheafSections Λ G :=
+  rfl
+
+/-- The underlying presheaf map of the isomorphism of sheaves of abelian groups induced by an
+isomorphism of sheaves of `Λ`-modules is `Etale.sectionsMap` of its `hom`. -/
+theorem Etale.sectionsMap_eq_mapIso_hom
+    {G G' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : G ≅ G') :
+    ((sheafToPresheaf _ _).mapIso ((sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapIso e)).hom =
+      Etale.sectionsMap e.hom :=
+  rfl
 
 lemma Etale.moduleFreeSheafSections_naturality
     {G G' : Etale.ModuleSheaf Λ X} (g : G ⟶ G') :
@@ -378,16 +422,13 @@ its image in `D⁺`. -/
 noncomputable abbrev Etale.homologyComparison :
     M.obj.homology 0 ⟶
       (DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M) :=
-  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj ≫
-    (DerivedCategory.homologyFunctor _ 0).map
-      ((DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj
 
 lemma Etale.derivedHomToHomology_app_eq {W : X.Etaleᵒᵖ}
     (β : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ X).obj W.unop) ⟶
       DerivedCategory.Plus.Q.obj M)
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((Etale.freeSheaf Λ X).obj W.unop) ⟶ M.obj)
-    (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
+    (hf : DerivedCategory.Plus.ι.map β = DerivedCategory.Q.map f) :
     (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M)).app W β =
       DerivedCategory.singleCyclesHom _ ≫ HomologicalComplex.cyclesMap f 0 ≫
         M.obj.homologyπ 0 ≫ Etale.homologyComparison M :=
@@ -426,7 +467,7 @@ theorem Etale.isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
     rw [reassoc_of% hτ, IsIso.hom_inv_id_assoc]
   obtain ⟨β, hβ⟩ : ∃ β : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶
       DerivedCategory.Plus.Q.obj M, DerivedCategory.Plus.ι.map β =
-        DerivedCategory.Q.map fM ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj :=
+        DerivedCategory.Q.map fM :=
     ⟨DerivedCategory.Plus.ι.preimage _, Functor.map_preimage _ _⟩
   refine ⟨β, ?_⟩
   rw [NatTrans.comp_app, ConcreteCategory.comp_apply,
@@ -524,7 +565,10 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_hz {W : X.Etal
     apply (Etale.moduleFreeSheafHomEquiv Λ W.unop
       ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).injective
     rw [Etale.moduleFreeSheafHomEquiv_apply, Etale.moduleFreeSheafHomEquiv_apply, map_zero]
-    have := Etale.derivedHomToHomology_app_eq M β f hf
+    have hf₀ : DerivedCategory.Plus.ι.map β = DerivedCategory.Q.map f := by
+      change _ = _ ≫ 𝟙 _ at hf
+      simpa only [Category.comp_id] using hf
+    have := Etale.derivedHomToHomology_app_eq M β f hf₀
     simp only [z, Category.assoc]
     rw [← this]
     exact hβ
@@ -562,6 +606,8 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_cover {W : X.E
         DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
     rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
     rfl
+  change _ = _ ≫ 𝟙 _ at hβ'
+  rw [Category.comp_id] at hβ'
   exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
     (homotopyOfSingleCycles M.obj f' b' hf'z)
 
@@ -587,9 +633,13 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
   rw [hsieve]
   let A := (Etale.moduleFreeSheaf Λ X).obj W.unop
   obtain ⟨f, hf⟩ := DerivedCategory.Plus.exists_ι_map_eq M β
+  have hf' : DerivedCategory.Plus.ι.map β =
+      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
+    change _ = _ ≫ 𝟙 _
+    simpa only [Category.comp_id] using hf
   let z := DerivedCategory.singleCyclesHom A ≫ HomologicalComplex.cyclesMap f 0
   have hz : z ≫ M.obj.homologyπ 0 = (0 : A ⟶ M.obj.homology 0) :=
-    Etale.isLocallyInjective_derivedHomToHomology_aux_hz M β hβ f hf
+    Etale.isLocallyInjective_derivedHomToHomology_aux_hz M β hβ f hf'
   let S := ShortComplex.mk (M.obj.toCycles (-1) 0) (M.obj.homologyπ 0) (by simp)
   have hS : S.Exact :=
     ShortComplex.exact_of_g_is_cokernel S (M.obj.homologyIsCokernel (-1) 0 (by simp))
@@ -612,7 +662,7 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
       ← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, S.toCycles_i]
   simp only [Presheaf.equalizerSieve_apply, map_zero]
-  exact Etale.isLocallyInjective_derivedHomToHomology_aux_cover M g β f hf b' hφz
+  exact Etale.isLocallyInjective_derivedHomToHomology_aux_cover M g β f hf' b' hφz
 
 end Key
 
@@ -635,30 +685,30 @@ theorem Etale.isLocallyBijective_derivedHomToHomology
     (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj L'.obj))
   have := Etale.isLocallyInjective_derivedHomToHomology M
   have := Etale.isLocallySurjective_derivedHomToHomology M
+  have hw : Functor.whiskerLeft (Etale.freeSheaf Λ X).op
+      (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ 0).map e.inv)) ≫
+      Functor.whiskerLeft (Etale.freeSheaf Λ X).op
+        (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ 0).map e.hom)) ≫
+      Etale.freeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L) =
+      Etale.freeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L) := by
+    rw [← Category.assoc, ← Functor.whiskerLeft_comp, ← CategoryTheory.Functor.map_comp,
+      ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+      CategoryTheory.Functor.map_id, Functor.whiskerLeft_id', Category.id_comp]
   have hfac : Etale.derivedHomToHomology L ≫
-      Etale.moduleFreeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L) =
-    (Functor.isoWhiskerLeft (Etale.moduleFreeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
+      Etale.freeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L) =
+    (Functor.isoWhiskerLeft (Etale.freeSheaf Λ X ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
       (preadditiveYoneda.mapIso e.symm)).hom ≫
       (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M) ≫
-        Etale.moduleFreeSheafSections Λ
+        Etale.freeSheafSections Λ
           ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))) ≫
       ((sheafToPresheaf _ _).mapIso ((sheafCompose X.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapIso
           ((DerivedCategory.Plus.homologyFunctor _ 0).mapIso e))).hom := by
-    simp only [Category.assoc]
-    have hnat := Etale.moduleFreeSheafSections_naturality
-      ((DerivedCategory.Plus.homologyFunctor _ 0).map e.hom)
-    change _ = _ ≫ _ ≫ Etale.moduleFreeSheafSections Λ _ ≫
-      Etale.sectionsMap ((DerivedCategory.Plus.homologyFunctor _ 0).map e.hom)
-    rw [hnat]
-    ext W β
-    simp only [NatTrans.comp_app, ConcreteCategory.comp_apply]
-    congr 1
-    change _ = ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _ ≫
-      (DerivedCategory.Plus.homologyFunctor _ 0).map (β ≫ e.inv)) ≫
-        (DerivedCategory.Plus.homologyFunctor _ 0).map e.hom
-    rw [Etale.derivedHomToHomology_app_apply]
-    simp
+    rw [Etale.sectionsMap_eq_mapIso_hom, Functor.mapIso_hom, Category.assoc,
+      Etale.freeSheafSections_naturality
+        (G' := (DerivedCategory.Plus.homologyFunctor _ 0).obj L),
+      Functor.isoWhiskerLeft_hom, Functor.mapIso_hom,
+      Iso.symm_hom, ← Category.assoc, Etale.derivedHomToHomology_naturality, Category.assoc, hw]
   rw [hfac]
   constructor <;> infer_instance
 

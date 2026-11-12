@@ -128,7 +128,7 @@ def intrinsicSiteFunctorIso (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u}
       (ProEtale.comparisonUpperStar
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).mapDerivedCategory ⋙
         (sfIntrinsicDerivedEquivalence T A).functor :=
-  Functor.mapDerivedCategoryCompIso _ _
+  (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Site comparison and coefficient extension, in the intrinsic ringed presentation. -/
 @[irreducible] def siteScalarIso
@@ -161,8 +161,8 @@ def intrinsicSiteFunctorIso (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u}
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i
   let o : EX.functor ⋙ sfIntrinsicExtensionByZero c.i A ≅ J ⋙ EZ.functor :=
     EX.funInvIdAssoc (J ⋙ EZ.functor)
-  let od := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso o ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let od := Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso o ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   exact (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight od _ ≪≫ Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (sfIntrinsicDerivedDirectImageComparison c.g A) ≪≫

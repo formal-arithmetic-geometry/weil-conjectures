@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.ScalarInternalHomData
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
@@ -90,8 +92,8 @@ private theorem derived_square_fac
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     [PreservesFiniteLimits V] [PreservesFiniteColimits V]
     (e : U ⋙ G ≅ H ⋙ V) (P : CochainComplex A ℤ) :
-    let ed := (Functor.mapDerivedCategoryCompIso U G).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso H V
+    let ed := Functor.mapDerivedCategoryCompIso U G ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso H V).symm
     let ec := (Functor.mapHomologicalComplexCompIso (Iso.refl (U ⋙ G)) (.up ℤ)).symm ≪≫
       NatIso.mapHomologicalComplex e (.up ℤ) ≪≫
       Functor.mapHomologicalComplexCompIso (Iso.refl (H ⋙ V)) (.up ℤ)
@@ -105,11 +107,11 @@ private theorem derived_square_fac
   have hu := Functor.mapDerivedCategoryCompIso_fac U G P
   have hh := Functor.mapDerivedCategoryCompIso_fac H V P
   have he := Functor.mapDerivedCategoryNatIso_fac e P
-  change (Functor.mapDerivedCategoryCompIso U G).hom.app (DerivedCategory.Q.obj P) ≫
+  change (Functor.mapDerivedCategoryCompIso U G).inv.app (DerivedCategory.Q.obj P) ≫
     G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app P) ≫
     G.mapDerivedCategoryFactors.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map (𝟙 _) = _ at hu
-  change (Functor.mapDerivedCategoryCompIso H V).hom.app (DerivedCategory.Q.obj P) ≫
+  change (Functor.mapDerivedCategoryCompIso H V).inv.app (DerivedCategory.Q.obj P) ≫
     V.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app P) ≫
     V.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map (𝟙 _) = _ at hh
@@ -118,7 +120,7 @@ private theorem derived_square_fac
   simp only [Category.assoc]
   rw [hh, he]
   rw [← Category.assoc, ← hu]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
   change _ = G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app P) ≫
     G.mapDerivedCategoryFactors.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map (𝟙 _) ≫
@@ -247,9 +249,9 @@ private theorem derivedTransport
         DerivedCategory.Q.map ((adjI.mapHomologicalComplex (.up ℤ)).unit.app P)) ∧
       ∃ dr : U.mapDerivedCategory ⋙ eR.functor.mapDerivedCategory ≅
         eS0.functor.mapDerivedCategory ⋙ u.mapDerivedCategory,
-      (dr = (Functor.mapDerivedCategoryCompIso U eR.functor).symm ≪≫
+      (dr = Functor.mapDerivedCategoryCompIso U eR.functor ≪≫
         Functor.mapDerivedCategoryNatIso restriction ≪≫
-        Functor.mapDerivedCategoryCompIso eS0.functor u) ∧
+        (Functor.mapDerivedCategoryCompIso eS0.functor u).symm) ∧
       ∃ de : LF ⋙ eS0.functor.mapDerivedCategory ≅ eR.functor.mapDerivedCategory ⋙ F,
       (∀ P : CochainComplex A ℤ,
         eS0.functor.mapDerivedCategory.map (ε.app P) ≫
@@ -280,9 +282,9 @@ private theorem derivedTransport
     transportedLeftIso ERd F eS
   let dr : U.mapDerivedCategory ⋙ ERd ≅
       ESd ⋙ u.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso U ER).symm ≪≫
+    Functor.mapDerivedCategoryCompIso U ER ≪≫
       Functor.mapDerivedCategoryNatIso restriction ≪≫
-      Functor.mapDerivedCategoryCompIso ES (u)
+      (Functor.mapDerivedCategoryCompIso ES (u)).symm
   let ce : EX ⋙ ESc ≅ ERc ⋙ lc :=
     (Functor.mapHomologicalComplexCompIso (Iso.refl (L ⋙ ES)) _).symm ≪≫
       NatIso.mapHomologicalComplex extension _ ≪≫
@@ -637,11 +639,11 @@ theorem derived_section_scalar_transport
       SheafOfModules.scalarDerivedRestriction (φ)),
   -- Restriction comparison is precisely localization of the ordinary one.
   (derivedRestriction =
-    (Functor.mapDerivedCategoryCompIso (Mod.comap a)
-      (sectionModuleEquivalence J R).functor).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (Mod.comap a)
+      (sectionModuleEquivalence J R).functor ≪≫
     Functor.mapDerivedCategoryNatIso restriction ≪≫
-    Functor.mapDerivedCategoryCompIso (sectionModuleEquivalence J S).functor
-      (SheafOfModules.scalarRestriction (φ))) ∧
+    (Functor.mapDerivedCategoryCompIso (sectionModuleEquivalence J S).functor
+      (SheafOfModules.scalarRestriction (φ))).symm) ∧
   -- The comparison of the universal derived extensions.
   ∃ derivedExtension : (internalDerived ⋙
       (sectionModuleEquivalence J S).functor.mapDerivedCategory ≅

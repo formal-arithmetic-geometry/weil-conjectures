@@ -327,7 +327,7 @@ noncomputable def scalarHomRestrictionComp (a : R ⟶ S) (b : S ⟶ T) :
     scalarDerivedRestriction (a ≫ b) ≅
       scalarDerivedRestriction b ⋙ scalarDerivedRestriction a :=
   Functor.mapDerivedCategoryNatIso (scalarHomOrdinaryRestrictionComp.{c, v, r} a b) ≪≫
-    Functor.mapDerivedCategoryCompIso (scalarRestriction b) (scalarRestriction a)
+    (Functor.mapDerivedCategoryCompIso (scalarRestriction b) (scalarRestriction a)).symm
 
 /-- Identity coefficient restriction is the identity on the underlying module sheaves.
 Source: Stacks 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/

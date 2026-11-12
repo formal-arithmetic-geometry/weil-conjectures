@@ -161,6 +161,7 @@ private theorem precoverageSite {E : Type uC} [Category.{vC} E] [HasPullbacks E]
       (fun i ↦ IsPullback.of_hasPullback b (a i))]
     exact J.pullback_stable b ha
 
+
 private theorem precoverageTopology {E : Type uC} [Category.{vC} E]
     (J : GrothendieckTopology E) : J.toPrecoverage.toGrothendieck = J := by
   apply le_antisymm J.toGrothendieck_toPrecoverage_le

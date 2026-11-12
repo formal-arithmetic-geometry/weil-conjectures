@@ -35,6 +35,18 @@ This is the forward construction in Stacks Project, Tag 01XZ. -/
 private theorem isFinitePresentation_of_coherent (X : Scheme.{u}) (F : X.Modules)
     (h : RingedSpace.IsCoherent X.toRingedSpace F) : F.IsFinitePresentation := by
   classical
+  have (V : X.Opens) :
+      HasSheafify ((Opens.grothendieckTopology X).over V)
+        AddCommGrpCat.{u} := inferInstance
+  have (V : X.Opens) :
+      ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
+  have (V : X.Opens) (W : CategoryTheory.Over V) :
+      HasSheafify (((Opens.grothendieckTopology X).over V).over W)
+        AddCommGrpCat.{u} := inferInstance
+  have (V : X.Opens) (W : CategoryTheory.Over V) :
+      (((Opens.grothendieckTopology X).over V).over W).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   have : F.IsFiniteType := h.1
   obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
   have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by

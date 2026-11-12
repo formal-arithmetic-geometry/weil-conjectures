@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsTruncationIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic

@@ -94,11 +94,11 @@ private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcI
       (pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj
         ((pbcDerivedRestrict (WeilConjectures.purCoefficientIso l F W).inv).obj K) :=
   (Functor.mapDerivedCategoryCompIso (pbcRestrict (pbcScalarCoefficientMap l E F i W))
-      (pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv)).symm.app K ≪≫
+      (pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv)).app K ≪≫
     (Functor.mapDerivedCategoryNatIso (pbcScalarModelRestrictionIso l E F i W)).app K ≪≫
     (Functor.mapDerivedCategoryCompIso
       (pbcRestrict (WeilConjectures.purCoefficientIso l F W).inv)
-      (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).app K
+      (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).symm.app K
 
 
 private theorem scalarPrincipalMap
@@ -130,11 +130,11 @@ private theorem scalarPrincipalMap
     intro n
     rw [Category.assoc, hp, ← G.map_comp_assoc]
     simp only [towerTransitionEndomorphism, Preadditive.sub_comp,
-      Category.id_comp, towerProductShift, Pi.lift_π, G.map_sub,
+      Category.id_comp, towerProductShift, Pi.lift_comp_π, G.map_sub,
       Preadditive.sub_comp, G.map_comp, Category.assoc,
       Preadditive.comp_sub, Category.comp_id, hp]
     rw [← Category.assoc p.hom, hp, Category.assoc]
-    rw [← G.map_comp_assoc, Pi.lift_π, G.map_comp, Category.assoc,
+    rw [← G.map_comp_assoc, Pi.lift_comp_π, G.map_comp, Category.assoc,
       CochainComplex.principalLevelIso_step F μ n]
   have hu : G.map (CochainComplex.PrincipalCone.productUnit μ) ≫ p.hom =
       CochainComplex.PrincipalCone.productUnit ν := by
@@ -142,9 +142,9 @@ private theorem scalarPrincipalMap
     intro n
     rw [Category.assoc, hp, ← G.map_comp_assoc]
     change G.map ((Pi.lift _) ≫ Pi.π K n) ≫ (e n).hom = _
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     change G.map _ ≫ (e n).hom = (Pi.lift _) ≫ Pi.π L n
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     exact CochainComplex.principalLevelIso_inr F μ n
   let c := CochainComplex.coneSquareIso (G.map (towerTransitionEndomorphism f))
     (towerTransitionEndomorphism g) p p hsq

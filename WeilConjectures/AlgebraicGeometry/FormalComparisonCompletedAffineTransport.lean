@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -17,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FormalComparisonCompletedAffineData
 import WeilConjectures.AlgebraicGeometry.FormalSystemCompletedAffineSections
 import Mathlib.CategoryTheory.Limits.Preserves.Limits
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Flat transport of the comparison to the completed affine base
 

@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 
@@ -59,9 +61,9 @@ private theorem stalkComparison_normalized
     simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc]
   have ht'' := congrArg (fun a => a ≫ (comparisonStalkCohomology X' z i).map c.e'.hom) ht'
   simp only [Category.assoc] at ht''
-  simp only [stalkComparison, comparisonIntoPullback, Category.assoc, Functor.map_comp]
+  simp only [stalkComparison, comparisonIntoPullback, Category.assoc, Functor.map_comp, cast_eq]
   rw [← Functor.map_comp, ← Functor.map_comp, ← c.represents]
-  simp only [Functor.map_comp, IsIso.inv_hom_id_assoc]
+  simp only [Functor.map_comp, cast_eq, IsIso.inv_hom_id_assoc]
   rw [ht'']
 
 /-- Invertibility of the canonical stalk comparison is independent of coordinates.

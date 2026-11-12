@@ -151,8 +151,7 @@ theorem strictlyStandard_localized_conormal_split
       apply LinearMap.range_eq_top.mp
       apply top_unique
       intro x _
-      induction x using TensorProduct.induction_on with
-      | zero => exact N.zero_mem
+      induction x using TensorProduct.inductionOn with
       | tmul s x =>
         have hm := N.smul_mem s (hx x)
         simpa only [F, TensorProduct.mk_apply, TensorProduct.smul_tmul', smul_eq_mul,

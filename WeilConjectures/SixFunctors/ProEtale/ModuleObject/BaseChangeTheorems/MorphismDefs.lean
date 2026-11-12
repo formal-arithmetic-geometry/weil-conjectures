@@ -187,15 +187,7 @@ noncomputable def boundedConstructibleBaseChangeCounitStep :
     (Functor.leftUnitor _).hom
 
 variable {f g f' g'} in
-/-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
-`g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
-over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction (`ℚ̄_ℓ`-coefficient).
-
-Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
-proper; no such hypothesis is built into the definition. -/
-@[no_expose]
-noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
+noncomputable def boundedConstructibleBaseChangeImpl (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleUpperStar
       (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g' ⋙
@@ -204,13 +196,21 @@ noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     (boundedConstructibleBaseChangeSquareStep ℓ sq).hom ≫
       boundedConstructibleBaseChangeCounitStep ℓ f f' g'
 
+omit ℓ k in
 variable {f g f' g'} in
-private theorem boundedConstructibleBaseChange_def (sq : CommSq g' f' f g) :
-    boundedConstructibleBaseChange ℓ sq =
-      boundedConstructibleBaseChangeUnitStep ℓ f g f' ≫
-        (boundedConstructibleBaseChangeSquareStep ℓ sq).hom ≫
-          boundedConstructibleBaseChangeCounitStep ℓ f f' g' :=
-  rfl
+/-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
+`g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
+over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
+counit contraction (`ℚ̄_ℓ`-coefficient).
+
+Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
+proper; no such hypothesis is built into the definition. -/
+noncomputable irreducible_def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
+    boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleUpperStar
+      (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g' ⋙
+        boundedConstructibleLowerStar ℓ f' :=
+  boundedConstructibleBaseChangeImpl ℓ sq
 
 variable {f g f' g'} in
 /-- The adjunct presentation is the specified unit--square--counit exchange map. -/
@@ -252,7 +252,8 @@ lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
       Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
         (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
-  unfold boundedConstructibleBaseChange boundedConstructibleBaseChangeUnitStep
+  rw [boundedConstructibleBaseChange_def ℓ sq]
+  unfold boundedConstructibleBaseChangeImpl boundedConstructibleBaseChangeUnitStep
     boundedConstructibleBaseChangeSquareStep boundedConstructibleBaseChangeCounitStep
     Adjunction.exchangeRight
   rfl
@@ -316,15 +317,7 @@ noncomputable def boundedConstructibleBaseChangeCounitStep :
     (Functor.leftUnitor _).hom
 
 variable {f g f' g'} in
-/-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
-`g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
-over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
-counit contraction (`E`-coefficient).
-
-Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
-proper; no such hypothesis is built into the definition. -/
-@[no_expose]
-noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
+noncomputable def boundedConstructibleBaseChangeImpl (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
       (Profinite.continuousMapRingObj E) ℓ g ⟶
       boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g' ⋙
@@ -332,6 +325,22 @@ noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
   boundedConstructibleBaseChangeUnitStep ℓ E f g f' ≫
     (boundedConstructibleBaseChangeSquareStep ℓ E sq).hom ≫
       boundedConstructibleBaseChangeCounitStep ℓ E f f' g'
+
+omit ℓ k in
+variable {f g f' g'} in
+/-- The *base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a commutative square
+`g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories of module objects
+over `Λ`, assembled as the composite of the unit insertion, the square transport, and the
+counit contraction (`E`-coefficient).
+
+Proper base change asserts that this morphism is an isomorphism for a cartesian square with `f`
+proper; no such hypothesis is built into the definition. -/
+noncomputable irreducible_def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
+    boundedConstructibleLowerStar ℓ E f ⋙ boundedConstructibleUpperStar
+      (Profinite.continuousMapRingObj E) ℓ g ⟶
+      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g' ⋙
+        boundedConstructibleLowerStar ℓ E f' :=
+  boundedConstructibleBaseChangeImpl ℓ E sq
 
 variable {f g f' g'} in
 /-- The base-change morphism `BC_sq` is the canonical adjunct presentation
@@ -344,10 +353,7 @@ theorem boundedConstructibleBaseChange_eq_squareExchange (sq : CommSq g' f' f g)
         (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g)
         (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g')
         (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ sq) :=
-  (show boundedConstructibleBaseChange ℓ E sq =
-      boundedConstructibleBaseChangeUnitStep ℓ E f g f' ≫
-        (boundedConstructibleBaseChangeSquareStep ℓ E sq).hom ≫
-          boundedConstructibleBaseChangeCounitStep ℓ E f f' g' by rfl).trans
+  (boundedConstructibleBaseChange_def ℓ E sq).trans
     (Adjunction.squareExchange_eq_unit_square_counit _ _ _ _ _).symm
 
 variable {f g f' g'} in
@@ -360,7 +366,8 @@ lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
         (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ
           sq) := by
-  unfold boundedConstructibleBaseChange boundedConstructibleBaseChangeUnitStep
+  rw [boundedConstructibleBaseChange_def ℓ E sq]
+  unfold boundedConstructibleBaseChangeImpl boundedConstructibleBaseChangeUnitStep
     boundedConstructibleBaseChangeSquareStep boundedConstructibleBaseChangeCounitStep
     Adjunction.exchangeRight
   rfl

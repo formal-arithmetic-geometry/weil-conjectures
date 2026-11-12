@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Direct.ProEtaleDirectIm
 public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
@@ -214,9 +215,9 @@ private theorem simple_derived_mate_factors
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _
-          ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+          (Functor.mapDerivedCategoryCompIso G L' ≪≫
             Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso L H).hom)).app (DerivedCategory.Q.obj K) ≫
+            (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app (DerivedCategory.Q.obj K) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
@@ -302,8 +303,7 @@ theorem fixedScalarRestrictionDirectImageMap_factors
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) ℤ) :
     (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategory.map
-        ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorUnit.app
-          ((HomotopyCategory.quotient _ _).obj K)) ≫
+        ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorUnitQ K) ≫
       (fixedScalarRestrictionDirectImageMap φ f).app (DerivedCategory.Q.obj K) ≫
       (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.map
         ((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryFactors.hom.app
@@ -312,11 +312,10 @@ theorem fixedScalarRestrictionDirectImageMap_factors
         (((lowerStar (ModuleCat.{u + 1} B) f).mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (fixedScalarRestrictionDirectImageUnderived φ f).hom (.up ℤ)).app K) ≫
-      (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorUnit.app
-        ((HomotopyCategory.quotient _ _).obj
-          (((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapHomologicalComplex
-            (.up ℤ)).obj K)) := by
-  have h := simple_derived_mate_factors
+      (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorUnitQ
+        (((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapHomologicalComplex
+          (.up ℤ)).obj K) := by
+  have h := derived_mate_factors
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (upperStarRestrictScalarsIso φ f) K
@@ -324,7 +323,8 @@ theorem fixedScalarRestrictionDirectImageMap_factors
   unfold Functor.mapDerivedCategorySquareIso at hm
   erw [← hm] at h
   rw [restriction_underived_mate] at h
-  simpa only [fixedScalarRestrictionDirectImageUnderived, Iso.refl_hom] using h
+  simpa only [fixedScalarRestrictionDirectImageUnderived, Iso.refl_hom,
+    chainDerivedUnit, Functor.rightDerivedFunctorUnitQ] using h
 
 private noncomputable def scalarDiagram {C : Type (u + 1)} [Category.{u} C]
     (A : Type (u + 1)) [Ring A] :

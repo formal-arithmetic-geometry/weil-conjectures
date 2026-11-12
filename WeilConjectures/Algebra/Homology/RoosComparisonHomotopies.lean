@@ -137,7 +137,7 @@ private theorem signed_cone_homotopy
   refine ⟨{ hom := K, zero := ?_, comm := ?_ }⟩
   · intro p q hpq
     change ¬ (q + 1 = p) at hpq
-    simp only [K, dif_neg hpq]
+    simp only [K, dite_eq_right hpq]
   · intro j
     obtain ⟨p, rfl⟩ : ∃ p : ℤ, p + 1 = j := ⟨j - 1, by omega⟩
     rw [dNext_eq _ (show (ComplexShape.up ℤ).Rel (p + 1) (p + 1 + 1) from rfl),
@@ -145,7 +145,7 @@ private theorem signed_cone_homotopy
     apply (cancel_mono (e p).hom).1
     simp only [HomologicalComplex.id_f, Preadditive.add_comp, Category.id_comp]
     rw [hf]
-    simp only [K, ePrev, dif_pos rfl, Iso.trans_inv, biprod.mapIso_inv, Iso.refl_inv,
+    simp only [K, ePrev, dite_eq_left rfl, Iso.trans_inv, biprod.mapIso_inv, Iso.refl_inv,
       eqToIso.inv, eqToHom_refl, Category.id_comp, Category.assoc]
     rw [← Category.assoc (C.d (p + 1) (p + 1 + 1)), hd]
     simp only [Category.assoc]

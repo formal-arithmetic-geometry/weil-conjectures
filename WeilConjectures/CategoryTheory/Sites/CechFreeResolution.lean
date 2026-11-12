@@ -170,7 +170,7 @@ lemma cechNerveSigma_face_eq {Z : C} {f : Z ⟶ X} {m k : ℕ} {y : Fin (m + 1) 
   congr 1
   refine Pi.hom_ext _ _ fun l ↦ ?_
   rw [Category.assoc, ← hG]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   simp
 
 variable {U}
@@ -195,7 +195,7 @@ lemma cechFreeHomotopy_of {n : ℕ} {T : Cᵒᵖ} (y : Fin (n + 1) → ι)
   subst hf
   rw [cechFreeHomotopy]
   erw [FreeAbelianGroup.lift_apply_of]
-  rw [dif_pos h]
+  rw [dite_eq_left h]
 
 /-- The contracting homotopy `ℤ[yoneda X](T) ⟶ ℤ_𝔘[0](T)` in degree `-1`. -/
 noncomputable def cechFreeAugHomotopy (T : Cᵒᵖ) :
@@ -256,7 +256,7 @@ lemma cechFreeD_homotopy (n : ℕ) (T : Cᵒᵖ) (x : (cechFree U (n + 1)).obj T
         ext1
         simp only [Over.comp_left, Over.homMk_left, Category.assoc]
         rw [← Over.comp_left]
-        erw [Pi.lift_π]
+        erw [Pi.lift_comp_π]
     rw [e₀]
     simp only [cechNerveSigmaMap_app_apply] at e ⊢
     rw [Fin.val_zero, pow_zero, one_smul, add_assoc, add_eq_left, ← Finset.sum_add_distrib]
@@ -270,7 +270,7 @@ lemma cechFreeAugHomotopy_of {T : Cᵒᵖ} (f : T.unop ⟶ X) (h : ∃ a, Nonemp
         Over.mk f ⟶ cechNerveObj U (fun _ : Fin 1 ↦ h.choose)).left⟩ := by
   rw [cechFreeAugHomotopy]
   erw [FreeAbelianGroup.lift_apply_of]
-  rw [dif_pos h]
+  rw [dite_eq_left h]
 
 /-- The homotopy identity `d h + h ε = 1` in degree `0`. -/
 lemma cechFreeD_homotopy_zero (T : Cᵒᵖ) (x : (cechFree U 0).obj T) :
@@ -302,7 +302,7 @@ lemma cechFreeD_homotopy_zero (T : Cᵒᵖ) (x : (cechFree U 0).obj T) :
         (by funext l; obtain rfl : l = 0 := Fin.fin_one_eq_zero l; rfl) _ fun l ↦ by
         obtain rfl : l = 0 := Fin.fin_one_eq_zero l
         exact (cechNerveCons_π_of_eq_zero U Λ _ _ (by rfl) _).trans
-          (Pi.lift_π (fun _ : Fin 1 ↦ Λ) 0).symm
+          (Pi.lift_comp_π (fun _ : Fin 1 ↦ Λ) 0).symm
     rw [e₀, e₁]
     simp only [Fin.val_zero, pow_zero, one_smul, Fin.val_one, pow_one, neg_smul]
     rw [add_assoc]

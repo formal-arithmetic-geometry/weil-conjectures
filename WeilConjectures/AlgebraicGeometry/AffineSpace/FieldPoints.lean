@@ -82,4 +82,5 @@ lemma fieldPointsEquiv_symm_apply (a : L) :
     (fieldPointsEquiv k L).symm a = (fieldPointsEquivPi PUnit.{u + 1} k L).symm fun _ ↦ a :=
   rfl
 
+
 end AlgebraicGeometry.AffineSpace

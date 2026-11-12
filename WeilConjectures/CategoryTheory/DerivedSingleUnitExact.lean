@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedSingleUnit
 
 /-!
@@ -74,7 +76,8 @@ private theorem single_unit_term
     DerivedCategory.Q.map _
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
-  ext n
+  apply HomologicalComplex.hom_ext
+  intro n
   by_cases hn : n = 0
   · subst n
     simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,

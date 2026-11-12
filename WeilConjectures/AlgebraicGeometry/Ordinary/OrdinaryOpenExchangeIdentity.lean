@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExch
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryOpenModuleIdentity
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identity normalization for ordinary open exchange
 
@@ -16,8 +18,6 @@ Source: Stacks Project, Tags 03DI, 07A7 and 099N; the identity part of
 proof step 7 of `thm-cbc-complete-proetale`.
 -/
 
--- After pruning, this module only keeps private declarations.
-set_option linter.privateModule false
 
 
 @[expose] public noncomputable section
@@ -27,7 +27,9 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits
 
-private theorem idFactors
+namespace AlgebraicGeometry.Scheme.OrdinaryOpenExchangeIdentity
+
+theorem idFactors
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (P : CochainComplex C ℤ) :
     (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj P) =
@@ -44,7 +46,7 @@ private theorem idFactors
     Category.id_comp, Category.comp_id, Category.comp_id] at h
   exact h
 
-private theorem identityCounit
+theorem identityCounit
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (F G : C ⥤ C) [F.Additive] [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -68,6 +70,8 @@ private theorem identityCounit
   rw [Functor.mapDerivedCategoryNatIso_fac, ← Category.assoc, hn]
   simp only [eqToIso_refl, Iso.refl_hom, Category.id_comp]
 
+end AlgebraicGeometry.Scheme.OrdinaryOpenExchangeIdentity
+
 namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] cbcDatumOrdinaryTransport AdicCoefficientDatum.pullId
@@ -77,3 +81,4 @@ attribute [local irreducible] cbcOrdinaryExchange
   cbcDatumOrdinaryExchange
 
 end AlgebraicGeometry.Scheme
+-- Only imports remain after declaration-level pruning.

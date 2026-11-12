@@ -37,7 +37,7 @@ set_option genSizeOfSpec false
 set_option genSizeOf false
 set_option genCtorIdx false
 set_option linter.privateModule false
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective

@@ -60,8 +60,7 @@ variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F
 
 section TowerComposition
 attribute [local irreducible] integralOperationsTensorLevel integralOrdinaryScalarComp
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-  integralOperationsTensorTowerFunctor
+attribute [local implicit_reducible] integralOperationsTensorTowerFunctor
 
 /-- Normalized strict tensor tower comparisons respect coefficient composition.
 Source: Stacks 08TC and the blueprint coefficient comparison step 9.

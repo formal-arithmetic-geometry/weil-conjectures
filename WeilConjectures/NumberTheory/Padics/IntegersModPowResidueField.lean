@@ -40,6 +40,7 @@ lemma integersModPowToResidueField_comp_integersModPowMk :
     (integersModPowToResidueField l E n).comp (integersModPowMk l E n) = integersResidue l E :=
   RingHom.ext fun _ ↦ rfl
 
+
 lemma integersModPowToResidueField_integersModPowMk (x : integers l E) :
     integersModPowToResidueField l E n (integersModPowMk l E n x) = integersResidue l E x :=
   rfl

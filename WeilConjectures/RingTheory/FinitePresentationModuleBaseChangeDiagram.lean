@@ -161,7 +161,9 @@ theorem exists_finitePresentation_baseChange_diagram
     intro i j
     obtain ⟨k, hik, hjk⟩ := exists_ge_ge i.val j.val
     exact ⟨⟨k, i.property.trans hik⟩, hik, hjk⟩⟩
-  let F : J ⥤ I := (show Monotone (fun j : J ↦ j.val) from fun _ _ h ↦ h).functor
+  let F : J ⥤ I :=
+    { obj := fun j ↦ j.val
+      map := fun h ↦ homOfLE (leOfHom h) }
   have hF : F.Final := by
     apply Functor.final_of_exists_of_isFiltered
     · intro i

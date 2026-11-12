@@ -158,7 +158,8 @@ private theorem compactSupportProjectionMap_eq
     projectionMap, rightDerivedLowerShriek]
 
 section ProjectionProof
-local instance essentiallySmall_etale_shriekTensorMain (X : Scheme.{u}) :
+local instance essentiallySmall_etale_shriekTensorMain_shriekTensorCompositionSupplement
+    (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
@@ -248,7 +249,8 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] Etale.sheafBraidedCategory
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize
-local instance essentiallySmall_etale_tensorConvention (X : Scheme.{u}) :
+local instance essentiallySmall_etale_tensorConvention_shriekTensorCompositionSupplement
+    (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)

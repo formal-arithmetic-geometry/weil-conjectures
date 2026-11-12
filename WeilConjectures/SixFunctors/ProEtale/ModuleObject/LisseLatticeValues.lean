@@ -129,7 +129,7 @@ instance mono_padicIntegersRingObjToContinuousMapRingObj :
     have h' (s : S.unop) : ((a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E.1)).down s :
         E.1) = (b : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E.1)).down s :=
       congrArg (fun z : ULift.{u + 1} C(S.unop, E.1) ↦ z.down s) h
-    exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ Subtype.ext (h' s))
+    exact ULift.ext (ContinuousMap.ext fun s ↦ Subtype.ext (h' s))
   have := NatTrans.mono_of_mono_app (padicIntegersRingObjToContinuousMapRingObj.{u} ℓ E).hom
   exact Sheaf.Hom.mono_of_presheaf_mono _ _ _
 

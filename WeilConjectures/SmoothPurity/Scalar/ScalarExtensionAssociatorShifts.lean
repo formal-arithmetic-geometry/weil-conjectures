@@ -84,7 +84,7 @@ private theorem integral_comp_commShift :
     let := hn
     change NatTrans.CommShift
       ((Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L i Y)
-        (integralOrdinaryScalar l L M j Y)).inv ≫
+        (integralOrdinaryScalar l L M j Y)).hom ≫
         (Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L i Y M j)).hom) ℤ
     infer_instance
   constructor

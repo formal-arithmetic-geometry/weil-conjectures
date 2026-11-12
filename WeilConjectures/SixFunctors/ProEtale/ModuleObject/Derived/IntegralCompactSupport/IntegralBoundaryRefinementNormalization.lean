@@ -344,7 +344,7 @@ private theorem total_triangle {X Y Z : Scheme.{u}} (j : X ⟶ Z) (i : X ⟶ Y)
       leftDerivedUpperStarIsoMapDerivedCategory Λ j ≪≫
         (Functor.mapDerivedCategoryNatIso
           (eqToIso (congrArg (upperStar Λ) h.symm) ≪≫ upperStarComp Λ i r) ≪≫
-          Functor.mapDerivedCategoryCompIso (upperStar Λ r) (upperStar Λ i)) ≪≫
+          (Functor.mapDerivedCategoryCompIso (upperStar Λ r) (upperStar Λ i)).symm) ≪≫
         Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ r).symm
           (upperStar Λ i).mapDerivedCategory ≪≫
         Functor.isoWhiskerLeft (pull Λ r)
@@ -362,7 +362,7 @@ private theorem total_triangle_restriction {W A B : Scheme.{u}}
         (pull Λ i).map v =
       (Functor.mapDerivedCategoryNatIso
           (eqToIso (congrArg (upperStar Λ) h.symm) ≪≫ upperStarComp Λ i r) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar Λ r) (upperStar Λ i)).hom.app
+        (Functor.mapDerivedCategoryCompIso (upperStar Λ r) (upperStar Λ i)).symm).hom.app
           K ≫
         (upperStar Λ i).mapDerivedCategory.map
           ((leftDerivedUpperStarIsoMapDerivedCategory Λ r).inv.app K ≫
@@ -380,7 +380,7 @@ private theorem total_triangle_restriction {W A B : Scheme.{u}}
       leftDerivedUpperStarComp Λ i r)
     (Functor.mapDerivedCategoryNatIso
         (eqToIso (congrArg (upperStar Λ) h.symm) ≪≫ upperStarComp Λ i r) ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar Λ r) (upperStar Λ i))
+      (Functor.mapDerivedCategoryCompIso (upperStar Λ r) (upperStar Λ i)).symm)
     (total_triangle Λ j i r h)
     (K := K) (N := M) v
 

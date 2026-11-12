@@ -46,4 +46,5 @@ theorem isLocalization_Q :
     (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) :=
   inferInstance
 
+
 end DerivedCategory

@@ -301,7 +301,7 @@ noncomputable def doubleComparison (f : End X) (g : End Y)
         Functor.mapIso_hom, Iso.symm_hom, ne_eq, zero_ne_one, not_false_eq_true,
         HomologicalComplex.double_d, Category.assoc, Iso.inv_hom_id_assoc,
         Functor.mapHomologicalComplex_obj_d, P.map_comp, zero_add, one_ne_zero,
-        Iso.map_inv_hom_id_assoc]
+        Iso.inv_hom_id_map_assoc]
       rw [reassoc_of% h]
     · change _ ≫ _ = P.map _ ≫ _
       rw [HomologicalComplex.double_d_eq_zero₀ _ _ _ _ hn,
@@ -352,7 +352,7 @@ theorem factorIso_step
         Category.comp_id, Category.id_comp, P.map_comp,
         HomologicalComplex.Hom.isoOfComponents_hom_f, doubleComparisonX,
         Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
-        Iso.map_inv_hom_id_assoc, Iso.inv_hom_id_assoc]
+        Iso.inv_hom_id_map_assoc, Iso.inv_hom_id_assoc]
       rw [reassoc_of% h]
     · exact (HomologicalComplex.isZero_double_X _ _ n hn hn').eq_of_tgt _ _
 

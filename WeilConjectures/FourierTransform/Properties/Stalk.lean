@@ -148,7 +148,7 @@ noncomputable def fourierIntegrandFibreIso :
       (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} Λ)
           (fibreToProduct π π' ξ) (pullback.fst π π') (pullback.fst π (ξ ≫ π'))
           (fibreToProduct_fst π π' ξ).symm) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).symm _
+        (Functor.mapDerivedCategoryCompIso _ _).symm).symm _
 
 /-- **The stalk formula** as an isomorphism of functors: for a point `ξ : T ⟶ V'` of the
 dual,

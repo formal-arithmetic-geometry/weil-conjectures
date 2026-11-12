@@ -142,6 +142,7 @@ theorem isProper_comparisonSnd : IsProper (comparisonSnd σ₁ σ₂) := by
   rw [comparisonSnd_eq]
   infer_instance
 
+
 section ComparisonOverV
 
 /-! ### The comparison space over the proper-extension open
@@ -460,6 +461,7 @@ lemma mem_comparisonBoundary_iff {z : comparisonSpace σ₁ σ₂} :
       comparisonFst σ₁ σ₂ z ∈ σ₁.forbiddenBoundary :=
   Iff.rfl
 
+
 variable {σ₁ σ₂} in
 /-- **Key boundary disjointness from the self boundary** (blueprint:
 `lemma:nagata-key-boundary-disjointness`): if the second projection of the comparison
@@ -497,6 +499,7 @@ theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared O₁)
     KeyDisjoint σ₁ σ₂ :=
   keyDisjoint_of_comparisonBoundary_subset h₂
     (comparisonBoundary_subset_preimage_selfBoundary hD hmem)
+
 
 section Avoids
 

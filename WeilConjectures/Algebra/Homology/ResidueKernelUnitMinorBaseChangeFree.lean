@@ -15,6 +15,7 @@ set_option autoImplicit false
 universe v
 open CategoryTheory
 namespace ModuleCat
+set_option backward.dsimp.instances true in
 /--
 (blueprint: new-residue-kernel-unit-minor-base-change-free)
 Finite projective modules remain free after localization at a prime.

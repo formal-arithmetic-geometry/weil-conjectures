@@ -286,6 +286,13 @@ private lemma relativeExtension_eq_of_represents {D T : Scheme.{u}} (i : D ⟶ T
     (hβ : RelativeExtensionRepresents i P β) : β = relativeExtension i P :=
   (Classical.choose_spec (relativeExtension_existsUnique i P)).2 β hβ
 
+section
+
+private local instance cartierPairForgottenSectionsHAdd {T : Scheme.{u}}
+    (E : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : T.Etaleᵒᵖ) :
+    HAdd ((E.obj ⋙ forget AddCommGrpCat.{u + 1}).obj U) (E.obj.obj U) (E.obj.obj U) :=
+  inferInstanceAs (HAdd (E.obj.obj U) (E.obj.obj U) (E.obj.obj U))
+
 private theorem relativeExtensionRepresents_mk {D T : Scheme.{u}} (i : D ⟶ T)
     [IsClosedImmersion i] {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk i.openComplement.ι))
@@ -303,6 +310,8 @@ private theorem relativeExtensionRepresents_mk {D T : Scheme.{u}} (i : D ⟶ T)
       (f.app _ P.2) = 0) :
     RelativeExtensionRepresents i P hE.extClass := by
   exact ⟨E, a, b, hab, hE, f, ha, hb, hτ, rfl⟩
+
+end
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma pole_boundary_eq_relative {D T : Scheme.{u}} (i : D ⟶ T)

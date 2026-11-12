@@ -175,4 +175,5 @@ theorem isFinite_and_surjective_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι 
     IsFinite (symmetricProduct S (k + 1) e) ∧ Surjective (symmetricProduct S (k + 1) e) :=
   ⟨isFinite_symmetricProduct S (k + 1) e, surjective_symmetricProduct S (k + 1) e⟩
 
+
 end AlgebraicGeometry.ProjectiveSpace

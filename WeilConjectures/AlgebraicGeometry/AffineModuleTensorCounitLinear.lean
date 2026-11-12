@@ -31,6 +31,13 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
+local instance instHasLeftKanExtension_affineModuleTensorCounitLinear
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+    (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+  have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+  exact Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+
 set_option hygiene false in
 local notation "𝓙" T => Opens.grothendieckTopology T
 set_option hygiene false in

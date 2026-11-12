@@ -27,7 +27,6 @@ keep the time and memory needed to compile each module below the build limits.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.privateModule false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
@@ -233,7 +232,9 @@ private theorem normalized_inverse
   rw [hπ, ← hs]
   simp only [Category.assoc, ← F.map_comp, s.hom_inv_id, Category.comp_id]
 
-private theorem endpoint_generator_argument
+namespace CyclicAugmentation
+
+theorem endpoint_generator_argument
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
     (U : A ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
@@ -265,5 +266,7 @@ private theorem endpoint_generator_argument
   dsimp only [Functor.comp_map] at hπ hs
   rw [← hπ, ← hs]
   simp only [← CategoryTheory.Functor.map_comp_assoc, hordinary]
+
+end CyclicAugmentation
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

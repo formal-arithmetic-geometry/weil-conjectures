@@ -34,6 +34,13 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
+local instance instHasLeftKanExtension_affineModuleTensorUnitSections
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+    (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+  have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+  exact Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+
 set_option hygiene false in
 local notation "𝓙" T => Opens.grothendieckTopology T
 set_option hygiene false in
@@ -102,8 +109,7 @@ private theorem scalar_relation_unit_bijective
     rw [map_sub, sub_eq_zero] at hz
     exact hz
   have hnormal (z : TensorProduct D C N) : q z = q (TensorProduct.tmul D (1 : C) (a z)) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul c n => rw [ha]; exact hrel c n
     | add x y hx hy => simp only [map_add, TensorProduct.tmul_add, hx, hy]
   constructor

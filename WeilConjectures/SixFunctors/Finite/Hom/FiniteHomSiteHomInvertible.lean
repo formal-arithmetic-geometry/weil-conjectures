@@ -133,7 +133,7 @@ theorem finiteHomSiteHomInvertible
   have : G.IsEquivalence := (ProEtale.finiteCoefficientIntrinsicRealization_exact X A).1
   let R := G.mapDerivedCategory
   let d : finiteHomNu l E X n ≅ F.mapDerivedCategory ⋙ R :=
-    Functor.mapDerivedCategoryCompIso F G
+    (Functor.mapDerivedCategoryCompIso F G).symm
   let β := ProEtale.siteComparisonEvaluationHom
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X K M
   have hβ : IsIso β :=

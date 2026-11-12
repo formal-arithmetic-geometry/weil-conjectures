@@ -539,16 +539,16 @@ private lemma derivedComp_assoc (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH)
   have hassoc := congr_app (mapDerivedCategoryCompIso_assoc F G H) K
   have hm' := congr_app hm K
   simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app] at ha hc hassoc hm'
-  simp only [derivedComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [derivedComp, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app,
     Functor.map_comp, Category.assoc]
-  rw [← cancel_epi (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso F G).hom.app K))]
-  simp only [← map_comp_assoc, Iso.hom_inv_id_app_assoc]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso (F ⋙ G) H).hom.app K)]
-  rw [← reassoc_of% ha, Iso.hom_inv_id_app_assoc]
+  rw [← cancel_epi (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso F G).inv.app K))]
+  simp only [← map_comp_assoc, Iso.inv_hom_id_app_assoc]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso (F ⋙ G) H).inv.app K)]
+  rw [← reassoc_of% ha, Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% hassoc]
-  simp only [Iso.hom_inv_id_app_assoc]
-  rw [← reassoc_of% hc, Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [← reassoc_of% hc, Iso.inv_hom_id_app_assoc]
   exact hm'
 end DerivedComposition
 end CategoryTheory.Functor
@@ -617,11 +617,11 @@ private lemma derivedComp_id_comp (e : A ≅ 𝟭 C) (a : A ⋙ F ≅ F)
   have hn := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight e F) K
   have hu := congr_app (mapDerivedCategoryCompIso_id_comp F) K
   simp only [NatTrans.comp_app, whiskerRight_app, NatTrans.id_app] at hn hu
-  simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [derivedComp, derivedUnit, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, map_comp, leftUnitor_hom_app,
     mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso A F).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso A F).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
   exact (Category.comp_id _).symm
 
 private lemma derivedComp_comp_id (e : B ≅ 𝟭 D) (a : F ⋙ B ≅ F)
@@ -637,11 +637,11 @@ private lemma derivedComp_comp_id (e : B ≅ 𝟭 D) (a : F ⋙ B ≅ F)
   have hn := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
   have hu := congr_app (mapDerivedCategoryCompIso_comp_id F) K
   simp only [NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app] at hn hu
-  simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [derivedComp, derivedUnit, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerLeft_hom, whiskerLeft_app, rightUnitor_hom_app,
     mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso F B).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F B).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hn, reassoc_of% hu, Category.comp_id]
   exact (Category.comp_id _).symm
 end DerivedUnit
 end CategoryTheory.Functor
@@ -724,7 +724,6 @@ variable [MonoidalCategory E] [MonoidalPreadditive E]
   [∀ (X : E), PreservesColimitsOfShape ℤ ((curriedTensor E).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution E]
   {V : Type*} [Category V] [Abelian V] [HasDerivedCategory V]
-
 private lemma leftComp_assoc
     (G : D ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (H : E ⥤ V) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
@@ -745,6 +744,7 @@ private lemma leftComp_assoc
   apply transportComp_assoc
   apply derivedComp_assoc
   simpa only [associator_trans_eq] using h
+
 
 end LeftTransport
 end CategoryTheory.Functor
@@ -922,7 +922,6 @@ private noncomputable abbrev scalarDerivedUnit
   (Mod.extendScalars a).leftDerivedFunctorNatIso (scalarUnit a ha) ≪≫
     (𝟭 (Mod C R)).leftDerivedFunctorIsoMapDerivedCategory ≪≫
       Functor.mapDerivedCategoryIdIso (Mod C R)
-
 private lemma scalarDerivedComp_assoc
     (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g] (j : U ⟶ V) [IsMonHom j]
     (fg : R ⟶ U) [IsMonHom fg] (gj : S ⟶ V) [IsMonHom gj]
@@ -972,6 +971,7 @@ private lemma scalarDerivedComp_comp_id
   apply Functor.transportComp_comp_id
   apply Functor.derivedComp_comp_id
   exact scalarComp_comp_id a ha f h
+
 
 private lemma scalarDerivedComp_shift
     (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g]
@@ -1155,7 +1155,6 @@ theorem condensedAlgClCoefficientCalculus
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact scalarCalculus (padicSubfieldRingObjToPadicAlgCl T ℓ E)
 
--- Keep the resolution constructions behind their proved comparison API.
 /-- Coherence of the canonical multiplication and unit comparisons.
 Source: TwoColimit.lean, ExtendScalars; sheaf tensor coherence and localization
 (blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).

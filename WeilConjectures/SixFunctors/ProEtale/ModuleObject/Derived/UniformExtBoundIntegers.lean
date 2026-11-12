@@ -67,7 +67,7 @@ lemma Limits.eq_zero_of_isIso_sub_powShift_of_bijective {C : Type*} [Category* C
     rw [← cancel_mono (𝟙 _ - powShift e), zero_comp]
     refine Pi.hom_ext _ _ fun n ↦ ?_
     simp [hx]
-  have h₀ := Pi.lift_π x 0
+  have h₀ := Pi.lift_comp_π x 0
   rw [h, zero_comp] at h₀
   exact h₀.symm
 

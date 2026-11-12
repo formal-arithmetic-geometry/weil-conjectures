@@ -105,7 +105,7 @@ theorem locallyConstantCochains_degreewise_exact
       rw [hx, map_zero]
       rfl
     change (E.functor.map S.f).hom.hom (lift (e S.X₂ n x g)) = e S.X₂ n x g
-    simp only [lift, dif_pos hy]
+    simp only [lift, dite_eq_left hy]
     exact Classical.choose_spec (hex _ hy)
   · apply (AddCommGrpCat.mono_iff_injective T.f).2
     intro x y hxy

@@ -177,7 +177,7 @@ theorem exists_hypercohomology_firstPage
     habut (fun n ↦ F.rightDerivedCohomologyWithResolution K ρ n) c
   refine ⟨aug, u, w, c, H, haug, hu, ?_, ?_, hfin, hstep, hstab⟩
   · intro m s n h
-    dsimp [w]
+    dsimp only [w, HomologicalComplex.comp_f]
     rw [← Category.assoc, he m s n h, Category.assoc,
       mapHomologicalComplex_map_f, ← F.map_comp, Category.assoc]
   · intro n

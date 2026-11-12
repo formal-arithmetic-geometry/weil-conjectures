@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedReductionModels
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryTensorHorizontal
 import all WeilConjectures.AlgebraicGeometry.ProjectionTensorCore.SemilinearTensorReductionCore
 

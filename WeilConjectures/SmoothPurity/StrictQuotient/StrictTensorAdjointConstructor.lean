@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.StrictQuotient.StrictQuotientExpressions
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SmoothPurity.StrictQuotient.StrictTensorOrdinaryAdjunct
 import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 

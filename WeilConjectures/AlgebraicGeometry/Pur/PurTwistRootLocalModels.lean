@@ -303,7 +303,7 @@ private noncomputable def stalkFiberIso {S : Scheme.{u}} {Ω : Type u}
     (F : Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1}) :
     proEtaleGeometricStalk s F ≅ (ProEtale.geometricPoint s).sheafFiber.obj F :=
   Functor.Final.colimitIso (ProEtale.geometricElementsEquiv s).functor.op
-    ((CategoryOfElements.π (ProEtale.geometricPoint s).fiber).op ⋙ F.obj)
+    ((Functor.Elements.π (ProEtale.geometricPoint s).fiber).op ⋙ F.obj)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -315,7 +315,7 @@ private noncomputable def fiberOverIso
   Functor.Final.colimitIso
     ((FunctorToTypes.fromOverFunctorElementsEquivalence Φ.fiber x).functor ⋙
       Over.forget (Φ.fiber.elementsMk U x)).op
-    ((CategoryOfElements.π Φ.fiber).op ⋙ F.obj)
+    ((Functor.Elements.π Φ.fiber).op ⋙ F.obj)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

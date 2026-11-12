@@ -199,4 +199,5 @@ lemma isLocalization_fromSpecFunctionField_appLE {X : Scheme.{u}} [IsIntegral X]
   refine Algebra.algebra_ext _ _ fun r ↦ ?_
   exact congr($(fromSpecFunctionField_appLE_eq W h).hom r)
 
+
 end AlgebraicGeometry.Scheme

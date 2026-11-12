@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle

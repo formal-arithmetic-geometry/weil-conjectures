@@ -74,8 +74,7 @@ theorem picard_residue_quotient_model_homology
     let S := ModuleCat.extendScalars.{v, v, v} (algebraMap Γ(W, U) κ)
     have ht : t j (affineResidueDifferential W U _ K i j x) =
         S.map (F.map (K.d i j)) (t i x) := by
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul r m => rfl
       | add x y hx hy => simp only [map_add, hx, hy]
     change (δ.hom.app (F.obj (K.X j)))

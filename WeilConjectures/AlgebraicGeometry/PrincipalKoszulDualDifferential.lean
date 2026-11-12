@@ -93,7 +93,7 @@ private theorem coneZeroProjection (m : ℕ) :
     erw [ComplexShape.next_eq' (ComplexShape.up ℤ)
       (show (ComplexShape.up ℤ).Rel 0 1 from rfl)]
     rfl
-  erw [dif_pos hn]
+  erw [dite_eq_left hn]
   have hs (j : ℤ) (hj : (ComplexShape.up ℤ).Rel 0 j) :
       (HomologicalComplex.homotopyCofiber.XIsoBiprod (scalarComplex R a m)
         0 1 zeroOneRel).hom ≫ biprod.snd =

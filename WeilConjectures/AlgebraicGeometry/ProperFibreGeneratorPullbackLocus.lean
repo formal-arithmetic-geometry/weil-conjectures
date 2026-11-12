@@ -130,7 +130,10 @@ theorem proper_fibre_generator_pullback_locus {X S : Scheme.{v}} (f : X ⟶ S)
   have hunit := (Modules.tensorPullbackObjUnitToUnit_isIso
     (pullback.snd f (h ≫ k))).1
   let : IsIso (Modules.tensorPullbackObjUnitToUnit (pullback.snd f (h ≫ k))) := hunit
-  refine ⟨SheafOfModules.unit T.ringCatSheaf, inferInstance, ?_⟩
+  have : (SheafOfModules.unit T.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{v, v, v}
+  refine ⟨SheafOfModules.unit T.ringCatSheaf,
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{v, v, v} _, ?_⟩
   exact ⟨eL ≪≫ eR ≪≫ (asIso
     (Modules.tensorPullbackObjUnitToUnit (pullback.snd f (h ≫ k)))).symm⟩
 

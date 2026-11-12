@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.CategoryTheory.Abelian.DerivedCyclesMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.Abelian.DerivedSingleShiftNormalization
@@ -60,7 +63,10 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
       (DerivedCategory.homologyFunctorFactors D n).inv.app
         ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
       (DerivedCategory.homologyFunctor D n).map
-        (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫
+        ((DerivedCategory.quotientCompQhIso D).inv.app
+            ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫
+          S.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app K)) ≫
       (DerivedCategory.homologyFunctor D n).map (S.rightDerivedFunctor.map q) ≫
       (DerivedCategory.homologyFunctor D n).map
         (S.rightDerivedFunctorPlusCompatibility.inv.app M) =
@@ -75,7 +81,7 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
   let J := (HomotopyCategory.Plus.singleFunctor C n).obj Y
   have hcunit : S.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj J) ≫
       S.rightDerivedFunctorPlusCompatibility.inv.app (DerivedCategory.Plus.Qh.obj J) =
-      DerivedCategory.Plus.ι.map (S.rightDerivedFunctorPlusUnit.app J) := by
+      DerivedCategory.Plus.ι.map (S.rightDerivedFunctorPlusUnith.app J) := by
     simpa only [rightDerivedFunctorPlusCompatibility, rightDerivedUnique,
       rightDerivedNatIso, ιRightDerivedFunctorUnit, rightDerivedFunctorPlusιUnit,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.id_app,
@@ -145,8 +151,10 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
     rw [he, S.rightDerivedFunctorPlus.map_id]
     erw [Category.comp_id]
     simp only [Functor.map_comp, mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-      Functor.preimageIso_inv, Functor.map_preimage, Functor.mapIso_inv]
+      Functor.preimageIso_inv, Functor.map_preimage]
     rw [← hcunit]
+    simp only [Iso.trans_inv, Functor.mapIso_inv, Category.assoc]
+    erw [Category.id_comp]
     rfl
   have hw : z ≫
       S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫
@@ -192,6 +200,7 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
   rw [← reassoc_of% hz]
   erw [← HD.map_comp_assoc, ← HD.map_comp_assoc, ← HD.map_comp]
   simp only [Category.assoc]
+  erw [Category.id_comp, S.rightDerivedFunctor.map_id, Category.id_comp]
   rw [hw]
   simp only [HD.map_comp, Category.assoc, rightDerivedPlusSingleUnitHomologyAt]
   rfl

@@ -30,7 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 attribute [local implicit_reducible] CategoryTheory.TwoSquare
-  CategoryTheory.Functor.mapHomologicalComplex
   AlgebraicGeometry.ProEtale.VaryingRing.push
   AlgebraicGeometry.ProEtale.spCoefficientCommRings
   AlgebraicGeometry.ProEtale.SpTowerShriek.tau

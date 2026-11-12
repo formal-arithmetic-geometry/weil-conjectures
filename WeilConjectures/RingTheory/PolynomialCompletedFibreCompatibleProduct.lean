@@ -118,7 +118,9 @@ theorem completed_fibre_compatible_product
           rw [← Ideal.LiesOver.over (P := t.1) (p := q)]
           exact hq
     apply IsLocalRing.eq_maximalIdeal
-    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := A)
+    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A)
+    change ((t.1.comap (Polynomial.C : B →+* Polynomial B)).comap
+      (algebraMap A B)).IsMaximal
     rw [hcomp]
     infer_instance
   let : Algebra (Polynomial A) L :=
@@ -150,7 +152,7 @@ theorem completed_fibre_compatible_product
     (E₃.symm.toRingEquiv.trans (E₄.toRingEquiv.trans
       (E₅.toRingEquiv.trans E₆.toRingEquiv))))
   have hzero (t : Q) (h : ¬ s ≤ t.1) : Subsingleton (s.Fiber (D t)) := by
-    obtain ⟨x, hxs, hxt⟩ := SetLike.not_le_iff_exists.mp h
+    obtain ⟨x, hxs, hxt⟩ := IsConcreteLE.not_le_iff_exists.mp h
     have hu : IsUnit (algebraMap (Polynomial B) (D t) x) := by
       rw [IsScalarTower.algebraMap_apply (Polynomial B) (Localization.AtPrime t.1) (D t)]
       exact (IsLocalization.map_units (Localization.AtPrime t.1) (⟨x, hxt⟩ : t.1.primeCompl)).map _
@@ -179,7 +181,7 @@ theorem completed_fibre_compatible_product
     intro f
     refine ⟨fun t ↦ if ht : s ≤ t.1 then f ⟨t, ht⟩ else 0, ?_⟩
     funext t
-    exact dif_pos t.2
+    exact dite_eq_left t.2
   let E₇ := RingEquiv.ofBijective restrict ⟨hinj, hsurj⟩
   let en : Fin (Fintype.card U) ≃ U := (Fintype.equivFin U).symm
   refine ⟨Fintype.card U, fun i ↦ (en i).1.1, fun i ↦ inferInstance, ?_, ?_, ?_⟩

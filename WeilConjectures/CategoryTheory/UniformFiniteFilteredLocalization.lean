@@ -42,7 +42,7 @@ Source: Stacks, Tags 05S2 and 05S4, restricted uniformly in cochain degree
 (blueprint: def-trf-uniform-finite-filtered-localization). -/
 def uniformFilteredProperty (B : Option (ℤ × ℤ))
     (P : ObjectProperty (CochainComplex C ℤ)) :
-    ObjectProperty (FilteredObject (CochainComplex C ℤ)) := fun K ↦
+    ObjectProperty (WeilFilteredObject (CochainComplex C ℤ)) := fun K ↦
   K.filtration.IsFinite ∧
     (∀ a b : ℤ, B = some (a, b) →
       K.filtration.F a = ⊤ ∧ K.filtration.F (b + 1) = ⊥) ∧ P K.obj
@@ -60,6 +60,6 @@ Source: Stacks, Tag 05S2
 def uniformFilteredQuasiIso (B : Option (ℤ × ℤ))
     (P : ObjectProperty (CochainComplex C ℤ)) :
     MorphismProperty (UniformFilteredComplexes C B P) := fun _ _ f ↦
-  ∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom p)
+  ∀ p : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps f.hom p)
 
 end CategoryTheory

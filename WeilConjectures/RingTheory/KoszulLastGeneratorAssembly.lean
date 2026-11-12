@@ -77,7 +77,7 @@ private theorem prefix_decomposition (v : Fin (r + 1) →₀ R) :
     rw [Finsupp.mapDomain_of_notMem_range]
     · exact zero_add _
     · simp
-  · simp [koszulPrefixInclusion, Finsupp.mapDomain_apply (Fin.castSucc_injective r),
+  · simp [koszulPrefixInclusion, Finsupp.mapDomain_apply_of_injective (Fin.castSucc_injective r),
       prefixRetraction, Fin.castSucc_ne_last]
 
 private theorem exterior_map_coe {E F : Type u} [AddCommGroup E] [Module R E]

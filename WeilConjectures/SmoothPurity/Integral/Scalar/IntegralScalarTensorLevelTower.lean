@@ -69,7 +69,7 @@ section FiniteLevel
 
 attribute [local irreducible] scalarAdjunction integralOrdinaryScalarComp
   integralOperationsRoos integralOperationsRoosMap
-attribute [local implicit_reducible] Functor.mapHomologicalComplex integralOperationsRoosFunctor
+attribute [local implicit_reducible] integralOperationsRoosFunctor
   NatIso.mapHomologicalComplex NatTrans.mapHomologicalComplex
   integralOperationsTensorTowerFunctor integralOperationsTensorComplexFunctor
   integralOperationsTensorLevel integralOperationsRestrict integralOperationsTensorComposite

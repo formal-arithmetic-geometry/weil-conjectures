@@ -205,7 +205,7 @@ lemma bijective_globalPrincipalParts : Function.Bijective (globalPrincipalParts 
         refine ⟨⟨Tᶜ, hT.isOpen_compl⟩, le_top, fun h ↦ h.2 rfl, v, fun ⟨y, _⟩ hy ↦ ?_⟩
         by_cases hyx : y = x'.1
         · subst hyx
-          exact (dif_pos (show IsClosed {x'.1} from x'.2)).trans hv.symm
+          exact (dite_eq_left (show IsClosed {x'.1} from x'.2)).trans hv.symm
         · have hyS : y ∉ S := fun h ↦ hy ⟨Or.inl h, hyx⟩
           have hyv : v ∈ stalkLattice k φ y := by
             by_contra h
@@ -215,7 +215,7 @@ lemma bijective_globalPrincipalParts : Function.Bijective (globalPrincipalParts 
       · have hScl' : IsClosed S := hScl S Set.subset_union_left hSf
         refine ⟨⟨Sᶜ, hScl'.isOpen_compl⟩, le_top, hxS, 0, fun y hy ↦ ?_⟩
         rw [hs y.1 hy, Submodule.Quotient.mk_zero]
-    · exact dif_pos x.2
+    · exact dite_eq_left x.2
 
 /-- The global principal parts are the finitely supported families of classes at the closed
 points. -/

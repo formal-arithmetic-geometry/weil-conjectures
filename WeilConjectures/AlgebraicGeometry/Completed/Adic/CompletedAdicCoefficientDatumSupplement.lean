@@ -535,8 +535,7 @@ private noncomputable def sectionTensorIso
       map_add' := fun _ _ ↦ rfl
       map_smul' := by
         intro r x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
   exact e.toModuleIso
@@ -557,8 +556,7 @@ private noncomputable def presheafTensorIso
   PresheafOfModules.isoMk (sectionTensorIso φ M) (by
     intro X Y f
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s m =>
       change changeOfRingsMap φ M f (s ⊗ₜ m) = _
       rw [show changeOfRingsMap φ M f (s ⊗ₜ m) = _ from
@@ -592,8 +590,7 @@ private lemma presheafTensorIso_naturality
         ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj
           (unit (𝓡 O'))).val ◁ a.val := by
   ext X x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul s m => rfl
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 

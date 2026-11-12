@@ -126,8 +126,6 @@ variable {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
   [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
   [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
 
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-
 private lemma triangle_fac (cU : U₀ ≅ U₁ ⋙ U₂) (K : CochainComplex C₀ ℤ) :
     (mapDerivedCategoryTriangleIso cU).hom.app (DerivedCategory.Q.obj K) ≫
       U₂.mapDerivedCategory.map (U₁.mapDerivedCategoryFactors.hom.app K) ≫
@@ -135,7 +133,7 @@ private lemma triangle_fac (cU : U₀ ≅ U₁ ⋙ U₂) (K : CochainComplex C�
         ((U₁.mapHomologicalComplex (.up ℤ)).obj K) =
     U₀.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex cU.hom (.up ℤ)).app K) := by
-  simp only [mapDerivedCategoryTriangleIso, Iso.trans_hom, NatTrans.comp_app,
+  simp only [mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc]
   rw [comp_fac]
   exact mapDerivedCategoryNatIso_fac cU K
@@ -266,8 +264,8 @@ private def heartDerivedIso (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u}) (E : Encoding A T) :
     (heart A R e T E).mapDerivedCategory ≅ coefficientEncoding A e T E :=
   mapDerivedCategoryNatIso (eqToIso (heart_eq A R e T E)) ≪≫
-    mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom T))
-      (E.ordinary.functor ⋙ E.fixed.functor)
+    (mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom T))
+      (E.ordinary.functor ⋙ E.fixed.functor)).symm
 
 private def localizedPull (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T) {X Y : Scheme.{u}} (f : X ⟶ Y) :

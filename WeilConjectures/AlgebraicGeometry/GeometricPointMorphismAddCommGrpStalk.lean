@@ -45,16 +45,16 @@ theorem geometricPointMorphism_addCommGrp_stalk
   let b : Over.mk s ⟶ Over.mk s' := Over.homMk a ha
   let α : (pointSmallEtale s').fiber ⟶ (pointSmallEtale s).fiber :=
     Functor.whiskerLeft (Etale.forget S) (coyoneda.map b.op)
-  have : (CategoryOfElements.map α).IsEquivalence :=
+  have : (NatTrans.mapElements α).IsEquivalence :=
     geometricPointMorphism_category_equivalence s s' a ha
-  let D := (CategoryOfElements.π (pointSmallEtale s).fiber).op ⋙ F.obj
+  let D := (Functor.Elements.π (pointSmallEtale s).fiber).op ⋙ F.obj
   let f : (pointSmallEtale s').sheafFiber.obj F ⟶
       (pointSmallEtale s).sheafFiber.obj F :=
-    colimit.pre D (CategoryOfElements.map α).op
+    colimit.pre D (NatTrans.mapElements α).op
   have hf : ∀ U t, (pointSmallEtale s').toPresheafFiber U t F.obj ≫ f =
       (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj := by
     intro U t
-    exact colimit.ι_pre D (CategoryOfElements.map α).op (op ⟨U, t⟩)
+    exact colimit.ι_pre D (NatTrans.mapElements α).op (op (Functor.elementsMk _ U t))
   have hi : IsIso f := by dsimp [f]; infer_instance
   have hu : ∀ g, (∀ U t, (pointSmallEtale s').toPresheafFiber U t F.obj ≫ g =
       (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj) → g = f := by

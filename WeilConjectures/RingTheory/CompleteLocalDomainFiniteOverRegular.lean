@@ -198,7 +198,7 @@ theorem complete_local_domain_finite_over_regular
     let : Module.Finite f.range R := hrange
     let : Algebra.IsIntegral f.range R := inferInstance
     exact Order.krullDim_le_of_strictMono (PrimeSpectrum.comap f.range.subtype)
-      (fun p q hpq ↦ Ideal.IsIntegral.comap_lt_comap hpq)
+      (fun p q hpq ↦ Ideal.IsIntegral.under_lt_under hpq)
   have hdomain : IsDomain A := by
     rcases hproperties with ⟨_, _, hdom, _, _⟩ | ⟨_, _, _, hdom, _, _⟩
     · exact hdom
@@ -238,7 +238,7 @@ theorem complete_local_domain_finite_over_regular
     let : Module.Finite f.range R := hrange
     let : Algebra.IsIntegral f.range R := inferInstance
     exact (eq_maximalIdeal
-      (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := f.range)
+      (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := f.range)
         (maximalIdeal R))).symm
   let q := Ideal.quotientMap (maximalIdeal R) f.range.subtype hmax.le
   have hq : Function.Bijective q := by

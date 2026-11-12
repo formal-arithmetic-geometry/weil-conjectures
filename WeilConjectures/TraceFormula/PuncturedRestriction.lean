@@ -155,7 +155,8 @@ lemma globalSectionsRestriction_comp_eq_zero {X₁ X₂ X₃ : Scheme.{u}} (f : 
   rw [h, zero_comp] at hc
   rwa [← cancel_mono ((rightDerivedGlobalSections A X₃).map
     ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).hom.app K)), zero_comp]
+      (Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).symm).hom.app K)),
+    zero_comp]
 
 /-- The restriction map along a composite `g ≫ f` vanishes as soon as the restriction along `g`
 of the pullback vanishes. -/
@@ -167,7 +168,8 @@ lemma globalSectionsRestriction_comp_eq_zero_of_right {X₁ X₂ X₃ : Scheme.{
   rw [h, comp_zero] at hc
   rwa [← cancel_mono ((rightDerivedGlobalSections A X₃).map
     ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).hom.app K)), zero_comp]
+      (Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).symm).hom.app K)),
+    zero_comp]
 
 /-- If the restriction along `f` followed by the restriction along `g` vanishes and the latter
 is an isomorphism, the restriction along `f` vanishes. -/

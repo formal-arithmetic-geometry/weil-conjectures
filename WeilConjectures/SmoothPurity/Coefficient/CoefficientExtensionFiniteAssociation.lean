@@ -83,7 +83,6 @@ private theorem tensorSection_smul {f : R ⟶ S}
       (SheafOfModules.changeOfRingsPresheaf.{v, c, max c v r} f M)
   have h := (η.app U).hom.map_smul b
     ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] x)
-  rw [TensorProduct.smul_tmul'] at h
   change (toSheafify J
       (SheafOfModules.changeOfRingsPresheaf.{v, c, max c v r} f M).presheaf).app U
         ((b * 1) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] x) =

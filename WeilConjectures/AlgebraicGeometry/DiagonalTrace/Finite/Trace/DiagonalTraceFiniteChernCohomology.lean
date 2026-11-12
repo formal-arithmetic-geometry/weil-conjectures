@@ -100,7 +100,7 @@ theorem diagonalTrace_finite_chern_cohomology
     have : Finite (SpTowerShriek.R l E k) := b.finite k
     let A := FiniteRing l E k
     let hA : ((l ^ (k + 1) : ℕ) : A) = 0 :=
-      ULift.ext _ _ (coefficient_annihilates l E k)
+      ULift.ext (coefficient_annihilates l E k)
     let hNS : IsUnit ((l ^ (k + 1) : ℕ) : Γ(S, ⊤)) := by
       simpa only [Nat.cast_pow] using hS.pow (k + 1)
     let F := (Scheme.sfIntrinsicModuleEquivalence S (SpTowerShriek.R l E k)).functor

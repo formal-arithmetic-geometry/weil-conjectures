@@ -137,6 +137,7 @@ theorem dvd_of_pow_eq_pow_away {ϖ : S} (hϖ : Irreducible ϖ) {N a : ℕ} (hN :
   have hjk := unit_mul_pow_congr_pow hϖ hϖ _ _ _ _ h
   exact (Nat.dvd_add_left (dvd_mul_left N k)).1 (hjk ▸ dvd_mul_left N j)
 
+
 end Roots
 
 end IsDiscreteValuationRing
@@ -265,5 +266,6 @@ theorem isDiscreteValuationRing_quotient_iInf_span_pow (hm : maximalIdeal R = Id
   obtain ⟨n, u, rfl⟩ := exists_eq_pow_mul_unit_of_notMem_iInf hm
     fun h ↦ hx (Ideal.Quotient.eq_zero_iff_mem.2 h)
   exact ⟨n, ⟨(u.map (Ideal.Quotient.mk _).toMonoidHom), by simp⟩⟩
+
 
 end IsLocalRing

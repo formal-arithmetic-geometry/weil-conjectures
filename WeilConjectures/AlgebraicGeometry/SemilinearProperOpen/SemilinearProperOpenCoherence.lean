@@ -35,7 +35,7 @@ open WeilConjectures.SemilinearSections
 
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors SemilinearSections.systemRing
 
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
@@ -167,7 +167,7 @@ private theorem p_coherence {X Y Z T : Scheme.{u}}
   apply Iso.ext
   apply NatTrans.ext
   funext M
-  simpa only [pComp, P, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+  simpa only [pComp, P, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc, Functor.map_comp] using congr_app hh M
 

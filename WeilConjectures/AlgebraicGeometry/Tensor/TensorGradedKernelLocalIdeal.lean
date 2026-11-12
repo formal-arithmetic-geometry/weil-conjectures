@@ -68,8 +68,7 @@ private theorem tensor_image_mem {X : Scheme.{u}} (J : X.IdealSheafData)
   let μ : J.toModules ⊗ M ⟶ M := J.toModulesι ▷ M ≫ (λ_ M).hom
   change (show B.right.obj.obj (op V.1) from μ.app V.1
     (tensorSectionsMap J.toModules M V.1 t)) ∈ _
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]; exact Ideal.zero_mem _
+  induction t using TensorProduct.inductionOn with
   | tmul r s =>
     rw [tensorSectionsMap_tmul]
     change (show B.right.obj.obj (op V.1) from (λ_ M).hom.app V.1

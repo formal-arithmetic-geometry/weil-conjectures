@@ -104,7 +104,7 @@ lemma coe_powersMonomial {d : ℕ} (c : K) (hc : c ∈ V ^ d) :
 
 lemma powersMonomial_mem {d : ℕ} (c : K) (hc : c ∈ V ^ d) :
     powersMonomial c hc ∈ V.powersGrading d := fun e he => by
-  rw [coe_powersMonomial, coeff_monomial, if_neg he.symm]
+  rw [coe_powersMonomial, coeff_monomial, ite_eq_right he.symm]
 
 lemma powersMonomial_mul {d e : ℕ} (a b : K) (ha : a ∈ V ^ d) (hb : b ∈ V ^ e) :
     powersMonomial a ha * powersMonomial b hb =
@@ -122,8 +122,8 @@ lemma mem_powersGrading_iff_exists {d : ℕ} {F : V.powersAlgebra} :
     refine ⟨(F : K[X]).coeff d, coeff_mem_pow F d, Subtype.ext (Polynomial.ext fun e => ?_)⟩
     rw [coe_powersMonomial, coeff_monomial]
     by_cases h : d = e
-    · rw [if_pos h, h]
-    · rw [if_neg h, hF e fun he => h he.symm]
+    · rw [ite_eq_left h, h]
+    · rw [ite_eq_right h, hF e fun he => h he.symm]
   · rintro ⟨c, hc, rfl⟩
     exact powersMonomial_mem c hc
 
@@ -131,7 +131,7 @@ variable (V)
 
 instance powersGrading.instGradedMonoid : SetLike.GradedMonoid V.powersGrading where
   one_mem e he := by
-    rw [OneMemClass.coe_one, coeff_one, if_neg he]
+    rw [OneMemClass.coe_one, coeff_one, ite_eq_right he]
   mul_mem {d e F G} hF hG := by
     obtain ⟨a, ha, rfl⟩ := mem_powersGrading_iff_exists.mp hF
     obtain ⟨b, hb, rfl⟩ := mem_powersGrading_iff_exists.mp hG

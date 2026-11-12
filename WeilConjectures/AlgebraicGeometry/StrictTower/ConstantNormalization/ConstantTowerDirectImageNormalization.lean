@@ -369,7 +369,6 @@ private theorem homotopy_comp_inv_id (F : C ⥤ D) [F.Additive]
     (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)) K
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
   exact h
-
 set_option backward.isDefEq.respectTransparency false in
 private theorem squareComparison_eq_mate
     (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
@@ -390,9 +389,9 @@ private theorem squareComparison_eq_mate
     (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        ((Functor.mapDerivedCategoryCompIso Q LH).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso Q LH ≪≫
           Functor.mapDerivedCategoryNatIso s ≪≫
-            Functor.mapDerivedCategoryCompIso LF P).hom)).natTrans := by
+            (Functor.mapDerivedCategoryCompIso LF P).symm).hom)).natTrans := by
   apply Functor.rightDerived_ext (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory)
     (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
     (HomotopyCategory.quasiIso C (.up ℤ))
@@ -417,6 +416,7 @@ private theorem squareComparison_eq_mate
     Category.comp_id] at h
   repeat' first | erw [Category.id_comp] at h | erw [Category.comp_id] at h
   exact h.symm
+
 
 end GenericNormalization
 
@@ -810,9 +810,9 @@ abbrev L (X : Scheme.{u}) := completedRlim X (coefficients A X)
 Source: Stacks 00YV (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     delta A Y ⋙ G A f ≅ pull A f ⋙ delta A X :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ (modulePullback A f)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact diagonal preserves K-injectives because it is right adjoint to exact
 terminal-index evaluation. Source: Stacks 08BJ
@@ -855,11 +855,10 @@ def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
   Functor.rightDerivedFunctorCompIso (Functor.const ℕᵒᵖ) (towerDirectImage A f) ≪≫
   Functor.isoWhiskerRight
     (Functor.rightDerivedFunctorIsoMapDerivedCategory (Functor.const ℕᵒᵖ)) (R A f)
-
 /-- Evaluation of a diagonal is canonically the identity.
 Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (Functor.constCompEvaluationObj (D := Modules A X) (op n)) ≪≫
       Functor.mapDerivedCategoryIdIso _
@@ -876,6 +875,7 @@ private theorem chi_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Functor.const ℕᵒᵖ) (towerDirectImage A f) (modulePullback A f) (towerPullback A f)
     a (a.whiskerRight ℕᵒᵖ) (Functor.compConstIso ℕᵒᵖ (modulePullback A f)).symm
     (Functor.compConstIso ℕᵒᵖ (moduleDirectImage A f)) (const_mate _ _ a)
+
 
 private theorem scalar_obj (X : Scheme.{u})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
@@ -1001,8 +1001,7 @@ private theorem level_hom_ext (X : Scheme.{u})
   apply sheafify_hom_ext (ProEt.topology X) _ _
     ((SheafOfModules.toSheaf (reductionModuleRing X R)).obj N).property
   ext U t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp only [map_add, ht, ht']
   | tmul s x =>
       have ht := h U s x

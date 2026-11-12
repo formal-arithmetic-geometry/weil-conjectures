@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.QuasiIso
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.Defs

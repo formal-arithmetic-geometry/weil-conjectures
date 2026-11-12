@@ -60,6 +60,7 @@ private theorem baseChange_unit_top {X S X' S' : Scheme.{u}}
   simpa [moduleBaseChangeMap, adj, Hom.comp_app, pushforward_map_app,
     pushforwardCongr_hom_app_app] using ht
 
+
 /-- Affine pushforward preserves quasi-coherence and its canonical base change map is invertible.
 Source: Stacks Project, Lemma 02KG
 (blueprint: lem-weil-pbc-affine-pushforward-base-change).
@@ -251,6 +252,7 @@ theorem affinePushforward_baseChange_comp
             (Classical.choose (exists_tensorPullbackAdjunction (h' ≫ g')))).symm
             (pushforwardComp h' g')).inv.app F) := by
   exact moduleBaseChangeMap_pasting f f' f'' g g' h h' sq₁.w sq₂.w F
+
 
 
 end

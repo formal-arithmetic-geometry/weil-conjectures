@@ -9,6 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.KFlatBifunctorIsoDescent
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
@@ -311,10 +313,10 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
         (hN : CochainComplex.IsKFlatTensor (R := X.sheaf) N),
         (e P N hP hN).hom ≫
             (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
-            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+            cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+              (CochainComplex.mapBifunctor P N (curriedTensor _)))) ≫
             DerivedCategory.Q.map (φ P N).hom =
-          (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+          cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
             Functor.LaxMonoidal.μ DerivedCategory.Q
               ((F.mapHomologicalComplex (.up ℤ)).obj P)

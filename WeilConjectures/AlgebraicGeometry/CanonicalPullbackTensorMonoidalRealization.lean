@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 
 /-! # Realizing the canonical tensor comparison by a monoidal structure
@@ -111,9 +113,9 @@ theorem canonicalPullbackTensor_monoidal_realization
             (DerivedCategory.Q.obj N)).hom).1
           simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
           dsimp only [pullbackTensorModelMap, pullbackTensorTotal]
-          simpa only [Category.assoc] using heq
+          simpa only [cast_eq, Category.assoc] using heq
         rw [Functor.Monoidal.coreMonoidalTransport_μIso_inv]
-        simp only [Category.assoc]
+        simp only [cast_eq, Category.assoc]
         rw [tensorHom_comp_tensorHom_assoc, hδ P, hδ N]
         apply (cancel_epi (δ.hom.app
           (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N))).1

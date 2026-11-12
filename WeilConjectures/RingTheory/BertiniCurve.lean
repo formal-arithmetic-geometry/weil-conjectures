@@ -63,6 +63,7 @@ theorem PrimeSpectrum.connectedSpace_quotient_of_isIntegral {R S : Type*} [CommR
     rw [← RingHom.ker_eq_comap_bot, (RingHom.injective_iff_ker_eq_bot _).1 hinj]
     exact bot_le
   obtain ⟨Q, -, hQ, hQP⟩ := Ideal.exists_ideal_over_prime_of_isIntegral P ⊥ hker
+  rw [Ideal.under_def] at hQP
   have hIQ : I.map (algebraMap R S) ≤ Q := Ideal.map_le_iff_le_comap.2 (hQP ▸ hIP)
   refine ⟨⟨Q.map (Ideal.Quotient.mk _), Ideal.map_isPrime_of_surjective
     Ideal.Quotient.mk_surjective (by rwa [Ideal.mk_ker])⟩, ?_⟩

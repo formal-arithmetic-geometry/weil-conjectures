@@ -134,6 +134,7 @@ private theorem properProjection_preserved
     (A' (compactSupportProperSquare f)) (by
       simpa only [projectionTensorComparisonCompatible] using hφ) K L
 
+set_option backward.isDefEq.respectTransparency false in
 /-- One tensor comparison carries the compact-support projection and the proper counit
 projection through inclusion of a finite coefficient field. The compact-support square
 holds for every f, and the proper square holds for proper f. This compares maps;

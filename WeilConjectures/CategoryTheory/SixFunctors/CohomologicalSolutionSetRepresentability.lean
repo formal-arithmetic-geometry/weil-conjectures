@@ -115,7 +115,7 @@ theorem cohomological_isRepresentable_of_solutionSet
     apply coproduct_element_zero H hH B
     intro f
     rw [← AddCommGrpCat.comp_apply, ← H.map_comp, ← op_comp]
-    simpa only [κ, Sigma.ι_desc] using f.property
+    simpa only [κ, Sigma.ι_comp_desc] using f.property
   obtain ⟨Y, p, δ, hT⟩ := distinguished_cocone_triangle κ
   obtain ⟨y, hy⟩ := (ShortComplex.ab_exact_iff _).1
     (H.map_distinguished_op_exact (Triangle.mk κ p δ) hT) x hκ

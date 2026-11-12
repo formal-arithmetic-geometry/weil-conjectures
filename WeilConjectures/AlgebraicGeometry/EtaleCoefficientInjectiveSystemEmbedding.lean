@@ -31,7 +31,7 @@ private theorem etaleCoefficientProductEmbedding_mono
     infer_instance
   have : Mono (etaleCoefficientProductEmbedding D F φ i ≫ Pi.π _ ⟨i, 𝟙 i⟩) := by
     dsimp [etaleCoefficientProductEmbedding]
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     infer_instance
   exact mono_of_mono (etaleCoefficientProductEmbedding D F φ i) (Pi.π _ ⟨i, 𝟙 i⟩)
 

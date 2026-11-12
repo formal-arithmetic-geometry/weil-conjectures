@@ -94,7 +94,7 @@ lemma liftTriangle_distinguished (T : Triangle C) (hT : T ∈ distTriang C) (h�
     (by simp [liftTriangle, Functor.mapTriangle]) (by simp [liftTriangle, Functor.mapTriangle])
     (by
       dsimp [liftTriangle, Functor.mapTriangle]
-      simp only [Triangle.mk_mor₃, ObjectProperty.homMk_hom, Category.assoc,
+      simp only [Category.assoc,
         CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
       erw [Iso.inv_hom_id_app, Category.comp_id]))
 
@@ -213,7 +213,7 @@ lemma HomotopyCategory.Plus.ι_map_singleFunctors_shiftIso_inv_app {A : Type*} [
   rw [SingleFunctors.map_lift_shiftIso_inv_app]
   simp only [HomotopyCategory.singleFunctors, ObjectProperty.ι_obj, Functor.comp_obj,
     ObjectProperty.lift_obj_obj, Iso.refl_hom, NatTrans.id_app,
-    SingleFunctors.postcomp_shiftIso_inv_app, HomotopyCategory.quotient_obj_singleFunctors_obj,
+    SingleFunctors.postcomp_shiftIso_inv_app,
     Iso.refl_inv, Category.assoc, Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
@@ -407,9 +407,26 @@ instance (K : CochainComplex A ℤ) (s : ℤ) :
   exact DerivedCategory.TStructure.t.isGE_of_iso
     ((DerivedCategory.quotientCompQhIso A).symm.app (K.stupidFiltrationGE.obj ⟨s⟩)) s
 
+variable (A) in
+/-- The isomorphism `HomotopyCategory.Plus.singleFunctor A t ⋙ DerivedCategory.Plus.Qh ≅
+DerivedCategory.Plus.singleFunctor A t`. -/
+noncomputable def plusSingleFunctorCompQhIso (t : ℤ) :
+    HomotopyCategory.Plus.singleFunctor A t ⋙ DerivedCategory.Plus.Qh ≅
+      DerivedCategory.Plus.singleFunctor A t :=
+  ((Functor.FullyFaithful.ofFullyFaithful DerivedCategory.Plus.ι).whiskeringRight A).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.Plus.QhCompιIsoιCompQh A) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (HomotopyCategory.Plus.singleFunctorCompιIso A t) _ ≪≫
+      (DerivedCategory.singleFunctorIsoCompQh A t).symm ≪≫
+      (DerivedCategory.Plus.singleFunctorιIso A t).symm)
+
 instance (t : ℤ) (X : A) :
-    (DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor A t).obj X)).IsGE t :=
-  inferInstanceAs (((DerivedCategory.Plus.singleFunctor A t).obj X).IsGE t)
+    (DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor A t).obj X)).IsGE t := by
+  have : ((DerivedCategory.Plus.singleFunctor A t).obj X).IsGE t := inferInstance
+  rw [← DerivedCategory.Plus.isGE_ι_obj_iff] at this ⊢
+  exact DerivedCategory.TStructure.t.isGE_of_iso
+    (DerivedCategory.Plus.ι.mapIso ((plusSingleFunctorCompQhIso A t).app X).symm) t
 
 /-- The tower of distinguished triangles `R⁺v(σ_{≥ -q} K)` in `D⁺(B)`, image under the
 right derived functor `R⁺v` of the tower of stupid truncations of `K`. -/
@@ -466,12 +483,22 @@ noncomputable abbrev rightDerivedSingleFunctors : SingleFunctors A (DerivedCateg
   ((HomotopyCategory.Plus.singleFunctors A).postcomp DerivedCategory.Plus.Qh).postcomp
     v.rightDerivedFunctorPlus
 
+/-- The isomorphism `Hʳ(R⁺v(X[0])) ≅ R^r v(X)`, natural in `X`. -/
+noncomputable def rightDerivedSingleFunctorsZeroIso (r : ℕ) :
+    v.rightDerivedSingleFunctors.functor 0 ⋙
+        (DerivedCategory.Plus.homologyFunctor B 0).shift (r : ℤ) ≅
+      v.rightDerived r :=
+  Functor.associator (HomotopyCategory.Plus.singleFunctor A 0 ⋙ DerivedCategory.Plus.Qh)
+      v.rightDerivedFunctorPlus (DerivedCategory.Plus.homologyFunctor B r) ≪≫
+    Functor.isoWhiskerRight (plusSingleFunctorCompQhIso A 0) _ ≪≫
+    v.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso r
+
 /-- The isomorphism `Hⁿ(R⁺v(X[-t])) ≅ R^r v(X)` for `n - t = r`, natural in `X`. -/
 noncomputable def homologyRightDerivedSingleIso (t n : ℤ) (r : ℕ) (h : n - t = r) :
     v.rightDerivedSingleFunctors.functor t ⋙ (DerivedCategory.Plus.homologyFunctor B 0).shift n ≅
       v.rightDerived r :=
   v.rightDerivedSingleFunctors.shiftSequenceIso _ t 0 (-t) n r (by omega) (by omega) ≪≫
-    v.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso r
+    v.rightDerivedSingleFunctorsZeroIso r
 
 /-- The isomorphisms `Hⁿ(R⁺v(X[-t])) ≅ R^r v(X)` are compatible with the isomorphisms
 `Hⁿ(R⁺v(X[-t])) ≅ Hⁿ⁺¹(R⁺v(X[-t-1]))`. -/
@@ -572,7 +599,8 @@ noncomputable def stupidFiltrationAbutmentι (K : CochainComplex.Plus A) (p n : 
       (DerivedCategory.Plus.homologyFunctor B n).obj
         (v.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj K)) :=
   ((DerivedCategory.Plus.homologyFunctor B 0).shift n).map (v.rightDerivedFunctorPlus.map
-    (DerivedCategory.Plus.Qh.map (CochainComplex.stupidFiltrationGEPlusι K (-(-p)))))
+    (DerivedCategory.Plus.Qh.map (CochainComplex.stupidFiltrationGEPlusι K (-(-p))) ≫
+      (DerivedCategory.Plus.quotientCompQhIso A).hom.app K))
 
 lemma stupidFiltrationAbutmentι_comp (K : CochainComplex.Plus A) (p n : ℤ) :
     (v.stupidFiltrationExactCouple K.obj).α (p + 1, n) (p, n) ≫
@@ -586,9 +614,12 @@ lemma stupidFiltrationAbutmentι_comp (K : CochainComplex.Plus A) (p n : ℤ) :
   rw [TriangleTower.coupleα_eq _ _ (-(p + 1)) (-p) n (by omega), ← Functor.map_comp,
     Category.assoc]
   congr 1
-  simp only [stupidFiltrationTower, TriangleTower.map_mor₁, ← Functor.map_comp,
-    CochainComplex.stupidTower_mor₁_comp_stupidFiltrationGEPlusι]
-  exact h
+  simp only [stupidFiltrationTower, TriangleTower.map_mor₁, ← Functor.map_comp]
+  have h' := h =≫ v.rightDerivedFunctorPlus.map
+    ((DerivedCategory.Plus.quotientCompQhIso A).hom.app K)
+  simp only [Category.assoc, ← Functor.map_comp] at h'
+  rw [← Functor.map_comp_assoc, CochainComplex.stupidTower_mor₁_comp_stupidFiltrationGEPlusι]
+  exact h'
 
 /-- The filtration of the abutment `Hⁿ(R⁺v(K))` by the images of the maps
 `Hⁿ(R⁺v(σ_{≥ p} K)) ⟶ Hⁿ(R⁺v(K))`. -/

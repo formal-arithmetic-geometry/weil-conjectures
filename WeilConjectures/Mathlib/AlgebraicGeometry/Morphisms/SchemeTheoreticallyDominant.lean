@@ -126,6 +126,7 @@ theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (g : T ⟶ Y) :
   (isSchemeTheoreticallyDominant_iff g).trans
     (Scheme.isIso_subschemeι_iff_eq_bot g.ker).symm
 
+
 /-- Precomposition with a scheme-theoretically dominant morphism does not change the
 kernel ideal sheaf. -/
 lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
@@ -226,6 +227,7 @@ theorem Scheme.Hom.ker_morphismRestrict (U : Y.Opens) :
     (g ∣_ U).ker = g.ker.comap U.ι :=
   g.ker_of_isPullback U.ι (isPullback_morphismRestrict g U).flip
 
+
 /-- The two closed subschemes of `Y'` occurring in flat base change for
 scheme-theoretic images have the same kernel ideal sheaf.
 
@@ -268,6 +270,7 @@ lemma Scheme.Hom.image.eq_pullbackIso_hom (c : (pullback.snd g q).image ⟶ pull
     c = (pullbackIso g q).hom := by
   rw [← cancel_mono (pullback.fst q g.imageι), hc, pullbackIso_hom_fst]
 
+
 /-- The base change isomorphism is compatible with the factor maps through the
 scheme-theoretic images. -/
 @[reassoc (attr := simp)]
@@ -299,6 +302,7 @@ lemma Scheme.Hom.image.isPullback_imageι :
       q g.imageι :=
   isPullback_imageι_of_comp g q _ <| by
     rw [← pullbackIso_hom_fst_assoc, pullback.condition, Category.assoc]
+
 
 section Opens
 
@@ -478,6 +482,7 @@ lemma Scheme.Hom.imageMap_comp {X'' Y'' : Scheme.{u}} (g'' : X'' ⟶ Y'') (u' : 
       imageMap g g' u v w ≫ imageMap g' g'' u' v' w' :=
   (eq_imageMap g g'' (u ≫ u') (v ≫ v') _ _ (by simp)).symm
 
+
 end Image
 
 section ImageOverOpen
@@ -527,6 +532,7 @@ theorem isSchemeTheoreticallyDominant_iff_app_injective {X Y : Scheme.{u}} (f : 
   funext U
   rw [f.ker_apply U, Scheme.IdealSheafData.ideal_bot, Pi.bot_apply]
   exact (RingHom.injective_iff_ker_eq_bot _).mp (h U)
+
 
 end AppInjective
 

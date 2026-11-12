@@ -298,7 +298,7 @@ theorem exists_etaleConstructibleStratumFiltration
     let epNat := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (j i) (V i.succ).ι
         (V i.castSucc).ι (X.homOfLE_ι _).symm) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     let ep := epNat.app K
     -- Compare the left adjoints through the known comparison of their right adjoints.
     let eo := (derivedOpenImmersionLowerShriekUpperStarAdjunction
@@ -312,7 +312,7 @@ theorem exists_etaleConstructibleStratumFiltration
         (V i.castSucc).ι).mapDerivedCategory.mapIso ep ≪≫ eo.app _
     let ec := ((Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (c i) (V i.succ).ι)) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).app K
+      (Functor.mapDerivedCategoryCompIso _ _).symm).app K
     let e₃ : Δ.obj₃ ≅ ((@immersionLowerShriek A _ _ _ _ (c i)
         (V i.succ).ι (hc i) _).obj (P i))⟦(0 : ℤ)⟧ :=
       G.mapIso ((lowerStar (ModuleCat.{u + 1} A) (c i)).rightDerivedFunctor.mapIso ec.symm) ≪≫

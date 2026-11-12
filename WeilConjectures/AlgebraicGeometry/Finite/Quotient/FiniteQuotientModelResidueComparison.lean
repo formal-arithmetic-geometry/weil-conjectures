@@ -140,7 +140,7 @@ private def residueChange_comp (X : Scheme.{t})
   let e : (completedRestriction X g).mapDerivedCategory ⋙
       (completedRestriction X f).mapDerivedCategory ≅
       (completedRestriction X (f ≫ g)).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (completedRestrictCompIso X f g).symm
   exact ((a.comp b).ofNatIsoRight e).leftAdjointUniq c
 

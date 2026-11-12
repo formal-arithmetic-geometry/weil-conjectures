@@ -37,7 +37,10 @@ theorem adjunction_cochain_transpose
     (εc : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
     (ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     (hε : ∀ P : CochainComplex A ℤ,
-      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) = εc.app P)
+      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫
+          (DerivedCategory.quotientCompQhIso B).hom.app
+            ((E.mapHomologicalComplex (.up ℤ)).obj P) =
+        T.map ((DerivedCategory.quotientCompQhIso A).hom.app P) ≫ εc.app P)
     (d : T ⊣ R.mapDerivedCategory)
     (hd : ∀ (M : HomotopyCategory A (.up ℤ)) (N : HomotopyCategory B (.up ℤ))
       (f : (E.mapHomotopyCategory (.up ℤ)).obj M ⟶ N),
@@ -58,24 +61,22 @@ theorem adjunction_cochain_transpose
     rw [Adjunction.homEquiv_unit, Adjunction.mapHomotopyCategory_unit_app_quotient,
     Adjunction.homEquiv_unit, qA.map_comp]
     rfl
-  rw [haeq, hε P] at ht
-  let R₀ := R
-  have hf : R₀.mapDerivedCategoryFactorsh.inv.app (qB.obj K) =
-    R₀.mapDerivedCategoryFactors.inv.app K := by
-    apply (cancel_epi (R₀.mapDerivedCategoryFactorsh.hom.app (qB.obj K))).1
-    rw [Iso.hom_inv_id_app, R₀.mapDerivedCategoryFactorsh_hom_app]
-    simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
-    simp only [Functor.comp_obj, Quotient.lift.isLift_hom, Functor.map_id,
-      Category.comp_id, Category.assoc]
-    change 𝟙 _ = R₀.mapDerivedCategory.map (𝟙 (DerivedCategory.Q.obj K)) ≫
-    R₀.mapDerivedCategoryFactors.hom.app K ≫
-      𝟙 (DerivedCategory.Q.obj ((R₀.mapHomologicalComplex (.up ℤ)).obj K)) ≫
-      R₀.mapDerivedCategoryFactors.inv.app K
-    erw [R₀.mapDerivedCategory.map_id, Category.id_comp, Category.id_comp,
-    Iso.hom_inv_id_app]
-    rfl
-  rw [hf] at ht
-  exact ht
+  rw [haeq] at ht
+  have hf : R.mapDerivedCategoryFactorsh.inv.app (qB.obj K) ≫
+      R.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso B).hom.app K) =
+    (DerivedCategory.quotientCompQhIso A).hom.app
+        ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      R.mapDerivedCategoryFactors.inv.app K := by
+    apply (cancel_epi (R.mapDerivedCategoryFactorsh.hom.app (qB.obj K))).1
+    rw [Iso.hom_inv_id_app_assoc, R.mapDerivedCategoryFactorsh_hom_app]
+    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+      Category.assoc]
+    erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
+      Iso.hom_inv_id_app, Category.comp_id]
+  apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app P)).1
+  rw [← d.homEquiv_naturality_left, ← Category.assoc, ← hε P, Category.assoc,
+    ← DerivedCategory.quotientCompQhIso_hom_naturality, ← Category.assoc,
+    d.homEquiv_naturality_right]
+  erw [ht, Category.assoc, hf,
+    ← Category.assoc, DerivedCategory.quotientCompQhIso_hom_naturality, Category.assoc]
 end CategoryTheory

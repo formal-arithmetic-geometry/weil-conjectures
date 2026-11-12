@@ -162,8 +162,7 @@ theorem tensor_quotient_kernel_le_span
     exact hz
   obtain ⟨t, rfl⟩ := hz'
   clear hz
-  induction t using TensorProduct.induction_on with
-  | zero => rw [map_zero]; exact Q.zero_mem
+  induction t using TensorProduct.inductionOn with
   | add t u ht hu => rw [map_add]; exact Q.add_mem ht hu
   | tmul a b =>
     change a ⊗ₜ[R] b.val ∈ Q

@@ -30,7 +30,7 @@ attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   Functor.ofSequence Functor.ofOpSequence constantSheaf presheafToSheaf Functor.leftAdjoint
   HasDerivedCategory.standard MorphismProperty.Over.pullback
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   ProEtale.VaryingRing.coefficientTransition RingHom.ulift
   SemilinearSections.moduleAbelian SemilinearSections.hasDerived
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat

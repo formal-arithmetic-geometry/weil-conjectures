@@ -251,6 +251,7 @@ lemma pullbackHom_square (sq : φ_Y ≫ η_S = η_R ≫ F.map φ_X) :
   rw [← Category.assoc, ← G.map_comp, sq, G.map_comp, Category.assoc, Category.assoc,
     Adjunction.counitAlgHom, Adjunction.counitAlgHom, adj.counit_naturality]
 
+
 end Adjunction
 
 end CategoryTheory

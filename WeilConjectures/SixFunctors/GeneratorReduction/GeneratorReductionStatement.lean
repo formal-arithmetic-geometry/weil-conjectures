@@ -41,6 +41,6 @@ variable {S : Type s} (W : S → Scheme.{u}) {I : Type i} (location : I → S)
 
 private theorem inverseOrZero_eq_inv {A : Type v} [Category.{w} A] [HasZeroMorphisms A]
     {X Y : A} (f : X ⟶ Y) [IsIso f] : inverseOrZero f = inv f := by
-  simp only [inverseOrZero, dif_pos (inferInstance : IsIso f)]
+  simp only [inverseOrZero, dite_eq_left (inferInstance : IsIso f)]
 
 end WeilConjectures.GeneratorReduction

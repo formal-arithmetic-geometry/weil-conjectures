@@ -189,6 +189,7 @@ lemma mateEquiv_natTrans_eq_mateIso_hom :
     (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = (mateIso adj eL).hom :=
   rfl
 
+
 end Equivalence
 
 end CategoryTheory.Endofunctor.IsoAlgebra

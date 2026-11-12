@@ -216,7 +216,7 @@ theorem exists_etale_limit_finite_cech_coefficient_data
           (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j n t))) ≫
       (F k.val).obj.map (γ j k a n t).inv.op := by
     dsimp only [m]
-    erw [Pi.lift_π_assoc]
+    erw [Pi.lift_comp_π_assoc]
     simp only [Category.assoc, ← Functor.map_comp, ← op_comp,
       Iso.hom_inv_id_assoc]
   have hl (j : J) (n : ℕ) (t : Fin (n + 1) → K) :
@@ -232,7 +232,7 @@ theorem exists_etale_limit_finite_cech_coefficient_data
           (c.π.app (op j.val))).obj (Wj j n t))) ≫
       L.pt.obj.map (δ j n t).inv.op := by
     dsimp only [l]
-    erw [Pi.lift_π_assoc]
+    erw [Pi.lift_comp_π_assoc]
     simp only [Category.assoc, ← Functor.map_comp, ← op_comp,
       Iso.hom_inv_id_assoc]
   obtain ⟨hdm, hdl⟩ := etale_limit_finite_cech_coefficient_differential

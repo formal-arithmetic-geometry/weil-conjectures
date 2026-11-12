@@ -90,7 +90,7 @@ import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import Mathlib.CategoryTheory.Sites.Sheafification
@@ -175,10 +175,10 @@ private def fixedPullbackIso {X Y : Scheme.{u}} (g : Y ⟶ X)
       ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)) (Iso.refl _))
   exact (relativeRestriction g B).mapDerivedCategory.mapIso
       ((Functor.mapDerivedCategoryNatIso e).app N).symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso P (relativeRestriction g B)).app N).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso P (relativeRestriction g B)).app N ≪≫
     (Functor.mapDerivedCategoryNatIso (relativeEncoding g B)).app N ≪≫
-    (Functor.mapDerivedCategoryCompIso (scalarRestriction X B)
-      (ProEtale.upperStar (ModuleCat.{u + 1} B) g)).app N
+    ((Functor.mapDerivedCategoryCompIso (scalarRestriction X B)
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) g)).app N).symm
 
 private def fixedHomologyIso {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
@@ -425,8 +425,8 @@ theorem lisse_finite_quotient_etale_origin_core
     let H := ProEtale.upperStar (ModuleCat.{u + 1} B) W.hom
     let c := (Functor.mapDerivedCategoryNatIso
       (ProEtale.upperStarComp (ModuleCat.{u + 1} B) W.hom g)).app J ≪≫
-        (Functor.mapDerivedCategoryCompIso
-          (ProEtale.upperStar (ModuleCat.{u + 1} B) g) H).app J
+        ((Functor.mapDerivedCategoryCompIso
+          (ProEtale.upperStar (ModuleCat.{u + 1} B) g) H).app J).symm
     have := hLl q
     let E : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
         Sheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} B) :=
@@ -458,20 +458,20 @@ theorem lisse_finite_quotient_etale_origin_core
           (Functor.isoWhiskerLeft M.obj
             (ModuleCat.restrictScalarsEquivalenceOfRingEquiv eBC).counitIso))
         (by intro M N f; ext U x; rfl)
-    let eU := (Functor.mapDerivedCategoryCompIso Q UB).symm ≪≫
+    let eU := Functor.mapDerivedCategoryCompIso Q UB ≪≫
       Functor.mapDerivedCategoryNatIso
         (AlgebraicGeometry.Etale.upperStarRestrictScalarsIsoSheaf eBC.toRingHom V.hom) ≪≫
-          Functor.mapDerivedCategoryCompIso U QV
-    let eT := (Functor.mapDerivedCategoryCompIso T Q).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso U QV).symm
+    let eT := Functor.mapDerivedCategoryCompIso T Q ≪≫
       Functor.mapDerivedCategoryNatIso eQ ≪≫ Functor.mapDerivedCategoryIdIso _
-    let eF := (Functor.mapDerivedCategoryCompIso UB FV).symm ≪≫
+    let eF := Functor.mapDerivedCategoryCompIso UB FV ≪≫
       Functor.mapDerivedCategoryNatIso
         (ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B) V.hom).symm ≪≫
-          Functor.mapDerivedCategoryCompIso F HV
+          (Functor.mapDerivedCategoryCompIso F HV).symm
     let eV := (Functor.mapDerivedCategoryNatIso
       (ProEtale.upperStarComp (ModuleCat.{u + 1} B) V.hom g)).app J ≪≫
-        (Functor.mapDerivedCategoryCompIso
-          (ProEtale.upperStar (ModuleCat.{u + 1} B) g) HV).app J
+        ((Functor.mapDerivedCategoryCompIso
+          (ProEtale.upperStar (ModuleCat.{u + 1} B) g) HV).app J).symm
     exact ⟨FV.mapDerivedCategory.mapIso ((eU.app (T.mapDerivedCategory.obj L)).symm ≪≫
         UB.mapDerivedCategory.mapIso (eT.app L)) ≪≫
       eF.app L ≪≫ HV.mapDerivedCategory.mapIso eL ≪≫ eV.symm⟩

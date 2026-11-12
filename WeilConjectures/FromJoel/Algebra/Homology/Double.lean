@@ -69,7 +69,7 @@ noncomputable def mapHomologicalComplexObjDoubleIso :
     by_cases h₀ : i = i₀
     · by_cases h₁ : j = i₁
       · subst h₀ h₁
-        simp [double_d _ _ hi₀₁', mapHomologicalComplexObjDoubleXIso, dif_neg hi₀₁'.symm]
+        simp [double_d _ _ hi₀₁', mapHomologicalComplexObjDoubleXIso, dite_eq_right hi₀₁'.symm]
       · simp [double_d_eq_zero₁ _ _ _ _ h₁]
     · simp [double_d_eq_zero₀ _ _ _ _ h₀])
 
@@ -107,7 +107,7 @@ noncomputable def doubleFunctorCompMapHomologicalComplex :
       dsimp
       apply to_double_hom_ext
       · simp [mapHomologicalComplexObjDoubleXIso]
-      · simp [mapHomologicalComplexObjDoubleXIso, dif_neg hi₀₁'.symm])
+      · simp [mapHomologicalComplexObjDoubleXIso, dite_eq_right hi₀₁'.symm])
 
 end
 

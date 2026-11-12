@@ -32,8 +32,9 @@ derived from the main theorem.
 
 ## Status
 
-The main theorems are proved without `sorry`. The Lean code on `master` is identical to
-commit `91ebbc09a7`, which was independently built (from the shared build cache) and audited:
+The main theorems are proved without `sorry`. The Lean code on `master` is commit `91ebbc09a7`
+ported to Lean v4.35.0-rc3 with every statement unchanged; `91ebbc09a7` was independently built
+(from the shared build cache) and audited:
 `#print axioms` shows only `propext`, `Classical.choice` and `Quot.sound`. See
 [`formalization.yaml`](formalization.yaml) for the details of the process, the review
 status and the sources.
@@ -56,7 +57,7 @@ The informal blueprint lives in
 ## Authors
 
 Bin Dong, Nailin Guan, Jiedong Jiang, Ruochuan Liu, Christian Merten, Xiangyu Pan,
-Tingxiao Shi, Bin Wu, Wei Yang. Most of the proof was written by AI agents
+Tingxiao Shi, Bin Wu, Edison Xie, Wei Yang. Most of the proof was written by AI agents
 (Anthropic Claude models), orchestrated and supervised by the authors; see
 [`formalization.yaml`](formalization.yaml).
 

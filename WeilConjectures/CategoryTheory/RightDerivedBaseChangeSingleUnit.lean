@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The derived unit equation for base change on single complexes
@@ -103,7 +104,6 @@ private theorem single_exact_transport {D E : Type*} [Category* D] [Category* E]
     whiskerLeft_app, associator_inv_app, whiskerRight_app, NatTrans.id_app,
     Category.comp_id, Category.id_comp]
   erw [Category.id_comp]
-  rfl
 
 private theorem single_comparison {D E : Type*} [Category* D] [Category* E]
     [Abelian D] [Abelian E] [HasDerivedCategory D] [HasDerivedCategory E]
@@ -112,11 +112,14 @@ private theorem single_comparison {D E : Type*} [Category* D] [Category* E]
       (F.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 X).hom := by
   apply DerivedCategory.Plus.ι.map_injective
   simp only [mapHomotopyCategoryPlusSingleFunctorQhObjIso, Functor.preimageIso_hom,
-    Functor.map_preimage, Functor.mapIso_hom]
+    Functor.map_preimage]
   change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι E).map
     (homotopySingleIso F X).hom) = _
   simp only [homotopySingleIso, Functor.preimageIso_hom, Functor.map_preimage,
     Functor.mapIso_hom]
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
+  erw [Category.id_comp]
   rfl
 
 omit [HasDerivedCategory B] [HasDerivedCategory B'] [HasDerivedCategory C]
@@ -136,7 +139,10 @@ private theorem single_naturality (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
       (DerivedCategory.Plus.singleFunctor C' 0).map (e.app Y) := by
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_hom, Functor.map_preimage, Functor.mapIso_hom]
+    Functor.preimageIso_hom, Functor.map_preimage]
+  simp only [Iso.trans_hom, Iso.app_hom, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
+  erw [Category.id_comp, Category.id_comp]
   change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C').map
       ((NatTrans.mapHomotopyCategoryPlus e).app
         ((HomotopyCategory.Plus.singleFunctor B 0).obj Y))) ≫
@@ -176,7 +182,7 @@ private theorem single_naturality (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
     simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
       Functor.mapHomologicalComplex_map_f,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self]
     dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
     simp only [Functor.map_id, Category.id_comp]
@@ -224,21 +230,21 @@ theorem rightDerivedBaseChange_single_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) 
   have ht := single_exact_transport β Y
   simp only [singleTransport_hom, Functor.map_id, Category.id_comp,
     Category.comp_id] at ht
-  have hu := G'.rightDerivedFunctorPlusUnit.naturality (homotopySingleIso β Y).hom
+  have hu := G'.rightDerivedFunctorPlusUnith.naturality (homotopySingleIso β Y).hom
   dsimp only [Functor.comp_map] at hu
   change γ.mapDerivedCategoryPlus.map
       ((G.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 Y).inv ≫
-        G.rightDerivedFunctorPlusUnit.app K ≫ G.rightDerivedFunctorPlus.map
+        G.rightDerivedFunctorPlusUnith.app K ≫ G.rightDerivedFunctorPlus.map
           (singleTransport B Y).hom) ≫ _ =
     _ ≫ _ ≫ (G'.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 (β.obj Y)).inv ≫
-      G'.rightDerivedFunctorPlusUnit.app _ ≫ G'.rightDerivedFunctorPlus.map
+      G'.rightDerivedFunctorPlusUnith.app _ ≫ G'.rightDerivedFunctorPlus.map
         (singleTransport B' (β.obj Y)).hom
   rw [singleTransport_hom, singleTransport_hom]
   erw [Functor.map_id, Functor.map_id]
   erw [Category.comp_id, Category.comp_id]
   rw [Functor.map_comp, Category.assoc]
   erw [← Category.assoc (γ.mapDerivedCategoryPlus.map
-    (G.rightDerivedFunctorPlusUnit.app K)), hfac]
+    (G.rightDerivedFunctorPlusUnith.app K)), hfac]
   simp only [rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
     whiskerRight_app, whiskerLeft_app, Functor.associator_inv_app,
     Functor.associator_hom_app, mapHomotopyCategoryPlusCompIso_refl_hom_app,

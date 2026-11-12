@@ -57,11 +57,11 @@ def finiteP1PositiveClass (S : Scheme.{u}) [IsNoetherian S]
     (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] :
     geoP1Unit (FiniteRing l E n) (ProjectiveLine S) ⟶
       geoP1Twist (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2 :=
+        (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2 :=
   (geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map
     (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))
       (pow_pos (Fact.out : l.Prime).pos _)
-      (ULift.ext _ _ (coefficient_annihilates l E n)) S
+      (ULift.ext (coefficient_annihilates l E n)) S
       (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))
 
 attribute [local irreducible] finiteP1PositiveClass
@@ -106,7 +106,7 @@ theorem finiteP1PositiveClass_adjunct (S : Scheme.{u}) [IsNoetherian S]
           finiteP1PositiveClass l E S hS n) =
       biprod.inr ≫ geoP1TwistedMap (FiniteRing l E n) (l ^ (n + 1))
         (pow_pos (Fact.out : l.Prime).pos _)
-        (ULift.ext _ _ (coefficient_annihilates l E n)) S
+        (ULift.ext (coefficient_annihilates l E n)) S
         (by simpa only [Nat.cast_pow] using hS.pow (n + 1)) := by
   unfold finiteP1PositiveClass
   exact ordinary_positive_adjunct _ _ _ _ S _
@@ -152,7 +152,7 @@ theorem finiteP1_kummer_chern_realization
     ∃ t : (SpTowerShriek.Ev l E X n).obj ((line l E cX)⟦(2 : ℤ)⟧) ≅
       (finiteOverRealization l E n e).obj
         (geoP1Twist (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2),
+          (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2),
       (SpTowerShriek.Ev l E X n).map
           (firstChern l E cX (Scheme.Pic.mapHom e.hom (hyperplanePic S))) ≫ t.hom =
         (finiteOverUnitCoordinate l E n e c).hom ≫

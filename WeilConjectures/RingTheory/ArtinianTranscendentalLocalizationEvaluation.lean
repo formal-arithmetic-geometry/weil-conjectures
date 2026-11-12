@@ -125,8 +125,12 @@ theorem localization_transcendental_evaluation
     have hfibre : Module.Flat
         (T₀ ⧸ (IsLocalRing.maximalIdeal D).map (algebraMap D T₀))
         (_root_.TensorProduct T₀
-          (T₀ ⧸ (IsLocalRing.maximalIdeal D).map (algebraMap D T₀)) S) :=
-      inferInstance
+          (T₀ ⧸ (IsLocalRing.maximalIdeal D).map (algebraMap D T₀)) S) := by
+      have := Module.Free.of_divisionRing
+        (T₀ ⧸ (IsLocalRing.maximalIdeal D).map (algebraMap D T₀))
+        (_root_.TensorProduct T₀
+          (T₀ ⧸ (IsLocalRing.maximalIdeal D).map (algebraMap D T₀)) S)
+      exact Module.Flat.of_free
     have hf := (Module.flat_and_flat_of_flat_fibre_noetherian D T₀ S S hfibre).2
     exact RingHom.flat_algebraMap_iff.mpr hf
   let e : ULift.{max u v z} T₀ ≃+* T₀ := ULift.ringEquiv

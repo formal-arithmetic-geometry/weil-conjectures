@@ -99,7 +99,12 @@ open KappaCalculation
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 @[no_expose] private noncomputable instance tensorCoproducts (R : Sheaf J CommRingCat.{w}) :
-    HasCoproducts.{0} (Modules R) := inferInstance
+    HasCoproducts.{0} (Modules R) := by
+  intro I
+  let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 @[no_expose] private noncomputable instance hasTensorTotal (R : Sheaf J CommRingCat.{w})
     (P Q : Complex R) :

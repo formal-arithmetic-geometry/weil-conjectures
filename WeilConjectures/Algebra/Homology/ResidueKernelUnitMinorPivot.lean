@@ -65,8 +65,7 @@ private theorem residue_kernel_matrix_rank_one
         fA.hom.baseChange F := by
       apply LinearMap.ext
       intro z
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add, hx, hy]
       | tmul s x =>
         apply (E YA).injective

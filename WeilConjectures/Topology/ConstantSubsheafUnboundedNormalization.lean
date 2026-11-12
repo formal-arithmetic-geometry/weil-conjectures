@@ -199,7 +199,7 @@ theorem constantSubsheaf_unbounded_normalization
   have hfac : b ≫ g = Sigma.desc f := by
     apply Sigma.hom_ext
     intro i
-    simp only [b, g, Sigma.ι_desc_assoc, Category.assoc, Sigma.ι_desc]
+    simp only [b, g, Sigma.ι_comp_desc_assoc, Category.assoc, Sigma.ι_comp_desc]
     exact ht_transport (.inl i) (e (.inl i)) (e.symm_apply_apply (.inl i))
   have hg : Epi g := by
     let _ := hf
@@ -208,7 +208,7 @@ theorem constantSubsheaf_unbounded_normalization
     g, hg, (fun i ↦ (f' i).hom.app (op (A' i)) (unit (A' i))), ?_, ?_, ?_⟩
   · intro i
     exact ConcreteCategory.congr_hom
-      (NatTrans.congr_app (congrArg (fun α ↦ α.hom) (Sigma.ι_desc f' i)) (op (A' i)))
+      (NatTrans.congr_app (congrArg (fun α ↦ α.hom) (Sigma.ι_comp_desc f' i)) (op (A' i)))
       (unit (A' i))
   · intro i
     exact ht (e.symm i)

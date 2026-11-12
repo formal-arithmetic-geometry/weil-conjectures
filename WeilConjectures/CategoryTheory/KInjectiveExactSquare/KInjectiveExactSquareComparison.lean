@@ -290,8 +290,8 @@ theorem existsUnique_normalized
     have ht' := congrArg
       (fun t ↦ F.map (e X).hom ≫ t ≫ G.map (e Y).inv) ht
     simpa only [c, Functor.map_comp, Category.assoc,
-      Iso.map_hom_inv_id_assoc, Iso.map_inv_hom_id_assoc,
-      Iso.map_hom_inv_id, Category.comp_id] using ht'
+      Iso.hom_inv_id_map_assoc, Iso.inv_hom_id_map_assoc,
+      Iso.hom_inv_id_map, Category.comp_id] using ht'
   have ci (X : DerivedCategory A') : IsIso (c X) := by
     have := ha' (j X) (hj X)
     have := hb' (j X) (hj X)
@@ -306,8 +306,8 @@ theorem existsUnique_normalized
     have ht' := congrArg (fun t ↦ F.map (e X).hom ≫ t ≫ G.map u.inv) ht
     change c X = _
     simpa only [c, Functor.map_comp, Category.assoc,
-      Iso.map_hom_inv_id_assoc, Iso.map_inv_hom_id_assoc,
-      Iso.map_hom_inv_id, Category.comp_id] using ht'.symm
+      Iso.hom_inv_id_map_assoc, Iso.inv_hom_id_map_assoc,
+      Iso.hom_inv_id_map, Category.comp_id] using ht'.symm
   have atJ (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
       β.hom.app (Q.obj (π.obj J)) = d J hJ := by
     simpa using formula (Q.obj (π.obj J)) J hJ (Iso.refl _)

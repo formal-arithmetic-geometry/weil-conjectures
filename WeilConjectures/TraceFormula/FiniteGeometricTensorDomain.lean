@@ -98,7 +98,9 @@ theorem finiteGeometricTensor_domain
       (traceFormulaFiniteTensor l E X.obj.left n).obj (K, L) :=
     t P Lc (.inl hP) ≪≫
       (traceFormulaFiniteTensor l E X.obj.left n).mapIso
-        (Iso.prod (asIso (DerivedCategory.Q.map g) ≪≫ eK) eL)
+        (Iso.prod (C := proEtaleDerivedCategory X.obj.left A)
+          (D := proEtaleDerivedCategory X.obj.left A)
+          (asIso (DerivedCategory.Q.map g) ≪≫ eK) eL)
   have ht (a b c d : ℤ) (htK : HasProEtaleTorAmplitude X.obj.left A K a b)
       (htL : HasProEtaleTorAmplitude X.obj.left A L c d) :=
     (finiteCoefficient_tensor_ctf D l hl E (n + 1) (by omega) X.obj.left

@@ -75,7 +75,7 @@ theorem isSheaf_continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalSpa
     refine ⟨inferInstance, ?_⟩
     apply +allowSynthFailures equalizerCondition_yonedaPresheaf Profinite.toTopCat.{u} T
     intro Z B π hπ
-    exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 0 2).mp hπ)
+    exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 1 3).mp hπ)
       π.hom.hom.continuous
   exact Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp
     (continuousMapRingPresheafOfUniverse.{u, v} T)

@@ -79,11 +79,9 @@ theorem isZero_tor_restrictScalars_of_flat
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro t
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul x m =>
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul a x => rfl
         | add x y hx hy => simp_all [TensorProduct.add_tmul]
       | add x y hx hy => simp_all

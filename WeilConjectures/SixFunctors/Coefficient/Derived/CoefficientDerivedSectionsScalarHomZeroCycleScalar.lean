@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentativeData
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleClosed
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Scalar extension of the unit class and of the left unitor
 
@@ -39,8 +41,15 @@ theorem localizedUnit_eq
     (Q : CochainComplex A ℤ) :
     DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) =
-      DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app Q) := by
-  rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+      (DerivedCategory.quotientCompQhIso A).hom.app Q ≫
+        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app Q) ≫
+        (DerivedCategory.quotientCompQhIso A).inv.app
+          ((F.mapHomologicalComplex (.up ℤ) ⋙ R.mapHomologicalComplex (.up ℤ)).obj Q) := by
+  have hq : (DerivedCategory.quotientCompQhIso A).hom.app Q = 𝟙 _ := rfl
+  have hqi (K : CochainComplex A ℤ) :
+      (DerivedCategory.quotientCompQhIso A).inv.app K = 𝟙 _ := rfl
+  rw [hq, hqi, Category.id_comp, Category.comp_id,
+    Adjunction.mapHomotopyCategory_unit_app_quotient]
   rfl
 
 /-- The finite derived scalar unit on a K-flat complex in cochain coordinates.
@@ -77,7 +86,9 @@ theorem coefficientFiniteAdjunction_unit_reductionModel
       DerivedCategory.Q.map
         ((((scalarReductionExtension_adjunction l E W n).choose).mapHomologicalComplex
           (.up ℤ)).unit.app Q) := by
-    exact localizedUnit_eq (scalarReductionExtension_adjunction l E W n).choose Q
+    exact congrArg DerivedCategory.Qh.map
+      (Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
+        (scalarReductionExtension_adjunction l E W n).choose Q)
   have hmodel : (coefficientFiniteReductionModel l E W Q hQ n).hom =
       (scalarReductionCounit l E W n).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) := by
@@ -107,7 +118,17 @@ theorem coefficientFiniteReductionModel_hom
       (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
     (n : ℕ) :
     (coefficientFiniteReductionModel l E W Q hQ n).hom =
-      (scalarReductionCounit l E W n).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) := by
+      (coefficientFiniteDerivedExtension l E W n).map
+          ((DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app Q) ≫
+        (scalarReductionCounit l E W n).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫
+        (DerivedCategory.quotientCompQhIso (scalarReductionTarget l E W n)).hom.app
+          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) := by
+  have hqi : (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app Q =
+      𝟙 _ := rfl
+  have hq (K : CochainComplex (scalarReductionTarget l E W n) ℤ) :
+      (DerivedCategory.quotientCompQhIso (scalarReductionTarget l E W n)).hom.app K = 𝟙 _ := rfl
+  erw [hqi, hq, Category.comp_id]
+  erw [(coefficientFiniteDerivedExtension l E W n).map_id, Category.id_comp]
   dsimp only [coefficientFiniteReductionModel, coefficientLocalizedCounitModel,
     Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app, asIso_hom]
   change (coefficientFiniteDerivedExtension l E W n).map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
@@ -128,7 +149,18 @@ theorem coefficientFiniteReductionModel_naturality
       (coefficientFiniteReductionModel l E W X hX n).hom ≫
         DerivedCategory.Q.map (((scalarReductionExtension l E W n).mapHomologicalComplex
           (.up ℤ)).map g) := by
-  rw [coefficientFiniteReductionModel_hom, coefficientFiniteReductionModel_hom]
+  have hmodel (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+      (hQ : CochainComplex.IsKFlatIndependentCoefficients
+        (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q) :
+      (coefficientFiniteReductionModel l E W Q hQ n).hom =
+        (scalarReductionCounit l E W n).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) := by
+    dsimp only [coefficientFiniteReductionModel, coefficientLocalizedCounitModel,
+      Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app, asIso_hom]
+    change (coefficientFiniteDerivedExtension l E W n).map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
+    simp only [Category.comp_id]
+    erw [(coefficientFiniteDerivedExtension l E W n).map_id, Category.id_comp]
+  rw [hmodel Y hY, hmodel X hX]
   exact (scalarReductionCounit l E W n).naturality ((HomotopyCategory.quotient _ (.up ℤ)).map g)
 
 /-- Maps out of an ordinary finite scalar extension are determined on unit sections.

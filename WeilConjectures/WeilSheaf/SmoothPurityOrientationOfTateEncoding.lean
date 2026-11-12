@@ -32,7 +32,8 @@ open ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
-local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance instFactPrimeRingChar_smoothPurityOrientationOfTateEncoding
+    : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 
 variable {X Y : Scheme.{u}}
   [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -45,17 +46,23 @@ variable {X Y : Scheme.{u}}
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityOrientationOfTateEncoding
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityOrientationOfTateEncoding
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityOrientationOfTateEncoding
+    : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
-local instance : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityOrientationOfTateEncoding_2
+    : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityOrientationOfTateEncoding_2
+    : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityOrientationOfTateEncoding_2
+    : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
 variable (d : ℕ) [SmoothOfRelativeDimension d f] [HasUpperShriek k₀ l f]

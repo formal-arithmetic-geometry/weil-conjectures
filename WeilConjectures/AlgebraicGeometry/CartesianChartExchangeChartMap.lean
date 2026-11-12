@@ -89,4 +89,5 @@ lemma chartRestrictedMap_apply_eq_rawAffine
   exact congrArg (fun t ↦ t x)
     (chartRestrictedMap_eq_rawAffine f D c F q i V j hl₂ hw)
 
+
 end AlgebraicGeometry.Etale

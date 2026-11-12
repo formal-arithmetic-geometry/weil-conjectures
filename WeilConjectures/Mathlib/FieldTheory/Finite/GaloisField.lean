@@ -54,4 +54,5 @@ theorem coe_frobeniusAlgHom_pow (K R : Type*) [Field K] [Fintype K] [CommRing R]
     (n : ℕ) : ⇑(frobeniusAlgHom K R ^ n) = (· ^ (Fintype.card K ^ n)) := by
   rw [AlgHom.coe_pow, coe_frobeniusAlgHom, pow_iterate]
 
+
 end FiniteField

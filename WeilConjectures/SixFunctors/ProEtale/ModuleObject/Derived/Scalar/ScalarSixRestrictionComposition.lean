@@ -107,7 +107,7 @@ private theorem exact_normalized
         (Functor.mapDerivedCategoryCompNatIso rH ≪≫
           Functor.mapDerivedCategoryIdIso A).hom.app M =
       (Functor.mapDerivedCategoryNatIso c ≪≫
-          Functor.mapDerivedCategoryCompIso R S).hom.app
+          (Functor.mapDerivedCategoryCompIso R S).symm).hom.app
           (F.mapDerivedCategory.obj (G.mapDerivedCategory.obj M)) ≫
         S.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompNatIso rF ≪≫
           Functor.mapDerivedCategoryIdIso B).hom.app (G.mapDerivedCategory.obj M)) ≫
@@ -133,14 +133,14 @@ private theorem exact_normalized
   rw [hunit'] at hdq
   have hc : Functor.mapDerivedCategoryCompNatIso c.symm =
       (Functor.mapDerivedCategoryNatIso c ≪≫
-        Functor.mapDerivedCategoryCompIso R S).symm := by
+        (Functor.mapDerivedCategoryCompIso R S).symm).symm := by
     apply Iso.ext
     simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Functor.mapDerivedCategoryNatIso_symm]
+      Iso.symm_hom, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm]
   rw [hc] at hdq
   have hdq' := congrArg (fun z ↦
     (Functor.mapDerivedCategoryNatIso c ≪≫
-      Functor.mapDerivedCategoryCompIso R S).hom.app
+      (Functor.mapDerivedCategoryCompIso R S).symm).hom.app
       (F.mapDerivedCategory.obj (G.mapDerivedCategory.obj M)) ≫ z) hdq
   simp only [Iso.symm_hom, Iso.hom_inv_id_app_assoc] at hdq'
   simp only [Iso.trans_hom, NatTrans.comp_app,
@@ -185,7 +185,7 @@ private theorem canonical_normalized (E : LocallyClosedExtensionData.{u})
         ((Functor.mapDerivedCategoryCompNatIso (E.gamma a b)).hom.app M) ≫
         (E.derivedRestriction (a.comp b)).hom.app M =
       (Functor.mapDerivedCategoryNatIso (a.pullComp b) ≪≫
-        Functor.mapDerivedCategoryCompIso a.pull b.pull).hom.app
+        (Functor.mapDerivedCategoryCompIso a.pull b.pull).symm).hom.app
           ((E.derived a).obj ((E.derived b).obj M)) ≫
         b.pull.mapDerivedCategory.map
           ((E.derivedRestriction a).hom.app ((E.derived b).obj M)) ≫
@@ -229,7 +229,7 @@ private theorem chosen_normalized (E : LocallyClosedExtensionData.{u})
       a.pull.mapDerivedCategory b.pull.mapDerivedCategory (a.comp b).pull.mapDerivedCategory
       (D.restriction a) (D.restriction b) (D.restriction (a.comp b)) (D.gamma a b)
       (Functor.mapDerivedCategoryNatIso (a.pullComp b) ≪≫
-        Functor.mapDerivedCategoryCompIso a.pull b.pull) := by
+        (Functor.mapDerivedCategoryCompIso a.pull b.pull).symm) := by
   exact normalization_congr
     (A := DerivedCategory (proEtaleRingModules T.scheme T.ring))
     (B := DerivedCategory (proEtaleRingModules S.scheme S.ring))
@@ -241,7 +241,7 @@ private theorem chosen_normalized (E : LocallyClosedExtensionData.{u})
     (rG := D.restriction b) (rG' := E.derivedRestriction b)
     (rH := D.restriction (a.comp b)) (rH' := E.derivedRestriction (a.comp b))
     (c := Functor.mapDerivedCategoryNatIso (a.pullComp b) ≪≫
-      Functor.mapDerivedCategoryCompIso a.pull b.pull)
+      (Functor.mapDerivedCategoryCompIso a.pull b.pull).symm)
     (gamma := D.gamma a b)
     (restriction_eq E D a) (restriction_eq E D b) (restriction_eq E D (a.comp b))
     rfl (gamma_eq E D a b) (canonical_normalized E hE a b)
@@ -258,7 +258,7 @@ private theorem derived_normalized (E : LocallyClosedExtensionData.{u})
       (D.gamma a b ≪≫ eqToIso (congrArg E.derived h.symm))
       (eqToIso (congrArg (fun z ↦ z.pull.mapDerivedCategory) h) ≪≫
         Functor.mapDerivedCategoryNatIso (a.pullComp b) ≪≫
-        Functor.mapDerivedCategoryCompIso a.pull b.pull) := by
+        (Functor.mapDerivedCategoryCompIso a.pull b.pull).symm) := by
   exact normalization_transport
     (I := LocallyClosedCoefficientImmersion T X)
     (E.derived a) (E.derived b) a.pull.mapDerivedCategory b.pull.mapDerivedCategory
@@ -266,7 +266,7 @@ private theorem derived_normalized (E : LocallyClosedExtensionData.{u})
     (D.restriction a) (D.restriction b) (fun z ↦ D.restriction z)
     c (a.comp b) h (D.gamma a b)
     (Functor.mapDerivedCategoryNatIso (a.pullComp b) ≪≫
-      Functor.mapDerivedCategoryCompIso a.pull b.pull)
+      (Functor.mapDerivedCategoryCompIso a.pull b.pull).symm)
     (chosen_normalized E hE D a b)
 
 private theorem inverse_square {C : Type*} [Category C] {W X V Y Z : C}
@@ -555,8 +555,9 @@ private theorem derived_forward_comp
       G₀₁.mapDerivedCategory G₁₂.mapDerivedCategory G₀₂.mapDerivedCategory
       (Functor.mapDerivedCategorySquareIso q₀₁) (Functor.mapDerivedCategorySquareIso q₁₂)
       (Functor.mapDerivedCategorySquareIso q₀₂)
-      (Functor.mapDerivedCategoryNatIso cF ≪≫ Functor.mapDerivedCategoryCompIso F₀₁ F₁₂)
-      (Functor.mapDerivedCategoryNatIso cG ≪≫ Functor.mapDerivedCategoryCompIso G₀₁ G₁₂) := by
+      (Functor.mapDerivedCategoryNatIso cF ≪≫ (Functor.mapDerivedCategoryCompIso F₀₁ F₁₂).symm)
+      (Functor.mapDerivedCategoryNatIso cG ≪≫
+        (Functor.mapDerivedCategoryCompIso G₀₁ G₁₂).symm) := by
   intro K
   exact Functor.exactSquare_comp_forward F₀₁ F₁₂ F₀₂ G₀₁ G₁₂ G₀₂ U₀ U₁ U₂
     q₀₁ q₁₂ q₀₂ cF cG hq K
@@ -578,11 +579,11 @@ private theorem derived_pull_comp (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRin
         (ringPullComp f g (scalarSixSectionRing Λ Z) (scalarSixSectionRing Λ Y)
           (scalarSixSectionRing Λ X) (G.coefficient Λ g) (G.coefficient Λ f)
           (G.coefficient Λ (f ≫ g)) (coefficient_comp G Λ f g)) ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           (proEtaleRingModulePullback g (scalarSixSectionRing Λ Z)
             (scalarSixSectionRing Λ Y) (G.coefficient Λ g))
           (proEtaleRingModulePullback f (scalarSixSectionRing Λ Y)
-            (scalarSixSectionRing Λ X) (G.coefficient Λ f))) := by
+            (scalarSixSectionRing Λ X) (G.coefficient Λ f))).symm) := by
   have hd := derived_forward_comp
     (upperStar Λ.X g) (upperStar Λ.X f) (upperStar Λ.X (f ≫ g))
     (proEtaleRingModulePullback g _ _ (G.coefficient Λ g))
@@ -750,14 +751,14 @@ private theorem scalar_pull_comp
       (eqToIso (congrArg (fun z ↦ z.pull.mapDerivedCategory) h) ≪≫
         Functor.mapDerivedCategoryNatIso
           ((scalarSixImmersion G Λ f).pullComp (scalarSixImmersion G Λ g)) ≪≫
-        Functor.mapDerivedCategoryCompIso
-          (scalarSixImmersion G Λ f).pull (scalarSixImmersion G Λ g).pull) := by
+        (Functor.mapDerivedCategoryCompIso
+          (scalarSixImmersion G Λ f).pull (scalarSixImmersion G Λ g).pull).symm) := by
   have ht := pullComp_transport G Λ f g h
   simp only [Over.comp_left] at ht
   exact forward_comp_congr _ _ _ _ _ _ _ _ _ _ _ _ _
     (iso_trans_assoc_congr ht
       (Functor.mapDerivedCategoryCompIso
-        (scalarSixImmersion G Λ f).pull (scalarSixImmersion G Λ g).pull))
+        (scalarSixImmersion G Λ f).pull (scalarSixImmersion G Λ g).pull).symm)
     (derived_pull_comp G Λ g.left f.left)
 
 private theorem scalar_normalized
@@ -782,7 +783,7 @@ private theorem scalar_normalized
   let c := scalarSixImmersion G Λ (g ≫ f)
   let cp := eqToIso (congrArg (fun z ↦ z.pull.mapDerivedCategory) h) ≪≫
     Functor.mapDerivedCategoryNatIso (a.pullComp b) ≪≫
-    Functor.mapDerivedCategoryCompIso a.pull b.pull
+    (Functor.mapDerivedCategoryCompIso a.pull b.pull).symm
   have hn := derived_normalized E hE D a b c h
   have hq := scalar_pull_comp G Λ f g h
   exact transport_normalized

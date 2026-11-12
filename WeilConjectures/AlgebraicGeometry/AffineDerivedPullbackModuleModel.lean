@@ -97,7 +97,10 @@ theorem exists_affine_derivedPullback_module_model {X Y : Scheme.{u}} (f : X ⟶
   let T : ModuleCat.{u} Γ(Y, ⊤) ⥤
       SheafOfModules.{u} (moduleRings (Spec Γ(Y, ⊤)).toRingedSpace) :=
     tilde.functor Γ(Y, ⊤)
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := Γ(Y, ⊤)) f g
   let R := moduleSpecΓFunctor (R := Γ(Y, ⊤))
   have adj : T ⊣ R := tilde.adjunction
   let : T.IsLeftAdjoint := adj.isLeftAdjoint

@@ -64,6 +64,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 open AlgebraicGeometry.ProEtale
 
+local instance (Y : Scheme.{u}) (J : Type u) : HasColimitsOfShape (Discrete J) (Over Y) := by
+  have : HasColimitsOfShape (Discrete J) Scheme.{u} := inferInstance
+  exact ⟨fun F ↦ Over.hasColimit_of_hasColimit_comp_forget F⟩
+
 private theorem testObject_preservesLimit
     {I : Type v} [Category.{w} I] (Y : Scheme.{u}) (D : I ⥤ Profinite.{u}) :
     PreservesLimit D (profiniteToProEtOf Y ⋙ ProEt.forget Y) := by
@@ -102,13 +106,13 @@ private noncomputable def finiteCopiesOverIso (Y : Scheme.{u}) (E : FintypeCat.{
           Sigma.desc (fun e : E ↦ (Sigma.ι (fun _ : E ↦ Over.mk (𝟙 Y)) e).left) ≫
             (∐ fun _ : E ↦ Over.mk (𝟙 Y)).hom =
           Sigma.ι (fun _ : E ↦ Y) e ≫ Sigma.desc (fun _ : E ↦ 𝟙 Y)
-        rw [Sigma.ι_desc_assoc, Sigma.ι_desc]
+        rw [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
         exact (Sigma.ι (fun _ : E ↦ Over.mk (𝟙 Y)) e).w)
   refine ⟨h, k, ?_, ?_⟩
   · apply Sigma.hom_ext
     intro e
     rw [← Category.assoc, show Sigma.ι (fun _ : E ↦ Over.mk (𝟙 Y)) e ≫ h =
-      Over.homMk (Sigma.ι (fun _ : E ↦ Y) e) (by simp) from Sigma.ι_desc _ _]
+      Over.homMk (Sigma.ι (fun _ : E ↦ Y) e) (by simp) from Sigma.ι_comp_desc _ _]
     apply Over.OverMorphism.ext
     change Sigma.ι (fun _ : E ↦ Y) e ≫
       Sigma.desc (fun e : E ↦ (Sigma.ι (fun _ : E ↦ Over.mk (𝟙 Y)) e).left) = _
@@ -118,7 +122,7 @@ private noncomputable def finiteCopiesOverIso (Y : Scheme.{u}) (E : FintypeCat.{
       (Sigma.ι (fun _ : E ↦ Over.mk (𝟙 Y)) e).left) ≫ h.left = 𝟙 _
     apply Sigma.hom_ext
     intro e
-    rw [Sigma.ι_desc_assoc]
+    rw [Sigma.ι_comp_desc_assoc]
     change (Sigma.ι (fun _ : E ↦ Over.mk (𝟙 Y)) e ≫ h).left = _
     simp [h]
 
@@ -128,7 +132,7 @@ private theorem finiteCopiesOverIso_ι (Y : Scheme.{u}) (E : FintypeCat.{u}) (e 
       Over.homMk (Sigma.ι (fun _ : E ↦ Y) e) (by
         change Sigma.ι (fun _ : E ↦ Y) e ≫ Sigma.desc (fun _ : E ↦ 𝟙 Y) = 𝟙 Y
         simp) := by
-  exact Sigma.ι_desc _ _
+  exact Sigma.ι_comp_desc _ _
 
 private noncomputable def finiteCopiesOverNatIso (Y : Scheme.{u}) :
     CategoryTheory.forget FintypeCat.{u} ⋙ sigmaConst.obj (Over.mk (𝟙 Y)) ≅

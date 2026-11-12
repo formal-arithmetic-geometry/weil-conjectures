@@ -67,8 +67,8 @@ private noncomputable def exactPostcompositionDerivedIso.{uC, uD, uE, vC, vD, vE
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ G.mapDerivedCategoryPlusFactorsh.symm
   exact Functor.rightDerivedNatIso _ _
-    (F ⋙ G).rightDerivedFunctorPlusUnit
-    (Functor.whiskerRight F.rightDerivedFunctorPlusUnit G.mapDerivedCategoryPlus ≫
+    (F ⋙ G).rightDerivedFunctorPlusUnith
+    (Functor.whiskerRight F.rightDerivedFunctorPlusUnith G.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom)
     (HomotopyCategory.Plus.quasiIso C) e
 

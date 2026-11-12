@@ -58,7 +58,7 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local implicit_reducible] value expression IntegralCoherence.value scalarQuotients
   pullbackTensorRestrictedTower CategoryTheory.TwoSquare
   referenceOrdinaryModel integralCoefficientSheaf integralCoefficientCommRingSheaf
-  Functor.mapHomologicalComplex HomologicalComplex.asFunctor
+  HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
   integralOperationsGoodLocalization
 

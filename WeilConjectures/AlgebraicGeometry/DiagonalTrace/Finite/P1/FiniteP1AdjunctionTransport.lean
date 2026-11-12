@@ -48,9 +48,9 @@ def finiteNativePullCoordinate (A : Type u) [CommRing A] [Finite A]
   let K := (Scheme.sfIntrinsicModuleEquivalence X A).functor
   exact Functor.isoWhiskerLeft e.functor.mapDerivedCategory
       (Functor.mapDerivedCategoryNatIso d) ≪≫
-    (Functor.mapDerivedCategoryCompIso e.functor (Scheme.sfIntrinsicPullback A f)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso e.functor (Scheme.sfIntrinsicPullback A f) ≪≫
     Functor.mapDerivedCategoryNatIso (e.funInvIdAssoc (H ⋙ K)) ≪≫
-    Functor.mapDerivedCategoryCompIso H K
+    (Functor.mapDerivedCategoryCompIso H K).symm
 
 /-- Compose realization with pullback along the specified isomorphism over the base.
 Source: diagonal-tower trace (1), and linePullRealization in
@@ -73,7 +73,7 @@ def finiteProjectionPullCoordinate (A : Type u) [CommRing A] [Finite A]
   exact finiteNativePullCoordinate A f ≪≫
     Functor.isoWhiskerRight
       (Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar C p) (upperStar C e.hom)) K ≪≫
+        (Functor.mapDerivedCategoryCompIso (upperStar C p) (upperStar C e.hom)).symm) K ≪≫
     Functor.associator (upperStar C p).mapDerivedCategory H K ≪≫
     Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory C p).symm (H ⋙ K) ≪≫
     Functor.isoWhiskerLeft (geoP1Pullback (ULift.{u + 1} A) p)

@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Integral.IntegralLineTensorComparisonDefinitions
+public import WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInversePair
+public import WeilConjectures.Algebra.Homology.FlatSingleDerivedNormalization.FlatSingleDerivedNormalization
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTensor
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
@@ -118,9 +120,28 @@ theorem integralLineTensorComparison_representative
   let : HasDerivedCategory
       (SheafOfModules.LineUnbounded.Modules.{t, u} X (ring l E X none)) :=
     HasDerivedCategory.standard _
-  obtain ⟨_, _, hT, _, hTf, _, _⟩ :=
-    SheafOfModules.LineUnbounded.line_unbounded_derived_tensor.{t, u} X
-      (ring l E X none) T
+  let R := ring l E X none
+  let Rm := (sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology X)
+    (forget₂ CommRingCat RingCat)).obj R
+  have hcover : ∀ U : X.ProEt, ∃ s : Sieve U,
+      s ∈ AlgebraicGeometry.Scheme.ProEt.topology X U ∧
+      ∀ (V : X.ProEt) (f : V ⟶ U), s f →
+        Nonempty (T.over V ≅ SheafOfModules.unit (Rm.over V)) := by
+    obtain ⟨I, V, hV, h⟩ :=
+      (SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free
+        (M := T) (r := 1)).mp inferInstance
+    intro U
+    refine ⟨Sieve.ofObjects V U, hV U, ?_⟩
+    rintro Z f ⟨i, ⟨g⟩⟩
+    let e : T.over (V i) ≅ SheafOfModules.unit (Rm.over (V i)) :=
+      (h i).some ≪≫ SheafOfModules.freeUniqueIso (ULift (Fin 1))
+    exact ⟨((SheafOfModules.overFunctorMap Rm g).app T).symm ≪≫
+      (SheafOfModules.overMap Rm g).mapIso e ≪≫
+        SheafOfModules.overMapUnitIso (R := Rm) g⟩
+  obtain ⟨_, _, _, _, _, _, _, hflat, _⟩ :=
+    SheafOfModules.LineEvaluation.evaluation_inverse_pair R T hcover
+  obtain ⟨hT, hTf, _⟩ :=
+    SheafOfModules.FlatSingleDerivedNormalization.flat_single_derived_normalization R T hflat
   have htotal := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
     (ring l E X none) P.obj ((integralLineSingle l E X).obj T)
     P.property.1 hT P.property.2 hTf

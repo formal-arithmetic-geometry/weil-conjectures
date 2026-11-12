@@ -102,11 +102,11 @@ private theorem termIso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) (i : ℤ) :
       simp [exteriorRankOpen]
     let T (U : X.Opens) : X.Modules :=
       (pushforward U.ι).obj (exteriorPower ((restrictFunctor U.ι).obj M) d)
-    simp only [locallyRankedExteriorTerm, Int.natCast_nonneg, if_pos, Int.toNat_natCast]
+    simp only [locallyRankedExteriorTerm, Int.natCast_nonneg, ite_eq_left, Int.toNat_natCast]
     change Nonempty (T (exteriorRankOpen (LocallyConstant.const X d) d) ≅ exteriorPower M d)
     rw [hrank]
     exact exteriorSheaf_fullOpen_pushforward_iso M d
-  · simp only [if_neg hi]
+  · simp only [ite_eq_right hi]
     by_cases hn : 0 ≤ i
     · have hd : d ≠ i.toNat := by
         intro h
@@ -114,9 +114,9 @@ private theorem termIso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) (i : ℤ) :
         simpa [h] using (Int.toNat_of_nonneg hn).symm
       have : IsEmpty (exteriorRankOpen (LocallyConstant.const X d) i.toNat).toScheme :=
         ⟨fun x ↦ hd x.property⟩
-      rw [locallyRankedExteriorTerm, if_pos hn]
+      rw [locallyRankedExteriorTerm, ite_eq_left hn]
       exact ⟨(zeroPushforward _ _).isoZero⟩
-    · simp only [locallyRankedExteriorTerm, if_neg hn]
+    · simp only [locallyRankedExteriorTerm, ite_eq_right hn]
       exact ⟨Iso.refl _⟩
 
 /-- A constant rank function gives a single exterior power in the indicated degree;
@@ -154,16 +154,16 @@ theorem constantRankExterior_derived_iso {X : Scheme.{u}}
   have components (i : ℤ) : Nonempty (K.X i ≅ S.X i) := by
     obtain ⟨t⟩ := termIso M d i
     by_cases hi : i = (d : ℤ)
-    · exact ⟨(t ≪≫ eqToIso (if_pos hi)) ≪≫
+    · exact ⟨(t ≪≫ eqToIso (ite_eq_left hi)) ≪≫
         (HomologicalComplex.singleObjXIsoOfEq (ComplexShape.up ℤ) (d : ℤ) F i hi).symm⟩
-    · exact ⟨(t ≪≫ eqToIso (if_neg hi)) ≪≫
+    · exact ⟨(t ≪≫ eqToIso (ite_eq_right hi)) ≪≫
         ((HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) (d : ℤ) F i hi).isoZero).symm⟩
   let c : K ≅ S := HomologicalComplex.Hom.isoOfComponents
     (fun i ↦ (components i).some) (by
       intro i j hij
       have hj : i + 1 = j := hij
       subst j
-      simp [S, K, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      simp [S, K, CochainComplex.singleFunctor,
         locallyRankedExteriorComplex, HomologicalComplex.single_obj_d])
   exact ⟨DerivedCategory.Q.mapIso c ≪≫
     ((DerivedCategory.singleFunctorIsoCompQ C (d : ℤ)).app F).symm ≪≫

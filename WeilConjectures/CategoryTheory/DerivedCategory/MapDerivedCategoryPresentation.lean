@@ -166,7 +166,7 @@ lemma derivedRepresents_mapDerivedCategoryCompIso (F : C ⥤ D) (G : D ⥤ E)
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     DerivedRepresents (ofMap (F ⋙ G)) ((ofMap F).comp (ofMap G))
-      (mapDerivedCategoryCompIso F G).hom (𝟙 (F ⋙ G)) := by
+      (mapDerivedCategoryCompIso F G).inv (𝟙 (F ⋙ G)) := by
   intro K
   have h := mapDerivedCategoryCompIso_fac F G K
   rw [Q_map_compIso_hom] at h
@@ -278,8 +278,8 @@ lemma derivedRepresents_mapDerivedCategoryCompIso_inv (F : C ⥤ D) (G : D ⥤ E
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     DerivedRepresents ((ofMap F).comp (ofMap G)) (ofMap (F ⋙ G))
-      (mapDerivedCategoryCompIso F G).inv (𝟙 (F ⋙ G)) :=
-  DerivedRepresents.inv (τ₀ := Iso.refl (F ⋙ G))
+      (mapDerivedCategoryCompIso F G).hom (𝟙 (F ⋙ G)) :=
+  DerivedRepresents.inv (τ := (mapDerivedCategoryCompIso F G).symm) (τ₀ := Iso.refl (F ⋙ G))
     (derivedRepresents_mapDerivedCategoryCompIso F G)
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
@@ -306,7 +306,7 @@ lemma derivedRepresents_mapDerivedCategoryCompIso_symm_trans {F₁ : C ⥤ D} {F
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (e : F₁ ⋙ F₂ ≅ G) :
     DerivedRepresents ((ofMap F₁).comp (ofMap F₂)) (ofMap G)
-      ((mapDerivedCategoryCompIso F₁ F₂).symm ≪≫ mapDerivedCategoryNatIso e).hom e.hom :=
+      (mapDerivedCategoryCompIso F₁ F₂ ≪≫ mapDerivedCategoryNatIso e).hom e.hom :=
   ((derivedRepresents_mapDerivedCategoryCompIso_inv F₁ F₂).comp
     (derivedRepresents_mapDerivedCategoryNatIso e)).congr rfl (by simp)
 
@@ -319,7 +319,7 @@ lemma derivedRepresents_mapDerivedCategoryNatIso_trans_compIso {F : C ⥤ E}
     [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
     (e : F ≅ G₁ ⋙ G₂) :
     DerivedRepresents (ofMap F) ((ofMap G₁).comp (ofMap G₂))
-      (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryCompIso G₁ G₂).hom e.hom :=
+      (mapDerivedCategoryNatIso e ≪≫ (mapDerivedCategoryCompIso G₁ G₂).symm).hom e.hom :=
   ((derivedRepresents_mapDerivedCategoryNatIso e).comp
     (derivedRepresents_mapDerivedCategoryCompIso G₁ G₂)).congr rfl (by simp)
 

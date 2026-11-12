@@ -47,7 +47,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 /-- The derived compositor induced by an ordinary compositor of exact functors. -/
 abbrev mapDerivedCategoryTriangleIso' (σ : H ≅ F ⋙ G) :
     H.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
-  mapDerivedCategoryNatIso σ ≪≫ mapDerivedCategoryCompIso F G
+  mapDerivedCategoryNatIso σ ≪≫ (mapDerivedCategoryCompIso F G).symm
 
 /-- The derived compositor is the localization of the ordinary one. -/
 theorem mapDerivedCategoryTriangleIso'_hom_app_factors (σ : H ≅ F ⋙ G)
@@ -57,7 +57,7 @@ theorem mapDerivedCategoryTriangleIso'_hom_app_factors (σ : H ≅ F ⋙ G)
       (mapDerivedCategoryTriangleIso' σ).hom.app (DerivedCategory.Q.obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc,
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
     mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac]
 
 end CategoryTheory.Functor

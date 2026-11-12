@@ -166,7 +166,7 @@ theorem affine_open_perfect_source_model
     perfect_exact_pullback j H θ E.obj hE
   let C := eD.inverse.obj (r.mapDerivedCategory.obj E.obj)
   let c : H.mapDerivedCategory.obj E.obj ≅ C :=
-    (Functor.mapDerivedCategoryCompIso r e₀.inverse).app E.obj
+    ((Functor.mapDerivedCategoryCompIso r e₀.inverse).app E.obj).symm
   have hpC : IsPerfect (Spec A) C := by
     intro x
     obtain ⟨V, hx, K, hK, ⟨iK⟩⟩ := hpH x

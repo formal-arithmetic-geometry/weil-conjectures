@@ -114,11 +114,11 @@ noncomputable def shriekCoefficientCompactificationIso
     CondensedRing.derivedComapLowerStarIso e.inv.hom c.obj.obj.g
   let j : J.mapDerivedCategory ⋙ UZ ≅
       shriekCoefficientTransport e X ⋙ J'.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso J (Mod.comap
-      (coefficientMap e.inv.hom c.obj.obj.Z))).symm ≪≫
+    Functor.mapDerivedCategoryCompIso J (Mod.comap
+      (coefficientMap e.inv.hom c.obj.obj.Z)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (CondensedRing.comapOpenImmersionLowerShriekIso e.inv.hom c.obj.obj.i) ≪≫
-      Functor.mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom X)) J'
+      (Functor.mapDerivedCategoryCompIso (Mod.comap (coefficientMap e.inv.hom X)) J').symm
   exact Functor.associator J.mapDerivedCategory P.rightDerivedFunctor
       (shriekCoefficientTransport e Y) ≪≫
     Functor.isoWhiskerLeft J.mapDerivedCategory d ≪≫
@@ -151,9 +151,9 @@ private theorem constructible_iso {T : Scheme.{u}}
   classical
   unfold IsConstantModelConstructible at h ⊢
   split at h
-  · rw [if_pos ‹_›]
+  · rw [ite_eq_left ‹_›]
     exact stratified_iso i h
-  · rw [if_neg ‹_›]
+  · rw [ite_eq_right ‹_›]
     exact fun U hU ↦ stratified_iso
       ((CondensedRing.upperStar Λ U.ι).mapIso i) (h U hU)
 
@@ -169,7 +169,7 @@ private instance ctf_replete (T : Scheme.{u}) :
 private noncomputable def transportCompIso
     (e : Mon.mk Λ ≅ Mon.mk Λ') (T : Scheme.{u}) :
     shriekCoefficientTransport e T ⋙ shriekCoefficientTransport e.symm T ≅ 𝟭 _ := by
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp _ _).symm ≪≫ Mod.comapCongr (by
         change (upperStarFromPoint T).map e.hom.hom ≫

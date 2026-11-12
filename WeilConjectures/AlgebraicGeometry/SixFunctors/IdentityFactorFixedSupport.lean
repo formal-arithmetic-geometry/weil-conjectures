@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportSiteCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Stalk
@@ -289,7 +291,7 @@ private theorem identityFactorIsoApp
   erw [Category.comp_id, Category.comp_id]
   rfl
 
-attribute [local irreducible] Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctor
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory
 
 /-- The geometric compositor on an etale-origin input is the pair of identity unit maps.

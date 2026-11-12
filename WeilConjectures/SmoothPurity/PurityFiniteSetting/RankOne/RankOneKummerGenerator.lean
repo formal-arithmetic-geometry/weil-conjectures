@@ -24,7 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting.RankOne
 
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   HomologicalComplex.homologyFunctor Scheme.kummerSequence
 
 open AlgebraicGeometry.Scheme

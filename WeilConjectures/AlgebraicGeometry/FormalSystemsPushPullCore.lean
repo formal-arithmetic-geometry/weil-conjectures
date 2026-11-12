@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullComparison
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullAffineAnnihilation
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 @[expose] public section
 
@@ -80,6 +81,6 @@ theorem exists_formalSystemsPushPull_core {X Y : Scheme.{u}} [IsNoetherian Y]
   refine ⟨h, α, ?_⟩
   have ha := formalSystemsPushPull_affine_annihilation J K f _hV adj G F _β h κ α hκ hα
   exact (List.TFAE.out (coherentFormalModule_annihilated_iff Y J K G
-    ((completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩) α) 1 0).mp ha
+    ((completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩) α) 2 1).mp ha
 
 end AlgebraicGeometry

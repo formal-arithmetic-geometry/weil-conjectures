@@ -150,7 +150,7 @@ instance ZMod.moduleInjective_self (n : ℕ) [NeZero n] : Module.Injective (ZMod
 /-- `ULift (ZMod n)` is an injective module over itself. -/
 instance ZMod.moduleInjective_ulift_self (n : ℕ) [NeZero n] :
     Module.Injective (ULift.{v} (ZMod n)) (ULift.{v} (ZMod n)) :=
-  ZModLike.injective_self (Nat.pos_of_ne_zero (NeZero.ne n)) (ULift.ext _ _ (by simp))
-    (fun x ↦ ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext _ _ (by
+  ZModLike.injective_self (Nat.pos_of_ne_zero (NeZero.ne n)) (ULift.ext (by simp))
+    (fun x ↦ ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext (by
       simpa using (ZMod.intCast_surjective x.down).choose_spec)⟩)
     fun z hz ↦ (ZMod.intCast_zmod_eq_zero_iff_dvd z n).1 (by simpa using congrArg ULift.down hz)

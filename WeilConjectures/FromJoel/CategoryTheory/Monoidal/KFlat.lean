@@ -175,6 +175,7 @@ lemma isLeftDerivedFunctor_bifunctorCounit₂_kFlat (Y : C) :
   W.localizerMorphismKFlat.isLeftDerivedFunctor_of_isLeftDerivabilityStructure _
     (fun X ↦ isIso_counit_app_app_of_kFlat_left _ _ _ _ X.property)
 
+
 end DerivedMonoidal
 
 end CategoryTheory

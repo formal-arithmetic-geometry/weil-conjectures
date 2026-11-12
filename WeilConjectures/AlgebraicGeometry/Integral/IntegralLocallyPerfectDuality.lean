@@ -83,8 +83,8 @@ private theorem identityLocalModel (X : Scheme.{u}) (R : Rings X) (U : X.ProEt)
     Functor.isoWhiskerRight t F' ≪≫ (Iso.refl _)
   let ds : H.mapDerivedCategory ⋙ F'.mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ E.functor.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso H F').symm ≪≫
-      Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso F E.functor
+    Functor.mapDerivedCategoryCompIso H F' ≪≫
+      Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso F E.functor).symm
   let α (M : DerivedCategory (pbcModules X R)) :
       integralLocalDerived (𝟙 X) R U M ≅
         E.functor.mapDerivedCategory.obj (F.mapDerivedCategory.obj M) :=

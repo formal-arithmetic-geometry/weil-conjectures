@@ -49,7 +49,7 @@ theorem exists_basis_of_subfield {ℓ : Type u} [Field ℓ] (p : ℕ) [Fact p.Pr
     exact hN _ (fun j ↦ ((s.equivFin.symm j : L) : ℓ)) (fun j ↦ (s.equivFin.symm j : L).2)
       ((hs.comp _ s.equivFin.symm.injective).map' L.val.toLinearMap
         (LinearMap.ker_eq_bot_of_injective L.val.injective))
-  have : Algebra.IsSeparable k⟮x⟯ L := ⟨fun y ↦ IsSeparable.of_algHom L.val (hsep _ y.2)⟩
+  have : Algebra.IsSeparable k⟮x⟯ L := ⟨fun y ↦ IsSeparable.of_algHom k⟮x⟯ L.val (hsep _ y.2)⟩
   -- transport to `k⟮x'⟯ ≤ E'`
   let x' : E' := ⟨x, hxE⟩
   have hmap : (k⟮x'⟯).map E'.val = k⟮x⟯ := by

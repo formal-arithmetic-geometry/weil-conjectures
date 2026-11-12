@@ -49,10 +49,10 @@ lemma preimage_sigmaDesc {σ : Type u} {g : σ → Scheme.{u}} {X : Scheme.{u}}
   obtain ⟨⟨i, y⟩, rfl⟩ := (sigmaMk g).surjective x
   rw [sigmaMk_mk, SetLike.mem_coe, SetLike.mem_coe, TopologicalSpace.Opens.mem_iSup]
   refine ⟨fun h ↦ ⟨i, y, ?_, rfl⟩, ?_⟩
-  · rwa [Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, Sigma.ι_desc] at h
+  · rwa [Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, Sigma.ι_comp_desc] at h
   rintro ⟨j, z, hz, e⟩
   obtain ⟨rfl, rfl⟩ := Sigma.mk.inj_iff.mp ((sigmaι_eq_iff g j i z y).mp e)
-  rwa [Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, Sigma.ι_desc]
+  rwa [Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
 
 /-- A morphism `Sigma.desc f` out of a finite disjoint union is affine if each `f i` is: the
 preimage of an affine open is the disjoint union of the affine opens `f i ⁻¹ᵁ U`. -/
@@ -83,6 +83,7 @@ lemma hasAmpleFamily_iff (X : Scheme.{u}) :
           ⨆ i, (Modules.Hom.zeroLocus (s i)).support.compl = ⊤ :=
   Iff.rfl
 
+
 namespace HasAmpleFamily
 
 /-- **Ample families pull back along affine morphisms.** If `L` with sections `s i` is an ample
@@ -92,7 +93,7 @@ theorem of_isAffineHom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (h : Y.H
     X.HasAmpleFamily := by
   obtain ⟨L, hL, ι, _, s, hs, hcov⟩ := h
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ Y.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   let t (i : ι) : 𝟙_ X.Modules ⟶ (Modules.pullback f).obj L :=
     (Modules.pullbackObjUnitIso f).inv ≫ (Modules.pullback f).map (s i)
   have ht (i : ι) : (Modules.Hom.zeroLocus (t i)).support.compl =

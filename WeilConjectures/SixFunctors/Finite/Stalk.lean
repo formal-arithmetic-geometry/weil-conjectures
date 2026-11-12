@@ -105,11 +105,12 @@ omit [IsFinite f] [IsAlgClosed Ω] in
 obtained from a pointed étale neighbourhood `(U, u)` of `y`, functorially. -/
 @[simps!]
 def Etale.baseChangeNbhd : Nbhd y ⥤ (pointSmallEtale t.1).fiber.Elements where
-  obj c := ⟨f.Etale.obj c.1, CategoryTheory.Over.homMk (basePt f c t) (basePt_snd f c t)⟩
-  map g := CategoryOfElements.homMk _ _ (f.Etale.map g.val)
+  obj c := Functor.elementsMk _ (f.Etale.obj c.1)
+    (CategoryTheory.Over.homMk (basePt f c t) (basePt_snd f c t))
+  map g := Functor.Elements.homMk (f.Etale.map g.val)
     (CategoryTheory.Over.OverMorphism.ext (basePt_comp_etale_map_left f g t))
-  map_id _ := CategoryOfElements.ext _ _ _ (f.Etale.map_id _)
-  map_comp _ _ := CategoryOfElements.ext _ _ _ (f.Etale.map_comp _ _)
+  map_id _ := Functor.Elements.hom_ext (f.Etale.map_id _)
+  map_comp _ _ := Functor.Elements.hom_ext (f.Etale.map_comp _ _)
 
 variable (G : Sheaf X.smallEtaleTopology A)
 
@@ -120,7 +121,7 @@ variable (G : Sheaf X.smallEtaleTopology A)
 def Etale.stalkRestrict :
     (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) ⟶
       (pointSmallEtale t.1).sheafFiber.obj G :=
-  colimit.pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
+  colimit.pre ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (Etale.baseChangeNbhd f y t).op
 
 omit [IsFinite f] [HasSmallSiteSheafify A] in
@@ -132,7 +133,7 @@ lemma Etale.toPresheafFiber_stalkRestrict (c : Nbhd y) :
         Etale.stalkRestrict A f y t G =
       (pointSmallEtale t.1).toPresheafFiber (f.Etale.obj c.1)
         ((Etale.baseChangeNbhd f y t).obj c).2 G.obj :=
-  colimit.ι_pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
+  colimit.ι_pre ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (Etale.baseChangeNbhd f y t).op (op c)
 
 omit [IsFinite f] [HasSmallSiteSheafify A] in
@@ -147,10 +148,10 @@ lemma Etale.stalkRestrict_naturality {G G' : Sheaf X.smallEtaleTopology A} (φ :
       (pointSmallEtale t.1).presheafFiber.map φ.hom =
     (pointSmallEtale y).toPresheafFiber U u _ ≫
       (pointSmallEtale y).presheafFiber.map ((f)_*[A].map φ).hom ≫ Etale.stalkRestrict A f y t G'
-  erw [Etale.toPresheafFiber_stalkRestrict_assoc A f y t G ⟨U, u⟩,
+  erw [Etale.toPresheafFiber_stalkRestrict_assoc A f y t G (Functor.elementsMk _ U u),
     GrothendieckTopology.Point.toPresheafFiber_naturality,
     GrothendieckTopology.Point.toPresheafFiber_naturality_assoc,
-    Etale.toPresheafFiber_stalkRestrict A f y t G' ⟨U, u⟩]
+    Etale.toPresheafFiber_stalkRestrict A f y t G' (Functor.elementsMk _ U u)]
   rfl
 
 omit [IsFinite f] in
@@ -180,7 +181,8 @@ lemma Etale.stalkRestrict_eq_counit (s : Spec (.of Ω) ⟶ X)
         (pointSmallEtale s).sheafFiber.map
           ((Etale.upperStarLowerStarAdjunction A f).counit.app G)
   -- on the germ of a section over `(V, u)` the left hand side is the germ at `(V ×_Y X, (u, s))`
-  rw [Etale.toPresheafFiber_stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G ⟨V, u⟩]
+  rw [Etale.toPresheafFiber_stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G
+    (Functor.elementsMk _ V u)]
   -- the right hand side is the three steps of `upperStarCompSheafFiberIso`, in reverse
   simp only [Etale.upperStarCompSheafFiberIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app, Category.assoc, ← Functor.map_comp]
@@ -202,9 +204,9 @@ lemma Etale.stalkRestrict_eq_counit (s : Spec (.of Ω) ⟶ X)
       (pointSmallEtale s) f.Etale (Hom.coverPreserving_etale f) A G V _).symm
   -- the transported point is `(u, s)`, since its two components are `u` and `s`
   refine CategoryTheory.Over.OverMorphism.ext (Limits.pullback.hom_ext ?_ ?_)
-  · exact (basePt_fst f ⟨V, u⟩ ⟨s, rfl⟩).trans
+  · exact (basePt_fst f (Functor.elementsMk _ V u) ⟨s, rfl⟩).trans
       (pointSmallEtaleFiberEtaleIso_inv_app_left_fst f s V u).symm
-  · exact (basePt_snd f ⟨V, u⟩ ⟨s, rfl⟩).trans
+  · exact (basePt_snd f (Functor.elementsMk _ V u) ⟨s, rfl⟩).trans
       (pointSmallEtaleFiberEtaleIso_inv_app_left_snd f s V u).symm
 
 omit [IsFinite f] in
@@ -233,14 +235,14 @@ variable (G : Sheaf X.smallEtaleTopology A)
 def Etale.stalkIsoColimitSections :
     colimit (sectionsFunctor f y G) ≅ (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) :=
   Functor.Final.colimitIso (forget f y).op
-    ((CategoryOfElements.π (pointSmallEtale y).fiber).op ⋙ ((f)_*[A].obj G).obj)
+    ((Functor.Elements.π (pointSmallEtale y).fiber).op ⋙ ((f)_*[A].obj G).obj)
 
 /-- The comparison of the colimit of the sections of `G` over the `t`-th pieces of the split
 neighbourhoods of `y` with the stalk of `G` at `t`. -/
 def Etale.pieceIsoStalk (t : GeometricFiber f y) :
     colimit (pieceSectionsFunctor f y G t) ≅ (pointSmallEtale t.1).sheafFiber.obj G :=
   Functor.Final.colimitIso (pieceFunctor t).op
-    ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
+    ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
 
 omit [HasSmallSiteSheafify A] in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -257,14 +259,15 @@ lemma Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict :
   intro s
   apply Pi.hom_ext
   intro t
-  simp only [Category.assoc, Pi.lift_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
+  simp only [Category.assoc, Pi.lift_comp_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
   erw [Etale.stalkIsoColimitSections, Functor.Final.ι_colimitIso_hom_assoc,
     Etale.toPresheafFiber_stalkRestrict, piComparison_comp_π_assoc, colim_map, ι_colimMap_assoc,
-    ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_π, Etale.pieceIsoStalk,
-    Functor.Final.ι_colimitIso_hom]
-  exact (colimit.w ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
-    (CategoryOfElements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
-      ((Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
+    ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π,
+    Etale.pieceIsoStalk, Functor.Final.ι_colimitIso_hom]
+  exact (colimit.w ((Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
+    (Functor.Elements.homMk
+      (x := Functor.elementsMk _ (s.unop.pieceObj t) (s.unop.piecePt t))
+      (y := (Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
       (CategoryTheory.Over.OverMorphism.ext (s.unop.piecePt_comp_pieceIncl t))).op).symm
 
 /-- The stalk of `f_* G` at `y` is the product of the stalks of `G` at the geometric points
@@ -306,8 +309,8 @@ def Etale.lowerStarSheafFiberIsoPi :
       intro t
       simp only [Functor.comp_map, Iso.trans_hom, Etale.stalkIsoPi_hom, Iso.symm_hom,
         Category.assoc, piObjIso_hom_comp_π]
-      rw [NatTrans.naturality, piObjIso_inv_comp_π_assoc, piObjIso_inv_comp_π, Pi.lift_π,
-        Pi.lift_π_assoc, Etale.stalkRestrict_naturality])
+      rw [NatTrans.naturality, piObjIso_inv_comp_π_assoc, piObjIso_inv_comp_π, Pi.lift_comp_π,
+        Pi.lift_comp_π_assoc, Etale.stalkRestrict_naturality])
 
 end StalkFormula
 

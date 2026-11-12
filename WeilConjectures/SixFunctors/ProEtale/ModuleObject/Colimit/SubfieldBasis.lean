@@ -144,7 +144,7 @@ lemma continuousMapRingObjMulLeft_hom_whiskerRight_comp_mul (t : T) :
       (continuousMapRingObjMulLeft.{u} T t).hom := by
   ext S : 2
   refine AddCommGrpCat.hom_ext_toIntLinearMap (TensorProduct.ext' fun _ _ ↦ ?_)
-  exact ULift.ext _ _ (_root_.mul_assoc _ _ _)
+  exact ULift.ext (_root_.mul_assoc _ _ _)
 
 /-- The multiplication by a constant `t` on the condensed abelian group `C(-, T)` commutes with
 the multiplication of the condensed ring `C(-, T)`. -/
@@ -176,8 +176,8 @@ noncomputable def continuousMapRingObjMapOfAddMonoidHom (φ : T →+ T') (hφ : 
     continuousMapRingObj.{u} T ⟶ continuousMapRingObj T' :=
   ⟨{ app _ := AddCommGrpCat.ofHom
         { toFun a := ULift.up ((⟨φ, hφ⟩ : C(T, T')).comp a.down)
-          map_zero' := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_zero φ)
-          map_add' _ _ := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_add φ _ _) }
+          map_zero' := ULift.ext (ContinuousMap.ext fun _ ↦ map_zero φ)
+          map_add' _ _ := ULift.ext (ContinuousMap.ext fun _ ↦ map_add φ _ _) }
      naturality _ _ _ := rfl }⟩
 
 /-- The sections of `continuousMapRingObjMapOfAddMonoidHom φ hφ` are given by postcomposition
@@ -231,17 +231,17 @@ lemma isIso_biproductDesc_padicSubfieldRingObjMap_comp_mulLeft (h : E ≤ F) :
     · subst hij
       rw [biproduct.ι_π_self]
       ext S a
-      refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+      refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
       exact (FiniteIntermediateField.basisOfLECoord_basisOfLE_mul h i i (a.down s)).trans
-        (if_pos rfl)
+        (ite_eq_left rfl)
     · rw [biproduct.ι_π_ne _ hij]
       ext S a
-      refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+      refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
       exact (FiniteIntermediateField.basisOfLECoord_basisOfLE_mul h i j (a.down s)).trans
-        (if_neg hij)
+        (ite_eq_right hij)
   · rw [biproduct.lift_desc]
     ext S a
-    refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
     rw [sum_hom_app_apply_down]
     exact FiniteIntermediateField.sum_basisOfLE_mul_basisOfLECoord h (a.down s)
 

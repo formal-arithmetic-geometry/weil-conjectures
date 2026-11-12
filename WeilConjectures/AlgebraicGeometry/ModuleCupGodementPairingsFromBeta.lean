@@ -46,12 +46,12 @@ private def stalkEval (X : Scheme.{u}) (F : X.Modules) (x : X) :
 private theorem proj_unit (X : Scheme.{u}) (F : X.Modules) (x : X) :
     moduleCup_godementUnit X F ≫ proj X F x = toSkyscraper (LinearMap.id :
       F.presheaf.stalk x →ₗ[X.presheaf.stalk x] F.presheaf.stalk x) := by
-  simp only [moduleCup_godementUnit, proj, Pi.lift_π]
+  simp only [moduleCup_godementUnit, proj, Pi.lift_comp_π]
 
 private theorem proj_map (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G) (x : X) :
     moduleCup_godementMap X f ≫ proj X G x =
       toSkyscraper (f.stalkLinearMap x ∘ₗ stalkEval X F x) := by
-  simp only [moduleCup_godementMap, proj, Pi.lift_π, comp_toSkyscraper, stalkEval,
+  simp only [moduleCup_godementMap, proj, Pi.lift_comp_π, comp_toSkyscraper, stalkEval,
     LinearMap.comp_assoc]
 
 private theorem eval_toSkyscraper (X : Scheme.{u}) (F : X.Modules) (x : X)

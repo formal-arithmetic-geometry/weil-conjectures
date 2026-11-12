@@ -104,6 +104,7 @@ theorem PrimeSpectrum.continuous_sigmaToPi {ι : Type*} (R : ι → Type*)
     Continuous (PrimeSpectrum.sigmaToPi R) :=
   continuous_sigma fun _ ↦ continuous_comap (Pi.evalRingHom R _)
 
+
 theorem PrimeSpectrum.isSpectralMap_comap {R S : Type*} [CommSemiring R] [CommSemiring S]
     (f : R →+* S) : IsSpectralMap (PrimeSpectrum.comap f) where
   toContinuous := PrimeSpectrum.continuous_comap f

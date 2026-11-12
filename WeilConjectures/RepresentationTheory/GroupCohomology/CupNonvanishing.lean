@@ -146,20 +146,20 @@ lemma cupHom_contractNth_castSucc {n : ℕ} (a : Fin n → Additive G →+ k) (g
     Fintype.prod_eq_mul_prod_compl j, Fin.contractNth_apply_of_eq _ _ _ _ (by simp),
     ofMul_mul, map_add, add_mul]
   congr 1
-  · rw [if_pos (by omega)]
+  · rw [ite_eq_left (by omega)]
     congr 1
     refine Finset.prod_congr rfl fun i hi ↦ ?_
     have hi : i ≠ j := by simpa using hi
     rcases lt_or_gt_of_ne (Fin.val_ne_of_ne hi) with h | h
-    · rw [Fin.contractNth_apply_of_lt _ _ _ _ (by simpa using h), if_pos (by omega)]
-    · rw [Fin.contractNth_apply_of_gt _ _ _ _ (by simpa using h), if_neg (by omega)]
-  · rw [if_neg (by omega)]
+    · rw [Fin.contractNth_apply_of_lt _ _ _ _ (by simpa using h), ite_eq_left (by omega)]
+    · rw [Fin.contractNth_apply_of_gt _ _ _ _ (by simpa using h), ite_eq_right (by omega)]
+  · rw [ite_eq_right (by omega)]
     congr 1
     refine Finset.prod_congr rfl fun i hi ↦ ?_
     have hi : i ≠ j := by simpa using hi
     rcases lt_or_gt_of_ne (Fin.val_ne_of_ne hi) with h | h
-    · rw [Fin.contractNth_apply_of_lt _ _ _ _ (by simpa using h), if_pos (by omega)]
-    · rw [Fin.contractNth_apply_of_gt _ _ _ _ (by simpa using h), if_neg (by omega)]
+    · rw [Fin.contractNth_apply_of_lt _ _ _ _ (by simpa using h), ite_eq_left (by omega)]
+    · rw [Fin.contractNth_apply_of_gt _ _ _ _ (by simpa using h), ite_eq_right (by omega)]
 
 /-- The cup product of homomorphisms is a cocycle. -/
 theorem d_cupHom {n : ℕ} (a : Fin n → Additive G →+ k) :
@@ -172,7 +172,7 @@ theorem d_cupHom {n : ℕ} (a : Fin n → Additive G →+ k) :
     simp [cupHom, cupPartial]
   have hn : cupHom a (fun i ↦ g i.castSucc) = cupPartial a g n := by
     simp only [cupHom, cupPartial]
-    exact Finset.prod_congr rfl fun i _ ↦ by rw [if_pos i.isLt]
+    exact Finset.prod_congr rfl fun i _ ↦ by rw [ite_eq_left i.isLt]
   rw [h0, hn]
   have htel : ∑ j : Fin n, (-1 : k) ^ ((j : ℕ) + 1) *
       (cupPartial a g (j + 1) + cupPartial a g j) =
@@ -249,7 +249,8 @@ theorem not_isZero_groupCohomology_finsupp [Nontrivial k] (ι : Type u) [Infinit
   by_cases hij : i = j
   · subst hij; simp
   · classical
-    rw [Finsupp.single_apply, if_neg (fun h ↦ hij (Fin.ext (f.injective h).symm)), if_neg hij]
+    rw [Finsupp.single_apply, ite_eq_right (fun h ↦ hij (Fin.ext (f.injective h).symm)),
+      ite_eq_right hij]
     simp
 
 /-- The differential of inhomogeneous cochains is precomposition with the differential of the bar
@@ -303,7 +304,8 @@ theorem exists_ext_ne_zero_finsupp.{w} [Nontrivial k] (ι : Type u) [Infinite ι
   by_cases hij : i = j
   · subst hij; simp
   · classical
-    rw [Finsupp.single_apply, if_neg (fun h ↦ hij (Fin.ext (f.injective h).symm)), if_neg hij]
+    rw [Finsupp.single_apply, ite_eq_right (fun h ↦ hij (Fin.ext (f.injective h).symm)),
+      ite_eq_right hij]
     simp
 
 end groupCohomology

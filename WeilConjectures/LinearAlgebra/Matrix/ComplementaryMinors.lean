@@ -288,7 +288,7 @@ theorem rank_map_add_rank_map_add_eq_of_exact (hψ : ∀ s, ψ s ≠ 0 → IsUni
     have h' : ((C q (q + 1)).map ψ).rank + ((C (q + 1) (q + 1 + 1)).map ψ).rank =
         Fintype.card (ι (q + 1)) := by
       have := h
-      simp only [P, if_neg hq, add_zero] at this
+      simp only [P, ite_eq_right hq, add_zero] at this
       rwa [show q + 1 - 1 = q by omega] at this
     obtain ⟨L, M, L', M', -, -, -, -, hs, -, -⟩ :=
       exists_split_of_rank_map_add_eq ψ hψ _ _ (hC _ _ _) h'
@@ -298,7 +298,7 @@ theorem rank_map_add_rank_map_add_eq_of_exact (hψ : ∀ s, ψ s ≠ 0 → IsUni
     obtain ⟨ρ, _, _, L, M, L', M', hs⟩ := split q hq' h
     have := rank_map_add_rank_map_eq_of_exact ψ (C (q - 1) q) (C q (q + 1)) (hC _ _ _) hs
       (fun K hK ↦ hex q hq _ K hK)
-    simp only [P, if_neg hq, add_zero]
+    simp only [P, ite_eq_right hq, add_zero]
     exact this
   -- the steps in degrees `i` and `i - 1`
   have stepi (h : P (i + 1)) : P i ∧ P (i - 1) := by
@@ -334,15 +334,16 @@ theorem rank_map_add_rank_map_add_eq_of_exact (hψ : ∀ s, ψ s ≠ 0 → IsUni
     rw [Fintype.card_sum] at r₂
     constructor
     · change _ + _ + (if i = i then _ else _) = _
-      rw [if_pos rfl]
+      rw [ite_eq_left rfl]
       omega
-    · simp only [P, if_neg (show i - 1 ≠ i by omega), add_zero]
+    · simp only [P, ite_eq_right (show i - 1 ≠ i by omega), add_zero]
       rw [show i - 1 + 1 = i by omega]
       omega
   -- the descending induction
   have top (q : ℤ) (hq : max N i < q) : P q := by
     have := hN q (lt_of_le_of_lt (le_max_left _ _) hq)
-    simp only [P, if_neg (show q ≠ i by omega), add_zero, Fintype.card_eq_zero, Nat.add_eq_zero_iff]
+    simp only [P, ite_eq_right (show q ≠ i by omega), add_zero,
+      Fintype.card_eq_zero, Nat.add_eq_zero_iff]
     exact ⟨Nat.le_zero.1 ((rank_le_card_height _).trans_eq Fintype.card_eq_zero),
       Nat.le_zero.1 ((rank_le_card_width _).trans_eq Fintype.card_eq_zero)⟩
   have key (n : ℕ) : ∀ q, max N i + 1 - n ≤ q → P q := by

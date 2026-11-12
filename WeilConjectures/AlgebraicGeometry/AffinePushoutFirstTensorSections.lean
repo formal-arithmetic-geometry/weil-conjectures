@@ -40,6 +40,13 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
+local instance instHasLeftKanExtension_affinePushoutFirstTensorSections
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+    (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+  have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+  exact Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+
 set_option hygiene false in
 local notation "𝓙" T => Opens.grothendieckTopology T
 set_option hygiene false in
@@ -184,8 +191,7 @@ theorem affine_pushout_first_tensor_sections [IsAffineHom f]
       simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
     intro r
     obtain ⟨x, rfl⟩ := e.surjective r
-    induction x using TensorProduct.induction_on with
-    | zero => exact ⟨[], by simp⟩
+    induction x using TensorProduct.inductionOn with
     | tmul c d => exact ⟨[(c, d)], by simpa using htmul c d⟩
     | add x y hx hy =>
       obtain ⟨l, hl⟩ := hx

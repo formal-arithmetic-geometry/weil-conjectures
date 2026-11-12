@@ -156,6 +156,7 @@ theorem Scheme.noetherianBaseSystem_spec (S : Scheme.{u}) [CompactSpace S]
   ⟨fun _ ↦ inferInstance, fun _ ↦ inferInstance, fun _ ↦ inferInstance,
     ⟨S.noetherianBaseSystem.isLimit⟩⟩
 
+
 variable {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S]
   [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f]
 
@@ -226,6 +227,7 @@ theorem descendedModel_spec :
   ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
     descendedModelIso_hom_comp f⟩
 
+
 /-- **The selected Noetherian compactification** `C_{Y,λ}` of the descended model, given by the
 recursive Noetherian construction `AlgebraicGeometry.noetherianCompactification`.
 (blueprint: `def-nagata-final-noetherian-compactification`) -/
@@ -242,6 +244,7 @@ theorem descendedModelCompactification_spec :
         descendedModelHom f :=
   ⟨(descendedModelCompactification f).isOpenImmersion,
     (descendedModelCompactification f).isProper, (descendedModelCompactification f).comm.symm⟩
+
 
 /-- **The base-changed compactification** `C^fp(X/S)`: the base change of the Noetherian
 compactification of the descended model along `S ⟶ S_λ`, composed with the identification

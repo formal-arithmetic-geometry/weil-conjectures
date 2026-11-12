@@ -237,8 +237,9 @@ private theorem pull_section_smul {R : Sheaf J CommRingCat.{v}}
     simp only [Functor.map_id] at hsm
     change (AI.moduleUnderlying.inv.app M).hom.app U
         ((L.map ((underlying R).map μ)).hom.app U x) =
-      AI.ringUnderlying.hom.hom.app U
-          ((L.map (sectionMap R a ((underlying R).obj M))).hom.app U x) •
+      (show (F.rings.obj R).obj.obj U from
+        AI.ringUnderlying.hom.hom.app U
+          ((L.map (sectionMap R a ((underlying R).obj M))).hom.app U x)) •
         (show (AI.modules.obj M).val.obj U from
           (AI.moduleUnderlying.inv.app M).hom.app U x) at hsm
     rw [hx] at hsm
@@ -326,7 +327,7 @@ private noncomputable def doubleComparison (f : End X) (g : End Y)
         Functor.mapIso_hom, Iso.symm_hom, ne_eq, zero_ne_one, not_false_eq_true,
         HomologicalComplex.double_d, Category.assoc, Iso.inv_hom_id_assoc,
         Functor.mapHomologicalComplex_obj_d, P.map_comp, zero_add, one_ne_zero,
-        Iso.map_inv_hom_id_assoc]
+        Iso.inv_hom_id_map_assoc]
       rw [reassoc_of% h]
     · change _ ≫ _ = P.map _ ≫ _
       rw [HomologicalComplex.double_d_eq_zero₀ _ _ _ _ hn,
@@ -374,7 +375,7 @@ private theorem factorIso_step
         Category.comp_id, Category.id_comp, P.map_comp,
         HomologicalComplex.Hom.isoOfComponents_hom_f, doubleComparisonX,
         Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
-        Iso.map_inv_hom_id_assoc, Iso.inv_hom_id_assoc]
+        Iso.inv_hom_id_map_assoc, Iso.inv_hom_id_assoc]
       rw [reassoc_of% h]
     · exact (HomologicalComplex.isZero_double_X _ _ n hn hn').eq_of_tgt _ _
 

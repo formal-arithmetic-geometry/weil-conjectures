@@ -45,6 +45,7 @@ abbrev primaryModuleForget :
 noncomputable def primaryRestrictedModule
     (R : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K))) :
     Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ H.toSubgroup := by
+  letI : Module ℤ R.obj.V := AddCommGroup.toIntModule _
   let ρ : Representation ℤ H.toSubgroup R.obj.V :=
     { toFun := fun g ↦ (R.obj.ρ (g : Gal(Ks/K))).toAddMonoidHom.toIntLinearMap
       map_one' := by ext x; simp
@@ -69,8 +70,9 @@ noncomputable def primarySubmodule
 /-- The subgroup of B consisting of elements of A; its quotient is literally B/A. -/
 abbrev primaryRelativeSubmodule
     (R : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))
-    (A B : AddSubgroup R.obj.V) : Submodule ℤ B.toIntSubmodule :=
-  A.toIntSubmodule.comap B.toIntSubmodule.subtype
+    (A B : AddSubgroup R.obj.V) : Submodule ℤ B.toIntSubmodule := by
+  letI : Module ℤ R.obj.V := AddCommGroup.toIntModule _
+  exact A.toIntSubmodule.comap B.toIntSubmodule.subtype
 
 /-- The quotient representation with trivial action. It agrees with the induced action
 when g*x-x lies in A, which is required by the exactness theorem below. -/

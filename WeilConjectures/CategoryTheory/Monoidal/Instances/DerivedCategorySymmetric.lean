@@ -89,7 +89,8 @@ universe w v u
 
 variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
 
-local instance hasColimitsOfSize_symmetricCategory : HasColimitsOfSize.{0, 0} C :=
+local instance hasColimitsOfSize_symmetricCategory_derivedCategorySymmetric
+    : HasColimitsOfSize.{0, 0} C :=
   hasColimitsOfSizeShrink C
 
 variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]

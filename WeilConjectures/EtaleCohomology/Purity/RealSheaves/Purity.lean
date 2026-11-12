@@ -1020,8 +1020,7 @@ theorem exists_restriction_isAffine [SmoothOfRelativeDimension 1 p] [Geometrical
   · have h := (W.isConj_toStandard_frobenius y').trans (R.restrict_frobenius x y' hxy)
     have h' := e.toMulEquiv.toMonoidHom.map_isConj h
     convert h' using 1
-    · exact (W.toStandard.symm_apply_apply _).symm
-    · rfl
+    exact (W.toStandard.symm_apply_apply _).symm
 
 /-- Blueprint `sk-p-real-purity`: Purity of real lisse sheaves on curves.
 

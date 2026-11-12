@@ -160,6 +160,13 @@ private abbrev extensionTensor {T : TopCat.{u}} {A B : T.Sheaf CommRingCat.{u}}
     (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t M).obj W :=
   z ⊗ₜ[A.obj.obj W, (t.hom.app W).hom] m
 
+local instance instHasLeftKanExtension_pushoutRegularModuleComparison
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+    (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+  have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+  exact Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The regular module of the pushout algebra is the tensor pullback of the direct

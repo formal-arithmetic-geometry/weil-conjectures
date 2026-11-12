@@ -45,7 +45,7 @@ private theorem restriction₀_naturality
     Limits.FormalCoproduct.cosimplicialObjectFunctor,
     AlgebraicTopology.alternatingCofaceMapComplex,
     AlgebraicTopology.AlternatingCofaceMapComplex.map, Limits.FormalCoproduct.evalOp]
-  simp only [Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
+  simp only [Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc]
   exact f.naturality _
 
 set_option backward.isDefEq.respectTransparency false in
@@ -65,9 +65,9 @@ private theorem restriction₀_d
     Preadditive.comp_add, Preadditive.comp_neg]
   apply Pi.hom_ext
   intro t
-  simp only [Preadditive.add_comp, Preadditive.neg_comp, Category.assoc, Pi.lift_π,
+  simp only [Preadditive.add_comp, Preadditive.neg_comp, Category.assoc, Pi.lift_comp_π,
     restriction₀, zero_comp]
-  erw [Pi.lift_π_assoc, Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π_assoc]
   rw [← F.map_comp, ← F.map_comp, ← op_comp, ← op_comp, ← i.map_comp, ← i.map_comp]
   change F.map (i.map (homOfLE (show (∏ᶜ fun k : Fin 2 ↦ U (t k)) ≤ ⊤ from le_top))).op +
     -F.map (i.map (homOfLE (show (∏ᶜ fun k : Fin 2 ↦ U (t k)) ≤ ⊤ from le_top))).op = 0
@@ -154,7 +154,7 @@ theorem nonempty_etale_openCech_resolution_total_iso
     simp only [CochainComplex.fromSingle₀Equiv_symm_apply_f_zero]
     change restriction₀ X i U (I.cocomplex.X q).obj ≫ Pi.π _ t = _
     dsimp [restriction₀]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
   have : QuasiIso b := HomologicalComplex₂.quasiIso_of_column_augmentation
     D A a ha b (fun _ ↦ rfl) hcol
   exact ⟨(isoOfQuasiIsoAt b n).symm ≪≫ (I.isoRightDerivedObj F n).symm⟩

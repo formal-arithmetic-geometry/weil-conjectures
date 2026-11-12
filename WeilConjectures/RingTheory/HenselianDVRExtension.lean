@@ -55,7 +55,7 @@ to a root. -/
 lemma exists_isRoot_residue_eq (f : A[X]) (hf : f.Monic) (a₀ : ResidueField A)
     (h₁ : aeval a₀ f = 0) (h₂ : aeval a₀ (derivative f) ≠ 0) :
     ∃ a : A, f.IsRoot a ∧ residue A a = a₀ := by
-  have := (HenselianLocalRing.TFAE A).out 0 1
+  have := (HenselianLocalRing.TFAE A).out 1 2
   exact this.mp inferInstance f hf a₀ h₁ h₂
 
 variable [IsSepClosed (ResidueField A)] {N : ℕ} (hN : (N : ResidueField A) ≠ 0)
@@ -164,7 +164,7 @@ theorem isDiscreteValuationRing_integralClosure :
     IsDiscreteValuationRing (integralClosure R L) := by
   have := isDedekindDomain_integralClosure R F L
   have := isLocalRing_integralClosure R L
-  have h := (IsDiscreteValuationRing.TFAE _ (not_isField_integralClosure R F L)).out 0 2
+  have h := (IsDiscreteValuationRing.TFAE _ (not_isField_integralClosure R F L)).out 1 3
   exact h.2 inferInstance
 
 variable (R F L) in
@@ -213,6 +213,7 @@ lemma bijective_algebraMap_residueField_integralClosure [IsAlgClosed (ResidueFie
   let := isLocalHom_algebraMap_integralClosure R F L
   have := Algebra.IsAlgebraic.residueField_of_isIntegral (R := R) (S := integralClosure R L)
   exact IsAlgClosed.algebraMap_bijective_of_isIntegral
+
 
 variable (R F L) in
 include F in
@@ -264,15 +265,15 @@ theorem exists_eq_unit_mul_pow_mul_finrank_residueField {π : R} (hπ : Irreduci
       uniq := fun q ↦ by
         obtain ⟨q, hq, hlo⟩ := q
         refine Subtype.ext (IsLocalRing.eq_maximalIdeal ?_)
-        refine Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := R) q ?_
-        rw [← Ideal.under_def, ← Ideal.over_def q (maximalIdeal R)]
+        refine Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) q ?_
+        rw [← Ideal.over_def q (maximalIdeal R)]
         infer_instance }
   have hsum := Ideal.sum_ramification_inertia_eq_finrank (maximalIdeal R) B
   rw [Fintype.sum_unique] at hsum
   change (maximalIdeal B).ramificationIdx R * (maximalIdeal B).inertiaDeg R = _ at hsum
-  rw [← Ideal.ramificationIdx'_eq_ramificationIdx' _ _ hpS,
-    ← Ideal.inertiaDeg'_eq_inertiaDeg (maximalIdeal R) (maximalIdeal B), he,
-    Ideal.inertiaDeg'_algebraMap, ← IsFractionRing.finrank_eq R F B L] at hsum
+  rw [← Ideal.ramificationIdx'_eq_ramificationIdx' _ _ hpS, he,
+    Ideal.inertiaDeg_eq_of_isMaximal (maximalIdeal R) (maximalIdeal B),
+    ← IsFractionRing.finrank_eq R F B L] at hsum
   exact hsum
 
 variable (R F L) in
@@ -291,6 +292,7 @@ theorem exists_eq_unit_mul_pow_finrank [IsAlgClosed (ResidueField R)] {π : R}
     (bijective_algebraMap_residueField_integralClosure R F L)).finrank_eq.symm.trans
     (Module.finrank_self _), mul_one] at he
   exact ⟨ϖ, u, hϖ, he ▸ hu⟩
+
 
 variable (R F L) in
 include F in

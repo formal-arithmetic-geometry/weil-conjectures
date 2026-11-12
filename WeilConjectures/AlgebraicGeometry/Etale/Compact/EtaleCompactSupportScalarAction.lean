@@ -71,10 +71,9 @@ private def sectionScalar (R : Sheaf J CommRingCat.{w})
     naturality := by
       intro U V f
       ext x
-      change s V • M.val.map f x = M.val.map f (s U • x)
-      rw [M.val.map_smul]
-      congr 1
-      exact (hs f).symm }
+      exact ((M.val.map_smul f (s U) x).trans
+        (congrArg (fun a : R.obj.obj V ↦ a • (show M.val.obj V from M.val.map f x))
+          (hs f))).symm }
 
 private theorem sectionScalar_naturality (R : Sheaf J CommRingCat.{w})
     (s : ∀ U, R.obj.obj U)
@@ -221,11 +220,13 @@ private theorem inverse_levelScalar
   have hm := A.moduleSMul M (B.obj M) a b tm (by
     intro U x
     change scalarSection Y O t r n U • (show M.val.obj U from x) =
-      a.hom.app U x • (show M.val.obj U from b.hom.app U x)
+      (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology) O t n).obj.obj U from
+        a.hom.app U x) • (show M.val.obj U from b.hom.app U x)
     dsimp only [a, b]
     change scalarSection Y O t r n U • (show M.val.obj U from x) =
-      (coefficientConstantSection (J := Y.smallEtaleTopology) O t n
-        (Ideal.Quotient.mk _ r)).hom.app U (terminal.hom.app U x) •
+      (show (coefficientQuotientSheaf (J := Y.smallEtaleTopology) O t n).obj.obj U from
+        (coefficientConstantSection (J := Y.smallEtaleTopology) O t n
+          (Ideal.Quotient.mk _ r)).hom.app U (terminal.hom.app U x)) •
           (show M.val.obj U from x)
     rw [constantSection_apply])
   apply (BX ⋙ sheafToPresheaf X.smallEtaleTopology (Type (u + 1))).map_injective
@@ -244,7 +245,8 @@ private theorem inverse_levelScalar
     ((A.modules.map (levelScalar Y O t r n M)).val.app U)
       ((A.moduleUnderlying.inv.app M).hom.app U x) at hn
   rw [← hn]
-  trans (A.ringUnderlying.hom.hom.app U ((L.map a).hom.app U x)) •
+  trans (show (coefficientQuotientSheaf (J := X.smallEtaleTopology) O t n).obj.obj U from
+    A.ringUnderlying.hom.hom.app U ((L.map a).hom.app U x)) •
     (show ((A.modules.obj M).val.obj U) from
       (A.moduleUnderlying.inv.app M).hom.app U ((L.map b).hom.app U x))
   · exact hm U x

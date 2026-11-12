@@ -222,6 +222,8 @@ private theorem higherDirectImage_filtered
       (DerivedCategory.singleFunctor _ 0 ⋙ R((p)_*⟦Λ⟧) ⋙
         DerivedCategory.homologyFunctor _ q) := by
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  -- Cache the zero morphisms of `A`: searching for them under `truncGEFunctor` times out.
+  let : HasZeroMorphisms A := inferInstance
   have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
   let S := CochainComplex.singleFunctor A 0
   let T := DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ p).rightDerivedFunctor ⋙
@@ -236,9 +238,8 @@ private theorem higherDirectImage_filtered
     infer_instance
   let D := M ⋙ S
   let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
-  have hπ (i : I) : IsIso (π.app i) := by
-    change IsIso (((S.obj (M.obj i))).πTruncGE 0)
-    infer_instance
+  have hπ (i : I) : IsIso (π.app i) :=
+    inferInstanceAs (IsIso ((S.obj (M.obj i)).πTruncGE 0))
   have : IsIso π := NatIso.isIso_of_isIso_app π
   have hc : IsColimit (condensedContinuityCocone D 0) :=
     (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
@@ -249,7 +250,7 @@ private theorem higherDirectImage_filtered
     IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
   have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
   change PreservesColimit M (S ⋙ T)
-  infer_instance
+  exact comp_preservesColimit S T
 
 -- A finite bound for the geometric fibres of a proper morphism to a Noetherian scheme.
 private theorem exists_geometricFibre_bound {Z Y : Scheme.{u}} [IsNoetherian Y]
@@ -387,7 +388,7 @@ private theorem continuousModel_bound (ℓ : ℕ) [Fact ℓ.Prime]
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤
       if (d : ℤ) < 0 then ⊥ else (((d : ℤ).toNat : ℕ) : WithBot ℕ∞) := by
-    rw [if_neg (by omega), Int.toNat_natCast]
+    rw [ite_eq_right (by omega), Int.toNat_natCast]
     exact hd y
   refine ⟨2 * (d : ℤ) + 1, fun M hM ↦ bound_of_ind _ p _ (fun N hN ↦ ?_) M
     (continuous_closure_le_ind ℓ F Z M hM)⟩
@@ -407,7 +408,7 @@ private theorem qbar_bound (ℓ : ℕ) [Fact ℓ.Prime]
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤
       if (d : ℤ) < 0 then ⊥ else (((d : ℤ).toNat : ℕ) : WithBot ℕ∞) := by
-    rw [if_neg (by omega), Int.toNat_natCast]
+    rw [ite_eq_right (by omega), Int.toNat_natCast]
     exact hd y
   refine ⟨2 * (d : ℤ) + 1, fun M hM ↦ bound_of_ind _ p _ (fun N hN ↦ ?_) M
     (qbar_closure_le_ind ℓ Z M hM)⟩

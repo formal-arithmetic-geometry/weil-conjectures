@@ -99,7 +99,7 @@ private theorem tensor_section_map {X : Scheme.{v}} {M N : X.Modules}
 
 private theorem tensor_section_induction {X : Scheme.{v}} (M N : X.Modules)
     (P : ∀ U : X.Opens, (M ⊗ N).val.obj (op U) → Prop)
-    (hzero : ∀ U, P U 0)
+    (_hzero : ∀ U, P U 0)
     (hadd : ∀ U x y, P U x → P U y → P U (x + y))
     (htmul : ∀ U x y, P U (tmulSection x y))
     (hlocal : ∀ U x (S : Sieve U), S ∈ Opens.grothendieckTopology X U →
@@ -130,8 +130,7 @@ private theorem tensor_section_induction {X : Scheme.{v}} (M N : X.Modules)
   change k.app (op V) z = (M ⊗ N).val.map f.op x at hz
   rw [← hz]
   clear hz
-  induction z using TensorProduct.induction_on with
-  | zero => rw [map_zero]; exact hzero V
+  induction z using TensorProduct.inductionOn with
   | tmul a b => exact htmul V a b
   | add a b ha hb => rw [map_add]; exact hadd V _ _ ha hb
 

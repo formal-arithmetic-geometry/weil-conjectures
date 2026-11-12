@@ -106,13 +106,13 @@ private theorem preserves_large_coproducts
       obtain ⟨i, hi⟩ := i
       change t.ι.app (Discrete.mk i) ≫ _ = _
       rw [ht.fac]
-      simp only [Cofan.mk_ι_app, dif_pos hi]
+      simp only [Cofan.mk_ι_app, dite_eq_left hi]
     · intro s m hm
       apply ht.hom_ext
       intro ⟨i⟩
       rw [ht.fac]
       by_cases hi : ¬ IsZero (G i)
-      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
           using hm ⟨i, hi⟩
       · exact (not_not.mp hi).eq_of_src _ _
   let V : B → C := fun b ↦ U (e.symm b)

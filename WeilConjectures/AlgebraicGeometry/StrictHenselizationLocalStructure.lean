@@ -68,7 +68,7 @@ theorem strictHenselizationLocalStructure
   let := hstrict
   let Nall := (Scheme.pointSmallEtale (xU ≫ i)).fiber.Elements
   let P : ObjectProperty Nall := fun n ↦ IsAffine n.1.left
-  let D := (P.ι ⋙ CategoryOfElements.π (Scheme.pointSmallEtale (xU ≫ i)).fiber ⋙
+  let D := (P.ι ⋙ Functor.Elements.π (Scheme.pointSmallEtale (xU ≫ i)).fiber ⋙
     Scheme.Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
   let : HasColimit D := ⟨⟨cn, hcn⟩⟩
   let incl := Scheme.strictHenselizationAffineInclusion (xU ≫ i)

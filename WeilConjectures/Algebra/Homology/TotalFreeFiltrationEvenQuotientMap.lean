@@ -42,7 +42,7 @@ lemma lower_mem_odd (j : ℕ) (k : ℤ) (x : (S j).X₁.X (k + j)) :
       (if 2 * a + 1 ≤ 2 * j + 1 then LinearMap.range (lower K S e a k).hom else ⊥)) j)
   apply (le_sup_right :
     (if 2 * j + 1 ≤ 2 * j + 1 then LinearMap.range (lower K S e j k).hom else ⊥) ≤ _)
-  simp only [le_refl, if_true]
+  simp only [le_refl, ite_true]
   exact ⟨x, rfl⟩
 
 /-- The explicit lower-column map, with its codomain restricted to the odd term.
@@ -72,7 +72,7 @@ private lemma earlierColumn_mem (j a : ℕ) (ha : a < j) (q l : ℤ)
       (if 2 * b + 1 ≤ 2 * j then LinearMap.range (lower K S e b l).hom else ⊥)) a)
   apply (le_sup_left :
     (if 2 * a + 2 ≤ 2 * j then LinearMap.range (full K a l).hom else ⊥) ≤ _)
-  rw [if_pos (by omega)]
+  rw [ite_eq_left (by omega)]
   exact ⟨x, rfl⟩
 
 include h_positive in

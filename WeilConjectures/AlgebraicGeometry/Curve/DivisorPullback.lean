@@ -188,8 +188,8 @@ theorem Divisor.degree_pullback_single
   have := SmoothOfRelativeDimension.smooth 1 (Y ↘ Spec (.of k))
   -- a uniformizer at `y`, as a section `t` on an open `V ∋ y`
   obtain ⟨_, hdvr⟩ := isDiscreteValuationRing_stalk_of_isClosed (Y ↘ Spec (.of k)) hyc
-  have hε : maximalIdeal (Y.presheaf.stalk y) = Ideal.span {Classical.epsilon fun t ↦
-      maximalIdeal (Y.presheaf.stalk y) = Ideal.span {t}} := by
+  have hε : maximalIdeal (Y.presheaf.stalk y) = Ideal.span
+      {Classical.epsilon fun t ↦ maximalIdeal (Y.presheaf.stalk y) = Ideal.span {t}} := by
     refine Classical.epsilon_spec (p := fun t ↦ maximalIdeal (Y.presheaf.stalk y) =
       Ideal.span {t}) ?_
     obtain ⟨t, ht⟩ := (IsPrincipalIdealRing.principal (maximalIdeal (Y.presheaf.stalk y))).1
@@ -208,26 +208,27 @@ theorem Divisor.degree_pullback_single
     · have hF : F P.1 = π.ramificationIndex P.1 := by
         rw [hF]
         dsimp only
-        rw [finsum_eq_dif, dif_pos h]
+        rw [finsum_eq_dif, dite_eq_left h]
         obtain ⟨P, hP⟩ := P
         subst h
         exact (π.ramificationIndex_eq P hyV t hgerm).symm
-      rw [if_pos (Subtype.ext h.symm), hF]
+      rw [ite_eq_left (Subtype.ext h.symm), hF]
     · have hF : F P.1 = 0 := by
         rw [hF]
         dsimp only
-        rw [finsum_eq_dif, dif_neg h]
-      rw [if_neg fun h' ↦ h (congrArg Subtype.val h').symm, hF, zero_mul, mul_zero]
+        rw [finsum_eq_dif, dite_eq_right h]
+      rw [ite_eq_right fun h' ↦ h (congrArg Subtype.val h').symm, hF, zero_mul, mul_zero]
   have hFc (x : X) (hx : F x ≠ 0) : x ∈ closedPoints X := by
     by_contra hxc
     refine hx ?_
     rw [hF]
     dsimp only
-    rw [finsum_eq_dif, dif_neg fun (h : π x = y) ↦ hxc (π.isClosed_singleton_of_apply (h ▸ hyc))]
+    rw [finsum_eq_dif,
+      dite_eq_right fun (h : π x = y) ↦ hxc (π.isClosed_singleton_of_apply (h ▸ hyc))]
   have hC : ∑ᶠ x ∈ closedPoints X, F x = ∑ᶠ x, F x := finsum_congr fun x ↦ by
     by_cases hx : x ∈ closedPoints X
-    · rw [finsum_eq_if, if_pos hx]
-    · rw [finsum_eq_if, if_neg hx]
+    · rw [finsum_eq_if, ite_eq_left hx]
+    · rw [finsum_eq_if, ite_eq_right hx]
       exact (not_not.mp (mt (hFc x) hx)).symm
   rw [Divisor.degree_apply, Finsupp.sum, ← finsum_eq_sum_of_support_subset _
     (s := (Divisor.pullback π (Finsupp.single ⟨y, hy⟩ n)).support) (by simp)]

@@ -128,7 +128,7 @@ theorem constantTorsion_acyclic_of_cyclic
     refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
     · intro m
       let A := AddSubgroup.closure ({m} : Set M)
-      have hA : A.FG := ⟨{m}, by simp [A]⟩
+      have hA : A.FG := AddSubgroup.isAddFG_iff.mpr ⟨{m}, by simp [A]⟩
       exact ⟨⟨A, hA⟩, ⟨m, AddSubgroup.subset_closure (by simp)⟩, rfl⟩
     · intro i a b hab
       exact ⟨i, 𝟙 i, Subtype.ext hab⟩

@@ -127,7 +127,7 @@ theorem depth_quotient_nonzerodivisor
         RingTheory.Sequence.IsRegular (S ⧸ Ideal.span {x}) rs ∧
         (∀ y ∈ rs, y ∈ maximalIdeal (S ⧸ Ideal.span {x})) ∧
         k = (rs.length : ℕ∞)} := by
-    simp only [depth, Ideal.depth, if_neg hm]
+    simp only [depth, Ideal.depth, ite_eq_right hm]
   have hmem : depth (R := S ⧸ Ideal.span {x}) (S ⧸ Ideal.span {x}) ∈
       {k : ℕ∞ | ∃ rs : List (S ⧸ Ideal.span {x}),
         RingTheory.Sequence.IsRegular (S ⧸ Ideal.span {x}) rs ∧

@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotien
 public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotientCoefficients
 public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalDerivedScalarComparisons
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
@@ -88,10 +90,10 @@ private theorem square_single
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesFiniteLimits S] [PreservesFiniteColimits S]
     (e : R ⋙ G ≅ L ⋙ S) (M : A) :
-    (mapDerivedCategoryCompIso R G).inv.app
+    (mapDerivedCategoryCompIso R G).hom.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryNatIso e).hom.app _ ≫
-      (mapDerivedCategoryCompIso L S).hom.app _ ≫
+      (mapDerivedCategoryCompIso L S).inv.app _ ≫
       S.mapDerivedCategory.map ((L.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
       (S.mapDerivedCategorySingleFunctor 0).hom.app (L.obj M) =
     G.mapDerivedCategory.map ((R.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
@@ -100,7 +102,7 @@ private theorem square_single
   rw [mapDerivedCategoryCompIso_hom_app_singleFunctor,
     mapDerivedCategoryNatIso_hom_app_singleFunctor]
   rw [← mapDerivedCategoryCompIso_hom_app_singleFunctor R G M]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem exact_computation
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -180,10 +182,10 @@ private theorem square_single_transport
     (M : A) (N : B') (φ : L.obj M ⟶ N) :
     LG.map ((R.mapDerivedCategorySingleFunctor 0).inv.app M) ≫
       eg.hom.app (R.mapDerivedCategory.obj ((DerivedCategory.singleFunctor A 0).obj M)) ≫
-      (mapDerivedCategoryCompIso R G).inv.app
+      (mapDerivedCategoryCompIso R G).hom.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       (mapDerivedCategoryNatIso e).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
-      (mapDerivedCategoryCompIso L S).hom.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
+      (mapDerivedCategoryCompIso L S).inv.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
       S.mapDerivedCategory.map (el.inv.app ((DerivedCategory.singleFunctor A 0).obj M)) ≫
       S.mapDerivedCategory.map (el.hom.app ((DerivedCategory.singleFunctor A 0).obj M)) ≫
       S.mapDerivedCategory.map ((L.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
@@ -441,7 +443,7 @@ private theorem scalarCoefficientPull_eq
   have hv (T : Scheme.{u}) : (scalarCoefficientUnit a T).hom =
       ((V₀ a T).mapDerivedCategorySingleFunctor 0).hom.app
         (Mod.regular (condensedRingObj Λ' T)) := by
-    simpa only [scalarCoefficientUnit, Iso.trans_hom, Iso.app_hom,
+    simpa only [scalarCoefficientUnit, cast_eq, Iso.trans_hom, Iso.app_hom,
       Functor.mapIso_hom, Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
       CochainComplex.singleFunctors] using
       ((V₀ a T).mapDerivedCategorySingleFunctor_hom_app_eq _).symm

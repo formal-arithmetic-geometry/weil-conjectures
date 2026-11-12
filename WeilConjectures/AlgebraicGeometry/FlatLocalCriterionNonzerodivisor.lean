@@ -87,8 +87,7 @@ theorem flat_of_localCriterion_nonzerodivisor
     have hcompat : ∀ t, TensorProduct.rid A M (I.subtype.lTensor M (f.lTensor M t)) =
         x • TensorProduct.rid A M t := by
       intro t
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul m a => simp [f, LinearMap.toSpanSingleton, mul_smul, mul_comm]
       | add t s ht hs => simp [ht, hs, smul_add]
     intro t s h

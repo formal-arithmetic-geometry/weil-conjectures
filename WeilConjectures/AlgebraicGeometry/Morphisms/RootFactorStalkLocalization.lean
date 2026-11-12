@@ -173,7 +173,7 @@ theorem rootFactor_stalk_localization (R : CommRingCat.{u}) (f : R)
     rw [hbase]
     exact IsLocalRing.maximalIdeal.isMaximal R₀
   have hP : P.IsMaximal :=
-    Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := R₀) P hb
+    Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R₀) P hb
   refine ⟨P, hP, ?_⟩
   let E := Localization.AtPrime P
   have hloc : IsLocalization.AtPrime E w.asIdeal := by

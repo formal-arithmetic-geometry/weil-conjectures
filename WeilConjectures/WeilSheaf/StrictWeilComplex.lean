@@ -166,7 +166,7 @@ lemma mapDerivedCategorySingleFunctor_hom_app_zero (U : C ⥤ D) [U.Additive]
       U.mapDerivedCategoryFactors.hom.app ((CochainComplex.singleFunctor C 0).obj X) ≫
         DerivedCategory.Q.map ((U.mapCochainComplexSingleFunctor 0).hom.app X) := by
   simp [Functor.mapDerivedCategorySingleFunctor, Functor.mapCochainComplexSingleFunctor,
-    CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    CochainComplex.singleFunctor,
     DerivedCategory.singleFunctorIsoCompQ]
 
 /-- The isomorphism `D(U) ⋙ D(G) ≅ D(V)` induced by an isomorphism `α : U ⋙ G ≅ V` of exact
@@ -178,7 +178,7 @@ lemma mapDerivedCategoryCompIso_inv_app_singleFunctor (U : C ⥤ D) (G : D ⥤ E
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]
     (α : U ⋙ G ≅ V) (X : C) :
-    (mapDerivedCategoryCompIso U G).inv.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
+    (mapDerivedCategoryCompIso U G).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         (mapDerivedCategoryNatIso α).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         (V.mapDerivedCategorySingleFunctor 0).hom.app X =
       G.mapDerivedCategory.map ((U.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
@@ -190,7 +190,7 @@ lemma mapDerivedCategoryCompIso_inv_app_singleFunctor (U : C ⥤ D) (G : D ⥤ E
     Category.assoc]
   erw [mapDerivedCategoryNatIso_fac_assoc α ((CochainComplex.singleFunctor C 0).obj X),
     ← mapDerivedCategoryCompIso_fac_assoc U G ((CochainComplex.singleFunctor C 0).obj X)]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   congr 1
   have hn := G.mapDerivedCategoryFactors.hom.naturality
     ((U.mapCochainComplexSingleFunctor 0).hom.app X)
@@ -206,7 +206,7 @@ lemma mapDerivedCategoryCompIso_inv_app_singleFunctor (U : C ⥤ D) (G : D ⥤ E
     Iso.refl_hom, NatTrans.id_app, NatTrans.mapHomologicalComplex_app_f,
     mapHomologicalComplex_map_f, Functor.mapCochainComplexSingleFunctor,
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self, CochainComplex.singleFunctor,
-    CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self,
+    HomologicalComplex.single_map_f_self,
     HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
     Iso.refl_inv, Category.id_comp, Functor.map_id]
   erw [Functor.map_id, Category.id_comp, Category.id_comp]

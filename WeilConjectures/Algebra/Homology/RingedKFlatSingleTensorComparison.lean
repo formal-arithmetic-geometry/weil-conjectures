@@ -48,6 +48,11 @@ attribute [local instance] hasSheafify_coefficientUniverse
   wEqualsLocallyBijective_coefficientUniverse isMonoidal_W_independentCoefficients
   monoidalCategory symmetricCategory cochainModulesPreadditive
 
+private local instance (I : Type r) : HasColimitsOfShape (Discrete I)
+    (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 omit [HasDerivedCategory.{w} (Modules R)] in
 private theorem functorial_resolution :
     ∃ (F : CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ)
@@ -57,6 +62,13 @@ private theorem functorial_resolution :
       (∀ P n, IsFlatOnSite (J := J) (R := R) ((F.obj P).X n)) := by
   let := (nonempty_monoidalClosed_independentCoefficients (R := R)).some
   let := hasFunctorialFlatResolution_kfi R
+  have (I : Type r) : HasColimitsOfShape (Discrete I) (Modules R) :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := Modules R)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := Modules R)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   have : HasExactColimitsOfShape ℤ (Modules R) := by
     have := AB5OfSize_of_univLE.{0, 0, r, r} AddCommGrpCat.{r}
     have : HasExactColimitsOfShape ℤ (Sheaf J AddCommGrpCat.{r}) :=

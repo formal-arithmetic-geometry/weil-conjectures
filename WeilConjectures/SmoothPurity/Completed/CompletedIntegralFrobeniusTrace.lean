@@ -269,7 +269,7 @@ theorem integralCompletedScalarMap_frobeniusSystem_trace :
         (ConcreteCategory.congr_hom (uB.naturality g) _).symm)
   · exact fun V x ↦ completionPresentation_unit_eq l L Y V x
   · intro h
-    exact ModuleCat.CoextendScalars.sum_mul_frobeniusDual_ne_zero bL t₀ ht₀ (ULift.ext _ _ h)
+    exact ModuleCat.CoextendScalars.sum_mul_frobeniusDual_ne_zero bL t₀ ht₀ (ULift.ext h)
   · exact ((map_sum (κB V) (fun i ↦ bL i * ModuleCat.CoextendScalars.frobeniusDual bL t₀ ht₀ i)
       Finset.univ).trans (Finset.sum_congr rfl fun i _ ↦ map_mul _ _ _)).symm
   · funext i

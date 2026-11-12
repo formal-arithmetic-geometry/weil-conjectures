@@ -83,7 +83,7 @@ noncomputable def padicAlgClPresheafToAdicConstantSheafMonHom :
   Mon.Hom.mk' (padicAlgClPresheafToAdicConstantSheaf X l)
     (by
       ext U n
-      refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+      refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
       exact (show ((ULift.down n : ℤ) : PadicAlgCl l) =
         (ULift.down n • (1 : ULift.{u + 1} (PadicAlgCl l))).down by simp))
     (by

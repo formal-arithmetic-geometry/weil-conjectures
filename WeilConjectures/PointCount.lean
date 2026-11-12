@@ -147,6 +147,7 @@ theorem Hom.degreeOver_eq_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
     hx (X.mem_finitePoints.mpr (Module.finite_of_finite k))
   exact Module.finrank_of_not_finite h
 
+
 /-- Ring homomorphisms from a finitely generated ring into a finite ring form a finite
 type. -/
 private lemma finite_ringHom {A B : Type u} [CommRing A] [CommRing B] [Finite B]
@@ -337,14 +338,14 @@ private lemma nat_card_fieldPointFiber [Finite k] (f : X.Hom (Spec (.of k))) {n 
   have : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
   rw [← Nat.card_congr (algHomEquivFieldPointFiber f (FiniteField.galoisExtension k n) x)]
   by_cases hdvd : f.degreeOver x ∣ n
-  · rw [if_pos hdvd]
+  · rw [ite_eq_left hdvd]
     have hdvd' : Module.finrank k (X.residueField x) ∣
         Module.finrank k (FiniteField.galoisExtension k n) := by
       rw [FiniteField.finrank_galoisExtension k n hn]
       exact hdvd
     rw [FiniteField.natCard_algHom_of_finrank_dvd hdvd']
     rfl
-  · rw [if_neg hdvd]
+  · rw [ite_eq_right hdvd]
     have : IsEmpty (X.residueField x →ₐ[k] FiniteField.galoisExtension k n) := by
       rw [← not_nonempty_iff, FiniteField.nonempty_algHom_iff_finrank_dvd,
         FiniteField.finrank_galoisExtension k n hn]
@@ -357,7 +358,7 @@ private lemma nonempty_fieldPointFiber [Finite k] (f : X.Hom (Spec (.of k))) {n 
     (hn : n ≠ 0) {x : X} (hdvd : f.degreeOver x ∣ n) :
     Nonempty (f.FieldPointFiber (FiniteField.galoisExtension k n) x) := by
   have h := nat_card_fieldPointFiber f hn x
-  rw [if_pos hdvd] at h
+  rw [ite_eq_left hdvd] at h
   have hpos : 0 < Nat.card (f.FieldPointFiber (FiniteField.galoisExtension k n) x) := by
     rw [h]
     exact Nat.pos_of_ne_zero fun h0 ↦ hn (Nat.eq_zero_of_zero_dvd (h0 ▸ hdvd))
@@ -445,7 +446,7 @@ theorem Hom.pointCount_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
         Nat.card_congr ((fieldPointsEquivSigma f K).trans E)
     _ = ∑ q : T', Nat.card (f.FieldPointFiber K q.1.1) := Nat.card_sigma
     _ = ∑ q : T', f.degreeOver q.1.1 := Finset.sum_congr rfl fun q _ ↦ by
-        rw [nat_card_fieldPointFiber f hn, if_pos (Finset.mem_filter.mp q.2).2]
+        rw [nat_card_fieldPointFiber f hn, ite_eq_left (Finset.mem_filter.mp q.2).2]
     _ = ∑ x ∈ T', f.degreeOver x.1 :=
         Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1)
 
@@ -488,7 +489,7 @@ theorem Hom.finsum_fieldPoints_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
           exact fieldPointsEquivSigma_symm_base f K _)
     _ = ∑ q : T', f.degreeOver q.1.1 • g q.1 := Finset.sum_congr rfl fun q _ ↦ by
         rw [Finset.sum_const, Finset.card_univ, Fintype.card_eq_nat_card,
-          nat_card_fieldPointFiber f hn, if_pos (Finset.mem_filter.mp q.2).2]
+          nat_card_fieldPointFiber f hn, ite_eq_left (Finset.mem_filter.mp q.2).2]
     _ = ∑ x ∈ T', f.degreeOver x.1 • g x :=
         Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1 • g x)
 

@@ -61,10 +61,10 @@ noncomputable def derivedRestrictionIso {S Y Y' : Scheme.{v}}
   let r := Limits.pullback.snd U.hom h
   let r' := Limits.pullback.snd U.hom h'
   have hw : r' ≫ a = q ≫ r := by simp [q, r, r', rawAffineRestrictedMap]
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso ((upperStarComp AddCommGrpCat.{v + 1} q r).symm ≪≫
       upperStarComp AddCommGrpCat.{v + 1} r' a (q ≫ r) hw.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Natural pullback on zeroth homology of restricted derived sections.
 Source: Stacks Project, Tags 07A6 and 0D6F.

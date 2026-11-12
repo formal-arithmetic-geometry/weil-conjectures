@@ -39,7 +39,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local implicit_reducible] CategoryTheory.uniformProd
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  Functor.mapHomologicalComplex
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientEvaluationTensorIso coefficientSequenceRestriction scalarReductionExtension
@@ -427,7 +426,6 @@ private theorem tensorLevel_generator
     unrestrictedIntegralReductionFunctor, scalarReductionExtension,
     integralCoefficientCommRingSheaf, Functor.comp_obj, ObjectProperty.ι_obj] at hh ⊢
   convert hh using 1
-  congr 1
 
 set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient functor and complex instances within this declaration.

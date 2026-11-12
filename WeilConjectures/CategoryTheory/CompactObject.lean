@@ -72,7 +72,7 @@ private lemma toAddMonoid_comp_sigmaProj {I : Type v} [DecidableEq I] (E : I →
       simp [sigmaProj, Preadditive.rightComp]
     · rw [DirectSum.of_eq_of_ne _ _ _ (Ne.symm h)]
       simp only [sigmaProj, Preadditive.rightComp, AddMonoidHom.mk'_apply, Category.assoc,
-        Sigma.ι_desc]
+        Sigma.ι_comp_desc]
       convert comp_zero
       convert Pi.single_eq_of_ne h _
   | add d₁ d₂ h₁ h₂ => simp [Preadditive.add_comp, h₁, h₂]

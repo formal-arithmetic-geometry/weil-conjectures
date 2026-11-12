@@ -68,7 +68,7 @@ import WeilConjectures.CategoryTheory.StrictRoosNormalization
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-import Mathlib.Logic.Denumerable
+import Mathlib.Basic.Denumerable
 import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosChainMaps
 import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution
@@ -608,8 +608,8 @@ ordinary identity of component functors.
 Source: blueprint paragraph (2), quotient projection normalization
 (blueprint: def-sp-complete-compactification-limit-comparison). -/
 def fixedOpenEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ) :=
-  (Functor.mapDerivedCategoryCompIso (fixedOpenOrd l E j) (fixedEvaluation l E Z n)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (fixedEvaluation l E X n) (openOrd l E j)
+  Functor.mapDerivedCategoryCompIso (fixedOpenOrd l E j) (fixedEvaluation l E Z n) ≪≫
+    (Functor.mapDerivedCategoryCompIso (fixedEvaluation l E X n) (openOrd l E j)).symm
 
 /-- Ordinary finite-level open evaluation; the comparison preserves the actual open unit.
 Source: blueprint paragraph (2)

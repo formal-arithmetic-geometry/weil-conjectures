@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition
 import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
@@ -73,10 +75,14 @@ private theorem singleComparison_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modu
             ((HomologicalComplex.singleMapHomologicalComplex
               (tensorPullback f) (.up ℤ) 0).hom.app M) ≫
             (HomotopyCategory.singleFunctor _ 0).map (t.hom.app M)) := by
-  dsimp only [canonicalSinglePullbackMap, DerivedCategory.singleFunctor,
-    DerivedCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map]
-  exact fuse (DerivedCategory.Qh.{w}
-    (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))) _ _ _
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  simp only [canonicalSinglePullbackMap, cast_eq, Scheme.Modules, Scheme.ringCatSheaf,
+    moduleRings, DerivedCategory.singleFunctor,
+    DerivedCategory.singleFunctors, HomotopyCategory.singleFunctor,
+    HomotopyCategory.singleFunctors, SingleFunctors.postcomp, Functor.comp_map,
+    Functor.map_comp, Category.assoc, DerivedCategory.Qh,
+    HomologicalComplexUpToQuasiIso.Qh, HomotopyCategory.quotient,
+    Quotient.lift_map_functor_map, DerivedCategory.Q]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

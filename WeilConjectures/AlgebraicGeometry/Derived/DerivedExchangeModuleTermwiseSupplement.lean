@@ -13,6 +13,8 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
@@ -51,7 +53,7 @@ attribute [local irreducible] upperStar lowerStar squareUpperStarIso
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit Functor.rightDerivedFunctorUnitQ
   Functor.rightDerivedFunctorObjQIso
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem factorsh_hom
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -120,9 +122,9 @@ private theorem square_factors
     [CategoryTheory.Limits.PreservesFiniteLimits H]
     [CategoryTheory.Limits.PreservesFiniteColimits H]
     (e : G ⋙ L' ≅ L ⋙ H) (N : HomotopyCategory C (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso G L').inv ≫
+    ((Functor.mapDerivedCategoryCompIso G L').hom ≫
       (Functor.mapDerivedCategoryNatIso e).hom ≫
-      (Functor.mapDerivedCategoryCompIso L H).hom).app (DerivedCategory.Qh.obj N) ≫
+      (Functor.mapDerivedCategoryCompIso L H).inv).app (DerivedCategory.Qh.obj N) ≫
       H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫
       H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =
     L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
@@ -134,7 +136,7 @@ private theorem square_factors
   simp only [NatTrans.comp_app, Category.assoc]
   erw [h₂, h₃, ← h₁]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
 
 /-- The exact derived adjunction mate satisfies the right-derived unit identity on complexes.
 Source: Stacks Project, derived.tex, Tag 0DVC; exact-derived mate factorization
@@ -162,9 +164,9 @@ theorem derivedExchangeUnitQ
     G.mapDerivedCategory.map (R.rightDerivedFunctorUnitQ I) ≫
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+        (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
           Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso L H).hom)).natTrans.app
+          (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans.app
           (DerivedCategory.Q.obj I) =
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
@@ -173,8 +175,8 @@ theorem derivedExchangeUnitQ
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.inv.app I) := by
   have h := Adjunction.derivedExact_mateEquiv_app_fac adj adj'
     (TwoSquare.mk _ _ _ _ e.hom)
-    (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso L H).hom)
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     (by
       intro N
       simpa only [Iso.trans_hom, Iso.symm_hom] using square_factors G L L' H e N)

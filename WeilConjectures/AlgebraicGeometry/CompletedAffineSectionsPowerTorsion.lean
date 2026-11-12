@@ -44,8 +44,7 @@ private theorem tensor_ideal_range {A S T : Type u} [CommRing A]
   · apply Submodule.smul_le.mpr
     intro a ha z hz
     clear hz
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul s t =>
       rw [TensorProduct.smul_tmul']
       exact Submodule.apply_mem_map₂ _
@@ -117,8 +116,7 @@ private theorem adic_tensor_unit_bijective {A : Type u} [CommRing A]
     intro a ha z hz
     clear hz
     change a • z = 0
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul s x => rw [← TensorProduct.tmul_smul, hz a ha x, TensorProduct.tmul_zero]
     | add x y hx hy => simp only [smul_add, hx, hy, add_zero]
   obtain ⟨e, he⟩ := adic_tensor_unit_quotient I hI T n

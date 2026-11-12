@@ -138,6 +138,7 @@ lemma toFiniteEtale_mapIso (t : EtaleTorsor M Y) (e : Y ≅ Y') :
 lemma vaddHom_mapIso (t : EtaleTorsor M Y) (e : Y ≅ Y') (m : M) :
     (t.mapIso e).vaddHom m = (FiniteEtale.mapIso e).map (t.vaddHom m) := rfl
 
+
 /-- Transport along an isomorphism of the base preserves isomorphism of torsors. -/
 lemma IsIsomorphic.mapIso {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) (e : Y ≅ Y') :
     (t₁.mapIso e).IsIsomorphic (t₂.mapIso e) := by
@@ -510,7 +511,7 @@ theorem exists_pullback_iso_of_isIsomorphic_mapIso
     have h₂ := ZMod.castHom_eq_zero_of_pow_mul_eq_zero hl (hv (n + v) (t (n + v)) (hfix _) g hg)
     rw [h₁] at h₂
     apply Multiplicative.toAdd.injective
-    exact ULift.ext _ _ h₂
+    exact ULift.ext h₂
   obtain ⟨T, hT⟩ := exists_isIsomorphic_pullback k s hρ (t n) hkill
   exact ⟨T.toFiniteEtale, hT.nonempty_iso⟩
 

@@ -73,7 +73,7 @@ theorem large_hom_solutionSetCondition
   let Q := cokernel d
   let q : P ⟶ Q := cokernel.π d
   have hrel (j : J) : rel j ≫ q = 0 := by
-    rw [← Sigma.ι_desc rel j, Category.assoc, cokernel.condition, comp_zero]
+    rw [← Sigma.ι_comp_desc rel j, Category.assoc, cokernel.condition, comp_zero]
   have hadd (a b : A) : i (a + b) ≫ q = i a ≫ q + i b ≫ q := by
     have h := hrel (.inl (a, b))
     change (i (a + b) - i a - i b) ≫ q = 0 at h
@@ -90,12 +90,12 @@ theorem large_hom_solutionSetCondition
   refine ⟨PUnit, fun _ => Q, fun _ => f, ?_⟩
   intro X h
   let k : P ⟶ X := Sigma.desc (fun a => (h a).down)
-  have hik (a : A) : i a ≫ k = (h a).down := Sigma.ι_desc _ a
+  have hik (a : A) : i a ≫ k = (h a).down := Sigma.ι_comp_desc _ a
   have hd : d ≫ k = 0 := by
     apply Sigma.hom_ext
     intro j
     change Sigma.ι (fun _ : J => G) j ≫ Sigma.desc rel ≫ k = _
-    rw [Sigma.ι_desc_assoc, comp_zero]
+    rw [Sigma.ι_comp_desc_assoc, comp_zero]
     cases j with
     | inl ab =>
       rcases ab with ⟨a, b⟩

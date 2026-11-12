@@ -61,7 +61,7 @@ private theorem exists_finite_free_stalk_sections
       (s : F.obj.obj (Opposite.op V)), Φ.toPresheafFiber V a F.obj s = m (B i) :=
     Φ.toPresheafFiber_jointly_surjective (m (B i))
   choose V a s hs using hi
-  let j (i : Fin n) : Φ.fiber.Elements := ⟨V i, a i⟩
+  let j (i : Fin n) : Φ.fiber.Elements := Φ.fiber.elementsMk (V i) (a i)
   obtain ⟨k, hk⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image j)
   let g (i : Fin n) : k ⟶ j i := (hk (Finset.mem_image.mpr ⟨i, Finset.mem_univ i, rfl⟩)).some
   let t : P ⟶ F.obj.obj (Opposite.op k.1) := ConcreteCategory.ofHom
@@ -133,9 +133,9 @@ private theorem exists_finite_free_section_germ_equality
     apply (Φ.toPresheafFiber_eq_iff' V a (s (B i)) (t (B i))).mp
     exact ConcreteCategory.congr_hom h (B i)
   choose W r b hb he using hi
-  let v : Φ.fiber.Elements := ⟨V, a⟩
-  let j (i : Fin n) : Φ.fiber.Elements := ⟨W i, b i⟩
-  let f (i : Fin n) : j i ⟶ v := CategoryOfElements.homMk _ _ (r i) (hb i)
+  let v : Φ.fiber.Elements := Φ.fiber.elementsMk V a
+  let j (i : Fin n) : Φ.fiber.Elements := Φ.fiber.elementsMk (W i) (b i)
+  let f (i : Fin n) : j i ⟶ v := Functor.Elements.homMk (r i) (hb i)
   obtain ⟨k, q, g, hg⟩ := IsCofiltered.wideCospan f
   refine ⟨k.1, k.2, q.1, q.2, ?_⟩
   apply ModuleCat.hom_ext

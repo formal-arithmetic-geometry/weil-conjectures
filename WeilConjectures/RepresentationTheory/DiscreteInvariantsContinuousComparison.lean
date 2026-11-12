@@ -79,6 +79,10 @@ noncomputable def rightDerivedAddEquivContinuousCohomology
   let I := injectiveResolution F
   let : TopologicalSpace (E.functor.obj F).obj.V := ⊥
   let : DiscreteTopology (E.functor.obj F).obj.V := ⟨rfl⟩
+  -- The Rep module structure is not the `zsmul` one, so its scalar action is made
+  -- continuous directly from the discrete topology.
+  let : @ContinuousSMul ℤ (E.functor.obj F).obj.V (E.functor.obj F).obj.hV2.toSMul _ _ :=
+    @ContinuousSMul.mk ℤ _ (E.functor.obj F).obj.hV2.toSMul _ _ continuous_of_discreteTopology
   let ρ : ContRepresentation ℤ G (E.functor.obj F).obj.V :=
     .ofMonoidHom
       { toFun := fun g ↦ ⟨(E.functor.obj F).obj.ρ g, continuous_of_discreteTopology⟩
@@ -93,9 +97,15 @@ noncomputable def rightDerivedAddEquivContinuousCohomology
             (E.functor.obj F).obj.ρ g ((E.functor.obj F).obj.ρ h x)
           simp [map_mul] }
   let M : TopRep.{max u s} ℤ G := TopRep.of ρ
+  -- The coefficient identity, from the Rep `ℤ`-module structure to the `zsmul` one on `M`.
+  let e₀ : @LinearEquiv ℤ ℤ _ _ (RingHom.id ℤ) (RingHom.id ℤ) _ _ (E.functor.obj F).obj.V M.V
+      _ _ _ (AddCommGroup.toIntModule M.V) :=
+    @LinearEquiv.mk ℤ ℤ _ _ _ _ _ _ _ _ _ _ _ (AddCommGroup.toIntModule M.V)
+      (@LinearMap.mk ℤ ℤ _ _ (RingHom.id ℤ) _ _ _ _ _ (AddCommGroup.toIntModule M.V)
+        ⟨id, fun _ _ ↦ rfl⟩ fun n x ↦ int_smul_eq_zsmul _ n x) id (fun _ ↦ rfl) (fun _ ↦ rfl)
   let a := invariantResolutionHomologyAddEquivContinuousCohomology
-    G A E F I M (LinearEquiv.refl ℤ _) (fun _ _ ↦ rfl) q
-  let b := continuousCohomologyAddEquivOfCoefficients G M N e he q
+    G A E F I M e₀ (fun _ _ ↦ rfl) q
+  let b := continuousCohomologyAddEquivOfCoefficients G M N (e₀.symm ≪≫ₗ e) he q
   let c := (I.isoRightDerivedObj Γ q) ≪≫
     (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) q).mapIso
       ((NatIso.mapHomologicalComplex η (ComplexShape.up ℕ)).app I.cocomplex)

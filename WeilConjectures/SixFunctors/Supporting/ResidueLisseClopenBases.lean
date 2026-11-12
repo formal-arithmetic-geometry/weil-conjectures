@@ -290,7 +290,7 @@ theorem residue_lisse_clopen_bases
     let r (q : ℤ) : ℕ := if h : q ∈ Set.Icc a b then ranks ⟨q, h⟩ else 0
     refine ⟨a, b, r, hab, ?_, ?_⟩
     · intro q
-      have er : r q.val = ranks q := dif_pos q.property
+      have er : r q.val = ranks q := dite_eq_left q.property
       rw [er]
       obtain ⟨ef⟩ := sf_clopen_residue_free_restriction l E S (U i) d
         (H q.val) (ranks q) (hranks q)

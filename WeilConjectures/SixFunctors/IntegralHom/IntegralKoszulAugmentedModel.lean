@@ -155,7 +155,6 @@ attribute [local implicit_reducible] homComplex totalTensor coefficientTotalTens
   evaluate projection
   homComplexπ moduleMonoidal coefficientUnit SheafOfModules.unit PresheafOfModules.unit
   CategoryTheory.Functor.map₂HomologicalComplex
-  CochainComplex.singleFunctors
 
 attribute [local irreducible] tensorUnitIso homComplexFunctor
   completedIntegralCoefficientSheafUnrestricted HasDerivedCategory.standard
@@ -212,13 +211,12 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   IntegralOnSlice.restrict IntegralOnSlice.ring IntegralOnSlice.finite IntegralOnSlice.projection
   SheafOfModules.restrictScalars completedIntegralCommRingProjectionUnrestricted
   integralCoefficientSheaf integralCoefficientCommRingSheaf
-  CategoryTheory.Functor.mapHomologicalComplex
   SheafOfModules.KFlatTotalTensorModel.tensor SheafOfModules.KFlatTotalTensorModel.monoidal
 
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
   unrestrictedIntegralReductionExistence tensorScalarLevelIso
 
-attribute [local implicit_reducible] tensorDiagram WithInitial.lift
+attribute [local implicit_reducible] tensorDiagram
 
 private theorem levelUnit_eq_tensor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

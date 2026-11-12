@@ -29,6 +29,17 @@ abbrev LiftedPointSections0 (ell : ℕ) [Fact ell.Prime]
 abbrev LiftedPointSections2 (P : Profinite.{u}) (A : Type u) [TopologicalSpace A] :=
   ULift.{u + 1} C(P, ULift.{u + 1} A)
 
+/-- Shortcut instance: on v4.35 the default search for this instance times out. -/
+local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell) :
+    ContinuousSMul (PadicAlgCl.integers ell E.1) (PadicAlgCl.integers ell E.1) :=
+  ContinuousMul.to_continuousSMul
+
+/-- Shortcut instance: on v4.35 the default search for this instance times out. -/
+local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell) :
+    ContinuousSMul (PadicAlgCl.integers ell E.1) (ULift.{u + 1} (PadicAlgCl.integers ell E.1)) :=
+  ContinuousSMul.induced
+    (ULift.moduleEquiv : ULift.{u + 1} (PadicAlgCl.integers ell E.1) ≃ₗ[_] _)
+
 private theorem continuous_liftedPi_linearMap
     {R : Type} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     {M : Type (u + 1)} [AddCommGroup M] [Module R M] [TopologicalSpace M]

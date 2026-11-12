@@ -104,7 +104,7 @@ private theorem braidingAt_transport (X Y : S.PairCategory) {L H : I}
     Category.comp_id]
   rw [endpoint_tower S U join left right Y X hT k]
   rw [Functor.map_comp, Functor.map_comp]
-  simp only [Category.assoc, Iso.map_inv_hom_id_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_map_assoc]
   rw [reassoc_of% (hc k _ _)]
   simp only [Category.assoc]
   erw [← hn H

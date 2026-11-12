@@ -90,8 +90,8 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
   have hbr : Set.range b.left.base = Set.univ := by
     refine Set.eq_univ_of_forall fun p ↦ ?_
     obtain ⟨q, hq⟩ : j.left.base p ∈ Set.range j.left.base := ⟨p, rfl⟩
-    have h1 : j.left.base p ∈ ({(F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base
-        (default : Spec (.of k))} : Set _) := hB ▸ ⟨p, rfl⟩
+    have h1 : j.left.base p ∈ ({((F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base
+        (default : Spec (.of k)))} : Set _) := hB ▸ ⟨p, rfl⟩
     refine ⟨(default : Spec (.of k)), j.left.isOpenEmbedding.injective ?_⟩
     rw [Set.mem_singleton_iff] at h1
     rw [h1, ← hbj]

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientMaps
 public import WeilConjectures.CategoryTheory.Exact.ExactDegreeZeroAdjoint
 import all WeilConjectures.AlgebraicGeometry.Vector.VectorPurityScalarSingle

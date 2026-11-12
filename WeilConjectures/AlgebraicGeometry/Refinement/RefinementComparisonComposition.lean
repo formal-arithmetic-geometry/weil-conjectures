@@ -133,7 +133,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 
 omit [HasKInjectiveResolutions D] [EnoughInjectives D] in
 private theorem compat_fac (F : C ⥤ D) [F.Additive] (K : HomotopyCategory.Plus C) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
       F.rightDerivedFunctorUnit.app K.obj := by
   change F.rightDerivedFunctorPlusιUnit.app K ≫
@@ -167,7 +167,7 @@ private theorem comp_compat (F : C ⥤ D) (G : D ⥤ E)
   rw [← DerivedCategory.Plus.ι.map_comp_assoc, rightDerivedFunctorPlusCompIso_fac_app,
     rightDerivedFunctorPlusCompUnit_app, DerivedCategory.Plus.ι.map_comp]
   have hn := G.rightDerivedFunctorPlusCompatibility.hom.naturality
-    (F.rightDerivedFunctorPlusUnit.app K)
+    (F.rightDerivedFunctorPlusUnith.app K)
   simp only [comp_map] at hn
   rw [Category.assoc, reassoc_of% hn, ← Category.assoc,
     compat_fac G (F.mapHomotopyCategoryPlus.obj K)]

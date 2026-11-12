@@ -304,7 +304,7 @@ theorem publishedSystemTransportedTensor_normalized_flat {X Y : Scheme.{u}}
     have h' := hn.1 M N V ((AmbientPullbackTensor.base.{u} f none).obj V)
       (𝟙 _) x y 1
     simpa only [AmbientPullbackTensor.generator, AmbientPullbackTensor.tensor,
-      AmbientPullbackTensor.pure, one_smul, op_id, PresheafOfModules.map_id,
+      AmbientPullbackTensor.pure, SMul.smul_eq_hSMul, one_smul, op_id, PresheafOfModules.map_id,
       ModuleCat.restrictScalarsId'_inv_app, ModuleCat.restrictScalarsId'App_inv_apply,
       AmbientPullbackTensor.base, AmbientPullbackTensor.topology,
       AmbientPullbackTensor.coefficients, pullbackTensorSequenceBase] using h'

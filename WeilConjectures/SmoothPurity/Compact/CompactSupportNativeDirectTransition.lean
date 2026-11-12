@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEvaluation
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
 import all WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
@@ -69,7 +71,6 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   ProEtale.VaryingRing.coefficientTransition RingHom.ulift
   SemilinearSections.moduleAbelian SemilinearSections.hasDerived coefficientSequenceHasDerived
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  Functor.mapHomologicalComplex
   SemilinearSections.systemRing SemilinearSections.ringPresheaf SemilinearSections.rings
   SemilinearSections.evaluation SheafOfModules.pushforward SheafOfModules.restrictScalars
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀
@@ -109,7 +110,7 @@ private theorem derivedIso_unitQ
     (HomotopyCategory.quasiIso A (.up ℤ))
     (Functor.whiskerRight (NatTrans.mapHomotopyCategory e.hom (.up ℤ)) DerivedCategory.Qh)
     ((HomotopyCategory.quotient A (.up ℤ)).obj I)
-  simp only [Functor.whiskerRight_app, NatTrans.mapHomotopyCategory_app] at h
+  simp only [Functor.whiskerRight_app] at h
   change F.rightDerivedFunctorUnit.app
       ((HomotopyCategory.quotient A (.up ℤ)).obj I) ≫
         (Functor.rightDerivedFunctorNatIso e).hom.app (DerivedCategory.Q.obj I) =

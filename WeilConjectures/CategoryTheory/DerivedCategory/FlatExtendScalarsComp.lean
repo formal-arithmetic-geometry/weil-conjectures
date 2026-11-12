@@ -41,7 +41,7 @@ noncomputable def derivedExtendScalarsComp :
   have : PreservesFiniteLimits (extendScalars.{u + 1, u + 1, u + 1} (g.comp f)) :=
     preservesFiniteLimits_extendScalars_of_flat hgf
   Functor.mapDerivedCategoryNatIso (extendScalarsComp.{u + 1, u + 1} f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 lemma derivedExtendScalarsComp_hom_app_factors (K : CochainComplex (ModuleCat.{u + 1} A) ℤ) :
     have : PreservesFiniteLimits (extendScalars.{u + 1, u + 1, u + 1} f) :=
@@ -68,7 +68,8 @@ lemma derivedExtendScalarsComp_hom_app_factors (K : CochainComplex (ModuleCat.{u
     congr 1
   rw [h'] at h
   erw [Category.comp_id] at h
-  simp only [derivedExtendScalarsComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [derivedExtendScalarsComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Category.assoc]
   erw [h]
   exact Functor.mapDerivedCategoryNatIso_fac _ K
 

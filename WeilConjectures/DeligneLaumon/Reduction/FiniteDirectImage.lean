@@ -38,14 +38,9 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {F G : WeilSheaf
 
 /-- `ι`-reality is invariant under isomorphism. -/
 theorem IsReal.of_iso {ι : PadicAlgCl l →+* ℂ} (e : F ≅ G) (h : F.IsReal ι) : G.IsReal ι :=
-  fun x n ↦ by
-    obtain ⟨e'⟩ := nonempty_equiv_stalkAt_of_iso _ _
-      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-        (X ↘ Spec (CommRingCat.of k₀)) x) e
-    have := e'.localPolynomial_eq
-    unfold stalk
-    rw [← this]
-    exact h x n
+  fun x ↦ by
+    obtain ⟨e'⟩ := nonempty_equiv_stalk_of_iso e x
+    exact (h x).of_localPolynomial_eq e'.localPolynomial_eq.symm
 
 end Iso
 

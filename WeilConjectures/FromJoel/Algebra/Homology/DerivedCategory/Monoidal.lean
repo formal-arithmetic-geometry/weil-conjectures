@@ -34,7 +34,7 @@ namespace DerivedCategory
 
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
-noncomputable instance : MonoidalCategory (DerivedCategory C) :=
+noncomputable instance instMonoidalCategory : MonoidalCategory (DerivedCategory C) :=
   inferInstanceAs (MonoidalCategory (DerivedMonoidal Qh
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))))
 
@@ -52,7 +52,7 @@ instance : (curriedTensor (DerivedCategory C)).IsLeftDerivedFunctor₂
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)))
 
-noncomputable instance : (Q (C := C)).LaxMonoidal :=
+noncomputable instance instLaxMonoidalQ : (Q (C := C)).LaxMonoidal :=
   Functor.LaxMonoidal.ofIso (quotientCompQhIso C)
 
 end DerivedCategory

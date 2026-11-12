@@ -37,10 +37,10 @@ theorem even_finrank_of_isAlt {B : LinearMap.BilinForm K V} (halt : B.IsAlt)
   by_contra hodd
   rw [Nat.not_even_iff_odd] at hodd
   set b := Module.finBasis K V with hb
-  set M := BilinForm.toMatrix b B with hM
+  set M := LinearMap.BilinForm.toMatrix b B with hM
   have hskew : Mᵀ = -M := by
     ext i j
-    simp only [Matrix.transpose_apply, Matrix.neg_apply, hM, BilinForm.toMatrix_apply]
+    simp only [Matrix.transpose_apply, Matrix.neg_apply, hM, LinearMap.BilinForm.toMatrix_apply]
     exact (halt.neg_eq _ _).symm
   have hdet : M.det = -M.det := by
     conv_lhs => rw [← Matrix.det_transpose M, hskew, Matrix.det_neg]

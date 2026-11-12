@@ -84,7 +84,7 @@ theorem purelyInseparable_baseChange_residue
     intro n hn
     have : n.IsMaximal := hn
     exact IsLocalRing.eq_maximalIdeal
-      (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal n)
+      (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := A) n)
   obtain ⟨n, hn⟩ := Ideal.exists_maximal B
   have hlocal : IsLocalRing B := IsLocalRing.of_unique_max_ideal ⟨n, hn, by
     intro q hq

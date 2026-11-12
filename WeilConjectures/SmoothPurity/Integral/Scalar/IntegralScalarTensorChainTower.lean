@@ -63,8 +63,8 @@ variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F
 
 attribute [local irreducible] integralOperationsTensorLevel integralOrdinaryScalarComp
   integralOperationsTensorTowerFunctor integralOperationsRoos integralOperationsRoosMap
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-  integralOperationsTensorComplexFunctor integralOperationsRoosFunctor
+attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
+  integralOperationsRoosFunctor
 
 /-- The normalized completed-tensor Roos chain maps respect coefficient towers.
 Source: Stacks 07A4, 08TC; blueprint scalar comparison proof step 9

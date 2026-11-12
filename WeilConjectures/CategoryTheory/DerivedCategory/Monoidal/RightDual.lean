@@ -29,7 +29,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_rightDual
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 /-- A bounded complex `P` of objects with chosen right duals is paired in `D(A)` with its
 termwise dual complex `P^∨`: `Q P` and `Q P^∨` form an exact pairing. -/

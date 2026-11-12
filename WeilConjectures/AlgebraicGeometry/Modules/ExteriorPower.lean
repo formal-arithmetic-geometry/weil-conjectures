@@ -41,6 +41,11 @@ section Sheafification
 
 variable (P : _root_.PresheafOfModules.{u} X.ringCatSheaf.obj)
 
+local instance {U V : X.Opens} (i : V ⟶ U) :
+    Module Γ(X, V)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj (P.obj (op V))) :=
+  inferInstanceAs (Module Γ(X, V) (P.obj (op V)))
+
 /-- The sheafification of a presheaf of modules on a scheme. -/
 noncomputable abbrev sheafificationObj : X.Modules :=
   (_root_.PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj P

@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 public import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplement
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSiteSupplement
@@ -70,6 +72,73 @@ theorem adjunctionTranspose_of_unit
       ((am.homEquiv P H).apply_symm_apply g)
   rw [hg]
 
+theorem scalarPairWithAdjunction_normalization
+    (E : scalarModules J R ⥤ scalarModules J S) (hadd : E.Additive)
+    (F : DerivedCategory (scalarModules J R) ⥤ DerivedCategory (scalarModules J S))
+    (ε : DerivedCategory.Qh ⋙ F ⟶ scalarHomotopy E hadd ⋙ DerivedCategory.Qh)
+    (am : E ⊣ scalarRestriction a) (d : F ⊣ scalarDerivedRestriction a)
+    (hd : ∀ (P : CochainComplex (scalarModules J R) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
+      d.unit.app (DerivedCategory.Q.obj P) ≫
+        (scalarDerivedRestriction a).map
+          (cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
+        (scalarRestriction a).mapDerivedCategoryFactorsh.hom.app
+          ((E.mapHomotopyCategory (.up ℤ)).obj
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
+        cast (by rfl) (DerivedCategory.Qh.map ((am.mapHomotopyCategory (.up ℤ)).unit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) :
+    ∀ (P : CochainComplex (scalarModules J R) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
+      (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) →
+      ∀ (H : CochainComplex (scalarModules J S) ℤ)
+        (g : P ⟶ ((scalarRestriction a).mapHomologicalComplex (.up ℤ)).obj H),
+        (d.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj H)).symm
+            (DerivedCategory.Q.map g ≫ (scalarRestrictionComparison a).inv.app H) =
+          scalarPairComplexComparison E hadd F ε P ≫
+            DerivedCategory.Q.map (scalarChainTranspose a E hadd am P H g) := by
+  classical
+  have := hadd
+  intro P hP hflat H g
+  let q := HomotopyCategory.quotient (scalarModules J R) (.up ℤ)
+  let q' := HomotopyCategory.quotient (scalarModules J S) (.up ℤ)
+  have hh := adjunctionTranspose_of_unit (am.mapHomotopyCategory (.up ℤ))
+    DerivedCategory.Qh DerivedCategory.Qh d ε
+    (scalarRestriction a).mapDerivedCategoryFactorsh (q.obj P) (hd P hP)
+    (q'.obj H) (q.map g)
+  clear hd
+  have hfac : (scalarRestriction a).mapDerivedCategoryFactorsh.inv.app (q'.obj H) =
+      (scalarRestriction a).mapDerivedCategoryFactors.inv.app H := by
+    apply (Iso.inv_eq_inv
+      ((scalarRestriction a).mapDerivedCategoryFactorsh.app (q'.obj H))
+      ((scalarRestriction a).mapDerivedCategoryFactors.app H)).2
+    change (scalarRestriction a).mapDerivedCategoryFactorsh.hom.app (q'.obj H) =
+      (scalarRestriction a).mapDerivedCategoryFactors.hom.app H
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+    change (scalarRestriction a).mapDerivedCategory.map (𝟙 _) ≫
+      (scalarRestriction a).mapDerivedCategoryFactors.hom.app H ≫ 𝟙 _ ≫
+        DerivedCategory.Qh.map (𝟙 _) = _
+    erw [(scalarRestriction a).mapDerivedCategory.map_id (DerivedCategory.Q.obj H),
+      DerivedCategory.Qh.map_id ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        (((scalarRestriction a).mapHomologicalComplex (.up ℤ)).obj H))]
+    simp only [Category.id_comp]
+    exact Category.comp_id ((scalarRestriction a).mapDerivedCategoryFactors.hom.app H)
+  have ht : ((am.mapHomotopyCategory (.up ℤ)).homEquiv (q.obj P) (q'.obj H)).symm
+      (q.map g) = q'.map (((am.mapHomologicalComplex (.up ℤ)).homEquiv P H).symm g) := by
+    rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+    erw [Adjunction.mapHomotopyCategory_counit_app_quotient]
+    rw [Functor.mapHomotopyCategory_map, q'.map_comp]
+  rw [hfac, ht] at hh
+  change (d.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj H)).symm
+      (DerivedCategory.Q.map g ≫ (scalarRestrictionComparison a).inv.app H) =
+    ε.app (q.obj P) ≫ DerivedCategory.Q.map
+      (scalarChainTranspose a E hadd am P H g) at hh
+  have hcP : scalarPairComplexComparison E hadd F ε P = ε.app (q.obj P) := by
+    dsimp only [scalarPairComplexComparison]
+    change F.map (𝟙 _) ≫ ε.app (q.obj P) ≫ 𝟙 _ = ε.app (q.obj P)
+    simp
+  rw [hcP]
+  exact hh
+
 /-- Construct the scalar-derived pair from the specified ordinary and derived adjunctions.
 Source: Stacks 07A4 and 0D6D (blueprint: lem-coef-actual-scalar-derived-pair).
 The object data are the given extension and derived functors; only their normalization
@@ -100,12 +169,12 @@ noncomputable def scalarPairWithAdjunction
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
       d.unit.app (DerivedCategory.Q.obj P) ≫
         (scalarDerivedRestriction a).map
-          (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+          (cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
         (scalarRestriction a).mapDerivedCategoryFactorsh.hom.app
           ((E.mapHomotopyCategory (.up ℤ)).obj
             ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-        DerivedCategory.Qh.map ((am.mapHomotopyCategory (.up ℤ)).unit.app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
+        cast (by rfl) (DerivedCategory.Qh.map ((am.mapHomotopyCategory (.up ℤ)).unit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) :
     ScalarDerivedPair a := by
   classical
   have := hadd
@@ -127,46 +196,7 @@ noncomputable def scalarPairWithAdjunction
     dsimp only [scalarPairComplexComparison]
     infer_instance
   · exact hu
-  · intro P hP hflat H g
-    let q := HomotopyCategory.quotient (scalarModules J R) (.up ℤ)
-    let q' := HomotopyCategory.quotient (scalarModules J S) (.up ℤ)
-    have hh := adjunctionTranspose_of_unit (am.mapHomotopyCategory (.up ℤ))
-      DerivedCategory.Qh DerivedCategory.Qh d ε
-      (scalarRestriction a).mapDerivedCategoryFactorsh (q.obj P) (hd P hP)
-      (q'.obj H) (q.map g)
-    clear hd hu hobj hmap hc hF
-    have hfac : (scalarRestriction a).mapDerivedCategoryFactorsh.inv.app (q'.obj H) =
-        (scalarRestriction a).mapDerivedCategoryFactors.inv.app H := by
-      apply (Iso.inv_eq_inv
-        ((scalarRestriction a).mapDerivedCategoryFactorsh.app (q'.obj H))
-        ((scalarRestriction a).mapDerivedCategoryFactors.app H)).2
-      change (scalarRestriction a).mapDerivedCategoryFactorsh.hom.app (q'.obj H) =
-        (scalarRestriction a).mapDerivedCategoryFactors.hom.app H
-      rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-      change (scalarRestriction a).mapDerivedCategory.map (𝟙 _) ≫
-        (scalarRestriction a).mapDerivedCategoryFactors.hom.app H ≫ 𝟙 _ ≫
-          DerivedCategory.Qh.map (𝟙 _) = _
-      erw [(scalarRestriction a).mapDerivedCategory.map_id (DerivedCategory.Q.obj H),
-        DerivedCategory.Qh.map_id ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((scalarRestriction a).mapHomologicalComplex (.up ℤ)).obj H))]
-      simp only [Category.id_comp]
-      exact Category.comp_id ((scalarRestriction a).mapDerivedCategoryFactors.hom.app H)
-    have ht : ((am.mapHomotopyCategory (.up ℤ)).homEquiv (q.obj P) (q'.obj H)).symm
-        (q.map g) = q'.map (((am.mapHomologicalComplex (.up ℤ)).homEquiv P H).symm g) := by
-      rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
-      erw [Adjunction.mapHomotopyCategory_counit_app_quotient]
-      rw [Functor.mapHomotopyCategory_map, q'.map_comp]
-    rw [hfac, ht] at hh
-    change (d.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj H)).symm
-        (DerivedCategory.Q.map g ≫ (scalarRestrictionComparison a).inv.app H) =
-      ε.app (q.obj P) ≫ DerivedCategory.Q.map
-        (scalarChainTranspose a E hadd am P H g) at hh
-    have hcP : scalarPairComplexComparison E hadd F ε P = ε.app (q.obj P) := by
-      dsimp only [scalarPairComplexComparison]
-      change F.map (𝟙 _) ≫ ε.app (q.obj P) ≫ 𝟙 _ = ε.app (q.obj P)
-      simp
-    rw [hcP]
-    exact hh
+  · exact scalarPairWithAdjunction_normalization.{c, v, r, w} a E hadd F ε am d hd
 
 end CategoryTheory.ScalarHomTensor
 
@@ -179,6 +209,21 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
   HasDerivedCategory.standard
+
+theorem coefficientFiniteAdjunction_unit (n : ℕ) :
+    ∀ (P : CochainComplex (scalarReductionSource l E W) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients P →
+      (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj P) ≫
+        (scalarReductionDerivedRestriction l E W n).map
+          (cast (by rfl) ((scalarReductionCounit l E W n).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
+        (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh.hom.app
+          (((scalarReductionExtension l E W n).mapHomotopyCategory (.up ℤ)).obj
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
+        cast (by rfl) (DerivedCategory.Qh.map
+          (((scalarReductionExtension_adjunction l E W n).choose.mapHomotopyCategory
+            (.up ℤ)).unit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
+  exact (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec
 
 set_option maxHeartbeats 500000 in
 -- The normalized unit compares the explicit scalar extension on sections.
@@ -216,7 +261,7 @@ noncomputable def coefficientActualScalarDerivedPair (n : ℕ) :
         (eqToIso (hobj M)).inv_hom_id
       exact hi)
     (coefficientFiniteAdjunction l E W n)
-    (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec
+    (coefficientFiniteAdjunction_unit l E W n)
 
 /-- The constructed pair retains the prescribed ordinary extension.
 Source: Stacks 07A6 (blueprint: lem-coef-actual-scalar-derived-pair).

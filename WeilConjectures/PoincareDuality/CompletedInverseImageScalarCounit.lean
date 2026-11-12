@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension
 public import WeilConjectures.SmoothPurity.Supporting.IsomorphismDerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackComparison
@@ -286,8 +288,8 @@ Source: Stacks Tags 015F and 04VG; lem-fix-weil-operations.proof.md, first parag
 def integralInverseImageDerivedCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     inverseImageIntegralDerived l E g ⋙ inverseImageIntegralDerived l E (inv g) ≅
       𝟭 (DerivedCategory (integralTowerModules l E Y)) :=
-  (Functor.mapDerivedCategoryCompIso (inverseImageIntegralModules l E g)
-    (inverseImageIntegralModules l E (inv g))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (inverseImageIntegralModules l E g)
+    (inverseImageIntegralModules l E (inv g)) ≪≫
     Functor.mapDerivedCategoryNatIso (integralInverseImageCounit l E g) ≪≫
     Functor.mapDerivedCategoryIdIso (integralTowerModules l E Y)
 
@@ -409,7 +411,7 @@ private abbrev derivedCounit (G : A ⥤ B) (H : B ⥤ A)
     [G.Additive] [H.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (e : G ⋙ H ≅ 𝟭 A) :=
-  (Functor.mapDerivedCategoryCompIso G H).symm ≪≫
+  Functor.mapDerivedCategoryCompIso G H ≪≫
     Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso A
 
 private theorem derivedCounit_factors (G : A ⥤ B) (H : B ⥤ A)
@@ -421,10 +423,10 @@ private theorem derivedCounit_factors (G : A ⥤ B) (H : B ⥤ A)
       H.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app X) ≫
         H.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj X) ≫
         DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app X) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso G H).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso G H).inv.app
     (DerivedCategory.Qh.obj X))).1
-  simp only [derivedCounit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Iso.hom_inv_id_app_assoc]
+  simp only [derivedCounit, Iso.trans_hom, NatTrans.comp_app,
+    Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj,
     Functor.mapDerivedCategoryNatIso_fach,
     Functor.mapDerivedCategoryCompIso_hom_app_factorsh_assoc]
@@ -443,10 +445,10 @@ private theorem derivedSquare_factors
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.hom.app X) ≫
         F₂.mapDerivedCategoryFactorsh.hom.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) ≫
         DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app X) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F₁ F₂).inv.app
     (DerivedCategory.Qh.obj X))).1
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc]
+    NatTrans.comp_app, Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factorsh,
     Functor.mapDerivedCategoryNatIso_fach,
     Functor.mapDerivedCategoryCompIso_hom_app_factorsh_assoc]

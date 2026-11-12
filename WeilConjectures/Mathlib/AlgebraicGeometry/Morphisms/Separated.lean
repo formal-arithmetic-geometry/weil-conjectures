@@ -90,6 +90,7 @@ theorem Scheme.Hom.diagonal_isClosedImmersion_finitePresentation [IsSeparated f]
       QuasiCompact (pullback.diagonal f) ∧ QuasiSeparated (pullback.diagonal f) :=
   ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
+
 end Diagonal
 
 variable {W S : Scheme.{u}} (w : W ⟶ S)
@@ -383,6 +384,7 @@ theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated' (S : Scheme.{u})
     [f.IsOver S] [g.IsOver S] {W : Scheme.{u}} (ι : W ⟶ T)
     [IsSchemeTheoreticallyDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g :=
   ext_of_isSchemeTheoreticallyDominant_of_isSeparated (Y ↘ S) (by simp) ι hU
+
 
 end SchemeTheoreticallyDominant
 

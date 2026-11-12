@@ -83,7 +83,7 @@ theorem isZero_firstDerivedLimit_of_eventually_isIso
         (zero := (0 : P ⟶ K (m : ℤ).toNat)) (succ := up) (pred := down)
         (show ((n + 1 : ℕ) : ℤ) ≤ (m : ℤ) by omega)
       dsimp [down] at he
-      rw [dif_pos (show 0 < (n : ℤ) + 1 by omega)] at he
+      rw [dite_eq_left (show 0 < (n : ℤ) + 1 by omega)] at he
       rw! [show (n : ℤ) + 1 - 1 = (n : ℤ) by omega] at he
       simp only [eqToHom_refl] at he
       change q n = Pi.π K n + q (n + 1) ≫ f n at he
@@ -96,7 +96,7 @@ theorem isZero_firstDerivedLimit_of_eventually_isIso
       (𝟙 P) ≫ Pi.π K n
     dsimp only [P]
     simpa only [towerProductShift, Preadditive.comp_sub, Preadditive.sub_comp, assoc,
-      id_comp, Pi.lift_π, Pi.lift_π_assoc] using hq n
+      id_comp, Pi.lift_comp_π, Pi.lift_comp_π_assoc] using hq n
   have : Epi (roosMap A) := epi_of_epi_fac hsplit
   obtain ⟨_, _, e₁, _⟩ := derivedLimitRoosAbelianGroups.{u}
   exact (isZero_cokernel_of_epi (roosMap A)).of_iso (e₁ A)

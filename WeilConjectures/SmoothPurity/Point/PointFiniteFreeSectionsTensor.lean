@@ -182,6 +182,15 @@ variable (k : Type t) [Field k] (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
+local instance pointFiniteFreeUnitHSMul
+    (F : integralTowerModules l E (Spec (.of k))) (U : (Spec (.of k)).ProEtᵒᵖ) :
+    HSMul ((SheafOfModules.unit
+      (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k)))).val.obj U)
+      (F.val.obj U) (F.val.obj U) :=
+  inferInstanceAs (HSMul
+    ((completedIntegralCoefficientSheafUnrestricted l E (Spec (.of k))).obj.obj U)
+    (F.val.obj U) (F.val.obj U))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in

@@ -74,7 +74,7 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   {πX : X'.left ⟶ X.left} {πY : Y'.left ⟶ Y.left}
   (sq : IsPullback πX f'.left f.left πY) [WeaklyEtale πY] [WeaklyEtale πX]
 
-set_option linter.unusedSectionVars false in
+omit [IsProper f'.left] in
 /-- The bounded-constructible base-change inverse has the specified ambient inverse. -/
 lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
     (P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧) :
@@ -96,7 +96,7 @@ variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
   (γ : P ⟶ (boundedConstructibleUpperShriek l f).obj N)
 
-set_option linter.unusedSimpArgs false in
+omit [IsProper f'.left] in
 /-- Convert the ordinary trace to the levelwise pullback coordinates used by descent. -/
 lemma baseChangedProperTrace_levelwise :
     (rightDerivedLowerStarBaseChangeIso (Profinite.padicAlgClRingObj l) sq).inv.app P.obj ≫
@@ -118,7 +118,7 @@ lemma baseChangedProperTrace_levelwise :
   have hbc := boundedConstructibleBaseChangeOfMap_inv_app_hom l f f' sq P
   simp only [baseChangedProperTrace, ObjectProperty.FullSubcategory.comp_hom,
     ObjectProperty.FullSubcategory.id_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, Category.comp_id, Category.id_comp, Category.assoc, hbc]
+    ObjectProperty.homMk_hom, Category.assoc, hbc]
   erw [Category.id_comp]
   simp only [Functor.id_obj]
 

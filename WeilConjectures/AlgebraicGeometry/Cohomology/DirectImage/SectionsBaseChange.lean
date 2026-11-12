@@ -164,8 +164,7 @@ theorem bijective_sectionsBaseChangeOpen [IsAffine S]
     rw [this]
     exact Φ.bijective
   intro x
-  induction x using TensorProduct.induction_on with
-  | zero => rw [map_zero, map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add, map_add, hx, hy]
   | tmul b m =>
     rw [sectionsBaseChangeOpen_tmul]
@@ -185,8 +184,7 @@ lemma presheaf_map_sectionsBaseChangeOpen {UX UX' : X.Opens} (hU : UX' ≤ UX) {
     ((pullback g').obj ℱ).presheaf.map (homOfLE hZZ).op (sectionsBaseChangeOpen H ℱ W hg hZ x) =
       sectionsBaseChangeOpen H ℱ W hg hZ'
         ((sectionsModuleRestrict f ℱ hU).baseChange Γ(T, W) x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul b m =>
     rw [LinearMap.baseChange_tmul, sectionsBaseChangeOpen_tmul, sectionsBaseChangeOpen_tmul,

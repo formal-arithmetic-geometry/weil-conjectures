@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.Finite.Extension
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantExtension
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroupDense
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobenius

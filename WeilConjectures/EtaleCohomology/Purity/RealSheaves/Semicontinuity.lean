@@ -469,7 +469,7 @@ theorem le_radius_inv_tprod_eulerFactor (T : Set C.finitePoints) {β : ℝ}
   refine (wnorm_prod_le (by positivity) _ _).trans ?_
   calc ∏ x ∈ lowDegree (p := p) T n, wnorm r (localPoly (W := W) (l := l) (ρ := ρ) (ι := ι) x.1)
       ≤ ∏ x ∈ lowDegree (p := p) T n, Real.exp (d * c ^ p.degreeOver x.1.1) :=
-        Finset.prod_le_prod (fun x _ ↦ wnorm_nonneg (by positivity) _)
+        Finset.prod_le_prod₀ (fun x _ ↦ wnorm_nonneg (by positivity) _)
           fun x _ ↦ wnorm_localPoly_le (by positivity) x.1 (hw x.1 x.2)
     _ = Real.exp (d * ∑ x ∈ lowDegree (p := p) T n, c ^ p.degreeOver x.1.1) := by
         rw [← Real.exp_sum, Finset.mul_sum]

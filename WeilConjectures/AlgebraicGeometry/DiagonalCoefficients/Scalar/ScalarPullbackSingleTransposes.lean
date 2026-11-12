@@ -167,9 +167,9 @@ private theorem exact_square_single
     [PreservesFiniteLimits V] [PreservesFiniteColimits V]
     [PreservesFiniteLimits W] [PreservesFiniteColimits W]
     (e : G ⋙ W ≅ V ⋙ F) (N : C) :
-    (((Functor.mapDerivedCategoryCompIso G W).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso G W ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso V F).hom.app
+        (Functor.mapDerivedCategoryCompIso V F).symm).hom.app
           ((DerivedCategory.singleFunctor C 0).obj N)) ≫
       F.mapDerivedCategory.map ((V.mapDerivedCategorySingleFunctor 0).hom.app N) ≫
       (F.mapDerivedCategorySingleFunctor 0).hom.app (V.obj N) =
@@ -179,9 +179,9 @@ private theorem exact_square_single
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso G W).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso G W).inv.app
     ((DerivedCategory.singleFunctor C 0).obj N))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor G W N]
   simp only [Category.assoc]
 end ExactSquare

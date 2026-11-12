@@ -133,6 +133,7 @@ theorem schemeDerivedGlobalSections_computed_by_resolution (X : Scheme.{u})
   exact ⟨(schemeDerivedGlobalSections X).mapIso (asIso (DerivedCategory.Q.map s)) ≪≫
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorObjQIso I⟩
 
+
 /-- Global derived Hom: RΓ(X,R𝓗om(P,Q)) in D(O_X(X)), contravariant in P and
 covariant in Q, encoded as a functor from D(O_X)ᵒᵖ × D(O_X).
 Source: Stacks, Tag 0B6A (blueprint: def-pc-global-derived-rhom). -/

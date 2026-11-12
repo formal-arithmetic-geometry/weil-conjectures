@@ -81,7 +81,8 @@ lemma ValuationSubring.coe_le_ord_of_strictMono {O K : Type*} [CommRing O] [IsDo
   set φ : O →+* V := (algebraMap O K).codRestrict V hV
   have hφ : Function.Injective φ := fun x y h ↦
     IsFractionRing.injective O K (congrArg Subtype.val h)
-  have hx (i : ℕ) : ∃ x : V, x ∈ f (i + 1) ∧ x ∉ f i := SetLike.exists_of_lt (hf i.lt_succ_self)
+  have hx (i : ℕ) : ∃ x : V, x ∈ f (i + 1) ∧ x ∉ f i :=
+    IsConcreteLE.exists_of_lt (hf i.lt_succ_self)
   choose x hx₁ hx₂ using hx
   obtain ⟨⟨c, hc⟩, hcx⟩ := IsLocalization.exist_integer_multiples (nonZeroDivisors O)
     (Finset.range m) (fun i ↦ (x i : K))
@@ -134,7 +135,7 @@ theorem ValuationSubring.isDiscreteValuationRing_of_ringKrullDim_eq_one {O K : T
   have hφ : Function.Injective φ := fun x y h ↦
     IsFractionRing.injective O K (congrArg Subtype.val h)
   have : IsNoetherianRing V := by
-    rw [IsNoetherianRing, isNoetherian_iff', WellFoundedGT, isWellFounded_iff,
+    rw [IsNoetherianRing, isNoetherian_iff, WellFoundedGT,
       RelEmbedding.wellFounded_iff_isEmpty]
     refine ⟨fun f ↦ ?_⟩
     have hf : StrictMono f := fun i j h ↦ f.map_rel_iff.2 h
@@ -160,7 +161,7 @@ theorem ValuationSubring.isDiscreteValuationRing_of_ringKrullDim_eq_one {O K : T
     have := (valuation_lt_one_iff V (φ x)).2 (hloc x hx)
     rw [h, Ideal.mem_bot, map_eq_zero_iff φ hφ] at this
     exact hx0 this
-  have h := (IsDiscreteValuationRing.TFAE V hnf).out 0 1
+  have h := (IsDiscreteValuationRing.TFAE V hnf).out 1 2
   exact h.2 inferInstance
 
 /-- A one-dimensional noetherian local domain is dominated by a discrete valuation ring. -/
@@ -271,7 +272,7 @@ theorem Ideal.exists_isDiscreteValuationRing_of_lt {B : Type u} [CommRing B] [Is
   have hO : ¬IsField O := by
     rw [isField_iff_maximalIdeal_eq]
     intro h
-    obtain ⟨b, hbq, hbp⟩ := SetLike.exists_of_lt hpq
+    obtain ⟨b, hbq, hbp⟩ := IsConcreteLE.exists_of_lt hpq
     have hb : algebraMap _ O (Ideal.Quotient.mk p b) ∈ maximalIdeal O :=
       (IsLocalization.AtPrime.to_map_mem_maximal_iff O q' _).2 (Ideal.mem_map_of_mem _ hbq)
     rw [h, Ideal.mem_bot, map_eq_zero_iff _ (IsLocalization.injective O

@@ -77,6 +77,7 @@ lemma mapMod_obj_smul (M : Mod C R) :
 /-- `mapMod` commutes with the forgetful functors. -/
 lemma mapMod_comp_forget : F.mapMod R ⋙ Mod.forget (F.obj R) = Mod.forget R ⋙ F := rfl
 
+
 instance faithful_mapMod [F.Faithful] : (F.mapMod R).Faithful where
   map_injective h := Mod.hom_ext _ _ (F.map_injective congr(($h).hom))
 

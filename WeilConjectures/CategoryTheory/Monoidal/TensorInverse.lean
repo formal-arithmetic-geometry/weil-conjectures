@@ -185,6 +185,7 @@ lemma addIso_congr {a b c c' : ℤ} (h : a + b = c) (h' : a + b = c') :
   subst h h'
   simp
 
+
 lemma addIso_hom_eqToHom {a b c c' : ℤ} (h : a + b = c) (hc : c = c') :
     (e.addIso a b c h).hom ≫ eqToHom (congrArg e.zpow hc) = (e.addIso a b c' (h.trans hc)).hom := by
   subst hc

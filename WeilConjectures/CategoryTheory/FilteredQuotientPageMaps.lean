@@ -29,7 +29,7 @@ Source: Stacks Project, Tag 012K, Lemma 12.24.4.
 (blueprint: lem-sp-filtered-quotient-page-maps). -/
 def FilteredQuotientPageMapProperty
     (U V : ObjectProperty.FullSubcategory
-      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (r : ℤ)
+      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (r : ℤ)
     (DU : FilteredComplexPageDifferential U.obj.obj U.obj.filtration r)
     (DV : FilteredComplexPageDifferential V.obj.obj V.obj.filtration r)
     (m : DU.page ⟶ DV.page) : Prop :=
@@ -99,7 +99,7 @@ private theorem subobject_preserves_sup
   · exact h'.trans (leOfHom ((Subobject.pullback f).map (homOfLE le_sup_right)))
 
 private theorem filtered_step_preserved
-    {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (p n : ℤ) :
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (p n : ℤ) :
     U.filtration.complexStep p n ≤
       (Subobject.pullback (t.hom.f n)).obj (V.filtration.complexStep p n) := by
   obtain ⟨s, hs⟩ := t.preserves p
@@ -113,7 +113,7 @@ private theorem filtered_step_preserved
   exact imageSubobject_le _ (Subobject.factorThru _ _ hf) (by simp)
 
 private theorem filtered_graded_subobjects_preserved
-    {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V)
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} (t : U ⟶ V)
     (s : ∀ a : ℤ, (U.filtration.step a : CochainComplex C ℤ) ⟶
       (V.filtration.step a : CochainComplex C ℤ))
     (hs : ∀ a, s a ≫ (V.filtration.step a).arrow =
@@ -153,7 +153,7 @@ private theorem filtered_graded_subobjects_preserved
     · exact hstep (p + 1) n
 
 private structure QuotientPageSquares
-    (U V : FilteredObject (CochainComplex C ℤ)) (t : U ⟶ V) (r : ℤ) where
+    (U V : WeilFilteredObject (CochainComplex C ℤ)) (t : U ⟶ V) (r : ℤ) where
   s : ∀ a : ℤ, (U.filtration.step a : CochainComplex C ℤ) ⟶
     (V.filtration.step a : CochainComplex C ℤ)
   hs : ∀ a, s a ≫ (V.filtration.step a).arrow = (U.filtration.step a).arrow ≫ t.hom
@@ -170,7 +170,7 @@ private structure QuotientPageSquares
     kz pq ≫ filteredComplexPageπ V.obj V.filtration r pq
 
 private noncomputable def quotientPageSquares
-    {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (r : ℤ) :
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (r : ℤ) :
     QuotientPageSquares U V t r := by
   classical
   choose s hs using t.preserves
@@ -222,7 +222,7 @@ private noncomputable def quotientPageSquares
   exact ⟨s, hs, g, hg, kz, hkz, k, fun _ ↦ cokernel.π_desc _ _ _⟩
 
 private theorem quotientPageSquares_unique
-    {U V : FilteredObject (CochainComplex C ℤ)} {t : U ⟶ V} {r : ℤ}
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} {t : U ⟶ V} {r : ℤ}
     (S : QuotientPageSquares U V t r) (p q : ℤ)
     (s : ∀ a : ℤ, (U.filtration.step a : CochainComplex C ℤ) ⟶
       (V.filtration.step a : CochainComplex C ℤ))
@@ -257,8 +257,9 @@ private theorem quotientPageSquares_unique
   apply (cancel_epi (filteredComplexPageπ U.obj U.filtration r (p, q))).1
   rw [S.hk, hk, hkz_eq]
 
+
 private theorem quotientPageSquares_comm
-    {U V : FilteredObject (CochainComplex C ℤ)} {t : U ⟶ V} {r : ℤ}
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} {t : U ⟶ V} {r : ℤ}
     (S : QuotientPageSquares U V t r)
     (DU : FilteredComplexPageDifferential U.obj U.filtration r)
     (DV : FilteredComplexPageDifferential V.obj V.filtration r) (i j : ℤ × ℤ) :
@@ -320,7 +321,7 @@ private theorem quotientPageSquares_comm
   · rw [DU.shape i j hij, DV.shape i j hij, comp_zero, zero_comp]
 
 private noncomputable def quotientPageMap
-    {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (r : ℤ)
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (r : ℤ)
     (DU : FilteredComplexPageDifferential U.obj U.filtration r)
     (DV : FilteredComplexPageDifferential V.obj V.filtration r) : DU.page ⟶ DV.page where
   f := (quotientPageSquares t r).k
@@ -347,10 +348,11 @@ restrictions and descents provide squares for each filtered map, so the universa
 square property determines every component, and therefore the whole family. -/
 theorem filteredQuotient_page_maps
     (D : ∀ (U : ObjectProperty.FullSubcategory
-      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ) (hr : 1 ≤ r),
+      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ)
+      (hr : 1 ≤ r),
       FilteredComplexPageDifferential U.obj.obj U.obj.filtration r) :
     ∃! m : ∀ {U V : ObjectProperty.FullSubcategory
-      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)} (t : U ⟶ V)
+      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)} (t : U ⟶ V)
         (r : ℤ) (hr : 1 ≤ r), (D U r hr).page ⟶ (D V r hr).page,
       (∀ U r hr, m (𝟙 U) r hr = 𝟙 _) ∧
       (∀ U V W (t : U ⟶ V) (t' : V ⟶ W) r hr,
@@ -359,7 +361,7 @@ theorem filteredQuotient_page_maps
         FilteredQuotientPageMapProperty (C := C) U V t r (D U r hr) (D V r hr) (m t r hr)) := by
   classical
   let m : ∀ {U V : ObjectProperty.FullSubcategory
-      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)}
+      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)}
       (t : U ⟶ V) (r : ℤ) (hr : 1 ≤ r), (D U r hr).page ⟶ (D V r hr).page :=
     fun t r hr ↦ quotientPageMap t.hom r (D _ r hr) (D _ r hr)
   refine ⟨m, ⟨?_, ?_, ?_⟩, ?_⟩
@@ -405,5 +407,6 @@ theorem filteredQuotient_page_maps
     let S := quotientPageSquares t.hom r
     exact h'.2.2 U V t r hr p q S.s (S.g p) (S.kz (p, q)) (S.k (p, q))
       S.hs (S.hg p) (S.hkz (p, q)) (S.hk (p, q))
+
 
 end CategoryTheory

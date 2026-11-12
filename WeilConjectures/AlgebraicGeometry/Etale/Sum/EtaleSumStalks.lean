@@ -121,12 +121,12 @@ private noncomputable def forwardTransformation
   naturality {W W'} g := by
     apply Pi.hom_ext
     intro v
-    simp only [Category.assoc, Pi.lift_π]
+    simp only [Category.assoc, Pi.lift_comp_π]
     change F.map g ≫ forwardFamily f A x F W'.unop v =
       (Pi.lift fun v ↦ forwardFamily f A x F W.unop v) ≫
         Pi.map' ((Scheme.pointSmallEtale x).fiber.map ((base f).map g.unop))
           (fun _ ↦ 𝟙 _) ≫ Pi.π _ v
-    rw [Pi.map'_comp_π, ← Category.assoc, Pi.lift_π, Category.comp_id]
+    rw [Pi.map'_comp_π, ← Category.assoc, Pi.lift_comp_π, Category.comp_id]
     let z : Over.mk x ⟶ Over.mk f := v ≫ Over.homMk W'.unop.hom
     let w' : (Scheme.pointSmallEtale z.left).fiber.obj W'.unop := Over.homMk v.left
     let w := w' ≫ (Scheme.Etale.forget U).map g.unop
@@ -159,7 +159,7 @@ private lemma forward_germ (F : U.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} A)
     Equiv.apply_symm_apply, ← Category.assoc]
   have h := (presheaf f A F).descOfIsLeftKanExtension_fac_app
     ((base f).op.lanUnit.app F) _ (forwardTransformation f A x F) (op W)
-  exact (congrArg (· ≫ Pi.π _ v) h).trans (Pi.lift_π _ _)
+  exact (congrArg (· ≫ Pi.π _ v) h).trans (Pi.lift_comp_π _ _)
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

@@ -153,10 +153,10 @@ noncomputable def mapDerivedCategoryEtaleLowerShriekBaseChangeIso
     (hsq : IsPullback g' j' j g'') :
     D((g')^*[A]) ⋙ D(etaleLowerShriek A j' inferInstance) ≅
       D(etaleLowerShriek A j inferInstance) ⋙ D((g'')^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso
       (@asIso _ _ _ _ _ (isIso_etaleLowerShriekSquareBaseChangeMap A hsq)) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The derived base change isomorphism for the étale extension by zero is the mate of the
 derived square isomorphism of pullbacks, for the adjunctions `Dj_! ⊣ Dj^*` and

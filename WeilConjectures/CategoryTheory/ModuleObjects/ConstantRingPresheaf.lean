@@ -68,6 +68,7 @@ lemma constRingObj_mul_app (U : Cᵒᵖ) :
     (μ[constRingObj (C := C) T]).app U = μ[AddCommGrpCat.of T] :=
   rfl
 
+
 /-- The constant ring presheaf of a commutative ring is a commutative ring object. -/
 instance isCommMonObj_constRingObj (T : Type w) [CommRing T] :
     IsCommMonObj (constRingObj (C := C) T) where

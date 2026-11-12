@@ -323,7 +323,7 @@ private theorem constant_constructible_of_models
     IsConstantModelConstructible Λ X N := by
   classical
   exact (show IsConstantModelConstructible Λ X N = IsFiniteConstantStratified Λ X N from
-    if_pos ⟨inferInstance, inferInstance⟩).mpr hN
+    ite_eq_left ⟨inferInstance, inferInstance⟩).mpr hN
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Extension by zero preserves constructibility with finite constant scalar models.

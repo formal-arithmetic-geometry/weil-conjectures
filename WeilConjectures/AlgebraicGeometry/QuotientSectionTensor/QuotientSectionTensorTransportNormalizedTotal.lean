@@ -75,6 +75,9 @@ private theorem resolving_of_iso
   let := SheafOfModules.monoidalCategory A
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients A
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients A
+  have (I : Type w) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   constructor
   · intro V hV n
     exact (hQ V hV n).of_iso (((curriedTensor _).map₂CochainComplex.obj V).mapIso e.symm)

@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSingleBaseChangeComparison
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
@@ -93,7 +95,10 @@ private theorem single_pullback_naturality
   have hc := mapped_square Q _ _ _ _ (c.naturality a)
   have ht := mapped_square (DerivedCategory.singleFunctor C_A 0) _ _ _ _ (t.hom.naturality a)
   have hh := compose_three_squares _ _ _ _ _ _ _ _ _ _ hε hc ht
-  exact hh
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  with_unfolding_all
+    simpa only [Scheme.Modules.canonicalSinglePullbackMap, cast_eq, Category.assoc] using! hh
 
 set_option maxHeartbeats 400000 in
 -- The right-derived unit is compared with localized single-complex morphisms.
@@ -112,7 +117,7 @@ private theorem single_directImage_naturality
   have hβ := β.naturality ((HomotopyCategory.singleFunctor _ 0).map a)
   have hc := (HomologicalComplex.singleMapHomologicalComplex
     (Scheme.Modules.pushforward k) (ComplexShape.up ℤ) 0).inv.naturality a
-  simp only [Scheme.Modules.canonicalSingleDirectImageMap,
+  simp only [Scheme.Modules.canonicalSingleDirectImageMap, cast_eq,
     DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
     HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
     SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,
@@ -120,11 +125,12 @@ private theorem single_directImage_naturality
   erw [← hβ]
   erw [Functor.mapHomotopyCategory_map]
   erw [← Functor.map_comp_assoc, ← Functor.map_comp]
-  erw [← Functor.map_comp_assoc, ← Functor.map_comp]
+  erw [← Functor.map_comp_assoc]
+  simp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
+    HomotopyCategory.quotient, Quotient.lift_map_functor_map]
   congr 1
-  congr 2
-  simp only [Functor.comp_map] at hc
-  exact hc.symm
+  simpa only [Functor.comp_map] using! congrArg
+    (DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings B.toRingedSpace))).map hc.symm
 
 set_option maxHeartbeats 500000 in
 -- Naturality rewrites elaborate the selected derived functors and localization maps.

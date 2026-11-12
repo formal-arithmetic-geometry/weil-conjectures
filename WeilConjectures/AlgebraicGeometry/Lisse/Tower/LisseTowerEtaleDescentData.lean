@@ -70,7 +70,7 @@ def lisseTowerAlgebraArrow {A : Type (u + 1)} [CommRing A]
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (lisseTowerEtaleQuotient d n))
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
         (Ideal.Quotient.mk ((d.ideal.map
-          (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 2))))).inv.app E' ≫
+          (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 2))))).hom.app E' ≫
     (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
       (Ideal.Quotient.mk ((d.ideal.map
         (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 2)))

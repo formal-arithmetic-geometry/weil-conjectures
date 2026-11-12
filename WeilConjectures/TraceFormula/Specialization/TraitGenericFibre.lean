@@ -82,8 +82,7 @@ theorem isWContractibleRing_closedLift_tensorProduct_traitGenericField (C : Type
       | zero => simp
       | add x y _ _ hx hy => simpa [TensorProduct.add_tmul] using add_mem (hx ω) (hy ω)
       | smul a x _ hx => simpa [TensorProduct.smul_tmul] using hx (a • ω)
-    induction x using TensorProduct.induction_on with
-    | zero => exact zero_mem _
+    induction x using TensorProduct.inductionOn with
     | tmul h ω => exact htmul h (Algebra.ClosedLift.mem_span_isIdempotentElem hC0 h) ω
     | add x y hx hy => exact add_mem hx hy
   have hφ : Function.Injective φ := Algebra.ClosedLift.injective_includeLeft

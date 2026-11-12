@@ -45,7 +45,7 @@ private lemma modelToInternalX_π {R : Type u} [CommRing R]
     (P N : CochainComplex (ModuleCat.{u} R) ℤ) (n p q : ℤ) (h : p + n = q) :
     modelToInternalX P N n ≫ internalHomπ P N n p q h =
       (p * n).negOnePow • modelπ P N n p q h :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 private noncomputable def internalToModelX {R : Type u} [CommRing R]
     (P N : CochainComplex (ModuleCat.{u} R) ℤ) (n : ℤ) :

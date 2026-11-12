@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
@@ -141,6 +142,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import all Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import all Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Derived adjunctions computed by a left resolving class
@@ -246,7 +248,7 @@ theorem derivedAdjunctionOfResolvingClass
       ∀ (M : CochainComplex A ℤ) (I : CochainComplex B ℤ)
         (f : (G.mapHomologicalComplex (.up ℤ)).obj M ⟶ I),
         d.homEquiv (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)
-            (εh.app ((HomotopyCategory.quotient A (.up ℤ)).obj M) ≫
+            (cast (by rfl) (εh.app ((HomotopyCategory.quotient A (.up ℤ)).obj M)) ≫
               DerivedCategory.Q.map f) =
           DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫
             η.app I := by

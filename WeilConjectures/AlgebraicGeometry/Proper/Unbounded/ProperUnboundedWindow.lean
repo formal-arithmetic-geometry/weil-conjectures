@@ -43,14 +43,14 @@ private lemma dimensionBound_of_nat_tests (δ : WithBot ℕ∞) (d : ℤ)
     (hδ : ∀ n : ℕ, (n : WithBot ℕ∞) ≤ δ → (n : ℤ) ≤ d) :
     δ ≤ if 0 ≤ d then (d.toNat : WithBot ℕ∞) else ⊥ := by
   by_cases hd : 0 ≤ d
-  · rw [if_pos hd]
+  · rw [ite_eq_left hd]
     by_contra hle
     have hsucc : ((d.toNat + 1 : ℕ) : WithBot ℕ∞) ≤ δ := by
       simpa only [Nat.cast_add, Nat.cast_one] using
         (ENat.WithBot.add_one_le_iff).2 (lt_of_not_ge hle)
     have := hδ (d.toNat + 1) hsucc
     omega
-  · rw [if_neg hd]
+  · rw [ite_eq_right hd]
     apply le_of_eq
     by_contra hne
     have hzero : (0 : WithBot ℕ∞) ≤ δ := by

@@ -59,7 +59,7 @@ lemma Scheme.Hom.exists_lift_of_isSepClosed {P Y : Scheme.{u}} (f : P ⟶ Y) [Is
     Over.w e.inv
   refine ⟨Sigma.ι (fun _ : ι ↦ Spec (.of Ω)) i ≫ e.inv.left ≫ pullback.fst f y, ?_⟩
   rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc e.inv.left, he,
-    Sigma.ι_desc_assoc, Category.id_comp]
+    Sigma.ι_comp_desc_assoc, Category.id_comp]
 
 end AlgebraicGeometry
 
@@ -124,6 +124,7 @@ lemma fiber_obj_obj (P : Y.FiniteEtale) :
 
 lemma fiber_map_apply {P Q : Y.FiniteEtale} (f : P ⟶ Q) (x : (fiber s).obj P) :
     (fiber s).map f x = (pointSmallEtale s).fiber.map f.hom x := rfl
+
 
 lemma fiber_map_left {P Q : Y.FiniteEtale}
     (f : P ⟶ Q) (x : (fiber s).obj P) : ((fiber s).map f x).left = x.left ≫ f.hom.left := rfl

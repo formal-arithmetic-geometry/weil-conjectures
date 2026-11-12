@@ -63,7 +63,7 @@ theorem exists_etale_localization_away_of_inertia (hπ : π ≠ 0) (ψ₀ : A �
     powers_le_nonZeroDivisors_of_noZeroDivisors hπ
   have : IsDomain R' := IsLocalization.isDomain_of_le_nonZeroDivisors R' hπ'
   have : IsDedekindDomain R' := IsLocalization.isDedekindDomain R hπ' R'
-  have : IsDedekindDomain A := isDedekindDomain.of_formallyUnramified R' A
+  have : IsDedekindDomain A := IsDedekindDomain.of_formallyUnramified R' A
   have : Algebra.IsIntegral R' A := Algebra.IsIntegral.of_finite R' A
   -- the elements of `R'` map into `K`
   have hR'K (ψ : A →ₐ[R] Ω) (r' : R') :
@@ -82,8 +82,8 @@ theorem exists_etale_localization_away_of_inertia (hπ : π ≠ 0) (ψ₀ : A �
   have hinj (ψ : A →ₐ[R] Ω) : Function.Injective ψ := by
     refine (injective_iff_map_eq_zero ψ).2 fun x hx ↦ ?_
     have hker : RingHom.ker ψ.toRingHom = ⊥ := by
-      refine Ideal.eq_bot_of_comap_eq_bot (R := R') ?_
-      rw [RingHom.comap_ker, eq_bot_iff]
+      refine Ideal.eq_bot_of_under_eq_bot (R := R') ?_
+      rw [Ideal.under_def, RingHom.comap_ker, eq_bot_iff]
       intro r' hr'
       obtain ⟨k, hk⟩ := hR'K ψ r'
       rw [RingHom.mem_ker] at hr'

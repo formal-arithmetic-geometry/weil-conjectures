@@ -95,8 +95,7 @@ theorem associatedExtension_restriction_existsUnique
     { toFun := l
       map_add' := l.map_add
       map_smul' := fun a z ↦ by
-        induction z using TensorProduct.induction_on with
-        | zero => rw [smul_zero, map_zero, smul_zero]
+        induction z using TensorProduct.inductionOn with
         | tmul b m =>
           change X.presheaf.obj U at b
           change l ((a * b) ⊗ₜ[_] m) = (X.presheaf.map f a) • l (b ⊗ₜ[_] m)

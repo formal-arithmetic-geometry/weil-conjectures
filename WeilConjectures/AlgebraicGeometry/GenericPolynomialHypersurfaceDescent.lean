@@ -57,9 +57,9 @@ private theorem clear_polynomial
       MvPolynomial.map (algebraMap A K) P = (d : A) • Q := by
   classical
   obtain ⟨d, hd⟩ := IsLocalization.exist_integer_multiples
-    (nonZeroDivisors A) Q.support (fun i ↦ MvPolynomial.coeff i Q)
+    (nonZeroDivisors A) Q.support (fun i ↦ AddMonoidAlgebra.coeff Q i)
   change ∀ i ∈ Q.support, ∃ a : A, algebraMap A K a =
-    (d : A) • MvPolynomial.coeff i Q at hd
+    (d : A) • AddMonoidAlgebra.coeff Q i at hd
   let P : MvPolynomial σ A :=
     ∑ i : Q.support, MvPolynomial.monomial i.val (hd i.val i.prop).choose
   refine ⟨P, d, ?_⟩
@@ -68,13 +68,13 @@ private theorem clear_polynomial
   rw [map_sum]
   simp only [MvPolynomial.map_monomial]
   have hnum (i : Q.support) : algebraMap A K (hd i.val i.prop).choose =
-      (d : A) • MvPolynomial.coeff i.val Q := (hd i.val i.prop).choose_spec
+      (d : A) • AddMonoidAlgebra.coeff Q i.val := (hd i.val i.prop).choose_spec
   simp_rw [hnum]
   simp_rw [← MvPolynomial.smul_monomial]
   rw [← Finset.smul_sum]
   congr 1
   exact (Finset.sum_coe_sort Q.support
-    (fun i ↦ MvPolynomial.monomial i (MvPolynomial.coeff i Q))).trans
+    (fun i ↦ MvPolynomial.monomial i (AddMonoidAlgebra.coeff Q i))).trans
       Q.support_sum_monomial_coeff
 
 

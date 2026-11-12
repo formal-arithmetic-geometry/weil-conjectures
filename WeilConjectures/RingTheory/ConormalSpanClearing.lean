@@ -184,6 +184,6 @@ theorem exists_conormal_span_clearing
     rw [← Finset.sum_attach E (fun j ↦ h l j * f j)]
     apply Finset.sum_congr (by ext; simp)
     intro j hj
-    simp only [h, dif_pos j.property]
+    simp only [h, dite_eq_left j.property]
 
 end Ideal

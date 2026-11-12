@@ -77,13 +77,13 @@ theorem etale_coefficient_product_transition_laws
     apply Pi.hom_ext
     intro t
     dsimp only [etaleCoefficientProductTransition]
-    refine (Pi.lift_π _ t).trans ?_
+    refine (Pi.lift_comp_π _ t).trans ?_
     exact etale_coefficient_product_identity_component D F i t
   · intro i j k f g
     apply Pi.hom_ext
     intro t
     dsimp only [etaleCoefficientProductTransition]
-    rw [Category.assoc, Category.assoc, Pi.lift_π, Pi.lift_π]
+    rw [Category.assoc, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π]
     exact etale_coefficient_product_composition_component D F f g t
 
 end AlgebraicGeometry.Etale

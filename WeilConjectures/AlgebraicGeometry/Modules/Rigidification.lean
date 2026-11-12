@@ -110,7 +110,7 @@ theorem exists_isFreeGenerator_top_of_comp_eq_id {P B : Scheme.{u}} (π : P ⟶ 
       refine hγO.smul_left_injective ?_
       dsimp only
       rw [one_smul]
-      convert h2.symm using 3 <;> rfl
+      convert h2.symm using 3
     obtain ⟨a, ha⟩ := hπ (V i ⊓ V j) w.1
     have ha1 : a = 1 := by
       have h4 := key (V i ⊓ V j) (V i ⊓ V j) (hle _) le_rfl a

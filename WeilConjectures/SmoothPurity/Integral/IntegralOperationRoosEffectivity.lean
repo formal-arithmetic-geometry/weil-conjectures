@@ -139,7 +139,7 @@ private theorem adjointProductIso
     IsIso ((adj.homEquiv K X).symm (b.hom ≫ s)) := by
   have he : (b.hom ≫ Pi.lift ps) ≫ Pi.π V n ≫ t.hom =
       (b.hom ≫ s) ≫ G.map a.inv := by
-    simp only [Category.assoc, Pi.lift_π_assoc, hs, Iso.inv_hom_id, Category.comp_id]
+    simp only [Category.assoc, Pi.lift_comp_π_assoc, hs, Iso.inv_hom_id, Category.comp_id]
   rw [he, adj.homEquiv_naturality_right_symm] at hi
   let := hi
   exact IsIso.of_isIso_comp_right _ a.inv

@@ -50,7 +50,7 @@ private lemma openLocalization_terminal {U X : Scheme.{u}}
       erw [hL.map_preimage]
       simp)) (fun s m ↦ ?_)⟩
   ext
-  apply hL.map_injective
+  refine congrArg Quiver.Hom.unop (hL.map_injective ?_)
   erw [hL.map_preimage]
   simp [← CostructuredArrow.w m]
 

@@ -132,7 +132,7 @@ lemma abSectionAct_one (m : N.X.obj.obj U) :
     ((Functor.LaxMonoidal.ε ((Functor.whiskeringRight _ _ _).obj
       (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1}))).app U (ULift.up 1)))).trans rfl
   rw [adicConstantSheaf_one_app]
-  refine ULift.ext _ _ ?_
+  refine ULift.ext ?_
   exact ((congrArg (algebraMap _ _) (one_zsmul (1 : PadicAlgCl l))).trans (map_one _)).symm
 
 lemma abSectionAct_add (a : (adicConstantSheaf l X).obj.obj U) (x y : N.X.obj.obj U) :
@@ -252,7 +252,7 @@ lemma toWeilSheaf_smul (c : ULift.{u + 1} (PadicAlgCl l))
 lemma smul_eq_constSection_mul (c : ULift.{u + 1} (PadicAlgCl l))
     (a : (adicConstantSheaf l X).obj.obj U) :
     c • a = ULift.up ((constScalarSection U c).down * a.down) :=
-  ULift.ext _ _ (Algebra.smul_def c.down a.down)
+  ULift.ext (Algebra.smul_def c.down a.down)
 
 variable (U) in
 /-- The action of `ℚ̄_ℓ,X(U)` on the sections over `U` of a module object over

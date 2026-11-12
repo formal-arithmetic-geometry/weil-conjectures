@@ -178,10 +178,10 @@ theorem injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
             ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id
         ((strictLocalNeighbourhoodProjection f s).app i)).symm.trans
         ((strictLocalNeighbourhoodProjection f s).naturality a).symm)) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app j))
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map
-        a))).inv.app K.obj) =
+        a))).symm).inv.app K.obj) =
         termwiseSectionsRestriction ((strictLocalNeighbourhoodDiagram f s).map a)
           ((strictLocalNeighbourhoodProjection f s).app j)
           ((strictLocalNeighbourhoodProjection f s).app i)
@@ -213,9 +213,9 @@ theorem injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictLocalizationToBase s))
             (Q.over i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).inv.app K.obj) =
+            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).symm).inv.app K.obj) =
         termwiseSectionsRestriction (Q.legs.app i)
           ((strictLocalNeighbourhoodProjection f s).app i)
           (pullback.fst f (Scheme.strictLocalizationToBase s))

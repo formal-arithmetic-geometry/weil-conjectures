@@ -118,7 +118,7 @@ lemma constantZModToGmSheaf_comp_nsmul (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1) :
   change (n • 𝟙 X.gmSheaf).hom.app U ((X.zmodToGmPresheaf n ζ hζ).app U a) = _
   rw [nsmul_hom_app_apply]
   refine (map_nsmul ((X.zmodToGmPresheaf n ζ hζ).app U).hom n a).symm.trans ?_
-  have ha : n • a = 0 := ULift.ext _ _ (by
+  have ha : n • a = 0 := ULift.ext (by
     change n • a.down = 0
     rw [nsmul_eq_mul, ZMod.natCast_self, zero_mul])
   rw [ha, map_zero]

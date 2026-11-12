@@ -161,7 +161,7 @@ theorem completion_isEquivalence_of_projective_embedding
   let _ := hFF.faithful
   have hPres : PreservesFiniteLimits (completion X K) ∧
       PreservesFiniteColimits (completion X K) := by
-    apply ((Functor.exact_tfae (completion X K)).out 0 3).mp
+    apply ((Functor.exact_tfae (completion X K)).out 1 4).mp
     exact (exactness_independent_zero (completion X K) zC
       (@Preadditive.preadditiveHasZeroMorphisms _ _ hC.some.toPreadditive) zD
       (@Preadditive.preadditiveHasZeroMorphisms _ _ hD.some.toPreadditive) hz

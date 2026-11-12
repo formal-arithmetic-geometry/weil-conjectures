@@ -52,7 +52,7 @@ theorem exists_iso_of_distTriang_biprod_lift {X Y Y' Z : C} (f : X ⟶ Y) (g : X
   have h₂ : E.inv ≫ ψ ≫ e.hom.hom₃ = biprod.snd := by
     have := e.hom.comm₂
     simp only [e, isoTriangleOfIso₁₂_hom_hom₂] at this
-    simpa using this
+    simpa [e] using this
   refine ⟨Triangle.π₃.mapIso e, ?_, ?_⟩
   · have : biprod.inr ≫ E.inv = (biprod.inr : Y' ⟶ Y ⊞ Y') := by simp [E]
     simp only [Functor.mapIso_hom, Triangle.π₃_map]

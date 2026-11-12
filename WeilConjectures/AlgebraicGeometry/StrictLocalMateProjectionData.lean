@@ -118,10 +118,10 @@ structure StrictLocalMateProjectionData
             ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id
         ((strictLocalNeighbourhoodProjection f s).app i)).symm.trans
         ((strictLocalNeighbourhoodProjection f s).naturality a).symm)) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app j))
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map
-        a))).inv.app K.obj) ≫
+        a))).symm).inv.app K.obj) ≫
       (e i).inv
   restriction : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
         ((strictLocalCohomologySourceLegs s
@@ -157,9 +157,9 @@ structure StrictLocalMateProjectionData
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictLocalizationToBase s))
             (Q.over i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).inv.app K.obj) ≫
+            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).symm).inv.app K.obj) ≫
       (strictLocalBaseChangeTargetIso f s K n).inv
 
 

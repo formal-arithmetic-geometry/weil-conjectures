@@ -112,7 +112,8 @@ universe u v r s u₁ v₁ u₂ v₂
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open scoped TensorProduct
-local instance (priority := 5000) (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
+local instance (priority := 5000) instEssentiallySmallProEt_automorphismConstructibleStageCore
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
@@ -331,8 +332,7 @@ private theorem rawIso_existsUnique
     exact ((conj_eqToHom_iff_heq _ _ (hF K) (hG K)).1 rfl)
   have hn (K L : ScalarLocalization R C t) (f : K ⟶ L) :
       F.map f ≫ (a L).hom = (a K).hom ≫ G.map f := by
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | tmul z f =>
       have h₁ := heq_comp (hF K) (hF L) (hG L) (mF K.obj L.obj f z) (ha L)
       have h₂ := heq_comp (hF K) (hG K) (hG L) (ha K) (mG K.obj L.obj f z)
@@ -435,9 +435,6 @@ def automorphismStageRationalSquare
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 section QbarSquare
 
@@ -646,8 +643,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 end IntegralCoherence
 
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 -- Keep the recorded pullback interfaces opaque while checking their shift structures.
 set_option allowUnsafeReducibility true in

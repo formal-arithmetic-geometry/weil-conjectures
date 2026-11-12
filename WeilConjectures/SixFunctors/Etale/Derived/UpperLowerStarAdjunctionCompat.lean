@@ -63,7 +63,7 @@ lemma conjugateEquiv_leftDerivedUpperStarComp_hom {T S R : Scheme.{u}} (g₁ : T
           (mapDerivedUpperStarLowerStarAdjunction A g₁))
         (mapDerivedUpperStarLowerStarAdjunction A g₁₂)
         (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g₁ g₂ g₁₂ hg) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom := by
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom := by
   rw [mapDerivedUpperStarLowerStarAdjunction_eq, mapDerivedUpperStarLowerStarAdjunction_eq,
     mapDerivedUpperStarLowerStarAdjunction_eq]
   ext K

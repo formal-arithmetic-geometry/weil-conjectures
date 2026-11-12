@@ -168,8 +168,10 @@ theorem noetherian_vanishing_of_constant_subsheaves
         intro i
         exact Fin.elim0 i
       have hz : IsZero T := IsZero.of_epi_eq_zero g hgzero
-      change IsZero ((Abelian.extFunctorObj _ p).obj T)
-      exact Functor.map_isZero _ hz
+      rw [AddCommGrpCat.isZero_iff_subsingleton]
+      refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+      rw [← Abelian.Ext.comp_mk₀_id x, hz.eq_of_src (𝟙 T) 0,
+        Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero]
     | succ n ih =>
       intro U hU T g hg
       let _ := hg

@@ -78,15 +78,20 @@ private noncomputable def line_homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _)
           map_add' n n' := hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
             (M₂ := (restrictOver R X.unop).obj N) fun W ↦ by
               ext
-              change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op (n + n') =
-                (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n +
-                  (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n'
+              change (1 : R.obj (op W.unop.left)) •
+                (show N.obj (op W.unop.left) from N.map W.unop.hom.op (n + n')) =
+                (1 : R.obj (op W.unop.left)) •
+                  (show N.obj (op W.unop.left) from N.map W.unop.hom.op n) +
+                  (1 : R.obj (op W.unop.left)) •
+                    (show N.obj (op W.unop.left) from N.map W.unop.hom.op n')
               rw [map_add, smul_add]
           map_smul' r n := hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
             (M₂ := (restrictOver R X.unop).obj N) fun W ↦ by
               ext
-              change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op (r • n) =
-                R.map W.unop.hom.op r • (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op n
+              change (1 : R.obj (op W.unop.left)) •
+                (show N.obj (op W.unop.left) from N.map W.unop.hom.op (r • n)) =
+                R.map W.unop.hom.op r • (1 : R.obj (op W.unop.left)) •
+                  (show N.obj (op W.unop.left) from N.map W.unop.hom.op n)
               rw [one_smul, one_smul, N.map_smul]
               rfl }
       hom_inv_id := by
@@ -94,8 +99,8 @@ private noncomputable def line_homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _)
         refine hom_ext (M₁ := (restrictOver R X.unop).obj (unit _))
           (M₂ := (restrictOver R X.unop).obj N) fun W ↦ ?_
         refine ModuleCat.hom_ext (LinearMap.ext_ring ?_)
-        change (1 : R.obj (op W.unop.left)) • N.map W.unop.hom.op
-          (φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj (op X.unop))) =
+        change (1 : R.obj (op W.unop.left)) • (show N.obj (op W.unop.left) from
+          N.map W.unop.hom.op (φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj (op X.unop)))) =
             φ.app W (1 : R.obj (op W.unop.left))
         rw [one_smul]
         refine (naturality_apply φ
@@ -199,13 +204,14 @@ private theorem lineEval_of_inverse
     M.restrictₛₗ W.hom.op m₀ at hn
   calc
     x = ψ.app (op W) (φ.app (op W) x) := (hi' _ _).symm
-    _ = φ.app (op W) x • ψ.app (op W) (1 : R.obj (op W.left)) := by
+    _ = (show R.obj (op W.left) from φ.app (op W) x) •
+        ψ.app (op W) (1 : R.obj (op W.left)) := by
       rw [← map_smul]
       congr 1
       let a : R.obj (op W.left) := φ.app (op W) x
       change a = a * 1
       exact (mul_one a).symm
-    _ = _ := congrArg (φ.app (op W) x • ·) hn
+    _ = _ := congrArg ((show R.obj (op W.left) from φ.app (op W) x) • ·) hn
 
 end LineUnit
 

@@ -42,7 +42,7 @@ additive monoid. -/
 lemma ULift.isAddTorsionFree_continuousMap (S T : Type*) [TopologicalSpace S] [TopologicalSpace T]
     [AddMonoid T] [ContinuousAdd T] [IsAddTorsionFree T] :
     IsAddTorsionFree (ULift.{w} C(S, T)) :=
-  ⟨fun _ hn _ _ h ↦ ULift.ext _ _ (ContinuousMap.ext fun s ↦
+  ⟨fun _ hn _ _ h ↦ ULift.ext (ContinuousMap.ext fun s ↦
     nsmul_right_injective hn (congrArg (fun z : ULift.{w} C(S, T) ↦ z.down s) h))⟩
 
 namespace AlgebraicGeometry.ProEtale

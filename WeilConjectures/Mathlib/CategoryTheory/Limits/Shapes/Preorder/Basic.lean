@@ -78,6 +78,7 @@ lemma isIso_map_of_interleave (h₁ : IsColimit c₁) (h₂ : IsColimit c₂)
     IsIso (h₁.map c₂ u) :=
   isIso_of_interleave h₁ h₂ u v hu hv _ (h₁.ι_map c₂ u)
 
+
 end IsColimit
 
 /-- The map of colimits `colimMap u` induced by a natural transformation `u : F₁ ⟶ F₂`
@@ -89,5 +90,6 @@ lemma isIso_colimMap_of_interleave [HasColimit F₁] [HasColimit F₂]
     (hv : ∀ i, v i ≫ u.app (Order.succ i) = F₂.map (homOfLE (Order.le_succ i))) :
     IsIso (colimMap u) :=
   IsColimit.isIso_map_of_interleave (colimit.isColimit _) (colimit.isColimit _) u v hu hv
+
 
 end CategoryTheory.Limits

@@ -106,6 +106,6 @@ theorem koszulRegularImmersion_ext_pullback
   dsimp only at hs
   refine ⟨@asIso _ _ _ _ ((Scheme.Modules.restrictAdjunction V.ι).unit.app _) hs ≪≫
     (Scheme.Modules.pushforward V.ι).mapIso e ≪≫ ?_⟩
-  exact eqToIso (by simp only [Scheme.Modules.locallyRankedExteriorTerm, if_pos hq, V])
+  exact eqToIso (by simp only [Scheme.Modules.locallyRankedExteriorTerm, ite_eq_left hq, V])
 
 end AlgebraicGeometry

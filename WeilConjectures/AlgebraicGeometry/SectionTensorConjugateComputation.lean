@@ -39,10 +39,8 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
 
 attribute [local irreducible] sectionTensorRightComparison sectionTensorRightLocalization
 
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
-
 attribute [local implicit_reducible] sectionScalarTensor
-  ModuleRingedComparison.totalTensor CochainComplex.singleFunctors
+  ModuleRingedComparison.totalTensor
   CategoryTheory.Functor.map₂HomologicalComplex
   ModuleRingedComparison.sectionLocalizationComparison
 

@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.Matrix.SesquilinearForm
 public import Mathlib.NumberTheory.Padics.ProperSpace
 public import Mathlib.RingTheory.Filtration
+public import Mathlib.Topology.Instances.Matrix
 public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology
 
 /-!

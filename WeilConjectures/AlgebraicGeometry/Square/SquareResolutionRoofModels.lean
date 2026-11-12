@@ -120,7 +120,6 @@ Source: Stacks Project, Tag 0D5X
 
 attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
   Scheme.Modules.instCategory Scheme.Modules.instAbelian TopCat.Sheaf
-  Functor.mapHomologicalComplex
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

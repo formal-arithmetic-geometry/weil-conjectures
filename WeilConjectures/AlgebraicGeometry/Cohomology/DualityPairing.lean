@@ -114,7 +114,7 @@ lemma bijective_dualPairing_sigma {ι : Type u} [Finite ι] (f : ι → X.Module
     refine ⟨Sigma.desc x, LinearMap.ext fun c ↦ ?_⟩
     rw [hsum c, map_sum, map_sum]
     refine Finset.sum_congr rfl fun j _ ↦ ?_
-    rw [dualPairing_apply, ← H.map_comp_apply, Sigma.ι_desc, ← dualPairing_apply, hx j]
+    rw [dualPairing_apply, ← H.map_comp_apply, Sigma.ι_comp_desc, ← dualPairing_apply, hx j]
     rfl
 
 /-- **The duality pairing and binary biproducts.** -/

@@ -40,12 +40,12 @@ theorem diagonalResidueProjection_ker (ℓ n : ℕ) [Fact ℓ.Prime] :
     · intro h
       exact congrArg ULift.down h
     · intro h
-      exact ULift.ext _ _ h
+      exact ULift.ext h
   rw [RingHom.mem_ker, hx, ← RingHom.mem_ker, PadicInt.ker_toZModPow,
     Ideal.mem_span_singleton, Ideal.mem_span_singleton]
   constructor
   · rintro ⟨z, hz⟩
-    exact ⟨ULift.up z, ULift.ext _ _ (by simpa using hz)⟩
+    exact ⟨ULift.up z, ULift.ext (by simpa using hz)⟩
   · rintro ⟨z, hz⟩
     exact ⟨z.down, by simpa using congrArg ULift.down hz⟩
 

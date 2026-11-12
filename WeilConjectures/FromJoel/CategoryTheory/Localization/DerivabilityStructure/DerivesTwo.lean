@@ -91,6 +91,7 @@ lemma isInvertedBy₂ (h : Derives₂ Φ₁ Φ₂ F) (X₁₀ : C₁₀) :
     W₂₀.IsInvertedBy (Φ₂.functor ⋙ F.obj (Φ₁.functor.obj X₁₀)) :=
   ((derives₂_iff _ _ _).1 h).2 _
 
+
 variable [Φ₁.IsLeftDerivabilityStructure] [Φ₂.IsLeftDerivabilityStructure]
   [W₁.ContainsIdentities] [W₂.ContainsIdentities]
 

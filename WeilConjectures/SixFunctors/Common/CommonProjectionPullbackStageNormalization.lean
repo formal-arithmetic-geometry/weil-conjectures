@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackStages
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option cleanup.letToHave false
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory AlgebraicGeometry

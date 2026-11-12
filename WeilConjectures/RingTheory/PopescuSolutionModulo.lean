@@ -300,7 +300,7 @@ theorem exists_essentiallySmooth_artinian_factorization_mod_prime_pow
   have : Etale Q D := Etale.of_equiv e.symm
   let g : D →+* B := A.val.toRingHom.comp e.toRingHom
   have hvalLocal : IsLocalHom A.val.toRingHom := by
-    apply (IsLocalRing.local_hom_TFAE A.val.toRingHom).out 4 0 |>.mp
+    apply (IsLocalRing.local_hom_TFAE A.val.toRingHom).out 5 1 |>.mp
     change (IsLocalRing.maximalIdeal B).comap A.val.toRingHom = _
     rw [← IsLocalRing.map_maximalIdeal_of_surjective
       (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))

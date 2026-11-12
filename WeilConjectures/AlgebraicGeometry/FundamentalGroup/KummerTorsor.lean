@@ -358,7 +358,7 @@ noncomputable def EtaleTorsor.kummer (hζs : IsPrimitiveRoot ((pointRingHom s).h
       exact hζs
     obtain ⟨m, hm, huniq⟩ := existsUnique_comp_kummerAlgHom ζ hζ hf _ _ hαβ hζΩ
     refine ⟨⟨m⟩, (fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).2 hm, fun m' h ↦ ?_⟩
-    exact ULift.ext _ _ (huniq m'.down ((fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).1 h))
+    exact ULift.ext (huniq m'.down ((fiber_map_kummerVaddHom_eq_iff hn hf s _ x y).1 h))
 
 section Monodromy
 

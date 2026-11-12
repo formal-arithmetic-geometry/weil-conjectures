@@ -117,12 +117,7 @@ lemma frobenius_comp_eq_comp_frobenius : ΦX ≫ f = f ≫ ΦY :=
     _ = r ≫ f' ≫ ΦY := by rw [sq.w]
     _ = f ≫ ΦY := by rw [← Category.assoc, hrf]
 
-/-- The Frobenius comparison `θ_f : Rf_! ⋙ LΦ_Y^* ≅ LΦ_X^* ⋙ Rf_!` of the lower shriek, for the
-cartesian square `sq : p ≫ f = f' ≫ Φ_Y` and the relative Frobenius `r` with `r ≫ p = Φ_X` and
-`r ≫ f' = f`, a finite universal homeomorphism: compact-support base change for `sq`, the unit
-of `Lr^* ⊣ Rr_*`, the identification `Rr_! ≅ Rr_*` and the composition isomorphisms of the
-lower shriek and of the pullback (blueprint `sk-d-weil-push`). -/
-noncomputable def weilLowerShriekFrobeniusComparison :
+noncomputable def weilLowerShriekFrobeniusComparisonImpl :
     boundedConstructibleLowerShriek ℓ f ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX ⋙
@@ -144,6 +139,15 @@ noncomputable def weilLowerShriekFrobeniusComparison :
     Functor.isoWhiskerRight
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).symm _ ≪≫
     eqToIso (by rw [hrp, hrf])
+
+omit ℓ k in
+/-- The Frobenius comparison `θ_f : Rf_! ⋙ LΦ_Y^* ≅ LΦ_X^* ⋙ Rf_!` of the lower shriek, for the
+cartesian square `sq : p ≫ f = f' ≫ Φ_Y` and the relative Frobenius `r` with `r ≫ p = Φ_X` and
+`r ≫ f' = f`, a finite universal homeomorphism: compact-support base change for `sq`, the unit
+of `Lr^* ⊣ Rr_*`, the identification `Rr_! ≅ Rr_*` and the composition isomorphisms of the
+lower shriek and of the pullback (blueprint `sk-d-weil-push`). -/
+noncomputable irreducible_def weilLowerShriekFrobeniusComparison :=
+  @weilLowerShriekFrobeniusComparisonImpl
 
 /-- The *lower shriek of Weil objects* along a morphism `f` compatible with Frobenius
 endomorphisms: a Weil object `(K, φ)` for `Φ_X` is sent to `Rf_! K` with the Weil structure
@@ -259,7 +263,8 @@ lemma boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusCompa
     (boundedConstructibleLowerShriek ℓ (Φ ≫ toPoint X)).map h₄
   simp only [CategoryTheory.Functor.map_comp, Functor.comp_map, eqToHom_map, Functor.comp_obj,
     Functor.id_obj] at h₁ h₂ h₃ h₄'
-  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+  simp only [weilLowerShriekFrobeniusComparison_def, weilLowerShriekFrobeniusComparisonImpl,
+    Iso.trans_hom, NatTrans.comp_app, asIso_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
     Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
@@ -470,7 +475,8 @@ lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {
   have cH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app_bottom ℓ hZ
     (hL.paste_horiz sq) hy.symm K
   have hk := baseChange_comp_relativeFrobenius_stalk ℓ hZ hL hT hi K
-  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+  simp only [weilLowerShriekFrobeniusComparison_def, weilLowerShriekFrobeniusComparisonImpl,
+    Iso.trans_hom, NatTrans.comp_app, asIso_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
     Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
@@ -602,7 +608,8 @@ lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
   have hn := (boundedConstructibleLowerShriekCompToPoint ℓ (r ≫ f')).inv.naturality
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K)
   simp only [Functor.comp_map] at hn
-  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+  simp only [weilLowerShriekFrobeniusComparison_def, weilLowerShriekFrobeniusComparisonImpl,
+    Iso.trans_hom, NatTrans.comp_app, asIso_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
     Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,

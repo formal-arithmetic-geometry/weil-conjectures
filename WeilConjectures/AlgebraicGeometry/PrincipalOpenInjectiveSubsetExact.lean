@@ -132,7 +132,7 @@ theorem principalOpen_injective_subset_exact
     have hn : (T.val.erase j.val).Nonempty := Finset.card_pos.mp (by
       rw [Finset.card_erase_of_mem j.property, T.property]
       omega)
-    simp only [dif_pos hn]
+    simp only [dite_eq_left hn]
     rfl
   obtain ⟨b₀, hb₀⟩ := hex c₀ hc₀
   change C.d p (p + 1) b₀ = c₀ at hb₀
@@ -151,7 +151,7 @@ theorem principalOpen_injective_subset_exact
     rw [Finset.card_erase_of_mem j.property, hT]
     omega
   have hn : (T.val.erase j.val).Nonempty := Finset.card_pos.mp (by omega)
-  simp only [dif_pos hn, b, dif_pos hj]
+  simp only [dite_eq_left hn, b, dite_eq_left hj]
   rfl
 
 end AlgebraicGeometry

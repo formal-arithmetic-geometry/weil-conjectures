@@ -104,8 +104,8 @@ def inclusion : ordinary (B := B) ⟶ product where
     apply Limits.Pi.hom_ext
     intro n
     dsimp only [product]
-    simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π_assoc,
-      Limits.Pi.lift_π]
+    simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc,
+      Limits.Pi.lift_comp_π]
     exact (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).naturality f
 
 /-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941
@@ -119,7 +119,7 @@ theorem inclusion_difference (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift,
     Category.assoc, Preadditive.sub_comp, Category.id_comp, Preadditive.comp_sub,
-    Limits.Pi.lift_π, Limits.Pi.lift_π_assoc, zero_comp, sub_eq_zero]
+    Limits.Pi.lift_comp_π, Limits.Pi.lift_comp_π_assoc, zero_comp, sub_eq_zero]
   ext p
   exact (limit.w (X.X p) (homOfLE (Nat.le_succ n)).op).symm
 

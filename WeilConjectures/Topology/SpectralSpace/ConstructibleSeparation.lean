@@ -107,4 +107,5 @@ theorem constructibleSeparation_spec [QuasiSeparatedSpace X] :
     subset_constructibleSeparation_fst h₁ h₂ hd, subset_constructibleSeparation_snd h₁ h₂ hd,
     disjoint_constructibleSeparation h₁ h₂ hd⟩
 
+
 end PrespectralSpace

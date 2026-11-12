@@ -66,8 +66,7 @@ theorem functor_existsUnique
   have : J'.Additive := hJ'.1
   refine CategoryTheory.Functor.ext hJ'.2.1 ?_
   intro K M a
-  induction a using TensorProduct.induction_on with
-  | zero => simp
+  induction a using TensorProduct.inductionOn with
   | tmul c a =>
     apply (conj_eqToHom_iff_heq _ _ (hJ'.2.1 K) (hJ'.2.1 M)).2
     exact (hJ'.2.2 K.obj M.obj a c).trans (heq_of_eq (hJ K.obj M.obj a c).symm)

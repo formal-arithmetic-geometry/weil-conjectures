@@ -41,7 +41,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 
 private noncomputable def exactComp (e : H ≅ F ⋙ G) :
     H.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
-  Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G
+  Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm
 
 @[reassoc]
 private lemma exactComp_fac (e : H ≅ F ⋙ G)
@@ -54,7 +54,7 @@ private lemma exactComp_fac (e : H ≅ F ⋙ G)
   have hcomp := Functor.mapDerivedCategoryCompIso_fach F G P
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hcomp
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hcomp
-  simp only [exactComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [exactComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hcomp, Functor.mapDerivedCategoryNatIso_fach]
 
 end ExactFunctors
@@ -285,7 +285,7 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 noncomputable def derivedSliceMapIso {U V : C} (f : V ⟶ U) :
     derivedSliceRestriction J B U ⋙ derivedSliceMap J B f ≅
       derivedSliceRestriction J B V :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (sliceRestrictionMapIso J B f)
 
 variable (A D : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)))
@@ -322,7 +322,7 @@ private theorem derivedSliceMapIso_symm {U V : C} (f : V ⟶ U) :
       (sliceRestrictionMapIso J B f).symm := by
   apply Iso.ext
   simp only [derivedSliceMapIso, exactComp, Iso.symm_hom, Iso.trans_inv,
-    Iso.trans_hom, Iso.symm_inv,
+    Iso.trans_hom,
     Functor.mapDerivedCategoryNatIso_symm]
 
 private noncomputable def sliceMapDerivedId (U : C) :=
@@ -669,9 +669,9 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 noncomputable def sliceRestrictScalarsIso (φ : B →+* B') (U : C) :
     derivedSliceRestriction J B' U ⋙ Sheaf.derivedRestrictScalars (J.over U) φ ≅
       Sheaf.derivedRestrictScalars J φ ⋙ derivedSliceRestriction J B U :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso
       (sliceRestrictScalarsSheafIso J B φ U) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end CategoryTheory

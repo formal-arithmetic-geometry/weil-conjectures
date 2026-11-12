@@ -262,6 +262,7 @@ lemma strIterate_add_hom (K : IsoAlgebra F) (m n : ℕ) :
       _ ≫ F.map ((F.iterate n).map (K.strIterate m).hom) ≫ F.map (K.strIterate n).hom ≫ _
     rw [ih, F.map_comp, F.map_comp, eqToHom_map, Category.assoc, Category.assoc]
 
+
 section Map
 
 variable {G : D ⥤ D} {L : C ⥤ D}
@@ -383,6 +384,7 @@ lemma mapOfNatIso₂_obj_obj_str
   ext
   simp [mapOfNatIso₂]
 
+
 end Map₂
 
 section Op
@@ -406,6 +408,7 @@ noncomputable def opFunctor : (IsoAlgebra F)ᵒᵖ ⥤ IsoAlgebra F.op where
 lemma opFunctor_obj_carrier (K : (IsoAlgebra F)ᵒᵖ) :
     (opFunctor.obj K).carrier = Opposite.op K.unop.carrier :=
   mk_carrier _ _
+
 
 @[simp]
 lemma opFunctor_obj_str (K : (IsoAlgebra F)ᵒᵖ) :

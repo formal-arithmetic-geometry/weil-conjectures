@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The quotient action on a square-zero ideal
 
@@ -119,6 +120,9 @@ theorem square_zero_glued_scalar_exists_unique (X : Scheme.{u})
     dsimp [t]
     rw [map_mul, iz, mul_zero, map_zero]
   let E := SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op U)
+  have : E.Additive := by
+    dsimp only [E, SheafOfModules.evaluation]
+    infer_instance
   have he := hS.exact.map_of_mono_of_preservesKernel E inferInstance inferInstance
   obtain ⟨y, hy⟩ := ((ShortComplex.mk i q hw).map E).moduleCat_exact_iff.mp he z pz
   change i.val.app (op U) y = z at hy

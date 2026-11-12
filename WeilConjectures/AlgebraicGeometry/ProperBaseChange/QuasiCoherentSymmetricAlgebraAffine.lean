@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricAlgebraSheafConstruction
 import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricAlgebraAffineComparisonStalks
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine comparison for the symmetric algebra sheaf
 

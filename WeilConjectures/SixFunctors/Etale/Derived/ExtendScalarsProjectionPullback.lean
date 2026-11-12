@@ -52,6 +52,17 @@ variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B
   {T : A ⥤ A} {E : A ⥤ B} {gA : A ⥤ A'} {gB : B ⥤ B'} {T' : A' ⥤ A'} {E' : A' ⥤ B'}
   [T.Additive] [E.Additive] [gA.Additive] [gB.Additive] [T'.Additive] [E'.Additive]
 
+omit [Preadditive A] [Preadditive B] [Preadditive A'] [Preadditive B'] [T.Additive]
+  [E.Additive] [gA.Additive] [gB.Additive] [T'.Additive] [E'.Additive] in
+/-- `NatTrans.mapHomotopyCategory` evaluated at the quotient of a complex. -/
+private lemma NatTrans.mapHomotopyCategory_app_quotient {V W : Type*} [Category V] [Category W]
+    [Preadditive V] [Preadditive W] {F G : V ⥤ W} [F.Additive] [G.Additive]
+    (α : F ⟶ G) (K : CochainComplex V ℤ) :
+    (NatTrans.mapHomotopyCategory α (.up ℤ)).app ((HomotopyCategory.quotient V (.up ℤ)).obj K) =
+      (HomotopyCategory.quotient W (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex α (.up ℤ)).app K) :=
+  rfl
+
 /-- A commutative square of natural transformations `gB (p P) ≫ σ P = σ (T P) ≫ E' (τ P) ≫
 p' (gA P)` induces the corresponding commutative square on homotopy categories. -/
 private lemma NatTrans.mapHomotopyCategory_transpose_square (p : T ⋙ E ⟶ E) (p' : T' ⋙ E' ⟶ E')
@@ -80,7 +91,7 @@ private lemma NatTrans.mapHomotopyCategory_transpose_square (p : T ⋙ E ⟶ E) 
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp, Category.comp_id,
-    NatTrans.mapHomotopyCategory, HomotopyCategory.quotient_obj_as,
+    NatTrans.mapHomotopyCategory_app_quotient,
     Functor.mapHomotopyCategory_map]
   simp only [← Functor.map_comp]
   congr 1

@@ -107,13 +107,13 @@ theorem finiteCoefficientDerivedComparison_fullyFaithful
     exact isIso_of_reflects_iso _ L.mapDerivedCategory
   let ff := adj.fullyFaithfulLOfIsIsoUnit
   let e := Functor.mapDerivedCategoryCompIso L E
-  let f := (ff.comp (Functor.FullyFaithful.ofFullyFaithful E.mapDerivedCategory)).ofIso e.symm
+  let f := (ff.comp (Functor.FullyFaithful.ofFullyFaithful E.mapDerivedCategory)).ofIso e
   refine ⟨inferInstance, ⟨f⟩, ?_⟩
   intro I
   have : PreservesColimitsOfShape (Discrete I) L.mapDerivedCategory :=
     adj.leftAdjoint_preservesColimits.preservesColimitsOfShape
   have : PreservesColimitsOfShape (Discrete I) (L.mapDerivedCategory ⋙ E.mapDerivedCategory) :=
     inferInstance
-  exact ⟨preservesColimitsOfShape_of_natIso e.symm⟩
+  exact ⟨preservesColimitsOfShape_of_natIso e⟩
 
 end AlgebraicGeometry.ProEtale

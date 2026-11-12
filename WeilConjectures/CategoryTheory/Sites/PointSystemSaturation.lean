@@ -169,7 +169,7 @@ private theorem exists_filteredSystem_finiteCoverLifting
       colimit.ι ((sys n).diagram ⋙ F.obj) i ≫ (bridge n).hom =
         colimit.ι (Grothendieck.ι A n ⋙ P) i := by
     dsimp only [bridge]
-    rw [HasColimit.isoOfNatIso_ι_hom]
+    rw [HasColimit.ι_isoOfNatIso_hom]
     simp [eqToHom_app, A]
   let first (n : ℕ) : Q.obj n := (bridge n).hom (sys n).first
   let second (n : ℕ) : Q.obj n := (bridge n).hom (sys n).second
@@ -187,13 +187,13 @@ private theorem exists_filteredSystem_finiteCoverLifting
       Functor.ofSequence_map_homOfLE_succ transition n
     simp only [Functor.comp_obj, fiberwiseColimit, Over.forget_obj, Cat.of_α, overUnion,
       Cat.Hom.comp_toFunctor, Functor.comp_map, Over.forget_map, Nat.succ_eq_add_one,
-      homOfLE_leOfHom, HasColimit.isoOfNatIso_ι_hom_assoc, Grothendieck.ι_obj,
+      homOfLE_leOfHom, HasColimit.ι_isoOfNatIso_hom_assoc, Grothendieck.ι_obj,
       eqToIso.hom, eqToHom_app, eqToHom_refl, ι_colimMap_assoc, NatTrans.comp_app,
       Functor.whiskerRight_app, Grothendieck.ιNatTrans_app_base,
       Grothendieck.ιNatTrans_app_fiber, Functor.map_id, Category.comp_id, eqToHom_map,
       Functor.associator_hom_app, colimit.ι_pre, Category.id_comp,
       pointSystemRefinementMap, Category.assoc, Monotone.functor_obj,
-      colimit.ι_pre_assoc, HasColimit.isoOfNatIso_ι_hom, P, bridge, obj, Q, U]
+      colimit.ι_pre_assoc, HasColimit.ι_isoOfNatIso_hom, P, bridge, obj, Q, U]
     dsimp only [Grothendieck.ι]
     simp only [Functor.comp_obj, homOfLE_leOfHom]
     have he := congrArg (fun t : obj n ⟶ obj (n + 1) ↦ t.left.toFunctor.obj i) hs
@@ -260,7 +260,7 @@ private theorem exists_filteredSystem_finiteCoverLifting
       colimit.ι ((sys m).diagram ⋙ R) i ≫ (hb m).hom =
         colimit.ι (Grothendieck.ι A m ⋙ H) i := by
     dsimp only [hb]
-    rw [HasColimit.isoOfNatIso_ι_hom]
+    rw [HasColimit.ι_isoOfNatIso_hom]
     simp [eqToHom_app, A]
   have hb_step (m : ℕ) :
       (hb m).hom ≫ HQ.map (homOfLE m.le_succ) =
@@ -276,13 +276,13 @@ private theorem exists_filteredSystem_finiteCoverLifting
       Functor.ofSequence_map_homOfLE_succ transition m
     simp only [Functor.comp_obj, fiberwiseColimit, Over.forget_obj, Cat.of_α, overUnion,
       Cat.Hom.comp_toFunctor, Functor.comp_map, Over.forget_map, Nat.succ_eq_add_one,
-      homOfLE_leOfHom, HasColimit.isoOfNatIso_ι_hom_assoc, Grothendieck.ι_obj,
+      homOfLE_leOfHom, HasColimit.ι_isoOfNatIso_hom_assoc, Grothendieck.ι_obj,
       eqToIso.hom, eqToHom_app, eqToHom_refl, ι_colimMap_assoc, NatTrans.comp_app,
       Functor.whiskerRight_app, Grothendieck.ιNatTrans_app_base,
       Grothendieck.ιNatTrans_app_fiber, Functor.map_id, Category.comp_id, eqToHom_map,
       Functor.associator_hom_app, colimit.ι_pre, Category.id_comp,
       pointSystemRefinementMap, Category.assoc, Monotone.functor_obj,
-      colimit.ι_pre_assoc, HasColimit.isoOfNatIso_ι_hom, H, hb, obj, U, HQ]
+      colimit.ι_pre_assoc, HasColimit.ι_isoOfNatIso_hom, H, hb, obj, U, HQ]
     dsimp only [Grothendieck.ι]
     have he := congrArg (fun t : obj m ⟶ obj (m + 1) ↦ t.left.toFunctor.obj i) hs
     change (Over.Hom.left (S.map (homOfLE m.le_succ))).toFunctor.obj i =

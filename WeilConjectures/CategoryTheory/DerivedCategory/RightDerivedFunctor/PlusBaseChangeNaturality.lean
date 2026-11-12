@@ -118,11 +118,11 @@ variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Categor
 @[reassoc]
 lemma rightDerivedFunctorPlusBaseChange_fac_app (e : G ⋙ γ ⟶ β ⋙ G')
     (K : HomotopyCategory.Plus B) :
-    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnit.app K) ≫
+    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnith.app K) ≫
         (rightDerivedFunctorPlusBaseChange e).app (DerivedCategory.Plus.Qh.obj K) =
       γ.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj K) ≫
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e).app K) ≫
-        G'.rightDerivedFunctorPlusUnit.app (β.mapHomotopyCategoryPlus.obj K) ≫
+        G'.rightDerivedFunctorPlusUnith.app (β.mapHomotopyCategoryPlus.obj K) ≫
         G'.rightDerivedFunctorPlus.map (β.mapDerivedCategoryPlusFactorsh.inv.app K) := by
   have h := congr_app (rightDerivedFunctorPlusBaseChange_fac e) K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -153,7 +153,7 @@ lemma rightDerivedFunctorPlusBaseChange_naturality (e : G ⋙ γ ⟶ β ⋙ G')
       Functor.whiskerRight (mapDerivedCategoryPlusNatIso v).hom G'.rightDerivedFunctorPlus =
       Functor.whiskerLeft G.rightDerivedFunctorPlus (mapDerivedCategoryPlusNatIso u).hom ≫
         rightDerivedFunctorPlusBaseChange e₂ from congr_app key K
-  refine Functor.rightDerived_ext _ (Functor.whiskerRight G.rightDerivedFunctorPlusUnit
+  refine Functor.rightDerived_ext _ (Functor.whiskerRight G.rightDerivedFunctorPlusUnith
     γ.mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom)
     (HomotopyCategory.Plus.quasiIso B) _ _ _ (NatTrans.ext (funext fun K => ?_))
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -181,9 +181,9 @@ lemma rightDerivedFunctorPlusBaseChange_naturality (e : G ⋙ γ ⟶ β ⋙ G')
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
     exact (mapDerivedCategoryPlusNatIso_hom_app_factorsh v K).trans (by erw [comp_id])
   have hu := (mapDerivedCategoryPlusNatIso u).hom.naturality
-    (G.rightDerivedFunctorPlusUnit.app K)
+    (G.rightDerivedFunctorPlusUnith.app K)
   have hu' := mapDerivedCategoryPlusNatIso_hom_app_factorsh u (G.mapHomotopyCategoryPlus.obj K)
-  have hη := G'.rightDerivedFunctorPlusUnit.naturality
+  have hη := G'.rightDerivedFunctorPlusUnith.naturality
     ((NatTrans.mapHomotopyCategoryPlus v.hom).app K)
   simp only [Functor.comp_obj, Functor.comp_map] at hu hη
   simp only [rightDerivedFunctorPlusBaseChange_fac_app_assoc, reassoc_of% hu,
@@ -245,7 +245,7 @@ lemma rightDerivedFunctorPlusBaseChange_paste (e₁ : G₁ ⋙ γ₁ ⟶ β₁ �
         Functor.whiskerLeft β₁.mapDerivedCategoryPlus (rightDerivedFunctorPlusBaseChange e₂) ≫
         (Functor.associator _ _ _).inv by
     simpa using congr_app key K
-  refine Functor.rightDerived_ext _ (Functor.whiskerRight G₁.rightDerivedFunctorPlusUnit
+  refine Functor.rightDerived_ext _ (Functor.whiskerRight G₁.rightDerivedFunctorPlusUnith
     (γ₁ ⋙ γ₂).mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom)
     (HomotopyCategory.Plus.quasiIso B₁) _ _ _ (NatTrans.ext (funext fun K => ?_))
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -276,7 +276,7 @@ lemma rightDerivedFunctorPlusBaseChange_paste (e₁ : G₁ ⋙ γ₁ ⟶ β₁ �
   have hγ := mapDerivedCategoryPlusCompIso_hom_app_factorsh γ₁ γ₂
     (G₁.mapHomotopyCategoryPlus.obj K)
   have hn := (mapDerivedCategoryPlusCompIso γ₁ γ₂).hom.naturality
-    (G₁.rightDerivedFunctorPlusUnit.app K)
+    (G₁.rightDerivedFunctorPlusUnith.app K)
   have hbc := (rightDerivedFunctorPlusBaseChange e₂).naturality
     (β₁.mapDerivedCategoryPlusFactorsh.inv.app K)
   have hf := γ₂.mapDerivedCategoryPlusFactorsh.hom.naturality

@@ -209,7 +209,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance instEssentiallySmallEtale_pointPerfect
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
@@ -269,8 +270,8 @@ lemma nonempty_iso_reductionModIdeal_of_distTriang {X : Scheme.{u}} {ϖ : Λ}
       CategoryTheory.Functor.map_id]
   obtain ⟨φ, -⟩ := exists_iso_of_arrow_iso _ _ hT hT'
     (Arrow.isoMk u.symm u.symm (by
-      dsimp only [Arrow.mk_hom, Triangle.mk_mor₁, Iso.symm_hom]
-      rw [hmor, Triangle.mk_mor₁, Linear.comp_smul, Linear.smul_comp]
+      change u.inv ≫ (F.mapTriangle.obj T).mor₁ = (ϖ • 𝟙 K) ≫ u.inv
+      rw [hmor, Linear.comp_smul, Linear.smul_comp]
       exact congrArg (ϖ • ·) ((Category.comp_id u.inv).trans (Category.id_comp u.inv).symm)))
   exact ⟨Triangle.π₃.mapIso φ ≪≫ F.mapIso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
     ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso e))⟩
@@ -641,9 +642,9 @@ instance preservesFiniteColimits_Γ_of_isAlgClosed :
     PreservesFiniteColimits
       (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)) := by
   have h := (Functor.preservesFiniteLimits_tfae
-    (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 3 0
+    (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 4 1
   have h' := (Functor.preservesFiniteColimits_tfae
-    (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 0 3
+    (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 1 4
   exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
 
 /-- Over an algebraically closed field `K`: for `M ∈ D^b_c(Spec K, ℚ̄_ℓ)` the derived global

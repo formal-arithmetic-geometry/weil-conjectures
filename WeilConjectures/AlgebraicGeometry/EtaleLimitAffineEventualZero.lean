@@ -117,6 +117,5 @@ theorem etale_limit_affine_eventual_zero
     rw [hcomposition]
     simp only [Sheaf.H.map_comp_apply]
     convert hzero using 1
-    rfl
 
 end AlgebraicGeometry.Etale

@@ -126,8 +126,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`: for a common refinement `c` of `c₁`
 and `c₂` (`Compactification.exists_overRefinement`), the composite `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}`
 of the isomorphisms `boundedConstructibleLowerShriekRefinementIso'` along the refinements. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
+noncomputable irreducible_def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
     (c₁ c₂ : Compactification f.left) :
     boundedConstructibleLowerShriekOfCompactification ℓ c₁ ≅
       boundedConstructibleLowerShriekOfCompactification ℓ c₂ :=
@@ -160,7 +159,6 @@ lemma boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refine
         (boundedConstructibleLowerShriekRefinementIso' ℓ
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.hom_overG).symm := by
-  unfold boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
-  rfl
+  rw [boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_def]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

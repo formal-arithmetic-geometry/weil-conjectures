@@ -267,7 +267,7 @@ variable {C : Type uC} {D : Type uD} {E : Type uE}
   [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
 private noncomputable abbrev derivedComp (e : F ⋙ G ≅ FG) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ FG.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F G).symm ≪≫ mapDerivedCategoryNatIso e
+  (mapDerivedCategoryCompIso F G) ≪≫ mapDerivedCategoryNatIso e
 
 end DerivedCompositionAPI
 section TransportAPI

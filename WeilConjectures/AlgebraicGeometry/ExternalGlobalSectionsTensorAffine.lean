@@ -234,8 +234,7 @@ theorem externalGlobalSectionsTensor_bijective_of_isAffine
   obtain ⟨e, he⟩ := exists_affine_projection_sections_tensor k X Y f g F G
   have hc (z : scalarObj f F (op ⊤) ⊗[k] scalarObj g G (op ⊤)) :
       tensorSectionsMap P Q ⊤ (e z) = externalGlobalSectionsTensor f g F G z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul s t =>
       rw [he, tensorSectionsMap_tmul]
       rfl

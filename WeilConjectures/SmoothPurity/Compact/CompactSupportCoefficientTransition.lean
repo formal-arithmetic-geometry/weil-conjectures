@@ -68,22 +68,22 @@ private theorem localizeRestrictionTransition
         (Functor.mapDerivedCategorySquareIso α₁).hom.app M =
       (Functor.mapDerivedCategorySquareIso α₀).hom.app M ≫
         F₀.mapDerivedCategory.map (t.app M) ≫
-        ((Functor.mapDerivedCategoryCompIso p F₀).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso p F₀ ≪≫
           Functor.mapDerivedCategoryNatIso γ).hom.app (E₁.mapDerivedCategory.obj M) := by
   let a₀ := Functor.mapDerivedCategorySquareIso α₀
   let a₁ := Functor.mapDerivedCategorySquareIso α₁
-  let β := (Functor.mapDerivedCategoryCompIso p F₀).symm ≪≫
+  let β := Functor.mapDerivedCategoryCompIso p F₀ ≪≫
     Functor.mapDerivedCategoryNatIso γ
   have hβ (K : CochainComplex X₁ ℤ) :
       β.hom.app (DerivedCategory.Q.obj K) ≫ F₁.mapDerivedCategoryFactors.hom.app K =
         F₀.mapDerivedCategory.map (p.mapDerivedCategoryFactors.hom.app K) ≫
           F₀.mapDerivedCategoryFactors.hom.app ((p.mapHomologicalComplex (.up ℤ)).obj K) ≫
           DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex γ.hom (.up ℤ)).app K) := by
-    dsimp only [β, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+    dsimp only [β, Iso.trans_hom, NatTrans.comp_app]
     rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso p F₀).hom.app
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso p F₀).inv.app
       (DerivedCategory.Q.obj K))).1
-    simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
     rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors]
     simp only [Category.assoc]
   let l : U.mapDerivedCategory ⋙ B₀.mapDerivedCategory ⟶
@@ -319,7 +319,7 @@ def compactSupportCoefficientTransition (W : Scheme.{u}) {m n : ℕ} (h : n ≤ 
       (compactSupportOrdinaryCoefficientTransition l E W h) (.up ℤ)) DerivedCategory.Q) ≫
     (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation.{u, u} l E W n)
       (proEtaleCoefficientRestrictScalars W
-        (compactSupportLevelQuotient l E m n h))).hom
+        (compactSupportLevelQuotient l E m n h))).inv
 
 private theorem compactSupportCoefficientTransition_fac (W : Scheme.{u}) {m n : ℕ}
     (h : n ≤ m) (K : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ) :

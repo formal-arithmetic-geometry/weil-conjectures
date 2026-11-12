@@ -91,6 +91,7 @@ lemma map₂CochainComplex_obj_commShiftIso_inv_app
     ((F.map₂CochainComplex.obj K₁).commShiftIso y).inv.app K₂ =
       (mapBifunctorShift₂Iso K₁ K₂ F y).inv := rfl
 
+
 lemma map₂CochainComplex_flip_obj_commShiftIso_hom_app
     (K₁ : CochainComplex C₁ ℤ) (K₂ : CochainComplex C₂ ℤ) (x : ℤ) :
     ((F.map₂CochainComplex.flip.obj K₂).commShiftIso x).hom.app K₁ =
@@ -100,6 +101,7 @@ lemma map₂CochainComplex_flip_obj_commShiftIso_inv_app
     (K₁ : CochainComplex C₁ ℤ) (K₂ : CochainComplex C₂ ℤ) (x : ℤ) :
     ((F.map₂CochainComplex.flip.obj K₂).commShiftIso x).inv.app K₁ =
       (mapBifunctorShift₁Iso K₁ K₂ F x).inv := rfl
+
 
 end
 

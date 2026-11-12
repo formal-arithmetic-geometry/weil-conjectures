@@ -288,8 +288,7 @@ private def regularExtensionPresheafIso :
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [map_add, hz, hz']
   | tmul s x =>
     change (regularExtensionApp α V).hom
@@ -626,7 +625,7 @@ private theorem pullbackUnitProduct_zero {X Y : Scheme.{u}} (g : X ⟶ Y) :
   intro n
   simp only [pullbackUnitProduct, constantWeilPullbackRoosEndomorphism,
     towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-    Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_π, Pi.lift_π_assoc,
+    Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc,
     zero_comp]
   apply sub_eq_zero.mpr
   change pullbackUnitLevel l E g n = pullbackUnitLevel l E g (n + 1) ≫
@@ -656,11 +655,11 @@ private theorem chainUnitCandidate_generators {X Y : Scheme.{u}} (g : X ⟶ Y)
       (constantWeilReducedUnitSection l E Y n V) := by
   simp only [chainUnitCandidate, CochainComplex.mappingCocone.lift_f_fst_f_assoc]
   have h := congrArg (fun a ↦ a.f 0)
-    (Pi.lift_π (pullbackUnitLevel l E g) n)
+    (Pi.lift_comp_π (pullbackUnitLevel l E g) n)
   change ((pullbackUnitProduct l E g).f 0 ≫ _).val.app _ _ = _
   rw [← HomologicalComplex.comp_f]
   change (((Pi.lift (pullbackUnitLevel l E g) ≫ Pi.π _ n).f 0).val.app _) _ = _
-  rw [Pi.lift_π]
+  rw [Pi.lift_comp_π]
   exact pullbackUnitLevel_generator l E g n V
 
 private theorem cocone_hom_ext {A : Type*} [Category A] [Preadditive A]
@@ -721,7 +720,7 @@ private theorem normalized_chainUnit_unique {X Y : Scheme.{u}} (g : X ⟶ Y)
     rw [hη.1 n T]
     change _ = ((pullbackUnitProduct l E g ≫ Pi.π _ n).f 0).val.app _ _
     change _ = (((Pi.lift (pullbackUnitLevel l E g) ≫ Pi.π _ n).f 0).val.app _) _
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     exact (pullbackUnitLevel_generator l E g n T).symm
   apply cocone_hom_ext (constantWeilPullbackRoosEndomorphism l E g)
   · simpa only [chainUnitCandidate, CochainComplex.mappingCocone.lift_fst] using hfst
@@ -827,7 +826,7 @@ private theorem finiteSingleRegularIso_one (Y : Scheme.{u}) (n : ℕ) (U : Y.Pro
     simp only [finiteSingleRegularIso, Iso.trans_hom, Functor.mapIso_hom,
       HomologicalComplex.comp_f, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Category.assoc, Iso.inv_hom_id_assoc]
   rw [hf]
   change ((HomologicalComplex.singleObjXSelf (.up ℤ) 0
@@ -936,7 +935,7 @@ private theorem pullbackLevelRegularIso_one {X Y : Scheme.{u}}
     simp only [pullbackLevelRegularIso, Iso.trans_hom, Functor.mapIso_hom,
       Functor.mapHomologicalComplex_map_f, HomologicalComplex.comp_f, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Functor.map_comp, Category.assoc]
     dsimp only [R, F, a]
     simp only [← Category.assoc, ← CategoryTheory.Functor.map_comp]
@@ -1064,7 +1063,7 @@ private theorem quotientProjection_locallySurjective (X : Scheme.{u}) (n : ℕ) 
   intro V f hf
   obtain ⟨x, hx⟩ := hf
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective x.down
-  have hxa : x = ULift.up ((Ideal.Quotient.mk _) a) := ULift.ext _ _ ha.symm
+  have hxa : x = ULift.up ((Ideal.Quotient.mk _) a) := ULift.ext ha.symm
   subst x
   let A := CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))
   let b := (toSheafify J ((Functor.const X.ProEtᵒᵖ).obj A)).app (op V) (ULift.up a)
@@ -1286,6 +1285,8 @@ private theorem pullbackRoos_epi {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
       using quotientStep_epi l E X n
   have h := AlgebraicGeometry.ProEtale.milnor_epimorphic.{u, u, _} X
     (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X) M ht
+  have : HasCountableProducts (CochainComplex (integralTowerModules l E X) ℤ) :=
+    ⟨fun _ _ ↦ HomologicalComplex.instHasLimitsOfShape⟩
   exact singleTower_epi M h.1 _ (pullbackRegularTowerIso l E g)
 private theorem chainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     QuasiIso (chainUnitCandidate l E g) := by
@@ -1295,7 +1296,7 @@ private theorem chainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y) [Is
     (pullbackRegularCone l E g) (pullbackRegularConeIsLimit l E g)
     P (productIsProduct _) (pullbackUnitProduct l E g)
     (constantWeilPullbackRoosEndomorphism l E g)
-    (fun n ↦ Pi.lift_π (pullbackUnitLevel l E g) n)
+    (fun n ↦ Pi.lift_comp_π (pullbackUnitLevel l E g) n)
     (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).1 rfl n)
   let S := ShortComplex.mk (pullbackUnitProduct l E g)
     (constantWeilPullbackRoosEndomorphism l E g) hz

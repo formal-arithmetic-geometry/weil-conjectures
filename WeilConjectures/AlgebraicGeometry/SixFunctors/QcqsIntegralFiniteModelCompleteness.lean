@@ -236,7 +236,7 @@ private theorem models_on_qcqs
     (M : Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V)) :
     IsConstantModelConstructible Λ V M ↔ IsFiniteConstantStratified Λ V M := by
   unfold IsConstantModelConstructible
-  rw [if_pos (show CompactSpace V ∧ QuasiSeparatedSpace V from
+  rw [ite_eq_left (show CompactSpace V ∧ QuasiSeparatedSpace V from
     ⟨inferInstance, inferInstance⟩)]
 
 private theorem complete_sheaf

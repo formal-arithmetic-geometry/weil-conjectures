@@ -77,7 +77,7 @@ lemma leftDerivedUpperStarComp_hom_app_comp_isoMapDerivedCategory
           D((g₁)^*[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A g₂).hom.app K) =
       (leftDerivedUpperStarIsoMapDerivedCategory A g₁₂).hom.app K ≫
         (Functor.mapDerivedCategoryNatIso (upperStarComp A g₁ g₂ g₁₂ hg) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom.app K := by
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app K := by
   simp [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
     Functor.leftDerivedFunctorCompIso, leftDerivedUpperStarIsoMapDerivedCategory]
 

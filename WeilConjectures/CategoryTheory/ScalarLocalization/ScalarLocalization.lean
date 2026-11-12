@@ -79,25 +79,20 @@ theorem composition_laws :
         composition R C p K L N (composition R C p L M N h g) f) := by
   constructor
   · intro K L f
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | tmul a f => simp [composition_tmul]
     | add f g hf hg => simp [map_add, hf, hg]
   constructor
   · intro K L f
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | tmul a f => simp [composition_tmul]
     | add f g hf hg => simp [map_add, hf, hg]
   · intro K L M N f g h
-    induction h using TensorProduct.induction_on with
-    | zero => simp
+    induction h using TensorProduct.inductionOn with
     | tmul c h =>
-      induction g using TensorProduct.induction_on with
-      | zero => simp
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
-        induction f using TensorProduct.induction_on with
-        | zero => simp
+        induction f using TensorProduct.inductionOn with
         | tmul a f => simp [composition_tmul, Category.assoc, mul_assoc]
         | add f f' hf hf' => simp [map_add, hf, hf']
       | add g g' hg hg' => simp [map_add, hg, hg']
@@ -220,11 +215,9 @@ theorem map_laws :
   · intro K
     simp [mapHom]
   · intro K L M f g
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f => simp [mapHom, composition_tmul]
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
@@ -258,8 +251,7 @@ private theorem map_comp (U : C ⥤ C) [U.Additive] [U.Linear R] :
   change mapHom R C p U _ _ (mapHom R C p T _ _ f) =
     mapHom R C p (T ⋙ U) _ _ f
   dsimp only [mapHom]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     simp only [LinearMap.baseChange_tmul]
     rfl
@@ -272,8 +264,7 @@ private theorem map_identity : map R C p (𝟭 C) = 𝟭 (ScalarLocalization R C
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
   change mapHom R C p (𝟭 C) _ _ f = f
   dsimp only [mapHom]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     simp only [LinearMap.baseChange_tmul]
     rfl

@@ -172,7 +172,7 @@ lemma kernelComparison_linear
     have hn := e.hom.naturality (adj.monoidalProjection M X)
     dsimp at hn
     rw [Functor.map_comp, assoc, reassoc_of% hn, ← B.map_comp, map_monoidalProjection_counit,
-      reassoc_of% he, B.map_comp, Functor.Monoidal.map_μ_δ_assoc]
+      reassoc_of% he, B.map_comp, Functor.Monoidal.μ_δ_map_assoc]
   apply (adjA.homEquiv _ _).symm.injective
   simp only [homEquiv_counit, Functor.map_comp, assoc, counit_naturality, counit_naturality_assoc]
   rw [map_kernelComparison_counit, map_monoidalProjection_counit_assoc, ← δ_natural_left_assoc,
@@ -245,7 +245,7 @@ lemma kernelUnitTranspose_linear
   rw [kernelUnitTranspose, kernelUnitTranspose, h₁, hι, ← unit_whiskerRight_monoidalProjection]
   simp only [assoc]
   rw [← Δ'.map_comp_assoc, ← Δ'.map_comp_assoc]
-  simp only [assoc, Functor.Monoidal.map_μ_δ_assoc, Functor.Monoidal.μ_δ_assoc]
+  simp only [assoc, Functor.Monoidal.μ_δ_map_assoc, Functor.Monoidal.μ_δ_assoc]
   dsimp only [Functor.comp_obj]
   simp only [Δ'.map_comp, assoc]
   rw [hn, tensorHom_def, Δ'.map_comp, assoc,

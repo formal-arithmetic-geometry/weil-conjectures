@@ -160,7 +160,7 @@ theorem sectionRing_overlap_sheaf_map
         (hh r hr a n ⟨ξ, hξ⟩) Q hQV
       simp only [F, H, C, Q, Scheme.Hom.comp_appLE, Scheme.homOfLE_appLE,
         CommRingCat.hom_comp, RingHom.comp_apply]
-      convert hgu.trans hhv.symm using 1 <;> rfl
+      convert hgu.trans hhv.symm using 1
     have : IsAffine C.toScheme := (Proj.isAffineOpen_basicOpen
       (sectionRingGrade L) a.val a.property hr)
     have hres : F.resLE C P le_rfl = H.resLE C P hP := by

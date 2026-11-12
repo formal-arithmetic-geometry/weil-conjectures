@@ -53,7 +53,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback
   AlgebraicGeometry.Scheme.proEtaleRingModulePullback
 attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
-  CategoryTheory.Functor.mapHomologicalComplex
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
 
@@ -61,7 +60,7 @@ attribute [local irreducible] PresheafOfModules.sheafification
   PresheafOfModules.sheafificationAdjunction
 attribute [local implicit_reducible] WeilConjectures.finiteScalarPresheafMonoidal
   PresheafOfModules.monoidalCategory PresheafOfModules.monoidalCategoryStruct
-  AlgebraicGeometry.ProEtale.finiteCoefficientModulePresheaf Functor.asEquivalence
+  AlgebraicGeometry.ProEtale.finiteCoefficientModulePresheaf
 
 attribute [local instance 20000] ProEtale.sheafBraidedCategory
 

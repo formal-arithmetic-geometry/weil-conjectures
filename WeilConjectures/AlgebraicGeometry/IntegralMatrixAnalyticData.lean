@@ -193,4 +193,5 @@ theorem continuousFunctionPushforward_app_one {X Y : Scheme.{u}} (f : Y ⟶ X)
   rw [continuousFunctionPushforward_app]
   rfl
 
+
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -8,10 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonPasting
-import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalPullbackComposition
 import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
+import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
 
 /-! Pullback composition and completed reduction on the strict diagram category.
 Source: Stacks Project, Tags 0D6D and 0E48.

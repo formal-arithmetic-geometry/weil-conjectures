@@ -150,22 +150,19 @@ theorem exists_integral_tensor_generators_of_colimit
     (Algebra.TensorProduct.map (AlgHom.id S R) φ₀).toRingHom
   have bcompat {i j : J} (h : i ≤ j) (b : B i) :
       bι j (bmap h b) = bι i b := by
-    induction b using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction b using TensorProduct.inductionOn with
     | tmul t b =>
       change incl j (trans i j h t) ⊗ₜ[S] b = incl i t ⊗ₜ[S] b
       congr 1
       exact ConcreteCategory.congr_hom (colimit.w F (homOfLE h)) t
     | add x y hx hy => simp only [map_add, hx, hy]
   have φcompat (j : J) (b : B j) : cι j (φ j b) = φcolim (bι j b) := by
-    induction b using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction b using TensorProduct.inductionOn with
     | tmul t b => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have φtrans {i j : J} (h : i ≤ j) (b : B i) :
       cmap h (φ i b) = φ j (bmap h b) := by
-    induction b using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction b using TensorProduct.inductionOn with
     | tmul t b => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have rep (b : R ⊗[S] B₀) : ∃ j, ∃ t : B j, bι j t = b := by

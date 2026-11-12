@@ -65,15 +65,13 @@ private def avg (f : V →ₗ[R] W) (t : TensorProduct R S S)
   map_smul' s z := by
     have h₁ : avgRaw (S := S) f t (s • z) = avgRaw (S := S) f (((1 : S) ⊗ₜ[R] s) * t) z := by
       clear ht
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul x y => simp only [Algebra.TensorProduct.tmul_mul_tmul, one_mul,
           avgRaw_tmul, mul_smul, smul_comm y s]
       | add t w ht hw => simp only [mul_add, avgRaw_add, LinearMap.add_apply, ht, hw]
     have h₂ : avgRaw (S := S) f ((s ⊗ₜ[R] (1 : S)) * t) z = s • avgRaw (S := S) f t z := by
       clear ht h₁
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul x y => simp only [Algebra.TensorProduct.tmul_mul_tmul, one_mul,
           avgRaw_tmul, mul_smul]
       | add t w ht hw => simp only [mul_add, avgRaw_add, LinearMap.add_apply, smul_add, ht, hw]
@@ -87,8 +85,7 @@ private theorem avgRaw_naturality (f : V →ₗ[R] W) (f' : V' →ₗ[R] W')
     (a : V →ₗ[S] V') (b : W →ₗ[S] W') (h : ∀ z, b (f z) = f' (a z))
     (t : TensorProduct R S S) (z : V) :
     b (avgRaw (S := S) f t z) = avgRaw (S := S) f' t (a z) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul x y => simp only [avgRaw_tmul, map_smul, h]
   | add t u ht hu => simp only [avgRaw_add, LinearMap.add_apply, map_add, ht, hu]
 
@@ -96,8 +93,7 @@ omit [Module R V'] [IsScalarTower R S V'] in
 private theorem avgRaw_comp (f : V →ₗ[R] W) (b : W →ₗ[S] V') (a : V →ₗ[S] V')
     (h : ∀ z, b (f z) = a z) (t : TensorProduct R S S) (z : V) :
     b (avgRaw (S := S) f t z) = Algebra.TensorProduct.lmul' R t • a z := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul x y => simp only [avgRaw_tmul, map_smul, h,
       Algebra.TensorProduct.lmul'_apply_tmul, mul_smul]
   | add t u ht hu => simp only [avgRaw_add, LinearMap.add_apply, map_add, ht, hu, add_smul]
@@ -132,8 +128,10 @@ private def sheafAverage
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  change avgRaw (V := M.obj.obj V) (W := H.obj.obj V) (S := S) (η.hom.app V).hom t (M.obj.map w z) =
-    H.obj.map w (avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S) (η.hom.app U).hom t z)
+  change (avgRaw (V := M.obj.obj V) (W := H.obj.obj V) (S := S)
+    (η.hom.app V).hom t).toFun (M.obj.map w z) =
+    H.obj.map w ((avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S)
+      (η.hom.app U).hom t).toFun z)
   symm
   apply avgRaw_naturality (a := (M.obj.map w).hom) (b := (H.obj.map w).hom)
   intro z
@@ -178,9 +176,10 @@ private theorem sheafAverage_square
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  change avgRaw (V := M'.obj.obj U) (W := H'.obj.obj U) (S := S)
-    (η'.hom.app U).hom t (a.hom.app U z) =
-    b.hom.app U (avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S) (η.hom.app U).hom t z)
+  change (avgRaw (V := M'.obj.obj U) (W := H'.obj.obj U) (S := S)
+    (η'.hom.app U).hom t).toFun (a.hom.app U z) =
+    b.hom.app U ((avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S)
+      (η.hom.app U).hom t).toFun z)
   symm
   apply avgRaw_naturality
   intro z
@@ -218,7 +217,8 @@ private theorem sheafAverage_comp
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  change b.hom.app U (avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S) (η.hom.app U).hom t z) =
+  change b.hom.app U ((avgRaw (V := M.obj.obj U) (W := H.obj.obj U) (S := S)
+    (η.hom.app U).hom t).toFun z) =
     Algebra.TensorProduct.lmul' R t • a.hom.app U z
   apply avgRaw_comp
   intro z

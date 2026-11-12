@@ -142,7 +142,7 @@ Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
 def pullComp {T U X : Scheme.{u}} (i : T ⟶ U) (j : U ⟶ X) :
     pull A (i ≫ j) ≅ pull A j ⋙ pull A i :=
   Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp (ModuleCat.{u + 1} A) i j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Geometric equality induces equality of the exact pullback functors.
 Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/

@@ -90,6 +90,7 @@ lemma isInvariant_iff (U : V.left.Opens) :
 
 lemma isInvariant_top : D.IsInvariant ⊤ := fun _ _ _ _ _ _ ↦ by simp
 
+
 lemma IsInvariant.inf {U U' : V.left.Opens} (hU : D.IsInvariant U) (hU' : D.IsInvariant U') :
     D.IsInvariant (U ⊓ U') := fun _ f₁ f₂ h a ha ↦
   Set.subset_inter (hU f₁ f₂ h a (ha.trans Set.inter_subset_left))

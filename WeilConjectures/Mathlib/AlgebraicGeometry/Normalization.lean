@@ -674,6 +674,7 @@ lemma etale_integralClosure_of_etale_fromNormalization {U : S.Opens} (hU : IsAff
   rw [e] at this
   exact RingHom.etale_algebraMap.mp this
 
+
 end Hom
 
 end AlgebraicGeometry.Scheme

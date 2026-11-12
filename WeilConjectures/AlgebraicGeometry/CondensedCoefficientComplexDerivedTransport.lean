@@ -165,7 +165,7 @@ private lemma exact_comparison_complex
     ext n
     rfl
   erw [hc, CategoryTheory.Functor.map_id]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   erw [Category.id_comp]
 
 omit [IsCommMonObj S] in

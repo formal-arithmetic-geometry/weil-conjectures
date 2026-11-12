@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Right.RightDerivedSingleH0
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Normalization of a derived counit on single objects
 
@@ -67,7 +68,7 @@ private theorem single_rightDerived_counit_of_formula (a : L ⊣ R)
       erw [CategoryTheory.Functor.map_id, Category.id_comp]
     · exact (L.map_isZero
         (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn)).eq_of_src _ _
-  rw [Functor.singleRightDerivedUnit_app]
+  rw [Functor.singleRightDerivedUnit_app, cast_eq]
   change L.mapDerivedCategory.map (DerivedCategory.Q.map b ≫ _) ≫ _ = _
   rw [Functor.map_comp, Category.assoc]
   erw [hc K, L.mapDerivedCategoryFactors.hom.naturality_assoc]
@@ -86,7 +87,6 @@ private theorem single_rightDerived_counit_of_formula (a : L ⊣ R)
       Functor.isoWhiskerLeft_inv, Iso.refl_inv,
       Category.id_comp]
     erw [Category.id_comp, Category.comp_id]
-    rfl
   rw [hs, Category.assoc]
   rfl
 

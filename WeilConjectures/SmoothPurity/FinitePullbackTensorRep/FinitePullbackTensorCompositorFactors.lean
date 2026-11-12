@@ -39,10 +39,10 @@ private theorem derive_conjugate_comp
     (Functor.mapDerivedCategoryNatIso
       (rK ≪≫ c ≪≫ Functor.isoWhiskerRight rF.symm G' ≪≫
         Functor.isoWhiskerLeft F rG.symm)).hom ≫
-        (Functor.mapDerivedCategoryCompIso F G).hom =
+        (Functor.mapDerivedCategoryCompIso F G).inv =
       (Functor.mapDerivedCategoryNatIso rK).hom ≫
         (Functor.mapDerivedCategoryNatIso c).hom ≫
-        (Functor.mapDerivedCategoryCompIso F' G').hom ≫
+        (Functor.mapDerivedCategoryCompIso F' G').inv ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso rF).inv G'.mapDerivedCategory ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso rG).inv := by
   simp only [Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
@@ -60,13 +60,13 @@ private theorem exact_compositor_fac
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     [Limits.PreservesFiniteLimits K] [Limits.PreservesFiniteColimits K]
     (a : K ≅ F ⋙ G) (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+    (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         (DerivedCategory.Q.obj P) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
       K.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso a.symm (.up ℤ)).inv.app P) := by
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   exact Functor.mapDerivedCategoryNatIso_fac a P
 
@@ -165,10 +165,11 @@ theorem compositor_fac {X Y Z : Scheme.{u}}
     rF rH rK
     (sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom
     (mapDerivedCategoryNatIso (moduleComp l E f h n) ≪≫
-      mapDerivedCategoryCompIso OF OH).hom
+      (mapDerivedCategoryCompIso OF OH).symm).hom
     (by
       dsimp only [rF, rH, rK, OF, OH, OK, IF, IH, IK, moduleComp, realization] at hd ⊢
-      simpa only [Iso.trans_hom, Category.assoc, sfIntrinsicDerivedPullbackComp] using hd)
+      simpa only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+        sfIntrinsicDerivedPullbackComp] using hd)
     (DerivedCategory.Q.obj P)
     (DerivedCategory.Q.obj ((pull l E f n).obj P))
     (DerivedCategory.Q.obj ((pull l E (h ≫ f) n).obj P))

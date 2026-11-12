@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
 /-!
@@ -31,6 +31,10 @@ universe u
 open CategoryTheory
 
 variable {C : Type*} [Category* C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
+
+local instance instCommRingCarrierObj_exteriorPower
+    (X : Cᵒᵖ) : CommRing ((R ⋙ forget₂ CommRingCat RingCat).obj X) :=
+  inferInstanceAs (CommRing (R.obj X))
 
 namespace PresheafOfModules
 

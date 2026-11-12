@@ -77,7 +77,7 @@ lemma padicIntegersRingObjMulLeft_comp_residueField (ϖ : PadicAlgCl.integers �
     padicIntegersRingObjMulLeft.{u} ℓ E ϖ ≫ padicIntegersRingObjToResidueField ℓ E = 0 := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   ext S a
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
   change PadicAlgCl.integersResidue ℓ E (ϖ * a.down s) = 0
   rw [map_mul, show PadicAlgCl.integersResidue ℓ E ϖ = 0 from
     (IsLocalRing.residue_eq_zero_iff _).2 hϖ, zero_mul]
@@ -117,7 +117,7 @@ lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integ
         refine Topology.IsInducing.subtypeVal.continuous_iff.2 ?_
         simp only [Function.comp_def, hbv]
         exact continuous_const.mul (continuous_subtype_val.comp a.down.continuous)
-      exact ⟨ULift.up ⟨b, hbc⟩, ULift.ext _ _ (ContinuousMap.ext fun s ↦
+      exact ⟨ULift.up ⟨b, hbc⟩, ULift.ext (ContinuousMap.ext fun s ↦
         (hf S _ s).trans ((mul_comm _ _).trans (hb s)))⟩
     rw [ShortComplex.exact_iff_isZero_homology] at h
     exact h.of_iso ((T.map (sheafToPresheaf _ _)).mapHomologyIso ((evaluation _ _).obj S)).symm
@@ -125,7 +125,7 @@ lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integ
     rw [AddCommGrpCat.mono_iff_injective]
     intro a b hab
     have h := congrArg ULift.down hab
-    exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hne
+    exact ULift.ext (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hne
       (((hf S a s).symm.trans (congrArg (fun z : C(S.unop, PadicAlgCl.integers ℓ E) ↦ z s)
         h)).trans (hf S b s)))
   have hepi (S : Profinite.{u}ᵒᵖ) : Epi (((sheafToPresheaf _ _).map T.g).app S) := by
@@ -133,7 +133,7 @@ lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integ
     intro c
     refine ⟨ULift.up ⟨Function.surjInv (PadicAlgCl.integersResidue_surjective ℓ E) ∘ c.down,
       continuous_of_discreteTopology.comp c.down.continuous⟩,
-      ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
+      ULift.ext (ContinuousMap.ext fun s ↦ ?_)⟩
     exact (hg S _ s).trans (Function.surjInv_eq _ _)
   have : Mono T.f := (sheafToPresheaf _ _).mono_of_mono_map (NatTrans.mono_of_mono_app _)
   have : Epi T.g := (sheafToPresheaf _ _).epi_of_epi_map (NatTrans.epi_of_epi_app _)

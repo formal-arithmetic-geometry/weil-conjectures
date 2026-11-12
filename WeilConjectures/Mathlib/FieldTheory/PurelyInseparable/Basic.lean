@@ -66,8 +66,7 @@ theorem eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct_of_finiteType
     simpa using this
   have hnat (C : Type _) [CommRing C] [Algebra k C] (π : B →ₐ[k] C) (i) (x : A ⊗[k] B) :
       π (Φ B i x) = Φ C i (Algebra.TensorProduct.map (AlgHom.id k A) π x) := by
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp [hx, hy]
     | tmul a c =>
       simp [Φ, Algebra.TensorProduct.basis_repr_tmul]
@@ -166,6 +165,7 @@ theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed 
   obtain ⟨n, a, ha⟩ := IsPurelyInseparable.pow_mem k p α
   exact ⟨n, ha ▸ isSeparable_algebraMap a⟩
 
+
 end KBar
 
 section PowMem
@@ -185,6 +185,7 @@ The other notions of the blueprint definition are those of Mathlib: `Module.Fini
 theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
     IsPurelyInseparable F E ↔ ∀ α : E, ∃ n : ℕ, ∃ a : F, algebraMap F E a = α ^ q ^ n :=
   isPurelyInseparable_iff_pow_mem F q
+
 
 end PowMem
 

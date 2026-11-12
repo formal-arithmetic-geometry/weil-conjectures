@@ -497,6 +497,7 @@ lemma fst_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAl
   change (inr m * y.1 : DualNumber (F.obj (.op U))).fst = _
   simp
 
+
 lemma exists_mul_pow_eq_of_mem_subMod (J : (dualGlueData H).glued.IdealSheafData)
     (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite) (r : Γ(S, U.1))
     {m' : F.obj (.op (U.basicOpen r))} (hm' : m' ∈ subMod J (U.basicOpen r)) :
@@ -616,6 +617,7 @@ lemma subAlgFunctor_map (J : (dualGlueData H).glued.IdealSheafData)
     {U V : S.AffineZariskiSiteᵒᵖ} (i : U ⟶ V) : (subAlgFunctor J).map i = subAlgRes J i :=
   rfl
 
+
 variable {H} in
 /-- The components of the structure morphism `𝒪_S ⟶ subAlgFunctor J`. -/
 noncomputable def subAlgMapApp (J : (dualGlueData H).glued.IdealSheafData)
@@ -643,6 +645,7 @@ noncomputable def subAlgMap (J : (dualGlueData H).glued.IdealSheafData) :
 lemma subAlgMap_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZariskiSiteᵒᵖ) :
     (subAlgMap J).app U = subAlgMapApp J U :=
   rfl
+
 
 variable {H} in
 /-- The components of the inclusion of the subalgebras attached to `J ≤ J'`. -/
@@ -673,6 +676,7 @@ lemma subAlgInclusion_app {J J' : (dualGlueData H).glued.IdealSheafData} (h : J 
     (U : S.AffineZariskiSiteᵒᵖ) : (subAlgInclusion h).app U = subAlgInclusionApp h U :=
   rfl
 
+
 variable {H} in
 /-- The components of the inclusion of the subalgebra attached to `J` into `F`. -/
 noncomputable def subAlgιApp (J : (dualGlueData H).glued.IdealSheafData)
@@ -696,6 +700,7 @@ noncomputable def subAlgι (J : (dualGlueData H).glued.IdealSheafData) : subAlgF
 lemma subAlgι_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZariskiSiteᵒᵖ) :
     (subAlgι J).app U = subAlgιApp J U :=
   rfl
+
 
 lemma subAlgMap_comp_subAlgInclusion {J J' : (dualGlueData H).glued.IdealSheafData}
     (h : J ≤ J') : subAlgMap J ≫ subAlgInclusion h = subAlgMap J' := by
@@ -938,6 +943,7 @@ lemma approx_ι_π (j : ApproxIndex H) (U : S.AffineZariskiSite) :
       Spec.map ((subAlgι j.unop.1).app (.op U)) ≫
         colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U :=
   ι_relativeGluingMap _ _ _ U
+
 
 lemma approx_ι_π' (j₀ : ApproxIndex H) (j : Over j₀) (U : S.AffineZariskiSite) :
     colimit.ι (relativeGluingData H).functor U ≫ (approxπ H).app j.left =

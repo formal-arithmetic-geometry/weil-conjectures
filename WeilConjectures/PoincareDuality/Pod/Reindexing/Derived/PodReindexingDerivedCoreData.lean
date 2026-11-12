@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.PoincareDuality.PodReindexingStrictData.PodReindexingStrictComparisons
-public import Mathlib.Logic.Basic
+public import Mathlib.Basic.Logic.Lemmas
 
 /-! Raw comparison data for the derived reindexing core.
 

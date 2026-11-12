@@ -86,6 +86,7 @@ private theorem linearLift_underlying
     (α : (moduleSets R).obj M ⟶ (moduleSets R).obj N) (ha hs) :
     (moduleSets R).map (linearLift α ha hs) = α := rfl
 
+
 private noncomputable def sectionPair
     {C : Type uC} [Category.{vC} C]
     {J : GrothendieckTopology C}

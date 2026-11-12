@@ -142,10 +142,7 @@ private theorem rational_naturality {M N : sfRationalConstructibleCategory l E X
   have hN := chosen_spec (pullbackTensorRationalRightUnitor_existsUnique l E X N)
     (pullbackTensorRationalRightUnitor l E X N) rfl
   change T.map (Prod.mkHom f (𝟙 U)) ≫ _ = _
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    rw [hb]
-    simp
+  induction f using TensorProduct.inductionOn with
   | tmul c f =>
     have hm : HEq (T.map (Prod.mkHom
         (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] f) (𝟙 U)))
@@ -202,6 +199,8 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
 attribute [local irreducible] commonStageDerivedTensor rationalDerivedTensor
   pullbackTensorCommonUnitStage pullbackTensorRationalRightUnitor
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality of the canonical right unitor for the reconstructed common-stage unit.
 
 Source: Stacks Project, Tags 07A4 and 0941; coefficient operations blueprint.

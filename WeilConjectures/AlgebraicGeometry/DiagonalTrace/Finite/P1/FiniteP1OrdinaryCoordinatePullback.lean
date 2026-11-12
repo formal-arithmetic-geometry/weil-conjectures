@@ -237,7 +237,7 @@ theorem finiteP1_ordinary_coordinate_pullback (n : ℕ)
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) (ProjectiveLine S) ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S))⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S))⟦(2 : ℤ)⟧) :
     HEq
       ((finiteKummerUnitCoordinate l E n e c).hom ≫
         (finiteOverRealization l E n e).map
@@ -245,19 +245,19 @@ theorem finiteP1_ordinary_coordinate_pullback (n : ℕ)
         (finiteKummerLineCoordinate l E n e hS c).inv)
       (finiteOrdinaryCoordinateArrow l E n X c
         (Etale.ordinaryFiniteLinePullbackMap (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n))
+          (ULift.ext (coefficient_annihilates l E n))
           (Etale.projectiveLineTraceTransport (l ^ (n + 1))
             (pow_pos (Fact.out : l.Prime).pos _) (FiniteRing l E n)
-            (ULift.ext _ _ (coefficient_annihilates l E n))) e.hom
+            (ULift.ext (coefficient_annihilates l E n))) e.hom
           (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
             (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) a)) := by
   exact (heq_of_eq (finiteP1_realized_coordinate_pullback l E n e hS c a)).trans
     (finiteP1LocalCoordinateImage_ordinary l E n X c
       (Etale.ordinaryFiniteLinePullbackMap (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n))
+        (ULift.ext (coefficient_annihilates l E n))
         (Etale.projectiveLineTraceTransport (l ^ (n + 1))
           (pow_pos (Fact.out : l.Prime).pos _) (FiniteRing l E n)
-          (ULift.ext _ _ (coefficient_annihilates l E n))) e.hom
+          (ULift.ext (coefficient_annihilates l E n))) e.hom
         (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
           (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) a))
 

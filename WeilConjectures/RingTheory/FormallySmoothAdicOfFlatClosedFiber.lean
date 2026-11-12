@@ -316,7 +316,7 @@ theorem formallySmoothAdic_of_flat_closedFiber
   obtain ⟨ψ, _, hcomm, hψflat⟩ := flat_adicCompletion_of_flat_local A B f hflat
     (fun x hx ↦ map_maximalIdeal_le f (Ideal.mem_map_of_mem f hx))
   have : IsLocalHom ψ := by
-    apply ((local_hom_TFAE ψ).out 0 2).mpr
+    apply ((local_hom_TFAE ψ).out 1 3).mpr
     rw [AdicCompletion.maximalIdeal_eq_map (R := A), Ideal.map_map, hcomm,
       ← Ideal.map_map, AdicCompletion.maximalIdeal_eq_map (R := B)]
     exact Ideal.map_mono (map_maximalIdeal_le f)

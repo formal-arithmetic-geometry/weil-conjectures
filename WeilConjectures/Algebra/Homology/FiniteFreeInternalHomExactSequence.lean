@@ -128,7 +128,8 @@ private theorem unitLift_unique
   apply LinearMap.ext_ring
   change φ.app W (1 : R.obj.obj (op W.unop.left)) =
     (1 : R.obj.obj (op W.unop.left)) •
-      N.val.map W.unop.hom.op (φ.app (op (Over.mk (𝟙 U))) (1 : R.obj.obj (op U)))
+      PresheafOfModulesOfCommRing.map (R := R.obj) N.val W.unop.hom.op
+        (φ.app (op (Over.mk (𝟙 U))) (1 : R.obj.obj (op U)))
   rw [one_smul]
   have h := PresheafOfModules.naturality_apply φ
     (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op

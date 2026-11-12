@@ -234,7 +234,7 @@ theorem pow_smul_frobeniusCoefficientIterate_eq
     simp only [Nat.mul_zero, pow_zero, one_smul, frobeniusCoefficientIterate_zero]
     change _ = _ ≫ (extendScalarsUpperStarIterateZeroIso ℓ E Φ).inv.app K₀ ≫ _
     simp only [extendScalarsUpperStarIterateZeroIso_inv_app]
-    have h₁ := Iso.map_inv_hom_id_assoc ((upperStarIterateZeroIso ℓ 𝒪 Φ).app K₀)
+    have h₁ := Iso.inv_hom_id_map_assoc ((upperStarIterateZeroIso ℓ 𝒪 Φ).app K₀)
       (boundedConstructibleExtendScalars X.left ℓ E) e.hom
     simp only [Iso.app_inv, Iso.app_hom] at h₁
     simp only [assoc, h₁]
@@ -252,13 +252,13 @@ theorem pow_smul_frobeniusCoefficientIterate_eq
     change _ = _ ≫ (extendScalarsUpperStarIterateSuccIso ℓ E Φ σ m
       (extendScalarsUpperStarIterateIso ℓ E Φ σ m)).inv.app K₀ ≫ _
     simp only [extendScalarsUpperStarIterateSuccIso_inv_app, frobeniusCoefficientIterate_succ_eq]
-    have h₁ := fun {Z} (g : _ ⟶ Z) ↦ Iso.map_inv_hom_id_assoc
+    have h₁ := fun {Z} (g : _ ⟶ Z) ↦ Iso.inv_hom_id_map_assoc
       ((upperStarIterateSuccIso ℓ 𝒪 Φ m).app K₀) (boundedConstructibleExtendScalars X.left ℓ E) g
     simp only [Iso.app_inv, Iso.app_hom] at h₁
     have h₂ := σ.inv.naturality (frobeniusCoefficientIterate θ m)
     have h₃ := (upperStarIterateSuccIso ℓ 𝔼 Φ m).hom.naturality e.inv
     simp only [Functor.comp_map] at h₂ h₃
-    simp only [Functor.map_comp, assoc, Iso.map_hom_inv_id_assoc, h₁, ← reassoc_of% h₂,
+    simp only [Functor.map_comp, assoc, Iso.hom_inv_id_map_assoc, h₁, ← reassoc_of% h₂,
       reassoc_of% h₃]
 
 /-- **The stalks of the iterates of a rational model** (blueprint `sk-lem-tf-rational-model`,
@@ -331,7 +331,7 @@ theorem exists_integralModel_frobeniusCorrespondence
   refine ⟨K₀, e, hθ.choose, hθ.choose_spec.choose, ?_⟩
   symm
   simp only [← hθ.choose_spec.choose_spec, Linear.smul_comp, Linear.comp_smul,
-    Iso.inv_hom_id_app_assoc, assoc, Iso.inv_hom_id, comp_id, Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_app_assoc, assoc, Iso.inv_hom_id, comp_id, Iso.inv_hom_id_map_assoc]
 
 end IntegralModel
 

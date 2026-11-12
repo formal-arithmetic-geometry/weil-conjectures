@@ -166,9 +166,13 @@ private def sectionScalar (a : (O.obj ⋙ forget CommRingCat).sections)
     (M : ConstantCompletion.Mod O) : End M :=
   ⟨PresheafOfModules.sectionsSMul M.val ⟨a.val, a.property⟩⟩
 
+attribute [local implicit_reducible] SheafOfModules.unit PresheafOfModules.unit
+  CategoryTheory.sheafCompose
+
 private theorem unit_action_apply (M : ConstantCompletion.Mod O)
     (s : End (SheafOfModules.unit (siteModuleRings O))) (U : Cᵒᵖ) (x : M.val.obj U) :
-    (unitEndAction M s).val.app U x = (s.val.app U (1 : O.obj.obj U)) • x := by
+    (unitEndAction M s).val.app U x =
+      (show O.obj.obj U from s.val.app U (1 : O.obj.obj U)) • x := by
   have h : M ◁ s ≫ (ρ_ M).hom = (ρ_ M).hom ≫
       sectionScalar O (SheafOfModules.unitHomEquiv _ s) M := by
     apply pure_hom_ext O M (SheafOfModules.unit (siteModuleRings O)) M
@@ -202,7 +206,8 @@ private theorem unit_action_apply (M : ConstantCompletion.Mod O)
   have hh := congrArg (fun f ↦ f.val.app U x)
     (congrArg (fun f ↦ (ρ_ M).inv ≫ f) h)
   simp only [Iso.inv_hom_id_assoc] at hh
-  change (unitEndAction M s).val.app U x = (s.val.app U (1 : O.obj.obj U)) • x at hh
+  change (unitEndAction M s).val.app U x =
+    (show O.obj.obj U from s.val.app U (1 : O.obj.obj U)) • x at hh
   exact hh
 
 private theorem koszul_scalar_power_apply

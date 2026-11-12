@@ -70,7 +70,7 @@ theorem Hom.zetaSeries_congr {Y Y' : Scheme.{u}} (g : Y ⟶ Spec (.of k))
 sums of the point counts. -/
 private lemma X_mul_derivative_zetaSeries_mul {Y Y' : Scheme.{u}} (g : Y ⟶ Spec (.of k))
     (g' : Y' ⟶ Spec (.of k)) :
-    PowerSeries.X * PowerSeries.derivative ℚ (g.zetaSeries * g'.zetaSeries) =
+    PowerSeries.X * PowerSeries.derivative (R := ℚ) (g.zetaSeries * g'.zetaSeries) =
       PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else
         ((g.pointCount n + g'.pointCount n : ℕ) : ℚ)) * (g.zetaSeries * g'.zetaSeries) := by
   have hs : PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else
@@ -98,7 +98,7 @@ theorem Hom.zetaSeries_mul_zetaSeries_eq {Y₁ Y₂ Y₃ Y₄ : Scheme.{u}} (g�
     ext n
     by_cases hn : n = 0
     · simp [hn]
-    · simp only [hn, if_false, h n hn]
+    · simp only [hn, ite_false, h n hn]
   rw [hfun] at h₁₂
   have hconst : PowerSeries.constantCoeff (g₁.zetaSeries * g₂.zetaSeries) =
       PowerSeries.constantCoeff (g₃.zetaSeries * g₄.zetaSeries) := by

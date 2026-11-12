@@ -87,7 +87,7 @@ variable (σ : Type*) (R : Type*) [CommRing R]
 grading, via `r ↦ C r`. -/
 noncomputable def homogeneousSubmoduleZeroEquiv : R ≃+* homogeneousSubmodule σ R 0 where
   toFun r := ⟨C r, isHomogeneous_C σ r⟩
-  invFun p := coeff 0 (p : MvPolynomial σ R)
+  invFun p := AddMonoidAlgebra.coeff (p : MvPolynomial σ R) 0
   left_inv r := by simp
   right_inv p := Subtype.ext
     (totalDegree_eq_zero_iff_eq_C.mp ((totalDegree_zero_iff_isHomogeneous _).mpr p.2)).symm
@@ -376,6 +376,7 @@ lemma homogeneousLocalizationAwayXEquiv_algebraMap (r : R) :
       (algebraMap R (HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i)) r) = C r := by
   rw [AlgEquiv.commutes, algebraMap_eq]
 
+
 end Chart
 
 
@@ -438,7 +439,7 @@ the same degree over `K`. -/
 theorem IsHomogeneous.sum_monomial_linearMap {σ K L : Type*} [CommRing K]
     [CommRing L] [Algebra K L] (f : L →ₗ[K] K) {G : MvPolynomial σ L} {d : ℕ}
     (hG : G.IsHomogeneous d) :
-    (∑ s ∈ G.support, monomial s (f (coeff s G))).IsHomogeneous d :=
+    (∑ s ∈ G.support, monomial s (f (AddMonoidAlgebra.coeff G s))).IsHomogeneous d :=
   IsHomogeneous.sum _ _ _ fun _ hs =>
     isHomogeneous_monomial _ (hG.degree_eq_sum_deg_support hs).symm
 
@@ -446,11 +447,12 @@ theorem IsHomogeneous.sum_monomial_linearMap {σ K L : Type*} [CommRing K]
 coefficients of `G` at a point `y` with coordinates in `K` is `f` of the value of `G` at `y`. -/
 theorem eval_sum_monomial_linearMap {σ K L : Type*} [CommRing K] [CommRing L]
     [Algebra K L] (f : L →ₗ[K] K) (G : MvPolynomial σ L) (y : σ → K) :
-    eval y (∑ s ∈ G.support, monomial s (f (coeff s G))) = f (eval (algebraMap K L ∘ y) G) := by
+    eval y (∑ s ∈ G.support, monomial s (f (AddMonoidAlgebra.coeff G s))) =
+      f (eval (algebraMap K L ∘ y) G) := by
   rw [map_sum, eval_eq (algebraMap K L ∘ y) G, map_sum]
   refine Finset.sum_congr rfl fun s _ => ?_
   rw [eval_monomial, Finsupp.prod]
-  simp only [Function.comp_apply, ← map_pow, ← map_prod, mul_comm (coeff s G),
+  simp only [Function.comp_apply, ← map_pow, ← map_prod, mul_comm (AddMonoidAlgebra.coeff G s),
     ← Algebra.smul_def, map_smul, smul_eq_mul]
   exact mul_comm _ _
 
@@ -475,7 +477,7 @@ variable {R}
 
 lemma monomialToNat_mul {a b : n → ℤ} (ha : 0 ≤ a) (hb : 0 ≤ b) :
     monomialToNat R a * monomialToNat R b = monomialToNat R (a + b) := by
-  rw [monomialToNat, monomialToNat, monomialToNat, monomial_mul, one_mul]
+  rw [monomialToNat, monomialToNat, monomialToNat, monomial_mul_monomial, one_mul]
   congr 2
   ext i
   simp [Int.toNat_add (ha i) (hb i)]
@@ -695,10 +697,10 @@ theorem linearIndependent_awayMonomial : LinearIndependent R (awayMonomial R s) 
         (e₀.1 + (N + k) • s.indicator (1 : n → ℤ)) i := by
       omega
     simpa using h3)
-  have := congrArg (coeff (u e₀)) hk'
-  rw [coeff_sum, coeff_zero, Finset.sum_eq_single e₀ (fun e he hne ↦ by
-    rw [coeff_monomial, if_neg fun h ↦ hne (hu e he h)]) (fun h ↦ (h he₀).elim),
-    coeff_monomial, if_pos rfl] at this
+  have := congrArg (fun p : MvPolynomial n R ↦ AddMonoidAlgebra.coeff p (u e₀)) hk'
+  rw [coeff_sum, AddMonoidAlgebra.coeff_zero, Finset.sum_eq_single e₀ (fun e he hne ↦ by
+    rw [coeff_monomial, ite_eq_right fun h ↦ hne (hu e he h)]) (fun h ↦ (h he₀).elim),
+    coeff_monomial, ite_eq_left rfl] at this
   exact this
 
 /-- **The Laurent monomials `xᵉ` span** the degree-zero part of the localization of
@@ -739,7 +741,7 @@ theorem span_awayMonomial : Submodule.span R (Set.range (awayMonomial R s)) = �
     congr 1
     exact hmono.symm
   have hz : Away.mk _ (monomialToNat_indicator_mem R s) N a ha =
-      ∑ u ∈ a.support.attach, coeff u.1 a • awayMonomial R s (e u) := by
+      ∑ u ∈ a.support.attach, AddMonoidAlgebra.coeff a u.1 • awayMonomial R s (e u) := by
     apply HomogeneousLocalization.val_injective
     rw [val_sum, Away.val_mk]
     conv_lhs => rw [a.as_sum]

@@ -42,7 +42,7 @@ theorem Scheme.ord_algebraMap_stalk {X : Scheme} [IsIntegral X] [IsLocallyNoethe
   have hfin : Ring.ord (X.presheaf.stalk x) s ≠ ⊤ := Ring.ord_ne_top hmem
   obtain ⟨n, hn⟩ := ENat.ne_top_iff_exists.mp hfin
   simp only [Ring.ordMonoidWithZeroHom, hmem, MonoidWithZeroHom.coe_mk, ZeroHom.coe_mk,
-    if_true, ← hn, ENat.recTopCoe_natCast, ENat.toNat_natCast]
+    ite_true, ← hn, ENat.recTopCoe_natCast, ENat.toNat_natCast]
 
 
 section OpenImmersion

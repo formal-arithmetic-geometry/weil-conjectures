@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
@@ -437,10 +436,10 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h 
     ((g)_*[ModuleCat.{u + 1} Λ]) F
   have ha : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
       (D+((p)^*[ModuleCat.{u + 1} Λ]).map
-      (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app K))) := by
+      (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app K))) := by
     have hN :=
       (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso 0).hom.naturality
-      (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app K)
+      (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app K)
     simp only [Functor.comp_map] at hN
     rw [← IsIso.inv_comp_eq] at hN
     rw [← hN]
@@ -461,10 +460,10 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h 
   have hu₂ := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
     ((h)_*[ModuleCat.{u + 1} Λ]) (((e)^*[ModuleCat.{u + 1} Λ]).obj F)
   have hc : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
         (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K))) := by
     have hN := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
-      (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality ψ.hom)
+      (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.naturality ψ.hom)
     simp only [Functor.comp_map, Functor.map_comp] at hN
     exact IsIso.of_isIso_fac_left hN
   have hfac := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map

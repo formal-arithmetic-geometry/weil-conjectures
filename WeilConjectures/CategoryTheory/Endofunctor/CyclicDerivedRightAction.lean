@@ -195,11 +195,11 @@ private theorem structure_fach (K : HomotopyCategory (IsoAlgebra F) (.up ℤ)) :
           (((forget F).mapHomotopyCategory (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (strNatIso F).hom (.up ℤ)).app K) := by
-  change ((Functor.mapDerivedCategoryCompIso (forget F) F).inv.app _ ≫
+  change ((Functor.mapDerivedCategoryCompIso (forget F) F).hom.app _ ≫
       (Functor.mapDerivedCategoryNatIso (strNatIso F)).hom.app _) ≫ _ = _
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fach]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factorsh (forget F) F K]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
 
 omit [F.IsEquivalence] [HasDerivedCategory C] [HasDerivedCategory (IsoAlgebra F)]
   [G.IsEquivalence] [HasDerivedCategory (IsoAlgebra G)]

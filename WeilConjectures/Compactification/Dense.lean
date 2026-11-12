@@ -59,6 +59,7 @@ theorem Compactification.IsDense.isSchemeTheoreticallyDominant {c : Compactifica
     (hc : c.IsDense) : IsSchemeTheoreticallyDominant c.i :=
   hc
 
+
 /-- The dense refinement of a compactification of a quasi-compact morphism is dense
 (blueprint: `prop:nagata-dense-refinement`). -/
 theorem Compactification.isDense_denseRefinement (c : Compactification f) [QuasiCompact f] :

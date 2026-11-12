@@ -220,7 +220,7 @@ private theorem origins_of_levelBounds (W : Scheme.{u}) (M : System l E W)
     ⟨⟨Kplus n, Iso.refl _⟩⟩
   let ev (n : ℕ) : (R n).mapDerivedCategory.obj (levels n).obj ≅
       (coefficientSequenceDerivedEvaluation l E W n).obj M :=
-    (Functor.mapDerivedCategoryCompIso (C n) (R n)).symm.app (K n).obj ≪≫ (hK n).some
+    (Functor.mapDerivedCategoryCompIso (C n) (R n)).app (K n).obj ≪≫ (hK n).some
   let res (n : ℕ) := Sheaf.derivedRestrictScalars (ProEt.topology W)
     (RingHom.ulift.{u + 1, u + 1, u, u}
       (Padic.coefficientExtensionTransition l E (n + 1)))

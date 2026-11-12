@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEvaluation
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
@@ -376,7 +378,7 @@ private local instance nativeExtensionAdditive {X Z : Scheme.{u}} (j : X ⟶ Z)
 
 -- Keep conversion from expanding the localization choices during specialization.
 attribute [local irreducible] HasDerivedCategory.standard
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 

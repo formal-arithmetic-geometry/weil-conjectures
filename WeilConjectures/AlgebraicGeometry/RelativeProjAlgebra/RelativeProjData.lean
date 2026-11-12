@@ -156,7 +156,7 @@ private theorem locally_finite_sections (U : X.Opens) (s : Γ(A.algebra.obj.toMo
         F i ⟶ (presheafToSheaf J AddCommGrpCat.{u}).obj P) ≫ ψ := by
       ext1
       change _ = Sigma.ι (fun i ↦ (F i).obj) i ≫ toSheafify J P ≫ ψ.hom
-      rw [← hφ, Sigma.ι_desc]
+      rw [← hφ, Sigma.ι_comp_desc]
     rw [e, Category.assoc, Category.assoc, hgh]
   have := (Sheaf.isLocallySurjective_iff_epi' (A := AddCommGrpCat.{u}) ψ).2 hψ
   have hsurj : Presheaf.IsLocallySurjective J φ := by
@@ -171,7 +171,7 @@ private theorem locally_finite_sections (U : X.Opens) (s : Γ(A.algebra.obj.toMo
   rw [map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   change (Sigma.ι (fun i ↦ (F i).obj) i ≫ φ).app (op W) (a i) = _
-  rw [Sigma.ι_desc]
+  rw [Sigma.ι_comp_desc]
   rfl
 
 private theorem finite_sections_of_local_presentations
@@ -253,7 +253,7 @@ theorem sectionGrade_internal (V : X.affineOpens) :
           rw [← hb]
           change (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1
             ((Sigma.ι A.piece i ≫ A.decomposition.hom).app V.1 b) = 0
-          simpa only [if_neg h] using projection_inclusion_apply A V.1 i n b
+          simpa only [ite_eq_right h] using projection_inclusion_apply A V.1 i n b
     | add t s ht hs =>
         simp only [map_add, ht, hs, DirectSum.add_apply]
         rfl
@@ -323,8 +323,7 @@ theorem irrelevant_le {V W : X.affineOpens} (h : W ≤ V) :
   let I := (HomogeneousIdeal.irrelevant (A.sectionGrade V)).map (A.restriction h)
   have hm (t : Γ(F, V.1) ⊗[Γ(X, V.1)] Γ(X, W.1)) :
       (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) W.1 (c t) ∈ I := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a r =>
         rw [ht, Scheme.Modules.Hom.app_smul]
         have he : (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) W.1

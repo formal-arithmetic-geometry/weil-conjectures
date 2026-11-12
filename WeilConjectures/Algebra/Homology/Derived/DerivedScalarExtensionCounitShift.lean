@@ -323,7 +323,10 @@ theorem derivedScalarExtension_counitShift
                 (DerivedCategory A) (DerivedCategory A')).obj DerivedCategory.Qh ⋙
               ((Functor.whiskeringRight (HomotopyCategory A (.up ℤ))
                 (DerivedCategory A') (DerivedCategory A')).obj H) :=
-          { app G := (Functor.associator DerivedCategory.Qh G H).inv }
+          { app G := (Functor.associator DerivedCategory.Qh G H).inv
+            naturality G G' α := by
+              ext X
+              exact (Category.comp_id _).trans (Category.id_comp _).symm }
         let : IsIso t := by apply NatIso.isIso_of_isIso_app
         exact CostructuredArrow.isEquivalenceMap₂ t (𝟙 _)
       constructor

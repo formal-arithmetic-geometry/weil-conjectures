@@ -72,7 +72,7 @@ private theorem derivedOpenUnit {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersio
   obtain ⟨e, ⟨he⟩⟩ := proEtaleOpen_slicePresentation j RV RU c
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
-  let he' := Functor.mapDerivedCategoryNatIso he ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let he' := Functor.mapDerivedCategoryNatIso he ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let L := (SheafOfModules.localizedModuleExtension.{u} RV (ProEt.mk j)).mapDerivedCategory
   let adjL := SheafOfModules.localizedModuleDerivedAdjunction.{u} RV (ProEt.mk j)
   have : IsIso adjL.unit := SheafOfModules.localizedDerivedUnit_isIso j RV

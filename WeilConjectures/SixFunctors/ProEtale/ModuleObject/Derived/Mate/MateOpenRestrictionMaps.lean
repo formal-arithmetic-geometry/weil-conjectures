@@ -77,7 +77,7 @@ def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
       (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i))
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (j ≫ i)).ofNatIsoRight
       (Functor.mapDerivedCategoryNatIso (upperStarComp Λ j i) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)))
+        (Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)).symm))
 
 /-- The canonical identification of compact-support image for the trivial open
 compactification (j,id) with levelwise extension by zero. The identity direct-image

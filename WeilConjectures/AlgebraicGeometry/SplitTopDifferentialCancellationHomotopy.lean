@@ -97,8 +97,8 @@ theorem split_top_differential_cancellation_homotopy
         have h₂ : i ≠ ((m + 1 : ℕ) : ℤ) := by omega
         simp only [HomologicalComplex.comp_f, p, HomologicalComplex.sub_f_apply,
           HomologicalComplex.id_f, hN]
-        have hh₁ : h (i + 1) i = 0 := by simp only [h, dif_neg h₁]
-        have hh₂ : h i (i - 1) = 0 := by simp only [h, dif_neg h₂]
+        have hh₁ : h (i + 1) i = 0 := by simp only [h, dite_eq_right h₁]
+        have hh₂ : h i (i - 1) = 0 := by simp only [h, dite_eq_right h₂]
         simp only [hh₁, hh₂, comp_zero, zero_comp, add_zero, sub_zero,
           Category.comp_id]
     · exact ((B.truncLE m).isZero_of_isStrictlyLE m i (by omega)).eq_of_src _ _

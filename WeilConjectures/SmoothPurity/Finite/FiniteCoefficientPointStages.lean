@@ -700,8 +700,7 @@ private theorem pointExtendScalars_semilinear
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul b x =>
       change b ⊗ₜ[R, φ] (a • f.hom x) = _
       rw [TensorProduct.tmul_smul]
@@ -777,11 +776,9 @@ private theorem pointScalarExtension_existsUnique
         change k K.obj N.obj
           (ScalarLocalization.composition R C t K.obj M.obj N.obj g f) =
             k K.obj M.obj f ≫ k M.obj N.obj g
-        induction g using TensorProduct.induction_on with
-        | zero => simp
+        induction g using TensorProduct.inductionOn with
         | tmul b g =>
-            induction f using TensorProduct.induction_on with
-            | zero => simp
+            induction f using TensorProduct.inductionOn with
             | tmul a f =>
                 rw [ScalarLocalization.composition_tmul]
                 change c (b * a) • I.map (f ≫ g) =
@@ -932,7 +929,7 @@ noncomputable def pointFibreLiftDownIso (F : Type u) [Field F] :
     (pointFibreModuleLift F).mapDerivedCategory ⋙
         (pointFibreCoefficientDown F).mapDerivedCategory ≅
       (ModuleCat.uliftFunctor.{u + 1, u} F).mapDerivedCategory :=
-  (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreLiftDown_existsUnique F).exists.choose
 
@@ -949,8 +946,7 @@ private theorem tensorMap_smul
     (σ : R' →+* R) (eA : A →ₛₗ[σ] B) (eM : M →ₛₗ[σ] N)
     (τ : A →+* B) (hτ : ∀ a, eA a = τ a) (a : A) (x : A ⊗[R'] M) :
     TensorProduct.map eA eM (a • x) = τ a • TensorProduct.map eA eM x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul b m =>
       simp only [TensorProduct.smul_tmul', TensorProduct.map_tmul, hτ, smul_eq_mul, map_mul]
   | add x y hx hy => simp only [smul_add, map_add, hx, hy]
@@ -1018,8 +1014,7 @@ theorem pointFibreRationalDown_existsUnique :
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | tmul a x => rfl
     | add x y hx hy => simp only [map_add, hx, hy])
   refine ⟨η, fun _ _ _ ↦ rfl, ?_⟩
@@ -1030,8 +1025,7 @@ theorem pointFibreRationalDown_existsUnique :
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro x
-  induction x using TensorProduct.induction_on with
-  | zero => exact (η'.hom.app M).hom.map_zero.trans (η.hom.app M).hom.map_zero.symm
+  induction x using TensorProduct.inductionOn with
   | tmul a x => exact hη' M a.down x
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -1049,11 +1043,11 @@ noncomputable def pointFibreRationalDownIso :
   letI := pointModuleRationalizationColimits l E
   CategoryTheory.Functor.associator _ _ _ ≪≫
     CategoryTheory.Functor.isoWhiskerLeft _
-      (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _) ≪≫
+    CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreRationalDown_existsUnique D l E).exists.choose ≪≫
-    CategoryTheory.Functor.mapDerivedCategoryCompIso _ _
+    (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The common-lift rational object before descending its size.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -1133,10 +1127,7 @@ theorem pointFibreTensorLift_existsUnique :
       apply LinearMap.ext
       intro x
       obtain ⟨x⟩ := x
-      induction x using TensorProduct.induction_on with
-      | zero =>
-          rw [show ULift.up (0 : L ⊗[E] M) = (0 : ULift.{u + 1} (L ⊗[E] M)) from rfl]
-          simp only [map_zero]
+      induction x using TensorProduct.inductionOn with
       | tmul a x => rfl
       | add x y hx hy =>
           rw [show ULift.up (x + y) =
@@ -1153,10 +1144,7 @@ theorem pointFibreTensorLift_existsUnique :
     apply LinearMap.ext
     intro x
     obtain ⟨x⟩ := x
-    induction x using TensorProduct.induction_on with
-    | zero =>
-        rw [show ULift.up (0 : L ⊗[E] M) = (0 : ULift.{u + 1} (L ⊗[E] M)) from rfl]
-        exact (η'.hom.app M).hom.map_zero.trans (η.hom.app M).hom.map_zero.symm
+    induction x using TensorProduct.inductionOn with
     | tmul a x => exact hη' M a x
     | add x y hx hy =>
         rw [show ULift.up (x + y) =
@@ -1170,10 +1158,10 @@ noncomputable def pointFibreTensorLiftIso :
         (ModuleCat.uliftFunctor.{u + 1, u} L).mapDerivedCategory ≅
       (ModuleCat.uliftFunctor.{u + 1, u} E).mapDerivedCategory ⋙
         pointCoefficientFieldDerivedTensor l E L ι :=
-  (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  CategoryTheory.Functor.mapDerivedCategoryCompIso _ _ ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso
       (pointFibreTensorLift_existsUnique l E L ι).exists.choose ≪≫
-    CategoryTheory.Functor.mapDerivedCategoryCompIso _ _
+    (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm
 
 attribute [local irreducible] pointIntegralRationalFibre pointFibreSizeDescent
   pointFibreLiftDownIso pointFibreRationalDownIso
@@ -1419,7 +1407,7 @@ theorem pointRationalFibreScalar_existsUnique :
         (pointRationalNormalization D l hl E (Q.obj K)).hom)).mp
   exact eq_of_heq ((he' K).trans (hs K).symm)
 
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The normalized rational scalar comparison used on common-stage representatives.

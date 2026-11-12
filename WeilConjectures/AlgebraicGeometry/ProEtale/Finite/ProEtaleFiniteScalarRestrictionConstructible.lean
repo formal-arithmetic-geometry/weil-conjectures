@@ -463,12 +463,12 @@ theorem proEtaleFiniteScalarRestriction_constructible
       IsConstructibleProEtaleModuleSheaf X A (R.obj F) := by
     obtain ⟨S, hn, hS⟩ := hF
     exact ⟨S, hn, proEtaleFiniteScalarRestriction_sameStratification X A B a F S hS⟩
-  let D := R.mapDerivedCategory.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}
+  let D := R.mapDerivedCategory.{u + 2, u + 2}
   let e (q : ℤ) : DerivedCategory.homologyFunctor
       (proEtaleRingModules X (proEtaleConstantRing X B)) q ⋙ R ≅
       D ⋙ DerivedCategory.homologyFunctor
         (proEtaleRingModules X (proEtaleConstantRing X A)) q :=
-    R.mapDerivedCategoryHomologyFunctorIso.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2} q
+    R.mapDerivedCategoryHomologyFunctorIso.{u + 2, u + 2} q
   have hz (L : DerivedCategory (proEtaleRingModules X (proEtaleConstantRing X B))) (q : ℤ) :
       IsZero ((DerivedCategory.homologyFunctor
         (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj (D.obj L)) ↔

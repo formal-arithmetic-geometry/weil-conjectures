@@ -322,7 +322,7 @@ private theorem hom_colimit_fractions
   rw [← hκ n f, κ.symm_apply_apply]
   change β.hom ((colimit.ι Y n) f) = _
   have h := ι_preservesColimitIso_hom G Y n
-  have h' := HasColimit.isoOfNatIso_ι_hom α n
+  have h' := HasColimit.ι_isoOfNatIso_hom α n
   have hh : G.map (colimit.ι Y n) ≫ β.hom =
       α.hom.app n ≫ colimit.ι (X ⋙ preadditiveCoyoneda.obj (op K)) n := by
     calc

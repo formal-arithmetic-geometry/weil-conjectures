@@ -84,6 +84,7 @@ private theorem tensorNatTrans_ext_resolving
   apply (cancel_epi (F.map e.hom)).1
   rw [a.naturality, b.naturality, h Y Z hY hZ]
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem finiteTensor_flat_representatives (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (Y : Scheme.{u}) (n : ℕ)
@@ -270,6 +271,7 @@ theorem canonicalFinitePullbackTensor_associativity {X Y : Scheme.{u}}
   let μ := finitePullbackTensorConstructionIso l E f n
   let a := assocLeftPath F μ
   let b := assocRightPath F μ
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hab : a = b := tripleNatTrans_ext_resolving DerivedCategory.Q
     (proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n))
     (finiteTensor_flat_representatives l E Y n) a b (by
@@ -316,6 +318,7 @@ theorem canonicalFinitePullbackTensor_unit {X Y : Scheme.{u}}
   let F := finiteDerivedPullback l E n f
   let μ := finitePullbackTensorConstructionIso l E f n
   obtain ⟨ε, hε⟩ := finitePullbackTensor_unit_representatives_exists l E f n
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hL : unitLeftPath F μ ε =
       Functor.whiskerRight (MonoidalCategory.leftUnitorNatIso D).hom F :=
     natTrans_ext_resolving DerivedCategory.Q
@@ -323,6 +326,7 @@ theorem canonicalFinitePullbackTensor_unit {X Y : Scheme.{u}}
       (finiteTensor_flat_representatives l E Y n) _ _ (by
         intro P hP
         exact (hε P hP).1)
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hR : unitRightPath F μ ε =
       Functor.whiskerRight (MonoidalCategory.rightUnitorNatIso D).hom F :=
     natTrans_ext_resolving DerivedCategory.Q
@@ -376,6 +380,7 @@ theorem canonicalFinitePullbackTensor_composition {X Y Z : Scheme.{u}}
   let b : TY ⋙ K ⟶ ((F ⋙ H).prod (F ⋙ H)) ⋙ TZ :=
     Functor.whiskerLeft TY c.hom ≫ Functor.whiskerRight μf.hom H ≫
       Functor.whiskerLeft (F.prod F) μh.hom
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hab : a = b := tensorNatTrans_ext_resolving DerivedCategory.Q
     (proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n))
     (finiteTensor_flat_representatives l E Y n) a b (by
@@ -494,6 +499,7 @@ theorem canonicalFinitePullbackTensor_braiding {X Y : Scheme.{u}} (f : X ⟶ Y) 
       Functor.whiskerLeft (pullbackTensorSwap _) μ.hom
   let b : TY ⋙ F ⟶ pullbackTensorSwap _ ⋙ (F.prod F) ⋙ TX :=
     μ.hom ≫ Functor.whiskerLeft (F.prod F) σX.hom
+  set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
   have hab : a = b := tensorNatTrans_ext_resolving DerivedCategory.Q
     (proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n))
     (finiteTensor_flat_representatives l E Y n) a b (by

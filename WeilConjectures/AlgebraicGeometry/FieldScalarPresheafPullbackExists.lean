@@ -96,7 +96,7 @@ variable {k : Type u} [Ring k] (X : TopCat.{u})
   (α : k →+* R.obj.obj (op ⊤))
 
 private noncomputable abbrev scalarMap (U : (Opens X)ᵒᵖ) :=
-  (fieldScalarPresheafRingMap X R α).app U |>.hom
+  show k →+* R.obj.obj U from ((fieldScalarPresheafRingMap X R α).app U).hom
 
 private lemma scalarMap_naturality {U V : (Opens X)ᵒᵖ} (f : U ⟶ V) (r : k) :
     R.obj.map f (scalarMap X R α U r) = scalarMap X R α V r := by

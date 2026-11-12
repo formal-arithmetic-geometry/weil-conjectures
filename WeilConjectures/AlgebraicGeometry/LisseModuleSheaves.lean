@@ -898,4 +898,5 @@ theorem lisseToModuleObject_isIso_of_categories [Finite Λ] :
   exact ⟨Functor.IsEquivalence.mk, lisseToModuleObject_injective,
     lisseToModuleObject_surjective⟩
 
+
 end AlgebraicGeometry.Scheme

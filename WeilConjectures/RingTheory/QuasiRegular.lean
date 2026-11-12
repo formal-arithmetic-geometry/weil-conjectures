@@ -9,6 +9,8 @@ public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-!
 # Regular sequences are quasi-regular
@@ -231,7 +233,7 @@ theorem coeff_mem_of_eval_mem_pow_succ : ∀ {n : ℕ} {a : Fin n → R}, IsRevR
       have hQ0I (t : Fin n →₀ ℕ) : (P.coeff 0).coeff t ∈ I := by
         have h1 := hJI (hQ t)
         have h2 : a 0 * H.coeff t ∈ I := Ideal.mul_mem_right _ _ ha0I
-        rw [coeff_add, coeff_C_mul] at h1
+        simp only [AddMonoidAlgebra.coeff_add, Finsupp.add_apply, coeff_C_mul] at h1
         simpa using I.sub_mem h1 h2
       rw [← Finsupp.cons_tail m]
       cases h : m 0 with

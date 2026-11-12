@@ -115,7 +115,8 @@ private lemma cechOverAbCycles_π
       ObjectProperty.ι, inducedFunctor] at hn ⊢
     simp only [K, S, T, cechOverAbIso, Iso.trans_hom,
       HomologicalComplex.homologyMap_comp, ConcreteCategory.comp_apply] at hn
-    convert hn using 1 <;> rfl
+    convert hn using 1
+    rfl
 
 /-- Inverse image respects any normalized additive Cech comparison systems.
 This is a compatibility statement for existing systems, not an existence assertion.

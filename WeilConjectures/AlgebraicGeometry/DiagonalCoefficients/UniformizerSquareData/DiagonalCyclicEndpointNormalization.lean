@@ -61,7 +61,7 @@ def cyclicAdjunctionAux
   ((scalarAdjunction (cyclicMap l n) (diagonalSurface Y)).comp
     (finiteAdjunction q.cyclic.eW)).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso q.cyclic.eW.F.asEquivalence.inverse
-        (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y)))).symm
+        (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y))))
 
 /-- The explicit route adjunction respects the prescribed shifts.
 Source: diagonal tower coefficient changes (1)
@@ -85,7 +85,7 @@ theorem cyclicAdjunction_commShift
   unfold cyclicAdjunctionAux
   exact rightIso_commShift _
     (Functor.mapDerivedCategoryCompIso q.cyclic.eW.F.asEquivalence.inverse
-      (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y)))).symm hcomp
+      (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y)))) hcomp
 
 /-- The realized degree-zero endpoint of this coefficient route.
 Source: diagonal tower coefficient changes (1)

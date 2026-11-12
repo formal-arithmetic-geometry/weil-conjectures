@@ -144,6 +144,10 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
       Hp.map (Ck.a.hom ≫ HZ.map Ck.lambda) ≫ qk =
         Hp.map (HY.map (InjectiveResolution.desc (𝟙 G) Ch.J Ck.I)) ≫
           Hp.map (HY.map Ch.β) ≫ s := by
+  have : (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).Additive := by
+    dsimp only [RingedSpace.globalSectionsFunctor, SheafOfModules.evaluation]
+    infer_instance
   dsimp only
   let PX := (pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)
   let PY := (pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)

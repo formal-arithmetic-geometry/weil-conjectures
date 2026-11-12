@@ -308,6 +308,7 @@ theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyc
     Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) :=
   ⟨F.rightDerivedObjIsoOfResolution ι hI q⟩
 
+
 end Functor
 
 end CategoryTheory

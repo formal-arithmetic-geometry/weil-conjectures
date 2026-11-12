@@ -61,6 +61,7 @@ private theorem coefficientIntegers_mem (l : ℕ) [Fact l.Prime] (E : Type*) [Fi
       Padic.coefficientExtensionAbsoluteValue l E x ≤ 1 :=
   Padic.mem_coefficientExtensionIntegers l E x
 
+
 private noncomputable def coefficientWithAbsLiftIntegerRingEquiv (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     latticeCoefficientIntegers l (ULift.{u} E) ≃+* Padic.coefficientExtensionIntegers l E :=

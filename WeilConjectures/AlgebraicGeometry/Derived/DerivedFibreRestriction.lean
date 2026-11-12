@@ -197,7 +197,7 @@ private theorem derive_germ_iso
         (Functor.mapDerivedCategoryPlusNatIso e).inv =
       Functor.rightDerivedFunctorPlusNatTrans (a ≫ e.inv) ≫
         F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom := by
-  apply Functor.rightDerived_ext H.rightDerivedFunctorPlus H.rightDerivedFunctorPlusUnit
+  apply Functor.rightDerived_ext H.rightDerivedFunctorPlus H.rightDerivedFunctorPlusUnith
     (HomotopyCategory.Plus.quasiIso _) _ _ _
   ext M : 2
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app]

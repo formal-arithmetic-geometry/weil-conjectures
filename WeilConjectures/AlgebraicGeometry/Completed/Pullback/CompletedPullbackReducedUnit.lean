@@ -101,7 +101,7 @@ private theorem intrinsicUnit_finite (T : Scheme.{u})
   let δ := comparisonModulesEquiv_to_cech T d
   let δD : F ≅ (completedCechDerivedEquiv T d).functor ⋙
       ConstantCompletion.dres (comparisonCompletedRingIso T d).inv :=
-    Functor.mapDerivedCategoryNatIso δ ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryNatIso δ ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   obtain ⟨k, hk⟩ := completed_koszul_constant_transport T d
     (comparisonCompletedRingIso T d) (comparisonCompletedRingIso_scalar T d) F δD r a ha P
   let L := ConstantCompletion.extend

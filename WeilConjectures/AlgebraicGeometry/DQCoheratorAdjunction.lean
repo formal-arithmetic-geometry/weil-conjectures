@@ -38,7 +38,6 @@ universe u w
 open CategoryTheory
 
 namespace AlgebraicGeometry
-
 /-- The inclusion of the quasi-coherent derived full subcategory on a qcqs scheme
 has a right adjoint. Its adjunction supplies the natural Hom bijection.
 Source: Stacks Project, Tag 0B6I, final proof paragraph, and
@@ -81,6 +80,7 @@ theorem exists_dqCoheratorAdjunction (Y : Scheme.{u}) [CompactSpace Y]
     exact ⟨fun _ ↦ trivial, fun _ ↦
       brownHomRepresentabilityLocallySmall (schemeDerivedQCohProperty Y).ι hgen hpres E⟩
   exact ⟨_, ⟨Adjunction.ofIsLeftAdjoint (schemeDerivedQCohProperty Y).ι⟩⟩
+
 
 /-- Every shift O_Y[-i] is in the quasi-coherent full subcategory.
 Source: Stacks Project, Tag 0B6I, final proof paragraph
@@ -429,6 +429,7 @@ theorem globalSections_homology_equiv_structureSheaf_shift (Y : Scheme.{u})
   let eH := e ≪≫ (K.sc i).mapHomologyIso U
   exact ⟨eH.addCommGroupIsoToAddEquiv.symm.trans
     ((CochainComplex.HomComplex.homologyAddEquiv _ I i).trans (unitClassDerivedEquiv Y I i))⟩
+
 
 /-- Any coherator right adjoint detects quasi-isomorphisms on derived global sections,
 computed on K-injective representatives of the source and target.

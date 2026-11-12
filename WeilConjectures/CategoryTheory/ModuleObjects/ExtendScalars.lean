@@ -97,6 +97,7 @@ instance : (comap φ : Mod C S ⥤ Mod C R).Faithful where
 
 lemma comap_comp_forget : comap φ ⋙ forget R = (forget S : Mod C S ⥤ C) := rfl
 
+
 end Restriction
 
 end Mod
@@ -193,6 +194,7 @@ lemma extendScalarsObj_X : (extendScalarsObj φ M).X =
 lemma extendScalarsObj_smul :
     γ[S,(extendScalarsObj φ M).X] = (extendScalarsBimod φ M).actLeft :=
   rfl
+
 
 /-- The projection `S ⊗ M ⟶ S ⊗_R M`. -/
 noncomputable def extendπ : S ⊗ M.X ⟶ (extendScalarsObj φ M).X :=
@@ -616,6 +618,7 @@ lemma coextendScalarsObj_X :
 
 lemma coextendScalarsObj_smul : γ[S,(coextendScalarsObj φ N).X] = coextendSMul φ N := rfl
 
+
 /-- The inclusion `Hom_R(S, N) ⟶ [S, N]`. -/
 noncomputable def coextendι : (coextendScalarsObj φ N).X ⟶ (ihom S).obj N.X :=
   equalizer.ι (coextendFst φ N) (coextendSnd S N)
@@ -635,6 +638,7 @@ noncomputable def coextendEv : S ⊗ (coextendScalarsObj φ N).X ⟶ N.X :=
 
 lemma uncurry_coextendι : MonoidalClosed.uncurry (coextendι φ N) = coextendEv φ N :=
   rfl
+
 
 /-- The elements of `Hom_R(S, N)` are `R`-linear: `f(φ(r) s) = r • f(s)`. -/
 @[reassoc]

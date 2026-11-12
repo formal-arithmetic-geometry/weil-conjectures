@@ -262,7 +262,8 @@ theorem supported_compact_detector_model (Y : Scheme.{u})
   let (I : Type u) : P.IsClosedUnderColimitsOfShape (Discrete I) :=
     supported_closed_coproducts Y V I
   let S := P.FullSubcategory
-  let : HasCoproducts.{u} S := inferInstance
+  let : HasCoproducts.{u} S := fun I ↦
+    hasColimitsOfShape_of_closedUnderColimits (Discrete I) P
   let : LocallySmall.{u} S := inferInstance
   let C := ShrinkHoms S
   let eqv : S ≌ C := ShrinkHoms.equivalence.{u} S

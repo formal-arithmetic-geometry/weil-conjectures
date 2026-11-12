@@ -105,13 +105,13 @@ def twoTermTensorRawIso (n : ℤ) :
     by_cases hb : b = -1
     · subst b
       obtain rfl : a = n + 1 := by omega
-      simp only [f, dif_pos rfl, eqToHom_refl, Category.id_comp,
+      simp only [f, dite_eq_left rfl, eqToHom_refl, Category.id_comp,
         biprod.inl_desc, CochainComplex.ιMapBifunctor]
       exact (Category.comp_id _).symm
     · by_cases hb' : b = 0
       · subst b
         obtain rfl : a = n := by omega
-        simp only [f, dif_neg (by omega : (0 : ℤ) ≠ -1), dite_true,
+        simp only [f, dite_eq_right (by omega : (0 : ℤ) ≠ -1), dite_true,
           eqToHom_refl, Category.id_comp, biprod.inr_desc, CochainComplex.ιMapBifunctor]
         exact (Category.comp_id _).symm
       · have hz := ((ordinaryTensor Y R).obj (A.X a)).map_isZero (hzero b hb hb')
@@ -120,7 +120,7 @@ def twoTermTensorRawIso (n : ℤ) :
     · simp only [biprod.inl_desc_assoc, HomologicalComplex.ι_mapBifunctorDesc, f,
         dite_true, eqToHom_refl, Category.id_comp, Category.comp_id]
     · simp only [biprod.inr_desc_assoc, HomologicalComplex.ι_mapBifunctorDesc, f,
-        dif_neg (by omega : (0 : ℤ) ≠ -1), dite_true, eqToHom_refl,
+        dite_eq_right (by omega : (0 : ℤ) ≠ -1), dite_true, eqToHom_refl,
         Category.id_comp, Category.comp_id]
 @[reassoc]
 theorem twoTermTensorRawIso_inl_inv (n : ℤ) :

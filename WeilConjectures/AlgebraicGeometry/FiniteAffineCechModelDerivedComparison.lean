@@ -93,7 +93,7 @@ theorem finiteAffineCechModel_derivedComparison
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)).obj K)) :=
     (DerivedCategory.Plus.ι (C := SheafOfModules.{u}
       (moduleRings T.toRingedSpace))).mapIso
-        (asIso (G.rightDerivedFunctorPlusUnit.app H)).symm
+        (asIso (G.rightDerivedFunctorPlusUnith.app H)).symm
   let e : G.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) ≅
       DerivedCategory.Q.obj ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) :=
     G.rightDerivedFunctor.mapIso

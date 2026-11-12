@@ -137,13 +137,11 @@ theorem grothendieckBottomEdge_singleUnit
       Triangulated.SpectralObject.mapTriangulatedFunctor,
       Triangulated.TStructure.spectralObjectFunctor, Triangulated.TStructure.spectralObject,
       Triangulated.TStructure.ω₁]
-    simp only [homOfLE_leOfHom, Fin.isValue, Functor.map_id, Functor.id_hcomp,
-      Functor.whiskerLeft_app, Functor.hcomp_id, Functor.whiskerRight_app,
-      Functor.map_comp, Functor.map_inv, IsIso.eq_inv_comp]
-    dsimp only [ComposableArrows.mk₁, ComposableArrows.Mk₁.obj]
-    simp only [Triangulated.TStructure.eTruncGE_obj_bot, Functor.id_map,
-      Triangulated.TStructure.eTruncLT_obj_coe]
-    change _ ≫ inv ((DerivedCategory.Plus.homologyFunctor C n).map
+    simp only [homOfLE_leOfHom, Fin.isValue, Functor.map_id, NatTrans.hcomp_app,
+      NatTrans.id_app]
+    dsimp
+    simp only [Category.id_comp, Functor.map_id, Category.comp_id]
+    change inv ((DerivedCategory.Plus.homologyFunctor C n).map
       (G.rightDerivedFunctorPlus.map ((DerivedCategory.Plus.TStructure.t.truncGEπ 0).app
         ((DerivedCategory.Plus.TStructure.t.truncLT 1).obj
           (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X)))))) ≫

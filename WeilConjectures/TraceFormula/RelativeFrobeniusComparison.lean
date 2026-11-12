@@ -364,7 +364,8 @@ lemma weilLowerShriekFrobeniusComparison_hom_app_eq (ΦX : X ⟶ X) (ΦY : Y ⟶
           ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K ≫
             eqToHom (by rw [hrp])) := by
   subst hrp hrf
-  simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
+  simp only [weilLowerShriekFrobeniusComparison_def, weilLowerShriekFrobeniusComparisonImpl,
+    Iso.trans_hom, NatTrans.comp_app, asIso_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
     Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom,

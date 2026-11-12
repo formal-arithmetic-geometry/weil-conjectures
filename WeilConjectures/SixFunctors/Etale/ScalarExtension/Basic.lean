@@ -36,7 +36,8 @@ variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
 
 /- Mathlib's instance is stated for `extendScalars.{u₁, u₂, max u₂ w}`, and unifying
 `u + 1 =?= max (u + 1) ?w` gets stuck. -/
-instance (φ : R →+* S) : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).IsLeftAdjoint :=
+instance instIsLeftAdjointModuleCatExtendScalars_basic
+    (φ : R →+* S) : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).IsLeftAdjoint :=
   (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).isLeftAdjoint
 
 section

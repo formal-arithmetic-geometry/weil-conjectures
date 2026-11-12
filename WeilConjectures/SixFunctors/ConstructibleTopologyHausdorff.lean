@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Topology.Spectral.Basic
 
 /-!
 # The constructible topology of a spectral space is Hausdorff

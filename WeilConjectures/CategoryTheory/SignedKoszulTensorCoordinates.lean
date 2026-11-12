@@ -235,7 +235,7 @@ theorem exists_ringedSignedKoszulTensorCoordinates
       simp
     · simp [h]
   · by_cases h : q + (I.card : ℤ) = (q + 1) + (L.card : ℤ)
-    · rw [dif_pos h]
+    · rw [dite_eq_left h]
       simp only [ringedKoszulCoefficientSMul, map_sum, Finset.sum_smul]
       apply Finset.sum_congr rfl
       intro i hi
@@ -243,18 +243,19 @@ theorem exists_ringedSignedKoszulTensorCoordinates
       · subst L
         simp [h, Category.assoc, hp]
       · by_cases heq : q + (I.card : ℤ) = (q + 1) + ((I.erase i).card : ℤ)
-        · simp only [dif_pos heq, Category.assoc,
-            Linear.smul_comp, hp, dif_neg he, if_neg he, map_zero, comp_zero, zero_smul, smul_zero]
-        · simp only [dif_neg heq, zero_comp, if_neg he, map_zero, zero_smul]
-    · rw [dif_neg h]
+        · simp only [dite_eq_left heq, Category.assoc,
+            Linear.smul_comp, hp, dite_eq_right he, ite_eq_right he, map_zero, comp_zero,
+            zero_smul, smul_zero]
+        · simp only [dite_eq_right heq, zero_comp, ite_eq_right he, map_zero, zero_smul]
+    · rw [dite_eq_right h]
       apply Finset.sum_eq_zero
       intro i hi
       by_cases heq : q + (I.card : ℤ) = (q + 1) + ((I.erase i).card : ℤ)
       · have he : I.erase i ≠ L := by
           intro he
           exact h (he ▸ heq)
-        simp only [dif_pos heq, Category.assoc, ringedKoszulCoefficientSMul,
-          Linear.smul_comp, hp, dif_neg he, comp_zero, smul_zero]
-      · simp only [dif_neg heq, zero_comp]
+        simp only [dite_eq_left heq, Category.assoc, ringedKoszulCoefficientSMul,
+          Linear.smul_comp, hp, dite_eq_right he, comp_zero, smul_zero]
+      · simp only [dite_eq_right heq, zero_comp]
 
 end CategoryTheory

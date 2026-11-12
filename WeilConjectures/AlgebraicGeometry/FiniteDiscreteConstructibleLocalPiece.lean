@@ -18,7 +18,8 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteConstructibleLocalPiece
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 open AlgebraicGeometry.ProEtale in
 private lemma finiteLocallyConstant_of_cover {Λ : Type (u + 1)} [CommRing Λ]

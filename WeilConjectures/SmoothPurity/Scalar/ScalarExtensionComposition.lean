@@ -660,7 +660,7 @@ noncomputable def integralOrdinaryDerivedScalarComp :
     integralOrdinaryDerivedScalar l E L ι Y ⋙ integralOrdinaryDerivedScalar l L M j Y ≅
       integralOrdinaryDerivedScalar l E M (j.comp ι) Y :=
   (Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
-    (integralOrdinaryScalar l L M j Y)).symm ≪≫
+    (integralOrdinaryScalar l L M j Y)) ≪≫
     Functor.mapDerivedCategoryNatIso (integralOrdinaryScalarComp l E L ι Y M j)
 
 /-- The ordinary derived tensor unit, through the fixed derived localization.
@@ -793,8 +793,8 @@ private theorem ordinary_pentagon
 end OrdinaryCoherence
 
 attribute [local irreducible] integralOrdinaryScalarComp integralOrdinaryScalarUnit
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
-  Functor.mapDerivedCategoryIdIso Functor.mapDerivedCategory
+  Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategory
 
 section DerivedCoherence
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
@@ -809,7 +809,7 @@ variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
   (ha : a = Functor.isoWhiskerRight u F ≪≫ Functor.leftUnitor F)
 include ha in
 private theorem derived_source_unit :
-    ((Functor.mapDerivedCategoryCompIso T F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso T F ≪≫
       Functor.mapDerivedCategoryNatIso a).hom =
     Functor.whiskerRight
       (Functor.mapDerivedCategoryNatIso u ≪≫ Functor.mapDerivedCategoryIdIso A).hom
@@ -824,14 +824,14 @@ private theorem derived_source_unit :
     erw [Category.comp_id] at hx
     exact hx
   rw [ha']
-  apply (cancel_mono (Functor.mapDerivedCategoryCompIso (𝟭 A) F).hom).mp
-  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+  apply (cancel_mono (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
+  simp only [Iso.trans_hom, Category.assoc,
     Functor.whiskerRight_comp]
   rw [h]
-  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
   have hu' : Functor.whiskerRight (Functor.mapDerivedCategoryIdIso A).hom
-      F.mapDerivedCategory ≫ (Functor.mapDerivedCategoryCompIso (𝟭 A) F).hom = 𝟙 _ := by
-    apply (cancel_epi (Functor.mapDerivedCategoryCompIso (𝟭 A) F).hom).mp
+      F.mapDerivedCategory ≫ (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv = 𝟙 _ := by
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso (𝟭 A) F).inv).mp
     rw [← Category.assoc, hu]
     exact (Category.id_comp _).trans (Category.comp_id _).symm
   rw [Category.assoc, hu', Category.comp_id]
@@ -849,7 +849,7 @@ variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
   (ha : a = Functor.isoWhiskerLeft F u ≪≫ Functor.rightUnitor F)
 include ha in
 private theorem derived_target_unit :
-    ((Functor.mapDerivedCategoryCompIso F T).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F T ≪≫
       Functor.mapDerivedCategoryNatIso a).hom =
     Functor.whiskerLeft F.mapDerivedCategory
       (Functor.mapDerivedCategoryNatIso u ≪≫ Functor.mapDerivedCategoryIdIso B).hom := by
@@ -863,15 +863,15 @@ private theorem derived_target_unit :
     erw [Category.comp_id] at hx
     exact hx
   rw [ha']
-  apply (cancel_mono (Functor.mapDerivedCategoryCompIso F (𝟭 B)).hom).mp
-  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+  apply (cancel_mono (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
+  simp only [Iso.trans_hom, Category.assoc,
     Functor.whiskerLeft_comp]
   rw [h]
-  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
   have hu' : Functor.whiskerLeft F.mapDerivedCategory
       (Functor.mapDerivedCategoryIdIso B).hom ≫
-      (Functor.mapDerivedCategoryCompIso F (𝟭 B)).hom = 𝟙 _ := by
-    apply (cancel_epi (Functor.mapDerivedCategoryCompIso F (𝟭 B)).hom).mp
+      (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv = 𝟙 _ := by
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso F (𝟭 B)).inv).mp
     rw [← Category.assoc, hu]
     exact (Category.id_comp _).trans (Category.comp_id _).symm
   rw [Category.assoc, hu', Category.comp_id]
@@ -932,13 +932,13 @@ private theorem derived_pentagon
     (h : Functor.isoWhiskerRight a H ≪≫ b = Functor.isoWhiskerLeft F c ≪≫ d)
     (K : DerivedCategory A) :
     H.mapDerivedCategory.map
-        (((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso F G ≪≫
           Functor.mapDerivedCategoryNatIso a).hom.app K) ≫
-      ((Functor.mapDerivedCategoryCompIso FG H).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso FG H ≪≫
         Functor.mapDerivedCategoryNatIso b).hom.app K =
-    ((Functor.mapDerivedCategoryCompIso G H).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso G H ≪≫
         Functor.mapDerivedCategoryNatIso c).hom.app (F.mapDerivedCategory.obj K) ≫
-      ((Functor.mapDerivedCategoryCompIso F GH).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F GH ≪≫
         Functor.mapDerivedCategoryNatIso d).hom.app K :=
   Functor.mapDerivedCategoryCompNatIso_cocycle a b c d
     (fun X ↦ congrArg (fun e ↦ e.hom.app X) h) K
@@ -1070,8 +1070,7 @@ private theorem localizedIso
       F.map f ≫ (c K').hom = (c K).hom ≫ G.map f := by
     obtain ⟨K⟩ := K
     obtain ⟨K'⟩ := K'
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | add f g hf hg =>
       rw [F.map_add, G.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
     | tmul a f =>

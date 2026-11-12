@@ -30,6 +30,7 @@ theorem affine_torsor_orbit_data (d : ℕ) :
   classical
   refine ⟨0, fun i => ⊥, Nat.zero_le d, by simp⟩
 
+
 /-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures.
 
 Source: Stacks Project, Tag 03SF and affine descent, Tag 023R.
@@ -201,5 +202,6 @@ private theorem affine_torsor_fixed_orbits_counterexample
       pullback.lift (𝟙 U.toScheme) U.ι (by simp)
     exact ⟨z (Classical.choice hx)⟩
   exact empty_fixed_ring_no_iso _ ⟨θ⟩
+
 
 end AlgebraicGeometry.Scheme

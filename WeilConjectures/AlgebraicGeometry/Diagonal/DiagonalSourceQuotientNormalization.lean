@@ -91,7 +91,7 @@ private theorem residueLinear_cokernel (ℓ n : ℕ) [Fact ℓ.Prime] :
     rw [ModuleCat.epi_iff_surjective]
     intro x
     obtain ⟨y, hy⟩ := ZMod.ringHom_surjective (PadicInt.toZModPow (n + 1)) x.down
-    exact ⟨ULift.up y, ULift.ext _ _ hy⟩
+    exact ⟨ULift.up y, ULift.ext hy⟩
   exact ⟨w, ⟨hex.gIsCokernel⟩⟩
 
 private def constantRestrictionIso (ℓ n : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :

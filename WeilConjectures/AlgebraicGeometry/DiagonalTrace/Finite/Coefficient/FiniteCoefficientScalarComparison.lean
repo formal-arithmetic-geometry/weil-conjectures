@@ -98,7 +98,7 @@ def finiteScalarLineCoordinate
     (comparisonUpperStar AddCommGrpCat.{u + 1} T).obj
         ((Etale.moduleAbelianForget (FiniteRing l E n) T).obj
           (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-            (ULift.ext _ _ (coefficient_annihilates l E n)))) ⟶
+            (ULift.ext (coefficient_annihilates l E n)))) ⟶
       (finiteForget l E T n).obj (finiteLine l E T n) :=
   (finiteScalarComparison l E n T).hom.app _ ≫
     (finiteForget l E T n).map (finiteOrdinaryLineCoordinate l E n T c).hom

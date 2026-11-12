@@ -90,9 +90,9 @@ noncomputable def Etale.openImmersionLowerShriekDerivedBaseChangeIso
     ((g')^*[A]).mapDerivedCategory ⋙ ((j')_!open[A]).mapDerivedCategory ≅
       ((j)_!open[A]).mapDerivedCategory ⋙ ((g'')^*[A]).mapDerivedCategory :=
   have := Etale.isIso_openImmersionLowerShriekBaseChangeMap A hsq
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (asIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry

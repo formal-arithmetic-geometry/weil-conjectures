@@ -143,7 +143,7 @@ theorem dvr_unit_root_atPrime
         exact AdjoinRoot.liftAlgHom_root _ _ _ _))
     exact Algebra.Etale.of_equiv equiv
   have hlocal : IsLocalHom (algebraMap R L) := by
-    apply ((IsLocalRing.local_hom_TFAE (algebraMap R L)).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE (algebraMap R L)).out 5 1).mp
     ext x
     change algebraMap B L (algebraMap R B x) ∈ IsLocalRing.maximalIdeal L ↔ _
     rw [IsLocalization.AtPrime.to_map_mem_maximal_iff L q]

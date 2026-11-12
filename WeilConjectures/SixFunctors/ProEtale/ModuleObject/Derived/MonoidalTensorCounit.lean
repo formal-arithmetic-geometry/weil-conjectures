@@ -268,8 +268,8 @@ private lemma homotopyTensorComparison_app_app_fac (A B : HomotopyCategory C (.u
   rw [F.leftDerivedTensorComparison_app_app_comp_tensorHom_assoc]
   have h := (asIso (mapHomotopyCategoryδNatTrans (.up ℤ) F)).hom_inv_id_app_app A B
   simp only [asIso_hom] at h
-  rw [← Qh.map_comp, h, Qh.map_id]
-  erw [Category.comp_id]
+  rw [← Qh.map_comp, h]
+  erw [Qh.map_id, Category.comp_id]
 
 /-- Changing the target tensor counit by the inverse comonoidal comparison leaves the
 canonical derived tensor comparison unchanged, by the derived universal property. -/

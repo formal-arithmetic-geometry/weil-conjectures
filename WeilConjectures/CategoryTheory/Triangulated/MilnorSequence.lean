@@ -64,7 +64,7 @@ private def milnorProjectionCone [HasDerivedCategory.{v} AddCommGrpCat.{u}]
         (fun n => K.map (homOfLE (Nat.le_succ n)).op)) ≫
           Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n = 0 at hn
       simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-        Category.id_comp, Pi.lift_π, Preadditive.comp_sub, Category.assoc] at hn
+        Category.id_comp, Pi.lift_comp_π, Preadditive.comp_sub, Category.assoc] at hn
       simpa only [Category.assoc] using (sub_eq_zero.mp hn))
 
 /-- The natural Milnor short exact sequence for every derived inverse limit of abelian groups.
@@ -168,7 +168,7 @@ theorem milnor_shortExact [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) :
         (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n) =
         (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
           (p ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n) := by
-      simp only [b, dif_pos hT, limit.lift_π, milnorProjectionCone,
+      simp only [b, dite_eq_left hT, limit.lift_π, milnorProjectionCone,
         NatTrans.ofOpSequence_app]
     exact ⟨milnor_projection_epi i K L p δ hT _ hπ, hπ⟩
   refine ⟨a, b, ?_, ?_⟩
@@ -189,14 +189,14 @@ theorem milnor_shortExact [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) :
           (fun n : ℕ => (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj
             (K.obj (Opposite.op n))) n) h
       dsimp only [Functor.comp_obj] at hn ⊢
-      simpa only [j, Category.assoc, Pi.lift_π] using hn⟩
+      simpa only [j, Category.assoc, Pi.lift_comp_π] using hn⟩
     have hbj : b K L p δ ≫ j =
         (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫
           piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i)
             (fun n : ℕ => K.obj (Opposite.op n)) := by
       apply Pi.hom_ext
       intro n
-      simpa only [j, Category.assoc, Pi.lift_π, piComparison_comp_π,
+      simpa only [j, Category.assoc, Pi.lift_comp_π, piComparison_comp_π,
         ← Functor.map_comp] using hπ n
     have hz' : a K L p δ ≫ b K L p δ = 0 := by
       apply (cancel_mono j).1

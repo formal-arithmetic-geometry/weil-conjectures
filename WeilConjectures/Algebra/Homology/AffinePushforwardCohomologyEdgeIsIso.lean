@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
@@ -101,34 +103,40 @@ theorem affinePushforwardCohomologyEdge_isIso
       infer_instance
     have hPs : QuasiIso ((P.mapHomologicalComplex (.up ℤ)).map s) :=
       affinePushforward_resolution_quasiIso _ D J hD s
-    have hs : IsIso (DerivedCategory.Qh.map (q.map s)) := by
+    have hs : IsIso (DerivedCategory.Qh.{w}.map (q.map s)) := by
       apply (DerivedCategory.isIso_Qh_map_iff _).mpr
       exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hsi
-    have hPs' : IsIso (DerivedCategory.Qh.map
+    have hPs' : IsIso (DerivedCategory.Qh.{w}.map
         ((P.mapHomotopyCategory (.up ℤ)).map (q.map s))) := by
       apply (DerivedCategory.isIso_Qh_map_iff _).mpr
       exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hPs
-    have : IsIso ((DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s)) := by
-      change IsIso (P.rightDerivedFunctor.map (DerivedCategory.Qh.map (q.map s)))
+    have : IsIso ((DerivedCategory.Qh.{w} ⋙
+        P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s)) := by
+      change IsIso (P.rightDerivedFunctor.{_, _, _, _, w, w}.map
+        (DerivedCategory.Qh.{w}.map (q.map s)))
       infer_instance
-    have hu : IsIso (P.rightDerivedFunctorUnit.app (q.obj D)) := by
-      have hn := P.rightDerivedFunctorUnit.naturality (q.map s)
-      have : IsIso (P.rightDerivedFunctorUnit.app (q.obj D) ≫
-          (DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s)) := by
+    have hu : IsIso (P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.app (q.obj D)) := by
+      have hn := P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.naturality (q.map s)
+      have : IsIso (P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.app (q.obj D) ≫
+          (DerivedCategory.Qh.{w} ⋙ P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s)) := by
         rw [← hn]
         dsimp only [Functor.comp_map]
         infer_instance
       exact IsIso.of_isIso_comp_right _
-        ((DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s))
-    let : (affinePushforwardTilde B).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+        ((DerivedCategory.Qh.{w} ⋙ P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s))
+    let : (affinePushforwardTilde B).Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of B) f g
     let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
     let : PreservesFiniteLimits (affinePushforwardTilde B) :=
       Functor.preservesFiniteLimits_of_preservesHomology (affinePushforwardTilde B)
     let : PreservesFiniteColimits (affinePushforwardTilde B) :=
       Functor.preservesFiniteColimits_of_preservesHomology (affinePushforwardTilde B)
-    let : (affinePushforwardTilde A).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let : (affinePushforwardTilde A).Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of A) f g
     let : (affinePushforwardTilde A ⋙ P).Additive := inferInstance
     let : (affinePushforwardTilde A ⋙ P).PreservesZeroMorphisms :=
       ⟨fun X Y => by simp⟩
@@ -140,6 +148,7 @@ theorem affinePushforwardCohomologyEdge_isIso
     have : IsIso ((σ.hom.mapHomologicalComplex (.up ℤ)).app C) :=
       ((NatIso.mapHomologicalComplex σ (.up ℤ)).app C).isIso_hom
     dsimp only [affinePushforwardCohomologyMapOfComparison]
+    simp only [cast_eq]
     infer_instance
   have hn := hα C L₀ (Iso.refl _) ⟨rfl, rfl⟩
   simp only [Iso.refl_hom] at hn

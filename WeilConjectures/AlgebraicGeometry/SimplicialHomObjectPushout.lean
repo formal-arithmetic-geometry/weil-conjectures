@@ -35,7 +35,7 @@ private def familyToNatTrans {X : Scheme.{u₁}}
   app n := TypeCat.ofHom (fun s ↦ ⟨f.val n.unop.len s.down⟩)
   naturality {m n} φ := by
     ext s
-    exact ULift.ext _ _ (f.property n.unop.len m.unop.len φ.unop s.down).symm
+    exact ULift.ext (f.property n.unop.len m.unop.len φ.unop s.down).symm
 
 private def natTransToFamily {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)} {S : SSet.{t₁}}
@@ -69,7 +69,7 @@ private theorem glueFamilies {X : Scheme.{u₁}}
   have hL := L.map_isPushout hpush
   have hw : L.map p ≫ familyToNatTrans fB = L.map q ≫ familyToNatTrans fC := by
     ext n s
-    exact ULift.ext _ _ (hagree n.unop.len s.down)
+    exact ULift.ext (hagree n.unop.len s.down)
   let d := hL.desc (familyToNatTrans fB) (familyToNatTrans fC) hw
   refine ⟨natTransToFamily d, ?_, ?_⟩
   · intro n s
@@ -94,9 +94,9 @@ private theorem family_pushout_ext {X : Scheme.{u₁}}
   apply familyToNatTrans_injective
   apply hL.hom_ext
   · ext n s
-    exact ULift.ext _ _ (hi n.unop.len s.down)
+    exact ULift.ext (hi n.unop.len s.down)
   · ext n s
-    exact ULift.ext _ _ (hj n.unop.len s.down)
+    exact ULift.ext (hj n.unop.len s.down)
 
 private lemma representedFamily_hom_ext {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)} {S : SSet.{t₁}}

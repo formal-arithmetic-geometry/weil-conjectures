@@ -20,8 +20,8 @@ private theorem unit_naturality (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G)
       f ≫ moduleCup_godementUnit X G := by
   apply Pi.hom_ext
   intro x
-  simp only [moduleCup_godementMap, moduleCup_godementUnit, Category.assoc, Pi.lift_π]
-  rw [Pi.lift_π_assoc]
+  simp only [moduleCup_godementMap, moduleCup_godementUnit, Category.assoc, Pi.lift_comp_π]
+  rw [Pi.lift_comp_π_assoc]
   refine hom_ext _ _ fun V ↦ ?_
   ext p
   refine SkyscraperSections.ext fun hx ↦ ?_

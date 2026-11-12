@@ -448,7 +448,7 @@ lemma Scheme.Hom.exists_hasNoetherPartitionOver_nonempty [IsNoetherian Y] [Quasi
   have hIp : I ≤ p := hp.1.2
   obtain ⟨f₀, hf₀, hf₀p⟩ : ∃ f₀ ∈ ((I.finite_minimalPrimes_of_isNoetherianRing).toFinset.erase
       p).inf id, f₀ ∉ p := by
-    refine SetLike.not_le_iff_exists.mp fun hle ↦ ?_
+    refine IsConcreteLE.not_le_iff_exists.mp fun hle ↦ ?_
     obtain ⟨p', hp', hp'p⟩ := (Ideal.IsPrime.inf_le' this).mp hle
     rw [Finset.mem_erase, Set.Finite.mem_toFinset] at hp'
     exact hp'.1 (le_antisymm hp'p (hp.2 ⟨hp'.2.1.1, hp'.2.1.2⟩ hp'p))

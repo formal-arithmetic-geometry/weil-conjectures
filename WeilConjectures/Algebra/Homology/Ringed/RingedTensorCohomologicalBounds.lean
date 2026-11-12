@@ -149,6 +149,12 @@ private theorem bounded_kflat_model
         (derivedChangeRingIndependentCoefficients J R)) ℤ) (p : P ⟶ G),
       P.IsStrictlyLE a ∧ P.IsKFlatIndependentCoefficients ∧ QuasiIso p := by
   let A := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)
+  have (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (I : Type r) : HasColimitsOfShape (Discrete I) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := symmetricCategory R
@@ -164,6 +170,10 @@ private theorem bounded_kflat_model
       GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := by infer_instance
   have : ∀ X₁ X₂ X₃ X₄ : GradedObject ℤ A,
       GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := by infer_instance
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   let := hasFunctorialFlatResolution_kfi R
   let Λ := (Classical.arbitrary (Abelian.LeftResolution
     (ObjectProperty.flat.ι : _ ⥤ A))).reduced

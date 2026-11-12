@@ -82,6 +82,7 @@ theorem essentiallySmall_and_isCoverDense (S : Scheme.{u}) :
       (AffineEtale.Spec S).IsCoverDense S.smallEtaleTopology :=
   ⟨inferInstance, inferInstance⟩
 
+
 end AffineEtale
 
 end AlgebraicGeometry.Scheme

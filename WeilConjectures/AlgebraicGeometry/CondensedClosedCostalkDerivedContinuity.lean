@@ -54,7 +54,7 @@ private theorem triangleComparison_isIso
     Functor.whiskerRight (Functor.whiskerLeft T Triangle.π₂Toπ₃) (F.shift m)
   let d₁ : A₁ ⟶ A₂ :=
     { app s := F.homologySequenceδ (T.obj s) m n h
-      naturality _ _ f := F.homologySequenceδ_naturality _ _ (T.map f) m n h }
+      naturality _ _ f := F.homologySequenceδ_naturality (T.map f) m n h }
   let d₂ : A₂ ⟶ A₃ :=
     Functor.whiskerRight (Functor.whiskerLeft T Triangle.π₁Toπ₂) (F.shift n)
   let d₃ : A₃ ⟶ A₄ :=
@@ -119,7 +119,7 @@ private theorem triangleComparison_isIso
       dsimp only [A₀, A₁, A₂, A₃, A₄]
       simp only [triangleComparison, ι_colimMap_assoc, colimit.ι_desc,
         colimit.ι_desc_assoc]
-      exact (F.homologySequenceδ_naturality _ _ (c.ι.app s) m n h).symm)
+      exact (F.homologySequenceδ_naturality (c.ι.app s) m n h).symm)
     (by
       change colimMap d₂ ≫ triangleComparison T c F n Triangle.π₂ =
         triangleComparison T c F n Triangle.π₁ ≫ (F.shift n).map c.pt.mor₁
@@ -245,6 +245,13 @@ private theorem comparison_of_colimitCocone
 attribute [local irreducible] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.upperStarFromPoint
 
+noncomputable local instance hasZeroMorphisms_condensedRingObj_condensedClosedCostalkDerived
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
+set_option maxHeartbeats 400000 in
 -- Recollement and derived comparison elaboration need additional heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
@@ -345,7 +352,7 @@ theorem condensed_closed_costalk_derived_continuity
   let F := DerivedCategory.homologyFunctor A 0
   let eQ : CochainComplex.Plus.ι A ⋙ DerivedCategory.Q ≅
       DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι :=
-    Functor.isoWhiskerLeft (CochainComplex.Plus.ι A) (DerivedCategory.quotientCompQhIso A)
+    (DerivedCategory.Plus.QCompιIso A).symm
   have hid (r : ℤ) : IsIso (triangleComparison TT tc F r Triangle.π₂) := by
     let C := HomologicalComplex.homologyFunctor A (.up ℤ) r
     have hb : IsIso (colimit.desc (D ⋙ C) (C.mapCocone d)) := by

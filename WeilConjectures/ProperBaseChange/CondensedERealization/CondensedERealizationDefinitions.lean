@@ -493,7 +493,7 @@ private lemma bounded_comap_iff {X : Scheme.{u}}
     (Mod.comapId S).symm ≪≫ Mod.comapCongr (by simp) ≪≫
       Mod.comapComp (asIso a).inv a
   let e := (Functor.mapDerivedCategoryIdIso _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso i ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryNatIso i ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   exact bounded_iso (e.app K).symm (bounded_comap (asIso a).inv _ h)
 
 set_option backward.isDefEq.respectTransparency false in

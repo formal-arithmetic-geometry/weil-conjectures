@@ -174,7 +174,7 @@ theorem dvr_tame_tensor_factor_ramificationIdx_le
   have he : (IsLocalRing.maximalIdeal A₁).ramificationIdx A = t := by
     let : (IsLocalRing.maximalIdeal A₁).LiesOver (IsLocalRing.maximalIdeal A) :=
       ⟨(IsLocalRing.eq_maximalIdeal
-        (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal
+        (Ideal.isMaximal_under_of_isIntegral_of_isMaximal
           (IsLocalRing.maximalIdeal A₁))).symm⟩
     let : IsDiscreteValuationRing (Localization.AtPrime (IsLocalRing.maximalIdeal A₁)) :=
       IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain A₁

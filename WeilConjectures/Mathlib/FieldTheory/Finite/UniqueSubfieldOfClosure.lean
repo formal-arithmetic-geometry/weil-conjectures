@@ -87,7 +87,7 @@ theorem exists_unique_subfield_of_closure
       change x ∈ F m ↔ _
       rw [hmem, Polynomial.mem_rootSet_of_ne hne]
       simp [sub_eq_zero]
-    rw [← SetLike.coe_sort_coe, Nat.card_congr (Equiv.setCongr hset),
+    rw [← SetLike.coe_sort_coe, Nat.card_congr (Set.equivOfEq hset),
       Nat.card_eq_fintype_card]
     rw [Polynomial.card_rootSet_eq_natDegree
       (galois_poly_separable p (q ^ m) ?_) (IsAlgClosed.splits _)]

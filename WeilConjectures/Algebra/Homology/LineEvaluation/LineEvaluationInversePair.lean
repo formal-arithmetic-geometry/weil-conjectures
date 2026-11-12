@@ -52,6 +52,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Specified evaluation and inverse tensor pair for a sheaf line
 
@@ -295,8 +296,9 @@ private theorem chart_basis (P : Modules.{uC, vC, r} R) (W : C)
     change e.inv.val.app (op V) (e.hom.val.app (op V) x) = x at h
     calc
       x = e.inv.val.app (op V) (e.hom.val.app (op V) x) := h.symm
-      _ = e.hom.val.app (op V) x •
-          e.inv.val.app (op V) (1 : R.obj.obj (op V.left)) := by
+      _ = (show R.obj.obj (op V.left) from e.hom.val.app (op V) x) •
+          (show P.val.obj (op V.left) from
+            e.inv.val.app (op V) (1 : R.obj.obj (op V.left))) := by
         simpa only [smul_eq_mul, mul_one] using
           (e.inv.val.app (op V)).hom.map_smul (e.hom.val.app (op V) x)
             (1 : R.obj.obj (op V.left))
@@ -454,6 +456,10 @@ private theorem evaluation_isIso (P : Modules.{uC, vC, r} R)
   unfold evaluation
   rw [Adjunction.homEquiv_counit]
   infer_instance
+
+private noncomputable local instance (M : Modules.{uC, vC, r} R) (U : Cᵒᵖ) :
+    SMul ((unit (ringSheaf.{uC, vC, r} R)).val.obj U) (M.val.obj U) :=
+  inferInstanceAs (SMul (R.obj.obj U) (M.val.obj U))
 
 private theorem cancellation_pure (P Q M : Modules.{uC, vC, r} R)
     (e : P ⊗ Q ≅ unit (ringSheaf.{uC, vC, r} R)) (U : Cᵒᵖ)

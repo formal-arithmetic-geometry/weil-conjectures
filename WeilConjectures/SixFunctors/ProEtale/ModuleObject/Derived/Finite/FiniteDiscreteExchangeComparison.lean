@@ -33,7 +33,8 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 -- Fix the size bound explicitly to avoid a recursive instance search on this site.
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteExchangeComparison
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 private noncomputable def arrowIsoOfObjectIso
     {C D : Type*} [Category C] [Category D] (P : ObjectProperty D)

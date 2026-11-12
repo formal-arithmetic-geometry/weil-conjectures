@@ -100,8 +100,7 @@ private theorem tensorAddHom_ext {M N P : Type*} [AddCommGroup M] [AddCommGroup 
     [AddCommGroup P] {f g : TensorProduct ℤ M N →+ P}
     (h : ∀ m n, f (m ⊗ₜ[ℤ] n) = g (m ⊗ₜ[ℤ] n)) : f = g := by
   ext z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul m n => exact h m n
   | add z w hz hw => simp only [map_add, hz, hw]
 
@@ -284,8 +283,7 @@ private theorem rawTensorQuotient_balance (M N : IM) :
   apply AddCommGrpCat.hom_ext
   apply tensorAddHom_ext
   intro t n
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [TensorProduct.zero_tmul, map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp only [TensorProduct.add_tmul, map_add, ht, ht']
   | tmul m r =>
     exact TensorProduct.smul_tmul (R := (A).obj U)
@@ -432,8 +430,7 @@ private theorem rawTensorQuotient_epi (M N : IM) : Epi (rawTensorQuotient J R M 
   have (U : Cᵒᵖ) : Epi ((rawTensorQuotient J R M N).app U) := by
     rw [AddCommGrpCat.epi_iff_surjective]
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero _⟩
+    induction z using TensorProduct.inductionOn with
     | tmul m n => exact ⟨m ⊗ₜ[ℤ] n, rfl⟩
     | add z w hz hw =>
       obtain ⟨z', hz'⟩ := hz
@@ -476,8 +473,7 @@ private noncomputable def comparison_presheafTensorIso (M N : IM) :
     intro U V f
     apply ModuleCat.hom_ext
     ext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul x y => rfl
     | add x y hx hy => simp only [map_add, hx, hy])
 

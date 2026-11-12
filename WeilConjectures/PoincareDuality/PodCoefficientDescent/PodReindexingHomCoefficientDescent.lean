@@ -152,8 +152,7 @@ private theorem localizedLinearEquiv_existsUnique
   · intro e he
     apply LinearEquiv.ext
     intro q
-    induction q using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction q using TensorProduct.inductionOn with
     | tmul a f => exact eq_of_heq (he f a _ HEq.rfl)
     | add q q' hq hq' => simp only [map_add, hq, hq']
 
@@ -579,7 +578,7 @@ theorem integral_comparison_existsUnique
       rw [← H.map_comp, ← H.map_comp]
       congr 1
       ext
-      · exact congrArg Quiver.Hom.op hM'.symm
+      · exact hM'.symm
       · exact hN)
   refine ⟨α, hn, ?_⟩
   intro β hβ
@@ -1212,6 +1211,8 @@ variable (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
   {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The recorded common-stage pullback in its literally specified object coordinates.
 Only equality transport is used, preserving the prescribed representative maps.
@@ -1275,8 +1276,6 @@ def commonEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField
   (common_evaluation_existsUnique l Ω W P).exists.choose
 
 section CommonPairProof
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 private theorem stageIntegralObject (W : Scheme.{u})
     (P : generalAlgebraicallyClosedConstructibleCategory l Ω W)

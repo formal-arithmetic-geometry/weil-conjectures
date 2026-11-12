@@ -50,7 +50,7 @@ private theorem finite_counit_epi {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
         (s ≫ f) ⟨s, rfl⟩ F) := by
       have he : (Etale.stalkIsoPi (ModuleCat.{u + 1} Λ) f (s ≫ f) F).hom ≫
           CategoryTheory.Limits.Pi.π D ⟨s, rfl⟩ = _ :=
-        CategoryTheory.Limits.Pi.lift_π _ _
+        CategoryTheory.Limits.Pi.lift_comp_π _ _
       rw [← he]
       infer_instance
     exact epi_of_epi_fac
@@ -179,7 +179,7 @@ theorem IsCurve.finite_pushforward_coefficient_control {k : Type u} [Field k] [I
           (e.hom ≫ CategoryTheory.Limits.Pi.π M t.as) z
         dsimp only [e]
         rw [Etale.stalkIsoPi_hom]
-        erw [CategoryTheory.Limits.Pi.lift_π]
+        erw [CategoryTheory.Limits.Pi.lift_comp_π]
         exact congrFun hxz t.as
       intro x
       apply hφ.isOfFinAddOrder_iff.mp

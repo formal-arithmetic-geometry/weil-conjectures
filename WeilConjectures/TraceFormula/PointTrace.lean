@@ -396,14 +396,23 @@ lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
     trace (gradedHomHom ℓ k (shiftedUnitEquiv ℓ k m c)) =
       (m.negOnePow : ℤ) • pointScalar ℓ k c := by
   rw [gradedHomHom_shiftedUnitEquiv]
-  have := (DerivedCategory.singleFunctor (PointMod ℓ k) 0).map_preimage (pointScalar ℓ k c)
+  let e : 𝟙_ (DerivedCategory (PointMod ℓ k)) ≅
+      (DerivedCategory.singleFunctor (PointMod ℓ k) 0).obj (𝟙_ _) :=
+    (DerivedCategory.quotientCompQhIso (PointMod ℓ k)).app (𝟙_ (CochainComplex (PointMod ℓ k) ℤ))
+  let r := (DerivedCategory.singleFunctor (PointMod ℓ k) 0).preimage
+    (e.inv ≫ pointScalar ℓ k c ≫ e.hom)
+  have hr : (DerivedCategory.singleFunctor (PointMod ℓ k) 0).map r =
+      e.inv ≫ pointScalar ℓ k c ≫ e.hom := Functor.map_preimage _ _
   let hd : HasRightDual ((shiftFunctor (DerivedCategory (PointMod ℓ k)) m).obj
       ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).obj (𝟙_ _))) :=
-    shiftedUnitHasRightDual ℓ k m
-  have h := DerivedCategory.trace_shiftFunctor_map_singleFunctor_map m
-    ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).preimage (pointScalar ℓ k c))
-  rw [this] at h
-  exact h
+    hasRightDualOfIso ((shiftFunctor _ m).mapIso e.symm)
+  rw [trace_eq_of_iso ((shiftFunctor _ m).mapIso e) _
+    ((shiftFunctor _ m).map ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).map r))
+    (by simp only [Functor.mapIso_hom, ← Functor.map_comp, hr, Iso.hom_inv_id_assoc])]
+  rw [DerivedCategory.trace_shiftFunctor_map_singleFunctor_map, hr]
+  change e.hom ≫ ((m.negOnePow : ℤ) • (e.inv ≫ pointScalar ℓ k c ≫ e.hom)) ≫ e.inv = _
+  simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp, Category.assoc,
+    Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- the instances on the ambient derived category of modules are found through long searches
@@ -427,7 +436,7 @@ theorem trace_eq_pointScalar_sum {Y : DerivedCategory (PointMod ℓ k)} [HasRigh
     trace_gradedHomHom_shiftedUnitEquiv, linearMapTrace_gradedHom_map_shiftedUnitEquiv,
     Finset.smul_sum, smul_ite, smul_zero]
   rw [Finset.sum_comm]
-  simp only [Finset.sum_ite_eq', hs, if_true]
+  simp only [Finset.sum_ite_eq', hs, ite_true]
   rw [map_sum]
   simp only [map_zsmul]
 

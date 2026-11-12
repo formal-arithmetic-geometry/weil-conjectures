@@ -362,7 +362,8 @@ private theorem flat_relations
       (siteTensorPresheaf P M.val).map f.op 0 at hf
     simpa only [map_zero] using hf
   have hlocal : ∑ i, coeffGenerator A.obj n (op V)
-      ⟨fun i ↦ A.obj.map f.op (a i)⟩ i ⊗ₜ[A.obj.obj (op V)] M.val.map f.op (s i) = 0 := by
+      ⟨fun i ↦ A.obj.map f.op (a i)⟩ i ⊗ₜ[A.obj.obj (op V)]
+        (show M.val.obj (op V) from M.val.map f.op (s i)) = 0 := by
     convert hx using 1
     dsimp only [x]
     rw [map_sum]

@@ -46,30 +46,16 @@ private theorem singleComparison (X : C) :
           ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app X) := by
   dsimp [mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ]
   simp only [Functor.map_id, Category.id_comp, Category.comp_id]
-  rfl
 private theorem derivedCompSingle (X : C) :
-    (mapDerivedCategoryCompIso F G).hom.app
+    (mapDerivedCategoryCompIso F G).inv.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
         (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
       ((F ⋙ G).mapDerivedCategorySingleFunctor 0).hom.app X := by
-  rw [singleComparison F, singleComparison G, singleComparison (F ⋙ G)]
-  simp only [Functor.map_comp, Category.assoc]
-  erw [G.mapDerivedCategoryFactors_hom_naturality_assoc]
-  have hfac := mapDerivedCategoryCompIso_fac F G
-    ((HomologicalComplex.single C (.up ℤ) 0).obj X)
-  have hid : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
-      (ComplexShape.up ℤ)).hom.app ((HomologicalComplex.single C (.up ℤ) 0).obj X) = 𝟙 _ := rfl
-  erw [hid, Functor.map_id, Category.comp_id] at hfac
-  erw [reassoc_of% hfac]
-  simp only [← Functor.map_comp]
-  congr 2
-  ext i
-  by_cases h : i = 0
-  · subst i
-    simp [HomologicalComplex.singleMapHomologicalComplex]
-    rfl
-  · simp [HomologicalComplex.singleMapHomologicalComplex, h]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).hom.app _),
+    Iso.hom_inv_id_app_assoc]
+  exact (F.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app
+    G X 0).symm
 variable (H : C ⥤ D) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
 omit [HasDerivedCategory C] [HasDerivedCategory D]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -111,8 +97,8 @@ private theorem derivedTripleNatSingle
     (M : C ⥤ B) [M.Additive] [PreservesFiniteLimits M] [PreservesFiniteColimits M]
     (e : F ⋙ G ⋙ K ≅ M) (X : C) :
     let ρ := Functor.isoWhiskerLeft F.mapDerivedCategory
-        (Functor.mapDerivedCategoryCompIso G K).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso G K) ≪≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)) ≪≫
         Functor.mapDerivedCategoryNatIso e
     ρ.hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
         (M.mapDerivedCategorySingleFunctor 0).hom.app X =
@@ -122,17 +108,17 @@ private theorem derivedTripleNatSingle
         (K.mapDerivedCategorySingleFunctor 0).hom.app (G.obj (F.obj X)) ≫
           (DerivedCategory.singleFunctor B 0).map (e.hom.app X) := by
   dsimp only
-  change ((Functor.mapDerivedCategoryCompIso G K).inv.app _ ≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).inv.app _ ≫
+  change ((Functor.mapDerivedCategoryCompIso G K).hom.app _ ≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ K)).hom.app _ ≫
         (Functor.mapDerivedCategoryNatIso e).hom.app _) ≫ _ = _
   simp only [Category.assoc]
   rw [derivedNatSingle (F ⋙ G ⋙ K) M e X]
   rw [← derivedCompSingle F (G ⋙ K) X]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  erw [← (Functor.mapDerivedCategoryCompIso G K).inv.naturality_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  erw [← (Functor.mapDerivedCategoryCompIso G K).hom.naturality_assoc]
   rw [← derivedCompSingle G K (F.obj X)]
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory.Functor
 
@@ -290,8 +276,8 @@ private theorem universal_single_transport
           (V.mapDerivedCategorySingleFunctor 0).inv.app H ≫ V.mapDerivedCategory.map f) := by
   let ρ : E.mapDerivedCategory ⋙ U.mapDerivedCategory ⋙ TZ.mapDerivedCategory ≅
       V.mapDerivedCategory :=
-    Functor.isoWhiskerLeft E.mapDerivedCategory (Functor.mapDerivedCategoryCompIso U TZ).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso E (U ⋙ TZ)).symm ≪≫
+    Functor.isoWhiskerLeft E.mapDerivedCategory (Functor.mapDerivedCategoryCompIso U TZ) ≪≫
+      (Functor.mapDerivedCategoryCompIso E (U ⋙ TZ)) ≪≫
         Functor.mapDerivedCategoryNatIso ρ₀
   let sZ := DerivedCategory.singleFunctor B 0
   let sR := DerivedCategory.singleFunctor A 0

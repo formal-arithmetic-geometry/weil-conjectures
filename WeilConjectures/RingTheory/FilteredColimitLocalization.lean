@@ -145,7 +145,7 @@ theorem isDomain_and_isIntegrallyClosed_of_isColimit (hc : IsColimit c)
     intro n
     by_cases hn : n ∈ P.support
     · exact hj _ (by simp [Finset.mem_image_of_mem P.coeff hn])
-    · exact ⟨0, by rw [map_zero, notMem_support_iff.mp hn]⟩
+    · exact ⟨0, by rw [map_zero]; exact (notMem_support_iff.mp hn).symm⟩
   obtain ⟨Q, hQ, -, hQm⟩ := lifts_and_natDegree_eq_and_monic hlift hP
   have h1 : (c.ι.app j).hom Q.leadingCoeff ≠ 0 := by
     rw [hQm.leadingCoeff]

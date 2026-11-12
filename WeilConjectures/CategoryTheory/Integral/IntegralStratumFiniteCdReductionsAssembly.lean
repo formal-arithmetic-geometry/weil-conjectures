@@ -123,6 +123,6 @@ theorem integralStratumFiniteCdReductions_assembly
       ((preadditiveCoyoneda.obj (op R)).rightDerivedFunctor.obj (H.obj (K⟦r⟧)))) := by
     simpa only [CondensedRing.stratumModuleDerivedSections, R, H, P] using hz
   exact subsingleton_hom_of_internal_sections R
-    (DerivedCategory.singleFunctorObjUnitIso _).symm P (K⟦r⟧) H hadj hzH
+    (DerivedCategory.singleFunctorObjUnitIso _) P (K⟦r⟧) H hadj hzH
 
 end CategoryTheory

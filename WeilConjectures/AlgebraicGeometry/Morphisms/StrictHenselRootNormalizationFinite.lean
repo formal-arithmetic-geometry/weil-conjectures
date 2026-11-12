@@ -212,7 +212,7 @@ theorem GaloisCover.strict_hensel_root_normalization_finite
     intro M hM
     have : M.IsMaximal := hM
     have hMH : (M.comap (algebraMap H A)).IsMaximal :=
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal M
     have hgM : algebraMap H A g ∈ M := by
       change g ∈ M.comap (algebraMap H A)
       rw [IsLocalRing.eq_maximalIdeal hMH]

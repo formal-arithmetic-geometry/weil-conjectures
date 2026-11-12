@@ -86,11 +86,11 @@ private theorem raw_unit_comp
       (G.mapDerivedCategorySingleFunctor 0).inv.app L) ≫
       G.mapDerivedCategory.map ((DerivedCategory.singleFunctor W 0).map g ≫
         (F.mapDerivedCategorySingleFunctor 0).inv.app M) ≫
-      ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso e).hom.app
           ((DerivedCategory.singleFunctor V 0).obj M) := by
   have ht := SheafExactDegreeZero.unit_comp F G H e
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e) rfl f g h hh
   unfold SheafExactDegreeZero.unit SheafExactDegreeZero.map
     SheafExactDegreeZero.comparison SheafExactDegreeZero.functor SheafExactDegreeZero.obj at ht
@@ -119,7 +119,7 @@ theorem adjointInsertion_comp
     (hζ : ζ = η ≫ R.map θ ≫ e.hom.app H) :
     M.map (adjointInsertion R a η) ≫ adjointInsertion S b θ =
       (Adjunction.leftAdjointCompIso a b c
-        ((Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso S R ≪≫
           Functor.mapDerivedCategoryNatIso e)).hom.app
             ((DerivedCategory.singleFunctor V 0).obj F) ≫ adjointInsertion T c ζ := by
   unfold adjointInsertion

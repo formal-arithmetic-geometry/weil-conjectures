@@ -57,7 +57,7 @@ private theorem affine_dimension_bound {X Y : Scheme.{u}} [IsAffine X] [IsAffine
   refine ⟨d + n, ?_⟩
   rw [heq]
   refine (ringKrullDim_le_of_surjective q.toRingHom hq).trans ?_
-  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing]
+  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite]
   calc
     ringKrullDim Γ(Y, ⊤) + (Nat.card (Fin n) : WithBot ℕ∞) ≤
         (d : WithBot ℕ∞) + n := by simpa [add_comm] using add_le_add_right hd n

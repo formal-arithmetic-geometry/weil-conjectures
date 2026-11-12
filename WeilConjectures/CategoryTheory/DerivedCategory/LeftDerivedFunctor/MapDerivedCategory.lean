@@ -199,7 +199,7 @@ functors between abelian categories with functorial flat resolutions, obtained f
 noncomputable def leftDerivedFunctorCompIso (G : D ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).leftDerivedFunctor ≅ F.leftDerivedFunctor ⋙ G.leftDerivedFunctor :=
-  (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory ≪≫ mapDerivedCategoryCompIso F G ≪≫
+  (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory ≪≫ (mapDerivedCategoryCompIso F G).symm ≪≫
     isoWhiskerRight F.leftDerivedFunctorIsoMapDerivedCategory.symm G.mapDerivedCategory ≪≫
     isoWhiskerLeft F.leftDerivedFunctor G.leftDerivedFunctorIsoMapDerivedCategory.symm
 
@@ -239,7 +239,8 @@ instance isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor :
       ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
         ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) :=
     G.isIso_leftDerivedFunctorCounit_app_of_kFlat _ (F.kFlat_mapHomologicalComplex_obj K hK)
-  dsimp [leftDerivedFunctorCompMapDerivedCategoryCounit]
+  dsimp only [leftDerivedFunctorCompMapDerivedCategoryCounit, NatTrans.comp_app,
+    whiskerRight_app, whiskerLeft_app]
   infer_instance
 
 /-- **Composition with an exact functor preserving K-flat complexes**: for an exact functor

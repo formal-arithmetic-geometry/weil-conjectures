@@ -14,6 +14,7 @@ import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Detecting zero direct-image cohomology on the affine basis
 

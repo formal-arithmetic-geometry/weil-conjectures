@@ -12,6 +12,8 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtension
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeIntoPullback
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Explicit coordinates for affine base-change cohomology
 
@@ -47,7 +49,10 @@ theorem tilde_preservesHomology (A : Type u) [CommRing A] :
         (tilde.functor (.of A))).PreservesHomology := by
   let T : ModuleCat.{u} A ⥤ SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
   have adj : T ⊣ moduleSpecΓFunctor (R := .of A) := tilde.adjunction
   let : T.IsLeftAdjoint := adj.isLeftAdjoint
   let : PreservesFiniteColimits T := inferInstance
@@ -100,8 +105,14 @@ def affineBaseChangeTildeCohomologyIso
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
   let TB : ModuleCat.{u} A' ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) := tilde.functor (.of A')
-  let : TA.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : TA.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
+  let : TB.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A') f g
   let : TA.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   let : TB.PreservesHomology := tilde_preservesHomology A'
@@ -124,8 +135,12 @@ def affineBaseChangeTildeCohomologyIso
   let eC : DerivedCategory.Q.obj ((TB.mapHomologicalComplex (.up ℤ)).obj C) ≅
       (derivedPullback f).obj K :=
     (DerivedCategory.Q.mapIso δ).symm ≪≫
+      ((DerivedCategory.quotientCompQhIso _).app
+        ((E.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
+      DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).symm.app P) ≪≫
       (asIso ((SingleComplexBaseChange.counit f).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).symm ≪≫
+      (derivedPullback f).mapIso ((DerivedCategory.quotientCompQhIso _).app P) ≪≫
       (derivedPullback f).mapIso e
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i

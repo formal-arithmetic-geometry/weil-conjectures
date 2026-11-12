@@ -18,7 +18,7 @@ namespace AlgebraicGeometry.Etale.ExceptionalCoefficients
 
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
-  Functor.mapDerivedCategoryFactorsh Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryFactorsh
   Functor.mapDerivedCategoryNatIso
 
 private theorem normalized_left_unit

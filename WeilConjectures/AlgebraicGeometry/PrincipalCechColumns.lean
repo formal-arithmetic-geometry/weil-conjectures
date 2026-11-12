@@ -94,7 +94,7 @@ def principalCechHorizontal (p : ℤ) :
     apply Limits.Pi.hom_ext
     intro S
     simp only [principalCechColumnFunctor, Category.assoc, Limits.Pi.map_π,
-      Limits.Pi.lift_π_assoc, Limits.Pi.lift_π, Preadditive.comp_sum,
+      Limits.Pi.lift_comp_π_assoc, Limits.Pi.lift_comp_π, Preadditive.comp_sum,
       Preadditive.sum_comp]
     apply Finset.sum_congr rfl
     intro j hj

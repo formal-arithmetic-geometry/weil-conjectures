@@ -180,7 +180,7 @@ theorem cechFirstSortingNonjunctionCancellation (X : Scheme.{u}) {I : Type v} [L
     apply Finset.sum_congr rfl
     intro τ _
     by_cases h : cechStableSort (t ∘ j.succAbove) σ ∧ cechPartialSort σ τ b
-    · simp only [h, and_self, if_true, map_zsmul, smul_smul]
+    · simp only [h, and_self, ite_true, map_zsmul, smul_smul]
       rw [sortingRestriction_comp X U F S]
     · simp [h]
   have hn : (∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),

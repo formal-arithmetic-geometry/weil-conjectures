@@ -139,7 +139,7 @@ theorem etale_chart_residue_triples_functor_construction
     let N := P.FullSubcategory
     let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom
     let NU := Q.FullSubcategory
-    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+    let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
       Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
     let DU := Q.ι.op ⋙ D
     let T := EtaleResidueTriples A p K χ
@@ -172,7 +172,7 @@ theorem etale_chart_residue_triples_functor_construction
   let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A,
     g ≫ i = c.obj.1.hom
   let NU := Q.FullSubcategory
-  let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+  let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
     Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
   let DU := Q.ι.op ⋙ D
   let T := EtaleResidueTriples A p K χ
@@ -234,31 +234,31 @@ theorem etale_chart_residue_triples_functor_construction
       simpa only [Spec.map_comp, Category.assoc] using hp
     rw [hp', ← Category.assoc, hy]
   have chart_map {c d : NU} (f : c ⟶ d) :
-      f.hom.hom.val.left ≫ g d = g c := by
+      f.hom.hom.hom.left ≫ g d = g c := by
     apply (cancel_mono i).mp
     rw [Category.assoc, hg, hg]
-    exact f.hom.hom.val.w
+    exact f.hom.hom.hom.w
   have point_map {c d : NU} (f : c ⟶ d) :
-      c.obj.obj.2.left ≫ f.hom.hom.val.left = d.obj.obj.2.left := by
-    have hf := f.hom.hom.property
+      c.obj.obj.2.left ≫ f.hom.hom.hom.left = d.obj.obj.2.left := by
+    have hf := f.hom.hom.map_val
     exact congrArg Over.Hom.left hf
   have alpha_map {c d : NU} (f : c ⟶ d) :
-      α d ≫ f.hom.hom.val.left.appTop = α c := by
+      α d ≫ f.hom.hom.hom.left.appTop = α c := by
     dsimp only [α]
     rw [Category.assoc, ← Hom.comp_appTop, chart_map]
   have residue_map {c d : NU} (f : c ⟶ d) :
-      f.hom.hom.val.left.appTop ≫
+      f.hom.hom.hom.left.appTop ≫
         ((ΓSpecIso (t c).B).inv ≫ (Spec (t c).B).Γevaluation (t c).q ≫ (t c).φ) =
       (ΓSpecIso (t d).B).inv ≫ (Spec (t d).B).Γevaluation (t d).q ≫ (t d).φ := by
     apply Spec.map_injective
     apply affine_point_cancel (CommRingCat.ofHom K.subtype) (t d).B
     rw [Spec.map_comp, ← Category.assoc, ← point_formula,
-      Category.assoc, ← toSpecΓ_naturality f.hom.hom.val.left, ← Category.assoc,
+      Category.assoc, ← toSpecΓ_naturality f.hom.hom.hom.left, ← Category.assoc,
       point_map, point_formula]
   let H : NUᵒᵖ ⥤ T :=
     { obj := fun c ↦ t c.unop
       map := fun f ↦ InducedCategory.homMk
-        (Under.homMk (Over.homMk f.unop.hom.hom.val.left.appTop (residue_map f.unop))
+        (Under.homMk (Over.homMk f.unop.hom.hom.hom.left.appTop (residue_map f.unop))
           (by
             apply Over.OverMorphism.ext
             exact alpha_map f.unop))

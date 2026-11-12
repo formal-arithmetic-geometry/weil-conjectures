@@ -52,12 +52,12 @@ isomorphism on bounded below complexes of injectives, which is all that
 `HomotopyCategory.Plus.localizerMorphism_derives` asks for. -/
 instance isRightDerivedFunctor_rightDerivedFunctorPlus_comp_right :
     (F.rightDerivedFunctorPlus ⋙ G).IsRightDerivedFunctor
-      (Functor.whiskerRight F.rightDerivedFunctorPlusUnit G ≫ (Functor.associator _ _ _).hom)
+      (Functor.whiskerRight F.rightDerivedFunctorPlusUnith G ≫ (Functor.associator _ _ _).hom)
       (HomotopyCategory.Plus.quasiIso C) := by
   refine (HomotopyCategory.Plus.localizerMorphism_derives
     ((F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh) ⋙ G)).isRightDerivedFunctor_of_isIso _
     (fun X₁ => ?_)
-  have : IsIso (F.rightDerivedFunctorPlusUnit.app
+  have : IsIso (F.rightDerivedFunctorPlusUnith.app
     ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj X₁)) := inferInstance
   dsimp
   infer_instance
@@ -87,12 +87,12 @@ and right derived functors are unique up to canonical isomorphism. -/
 noncomputable def rightDerivedFunctorPlusIsoMapDerivedCategoryPlus :
     F.rightDerivedFunctorPlus ≅ F.mapDerivedCategoryPlus :=
   rightDerivedUnique F.rightDerivedFunctorPlus F.mapDerivedCategoryPlus
-    F.rightDerivedFunctorPlusUnit F.mapDerivedCategoryPlusFactorsh.inv
+    F.rightDerivedFunctorPlusUnith F.mapDerivedCategoryPlusFactorsh.inv
     (HomotopyCategory.Plus.quasiIso C)
 
 @[reassoc (attr := simp)]
 lemma rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac :
-    F.rightDerivedFunctorPlusUnit ≫
+    F.rightDerivedFunctorPlusUnith ≫
         Functor.whiskerLeft DerivedCategory.Plus.Qh
           F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom =
       F.mapDerivedCategoryPlusFactorsh.inv := by
@@ -101,8 +101,8 @@ lemma rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac :
 /-- The unit of the bounded below right derived functor of an *exact* functor is an
 isomorphism everywhere: the right derived functor is computed by applying the functor
 levelwise, with no resolution needed. -/
-instance isIso_rightDerivedFunctorPlusUnit : IsIso F.rightDerivedFunctorPlusUnit := by
-  have : IsIso (F.rightDerivedFunctorPlusUnit ≫
+instance isIso_rightDerivedFunctorPlusUnit : IsIso F.rightDerivedFunctorPlusUnith := by
+  have : IsIso (F.rightDerivedFunctorPlusUnith ≫
       Functor.whiskerLeft DerivedCategory.Plus.Qh
         F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom) := by
     rw [F.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac]

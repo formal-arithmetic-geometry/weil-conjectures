@@ -81,8 +81,7 @@ lemma Equiv.tprodEquivLinHomOfDual_map [FiniteDimensional k V] [FiniteDimensiona
     (γ : V₂' →ₗ[k] V') (h : ∀ d v, b (γ d) v = b₂ d (α v)) (x : TensorProduct k V W) :
     Equiv.tprodEquivLinHomOfDual (σ := σ₂) b₂ (TensorProduct.map α β x) =
       β ∘ₗ Equiv.tprodEquivLinHomOfDual (σ := σ) b x ∘ₗ γ := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul v w =>
     ext d
     simp only [TensorProduct.map_tmul, LinearMap.comp_apply, tprodEquivLinHomOfDual_tmul, h,

@@ -194,7 +194,7 @@ theorem bounded_epimorphic_top_derivedLimit
       intro n
       rw [Category.assoc, piComparison_comp_π, ← Functor.map_comp]
       simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-        Category.id_comp, Pi.lift_π,
+        Category.id_comp, Pi.lift_comp_π,
         Preadditive.comp_sub, Category.assoc, piComparison_comp_π,
         piComparison_comp_π_assoc]
       rw [Functor.map_sub, Functor.map_comp]

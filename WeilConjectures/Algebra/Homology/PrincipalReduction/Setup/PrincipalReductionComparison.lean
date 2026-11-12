@@ -152,7 +152,7 @@ theorem comparison [IsDomain R] (ht : D.t ≠ 0) :
   apply (cancel_mono (H.map (e Y).inv)).1
   dsimp only [F, H, Functor.comp_obj] at *
   simpa only [Functor.map_comp, Functor.map_inv, Category.assoc,
-    Iso.map_hom_inv_id_assoc, Iso.map_hom_inv_id, Functor.comp_obj,
+    Iso.hom_inv_id_map_assoc, Iso.hom_inv_id_map, Functor.comp_obj,
     Category.comp_id]
     using hn.symm
 

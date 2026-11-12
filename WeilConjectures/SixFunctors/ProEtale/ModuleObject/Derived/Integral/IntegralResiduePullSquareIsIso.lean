@@ -18,7 +18,8 @@ universe u v
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResiduePullSquareIsIso
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 private theorem exists_flat_colimit_model
     {C : Type*} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -56,7 +57,8 @@ theorem integralResidue_pullSquare_isIso :
       exists_flat_colimit_model (DerivedCategory.Q.objPreimage K)
     let H := (HomotopyCategory.quotient _ (.up ℤ)).obj P
     let eP : DerivedCategory.Qh.obj H ≅ K :=
-      asIso (DerivedCategory.Q.map π) ≪≫ DerivedCategory.Q.objObjPreimageIso K
+      (DerivedCategory.quotientCompQhIso _).app P ≪≫
+        asIso (DerivedCategory.Q.map π) ≪≫ DerivedCategory.Q.objObjPreimageIso K
     obtain ⟨hX, heq⟩ := residueExchangePull_flatModel ℓ E f P hP hcolim
     have hY : IsIso ((residueExchangeReductionCounit ℓ E Y).app H) := by
       unfold residueExchangeReductionCounit

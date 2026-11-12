@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.PQFCohomology
@@ -14,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps
 import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealImageBound
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Cohomology reductions: KernelBound
 Source: Stacks Project, Lemma 02OB. -/

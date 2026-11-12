@@ -64,7 +64,7 @@ lemma IsLocalHom.of_comp_of_isIntegral {A B K : Type*} [CommRing A] [CommRing B]
     · by_contra h
       exact ha (isUnit_of_map_unit (ψ.comp f) a (isUnit_iff_ne_zero.2 h))
   have : (RingHom.ker ψ).IsMaximal :=
-    Ideal.isMaximal_of_isIntegral_of_isMaximal_comap' f hf _ (hker ▸ inferInstance)
+    Ideal.isMaximal_of_isIntegral_of_isMaximal_comap f hf _ (hker ▸ inferInstance)
   have hm : RingHom.ker ψ = IsLocalRing.maximalIdeal B := IsLocalRing.eq_maximalIdeal this
   refine ⟨fun a ha ↦ ?_⟩
   by_contra h

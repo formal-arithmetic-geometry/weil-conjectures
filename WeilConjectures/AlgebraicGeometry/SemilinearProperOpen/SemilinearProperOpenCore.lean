@@ -152,7 +152,7 @@ section ProofEnvironment
 -- Compare the canonical constructions through their APIs, without unfolding their data.
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors
 
 section CategoricalProof
@@ -571,13 +571,13 @@ private theorem derived_square_conjugate (a : G' ≅ G) (b : G ⋙ l ≅ L ⋙ H
   simp only [Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
   have h := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a l
-  have h' : (Functor.mapDerivedCategoryCompIso G' l).inv ≫
+  have h' : (Functor.mapDerivedCategoryCompIso G' l).hom ≫
       (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight a l)).hom =
       Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a).hom l.mapDerivedCategory ≫
-        (Functor.mapDerivedCategoryCompIso G l).inv := by
-    apply (cancel_mono (Functor.mapDerivedCategoryCompIso G l).hom).mp
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    rw [h, Iso.inv_hom_id_assoc]
+        (Functor.mapDerivedCategoryCompIso G l).hom := by
+    apply (cancel_mono (Functor.mapDerivedCategoryCompIso G l).inv).mp
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    rw [h, Iso.hom_inv_id_assoc]
   rw [reassoc_of% h']
 
 private theorem derived_iso_symm_inv (a : G' ≅ G) :
@@ -608,7 +608,7 @@ variable {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
 
 private theorem derived_constant_square_comp (e : L ⋙ G ≅ F ⋙ l) :
     Functor.whiskerRight (Functor.mapDerivedCategoryNatIso (Iso.refl (F ⋙ Functor.const ℕᵒᵖ)) ≪≫
-          Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).hom
+          (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm).hom
         ((Functor.whiskeringRight ℕᵒᵖ E D).obj l).mapDerivedCategory ≫
       ((TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e.symm).hom).hComp
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
@@ -616,7 +616,7 @@ private theorem derived_constant_square_comp (e : L ⋙ G ≅ F ⋙ l) :
     (Functor.mapDerivedCategorySquareIso (constant_diagram_square L G F l e).symm).hom ≫
       Functor.whiskerLeft L.mapDerivedCategory
         (Functor.mapDerivedCategoryNatIso (Iso.refl (G ⋙ Functor.const ℕᵒᵖ)) ≪≫
-          Functor.mapDerivedCategoryCompIso G (Functor.const ℕᵒᵖ)).hom := by
+          (Functor.mapDerivedCategoryCompIso G (Functor.const ℕᵒᵖ)).symm).hom := by
   have h := Functor.mapDerivedCategorySquareIso_comp
     F (Functor.const ℕᵒᵖ) (F ⋙ Functor.const ℕᵒᵖ)
     G (Functor.const ℕᵒᵖ) (G ⋙ Functor.const ℕᵒᵖ)
@@ -641,13 +641,13 @@ private theorem derived_constant_square_comp (e : L ⋙ G ≅ F ⋙ l) :
 private theorem derived_constant_square_inverse (e : L ⋙ G ≅ F ⋙ l) :
     Functor.whiskerLeft L.mapDerivedCategory
         (Functor.mapDerivedCategoryNatIso (Iso.refl (G ⋙ Functor.const ℕᵒᵖ)) ≪≫
-          Functor.mapDerivedCategoryCompIso G (Functor.const ℕᵒᵖ)).hom ≫
+          (Functor.mapDerivedCategoryCompIso G (Functor.const ℕᵒᵖ)).symm).hom ≫
       ((TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).hom).vComp
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
           (Functor.compConstIso ℕᵒᵖ l)).hom)).natTrans =
     (Functor.mapDerivedCategorySquareIso (constant_diagram_square L G F l e)).hom ≫
       Functor.whiskerRight (Functor.mapDerivedCategoryNatIso (Iso.refl (F ⋙ Functor.const ℕᵒᵖ)) ≪≫
-          Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).hom
+          (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm).hom
         ((Functor.whiskeringRight ℕᵒᵖ E D).obj l).mapDerivedCategory := by
   apply NatTrans.ext
   funext K
@@ -937,7 +937,7 @@ Source: Zheng 4.10; Stacks 07A7 (blueprint: lem-sf-semilinear-proper-open-mate-p
 def pComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     P C τ (f ≫ g) ≅ P C τ g ⋙ P C τ f :=
   Functor.mapDerivedCategoryNatIso (pullComp C τ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (pull C τ g) (pull C τ f)
+    (Functor.mapDerivedCategoryCompIso (pull C τ g) (pull C τ f)).symm
 
 /-- Direct-image composition is precisely the mate of inverse-image composition.
 Source: Stacks 07A7 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -1151,7 +1151,7 @@ theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     chosen_unit_isIso_congr (pull C τ j) (VaryingRing.pull C τ j)
       (pull_eq C τ j) (VaryingRing.moduleJAdj_unit_isIso C τ j)
   have hf := (jAdj C τ j).fullyFaithfulLOfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso (extension C τ j) (pull C τ j)).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (extension C τ j) (pull C τ j) ≪≫
       Functor.mapDerivedCategoryNatIso (asIso (ordinaryOpenAdj C τ j).unit).symm ≪≫
         Functor.mapDerivedCategoryIdIso _)
   have := hf.full

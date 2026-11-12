@@ -16,6 +16,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex
 import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeCriterion
 import WeilConjectures.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison
@@ -157,10 +159,18 @@ theorem relativelyFlat_derivedBaseChange_complex
         pullback.condition (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫
       (schemeDerivedDirectImage (pullback.snd f g)).map
-        ((SingleComplexBaseChange.counit (pullback.fst f g)).app
+        (cast (by rfl) ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
+            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))) :
+          (derivedPullback (pullback.fst f g)).obj
+              (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G
+                (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ⟶
+            DerivedCategory.Q.obj
+              (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex
+                (.up ℤ)).obj (CochainComplex.mapBifunctor P G
+                  (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
   classical
+  simp only [cast_eq]
   let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
     IsPullback.of_hasPullback f g
   obtain ⟨τ, hτ⟩ := exists_canonicalPullbackTensorComparison (pullback.fst f g)
@@ -200,7 +210,7 @@ theorem relativelyFlat_derivedBaseChange_complex
             ((HomotopyCategory.quotient _ (.up ℤ)).obj G) := by
     simp only [a, b, Iso.trans_hom, tensorIso_hom, Iso.symm_hom, Iso.refl_hom,
       Functor.mapIso_hom, Functor.map_comp, Category.assoc]
-    rw [reassoc_of% hab₀]
+    erw [reassoc_of% hab₀]
     rw [reassoc_of% (hτ.2 E (DerivedCategory.Q.obj P)
       (DerivedCategory.Q.obj G) (DerivedCategory.Q.obj G) e.inv (𝟙 _))]
     simp only [CategoryTheory.Functor.map_id]
@@ -208,7 +218,7 @@ theorem relativelyFlat_derivedBaseChange_complex
       (tensor_cancel_iso ((derivedPullback (pullback.fst f g)).mapIso e)
         ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))
-  rw [← hab, Functor.map_comp, Functor.map_comp] at hi
+  erw [← hab] at hi
   have := hi
   have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
       (pullback.fst f g) pullback.condition (E ⊗ DerivedCategory.Q.obj G) ≫
@@ -220,7 +230,7 @@ theorem relativelyFlat_derivedBaseChange_complex
             (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
     exact (isIso_comp_right_iff _
       ((schemeDerivedDirectImage (pullback.snd f g)).map b.hom)).mp
-        (by simpa only [Category.assoc] using hi)
+        (by simpa only [a, Iso.trans_hom, Functor.map_comp, Category.assoc] using hi)
   have hn := baseChange_naturality f (pullback.snd f g) g (pullback.fst f g)
     pullback.condition a.hom
   have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g

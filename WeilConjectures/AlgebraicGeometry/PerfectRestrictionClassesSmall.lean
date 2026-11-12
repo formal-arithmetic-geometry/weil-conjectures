@@ -31,7 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport a chosen localization along an exact equivalence of abelian categories.
 This is the localization construction in `SchemeIsoDerivedLocalizations`, specialized
 to the module-sheaf universe; its helper there is private. -/
-private theorem hasDerivedCategory_of_equivalence {C D : Type (u + 1)}
+private theorem hasDerivedCategory_of_equivalence_private {C D : Type (u + 1)}
     [Category.{u} C] [Category.{u} D] [Abelian C] [Abelian D]
     (e : C ≌ D) [HasDerivedCategory.{w} D] : Nonempty (HasDerivedCategory.{w} C) := by
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
@@ -154,7 +154,7 @@ theorem perfectRestriction_classes_small (X : Scheme.{u}) (W : X.Opens)
   let e : B ≌ C := Modules.overEquiv A
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
-  obtain ⟨hD⟩ := hasDerivedCategory_of_equivalence e.symm
+  obtain ⟨hD⟩ := hasDerivedCategory_of_equivalence_private e.symm
   let : HasDerivedCategory.{w} C := hD
   obtain ⟨hO⟩ := nonempty_derivedOpenLocalization A.toScheme
   let : ∀ V : A.toScheme.Opens, HasDerivedCategory.{w}
@@ -177,7 +177,7 @@ theorem perfectRestriction_classes_small (X : Scheme.{u}) (W : X.Opens)
         IsPerfect A.toScheme (d.functor.obj Z.obj) := by
     obtain ⟨E, hE, ⟨i⟩⟩ := Z.property
     let c : (R ⋙ e.functor).mapDerivedCategory.obj E.obj ≅ d.functor.obj Z.obj :=
-      (Functor.mapDerivedCategoryCompIso R e.functor).app E.obj ≪≫ d.functor.mapIso i
+      ((Functor.mapDerivedCategoryCompIso R e.functor).app E.obj).symm ≪≫ d.functor.mapIso i
     have hqc : schemeDerivedQCohProperty A.toScheme
         ((R ⋙ e.functor).mapDerivedCategory.obj E.obj) :=
       (schemeDerivedQCoh_openRestriction_iff Y A E.obj).2 (fun n ↦ by
@@ -198,5 +198,12 @@ theorem perfectRestriction_classes_small (X : Scheme.{u}) (W : X.Opens)
     (fun Z ↦ (hImage Z).1)
   let G := Q.lift F (fun Z ↦ (hImage Z).2)
   exact small_of_injective G.mapSkeleton_injective
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+/-- Public export of the private `hasDerivedCategory_of_equivalence_private` (used by `import all`
+importers; linter.privateModule). -/
+alias hasDerivedCategory_of_equivalence := hasDerivedCategory_of_equivalence_private
 
 end AlgebraicGeometry.Scheme

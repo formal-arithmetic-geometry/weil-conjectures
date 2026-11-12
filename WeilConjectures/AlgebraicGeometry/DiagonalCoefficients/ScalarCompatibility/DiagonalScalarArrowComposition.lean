@@ -84,7 +84,7 @@ abbrev compositeRestriction (_s : ScalarCompatibility a Y L₀ L₁ m d₀ d₁)
     (scalarAdjunction b (diagonalSurface Y))).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso
         (Mod.comap (coefficientMap b (diagonalSurface Y)))
-        (Mod.comap (coefficientMap a (diagonalSurface Y)))).symm
+        (Mod.comap (coefficientMap a (diagonalSurface Y))))
 
 /-- The supported endpoint for two successive scalar changes. -/
 def compositeSource :

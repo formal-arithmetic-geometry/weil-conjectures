@@ -14,6 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafC
 import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeRestrictionDirectImageMate
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 
 /-! # Ambient operation comparisons for finite scalar extension
 
@@ -899,12 +901,6 @@ theorem pbcScalarRestrictionPullback_app
             (pbcScalarCoefficientInverseSquare l E F i g)) (.up ℤ)).app K) := by
   let dE := pbcIntegralDatum l E
   let dF := pbcIntegralDatum l F
-  let resY := pbcRestrict (pbcScalarCoefficientMap l E F i Y)
-  let resX := pbcRestrict (pbcScalarCoefficientMap l E F i X)
-  let PE := proEtaleRingModulePullback g (pbcAdicCompletion Y dE) (pbcAdicCompletion X dE)
-    (pbcCompletedCoefficientIso g dE)
-  let PF := proEtaleRingModulePullback g (pbcAdicCompletion Y dF) (pbcAdicCompletion X dF)
-    (pbcCompletedCoefficientIso g dF)
   let pb := proEtaleRingRestrictionPullbackInv g
     (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF) (pbcAdicCompletion X dE)
     (pbcAdicCompletion X dF) (pbcScalarCoefficientMap l E F i Y)
@@ -915,25 +911,10 @@ theorem pbcScalarRestrictionPullback_app
     (pbcAdicCompletion X dF) (pbcScalarCoefficientMap l E F i Y)
     (pbcScalarCoefficientMap l E F i X) (pbcCompletedCoefficientIso g dE)
     (pbcCompletedCoefficientIso g dF) (pbcScalarCoefficientInverseSquare l E F i g)
-  let a := Functor.mapDerivedCategoryCompIso PF resX
-  let b := Functor.mapDerivedCategoryNatIso (asIso pb).symm
-  let c := Functor.mapDerivedCategoryCompIso resY PE
-  refine scalarRestrictionPullback_chase (c.inv.app _) (c.hom.app _) (b.inv.app _) (b.hom.app _)
-    (a.hom.app _) _ _ _ _ _ _ _ _ _ _ (c.inv_hom_id_app _) (b.inv_hom_id_app _)
-    (Functor.mapDerivedCategoryCompIso_fac PF resX K) ?_
-    (Functor.mapDerivedCategoryCompIso_fac resY PE K) ?_
-    (Functor.mapDerivedCategoryNatIso_fac (asIso pb).symm K) ?_
-  all_goals first
-    | (refine (DerivedCategory.Q.map_comp _ _).symm.trans ?_
-       rw [← NatTrans.comp_app, ← NatTrans.mapHomologicalComplex_comp]
-       simp)
-    | (rw [← CategoryTheory.Functor.map_id]
-       congr 1
-       ext n : 1
-       simp [Functor.mapHomologicalComplexCompIso])
-    | (rw [← CategoryTheory.Functor.map_id]
-       congr 1)
-  all_goals rfl
+  change (Functor.mapDerivedCategorySquareIso (asIso pb).symm).inv.app
+    (DerivedCategory.Q.obj K) ≫ _ = _
+  rw [Functor.mapDerivedCategorySquareIso_symm]
+  exact Functor.exactSquare_fac (asIso pb) K
 
 -- The final diagram chase, over an abstract category.
 private theorem scalarPullMate_chase {C : Type*} [Category C]

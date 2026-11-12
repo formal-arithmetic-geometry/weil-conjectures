@@ -79,7 +79,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
   [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance instHasColimitsOfSize_dualizableCriterion
+    : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 open HomotopyCategory MonoidalClosed
 

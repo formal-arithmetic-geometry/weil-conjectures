@@ -59,10 +59,10 @@ theorem exists_firstOrder_coordinates (σ : Type u) [Finite σ] (K : Type v) [Fi
       coeff (Finsupp.single i 1) (f * g) =
         constantCoeff f * coeff (Finsupp.single i 1) g +
           constantCoeff g * coeff (Finsupp.single i 1) f := by
-    have hc (p : T) : constantCoeff (pderiv K i p) = coeff (Finsupp.single i 1) p := by
+    have hc (p : T) : constantCoeff (pderiv (R := K) i p) = coeff (Finsupp.single i 1) p := by
       rw [← coeff_zero_eq_constantCoeff_apply, coeff_pderiv]
       simp only [zero_add, Finsupp.zero_apply, Nat.cast_zero, mul_one]
-    have h := congrArg (constantCoeff (σ := σ)) ((pderiv K i).leibniz f g)
+    have h := congrArg (constantCoeff (σ := σ)) ((pderiv (R := K) i).leibniz f g)
     simpa only [map_add, smul_eq_mul, map_mul, hc] using h
   let jet : T →+* TrivSqZeroExt K (σ → K) :=
     { toFun := fun f ↦ ⟨constantCoeff f, fun i ↦ coeff (Finsupp.single i 1) f⟩

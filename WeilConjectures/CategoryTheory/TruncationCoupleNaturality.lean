@@ -368,7 +368,7 @@ theorem raw_naturality (K N : CochainComplex.Plus A)
   · intro p q
     let τ := F.rightDerivedFunctor.mapTriangle.map (triangleMap c q)
     have h := (DerivedCategory.homologyFunctor B 0).homologySequenceδ_naturality
-      (derivedTriangle F K q) (derivedTriangle F N q) τ (p + q) (p + q + 1) rfl
+      τ (p + q) (p + q + 1) rfl
     change
       (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B (p + q)).map
           ((DerivedCategory.singleFunctor A q).map (homologyMap c q)) ≫

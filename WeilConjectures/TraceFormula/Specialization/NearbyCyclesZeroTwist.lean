@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionExchange
@@ -203,7 +205,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- For an exact functor `F`, the identification `LF(A[0]) ≅ D(F)(A[0]) ≅ (F A)[0]` followed by
 `φ[0]` for `φ : F A ⟶ B` is the counit of the left derived functor followed by the morphism
 `F(A[0]) ⟶ B[0]` of the homotopy category induced by `φ`. -/
-lemma leftDerivedFunctorIsoMapDerivedCategory_hom_app_single_comp {A : C} {B : D}
+private lemma leftDerivedFunctorIsoMapDerivedCategory_hom_app_single_comp {A : C} {B : D}
     (φ : F.obj A ⟶ B) :
     F.leftDerivedFunctorIsoMapDerivedCategory.hom.app ((DerivedCategory.singleFunctor C 0).obj A) ≫
       (F.mapDerivedCategorySingleFunctor 0).hom.app A ≫ (DerivedCategory.singleFunctor D 0).map φ =
@@ -227,7 +229,7 @@ lemma leftDerivedFunctorIsoMapDerivedCategory_hom_app_single_comp {A : C} {B : D
 /-- The isomorphism `LF(A[0]) ≅ D(F)(A[0]) ≅ (F A)[0] ≅ B[0]` induced by `e : F A ≅ B` is the
 counit of the left derived functor followed by the morphism of the homotopy category induced by
 `e`. -/
-lemma leftDerivedFunctorIsoMapDerivedCategory_app_single_trans_hom {A : C} {B : D}
+private lemma leftDerivedFunctorIsoMapDerivedCategory_app_single_trans_hom {A : C} {B : D}
     (e : F.obj A ≅ B) :
     ((F.leftDerivedFunctorIsoMapDerivedCategory.app ((DerivedCategory.singleFunctor C 0).obj A) ≪≫
       (F.mapDerivedCategorySingleFunctor 0).app A) ≪≫
@@ -248,7 +250,7 @@ open Scheme
 `ℚ̄_ℓ,Y(0)[0]` is the tensor unit, the isomorphism `Lf^* ℚ̄_ℓ,Y(0) ≅ ℚ̄_ℓ,X(0)`
 (`ProEtale.CondensedRing.leftDerivedUpperStarTateTwistDerivedZeroIso`) is the unit comparison
 `Lf^* Λ_Y ≅ Λ_X` of the monoidal derived pullback. -/
-lemma leftDerivedUpperStarTateTwistDerivedZeroIso_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (ℓ : ℕ)
+private lemma leftDerivedUpperStarTateTwistDerivedZeroIso_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (ℓ : ℕ)
     [Fact ℓ.Prime] :
     leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ =
       leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f :=
@@ -304,7 +306,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' : Scheme.{u}} {M : NearbyCyclesModel
 /-- In degree `0`, the specialization map `σ : Li^* ℚ̄_ℓ(0) ⟶ Ψ ℚ̄_ℓ(0)` for the canonical
 comparisons of the Tate twists with the pullbacks along `ε` and `j` is the specialization unit,
 up to the unit comparison of `Li^*`. -/
-lemma twistSpecializationMap_tateTwistZero :
+private lemma twistSpecializationMap_tateTwistZero :
     M.twistSpecializationMap (Profinite.padicAlgClRingObj ℓ)
         (leftDerivedUpperStarTateTwistDerivedZeroIso M.ε ℓ ≪≫
           (leftDerivedUpperStarTateTwistDerivedZeroIso M.j ℓ).symm) =

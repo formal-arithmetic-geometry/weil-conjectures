@@ -149,19 +149,19 @@ private theorem exact_comparison_triangle
   have hr := Functor.mapDerivedCategoryNatIso_isoWhiskerRight ce E₂
   have hl := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft E₀ cp
   have hp' := congrArg (fun t ↦ t ≫
-    (Functor.isoWhiskerLeft D(E₀) (Functor.mapDerivedCategoryCompIso P Q)).hom) hp
-  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at hp'
+    (Functor.isoWhiskerLeft D(E₀) (Functor.mapDerivedCategoryCompIso P Q)).inv) hp
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hp'
   simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_comp, Category.assoc] at hp' ⊢
   rw [← hp']
   simp only [Iso.symm_hom]
-  apply (cancel_epi (Functor.mapDerivedCategoryCompIso F₀ E₂).hom).1
-  simp only [Iso.hom_inv_id_assoc]
+  apply (cancel_epi (Functor.mapDerivedCategoryCompIso F₀ E₂).inv).1
+  simp only [Iso.inv_hom_id_assoc]
   rw [← reassoc_of% hr]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc,
+  simp only [Category.assoc, Iso.inv_hom_id_assoc,
     Functor.mapDerivedCategoryNatIso_trans]
   rw [reassoc_of% hn]
-  simp only [Functor.isoWhiskerLeft_hom, Iso.trans_hom,
+  simp only [Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv, Iso.trans_hom, Iso.symm_hom,
     Functor.whiskerLeft_comp]
   rw [← reassoc_of% hl]
 

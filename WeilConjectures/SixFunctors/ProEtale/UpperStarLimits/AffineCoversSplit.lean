@@ -96,7 +96,8 @@ lemma exists_factorization {X W : Scheme.{u}} [IsAffine X] (hX : AffineCoversSpl
   have hb : WeaklyEtale b := IsZariskiLocalAtSource.sigmaDesc fun j ↦ inferInstance
   have hc : Limits.Sigma.map c ≫ b = Sigma.desc v ≫ φ := by
     refine Sigma.hom_ext _ _ fun j ↦ ?_
-    simp only [b, c, v, Sigma.ι_map_assoc, Sigma.ι_desc, Sigma.ι_desc_assoc, Category.assoc]
+    simp only [b, c, v, Sigma.ι_map_assoc, Sigma.ι_comp_desc,
+      Sigma.ι_comp_desc_assoc, Category.assoc]
     rw [← pullback.condition, ← Category.assoc]
     exact congrArg (· ≫ φ) (f.w₀ j)
   refine ⟨_, inferInstance, s ≫ Limits.Sigma.map c, b, hb, ?_⟩

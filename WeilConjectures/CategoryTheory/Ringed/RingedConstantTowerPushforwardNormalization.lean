@@ -83,7 +83,7 @@ def ringedConstantTowerEvaluation
     [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] (n : ℕᵒᵖ) :
     (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).mapDerivedCategory ⋙
         ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ≅ 𝟭 (DerivedCategory A) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.constCompEvaluationObj (D := A) n) ≪≫
       Functor.mapDerivedCategoryIdIso A
 
@@ -101,9 +101,9 @@ def ringedConstantTowerPullback
         ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ≅
       F.mapDerivedCategory ⋙
         (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F).symm ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -124,20 +124,10 @@ private theorem rct_id_fac
     (I : CochainComplex A ℤ) :
     (Functor.mapDerivedCategoryIdIso A).hom.app (DerivedCategory.Q.obj I) =
       (𝟭 A).mapDerivedCategoryFactors.hom.app I := by
-  have h := congr_app (congr_arg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh A))
-    ((HomotopyCategory.quotient A (.up ℤ)).obj I)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app,
-    Functor.mapHomotopyCategoryIdIso_hom_app_eq_id, Functor.map_id,
-    Category.comp_id] at h
-  erw [Functor.map_id, Category.comp_id, Category.comp_id] at h
-  erw [h, Functor.mapDerivedCategoryFactorsh_hom_app]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
-  erw [Functor.map_id, Functor.map_id, Category.id_comp,
-    Category.comp_id, Category.comp_id, Category.comp_id]
+  have hI : (Functor.mapHomologicalComplexIdIso A (.up ℤ)).hom.app I = 𝟙 _ := by
+    ext; simp
+  rw [Functor.mapDerivedCategoryIdIso_hom_app, hI]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -157,7 +147,8 @@ private theorem rct_eval_fac
   simp only [ringedConstantTowerEvaluation, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc, rct_id_fac]
   rw [Functor.mapDerivedCategoryNatIso_fac, ← hc]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   erw [Functor.map_id, Category.id_comp, Category.comp_id]
 
 set_option backward.defeqAttrib.useBackward true in
@@ -189,7 +180,8 @@ private theorem rct_pull_fac
   simp only [ringedConstantTowerPullback, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
   erw [hG, Functor.mapDerivedCategoryNatIso_fac, ← hF]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   rfl
 
 end CategoryTheory

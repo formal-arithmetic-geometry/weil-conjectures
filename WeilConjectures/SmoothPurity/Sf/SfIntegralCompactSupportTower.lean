@@ -102,7 +102,7 @@ noncomputable def sfCompactSupportDerivedRestrictionComp (T : Scheme.{u}) (n : �
     (sfCompactSupportFiniteRestriction l E T n).mapDerivedCategory ⋙
         scalarReductionDerivedRestriction.{u, u} l E T (n + 1) ≅
       scalarReductionDerivedRestriction.{u, u} l E T n :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (sfCompactSupportRestrictionComp l E T n)
 
 /-- The canonical reduction map at the finite coefficient level. It is the adjunct

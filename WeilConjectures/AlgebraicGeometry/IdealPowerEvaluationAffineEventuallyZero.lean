@@ -6,12 +6,14 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 import all WeilConjectures.AlgebraicGeometry.AffineSectionCoverTwistGeneration
 import all WeilConjectures.AlgebraicGeometry.CoherentAffineMapSupportRadical
 import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine local vanishing of ideal-power evaluation
 

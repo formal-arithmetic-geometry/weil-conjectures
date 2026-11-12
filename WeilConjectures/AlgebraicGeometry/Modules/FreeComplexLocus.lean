@@ -123,19 +123,19 @@ theorem exists_opens_hasSplitHomology_degree (hC : ∀ n m l, C m l * C n m = 0)
       Subsingleton.elim _ _⟩
   by_cases hqi : q ≠ i
   · have h := hy q
-    rw [if_neg hqi, add_zero] at h
+    rw [ite_eq_right hqi, add_zero] at h
     obtain ⟨W, hyW, hW⟩ := exists_opens_split_of_rank_add_eq _ _ (hC _ _ _) y h
     refine ⟨W, hyW, fun h ↦ absurd h hq, fun g hg ↦ ?_⟩
-    have : IsEmpty (Fin (if q = i then k else 0)) := by rw [if_neg hqi]; infer_instance
+    have : IsEmpty (Fin (if q = i then k else 0)) := by rw [ite_eq_right hqi]; infer_instance
     obtain ⟨L₁, M₁, L₁', M₁', L₂, M₂, L₂', M₂', s₁, s₂, s⟩ := hW g hg
     exact Matrix.hasSplitHomology_of_add_eq_one s₁ s₂ s
   rw [not_not] at hqi
   subst hqi
   -- split factorisations of the two differentials near `y`
   have hlo := hy (q - 1)
-  rw [if_neg (by omega), add_zero, show q - 1 + 1 = q by omega] at hlo
+  rw [ite_eq_right (by omega), add_zero, show q - 1 + 1 = q by omega] at hlo
   have hhi := hy (q + 1)
-  rw [if_neg (by omega), add_zero, show q + 1 - 1 = q by omega] at hhi
+  rw [ite_eq_right (by omega), add_zero, show q + 1 - 1 = q by omega] at hhi
   obtain ⟨Wa, hya, ha⟩ := exists_opens_split_of_rank_add_eq _ _ (hC _ _ _) y hlo
   obtain ⟨Wb, hyb, hb⟩ := exists_opens_split_of_rank_add_eq _ _ (hC _ _ _) y hhi
   set W₁ := Wa ⊓ Wb with hW₁
@@ -157,7 +157,7 @@ theorem exists_opens_hasSplitHomology_degree (hC : ∀ n m l, C m l * C n m = 0)
     have := Modules.rank_splitIdempotent_map hA s₁ s₂
       (W₁.toScheme.fromSpecResidueField y₁).appTop.hom
     have h₀ := hy q
-    rw [if_pos rfl] at h₀
+    rw [ite_eq_left rfl] at h₀
     rw [hε]
     change _ = k
     convert this using 1
@@ -204,7 +204,7 @@ theorem exists_opens_hasSplitHomology_degree (hC : ∀ n m l, C m l * C n m = 0)
     rw [← Matrix.map_mul, hC, Matrix.map_zero _ (map_zero _)]
   refine (Matrix.hasSplitHomology_of_splitIdempotent hA' t₁ t₂ hε₃ h₃).of_equiv
     (finCongr ?_)
-  rw [hrank, if_pos rfl]
+  rw [hrank, ite_eq_left rfl]
 
 /-- **Splitting near a point satisfying the rank condition.** Let `C` be a bounded complex of
 finite free `Γ(X, ⊤)`-modules, and `y` a point satisfying the rank condition for `i` and `k`.

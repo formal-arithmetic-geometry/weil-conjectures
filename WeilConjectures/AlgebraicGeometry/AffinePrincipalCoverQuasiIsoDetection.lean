@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -33,6 +34,11 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+local instance instAdditiveModuleCatExtendScalars_affinePrincipalCoverQuasiIsoDetection
+    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
+    (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+  (ModuleCat.extendRestrictScalarsAdj.{u} f).left_adjoint_additive
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem tilde_preservesHomology (R : CommRingCat.{u}) :
@@ -115,7 +121,10 @@ private theorem principalOpen_localized_quasiIso
       Functor.isoWhiskerLeft _ (Modules.restrictFunctorCongr (by simp [p])) ≪≫
       Functor.isoWhiskerLeft _ (Modules.restrictFunctorIsoPullback j) ≪≫
       Modules.tildePullbackIso φ
-  have : (tilde.functor S).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : (tilde.functor S).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := S) f g
   have : (Modules.restrictFunctor p).Additive := ⟨by intros; rfl⟩
   have : (tilde.functor S).PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
   have : (tilde.functor S).PreservesHomology := tilde_preservesHomology S

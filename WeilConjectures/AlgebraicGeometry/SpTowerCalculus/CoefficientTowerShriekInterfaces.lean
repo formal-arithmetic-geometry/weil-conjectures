@@ -188,7 +188,7 @@ def levelComparison (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
   letI := (q.abelian T).evaluationColimits n
   letI : (spCoefficientEvaluation l E T (q.abelian T).equivalence n).Additive :=
     Functor.additive_of_iso (q.ordinaryEvaluation T n)
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (q.ordinaryEvaluation T n)
 
 /-- The finite sheaf extension along an etale localization is left Kan extension followed
@@ -306,9 +306,9 @@ structure EtaleOperation (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operati
   unit_termwise : derivedAdjunction.unit =
     (Functor.mapDerivedCategoryIdIso _).inv ≫
       SpTowerShriek.deriveMap l E ordinaryAdjunction.unit ≫
-      (Functor.mapDerivedCategoryCompIso extension (o.geometry e).pull).hom
+      (Functor.mapDerivedCategoryCompIso extension (o.geometry e).pull).inv
   counit_termwise : derivedAdjunction.counit =
-    (Functor.mapDerivedCategoryCompIso (o.geometry e).pull extension).inv ≫
+    (Functor.mapDerivedCategoryCompIso (o.geometry e).pull extension).hom ≫
       SpTowerShriek.deriveMap l E ordinaryAdjunction.counit ≫
       (Functor.mapDerivedCategoryIdIso _).hom
 
@@ -569,7 +569,7 @@ def sequenceOpenComposition (b : SpTowerShriek.Base l E)
     SpTowerShriek.openD l E b (o.openOp j) ⋙
       SpTowerShriek.openD l E b (o.openOp i) ≅
       SpTowerShriek.openD l E b (o.openOp (j ≫ i)) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((((o.openOp j).ordinaryAdjunction.comp (o.openOp i).ordinaryAdjunction).ofNatIsoRight
         (o.ordinaryComp j i)).leftAdjointUniq (o.openOp (j ≫ i)).ordinaryAdjunction)

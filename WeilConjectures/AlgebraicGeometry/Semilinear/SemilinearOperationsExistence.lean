@@ -196,7 +196,7 @@ private theorem operationOpenSystems (systems : Data.{c, v, r} J B τ) (U : C) :
         (by exact ((ι n).hom.naturality S.f).symm)
         (by exact ((ι n).hom.naturality S.g).symm)
     exact ShortComplex.exact_of_iso e.symm ((hs.map E).map T)
-  obtain ⟨hl, hc⟩ := ((Functor.exact_tfae L).out 1 3).mp he
+  obtain ⟨hl, hc⟩ := ((Functor.exact_tfae L).out 2 4).mp he
   let := hl
   let := hc
   refine ⟨{

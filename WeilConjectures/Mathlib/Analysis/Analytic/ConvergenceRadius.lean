@@ -344,6 +344,7 @@ theorem eval_ne_zero_of_differentiableOn_tprod_inv {J : Type*} {P : J → Polyno
   eval_ne_zero_of_lt_radius_tprod_inv hP hf hmul j <|
     (enorm_eq_nnnorm z ▸ hz).trans_le (le_radius_of_differentiableOn hg hF)
 
+
 end Nonneg
 
 section Pole
@@ -440,7 +441,7 @@ convergence of `f` is at least that of `g`: writing `mₙ = ‖fₙ‖ rⁿ` for
 `g`, the recursion `(n + 1) f_{n + 1} = ∑_{i + j = n} gᵢ fⱼ` gives
 `(n + 1) m_{n + 1} ≤ r C (m₀ + ⋯ + mₙ)` with `C = ∑ ‖gᵢ‖ rⁱ`, so the partial sums of the `mₙ`
 grow more slowly than any exponential `(1 + ε)ⁿ`. -/
-theorem radius_le_radius_of_derivative_eq_mul {f g : ℂ⟦X⟧} (h : derivative ℂ f = g * f) :
+theorem radius_le_radius_of_derivative_eq_mul {f g : ℂ⟦X⟧} (h : derivative (R := ℂ) f = g * f) :
     g.radius ≤ f.radius := by
   refine ENNReal.le_of_forall_nnreal_lt fun r hr ↦ ENNReal.le_of_forall_nnreal_lt fun ρ hρ ↦ ?_
   have hρr : (ρ : ℝ) < r := by exact_mod_cast hρ
@@ -549,7 +550,7 @@ open scoped ComplexOrder
 /-- If `X G' = S G` with `S` having nonnegative coefficients and no constant term, and `G` has a
 nonnegative constant coefficient, then all the coefficients of `G` are nonnegative: the
 recursion `n gₙ = ∑_{i + j = n, i ≥ 1} sᵢ gⱼ` preserves nonnegativity. -/
-theorem coeff_nonneg_of_X_mul_derivative_eq {G S : ℂ⟦X⟧} (h : X * derivative ℂ G = S * G)
+theorem coeff_nonneg_of_X_mul_derivative_eq {G S : ℂ⟦X⟧} (h : X * derivative (R := ℂ) G = S * G)
     (hS : ∀ n, 0 ≤ coeff n S) (hS0 : coeff 0 S = 0) (hG0 : 0 ≤ coeff 0 G) (k : ℕ) :
     0 ≤ coeff k G := by
   induction k using Nat.strong_induction_on with

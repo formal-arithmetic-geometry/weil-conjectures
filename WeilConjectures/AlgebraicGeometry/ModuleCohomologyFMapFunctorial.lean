@@ -155,6 +155,8 @@ theorem moduleCohomologyFMap_independent {X Y : Scheme.{u}} (h : X ⟶ Y)
   obtain ⟨e, hl, hb⟩ := moduleCohomologyFMapData_comparison h φ C C'
   let ΓX := RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
   let ΓY := RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
+  have : ΓY.Additive := inferInstanceAs
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}).Additive
   let HX := ΓX.mapHomologicalComplex (ComplexShape.up ℕ)
   let HY := ΓY.mapHomologicalComplex (ComplexShape.up ℕ)
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
@@ -457,6 +459,7 @@ theorem moduleCohomologyPullback_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y 
   rw [← moduleCohomologyFMap_comp h k]
   rw [moduleCohomologyFMap_target_naturality]
   simp only [Category.assoc, hc]
+
 
 private theorem moduleCohomologyFMap_congr {X Y : Scheme.{u}}
     {h k : X ⟶ Y} (e : h = k) {G : Y.Modules} {F : X.Modules}

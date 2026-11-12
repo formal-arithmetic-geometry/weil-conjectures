@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.PerfectStalkDerivedHomLift
 import WeilConjectures.AlgebraicGeometry.PerfectStalkQuasiIsoDetection
@@ -64,7 +65,7 @@ private theorem restrict_model_for_stalk_spread (X : Scheme.{u})
   exact ⟨(Functor.mapDerivedCategoryNatIso
     (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace)
       (homOfLE h))).symm.app E ≪≫
-    (Functor.mapDerivedCategoryCompIso A T).app E ≪≫ T.mapDerivedCategory.mapIso e ≪≫
+    (Functor.mapDerivedCategoryCompIso A T).symm.app E ≪≫ T.mapDerivedCategory.mapIso e ≪≫
       T.mapDerivedCategoryFactors.app K⟩
 
 set_option backward.isDefEq.respectTransparency false in

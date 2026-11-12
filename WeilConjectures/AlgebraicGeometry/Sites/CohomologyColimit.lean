@@ -108,7 +108,7 @@ lemma exists_mem_forall_eq_sum_of_isColimit_cofan {ι : Type u}
         F i ⟶ (presheafToSheaf _ _).obj P) ≫ ψ := by
       ext1
       change _ = Sigma.ι (fun i ↦ (F i).obj) i ≫ toSheafify _ P ≫ ψ.hom
-      rw [← hφ, Sigma.ι_desc]
+      rw [← hφ, Sigma.ι_comp_desc]
     rw [e, Category.assoc, Category.assoc, hgh]
   have := (Sheaf.isLocallySurjective_iff_epi' (A := AddCommGrpCat.{u + 1}) ψ).2 hψ
   have : Presheaf.IsLocallySurjective X.smallEtaleTopology φ := by
@@ -122,7 +122,7 @@ lemma exists_mem_forall_eq_sum_of_isColimit_cofan {ι : Type u}
   rw [map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   change (Sigma.ι (fun i ↦ (F i).obj) i ≫ φ).app (op V) (a i) = _
-  rw [Sigma.ι_desc]
+  rw [Sigma.ι_comp_desc]
 
 variable (X) in
 /-- **`H¹` commutes with direct sums on a qcqs scheme.** Let `X` be quasi-compact and

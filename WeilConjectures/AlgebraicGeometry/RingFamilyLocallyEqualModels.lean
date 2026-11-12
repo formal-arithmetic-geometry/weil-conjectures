@@ -163,7 +163,7 @@ theorem ringFamilySheafModel_iso_of_locally_equal_ideals_with_unit (s : ℕ)
             (ringFamilyComponentEquiv K (O.obj.obj X) _ _ hX 0 x)) = _
       exact congrArg _ (ringFamilyComponentEquiv_augmentation K ε
         (O.obj.obj X) _ _ hX x)
-    · simp only [HomologicalComplex.mkHomToSingle, dif_neg hn]
+    · simp only [HomologicalComplex.mkHomToSingle, dite_eq_right hn]
       rfl
 
 end CategoryTheory

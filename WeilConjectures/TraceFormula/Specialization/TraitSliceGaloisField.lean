@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.PowerSeries.Expand
 public import Mathlib.RingTheory.PowerSeries.Trunc
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisHensel
+public import Mathlib.RingTheory.Adjoin.Polynomial.Transcendental
 
 /-!
 

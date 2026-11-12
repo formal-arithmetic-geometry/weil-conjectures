@@ -114,7 +114,7 @@ private noncomputable def torsionComparisonPointElements
     {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (t : Spec (.of Ω) ⟶ T) :
     Scheme.ProEtaleGeometricNeighbourhood t ≌ (torsionComparisonPoint t).fiber.Elements where
-  functor.obj n := ⟨n.right, ULift.up n.hom⟩
+  functor.obj n := Functor.elementsMk _ n.right (ULift.up n.hom)
   functor.map f := ⟨f.right, congrArg ULift.up f.w⟩
   inverse.obj n := StructuredArrow.mk n.2.down
   inverse.map f := StructuredArrow.homMk f.1 (congrArg ULift.down f.2)
@@ -137,7 +137,7 @@ private noncomputable def torsionComparisonPointStalkIso
       (torsionComparisonPoint t).sheafFiber :=
   Functor.isoWhiskerLeft (sheafToPresheaf (Scheme.ProEt.topology T) A)
     (Functor.isoWhiskerLeft
-      ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π
+      ((Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π
         (torsionComparisonPoint t).fiber).op)
       (Functor.Final.colimIso (torsionComparisonPointElements t).functor.op))
 

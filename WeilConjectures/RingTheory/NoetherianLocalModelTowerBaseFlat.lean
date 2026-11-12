@@ -47,11 +47,9 @@ private theorem flat_tensor_over_algebra
   have hcomm : ∀ z, (LinearMap.lTensor B f) (eN z) =
       eQ (LinearMap.lTensor (B ⊗[C] P) N.subtype z) := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul b n =>
-      induction b using TensorProduct.induction_on with
-      | zero => simp
+      induction b using TensorProduct.inductionOn with
       | tmul b p => rfl
       | add b b' hb hb' => simp only [add_tmul, map_add, hb, hb']
     | add z z' hz hz' => simp only [map_add, hz, hz']

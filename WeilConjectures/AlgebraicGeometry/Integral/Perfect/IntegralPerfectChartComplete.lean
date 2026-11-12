@@ -23,6 +23,7 @@ namespace AlgebraicGeometry.Scheme
 -- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
 attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- A perfect integral model on one pro-etale chart is intrinsically complete there.
 Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.5.8(1),(2).
 (blueprint: lem-weil-pbc-integral-perfect-chart-complete).

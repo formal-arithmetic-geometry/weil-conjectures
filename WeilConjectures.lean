@@ -17586,6 +17586,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Change
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -19143,6 +19144,7 @@ public import WeilConjectures.RingTheory.ExtendedReesAlgebraGraded
 public import WeilConjectures.RingTheory.ExtendedReesAlgebraPow
 public import WeilConjectures.RingTheory.Extension.JacobiZariskiBaseChange
 public import WeilConjectures.RingTheory.Extension.NaiveCotangentHomotopy
+public import WeilConjectures.RingTheory.ExteriorPairingDualBasis
 public import WeilConjectures.RingTheory.FGFractionFieldSubmoduleLatticePresentation
 public import WeilConjectures.RingTheory.FactorsThroughLocalization
 public import WeilConjectures.RingTheory.FactorsThroughSmooth

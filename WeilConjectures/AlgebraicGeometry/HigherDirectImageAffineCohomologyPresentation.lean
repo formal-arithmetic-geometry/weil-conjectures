@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 import WeilConjectures.AlgebraicGeometry.HigherDirectImagePresheaf
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageCoefficientComparison
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-local presentation of ordinary higher direct images
 

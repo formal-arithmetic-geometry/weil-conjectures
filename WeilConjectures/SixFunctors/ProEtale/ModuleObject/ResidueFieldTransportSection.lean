@@ -67,7 +67,7 @@ lemma continuousMapConstRingHom_hom_comp_continuousMapToLowerStar (t : T) :
     (ε (toSpecZ X)_*[Ab.{u + 1}] ≫ (toSpecZ X)_*[Ab.{u + 1}].map
       (continuousMapSectionRingHom X T (ContinuousMap.const X t)).hom)).symm
   erw [unitHomEval_ε_comp_lowerStar_map, unitHomEval_continuousMapSectionRingHom]
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ rfl)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ rfl)
 
 /-- **The constant global sections of `T_X` are pulled back from `T̲`**: the global section of
 `T_X = p_X^* T̲` given by the constant map `t : X → T` is the image under `p_X^*` of the constant

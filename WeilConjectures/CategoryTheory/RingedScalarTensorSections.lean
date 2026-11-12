@@ -87,6 +87,5 @@ theorem scalarTensorRightUnit_pure (M : Mod R) (V : Cᵒᵖ) (x : M.val.obj V) :
       Iso.hom_inv_id, SheafOfModules.id_val, PresheafOfModules.id_app,
       ModuleCat.id_apply] using hh.symm : _)
   convert hh' using 1
-  rfl
 
 end CategoryTheory.ConstantCompletion

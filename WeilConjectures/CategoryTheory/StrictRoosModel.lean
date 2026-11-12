@@ -143,7 +143,7 @@ lemma roosLift_χ {X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
             biprod.snd := by
       obtain rfl := (ComplexShape.up ℤ).next_eq' hq
       dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-      rw [dif_pos hq]
+      rw [dite_eq_left hq]
     have h := CochainComplex.mappingCocone.lift_f_snd_v (roosU X) α 0
         (by simp [hα]) (p + 1) p (by omega)
     simpa [roosLift, roosχ, CochainComplex.mappingCocone.snd,

@@ -81,7 +81,7 @@ private theorem head_tail_decomposition (v : Fin (r + 1) →₀ R) :
     rw [Finsupp.mapDomain_of_notMem_range]
     · exact zero_add _
     · simp
-  · simp [koszulTailInclusion, Finsupp.mapDomain_apply (Fin.succ_injective r),
+  · simp [koszulTailInclusion, Finsupp.mapDomain_apply_of_injective (Fin.succ_injective r),
       tailRetraction, Fin.succ_ne_zero]
 
 private theorem exterior_map_coe {E F : Type (u + 1)} [AddCommGroup E] [Module R E]

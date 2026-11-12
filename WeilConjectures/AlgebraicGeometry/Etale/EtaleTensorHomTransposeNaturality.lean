@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true
 attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   Functor.leftDerivedFunctor Functor.leftDerivedFunctorCounit
-  _root_.DerivedCategory.instMonoidalCategory_weilConjectures
+  _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
 /-- Naturality of the derived tensor-Hom transpose in its first variable.

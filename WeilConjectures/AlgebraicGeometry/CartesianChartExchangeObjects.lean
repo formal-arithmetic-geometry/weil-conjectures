@@ -30,4 +30,5 @@ lemma chartCone_pt_hom
       pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom) := by
   rfl
 
+
 end AlgebraicGeometry.Etale

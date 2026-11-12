@@ -184,9 +184,9 @@ private theorem derived_comp_heq
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (h : F = F') (e : F ⋙ G ≅ H) (e' : F' ⋙ G ≅ H) (he : HEq e e') :
-    HEq ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    HEq (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e)
-      ((Functor.mapDerivedCategoryCompIso F' G).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F' G ≪≫
         Functor.mapDerivedCategoryNatIso e') := by
   subst F'
   have hh := eq_of_heq he
@@ -316,7 +316,7 @@ private theorem adjacentRoosProjection
     Pretriangulated.comp_distTriang_mor_zero₁₂ _ hc
   have hn := congrArg (fun a ↦ a ≫ Pi.π K n) hz
   simp only [towerTransitionEndomorphism, Preadditive.comp_sub, Category.comp_id,
-    Preadditive.sub_comp, Category.assoc, towerProductShift, Pi.lift_π,
+    Preadditive.sub_comp, Category.assoc, towerProductShift, Pi.lift_comp_π,
     zero_comp] at hn
   exact (sub_eq_zero.mp hn).symm
 
@@ -375,7 +375,7 @@ private theorem roosTransport
   · change Pi.lift q ≫ A.inv = 𝟙 M ≫ p
     apply Pi.hom_ext
     intro n
-    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc,
+    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_comp_π_assoc,
       Category.id_comp]
     apply (cancel_mono (a n).hom).1
     simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using (hp n).symm

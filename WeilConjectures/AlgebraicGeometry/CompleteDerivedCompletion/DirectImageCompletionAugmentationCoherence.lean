@@ -117,7 +117,7 @@ theorem directImage_augmentation_pullReduction_coherence :
       dsimp [constantInterchange]
       simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
       rw [hG, Functor.mapDerivedCategoryNatIso_fac, ← hF]
-      simp only [Iso.inv_hom_id_app_assoc, Category.assoc]
+      simp only [Iso.hom_inv_id_app_assoc, Category.assoc]
       simp only [NatIso.mapHomologicalComplex]
     have hbetaSimpl :
         (constantInterchange l E H).inv.app (DerivedCategory.Q.obj P) ≫

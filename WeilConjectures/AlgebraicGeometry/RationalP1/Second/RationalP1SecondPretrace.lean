@@ -52,7 +52,7 @@ private theorem inverse_square
   simp only [IsIso.hom_inv_id_assoc]
   rw [← reassoc_of% h]
   simp only [Functor.map_comp, Category.assoc, Functor.map_inv,
-    IsIso.hom_inv_id_assoc, Iso.map_hom_inv_id_assoc, IsIso.hom_inv_id, Category.comp_id]
+    IsIso.hom_inv_id_assoc, Iso.hom_inv_id_map_assoc, IsIso.hom_inv_id, Category.comp_id]
 
 private theorem assemble_pretrace
     {C D E : Type*} [Category* C] [Category* D] [Category* E] [mE : MonoidalCategory E]

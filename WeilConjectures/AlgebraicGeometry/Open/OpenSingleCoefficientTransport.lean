@@ -5,10 +5,12 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
-import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
 import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 
 /-! # Coefficient transport along an isomorphic apex over an open subscheme
@@ -149,9 +151,7 @@ attribute [local irreducible]
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 set_option cleanup.letToHave false in
 -- Keep the selected derived comparisons abstract during this calculation.
@@ -214,10 +214,11 @@ private theorem q_normalize {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Scheme.Modules.tensorPullback f) (.up ℤ) 0).hom.app M)) := by
-  let t := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-    (Scheme.Modules.pullbackPushforwardAdjunction f)
-  exact cancel (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0) _ _ (t.app M)
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  simp only [Scheme.picardTermwiseSingleMap, Scheme.Modules.canonicalSinglePullbackMap,
+    cast_eq, Scheme.Modules, Scheme.ringCatSheaf, moduleRings,
+    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.comp_id, SingleComplexBaseChange.counit]
 
 attribute [local irreducible] singleComplexOpenPullbackIso Scheme.picardTermwiseSingleMap
   Scheme.picardTermwiseCounit

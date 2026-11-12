@@ -214,30 +214,30 @@ lemma mapDerivedCategorySquareIso_hom_app_comp (α₂ : r₀ ⋙ p₂ ≅ P₂ �
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hA₁ hA₂ hA₃
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
   have hWL₁' : (mapDerivedCategoryNatIso (isoWhiskerLeft r₀ e)).hom.app K =
-      (mapDerivedCategoryCompIso r₀ p₁₂).hom.app K ≫
+      (mapDerivedCategoryCompIso r₀ p₁₂).inv.app K ≫
         (mapDerivedCategoryNatIso e).hom.app (r₀.mapDerivedCategory.obj K) ≫
-        (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).inv.app K := by
-    rw [← reassoc_of% hWL₁, Iso.hom_inv_id_app, Category.comp_id]
+        (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).hom.app K := by
+    rw [← reassoc_of% hWL₁, Iso.inv_hom_id_app, Category.comp_id]
   have hWR₂' : (mapDerivedCategoryNatIso (isoWhiskerRight α₂ p₁)).hom.app K =
-      (mapDerivedCategoryCompIso (r₀ ⋙ p₂) p₁).hom.app K ≫
+      (mapDerivedCategoryCompIso (r₀ ⋙ p₂) p₁).inv.app K ≫
         p₁.mapDerivedCategory.map ((mapDerivedCategoryNatIso α₂).hom.app K) ≫
-        (mapDerivedCategoryCompIso (P₂ ⋙ r₁) p₁).inv.app K := by
-    rw [← reassoc_of% hWR₂, Iso.hom_inv_id_app, Category.comp_id]
-  have hA₂' : (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).inv.app K ≫
-      (mapDerivedCategoryCompIso (r₀ ⋙ p₂) p₁).hom.app K =
-      (mapDerivedCategoryCompIso p₂ p₁).hom.app (r₀.mapDerivedCategory.obj K) ≫
-        p₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₀ p₂).inv.app K) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).hom.app K),
-      Iso.hom_inv_id_app_assoc, reassoc_of% hA₂, ← Functor.map_comp, Iso.hom_inv_id_app,
+        (mapDerivedCategoryCompIso (P₂ ⋙ r₁) p₁).hom.app K := by
+    rw [← reassoc_of% hWR₂, Iso.inv_hom_id_app, Category.comp_id]
+  have hA₂' : (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).hom.app K ≫
+      (mapDerivedCategoryCompIso (r₀ ⋙ p₂) p₁).inv.app K =
+      (mapDerivedCategoryCompIso p₂ p₁).inv.app (r₀.mapDerivedCategory.obj K) ≫
+        p₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₀ p₂).hom.app K) := by
+    rw [← cancel_epi ((mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).inv.app K),
+      Iso.inv_hom_id_app_assoc, reassoc_of% hA₂, ← Functor.map_comp, Iso.inv_hom_id_app,
       Functor.map_id, Category.comp_id]
-  have hA₃' : (mapDerivedCategoryCompIso (P₂ ⋙ r₁) p₁).inv.app K ≫
-      (mapDerivedCategoryCompIso P₂ (r₁ ⋙ p₁)).hom.app K =
-      p₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso P₂ r₁).hom.app K) ≫
-        (mapDerivedCategoryCompIso r₁ p₁).inv.app (P₂.mapDerivedCategory.obj K) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso (P₂ ⋙ r₁) p₁).hom.app K),
-      Iso.hom_inv_id_app_assoc, ← reassoc_of% hA₃, Iso.hom_inv_id_app, Category.comp_id]
+  have hA₃' : (mapDerivedCategoryCompIso (P₂ ⋙ r₁) p₁).hom.app K ≫
+      (mapDerivedCategoryCompIso P₂ (r₁ ⋙ p₁)).inv.app K =
+      p₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso P₂ r₁).inv.app K) ≫
+        (mapDerivedCategoryCompIso r₁ p₁).hom.app (P₂.mapDerivedCategory.obj K) := by
+    rw [← cancel_epi ((mapDerivedCategoryCompIso (P₂ ⋙ r₁) p₁).inv.app K),
+      Iso.inv_hom_id_app_assoc, ← reassoc_of% hA₃, Iso.inv_hom_id_app, Category.comp_id]
   rw [← reassoc_of% hWR₁, ← hA₁, reassoc_of% hm, reassoc_of% hWL₂, hWL₁', hWR₂']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% hA₂', reassoc_of% hA₃']
 
 end Pasting
@@ -279,8 +279,8 @@ lemma mapDerivedCategorySquareIso_hom_app_id (α : r ⋙ p ≅ P ⋙ r) (eP : P 
   rw [← reassoc_of% hWR, reassoc_of% hm, hUL]
   -- the identity is that of an object which agrees with the target only up to unfolding `𝟭 A`
   erw [Category.comp_id]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso r p).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hWL, hUR]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso r p).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hWL, hUR]
   erw [Category.comp_id]
 
 end Identity

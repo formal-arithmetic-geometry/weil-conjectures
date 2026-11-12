@@ -703,6 +703,7 @@ def HasCommonMorphismFormula
         (extend Y (closureInclusion l Ω L).toRingHom).map ((J L).map f) ≫
         (toCommon l Y Ω J β B.stage L hB B.obj).inv ≫ (γ B).inv
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The functors and precisely the formulas and coherence asserted by the node.
 The targets are ordinary derived categories over discrete constant coefficient sheaves;
 there is deliberately no constructibility predicate on their objects.

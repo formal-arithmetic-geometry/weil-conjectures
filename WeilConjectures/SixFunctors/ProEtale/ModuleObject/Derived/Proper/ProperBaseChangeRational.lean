@@ -80,7 +80,6 @@ This fixes the ring operations as well as the underlying sheaf.
 * `isIso_finiteCoefficientPushHom_boundedBelow` and
   `isIso_algClCoefficientPushHom_boundedBelow`: the other two coefficient comparisons.
 * `properPushforward_boundedConstructible_rational`: preservation of bounded constructibility.
-* `isIso_properProjectionMap_boundedConstructible_rational`: the specified projection mate.
 * `isIso_properBaseChange_boundedConstructible_rational`: the specified exchange components.
 
 The helper `rationalCoefficientPushforwardPreservation` supplies the existing preservation
@@ -250,6 +249,7 @@ private theorem projection_scalars
     infer_instance
   exact isIso_of_six_sides _ _ _ _ _ _ (coefficientProjectionSquare ℓ k f a K M)
 
+-- Keep the bundled category and endpoints abstract after the generic comparison helpers.
 -- Keep the bundled category and endpoints abstract after the generic comparison helpers.
 attribute [local irreducible] moduleObjectProjectionData
 

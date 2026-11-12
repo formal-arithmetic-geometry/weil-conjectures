@@ -192,9 +192,9 @@ theorem localTerm_traceClass_ofGraph_squaring
     (F : (ofGraph K (specPolynomialOver.squaring k) v).FixedLocus) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     [IsClosedImmersion j.left]
-    (hB : Set.range j.left.base = {(F.liftPoint (specPolynomialOver.origin k)
+    (hB : Set.range j.left.base = {((F.liftPoint (specPolynomialOver.origin k)
       (isContractingAt_ofGraph_squaring v).comp_c₁_eq_comp_c₂).left.base
-        (default : Spec (.of k))})
+        (default : Spec (.of k)))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (specPolynomialOver.origin k)).obj K)] :
     ((ofGraph K (specPolynomialOver.squaring k) v).traceClass F).localTerm j =

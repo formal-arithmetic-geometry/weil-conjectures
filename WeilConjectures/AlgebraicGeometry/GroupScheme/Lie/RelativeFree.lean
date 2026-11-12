@@ -490,7 +490,7 @@ theorem derivation_eq_sum {R : Type u} [CommRing R] (σ : k →+* R) (D : A →+
       rw [← tangentChartCoeff_eq_lieToDualCotangent he hj hx _ hm]
       simp only [m, map_sub, map_sum, map_smul, tangentChartCoeff_algebraMap, sub_zero,
         smul_eq_mul, hab, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ,
-        if_true, sub_self]
+        ite_true, sub_self]
     exact LinearMap.congr_fun hf y
   have hsq : D m = 0 := by
     have hz := (Ideal.toCotangent_eq_zero _ _).1 hcot
@@ -615,7 +615,7 @@ theorem existsUnique_prod_eq (X : Over (Spec (.of k))) (v : infPointsAt G X) :
     exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
   · rw [← hr, hprod]
     simp only [hab, apply_ite, map_one, map_zero, mul_one, mul_zero,
-      Finset.sum_ite_eq, Finset.mem_univ, if_true]
+      Finset.sum_ite_eq, Finset.mem_univ, ite_true]
 
 omit [Fintype I] in
 variable {b} in

@@ -237,7 +237,7 @@ private theorem refine_lisse (X : Scheme.{u}) [IsNoetherian X]
 private theorem constructible_stratified (X : Scheme.{u}) [IsNoetherian X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ₀ X))
     (hM : IsConstantModelConstructible Λ₀ X M) : IsFiniteConstantStratified Λ₀ X M := by
-  rw [IsConstantModelConstructible, if_pos
+  rw [IsConstantModelConstructible, ite_eq_left
     (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance, inferInstance⟩)] at hM
   exact hM
 

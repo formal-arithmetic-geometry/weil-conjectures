@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The pinned derived adjunction on single complexes
 Source: Stacks Project, cohomology.tex, Tag 079W; derived.tex, Tags 08J5 and 06XS.
@@ -38,7 +40,7 @@ private theorem single_complex_transpose
   funext i
   by_cases hi : i = q
   · subst i
-    simp [Adjunction.homEquiv_apply, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [Adjunction.homEquiv_apply, CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Category.assoc]
   · apply (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) q N i hi).eq_of_src
 
@@ -80,11 +82,11 @@ Source: Stacks Project, cohomology.tex, Tag 079W.
         ((Scheme.Modules.pushforward g).obj M) ⟶
     (schemeDerivedDirectImage g).obj ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj M) :=
-  DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+  cast (by rfl) (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
         (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) (ComplexShape.up ℤ) q).inv.app M)) ≫
     (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
-      ((HomotopyCategory.singleFunctor _ q).obj M)
+      ((HomotopyCategory.singleFunctor _ q).obj M))
 
 -- Comparing the pinned sheaf adjunction to its normalized construction needs extra heartbeats.
 /-- The pinned derived adjunction on a single complex in any integer degree.
@@ -129,7 +131,7 @@ theorem topEdgeSingleAdjunctionTranspose {T S : Scheme.{u}} (g : T ⟶ S) (q : �
       ((HomotopyCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj M)) hk)
   simp only [pinnedModulePullbackComparisonAt, derivedSingleComparisonOfCounit,
-    topEdgeSingleDirectImageMap, k, ε,
+    topEdgeSingleDirectImageMap, cast_eq, k, ε,
     DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
     HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
     SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,

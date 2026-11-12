@@ -174,12 +174,12 @@ theorem etale_refineHom : AlgebraicGeometry.Etale (ch.refineHom hY₀ A') := by
 /-- `Spec A'`, pointed by `φ''`, as a pointed étale neighbourhood of `y`. -/
 def refine : Nbhd y :=
   have := ch.etale_refineHom hY₀ A'
-  ⟨Scheme.Etale.mk (ch.refineHom hY₀ A'), CategoryTheory.Over.homMk
+  Functor.elementsMk _ (Scheme.Etale.mk (ch.refineHom hY₀ A')) (CategoryTheory.Over.homMk
     (Spec.map (CommRingCat.ofHom φ'')) (by
       change Spec.map (CommRingCat.ofHom φ'') ≫ ch.refineHom hY₀ A' = y
       rw [refineHom, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ'',
         SpecMap_map_fromSpec, ← Category.assoc, SpecMap_point_fromSpec]
-      exact CategoryTheory.Over.w c.2)⟩
+      exact CategoryTheory.Over.w c.2))
 
 @[simp]
 lemma refine_fst_hom : (ch.refine hY₀ A' φ'' hφ'').1.hom = ch.refineHom hY₀ A' := rfl
@@ -190,7 +190,7 @@ lemma refine_snd_left :
 
 /-- The refinement `Spec A' ⟶ U` of pointed étale neighbourhoods. -/
 def refineMap : ch.refine hY₀ A' φ'' hφ'' ⟶ c :=
-  CategoryOfElements.homMk _ _
+  Functor.Elements.homMk
     (MorphismProperty.Over.homMk
       (Spec.map (CommRingCat.ofHom (algebraMap ch.Ring A')) ≫ ch.isAffineOpen.fromSpec) (by
         change (Spec.map (CommRingCat.ofHom (algebraMap ch.Ring A')) ≫ ch.isAffineOpen.fromSpec) ≫

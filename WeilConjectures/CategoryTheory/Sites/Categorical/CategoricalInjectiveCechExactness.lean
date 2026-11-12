@@ -40,14 +40,14 @@ private noncomputable def categoricalCofree : Cᵒᵖ ⥤ A where
   map_id Y := by
     apply Pi.hom_ext
     rintro ⟨Z, g⟩
-    erw [Pi.lift_π, Category.id_comp]
+    erw [Pi.lift_comp_π, Category.id_comp]
     dsimp only [unop_id]
     rw [Category.comp_id]
   map_comp h h' := by
     apply Pi.hom_ext
     rintro ⟨Z, g⟩
     simp only [Category.assoc]
-    erw [Pi.lift_π, Pi.lift_π, Pi.lift_π]
+    erw [Pi.lift_comp_π, Pi.lift_comp_π, Pi.lift_comp_π]
     dsimp only [Sigma.fst, Sigma.snd]
     rw [unop_comp, Category.assoc]
 
@@ -59,7 +59,7 @@ private noncomputable def toCategoricalCofree : P ⟶ categoricalCofree P where
     rintro ⟨Z, g⟩
     dsimp only [categoricalCofree]
     simp only [Category.assoc]
-    erw [Pi.lift_π, Pi.lift_π, Pi.lift_π]
+    erw [Pi.lift_comp_π, Pi.lift_comp_π, Pi.lift_comp_π]
     rw [op_comp, P.map_comp]
     rfl
 
@@ -69,7 +69,7 @@ private instance mono_toCategoricalCofree : Mono (toCategoricalCofree P) := by
         Pi.π (fun s : Σ Z : C, Z ⟶ Y.unop ↦ P.obj (op s.1)) ⟨Y.unop, 𝟙 _⟩ =
         𝟙 (P.obj Y) := by
       dsimp only [toCategoricalCofree]
-      erw [Pi.lift_π]
+      erw [Pi.lift_comp_π]
       simp
     exact mono_of_mono_fac h
   exact NatTrans.mono_of_mono_app _
@@ -86,13 +86,13 @@ private noncomputable def categoricalCofreeHomIso (B : A) :
       left_inv := fun f ↦ by
         apply Pi.hom_ext
         intro s
-        erw [Pi.lift_π]
+        erw [Pi.lift_comp_π]
       right_inv := fun f ↦ by
         change (∀ (Z : C) (_ : Z ⟶ Y.unop), B ⟶ P.obj (op Z)) at f
         funext Z g
         change (Pi.lift fun s : Σ T : C, T ⟶ Y.unop ↦ f s.1 s.2) ≫
           Pi.π (fun s : Σ T : C, T ⟶ Y.unop ↦ P.obj (op s.1)) ⟨Z, g⟩ = f Z g
-        erw [Pi.lift_π]
+        erw [Pi.lift_comp_π]
       map_add' := fun f g ↦ by
         funext Z h
         exact Preadditive.add_comp _ _ _ _ _ _ }) (by
@@ -105,7 +105,7 @@ private noncomputable def categoricalCofreeHomIso (B : A) :
       f ≫ Pi.π (fun s : Σ T : C, T ⟶ Y.unop ↦ P.obj (op s.1)) ⟨Z, g ≫ h.unop⟩
     dsimp only [categoricalCofree]
     rw [Category.assoc]
-    erw [Pi.lift_π])
+    erw [Pi.lift_comp_π])
 
 variable {V : C} [HasFiniteProducts (Over V)] {n : ℕ} (U : Fin n → Over V)
 
@@ -120,11 +120,11 @@ private noncomputable def categoricalCechHomIso (B : A) :
       left_inv := fun f ↦ by
         apply Pi.hom_ext
         intro y
-        erw [Pi.lift_π]
+        erw [Pi.lift_comp_π]
       right_inv := fun f ↦ by
         funext y
         change Pi.lift f ≫ Pi.π _ y = f y
-        erw [Pi.lift_π]
+        erw [Pi.lift_comp_π]
       map_add' := fun f g ↦ by
         funext y
         exact Preadditive.add_comp _ _ _ _ _ _ }) (by
@@ -143,7 +143,7 @@ private noncomputable def categoricalCechHomIso (B : A) :
     apply Finset.sum_congr rfl
     intro i _
     simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp, Category.assoc]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     congr 1
     exact (Category.assoc _ _ _).symm)
 

@@ -104,7 +104,7 @@ private theorem kflat_resolutions (T : Scheme.{u})
       (R := pbcAdicCompletion T d) K
   exact ⟨P, s, hP, hs⟩
 section
-attribute [local implicit_reducible] cbcStrictOpen Functor.mapHomologicalComplex
+attribute [local implicit_reducible] cbcStrictOpen
   catToReflQuiver
 attribute [local irreducible] Functor.mapDerivedCategory
   cbcStrictOpenModule completedTowerModulePullback completedModulePullback
@@ -199,7 +199,7 @@ Source: Stacks 03DI (blueprint: lem-cbc-completed-ring-strict-finite-exchange). 
 def cbcFiniteExchange (n : ℕ) :=
   Functor.mapDerivedCategoryNatIso (asIso (cbcFiniteInverse d sq n)).symm
 section
-attribute [local implicit_reducible] cbcStrictOpen Functor.mapHomologicalComplex
+attribute [local implicit_reducible] cbcStrictOpen
   catToReflQuiver completedReductionCoefficient reductionCoefficientSystem
 attribute [local irreducible] Functor.mapDerivedCategory
   cbcStrictOpenModule completedTowerModulePullback completedModulePullback

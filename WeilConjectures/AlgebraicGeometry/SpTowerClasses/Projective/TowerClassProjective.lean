@@ -83,7 +83,7 @@ localizing the specified ordinary tensor/Hom unit isomorphism.
 Source: classes (4), untwisting the Chern arrow (blueprint: def-sp-tower-class-projective). -/
 def Twisting.cancelNegative {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     t.T l E ⋙ t.N l E ≅ 𝟭 (D T (Arings l E T)) :=
-  (Functor.mapDerivedCategoryCompIso t.equivalence.functor t.equivalence.inverse).symm ≪≫
+  Functor.mapDerivedCategoryCompIso t.equivalence.functor t.equivalence.inverse ≪≫
     Functor.mapDerivedCategoryNatIso t.equivalence.unitIso.symm ≪≫
     Functor.mapDerivedCategoryIdIso (Systems T (Arings l E T))
 

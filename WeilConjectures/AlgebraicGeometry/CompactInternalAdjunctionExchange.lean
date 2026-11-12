@@ -211,7 +211,7 @@ private theorem compact_exchange_projection
         ((leftDerivedUpperStarTensorComparison A g').app U).app V := rfl
   simp only [← δg, ← δg']
   erw [hom_inv_whiskerRight'_assoc, Functor.Monoidal.δ_μ_assoc,
-    IsIso.inv_hom_id_assoc, Functor.Monoidal.map_μ_δ_assoc]
+    IsIso.inv_hom_id_assoc, Functor.Monoidal.μ_δ_map_assoc]
   unfold derivedSquareUpperStarIsoInvApp
   simp only [tensorLeft]
   erw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp,

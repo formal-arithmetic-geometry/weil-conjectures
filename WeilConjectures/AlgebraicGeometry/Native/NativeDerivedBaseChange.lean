@@ -32,9 +32,9 @@ def adicDerivedPullSquare (l : ℕ) [Fact l.Prime]
     {p : Z ⟶ T} {g : T' ⟶ T} (sq : CommSq v p' p g) :
     (adicUpperStar l g).mapDerivedCategory ⋙ (adicUpperStar l p').mapDerivedCategory ≅
       (adicUpperStar l p).mapDerivedCategory ⋙ (adicUpperStar l v).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (adicUpperStarCompIso l sq.w.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The unit--square--counit mate on ordinary native geometric derived categories.
 No boundedness, properness, or Weil structure is needed to construct it.

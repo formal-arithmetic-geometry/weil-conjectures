@@ -179,7 +179,7 @@ theorem compactSupportProjectionAdjunct_isIso
           (T.evaluationIso j).inv)) ≫ Pi.π _ n ≫ (T.evaluationIso n).hom) =
         (adj.homEquiv _ _).symm ((coefficientSequenceProjection l E Y n).app N) ≫
           (ε n).inv := by
-      simp only [Pi.lift_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      simp only [Pi.lift_comp_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
       exact adj.homEquiv_naturality_right_symm _ _
     have : IsIso ((adj.homEquiv _ _).symm
         ((coefficientSequenceProjection l E Y n).app N) ≫ (ε n).inv) := by
@@ -257,7 +257,7 @@ theorem compactSupportProjectionAdjunct_isIso
       (scalarReductionDerivedExtension l E Y n).map ε.hom ≫
         (adj.homEquiv _ _).symm ((coefficientSequenceProjection l E Y n).app N) ≫
         (e n).hom := by
-    rw [← hε, Category.assoc, Pi.lift_π]
+    rw [← hε, Category.assoc, Pi.lift_comp_π]
     exact (adj.homEquiv_naturality_left_symm _ _).trans
       (congrArg (fun z ↦ (scalarReductionDerivedExtension l E Y n).map ε.hom ≫ z)
         (adj.homEquiv_naturality_right_symm _ _))

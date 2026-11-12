@@ -129,7 +129,7 @@ theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
     apply (cancel_mono ((M.obj I').iCycles 0)).1
     rw [Category.assoc, cyclesMap_i, ← Category.assoc, hw, Category.assoc, hz']
     dsimp [k, M, CochainComplex.singleFunctor, CochainComplex.singleFunctors]
-    simp only [Functor.map_comp, comp_f, Functor.mapHomologicalComplex_map_f,
+    simp only [Functor.map_comp,
       single_map_f_self, Category.assoc]
     rw [← F.map_comp_assoc, Iso.inv_hom_id, F.map_id, Category.id_comp]
   have hh := (F.mapHomotopy h).homologyMap_eq 0
@@ -231,6 +231,7 @@ theorem degreeZeroCohomology_resolution_pullback {X Y : Scheme.{u}} (u : Y ⟶ X
       F'.map (U.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ≫ r.f 0)
   rw [← Category.assoc, η.naturality, Category.assoc, Functor.comp_map,
     ← F'.map_comp, hη]
+
 
 private theorem uliftZ_naturality {A B : AddCommGrpCat.{u + 1}}
     (f : AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ A) (k : A ⟶ B) :

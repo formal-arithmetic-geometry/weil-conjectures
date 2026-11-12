@@ -5,9 +5,13 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidalUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
+import all Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # Left unitality of the tensor comparison of the derived pullback
@@ -60,7 +64,7 @@ lemma leftDerivedUpperStarUnitIso_hom_comp_ε :
   congr 1
   erw [(g)^*[A].mapDerivedCategoryFactorsh_hom_app (𝟙_ _)]
   simp only [Functor.OplaxMonoidal.mapHomotopyCategoryη,
-    Functor.OplaxMonoidal.mapHomologicalComplexη, Functor.Monoidal.εIso_inv, Functor.map_comp,
+    Functor.OplaxMonoidal.mapHomologicalComplexη, Functor.map_comp,
     Q_obj_single_obj, Functor.comp_obj, Category.assoc]
   have h₃ : ∀ K, (quotientCompQhIso (Sheaf Y.smallEtaleTopology A)).hom.app K = 𝟙 _ :=
     fun _ ↦ rfl
@@ -79,6 +83,7 @@ lemma leftDerivedUpperStarUnitIso_hom_comp_ε :
     exact (Category.comp_id _).symm.trans (h.trans (Category.id_comp _))
   erw [Category.id_comp, h₆, h₆]
   rw [h₆]
+  erw [Category.comp_id, Category.id_comp]
   rfl
 
 variable [(g)^*[A].PreservesFlat]

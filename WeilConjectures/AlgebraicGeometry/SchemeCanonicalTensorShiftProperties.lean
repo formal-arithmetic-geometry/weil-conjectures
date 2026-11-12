@@ -36,52 +36,7 @@ private lemma independent_tensorRight_eq (P : CochainComplex.KFlat C) :
       (h := .int) ((LKFlat C).obj P) =
       commShiftTensorRightQhObj ((HomotopyCategory.quotient C _).obj P.obj)
         ((HomotopyCategory.kFlat_quotient_obj_iff _).2 P.2) := by
-  have hP := (HomotopyCategory.kFlat_quotient_obj_iff _).2 P.2
-  refine Functor.CommShift.eq_of_natTransCommShift (LKFlat C)
-    (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat _ _
-    ((Localization.Lifting₂.iso (L C) (LKFlat C) _ _ (F C).flip
-      (curriedTensor (DerivedCategory C)).flip).app P.obj)
-    (Functor.CommShift₂OfLocalization.commShift_liftingIsoApp (L C) (LKFlat C) _ _ (F C).flip _
-      P.obj) ?_
-  let := commShiftTensorRightQhObj ((HomotopyCategory.quotient C _).obj P.obj) hP
-  have := isIso_tensorRightCounit ((HomotopyCategory.quotient C _).obj P.obj) hP
-  let : Localization.Lifting Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
-      ((curriedTensor _).flip.obj ((HomotopyCategory.quotient C _).obj P.obj) ⋙ Qh)
-      ((curriedTensor _).flip.obj (Qh.obj ((HomotopyCategory.quotient C _).obj P.obj))) :=
-    ⟨asIso (tensorRightCounit _)⟩
-  have h := NatTrans.commShift_iso_hom_of_localization Qh (HomotopyCategory.quasiIso C (.up ℤ)) ℤ
-    ((curriedTensor _).flip.obj ((HomotopyCategory.quotient C _).obj P.obj) ⋙ Qh)
-    ((curriedTensor (DerivedCategory C)).flip.obj
-      (Qh.obj ((HomotopyCategory.quotient C _).obj P.obj)))
-  have : NatTrans.CommShift (tensorRightCounit ((HomotopyCategory.quotient C _).obj P.obj)) ℤ :=
-    h
-  change NatTrans.CommShift (F₁ := LKFlat C ⋙ (curriedTensor _).flip.obj
-    (Qh.obj ((HomotopyCategory.quotient C _).obj P.obj)))
-    (Functor.CommShift₂OfLocalization.liftingIsoApp (L C) (LKFlat C)
-    (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
-    (F C).flip (curriedTensor (DerivedCategory C)).flip P.obj) ℤ
-  have eq : (Functor.CommShift₂OfLocalization.liftingIsoApp (L C) (LKFlat C)
-      (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
-      (F C).flip (curriedTensor (DerivedCategory C)).flip P.obj : LKFlat C ⋙
-        (curriedTensor _).flip.obj (Qh.obj ((HomotopyCategory.quotient C _).obj P.obj)) ⟶ _) =
-      (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft (CochainComplex.ιKFlat C) ((Functor.associator _ _ _).hom ≫
-          Functor.whiskerLeft (HomotopyCategory.quotient C _)
-            (tensorRightCounit ((HomotopyCategory.quotient C _).obj P.obj)) ≫
-          (Functor.associator _ _ _).inv ≫
-          Functor.whiskerRight ((curriedTensor C).quotientCompBifunctorMapHomotopyFlipObjIso
-            (.up ℤ) (.up ℤ) (.up ℤ) P.obj).hom Qh ≫
-          (Functor.associator _ _ _).hom) ≫
-        (Functor.associator _ _ _).inv := by
-    rw [show ((curriedTensor C).quotientCompBifunctorMapHomotopyFlipObjIso
-      (.up ℤ) (.up ℤ) (.up ℤ) P.obj).hom = 𝟙 _ from rfl, Functor.whiskerRight_id']
-    ext K
-    dsimp
-    simp only [Category.id_comp, Category.comp_id]
-    exact (Category.comp_id ((tensorRightCounit ((HomotopyCategory.quotient C _).obj P.obj)).app
-      ((HomotopyCategory.quotient C _).obj K.obj))).symm
-  rw [eq]
-  infer_instance
+  exact commShiftTensorRight_eq C P
 
 private lemma independent_tensorRight_exact (K : DerivedCategory C) :
     let : (tensorRight K).CommShift ℤ :=

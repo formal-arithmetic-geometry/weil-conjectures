@@ -78,4 +78,3 @@ theorem quotient_complete_local
   refine ⟨hnoeth, inferInstance, hmax, ?_⟩
   rw [hmax]
   convert hcomp using 1
-  all_goals rfl

@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 
 public import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
@@ -32,7 +34,10 @@ local instance preSourceCoordinatesPreadditive (Y : Scheme.{u}) :
 local instance preSourceCoordinatesAbelian (Y : Scheme.{u}) :
     Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 local instance preTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 local instance preTildeHomology (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).PreservesHomology := tilde_preservesHomology C
 local instance preTildeLimits (C : Type u) [CommRing C] :
@@ -78,9 +83,9 @@ theorem affineTildeTensorSourcePrecomparison
       (derivedPullback g).obj (DerivedCategory.Q.obj
         (((Scheme.Modules.pushforward f).mapHomologicalComplex (.up ℤ)).obj
           (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M))),
-      χpre.hom ≫ (SingleComplexBaseChange.counit g).app
+      χpre.hom ≫ cast (by rfl) ((SingleComplexBaseChange.counit g).app
           (qs.obj (((Scheme.Modules.pushforward f).mapHomologicalComplex (.up ℤ)).obj
-              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M))) =
+              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)))) =
         affineTildeTensorDerivedCounit R A B D M m
           (affinePushforwardTilde B).mapDerivedCategory rfl ≫
           DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom := by
@@ -151,8 +156,8 @@ theorem affineTildeTensorSourcePrecomparison
     simp only [eqToHom_refl, Category.id_comp]
     rfl
   refine ⟨χpre, ?_⟩
-  simpa only [f, g, C, H, N, E, T, TR, P, PB, RC, EC, TC, PC, PBC, q, qs,
-    Category.assoc] using hc.trans (congrArg (fun z ↦ z ≫
+  with_unfolding_all simpa only [cast_eq, f, g, C, H, N, E, T, TR, P, PB, RC, EC, TC,
+    PC, PBC, q, qs, Category.assoc] using hc.trans (congrArg (fun z ↦ z ≫
       DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom) hdc.symm)
 
 

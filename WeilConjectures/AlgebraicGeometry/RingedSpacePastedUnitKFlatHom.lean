@@ -6,8 +6,10 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Algebra.Homology.KFlat
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.RingedSpacePastedPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.RingedSpaceKFlatDirectImageHomLocalization
 

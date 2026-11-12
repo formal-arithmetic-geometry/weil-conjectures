@@ -159,7 +159,8 @@ theorem coeff_prod_inv_alternatingCharpolyRevProd_stalk (K : WeilComplex k₀ l 
           rfl)
         (fun x hx ↦ hs x ((Nat.le_of_dvd hi0 hx).trans hi))] at htr
     simp only [map_sum, PowerSeries.coeff_mk]
-    rw [if_pos ⟨hi0.ne', one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, htr, Finset.sum_filter]
+    rw [ite_eq_left ⟨hi0.ne', one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, htr,
+      Finset.sum_filter]
     refine Finset.sum_congr rfl fun x _ ↦ ?_
     simp [hi0.ne', nsmul_eq_mul]
 
@@ -191,7 +192,7 @@ theorem coeff_prod_inv_localPolynomial_stalk (F : WeilSheaf k₀ l X) {S : Finse
     n s hs
   refine Eq.trans (congrArg (coeff n) (Finset.prod_congr rfl fun x _ ↦ ?_)) h
   refine congrArg Inv.inv ?_
-  rw [LinearMap.alternatingCharpolyRevProd, Finset.prod_singleton, if_pos Even.zero,
+  rw [LinearMap.alternatingCharpolyRevProd, Finset.prod_singleton, ite_eq_left Even.zero,
     FrobeniusModule.localPolynomial, LinearMap.charpolyRev, LinearMap.charpolyRev]
   have h2 : (WeilComplex.stalk (toComplex.obj F) 0 x).frobeniusEnd.charpoly =
       (F.stalk x).frobeniusEnd.charpoly :=

@@ -274,7 +274,7 @@ theorem Etale.exists_finset_mono_pi_lift {X : Scheme.{u}} [IsNoetherian X]
     let l : L₀ := ⟨index k, Finset.mem_image.mpr ⟨k, Finset.mem_univ _, rfl⟩⟩
     apply hindex k
     change ((P (x i)).map (φ l)).hom v = 0
-    rw [← Pi.lift_π (fun l : L₀ ↦ φ l) l, Functor.map_comp,
+    rw [← Pi.lift_comp_π (fun l : L₀ ↦ φ l) l, Functor.map_comp,
       ConcreteCategory.comp_apply, hv]
     simp
   -- The generic-stalk criterion propagates injectivity over each irreducible stratum.

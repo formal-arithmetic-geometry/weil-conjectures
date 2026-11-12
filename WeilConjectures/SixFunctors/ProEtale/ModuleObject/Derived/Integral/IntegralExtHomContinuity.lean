@@ -397,6 +397,17 @@ variable {ℓ : ℕ} {k : Type u} {E : Type} [Field k] [Field E]
   [Fact ℓ.Prime] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+attribute [local instance] hasZeroMorphisms_condensedRingObj_integralLfpHom
+
+local instance integralContinuityHasColimitsOfShape
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) (I : Type (u + 1)) [SmallCategory I] :
+    HasColimitsOfShape I (CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfShape I C := inferInstance
+  infer_instance
+
 /-- Local finite-presentation continuity, packaged with the coefficient monoid data. -/
 private def localIntegralContinuity
     (R : CommMon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
@@ -453,7 +464,7 @@ private theorem constructible_hom_continuity
   · intro q
     apply constructible_of_finiteConstantStratified Λ X
     have h := hC.2 q
-    simpa only [IsConstantModelConstructible, if_pos
+    simpa only [IsConstantModelConstructible, ite_eq_left
       (show CompactSpace X ∧ QuasiSeparatedSpace X from
         ⟨inferInstance, inferInstance⟩)] using h
 

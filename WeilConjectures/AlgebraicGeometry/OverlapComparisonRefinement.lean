@@ -105,9 +105,9 @@ private def comparison_comp_inv (T : F.OverlapTransitions f) {D : F.DescentData 
       _ ≫ (F.map g₂.op.toLoc).toFunctor.map (e₂.inv ≫ (ε.e b).hom)
     rw [Functor.map_comp, Functor.map_comp, Category.assoc, ε.comm]
     rw [← cancel_epi ((F.map g₁.op.toLoc).toFunctor.map e₁.hom)]
-    simp only [← Category.assoc, Iso.map_hom_inv_id, Category.id_comp]
+    simp only [← Category.assoc, Iso.hom_inv_id_map, Category.id_comp]
     rw [h]
-    simp only [Category.assoc, Iso.map_hom_inv_id_assoc]
+    simp only [Category.assoc, Iso.hom_inv_id_map_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 private def comparison_pull (T : F.OverlapTransitions f) {D : F.DescentData f}

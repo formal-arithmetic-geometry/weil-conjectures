@@ -38,12 +38,10 @@ theorem tensorProduct_of_flat [Flat S M] [Flat R N] : Flat R (M ⊗[S] N) := by
   have key : (e P).toLinearMap.restrictScalars R ∘ₗ Q.subtype.lTensor (M ⊗[S] N) =
       (g.lTensor M).restrictScalars R ∘ₗ (e Q).toLinearMap.restrictScalars R := by
     refine LinearMap.ext fun x ↦ ?_
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
     | tmul y q =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | add y y' hy hy' =>
         simp only [LinearMap.coe_comp, Function.comp_apply, add_tmul, map_add] at hy hy' ⊢
         rw [hy, hy']

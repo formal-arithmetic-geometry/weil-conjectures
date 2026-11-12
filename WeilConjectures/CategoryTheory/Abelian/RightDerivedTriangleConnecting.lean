@@ -107,7 +107,7 @@ theorem rightDerived_triangle_connecting
   obtain ⟨τ, hτ₁, hτ₃⟩ := horseshoe_derived_triangle_comparison v S hS
     IA IB IC α β hαβ hιA hιB hH hvH hExt
   have hnat := (DerivedCategory.homologyFunctor B 0).homologySequenceδ_naturality
-    _ _ τ (n : ℤ) (n + 1) (by omega)
+    τ (n : ℤ) (n + 1) (by omega)
   symm at hnat
   change DerivedCategory.HomologySequence.δ _ (n : ℤ) (n + 1) rfl ≫
       (DerivedCategory.homologyFunctor B (n + 1)).map τ.hom₁ =

@@ -83,7 +83,7 @@ theorem map_zetaSeries_eq_inv_alternatingCharpolyRevProd {S : Finset ℤ}
         (fun i ↦ ((adicConstant k₀ l X).compactlySupportedCohomology i).frobeniusEnd) 1)⁻¹ := by
   set f := X ↘ Spec (CommRingCat.of k₀)
   set φ := algebraMap ℚ (PadicAlgCl l)
-  have hF : PowerSeries.X * PowerSeries.derivative _ (PowerSeries.map φ f.zetaSeries) =
+  have hF : PowerSeries.X * PowerSeries.derivative (PowerSeries.map φ f.zetaSeries) =
       PowerSeries.map φ (PowerSeries.mk fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) *
         PowerSeries.map φ f.zetaSeries := by
     rw [← PowerSeries.map_derivative, ← PowerSeries.map_X φ, ← map_mul,
@@ -97,7 +97,7 @@ theorem map_zetaSeries_eq_inv_alternatingCharpolyRevProd {S : Finset ℤ}
       PowerSeries.constantCoeff_inv,
       LinearMap.constantCoeff_alternatingCharpolyRevProd _ _ one_ne_zero, inv_one]
   · rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, PowerSeries.coeff_map,
-      PowerSeries.coeff_mk, if_pos rfl, map_zero]
+      PowerSeries.coeff_mk, ite_eq_left rfl, map_zero]
   · intro i _
     rcases eq_or_ne i 0 with rfl | hi0
     · simp
@@ -111,8 +111,8 @@ theorem map_zetaSeries_eq_inv_alternatingCharpolyRevProd {S : Finset ℤ}
         LinearMap.ext fun _ ↦ Subsingleton.elim _ _
       rw [Function.mem_support, h0, map_zero, smul_zero] at hj
       exact hj rfl
-    rw [PowerSeries.coeff_map, PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg hi0,
-      if_pos ⟨hi0, one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, map_natCast,
+    rw [PowerSeries.coeff_map, PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right hi0,
+      ite_eq_left ⟨hi0, one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, map_natCast,
       pointCount_eq_finsum_trace_compactlySupportedCohomology k₀ l X
         (Nat.one_le_iff_ne_zero.2 hi0), finsum_eq_sum_of_support_subset _ hsupp]
 

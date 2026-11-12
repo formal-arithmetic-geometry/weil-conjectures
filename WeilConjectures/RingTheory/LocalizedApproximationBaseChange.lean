@@ -323,7 +323,8 @@ theorem localized_approximation_baseChange
         exact hu
       have hzq := (IsLocalization.AtPrime.isUnit_to_map_iff Bj qj (e z)).mp hez
       exact ⟨e z, hzq, e.symm_apply_apply z⟩
-    refine ⟨t, N.map θ, ht, ?_⟩
+    let W : Submonoid (Bi ⊗[Rp] Aj) := N.map θ
+    refine ⟨t, W, ht, ?_⟩
     exact IsLocalization.isLocalization_of_submonoid_le (Bi ⊗[Rp] Aj) Bj M N hMN
   · intro i j f
     let := (B.map f).hom.toAlgebra

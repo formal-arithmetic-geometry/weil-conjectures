@@ -166,11 +166,11 @@ private theorem derived_square_left_comp
       Functor.whiskerLeft U.mapDerivedCategory (Functor.mapDerivedCategoryNatIso z).hom ≫
         (Functor.mapDerivedCategorySquareIso o).hom := by
   have hz := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft U z
-  apply (cancel_epi (Functor.mapDerivedCategoryCompIso U L).hom).mp
+  apply (cancel_epi (Functor.mapDerivedCategoryCompIso U L).inv).mp
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso_trans, Category.assoc,
-    Iso.hom_inv_id_assoc]
-  rw [← reassoc_of% hz, Iso.hom_inv_id_assoc]
+    Iso.inv_hom_id_assoc]
+  rw [← reassoc_of% hz, Iso.inv_hom_id_assoc]
 
 private theorem exact_unit_square
     {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}

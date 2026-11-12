@@ -214,7 +214,7 @@ set_option synthInstance.maxSize 1024 in
 shriek commutes with the shifts. -/
 instance commShift_boundedConstructibleLowerShriekComp_padicAlgCl_hom (f : X ⟶ Y) (g : Y ⟶ S) :
     NatTrans.CommShift (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom ℤ := by
-  unfold boundedConstructibleLowerShriekComp_padicAlgCl
+  rw [boundedConstructibleLowerShriekComp_padicAlgCl_def]
   dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, asIso_hom, asIso_inv]
   infer_instance

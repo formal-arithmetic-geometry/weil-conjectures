@@ -89,4 +89,5 @@ theorem rawRestrictedCohomologyClass_naturality {S Y Y' : Scheme.{u}}
   apply (ConcreteCategory.bijective_of_isIso (rawRestrictedCohomologyComparison h' q F' V)).1
   rw [rawRestrictedCohomologyClass_spec, ← rawRestrictedCohomologyClass_map]
 
+
 end AlgebraicGeometry.Etale

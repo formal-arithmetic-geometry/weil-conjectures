@@ -132,7 +132,7 @@ theorem Etale.epi_sigmaDesc_sectionHom (F : Sheaf X.smallEtaleTopology (ModuleCa
   have key (τ : F.obj.obj (op (Etale.self (X := X) V.hom V.prop))) :
       g.hom.app _ τ = g'.hom.app _ τ := by
     have := congr(Sigma.ι _ (⟨⟨V, hV⟩, τ⟩ : Etale.SectionIndex F) ≫ $hgg')
-    simp only [Sigma.ι_desc_assoc, Etale.sectionHom_comp] at this
+    simp only [Sigma.ι_comp_desc_assoc, Etale.sectionHom_comp] at this
     exact Etale.sectionHom_injective _ _ _ this
   apply (ConcreteCategory.bijective_of_isIso (G.obj.map e.hom.op)).1
   rw [← NatTrans.naturality_apply g.hom e.hom.op, ← NatTrans.naturality_apply g'.hom e.hom.op]

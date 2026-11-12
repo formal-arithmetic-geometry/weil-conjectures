@@ -69,7 +69,7 @@ theorem isIso_iff_unitCoproductComparison
           β'.app (N_C.obj M) := by
     apply Sigma.hom_ext
     intro i
-    simp only [Sigma.ι_desc_assoc, Category.assoc, ← G.map_comp_assoc, Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc_assoc, Category.assoc, ← G.map_comp_assoc, Sigma.ι_comp_desc]
     rw [← R_D.map_comp, he, R_D.map_comp, ← reassoc_of% hu,
       G.map_comp, Category.assoc]
     congr 1

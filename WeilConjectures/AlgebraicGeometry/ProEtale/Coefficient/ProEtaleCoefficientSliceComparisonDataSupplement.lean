@@ -122,7 +122,6 @@ instance proEtaleSliceRestriction_colimits {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     PreservesFiniteColimits (proEtaleSliceModuleRestriction U O) :=
   (proEtaleSliceModuleRestriction_exact U O).2.2
-
 /-- Exact localization of the normalized ordinary comparison, with its canonical
 composition comparison. Source: Stacks 03CE and 05RT
 (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
@@ -137,7 +136,8 @@ def proEtaleSliceDerivedComparison {X : Scheme.{u}} (U : X.ProEt)
     proEtaleRingDerivedPullback U.hom O B c ≅
       proEtaleSliceDerivedRestriction U O ⋙ proEtaleSliceDerivedScalarTransport U O B
         (proEtaleSliceCoefficientIso U O B c delta) :=
-  Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
+
 
 /-- The exact termwise functor used in the representative normalizations.
 Source: Stacks 07A4 (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/

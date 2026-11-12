@@ -359,7 +359,7 @@ private def factorCoconeIsColimit
       simp [e, localizationSheafCocone, factorCocone, factorMap]
     · have hz : IsZero ((ringedLocalizationTwoTerm O s).X n) := by
         change IsZero (ringedLocalizationTwoTermX O s n)
-        simp only [ringedLocalizationTwoTermX, if_neg h0, if_neg h1]
+        simp only [ringedLocalizationTwoTermX, ite_eq_right h0, ite_eq_right h1]
         exact Limits.isZero_zero _
       refine { desc := fun _ ↦ 0
                fac := ?_

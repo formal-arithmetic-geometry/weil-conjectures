@@ -428,7 +428,7 @@ def integralExceptionalDerivedLevelFixed (n : ℕ) :
       (Padic.coefficientExtensionRing l E (n + 1))).inverse :=
   letI := (Scheme.sfIntrinsicModuleEquivalence W
     (Padic.coefficientExtensionRing l E (n + 1))).inverse_additive
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (integralExceptionalLevelFixed l E W n)
 
 /-- Coordinates preserve finite evaluation as an equality of actual ordinary functors.
@@ -508,10 +508,10 @@ Source: blueprint integral exceptional image (blueprint: def-pur-adic-proetale-r
         ((coefficientSequenceDerivedEvaluation l E W n).obj N) :=
   (integralExceptionalProRealization l E W n).mapDerivedCategory.mapIso
     ((integralExceptionalProEvaluationModel l E W P n).app _ ≪≫
-      (Functor.mapDerivedCategoryCompIso _ _).symm.app N ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).app N ≪≫
       (Functor.mapDerivedCategoryNatIso
         (eqToIso (integralExceptionalCoordinatesEvaluation l E W n))).app N ≪≫
-      (Functor.mapDerivedCategoryCompIso _ _).app N) ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm.app N) ≪≫
     (integralExceptionalDerivedLevelFixed l E W n).app _
 
 /-- The inverse coordinate/evaluation identification uses the actual counit of the

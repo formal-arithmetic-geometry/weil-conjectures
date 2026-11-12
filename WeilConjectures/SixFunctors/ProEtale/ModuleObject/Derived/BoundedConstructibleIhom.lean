@@ -239,7 +239,7 @@ theorem boundedConstructible_ihom (hΛ : LisseHypotheses Λ) {T : Scheme.{u}}
     let Z' : TopologicalSpace.Closeds T := ⟨c.base '' Set.range V.closedComplement.base,
       c.isClosedEmbedding.isClosedMap _ V.closedComplement.isClosedEmbedding.isClosed_range⟩
     have hZ' : Z' < Z := by
-      refine SetLike.lt_iff_le_and_exists.2 ⟨fun x ⟨w, _, hw⟩ ↦ hcZ ⟨w, hw⟩,
+      refine IsConcreteLE.lt_iff_le_and_exists.2 ⟨fun x ⟨w, _, hw⟩ ↦ hcZ ⟨w, hw⟩,
         c.base v, hcZ ⟨v, rfl⟩, fun ⟨w, hw, hwv⟩ ↦ ?_⟩
       rw [c.isClosedEmbedding.injective hwv, Scheme.Opens.range_closedComplement] at hw
       exact hw hv

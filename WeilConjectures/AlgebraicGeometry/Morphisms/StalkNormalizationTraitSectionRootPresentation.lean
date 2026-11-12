@@ -53,7 +53,7 @@ private theorem root_local {R : Type u} [CommRing R] [IsLocalRing R]
       AdjoinRoot.mk p q ∈ M ↔ q.coeff 0 ∈ IsLocalRing.maximalIdeal R := by
     let := hM
     have hc : M.comap ρ = IsLocalRing.maximalIdeal R := by
-      have hm := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R) M
+      have hm := Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R) M
       exact IsLocalRing.eq_maximalIdeal hm
     have ht : t ∈ M := by
       apply hM.isPrime.mem_of_pow_mem e
@@ -198,9 +198,9 @@ theorem GaloisCover.stalk_normalization_trait_section_root_presentation {S C : S
     have hc : (IsLocalRing.maximalIdeal D).comap (AdjoinRoot.of p) =
         IsLocalRing.maximalIdeal R := by
       exact IsLocalRing.eq_maximalIdeal
-        (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R)
+        (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R)
           (IsLocalRing.maximalIdeal D))
-    exact ((IsLocalRing.local_hom_TFAE _).out 4 0).mp hc
+    exact ((IsLocalRing.local_hom_TFAE _).out 5 1).mp hc
   let := hA
   let := hAtrait
   let := hK

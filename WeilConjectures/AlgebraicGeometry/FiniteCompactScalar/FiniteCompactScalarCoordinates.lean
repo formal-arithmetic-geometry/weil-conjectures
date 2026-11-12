@@ -29,13 +29,13 @@ def openRealizationIso (A : Type u) [CommRing A] [Finite A]
       (ProEtale.openImmersionLowerShriek
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙
         (sfIntrinsicDerivedEquivalence Z A).functor :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((sfIntrinsicModuleEquivalence X A).funInvIdAssoc
         (ProEtale.openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
           (sfIntrinsicModuleEquivalence Z A).functor)) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The open site comparison followed by the normalized intrinsic realization. -/
 def openSiteIso (A : Type u) [CommRing A] [Finite A]

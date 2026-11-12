@@ -123,7 +123,7 @@ private theorem cechModuleSheafAugmentation₀_coface {X : Scheme.{u}} {ι : Typ
     FormalCoproduct.evalOp, FormalCoproduct.cech, FormalCoproduct.mapPower, FormalCoproduct.power,
     CosimplicialObject.δ, Functor.comp_obj, Functor.comp_map,
     Functor.whiskeringLeft_obj_obj, Functor.rightOp_map, Functor.rightOp_obj,
-    Category.assoc, Pi.lift_π, Pi.lift_π_assoc, cechModuleSheafFunctor, Function.comp_def]
+    Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, cechModuleSheafFunctor, Function.comp_def]
   exact cechIntersectionRestriction_naturality F _
 
 set_option backward.isDefEq.respectTransparency false in

@@ -90,7 +90,7 @@ theorem moduleCup_godement_tensor_map_of_pairing_exists (X : Scheme.{u})
   intro H K x U hx s r
   have hcoord : b H K ≫
       Pi.π (fun y : X ↦ skyscraper y ((H ⊗ K).presheaf.stalk y)) x =
-      toSkyscraper (l H K x) := Pi.lift_π _ _
+      toSkyscraper (l H K x) := Pi.lift_comp_π _ _
   have hv := congrArg (fun f ↦ f.val) hcoord
   rw [SheafOfModules.comp_val] at hv
   erw [hv]

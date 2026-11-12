@@ -200,7 +200,7 @@ lemma trivId_conj (h : W ⟶ W) (e : h ≫ p = p) :
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   rw [hε₁, Functor.map_comp]
   simp only [Category.assoc]
-  rw [Iso.map_hom_inv_id_assoc, reassoc_of% (adicUpperStarComp_hom_app_comp_map_congr_comp_inv_app h
+  rw [Iso.hom_inv_id_map_assoc, reassoc_of% (adicUpperStarComp_hom_app_comp_map_congr_comp_inv_app h
       (Category.id_comp p) (by rw [Category.id_comp]) G), hε₂,
     adicUpperStarCongr_inv_app (Category.id_comp p) (Category.id_comp p).symm,
     reassoc_of% adicUpperStarCongr_hom_app_trans, reassoc_of% adicUpperStarCongr_hom_app_trans,

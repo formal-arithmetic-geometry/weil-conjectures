@@ -33,21 +33,21 @@ open Module
 namespace CategoryTheory
 
 abbrev P0Cycle (R : Type u) [CommRing R]
-    (K : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) (n : ℤ) :=
+    (K : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) (n : ℤ) :=
   {z : K.obj.X n // K.obj.d n (n + 1) z = 0}
 
 abbrev P0StepCycle (R : Type u) [CommRing R]
-    (K : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
+    (K : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
     (j n : ℤ) :=
   {z : K.obj.X n // (∃ x : (K.filtration.step j : CochainComplex (ModuleCat.{u} R) ℤ).X n,
       (K.filtration.step j).arrow.f n x = z) ∧ K.obj.d n (n + 1) z = 0}
 
 abbrev P0Index (R : Type u) [CommRing R]
-    (K : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) (n : ℤ) :=
+    (K : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) (n : ℤ) :=
   P0Cycle R K n ⊕ (Σ j : ℤ, P0StepCycle R K j n)
 
 noncomputable def P0Index.map (R : Type u) [CommRing R]
-    (K : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
+    (K : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
     (n : ℤ) : P0Index R K n → K.obj.X n := fun z =>
   match z with
   | Sum.inl z => z.1
@@ -160,7 +160,7 @@ lemma Subobject.ofLE_arrow_f_apply {R : Type u} [CommRing R]
     Y.arrow.f n ((Subobject.ofLE X Y h).f n x) = X.arrow.f n x := by
   rw [← ModuleCat.comp_apply, ← HomologicalComplex.comp_f, Subobject.ofLE_arrow]
 
-variable (R : Type u) [CommRing R] (K : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
+variable (R : Type u) [CommRing R] (K : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
 
 /-- The generators of `F^i P₀` in degree `n`: the filtered cocycles of `F^j K` with `j ≥ i`.
 Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
@@ -208,7 +208,7 @@ noncomputable def P0Filtration : DecreasingFiltration (P0Complex R K) where
     (P0StepComplex.ofLE_ι R K _)
 
 /-- The filtered basic complex `P₀`. -/
-noncomputable def P0Filtered : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ) where
+noncomputable def P0Filtered : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ) where
   obj := P0Complex R K
   filtration := P0Filtration R K
 

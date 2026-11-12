@@ -77,7 +77,7 @@ lemma comps_injective {Z : B.ProEt} :
   rw [eq_sum_comps x, eq_sum_comps x']
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   congr 1
-  exact ULift.ext _ _ (congrFun h i)
+  exact ULift.ext (congrFun h i)
 
 /-- The section of `ℚ̄_ℓ,Bⁿ` over `Z` with given components. -/
 noncomputable def ofComps {Z : B.ProEt} (c : Fin n → PadicAlgCl.locallyFiniteFunctions l Z.left) :

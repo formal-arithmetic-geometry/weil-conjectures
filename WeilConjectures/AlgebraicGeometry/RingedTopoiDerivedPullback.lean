@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
@@ -369,7 +372,8 @@ theorem ringedTopoiDerivedPullback
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (p : P ⟶ A)
           (hp : P.IsKFlatTensor) (hf : ∀ n : ℤ, (P.X n).IsFlat) [hq : QuasiIso p],
           (alpha p hp hf hq).hom = inv (LF.map (DerivedCategory.Q.map p)) ≫
-            epsilon.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ∧
+            cast (by rfl)
+              (epsilon.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) ∧
         (∀ {A A' P P' : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
           (p : P ⟶ A) (p' : P' ⟶ A') (a : P ⟶ P') (b : A ⟶ A')

@@ -74,7 +74,7 @@ private theorem truncGE_preservesCoproducts
           π.app (K i) ≫ Sigma.ι L i
         rw [← π.naturality (Sigma.ι K i)]
         change (Sigma.ι K i ≫ (t.truncGEπ a).app (∐ K)) ≫ t.descTruncGE f a = _
-        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_desc]
+        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_comp_desc]
       · apply t.from_truncGE_obj_ext
         dsimp only [r]
         rw [← Category.assoc, t.π_descTruncGE]

@@ -56,6 +56,13 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
 private abbrev Mod := RingedTensorModules.{c, v, r} J R
 
+noncomputable local instance ringedTensorUnitSMul
+    (M : SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
+    (U : Cᵒᵖ) :
+    SMul (((ringedTensorUnitComplex.{c, v, r} J R).X 0).val.obj U) (M.val.obj U) :=
+  (M.val.obj U).isModule.toSMul
+
 private def pure (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) : (A ⊗ B).val.obj U :=
   (tensorObjIsoSheafification A B).inv.val.app U
@@ -70,7 +77,7 @@ private theorem pure_restrict (A B : Mod.{c, v, r} J R)
     (A.val ⊗ B.val)) ≫ (tensorObjIsoSheafification A B).inv.val
   exact (PresheafOfModules.naturality_apply η f (x ⊗ₜ[R.obj.obj U] y)).symm
 
-private theorem pure_ext (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ N}
+private theorem pure_ext_private (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ N}
     (h : ∀ U x y, f.val.app U (pure.{c, v, r} J R A B U x y) =
       g.val.app U (pure.{c, v, r} J R A B U x y)) : f = g := by
   apply (cancel_epi (tensorObjIsoSheafification A B).inv).mp
@@ -83,6 +90,10 @@ private theorem pure_ext (A B N : Mod.{c, v, r} J R) {f g : A ⊗ B ⟶ N}
   apply ModuleCat.MonoidalCategory.tensor_ext
   intro x y
   exact h U x y
+
+/-- Public export of the private `pure_ext_private`
+(used by `import all` importers; linter.privateModule). -/
+alias pure_ext := pure_ext_private
 
 private theorem pure_braiding (A B : Mod.{c, v, r} J R) (U : Cᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) :
@@ -105,7 +116,7 @@ private theorem pure_ext₃ (A B D N : Mod.{c, v, r} J R)
   apply (SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N).injective
   change (SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N
       ((β_ D (A ⊗ B)).hom ≫ f)) = _
-  refine pure_ext.{c, v, r} J R A B (SheafOfModules.homObjSmall_kfi (R := R) D N)
+  refine pure_ext_private.{c, v, r} J R A B (SheafOfModules.homObjSmall_kfi (R := R) D N)
     (f := SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N ((β_ D (A ⊗ B)).hom ≫ f))
     (g := SheafOfModules.tensorHomEquiv_kfi (R := R) D (A ⊗ B) N ((β_ D (A ⊗ B)).hom ≫ g)) ?_
   intro U x y
@@ -134,7 +145,7 @@ private theorem pure_ext₃ (A B D N : Mod.{c, v, r} J R)
 
 private abbrev Complex := CochainComplex (Mod.{c, v, r} J R) ℤ
 
-private theorem tensorGenerator_ext
+private theorem tensorGenerator_ext_private
     (P Q F : Complex.{c, v, r} J R)
     (φ ψ : (coefficientTotalTensor.{r, c, v} J R).obj (P, Q) ⟶ F)
     (h : ∀ (p q k : ℤ) (hpq : p + q = k) (U : Cᵒᵖ)
@@ -147,11 +158,15 @@ private theorem tensorGenerator_ext
   apply HomologicalComplex.mapBifunctor.hom_ext
     (K₁ := P) (K₂ := Q) (F := curriedTensor (Mod.{c, v, r} J R)) (c := .up ℤ)
   intro p q hpq
-  apply pure_ext.{c, v, r} J R (P.X p) (Q.X q) (F.X k)
+  apply pure_ext_private.{c, v, r} J R (P.X p) (Q.X q) (F.X k)
   intro U x y
   exact h p q k hpq U x y
 
-private theorem tensorGenerator_ext₃
+/-- Public export of the private `tensorGenerator_ext_private`
+(used by `import all` importers; linter.privateModule). -/
+alias tensorGenerator_ext := tensorGenerator_ext_private
+
+private theorem tensorGenerator_ext₃_private
     (P Q N F : Complex.{c, v, r} J R)
     (φ ψ : (coefficientTotalTensor.{r, c, v} J R).obj
       ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q), N) ⟶ F)
@@ -230,7 +245,7 @@ structure RingedTensorConstraintModels
         (ρ.f p).val.app U
             (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R P
       (ringedTensorUnitComplex.{c, v, r} J R)
-              p 0 p (Int.add_zero p) U x a) = a • x) ∧
+              p 0 p (Int.add_zero p) U x a) = (show R.obj.obj U from a) • x) ∧
       (T.iso J R S P (ringedTensorUnitComplex.{c, v, r} J R)
           hP unitKFlat).hom ≫ S.tensor.map (Prod.mkHom (𝟙 _) u.inv) ≫
           (S.monoidal.rightUnitor (DerivedCategory.Q.obj P)).hom = DerivedCategory.Q.map ρ
@@ -277,7 +292,7 @@ private theorem model_symmetry
   intro P Q hP hQ
   obtain ⟨σ, hσ, he⟩ := M.symmetry_model P Q hP hQ
   have hs : σ = (β_ P Q).hom := by
-    apply tensorGenerator_ext.{c, v, r} J R
+    apply tensorGenerator_ext_private.{c, v, r} J R
     intro p q k hpq U x y
     have hqp : q + p = k := (add_comm q p).trans hpq
     exact (hσ p q k hpq hqp U x y).trans
@@ -302,7 +317,7 @@ private theorem model_associator
   intro P Q N hP hQ hN
   obtain ⟨a, ha, he⟩ := M.associator_model P Q N hP hQ hN
   have heq : a = (α_ P Q N).hom := by
-    apply tensorGenerator_ext₃.{c, v, r} J R
+    apply tensorGenerator_ext₃_private.{c, v, r} J R
     intro p q t i k hpq hit U x y z
     have hpj : p + (q + t) = k := by omega
     exact (ha p q t i (q + t) k hpq hit rfl hpj U x y z).trans
@@ -339,7 +354,7 @@ private theorem model_rightUnitor
     · subst q
       have hk : k = p := by omega
       subst hk
-      apply pure_ext.{c, v, r} J R (P.X k)
+      apply pure_ext_private.{c, v, r} J R (P.X k)
         ((ringedTensorUnitComplex.{c, v, r} J R).X 0) (P.X k)
       intro U x a
       exact (hρ k U x a).trans
@@ -426,5 +441,12 @@ theorem ringedTensorConstraint_completion
   exact ⟨⟨t, ht, hn, u, model_symmetry J R S T s u M,
     model_associator J R S T s u M t ht, model_leftUnitor J R S T s u M t ht,
     model_rightUnitor J R S T s u M t ht⟩, rfl⟩
+
+end CategoryTheory
+
+namespace CategoryTheory
+/-- Public export of the private `tensorGenerator_ext₃_private` (used by `import all` importers;
+linter.privateModule). -/
+alias tensorGenerator_ext₃ := tensorGenerator_ext₃_private
 
 end CategoryTheory

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.Algebra.FiveLemma
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Exact functors on `Ext`-groups, by dimension shifting

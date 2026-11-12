@@ -58,8 +58,8 @@ lemma ker_integersModPowULiftTransition :
       integersModPowMk l E (n + 1) ((l : integers l E) ^ n) ∣ x.down := by
     rw [← RingHom.mem_ker, ker_integersModPowTransition, Ideal.mem_span_singleton]
   rw [RingHom.mem_ker, Ideal.mem_span_singleton]
-  refine ⟨fun hx ↦ ?_, fun ⟨c, hc⟩ ↦ ULift.ext _ _ (h.2 ⟨c.down, congrArg ULift.down hc⟩)⟩
+  refine ⟨fun hx ↦ ?_, fun ⟨c, hc⟩ ↦ ULift.ext (h.2 ⟨c.down, congrArg ULift.down hc⟩)⟩
   obtain ⟨c, hc⟩ := h.1 (congrArg ULift.down hx)
-  exact ⟨ULift.up c, ULift.ext _ _ hc⟩
+  exact ⟨ULift.up c, ULift.ext hc⟩
 
 end PadicAlgCl

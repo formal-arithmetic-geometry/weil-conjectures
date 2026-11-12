@@ -359,7 +359,7 @@ lemma absoluteFrobenius_geometricFiber_comp_geometricFiberToAlgebraicClosure (m 
   ext z
   simp only [CommRingCat.hom_ofHom, iterateFrobeniusOfPrime_apply, pow_mul,
     FiniteField.ringChar_pow_log_card, RingEquiv.toRingHom_eq_coe, RingHom.coe_coe,
-    AlgEquiv.coe_ringEquiv, AlgEquiv.coe_pow,
+    AlgEquiv.coe_toRingEquiv, AlgEquiv.coe_pow,
     FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate]
   rw [Nat.card_eq_fintype_card]
 

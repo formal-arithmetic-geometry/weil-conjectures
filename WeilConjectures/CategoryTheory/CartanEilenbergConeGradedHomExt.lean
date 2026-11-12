@@ -122,16 +122,16 @@ theorem cartanEilenberg_cone_graded_hom_ext
     change F.complexStep p m ≤ Subobject.mk e
     rw [hF p m]
     apply sup_le
-    · rw [if_pos (by omega : p ≤ m + 1)]
+    · rw [ite_eq_left (by omega : p ≤ m + 1)]
       let a := (CochainComplex.mappingCone.inl aug).v (m + 1) m (by omega)
       have ha : imageSubobject a ≤ F.complexStep p m := by
-        rw [hF p m, if_pos (by omega : p ≤ m + 1)]
+        rw [hF p m, ite_eq_left (by omega : p ≤ m + 1)]
         exact le_sup_left
       obtain ⟨l, hl⟩ := lift_of_image_le j a ha
       have hw : l ≫ q ≫ g = l ≫ q ≫ h := by
         by_cases hp : p ≤ m
         · have han : imageSubobject a ≤ F.complexStep (p + 1) m := by
-            rw [hF (p + 1) m, if_pos (by omega : p + 1 ≤ m + 1)]
+            rw [hF (p + 1) m, ite_eq_left (by omega : p + 1 ≤ m + 1)]
             exact le_sup_left
           have hz := lift_next_quotient_zero F p m a han l hl
           change l ≫ q = 0 at hz

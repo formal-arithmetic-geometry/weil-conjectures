@@ -110,7 +110,7 @@ private theorem section_amalgamation
       M.val.presheaf.map (homOfLE (show R ≤ Q by rw [hR]; exact inf_le_right)).op b' at h
     have h' := congrArg (fun x ↦ M.val.presheaf.map (eqToHom hR.symm).op x) h
     simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp] at h'
-    convert h' using 1 <;> congr 2
+    convert h' using 1
   let F : TopCat.Sheaf AddCommGrpCat X := ⟨M.val.presheaf, M.isSheaf⟩
   let O : Bool → X.Opens := fun j ↦ if j then P else Q
   let sf : ∀ j : Bool, (F.obj.obj (.op (O j))) := fun j ↦ by
@@ -126,7 +126,7 @@ private theorem section_amalgamation
       have h' := congrArg
         (fun x ↦ M.val.presheaf.map (eqToHom (inf_comm Q P)).op x) hcompat.symm
       simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp] at h'
-      convert h' using 1 <;> congr 2
+      convert h' using 1
     · simpa [O, sf, F, Opens.infLELeft, Opens.infLERight] using hcompat
     · rfl
   have hcover' : T ≤ ⨆ j, O j := by

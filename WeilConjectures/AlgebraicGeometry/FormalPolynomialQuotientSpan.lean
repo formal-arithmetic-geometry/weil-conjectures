@@ -53,8 +53,8 @@ private theorem evaluation_mem_span
           MvPolynomial.eval₂Hom ρ (fun i => ρ (generators i)) b.val)) :=
     Submodule.subset_span ⟨b, rfl⟩
   have heq : MvPolynomial.eval (fun i => ρ (generators i))
-      (MvPolynomial.monomial d (MvPolynomial.coeff d p)) =
-        MvPolynomial.coeff d p •
+      (MvPolynomial.monomial d (AddMonoidAlgebra.coeff p d)) =
+        AddMonoidAlgebra.coeff p d •
           MvPolynomial.eval₂Hom ρ (fun i => ρ (generators i)) b.val := by
     simp [b, MvPolynomial.eval_monomial, MvPolynomial.eval₂_monomial, smul_eq_mul]
   rw [heq]

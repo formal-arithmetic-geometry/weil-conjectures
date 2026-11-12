@@ -71,8 +71,8 @@ noncomputable def neighborhoodCompEtale [Etale ι] :
     PointedEtaleNeighborhood s ⥤ PointedEtaleNeighborhood (s ≫ ι) where
   obj x :=
     haveI : Etale x.1.hom := x.1.prop
-    ⟨Scheme.Etale.mk (x.1.hom ≫ ι), CategoryTheory.Over.homMk x.2.left
-      (by simpa using congrArg (· ≫ ι) (CategoryTheory.Over.w x.2))⟩
+    Functor.elementsMk _ (Scheme.Etale.mk (x.1.hom ≫ ι)) (CategoryTheory.Over.homMk x.2.left
+      (by simpa using congrArg (· ≫ ι) (CategoryTheory.Over.w x.2)))
   map {x y} f := ⟨MorphismProperty.Over.homMk f.1.left (by simp),
     CategoryTheory.Over.OverMorphism.ext (congrArg (fun g ↦ g.left) f.2)⟩
 
@@ -129,8 +129,8 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H {X S W : Schem
   intro x c
   have : Etale x.1.hom := x.1.prop
   let x' : PointedEtaleNeighborhood s :=
-    ⟨Scheme.Etale.mk (pullback.snd x.1.hom ι), CategoryTheory.Over.homMk
-      (pullback.lift x.2.left s (CategoryTheory.Over.w x.2)) (pullback.lift_snd _ _ _)⟩
+    Functor.elementsMk _ (Scheme.Etale.mk (pullback.snd x.1.hom ι)) (CategoryTheory.Over.homMk
+      (pullback.lift x.2.left s (CategoryTheory.Over.w x.2)) (pullback.lift_snd _ _ _))
   let e : (neighborhoodCompEtale ι s).obj x' ⟶ x :=
     ⟨MorphismProperty.Over.homMk (pullback.fst _ _) pullback.condition,
       CategoryTheory.Over.OverMorphism.ext (pullback.lift_fst _ _ _)⟩

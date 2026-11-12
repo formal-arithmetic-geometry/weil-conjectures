@@ -51,8 +51,7 @@ private lemma contract3_includeRight (f : L →ₗ[K] K) (x : L ⊗[K] L) :
 private lemma contract3_map_includeRight (f : L →ₗ[K] K) (x : L ⊗[K] L) :
     contract3 f (map (AlgHom.id K L) (includeRight : L →ₐ[K] L ⊗[K] L) x) =
       ((_root_.TensorProduct.rid K L) (LinearMap.lTensor L f x)) ⊗ₜ 1 := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a b => simp [contract3, TensorProduct.tmul_smul, TensorProduct.smul_tmul']
   | add x y hx hy => simp only [map_add, hx, hy, TensorProduct.add_tmul]
 
@@ -61,14 +60,11 @@ private lemma contract3_mul_map_includeLeft (f : L →ₗ[K] K) (y : L ⊗[K] (L
     (x : L ⊗[K] L) :
     contract3 f (y * map (AlgHom.id K L) (includeLeft : L →ₐ[K] L ⊗[K] L) x) =
       contract3 f y * x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a b =>
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul c z =>
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | tmul e g =>
         simp [contract3, TensorProduct.tmul_smul, TensorProduct.smul_tmul', mul_comm]
       | add z w hz hw => simp only [TensorProduct.tmul_add, add_mul, map_add, hz, hw]
@@ -80,8 +76,7 @@ private lemma equivFinsuppOfBasisRight_apply_eq_rid_lTensor {ι : Type*} [Decida
     (b : Module.Basis ι K L) (x : L ⊗[K] L) (i : ι) :
     _root_.TensorProduct.equivFinsuppOfBasisRight b x i =
       _root_.TensorProduct.rid K L (LinearMap.lTensor L (b.coord i) x) := by
-  induction x using _root_.TensorProduct.induction_on with
-  | zero => simp
+  induction x using _root_.TensorProduct.inductionOn with
   | tmul a c => simp
   | add x y hx hy => simp only [map_add, Finsupp.add_apply, hx, hy]
 

@@ -89,7 +89,7 @@ private theorem ordinaryExactComp
   let := comp_preservesFiniteColimits (ordinaryPull l E r) (ordinaryPull l E s)
   exact ⟨ordinaryExactComparison l E (s ≫ r) ≪≫
     Functor.mapDerivedCategoryNatIso c ≪≫
-    Functor.mapDerivedCategoryCompIso (ordinaryPull l E r) (ordinaryPull l E s) ≪≫
+    (Functor.mapDerivedCategoryCompIso (ordinaryPull l E r) (ordinaryPull l E s)).symm ≪≫
     Functor.isoWhiskerRight (ordinaryExactComparison l E r).symm _ ≪≫
     Functor.isoWhiskerLeft _ (ordinaryExactComparison l E s).symm⟩
 

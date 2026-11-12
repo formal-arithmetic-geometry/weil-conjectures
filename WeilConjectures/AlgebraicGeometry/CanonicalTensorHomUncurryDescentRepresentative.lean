@@ -99,7 +99,7 @@ theorem exists_tensorHomUncurry_descent_representative (X : Scheme.{u})
       (DerivedCategory.Q.map φ ≫ (schemeDerivedInternalHomResolutionIso X L M).inv) g :=
     ⟨g, hg, fun g' hg' ↦ unique _ _ _ _ _ _ hg' hg⟩
   dsimp only [t]
-  rw [dif_pos hex]
+  rw [dite_eq_left hex]
   exact unique _ _ _ _ _ g (Classical.choose_spec hex).1 hg
 
 end AlgebraicGeometry

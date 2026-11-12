@@ -412,6 +412,11 @@ private noncomputable def tensorMultiplication
   (tensorUnitIso T R M).inv ≫ (siteSheafTensorRight (A := R) M).map
     f ≫ (tensorUnitIso T R M).hom
 
+private local instance adicReductionUnitSectionSMul
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj R)) (V : T.ProEtᵒᵖ) :
+    SMul ((unit ((adicLisseForget T).obj R)).val.obj V) (M.val.obj V) :=
+  inferInstanceAs (SMul (R.obj.obj V) (M.val.obj V))
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensorMultiplication_apply
     (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj R)) (V : T.ProEtᵒᵖ) (x : M.val.obj V) :

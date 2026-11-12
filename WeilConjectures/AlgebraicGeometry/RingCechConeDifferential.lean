@@ -294,11 +294,7 @@ theorem ringCechConeEquiv_d (A : CommRingCat.{u}) (r q : ℕ)
   let D := ringCechDifferential A (r + 1) f (q + 1)
   have hy : ∀ z, E (0, -T z) = D (F (0, z)) := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero =>
-      rw [map_zero, neg_zero]
-      change E 0 = D (F 0)
-      rw [map_zero, map_zero, map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul s z => exact differential_snd_tmul A r q f s z
     | add z w hz hw =>
       have hp : ((0 : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 2)),

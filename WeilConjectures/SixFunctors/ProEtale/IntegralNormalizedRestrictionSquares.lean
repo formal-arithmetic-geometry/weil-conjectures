@@ -249,7 +249,7 @@ private theorem finiteBack_canonical
         ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} B)))).app _ b)
   exact hc.symm.trans (congrArg (c.inv.hom.app _) h)
 
-private theorem finiteBack_ringIso
+private theorem finiteBack_ringIso_private
     (B : Type u) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
     [Finite B] [DiscreteTopology B]
     (a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X)
@@ -286,6 +286,10 @@ private theorem finiteBack_ringIso
       exact Category.comp_id _
     _ = c.inv ≫ F.map e.ringIso.hom ≫ finiteBack X B a := by
       rw [← Category.assoc, hg, finiteBack_canonical]
+
+/-- Public export of the private `finiteBack_ringIso_private`
+(used by `import all` importers; linter.privateModule). -/
+alias finiteBack_ringIso := finiteBack_ringIso_private
 
 private def continuousRingTopologyIso
     (B : Type u) [Ring B] (t₁ t₂ : TopologicalSpace B) (ht : t₁ = t₂)
@@ -363,7 +367,7 @@ private theorem point_unit_map
   exact (congrArg (fun k : R ⟶ (sfbPullbackFromPointRightAdjoint X).obj
       ((upperStarFromPoint X).obj T) ↦ k.hom.app (op S) x) h).symm
 
-private theorem integral_projection_back (n : ℕ)
+private theorem integral_projection_back_private (n : ℕ)
     (a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X)
     (c : Cone (sfbIntegralFiniteTower l E ⋙ FintypeCat.toProfinite))
     (j : sfbIntegralProfinite l E ≅ c.pt)
@@ -428,5 +432,9 @@ private theorem integral_projection_back (n : ℕ)
     ((((integerPointIso l E).inv.hom.app (op S)) f).down x) =
       (g ≫ j.hom ≫ c.π.app (op n)) x
   exact (hq n (g x)).symm
+
+/-- Public export of the private `integral_projection_back_private`
+(used by `import all` importers; linter.privateModule). -/
+alias integral_projection_back := integral_projection_back_private
 
 end AlgebraicGeometry.ProEtale.IntegralPresentation

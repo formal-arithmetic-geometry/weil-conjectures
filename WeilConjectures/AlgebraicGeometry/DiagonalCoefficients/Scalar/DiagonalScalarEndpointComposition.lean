@@ -45,7 +45,7 @@ def scalarRestrictionCompIso (h : a ≫ b = c) (X : Scheme.{u}) :
         (coefficientMap b X)).mapDerivedCategory ⋙
         (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
           (coefficientMap a X)).mapDerivedCategory :=
-  ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp (coefficientMap a X) (coefficientMap b X)).symm ≪≫
         Mod.comapCongr (by rw [← h, coefficientMap_comp]))).symm

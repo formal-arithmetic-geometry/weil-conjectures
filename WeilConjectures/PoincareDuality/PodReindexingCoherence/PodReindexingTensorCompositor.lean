@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 import Mathlib.Tactic.CategoryTheory.Slice
 import all Mathlib.CategoryTheory.Limits.HasLimits
@@ -235,7 +237,7 @@ private theorem composition_derived_factors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (a : H ≅ F ⋙ G) (K : CochainComplex C₀ ℤ) :
-    (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+    (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -248,7 +250,7 @@ private theorem composition_derived_factors
       𝟙 _ := rfl
   rw [hid] at hc
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   erw [hc, ha]
   congr 2
   change _ = (NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app K ≫ 𝟙 _
@@ -274,8 +276,8 @@ private def canonicalCompositor {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X)
       complex := fun P ↦ ac.app P
       degree := fun P i ↦ ?_
       derived := Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso (podReindexingFunctor l E g s)
-          (podReindexingFunctor l E h s)
+        (Functor.mapDerivedCategoryCompIso (podReindexingFunctor l E g s)
+          (podReindexingFunctor l E h s)).symm
       model := fun P ↦ ?_ }
   · exact Category.comp_id _
   · exact composition_derived_factors (podReindexingFunctor l E g s)

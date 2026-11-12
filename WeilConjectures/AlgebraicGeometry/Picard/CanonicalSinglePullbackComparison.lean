@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # The pinned derived pullback comparison on a single module
@@ -48,10 +50,10 @@ def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) 
   let ε := (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f
   let t := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
     (pullbackPushforwardAdjunction f)
-  exact ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
+  exact cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
     DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
-        (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app M)) ≫
+        (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app M))) ≫
     (DerivedCategory.singleFunctor _ 0).map (t.hom.app M)
 
 /-- The pinned comparison is invertible on an invertible module.
@@ -82,6 +84,6 @@ theorem isIso_canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (pullbackPushforwardAdjunction f)
   have hi : IsIso (c ≫ (DerivedCategory.singleFunctor _ 0).map (t.hom.app M)) :=
     inferInstance
-  simpa only [canonicalSinglePullbackMap, c, t, ε, Category.assoc] using hi
+  simpa only [canonicalSinglePullbackMap, c, t, ε, cast_eq, Category.assoc] using hi
 
 end AlgebraicGeometry.Scheme.Modules

@@ -439,14 +439,14 @@ theorem unboundedProperOpenHorizontalComposition_of_normalization
         (Γ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂)).hom.app K =
           (Functor.mapDerivedCategoryNatIso
               (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
               (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫
             D((j)_!open[ModuleCat.{u + 1} A]).map ((Γ k r p i sq₁).hom.app K) ≫
             (Γ l p q j sq₂).hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫
             R((q)_*[ModuleCat.{u + 1} A]).map
               ((Functor.mapDerivedCategoryNatIso
                   (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-                Functor.mapDerivedCategoryCompIso _ _).inv.app K)) := by
+                (Functor.mapDerivedCategoryCompIso _ _).symm).inv.app K)) := by
   have normalized {U V W Z : Scheme.{u}}
       [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

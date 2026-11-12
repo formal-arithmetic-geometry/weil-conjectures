@@ -82,7 +82,7 @@ instance isLocallyInjective_padicAlgClPresheafToAdicConstantSheaf :
     Presheaf.IsLocallyInjective (ProEt.topology X)
       (padicAlgClPresheafToAdicConstantSheaf X l) :=
   Presheaf.isLocallyInjective_of_injective _ _ fun _ _ _ h ↦
-    ULift.ext _ _ (Subtype.ext (congrArg (fun z ↦ z.down.1) h))
+    ULift.ext (Subtype.ext (congrArg (fun z ↦ z.down.1) h))
 
 /-- **The two models of `ℚ̄_ℓ,X` agree**: the comparison
 `padicAlgClSheaf X ℓ ⟶ adicConstantSheaf ℓ X`

@@ -407,7 +407,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
   completedReductionTower CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors CategoryTheory.Functor.mapDerivedCategoryFactorsh
-  CategoryTheory.Functor.mapDerivedCategoryCompIso CategoryTheory.Functor.mapDerivedCategoryNatIso
+  CategoryTheory.Functor.mapDerivedCategoryNatIso
 
 /-- The representative equation for the comparison of entire derived strict towers.
 It uses actual universal counits and the ordinary strict comparison, so evaluations
@@ -689,12 +689,12 @@ def stratumTowerEvaluationIso (n : ℕ) :
         (reductionModuleRing Y (d.completedRing Y)) n ≅
       reductionTowerDerivedEvaluation X (reductionModuleRing X (d.completedRing X)) n ⋙
         d.pull f :=
-  (Functor.mapDerivedCategoryCompIso (d.towerModulePull f)
-    (reductionTowerEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (d.towerModulePull f)
+    (reductionTowerEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n) ≪≫
     Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (reductionTowerEvaluation X (reductionModuleRing X (d.completedRing X)) n)
-      (stratumModulePull d f)
+      (stratumModulePull d f)).symm
 
 section
 attribute [local semireducible] completedReductionModuleTowerFunctor

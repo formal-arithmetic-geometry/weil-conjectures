@@ -104,7 +104,7 @@ theorem derived_fiber_open_factorization (W : Scheme.{v}) (w : W)
   obtain ⟨b⟩ := pullbackCompIso g U.ι
   let θ : R.mapDerivedCategory ⋙ V.mapDerivedCategory ⋙ derivedPullback g ≅
       derivedPullback (W.fromSpecResidueField w) :=
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso R V).symm
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso R V)
       (derivedPullback g) ≪≫
     Functor.isoWhiskerRight a.symm (derivedPullback g) ≪≫ b ≪≫
     eqToIso (congrArg (fun f ↦ derivedPullback f) (openResiduePoint_comp W w U hwU))

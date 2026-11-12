@@ -84,6 +84,8 @@ theorem moduleCohomology_scalar_endomorphism {X : Scheme.{v}} (G : X.Modules)
     ((RingedSpace.moduleCohomology X.toRingedSpace q).map tau).hom x = r • x := by
   let : EnoughInjectives X.Modules :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+    inferInstanceAs (CommRing (X.presheaf.obj (op ⊤)))
   have ht : tau = scalarEnd G r := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -102,11 +104,11 @@ theorem moduleCohomology_scalar_endomorphism {X : Scheme.{v}} (G : X.Modules)
   let e := I.isoRightDerivedObj E q
   have hn := InjectiveResolution.isoRightDerivedObj_hom_naturality tau I I phi hw E q
   have hm : (E.mapHomologicalComplex _ ⋙ HomologicalComplex.homologyFunctor _ _ q).map phi =
-      r • 𝟙 _ := by
+      r • 𝟙 (((E.mapHomologicalComplex _).obj I.cocomplex).homology q) := by
     change ShortComplex.homologyMap _ = _
     have hsc : ((HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) q).map
         ((E.mapHomologicalComplex (ComplexShape.up ℕ)).map phi)) =
-        r • 𝟙 _ := by
+        r • 𝟙 (((E.mapHomologicalComplex _).obj I.cocomplex).sc q) := by
       ext t <;>
         simp [phi, E, RingedSpace.globalSectionsFunctor, scalarEnd,
           SheafOfModules.evaluation, PresheafOfModules.evaluation]

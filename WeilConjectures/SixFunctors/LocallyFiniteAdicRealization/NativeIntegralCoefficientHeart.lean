@@ -706,7 +706,7 @@ theorem nativeIntegralCoefficient_heart
       (integralDetailedCoefficientComparison X l E).hom).mapIso counit.symm) hN
   have hconst := (ProEtale.integralSectionLocalModels l E X M).mpr hm
   have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  rw [ProEtale.IsConstantModelConstructible, if_pos hqc] at hconst
+  rw [ProEtale.IsConstantModelConstructible, ite_eq_left hqc] at hconst
   have hM := ProEtale.constructible_of_finiteConstantStratified _ X M hconst
   -- Scalar extension preserves constructibility; the native encoding reflects it.
   have hext := ProEtale.constructible_extend A (abRing l X) a hM

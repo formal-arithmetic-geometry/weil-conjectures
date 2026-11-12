@@ -246,7 +246,8 @@ noncomputable def integralToLocallyFiniteFunctions :
 lemma integralToLocallyFiniteFunctions_injective :
     Function.Injective (integralToLocallyFiniteFunctions l T) := by
   intro f g h
-  ext t
+  apply ContinuousMap.ext
+  intro t
   have := congrArg (fun φ : locallyFiniteFunctions l T ↦ (φ : C(T, PadicAlgCl l)) t) h
   exact PadicInt.ext (by simpa [integralToLocallyFiniteFunctions, integralCoe] using this)
 

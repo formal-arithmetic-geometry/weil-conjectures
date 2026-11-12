@@ -14,6 +14,7 @@ public import WeilConjectures.WeilSheaf.UpperShriek
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.SmoothPurityAbsolute
 import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
 import WeilConjectures.WeilSheaf.SmoothPurityAbsolute
 import WeilConjectures.WeilSheaf.VerdierExchangeNatural

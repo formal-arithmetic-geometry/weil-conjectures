@@ -95,8 +95,8 @@ theorem comparison_representative
     let F := integralDerivedReduction l E Y D hl n
     ∃ (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
       (_ : flat.{t, u} Y R P) (_ : I.IsKInjective)
-      (_ : Nonempty (DerivedCategory.Q.obj P ≅ K))
-      (_ : Nonempty (DerivedCategory.Q.obj I ≅ L))
+      (_ : Nonempty (Iso (C := DerivedCategory (Modules.{t, u} Y R)) (DerivedCategory.Q.obj P) K))
+      (_ : Nonempty (Iso (C := DerivedCategory (Modules.{t, u} Y R)) (DerivedCategory.Q.obj I) L))
       (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))
       (eNeg : Q.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit
         ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -130,7 +130,7 @@ theorem comparison_representative
   have : QuasiIso p := hp
   have : IsIso (DerivedCategory.Q.map p) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso A p).2 hp
-  let eP : DerivedCategory.Q.obj P ≅ K :=
+  let eP : Iso (C := DerivedCategory A) (DerivedCategory.Q.obj P) K :=
     asIso (DerivedCategory.Q.map p) ≪≫ DerivedCategory.Q.objObjPreimageIso K
   let G' : CochainComplex A ℤ := DerivedCategory.Q.objPreimage L
   let I := (CochainComplex.kInjectiveResolutionFunctor.{max u (t + 1)} A).obj G'
@@ -141,7 +141,7 @@ theorem comparison_representative
     (CochainComplex.monoQuasiIso_toKInjectiveResolution_app A G').2
   have : IsIso (DerivedCategory.Q.map eta) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso A eta).2 heta
-  let eI : DerivedCategory.Q.obj I ≅ L :=
+  let eI : Iso (C := DerivedCategory A) (DerivedCategory.Q.obj I) L :=
     (asIso (DerivedCategory.Q.map eta)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso L
   obtain ⟨Q, hQ, hzero, eNeg, eZero, epsilon, hepsilon⟩ :=
     integralReduction_twoTerm_resolution l E Y D hl n

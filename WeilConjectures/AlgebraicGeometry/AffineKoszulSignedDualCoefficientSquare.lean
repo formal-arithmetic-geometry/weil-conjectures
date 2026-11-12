@@ -151,7 +151,7 @@ private theorem coefficient_dual_iso_of_components
           (T.map (a (q + 1)).hom ≫ T.map (K.d (q + 1) q) ≫ T.map (a q).inv).op) ≫
           H.map (T.map (a (q + 1)).inv).op ≫ (e0 (q + 1)).hom ≫ T.map (c (q + 1)).inv
       simp only [op_comp, Functor.map_comp, Category.assoc,
-        Linear.units_smul_comp, Linear.comp_units_smul, Iso.map_inv_hom_id_assoc]
+        Linear.units_smul_comp, Linear.comp_units_smul, Iso.inv_hom_id_map_assoc]
       have ha : H.map (T.map (a (q + 1)).hom).op ≫
           H.map (T.map (a (q + 1)).inv).op = 𝟙 _ :=
         (H.mapIso (T.mapIso (a (q + 1))).op).hom_inv_id
@@ -275,7 +275,7 @@ private theorem coefficient_dual_square_of_components
         SheafOfModules.homObjMap (𝟙 (T.obj (K.X q))) (T.map g) := by
       simp only [SheafOfModules.homObjMap_comp_homObjMap,
         Category.id_comp, Category.comp_id]
-    simp only [Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc]
+    simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_map_assoc]
     rw [← Category.assoc _ (SheafOfModules.homObjMap (T.map a.inv) (𝟙 (T.obj NQ))) _, hc]
     rw [Category.assoc, ← Category.assoc _ (eQ q).hom _, hg q]
     rw [hδ q]
@@ -327,7 +327,10 @@ theorem affine_koszul_signed_dual_coefficient_square
   let K := ExteriorAlgebra.koszulComplex A n f
   let NO := ModuleCat.of A A
   let NQ := ModuleCat.of A (A ⧸ I)
-  have : (tilde.functor Γ(Y, U.1)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : (tilde.functor Γ(Y, U.1)).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := Γ(Y, U.1)) f g
   have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive := ⟨by intros; rfl⟩
   have hT : T.Additive := inferInstanceAs
     (tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive

@@ -118,7 +118,7 @@ lemma of_distTriang {s : C} {J : Type*} [HasColimitsOfShape (Discrete J) C]
       (f - ∑ j ∈ S₃, b' j ≫ Sigma.ι (fun j ↦ (T j).obj₂) j) (by
     rw [sub_comp, hg, sum_comp, sub_eq_zero]
     refine Finset.sum_congr rfl fun j hj ↦ ?_
-    simp [b', dif_pos hj, hb j hj, coproductTriangle])
+    simp [b', dite_eq_left hj, hb j hj, coproductTriangle])
   obtain ⟨S₁, d, hd⟩ := h₁ a
   let d' (j : J) : s ⟶ (T j).obj₂ := if j ∈ S₁ then d j ≫ (T j).mor₁ else 0
   refine ⟨S₁ ∪ S₃, fun j ↦ b' j + d' j, ?_⟩
@@ -411,7 +411,7 @@ lemma compactFor_singleFunctor_of_homFactorsThroughFilteredColimits {s : Derived
     ← Finset.sum_coe_sort S]
   refine Finset.sum_congr rfl fun x _ ↦ ?_
   have hx : (⟨(x : Discrete J).as⟩ : Discrete J) ∈ S := x.2
-  simp only [dif_pos hx, assoc, φ]
+  simp only [dite_eq_left hx, assoc, φ]
   exact congrArg (h x ≫ ·) (ι_comp_sigmaComparison G B _).symm
 
 end Continuity

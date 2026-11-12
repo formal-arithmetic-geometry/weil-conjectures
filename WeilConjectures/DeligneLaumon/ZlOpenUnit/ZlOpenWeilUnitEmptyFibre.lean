@@ -185,8 +185,7 @@ private theorem tensor_natural {R : Type*} [CommRing R] {p : R}
       e ⟨K⟩ ≫ G.map (b ⊗ₜ[R] a) = F.map (b ⊗ₜ[R] a) ≫ e ⟨L⟩)
     (K L : ScalarLocalization R C p) (v : K ⟶ L) :
     e K ≫ G.map v = F.map v ≫ e L := by
-  induction v using TensorProduct.induction_on with
-  | zero => simp
+  induction v using TensorProduct.inductionOn with
   | tmul b a => exact he K.obj L.obj a b
   | add a b ha hb =>
     rw [F.map_add, G.map_add, Preadditive.comp_add, Preadditive.add_comp, ha, hb]
@@ -661,8 +660,6 @@ def EmptyFibre (S : Action D l hl X₀ U₀ j₀ Ω)
             (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω N.stage)).obj N.obj)))
 
 attribute [local irreducible] rationalStageScalar sfIntegralConstructible
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 /-- Actual scalar-unit and Frobenius-comparison equations at every pair of finite
 coefficient fields, using the action's specified integral and rational comparisons.
@@ -764,9 +761,6 @@ def FiniteScalarCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
         (rationalFrobeniusStageScalar D l hl U₀ Ω E L h)
         (rationalFrobeniusStageScalar D l hl X₀ Ω E L h)
 
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-
 /-- The object equation of the recorded common-stage pullback.
 Source: coefficient descent (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
 def pullbackStageIso {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -782,9 +776,6 @@ def pullbackStageIso {X Y : Scheme.{u}} (f : X ⟶ Y)
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) f).obj K) :=
   eqToIso ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1
     ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj K))
-
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 /-- Inclusion of every literal finite stage preserves the actual unit and beta.
 The pullback edges are the canonical object identifications of the recorded

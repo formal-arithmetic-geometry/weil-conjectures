@@ -94,7 +94,6 @@ private theorem ordinaryPullback_Q_iso {T X : Scheme.{u}} (g : T ⟶ X)
     (DerivedCategory.quotientCompQhIso _).app _ ≪≫
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex η (.up ℤ)).app P)⟩
 
-
 set_option maxHeartbeats 400000 in
 -- The comparison elaborates several equivalences of module and derived categories,
 -- with independent localization universes and nondefinitionally equal composite functors.
@@ -160,24 +159,6 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
   have : A.Additive := Functor.additive_of_preserves_binary_products _
   have : B.PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
-  have : B.PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
   have : B.Additive := Functor.additive_of_preserves_binary_products _
   have : C.Additive := Functor.additive_of_preserves_binary_products _
   have : (Scheme.Modules.pullback f).Additive := Scheme.Modules.instAdditivePullback f
@@ -213,8 +194,8 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
       (RX.mapDerivedCategory.obj ((derivedPullback g).obj E)) ≅
       DerivedCategory.Q.obj
         (((Scheme.Modules.pullback f).mapHomologicalComplex (.up ℤ)).obj P) :=
-    ((Functor.mapDerivedCategoryCompIso RX C).app _).symm ≪≫ θ.app E ≪≫
-      (derivedPullback f).mapIso ((Functor.mapDerivedCategoryCompIso RY A).app E ≪≫ eP) ≪≫ q
+    (Functor.mapDerivedCategoryCompIso RX C).app _ ≪≫ θ.app E ≪≫
+      (derivedPullback f).mapIso (((Functor.mapDerivedCategoryCompIso RY A).app E).symm ≪≫ eP) ≪≫ q
   let δ : F ⋙ C ≅ A ⋙ Scheme.Modules.pullback f :=
     Functor.associator A (Scheme.Modules.pullback f ⋙ B) C ≪≫
       Functor.isoWhiskerLeft A (Functor.associator (Scheme.Modules.pullback f) B C) ≪≫

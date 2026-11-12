@@ -74,7 +74,7 @@ private noncomputable def telescope_cokernel
                   Sigma.ι (fun n : ℕ ↦ E.obj n) k ≫ s.π := by
               have hz := congrArg
                 (fun z ↦ Sigma.ι (fun n : ℕ ↦ E.obj n) k ≫ z) s.condition
-              simp only [telescopeColimitShift, Sigma.ι_desc_assoc, Preadditive.sub_comp,
+              simp only [telescopeColimitShift, Sigma.ι_comp_desc_assoc, Preadditive.sub_comp,
                 Category.assoc, comp_zero] at hz
               exact (sub_eq_zero.mp hz).symm
             have hall (m : ℕ) (hnm : n ≤ m) :

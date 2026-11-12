@@ -650,8 +650,7 @@ private theorem integralComparisonDerivedCounit
     erw [DerivedCategory.quotientCompQhIso_hom_naturality]
     dsimp only [Functor.comp_obj]
     erw [CategoryTheory.Functor.map_id]
-    erw [CategoryTheory.Functor.map_id DerivedCategory.Qh]
-    repeat' erw [Category.id_comp]
+    erw [Category.id_comp, Iso.inv_hom_id_app_assoc]
     rfl
   calc
     d.counit.app (DerivedCategory.Q.obj I) =
@@ -726,8 +725,8 @@ private theorem integralComparisonLimitToRoos_generic
     intro n
     simp only [scalarRoosBoundary, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Category.assoc,
-      Pi.lift_π, zero_comp]
-    rw [← Category.assoc, Pi.lift_π, Pi.lift_π, hπ, sub_self]
+      Pi.lift_comp_π, zero_comp]
+    rw [← Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π, hπ, sub_self]
   let α := CochainComplex.mappingCocone.lift (scalarRoosBoundary C.asFunctor) a 0
     (by simp [ha])
   have hα : α ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C.asFunctor) = a :=
@@ -735,7 +734,7 @@ private theorem integralComparisonLimitToRoos_generic
   refine ⟨α, ⟨?_, ?_⟩, ?_⟩
   · intro n
     rw [← Category.assoc, hα]
-    exact Pi.lift_π π n
+    exact Pi.lift_comp_π π n
   · intro i j h
     simp [α]
   · intro β hβ
@@ -745,7 +744,7 @@ private theorem integralComparisonLimitToRoos_generic
       apply Pi.hom_ext
       intro n
       rw [Category.assoc, hβ.1 n]
-      exact (Pi.lift_π π n).symm
+      exact (Pi.lift_comp_π π n).symm
     ext i : 1
     have hfi := congrArg (fun f ↦ HomologicalComplex.Hom.f f i) hf
     have hsi : α.f i ≫ (CochainComplex.mappingCocone.snd

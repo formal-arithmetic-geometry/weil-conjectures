@@ -70,7 +70,7 @@ private noncomputable def exactComposition
     ExactComposition F G H (exactImage H) (exactImage F) (exactImage G) := by
   letI : PreservesFiniteLimits (F ⋙ G) := comp_preservesFiniteLimits F G
   letI : PreservesFiniteColimits (F ⋙ G) := comp_preservesFiniteColimits F G
-  refine ⟨e, (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+  refine ⟨e, Functor.mapDerivedCategoryCompIso F G ≪≫
     Functor.mapDerivedCategoryNatIso e, ?_⟩
   intro K
   exact Functor.exactDerivedRestrictionComposition_hom_factors F G H e K

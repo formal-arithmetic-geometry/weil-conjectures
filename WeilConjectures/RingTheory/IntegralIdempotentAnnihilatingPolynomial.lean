@@ -65,7 +65,7 @@ theorem exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient
       by_cases hi : i = g.natDegree
       · subst i
         simp [coeff_map, hg.coeff_natDegree]
-      · simp only [coeff_map, coeff_X_pow, if_neg hi]
+      · simp only [coeff_map, coeff_X_pow, ite_eq_right hi]
         exact Ideal.Quotient.eq_zero_iff_mem.mpr (hcoeff i hi)
     have hq : (X * (X - 1) : A[X]).Monic :=
       monic_X.mul (by simpa using monic_X_sub_C (1 : A))

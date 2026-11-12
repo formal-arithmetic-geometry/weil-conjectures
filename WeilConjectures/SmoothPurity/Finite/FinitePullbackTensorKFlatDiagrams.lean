@@ -38,7 +38,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   FinitePullbackTensorRep.totalTensor
 attribute [local semireducible] FinitePullbackTensorRep.pull
 attribute [local implicit_reducible] FinitePullbackTensorRep.pull
-  CategoryTheory.Functor.map₂HomologicalComplex CategoryTheory.Functor.mapHomologicalComplex
+  CategoryTheory.Functor.map₂HomologicalComplex
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 attribute [local instance] FinitePullbackTensorRep.modules_abelian

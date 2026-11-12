@@ -98,7 +98,7 @@ private theorem cochainsEquiv_d {R : Type*} [CommRing R] [TopologicalSpace R]
     exact resolutionEquiv_d e (i + 1) x.val
   · have h' : ¬(ComplexShape.up ℕ).Rel i j := h
     rw [HomologicalComplex.shape _ _ _ h', HomologicalComplex.shape _ _ _ h']
-    simp
+    rw [TopModuleCat.hom_zero_apply, TopModuleCat.hom_zero_apply, map_zero]
 
 private noncomputable def concreteData {R : Type*} [Ring R] [TopologicalSpace R]
     (S : ShortComplex (TopModuleCat.{s} R)) : S.LeftHomologyData :=

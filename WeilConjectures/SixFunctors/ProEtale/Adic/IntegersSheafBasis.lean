@@ -78,8 +78,8 @@ noncomputable def continuousMapAbSheafAddHom {R Q : Type} [TopologicalSpace R] [
     (hφ : Continuous φ) : continuousMapAbSheaf X R ⟶ continuousMapAbSheaf X Q :=
   ⟨{ app _ := AddCommGrpCat.ofHom
       { toFun f := ULift.up ((⟨φ, hφ⟩ : C(R, Q)).comp f.down)
-        map_zero' := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_zero φ)
-        map_add' _ _ := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_add φ _ _) }
+        map_zero' := ULift.ext (ContinuousMap.ext fun _ ↦ map_zero φ)
+        map_add' _ _ := ULift.ext (ContinuousMap.ext fun _ ↦ map_add φ _ _) }
      naturality _ _ _ := rfl }⟩
 
 variable {X} {l : ℕ} [Fact l.Prime] {E F : FiniteIntermediateField l}
@@ -93,14 +93,14 @@ lemma padicIntegersSheafMulOfLE_add (o o' : integers l F.1) :
     padicIntegersSheafMulOfLE X h (o + o') =
       padicIntegersSheafMulOfLE X h o + padicIntegersSheafMulOfLE X h o' := by
   ext U f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   exact add_mul o o' _
 
 lemma padicIntegersSheafMulOfLE_refl_comp (r : integers l E.1) (o : integers l F.1) :
     padicIntegersSheafMulOfLE X (le_refl E.1) r ≫ padicIntegersSheafMulOfLE X h o =
       padicIntegersSheafMulOfLE X h (integersInclusion l h r * o) := by
   ext U f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change o * integersInclusion l h (r * f.down x) =
     integersInclusion l h r * o * integersInclusion l h (f.down x)
   rw [map_mul]
@@ -113,7 +113,7 @@ lemma padicIntegersSheafMulOfLE_comp_mapOfLE {F' : FiniteIntermediateField l} (h
           (padicIntegersSheafMapOfLE X l h') =
       padicIntegersSheafMulOfLE X (h.trans h') (integersInclusion l h' o) := by
   ext U f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change integersInclusion l h' (o * integersInclusion l h (f.down x)) =
     integersInclusion l h' o * integersInclusion l (h.trans h') (f.down x)
   rw [map_mul]
@@ -168,7 +168,7 @@ lemma sum_padicIntegersSheafCoord_comp_mul :
   let := (integersInclusion l h).toAlgebra
   ext U f
   rw [sheafHom_app_sum]
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   have := b.sum_repr (f.down x)
   simp only [Algebra.smul_def, RingHom.algebraMap_toAlgebra] at this
   refine Eq.trans ?_ this
@@ -187,7 +187,7 @@ lemma padicIntegersSheafMulOfLE_comp_coord (o : integers l F.1) (j : Fin d) :
       padicIntegersSheafMulOfLE X (le_refl E.1) (b.repr o j) := by
   let := (integersInclusion l h).toAlgebra
   ext U f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change b.coord j (o * integersInclusion l h (f.down x)) = b.repr o j * f.down x
   have e : integersInclusion l h (f.down x) * o = f.down x • o := (Algebra.smul_def _ _).symm
   rw [mul_comm, e,

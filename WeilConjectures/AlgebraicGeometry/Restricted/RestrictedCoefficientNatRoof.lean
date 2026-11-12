@@ -31,7 +31,7 @@ open Scheme.Modules
 
 -- Expose only the category and complex wrappers used in instance matching.
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
-attribute [local implicit_reducible] Scheme.Modules.Hom Functor.mapHomologicalComplex
+attribute [local implicit_reducible] Scheme.Modules.Hom
   HomologicalComplex.single
 attribute [local irreducible] restrictionSectionsIso pushforwardRestrictIso
   restrictedDirectImageMap ModuleCohomologyFMapData.map moduleCohomologyFMap

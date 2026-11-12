@@ -102,7 +102,7 @@ theorem exists_openRestriction_derivedMonoidal (X : Scheme.{u})
     Functor.isLeftDerivedFunctor_of_inverts W _ P.mapDerivedCategoryFactorsh
   let e : O.mapDerivedCategory ⋙ A.mapDerivedCategory ≅
       derivedPullbackAcrossUniverses U.ι :=
-    (Functor.mapDerivedCategoryCompIso O A).symm ≪≫
+    Functor.mapDerivedCategoryCompIso O A ≪≫
       Functor.mapDerivedCategoryNatIso θ ≪≫
         Functor.leftDerivedUnique (derivedPullbackAcrossUniverses U.ι) P.mapDerivedCategory
           P.mapDerivedCategoryFactorsh.hom ε W

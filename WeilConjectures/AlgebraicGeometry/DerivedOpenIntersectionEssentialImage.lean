@@ -133,7 +133,7 @@ theorem derived_open_intersection_mem_essImage
   let a := a0.mapDerivedCategoryRightDerivedAdjunction
   let zD : rg.mapDerivedCategory ⋙ E.functor ≅
       (schemeOpenOverlapRestriction X iO).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso rg e.functor).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso rg e.functor) ≪≫
       Functor.mapDerivedCategoryNatIso z
   let b := (a.comp E.toAdjunction).ofNatIsoLeft zD
   let j := b.rightAdjointUniq adj

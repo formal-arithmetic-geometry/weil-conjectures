@@ -23,7 +23,7 @@ open ProEtale ProEtaleWeilSheaf CondensedRing
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (ℓ : ℕ) [Fact ℓ.Prime]
   [Fact (ringChar k₀ ≠ ℓ)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-local instance : NeZero (ℓ : k₀) := ⟨by
+local instance instNeZeroCast_smoothPurityTateDescentPair : NeZero (ℓ : k₀) := ⟨by
   rw [Ne, ringChar.spec, Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime k₀ _) Fact.out]
   exact Fact.out⟩
 attribute [local instance] neZero_natCast_algebraicClosure

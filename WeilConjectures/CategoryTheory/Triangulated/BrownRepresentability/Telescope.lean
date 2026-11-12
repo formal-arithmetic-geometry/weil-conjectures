@@ -153,7 +153,7 @@ lemma cofan_inj (k : ULift.{v} ℕ) :
 @[reassoc (attr := simp)]
 lemma ι_desc {Y : C} (f : ∀ k : ULift.{v} ℕ, X k.down ⟶ Y) (n : ℕ) :
     ι X n ≫ Sigma.desc f = f ⟨n⟩ :=
-  Sigma.ι_desc f ⟨n⟩
+  Sigma.ι_comp_desc f ⟨n⟩
 
 /-- Morphisms out of `∐ₙ Xₙ` are determined by their restrictions to the summands. -/
 @[ext]
@@ -221,7 +221,7 @@ lemma eq_zero_of_comp_eq_zero {s : C} (hs : IsCompactObj s) (g : s ⟶ sum X)
     rw [hf, Preadditive.sum_comp, Finset.sum_eq_single k] at this
     · simpa using this
     · intro b _ hb
-      rw [cofan_inj, assoc, ι_proj_of_ne X (fun h ↦ hb (ULift.ext _ _ h)), comp_zero]
+      rw [cofan_inj, assoc, ι_proj_of_ne X (fun h ↦ hb (ULift.ext h)), comp_zero]
     · exact fun h ↦ (h hk).elim
   rw [hf]
   exact Finset.sum_eq_zero fun k hk ↦ by rw [hf' k hk, zero_comp]

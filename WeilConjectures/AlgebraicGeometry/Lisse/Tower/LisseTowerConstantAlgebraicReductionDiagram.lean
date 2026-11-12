@@ -158,7 +158,7 @@ theorem lisse_tower_constant_algebraic_reduction_diagram
             (Functor.mapDerivedCategoryCompIso
               (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
                 (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-              (R (n + 1))).inv.app (K n) ≫
+              (R (n + 1))).hom.app (K n) ≫
             (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
               (Ideal.Quotient.mk (J ^ (n + 2)))
               (Ideal.Quotient.factor

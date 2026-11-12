@@ -149,7 +149,7 @@ noncomputable def WeilComplex.upperStarCompIso {X Y Z : Scheme.{u}}
       WeilComplex.upperStar g ⋙ WeilComplex.upperStar f :=
   ObjectProperty.liftFullSubcategoryCompIso _ _ _
     (Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l f g) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _) _ _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm) _ _ _
 
 /-- Pullback of Weil complexes along the identity is the identity. -/
 noncomputable def WeilComplex.upperStarIdIso (X : Scheme.{u})

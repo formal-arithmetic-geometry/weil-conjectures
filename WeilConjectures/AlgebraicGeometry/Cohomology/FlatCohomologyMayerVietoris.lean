@@ -137,10 +137,7 @@ theorem H.baseChange_mayerVietoris
     apply LinearMap.ext
     intro x
     obtain ⟨y, rfl⟩ := (E n).surjective x
-    induction y using TensorProduct.induction_on with
-    | zero =>
-      change d' n 0 = 0
-      exact map_zero _
+    induction y using TensorProduct.inductionOn with
     | tmul s x =>
       simpa [dt, E, H.baseChange, extendComparison, ← Prod.smul_mk] using
         congrArg (fun y ↦ s • y) (hs₂ n x)

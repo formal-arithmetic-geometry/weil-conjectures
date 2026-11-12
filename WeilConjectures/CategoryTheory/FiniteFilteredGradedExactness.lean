@@ -18,7 +18,7 @@ parts (1)--(5), with the finite filtrations of Tag 0121
 The filtered objects, filtration-preserving maps, filtration steps, graded pieces and the
 canonical step and graded maps are the recorded ones of `def-sp-filtration`
 (`CategoryTheory.FilteredObject` over `CategoryTheory.DecreasingFiltration`, with
-`FilteredObject.restrictionSteps` and `FilteredObject.gradedMapSteps`).
+`WeilFilteredObject.restrictionSteps` and `WeilFilteredObject.gradedMapSteps`).
 
 ## Main definitions
 
@@ -41,17 +41,17 @@ open Limits
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-namespace FilteredObject
+namespace WeilFilteredObject
 
 /-- A filtered map `f : M → N` is strict when `f(FᵖM) = im(f) ∩ FᵖN` for every
 integer `p`, as subobjects of `N`.
 Source: Stacks Project, Homology, Tag 05QH, part (4)
 (blueprint: lem-trf-finite-filtered-graded-exactness). -/
-def IsStrict {A B : FilteredObject C} (f : A ⟶ B) : Prop :=
+def IsStrict {A B : WeilFilteredObject C} (f : A ⟶ B) : Prop :=
   ∀ p : ℤ,
     imageSubobject (restrictionSteps f p ≫ (B.filtration.step p).arrow) =
       imageSubobject f.hom ⊓ B.filtration.step p
 
-end FilteredObject
+end WeilFilteredObject
 
 end CategoryTheory

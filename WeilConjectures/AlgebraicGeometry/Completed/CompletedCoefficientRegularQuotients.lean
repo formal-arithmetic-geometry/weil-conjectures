@@ -245,7 +245,7 @@ private theorem projection_surjective {I : Ideal (Padic.coefficientExtensionInte
     have hsφ : Function.Surjective φ := by
       intro b
       obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective b.down
-      exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+      exact ⟨ULift.up a, ULift.ext ha⟩
     exact constRing_surj (Scheme.ProEt.topology T) φ hsφ U
   intro x
   obtain ⟨a, ha⟩ := hs x
@@ -269,8 +269,8 @@ private theorem uniformizer_kernel (n : ℕ) (U : T.ProEtᵒᵖ) :
         (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
         (n + 1) U := by
   ext x
-  change _ = 0 ↔ x ∈ Ideal.span {scalarHom l E T U
-    (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)}
+  change _ = 0 ↔ x ∈ Ideal.span
+    {scalarHom l E T U (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)}
   rw [Ideal.mem_span_singleton]
   constructor
   · intro hx

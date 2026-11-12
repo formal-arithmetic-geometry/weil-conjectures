@@ -244,9 +244,9 @@ theorem adic_tower_reconstruction
     · rintro ⟨n, _, h⟩
       exact ⟨_, ⟨n, rfl⟩, h⟩
   apply IsTopologicalAddGroup.ext
-  · apply topologicalAddGroup_iInf
+  · apply isTopologicalAddGroup_iInf
     intro n
-    exact topologicalAddGroup_induced (p n).toAddMonoidHom
+    exact isTopologicalAddGroup_induced (p n).toAddMonoidHom
   · let := I.adicModuleTopology L
     infer_instance
   · rw [nhds_iInf, hb.eq_iInf]

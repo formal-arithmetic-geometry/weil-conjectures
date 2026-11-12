@@ -47,8 +47,7 @@ variable {R : Type*} [CommRing R] {M : Type*} [AddCommGroup M] [Module R M]
 /-- The `i`-th component of `TensorProduct.piRight` is `lTensor M (proj i)`. -/
 lemma piRight_apply_eq_lTensor_proj [Fintype ι] [DecidableEq ι] (x : M ⊗[R] (∀ i, P i)) (i : ι) :
     piRight R R M P x i = (LinearMap.proj i : (∀ i, P i) →ₗ[R] P i).lTensor M x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul m p => simp
   | add x y hx hy => simp_all
 
@@ -112,8 +111,7 @@ lemma descentLift_eq (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k) (l : J)
     descentLift θ l w = (LinearMap.id : N l →ₗ[A] N l).liftBaseChange (B l)
       ((LinearMap.proj l : (∀ j, N j) →ₗ[A] N l).lTensor (B l)
         ((descentSubmodule θ).subtype.lTensor (B l) w)) := by
-  induction w using TensorProduct.induction_on with
-  | zero => simp
+  induction w using TensorProduct.inductionOn with
   | tmul b n => simp
   | add x y hx hy => simp_all
 
@@ -125,8 +123,7 @@ lemma liftBaseChange_lTensor_restrictScalars {B N P : Type*} [CommRing B] [Algeb
     (θ : N →ₗ[B] P) (x : B ⊗[A] N) :
     (LinearMap.id : P →ₗ[A] P).liftBaseChange B ((θ.restrictScalars A).lTensor B x) =
       θ ((LinearMap.id : N →ₗ[A] N).liftBaseChange B x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul b n => simp
   | add x y hx hy => simp_all
 
@@ -136,8 +133,7 @@ lemma liftBaseChange_lTensor_mk_one {B N : Type*} [CommRing B] [Algebra A B]
     [AddCommGroup N] [Module A N] (x : B ⊗[A] N) :
     (LinearMap.id : B ⊗[A] N →ₗ[A] B ⊗[A] N).liftBaseChange B
       ((TensorProduct.mk A B N 1).lTensor B x) = x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul b n => simp [smul_tmul']
   | add x y hx hy => simp_all
 
@@ -164,8 +160,7 @@ theorem bijective_descentLift_of_flat (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] 
         ((θ j k).restrictScalars A).lTensor (B l) ((LinearMap.proj j).lTensor (B l) z) -
           (TensorProduct.mk A (B j) (N k) 1).lTensor (B l)
             ((LinearMap.proj k).lTensor (B l) z) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul b n => simp [tmul_sub]
     | add x y hx hy =>
       simp only [map_add, hx, hy]
@@ -228,6 +223,7 @@ lemma descentEquiv_tmul (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
     descentEquiv θ hunit hcocycle l (b ⊗ₜ n) = b • (n : ∀ j, N j) l :=
   rfl
 
+
 section Amitsur
 
 variable {A B N : Type*} [CommRing A] [CommRing B] [Algebra A B] [AddCommGroup N] [Module A N]
@@ -242,6 +238,7 @@ noncomputable abbrev amitsurCoaction (A B N : Type*) [CommRing A] [CommRing B] [
 lemma amitsurCoaction_tmul (b : B) (n : N) :
     amitsurCoaction A B N () () (b ⊗ₜ n) = b ⊗ₜ (1 ⊗ₜ n) :=
   rfl
+
 
 /-- The inclusion `n ↦ (1 ⊗ n)` of `N` into the descent submodule of `amitsurCoaction`. -/
 noncomputable def amitsurInclusion : N →ₗ[A] descentSubmodule (amitsurCoaction A B N) where
@@ -267,8 +264,7 @@ theorem _root_.Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq [Module.Fa
       (LinearMap.id : B ⊗[A] N →ₗ[A] B ⊗[A] N).liftBaseChange B
         (amitsurCoaction A B N j j x) = x := by
     intro j x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b n => simp [smul_tmul']
     | add x y hx hy => simp_all
   have hcocycle : ∀ (j k l : Unit) (x : B ⊗[A] N),
@@ -276,8 +272,7 @@ theorem _root_.Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq [Module.Fa
         (amitsurCoaction A B N j k x) =
         (TensorProduct.mk A B (B ⊗[A] N) 1).lTensor B (amitsurCoaction A B N j l x) := by
     intro j k l x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b n => rfl
     | add x y hx hy => simp_all
   have hbij := bijective_descentLift_of_flat (amitsurCoaction A B N) hunit hcocycle ()
@@ -286,8 +281,7 @@ theorem _root_.Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq [Module.Fa
       descentLift (amitsurCoaction A B N) ()
         ((amitsurInclusion (A := A) (B := B) (N := N)).lTensor B x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b n => simp [amitsurInclusion, smul_tmul']
     | add x y hx hy => simp_all
   have hincl : Function.Bijective (amitsurInclusion (A := A) (B := B) (N := N)) := by
@@ -310,16 +304,14 @@ theorem _root_.Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq [Module.Fa
         ((Algebra.TensorProduct.includeLeft : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N x) =
         amitsurCoaction A B N () () x := by
       intro x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul b n => simp
       | add x y hx hy => simp_all
     have h2 : ∀ x : B ⊗[A] N, TensorProduct.assoc A B B N
         ((Algebra.TensorProduct.includeRight : B →ₐ[A] B ⊗[A] B).toLinearMap.rTensor N x) =
         1 ⊗ₜ x := by
       intro x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul b n => simp
       | add x y hx hy => simp_all [tmul_add]
     rw [← h1, ht, h2]

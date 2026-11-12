@@ -787,8 +787,7 @@ private theorem quotientGeneratorCoefficient_cover {S T : Scheme.{u}} (h : T ⟶
   obtain ⟨c, hc, _, hp, _⟩ := exists_tensorPullback_affine_sections h U W hWU
   have ht (t : Γ(E, U.1) ⊗[Γ(S, U.1)] Γ(T, W.1)) :
       hl.coeff (q.app W.1 (c E inferInstance t)) ∈ I := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero, hl.coeff_zero]; exact I.zero_mem
+    induction t using TensorProduct.inductionOn with
     | tmul m r =>
       rw [hp, Hom.app_smul, hl.coeff_smul_left]
       apply I.mul_mem_left

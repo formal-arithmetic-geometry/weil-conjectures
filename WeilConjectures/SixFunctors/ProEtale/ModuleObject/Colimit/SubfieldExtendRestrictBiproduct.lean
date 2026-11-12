@@ -54,7 +54,7 @@ noncomputable def extendScalarsCompRestrictScalarsIsoBiproductPow (X : Scheme.{u
   exact Functor.isoWhiskerRight
       (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctorIsoMapDerivedCategory
       _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso e' ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫ Functor.mapDerivedCategoryNatIso e' ≪≫
     Functor.mapDerivedCategoryBiproductPowIso _ d
 
 /-- Blueprint `sk-prop-sfb-cartesian-coefficients`: for finite subextensions `E ≤ F`, the

@@ -100,7 +100,7 @@ private theorem descendTranspose_left
     e₀.inv ≫ E₀ (F.map e₀.hom ≫ F.map a ≫ b) =
       a ≫ e₁.inv ≫ E₁ (F.map e₁.hom ≫ b) := by
   rw [ha₀] at hn
-  simp only [Functor.map_comp, Category.assoc, Iso.map_inv_hom_id_assoc] at hn
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_map_assoc] at hn
   rw [hn]
   simp only [Iso.inv_hom_id_assoc]
 

@@ -48,7 +48,7 @@ lemma homologySequenceδ_mapTriangle_naturality {F₁ F₂ : C ⥤ D} [F₁.Comm
     (h : n₀ + 1 = n₁) :
     H.homologySequenceδ (F₁.mapTriangle.obj T) n₀ n₁ h ≫ (H.shift n₁).map (τ.app T.obj₁) =
       (H.shift n₀).map (τ.app T.obj₃) ≫ H.homologySequenceδ (F₂.mapTriangle.obj T) n₀ n₁ h :=
-  (H.homologySequenceδ_naturality _ _ ((NatTrans.mapTriangle τ).app T) n₀ n₁ h).symm
+  (H.homologySequenceδ_naturality ((NatTrans.mapTriangle τ).app T) n₀ n₁ h).symm
 
 variable [Preadditive C] [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [Pretriangulated C] [H.IsHomological]

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 public import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionOrdinaryModels
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
@@ -153,8 +155,8 @@ private theorem finiteRetract_total [MonoidalCategory A] [MonoidalPreadditive A]
     dsimp only [forth, back]
     rw [← Category.assoc, HomologicalComplex.ι_mapBifunctorDesc]
     by_cases hp : p ∈ Finset.Icc a b
-    · simp only [dif_pos hp, biproduct.ι_desc, Category.comp_id]
-    · rw [dif_neg hp, zero_comp]
+    · simp only [dite_eq_left hp, biproduct.ι_desc, Category.comp_id]
+    · rw [dite_eq_right hp, zero_comp]
       have hz : IsZero (P.X p ⊗ Q.X q) :=
         (tensorRight (Q.X q)).map_isZero (hb p (by
           simp only [Finset.mem_Icc, not_and_or, not_le] at hp
@@ -179,6 +181,20 @@ private theorem finiteRetract_flat
     (p : (∏ᶜ fun _ : Fin n ↦
       unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⟶ M)
     (hip : i ≫ p = 𝟙 M) : IsFlatOnSite (J := J) (R := R) M := by
+  let : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasCoproducts.{r} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasFiniteCoproducts (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+    hasFiniteCoproducts_of_hasCoproducts _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := symmetricCategory R
@@ -260,7 +276,8 @@ private def recordedTensor (W : Scheme.{u}) :
       IntegralOnSlice.D.{u, u} l E Y none := DerivedCategory.Qh
   let : L.IsLocalization
       (HomotopyCategory.quasiIso (scalarReductionSource.{u, u} l E Y) (.up ℤ)) :=
-    inferInstance
+    inferInstanceAs ((DerivedCategory.Qh (C := scalarReductionSource.{u, u} l E Y)).IsLocalization
+      (HomotopyCategory.quasiIso (scalarReductionSource.{u, u} l E Y) (.up ℤ)))
   let : F.mapDerivedCategory.IsLeftDerivedFunctor (L := L) F.mapDerivedCategoryFactorsh.hom
       (HomotopyCategory.quasiIso (scalarReductionSource.{u, u} l E Y) (.up ℤ)) :=
     Functor.isLeftDerivedFunctor_of_inverts (L := L) _ F.mapDerivedCategory
@@ -390,6 +407,9 @@ theorem projectiveChartOrdinaryTensorModel {X T : Scheme.{u}}
     ((PurCompactSupport.completed l E).ring X)
     ((PurCompactSupport.completed l E).ring T) ((PurCompactSupport.completed l E).pull f)
     (recordedTensor l E X) (recordedTensor l E T)
+  let : HasDerivedCategory (SheafOfModules.{u + 1}
+      ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
+    integralTowerHasDerivedCategory l E T
   exact ⟨pi.app (TX.obj (K, L)) ≪≫ tp.app (K, L) ≪≫
     TT.mapIso ((pi.app K).symm.prod (pi.app L).symm) ≪≫
     TT.mapIso (eP.prod eQ) ≪≫

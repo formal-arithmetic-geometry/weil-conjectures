@@ -149,8 +149,8 @@ theorem proEtaleCanonicalDerivedPullback_normalization
         (Adjunction.leftAdjointCompIso (proEtaleRingModuleAdjunction k RV RW ck)
           (proEtaleRingModuleAdjunction h RW RZ ch)
           (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c) d).symm ≪≫
-        Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
-          (proEtaleRingModulePullback h RW RZ ch) := by
+        (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+          (proEtaleRingModulePullback h RW RZ ch)).symm := by
   let D := Classical.choice (ambientData_transport h k RV RW RZ ck ch c hc)
   have hk := normalizedAdj_eq_actual k RV RW ck D.adjk D.nk
   have hh := normalizedAdj_eq_actual h RW RZ ch D.adjh D.nh
@@ -182,7 +182,7 @@ theorem proEtaleCanonicalDerivedPullback_normalization
       (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c)).apply_symm_apply d).symm
   have e := pullbackData_comparison h k RV RW RZ ck ch c hc _ D
   exact e.trans (congrArg (fun a ↦ Functor.mapDerivedCategoryNatIso a ≪≫
-    Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
-      (proEtaleRingModulePullback h RW RZ ch)) hleft)
+    (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+      (proEtaleRingModulePullback h RW RZ ch)).symm) hleft)
 
 end AlgebraicGeometry.Scheme

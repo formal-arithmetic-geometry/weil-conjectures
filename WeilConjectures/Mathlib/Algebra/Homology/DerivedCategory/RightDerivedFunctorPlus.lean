@@ -61,7 +61,8 @@ noncomputable def mapHomotopyCategoryPlusSingleFunctorQhObjIso (G : C₀ ⥤ D) 
       ((HomotopyCategory.Plus.singleFunctor C₀ n).obj X)) ≅
       (DerivedCategory.Plus.singleFunctor D n).obj (G.obj X) :=
   DerivedCategory.Plus.ι.preimageIso
-    (DerivedCategory.Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex G _ n).app X))
+    ((DerivedCategory.quotientCompQhIso D).app _ ≪≫
+      DerivedCategory.Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex G _ n).app X))
 
 variable (F : C ⥤ D) [F.Additive] [EnoughInjectives C]
 
@@ -73,7 +74,7 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIso (n : ℤ) (I : C) [
       (DerivedCategory.Plus.singleFunctor D n).obj (F.obj I) :=
   F.rightDerivedFunctorPlus.mapIso (mapHomotopyCategoryPlusSingleFunctorQhObjIso
       (InjectiveObject.ι C) n ⟨I, inferInstance⟩).symm ≪≫
-    (asIso (F.rightDerivedFunctorPlusUnit.app ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
+    (asIso (F.rightDerivedFunctorPlusUnith.app ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
       ((HomotopyCategory.Plus.singleFunctor (InjectiveObject C) n).obj
         ⟨I, inferInstance⟩)))).symm ≪≫
     (mapHomotopyCategoryPlusSingleFunctorQhObjIso (InjectiveObject.ι C ⋙ F) n
@@ -102,7 +103,8 @@ theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_si
         inferInstance
     · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn).injective
   refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
-    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj K))).symm)
+    (F.rightDerivedFunctorPlus.mapIso ((DerivedCategory.Plus.quotientCompQhIso C).app K).symm ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj K))).symm))
   refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctorFactorsh D q).app _)
   refine IsZero.of_iso ?_ ((HomotopyCategory.homologyFunctorFactors D _ q).app _)
   refine ShortComplex.isZero_homology_of_isZero_X₂ _ ?_
@@ -123,7 +125,8 @@ theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_ob
   refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
     (F.rightDerivedFunctorPlus.mapIso e.symm))
   refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor D q).mapIso
-    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj M))).symm)
+    (F.rightDerivedFunctorPlus.mapIso ((DerivedCategory.Plus.quotientCompQhIso C).app M).symm ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj M))).symm))
   refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctorFactorsh D q).app _)
   refine IsZero.of_iso ?_ ((HomotopyCategory.homologyFunctorFactors D _ q).app _)
   refine ShortComplex.isZero_homology_of_isZero_X₂ _ ?_
@@ -168,7 +171,9 @@ instance : (injectiveObjectFunctor C).EssSurj where
     obtain ⟨n, hn⟩ := K.2
     have : K.IsGE n := (K.isGE_ι_obj_iff n).1 hn
     obtain ⟨L, _, ⟨e⟩⟩ := exists_injective_nonempty_iso K n
-    exact ⟨(HomotopyCategory.Plus.quotient _).obj L, ⟨e⟩⟩
+    exact ⟨(HomotopyCategory.Plus.quotient _).obj L,
+      ⟨(DerivedCategory.Plus.quotientCompQhIso C).app
+        ((InjectiveObject.ι C).mapCochainComplexPlus.obj L) ≪≫ e⟩⟩
 
 instance : (injectiveObjectFunctor C).IsEquivalence where
 
@@ -208,18 +213,18 @@ noncomputable def rightDerivedFunctorPlusIsoInjectiveObject :
     F.rightDerivedFunctorPlus ≅ (injectiveObjectEquivalence C).inverse ⋙
       (InjectiveObject.ι C ⋙ F).mapHomotopyCategoryPlus ⋙ Qh :=
   have : IsIso (whiskerLeft (InjectiveObject.ι C).mapHomotopyCategoryPlus
-      F.rightDerivedFunctorPlusUnit) :=
+      F.rightDerivedFunctorPlusUnith) :=
     @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun X ↦ by dsimp; infer_instance)
   let α : (InjectiveObject.ι C ⋙ F).mapHomotopyCategoryPlus ⋙ Qh ≅
       (injectiveObjectEquivalence C).functor ⋙ F.rightDerivedFunctorPlus :=
     isoWhiskerRight (mapHomotopyCategoryPlusCompIso (Iso.refl _)).symm _ ≪≫
       asIso (whiskerLeft (InjectiveObject.ι C).mapHomotopyCategoryPlus
-        F.rightDerivedFunctorPlusUnit)
+        F.rightDerivedFunctorPlusUnith)
   (Functor.leftUnitor _).symm ≪≫
     isoWhiskerRight (injectiveObjectEquivalence C).counitIso.symm _ ≪≫
     Functor.associator _ _ _ ≪≫ isoWhiskerLeft _ α.symm
 
-noncomputable instance : F.rightDerivedFunctorPlus.CommShift ℤ :=
+noncomputable instance rightDerivedFunctorPlusCommShift : F.rightDerivedFunctorPlus.CommShift ℤ :=
   Functor.CommShift.ofIso F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
 
 /-- The right derived functor `RF : D⁺(C) ⥤ D⁺(D)` of an additive functor `F` (for `C` with
@@ -237,7 +242,7 @@ right derived functor at the complex of injective objects attached to `Y`, follo
 image of the counit of the equivalence `K⁺(Inj) ≌ D⁺`. -/
 lemma rightDerivedFunctorPlusIsoInjectiveObject_inv_app (Y : DerivedCategory.Plus C) :
     F.rightDerivedFunctorPlusIsoInjectiveObject.inv.app Y =
-      F.rightDerivedFunctorPlusUnit.app ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
+      F.rightDerivedFunctorPlusUnith.app ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
           ((injectiveObjectEquivalence C).inverse.obj Y)) ≫
         F.rightDerivedFunctorPlus.map ((injectiveObjectEquivalence C).counit.app Y) := by
   simp [rightDerivedFunctorPlusIsoInjectiveObject, mapHomotopyCategoryPlusCompIso_refl_inv_app]
@@ -248,14 +253,14 @@ derived functor commutes with the shifts. On complexes of injective objects, thi
 definition of the shift structure on `F.rightDerivedFunctorPlus`; in general, every bounded
 below complex maps to a complex of injective objects by a quasi-isomorphism. -/
 instance commShift_rightDerivedFunctorPlusUnit :
-    NatTrans.CommShift F.rightDerivedFunctorPlusUnit ℤ := by
+    NatTrans.CommShift F.rightDerivedFunctorPlusUnith ℤ := by
   let inj := (InjectiveObject.ι C).mapHomotopyCategoryPlus
   let E := injectiveObjectEquivalence C
   let G := (InjectiveObject.ι C ⋙ F).mapHomotopyCategoryPlus ⋙ Qh
   let c := mapHomotopyCategoryPlusCompIso (Iso.refl (InjectiveObject.ι C ⋙ F))
   have hI : NatTrans.CommShift F.rightDerivedFunctorPlusIsoInjectiveObject.inv ℤ :=
     Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
-  have heq : whiskerLeft inj F.rightDerivedFunctorPlusUnit =
+  have heq : whiskerLeft inj F.rightDerivedFunctorPlusUnith =
       (associator inj F.mapHomotopyCategoryPlus Qh).inv ≫ whiskerRight c.hom Qh ≫
         (leftUnitor G).inv ≫ whiskerRight E.unitIso.hom G ≫
         (associator E.functor E.inverse G).hom ≫
@@ -263,7 +268,7 @@ instance commShift_rightDerivedFunctorPlusUnit :
         (associator inj Qh F.rightDerivedFunctorPlus).hom := by
     refine NatTrans.ext (funext fun X ↦ ?_)
     have h₁ := c.hom.naturality (E.unit.app X)
-    have h₂ := F.rightDerivedFunctorPlusUnit.naturality (inj.map (E.unit.app X))
+    have h₂ := F.rightDerivedFunctorPlusUnith.naturality (inj.map (E.unit.app X))
     simp only [c, mapHomotopyCategoryPlusCompIso_refl_hom_app, Category.comp_id,
       Category.id_comp] at h₁
     simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, associator_inv_app,
@@ -278,7 +283,7 @@ instance commShift_rightDerivedFunctorPlusUnit :
       R+(F).map (E.counit.app (E.functor.obj X))
     rw [← Functor.map_comp]
     erw [E.functor_unit_comp, Functor.map_id, Category.comp_id]
-  have : NatTrans.CommShift (whiskerLeft inj F.rightDerivedFunctorPlusUnit) ℤ := by
+  have : NatTrans.CommShift (whiskerLeft inj F.rightDerivedFunctorPlusUnith) ℤ := by
     rw [heq]; infer_instance
   refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
   obtain ⟨f, hf⟩ := (Qh_map_bijective_of_isKInjective K (inj.obj (E.inverse.obj (Qh.obj K)))

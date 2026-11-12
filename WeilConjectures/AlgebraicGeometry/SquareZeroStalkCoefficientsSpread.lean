@@ -151,7 +151,7 @@ theorem exists_squareZero_stalk_coefficients_spread
   have hg (i : ℤ) : (A i).map (X.presheaf.germ V x hxV) = coordMatrix (δ i) := by
     ext q p
     by_cases hi : i ∈ Finset.Icc a b
-    · exact (by simpa only [A, dif_pos hi, Matrix.map_apply, c] using ht ⟨⟨i, hi⟩, q, p⟩)
+    · exact (by simpa only [A, dite_eq_left hi, Matrix.map_apply, c] using ht ⟨⟨i, hi⟩, q, p⟩)
     · have hz : d i = 0 := hd i (by simpa only [Finset.mem_Icc, not_and_or, not_le] using hi)
       exact Fin.elim0 (hz ▸ p)
   let τ := Σ i : ι, Fin (d (i.1 + 1 + 1)) × Fin (d i.1)

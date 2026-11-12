@@ -465,7 +465,7 @@ theorem mem_of_forall_smul_eq_self (H : Subgroup G) (hH : IsClosed (H : Set G)) 
     have : Fintype (G ⧸ S) := Fintype.ofFinite _
     let X : ContAction FintypeCat.{u} G :=
       ⟨Action.FintypeCat.ofMulAction G (FintypeCat.of (G ⧸ S)), by
-        rw [Action.isContinuous_def]
+        constructor
         have : DiscreteTopology ((forget₂ (Action FintypeCat G) TopCat).obj
           (Action.FintypeCat.ofMulAction G (FintypeCat.of (G ⧸ S)))) := ⟨rfl⟩
         have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj

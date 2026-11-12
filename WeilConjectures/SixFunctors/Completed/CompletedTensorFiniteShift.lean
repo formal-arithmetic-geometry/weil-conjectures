@@ -355,7 +355,6 @@ private theorem unshiftedTransition_square (W : AlgebraicGeometry.Scheme.{t})
   simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
 
 attribute [local implicit_reducible] integralOperationsTensorLevel integralOperationsRestrict
-  CategoryTheory.Functor.mapHomologicalComplex CochainComplex.shiftFunctor
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj CategoryTheory.Functor.map₂HomologicalComplex
   integralCoefficientCommRingSheaf completedIntegralCommRingSheafUnrestricted

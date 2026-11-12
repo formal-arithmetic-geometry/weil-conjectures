@@ -114,7 +114,7 @@ private theorem refinement_of_split (T : Scheme.{t}) (W : T.ProEt) [IsAffine W.l
     let b : (O i).toScheme ⟶ V i :=
       IsOpenImmersion.lift (Sigma.ι V i) ((O i).ι ≫ s) hfactor
     have hb : b ≫ v i = (O i).ι := by
-      rw [← Sigma.ι_desc v i, ← Category.assoc, IsOpenImmersion.lift_fac,
+      rw [← Sigma.ι_comp_desc v i, ← Category.assoc, IsOpenImmersion.lift_fac,
         Category.assoc, hs', Category.comp_id]
     have ha' (j : 𝒰.I₀) : (a j).left = eqToHom (hZ j) ≫ 𝒰.f j := hZa j
     let d : (O i).toScheme ⟶ (Z (g.s₀ (e i))).left :=
@@ -185,7 +185,7 @@ private theorem weak_of_refinement (T : Scheme.{t}) (W : T.ProEt)
       exact (ProEt.forget T ⋙ Over.forget T).mono_of_mono_map
         (inferInstanceAs (Mono (O i.down).ι))
     · intro i j hij Z a b hab
-      have hij' : i.down ≠ j.down := fun h ↦ hij (ULift.ext _ _ h)
+      have hij' : i.down ≠ j.down := fun h ↦ hij (ULift.ext h)
       have : IsEmpty Z.left := by
         constructor
         intro z
@@ -246,7 +246,7 @@ private theorem split_clopen_cover (T : Scheme.{t}) [IsAffine T]
     cases b
     · exact ⟨y, hy⟩
     · have heq : Z.ι y = U.ι x := by
-        have hq : Sigma.ι Y true ≫ Sigma.desc q = Z.ι := Sigma.ι_desc q true
+        have hq : Sigma.ι Y true ≫ Sigma.desc q = Z.ι := Sigma.ι_comp_desc q true
         exact (congrArg (fun f ↦ f y) hq).symm.trans
           ((congrArg (fun z ↦ (Sigma.desc q) z) hy).trans
             (congrArg (fun f ↦ f (U.ι x)) hs'))
@@ -258,7 +258,7 @@ private theorem split_clopen_cover (T : Scheme.{t}) [IsAffine T]
   let r : U.toScheme ⟶ V := IsOpenImmersion.lift (Sigma.ι Y false) (U.ι ≫ s.left) hf
   refine ⟨r, (cancel_mono U.ι).mp ?_⟩
   change r ≫ q false = 𝟙 _ ≫ U.ι
-  rw [← Sigma.ι_desc q false, ← Category.assoc, IsOpenImmersion.lift_fac,
+  rw [← Sigma.ι_comp_desc q false, ← Category.assoc, IsOpenImmersion.lift_fac,
     Category.assoc, hs', Category.comp_id, Category.id_comp]
 
 /-- A clopen of an affine categorically weakly contractible scheme is weakly

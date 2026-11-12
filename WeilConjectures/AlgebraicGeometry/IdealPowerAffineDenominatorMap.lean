@@ -6,14 +6,17 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import WeilConjectures.AlgebraicGeometry.AffineCompatibleDenominatorData
 import WeilConjectures.AlgebraicGeometry.IdealPowerNumeratorPresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.LinearAlgebra.Isomorphisms
 import Mathlib.Algebra.GroupWithZero.Action.Units
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine denominator maps before annihilator quotient descent
 

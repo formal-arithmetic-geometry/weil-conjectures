@@ -222,7 +222,7 @@ theorem exists_rightDerivedPullback_app_comp_eq_smul
     (Iso.refl _) (ΓPullback A π) α (ΓPullback A π ≫ Functor.whiskerLeft _ α) (by simp) M
   refine ⟨(Functor.rightDerivedPullback (π)_*[A] α).app _ ≫
     (Sheaf.Γ _ A).rightDerivedFunctor.map ((Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).inv.app M ≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).inv.app M ≫
         (Functor.mapDerivedCategoryToId _ τ).app M), ?_⟩
   rw [← assoc, ← hcomp, assoc, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
   exact Functor.rightDerivedPullback_app_comp_map_mapDerivedCategoryToId_app _ τ d hτ M

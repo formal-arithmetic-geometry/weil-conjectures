@@ -27,8 +27,8 @@ section
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
-private lemma quotientComparison_hom (K : CochainComplex C ℤ) :
-    (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ := rfl
+private lemma quotientComparison_hom (K : CochainComplex.Plus C) :
+    (DerivedCategory.Plus.QCompιIso C).inv.app K = 𝟙 _ := rfl
 
 private abbrev cycleComplex (M : C) (I : CochainComplex.Plus C) :=
   ((preadditiveCoyoneda.obj (op M)).mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj
@@ -50,7 +50,7 @@ private noncomputable def cycleToDerived (M : C) (I : CochainComplex.Plus C) (n 
     ShiftedHom.map (Cocycle.equivHomShift.symm
       (Cocycle.fromSingleMk x.val (zero_add n) (n + 1) rfl
         (cycleCondition M I n x))) DerivedCategory.Q ≫
-      ((DerivedCategory.quotientCompQhIso C).hom.app I.obj)⟦n⟧') (by
+      ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧') (by
     intro x y
     change ShiftedHom.map (Cocycle.equivHomShift.symm
       (Cocycle.fromSingleMk (x.val + y.val) (zero_add n) (n + 1) rfl _)) _ ≫ _ = _
@@ -64,7 +64,7 @@ private lemma cycleToDerived_apply (M : C) (I : CochainComplex.Plus C) (n : ℤ)
       ShiftedHom.map (Cocycle.equivHomShift.symm
         (Cocycle.fromSingleMk x.val (zero_add n) (n + 1) rfl
           (cycleCondition M I n x))) DerivedCategory.Q ≫
-        ((DerivedCategory.quotientCompQhIso C).hom.app I.obj)⟦n⟧' := rfl
+        ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧' := rfl
 
 private lemma cycleToDerived_boundary (M : C) (I : CochainComplex.Plus C) (n : ℤ) :
     AddMonoidHom.range ((cycleComplex M I).sc n).abToCycles ≤
@@ -221,18 +221,18 @@ theorem exists_rhom_injective_cocycle_family
           exact hf⟩)
       let b := (DerivedCategory.Plus.homologyFunctorObjQIso
         (V.mapCochainComplexPlus.obj I) n).inv a
-      let η := V.rightDerivedFunctorPlusUnit.app
-        ((HomotopyCategory.Plus.quotient C).obj I)
+      let η := V.rightDerivedFunctorPlusUnit.app I
       β I hi n ((H n).map η b) =
         ShiftedHom.map (Cocycle.equivHomShift.symm
           (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
-            ((DerivedCategory.quotientCompQhIso C).hom.app I.obj)⟦n⟧' := by
+          ((DerivedCategory.Plus.QCompιIso C).inv.app I)⟦n⟧' := by
     let := hi
     dsimp only
     let E := V.homologyRightDerivedFunctorPlusObjQIsoOfInjective I n
     change homologyToDerived M I n (E.hom (E.inv _)) = _
     rw [← AddCommGrpCat.comp_apply, Iso.inv_hom_id, AddCommGrpCat.id_apply]
-    exact homologyToDerived_cycle M I n _
+    refine (homologyToDerived_cycle M I n _).trans ?_
+    rw [cycleToDerived_apply]
   refine ⟨{ map := β, normalize := hβ, natural := ?_ }⟩
   dsimp only
   intro I J hi hj n φ a
@@ -245,8 +245,8 @@ theorem exists_rhom_injective_cocycle_family
   let γ := V.mapCochainComplexPlus.map φp
   let eQI := DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj I) n
   let eQJ := DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj J) n
-  let ηI := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)
-  let ηJ := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj J)
+  let ηI := V.rightDerivedFunctorPlusUnit.app I
+  let ηJ := V.rightDerivedFunctorPlusUnit.app J
   have heQ : HomologicalComplex.homologyMap φ' n ≫ eQJ.inv =
       eQI.inv ≫ (H n).map ((DerivedCategory.Plus.Q (C := AddCommGrpCat.{v})).map γ) := by
     apply (cancel_epi eQI.hom).1
@@ -256,8 +256,7 @@ theorem exists_rhom_injective_cocycle_family
       (eQJ.hom ≫ eQJ.inv) = _
     rw [Iso.hom_inv_id, Category.comp_id]
   have hη := congrArg ((H n).map)
-    (V.rightDerivedFunctorPlusUnit.naturality
-      ((HomotopyCategory.Plus.quotient C).map φp))
+    (V.rightDerivedFunctorPlusUnit.naturality φp)
   change (H n).map ((DerivedCategory.Plus.Q (C := AddCommGrpCat.{v})).map γ ≫ ηJ) =
     (H n).map (ηI ≫ RV.map (Q.map φp)) at hη
   simp only [Functor.map_comp] at hη

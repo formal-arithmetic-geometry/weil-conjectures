@@ -117,8 +117,7 @@ private theorem quotientSectionMap_bijective (c : R ⟶ S) (p : R ⟶ A) (q : S 
     change v (c.hom.app U x) = 0
     rw [hvp, show p.hom.app U x = 0 from hx, TensorProduct.tmul_zero]
   have hgen (z : T) : ∃ s, v s = z := by
-    induction z using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero v⟩
+    induction z using TensorProduct.inductionOn with
     | tmul s x =>
       obtain ⟨x, rfl⟩ := hp x
       refine ⟨(show S.obj.obj U from s) * c.hom.app U x, ?_⟩
@@ -325,8 +324,8 @@ compatibility of j with every quotient transition; the limit equations give the
 same compatibility for pi(s). Their product is the coefficient transition formula.
 The construction uses only ideal equality and not a chosen relating unit. -/
 theorem coefficients_exists (e : ℕ) (he : 1 ≤ e)
-    (hideal : Ideal.span ({integralScalarIntegerInclusion l E L ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (hideal : Ideal.span
+      ({integralScalarIntegerInclusion l E L ι (Padic.coefficientExtensionUniformizer l E)} :
         Set (Padic.coefficientExtensionIntegers l L)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l L ^ e})
     (hexp : ∀ n : ℕ, index e n + 1 = e * (n + 1))
@@ -354,10 +353,10 @@ theorem coefficients_exists (e : ℕ) (he : 1 ≤ e)
           ((completedIntegralCommRingProjectionUnrestricted l E W n).hom.app U).hom) := by
     rw [AlgebraicGeometry.ProEtale.uniformizer_kernel,
       AlgebraicGeometry.ProEtale.uniformizer_kernel]
-    change Ideal.span {scalarValue l L W U
-        (Padic.coefficientExtensionUniformizer l L) ^ (index e n + 1)} =
-      Ideal.map (c.hom.app U).hom (Ideal.span {scalarValue l E W U
-        (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)})
+    change Ideal.span
+        {scalarValue l L W U (Padic.coefficientExtensionUniformizer l L) ^ (index e n + 1)} =
+      Ideal.map (c.hom.app U).hom
+        (Ideal.span {scalarValue l E W U (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)})
     rw [Ideal.map_span, Set.image_singleton, map_pow]
     have hc := scalarValue_map l E W L ι U (Padic.coefficientExtensionUniformizer l E)
     change (c.hom.app U).hom _ = _ at hc

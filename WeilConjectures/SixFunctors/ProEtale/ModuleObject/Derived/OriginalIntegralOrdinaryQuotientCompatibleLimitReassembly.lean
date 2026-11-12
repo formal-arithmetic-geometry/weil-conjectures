@@ -94,6 +94,8 @@ private theorem lift_sectionwise
   ext U x
   exact hg U x n
 
+-- The high-priority `u + 1` sheafification instance gets stuck on these universe levels.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 -- Represent sections by a sheafified free Yoneda module, with the site universes retained.
 private theorem sections_of_hom_lifts
     {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
@@ -320,7 +322,7 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
         have hπ : A ≫ Pi.π Q n.as = q n.as := by
           simp [A, q, Q, OriginalIntegralQuotientSequence.augmentation]
         rw [hπ]
-        simpa only [t, q, Pi.lift_π, L.map_comp] using
+        simpa only [t, q, Pi.lift_comp_π, L.map_comp] using
           quotient_lift_map L g (a n.as) (ell ^ (n.as + 1)) (hg n.as)
       change L.map (t ≫ cokernel.π A) = 0
       rw [Functor.map_comp, ← he, Category.assoc, ← L.map_comp,
@@ -403,7 +405,7 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
     refine ⟨Abelian.monoLift A t hv, fun n ↦ ?_⟩
     have h := congrArg (fun z ↦ z ≫ Pi.π Q n) (Abelian.monoLift_comp A t hv)
     simpa only [Category.assoc, A, OriginalIntegralQuotientSequence.augmentation,
-      Pi.lift_π, t, Q, q] using h
+      Pi.lift_comp_π, t, Q, q] using h
   let F := sectionModuleEquivalence.{u + 1, u + 1, u}
     (ProEt.topology X) (condensedRingObj Λ X)
   dsimp only

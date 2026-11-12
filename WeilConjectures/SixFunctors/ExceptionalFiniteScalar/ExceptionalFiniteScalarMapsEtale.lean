@@ -447,7 +447,7 @@ private theorem coefficient_annihilator (ell : ℕ) [Fact ell.Prime]
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   Etale.derivedTensor Etale.upperStar Etale.lowerStar HasDerivedCategory.standard
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategorySingleFunctor DerivedCategory instCategoryDerivedCategory
   HasDerivedCategory.ofIsGrothendieckAbelian
 

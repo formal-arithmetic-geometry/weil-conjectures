@@ -49,8 +49,7 @@ private theorem cyclicTensorInsertion_bijective {N : ℕ} {A : Type (u + 1)}
     exact one_smul _ b
   have hp (z : A ⊗[ℤ] ULift.{u + 1} (ZMod N)) :
       cyclicTensorInsertion.{u} (N := N) (q z) = z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul b a =>
       obtain ⟨a⟩ := a

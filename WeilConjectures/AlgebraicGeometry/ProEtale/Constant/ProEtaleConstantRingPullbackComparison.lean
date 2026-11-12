@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
+public import Mathlib.Tactic.IrreducibleDef
 
 /-!
 # Constant-coefficient pro-etale pullback comparison
@@ -147,7 +148,7 @@ Source: the composition clause of
 literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
 pur713-def-pullback-comparison.md (blueprint: pur713-def-pullback-comparison).
 -/
-@[no_expose] noncomputable def proEtaleConstantRingPullbackComposition
+noncomputable irreducible_def proEtaleConstantRingPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] :
     proEtaleConstantRingDerivedPullback A k ⋙
@@ -179,8 +180,7 @@ theorem proEtaleConstantRingPullbackComposition_eq
       proEtaleRingDerivedPullback (h ≫ k)
         (proEtaleConstantRing V A) (proEtaleConstantRing Z A) c)
       (proEtaleConstantRingCompositeCoefficients_eq h k A)) := by
-  unfold proEtaleConstantRingPullbackComposition
-  rfl
+  exact proEtaleConstantRingPullbackComposition_def h k A
 
 end AlgebraicGeometry.Scheme
 

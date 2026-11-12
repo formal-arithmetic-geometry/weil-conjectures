@@ -134,7 +134,7 @@ theorem etaleOrigin_pushforward_amplitude
       rp.rightDerivedFunctor.mapIso ((ν X).mapDerivedCategoryPlusCompatibility.app J)
   let eC (T : Scheme.{u}) (K : FiniteCoefficientEtaleDerivedCategory T A) :
       (Cp T).obj K ≅ (R T).mapDerivedCategory.obj ((ν T).mapDerivedCategory.obj K) :=
-    (Functor.mapDerivedCategoryCompIso (ν T) (R T)).app K
+    (Functor.mapDerivedCategoryCompIso (ν T) (R T)).symm.app K
   let direct := Scheme.proEtaleConstantDerivedDirectImage f B
   -- Then change to the canonical intrinsic constant-ring presentation.
   let e : (Cp Y).obj (F.obj L) ≅ direct.obj ((Cp X).obj L) :=

@@ -126,6 +126,7 @@ theorem additive_alternatingCech_coordinates {Y S : Scheme.{u}} {r : ℕ}
       apply LinearMap.ext
       intro x
       simp only [C, alternatingCechComplex, CochainComplex.of_d]
+      change (∀ q : Fin (p + 1) ↪o Fin r, G.obj (op (alternatingCechIntersection V q))) at x
       change (∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
         (G.map (homOfLE (alternatingCechIntersection_face_le V p t j)).op).hom.comp
           (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))) x = _

@@ -355,10 +355,7 @@ theorem unitTensorFinite (hfd : J.HasFiniteDisjointRefinements W) :
     (tensorObjComparison J F G) (Sheaf.isSeparated _) hfd
     (fun _ _ _ hf t ↦ hf.exists_map_tensorObj_eq F G t) (x.hom.app (op W) (unitSection J W))
   clear hθ hiso
-  induction p using TensorProduct.induction_on generalizing x with
-  | zero =>
-    refine ⟨0, Fin.elim0, Fin.elim0, hom_ext_of_unitSection hW ?_⟩
-    rw [sum_hom_app_unitSection, ← hp, map_zero, Finset.univ_eq_empty, Finset.sum_empty]
+  induction p using TensorProduct.inductionOn generalizing x with
   | tmul a b =>
     obtain ⟨s, hs⟩ := exists_unitHom_eq hW F a
     obtain ⟨t, ht⟩ := exists_unitHom_eq hW G b
@@ -396,7 +393,7 @@ theorem unitFactorsThroughFiniteCoproducts (hfd : J.HasFiniteDisjointRefinements
       w := fun ⟨k⟩ ↦ by
         dsimp
         rw [Category.assoc, ← Functor.map_comp_assoc]
-        erw [Sigma.ι_desc]
+        erw [Sigma.ι_comp_desc]
         erw [adj.counit.naturality]
         simp [e] }
   have hiso : IsIso (a.map ψ) := by
@@ -423,7 +420,7 @@ theorem unitFactorsThroughFiniteCoproducts (hfd : J.HasFiniteDisjointRefinements
   rw [sum_hom_app_unitSection, ← hp, ← hμ, map_sum,
     Finset.sum_image (fun _ _ _ _ h ↦ Discrete.ext h)]
   refine Finset.sum_congr rfl fun d _ ↦ ?_
-  rw [← hb d, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, Sigma.ι_desc,
+  rw [← hb d, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, Sigma.ι_comp_desc,
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply,
     hy]
 

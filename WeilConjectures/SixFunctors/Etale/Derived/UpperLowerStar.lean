@@ -180,7 +180,7 @@ noncomputable def rightDerivedLowerStarComp {T S U : Scheme.{u}} (g₁ : T ⟶ S
     ((mapDerivedUpperStarLowerStarAdjunction A g₂).comp
       (mapDerivedUpperStarLowerStarAdjunction A g₁))
     (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g₁ g₂) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).symm).symm
+      (Functor.mapDerivedCategoryCompIso _ _).symm).symm).symm
 
 variable (Λ : Type*) [Ring Λ] [Linear Λ A] in
 /-- If `A` is `Λ`-linear, the total right derived pushforward `Rg_*` is `Λ`-linear, being right

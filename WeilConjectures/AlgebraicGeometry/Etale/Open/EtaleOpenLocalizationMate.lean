@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The adjunction mate of exact open localization. -/
 
@@ -76,7 +79,9 @@ private theorem open_unit
     (ModuleCat.{u + 1} A) j).mapDerivedCategoryAdjunction_unit_app_fac
       ((HomotopyCategory.quotient _ _).obj P)
   rw [Adjunction.mapHomotopyCategory_unit_app_quotient] at h
-  change _ ≫ _ ≫ _ = DerivedCategory.Q.map _ at h
+  change _ ≫ _ ≫ _ = DerivedCategory.Q.map
+    (((openImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).unit.app P) at h
   change _ ≫ (derivedRestriction (A := A) j).map
     ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient _ _).obj P)) ≫

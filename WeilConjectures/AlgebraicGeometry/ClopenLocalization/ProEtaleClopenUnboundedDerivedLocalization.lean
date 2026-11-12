@@ -547,10 +547,10 @@ private def coordinateBicone {J : Type*} (D : J → Type*)
         simp [coordinateProjection, coordinateInclusion, coordinateInsertion,
           coordinateTransport, NatTrans.pi', Functor.pi', Pi.eval]
       · have hz : IsZero ((coordinateInsertion D i).obj (M i) l) := by
-          simpa only [coordinateInsertion, Functor.pi'_obj, dif_neg hl, Functor.const_obj_obj]
+          simpa only [coordinateInsertion, Functor.pi'_obj, dite_eq_right hl, Functor.const_obj_obj]
             using (HasZeroObject.zero (C := D l)).choose_spec
         exact hz.eq_of_src _ _
-    · simp only [dif_neg h]
+    · simp only [dite_eq_right h]
       apply NatTrans.ext
       funext M l
       by_cases hi : i = l
@@ -600,7 +600,7 @@ private def transportBicone {C : Type*} [Category C] [HasZeroMorphisms C]
     · subst k
       rw [Category.assoc, ← Category.assoc (b.ι i), b.ι_π]
       simp only [dite_true, eqToHom_refl, Category.id_comp, Iso.inv_hom_id]
-    · simp only [Category.assoc, ← Category.assoc (b.ι i), b.ι_π, dif_neg hik,
+    · simp only [Category.assoc, ← Category.assoc (b.ι i), b.ι_π, dite_eq_right hik,
         zero_comp, comp_zero]
 
 private def transportBicone_bilimit {C : Type*} [Category C] [Preadditive C]
@@ -854,7 +854,7 @@ private theorem insertionOffDiagonal (i k : I) (hki : k ≠ i) (M) :
   have hz : IsZero ((CoordinateSums.coordinateInsertion
       (fun l ↦ Modules.{t, u, v, w} ((clopenRingRestriction (j l)).obj R)) i).obj M k) := by
     simpa only [CoordinateSums.coordinateInsertion, Functor.pi'_obj,
-      dif_neg (Ne.symm hki), Functor.const_obj_obj] using
+      dite_eq_right (Ne.symm hki), Functor.const_obj_obj] using
         (HasZeroObject.zero (C := Modules.{t, u, v, w}
           ((clopenRingRestriction (j k)).obj R))).choose_spec
   exact hz.of_iso ((insertionCoordinate.{t, u, v, w} X I Y j hd hc R hcomm i k).app M)
@@ -886,7 +886,7 @@ theorem insertion_exact (i : I) :
     (clopen_ringed_module_gluing.{t, u, v, w,
       max v w (t + 1), max v w (t + 1), 0, 0} X I Y j hd hc R hcomm)))
   apply ((Functor.exact_tfae
-    (insertion.{t, u, v, w} X I Y j hd hc R hcomm i)).out 1 3).mp
+    (insertion.{t, u, v, w} X I Y j hd hc R hcomm i)).out 2 4).mp
   intro S hS
   apply (h.2.2.2.2.2.2.2.2.2.2.2.2.2.1
     (S.map (insertion.{t, u, v, w} X I Y j hd hc R hcomm i))).mpr
@@ -1381,7 +1381,7 @@ theorem clopen_unbounded_derived_localization :
   let hei := insertionDiagonal.{t, u, v, w} X I Y j hd hc R hcomm
   let ei := derivedInsertion.{t, u, v, w} X I Y j hd hc R hcomm
   have heiD (i : I) : ei i ⋙ derivedRestriction.{t, u, v, w} (j i) R ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (hei i) ≪≫ Functor.mapDerivedCategoryIdIso _
   have hez (i k : I) (hik : i ≠ k) (K : D k) :
       IsZero ((ei k ⋙ derivedRestriction.{t, u, v, w} (j i) R).obj K) := by
@@ -1391,7 +1391,7 @@ theorem clopen_unbounded_derived_localization :
       exact insertionOffDiagonal.{t, u, v, w} X I Y j hd hc R hcomm k i hik M
     have : IsZero (F.mapDerivedCategory.obj K) :=
       F.isZero_mapDerivedCategory_obj K (fun n ↦ hF _)
-    exact this.of_iso ((Functor.mapDerivedCategoryCompIso _ _).symm.app K)
+    exact this.of_iso ((Functor.mapDerivedCategoryCompIso _ _).app K)
   have hempty := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
   have hindex := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
   clear h

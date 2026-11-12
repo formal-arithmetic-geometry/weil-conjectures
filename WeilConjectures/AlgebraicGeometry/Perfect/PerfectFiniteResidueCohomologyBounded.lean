@@ -129,7 +129,7 @@ theorem finiteFiberCohomologyBounded
       DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app C) ≪≫
       (DerivedCategory.quotientCompQhIso _).app FC
   let eC : (R ⋙ A).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj C :=
-    (Functor.mapDerivedCategoryCompIso R A).app E ≪≫
+    (Functor.mapDerivedCategoryCompIso R A).symm.app E ≪≫
       A.mapDerivedCategory.mapIso e ≪≫ A.mapDerivedCategoryFactors.app P
   obtain ⟨θ⟩ := derivedPullback_openRestriction_iso_universes g W V hWV
   let eFC : (S ⋙ B).mapDerivedCategory.obj ((derivedPullback g).obj E) ≅

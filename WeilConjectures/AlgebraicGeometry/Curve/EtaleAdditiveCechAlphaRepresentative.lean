@@ -70,7 +70,7 @@ theorem additiveCech_alpha_representative
       rw [← Category.assoc]
       change a n ≫ Pi.π _ _ ≫ _ = _
       dsimp only [a]
-      erw [Pi.lift_π_assoc]
+      erw [Pi.lift_comp_π_assoc]
       dsimp only [Functor.comp_map, Functor.op_map]
       erw [← Functor.map_comp]
       congr 1
@@ -89,7 +89,7 @@ theorem additiveCech_alpha_representative
     simp only [Category.assoc]
     erw [TopCat.Presheaf.cechComplexFunctor_map_f_π]
     dsimp only [a]
-    erw [Pi.lift_π_assoc, Pi.lift_π]
+    erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact (I.cocomplex.d n (n + 1)).hom.naturality _
   have hc : (additiveCechGlobal I).iCycles n ≫ additiveCechAlpha U I n ≫
       (additiveCechTotal U I).d n (n + 1) = 0 := by

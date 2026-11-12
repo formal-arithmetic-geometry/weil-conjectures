@@ -116,7 +116,7 @@ theorem exists_etale_isPullback_sigma (P : Y.FiniteEtale) (y : Y) :
   rw [Iso.refl_hom, Category.comp_id, ← cancel_epi E.inv, Iso.inv_hom_id_assoc]
   refine Sigma.hom_ext _ _ fun i ↦ ?_
   simp only [E, E₁, Iso.trans_inv, Iso.symm_inv, asIso_hom, Category.assoc, ι_sigmaSpec_assoc,
-    Sigma.ι_desc]
+    Sigma.ι_comp_desc]
   change Spec.map _ ≫ Spec.map (CommRingCat.ofHom e''.toRingEquiv.toRingHom) ≫ Spec.map _ = _
   rw [← Spec.map_comp, ← Spec.map_comp, ← Spec.map_id]
   congr 1

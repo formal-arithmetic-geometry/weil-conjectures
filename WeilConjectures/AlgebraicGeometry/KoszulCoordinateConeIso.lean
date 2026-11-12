@@ -99,8 +99,7 @@ private theorem rid_naturality (A : Type u) [CommRing A]
     {M N : Type u} [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
     (l : M →ₗ[A] N) (x : TensorProduct A M A) :
     TensorProduct.rid A N (l.rTensor A x) = l (TensorProduct.rid A M x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul x a => simp
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -137,7 +136,7 @@ private theorem koszul_cone_coordinates (A : Type u) [CommRing A] (r : ℕ)
       AddEquiv.coe_mk, Equiv.invFun_as_coe, AddEquiv.coe_toEquiv_symm, AddEquiv.symm_mk,
       LinearEquiv.coe_mk, LinearMap.coe_mk, AddHom.coe_mk, Prod.map_fst, Prod.map_snd,
       u, v, e₀, e] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
   · intro n x
     have h := congrArg ((u (n + 1)).prodCongr (u n)) (hd n ((v (n + 2)).symm x))
     dsimp only [ExteriorAlgebra.koszulComplexTensor, ExteriorAlgebra.koszulComplex] at h ⊢
@@ -153,7 +152,7 @@ private theorem koszul_cone_coordinates (A : Type u) [CommRing A] (r : ℕ)
       TensorProduct.rid_symm_apply, LinearMap.rTensor_tmul, LinearEquiv.coe_mk,
       LinearMap.coe_mk, AddHom.coe_mk, Prod.map_apply, map_add, rid_naturality, map_smul,
       map_neg, LinearEquiv.trans_apply, Prod.map_fst, Prod.map_snd, u, v, e] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
 
 /-- The sheafified Koszul complex, with one distinguished coordinate, is the
 mapping cone of multiplication by that coordinate on the remaining complex.

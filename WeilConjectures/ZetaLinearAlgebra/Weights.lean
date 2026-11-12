@@ -12,6 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Coprime.Lemmas
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Purity of a polynomial, and disjointness of distinct weights
@@ -260,8 +261,8 @@ theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin
       show Multiset.filter N (Q i).roots = if i = j then (Q j).roots else 0 by
         by_cases hij : i = j
         · subst hij
-          rw [if_pos rfl, Multiset.filter_eq_self.2 fun z hz ↦ (hQ i).2 z hz]
-        · rw [if_neg hij, Multiset.filter_eq_nil.2 fun z hz hcon ↦
+          rw [ite_eq_left rfl, Multiset.filter_eq_self.2 fun z hz ↦ (hQ i).2 z hz]
+        · rw [ite_eq_right hij, Multiset.filter_eq_nil.2 fun z hz hcon ↦
             hij (Fin.ext (weight_eq_of_norm_eq hq ((hQ i).2 z hz) hcon))]]
     exact Finset.sum_ite_eq' s j _
   have hroots := congrArg Polynomial.roots h
@@ -275,12 +276,14 @@ theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin
   · have hoddj : j ∉ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1 := by
       simp [Nat.not_odd_iff_even.2 he]
     have hevenj : j ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1 := by simp [he]
-    rw [if_neg hoddj, if_pos hevenj, if_neg hoddj, if_pos hevenj, zero_add, zero_add] at hfil
+    rw [ite_eq_right hoddj, ite_eq_left hevenj, ite_eq_right hoddj, ite_eq_left hevenj,
+      zero_add, zero_add] at hfil
     exact hfil.symm
   · have hoddj : j ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1 := by simp [ho]
     have hevenj : j ∉ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1 := by
       simp [Nat.not_even_iff_odd.2 ho]
-    rw [if_pos hoddj, if_neg hevenj, if_pos hoddj, if_neg hevenj, add_zero, add_zero] at hfil
+    rw [ite_eq_left hoddj, ite_eq_right hevenj, ite_eq_left hoddj, ite_eq_right hevenj,
+      add_zero, add_zero] at hfil
     exact hfil
 
 

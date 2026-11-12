@@ -82,8 +82,8 @@ theorem flat_and_finrank_eq_of_algebraMap_eq {K : Type*} [Field K] (evR : R →+
   have huniq (q : Ideal S) (hq : q.IsPrime) (hlo : q.LiesOver (maximalIdeal R)) :
       q = maximalIdeal S := by
     refine IsLocalRing.eq_maximalIdeal
-      (Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := R) q ?_)
-    rw [← Ideal.under_def, ← Ideal.over_def q (maximalIdeal R)]
+      (Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) q ?_)
+    rw [← Ideal.over_def q (maximalIdeal R)]
     exact maximalIdeal.isMaximal R
   have hset : (maximalIdeal R).primesOver S = {maximalIdeal S} :=
     Set.ext fun q ↦ ⟨fun hq ↦ huniq q hq.1 hq.2, fun h ↦ h ▸ ⟨inferInstance, hliesOver⟩⟩

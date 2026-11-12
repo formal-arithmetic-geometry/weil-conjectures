@@ -148,6 +148,7 @@ lemma torAmplitudeIn_iff_forall_tensorSingleConcentratedIn (a b : ℤ) (K : Deri
     torAmplitudeIn C a b K ↔ ∀ F : C, TensorSingleConcentratedIn C a b K F :=
   Iff.rfl
 
+
 end TensorSingle
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [BraidedCategory C]

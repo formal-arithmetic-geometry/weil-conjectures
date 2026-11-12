@@ -72,7 +72,7 @@ theorem ringKrullDim_le_of_isQuasiFiniteAtPrime
   let f : PrimeSpectrum T → PrimeSpectrum R := PrimeSpectrum.comap (algebraMap R T)
   have hf : StrictMono f := by
     intro a b hab
-    exact Ideal.IsIntegral.comap_lt_comap hab
+    exact Ideal.IsIntegral.under_lt_under hab
   have hh := Order.height_le_height_apply_of_strictMono f hf
     (⟨q', inferInstance⟩ : PrimeSpectrum T)
   simpa [← PrimeSpectrum.height_eq_orderHeight, f, q', T, Ideal.under,

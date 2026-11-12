@@ -28,7 +28,8 @@ open ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
-local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance instFactPrimeRingChar_smoothPurityNativeTrace
+    : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 
 variable {X Y : Scheme.{u}}
   [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -42,17 +43,23 @@ variable {X Y : Scheme.{u}}
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
 
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeTrace
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeTrace
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeTrace
+    : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
-local instance : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeTrace_2
+    : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeTrace_2
+    : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeTrace_2
+    : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
 variable
@@ -65,7 +72,7 @@ variable
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
       (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj (𝟙_ _))
 
-set_option linter.unusedSectionVars false in
+omit [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- Identify the two spellings of the chosen compact-support functor once, before
 composing the trace. The compactification choices use the same proposition. -/
 lemma condensedShriekForTrace_eq :

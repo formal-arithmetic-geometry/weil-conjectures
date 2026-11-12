@@ -20,7 +20,7 @@ The proof identifies the prescribed pullback functor with coherent stage-system 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 set_option cleanup.letToHave false
@@ -72,7 +72,6 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
-  GeneralAlgebraicallyClosedCoefficients.Stage
   StageSystem.ι
   GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
   GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
@@ -106,7 +105,6 @@ private theorem commonPullback_eq_morphism
     rw [StageSystem.Morphism.functor_map_mkHom]
     dsimp only [StageSystem.Morphism.mapAt]
     erw [ha, hb']
-    rfl
 
 private theorem commonPullback_map_inclusion
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]

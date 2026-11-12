@@ -767,8 +767,9 @@ def generator {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (a : V ⟶ (base f s).obj U) (m : M.val.obj (op U))
     (r : (coefficients ell E X s).obj.obj (op V)) :
     ((pull ell E f s).obj M).val.obj (op V) :=
-  r • (((pull ell E f s).obj M).val.map a.op
-    (((adjunction ell E f s).unit.app M).val.app (op U) m))
+  @SMul.smul _ _ (((pull ell E f s).obj M).val.obj (op V)).isModule.toSMul r
+    (((pull ell E f s).obj M).val.map a.op
+      (((adjunction ell E f s).unit.app M).val.app (op U) m))
 
 /-- The image c_f(a) of a local scalar in inverse-image coordinates.
 Source: Stacks 03D3 (blueprint: lem-sf-ambient-pullback-site-constructions). -/

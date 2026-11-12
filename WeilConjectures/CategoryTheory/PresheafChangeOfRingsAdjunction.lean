@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import Mathlib.Topology.Sheaves.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # Change of rings for presheaves of modules
@@ -16,6 +17,7 @@ Source: Stacks Project, Sheaves, Tag 006R (blueprint: lem-pc-presheaf-change-of-
 -/
 
 @[expose] public section
+
 
 universe u v w
 
@@ -30,6 +32,7 @@ local notation "R" => (A.presheaf ⋙ forget₂ CommRingCat RingCat)
 local notation "S" => (B.presheaf ⋙ forget₂ CommRingCat RingCat)
 local notation "a" => Functor.whiskerRight α.hom (forget₂ CommRingCat RingCat)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -66,6 +69,7 @@ private noncomputable def tensorRestriction (M : PresheafOfModules.{max v w} R)
   exact ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
     («R» := A.presheaf.obj U) («S» := B.presheaf.obj U) (α.hom.app U).hom h
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -110,6 +114,7 @@ private noncomputable def tensorPresheaf (M : PresheafOfModules.{max v w} R) :
     simp
     rfl
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in

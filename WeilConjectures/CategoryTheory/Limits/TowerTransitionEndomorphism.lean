@@ -49,7 +49,7 @@ theorem towerProductShift_eq_iff {C : Type u} [Category.{v} C] {K : ℕ → C}
   constructor
   · intro h n
     subst s
-    exact Pi.lift_π _ _
+    exact Pi.lift_comp_π _ _
   · intro h
     apply Pi.hom_ext
     intro n

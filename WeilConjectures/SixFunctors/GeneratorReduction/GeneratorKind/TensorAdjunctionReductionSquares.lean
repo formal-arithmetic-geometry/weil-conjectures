@@ -334,7 +334,7 @@ private def Word.ordinaryR (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 private theorem inverseOrZero_eq_inv {A : Type*} [Category A] [HasZeroMorphisms A]
     {X Y : A} (f : X ⟶ Y) [IsIso f] : inverseOrZero f = inv f := by
   classical
-  simp only [inverseOrZero, dif_pos (inferInstance : IsIso f)]
+  simp only [inverseOrZero, dite_eq_left (inferInstance : IsIso f)]
 
 private theorem inverse_mate_unit_square
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]

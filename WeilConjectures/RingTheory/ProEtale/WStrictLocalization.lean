@@ -165,3 +165,4 @@ theorem exists_isWStrictlyLocalRing (R : Type u) [CommRing R] :
       IsWStrictlyLocalRing S := by
   use WStrictLocalization R, inferInstance, inferInstance, inferInstance, inferInstance
   infer_instance
+

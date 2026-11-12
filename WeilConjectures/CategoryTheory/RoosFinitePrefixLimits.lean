@@ -76,13 +76,13 @@ noncomputable def roosPrefixConeIsLimit (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpC
     funext i
     change ((Pi.lift _ : c.pt ⟶ (roosPrefixCone s A).pt) ≫
       Pi.π (fun j : ℕ ↦ A.obj (Opposite.op j)) i.val) x = _
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     exact ConcreteCategory.congr_hom
       (roosPrefixCone_coordinate s A c (i.val + 1) n.unop i.val (by omega) i.isLt) x
   uniq c m hm := by
     apply Pi.hom_ext
     intro i
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     have h := congrArg (fun f ↦ f ≫
       roosPrefixEval s A (i + 1) i (by omega)) (hm (Opposite.op (i + 1)))
     exact h

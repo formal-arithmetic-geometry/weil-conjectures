@@ -255,8 +255,8 @@ lemma zmodAbSheafOverMatrix_one {m r : ℕ} {Y : X.ProEt} :
   rw [zmodAbSheafOverMatrix_components, Category.id_comp, biproduct.ι_π]
   by_cases h : i = j
   · subst h
-    rw [Matrix.one_apply_eq, dif_pos rfl, zmodAbSheafOverMul_one, eqToHom_refl]
-  · rw [Matrix.one_apply_ne h, dif_neg h, zmodAbSheafOverMul_zero]
+    rw [Matrix.one_apply_eq, dite_eq_left rfl, zmodAbSheafOverMul_one, eqToHom_refl]
+  · rw [Matrix.one_apply_ne h, dite_eq_right h, zmodAbSheafOverMul_zero]
 
 /-- A matrix is determined by the endomorphism it gives. -/
 lemma zmodAbSheafOverMatrix_injective {m r : ℕ} {Y : X.ProEt}
@@ -280,7 +280,7 @@ lemma zmodAbSheafOverMul_comp_reduce {m m' : ℕ} (h : m ∣ m') {Y : X.ProEt}
         ((⟨ZMod.castHom h (ZMod m), continuous_of_discreteTopology⟩ :
           C(ZMod m', ZMod m)).comp c) := by
   refine zmodAbSheafOver_hom_ext ?_
-  refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
   exact (by rw [map_mul, map_one] :
     ZMod.castHom h (ZMod m) (c t * 1) = ZMod.castHom h (ZMod m) (c t) * ZMod.castHom h _ 1)
 
@@ -309,7 +309,7 @@ lemma exists_matrix_lift {T : Type*} [TopologicalSpace T] {l n r : ℕ} [NeZero 
     if h : IsUnit N.det then (ZMod.exists_isUnit_det_map_castHom_eq N h).choose else 1
   have hL (t : T) : IsUnit (L (ev t A)).det ∧
       (L (ev t A)).map (ZMod.castHom (pow_dvd_pow l n.le_succ) (ZMod (l ^ n))) = ev t A := by
-    simp only [L, dif_pos (hdet t)]
+    simp only [L, dite_eq_left (hdet t)]
     exact (ZMod.exists_isUnit_det_map_castHom_eq _ (hdet t)).choose_spec
   let A' : Matrix (Fin r) (Fin r) C(T, ZMod (l ^ (n + 1))) := fun i j ↦
     ⟨fun t ↦ L (Am t) i j, (continuous_of_discreteTopology

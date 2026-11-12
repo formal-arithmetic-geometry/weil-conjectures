@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedHomComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomSelfAdjunction

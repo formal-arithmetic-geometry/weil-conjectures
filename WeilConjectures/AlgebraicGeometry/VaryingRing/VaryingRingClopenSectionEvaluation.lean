@@ -205,10 +205,10 @@ private theorem strictSection_descent (B : Type (u + 1)) [CommRing B]
         (singleSection B k r p i h))
       ((Functor.mapDerivedCategoryCompIso
         (StrictTower.towerPullback B (pullback.snd p i))
-        (StrictTower.towerJ B (pullback.fst p i))).hom ≫
+        (StrictTower.towerJ B (pullback.fst p i))).inv ≫
         strictSectionArrow B k r p i h ≫
         (Functor.mapDerivedCategoryCompIso (StrictTower.towerPullback B r)
-          (StrictTower.towerJ B k)).inv) := by
+          (StrictTower.towerJ B k)).hom) := by
   let q := pullback.snd p i
   let b := pullback.fst p i
   let s := StrictTower.squareLift k r p i h

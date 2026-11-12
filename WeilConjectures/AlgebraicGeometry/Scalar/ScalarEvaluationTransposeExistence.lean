@@ -62,13 +62,13 @@ private theorem exactSquare_fac
         G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((δ.hom.mapHomologicalComplex (.up ℤ)).app K) := by
   have hc := Functor.mapDerivedCategoryCompIso_hom_app_factors R G K
-  have hi : (Functor.mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K) ≫
+  have hi : (Functor.mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K) ≫
       (R ⋙ G).mapDerivedCategoryFactors.hom.app K =
     G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) := by
     apply (cancel_epi
-      ((Functor.mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj K))).mp
-    rw [Iso.hom_inv_id_app_assoc]
+      ((Functor.mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj K))).mp
+    rw [Iso.inv_hom_id_app_assoc]
     exact hc.symm
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]

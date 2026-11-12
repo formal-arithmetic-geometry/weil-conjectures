@@ -118,4 +118,5 @@ lemma restrictOverHomObjIso_inv_app_apply (W : (Over U)ᵒᵖ)
     (restrictOverHomObjIso M N U).inv.app W ψ = restrictOverHomObjBwd U W.unop ψ :=
   rfl
 
+
 end PresheafOfModules

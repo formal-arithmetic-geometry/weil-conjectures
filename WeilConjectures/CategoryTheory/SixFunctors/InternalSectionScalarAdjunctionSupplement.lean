@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
@@ -311,6 +313,10 @@ private theorem scalarExtension_unit_image
         (scalarExtension_unit J a s M)
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app] at h
   exact congrArg (fun f ↦ f.val.app U m) h
+
+noncomputable local instance (U : Cᵒᵖ) (N : ModuleCat ((sectionRingSheaf J S).obj.obj U)) :
+    SMul (S.obj.obj U) N :=
+  inferInstanceAs (SMul ((sectionRingSheaf J S).obj.obj U) N)
 
 omit [HasDerivedCategory (scalarInternalModules J R)]
   [HasDerivedCategory (scalarInternalModules J S)]

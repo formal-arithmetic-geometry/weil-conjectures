@@ -93,7 +93,8 @@ lemma isFreeGenerator_toSheafifyTensor {U : X.Opens} {s : Γ(M, U)} {t : Γ(N, U
     IsFreeGenerator (M := sheafifyTensor M N)
       ((toSheafifyTensor M N).app (op U) (s ⊗ₜ[Γ(X, U)] t)) := by
   have hP (W : X.Opens) (hW : W ≤ U) : Function.Bijective fun r : Γ(X, W) ↦
-      r • (M.val ⊗ N.val).map (homOfLE hW).op (s ⊗ₜ[Γ(X, U)] t) :=
+      r • (show (M.val ⊗ N.val).obj (op W) from
+        (M.val ⊗ N.val).map (homOfLE hW).op (s ⊗ₜ[Γ(X, U)] t)) :=
     TensorProduct.bijective_smul_tmul (hs W hW) (ht W hW)
   have hPmap {V W : X.Opens} (hV : V ≤ U) (i : W ⟶ V) :
       (M.val ⊗ N.val).map i.op ((M.val ⊗ N.val).map (homOfLE hV).op (s ⊗ₜ[Γ(X, U)] t)) =
@@ -117,9 +118,10 @@ lemma isFreeGenerator_toSheafifyTensor {U : X.Opens} {s : Γ(M, U)} {t : Γ(N, U
     have hS := Presheaf.equalizerSieve_mem (Opens.grothendieckTopology X)
       ((PresheafOfModules.toPresheaf _).map (toSheafifyTensor M N)) (X := op V) _ _ hrr'
     refine Scheme.ext_of_mem hS fun Z l hl ↦ (hP Z ((leOfHom l).trans h)).1 ?_
-    have : (M.val ⊗ N.val).map l.op (r • (M.val ⊗ N.val).map (homOfLE h).op
-        (s ⊗ₜ[Γ(X, U)] t)) = (M.val ⊗ N.val).map l.op (r' • (M.val ⊗ N.val).map (homOfLE h).op
-        (s ⊗ₜ[Γ(X, U)] t)) := hl
+    have : (M.val ⊗ N.val).map l.op (r • (show (M.val ⊗ N.val).obj (op V) from
+        (M.val ⊗ N.val).map (homOfLE h).op (s ⊗ₜ[Γ(X, U)] t))) =
+        (M.val ⊗ N.val).map l.op (r' • (show (M.val ⊗ N.val).obj (op V) from
+          (M.val ⊗ N.val).map (homOfLE h).op (s ⊗ₜ[Γ(X, U)] t))) := hl
     rw [PresheafOfModules.map_smul, PresheafOfModules.map_smul, hPmap] at this
     exact this
   refine isFreeGenerator_of_locally _ hinj fun V h q ↦ ?_

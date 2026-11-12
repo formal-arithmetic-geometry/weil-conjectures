@@ -71,7 +71,7 @@ theorem depth_three_local_cohomology_vanishing
       RingTheory.Sequence.IsRegular R rs ∧ (∀ r ∈ rs, r ∈ m) ∧
         n = (rs.length : ℕ∞)} := by
     simp only [m] at hm
-    simp only [IsLocalRing.depth, Ideal.depth, if_neg hm, m]
+    simp only [IsLocalRing.depth, Ideal.depth, ite_eq_right hm, m]
   have hlt : (2 : ℕ∞) < IsLocalRing.depth (R := R) R :=
     lt_of_lt_of_le (by decide : (2 : ℕ∞) < 3) hdepth
   rw [hdef] at hlt

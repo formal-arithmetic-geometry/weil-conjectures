@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 

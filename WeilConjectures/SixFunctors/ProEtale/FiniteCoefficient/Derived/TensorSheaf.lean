@@ -228,7 +228,8 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
   have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
       ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
     NatIso.isIso_app_of_isIso _ _
-  dsimp [leftDerivedUpperStarTensorRightCounit]
+  simp only [leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app]
   infer_instance
 
 /-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` on homotopy categories. -/
@@ -346,7 +347,7 @@ lemma mapHomologicalComplex_map_mapBifunctorSingle₂Iso_hom_comp
     rfl
   refine (cancel_epi (((g)^*[A].mapHomologicalComplex (.up ℤ)).map
     (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Y K).inv)).1 ?_
-  erw [Iso.map_inv_hom_id_assoc]
+  erw [Iso.inv_hom_id_map_assoc]
   rw [h₃, MonoidalCategory.whiskerLeft_comp, Category.assoc, h₂']
   erw [reassoc_of% h₁]
 

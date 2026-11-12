@@ -58,7 +58,8 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralIntegralResiduePullOrdinaryUnit
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 attribute [local irreducible] Mod.extendScalarsIsoComapInv
 private theorem extendSquare_forget
     {C : Type*} [Category C] [MonoidalCategory C]
@@ -145,18 +146,6 @@ private theorem comapUpperStar_forget
   erw [← Category.assoc, hs]
   rfl
 
-private theorem comapUpperStar_inv_forget
-    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
-    (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ' Y)) :
-    ((CondensedRing.comapUpperStarIso a f).inv.app N).hom ≫
-        (profinitePointModuleForgetPullbackIso Λ' f).hom.app N =
-      (profinitePointModuleForgetPullbackIso Λ f).hom.app
-          ((Mod.comap (coefficientMap a Y)).obj N) := by
-  let e := (Mod.forget (condensedRingObj Λ X)).mapIso
-    ((CondensedRing.comapUpperStarIso a f).app N)
-  exact isoInvFac e _ _ (comapUpperStar_forget a f N)
 
 set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
@@ -196,34 +185,6 @@ private theorem ordinary_vertical_unit
     moduleUnit_forget Λ f ((Mod.comap (coefficientMap a Y)).obj N)]
   rfl
 
-set_option maxHeartbeats 400000 in
--- The concrete comparisons unfold several coefficient and module functor wrappers.
-private theorem ordinaryScalarUnit
-    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
-    (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    (CondensedRing.upperStar Λ f).map
-        ((Mod.extendRestrictAdjunction (coefficientMap a Y)).unit.app M) ≫
-      (CondensedRing.comapUpperStarIso a f).inv.app
-        ((Mod.extendScalars (coefficientMap a Y)).obj M) =
-    (Mod.extendRestrictAdjunction (coefficientMap a X)).unit.app
-        ((CondensedRing.upperStar Λ f).obj M) ≫
-      (Mod.comap (coefficientMap a X)).map ((CondensedRing.pullIso a f).hom.app M) := by
-  let au := CondensedRing.upperStarLowerStarAdjunction Λ f
-  let av := CondensedRing.upperStarLowerStarAdjunction Λ' f
-  let e := CondensedRing.comapLowerStarIso a f
-  have hq : ((mateEquiv av au).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans =
-      (CondensedRing.comapUpperStarIso a f).inv := by
-    apply NatTrans.ext
-    funext N
-    apply (au.homEquiv _ _).injective
-    simp only [Adjunction.homEquiv_unit]
-    exact (unit_mateEquiv_symm av au (TwoSquare.mk _ _ _ _ e.hom) N).symm.trans
-      (ordinary_vertical_unit a f N)
-  exact unitCompositeMate (Mod.extendRestrictAdjunction (coefficientMap a Y))
-    (Mod.extendRestrictAdjunction (coefficientMap a X)) au av e
-    (CondensedRing.comapUpperStarIso a f).inv hq M
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

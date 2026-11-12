@@ -133,10 +133,10 @@ theorem filteredComplex_page_differential_exists_unique
         t' ≫ (F.complexQuotientπ j.1 (j.1 + 1) (by omega)).f (j.1 + j.2)) :
       x ≫ filteredComplexPageπ K F r i ≫ d i j =
         y ≫ filteredComplexPageπ K F r j := by
-    simpa only [d, dif_pos hij, filteredComplexPageπ, filteredComplexPageObject] using
+    simpa only [d, dite_eq_left hij, filteredComplexPageπ, filteredComplexPageObject] using
       hδ i j hij A t t' x y ht hx hy
   have hshape (i j : ℤ × ℤ) (hij : ¬(ComplexShape.up' (r, 1 - r)).Rel i j) :
-      d i j = 0 := by simp only [d, dif_neg hij]
+      d i j = 0 := by simp only [d, dite_eq_right hij]
   have hsquare (i j k : ℤ × ℤ) : d i j ≫ d j k = 0 := by
     by_cases hij : (ComplexShape.up' (r, 1 - r)).Rel i j
     · by_cases hjk : (ComplexShape.up' (r, 1 - r)).Rel j k

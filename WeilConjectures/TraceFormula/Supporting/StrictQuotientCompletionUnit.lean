@@ -76,7 +76,7 @@ private theorem roos_inclusion_fst
       Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n =
         limit.π X.asFunctor (op n) := by
   dsimp only [roosι, roosLift]
-  rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst, Pi.lift_π]
+  rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst, Pi.lift_comp_π]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem moduleEqToHom_section
@@ -244,7 +244,7 @@ theorem strictQuotientCompletionUnit
       CochainComplex.mappingCocone.lift_fst _ _ _ _]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, Pi.map_π, Pi.lift_π]
+    simp only [Category.assoc, Pi.map_π, Pi.lift_comp_π]
     have hi := roos_inclusion_fst ((CompletionUnit.tower l E Y).obj K) n
     dsimp only [c, CompletionUnit.OrdinaryModel.coneAugmentation]
     simp only [Category.assoc]

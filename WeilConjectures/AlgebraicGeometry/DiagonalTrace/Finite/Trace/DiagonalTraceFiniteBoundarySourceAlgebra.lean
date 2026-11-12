@@ -165,7 +165,7 @@ private theorem finiteCoefficientIso_forget (l : ℕ) [Fact l.Prime] (T : Scheme
     unfold finiteCoefficientIso
     rfl
   rw [← hfi] at hf
-  rw [b.hom_inv_id, ← hf, Iso.map_hom_inv_id]
+  rw [b.hom_inv_id, ← hf, Iso.hom_inv_id_map]
   rfl
 
 private theorem finiteCoefficientIso_one (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
@@ -266,7 +266,7 @@ private theorem rootSystemTransport_finiteCoordinates
   simp only [rootSystemTransport, supportedFiniteShiftedCoordinates,
     supportedFiniteSingleCoordinates, Iso.trans_hom, Iso.symm_hom,
     Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, Functor.map_comp, Category.assoc]
-  have hc₀ := Iso.map_inv_hom_id
+  have hc₀ := Iso.inv_hom_id_map
     ((V.mapDerivedCategory.commShiftIso (2 : ℤ)).app
       ((DerivedCategory.singleFunctor A 0).obj W))
     (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory)
@@ -276,7 +276,7 @@ private theorem rootSystemTransport_finiteCoordinates
   let E := ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory
   have hc : (E.map ((V.mapDerivedCategorySingleFunctor 0).inv.app W))⟦(2 : ℤ)⟧' ≫
       (E.map ((V.mapDerivedCategorySingleFunctor 0).hom.app W))⟦(2 : ℤ)⟧' = 𝟙 _ := by
-    have hc₁ := Iso.map_inv_hom_id ((V.mapDerivedCategorySingleFunctor 0).app W) E
+    have hc₁ := Iso.inv_hom_id_map ((V.mapDerivedCategorySingleFunctor 0).app W) E
     simp only [Iso.app_inv, Iso.app_hom] at hc₁
     rw [← Functor.map_comp, hc₁, CategoryTheory.Functor.map_id]
   rw [reassoc_of% hc]

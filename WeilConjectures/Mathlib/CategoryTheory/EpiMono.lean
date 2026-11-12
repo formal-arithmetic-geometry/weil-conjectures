@@ -55,6 +55,7 @@ lemma isIso_comp_of_fac {M P : C} (p : M ⟶ P) (i : P ⟶ M) (b : M ⟶ B) (s :
   simp only [Category.assoc, Category.id_comp]
   rw [reassoc_of% h, reassoc_of% hs, h, reassoc_of% hs]
 
+
 /-- A morphism `a` such that `a ≫ b` and `b ≫ a` are isomorphisms for some `b` is an
 isomorphism. -/
 lemma isIso_of_isIso_comp_of_isIso_comp {P Q : C} (a : P ⟶ Q) (b : Q ⟶ P) (h₁ : IsIso (a ≫ b))

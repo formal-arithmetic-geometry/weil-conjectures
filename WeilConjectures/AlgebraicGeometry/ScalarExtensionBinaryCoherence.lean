@@ -82,7 +82,6 @@ noncomputable def scalarTensorLeftUnitRawIso (R : Sheaf J CommRingCat.{u}) (N : 
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro a x
-      change (R.obj.map i a) • (N.val.map i x) = N.val.map i (a • x)
       exact (N.val.map_smul i a x).symm)
 
 /-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication.
@@ -122,7 +121,6 @@ noncomputable def scalarTensorRightUnitRawIso (R : Sheaf J CommRingCat.{u}) (N :
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro x a
-      change (R.obj.map i a) • (N.val.map i x) = N.val.map i (a • x)
       exact (N.val.map_smul i a x).symm)
 
 /-- Explicit tensor unit comparison, obtained from sectionwise scalar multiplication.
@@ -181,8 +179,7 @@ noncomputable def scalarTensorAssocRawIso {R : Sheaf J CommRingCat.{u}}
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro xy z
-      induction xy using TensorProduct.induction_on with
-      | zero => simp
+      induction xy using TensorProduct.inductionOn with
       | add xy xy' h h' => simp only [map_add, TensorProduct.add_tmul, h, h']
       | tmul x y => rfl)
 

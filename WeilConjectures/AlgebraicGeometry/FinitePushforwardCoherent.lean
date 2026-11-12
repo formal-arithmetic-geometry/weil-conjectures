@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherence of finite direct images
 
@@ -140,8 +141,12 @@ theorem isCoherent_unit_of_finite_to_locallyNoetherian {X Y : Scheme.{u}} (f : Y
     [IsFinite f] [IsLocallyNoetherian X] :
     RingedSpace.IsCoherent Y.toRingedSpace (SheafOfModules.unit Y.ringCatSheaf) := by
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian f
-  have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation :=
-    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u}
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation := by
+    have : (SheafOfModules.unit Y.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    have : (SheafOfModules.unit Y.ringCatSheaf).IsFiniteLocallyFree :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    exact SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u}
       (SheafOfModules.unit Y.ringCatSheaf)
   exact (isCoherent_iff_isQuasicoherent_and_isFiniteType Y _).mpr
     ⟨SheafOfModules.isQuasicoherent_unit.{u, u, u},

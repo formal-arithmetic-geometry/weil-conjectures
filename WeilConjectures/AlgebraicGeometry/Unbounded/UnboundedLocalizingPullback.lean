@@ -95,13 +95,13 @@ private theorem preservesCoproducts_of_small.{w, v, u₁, u₂, v₁, v₂}
         obtain ⟨i, hi⟩ := i
         change t.ι.app (Discrete.mk i) ≫ _ = _
         rw [ht.fac]
-        simp only [Cofan.mk_ι_app, dif_pos hi]
+        simp only [Cofan.mk_ι_app, dite_eq_left hi]
       · intro s m hm
         apply ht.hom_ext
         intro ⟨i⟩
         rw [ht.fac]
         by_cases hi : ¬ IsZero (K i)
-        · simpa only [r, cofan_mk_inj, t₀, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+        · simpa only [r, cofan_mk_inj, t₀, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
             using hm ⟨i, hi⟩
         · exact (not_not.mp hi).eq_of_src _ _
     let q : Cofan (fun i ↦ c.obj (U i)) :=
@@ -182,7 +182,7 @@ private theorem pullback_constructible
   classical
   have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   have hY : CompactSpace Y ∧ QuasiSeparatedSpace Y := ⟨inferInstance, inferInstance⟩
-  simp only [IsConstantModelConstructible, if_pos hX, if_pos hY] at hM ⊢
+  simp only [IsConstantModelConstructible, ite_eq_left hX, ite_eq_left hY] at hM ⊢
   obtain ⟨S, hS⟩ := hM
   let T := S.pullback g
   refine ⟨T, fun i ↦ ?_⟩

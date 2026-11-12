@@ -154,7 +154,7 @@ private theorem lift_proj {X Y : Scheme.{v}} (f : Y ⟶ X)
     {F : X.Modules} {G : Y.Modules} (q : F ⟶ (pushforward f).obj G) (x : Y) :
     lift f q ≫ (pushforward f).map (proj Y G x) =
       proj X F (f x) ≫ coord f q x := by
-  simp only [lift, proj, Category.assoc, inv_piComparison_comp_map_π, Pi.lift_π]
+  simp only [lift, proj, Category.assoc, inv_piComparison_comp_map_π, Pi.lift_comp_π]
 
 private theorem lift_apply {X Y : Scheme.{v}} (f : Y ⟶ X)
     {F : X.Modules} {G : Y.Modules} (q : F ⟶ (pushforward f).obj G)
@@ -179,7 +179,7 @@ private theorem unit_apply (X : Scheme.{v}) (F : X.Modules) (x : X)
     (proj X F x).app U ((moduleCup_godementUnit X F).app U s) ⟨hx⟩ =
       F.presheaf.germ U x hx s := by
   change ((moduleCup_godementUnit X F ≫ proj X F x).app U s) ⟨hx⟩ = _
-  simp only [moduleCup_godementUnit, proj, Pi.lift_π]
+  simp only [moduleCup_godementUnit, proj, Pi.lift_comp_π]
   erw [toSkyscraper_app_apply]
   rfl
 
@@ -223,7 +223,7 @@ private theorem map_apply (X : Scheme.{v}) {F G : X.Modules} (q : F ⟶ G)
     (proj X G x).app U ((moduleCup_godementMap X q).app U s) ⟨hx⟩ =
       q.stalkLinearMap x ((proj X F x).app U s ⟨hx⟩) := by
   change ((moduleCup_godementMap X q ≫ proj X G x).app U s) ⟨hx⟩ = _
-  simp only [moduleCup_godementMap, proj, Pi.lift_π, Hom.comp_app,
+  simp only [moduleCup_godementMap, proj, Pi.lift_comp_π, Hom.comp_app,
     ConcreteCategory.comp_apply]
   erw [toSkyscraper_app_apply]
   rw [LinearMap.comp_apply, skyscraperStalkEval_germ]
@@ -279,7 +279,7 @@ private theorem multiply_apply (X : Scheme.{v}) (F : X.Modules) (x : X)
     (proj X F x).app U ((moduleCup_godementMultiply X F).app U s) ⟨hx⟩ =
       eval X F x ((proj X (moduleCup_godementObject X F) x).app U s ⟨hx⟩) := by
   change ((moduleCup_godementMultiply X F ≫ proj X F x).app U s) ⟨hx⟩ = _
-  simp only [moduleCup_godementMultiply, proj, Pi.lift_π, Hom.comp_app,
+  simp only [moduleCup_godementMultiply, proj, Pi.lift_comp_π, Hom.comp_app,
     ConcreteCategory.comp_apply]
   erw [toSkyscraper_app_apply]
   rw [LinearMap.comp_apply, LinearMap.comp_apply]

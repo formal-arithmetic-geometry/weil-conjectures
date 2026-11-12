@@ -122,6 +122,7 @@ noncomputable instance comp (F : Cx ⥤ Cs) (G : Cs ⥤ Ct) [ShiftLift ι F ιs]
 /-- The lift of the identity functor is the identity functor. -/
 lemma id_lift : lift ι (𝟭 Cx) = 𝟭 Dx := rfl
 
+
 /-- The lift of a composite is the composite of the lifts. -/
 lemma comp_lift (F : Cx ⥤ Cs) (G : Cs ⥤ Ct) [ShiftLift ι F ιs] [ShiftLift ιs G ιt] :
     lift ι (F ⋙ G) = lift ι F ⋙ lift ιs G := rfl
@@ -190,6 +191,7 @@ lemma connecting_comp_id (F : Cx ⥤ Cs) [ShiftLift ι F ιs] {a c : Cx}
     (δ : ι.obj c ⟶ (shiftFunctor Dx (1 : ℤ)).obj (ι.obj a)) :
     connecting ι ιs (F ⋙ 𝟭 Cs) δ = connecting ι ιs F δ := by
   rw [connecting_comp, connecting_id]
+
 
 end Functor.ShiftLift
 

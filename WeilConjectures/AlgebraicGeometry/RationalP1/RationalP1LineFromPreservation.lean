@@ -75,14 +75,14 @@ private theorem regular_constructible (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] :
     IsConstantModelConstructible Λ X (Mod.regular (condensedRingObj Λ X)) := by
   have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  rw [IsConstantModelConstructible, if_pos hX]
+  rw [IsConstantModelConstructible, ite_eq_left hX]
   exact ⟨oneStratum X, fun _ ↦ model_regular Λ (𝟙 X)⟩
 
 private theorem zero_constructible (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] :
     IsConstantModelConstructible Λ X (0 : Modules Λ X) := by
   have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  rw [IsConstantModelConstructible, if_pos hX]
+  rw [IsConstantModelConstructible, ite_eq_left hX]
   exact ⟨oneStratum X, fun _ ↦ model_zero Λ (𝟙 X)⟩
 
 -- The homology comparison elaborates through the internal module category.

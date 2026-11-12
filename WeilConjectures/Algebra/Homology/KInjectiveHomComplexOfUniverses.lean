@@ -84,7 +84,7 @@ set_option linter.unusedSectionVars false in
 private lemma homComplexToInternalHomObjX_π (n p q : ℤ) (h : p + n = q) :
     homComplexToInternalHomObjX L M K π n ≫ internalHomπ (C := D) L M n p q h =
       (p * n).negOnePow • π n p q h :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 set_option linter.unusedSectionVars false in
 private lemma internalHomObjToHomComplexX_π (n p q : ℤ) (h : p + n = q) :

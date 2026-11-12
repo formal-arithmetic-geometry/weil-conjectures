@@ -63,15 +63,20 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [Finite k]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
-local instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
+local instance instFactPrimeRingCharAlgebraicClosure_smoothPurityDescendedVerdierUnit
+    : Fact (ringChar (AlgebraicClosure k)).Prime :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-local instance : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
+local instance instFactNeNatRingCharAlgebraicClosure_smoothPurityDescendedVerdierUnit
+    : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
-local instance : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_smoothPurityDescendedVerdierUnit
+    : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_smoothPurityDescendedVerdierUnit
+    : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_smoothPurityDescendedVerdierUnit
+    : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 
 omit [Finite k] [Fact (ringChar k).Prime] [LocallyOfFiniteType Y.hom] in

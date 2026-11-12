@@ -175,11 +175,20 @@ theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ
     (topology Y s) (topology X s) (base f s)
     (coefficients ell E Y s) (coefficients ell E X s) (ringUnit ell E f s)
     (pull ell E f s) (adjunction ell E f s) A B TA TB
+  have generator_one (N : Modules ell E Y s) (U : Site Y s) (V : Site X s)
+      (a : V ⟶ (base f s).obj U) (y : N.val.obj (op U)) :
+      generator ell E f s N U V a y 1 =
+        ((pull ell E f s).obj N).val.map a.op
+          (((adjunction ell E f s).unit.app N).val.app (op U) y) :=
+    one_smul ((ring (topology X s) (coefficients ell E X s)).obj.obj (op V))
+      (show ((pull ell E f s).obj N).val.obj (op V) from
+        ((pull ell E f s).obj N).val.map a.op
+          (((adjunction ell E f s).unit.app N).val.app (op U) y))
   have hn : TensorData.Normalized ell E f s A B TA TB data := by
     refine ⟨?_, ?_, hd.2.1, ?_⟩
     · intro M N U V a x y r
+      rw [generator_one]
       dsimp only [generator, tensor, pure, Modules]
-      simp only [one_smul]
       exact hd.1.1 M N U V a x y r
     · intro M M' N N' a b
       exact hd.1.2 M M' N N' a b
@@ -191,8 +200,8 @@ theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ
   refine ⟨⟨?_, ho.2.1⟩, ho.2.2.1, ?_⟩
   · intro M N U V a x y r
     have h := ho.1 M N U V a x y r
+    rw [generator_one] at h
     dsimp only [generator, tensor, pure, Modules] at h
-    simp only [one_smul] at h
     exact h
   · intro P hp hf
     exact ho.2.2.2 P ⟨hp, hf⟩

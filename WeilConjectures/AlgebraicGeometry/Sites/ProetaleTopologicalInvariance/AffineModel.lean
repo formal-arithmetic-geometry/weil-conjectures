@@ -160,6 +160,7 @@ lemma indEtale_of_le [Algebra.IndEtale Γ(S, U'') D] : Algebra.IndEtale Γ(S, U)
   exact RingHom.IndEtale.comp ((RingHom.IndEtale.algebraMap_iff _ _).mpr ‹_›)
     ((RingHom.IndEtale.algebraMap_iff _ _).mpr this)
 
+
 include hU hU'' hD in
 /-- For affine opens `U'' ≤ U`, a weakly étale `Γ(S, U'')`-algebra is weakly étale over
 `Γ(S, U)` (through the restriction map, which is étale). -/

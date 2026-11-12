@@ -93,3 +93,4 @@ lemma RingHom.exists_mul_mem_range_of_surjective {f : R →+* S}
     ∃ r : R, r ∉ m ∧ f r * s ∈ f.range := by
   obtain ⟨r, rfl⟩ := hf s
   exact ⟨1, (Ideal.ne_top_iff_one m).mp hm.ne_top, r, by simp⟩
+

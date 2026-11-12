@@ -79,14 +79,14 @@ noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
     {E₀ : IntermediateField K L}
     {P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)}
     {E E' : finiteStageIndex E₀} (h : E ≤ E')
-    (u : (pull f Λ (IntermediateField.inclusion E.property.1)).obj P₀ ⟶
-      (pull f Λ (IntermediateField.inclusion E.property.1)).obj Q₀) :
-    (pull f Λ (IntermediateField.inclusion E'.property.1)).obj P₀ ⟶
-      (pull f Λ (IntermediateField.inclusion E'.property.1)).obj Q₀ := by
+    (u : (pull f Λ (A := E₀) (B := E.1) (IntermediateField.inclusion E.property.1)).obj P₀ ⟶
+      (pull f Λ (A := E₀) (B := E.1) (IntermediateField.inclusion E.property.1)).obj Q₀) :
+    (pull f Λ (A := E₀) (B := E'.1) (IntermediateField.inclusion E'.property.1)).obj P₀ ⟶
+      (pull f Λ (A := E₀) (B := E'.1) (IntermediateField.inclusion E'.property.1)).obj Q₀ := by
   let h₀E' : E₀ ≤ E'.1 := E'.property.1
   let hEE' : E.1 ≤ E'.1 := h
   let compIso :=
-    (eqToIso (congrArg (fun j : E₀ →ₐ[K] E'.1 => pull f Λ j)
+    (eqToIso (congrArg (fun j : E₀ →ₐ[K] E'.1 => pull f Λ (A := E₀) (B := E'.1) j)
       (show IntermediateField.inclusion h₀E' =
           (IntermediateField.inclusion hEE').comp
             (IntermediateField.inclusion E.property.1) by
@@ -95,7 +95,8 @@ noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
       (pullCompIso f Λ (IntermediateField.inclusion E.property.1)
         (IntermediateField.inclusion hEE'))
   exact compIso.hom.app P₀ ≫
-      (pull f Λ (IntermediateField.inclusion hEE')).map u ≫ compIso.inv.app Q₀
+      (pull f Λ (A := E.1) (B := E'.1) (IntermediateField.inclusion hEE')).map u ≫
+    compIso.inv.app Q₀
 
 /-- The canonical leg from a finite-stage Hom set to the limiting Hom set.
 Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
@@ -204,31 +205,31 @@ theorem finiteEtaleConstructibleHomDescent
     (P : DerivedCategoryModule Λ (scheme f L)) (hP : ctf f Λ P) :
     (∃ (E : IntermediateField K L), FiniteDimensional K E ∧
       ∃ (P_E : DerivedCategoryModule Λ (scheme f E)), ctf f Λ P_E ∧
-        Nonempty ((pull f Λ (IntermediateField.val E)).obj P_E ≅ P)) ∧
+        Nonempty ((pull f Λ (A := E) (B := L) (IntermediateField.val E)).obj P_E ≅ P)) ∧
     (∀ (E : IntermediateField K L) (_hE : FiniteDimensional K E)
       (P_E Q_E : DerivedCategoryModule Λ (scheme f E)),
       ctf f Λ P_E → ctf f Λ Q_E →
-      ∀ (u : (pull f Λ (IntermediateField.val E)).obj P_E ⟶
-        (pull f Λ (IntermediateField.val E)).obj Q_E),
+      ∀ (u : (pull f Λ (A := E) (B := L) (IntermediateField.val E)).obj P_E ⟶
+        (pull f Λ (A := E) (B := L) (IntermediateField.val E)).obj Q_E),
       ∃ (E' : IntermediateField K L) (hEE' : E ≤ E'),
         FiniteDimensional K E' ∧
-        ctf f Λ ((pull f Λ (IntermediateField.inclusion hEE')).obj P_E) ∧
-        ctf f Λ ((pull f Λ (IntermediateField.inclusion hEE')).obj Q_E) ∧
-        ∃ (v : (pull f Λ (IntermediateField.inclusion hEE')).obj P_E ⟶
-          (pull f Λ (IntermediateField.inclusion hEE')).obj Q_E),
+        ctf f Λ ((pull f Λ (A := E) (B := E') (IntermediateField.inclusion hEE')).obj P_E) ∧
+        ctf f Λ ((pull f Λ (A := E) (B := E') (IntermediateField.inclusion hEE')).obj Q_E) ∧
+        ∃ (v : (pull f Λ (A := E) (B := E') (IntermediateField.inclusion hEE')).obj P_E ⟶
+          (pull f Λ (A := E) (B := E') (IntermediateField.inclusion hEE')).obj Q_E),
           (pullValCompIso f hEE' Λ).hom.app P_E ≫
-              (pull f Λ (IntermediateField.val E')).map v ≫
+              (pull f Λ (A := E') (B := L) (IntermediateField.val E')).map v ≫
             (pullValCompIso f hEE' Λ).inv.app Q_E = u) ∧
     (∀ (E : IntermediateField K L) (_hE : FiniteDimensional K E)
       (P_E Q_E : DerivedCategoryModule Λ (scheme f E)),
       ctf f Λ P_E → ctf f Λ Q_E →
       ∀ (u v : P_E ⟶ Q_E),
-        (pull f Λ (IntermediateField.val E)).map u =
-          (pull f Λ (IntermediateField.val E)).map v →
+        (pull f Λ (A := E) (B := L) (IntermediateField.val E)).map u =
+          (pull f Λ (A := E) (B := L) (IntermediateField.val E)).map v →
         ∃ (E' : IntermediateField K L) (hEE' : E ≤ E'),
           FiniteDimensional K E' ∧
-          (pull f Λ (IntermediateField.inclusion hEE')).map u =
-            (pull f Λ (IntermediateField.inclusion hEE')).map v) ∧
+          (pull f Λ (A := E) (B := E') (IntermediateField.inclusion hEE')).map u =
+            (pull f Λ (A := E) (B := E') (IntermediateField.inclusion hEE')).map v) ∧
     (∀ (E₀ : IntermediateField K L) (_hE₀ : FiniteDimensional K E₀)
       (P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)),
       ctf f Λ P₀ → ctf f Λ Q₀ →
@@ -248,9 +249,9 @@ theorem finiteEtaleConstructibleHomDescent
     obtain ⟨H, ⟨hH⟩⟩ := finiteEtaleConstructibleHomContinuity f Λ E hE P_E Q_E hPE hQE
     let i : finiteStageIndex E := ⟨E, le_rfl, hE⟩
     let x : H.F.obj i := (H.objEquiv i).symm
-      ((pull f Λ (IntermediateField.inclusion i.property.1)).map u)
+      ((pull f Λ (A := E) (B := i.1) (IntermediateField.inclusion i.property.1)).map u)
     let y : H.F.obj i := (H.objEquiv i).symm
-      ((pull f Λ (IntermediateField.inclusion i.property.1)).map v)
+      ((pull f Λ (A := E) (B := i.1) (IntermediateField.inclusion i.property.1)).map v)
     have hxy : H.c.ι.app i x = H.c.ι.app i y := by
       apply H.vertexEquiv.injective
       simp only [H.leg_eq, x, y, Equiv.apply_symm_apply, finiteStageHomLeg_map]

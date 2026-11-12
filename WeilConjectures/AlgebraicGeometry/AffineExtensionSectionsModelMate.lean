@@ -84,7 +84,10 @@ theorem affineExtensionSections_model_mate_isIso
   classical
   have hT : (@id (ModuleCat.{u} R ⥤
       SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
-        (tilde.functor R)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+        (tilde.functor R)).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := R) f g
   have hE : (ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)).Additive :=
     (ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).left_adjoint_additive
   have hP : (@id (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤

@@ -729,14 +729,14 @@ theorem unboundedProperOpenComposition_of_normalization (A : Type (u + 1)) [Comm
         (Γ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂)).hom.app K =
           (Functor.mapDerivedCategoryNatIso
               (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
               (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫
             D((j)_!open[ModuleCat.{u + 1} A]).map ((Γ k r p i sq₁).hom.app K) ≫
             (Γ l p q j sq₂).hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫
             R((q)_*[ModuleCat.{u + 1} A]).map
               ((Functor.mapDerivedCategoryNatIso
                   (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-                Functor.mapDerivedCategoryCompIso _ _).inv.app K)) := by
+                (Functor.mapDerivedCategoryCompIso _ _).symm).inv.app K)) := by
   refine ⟨?_, unboundedProperOpenHorizontalComposition_of_normalization A θ Γ hθ hΓ⟩
   intro U V W Z S T _ _ _ _ _ _ k r₁ p₁ i₁ r₂ p₂ i₂ _ _ _ _ _ _ _ sq₁ sq₂ K
   exact generic_vertical_pasting

@@ -49,8 +49,7 @@ theorem bijective_liftOfBalanced (h₁ : ∀ y, ∑ j, μ (b j) (κ j y) = y)
     simp [inv]
   refine ⟨Function.LeftInverse.injective (g := inv) fun τ ↦ ?_,
     Function.RightInverse.surjective (g := inv) fun y ↦ ?_⟩
-  · induction τ using TensorProduct.induction_on with
-    | zero => simp
+  · induction τ using TensorProduct.inductionOn with
     | add τ τ' hτ hτ' => rw [map_add, map_add, hτ, hτ']
     | tmul o a =>
       rw [hinv, liftOfBalanced_tmul]

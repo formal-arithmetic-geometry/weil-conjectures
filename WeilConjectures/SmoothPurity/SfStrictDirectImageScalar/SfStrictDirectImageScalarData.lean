@@ -236,8 +236,6 @@ attribute [local irreducible] integralUnit completedScalarChangeData
   sfIntegralScalarUnit sfRationalScalarComp sfRationalScalarUnit
   GeneralAlgebraicallyClosedCoefficients.associator
   GeneralAlgebraicallyClosedCoefficients.unitor
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 set_option genSizeOf false in
 set_option genInjectivity false in

@@ -64,7 +64,7 @@ private lemma compFactors {C D E : Type*}
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : H ≅ F ⋙ G) (K : CochainComplex C ℤ) :
     (Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+      (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
     H.mapDerivedCategoryFactors.hom.app K ≫
@@ -80,7 +80,7 @@ private lemma compFactors {C D E : Type*}
   rw [hid] at hc
   dsimp only [Functor.comp_obj] at hc
   simp only [Category.comp_id] at hc
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hc, hn]
   rfl
 

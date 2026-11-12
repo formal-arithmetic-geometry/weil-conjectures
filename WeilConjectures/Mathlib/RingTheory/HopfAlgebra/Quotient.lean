@@ -71,7 +71,7 @@ theorem _root_.Ideal.isHopfIdeal_sSup {S : Set (Ideal A)} (hS : ∀ J ∈ S, J.I
       have hle' : J.1.restrictScalars R ≤ T.restrictScalars R := hle
       refine ⟨hJ.counit_eq_zero hy, ?_, hle (hJ.antipode_mem hy)⟩
       have hc := ((Submodule.isCoideal_iff_comul_mem _).1 hJ.toIsCoideal).2 y hy
-      refine SetLike.le_def.1 (sup_le_sup ?_ ?_) hc
+      refine IsConcreteLE.le_iff.1 (sup_le_sup ?_ ?_) hc
       · rintro _ ⟨z, rfl⟩
         refine ⟨LinearMap.lTensor A (Submodule.inclusion hle') z, ?_⟩
         rw [← LinearMap.comp_apply, ← LinearMap.lTensor_comp]

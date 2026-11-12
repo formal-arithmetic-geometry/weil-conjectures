@@ -72,9 +72,9 @@ private lemma block_square
       X.map ((index e).map (homOfLE (Nat.le_succ n)).op))) ≫
       Pi.π (fun n : ℕ ↦ X.obj ((index e).obj (op n))) n
   simp only [block, selection, towerTransitionEndomorphism,
-    towerProductShift, Category.assoc, Pi.lift_π, Preadditive.comp_sub,
+    towerProductShift, Category.assoc, Pi.lift_comp_π, Preadditive.comp_sub,
     Category.comp_id, Preadditive.comp_sum, Preadditive.sub_comp,
-    Category.id_comp, Pi.lift_π_assoc]
+    Category.id_comp, Pi.lift_comp_π_assoc]
   have ht := telescoping X s e
   simp only [Preadditive.sub_comp, Category.assoc, Finset.sum_sub_distrib] at ht
   dsimp only [s] at ht hnext

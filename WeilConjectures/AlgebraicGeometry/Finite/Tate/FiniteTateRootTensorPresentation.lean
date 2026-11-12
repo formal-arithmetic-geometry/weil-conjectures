@@ -60,7 +60,7 @@ private def rootsAddHomEquiv (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : ℕ)
           intro a x
           obtain ⟨z, hz⟩ := ZMod.intCast_surjective a.down
           have ha : (z : ULift.{u + 1} (ZMod (l ^ (r + 1)))) = a :=
-            ULift.ext _ _ hz
+            ULift.ext hz
           rw [← ha]
           exact map_intCast_smul (show
             (F.obj (purTwistRootsModule T l r)).obj.obj U →+ (F.obj N).obj.obj U

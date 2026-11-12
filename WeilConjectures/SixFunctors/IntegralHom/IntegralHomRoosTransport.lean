@@ -21,7 +21,7 @@ Source: blueprint order 2478, proof step 8; Stacks Tags 08TC, 0038 and 08JC
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
@@ -42,14 +42,14 @@ private theorem homotopyLimit_of_roos
       Pi.lift (fun n : ℕ ↦ c.π.app (op n)) := by
     apply Pi.hom_ext
     intro n
-    exact (Fan.IsLimit.fac hP _ n).trans (Pi.lift_π (fun n : ℕ ↦ c.π.app (op n)) n).symm
+    exact (Fan.IsLimit.fac hP _ n).trans (Pi.lift_comp_π (fun n : ℕ ↦ c.π.app (op n)) n).symm
   have hshift : Pretriangulated.towerShift hP =
       towerProductShift (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) := by
     apply Pi.hom_ext
     intro n
     change Fan.IsLimit.lift hP _ ≫ (Fan.mk _ (Pi.π _)).proj n = _
     rw [Fan.IsLimit.fac]
-    exact (Pi.lift_π (fun n : ℕ ↦ Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫
+    exact (Pi.lift_comp_π (fun n : ℕ ↦ Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫
       F.map (homOfLE n.le_succ).op) n).symm
   refine ⟨Fan.mk _ (Pi.π _), hP, δ, ?_⟩
   rw [hfirst, hshift]
@@ -70,13 +70,13 @@ private theorem roos_of_homotopyLimit
       Pi.lift (fun n : ℕ ↦ c.π.app (op n)) := by
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, hψ, Fan.IsLimit.fac, Pi.lift_π]
+    rw [Category.assoc, hψ, Fan.IsLimit.fac, Pi.lift_comp_π]
   have ht : Pretriangulated.towerShift hP ≫ ψ.hom =
       ψ.hom ≫ towerProductShift (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) := by
     apply Pi.hom_ext
     intro n
     rw [Category.assoc, hψ, Pretriangulated.towerShift, Fan.IsLimit.fac]
-    simp only [Category.assoc, towerProductShift, Pi.lift_π]
+    simp only [Category.assoc, towerProductShift, Pi.lift_comp_π]
     rw [← Category.assoc, hψ]
   have htransition : (𝟙 P.pt - Pretriangulated.towerShift hP) ≫ ψ.hom =
       ψ.hom ≫ towerTransitionEndomorphism (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) := by
@@ -97,6 +97,10 @@ private theorem roos_of_homotopyLimit
   · simp
 
 namespace WeilConjectures.IntegralHom
+
+attribute [local implicit_reducible] completedIntegralCoefficientSheaf
+  completedIntegralCommRingSheafUnrestricted
+  completedIntegralCommRingSheaf CategoryTheory.sheafCompose
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -145,9 +149,8 @@ theorem hom_roosTransport
       Functor.mapIso_inv, NatTrans.comp_app, Functor.const_obj_map, Functor.const_obj_obj,
       Iso.refl_hom]
     change H.map (e.inv ≫ _) ≫ _ = 𝟙 _ ≫ ((H.map e.inv ≫ e'.inv) ≫ _)
-    rw [Functor.map_comp, Category.id_comp, Category.assoc]
-    simpa only [Category.assoc] using
-      congrArg (fun f ↦ H.map e.inv ≫ f) (hτ n).symm
+    erw [Functor.map_comp, Category.id_comp, Category.assoc, Category.assoc]
+    exact congrArg (fun f ↦ H.map e.inv ≫ f) (hτ n).symm
   obtain ⟨Pprod, hPprod, _, _⟩ := (show Pretriangulated.IsHomotopyLimit c' from hc')
   let : HasProduct (fun n : ℕ ↦ F'.obj (op n)) := ⟨⟨Pprod, hPprod⟩⟩
   obtain ⟨δ', hδ'⟩ := roos_of_homotopyLimit F' c' hc'

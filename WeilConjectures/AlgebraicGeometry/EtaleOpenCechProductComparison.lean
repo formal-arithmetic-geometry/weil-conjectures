@@ -117,12 +117,12 @@ private theorem productIso_indexMap
   change _ ≫ i.map (Pi.π (fun k ↦ U ((t ∘ α) k)) k.as) =
     _ ≫ i.map (Pi.π (fun k ↦ U ((t ∘ α) k)) k.as)
   rw [Category.assoc, productIso_inv_π]
-  rw [← Over.comp_left, Pi.lift_π]
+  rw [← Over.comp_left, Pi.lift_comp_π]
   rw [Category.assoc, ← i.map_comp]
   change _ = (productIso i ht U n t).inv ≫
     i.map ((Pi.lift (fun k ↦ Pi.π (fun k ↦ U (t k)) (α k))) ≫
       Pi.π (fun k ↦ U (t (α k))) k.as)
-  rw [Pi.lift_π, productIso_inv_π]
+  rw [Pi.lift_comp_π, productIso_inv_π]
 
 private theorem degreeIso_indexMap
     {X : Scheme.{u}} (i : X.Opens ⥤ X.Etale) [PreservesFiniteLimits i]
@@ -139,9 +139,9 @@ private theorem degreeIso_indexMap
           (degreeIso i ht U P n).hom := by
   apply Pi.hom_ext
   intro s
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   rw [← Category.assoc, degreeIso_hom_π]
-  rw [degreeIso_hom_π, ← Category.assoc, Pi.lift_π]
+  rw [degreeIso_hom_π, ← Category.assoc, Pi.lift_comp_π]
   simp only [Category.assoc]
   congr 1
   rw [← P.map_comp, ← P.map_comp, ← op_comp, ← op_comp]

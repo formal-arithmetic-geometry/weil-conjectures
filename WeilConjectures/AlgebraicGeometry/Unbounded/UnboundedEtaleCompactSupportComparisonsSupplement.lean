@@ -157,6 +157,8 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenInterchang
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompositionSupplement
 
 /-!
 # Unbounded ordinary etale compact-support comparisons
@@ -332,92 +334,6 @@ private lemma derived_iso_symm
     Functor.mapDerivedCategoryNatIso e.symm = (Functor.mapDerivedCategoryNatIso e).symm :=
   Iso.ext (Functor.mapDerivedCategoryNatIso_symm e)
 
-private lemma derived_triangle_assoc
-    {C₀ C₁ C₂ C₃ : Type*}
-    [Category C₀] [Category C₁] [Category C₂] [Category C₃]
-    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
-    [HasDerivedCategory C₀] [HasDerivedCategory C₁]
-    [HasDerivedCategory C₂] [HasDerivedCategory C₃]
-    (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₂ ⥤ C₃)
-    (FG : C₀ ⥤ C₂) (GH : C₁ ⥤ C₃) (FGH : C₀ ⥤ C₃)
-    [F.Additive] [G.Additive] [H.Additive]
-    [FG.Additive] [GH.Additive] [FGH.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
-    [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
-    [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
-    (eFG : FG ≅ F ⋙ G) (eGH : GH ≅ G ⋙ H)
-    (eF_GH : FGH ≅ F ⋙ GH) (eFG_H : FGH ≅ FG ⋙ H)
-    (h : eF_GH ≪≫ Functor.isoWhiskerLeft F eGH =
-      eFG_H ≪≫ Functor.isoWhiskerRight eFG H) :
-    (Functor.mapDerivedCategoryTriangleIso eF_GH).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory
-          (Functor.mapDerivedCategoryTriangleIso eGH).hom =
-      (Functor.mapDerivedCategoryTriangleIso eFG_H).hom ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryTriangleIso eFG).hom
-          H.mapDerivedCategory := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
-    Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F GH).hom,
-    ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft,
-    Category.assoc, ← Category.assoc (Functor.mapDerivedCategoryCompIso FG H).hom,
-    ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
-  simp only [← Category.assoc]
-  rw [← Functor.mapDerivedCategoryNatIso_trans, h,
-    Functor.mapDerivedCategoryNatIso_trans]
-  simp only [Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_assoc]
-
-private lemma derived_unit_right
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (F : C ⥤ D) (I : D ⥤ D) [F.Additive] [I.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    (e : I ≅ 𝟭 D) (m : F ≅ F ⋙ I)
-    (h : m ≪≫ Functor.isoWhiskerLeft F e = (Functor.rightUnitor F).symm) :
-    (Functor.mapDerivedCategoryTriangleIso m).hom ≫
-      Functor.whiskerLeft F.mapDerivedCategory
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso D).hom =
-      𝟙 _ := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
-    Functor.whiskerLeft_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).hom,
-    ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
-  simp only [← Category.assoc]
-  rw [← Functor.mapDerivedCategoryNatIso_trans, h]
-  simp only [Category.assoc]
-  change (Functor.mapDerivedCategoryNatIso (Iso.refl F)).hom ≫ _ = _
-  rw [Functor.mapDerivedCategoryNatIso_refl]
-  simp only [Category.id_comp]
-  exact Functor.mapDerivedCategoryCompIso_comp_id F
-
-private lemma derived_unit_left
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (F : C ⥤ D) (I : C ⥤ C) [F.Additive] [I.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
-    (e : I ≅ 𝟭 C) (m : F ≅ I ⋙ F)
-    (h : m ≪≫ Functor.isoWhiskerRight e F = (Functor.leftUnitor F).symm) :
-    (Functor.mapDerivedCategoryTriangleIso m).hom ≫
-      Functor.whiskerRight
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom
-        F.mapDerivedCategory = 𝟙 _ := by
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
-    Functor.whiskerRight_comp, Category.assoc]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).hom,
-    ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight]
-  simp only [← Category.assoc]
-  rw [← Functor.mapDerivedCategoryNatIso_trans, h]
-  simp only [Category.assoc]
-  change (Functor.mapDerivedCategoryNatIso (Iso.refl F)).hom ≫ _ = _
-  rw [Functor.mapDerivedCategoryNatIso_refl]
-  simp only [Category.id_comp]
-  exact Functor.mapDerivedCategoryCompIso_id_comp F
-
 private lemma identity_tail_eq
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     Functor.isoWhiskerLeft
@@ -440,7 +356,7 @@ private lemma identity_tail_eq
 
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private noncomputable def exact_pb_comp
     (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}
@@ -707,82 +623,6 @@ private lemma exact_unit_ext
   exact Localization.natTrans_ext DerivedCategory.Qh
     (HomotopyCategory.quasiIso C (.up ℤ)) h
 
-private lemma exact_adj_comp
-    {C : Type uC} {D : Type uD} {E : Type uE} [Category.{vC} C] [Category.{vD} D] [Category.{vE} E]
-    [Abelian C] [Abelian D] [Abelian E]
-    [IsGrothendieckAbelian.{vC} C] [IsGrothendieckAbelian.{vD} D] [IsGrothendieckAbelian.{vE} E]
-    [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D] [HasDerivedCategory.{wE} E]
-    [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
-    [MonoidalCategory D] [MonoidalPreadditive D] [SymmetricCategory D] [MonoidalClosed D]
-    [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
-    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : D ⥤ E} {R₂ : E ⥤ D}
-    [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive]
-    [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
-    [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
-    [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂]
-    [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
-    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) :
-    (a.comp b).mapDerivedCategoryAdjunction =
-      ((a.mapDerivedCategoryAdjunction.comp b.mapDerivedCategoryAdjunction
-        ).ofNatIsoLeft (Functor.mapDerivedCategoryCompIso L₁ L₂).symm
-          ).ofNatIsoRight (Functor.mapDerivedCategoryCompIso R₂ R₁).symm := by
-  apply Adjunction.ext
-  apply exact_unit_ext (C := C)
-  intro K
-  simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_hom, Adjunction.comp_unit_app]
-  let KL := ((L₁ ⋙ L₂).mapHomotopyCategory (.up ℤ)).obj K
-  rw [← cancel_mono ((R₂ ⋙ R₁).mapDerivedCategory.map
-    ((L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K) ≫
-      (R₂ ⋙ R₁).mapDerivedCategoryFactorsh.hom.app KL)]
-  simp only [Category.assoc]
-  rw [(a.comp b).mapDerivedCategoryAdjunction_unit_app_fac K]
-  have hL : (Functor.mapDerivedCategoryCompIso L₁ L₂).inv.app
-      (DerivedCategory.Qh.obj K) ≫ (L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K =
-      L₂.mapDerivedCategory.map (L₁.mapDerivedCategoryFactorsh.hom.app K) ≫
-        L₂.mapDerivedCategoryFactorsh.hom.app ((L₁.mapHomotopyCategory (.up ℤ)).obj K) := by
-    rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app
-      (DerivedCategory.Qh.obj K)), Iso.hom_inv_id_app_assoc]
-    exact (Functor.mapDerivedCategoryCompIso_hom_app_factorsh L₁ L₂ K).symm
-  have hR : (Functor.mapDerivedCategoryCompIso R₂ R₁).inv.app
-      (DerivedCategory.Qh.obj KL) ≫ (R₂ ⋙ R₁).mapDerivedCategoryFactorsh.hom.app KL =
-      R₁.mapDerivedCategory.map (R₂.mapDerivedCategoryFactorsh.hom.app KL) ≫
-        R₁.mapDerivedCategoryFactorsh.hom.app ((R₂.mapHomotopyCategory (.up ℤ)).obj KL) := by
-    rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso R₂ R₁).hom.app
-      (DerivedCategory.Qh.obj KL)), Iso.hom_inv_id_app_assoc]
-    exact (Functor.mapDerivedCategoryCompIso_hom_app_factorsh R₂ R₁ KL).symm
-  have hn := (Functor.mapDerivedCategoryCompIso R₂ R₁).inv.naturality
-    ((L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K)
-  simp only [Functor.comp_map] at hn
-  erw [← reassoc_of% hn]
-  rw [hR]
-  simp only [Functor.comp_map]
-  slice_rhs 3 4 =>
-    erw [← R₁.mapDerivedCategory.map_comp, ← R₂.mapDerivedCategory.map_comp, hL]
-  simp only [Functor.map_comp, Category.assoc]
-  have hη := b.mapDerivedCategoryAdjunction.unit.naturality
-    (L₁.mapDerivedCategoryFactorsh.hom.app K)
-  simp only [Functor.comp_map, Functor.id_map] at hη
-  slice_rhs 2 3 =>
-    erw [← R₁.mapDerivedCategory.map_comp, ← hη]
-  simp only [Functor.map_comp, Category.assoc]
-  slice_rhs 3 5 =>
-    erw [← R₁.mapDerivedCategory.map_comp_assoc,
-      ← R₁.mapDerivedCategory.map_comp, Category.assoc,
-      b.mapDerivedCategoryAdjunction_unit_app_fac]
-  have hN := R₁.mapDerivedCategoryFactorsh.hom.naturality
-    ((b.mapHomotopyCategory (.up ℤ)).unit.app ((L₁.mapHomotopyCategory (.up ℤ)).obj K))
-  simp only [Functor.comp_map] at hN
-  erw [hN]
-  erw [reassoc_of% (a.mapDerivedCategoryAdjunction_unit_app_fac K)]
-  rw [← Functor.map_comp]
-  congr 1
-  rw [Adjunction.mapHomotopyCategory_comp_unit_app]
-  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_hom_app]
-  repeat erw [CategoryTheory.Functor.map_id]
-  repeat erw [Category.comp_id]
 private lemma exact_adj_conjugate
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [Abelian C] [Abelian D]
@@ -827,65 +667,6 @@ private lemma exact_adj_conjugate
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
   exact Adjunction.mapHomotopyCategory_unit_app_comp (.up ℤ) a b e.hom r.hom h K
-private lemma derived_open_comp_conjugate
-    (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
-    [HasSmallSiteSheafify B] [MonoidalCategory B] [MonoidalPreadditive B]
-    [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
-    {X Y Z : Scheme.{u}}
-    (j₁ : X ⟶ Y) (j₂ : Y ⟶ Z) [IsOpenImmersion j₁] [IsOpenImmersion j₂] :
-    conjugateEquiv
-      ((openImmersionLowerShriekUpperStarAdjunction B j₁
-        ).mapDerivedCategoryAdjunction.comp
-        (openImmersionLowerShriekUpperStarAdjunction B j₂
-          ).mapDerivedCategoryAdjunction)
-      (openImmersionLowerShriekUpperStarAdjunction B (j₁ ≫ j₂)
-        ).mapDerivedCategoryAdjunction
-      (Functor.mapDerivedCategoryTriangleIso
-        (openImmersionLowerShriekComp B j₁ j₂)).hom =
-      (Functor.mapDerivedCategoryTriangleIso
-        (upperStarComp B j₁ j₂)).inv := by
-  let a := openImmersionLowerShriekUpperStarAdjunction B j₁
-  let b := openImmersionLowerShriekUpperStarAdjunction B j₂
-  let c := openImmersionLowerShriekUpperStarAdjunction B (j₁ ≫ j₂)
-  let e := openImmersionLowerShriekComp B j₁ j₂
-  let r := upperStarComp B j₁ j₂
-  have hu (K : Sheaf X.smallEtaleTopology B) :
-      c.unit.app K ≫ (upperStar B (j₁ ≫ j₂)).map (e.hom.app K) =
-        (a.comp b).unit.app K ≫ r.inv.app
-          (((openImmersionLowerShriek B j₁) ⋙ (openImmersionLowerShriek B j₂)).obj K) := by
-    exact Adjunction.unit_leftAdjointUniq_hom_app c ((a.comp b).ofNatIsoRight r.symm) K
-  have hd := exact_adj_conjugate
-    (C := Sheaf X.smallEtaleTopology B) (D := Sheaf Z.smallEtaleTopology B)
-    c (a.comp b) e r.symm hu
-  rw [exact_adj_comp (C := Sheaf X.smallEtaleTopology B)
-    (D := Sheaf Y.smallEtaleTopology B) (E := Sheaf Z.smallEtaleTopology B) a b] at hd
-  apply conjugateEquiv_eq_of_unit
-  intro K
-  have hK := congrArg (fun t ↦ t.app K) hd
-  simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_hom, Adjunction.comp_unit_app,
-    Functor.mapDerivedCategoryNatIso_symm] at hK
-  let L₁ := openImmersionLowerShriek B j₁
-  let L₂ := openImmersionLowerShriek B j₂
-  let R := upperStar B (j₁ ≫ j₂)
-  let R₁ := upperStar B j₁
-  let R₂ := upperStar B j₂
-  have hk := congrArg (fun t ↦ t ≫ R.mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app K)) hK
-  simp only [Category.assoc] at hk
-  have hn := (Functor.mapDerivedCategoryTriangleIso r).inv.naturality
-    ((Functor.mapDerivedCategoryCompIso L₁ L₂).hom.app K)
-  simp only [Functor.comp_map] at hn
-  simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_inv,
-    NatTrans.comp_app, Category.assoc] at hn
-  erw [← hn] at hk
-  erw [← (R₂.mapDerivedCategory ⋙ R₁.mapDerivedCategory).map_comp_assoc,
-    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hk
-  simpa only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.trans_inv,
-    NatTrans.comp_app, Functor.map_comp, Adjunction.comp_unit_app,
-    a, b, c, e, r, L₁, L₂, R, R₁, R₂, Category.assoc] using hk.symm
-
 end ExactOpenComposition
 
 section IdentityComparisons
@@ -1509,7 +1290,7 @@ noncomputable def unboundedEtaleUpperStarCompIso
       (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ⋙
         (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact inverse-image identity is the sheaf identity descended termwise.
 Source: Stacks Project, Tags 0F7H and 0F7L
@@ -1525,11 +1306,11 @@ private lemma upperStar_comp_id_unit
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom ≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom ≫
         Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
           (unboundedEtaleUpperStarIdIso A X).hom = 𝟙 _ := by
   rw [upperStarComp_id_left]
-  simp only [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_trans,
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategoryNatIso_trans,
     Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
   rw [reassoc_of% Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
   ext K
@@ -1772,7 +1553,7 @@ section UnboundedBaseChange
 set_option backward.isDefEq.respectTransparency false
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private lemma unbounded_shriek_base_change
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -2111,11 +1892,11 @@ theorem unboundedEtaleCompactSupport_baseChange_id
     (unboundedEtaleUpperStarIdIso A X) (unboundedEtaleUpperStarIdIso A Y)
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) (𝟙 Y) (𝟙 Y) (𝟙 Y) (by simp)) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
-    (upperStar_comp_id_unit A X) (upperStar_comp_id_unit A Y)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
+    (exact_pb_id_left A (𝟙 X)) (exact_pb_id_left A (𝟙 Y))
   intro K
   have h := unboundedEtaleCompactSupport_baseChange_comp A sq sq
     (by simpa only [Category.id_comp] using sq)
@@ -2217,7 +1998,7 @@ private lemma right_derived_plus_unit
     [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
     [HasKInjectiveResolutions C] (F : C ⥤ D) [F.Additive]
     (K : HomotopyCategory.Plus C) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
       F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K) := by
   simpa only [Functor.rightDerivedFunctorPlusCompatibility, Functor.rightDerivedUnique,
@@ -2237,7 +2018,7 @@ private lemma right_derived_plus_unit_assoc
     (K : HomotopyCategory.Plus C) {Z : DerivedCategory D}
     (h : F.rightDerivedFunctor.obj
       (DerivedCategory.Qh.obj ((HomotopyCategory.Plus.ι C).obj K)) ⟶ Z) :
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K) ≫
         F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) ≫ h =
       F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K) ≫ h := by
   rw [← Category.assoc, right_derived_plus_unit]
@@ -2311,12 +2092,12 @@ private lemma right_derived_comp_plus
   rw [← Functor.map_comp_assoc, Functor.rightDerivedFunctorPlusCompIso_fac_app,
     Functor.rightDerivedFunctorPlusCompUnit_app, Functor.map_comp]
   have hn := G.rightDerivedFunctorPlusCompatibility.hom.naturality
-    (F.rightDerivedFunctorPlusUnit.app K)
+    (F.rightDerivedFunctorPlusUnith.app K)
   simp only [Functor.comp_map] at hn
   rw [Category.assoc, reassoc_of% hn]
   rw [right_derived_plus_unit_assoc, right_derived_plus_unit_assoc]
   have hl := (G.rightDerivedFunctor.map_comp
-      (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K))
+      (DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app K))
       (F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K))).symm.trans
     (congrArg G.rightDerivedFunctor.map (right_derived_plus_unit F K))
   have hr := right_comp_unit F G ((HomotopyCategory.Plus.ι C).obj K)
@@ -2434,12 +2215,12 @@ private lemma exact_square_plus
       DerivedCategory.Plus.ι.mapIso
           ((upperStarCompDerivedPlus B a b ab hab).app K) =
         (Functor.mapDerivedCategoryNatIso (upperStarComp B a b ab hab) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).app (DerivedCategory.Plus.ι.obj K) := by
+          (Functor.mapDerivedCategoryCompIso _ _).symm).app (DerivedCategory.Plus.ι.obj K) := by
     apply Iso.ext
     simp only [Functor.mapIso_hom, Iso.app_hom, upperStarCompDerivedPlus,
       Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
       Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.symm_hom]
   change DerivedCategory.Plus.ι.map
       ((upperStarCompDerivedPlus B f' g (g' ≫ f) sq.w).inv.app K ≫
         (upperStarCompDerivedPlus B g' f).hom.app K) = _
@@ -2451,11 +2232,11 @@ private lemma exact_square_plus
   rewrite [hc, hc]
   simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.app_inv, Iso.app_hom, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.app_inv, Iso.app_hom, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Category.assoc]
 
 section ProperExchangeRestriction
-attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
+attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Functor.rightDerivedFunctorPlusCompatibility
 private lemma exact_unit_plus
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
@@ -2559,7 +2340,7 @@ private lemma proper_exchange_plus
 end ProperExchangeRestriction
 end Proper
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
-  Functor.mapDerivedCategory Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
+  Functor.mapDerivedCategory Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorPlusCompatibility
 private lemma refinement_base_change_plus
     (A : Type (u + 1)) [CommRing A]
@@ -2577,7 +2358,7 @@ private lemma refinement_base_change_plus
     simp only [refinementLowerShriekBaseChangeDerivedPlusIso,
       refinementLowerShriekBaseChangeDerivedIso, Iso.trans_hom, NatTrans.comp_app,
       Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.symm_hom]
   have hi : DerivedCategory.Plus.ι.mapIso
       ((refinementLowerShriekBaseChangeDerivedPlusIso (ModuleCat.{u + 1} A) r hp).app K) =
       (refinementLowerShriekBaseChangeDerivedIso (ModuleCat.{u + 1} A) r hp).app
@@ -3048,7 +2829,7 @@ private lemma bounded_open_comp_conjugate
       simp only [Functor.mapIso_hom, Iso.app_hom, upperStarCompDerivedPlus,
         Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, NatTrans.comp_app,
         Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-        Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+        Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.symm_hom]
     exact congrArg Iso.inv he
   rw [hi]
   simp only [Adjunction.comp_unit_app, Functor.mapDerivedCategoryTriangleIso,
@@ -3475,7 +3256,7 @@ private lemma bounded_sh_comp_plus
       Iso.refl_trans, mapDerivedCategoryOpenImmersionLowerShriekComp,
       Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
       Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Iso.symm_hom]
     rfl
   exact congrArg Iso.inv he
 
@@ -4182,7 +3963,7 @@ private lemma comparison_complex_fac
     rw [Iso.hom_inv_id_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app]
     exact (Category.comp_id _).symm
   rw [hc]
-  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Category.assoc]
   erw [DerivedCategory.Qh.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
     Category.id_comp]
   have ha : (a.mapHomotopyCategory (.up ℤ)).app
@@ -4190,45 +3971,7 @@ private lemma comparison_complex_fac
     (HomotopyCategory.quotient _ (.up ℤ)).map
       ((a.mapHomologicalComplex (.up ℤ)).app J) := rfl
   erw [ha, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  simp only [Category.assoc]
   rfl
-
-private lemma open_comparison_mono (B : Type*) [Category.{u + 1} B] [Abelian B]
-    [IsGrothendieckAbelian.{u + 1} B]
-    {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]
-    (M : Sheaf U.smallEtaleTopology B) :
-    Mono ((openImmersionLowerShriekToLowerStar B j).app M) := by
-  let γ : (openImmersionLowerShriek B j).obj M ⟶ (lowerStar B j).obj M :=
-    (openImmersionLowerShriekToLowerStar B j).app M
-  have hj : IsIso ((upperStar B j).map γ) :=
-    (NatIso.isIso_map_iff (upperStarIsoOpenImmersionRestriction B j) γ).2 inferInstance
-  have hz := isZero_upperStar_openImmersionLowerShriek_of_disjoint_range B j
-    j.closedComplement (by rw [j.range_closedComplement]; exact disjoint_compl_right) M
-  have hc : Mono ((upperStar B j.closedComplement).map γ) := hz.mono _
-  have hker {Y : Scheme.{u}}
-      (q : Sheaf Z.smallEtaleTopology B ⥤ Sheaf Y.smallEtaleTopology B)
-      [PreservesFiniteLimits q] [Mono (q.map γ)] : IsZero (q.obj (kernel γ)) :=
-    (isZero_kernel_of_mono (q.map γ)).of_iso (PreservesKernel.iso q γ)
-  have h0 : IsZero (kernel γ) :=
-    isZero_of_isZero_upperStar (A := B) (j := j) j.closedComplement j.range_closedComplement
-      (hker (upperStar B j)) (hker (upperStar B j.closedComplement))
-  exact Preadditive.mono_of_isZero_kernel γ h0
-
-private lemma compactification_comparison_mono_aux
-    (B : Type*) [Category.{u + 1} B] [Abelian B]
-    [IsGrothendieckAbelian.{u + 1} B] [HasSmallSiteSheafify B]
-    {U X : Scheme.{u}} {f : U ⟶ X} (c : Compactification f)
-    (M : Sheaf U.smallEtaleTopology B) :
-    Mono ((lowerStar B c.g).map ((openImmersionLowerShriekToLowerStar B c.i).app M) ≫
-      (lowerStarComp B c.i c.g f c.comm).hom.app M) := by
-  have := open_comparison_mono B c.i M
-  infer_instance
-
-private lemma compactification_comparison_mono (A : Type (u + 1)) [CommRing A]
-    {U X : Scheme.{u}} {f : U ⟶ X} (c : Compactification f)
-    (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
-    Mono ((compactificationSheafToDirectImage A c).app M) :=
-  compactification_comparison_mono_aux (ModuleCat.{u + 1} A) c M
 
 private lemma theta_normalization
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
@@ -4369,7 +4112,12 @@ private lemma normalization_open_interchange
   have hs : N.sheafComparison k c = a := by
     apply NatTrans.ext
     funext M
-    have := compactification_comparison_mono A c M
+    have : Mono ((openImmersionLowerShriekToLowerStar
+        (ModuleCat.{u + 1} A) c.i).app M) := open_compare_mono A c.i M
+    have : Mono ((compactificationSheafToDirectImage A c).app M) := by
+      dsimp only [compactificationSheafToDirectImage, NatTrans.comp_app,
+        Functor.whiskerRight_app]
+      infer_instance
     apply (cancel_mono ((compactificationSheafToDirectImage A c).app M)).1
     rw [N.sheaf_normalization]
     have he := theta_normalization (ModuleCat.{u + 1} A) c.i c.g k c.comm.symm θ hθ M

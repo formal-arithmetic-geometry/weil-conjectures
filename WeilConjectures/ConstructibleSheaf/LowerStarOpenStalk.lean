@@ -139,7 +139,7 @@ theorem finite_sheafFiber_lowerStar
   -- every element of the fibre category is refined by one with irreducible underlying space
   have key (E : Φ.fiber.Elements) : ∃ (W : X.Etale) (w : Φ.fiber.obj W) (k : W ⟶ E.1),
       Φ.fiber.map k w = E.2 ∧ IrreducibleSpace W.left := by
-    obtain ⟨V, v⟩ := E
+    obtain @⟨V, v⟩ := E
     have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian (Y := X) V.hom
     obtain ⟨O, hO, hOirr⟩ := exists_isOpen_irreducibleSpace_of_isDomain_stalk (hX V)
       (v.left (IsLocalRing.closedPoint Ω))
@@ -156,7 +156,7 @@ theorem finite_sheafFiber_lowerStar
       ∃ (E : Φ.fiber.Elements) (σ : ToType (J.obj.obj (op E.1))),
       Φ.toPresheafFiber E.1 E.2 J.obj σ = p := by
     obtain ⟨V, v, σ, hσ⟩ := Φ.toPresheafFiber_jointly_surjective p
-    exact ⟨⟨V, v⟩, σ, hσ⟩
+    exact ⟨Φ.fiber.elementsMk V v, σ, hσ⟩
   choose E σ hσ using hrep
   classical
   obtain ⟨E₀, hE₀⟩ := IsCofiltered.inf_objs_exists (T.image E)

@@ -1103,8 +1103,7 @@ private def restrictedTensorPresheafIso
     intro z
     change ((scalarModule.{c, v, u} φ).val ⊗ M.val).map f z =
       (changeOfRingsPresheafOfUniverses φ M).map f z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s x => exact (changeOfRingsMap_tmulOfUniverses φ M f s x).symm
 

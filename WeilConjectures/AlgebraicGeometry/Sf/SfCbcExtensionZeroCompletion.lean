@@ -255,12 +255,12 @@ def sfCbcExtensionTransport {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     sfCbcDerivedExtension j A ⋙ (sfCbcModelDerived X A).functor ≅
       (sfCbcModelDerived U A).functor ⋙ sfCbcModelDerivedExtension j A :=
-  (Functor.mapDerivedCategoryCompIso (sfCbcOpenExtension j A)
-      (sfCbcModelModules X A)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (sfCbcOpenExtension j A)
+      (sfCbcModelModules X A) ≪≫
     Functor.mapDerivedCategoryNatIso
       (isoWhiskerRight (sfCbcModelModules U A).asEquivalence.unitIso
         (sfCbcOpenExtension j A ⋙ sfCbcModelModules X A)) ≪≫
-    Functor.mapDerivedCategoryCompIso (sfCbcModelModules U A) (sfCbcModelExtension j A)
+    (Functor.mapDerivedCategoryCompIso (sfCbcModelModules U A) (sfCbcModelExtension j A)).symm
 
 attribute [local irreducible] sfCbcModelDerived
 

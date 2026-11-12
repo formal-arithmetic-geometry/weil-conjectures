@@ -60,8 +60,7 @@ private theorem internalGenerator_hom_ext
   apply (cancel_epi (Mod.extendπ a M)).mp
   apply Sheaf.tensor_hom_ext
   ext U y
-  induction y using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction y using TensorProduct.inductionOn with
   | add y y' hy hy' => simp only [map_add, hy, hy']
   | tmul z x => exact h U z x
 
@@ -153,8 +152,6 @@ private theorem ordinary_computation_transport (a : Λ ⟶ Λ') [IsMonHom a]
     ((ho ((ModuleRingedComparison.equivalence Λ T).functor.obj M) U z x).symm.trans
       (hscalar.symm.trans hr.symm)))
 
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
-
 attribute [local implicit_reducible] ModuleRingedComparison.sectionLocalizationComparison
   CategoryTheory.Functor.map₂HomologicalComplex
 
@@ -198,15 +195,15 @@ private theorem exactSquareFactors
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.hom (.up ℤ)).app P) =
-    ((Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P) ≫
+    ((Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryNatIso r).hom.app (DerivedCategory.Q.obj P) ≫
-      (Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj P)) ≫
+      (Functor.mapDerivedCategoryCompIso F' G').inv.app (DerivedCategory.Q.obj P)) ≫
       G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app P) ≫
       G'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj P) := by
   simp only [Category.assoc]
   apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+    ((Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P))).mp
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]

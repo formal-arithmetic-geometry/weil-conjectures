@@ -25,7 +25,7 @@ open CategoryTheory.Limits
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex PurCompactSupport.finite
+  sfIntrinsicDerivedEquivalence PurCompactSupport.finite
   sfIntrinsicPullback sfIntrinsicTransport sfIntrinsicExtensionByZero
 set_option backward.defeqAttrib.useBackward true
 

@@ -139,6 +139,7 @@ lemma skyscraperPresheafAb_map_apply {V V' : X.Opensᵒᵖ} (i : V ⟶ V')
     (skyscraperPresheafAb x I).map i s ⟨hx⟩ = s ⟨i.unop.le hx⟩ :=
   rfl
 
+
 lemma skyscraperPresheafAb_map_smul {V V' : X.Opensᵒᵖ} (i : V ⟶ V')
     (a : X.ringCatSheaf.obj.obj V) (s : (skyscraperPresheafAb x I).obj V) :
     (skyscraperPresheafAb x I).map i (a • s) =

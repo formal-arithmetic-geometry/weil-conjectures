@@ -199,7 +199,7 @@ private theorem scalarSixDerivedRestrictionTowerSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.isoWhiskerRight
         (Functor.mapDerivedCategoryNatIso (scalarSixOrdinaryRestrictionTower a b Y) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) (scalarSixPull Λ f) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) (scalarSixPull Λ f) ≪≫
       (Functor.associator _ _ _ ≪≫
         Functor.isoWhiskerLeft
           (Mod.comap (coefficientMap (Λ := Λ'.X) (Λ' := Λ''.X)
@@ -214,7 +214,7 @@ private theorem scalarSixDerivedRestrictionTowerSquare
       (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ''.X) (a ≫ b).hom.hom f).symm ≪≫
         Functor.isoWhiskerLeft (scalarSixPull Λ'' f)
           (Functor.mapDerivedCategoryNatIso (scalarSixOrdinaryRestrictionTower a b X) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _) := by
+            (Functor.mapDerivedCategoryCompIso _ _).symm) := by
   have : IsMonHom a.hom.hom := a.hom.isMonHom_hom
   have : IsMonHom b.hom.hom := b.hom.isMonHom_hom
   have : IsMonHom (a ≫ b).hom.hom := (a ≫ b).hom.isMonHom_hom

@@ -236,7 +236,7 @@ theorem exists_hasDivisorComplementDirectImages_of_isRegularImmersion {k : Type 
     rw [ringChar.eq (ZModCoeff.{u} ℓ) ℓ]
     exact NeZero.ne ℓ⟩
   have : HasInvertibleExponent (ZModCoeff.{u} ℓ) (Spec (.of k)) :=
-    ⟨ℓ, Nat.pos_of_ne_zero (NeZero.ne ℓ), ULift.ext _ _ (by simp),
+    ⟨ℓ, Nat.pos_of_ne_zero (NeZero.ne ℓ), ULift.ext (by simp),
       by simpa using (Ne.isUnit hℓ).map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
   exact exists_higherDirectImage_constantSheaf_of_isRegularImmersion (ZModCoeff.{u} ℓ) aW i hD j
     hj x

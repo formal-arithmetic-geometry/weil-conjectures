@@ -89,7 +89,6 @@ private theorem localize {R : Type u} {S : Type v} [CommRing R] [CommRing S]
 
 set_option maxHeartbeats 800000 in
 -- Completion and tensor scalar towers require extra elaboration work.
-set_option backward.isDefEq.respectTransparency false in
 /-- Every absolute derivation of a finite integral model extends to the base-changed
 formal fibre, compatibly with the model's inclusion into its fraction field.
 Source: Stacks Project, More on Algebra, Tag 07PR, finite-model and extension paragraphs;
@@ -150,11 +149,9 @@ theorem exists_formalFiber_extension
   let : DistribMulAction B H := (inferInstance : Module B H).toDistribMulAction
   let : Algebra B (C ⊗[A] B) := Algebra.TensorProduct.rightAlgebra
   obtain ⟨_, e, _, _, _, _⟩ := AdicCompletion.completion_finite_extension A B q
-  let h : (∀ t : Q, AdicCompletion
-      (IsLocalRing.maximalIdeal (Localization.AtPrime t.1)) (Localization.AtPrime t.1))
-      ≃ₐ[B] H := AlgEquiv.ofRingEquiv (f := RingEquiv.piUnique _) (by intro x; rfl)
   let e0 : (B ⊗[A] C) ≃ₐ[B] H :=
-    (Algebra.TensorProduct.commRight A B C).trans (e.trans h)
+    (Algebra.TensorProduct.commRight A B C).trans
+      (e.trans (AlgEquiv.ofRingEquiv (f := RingEquiv.piUnique _) (by intro x; rfl)))
   let eR : R ≃ₐ[M] (M ⊗[B] H) :=
     (Algebra.TensorProduct.cancelBaseChange A K M M C).trans
       ((Algebra.TensorProduct.cancelBaseChange A B M M C).symm.trans

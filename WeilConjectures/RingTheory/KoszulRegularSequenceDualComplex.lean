@@ -603,7 +603,8 @@ theorem koszul_conormal_comparison_change_generators
           (exteriorPower.ιMulti A r w)) := by
       have hh := hφ (ModuleCat.ofHom (x.hom.comp (exteriorPower.map r t))) w
       rw [hwv] at hh
-      convert hh using 1 <;> rfl
+      convert hh using 1
+      rfl
     _ = (-1 : A ⧸ I) ^ (r * (r - 1) / 2) *
         Ideal.Quotient.mk I (x.hom (exteriorPower.ιMulti A r (fun i ↦ t (w i)))) := by
       congr 2

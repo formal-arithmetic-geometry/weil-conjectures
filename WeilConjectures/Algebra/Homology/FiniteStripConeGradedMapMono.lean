@@ -82,7 +82,7 @@ private theorem finiteStripRowInclusion_projection
       simp only [HomologicalComplex.homotopyCofiber.inlX_XIsoBiprod_hom_assoc,
         biprod.inl_map]
       unfold finiteStripSourceProjection
-      rw [dif_pos h]
+      rw [dite_eq_left h]
       simp only [Category.assoc, HomologicalComplex.XIsoOfEq, eqToIso.hom,
         eqToHom_trans_assoc, eqToHom_refl, Category.id_comp, Iso.hom_inv_id_assoc]
       have hr : (biprod.inl :
@@ -149,7 +149,7 @@ private theorem finiteStripGradedMap_hasLeftInverse
         change HomologicalComplex.homotopyCofiber.inlX b (n + 1) n rfl ≫ _ ≫ _ = 0
         simp only [HomologicalComplex.homotopyCofiber.inlX_XIsoBiprod_hom_assoc,
           biprod.inl_map_assoc]
-        rw [finiteStripSourceProjection, dif_neg hn]
+        rw [finiteStripSourceProjection, dite_eq_right hn]
         simp
       · exact bot_le
     · apply Finset.sup_le
@@ -165,7 +165,7 @@ private theorem finiteStripGradedMap_hasLeftInverse
         simp only [HomologicalComplex.homotopyCofiber.inrX_XIsoBiprod_hom_assoc,
           biprod.inr_map_assoc]
         rw [← Category.assoc, ← Category.assoc,
-          finiteStripTotalProjection_ι K p n i (n - i) (by omega), dif_neg hn]
+          finiteStripTotalProjection_ι K p n i (n - i) (by omega), dite_eq_right hn]
         simp
       · exact bot_le
   have hzero : (F.step (p + 1)).arrow.f n ≫ P = 0 := by

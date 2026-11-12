@@ -111,7 +111,7 @@ theorem supported_open_pushforward_complement_zero (X : Scheme.{u}) (U : X.Opens
   let dV := eV.mapDerivedCategory
   have hzV' : IsZero (dV.functor.obj
       (rV.mapDerivedCategory.obj ((schemeDerivedDirectImage U.ι).obj F))) :=
-    hzV.of_iso ((Functor.mapDerivedCategoryCompIso rV eV.functor).app _).symm
+    hzV.of_iso ((Functor.mapDerivedCategoryCompIso rV eV.functor).symm.app _).symm
   exact IsZero.of_full_of_faithful_of_isZero dV.functor _ hzV'
 
 

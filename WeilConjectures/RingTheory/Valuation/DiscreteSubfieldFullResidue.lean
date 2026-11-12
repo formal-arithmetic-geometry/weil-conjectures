@@ -87,7 +87,7 @@ theorem exists_powIndependent_closure (k : Type u) [Field k] (p : ℕ) [hp : Exp
   · let ext : (s → Fin p) → {E : I →₀ ℕ // ∀ i, E i < p} := fun E =>
       ⟨Finsupp.onFinset s (fun j => if h : j ∈ s then (E ⟨j, h⟩ : ℕ) else 0) fun j hj => by
         by_contra h
-        exact hj (dif_neg h), fun j => by
+        exact hj (dite_eq_right h), fun j => by
         rw [Finsupp.onFinset_apply]
         split_ifs
         · exact Fin.isLt _
@@ -97,7 +97,7 @@ theorem exists_powIndependent_closure (k : Type u) [Field k] (p : ℕ) [hp : Exp
       dsimp only [ext]
       rw [Finsupp.onFinset_prod _ fun _ => pow_zero _, ← Finset.prod_coe_sort s]
       refine Finset.prod_congr rfl fun i _ => ?_
-      rw [dif_pos i.2]
+      rw [dite_eq_left i.2]
     have hinj : Function.Injective ext := fun E E' h => funext fun i => Fin.ext (by
       have := congrArg (fun E : {E : I →₀ ℕ // ∀ i, E i < p} => E.1 i) h
       simpa [ext] using this)

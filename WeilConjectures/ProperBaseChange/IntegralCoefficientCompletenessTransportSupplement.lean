@@ -172,7 +172,7 @@ def purDerivedCoefficientRoundTrip (W : Scheme.{u}) :
   have := (integralDetailedCoefficientRestriction_exact W l E).2
   (Functor.mapDerivedCategoryCompIso (purOrdinaryCoefficientModel l E W)
     (SheafOfModules.restrictScalars.{u + 1}
-      (integralDetailedCoefficientComparison W l E).hom)).symm ≪≫
+      (integralDetailedCoefficientComparison W l E).hom)) ≪≫
     Functor.mapDerivedCategoryNatIso (purOrdinaryCoefficientRoundTrip l E W) ≪≫
       Functor.mapDerivedCategoryIdIso _
 

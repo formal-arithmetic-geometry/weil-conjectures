@@ -81,7 +81,7 @@ theorem scalar_section_ordinary_normalized_map (T : Scheme.{u})
         (show (condensedRingObj Λ' T).obj.obj W from
           (1 : (ring Λ' T).obj.obj W)) m
       let adj := Mod.extendRestrictAdjunction (ProEtale.coefficientMap a T)
-      have hscalar (s : (condensedRingObj Λ' T).obj.obj W) :
+      have hscalar (s : (ring Λ' T).obj.obj W) :
           InternalAbelianSheafModule.internalScalarGenerator J
               (ProEtale.coefficientMap a T) M W s m =
             s • (show ((equivalence Λ' T).functor.obj

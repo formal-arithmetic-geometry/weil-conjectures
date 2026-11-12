@@ -81,7 +81,7 @@ public import Mathlib.CategoryTheory.Limits.Connected
 public import Mathlib.CategoryTheory.Limits.Types.Filtered
 public import Mathlib.CategoryTheory.Filtered.Connected
 public import Mathlib.CategoryTheory.Filtered.Final
-public import Mathlib.Data.Finite.Prod
+public import Mathlib.Basic.Finite.Prod
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 public import Mathlib.CategoryTheory.Sites.Sheafification
@@ -194,7 +194,6 @@ private noncomputable def constantComparisonHom (M : ModuleCat.{u + 1} A) :
     { app U := η.app U
       naturality _ _ f := by ext x; exact ConcreteCategory.congr_hom (η.naturality f) x }
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}] [HasSheafify J (ModuleCat.{u + 1} A)] in
 private theorem constantComparisonHom_isIso (M : ModuleCat.{u + 1} A) :
     IsIso (constantComparisonHom J A R a M) := by
   let N := (restriction J A R a).obj

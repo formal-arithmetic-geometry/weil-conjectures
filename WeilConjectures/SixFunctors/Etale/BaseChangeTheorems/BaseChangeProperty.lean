@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SixFunctors.BaseChange.Derived
@@ -277,22 +279,22 @@ theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap
     have : Injective (M.obj.X m) := (L.obj.X m).2
     have : IsTorsionModuleSheaf (M.obj.X m) := .of_isTorsion hΛ _
     hf.rightAcyclic Λ sq (M.obj.X m)
-  have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+  have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
       (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
     (f')_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
       (((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M) hM
-  have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
+  have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) := by
     dsimp only [P, M]
     infer_instance
   have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
   have : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) ≫
       (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         (DerivedCategory.Plus.Qh.obj P)) := by
     rw [hfac]
     infer_instance
   exact IsIso.of_isIso_comp_left (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P)) _
 
 /-- **`IA ⇒ PBC` for a proper morphism and a torsion coefficient ring**: if `Λ` is torsion as an
 additive group and `f` is proper with injective acyclicity, then the derived base change map is

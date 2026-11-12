@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+import all WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
 import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
@@ -33,11 +36,8 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.tensorPullbackCompositionIso Scheme.Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
-  CochainComplex.singleFunctors DerivedCategory.singleFunctors
-  HomotopyCategory.singleFunctors SingleFunctors.postcomp
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
+  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.singleFunctors
 
 private theorem cancel_single_maps
     {C D : Type*} [Category C] [Category D] (S : C ⥤ D)
@@ -142,10 +142,7 @@ private theorem tensor_single_normalize {X Y : Scheme.{u}} (f : X ⟶ Y)
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
           (Scheme.Modules.tensorPullback f) (.up ℤ) 0).hom.app M)) := by
-  exact cancel_single_maps (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0) _ _
-    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (Scheme.Modules.pullbackPushforwardAdjunction f)).app M)
+  exact Scheme.single_map_normalize f M
 
 private theorem tensor_single_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) :

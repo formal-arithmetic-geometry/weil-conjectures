@@ -66,10 +66,10 @@ theorem WeilComplex.nonempty_iso_tensorLisse_comp_upperStar {X Y : Scheme.{u}}
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _) _ ≪≫
-          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (ProEtaleWeilSheaf.ihomFunctorDualCompUpperStarIso φ G hG) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _ ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm _ ≪≫

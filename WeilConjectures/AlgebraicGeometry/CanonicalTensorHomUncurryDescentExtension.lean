@@ -109,7 +109,7 @@ private theorem orbit_extension {C : Type*} [Category* C] [MonoidalCategory C]
     if h : ∃ g, R K L M f g then Classical.choose h else 0
   have value K L M f g (hg : R K L M f g) : s K L M f = g := by
     dsimp only [s]
-    rw [dif_pos ⟨g, hg⟩]
+    rw [dite_eq_left ⟨g, hg⟩]
     exact unique _ _ _ _ _ _ (Classical.choose_spec ⟨g, hg⟩) hg
   refine ⟨s, ?_, ?_⟩
   · intro i

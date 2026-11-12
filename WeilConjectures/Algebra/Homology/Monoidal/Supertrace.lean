@@ -149,6 +149,7 @@ theorem sum_negOnePow_smul_linearMapTrace_eq {R : Type*} [CommRing R]
       (ModuleCat.homAddEquiv (M := P.X i) (N := P.X i)).toAddMonoidHom)
     (fun _ _ g h ↦ LinearMap.trace_comp_comm' g.hom h.hom)
 
+
 end Homotopy
 
 namespace CochainComplex

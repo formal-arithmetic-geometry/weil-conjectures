@@ -60,19 +60,16 @@ theorem kunnethGlobalSectionsMap_resolution
     {L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ L) :
     tensorHom
-        ((Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorUnit.app
-            ((HomotopyCategory.quotient _ _).obj P) ≫
+        ((Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorUnitQ P ≫
           (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).map eP.hom)
-        ((Sheaf.Γ Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorUnit.app
-            ((HomotopyCategory.quotient _ _).obj Q) ≫
+        ((Sheaf.Γ Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorUnitQ Q ≫
           (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).map eQ.hom) ≫
       kunnethGlobalSectionsMap Λ (pullback.fst f g) (pullback.snd f g) f g
         pullback.condition.symm K L =
     Functor.LaxMonoidal.μ DerivedCategory.Q _ _ ≫
       DerivedCategory.Q.map (exteriorSectionsComplex (ModuleCat.{u + 1} Λ) f g P Q) ≫
-      (Sheaf.Γ (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorUnit.app
-        ((HomotopyCategory.quotient _ _).obj
-          (exteriorSectionsComplexTarget (ModuleCat.{u + 1} Λ) f g P Q)) ≫
+      (Sheaf.Γ (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorUnitQ
+        (exteriorSectionsComplexTarget (ModuleCat.{u + 1} Λ) f g P Q) ≫
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (pullback f g)).map
         ((exteriorProductResolutionIso (ModuleCat.{u + 1} Λ) f g P Q hP hQ).inv ≫
           derivedTensorHom (ModuleCat.{u + 1} Λ)

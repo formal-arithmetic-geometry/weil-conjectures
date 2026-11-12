@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSingleAdjunctionTranspose
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Single-complex normalization of the truncated counit
 Source: Stacks Project, cohomology.tex, Tag 079W; derived.tex, Tags 08J5 and 06XS.
@@ -154,6 +156,7 @@ private theorem single_kappa {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
   have hn : L.map (SS.map a) ≫ pinnedModulePullbackComparisonAt g q (HS.obj (SS.obj N)) =
       pinnedModulePullbackComparisonAt g q N ≫ ST.map (l.map a) := by
     unfold pinnedModulePullbackComparisonAt derivedSingleComparisonOfCounit
+    simp only [cast_eq]
     rw [← Category.assoc]
     have h := (@pinnedPullbackCounit.{u, w} _
       (fun {_ _} f ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} f) _ _ g).naturality

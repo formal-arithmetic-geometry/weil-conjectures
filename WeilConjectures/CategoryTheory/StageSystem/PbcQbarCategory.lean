@@ -301,8 +301,7 @@ private lemma tensor_map_smul
     (m : A ⊗[R] M →+ B ⊗[S] N)
     (hm : ∀ a f, m (a ⊗ₜ[R] f) = k a ⊗ₜ[S] F f)
     (a : A) (f : A ⊗[R] M) : m (a • f) = k a • m f := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul b f =>
     simp only [TensorProduct.smul_tmul', smul_eq_mul, hm, map_mul]
   | add f g hf hg => simp only [smul_add, map_add, hf, hg]
@@ -415,7 +414,7 @@ theorem pbcQbarScalarCompatible :
   by_cases hEF : E = F
   · subst F
     rw [show pbcScalarExtension l Qbar T hDim.out hInv.out h = 𝟭 _ from
-      dif_pos (Eq.refl E)]
+      dite_eq_left (Eq.refl E)]
     rfl
   · let B := pbcRationalScalarExtension l (pbcFiniteField.{u} l Qbar E)
       (pbcFiniteField.{u} l Qbar F) (pbcFiniteFieldInclusion l Qbar h)
@@ -438,7 +437,7 @@ theorem pbcQbarScalarCompatible :
       simp only [map_one]
       rfl
     have hB : pbcScalarExtension l Qbar T hDim.out hInv.out h = B := by
-      simp only [pbcScalarExtension, dif_neg hEF]
+      simp only [pbcScalarExtension, dite_eq_right hEF]
       exact (pbcRationalScalarExtension_exists l Qbar T hDim.out hInv.out h).unique
         (pbcRationalScalarExtension_exists l Qbar T hDim.out hInv.out h).exists.choose_spec hb
     rw [hB]

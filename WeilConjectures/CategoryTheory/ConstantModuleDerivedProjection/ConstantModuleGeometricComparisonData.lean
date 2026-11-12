@@ -195,141 +195,6 @@ private def scalarAdd
             (x.hom.naturality f)
         · exact congrArg (fun g ↦ g t) (y.hom.naturality f) }
 
-set_option maxHeartbeats 800000 in
--- Comparing the two bundled scalar actions unfolds restriction of scalars and sheaf composition.
-private theorem scalarComparison
-    {C D : Type u} [Category.{v} C] [Category.{v} D]
-    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
-    (B : Type (max u v)) [CommRing B]
-    (r : @RingedToposMorphismOfUniverses D C _ _
-      (essentiallySmallSelf.{v} D) (essentiallySmallSelf.{v} C) K J
-      ((constantSheaf K RingCat.{max u v}).obj (RingCat.of B))
-      ((constantSheaf J RingCat.{max u v}).obj (RingCat.of B)))
-    (e₁ : r.inverse.obj ((constantSheaf J (Type (max u v))).obj PUnit.{max u v + 1}) ≅
-      (constantSheaf K (Type (max u v))).obj PUnit.{max u v + 1})
-    (hn : ∀ b : B,
-      r.inverse.map ((constantSheaf J (Type (max u v))).map
-        (TypeCat.ofHom (fun _ : PUnit.{max u v + 1} ↦ b)) ≫
-        (constantCommuteCompose J (forget RingCat.{max u v})).inv.app (RingCat.of B)) ≫
-        r.ringMap =
-      e₁.hom ≫ (constantSheaf K (Type (max u v))).map
-        (TypeCat.ofHom (fun _ : PUnit.{max u v + 1} ↦ b)) ≫
-        (constantCommuteCompose K (forget RingCat.{max u v})).inv.app (RingCat.of B))
-    (q : FixedScalarGeometricAdjunctionOfUniverses J K B r.inverse r.direct r.adj r.leftExact) :
-    ∃ β : r.modules ⋙ constantRingModuleRestriction J B ≅
-        constantRingModuleRestriction K B ⋙ q.direct,
-      ∀ N, (sheafCompose J (forget (ModuleCat.{max u v} B))).map (β.hom.app N) ≫
-        q.underlying.hom.app ((constantRingModuleRestriction K B).obj N) =
-          r.underlying.hom.app N := by
-  let U := sheafCompose J (forget (ModuleCat.{max u v} B))
-  let S := constantRingModuleRestriction J B
-  let H := constantRingModuleRestriction K B
-  let θ (N) : U.obj (S.obj (r.modules.obj N)) ≅ U.obj (q.direct.obj (H.obj N)) :=
-    r.underlying.app N ≪≫ (q.underlying.app (H.obj N)).symm
-  have hop N (T : Sheaf J (Type (max u v))) (b : B)
-      (x y : T ⟶ U.obj (S.obj (r.modules.obj N))) :
-      scalarAdd (S.obj (r.modules.obj N)) T b x y ≫ (θ N).hom =
-        scalarAdd (q.direct.obj (H.obj N)) T b (x ≫ (θ N).hom) (y ≫ (θ N).hom) := by
-    apply (cancel_mono (q.underlying.hom.app (H.obj N))).1
-    apply (r.adj.homEquiv T _).symm.injective
-    let a := toConstantUnit J T ≫ constantScalar J B b
-    let z := scalarAdd (S.obj (r.modules.obj N)) T b x y
-    have hz (V : Cᵒᵖ) (t : T.obj.obj V) :
-        z.hom.app V t = @Add.add ((r.modules.obj N).val.obj V) inferInstance
-          (@SMul.smul _ ((r.modules.obj N).val.obj V) inferInstance
-            (a.hom.app V t) (x.hom.app V t)) (y.hom.app V t) := by
-      have hs : a.hom.app V t =
-          (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of B))).app V b :=
-        constantScalar_apply J B b V _
-      erw [hs]
-      rfl
-    have hr := r.module_linear N T a x y z hz
-    have hq := q.linear (H.obj N) T b (x ≫ (θ N).hom) (y ≫ (θ N).hom)
-      (scalarAdd (q.direct.obj (H.obj N)) T b (x ≫ (θ N).hom)
-        (y ≫ (θ N).hom)) (fun _ _ ↦ rfl)
-    have hc : r.inverse.map (toConstantUnit J T ≫ constantScalar J B b) ≫
-        r.ringMap = r.inverse.map (toConstantUnit J T) ≫ e₁.hom ≫ constantScalar K B b := by
-      erw [Functor.map_comp, Category.assoc]
-      exact congrArg (fun z ↦ r.inverse.map (toConstantUnit J T) ≫ z) (hn b)
-    ext V t
-    have hr' := hr V t
-    have hq' := hq V t
-    erw [hc] at hr'
-    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, types_comp_apply,
-      constantScalar_apply] at hr'
-    have hθ (w : T ⟶ U.obj (S.obj (r.modules.obj N))) :
-        (w ≫ (θ N).hom) ≫ q.underlying.hom.app (H.obj N) =
-          w ≫ r.underlying.hom.app N := by
-      dsimp [θ]
-      erw [Category.assoc, Category.assoc, Iso.inv_hom_id_app]
-      erw [Category.comp_id]
-    erw [hθ x, hθ y] at hq'
-    change _ = @Add.add ((H.obj N).obj.obj V) inferInstance
-      (@SMul.smul B ((H.obj N).obj.obj V) inferInstance b _) _ at hr'
-    erw [hθ]
-    exact hr'.trans hq'.symm
-  let g N V : (S.obj (r.modules.obj N)).obj.obj V →
-      (q.direct.obj (H.obj N)).obj.obj V := (θ N).hom.hom.app V
-  have hl N V (b : B) (x y : (S.obj (r.modules.obj N)).obj.obj V) :
-      g N V (b • x + y) =
-        b • g N V x + g N V y := by
-    let A := U.obj (S.obj (r.modules.obj N))
-    have h := hop N (MonoidalCategory.tensorObj A A) b (CartesianMonoidalCategory.fst A A)
-      (CartesianMonoidalCategory.snd A A)
-    exact congrArg (fun f ↦ f.hom.app V (x, y)) h
-  have ha N V (x y : (S.obj (r.modules.obj N)).obj.obj V) :
-      g N V (x + y) =
-        g N V x + g N V y := by
-    simpa using hl N V 1 x y
-  have hz N V : g N V 0 = 0 := by
-    have h := ha N V 0 0
-    simpa using (add_left_cancel (a := g N V 0)
-      (by simpa using h.symm :
-        g N V 0 + g N V 0 =
-          g N V 0 + 0))
-  let f N : S.obj (r.modules.obj N) ⟶ q.direct.obj (H.obj N) :=
-    { hom :=
-      { app := fun V ↦ ConcreteCategory.ofHom (C := ModuleCat B)
-          (show (S.obj (r.modules.obj N)).obj.obj V →ₗ[B]
-              (q.direct.obj (H.obj N)).obj.obj V from
-          { toFun := g N V
-            map_add' := ha N V
-            map_smul' := fun b x ↦ by simpa [hz] using hl N V b x 0 })
-        naturality := by
-          intro V W g
-          ext x
-          exact congrArg (fun g ↦ g x) ((θ N).hom.hom.naturality g) } }
-  have hf N : U.map (f N) = (θ N).hom := rfl
-  have hi N : IsIso (f N) := by
-    have : IsIso (U.map (f N)) := by erw [hf]; infer_instance
-    exact isIso_of_reflects_iso (f N) U
-  let β : r.modules ⋙ S ≅ H ⋙ q.direct := NatIso.ofComponents
-    (fun N ↦ asIso (f N)) (by
-      intro N M g
-      apply (Functor.map_injective U)
-      simp only [Functor.map_comp]
-      change U.map (S.map (r.modules.map g)) ≫ (θ M).hom =
-        (θ N).hom ≫ U.map (q.direct.map (H.map g))
-      dsimp [θ]
-      have hr := r.underlying.hom.naturality g
-      change U.map (S.map (r.modules.map g)) ≫ r.underlying.hom.app M =
-        r.underlying.hom.app N ≫ _ at hr
-      erw [← Category.assoc, hr]
-      simp only [Category.assoc]
-      have hq := q.underlying.inv.naturality (H.map g)
-      change _ ≫ q.underlying.inv.app (H.obj M) =
-        q.underlying.inv.app (H.obj N) ≫ U.map (q.direct.map (H.map g)) at hq
-      erw [← hq]
-      rfl)
-  refine ⟨β, ?_⟩
-  intro N
-  change U.map (f N) ≫ _ = _
-  erw [hf]
-  change (r.underlying.hom.app N ≫ q.underlying.inv.app (H.obj N)) ≫
-    q.underlying.hom.app (H.obj N) = _
-  erw [Category.assoc, Iso.inv_hom_id_app]
-  exact Category.comp_id _
-
 end CategoryTheory
 
 namespace CategoryTheory.ConstantModuleDerivedProjection
@@ -339,6 +204,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   (A : Type (max u v)) [CommRing A]
 set_option maxHeartbeats 70000 in
 -- Bound the dependent ordinary-data elaboration.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The geometric morphism and its two ordinary module adjunctions.
 The Hom equations normalize the adjunctions on the underlying sheaves; the fixed-ring
 action is the induced one, as specified by the scalar equation for its direct image.
@@ -444,6 +310,7 @@ attribute [instance] ExactData.pullA_additive ExactData.pushA_additive
 
 variable [HasDerivedCategory.{w} (Modules J A)] [HasDerivedCategory.{w} (Modules K A)]
   [HasDerivedCategory.{w} (Fixed J A)] [HasDerivedCategory.{w} (Fixed K A)]
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Cache the recorded K-flat monoidal structure on the ringed derived category.
 Source: Stacks Tag 07A4
 (blueprint: def-sfb-constant-module-geometric-comparison-data). -/
@@ -498,6 +365,7 @@ structure FixedTensorData (d : GeometricData J K A) where
         ((d.inverse.map x ≫ underlying.inv.app M).hom.app U t)
         ((d.inverse.map y ≫ underlying.inv.app N).hom.app U t)
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 60000 in

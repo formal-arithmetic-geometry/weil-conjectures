@@ -206,9 +206,9 @@ theorem popescu_auxiliaryAlgebra_localizations_part2
   have hβz : β zp = 0 := by simp [P, β, zp]
   have hβt (i : Fin r) (j : Fin m) : β (tp i j) =
       if h : i = l then v j else ν (tq ⟨i, h⟩ j) := by simp [P, β, tp]
-  have hβtl (j : Fin m) : β (tp l j) = v j := by rw [hβt, dif_pos rfl]
+  have hβtl (j : Fin m) : β (tp l j) = v j := by rw [hβt, dite_eq_left rfl]
   have hβtn (i : {i : Fin r // i ≠ l}) (j : Fin m) :
-      β (tp i.val j) = ν (tq i j) := by rw [hβt, dif_neg i.property]
+      β (tp i.val j) = ν (tq i j) := by rw [hβt, dite_eq_right i.property]
   have hβf (j : Fin m) : β (aeval xp (f j)) = ν (aeval xq (f j)) := by
     have h : β.comp (aeval xp) = ν.comp (aeval xq) := by
       apply MvPolynomial.algHom_ext
@@ -259,7 +259,7 @@ theorem popescu_auxiliaryAlgebra_localizations_part2
     · change G (F (ν (yq i))) = ν (yq i)
       rw [hF, hαy, hG, hb, hβy]
     · change G (F (ν (tq ij.1 ij.2))) = ν (tq ij.1 ij.2)
-      rw [hF, hαt, hG, hb, hβt, dif_neg ij.1.property]
+      rw [hF, hαt, hG, hb, hβt, dite_eq_right ij.1.property]
   have hFx (k : Fin n) : F (ν (xq k)) = μ (q (xp k)) := (hF (xq k)).trans (congrArg μ (hαx k))
   have hFy (i : Fin r) : F (ν (yq i)) = μ (q (yp i)) := (hF (yq i)).trans (congrArg μ (hαy i))
   have hFt (i : {i : Fin r // i ≠ l}) (j : Fin m) :

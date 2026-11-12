@@ -45,7 +45,7 @@ theorem exactRestrictionDerivedIdentityUnit {C D : Type*} [Category C] [Category
     [PreservesFiniteLimits U] [PreservesFiniteColimits U]
     (e : U ≅ 𝟭 C) (a : U ⋙ F ≅ F)
     (ha : ∀ X, a.hom.app X = F.map (e.hom.app X)) (K : DerivedCategory C) :
-    ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso U F ≪≫
       Functor.mapDerivedCategoryNatIso a).hom.app K =
       F.mapDerivedCategory.map
         ((Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom.app K)
@@ -62,10 +62,10 @@ theorem exactRestrictionDerivedIdentityUnit {C D : Type*} [Category C] [Category
     Functor.mapDerivedCategoryNatIso_refl
   rw [heq]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hn hu
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [Iso.trans_hom, NatTrans.comp_app,
     Functor.mapDerivedCategoryNatIso_trans, hi, Category.comp_id, Functor.map_comp]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso U F).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hn, hu]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso U F).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← reassoc_of% hn, hu]
   exact (Category.comp_id _).symm
 
 end CategoryTheory

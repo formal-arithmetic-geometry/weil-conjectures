@@ -155,6 +155,20 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.LocalizedOrdinary
 
+universe v w
+
+local instance restrictedTargetSMul
+    {D : Type v} [Category.{w} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {A : Sheaf K CommRingCat.{u}}
+    (M : SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj A))
+    {U V : Dᵒᵖ} (f : U ⟶ V) :
+    SMul (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose K (forget₂ CommRingCat RingCat)).obj A).obj.map f).hom).obj
+          (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
@@ -333,8 +347,10 @@ structure Composition (ag : Edge l E ϖ g) (ah : Edge l E ϖ h) (ac : Edge l E �
         ((proEtaleBaseChange g).obj V)
         (e' • unitSection l E ϖ g ag.coefficient M V m)) =
     (e'' * scalarSection l E ϖ h ah.coefficient ((proEtaleBaseChange g).obj V) e') •
-      (((G₀ l E ϖ (h ≫ g) ac.coefficient).obj M).val.map
-        ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+      (show ((G₀ l E ϖ (h ≫ g) ac.coefficient).obj M).val.obj
+        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V))) from
+        ((G₀ l E ϖ (h ≫ g) ac.coefficient).obj M).val.map
+          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
           (unitSection l E ϖ (h ≫ g) ac.coefficient M V m))
   ordinary_inverse_unit : ∀ (M : pbcModules X (R l E ϖ X)) (V : X.ProEt)
     (m : M.val.obj (op V)),
@@ -387,10 +403,12 @@ structure Composition (ag : Edge l E ϖ g) (ah : Edge l E ϖ h) (ac : Edge l E �
         (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
         (((proEtaleSheafAdjunction h CommRingCat.{u + 1}).unit.app (B l E Y)).hom.app
           (op ((proEtaleBaseChange g).obj V)) b'))) •
-      (((G₀ l E ϖ (h ≫ g) ac.coefficient).obj ((F₀ l E ϖ X).obj M)).val.map
-        ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
-        (unitSection l E ϖ (h ≫ g) ac.coefficient ((F₀ l E ϖ X).obj M) V
-          (pbcTensorSection (iota l E ϖ X) M (op V) 1 m)))
+      (show ((G₀ l E ϖ (h ≫ g) ac.coefficient).obj ((F₀ l E ϖ X).obj M)).val.obj
+        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V))) from
+        ((G₀ l E ϖ (h ≫ g) ac.coefficient).obj ((F₀ l E ϖ X).obj M)).val.map
+          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+          (unitSection l E ϖ (h ≫ g) ac.coefficient ((F₀ l E ϖ X).obj M) V
+            (pbcTensorSection (iota l E ϖ X) M (op V) 1 m)))
   derived_square : ∀ K : PbcCompletedDerived X (pbcIntegralDatum l E),
     (F l E ϖ Z).map ((pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).inv.app K) ≫
       ac.derived.hom.app K =

@@ -94,7 +94,7 @@ theorem localization_artinian_transcendental_properties
       ← Ideal.map_pow, hn]
     exact Ideal.map_bot
   have : IsLocalHom (algebraMap D L) := by
-    apply ((IsLocalRing.local_hom_TFAE (algebraMap D L)).out 3 0).mp
+    apply ((IsLocalRing.local_hom_TFAE (algebraMap D L)).out 4 1).mp
     intro d hd
     rw [Ideal.mem_comap, IsScalarTower.algebraMap_apply D (Polynomial D) L,
       IsLocalization.AtPrime.to_map_mem_maximal_iff (S := L) P]

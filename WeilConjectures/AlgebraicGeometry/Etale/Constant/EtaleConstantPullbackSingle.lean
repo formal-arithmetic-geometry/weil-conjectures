@@ -51,13 +51,13 @@ theorem etaleConstantPullback_single
     (Scheme.upperStarConstantSheafIso ((ModuleCat.{u + 1} C)) f) M
   simp only [exceptionalConstantPullbackIso, Iso.trans_hom,
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Iso.symm_hom, Category.assoc]
+    Category.assoc]
   have hn := (leftDerivedUpperStarIsoMapDerivedCategory
     ((ModuleCat.{u + 1} C)) f).hom.naturality
       (((constantSheaf Y.smallEtaleTopology
         ((ModuleCat.{u + 1} C))).mapDerivedCategorySingleFunctor 0).inv.app M)
   rw [reassoc_of% hn]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] at hc
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc] at hc
   rw [hc]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]

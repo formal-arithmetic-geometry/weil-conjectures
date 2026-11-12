@@ -93,7 +93,8 @@ theorem preservesZeroMorphisms_curriedTensor_independentCoefficients :
       refine ⟨fun P Q ↦ ?_⟩
       change (0 : P ⟶ Q) ▷ M.val = 0
       ext U : 1
-      change (0 : P ⟶ Q).app U ▷ M.val.obj U = 0
+      change whiskerRight (C := ModuleCat (R.obj.obj U)) ((0 : P ⟶ Q).app U)
+        (M.val.obj U) = 0
       simp
     have ht : IsZero ((0 : SheafOfModules.{w} 𝓡).val ⊗ M.val) := by
       exact Functor.map_isZero (tensorRight M.val) hp
@@ -197,5 +198,6 @@ theorem isKFlatResolutionIndependentCoefficients_iff_isKFlatResolution
     (f : K ⟶ G) :
     IsKFlatResolutionIndependentCoefficients f ↔ IsKFlatTensorResolution f := by
   rfl
+
 
 end CochainComplex

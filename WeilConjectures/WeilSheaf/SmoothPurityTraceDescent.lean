@@ -145,12 +145,12 @@ lemma geometricFiberWeilDirectTrace_forget :
         (geometricFiberWeilDirectTrace Λ hc ε) =
     (lowerStar Λ (Scheme.Hom.geometricFiberMap f h)).rightDerivedFunctor.map
       ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-        (Endofunctor.IsoAlgebra.forget _)).inv.app P) ≫
+        (Endofunctor.IsoAlgebra.forget _)).hom.app P) ≫
       (rightDerivedLowerStarBaseChangeIso Λ
         (Scheme.Hom.isPullback_geometricFiberMap f h).flip).inv.app P ≫
       (upperStar Λ t.geometricFiberProj).mapDerivedCategory.map ε ≫
       (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-        (Endofunctor.IsoAlgebra.forget _)).hom.app N := by
+        (Endofunctor.IsoAlgebra.forget _)).inv.app N := by
   exact Functor.descendedTrace_forget
     (lowerStar Λ f).rightDerivedFunctor
     (geometricFiberWeilLowerStar Λ s).mapDerivedCategory
@@ -162,9 +162,9 @@ lemma geometricFiberWeilDirectTrace_forget :
     (upperStar Λ s.geometricFiberProj).mapDerivedCategory
     (upperStar Λ t.geometricFiberProj).mapDerivedCategory
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (geometricFiberWeilRightDerivedLowerStarIso hc)
     (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
       (lowerStarGeometricFiberMapCompFrobeniusIso Λ f h))

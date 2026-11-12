@@ -38,7 +38,7 @@ private theorem extMk_augmentation {C : Type*} [Category C] [Abelian C] [HasExt 
     ext : 1
     apply (Cochain.fromSingleEquiv (p := 0) (q := 0) (n := 0) rfl).injective
     simp [Cocycle.equivHomShift_apply, Cochain.fromSingleEquiv,
-      Cochain.rightUnshift_v, ShiftedHom.mk₀, I.ι'_f_zero, singleFunctor, singleFunctors,
+      Cochain.rightUnshift_v, ShiftedHom.mk₀, I.ι'_f_zero, singleFunctor,
       HomologicalComplex.single_map_f_self, CategoryTheory.shiftFunctorZero',
       CochainComplex.shiftFunctorZero_eq]
   ext

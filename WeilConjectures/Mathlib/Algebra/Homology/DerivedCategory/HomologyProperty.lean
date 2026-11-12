@@ -91,6 +91,7 @@ lemma homologyProperty_iff (M : DerivedCategory A) :
     homologyProperty P M ↔ ∀ n : ℤ, P ((homologyFunctor A n).obj M) :=
   Iff.rfl
 
+
 variable (P)
 
 instance [P.IsClosedUnderIsomorphisms] : (homologyProperty P).IsClosedUnderIsomorphisms where

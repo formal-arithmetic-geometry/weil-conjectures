@@ -53,7 +53,7 @@ theorem HenselianLocalRing.of_isIntegral (A : Type u) (B : Type v) [CommRing A] 
         exact bot_le)
       rw [IsLocalRing.eq_maximalIdeal hQ]
     have : IsLocalRing C := IsLocalRing.of_unique_max_ideal
-      ⟨_, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal _, fun M hM ↦ hmax M hM⟩
+      ⟨_, Ideal.isMaximal_under_of_isIntegral_of_isMaximal _, fun M hM ↦ hmax M hM⟩
     have hC : maximalIdeal C = (maximalIdeal B).comap (algebraMap C B) :=
       hmax _ inferInstance
     have : HenselianLocalRing C := finite_local_henselian A C
@@ -143,7 +143,7 @@ theorem IsWStrictlyLocalRing.of_isUniversalHomeomorphism (R R' : Type u) [CommRi
   __ := IsWLocalRing.of_isUniversalHomeomorphism R R'
   isStrictlyHenselianLocalRing_localization m' _ := by
     let m := m'.comap (algebraMap R R')
-    have : m.IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal m'
+    have : m.IsMaximal := Ideal.isMaximal_under_of_isIntegral_of_isMaximal m'
     have hR := IsWStrictlyLocalRing.isStrictlyHenselianLocalRing_localization (R := R) m
     let S := Localization (Algebra.algebraMapSubmonoid R' m.primeCompl)
     have : IsLocalization.AtPrime S m' := isLocalization_atPrime_of_isMaximal (R := R) m' S

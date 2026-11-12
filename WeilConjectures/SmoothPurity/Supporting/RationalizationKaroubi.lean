@@ -200,8 +200,7 @@ theorem rationalScalarExtension_existsUnique :
   have : J'.Additive := hJ'.1
   refine CategoryTheory.Functor.ext hJ'.2.1 ?_
   intro K M f
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     apply (conj_eqToHom_iff_heq _ _ (hJ'.2.1 K) (hJ'.2.1 M)).2
     exact (hJ'.2.2 K.obj M.obj f a).trans (heq_of_eq (hJ K.obj M.obj f a).symm)
@@ -363,11 +362,9 @@ theorem rationalScalarHom_laws :
   · intro K M N f g
     change rationalScalarHom D l hl E Y L ι _ _
       (ScalarLocalization.composition _ _ _ _ _ _ g f) = _
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp only [ScalarLocalization.composition_tmul, hm, map_mul, Functor.map_comp]
       | add f f' hf hf' => simp [map_add, hf, hf']
@@ -413,8 +410,7 @@ private theorem localizedIso
       F.map f ≫ (c K').hom = (c K).hom ≫ G.map f := by
     obtain ⟨K⟩ := K
     obtain ⟨K'⟩ := K'
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f using TensorProduct.inductionOn with
     | add f g hf hg =>
       rw [F.map_add, G.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
     | tmul a f =>

@@ -34,6 +34,7 @@ private theorem alternatingRow_d_apply {X : Scheme.{u}} {r : ℕ}
       ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
         (G.map (homOfLE (alternatingCechIntersection_face_le U p t j)).op).hom
           (s ((Fin.succAboveOrderEmb j).trans t)) := by
+  change (∀ q : Fin (p + 1) ↪o Fin r, G.obj (op (alternatingCechIntersection U q))) at s
   change ((∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
     (G.map (homOfLE (alternatingCechIntersection_face_le U p t j)).op).hom.comp
       (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))) s) = _
@@ -346,7 +347,7 @@ theorem principalSubsetHorizontalFaceCoordinate
     apply Finset.card_pos.mp
     rw [Finset.card_erase_of_mem (S.val.orderIsoOfFin hcard k).property, hcard]
     omega
-  erw [dif_pos hn]
+  erw [dite_eq_left hn]
   erw [show (-1 : A) ^ k.val = (((-1 : ℤ) ^ k.val : ℤ) : A) by simp,
     Int.cast_smul_eq_zsmul A, b.map_zsmul]
   congr 1

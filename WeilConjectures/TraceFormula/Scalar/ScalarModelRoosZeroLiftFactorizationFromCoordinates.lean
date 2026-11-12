@@ -45,12 +45,13 @@ private theorem scalarCounit_natural
         completedScalarCounit l L F j X B =
       completedScalarCounit l L F j X A ≫
         DerivedCategory.Q.map ((completedOrdinaryScalarComplex l L F j X).map g) := by
-  let d := completedScalarChangeData.{u, u} l L F j X
-  let : d.choose.Additive := d.choose_spec.choose_spec.choose_spec.choose
-  let H := d.choose_spec.choose_spec.choose_spec.choose_spec.2.2
-  simpa only [completedDerivedScalarExtension, completedScalarCounit,
-    completedOrdinaryScalarComplex, completedOrdinaryScalarExtension] using
-      homotopyCounit_naturality d.choose H.choose H.choose_spec.choose g
+  dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]
+  with_unfolding_all
+    exact homotopyCounit_naturality
+      (completedOrdinaryScalarExtension.{u, u} l L F j X)
+      (completedDerivedScalarExtension.{u, u} l L F j X)
+      ((completedScalarChangeData.{u, u} l L F j X).choose_spec.choose_spec.choose_spec
+        |>.choose_spec.2.2.choose_spec.choose) g
 
 /-- The normalized scalar realization factors a strict zero-shift lift satisfying the
 quotient-coordinate predicate.

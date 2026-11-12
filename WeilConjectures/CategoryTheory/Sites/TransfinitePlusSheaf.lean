@@ -110,6 +110,7 @@ theorem isSheaf_transfinitePlus_obj_of_isSeparator [Abelian A] [IsGrothendieckAb
     Presheaf.IsSheaf J ((J.transfinitePlus A κ).obj P) :=
   J.isSheaf_transfinitePlus_obj κ hG.isDetector hC P
 
+
 section Sheafification
 
 variable (A) [∀ (P : Cᵒᵖ ⥤ A) (X : C) (S : J.Cover X), HasMultiequalizer (S.index P)]

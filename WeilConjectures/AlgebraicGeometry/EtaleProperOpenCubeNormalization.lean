@@ -71,8 +71,8 @@ private theorem canonical_square_normalized
     [PreservesFiniteLimits K'] [PreservesFiniteColimits K']
     (β : K ⋙ A ≅ D ⋙ K') :
     ExactSquareNormalized K D A K' β
-      ((Functor.mapDerivedCategoryCompIso K A).symm ≪≫
-        Functor.mapDerivedCategoryNatIso β ≪≫ Functor.mapDerivedCategoryCompIso D K') := by
+      (Functor.mapDerivedCategoryCompIso K A ≪≫
+        Functor.mapDerivedCategoryNatIso β ≪≫ (Functor.mapDerivedCategoryCompIso D K').symm) := by
   intro X
   simpa only [Iso.trans_hom, Iso.symm_hom] using square_factors K D A K' β X
 
@@ -407,15 +407,15 @@ private theorem derived_mate_unit
       (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+        (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
           Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso L H).hom)).natTrans := by
+          (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans := by
   intro X
   exact Adjunction.derivedExact_mateEquiv_app_fac adj adj'
     (TwoSquare.mk _ _ _ _ e.hom)
-    (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso L H).hom)
+      (Functor.mapDerivedCategoryCompIso L H).symm).hom)
     (by
       intro N
       simpa only [Iso.trans_hom, Iso.symm_hom] using square_factors G L L' H e N) X

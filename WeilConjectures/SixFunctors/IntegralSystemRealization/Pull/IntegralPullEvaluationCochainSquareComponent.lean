@@ -23,7 +23,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   coefficientSequenceEvaluation pullbackTensorSequenceInverse
 
 /-- The ordinary cochain comparison used by the degreewise square.

@@ -145,6 +145,7 @@ lemma IsUniversalSection.baseChangeObj_left :
 lemma IsUniversalSection.baseChangeObj_hom :
     (IsUniversalSection.baseChangeObj hv o u').hom = pullback.snd v o ≫ u' := rfl
 
+
 variable {o u'} in
 /-- The projection `V ×_U O ⟶ V`, as a morphism of étale `T`-schemes. -/
 noncomputable def IsUniversalSection.baseChangeHom (ho : o ≫ u = u') :
@@ -263,7 +264,7 @@ lemma isUniversalSection_uliftYoneda (V : T.Etale) :
   convert (Equiv.ulift.{w}.symm.bijective : Function.Bijective (Equiv.ulift.{w}.symm :
     (W ⟶ V) → ULift (W ⟶ V))) using 1
   ext a
-  exact ULift.ext _ _ (Category.comp_id a)
+  exact congrArg ULift.up (Category.comp_id a)
 
 end Representable
 

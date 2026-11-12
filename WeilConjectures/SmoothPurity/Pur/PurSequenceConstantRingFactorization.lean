@@ -173,10 +173,12 @@ private def constantGeometry :
     intro N T a x y z hz U t
     obtain ⟨⟨n, V⟩⟩ := U
     change T.obj.obj (op V) at t
-    change _ = a.hom.app (op V) t •
+    let av : (ring (coefficientSequenceTopology J)
+        (SheafOfModules.systemSequenceRing.{c, v, max c v r}
+          ((Functor.const ℕᵒᵖ).obj A))).obj.obj (op (n, V)) := a.hom.app (op V) t
+    change _ = av •
       (_ : N.val.obj (op (n, V))) + (_ : N.val.obj (op (n, V)))
     let p := (limit.π ((constantTowers.{c, v, r} J A).functor.obj N) (op n)).val.app (op V)
-    let av : (ring J A).obj.obj (op V) := a.hom.app (op V) t
     let xv : (limit ((constantTowers.{c, v, r} J A).functor.obj N)).val.obj (op V) :=
       x.hom.app (op V) t
     let yv : (limit ((constantTowers.{c, v, r} J A).functor.obj N)).val.obj (op V) :=

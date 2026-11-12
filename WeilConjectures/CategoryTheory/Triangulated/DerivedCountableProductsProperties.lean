@@ -183,7 +183,7 @@ private theorem localizationPreservesProducts
       rw [Category.assoc, Category.assoc, ← L.map_comp, ← he, L.map_comp]
       simp only [Category.assoc, IsIso.inv_hom_id_assoc]
       rw [← L.map_comp]
-      simp only [g, Pi.lift_π]
+      simp only [g, Pi.lift_comp_π]
       have h := congrArg (fun a ↦ e.inv ≫ a ≫ L.map (φ j).s) (hφ j)
       simpa [MorphismProperty.LeftFraction.map, Category.assoc] using h.symm
     choose lift fac using hex

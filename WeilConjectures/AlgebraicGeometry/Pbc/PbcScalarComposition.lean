@@ -154,8 +154,7 @@ theorem pbcRationalScalarComp_naturality
   change pbcRationalScalarHom l F G j T hDim hInv (I.obj K.obj) (I.obj L.obj)
       (pbcRationalScalarHom l E F i T hDim hInv K.obj L.obj f) ≫ Q.map (η L.obj) =
     Q.map (η K.obj) ≫ pbcRationalScalarHom l E G (j.comp i) T hDim hInv K.obj L.obj f
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     rw [pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul]
     change ScalarLocalization.composition _ _ _ _ _ _
@@ -293,8 +292,7 @@ theorem pbcRationalScalarUnit_naturality
   dsimp only [pbcRationalScalarExtension]
   change pbcRationalScalarHom l E E (AlgHom.id (Padic l) E) T hDim hInv
       K.obj L.obj f ≫ Q.map (η L.obj) = Q.map (η K.obj) ≫ f
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     rw [pbcRationalScalarHom_tmul]
     change ScalarLocalization.composition _ _ _ _ _ _

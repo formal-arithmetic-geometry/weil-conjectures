@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
@@ -18,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationIrreducibleSupport
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A filtration with unresolved factors of smaller support
 

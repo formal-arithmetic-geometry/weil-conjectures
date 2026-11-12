@@ -53,9 +53,9 @@ noncomputable def exactEtaleSumExchange
         (etaleLowerShriek (ModuleCat.{u + 1} A) (pullback.fst g f)
           inferInstance).mapDerivedCategory :=
   haveI := isIso_etaleLowerShriekBaseChangeMap A g f
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (asIso (etaleLowerShriekBaseChangeMap A g f)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The proper exchange followed by inverse open-extension exchange, using exact derived
 inverse image. The transport from `L(g^*)` is the canonical exact-functor comparison.

@@ -60,32 +60,32 @@ theorem residueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p :
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) (p ≫ q))
       ((Functor.mapDerivedCategoryCompIso
           ((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
-          (residueFieldModuleSheaf Y ℓ E)).inv ≫
+          (residueFieldModuleSheaf Y ℓ E)).hom ≫
         (Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E q)).hom ≫
         (Functor.mapDerivedCategoryCompIso (residueFieldModuleSheaf Z ℓ E)
-          ((q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
+          ((q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).inv)
       ((Functor.mapDerivedCategoryCompIso
           ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
-          (residueFieldModuleSheaf X ℓ E)).inv ≫
+          (residueFieldModuleSheaf X ℓ E)).hom ≫
         (Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E p)).hom ≫
         (Functor.mapDerivedCategoryCompIso (residueFieldModuleSheaf Y ℓ E)
-          ((p)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
+          ((p)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).inv)
       ((Functor.mapDerivedCategoryCompIso
           ((p ≫ q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
-          (residueFieldModuleSheaf X ℓ E)).inv ≫
+          (residueFieldModuleSheaf X ℓ E)).hom ≫
         (Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E (p ≫ q))).hom ≫
         (Functor.mapDerivedCategoryCompIso (residueFieldModuleSheaf Z ℓ E)
-          ((p ≫ q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
+          ((p ≫ q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).inv)
       ((Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp
         (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso
           ((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
-          ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)).hom)
+          ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)).inv)
       ((Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso
           ((q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])
-          ((p)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
+          ((p)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).inv)
       ?_ (residueFieldDerivedUpperStarIso ℓ E q) (residueFieldDerivedUpperStarIso ℓ E p)
       (residueFieldDerivedUpperStarIso ℓ E (p ≫ q)) ?_ ?_ ?_
       (CondensedRing.leftDerivedUpperStarComp
@@ -97,20 +97,30 @@ theorem residueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p :
         (residueFieldModuleSheafUpperStarIso_compCoherence ℓ E p q)
   · intro M
     delta residueFieldDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc]
   · intro M
     delta residueFieldDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc]
   · intro M
     delta residueFieldDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc]
   · intro M
     delta CondensedRing.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible exact trans_trans_isoWhiskerLeft_hom_app _ _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta ProEtale.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible exact trans_trans_isoWhiskerLeft_hom_app _ _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
 
 end AlgebraicGeometry.ProEtale

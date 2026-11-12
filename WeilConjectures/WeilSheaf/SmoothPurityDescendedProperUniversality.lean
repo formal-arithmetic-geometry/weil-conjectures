@@ -78,9 +78,9 @@ theorem geometricFiberWeilDirectTrace_universal
   exact Functor.bijective_map_comp_of_trace_coordinates
     (lowerStar Λ (Scheme.Hom.geometricFiberMap f h)).rightDerivedFunctor
     ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-      (Endofunctor.IsoAlgebra.forget _)).symm.app P)
+      (Endofunctor.IsoAlgebra.forget _)).app P)
     ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-      (Endofunctor.IsoAlgebra.forget _)).app N)
+      (Endofunctor.IsoAlgebra.forget _)).symm.app N)
     ((rightDerivedLowerStarBaseChangeIso Λ
       (Scheme.Hom.isPullback_geometricFiberMap f h).flip).inv.app P)
     ((upperStar Λ t.geometricFiberProj).mapDerivedCategory.map ε) _
@@ -95,9 +95,11 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [Finite k]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left]
 
-local instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
+local instance instFactPrimeRingCharAlgebraicClosure_smoothPurityDescendedProperUniversality
+    : Fact (ringChar (AlgebraicClosure k)).Prime :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-local instance : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
+local instance instFactNeNatRingCharAlgebraicClosure_smoothPurityDescendedProperUniversality
+    : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
 
 /-- The geometric fibre of an arrow, viewed over the algebraic closure. -/
@@ -107,17 +109,23 @@ noncomputable abbrev traceGeometricFiberOverMap :
   Over.homMk (Scheme.Hom.geometricFiberMap f.left (Over.w f)) (by
     simp [Scheme.Hom.geometricFiberToAlgebraicClosure, Scheme.Hom.geometricFiberMap])
 
-local instance : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityDescendedProperUniversality
+    : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityDescendedProperUniversality
+    : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityDescendedProperUniversality
+    : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
-local instance : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityDescendedProperUniversality_2
+    : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityDescendedProperUniversality_2
+    : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityDescendedProperUniversality_2
+    : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 local instance : IsProper (traceGeometricFiberOverMap f).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
@@ -128,7 +136,6 @@ variable (hc : UpperStarWeilCompatible (Profinite.padicAlgClRingObj l) f.left (O
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
   (γ : P ⟶ (boundedConstructibleUpperShriek l f).obj N)
 
-set_option linter.style.longLine false in
 /-- The actual descended trace is geometrically universal when the exceptional
 base-change component is invertible. -/
 theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
@@ -152,7 +159,6 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
     (traceGeometricFiberOverMap f)
     (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip γ K
 
-set_option linter.style.longLine false in
 /-- The actual descended trace is geometrically universal for a smooth proper map. -/
 theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
     (d : ℕ) [SmoothOfRelativeDimension d f.left]

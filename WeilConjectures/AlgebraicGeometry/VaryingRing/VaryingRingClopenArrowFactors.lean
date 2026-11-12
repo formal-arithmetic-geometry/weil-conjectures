@@ -41,12 +41,12 @@ def localizedArrow
     (t : F ⋙ G ⟶ H ⋙ K) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ K.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).inv ≫
+  (Functor.mapDerivedCategoryCompIso F G).hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso A (.up ℤ)) _ _
       (F ⋙ G).mapDerivedCategory (H ⋙ K).mapDerivedCategory
       (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso H K).hom
+    (Functor.mapDerivedCategoryCompIso H K).inv
 
 private theorem localizedArrow_comp
     {A B C D E : Type*}
@@ -68,7 +68,7 @@ private theorem localizedArrow_comp
     localizedArrow F₁ F₂ H₁ H₂ t ≫ localizedArrow H₁ H₂ G₁ G₂ s =
       localizedArrow F₁ F₂ G₁ G₂ (t ≫ s) := by
   unfold localizedArrow
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
   simp only [NatTrans.mapHomologicalComplex_comp, Functor.whiskerRight_comp,
     Localization.comp_liftNatTrans_assoc]
 

@@ -51,6 +51,7 @@ theorem directed_adjoin_finset_and_iSup_eq_top :
     exact le_iSup (fun s : Finset B ↦ adjoin R (s : Set B)) {x}
       (subset_adjoin (Finset.mem_coe.2 (Finset.mem_singleton_self x)))
 
+
 end Algebra
 
 namespace Subalgebra
@@ -117,6 +118,7 @@ theorem awayToFractionRing_mk' (S : Subalgebra K B) {g : S} (hg : g ≠ 0) (a : 
     Subalgebra.coe_val, IsScalarTower.coe_toAlgHom', map_pow]
   exact (mul_div_cancel₀ _ (pow_ne_zero n hg')).symm
 
+
 /-- `S_g → Frac B` is compatible with the inclusion `S ⊆ B ⊆ Frac B`. -/
 @[simp]
 theorem awayToFractionRing_algebraMap (S : Subalgebra K B) {g : S} (hg : g ≠ 0) (a : S) :
@@ -154,6 +156,7 @@ theorem mem_localizationSubalgebra (S : Subalgebra K B) {g : S} (hg : g ≠ 0)
     exact ⟨a, n, awayToFractionRing_mk' S hg a n⟩
   · rintro ⟨a, n, rfl⟩
     exact ⟨_, awayToFractionRing_mk' S hg a n⟩
+
 
 /-- The set of subalgebras `(B_i)_g ⊆ Frac B`, for `B_i` in a set `F` of subalgebras of `B` and
 `g ∈ B_i` nonzero. -/
@@ -214,6 +217,7 @@ theorem isFiltered_and_isColimit_localizationSubalgebras {F : Set (Subalgebra K 
   refine ⟨Subalgebra.isFiltered_of_directedOn hD ?_, ⟨Subalgebra.isColimitCocone hD hcov'⟩⟩
   obtain ⟨T, hT, -⟩ := hcov' 0
   exact ⟨T, hT⟩
+
 
 end Localization
 

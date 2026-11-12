@@ -38,7 +38,7 @@ private theorem cofan_sections_isIso {X : Scheme.{u}} {J : Type (u + 1)} [Finite
   have : IsIso (Sigma.desc a) :=
     (Cofan.nonempty_isColimit_iff_isIso_sigmaDesc (Cofan.mk Z.left a)).mp ⟨hd⟩
   have hopen (j : J) : IsOpenImmersion (a j) := by
-    rw [← Sigma.ι_desc a j]
+    rw [← Sigma.ι_comp_desc a j]
     infer_instance
   have hmono (j : J) : Mono (d j) := by
     have : IsOpenImmersion (d j).left := hopen j
@@ -106,14 +106,15 @@ theorem nonempty_etale_over_coproduct_cech_iso
         intro t
         dsimp [FormalCoproduct.cosimplicialObjectFunctor, FormalCoproduct.evalOp,
           FormalCoproduct.cech, FormalCoproduct.mapPower]
-        simp only [Category.assoc, Pi.lift_π, Pi.lift_π_assoc]
+        simp only [Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
         rw [← P.map_comp, ← P.map_comp, ← op_comp, ← op_comp]
         congr 2
         apply congrArg Quiver.Hom.op
         apply Pi.hom_ext
         intro r
         dsimp [A, B]
-        simp only [Function.comp_def, Category.assoc, Pi.map_π, Pi.lift_π, Pi.lift_π_assoc] }
+        simp only [Function.comp_def, Category.assoc, Pi.map_π, Pi.lift_comp_π,
+          Pi.lift_comp_π_assoc] }
   let m := (AlgebraicTopology.alternatingCofaceMapComplex AddCommGrpCat.{u + 1}).map b
   have h (n : ℕ) : IsIso (m.f n) := by
     let Z : X.Etale := (∏ᶜ fun _ : Fin (n + 1) ↦ Over.mk g).left
@@ -133,7 +134,7 @@ theorem nonempty_etale_over_coproduct_cech_iso
       apply Pi.hom_ext
       intro t
       dsimp [e]
-      simp only [Category.assoc, Pi.lift_π]
+      simp only [Category.assoc, Pi.lift_comp_π]
       rfl
     rw [he]
     exact @IsIso.comp_isIso _ _ _ _ _ e.hom _ e.isIso_hom hs

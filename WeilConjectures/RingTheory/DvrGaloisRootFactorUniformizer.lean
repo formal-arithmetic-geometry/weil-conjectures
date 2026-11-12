@@ -125,7 +125,7 @@ theorem dvr_galois_root_factor_uniformizer
       E ⟨hE.1, inferInstance⟩ (dvr_galois_normalization_ramification_dvd B E n hE)
       P hP inferInstance Q hQ hc
   let : IsLocalHom (algebraMap A (Localization.AtPrime Q)) := by
-    apply ((IsLocalRing.local_hom_TFAE _).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE _).out 5 1).mp
     change (IsLocalRing.maximalIdeal (Localization.AtPrime Q)).comap
       ((algebraMap S (Localization.AtPrime Q)).comp (algebraMap A S)) =
         IsLocalRing.maximalIdeal A

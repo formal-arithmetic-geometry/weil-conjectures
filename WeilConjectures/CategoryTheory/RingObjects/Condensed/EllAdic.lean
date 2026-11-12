@@ -177,7 +177,7 @@ lemma isSheaf_padicAlgClSubfunctor :
   obtain ⟨α, _, Y, π, hπ, hmem⟩ := (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily _).mp ha
   choose E hE h using hmem
   have hsurj : ∀ b : S.unop, ∃ (i : α) (y : Y i), π i y = b :=
-    ((Profinite.effectiveEpiFamily_tfae Y π).out 0 2).mp hπ
+    ((Profinite.effectiveEpiFamily_tfae Y π).out 1 3).mp hπ
   refine ⟨⨆ i, E i, inferInstance, fun x ↦ ?_⟩
   obtain ⟨i, y, rfl⟩ := hsurj x
   exact (le_iSup E i) (h i y)

@@ -20,7 +20,6 @@ set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] HasDerivedCategory.standard Padic
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology

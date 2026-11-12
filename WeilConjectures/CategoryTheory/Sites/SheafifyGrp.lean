@@ -274,6 +274,7 @@ lemma sheafifyGrp_comp_forget :
     sheafifyGrp J G ⋙ forget GrpCat = sheafify J (G ⋙ forget GrpCat) :=
   rfl
 
+
 /-- The group law of the sheafification is commutative if that of `G` is. -/
 lemma sheafify_mul_comm (hG : ∀ (X : Cᵒᵖ) (x y : G.obj X), x * y = y * x) {X : C}
     (s t : (sheafify J (G ⋙ forget GrpCat)).obj (op X)) : s * t = t * s :=

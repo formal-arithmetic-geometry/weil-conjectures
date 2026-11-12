@@ -84,8 +84,8 @@ noncomputable def Etale.mapDerivedCategoryUpperStarGeometricFiberMapCompFrobeniu
         (f.geometricGaloisFrobenius.hom)^*[A].mapDerivedCategory ≅
       (g.geometricGaloisFrobenius.hom)^*[A].mapDerivedCategory ⋙
         (Scheme.Hom.geometricFiberMap φ h)^*[A].mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Etale.upperStarGeometricFiberMapCompFrobeniusIso A φ h) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry

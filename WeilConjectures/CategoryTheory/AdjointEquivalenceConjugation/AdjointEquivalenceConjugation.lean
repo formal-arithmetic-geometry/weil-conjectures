@@ -86,8 +86,7 @@ theorem conjugation_transpose (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂)
     Functor.comp_map, Equivalence.invFunIdAssoc_inv_app,
     Equivalence.invFunIdAssoc_hom_app]
   simp only [Equivalence.symm_functor, Functor.comp_obj, Equivalence.symm_inverse,
-    Functor.id_obj, Functor.map_comp, Equivalence.fun_inv_map, Category.assoc,
-    Iso.inv_hom_id_app_assoc]
+    Functor.id_obj, Functor.map_comp, Equivalence.fun_inv_map, Category.assoc]
   have hu : E₂.unitIso.inv.app (E₂.inverse.obj N) =
       E₂.inverse.map (E₂.counitIso.hom.app N) := E₂.unitInv_app_inverse N
   rw [hu]

@@ -121,8 +121,7 @@ theorem span_range_mk_map_eq_top_iff (φ : A →+* B) (I : Ideal (MvPolynomial n
           tmul_zero]) : I.map (map φ) ≤ RingHom.ker Θ₀) hx
     have hΘ : Function.Surjective Θ := by
       intro y
-      induction y using TensorProduct.induction_on with
-      | zero => exact ⟨0, map_zero _⟩
+      induction y using TensorProduct.inductionOn with
       | tmul b q =>
         obtain ⟨f, rfl⟩ := Ideal.Quotient.mk_surjective q
         refine ⟨b • Ideal.Quotient.mk _ (map φ f), ?_⟩

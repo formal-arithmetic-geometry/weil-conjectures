@@ -52,6 +52,12 @@ theorem exists_kFlat_resolution
   classical
   let A := SheafOfModules.{w}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
+  have (I : Type w) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (I : Type w) : HasColimitsOfShape (Discrete I) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
@@ -68,6 +74,10 @@ theorem exists_kFlat_resolution
   have (M : A) : PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj M) := inferInstance
   have : HasExactColimitsOfShape ℤ A := SheafOfModules.hasExactColimits_int_adapted R
   have := SheafOfModules.hasFunctorialFlatResolution_adapted (R := R)
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   let Λ := (Classical.arbitrary (Abelian.LeftResolution
     (ObjectProperty.flat.ι : _ ⥤ A))).reduced
   let P := Λ.resolutionFunctor.obj K

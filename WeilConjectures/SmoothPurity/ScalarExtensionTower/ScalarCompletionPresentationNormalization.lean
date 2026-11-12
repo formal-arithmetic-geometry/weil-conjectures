@@ -32,7 +32,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   integralOperationsRoos integralOperationsRoosMap
 attribute [local implicit_reducible] integralScalarExtension integralScalarExtensionOfUniverses
   integralComparisonDerivedSequenceScalar integralScalarComplexFunctor
-  integralOperationsGoodLocalization integralOperationsRoosFunctor Functor.mapHomologicalComplex
+  integralOperationsGoodLocalization integralOperationsRoosFunctor
 
 /-- Completion in any coherent scalar quotient presentation is the normalized realization.
 Source: Stacks 06YY and 0941, coherent quotient comparisons and completion augmentation.

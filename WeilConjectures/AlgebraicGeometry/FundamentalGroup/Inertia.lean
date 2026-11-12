@@ -142,7 +142,7 @@ theorem fixingSubgroup_le_topologicalClosure_iSup
     rw [← mul_smul, show k * h = h * (h⁻¹ * k * h) by group, mul_smul, hu _ this]
   let Oc : ContAction FintypeCat.{u} G :=
     ⟨Action.FintypeCat.ofMulAction G (FintypeCat.of O), by
-      rw [Action.isContinuous_def]
+      constructor
       have : DiscreteTopology ((forget₂ (Action FintypeCat G) TopCat).obj
         (Action.FintypeCat.ofMulAction G (FintypeCat.of O))) := ⟨rfl⟩
       have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj

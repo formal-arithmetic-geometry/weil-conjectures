@@ -166,16 +166,14 @@ private theorem normal_tensor_of_fg
         apply CommRingCat.hom_ext
         apply RingHom.ext
         intro x
-        induction x using _root_.TensorProduct.induction_on with
-        | zero => simp
+        induction x using _root_.TensorProduct.inductionOn with
         | tmul a b => rfl
         | add x y hx hy => simp_all
       map_comp f g := by
         apply CommRingCat.hom_ext
         apply RingHom.ext
         intro x
-        induction x using _root_.TensorProduct.induction_on with
-        | zero => simp
+        induction x using _root_.TensorProduct.inductionOn with
         | tmul a b => rfl
         | add x y hx hy => simp_all }
   let c : Cocone F :=
@@ -186,13 +184,11 @@ private theorem normal_tensor_of_fg
             apply CommRingCat.hom_ext
             apply RingHom.ext
             intro x
-            induction x using _root_.TensorProduct.induction_on with
-            | zero => simp
+            induction x using _root_.TensorProduct.inductionOn with
             | tmul a b => rfl
             | add x y hx hy => simp_all } }
   have hsurj (x : E ⊗[k] A) : ∃ s y, (c.ι.app s).hom y = x := by
-    induction x using _root_.TensorProduct.induction_on with
-    | zero => exact ⟨∅, 0, map_zero _⟩
+    induction x using _root_.TensorProduct.inductionOn with
     | tmul a b =>
       refine ⟨{a}, (⟨a, IntermediateField.subset_adjoin k _ (by simp)⟩ : K {a}) ⊗ₜ b, ?_⟩
       rfl

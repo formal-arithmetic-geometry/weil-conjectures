@@ -164,7 +164,7 @@ private theorem coord_restriction_natural_aux {S : Scheme.{u}} (E : S.Modules) (
   conv_lhs => rw [← sum_coord_smul_symm_single n (e U (toEtaleSelf U)) m, map_sum]
   simp only [semilinear_of_smul_comp g.left (ρ g) (hsmul g), hc, map_sum, map_smul,
     LinearEquiv.apply_symm_apply, Finset.sum_apply, Pi.smul_apply, Pi.single_apply, smul_eq_mul,
-    mul_ite, mul_one, mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+    mul_ite, mul_one, mul_zero, Finset.sum_ite_eq, Finset.mem_univ, ite_true]
 
 /-- `coord_restriction_natural_aux` for restriction maps typed as maps of sections of the
 étale tensor-section sheaf. -/

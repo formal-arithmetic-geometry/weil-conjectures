@@ -192,13 +192,13 @@ theorem embeddedIntegralCompletenessTransport
       Mod.comapComp a.hom.hom φ
   let α : (Mod.comap τ).mapDerivedCategory ⋙ (Mod.comap ψ).mapDerivedCategory ≅
       (Mod.comap φ).mapDerivedCategory ⋙ (Mod.comap a.hom.hom).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-      Functor.mapDerivedCategoryNatIso ε ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+      Functor.mapDerivedCategoryNatIso ε ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let β : (Mod.comap a.hom.hom).mapDerivedCategory ⋙ FS.mapDerivedCategory ≅
       FR.mapDerivedCategory ⋙ (ConstantCompletion.res c).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (smallRestrictionIso X a.hom.hom) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   let L := (Mod.comap φ).mapDerivedCategory.obj K
   let M := (Mod.comap ψ).mapDerivedCategory.obj ((Mod.comap τ).mapDerivedCategory.obj K)
   let δ : FS.mapDerivedCategory.obj M ≅

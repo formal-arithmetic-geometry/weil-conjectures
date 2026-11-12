@@ -457,9 +457,9 @@ private theorem augmentation_eq
       biprod.lift_fst]
     rw [← Category.assoc (b'.f _), hb',
       biprod.lift_fst_assoc]
-    have h := congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_π gamma n)
+    have h := congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_comp_π gamma n)
     have h' := congrArg (fun f ↦ f.f (p + 1))
-      (Pi.lift_π (fun n ↦ (F.mapHomologicalComplex (.up ℤ)).map (gamma n)) n)
+      (Pi.lift_comp_π (fun n ↦ (F.mapHomologicalComplex (.up ℤ)).map (gamma n)) n)
     simpa only [HomologicalComplex.comp_f] using
       (congrArg F.map h).trans h'.symm
   · apply product_degree_ext
@@ -808,7 +808,7 @@ private theorem derivedUnitCompatibility
       Gtw.mapDerivedCategory.map (Jtw.mapDerivedCategoryFactors.inv.app M)) ≫
       Gtw.mapDerivedCategory.map dJ ≫ dG = _
     simp only [dJ, dG, Category.assoc, ← Iso.app_inv, ← Iso.app_hom,
-      Iso.map_inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+      Iso.inv_hom_id_map_assoc, Iso.inv_hom_id, Category.comp_id]
   calc
     _ = (restrictionUnitDerivedAdjunction.{a, b, c, d, wA, wB} adj).unit.app
           (LA.obj (DerivedCategory.Q.obj M)) ≫
@@ -864,7 +864,7 @@ private theorem derivedUnitCompatibility
           Gc.map (kappaJ M).hom ≫ (kappaG (Jt.obj M)).hom) := by
       rw [hloc]
       simp only [Category.assoc, ← Iso.app_inv, ← Iso.app_hom,
-        Iso.map_inv_hom_id_assoc]
+        Iso.inv_hom_id_map_assoc]
       simp only [Iso.app_hom]
       rw [G.mapDerivedCategoryFactors_hom_naturality_assoc]
       dsimp only [Jc, Gc]

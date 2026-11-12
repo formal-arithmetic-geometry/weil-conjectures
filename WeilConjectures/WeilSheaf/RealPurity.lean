@@ -75,6 +75,12 @@ theorem charpoly_frobeniusEnd_eq_of_linearEquiv (M : FrobeniusModule K) {V : Typ
   rw [LinearMap.comp_apply, LinearMap.comp_apply, frobeniusEnd_apply,
     LinearEquiv.coe_toLinearMap, hf]
 
+private theorem localPolynomial_eq_of_linearEquiv (M : FrobeniusModule K) {V : Type*}
+    [AddCommGroup V] [Module K V] [FiniteDimensional K V] {T : Module.End K V}
+    (f : M.carrier ≃ₗ[K] V) (hf : ∀ v, f (M.frobenius v) = T (f v)) :
+    M.localPolynomial = T.charpolyRev :=
+  congrArg Polynomial.reverse (charpoly_frobeniusEnd_eq_of_linearEquiv M f hf)
+
 /-- If a Frobenius module `M` is identified with a space `V` with an endomorphism `T`,
 compatibly with the Frobenius, then the Frobenius of `M` and `T` have the same determinant. -/
 theorem det_frobeniusEnd_eq_of_linearEquiv (M : FrobeniusModule K) {V : Type*}
@@ -254,6 +260,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
   obtain ⟨e, hst, -, -, -⟩ := W.exists_equivalence_isLisse l
   -- the subquotient `𝒢₂ / 𝒢₁` in the category of lisse Weil sheaves
   let G : ObjectProperty.FullSubcategory (fun F : WeilSheaf k₀ l C ↦ F.IsLisse) := ⟨𝒢, h𝒢⟩
+  have hrealG : G.obj.IsReal ι := hreal
   let G₁ : ObjectProperty.FullSubcategory (fun F : WeilSheaf k₀ l C ↦ F.IsLisse) := ⟨𝒢₁, h₁⟩
   let G₂ : ObjectProperty.FullSubcategory (fun F : WeilSheaf k₀ l C ↦ F.IsLisse) := ⟨𝒢₂, h₂⟩
   let Q : ObjectProperty.FullSubcategory (fun F : WeilSheaf k₀ l C ↦ F.IsLisse) :=
@@ -324,11 +331,10 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
   -- the representation of `𝒢` is `ι`-real
   have hreal' : W.IsReal l P.obj.ρ ι := fun x n ↦ by
     obtain ⟨f, hf⟩ := hst G x
-    have h := hreal x n
-    rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def,
-      FrobeniusModule.charpoly_frobeniusEnd_eq_of_linearEquiv _ f hf] at h
-    rw [WeilGroup.localPolynomial, LinearMap.charpolyRev_def]
-    exact h
+    have hpoly : (G.obj.stalk x).localPolynomial = W.localPolynomial l P.obj.ρ x :=
+      FrobeniusModule.localPolynomial_eq_of_linearEquiv _ f hf
+    have hcoeff := congrArg (fun p : Polynomial (PadicAlgCl l) ↦ ι (p.coeff n)) hpoly
+    exact (congrArg (starRingEnd ℂ) hcoeff).symm.trans ((hrealG x n).trans hcoeff)
   -- purity of the constituent, transported back to the stalks
   obtain ⟨γ, hγ⟩ : ∃ γ, W.HasDetWeight l R.obj.ρ ι γ := ⟨_, R.property.2.hasDetWeight ι⟩
   have hpure := WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal W l P.obj.ρ ι

@@ -71,6 +71,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKa
 import all WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import all Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import all WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomAdjunction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Compatibility of the normalized tensor comparison with quotient transitions
 
@@ -148,8 +149,7 @@ private theorem pure_local_ext
     exact (he.trans (hh _)).symm
   rw [hz]
   clear hw hz
-  induction w using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction w using TensorProduct.inductionOn with
   | tmul x y => exact h (op U) (T.map i.op s) x y
   | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
 
@@ -372,18 +372,21 @@ private theorem tensorGenerator_smul_left (P Q : CochainComplex (GMod R) ℤ)
         (SheafOfModules.ScalarHomOrdinary.pure R (P.X p) (Q.X q) V x y)
   rw [pure_smul_left, map_smul]
 
+omit [EssentiallySmall.{max c v r} C] in
 private theorem extension_preserves_small_colimits (F : GMod R ⥤ GMod S)
     (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)
     (hmF : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (hF M) ≫
       SheafOfModules.changeOfRingsHom a M f ≫ eqToHom (hF N).symm) :
     PreservesColimitsOfSize.{0, 0} F := by
-  let := HasDerivedCategory.standard (GMod R)
-  let := HasDerivedCategory.standard (GMod S)
-  obtain ⟨s⟩ := SheafOfModules.scalarDerivedPair_exists a
-  have hs : s.extension = F := SheafOfModules.coefficientPresentation_eq a
-    s.extension F s.extension_obj hF s.extension_map hmF
-  rw [← hs]
-  let := s.ordinaryAdjunction.isLeftAdjoint
+  let e : F ≅ SheafOfModules.CoefficientOrdinaryProof.tensorFunctor a :=
+    NatIso.ofComponents (fun M ↦ eqToIso (hF M)) (by
+      intro M N f
+      change F.map f ≫ eqToHom (hF N) =
+        eqToHom (hF M) ≫ SheafOfModules.changeOfRingsHom a M f
+      rw [hmF]
+      simp)
+  let := ((SheafOfModules.CoefficientOrdinaryProof.tensorAdjunction a).ofNatIsoLeft
+    e.symm).isLeftAdjoint
   infer_instance
 
 end TotalGenerators

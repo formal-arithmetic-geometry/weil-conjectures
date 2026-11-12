@@ -75,7 +75,8 @@ private theorem scalarTowerProductFibre_quasiIso (P : CochainComplex A ℤ) (μ 
   have hab : a ≫ b = b ≫ a := by
     apply Limits.Pi.hom_ext
     intro n
-    simp only [a, b, Category.assoc, Limits.Pi.lift_π, Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+    simp only [a, b, Category.assoc, Limits.Pi.lift_comp_π, Limits.Pi.map_π,
+      Limits.Pi.lift_comp_π_assoc]
   let t := b ≫ a
   let d := -(𝟙 V - t)
   have hat : a ≫ t = t ≫ a := by

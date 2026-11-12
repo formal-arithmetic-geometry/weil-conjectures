@@ -62,7 +62,7 @@ private theorem coeff_almostIntegral (R K : Type u) [CommRing R] [IsDomain R]
           simpa only [coeff_map, Algebra.smul_def, algebraMap_apply''] using heq
         _ = _ := by
           rw [hprod]
-          simp only [coeff_X_pow_mul', le_refl, if_true, Nat.sub_self,
+          simp only [coeff_X_pow_mul', le_refl, ite_true, Nat.sub_self,
             coeff_zero_eq_constantCoeff, map_mul, map_pow]
           rw [← coeff_zero_eq_constantCoeff, coeff_map]
           simp only [coeff_zero_eq_constantCoeff, constantCoeff_divXPowOrder, hg0]
@@ -104,7 +104,7 @@ private theorem coeff_mem_range (R K : Type u) [CommRing R] [IsNoetherianRing R]
       have hsum : (∑ j : Fin n, if n = j then r j else 0) = 0 := by
         apply Finset.sum_eq_zero
         intro j _
-        exact if_neg (ne_of_gt j.isLt)
+        exact ite_eq_right (ne_of_gt j.isLt)
       rw [hsum, map_zero, sub_zero]
     have hgalmost : IsAlmostIntegral (PowerSeries R) g :=
       (completeIntegralClosure (PowerSeries R) (PowerSeries K)).sub_mem hf

@@ -194,7 +194,7 @@ private lemma freeWeil_counit (M : IsoAlgebra F) (n : ℤ) :
     Sigma.ι (Free.obj F M.carrier) n ≫
       (forget F).map ((Free.adjunction F).counit.app M) = (freeWeilTheta F M n).hom := by
   change Sigma.ι _ n ≫ Sigma.desc _ = _
-  exact Sigma.ι_desc _ _
+  exact Sigma.ι_comp_desc _ _
 
 private def freeWeilShiftApp (M : IsoAlgebra F) :
     (Free.functor F).obj M.carrier ⟶ (Free.functor F).obj M.carrier :=
@@ -423,7 +423,7 @@ private lemma freeWeil_underlying_split (M : IsoAlgebra F) :
       (forget F).map ((freeWeilDifference F).app M) ≫ freeWeilRetraction F M =
         Sigma.ι (Free.obj F M.carrier) n ≫ 𝟙 _
     erw [← Category.assoc, freeWeilDifference_summand, Preadditive.sub_comp]
-    simp only [Category.assoc, freeWeilRetraction, Sigma.ι_desc,
+    simp only [Category.assoc, freeWeilRetraction, Sigma.ι_comp_desc,
       Iso.inv_hom_id_assoc]
     rw [← Preadditive.comp_sub, freeWeilPrimitive_step]
     simp [freeWeilSection]
@@ -435,7 +435,7 @@ private lemma freeWeil_underlying_split (M : IsoAlgebra F) :
           (∐ Free.obj F M.carrier) ⟶ ∐ Free.obj F M.carrier) = 𝟙 _
     apply Sigma.hom_ext
     intro n
-    simp only [Preadditive.comp_add, ← Category.assoc, freeWeilRetraction, Sigma.ι_desc,
+    simp only [Preadditive.comp_add, ← Category.assoc, freeWeilRetraction, Sigma.ι_comp_desc,
       freeWeil_counit]
     rw [Category.assoc, freeWeilPrimitive_difference]
     simp only [Preadditive.comp_sub, freeWeilSection, Iso.hom_inv_id_assoc,
@@ -689,5 +689,6 @@ theorem freeWeil_mem_localizingClosure
       ((Free.functor F).mapDerivedCategory.obj ((forget F).mapDerivedCategory.obj K)) :=
     P.le_localizingClosure _ ⟨_, hK, ⟨Iso.refl _⟩⟩
   exact P.localizingClosure.ext_of_isTriangulatedClosed₃ _ (hdist K) h h
+
 
 end CategoryTheory.Endofunctor.IsoAlgebra

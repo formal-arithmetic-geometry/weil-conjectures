@@ -60,8 +60,8 @@ lemma eq_of_isIdempotentElem (p : Ideal R) [p.IsPrime] (L : Type u) [Field L]
   have hRloc : IsLocalRing R' :=
     IsLocalRing.of_henselianLocalRing_of_isIntegral_of_isDomain (R := R)
   have hlochom : IsLocalHom (algebraMap R R') :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap R R')).out 0 4).mpr
-      (IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal _))
+    ((IsLocalRing.local_hom_TFAE (algebraMap R R')).out 1 5).mpr
+      (IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_under_of_isIntegral_of_isMaximal _))
   have : Algebra.IsAlgebraic (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField R') :=
     Algebra.IsAlgebraic.residueField_of_isIntegral
   -- Hence `R' ⊗[R] S` is a local ring.
@@ -164,7 +164,7 @@ lemma bijective_algebraMap_residueField_fiber (p : Ideal R) [p.IsPrime]
     .of_flat_lmul' p.ResidueField (p.Fiber S) (flat_lmul' p.ResidueField (p.Fiber S))
   have htfae : Ring.AbsolutelyFlat (p.Fiber S) ↔
       IsReduced (p.Fiber S) ∧ ∀ P : Ideal (p.Fiber S), P.IsPrime → P.IsMaximal :=
-    (Ring.AbsolutelyFlat.tfae (p.Fiber S)).out 0 1
+    (Ring.AbsolutelyFlat.tfae (p.Fiber S)).out 1 2
   have hmax : q.IsMaximal := (htfae.mp habs).2 q inferInstance
   have hsurj : Function.Surjective (algebraMap (p.Fiber S) q.ResidueField) := by
     rw [IsScalarTower.algebraMap_eq (p.Fiber S) (p.Fiber S ⧸ q) q.ResidueField]

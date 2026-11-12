@@ -67,11 +67,11 @@ private theorem mappedInverseComposite
     [CategoryTheory.Limits.PreservesFiniteLimits (F ⋙ G)]
     [CategoryTheory.Limits.PreservesFiniteColimits (F ⋙ G)]
     (e : F ⋙ G ≅ H) :
-    Functor.mapDerivedCategoryNatIso e.symm ≪≫ Functor.mapDerivedCategoryCompIso F G =
-      ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryNatIso e.symm ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm =
+      (Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso e).symm := by
   apply Iso.ext
-  simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso_symm]
 
 private theorem comapCongrSymm
@@ -123,7 +123,7 @@ private theorem derivedSquareAlong
     (h : a ≫ b = c) {U X : Scheme.{u}} (j : U ⟶ X) :
     Functor.isoWhiskerRight
         (Functor.mapDerivedCategoryNatIso (towerAlong a b c h X) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) (CondensedRing.scalarSixPull A j) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) (CondensedRing.scalarSixPull A j) ≪≫
       (Functor.associator _ _ _ ≪≫
         Functor.isoWhiskerLeft
           (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -138,7 +138,7 @@ private theorem derivedSquareAlong
       (CondensedRing.derivedComapUpperStarIso (Λ := A.X) (Λ' := C.X) (scalarMap c) j).symm ≪≫
         Functor.isoWhiskerLeft (CondensedRing.scalarSixPull C j)
           (Functor.mapDerivedCategoryNatIso (towerAlong a b c h U) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _) := by
+            (Functor.mapDerivedCategoryCompIso _ _).symm) := by
   subst c
   dsimp only [towerAlong, CondensedRing.scalarSixOrdinaryRestrictionTower]
   simp only [Iso.trans_symm, Iso.symm_symm_eq, comapCongrSymm]
@@ -237,11 +237,11 @@ theorem integral_restriction_pullback_tower_square (n : ℕ)
     rfl
   have hc (Z : Scheme.{u}) :
       Functor.mapDerivedCategoryNatIso (towerAlong a b c hf Z) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Mod.comap (D := Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
               (AdicCompletion.transition l E Z n))
             (Mod.comap (D := Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-              (AdicCompletion.quotient l E Z (n + 1))) =
+              (AdicCompletion.quotient l E Z (n + 1)))).symm =
         (AdicCompletion.restrictComp l E Z n).symm := by
     rw [ho Z]
     dsimp only [AdicCompletion.restrictComp, ordinaryComp]

@@ -304,9 +304,9 @@ private theorem productComparison_roos (M : CochainComplex A ℤ) :
   intro n
   simp only [roosU, towerTransitionEndomorphism, towerProductShift,
     Functor.map_sub, Preadditive.sub_comp, Preadditive.comp_sub,
-    Category.comp_id, Category.assoc, Pi.lift_π,
+    Category.comp_id, Category.assoc, Pi.lift_comp_π,
     productComparison_projection]
-  simp only [← Functor.map_comp_assoc, Category.id_comp, Pi.lift_π]
+  simp only [← Functor.map_comp_assoc, Category.id_comp, Pi.lift_comp_π]
   erw [Functor.map_comp, Category.assoc, coneLevel_step]
   simp only [← Category.assoc]
   erw [productComparison_projection F S T hscalar hproducts M (n + 1)]

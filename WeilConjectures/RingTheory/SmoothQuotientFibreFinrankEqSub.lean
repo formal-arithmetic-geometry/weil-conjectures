@@ -59,7 +59,7 @@ theorem smooth_quotient_fibre_finrank_eq_sub
   obtain ⟨e, _, _⟩ :=
     ((KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange R P C hq).split_tfae'
       (g := (KaehlerDifferential.mapBaseChange R P C).restrictScalars P)).out
-        1 2 rfl rfl |>.mp
+        2 3 rfl rfl |>.mp
           ⟨KaehlerDifferential.mapBaseChange_surjective R P C hq, l, hl⟩
   let e' : (C ⊗[P] KaehlerDifferential R P) ≃ₗ[P]
       J.Cotangent × KaehlerDifferential R C :=

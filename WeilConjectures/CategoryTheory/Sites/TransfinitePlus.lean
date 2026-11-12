@@ -182,4 +182,5 @@ lemma functorCategory_W_toTransfinitePlus :
     J.W.functorCategory (Cᵒᵖ ⥤ A) (J.toTransfinitePlus A κ) :=
   J.W_toTransfinitePlus_app A κ
 
+
 end CategoryTheory.GrothendieckTopology

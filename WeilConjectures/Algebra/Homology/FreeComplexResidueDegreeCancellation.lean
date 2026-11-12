@@ -56,14 +56,12 @@ private noncomputable def tensorExtendEquiv (R : Type u) (S : Type u) [CommRing 
             ((TensorProduct.mk R S N).map_smul r (show S from s)) }
   have h₁ : ∀ x, invFun (toFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have h₂ : ∀ x, toFun (invFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   exact
@@ -71,8 +69,7 @@ private noncomputable def tensorExtendEquiv (R : Type u) (S : Type u) [CommRing 
       invFun := invFun
       map_add' := toFun.map_add
       map_smul' s x := by
-        induction x using TensorProduct.induction_on with
-        | zero => exact (map_zero toFun).trans (show (0 : T) = s • (0 : T) from (smul_zero s).symm)
+        induction x using TensorProduct.inductionOn with
         | tmul s' n => rfl
         | add x y hx hy =>
           rw [smul_add, map_add, hx, hy, map_add]
@@ -110,8 +107,8 @@ private theorem cancel_supported_idempotent
       map_add' := fun _ _ ↦ rfl
       map_smul' := fun _ _ ↦ rfl } : M.X j ≅ K.X j)
   let e : ∀ j : ℤ, X j ≅ K.X j := fun j ↦
-    if hj : j ∈ ({i - 1, i, i + 1} : Set ℤ) then eqToIso (if_pos hj)
-    else eqToIso (if_neg hj) ≪≫ e₀ j hj
+    if hj : j ∈ ({i - 1, i, i + 1} : Set ℤ) then eqToIso (ite_eq_left hj)
+    else eqToIso (ite_eq_right hj) ≪≫ e₀ j hj
   let Q : CochainComplex (ModuleCat.{max u v} R) ℤ :=
     { X := X
       d := fun j k ↦ (e j).hom ≫ K.d j k ≫ (e k).inv
@@ -143,11 +140,11 @@ private theorem cancel_supported_idempotent
       infer_instance
     exact hK.of_iso (e i)
   · intro j hj
-    exact dif_neg hj
+    exact dite_eq_right hj
   · intro j k hj hk
-    apply (conj_eqToHom_iff_heq (Q.d j k) (M.d j k) (if_neg hj) (if_neg hk)).mp
+    apply (conj_eqToHom_iff_heq (Q.d j k) (M.d j k) (ite_eq_right hj) (ite_eq_right hk)).mp
     dsimp only [Q, e]
-    simp only [dif_neg hj, dif_neg hk, Iso.trans_hom, Iso.trans_inv, eqToIso.hom,
+    simp only [dite_eq_right hj, dite_eq_right hk, Iso.trans_hom, Iso.trans_inv, eqToIso.hom,
       eqToIso.inv, Category.assoc]
     congr 1
   · intro j _
