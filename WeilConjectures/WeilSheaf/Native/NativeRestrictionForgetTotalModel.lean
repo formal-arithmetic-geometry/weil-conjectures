@@ -624,13 +624,18 @@ private theorem native_restriction_data
         heq_of_eq (congrArg (fun S ↦ fun M N ↦ S.obj (M, N))
           (eq_of_heq hc.2.2.1)), hc.2.2.2⟩
 
--- Tensor totalizations only need small coproducts. Record them directly so synthesis
--- does not repeatedly search through the module and sheaf colimit instances.
-private instance restriction_adicSmallColimits (X : Scheme.{u})
+-- Build the tensor instances for arbitrary complexes once, before specializing
+-- them to the nested restriction and forgetful functors below.
+private instance restriction_adicTensor (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (P T : CochainComplex
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :
+    HomologicalComplex.HasTensor P T := inferInstance
+
+private instance restriction_adicComplexMonoidal (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] :
-    HasColimitsOfSize.{0, 0}
-      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
-  hasColimitsOfSizeShrink _
+    MonoidalCategory (CochainComplex
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
 
 section AbstractTransport
 variable (α : (ProEtale.adicUpperStar l
