@@ -47,7 +47,9 @@ expected diagonal.
   endomorphism preserving a submodule is the product of those of the restriction to the submodule
   and of the induced endomorphism of the quotient.
 * `LinearMap.charpoly_eq_prod_charpoly_mapQ_of_le`: the characteristic polynomial of an
-  endomorphism preserving a finite filtration is the product over its graded pieces.
+  endomorphism preserving a finite filtration is the product over its graded pieces;
+  `LinearMap.charpoly_roots_eq_sum_charpoly_roots_mapQ_of_le` is the corresponding statement on
+  eigenvalues.
 * `LinearMap.charpoly_mapQ_restrict_dvd`: the characteristic polynomial on an invariant
   subquotient divides the characteristic polynomial on the whole space.
 * `LinearMap.charpoly_eq_one_of_subsingleton`: the characteristic polynomial of an
@@ -173,6 +175,22 @@ theorem charpoly_eq_prod_charpoly_mapQ_of_le (f : V →ₗ[K] V) (F : ℕ → Su
   rw [← key n le_rfl]
   refine charpoly_eq_of_comp_eq (LinearEquiv.ofTop (F n) hn).symm ?_
   ext x
+  rfl
+
+/-- **Eigenvalues along a filtration.** If `f` preserves a finite filtration
+`0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n = V`, the multiset of roots of the characteristic polynomial of `f` is
+the sum of those of the endomorphisms induced by `f` on the graded pieces `F (i + 1) ⧸ F i`: the
+eigenvalues with algebraic multiplicity are the union of those on the graded pieces.
+(blueprint: `lemma-filtrations-spectra--2`) -/
+theorem charpoly_roots_eq_sum_charpoly_roots_mapQ_of_le (f : V →ₗ[K] V)
+    (F : ℕ → Submodule K V) (n : ℕ) (h0 : F 0 = ⊥) (hn : F n = ⊤)
+    (hle : ∀ i < n, F i ≤ F (i + 1)) (hF : ∀ i, F i ≤ (F i).comap f) :
+    f.charpoly.roots = ∑ i ∈ Finset.range n,
+      (((F i).comap (F (i + 1)).subtype).mapQ ((F i).comap (F (i + 1)).subtype)
+        (f.restrict (hF (i + 1))) fun _ hx ↦ hF i hx).charpoly.roots := by
+  rw [charpoly_eq_prod_charpoly_mapQ_of_le f F n h0 hn hle hF,
+    Polynomial.roots_prod _ _ (Finset.prod_ne_zero_iff.2 fun _ _ ↦ (charpoly_monic _).ne_zero),
+    Finset.sum_eq_multiset_sum, Multiset.bind]
   rfl
 
 /-- The characteristic polynomial of the endomorphism induced by `f` on an invariant

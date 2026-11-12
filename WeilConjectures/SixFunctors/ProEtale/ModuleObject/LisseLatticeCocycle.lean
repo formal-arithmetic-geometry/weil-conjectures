@@ -30,6 +30,12 @@ descent cocycle. By the lattice theorem on regular schemes
 `𝒪_E`-spans of the lattices `σ` (`PadicAlgCl.CompactOpenLattice.integersBasisGL`) are locally
 constant and conjugate `γ` into `GL_n(𝒪_E)`
 (`PadicAlgCl.CompactOpenLattice.norm_integersBasisGL_inv_mul_mul_le_one`).
+
+The proof only uses the existence of lattice-valued twisted sections
+(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection`),
+so it also applies to connected Noetherian schemes whose local rings are integrally closed domains
+(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk`, blueprint
+`lemma-global-lattice-normal-scheme`).
 -/
 
 @[expose] public section
@@ -56,11 +62,19 @@ lemma exists_lift_sigmaι {κ : Type u} [Small.{u} κ] (V : κ → Scheme.{u}) {
     hv
   exact ⟨j, _, pullback.snd _ _, pullback.fst _ _, r, hr₂, pullback.condition⟩
 
-/-- **Integral conjugates of transition values on regular schemes.** See the module docstring. -/
-theorem exists_integral_conj_of_transitionValues {S : Scheme.{u}} [IsLocallyNoetherian S]
-    [CompactSpace S] [QuasiSeparatedSpace S] [IsRegular S]
+/-- **Integral conjugates of transition values.** Let `S` be a quasi-compact quasi-separated
+locally Noetherian scheme on which every descent cocycle `γ` acting on the lattices of `Eⁿ`, on a
+single-morphism pro-étale cover, has a lattice-valued twisted section (for instance a regular or
+a connected normal scheme). Then transition values on a finite affine pro-étale cover of `S` are
+conjugate to integral ones. See the module docstring. -/
+theorem exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection
+    {S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] [QuasiSeparatedSpace S]
     (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) [Finite 𝒰.I₀] [∀ k, IsAffine (𝒰.X k)]
     {n : ℕ}
+    (hσ : ∀ {V : Scheme.{u}} (f : V ⟶ S) [WeaklyEtale f] [Surjective f] [QuasiCompact f]
+      (γ : ↥(pullback f f) → GL (Fin n) E),
+      IsDescentCocycle f (fun z (L : CompactOpenLattice E n) ↦ γ z • L) →
+        ∃ σ, IsTwistedSection f (fun z (L : CompactOpenLattice E n) ↦ γ z • L) (𝟙 S) σ)
     (Tval : ∀ (j k : 𝒰.I₀) (W : Scheme.{u}) (a : W ⟶ 𝒰.X j) (b : W ⟶ 𝒰.X k),
         a ≫ 𝒰.f j = b ≫ 𝒰.f k → W → GL (Fin n) E)
     (hc : ∀ j k W a b h i i', Continuous fun x ↦
@@ -295,7 +309,7 @@ theorem exists_integral_conj_of_transitionValues {S : Scheme.{u}} [IsLocallyNoet
   -- the lattice theorem
   have hdc := ProEtale.AdicSheaf.isDescentCocycle_smul_compactOpenLattice F γ hγc hγc'
     (fun v ↦ hdiag v) (fun w ↦ hcoc w)
-  obtain ⟨σ, hσlc, hσ⟩ := exists_isTwistedSection_compactOpenLattice F γ hdc
+  obtain ⟨σ, hσlc, hσ⟩ := hσ F γ hdc
   let s : ∐ 𝒰.X ⟶ pullback F (𝟙 S) :=
     pullback.lift (𝟙 _) F (by rw [Category.id_comp, Category.comp_id])
   have hlc (k : 𝒰.I₀) : IsLocallyConstant fun v ↦
@@ -339,5 +353,79 @@ theorem exists_integral_conj_of_transitionValues {S : Scheme.{u}} [IsLocallyNoet
   · rw [mul_inv_rev, mul_inv_rev, inv_inv, ← _root_.mul_assoc]
     exact CompactOpenLattice.norm_integersBasisGL_inv_mul_mul_le_one _
       (inv_smul_eq_iff.2 (hkey j k w)) i i'
+
+
+/-- **Integral conjugates of transition values on regular schemes.** See the module docstring. -/
+theorem exists_integral_conj_of_transitionValues {S : Scheme.{u}} [IsLocallyNoetherian S]
+    [CompactSpace S] [QuasiSeparatedSpace S] [IsRegular S]
+    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) [Finite 𝒰.I₀] [∀ k, IsAffine (𝒰.X k)]
+    {n : ℕ}
+    (Tval : ∀ (j k : 𝒰.I₀) (W : Scheme.{u}) (a : W ⟶ 𝒰.X j) (b : W ⟶ 𝒰.X k),
+        a ≫ 𝒰.f j = b ≫ 𝒰.f k → W → GL (Fin n) E)
+    (hc : ∀ j k W a b h i i', Continuous fun x ↦
+      ((Tval j k W a b h x : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i')
+    (hc' : ∀ j k W a b h i i', Continuous fun x ↦
+      (((Tval j k W a b h x)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i')
+    (hcomp : ∀ j k (W W' : Scheme.{u}) (c : W' ⟶ W) a b h h' x,
+      Tval j k W' (c ≫ a) (c ≫ b) h' x = Tval j k W a b h (c.base x))
+    (htrans : ∀ j k l W a b c h h' h'' x,
+      Tval j l W a c h'' x = Tval j k W a b h x * Tval k l W b c h' x)
+    (hself : ∀ k W a h x, Tval k k W a a h x = 1) :
+    ∃ g : ∀ k, 𝒰.X k → GL (Fin n) E,
+      (∀ k i i', Continuous fun v ↦ ((g k v : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i') ∧
+      (∀ k i i', Continuous fun v ↦
+        (((g k v)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i') ∧
+      (∀ j k (w : ↥(pullback (𝒰.f j) (𝒰.f k))) i i',
+        ‖(((g j ((pullback.fst (𝒰.f j) (𝒰.f k)).base w))⁻¹ *
+          Tval j k _ (pullback.fst (𝒰.f j) (𝒰.f k)) (pullback.snd (𝒰.f j) (𝒰.f k))
+            pullback.condition w * g k ((pullback.snd (𝒰.f j) (𝒰.f k)).base w) :
+              GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i'‖ ≤ 1) ∧
+      (∀ j k (w : ↥(pullback (𝒰.f j) (𝒰.f k))) i i',
+        ‖((((g j ((pullback.fst (𝒰.f j) (𝒰.f k)).base w))⁻¹ *
+          Tval j k _ (pullback.fst (𝒰.f j) (𝒰.f k)) (pullback.snd (𝒰.f j) (𝒰.f k))
+            pullback.condition w * g k ((pullback.snd (𝒰.f j) (𝒰.f k)).base w))⁻¹ :
+              GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i'‖ ≤ 1) :=
+  exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection 𝒰
+    (fun f _ _ _ γ hdc ↦ exists_isTwistedSection_compactOpenLattice f γ hdc) Tval hc hc' hcomp
+    htrans hself
+
+/-- **Integral conjugates of transition values on connected normal schemes** (blueprint
+`lemma-global-lattice-normal-scheme`): the case of a connected locally Noetherian scheme whose
+local rings are integrally closed domains, with the lattice theorem
+`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`. -/
+theorem exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk {S : Scheme.{u}}
+    [IsLocallyNoetherian S] [CompactSpace S] [QuasiSeparatedSpace S] [ConnectedSpace S]
+    (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s))
+    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) [Finite 𝒰.I₀] [∀ k, IsAffine (𝒰.X k)]
+    {n : ℕ}
+    (Tval : ∀ (j k : 𝒰.I₀) (W : Scheme.{u}) (a : W ⟶ 𝒰.X j) (b : W ⟶ 𝒰.X k),
+        a ≫ 𝒰.f j = b ≫ 𝒰.f k → W → GL (Fin n) E)
+    (hc : ∀ j k W a b h i i', Continuous fun x ↦
+      ((Tval j k W a b h x : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i')
+    (hc' : ∀ j k W a b h i i', Continuous fun x ↦
+      (((Tval j k W a b h x)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i')
+    (hcomp : ∀ j k (W W' : Scheme.{u}) (c : W' ⟶ W) a b h h' x,
+      Tval j k W' (c ≫ a) (c ≫ b) h' x = Tval j k W a b h (c.base x))
+    (htrans : ∀ j k l W a b c h h' h'' x,
+      Tval j l W a c h'' x = Tval j k W a b h x * Tval k l W b c h' x)
+    (hself : ∀ k W a h x, Tval k k W a a h x = 1) :
+    ∃ g : ∀ k, 𝒰.X k → GL (Fin n) E,
+      (∀ k i i', Continuous fun v ↦ ((g k v : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i') ∧
+      (∀ k i i', Continuous fun v ↦
+        (((g k v)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i') ∧
+      (∀ j k (w : ↥(pullback (𝒰.f j) (𝒰.f k))) i i',
+        ‖(((g j ((pullback.fst (𝒰.f j) (𝒰.f k)).base w))⁻¹ *
+          Tval j k _ (pullback.fst (𝒰.f j) (𝒰.f k)) (pullback.snd (𝒰.f j) (𝒰.f k))
+            pullback.condition w * g k ((pullback.snd (𝒰.f j) (𝒰.f k)).base w) :
+              GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i'‖ ≤ 1) ∧
+      (∀ j k (w : ↥(pullback (𝒰.f j) (𝒰.f k))) i i',
+        ‖((((g j ((pullback.fst (𝒰.f j) (𝒰.f k)).base w))⁻¹ *
+          Tval j k _ (pullback.fst (𝒰.f j) (𝒰.f k)) (pullback.snd (𝒰.f j) (𝒰.f k))
+            pullback.condition w * g k ((pullback.snd (𝒰.f j) (𝒰.f k)).base w))⁻¹ :
+              GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i i'‖ ≤ 1) :=
+  exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection 𝒰
+    (fun f _ _ _ γ hdc ↦
+      exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk hS f γ hdc)
+    Tval hc hc' hcomp htrans hself
 
 end AlgebraicGeometry

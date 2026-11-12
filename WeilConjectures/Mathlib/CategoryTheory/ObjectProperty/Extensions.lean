@@ -26,6 +26,9 @@ filtration with the subobject (resp. take the images of the filtration in the qu
 If `P` is closed under kernels, cokernels and extensions, then in an exact sequence
 `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₄ ⟶ X₅` whose four outer terms satisfy `P`, so does `X₃`
 (`CategoryTheory.ObjectProperty.prop_X₃_of_exact`).
+
+An exact functor carrying objects with `P` to objects with `Q` carries `P.filtrationClosure`
+into `Q.filtrationClosure` (`CategoryTheory.ObjectProperty.filtrationClosure.map`).
 -/
 
 @[expose] public section
@@ -253,5 +256,23 @@ theorem prop_X₃_of_exact_of_fullyFaithful (F : C ⥤ D) [F.Full] [F.Faithful] 
 
 
 end FiveTerm
+
+section Map
+
+variable {D : Type*} [Category* D] [Abelian D] {Q : ObjectProperty D}
+
+/-- An exact functor carrying objects with `P` to objects with `Q` carries the filtration closure
+of `P` into the filtration closure of `Q`: it carries a filtration with quotients in `P` to a
+filtration with quotients in `Q`. -/
+theorem filtrationClosure.map (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+    [PreservesFiniteColimits F] [Q.IsClosedUnderIsomorphisms] (hF : ∀ X, P X → Q (F.obj X))
+    {X : C} (hX : P.filtrationClosure X) : Q.filtrationClosure (F.obj X) := by
+  induction hX with
+  | of_isZero hX => exact .of_isZero (F.map_isZero hX)
+  | of_mono i _ hi ih =>
+    have : Mono (F.map i) := F.map_mono i
+    exact .of_mono (F.map i) ih (Q.prop_of_iso (PreservesCokernel.iso F i) (hF _ hi))
+
+end Map
 
 end CategoryTheory.ObjectProperty

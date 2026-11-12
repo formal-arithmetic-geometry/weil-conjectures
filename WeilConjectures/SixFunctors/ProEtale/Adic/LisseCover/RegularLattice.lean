@@ -21,9 +21,14 @@ twisted section with values in the lattices
 scheme has a lattice (blueprint `thm-lisse-qlbar-representations` (4), used in
 `prop-zl-smooth-proper-relative-purity`).
 
-On a connected `T`, the orbit of a lattice is contained in a finite invariant set of lattices
-(`AlgebraicGeometry.exists_finite_invariant_subset`, Bhatt–Scholze, Lemma 7.4.10), whose sum is an
-invariant lattice. In general the sections over the finitely many connected components glue.
+More generally, this holds on a connected Noetherian scheme whose local rings are integrally
+closed domains
+(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`,
+blueprint `lemma-global-lattice-normal-scheme`): the orbit of a lattice is contained in a finite
+invariant set of lattices
+(`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`, Bhatt–Scholze,
+Lemma 7.4.10), whose sum is an invariant lattice. On a regular scheme the sections over the
+finitely many connected components glue.
 -/
 
 @[expose] public section
@@ -37,17 +42,26 @@ namespace AlgebraicGeometry
 variable {l : ℕ} [Fact l.Prime] {E : IntermediateField ℚ_[l] (PadicAlgCl l)}
   [FiniteDimensional ℚ_[l] E] {n : ℕ} {T V : Scheme.{u}}
 
-/-- **Lattices on connected regular schemes.** -/
-theorem exists_isTwistedSection_compactOpenLattice_of_connectedSpace [IsLocallyNoetherian T]
-    [CompactSpace T] [IsRegular T] [ConnectedSpace T] (f : V ⟶ T) [WeaklyEtale f]
-    [Surjective f] [QuasiCompact f] (γ : ↥(pullback f f) → GL (Fin n) E)
+/-- **Lattices on connected normal schemes** (blueprint `lemma-global-lattice-normal-scheme`).
+Let `T` be a connected Noetherian scheme whose local rings are integrally closed domains, and `γ`
+a cocycle on a single-morphism pro-étale cover of `T` acting on the lattices of `Eⁿ` by a descent
+cocycle. Then `γ` has a twisted section with values in the lattices: the orbit of the standard
+lattice lies in a finite invariant set of lattices
+(`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`), whose sum is an
+invariant lattice. -/
+theorem exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk
+    [IsLocallyNoetherian T] [CompactSpace T] [ConnectedSpace T]
+    (hT : ∀ y : T, IsDomain (T.presheaf.stalk y) ∧ IsIntegrallyClosed (T.presheaf.stalk y))
+    (f : V ⟶ T) [WeaklyEtale f] [Surjective f] [QuasiCompact f]
+    (γ : ↥(pullback f f) → GL (Fin n) E)
     (hc : IsDescentCocycle f (fun z (L : CompactOpenLattice E n) ↦ γ z • L)) :
     ∃ σ, IsTwistedSection f (fun z (L : CompactOpenLattice E n) ↦ γ z • L) (𝟙 T) σ := by
   classical
   obtain ⟨t₀⟩ := (inferInstance : Nonempty T)
   obtain ⟨v₀, -⟩ := f.surjective t₀
   obtain ⟨A, hAfin, hAlc, hAinv, hs⟩ :=
-    exists_finite_invariant_subset f hc v₀ (CompactOpenLattice.standard E n)
+    exists_finite_invariant_subset_of_isIntegrallyClosed_stalk hT f hc v₀
+      (CompactOpenLattice.standard E n)
   set p₁ := (pullback.fst f f).base
   set p₂ := (pullback.snd f f).base
   set q := (pullback.fst f (𝟙 T)).base
@@ -89,6 +103,17 @@ theorem exists_isTwistedSection_compactOpenLattice_of_connectedSpace [IsLocallyN
     congr 1
     ext L
     simp only [Set.Finite.mem_toFinset, Finset.mem_image, h, Set.mem_image]
+
+/-- **Lattices on connected regular schemes**: the case of
+`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk` for a
+regular scheme, whose local rings are integrally closed domains. -/
+theorem exists_isTwistedSection_compactOpenLattice_of_connectedSpace [IsLocallyNoetherian T]
+    [CompactSpace T] [IsRegular T] [ConnectedSpace T] (f : V ⟶ T) [WeaklyEtale f]
+    [Surjective f] [QuasiCompact f] (γ : ↥(pullback f f) → GL (Fin n) E)
+    (hc : IsDescentCocycle f (fun z (L : CompactOpenLattice E n) ↦ γ z • L)) :
+    ∃ σ, IsTwistedSection f (fun z (L : CompactOpenLattice E n) ↦ γ z • L) (𝟙 T) σ :=
+  exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk
+    (fun t ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk t⟩) f γ hc
 
 /-- **Lattices on regular schemes.** Let `T` be a regular Noetherian scheme and `γ` a cocycle
 on a single-morphism pro-étale cover of `T` acting on the lattices of `Eⁿ` by a descent cocycle.
