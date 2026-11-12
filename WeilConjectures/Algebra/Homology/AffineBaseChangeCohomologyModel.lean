@@ -100,7 +100,6 @@ private theorem affine_stalkComparison_normalized
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- The degree-i affine module comparison and its prime localizations, without any
 invertibility hypothesis. Source: Stacks Project, perfect.tex, Tag 0DJ8, affine
 proof, equation-bc and the displayed localization identity.
