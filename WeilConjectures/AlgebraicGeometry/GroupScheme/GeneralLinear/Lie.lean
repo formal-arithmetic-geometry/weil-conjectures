@@ -241,11 +241,13 @@ theorem coe_homMulEquiv_tangentMap_commutator {A : Type u} [CommRing A] [Algebra
   let f : GrpObj.pointsKer 𝔾𝕃(n; k) π →* GL n A :=
     (homMulEquiv n k A).toMonoidHom.comp (GrpObj.pointsKer 𝔾𝕃(n; k) π).subtype
   change (↑(f ⁅GrpObj.tangentMap e he hπe p, GrpObj.tangentMap d hd hπd q⁆) : Matrix n n A) = _
-  rw [map_commutatorElement, coe_commutator_of_eq_one_add_smul e d he hd _ _ _ _
+  rw [map_commutatorElement]
+  change (↑⁅homMulEquiv n k A (GrpObj.tangentMap e he hπe p).1,
+    homMulEquiv n k A (GrpObj.tangentMap d hd hπd q).1⁆ : Matrix n n A) = _
+  rw [coe_commutator_of_eq_one_add_smul e d he hd _ _ _ _
     (coe_homMulEquiv_tangentMap e he hπe p) (coe_homMulEquiv_tangentMap d hd hπd q)]
   simp only [← RingHom.mapMatrix_apply, map_sub, map_mul]
 
-set_option trace.profiler true in
 open scoped commutatorElement in
 theorem tangentMatrix_tangentBracket (p q : GrpObj.pointsKer 𝔾𝕃(n; k) GrpObj.aug₁) :
     tangentMatrix n k (GrpObj.tangentBracket p q) =
