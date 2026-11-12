@@ -67,6 +67,18 @@ private def moduleIsoSectionEquiv
   left_inv x := congrArg (fun q : M ⟶ M ↦ q.val.app U x) e.hom_inv_id
   right_inv x := congrArg (fun q : N ⟶ N ↦ q.val.app U x) e.inv_hom_id
 
+private theorem constantPushforward_map_heq (A : Type u) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M N : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)}
+    (a : M ⟶ N) (U : Y.ProEtᵒᵖ) (x : M.val.obj (chart f U))
+    (y : ((Scheme.proEtaleConstantRingPushforward A f).obj M).val.obj U)
+    (hxy : HEq x y) :
+    a.val.app (chart f U) x =
+      ((Scheme.proEtaleConstantRingPushforward A f).map a).val.app U y := by
+  have h : x = y := eq_of_heq hxy
+  cases h
+  exact (pushforward_map_apply A f a U x).symm
+
 set_option profiler true in
 -- Compare the scalar-extension root section with its normalized finite evaluation.
 private theorem normalizedRootSection
@@ -183,7 +195,7 @@ private theorem horizontal_varying_root_square
   have hinput :=
     (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n) U).eq_symm_apply.mpr
       hcoord
-  dsimp only [moduleIsoSectionEquiv, Equiv.symm] at hinput
+  dsimp only [moduleIsoSectionEquiv, Equiv.symm, Equiv.coe_fn_mk] at hinput
   let v := (((d.varyingPush.hom.app N').app (op n)).hom.app U)
     (((p.restrictionX.F.map α).app (op n)).hom.app U y)
   have hv : HEq v (adjointSection l (ULift.{u} (Padic l)) d.geometry
@@ -195,15 +207,15 @@ private theorem horizontal_varying_root_square
   have hx' : HEq x' (adjointSection l (ULift.{u} (Padic l)) d.geometry
       d.line.iso.hom n U x) := by
     exact (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).trans hv
+  dsimp only [x, N, y] at hx'
   have hn := d.line.normalization n U 1 z
-  rw [pushforward_map_apply, ← hinput, map_one] at hn
+  rw [← hinput, map_one] at hn
   have heval : (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' x' =
       Scheme.tateFiniteTensor X' l (FiniteRing l (ULift.{u} (Padic l)) n) n
         (finiteScalar l (ULift.{u} (Padic l)) n) U'.unop 1
         (restrictRoot l hX n U z) := by
-    exact (congrArg
-      (fun q ↦ (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' q)
-      (eq_of_heq hx')).trans hn
+    exact (constantPushforward_map_heq (FiniteRing l (ULift.{u} (Padic l)) n) hX
+      (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx').trans hn
   let z' := (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
