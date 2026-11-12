@@ -20834,6 +20834,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedUpperShriekCoprodu
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarFiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
