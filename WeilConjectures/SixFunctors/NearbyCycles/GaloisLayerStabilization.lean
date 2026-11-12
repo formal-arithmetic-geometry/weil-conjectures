@@ -174,32 +174,32 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
 
 -- Cache the graded tensor hypotheses of `leftDerivedFunctor`: rebuilding them for every
 -- pullback in the statement and proof dominates elaboration.
-@[local instance 20000] theorem stabilizationHasTensorFour (T : Scheme.{u}) :
+@[local instance 20000] abbrev stabilizationHasTensorFour (T : Scheme.{u}) :
     ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasTensor₄ObjExt A B C D := by
   infer_instance
 
-@[local instance 20000] theorem stabilizationHasGoodTensor12 (T : Scheme.{u}) :
+@[local instance 20000] abbrev stabilizationHasGoodTensor12 (T : Scheme.{u}) :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasGoodTensor₁₂Tensor A B C := by
   infer_instance
 
-@[local instance 20000] theorem stabilizationHasGoodTensor23 (T : Scheme.{u}) :
+@[local instance 20000] abbrev stabilizationHasGoodTensor23 (T : Scheme.{u}) :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasGoodTensorTensor₂₃ A B C := by
   infer_instance
 
-@[local instance 20000] theorem stabilizationTensorLeftSequential (T : Scheme.{u}) :
+@[local instance 20000] abbrev stabilizationTensorLeftSequential (T : Scheme.{u}) :
     ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := by
   infer_instance
 
-@[local instance 20000] theorem stabilizationTensorRightSequential (T : Scheme.{u}) :
+@[local instance 20000] abbrev stabilizationTensorRightSequential (T : Scheme.{u}) :
     ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := by
   infer_instance
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
 of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible at `L(𝟙)^* C` (stabilization at the
@@ -245,13 +245,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
       (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
       (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
-    exact @retraction_of_comp_of_isIso_aux
-      _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-      ((N.galoisLayerHom h Ω).pullbackExchange Λ)
+    exact retraction_of_comp_of_isIso_aux ((N.galoisLayerHom h Ω).pullbackExchange Λ)
       ((N.galoisLayerHom h L').pullbackExchange Λ)
       ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
-      (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab r hr _ Finset.univ _
+      (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx r hr Finset.univ _
       (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
       (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
       (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
