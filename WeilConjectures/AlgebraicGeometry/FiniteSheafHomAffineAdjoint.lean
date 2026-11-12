@@ -120,8 +120,8 @@ theorem exists_affine_derivedSheafHom_adjunction
               DerivedCategory.Q.map
                 ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app K) := by
   classical
-  obtain ⟨H, iH, adj₀, haction, hc, hlocal⟩ :=
-    sheafHom_affine_rightAdjoint (f := f)
+  refine (sheafHom_affine_rightAdjoint (f := f)).elim fun H hH₀ ↦ ?_
+  rcases hH₀ with ⟨iH, adj₀, haction, hc, hlocal⟩
   change (SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
     SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) at H
   have hH : H.Additive := adj₀.right_adjoint_additive
@@ -207,8 +207,8 @@ theorem exists_affine_derivedSheafHom_adjunction
         (NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app K := by
       ext n
       rfl
-    have he := (adj₀.mapHomologicalComplex (.up ℤ)).derivedε_fac_app W t.hom β K
-    rw [hε] at he
-    exact he
+    dsimp only [adj]
+    rw [Adjunction.derived_counit]
+    rw [(adj₀.mapHomologicalComplex (.up ℤ)).derivedε_fac_app W t.hom β K, hε]
 
 end AlgebraicGeometry
