@@ -40,6 +40,7 @@ private theorem derived_unique_fac
     Iso.refl_hom, NatTrans.id_app, Category.comp_id] using
     Functor.leftDerivedNatTrans_app LF LF' c c' W (𝟙 _) K
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- Comparing the internal module-object derived functors needs this elaboration budget.
 set_option synthInstance.maxHeartbeats 200000 in
