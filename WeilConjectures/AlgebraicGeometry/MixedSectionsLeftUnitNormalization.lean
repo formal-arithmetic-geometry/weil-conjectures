@@ -153,9 +153,6 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
-set_option maxHeartbeats 700000 in
-set_option trace.profiler true in
--- The statement expands sheaf, scalar, and localization instances.
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
@@ -230,11 +227,8 @@ theorem mixedSections_left_unit_normalization
         (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
-    apply eq_of_heq
-    dsimp only [p, F, HY, HZ, Df, Dfg, Sg, schemeDerivedGlobalSections,
-      schemeGlobalScalarRestriction, schemeDerivedDirectImage,
-      RingedSpace.derivedModuleDirectImage] at hp ⊢
-    simpa only [Category.assoc] using hp
+    dsimp only [p]
+    simpa only [Category.assoc] using eq_of_heq hp
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
