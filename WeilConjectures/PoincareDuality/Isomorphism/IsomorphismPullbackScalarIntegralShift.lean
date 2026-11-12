@@ -246,7 +246,7 @@ private theorem integralScalarConjugation_eq
   have hc := isomorphismComparison_scalarExtension l (Coefficient.{u} l Ω E)
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
     g hX hY K.obj K.property
-  rw [← hαK, ← hkE, ← hkL] at hc
+  simp only [← hαK, ← hkE, ← hkL] at hc
   have hf : χF.hom = (scalarCompletion l (Coefficient.{u} l Ω E)
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) X).app (FE.obj K.obj) :=
     ordinaryComparison_hom l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
@@ -264,9 +264,7 @@ private theorem integralScalarConjugation_eq
         GeneralAlgebraicallyClosedCoefficients.integralTransition,
         scalar_restrict_obj, pullback_restrict_obj] at hc ⊢
       convert hc using 1)
-  change (α.hom.app K).hom = (integralScalarConjugation eE eL χY χX b).hom.app K
-  rw [integralScalarConjugation_hom_app]
-  exact H
+  exact H.trans (integralScalarConjugation_hom_app eE eL χY χX b K).symm
 
 set_option trace.profiler true in
 /-- The integral scalar comparison preserves the supplied integral pullback shifts.
