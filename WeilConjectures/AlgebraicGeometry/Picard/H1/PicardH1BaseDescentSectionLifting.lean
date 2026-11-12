@@ -28,7 +28,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 300000 in
 set_option profiler true in
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
 This asserts surjectivity of restriction, not existence of a generating section.

@@ -33,7 +33,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 300000 in
 set_option profiler true in
 -- Comparing the two derived Hom interfaces unfolds the chosen derived pullback functors.
 /-- A connective strictly perfect model with a scalar degree-zero basis realizes its
