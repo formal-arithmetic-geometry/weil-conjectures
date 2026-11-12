@@ -353,6 +353,8 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   WeilConjectures.coefficientSequenceCommRingPresheaf
 
 -- The ambient comparison elaborates several dependent coefficient-stage identifications.
+set_option trace.profiler true in
+set_option maxHeartbeats 800000 in
 /-- The canonical finite evaluation intertwines the left exceptional scalar mate.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, reduction compatibility.
 Proof: apply the faithful finite full inclusion and substitute the scalar equality
