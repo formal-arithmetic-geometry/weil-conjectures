@@ -50,6 +50,7 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   (x : RationalPoint X)
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the ambient identity is transported to the bounded constructible forms of the objects
 /-- The restriction of the Künneth map `Π_{K,L}` to the diagonal is the lax tensor map `μ_X` of
 the specialization, through the pullback exchange `α_Δ` and the identifications
@@ -128,6 +129,7 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
 variable (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- matching the abstract statements against the concrete functors
 /-- **Nearby cycles of the universal kernel**, second identity (blueprint
 `det-tf-sp-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
