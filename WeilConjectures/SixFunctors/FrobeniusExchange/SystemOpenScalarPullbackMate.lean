@@ -168,12 +168,11 @@ end OpenRestriction
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
-  exact inverseMate_isIso_of_left_adjoints_explicit
-    (L₁ := integralComparisonSequencePullback l L j)
-    (R₁ := integralComparisonSequenceDirectImage l L j)
-    (L₂ := integralComparisonSequencePullback l E j)
-    (R₂ := integralComparisonSequenceDirectImage l E j)
-    (G := sequenceRestriction l E L ι B) (H := sequenceRestriction l E L ι X)
+  have h := inverseMate_isIso_of_left_adjoints_explicit
+    (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
+      (sequenceQuotient l L) j)
+    (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
+      (sequenceQuotient l E) j)
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
       (sequenceQuotient l L) j)
@@ -182,6 +181,7 @@ private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X �
       (sequenceQuotient l E) j)
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
     (openRestrictionMate_isIso l E L ι j)
+  exact h
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
 private theorem normalizedAdjointComparison_choose_eq
