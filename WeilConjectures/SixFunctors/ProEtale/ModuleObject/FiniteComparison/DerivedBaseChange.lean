@@ -261,7 +261,6 @@ lemma finiteCoefficientDerivedUpperStarIso_cube (sq : CommSq g' f' f g)
   with_reducible
     exact cube_aux _ _ _ _ _ _ _ _ _ _ _ _ _ _ (by simp [← Functor.map_comp]) (by simp) H₁ H₂ H₃
 
-set_option maxHeartbeats 1000000 in
 -- As for `nonempty_arrowIso_map_exchangeRight_residueField`, elaborating the cube law of mates on
 -- these derived categories needs more heartbeats.
 /-- **The exchange morphisms and the finite-coefficient comparison.** For a commutative square

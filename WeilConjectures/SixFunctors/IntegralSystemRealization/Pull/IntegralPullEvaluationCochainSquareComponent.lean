@@ -35,7 +35,6 @@ def ordinaryPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option maxHeartbeats 600000 in
 -- The component statement unfolds the mapped cochain comparison and needs extra heartbeats.
 /-- The degreewise component of the ordinary cochain pullback evaluation transition square.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks Tags 03D2 and 0941.

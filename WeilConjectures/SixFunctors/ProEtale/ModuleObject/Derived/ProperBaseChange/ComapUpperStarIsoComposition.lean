@@ -64,7 +64,6 @@ private lemma upperStarComp_inv_conjugate
   simp only [upperStarComp, Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom,
     Equiv.apply_symm_apply, Iso.symm_hom]
 
-set_option maxHeartbeats 800000 in
 -- The mate comparison repeats typeclass searches for module-object adjunctions.
 /-- Composition coherence for the ordinary coefficient-restriction comparison.
 Source: Bhatt--Scholze, Remark 6.8.15.

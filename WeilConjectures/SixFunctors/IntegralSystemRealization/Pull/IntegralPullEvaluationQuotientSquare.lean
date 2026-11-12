@@ -233,7 +233,6 @@ private theorem ordinary_restriction_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n 
   exact ⟨(proEtaleCoefficientDirectImageComparison f
     (Padic.coefficientExtensionTransition l E (n + 1))).symm, HEq.rfl⟩
 
-set_option maxHeartbeats 400000 in
 -- Comparing the concrete localization factors and adjunction mates needs extra heartbeats.
 /-- Pullback evaluation respects adjacent quotient transitions, with the scalar
 comparison obtained by transposing the published restricted direct-image map.

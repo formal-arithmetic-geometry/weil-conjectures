@@ -45,7 +45,6 @@ open Scheme
 variable {k : Type u} [Field k] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the generic search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The monoidal structure of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the full monoidal subcategory of `D(Mod_{Λ_X})`
 (`isMonoidal_boundedConstructible`). Finding it from the generic instances exceeds the default
