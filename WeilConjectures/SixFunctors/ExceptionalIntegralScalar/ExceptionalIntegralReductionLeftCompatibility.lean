@@ -379,6 +379,7 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   WeilConjectures.coefficientSequenceCommRingPresheaf
 
 -- The ambient comparison elaborates several dependent coefficient-stage identifications.
+set_option profiler true in
 /-- The canonical finite evaluation intertwines the left exceptional scalar mate.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, reduction compatibility.
 Proof: apply the faithful finite full inclusion and substitute the scalar equality
@@ -536,7 +537,7 @@ theorem integralReductionLeftCompatibility
   have hp'' := reduction_comparison_pasting δY
     ((finiteTorConstructibleIntegral l E.carrier Y).ι.mapIso ((transport.realizeF E).app K))
     _ _ _ _ py _ _ _ _ _ _ _ _ _ _ hi hproj hμ
-  simp only [Functor.map_comp, Category.assoc] at hp''
+  simp only [Functor.map_comp] at hp''
   have hr := congrArg (fun z ↦
     IY.map (eY.hom.app ((operation (.integral E)).F.obj K)) ≫ z ≫
       VY.map ((eqToIso (transport.support E)).hom.app N) ≫
