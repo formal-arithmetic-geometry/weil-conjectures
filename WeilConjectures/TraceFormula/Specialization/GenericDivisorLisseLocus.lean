@@ -108,6 +108,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 -- Reuse tensor preservation of colimits throughout the graded tensor constructions.
+-- Public declarations make these available in theorem statements; instance search stays local.
 local instance (priority := 10000) lisseTensorLeftColimit (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
@@ -283,14 +284,14 @@ theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left
               Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F)) := by
   have := hX.1
   -- the étale model of `F` and a stratification on which its homology is lisse
-  obtain ⟨F₀, hF₀, ⟨e₀⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ _).1
-    (isEtaleOrigin_of_isConstructible _ hF)
+  refine ((DerivedCategory.boundedConstructible_iff _ _ _).1
+    (isEtaleOrigin_of_isConstructible _ hF)).elim fun F₀ ⟨hF₀, ⟨e₀⟩⟩ ↦ ?_
   have key := exists_stratification_isFiniteLocallyConstantSheaf_upperStar_homology
     (A := ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) F₀
     (by exact_mod_proofs hF₀)
-  obtain ⟨R, hR⟩ := key
-  obtain ⟨V, ζV, w, hζeq, sq, hw⟩ := exists_opens_pullback_range_subset hX hh hI ζ hζ
-    R.interiorUnion R.dense_interiorUnion
+  refine key.elim fun R hR ↦ ?_
+  refine (exists_opens_pullback_range_subset hX hh hI ζ hζ
+    R.interiorUnion R.dense_interiorUnion).elim fun V ⟨ζV, w, hζeq, sq, hw⟩ ↦ ?_
   have : Nonempty (overRestrict X V).left :=
     ⟨(centreι (overRestrict X V) (I.comap (overRestrictι X V).left)).left ζV⟩
   let K := (boundedConstructibleUpperStar
