@@ -518,6 +518,7 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory WeilConjectures.integralComparisonSequenceScalarModel
 
+set_option profiler true in
 set_option maxHeartbeats 5000000 in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of any localization
@@ -654,6 +655,7 @@ theorem finiteEvaluationSystemScalarAdjunction_heq_model (W : Scheme.{u}) :
   unfold finiteEvaluationSystemScalarAdjunction
   exact mpr_heq_self _ _
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the scalar/pullback comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the inverse mate, along the fixed
@@ -745,6 +747,7 @@ instance normalizedRestrictScalars_preservesFiniteColimits (W : Scheme.{u}) (n :
       (proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)) :=
   proEtaleCoefficientRestrictScalars_preservesFiniteColimits _ _
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- comparing the semilinear-system presentation with the sequence-site presentation
 /-- The scalar evaluation square of the normalized finite evaluation is the localization of
@@ -857,6 +860,7 @@ theorem eqToIso_hom_app_val_app_heq {C : Type*} [Category C] (K : Type u) [Field
   subst h
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- sectionwise comparison of identity-on-sections squares
 /-- The ordinary cube of right-adjoint squares: direct image, restriction of scalars and
