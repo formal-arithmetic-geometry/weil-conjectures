@@ -66,11 +66,11 @@ transporting along isomorphisms. If the transported action fixes the inclusion, 
 is fixed on both sides. -/
 lemma exists_invariant_retraction_of_conjugate {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (R : T ⟶ A) (η : A ⟶ T)
-    (i : P ≅ F.obj A) (κ : F.obj T ≅ Q) (hα : α = i.hom ≫ F.map η ≫ κ.hom)
     (hR : η ≫ R = 𝟙 A)
-    {ι : Type*} (u : ι → (T ⟶ T)) (ρ : ι → (Q ⟶ Q))
-    (hρ : ∀ σ, ρ σ = κ.inv ≫ F.map (u σ) ≫ κ.hom) (hinv : ∀ σ, u σ ≫ R = R)
-    (hfix : ∀ σ, α ≫ ρ σ = α) :
+    (i : P ≅ F.obj A) (κ : F.obj T ≅ Q) (hα : α = i.hom ≫ F.map η ≫ κ.hom)
+    {ι : Type*} (u : ι → (T ⟶ T)) (hinv : ∀ σ, u σ ≫ R = R)
+    (ρ : ι → (Q ⟶ Q)) (hfix : ∀ σ, α ≫ ρ σ = α)
+    (hρ : ∀ σ, ρ σ = κ.inv ≫ F.map (u σ) ≫ κ.hom) :
     ∃ r, α ≫ r = 𝟙 P ∧ ∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α := by
   refine ⟨κ.inv ≫ F.map R ≫ i.inv, ?_, fun σ ↦ ⟨?_, ?_⟩⟩
   · rw [hα]
@@ -122,14 +122,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant
   simp only [eqToHom_refl, Category.id_comp] at hα
   rw [Functor.map_comp] at hα
   exact exists_invariant_retraction_of_conjugate (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
-    (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _
+    (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
-    (N.galoisLayerExchangeIso h Ω Λ C) hα hR
-    (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
-      (pullbackAction_fst h _ specGaloisAction_comp σ)
-      (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
+    (N.galoisLayerExchangeIso h Ω Λ C) hα _ hinv
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
-    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C) hinv
     (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
+    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

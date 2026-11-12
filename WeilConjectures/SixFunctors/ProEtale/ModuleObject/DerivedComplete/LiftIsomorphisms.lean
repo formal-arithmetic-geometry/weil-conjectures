@@ -82,6 +82,22 @@ lemma isIso_derivedReductionStep (n : ℕ)
   dsimp only [derivedReductionStep, Mod.derivedExtendScalarsReduction]
   infer_instance
 
+/-- A reduction step is compatible with the transition maps after restricting scalars. -/
+lemma map_comp_reductionTransition_derivedReductionStep (n : ℕ)
+    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
+    (s : (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
+      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L) :
+    (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.map s ≫
+        reductionTransition E n L =
+      reductionTransition E n K ≫
+        (Mod.comap (integersModPowReduction X ℓ E n)).mapDerivedCategory.map
+          (derivedReductionStep n s) :=
+  Mod.map_comp_derivedReductionTransition_app
+    (integersModPowReduction X ℓ E (n + 1)) (integersModPowTransition X ℓ E n)
+    (integersModPowReduction X ℓ E n)
+    (integersModPowReduction_comp_integersModPowTransition X ℓ E n) (A := L) (B := K) s
+
 set_option profiler true in
 /-- **Lifting isomorphisms of reductions** (König's lemma): if `L` is derived complete, and for
 every `n` the reductions `red_{n+1} K`, `red_{n+1} L` are isomorphic with finitely many morphisms
@@ -108,11 +124,7 @@ theorem exists_forall_isIso_derivedReduction_map
     (X := X) (ℓ := ℓ) (E := E) (K := K) (L := L) hL
     (fun n ↦ (t n).hom) fun n ↦ by
     rw [← congrArg Iso.hom (ht n)]
-    exact Mod.map_comp_derivedReductionTransition_app
-      (integersModPowReduction X ℓ E (n + 1 + 1)) (integersModPowTransition X ℓ E (n + 1))
-      (integersModPowReduction X ℓ E (n + 1))
-      (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1))
-      (A := L) (B := K) (t (n + 1)).hom
+    exact map_comp_reductionTransition_derivedReductionStep (n + 1) (t (n + 1)).hom
   exact ⟨f, fun n ↦ (hf n) ▸ inferInstance⟩
 
 end AlgebraicGeometry.ProEtale
