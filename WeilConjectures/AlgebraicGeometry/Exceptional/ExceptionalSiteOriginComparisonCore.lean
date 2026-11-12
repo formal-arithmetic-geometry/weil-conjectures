@@ -407,9 +407,10 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     change (β.hom.app M).hom.app U y = _ at hb
     simp only [ht, ha, hb]
     dsimp only [id] at h
-    simp only [h]
-    exact (((S.levelAdj n).counit.app M).val.app
-      ((Scheme.toProEt W).op.obj U)).hom.map_add _ _
+    exact (congrArg (fun z ↦ ((S.levelAdj n).counit.app M).val.app
+      ((Scheme.toProEt W).op.obj U) z) h).trans
+        ((((S.levelAdj n).counit.app M).val.app
+          ((Scheme.toProEt W).op.obj U)).hom.map_add _ _)
   have hsmul (M) (U : W.Etaleᵒᵖ) (q : (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))
       (x : (R.obj M).val.obj U) :
       (β.hom.app M).hom.app U
@@ -479,7 +480,8 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     simp only [ha] at ht
     simp only [ht, hb]
     dsimp only [id] at h
-    simp only [h]
+    refine (congrArg (fun z ↦ ((S.levelAdj n).counit.app M).val.app
+      ((Scheme.toProEt W).op.obj U) z) h).trans ?_
     have hconst := constantSection_apply (Scheme.ProEt.topology W)
       (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) q ((Scheme.toProEt W).op.obj U)
       ((S.singleton.hom).hom.app ((Scheme.toProEt W).op.obj U)
@@ -674,6 +676,20 @@ private theorem exceptional_inverse_scalar_transpose
       dsimp only [Functor.comp_obj]
       rw [Category.comp_id]
 
+private theorem exceptional_transpose_conjugate
+    {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    {X X' : C} {Y Y' : D} (eX : X ≅ X') (eY : Y ≅ Y')
+    (f : X ⟶ G.obj Y) (g : F.obj X' ⟶ Y')
+    (h : f ≫ G.map eY.hom = eX.hom ≫ adj.homEquiv _ _ g) :
+    (adj.homEquiv X Y).symm f = F.map eX.hom ≫ g ≫ eY.inv := by
+  apply (adj.homEquiv X Y).injective
+  simp only [Equiv.apply_symm_apply, adj.homEquiv_naturality_left,
+    adj.homEquiv_naturality_right]
+  apply (cancel_mono (G.map eY.hom)).mp
+  simpa only [Category.assoc, ← G.map_comp, eY.inv_hom_id, G.map_id,
+    Category.comp_id] using h
+
 set_option trace.profiler true in
 -- Assemble the derived comparison and all evaluation and scalar-mate clauses.
 /-- The site comparison core, before the final evaluation-origin projection.
@@ -842,23 +858,8 @@ theorem exceptionalSiteOriginComparison_core
       have he : ((PX.scalar h).derivedAdj.homEquiv _ _).symm
           ((PX.transition h).app (I.system.inverse.obj M)) =
           (PX.scalar h).derived.map em.hom ≫ g ≫ en.inv := by
-        apply ((PX.scalar h).derivedAdj.homEquiv _ _).injective
-        simp only [Equiv.apply_symm_apply, (PX.scalar h).derivedAdj.homEquiv_naturality_left,
-          (PX.scalar h).derivedAdj.homEquiv_naturality_right]
-        dsimp only [Functor.comp_obj] at hg ⊢
-        simp only [hg]
-        have ht := I.inverseTransition h M
-        change (PX.transition h).app (I.system.inverse.obj M) ≫
-            (PX.scalar h).restriction.map en.hom = em.hom ≫
-            (I.level m).inverse.map ((PE.transition h).app M) ≫
-            (I.restrictedInverse h).hom.app ((PE.evaluation n).obj M) at ht
-        have hc : (PX.scalar h).restriction.map en.inv ≫
-            (PX.scalar h).restriction.map en.hom = 𝟙 _ :=
-          ((PX.scalar h).restriction.mapIso en).inv_hom_id
-        apply (cancel_mono ((PX.scalar h).restriction.map en.hom)).mp
-        simp only [Category.assoc, hc]
-        dsimp only [Functor.comp_obj] at ht ⊢
-        simpa only [Category.comp_id] using ht
+        apply exceptional_transpose_conjugate (PX.scalar h).derivedAdj em en _ g
+        simpa only [hg, Category.assoc] using I.inverseTransition h M
       rw [he]
       dsimp only [g]
       infer_instance
