@@ -200,6 +200,7 @@ private theorem diagonalLocalChern_pullback_sum_factorization (l : ℕ) [Fact l.
           (derivedUpper Λ hX).map (cF.derived ≫ eX.localChern l X z) ≫ line.shift =
         L'.map (c.derived ≫ γ) ≫ v +
           L'.map c.derived ≫ (cF'.derived ≫ eX'.localChern l X' z') := by
+  dsimp only
   let Λ := Profinite.continuousMapRingObj.{u} ℤ_[l]
   let L' := derivedUpper Λ f'
   obtain ⟨M, hM⟩ := hPic
@@ -212,17 +213,10 @@ private theorem diagonalLocalChern_pullback_sum_factorization (l : ℕ) [Fact l.
     hunit hunit' p p' eX eX' cF cF' line c z (w + z') hz hsum
   obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f' hunit'
     p' eX' cF' M w hw
-  refine ⟨γ, v, ?_⟩
-  calc
-    _ = L'.map c.derived ≫ cF'.derived ≫ eX'.localChern l X' (w + z') := hpull
-    _ = L'.map c.derived ≫ (cF'.derived ≫ eX'.localChern l X' w) +
-        L'.map c.derived ≫ (cF'.derived ≫ eX'.localChern l X' z') := by
-      rw [localChern_add]
-      simp only [Preadditive.comp_add]
-    _ = _ := by
-      apply congrArg (fun x ↦ x + L'.map c.derived ≫
-        (cF'.derived ≫ eX'.localChern l X' z'))
-      exact map_comp_factor L' c.derived γ v _ hbase
+  refine ⟨γ, v, hpull.trans ?_⟩
+  rw [localChern_add]
+  simp only [Preadditive.comp_add]
+  exact congrArg₂ (· + ·) (map_comp_factor L' c.derived γ v _ hbase) rfl
 
 set_option linter.unusedVariables false in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
