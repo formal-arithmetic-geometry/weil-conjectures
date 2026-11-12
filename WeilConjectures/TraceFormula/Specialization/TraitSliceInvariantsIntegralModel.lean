@@ -243,9 +243,8 @@ set_option linter.style.whitespace false in
 automorphism `galoisEquiv⁻¹ τ`. -/
 lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (τ : Gal(traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
-      (traitGenericField K)/traitTensorCompositum (PowerSeries K) (traitGenericField k')
-        (traitGenericField K)))
+    (τ : Gal(traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K) /
+      traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K)))
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C ≫
