@@ -48,8 +48,6 @@ private theorem transport_biprod_comparison
   · simpa only [Category.assoc, biprod.map_snd, biprod.map_snd_assoc] using
       congrArg (fun k ↦ biprod.snd ≫ k) i₂.hom.w.symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
 (blueprint: lem-pc-standard-single-union-homotopy-chain-data).
