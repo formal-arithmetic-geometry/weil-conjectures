@@ -109,9 +109,16 @@ private theorem baseChange_naturality
     ← adj'.homEquiv_naturality_right, ht]
 
 
-set_option maxHeartbeats 500000 in
-set_option profiler true in
--- Tensor representative transport needs additional instance and equality elaboration.
+-- Construct tensor-total coproducts directly, avoiding repeated colimit instance searches.
+private theorem relativelyFlat_tensorHasMapBifunctor (X : Scheme.{u})
+    (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    CochainComplex.HasMapBifunctor P G
+      (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)) := by
+  intro n
+  exact ((Scheme.Modules.globalPullbackMatesColimits X).has_colimits_of_shape _).has_colimit _
+
+attribute [local instance] relativelyFlat_tensorHasMapBifunctor
+
 /-- The canonical base-change map for a relatively flat bounded-above complex is
 invertible. `P` is a K-flat representative of `E` (`e`), so the total tensor complex
 `Tot(P ⊗ G)` represents `E ⊗^L G`; `α` is any identification of the two (invertibility
