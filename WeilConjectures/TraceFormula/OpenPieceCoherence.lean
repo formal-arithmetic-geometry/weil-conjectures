@@ -261,8 +261,8 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
       (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app K)
     (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
       (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app _)
-    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-      sq.toCommSq.flip).hom.app K
+    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq.flip).hom.app K)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
     (boundedConstructibleLowerShriekCompToPoint ℓ j) ?_ ?_
