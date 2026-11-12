@@ -341,7 +341,7 @@ theorem canonical_integral_scalar_square
   let eO := e₀
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
-  letI := ordinaryComparison_shift l Ω T a b h
+  letI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
   let rF : IE ⋙ IY ≅ IX := Iso.refl _
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
   letI := finiteTorIntegralShift_compatibility_cached l Ω E T
