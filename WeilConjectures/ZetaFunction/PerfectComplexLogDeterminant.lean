@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.CategoricalTrace
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceLaws
+public import WeilConjectures.Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
 
 /-!
@@ -50,20 +51,6 @@ namespace DerivedCategory
 
 variable {L : Type u} [Field L]
 
-/-- The trace of the endomorphism of a module induced by `f` through an isomorphism `e` is the
-trace of `f`. -/
-lemma linearMapTrace_eq_of_iso {M N : ModuleCat.{u} L} (e : M ≅ N) (f : M ⟶ M) (g : N ⟶ N)
-    (h : f ≫ e.hom = e.hom ≫ g) :
-    LinearMap.trace L M f.hom = LinearMap.trace L N g.hom := by
-  have hg : g = e.inv ≫ f ≫ e.hom := by rw [h, Iso.inv_hom_id_assoc]
-  rw [hg, ← LinearMap.trace_conj' f.hom e.toLinearEquiv]
-  rfl
-
-/-- The trace of an endomorphism of a zero module is zero. -/
-lemma linearMapTrace_eq_zero_of_isZero {M : ModuleCat.{u} L} (hM : IsZero M) (f : M ⟶ M) :
-    LinearMap.trace L M f.hom = 0 := by
-  rw [hM.eq_of_src f 0, ModuleCat.hom_zero, map_zero]
-
 variable [HasDerivedCategory.{u} (ModuleCat.{u} L)]
 
 /-- **The trace over a field is the supertrace on cohomology**: for a perfect complex `P` of
@@ -100,7 +87,7 @@ theorem IsPerfect.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map
     (homologyFunctor (ModuleCat.{u} L) i).mapIso e ≪≫ (homologyFunctorFactors _ i).app C
   have htr (i : ℤ) : LinearMap.trace L _ ((homologyFunctor (ModuleCat.{u} L) i).map w).hom =
       LinearMap.trace L _ (HomologicalComplex.homologyMap v i).hom := by
-    refine linearMapTrace_eq_of_iso (eH i) _ _ ?_
+    refine ModuleCat.trace_hom_eq_of_iso (eH i) _ _ ?_
     have h := (homologyFunctorFactors (ModuleCat.{u} L) i).hom.naturality v
     simp only [Functor.comp_map] at h
     simp only [eH, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, ← Functor.map_comp_assoc,
@@ -108,10 +95,10 @@ theorem IsPerfect.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map
     rfl
   have hzero (i : ℤ) (hi : IsZero ((homologyFunctor (ModuleCat.{u} L) i).obj P)) :
       LinearMap.trace L _ (HomologicalComplex.homologyMap v i).hom = 0 :=
-    (htr i).symm.trans (linearMapTrace_eq_zero_of_isZero hi _)
+    (htr i).symm.trans (ModuleCat.trace_hom_eq_zero_of_isZero hi _)
   have hzero' (i : ℤ) (hi : i ∉ Finset.Icc a b) :
       LinearMap.trace L _ (HomologicalComplex.homologyMap v i).hom = 0 := by
-    refine linearMapTrace_eq_zero_of_isZero ?_ _
+    refine ModuleCat.trace_hom_eq_zero_of_isZero ?_ _
     rcases not_and_or.1 (Finset.mem_Icc.not.1 hi) with h | h
     · exact (C.exactAt_of_isGE a i (by lia)).isZero_homology
     · exact (C.exactAt_of_isLE b i (by lia)).isZero_homology
@@ -139,7 +126,6 @@ theorem IsPerfect.trace_smul {P : DerivedCategory (ModuleCat.{u} L)} (hP : P.IsP
     letI := braidedCategory' (ModuleCat.{u} L)
     MonoidalCategory.trace (r • w) = r • MonoidalCategory.trace w := by
   obtain ⟨s, hs⟩ := hP.exists_finset_isZero_homology
-  have := fun i ↦ homologyFunctor_linear L i
   rw [hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map _ s hs,
     hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map _ s hs,
     Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, smul_smul]
@@ -147,15 +133,6 @@ theorem IsPerfect.trace_smul {P : DerivedCategory (ModuleCat.{u} L)} (hP : P.IsP
   rw [Finset.mul_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [Functor.map_smul, ModuleCat.hom_smul, map_smul, smul_eq_mul, mul_smul_comm]
-
-omit [HasDerivedCategory.{u} (ModuleCat.{u} L)] in
-/-- A functor to `L`-modules sends powers of an endomorphism to powers of linear maps. -/
-lemma hom_map_pow {D : Type*} [Category D] (F : D ⥤ ModuleCat.{u} L) {X : D} (v : End X)
-    (m : ℕ) : (F.map (v ^ m)).hom = (F.map v).hom ^ m := by
-  induction m with
-  | zero => simp [End.one_def]; rfl
-  | succ m ih => rw [pow_succ, End.mul_def, F.map_comp, ModuleCat.hom_comp, ih, pow_succ,
-      Module.End.mul_eq_comp]
 
 /-- Blueprint `lemma-logarithm-determinant--3`: for a field `L` of characteristic zero, a perfect
 complex `P` of `D(L)` and an endomorphism `v` of `P`, with
@@ -190,6 +167,12 @@ theorem IsPerfect.inv_alternatingCharpolyRevProd_eq_exp [CharZero L]
     rw [IsPerfect.categoricalTrace,
       hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map (v ^ m) s hs,
       unitEndScalar_algebraMap]
-    exact Finset.sum_congr rfl fun i _ ↦ by rw [hom_map_pow]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    have h : ((homologyFunctor (ModuleCat.{u} L) i).map (v ^ m)).hom =
+        ((homologyFunctor (ModuleCat.{u} L) i).map v).hom ^ m :=
+      (congrArg ModuleCat.Hom.hom
+        (map_pow (Functor.mapEnd P (homologyFunctor (ModuleCat.{u} L) i)) v m)).trans
+          (map_pow (ModuleCat.endRingEquiv _) _ m)
+    rw [h]
 
 end DerivedCategory

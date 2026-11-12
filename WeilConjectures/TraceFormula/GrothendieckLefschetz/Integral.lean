@@ -97,7 +97,8 @@ theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I 
     (cx : ∀ x : geometricFixedPoint f m, Cone (S.stalkTower x.1 (β x) (hβ x)).restrict)
     (hcx : ∀ x : geometricFixedPoint f m, IsHomotopyLimit (cx x))
     [∀ x : geometricFixedPoint f m, HasRightDual (cx x).pt]
-    [∀ (x : geometricFixedPoint f m) (n : ℕ), HasRightDual ((S.stalkTower x.1 (β x) (hβ x)).obj n)]
+    [∀ (x : geometricFixedPoint f m) (n : ℕ),
+      HasRightDual ((S.stalkTower x.1 (β x) (hβ x)).obj n)]
     (Vx : ∀ x : geometricFixedPoint f m, (cx x).pt ⟶ (cx x).pt)
     (hVx : ∀ x : geometricFixedPoint f m, (S.stalkTower x.1 (β x) (hβ x)).IsLift (cx x)
       ((F.iterate m).localOperatorFamily x.2.2 (β x) (hβ x)) (Vx x)) :

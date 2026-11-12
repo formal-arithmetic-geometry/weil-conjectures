@@ -80,7 +80,7 @@ lemma unitEndScalar_id : unitEndScalar R (𝟙 _) = 1 := by
   simp [unitEndScalar]
 
 /-- The cohomology functors `Hⁿ : D(A) ⥤ Mod_A` are `A`-linear. -/
-lemma homologyFunctor_linear (n : ℤ) : (homologyFunctor (ModuleCat.{u} R) n).Linear R := by
+instance homologyFunctor_linear (n : ℤ) : (homologyFunctor (ModuleCat.{u} R) n).Linear R := by
   have : (HomologicalComplex.shortComplexFunctor (ModuleCat.{u} R) (ComplexShape.up ℤ) n).Linear
       R := ⟨fun _ _ ↦ rfl⟩
   have hF : (HomologicalComplex.homologyFunctor (ModuleCat.{u} R) (ComplexShape.up ℤ) n).Linear R :=
@@ -100,7 +100,6 @@ lemma homologyFunctor_linear (n : ℤ) : (homologyFunctor (ModuleCat.{u} R) n).L
 @[simp]
 lemma unitEndScalar_algebraMap (r : R) :
     unitEndScalar R (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r) = r := by
-  have := homologyFunctor_linear R 0
   rw [unitEndScalar, Algebra.algebraMap_eq_smul_one, End.one_def, Functor.map_smul,
     CategoryTheory.Functor.map_id]
   simp

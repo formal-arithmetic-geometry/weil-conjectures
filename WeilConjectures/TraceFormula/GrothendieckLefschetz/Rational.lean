@@ -28,7 +28,11 @@ integral trace formula
 `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.trace_eq_finsum_trace`.
 
 The scalar extension `G` is any additive braided monoidal functor `D(𝒪_E) ⥤ D(E)`, and the
-scalar `π_E^{-Nm}` is any `t ∈ E`.
+scalar `π_E^{-Nm}` is any `t ∈ E`. No `E`-coefficient sheaf appears in the statement: this is the
+reduction step of clause `--3`, the integral formula transported along `G` and scaled by `t`. The
+identification of `RΓ_c(X, K_E)`, of the stalks `(K_E)_x̄` and of their Frobenius operators with
+`G(P_R)`, `G(P_{x̄,R})` and `t • G(V)`, `t • G(V_x̄)` (clause `--2` of
+`lemma-integral-models-rational-frobenius-correspondences`) is not part of this file.
 -/
 
 @[expose] public section
@@ -62,6 +66,9 @@ local Frobenius operators `t • G(V_x̄)` on the stalks `(K_E)_x̄ = G(P_{x̄,R
 ```
 tr_E(Frob_{X,K_E}^m ∣ RΓ_c(X, K_E)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_E(Frob_{x̄,m} ∣ (K_E)_x̄).
 ```
+This is the reduction step only: the statement is about `t • G(V)` and `t • G(V_x̄)` for an
+arbitrary braided functor `G` and scalar `t`, and does not mention an `E`-coefficient sheaf; the
+identification of the Frobenius operators of `K_E` with them is left to the caller.
 -/
 theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
     (hI : I = Ideal.span {ϖ})
