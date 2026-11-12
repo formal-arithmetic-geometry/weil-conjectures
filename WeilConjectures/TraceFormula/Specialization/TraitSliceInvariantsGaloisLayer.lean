@@ -222,7 +222,6 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
     (baseChangeHom hM b hb v hv) A hM1
   trace "PH112: cartesian comparison accepted"
-  trace_state
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -271,6 +270,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
   refine hK₀.elim fun e htors ↦ ?_
   refine ((baseChangeGaloisModel hM b hb v hv)
     |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
+      (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
       (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)) ℓ
       (fun M' _ ↦ IntermediateField.not_dvd_finrank_of_forall_finiteGalois
@@ -289,11 +289,20 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (baseChangeGaloisResidue hM b hb v hv)
     (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
   trace "PH112: layer action ready"
-  have result := finish
+  have geometricFinish := finish
     (by trace "PH112: total"; exact baseChangeToGaloisModel_comp_total hM b hb v hv)
     (by trace "PH112: generic"; exact baseChangeToGaloisModel_comp_generic hM b hb v hv)
     (by trace "PH112: rho"; exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
-    eG L₁ act actΩ
+  trace "PH112: geometry accepted"
+  have equivFinish := geometricFinish eG
+  trace "PH112: equivalence accepted"
+  have fieldFinish := equivFinish L₁
+  trace "PH112: finite field accepted"
+  have actFinish := fieldFinish act
+  trace "PH112: base action accepted"
+  have avgFinish := actFinish actΩ
+  trace "PH112: layer action accepted"
+  have result := avgFinish
     (by trace "PH112: multiplication"; exact autAction_baseChangeAut_mul hM b hb v hv _)
     (by
       trace "PH112: intertwining"
