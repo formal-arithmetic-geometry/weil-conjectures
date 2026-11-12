@@ -586,7 +586,7 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     simp only [Category.assoc] at hnat''
     have haug := congrArg (fun g ↦ DerivedCategory.Q.map g)
       (augmented_tensor_pull a S t f C)
-    dsimp only [wY]
+    dsimp only [wY] at hnat'' haug ⊢
     simp only [Functor.map_comp, Category.assoc] at haug ⊢
     apply Eq.trans hnat''
     exact congrArg
