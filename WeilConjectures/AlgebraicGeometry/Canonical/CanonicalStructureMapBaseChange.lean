@@ -108,7 +108,6 @@ private theorem single_pullback_naturality
   with_unfolding_all
     simpa only [Scheme.Modules.canonicalSinglePullbackMap, cast_eq, Category.assoc] using! hh
 
-set_option profiler true in
 -- The right-derived unit is compared with localized single-complex morphisms.
 private theorem single_directImage_naturality
     [∀ Y : Scheme.{u},
@@ -136,6 +135,7 @@ private theorem single_directImage_naturality
     simpa only [Scheme.Modules.canonicalSingleDirectImageMap, cast_eq,
       Category.assoc] using! hh.symm
 
+-- Paste the comparison squares around the ordinary structure-map identity.
 private theorem structure_map_pasting
     {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
     {A₀ A₁ A₂ A₃ A₄ A₅ : D} {M₀ M₁ M₂ M₃ M₄ : C}
@@ -159,8 +159,6 @@ private theorem structure_map_pasting
       simp only [Functor.map_comp, Category.assoc]
     _ = _ := by rw [h]; simp only [Functor.map_comp, Category.assoc]
 
-set_option profiler true in
--- Naturality rewrites elaborate the selected derived functors and localization maps.
 /-- The canonical structure maps commute with the pinned derived exchange map.
 No cartesianness, flatness, vanishing or invertibility assumption is needed.
 Source: Stacks Project, Tag 08HY, mate description, and Tag 0096, pullback of modules.
