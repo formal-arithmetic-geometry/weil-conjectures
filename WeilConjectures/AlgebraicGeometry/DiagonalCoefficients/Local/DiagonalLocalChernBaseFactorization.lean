@@ -193,7 +193,22 @@ private theorem limit_comparison_naturality
   rw [reassoc_of% (σ.naturality w)]
   rw [← T.map_comp_assoc, hw, T.map_comp]
   simp only [Category.assoc]
-  rw [τ.naturality θ]
+  have hτ := τ.naturality θ
+  simp only [Functor.comp_map] at hτ
+  rw [hτ]
+
+private theorem map_naturality_postcomp
+    {A B C D E : Type*}
+    [Category* A] [Category* B] [Category* C] [Category* D] [Category* E]
+    (R : A ⥤ B) (U : B ⥤ D) (V : A ⥤ C) (T : C ⥤ D) (L : D ⥤ E)
+    (σ : R ⋙ U ⟶ V ⋙ T) {X Y : A} {Z : B} {W : E}
+    (a : Z ⟶ R.obj X) (f : X ⟶ Y) (u : W ⟶ L.obj (U.obj Z)) :
+    (u ≫ L.map (U.map a ≫ σ.app X)) ≫ L.map (T.map (V.map f)) =
+      u ≫ L.map (U.map (a ≫ R.map f) ≫ σ.app Y) := by
+  have h := congrArg L.map (σ.naturality f)
+  simp only [Functor.comp_map, Functor.map_comp] at h
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← h]
 
 set_option profiler true in
 private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
@@ -305,15 +320,10 @@ private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     p.Rf.R p.LX.R p.LS.R p.Rt.R p.completed.iso.hom p.limits.iso.hom
     b₀ w _ (p.coefficientsX.unitMap l E p.LX)
     (p.restrictionX.F.mapDerivedCategory.map θX) hw]
-  have hv := p.varying.hom.naturality θX
-  simp only [Functor.comp_map] at hv
-  have hvL := congrArg (fun k ↦ p.LS.R.map k) hv
-  simp only [Functor.map_comp] at hvL
-  have hh := congrArg (fun k ↦ k ≫
-    p.LS.R.map (p.Rt.R.map (p.restrictionX.F.mapDerivedCategory.map θX))) hu
-  simp only [Functor.map_comp, Category.assoc, Functor.comp_map] at hh ⊢
-  rw [← hvL] at hh
-  convert! hh using 1
+  rw [hu]
+  exact map_naturality_postcomp R p.restrictionS.F.mapDerivedCategory
+    p.restrictionX.F.mapDerivedCategory p.Rt.R p.LS.R p.varying.hom a θX
+    (p.coefficientsS.unitMap l E p.LS)
 
 private theorem realized_factor_calculation
     {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]

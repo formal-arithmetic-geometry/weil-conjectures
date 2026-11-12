@@ -290,7 +290,7 @@ private theorem adjunct_transport_calculation
       S.map_id, Category.comp_id] using h
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% (σ.naturality z), ← Category.assoc, hb]
-  simp only [Category.assoc, Functor.comp_map]
+  simp only [Category.assoc]
 
 private theorem map_comp_naturality_square
     {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
