@@ -520,8 +520,13 @@ theorem embeddedFirstReductionOrdinary
       integralModelsEmbedded_scalar_square ℓ E π hπ X,
       integralModelsEmbedded_residue_square ℓ E π X,
       integralModelsEmbedded_reduction_square ℓ E π hπ X⟩
-  obtain ⟨i⟩ := smallQuotientComparisonIso X φ q e p
-    (first_reduction_square ℓ E π X) hd.1 hd.2
+  have hi : Nonempty (Mod.comap φ ⋙ Mod.extendScalars (q ≫ e) ≅
+      Mod.extendScalars p) := by
+    apply smallQuotientComparisonIso X φ q e p
+    · exact first_reduction_square ℓ E π X
+    · exact hd.1
+    · exact hd.2
+  obtain ⟨i⟩ := hi
   exact ⟨Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (Mod.comap φ) (Mod.extendScalarsComp q e).symm ≪≫ i⟩
 
