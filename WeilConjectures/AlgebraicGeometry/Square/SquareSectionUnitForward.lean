@@ -96,6 +96,7 @@ private theorem unitQ_eq {C D : Type*} [Category C] [Category D] [Abelian C] [Ab
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
+set_option trace.profiler true in
 private theorem square_unitQ {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (I : CochainComplex Z.Modules ℤ) :
@@ -138,6 +139,7 @@ private theorem square_unitQ {X S Z T : Scheme.{u}}
 
 set_option maxHeartbeats 500000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
+set_option trace.profiler true in
 private theorem sections_unit {X S : Scheme.{u}} (f : X ⟶ S)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     (RingedSpace.inverseOpenUnitQ f.toLRSHom.toShHom).app K ≫
@@ -283,6 +285,7 @@ private theorem sections_unitAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
 set_option maxHeartbeats 2400000 in
 -- Checking the common cochain carriers requires the larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
+set_option trace.profiler true in
 private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -350,6 +353,7 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
 set_option maxHeartbeats 400000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
+set_option trace.profiler true in
 private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -533,6 +537,7 @@ private theorem injectiveComparison_transport {Z T : Scheme.{u}} (k : Z ⟶ T)
 
 set_option maxHeartbeats 600000 in
 -- The final calculation elaborates several derived and cochain comparison carriers.
+set_option trace.profiler true in
 private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (G : Z.Modules) (J : InjectiveResolution G) (q : ℕ) (V : S.Opens) :
