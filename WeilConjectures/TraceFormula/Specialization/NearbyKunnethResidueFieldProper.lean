@@ -67,6 +67,7 @@ set_option hygiene false in
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
 -- the Künneth maps of the product are large terms
+set_option profiler true in
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
 Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`, `N` of finite
