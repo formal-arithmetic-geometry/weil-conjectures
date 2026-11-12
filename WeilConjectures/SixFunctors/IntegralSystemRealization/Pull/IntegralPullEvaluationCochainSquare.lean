@@ -83,20 +83,8 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
     let target ← Lean.Elab.Tactic.getMainTarget
     let proof ← Lean.Elab.Term.elabTerm (← `(h)) none
     let proofType ← Lean.Meta.inferType proof
-    let rec differences : Nat → Lean.Expr → Lean.Expr → List (Lean.Expr × Lean.Expr)
-      | 0, a, b => [(a, b)]
-      | fuel + 1, a, b =>
-        if a == b then [] else
-        match a, b with
-        | .app f x, .app g y =>
-          (differences fuel f g ++ differences fuel x y).take 8
-        | .mdata _ a, b => differences fuel a b
-        | a, .mdata _ b => differences fuel a b
-        | .proj s i a, .proj t j b =>
-          if s == t && i == j then differences fuel a b else [(a, b)]
-        | _, _ => [(a, b)]
-    for (a, b) in differences 100 target proofType do
-      Lean.logInfo m!"DIFFERENCE: {a}\nVERSUS: {b}"
+    Lean.logInfo m!"GOAL RAW: {repr target}"
+    Lean.logInfo m!"PROOF RAW: {repr proofType}"
   exact h
 
 end WeilConjectures.IntegralSystemRealization
