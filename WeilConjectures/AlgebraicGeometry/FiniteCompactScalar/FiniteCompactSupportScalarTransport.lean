@@ -207,7 +207,6 @@ private theorem compactSiteIso_factors
     Functor.mapIso_hom, asIso_hom, Functor.map_comp,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Category.id_comp, Category.comp_id, Category.assoc]
-  try dsimp only [Functor.comp_obj]
   simp only [sfIntrinsicCompactSupport, Functor.comp_map]
   try simp only [
     (Etale.lowerStar
@@ -221,7 +220,6 @@ private theorem compactSiteIso_factors
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory.map_id,
     Category.id_comp]
   try simp only [← (sfIntrinsicDerivedEquivalence Y A).functor.map_comp_assoc]
-  try simp only [DerivedCategory.Plus.ι.map_comp, Category.assoc]
   erw [hn, he]
   try simp only [(sfIntrinsicDerivedEquivalence Y A).functor.map_comp, Category.assoc]
   erw [reassoc_of% hd]

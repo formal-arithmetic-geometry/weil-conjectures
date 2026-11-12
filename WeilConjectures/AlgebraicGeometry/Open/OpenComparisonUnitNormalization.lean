@@ -244,7 +244,6 @@ theorem openComparison_unit_normalization (A : Type (u + 1)) [CommRing A]
       exact (openComparisonRestrictionIso_conjugate A j).trans
         (openComparisonRestriction_directImage_mate A j).symm
     have hb : mateEquiv cX cU (mateEquiv e d β) = θ := by
-      change (mateEquiv cX cU (mateEquiv e d β)) = _
       rw [iterated_mateEquiv_conjugateEquiv]
       exact congrArg Iso.hom
         ((conjugateIsoEquiv (e.comp cX) (cU.comp d)).apply_symm_apply

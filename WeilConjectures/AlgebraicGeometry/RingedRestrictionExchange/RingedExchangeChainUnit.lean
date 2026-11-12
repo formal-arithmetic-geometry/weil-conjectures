@@ -102,7 +102,6 @@ private theorem cochainUnit_eq_chainComparison [Abelian.HasKInjectiveResolutions
   repeat first
     | erw [CategoryTheory.Functor.map_id]
     | erw [Category.id_comp]
-    | erw [Category.comp_id]
 end Comparisons
 
 section GenericMate

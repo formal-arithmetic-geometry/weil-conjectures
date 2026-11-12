@@ -1372,7 +1372,7 @@ theorem gamma_identities :
         Category.assoc] using hh'
     have hm := congrArg (mateEquiv (adj R φ p) (adj R φ p)) ha
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      TwoSquare.mk, Category.assoc] at hm
+      Category.assoc] at hm
     rw [mate_whisker] at hm
     have hmM := congrArg (fun s ↦ s.app M) hm
     have hh : (jId R φ X).inv.app ((P R φ p).obj M) ≫

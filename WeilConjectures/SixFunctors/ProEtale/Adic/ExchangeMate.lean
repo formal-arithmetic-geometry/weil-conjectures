@@ -76,7 +76,6 @@ lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a 
     | rw [ObjectProperty.FullSubcategory.comp_hom]
     | rw [NatTrans.comp_app]
     | rw [lowerStar_map_hom_app']
-    | rw [Functor.map_comp]
     | rw [lowerStarComp_hom_app_hom_app]
     | rw [lowerStarComp_inv_app_hom_app]
     | rw [lowerStarCongr_hom_app_hom_app]
@@ -112,7 +111,8 @@ lemma conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
         ((adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction.comp
           (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
       (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv =
-    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
+    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom
+      (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
@@ -245,7 +245,8 @@ lemma mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom :
         (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction
         (TwoSquare.mk _ _ _ _
           (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)) =
-    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
+    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom
+      (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
