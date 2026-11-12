@@ -20,7 +20,6 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- Construct and prove coherence with abstract monoidal categories, so the
 -- categorical identities do not unfold either site's sheafification tensor.
-set_option profiler true in
 private theorem nativeChainTensorComparison
     {B : Type*} [Category* B] [Preadditive B] [HasZeroObject B]
     [MonoidalCategory B] [MonoidalPreadditive B]
@@ -144,12 +143,10 @@ private theorem nativeChainTensorComparison
     simp only [Iso.inv_hom_id_app_assoc]
     erw [hl, Category.comp_id, reassoc_of% hr]
 
-
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
-set_option profiler true in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
@@ -168,6 +165,7 @@ structure NativeRingedForgetTensorChainComparison where
     b.forget.map (RingedForgetTensorTransposition.tensorSummand b.J b.R P Q p q n h) ≫
         (tensor.hom.app (P, Q)).f n =
       (by
+        -- Infer the composite before comparing the two total-tensor presentations.
         exact b.underived.tensor.hom.app (P.X p, Q.X q) ≫
           RingedForgetTensorTransposition.tensorSummand b.K b.Q
             ((b.forget.mapHomologicalComplex (.up ℤ)).obj P)
@@ -180,7 +178,6 @@ structure NativeRingedForgetTensorChainComparison where
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ F.obj N) ≫
         (α_ (F.obj P) (F.obj Q) (F.obj N)).hom
 
-set_option profiler true in
 /-- Restriction has the comparison obtained by summing its underived tensorators.
 Its summand equations determine it uniquely.
 Source: Stacks 06YN and 0FPT
