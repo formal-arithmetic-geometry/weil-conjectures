@@ -353,6 +353,17 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       ph112_remaining "PH112: average; remaining:"
       exact hL₁.2)
   ph112_remaining "PH112: averaging application accepted; remaining:"
-  exact result
+  refine result.elim fun V hV ↦ ?_
+  refine hV.elim fun iV hV ↦ ?_
+  ph112_remaining "PH112 quotient witnesses"
+  refine ⟨V, iV, ?_, ?_⟩
+  · intro σ hσ
+    exact hV.1 σ hσ
+  · ph112_remaining "PH112 triviality transferred"
+    refine hV.2.elim fun r hr ↦ ?_
+    refine ⟨r, ?_, ?_⟩
+    · exact hr.1
+    · ph112_remaining "PH112 retraction transferred"
+      exact hr.2
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
