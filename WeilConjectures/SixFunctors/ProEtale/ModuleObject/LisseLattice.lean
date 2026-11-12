@@ -10,13 +10,17 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeDesc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeFiniteCover
 
 /-!
-# Lattices of lisse `E`-sheaves on regular schemes
+# Lattices of lisse `E`-sheaves on normal and regular schemes
 
 Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, and `S`
-a connected regular Noetherian scheme. Every lisse (locally free) `E_S`-module `L` has a lattice:
-there is a locally free `𝒪_{E,S}`-module `L₀` with `E_S ⊗_{𝒪_{E,S}} L₀ ≅ L`
-(`AlgebraicGeometry.ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso`, blueprint
-`sk-lem-stratified-lattice`, first stage).
+a connected Noetherian scheme whose local rings are integrally closed domains. Every lisse
+(locally free) `E_S`-module `L` has a lattice: there is a locally free `𝒪_{E,S}`-module `L₀` with
+`E_S ⊗_{𝒪_{E,S}} L₀ ≅ L`
+(`ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClosed_stalk`,
+blueprint `lemma-global-lattice-normal-scheme`). In particular this holds on a connected regular
+Noetherian scheme
+(`AlgebraicGeometry.ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso`,
+blueprint `sk-lem-stratified-lattice`, first stage).
 
 The proof:
 
@@ -25,9 +29,10 @@ The proof:
   being connected (`AlgebraicGeometry.ProEtale.rank_eq_of_comp_eq`);
 * the values of the transition matrices of the trivialisations form a continuous `GL_n(E)`-valued
   cocycle (`AlgebraicGeometry.ProEtale.exists_transitionValues`);
-* on the regular scheme `S`, the cocycle is conjugate to a `GL_n(𝒪_E)`-valued one by a lattice-
-  valued twisted section (`AlgebraicGeometry.exists_integral_conj_of_transitionValues`, from the
-  lattice theorem `AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`);
+* the cocycle is conjugate to a `GL_n(𝒪_E)`-valued one by a lattice-valued twisted section
+  (`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk`, from
+  the lattice theorem
+  `AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`);
 * the trivialisations changed accordingly have integral transition matrices, so the lattices
   spanned by the bases glue to `L₀`
   (`ProEtale.CondensedRing.exists_isLocallyFree_extendScalars_iso_of_isDefinedOver`).
@@ -60,10 +65,11 @@ lemma isZero_mod_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
   ext : 1
   exact hX.eq_of_src _ _
 
-/-- **Lisse `E`-sheaves on connected regular Noetherian schemes have lattices** (blueprint
-`sk-lem-stratified-lattice`, first stage). See the module docstring. -/
-theorem exists_isLocallyFree_padicIntegers_extendScalars_iso {S : Scheme.{u}} [IsNoetherian S]
-    [IsRegular S] [ConnectedSpace S]
+/-- **Lisse `E`-sheaves on connected normal Noetherian schemes have lattices** (blueprint
+`lemma-global-lattice-normal-scheme`). See the module docstring. -/
+theorem exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClosed_stalk
+    {S : Scheme.{u}} [IsNoetherian S] [ConnectedSpace S]
+    (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s))
     (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E.1) S))
     (hL : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E.1) S) L) :
@@ -131,7 +137,24 @@ theorem exists_isLocallyFree_padicIntegers_extendScalars_iso {S : Scheme.{u}} [I
   obtain ⟨Tval, hc, hc', hcomp, htrans, hself, hdesc⟩ :=
     exists_transitionValues L 𝒰 fun k ↦ (he k).some
   obtain ⟨g, hg, hg', hint₁, hint₂⟩ :=
-    exists_integral_conj_of_transitionValues 𝒰 Tval hc hc' hcomp htrans hself
+    exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk hS 𝒰 Tval hc hc' hcomp
+      htrans hself
   exact hdesc g hg hg' hint₁ hint₂
+
+
+/-- **Lisse `E`-sheaves on connected regular Noetherian schemes have lattices** (blueprint
+`sk-lem-stratified-lattice`, first stage): the local rings of a regular scheme are integrally
+closed domains. See the module docstring. -/
+theorem exists_isLocallyFree_padicIntegers_extendScalars_iso {S : Scheme.{u}} [IsNoetherian S]
+    [IsRegular S] [ConnectedSpace S]
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E.1) S))
+    (hL : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E.1) S) L) :
+    ∃ L₀ : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) S),
+      IsLocallyFree (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) S) L₀ ∧
+        Nonempty ((Mod.extendScalars (padicIntegersToPadicSubfield S ℓ E)).obj L₀ ≅ L) :=
+  exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClosed_stalk
+    (fun s ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk s⟩) L hL
 
 end AlgebraicGeometry.ProEtale

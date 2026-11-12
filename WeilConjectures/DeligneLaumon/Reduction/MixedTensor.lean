@@ -79,7 +79,9 @@ theorem IsMixed.tensorObj_of_filtrationClosure_isLissePunctuallyPure
       (h₁.mono_weight (le_max_left _ _)) (h₃.mono_weight (le_max_right _ _))⟩
 
 /-- **The tensor product of mixed sheaves is mixed** (blueprint:
-`proposition-weights-under-usual-operations--5`, without the weights). -/
+`proposition-weights-under-usual-operations--5`, without the weights). The
+scheme `X` is assumed quasi-compact over `k₀`, unlike in the blueprint: mixedness is a global
+filtration, built here by Noetherian induction. -/
 theorem IsMixed.tensorObj [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse)
     (hFm : F.IsMixed ι) (hG : G.IsMixed ι) : (F.tensorObj G hF).IsMixed ι := by
   refine isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable

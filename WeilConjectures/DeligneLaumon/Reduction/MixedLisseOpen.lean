@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.MixedNoetherianInduction
+public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.MixedWeightsIn
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ExtensionsMap
 

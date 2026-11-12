@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsCover
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeNormal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeValues
 
 /-!

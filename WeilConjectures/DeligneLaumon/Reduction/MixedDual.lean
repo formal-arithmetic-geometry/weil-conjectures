@@ -17,7 +17,7 @@ Clause 6 of the blueprint proposition `proposition-weights-under-usual-operation
 a mixed lisse Weil sheaf is mixed, of the negated weights
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsIn.dual`); and when a filtration of a lisse sheaf
 has lisse graded pieces, their duals are the graded pieces of the annihilator filtration of the
-dual (`AlgebraicGeometry.WeilSheaf.nonempty_cokernel_annihilator_iso_dual`).
+dual (`AlgebraicGeometry.WeilSheaf.cokernelAnnihilatorIsoDual`).
 
 ## Proof
 
@@ -87,7 +87,9 @@ theorem IsMixed.dual_of_filtrationClosure_isLissePunctuallyPure
       (h₁.mono_weight (le_max_left _ _)) (h₃.mono_weight (le_max_right _ _))⟩
 
 /-- **The dual of a mixed lisse sheaf is mixed** (blueprint:
-`proposition-weights-under-usual-operations--6`, first assertion, without the weights). -/
+`proposition-weights-under-usual-operations--6`, first assertion, without the weights). The
+scheme `X` is assumed quasi-compact over `k₀`, unlike in the blueprint: mixedness is a global
+filtration, built here by Noetherian induction. -/
 theorem IsMixed.dual [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse)
     (h : F.IsMixed ι) : (F.dual hF).IsMixed ι := by
   refine isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable
@@ -122,12 +124,12 @@ theorem IsMixedOfWeightsIn.isMixedOfWeightsAtMost_dual
 with lisse quotient `G₂ / G₁`, and let `d₁ : F^∨ ⟶ G₁^∨` be the restriction
 `F^∨ ⟶ G₂^∨ ⟶ G₁^∨`. The annihilator `G₂^⊥ = ker (F^∨ ⟶ G₂^∨)` is contained in the annihilator
 `G₁^⊥ = ker d₁`, with quotient the dual `(G₂ / G₁)^∨`. -/
-theorem nonempty_cokernel_annihilator_iso_dual_of_comp_eq {F G₁ G₂ : WeilSheaf k₀ l X}
+noncomputable def cokernelAnnihilatorIsoDualOfCompEq {F G₁ G₂ : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (hG₁ : G₁.IsLisse) (hG₂ : G₂.IsLisse) (i₂ : G₂ ⟶ F) [Mono i₂]
     (j : G₁ ⟶ G₂) [Mono j] (hQ : (cokernel j).IsLisse) (d₁ : F.dual hF ⟶ G₁.dual hG₁)
     (hd₁ : dualMap i₂ hG₂ hF ≫ dualMap j hG₁ hG₂ = d₁) :
-    Nonempty (cokernel (kernel.lift d₁ (kernel.ι (dualMap i₂ hG₂ hF))
-      (by rw [← hd₁, kernel.condition_assoc, zero_comp])) ≅ (cokernel j).dual hQ) := by
+    cokernel (kernel.lift d₁ (kernel.ι (dualMap i₂ hG₂ hF))
+      (by rw [← hd₁, kernel.condition_assoc, zero_comp])) ≅ (cokernel j).dual hQ := by
   subst hd₁
   set f := dualMap i₂ hG₂ hF
   set g := dualMap j hG₁ hG₂
@@ -149,8 +151,8 @@ theorem nonempty_cokernel_annihilator_iso_dual_of_comp_eq {F G₁ G₂ : WeilShe
   have hSE := ShortComplex.ShortExact.mk' h₀ inferInstance inferInstance
   have hD := exact_dualMap (ShortComplex.exact_cokernel j) hG₁ hG₂ hQ
   have := mono_dualMap (cokernel.π j) hG₂ hQ
-  exact ⟨IsColimit.coconePointUniqueUpToIso (colimit.isColimit _) hSE.gIsCokernel ≪≫
-    IsLimit.conePointUniqueUpToIso (limit.isLimit _) hD.fIsKernel⟩
+  exact IsColimit.coconePointUniqueUpToIso (colimit.isColimit _) hSE.gIsCokernel ≪≫
+    IsLimit.conePointUniqueUpToIso (limit.isLimit _) hD.fIsKernel
 
 /-- **Graded pieces of the annihilator filtration.** Let `G₁ ⊆ G₂ ⊆ F` be lisse Weil sheaves,
 embedded by `i₁ : G₁ ⟶ F` and `i₂ : G₂ ⟶ F`, with lisse graded piece `G₂ / G₁`. The annihilator
@@ -158,13 +160,23 @@ embedded by `i₁ : G₁ ⟶ F` and `i₂ : G₂ ⟶ F`, with lisse graded piece
 `G₁^⊥ = ker (i₁^∨)`, and the graded piece `G₁^⊥ / G₂^⊥` of the annihilator filtration is the dual
 `(G₂ / G₁)^∨` of the graded piece (blueprint: `proposition-weights-under-usual-operations--6`,
 second assertion). -/
+noncomputable def cokernelAnnihilatorIsoDual {F G₁ G₂ : WeilSheaf k₀ l X}
+    (hF : F.IsLisse) (hG₁ : G₁.IsLisse) (hG₂ : G₂.IsLisse) (i₁ : G₁ ⟶ F) (i₂ : G₂ ⟶ F) [Mono i₂]
+    (j : G₁ ⟶ G₂) [Mono j] (hj : j ≫ i₂ = i₁) (hQ : (cokernel j).IsLisse) :
+    cokernel (kernel.lift (dualMap i₁ hG₁ hF) (kernel.ι (dualMap i₂ hG₂ hF))
+      (by rw [← hj, dualMap_comp j i₂ hG₁ hG₂ hF, kernel.condition_assoc, zero_comp])) ≅
+        (cokernel j).dual hQ :=
+  cokernelAnnihilatorIsoDualOfCompEq hF hG₁ hG₂ i₂ j hQ _ (by rw [← dualMap_comp, hj])
+
+/-- The graded piece `G₁^⊥ / G₂^⊥` of the annihilator filtration is isomorphic to the dual
+`(G₂ / G₁)^∨` (blueprint: `proposition-weights-under-usual-operations--6`, second assertion),
+see `AlgebraicGeometry.WeilSheaf.cokernelAnnihilatorIsoDual`. -/
 theorem nonempty_cokernel_annihilator_iso_dual {F G₁ G₂ : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (hG₁ : G₁.IsLisse) (hG₂ : G₂.IsLisse) (i₁ : G₁ ⟶ F) (i₂ : G₂ ⟶ F) [Mono i₂]
     (j : G₁ ⟶ G₂) [Mono j] (hj : j ≫ i₂ = i₁) (hQ : (cokernel j).IsLisse) :
     Nonempty (cokernel (kernel.lift (dualMap i₁ hG₁ hF) (kernel.ι (dualMap i₂ hG₂ hF))
       (by rw [← hj, dualMap_comp j i₂ hG₁ hG₂ hF, kernel.condition_assoc, zero_comp])) ≅
         (cokernel j).dual hQ) :=
-  nonempty_cokernel_annihilator_iso_dual_of_comp_eq hF hG₁ hG₂ i₂ j hQ _
-    (by rw [← dualMap_comp, hj])
+  ⟨cokernelAnnihilatorIsoDual hF hG₁ hG₂ i₁ i₂ j hj hQ⟩
 
 end AlgebraicGeometry.WeilSheaf

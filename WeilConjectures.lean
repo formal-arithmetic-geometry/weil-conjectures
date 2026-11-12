@@ -16939,7 +16939,6 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.MixedDual
 public import WeilConjectures.DeligneLaumon.Reduction.MixedLisseOpen
-public import WeilConjectures.DeligneLaumon.Reduction.MixedNoetherianInduction
 public import WeilConjectures.DeligneLaumon.Reduction.MixedOperations
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
 public import WeilConjectures.DeligneLaumon.Reduction.MixedTensor
@@ -22392,7 +22391,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Descent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.FiniteOrbit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GenericallyConnected
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.NormalLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.RegularLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.SheafGluing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
@@ -23691,15 +23689,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularE
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeCocycle
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeCocycleNormal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeEmbedding
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeNormal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeNormalScheme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeTransition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeValues
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseModuleFibre
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseModuleMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
