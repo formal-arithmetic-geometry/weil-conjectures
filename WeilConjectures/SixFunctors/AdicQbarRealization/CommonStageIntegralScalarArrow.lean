@@ -103,6 +103,7 @@ private theorem stageScalarArrow_heq
   subst f
   simp only [eqToHom_refl, _root_.CategoryTheory.Functor.map_id, Category.comp_id]
   rw [map_isoToStage]
+  rfl
 
 -- Stage descent transports several dependent category presentations.
 /-- Pullback of a literal coefficient arrow is the localized integral scalar map,
