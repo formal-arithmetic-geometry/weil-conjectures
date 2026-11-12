@@ -735,7 +735,7 @@ lemma autAt_spec (j : Index y) (g : Aut (fiber y)) :
 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- A loop acts on the point `a_j` through `autAt`. -/
-lemma asIso.hom_app_point (j : Index y) (g : Aut (fiber y)) :
+lemma hom_app_point (j : Index y) (g : Aut (fiber y)) :
     g.asIso.hom.app ((obj y).obj j) (point y j) =
       (fiber y).map (autAt y j g).asIso.hom (point y j) := by
   have e := ConcreteCategory.congr_hom (g.asIso.inv.naturality (autAt y j g).asIso.hom) (point y j)
@@ -861,7 +861,7 @@ theorem continuous_loop : Continuous (loop y) := by
             (π_p y)).π.app j).base q)).asIso.hom (point y j)) := by
       have e := ConcreteCategory.congr_hom ((loop y q).asIso.hom.naturality φ) (point y j)
       simp only [FintypeCat.comp_apply] at e
-      rw [e, asIso.hom_app_point, autAt_loop]
+      rw [e, hom_app_point, autAt_loop]
     simp only [h]
     exact (((isLocallyConstant_pairIndex y j).comp_continuous
       (((pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base.hom.continuous)).comp
