@@ -113,7 +113,6 @@ theorem homComplex_mappingCone_iso
       pg n ≫ proj G (n + 1) p ≫ SheafOfModules.homObjMap (R := R) (𝟙 (E.X p)) (ig n p) +
       pi n ≫ proj I n p ≫ SheafOfModules.homObjMap (R := R) (𝟙 (E.X p)) (ii n p) :=
     Fan.IsLimit.fac (hp cf n) _ p
-  clear_value a
   let bg (n : ℤ) : H.X n ⟶ HG.X (n + 1) := Fan.IsLimit.lift (hp G (n + 1))
     (fun p ↦ proj cf n p ≫ SheafOfModules.homObjMap (R := R) (𝟙 (E.X p)) (fg n p))
   let bi (n : ℤ) : H.X n ⟶ HI.X n := Fan.IsLimit.lift (hp I n)
@@ -124,7 +123,6 @@ theorem homComplex_mappingCone_iso
   have hbi (n p : ℤ) : bi n ≫ proj I n p =
       proj cf n p ≫ SheafOfModules.homObjMap (R := R) (𝟙 (E.X p)) (fi n p) :=
     Fan.IsLimit.fac (hp I n) _ p
-  clear_value bg bi
   let b (n : ℤ) : H.X n ⟶ K.X n :=
     bg n ≫ HomologicalComplex.homotopyCofiber.inlX hf (n + 1) n rfl +
       bi n ≫ HomologicalComplex.homotopyCofiber.inrX hf n
@@ -140,12 +138,11 @@ theorem homComplex_mappingCone_iso
       HomologicalComplex.homotopyCofiber.inlX_sndX,
       HomologicalComplex.homotopyCofiber.inrX_sndX, comp_zero, zero_add]
     exact Category.comp_id _
-  clear_value b
   have habg (n : ℤ) : a n ≫ bg n = pg n := by
     apply Fan.IsLimit.hom_ext (hp G (n + 1))
     intro p
     change (a n ≫ bg n) ≫ proj G (n + 1) p = pg n ≫ proj G (n + 1) p
-    rw [Category.assoc, hbg, ← Category.assoc, ha]
+    rw [Category.assoc, hbg n p, ← Category.assoc, ha n p]
     simp only [Preadditive.add_comp, Category.assoc,
       SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
     dsimp only [ig, ii, fg]
@@ -157,7 +154,7 @@ theorem homComplex_mappingCone_iso
     apply Fan.IsLimit.hom_ext (hp I n)
     intro p
     change (a n ≫ bi n) ≫ proj I n p = pi n ≫ proj I n p
-    rw [Category.assoc, hbi, ← Category.assoc, ha]
+    rw [Category.assoc, hbi n p, ← Category.assoc, ha n p]
     simp only [Preadditive.add_comp, Category.assoc,
       SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
     dsimp only [ig, ii, fi]
@@ -168,14 +165,14 @@ theorem homComplex_mappingCone_iso
   have hab (n : ℤ) : a n ≫ b n = 𝟙 (K.X n) := by
     apply HomologicalComplex.homotopyCofiber.ext_to_X hf n (n + 1) rfl
     · change (a n ≫ b n) ≫ pg n = (𝟙 _) ≫ pg n
-      rw [Category.assoc, hb₁, habg, Category.id_comp]
+      simp only [Category.assoc, hb₁ n, habg n, Category.id_comp]
     · change (a n ≫ b n) ≫ pi n = (𝟙 _) ≫ pi n
-      rw [Category.assoc, hb₂, habi, Category.id_comp]
+      simp only [Category.assoc, hb₂ n, habi n, Category.id_comp]
   have hba (n : ℤ) : b n ≫ a n = 𝟙 (H.X n) := by
     apply Fan.IsLimit.hom_ext (hp cf n)
     intro p
     change (b n ≫ a n) ≫ proj cf n p = (𝟙 _) ≫ proj cf n p
-    rw [Category.assoc, ha, Preadditive.comp_add]
+    rw [Category.assoc, ha n p, Preadditive.comp_add]
     simp only [← Category.assoc, hb₁, hb₂, hbg, hbi]
     simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
       Category.id_comp, ← Preadditive.comp_add, ← homObjMap_add_right]
