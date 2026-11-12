@@ -404,7 +404,7 @@ theorem scalar_chern_local_factorization
       _ (scalarQLocalChern l E Y r z))
     unfold scalarQChern scalarQLocalChern
     dsimp only
-    exact congrArg (fun c ↦ c ≫ (eqToIso (family.rational E).q_canonical).hom.app _) hq
+    exact hq =≫ (eqToIso (family.rational E).q_canonical).hom.app _
   · have hreal := realize_local_regular_adjunct l _ hP r.t₂.toPresentation
       r.eW r.eP family.zl.R₂ family.zl.p₂_canonical family.zl.p₂_unit r.p₂_square b hb w hw
     have hi := extend_local_adjunct_of_eq (integralMap l E) _ family.zl.R₂
@@ -420,6 +420,6 @@ theorem scalar_chern_local_factorization
       _ (scalarP2LocalChern l E Y r w))
     unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
     dsimp only
-    exact congrArg (fun c ↦ c ≫ (eqToIso (family.rational E).p₂_canonical).hom.app _) hq
+    exact hq =≫ (eqToIso (family.rational E).p₂_canonical).hom.app _
 
 end AlgebraicGeometry.ProEtale.RationalP1
