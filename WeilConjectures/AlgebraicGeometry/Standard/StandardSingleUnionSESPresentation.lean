@@ -157,6 +157,7 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
 
 end
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the six literal derived vertices requires additional heartbeats.
 /-- The three canonical comparisons are obtained from a morphism of short exact

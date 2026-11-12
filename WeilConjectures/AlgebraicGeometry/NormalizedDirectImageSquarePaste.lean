@@ -45,6 +45,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 set_option linter.all false in
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The explicit categorical carrier conversions require the larger elaboration budget.
 /-- Component assembly from the two comparison-unit equations and transport.
