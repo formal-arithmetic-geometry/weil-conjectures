@@ -381,7 +381,9 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
     (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
     θ θ' (derivedBaseChangeMap B sq.toCommSq)
-    (by sorry)
+    (by
+      have HN := native_base_change_mate (R l E n) sq.toCommSq
+      simpa only [StrictFiniteCoordinates] using HN)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
