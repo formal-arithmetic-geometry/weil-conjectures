@@ -89,6 +89,7 @@ private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X 
         T.rightDerivedFunctorIsoMapDerivedCategory.symm
 
 
+set_option profiler true in
 set_option maxHeartbeats 900000 in
 -- The nested derived-adjunction existentials require additional elaboration heartbeats.
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.

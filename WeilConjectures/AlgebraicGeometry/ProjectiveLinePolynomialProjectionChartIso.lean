@@ -25,6 +25,7 @@ namespace AlgebraicGeometry.Proj
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the concrete polynomial chart maps elaborates many dependent sheaf coercions.
 set_option backward.isDefEq.respectTransparency.types false in

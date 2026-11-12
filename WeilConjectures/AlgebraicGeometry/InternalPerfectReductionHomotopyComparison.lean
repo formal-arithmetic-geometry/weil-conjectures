@@ -26,6 +26,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The balancing squares unfold the derived counits of successor extension.
 /-- The canonical levelwise derived-to-homotopy comparisons commute with successor
