@@ -33,6 +33,7 @@ attribute [local instance 20000] sheafBraidedCategory
 attribute [local instance 30000] CondensedRing.monoidal_upperStar
 attribute [local irreducible] Mod.monoidalClosed
 
+-- Check monoidal coherence without unfolding the concrete coefficient functors.
 private theorem canonical_monoidal_inverse_exchange
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory F]
@@ -92,7 +93,6 @@ private theorem canonicalFixed_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
 
 
 -- The composite adjunctions require large monoidal instance arguments.
-set_option profiler true in
 -- The two composite adjunctions carry large monoidal structures.
 /-- The adjoint-normalized finite coefficient pullback comparison is monoidal
 for the section-normalized tensor structures.

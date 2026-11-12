@@ -48,6 +48,7 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
+-- Keep the coefficient calculation independent of the affine-space constructions.
 private theorem translationCoefficient_naturality
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -79,7 +80,6 @@ private theorem translationCoefficient_naturality
     condensedPushforwardHom_comp_map_coefficientMap a t, Functor.map_comp]
   simp only [Category.assoc, unitUnderlying]
 
-set_option profiler true in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

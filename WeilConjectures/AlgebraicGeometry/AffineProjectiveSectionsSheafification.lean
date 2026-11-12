@@ -94,6 +94,7 @@ private noncomputable def affineSectionsIso (Y : Scheme.{u}) [IsAffine Y] :
         f.val.app _ (M.presheaf.map (homOfLE _).op ((M.restrictAppIso _ ⊤).hom m))
       exact (ConcreteCategory.congr_hom (f.mapPresheaf.naturality _) _).symm)
 
+-- Compare section scalar actions before introducing the homological complex.
 private theorem affine_restrictTilde_flat (Y : Scheme.{u}) [IsAffine Y]
     (M : ModuleCat.{u} Γ(Y, ⊤)) [Module.Projective Γ(Y, ⊤) M] :
     ((restrictFunctor Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M)).IsFlatOver
@@ -122,7 +123,6 @@ private theorem affine_restrictTilde_flat (Y : Scheme.{u}) [IsAffine Y]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 -- The chart and section scalar actions require additional definitional-equality checks.
 /-- Sheafification of a ring quasi-isomorphism to the sections of a quasi-coherent
 complex supplies a quasi-isomorphism to that complex; finite projective terms give
