@@ -314,7 +314,7 @@ private theorem open_singleton_mate_pasting
   slice_lhs 2 3 => rw [ht]
   simp only [← Category.assoc]
   rw [hi]
-  slice_lhs 4 5 => rw [← δ.hom.naturality]
+  slice_lhs 4 5 => erw [← δ.hom.naturality]
   simp only [Functor.comp_map, ← Category.assoc, ← Functor.map_comp]
   simp only [← Category.assoc] at hz
   rw [hz]
@@ -374,9 +374,8 @@ private theorem open_evaluation_mate
     _ ?_ h ?_
   · exact (DerivedCategory.Q.mapIso
       ((NatIso.mapHomologicalComplex (S.val.openEvaluation n) (.up ℤ)).app P)).hom_inv_id
-  · have hr := S.property.2.2.2.2 n P
-    rw [← Category.assoc] at hr
-    exact hr
+  · rw [Category.assoc]
+    exact S.property.2.2.2.2 n P
 
 set_option profiler true in
 -- Two successive Hom transposes involve the full strict etale derived packages.
