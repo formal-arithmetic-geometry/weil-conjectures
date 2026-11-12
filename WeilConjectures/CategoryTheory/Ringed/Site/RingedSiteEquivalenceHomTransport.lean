@@ -218,7 +218,6 @@ private def sheafHomIso (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
 
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem sheafHomIso_naturality
     (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)

@@ -703,7 +703,6 @@ private theorem qcqsFiniteFreeHomContinuity
   apply (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.1
   exact ⟨IsColimit.mapCoconeEquiv e.symm hcomp⟩
 
--- Derived module functors require additional elaboration heartbeats.
 set_option synthInstance.maxSize 4096 in
 private theorem freeComap {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}

@@ -47,8 +47,8 @@ variable {k : Type u} [Field k] (X : Over (Spec (.of k))) [LocallyOfFiniteType X
 
 -- the generic search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The monoidal structure of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the full monoidal subcategory of `D(Mod_{Λ_X})`
-(`isMonoidal_boundedConstructible`). Finding it from the generic instances exceeds the default
-heartbeat limit, so it is recorded once here. -/
+(`isMonoidal_boundedConstructible`), recorded once here instead of being found from the generic
+instances. -/
 noncomputable instance monoidalCategory_boundedConstructible
     {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
     MonoidalCategory (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=

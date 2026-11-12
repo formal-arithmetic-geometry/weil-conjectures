@@ -258,7 +258,6 @@ private theorem tensor_cohomology_classical_torsion
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
--- Comparing the derived monoidal structures needs additional elaboration heartbeats.
 private theorem dual_data
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u})

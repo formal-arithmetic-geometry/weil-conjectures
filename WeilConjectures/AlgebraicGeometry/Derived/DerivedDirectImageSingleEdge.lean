@@ -46,7 +46,6 @@ private theorem transpose_top_naturality
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
--- The pinned sheaf adjunction requires extra elaboration heartbeats.
 private theorem truncatedCounit_source {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE q)
     (K : schemeDerivedCategory T) (d : (derivedPullback g).obj C ⟶ K) :

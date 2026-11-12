@@ -33,7 +33,6 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
--- Transport of local generators through iterated slice sites needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.style.haveILetI false in

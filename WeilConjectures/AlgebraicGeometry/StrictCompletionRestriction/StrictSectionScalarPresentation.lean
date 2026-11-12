@@ -142,7 +142,6 @@ universe a b w
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
   [HasDerivedCategory.{w} A] [CountableAB4Star A]
 -- Assembly of the scalar tower and both localized descents has many dependent fields.
--- Elaborating the concrete tensor and localization interfaces needs extra heartbeats.
 private theorem scalarPresentation (r : End (𝟭 A)) :
     ∃ S : Presentation A, S.scalar = r := by
   let τ (n : ℕ) : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ :=
@@ -311,7 +310,6 @@ universe u
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 -- Assembly of the scalar tower and both localized descents has many dependent fields.
--- Elaborating the concrete tensor and localization interfaces needs extra heartbeats.
 private theorem section_scalar_value
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (M : AdicCompletion.Modules l E X) (U : X.ProEtᵒᵖ)

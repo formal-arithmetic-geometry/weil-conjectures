@@ -307,8 +307,6 @@ private theorem pinned_unit_fac
 
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
--- Affine carrier identifications require additional instance search.
--- Affine carrier identifications require additional elaboration heartbeats.
 /-- Before cancelling comparisons, the normalized derived pullback unit agrees with
 its ordinary model. This identity holds for every complex, without K-flatness.
 Source: Stacks Project, perfect.tex, Tag 0AA7, normalized derived unit calculation;

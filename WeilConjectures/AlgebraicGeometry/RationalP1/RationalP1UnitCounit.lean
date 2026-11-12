@@ -209,8 +209,6 @@ variable (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
   [IsSeparated (Y ↘ Spec (.of k))]
 
-set_option linter.style.maxHeartbeats false in
--- The explicit restriction witnesses require extra elaboration heartbeats.
 -- Keep fixed site and derived comparisons folded during elaboration.
 include k p hpl in
 /-- The actual two functors preserve Loc of finite-constant-model Dbc.

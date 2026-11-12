@@ -24,7 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
--- On slopmaster2 19ba966718 this comparison exhausts 200000 heartbeats in 20 seconds.
 /-- Conditional localization of the explicit native swap.
 Source: Stacks 06YU and 0FPT, localization of the signed tensor symmetry.
 (blueprint: new-sf-native-weil-ringed-swap-conditional).

@@ -32,8 +32,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
--- Transporting finite local generators through the iterated slice sites needs more
--- elaboration heartbeats; this file still compiles within the 60-second limit.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 open TopologicalSpace in

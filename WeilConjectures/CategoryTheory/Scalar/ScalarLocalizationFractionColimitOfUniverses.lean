@@ -642,7 +642,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 set_option linter.style.whitespace false in
--- Elaborating the sectionwise tensor normalization requires additional heartbeats.
 /-- The ordinary sequential colimit of a scalar sequence of complexes.
 Source: Stacks Project, algebra.tex, Tag 00CM; sites-modules.tex, Tags 03CY and 03EK.
 (blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).

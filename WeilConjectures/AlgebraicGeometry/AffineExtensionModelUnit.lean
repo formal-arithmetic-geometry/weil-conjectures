@@ -35,8 +35,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
--- Affine carrier identifications require additional instance search.
--- Affine carrier identifications require additional elaboration heartbeats.
 /-- K-flat extension models respect the extension adjunction unit.
 Source: Stacks Project, perfect.tex, Tags 08DW(2) and 0AA7.
 (blueprint: new-affine-extension-model-unit).

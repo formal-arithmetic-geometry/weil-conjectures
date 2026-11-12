@@ -76,8 +76,6 @@ def affineModelPullbackComparison {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R
       ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫
     (DerivedCategory.quotientCompQhIso _).hom.app _
 
--- Affine carrier identifications require additional instance search.
--- Affine carrier identifications require additional elaboration heartbeats.
 /-- The two canonical comparison maps used to form the affine pullback sections model
 are invertible on a K-flat associated-sheaf complex.
 Source: Stacks Project, perfect.tex, Tags 08DV, 08DW(2), and 06Z0.

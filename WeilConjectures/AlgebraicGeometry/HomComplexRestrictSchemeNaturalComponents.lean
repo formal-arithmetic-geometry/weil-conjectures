@@ -127,7 +127,6 @@ private theorem factor_naturality
     _ = eM ≫ (τM ≫ ψ) := by rw [← heM, Category.assoc]
     _ = _ := by rw [← hk, Category.assoc]
 
--- Elaborating the product and signed-differential interfaces needs additional heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction isomorphisms for ordinary Hom complexes can be chosen
 naturally in the second complex.

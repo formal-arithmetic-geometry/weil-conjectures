@@ -137,7 +137,6 @@ private theorem scalar_quotient_unit_ext (W : Scheme.{u})
   erw [sequenceScalarAdjunction_unit]
   exact h n U x
 
--- Elaborating the three coefficient adjunctions requires additional heartbeats.
 /-- The scalar counit on a good complex is the ordinary balanced quotient comparison.
 Source: Stacks 06YY, 0941, and the scalar-normalization step of the blueprint
 prop-pod-dual-tate-data-compatibility, Steps 1 and 5.

@@ -233,7 +233,6 @@ private theorem ordinary_restriction_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n 
   exact ⟨(proEtaleCoefficientDirectImageComparison f
     (Padic.coefficientExtensionTransition l E (n + 1))).symm, HEq.rfl⟩
 
--- Comparing the concrete localization factors and adjunction mates needs extra heartbeats.
 /-- Pullback evaluation respects adjacent quotient transitions, with the scalar
 comparison obtained by transposing the published restricted direct-image map.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7

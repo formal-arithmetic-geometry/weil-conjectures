@@ -317,8 +317,6 @@ private theorem resolving_fullyFaithful :
     (NatIso.prod (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso (MR)))
       (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso (MR)))) hff
 
--- Comparing the total-tensor and monoidal cochain presentations needs extra heartbeats.
--- Comparing the total-tensor and monoidal cochain presentations needs extra heartbeats.
 -- Converting the published total tensor to its cochain monoidal presentation is costly.
 -- Converting the published total tensor to its cochain monoidal presentation is costly.
 attribute [local irreducible] HasCanonicalTensorShifts IsNormalized

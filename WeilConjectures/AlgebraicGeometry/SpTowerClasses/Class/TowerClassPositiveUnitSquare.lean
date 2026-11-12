@@ -156,7 +156,6 @@ private theorem ordinary_unit_square
     (tX.equivalence.functor.map q.iso.hom ≫ tX.unitIso.hom) n U z
   exact hleft.trans (hX.symm.trans hright.symm)
 
--- The derived single-functor comparison rewrites need the larger heartbeat budget.
 /-- The positive pullback comparison respects the coefficient-to-line unit.
 
 Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), twisting the

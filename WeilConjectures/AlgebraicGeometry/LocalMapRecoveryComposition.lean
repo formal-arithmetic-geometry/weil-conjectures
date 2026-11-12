@@ -66,7 +66,6 @@ private theorem conjugate_transport {C D : Type*} [Category C] [Category D]
       simp only [Iso.inv_hom_id_app_assoc]
     _ = d₀F.inv ≫ L₀.map r ≫ d₀G.hom := by rw [heF, heG]
 
--- Cover projection instance comparisons during rewriting need additional elaboration heartbeats.
 /-- Recovery for two successive base changes, without an earlier base scheme.
 Source: Stacks Project, Tag 01ZR, first proof, base change of local lifts;
 Tags 0095 and 0096, functoriality of module pullback.

@@ -52,7 +52,6 @@ private theorem stalk_map_germ (z : Z) {M N : Z.Modules} (f : M ⟶ N)
   TopCat.Presheaf.stalkFunctor_map_germ_apply U z hz
     ((PresheafOfModules.toPresheaf _).map f.val) a
 
--- Normalizing the two stalk colimits and the coproduct comparison needs extra heartbeats.
 private theorem additive_stalk_chart (A : AffineData i) (z : Z) :
     ∃ e : TopCat.Presheaf.stalk (C := CommRingCat) A.algebra.right.obj z ≃+
         Ideal.associatedGraded (RingHom.ker (i.stalkMap z).hom),

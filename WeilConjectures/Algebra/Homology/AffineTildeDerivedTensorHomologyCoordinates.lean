@@ -174,7 +174,6 @@ private lemma homologyFactorsh
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
--- The nested exact homology comparisons require additional elaboration heartbeats.
 /-- Applying homology to the raw tensor counit gives precisely the module
 comparison, coefficient homology map and normalized ordinary pushforward map.
 This statement contains no geometric base-change map or pullback representative.

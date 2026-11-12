@@ -261,7 +261,6 @@ private theorem factor_differential
     Preadditive.sub_comp, Preadditive.zsmul_comp, Category.assoc, hα, hβ]
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem sheafHomIso_naturality
     (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
@@ -489,7 +488,6 @@ private theorem homComplexRestriction
     (fun f g ↦ sheafHomIso_naturality F R hF f g)
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 private theorem derivedHomRestriction
     {C D : Type u} [SmallCategory C] [SmallCategory D]

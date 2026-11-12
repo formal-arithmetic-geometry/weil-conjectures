@@ -261,8 +261,6 @@ lemma finiteCoefficientDerivedUpperStarIso_cube (sq : CommSq g' f' f g)
   with_reducible
     exact cube_aux _ _ _ _ _ _ _ _ _ _ _ _ _ _ (by simp [← Functor.map_comp]) (by simp) H₁ H₂ H₃
 
--- As for `nonempty_arrowIso_map_exchangeRight_residueField`, elaborating the cube law of mates on
--- these derived categories needs more heartbeats.
 /-- **The exchange morphisms and the finite-coefficient comparison.** For a commutative square
 of schemes, `D(Φ_{Y'})` of the exchange morphism of the pullback square comparison of module
 objects over `T̲` at `M` and the exchange morphism of `leftDerivedUpperStarSquareIso` for

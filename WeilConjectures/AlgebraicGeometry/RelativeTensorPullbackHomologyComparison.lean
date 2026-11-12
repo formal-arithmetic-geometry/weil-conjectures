@@ -96,7 +96,6 @@ private theorem kFlat_tensor_left_of_quasiIso
 
 
 
--- Elaborating the mixed-ring tensor comparisons needs additional heartbeats.
 /-- Restricting scalars identifies the homology of tensor with derived pullback
 with the homology computed by any K-flat resolution of the restricted complex.
 This comparison does not require finite Tor amplitude or any boundedness of K or P.

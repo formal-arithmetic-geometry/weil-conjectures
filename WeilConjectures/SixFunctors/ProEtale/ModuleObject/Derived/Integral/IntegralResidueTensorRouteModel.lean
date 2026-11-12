@@ -35,7 +35,6 @@ local instance instEssentiallySmallProfinite_integralResidueTensorRouteModel
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 set_option linter.style.haveILetI false in
 set_option cleanup.letToHave false in
--- Elaborating the concrete module tensor comparisons needs extra heartbeats.
 /-- Compute the tensor-route against the ordinary homotopy tensor model.
 Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
 (blueprint: new-integral-residue-tensor-route-model)
