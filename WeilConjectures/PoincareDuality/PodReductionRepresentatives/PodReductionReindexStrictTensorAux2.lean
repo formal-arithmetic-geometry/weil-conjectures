@@ -75,6 +75,48 @@ private theorem tensorReductionStrictMap_section (W : Scheme.{u})
     (tensorReductionStrictMap_component l E W P Q n)
 
 set_option profiler true in
+private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
+    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q k : ℤ)
+    (hpq : p + q = k) (V : W.ProEt)
+    (x : (P.X p).val.obj (op V)) (y : (Q.X q).val.obj (op V)) :
+    ((tensorReductionFiniteComponent l E W P Q n).f k).val.app (op V)
+      (((pullbackTensorReductionEvaluation l E W n).hom.app _).val.app (op V)
+        (unrestrictedIntegralTensorSection l E W n _ (op V) 1
+          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
+            (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y))) =
+      coefficientTensorGenerator.{u, u + 1, u}
+        (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
+        (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P)
+        (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q)
+        p q k hpq (op (n, V))
+        (((pullbackTensorReductionEvaluation l E W n).hom.app (P.X p)).val.app (op V)
+          (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
+        (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
+          (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y)) := by
+  unfold tensorReductionFiniteComponent
+  dsimp only
+  simp only [HomologicalComplex.comp_f, reductionEvaluationComplex_inv_f]
+  erw [sheafOfModules_comp_apply]
+  erw [sheafOfModules_natIso_inv_hom_apply]
+  rw [← scalarUnitSection_eq]
+  erw [sheafOfModules_comp_apply, coefficientScalarTensorIso_hom_unitSection,
+    sheafOfModules_comp_apply]
+  have hm := coefficientTotalTensor_map_generator W (integralCoefficientCommRingSheaf l E W n)
+    ((pullbackTensorReductionEvaluationComplex l E W n).hom.app P)
+    ((pullbackTensorReductionEvaluationComplex l E W n).hom.app Q) p q k hpq (op V)
+    (coefficientIntegralScalarUnitSection l E W n (P.X p) (op V) x)
+    (coefficientIntegralScalarUnitSection l E W n (Q.X q) (op V) y)
+  erw [hm]
+  simp only [reductionEvaluationComplex_hom_f, scalarUnitSection_eq]
+  exact coefficientEvaluationTensorIso_inv_generator l E W n
+    (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P)
+    (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q) p q k hpq (op V)
+    (((pullbackTensorReductionEvaluation l E W n).hom.app (P.X p)).val.app (op V)
+      (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
+    (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
+      (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y))
+
+set_option profiler true in
 -- The finite component unfolds four transported tensor comparisons.
 /-- The strict reduction tensor map sends the reduction of `1 ⊗ (x ⊗ y)` to the tensor of the
 reductions of `1 ⊗ x` and `1 ⊗ y`.
@@ -97,34 +139,7 @@ theorem strictMap_generator (W : Scheme.{u})
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
         (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y)) := by
-  rw [tensorReductionStrictMap_section]
-  trace "PH199: component applied"
-  unfold tensorReductionFiniteComponent
-  dsimp only
-  simp only [HomologicalComplex.comp_f, reductionEvaluationComplex_inv_f]
-  erw [sheafOfModules_comp_apply]
-  erw [sheafOfModules_natIso_inv_hom_apply]
-  trace "PH199: cancellation done"
-  rw [← scalarUnitSection_eq]
-  erw [sheafOfModules_comp_apply, coefficientScalarTensorIso_hom_unitSection,
-    sheafOfModules_comp_apply]
-  trace "PH199: scalar tensor applied"
-  have hm := coefficientTotalTensor_map_generator W (integralCoefficientCommRingSheaf l E W n)
-    ((pullbackTensorReductionEvaluationComplex l E W n).hom.app P)
-    ((pullbackTensorReductionEvaluationComplex l E W n).hom.app Q) p q k hpq (op V)
-    (coefficientIntegralScalarUnitSection l E W n (P.X p) (op V) x)
-    (coefficientIntegralScalarUnitSection l E W n (Q.X q) (op V) y)
-  trace "PH199: tensor map prepared"
-  erw [hm]
-  simp only [reductionEvaluationComplex_hom_f, scalarUnitSection_eq]
-  trace "PH199: inverse evaluation remains"
-  exact coefficientEvaluationTensorIso_inv_generator l E W n
-    (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P)
-    (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q) p q k hpq (op V)
-    (((pullbackTensorReductionEvaluation l E W n).hom.app (P.X p)).val.app (op V)
-      (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
-    (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
-      (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y))
-  trace "PH199: proof completed"
+  exact (tensorReductionStrictMap_section l E W P Q n k V _).trans
+    (tensorReductionFiniteComponent_generator l E W P Q n p q k hpq V x y)
 
 end WeilConjectures.PodReductionRepresentatives
