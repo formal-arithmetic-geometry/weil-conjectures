@@ -113,12 +113,6 @@ private theorem finitePullback_native
       (sfIntrinsicConstantModuleAdjunction f A) M
     simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
       Functor.whiskerLeft_app] at h
-    change (proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f)).unit.app M ≫
-      (eqToIso (finiteDirectImage_eq l E n f)).hom.app
-        ((proEtaleRingModulePullback f (R.ring Y) (R.ring X) (R.pull f)).obj M) ≫
-      (proEtaleConstantModuleDirectImage f A).map
-        ((finitePullbackIso l E n f).hom.app M) =
-      (sfIntrinsicConstantModuleAdjunction f A).unit.app M at h
     rw [he] at h
     have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) x) h
     exact hv
