@@ -172,8 +172,6 @@ theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X
   rw [map_mul, map_zero] at h
   exact (hunit.mul_right_eq_zero).1 h
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the group structure on points of the quotient scheme makes instance search slow
 /-- A tangent vector of `V(I)` whose matrix satisfies the equations of `J ≥ I` is tangent to
 `V(J)`. -/
 theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
