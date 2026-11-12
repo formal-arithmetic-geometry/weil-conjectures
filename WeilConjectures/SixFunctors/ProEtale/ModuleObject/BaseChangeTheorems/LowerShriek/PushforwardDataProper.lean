@@ -233,7 +233,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   have hpb : (𝔽).pb (SepFinType.homMk (ofIsProperBaseChangeHom sq)) =
       boundedConstructibleUpperStar Λ ℓ g' :=
     boundedConstructibleUpperStar_ofIsProperBaseChangeHom sq
-  simp only [hpb] at key
+  erw [hpb] at key
   exact key
 
 variable {P}
