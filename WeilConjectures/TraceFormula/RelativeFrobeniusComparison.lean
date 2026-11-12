@@ -558,11 +558,17 @@ theorem weilLowerShriekFrobeniusComparison_comp (aX bX abX : X ⟶ X) (aY bY abY
     (by rw [hrpab]; simp only [Category.assoc, reassoc_of% ht₁])
     (by rw [hrfab, Category.assoc, hrfa])
   have : IsFinite t.left := MorphismProperty.of_isPullback hT.overLeft inferInstance
-  rw [weilLowerShriekFrobeniusComparison_hom_app_eq ℓ _ _ _ sqab,
-    weilLowerShriekFrobeniusComparison_hom_app_eq ℓ _ _ _ sqb,
-    weilLowerShriekFrobeniusComparison_hom_app_eq ℓ _ _ _ sqa,
-    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hQ sqb K]
-  simp only [Functor.map_comp, Category.assoc (obj := Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)]
+  simp only [weilLowerShriekFrobeniusComparison_hom_app_eq,
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hQ sqb K,
+    Functor.map_comp, Category.assoc (obj := Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)]
+  let ψ₁ := (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+    hT.toCommSq).hom.app
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ pb).obj K)
+  let ψ₂ := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ pa).map
+    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ rb pb).inv.app K)
+  have hN₂ := (relativePullback ℓ ra (t ≫ f'ab) (rb ≫ f'b) hrfa).naturality (ψ₁ ≫ ψ₂)
+  have hN₃ := (relativePullback ℓ (ra ≫ t) f'ab (rb ≫ f'b) hrfab).naturality
+    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ q pb).inv.app K)
   have hR6 := congrArg (boundedConstructibleLowerShriek ℓ
     (rb ≫ f'b)).map (boundedConstructibleUpperStarComp_relativeFrobenius_aux ℓ ra hT.toCommSq pb K)
   simp only [Functor.map_comp
@@ -573,9 +579,7 @@ theorem weilLowerShriekFrobeniusComparison_comp (aX bX abX : X ⟶ X) (aY bY abY
       ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ rb pb).inv.app K))
     (map_relativePullback_app_comp_baseChange_app ℓ hT hQ
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ pb).obj K))
-    (Functor.map_comp _ _ _)
-    ((relativePullback ℓ ra (t ≫ f'ab) (rb ≫ f'b) hrfa).naturality _)
-    ((relativePullback ℓ (ra ≫ t) f'ab (rb ≫ f'b) hrfab).naturality _)
+    ((boundedConstructibleLowerShriek ℓ (t ≫ f'ab)).map_comp ψ₁ ψ₂) hN₂ hN₃
     (relativePullback_comp_app ℓ ra t f'ab (t ≫ f'ab) (rb ≫ f'b) rfl hrfa _) hR6
   · exact eqToHom_refl _ _
   · rw [eqToHom_refl, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
