@@ -105,6 +105,7 @@ set_option maxHeartbeats 3200000 in
 -- the rewriting of morphisms between spectra of rings of invariants is slow
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+set_option profiler true in
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
   [Smooth (C ↘ Spec (.of K))] in
 /-- **The Frobenius lift on `Spec B_Q^{I_Q}`.** Let `σ_F` be an element of the decomposition
