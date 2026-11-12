@@ -115,9 +115,28 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
         d.hom ≫ p.app (DerivedCategory.Q.obj K) ≫ ι.hom.app (DerivedCategory.Q.obj K) =
           adj.counit.app (DerivedCategory.Q.obj K) := by
   intro C A S B U M p
-  obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
-    exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
-  let _ := hH₀
+  have h := exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
+  let H₀ := h.choose
+  have h₀ := h.choose_spec
+  have hH₀ : H₀.Additive := h₀.choose
+  have h₁ := h₀.choose_spec
+  let iH := h₁.choose
+  have h₂ := h₁.choose_spec
+  let adj₀ := h₂.choose
+  have h₃ := h₂.choose_spec
+  have h_eval := h₃.1
+  let R := h₃.2.choose
+  have h₄ := h₃.2.choose_spec
+  let β := h₄.choose
+  have h₅ := h₄.choose_spec
+  let L := h₅.choose
+  have h₆ := h₅.choose_spec
+  let t := h₆.choose
+  have h₇ := h₆.choose_spec
+  let adj := h₇.choose
+  have h₈ := h₇.choose_spec
+  have hR := h₈.1
+  have h_counit := h₈.2.2.2
   refine ⟨R, L, affineScalarLocalizationIso.{u, wY, wA} f L t, adj, ?_⟩
   intro ι K
   exact affine_derivedHom_localized_evaluation.{u, wY, wA}
@@ -176,14 +195,23 @@ theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
             (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op, 𝟙 K) ≫
         ι.hom.app K = adjH.counit.app K := by
-  obtain ⟨R, L, e, adj, h_eval⟩ := exists_affine_localizedEvaluation.{u, wY, wA} f
+  have h := exists_affine_localizedEvaluation.{u, wY, wA} f
+  let R := h.choose
+  have h₀ := h.choose_spec
+  let L := h₀.choose
+  have h₁ := h₀.choose_spec
+  let e := h₁.choose
+  have h₂ := h₁.choose_spec
+  let adj := h₂.choose
+  have h_eval := h₂.choose_spec
   let ι := Classical.choice (derivedInternalHom_unit_iso.{u, wY} Y)
   refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
   intro K
   let Kc : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ :=
     DerivedCategory.Q.objPreimage K
   let q : DerivedCategory.Q.obj Kc ≅ K := DerivedCategory.Q.objObjPreimageIso K
-  obtain ⟨d₀, hd₀⟩ := h_eval ι Kc
+  let d₀ := (h_eval ι Kc).choose
+  have hd₀ := (h_eval ι Kc).choose_spec
   let F := (Functor.curry.obj
     (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj
       (op ((DerivedCategory.singleFunctor
