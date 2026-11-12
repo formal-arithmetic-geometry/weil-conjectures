@@ -138,7 +138,6 @@ private theorem map_comp_square
     F.map (f ≫ g) ≫ h = (F.map f ≫ k) ≫ t := by
   rw [Functor.map_comp, Category.assoc, hn, Category.assoc]
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The two tensor-cohomology transports require a larger elaboration budget.
@@ -214,6 +213,7 @@ theorem exists_singleComplexOpen_normalized_transport
   have : RX.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _
   let P₀ := (RX.mapHomologicalComplex (.up ℤ)).obj P
   let ν := openDerivedAdditiveStalkIso X' (f' ⁻¹ᵁ V') z i
+  -- Projections avoid rechecking the large stalk models during existential elimination.
   have htermwise := exists_singleComplexOpen_termwise_comparison
     f f' g g' sq V V' hV' j hj sq₀ P hP hcP z i
   have hP₀ := htermwise.choose

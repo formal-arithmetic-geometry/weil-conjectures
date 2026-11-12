@@ -83,7 +83,6 @@ private theorem transport_representatives
 
 set_option linter.unusedVariables false in
 -- The quantified proof hypotheses occur only in the proof, not in the conclusion.
-set_option trace.profiler true in
 /-- Transport the localized tensor comparison into derived pullback, independently
 of any coefficient morphism or target representative.
 
@@ -166,6 +165,7 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
       (DerivedCategory.Q.obj P) :=
     eqToIso (congrArg (fun W ↦ DerivedCategory.Q.obj W) hQ0) ≪≫
       (isoPullbackComplexCounitIso j).symm.app P
+  -- Projections avoid rechecking the large stalk models during existential elimination.
   have hcanonical := exists_affineSpectrum_canonicalComparison_square
     f f' g g' sq sq0 z0 i P Q hP hQ hcP hcQ hQ0
   let l0 := hcanonical.choose
