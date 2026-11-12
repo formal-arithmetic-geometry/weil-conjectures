@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateIsoComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgClData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionPadicAlgCl
 
@@ -26,6 +27,17 @@ For the extension of scalars `T : Dᵇc(-)⟦E⟧ ⥤ Dᵇc(-)⟦ℚ̄_ℓ⟧` a
   `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`, the conjugates of the former
   (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_toPadicAlgCl`). This is the formal
   argument `CategoryTheory.mateEquiv_inv_app_comp_conjugateIsoEquiv`.
+
+The first statement is the instance, for the coefficient change
+`ProEtale.CondensedRing.toPadicAlgClCoefficientChange`, of the general compatibility
+`ProEtale.CondensedRing.BoundedConstructibleCoefficientChange.squareCompatible_lowerShriekComp`,
+once both composition isomorphisms are identified with the general construction
+`ProEtale.CondensedRing.BoundedConstructiblePushforwardData.lowerShriekComp`. For `ℚ̄_ℓ` this is
+`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_eq_lowerShriekComp`. For
+`E` it is `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_eq_lowerShriekComp`, whose
+proof is left as `sorry`: it is the unfolding of the `@[no_expose]` definitions
+`boundedConstructibleLowerShriekComp` and `boundedConstructibleLowerShriekOfCompactificationIso`,
+which is not possible outside their defining modules.
 -/
 
 @[expose] public section
@@ -46,6 +58,70 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {k : Typ
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
   [IsSeparated S.hom] (f : X ⟶ Y) (g : Y ⟶ S)
 
+section Bridge
+
+variable (k) in
+/-- The exchange morphisms `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of the pushforward datum of `ℚ̲̄_ℓ` are
+isomorphisms for proper `p'`. -/
+lemma isIsoExchange_padicAlgClPushforwardData :
+    (padicAlgClPushforwardData ℓ k).IsIsoExchange := by
+  intro X Z X' Z' _ _ _ _ _ _ _ _ _ _ _ _ p i' j p' _ _ _ sq
+  have h : (padicAlgClPushforwardData ℓ k).lowerStarOpenImmersionLowerShriekExchange sq =
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ sq := by
+    unfold boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep
+      BoundedConstructiblePushforwardData.lowerStarOpenImmersionLowerShriekExchange
+      Adjunction.exchangeRight
+    rfl
+  rw [h]
+  exact isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ sq
+
+variable (k) in
+/-- The exchange morphisms `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of the pushforward datum of `E̲` are
+isomorphisms for proper `p'`. -/
+lemma isIsoExchange_continuousMapPushforwardData :
+    (continuousMapPushforwardData ℓ k E).IsIsoExchange := by
+  intro X Z X' Z' _ _ _ _ _ _ _ _ _ _ _ _ p i' j p' _ _ _ sq
+  have h : (continuousMapPushforwardData ℓ k E).lowerStarOpenImmersionLowerShriekExchange sq =
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E
+        sq := by
+    unfold ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep
+      BoundedConstructiblePushforwardData.lowerStarOpenImmersionLowerShriekExchange
+      Adjunction.exchangeRight
+    rfl
+  rw [h]
+  exact isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E sq
+
+/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on bounded constructible
+`ℚ̄_ℓ`-sheaves is the one of the pushforward datum of `ℚ̲̄_ℓ`. -/
+lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq_lowerShriekComp :
+    boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g =
+      BoundedConstructiblePushforwardData.lowerShriekComp
+        (isIsoRefinementPushforward_padicAlgClPushforwardData ℓ k)
+        (isIsoExchange_padicAlgClPushforwardData ℓ k) f g := by
+  rw [boundedConstructibleLowerShriekComp_padicAlgCl_def]
+  simp only [boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq_refinementIso]
+  rfl
+
+/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on bounded constructible `E`-sheaves is
+the one of the pushforward datum of `E̲`: both are the same construction. The proof is the
+unfolding of `boundedConstructibleLowerShriekComp` and
+`boundedConstructibleLowerShriekOfCompactificationIso`, whose bodies are not exposed outside
+their defining modules. -/
+lemma boundedConstructibleLowerShriekComp_eq_lowerShriekComp :
+    boundedConstructibleLowerShriekComp ℓ E f g =
+      BoundedConstructiblePushforwardData.lowerShriekComp
+        (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E)
+        (isIsoExchange_continuousMapPushforwardData ℓ E k) f g := by
+  sorry
+
+end Bridge
+
 /-- Blueprint `proposition-six-operations-change-coefficients--16`: **the (Shriek) comparison is
 compatible with the composition of morphisms.** For the extension of scalars `T` along
 `E ⟶ ℚ̄_ℓ`, the comparison `R(f ≫ g)_! ⋙ T ≅ T ⋙ R(f ≫ g)_!` corresponds, under the composition
@@ -57,7 +133,18 @@ theorem squareCompatible_boundedConstructibleLowerShriekComp_toPadicAlgCl :
         (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E g))
       (boundedConstructibleLowerShriekComp ℓ E f g).hom
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom := by
-  sorry
+  have H := (toPadicAlgClCoefficientChange ℓ E k).squareCompatible_lowerShriekComp
+    (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E)
+    (isIsoExchange_continuousMapPushforwardData ℓ E k)
+    (isIsoRefinementPushforward_padicAlgClPushforwardData ℓ k)
+    (isIsoExchange_padicAlgClPushforwardData ℓ k) f g
+  refine NatTrans.SquareCompatible.of_eq_natTrans (NatTrans.SquareCompatible.of_eq H
+    (boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k (f ≫ g)).symm
+    ?_) (congrArg Iso.hom (boundedConstructibleLowerShriekComp_eq_lowerShriekComp ℓ E f g).symm)
+    (congrArg Iso.hom
+      (boundedConstructibleLowerShriekComp_padicAlgCl_eq_lowerShriekComp ℓ f g).symm)
+  rw [boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k f,
+    boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k g]
 
 /-- Blueprint `proposition-six-operations-change-coefficients--17`: **the `f^!` comparison is
 compatible with the composition of morphisms.** For the extension of scalars `T` along

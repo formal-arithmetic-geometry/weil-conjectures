@@ -30,6 +30,11 @@ and `c = a ≫ b`).
   are transitive with respect to composition isomorphisms of the horizontal functors, then so
   are the right adjoint comparisons `R ⋙ G ⟶ H ⋙ R'` defined as the mates of their inverses
   (e.g. the comparisons `f^! ⋙ T ⟶ T ⋙ f^!`).
+* `CategoryTheory.mateEquiv_inv_app_comp_conjugateIsoEquiv`: if commutation isomorphisms
+  `L ⋙ T ≅ T ⋙ Lₜ` of left adjoints are compatible with composition isomorphisms
+  `L_{gf} ≅ L_f ⋙ L_g` of the *vertical* functors (e.g. `R(gf)_! ≅ Rf_! ⋙ Rg_!`), then the right
+  adjoint comparisons defined as the mates of their inverses are compatible with the conjugate
+  composition isomorphisms `R_{gf} ≅ R_g ⋙ R_f` (e.g. `(gf)^! ≅ f^! g^!`).
 -/
 
 @[expose] public section
