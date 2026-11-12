@@ -637,46 +637,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType Xc.hom] [QuasiCompact Xc.hom] [IsSeparated Xc.hom]
   [LocallyOfFiniteType Xc'.hom] [QuasiCompact Xc'.hom] [IsSeparated Xc'.hom]
 
-private lemma shrinkExchange_square (hc : Mc.IsTraitModelOfGenericBase Xc ι qc gc)
-    (h : M.IsTraitModelOfGenericBase X₁ ι q g) (j : X₁ ⟶ Xc) (j' : X' ⟶ Xc')
-    (r : M.Hom Mc j.left j'.left) (hg : g = r.generic ≫ gc)
-    {c : (traitGenericBase q).left ⟶ X₁.left}
-    (hcε : genericFibreInclusion M q g h.isTraitModelOver.isPullback_j.w ≫ c = M.ε)
-    (sb : traitGenericBase q ⟶ genericBaseChange Xc ι)
-    (hsb : sb.left ≫ pullback.fst Xc.hom ι = c ≫ j.left)
-    (A : Dᵇc(Xc.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map
-        ((hc.rebaseExchange ℓ).app A) ≫
-      ((shrinkRebaseHom hc h r hg hcε sb hsb).boundedConstructiblePullbackExchange ℓ
-        (h.isTraitModelOfGenericBase_shrink.preservesBoundedConstructible (ℓ := ℓ))
-        (hc.isTraitModelOfGenericBase_rebase.preservesBoundedConstructible (ℓ := ℓ))).app
-          ((boundedConstructibleUpperStarOfMap ℓ (X := Xc) (Y := genericBaseChange Xc ι)
-            (pullback.fst Xc.hom ι)).obj A) ≫
-      (boundedConstructibleNearbyCycles
-        (h.isTraitModelOfGenericBase_shrink.preservesBoundedConstructible (ℓ := ℓ))).map
-          (boundedConstructibleShrinkSquareIso ℓ hsb A).hom =
-      (r.boundedConstructiblePullbackExchange ℓ
-        (h.preservesBoundedConstructible (ℓ := ℓ))
-        (hc.preservesBoundedConstructible (ℓ := ℓ))).app A ≫
-        (h.shrinkExchange ℓ hcε).app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A) := by
-  have hρc : ∀ A, ((hc.rebaseExchange ℓ).app A).hom =
-      hc.rebaseHom.specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj :=
-    fun _ ↦ by unfold rebaseExchange; exact ObjectProperty.homMk_hom _
-  have hρψ : ∀ A, ((h.shrinkExchange ℓ hcε).app A).hom =
-      (h.shrinkHom hcε).specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj :=
-    fun _ ↦ by unfold shrinkExchange; exact ObjectProperty.homMk_hom _
-  exact boundedConstructibleSpecialIdExchange_square
-    (Y := traitGenericBase q) (Zη := genericBaseChange Xc ι) (Z₁ := X₁) (Zc := Xc)
-    (S := X') (Sc := Xc') (h.shrinkHom hcε) r
-    (shrinkRebaseHom hc h r hg hcε sb hsb) hc.rebaseHom hsb
-    ((Category.comp_id _).trans (Category.id_comp _).symm)
-    ((Category.comp_id _).trans (Category.id_comp _).symm)
-    (h.isTraitModelOfGenericBase_shrink.preservesBoundedConstructible (ℓ := ℓ))
-    (h.preservesBoundedConstructible (ℓ := ℓ)) (hc.preservesBoundedConstructible (ℓ := ℓ))
-    (hc.isTraitModelOfGenericBase_rebase.preservesBoundedConstructible (ℓ := ℓ))
-    (hc.rebaseExchange ℓ) (h.shrinkExchange ℓ hcε) hρc hρψ A
-
 /-- **The dualizing map of an open sub-model of a proper model and shrinking**: let `M` be an open
 sub-model of a proper trait model `M_c` over the generic base `(F, X_c, ι)` with proper `X_c`,
 `X_c'` and full generic fibre, through open immersions `j`, `j'` and `r : M ⟶ M_c`, and let
@@ -720,6 +680,12 @@ theorem exists_θ_eq_shrink_of_openSubmodel (D : NearbyDualizingDataOfGenericBas
   have h₂ := D.θ_eq_rebase_of_isProper hc hgen
   have h₃ := D.map_θ_comp_dualizingComplexUpperStarIso hc.isTraitModelOfGenericBase_rebase
     h.isTraitModelOfGenericBase_shrink sb j' (shrinkRebaseHom hc h r hg hcε sb hsb) hr hq hg
+  have hρc : ∀ A, ((hc.rebaseExchange ℓ).app A).hom =
+      hc.rebaseHom.specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj :=
+    fun _ ↦ by unfold rebaseExchange; exact ObjectProperty.homMk_hom _
+  have hρψ : ∀ A, ((h.shrinkExchange ℓ hcε).app A).hom =
+      (h.shrinkHom hcε).specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj :=
+    fun _ ↦ by unfold shrinkExchange; exact ObjectProperty.homMk_hom _
   refine exists_θ_eq_of_openSubmodel_of_rebase
     (Ψc := boundedConstructibleNearbyCycles (hc.preservesBoundedConstructible (ℓ := ℓ)))
     (ΨM := boundedConstructibleNearbyCycles (h.preservesBoundedConstructible (ℓ := ℓ)))
@@ -747,7 +713,16 @@ theorem exists_θ_eq_shrink_of_openSubmodel (D : NearbyDualizingDataOfGenericBas
   · exact h₁
   · exact h₂
   · exact h₃
-  · exact shrinkExchange_square ℓ hc h j j' r hg hcε sb hsb (dualizingComplex ℓ Xc)
+  · transport_exact boundedConstructibleSpecialIdExchange_square
+      (Y := traitGenericBase q) (Zη := genericBaseChange Xc ι) (Z₁ := X₁) (Zc := Xc)
+      (S := X') (Sc := Xc') (h.shrinkHom hcε) r
+      (shrinkRebaseHom hc h r hg hcε sb hsb) hc.rebaseHom hsb
+      ((Category.comp_id _).trans (Category.id_comp _).symm)
+      ((Category.comp_id _).trans (Category.id_comp _).symm)
+      (h.isTraitModelOfGenericBase_shrink.preservesBoundedConstructible (ℓ := ℓ))
+      (h.preservesBoundedConstructible (ℓ := ℓ)) (hc.preservesBoundedConstructible (ℓ := ℓ))
+      (hc.isTraitModelOfGenericBase_rebase.preservesBoundedConstructible (ℓ := ℓ))
+      (hc.rebaseExchange ℓ) (h.shrinkExchange ℓ hcε) hρc hρψ (dualizingComplex ℓ Xc)
 
 end OpenSubmodel
 
