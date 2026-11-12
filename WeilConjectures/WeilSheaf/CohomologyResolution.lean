@@ -67,6 +67,33 @@ end ProEtaleWeilSheaf
 
 namespace ProEtale
 
+set_option profiler true in
+/-- Global sections identify the Frobenius from a commuting square with the structure map
+of the original sheaf. -/
+lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
+    (hW : W ⟶ W) (hZ : Z ⟶ Z) (comm : g ≫ hW = hZ ≫ g)
+    (X : IsoAlgebra (adicLowerStar l hZ)) :
+    (IsoAlgebra.frobeniusNatTrans
+      (adicLowerStarComp l g hW ≪≫ adicLowerStarCongr l comm ≪≫
+        (adicLowerStarComp l hZ g).symm)
+      (AdicSheaf.forget W ⋙ Sheaf.Γ _ (WeilCoefficients.{u} l))
+      (AdicSheaf.forget Z ⋙ Sheaf.Γ _ (WeilCoefficients.{u} l))
+      (Functor.isoWhiskerLeft (AdicSheaf.forget Z) (globalSectionsLowerStarIso _ g))
+      (Functor.whiskerLeft (AdicSheaf.forget W) (globalSectionsLowerStarIso _ hW).inv)).app X =
+      (globalSectionsLowerStarIso _ hZ).inv.app X.carrier.X ≫
+        (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map X.str.hom) := by
+  have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
+    g g hW hZ comm.symm X.carrier.X ((AdicSheaf.forget _).map X.str.hom)
+  rw [IsoAlgebra.frobeniusNatTrans_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
+    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom,
+    Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, NatTrans.comp_app,
+    Mod.comp_hom', Mod.comp_hom', adicLowerStarComp_hom_app_hom,
+    adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom]
+  simp only [Category.assoc]
+  exact h
+
 /-- The underlying morphism of sheaves of the Frobenius exchange isomorphism. -/
 lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app {k : Type u}
     [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)}
@@ -107,23 +134,12 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
           Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
   refine NatTrans.ext (funext fun X ↦ ?_)
-  have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
-    (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
-      (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
+  exact adicGlobalSections_frobeniusNatTrans_app
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
-    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
-    ((AdicSheaf.forget _).map X.str.hom)
-  rw [IsoAlgebra.frobeniusNatTrans_app,
-    ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
-    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
-  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
-  simp only [Category.assoc]
-  exact h
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) X
 
 
 /-- **Weil cohomology from an injective resolution.** Let `I` be an injective resolution of a
