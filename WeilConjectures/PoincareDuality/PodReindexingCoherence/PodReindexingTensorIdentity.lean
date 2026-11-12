@@ -280,6 +280,8 @@ private theorem identity_tensor_chain (X : Scheme.{u})
   apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
     (R := podReindexingRing l E X s)
   intro p q hpq U x y
+  change (P.X p).val.obj (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) at x
+  change (Q.X q).val.obj (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) at y
   let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
     (podReindexingRing l E X s) P Q p q n hpq
       (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) x y
