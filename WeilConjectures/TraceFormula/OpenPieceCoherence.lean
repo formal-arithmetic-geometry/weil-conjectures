@@ -81,20 +81,20 @@ lemma map_counit_eq_of_baseChange {A B : Type*} [Category A] [Category B]
 /-- Counit compatibility and base change compatibility imply compatibility after applying
 the functors to the point. -/
 lemma compToPoint_inv_app_comp_counit_comp_pullback {A B C : Type*}
-    [Category A] [Category B] [Category C] {jL : A ⥤ B} {jU : B ⥤ A}
+    [Category A] [Category B] [Category C] {jL : A ⥤ B}
     {H : A ⥤ A} {H' : B ⥤ B} {aX : B ⥤ C} {aU : A ⥤ C}
-    (ε : jU ⋙ jL ⟶ 𝟭 B) (θ : jU ⋙ H ⟶ H' ⋙ jU) (β : jL ⋙ H' ⟶ H ⋙ jL)
-    (pΦ : aX ⟶ H' ⋙ aX) (pΦU : aU ⟶ H ⋙ aU) (c : jL ⋙ aX ≅ aU) (M : B)
-    (hε : H'.map (ε.app M) = β.app (jU.obj M) ≫ jL.map (θ.app M) ≫ ε.app (H'.obj M))
-    (hB : pΦ.app (jL.obj (jU.obj M)) ≫ aX.map (β.app (jU.obj M)) ≫
-        c.hom.app (H.obj (jU.obj M)) = c.hom.app (jU.obj M) ≫ pΦU.app (jU.obj M)) :
-    c.inv.app (jU.obj M) ≫ aX.map (ε.app M) ≫ pΦ.app M =
-      pΦU.app (jU.obj M) ≫ aU.map (θ.app M) ≫ c.inv.app (jU.obj (H'.obj M)) ≫
-        aX.map (ε.app (H'.obj M)) := by
-  have hp := pΦ.naturality (ε.app M)
-  have hn := c.inv.naturality (θ.app M)
-  have hB' : pΦ.app (jL.obj (jU.obj M)) ≫ aX.map (β.app (jU.obj M)) =
-      c.hom.app (jU.obj M) ≫ pΦU.app (jU.obj M) ≫ c.inv.app (H.obj (jU.obj M)) := by
+    {N N' : A} {M : B} (ε : jL.obj N ⟶ M) (ε' : jL.obj N' ⟶ H'.obj M)
+    (θ : H.obj N ⟶ N') (β : jL ⋙ H' ⟶ H ⋙ jL)
+    (pΦ : aX ⟶ H' ⋙ aX) (pΦU : aU ⟶ H ⋙ aU) (c : jL ⋙ aX ≅ aU)
+    (hε : H'.map ε = β.app N ≫ jL.map θ ≫ ε')
+    (hB : pΦ.app (jL.obj N) ≫ aX.map (β.app N) ≫ c.hom.app (H.obj N) =
+      c.hom.app N ≫ pΦU.app N) :
+    c.inv.app N ≫ aX.map ε ≫ pΦ.app M =
+      pΦU.app N ≫ aU.map θ ≫ c.inv.app N' ≫ aX.map ε' := by
+  have hp := pΦ.naturality ε
+  have hn := c.inv.naturality θ
+  have hB' : pΦ.app (jL.obj N) ≫ aX.map (β.app N) =
+      c.hom.app N ≫ pΦU.app N ≫ c.inv.app (H.obj N) := by
     rw [← reassoc_of% hB, Iso.hom_inv_id_app]
     simp
   simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hp hn
@@ -253,18 +253,19 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
   rw [weilUpperStarComparison_hom_app_eq ℓ j hj sq.toCommSq.flip]
   refine compToPoint_inv_app_comp_counit_comp_pullback
     (jL := boundedConstructibleLowerShriek ℓ j)
-    (jU := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)
     (H := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU)
     (H' := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
     (aX := boundedConstructibleLowerShriek ℓ (toPoint X))
     (aU := boundedConstructibleLowerShriek ℓ (toPoint U))
     (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
-      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit)
+      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app K)
+    (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
+      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app _)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-      sq.toCommSq.flip).hom
+      sq.toCommSq.flip).hom.app K
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
-    (boundedConstructibleLowerShriekCompToPoint ℓ j) K ?_ ?_
+    (boundedConstructibleLowerShriekCompToPoint ℓ j) ?_ ?_
   · exact hε
   · exact hB
 
