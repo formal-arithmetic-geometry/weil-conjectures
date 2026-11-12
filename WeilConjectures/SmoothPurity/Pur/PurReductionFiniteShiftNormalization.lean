@@ -278,9 +278,9 @@ private theorem finite_adj_shift (n : ℕ)
         (R := completedIntegralCommRingSheafUnrestricted l E W) K
     exact ⟨Q, f, hQ, hf⟩
   · intro Q hQ
-    simp only [finiteCochainModel_counit l E W n Q hQ]
     apply (Iso.eq_comp_inv (R.mapDerivedCategoryFactors.app _)).2
     have hu := CompletionUnit.finiteModel_unit l E W Q hQ n
+    simp only [← finiteCochainModel_counit l E W n Q hQ] at hu
     with_unfolding_all exact (Category.assoc _ _ _).trans hu
 
 -- Assemble the actual sequence projection from exact restriction and the derived limit.
@@ -390,9 +390,9 @@ theorem purReductionFiniteShiftNormalization
     let := sf n
     have := hsf n
     have h := NatTrans.shift_app_comm (finiteCochainModel l E W n).ε r Q
-    simp only [finiteCochainModel_counit l E W n Q hQ,
-      finiteCochainModel_counit l E W n (Q⟦r⟧) hQr,
-      Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+    simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+    simp only [← finiteCochainModel_counit l E W n Q hQ,
+      ← finiteCochainModel_counit l E W n (Q⟦r⟧) hQr]
     with_unfolding_all exact h
   · intro n
     let := sf n
