@@ -262,7 +262,8 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   let α := (τ.pullbackExchange Λ).app C
   with_reducible
     have key := isIso_of_invariant_summands_square
-      (fun q ↦ DerivedCategory.homologyFunctor _ q)
+      (fun q ↦ DerivedCategory.homologyFunctor
+        (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')) q)
       (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
       L((f')^*⟦Λ⟧) Ψ₂Ω α α₁ r₁ hr₁ α₂ r₂ hr₂
       cA cB cB' I' _ _ _ hnat hIA β hsq
