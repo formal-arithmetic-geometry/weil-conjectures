@@ -19,6 +19,10 @@ transition maps, and the cone of projections `A ⟶ A/φⁿ`
 (`CategoryTheory.Limits.cokernelEndPowTowerCone`). For a module `M` over a ring and the
 multiplication `φ` by an element `ϖ`, these are the reductions `M/ϖⁿM` of `M` and the object `A`
 is `ϖ`-adically complete and separated when the cone is a limit cone.
+
+For `φ = ℓ • 𝟙 A` with `ℓ : ℕ` this is the tower `CategoryTheory.Limits.cokernelPowTower A ℓ` of
+`WeilConjectures.CategoryTheory.Abelian.CokernelPowTower`, which is indexed by the multiples
+`ℓⁿ • 𝟙 A` rather than by the powers `φⁿ`.
 -/
 
 @[expose] public section

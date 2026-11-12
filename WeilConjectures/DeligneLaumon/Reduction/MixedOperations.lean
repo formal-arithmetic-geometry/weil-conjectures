@@ -44,14 +44,15 @@ theorem IsMixed.of_shortExact {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k�
 
 /-- **Upper bounds under inverse image.** Pulling back along any morphism `φ : X ⟶ Y` of
 `k₀`-schemes locally of finite type carries Weil sheaves mixed of weights at most `w` to Weil
-sheaves mixed of weights at most `w`: the pullback is exact and preserves punctual purity.
-(blueprint: `proposition-weights-under-usual-operations--9`) -/
+sheaves mixed of weights at most `w`; this is
+`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.upperStar` in the notation of the blueprint
+proposition. (blueprint: `proposition-weights-under-usual-operations--9`) -/
 theorem isMixedOfWeightsAtMost_upperStar_obj {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y} {w : ℝ}
     (hF : F.IsMixedOfWeightsAtMost ι w) (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
     ((WeilSheaf.upperStar φ).obj F).IsMixedOfWeightsAtMost ι w :=
-  hF.map (WeilSheaf.upperStar φ) fun _ _ hG ↦ hG.upperStar φ
+  hF.upperStar φ
 
 end AlgebraicGeometry.WeilSheaf

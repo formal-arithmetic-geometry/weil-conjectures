@@ -109,14 +109,11 @@ variable {W X : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
 variable [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Pulling back along an immersion `h : W ⟶ X` preserves mixed upper weight bounds: restrict
-the filtration, a closed point of `W` being a closed point of `X` with the same residue field,
-stalk and local Frobenius (blueprint: `lem-zl-morphism-open-closed-reduction`, restriction).
-
-The pullback is exact and preserves punctual purity along any morphism of `k₀`-schemes
-(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`), so the immersion hypothesis
-is not used. -/
-theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar [IsImmersion h] {w : ℝ}
+/-- Pulling back along a morphism `h : W ⟶ X` of `k₀`-schemes preserves mixed upper weight
+bounds: restrict the filtration, the pullback being exact and preserving punctual purity
+(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`) (blueprint:
+`lem-zl-morphism-open-closed-reduction`, restriction). -/
+theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {w : ℝ}
     {F : WeilSheaf k₀ l X} (hF : F.IsMixedOfWeightsAtMost ι w) :
     ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
   hF.map (WeilSheaf.upperStar h) fun _ _ hG ↦ WeilSheaf.IsPunctuallyPureOfWeight.upperStar hG h

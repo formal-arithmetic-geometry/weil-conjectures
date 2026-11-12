@@ -17519,7 +17519,6 @@ public import WeilConjectures.LeanEval.WeilConjectures
 public import WeilConjectures.LinearAlgebra.Basis.PowQuotientTower
 public import WeilConjectures.LinearAlgebra.Basis.TowerLift
 public import WeilConjectures.LinearAlgebra.Basis.ULiftPowQuotient
-public import WeilConjectures.LinearAlgebra.Charpoly.FiltrationRoots
 public import WeilConjectures.LinearAlgebra.ContinuousIntegralDiagonalRankLocus
 public import WeilConjectures.LinearAlgebra.ContinuousIntegralMatrixLocalSmith
 public import WeilConjectures.LinearAlgebra.DvrMatrixSmithPowers
@@ -17954,7 +17953,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ExtensionsMap
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteExtensionClosure
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteLisseFiltration
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.MixedWeightsIn
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ExtensionsMap
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 
 /-!
 # Mixed sheaves with lisse graded pieces on a dense open
