@@ -332,9 +332,14 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   let b := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app
     (integralOperationsRoos
       ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))
+  let eP := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj
+  let eQ := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj
+  let e := (integralCompletedTensorComparison l E X).app
+    ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q)
   dsimp only [podOrdinaryReindex, integralOperationsTensorOnGood,
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
-    Functor.comp_obj, Functor.prod_obj] at a b
+    isoReductionIntegralComplex, podGoodReindex, integralOperationsRoosFunctor,
+    Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at a b eP eQ e
   have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
     (DerivedCategory.Q (C := scalarReductionSource l E X))
@@ -345,23 +350,20 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (W := (isoReductionIntegralComplex l E g).obj
       (integralOperationsRoos
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
-    ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
-    ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
-    ((integralCompletedTensorComparison l E X).app
-      ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q))
+    eP eQ e
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
     _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
     (by
-      simpa only [a, b, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
+      simpa only [a, b, eP, eQ, e, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
         integralOperationsGoodLocalization, Functor.comp_obj, Functor.prod_obj,
         Iso.app_hom] using hs)
     ((integralCompletedTensor l E X).map
       (Prod.mkHom
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))))
-  simpa only [a, b, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
+  simpa only [a, b, eP, eQ, e, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
     integralOperationsGoodLocalization, Functor.comp_obj, Functor.prod_obj,
     Iso.app_hom, Iso.app_inv] using finish.trans
       (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
