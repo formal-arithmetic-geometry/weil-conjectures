@@ -34,6 +34,13 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+private lemma flatComp_nonempty_arrowIso_map_trans {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {A B A' B' : C} {A'' B'' : D} {f : A ⟶ B} {g : A' ⟶ B'}
+    {h : A'' ⟶ B''} (k : Nonempty (Arrow.mk f ≅ Arrow.mk g))
+    (l : Nonempty (Arrow.mk (F.map g) ≅ Arrow.mk h)) :
+    Nonempty (Arrow.mk (F.map f) ≅ Arrow.mk h) :=
+  ⟨F.mapArrow.mapIso k.some ≪≫ l.some⟩
+
 -- Derived functors repeatedly request these graded tensor properties. Prove them once for
 -- module sheaves so elaborating each functor does not reconstruct the same colimit arguments.
 local instance flatComp_hasTensor₄ObjExt
@@ -65,8 +72,6 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option trace.profiler true in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map under two successive flat changes of coefficients**: if the (Push)
 comparisons of `a₁` and `a₂` are invertible on bounded below objects along quasi-compact
 quasi-separated morphisms, then for models whose `j`s are quasi-compact and quasi-separated and
@@ -118,11 +123,9 @@ theorem nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat
   have := isGE_leftDerivedUpperStar_obj _ P.ε C₁ m
   have k₂ := nonempty_arrowIso_map_kunnethMap_of_flat a₂ φ₁ φ₂ A₁ B₁
     (h₂ M.j _ n) (h₂ N.j _ n) (h₂ P.j _ m)
-  exact ⟨(Mod.extendScalars (coefficientMap a₂ Z')).leftDerivedFunctor.mapArrow.mapIso k₁.some ≪≫
-    k₂.some⟩
+  exact flatComp_nonempty_arrowIso_map_trans
+    (Mod.extendScalars (coefficientMap a₂ Z')).leftDerivedFunctor k₁ k₂
 
-set_option trace.profiler true in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map under two successive flat changes of coefficients**: under the
 hypotheses of `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat`, for every
 `h : W ⟶ Z'`, `T₂ T₁ Lh^* Π_{A₀,B₀}` and `Lh^* Π_{T₂ T₁ A₀, T₂ T₁ B₀}` are isomorphic arrows. -/
