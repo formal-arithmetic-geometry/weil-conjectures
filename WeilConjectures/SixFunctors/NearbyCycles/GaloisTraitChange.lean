@@ -266,7 +266,11 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
   trace "PH329: simplified naturality"
   let α := (τ.pullbackExchange Λ).app C
-  let F := L((f')^*⟦Λ⟧)
+  let F : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₁') Ab.{u + 1})
+      (condensedRingObj Λ X₁')) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1})
+        (condensedRingObj Λ X₂')) := L((f')^*⟦Λ⟧)
+  trace "PH329: named pullback functor"
   let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
   let H := DerivedCategory.homologyFunctor A
   trace "PH329: specialized homology functors"
