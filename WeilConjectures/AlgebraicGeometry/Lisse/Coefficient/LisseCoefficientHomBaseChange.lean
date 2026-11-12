@@ -419,8 +419,8 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
       (ModuleCat.ringExtensionTmul.{d + 1, d + 1} _ _ (Ideal.Quotient.mk _ s) x))
   simp only [map_sum, map_smul, ringQuotientCoordinate_tmul] at hh
   rw [sheaf_sum_apply]
-  dsimp only [quotientCoordinateSheaf, quotientReconstructMap,
-    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ModuleCat.comp_apply]
   simp only [quotientCoordinateSheaf_tmul]
   calc
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
