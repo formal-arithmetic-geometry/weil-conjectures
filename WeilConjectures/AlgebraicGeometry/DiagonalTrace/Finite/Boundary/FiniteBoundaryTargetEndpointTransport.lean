@@ -32,6 +32,16 @@ private theorem finiteBoundaryTargetRestriction_inv_section
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
 
+private theorem finiteBoundaryTargetRestriction_inv_app
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
+    ((finiteBoundaryRestrictionUnderlying l T r n).inv.app M).hom.app U =
+      eqToHom (r.underlying M n U).symm := by
+  ext x
+  exact eq_of_heq ((finiteBoundaryTargetRestriction_inv_section l T r n M U x).trans
+    (finiteBoundary_cast_heq (r.underlying M n U).symm x).symm)
+
 set_option profiler true in
 /-- Target endpoint transport.  The finite root map, the inverse line
 comparison, the inverse restriction comparison and the coefficient lineForget
@@ -66,6 +76,9 @@ theorem finiteBoundary_target_endpoint
   dsimp only [abEvaluation, Functor.comp_map, evaluation_obj_map]
   apply Sheaf.hom_ext
   ext U z
+  dsimp only [e]
+  rw [finiteBoundaryTargetRestriction_inv_app l T r n
+    (lineModule l (ULift.{u} (Padic l)) c) U]
   trace "target: extensionality complete"
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
@@ -87,24 +100,21 @@ theorem finiteBoundary_target_endpoint
   trace "target: scalar unit complete"
   let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
       (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
-    η.val.app (op (n, U.unop)) x
+    ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
+        (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
   trace "target: scalar section named"
-  let w : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U :=
-    (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
+  let w := (eqToHom (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm) v
   trace "target: restricted section named"
-  have hw : HEq w v := by
-    dsimp only [w, e]
-    exact finiteBoundaryTargetRestriction_inv_section l T r n
-      (lineModule l (ULift.{u} (Padic l)) c) U v
+  have hw : HEq w v := finiteBoundary_cast_heq
+    (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm v
   trace "target: restriction comparison complete"
   dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
-    (hw.trans (heq_of_eq hu))
+    (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   trace "target: tensor normalization complete"
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
-  dsimp only [η, x'] at he
-  rw [he]
   dsimp only [w, v, η, x'] at ht hi
   exact congrArg ((cartierProRootMap A (l ^ (n + 1)) hA T
     (pow_pos (Fact.out : l.Prime).pos _) hN).hom.app U) (ht.trans hi)
