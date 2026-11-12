@@ -248,7 +248,8 @@ theorem kFlat_pullback_adjunction_comparison
     (q.obj P) (q'.obj I) (q'.map a)
   have ha := kFlat_pullback_adjunction_comparison_transpose (g := g) (P := P) (I := I)
     (α := α)
-  rw [ha] at h
-  exact h
+  exact h.trans (congrArg (fun f ↦ DerivedCategory.Qh.map f ≫
+    (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+      (q'.obj I)) ha)
 
 end AlgebraicGeometry
