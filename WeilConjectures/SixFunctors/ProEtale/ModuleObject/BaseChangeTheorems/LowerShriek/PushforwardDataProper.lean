@@ -213,23 +213,26 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj))
       (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw) :=
     P.isIso_baseChange_exchangeFormalism (IsPullback.of_id_snd (f := ofIsProperBaseChangeHom sq))
+  have key := (𝔽).shriekBaseChange_id_left
+    (SepFinType.homMk (Compactification.ofIsProper f.left).overG)
+    (SepFinType.homMk (Compactification.ofIsProper f'.left).overG)
+    (SepFinType.homMk (ofIsProperBaseChangeHom sq)) (SepFinType.homMk g) hw
+    (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)
+  -- Identify the trivial compactifications and their connecting map before comparison.
+  obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
+  obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
+  obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
+  obtain ⟨fl', ⟨⟨⟨⟩⟩⟩, fw'⟩ := f'
+  change Xl ⟶ Y.left at fl
+  change Xl' ⟶ Y'.left at fl'
+  obtain rfl : Xh = fl ≫ Y.hom := by simpa using fw.symm
+  obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
+  obtain ⟨gl, ⟨⟨⟨⟩⟩⟩, gw⟩ := g'
   simp only [lowerShriekOfCompactificationOfIsProperIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom,
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
   rewrite [P.baseChange_eq_pfBaseChange,
     P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
-  refine NatTrans.ext (funext fun K ↦ ?_)
-  have key := (𝔽).shriekBaseChange_id_left_app
-    (SepFinType.homMk (Compactification.ofIsProper f.left).overG)
-    (SepFinType.homMk (Compactification.ofIsProper f'.left).overG)
-    (SepFinType.homMk (ofIsProperBaseChangeHom sq)) (SepFinType.homMk g) hw
-    (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w) K
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.leftUnitor_hom_app, Functor.comp_obj, Functor.map_comp]
-  erw [Category.comp_id, CategoryTheory.Functor.map_id, Category.comp_id]
-  -- Expose the underlying scheme maps before comparing the pullback functors.
-  dsimp only [exchangeFormalism, boundedConstructibleUpperStar, ofIsProperBaseChangeHom,
-    Compactification.overObj, Compactification.ofIsProper] at key ⊢
   exact key
 
 variable {P}
