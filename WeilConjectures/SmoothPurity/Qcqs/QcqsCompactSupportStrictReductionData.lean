@@ -70,6 +70,7 @@ include K₀ hl
 -- The existing statement retains the geometric hypotheses of its source.
 set_option linter.unusedSectionVars false in
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Elaborate the explicit paste across the two equivalent sequence-site presentations.
 
 /-- The strict comparison map exists and has the prescribed finite coordinate identity.
