@@ -43,7 +43,6 @@ attribute [local irreducible] podReindexingCoefficient podReindexingHomModel
   Functor.mapHomologicalComplexUpToQuasiIso Functor.mapHomologicalComplexUpToQuasiIsoFactors
   CoefficientClosedStructure.tensor
 
-set_option trace.profiler true in
 /-- The pure-normalized tensor-chain comparison is natural in both inputs.
 Source: blueprint dual-Tate compatibility, Steps 1 and 2.
 (blueprint: lem-pod-reindexing-tensor-chain-naturality).
