@@ -148,10 +148,10 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ.commSq_j))
       (L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)) e').symm
       ?_
-    exact_mod_proofs hA
+    fo_apply hA using hA
   have := isSplitMono_pullbackExchange_app_of_isSplitMono_map_exchangeRight_app
-    (Profinite.padicAlgClRingObj ℓ) φ B (by exact_mod_proofs h)
-  exact_mod_proofs this
+    (Profinite.padicAlgClRingObj ℓ) φ B (by fo_apply h using h)
+  fo_apply this using this
 
 open PadicAlgCl in
 /-- **Split pullback exchanges from unique torsion retractions** (the mechanism of SGA 4½,
