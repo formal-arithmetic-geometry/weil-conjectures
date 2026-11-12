@@ -385,6 +385,9 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   trace "cancel P"
   have cancelQ := cancelP eQ
   trace "cancel Q"
+  run_tac Lean.Elab.Tactic.withMainContext do
+    Lean.logInfo m!"e: {(← Lean.Meta.getLocalDeclFromUserName `e).type}"
+    Lean.logInfo m!"cancelQ: {(← Lean.Meta.getLocalDeclFromUserName `cancelQ).type}"
   have cancel := cancelQ e
   trace "cancel e"
   have cancel' := cancel
