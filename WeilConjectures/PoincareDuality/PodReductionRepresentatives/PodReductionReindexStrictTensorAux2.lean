@@ -63,6 +63,7 @@ theorem scalarUnitSection_eq (W : Scheme.{u}) (n : ℕ)
       unrestrictedIntegralTensorSection l E W n M U 1 x :=
   finiteAdjunction_unit_apply l E W n M U x
 
+set_option trace.profiler true in
 set_option maxHeartbeats 2000000 in
 -- The finite component unfolds four transported tensor comparisons.
 /-- The strict reduction tensor map sends the reduction of `1 ⊗ (x ⊗ y)` to the tensor of the
