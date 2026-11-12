@@ -41,7 +41,6 @@ private theorem derived_unique_fac
     Iso.refl_hom, NatTrans.id_app, Category.comp_id] using
     Functor.leftDerivedNatTrans_app LF LF' c c' W (𝟙 _) K
 
-set_option profiler true in
 /-- The specified nonflat derived scalar pullback comparison has the specified restriction mate.
 
 Source: proof step 2 of `lem-sp-original-integral-finite-quotient-mate-transport`, above
@@ -86,11 +85,9 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc]
-  have hfac := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hfac
-  erw [CategoryTheory.Functor.map_id, Category.comp_id,
-    CategoryTheory.Functor.map_id, Category.id_comp] at hfac
-  exact hfac
+  simpa only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
+    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] using
+    derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
 
 
 end AlgebraicGeometry.ProEtale.CondensedRing
