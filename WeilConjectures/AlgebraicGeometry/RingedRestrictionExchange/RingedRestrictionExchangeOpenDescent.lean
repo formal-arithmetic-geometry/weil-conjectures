@@ -834,6 +834,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   apply Iso.ext
   apply NatTrans.ext
   funext N
+  trace_state
   apply (cancel_mono (db.hom.app N)).mp
   change (da.hom.app N ≫ t.hom.app N ≫ db.inv.app N) ≫ db.hom.app N = _
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
