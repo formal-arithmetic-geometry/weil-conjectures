@@ -44,7 +44,6 @@ namespace NearbyCyclesModel
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
-set_option trace.profiler true in
 /-- **Nearby cycles commute with extension of scalars** along a coefficient change `a : Λ ⟶ Λ'`,
 at a complex `K` at which `Rj_*` commutes with the extension of scalars: then
 `Λ' ⊗ᴸ Ψ_M K ≅ Ψ_M (Λ' ⊗ᴸ K)`, the pullbacks commuting with extension of scalars
