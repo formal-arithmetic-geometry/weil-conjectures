@@ -394,16 +394,25 @@ theorem native_forget_normalized_binary_models
     let θ := (HomologicalComplex.mapBifunctorFlipIso T P
       (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
     let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
-    obtain ⟨ψ, hψ, hloc⟩ := (native_normalized_tensor_models k₀ l X).choose_spec.2
-      P T I hP hT hI φ
+    have hn := (native_normalized_tensor_models k₀ l X).choose_spec.2 P T I hP hT hI φ
+    let ψ := hn.choose
+    have hψ := hn.choose_spec.1
+    have hloc := hn.choose_spec.2
     have hψj : ψ = j := normalized_binary_uncurry_eq a P T I j ψ hψ
-    subst ψ
-    obtain ⟨hUI, χ, hχ, hs⟩ := native_hom_evaluation_square_all_sources k₀ l X
+    rw [hψj] at hψ hloc
+    have heval := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
+    have hUI := heval.choose
+    let χ := heval.choose_spec.choose
+    have hχ := heval.choose_spec.choose_spec.1
+    have hs := heval.choose_spec.choose_spec.2
     let φ' := V.map φ ≫ χ.hom
     have hUP := native_two_sided_kflat_forget k₀ l X P hP
     have hUT := native_two_sided_kflat_forget k₀ l X T hT
-    obtain ⟨ψ', hψ', hloc'⟩ := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
+    have ho := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
+    let ψ' := ho.choose
+    have hψ' := ho.choose_spec.1
+    have hloc' := ho.choose_spec.2
     let v := chain P T
     have hchain' : V.map j = v.hom ≫ ψ' := by
       apply HomologicalComplex.hom_ext
