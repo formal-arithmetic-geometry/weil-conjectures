@@ -34,7 +34,9 @@ private theorem ringedSwap_summand
     letI := SheafOfModules.symmetricCategory R
     RingedForgetTensorTransposition.tensorSummand J R P Q p q n hpq ≫
         (CochainComplex.Monoidal.braiding P Q).hom.f n =
-      SMul.smul ((p * q).negOnePow : ℤ) ((β_ (P.X p) (Q.X q)).hom ≫
+      (@Preadditive.homGroup (RingedTensorModules.{u, u, u} J R) _ inferInstance
+        (P.X p ⊗ Q.X q) (((coefficientTotalTensor.{u, u, u} J R).obj (Q, P)).X n)).zsmul
+        ((p * q).negOnePow : ℤ) ((β_ (P.X p) (Q.X q)).hom ≫
         RingedForgetTensorTransposition.tensorSummand J R Q P q p n hqp) := by
   letI := SheafOfModules.isMonoidal_W_independentCoefficients R
   letI := SheafOfModules.monoidalCategory R
