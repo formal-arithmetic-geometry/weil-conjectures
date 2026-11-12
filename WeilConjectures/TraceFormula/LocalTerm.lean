@@ -488,7 +488,8 @@ of `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem localTerm_eq_of_iso [IsProper B.hom] (j : B ⟶ E) [IsOpenImmersion j.left]
     [IsClosedImmersion j.left] (e : B ≅ point k) [IsProper e.hom.left]
     (α : BorelMooreSection ℓ E) :
-    α.localTerm j = .of (pushforward e.hom (α.restrict j) ≫ (dualizingComplexPointIso ℓ k).hom) := by
+    α.localTerm j =
+      .of (pushforward e.hom (α.restrict j) ≫ (dualizingComplexPointIso ℓ k).hom) := by
   rw [← integral_point, integral_pushforward, localTerm]
 
 end BorelMooreSection
