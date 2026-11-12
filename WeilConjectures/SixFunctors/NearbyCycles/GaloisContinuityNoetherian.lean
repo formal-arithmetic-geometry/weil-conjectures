@@ -38,6 +38,20 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+private lemma map_eq_of_epi_of_intertwining
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (Q : C ⥤ D) (F : D ⥤ E) {A B : C} {Z : D}
+    (i : A ⟶ B) [Epi ((Q ⋙ F).map i)] (e : Q.obj B ≅ Z)
+    {u v : B ⟶ B} {x y : Z ⟶ Z} (huv : i ≫ u = i ≫ v)
+    (hx : e.hom ≫ x = Q.map u ≫ e.hom) (hy : e.hom ≫ y = Q.map v ≫ e.hom) :
+    F.map x = F.map y := by
+  have h : (Q ⋙ F).map u = (Q ⋙ F).map v := by
+    apply (cancel_epi ((Q ⋙ F).map i)).1
+    simpa only [Functor.map_comp] using congrArg (Q ⋙ F).map huv
+  apply (cancel_epi (F.map e.hom)).1
+  rw [← F.map_comp, ← F.map_comp, hx, hy, F.map_comp, F.map_comp]
+  exact congrArg (fun f ↦ f ≫ F.map e.hom) h
+
 namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
@@ -124,29 +138,14 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       (pullbackAction_fst h _ specGaloisAction_comp τ) j 1
       (restrictNormal_eq_one_of_forall_apply_eq Ω L' τ hτ ▸
         pullbackAction_comp_galoisLevelProjection h L' τ)
-  have key (τ : Ω ≃ₐ[L] Ω) (hτ : ∀ x : L', τ x = x) := by
-    have hτ' := congrArg Φ.map (hU τ hτ)
-    rwa [Φ.map_comp, Φ.map_comp] at hτ'
-  have hG := (cancel_epi ((Φ.mapCocone
-      ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).ι.app j)).1
-    ((key σ hσ).trans (key 1 fun _ ↦ rfl).symm)
-  have hA : Ψ.map
-      (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-        (pullbackAction h _ specGaloisAction_comp σ)
-        (pullbackAction_fst h _ specGaloisAction_comp σ)
-        (pullbackAction_fst h _ specGaloisAction_comp σ)
-        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) =
-      Ψ.map
-      (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-        (pullbackAction h _ specGaloisAction_comp 1)
-        (pullbackAction_fst h _ specGaloisAction_comp 1)
-        (pullbackAction_fst h _ specGaloisAction_comp 1)
-        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
-    apply (cancel_epi (Ψ.map eK.hom)).1
-    simp only [← Ψ.map_comp, eK,
-      GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport]
-    exact (Ψ.map_comp _ _).trans ((congrArg (fun f ↦ f ≫ Ψ.map eK.hom) hG).trans
-      (Ψ.map_comp _ _).symm)
+  have he (τ : Ω ≃ₐ[L] Ω) :=
+    GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport
+      (Profinite.continuousMapRingObj T₀) K a hK _ e
+      (pullbackAction h _ specGaloisAction_comp τ)
+      (pullbackAction_fst h _ specGaloisAction_comp τ)
+  have hA := map_eq_of_epi_of_intertwining DerivedCategory.Q Ψ
+    (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j) eK
+    ((hU σ hσ).trans (hU 1 fun _ ↦ rfl).symm) (he σ) (he 1)
   have hact (τ : Ω ≃ₐ[L] Ω) := congrArg H.map
     (galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω τ C)
   simp only [H.map_comp] at hact
