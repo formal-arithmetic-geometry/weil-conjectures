@@ -245,7 +245,7 @@ section Devissage
 variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
   {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
 
-set_option trace.profiler true in
+set_option profiler true in
 omit [IsOpenImmersion j'] in
 /-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be a quasi-compact open immersion with
 closed complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*`
@@ -284,21 +284,27 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := inferInstance
   let (X : Scheme.{u}) : MonoidalClosed (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := inferInstance
+  -- Elaborate each derived functor once, including its K-flat tensor instances.
+  let gStar := L((gZ)^*⟦Λ⟧)
+  let jStar := L((j)^*⟦Λ⟧)
+  let jStar' := L((j')^*⟦Λ⟧)
+  let gUStar := L((gU)^*⟦Λ⟧)
+  let jPush := R((j)_*⟦Λ⟧)
   -- the triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`
   obtain ⟨C, v', w, hT⟩ := distinguished_cocone_triangle
     ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M)
   have hC : boundedConstructible (condensedRingObj Λ Z) C :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₃ _ hT hM hjM
   -- `C` is supported on `W`
-  have hjC : IsZero ((L((j)^*⟦Λ⟧)).obj C) := by
-    have h₁ : IsIso ((L((j)^*⟦Λ⟧)).map
+  have hjC : IsZero (jStar.obj C) := by
+    have h₁ : IsIso (jStar.map
         ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M)) :=
       IsIso.of_isIso_fac_right (hh := IsIso.id _)
         ((derivedUpperStarLowerStarAdjunction Λ j).left_triangle_components M)
-    exact (Triangle.isZero₃_iff_isIso₁ _ ((L((j)^*⟦Λ⟧)).map_distinguished _ hT)).2 h₁
-  have hjC' : IsZero ((L((j)^*⟦Λ⟧)).obj (C⟦(-1 : ℤ)⟧)) :=
+    exact (Triangle.isZero₃_iff_isIso₁ _ (jStar.map_distinguished _ hT)).2 h₁
+  have hjC' : IsZero (jStar.obj (C⟦(-1 : ℤ)⟧)) :=
     ((shiftFunctor _ (-1 : ℤ)).map_isZero hjC).of_iso
-      (((L((j)^*⟦Λ⟧)).commShiftIso (-1 : ℤ)).app C)
+      ((jStar.commShiftIso (-1 : ℤ)).app C)
   have hu := isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero Λ j i hij hjC'
   have hC' : boundedConstructible (condensedRingObj Λ Z) (C⟦(-1 : ℤ)⟧) :=
     (boundedConstructible _).le_shift (-1 : ℤ) C hC
@@ -312,36 +318,36 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
   let := adj.rightAdjointCommShift ℤ
   have := adj.commShift_of_leftAdjoint ℤ
   have : (ihom K).IsTriangulated := adj.isTriangulated_rightAdjoint
-  let adj' : (curriedTensor _).obj ((L((gZ)^*⟦Λ⟧)).obj K) ⊣ ihom ((L((gZ)^*⟦Λ⟧)).obj K) :=
+  let adj' : (curriedTensor _).obj (gStar.obj K) ⊣ ihom (gStar.obj K) :=
     ihom.adjunction _
   let := adj'.rightAdjointCommShift ℤ
   have := adj'.commShift_of_leftAdjoint ℤ
-  have : (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).IsTriangulated := adj'.isTriangulated_rightAdjoint
-  have hT₁ := (L((gZ)^*⟦Λ⟧)).map_distinguished _ ((ihom K).map_distinguished _ hT')
-  have hT₂ := (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).map_distinguished _
-    ((L((gZ)^*⟦Λ⟧)).map_distinguished _ hT')
+  have : (ihom (gStar.obj K)).IsTriangulated := adj'.isTriangulated_rightAdjoint
+  have hT₁ := gStar.map_distinguished _ ((ihom K).map_distinguished _ hT')
+  have hT₂ := (ihom (gStar.obj K)).map_distinguished _
+    (gStar.map_distinguished _ hT')
   have : IsIso (ihomUpperStarComparison Λ gZ K
       (Triangle.mk ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M) v' w).invRotate.obj₁) :=
     hφ₁
   refine Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton hT₁ hT₂ _ _
-    (ihomUpperStarComparison Λ gZ K ((R((j)_*⟦Λ⟧)).obj ((L((j)^*⟦Λ⟧)).obj M)))
+    (ihomUpperStarComparison Λ gZ K (jPush.obj (jStar.obj M)))
     (ihomUpperStarComparison_naturality Λ gZ K _)
     (ihomUpperStarComparison_naturality Λ gZ K _) ?_
   -- the third term is `Rj'_*` of an object, and `Lj'^*` kills the first one
-  let eB := (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).mapIso
-      (asIso ((baseChangeMap Λ sqU.toCommSq).app ((L((j)^*⟦Λ⟧)).obj M))) ≪≫
+  let eB := (ihom (gStar.obj K)).mapIso
+      (asIso ((baseChangeMap Λ sqU.toCommSq).app (jStar.obj M))) ≪≫
     ihomRightDerivedLowerStarIso Λ j' _ _
-  have hz₀ : IsZero ((L((j)^*⟦Λ⟧)).obj ((ihom K).obj (C⟦(-1 : ℤ)⟧))) :=
+  have hz₀ : IsZero (jStar.obj ((ihom K).obj (C⟦(-1 : ℤ)⟧))) :=
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
-      hij.symm.disjoint _).of_iso ((L((j)^*⟦Λ⟧)).mapIso ((ihom K).mapIso
+      hij.symm.disjoint _).of_iso (jStar.mapIso ((ihom K).mapIso
         (asIso ((derivedUpperStarLowerStarAdjunction Λ i).unit.app (C⟦(-1 : ℤ)⟧))) ≪≫
           ihomRightDerivedLowerStarIso Λ i K _))
-  have hz : IsZero ((L((j')^*⟦Λ⟧)).obj ((L((gZ)^*⟦Λ⟧)).obj ((ihom K).obj (C⟦(-1 : ℤ)⟧)))) :=
-    ((L((gU)^*⟦Λ⟧)).map_isZero hz₀).of_iso
+  have hz : IsZero (jStar'.obj (gStar.obj ((ihom K).obj (C⟦(-1 : ℤ)⟧)))) :=
+    (gUStar.map_isZero hz₀).of_iso
       ((pullbackSquareComparison Λ sqU.toCommSq).app _)
   exact (derivedUpperStarLowerStarAdjunction Λ j').subsingleton_hom_of_isZero_leftAdjoint eB
     (((shiftFunctor _ (1 : ℤ)).map_isZero hz).of_iso
-      (((L((j')^*⟦Λ⟧)).commShiftIso (1 : ℤ)).app _))
+      ((jStar'.commShiftIso (1 : ℤ)).app _))
 
 end Devissage
 
