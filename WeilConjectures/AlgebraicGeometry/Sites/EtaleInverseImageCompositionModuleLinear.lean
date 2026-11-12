@@ -48,7 +48,6 @@ private theorem exists_comparison_with_unique_unit
   rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
   exact (hc' G).trans (hu G).symm
 
-set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
 image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
