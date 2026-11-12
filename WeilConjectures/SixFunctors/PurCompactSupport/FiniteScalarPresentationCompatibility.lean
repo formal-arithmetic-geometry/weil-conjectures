@@ -114,8 +114,12 @@ private theorem finitePullback_native
     simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
       Functor.whiskerLeft_app] at h
     rw [he] at h
-    dsimp only [finitePullbackIso] at h
-    exact congrArg (fun z ↦ z.val.app (Opposite.op V) x) h
+    have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) x) h
+    change (finitePullbackIso l E n f).hom.app M |>.val.app
+      (Opposite.op ((proEtaleBaseChange f).obj V))
+      (((proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f)).unit.app M).val.app
+        V x) = _ at hv
+    exact hv
   · exact (openSquarePullbackModel_existsUnique A f).exists.choose_spec
 
 private theorem finiteOpen_native
