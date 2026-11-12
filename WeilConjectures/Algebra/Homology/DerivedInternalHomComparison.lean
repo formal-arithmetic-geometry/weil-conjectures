@@ -77,12 +77,20 @@ local instance : Abelian.HasKInjectiveResolutions 𝒜 :=
 set_option synthInstance.maxSize 512 in
 noncomputable local instance : MonoidalCategory (HomotopyCategory 𝒜 (.up ℤ)) := inferInstance
 
+private def curryProdResolutionIso
+    {D₁ D₂ D₃ D₄ : Type*} [Category D₁] [Category D₂] [Category D₃] [Category D₄]
+    (I : D₂ ⥤ D₂) (H : D₁ ⥤ D₂ ⥤ D₃) (Q : D₃ ⥤ D₄) (L : D₁) :
+    (Functor.curry.obj ((𝟭 D₁).prod I ⋙ Functor.uncurry.obj H ⋙ Q)).obj L ≅
+      I ⋙ H.obj L ⋙ Q :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
+    intro M M' g
+    simp only [Functor.curry_obj_obj_map, Functor.comp_map, Functor.prod_map,
+      Functor.id_map, Functor.uncurry_obj_map, Functor.map_id, NatTrans.id_app,
+      Category.id_comp, Iso.refl_hom, Category.comp_id])
+
 variable [HasDerivedCategory.{u} 𝒜] (L : CochainComplex 𝒜 ℤ)
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Matching the identities of `(CochainComplex 𝒜 ℤ)ᵒᵖ` in the naturality square needs
--- unification up to the universe presentation `max u u u` of `homComplexFunctor`.
 /-- `R𝓗om(Q L, -) ∘ Q ≅ Q ∘ 𝓗om^•(L, -) ∘ I`, where `I` is the functorial K-injective
 resolution used to define `derivedInternalHom`. -/
 noncomputable def derivedInternalHomCompQIso :
@@ -96,15 +104,11 @@ noncomputable def derivedInternalHomCompQIso :
       (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} 𝒜 M).2,
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} 𝒜 M⟩))
       ((DerivedCategory.Q).op.prod DerivedCategory.Q)
-  NatIso.ofComponents (fun M ↦ e.app (op L, M)) fun {M M'} g ↦ by
-    have h := e.hom.naturality ((𝟙 (op L), g) : (op L, M) ⟶ (op L, M'))
-    simp only [Functor.comp_map, Functor.prod_map, Functor.op_map, Functor.id_map,
-      Functor.uncurry_obj_map, Functor.curry_obj_obj_map, unop_id, Functor.map_id, op_id,
-      Iso.app_hom] at h ⊢
-    rw [show (homComplexFunctor.{u, u, u, u} (C := C) (J := J) (R := R)).map (𝟙 (op L)) = 𝟙 _
-      from Functor.map_id _ _, NatTrans.id_app] at h
-    refine h.trans ?_
-    congr 2
+  ((Functor.curryObjProdComp DerivedCategory.Q.op DerivedCategory.Q
+    (derivedInternalHom J R)).app (op L)).symm ≪≫
+    (Functor.curry.mapIso e).app (op L) ≪≫
+    curryProdResolutionIso (CochainComplex.kInjectiveResolutionFunctor.{u} 𝒜)
+      (homComplexFunctor.{u, u, u, u} (C := C) (J := J) (R := R)) DerivedCategory.Q (op L)
 
 variable [(HomotopyCategory.quasiIso 𝒜
   (ComplexShape.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure]
