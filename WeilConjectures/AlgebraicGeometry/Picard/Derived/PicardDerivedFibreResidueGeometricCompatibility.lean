@@ -62,6 +62,24 @@ private theorem transport_square_apply
   rw [hφ]
   exact (congrArg ei (map_square_apply H u a.hom b.hom t h (eK z))).trans (hg _)
 
+private theorem transport_square_family
+    {C D : Type*} [Category* C] [Category* D] {R : Type*} [Ring R]
+    (F : C ⥤ D) (H : D ⥤ ModuleCat R)
+    {I : Type*} {A : C} {B : I → C} {A' : D} {B' : I → D}
+    (u : ∀ i, A ⟶ B i) (a : F.obj A ≅ A') (b : ∀ i, F.obj (B i) ≅ B' i)
+    (t : ∀ i, A' ⟶ B' i) (h : ∀ i, F.map (u i) ≫ (b i).hom = a.hom ≫ t i)
+    {P : Type*} {Q : I → Type*} [Add P] [∀ i, Add (Q i)]
+    (e : H.obj A' ≃+ P) (ei : ∀ i, H.obj (B' i) ≃+ Q i) (g : ∀ i, P → Q i)
+    (hg : ∀ i z, ei i (H.map (t i) z) = g i (e z)) :
+    ∃ (d : H.obj (F.obj A) ≃+ P) (di : ∀ i, H.obj (F.obj (B i)) ≃+ Q i),
+      ∀ i z, di i (H.map (F.map (u i)) z) = g i (d z) := by
+  refine ⟨(H.mapIso a).toLinearEquiv.toAddEquiv.trans e,
+    fun i ↦ (H.mapIso (b i)).toLinearEquiv.toAddEquiv.trans (ei i), ?_⟩
+  intro i
+  exact transport_square_apply H (F.map (u i)) a (b i) (t i) (h i)
+    (AddEquiv.refl _) (AddEquiv.refl _) (H.map (F.map (u i))) (fun _ ↦ rfl)
+    e (ei i) (g i) (hg i)
+
 private theorem residue_fibre_isomorphisms
     {X S W : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
@@ -89,6 +107,50 @@ private theorem residue_fibre_isomorphisms
     (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
   choose ei heif heis using hFi
   exact ⟨r, hr, e, ei, hef, hes, heif, heis⟩
+
+private theorem structure_cohomology_of_normalization
+    [∀ Y : Scheme.{v},
+      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
+    {W T X : Scheme.{v}} [IsAffine T] {I : Type*} {Xi : I → Scheme.{v}}
+    (g : T ⟶ W) (q : X ⟶ T) [IsProper q]
+    (qi : ∀ i, Xi i ⟶ T) [∀ i, IsProper (qi i)] (j : ∀ i, Xi i ⟶ X)
+    (E : schemeDerivedCategory W) (Ei : I → schemeDerivedCategory W)
+    (u : ∀ i, E ⟶ Ei i)
+    (h : ∃ (a : (derivedPullback g).obj E ≅
+        (schemeDerivedDirectImage q).obj ((DerivedCategory.singleFunctor
+          (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0).obj
+            (SheafOfModules.unit X.ringCatSheaf)))
+      (ai : ∀ i, (derivedPullback g).obj (Ei i) ≅
+        (schemeDerivedDirectImage (qi i)).obj ((DerivedCategory.singleFunctor
+          (SheafOfModules.{v} (moduleRings (Xi i).toRingedSpace)) 0).obj
+            (SheafOfModules.unit (Xi i).ringCatSheaf))),
+      ∃ hj : ∀ i, j i ≫ q = qi i,
+        ∀ i, (derivedPullback g).map (u i) ≫ (ai i).hom =
+          a.hom ≫ relativeMVUnit (j i) q ((DerivedCategory.singleFunctor
+            (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0).obj
+              (SheafOfModules.unit X.ringCatSheaf)) ≫
+          (schemeDerivedDirectImage (j i ≫ q)).map
+            (Modules.canonicalSinglePullbackMap (j i) (SheafOfModules.unit X.ringCatSheaf) ≫
+              (DerivedCategory.singleFunctor _ 0).map (Modules.pullbackObjUnitIso (j i)).hom) ≫
+          eqToHom (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj
+            ((DerivedCategory.singleFunctor
+              (SheafOfModules.{v} (moduleRings (Xi i).toRingedSpace)) 0).obj
+                (SheafOfModules.unit (Xi i).ringCatSheaf))) (hj i))) :
+    let H := DerivedCategory.homologyFunctor
+      (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 1 ⋙
+      SheafOfModules.evaluation (moduleRings T.toRingedSpace) (.op ⊤)
+    ∃ (e : H.obj ((derivedPullback g).obj E) ≃+ Sheaf.H (structureSheafAb X) 1)
+      (ei : ∀ i, H.obj ((derivedPullback g).obj (Ei i)) ≃+
+        Sheaf.H (structureSheafAb (Xi i)) 1),
+      ∀ i z, ei i (H.map ((derivedPullback g).map (u i)) z) =
+        structureSheafCohomologyPullback (j i) 1 (e z) := by
+  intro H
+  obtain ⟨a, ai, hj, hnorm⟩ := h
+  exact transport_square_family (derivedPullback g) H u a ai _ hnorm
+    (structureDerivedImageCohomologyEquiv q)
+    (fun i ↦ structureDerivedImageCohomologyTargetEquiv q (j i) (hj i))
+    (fun i ↦ structureSheafCohomologyPullback (j i) 1)
+    (fun i ↦ structure_derived_image_cohomology_naturality q (j i) (hj i))
 
 set_option profiler true in
 
@@ -138,26 +200,14 @@ theorem picard_derived_fibre_residue_geometric_compatibility
   classical
   obtain ⟨r, hr, eF, eFi, heFfst, heFsnd, heFifst, heFisnd⟩ :=
     residue_fibre_isomorphisms f Xi fi k w s hw
-  obtain ⟨a, ai, hj, hnorm⟩ := picard_derived_residue_normalization
-    f Xi fi ui hui L W k (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
-    eF heFfst heFsnd eFi heFifst heFisnd τ
   let q := pullback.snd f (S.fromSpecResidueField s) ≫ r.inv
   let qi := fun i ↦ pullback.snd (fi i) (S.fromSpecResidueField s) ≫ r.inv
   let j := fun i ↦ ((Over.pullback (S.fromSpecResidueField s)).map
     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left
-  let H := DerivedCategory.homologyFunctor
-    (SheafOfModules.{v} (moduleRings (Spec (W.residueField w)).toRingedSpace)) 1 ⋙
-    SheafOfModules.evaluation (moduleRings (Spec (W.residueField w)).toRingedSpace) (.op ⊤)
-  let e := structureDerivedImageCohomologyEquiv q
-  let ei := fun i ↦ structureDerivedImageCohomologyTargetEquiv q (j i) (hj i)
-  let d := (H.mapIso a).toLinearEquiv.toAddEquiv
-  let di := fun i ↦ (H.mapIso (ai i)).toLinearEquiv.toAddEquiv
-  refine ⟨d.trans e, fun i ↦ (di i).trans (ei i), ?_⟩
-  intro i
-  exact transport_square_apply H _ a (ai i) _ (hnorm i) (AddEquiv.refl _) (AddEquiv.refl _)
-    ((derivedFiberCohomologyFunctor W w 1).map
-      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)) (fun _ ↦ rfl) e (ei i)
-    (structureSheafCohomologyPullback (j i) 1)
-    (structure_derived_image_cohomology_naturality q (j i) (hj i))
+  exact structure_cohomology_of_normalization (W.fromSpecResidueField w) q qi j _ _
+    (fun i ↦ picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)
+    (picard_derived_residue_normalization f Xi fi ui hui L W k
+      (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
+      eF heFfst heFsnd eFi heFifst heFisnd τ)
 
 end AlgebraicGeometry.Scheme
