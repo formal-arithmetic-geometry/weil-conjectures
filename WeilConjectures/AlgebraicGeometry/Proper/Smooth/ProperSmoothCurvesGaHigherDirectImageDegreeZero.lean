@@ -51,6 +51,7 @@ attribute [local instance]
 namespace Scheme.Modules
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- The kernel check of the explicit section equivalences is slow.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
