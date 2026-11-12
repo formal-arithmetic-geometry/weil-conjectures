@@ -73,7 +73,6 @@ theorem towerSheafIso_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckTo
   have h := congrArg (fun f ↦ ((f.app n).f k).val.app U z) e.hom_inv_id
   exact h
 
-set_option profiler true in
 /-- The tower map induced by the chain-level model of the system tensor comparison sends the
 total tensor of two unit-inserted original sections to the same total tensor after reindexing.
 Source: Stacks 03EK, 07A4, 0941. -/
