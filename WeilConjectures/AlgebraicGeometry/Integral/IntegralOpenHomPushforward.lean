@@ -25,7 +25,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option trace.profiler true in
 /-- Internal Hom out of open extension by zero is open direct image of internal
 Hom into the open restriction. All coefficients are the identified completed rings.
 Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN
