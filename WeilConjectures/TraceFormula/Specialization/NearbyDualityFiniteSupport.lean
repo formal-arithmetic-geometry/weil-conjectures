@@ -233,9 +233,10 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     have hT₂ := L((sliceSpecialMap (traitSliceCoord k') hRM (hcoord a))^*⟦
       Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT₁
     have hz := Triangle.isZero₃_of_isIso₁ _ hT₂ hs'
+    have hcoord_a := hcoord a
     obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (k' := k') (K := traitSliceField k')
       (M := M.restrictOpen V) (q := V.ι ≫ q) (g := (M.j ⁻¹ᵁ V).ι ≫ g)
-      (traitSliceCoord k') hRM (b := coord a) (hcoord a)
+      (traitSliceCoord k') hRM (b := coord a) hcoord_a
     rw [← hl]
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
       ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)
