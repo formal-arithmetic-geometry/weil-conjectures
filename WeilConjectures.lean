@@ -21027,6 +21027,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Loca
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalKunnethMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FailureNormalBase
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChangeNormal
