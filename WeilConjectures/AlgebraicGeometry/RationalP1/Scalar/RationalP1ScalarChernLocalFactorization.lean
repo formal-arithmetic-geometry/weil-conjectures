@@ -187,6 +187,37 @@ private theorem unitEndpoint_nonempty
     Nonempty (UnitPullEndpoint Λ f) := by
   exact ⟨nativeUnitPullEndpoint Λ f⟩
 
+-- Realize the normalized adjunct before specializing the scheme and coefficient diagrams.
+set_option profiler true in
+private theorem realize_local_regular_adjunct (l : ℕ) [Fact l.Prime]
+    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
+    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
+    (f : X ⟶ S) (hS : IsUnit (l : Γ(S, ⊤)))
+    (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
+    (eX : CompletedRealization l X) (eS : CompletedRealization l S)
+    (D : DiagonalRightDerived
+      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f))
+    (canonical : D.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
+    (hcanonical : IsCanonicalRightDerived
+      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f) D canonical)
+    (push : CompletedPushSquare l f eX eS p.Rc D)
+    (b : DiagonalTrace.completedUnit l S ⟶
+      p.Rc.R.obj ((DiagonalTrace.completedLine l X) ⟦(2 : ℤ)⟧))
+    (hb : CompletedChernNormalized l p b)
+    (z : DiagonalTrace.completedUnit l X ⟶
+      (DiagonalTrace.completedLine l X) ⟦(2 : ℤ)⟧)
+    (hz : CompletedLocalChernNormalized l p z) :
+    realizeScalarChern l f eX eS p.Rc D push b =
+      regularUnitPush _ f D ≫ D.R.map (realizeLocalChern l X eX z) := by
+  obtain ⟨cF⟩ := unitEndpoint_nonempty (Profinite.continuousMapRingObj.{u} ℤ_[l]) f
+  have hlocal := diagonalCompletedModelChern_adjunct l f hS p eX eS D canonical
+    hcanonical push cF b hb z (by
+      simpa only [ModelLocalChernNormalized, CompletedLocalChernNormalized] using hz)
+  have hpush := diagonalCanonicalUnitPush l f D canonical hcanonical cF _
+    (eX.localChern l X z)
+  simpa only [realizeLocalChern, CompletedRealization.localChern, regularUnitPush]
+    using hlocal.trans hpush.symm
+
 -- Compare the native and bundled monoidal structures on the derived coefficient unit.
 private theorem native_p2_endpoint
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -245,9 +276,8 @@ private theorem canonical_q_local_adjunct
   rw [canonical_local_adjunct Λ _ D canonical hcanonical cF]
   rw [unitPullEndpoint_eq Λ Y cF]
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
 -- Compare the canonical adjunct and the monoidal endpoint before specializing coefficients.
+set_option profiler true in
 private theorem canonical_p2_local_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})
@@ -262,11 +292,13 @@ private theorem canonical_p2_local_adjunct
       (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
         (secondProjection Y)).homEquiv _ _ ((scalarP2UnitIso Λ Y).hom ≫ z) := by
   let cF := nativeUnitPullEndpoint Λ (secondProjection Y)
-  rw [canonical_local_adjunct Λ _ D canonical hcanonical cF]
-  rw [native_p2_endpoint Λ Y cF]
+  refine (canonical_local_adjunct Λ _ D canonical hcanonical cF T z).trans ?_
+  exact congrArg (fun e : (derivedUpper Λ (secondProjection Y)).obj
+      (unit Λ (ProjectiveLine Y)) ⟶ unit Λ (diagonalSurface Y) ↦
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (secondProjection Y)).homEquiv
+      (unit Λ (ProjectiveLine Y)) T (e ≫ z)) (native_p2_endpoint Λ Y cF)
 
-set_option trace.profiler true in
-set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Concrete coefficient conversions cross the named derived functor interfaces.
 /-- A normalized completed adjunct comes from its local section class, and this
 factorization survives realization and both finite-field scalar changes.
@@ -329,19 +361,8 @@ theorem scalar_chern_local_factorization
       (Scheme.Pic.map r.t₂.model.model.hom
         (SpTowerClasses.hyperplanePic (ProjectiveLine Y))))
   refine ⟨z, w, hz, hw, ?_, ?_⟩
-  · obtain ⟨cF⟩ := unitEndpoint_nonempty
-      (Profinite.continuousMapRingObj.{u} ℤ_[l]) (ProjectiveLine Y ↘ Y)
-    have hlocal := diagonalCompletedModelChern_adjunct l _ hY r.tq.toPresentation
-      r.eP r.eY family.zl.Rq family.zl.q_canonical family.zl.q_unit r.q_square
-      cF a ha z (by simpa only [ModelLocalChernNormalized] using hz)
-    have hpush := diagonalCanonicalUnitPush l _ family.zl.Rq family.zl.q_canonical
-      family.zl.q_unit cF _ (r.eP.localChern l _ z)
-    rw [← hpush] at hlocal
-    have hreal : realizeScalarChern l _ r.eP r.eY r.tq.Rc family.zl.Rq r.q_square a =
-        regularUnitPush _ _ family.zl.Rq ≫ family.zl.Rq.R.map
-          (realizeLocalChern l _ r.eP z) := by
-      simpa only [realizeLocalChern, CompletedRealization.localChern, regularUnitPush]
-        using hlocal
+  · have hreal := realize_local_regular_adjunct l _ hY r.tq.toPresentation
+      r.eP r.eY family.zl.Rq family.zl.q_canonical family.zl.q_unit r.q_square a ha z hz
     unfold scalarQChern scalarQLocalChern
     dsimp only
     rw [hreal, extend_local_adjunct _ _ _ _ _ _ ((family.toIntegral E).units _),
@@ -349,19 +370,8 @@ theorem scalar_chern_local_factorization
     simp only [coefficient, line]
     exact canonical_q_local_adjunct _ Y (family.rational E).Rq
       (family.rational E).q_canonical (family.rational E).q_unit _ _
-  · obtain ⟨cF⟩ := unitEndpoint_nonempty
-      (Profinite.continuousMapRingObj.{u} ℤ_[l]) (secondProjection Y)
-    have hlocal := diagonalCompletedModelChern_adjunct l _ hP r.t₂.toPresentation
-      r.eW r.eP family.zl.R₂ family.zl.p₂_canonical family.zl.p₂_unit r.p₂_square
-      cF b hb w (by simpa only [ModelLocalChernNormalized] using hw)
-    have hpush := diagonalCanonicalUnitPush l _ family.zl.R₂ family.zl.p₂_canonical
-      family.zl.p₂_unit cF _ (r.eW.localChern l _ w)
-    rw [← hpush] at hlocal
-    have hreal : realizeScalarChern l _ r.eW r.eP r.t₂.Rc family.zl.R₂ r.p₂_square b =
-        regularUnitPush _ _ family.zl.R₂ ≫ family.zl.R₂.R.map
-          (realizeLocalChern l _ r.eW w) := by
-      simpa only [realizeLocalChern, CompletedRealization.localChern, regularUnitPush]
-        using hlocal
+  · have hreal := realize_local_regular_adjunct l _ hP r.t₂.toPresentation
+      r.eW r.eP family.zl.R₂ family.zl.p₂_canonical family.zl.p₂_unit r.p₂_square b hb w hw
     unfold scalarP2Chern scalarP2LocalChern
     dsimp only
     rw [hreal, extend_local_adjunct _ _ _ _ _ _ ((family.toIntegral E).units _),
