@@ -249,6 +249,7 @@ private theorem normalized_full_cube
     _ _ _ _ _ _ hN hS a.hom d.hom hA hD hc
 
 end FullCube
+set_option trace.profiler true in
 set_option maxHeartbeats 3000000 in
 -- The concrete normalization needs the coefficient-system elaboration budget.
 /-- Exact scalar restriction commutes with the normalized Brown image square.
