@@ -89,6 +89,28 @@ theorem galoisTensorRightColimit (Y : Scheme.{u})
 attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimit
   galoisTensorRightColimit
 
+/-- The exchange of a Galois layer is the image of the derived unit, with the comparison
+isomorphisms on either side. -/
+lemma pullbackExchange_galoisLayerHom_app_eq_comp_unit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
+    (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  dsimp only [galoisLayer, galoisLayerExchangeIso, Functor.comp_map, Functor.mapIso_hom,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]
+  simpa only [Functor.map_comp] using hα
+
 /-- Transport the normalized trace retraction of a tower from a bounded below complex
 across an isomorphism in the derived category. -/
 theorem galoisTower_derivedUnit_retraction_of_iso
@@ -167,11 +189,13 @@ theorem exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
             (pullbackAction_fst h _ specGaloisAction_comp (act k)) A) ≫ φ = φ) →
           G.map (R ≫ (CondensedRing.derivedUpperStarLowerStarAdjunction
             (Profinite.continuousMapRingObj T₀)
-            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app A) ≫ φ = φ := by
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app A) ≫ φ =
+              φ := by
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ A hA
   choose F₀ hF₀ using hterms
   have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
-      (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj T₀) S)),
+      (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj T₀) S)),
       IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) :=
     fun j M ↦ isIso_galois_card_smul_id T₀ j (hp j) M
   have hc := fun n ↦ isColimitModuleCocone_galoisTower Ω h T₀ (K.X n)
@@ -216,7 +240,7 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
@@ -260,19 +284,19 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
               (Profinite.continuousMapRingObj T₀)).app C) ≫ φ = φ := by
   obtain ⟨R, hRC, hcoinv⟩ := exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     T₀ h Ω hp (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC act hact
-  have hα := Hom.pullbackExchange_app_of_total_eq_id (Profinite.continuousMapRingObj T₀) N
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
-    (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp] at hα
-  rw [Functor.map_comp] at hα
+  have hα := pullbackExchange_galoisLayerHom_app_eq_comp_unit
+    (Profinite.continuousMapRingObj T₀) N h Ω C
   refine Exists.imp ?_ (exists_retraction_of_eq_comp_map_comp_of_coinvariant
     (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
     (A₀ := L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)
-    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦Profinite.continuousMapRingObj T₀⟧).obj
-      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦Profinite.continuousMapRingObj T₀⟧).obj
+    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
+      Profinite.continuousMapRingObj T₀⟧).obj
+      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+        Profinite.continuousMapRingObj T₀⟧).obj
         (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))
     (((N.galoisLayerHom h Ω).pullbackExchange (Profinite.continuousMapRingObj T₀)).app C)
-    ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app _)
+    ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app
+      ((N.nearbyCycles (Profinite.continuousMapRingObj T₀)).obj C))
     (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C)
     ((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
       (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
