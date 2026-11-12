@@ -32,8 +32,45 @@ attribute [local instance_reducible] IntegralOnSlice.Site IntegralOnSlice.topolo
   IntegralOnSlice.restrict IntegralOnSlice.ring
 attribute [local instance_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 
-set_option maxHeartbeats 800000 in
--- Comparing the normalized ring actions consumes heartbeats across several restrictions.
+private theorem mapCompIdApply
+    {C D : Type*} [Category C] [Category D] {FC : D → D → Type*} {CC : D → Type*}
+    [∀ A B, FunLike (FC A B) (CC A) (CC B)] [ConcreteCategory D FC] (F : C ⥤ D) {A B : C}
+    (f : A ⟶ B) (h : B ⟶ A) (hcomp : f ≫ h = 𝟙 _) (x : CC (F.obj A)) :
+    (F.map h) ((F.map f) x) = x := by
+  rw [← ConcreteCategory.comp_apply, ← F.map_comp, hcomp, F.map_id,
+    ConcreteCategory.id_apply]
+
+private theorem finitePullbackGenerator_counit
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n : ℕ)
+    (M : integralOperationsFiniteModules l E Y n) (V : Y.ProEt)
+    (x : M.val.obj (op V)) :
+    ((integralOperationsLevelPullback l E g n).obj M).val.map
+        (proEtaleIsoCommaArrow g ((proEtaleBaseChange g).obj V)).op
+      (integralOperationsPullbackGenerator l E g n M
+        ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V))
+        (M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+          (inferInstance : WeaklyEtale g) trivial).counit.app V).op x)) =
+      integralOperationsPullbackGenerator l E g n M V x := by
+  let adj := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+    (inferInstance : WeaklyEtale g) trivial
+  let c := adj.counit.app V
+  let N := (integralOperationsLevelPullback l E g n).obj M
+  let η := (coefficientProEtaleModuleAdjunction.{u, u} g
+    (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app M
+  have hη := PresheafOfModules.naturality_apply η.val c.op x
+  change integralOperationsPullbackGenerator l E g n M
+      ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V)) (M.val.map c.op x) =
+    N.val.map ((proEtaleBaseChange g).map c).op
+      (integralOperationsPullbackGenerator l E g n M V x) at hη
+  rw [hη]
+  have ht : ((proEtaleBaseChange g).map c).op ≫
+      (proEtaleIsoCommaArrow g ((proEtaleBaseChange g).obj V)).op = 𝟙 _ := by
+    rw [← op_comp]
+    exact congrArg Quiver.Hom.op (adj.right_triangle_components V)
+  exact mapCompIdApply N.val.presheaf _ _ ht _
+
 /-- The finite quotient augmentation agrees on each degree after the two comparisons.
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
 (blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
@@ -78,38 +115,14 @@ theorem isomorphismOrdinaryFiniteAugmentation
     (inferInstance : WeaklyEtale g) trivial
   let c := adj.counit.app V.unop
   let r := (((augmentation l E Y none).app P).app (op n)).f i
-  have hr := congrArg (fun f ↦ f x) (r.val.naturality c.op)
-  change r.val.app (op ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V.unop)))
-      ((P.X i).val.map c.op x) =
-    (((unrestrictedIntegralComplexFunctor l E Y n).obj P).X i).val.map c.op
-      (r.val.app V x) at hr
+  have hr := PresheafOfModules.naturality_apply r.val c.op x
   erw [hr]
   have hins := (QuotientTensor.insertion_existsUnique l E g n
     ((unrestrictedIntegralFiniteComplex l E Y n).obj P)).exists.choose_spec i
   erw [hins]
   simp only [QuotientTensor.tensorSection, one_smul]
   let M := ((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i
-  let N := (integralOperationsLevelPullback l E g n).obj M
-  let η := (coefficientProEtaleModuleAdjunction.{u, u} g
-    (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app M
-  have hη := congrArg (fun f ↦ f (r.val.app V x)) (η.val.naturality c.op).symm
-  change N.val.map ((proEtaleBaseChange g).map c).op
-      (integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x)) =
-    integralOperationsPullbackGenerator l E g n M
-      ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V.unop))
-      (M.val.map c.op (r.val.app V x)) at hη
-  erw [← hη]
-  have ht : ((proEtaleBaseChange g).map c).op ≫
-      (proEtaleIsoCommaArrow g ((proEtaleBaseChange g).obj V.unop)).op = 𝟙 _ := by
-    rw [← op_comp]
-    exact congrArg Quiver.Hom.op (adj.right_triangle_components V.unop)
-  have hv : N.val.map (proEtaleIsoCommaArrow g ((proEtaleBaseChange g).obj V.unop)).op
-      (N.val.map ((proEtaleBaseChange g).map c).op
-        (integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x))) =
-      integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x) := by
-    erw [← N.val.map_comp_apply, ht, N.val.map_id]
-    rfl
-  erw [hv]
+  erw [finitePullbackGenerator_counit l E g n M V.unop (r.val.app V x)]
   have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
   have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
     P n i V.unop x
