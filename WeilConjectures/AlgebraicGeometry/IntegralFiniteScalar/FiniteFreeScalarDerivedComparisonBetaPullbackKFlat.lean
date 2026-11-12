@@ -27,6 +27,7 @@ coefficient extensions.
 set_option Elab.async false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option profiler true
 set_option backward.defeqAttrib.useBackward true
 
 universe u
