@@ -181,34 +181,16 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.2
   let G := coefficientSequenceEvaluation l E Y n
   let H := coefficientSequenceEvaluation l E X n
-  have h₂ : (mateEquiv (ProEtale.VaryingRing.moduleAdj (rs l E) (qs l E) f)
-    (proEtaleRingModuleAdjunction f
-    (ProEtale.VaryingRing.coefficients (rs l E) Y n)
-    (ProEtale.VaryingRing.coefficients (rs l E) X n)
-    (ProEtale.StrictTower.constantRingIso (rs l E n) f))
-      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv) =
-      (ProEtale.VaryingRing.moduleEvalP (rs l E) (qs l E) f n).hom := by
-    exact varyingModuleEvalMate (rs l E) (qs l E) f n
-  have hb : IsIso (mateEquiv
-    (ProEtale.VaryingRing.moduleAdj (rs l E) (qs l E) f) (proEtaleRingModuleAdjunction f
-    (ProEtale.VaryingRing.coefficients (rs l E) Y n)
-    (ProEtale.VaryingRing.coefficients (rs l E) X n)
-    (ProEtale.StrictTower.constantRingIso (rs l E n) f))
-      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv) := by
-    rw [h₂]
-    exact ProEtale.VaryingRing.moduleEvalP_hom_isIso (rs l E) (qs l E) f n
+  have hb := ProEtale.VaryingRing.moduleEvalP_hom_isIso (rs l E) (qs l E) f n
+  rw [← varyingModuleEvalMate (rs l E) (qs l E) f n] at hb
   have hi := varyingDerivedMateIso (rs l E) (qs l E) f n
   apply derivedMate_isIso_of_rightEqualities
     (G := G) (H := H)
+    (G' := ProEtale.VaryingRing.eval (rs l E) (qs l E) Y n)
+    (H' := ProEtale.VaryingRing.eval (rs l E) (qs l E) X n)
     (Q := ProEtale.VaryingRing.pull (rs l E) (qs l E) f)
     (qAdditive := qadd)
     (tAdditive := ProEtale.VaryingRing.push_additive (rs l E) (qs l E) f)
-    (gnAdditive := coefficientSequenceEvaluation_additiveInstance l E Y n)
-    (hnAdditive := coefficientSequenceEvaluation_additiveInstance l E X n)
-    (gnLimits := coefficientSequenceEvaluation_limits l E Y n)
-    (gnColimits := coefficientSequenceEvaluation_colimits l E Y n)
-    (hnLimits := coefficientSequenceEvaluation_limits l E X n)
-    (hnColimits := coefficientSequenceEvaluation_colimits l E X n)
     (qLimits := (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.1)
     (qColimits := (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.2)
     (gAdditive := coefficientSequenceEvaluation_additiveInstance l E Y n)
@@ -230,6 +212,6 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).symm
     (by rfl) (finitePush_eq l E f n) (by rfl) (by rfl) hθ hb
     ?_
-  clear h₂ hb
+  clear hb
   exact hi
 end WeilConjectures.FrobeniusExchange
