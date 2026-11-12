@@ -834,10 +834,10 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   apply Iso.ext
   apply NatTrans.ext
   funext N
-  have h : da.hom.app N ≫ t.hom.app N =
-      (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N) ≫
-        (identityDirect T R).inv.app
-          ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N := by
+  let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
+  let v := (identityDirect T R).inv.app
+    ((proEtaleRingModuleDirectImage p R S c).obj N)
+  have h : da.hom.app N ≫ t.hom.app N = u ≫ v ≫ db.hom.app N := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
@@ -845,10 +845,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
     change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
-      (db.hom.app N).val.app V (((identityDirect T R).inv.app
-        ((proEtaleRingModuleDirectImage p R S c).obj N)).val.app V
-        ((((proEtaleRingModuleDirectImage p R S c).map
-          ((identityDirect P S).hom.app N)).val.app V) m))
+      (db.hom.app N).val.app V (v.val.app V (u.val.app V m))
     have hda := ha N V.unop m
     change (da.hom.app N).val.app V m = _ at hda
     rw [hda]
