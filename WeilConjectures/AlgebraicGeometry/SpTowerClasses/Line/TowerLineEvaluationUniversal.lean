@@ -80,8 +80,6 @@ attribute [local irreducible] constantResidueHomEquiv
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
--- The coefficient-system encodings require normalization when applying the Hom equivalence.
 /-- Evaluation of scalar extension represents additive maps from the roots sheaf.
 Source: blueprint classes (2), evaluation of coefficient extension
 (blueprint: lem-sp-tower-line-evaluation-universal).
@@ -162,9 +160,9 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
     rfl
   · intro N f U a x x' v hx hv
     erw [hΦ]
-    refine (hsection N f U a x v hv).trans ?_
-    exact congrArg (fun t : M.val.obj U ↦
+    have h := congrArg (fun t : M.val.obj U ↦
       a • (show N.val.obj U from (Ψ N f).val.app U t)) (he U x x' hx).symm
+    exact (hsection N f U a x v hv).trans h
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 
