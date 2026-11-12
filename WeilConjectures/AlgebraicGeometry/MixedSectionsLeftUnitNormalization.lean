@@ -146,6 +146,15 @@ private noncomputable abbrev mixedSectionsSheafAbelian (T : TopCat.{u})
 
 attribute [local instance 2000] mixedSectionsSheafAbelian
 
+-- Reuse the source-object equality in both the unit component and its dependent type.
+private theorem mixedSections_moduleDirectImage_comp_obj
+    {X Y Z : RingedSpace.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X)) (.up ℤ)) :
+    ((RingedSpace.moduleDirectImage (f ≫ g)).mapHomotopyCategory (.up ℤ)).obj K =
+      ((RingedSpace.moduleDirectImage g).mapHomotopyCategory (.up ℤ)).obj
+        (((RingedSpace.moduleDirectImage f).mapHomotopyCategory (.up ℤ)).obj K) := by
+  rfl
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
@@ -247,6 +256,8 @@ theorem mixedSections_left_unit_normalization
   dsimp only [p]
   rw [← Functor.map_comp]
   erw [he]
-  convert h using 1
+  have hK := mixedSections_moduleDirectImage_comp_obj f.toLRSHom.toShHom g.toLRSHom.toShHom K
+  dsimp only [HZ, schemeDerivedGlobalSections] at h ⊢
+  convert h
 
 end AlgebraicGeometry
