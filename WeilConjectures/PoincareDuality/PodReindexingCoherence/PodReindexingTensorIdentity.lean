@@ -256,6 +256,7 @@ private theorem identity_generator_restrict (X : Scheme.{u})
   rfl
 
 -- Pure generators cross the sectionwise coefficient transports in the rewrites.
+set_option profiler true in
 private theorem identity_tensor_chain (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
@@ -318,6 +319,7 @@ private theorem identity_representative_square
     _ = _ := by rw [hδ, Category.assoc, hd, Category.assoc]; rfl
 
 -- Elaborating the K-flat model square unfolds the fixed derived-category transports.
+set_option profiler true in
 private theorem identity_tensor_representative (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
