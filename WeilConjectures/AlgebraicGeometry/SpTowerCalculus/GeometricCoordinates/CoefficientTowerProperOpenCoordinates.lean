@@ -153,7 +153,6 @@ private noncomputable def graphPushIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (SemilinearProperOpen.coefficientMap_forget_eq (graphRings l E) (graphTransitions l E) f)
 
 -- Keep the adjacent maps abstract until the equality transport is performed once.
-set_option profiler true in
 -- The section pins compare functors on large coefficient-system categories.
 private structure OrdinaryModel
     (σ : ∀ T : Scheme.{u}, ∀ n,
@@ -205,7 +204,7 @@ private structure OrdinaryModel
 
 attribute [local instance] OrdinaryModel.additive OrdinaryModel.inverseAdditive
 
-set_option profiler true in
+-- Check the carrier conversion before specializing the abstract rings to the quotient tower.
 private theorem ordinaryPushHorizontal (A : ℕ → Type u) [∀ n, CommRing (A n)]
     (φ : ∀ n, CommRingCat.of (ULift.{u + 1} (A (n + 1))) ⟶
       CommRingCat.of (ULift.{u + 1} (A n))) :
@@ -224,7 +223,6 @@ private theorem ordinaryPushHorizontal (A : ℕ → Type u) [∀ n, CommRing (A 
   intro C X Y f M m n h V x
   exact SpTowerShriek.canonicalPushHorizontal C φ f M h V x
 
-set_option profiler true in
 private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : SS l E X (σgraph l E X) ⥤ SS l E Y (σgraph l E Y))
     (d : G ≅ VaryingRing.push (graphRings l E) (graphTransitions l E) f)
@@ -244,7 +242,6 @@ private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact ((VaryingRing.moduleEvalP_existsUnique
     (graphRings l E) (graphTransitions l E) f n).choose_spec.1 M V.unop _).symm
 
-set_option profiler true in
 -- Equality transport identifies the full coefficient-system presentation.
 private noncomputable def ordinaryModel
     (σ : ∀ T : Scheme.{u}, ∀ n,
