@@ -129,8 +129,7 @@ private theorem sheafification_normalization
   erw [Category.comp_id] at hh
   simpa only [Category.assoc] using hh.symm
 
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
+set_option profiler true in
 -- This compares homology in module sheaves, abelian sheaves and abelian presheaves.
 private theorem sheafification_unit_of_resolution
     {Y : RingedSpace.{u}}
@@ -167,13 +166,9 @@ private theorem sheafification_unit_of_resolution
       (DerivedCategory.homologyFunctorFactors _ q).hom.app J =
     (DerivedCategory.homologyFunctorFactors _ q).hom.app I ≫
       HomologicalComplex.homologyMap s q at hf
-  change S.map (H.map ((localComplexUnit F
-      (RingedSpace.localSectionsEnoughKInjectives Y)).app I)) ≫
-      (RingedSpace.localHypercohomologySheafificationAt q (DerivedCategory.Q.obj I)).hom ≫
-      T.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app I) ≫
-      T.map (HomologicalComplex.homologyMap s q) = _
+  simp only [Category.assoc]
   erw [← T.map_comp, ← hf, T.map_comp]
-  erw [← Category.assoc _ (T.map _) (T.map _), ← hn]
+  erw [← reassoc_of% hn]
   dsimp only [RingedSpace.localHypercohomologySheafificationModel,
     Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom, Iso.app_inv]
   simp only [Functor.map_comp, Category.assoc]
@@ -188,7 +183,8 @@ private theorem sheafification_unit_of_resolution
       (RingedSpace.localSectionComplexSheafificationIso Y q J).hom ≫
       T.map ((DerivedCategory.homologyFunctorFactors _ q).inv.app J) ≫
       T.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app J) = _
-  erw [← T.map_comp, Iso.inv_hom_id_app, T.map_id, Category.comp_id]
+  erw [((DerivedCategory.homologyFunctorFactors _ q).app J).map_inv_hom_id T,
+    Category.comp_id]
   have hcomp :
       (RingedSpace.derivedLocalAbelianSections Y).map (DerivedCategory.Q.map s) ≫
         (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
