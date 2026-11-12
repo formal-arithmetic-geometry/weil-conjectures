@@ -419,10 +419,13 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
       (ModuleCat.ringExtensionTmul.{d + 1, d + 1} _ _ (Ideal.Quotient.mk _ s) x))
   simp only [map_sum, map_smul, ringQuotientCoordinate_tmul] at hh
   rw [sheaf_sum_apply]
-  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    ModuleCat.comp_apply]
-  simp only [quotientCoordinateSheaf_tmul]
   calc
+    _ = ∑ i, (quotientReconstructMap Y b I M i).hom.app (op U)
+        ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
+          (lisseCoherence_quotientScalarGenerator Y _ _ M U (Ideal.Quotient.mk _ s) x)) := by
+      apply Finset.sum_congr rfl
+      intro i _
+      rfl
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
         ((toSheafification Y.smallEtaleTopology
           (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
@@ -432,6 +435,7 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
             (algebraMap R (S ⧸ I.map (algebraMap R S))) _ 1 (b.repr s i • x)) := by
       apply Finset.sum_congr rfl
       intro i _
+      rw [quotientCoordinateSheaf_tmul]
       dsimp only [quotientReconstructMap, ObjectProperty.FullSubcategory.comp_hom,
         NatTrans.comp_app]
       erw [ModuleCat.comp_apply, lisseCoherence_scalarSheafUnit_apply]
