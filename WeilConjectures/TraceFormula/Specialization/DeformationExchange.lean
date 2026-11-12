@@ -54,6 +54,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
 
+private lemma eq_fullSubcategory_hom_to_map {C : Type*} [Category C]
+    {P : ObjectProperty C} {A B : P.FullSubcategory} {f : A.obj ⟶ B.obj} {g : A ⟶ B}
+    (h : f = g.hom) : f = P.ι.map g := h
+
 private lemma componentSpecialLift_comp_d_deformation
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
     (j : B ⟶ F.F) [IsOpenImmersion j.left] {b : RationalPoint B}
@@ -229,6 +233,7 @@ private lemma supportCompactSupportExchange_component_identity
       (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
           (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
+  instantiate_by_match eq_fullSubcategory_hom_to_map [h := hF2'] as hF2map
   have hfsp := hc.componentSpecialLift_comp_d_deformation k' F j hb
   have hL := eqToHom_comp_map_lowerStarComp_inv ℓ (j ≫ F.d) (j ≫ F.d) rfl (diag X)
     (componentPointModelHom_comp_diag_left j) (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -255,63 +260,6 @@ private lemma supportCompactSupportExchange_component_identity
   run_tac do
     let n ← Lean.getRemainingHeartbeats
     Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let saved ← Lean.Meta.saveState
-    let e ← Lean.Meta.mkConstWithFreshMVarLevels ``CategoryTheory.supportIdentity_aux
-    let ty ← Lean.Meta.inferType e
-    let mut names : Array Lean.Name := #[]
-    let mut t := ty
-    while t.isForall do
-      names := names.push t.bindingName!
-      t := t.bindingBody!
-    let (mvs, _, concl) ← Lean.Meta.forallMetaTelescope ty
-    for (binder, value) in #[
-        ("Sp", "specialization (ℓ := ℓ) k' y"),
-        ("Ts", "specializationProd (ℓ := ℓ) k' (y ≫ c.c₁)"),
-        ("SX", "specialization (ℓ := ℓ) k' (y ≫ c.c₁)"),
-        ("SB", "NearbyCyclesModel.boundedConstructibleNearbyCycles hM"),
-        ("χΔ", "diagPushforwardExchange ℓ X k' (y ≫ c.c₁)"),
-        ("N₀", "(𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)"),
-        ("Rι'", "boundedConstructibleLowerStar ℓ (hc.specialFixedLocus k').ι"),
-        ("Rd'", "boundedConstructibleLowerShriek ℓ (hc.specialFixedLocus k').d"),
-        ("Ξ'", "lowerStarLowerShriekCompIso ℓ (hc.specialFixedLocus k').isPullback.w"),
-        ("M'", "(boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj\n      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("hχΔ", "hχΔ'"),
-        ("hχg", "hχg"),
-        ("hχdj", "hχdj"),
-        ("hF2", "hF2"),
-        ("hF2'", "hF2'"),
-        ("hL", "hL"),
-        ("hL'", "hL'"),
-        ("hF1", "hF1"),
-        ("hF3", "hF3"),
-        ("t", "(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _)"),
-        ("hι", "(ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj\n      (Profinite.padicAlgClRingObj ℓ) (deformationSpecialFibre X (y ≫ c.c₁).left.ker k' ⨯\n        deformationSpecialFibre X (y ≫ c.c₁).left.ker k').left))).faithful"),
-        ("hback", "NatIso.hom_app_comp_inv_app_comp_map_eqToHom\n      (boundedConstructibleLowerStarComp ℓ (j ≫ F.d) (diag X)) (𝟙_ _) rfl"),
-        ("cinv", "(boundedConstructibleLowerStarCompOfEq ℓ (hc.componentSpecialLift k' j hb)\n      (hc.specialFixedLocus k').ι (hc.componentSpecialLift_ι k' j hb)).inv.app\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("hcinv", "Iso.inv_hom_id_app (boundedConstructibleLowerStarCompOfEq ℓ\n      (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').ι\n        (hc.componentSpecialLift_ι k' j hb))\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("tr", "eqToHom (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj\n      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)"),
-        ("hback'", "NatIso.hom_app_comp_inv_app_comp_map_eqToHom_eq (boundedConstructibleLowerStarComp ℓ\n      (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)\n      (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')))\n      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))\n      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)\n      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)")] do
-      let some idx := names.findIdx? (· == Lean.Name.mkSimple binder)
-        | throwError "missing binder"
-      let ety ← Lean.instantiateMVars (← Lean.Meta.inferType mvs[idx]!)
-      let .ok parsed := Lean.Parser.runParserCategory (← Lean.getEnv) `term value
-        | throwError "parse failure"
-      let v ← Lean.Elab.Tactic.elabTerm parsed none
-      Lean.Elab.Term.synthesizeSyntheticMVarsNoPostponing
-      let v ← Lean.instantiateMVars v
-      Lean.logInfo m!"matching {binder} at {(← Lean.getRemainingHeartbeats) / 1000}"
-      if binder == "hF2'" then
-        Lean.logInfo m!"special pattern: {ety}\nspecial value: {← Lean.Meta.inferType v}"
-      synMatch ety (← Lean.Meta.inferType v)
-      mvs[idx]!.mvarId!.assign v
-    Lean.logInfo m!"matching target at {(← Lean.getRemainingHeartbeats) / 1000}"
-    synMatch concl (← Lean.Elab.Tactic.getMainTarget)
-    Lean.logInfo m!"transporting at {(← Lean.getRemainingHeartbeats) / 1000}"
-    let _ ← transportedApp e mvs
-    let n ← Lean.getRemainingHeartbeats
-    saved.restore
-    Lean.logInfo m!"finished transport at {n / 1000}"
   apply_by_match CategoryTheory.supportIdentity_aux
     [Sp := specialization (ℓ := ℓ) k' y,
     Ts := specializationProd (ℓ := ℓ) k' (y ≫ c.c₁),
@@ -325,7 +273,7 @@ private lemma supportCompactSupportExchange_component_identity
     M' := (boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
     hχΔ := hχΔ', hχg := hχg, hχdj := hχdj,
-    hF2 := hF2, hF2' := hF2', hL := hL, hL' := hL', hF1 := hF1, hF3 := hF3,
+    hF2 := hF2, hF2' := hF2map, hL := hL, hL' := hL', hF1 := hF1, hF3 := hF3,
     t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
     hι := (ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj
       (Profinite.padicAlgClRingObj ℓ) (deformationSpecialFibre X (y ≫ c.c₁).left.ker k' ⨯
