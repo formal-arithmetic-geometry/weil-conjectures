@@ -65,7 +65,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 private theorem cone_precompose
-    {E : Type*} [Category E] [Preadditive E] [Abelian E] [HasBinaryBiproducts E]
+    {E : Type*} [Category E] [Preadditive E] [HasBinaryBiproducts E]
     {P Q A B A' B' : CochainComplex E ℤ}
     (p : P ⟶ Q) (t : A ⟶ B) (t' : A' ⟶ B')
     (x : P ⟶ A) (y : Q ⟶ B) (h : p ≫ y = x ≫ t)
@@ -90,7 +90,7 @@ private theorem cone_precompose
       Category.assoc]
 
 private theorem mappingCone_map_isIso
-    {E : Type*} [Category E] [Preadditive E] [HasBinaryBiproducts E]
+    {E : Type*} [Category E] [Preadditive E] [Abelian E] [HasBinaryBiproducts E]
     [HasDerivedCategory E]
     {P Q A B : CochainComplex E ℤ}
     (p : P ⟶ Q) (t : A ⟶ B) (x : P ⟶ A) (y : Q ⟶ B)
