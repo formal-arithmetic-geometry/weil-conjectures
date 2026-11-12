@@ -117,13 +117,27 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
     ((AdicSheaf.forget _).map X.str.hom)
-  simp only [IsoAlgebra.frobeniusNatTrans_app,
-    ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.comp_map]
-  simp only [Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
-  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
-  simp only [Category.assoc] at h ⊢
+  change (globalSectionsLowerStarIso _
+      (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
+        (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))).inv.app X.carrier.X ≫
+    (globalSectionsLowerStarIso _
+      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app
+        ((adicLowerStar l (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
+          (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))).obj X.carrier).X ≫
+    (Sheaf.Γ _ _).map
+      (((adicLowerStarGeometricFiberMapCompFrobeniusIso l
+        (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _)).hom.app
+          X.carrier).hom ≫
+        ((adicLowerStar l (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
+          (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))).map X.str.hom).hom) ≫
+    (globalSectionsLowerStarIso _
+      (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
+        (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))).hom.app X.carrier.X =
+      (globalSectionsLowerStarIso _
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app X.carrier.X ≫
+        (Sheaf.Γ _ _).map X.str.hom.hom
+  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app,
+    adicLowerStar_map_hom, Category.assoc, Category.assoc]
   exact h
 
 
