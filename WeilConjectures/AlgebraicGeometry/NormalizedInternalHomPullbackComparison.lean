@@ -108,7 +108,6 @@ end EvaluationMate
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option trace.profiler true in
 /-- The natural evaluation mate for fixed pullback and tensor-Hom adjunctions.
 This statement concerns only sheaf internal Hom, with no global sections or base rings.
 Source: Stacks, Remark 08I3, Lemmas 08DJ and 079U

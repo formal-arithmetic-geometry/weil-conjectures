@@ -94,6 +94,7 @@ private theorem composite_isRightDerived_of_acyclic
   dsimp [Functor.rightDerivedFunctorCompUnit]
   infer_instance
 
+set_option trace.profiler true in
 /-- Transport a composite derived unit through chosen identifications of its two targets. -/
 private theorem derivedComparison_of_acyclic
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
@@ -135,11 +136,13 @@ private theorem derivedComparison_of_acyclic
         (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _) J
   have hfac : (Functor.rightDerivedFunctorCompUnit F G).app J ≫
       eD.inv.app (DerivedCategory.Qh.obj J) = (F ⋙ G).rightDerivedFunctorUnit.app J := by
-    rw [← heD, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+    erw [← heD, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
   simp only [c, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     NatTrans.comp_app, Iso.symm_hom, Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% hfac]
-  exact Functor.rightDerivedNatTrans_app_assoc _ _ _ _ _ _ J _
+  dsimp only [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
+  rw [Functor.rightDerivedNatTrans_app_assoc]
+  rfl
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
