@@ -180,7 +180,13 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       exact hnonunit (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField)
         (Q := Q) (a := c) hσF hu))
     have hmap := congrArg r (τ.map_sub a b)
-    have h2 : r (τ a - τ b) = 0 := hmap.symm ▸ hτzero
+    have hτzero' : r (τ (a - b)) = 0 := by
+      change r (τ c) = 0
+      exact hτzero
+    have h2 : r (τ a - τ b) = 0 := by
+      calc
+        r (τ a - τ b) = r (τ (a - b)) := hmap.symm
+        _ = 0 := hτzero'
     exact (sub_eq_zero.1 ((r.map_sub _ _).symm.trans h2)).trans
       ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
   have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
