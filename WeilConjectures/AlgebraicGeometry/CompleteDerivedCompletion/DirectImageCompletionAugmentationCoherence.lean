@@ -22,7 +22,6 @@ set_option linter.style.setOption false
 set_option linter.unusedSimpArgs false
 set_option linter.unusedTactic false
 set_option linter.unnecessarySeqFocus false
-set_option maxHeartbeats 1000000
 
 universe u
 
@@ -38,7 +37,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option profiler true in
 /-- The canonical pullback/reduction comparison carries the degree-zero
 augmentation through constant towers.  This is obtained by expanding
 `Localization.liftNatTrans` and applying the inr equation for mapping cones;
