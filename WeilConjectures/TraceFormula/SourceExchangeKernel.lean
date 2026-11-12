@@ -124,7 +124,8 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
       (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map
         ((ihom.ev K).app (dualizingComplex' ℓ X))))
     (exceptionalKunnethAdjoint ℓ K)
-  trace_state
+  dsimp only [externalProduct, verdierDual, dualizingComplex, tensorLeft, Functor.comp_obj,
+    Functor.id_obj, curriedTensor_obj_obj, curriedTensor_obj_map] at htransport ⊢
   exact htransport
 
 end AlgebraicGeometry.ProEtale.CondensedRing
