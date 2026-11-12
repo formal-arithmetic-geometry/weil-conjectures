@@ -81,6 +81,13 @@ private theorem iso_eq_of_inv {C : Type*} [Category C] {A B : C}
     (a b : A ≅ B) (g : B ⟶ A) (h : a.hom ≫ g = 𝟙 A) (hb : HEq b.inv g) : a = b :=
   iso_eq_of_hom_inv a b ((congrArg (fun z ↦ a.hom ≫ z) (eq_of_heq hb)).trans h)
 
+private theorem exists_iso_eq_of_inv {C : Type*} [Category C] {A B : C}
+    {E : Sort*} {P : E → Prop} {F : E → A ≅ B}
+    (a : A ≅ B) (g : B ⟶ A) (h : a.hom ≫ g = 𝟙 A)
+    (he : ∃ e, P e ∧ HEq (F e).inv g) : ∃ e, P e ∧ a = F e := by
+  obtain ⟨e, he, hinv⟩ := he
+  exact ⟨e, he, iso_eq_of_inv a (F e) g h hinv⟩
+
 /-- A common dense refinement of a compactification with itself supplies a dense source. -/
 private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
     [CompactSpace Y] [QuasiSeparatedSpace Y] [IsSeparated f]
@@ -166,18 +173,14 @@ private theorem comparisonsForMorphism
     let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
       ⟨ObjectProperty.homMk r, hb⟩
     let L := J.obj K
-    obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
-      f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
-    obtain ⟨e, he, hinv⟩ := integral_boundaryRefinement_normalization Λ k ℓ hadm
-      f c d r hb K L.property
-    refine ⟨e, he, ?_⟩
-    have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
-    have hn' : (ψ ⟨c⟩ ⟨d⟩).hom.app L ≫
-        compactificationRefinementComponent Λ r' K.obj = 𝟙 _ :=
-      cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
+    refine exists_iso_eq_of_inv ((φ c d).app K)
+      (compactificationRefinementComponent Λ r' K.obj) ?_ ?_
+    · obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
+        f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
+      have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
+      exact cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
         (refinementComponent_comp Λ ℓ hadm r' a L.obj)
-    exact iso_eq_of_inv _ _ _ hn'
-      hinv
+    · exact integral_boundaryRefinement_normalization Λ k ℓ hadm f c d r hb K L.property
 
 -- The explicit comparison family has several large derived-category instance arguments.
 attribute [-instance] CategoryTheory.catToReflQuiver in
