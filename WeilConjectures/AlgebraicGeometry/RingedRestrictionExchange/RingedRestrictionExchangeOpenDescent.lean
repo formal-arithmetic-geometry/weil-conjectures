@@ -863,7 +863,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   have hda := ha N V.unop m
   change (da.hom.app N).val.app V m = _ at hda
   rw [hda]
-  rw [direct_transport_inv]
+  rw [direct_transport_inv e]
   have hidP := identityDirect_hom_sections P S N ((proEtaleBaseChange p).obj V.unop) m
   change (((proEtaleRingModuleDirectImage p R S c).map
     ((identityDirect P S).hom.app N)).val.app V) m = _ at hidP
