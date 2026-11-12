@@ -99,7 +99,6 @@ noncomputable def classTransportMap :
     ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K
         (𝟙 _))))
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- **The test maps of the transport map** (blueprint `lem-trf-trace-source-exchange`, Step 1):
 `test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read through the transport. -/
