@@ -165,11 +165,9 @@ private theorem comparisonsForCoefficient
       Functor.isoWhiskerLeft J (ψ ⟨c⟩ ⟨d⟩)
     refine ⟨φ, ?_, ?_, ?_⟩
     · intro c
-      exact (congrArg (Functor.isoWhiskerLeft J) (hi ⟨c⟩)).trans
-        (Functor.isoWhiskerLeft_refl J _)
+      simp only [φ, hi, Functor.isoWhiskerLeft_refl]
     · intro c d e
-      exact (Functor.isoWhiskerLeft_trans J (ψ ⟨c⟩ ⟨d⟩) (ψ ⟨d⟩ ⟨e⟩)).symm.trans
-        (congrArg (Functor.isoWhiskerLeft J) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩))
+      simp only [φ, ← Functor.isoWhiskerLeft_trans, hc]
     · intro c d r hb K
       let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
         ⟨ObjectProperty.homMk r, hb⟩
