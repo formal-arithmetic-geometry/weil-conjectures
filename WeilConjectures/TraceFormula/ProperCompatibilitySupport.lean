@@ -85,9 +85,10 @@ theorem homEquiv_symm_supportIso_hom :
     (boundedConstructibleLowerShriek ℓ c.support)
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).inv
     (dualizingComplexComp ℓ F.d).inv]
-  simp only [NatTrans.naturality_comp_assoc
-    (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ F.ι_support).hom
-    (dualizingComplexComp ℓ F.d).inv]
+  have n := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ F.ι_support).hom.naturality
+    (dualizingComplexComp ℓ F.d).inv
+  simp only [Functor.comp_map] at n
+  simp only [reassoc_of% n]
 
 end Correspondence.FixedLocus
 
@@ -179,7 +180,6 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     Functor.map_app_comp_map_map_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv,
     lowerShriekSquareIso_trace_exchange_assoc ℓ wc wb wgb wq wh whd]
-  simp only [Functor.map_comp, Category.assoc]
 
 end Exchange
 
