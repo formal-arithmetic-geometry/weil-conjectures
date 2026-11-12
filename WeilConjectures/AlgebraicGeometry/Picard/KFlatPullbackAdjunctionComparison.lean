@@ -134,49 +134,31 @@ private theorem kFlat_pullback_adjunction_comparison_naturality
     (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
       (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
         DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
-    (hε : (derivedPullback g).IsLeftDerivedFunctor ε
-      (HomotopyCategory.quasiIso _ (.up ℤ)))
+    (adj : derivedPullback g ⊣ schemeDerivedDirectImage g)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)
     (α : P ⟶ ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
       (.up ℤ)).obj I)
-    [hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))] :
-    ((relativeMVAdj g).homEquiv _ _)
-      ((kFlat_pullback_adjunction_comparison_iso g ε P hεP).inv ≫
-        DerivedCategory.Q.map
-          ((((Classical.choose
-            (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
-              (.up ℤ)).homEquiv _ _).symm α)) =
+    (a : ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P ⟶ I)
+    [hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))]
+    (h : adj.homEquiv _ _
+        (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+          DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map a)) =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map α) ≫
+        (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) :
+    adj.homEquiv _ _
+      ((kFlat_pullback_adjunction_comparison_iso g ε P hεP).inv ≫ DerivedCategory.Q.map a) =
       DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I := by
   let : HasDerivedCategory.{w} S.Modules := d S
   let : HasDerivedCategory.{w} S'.Modules := d S'
-  let q := HomotopyCategory.quotient
-    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
-  let q' := HomotopyCategory.quotient
-    (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) (.up ℤ)
-  let A := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
-  let ac := A.mapHomologicalComplex (.up ℤ)
-  let a := (ac.homEquiv _ _).symm α
-  let ah := A.mapHomotopyCategory (.up ℤ)
-  let η := (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit
-  have h : (relativeMVAdj g).homEquiv _ _
-      (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) =
-      DerivedCategory.Qh.map ((ah.homEquiv _ _) (q'.map a)) ≫ η.app (q'.obj I) := by
-    exact Classical.choose_spec (exists_schemeDerivedAdjunction g ε hε)
-      (q.obj P) (q'.obj I) (q'.map a)
-  have ha : (ah.homEquiv _ _) (q'.map a) = q.map α := by
-    simpa only [A, ac, a, ah, q, q'] using
-      (kFlat_pullback_adjunction_comparison_transpose (g := g) (P := P) (I := I) (α := α))
-  rw [ha] at h
-  change ((relativeMVAdj g).homEquiv _ _)
-    (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) = _ at h
   rw [kFlat_pullback_adjunction_comparison_iso_inv]
   dsimp only [Functor.mapIso_inv]
   simp only [Category.assoc]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality a]
   rw [Adjunction.homEquiv_naturality_left]
   simp only [asIso_hom]
-  rw [← Category.assoc (ε.app (q.obj P))]
+  rw [← Category.assoc (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))]
   rw [Adjunction.homEquiv_naturality_right]
   erw [h]
   have hf : ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategoryFactors
@@ -261,7 +243,12 @@ theorem kFlat_pullback_adjunction_comparison
   apply ((relativeMVAdj g).homEquiv _ _).injective
   rw [Equiv.apply_symm_apply]
   let hεP_inst : IsIso (ε.app (q.obj P)) := hεP P hP
-  simpa only [e, a, ac, A] using
-    (kFlat_pullback_adjunction_comparison_naturality (g := g) ε hε P I α)
+  apply kFlat_pullback_adjunction_comparison_naturality g ε (relativeMVAdj g) P I α a
+  have h := Classical.choose_spec (exists_schemeDerivedAdjunction g ε hε)
+    (q.obj P) (q'.obj I) (q'.map a)
+  have ha := kFlat_pullback_adjunction_comparison_transpose (g := g) (P := P) (I := I)
+    (α := α)
+  rw [ha] at h
+  exact h
 
 end AlgebraicGeometry
