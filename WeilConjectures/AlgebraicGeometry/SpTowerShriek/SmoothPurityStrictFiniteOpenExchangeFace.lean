@@ -220,9 +220,8 @@ private meta partial def conversionCongruence
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
   let h ← compute
-  let ty ← Lean.Meta.mkHEq a b
-  let h ← Lean.Meta.mkAuxTheorem ty h
-    (zetaDelta := true) (kind? := `_finiteCongruence)
+  -- Reduction steps are already checked separately. Share the congruence proof itself
+  -- instead of repeatedly closing and kernel-checking its entire local context.
   cache.modify fun m => m.insert (a, b) h
   return h
 
@@ -233,8 +232,8 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let y ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
     let strip (e : Lean.Expr) : Lean.Expr := e.replace fun v =>
       if v.isMData then some v.consumeMData else none
-    let x := strip x
-    let y := strip y
+    let x ← Lean.Meta.zetaReduce (strip x)
+    let y ← Lean.Meta.zetaReduce (strip y)
     let cache ← IO.mkRef ({} : Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr)
     let congrCache ← IO.mkRef
       ({} : Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem)
