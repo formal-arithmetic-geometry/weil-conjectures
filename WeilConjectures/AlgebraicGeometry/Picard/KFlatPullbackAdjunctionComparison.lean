@@ -161,7 +161,8 @@ theorem kFlat_pullback_adjunction_comparison
   rw [ha] at h
   change ((relativeMVAdj g).homEquiv _ _)
     (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) = _ at h
-  dsimp only [e, Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv, asIso_inv]
+  dsimp only [e, kFlat_pullback_adjunction_comparison_iso, Iso.trans_inv, Iso.symm_inv,
+    Functor.mapIso_inv, asIso_inv]
   simp only [Category.assoc]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality a]
   rw [Adjunction.homEquiv_naturality_left]
