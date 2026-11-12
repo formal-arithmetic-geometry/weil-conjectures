@@ -120,8 +120,68 @@ private theorem transition_cube_descent
   rw [α.naturality, β.naturality]
   exact congrArg (fun z ↦ z ≫ (rE ⋙ sY ⋙ qL).map e.hom) (h P)
 
-set_option maxHeartbeats 800000 in
--- The eight-sided categorical pasting has many reassociated functor images.
+/-- Paste the scalar, reindexing, and naturality squares in abstract categories,
+so the diagram algebra does not unfold the concrete derived sheaf functors. -/
+private theorem reduction_cube_pasting
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (R : A ⥤ D) (S : B ⥤ D) (T : C ⥤ D)
+    {A₀ A₁ A₂ A₃ A₄ A₅ : A} {B₀ B₁ B₂ B₃ B₄ B₅ : B}
+    {C₀ C₁ C₂ C₃ C₄ C₅ : C} {D₀ D₁ D₂ D₃ D₄ D₅ : D}
+    {γX : R.obj A₀ ⟶ S.obj B₀} {d : B₀ ⟶ B₁} {τ : S.obj B₁ ⟶ T.obj C₁}
+    {δ : A₀ ⟶ A₃} {dL : R.obj A₃ ⟶ T.obj C₀} {γY : C₀ ⟶ C₁}
+    {eY : C₁ ⟶ C₂} {εY : C₂ ⟶ C₃} {qfS : T.obj C₃ ⟶ D₃}
+    {eE : B₁ ⟶ B₂} {qf : B₂ ⟶ B₃} {εX : S.obj B₃ ⟶ D₂} {τc : D₂ ⟶ D₃}
+    {τ' : S.obj B₂ ⟶ T.obj C₂} {fE : A₀ ⟶ A₁} {fX : A₁ ⟶ A₂}
+    {eLX : R.obj A₂ ⟶ D₀} {αX : D₀ ⟶ D₁} {sβ : D₁ ⟶ D₂}
+    {f : B₀ ⟶ B₄} {eEX : B₄ ⟶ B₅} {βE : B₅ ⟶ B₃}
+    {γX' : R.obj A₁ ⟶ S.obj B₄} {εXR : S.obj B₅ ⟶ D₁}
+    {pfY : A₃ ⟶ A₄} {fL : A₄ ⟶ A₅} {dL' : R.obj A₄ ⟶ T.obj C₄}
+    {fY : C₀ ⟶ C₄} {eLY : C₄ ⟶ C₅} {αY : C₅ ⟶ C₃}
+    {qfL : T.obj C₅ ⟶ D₅} {qα : D₅ ⟶ D₃} {bc : A₂ ⟶ A₅}
+    {eLX' : R.obj A₅ ⟶ D₄} {mbc : D₀ ⟶ D₄} {βL : D₄ ⟶ D₅}
+    (hscalarX : R.map fX ≫ eLX ≫ αX = γX' ≫ S.map eEX ≫ εXR)
+    (hscalarY : fY ≫ eLY ≫ αY = γY ≫ eY ≫ εY)
+    (hreindexE : f ≫ eEX ≫ βE = d ≫ eE ≫ qf)
+    (hreindexL : R.map fL ≫ eLX' ≫ βL = dL' ≫ T.map eLY ≫ qfL)
+    (hnτ : S.map eE ≫ τ' = τ ≫ T.map eY)
+    (hτ : S.map qf ≫ εX ≫ τc = τ' ≫ T.map εY ≫ qfS)
+    (hnγ : R.map fE ≫ γX' = γX ≫ S.map f)
+    (hnε : S.map βE ≫ εX = εXR ≫ sβ)
+    (hnb : R.map bc ≫ eLX' = eLX ≫ mbc)
+    (hnD : R.map pfY ≫ dL' = dL ≫ T.map fY)
+    (hnq : T.map αY ≫ qfS = qfL ≫ qα)
+    (hb : fE ≫ fX ≫ bc = δ ≫ pfY ≫ fL)
+    (hc : αX ≫ sβ ≫ τc = mbc ≫ βL ≫ qα) :
+    γX ≫ S.map d ≫ τ ≫ T.map eY ≫ T.map εY ≫ qfS =
+      R.map δ ≫ dL ≫ T.map γY ≫ T.map eY ≫ T.map εY ≫ qfS := by
+  have hleft : γX ≫ S.map d ≫ τ ≫ T.map eY ≫ T.map εY ≫ qfS =
+      R.map fE ≫ R.map fX ≫ eLX ≫ αX ≫ sβ ≫ τc := by
+    calc
+      _ = γX ≫ S.map (d ≫ eE ≫ qf) ≫ εX ≫ τc := by
+        simp only [Functor.map_comp, Category.assoc]
+        rw [← reassoc_of% hnτ, ← hτ]
+      _ = γX ≫ S.map (f ≫ eEX ≫ βE) ≫ εX ≫ τc := by rw [← hreindexE]
+      _ = R.map fE ≫ γX' ≫ S.map eEX ≫ εXR ≫ sβ ≫ τc := by
+        simp only [Functor.map_comp, Category.assoc]
+        rw [reassoc_of% hnε, ← reassoc_of% hnγ]
+      _ = _ := by rw [← reassoc_of% hscalarX]
+  have hright : R.map δ ≫ dL ≫ T.map γY ≫ T.map eY ≫ T.map εY ≫ qfS =
+      R.map fE ≫ R.map fX ≫ eLX ≫ mbc ≫ βL ≫ qα := by
+    calc
+      _ = R.map δ ≫ dL ≫ T.map (fY ≫ eLY ≫ αY) ≫ qfS := by
+        rw [hscalarY]
+        simp only [Functor.map_comp, Category.assoc]
+      _ = R.map δ ≫ R.map pfY ≫ dL' ≫ T.map eLY ≫ qfL ≫ qα := by
+        simp only [Functor.map_comp, Category.assoc]
+        rw [hnq, ← reassoc_of% hnD]
+      _ = R.map δ ≫ R.map pfY ≫ R.map fL ≫ eLX' ≫ βL ≫ qα := by
+        rw [← reassoc_of% hreindexL]
+      _ = R.map fE ≫ R.map fX ≫ R.map bc ≫ eLX' ≫ βL ≫ qα := by
+        simpa only [Functor.map_comp, Category.assoc] using
+          congrArg (fun z ↦ R.map z ≫ eLX' ≫ βL ≫ qα) hb.symm
+      _ = _ := by rw [reassoc_of% hnb]
+  rw [hleft, hright, hc]
+
 private theorem good_reduction
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -175,16 +235,10 @@ private theorem good_reduction
   have hreindexL := podReindexReduction_quotient_normalization l L g D' hD'
     MLY MLX DLY DLX βL hβL PS
   let r := (podReindexCalculus l L X).reduction
-  let p := podOrdinaryReindex l E g
-  let pL := podOrdinaryReindex l L g
-  let q := integralComparisonDerivedSequencePullback l E g
   let qL := integralComparisonDerivedSequencePullback l L g
   let sX := integralComparisonDerivedSequenceScalar l E L ι X
   let sY := integralComparisonDerivedSequenceScalar l E L ι Y
-  let aX := integralOrdinaryDerivedScalar l E L ι X
-  let aY := integralOrdinaryDerivedScalar l E L ι Y
   let γX := podScalarReduction l E L ι X D'.targetRoos S.target
-  let γY := podScalarReduction l E L ι Y D'.sourceRoos S.source
   let τ := (integralComparisonSystemScalarPullback l E L ι g).hom
   let C := (MEY.quotient l E Y).obj P.obj
   have hflat : CochainComplex.IsKFlatIndependentCoefficients
@@ -222,129 +276,8 @@ private theorem good_reduction
         (((integralComparisonSequenceScalarModel l E L ι Y).E.mapHomologicalComplex
           (.up ℤ)).obj C))).1
   simp only [Category.assoc]
-  let K := DerivedCategory.Q.obj P.obj
-  let fE := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app P.obj
-  let fX := (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app PR.obj
-  let fY := (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj
-  let fL := (isoReductionIntegralInverse l L g).mapDerivedCategoryFactors.hom.app PS.obj
-  let eEY := DEY.reductionComparison.app P.obj
-  let eEX := DEX.reductionComparison.app PR.obj
-  let eLY := DLY.reductionComparison.app PS.obj
-  let eLX := DLX.reductionComparison.app
-    (((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)).obj PR.obj)
-  let αXc := (NatIso.mapHomologicalComplex αX (.up ℤ)).inv.app PR.obj
-  let αYc : (MLY.quotient l L Y).obj PS.obj ⟶
-      (((integralComparisonSequenceScalarModel l E L ι Y).E.mapHomologicalComplex
-        (.up ℤ)).obj C) := (NatIso.mapHomologicalComplex αY (.up ℤ)).inv.app P.obj
-  let βEc : (MEX.quotient l E X).obj PR.obj ⟶
-      (((integralComparisonSequencePullback l E g).mapHomologicalComplex (.up ℤ)).obj C) :=
-    (NatIso.mapHomologicalComplex βE (.up ℤ)).inv.app P.obj
-  let βLc : (MLX.quotient l L X).obj ((isoReductionIntegralComplex l L g).obj PS.obj) ⟶
-      (((integralComparisonSequencePullback l L g).mapHomologicalComplex (.up ℤ)).obj
-        ((MLY.quotient l L Y).obj PS.obj)) :=
-    (NatIso.mapHomologicalComplex βL (.up ℤ)).inv.app PS.obj
-  let bc : (((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)).obj PR.obj) ⟶
-      ((isoReductionIntegralComplex l L g).obj PS.obj) :=
-    (NatIso.mapHomologicalComplex S.ordinary (.up ℤ)).hom.app P.obj
-  let τc := (NatIso.mapHomologicalComplex
-    (integralComparisonSequenceScalarPullback l E L ι g) (.up ℤ)).hom.app C
-  let qf := (integralComparisonSequencePullback l E g).mapDerivedCategoryFactors.hom.app C
-  let qfL := (integralComparisonSequencePullback l L g).mapDerivedCategoryFactors.hom.app
-    ((MLY.quotient l L Y).obj PS.obj)
-  let εY := (integralComparisonSequenceScalarModel l E L ι Y).ε.app C
-  let εX := (integralComparisonSequenceScalarModel l E L ι X).ε.app
-    (((integralComparisonSequencePullback l E g).mapHomologicalComplex (.up ℤ)).obj C)
-  let εXR := (integralComparisonSequenceScalarModel l E L ι X).ε.app
-    ((MEX.quotient l E X).obj PR.obj)
-  let qfS := (integralComparisonSequencePullback l L g).mapDerivedCategoryFactors.hom.app
-    (((integralComparisonSequenceScalarModel l E L ι Y).E.mapHomologicalComplex (.up ℤ)).obj C)
-  let δ := (S.derived l E L ι g D D').hom
-  let sβ := ((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex
-    (.up ℤ)).map βEc
-  let qα := ((integralComparisonSequencePullback l L g).mapHomologicalComplex (.up ℤ)).map αYc
-  change aX.map fE ≫ fX ≫ DerivedCategory.Q.map bc =
-    δ.app K ≫ pL.map fY ≫ fL at hb
-  change r.map (DerivedCategory.Q.map bc) ≫
-      DLX.reductionComparison.app ((isoReductionIntegralComplex l L g).obj PS.obj) =
-    eLX ≫ DerivedCategory.Q.map ((MLX.quotient l L X).map bc) at hnb
-  change sX.map (q.map eEY) ≫ τ.app (DerivedCategory.Q.obj C) =
-    τ.app ((podReindexCalculus l E Y).reduction.obj K) ≫ qL.map (sY.map eEY) at hnτ
-  change sX.map qf ≫ εX ≫ DerivedCategory.Q.map τc =
-    τ.app (DerivedCategory.Q.obj C) ≫ qL.map εY ≫ qfS at hτ
-  change sX.map (DerivedCategory.Q.map βEc) ≫ εX =
-    εXR ≫ DerivedCategory.Q.map sβ at hnε
-  change qL.map (DerivedCategory.Q.map αYc) ≫ qfS =
-    qfL ≫ DerivedCategory.Q.map qα at hnq
-  change r.map (pL.map fY) ≫ D'.reduction.inv.app (DerivedCategory.Q.obj PS.obj) =
-    D'.reduction.inv.app (aY.obj K) ≫
-      qL.map ((podReindexCalculus l L Y).reduction.map fY) at hnD
-  change γX.app (p.obj K) ≫ sX.map (D.reduction.inv.app K) ≫
-      τ.app ((podReindexCalculus l E Y).reduction.obj K) ≫
-      qL.map (sY.map eEY) ≫ qL.map εY ≫ qfS =
-    r.map (δ.app K) ≫ D'.reduction.inv.app (aY.obj K) ≫
-      qL.map (γY.app K) ≫ qL.map (sY.map eEY) ≫ qL.map εY ≫ qfS
-  have hleft :
-      γX.app (p.obj K) ≫ sX.map (D.reduction.inv.app K) ≫
-        τ.app ((podReindexCalculus l E Y).reduction.obj K) ≫
-        qL.map (sY.map eEY) ≫ qL.map εY ≫ qfS =
-      r.map (aX.map fE) ≫ r.map fX ≫ eLX ≫
-        DerivedCategory.Q.map αXc ≫ DerivedCategory.Q.map sβ ≫ DerivedCategory.Q.map τc := by
-    calc
-      _ = γX.app (p.obj K) ≫
-          sX.map (D.reduction.inv.app K ≫ q.map eEY ≫ qf) ≫ εX ≫
-          DerivedCategory.Q.map τc := by
-        simp only [Functor.map_comp, Category.assoc]
-        erw [← reassoc_of% hnτ, ← hτ]
-      _ = γX.app (p.obj K) ≫ sX.map
-          ((podReindexCalculus l E X).reduction.map fE ≫ eEX ≫
-            DerivedCategory.Q.map βEc) ≫ εX ≫ DerivedCategory.Q.map τc := by
-        rw [← hreindexE]
-      _ = r.map (aX.map fE) ≫ γX.app (DerivedCategory.Q.obj PR.obj) ≫
-          sX.map eEX ≫ εXR ≫ DerivedCategory.Q.map sβ ≫ DerivedCategory.Q.map τc := by
-        simp only [Functor.map_comp, Category.assoc]
-        erw [reassoc_of% hnε, ← reassoc_of% hnγ]
-      _ = _ := by
-        simpa only [Functor.map_comp, Category.assoc] using
-          congrArg (fun z ↦ r.map (aX.map fE) ≫ z ≫
-            DerivedCategory.Q.map sβ ≫ DerivedCategory.Q.map τc) hscalarX.symm
-  have hright :
-      r.map (δ.app K) ≫ D'.reduction.inv.app (aY.obj K) ≫
-        qL.map (γY.app K) ≫ qL.map (sY.map eEY) ≫ qL.map εY ≫ qfS =
-      r.map (aX.map fE) ≫ r.map fX ≫ eLX ≫
-        DerivedCategory.Q.map ((MLX.quotient l L X).map bc) ≫
-        DerivedCategory.Q.map βLc ≫ DerivedCategory.Q.map qα := by
-    calc
-      _ = r.map (δ.app K) ≫ D'.reduction.inv.app (aY.obj K) ≫
-          qL.map ((podReindexCalculus l L Y).reduction.map fY ≫ eLY ≫
-            DerivedCategory.Q.map αYc) ≫ qfS := by
-        simpa only [Functor.map_comp, Category.assoc] using
-          congrArg (fun z ↦ r.map (δ.app K) ≫ D'.reduction.inv.app (aY.obj K) ≫
-            qL.map z ≫ qfS) hscalarY.symm
-      _ = r.map (δ.app K) ≫ r.map (pL.map fY) ≫
-          D'.reduction.inv.app (DerivedCategory.Q.obj PS.obj) ≫ qL.map eLY ≫
-          qfL ≫ DerivedCategory.Q.map qα := by
-        simp only [Functor.map_comp, Category.assoc]
-        erw [hnq, ← reassoc_of% hnD]
-      _ = r.map (δ.app K) ≫ r.map (pL.map fY) ≫ r.map fL ≫
-          DLX.reductionComparison.app ((isoReductionIntegralComplex l L g).obj PS.obj) ≫
-          DerivedCategory.Q.map βLc ≫ DerivedCategory.Q.map qα := by
-        simpa only [Category.assoc] using
-          congrArg (fun z ↦ r.map (δ.app K) ≫ r.map (pL.map fY) ≫ z ≫
-            DerivedCategory.Q.map qα) hreindexL.symm
-      _ = r.map (aX.map fE) ≫ r.map fX ≫ r.map (DerivedCategory.Q.map bc) ≫
-          DLX.reductionComparison.app ((isoReductionIntegralComplex l L g).obj PS.obj) ≫
-          DerivedCategory.Q.map βLc ≫ DerivedCategory.Q.map qα := by
-        simpa only [Functor.map_comp, Category.assoc] using
-          congrArg (fun z ↦ r.map z ≫
-            DLX.reductionComparison.app ((isoReductionIntegralComplex l L g).obj PS.obj) ≫
-            DerivedCategory.Q.map βLc ≫ DerivedCategory.Q.map qα) hb.symm
-      _ = _ := by
-        simpa only [Category.assoc] using
-          congrArg (fun z ↦ r.map (aX.map fE) ≫ r.map fX ≫ z ≫
-            DerivedCategory.Q.map βLc ≫ DerivedCategory.Q.map qα) hnb
-  rw [hleft, hright]
-  simpa only [Category.assoc] using congrArg
-    (fun z ↦ r.map (aX.map fE) ≫ r.map fX ≫ eLX ≫ z) hc
+  exact reduction_cube_pasting r sX qL hscalarX hscalarY hreindexE hreindexL
+    hnτ hτ hnγ hnε hnb hnD hnq hb hc
 
 attribute [local irreducible] podReindexCalculus integralComparisonSequenceScalarModel
 attribute [local irreducible] integralComparisonSystemScalarPullback podScalarReduction
