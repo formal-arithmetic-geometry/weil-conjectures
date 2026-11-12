@@ -43,7 +43,6 @@ private theorem tensorComparison_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (Classical.choose_spec
     (ExistsUnique.exists (existsUnique_supportDerivedTensorComparison Λ f))).1 K K' M M' a b
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -82,7 +81,6 @@ private theorem openProjection_naturality_right {U X : Scheme.{u}} (j : U ⟶ X)
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [h, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -124,7 +122,6 @@ private theorem openProjection_naturality_left {U X : Scheme.{u}} (j : U ⟶ X)
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [h, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -167,7 +164,6 @@ private theorem closedProjection_naturality_right {Z X : Scheme.{u}} (i : Z ⟶ 
   congr 2
   rw [← Category.assoc, h, Category.assoc, (tZ.map ε).naturality]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the concrete derived adjunctions needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -188,7 +188,6 @@ noncomputable def derivedHomRestrictScalarsIso (K : 𝐃(X, Λ)) :
       (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ') ((derivedExtendScalars hφ ha X).obj K)))
     (derivedExtendScalarsTensorIso hφ ha X K).symm
 
-set_option maxHeartbeats 400000 in
 -- the kernel checks the ten isomorphisms of the chain below
 /-- With scalars restricted back to `Λ`, the derived extension of scalars `K ⊗ᴸ_Λ Λ'` is the
 derived tensor product `K ⊗ᴸ (Λ ⧸ (a))_X` with the constant sheaf: on a K-flat complex `P`

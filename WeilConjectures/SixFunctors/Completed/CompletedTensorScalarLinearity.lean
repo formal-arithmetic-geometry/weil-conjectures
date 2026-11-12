@@ -231,7 +231,6 @@ private noncomputable def finiteLinear (n : ℕ) :
 
 attribute [local instance] finiteLinear
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the chosen reduction and its sheafification adjunction needs extra heartbeats.
 private theorem reduction_linear (n : ℕ) :
     (unrestrictedIntegralReductionFunctor.{u, u} l E W n).Linear (ScalarRing l E) := by
