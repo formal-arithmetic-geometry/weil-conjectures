@@ -35,6 +35,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option profiler true in
 set_option maxHeartbeats 1500000 in
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain

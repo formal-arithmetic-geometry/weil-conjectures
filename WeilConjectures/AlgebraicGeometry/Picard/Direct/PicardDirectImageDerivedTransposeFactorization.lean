@@ -50,6 +50,7 @@ private theorem coefficientMate_evaluation
   rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_counit,
     schemeDerivedMate_evaluation, Category.assoc]
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Keep the explicitly constructed coefficient comparison folded.
 /-- The normalized transpose factors through the coefficient transpose.
