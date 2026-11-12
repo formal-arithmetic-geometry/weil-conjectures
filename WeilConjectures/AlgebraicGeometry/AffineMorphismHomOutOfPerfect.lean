@@ -31,7 +31,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 600000 in
 -- Elaborating the fixed derived-adjunction choices requires additional heartbeats.
 private theorem baseChangeMap_naturality
     [∀ Y : Scheme.{uAH},
