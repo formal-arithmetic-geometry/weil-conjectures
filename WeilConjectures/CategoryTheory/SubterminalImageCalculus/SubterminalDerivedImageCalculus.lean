@@ -166,8 +166,8 @@ def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     (SheafOfModules.overFunctor.{max u r} (ring R) X).mapHomologicalComplex (.up ℤ) ≅
       (SheafOfModules.overFunctor.{max u r} (ring R) Y).mapHomologicalComplex (.up ℤ) ⋙
         (SheafOfModules.overMap.{max u r} (ring R) f).mapHomologicalComplex (.up ℤ) :=
-  NatIso.mapHomologicalComplex
-    (SheafOfModules.overFunctorMap.{max u r} (ring R) f).symm (.up ℤ)
+  (Functor.mapHomologicalComplexCompIso
+    (SheafOfModules.overFunctorMap.{max u r} (ring R) f) (.up ℤ)).symm
 
 universe d vd wd
 
