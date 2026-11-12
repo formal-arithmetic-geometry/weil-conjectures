@@ -92,6 +92,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale [WeaklyEtale πP]
     rw [← Scheme.Hom.comp_apply, sq.w, Scheme.Hom.comp_apply]
   have sqV : IsPullback (πP ∣_ V) V'.ι V.ι πP := isPullback_morphismRestrict πP V
   /- The triangle `X ⟶ M ⟶ Rj_* j^* M ⟶`. -/
+  -- Reuse the derived pullbacks to avoid repeating their instance search.
   let jStar := L((V.ι)^*⟦𝐐⟧)
   let adjV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
   obtain ⟨X, f, h, hT⟩ := distinguished_cocone_triangle₁ (adjV.unit.app M.obj)
@@ -132,29 +133,26 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale [WeaklyEtale πP]
   have hT' : πStar.mapTriangle.obj Tr ∈ distTriang _ :=
     πStar.map_distinguished _ hT
   have : IsIso (baseChangeMap 𝐐 sqV.toCommSq) := isIso_baseChangeMap_of_weaklyEtale 𝐐 sqV
-  let e₃ := asIso ((baseChangeMap 𝐐 sqV.toCommSq).app (jStar.obj M.obj))
+  let e₃ : (πStar.mapTriangle.obj Tr).obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
+      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj (jStar.obj M.obj)) :=
+    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app (jStar.obj M.obj))
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sq
-  refine isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
+  exact isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
     (lowerStarUpperShriekAdjunction ℓ i') (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) hLi hLi'
     πStar (ObjectProperty.liftCompιIso _ _ _) Tr hT hT' e₁ (Iso.refl _)
-    ?_ ?_ ?_ ?_
-  · intro Q
-    exact adjV.subsingleton_hom_of_isZero
+    (fun Q ↦ adjV.subsingleton_hom_of_isZero
       (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V.ι i.left
-        hcompl.symm.disjoint Q.obj) _
-  · intro Q
-    exact subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V.ι i.left
-      hcompl.symm.disjoint Q.obj _ _
-  · intro Q
-    exact @Equiv.subsingleton _ _ (Iso.homCongr (Iso.refl _) e₃)
+        hcompl.symm.disjoint Q.obj) _)
+    (fun Q ↦ subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V.ι i.left
+        hcompl.symm.disjoint Q.obj _ _)
+    (fun Q ↦ @Equiv.subsingleton _ _ (Iso.homCongr (Iso.refl _) e₃)
       ((derivedUpperStarLowerStarAdjunction 𝐐 V'.ι).subsingleton_hom_of_isZero
         (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V'.ι i'.left
-          hV' Q.obj) _)
-  · intro Q
-    exact @Equiv.subsingleton _ _
+          hV' Q.obj) _))
+    (fun Q ↦ @Equiv.subsingleton _ _
       (Iso.homCongr (Iso.refl _) ((shiftFunctor _ (-1 : ℤ)).mapIso e₃))
-      (subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V'.ι i'.left hV' Q.obj _ _)
+      (subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V'.ι i'.left hV' Q.obj _ _))
 
 /-- **The base change map of a closed exceptional inverse image along a weakly étale morphism is
 an isomorphism**, as an isomorphism of functors `πZ^* Ri^! ≅ Ri'^! πP^*`. -/
