@@ -31,7 +31,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- A homology-coordinate identity for one augmented lift holds for every such lift. -/
 private theorem quotient_tensor_coordinates_of_chosen
     {A C : Type u} [CommRing A] [CommRing C] {T : Type*}
@@ -74,7 +73,6 @@ private theorem quotient_tensor_coordinates_of_chosen
 
 set_option linter.unusedVariables false in
 -- The nested hypotheses keep their documented names although the conclusion is nondependent.
-set_option profiler true in
 /-- The intrinsic derived self-tensor of a closed-immersion quotient has normalized
 projective-resolution coordinates on affine opens. The restriction equation holds
 for any augmented quotient-resolution comparison, whose existence is not asserted here.
