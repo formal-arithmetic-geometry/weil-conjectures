@@ -46,36 +46,6 @@ open Scheme PadicAlgCl
 
 attribute [local instance] traitGenericFieldAlgebra
 
-elab "ph112_remaining" label:str : tactic => do
-  Lean.logInfo m!"{label.getString}: {(← Lean.getRemainingHeartbeats) / 1000}"
-
-private meta partial def ph112_dataDiffs (a b : Lean.Expr)
-    (acc : Array (Lean.Expr × Lean.Expr)) : Lean.MetaM (Array (Lean.Expr × Lean.Expr)) := do
-  if a == b || acc.size ≥ 4 then return acc
-  if !a.hasLooseBVars && !b.hasLooseBVars && (← Lean.Meta.isProof a) then return acc
-  match a, b with
-  | .app .., .app .. =>
-    let aa := a.getAppArgs
-    let bb := b.getAppArgs
-    if a.getAppFn != b.getAppFn || aa.size != bb.size then return acc.push (a, b)
-    let mut acc := acc
-    for i in [:aa.size] do
-      acc ← ph112_dataDiffs aa[i]! bb[i]! acc
-    return acc
-  | .lam _ ta ba _, .lam _ tb bb _ => ph112_dataDiffs ba bb (← ph112_dataDiffs ta tb acc)
-  | .forallE _ ta ba _, .forallE _ tb bb _ =>
-    ph112_dataDiffs ba bb (← ph112_dataDiffs ta tb acc)
-  | _, _ => return acc.push (a, b)
-
-elab "ph112_data_diff" label:str t:term : tactic => Lean.Elab.Tactic.withMainContext do
-  let h ← Lean.Elab.Tactic.elabTerm t none
-  let H ← Lean.instantiateMVars (← Lean.Meta.inferType h)
-  let G ← Lean.instantiateMVars (← (← Lean.Elab.Tactic.getMainGoal).getType)
-  let ds ← ph112_dataDiffs (ExactModProofs.stripMData H) (ExactModProofs.stripMData G) #[]
-  Lean.logInfo m!"PH112 {label.getString}: {ds.size} data differences"
-  for (a, b) in ds do
-    Lean.logInfo m!"PH112 {label.getString}: {a}\nVERSUS\n{b}"
-
 /-- Constructibility of a derived pullback passes to any further factorization. -/
 private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
     {Z Y X : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X) (fg : Z ⟶ X) (hfg : f ≫ g = fg)
@@ -281,7 +251,6 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
             (Profinite.padicAlgClRingObj ℓ)).app A) =
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
-  ph112_remaining "PH112 start remaining:"
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -305,9 +274,9 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
   have : CompactSpace (baseChangeGaloisModel hM b hb v hv).generic :=
     QuasiCompact.compactSpace_of_compactSpace (baseChangeGaloisResidue hM b hb v hv)
   have : IsNoetherian (baseChangeGaloisModel hM b hb v hv).generic := ⟨⟩
-  have : QuasiCompact (baseChangeSpecial b v).hom := 
+  have : QuasiCompact (baseChangeSpecial b v).hom :=
     MorphismProperty.of_isPullback hT.isPullback_i ‹_›
-  have : IsSeparated (baseChangeSpecial b v).hom := 
+  have : IsSeparated (baseChangeSpecial b v).hom :=
     MorphismProperty.of_isPullback hT.isPullback_i ‹_›
   have : CompactSpace (baseChangeGaloisModel hM b hb v hv).total :=
     QuasiCompact.compactSpace_of_compactSpace (pullback.snd b v)
@@ -317,7 +286,6 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     QuasiCompact.compactSpace_of_compactSpace (baseChangeSpecial b v).hom
   have : QuasiSeparatedSpace (baseChangeSpecial b v).left :=
     quasiSeparatedSpace_of_quasiSeparated (baseChangeSpecial b v).hom
-  ph112_remaining "PH112 geometry"
   have hC := boundedConstructible_leftDerivedUpperStar_obj_of_factorization
     (Z := (baseChangeGaloisModel hM b hb v hv).generic)
     ((baseChangeHom hM b hb v hv).traitChangeThickening (traitGenericField K)
@@ -325,15 +293,11 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _)
     M.ε (baseChangeGaloisModel hM b hb v hv).ε (Category.assoc _ _ _)
     (Profinite.padicAlgClRingObj ℓ) A hA
-  ph112_remaining "PH112 constructible"
   -- Direct elimination keeps the large dependent types in their original form.
   refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB
-    (by
-      ph112_data_diff "constructibility" hC
-      cast_proofs hC)).elim fun E hE ↦ ?_
+    (by cast_proofs hC)).elim fun E hE ↦ ?_
   refine hE.elim fun K₀ hK₀ ↦ ?_
   refine hK₀.elim fun e htors ↦ ?_
-  ph112_remaining "PH112 integral model"
   refine ((baseChangeGaloisModel hM b hb v hv)
     |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
       (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
@@ -344,15 +308,14 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
         (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
-      A (by
-        ph112_data_diff "constructibility" hC
-        cast_proofs hC) E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
-  ph112_remaining "PH112 finite layer ready"
+      A (by cast_proofs hC) E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   have result := exists_subgroup_pullbackExchange_of_galois_average
     (Λ := Profinite.padicAlgClRingObj ℓ)
-    (ρ := baseChangeToGaloisLayer hM b hb v hv) (ψ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+    (ρ := baseChangeToGaloisLayer hM b hb v hv)
+    (ψ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
           (baseChangeGaloisResidue hM b hb v hv)
-          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))) (χ := (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))))
+    (χ := (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
           (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
           (baseChangeHom_total_comp hM b hb v hv)).comp
             (baseChangeHom hM b hb v hv).fromCartesian))
@@ -371,14 +334,13 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
           (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
           (baseChangeHom_total_comp hM b hb v hv)).comp
-            (baseChangeHom hM b hb v hv).fromCartesian) rfl HEq.rfl A (by
-          ph112_data_diff "cartesian source" hM1
-          cast_proofs hM1))
+            (baseChangeHom hM b hb v hv).fromCartesian) rfl HEq.rfl A (by cast_proofs hM1))
     (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
     (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
     (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
     (act := baseChangeAut hM b hb v hv)
-    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁) (actΩ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁)
+    (actΩ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
           (baseChangeGaloisResidue hM b hb v hv)
           (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))))
     (hmul := autAction_baseChangeAut_mul hM b hb v hv _)
@@ -402,12 +364,9 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
           (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
         ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
           (baseChangeGaloisResidue hM b hb v hv)
-          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))) rfl HEq.rfl HEq.rfl A
-        (by
-          ph112_data_diff "average source" hL₁.2
-          cast_proofs hL₁.2))
-  ph112_remaining "PH112 average ready"
-  ph112_data_diff "conclusion" result
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        rfl HEq.rfl HEq.rfl A
+        (by cast_proofs hL₁.2))
   cast_proofs result
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
