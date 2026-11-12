@@ -55,6 +55,7 @@ private theorem tensorNatural₂
   simpa only [_root_.CategoryTheory.Functor.map_id, Functor.comp_obj, Functor.uncurry_obj_obj,
     Functor.prod_obj, Iso.app_inv, NatTrans.id_app, Category.id_comp] using h
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- The derived-instance conversions require additional kernel heartbeats.
 /-- The inverse exceptional tensorator is the ordinary scalar tensor comparison.
