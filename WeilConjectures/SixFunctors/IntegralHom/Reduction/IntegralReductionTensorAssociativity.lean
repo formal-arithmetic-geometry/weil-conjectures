@@ -209,6 +209,7 @@ private theorem normalizedBeta_eq (n : ℕ)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
+set_option profiler true in
 set_option maxHeartbeats 6400000 in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
