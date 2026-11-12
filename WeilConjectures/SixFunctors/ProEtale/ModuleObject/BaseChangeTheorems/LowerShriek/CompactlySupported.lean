@@ -94,8 +94,8 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
       ℓ E c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
   rw [ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
-  refine IsIso.comp_isIso'
-    (IsIso.comp_isIso' (IsIso.comp_isIso' (IsIso.comp_isIso' ?_ ?_) ?_) ?_) ?_
+  refine IsIso.comp_isIso' ?_
+    (IsIso.comp_isIso' ?_ (IsIso.comp_isIso' ?_ (IsIso.comp_isIso' ?_ ?_)))
   · infer_instance
   · exact Functor.isIso_whiskerLeft _ _
   · infer_instance
