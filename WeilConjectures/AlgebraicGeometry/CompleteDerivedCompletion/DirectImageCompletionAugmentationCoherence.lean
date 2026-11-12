@@ -72,6 +72,7 @@ private theorem directImage_constantInterchange_factors
   let H := CondensedRing.upperStar (DerivedNakayama.integerRing l E) f
   have hF := Functor.mapDerivedCategoryCompIso_hom_app_factors H
     (constant l E X) P
+  dsimp only [H] at hF
   have hG := Functor.mapDerivedCategoryCompIso_hom_app_factors
     (constant l E Y) (pull l E f) P
   dsimp [constantInterchange]
@@ -88,8 +89,10 @@ private theorem directImage_augmentation_factors (T : Scheme.{u})
   simp only [augmentation, Localization.liftNatTrans_app, Functor.whiskerRight_app]
   change (_ ≫ DerivedCategory.Q.map ((strictAugmentation l E T).app P) ≫
     (redFactors l E T).inv.app P) ≫ (redFactors l E T).hom.app P = _
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  rfl
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  simp only [Localization.Lifting.iso]
+  exact congrArg (fun g ↦ (constant l E T).mapDerivedCategoryFactors.hom.app P ≫ g)
+    (Category.comp_id (DerivedCategory.Q.map ((strictAugmentation l E T).app P)))
 
 /-- The canonical pullback/reduction comparison carries the degree-zero
 augmentation through constant towers.  This is obtained by expanding
@@ -132,13 +135,17 @@ theorem directImage_augmentation_pullReduction_coherence :
         (constant l E Y).mapDerivedCategoryFactors.hom.app P ≫
           DerivedCategory.Q.map ((strictAugmentation l E Y).app P) ≫
           (redFactors l E Y).inv.app P := by
-      rw [← reassoc_of% haug, Iso.hom_inv_id_app, Category.comp_id]
+      rw [← reassoc_of% haug, Iso.hom_inv_id_app]
+      exact (Category.comp_id _).symm
     rw [haug']
     simp only [Functor.map_comp, Category.assoc]
     have hpr := (pullReduction_existsUnique l E f).exists.choose_spec P
+    dsimp only [H, pullReduction]
     rw [hpr]
     have hfac := (pull l E f).mapDerivedCategoryFactors_hom_naturality
       ((strictAugmentation l E Y).app P)
+    dsimp only [dpull]
+    simp only [Category.assoc]
     rw [reassoc_of% hfac, ← Functor.map_comp_assoc]
     have hinr := directImage_strictPullReduction_inr l E f P
     change ((pull l E f).mapHomologicalComplex (.up ℤ)).map
