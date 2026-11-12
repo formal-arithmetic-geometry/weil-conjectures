@@ -45,6 +45,22 @@ private theorem tensorResolution_restriction_tensor_square_id_left
   simpa only [tensorResolutionRestrictionTensorMap, Category.assoc] using
     tensorResolution_restrictedTensor_square j (𝟙 E) s (𝟙 E') s' e e f t (by simp) hss
 
+private theorem tensorResolution_restriction_tensor_square_id_right
+    {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
+    (E M F : CochainComplex Y.Modules ℤ) (E' M' F' : CochainComplex X.Modules ℤ)
+    (r : E ⟶ M) (r' : E' ⟶ M')
+    (e : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj E ⟶ E')
+    (m : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj M ⟶ M')
+    (f : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj F ⟶ F')
+    (hrr : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).map r ≫ m = e ≫ r') :
+    ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.mapBifunctorMap r (𝟙 F) (curriedTensor Y.Modules) (.up ℤ)) ≫
+      tensorResolutionRestrictionTensorMap j M F M' F' m f =
+    tensorResolutionRestrictionTensorMap j E F E' F' e f ≫
+      HomologicalComplex.mapBifunctorMap r' (𝟙 F') (curriedTensor X.Modules) (.up ℤ) := by
+  simpa only [tensorResolutionRestrictionTensorMap, Category.assoc] using
+    tensorResolution_restrictedTensor_square j r (𝟙 F) r' (𝟙 F') e m f f hrr (by simp)
+
 set_option profiler true in
 /-- The common K-flat zigzag respects three compatible restriction squares.
 
@@ -112,17 +128,14 @@ theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
     dsimp only [a₀, b₀, f₀, f₁]
     exact tensorResolution_restriction_tensor_square_id_left j E F N E' F' N' s s' e f t hss
   have h₁ : RC.map a₁ ≫ f₂ = f₁ ≫ b₁ := by
-    dsimp only [a₁, b₁, f₁, f₂, tensorResolutionRestrictionTensorMap]
-    simpa only [Category.assoc] using
-      tensorResolution_restrictedTensor_square j r (𝟙 F) r' (𝟙 F') e m f f hrr (by simp)
+    dsimp only [a₁, b₁, f₁, f₂]
+    exact tensorResolution_restriction_tensor_square_id_right j E M F E' M' F' r r' e m f hrr
   have h₂ : RC.map a₂ ≫ f₂ = f₃ ≫ b₂ := by
-    dsimp only [a₂, b₂, f₂, f₃, tensorResolutionRestrictionTensorMap]
-    simpa only [Category.assoc] using
-      tensorResolution_restrictedTensor_square j q (𝟙 F) q' (𝟙 F') k m f f hqq (by simp)
+    dsimp only [a₂, b₂, f₂, f₃]
+    exact tensorResolution_restriction_tensor_square_id_right j K M F K' M' F' q q' k m f hqq
   have h₃ : RC.map a₃ ≫ f₄ = f₃ ≫ b₃ := by
-    dsimp only [a₃, b₃, f₃, f₄, tensorResolutionRestrictionTensorMap]
-    simpa only [Category.assoc] using
-      tensorResolution_restrictedTensor_square j (𝟙 K) s (𝟙 K') s' k k f t (by simp) hss
+    dsimp only [a₃, b₃, f₃, f₄]
+    exact tensorResolution_restriction_tensor_square_id_left j K F N K' F' N' s s' k f t hss
   have : QuasiIso a₀ := tensorResolution_quasiIso_tensor_left s hs hE
   have : QuasiIso a₂ := tensorResolution_quasiIso_tensor_right q hq hF
   have : QuasiIso b₀ := tensorResolution_quasiIso_tensor_left s' hs' hE'
