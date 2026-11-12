@@ -151,7 +151,6 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
   IntegralModelsStacks.smallModules IntegralModelsStacks.smallMap
   ConstantCompletion.kernelIdeal RingedSiteIdeal.extension
 
-set_option profiler true in
 -- Transport compares the standard local derived instances and two complete subcategories.
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
@@ -204,6 +203,7 @@ theorem integralModelsEmbeddedCompletion
   let (U : Scheme.coefficientProEtaleSiteModel.{u, u} X) :=
     HasDerivedCategory.standard
       (ConstantCompletion.Mod ((IntegralModelsStacks.smallRing X B).over U))
+  -- Construct the small-site equivalence before introducing the derived transport data.
   have hcoeff := integralModelsEmbeddedCoefficientKernels ℓ E π hπ X
   have hkernel : I.extension φ = ConstantCompletion.kernelIdeal qB := hcoeff.2.2.2
   obtain ⟨e, ⟨he⟩⟩ := kernelCompleteEquivalence
