@@ -127,7 +127,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k₁ k₁' k₂ k₂' : Type u} [Field k�
   {Y' : Over (Spec (.of k₂'))} {M : NearbyCyclesModel X.left X'.left}
   {N : NearbyCyclesModel Y.left Y'.left} {j : Y.left ⟶ X.left} {j' : Y'.left ⟶ X'.left}
 
-set_option profiler true in
 -- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **Averaging splittings on bounded constructible complexes**: let `β` be the restriction
 `NearbyCyclesModel.liftExchange` of an exchange `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N` to bounded
@@ -213,6 +212,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
 
+set_option profiler true in
 -- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
 constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'`
