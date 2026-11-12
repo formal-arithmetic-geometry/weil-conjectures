@@ -90,9 +90,12 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
     (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq
   unfold baseChangeMap at hamb
   rw [hcomp] at hamb
-  have hθ := boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-    ℓ (Profinite.padicAlgClRingObj ℓ) sq
-  rw [hcomp] at hθ
+  have hθ (K : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
+        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+          (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)).hom.app K.obj := by
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+      ℓ (Profinite.padicAlgClRingObj ℓ) sq K, hcomp]
   have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
