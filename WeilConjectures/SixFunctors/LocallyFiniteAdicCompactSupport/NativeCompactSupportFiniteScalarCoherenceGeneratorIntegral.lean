@@ -69,7 +69,7 @@ private theorem reflect_factored_square {C D : Type*} [Category C] [Category D]
     _ = F.map mi ≫ F.map r := congrArg (fun a ↦ a ≫ F.map r) hi.symm
     _ = F.map (mi ≫ r) := (F.map_comp _ _).symm
 
-set_option trace.profiler true in
+set_option profiler true in
 -- The component formulas compare cached finite-stage and native presentations.
 /-- The integral finite-Tor numerator calculation underlying the generator transition.
 Source: Proposition 6.8.14 and Remark 6.8.15, the integral numerator calculation.
@@ -116,14 +116,23 @@ theorem native_compact_support_finite_scalar_coherence_generator_integral
   subst Aobj
   let Ki := (PurCompactSupport.finiteTorIntegralInclusion l
     (Coefficient.{u} l (PadicAlgCl l) i) X).obj K
-  obtain ⟨KE, hKE, hM⟩ := finiteTorScalarObject l D hl X i E h K
-  obtain ⟨bi, di, hboundi⟩ :=
-    native_integral_scalar_boundaries l D hl P c source target stage i
+  have hscalar := finiteTorScalarObject l D hl X i E h K
+  let KE := hscalar.choose
+  have hKE := hscalar.choose_spec.1
+  have hM := hscalar.choose_spec.2
+  have hbound := native_integral_scalar_boundaries l D hl P c source target stage i
+  let bi := hbound.choose
+  let di := hbound.choose_spec.choose
+  have hboundi := hbound.choose_spec.choose_spec
   have hfi := integralComponent_factorization_of_isos l D hl P c source target stage i
     change (hs i) (ht i) K (alpha i).hom bi di (hboundi K).1 (hboundi K).2 (hα i K)
-  obtain ⟨bE', dE', hbE', hdE', hfE'⟩ :=
-    integralStageComponent l D hl P c source target stage change i E h
-      (hs E) (ht E) K KE hKE (alpha E).hom (hα E KE)
+  have hcomponent := integralStageComponent l D hl P c source target stage change i E h
+    (hs E) (ht E) K KE hKE (alpha E).hom (hα E KE)
+  let bE' := hcomponent.choose
+  let dE' := hcomponent.choose_spec.choose
+  have hbE' := hcomponent.choose_spec.choose_spec.1
+  have hdE' := hcomponent.choose_spec.choose_spec.2.1
+  have hfE' := hcomponent.choose_spec.choose_spec.2.2
   have hdiagram := integralBoundaryTransitionPasting l D hl P c source target stage
     change hs ht i E h K KE hKE hM (bi.hom.app Ki) bE' (di.hom.app Ki) dE'
     (hboundi K).1 hbE' (hboundi K).2 hdE'
