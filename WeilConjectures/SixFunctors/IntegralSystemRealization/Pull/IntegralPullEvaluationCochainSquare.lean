@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemOperations
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponent
+public import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponent
 
 /-! # The cochain pullback evaluation transition square
 
@@ -29,13 +29,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
-    Functor.isoWhiskerLeft
-      ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
-      (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
+  ordinaryPullEvaluationComplex l E f n
 
-set_option maxHeartbeats 600000 in
--- Extensionality unfolds the cochain comparison components and needs extra heartbeats.
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
 Lemma 4.10, p. 23; Stacks 03D2 and 0941
@@ -81,8 +76,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
-  simpa only [integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
-    HomologicalComplex.comp_f] using
-    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  convert integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i using 1 <;>
+    simp only [integralPullEvaluationComplex, HomologicalComplex.comp_f]
 
 end WeilConjectures.IntegralSystemRealization

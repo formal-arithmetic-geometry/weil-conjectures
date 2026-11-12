@@ -122,8 +122,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The original existential statement names a witness unused by True.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 500000 in
--- Native specialization compares the canonical module and cochain tensor instances.
 /-- The localized sequence sites admit the ordinary native open tensor datum.
 Source: Stacks sites-modules.tex 0E8I, sites-cohomology.tex 0GL1 and 0G7E,
 and Homology 012Z.
@@ -177,10 +175,12 @@ theorem nativeOpenTensor_system_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
   let RZ := coefficientSequenceCommRingSheaf.{u, u} l E Z
   let RX := coefficientSequenceCommRingSheaf.{u, u} l E X
   let g := ProEtale.VaryingRing.baseChange j
-  let F := ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
-    (compactSupportSystemQuotient l E) j
-  let G := ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)
-    (compactSupportSystemQuotient l E) j
+  let F : SemilinearSections.Mod K RX ⥤ SemilinearSections.Mod J RZ :=
+    ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) j
+  let G : SemilinearSections.Mod J RZ ⥤ SemilinearSections.Mod K RX :=
+    ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) j
   let adj : F ⊣ G := ProEtale.VaryingRing.moduleJAdj (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) j
   let aG : G ⊣ ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -232,16 +232,21 @@ theorem nativeOpenTensor_system_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
   obtain ⟨chain, hs, hc⟩ :=
     nativeOpenTensor_totalization_exists.{u + 1, u, u} J RZ K RX F G
       (hF := hF) (hG := hG) adj ordinary ho
-  -- Give every instance parameter to the constructor explicitly.
-  let D := @OpenTensorCochainData.mk.{u + 1, u, u} (ℕ × Z.ProEt) _
-    (ProEtale.VaryingRing.sequenceSiteSmall Z) J RZ
-    (ℕ × X.ProEt) _ (ProEtale.VaryingRing.sequenceSiteSmall X) K RX
-    F G hF hG adj g (pullSection l E j)
-    (ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j) aG rho hn hp
-    (fun P hP hflat ↦ (hf P hP hflat).1)
-    (fun P hP hflat ↦ (hf P hP hflat).2)
-    ordinary hi ho chain hs hc
-  exact ⟨D, trivial⟩
+  refine ⟨{
+    right := ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) j
+    pullAdjunction := aG
+    pullTensor := rho
+    pullNaturality := hn
+    pullPure := hp
+    pullKFlat := fun P hP hflat ↦ (hf P hP hflat).1
+    pullFlat := fun P hP hflat ↦ (hf P hP hflat).2
+    ordinary := ordinary
+    ordinaryInverse := hi
+    ordinaryNaturality := ho
+    chain := chain
+    summand := hs
+    chainNaturality := hc
+  }, trivial⟩
 
 end WeilConjectures.CoefSupportOpenTensor
