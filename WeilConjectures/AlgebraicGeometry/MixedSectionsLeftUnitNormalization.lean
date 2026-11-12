@@ -23,6 +23,24 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+-- Perform the naturality paste before specializing the objects to derived sheaves.
+private theorem paste_unit_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (G : C ⥤ D) (H : D ⥤ E) (T : C ⥤ E) (c : G ⋙ H ⟶ T)
+    {A B : C} {U V : D} {P Q : E}
+    {u : U ⟶ V} {v : V ⟶ G.obj B} {a : U ⟶ G.obj A} {t : A ⟶ B}
+    {η : P ⟶ H.obj U} {b : P ⟶ Q} {x : Q ⟶ T.obj A}
+    (he : u ≫ v = a ≫ G.map t)
+    (hg : η ≫ H.map a ≫ c.app A = b ≫ x) :
+    (η ≫ H.map u ≫ H.map v) ≫ c.app B = b ≫ x ≫ T.map t := by
+  simp only [Category.assoc]
+  rw [← H.map_comp_assoc, he, H.map_comp_assoc]
+  have hn := c.naturality t
+  simp only [Functor.comp_map] at hn
+  rw [hn]
+  simp only [← Category.assoc] at hg ⊢
+  rw [hg]
+
 -- Keep the derived functors abstract while pasting units. The explicit source
 -- equality transports the first Leray equation without unfolding localization choices.
 private theorem generic_first_layer
@@ -226,17 +244,11 @@ theorem mixedSections_left_unit_normalization
         (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
-    dsimp only [p]
-    simp only [Category.assoc]
-    rw [← Functor.map_comp_assoc]
-    erw [he]
-    rw [Functor.map_comp_assoc]
-    have hn := (mixedGlobalSectionsDirectImageIso g).hom.naturality
-      (Df.rightDerivedFunctorUnit.app K)
-    simp only [Functor.comp_map] at hn
-    erw [hn]
-    simp only [← Category.assoc] at hg₀ ⊢
-    erw [hg₀]
+    have h := paste_unit_naturality (schemeDerivedDirectImage g)
+      (schemeDerivedGlobalSections Z)
+      (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
+      (mixedGlobalSectionsDirectImageIso g).hom he hg₀
+    exact h
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
