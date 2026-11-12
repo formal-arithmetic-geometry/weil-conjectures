@@ -21,6 +21,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 open TensorEvaluation
 variable {k₀ l X}
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing total components instantiates the two native tensor-Hom adjunctions.
 /-- Forgetting the two normalized chain-level uncurrying maps gives the same map
