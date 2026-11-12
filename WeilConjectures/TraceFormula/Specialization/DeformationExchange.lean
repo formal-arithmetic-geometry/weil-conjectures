@@ -246,14 +246,17 @@ private lemma supportCompactSupportExchange_component_identity
       (componentModelHom k' j hb) hM hN
   have hχΔ := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (deformationDiagModelHom X (y ≫ c.c₁).left.ker k') hXm hXXm
-  rw [← diagPushforwardExchange_eq_of_preserves k' (y ≫ c.c₁) hXm hXXm] at hχΔ
+  have hχΔ' (T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+    (congrArg (fun χ : type_of% (diagPushforwardExchange ℓ X k' (y ≫ c.c₁)) ↦
+      (boundedConstructible _).ι.map (χ.app T))
+      (diagPushforwardExchange_eq_of_preserves k' (y ≫ c.c₁) hXm hXXm)).trans (hχΔ T)
   have hχdj := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (componentPointModelHom k' j hb) hM hXm
   run_tac do
     let n ← Lean.getRemainingHeartbeats
     Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
   apply_by_match CategoryTheory.supportIdentity_aux [hF1 := hF1, hF3 := hF3, hF2 := hF2,
-    hF2' := hF2', hL := hL, hL' := hL', hχΔ := hχΔ, hχdj := hχdj, hχg := hχg,
+    hF2' := hF2', hL := hL, hL' := hL', hχΔ := hχΔ', hχdj := hχdj, hχg := hχg,
     t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
     hι := (ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj
       (Profinite.padicAlgClRingObj ℓ) (deformationSpecialFibre X (y ≫ c.c₁).left.ker k' ⨯
