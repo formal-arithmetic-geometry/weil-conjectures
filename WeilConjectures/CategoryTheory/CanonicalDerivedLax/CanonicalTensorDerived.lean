@@ -57,6 +57,7 @@ variable {A B : Type*} [Category.{u} A] [Category.{u} B]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 set_option maxHeartbeats 1200000 in
+set_option profiler true in
 -- K-flat localization and its three monoidal structures require substantial instance synthesis.
 /-- Exact-derived lax monoidality with the specified chain-level normalization.
 
