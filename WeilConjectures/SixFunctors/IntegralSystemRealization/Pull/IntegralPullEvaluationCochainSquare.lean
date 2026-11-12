@@ -86,8 +86,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   have h := @integralPullEvaluation_cochainSquare_component l inferInstance E
     inferInstance inferInstance inferInstance X Y f n r₀ hr₀ P
-  apply cochainSquare_of_components
-  intro i
-  simpa only [integralPullEvaluationComplex] using h i
+  simpa only [integralPullEvaluationComplex] using
+    cochainSquare_of_components _ _ _ _ _ h
 
 end WeilConjectures.IntegralSystemRealization
