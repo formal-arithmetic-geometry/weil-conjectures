@@ -56,7 +56,7 @@ private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.P
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
     (he : Nonempty ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
-        (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj K₀.obj) ≅ K) :
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj K₀.obj) ≅ K)) :
     ∃ (n : ℤ), derivedCompleteIntegers ℓ E X K₀.obj ∧ K₀.obj.IsGE n ∧
       boundedConstructible _ K₀.obj ∧
         Nonempty ((L(Mod.extendScalars (coefficientMap
