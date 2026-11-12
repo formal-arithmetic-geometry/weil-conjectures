@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoinvariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -48,6 +49,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Reuse the tensor and colimit instances at each occurrence of a derived functor.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 variable {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
   (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂') {L : Type u} [Field L]
@@ -79,7 +85,6 @@ lemma galoisLayerFst_generic_comp_galoisLayerAut [Algebra L Ω] (σ : Ω ≃ₐ[
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two product configurations are large terms
 /-- **The Künneth map descends along a Galois layer** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, projection formula (3); torsion coefficients). Let
