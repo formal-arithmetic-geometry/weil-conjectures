@@ -70,7 +70,7 @@ theorem isIso_baseChangeMap_app_paste_iff (sq₁ : CommSq g' f' f g) (sq₂ : Co
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) [IsIso (baseChangeMap Λ sq₂)] (M : 𝔻(X)) :
     IsIso ((baseChangeMap Λ sq).app M) ↔
       IsIso ((L((h)^*⟦Λ⟧)).map ((baseChangeMap Λ sq₁).app M)) := by
-  -- Infer the horizontal functors from the comparisons to avoid repeating derived-functor synthesis.
+  -- Infer horizontal functors from the comparisons to avoid repeated instance synthesis.
   have key := Adjunction.isIso_exchangeRight_app_paste_iff
     (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (derivedUpperStarLowerStarAdjunction Λ f'')
