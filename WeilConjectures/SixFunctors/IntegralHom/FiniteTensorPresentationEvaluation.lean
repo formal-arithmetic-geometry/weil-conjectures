@@ -105,7 +105,6 @@ variable
   (T : CoefficientTensorModels.{u, t + 1, t, (max u (t + 1)) + 1}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R S)
 
-set_option maxHeartbeats 800000 in
 -- Keep the representative calculation separate from construction of the adjunction.
 private theorem evaluation_for_adj
     (S : CoefficientClosedStructure
