@@ -142,7 +142,6 @@ theorem stalkAtIhomPairing_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     LinearEquiv.coe_coe, stalkAtIhomPairing_apply, stalkAtIhomPairing_apply]
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
 
-set_option profiler true in
 /-- The perfect stalk pairing identifies the stalk of the internal hom with linear maps. -/
 noncomputable def stalkAtIhomLinearEquiv (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     (F : WeilSheaf k₀ l X) :
@@ -151,7 +150,6 @@ noncomputable def stalkAtIhomLinearEquiv (D : WeilSheaf k₀ l X) (hD : D.IsLiss
   LinearEquiv.ofBijective (stalkAtIhomPairing s m hs D hD F)
     (bijective_stalkAtIhomPairing s m hs D hD F)
 
-set_option profiler true in
 lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier)
     (x : (D.stalkAt s m hs).carrier) :
@@ -159,7 +157,6 @@ lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
       Mod.evaluationPairing (stalkFunctor l s) D.obj.carrier F.obj.carrier v x :=
   rfl
 
-set_option profiler true in
 /-- Under the stalk equivalence, Frobenius acts by pre- and post-composition. -/
 lemma stalkAtIhomLinearEquiv_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier) :
@@ -173,7 +170,6 @@ lemma stalkAtIhomLinearEquiv_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     stalkAtIhomLinearEquiv_apply, stalkAtIhomLinearEquiv_apply]
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v y
 
-set_option profiler true in
 /-- The trace of the Frobenius on the stalk of the internal hom `[D, F]` out of a lisse Weil
 sheaf: `tr(F | [D, F]_s) = tr(F | F_s) tr(F⁻¹ | D_s)`, the stalk being `Hom(D_s, F_s)` with the
 Frobenius `f ↦ F ∘ f ∘ F⁻¹`. -/
