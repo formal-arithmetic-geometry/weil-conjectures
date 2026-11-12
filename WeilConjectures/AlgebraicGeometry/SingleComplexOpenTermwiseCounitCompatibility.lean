@@ -234,6 +234,14 @@ theorem singleComplexOpen_termwise_counit_compatibility
       (Scheme.Modules.tensorPullback k).Additive := fun k => tensorPullbackAdditive k
   let := schemeOpenRestriction_additive X U
   let := schemeOpenRestriction_additive X' U'
+  have : PreservesFiniteLimits (schemeOpenRestriction X U) :=
+    schemeOpenRestriction_preservesFiniteLimits X U
+  have : PreservesFiniteColimits (schemeOpenRestriction X U) :=
+    schemeOpenRestriction_preservesFiniteColimits X U
+  have : PreservesFiniteLimits (schemeOpenRestriction X' U') :=
+    schemeOpenRestriction_preservesFiniteLimits X' U'
+  have : PreservesFiniteColimits (schemeOpenRestriction X' U') :=
+    schemeOpenRestriction_preservesFiniteColimits X' U'
   let := tensorPullbackAdditive g'
   let := tensorPullbackAdditive j
   let : (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j).PreservesZeroMorphisms :=
