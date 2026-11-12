@@ -22,7 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option trace.profiler true in
+-- Fix the canonical hom-group scalar action explicitly: inferring it searches through
+-- both presentations of the total tensor and attempts expensive coercions between them.
 private theorem ringedSwap_summand
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -37,12 +38,14 @@ private theorem ringedSwap_summand
       (@Preadditive.homGroup (RingedTensorModules.{u, u, u} J R) _ inferInstance
         (P.X p ⊗ Q.X q) (((coefficientTotalTensor.{u, u, u} J R).obj (Q, P)).X n)).zsmul
         ((p * q).negOnePow : ℤ) ((β_ (P.X p) (Q.X q)).hom ≫
-        RingedForgetTensorTransposition.tensorSummand J R Q P q p n hqp) := by
+          RingedForgetTensorTransposition.tensorSummand J R Q P q p n hqp) := by
   letI := SheafOfModules.isMonoidal_W_independentCoefficients R
   letI := SheafOfModules.monoidalCategory R
   letI := SheafOfModules.symmetricCategory R
   exact CochainComplex.Monoidal.ι_braiding_hom (K := P) (L := Q) p q n hpq
 
+-- Do the composition and scalar algebra with abstract morphisms, before specializing
+-- to the sheaf tensor and its total-complex comparisons.
 private theorem signed_summand_of_comparison
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     (F : C ⥤ D) [F.Additive] [F.Faithful]
@@ -92,7 +95,6 @@ def nativeRingedSwapUnderived (P Q : ProEtaleWeilSheaf k₀ l X) :
   exact b.native.functor.preimageIso (A.underived Q P ≪≫
     β_ (b.native.functor.obj P) (b.native.functor.obj Q) ≪≫ (A.underived P Q).symm)
 
-set_option trace.profiler true in
 /-- The native signed chain swap on one homogeneous tensor summand.
 Source: Stacks 06YU, 0FPT.
 (blueprint: new-sf-native-weil-ringed-swap-summand).
@@ -123,7 +125,7 @@ theorem nativeRingedSwapComplex_summand
       Functor.map_preimage, Iso.trans_hom, Iso.symm_hom, Category.assoc,
       Iso.inv_hom_id, Category.comp_id]
   have h := congrArg (fun f ↦ f.f n) (nativeRingedSwapComplex_square b T adj A P Q)
-  refine signed_summand_of_comparison E _ s.hom _ _
+  exact signed_summand_of_comparison E _ s.hom _ _
     ((A.chain Q P).hom.f n) ((A.chain P Q).hom.f n)
     (A.underived (Q.X q) (P.X p)).hom (A.underived (P.X p) (Q.X q)).hom
     _ _ _ _ ((q * p).negOnePow : ℤ) ((p * q).negOnePow : ℤ) _
