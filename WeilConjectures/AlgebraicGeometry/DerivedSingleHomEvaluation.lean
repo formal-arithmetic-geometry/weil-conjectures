@@ -82,6 +82,10 @@ private theorem localized_hom_evaluation
     IsIso.hom_inv_id, Category.comp_id]
   rfl
 
+local instance homEvaluation_hasSheafCompose {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
 set_option profiler true in
 private theorem sheaf_hom_evaluation
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
@@ -200,7 +204,7 @@ theorem derived_single_hom_evaluation (Y : Scheme.{u})
                 (((CochainComplex.singleFunctor
                   (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op)).app I ≫
                     e.hom.app I)  := by
-  obtain ⟨j, hj⟩ := sheaf_hom_evaluation.{u, wY} (C := Opens Y)
+  obtain ⟨j, hj⟩ := sheaf_hom_evaluation.{u, wY} (C := TopologicalSpace.Opens Y)
     (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf _ e
   refine ⟨j, ?_⟩
   intro B k I hI

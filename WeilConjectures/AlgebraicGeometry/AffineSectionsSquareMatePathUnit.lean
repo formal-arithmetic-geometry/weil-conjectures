@@ -407,6 +407,10 @@ private theorem sections_unit_pasting
 
 
 
+local instance affineSections_hasSheafCompose {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
 local instance affineSections_directImage_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).Additive := inferInstance
 
@@ -584,9 +588,9 @@ theorem affineSections_square_mate_path_unit
       (aρ).hom.app F := by
   intro P₀ Q₀ F₀ G₀ P Q RF RG A₀ B₀ S₀ T₀ A D S T aA aB aS aT ρ₀ aρ
     t b ht hb z d hz hd v r hv hr s hs J a p k δ
-  dsimp only [aρ]
-  rw [affineBaseChangedSectionsDerivedIso_eq]
-  obtain ⟨e, he, hδ⟩ := exists_derivedPushforwardSquareMateUnit f g
+  rw [show aρ = _ from affineBaseChangedSectionsDerivedIso_eq f g]
+  have hmate := exists_derivedPushforwardSquareMateUnit f g
+  obtain ⟨e, he, hδ⟩ := hmate
   let α : P₀ ⋙ S₀ ≅ T₀ ⋙ ρ₀ :=
     Functor.isoWhiskerLeft P₀ t.symm ≪≫ (Functor.associator P₀ F₀ A₀).symm ≪≫
       Functor.isoWhiskerRight e A₀ ≪≫ Functor.associator Q₀ G₀ A₀ ≪≫
