@@ -40,6 +40,8 @@ private theorem mapCompIdApply
   rw [← ConcreteCategory.comp_apply, ← F.map_comp, hcomp, F.map_id,
     ConcreteCategory.id_apply]
 
+set_option profiler true in
+set_option maxHeartbeats 800000 in
 /-- The finite quotient augmentation agrees on each degree after the two comparisons.
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
 (blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
