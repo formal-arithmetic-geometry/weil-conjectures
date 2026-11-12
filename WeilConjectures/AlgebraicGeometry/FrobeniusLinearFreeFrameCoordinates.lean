@@ -68,6 +68,41 @@ private theorem frobenius_expansion_natural
   intro j _
   rw [← hv, hf, hg]
 
+private theorem frobenius_coordinates_of_linear_coordinates
+    (p : ℕ) (S : Scheme.{u}) (G : S.Etaleᵒᵖ ⥤ AddCommGrpCat.{u})
+    [instModules : ∀ W : S.Etale, Module Γ(W.left, ⊤) (G.obj (op W))]
+    (F : G ⟶ G)
+    (hF : ∀ (W : S.Etale) (a : Γ(W.left, ⊤)) (m : G.obj (op W)),
+      F.app (op W) (a • m) = a ^ p • F.app (op W) m)
+    (V : S.Etale) (n : ℕ)
+    (e : ∀ (W : S.Etale), (W ⟶ V) →
+      G.obj (op W) ≃ₗ[Γ(W.left, ⊤)] (Fin n → Γ(W.left, ⊤)))
+    (henat : ∀ (W : S.Etale) (h : W ⟶ V) (m : G.obj (op V)) (i : Fin n),
+      e W h (G.map h.op m) i = h.left.appTop (e V (𝟙 V) m i)) :
+  ∃ (e : ∀ (W : S.Etale), (W ⟶ V) →
+        (G.obj (op W)) ≃+ (Fin n → Γ(W.left, ⊤)))
+      (a : Fin n → Fin n → Γ(V.left, ⊤)),
+      (∀ (W : S.Etale) (h : W ⟶ V)
+        (m : (G.obj (op V))) (i : Fin n),
+        e W h (G.map h.op m) i =
+          h.left.appTop (e V (𝟙 V) m i)) ∧
+      (∀ (W : S.Etale) (h : W ⟶ V)
+        (m : (G.obj (op W))) (i : Fin n),
+        e W h (F.app (op W) m) i =
+          ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p) := by
+  classical
+  let v : Fin n → (G.obj (op V)) :=
+    fun j ↦ (e V (𝟙 V)).symm (Pi.single j 1)
+  let a : Fin n → Fin n → Γ(V.left, ⊤) :=
+    fun i j ↦ e V (𝟙 V) (F.app (op V) (v j)) i
+  refine ⟨fun W h ↦ (e W h).toAddEquiv, a, henat, ?_⟩
+  intro W h m i
+  exact frobenius_expansion_natural n p (e V (𝟙 V)) (e W h) h.left.appTop.hom
+    (G.map h.op).hom
+    (F.app (op V)).hom (F.app (op W)).hom (henat W h)
+    (fun s ↦ congrArg (fun f ↦ f s) (F.naturality h.op)) (hF W) m i
+
+
 set_option profiler true in
 /-- A specified finite free frame gives a natural Frobenius matrix on the etale slice.
 
@@ -114,17 +149,9 @@ theorem frobenius_linear_free_frame_coordinates
         (m : Γ((Modules.tensorPullback W.hom).obj E, ⊤)) (i : Fin n),
         e W h (F.hom.app (op W) m) i =
           ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p) := by
-  classical
   obtain ⟨e, henat⟩ := exists_natural_tensor_free_frame_coordinates S E V n α
-  let v : Fin n → Γ((Modules.tensorPullback V.hom).obj E, ⊤) :=
-    fun j ↦ (e V (𝟙 V)).symm (Pi.single j 1)
-  let a : Fin n → Fin n → Γ(V.left, ⊤) :=
-    fun i j ↦ e V (𝟙 V) (F.hom.app (op V) (v j)) i
-  refine ⟨fun W h ↦ (e W h).toAddEquiv, a, henat, ?_⟩
-  intro W h m i
-  exact frobenius_expansion_natural n p (e V (𝟙 V)) (e W h) h.left.appTop.hom
-    ((Modules.etaleTensorSectionsSheaf E).obj.map h.op).hom
-    (F.hom.app (op V)).hom (F.hom.app (op W)).hom (henat W h)
-    (fun s ↦ congrArg (fun f ↦ f s) (F.hom.naturality h.op)) (hF W) m i
+  exact frobenius_coordinates_of_linear_coordinates p S
+    (Modules.etaleTensorSectionsSheaf E).obj (instModules := fun W ↦ inferInstance)
+    F.hom hF V n e henat
 
 end AlgebraicGeometry.Scheme

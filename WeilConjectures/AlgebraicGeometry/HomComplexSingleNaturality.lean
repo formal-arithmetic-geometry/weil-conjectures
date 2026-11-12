@@ -51,7 +51,7 @@ private theorem single_hom_functor_iso (Y : Scheme.{u})
       CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (π : ∀ (L M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
       (n p q : ℤ), p + n = q →
-        (((F.obj (op L)).obj M).X n ⟶ SheafOfModules.homObj (L.X p) (M.X q)))
+        (((F.obj (op L)).obj M).X n ⟶ SheafOfModules.homObj (R := Y.sheaf) (L.X p) (M.X q)))
     (hlim : ∀ (L M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
       (n : ℤ), Nonempty (CategoryTheory.Limits.IsLimit
         (CategoryTheory.Limits.Fan.mk (((F.obj (op L)).obj M).X n)
@@ -60,14 +60,14 @@ private theorem single_hom_functor_iso (Y : Scheme.{u})
       (n m p q q' p' : ℤ) (_hnm : n + 1 = m) (hpq : p + m = q)
       (hq' : p + n = q') (hp' : p' + n = q),
       ((F.obj (op L)).obj M).d n m ≫ π L M m p q hpq =
-        π L M n p q' hq' ≫ SheafOfModules.homObjMap (𝟙 (L.X p)) (M.d q' q) -
+        π L M n p q' hq' ≫ SheafOfModules.homObjMap (R := Y.sheaf) (𝟙 (L.X p)) (M.d q' q) -
           n.negOnePow • (π L M n p' q hp' ≫
-            SheafOfModules.homObjMap (L.d p p') (𝟙 (M.X q))))
+            SheafOfModules.homObjMap (R := Y.sheaf) (L.d p p') (𝟙 (M.X q))))
     (hnat : ∀ (L L' M M' :
       CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
       (f : L' ⟶ L) (g : M ⟶ M') (n p q : ℤ) (hpq : p + n = q),
       (((F.map f.op).app M) ≫ (F.obj (op L')).map g).f n ≫ π L' M' n p q hpq =
-        π L M n p q hpq ≫ SheafOfModules.homObjMap (f.f p) (g.f q))
+        π L M n p q hpq ≫ SheafOfModules.homObjMap (R := Y.sheaf) (f.f p) (g.f q))
     (P Q : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (k : Q ⟶ P)
     [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).Additive]
     [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).Additive] :
@@ -148,7 +148,6 @@ private theorem single_hom_functor_iso (Y : Scheme.{u})
   rw [(F.obj (op (S.obj Q))).map_id] at h
   simp only [Category.comp_id] at h
   exact h
-
 
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
