@@ -398,6 +398,7 @@ private def quotientReconstructMap (b : Module.Basis ι R S) (I : Ideal R)
 
 omit [IsNoetherian Y] [Y.IsSeparated]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Kernel checking the sheafification reconstruction expands the chosen scalar adjunction.
 private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
@@ -745,6 +746,7 @@ attribute [local irreducible] lisseIntegerInclusion lisseRamificationIndex lisse
   Padic.coefficientExtensionAbsoluteValue Padic.coefficientExtensionUniformizer
   Padic.coefficientExtensionMaximalIdeal
 
+set_option profiler true in
 set_option maxHeartbeats 5000000 in
 -- Kernel checking the chosen scalar-extension transports needs a larger heartbeat budget.
 private theorem coefficientCofinal_reconstruct
