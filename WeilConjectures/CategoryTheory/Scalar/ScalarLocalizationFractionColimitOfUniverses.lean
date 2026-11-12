@@ -455,7 +455,6 @@ private theorem tensor_scalar_colimitAux
     simp only [Linear.smul_comp, Linear.comp_smul, Category.id_comp, Category.comp_id]
 
 set_option linter.style.whitespace false in
-set_option maxHeartbeats 400000 in
 -- The sectionwise tensor normalization has a large elaborated type.
 /-- The fraction legs exhibit restricted scalar extension as the module-sheaf colimit.
 Source: Stacks Project, algebra.tex Tag 00CM; sites-modules.tex Tags 03CY and 03EK.
@@ -643,7 +642,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 set_option linter.style.whitespace false in
-set_option maxHeartbeats 800000 in
 -- Elaborating the sectionwise tensor normalization requires additional heartbeats.
 /-- The ordinary sequential colimit of a scalar sequence of complexes.
 Source: Stacks Project, algebra.tex, Tag 00CM; sites-modules.tex, Tags 03CY and 03EK.

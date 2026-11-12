@@ -240,7 +240,6 @@ private theorem factor_differential
     Preadditive.sub_comp, Preadditive.zsmul_comp, Category.assoc, hα, hβ]
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
 -- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem sheafHomIso_naturality
@@ -308,7 +307,6 @@ abbrev complexMap
 attribute [local irreducible] homComplexFunctor
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
 -- Projection formulas require reducing the local Hom-complex abbreviations.
 set_option backward.isDefEq.respectTransparency true in
 private theorem homComplexFromComparison

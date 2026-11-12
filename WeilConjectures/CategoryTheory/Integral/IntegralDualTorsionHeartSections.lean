@@ -258,7 +258,6 @@ private theorem tensor_cohomology_classical_torsion
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-set_option maxHeartbeats 400000 in
 -- Comparing the derived monoidal structures needs additional elaboration heartbeats.
 private theorem dual_data
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -460,7 +459,6 @@ private theorem amplitude_from_heart_images
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 400000 in
 -- Keeping coefficients abstract prevents expansion of the chosen localization structures.
 private theorem sections_bound_of_tor_and_classical_cohomology
     (l : ℕ) (hl : l.Prime)

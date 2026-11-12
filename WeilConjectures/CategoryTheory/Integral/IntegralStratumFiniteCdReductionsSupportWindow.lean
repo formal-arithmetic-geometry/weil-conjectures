@@ -94,7 +94,6 @@ private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
   exact coefficientArrow_eq _ _ _ _ _ _ _ _ _ _ _ _ _ hti hd
 
 -- The generalized coefficient arrow needs the exact module-derived functor instances.
-set_option maxHeartbeats 1600000 in
 -- Generalizing the coefficient arrow requires the module-derived category instances.
 /-- The open restriction of supported sections of a finite reduction has cohomology
 in `[-1,c+1]`, and its underlying cohomology sheaves are classical local torsion.

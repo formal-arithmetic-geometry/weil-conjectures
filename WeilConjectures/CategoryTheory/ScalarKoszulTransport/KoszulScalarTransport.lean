@@ -109,7 +109,6 @@ theorem inverseNaturality
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [h, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Prove the component calculation abstractly, before specializing to module sheaves.
 private theorem tensorTotalRightUnit
     {E : Type u} [Category.{w} E] [Abelian E] [MonoidalCategory E]
@@ -197,7 +196,6 @@ private theorem tensorTotalRightUnit
   simp only [Category.assoc]
   exact (HomologicalComplex.rightUnitor'_inv N n).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep total-complex constructions abstract until their one sheaf specialization.
 private def tensorComparisonFamily
     {E : Type u} [Category.{w} E] [Abelian E] [MonoidalCategory E]
