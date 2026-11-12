@@ -342,7 +342,7 @@ private theorem identity_representative_square
       simp only [Category.assoc]
     _ = _ := by rw [hδ, Category.assoc, hd, Category.assoc]; rfl
 
--- Elaborating the K-flat model square unfolds the fixed derived-category transports.
+-- State the localized naturality square explicitly before composing it with the chain square.
 set_option profiler true in
 private theorem identity_tensor_representative (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
@@ -365,7 +365,10 @@ private theorem identity_tensor_representative (X : Scheme.{u})
   let B := total l E X s
   obtain ⟨hFP, hFQ, hm⟩ := c.tensor_model P Q hP hQ
   let r := T.comparison.app (⟨P, hP⟩, ⟨Q, hQ⟩)
-  have hn := T.comparison.hom.naturality
+  have hn : Q₀.map (B.map (Prod.mkHom (k.complex P).hom (k.complex Q).hom)) ≫ r.hom =
+      T.comparison.hom.app (⟨_, hFP⟩, ⟨_, hFQ⟩) ≫
+        S.tensor.map (Prod.mkHom (Q₀.map (k.complex P).hom) (Q₀.map (k.complex Q).hom)) :=
+    T.comparison.hom.naturality
     (Prod.mkHom (ObjectProperty.homMk (k.complex P).hom :
       (⟨_, hFP⟩ : ObjectProperty.FullSubcategory
         (CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -379,8 +382,10 @@ private theorem identity_tensor_representative (X : Scheme.{u})
       T.comparison.hom.app (⟨_, hFP⟩, ⟨_, hFQ⟩)) ≫
       S.tensor.map (Prod.mkHom (Q₀.map (k.complex P).hom) (Q₀.map (k.complex Q).hom)) =
       Q₀.map (k.complex (B.obj (P, Q))).hom ≫ r.hom := by
-    erw [Category.assoc, ← hn, ← Q₀.map_comp_assoc, hc]
-    rfl
+    exact (Category.assoc _ _ _).trans
+      ((congrArg (fun f ↦ Q₀.map (c.tensorChain P Q).hom ≫ f) hn.symm).trans
+        ((Q₀.map_comp_assoc _ _ _).symm.trans
+          (congrArg (fun f ↦ Q₀.map f ≫ r.hom) hc)))
   exact identity_representative_square (podReindexingDerivedFunctor l E (𝟙 X) s)
     S.tensor k.derived c.tensor.hom r (α.hom.app P) (α.hom.app Q)
     (α.hom.app (B.obj (P, Q))) (Q₀.map (k.complex P).hom)
