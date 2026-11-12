@@ -172,6 +172,7 @@ private theorem pullback_products
     reflectsLimitsOfShape_of_reflectsIsomorphisms
   exact preservesLimitsOfShape_of_reflects_of_preserves _ (Mod.forget _)
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Chartwise transport and product-cone descent require a larger elaboration budget.
 set_option synthInstance.maxHeartbeats 100000 in
