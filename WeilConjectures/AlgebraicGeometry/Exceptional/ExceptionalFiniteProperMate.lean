@@ -217,7 +217,6 @@ variable {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   (A : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell _ _
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous p (Type (u + 1)) J K))
 
-set_option profiler true in
 -- Check the transported addition and scalar actions on generalized sections.
 private theorem finiteConstantRight (n : ℕ) :
     ∃ e : A.right n ⋙ finiteConstantModule J

@@ -205,7 +205,6 @@ private theorem inverseSquare_eq
   simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
     IsIso.inv_hom_id_assoc, IsIso.hom_inv_id, Category.comp_id] using hh.symm
 
-set_option profiler true in
 -- The system and level mate identities require simultaneous localization comparisons.
 /-- Construct the normalized proper and open compactification comparisons.
 Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
@@ -374,7 +373,7 @@ theorem exceptionalSystemCompactificationComparison_exists
       ((P.val.levelDerivedOpen n).map ((CX.image.inverseEvaluation n).hom.app M))
       ((CZ.image.inverseEvaluation n).hom.app (S.derivedOpen.obj M)) hc
     simpa only [record, e, en, Iso.symm_hom, Iso.symm_inv, asIso_inv,
-      NatIso.isIso_inv_app, Functor.mapIso_hom, Functor.map_inv, Category.assoc] using hh
-
+      NatIso.isIso_inv_app, Functor.mapIso_hom, Iso.app_hom, Functor.map_inv,
+      Category.assoc] using hh
 
 end AlgebraicGeometry
