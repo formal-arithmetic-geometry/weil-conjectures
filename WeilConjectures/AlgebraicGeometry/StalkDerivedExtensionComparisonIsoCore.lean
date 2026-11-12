@@ -106,6 +106,20 @@ private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
   have : Abelian.HasFunctorialFlatResolution A₀ := schemeModule_hasFunctorialFlatResolution X
   have : IsGrothendieckAbelian.{u} A₀ :=
     SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have (M N : GradedObject ℤ A₀) : M.HasTensor N := inferInstance
+  have (M N K : GradedObject ℤ A₀) : GradedObject.HasGoodTensor₁₂Tensor M N K :=
+    inferInstance
+  have (M N K : GradedObject ℤ A₀) : GradedObject.HasGoodTensorTensor₂₃ M N K :=
+    inferInstance
+  have (M N K T : GradedObject ℤ A₀) : GradedObject.HasTensor₄ObjExt M N K T :=
+    inferInstance
+  let : MonoidalCategory (CochainComplex A₀ ℤ) :=
+    HomologicalComplex.monoidalCategory A₀ (.up ℤ)
+  have : HasColimitsOfShape ℤ A₀ := inferInstance
+  have : HasExactColimitsOfShape ℤ A₀ := inferInstance
+  have (M : A₀) : PreservesColimitsOfShape ℤ ((curriedTensor A₀).obj M) := inferInstance
+  have (M : A₀) : PreservesColimitsOfShape ℤ ((curriedTensor A₀).flip.obj M) := inferInstance
+  have : W.localizerMorphismKFlat.IsLeftDerivabilityStructure := inferInstance
   let G : A₀ ⥤ B₀ := Scheme.Modules.tensorPullback g'
   have : G.Additive := tensorPullbackAdditive.{u, w} g'
   have : (derivedPullback g').IsLeftDerivedFunctor (counit g') W :=
@@ -254,6 +268,7 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
       (stalkComplex g' z P)) = 𝟙 _ := DerivedCategory.Qh.map_id _
   have hq' : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} (C z))).hom.app
       (tensorComplex f f' g g' sq z P) = 𝟙 _ := rfl
-  simpa only [hq, hE, hq', Category.id_comp] using hcoord
+  erw [hq, hE, hq', Category.id_comp, Category.id_comp, Category.id_comp]
+  exact hcoord
 
 end AlgebraicGeometry.SingleComplexBaseChange
