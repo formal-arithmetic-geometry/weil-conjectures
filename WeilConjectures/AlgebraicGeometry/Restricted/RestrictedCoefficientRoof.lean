@@ -210,6 +210,25 @@ attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom
 attribute [local irreducible] moduleCohomologyFMap sectionExtendIso
 
+private theorem pushforward_sectionExtendIso_naturality
+    {X Z : Scheme.{u}} (v : Z ⟶ X) (U : X.Opens)
+    (J : CochainComplex Z.Modules ℕ) (L : CochainComplex X.Modules ℕ)
+    (ell : ((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj J ⟶ L)
+    (q : ℕ) :
+    let E := RingedSpace.openModuleSections X.toRingedSpace U
+    let Γ := E.mapHomologicalComplex (ComplexShape.up ℤ)
+    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) (q : ℤ)
+    (sectionExtendIso (RingedSpace.openModuleSections Z.toRingedSpace (v ⁻¹ᵁ U)) J q).hom ≫
+        H.map (Γ.map ((J.mapExtendIso ComplexShape.embeddingUpNat (pushforward v)).hom ≫
+          HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)) =
+      HomologicalComplex.homologyMap
+        ((E.mapHomologicalComplex (ComplexShape.up ℕ)).map ell) q ≫
+          (sectionExtendIso E L q).hom := by
+  intro E Γ H
+  dsimp only [Scheme.Modules, Scheme.Modules.Hom, Scheme.Modules.instCategory,
+    Scheme.Modules.instAbelian] at *
+  exact sectionExtendIso_comp_naturality (pushforward v) E J ell q
+
 private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Modules}
     (I : InjectiveResolution F) (U : X.Opens) (R : RestrictedResolutionSections I U)
     (q : ℕ) :
@@ -311,7 +330,7 @@ theorem restrictedCoefficient_roof {X Z : Scheme.{u}} (v : Z ⟶ X)
   have hβ : sI.hom ≫ H.map (Γ.map betaZ) = HN.map (EN.map beta) ≫ sL.hom :=
     sectionExtendIso_naturality E beta q
   have hdenom : sJ.hom ≫ H.map (Γ.map ellZ) = HN.map (EN.map ell) ≫ sL.hom :=
-    sectionExtendIso_comp_naturality (pushforward v) E J.cocomplex ell q
+    pushforward_sectionExtendIso_naturality v U J.cocomplex L ell q
   have hn := restrictedCoefficient_natRoof v F G φ I J L hL ell hell beta hbeta U R R' q
   let m := moduleCohomologyFMap (v.resLE U (v ⁻¹ᵁ U) le_rfl)
     (restrictedDirectImageMap v φ U) q

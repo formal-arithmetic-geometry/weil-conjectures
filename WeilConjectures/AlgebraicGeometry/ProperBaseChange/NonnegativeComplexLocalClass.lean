@@ -57,6 +57,23 @@ private theorem mapExtend_comp_component
     HomologicalComplex.mapExtendX_hom_eq L F hr]
   simp only [eqToIso.hom, eqToIso.inv, eqToHom_map, eqToHom_trans, eqToHom_refl]
 
+private theorem localClass_of_cycles {C : Type*} [Category C]
+    {Z H ZA HA T ZJ HJ ZB HB : C}
+    (π : Z ⟶ H) [Epi π] (m : H ⟶ HB) (a : H ⟶ HA) (α : ZA ⟶ HA)
+    (z : Z ⟶ ZA) (η : HA ⟶ T) (c : T ⟶ HJ) (k : ZA ⟶ ZJ)
+    (πJ : ZJ ⟶ HJ) (d : HJ ⟶ HB) (zD : ZJ ⟶ ZB) (πB : ZB ⟶ HB)
+    (zM : Z ⟶ ZB) (hleft : π ≫ m = zM ≫ πB) (ha : π ≫ a = z ≫ α)
+    (hclass : α ≫ η ≫ c = k ≫ πJ) (hd : πJ ≫ d = zD ≫ πB)
+    (hz : z ≫ k ≫ zD = zM) : m = a ≫ η ≫ c ≫ d := by
+  apply (cancel_epi π).mp
+  rw [hleft, ← Category.assoc π a, ha]
+  simp only [Category.assoc]
+  rw [← Category.assoc α η, ← Category.assoc (α ≫ η) c,
+    Category.assoc α η c, hclass]
+  simp only [Category.assoc]
+  rw [hd, ← Category.assoc z k, ← Category.assoc (z ≫ k) zD,
+    Category.assoc z k zD, hz]
+
 set_option profiler true in
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
@@ -211,18 +228,16 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
     change E.map (A.homologyπ (q : ℤ) ≫ η ≫ c) =
       E.map (k ≫ F.map (J.homologyπ (q : ℤ))) at h
     simpa only [Functor.map_comp] using h
-  apply (cancel_epi (C.homologyπ q)).1
-  change C.homologyπ q ≫
+  have hleft : C.homologyπ q ≫
       ((M.mapHomologyIso E').hom ≫ E'.map (sectionCohomologyTheta B q)) =
-    C.homologyπ q ≫ (a.hom ≫ E.map η ≫ E.map c ≫ E.map (F.map d.hom))
-  have hleft := section_comparison_cycles B q V
-  change C.homologyπ q ≫ (M.mapHomologyIso E').hom ≫
-      E'.map (sectionCohomologyTheta B q) = zM ≫ E.map (F.map (B.homologyπ q)) at hleft
-  erw [hleft, reassoc_of% hπ, reassoc_of% hh]
-  erw [← E.map_comp (F.map (J.homologyπ (q : ℤ))) (F.map d.hom),
-    ← F.map_comp (J.homologyπ (q : ℤ)) d.hom, hdπ,
-    F.map_comp zD (B.homologyπ q), E.map_comp (F.map zD) (F.map (B.homologyπ q))]
-  simpa only [Category.assoc] using
-    congrArg (fun z' ↦ z' ≫ E.map (F.map (B.homologyπ q))) hcycles.symm
+      zM ≫ E.map (F.map (B.homologyπ q)) := by
+    simpa only [zM, Category.assoc] using section_comparison_cycles B q V
+  have hd : E.map (F.map (J.homologyπ (q : ℤ))) ≫ E.map (F.map d.hom) =
+      E.map (F.map zD) ≫ E.map (F.map (B.homologyπ q)) := by
+    simpa only [Functor.map_comp] using congrArg (fun f ↦ E.map (F.map f)) hdπ
+  exact localClass_of_cycles (C.homologyπ q) _ a.hom (E.map (A.homologyπ (q : ℤ)))
+    z (E.map η) (E.map c) (E.map k) (E.map (F.map (J.homologyπ (q : ℤ))))
+    (E.map (F.map d.hom)) (E.map (F.map zD)) (E.map (F.map (B.homologyπ q)))
+    zM hleft hπ hh hd hcycles
 
 end AlgebraicGeometry
