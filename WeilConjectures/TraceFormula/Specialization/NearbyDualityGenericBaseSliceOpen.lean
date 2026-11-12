@@ -524,6 +524,7 @@ private lemma boundedConstructibleNearbyCycles_map_hom'' {X X' : Scheme.{u}}
   rfl
 
 -- the motive checks of the rewrites in the proof take a few seconds each on the large goal
+set_option profiler true in
 /-- **The square law of the pullback exchanges** on bounded constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_square`), for a commutative square of morphisms of
 models `φ₀ : M₂ ⟶ M`, `ψ : M ⟶ M_c`, `ψ' : M₂ ⟶ M₂,c`, `φ₁ : M₂,c ⟶ M_c` in which `ψ` and `ψ'`
@@ -609,6 +610,7 @@ noncomputable def boundedConstructibleTateTwistZeroUpperStarIso (f : Y.left ⟶ 
   ObjectProperty.isoMk _ (tateTwistZeroShiftUpperStarIso ℓ f n)
 
 -- the motive checks of the rewrites in the proof take a few seconds each
+set_option profiler true in
 /-- **The pullback exchange and the specialization maps of `ℚ̄_ℓ(0)[n]`** on bounded
 constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_ambientZeroTwistSpecializationMap`),
