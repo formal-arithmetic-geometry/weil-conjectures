@@ -62,6 +62,8 @@ attribute [local instance 2000] MonoidalCategory.toMonoidalCategoryStruct
 
 section BaseChange
 
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
+
 variable {A B A' B' : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A.hom]
   [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
   [LocallyOfFiniteType A'.hom] [QuasiCompact A'.hom] [IsSeparated A'.hom]
@@ -86,16 +88,14 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
   have hamb : IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq).app K.obj) := by
     have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ) hsq
     infer_instance
-  have hcomp := pullbackSquareComparison_eq_leftDerivedFunctorSquareIso
-    (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq
   unfold baseChangeMap at hamb
-  rw [hcomp] at hamb
+  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso] at hamb
   have hθ (K : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
         K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
           (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicAlgClRingObj ℓ) sq K, hcomp]
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
+      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
   have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
