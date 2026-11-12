@@ -22,7 +22,11 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
+set_option maxHeartbeats 800000 in
+set_option profiler true in
 private theorem replacement (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     (A B : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
