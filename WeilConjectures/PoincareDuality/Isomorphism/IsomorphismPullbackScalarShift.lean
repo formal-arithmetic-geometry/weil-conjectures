@@ -96,6 +96,7 @@ private theorem localization_shift_obj (l : ℕ) [Fact l.Prime]
   Functor.congr_obj (sfRationalTriangulationDatum l E W).choose_spec.choose_spec.1 J
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The four normalized localization squares require explicit heterogeneous transports.
 /-- The specified scalar comparison preserves the normalized integral and rational shifts.
 Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
