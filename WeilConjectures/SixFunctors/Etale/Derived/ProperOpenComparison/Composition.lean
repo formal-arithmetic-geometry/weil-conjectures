@@ -104,12 +104,20 @@ end Etale
 
 namespace ProperOpenDatum
 
+private theorem comparison_comp_of_squares
+    {C : Type*} [Category C] {A B C₁ D E F G H : C}
+    {a : A ⟶ B} {b : B ⟶ C₁} {c : C₁ ⟶ D} {d : D ⟶ E} {e : E ⟶ F}
+    {f : C₁ ⟶ G} {g : G ⟶ E} {h : G ⟶ H} {i : H ⟶ F} {j : B ⟶ H} {k : A ⟶ F}
+    (hnat : f ≫ g = c ≫ d) (hassoc : h ≫ i = g ≫ e)
+    (h₁ : b ≫ f ≫ h = j) (h₂ : a ≫ j ≫ i = k) :
+    a ≫ b ≫ c ≫ d ≫ e = k := by
+  rw [← reassoc_of% hnat, ← hassoc, reassoc_of% h₁, h₂]
+
 variable {X T₁ T₂ T₃ : Scheme.{u}} (u : T₁ ⟶ T₂) (v : T₂ ⟶ T₃) (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂)
   (j₃ : X ⟶ T₃) [IsProper u] [IsProper v] [IsOpenImmersion j₁] [IsOpenImmersion j₂]
   [IsOpenImmersion j₃] (h₁ : j₁ ≫ u = j₂) (h₂ : j₂ ≫ v = j₃)
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in -- the final rewrites unify large derived-category terms
 /-- Blueprint `lem-weil-pbc-proper-open-comparison-composition`: Composition of proper-open
 comparison maps. For proper `u : T₁ ⟶ T₂`, `v : T₂ ⟶ T₃` and open immersions `jᵢ : X ⟶ Tᵢ` with
 `j₁ ≫ u = j₂`, `j₂ ≫ v = j₃`,
@@ -153,7 +161,7 @@ theorem comparison_comp :
     Functor.comp_obj, Category.assoc]
   have h₁'' := congrArg ((v)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map h₁'
   simp only [Functor.map_comp] at h₁''
-  rw [← reassoc_of% hnat, ← hassoc, reassoc_of% h₁'', h₂']
+  exact comparison_comp_of_squares hnat hassoc h₁'' h₂'
 
 
 /-- The identity law of blueprint `lem-weil-pbc-proper-open-comparison-composition`: for the

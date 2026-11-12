@@ -87,7 +87,6 @@ private theorem map_heq {C D : Type*} [Category C] [Category D]
   exact heq_of_eq (congrArg F.map (eq_of_heq h))
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Stage descent transports several dependent category presentations.
 /-- Pullback of a literal coefficient arrow is the localized integral scalar map,
 with the prescribed endpoint transports.
