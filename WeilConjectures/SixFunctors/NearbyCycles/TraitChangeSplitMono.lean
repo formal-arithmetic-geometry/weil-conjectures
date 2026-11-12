@@ -124,7 +124,9 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
     using ℓ, E, φ.commSq_j, M.i,
       ((L(Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
         N.generic))).obj ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)), n₀,
-      (isGE_leftDerivedFunctor_extendScalars_obj _ _ n₀), hE
+      (isGE_leftDerivedFunctor_extendScalars_obj
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+        ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀)), hE
   -- `ℚ̄_ℓ ⊗ (E ⊗ Lε^* K₀) ≅ Lε^* B`
   have e' : (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       N.generic))).obj ((L(Mod.extendScalars (coefficientMap
