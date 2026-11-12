@@ -330,6 +330,8 @@ private theorem generator_restrict (W : Scheme.{u})
         hu.symm))))
 
 -- The three transported total-complex presentations need additional elaboration time.
+set_option profiler true in
+set_option maxHeartbeats 8000000 in
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
 private theorem tensor_chain_square {X Y Z : Scheme.{u}}
