@@ -354,8 +354,7 @@ lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
     IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app U) := by
   refine isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) (M := M.toGeneric)
     (h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) ?_ U hU
-  intro C₀ hC₀
-  cast_proofs h.isIso_pushforwardExchange_toTraitGeneric_app C₀ hC₀
+  cast_proofs IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) h
 
 /-! ### The global-sections step, for general coefficients -/
 
@@ -568,27 +567,31 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- the proper exchanges
-  · have h₃ := hM.isIso_pushforwardExchange_toTraitGeneric_of_iso
+  · have h₃ := hM.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ)
       (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
         nonempty_upperStar_obj_iso_comp _ heM A⟩
     cast_proofs h₃
-  · have h₃ := hN.isIso_pushforwardExchange_toTraitGeneric_of_iso
+  · have h₃ := hN.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ)
       (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
         nonempty_upperStar_obj_iso_comp _ heN B⟩
     cast_proofs h₃
-  · have h₃ := hP.isIso_pushforwardExchange_toTraitGeneric_of_iso _
+  · have h₃ := hP.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
     cast_proofs h₃
   -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
-  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
+  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+      (X := X') (Y := Y') (P := Z') f₁' f₂'
       (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
-      (isPullback_special hM hN hpb hP) _ hΨA' _ hΨB'
-  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
+      (isPullback_special hM hN hpb hP) _ (by cast_proofs hΨA') _ (by cast_proofs hΨB')
+  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+      (K := traitGenericField k') (X := Over.mk gM)
       (Y := Over.mk gN)
       (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
-      (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen) _ hA' _ hB'
+      (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen)
+      (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) (by cast_proofs hA')
+      (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B) (by cast_proofs hB')
 
 end Global
 
