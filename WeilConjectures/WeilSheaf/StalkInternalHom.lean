@@ -150,13 +150,23 @@ theorem trace_frobeniusEnd_stalkAt_ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse
     LinearMap.trace (PadicAlgCl l) _ ((D.ihom hD F).stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd *
         LinearMap.trace (PadicAlgCl l) _ (D.stalkAt s m hs).frobenius.symm.toLinearMap := by
-  refine FrobeniusModule.trace_frobeniusEnd_eq_mul_of_bijective
-    (V := (D.ihom hD F).stalkAt s m hs) (M := D.stalkAt s m hs) (N := F.stalkAt s m hs)
-    (stalkAtIhomPairing s m hs D hD F) (bijective_stalkAtIhomPairing s m hs D hD F) ?_
-  intro v x
-  rw [FrobeniusModule.frobeniusEnd, FrobeniusModule.frobeniusEnd, LinearEquiv.coe_coe,
-    LinearEquiv.coe_coe, stalkAtIhomPairing_apply, stalkAtIhomPairing_apply]
-  exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
+  let e := LinearEquiv.ofBijective (stalkAtIhomPairing s m hs D hD F)
+    (bijective_stalkAtIhomPairing s m hs D hD F)
+  have h : e.conj ((D.ihom hD F).stalkAt s m hs).frobeniusEnd =
+      (LinearMap.llcomp (PadicAlgCl l) _ _ _ (F.stalkAt s m hs).frobeniusEnd) ∘ₗ
+        (LinearMap.llcomp (PadicAlgCl l) _ _ _).flip
+          (D.stalkAt s m hs).frobenius.symm.toLinearMap := by
+    refine LinearMap.ext fun f ↦ LinearMap.ext fun x ↦ ?_
+    obtain ⟨v, rfl⟩ := e.surjective f
+    rw [LinearEquiv.conj_apply_apply, LinearEquiv.symm_apply_apply, LinearMap.comp_apply,
+      LinearMap.llcomp_apply, LinearMap.flip_apply, LinearMap.llcomp_apply, LinearEquiv.coe_coe]
+    change stalkAtIhomPairing s m hs D hD F
+        (((D.ihom hD F).stalkAt s m hs).frobeniusEnd v) x =
+      (F.stalkAt s m hs).frobeniusEnd
+        (stalkAtIhomPairing s m hs D hD F v ((D.stalkAt s m hs).frobenius.symm x))
+    simpa only [LinearEquiv.apply_symm_apply] using
+      stalkAtIhomPairing_frobenius s m hs D hD F v ((D.stalkAt s m hs).frobenius.symm x)
+  rw [← LinearMap.trace_conj' _ e, h, LinearMap.trace_compLeft_compRight]
 
 /-- The trace of the Frobenius on the stalk of `[G^∨, F] = G ⊗ F`, for a lisse Weil sheaf `G`,
 is the product of the traces on the stalks of `G` and `F`. -/
