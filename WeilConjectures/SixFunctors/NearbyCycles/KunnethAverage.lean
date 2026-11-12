@@ -45,12 +45,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-private def kunnethHomNsmul {C : Type*} [Category C] [Preadditive C]
-    {X Y : C} (n : ℕ) (f : X ⟶ Y) : X ⟶ Y := n • f
+set_option profiler true in
+local instance fastHomAddCommGroup {C : Type*} [Category C] [Preadditive C]
+    (X Y : C) : AddCommGroup (X ⟶ Y) := Preadditive.homGroup X Y
 
-private def kunnethHomSum {C : Type*} [Category C] [Preadditive C] {ι : Type*}
-    {X Y : C} (s : Finset ι) (f : ι → X ⟶ Y) : X ⟶ Y := ∑ i in s, f i
-
+set_option profiler true in
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
@@ -89,15 +88,14 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
     (hN : ∀ i, (σN i).autAction Λ (L((r₂)^*⟦Λ⟧).obj B) = 𝟙 _)
     (rM : (L((r₁)^*⟦Λ⟧) ⋙ MU.nearbyCycles Λ).obj A ⟶ (M.nearbyCycles Λ ⋙ L((r₁')^*⟦Λ⟧)).obj A)
     (hrM : (ρM.pullbackExchange Λ).app A ≫ rM = 𝟙 _)
-    (havgM : kunnethHomNsmul n (rM ≫ (ρM.pullbackExchange Λ).app A) =
-      kunnethHomSum s (fun i ↦ (σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
+    (havgM : n • (rM ≫ (ρM.pullbackExchange Λ).app A) =
+      ∑ i ∈ s, (σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A))
     (rP : (L((r)^*⟦Λ⟧) ⋙ PU.nearbyCycles Λ).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) ⟶
       (P.nearbyCycles Λ ⋙ L((r')^*⟦Λ⟧)).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))
     (hrP : (ρP.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) ≫ rP = 𝟙 _)
-    (havgP : kunnethHomNsmul n
-        (rP ≫ (ρP.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) =
-      kunnethHomSum s (fun i ↦ (σP i).autAction Λ
-        (L((r)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)))) :
+    (havgP : n • (rP ≫ (ρP.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) =
+      ∑ i ∈ s, (σP i).autAction Λ
+        (L((r)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))) :
     IsTensorRetract (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
       hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) := by
   refine isTensorRetract_of_sum' _ s n hn
@@ -115,7 +113,6 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
     simp only [hN i, CategoryTheory.Functor.map_id, tensorHom_id] at h
     exact h
   · simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp,
-      kunnethHomNsmul, kunnethHomSum, ← CategoryTheory.Functor.map_nsmul, havgM,
-      CategoryTheory.Functor.map_sum]
+      ← CategoryTheory.Functor.map_nsmul, havgM, CategoryTheory.Functor.map_sum]
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
