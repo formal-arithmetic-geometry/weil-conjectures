@@ -612,7 +612,7 @@ private theorem systemScalarModel_transpose_counit (W : Scheme.{u})
         (sequenceRestriction l E L ι W).mapDerivedCategoryFactors.inv.app
           ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) := by
   have h := A.transpose P _ (𝟙 ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P))
-  erw [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id] at h
+  erw [CategoryTheory.Functor.map_id, Category.comp_id, Adjunction.homEquiv_id] at h
   exact h
 
 set_option profiler true in
@@ -953,6 +953,7 @@ private theorem normalizedRestrictScalars_map_heq {W : Scheme.{u}} {n : ℕ}
     HEq ((((proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)).map
       g).val.app U) x) x := h U x
 
+set_option profiler true in
 /-- Evaluating the inverse restriction comparison still gives the identity on sections. -/
 private theorem sequenceScalarPullbackRight_inv_evaluation_heq
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (N : coefficientSequenceModules l L X)
@@ -962,7 +963,12 @@ private theorem sequenceScalarPullbackRight_inv_evaluation_heq
         ((integralComparisonSequenceDirectImage l L f).obj N))).val.obj U) :
     HEq ((((coefficientSequenceEvaluation l E Y n).map
       ((sequenceScalarPullbackRight l E L ι f).inv.app N)).val.app U).hom x) x :=
-  sequenceEvaluation_map_heq l E Y n _
+  sequenceEvaluation_map_heq l E Y n
+    (M := (sequenceRestriction l E L ι Y).obj
+      ((integralComparisonSequenceDirectImage l L f).obj N))
+    (M' := (integralComparisonSequenceDirectImage l E f).obj
+      ((sequenceRestriction l E L ι X).obj N))
+    ((sequenceScalarPullbackRight l E L ι f).inv.app N)
     (fun V y ↦ heq_of_eq (sequenceScalarPullbackRight_inv_app l E L ι f N V y)) U x
 
 /-- The finite direct-image restriction comparison is the identity on sections. -/
@@ -1037,12 +1043,13 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
   apply sheafOfModules_comp_three_eq_of_heq
   · exact sequenceScalarPullbackRight_inv_evaluation_heq l E L ι f n N
   · exact pdE _
-  · exact directImage_map_heq f _ (ρX.app N)
+  · exact directImage_map_heq f (Padic.coefficientExtensionRing l E (n + 1)) (ρX.app N)
       (fun U x ↦ heq_apply_of_heq_id _ (hρX N U) rfl rfl x)
   · intro W x
     exact heq_apply_of_heq_id _ (hρY _ W) rfl rfl x
-  · exact normalizedRestrictScalars_map_heq l E L ι (dL.app N) (pdL N)
-  · exact coefficientDirectImageComparison_app_heq f (integralScalarQuotientMap l E L ι n) _
+  · exact normalizedRestrictScalars_map_heq l E L ι (W := Y) (n := n) (dL.app N) (pdL N)
+  · exact coefficientDirectImageComparison_app_heq f (integralScalarQuotientMap l E L ι n)
+      ((coefficientSequenceEvaluation l L X n).obj N)
 
 end OrdinaryCube
 
