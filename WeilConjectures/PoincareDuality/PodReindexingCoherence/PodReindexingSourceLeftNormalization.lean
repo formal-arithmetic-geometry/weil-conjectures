@@ -326,7 +326,8 @@ theorem source_left_normalization
       Q.map eX.inv ≫ (Q.commShiftIso (-a)).hom.app (hom l E X s KP KI))
     hnat (by simpa only [Functor.mapIso_hom, Iso.prod_hom, Iso.op_hom,
       Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc] using hmodel) htail
-  simpa only [sourceModelInput, Functor.mapIso_hom, Iso.trans_hom, Iso.symm_hom,
+  simpa only [sourceModelInput, Functor.mapIso_hom, Functor.mapIso_inv,
+    Iso.trans_hom, Iso.symm_hom,
     Iso.prod_hom, Iso.op_hom, Iso.app_inv, Iso.refl_hom,
     CategoryTheory.Functor.map_comp, Category.assoc] using hcalc
 
