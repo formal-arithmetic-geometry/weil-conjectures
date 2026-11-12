@@ -290,7 +290,7 @@ private theorem normalizedBeta_eq (n : ℕ)
   have hu := coefficientScalarTensorIso_exists l E Y n P Q
   dsimp only [integralReductionChangeOfRings, integralReductionExistence,
     scalarReductionExtension, scalarReductionExistence, totalTensor, coefficientTotalTensor,
-    ordinaryTensor, Functor.uncurry_obj_obj] at hu
+    ordinaryTensor, Functor.uncurry_obj_obj] at *
   apply hu.unique
   · intro i j k hij U x y
     subst k
@@ -388,7 +388,11 @@ private theorem nativeReductionMonoidal
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       trace "native: beta theorem applied"
-      have hbκ := hb.trans (hc P Q).symm
+      have hkc := hc P Q
+      dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
+        integralReductionChangeOfRings, integralReductionExistence,
+        scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hb hkc
+      have hbκ := hb.trans hkc.symm
       trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
       trace "native: preservation supplied"
