@@ -674,10 +674,10 @@ theorem compactSupportExchangeOfCompactification_comp_app
           ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)).hom, ?_, ?_, ?_⟩
   · simp only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp]
     exact NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp ℓ φ ψ hN hM M
-  · exact compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp
+  · cast_proofs compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp
       ℓ j' ι' (toPoint Z') (comp_toPoint ι') (comp_toPoint j') (comp_toPoint (j' ≫ ι'))
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)
-  · exact compactificationLowerShriekIso_inv_app_comp_hom_app_hom ℓ j ι (toPoint Z)
+  · cast_proofs compactificationLowerShriekIso_inv_app_comp_hom_app_hom ℓ j ι (toPoint Z)
       (comp_toPoint ι) (comp_toPoint j) (comp_toPoint (j ≫ ι)) M
 
 end OpenComposition
