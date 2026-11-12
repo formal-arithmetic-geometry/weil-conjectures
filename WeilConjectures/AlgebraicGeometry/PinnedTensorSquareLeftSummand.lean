@@ -50,6 +50,63 @@ local instance pinnedTensorSquareLeftSummandInstance4 (Y : Scheme.{u}) (M : Y.Mo
     ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
 
+-- Resolve existence of the total tensor once, before elaborating its component maps.
+local instance pinnedTensorSquareLeftSummandHasMapBifunctor (Y : Scheme.{u})
+    (P Q : CochainComplex Y.Modules ℤ) :
+    HomologicalComplex.HasMapBifunctor P Q (curriedTensor Y.Modules) (.up ℤ) :=
+  inferInstance
+
+local instance pinnedTensorSquareLeftSummandModuleHasMapBifunctor
+    (R : Type u) [CommRing R] (P Q : CochainComplex (ModuleCat.{u} R) ℤ) :
+    HomologicalComplex.HasMapBifunctor P Q (curriedTensor _) (.up ℤ) :=
+  inferInstance
+
+private theorem pinnedTensorSquareLeftSummand_inverse_square
+    {C : Type*} [Category C] {A B D E : C} (e : A ≅ B) (f : D ≅ E)
+    (a : A ⟶ D) (b : B ⟶ E) (h : a ≫ f.hom = e.hom ≫ b) :
+    b ≫ f.inv = e.inv ≫ a := by
+  apply (cancel_mono f.hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, h,
+    Iso.inv_hom_id_assoc]
+
+private theorem pinnedTensorSquareLeftSummand_transport_naturality
+    {I C D : Type*} [Category C] [Category D] (F : I → C ⥤ D)
+    {a b : I} (h : a = b) {H : C ⥤ D} (τ : F b ⟶ H) {M N : C} (f : M ⟶ N) :
+    (F a).map f ≫ eqToHom (congrArg (fun i ↦ (F i).obj N) h) ≫ τ.app N =
+      (eqToHom (congrArg (fun i ↦ (F i).obj M) h) ≫ τ.app M) ≫ H.map f := by
+  subst a
+  simpa only [eqToHom_refl, Category.id_comp] using τ.naturality f
+
+-- Transport the module square once along an equality of scalar maps.
+private theorem pinnedTensorSquareLeftSummand_tensor_square {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (x : X)
+    (a : Y.presheaf.stalk (f x) →+* X.presheaf.stalk x)
+    (ha : a = (f.stalkMap x).hom) (M N : Y.Modules) :
+    let SX := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+    let SY := RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)
+    let E := ModuleCat.extendScalars.{u, u, u} a
+    let p := Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso f x)
+    let tx := Classical.choose (SheafOfModules.stalkTensorIso X.toRingedSpace x)
+    let ty := Classical.choose (SheafOfModules.stalkTensorIso Y.toRingedSpace (f x))
+    let c := Classical.choose (Scheme.Modules.module_pullback_tensor f)
+    let k (L : Y.Modules) :=
+      eqToHom (congrArg (fun b ↦ (ModuleCat.extendScalars b).obj (SY.obj L)) ha) ≫
+        p.inv.app L
+    E.map (ty M N).inv ≫ k (M ⊗ N) ≫ SX.map (c M N).hom ≫
+        (tx ((Scheme.Modules.tensorPullback f).obj M)
+          ((Scheme.Modules.tensorPullback f).obj N)).hom =
+      Functor.OplaxMonoidal.δ E (SY.obj M) (SY.obj N) ≫ (k M ⊗ₘ k N) := by
+  subst a
+  dsimp only
+  simp only [eqToHom_refl, Category.id_comp]
+  apply (cancel_epi (Functor.Monoidal.μIso
+    (ModuleCat.extendScalars (f.stalkMap x).hom)
+    ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)).obj M)
+    ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)).obj N)).hom).1
+  simpa only [Category.assoc, Functor.Monoidal.μIso_hom,
+    Functor.Monoidal.μ_δ_assoc] using
+    Scheme.Modules.module_pinned_tensor_stalk_square f x M N
+
 -- Keep the categorical chase independent of the stalk and total-complex definitions.
 private theorem summand_chase {C : Type*} [Category C]
     {A B C₀ D E F K B₀ D₀ E₀ F₀ H I J : C}
@@ -77,7 +134,6 @@ private theorem summand_chase {C : Type*} [Category C]
   simp only [Category.assoc]
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ l ≫ j) hm
 
-set_option maxHeartbeats 600000 in
 -- The component transports elaborate several nested tensor functors.
 /-- Pullback route on one tensor summand, in explicit stalk coordinates.
 
@@ -196,16 +252,8 @@ theorem pinned_tensor_square_left_summand
       (SingleComplexBaseChange.stalkComplex g' z Q)
       (curriedTensor _) (.up ℤ) p q n h ≫ (e P Q).inv.f n =
       (ty (P.X p) (Q.X q)).inv ≫ T.map iPQ := by
-    apply (cancel_mono ((e P Q).hom.f n)).1
-    have hs0 : T.map iPQ ≫ (e P Q).hom.f n =
-        (ty (P.X p) (Q.X q)).hom ≫
-          HomologicalComplex.ιMapBifunctor
-            (SingleComplexBaseChange.stalkComplex g' z P)
-            (SingleComplexBaseChange.stalkComplex g' z Q)
-            (curriedTensor _) (.up ℤ) p q n h := hs
-    erw [Category.assoc, ← HomologicalComplex.comp_f, Iso.inv_hom_id,
-      HomologicalComplex.id_f, Category.comp_id, Category.assoc, hs0,
-      Iso.inv_hom_id_assoc]
+    exact pinnedTensorSquareLeftSummand_inverse_square (ty (P.X p) (Q.X q))
+      ((HomologicalComplex.eval _ _ n).mapIso (e P Q)) (T.map iPQ) _ hs
   have hk (L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
       (i : ℤ) : k L i =
       eqToHom (congrArg (fun a : SingleComplexBaseChange.A g' z →+*
@@ -226,24 +274,11 @@ theorem pinned_tensor_square_left_summand
         (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
           (P.X p ⊗ Q.X q)) ≫ D.map (H.map iPQ) := by
     rw [hk]
-    have aux (a : SingleComplexBaseChange.A g' z →+* SingleComplexBaseChange.C z)
-        (ha : a = (g'.stalkMap z).hom) :
-        (ModuleCat.extendScalars a).map (T.map iPQ) ≫
-          eqToHom (congrArg (fun a ↦ (ModuleCat.extendScalars a).obj
-            (T.obj ((pullbackTensorTotal X P Q).X n))) ha) ≫
-            (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-              ((pullbackTensorTotal X P Q).X n) =
-        (eqToHom (congrArg (fun a ↦ (ModuleCat.extendScalars a).obj
-            (T.obj (P.X p ⊗ Q.X q))) ha) ≫
-          (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-            (P.X p ⊗ Q.X q)) ≫ D.map (H.map iPQ) := by
-      subst a
-      dsimp only [eqToHom_refl]
-      simp only [Category.id_comp]
-      exact (Classical.choose
-        (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.naturality iPQ
-    exact aux b (Classical.choose_spec
-      (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1
+    exact pinnedTensorSquareLeftSummand_transport_naturality
+      (fun a ↦ T ⋙ ModuleCat.extendScalars.{u, u, u} a)
+      (Classical.choose_spec
+        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1
+      (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv iPQ
   have hm : G.map (ty (P.X p) (Q.X q)).inv ≫
       (eqToHom (congrArg (fun a : SingleComplexBaseChange.A g' z →+*
           SingleComplexBaseChange.C z ↦ (ModuleCat.extendScalars a).obj
@@ -255,43 +290,12 @@ theorem pinned_tensor_square_left_summand
         (tx (H.obj (P.X p)) (H.obj (Q.X q))).hom =
       Functor.OplaxMonoidal.δ G (T.obj (P.X p)) (T.obj (Q.X q)) ≫
         (k P p ⊗ₘ k Q q) := by
-    rw [hk, hk]
-    have aux (a : SingleComplexBaseChange.A g' z →+* SingleComplexBaseChange.C z)
-        (ha : a = (g'.stalkMap z).hom) :
-        (ModuleCat.extendScalars a).map (ty (P.X p) (Q.X q)).inv ≫
-          (eqToHom (congrArg (fun a ↦ (ModuleCat.extendScalars a).obj
-              (T.obj (P.X p ⊗ Q.X q))) ha) ≫
-            (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-              (P.X p ⊗ Q.X q)) ≫ D.map (c (P.X p) (Q.X q)).hom ≫
-            (tx (H.obj (P.X p)) (H.obj (Q.X q))).hom =
-        Functor.OplaxMonoidal.δ (ModuleCat.extendScalars a)
-            (T.obj (P.X p)) (T.obj (Q.X q)) ≫
-          ((eqToHom (congrArg (fun a ↦ (ModuleCat.extendScalars a).obj
-                (T.obj (P.X p))) ha) ≫
-              (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-                (P.X p)) ⊗ₘ
-            (eqToHom (congrArg (fun a ↦ (ModuleCat.extendScalars a).obj
-                (T.obj (Q.X q))) ha) ≫
-              (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-                (Q.X q))) := by
-      subst a
-      simp only [eqToHom_refl, Category.id_comp]
-      apply (cancel_epi (Functor.Monoidal.μIso
-        (ModuleCat.extendScalars (g'.stalkMap z).hom)
-        (T.obj (P.X p)) (T.obj (Q.X q))).hom).1
-      have h₀ := Scheme.Modules.module_pinned_tensor_stalk_square g' z (P.X p) (Q.X q)
-      change (Functor.Monoidal.μIso
-          (ModuleCat.extendScalars (g'.stalkMap z).hom)
-          (T.obj (P.X p)) (T.obj (Q.X q))).hom ≫
-        (ModuleCat.extendScalars (g'.stalkMap z).hom).map
-          (ty (P.X p) (Q.X q)).inv ≫
-        (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-          (P.X p ⊗ Q.X q) ≫ D.map (c (P.X p) (Q.X q)).hom ≫
-          (tx (H.obj (P.X p)) (H.obj (Q.X q))).hom = _ at h₀
-      simpa only [Category.assoc, Functor.Monoidal.μIso_hom,
-        Functor.Monoidal.μ_δ_assoc] using h₀
-    exact aux b (Classical.choose_spec
-      (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1
+    refine (pinnedTensorSquareLeftSummand_tensor_square g' z b
+      (Classical.choose_spec
+        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1
+      (P.X p) (Q.X q)).trans ?_
+    exact congrArg (Functor.OplaxMonoidal.δ G (T.obj (P.X p)) (T.obj (Q.X q)) ≫ ·)
+      (congrArg₂ (fun u v ↦ u ⊗ₘ v) (hk P p).symm (hk Q q).symm)
   have hj :
       HomologicalComplex.ιMapBifunctor
           ((HC.obj P))
