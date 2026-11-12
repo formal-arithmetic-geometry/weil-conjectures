@@ -251,7 +251,7 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
       CommRingCat.comp_apply]
     simp only [hcancel]
     have hnat_fm := hnat (CommRingCat.ofHom fm)
-    rw [hnat_fm]
+    simp only [hnat_fm]
     have hnat_eK := hnat eK.symm.toRingEquiv.toCommRingCatIso.op
     simp only [hnat_eK]
     congr 2
