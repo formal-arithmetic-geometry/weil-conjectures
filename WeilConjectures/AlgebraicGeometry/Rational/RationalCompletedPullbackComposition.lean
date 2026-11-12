@@ -43,6 +43,14 @@ local instance (priority := 2000) rationalCompletedRestrictionCoeFun
     CoeFun (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) (fun _ ↦ M → N) where
   coe f := f.hom
 
+#print rationalCompletedRestrictionCoeFun
+section
+variable {R S : Type*} [Ring R] [Ring S] (φ : R →+* S)
+  (M : ModuleCat.{u} R) (N : ModuleCat.{u} S)
+#synth CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) _
+#synth CoeFun (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) _
+end
+
 set_option trace.profiler true in
 /-- Completed composition and descent to all raw rational fraction arrows.
 Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15.
