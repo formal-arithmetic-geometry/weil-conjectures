@@ -87,6 +87,7 @@ private theorem wedge_bilinear_naturality {X : Scheme.{v}} {A B : X.Modules}
     · simp only [d, Fin.append_left]
       exact PresheafOfModules.naturality_apply f.val g (a j)
     · simp only [d, Fin.append_right]
+      rfl
   have hfirst (a : Fin r → A.val.obj U) : ∀ y,
       b V ((A.val.exteriorPower (R := X.presheaf) r).map g
         (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a))
