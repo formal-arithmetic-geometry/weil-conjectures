@@ -57,7 +57,6 @@ variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
   (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option profiler true in
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**, from the bounded
 constructibility of the torsion nearby cycles at an integral model. Let `Ω/L` be Galois with
 finite subextensions of degree prime to `ℓ`, `C` a `ℚ̄_ℓ`-complex and `K₀` a bounded constructible
@@ -110,6 +109,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀.obj).symm) ?_
   transport_exact h₁
 
+/-- Transport stabilization along the identity pullback, then apply finite Galois averaging. -/
 private theorem retraction_of_stabilization
     {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
     (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
@@ -141,7 +141,6 @@ private theorem retraction_of_stabilization
     (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
   cast_proofs key
 
-set_option profiler true in
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles at an
 integral model. Under the hypotheses of
@@ -184,12 +183,14 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel h Ω ℓ hdeg C hC E
     K₀ e htors).elim fun L' hL' ↦ ⟨L', ?_⟩
+  -- Reuse the object fixed by hC instead of elaborating the derived pullback again.
   let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
   let : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K.obj) :=
     isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
       (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField)) K.obj
   exact retraction_of_stabilization N h Ω ℓ C L' hL'
 
+/-- Eliminate integral models with a generic conclusion, keeping the elimination motive small. -/
 private theorem integralModel_induction (X : Scheme.{u}) [IsNoetherian X]
     (ℓ : ℕ) [Fact ℓ.Prime] (K : PadicAlgClConstructible X ℓ) {P : Prop}
     (step : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -199,7 +200,6 @@ private theorem integralModel_induction (X : Scheme.{u}) [IsNoetherian X]
   obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X ℓ K
   exact step E K₀ e
 
-set_option profiler true in
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles of all
 bounded constructible integral complexes. This is
