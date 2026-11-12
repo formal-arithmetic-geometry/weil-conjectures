@@ -107,6 +107,7 @@ lemma pullbackExchange_galoisLayerHom_app_eq_comp_unit
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
+  -- Normalize the model before matching the exchange formula.
   dsimp only [galoisLayer, galoisLayerExchangeIso, Functor.comp_map, Functor.mapIso_hom,
     Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]
   simpa only [Functor.map_comp] using hα
@@ -148,7 +149,6 @@ theorem isIso_galois_card_smul_id (T₀ : Type) [TopologicalSpace T₀] [CommRin
   rw [← Nat.card_eq_fintype_card, IsGalois.card_aut_eq_finrank]
   exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀) hj M
 
-set_option profiler true in
 /-- The normalized trace of a Galois tower fixes invariant maps after every additive functor
 that carries its bounded below complex cocones to colimits. -/
 theorem exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
@@ -240,7 +240,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
@@ -318,9 +317,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   exact hcoinv (Z := Z) (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
     L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ G) hG φ' hφ'
 
-
-
-set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
 [Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
