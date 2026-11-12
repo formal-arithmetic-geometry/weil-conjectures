@@ -175,13 +175,13 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' {W : Scheme.{u}} (f : W 
         eqToHom ((congrArg (fun φ ↦ L((φ)^*⟦Λ⟧).obj K) (Category.comp_id f)).symm.trans h) := by
   rw [← leftDerivedUpperStarComp_inv_app_comp_eqToHom_id Λ f K, Category.assoc, eqToHom_trans]
 
+set_option profiler true in
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
 `p₂ ≫ a_Y = q ≫ 𝟙` and `p₁ ≫ a_X = p₂ ≫ a_Y`, the Künneth map
 `L(𝟙)^* Ra_{X*} A ⊗ L(𝟙)^* Ra_{Y*} B ⟶ Rq_* (Lp₁^* A ⊗ Lp₂^* B)` is an isomorphism if the base
 change morphism `La_Y^* Ra_{X*} A ⟶ Rp₂_* Lp₁^* A`, the projection morphism of `p₂` at
 `(Lp₁^* A, B)` and the projection morphism of `a_Y` at `(B, Ra_{X*} A)` are isomorphisms. -/
-set_option profiler true in
 theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {aX : X ⟶ S}
     {aY : Y ⟶ S} {q : P ⟶ S} (sq₁ : CommSq p₁ q aX (𝟙 S)) (sq₂ : CommSq p₂ q aY (𝟙 S))
     (w : CommSq p₁ p₂ aX aY)
