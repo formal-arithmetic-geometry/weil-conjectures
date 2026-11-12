@@ -191,34 +191,31 @@ lemma derivedLowerShriekTriangle_distinguished :
   rwa [Functor.mapTriangle_obj] at this
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the unification of the instance arguments of the global sections is slow
 /-- Exactness of `H_c^n(K₁) → H_c^n(K₂) → H_c^n(K₃)`. -/
 lemma exact_compactlySupportedCohomologyMap :
     Function.Exact (compactlySupportedCohomologyMap T.mor₁ n₀)
-      (compactlySupportedCohomologyMap T.mor₂ n₀) :=
-  WeilSheaf.exact_globalSectionsLinearMap
+      (compactlySupportedCohomologyMap T.mor₂ n₀) := by
+  have hExact := WeilSheaf.exact_globalSectionsLinearMap
     (homologySheaf_exact₂ _ n₀ (derivedLowerShriekTriangle_distinguished T hT))
+  exact hExact
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the unification of the instance arguments of the global sections is slow
 /-- Exactness of `H_c^{n₀}(K₂) → H_c^{n₀}(K₃) → H_c^{n₁}(K₁)`. -/
 lemma exact_compactlySupportedCohomologyδ_left :
     Function.Exact (compactlySupportedCohomologyMap T.mor₂ n₀)
-      (compactlySupportedCohomologyδ T n₀ n₁ h) :=
-  WeilSheaf.exact_globalSectionsLinearMap
+      (compactlySupportedCohomologyδ T n₀ n₁ h) := by
+  have hExact := WeilSheaf.exact_globalSectionsLinearMap
     (homologySheaf_exact₃ _ n₀ n₁ (derivedLowerShriekTriangle_distinguished T hT) h)
+  exact hExact
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the unification of the instance arguments of the global sections is slow
 /-- Exactness of `H_c^{n₀}(K₃) → H_c^{n₁}(K₁) → H_c^{n₁}(K₂)`. -/
 lemma exact_compactlySupportedCohomologyδ_right :
     Function.Exact (compactlySupportedCohomologyδ T n₀ n₁ h)
-      (compactlySupportedCohomologyMap T.mor₁ n₁) :=
-  WeilSheaf.exact_globalSectionsLinearMap
+      (compactlySupportedCohomologyMap T.mor₁ n₁) := by
+  have hExact := WeilSheaf.exact_globalSectionsLinearMap
     (homologySheaf_exact₁ _ n₀ n₁ (derivedLowerShriekTriangle_distinguished T hT) h)
+  exact hExact
 
 end WeilComplex
 
@@ -263,25 +260,22 @@ variable (hT : T ∈ distTriang (WeilComplex k₀ l (Spec (CommRingCat.of k₀))
 include hT
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the unification of the instance arguments of the global sections is slow
 lemma exact_cohomologyMap :
-    Function.Exact (cohomologyMap T.mor₁ n₀) (cohomologyMap T.mor₂ n₀) :=
-  WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₂ T n₀ hT)
+    Function.Exact (cohomologyMap T.mor₁ n₀) (cohomologyMap T.mor₂ n₀) := by
+  have hExact := WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₂ T n₀ hT)
+  exact hExact
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the unification of the instance arguments of the global sections is slow
 lemma exact_cohomologyδ_left :
-    Function.Exact (cohomologyMap T.mor₂ n₀) (cohomologyδ T n₀ n₁ h) :=
-  WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₃ T n₀ n₁ hT h)
+    Function.Exact (cohomologyMap T.mor₂ n₀) (cohomologyδ T n₀ n₁ h) := by
+  have hExact := WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₃ T n₀ n₁ hT h)
+  exact hExact
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the unification of the instance arguments of the global sections is slow
 lemma exact_cohomologyδ_right :
-    Function.Exact (cohomologyδ T n₀ n₁ h) (cohomologyMap T.mor₁ n₁) :=
-  WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₁ T n₀ n₁ hT h)
+    Function.Exact (cohomologyδ T n₀ n₁ h) (cohomologyMap T.mor₁ n₁) := by
+  have hExact := WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₁ T n₀ n₁ hT h)
+  exact hExact
 
 end SpecCohomology
 
