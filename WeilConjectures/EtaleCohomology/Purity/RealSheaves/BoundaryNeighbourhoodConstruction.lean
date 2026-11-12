@@ -158,22 +158,24 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk, hΦ])
   have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
       r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
+    let τ : Ideal.inertiaInvariants C.functionField Q →+*
+        Ideal.inertiaInvariants C.functionField Q :=
+      Ideal.inertiaInvariantsMap C.functionField Q hσF
     let b : Ideal.inertiaInvariants C.functionField Q := ε (r a)
     have hεr : r b = r a := RingHom.congr_fun hrε (r a)
     have h0 : r (a - ε (r a)) = 0 := by
       change r (a - b) = 0
       calc
         r (a - b) = r a - r b := r.map_sub _ _
-        _ = 0 := by rw [hεr, sub_self]
-    have h1 : ¬ IsUnit (Ideal.inertiaInvariantsMap C.functionField Q hσF (a - ε (r a))) :=
+        _ = r a - r a := congrArg (fun y => r a - y) hεr
+        _ = 0 := sub_self _
+    have h1 : ¬ IsUnit (τ (a - b)) :=
       fun hu ↦ (hr _).1 h0 (Ideal.isUnit_of_isUnit_inertiaInvariantsMap hσF hu)
-    have h2 : r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
-        Ideal.inertiaInvariantsMap C.functionField Q hσF (ε (r a))) = 0 := by
-      change r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
-        Ideal.inertiaInvariantsMap C.functionField Q hσF b) = 0
-      rw [← (Ideal.inertiaInvariantsMap C.functionField Q hσF).map_sub]
-      exact (hr _).2 h1
-    exact (sub_eq_zero.1 ((RingHom.map_sub r _ _).symm.trans h2)).trans
+    have h2 : r (τ a - τ b) = 0 := by
+      calc
+        r (τ a - τ b) = r (τ (a - b)) := congrArg r (τ.map_sub a b).symm
+        _ = 0 := (hr _).2 h1
+    exact (sub_eq_zero.1 ((r.map_sub _ _).symm.trans h2)).trans
       ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
   have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
       ≫ CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF) =
