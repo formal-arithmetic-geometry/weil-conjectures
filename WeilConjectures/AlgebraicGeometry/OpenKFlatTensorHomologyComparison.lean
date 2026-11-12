@@ -158,6 +158,52 @@ private theorem site_kFlat_tensor_quasiIso
     exact (((curriedTensor _).map₂CochainComplex.map α).naturality s).symm
 
 
+private theorem quasiIso_common_roof
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    {P Q T H : CochainComplex C ℤ}
+    (q : P ⟶ Q) (s : H ⟶ Q) (t : H ⟶ T)
+    [QuasiIso q] [QuasiIso s] [QuasiIso t] :
+    ∃ (L : CochainComplex C ℤ) (a : L ⟶ P) (b : L ⟶ T), QuasiIso a ∧ QuasiIso b := by
+  let DQ := DerivedCategory.Q (C := C)
+  let e : DQ.obj P ≅ DQ.obj T :=
+    asIso (DQ.map q) ≪≫ (asIso (DQ.map s)).symm ≪≫ asIso (DQ.map t)
+  obtain ⟨L, a, ha, b, he⟩ := DerivedCategory.right_fac e.hom
+  have : IsIso (DQ.map a) := ha
+  have ha' : QuasiIso a := (DerivedCategory.isIso_Q_map_iff_quasiIso C a).1 ha
+  have hb : IsIso (DQ.map b) := by
+    have hb' : DQ.map b = DQ.map a ≫ e.hom := by
+      rw [he, IsIso.hom_inv_id_assoc]
+    rw [hb']
+    infer_instance
+  exact ⟨L, a, b, ha', (DerivedCategory.isIso_Q_map_iff_quasiIso C b).1 hb⟩
+
+private theorem site_kFlat_tensor_homology_iso
+    {S : Type u} [Category.{u} S] {J : GrothendieckTopology S}
+    {R : Sheaf J CommRingCat.{u}}
+    {P T L : CochainComplex
+      (SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (hP : P.IsKFlatTensor) (hT : T.IsKFlatTensor)
+    (a : L ⟶ P) (b : L ⟶ T) (ha : QuasiIso a) (hb : QuasiIso b)
+    (N : CochainComplex
+      (SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (i : ℤ) :
+    letI := SheafOfModules.monoidalCategory R
+    Nonempty ((mapBifunctor P N (curriedTensor _)).homology i ≅
+      (mapBifunctor T N (curriedTensor _)).homology i) := by
+  classical
+  let := SheafOfModules.monoidalCategory R
+  obtain ⟨K, r, hK, _, hr, _⟩ := exists_isKFlatResolution (R := R) L
+  have : QuasiIso a := ha
+  have : QuasiIso b := hb
+  have : QuasiIso r := hr
+  let α := HomologicalComplex.mapBifunctorMap (r ≫ a) (𝟙 N) (curriedTensor _) (.up ℤ)
+  let β := HomologicalComplex.mapBifunctorMap (r ≫ b) (𝟙 N) (curriedTensor _) (.up ℤ)
+  have : QuasiIso α := site_kFlat_tensor_quasiIso (r ≫ a) inferInstance hK hP
+  have : QuasiIso β := site_kFlat_tensor_quasiIso (r ≫ b) inferInstance hK hT
+  exact ⟨(asIso (HomologicalComplex.homologyMap α i)).symm ≪≫
+    asIso (HomologicalComplex.homologyMap β i)⟩
+
 /-- A roof identifying a local K-flat complex T with the restriction of Q identifies
 its tensor homology with the open restriction of the tensor homology of any global
 K-flat resolution P of Q. Source: Stacks Project, Tags 06YH, 08CG and 06YB.
@@ -225,33 +271,10 @@ theorem open_kFlat_tensor_homology_comparison
   let M := SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))
   let := HasDerivedCategory.standard M
-  let DQ := DerivedCategory.Q (C := M)
-  let e : DQ.obj (VC.obj P) ≅ DQ.obj T :=
-    asIso (DQ.map (VC.map q)) ≪≫ (asIso (DQ.map s)).symm ≪≫ asIso (DQ.map t)
-  obtain ⟨L, a, ha, b, he⟩ := DerivedCategory.right_fac e.hom
-  have : IsIso (DQ.map a) := ha
-  have ha' : QuasiIso a := (DerivedCategory.isIso_Q_map_iff_quasiIso M a).1 ha
-  have hb : IsIso (DQ.map b) := by
-    have hb' : DQ.map b = DQ.map a ≫ e.hom := by
-      rw [he, IsIso.hom_inv_id_assoc]
-    rw [hb']
-    infer_instance
-  have hb' : QuasiIso b := (DerivedCategory.isIso_Q_map_iff_quasiIso M b).1 hb
-  obtain ⟨K, r, hK, _, hr, _⟩ := exists_isKFlatResolution (R := R.over U) L
-  have : QuasiIso a := ha'
-  have : QuasiIso b := hb'
-  have : QuasiIso r := hr
-  have hra : QuasiIso (r ≫ a) := inferInstance
-  have hrb : QuasiIso (r ≫ b) := inferInstance
-  let := SheafOfModules.monoidalCategory (R.over U)
-  let : MonoidalPreadditive M := Classical.choice (SheafOfModules.tensorClosed (R.over U)).1
+  obtain ⟨L, a, b, ha, hb⟩ := quasiIso_common_roof (VC.map q) s t
   let N := (HomologicalComplex.single M (.up ℤ) 0).obj (V.obj F)
-  let α := HomologicalComplex.mapBifunctorMap (r ≫ a) (𝟙 N) (curriedTensor _) (.up ℤ)
-  let β := HomologicalComplex.mapBifunctorMap (r ≫ b) (𝟙 N) (curriedTensor _) (.up ℤ)
-  have : QuasiIso α := site_kFlat_tensor_quasiIso (r ≫ a) hra hK hVP
-  have : QuasiIso β := site_kFlat_tensor_quasiIso (r ≫ b) hrb hK hT
+  obtain ⟨d⟩ := site_kFlat_tensor_homology_iso hVP hT a b ha hb N i
   obtain ⟨c⟩ := open_localized_tensor_homology_iso R U inferInstance P F i
-  exact ⟨c ≪≫ (asIso (HomologicalComplex.homologyMap α i)).symm ≪≫
-    asIso (HomologicalComplex.homologyMap β i)⟩
+  exact ⟨c ≪≫ d⟩
 
 end CochainComplex
