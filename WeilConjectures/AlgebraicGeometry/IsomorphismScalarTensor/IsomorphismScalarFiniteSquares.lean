@@ -96,7 +96,6 @@ private theorem finiteRight_ext (n : ℕ)
       exact (_root_.map_add fa z w).trans
         ((congrArg₂ (· + ·) hz hw).trans (_root_.map_add fb z w).symm)
 
--- On the rebased imports this proof needs more than the default heartbeat limit.
 /--
 The finite quotient and transition maps from the finite formula construction
 satisfy the two naturality squares. The hypotheses include completed normalization

@@ -42,7 +42,6 @@ variable (A : Data.{c, v, r} J B τ)
   (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
   (adjSet : uInv ⊣ uPush)
 
--- The dependent derived-operation fields require extra elaboration heartbeats.
 /-- Derived geometric operations with canonical K-injective and tensor normalizations.
 Source: Zheng Construction 4.1 and Lemma 4.10 (auxiliary; not a blueprint node). -/
 structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet where

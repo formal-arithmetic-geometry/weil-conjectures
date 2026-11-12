@@ -89,7 +89,6 @@ private theorem additive_comparisonIntoPullback_naturality
 
 
 set_option linter.unusedVariables false in
--- Transporting nested derived stalk functors requires extra elaboration heartbeats.
 /-- The open comparison square when the restricted representative data are supplied.
 Source: Stacks Project, Tag 0DJ8 (locality of equation-bc), Tag 0DJ9
 (source-open induction), and Tag 06YB (K-flat stalks).

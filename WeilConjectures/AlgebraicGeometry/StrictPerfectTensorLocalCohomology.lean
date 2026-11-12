@@ -76,8 +76,6 @@ private theorem coherent_homology_of_coherent_terms (Y : Scheme.{u})
     (hc ((ComplexShape.up ℤ).prev i)) hk).2
   exact hclosure.2.2.2.2 _ _ S.homologyIsoCokernelLift.symm hh
 
--- Transport through open-site and derived equivalences needs extra elaboration heartbeats;
--- the file still compiles within the single-file wall-clock limit.
 /-- A strictly perfect representative on one open computes the restricted tensor
 cohomology, with the sum of the two termwise degree intervals as a vanishing interval.
 Source: Stacks Project, perfect.tex, Tag 0DJQ, local tensor calculation in Lemma 36.27.2;

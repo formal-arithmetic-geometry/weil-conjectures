@@ -55,7 +55,6 @@ private theorem tensorNatural₂
   simpa only [_root_.CategoryTheory.Functor.map_id, Functor.comp_obj, Functor.uncurry_obj_obj,
     Functor.prod_obj, Iso.app_inv, NatTrans.id_app, Category.id_comp] using h
 
--- The derived-instance conversions require additional kernel heartbeats.
 /-- The inverse exceptional tensorator is the ordinary scalar tensor comparison.
 Source: Stacks 07A4 and blueprint thm-coef-finite-hom, evaluation paragraph
 (blueprint: lem-coef-finite-hom-scalar-tensor-normalization).

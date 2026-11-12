@@ -72,7 +72,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 4000 in
--- The three inverse-image adjunctions require additional elaboration heartbeats.
 /-- Pointwise form of the composition formula. The Ext construction of pullback
 is functorial under composition of exact inverse-image functors; evaluating that
 functoriality on a class gives the displayed equality. This is the pointwise

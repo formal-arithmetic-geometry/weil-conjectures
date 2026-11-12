@@ -73,7 +73,6 @@ attribute [local implicit_reducible] tensor integralComparisonDerivedSequenceSca
   integralOperationsGoodLocalization integralOperationsRoosFunctor
   integralOperationsTensorComplexFunctor integralOperationsTensorOnGood
 
--- Coherent presentation and model conversions need additional elaboration heartbeats.
 /-- The normalized scalar/tensor square on good representatives, before inverting
 scalar completion. The bridge is the specified ordinary tensor comparison followed
 by the two completion maps. It is not an arbitrary morphism.

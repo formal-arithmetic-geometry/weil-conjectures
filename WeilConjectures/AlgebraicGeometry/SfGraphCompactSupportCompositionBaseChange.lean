@@ -836,7 +836,6 @@ private theorem paste_word
     reassoc_of% hn, ← reassoc_of% hg]
 
 -- The component calculation instantiates five derived exchange identities.
--- The explicit factorwise derived-category calculation exceeds the default heartbeat budget.
 private theorem diagramRawInterchange_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z X' Y' Z' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

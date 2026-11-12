@@ -188,7 +188,6 @@ private theorem globalSectionsUpperStarMap_eval {T Y : Scheme.{v}} (m : T ⟶ Y)
   erw [← Sheaf.ΓRes_map FV a.op]
   rfl
 
--- Nested pullback pasting comparisons need additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
--- Must come first: it restores the instance order needed to avoid a heartbeat timeout below.
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal -- shake: keep
 public import WeilConjectures.TraceFormula.ContractingClosedPiece
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
@@ -46,12 +45,6 @@ identity `ν_X(T) ≫ w = Ra_{X'!}(χ) ≫ v`
 (`TraceSpecialization.fixedLocusToPointCompactSupportExchange_app_comp_eq_of_eq`): this is the
 form of fact (II) of `ComponentClassReduction` for `M = Rj_! ℚ̄_ℓ`, `T = R(dj)_* ℚ̄_ℓ`, `χ` the
 pushforward exchange of `𝒟_B ⟶ 𝒳` and `u` built from that of `𝒟_B ⟶ 𝒞`.
-
-## Implementation notes
-
-The two concrete statements involving both fixed squares need a raised heartbeat limit: unifying
-the base change identity of `F'` (resp. the two hypotheses) with the hand-written statement takes
-about 300k heartbeats.
 
 -/
 

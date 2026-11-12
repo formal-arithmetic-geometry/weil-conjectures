@@ -74,7 +74,6 @@ def leg (η : regularComplex l L Y ⟶
 attribute [local irreducible] integralScalarReductionWitness scalarReductionExistence
   scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem transition_locallySurjective (n : ℕ) :
     Sheaf.IsLocallySurjective (integralCoefficientSheafTransition l L Y n) := by
   let J := Scheme.ProEt.topology Y
@@ -105,7 +104,6 @@ private theorem transition_locallySurjective (n : ℕ) :
   intro V x
   exact hs.imageSieve_mem x
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem countable_exact : CountableAB4Star (integralTowerModules l L Y) := by
   let A := integralTowerModules l L Y
   let : HasFiniteBiproducts A := Abelian.hasFiniteBiproducts
@@ -126,7 +124,6 @@ private theorem countable_exact : CountableAB4Star (integralTowerModules l L Y) 
   have := hasExactLimitsOfShape_of_preservesEpi A (Discrete ℕ)
   exact CountableAB4Star.of_hasExactLimitsOfShape_nat A
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem normalized_coordinates
     (u : ∀ n : ℕ, (integralScalarFiniteComplex l E L ι Y n).obj
       (regularComplex l E Y) ≅ finiteRegularComplex l L Y n)
@@ -158,7 +155,6 @@ private abbrev quotientZeroIso
   (HomologicalComplex.eval _ (.up ℤ) 0).mapIso (u n) ≪≫
     (scalarReductionRestriction l L Y n).mapIso (finiteZeroIso l L Y n)
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem quotient_ordinary_limit
     (F : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l L Y) ℤ)
     (u : ∀ n : ℕ, F.obj (op n) ≅
@@ -282,7 +278,6 @@ private theorem quotient_ordinary_limit
       (Functor.isZero _ (fun n ↦ hzero n.unop p hp))
       (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ p hp)
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem quotient_degreewise_epi
     (F : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l L Y) ℤ)
     (u : ∀ n : ℕ, F.obj (op n) ≅
@@ -331,7 +326,6 @@ private theorem quotient_degreewise_epi
     exact (SheafOfModules.restrictScalars _).map_isZero
       (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ p hp)
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem boundary_degreewise_epi
     (F : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l L Y) ℤ)
     (he : ∀ (n : ℕ) (p : ℤ),
@@ -367,7 +361,6 @@ private theorem boundary_degreewise_epi
     infer_instance
   exact (epi_comp_iff_of_isIso _ e.hom).mp inferInstance
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem tower_compatibility
     {B : Type*} [Category* B] (F : ℕᵒᵖ ⥤ B) {Z : B}
     (a : ∀ n : ℕ, Z ⟶ F.obj (Opposite.op n))
@@ -380,7 +373,6 @@ private theorem tower_compatibility
         (homOfLE (Nat.le_succ m)).op ≫ (homOfLE h).op := Subsingleton.elim _ _
     rw [he, F.map_comp, ← Category.assoc, ha, ih]
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem tower_kernel
     {B : Type*} [Category* B] [Preadditive B]
     (F : ℕᵒᵖ ⥤ B) (c : Cone F) (hc : IsLimit c)
@@ -436,7 +428,6 @@ private theorem tower_kernel
         rw [← hi n.unop, ← Category.assoc, hl]
       _ = hc.lift d ≫ c.π.app n := (hc.fac d n).symm
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem kernel_cocone_quasiIso
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     {P B : CochainComplex A ℤ} (f : B ⟶ B) (η : P ⟶ CochainComplex.mappingCocone f)
@@ -491,7 +482,6 @@ private theorem kernel_cocone_quasiIso
   rw [hη]
   infer_instance
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem projection_coordinates (n : ℕ) (V : Y.ProEt)
     (s : (completedIntegralCoefficientSheafUnrestricted l L Y).obj.obj (op V)) :
     (((projectionComplex l L Y n).f 0 ≫
@@ -512,7 +502,6 @@ private theorem projection_coordinates (n : ℕ) (V : Y.ProEt)
   change ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app (op V) s) * 1 = _
   exact mul_one _
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem tower_roos_triangle
     (F : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l L Y) ℤ)
     (c : Cone F) (hc : IsLimit c)
@@ -537,7 +526,6 @@ private theorem tower_roos_triangle
     ShortComplex.ShortExact.mk' (S.exact_of_f_is_kernel hk) hm hb
   exact ⟨DerivedCategory.triangleOfSESδ hS, DerivedCategory.triangleOfSES_distinguished hS⟩
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem localized_roos_triangle
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     (F : ℕᵒᵖ ⥤ CochainComplex A ℤ) [HasProduct (fun n : ℕ ↦ F.obj (op n))]
@@ -596,7 +584,6 @@ private theorem localized_roos_triangle
   · change (e.inv ≫ δ) ≫ (𝟙 _)⟦(1 : ℤ)⟧' = e.inv ≫ δ
     simp
 
--- Explicit tower and sheaf transports need a larger elaboration heartbeat budget.
 private theorem regular_complete
     (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p)
     (hg : integralOperationsGoodComplex l E Y (regularComplex l E Y))

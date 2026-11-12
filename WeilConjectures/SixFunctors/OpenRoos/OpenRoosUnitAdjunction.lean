@@ -440,7 +440,6 @@ private theorem smallPrincipalHom
     (by simpa only [Functor.id_map, Iso.refl_hom, Category.id_comp] using he)
     (hb _ L ((principalLocallyComplete_iff R a L).mp hL))
 
--- On the rebased imports this proof needs more than the default heartbeat limit.
 private theorem principalHom (T : Scheme.{t})
     (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
     (hσ : ∀ {U V : T.ProEtᵒᵖ} (f : U ⟶ V),

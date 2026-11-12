@@ -197,7 +197,6 @@ private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
 set_option allowUnsafeReducibility true in
 attribute [local semireducible] Mod.extendScalars
 
--- The explicit coefficient-change comparison needs additional elaboration heartbeats.
 private theorem artinFunctionScalar
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k₀ : Type u) [Field k₀] [Fintype k₀]

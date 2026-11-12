@@ -73,7 +73,6 @@ private theorem mv_degreewise_split (X : Scheme.{u}) (U V : X.Opens)
   exact ⟨((schemeMayerVietorisComplex_shortExact X U V hcover I hI).map_of_exact
     (HomologicalComplex.eval _ _ n)).splittingOfInjective⟩
 
--- Nested localized comparisons require additional elaboration heartbeats.
 /-- The explicitly constructed boundary commutes with the recorded direct-image comparisons.
 Source: Stacks Tags 08BV, 0D5T and 0DJ9
 (blueprint: lem-pc-derived-mayer-vietoris-direct-image-boundary).

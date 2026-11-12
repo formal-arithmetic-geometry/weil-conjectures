@@ -122,7 +122,6 @@ private theorem nested_right_model
   simpa only [Category.assoc] using congrArg
     (fun f ↦ f ≫ SU.tensor.map (X := (PU, QNU))
       (Y := (PU, SU.tensor.obj (QU, NU))) (𝟙 PU, j.hom)) hL
--- The concrete site and tensor instances require additional elaboration heartbeats.
 -- The associativity square has dependent comparison endpoints.
 omit rho_naturality in
 private theorem associator_of_models :

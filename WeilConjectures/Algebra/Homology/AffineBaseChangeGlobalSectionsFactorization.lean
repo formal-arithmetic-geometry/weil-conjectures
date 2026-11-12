@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
--- Expanding the original comparison requires additional elaboration heartbeats.
 /-- Factorization of the affine global-sections coordinate before localization.
 Source: Stacks Project, Tags 01I9 and 0DJ8; the coordinate is defined in
 `affineBaseChangeTildeCohomologyIso`.

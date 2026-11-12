@@ -25,7 +25,6 @@ universe u v
 
 namespace LocalizedModule
 
--- Elaborating the nested localization scalar actions needs more than the default heartbeats.
 set_option linter.unusedVariables false in
 /-- Restriction maps, their principal localization comparisons, and compatibility.
 The positive homogeneous elements are indexed by `F`; `Rel f g` records a homogeneous

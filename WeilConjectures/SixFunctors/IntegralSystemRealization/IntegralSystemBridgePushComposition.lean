@@ -82,7 +82,6 @@ attribute [local instance] pullbackTensorSequenceInverse_additive
   ProEtale.SemilinearProperOpen.pull_additive ProEtale.SemilinearProperOpen.pull_limits
   ProEtale.SemilinearProperOpen.pull_colimits
 
--- On the rebased imports this proof needs more than the default heartbeat limit.
 private theorem pull_bridge_composition (o : Operations l E) (c : Compositors l E o)
     (b : CanonicalBridge l E o) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (b.pull l E (f ≫ g)).symm ≪≫ c.pullComp f g =
