@@ -162,6 +162,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id {W : Scheme.{u}} (f : W �
       L((f)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ S).hom.app K) := by
   rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom, leftDerivedUpperStarComp_id_right_app]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- unifying objects given by composites of derived pullbacks is slow
 /-- `leftDerivedUpperStarComp_inv_app_comp_eqToHom_id` followed by an arbitrary `eqToHom`. -/
@@ -176,6 +177,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' {W : Scheme.{u}} (f : W 
         eqToHom ((congrArg (fun φ ↦ L((φ)^*⟦Λ⟧).obj K) (Category.comp_id f)).symm.trans h) := by
   rw [← leftDerivedUpperStarComp_inv_app_comp_eqToHom_id Λ f K, Category.assoc, eqToHom_trans]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
