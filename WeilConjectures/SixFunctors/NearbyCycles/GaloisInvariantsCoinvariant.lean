@@ -130,6 +130,7 @@ private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
     (adj : F ⊣ G) {A B : C} (e : A ≅ B) (R : G.obj (F.obj A) ⟶ A)
     (hR : adj.unit.app A ≫ R = 𝟙 _) :
     adj.unit.app B ≫ G.map (F.map e.inv) ≫ R ≫ e.hom = 𝟙 _ := by
+  change adj.unit.app B ≫ (F ⋙ G).map e.inv ≫ R ≫ e.hom = 𝟙 _
   rw [← adj.unit.naturality_assoc e.inv, Category.assoc, hR, Category.id_comp,
     e.inv_hom_id]
 
@@ -213,6 +214,15 @@ end AlgebraicGeometry.ProEtale.GaloisTower
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
+
+private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
+    (adj : F ⊣ G) {A B : C} (e : A ≅ B) (R : G.obj (F.obj A) ⟶ A)
+    (hR : adj.unit.app A ≫ R = 𝟙 _) :
+    adj.unit.app B ≫ G.map (F.map e.inv) ≫ R ≫ e.hom = 𝟙 _ := by
+  change adj.unit.app B ≫ (F ⋙ G).map e.inv ≫ R ≫ e.hom = 𝟙 _
+  rw [← adj.unit.naturality_assoc e.inv, Category.assoc, hR, Category.id_comp,
+    e.inv_hom_id]
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
