@@ -160,7 +160,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
         (LocalizedModule.map p.asIdeal.primeCompl b.hom.hom y) =
       s.map (H.map ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))
         (z y) := by
-  intro L b P H E instE c s z y
+  intro L b P H E c s z y
   let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
   let d₀ := affineTensorPullbackHomologySheafIso A A' φg' M i
   let a := (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom
@@ -182,7 +182,6 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
         (s.map d₀.hom ((IsLocalizedModule.iso p.asIdeal.primeCompl
           (StructureSheaf.toStalkₗ A' (C.homology i) p)) y)))
       simp only [Functor.map_comp, ModuleCat.comp_apply]
-
 
 
 /-- The canonical target coordinate commutes with stalk localization.
