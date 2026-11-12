@@ -74,8 +74,6 @@ lemma classTest_kunnethVerdierMap :
 
 end Test
 
-set_option profiler true in
--- the adjunctions of bounded constructible complexes are unfolded in the defeq checks
 /-- The left projection morphism of a proper morphism after a unit. -/
 lemma leftProjection_lowerShriek_unit_app {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom]
     [QuasiCompact A.hom] [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]

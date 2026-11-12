@@ -47,11 +47,11 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
           ((boundedConstructibleLowerStar ℓ f).obj K) =
       (boundedConstructibleLowerStar ℓ (prod.map f f)).map (kunnethVerdierMap ℓ K K) ≫
         classTransportMap ℓ f K := by
-  rw [kernelPushforward, Category.assoc, IsIso.inv_comp_eq]
+  simp only [kernelPushforward, Category.assoc, IsIso.inv_comp_eq]
   apply classTest_injective ℓ (M := (boundedConstructibleLowerStar ℓ f).obj K)
-  rw [classTest_comp, classTest_comp, classTest_map_comp_classTransportMap,
-    classTest_kunnethVerdierMap, classTest_kunnethVerdierMap]
-  rewrite [← Functor.map_comp_assoc]
+  simp only [classTest_comp, classTest_map_comp_classTransportMap,
+    classTest_kunnethVerdierMap]
+  simp only [← Functor.map_comp_assoc]
   refine (congrArg (fun t ↦ (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map t ≫
     exceptionalKunnethAdjoint ℓ ((boundedConstructibleLowerStar ℓ f).obj K))
     (MonoidalCategory.whiskerLeft_whiskerLeft_map_comp_evaluation

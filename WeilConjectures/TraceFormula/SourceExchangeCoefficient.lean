@@ -186,8 +186,6 @@ lemma map_unit_comp_lowerShriekIsoLowerStar_inv (g : C ⟶ D) [IsProper g.left]
   rewrite [reassoc_of% h₁, ← (boundedConstructibleLowerStar ℓ g).map_comp_assoc, h₂]
   simp only [Functor.map_comp, Category.assoc]
 
-set_option profiler true in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- The coherence part of the class of the coefficient pushforward: for `g ≫ b = c ≫ q`,
 `q ≫ p₁ = p₁' ≫ f`, `q ≫ p₂ = p₂' ≫ f` with `g`, `f` proper, the two maps
 `Rp₁_! Rb_! Lb^* Lp₂^* Rf_* K ⟶ Rf_! Rc₁_! Lc₂^* K` agree. -/
