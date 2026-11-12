@@ -55,6 +55,9 @@ open Scheme
 
 attribute [local instance] DerivedCategory.braidedCategory'
 
+-- Resolve the underlying categories directly when elaborating derived pullback objects.
+attribute [local instance 30000] instCategoryDerivedCategory CategoryTheory.Mod.instCategory
+
 /-- The transpose of `F f ≫ g` along `F ⊣ G` is invertible if `f` and the transpose of `g` are. -/
 lemma _root_.CategoryTheory.Adjunction.isIso_homEquiv_of_eq_map_comp {C D : Type*} [Category C]
     [Category D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) {X X' : D} {Y : C} (f : X' ⟶ X)
