@@ -126,7 +126,7 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map
     (((Classical.choose
       (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
-        (.up ℤ)).homEquiv _ _).apply_symm_apply α
+        (.up ℤ)).homEquiv P I).apply_symm_apply α
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
