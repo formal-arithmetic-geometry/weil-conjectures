@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem isIso_fiber_projection
     {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
@@ -88,10 +87,6 @@ private theorem compatible_of_difference
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option trace.profiler true in
-set_option synthInstance.maxHeartbeats 400000 in
--- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 800000 in
--- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Objects of the derived category glue across a two-open cover with their prescribed
 transition, without an assertion about morphisms into another object.
 Source: Stacks Project, Cohomology, Tag 08DG, first assertion and cone construction
