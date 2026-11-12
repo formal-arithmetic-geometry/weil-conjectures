@@ -201,7 +201,7 @@ private theorem horizontal_varying_root_square
   have hv : HEq v (adjointSection l (ULift.{u} (Padic l)) d.geometry
       d.line.iso.hom n U x) :=
     varyingPush_adjoint_section l hX p p' d n N N' d.line.iso.hom U y x hx
-  let U' := (Scheme.proEtaleBaseChange hX).op.obj U
+  let U' := chart hX U
   let x' : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X' n).obj N').val.obj U' :=
     (((restrictionUnderlying l X' p'.restrictionX n).hom.app N').hom.app U') v
   have hx' : HEq x' (adjointSection l (ULift.{u} (Padic l)) d.geometry
@@ -210,12 +210,9 @@ private theorem horizontal_varying_root_square
   dsimp only [x, N, y] at hx'
   have hn := d.line.normalization n U 1 z
   rw [← hinput, map_one] at hn
-  have heval : (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' x' =
-      Scheme.tateFiniteTensor X' l (FiniteRing l (ULift.{u} (Padic l)) n) n
-        (finiteScalar l (ULift.{u} (Padic l)) n) U'.unop 1
-        (restrictRoot l hX n U z) := by
-    exact (constantPushforward_map_heq (SpTowerShriek.R l (ULift.{u} (Padic l)) n) hX
-      (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx').trans hn
+  have hmap := constantPushforward_map_heq (SpTowerShriek.R l (ULift.{u} (Padic l)) n) hX
+    (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx'
+  have heval := hmap.trans hn
   let z' := (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
@@ -223,11 +220,11 @@ private theorem horizontal_varying_root_square
     have heinj :=
       (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n) U').injective
     have hxv := heinj (heval.trans hleft.symm)
-    have hv' : v = (p'.coefficientsX.lineForget.inv.app (op n)).hom.app U'
-        (restrictRoot l hX n U z) :=
-      eq_of_heq ((restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).symm.trans
-        ((heq_of_eq hxv).trans
-          (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' _)))
+    dsimp only [x', N'] at hxv
+    have hv' := eq_of_heq ((restrictionUnderlying_hom_section l X' p'.restrictionX n
+      (lineModule l (ULift.{u} (Padic l)) p'.chernX) U' v).symm.trans
+      ((heq_of_eq hxv).trans (restrictionUnderlying_hom_section l X' p'.restrictionX n
+        (lineModule l (ULift.{u} (Padic l)) p'.chernX) U' _)))
     have hzv := congrArg
       (fun q ↦ (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' q) hv'
     have hir := (addSectionEquiv (p'.coefficientsX.lineForget.app (op n)) U').apply_symm_apply
