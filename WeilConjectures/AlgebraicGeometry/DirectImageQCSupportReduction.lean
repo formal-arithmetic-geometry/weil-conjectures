@@ -41,6 +41,7 @@ namespace AlgebraicGeometry
 
 set_option maxHeartbeats 700000 in
 -- Derived restriction and composition expand large localization and scalar-restriction terms.
+set_option profiler true in
 -- Coherence is redundant because proper-support hypotheses already include closedness.
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
