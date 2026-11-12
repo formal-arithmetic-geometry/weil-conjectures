@@ -101,6 +101,7 @@ private theorem affine_stalkComparison_normalized
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Expanding the stalk comparison and the two localization transports needs this budget.
 /-- The degree-i affine module comparison and its prime localizations, without any
 invertibility hypothesis. Source: Stacks Project, perfect.tex, Tag 0DJ8, affine
