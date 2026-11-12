@@ -65,6 +65,8 @@ private theorem composition_unit {X Y Z : Scheme.{u}}
 
 section
 
+set_option profiler true in
+set_option maxHeartbeats 600000 in
 private theorem square_unit_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
