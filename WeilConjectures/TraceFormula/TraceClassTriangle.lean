@@ -83,8 +83,6 @@ namespace Correspondence
 
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
-set_option maxHeartbeats 1600000 in
--- the proof assembles many composites of morphisms of `Dᵇc(X ⨯ X)` in one declaration
 /-- **Additivity of trace classes along a distinguished triangle** (blueprint
 `lem-trf-trace-triangle-compatibility`, `sk-i-additivity`): see the module docstring. -/
 theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
@@ -107,23 +105,25 @@ theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
     (h₄ : ∀ φ : (externalProduct ℓ K' (verdierDual ℓ K'')) ⟦(1 : ℤ)⟧ ⟶
       (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X), φ = 0) :
     c.traceClass F = F.traceClassWithCoeff K' u' + F.traceClassWithCoeff K'' u'' := by
-  rw [traceClass_eq_traceClassOfKernel, FixedLocus.traceClassWithCoeff_eq,
-    FixedLocus.traceClassWithCoeff_eq]
-  refine (congrArg F.traceClassOfKernel ?_).trans (map_add _ _ _)
+  refine (traceClass_eq_traceClassOfKernel c F).trans ?_
+  refine Eq.trans ?_ (congrArg₂ (· + ·)
+    (FixedLocus.traceClassWithCoeff_eq F K' u').symm
+    (FixedLocus.traceClassWithCoeff_eq F K'' u'').symm)
+  refine (congrArg F.traceClassOfKernel ?_).trans (map_add F.traceClassOfKernel _ _)
   have hεη : ε ≫ η = 0 := comp_distTriang_mor_zero₁₂ _ hT
   have hDcomp := verdierDualMap_comp_eq_zero (X := X) hεη
-  have hfP := externalProductMap_exchange ℓ ε (verdierDualMap ℓ ε)
-  have hfR := externalProductMap_exchange ℓ η (verdierDualMap ℓ ε)
-  have hgR := externalProductMap_exchange ℓ η (verdierDualMap ℓ η)
-  have hgfQ := externalProductMap_id_comp_eq_zero (M := K) hDcomp
-  have hgfR := externalProductMap_id_comp_eq_zero (M := K'') hDcomp
+  have hfP := externalProductMap_exchange (X := X) (Y := X) ℓ ε (verdierDualMap ℓ ε)
+  have hfR := externalProductMap_exchange (X := X) (Y := X) ℓ η (verdierDualMap ℓ ε)
+  have hgR := externalProductMap_exchange (X := X) (Y := X) ℓ η (verdierDualMap ℓ η)
+  have hgfQ := externalProductMap_id_comp_eq_zero (X := X) (M := K) hDcomp
+  have hgfR := externalProductMap_id_comp_eq_zero (X := X) (M := K'') hDcomp
   have he₁ : externalProductMap ℓ ε (𝟙 _) ≫ evaluationKernel ℓ K =
       externalProductMap ℓ (𝟙 K') (verdierDualMap ℓ ε) ≫ evaluationKernel ℓ K' :=
-    externalProductMap_comp_evaluationKernel ℓ ε
+    externalProductMap_comp_evaluationKernel (X := X) ℓ ε
   have he₂ : externalProductMap ℓ (𝟙 K) (verdierDualMap ℓ η) ≫
         evaluationKernel ℓ K =
       externalProductMap ℓ η (𝟙 _) ≫ evaluationKernel ℓ K'' :=
-    (externalProductMap_comp_evaluationKernel ℓ η).symm
+    (externalProductMap_comp_evaluationKernel (X := X) ℓ η).symm
   have hσ₁ : c.supportedClass ≫ externalProductMap ℓ (𝟙 K) (verdierDualMap ℓ ε) =
       c.supportedClassOfCoeff K' K' u' ≫ externalProductMap ℓ ε (𝟙 _) := by
     rw [← supportedClassOfCoeff_u, ← supportedClassOfCoeff_upperStar_map_comp, hu',
@@ -133,9 +133,9 @@ theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
         externalProductMap ℓ (𝟙 K'') (verdierDualMap ℓ η) := by
     rw [← supportedClassOfCoeff_u, ← supportedClassOfCoeff_comp_upperShriek_map, ← hu'',
       supportedClassOfCoeff_upperStar_map_comp]
-  obtain ⟨_, h₀⟩ := externalProduct_distTriang hT (verdierDual ℓ K)
-  obtain ⟨_, h₁'⟩ := externalProduct_distTriang hT (verdierDual ℓ K')
-  obtain ⟨_, h₂'⟩ := externalProduct_distTriang hT (verdierDual ℓ K'')
+  obtain ⟨_, h₀⟩ := externalProduct_distTriang (X := X) (ℓ := ℓ) hT (verdierDual ℓ K)
+  obtain ⟨_, h₁'⟩ := externalProduct_distTriang (X := X) (ℓ := ℓ) hT (verdierDual ℓ K')
+  obtain ⟨_, h₂'⟩ := externalProduct_distTriang (X := X) (ℓ := ℓ) hT (verdierDual ℓ K'')
   exact comp_eq_add_of_distTriang h₀ h₁' h₂' _ _ _ _ _
     hfP hfR hgR hgfQ hgfR _ _ _ he₁ he₂ _ _ _ hσ₁ hσ₂ h₁ h₂ h₃ h₄
 
