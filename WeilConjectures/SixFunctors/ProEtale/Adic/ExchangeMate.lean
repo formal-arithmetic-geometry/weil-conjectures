@@ -178,6 +178,7 @@ lemma adicLowerStarEquivalence_symm_unit_app_hom_hom_app {X : Scheme.{u}} (e : X
     adicLowerStarCongr_inv_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
     ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp]
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- Rewriting both sides down to sections takes many elaboration steps.
 /-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two

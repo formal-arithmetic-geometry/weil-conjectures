@@ -174,6 +174,7 @@ lemma adicLowerStarCongr_inv_app_hom_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
       M.X.obj.map ((MorphismProperty.Over.pullbackCongr h.symm).inv.app V.unop).op :=
   lowerStarCongr_hom_app_hom_app _ h.symm M.X V
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Rewriting both sides down to sections takes many elaboration steps.
 /-- `AlgebraicGeometry.ProEtale.lowerStarComp_exchange'` for sheaves of `ℚ̄_ℓ,X`-modules. -/
