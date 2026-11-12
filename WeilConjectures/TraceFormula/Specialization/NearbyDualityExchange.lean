@@ -86,9 +86,7 @@ lemma Hom.map_boundedConstructiblePushforwardExchange_app_comp_counit_app
   rw [Hom.boundedConstructiblePushforwardExchange_eq_mateEquiv]
   exact map_mateEquiv_app_comp_counit_aux hM hN _ A
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- the concrete ℚ̲̄_ℓ-coefficient functors are unfolded when matching the generic statements
 /-- The oplax monoidality of `NearbyCyclesModel.liftExchange` of an arbitrary transformation
 `α : Ψ_N ⋙ Lf'^* ⟶ Lf^* ⋙ Ψ_M`, deduced from that of `α`; the transformation is kept abstract so
 that the kernel never unfolds the pullback exchange. -/
@@ -120,10 +118,7 @@ private lemma liftExchange_tensor_oplax_aux
       Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f')
           _ _ ≫ (β.app A ⊗ₘ β.app B) ≫ boundedConstructibleTensorMap hM _ _ := by
   subst hβ
-  apply ObjectProperty.hom_ext
-  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
-    boundedConstructibleUpperStar_δ_hom, ObjectProperty.tensorHom_hom', liftExchange_app_hom]
-  exact hα A.obj B.obj
+  exact ObjectProperty.hom_ext _ (hα A.obj B.obj)
 
 /-- **The restricted pullback exchange is monoidal**, in the oplax form: the restriction of
 `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`. -/
