@@ -101,6 +101,7 @@ set_option hygiene false in
 local notation "𝐓" => Profinite.continuousMapRingObj T
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula, with finite coefficients**: let `P`
 be the product over the henselian trait `Spec k'⟦t⟧` of models `M`, `N` of finite type along
@@ -218,6 +219,7 @@ set_option hygiene false in
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4)): let `P` be the product over the henselian
