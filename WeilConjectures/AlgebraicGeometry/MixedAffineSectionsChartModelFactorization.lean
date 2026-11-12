@@ -28,6 +28,17 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem chartModelFactorization_of_units
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) {X X' : C} {Y Z Z' : D} (s : X' ⟶ X) [Epi s]
+    (a : L.obj X ≅ Y) (b : Z ≅ Z') (c : Y ⟶ Z') (p : X ⟶ R.obj Z)
+    (h : s ≫ p ≫ R.map b.hom = s ≫ adj.homEquiv _ _ (a.hom ≫ c)) :
+    (adj.homEquiv _ _).symm p ≫ b.hom = a.hom ≫ c := by
+  apply (adj.homEquiv _ _).injective
+  apply (cancel_epi s).1
+  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  exact h
+
 set_option profiler true in
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
@@ -138,9 +149,8 @@ theorem exists_mixedAffineSections_chart_model_factorization
   refine ⟨a, b, ?_⟩
   have : IsIso (mixedSectionsComplexUnit S C) :=
     mixedAffineChart_sectionsComplexUnit_isIso S P
-  apply ((mixedGlobalExtensionAdjunction g).homEquiv _ _).injective
-  apply (cancel_epi (mixedSectionsComplexUnit S C)).1
-  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  apply chartModelFactorization_of_units (mixedGlobalExtensionAdjunction g)
+    (mixedSectionsComplexUnit S C)
   have ha' := ha _ ((c.mapHomologicalComplex (.up ℤ)).app P)
   rw [hcP] at ha'
   simp only [Category.assoc] at hb ⊢

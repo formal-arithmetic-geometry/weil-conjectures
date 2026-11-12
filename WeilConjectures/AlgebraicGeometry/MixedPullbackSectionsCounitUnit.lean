@@ -26,6 +26,22 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem mixedSections_unit_naturality
+    {A B C D E : Type*} [Category A] [Category B] [Category C] [Category D] [Category E]
+    (Q : A ⥤ B) (H₀ : A ⥤ D) (H : B ⥤ D) (F : C ⥤ B) (J : C ⥤ E) (R : E ⥤ D)
+    (s : H₀ ⟶ Q ⋙ H) (L : F ⋙ H ≅ J ⋙ R)
+    {M M' : A} {X Y : C} (a : M ⟶ M') (ε : X ⟶ Y)
+    (η : Q.obj M ⟶ F.obj X) (β : Q.obj M' ⟶ F.obj Y)
+    (u : H₀.obj M' ⟶ R.obj (J.obj Y))
+    (hunit : η ≫ F.map ε = Q.map a ≫ β)
+    (hL : s.app M' ≫ H.map β ≫ L.hom.app Y = u) :
+    s.app M ≫ H.map η ≫ L.hom.app X ≫ R.map (J.map ε) = H₀.map a ≫ u := by
+  rw [← L.hom.naturality ε]
+  change s.app M ≫ H.map η ≫ H.map (F.map ε) ≫ L.hom.app Y = _
+  rw [← Functor.map_comp_assoc, hunit, Functor.map_comp, Category.assoc,
+    ← s.naturality_assoc a]
+  exact congrArg (fun f ↦ H₀.map a ≫ f) hL
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
@@ -44,7 +60,6 @@ private theorem sectionsComplexUnit_eq (S : Scheme.{u})
     Category.id_comp, Category.id_comp, Category.comp_id]
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Comparing the scheme and sheaf presentations of module categories needs extra reduction.
 /-- Apply sections to a pullback counit satisfying the underived unit factorization.
 Source: Stacks Project, Tags 079W (derived adjunction) and 0D5T (Leray composition).
@@ -191,16 +206,11 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
       DerivedCategory.Qh.map ((H.mapHomotopyCategory (.up ℤ)).map a) ≫
       R.mapDerivedCategoryFactorsh.inv.app ((J.mapHomotopyCategory (.up ℤ)).obj N) ≫
       (schemeGlobalScalarRestriction g).map (t.app N) := by
-    erw [← L.hom.naturality (ε.app M)]
-    change s.app M ≫ (schemeDerivedGlobalSections S).map
-      (η.app (DerivedCategory.Qh.obj M)) ≫
-      (schemeDerivedGlobalSections S).map ((schemeDerivedDirectImage g).map (ε.app M)) ≫
-      L.hom.app _ = _
-    rw [← Functor.map_comp_assoc, hu, Functor.map_comp]
-    simp only [Category.assoc]
-    erw [← s.naturality_assoc a]
-    simp only [Functor.comp_map]
-    erw [hL]
+    exact mixedSections_unit_naturality DerivedCategory.Qh
+      (H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+      (schemeDerivedGlobalSections S) (schemeDerivedDirectImage g)
+      (schemeDerivedGlobalSections T) (schemeGlobalScalarRestriction g)
+      s L a (ε.app M) (η.app (DerivedCategory.Qh.obj M)) (β.app N) _ hu hL
   have ha : (H.mapHomotopyCategory (.up ℤ)).map a =
       (HomotopyCategory.quotient _ (.up ℤ)).map
         ((d.mapHomologicalComplex (.up ℤ)).app C) := by

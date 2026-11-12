@@ -74,107 +74,61 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-set_option profiler true in
--- The derived unit calculation elaborates several affine carrier identifications.
-/-- The extension counit computes the affine chart source, and intertwines Hom transposes.
-Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7.
-(blueprint: lem-sc-mixed-affine-extension-unit-normalization).
+private theorem normalizationExtendScalars_preservesKFlatQuasiIso
+    {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
+    (ModuleCat.extendScalars.{u, u, u} f).PreservesKFlatQuasiIso := by
+  constructor
+  intro P Q hP hQ α hα
+  let U₀ := CategoryTheory.MonoidalCategoryStruct.tensorUnit (ModuleCat.{u} B)
+  let N := (HomologicalComplex.single (ModuleCat.{u} B) (.up ℤ) 0).obj U₀
+  have h := (CochainComplex.mixedTensor_kFlat_quasiIso f).1 N P Q α hα hP hQ
+  let e := CochainComplex.map₂HomologicalComplexFlipObjSingleIso
+    (ModuleCat.mixedTensor f).flip U₀
+  have h' : QuasiIso
+      ((((ModuleCat.mixedTensor f).obj
+        U₀).mapHomologicalComplex
+        (.up ℤ)).map α) :=
+    (quasiIso_iff_of_arrow_mk_iso _ _
+      (Arrow.isoMk (e.app P) (e.app Q) (e.hom.naturality α).symm)).1 h
+  let e₀ : (ModuleCat.mixedTensor f).obj U₀ ≅
+      ModuleCat.extendScalars.{u, u, u} f :=
+    Functor.isoWhiskerLeft (ModuleCat.extendScalars f)
+      (CategoryTheory.MonoidalCategory.leftUnitorNatIso (ModuleCat.{u} B)) ≪≫
+        Functor.rightUnitor _
+  let e₁ := NatIso.mapHomologicalComplex e₀ (.up ℤ)
+  exact (quasiIso_iff_of_arrow_mk_iso _ _
+    (Arrow.isoMk (e₁.app P) (e₁.app Q) (e₁.hom.naturality α).symm)).1 h'
 
-Proof: The ordinary affine tilde unit identifies H(F(P)) with P termwise, so this
-complex is K-flat. Its left-derived extension counit is therefore invertible.
-Identify the fixed mixedGlobalExtension adjunction with the derived extension
-adjunction by left-adjoint uniqueness, preserving its unit. The source comparison a
-is the inverse of extension applied to mixedSectionsComplexUnit, followed by this
-counit. The affine sections comparison is invertible by the affine chart sections
-unit theorem. Apply derivedη_fac_app to extension/restriction, inserting the exact
-restriction comparison and quotient-to-homotopy factors. This proves the formula for
-the unit. Postcompose with an arbitrary complex map f and use naturality of the
-exact restriction comparison to obtain the displayed equality. It is uniform in Z
-and f and uses no pullback, Leray comparison, or ordinary comparison c. Zero rings,
-zero complexes and zero morphisms satisfy the same unit and naturality equations. -/
-theorem exists_mixedAffineSections_extension_unit_normalization
-    {S T : Scheme.{u}} [IsAffine S] (g : T ⟶ S) :
-    let F : ModuleCat.{u} Γ(S, ⊤) ⥤
-        SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
-      tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ
-    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
-    let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom
-    let R := ModuleCat.restrictScalars.{u} g.appTop.hom
-    ∀ [F.Additive] [H.Additive] [E.Additive]
-      (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)
-      (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),
-    let C := (F.mapHomologicalComplex (.up ℤ)).obj P
-    let X := ((F ⋙ H).mapHomologicalComplex (.up ℤ)).obj P
-    ∃ a : (mixedGlobalExtension g).obj
-        ((schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)) ≅
-      DerivedCategory.Q.obj (((F ⋙ H ⋙ E).mapHomologicalComplex (.up ℤ)).obj P),
-    ∀ (Z : CochainComplex (ModuleCat.{u} Γ(T, ⊤)) ℤ)
-      (f : ((E.mapHomologicalComplex (.up ℤ)).obj X) ⟶ Z),
-      mixedSectionsComplexUnit S C ≫
-          (mixedGlobalExtensionAdjunction g).homEquiv _ _
-            (a.hom ≫ DerivedCategory.Q.map f) =
-        DerivedCategory.Q.map
-          (((ModuleCat.extendRestrictScalarsAdj g.appTop.hom).mapHomologicalComplex
-            (.up ℤ)).unit.app X ≫
-              (R.mapHomologicalComplex (.up ℤ)).map f) ≫
-          R.mapDerivedCategoryFactors.inv.app Z := by
-  classical
-  intro F H E R instF instH instE P hP C X
-  let lAdj : mixedGlobalExtension g ⊣ R.mapDerivedCategory :=
-    mixedGlobalExtensionAdjunction g
-  let Y : DerivedCategory (ModuleCat.{u} Γ(S, ⊤)) :=
-    (schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)
-  let eX : P ≅ X :=
-    ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app P).symm ≪≫
-      (NatIso.mapHomologicalComplex
-        (Scheme.Modules.normalizationChartModuleIso S) (.up ℤ)).app P
-  have hX : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat X :=
-    ((HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat.prop_iff_of_iso
-      eX).mp hP
-  have : IsIso (mixedSectionsComplexUnit S C) :=
-    mixedAffineChart_sectionsComplexUnit_isIso S P
-  let s : Y ≅ DerivedCategory.Q.obj X := (asIso (mixedSectionsComplexUnit S C)).symm
-  have : (ModuleCat.extendScalars.{u, u, u} g.appTop.hom).PreservesKFlatQuasiIso := by
-    constructor
-    intro P Q hP hQ α hα
-    let U₀ := CategoryTheory.MonoidalCategoryStruct.tensorUnit (ModuleCat.{u} Γ(T, ⊤))
-    let N := (HomologicalComplex.single (ModuleCat.{u} Γ(T, ⊤)) (.up ℤ) 0).obj U₀
-    have h := (CochainComplex.mixedTensor_kFlat_quasiIso g.appTop.hom).1 N P Q α hα hP hQ
-    let e := CochainComplex.map₂HomologicalComplexFlipObjSingleIso
-      (ModuleCat.mixedTensor g.appTop.hom).flip U₀
-    have h' : QuasiIso
-        ((((ModuleCat.mixedTensor g.appTop.hom).obj
-          U₀).mapHomologicalComplex
-          (.up ℤ)).map α) :=
-      (quasiIso_iff_of_arrow_mk_iso _ _
-        (Arrow.isoMk (e.app P) (e.app Q) (e.hom.naturality α).symm)).1 h
-    let e₀ : (ModuleCat.mixedTensor g.appTop.hom).obj U₀ ≅
-        ModuleCat.extendScalars.{u, u, u} g.appTop.hom :=
-      Functor.isoWhiskerLeft (ModuleCat.extendScalars g.appTop.hom)
-        (CategoryTheory.MonoidalCategory.leftUnitorNatIso (ModuleCat.{u} Γ(T, ⊤))) ≪≫
-          Functor.rightUnitor _
-    let e₁ := NatIso.mapHomologicalComplex e₀ (.up ℤ)
-    exact (quasiIso_iff_of_arrow_mk_iso _ _
-      (Arrow.isoMk (e₁.app P) (e₁.app Q) (e₁.hom.naturality α).symm)).1 h'
-  let adj := ModuleCat.extendRestrictScalarsAdj g.appTop.hom
-  let b : E.leftDerivedFunctor ⊣ R.mapDerivedCategory :=
-    adj.derivedAdjunction.ofNatIsoRight R.rightDerivedFunctorIsoMapDerivedCategory
-  let e := lAdj.leftAdjointUniq b
+private theorem normalizationExtension_unit
+    {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)
+    (X : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hX : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat X) :
+    let E := ModuleCat.extendScalars.{u, u, u} f
+    let R := ModuleCat.restrictScalars.{u} f
+    let adj := ModuleCat.extendRestrictScalarsAdj f
+    let b : E.leftDerivedFunctor ⊣ R.mapDerivedCategory :=
+      adj.derivedAdjunction.ofNatIsoRight R.rightDerivedFunctorIsoMapDerivedCategory
+    ∃ d : E.leftDerivedFunctor.obj (DerivedCategory.Q.obj X) ≅
+        DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj X),
+      b.unit.app (DerivedCategory.Q.obj X) ≫ R.mapDerivedCategory.map d.hom =
+        DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app X) ≫
+          R.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj X) := by
+  intro E R adj b
+  have : E.PreservesKFlatQuasiIso := normalizationExtendScalars_preservesKFlatQuasiIso f
   have : IsIso (E.leftDerivedFunctorCounit.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj X)) :=
     E.isIso_leftDerivedFunctorCounit_app_of_kFlat X hX
-  let q₀ := (DerivedCategory.quotientCompQhIso (ModuleCat.{u} Γ(S, ⊤))).app X
-  let q₁ := (DerivedCategory.quotientCompQhIso (ModuleCat.{u} Γ(T, ⊤))).app
+  let q₀ := (DerivedCategory.quotientCompQhIso (ModuleCat.{u} A)).app X
+  let q₁ := (DerivedCategory.quotientCompQhIso (ModuleCat.{u} B)).app
     ((E.mapHomologicalComplex (.up ℤ)).obj X)
-  let q₂ := (DerivedCategory.quotientCompQhIso (ModuleCat.{u} Γ(S, ⊤))).app
+  let q₂ := (DerivedCategory.quotientCompQhIso (ModuleCat.{u} A)).app
     ((R.mapHomologicalComplex (.up ℤ)).obj ((E.mapHomologicalComplex (.up ℤ)).obj X))
   let ε := E.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj X)
   let d : E.leftDerivedFunctor.obj (DerivedCategory.Q.obj X) ≅
       DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj X) :=
     E.leftDerivedFunctor.mapIso q₀.symm ≪≫ asIso ε ≪≫ q₁
-  let a := (mixedGlobalExtension g).mapIso s ≪≫ e.app (DerivedCategory.Q.obj X) ≪≫ d
   have hfac := (adj.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
-    (HomotopyCategory.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ))
+    (HomotopyCategory.quasiIso (ModuleCat.{u} A) (.up ℤ))
     E.leftDerivedFunctorCounit R.rightDerivedFunctorUnit
     ((HomotopyCategory.quotient _ (.up ℤ)).obj X)
   have ht : b.unit.app
@@ -279,6 +233,74 @@ theorem exists_mixedAffineSections_extension_unit_normalization
       _ = _ := by
         simp only [Category.assoc, Iso.inv_hom_id_app]
         erw [Category.comp_id]
+  exact ⟨d, hstd⟩
+
+set_option profiler true in
+-- The derived unit calculation elaborates several affine carrier identifications.
+/-- The extension counit computes the affine chart source, and intertwines Hom transposes.
+Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7.
+(blueprint: lem-sc-mixed-affine-extension-unit-normalization).
+
+Proof: The ordinary affine tilde unit identifies H(F(P)) with P termwise, so this
+complex is K-flat. Its left-derived extension counit is therefore invertible.
+Identify the fixed mixedGlobalExtension adjunction with the derived extension
+adjunction by left-adjoint uniqueness, preserving its unit. The source comparison a
+is the inverse of extension applied to mixedSectionsComplexUnit, followed by this
+counit. The affine sections comparison is invertible by the affine chart sections
+unit theorem. Apply derivedη_fac_app to extension/restriction, inserting the exact
+restriction comparison and quotient-to-homotopy factors. This proves the formula for
+the unit. Postcompose with an arbitrary complex map f and use naturality of the
+exact restriction comparison to obtain the displayed equality. It is uniform in Z
+and f and uses no pullback, Leray comparison, or ordinary comparison c. Zero rings,
+zero complexes and zero morphisms satisfy the same unit and naturality equations. -/
+theorem exists_mixedAffineSections_extension_unit_normalization
+    {S T : Scheme.{u}} [IsAffine S] (g : T ⟶ S) :
+    let F : ModuleCat.{u} Γ(S, ⊤) ⥤
+        SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
+      tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ
+    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
+    let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom
+    let R := ModuleCat.restrictScalars.{u} g.appTop.hom
+    ∀ [F.Additive] [H.Additive] [E.Additive]
+      (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)
+      (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),
+    let C := (F.mapHomologicalComplex (.up ℤ)).obj P
+    let X := ((F ⋙ H).mapHomologicalComplex (.up ℤ)).obj P
+    ∃ a : (mixedGlobalExtension g).obj
+        ((schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)) ≅
+      DerivedCategory.Q.obj (((F ⋙ H ⋙ E).mapHomologicalComplex (.up ℤ)).obj P),
+    ∀ (Z : CochainComplex (ModuleCat.{u} Γ(T, ⊤)) ℤ)
+      (f : ((E.mapHomologicalComplex (.up ℤ)).obj X) ⟶ Z),
+      mixedSectionsComplexUnit S C ≫
+          (mixedGlobalExtensionAdjunction g).homEquiv _ _
+            (a.hom ≫ DerivedCategory.Q.map f) =
+        DerivedCategory.Q.map
+          (((ModuleCat.extendRestrictScalarsAdj g.appTop.hom).mapHomologicalComplex
+            (.up ℤ)).unit.app X ≫
+              (R.mapHomologicalComplex (.up ℤ)).map f) ≫
+          R.mapDerivedCategoryFactors.inv.app Z := by
+  classical
+  intro F H E R instF instH instE P hP C X
+  let lAdj : mixedGlobalExtension g ⊣ R.mapDerivedCategory :=
+    mixedGlobalExtensionAdjunction g
+  let Y : DerivedCategory (ModuleCat.{u} Γ(S, ⊤)) :=
+    (schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)
+  let eX : P ≅ X :=
+    ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app P).symm ≪≫
+      (NatIso.mapHomologicalComplex
+        (Scheme.Modules.normalizationChartModuleIso S) (.up ℤ)).app P
+  have hX : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat X :=
+    ((HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat.prop_iff_of_iso
+      eX).mp hP
+  have : IsIso (mixedSectionsComplexUnit S C) :=
+    mixedAffineChart_sectionsComplexUnit_isIso S P
+  let s : Y ≅ DerivedCategory.Q.obj X := (asIso (mixedSectionsComplexUnit S C)).symm
+  let adj := ModuleCat.extendRestrictScalarsAdj g.appTop.hom
+  let b : E.leftDerivedFunctor ⊣ R.mapDerivedCategory :=
+    adj.derivedAdjunction.ofNatIsoRight R.rightDerivedFunctorIsoMapDerivedCategory
+  let e := lAdj.leftAdjointUniq b
+  obtain ⟨d, hstd⟩ := normalizationExtension_unit g.appTop.hom X hX
+  let a := (mixedGlobalExtension g).mapIso s ≪≫ e.app (DerivedCategory.Q.obj X) ≪≫ d
   have ha : lAdj.unit.app Y ≫
       R.mapDerivedCategory.map a.hom =
       s.hom ≫ DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app X) ≫
