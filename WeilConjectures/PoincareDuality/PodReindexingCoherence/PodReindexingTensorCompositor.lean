@@ -411,6 +411,7 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
   exact (congrArg (fun v ↦ m (((cgh.tensorChain P L).hom.f n).val.app U v)) hi').trans
     (hleft.trans (hright.symm.trans (congrArg (fun v ↦ d (b (a v))) hi').symm))
 
+set_option profiler true in
 set_option maxHeartbeats 8000000 in
 -- Paste the three tensor models across the exact-functor factorization maps.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -535,6 +536,7 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
   slice_rhs 3 4 => exact hf
   simp only [Category.assoc]; with_unfolding_all rfl
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The representative argument involves three exact derived functors.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
