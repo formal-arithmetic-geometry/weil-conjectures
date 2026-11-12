@@ -119,6 +119,6 @@ lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinit
   rw [hΦ]
   rw [hψ]
   rw [Functor.map_comp]
-  exact (classTransport ℓ f K).naturality_assoc ψ _
+  simpa only [Category.assoc] using (classTransport ℓ f K).naturality_assoc ψ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
