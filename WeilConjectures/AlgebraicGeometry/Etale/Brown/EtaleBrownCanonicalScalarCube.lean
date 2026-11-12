@@ -31,6 +31,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Compare four independently normalized adjunctions.
 /-- The scalar mate of the exact ordinary restriction square respects normalized
