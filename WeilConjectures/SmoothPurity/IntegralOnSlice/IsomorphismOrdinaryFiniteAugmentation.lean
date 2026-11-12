@@ -32,7 +32,6 @@ attribute [local instance_reducible] IntegralOnSlice.Site IntegralOnSlice.topolo
   IntegralOnSlice.restrict IntegralOnSlice.ring
 attribute [local instance_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 
--- Comparing the normalized ring actions consumes heartbeats across several restrictions.
 /-- The finite quotient augmentation agrees on each degree after the two comparisons.
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
 (blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
@@ -106,7 +105,7 @@ theorem isomorphismOrdinaryFiniteAugmentation
       (N.val.map ((proEtaleBaseChange g).map c).op
         (integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x))) =
       integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x) := by
-    erw [← N.val.map_comp_apply, ht, N.val.map_id]
+    erw [← PresheafOfModules.map_comp_apply, ht, PresheafOfModules.map_id]
     rfl
   erw [hv]
   have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
