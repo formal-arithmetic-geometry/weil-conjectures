@@ -287,8 +287,9 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
+  let b := asIso beta
   unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
-  refine (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2 (asIso beta).symm ?_
+  refine (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2 b.symm ?_
   intro i j k hij U x y
   subst k
   have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
@@ -382,7 +383,7 @@ private theorem nativeReductionMonoidal
       trace "native: normalization obtained"
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
-      have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      have hbκ := hb.trans (hc P Q).symm
       trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
       trace "native: preservation supplied"
