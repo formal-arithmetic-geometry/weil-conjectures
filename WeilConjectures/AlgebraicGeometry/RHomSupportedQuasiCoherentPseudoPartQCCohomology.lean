@@ -263,9 +263,9 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
     let eHomology := (DerivedCategory.homologyFunctor D n).mapIso eRI
     let eFactors := (DerivedCategory.homologyFunctorFactors D n).app
       (homComplex (R := X.toRingedSpace.sheaf.over V) (P x) I)
-    let eTotal : (H.over V) ≅
-        (homComplex (R := X.toRingedSpace.sheaf.over V) (P x) I).homology n :=
-      (F.mapDerivedCategoryHomologyFunctorIso n).app _ ≪≫ eHomology ≪≫ eFactors
+    let eFirst := (F.mapDerivedCategoryHomologyFunctorIso n).app _
+    let eSecond := eFirst ≪≫ eHomology
+    let eTotal := eSecond ≪≫ eFactors
     let qcoh := SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over V)
     apply qcoh.prop_of_iso eTotal.symm
     exact hPI
