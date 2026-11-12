@@ -69,7 +69,7 @@ private theorem mapped_homology_mem_of_shortExact
     ((hS.homology_exact₃ n (n + 1) (by simp)).map F)
     (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
 
 Source: Stacks Project, Tag 0117, long exact sequence, and Tag 01IE, extension closure.
@@ -98,7 +98,9 @@ theorem localized_complex_qc_homology_extension
     e.symm.toAdjunction.rightAdjoint_preservesLimits
   have : PreservesColimitsOfSize.{0, 0} F :=
     e.toAdjunction.leftAdjoint_preservesColimits
-  have : F.PreservesZeroMorphisms := e.fullyFaithfulFunctor.preservesZeroMorphisms
+  have : F.Full := e.full_functor
+  have : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full F
+  have : F.PreservesHomology := Functor.preservesHomologyOfExact F
   let P : ObjectProperty U.toScheme.Modules :=
     fun M ↦ M.IsQuasicoherent
   let : P.IsClosedUnderIsomorphisms :=
