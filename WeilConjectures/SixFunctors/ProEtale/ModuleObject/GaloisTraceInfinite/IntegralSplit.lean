@@ -305,7 +305,6 @@ lemma exists_retraction_map_unit_integersModPow (n : ℕ)
         (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K)
     exact comp_comp_eq_id_of_comp_eq e hR.choose_spec.1
 
-set_option profiler true in
 -- the retractions are compared through the large types of the reductions
 /-- **Uniqueness of invariant torsion retractions**: two retractions of the reduction modulo `ℓⁿ`
 of the unit `K ⟶ Rg_* Lg^* K`, invariant under the reductions of the Galois action, are equal. -/
@@ -380,7 +379,6 @@ lemma eq_of_retraction_map_unit_integersModPow (n : ℕ)
   refine eq_of_retraction_of_iso e ea ?_ hr hr' h₁ h₁'
   exact eq_of_invariant_retraction_derivedUnit_galois_integersModPow E h n hunit _ hred
 
-set_option profiler true in
 -- the torsion retractions are matched against the large types of the reductions
 /-- **The derived unit of an infinite Galois extension of degrees prime to `ℓ` splits with
 `𝒪_E`-coefficients** at every derived complete complex whose reductions modulo `ℓⁿ⁺¹` are bounded
