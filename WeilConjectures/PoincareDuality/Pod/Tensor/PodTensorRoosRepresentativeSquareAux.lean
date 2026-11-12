@@ -323,18 +323,22 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
-  let t (τ' : (podReindexTower l E g).obj
+  let a := (podOrdinaryReindex l E g).map
+    ((integralCompletedTensorComparison l E Y).hom.app (P, Q))
+  let b := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app
+    (integralOperationsRoos
+      ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))
+  let r (τ' : (podReindexTower l E g).obj
       ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)) ≅
       (integralOperationsTensorTowerFunctor l E X).obj
         (((podGoodReindex l E g D).obj P).obj, ((podGoodReindex l E g D).obj Q).obj)) :=
-    (podOrdinaryReindex l E g).map
-        ((integralCompletedTensorComparison l E Y).hom.app (P, Q)) ≫
-      (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app
-        (integralOperationsRoos
-          ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))) ≫
-      (DerivedCategory.Q (C := scalarReductionSource l E X)).map
-        ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
-          (integralOperationsRoosFunctor (A := scalarReductionSource l E X)).map τ'.hom)
+    (DerivedCategory.Q (C := scalarReductionSource l E X)).map
+      ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
+        (integralOperationsRoosFunctor (A := scalarReductionSource l E X)).map τ'.hom)
+  dsimp only [podOrdinaryReindex, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+    Functor.comp_obj, Functor.prod_obj] at a b r
+  let t := fun τ' ↦ a ≫ b ≫ r τ'
   exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
