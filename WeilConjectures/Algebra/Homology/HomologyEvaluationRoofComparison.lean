@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Algebra.Homology.HomologyEvaluationRestrictionComparison
 import WeilConjectures.Algebra.Homology.HomologyEvaluationRoofNaturality
+import WeilConjectures.Algebra.Homology.HomComplexComponents
 
 /-! # Compatibility of homology evaluation with a quasi-isomorphism roof
 
@@ -35,9 +36,22 @@ private theorem homComplex_precomp_homology_isIso
   let : QuasiIso (((homComplexFunctor (R := R)).map t.op).app K) := h
   infer_instance
 
-set_option maxHeartbeats 400000 in
+private theorem homologyEvaluation_compose_roof_square
+    {C : Type*} [Category* C] {M N U V P Q Z Y : C}
+    (e : M ⟶ N) (g : U ⟶ V) (f : P ⟶ Q)
+    (a₀ : M ≅ U) (b₀ : N ≅ V) (aq : U ≅ Z) (ap : P ≅ Z)
+    (bq : V ≅ Y) (bp : Q ≅ Y)
+    (h₀ : e ≫ b₀.hom = a₀.hom ≫ g)
+    (hs : g ≫ bq.hom = aq.hom ≫ ap.inv ≫ f ≫ bp.hom) :
+    e ≫ (b₀ ≪≫ bq ≪≫ bp.symm).hom =
+      (a₀ ≪≫ aq ≪≫ ap.symm).hom ≫ f := by
+  simp only [Iso.trans_hom, Iso.symm_hom]
+  calc
+    _ = ((e ≫ b₀.hom) ≫ bq.hom) ≫ bp.inv := by simp only [Category.assoc]
+    _ = a₀.hom ≫ (g ≫ bq.hom) ≫ bp.inv := by rw [h₀]; simp only [Category.assoc]
+    _ = _ := by rw [hs]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
 set_option profiler true in
--- Comparing the restricted Hom components elaborates several chosen product signatures.
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
 invertibility hypothesis on the model evaluation is used.
@@ -151,28 +165,12 @@ theorem homologyEvaluation_roof_comparison (X : Scheme.{u})
     exact homologyEvaluation_roof_naturality (R := V.toScheme.sheaf.over W)
       ((moduleOpenOverComplexFunctor X V W).obj T) E L
       ((moduleOpenOverComplexFunctor X V W).obj J)
-      (Classical.choose (homComplex_projections_exists (R := V.toScheme.sheaf.over W)))
-      (Classical.choose_spec
-        (homComplex_projections_exists (R := V.toScheme.sheaf.over W))).2.1
-      (Classical.choose_spec
-        (homComplex_projections_exists (R := V.toScheme.sheaf.over W))).2.2
+      (homComplexπ (R := V.toScheme.sheaf.over W))
+      (homComplex_d_π (R := V.toScheme.sheaf.over W))
+      (fun _ _ _ _ ↦ homComplexFunctor_map_f_π (R := V.toScheme.sheaf.over W))
       n q p g d f c hd hd' hc hc'
-  have compose_square {M₁ N₁ U₁ V₁ P₁ Q₁ Z₁ Y₁ :
-      SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)}
-      (e : M₁ ⟶ N₁) (g : U₁ ⟶ V₁) (f : P₁ ⟶ Q₁)
-      (a₀ : M₁ ≅ U₁) (b₀ : N₁ ≅ V₁) (aq : U₁ ≅ Z₁) (ap : P₁ ≅ Z₁)
-      (bq : V₁ ≅ Y₁) (bp : Q₁ ≅ Y₁)
-      (h₀ : e ≫ b₀.hom = a₀.hom ≫ g)
-      (hs : g ≫ bq.hom = aq.hom ≫ ap.inv ≫ f ≫ bp.hom) :
-      e ≫ (b₀ ≪≫ bq ≪≫ bp.symm).hom =
-        (a₀ ≪≫ aq ≪≫ ap.symm).hom ≫ f := by
-    simp only [Iso.trans_hom, Iso.symm_hom]
-    calc
-      _ = ((e ≫ b₀.hom) ≫ bq.hom) ≫ bp.inv := by simp only [Category.assoc]
-      _ = a₀.hom ≫ (g ≫ bq.hom) ≫ bp.inv := by rw [h₀]; simp only [Category.assoc]
-      _ = _ := by rw [hs]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
   refine ⟨a₀ ≪≫ asIso Qmap ≪≫ (asIso Pmap).symm, b₀ ≪≫ bq ≪≫ bp.symm, ?_⟩
-  exact compose_square (((Scheme.Modules.restrictFunctor V.ι).map e).over W)
+  exact homologyEvaluation_compose_roof_square (((Scheme.Modules.restrictFunctor V.ι).map e).over W)
     g f a₀ b₀ (asIso Qmap) (asIso Pmap) bq bp h₀ hs
 
 end CategoryTheory
