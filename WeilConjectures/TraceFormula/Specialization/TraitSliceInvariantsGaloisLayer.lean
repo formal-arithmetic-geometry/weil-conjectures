@@ -57,6 +57,24 @@ private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
   (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarCompOfEq Λ hfg).app A).symm
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f _ hA)
 
+/-- An invertible exchange transports triviality of the intertwined automorphism action. -/
+private lemma autAction_eq_id_of_pullbackExchange_intertwines
+    {X S : Scheme.{u}} {M N : NearbyCyclesModel X S}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (ρ : M.Hom N (𝟙 X) (𝟙 S)) (σ : M.Hom M (𝟙 X) (𝟙 S))
+    (τ : N.Hom N (𝟙 X) (𝟙 S))
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) (hρ : IsIso ((ρ.pullbackExchange Λ).app A))
+    (hint : (ρ.pullbackExchange Λ).app A ≫ σ.autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) =
+      L((𝟙 S)^*⟦Λ⟧).map (τ.autAction Λ A) ≫ (ρ.pullbackExchange Λ).app A)
+    (hτ : τ.autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) = 𝟙 _) :
+    σ.autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) = 𝟙 _ := by
+  have hτ' : τ.autAction Λ A = 𝟙 _ :=
+    eq_id_of_naturality_of_iso _ (fun f ↦ Hom.autAction_naturality Λ τ f)
+      ((leftDerivedUpperStarId Λ X).app A).symm hτ
+  rw [hτ', Functor.map_id, Category.id_comp] at hint
+  exact (cancel_epi _).1 (hint.trans (Category.comp_id _).symm)
+
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
   {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -183,21 +201,16 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
   have hSA := hL₁.2
   let eG := GenericAut.galoisEquiv (k' := k') (K := K)
   have htriv' (σ : GenericAut k' K)
-      (hσ : eG σ ∈ L₁.toIntermediateField.fixingSubgroup) :
-      (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicAlgClRingObj ℓ)
-        (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) = 𝟙 _ := by
-    have h₂ : ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
-        (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
-            (traitGenericField k') (traitGenericField K)) (eG σ)).autAction
-          (Profinite.padicAlgClRingObj ℓ) A = 𝟙 _ :=
-      eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality _ _ g)
-        ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app A).symm (htriv _ hσ)
-    have := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv
-      (Profinite.padicAlgClRingObj ℓ) A
-    have key := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv
-      (Profinite.padicAlgClRingObj ℓ) σ A
-    rw [h₂, CategoryTheory.Functor.map_id, Category.id_comp] at key
-    exact (cancel_epi _).1 (key.trans (Category.comp_id _).symm)
+      (hσ : eG σ ∈ L₁.toIntermediateField.fixingSubgroup) :=
+    autAction_eq_id_of_pullbackExchange_intertwines (Profinite.padicAlgClRingObj ℓ)
+      (baseChangeToGaloisLayer hM b hb v hv) (baseChangeAut hM b hb v hv σ)
+      ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+        (baseChangeGaloisResidue hM b hb v hv)
+        (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
+        (eG σ)) A
+      (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _ A)
+      (pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv _ σ A)
+      (htriv _ hσ)
   refine (exists_retraction_pullbackExchange_of_comp_galoisLayer
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
