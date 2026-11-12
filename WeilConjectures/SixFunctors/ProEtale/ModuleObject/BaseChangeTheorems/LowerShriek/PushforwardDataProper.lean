@@ -190,7 +190,6 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
   obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   rfl
 
-set_option profiler true in
 /-- The compact-support exchange map of `P` of the trivial compactifications of the proper `f`
 and `f'` is the base change `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of `P` of the square of their
 proper maps, through `Rf_!^c ≅ Rf_*`. -/
@@ -218,22 +217,14 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
     (SepFinType.homMk (Compactification.ofIsProper f'.left).overG)
     (SepFinType.homMk (ofIsProperBaseChangeHom sq)) (SepFinType.homMk g) hw
     (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)
-  -- Identify the trivial compactifications and their connecting map before comparison.
-  obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
-  obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
-  obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
-  obtain ⟨fl', ⟨⟨⟨⟩⟩⟩, fw'⟩ := f'
-  change Xl ⟶ Y.left at fl
-  change Xl' ⟶ Y'.left at fl'
-  obtain rfl : Xh = fl ≫ Y.hom := by simpa using fw.symm
-  obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
-  obtain ⟨gl, ⟨⟨⟨⟩⟩⟩, gw⟩ := g'
   simp only [lowerShriekOfCompactificationOfIsProperIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom,
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
   rewrite [P.baseChange_eq_pfBaseChange,
     P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
-  exact key
+  -- Compare components so the pullback identification is checked on objects and morphisms.
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  exact congr_app key K
 
 variable {P}
 

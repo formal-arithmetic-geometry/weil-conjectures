@@ -72,7 +72,6 @@ lemma boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardDa
 variable {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left]
   [IsProper p'.left]
 
-set_option profiler true in
 /-- **`Ex_!` on `𝒪_E`-complexes for proper vertical maps is `Ex_*`**: under the identifications
 `κ_p : Rp_! ≅ Rp_*` and `κ_{p'} : Rp'_! ≅ Rp'_*`, the compact-support base change of a cartesian
 square with `p` and `p'` proper is the proper base change morphism `Ex_* : Lg^* Rp_* ⟶ Rp'_* Lg'^*`:
