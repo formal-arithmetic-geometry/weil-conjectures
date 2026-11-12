@@ -441,9 +441,11 @@ set_option profiler true in
 private theorem finiteRightUnderlying_add
     (M : strictEtaleLevel X O ell n) (U : Y.Etaleᵒᵖ) (x y : ((A.right n).obj M).val.obj U) :
       ((A.rightUnderlying n).hom.app M).hom.app U (x + y) =
-        (show M.val.obj ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
+        (show M.val.obj
+            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
           ((A.rightUnderlying n).hom.app M).hom.app U x) +
-        (show M.val.obj ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
+        (show M.val.obj
+            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
           ((A.rightUnderlying n).hom.app M).hom.app U y) := by
   let p := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g
   let adj := strictEtaleSetAdjunction g
@@ -472,23 +474,23 @@ private theorem finiteRightUnderlying_add
   change (β.hom.app M).hom.app U (x + y) = _ at ht
   change (β.hom.app M).hom.app U x = _ at ha
   change (β.hom.app M).hom.app U y = _ at hb
-  rw [ht, ha, hb]
   dsimp only [id] at h
-  rw [h]
-  exact (((A.levelAdj n).counit.app M).val.app
-    (p.op.obj U)).hom.map_add _ _
+  let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
+  exact ht.trans ((congrArg ε h).trans
+    ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
 
 set_option profiler true in
 private theorem finiteRightUnderlying_smul
-    (M : strictEtaleLevel X O ell n) (U : Y.Etaleᵒᵖ) (q : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))
-      (x : ((A.right n).obj M).val.obj U) :
+    (M : strictEtaleLevel X O ell n) (U : Y.Etaleᵒᵖ)
+    (q : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) (x : ((A.right n).obj M).val.obj U) :
       ((A.rightUnderlying n).hom.app M).hom.app U
         ((toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
           (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app U q • x) =
       (toSheafify (X.smallEtaleTopology) ((Functor.const X.Etaleᵒᵖ).obj
         (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))))).app
           ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) q •
-        (show M.val.obj ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
+        (show M.val.obj
+            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).op.obj U) from
           ((A.rightUnderlying n).hom.app M).hom.app U x) := by
   let p := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g
   let L := Scheme.etaleSetPullback g
@@ -555,10 +557,7 @@ private theorem finiteRightUnderlying_smul
         from a.hom.app U z) • x) = _ at ht
   change (β.hom.app M).hom.app U x = _ at hb
   rw [ha] at ht
-  rw [ht]
-  conv_rhs => rw [hb]
   dsimp only [id] at h
-  rw [h]
   have hconst := constantSection_apply (X.smallEtaleTopology)
     (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) q (p.op.obj U)
     ((A.singleton.hom).hom.app (p.op.obj U)
@@ -568,9 +567,9 @@ private theorem finiteRightUnderlying_smul
     ((L.map a).hom.app (p.op.obj U)
       ((adj.unit.app T).hom.app U z)) = _ at hc'
   have hs := hc'.trans hconst
-  rw [hs]
-  exact (((A.levelAdj n).counit.app M).val.app
-    (p.op.obj U)).hom.map_smul _ _
+  let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
+  exact ht.trans ((congrArg ε h).trans
+    ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
 
 end
 
