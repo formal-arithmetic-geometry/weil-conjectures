@@ -84,6 +84,26 @@ private theorem map_normalization
   simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.comp_obj,
     Category.comp_id, ← F.map_comp, h]
 
+private theorem map_flip_total_insertion
+    {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive B]
+    (F : A ⥤ A ⥤ A) [F.PreservesZeroMorphisms]
+    [∀ X, (F.obj X).PreservesZeroMorphisms] (U : A ⥤ B) [U.Additive]
+    (P T : CochainComplex A ℤ) [HomologicalComplex.HasMapBifunctor T P F (.up ℤ)]
+    {K : CochainComplex B ℤ}
+    (e : (U.mapHomologicalComplex (.up ℤ)).obj
+      (CochainComplex.mapBifunctor T P F) ≅ K)
+    (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n) :
+    U.map (HomologicalComplex.ιMapBifunctor P T F.flip (.up ℤ) p q n hpq) ≫
+        ((U.mapHomologicalComplex (.up ℤ)).mapIso
+          (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)) ≪≫ e).hom.f n =
+      (q * p).negOnePow •
+        (U.map (HomologicalComplex.ιMapBifunctor T P F (.up ℤ) q p n hqp) ≫ e.hom.f n) := by
+  simp only [Iso.trans_hom, HomologicalComplex.comp_f, Functor.mapIso_hom,
+    Functor.mapHomologicalComplex_map_f]
+  rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
+  simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
+  rfl
+
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -222,12 +242,12 @@ theorem native_forget_normalized_binary_models
         (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
           (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
           (.up ℤ) q p n hqp := by
-      simp only [V, flip, nativeOpenTensorInsertion, Iso.trans_hom,
-        HomologicalComplex.comp_f, Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
-      rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom T P
-        (nativeTensorBifunctor k₀ l X) (.up ℤ) q p n hpq]
-      simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
-      rw [hchain T P q p n hqp]
+      change U.map (HomologicalComplex.ιMapBifunctor P T
+          (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
+          (V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
+            (nativeTensorBifunctor k₀ l X) (.up ℤ)) ≪≫ chain T P).hom.f n = _
+      rw [map_flip_total_insertion _ U P T (chain T P) p q n hpq hqp,
+        hchain T P q p n hqp]
       rfl
     have hk := hκ (V.obj T) (V.obj P) q p n hqp hpq
     have hc : Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
@@ -316,12 +336,12 @@ theorem native_forget_normalized_binary_models
           (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
             (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
             (.up ℤ) q p n hqp := by
-        simp only [V, v, flip, Iso.trans_hom, HomologicalComplex.comp_f,
-          Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
-        rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom T P
-        (nativeTensorBifunctor k₀ l X) (.up ℤ) q p n hpq]
-        simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
-        rw [hchain T P q p n hqp]
+        change U.map (HomologicalComplex.ιMapBifunctor P T
+            (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
+            (V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
+              (nativeTensorBifunctor k₀ l X) (.up ℤ)) ≪≫ chain T P).hom.f n = _
+        rw [map_flip_total_insertion _ U P T (chain T P) p q n hpq hqp,
+          hchain T P q p n hqp]
         rfl
       simp only [HomologicalComplex.comp_f]
       rw [← Category.assoc, hi, Linear.units_smul_comp, hψ' q p n hqp]

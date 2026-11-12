@@ -79,8 +79,6 @@ theorem nonempty_condensedRealizationTensorIso :
   exact ⟨Functor.postcompose₂CompIso
     (Functor.postcompose₂FlipIsoOfUncurry (tensorBifunctorForget k₀ l X)) τ⟩
 
-set_option profiler true in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology _) Ab) _`
 /-- The condensed realization of a native K-flat complex of pro-étale Weil sheaves is a K-flat
 complex of module objects. -/
 theorem kFlat_condensedRealization_mapHomologicalComplex
