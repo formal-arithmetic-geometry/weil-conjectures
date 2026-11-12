@@ -97,9 +97,19 @@ private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ)
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀) ≅ K) := by
-  obtain ⟨E, K₀, he⟩ := exists_padicAlgCl_iso_integralModel_obj_aux ℓ X K hK
-  obtain ⟨n, hcomplete, hn, hK₀, he⟩ := integralModel_obj_to_derivedComplete_aux ℓ he
-  exact ⟨E, K₀.obj, n, hcomplete, hn, hK₀, he⟩
+  let hmodel := exists_padicAlgCl_iso_integralModel_obj_aux ℓ X K hK
+  let E := hmodel.choose
+  let hmodelE := hmodel.choose_spec
+  let K₀ := hmodelE.choose
+  let he := hmodelE.choose_spec
+  let hprops := integralModel_obj_to_derivedComplete_aux ℓ (E := E) (K₀ := K₀) he
+  let n := hprops.choose
+  have hprops' := hprops.choose_spec
+  refine ⟨E, K₀.obj, n, ?_, ?_, ?_, ?_⟩
+  · exact hprops'.1
+  · exact hprops'.2.1
+  · exact hprops'.2.2.1
+  · exact hprops'.2.2.2
 
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
