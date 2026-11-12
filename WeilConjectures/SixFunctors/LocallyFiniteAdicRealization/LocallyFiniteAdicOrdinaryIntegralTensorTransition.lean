@@ -163,7 +163,6 @@ private theorem iso_factor_six
     a ≪≫ b ≪≫ c ≪≫ d ≪≫ e ≪≫ f = (a ≪≫ b ≪≫ c) ≪≫ (d ≪≫ e ≪≫ f) := by
   simp only [Iso.trans_assoc]
 
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
 private theorem finiteOrdinaryIntegralTensorModel_factor
     (A : FiniteCondensedData l X) (C : CoefficientSystem l X)
@@ -173,6 +172,7 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
         finiteOrdinaryCoefficientIntegralModel l X A C E := by
   unfold finiteOrdinaryIntegralTensorModel finiteOrdinaryRawIntegralModel
     finiteOrdinaryCoefficientIntegralModel
+  extract_lets
   exact iso_factor_six _ _ _ _ _ _
 
 /-- The ordinary finite closure comparison has the prescribed integral tensor map.
