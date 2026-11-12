@@ -299,13 +299,8 @@ private lemma pointComplexComp_naturality (Λ : ScalarSixRing.{u})
       (pointComplexComp Λ f D).hom =
     (pointComplexComp Λ f C).hom ≫
       ((pointPull Λ X).mapHomologicalComplex (.up ℤ)).map g := by
-  apply HomologicalComplex.hom_ext
-  intro n
-  dsimp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
-  erw [pointComplexComp_hom_f Λ f D n, pointComplexComp_hom_f Λ f C n]
-  have h := pointModuleComp_naturality Λ f (g.f n)
-  run_tac withMainContext do
-    structuralCast (← getMainGoal) (← getLocalDeclFromUserName `h).toExpr
+  have h := (Functor.mapHomologicalComplexCompIso (pointModuleComp Λ f) (.up ℤ)).hom.naturality g
+  simpa only [pointComplexComp, Functor.comp_map] using h
 
 -- The ordinary square on complexes is determined by its degree-zero coefficient summand.
 private lemma total_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
@@ -478,8 +473,9 @@ private lemma factors_naturality_square
     (w : P ⟶ E) (q : F.obj E ⟶ T) (e : F.obj P ⟶ T)
     (h : F.map w ≫ q = e) :
     G.map (Q.map w) ≫ η.app E ≫ R.map q = η.app P ≫ R.map e := by
-  rw [← Category.assoc, η.naturality w]
-  simp only [Functor.comp_map, Category.assoc, ← R.map_comp, h]
+  have hn := η.naturality w
+  dsimp only [Functor.comp_map] at hn
+  rw [← Category.assoc, hn, Category.assoc, ← R.map_comp, h]
 
 private lemma coherence
     {A B : Type*} [Category A] [Category B]
@@ -497,6 +493,67 @@ private lemma coherence
     _ = _ := by
       simp only [tensorHom_id]
       rw [Functor.LaxMonoidal.μ_natural_left]
+
+-- Compute the localized ordinary square independently of the final counit cancellation.
+private lemma normalized_beta_pullback_computes
+    (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
+    (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
+    (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X))
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (β : tensorLeft (DerivedCategory.Q.obj (complex Λ S Y)) ≅
+      scalarSixChange a Y ⋙ restriction a Y)
+    (hβ : AugmentationNormalized a S t Y β)
+    (C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Y) ℤ)
+    (hC : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat C) :
+    let F := CondensedRing.upperStar Λ.X f
+    let FC := (F.mapHomologicalComplex (.up ℤ)).obj C
+    let c := F.mapDerivedCategoryFactors.hom.app C
+    (scalarSixPull Λ f).map (β.hom.app (DerivedCategory.Q.obj C)) ≫
+      (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv.app
+        ((scalarSixChange a Y).obj (DerivedCategory.Q.obj C)) ≫
+      (restriction a X).map ((D.theta a f).inv.app (DerivedCategory.Q.obj C)) ≫
+      (restriction a X).map ((scalarSixChange a X).map c) ≫
+      (betaRestrictedCounit a X).app FC =
+    (scalarSixPull Λ f).map
+        (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫
+      F.mapDerivedCategoryFactors.hom.app (complex Λ S Y ⊗ C) ≫
+      DerivedCategory.Q.map
+        (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app
+          (complex Λ S Y)).app C) ≫
+      DerivedCategory.Q.map (HomologicalComplex.tensorHom
+        (pointComplexComp Λ f (CochainComplex.monoCokernelComplex S.f)).hom (𝟙 FC)) ≫
+      DerivedCategory.Q.map (HomologicalComplex.tensorHom (augmentation Λ S X) (𝟙 FC)) ≫
+      DerivedCategory.Q.map ((betaTotalNatIso a S t X).hom.app FC) := by
+  dsimp only
+  let F := CondensedRing.upperStar Λ.X f
+  let FC := (F.mapHomologicalComplex (.up ℤ)).obj C
+  let c := F.mapDerivedCategoryFactors.hom.app C
+  let wY : complex Λ S Y ⊗ C ⟶
+      ((Mod.comap (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj
+        (((Mod.extendScalars (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj C) :=
+    HomologicalComplex.tensorHom (augmentation Λ S Y) (𝟙 C) ≫
+      (betaTotalNatIso a S t Y).hom.app C
+  have hNY : β.hom.app (DerivedCategory.Q.obj C) ≫
+      (betaRestrictedCounit a Y).app C =
+    Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C ≫
+      DerivedCategory.Q.map wY := by
+    rw [DerivedCategory.Q.map_comp]
+    exact normalized_beta_computes a S t Y β hβ C hC
+  have hr := restricted_scalar_pull_computes D a f C
+  have hr' := congrArg
+    (fun k ↦ (scalarSixPull Λ f).map
+      (β.hom.app (DerivedCategory.Q.obj C)) ≫ k) hr
+  refine hr'.trans ?_
+  have hs := congrArg (fun g ↦ (scalarSixPull Λ f).map g) hNY
+  simp only [Functor.map_comp] at hs
+  rw [reassoc_of% hs]
+  have hnat := factors_naturality_square DerivedCategory.Q DerivedCategory.Q
+    (F.mapHomologicalComplex (.up ℤ)) F.mapDerivedCategory
+    F.mapDerivedCategoryFactors.hom wY _ _ (augmented_tensor_pull a S t f C)
+  simp only [Functor.map_comp, Category.assoc] at hnat
+  simpa only [scalarSixPull, F, Category.assoc] using congrArg
+    (fun k ↦ (scalarSixPull Λ f).map
+      (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫ k) hnat
 
 -- The composition compares exact and total derived realizations of the same complexes.
 /--
@@ -529,19 +586,8 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
   let F := CondensedRing.upperStar Λ.X f
   let FC := (F.mapHomologicalComplex (.up ℤ)).obj C
   let c := F.mapDerivedCategoryFactors.hom.app C
-  let wY : complex Λ S Y ⊗ C ⟶
-      ((Mod.comap (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj
-        (((Mod.extendScalars (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj C) :=
-    HomologicalComplex.tensorHom (augmentation Λ S Y) (𝟙 C) ≫
-      (betaTotalNatIso a S t Y).hom.app C
   have hFC : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat FC :=
     CondensedRing.kFlat_upperStar_mapHomologicalComplex_obj Λ.X f hC
-  have hNY : (β Y).hom.app (DerivedCategory.Q.obj C) ≫
-      (betaRestrictedCounit a Y).app C =
-    Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C ≫
-      DerivedCategory.Q.map wY := by
-    rw [DerivedCategory.Q.map_comp]
-    exact normalized_beta_computes a S t Y (β Y) (hβ Y) C hC
   have hNX := normalized_beta_computes a S t X (β X) (hβ X) FC hFC
   have hc : IsIso c := inferInstance
   have hrc : IsIso ((betaRestrictedCounit a X).app FC) := by
@@ -556,38 +602,7 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     ((restriction a X).map ((scalarSixChange a X).map c) ≫
       (betaRestrictedCounit a X).app FC)).1
   simp only [Category.assoc]
-  have hleft :
-      (scalarSixPull Λ f).map ((β Y).hom.app (DerivedCategory.Q.obj C)) ≫
-        (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv.app
-          ((scalarSixChange a Y).obj (DerivedCategory.Q.obj C)) ≫
-        (restriction a X).map ((D.theta a f).inv.app (DerivedCategory.Q.obj C)) ≫
-        (restriction a X).map ((scalarSixChange a X).map c) ≫
-        (betaRestrictedCounit a X).app FC =
-      (scalarSixPull Λ f).map
-          (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫
-        F.mapDerivedCategoryFactors.hom.app (complex Λ S Y ⊗ C) ≫
-        DerivedCategory.Q.map
-          (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app
-            (complex Λ S Y)).app C) ≫
-        DerivedCategory.Q.map (HomologicalComplex.tensorHom
-          (pointComplexComp Λ f (CochainComplex.monoCokernelComplex S.f)).hom (𝟙 FC)) ≫
-        DerivedCategory.Q.map (HomologicalComplex.tensorHom (augmentation Λ S X) (𝟙 FC)) ≫
-        DerivedCategory.Q.map ((betaTotalNatIso a S t X).hom.app FC) := by
-    have hr := restricted_scalar_pull_computes D a f C
-    have hr' := congrArg
-      (fun k ↦ (scalarSixPull Λ f).map
-        ((β Y).hom.app (DerivedCategory.Q.obj C)) ≫ k) hr
-    refine hr'.trans ?_
-    have hs := congrArg (fun g ↦ (scalarSixPull Λ f).map g) hNY
-    simp only [Functor.map_comp] at hs
-    rw [reassoc_of% hs]
-    have hnat := factors_naturality_square DerivedCategory.Q DerivedCategory.Q
-      (F.mapHomologicalComplex (.up ℤ)) F.mapDerivedCategory
-      F.mapDerivedCategoryFactors.hom wY _ _ (augmented_tensor_pull a S t f C)
-    simp only [Functor.map_comp, Category.assoc] at hnat
-    simpa only [scalarSixPull, F, Category.assoc] using congrArg
-      (fun k ↦ (scalarSixPull Λ f).map
-        (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫ k) hnat
+  have hleft := normalized_beta_pullback_computes D a S t f (β Y) (hβ Y) C hC
   have hn : (β X).hom.app ((scalarSixPull Λ f).obj (DerivedCategory.Q.obj C)) ≫
       (restriction a X).map ((scalarSixChange a X).map c) =
     (𝟙 (DerivedCategory.Q.obj (complex Λ S X)) ⊗ₘ c) ≫
