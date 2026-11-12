@@ -214,7 +214,7 @@ private theorem horizontal_varying_root_square
       Scheme.tateFiniteTensor X' l (FiniteRing l (ULift.{u} (Padic l)) n) n
         (finiteScalar l (ULift.{u} (Padic l)) n) U'.unop 1
         (restrictRoot l hX n U z) := by
-    exact (constantPushforward_map_heq (FiniteRing l (ULift.{u} (Padic l)) n) hX
+    exact (constantPushforward_map_heq (SpTowerShriek.R l (ULift.{u} (Padic l)) n) hX
       (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx').trans hn
   let z' := (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v
   have hroot : z' = restrictRoot l hX n U z := by
