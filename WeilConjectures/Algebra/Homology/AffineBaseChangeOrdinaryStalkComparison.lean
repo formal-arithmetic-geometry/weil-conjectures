@@ -28,6 +28,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Matching the stalk-model composites unfolds several derived and homology functors.
 /-- Localize the tensor comparison before passing through the derived pullback counit.
