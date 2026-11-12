@@ -356,7 +356,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
       (Adjunction.derivedUnitRetraction K a hK
         ((galoisTower Ω h).complexTrace (Λ) hd K hc)) hadj
   let F₃ := L((f')^*⟦Λ⟧)
-  have hmain : ∀ (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+  let hmain : ∀ (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Λ) X')) ⥤
         Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
           (condensedRingObj (Λ) Z)), _ := by
