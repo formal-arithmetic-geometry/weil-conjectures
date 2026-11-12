@@ -36,7 +36,33 @@ noncomputable local instance modelModuleTensor (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-set_option profiler true in
+private theorem relativeTensorPullback_kFlat_counit
+    {X S : Scheme.{u}} (f : X ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    (L : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
+    (hL : CochainComplex.IsKFlatTensor (R := S.sheaf) L) :
+    ∃ (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
+        SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (hG : ∀ M, G.obj M = Modules.tensorPullbackObj f M)
+      (_ : ∀ {M N} (a : M ⟶ N),
+        G.map a = eqToHom (hG M) ≫ Modules.tensorPullbackMap f a ≫ eqToHom (hG N).symm)
+      (_ : G.Additive),
+      Nonempty ((derivedPullback f).obj (DerivedCategory.Q.obj L) ≅
+        DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj L)) := by
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    G, hG, hGmap, hGadd, ε, _, _, hε⟩ := derivedPullback_spec f
+  have := hGadd
+  have := hε L hL
+  refine ⟨G, hG, hGmap, hGadd, ⟨?_⟩⟩
+  exact (derivedPullback f).mapIso
+      ((DerivedCategory.quotientCompQhIso
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace))).app L).symm ≪≫
+    asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj L)) ≪≫
+    DerivedCategory.Qh.mapIso ((G.mapHomotopyCategoryFactors (.up ℤ)).app L) ≪≫
+    (DerivedCategory.quotientCompQhIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).app _
+
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
@@ -86,7 +112,6 @@ theorem relativeTensorPullback_kFlat_model
               (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i)) := by
   classical
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  let D := SheafOfModules.{u} (moduleRings S.toRingedSpace)
   let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf
   let B := (sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R
@@ -100,19 +125,10 @@ theorem relativeTensorPullback_kFlat_model
     (moduleRings X.toRingedSpace)
   have : PreservesFiniteLimits W := hW.2.1
   have : PreservesFiniteColimits W := hW.2.2.1
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    G, hG, hGmap, hGadd, ε, _, _, hε⟩ :=
-    (derivedPullback_spec f)
+  obtain ⟨G, hG, hGmap, hGadd, ⟨ep⟩⟩ := relativeTensorPullback_kFlat_counit f L hL
   have := hGadd
   let T := G
   let TL := (T.mapHomologicalComplex (.up ℤ)).obj L
-  have := hε L hL
-  let ep : (derivedPullback f).obj (DerivedCategory.Q.obj L) ≅
-      DerivedCategory.Q.obj TL :=
-    (derivedPullback f).mapIso ((DerivedCategory.quotientCompQhIso D).app L).symm ≪≫
-      asIso (ε.app ((HomotopyCategory.quotient D (.up ℤ)).obj L)) ≪≫
-      DerivedCategory.Qh.mapIso ((G.mapHomotopyCategoryFactors (.up ℤ)).app L) ≪≫
-      (DerivedCategory.quotientCompQhIso C).app TL
   obtain ⟨ec⟩ := kFlat_derivedTensor_comparison_natIso X
     ((CategoryTheory.Functor.const (Discrete PUnit.{1})).obj A)
     ((CategoryTheory.Functor.const (Discrete PUnit.{1})).obj TL) (fun _ ↦ hA)

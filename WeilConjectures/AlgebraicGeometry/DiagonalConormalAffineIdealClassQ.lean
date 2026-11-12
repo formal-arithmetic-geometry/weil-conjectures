@@ -22,7 +22,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
-set_option profiler true in
 -- The chart and scalar-action transports elaborate several nested sheaf module instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -155,8 +154,8 @@ theorem diagonalConormal_affine_ideal_class_q (f : X ⟶ S)
       map_smul' := by
         intro a x
         change e (a • x) = a • e x
-        rw [← IsScalarTower.algebraMap_smul
-          (Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1)) a x]
+        refine (congrArg e (IsScalarTower.algebraMap_smul
+          (Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1)) a x).symm).trans ?_
         refine (e.map_smul (algebraMap Γ(X, U.1) _ a) x).trans ?_
         change (((pullback.diagonal f).appLE W U.1 hδ).hom.comp r.toRingHom)
           (algebraMap Γ(X, U.1) _ a) • e x = a • e x
