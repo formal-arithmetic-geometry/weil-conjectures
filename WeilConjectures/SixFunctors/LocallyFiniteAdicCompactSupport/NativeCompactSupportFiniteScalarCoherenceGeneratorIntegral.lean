@@ -69,7 +69,6 @@ private theorem reflect_factored_square {C D : Type*} [Category C] [Category D]
     _ = F.map mi ≫ F.map r := congrArg (fun a ↦ a ≫ F.map r) hi.symm
     _ = F.map (mi ≫ r) := (F.map_comp _ _).symm
 
-set_option profiler true in
 -- The component formulas compare cached finite-stage and native presentations.
 /-- The integral finite-Tor numerator calculation underlying the generator transition.
 Source: Proposition 6.8.14 and Remark 6.8.15, the integral numerator calculation.
@@ -116,6 +115,7 @@ theorem native_compact_support_finite_scalar_coherence_generator_integral
   subst Aobj
   let Ki := (PurCompactSupport.finiteTorIntegralInclusion l
     (Coefficient.{u} l (PadicAlgCl l) i) X).obj K
+  -- Choose the witnesses without eliminating existentials into the large coherence goal.
   have hscalar := finiteTorScalarObject l D hl X i E h K
   let KE := hscalar.choose
   have hKE := hscalar.choose_spec.1
