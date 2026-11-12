@@ -166,7 +166,6 @@ private theorem system_horizontal_map_heq {X Y : Systems.{c, v, r} J B τ}
   exact (heq_of_eq (transition_app_apply J B τ X h U x)).symm.trans
     (hsection.trans (heq_of_eq (transition_app_apply J B τ Y h U y)))
 
-set_option profiler true in
 -- The membership checks of the restriction maps unfold the evaluation functors.
 /-- A system is determined by its evaluations together with its transitions. -/
 theorem system_ext {X Y : Systems.{c, v, r} J B τ}

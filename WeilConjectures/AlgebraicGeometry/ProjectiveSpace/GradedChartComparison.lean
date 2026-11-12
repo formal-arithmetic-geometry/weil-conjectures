@@ -108,6 +108,32 @@ private theorem exists_away_fraction {R M : Type*} [CommRing R] [AddCommGroup M]
     have hs : s = (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := Subtype.ext hm.symm
     exact ⟨y, m, by rw [hs]⟩
 
+private theorem away_chart_map_naturality {R M N P P' Q Q' : Type*} [CommRing R]
+    [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N]
+    (f g : R) (e : M →ₗ[R] N)
+    (A : P → LocalizedModule.Away f M) (A' : P' → LocalizedModule.Away g M)
+    (B : Q → LocalizedModule.Away f N) (B' : Q' → LocalizedModule.Away g N)
+    (φ : P → Q) (φ' : P' → Q')
+    (L : LocalizedModule.Away f M → LocalizedModule.Away f N)
+    (L' : LocalizedModule.Away g M → LocalizedModule.Away g N)
+    (hB' : Function.Injective B')
+    (hφ : ∀ s, B (φ s) = L (A s)) (hφ' : ∀ s, B' (φ' s) = L' (A' s))
+    (hL : ∀ (y : M) (h : Submonoid.powers f), L (mk y h) = mk (e y) h)
+    (hL' : ∀ (y : M) (h : Submonoid.powers g), L' (mk y h) = mk (e y) h)
+    (u : P → P') (v : Q → Q') (a : R) (d : ℕ)
+    (hres : ∀ (m : ℕ) (y : M) (s : P),
+      A s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
+      A' (u s) = mk (a ^ m • y) (⟨g ^ (d * m), ⟨d * m, rfl⟩⟩ : Submonoid.powers g))
+    (hbetaRes : ∀ (m : ℕ) (y : N) (s : Q),
+      B s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
+      B' (v s) = mk (a ^ m • y) (⟨g ^ (d * m), ⟨d * m, rfl⟩⟩ : Submonoid.powers g))
+    (s : P) : φ' (u s) = v (φ s) := by
+  obtain ⟨y, m, hs⟩ := exists_away_fraction f (A s)
+  have ht : B (φ s) = mk (e y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := by
+    rw [hφ, hs, hL]
+  apply hB'
+  rw [hφ', hres m y s hs, hbetaRes m (e y) (φ s) ht, hL', map_smul]
+
 private theorem addEquiv_of_matching_ranges
     {M N P Q : Type*} [AddCommGroup M] [AddCommGroup N] [AddCommGroup P] [AddCommGroup Q]
     (A : M →+ P) (B : N →+ Q) (hA : Function.Injective A) (hB : Function.Injective B)
@@ -302,20 +328,15 @@ theorem graded_chart_comparison (k : Type u) [Field k]
       ((standardOpenProperties.{u, u, u} 𝒜).2.2.1 f.val.1 g.val.1 f.val.2 g.val.2
         f.property.1 g.property.1 f.property.2 g.property.2).1.mp inc
     obtain ⟨e', c, a, he', ha, hrel⟩ := hrelation
-    obtain ⟨y, m, hs⟩ := exists_away_fraction f.val.1 (A f s)
-    have ht : B f (lin f s) =
-        mk (e y) (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) := by
-      change B f (phi f s) = _
-      rw [hphi, hs, hL]
-    apply (hbeta g.val.1 g.val.2 g.property.1 g.property.2).1
-    change B g (phi g (F.val.map (homOfLE inc).op s)) =
-      B g (G.val.map (homOfLE inc).op (lin f s))
-    rw [hphi]
-    rw [hres f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
-      f.property.2 g.property.2 inc e' c a he' ha hrel m y s hs]
-    rw [hbetaRes f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
-      f.property.2 g.property.2 inc e' c a he' ha hrel m (e y) (lin f s) ht]
-    rw [hL, map_smul]
+    exact away_chart_map_naturality f.val.1 g.val.1 e.toLinearMap
+      (A f) (A g) (B f) (B g) (lin f) (lin g) (L f) (L g)
+      (hbeta g.val.1 g.val.2 g.property.1 g.property.2).1
+      (hphi f) (hphi g) (hL f) (hL g)
+      (F.val.map (homOfLE inc).op) (G.val.map (homOfLE inc).op) a e'
+      (hres f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
+        f.property.2 g.property.2 inc e' c a he' ha hrel)
+      (hbetaRes f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
+        f.property.2 g.property.2 inc e' c a he' ha hrel) s
   let basis := Set.range D
   have hBasis : Opens.IsBasis basis := by
     convert (standardOpenProperties.{u, u, u} 𝒜).1 using 1
