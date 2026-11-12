@@ -1125,7 +1125,6 @@ private theorem podReindexingHomModel_inv (W : Scheme.{u}) (s : Option ℕ)
   rw [CategoryTheory.ordinaryHomComparison_eq.{u+1,u,u+1,u+2}]
   rfl
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual Hom-complex and derived localization comparisons, with their
 projection, naturality, quasi-isomorphism, and resolution-model laws.
@@ -1297,7 +1296,6 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
     let κ := @podReindexingHomModel l _ E _ _ _ Y s K I hI
     exact (FD.mapIso κ).inv_comp_eq.mp hd
 
-set_option trace.profiler true in
 -- The theorem combines the two strictly smaller comparison packages above.
 /-- Tensor and Hom comparisons, the actual unbounded product Hom-complex comparison,
 and its natural derived descent with the specified K-injective resolution model.
