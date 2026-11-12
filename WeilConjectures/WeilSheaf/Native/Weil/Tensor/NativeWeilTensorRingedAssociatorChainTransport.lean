@@ -188,7 +188,8 @@ theorem nativeChainForgetComponent_transport
     · intro P Q
       exact native_weil_tensor_ringed_binary_chain_square D d o r P Q
     · exact r.associativity
-    · simpa only [G] using o.associativity
+    · intro X Y Z
+      exact o.associativity X Y Z
     · exact ha
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
