@@ -399,6 +399,7 @@ theorem native_forget_normalized_binary_models
     have hψ := hn.choose_spec.1
     have hloc := hn.choose_spec.2
     have hψj : ψ = j := normalized_binary_uncurry_eq a P T I j ψ hψ
+    change hn.choose = j at hψj
     rw [hψj] at hψ hloc
     have heval := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
@@ -415,6 +416,7 @@ theorem native_forget_normalized_binary_models
     have hloc' := ho.choose_spec.2
     let v := chain P T
     have hchain' : V.map j = v.hom ≫ ψ' := by
+      dsimp only [ψ']
       apply HomologicalComplex.hom_ext
       intro n
       apply HomologicalComplex.mapBifunctor.hom_ext_of_map U
@@ -436,7 +438,7 @@ theorem native_forget_normalized_binary_models
       change (p * q).negOnePow • _ = (q * p).negOnePow • _
       rw [mul_comm q p]
       congr 1
-      dsimp only [φ', HomologicalComplex.comp_f]
+      dsimp only [φ', χ, HomologicalComplex.comp_f]
       rw [Category.assoc, hχ p q n hqp]
       rfl
     let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model T I hI).inv
@@ -458,7 +460,6 @@ theorem native_forget_normalized_binary_models
       (DerivedCategory.Q.obj I) f
     simp only [Iso.app_hom, Iso.app_inv] at hunc
     rw [hf] at hunc
-    let ρ := nativeOrdinaryClosedTensorIso C.ordinaryClosed S
     have hmodel' : (model (V.obj T) (V.obj P) hUT).hom ≫
         DerivedCategory.Q.map (κ (V.obj T) (V.obj P)).hom =
         Functor.LaxMonoidal.μ DerivedCategory.Q (V.obj P) (V.obj T) := by
@@ -481,7 +482,8 @@ theorem native_forget_normalized_binary_models
     have hh := congrArg
       (fun z ↦ z ≫ DerivedCategory.Q.map (κ (V.obj T) (V.obj P)).hom) hmain
     simp only [Category.assoc, hmodel'] at hh
-    simpa only [C, F, δ, N, S, ρ, V, U, c, v, Iso.trans_hom, Functor.map_comp,
+    simpa only [C, F, δ, N, S, V, U, c, v, Iso.trans_hom, Functor.map_comp,
+      Functor.mapIso_hom,
       WeilConjectures.CoefficientClosedStructure.tensor, Category.assoc,
       CategoryTheory.Functor.comp_obj,
       NativeOrdinaryTensorIdentification.tensorIso, NatTrans.comp_app,
