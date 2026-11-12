@@ -62,22 +62,22 @@ theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
   intro M
   exact Mod.extendRestrictAdjunction_unit_app_hom (inclusion l E T) M
 
-private theorem scalarData_extensionAdditive : (ordinaryExtension l E T).Additive :=
+theorem scalarData_extensionAdditive : (ordinaryExtension l E T).Additive :=
   (scalar_adjunction_data l E T).1
 
-private theorem scalarData_restrictionAdditive : (ordinaryRestriction l E T).Additive :=
+theorem scalarData_restrictionAdditive : (ordinaryRestriction l E T).Additive :=
   (scalar_adjunction_data l E T).2.1
 
-private theorem scalarData_extensionLimits : PreservesFiniteLimits (ordinaryExtension l E T) :=
+theorem scalarData_extensionLimits : PreservesFiniteLimits (ordinaryExtension l E T) :=
   (scalar_adjunction_data l E T).2.2.1
 
-private theorem scalarData_extensionColimits : PreservesFiniteColimits (ordinaryExtension l E T) :=
+theorem scalarData_extensionColimits : PreservesFiniteColimits (ordinaryExtension l E T) :=
   (scalar_adjunction_data l E T).2.2.2.1
 
-private theorem scalarData_restrictionLimits : PreservesFiniteLimits (ordinaryRestriction l E T) :=
+theorem scalarData_restrictionLimits : PreservesFiniteLimits (ordinaryRestriction l E T) :=
   (scalar_adjunction_data l E T).2.2.2.2.1
 
-private theorem scalarData_restrictionColimits :
+theorem scalarData_restrictionColimits :
     PreservesFiniteColimits (ordinaryRestriction l E T) :=
   (scalar_adjunction_data l E T).2.2.2.2.2.1
 
@@ -85,8 +85,6 @@ attribute [local instance] scalarData_extensionAdditive scalarData_restrictionAd
   scalarData_extensionLimits scalarData_extensionColimits
   scalarData_restrictionLimits scalarData_restrictionColimits
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
 termwise on every complex, and their adjunction unit is the localized termwise unit.
@@ -123,8 +121,6 @@ Proof: exactness supplies both total-derived comparisons with the termwise
 localization. The latter has its canonical shifts and preserves triangles.
 Its comparison components are isomorphisms on every complex. The unit formula
 is the component formula for the localization of the ordinary adjunction. -/
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 theorem derived_scalar_data : DerivedScalarData l E T := by
   refine ⟨⟨(ordinaryExtension l E T).leftDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨(ordinaryRestriction l E T).rightDerivedFunctorIsoMapDerivedCategory⟩,
