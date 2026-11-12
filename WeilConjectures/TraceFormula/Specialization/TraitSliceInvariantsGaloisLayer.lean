@@ -169,12 +169,18 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
   refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC).elim fun E hE ↦ ?_
   refine hE.elim fun K₀ hK₀ ↦ ?_
   refine hK₀.elim fun e htors ↦ ?_
-  obtain ⟨L₁, htriv, hSA⟩ := (baseChangeGaloisModel hM b hb v hv)
+  refine ((baseChangeGaloisModel hM b hb v hv)
     |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
-      (baseChangeGaloisResidue hM b hb v hv) _ ℓ
+      (baseChangeGaloisResidue hM b hb v hv)
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)) ℓ
       (fun M' _ ↦ IntermediateField.not_dvd_finrank_of_forall_finiteGalois
-        (not_dvd_finrank_traitTensorCompositum (K := K) (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
-      A hC E K₀ e htors
+        (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
+        (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
+        (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
+          (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
+      A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
+  have htriv := hL₁.1
+  have hSA := hL₁.2
   have htriv' (σ : GenericAut k' K)
       (hσ : GenericAut.galoisEquiv σ ∈ L₁.toIntermediateField.fixingSubgroup) :
       (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicAlgClRingObj ℓ)
