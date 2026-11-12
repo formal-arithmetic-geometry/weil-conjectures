@@ -84,7 +84,7 @@ lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
         (adicGlobalSections l Z).map X.str.hom := by
   have h := adicLowerStarCompGlobalSectionsIso_inv_app_comm l g hW hZ g comm X.carrier
   have hnat := (adicLowerStarCompGlobalSectionsIso l g).hom.naturality X.str.hom
-  simp only [Functor.comp_map] at hnat
+  rw [Functor.comp_map] at hnat
   rw [IsoAlgebra.frobeniusNatTrans_app, Functor.map_comp]
   simp only [Category.assoc]
   rw [hnat, reassoc_of% h, Iso.inv_hom_id_app_assoc]
