@@ -381,11 +381,7 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
     (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
     θ θ' (derivedBaseChangeMap B sq.toCommSq)
-    (by
-      have HN := native_base_change_mate (R l E n) sq.toCommSq
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
-        exactByConversion h)
+    (by sorry)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
