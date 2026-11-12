@@ -377,6 +377,10 @@ theorem canonical_integral_scalar_square
   letI := finiteTorIntegralShift_compatibility_cached l Ω E T
   letI := finiteTorIntegralShift_compatibility_cached l Ω L T
   have restrictionData := restriction_iso IX IY JX JY IE IL S.functor SI O B
+    (C₁ := C.{u, v} l Ω T (.integral E))
+    (C₂ := sfIntegralConstructibleCategory l E.carrier T)
+    (C₃ := C.{u, v} l Ω T (.integral L))
+    (C₄ := sfIntegralConstructibleCategory l L.carrier T)
     (sC1 := sE) (sC2 := siE) (sC3 := sL) (sC4 := siL)
     (sIX := ixShift) (sIY := iyShift) (sJX := jxShift) (sJY := jyShift)
     (sIE := ieShift) (sIL := ilShift) (sS := sShift) (sSI := siShift) (sB := bShift)
