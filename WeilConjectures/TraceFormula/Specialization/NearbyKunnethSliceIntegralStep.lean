@@ -78,7 +78,7 @@ private theorem derivedCompleteIntegers_nearbyCycles_baseChangeSpecial_obj
       (condensedRingObj 𝒪 X))} (hA₀ : boundedConstructible (condensedRingObj 𝒪 X) A₀) :
     derivedCompleteIntegers ℓ E.1 (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).left
       (L((baseChangeSpecialMap hM b hb (traitSlice (traitSliceCoord k'))
-        (traitSlice_over (traitSliceCoord k')))^*⟦𝒪⟧).obj ((M.nearbyCycles 𝒪).obj A₀) := by
+        (traitSlice_over (traitSliceCoord k')))^*⟦𝒪⟧).obj ((M.nearbyCycles 𝒪).obj A₀)) := by
   have := hM.locallyOfFiniteType
   have := hM.quasiCompact
   have := hM.isSeparated
