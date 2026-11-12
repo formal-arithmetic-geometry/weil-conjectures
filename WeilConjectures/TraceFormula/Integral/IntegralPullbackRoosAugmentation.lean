@@ -80,8 +80,6 @@ private theorem restrictedSection_naturality
     rfl
   exact cast_map e f x
 
-set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- The sectionwise chase through the tower unit and q needs more than the default.
 /-- The defining Roos lift of the inverse-image comparison is the limit lift of the
 inverse image of a strict quotient presentation, followed by the whole-tower tensor
