@@ -122,14 +122,25 @@ theorem picardDirectImageSectionMap_restriction
       rw [Iso.hom_inv_id_assoc, adj.homEquiv_unit]
       exact adj.unit_naturality n
     rw [hh] at hev
-    rw [← picardDirectImageUnitMorphism_evaluation f L W k t ξ,
-      ← picardDirectImageUnitMorphism_evaluation f L W k t'
-        (picardDerivedModelRestriction _ i t t' h ξ)]
-    change (c.app L).inv.app ⊤
-      (((Modules.tensorPullback j).obj N).presheaf.map _
-        ((n ≫ adj.unit.app N).val.app (Opposite.op ⊤) (1 : Γ(pullback f (t ≫ k), ⊤)))) =
-      n'.val.app (Opposite.op ⊤) (1 : Γ(pullback f (t' ≫ k), ⊤))
-    erw [hev, hn']
-    rfl
+    calc
+      _ = (c.app L).inv.app ⊤
+          (((Modules.tensorPullback j).obj N).presheaf.map (homOfLE j.preimage_top.ge).op
+            ((n ≫ adj.unit.app N).val.app (Opposite.op ⊤)
+              (1 : Γ(pullback f (t ≫ k), ⊤)))) :=
+        congrArg (fun s ↦ (c.app L).inv.app ⊤
+          (((Modules.tensorPullback j).obj N).presheaf.map (homOfLE j.preimage_top.ge).op
+            ((adj.unit.app N).val.app (Opposite.op ⊤) s)))
+          (picardDirectImageUnitMorphism_evaluation f L W k t ξ).symm
+      _ = (c.app L).inv.app ⊤
+          ((e.inv ≫ (Modules.tensorPullback j).map n).val.app (Opposite.op ⊤)
+            (1 : Γ(pullback f (t' ≫ k), ⊤))) :=
+        congrArg ((c.app L).inv.app ⊤) hev
+      _ = n'.val.app (Opposite.op ⊤) (1 : Γ(pullback f (t' ≫ k), ⊤)) :=
+        congrArg (fun a : SheafOfModules.unit
+            (moduleRings (pullback f (t' ≫ k)).toRingedSpace) ⟶
+            (Modules.tensorPullback (pullback.fst f (t' ≫ k))).obj L ↦
+          a.val.app (Opposite.op ⊤) (1 : Γ(pullback f (t' ≫ k), ⊤))) hn'.symm
+      _ = _ := picardDirectImageUnitMorphism_evaluation f L W k t'
+        (picardDerivedModelRestriction _ i t t' h ξ)
 
 end AlgebraicGeometry.Scheme
