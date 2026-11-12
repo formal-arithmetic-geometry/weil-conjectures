@@ -108,7 +108,6 @@ private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
           (Scheme.Modules.tensorPullback (pullback.snd k U.ι)).map
             ((openTensorRestrictionIso U.ι).hom.app M)) :
     square_unit_cancel_statement k U M θ := by
-  dsimp only
   let p := pullback.fst k U.ι
   let q := pullback.snd k U.ι
   let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
@@ -193,6 +192,8 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     Scheme.Modules.pushforwardCongr pullback.condition.symm
   let θp := openTensorRestrictionIso p
   let θj := openTensorRestrictionIso U.ι
+  let βp := Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl
+  let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm
   rw [← open_unit p, ← open_unit U.ι]
   change ak.unit.app M ≫ (H k).map
       (ap.unit.app ((T k).obj M) ≫ (H p).map (θp.hom.app ((T k).obj M))) ≫
@@ -202,11 +203,10 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
       cQ.hom.app _ ≫ cP.inv.app _
   have hθ : θp.hom.app ((T k).obj M) ≫
       (openTensorRestrictionSquareIso k U).hom.app M =
-    (Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl).inv.app M ≫
-      (Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k)
-        pullback.condition.symm).hom.app M ≫
+    βp.inv.app M ≫ βq.hom.app M ≫
       (T q).map (θj.hom.app M) := by
-    simp only [openTensorRestrictionSquareIso, Iso.trans_hom, NatTrans.comp_app,
+    simp only [openTensorRestrictionSquareIso, θp, θj, βp, βq, p, q, T,
+      Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
       Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
       Iso.hom_inv_id_app_assoc]
