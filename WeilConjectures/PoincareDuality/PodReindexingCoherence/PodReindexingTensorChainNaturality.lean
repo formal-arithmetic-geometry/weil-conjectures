@@ -44,6 +44,7 @@ attribute [local irreducible] podReindexingCoefficient podReindexingHomModel
   CoefficientClosedStructure.tensor
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Sectionwise reindexing crosses coefficient transports in the generator rewrites.
 /-- The pure-normalized tensor-chain comparison is natural in both inputs.
 Source: blueprint dual-Tate compatibility, Steps 1 and 2.
