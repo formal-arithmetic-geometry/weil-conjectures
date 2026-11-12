@@ -23,8 +23,8 @@ construction of derived direct image in the blueprint.
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option Elab.async false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
