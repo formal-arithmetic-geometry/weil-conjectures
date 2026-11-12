@@ -69,8 +69,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.pushforwardComp Scheme.Modules.pushforwardCongr
   openTensorRestrictionIso openTensorRestrictionSquareIso
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- Elaborate the two composition mates with their specified adjunction units.
 private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) :
