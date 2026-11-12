@@ -172,7 +172,15 @@ theorem nativeChainForgetComponent_transport
         (nativeChainForgetC D (nativeTensorComplex T P Q) N).hom ≫
           ((nativeChainForgetC D P Q).hom ▷ U.obj N) ≫
             (α_ (U.obj P) (U.obj Q) (U.obj N)).hom := by
-    exact tensor_square_pasting E U F G r.tensor o.tensor
+    exact tensor_square_pasting
+      (C := CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+      (B := CochainComplex
+        (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R) ℤ)
+      (A := CochainComplex
+        (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.K D.b.Q) ℤ)
+      (O := CochainComplex
+        (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
+      E U F G r.tensor o.tensor
       (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
       (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
       (native_weil_tensor_ringed_binary_chain_square D d o r)
