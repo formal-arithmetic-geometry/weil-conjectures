@@ -152,7 +152,6 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
   ConstantCompletion.kernelIdeal RingedSiteIdeal.extension
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Transport compares the standard local derived instances and two complete subcategories.
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
