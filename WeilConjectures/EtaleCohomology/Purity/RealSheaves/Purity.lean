@@ -768,18 +768,13 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
     have hγ'eq : γ' = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
         W.frobeniusLift := by
       have hτlisse : W.IsLisse l τ := hRlisse.of_equiv eτ.symm
-      calc
-        γ' = frobeniusWeight ι (Nat.card K) (LinearMap.det (τ W.frobeniusLift)) /
-            Module.finrank (PadicAlgCl l) V' :=
-          HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
-        _ = frobeniusWeight ι (Nat.card K)
-              (LinearMap.det ((M₁.subquotient N₁) W.frobeniusLift)) /
-            Module.finrank (PadicAlgCl l)
-              ((M₁.subquotient N₁).toSubmodule ⧸ N₁.toSubmodule.comap
-                (M₁.subquotient N₁).toSubmodule.subtype) := by
-          rw [eτ.det_apply, eτ.finrank_eq]
-        _ = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
-            W.frobeniusLift := (detWeight_weightCharacter ι _ _ _).symm
+      have heq := HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
+      have heq' : γ' = frobeniusWeight ι (Nat.card K)
+          (LinearMap.det ((M₁.subquotient N₁) W.frobeniusLift)) /
+          Module.finrank (PadicAlgCl l)
+            (M₁.toSubmodule ⧸ N₁.toSubmodule.comap M₁.toSubmodule.subtype) := by
+        simpa only [eτ.det_apply, eτ.finrank_eq] using heq
+      exact heq'.trans (detWeight_weightCharacter ι _ _ _).symm
     have hWM : Representation.weightMultiset (weightCharacter ι (Nat.card K)) W.frobeniusLift
         (Representation.directSumSummand Q) = ∑ i, Multiset.replicate (d i) (w i) := by
       simp only [Representation.weightMultiset]
