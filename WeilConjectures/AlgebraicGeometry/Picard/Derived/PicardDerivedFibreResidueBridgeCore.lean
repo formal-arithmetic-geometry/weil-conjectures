@@ -35,6 +35,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/-- Compose the two naturality squares before specializing their cohomology groups. -/
 private theorem residue_bridge_of_naturality
     {I : Type*} {Φ : I → Type*} (P : ∀ i, Φ i → Prop)
     {M A B : Type*} {N C D : I → Type*}
@@ -53,7 +54,6 @@ private theorem residue_bridge_of_naturality
   refine ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, he i, fun z ↦ ?_⟩⟩
   exact (congrArg (ei i) ((hφ i).2 z)).trans (he i _)
 
-set_option profiler true in
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives, and the canonical affine residue comparisons followed by geometric fibre

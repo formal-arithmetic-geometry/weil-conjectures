@@ -90,6 +90,7 @@ private theorem residue_fibre_isomorphisms
   choose ei heif heis using hFi
   exact ⟨r, hr, e, ei, hef, hes, heif, heis⟩
 
+/-- Transport a family of squares along its chosen comparison isomorphisms. -/
 private theorem transport_square_family_of_exists
     {D : Type*} [Category* D] {R : Type*} [Ring R] (H : D ⥤ ModuleCat R)
     {I : Type*} {A A' : D} {B B' : I → D}
@@ -108,8 +109,6 @@ private theorem transport_square_family_of_exists
   exact transport_square_apply H (u i) a (b i) (t j i) (h i)
     (AddEquiv.refl _) (AddEquiv.refl _) (H.map (u i)) (fun _ ↦ rfl)
     e (ei j i) (g i) (hg j i)
-
-set_option profiler true in
 
 /-- Degree-one derived fibre cohomology of the coefficient direct images is identified with
 structure-sheaf cohomology of the fibres, compatibly with the coefficient arrows.

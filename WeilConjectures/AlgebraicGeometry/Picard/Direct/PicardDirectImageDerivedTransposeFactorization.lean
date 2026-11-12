@@ -50,6 +50,7 @@ private theorem coefficientMate_evaluation
   rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_counit,
     schemeDerivedMate_evaluation, Category.assoc]
 
+/-- Evaluate the coefficient mate before specializing its square to a fibre product. -/
 private theorem coefficientMate_tensor_evaluation
     {A B X W V : Scheme.{v}} (p : A ⟶ W) (p' : B ⟶ V)
     (r : V ⟶ W) (a : B ⟶ A) (ha : a ≫ p = p' ≫ r)
@@ -75,7 +76,6 @@ private theorem coefficientMate_tensor_evaluation
     Modules.tensorCoefficientComparison_eq]
   exact coefficientMate_evaluation p p' r a ha K _ _
 
-set_option profiler true in
 -- Keep the explicitly constructed coefficient comparison folded.
 /-- The normalized transpose factors through the coefficient transpose.
 Source: Stacks Project, Tag 08HY.
