@@ -273,6 +273,9 @@ private theorem perfectHomTensorComplexComp_hom_app_f {X Y Z : Scheme.{u}}
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) (n : ℤ) :
     ((perfectHomTensorComplexComp f g).hom.app K).f n =
       (perfectHomTensorComp f g).hom.app (K.X n) := by
+  let := perfectHomTensorAdditive f
+  let := perfectHomTensorAdditive g
+  let := perfectHomTensorAdditive (f ≫ g)
   rw [perfectHomTensorComplexComp]
   exact Functor.mapHomologicalComplexCompIso_hom_app_f _ _ _ _
 
@@ -300,6 +303,13 @@ private theorem affineCoordinateComplexComparison_comp_hom
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     affineCoordinateComplexComparison_hom_f, perfectHomTensorComplexComp_hom_app_f,
     affineCoordinateComplex_map_f, NatIso.mapHomologicalComplex_hom_app_f]
+  change (Scheme.Modules.tensorPullback q).map
+      ((affineCoordinateTensorComparison a b φ p hp).hom.app (M.X n)) ≫
+      (affineCoordinateTensorComparison b c ψ q hq).hom.app
+        ((ModuleCat.extendScalars φ).obj (M.X n)) =
+    (perfectHomTensorComp q p).hom.app ((affineCoordinateModules a).obj (M.X n)) ≫
+      (affineCoordinateTensorComparison a c (ψ.comp φ) (q ≫ p) hs).hom.app (M.X n) ≫
+      (affineCoordinateModules c).map ((ModuleCat.extendScalarsComp φ ψ).hom.app (M.X n))
   simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] using congrArg Iso.hom
     (affineCoordinateTensorComparison_comp a b c φ ψ p q hp hq hs (M.X n))
 
