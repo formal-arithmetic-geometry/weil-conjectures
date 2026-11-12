@@ -277,7 +277,7 @@ private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
   let C := (CochainComplex.singleFunctor (PointModules Λ) 0).obj S.X₃
   let s := HomologicalComplex.singleObjXSelf (.up ℤ) 0 S.X₃
   have h := point_ordinary_coefficient a f S.X₃ (s.hom ≫ t.hom)
-  dsimp only [targetZeroIso, target, C]
+  dsimp only [targetZeroIso, target, C, s]
   rw [pointComplexComp_hom_f]
   simpa only [mapIso_composite_hom, Functor.map_comp, Category.assoc] using h
 
