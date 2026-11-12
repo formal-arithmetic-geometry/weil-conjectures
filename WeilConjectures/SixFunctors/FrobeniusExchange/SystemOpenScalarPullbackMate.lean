@@ -75,6 +75,7 @@ theorem inverseMate_isIso_of_left_adjoints
     · infer_instance
     · exact (Functor.isoWhiskerRight (a₁.leftAdjointUniq b₁).symm H).isIso_hom
 
+/-- Cancel the outer factors of an equality between composites of isomorphisms. -/
 private theorem inverse_square_factors
     {C : Type*} [Category C] {A B D E F G : C}
     (q : A ≅ B) (i : B ≅ D) (r : D ≅ E) (g : A ≅ F) (s : F ≅ G) (t : G ≅ E)
@@ -164,6 +165,7 @@ private theorem openRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
 
 end OpenRestriction
 
+/-- The sectionwise argument with the sequence direct-image functors fixed explicitly. -/
 private theorem sequenceOpenRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] :
     IsIso ((mateEquiv
@@ -190,7 +192,6 @@ private theorem sequenceOpenRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ 
     exact (key x).symm.trans (hxy.trans (key y))
   exact NatIso.isIso_of_isIso_app _
 
--- elaborating the mate of the restriction adjunction is slow
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
@@ -288,7 +289,6 @@ private theorem sequenceDerived_kflat_ext (W : Scheme.{u}) {D : Type*} [Category
   apply (cancel_epi (F.map (DerivedCategory.Q.map r))).mp
   rw [α.naturality, β.naturality, h P hP]
 
--- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of the
 restriction/pullback comparison, for any scalar models with normalized adjunctions. -/
 private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
