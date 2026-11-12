@@ -94,7 +94,6 @@ private theorem composite_isRightDerived_of_acyclic
   dsimp [Functor.rightDerivedFunctorCompUnit]
   infer_instance
 
-set_option trace.profiler true in
 /-- Transport a composite derived unit through chosen identifications of its two targets. -/
 private theorem derivedComparison_of_acyclic
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
@@ -148,7 +147,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option trace.profiler true in
 /-- Sections of pushforward retain their affine scalar action before and after deriving.
 There are no internal-Hom, perfectness or quasi-coherence inputs in this statement.
 Source: Stacks, Tags 0D5T, 08D5 (proof of (2)), and 0AA7
