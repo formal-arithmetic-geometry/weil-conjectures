@@ -164,12 +164,8 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
       ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
     ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).counit.app (𝟙_ _)) hx'
-  unfold exceptionalKunnethMap exceptionalKunnethAdjoint upperShriekUnitTensorMap
-  refine (congrArg
-    ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv _ _)
-    key).trans ?_
-  exact (boundedConstructibleUpperShriekAdjunction ℓ
-    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_left _ _
+  rw [exceptionalKunnethMap, exceptionalKunnethAdjoint, key,
+    Adjunction.homEquiv_naturality_left]
 
 /-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
 `Y` be smooth over `k`. The exceptional Künneth map
