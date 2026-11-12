@@ -126,6 +126,7 @@ private noncomputable abbrev mixedSectionsSheafAbelian (T : TopCat.{u})
 attribute [local instance 2000] mixedSectionsSheafAbelian
 
 -- Keep the composition identification available without unfolding both pushforward functors.
+set_option profiler true in
 private theorem mixedSections_moduleDirectImage_comp
     {X Y Z : RingedSpace.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     RingedSpace.moduleDirectImage (f ≫ g) =
@@ -133,9 +134,9 @@ private theorem mixedSections_moduleDirectImage_comp
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 -- Expose the chosen composition-unit equation with its two source objects kept separate.
+set_option profiler true in
 private theorem mixedSections_comp_unit_heq
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
@@ -156,6 +157,8 @@ private theorem mixedSections_comp_unit_heq
       (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
+
+variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : HomotopyCategory
@@ -188,6 +191,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
+set_option profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
