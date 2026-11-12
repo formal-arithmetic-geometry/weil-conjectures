@@ -498,6 +498,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
 set_option maxHeartbeats 1700000 in
+set_option profiler true in
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
 This is the line-only substep of the rational P1 closure naturality proof; it has
