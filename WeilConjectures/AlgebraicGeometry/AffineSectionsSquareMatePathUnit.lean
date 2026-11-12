@@ -612,7 +612,12 @@ theorem affineSections_square_mate_path_unit
   have h := sections_unit_pasting P₀ Q₀ F₀ G₀ A₀ B₀ S₀ T₀ ρ₀
     aA aB aS aT t b hb z d hd v r hr e δ hδ J
   dsimp (config := { zetaDelta := false }) only at h
-  rw [hα] at h
-  exact h
+  refine h.trans ?_
+  exact congrArg (fun τ : P₀ ⋙ S₀ ⟶ T₀ ⋙ ρ₀ ↦
+    DerivedCategory.Qh.map ((τ.mapHomotopyCategory (.up ℤ)).app J) ≫
+      (T₀ ⋙ ρ₀).rightDerivedFunctorUnit.app J ≫
+      (Functor.rightDerivedFunctorCompMapDerivedCategoryIso T₀ ρ₀ ≪≫
+        Functor.isoWhiskerRight aT ρ₀.mapDerivedCategory).hom.app
+          (DerivedCategory.Qh.obj J)) hα
 
 end AlgebraicGeometry
