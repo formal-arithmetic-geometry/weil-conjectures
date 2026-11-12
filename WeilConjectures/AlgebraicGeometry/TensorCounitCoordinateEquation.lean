@@ -177,6 +177,22 @@ private theorem modelMap_natural
   let := pullbackDescentQLax X
   exact Functor.LaxMonoidal.μ_natural DerivedCategory.Q r s
 
+private theorem tensorCounit_counit_natural
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X T : Scheme.{u}} (k : T ⟶ X)
+    (A B : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (a : A ⟶ B) :
+    (derivedPullback k).map (DerivedCategory.Q.map a) ≫
+        (SingleComplexBaseChange.counit k).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj B) =
+      (SingleComplexBaseChange.counit k).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj A) ≫
+        DerivedCategory.Q.map
+          (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).map a) :=
+  (SingleComplexBaseChange.counit k).naturality
+    ((HomotopyCategory.quotient _ (.up ℤ)).map a)
+
 private theorem tensorCounit_resolution_transfer
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [MonoidalCategory C] [MonoidalCategory D] {L : C ⥤ D}
@@ -329,9 +345,8 @@ theorem tensorCounit_coordinateEquation
             ((HomotopyCategory.quotient _ (.up ℤ)).obj B) =
         (SingleComplexBaseChange.counit k).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj A) ≫
-          DerivedCategory.Q.map (F.map a) := by
-    exact (SingleComplexBaseChange.counit k).naturality
-      ((HomotopyCategory.quotient _ (.up ℤ)).map a)
+          DerivedCategory.Q.map (F.map a) :=
+    tensorCounit_counit_natural k A B a
   simp only [cast_eq] at heq ⊢
   exact tensorCounit_resolution_transfer
     (modelMap_natural X P0 G0 P G r s)
