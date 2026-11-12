@@ -155,10 +155,54 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
       rw [← mappingCone.map_comp, ← mappingCone.map_comp]
       simp only [Category.id_comp, Category.comp_id, hc]
 
+/-- Turn a strict cone comparison into a comparison of short exact cylinder rows. -/
+private lemma cyl_presentation [HasDerivedCategory.{w} C]
+    (a b c : Arrow (DerivedCategory C))
+    (h : ∃ (A B A' B' : CochainComplex C ℤ)
+      (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B'),
+      ∃ (hc : t ≫ β = α ≫ t')
+        (e₁ : DerivedCategory.Q.obj A ≅ a.left)
+        (e₂ : DerivedCategory.Q.obj B ≅ b.left)
+        (e₃ : DerivedCategory.Q.obj (mappingCone t) ≅ c.left)
+        (e₁' : DerivedCategory.Q.obj A' ≅ a.right)
+        (e₂' : DerivedCategory.Q.obj B' ≅ b.right)
+        (e₃' : DerivedCategory.Q.obj (mappingCone t') ≅ c.right),
+        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
+        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ b.hom ∧
+        DerivedCategory.Q.map (mappingCone.map t t' α β hc) ≫ e₃'.hom =
+          e₃.hom ≫ c.hom) :
+    ∃ (P P' : ShortComplex (CochainComplex C ℤ)) (m : P ⟶ P')
+      (e₁ : DerivedCategory.Q.obj P.X₁ ≅ a.left)
+      (e₂ : DerivedCategory.Q.obj P.X₂ ≅ b.left)
+      (e₃ : DerivedCategory.Q.obj P.X₃ ≅ c.left)
+      (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ a.right)
+      (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ b.right)
+      (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ c.right),
+      P.ShortExact ∧ P'.ShortExact ∧
+      DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
+      DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom = e₂.hom ≫ b.hom ∧
+      DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ c.hom := by
+  classical
+  obtain ⟨A, B, A', B', t, t', α, β, hc, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ := h
+  refine ⟨cylRow t, cylRow t', cylRowMap t t' α β hc,
+    (Iso.refl _) ≪≫ e₁, cylIso t ≪≫ e₂, (Iso.refl _) ≪≫ e₃,
+    (Iso.refl _) ≪≫ e₁', cylIso t' ≪≫ e₂', (Iso.refl _) ≪≫ e₃',
+    cyl_exact t, cyl_exact t', ?_, ?_, ?_⟩
+  · simpa only [cylRowMap, cylRow, Iso.trans_hom, Iso.refl_hom,
+      Category.id_comp] using hα
+  · have h : DerivedCategory.Q.map (cylMap t t' α β) ≫ (cylIso t').hom =
+        (cylIso t).hom ≫ DerivedCategory.Q.map β := by
+      dsimp only [cylIso]
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      simp [cylMap]
+    simpa only [cylRowMap, Iso.trans_hom, Category.assoc, hβ] using
+      congrArg (fun k ↦ k ≫ e₂'.hom) h
+  · simpa only [cylRowMap, cylRow, Iso.trans_hom, Iso.refl_hom,
+      Category.id_comp] using hγ
+
 end
 
-set_option maxHeartbeats 800000 in
--- Elaborating the six literal derived vertices requires additional heartbeats.
 /-- The three canonical comparisons are obtained from a morphism of short exact
 complexes, after identifying their localized vertices. No comparison is asserted
 invertible. The coefficients need not be quasi-coherent or relatively flat, and
@@ -228,27 +272,9 @@ theorem standardSingle_union_ses_presentation
       DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
       DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧
       DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ aUV.hom := by
-  classical
   let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  dsimp only
-  obtain ⟨C, D, C', D', t, t', α, β, hc, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ :=
-    standardSingle_union_ses_chain_data p g U V N
-  refine ⟨cylRow t, cylRow t', cylRowMap t t' α β hc,
-    (Iso.refl _) ≪≫ e₁, cylIso t ≪≫ e₂, (Iso.refl _) ≪≫ e₃,
-    (Iso.refl _) ≪≫ e₁', cylIso t' ≪≫ e₂', (Iso.refl _) ≪≫ e₃',
-    cyl_exact t, cyl_exact t', ?_, ?_, ?_⟩
-  · simpa only [cylRowMap, cylRow, Iso.trans_hom, Iso.refl_hom,
-      Category.id_comp] using hα
-  · have h : DerivedCategory.Q.map (cylMap t t' α β) ≫ (cylIso t').hom =
-        (cylIso t).hom ≫ DerivedCategory.Q.map β := by
-      dsimp only [cylIso]
-      rw [← Functor.map_comp, ← Functor.map_comp]
-      congr 1
-      simp [cylMap]
-    simpa only [cylRowMap, Iso.trans_hom, Category.assoc, hβ] using
-      congrArg (fun k ↦ k ≫ e₂'.hom) h
-  · simpa only [cylRowMap, cylRow, Iso.trans_hom, Iso.refl_hom,
-      Category.id_comp] using hγ
+  exact cyl_presentation (Arrow.mk _) (Arrow.mk _) (Arrow.mk _)
+    (standardSingle_union_ses_chain_data p g U V N)
 
 end AlgebraicGeometry
