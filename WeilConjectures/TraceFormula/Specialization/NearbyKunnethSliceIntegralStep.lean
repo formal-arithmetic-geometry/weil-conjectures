@@ -67,6 +67,7 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
+set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Pulling nearby cycles back to a slice preserves derived completeness for a bounded
 constructible integral complex. -/
@@ -173,7 +174,8 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
       (Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
       (Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
       (by simp) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
-      (by simp) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A₀ B₀ hu₁ hu₂ hπ
+      (by simp) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A₀ B₀
+      (by exact_mod_proofs hu₁) (by exact_mod_proofs hu₂) (by exact_mod_proofs hπ)
   -- finiteness properties of the total spaces and of the special and generic fibres
   have := hM.locallyOfFiniteType
   have := hM.quasiCompact
