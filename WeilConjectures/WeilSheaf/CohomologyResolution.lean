@@ -120,10 +120,10 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
   simp only [IsoAlgebra.frobeniusNatTrans_app,
     ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.comp_map, Functor.map_comp, Category.assoc]
-  simp only [Mod.forget_map, adicLowerStar_map_hom]
+    Functor.comp_map]
+  simp only [Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
   rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
-  simp only [Functor.map_comp, Category.assoc] at h ⊢
+  simp only [Category.assoc] at h ⊢
   exact h
 
 
