@@ -164,7 +164,7 @@ private theorem tensor_counit_compatibility
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- Independent localization instances require extra elaboration heartbeats.
 /-- Tensor comparison and counit descend together before taking an adjunction transpose.
 Source: Stacks Project, Tag 08EU, first sentence of proof; Tag 08FE.
