@@ -191,7 +191,6 @@ private theorem localChern_base_lift_factorization (l : ℕ) [Fact l.Prime]
   exact ⟨w, γ, v, hw, hbase⟩
 
 set_option linter.unusedVariables false in
-set_option profiler true in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base.
 
