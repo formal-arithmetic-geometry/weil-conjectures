@@ -236,7 +236,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
 set_option maxHeartbeats 500000 in
-set_option profiler true in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (SGA 4½, [Th. finitude],
 Lemme 3.4; torsion coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
@@ -365,7 +364,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
     intro G
     exact @retraction_of_eq_comp_map_comp_of_coinvariant _ _ _ _
       inferInstance inferInstance inferInstance inferInstance
-      F₁ F₂ G _ ((leftDerivedUpperStarId (Λ) X').app _) _
+      F₁ F₂ G _ _ _ _ _ ((leftDerivedUpperStarId (Λ) X').app _) _
       κ rfl _ _ hα hRC
       (fun k ↦ derivedUnitTransport (Λ)
         (pullbackAction h _ specGaloisAction_comp (act k))
