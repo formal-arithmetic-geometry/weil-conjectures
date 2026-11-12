@@ -40,6 +40,28 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+/-- Transport a retraction and its coinvariant property simultaneously for all functors.
+The witness is constructed before the target category and functor are chosen. -/
+lemma CategoryTheory.exists_retraction_of_eq_comp_map_comp_of_coinvariant
+    {C D E : Type*} [Category C] [Category D] [Category E] (F₁ : C ⥤ D) (F₂ : D ⥤ E)
+    {A₀ T : C} {W : D} {P : E} (α : P ⟶ F₂.obj W) (i : P ≅ F₂.obj (F₁.obj A₀))
+    (c : F₁.obj T ⟶ W) (κ : F₂.obj (F₁.obj T) ≅ F₂.obj W) (hκ : κ.hom = F₂.map c)
+    (η : A₀ ⟶ T) (R : T ⟶ A₀) (hα : α = i.hom ≫ F₂.map (F₁.map η ≫ c))
+    (hR : η ≫ R = 𝟙 A₀) {ι : Type*} (act : ι → (T ⟶ T))
+    (ρ : ι → (F₂.obj W ⟶ F₂.obj W))
+    (hρ : ∀ σ, ρ σ = κ.inv ≫ F₂.map (F₁.map (act σ)) ≫ κ.hom) :
+    ∃ r, α ≫ r = 𝟙 P ∧
+      ∀ {A : Type*} [Category A] (G : E ⥤ A) {B : A} (φ : G.obj (F₂.obj W) ⟶ B),
+        (∀ φ' : G.obj (F₂.obj (F₁.obj T)) ⟶ B,
+          (∀ σ, G.map (F₂.map (F₁.map (act σ))) ≫ φ' = φ') →
+            G.map (F₂.map (F₁.map (R ≫ η))) ≫ φ' = φ') →
+        (∀ σ, G.map (ρ σ) ≫ φ = φ) → G.map (r ≫ α) ≫ φ = φ := by
+  refine ⟨_, (retraction_of_eq_comp_map_comp_of_coinvariant F₁ F₂ (𝟭 E)
+    α i c κ hκ η R hα hR act ρ hρ).1, ?_⟩
+  intro A _ G B φ hcoinv hφ
+  exact (retraction_of_eq_comp_map_comp_of_coinvariant F₁ F₂ G
+    α i c κ hκ η R hα hR act ρ hρ).2 φ hcoinv hφ
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
@@ -70,7 +92,7 @@ attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimi
 across an isomorphism in the derived category. -/
 theorem galoisTower_derivedUnit_retraction_of_iso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {S S∞ : Scheme.{u}} (g : S∞ ⟶ S) [WeaklyEtale g] (T : GaloisTower g)
+    {S Sinf : Scheme.{u}} (g : Sinf ⟶ S) [WeaklyEtale g] (T : GaloisTower g)
     (hd : ∀ (j : T.J) (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
       (condensedRingObj Λ S)), IsIso (Fintype.card (T.Γ j) • 𝟙 M))
     (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
@@ -180,15 +202,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   have hRC := galoisTower_derivedUnit_retraction_of_iso Λ g (galoisTower Ω h) hd K hc a hK e
   let i := (leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)
   let eLayer := N.galoisLayerExchangeIso h Ω Λ C
-  let r := eLayer.inv ≫ L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map R) ≫ i.inv
-  have hmain := fun {Z : Scheme.{u}}
-      (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
-        (condensedRingObj Λ X')) ⥤
-          Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-            (condensedRingObj Λ Z)) ↦
-    retraction_of_eq_comp_map_comp_of_coinvariant
-      R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧)
-      G _ i _ eLayer rfl _ R hα hRC
+  obtain ⟨r, hr, hcoinv⟩ := exists_retraction_of_eq_comp_map_comp_of_coinvariant
+    R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧) _ i _ eLayer rfl _ R hα hRC
       (fun k ↦ derivedUnitTransport Λ
         (pullbackAction h _ specGaloisAction_comp (act k))
         (pullbackAction_fst h _ specGaloisAction_comp (act k))
@@ -197,7 +212,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
       (fun k ↦ N.galoisLayerAction Λ h Ω (act k)
         (L((𝟙 X)^*⟦Λ⟧).obj C))
       (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
-  refine ⟨r, (hmain (Z := X') (DerivedCategory.homologyFunctor _ 0)).1, ?_⟩
+  refine ⟨r, hr, ?_⟩
   intro Z G _ hG W φ hφ
   have hdZ : ∀ (j : FiniteGaloisIntermediateField L Ω)
       (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -209,7 +224,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     rw [hc]
     exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
       (hp j) M
-  refine (hmain (Z := Z) G).2 (B := W) φ ?_ hφ
+  refine hcoinv G (B := W) φ ?_ hφ
   intro φ' hφ'
   exact (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
     Λ hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e
