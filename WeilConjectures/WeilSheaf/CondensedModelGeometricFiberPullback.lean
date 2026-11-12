@@ -236,11 +236,11 @@ lemma weilCoefficientsForgetAb_map_lowerStarCongr_inv_app {g g' : S ⟶ T} (h : 
 lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T) :
     (adicSheafEquivCondensedMod l T).functor.map
         ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app x) ≫
-      (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) ≫
-        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
-          ((adicLowerStarCompCondensedModIso l e.inv).hom.app x) =
+      (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) =
       (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e).unit.app
-        ((adicSheafEquivCondensedMod l T).functor.obj x) := by
+          ((adicSheafEquivCondensedMod l T).functor.obj x) ≫
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
+          ((adicLowerStarCompCondensedModIso l e.inv).inv.app x) := by
   rw [Equivalence.toAdjunction_unit, Equivalence.symm_unit,
     CondensedRing.lowerStarInvAdjunction_unit_app]
   refine Mod.Hom.ext ?_
