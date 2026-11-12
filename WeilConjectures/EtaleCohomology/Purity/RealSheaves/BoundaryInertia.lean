@@ -470,7 +470,6 @@ noncomputable def boundaryInertia (z : ↥((Set.range j.base)ᶜ)) :
   (inertiaGroup sU GU (boundaryChart (p := p) j z) (boundaryChart (p := p) j z).point).comap
     ((MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype) ⊓ (weilGroupDeg pU sU GU).ker
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma exists_boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) :
@@ -486,7 +485,6 @@ its residue field. -/
 noncomputable def boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) : Gal(Ω/C.functionField) :=
   (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma boundaryFrobeniusLift_mem_stabilizer (z : ↥((Set.range j.base)ᶜ)) :
@@ -530,7 +528,6 @@ lemma isConj_restrictionHom_boundaryResidueFrobenius (z : ↥((Set.range j.base)
     Multiplicative.ofAdd (p.degreeOver z.1 : ℤ)
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] [IsCurve pU] in
 /-- An element of `W(U₀)` mapping into the decomposition group conjugates the inertia group at `z`
