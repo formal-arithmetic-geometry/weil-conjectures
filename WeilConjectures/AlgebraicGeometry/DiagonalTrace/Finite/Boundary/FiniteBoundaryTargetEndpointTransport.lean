@@ -63,6 +63,7 @@ theorem finiteBoundary_target_endpoint
   rw [← finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
     Functor.map_id, Category.id_comp]
+  dsimp only [abEvaluation, Functor.comp_map, evaluation_obj_map]
   apply Sheaf.hom_ext
   ext U z
   trace "target: extensionality complete"
@@ -84,9 +85,7 @@ theorem finiteBoundary_target_endpoint
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
   trace "target: scalar unit complete"
-  let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
-      (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  let v := η.val.app (op (n, U.unop)) x
   trace "target: scalar section named"
   let w := (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   trace "target: restricted section named"
@@ -97,10 +96,12 @@ theorem finiteBoundary_target_endpoint
   trace "target: restriction comparison complete"
   dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
-    (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
+    (hw.trans (heq_of_eq hu))
   trace "target: tensor normalization complete"
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
+  dsimp only [η, x'] at he
+  rw [he]
   dsimp only [w, v, η, x'] at ht hi
   exact congrArg ((cartierProRootMap A (l ^ (n + 1)) hA T
     (pow_pos (Fact.out : l.Prime).pos _) hN).hom.app U) (ht.trans hi)
