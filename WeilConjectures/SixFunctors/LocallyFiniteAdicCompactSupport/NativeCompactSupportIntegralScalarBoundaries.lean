@@ -48,6 +48,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The component formulas compare cached presentations of the coefficient categories.
 /-- Construct the two natural boundary isomorphisms and their prescribed components.
