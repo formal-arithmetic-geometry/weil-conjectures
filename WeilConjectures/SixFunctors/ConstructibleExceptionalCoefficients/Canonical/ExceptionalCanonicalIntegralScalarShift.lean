@@ -261,8 +261,6 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
-set_option maxHeartbeats 400000 in
-set_option profiler true in
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
 Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
 (blueprint: lem-sf-canonical-integral-scalar-square).
@@ -338,16 +336,15 @@ theorem canonical_integral_scalar_square
   letI bShift : B.CommShift ℤ := PurCompactSupport.scalarCommShift
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
   let θ : S.functor ⋙ JX ≅ IX ⋙ B := S.realization
-  have thetaShift : θ.hom.CommShift ℤ := canonicalIntegralScalarShift_compatibility l Ω S
+  letI := canonicalIntegralScalarShift_compatibility l Ω S
   obtain ⟨e₀, hχ, heO⟩ := ordinary_completed_scalar_shift l E.carrier L.carrier i T
   let eO := e₀
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
-  have chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
+  letI := ordinaryComparison_shift l Ω T a b h
   let rF : IE ⋙ IY ≅ IX := Iso.refl _
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
-  have rfShift : rF.hom.CommShift ℤ :=
-    finiteTorIntegralShift_compatibility l Ω E T
+  letI := finiteTorIntegralShift_compatibility_cached l Ω E T
   letI := finiteTorIntegralShift_compatibility_cached l Ω L T
   have restrictionData := restriction_iso IX IY JX JY IE IL S.functor SI O B
     (sC1 := sE) (sC2 := siE) (sC3 := sL) (sC4 := siL)
@@ -357,8 +354,7 @@ theorem canonical_integral_scalar_square
       (integralOrdinaryScalar l E.carrier L.carrier i T))
     (fullJY := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.full)
     (faithfulJY := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.faithful)
-    rF rG χ θ eO (hRF := rfShift)
-    (hChi := chiShift) (hTheta := thetaShift) (hOrd := heO)
+    rF rG χ θ eO (hOrd := heO)
   obtain ⟨e, hs, he⟩ := restrictionData
   refine ⟨e, ?_, hs⟩
   intro K
