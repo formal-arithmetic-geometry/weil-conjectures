@@ -66,7 +66,6 @@ private theorem component_transport {C D : Type*} [Category C] [Category D]
 attribute [local irreducible] IntegralSourceBoundary IntegralTargetBoundary
   IntegralComponent IntegralScalarFormula nativeScalarComponent
 
-set_option profiler true in
 -- Compare the cached finite-stage types without unfolding their constructions.
 /-- Move one normalized integral component to its canonical common scalar stage.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
@@ -115,17 +114,15 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
         b ≫ nativeScalarComponent l c source target E (change E) hs ht KE.obj ≫ d := by
   classical
   dsimp only [rationalization, Functor.comp_obj]
-  run_tac Lean.logInfo m!"PH070 start: {← IO.getNumHeartbeats}"
   obtain ⟨bE, dE, hboundE⟩ :=
     native_integral_scalar_boundaries l D hl P c source target stage E
-  run_tac Lean.logInfo m!"PH070 boundaries: {← IO.getNumHeartbeats}"
   let Ke := (PurCompactSupport.finiteTorIntegralInclusion l
     (Coefficient.{u} l (PadicAlgCl l) E) X).obj KE
   let Ki := (PurCompactSupport.finiteTorIntegralInclusion l
     (Coefficient.{u} l (PadicAlgCl l) i) X).obj K
   have hfE := integralComponent_factorization_of_isos l D hl P c source target stage E
     change hs ht KE alpha bE dE (hboundE KE).1 (hboundE KE).2 hm
-  run_tac Lean.logInfo m!"PH070 factorization: {← IO.getNumHeartbeats}"
+  -- Match the localization presentation used by the stage-object lemma.
   have hQ : (sfRationalConstructibleLocalization l
       (Coefficient.{u} l (PadicAlgCl l) E) X).obj Ke =
       ((⟨i, (sfRationalConstructibleLocalization l
@@ -134,7 +131,6 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
     (congrArg (sfRationalConstructibleLocalization l
       (Coefficient.{u} l (PadicAlgCl l) E) X).obj hKE).trans
         (integralStageObject l X i E h Ki).symm
-  run_tac Lean.logInfo m!"PH070 stage equality: {← IO.getNumHeartbeats}"
   have hh := component_transport
     (U := (PurCompactSupport.image (PurCompactSupport.completed l
       (Coefficient.{u} l (PadicAlgCl l) E)) c ⋙
@@ -148,14 +144,7 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
     (fun {_ _} b ↦ IntegralSourceBoundary l D hl P c target E KE b)
     (fun {_ _} d ↦ IntegralTargetBoundary l c source E KE d)
     (hboundE KE).1 (hboundE KE).2 hfE
-  run_tac Lean.logInfo m!"PH070 transport: {← IO.getNumHeartbeats}"
   dsimp only [Ki, Ke, finiteField, Functor.comp_obj, Functor.whiskerRight_app] at hh ⊢
-  run_tac Lean.logInfo m!"PH070 normalized: {← IO.getNumHeartbeats}"
-  run_tac do
-    let actual ← (← Lean.Elab.Tactic.getFVarId `hh).getType
-    let expected ← Lean.Elab.Tactic.getMainTarget
-    Lean.logInfo m!"PH070 actual source: {actual.getAppArgs[0]!}"
-    Lean.logInfo m!"PH070 expected source: {expected.getAppArgs[0]!}"
   exact hh
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
