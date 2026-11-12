@@ -91,6 +91,7 @@ private theorem finite_subobject_element_of_equivalence
       _ = e.hom ≫ R.map inc ≫ i.hom.app M := by
         simp only [Functor.comp_map, hf, R.map_comp, e, Iso.trans_hom, Iso.symm_hom,
           Functor.mapIso_hom, Category.assoc]
+        rfl
   let N := Subobject.mk f
   let eN : Φ.obj (N : C) ≅ R.obj B := Φ.mapIso (Subobject.underlyingIso f) ≪≫ e
   have hN : Finite (Φ.obj (N : C)) := Finite.of_injective eN.hom
