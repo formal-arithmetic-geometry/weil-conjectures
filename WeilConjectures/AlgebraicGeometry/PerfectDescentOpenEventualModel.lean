@@ -83,7 +83,10 @@ private theorem openBaseChange_transport
     · simp [eV, q, openBaseChangeIso, openBaseChangeInclusion,
         Category.assoc, morphismRestrict_ι]
     · simp [eV, q, openBaseChangeIso, openBaseChangeInclusion, Category.assoc]
-  obtain ⟨_, _, _, comp, _⟩ := exists_derivedPullbackComposition.{u, w}
+  let comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
+    (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))).choose
   obtain ⟨comparison⟩ := hcomp
   refine ⟨(derivedPullback eU.hom).obj B,
     derivedPullback_preserve_perfect eU.hom B hB, ⟨?_⟩⟩
@@ -97,9 +100,6 @@ private theorem openBaseChange_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the dependent stage objects and their composed comparison needs more heartbeats.
 /-- Descent on one original open supplies models on its inverse image at every later stage.
 Source: Stacks Project, Tag 09RF, choice and subsequent base change of each local model.
 (blueprint: lem-pc-perfect-descent-open-eventual-model).
@@ -179,7 +179,10 @@ theorem perfect_descent_open_eventual_model
   let B := (derivedPullback a).obj Ej
   have hB : (pullback (O.ι ≫ t) Tk.hom).IsPerfect B :=
     derivedPullback_preserve_perfect a Ej hEj
-  obtain ⟨_, _, _, comp, _⟩ := exists_derivedPullbackComposition.{u, w}
+  let comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
+    (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))).choose
   have hm : baseChangeMap (O.ι ≫ t) βk ≫ a = baseChangeMap (O.ι ≫ t) βj := by
     rw [← baseChangeMap_comp, hβα]
   have hcomp : Nonempty ((derivedPullback (baseChangeMap (O.ι ≫ t) βk)).obj B ≅

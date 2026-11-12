@@ -114,9 +114,6 @@ private noncomputable def globalSectionsShiftIso (X : Scheme.{u})
       (DerivedCategory.homologyFunctor A 0 ⋙ U) ≪≫
     Functor.isoWhiskerLeft (shiftFunctor (schemeDerivedCategory X) k) (globalSectionsZeroIso X)
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Comparing the site and ringed-space presentations of the derived category is expensive.
 /-- Cohomology of module-valued global Hom agrees with zeroth additive-group-valued
 hypercohomology of the internal Hom of shifted arguments. This comparison concerns
 only cohomology, not the identification with derived morphisms.
@@ -165,8 +162,10 @@ theorem schemeGlobalHom_shiftedHypercohomology_equiv
           (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X) X.sheaf).map
             ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
               ((𝟙 (P⟦m⟧)).op, q⟦n⟧')) (c P Q m n x) := by
-  obtain ⟨e, he⟩ := derivedInternalHom_shift_comparison.{u, w}
+  obtain ⟨e, he⟩ := @derivedInternalHom_shift_comparison.{u, w} X.Opens _
     (Opens.grothendieckTopology X) X.sheaf
+    (inferInstanceAs (HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))))
   let H := ringedSiteZerothHypercohomology (Opens.grothendieckTopology X) X.sheaf
   let F := derivedInternalHom (Opens.grothendieckTopology X) X.sheaf
   let a (P Q : schemeDerivedCategory X) (m n : ℤ) :=
