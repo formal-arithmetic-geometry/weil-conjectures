@@ -190,14 +190,34 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
               (adicLowerStarCongr l h₁).hom.app M ≫ (adicLowerStarComp l a₁ p).inv.app M) ≫
               (adicLowerStarComp l p q).hom.app ((a₁)_*ᵃ[l].obj M) ≫
                 (adicLowerStarCongr l hr).hom.app ((a₁)_*ᵃ[l].obj M) := by
+  -- Both sides are compared on sections: there they are restriction maps of `M.X` along
+  -- morphisms of the site. Comparing the `Mod`-level composites with the sheaf-level ones
+  -- directly makes the kernel unfold every composition.
   apply Mod.hom_ext
+  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
+  have key := congrArg (fun φ ↦ φ.hom.app V)
+    (lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X)
+  repeat' rw [Functor.map_comp]
   repeat' rw [Mod.comp_hom']
-  repeat' rw [adicLowerStar_map_hom]
-  repeat' rw [Mod.comp_hom']
-  repeat' rw [adicLowerStarComp_hom_app_hom]
-  repeat' rw [adicLowerStarComp_inv_app_hom]
-  repeat' rw [adicLowerStarCongr_hom_app_hom]
-  exact lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X
+  repeat' rw [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rw [NatTrans.comp_app]
+  repeat' rw [adicLowerStar_map_hom_hom_app]
+  repeat' rw [adicLowerStarComp_hom_app_hom_hom_app]
+  repeat' rw [adicLowerStarComp_inv_app_hom_hom_app]
+  repeat' rw [adicLowerStarCongr_hom_app_hom_hom_app]
+  repeat' rw [adicLowerStar_obj_X_obj_map]
+  repeat' rw [Functor.map_comp] at key
+  repeat' rw [ObjectProperty.FullSubcategory.comp_hom] at key
+  repeat' rw [NatTrans.comp_app] at key
+  repeat' rw [lowerStar_map_hom_app'] at key
+  repeat' rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+  repeat' rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rw [lowerStarComp_hom_app_hom_app] at key
+  repeat' rw [lowerStarComp_inv_app_hom_app] at key
+  repeat' rw [lowerStarCongr_hom_app_hom_app] at key
+  simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
+  exact key
 
 end ProEtale
 
