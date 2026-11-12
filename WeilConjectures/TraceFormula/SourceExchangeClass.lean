@@ -46,6 +46,7 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {ℓ} {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 0 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The core of `class_pushforward`: the two ways of transporting `Rp₁'_! (Lp₂'^* K' ⊗ Rb_! 𝟙)`

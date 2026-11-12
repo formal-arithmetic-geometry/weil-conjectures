@@ -44,6 +44,7 @@ section EvaluationExchange
 variable (ℓ) {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 3000000 in
 -- composite functors on bounded constructible complexes are unfolded
 /-- **Exchange of the evaluation kernels** along a proper morphism `f` (blueprint

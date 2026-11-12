@@ -66,6 +66,7 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- **The class of the coefficient pushforward** (blueprint `lem-trf-trace-source-exchange`,
