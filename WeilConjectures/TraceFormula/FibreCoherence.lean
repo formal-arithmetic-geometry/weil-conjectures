@@ -186,24 +186,24 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
     (pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app ℓ hT.toCommSq hi K)
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn₁ hn₂ hn₃ hn₄ hU' hPB hV
-  rw [hn₁]
-  erw [cV]
-  rw [hV]
+  simp only [hn₁]
+  simp only [cV]
+  simp only [hV]
   have hC := boundedConstructibleLowerShriekCompToPoint_hom_app ℓ ΦZ
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))
   simp only [eqToHom_refl, Category.id_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y)
+  simp only [← Functor.map_comp_assoc (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y)
       ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').inv.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))]
-  rw [Iso.inv_hom_id_app (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f')
+  simp only [Iso.inv_hom_id_app (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f')
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)),
     CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hn₂, reassoc_of% hU',
     ← reassoc_of% hC, reassoc_of% hn₃]
-  rw [← reassoc_of% (compactPullback_app ℓ ΦZ
+  simp only [← reassoc_of% (compactPullback_app ℓ ΦZ
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))), hPB,
     ← reassoc_of% hn₄]
