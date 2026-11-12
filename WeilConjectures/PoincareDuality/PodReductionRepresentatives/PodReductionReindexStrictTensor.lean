@@ -213,51 +213,53 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have e2 := strictMap_reducedUnit_generator l E Y P Q n p q k hpq V.2 x y
   have e12 := e1.trans (congrArg
     ((η.app (((S[Y]).obj ((R[Y]).obj P, (R[Y]).obj Q)).X k)).val.app (op V)) e2)
-  refine (congrArg (fun z ↦ res (m (a z))) e12).trans ?_
+  have hL1 := congrArg (fun z ↦ res (m (a z))) e12
   trace "PH199: strict map evaluated"
   have e3 := systemChain_generator l E g ((R[Y]).obj P) ((R[Y]).obj Q)
     p q k hpq V x₀ y₀
-  refine (congrArg (fun z ↦ res (m z)) e3).trans ?_
+  have hL2 := congrArg (fun z ↦ res (m z)) e3
   trace "PH199: system tensor evaluated"
   have e4 := coefficientTotalTensor_map_tensorGenerator.{u, u + 1, u}
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     βP.hom βQ.hom p q k hpq (op V') uP uQ
-  refine (congrArg res e4).trans ?_
-  refine (coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
+  have hL3 := congrArg res e4
+  have hL4 := coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
     (coefficientSequenceCommRingSheaf l E X) ((R[X]).obj ((F[g]).obj P))
     ((R[X]).obj ((F[g]).obj Q)) p q k hpq c
-    ((βP.hom.f p).val.app (op V') uP) ((βQ.hom.f q).val.app (op V') uQ)).trans ?_
+    ((βP.hom.f p).val.app (op V') uP) ((βQ.hom.f q).val.app (op V') uQ)
   have rP := (PresheafOfModules.naturality_apply (βP.hom.f p).val c uP).symm.trans
     (generators_unitSection l E g P βP hβP n p U x)
   have rQ := (PresheafOfModules.naturality_apply (βQ.hom.f q).val c uQ).symm.trans
     (generators_unitSection l E g Q βQ hβQ n q U y)
-  refine (congrArg₂ (coefficientTensorGenerator.{u, u + 1, u}
+  have hL5 := congrArg₂ (coefficientTensorGenerator.{u, u + 1, u}
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     ((R[X]).obj ((F[g]).obj P)) ((R[X]).obj ((F[g]).obj Q)) p q k hpq (op (n, U)))
-    rP rQ).trans ?_
+    rP rQ
+  have hL := hL1.trans (hL2.trans (hL3.trans (hL4.trans hL5)))
   have rT := generators_unitSection l E g ((T[Y]).obj (P, Q)) βT hβT n k U
     (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y)
-  refine Eq.trans ?_ (PresheafOfModules.naturality_apply
+  let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+    (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y
+  let s := (η.app ((pullbackTensorOrdinaryReduction l E Y).obj
+    (((T[Y]).obj (P, Q)).X k))).val.app (op V) (reducedUnitSection l E Y n _ (op V.2) z)
+  have hNat := PresheafOfModules.naturality_apply
     (βT.hom.f k ≫ ((R[X]).map t.hom).f k ≫
-      (tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val c _)
+      (tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val c s
   trace "PH199: left side completed"
-  have r3 := reducedUnitSection_map l E X n (t.hom.f k) U
-    (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-      (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-      (op ((proEtaleIsoPostcompose g).obj U)) x y)
+  have r3 := reducedUnitSection_map l E X n (t.hom.f k) U z
   have r4 := hPure p q k hpq U x y
   have r5 := strictMap_reducedUnit_generator l E X ((F[g]).obj P) ((F[g]).obj Q)
     n p q k hpq U x y
-  refine Eq.trans ?_ (congrArg (fun z ↦
+  have hR1 := congrArg (fun z ↦
     ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
-      ((((R[X]).map t.hom).f k).val.app (op (n, U)) z)) rT).symm
-  refine Eq.trans ?_ (congrArg (fun z ↦
-    ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U)) z)
-      r3).symm
-  refine Eq.trans ?_ (congrArg (fun z ↦
+      ((((R[X]).map t.hom).f k).val.app (op (n, U)) z)) rT
+  have hR2 := congrArg
+    (((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))) r3
+  have hR3 := congrArg (fun z ↦
     ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
-      (reducedUnitSection l E X n _ (op U) z)) r4).symm
-  exact r5.symm
+      (reducedUnitSection l E X n _ (op U) z)) r4
+  have hR := hNat.symm.trans (hR1.trans (hR2.trans (hR3.trans r5)))
+  exact hL.trans hR.symm
 
 end WeilConjectures.PodReductionRepresentatives
