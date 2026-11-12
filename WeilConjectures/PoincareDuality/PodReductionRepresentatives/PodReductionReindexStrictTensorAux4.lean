@@ -65,15 +65,13 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h1.symm.trans
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
-private theorem sequenceEvaluation_naturality_apply (W : Scheme.{u}) (n : ℕ)
-    {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
-    (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N)
-    {V V' : W.ProEt} (i : V' ⟶ V) (z : M.val.obj (op V)) :
-    N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op (f.val.app (op V) z) =
-      f.val.app (op V') (M.val.map i.op z) :=
-  (PresheafOfModules.naturality_apply f.val i.op z).symm
+private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
+    (M : coefficientSequenceModules l E W) {V V' : W.ProEt} (i : V' ⟶ V)
+    (z : M.val.obj (op (n, V))) :
+    ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
+      M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
 Source: Stacks 06YY and 0941. -/
 theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
@@ -84,19 +82,21 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
         (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)) =
       ((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')
         (unrestrictedIntegralTensorSection l E W n M (op V') 1 (M.val.map i.op z)) := by
-  have h1 := sequenceEvaluation_naturality_apply l E W n
-    ((pullbackTensorReductionEvaluation l E W n).hom.app M) i
+  have h1 := PresheafOfModules.naturality_apply
+    ((pullbackTensorReductionEvaluation l E W n).hom.app M).val i.op
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)
   have h2 := PresheafOfModules.naturality_apply
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val i.op z
   have h3 := (finiteAdjunction_unit_apply l E W n M (op V') (M.val.map i.op z)).symm.trans
     (h2.trans (congrArg (((unrestrictedIntegralReductionFunctor l E W n).obj M).val.map i.op)
       (finiteAdjunction_unit_apply l E W n M (op V) z)))
-  exact h1.trans
-    (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3.symm)
+  exact (sequenceEvaluation_map_apply l E W n
+    ((pullbackTensorOrdinaryReduction l E W).obj M) i _).symm.trans
+      (h1.symm.trans (congrArg
+        (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3.symm))
 
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- Two maps out of the reduction of a total tensor degree agree once they agree on reduced
 pure tensors over every object postcomposed along an isomorphism of schemes.
 Source: Stacks 03EK, 06YY, 09A5 and 0941. -/
