@@ -115,17 +115,17 @@ private theorem exchange_components_finish
     (θ : G ⋙ L' ≅ L ⋙ H) (i : R₀ ≅ R) (i' : R₀' ≅ R')
     {M : B} {K : A} {T : A'} (a : L.obj M ⟶ K) (t : H.obj K ⟶ T)
     [Preadditive B'] [Preadditive A']
-    {A₀ B₀ V : B'} {T₀ : A'} {c : A₀ ⟶ B₀} {γ : B₀ ⟶ V}
-    (v : L'.obj V ⟶ T₀) (a₀ : L'.obj B₀ ⟶ T₀)
+    {B₀ V : B'} {c : G.obj M ⟶ B₀} {γ : B₀ ⟶ V}
+    (v : L'.obj V ⟶ T) (a₀ : L'.obj B₀ ⟶ T)
     (hlocal : θ.hom.app M ≫ H.map a ≫ t = L'.map (c ≫ γ) ≫ v + L'.map c ≫ a₀)
     [L'.Additive] :
     G.map (adj.homEquiv _ _ a ≫ i.inv.app K) ≫
         (G.map (i.hom.app K) ≫ (Adjunction.exchangeRight adj adj' θ).app K ≫
           i'.inv.app (H.obj K)) ≫ R₀'.map t =
-      (c ≫ γ) ≫ (adj'.homEquiv _ _ v ≫ i'.inv.app T₀) +
-        c ≫ (adj'.homEquiv _ _ a₀ ≫ i'.inv.app T₀) := by
+      (c ≫ γ) ≫ (adj'.homEquiv _ _ v ≫ i'.inv.app T) +
+        c ≫ (adj'.homEquiv _ _ a₀ ≫ i'.inv.app T) := by
   rw [conjugated_exchange_adjunct]
-  exact (congrArg (fun x ↦ adj'.homEquiv _ _ x ≫ i'.inv.app T₀) hlocal).trans
+  exact (congrArg (fun x ↦ adj'.homEquiv _ _ x ≫ i'.inv.app T) hlocal).trans
     (adjunct_sum_factor (L := L') adj' i' c γ v a₀)
 
 set_option linter.unusedVariables false in
