@@ -203,6 +203,7 @@ private theorem normalizedBeta_eq (n : ℕ)
       (asIso beta).hom_inv_id
     rw [show (asIso beta).hom = beta from rfl,
       show (asIso beta).inv = inv beta from rfl] at hh
+    trace_state
     rw [hbeta i j U x y] at hh
     exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
