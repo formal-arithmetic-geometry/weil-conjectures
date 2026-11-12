@@ -36,7 +36,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
 set_option linter.style.haveILetI false in
--- Model selection and its nested derived-category terms exceed the default heartbeat limit.
 /-- Choose common affine residue models and representatives for the finite family.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
 (blueprint: new-picard-derived-fibre-residue-bridge)
@@ -113,6 +112,7 @@ theorem picard_derived_fibre_residue_bridge
               ((affineResidueModelEquiv W w U hwU hU p hpEq _ K hK m).trans e z) := by
   classical
   dsimp only
+  set_option profiler true in
   obtain ⟨U, hwU, hU, p, hp, hpEq, K, C, hK, hC, hE, hCi⟩ :=
     picard_derived_fibre_residue_model_data f Xi fi ui hui L W k w s hw τ
   letI : p.IsPrime := hp

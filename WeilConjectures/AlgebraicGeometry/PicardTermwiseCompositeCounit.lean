@@ -29,7 +29,6 @@ variable [∀ Y : Scheme.{v},
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The dependent complex comparisons require substantial instance elaboration.
 private theorem composite_counit_of_associativity
     (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)
     (K : CochainComplex
@@ -69,6 +68,7 @@ private theorem composite_counit_of_associativity
           (derivedPullback i).map (b t s hf) ≫
             (picardTermwiseCounit i).app (picardTermwiseModel W U K s) := by
   classical
+  set_option profiler true in
   dsimp only
   intro T T' i t t' s s' ht hs hf hf'
   subst t' s' t
@@ -105,7 +105,6 @@ private theorem composite_counit_of_associativity
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The dependent complex comparisons require substantial instance elaboration.
 set_option linter.unusedVariables false in
 -- Preserve the original statement, including its unused lambda binder t.
 /-- The composites of a fixed morphism with the pinned tensor-pullback counits
