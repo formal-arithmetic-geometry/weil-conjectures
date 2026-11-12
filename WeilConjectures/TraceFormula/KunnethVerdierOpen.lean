@@ -411,6 +411,7 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
   simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierSourceRestrictionIso_hom,
     verdierDualUpperStarIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing, Category.assoc]
   simp only [Category.assoc] at key
+  dsimp only [Functor.comp_obj, Functor.comp_map, verdierDual] at key ⊢
   exact_mod_proofs key
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
