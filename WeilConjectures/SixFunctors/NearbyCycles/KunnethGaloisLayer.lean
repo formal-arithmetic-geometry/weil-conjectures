@@ -79,6 +79,7 @@ lemma galoisLayerFst_generic_comp_galoisLayerAut [Algebra L Ω] (σ : Ω ≃ₐ[
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two product configurations are large terms
 /-- **The Künneth map descends along a Galois layer** (blueprint
