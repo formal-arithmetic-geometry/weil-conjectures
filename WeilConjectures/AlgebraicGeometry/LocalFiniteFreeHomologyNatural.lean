@@ -37,6 +37,7 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
 
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The functor-level comparisons require more elaboration steps than objectwise comparisons.
 /-- A bounded finite free resolution on an open computes restricted Ext
 naturally in every coefficient sheaf.

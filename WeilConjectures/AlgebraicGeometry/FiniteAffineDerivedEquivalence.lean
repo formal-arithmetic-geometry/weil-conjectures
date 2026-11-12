@@ -32,6 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Elaborating the scalar-restriction comparison unfolds several sheaf category instances.
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
 its direct-image algebra. Its functor is induced by `Rg_*` for the canonical morphism
