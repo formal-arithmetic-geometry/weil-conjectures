@@ -102,7 +102,8 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       hhalg, hσε, ← Category.assoc, hhalg]
 
 -- Select the pointwise action directly; searching through the integral-closure actions is costly.
-noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens} :
+noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens}
+    [Algebra Γ(C, W) Ω] :
     MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
   Ideal.pointwiseDistribMulAction.toMulAction
 
