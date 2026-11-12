@@ -203,7 +203,7 @@ private theorem integral_totalPair_eq_generator
     (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
     totalPair Y R P Q i j U x y =
       coefficientTensorGenerator.{u, t + 1, t}
-        (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j U x y := by
+        (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
   rfl
 
 -- Comparing the fixed localization models requires many definitional equalities.
@@ -265,6 +265,7 @@ private theorem reductionUnit_eq_coefficientIntegralScalarUnitSection
   with_unfolding_all rfl
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+set_option profiler true in
 private theorem normalizedBeta_eq (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
@@ -304,6 +305,7 @@ private theorem normalizedBeta_eq (n : ℕ)
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+set_option profiler true in
 private theorem nativeReductionMonoidal
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n) :
@@ -435,6 +437,7 @@ private theorem nativeReductionMonoidal
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+set_option profiler true in
 /-- A native tensor comparison transports the normalized scalar tensor mate to
 an associative tensor strength. No invertibility of that mate is asserted here.
 
