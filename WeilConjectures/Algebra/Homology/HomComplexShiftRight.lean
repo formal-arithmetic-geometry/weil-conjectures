@@ -83,7 +83,6 @@ private lemma shiftSign_sub {A : Type*} [AddCommGroup A]
     smul_smul n.negOnePow (k + n).negOnePow b, Int.negOnePow_add,
     mul_left_comm, Int.units_mul_self, mul_one]
 
-set_option profiler true in
 -- The dependent product projections require elaborating the Hom-complex specification.
 set_option backward.isDefEq.respectTransparency true in
 /-- The Hom-complex bifunctor commutes with shifts in its second complex.
@@ -154,6 +153,7 @@ theorem homComplex_shift_right
       π X.1.unop (X.2⟦n⟧) l p (p + l) rfl =
       ((n.negOnePow • ((F.obj X.1).obj X.2).d (k + n) (l + n)) ≫
         (e X.1.unop X.2 l).hom) ≫ π X.1.unop (X.2⟦n⟧) l p (p + l) rfl
+    -- Focus each rewrite to avoid unfolding unrelated morphisms while matching projections.
     conv_lhs =>
       rw [Category.assoc]
       rhs
