@@ -195,7 +195,7 @@ private theorem exists_pairing_of_rescale_equiv
   have hE' : E.toLinearEquiv (M.frobenius x) = q • N.frobenius (E.toLinearEquiv x) := by
     rw [← hE, smul_smul, hqc, one_smul]
   simp only [LinearEquiv.trans_apply]
-  rw [hE', map_smul, S.map_frobenius]
+  erw [hE', map_smul, S.map_frobenius]
   erw [LinearEquiv.dualMap_apply]
   rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
     FrobeniusModule.Equiv.symm_map_frobenius e y, LinearEquiv.coe_coe,
