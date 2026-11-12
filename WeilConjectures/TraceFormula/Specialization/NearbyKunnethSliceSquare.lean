@@ -52,6 +52,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- the statement involves the Künneth maps of the product and of its slice, whose instances
 -- on module objects over the slice need a long search
