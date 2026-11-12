@@ -90,8 +90,6 @@ private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X 
 
 
 set_option profiler true in
-set_option maxHeartbeats 900000 in
--- The nested derived-adjunction existentials require additional elaboration heartbeats.
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
 This lemma involves neither a quasi-coherent right adjoint of pushforward nor its
 comparison with scalar restriction.
@@ -147,12 +145,13 @@ theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
   obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
     exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
   let _ := hH₀
-  obtain ⟨ι⟩ := derivedInternalHom_unit_iso.{u, wY} Y
+  let ι := Classical.choice (derivedInternalHom_unit_iso.{u, wY} Y)
   let e := affineScalarLocalizationIso.{u, wY, wA} f L t
   refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
   intro K
-  let Kc := DerivedCategory.Q.objPreimage K
-  let q := DerivedCategory.Q.objObjPreimageIso K
+  let Kc : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ :=
+    DerivedCategory.Q.objPreimage K
+  let q : DerivedCategory.Q.obj Kc ≅ K := DerivedCategory.Q.objObjPreimageIso K
   obtain ⟨d₀, hd₀⟩ := affine_derivedHom_localized_evaluation.{u, wY, wA}
     f H₀ iH adj₀ h_eval R β L t adj hR h_counit ι Kc
   let F := (Functor.curry.obj

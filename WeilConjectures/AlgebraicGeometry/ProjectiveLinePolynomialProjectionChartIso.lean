@@ -26,8 +26,6 @@ namespace AlgebraicGeometry.Proj
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Comparing the concrete polynomial chart maps elaborates many dependent sheaf coercions.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical linear projection of polynomial Proj is an isomorphism when
 restricted to either standard affine chart of the projective line.
@@ -59,42 +57,7 @@ theorem isIso_polynomial_linearProjection_restrict (k : Type v) [Field k]
   let hl : ∀ j, l j ∈ 𝒜 1 := fun j ↦ X_mem_homogeneousSubmodule_one k j.down
   change IsIso (linearProjection 𝒜 l hl hcov ∣_
     ProjectiveSpace.standardOpen ι (Spec (.of k)) i)
-  let κ := IsOpenImmersion.lift
-    ((Spec (.of (Away 𝒜 (l i)))).basicOpen (linearChartSection 𝒜 l hl i i)).ι (𝟙 _) (by simp)
-  have hκ : κ ≫ (Scheme.basicOpen _ (linearChartSection 𝒜 l hl i i)).ι = 𝟙 _ :=
-    IsOpenImmersion.lift_fac _ _ _
-  let e := IsOpenImmersion.isoOfRangeEq (awayι 𝒜 (l i) (hl i) Nat.one_pos)
-    (linearProjection 𝒜 l hl hcov ⁻¹ᵁ ProjectiveSpace.standardOpen ι (Spec (.of k)) i).ι (by
-      rw [linearProjection_preimage_standardOpen, Scheme.Opens.range_ι,
-        ← opensRange_awayι 𝒜 _ (hl i) Nat.one_pos]
-      rfl)
-  have h1 : e.hom ≫ (linearProjection 𝒜 l hl hcov ∣_
-      ProjectiveSpace.standardOpen ι (Spec (.of k)) i) =
-      κ ≫ (linearChartHom 𝒜 l hl i).resLE _ _
-        (ProjectiveSpace.homOfSections_preimage_standardOpen _ _ _ i).ge := by
-    rw [← cancel_mono (ProjectiveSpace.standardOpen ι (Spec (.of k)) i).ι,
-      Category.assoc, morphismRestrict_ι,
-      IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, awayι_linearProjection,
-      Category.assoc,
-      Scheme.Hom.resLE_comp_ι, reassoc_of% hκ]
-  have key : e.hom ≫ (linearProjection 𝒜 l hl hcov ∣_
-      ProjectiveSpace.standardOpen ι (Spec (.of k)) i) ≫
-      (ProjectiveSpace.standardOpenIso ι (Spec (.of k)) i).hom =
-      AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom (algebraMap k (Away 𝒜 (l i)))))
-        (fun j : {j : ι // j ≠ i} ↦ (Scheme.ΓSpecIso (.of (Away 𝒜 (l i)))).inv
-          (Away.mk 𝒜 (hl i) 1 (l j.1) (by simpa using hl j.1))) := by
-    simp only [linearChartHom] at h1
-    rw [reassoc_of% h1,
-      ProjectiveSpace.homOfSections_resLE_standardOpenIso_hom,
-      AffineSpace.comp_homOfVector, reassoc_of% hκ, awayι_toSpecBase]
-    congr 1
-    funext j
-    have h := congrArg κ.appTop.hom (Scheme.divBasicOpen_mul_self _
-      (linearChartSection 𝒜 l hl i j.1) (linearChartSection 𝒜 l hl i i))
-    rw [map_mul, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
-      hκ, Scheme.Hom.id_appTop, CommRingCat.id_apply, CommRingCat.id_apply] at h
-    exact (mul_one _).symm.trans
-      ((congrArg (_ * ·) (linearChartSection_self 𝒜 l hl i).symm).trans h)
+  obtain ⟨e, key⟩ := exists_iso_linearProjection_restrict 𝒜 l hl hcov i
   let re : {j : Fin 2 // j ≠ i.down} ≃ {j : ι // j ≠ i} :=
     { toFun := fun j ↦ ⟨⟨j.1⟩, fun h ↦ j.2 (congrArg ULift.down h)⟩
       invFun := fun j ↦ ⟨j.1.down, fun h ↦ j.2 (ULift.ext h)⟩
