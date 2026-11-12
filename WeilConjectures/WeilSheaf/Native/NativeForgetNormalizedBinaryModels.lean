@@ -179,6 +179,14 @@ theorem native_forget_normalized_binary_models
             (((Endofunctor.IsoAlgebra.forget
                 (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj T)   := by
   classical
+  let : MonoidalCategory (DerivedCategory
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
+  let : MonoidalCategory (CochainComplex
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
+  have (P T : CochainComplex
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :
+      HomologicalComplex.HasTensor P T := inferInstance
+
   let : (nativeTensorBifunctor k₀ l X).Additive := by
     constructor
     intro A B f g
@@ -216,7 +224,8 @@ theorem native_forget_normalized_binary_models
           (.up ℤ) q p n hqp := by
       simp only [V, flip, nativeOpenTensorInsertion, Iso.trans_hom,
         HomologicalComplex.comp_f, Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
-      rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
+      rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom T P
+        (nativeTensorBifunctor k₀ l X) (.up ℤ) q p n hpq]
       simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
       rw [hchain T P q p n hqp]
       rfl
@@ -309,7 +318,8 @@ theorem native_forget_normalized_binary_models
             (.up ℤ) q p n hqp := by
         simp only [V, v, flip, Iso.trans_hom, HomologicalComplex.comp_f,
           Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
-        rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
+        rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom T P
+        (nativeTensorBifunctor k₀ l X) (.up ℤ) q p n hpq]
         simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
         rw [hchain T P q p n hqp]
         rfl

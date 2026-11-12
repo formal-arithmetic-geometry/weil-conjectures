@@ -206,6 +206,7 @@ theorem native_ordinary_restriction_total_model
       (Scheme.Hom.geometricFiberMap j (comp_over j
         (Spec (CommRingCat.of k₀))))).isLeftAdjoint
   letI := R.exactClosedDerivedMonoidal
+  have h := exact_total_tensor_square R P T
   exact exact_total_tensor_square_transport R.mapDerivedCategory f.hom g.hom
     ((dZ.tensorIso k₀ l).hom.app (M, N))
     ((dU.tensorIso k₀ l).app (R.mapDerivedCategory.obj M, R.mapDerivedCategory.obj N))
@@ -214,6 +215,6 @@ theorem native_ordinary_restriction_total_model
     (Functor.LaxMonoidal.μ DerivedCategory.Q P T)
     (R.mapDerivedCategoryFactors.hom.app (P ⊗ T))
     (DerivedCategory.Q.map (R.mapCochainComplexμIso P T).inv)
-    (exact_total_tensor_square R P T)
+    h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
