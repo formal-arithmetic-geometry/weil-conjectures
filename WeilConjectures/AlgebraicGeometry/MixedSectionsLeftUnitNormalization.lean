@@ -27,14 +27,12 @@ namespace AlgebraicGeometry
 private theorem paste_unit_naturality
     {C D E : Type*} [Category C] [Category D] [Category E]
     (G : C ⥤ D) (H : D ⥤ E) (T : C ⥤ E) (c : G ⋙ H ⟶ T)
-    {A B : C} {U V : D} {P Q : E}
-    {u : U ⟶ V} {v : V ⟶ G.obj B} {a : U ⟶ G.obj A} {t : A ⟶ B}
+    {A B : C} {U : D} {P Q : E}
+    {a : U ⟶ G.obj A} (t : A ⟶ B)
     {η : P ⟶ H.obj U} {b : P ⟶ Q} {x : Q ⟶ T.obj A}
-    (hg : η ≫ H.map a ≫ c.app A = b ≫ x)
-    (he : u ≫ v = a ≫ G.map t) :
-    (η ≫ H.map u ≫ H.map v) ≫ c.app B = b ≫ x ≫ T.map t := by
-  simp only [Category.assoc]
-  rw [← H.map_comp_assoc, he, H.map_comp_assoc]
+    (hg : η ≫ H.map a ≫ c.app A = b ≫ x) :
+    (η ≫ H.map (a ≫ G.map t)) ≫ c.app B = b ≫ x ≫ T.map t := by
+  simp only [Functor.map_comp, Category.assoc]
   have hn := c.naturality t
   simp only [Functor.comp_map] at hn
   rw [hn]
@@ -177,7 +175,6 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
-set_option trace.profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
@@ -236,19 +233,12 @@ theorem mixedSections_left_unit_normalization
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
-  have hg : p ≫ (mixedGlobalSectionsDirectImageIso g).hom.app
-        ((schemeDerivedDirectImage f).obj F) =
-      Sg.mapDerivedCategoryFactorsh.inv.app
-        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
-      (schemeGlobalScalarRestriction g).map
-        (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
-      (schemeGlobalScalarRestriction g).map
-        ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
-    have h := paste_unit_naturality (schemeDerivedDirectImage g)
-      (schemeDerivedGlobalSections Z)
-      (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
-      (mixedGlobalSectionsDirectImageIso g).hom hg₀ he
-    exact h
+  have hg := paste_unit_naturality (schemeDerivedDirectImage g)
+    (schemeDerivedGlobalSections Z)
+    (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
+    (mixedGlobalSectionsDirectImageIso g).hom (Df.rightDerivedFunctorUnit.app K) hg₀
+  erw [← he] at hg
+  simp only [Functor.map_comp] at hg
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
