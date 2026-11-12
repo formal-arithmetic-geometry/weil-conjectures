@@ -326,8 +326,27 @@ theorem galoisProjectorTensorRightColimit (Y : Scheme.{u})
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
     PreservesColimit F ((MonoidalCategory.curriedTensor _).flip.obj M) := inferInstance
 
+/-- Fourfold graded tensor products of pro-étale module objects admit extensionality. -/
+theorem galoisProjectorHasTensor₄ObjExt (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+
+/-- Graded tensor products of pro-étale module objects can be grouped on the left. -/
+theorem galoisProjectorHasGoodTensor₁₂Tensor (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+
+/-- Graded tensor products of pro-étale module objects can be grouped on the right. -/
+theorem galoisProjectorHasGoodTensorTensor₂₃ (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (X₁ X₂ X₃ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
+
 attribute [local instance 2000] galoisProjectorHasColimit galoisProjectorTensorLeftColimit
-  galoisProjectorTensorRightColimit
+  galoisProjectorTensorRightColimit galoisProjectorHasTensor₄ObjExt
+  galoisProjectorHasGoodTensor₁₂Tensor galoisProjectorHasGoodTensorTensor₂₃
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
@@ -371,7 +390,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
   simp only [eqToHom_refl, Category.id_comp] at hα
   have key := exists_retraction_of_eq_comp_map_comp_of_invariant_eq R((N.j)_*⟦Λ⟧)
     L((N.i)^*⟦Λ⟧) (α := ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C)
-      (i := (leftDerivedUpperStarId Λ X').app _) (c := _)
+      (i := (leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)) (c := _)
       (κ := (N.galoisLayerExchangeIso h Ω Λ C))
     rfl _ R hα hR
     (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
@@ -460,7 +479,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
-  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ _ hC
+  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀
+    (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
   choose F₀ hF₀ using hterms
   have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
       (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
