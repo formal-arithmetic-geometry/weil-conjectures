@@ -64,6 +64,7 @@ private theorem quotient_section_coordinates
   exact ⟨LinearEquiv.ofBijective l hq, fun _ ↦ rfl⟩
 
 set_option linter.unusedVariables false in
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- Affine scalar structures and tensor localization need additional elaboration fuel.
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented

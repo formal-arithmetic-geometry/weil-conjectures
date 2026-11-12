@@ -31,6 +31,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 attribute [local irreducible] quotientLine quotientLineMap derivedScalars
   QuotientLineRealization FiniteDiagonalComparison
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Repeated inherited coefficient-ring instance conversions exceed the default heartbeat budget.
 /-- Identify a supplied scalar-compatible quotient diagram with the positive finite
