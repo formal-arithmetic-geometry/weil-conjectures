@@ -249,6 +249,7 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
+set_option maxHeartbeats 400000 in
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
 Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
 (blueprint: lem-sf-canonical-integral-scalar-square).
@@ -334,8 +335,10 @@ theorem canonical_integral_scalar_square
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
   have rfShift : rF.hom.CommShift ℤ :=
     finiteTorIntegralShift_compatibility l Ω E T
-  have rgShift : rG.hom.CommShift ℤ :=
-    finiteTorIntegralShift_compatibility l Ω L T
+  have rgShift : rG.hom.CommShift ℤ := by
+    letI : JY.Full := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.full
+    letI : JY.Faithful := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.faithful
+    exact Functor.CommShift.ofComp_compatibility rG ℤ
   obtain ⟨e, hs, he⟩ := restriction_iso IX IY JX JY IE IL S.functor SI O B
     (sC1 := sE) (sC2 := siE) (sC3 := sL) (sC4 := siL)
     (sIX := ixShift) (sIY := iyShift) (sJX := jxShift) (sJY := jyShift)
