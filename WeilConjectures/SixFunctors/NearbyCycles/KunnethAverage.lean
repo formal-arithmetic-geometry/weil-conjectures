@@ -47,10 +47,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 set_option trace.Meta.synthInstance true in
 set_option profiler true in
-local instance fastHomAddCommGroup {C : Type*} [Category C] [Preadditive C]
-    (X Y : C) : AddCommGroup (X ⟶ Y) := Preadditive.homGroup X Y
-
-set_option profiler true in
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
