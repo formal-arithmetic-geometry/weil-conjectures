@@ -37,7 +37,6 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
 
 
 set_option profiler true in
--- The functor-level comparisons require more elaboration steps than objectwise comparisons.
 /-- A bounded finite free resolution on an open computes restricted Ext
 naturally in every coefficient sheaf.
 Source: Stacks Project, Tag 08DL (restriction of derived internal Hom), and
@@ -147,6 +146,8 @@ theorem local_finite_free_homology_natural
   have : IsIso αq := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro C
+    have : CochainComplex.IsKInjective (J.obj C) :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A (cs.obj C)
     have : CochainComplex.IsKInjective (Rc.obj (J.obj C)) :=
       Functor.PreservesKInjectiveComplexes.isKInjective_map (F := R) (J.obj C)
     have : QuasiIso (α.app C) := by

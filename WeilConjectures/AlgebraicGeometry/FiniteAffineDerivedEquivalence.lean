@@ -31,8 +31,17 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+private theorem affine_algebra_restrict_quasicoherent_iff
+    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
+    (M : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) :
+    M.IsQuasicoherent ↔
+      ((SheafOfModules.restrictScalars
+        (R := moduleRings Y.toRingedSpace)
+        (R' := moduleRings (directImageAlgebraSpace f))
+        ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj M).IsQuasicoherent :=
+  (Scheme.Modules.affine_module_correspondence f).1 M
+
 set_option profiler true in
--- Elaborating the scalar-restriction comparison unfolds several sheaf category instances.
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
 its direct-image algebra. Its functor is induced by `Rg_*` for the canonical morphism
 `g : (X, O_X) → (Y, f_* O_X)`. Restricting scalars recovers `Rf_*`.
@@ -103,7 +112,7 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
   have hT : ∀ M, pA M → schemeDerivedQCohProperty Y (T.rightDerivedFunctor.obj M) := by
     intro M hM n
     let e := (T.rightDerivedFunctorHomologyFunctorIso n).app M
-    have hq := ((Scheme.Modules.affine_module_correspondence f).1 _).mp (hM n)
+    have hq := (affine_algebra_restrict_quasicoherent_iff f _).mp (hM n)
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso e hq
   have underived : RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙ T ≅
       RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
@@ -117,9 +126,14 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     obtain ⟨⟨e⟩, hq⟩ := schemeHigherDirectImage_of_affine f K hK n
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) n
-    let c := (T.rightDerivedFunctorHomologyFunctorIso n).app (R.obj K) ≪≫
+    let c : T.obj ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) n).obj (R.obj K)) ≅
+        (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).obj
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).obj K) :=
+      (T.rightDerivedFunctorHomologyFunctorIso n).app (R.obj K) ≪≫
       H.mapIso (comparison.app K) ≪≫ e
-    apply ((Scheme.Modules.affine_module_correspondence f).1 _).mpr
+    apply (affine_algebra_restrict_quasicoherent_iff f _).mpr
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso c.symm hq
   obtain ⟨P, hP, hmap, hadd, L, ε, hderived, hflat, ⟨adj⟩⟩ :=
     RingedSpace.derivedModulePullback_adjunction (toDirectImageAlgebraSpace f)

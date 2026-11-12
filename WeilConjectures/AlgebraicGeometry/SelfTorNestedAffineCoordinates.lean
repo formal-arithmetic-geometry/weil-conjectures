@@ -115,8 +115,6 @@ private theorem exterior_over_component_ext_le
   rw [hb₁, hb₂] at heq
   exact heq
 
-set_option profiler true in
--- Identifying the derived tensor coordinates with abstract module maps needs extra fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- Choose affine source and target coordinates using quotient resolutions and conormal
 classes. The conjugated comparisons agree on the whole smaller affine chart's sections.
