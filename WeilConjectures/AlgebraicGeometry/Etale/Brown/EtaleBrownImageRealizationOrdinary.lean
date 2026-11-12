@@ -58,7 +58,6 @@ private theorem constantSection_apply
         (CategoryTheory.forget CommRingCat.{u + 1}))
   exact congrArg (fun f ↦ f.app U t) h
 
-set_option profiler true in
 /-- Construction of the section-normalized ordinary comparison.
 Source: Zheng, Construction 5.15; Stacks 03CY and 07A4.
 (blueprint: lem-pur-etale-brown-image-realization-ordinary).
