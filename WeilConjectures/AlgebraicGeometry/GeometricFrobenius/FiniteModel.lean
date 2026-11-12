@@ -198,7 +198,14 @@ theorem exists_finiteModel_of_isClosedImmersion {k₀ : Type u} [Field k₀] [Fi
     exact Ideal.mem_map_of_mem _ (Ideal.mem_comap.mpr (hG ▸ Ideal.subset_span hx))
   set J₀ := J.comap ι
   let B := (L ⊗[k₀] R) ⧸ J₀
+  let : Algebra L (L ⊗[k₀] R) := Algebra.TensorProduct.leftAlgebra
+  let : Algebra L B := Ideal.Quotient.algebra L
+  let : Module L B := Algebra.toModule
   let Ω := AlgebraicClosure L
+  let : CommRing (Ω ⊗[L] B) := Algebra.TensorProduct.instCommRing
+  let : Algebra Ω (Ω ⊗[L] B) := Algebra.TensorProduct.leftAlgebra
+  have : Module.IsTorsionFree L K := DivisionSemiring.to_moduleIsTorsionFree
+  have : Module.IsTorsionFree L Ω := DivisionSemiring.to_moduleIsTorsionFree
   have : Algebra.IsAlgebraic L K := Algebra.IsAlgebraic.tower_top (K := k₀) L
   let θ₀ : K →ₐ[L] Ω := IsAlgClosed.lift
   let θ' : K →ₐ[k₀] Ω := θ₀.restrictScalars k₀
