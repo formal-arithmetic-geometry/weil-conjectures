@@ -81,7 +81,7 @@ private theorem inverseMate_isIso_of_left_adjoints_explicit
     (w : TwoSquare R₁ H G R₂)
     (h : IsIso ((mateEquiv b₁ b₂).symm w)) :
     IsIso ((mateEquiv a₁ a₂).symm w) := by
-  letI := h
+  have := h
   exact inverseMate_isIso_of_left_adjoints a₁ b₁ a₂ b₂ w
 
 section Ordinary
@@ -169,6 +169,10 @@ end OpenRestriction
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
   exact inverseMate_isIso_of_left_adjoints_explicit
+    (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
+      (sequenceQuotient l L) j)
+    (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
+      (sequenceQuotient l E) j)
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
       (sequenceQuotient l L) j)
