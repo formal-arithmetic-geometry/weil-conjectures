@@ -389,8 +389,11 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
-  have finish := cancel'
-    _ τ (podTensorReindexAt_tower l E g D hD P Q τ) hs
+  have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
+  run_tac Lean.Elab.Tactic.withMainContext do
+    Lean.logInfo m!"hs: {(← Lean.Meta.getLocalDeclFromUserName `hs).type}"
+    Lean.logInfo m!"cancelTower: {(← Lean.Meta.getLocalDeclFromUserName `cancelTower).type}"
+  have finish := cancelTower hs
     ((integralCompletedTensor l E X).map
       (Prod.mkHom
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
