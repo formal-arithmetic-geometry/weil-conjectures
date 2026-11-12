@@ -263,7 +263,8 @@ theorem graded_chain_maps_exact (k : Type u) [Field k]
     exact Fin.cases (h𝒢 2) (Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) (fun i ↦ Fin.elim0 i)))
   have hNs : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N j),
       a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H j z → a • y ∈ H j (n + z) := by
-    exact Fin.cases (hA_smul 2) (Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (fun i ↦ Fin.elim0 i)))
+    exact Fin.cases (hA_smul 2)
+      (Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (fun i ↦ Fin.elim0 i)))
   have ha : ∀ j, Function.Injective (a j) ∧ Set.range (a j) = degreeZeroFractions
       (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
       (fun n : ℕ ↦ (H j n : Set (N j))) (Submonoid.powers f) := by
