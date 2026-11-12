@@ -26,8 +26,9 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+-- Use additivity of the factors before reconstructing additivity from preserved products.
+attribute [local instance 100] Functor.additive_of_preserves_binary_products
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 @[instance_reducible]
 private noncomputable def derivedCategoryTransport
@@ -69,11 +70,6 @@ private theorem lifted_morphism_eq
 
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
-set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
--- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 500000 in
--- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Compatible local morphisms between two fixed global derived objects lift globally.
 Source: Stacks Project, Cohomology, Tag 08BW, exactness at the local Hom pair
 (blueprint: lem-sc-scheme-derived-hom-gluing).
