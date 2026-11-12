@@ -176,19 +176,19 @@ lemma pullbackExchange_square_aux {SM1 SM SP1 SP : Type*} [Category SM1] [Catego
       gψ'.map (cEφ'.app C) ≫ cEψ'.app (e.obj C) ≫ εP.map (cB.app C))
     (αψ : (εM1 ⋙ RM1 ⋙ iM1) ⋙ g' ⟶ g ⋙ εM ⋙ RM ⋙ iM)
     (hαψ : αψ = Functor.whiskerLeft (εM1 ⋙ RM1) cIψ ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εM1 (mateEquiv aM1 aM cJψ).natTrans ≫
+      (Functor.whiskerLeft εM1 (mateEquiv aM1 aM cJψ) ≫
         Functor.whiskerRight cEψ RM) iM)
     (αφ : (εM ⋙ RM ⋙ iM) ⋙ f' ⟶ f ⋙ εP ⋙ RP ⋙ iP)
     (hαφ : αφ = Functor.whiskerLeft (εM ⋙ RM) cIφ ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εM (mateEquiv aM aP cJφ).natTrans ≫
+      (Functor.whiskerLeft εM (mateEquiv aM aP cJφ) ≫
         Functor.whiskerRight cEφ RP) iP)
     (αφ' : (εM1 ⋙ RM1 ⋙ iM1) ⋙ e' ⟶ e ⋙ εP1 ⋙ RP1 ⋙ iP1)
     (hαφ' : αφ' = Functor.whiskerLeft (εM1 ⋙ RM1) cIφ' ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εM1 (mateEquiv aM1 aP1 cJφ').natTrans ≫
+      (Functor.whiskerLeft εM1 (mateEquiv aM1 aP1 cJφ') ≫
         Functor.whiskerRight cEφ' RP1) iP1)
     (αψ' : (εP1 ⋙ RP1 ⋙ iP1) ⋙ k' ⟶ k ⋙ εP ⋙ RP ⋙ iP)
     (hαψ' : αψ' = Functor.whiskerLeft (εP1 ⋙ RP1) cIψ' ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εP1 (mateEquiv aP1 aP cJψ').natTrans ≫
+      (Functor.whiskerLeft εP1 (mateEquiv aP1 aP cJψ') ≫
         Functor.whiskerRight cEψ' RP) iP)
     (C : DX1) :
     cS.app ((εM1 ⋙ RM1 ⋙ iM1).obj C) ≫ f'.map (αψ.app C) ≫ αφ.app (g.obj C) =
@@ -399,7 +399,7 @@ lemma map_tensorMap_comp_pullbackExchange_app
     (pullbackSquareComparison Λ φ.commSq_ε).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (lowerStarTensorMap' Λ N.j) (lowerStarTensorMap' Λ M.j)
     (fun x y ↦ lowerStarTensorMap'_natural Λ M.j x y)
     (fun X Y ↦ pullbackSquareComparison_tensor Λ φ.commSq_i X Y)

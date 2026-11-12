@@ -62,7 +62,7 @@ noncomputable def integersModPowReductionIhomIso
         ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj L).obj :=
   haveI := isIso_ihomComparison_integersModPowReduction ℓ E n X K L
   asIso ((Functor.LaxMonoidal.ihomComparison
-    L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) K.obj).natTrans.app L.obj)
+    L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) K.obj).app L.obj)
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- The étale reading `ρ_X` is fully faithful on bounded constructible condensed

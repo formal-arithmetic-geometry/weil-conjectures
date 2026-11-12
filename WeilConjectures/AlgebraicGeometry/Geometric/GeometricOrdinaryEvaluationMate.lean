@@ -57,18 +57,17 @@ theorem geometricOrdinaryEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : 
     (adj' : L' ⊣ evaluation.{c, v, max c v r}
       J' O.coefficients O.coefficientTransition n) :
     IsIso ((mateEquiv adj adj').symm
-      (TwoSquare.mk _ _ _ _ (O.ordinaryPullEvaluation n).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (O.ordinaryPullEvaluation n).inv)) := by
   classical
   let δ := (O.ordinaryPullEvaluation n).symm
   let adjG := O.ordinaryAdjunction
   let adjL := O.levelAdjunction n
-  let b := (mateEquiv adjG adjL (TwoSquare.mk _ _ _ _ δ.hom)).natTrans
+  let b := (mateEquiv adjG adjL (TwoSquare.mk _ _ _ _ δ.hom))
   have hb : b = (O.ordinaryPushEvaluation n).hom := by
     have he : (mateEquiv adjG adjL).symm
         (TwoSquare.mk _ _ _ _ (O.ordinaryPushEvaluation n).hom) =
         TwoSquare.mk _ _ _ _ δ.hom := by
-      apply TwoSquare.ext
-      intro M
+      refine NatTrans.ext (funext fun M ↦ ?_)
       apply (adjL.homEquiv _ _).injective
       have hu := unit_mateEquiv_symm adjG adjL
         (TwoSquare.mk _ _ _ _ (O.ordinaryPushEvaluation n).hom) M
@@ -83,9 +82,9 @@ theorem geometricOrdinaryEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : 
       exact O.ordinary_unit_evaluation n M
     have hh := congrArg (mateEquiv adjG adjL) he
     rw [Equiv.apply_symm_apply] at hh
-    exact congrArg TwoSquare.natTrans hh.symm
+    exact hh.symm
   let a := ((mateEquiv adj adj').symm
-    (TwoSquare.mk _ _ _ _ δ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δ.hom))
   have h := iterated_mateEquiv_conjugateEquiv adj adj' adjL adjG
     ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ δ.hom))
   rw [Equiv.apply_symm_apply] at h

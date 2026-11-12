@@ -27,7 +27,7 @@ lemma purity_orientation_eq_iff_trace_eq
     {L' : A' ⥤ B'} {R' : B' ⥤ A'} (adj' : L' ⊣ R')
     (S : A ⥤ A') (T : B ⥤ B') (α : L ⋙ T ≅ S ⋙ L')
     {K : A} {U : B} (φ : K ⟶ R.obj U) (θ : S.obj K ⟶ R'.obj (T.obj U)) :
-    S.map φ ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α.inv)).natTrans.app U = θ ↔
+    S.map φ ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α.inv)).app U = θ ↔
       T.map ((adj.homEquiv _ _).symm φ) =
         α.hom.app K ≫ (adj'.homEquiv _ _).symm θ := by
   rw [← (adj'.homEquiv _ _).symm.injective.eq_iff]
@@ -45,7 +45,7 @@ lemma purity_orientation_map_eq_iff_trace_eq
     {L' : A' ⥤ B'} {R' : B' ⥤ A'} (adj' : L' ⊣ R')
     (S : A ⥤ A') (T : B ⥤ B') (α : L ⋙ T ≅ S ⋙ L')
     (β : R ⋙ S ≅ T ⋙ R')
-    (hβ : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α.inv)).natTrans = β.hom)
+    (hβ : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α.inv)) = β.hom)
     {K : A} {U : B} (φ : K ⟶ R.obj U)
     (θ θ₀ : S.obj K ⟶ S.obj (R.obj U)) (hθ : θ = θ₀) :
     S.map φ = θ₀ ↔ T.map ((adj.homEquiv _ _).symm φ) =

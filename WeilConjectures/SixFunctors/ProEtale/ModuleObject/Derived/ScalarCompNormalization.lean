@@ -167,7 +167,6 @@ theorem scalarCompNormalization
   repeat' first
     | erw [CategoryTheory.Functor.map_id] at hUi
     | erw [Category.id_comp] at hUi
-    | erw [Category.comp_id] at hUi
   repeat' first
     | erw [CategoryTheory.Functor.map_id]
     | erw [Category.id_comp]

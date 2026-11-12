@@ -341,7 +341,7 @@ theorem integralExceptionalSiteInverse_existsUnique (n : ℕ) :
   let adj₂ := ProEtale.comparisonAdjunction (ModuleCat.{u + 1}
     (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W
   let β := integralExceptionalSiteRight l E W P B n
-  let α := ((mateEquiv adj₁ adj₂).symm β.hom).natTrans
+  let α := ((mateEquiv adj₁ adj₂).symm β.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences adj₁ adj₂ β
   let e := (asIso α).symm
   have he M N (h : (B.ordinary.lift n).modules.obj M ⟶ N) :

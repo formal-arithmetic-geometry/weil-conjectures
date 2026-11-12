@@ -110,7 +110,7 @@ theorem artinSchreier_sheafTorsor (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S,
                 (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app
                   (Opposite.op U)) (ULift.up a)) s)).down =
           (e.hom.app (Opposite.op U) s).down ≫
-            (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).hom := by
+            (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).asIso.hom := by
   let : TopologicalSpace (ULift.{u + 1} (ZMod p)) := ⊥
   have : DiscreteTopology (ULift.{u + 1} (ZMod p)) := ⟨rfl⟩
   refine ⟨(artinSchreierEtaleTorsor hP hchar).toSheafTorsor,

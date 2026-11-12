@@ -69,7 +69,7 @@ private theorem mateUnit
     (e₁ : R₁ ≅ 𝟭 C) (e₂ : R₂ ≅ 𝟭 D) (X : C) :
     ((mateEquiv adj₁ adj₂).symm
       (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight e₁.hom F ≫ Functor.whiskerLeft F e₂.inv))).natTrans.app X ≫
+        (Functor.whiskerRight e₁.hom F ≫ Functor.whiskerLeft F e₂.inv))).app X ≫
       F.map ((adj₁.leftAdjointIdIso e₁).hom.app X) =
     (adj₂.leftAdjointIdIso e₂).hom.app (F.obj X) := by
   let u₁ := adj₁.leftAdjointIdIso e₁
@@ -322,7 +322,7 @@ private theorem comparisonScalarComp (T : Scheme.{u})
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) ψ))
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) χ))
     t₁ t₂ t₃ eA eB ht
-  have hmK := congrArg (fun w ↦ w.natTrans.app K) hm
+  have hmK := congrArg (fun w ↦ w.app K) hm
   dsimp only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app] at hmK

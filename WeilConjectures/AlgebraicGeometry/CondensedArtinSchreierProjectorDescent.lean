@@ -204,20 +204,20 @@ theorem condensedArtinSchreierPullback_reflectsIsomorphisms :
 
 private theorem images_tensor
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
-      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A))))
     (hprod : ∀ ψ ψ' : AddChar k (MonObj.Γ Λ),
-      ((image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+      ((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
-          e (ψ * ψ') =
-      (image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+          (e (ψ * ψ')).asHom =
+      (image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A)))
-    (_hunit : Functor.LaxMonoidal.ε G ≫ e 1 = Functor.LaxMonoidal.ε G)
+    (_hunit : Functor.LaxMonoidal.ε G ≫ (e 1).asHom = Functor.LaxMonoidal.ε G)
     (χ χ' : AddChar k (MonObj.Γ Λ)) :
     Nonempty (condensedArtinSchreierSheaf Λ k χ ⊗
       condensedArtinSchreierSheaf Λ k χ' ≅ condensedArtinSchreierSheaf Λ k (χ * χ')) := by
@@ -228,28 +228,28 @@ private theorem images_tensor
   have := heval (χ * χ')
   have := (CondensedRing.upperStarLowerStarAdjunction Λ q).image_tensor_regular_isIso
     (e χ) (e χ') (e (χ * χ')) (hprod χ χ')
-  exact ⟨asIso (((image.ι (e χ) ⊗ₘ image.ι (e χ')) ≫
+  exact ⟨asIso (((image.ι (e χ).asHom ⊗ₘ image.ι (e χ').asHom) ≫
     Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
     (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
-      factorThruImage (e (χ * χ')))⟩
+      factorThruImage (e (χ * χ')).asHom)⟩
 
 private theorem image_unit
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
-      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A))))
     (_hprod : ∀ ψ ψ' : AddChar k (MonObj.Γ Λ),
-      ((image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+      ((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
-          e (ψ * ψ') =
-      (image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+          (e (ψ * ψ')).asHom =
+      (image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A)))
-    (hunit : Functor.LaxMonoidal.ε G ≫ e 1 = Functor.LaxMonoidal.ε G)
+    (hunit : Functor.LaxMonoidal.ε G ≫ (e 1).asHom = Functor.LaxMonoidal.ε G)
     : Nonempty (Mod.regular (condensedRingObj Λ A) ≅
       condensedArtinSchreierSheaf Λ k 1) := by
   let := condensedArtinSchreierPullback_reflectsIsomorphisms Λ k
@@ -257,7 +257,7 @@ private theorem image_unit
   have := heval 1
   have := (CondensedRing.upperStarLowerStarAdjunction Λ q).unit_image_regular_isIso (e 1) hunit
   exact ⟨Mod.regularUnitIso (condensedRingObj Λ A) ≪≫
-    asIso (Functor.LaxMonoidal.ε G ≫ factorThruImage (e 1))⟩
+    asIso (Functor.LaxMonoidal.ε G ≫ factorThruImage (e 1).asHom)⟩
 
 private def sheafOfPullbackIso
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
@@ -269,20 +269,20 @@ private def sheafOfPullbackIso
 
 private theorem tensor_of_projectors
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
-      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A))))
     (hprod : ∀ ψ ψ' : AddChar k (MonObj.Γ Λ),
-      ((image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+      ((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
-          e (ψ * ψ') =
-      (image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+          (e (ψ * ψ')).asHom =
+      (image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A)))
-    (hunit : Functor.LaxMonoidal.ε G ≫ e 1 = Functor.LaxMonoidal.ε G)
+    (hunit : Functor.LaxMonoidal.ε G ≫ (e 1).asHom = Functor.LaxMonoidal.ε G)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (ψ ψ' : AddChar k (MonObj.Γ Λ)) (f : Γ(X, ⊤)) :
     Nonempty (condensedArtinSchreierSheafOf Λ k X ψ f ⊗
@@ -296,20 +296,20 @@ private theorem tensor_of_projectors
 
 private theorem inverse_of_projectors
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
-      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A))))
     (hprod : ∀ ψ ψ' : AddChar k (MonObj.Γ Λ),
-      ((image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+      ((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
-          e (ψ * ψ') =
-      (image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+          (e (ψ * ψ')).asHom =
+      (image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A)))
-    (hunit : Functor.LaxMonoidal.ε G ≫ e 1 = Functor.LaxMonoidal.ε G)
+    (hunit : Functor.LaxMonoidal.ε G ≫ (e 1).asHom = Functor.LaxMonoidal.ε G)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (ψ : AddChar k (MonObj.Γ Λ)) (f : Γ(X, ⊤)) :
     Nonempty (condensedArtinSchreierSheafOf Λ k X ψ f ⊗
@@ -324,7 +324,7 @@ private theorem inverse_of_projectors
 
 private theorem cover_of_evaluations
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
-      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A))))
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
@@ -339,7 +339,7 @@ private theorem cover_of_evaluations
     (rankOne_cover_pullback Λ q (AffineSpace.surjective_artinSchreierMap k)
       (AffineSpace.homOfVector (X ↘ Spec (.of k)) (fun _ : PUnit.{u + 1} ↦ f))
       (condensedArtinSchreierSheaf Λ k ψ)
-      ⟨asIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      ⟨asIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A)))⟩)
 
@@ -373,20 +373,20 @@ to obtain a tensor inverse. Tensor invertibility implies flatness; a flat object
 zero has Tor amplitude [0,0]. Empty schemes and trivial characters are included. -/
 theorem condensedArtinSchreier_properties_of_projectors
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
-      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ)) ≫
+      IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
           (Mod.regular (condensedRingObj Λ A))))
     (hprod : ∀ ψ ψ' : AddChar k (MonObj.Γ Λ),
-      ((image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+      ((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A))) ≫
-          e (ψ * ψ') =
-      (image.ι (e ψ) ⊗ₘ image.ι (e ψ')) ≫
+          (e (ψ * ψ')).asHom =
+      (image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫
         Functor.LaxMonoidal.μ G (Mod.regular (condensedRingObj Λ A))
           (Mod.regular (condensedRingObj Λ A)) ≫
         (CondensedRing.lowerStar Λ q).map (Mod.regularMul (condensedRingObj Λ A)))
-    (hunit : Functor.LaxMonoidal.ε G ≫ e 1 = Functor.LaxMonoidal.ε G)
+    (hunit : Functor.LaxMonoidal.ε G ≫ (e 1).asHom = Functor.LaxMonoidal.ε G)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (ψ ψ' : AddChar k (MonObj.Γ Λ)) (f : Γ(X, ⊤)) :
     IsLisseCoefficientModule Λ (condensedArtinSchreierSheafOf Λ k X ψ f) ∧

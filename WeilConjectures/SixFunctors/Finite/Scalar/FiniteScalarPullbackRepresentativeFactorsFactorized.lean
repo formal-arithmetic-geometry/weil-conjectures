@@ -57,7 +57,7 @@ private theorem inverse_mate_localization
     (t : R ⋙ G ≅ H ⋙ R')
     (d : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
-    (hs : (mateEquiv a b s.hom).natTrans = t.hom)
+    (hs : (mateEquiv a b s.hom) = t.hom)
     (hd : ∀ I : CochainComplex B ℤ,
       G.mapDerivedCategory.map (R.rightDerivedFunctorUnitQ I) ≫
         d.hom.app (DerivedCategory.Q.obj I) ≫
@@ -66,11 +66,11 @@ private theorem inverse_mate_localization
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t.hom (.up ℤ)).app I) ≫
         R'.rightDerivedFunctorUnitQ ((H.mapHomologicalComplex (.up ℤ)).obj I)) :
     ((mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      b.mapDerivedCategoryRightDerivedAdjunction).symm d.hom).natTrans =
+      b.mapDerivedCategoryRightDerivedAdjunction).symm d.hom) =
         (Functor.mapDerivedCategorySquareIso s).hom := by
   let m := (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
     b.mapDerivedCategoryRightDerivedAdjunction
-      (Functor.mapDerivedCategorySquareIso s).hom).natTrans
+      (Functor.mapDerivedCategorySquareIso s).hom)
   have hm : m = d.hom := by
     ext N
     obtain ⟨I, hI, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective N
@@ -112,11 +112,10 @@ private theorem inverse_mate_localization
       b.mapDerivedCategoryRightDerivedAdjunction
       (Functor.mapDerivedCategorySquareIso s).hom) =
         (d.hom : TwoSquare _ _ _ _) := by
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     exact congrArg (fun z ↦ z.app N) hm
   rw [hm'] at he
-  exact congrArg TwoSquare.natTrans he
+  exact he
 
 private theorem normalization_transport
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -157,10 +156,10 @@ private theorem inverse_mate_left_iso
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : L' ⊣ R') (e : L ≅ E)
     (t : R ⋙ G ⟶ H ⋙ R') :
-    ((mateEquiv (a.ofNatIsoLeft e) b).symm t).natTrans ≫
+    ((mateEquiv (a.ofNatIsoLeft e) b).symm t) ≫
         Functor.whiskerRight e.inv H =
-      ((mateEquiv a b).symm t).natTrans := by
-  let s := ((mateEquiv (a.ofNatIsoLeft e) b).symm t).natTrans
+      ((mateEquiv a b).symm t) := by
+  let s := ((mateEquiv (a.ofNatIsoLeft e) b).symm t)
   have hb : b.ofNatIsoLeft (Iso.refl L') = b := by
     apply Adjunction.ext
     ext N
@@ -171,13 +170,12 @@ private theorem inverse_mate_left_iso
   have hs : (mateEquiv a b
       (TwoSquare.mk _ _ _ _ (s ≫ Functor.whiskerRight e.inv H))) =
         (t : TwoSquare _ _ _ _) := by
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     have hh := congrArg (fun z ↦ z.app N) hm.symm
-    have hr := congrArg (fun z : TwoSquare _ _ _ _ ↦ z.natTrans.app N)
+    have hr := congrArg (fun z : TwoSquare _ _ _ _ ↦ z.app N)
       ((mateEquiv (a.ofNatIsoLeft e) b).apply_symm_apply t)
     exact hh.trans hr
-  exact (congrArg TwoSquare.natTrans
+  exact (
     ((mateEquiv a b).symm_apply_eq.mpr hs.symm)).symm
 
 private theorem square_factors
@@ -257,11 +255,11 @@ theorem finiteScalarPullback_representative_factors_factorized
   let d := (sfIntrinsicDerivedDirectImageComparison p R).symm ≪≫
     isoWhiskerLeft H.mapDerivedCategory
       (Functor.rightDerivedFunctorNatIso (eqToIso hg)).symm
-  have hs : (mateEquiv a b s.hom).natTrans = t.hom := by
+  have hs : (mateEquiv a b s.hom) = t.hom := by
     unfold s finiteScalarOrdinaryPullbackComparison
     change (mateEquiv a b ((mateEquiv a b).symm
-      (TwoSquare.mk _ _ _ _ t.hom))).natTrans = t.hom
-    exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply
+      (TwoSquare.mk _ _ _ _ t.hom))) = t.hom
+    exact ((mateEquiv a b).apply_symm_apply
       (TwoSquare.mk _ _ _ _ t.hom))
   have hd := normalization_transport
     (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p)
@@ -276,7 +274,7 @@ theorem finiteScalarPullback_representative_factors_factorized
     change ((mateEquiv
       (ProEtale.derivedUpperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1} R)) p)
-      b.mapDerivedCategoryRightDerivedAdjunction).symm d.hom).natTrans ≫
+      b.mapDerivedCategoryRightDerivedAdjunction).symm d.hom) ≫
       Functor.whiskerRight L.leftDerivedFunctorIsoMapDerivedCategory.hom H.mapDerivedCategory = _
     rw [AlgebraicGeometry.ProEtale.restriction_derived_adj_eq]
     exact (inverse_mate_left_iso a.mapDerivedCategoryRightDerivedAdjunction

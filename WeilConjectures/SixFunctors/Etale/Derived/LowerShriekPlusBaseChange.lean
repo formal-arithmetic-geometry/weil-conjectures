@@ -118,7 +118,7 @@ derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` (blue
 `def-weil-pbc-derived-exchange`). -/
 lemma derivedPlusFormalism_pfBaseChange (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     (w : t ≫ r = l ≫ b) :
-    ((derivedPlusFormalism A).pfBaseChange t l r b w).natTrans =
+    ((derivedPlusFormalism A).pfBaseChange t l r b w) =
       derivedBaseChangeMapPlus A (CommSq.mk w) := by
   rw [← baseChange_eq_derivedBaseChangeMapPlus, derivedPlusFormalism_pfBaseChange_eq_mateEquiv]
   ext K
@@ -163,7 +163,7 @@ and compatible with pasting (`ExchangeFormalism.baseChange_paste_horiz`,
 theorem isIso_derivedPlusFormalism_baseChange [Finite Λ] {U' U Z' Z : Scheme.{u}}
     {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion l] [IsOpenImmersion r]
     (h : IsPullback t l r b) :
-    IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w).natTrans :=
+    IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w) :=
   CompactSupportFormalism.HasBaseChange.isIso_baseChange h
 
 /-- Blueprint `def-cbc-exchange-map`: Compact-support exchange map.
@@ -180,7 +180,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap [Fi
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[ModuleCat.{u + 1} Λ]+ ⋙ D+((g)^*[ModuleCat.{u + 1} Λ]) ⟶
       D+((g')^*[ModuleCat.{u + 1} Λ]) ⋙ Rf_!(c.ofIsPullback sq)[ModuleCat.{u + 1} Λ]+ :=
-  ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChangeOfIsPullback sq c).natTrans
+  ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChangeOfIsPullback sq c)
 
 /-- Blueprint `thm-cbc-finite-torsion`: Compact-support base change at finite coefficients.
 
@@ -217,7 +217,7 @@ noncomputable def rightDerivedLowerShriekPlusBaseChangeMap [Finite Λ] [HasCompa
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ]+ ⋙ D+((g)^*[ModuleCat.{u + 1} Λ]) ⟶
       D+((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ]+ :=
-  ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekBaseChange sq).natTrans
+  ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekBaseChange sq)
 
 /-- Blueprint `sk-prop-sf-cbc`: Compact-support base change, clause (a) on the small étale site.
 

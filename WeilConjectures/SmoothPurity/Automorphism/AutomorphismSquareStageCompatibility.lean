@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 universe u v a₀ a₁ b₀ b₁
 open CategoryTheory AlgebraicGeometry
-attribute [local implicit_reducible] CategoryTheory.Aut
 namespace WeilConjectures
 attribute [local irreducible] HasDerivedCategory.standard integralCoefficientLinear
   integralDerivedPullback integralScalarExtensionOfUniverses integralComparisonComposition
@@ -132,16 +131,16 @@ private theorem integral_square
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom)
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom)
     (a : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
-      constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.hom ≅
-        constructibleIntegralPullback l E eX.hom ⋙ constructibleIntegralPullback l E f)
+      constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.asIso.hom ≅
+        constructibleIntegralPullback l E eX.asIso.hom ⋙ constructibleIntegralPullback l E f)
     (ha : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
       (K : sfIntegralConstructibleCategory l E X),
       ((a E).hom.app K).hom =
-        (integralComparisonComposition l E C eY.hom f K).inv ≫
+        (integralComparisonComposition l E C eY.asIso.hom f K).inv ≫
           eqToHom (congrArg (fun g ↦ (integralDerivedPullback l E g).obj K.obj) h) ≫
-            (integralComparisonComposition l E C f eX.hom K).hom)
+            (integralComparisonComposition l E C f eX.asIso.hom K).hom)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
     (ι : E →ₐ[ℚ_[l]] L)
@@ -149,19 +148,19 @@ private theorem integral_square
     (integralScalarExtension l E L ι Y).map
         ((a E).hom.app K).hom ≫
       (integralComparisonScalar l E L ι C f
-        ((constructibleIntegralPullback l E eX.hom).obj K)).hom ≫
+        ((constructibleIntegralPullback l E eX.asIso.hom).obj K)).hom ≫
       (integralDerivedPullback l L f).map
-        (integralComparisonScalar l E L ι C eX.hom K).hom =
-    (integralComparisonScalar l E L ι C eY.hom
+        (integralComparisonScalar l E L ι C eX.asIso.hom K).hom =
+    (integralComparisonScalar l E L ι C eY.asIso.hom
         ((constructibleIntegralPullback l E f).obj K)).hom ≫
-      (integralDerivedPullback l L eY.hom).map
+      (integralDerivedPullback l L eY.asIso.hom).map
         (integralComparisonScalar l E L ι C f K).hom ≫
       ((a L).hom.app
         ((integralComparisonConstructibleScalar l E L ι X).obj K)).hom := by
   have h₁ := congrArg (fun r ↦ r.hom)
-    ((normalizedIntegralMixedCoherence l C E L ι).2 eY.hom f K)
+    ((normalizedIntegralMixedCoherence l C E L ι).2 eY.asIso.hom f K)
   have h₂ := congrArg (fun r ↦ r.hom)
-    ((normalizedIntegralMixedCoherence l C E L ι).2 f eX.hom K)
+    ((normalizedIntegralMixedCoherence l C E L ι).2 f eX.asIso.hom K)
   dsimp only [integralComparisonScalarSquareLeft, integralComparisonScalarSquareRight,
     ObjectProperty.homMk_hom] at h₁ h₂
   have ht (g g' : Y ⟶ X) (w : g = g') :
@@ -183,13 +182,13 @@ private theorem integral_square
     sfConstructibleIntegralScalarExtension, constructibleIntegralPullback,
     Functor.comp_obj, ObjectProperty.lift_obj_obj, ObjectProperty.ι_obj] using
     mixed_square_cancel (integralScalarExtension l E L ι Y)
-    (integralComparisonComposition l E C eY.hom f K)
-    (integralComparisonComposition l E C f eX.hom K)
-    (integralComparisonComposition l L C eY.hom f
+    (integralComparisonComposition l E C eY.asIso.hom f K)
+    (integralComparisonComposition l E C f eX.asIso.hom K)
+    (integralComparisonComposition l L C eY.asIso.hom f
       ((integralComparisonConstructibleScalar l E L ι X).obj K))
-    (integralComparisonComposition l L C f eX.hom
+    (integralComparisonComposition l L C f eX.asIso.hom
       ((integralComparisonConstructibleScalar l E L ι X).obj K))
-    _ _ _ _ _ _ h₁ h₂ (ht (eY.hom ≫ f) (f ≫ eX.hom) h)
+    _ _ _ _ _ _ h₁ h₂ (ht (eY.asIso.hom ≫ f) (f ≫ eX.asIso.hom) h)
 
 private theorem rational_square
     (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}}
@@ -197,11 +196,11 @@ private theorem rational_square
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
     (a : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
-      constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.hom ≅
-        constructibleIntegralPullback l E eX.hom ⋙ constructibleIntegralPullback l E f)
+      constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.asIso.hom ≅
+        constructibleIntegralPullback l E eX.asIso.hom ⋙ constructibleIntegralPullback l E f)
     (b : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
-      rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.hom ≅
-        rationalDerivedPullback l E eX.hom ⋙ rationalDerivedPullback l E f)
+      rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.asIso.hom ≅
+        rationalDerivedPullback l E eX.asIso.hom ⋙ rationalDerivedPullback l E f)
     (hb : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
       (K : sfRationalConstructibleCategory l E X),
       HEq ((b E).hom.app K)
@@ -212,12 +211,12 @@ private theorem rational_square
     (hi : ∀ K : sfIntegralConstructibleCategory l E X,
       (integralScalarExtension l E L ι Y).map ((a E).hom.app K).hom ≫
         (integralPullbackScalarComparison l E L ι f
-          ((constructibleIntegralPullback l E eX.hom).obj K)).hom.hom ≫
+          ((constructibleIntegralPullback l E eX.asIso.hom).obj K)).hom.hom ≫
         (integralDerivedPullback l L f).map
-          (integralPullbackScalarComparison l E L ι eX.hom K).hom.hom =
-      (integralPullbackScalarComparison l E L ι eY.hom
+          (integralPullbackScalarComparison l E L ι eX.asIso.hom K).hom.hom =
+      (integralPullbackScalarComparison l E L ι eY.asIso.hom
           ((constructibleIntegralPullback l E f).obj K)).hom.hom ≫
-        (integralDerivedPullback l L eY.hom).map
+        (integralDerivedPullback l L eY.asIso.hom).map
           (integralPullbackScalarComparison l E L ι f K).hom.hom ≫
         ((a L).hom.app ((sfConstructibleIntegralScalarExtension 0 l
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X).obj K)).hom) :
@@ -226,12 +225,12 @@ private theorem rational_square
         (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map
           ((b E).hom.app K) ≫
         (rationalPullbackScalarComparison l E L ι f).hom.app
-          ((rationalDerivedPullback l E eX.hom).obj K) ≫
+          ((rationalDerivedPullback l E eX.asIso.hom).obj K) ≫
         (rationalDerivedPullback l L f).map
-          ((rationalPullbackScalarComparison l E L ι eX.hom).hom.app K) =
-      (rationalPullbackScalarComparison l E L ι eY.hom).hom.app
+          ((rationalPullbackScalarComparison l E L ι eX.asIso.hom).hom.app K) =
+      (rationalPullbackScalarComparison l E L ι eY.asIso.hom).hom.app
           ((rationalDerivedPullback l E f).obj K) ≫
-        (rationalDerivedPullback l L eY.hom).map
+        (rationalDerivedPullback l L eY.asIso.hom).map
           ((rationalPullbackScalarComparison l E L ι f).hom.app K) ≫
         (b L).hom.app
           ((sfRationalScalarExtension l E X 0
@@ -267,21 +266,21 @@ private theorem rational_square
       ScalarLocalization.localization]) haE).trans
     (scalar_map_localized l E L ι Y (aE.hom.app K.obj))
   have h₂ := (rationalPullbackScalarComparison_existsUnique l E L ι f).exists.choose_spec
-    ((rationalDerivedPullback l E eX.hom).obj K)
-  have hobj : ((rationalDerivedPullback l E eX.hom).obj K).obj =
-      (constructibleIntegralPullback l E eX.hom).obj K.obj :=
-    congrArg ScalarLocalization.obj (hp E eX.hom K)
+    ((rationalDerivedPullback l E eX.asIso.hom).obj K)
+  have hobj : ((rationalDerivedPullback l E eX.asIso.hom).obj K).obj =
+      (constructibleIntegralPullback l E eX.asIso.hom).obj K.obj :=
+    congrArg ScalarLocalization.obj (hp E eX.asIso.hom K)
   have h₂' : HEq
       ((rationalPullbackScalarComparison l E L ι f).hom.app
-        ((rationalDerivedPullback l E eX.hom).obj K))
+        ((rationalDerivedPullback l E eX.asIso.hom).obj K))
       ((sfRationalConstructibleLocalization l L Y).map
         (integralPullbackScalarComparison l E L ι f
-          ((constructibleIntegralPullback l E eX.hom).obj K.obj)).hom) := by
+          ((constructibleIntegralPullback l E eX.asIso.hom).obj K.obj)).hom) := by
     have hb : HEq ((rationalPullbackScalarComparison l E L ι f).hom.app
-        ((rationalDerivedPullback l E eX.hom).obj K))
+        ((rationalDerivedPullback l E eX.asIso.hom).obj K))
         ((sfRationalConstructibleLocalization l L Y).map
           (integralPullbackScalarComparison l E L ι f
-            ((rationalDerivedPullback l E eX.hom).obj K).obj).hom) := by
+            ((rationalDerivedPullback l E eX.asIso.hom).obj K).obj).hom) := by
       simpa only [rationalPullbackScalarComparison] using h₂
     exact hb.trans (dependent_heq (fun J ↦ (sfRationalConstructibleLocalization l L Y).map
       (integralPullbackScalarComparison l E L ι f J).hom) hobj)
@@ -299,35 +298,35 @@ private theorem rational_square
       ScalarLocalization.localization]) (by simp only [Functor.comp_obj, hp, hs, T,
       sfRationalConstructibleLocalization,
       ScalarLocalization.localization])
-    (hα eX.hom K)).trans
+    (hα eX.asIso.hom K)).trans
       (pullback_map_localized l L f
-        (integralPullbackScalarComparison l E L ι eX.hom K.obj).hom)
-  have h₄ := (rationalPullbackScalarComparison_existsUnique l E L ι eY.hom).exists.choose_spec
+        (integralPullbackScalarComparison l E L ι eX.asIso.hom K.obj).hom)
+  have h₄ := (rationalPullbackScalarComparison_existsUnique l E L ι eY.asIso.hom).exists.choose_spec
     ((rationalDerivedPullback l E f).obj K)
   have hobj₄ : ((rationalDerivedPullback l E f).obj K).obj =
       (constructibleIntegralPullback l E f).obj K.obj :=
     congrArg ScalarLocalization.obj (hp E f K)
   have h₄' : HEq
-      ((rationalPullbackScalarComparison l E L ι eY.hom).hom.app
+      ((rationalPullbackScalarComparison l E L ι eY.asIso.hom).hom.app
         ((rationalDerivedPullback l E f).obj K))
       ((sfRationalConstructibleLocalization l L Y).map
-        (integralPullbackScalarComparison l E L ι eY.hom
+        (integralPullbackScalarComparison l E L ι eY.asIso.hom
           ((constructibleIntegralPullback l E f).obj K.obj)).hom) := by
-    have hb : HEq ((rationalPullbackScalarComparison l E L ι eY.hom).hom.app
+    have hb : HEq ((rationalPullbackScalarComparison l E L ι eY.asIso.hom).hom.app
         ((rationalDerivedPullback l E f).obj K))
         ((sfRationalConstructibleLocalization l L Y).map
-          (integralPullbackScalarComparison l E L ι eY.hom
+          (integralPullbackScalarComparison l E L ι eY.asIso.hom
             ((rationalDerivedPullback l E f).obj K).obj).hom) := by
       simpa only [rationalPullbackScalarComparison] using h₄
     exact hb.trans (dependent_heq (fun J ↦ (sfRationalConstructibleLocalization l L Y).map
-      (integralPullbackScalarComparison l E L ι eY.hom J).hom) hobj₄)
-  have h₅ := (map_heq (rationalDerivedPullback l L eY.hom)
+      (integralPullbackScalarComparison l E L ι eY.asIso.hom J).hom) hobj₄)
+  have h₅ := (map_heq (rationalDerivedPullback l L eY.asIso.hom)
     (by simp only [Functor.comp_obj, hp, hs, T, sfRationalConstructibleLocalization,
       ScalarLocalization.localization]) (by simp only [Functor.comp_obj, hp, hs, T,
       sfRationalConstructibleLocalization,
       ScalarLocalization.localization])
     (hα f K)).trans
-      (pullback_map_localized l L eY.hom
+      (pullback_map_localized l L eY.asIso.hom
         (integralPullbackScalarComparison l E L ι f K.obj).hom)
   have h₆ := hb L ((U X).obj K)
   have hobj₆ : ((U X).obj K).obj = (T X).obj K.obj :=
@@ -370,12 +369,12 @@ private theorem rational_square
       ScalarLocalization.localization]) h₅ h₆')
   have hint : (T Y).map (aE.hom.app K.obj) ≫
       (integralPullbackScalarComparison l E L ι f
-        ((constructibleIntegralPullback l E eX.hom).obj K.obj)).hom ≫
+        ((constructibleIntegralPullback l E eX.asIso.hom).obj K.obj)).hom ≫
       (constructibleIntegralPullback l L f).map
-        (integralPullbackScalarComparison l E L ι eX.hom K.obj).hom =
-    (integralPullbackScalarComparison l E L ι eY.hom
+        (integralPullbackScalarComparison l E L ι eX.asIso.hom K.obj).hom =
+    (integralPullbackScalarComparison l E L ι eY.asIso.hom
         ((constructibleIntegralPullback l E f).obj K.obj)).hom ≫
-      (constructibleIntegralPullback l L eY.hom).map
+      (constructibleIntegralPullback l L eY.asIso.hom).map
         (integralPullbackScalarComparison l E L ι f K.obj).hom ≫
       aL.hom.app ((T X).obj K.obj) := by
     apply ObjectProperty.hom_ext (sfIntegralConstructible l L Y)
@@ -448,19 +447,19 @@ theorem automorphismSquareStageCompatibility
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom)
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom)
     (a : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
-      constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.hom ≅
-        constructibleIntegralPullback l E eX.hom ⋙ constructibleIntegralPullback l E f)
+      constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.asIso.hom ≅
+        constructibleIntegralPullback l E eX.asIso.hom ⋙ constructibleIntegralPullback l E f)
     (ha : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
       (K : sfIntegralConstructibleCategory l E X),
       ((a E).hom.app K).hom =
-        (integralComparisonComposition l E C eY.hom f K).inv ≫
+        (integralComparisonComposition l E C eY.asIso.hom f K).inv ≫
           eqToHom (congrArg (fun g ↦ (integralDerivedPullback l E g).obj K.obj) h) ≫
-            (integralComparisonComposition l E C f eX.hom K).hom)
+            (integralComparisonComposition l E C f eX.asIso.hom K).hom)
     (b : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
-      rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.hom ≅
-        rationalDerivedPullback l E eX.hom ⋙ rationalDerivedPullback l E f)
+      rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.asIso.hom ≅
+        rationalDerivedPullback l E eX.asIso.hom ⋙ rationalDerivedPullback l E f)
     (hb : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
       (K : sfRationalConstructibleCategory l E X),
       HEq ((b E).hom.app K)
@@ -470,12 +469,12 @@ theorem automorphismSquareStageCompatibility
     ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T w).map
         ((b (Coefficient.{u} l Ω E)).hom.app K) ≫
       (commonStagePullbackTransition l Ω f w).hom.app
-        ((rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom).obj K) ≫
+        ((rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.asIso.hom).obj K) ≫
       (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).map
-        ((commonStagePullbackTransition l Ω eX.hom w).hom.app K) =
-    ((commonStagePullbackTransition l Ω eY.hom w).hom.app
+        ((commonStagePullbackTransition l Ω eX.asIso.hom w).hom.app K) =
+    ((commonStagePullbackTransition l Ω eY.asIso.hom w).hom.app
         ((rationalDerivedPullback l (Coefficient.{u} l Ω E) f).obj K) ≫
-      (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.hom).map
+      (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.asIso.hom).map
         ((commonStagePullbackTransition l Ω f w).hom.app K)) ≫
       (b (Coefficient.{u} l Ω L)).hom.app
         (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T w).obj K) := by
@@ -487,12 +486,12 @@ theorem automorphismSquareStageCompatibility
       (integralScalarExtension l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) ι Y).map
           ((a (Coefficient.{u} l Ω E)).hom.app J).hom ≫
         (integralPullbackScalarComparison l _ _ ι f
-          ((constructibleIntegralPullback l _ eX.hom).obj J)).hom.hom ≫
+          ((constructibleIntegralPullback l _ eX.asIso.hom).obj J)).hom.hom ≫
         (integralDerivedPullback l _ f).map
-          (integralPullbackScalarComparison l _ _ ι eX.hom J).hom.hom =
-      (integralPullbackScalarComparison l _ _ ι eY.hom
+          (integralPullbackScalarComparison l _ _ ι eX.asIso.hom J).hom.hom =
+      (integralPullbackScalarComparison l _ _ ι eY.asIso.hom
           ((constructibleIntegralPullback l _ f).obj J)).hom.hom ≫
-        (integralDerivedPullback l _ eY.hom).map
+        (integralDerivedPullback l _ eY.asIso.hom).map
           (integralPullbackScalarComparison l _ _ ι f J).hom.hom ≫
         ((a (Coefficient.{u} l Ω L)).hom.app
           ((sfConstructibleIntegralScalarExtension 0 l
@@ -505,15 +504,15 @@ theorem automorphismSquareStageCompatibility
   exact conjugate_square
     (rationalDerivedPullback l (Coefficient.{u} l Ω E) f)
     (rationalDerivedPullback l (Coefficient.{u} l Ω L) f)
-    (rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom)
-    (rationalDerivedPullback l (Coefficient.{u} l Ω L) eX.hom)
-    (rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.hom)
-    (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.hom)
+    (rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.asIso.hom)
+    (rationalDerivedPullback l (Coefficient.{u} l Ω L) eX.asIso.hom)
+    (rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.asIso.hom)
+    (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.asIso.hom)
     _ _ _ _ (operationStageTransitionIso l Ω X E L w)
     (operationStageTransitionIso l Ω Y E L w)
     (rationalPullbackScalarComparison l _ _ ι f)
-    (rationalPullbackScalarComparison l _ _ ι eX.hom)
-    (rationalPullbackScalarComparison l _ _ ι eY.hom)
+    (rationalPullbackScalarComparison l _ _ ι eX.asIso.hom)
+    (rationalPullbackScalarComparison l _ _ ι eY.asIso.hom)
     (b (Coefficient.{u} l Ω E)) (b (Coefficient.{u} l Ω L)) K hr
 
 end WeilConjectures

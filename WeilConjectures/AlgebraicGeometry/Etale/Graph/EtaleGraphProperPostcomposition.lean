@@ -58,7 +58,7 @@ private lemma model_postcomposition
         (F.pfComp' c.g p (c.g ≫ p) rfl).inv.app ((F.sh c.i).obj K) := by
   let T := postTriangle c p
   have hw : c.g ≫ 𝟙 Y = 𝟙 c.Z ≫ c.g := by simp
-  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 _) c.g hw).natTrans :=
+  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 _) c.g hw) :=
     CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_vert_isIso ⟨hw⟩)
   have h₁ := congr_app (F.exchange_id_vert c.g hw) ((F.sh c.i).obj K)
   have h₂ := congr_app (F.shComp'_id_right c.i) K

@@ -241,7 +241,7 @@ noncomputable def leftDerivedUpperStarDerivedHomComparison
     L((g)^*[A]).obj ((RHom(Y)[A].obj (op K)).obj M) ⟶
       (RHom(Z)[A].obj (op (L((g)^*[A]).obj K))).obj (L((g)^*[A]).obj M) :=
   letI := leftDerivedUpperStarMonoidal A g
-  (Functor.LaxMonoidal.ihomComparison _ K).natTrans.app M
+  (Functor.LaxMonoidal.ihomComparison _ K).app M
 
 /-- The comparison `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` is natural in `M`. -/
 @[reassoc]
@@ -253,7 +253,7 @@ lemma leftDerivedUpperStarDerivedHomComparison_naturality_right
       leftDerivedUpperStarDerivedHomComparison A g K M ≫
         (RHom(Z)[A].obj _).map (L((g)^*[A]).map h) :=
   letI := leftDerivedUpperStarMonoidal A g
-  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.naturality h
+  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).naturality h
 
 /-- The comparison `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` is natural in `K`. -/
 @[reassoc]
@@ -274,7 +274,7 @@ instance [L((g)^*[A]).IsEquivalence]
     (K M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     IsIso (leftDerivedUpperStarDerivedHomComparison A g K M) :=
   letI := leftDerivedUpperStarMonoidal A g
-  inferInstanceAs (IsIso ((Functor.LaxMonoidal.ihomComparison _ K).natTrans.app M))
+  inferInstanceAs (IsIso ((Functor.LaxMonoidal.ihomComparison _ K).app M))
 
 /-- The isomorphism `Lg^* RHom(K, M) ≅ RHom(Lg^* K, Lg^* M)` when `Lg^*` is an equivalence. -/
 noncomputable abbrev leftDerivedUpperStarDerivedHomIso [L((g)^*[A]).IsEquivalence]

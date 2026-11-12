@@ -6,14 +6,13 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Order.Ring.Star
-public import Mathlib.Data.Rat.Star
 public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.Tactic.LinearCombination
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.WellKnown
 
 public import Mathlib.Topology.Connected.Separation
-public import Mathlib.Topology.Separation.Lemmas
+public import Mathlib.Topology.Separation.CompletelyRegular
 
 @[expose] public section
 

@@ -53,14 +53,14 @@ private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] (k : Type u) [Field k] [Fintype k] (c : k) :
-    (condensedArtinSchreierTranslationAction Λ k c).hom ≫
+    (condensedArtinSchreierTranslationAction Λ k c).asHom.hom ≫
         (ProEtale.lowerStar Ab.{u + 1}
           (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
             (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) =
       (ProEtale.lowerStar Ab.{u + 1}
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
           (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) ≫
-        (condensedArtinSchreierTranslationAction Λ' k c).hom := by
+        (condensedArtinSchreierTranslationAction Λ' k c).asHom.hom := by
   unfold condensedArtinSchreierTranslationAction
   simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]
   erw [CondensedRing.homEquiv_εIso_inv_hom Λ (Etale.artinSchreierTranslation k c),
@@ -81,15 +81,15 @@ private theorem regularCoefficient
     [MonoidalPreadditive C] [BraidedCategory C]
     {R S : C} [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
     (a : R ⟶ S) [IsMonHom a] (s : MonObj.Γ R) :
-    (Mod.regularEndRingHom s).hom ≫ a =
-      a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).hom := by
-  have h : Mod.regularEndRingHom s ≫ Mod.regularHomComap a =
+    (Mod.regularEndRingHom s).asHom.hom ≫ a =
+      a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom.hom := by
+  have h : (Mod.regularEndRingHom s).asHom ≫ Mod.regularHomComap a =
       Mod.regularHomComap a ≫ (Mod.comap a).map
-        (Mod.regularEndRingHom (MonObj.Γ.map a s)) := by
+        (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom := by
     apply Mod.regular_hom_ext
-    change (MonObj.one : 𝟙_ C ⟶ R) ≫ ((Mod.regularEndRingHom s).hom ≫ a) =
+    change (MonObj.one : 𝟙_ C ⟶ R) ≫ ((Mod.regularEndRingHom s).asHom.hom ≫ a) =
       (MonObj.one : 𝟙_ C ⟶ R) ≫
-        (a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).hom)
+        (a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom.hom)
     rw [← Category.assoc, ← Category.assoc, IsMonHom.one_hom (f := a)]
     erw [Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular,
       Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular]
@@ -133,7 +133,7 @@ theorem condensed_projector_coefficient_naturality
     (a : Λ ⟶ Λ') [IsMonHom a] (k : Type u) [Field k] [Fintype k]
     (hq : IsUnit (Fintype.card k : MonObj.Γ Λ))
     (ψ : AddChar k (MonObj.Γ Λ)) :
-    (condensedArtinSchreierProjector Λ k ψ).hom ≫
+    (condensedArtinSchreierProjector Λ k ψ).asHom.hom ≫
         (ProEtale.lowerStar Ab.{u + 1}
           (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
             (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) =
@@ -141,8 +141,9 @@ theorem condensed_projector_coefficient_naturality
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
           (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) ≫
         (condensedArtinSchreierProjector Λ' k
-          ((MonObj.Γ.map a).toMonoidHom.compAddChar ψ)).hom := by
+          ((MonObj.Γ.map a).toMonoidHom.compAddChar ψ)).asHom.hom := by
   unfold condensedArtinSchreierProjector
+  simp only [End.sum_asHom]
   rw [sumUnderlying, sumUnderlying, Preadditive.sum_comp, Preadditive.comp_sum]
   refine Finset.sum_congr rfl fun c _ ↦ ?_
   simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]

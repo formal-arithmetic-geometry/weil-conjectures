@@ -37,7 +37,8 @@ private theorem rank_one_commute
       _ = (x * f 1) * g 1 := mul_right_comm _ _ _
       _ = f x * g 1 := congrArg (fun z ↦ z * g 1) (h f x).symm
       _ = g (f x) := (h g (f x)).symm
-  change g ≫ f = f ≫ g
+  apply End.ext
+  change g.asHom ≫ f.asHom = f.asHom ≫ g.asHom
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.Hom.ext
   funext U
@@ -45,9 +46,9 @@ private theorem rank_one_commute
   apply LinearMap.ext
   intro x
   let f' : ModuleCat.of (O.obj.obj U) (O.obj.obj U) ⟶
-      ModuleCat.of (O.obj.obj U) (O.obj.obj U) := f.val.app U
+      ModuleCat.of (O.obj.obj U) (O.obj.obj U) := f.asHom.val.app U
   let g' : ModuleCat.of (O.obj.obj U) (O.obj.obj U) ⟶
-      ModuleCat.of (O.obj.obj U) (O.obj.obj U) := g.val.app U
+      ModuleCat.of (O.obj.obj U) (O.obj.obj U) := g.asHom.val.app U
   exact linear_commute f'.hom g'.hom x
 
 private theorem rank_one_power
@@ -56,15 +57,15 @@ private theorem rank_one_power
     (a t : (O.obj ⋙ forget CommRingCat).sections)
     (c : SheafOfModules.unit (siteModuleRings O) ≅
       SheafOfModules.unit (siteModuleRings O))
-    (hc : ringedKoszulScalar O t = c.hom ≫ ringedKoszulScalar O a)
+    (hc : (ringedKoszulScalar O t).asHom = c.hom ≫ (ringedKoszulScalar O a).asHom)
     (k : ℕ) :
-    ringedKoszulScalar O t ^ k =
-      ((Aut.toEnd (SheafOfModules.unit (siteModuleRings O)) c) ^ k) ≫
-        (ringedKoszulScalar O a ^ k) := by
-  let γ := Aut.toEnd (SheafOfModules.unit (siteModuleRings O)) c
-  change ringedKoszulScalar O t ^ k = ringedKoszulScalar O a ^ k * γ ^ k
-  rw [← (rank_one_commute O (ringedKoszulScalar O a) γ).mul_pow, hc]
-  rfl
+    (ringedKoszulScalar O t ^ k).asHom =
+      (Aut.toEnd (Aut.of c) ^ k).asHom ≫ (ringedKoszulScalar O a ^ k).asHom := by
+  let γ := Aut.toEnd (Aut.of c)
+  have h : ringedKoszulScalar O t = ringedKoszulScalar O a * γ := End.ext hc
+  change (ringedKoszulScalar O t ^ k).asHom =
+    (ringedKoszulScalar O a ^ k * γ ^ k).asHom
+  rw [← (rank_one_commute O (ringedKoszulScalar O a) γ).mul_pow, h]
 
 namespace AlgebraicGeometry.ProEtale.InternalCompletionTransport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -104,7 +105,7 @@ theorem uniformizer_koszul_scalar_square
         (fun _ ↦ a.val (op U)))
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) b).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
         Padic.coefficientExtensionUniformizer l E * b.down s)
     (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
     ∃ b : complex l E X P ≅
@@ -113,23 +114,23 @@ theorem uniformizer_koszul_scalar_square
       ((modules l E X).mapHomologicalComplex (.up ℤ)).map
           (PrincipalReduction.scalar l E X d n P) ≫
           (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).inv =
-        b.hom ≫ ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n := by
+        b.hom ≫ (ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n).asHom := by
   obtain ⟨t, ht, hreg, htransport⟩ := uniformizer_scalar_realization l E X
   obtain ⟨c, hc⟩ := ringed_regular_generator_association (ring l E X)
     (ConstantCompletion.kernelIdeal (residue l E X)) t a ht hreg ha
   let R := SheafOfModules.unit (siteModuleRings (ring l E X))
-  let c' : Aut R := c
-  let ck : R ≅ R := c' ^ (n + 1)
-  have hck : ck.hom = (Aut.toEnd R c') ^ (n + 1) :=
-    (Aut.toEnd R).map_pow c' (n + 1)
+  let c' : Aut R := Aut.of c
+  let ck : R ≅ R := (c' ^ (n + 1)).asIso
+  have hck : ck.hom = (Aut.toEnd c' ^ (n + 1)).asHom :=
+    congrArg End.asHom (Aut.toEnd.map_pow c' (n + 1))
   let S := HomologicalComplex.single (ConstantCompletion.Mod (ring l E X)) (.up ℤ) 0
   let T := (ringedKoszulTensor (ring l E X)).obj (complex l E X P)
   let U := ringedKoszulRightUnitIso (ring l E X) (complex l E X P)
   refine ⟨U.symm ≪≫ T.mapIso (S.mapIso ck), ?_⟩
   rw [htransport d hd P n]
-  change U.inv ≫ ringedSingletonKoszulPower (ring l E X) t (complex l E X P) n =
+  change U.inv ≫ (ringedSingletonKoszulPower (ring l E X) t (complex l E X P) n).asHom =
     (U.inv ≫ T.map (S.map ck.hom)) ≫
-      ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n
+      (ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n).asHom
   rw [ringedSingletonKoszulPower, ringedSingletonKoszulPower,
     rank_one_power (ring l E X) a t c hc, Category.assoc,
     ← Functor.map_comp, ← Functor.map_comp, hck]

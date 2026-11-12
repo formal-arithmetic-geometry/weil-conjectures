@@ -164,9 +164,9 @@ theorem exists_artinSchreier_root_of_approx
       rw [← hϑeq, Valuation.map_sub_eq_of_lt_left v hvϑp, map_pow]
     obtain ⟨γ, hγK, hγ⟩ := hroot (E i₀) (hE i₀ hi₀)
     have hvγ : v γ = v ϑ := by
-      refine pow_left_injective (M := Γ₀) hp.out.ne_zero ?_
-      simp only
-      rw [← map_pow, hγ, ← hvr₀, hvr₀']
+      have hpow : v γ ^ p = v ϑ ^ p := by
+        rw [← map_pow, hγ, ← hvr₀, hvr₀']
+      exact pow_left_injective hp.out.ne_zero hpow
     have hγ0 : γ ≠ 0 := by
       rintro rfl
       rw [zero_pow hp.out.ne_zero] at hγ

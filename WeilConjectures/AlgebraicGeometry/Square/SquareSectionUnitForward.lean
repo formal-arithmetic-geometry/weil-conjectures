@@ -53,7 +53,7 @@ attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
   RingedSpace.openModuleSections HomologicalComplex.homologyMap
   Scheme.Hom.toRingCatSheafHom SheafOfModules.pushforward SheafOfModules.forget
   SheafOfModules.toSheaf PresheafOfModules.toPresheaf HomologicalComplex.homology
-  HomologicalComplex.shortComplexFunctor HomologicalComplex.shortComplexFunctor'
+  HomologicalComplex.shortComplexFunctor
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars

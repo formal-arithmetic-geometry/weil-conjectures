@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
-import Mathlib.CategoryTheory.Limits.FullSubcategory
+public import Mathlib.CategoryTheory.Limits.FullSubcategory
 
 /-! # Created limits and colimits of fixed pairs
 

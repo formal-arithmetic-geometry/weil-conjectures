@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Flatness of localized quotient maps
 

@@ -56,7 +56,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local implicit_reducible] value expression IntegralCoherence.value scalarQuotients
-  pullbackTensorRestrictedTower CategoryTheory.TwoSquare
+  pullbackTensorRestrictedTower
   referenceOrdinaryModel integralCoefficientSheaf integralCoefficientCommRingSheaf
   HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
@@ -92,7 +92,7 @@ theorem completedQuotientMateTransport
     (ha : ∀ M, adj.homEquiv _ _ (a.hom.app M) =
       U.map ((Adjunction.ofIsRightAdjoint R).unit.app M) ≫ d.hom.app (R.leftAdjoint.obj M)) :
     (a ≪≫ Functor.isoWhiskerRight (eqToIso hL) V).hom =
-      ((mateEquiv (Adjunction.ofIsRightAdjoint R') adj).symm d'.hom).natTrans := by
+      ((mateEquiv (Adjunction.ofIsRightAdjoint R') adj).symm d'.hom) := by
   subst R'
   have hd' : d' = d := by simpa using hd
   subst d'

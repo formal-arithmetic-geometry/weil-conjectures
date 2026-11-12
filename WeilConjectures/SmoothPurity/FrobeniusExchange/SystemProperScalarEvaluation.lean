@@ -33,7 +33,7 @@ def finiteDirectScalar
       pbcDerivedExtend (scalarRingMap φ X) ⋙ proEtaleConstantDerivedDirectImage f B :=
   ((mateEquiv (pbcDerivedScalarAdjunction (scalarRingMap φ X))
     (pbcDerivedScalarAdjunction (scalarRingMap φ Y))).symm
-    (TwoSquare.mk _ _ _ _ (sfDerivedImageRestriction f φ).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (sfDerivedImageRestriction f φ).hom))
 
 /-- Finite evaluation of direct image by the specified geometric mate.
 Source: Zheng 4.10 (blueprint: lem-sf-system-proper-scalar-evaluation). -/
@@ -53,7 +53,7 @@ private def evaluationOfMate
     {L : X ⥤ Y} {P : Y ⥤ X} {l : x ⥤ y} {p : y ⥤ x}
     (a : L ⊣ P) (b : l ⊣ p) (e : L ⋙ F ≅ E ⋙ l)
     (v : P ⋙ E ≅ F ⋙ p)
-    (hv : v.hom = (mateEquiv a b e.inv).natTrans) :
+    (hv : v.hom = (mateEquiv a b e.inv)) :
     SemilinearSections.AdjunctionEvaluation E F a b where
   left := e
   right := v

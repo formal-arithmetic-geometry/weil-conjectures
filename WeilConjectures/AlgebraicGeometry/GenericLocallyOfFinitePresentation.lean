@@ -8,9 +8,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Properties
 
 import all WeilConjectures.RingTheory.GenericFlatness
 import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 
 /-! # Generic local finite presentation
 

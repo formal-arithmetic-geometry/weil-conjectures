@@ -45,6 +45,6 @@ geometric evaluation of the module return
 @[irreducible] def evaluateModuleReturn
     {C E : Type*} [Category C] [Category E] (F : C ⥤ E) (T : C ⥤ C)
     (ι : F ⟶ T ⋙ F) (M : C) (r : T.obj M ⟶ M) : End (F.obj M) :=
-  ι.app M ≫ F.map r
+  .of (ι.app M ≫ F.map r)
 
 end WeilConjectures.CondensedWeil

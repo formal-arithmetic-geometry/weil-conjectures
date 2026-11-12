@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.GrothendieckAbelian
 public import Mathlib.CategoryTheory.Localization.LocallySmall
 public import Mathlib.CategoryTheory.Quotient.LocallySmall
-public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Order.Int.ConditionallyCompleteOrder
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!

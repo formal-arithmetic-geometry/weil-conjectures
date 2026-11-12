@@ -36,7 +36,7 @@ reflector) is the inverse of the unit `[R c, R d] ⟶ R L [R c, R d]`. -/
 lemma ihomComparison_app :
     letI := monoidalClosed adj
     letI := adj.rightAdjointLaxMonoidal
-    ∀ (c d : C), (ihomComparison R c).natTrans.app d =
+    ∀ (c d : C), (ihomComparison R c).app d =
       inv (adj.unit.app ((ihom (R.obj c)).obj (R.obj d))) := by
   let := monoidalClosed adj
   let := adj.rightAdjointLaxMonoidal
@@ -80,7 +80,7 @@ subcategory commutes with internal homs. -/
 lemma isIso_ihomComparison :
     letI := monoidalClosed adj
     letI := adj.rightAdjointLaxMonoidal
-    ∀ c : C, IsIso (ihomComparison R c).natTrans := by
+    ∀ c : C, IsIso (ihomComparison R c) := by
   let := monoidalClosed adj
   let := adj.rightAdjointLaxMonoidal
   intro c

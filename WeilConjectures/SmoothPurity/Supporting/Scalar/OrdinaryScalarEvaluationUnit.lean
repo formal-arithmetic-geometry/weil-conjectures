@@ -53,7 +53,7 @@ theorem ordinaryScalarEvaluationUnit :
   let δ n := (SemilinearSections.restrictionEvaluation_existsUnique
     J B τ F σ α hα n).exists.choose
   let m n := ((mateEquiv A.scalar.ordinaryAdjunction
-    (A.levels n).ordinaryAdjunction).symm (δ n).hom).natTrans
+    (A.levels n).ordinaryAdjunction).symm (δ n).hom)
   have hm n : IsIso (m n) := by
     let : ((𝟭 ℕ).prod (𝟭 C)).IsContinuous
         (coefficientSequenceTopology J) (coefficientSequenceTopology J) := by

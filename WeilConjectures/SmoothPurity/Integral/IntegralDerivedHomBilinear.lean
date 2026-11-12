@@ -189,12 +189,13 @@ theorem integralDerivedHom_bilinear (l : ℕ) [Fact l.Prime]
     rw [(integralCoefficientLinear_existsUnique l E W).exists.choose_spec]
     let := standard
     have hc : integralScalarDerivedAction l E W r =
-        Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
-          (DerivedCategory (integralTowerModules l E W)) r := by
+        (Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
+          (DerivedCategory (integralTowerModules l E W)) r).asHom := by
       rw [coefficientDerived_eq]
-      apply CatCenter.ext_of_localization DerivedCategory.Q
+      apply Localization.natTrans_ext DerivedCategory.Q
         (HomologicalComplex.quasiIso (integralTowerModules l E W) (.up ℤ))
       intro P
+      change (CatCenter.localization _ DerivedCategory.Q _).app (DerivedCategory.Q.obj P) = _
       rw [CatCenter.localization_app]
       change DerivedCategory.Q.map (r • 𝟙 P) = r • 𝟙 (DerivedCategory.Q.obj P)
       rw [Functor.map_smul, CategoryTheory.Functor.map_id]

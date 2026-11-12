@@ -122,8 +122,7 @@ private theorem nativePullMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
         (compactSupportSystemQuotient l E) f n).hom =
       (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f n).inv := by
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   apply ((proEtaleRingModuleAdjunction f
     (ProEtale.VaryingRing.coefficients (compactSupportSystemLevel l E) Y n)
     (ProEtale.VaryingRing.coefficients (compactSupportSystemLevel l E) X n)
@@ -136,7 +135,6 @@ private theorem nativePullMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (compactSupportSystemLevel l E n) f).map
       ((ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f n).hom.app M))).1
-  dsimp only [TwoSquare.natTrans]
   change _ = (proEtaleRingModuleAdjunction f
     (ProEtale.VaryingRing.coefficients (compactSupportSystemLevel l E) Y n)
     (ProEtale.VaryingRing.coefficients (compactSupportSystemLevel l E) X n)
@@ -169,8 +167,7 @@ private theorem originalPullMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   let R := proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 1))
   have he : (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom) =
       TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     apply (b.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit]
     erw [← unit_mateEquiv_symm]

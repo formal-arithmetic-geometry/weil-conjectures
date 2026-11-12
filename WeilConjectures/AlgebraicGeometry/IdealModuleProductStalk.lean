@@ -15,6 +15,8 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.LinearAlgebra.Isomorphisms
 import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-!
 # Stalks of ideal-module products, quotients, and powers

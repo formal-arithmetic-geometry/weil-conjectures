@@ -231,10 +231,10 @@ private theorem adjunct_mate
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (adj : L ⊣ R) (adj' : L' ⊣ R') (G : C ⥤ E) (H : D ⥤ F)
     (θ : TwoSquare G L L' H) {A : C} {K : D} (z : L.obj A ⟶ K) :
-    G.map (adj.homEquiv A K z) ≫ (mateEquiv adj adj' θ).natTrans.app K =
-      adj'.homEquiv (G.obj A) (H.obj K) (θ.natTrans.app A ≫ H.map z) := by
+    G.map (adj.homEquiv A K z) ≫ (mateEquiv adj adj' θ).app K =
+      adj'.homEquiv (G.obj A) (H.obj K) (θ.app A ≫ H.map z) := by
   rw [adj.homEquiv_unit, G.map_comp, Category.assoc]
-  have hn := (mateEquiv adj adj' θ).natTrans.naturality z
+  have hn := (mateEquiv adj adj' θ).naturality z
   simp only [Functor.comp_map] at hn
   rw [hn]
   rw [← Category.assoc, unit_mateEquiv, Category.assoc, ← R'.map_comp,
@@ -248,15 +248,15 @@ private theorem shifted_adjunct_mate
     [R.CommShift ℤ] [R'.CommShift ℤ]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (G : C ⥤ E) (H : D ⥤ F)
     [G.CommShift ℤ] [H.CommShift ℤ] (θ : TwoSquare G L L' H)
-    [NatTrans.CommShift (mateEquiv adj adj' θ).natTrans ℤ]
+    [NatTrans.CommShift (mateEquiv adj adj' θ) ℤ]
     {A : C} {K : D} (q : ℤ) (z : L.obj A ⟶ K⟦q⟧) :
     G.map (adj.homEquiv A (K⟦q⟧) z ≫ (R.commShiftIso q).hom.app K) ≫
         (G.commShiftIso q).hom.app (R.obj K) ≫
-        (shiftFunctor E q).map ((mateEquiv adj adj' θ).natTrans.app K) =
+        (shiftFunctor E q).map ((mateEquiv adj adj' θ).app K) =
       adj'.homEquiv (G.obj A) ((H.obj K)⟦q⟧)
-        (θ.natTrans.app A ≫ H.map z ≫ (H.commShiftIso q).hom.app K) ≫
+        (θ.app A ≫ H.map z ≫ (H.commShiftIso q).hom.app K) ≫
           (R'.commShiftIso q).hom.app (H.obj K) := by
-  have hs := NatTrans.shift_app_comm (mateEquiv adj adj' θ).natTrans q K
+  have hs := NatTrans.shift_app_comm (mateEquiv adj adj' θ) q K
   simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at hs
   rw [Functor.map_comp, Category.assoc, hs]
   rw [← Category.assoc, adjunct_mate]
@@ -269,15 +269,15 @@ private theorem shifted_adjunct_mate_transport
     [R.CommShift ℤ] [R'.CommShift ℤ]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (G : C ⥤ E) (H : D ⥤ F)
     [G.CommShift ℤ] [H.CommShift ℤ] (θ : TwoSquare G L L' H)
-    [NatTrans.CommShift (mateEquiv adj adj' θ).natTrans ℤ]
+    [NatTrans.CommShift (mateEquiv adj adj' θ) ℤ]
     {A : C} {A' : E} {K : D} {K' : F} (q : ℤ)
     (δ : A' ⟶ G.obj A) (z : L.obj A ⟶ K⟦q⟧) (t : H.obj K ⟶ K') :
     δ ≫ G.map (adj.homEquiv A (K⟦q⟧) z ≫ (R.commShiftIso q).hom.app K) ≫
         (G.commShiftIso q).hom.app (R.obj K) ≫
         (shiftFunctor E q).map
-          ((mateEquiv adj adj' θ).natTrans.app K ≫ R'.map t) =
+          ((mateEquiv adj adj' θ).app K ≫ R'.map t) =
       adj'.homEquiv A' (K'⟦q⟧)
-        (L'.map δ ≫ θ.natTrans.app A ≫ H.map z ≫
+        (L'.map δ ≫ θ.app A ≫ H.map z ≫
           (H.commShiftIso q).hom.app K ≫ (shiftFunctor F q).map t) ≫
             (R'.commShiftIso q).hom.app K' := by
   have hm := shifted_adjunct_mate adj adj' G H θ q z

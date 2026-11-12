@@ -79,7 +79,7 @@ theorem jacobiZariski_quotient_smooth
       have hx : τ x.val ∈ (f.rTensor C).ker := by
         dsimp only [τ]
         rw [LinearMap.mem_ker, LinearMap.rTensor_comm,
-          ← LinearMap.baseChange_eq_ltensor]
+          ← LinearMap.baseChange_eq_lTensor]
         rw [x.prop, map_zero]
       have hz := congrArg Subtype.val
         (Subsingleton.elim (⟨_, hx⟩ : (f.rTensor C).ker) 0)

@@ -77,10 +77,11 @@ universe u a b c d
 private theorem monoidal_scalar {A : Type a} [Category.{b} A] [MonoidalCategory A]
     {B : Type c} [Category.{d} B] [MonoidalCategory B] (F : A ⥤ B) [F.Monoidal]
     (r : End (𝟙_ A)) (s : End (𝟙_ B))
-    (h : F.map r ≫ Functor.OplaxMonoidal.η F = Functor.OplaxMonoidal.η F ≫ s)
+    (h : F.map r.asHom ≫ Functor.OplaxMonoidal.η F =
+      Functor.OplaxMonoidal.η F ≫ s.asHom)
     (M : A) :
-    F.map ((λ_ M).inv ≫ r ▷ M ≫ (λ_ M).hom) =
-      (λ_ (F.obj M)).inv ≫ s ▷ F.obj M ≫ (λ_ (F.obj M)).hom := by
+    F.map ((λ_ M).inv ≫ r.asHom ▷ M ≫ (λ_ M).hom) =
+      (λ_ (F.obj M)).inv ≫ s.asHom ▷ F.obj M ≫ (λ_ (F.obj M)).hom := by
   simp only [Functor.map_comp, Functor.Monoidal.map_leftUnitor_inv,
     Functor.Monoidal.map_leftUnitor, Functor.Monoidal.map_whiskerRight, Category.assoc,
     Functor.Monoidal.μ_δ_assoc]
@@ -120,13 +121,13 @@ private theorem scalar_extension_square
     (φ : R ⟶ S) [IsMonHom φ] (M : Mod C R) (N : Mod C S)
     (t : End M) (s : End N) (η : (Mod.extendScalars φ).obj M ⟶ N)
     (α : M.X ⟶ N.X) (hη : Mod.extendUnitHom φ M ≫ η.hom = α)
-    (hs : t.hom ≫ α = α ≫ s.hom) :
-    (Mod.extendScalars φ).map t ≫ η = η ≫ s := by
+    (hs : t.asHom.hom ≫ α = α ≫ s.asHom.hom) :
+    (Mod.extendScalars φ).map t.asHom ≫ η = η ≫ s.asHom := by
   apply extendUnitHom_hom_ext φ M N
   simpa only [Mod.comp_hom', Category.assoc] using
-    scalar_square_under_unit (Mod.extendUnitHom φ M) t.hom
-      ((Mod.extendScalars φ).map t).hom η.hom α s.hom
-      (Mod.extendUnitHom_extendScalarsMap φ t).symm hη hs
+    scalar_square_under_unit (Mod.extendUnitHom φ M) t.asHom.hom
+      ((Mod.extendScalars φ).map t.asHom).hom η.hom α s.asHom.hom
+      (Mod.extendUnitHom_extendScalarsMap φ t.asHom).symm hη hs
 
 private theorem naturality_square
     {C D : Type*} [Category C] [Category D]
@@ -149,21 +150,22 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 omit [IsCommMonObj Λ] in
-private def scalarHom (d : End (Mod.regular Λ)) : End Λ := d.hom
+private def scalarHom (d : End (Mod.regular Λ)) : End Λ := .of d.asHom.hom
 
 attribute [local irreducible] scalarHom
 
 private def pointScalar (X : Scheme.{u}) (d : End (Mod.regular Λ)) :
     End (Mod.regular (condensedRingObj Λ X)) :=
-  Mod.Hom.mk' ((upperStarFromPoint X).map (scalarHom Λ d))
+  .of (Mod.Hom.mk' ((upperStarFromPoint X).map (scalarHom Λ d).asHom)
     (by
       unfold scalarHom
       exact IsModHom.smul_hom
-        (f := (((upperStarFromPoint X).mapMod Λ).map d).hom))
+        (f := (((upperStarFromPoint X).mapMod Λ).map d.asHom).hom)))
 
 omit [IsCommMonObj Λ] in
 private theorem pointScalar_hom (X : Scheme.{u}) (d : End (Mod.regular Λ)) :
-    (pointScalar Λ X d).hom = (upperStarFromPoint X).map (scalarHom Λ d) := rfl
+    (pointScalar Λ X d).asHom.hom =
+      (upperStarFromPoint X).map (scalarHom Λ d).asHom := rfl
 
 private def pullbackUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.upperStar Λ f).obj
@@ -178,10 +180,10 @@ omit [IsCommMonObj Λ] in
 private theorem coefficient_scalar_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : End (Mod.regular Λ)) :
     (((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y)).map
-      (pointScalar Λ Y d)).hom ≫ condensedPullbackHom Λ f =
-      condensedPullbackHom Λ f ≫ (pointScalar Λ X d).hom := by
+      (pointScalar Λ Y d).asHom).hom ≫ condensedPullbackHom Λ f =
+      condensedPullbackHom Λ f ≫ (pointScalar Λ X d).asHom.hom := by
   apply naturality_square (upperStarFromPoint Y ⋙ ProEtale.upperStar Ab.{u + 1} f)
-    (upperStarFromPoint X) (upperStarFromPointComp f).hom (scalarHom Λ d)
+    (upperStarFromPoint X) (upperStarFromPointComp f).hom (scalarHom Λ d).asHom
   · rw [mapMod_hom, pointScalar_hom]
     rfl
   · exact pointScalar_hom Λ X d
@@ -197,8 +199,8 @@ private theorem pullback_map {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 private theorem pullback_unit_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : End (Mod.regular Λ)) :
-    (CondensedRing.upperStar Λ f).map (pointScalar Λ Y d) ≫ pullbackUnit Λ f =
-      pullbackUnit Λ f ≫ pointScalar Λ X d := by
+    (CondensedRing.upperStar Λ f).map (pointScalar Λ Y d).asHom ≫ pullbackUnit Λ f =
+      pullbackUnit Λ f ≫ (pointScalar Λ X d).asHom := by
   let α := condensedPullbackHom Λ f
   let G := (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y)
   let M := 𝟙_ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
@@ -208,7 +210,7 @@ private theorem pullback_unit_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [pullback_map]
   exact scalar_extension_square α (G.obj M)
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
-    (G.map (pointScalar Λ Y d)) (pointScalar Λ X d) (pullbackUnit Λ f) α hη
+    (.of (G.map (pointScalar Λ Y d).asHom)) (pointScalar Λ X d) (pullbackUnit Λ f) α hη
     (coefficient_scalar_naturality Λ f d)
 end Coefficients
 
@@ -218,9 +220,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 private theorem regular_scalar_eq (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     (DerivedNakayama.regularPullbackIso l E X).inv ≫
-      (DerivedNakayama.pullback l E X).map d ≫
+      (DerivedNakayama.pullback l E X).map d.asHom ≫
       (DerivedNakayama.regularPullbackIso l E X).hom =
-    pointScalar (DerivedNakayama.integerRing l E) X d := by
+    (pointScalar (DerivedNakayama.integerRing l E) X d).asHom := by
   simp only [DerivedNakayama.regularPullbackIso, eqToIso_refl,
     Iso.refl_inv, Iso.refl_hom, Category.comp_id]
   apply Mod.hom_ext
