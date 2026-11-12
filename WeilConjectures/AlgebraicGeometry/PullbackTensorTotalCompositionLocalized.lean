@@ -55,10 +55,45 @@ private theorem tensorCompMate_tensor {X Y Z : Scheme.{u}}
     Scheme.Modules.finiteStructure_tensorComparison_composition f g (f ≫ g) rfl M N
 
 
+local instance pullbackTensorTotal_hasMapBifunctor (X : Scheme.{u})
+    (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    letI := pullbackDescentModuleTensor X
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+    HomologicalComplex.HasMapBifunctor P N (curriedTensor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (.up ℤ) := by
+  dsimp only
+  infer_instance
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option profiler true in
+private theorem pullbackTensorModelMap_natural (X : Scheme.{u})
+    {P N P' N' : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}
+    (a : P ⟶ P') (b : N ⟶ N') :
+    letI := pullbackDescentModuleTensor X
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+    (DerivedCategory.Q.map a ⊗ₘ DerivedCategory.Q.map b) ≫
+      pullbackTensorModelMap X P' N' =
+    pullbackTensorModelMap X P N ≫ DerivedCategory.Q.map
+      (HomologicalComplex.mapBifunctorMap a b (curriedTensor _) (.up ℤ)) := by
+  let : MonoidalCategory X.Modules := pullbackDescentModuleTensor X
+  let : (curriedTensor X.Modules).PreservesZeroMorphisms :=
+    SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+  let : ∀ M : X.Modules, ((curriedTensor _).obj M).PreservesZeroMorphisms :=
+    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
+  let : SymmetricCategory X.Modules := moduleSymmetric X
+  have : MonoidalPreadditive X.Modules := modulePreadditive X
+  let : MonoidalClosed X.Modules := moduleClosed X
+  have : IsGrothendieckAbelian.{u} X.Modules := moduleGrothendieck X
+  have : Abelian.HasFunctorialFlatResolution X.Modules := moduleResolutions X
+  have : Functor.HasDerivedMonoidalCategory (DerivedCategory.Qh (C := X.Modules))
+      (HomotopyCategory.quasiIso X.Modules (.up ℤ)) := moduleDerivedMonoidal X
+  let : MonoidalCategory (DerivedCategory X.Modules) := schemeDerivedTensorMonoidal X
+  let : Functor.LaxMonoidal (DerivedCategory.Q (C := X.Modules)) := pullbackDescentQLax X
+  exact Functor.LaxMonoidal.μ_natural (DerivedCategory.Q (C := X.Modules)) a b
+
 /-- Localization of the ordinary tensor/composition square.
 Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.
 (blueprint: lem-sc-pullback-tensor-total-composition-localized).
@@ -308,23 +343,14 @@ theorem pullback_tensor_total_composition_localized
     simpa only [Category.assoc, Iso.hom_inv_id_assoc, ← Fc.map_comp_assoc,
       Iso.hom_inv_id, Functor.map_id, Category.id_comp,
       show Fc.map (𝟙 _) = 𝟙 _ from Fc.map_id _] using hchain
-  let : SymmetricCategory X.Modules := moduleSymmetric X
-  have : MonoidalPreadditive X.Modules := modulePreadditive X
-  let : MonoidalClosed X.Modules := moduleClosed X
-  have : IsGrothendieckAbelian.{u} X.Modules := moduleGrothendieck X
-  have : Abelian.HasFunctorialFlatResolution X.Modules := moduleResolutions X
-  have : Functor.HasDerivedMonoidalCategory (DerivedCategory.Qh (C := X.Modules))
-      (HomotopyCategory.quasiIso X.Modules (.up ℤ)) := moduleDerivedMonoidal X
-  let : MonoidalCategory (DerivedCategory X.Modules) := schemeDerivedTensorMonoidal X
-  let : Functor.LaxMonoidal (DerivedCategory.Q (C := X.Modules)) := pullbackDescentQLax X
   change (DerivedCategory.Q.map (b.hom.app P) ⊗ₘ
       DerivedCategory.Q.map (b.hom.app N)) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q _ _ =
-    Functor.LaxMonoidal.μ DerivedCategory.Q _ _ ≫
+      pullbackTensorModelMap X _ _ =
+    pullbackTensorModelMap X _ _ ≫
       DerivedCategory.Q.map θ.inv ≫ DerivedCategory.Q.map (Fc.map ψ.inv) ≫
       DerivedCategory.Q.map (b.hom.app (pullbackTensorTotal Z P N)) ≫
       DerivedCategory.Q.map φ.hom
-  rw [Functor.LaxMonoidal.μ_natural]
+  rw [pullbackTensorModelMap_natural]
   change pullbackTensorModelMap X (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N)) ≫
       DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap
         (b.hom.app P) (b.hom.app N) (curriedTensor _) (.up ℤ)) = _

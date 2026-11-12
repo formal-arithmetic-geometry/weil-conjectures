@@ -35,7 +35,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- The top scalar Ext on a constant conormal-rank open is its dual determinant.
 
 Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.

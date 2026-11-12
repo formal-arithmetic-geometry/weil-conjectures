@@ -39,28 +39,35 @@ private theorem restrict_unit_bijective {X : Scheme.{v}} (M : X.Modules)
   rw [restrictAdjunction_unit_app_app]
   exact ConcreteCategory.bijective_of_isIso _
 
-set_option profiler true in
-set_option backward.isDefEq.respectTransparency false in
-/-- Local bilinear presheaf pairings into a sheaf extend through sheafification and tensor.
-Source: Stacks Project, Tag 0GMW; blueprint Riemann--Roch determinant paragraph,
-linear construction before independence of lifts.
-(blueprint: lem-sc-local-bilinear-sheafification-tensor).
+private theorem local_bilinear_tensor_morphism {X : Scheme.{v}}
+    (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (K : X.Modules)
+    (β : ∀ W : X.Opensᵒᵖ,
+      F.obj W →ₗ[X.presheaf.obj W] G.obj W →ₗ[X.presheaf.obj W] K.val.obj W)
+    (hβ : ∀ {W Z : X.Opensᵒᵖ} (g : W ⟶ Z) (x : F.obj W) (y : G.obj W),
+      β Z (F.map g x) (G.map g y) = K.val.map g (β W x y)) :
+    ∃ φ : (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj F ⊗
+        (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj G ⟶ K,
+      ∀ (W : X.Opensᵒᵖ) (x : F.obj W) (y : G.obj W),
+        φ.val.app W (tmulSection
+          (((PresheafOfModules.sheafificationAdjunction
+            (𝟙 X.ringCatSheaf.obj)).unit.app F).app W x)
+          (((PresheafOfModules.sheafificationAdjunction
+            (𝟙 X.ringCatSheaf.obj)).unit.app G).app W y)) = β W x y := by
+  let : Presheaf.IsLocallyInjective (Opens.grothendieckTopology X)
+      (𝟙 X.ringCatSheaf.obj) :=
+    Presheaf.isLocallyInjective_of_injective _ _ (fun _ ↦ Function.injective_id)
+  let : Presheaf.IsLocallySurjective (Opens.grothendieckTopology X)
+      (𝟙 X.ringCatSheaf.obj) :=
+    Presheaf.isLocallySurjective_of_surjective _ _ (fun _ ↦ Function.surjective_id)
+  obtain ⟨γ, ⟨hγ, hγunit⟩, _⟩ :=
+    PresheafOfModules.existsUnique_bilinear_sheafification_extension
+      X.presheaf X.sheaf (𝟙 X.ringCatSheaf.obj) F G K β hβ
+  obtain ⟨φ, hφ, _⟩ := SheafOfModules.tensor_bilinear_universal X.sheaf
+    ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj F)
+    ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj G) K γ hγ
+  exact ⟨φ, fun W x y ↦ (hφ W _ _).trans (hγunit W x y)⟩
 
-Proof: Put V(W)=U ∩ W and H'=j_*(H|U), where j:U→X is the inclusion.
-Restrict both presheaf inputs from W to V(W), apply b there, and identify H(V(W)) with H'(W) using
-the definition of restriction and pushforward. This is bilinear over O_X(W): the scalar
-action on H'
-is ordinary restriction, by Scheme.Hom.app_appIso_inv. Naturality follows from hb and
-the presheaf composition laws. Apply the bilinear sheafification extension theorem
-(Tag 0GMW) with the identity ring map and then the sheaf tensor universal property.
-This produces a morphism F^# tensor G^# → H'. For W contained in U the unit H(W)→H'(W)
-is bijective, since V(W)=W and its underlying map is restriction along this equality.
-Compose the constructed morphism's component with the inverse linear equivalence.
-Apply the injective unit component to verify both the pure-tensor equation and
-naturality; these reduce to the extension equations and naturality of the morphism
-and of the unit. This works also for degree-zero input modules, the empty open,
-and the zero ring; no local freeness or exactness is used. -/
-theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
+private theorem restrictPushforward_bilinear_pairing {X : Scheme.{v}}
     (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (H : X.Modules)
     (U : X.Opens)
     (b : ∀ W : X.Opens, W ≤ U →
@@ -69,22 +76,17 @@ theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
     (hb : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) x y,
       b Z (hZW.trans hW) (F.map (homOfLE hZW).op x) (G.map (homOfLE hZW).op y) =
         H.val.map (homOfLE hZW).op (b W hW x y)) :
-    let S : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj ⥤ X.Modules :=
-      PresheafOfModules.sheafification.{v} (𝟙 X.ringCatSheaf.obj)
-    let η := (PresheafOfModules.sheafificationAdjunction.{v} (𝟙 X.ringCatSheaf.obj)).unit
-    ∃ d : ∀ W : X.Opens, W ≤ U →
-      (S.obj F ⊗ S.obj G).val.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W),
-      (∀ W hW x y,
-        d W hW (tmulSection ((η.app F).app (op W) x) ((η.app G).app (op W) y)) =
-          b W hW x y) ∧
-      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,
-        H.val.map (homOfLE hZW).op (d W hW y) =
-          d Z (hZW.trans hW) ((S.obj F ⊗ S.obj G).val.map (homOfLE hZW).op y)) := by
-  classical
-  dsimp only
+    ∃ β : ∀ W : X.Opensᵒᵖ,
+        F.obj W →ₗ[X.presheaf.obj W] G.obj W →ₗ[X.presheaf.obj W]
+          ((pushforward U.ι).obj (H.restrict U.ι)).val.obj W,
+      (∀ {W Z : X.Opensᵒᵖ} (g : W ⟶ Z) (x : F.obj W) (y : G.obj W),
+        β Z (F.map g x) (G.map g y) =
+          ((pushforward U.ι).obj (H.restrict U.ι)).val.map g (β W x y)) ∧
+      (∀ (W : X.Opens) (hW : W ≤ U) (x : F.obj (op W)) (y : G.obj (op W)),
+        β (op W) x y =
+          ((restrictAdjunction U.ι).unit.app H).val.app (op W) (b W hW x y)) := by
   let j := U.ι
   let K := (pushforward j).obj (H.restrict j)
-  let q : H ⟶ K := (restrictAdjunction j).unit.app H
   let V (W : X.Opens) := j ''ᵁ (j ⁻¹ᵁ W)
   have hV (W : X.Opens) : V W ≤ U := U.ι_image_le _
   let k (W : X.Opens) := (homOfLE (j.image_preimage_le W)).op
@@ -133,18 +135,57 @@ theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
         H.val.map l (b (V W.unop) _ (F.map (k W.unop) x) (G.map (k W.unop) y))
     rw [hf, hg]
     exact hb _ _ _ hVZW _ _
-  let : Presheaf.IsLocallyInjective (Opens.grothendieckTopology X)
-      (𝟙 X.ringCatSheaf.obj) :=
-    Presheaf.isLocallyInjective_of_injective _ _ (fun _ ↦ Function.injective_id)
-  let : Presheaf.IsLocallySurjective (Opens.grothendieckTopology X)
-      (𝟙 X.ringCatSheaf.obj) :=
-    Presheaf.isLocallySurjective_of_surjective _ _ (fun _ ↦ Function.surjective_id)
-  obtain ⟨γ, ⟨hγ, hγunit⟩, _⟩ :=
-    PresheafOfModules.existsUnique_bilinear_sheafification_extension
-      X.presheaf X.sheaf (𝟙 X.ringCatSheaf.obj) F G K β hβ
-  obtain ⟨φ, hφ, _⟩ := SheafOfModules.tensor_bilinear_universal X.sheaf
-    ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj F)
-    ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj G) K γ hγ
+  refine ⟨β, hβ, ?_⟩
+  intro W hW x y
+  exact hb W (V W) hW (j.image_preimage_le W) x y
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Local bilinear presheaf pairings into a sheaf extend through sheafification and tensor.
+Source: Stacks Project, Tag 0GMW; blueprint Riemann--Roch determinant paragraph,
+linear construction before independence of lifts.
+(blueprint: lem-sc-local-bilinear-sheafification-tensor).
+
+Proof: Put V(W)=U ∩ W and H'=j_*(H|U), where j:U→X is the inclusion.
+Restrict both presheaf inputs from W to V(W), apply b there, and identify H(V(W)) with H'(W) using
+the definition of restriction and pushforward. This is bilinear over O_X(W): the scalar
+action on H'
+is ordinary restriction, by Scheme.Hom.app_appIso_inv. Naturality follows from hb and
+the presheaf composition laws. Apply the bilinear sheafification extension theorem
+(Tag 0GMW) with the identity ring map and then the sheaf tensor universal property.
+This produces a morphism F^# tensor G^# → H'. For W contained in U the unit H(W)→H'(W)
+is bijective, since V(W)=W and its underlying map is restriction along this equality.
+Compose the constructed morphism's component with the inverse linear equivalence.
+Apply the injective unit component to verify both the pure-tensor equation and
+naturality; these reduce to the extension equations and naturality of the morphism
+and of the unit. This works also for degree-zero input modules, the empty open,
+and the zero ring; no local freeness or exactness is used. -/
+theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
+    (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (H : X.Modules)
+    (U : X.Opens)
+    (b : ∀ W : X.Opens, W ≤ U →
+      F.obj (op W) →ₗ[X.presheaf.obj (op W)]
+        G.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W))
+    (hb : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) x y,
+      b Z (hZW.trans hW) (F.map (homOfLE hZW).op x) (G.map (homOfLE hZW).op y) =
+        H.val.map (homOfLE hZW).op (b W hW x y)) :
+    let S : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj ⥤ X.Modules :=
+      PresheafOfModules.sheafification.{v} (𝟙 X.ringCatSheaf.obj)
+    let η := (PresheafOfModules.sheafificationAdjunction.{v} (𝟙 X.ringCatSheaf.obj)).unit
+    ∃ d : ∀ W : X.Opens, W ≤ U →
+      (S.obj F ⊗ S.obj G).val.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W),
+      (∀ W hW x y,
+        d W hW (tmulSection ((η.app F).app (op W) x) ((η.app G).app (op W) y)) =
+          b W hW x y) ∧
+      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,
+        H.val.map (homOfLE hZW).op (d W hW y) =
+          d Z (hZW.trans hW) ((S.obj F ⊗ S.obj G).val.map (homOfLE hZW).op y)) := by
+  classical
+  dsimp only
+  let j := U.ι
+  let K := (pushforward j).obj (H.restrict j)
+  let q : H ⟶ K := (restrictAdjunction j).unit.app H
+  obtain ⟨β, hβ, hβunit⟩ := restrictPushforward_bilinear_pairing F G H U b hb
+  obtain ⟨φ, hφ⟩ := local_bilinear_tensor_morphism F G K β hβ
   let e (W : X.Opens) (hW : W ≤ U) :=
     LinearEquiv.ofBijective (q.val.app (op W)).hom (restrict_unit_bijective H U W hW)
   let d (W : X.Opens) (hW : W ≤ U) := (e W hW).symm.toLinearMap.comp
@@ -154,10 +195,7 @@ theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
     apply (e W hW).injective
     change e W hW ((e W hW).symm (φ.val.app (op W) (tmulSection _ _))) = _
     rw [LinearEquiv.apply_symm_apply]
-    refine (hφ (op W) _ _).trans ((hγunit (op W) x y).trans ?_)
-    change b (V W) (hV W) (F.map (k W) x) (G.map (k W) y) =
-      q.val.app (op W) (b W hW x y)
-    exact hb W (V W) hW (j.image_preimage_le W) x y
+    exact (hφ (op W) x y).trans (hβunit W hW x y)
   · intro W Z hW hZW y
     apply (e Z (hZW.trans hW)).injective
     have hq := PresheafOfModules.naturality_apply q.val (homOfLE hZW).op (d W hW y)
