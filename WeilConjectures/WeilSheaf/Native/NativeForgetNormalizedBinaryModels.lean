@@ -124,7 +124,7 @@ private theorem representative_hom_square
   simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using
     TensorEvaluationFormal.invert_hom_square H (δ.app T) (δ.app I)
       (F.map (Q.map φ ≫ e.inv) ≫ x) (δ.hom.app P ≫ V.map φ ≫ c ≫ e'.inv)
-      (by simpa only [Category.assoc] using hm)
+      (by simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using hm)
 
 -- The cancellation argument only uses the normalization squares and an adjunction.
 private theorem normalized_model_forget
@@ -204,6 +204,53 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+
+-- Apply the signed normalization once to an arbitrary map into a K-injective complex.
+private theorem native_normalized_uncurry_map
+    (P T I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+    (hP : NativeIsKFlat k₀ l X P) (hT : NativeIsKFlat k₀ l X T) (hI : I.IsKInjective)
+    (j : ((nativeTensorTotal k₀ l X).obj P).obj T ⟶ I) :
+    ∃ φ : P ⟶ CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) T I,
+      (∀ (p q n : ℤ) (hpq : p + q = n),
+        nativeOpenTensorInsertion k₀ l X P T p q n hpq ≫ j.f n =
+          (p * q).negOnePow • (((nativeTensorBifunctor k₀ l X).obj (T.X q)).map
+            (φ.f p ≫ CochainComplex.bifunctorHomπ (ihomBifunctor k₀ l X)
+              T I p q n (by omega)) ≫
+                (tensorIhomAdjunction k₀ l X (T.X q)).counit.app (I.X n))) ∧
+      (nativeOpenTensorModel k₀ l X P T hP hT).hom ≫ DerivedCategory.Q.map j =
+        ((nativeDerivedClosedComparison k₀ l X).weilClosed.transpose
+          (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) (DerivedCategory.Q.obj I)).symm
+          (DerivedCategory.Q.map φ ≫
+            ((nativeDerivedClosedComparison k₀ l X).homModels.weilRepresentatives.model
+              T I hI).inv) := by
+  classical
+  let : (nativeTensorBifunctor k₀ l X).Additive := by
+    constructor
+    intro A B f g
+    apply NatTrans.ext
+    funext Q
+    exact ((nativeTensorBifunctor k₀ l X).flip.obj Q).map_add
+  let : ∀ P : ProEtaleWeilSheaf k₀ l X,
+      ((nativeTensorBifunctor k₀ l X).obj P).Additive := by
+    intro P
+    exact (tensorIhomAdjunction k₀ l X P).left_adjoint_additive
+  let a : nativeTensorBifunctor k₀ l X ⊣₂ ihomBifunctor k₀ l X :=
+    { adj := tensorIhomAdjunction k₀ l X
+      unit_whiskerRight_map := by
+        intro A B f
+        apply NatTrans.ext
+        funext Q
+        exact (unit_conjugateEquiv_symm (tensorIhomAdjunction k₀ l X B)
+          (tensorIhomAdjunction k₀ l X A)
+          ((ihomBifunctor k₀ l X).map f.op) Q).symm }
+  let θ := (HomologicalComplex.mapBifunctorFlipIso T P
+    (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
+  let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
+  obtain ⟨ψ, hψ, hloc⟩ := (native_normalized_tensor_models k₀ l X).choose_spec.2
+    P T I hP hT hI φ
+  have hψj : ψ = j := signed_normalization_uncurry a P T I j ψ hψ
+  subst ψ
+  exact ⟨φ, hψ, hloc⟩
 
 -- The fixed representative squares involve several nested localization functors.
 /-- The fixed native tensor model forgets to the canonical ordinary localization tensorator.
@@ -364,31 +411,16 @@ theorem native_forget_normalized_binary_models
     have hC : C.Compatible := by
       unfold C nativeDerivedClosedComparison
       exact (native_closed_forgetful k₀ l X).2.2.2.2.choose_spec
-    let a : nativeTensorBifunctor k₀ l X ⊣₂ ihomBifunctor k₀ l X :=
-      { adj := tensorIhomAdjunction k₀ l X
-        unit_whiskerRight_map := by
-          intro A B f
-          apply NatTrans.ext
-          funext Q
-          exact (unit_conjugateEquiv_symm (tensorIhomAdjunction k₀ l X B)
-            (tensorIhomAdjunction k₀ l X A)
-            ((ihomBifunctor k₀ l X).map f.op) Q).symm }
     let N := ((nativeTensorTotal k₀ l X).obj P).obj T
     have hres := Abelian.HasKInjectiveResolutions.exists_isKInjective N
     let I := hres.choose
     have hI := hres.choose_spec.1
     let j := hres.choose_spec.2.choose
     have hj := hres.choose_spec.2.choose_spec.2
-    let θ := (HomologicalComplex.mapBifunctorFlipIso T P
-      (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
-    let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
-    have hnormalized := (native_normalized_tensor_models k₀ l X).choose_spec.2
-      P T I hP hT hI φ
-    let ψ := hnormalized.choose
+    have hnormalized := native_normalized_uncurry_map k₀ l X P T I hP hT hI j
+    let φ := hnormalized.choose
     have hψ := hnormalized.choose_spec.1
     have hloc := hnormalized.choose_spec.2
-    have hψj : hnormalized.choose = j := signed_normalization_uncurry a P T I j ψ hψ
-    simp only [hψj] at hloc hψ
     have hsources := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
     have hUI := hsources.choose
