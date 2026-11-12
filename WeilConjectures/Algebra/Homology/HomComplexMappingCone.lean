@@ -50,7 +50,6 @@ private lemma homObjMap_zero_right
   ext X φ
   rfl
 
-set_option profiler true in
 -- The product comparison unfolds the chosen Hom-complex functor repeatedly.
 set_option backward.isDefEq.respectTransparency false in
 /-- Internal Hom in the second variable commutes with mapping cones.
