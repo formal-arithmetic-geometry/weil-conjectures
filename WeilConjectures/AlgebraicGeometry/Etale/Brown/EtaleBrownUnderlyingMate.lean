@@ -179,13 +179,17 @@ private theorem brown_underlying_restriction_section
       brown_underlying_localization_coherence O t W P R ∧
       brown_underlying_scalar_coherence O t W P R := hR
   run_tac
-    let a ← Lean.Elab.Tactic.getLocalDeclFromUserName `hR
-    let b ← Lean.Elab.Tactic.getLocalDeclFromUserName `hR'
+    let a ← Lean.Meta.getLocalDeclFromUserName `hR
+    let b ← Lean.Meta.getLocalDeclFromUserName `hR'
     let count ← IO.mkRef (0 : Nat)
     let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
       if fuel == 0 || a == b || (← count.get) >= 12 then return
-      let a ← Lean.Meta.whnf a
-      let b ← Lean.Meta.whnf b
+      let unfoldHead (e : Lean.Expr) : Lean.MetaM Lean.Expr :=
+        if e.isAppOf ``StrictEtaleBrownRealizationCoherence ||
+            e.isAppOf ``brown_underlying_localization_coherence ||
+            e.isAppOf ``brown_underlying_scalar_coherence then Lean.Meta.whnf e else pure e
+      let a ← unfoldHead a
+      let b ← unfoldHead b
       if a == b then return
       match fuel, a, b with
       | k + 1, .app .., .app .. =>
