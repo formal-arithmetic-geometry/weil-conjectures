@@ -58,9 +58,35 @@ private theorem wedgeMul_wedge {R M : Type v} [CommRing R] [AddCommGroup M]
   apply Subtype.ext
   exact ExteriorAlgebra.ιMulti_mul_ιMulti a c
 
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
--- Scheme scalar identifications and the two span inductions need extra elaboration fuel.
+private theorem wedgeMul_map_wedge {R A B C : Type v} [CommRing R]
+    [AddCommGroup A] [Module R A] [AddCommGroup B] [Module R B]
+    [AddCommGroup C] [Module R C] (r s : ℕ) (f : A →ₗ[R] B) (t : C →ₗ[R] B)
+    (a : Fin r → A) (c : Fin s → C) :
+    wedgeMul r s (_root_.exteriorPower.map r f (_root_.exteriorPower.ιMulti R r a))
+      (_root_.exteriorPower.map s t (_root_.exteriorPower.ιMulti R s c)) =
+      _root_.exteriorPower.ιMulti R (r + s) (Fin.append (fun i ↦ f (a i))
+        (fun i ↦ t (c i))) := by
+  rw [_root_.exteriorPower.map_apply_ιMulti, _root_.exteriorPower.map_apply_ιMulti,
+    wedgeMul_wedge]
+
+private theorem exterior_pairing_naturality_of_generators
+    {R S A C P A' C' P' : Type v} [CommRing R] [CommRing S]
+    [AddCommGroup A] [Module R A] [AddCommGroup C] [Module R C]
+    [AddCommGroup P] [Module R P] [AddCommGroup A'] [Module S A']
+    [AddCommGroup C'] [Module S C'] [AddCommGroup P'] [Module S P']
+    {ι κ : Type v} {a : ι → A} {c : κ → C} {σ : R →+* S}
+    (ha : Submodule.span R (Set.range a) = ⊤)
+    (hc : Submodule.span R (Set.range c) = ⊤)
+    (l : A →ₛₗ[σ] A') (m : C →ₛₗ[σ] C') (k : P →ₛₗ[σ] P')
+    (b : A →ₗ[R] C →ₗ[R] P) (b' : A' →ₗ[S] C' →ₗ[S] P')
+    (h : ∀ i j, b' (l (a i)) (m (c j)) = k (b (a i) (c j))) (x : A) (y : C) :
+    b' (l x) (m y) = k (b x y) := by
+  have hfirst (i : ι) : (b' (l (a i))).comp m = k.comp (b (a i)) :=
+    LinearMap.ext_on_range hc (h i)
+  have hsecond : (b'.flip (m y)).comp l = k.comp (b.flip y) :=
+    LinearMap.ext_on_range ha (fun i ↦ LinearMap.congr_fun (hfirst i) y)
+  exact LinearMap.congr_fun hsecond x
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A natural family of linear maps on subopens induces a natural exterior tensor pairing.
@@ -135,15 +161,8 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
         (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c) =
       wedge (M := B) (r := (r + s)) (U := W)
         (Fin.append (fun j ↦ f.val.app (op W) (a j)) (fun j ↦ t W hW (c j))) := by
-    change (η.app ((B.val.exteriorPower (R := X.presheaf) (r + s)))).app (op W)
-      (wedgeMul r s
-        (_root_.exteriorPower.map (R := X.presheaf.obj (op W)) r (f.val.app (op W)).hom
-          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
-        (_root_.exteriorPower.map (R := X.presheaf.obj (op W)) s (t W hW)
-          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c))) = _
-    rw [_root_.exteriorPower.map_apply_ιMulti, _root_.exteriorPower.map_apply_ιMulti,
-      wedgeMul_wedge]
-    rfl
+    exact congrArg ((η.app (B.val.exteriorPower (R := X.presheaf) (r + s))).app (op W))
+      (wedgeMul_map_wedge r s (f.val.app (op W)).hom (t W hW) a c)
   have hbmap : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) (x y),
       b Z (hZW.trans hW) ((A.val.exteriorPower (R := X.presheaf) r).map (homOfLE hZW).op x)
         ((C.val.exteriorPower (R := X.presheaf) s).map (homOfLE hZW).op y) =
@@ -169,35 +188,13 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
         exact PresheafOfModules.naturality_apply f.val g (a j)
       · simp only [Fin.append_right]
         exact (ht W Z hW hZW (c j)).symm
-    have hfirst (a : Fin r → A.val.obj (op W)) : ∀ y,
-        b Z (hZW.trans hW) ((A.val.exteriorPower (R := X.presheaf) r).map g
-          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
-          ((C.val.exteriorPower (R := X.presheaf) s).map g y) =
-        (exteriorPower B (r + s)).val.map g
-          (b W hW (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a) y) := by
-      intro y
-      have hy : y ∈ Submodule.span (X.presheaf.obj (op W))
-          (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s)) := by
-        rw [_root_.exteriorPower.ιMulti_span]; trivial
-      induction hy using Submodule.span_induction with
-      | mem y hy => obtain ⟨c, rfl⟩ := hy; exact hpure a c
-      | zero => simp only [map_zero]
-      | add y z _ _ hy hz => simp only [map_add, hy, hz]
-      | smul k y _ hy =>
-        rw [PresheafOfModules.map_smul, (b Z _ _).map_smul,
-          (b W _ _).map_smul, PresheafOfModules.map_smul, hy]
-        rfl
-    have hx : x ∈ Submodule.span (X.presheaf.obj (op W))
-        (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r)) := by
-      rw [_root_.exteriorPower.ιMulti_span]; trivial
-    induction hx using Submodule.span_induction with
-    | mem x hx => obtain ⟨a, rfl⟩ := hx; exact hfirst a y
-    | zero => simp only [map_zero, LinearMap.zero_apply]
-    | add x z _ _ hx hz => simp only [map_add, LinearMap.add_apply, hx, hz]
-    | smul k x _ hx =>
-      rw [PresheafOfModules.map_smul, (b Z _).map_smul, LinearMap.smul_apply,
-        (b W _).map_smul, LinearMap.smul_apply, PresheafOfModules.map_smul, hx]
-      rfl
+    exact exterior_pairing_naturality_of_generators
+      (_root_.exteriorPower.ιMulti_span (X.presheaf.obj (op W)) r (A.val.obj (op W)))
+      (_root_.exteriorPower.ιMulti_span (X.presheaf.obj (op W)) s (C.val.obj (op W)))
+      ((A.val.exteriorPower (R := X.presheaf) r).restrictₛₗ g)
+      ((C.val.exteriorPower (R := X.presheaf) s).restrictₛₗ g)
+      ((exteriorPower B (r + s)).val.restrictₛₗ g) (b W hW) (b Z (hZW.trans hW))
+      hpure x y
   obtain ⟨d, hd, hdn⟩ := local_bilinear_sheafification_tensor_extension
     (A.val.exteriorPower (R := X.presheaf) r) (C.val.exteriorPower (R := X.presheaf) s)
     (exteriorPower B (r + s)) U b hbmap
