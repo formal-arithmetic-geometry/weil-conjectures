@@ -53,6 +53,7 @@ attribute [local irreducible]
   WeilConjectures.LocallyFiniteAdicRealization.sections
   AlgebraicGeometry.Scheme.completedAdicDerivedChange
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Compare the cached finite-stage types without unfolding their constructions.
 /-- The boundary-isomorphism interface to the normalized component factorization.
