@@ -141,7 +141,6 @@ private theorem pinnedSingle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.
       (Classical.choose_spec exists_derivedPullbackComposition))) f
   · simpa only [cast_eq] using Scheme.single_map_normalize f M
 
-set_option profiler true in
 private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {M N : Y.Modules} (k : M ⟶ N) :
     (derivedPullback f).map ((DerivedCategory.singleFunctor _ 0).map k) ≫

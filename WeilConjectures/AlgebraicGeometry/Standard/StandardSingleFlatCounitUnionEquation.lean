@@ -48,7 +48,6 @@ private theorem unionEquation_factor
 set_option linter.unusedVariables false in
 -- Preserve the original names of the nondependent forall proof binders.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-set_option profiler true in
 /-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and
 counit data for a bounded flat union complex (Stacks, Tag 0DJ9).
 (blueprint: new-pc-standard-single-flat-counit-union-equation).
