@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Integral.IntegralReductionTensorStr
 import Mathlib.CategoryTheory.Monoidal.Functor
 import all WeilConjectures.SixFunctors.Coefficient.Finite.CoefficientFiniteTensorMonoidal
 import all WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
+import all WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterEvaluation
 
 /-! # Associativity of the normalized reduction tensor strength
 
@@ -165,8 +166,6 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   integralReductionSourceHasDerivedCategory integralReductionTargetHasDerivedCategory
   coefficientFiniteHasDerived coefficientFiniteDerivedExtension derivedCategory
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  integralReductionChangeOfRings integralReductionExistence
-  scalarReductionExtension scalarReductionExistence completedIntegralCommRingProjection
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -234,9 +233,28 @@ private theorem normalizedBeta_eq (n : ℕ)
     subst k
     have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
       (hbeta i j U x y)
-    with_unfolding_all exact hh
+    simp only [totalPair_eq_coefficientTensorGenerator] at hh
+    dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
+      coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
+    dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
+      integralReductionChangeOfRings, integralReductionExistence,
+      scalarReductionExtension, scalarReductionExistence,
+      completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at hh ⊢
+    exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+private theorem finiteCochainModel_reductionCounit (n : ℕ)
+    (A : CochainComplex (scalarReductionSource l E Y) ℤ)
+    (hA : A.IsKFlatIndependentCoefficients) :
+    (finiteCochainModel l E Y n).ε.app A = reductionCounit l E Y D hl n A := by
+  rw [finiteCochainModel_counit l E Y n A hA]
+  unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+  change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  with_unfolding_all rfl
 
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
@@ -324,16 +342,9 @@ private theorem nativeReductionMonoidal
             e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) := by
         rw [hTR']
         exact hrepR.symm
-      have heps (A : CochainComplex (scalarReductionSource l E Y) ℤ)
-          (hA : A.IsKFlatIndependentCoefficients) :
-          D'.ε.app A = reductionCounit l E Y D hl n A := by
-        rw [finiteCochainModel_counit l E Y n A hA]
-        unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
-        dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
-        change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
-        simp only [CategoryTheory.Functor.map_id, Category.id_comp]
-        with_unfolding_all rfl
-      rw [heps P hP, heps Q hQ, heps _
+      rw [finiteCochainModel_reductionCounit l E Y D hl n P hP,
+        finiteCochainModel_reductionCounit l E Y D hl n Q hQ,
+        finiteCochainModel_reductionCounit l E Y D hl n _
         (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
