@@ -62,7 +62,7 @@ lemma CategoryTheory.Functor.comp_baseChangeIso_of_paste
   have nC' := pU.inv.naturality i
   simp only [Functor.comp_map, Functor.comp_obj] at nY n₁ nC nC'
   rw [← cancel_mono (γX.inv.app B)]
-  simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  simp only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj, Category.comp_id]
   rw [hV, hH]
   simp only [Functor.map_comp, Category.assoc]
   have c₁ : aXU.map (aL.inv.app B) ≫ aXU.map (aL.hom.app B) = 𝟙 _ := by
@@ -94,7 +94,6 @@ variable {S P W V : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompa
   [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
 
-set_option profiler true in
 /-- The compact-support base changes of the product squares of `X` and `Y` (here abstract
 cartesian squares over a base `S`) are compatible along a proper `f : X ⟶ Y`: pasting the
 cartesian squares `h ≫ p₁' = p_X ≫ f` and `g ≫ p_Y = p₂ ≫ f` with the product squares,

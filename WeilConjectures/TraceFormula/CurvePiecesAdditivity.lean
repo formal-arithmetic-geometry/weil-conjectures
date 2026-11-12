@@ -102,7 +102,8 @@ theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
       F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx) +
         F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
           (boundedConstructibleUpperShriekId ℓ X).inv.app _) := by
-  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_lowerStar j x hcompl K.carrier
+  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_lowerStar
+    (ℓ := ℓ) j x hcompl K.carrier
   have hu := comp_inv_app_eq_of_comp_eq (boundedConstructibleUpperShriekId ℓ X)
     (K.openPieceCoeff_comp_counit j m sq)
   have hz := eq_comp_inv_app_comp_map (boundedConstructibleUpperShriekId ℓ X)
