@@ -166,8 +166,6 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
   exact (AlgEquiv.restrictNormal_commutes σ L' x).trans
     ((IntermediateField.mem_fixingSubgroup_iff L' σ).1 hσ x x.2)
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- the pullback exchanges of the three layers are large terms
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
