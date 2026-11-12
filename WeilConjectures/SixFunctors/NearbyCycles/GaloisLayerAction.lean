@@ -358,6 +358,7 @@ lemma Hom.pullbackExchange_app_eq_derivedUnitTransport (M : NearbyCyclesModel X 
   · exact fun A ↦ pullbackSquareComparison_hom_app_of_eq_id_right Λ φ.generic M.ε hq φ.commSq_ε A
   · rfl
 
+set_option profiler true in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The action of an endomorphism of a model with identity total component** on the nearby
 cycles is `Li^*` of the unit transport along its generic component. -/
@@ -418,6 +419,7 @@ lemma galoisLayerAut_autAction (σ : L' ≃ₐ[L] L')
 
 variable [FiniteDimensional L L'] [IsGalois L L']
 
+set_option profiler true in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The pullback exchange of a finite Galois layer is split by the averaged action on nearby
 cycles**: if multiplication by `|Γ|` is invertible on `Lε^* C` and the unit transports along
