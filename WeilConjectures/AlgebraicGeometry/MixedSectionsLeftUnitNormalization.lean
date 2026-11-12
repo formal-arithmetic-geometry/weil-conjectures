@@ -23,6 +23,12 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+private theorem mixedSections_natTrans_app_heq
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
+    (α : F ⟶ G) {K L : C} (h : K = L) : HEq (α.app K) (α.app L) := by
+  subst L
+  rfl
+
 -- Perform the naturality paste before specializing the objects to derived sheaves.
 private theorem paste_unit_naturality
     {C D A E : Type*} [Category C] [Category D] [Category A] [Category E]
@@ -269,7 +275,7 @@ theorem mixedSections_left_unit_normalization
     · apply CategoryTheory.heq_comp
         (congrArg (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj hK)
         (congrArg (DerivedCategory.Qh ⋙ HZ.rightDerivedFunctor).obj hK) rfl
-      · congr!
+      · exact mixedSections_natTrans_app_heq HZ.rightDerivedFunctorUnit hK
       · rfl
     · rfl
 
