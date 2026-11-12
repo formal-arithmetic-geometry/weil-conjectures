@@ -84,6 +84,7 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_map_exchangeRight_app (�
 variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'}
   {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the coefficient changes of the base change morphism are matched against large types
 open PadicAlgCl in
