@@ -225,9 +225,11 @@ private theorem ordinaryPushHorizontal {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((EE l E X (σgraph l E X) m).obj M) V
           (((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f m).hom.app M).val.app
             V x)) := by
-  rw [ordinaryPushSection_eq, ordinaryPushSection_eq]
-  exact SpTowerShriek.canonicalPushHorizontal
-    (graphRings l E) (graphTransitions l E) f M h V x
+  exact congrArg
+    (SpTowerShriek.pushSection (SpTowerShriek.R l E n) f
+      ((EE l E X (σgraph l E X) n).obj M) V)
+    (SpTowerShriek.canonicalPushHorizontal
+      (graphRings l E) (graphTransitions l E) f M h V x)
 
 set_option profiler true in
 private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
