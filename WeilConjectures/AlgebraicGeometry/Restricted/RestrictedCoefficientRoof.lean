@@ -170,30 +170,6 @@ private theorem map_map_comp {C D E : Type*} [Category C] [Category D] [Category
     a ≫ G.map (F.map (f ≫ g)) = (a ≫ G.map (F.map f)) ≫ G.map (F.map g) := by
   simp only [Functor.map_comp, Category.assoc]
 
-private theorem sectionExtendIso_comp_naturality
-    {D : Type uD} [Category.{vD} D] [Abelian D]
-    {E : Type uE} [Category.{vE} E] [Abelian E]
-    {B : Type uB} [Category.{vB} B] [Abelian B]
-    (F : D ⥤ E) (G : E ⥤ B) [F.Additive] [G.Additive]
-    (K : CochainComplex D ℕ) {L : CochainComplex E ℕ}
-    (ell : (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj K ⟶ L) (q : ℕ) :
-    (sectionExtendIso (F ⋙ G) K q).hom ≫ HomologicalComplex.homologyMap
-        ((G.mapHomologicalComplex (ComplexShape.up ℤ)).map
-          ((K.mapExtendIso ComplexShape.embeddingUpNat F).hom ≫
-            HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)) (q : ℤ) =
-      HomologicalComplex.homologyMap
-        ((G.mapHomologicalComplex (ComplexShape.up ℕ)).map ell) q ≫
-          (sectionExtendIso G L q).hom := by
-  let Γ := G.mapHomologicalComplex (ComplexShape.up ℤ)
-  let H := HomologicalComplex.homologyFunctor B (ComplexShape.up ℤ) (q : ℤ)
-  have hcomp := map_map_comp Γ H (sectionExtendIso (F ⋙ G) K q).hom
-    (K.mapExtendIso ComplexShape.embeddingUpNat F).hom
-    (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)
-  exact hcomp.trans
-    ((congrArg (fun z ↦ z ≫ H.map (Γ.map
-      (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)))
-        (sectionExtendIso_comp F G K q)).trans (sectionExtendIso_naturality G ell q))
-
 private theorem transport_equation {C : Type*} [Category C]
     {A B M N P Q PZ QZ R RZ : C}
     (m : A ⟶ B) (rI : A ⟶ M) (rJ : B ⟶ N) (nI : M ⟶ P) (nJ : N ⟶ Q)
@@ -243,7 +219,15 @@ private theorem pushforward_sectionExtendIso_naturality
   let : E.Additive := inferInstanceAs
     (RingedSpace.openModuleSections X.toRingedSpace U).Additive
   let : (pushforward v).Additive := inferInstanceAs (pushforward v).Additive
-  exact sectionExtendIso_comp_naturality (pushforward v) E J ell q
+  let sJ := sectionExtendIso (RingedSpace.openModuleSections Z.toRingedSpace (v ⁻¹ᵁ U)) J q
+  have hcomp := map_map_comp Γ H sJ.hom
+    (J.mapExtendIso ComplexShape.embeddingUpNat (pushforward v)).hom
+    (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)
+  refine hcomp.trans ?_
+  exact (congrArg (fun z ↦ z ≫ H.map (Γ.map
+    (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)))
+      (sectionExtendIso_comp (pushforward v) E J q
+        (hG := inferInstanceAs E.Additive))).trans (sectionExtendIso_naturality E ell q)
 
 private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Modules}
     (I : InjectiveResolution F) (U : X.Opens) (R : RestrictedResolutionSections I U)
