@@ -263,6 +263,14 @@ theorem mixedSections_left_unit_normalization
   dsimp only [HZ, schemeDerivedGlobalSections] at h ⊢
   convert h using 1
   · simp only [hK, F]
-  · congr! (postTransparency := .reducible)
+  · apply eq_of_heq
+    apply CategoryTheory.heq_comp
+      (congrArg (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj hK) rfl rfl
+    · apply CategoryTheory.heq_comp
+        (congrArg (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj hK)
+        (congrArg (DerivedCategory.Qh ⋙ HZ.rightDerivedFunctor).obj hK) rfl
+      · congr!
+      · rfl
+    · rfl
 
 end AlgebraicGeometry
