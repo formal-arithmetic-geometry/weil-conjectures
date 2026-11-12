@@ -197,7 +197,7 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q) := by
   apply HomologicalComplex.hom_ext
   intro k
-  simp only [HomologicalComplex.comp_f]
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
   apply inverseImage_reduction_total_hom_ext l E g P Q k
   intro n p q hpq U x y
   simp only [sheafOfModules_comp_apply]
@@ -257,6 +257,7 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   run_tac do
     let now ← IO.monoMsNow
     Lean.logInfo m!"PH199: scalar normalization prepared {now}"
+  dsimp only [a, V', inverseImageUnitSection] at hL1 hL2
   have hL12 := hL1.trans hL2
   run_tac do
     let now ← IO.monoMsNow
