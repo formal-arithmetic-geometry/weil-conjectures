@@ -252,7 +252,7 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     simp only [hcancel]
     have hnat_fm := hnat (CommRingCat.ofHom fm)
     simp only [hnat_fm]
-    have hnat_eK := hnat eK.symm.toRingEquiv.toCommRingCatIso.hom.op
+    have hnat_eK := hnat eK.symm.toRingEquiv.toCommRingCatIso.hom
     simp only [hnat_eK]
     congr 2
     exact (IsLocalization.map_eq (S := Localization.Away (ρ.hom t)) (Q := Sm)
