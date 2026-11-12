@@ -462,7 +462,8 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
   let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1)).asHom
     (Iso.refl P) (Iso.refl P) (by
       change (f.app (op n) : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ (μ ^ (n + 1)).asHom
-      rw [Category.comp_id, Category.id_comp, hf n])
+      erw [Category.comp_id, Category.id_comp]
+      exact hf n)
   let b (n : ℕ) := e.app (op n) ≪≫ c n
   refine ⟨b, ?_, ?_⟩
   · intro n
@@ -483,9 +484,11 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n
       apply coneIso_natural
       · change (X.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ μ.asHom
-        rw [Category.comp_id, Category.id_comp, hX]
+        erw [Category.comp_id, Category.id_comp]
+        exact hX
       · change (Y.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ 𝟙 P
-        rw [Category.comp_id, Category.id_comp, hY]
+        erw [Category.comp_id, Category.id_comp]
+        exact hY
     change _ ≫ (e.hom.app (op n) ≫ (c n).hom) =
       (e.hom.app (op (n + 1)) ≫ (c (n + 1)).hom) ≫ _
     calc

@@ -197,7 +197,9 @@ private theorem ordinary_reduction_isIso
   intro X
   rw [D.ordinaryReduction_eq]
   apply scalar_adjunct_isIso_of_generators (reduction_scalar_comp l E T coefficient h)
-    (D.scalar _) (D.scalar _) (D.scalar _) X _ _
+    (D.scalar _) (D.scalar _) (D.scalar _) X
+    ((D.equivalence.functor.obj (ordinary.obj X)).level n)
+    ((D.equivalence.functor.obj (ordinary.obj X)).level m)
     ((level n).app X) ((level m).app X)
   intro U x
   have ht := transition X h U 1 x
