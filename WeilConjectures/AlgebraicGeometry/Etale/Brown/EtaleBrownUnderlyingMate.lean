@@ -178,7 +178,7 @@ private theorem brown_underlying_restriction_section
       HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x) ∧
       brown_underlying_localization_coherence O t W P R ∧
       brown_underlying_scalar_coherence O t W P R := hR
-  run_tac
+  run_tac Lean.Elab.Tactic.withMainContext do
     let a ← Lean.Meta.getLocalDeclFromUserName `hR
     let b ← Lean.Meta.getLocalDeclFromUserName `hR'
     let mut pending := #[(a.type, b.type)]
