@@ -143,9 +143,10 @@ private theorem brown_underlying_restriction_section
     ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
       (U : W.Etaleᵒᵖ) (x : M.val.obj U),
       HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x := by
-  rcases R with ⟨⟨ordinaryAdditive, derived, factors, equivalence,
-    ordinaryRestriction, restriction, scalar⟩, hR⟩
-  exact hR.1
+  rcases R with ⟨R, hR⟩
+  rcases R with @⟨ordinaryAdditive, derived, factors, equivalence,
+    ordinaryRestriction, restriction, scalar⟩
+  exact @hR.1
 
 private theorem brown_underlying_right_section
     (O : Type (u + 1)) [CommRing O] (t : O)
