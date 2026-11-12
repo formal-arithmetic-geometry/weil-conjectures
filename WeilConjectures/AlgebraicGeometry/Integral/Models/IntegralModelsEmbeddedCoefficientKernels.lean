@@ -332,6 +332,7 @@ private theorem residue_kernel_comparison (φ : R ⟶ B) (q : R ⟶ S) (p : B �
 
 end ResidueKernels
 
+set_option profiler true in
 /-- The embedded scalar map is flat and identifies the residue quotient, and extension
 of the constant residue kernel is exactly the completed residue kernel.
 
