@@ -52,8 +52,30 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
+-- Derive these tensor-existence facts once for an arbitrary scheme, so that the
+-- pullbacks below do not repeat the generic colimit search on each slice.
+private lemma sliceSquare_hasTensorFour (T : Scheme.{u})
+    (A B C D : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasTensor₄ObjExt A B C D := by
+  infer_instance
+
+private lemma sliceSquare_hasGoodTensorLeft (T : Scheme.{u})
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := by
+  infer_instance
+
+private lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := by
+  infer_instance
+
+attribute [local instance] sliceSquare_hasTensorFour sliceSquare_hasGoodTensorLeft
+  sliceSquare_hasGoodTensorRight
+
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
