@@ -121,7 +121,7 @@ private theorem affine_iso_of_section_equiv {X : Scheme.{u}} (U : X.affineOpens)
     exact hx
   exact transport _ V.ι_image_top (V.ι_image_le ⊤) e₀ rfl ht
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The affine quotient tensor resolutions compute the ambient homology sheaf,
 before any pullback to the closed subscheme.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG, and Tag 00LS.
