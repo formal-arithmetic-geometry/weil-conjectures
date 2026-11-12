@@ -320,7 +320,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
       (Profinite.continuousMapRingObj T₀)
       (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.naturality e.inv
     simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
-    rw [← reassoc_of% hn]
+    simp only [Category.assoc, hn]
     erw [reassoc_of% hadj]
     exact e.inv_hom_id
   have hmain := fun (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
