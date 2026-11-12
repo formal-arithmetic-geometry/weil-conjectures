@@ -943,31 +943,22 @@ private theorem ordinary_square (n : ℕ)
 private theorem ordinary_square_reductionUnits
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (n : ℕ)
     (P Q Z : CochainComplex (scalarReductionSource l E X) ℤ)
-    (t : Z ⟶ (U X l E n).obj
-          ((F X l E n).obj Q))
-    (betaZ : ((totalTensor.{u, u} X (S X l E n)).obj
-          ((F X l E n).obj P)).obj
-     
-          ((F X l E n).obj Z) ⟶
+    (t : Z ⟶ (U X l E n).obj ((F X l E n).obj Q))
+    (betaZ : ((totalTensor.{u, u} X (S X l E n)).obj ((F X l E n).obj P)).obj
+      ((F X l E n).obj Z) ⟶
       (F X l E n).obj (((totalTensor.{u, u} X (B X l E)).obj P).obj Z))
     [IsIso betaZ]
-    (betaQ : ((totalTensor.{u, u} X (S X l E n)).obj
-          ((F X l E n).obj P)).obj
-     
-          ((F X l E n).obj Q) ⟶
+    (betaQ : ((totalTensor.{u, u} X (S X l E n)).obj ((F X l E n).obj P)).obj
+      ((F X l E n).obj Q) ⟶
       (F X l E n).obj (((totalTensor.{u, u} X (B X l E)).obj P).obj Q))
     (b : ((totalTensor.{u, u} X (B X l E)).obj P).obj
-        ((U X l E n).obj
-          ((F X l E n).obj Q)) ⟶
-      (U X l E n).obj
-          ((F X l E n).obj
+        ((U X l E n).obj ((F X l E n).obj Q)) ⟶
+      (U X l E n).obj ((F X l E n).obj
         (((totalTensor.{u, u} X (B X l E)).obj P).obj Q)))
     (hZ : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ)
       (x : (P.X i).val.obj V) (z : (Z.X j).val.obj V),
       (betaZ.f (i + j)).val.app V
-        (totalPair.{u, u} X (S X l E n)
-          ((F X l E n).obj P)
-          ((F X l E n).obj Z)
+        (totalPair.{u, u} X (S X l E n) ((F X l E n).obj P) ((F X l E n).obj Z)
           i j V ((reductionUnit l E X D hl n (P.X i)).val.app V x)
             ((reductionUnit l E X D hl n (Z.X j)).val.app V z)) =
       (reductionUnit l E X D hl n _).val.app V
@@ -975,9 +966,7 @@ private theorem ordinary_square_reductionUnits
     (hQ : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ)
       (x : (P.X i).val.obj V) (y : (Q.X j).val.obj V),
       (betaQ.f (i + j)).val.app V
-        (totalPair.{u, u} X (S X l E n)
-          ((F X l E n).obj P)
-          ((F X l E n).obj Q)
+        (totalPair.{u, u} X (S X l E n) ((F X l E n).obj P) ((F X l E n).obj Q)
           i j V ((reductionUnit l E X D hl n (P.X i)).val.app V x)
             ((reductionUnit l E X D hl n (Q.X j)).val.app V y)) =
       (reductionUnit l E X D hl n _).val.app V
@@ -985,16 +974,14 @@ private theorem ordinary_square_reductionUnits
     (hb : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ) (s : (S X l E n).obj.obj V)
       (x : (P.X i).val.obj V) (y : (Q.X j).val.obj V),
       (b.f (i + j)).val.app V
-        (totalPair.{u, u} X (B X l E) P ((U X l E n).obj
-          ((F X l E n).obj Q))
+        (totalPair.{u, u} X (B X l E) P ((U X l E n).obj ((F X l E n).obj Q))
           i j V x (sfReductionTensor l E X n (Q.X j) V s y)) =
       sfReductionTensor l E X n _ V s
         (totalPair.{u, u} X (B X l E) P Q i j V x y)) :
     let adj := (scalarReductionExtension_adjunction l E X n).choose.mapHomologicalComplex (.up ℤ)
     let t' := (adj.homEquiv _ _).symm t
     adj.homEquiv _ _ (inv betaZ ≫
-        ((totalTensor.{u, u} X (S X l E n)).obj
-          ((F X l E n).obj P)).map t' ≫ betaQ) =
+        ((totalTensor.{u, u} X (S X l E n)).obj ((F X l E n).obj P)).map t' ≫ betaQ) =
       ((totalTensor.{u, u} X (B X l E)).obj P).map t ≫ b := by
   have hu (M : completedIntegralModuleSheaves l E X D hl) (W : X.ProEtᵒᵖ)
       (x : M.val.obj W) :
@@ -1199,15 +1186,12 @@ theorem restrictionTensor_mate_model
   obtain ⟨Z, t, hZ, _, ht, _⟩ := hres
   have : IsIso (q.map t) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso (Modules.{u, u} X R) t).2 ht
-  have hcP : IsIso (c.app P) := by
-    simpa only [c, MateDerived.reductionNat_app] using
-      (MateDerived.reductionCounit_isIso l E X D hl n P hP)
-  have hcZ : IsIso (c.app Z) := by
-    simpa only [c, MateDerived.reductionNat_app] using
-      (MateDerived.reductionCounit_isIso l E X D hl n Z hZ)
-  have hcQ : IsIso (c.app Q) := by
-    simpa only [c, MateDerived.reductionNat_app] using
-      (MateDerived.reductionCounit_isIso l E X D hl n Q hQ)
+  have hcP : IsIso (c.app P) :=
+    MateDerived.reductionCounit_isIso l E X D hl n P hP
+  have hcZ : IsIso (c.app Z) :=
+    MateDerived.reductionCounit_isIso l E X D hl n Z hZ
+  have hcQ : IsIso (c.app Q) :=
+    MateDerived.reductionCounit_isIso l E X D hl n Q hQ
   let t' : F.obj Z ⟶ F.obj Q := (adj₀.homEquiv Z (F.obj Q)).symm t
   have hZ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
   have normZ := m.normalization P Z hP hZ₀
@@ -1221,8 +1205,7 @@ theorem restrictionTensor_mate_model
   let betaQ := betaQ₀
   have hiZ : IsIso betaZ := hiZ₀
   have hiQ : IsIso betaQ := hiQ₀
-  let ψ := inv betaZ ≫ T'.map t' ≫ betaQ
-  have ho : adj₀.homEquiv _ _ ψ = TP.map t ≫ b Q :=
+  have ho :=
     MateOrdinary.ordinary_square_reductionUnits X l E D hl n P Q Z t betaZ betaQ
       (b Q) hbZ hbQ (hb Q)
   trace "PH045: ordinary square complete"
