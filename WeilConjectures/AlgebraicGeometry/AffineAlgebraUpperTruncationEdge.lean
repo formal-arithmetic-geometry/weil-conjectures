@@ -75,8 +75,7 @@ private theorem restriction_properties {Z : TopCat.{v}}
     inferInstanceAs (SheafOfModules.toSheaf A).ReflectsIsomorphisms
   exact ⟨hlim, hcolim, reflectsIsomorphisms_of_comp T (SheafOfModules.toSheaf O)⟩
 
-set_option maxHeartbeats 500000 in
--- Scalar-restriction comparisons elaborate several module-sheaf category instances.
+set_option profiler true in
 private theorem affineAlgebra_lowerTruncation_isIso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

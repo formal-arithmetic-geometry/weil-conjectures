@@ -241,7 +241,7 @@ private theorem scalar_unit_pull_formula
   unfold scalarUnitPullIso
   rfl
 
-set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Normalize the native module-object tensor instances and derived-functor comparisons.
 attribute [-instance] internalMonoidal internalTensorCommShift in
 private theorem scalar_unit_pull_adjunct
