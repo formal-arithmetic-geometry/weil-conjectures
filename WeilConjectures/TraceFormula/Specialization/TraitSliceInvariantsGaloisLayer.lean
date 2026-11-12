@@ -212,6 +212,10 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
             (Profinite.padicAlgClRingObj ℓ)).app A) =
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
+  let χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+    (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+    (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian
+  have hχ : IsIso ((χ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app A) := hM1
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -269,15 +273,18 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   exact exists_subgroup_pullbackExchange_of_galois_average
+    (M'' := baseChange hM b hb v hv) (N₁ := baseChangeGaloisLayer hM b hb v hv)
+    (N := baseChangeGaloisModel hM b hb v hv) (M := M)
+    (G := GenericAut k' K)
+    (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
+    (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
-      (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
-      (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
+    χ
     (baseChangeHom hM b hb v hv) (baseChangeToGaloisModel_comp_total hM b hb v hv)
     (baseChangeToGaloisModel_comp_generic hM b hb v hv) A
-    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) hM1
+    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) hχ
     (GenericAut.galoisEquiv (k' := k') (K := K)) L₁ (baseChangeAut hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
