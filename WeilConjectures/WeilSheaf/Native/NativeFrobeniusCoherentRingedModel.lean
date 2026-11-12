@@ -58,7 +58,6 @@ def canonicalFrobeniusRingedModel
 
 -- Check the constructor with abstract data so kernel conversion does not expand
 -- the concrete equivalence while comparing the two coherence predicates.
-set_option maxHeartbeats 1600000 in
 -- The two native and ringed module presentations require substantial type conversion.
 private theorem coherent_model_mk
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
@@ -126,7 +125,6 @@ private theorem coherent_model_mk
   change FrobeniusOrdinaryTensorCoherence A
   exact hc
 
-set_option maxHeartbeats 1600000 in
 -- The two native and ringed module presentations require substantial type conversion.
 /-- Retain tensor coherence of the explicitly constructed canonical Frobenius model.
 Source: canonical section tensor comparison
