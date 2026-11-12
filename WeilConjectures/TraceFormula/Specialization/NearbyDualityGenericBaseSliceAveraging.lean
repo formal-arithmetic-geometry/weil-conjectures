@@ -127,7 +127,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k₁ k₁' k₂ k₂' : Type u} [Field k�
   {Y' : Over (Spec (.of k₂'))} {M : NearbyCyclesModel X.left X'.left}
   {N : NearbyCyclesModel Y.left Y'.left} {j : Y.left ⟶ X.left} {j' : Y'.left ⟶ X'.left}
 
--- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **Averaging splittings on bounded constructible complexes**: let `β` be the restriction
 `NearbyCyclesModel.liftExchange` of an exchange `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N` to bounded
 constructible complexes, and `ρ σ` the restrictions of the actions of self-maps `ψ σ` of `N`
@@ -211,7 +210,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
-
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Triviality of a base-change action passes through the invertible exchange to the slice. -/
 private lemma genericSliceAut_autAction_eq_id_of_baseChange
     (A : DerivedCategory (Mod (Sheaf (ProEt.topology X₁.left) Ab.{u + 1})
@@ -237,8 +236,6 @@ private lemma genericSliceAut_autAction_eq_id_of_baseChange
       h.isTraitModelOver hb (Profinite.padicAlgClRingObj ℓ) hc σ
       (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
 
-set_option profiler true in
--- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
 constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'`
 acting trivially on `Ψ_{M''} (c^* A)`, and for every subgroup `U ≤ V` of finite index, the
@@ -282,7 +279,7 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
     fun U hUV _ ↦ ?_⟩
   have hs := sum_autAction_baseChangeAut_eq_relIndex_nsmul hM b hb
     (traitSlice (traitSliceCoord k')) (traitSlice_over _) (Profinite.padicAlgClRingObj ℓ) hUV
-    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) htriv
+    _ htriv
   have hn : Fintype.card (GenericAut k' (traitSliceField k') ⧸ U) =
       U.relIndex V * Fintype.card (GenericAut k' (traitSliceField k') ⧸ V) := by
     rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, ← Subgroup.index,
@@ -308,9 +305,6 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
     hc).pullbackExchange_comp_app_of_eq (Profinite.padicAlgClRingObj ℓ)
     (baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
     (h.genericSliceHom (traitSliceCoord k') hb) (Category.comp_id _) hspec htot hgen A
-  have hkA := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
-    hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
-    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
   have key := exists_retraction_of_averaging_comp (ι := GenericAut k' (traitSliceField k') ⧸ U)
     ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
     ((baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)).pullbackExchange
@@ -322,7 +316,7 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
       (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb)))
     (leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ)
       (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).left) A
-    (by exact_mod_proofs hx) (by exact_mod_proofs hkA) rB (by exact_mod_proofs hrB) Finset.univ
+    (by exact_mod_proofs hx) (by infer_instance) rB (by exact_mod_proofs hrB) Finset.univ
     (Fintype.card (GenericAut k' (traitSliceField k') ⧸ U))
     (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦ (baseChangeAut hM b hb
       (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out).autAction
@@ -334,7 +328,8 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
     (fun σ ↦ (genericSliceAut (traitSliceCoord k') hb σ.out).autAction
       (Profinite.padicAlgClRingObj ℓ) _)
     (fun σ ↦ pullbackExchange_genericSliceToBaseChange_app_comp_autAction
-      (traitSliceCoord k') hM hb (Profinite.padicAlgClRingObj ℓ) hc σ.out _) (fun σ ↦ Hom.autAction_naturality _ _ _)
+      (traitSliceCoord k') hM hb (Profinite.padicAlgClRingObj ℓ) hc σ.out _)
+    (fun σ ↦ Hom.autAction_naturality _ _ _)
   obtain ⟨r, hr₁, hr₂⟩ := key
   exact ⟨r, by exact_mod_proofs hr₁, by exact_mod_proofs hr₂⟩
 
@@ -345,7 +340,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
--- each derived pullback `L(f)^*` in the statement costs seconds of instance search
+set_option profiler true in
 /-- **The slice exchange is an averaging summand** (bounded constructible complexes): for a bounded
 constructible `A` on `X₁` there is a subgroup `V` of finite index of the pro-`p` kernel `P'` such
 that for every normal subgroup `U ≤ V` of finite index, the slice exchange
