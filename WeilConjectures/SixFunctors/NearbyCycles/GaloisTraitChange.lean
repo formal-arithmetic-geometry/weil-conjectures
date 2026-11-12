@@ -284,10 +284,7 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
     have key₁ := key₀ H
   run_tac Lean.logInfo m!"PH329: matched homology functors: {(← Lean.getRemainingHeartbeats) / 1000}"
   with_reducible
-    have key₂ := key₁ (fun g hg ↦ hcons g hg)
-  run_tac Lean.logInfo m!"PH329: specialized abstract categories: {(← Lean.getRemainingHeartbeats) / 1000}"
-  with_reducible
-    have key := key₂ α α₁ r₁ hr₁ α₂ r₂ hr₂
+    have key := key₁ (fun g hg ↦ hcons g hg) α α₁ r₁ hr₁ α₂ r₂ hr₂
       cA cB cB' I' _ _ _ hnat hIA β hsq
       (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
       (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
