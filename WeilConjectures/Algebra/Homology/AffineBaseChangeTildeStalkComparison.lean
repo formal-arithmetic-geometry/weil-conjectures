@@ -29,6 +29,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the explicit stalk and module composites unfolds several derived functors.
 /-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow.
