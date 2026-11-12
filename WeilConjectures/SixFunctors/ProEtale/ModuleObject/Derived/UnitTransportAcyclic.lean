@@ -120,14 +120,22 @@ theorem derivedUnitIso_hom_comp_derivedUnitTransport {X Y Y' : Scheme.{u}} (s : 
     (leftDerivedUpperStarComp_hom_app_Qh_fac Λ s g)
     (fun M ↦ ((upperStarLowerStarAdjunction Λ s).mapHomotopyCategory (.up ℤ)).derivedη_fac_app
       (HomotopyCategory.quasiIso _ _) _ _ M) ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-  rw [unitTransportHomotopyCompatible Λ s g ((HomotopyCategory.quotient _ (.up ℤ)).obj K),
-    unitTransport_mapHomotopyCategory_app_quotient Λ s g K] at h
+  have ht := (unitTransportHomotopyCompatible Λ s g
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj K)).trans
+      (unitTransport_mapHomotopyCategory_app_quotient Λ s g K)
+  have h' := h.trans (congrArg (fun t ↦ DerivedCategory.Qh.map t ≫
+    ((s ≫ g)_*⟦Λ⟧).rightDerivedFunctorUnit.app
+      ((((s ≫ g)^*⟦Λ⟧).mapHomotopyCategory _).obj
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) ≫
+    ((s ≫ g)_*⟦Λ⟧).rightDerivedFunctor.map
+      (inv (((s ≫ g)^*⟦Λ⟧).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj K)))) ht)
   rw [derivedUnitTransport_rfl]
   change _ ≫ (derivedUnitTransportNatTrans Λ s g g).app (DerivedCategory.Q.obj K) = _
   simp only [Adjunction.derivedUnitIso, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, asIso_hom,
     Functor.mapIso_hom, Iso.app_hom, asIso_inv, Functor.map_comp, Category.assoc]
   exact comp_eq_comp_of_app_naturality (derivedUnitTransportNatTrans Λ s g g)
-    ((DerivedCategory.quotientCompQhIso _).hom.app K) _ _ _ _ _ _ _ _ h
+    ((DerivedCategory.quotientCompQhIso _).hom.app K) _ _ _ _ _ _ _ _ h'
     (DerivedCategory.quotientCompQhIso_inv_naturality _)
 
 /-- **The derived unit transport along `s` with `s ≫ g = g` on acyclic complexes**: for a bounded
