@@ -1074,6 +1074,7 @@ theorem podReindexing_resolution_preservation {X Y : Scheme.{u}} (g : X ⟶ Y) [
     let := ha
     infer_instance
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1200000 in
 -- Elaborating the product comparison and fixed derived models needs a larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency true in
@@ -1273,6 +1274,7 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
           FD.map_id, Category.id_comp]
       _ = _ := congrArg (fun f ↦ FD.map κ.hom ≫ f) hd
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The theorem combines the separately stated tensor/Hom and derived comparison data.
 set_option maxHeartbeats 800000 in
