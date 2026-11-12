@@ -135,7 +135,7 @@ lemma projection_totalTensorSquare_of_sheaf
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
   dsimp only [nativeOpenTensorInsertion] at hn
-  dsimp only [Functor.comp_map L (condensedRealization k₀ l Z),
+  simp only [Functor.comp_map L (condensedRealization k₀ l Z),
     Functor.comp_map (condensedRealization k₀ l Y) R] at hn
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
