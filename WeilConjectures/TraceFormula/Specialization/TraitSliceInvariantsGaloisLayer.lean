@@ -280,15 +280,18 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   trace "PH112: finite layer ready"
   have result := finish
-    (baseChangeToGaloisModel_comp_total hM b hb v hv)
-    (baseChangeToGaloisModel_comp_generic hM b hb v hv)
-    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
+    (by trace "PH112: total"; exact baseChangeToGaloisModel_comp_total hM b hb v hv)
+    (by trace "PH112: generic"; exact baseChangeToGaloisModel_comp_generic hM b hb v hv)
+    (by trace "PH112: rho"; exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
     (GenericAut.galoisEquiv (k' := k') (K := K)) L₁ (baseChangeAut hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (autAction_baseChangeAut_mul hM b hb v hv _)
-    (pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
-    hL₁.1 hL₁.2
+    (by trace "PH112: multiplication"; exact autAction_baseChangeAut_mul hM b hb v hv _)
+    (by
+      trace "PH112: intertwining"
+      exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
+    (by trace "PH112: triviality"; exact hL₁.1)
+    (by trace "PH112: average"; exact hL₁.2)
   trace "PH112: averaging application accepted"
   exact result
 
