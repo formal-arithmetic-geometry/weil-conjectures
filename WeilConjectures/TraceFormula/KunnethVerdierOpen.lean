@@ -420,7 +420,7 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
     verdierDualUpperStarIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing, Category.assoc]
   simp only [Category.assoc] at key
   dsimp only [Functor.comp_obj, Functor.comp_map, verdierDual] at key ⊢
-  convert key using 2 <;> rfl
+  convert key using 3 <;> rfl
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
