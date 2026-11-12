@@ -75,6 +75,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
 private lemma exists_tensor_isGE_of_boundedConstructible
     {ℓ : ℕ} [Fact ℓ.Prime] {X Y Z : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
+    [TopologicalSpace.NoetherianSpace Z]
     {f₁ : Z ⟶ X} {f₂ : Z ⟶ Y} (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
@@ -116,7 +118,8 @@ private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
     DerivedCategory.TStructure.t.isGE_of_ge A₀.obj _ _ (min_le_left _ _)
   have : B₀.obj.IsGE (min A₀.2.1.1.choose B₀.2.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀.obj _ _ (min_le_right _ _)
-  obtain ⟨c, hc⟩ := exists_tensor_isGE_of_boundedConstructible E A₀.2 B₀.2
+  obtain ⟨c, hc⟩ := exists_tensor_isGE_of_boundedConstructible E (A₀ := A₀.obj) (B₀ := B₀.obj)
+    A₀.2 B₀.2
   have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
   have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
   have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
