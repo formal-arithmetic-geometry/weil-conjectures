@@ -82,9 +82,63 @@ private theorem localized_hom_evaluation
     IsIso.hom_inv_id, Category.comp_id]
   rfl
 
+private theorem sheaf_hom_evaluation
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{wY}
+      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
+    (L : CochainComplex
+      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+    (e : (homComplexFunctor (R := R)).obj (op L) ≅ 𝟭 _) :
+    ∃ j : (Functor.curry.obj (derivedInternalHom J R)).obj
+        (op (DerivedCategory.Q.obj L)) ≅ 𝟭 _,
+      ∀ (B : CochainComplex
+          (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+        (k : L ⟶ B)
+        (I : CochainComplex
+          (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+        (_ : I.IsKInjective),
+      ∃ c : DerivedCategory.Q.obj (homComplex (R := R) B I) ≅
+          (derivedInternalHom J R).obj (op (DerivedCategory.Q.obj B), DerivedCategory.Q.obj I),
+        c.hom ≫ (derivedInternalHom J R).map
+          ((DerivedCategory.Q.map k).op, 𝟙 (DerivedCategory.Q.obj I)) ≫
+          j.hom.app (DerivedCategory.Q.obj I) =
+            DerivedCategory.Q.map ((homComplexFunctor (R := R)).map k.op |>.app I ≫
+              e.hom.app I) := by
+  let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let T := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  obtain ⟨d⟩ := derivedInternalHom_comparison.{u, wY}
+    J R T η
+    (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
+  have hη (M : CochainComplex A ℤ) : IsIso (DerivedCategory.Q.map (η.app M)) := by
+    have : QuasiIso (η.app M) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
+    infer_instance
+  obtain ⟨j, hj⟩ := localized_hom_evaluation DerivedCategory.Q
+    (HomologicalComplex.quasiIso A (.up ℤ))
+    (homComplexFunctor (R := R))
+    (derivedInternalHom J R)
+    T η _ e d hη
+  refine ⟨j, ?_⟩
+  intro B k I hI
+  have : I.IsKInjective := hI
+  have : (T.obj I).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A I
+  have : QuasiIso (η.app I) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A I).2
+  have : QuasiIso
+      (((homComplexFunctor (R := R)).obj (op B)).map (η.app I)) := by
+    have hid := (homComplexFunctor (R := R)).map_id (op B)
+    simpa only [op_id, hid, NatTrans.id_app, Category.id_comp] using
+      quasiIso_homComplex_map (R := R)
+        (show I ⟶ T.obj I from η.app I) (𝟙 B)
+  exact hj B k I inferInstance
+
+
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 -- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
@@ -144,37 +198,11 @@ theorem derived_single_hom_evaluation (Y : Scheme.{u})
                 (((CochainComplex.singleFunctor
                   (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op)).app I ≫
                     e.hom.app I)  := by
-  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
-  let T := CochainComplex.kInjectiveResolutionFunctor.{u} A
-  let η := CochainComplex.toKInjectiveResolution.{u} A
-  obtain ⟨d⟩ := derivedInternalHom_comparison.{u, wY}
-    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf T η
-    (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
-      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
-  have hη (M : CochainComplex A ℤ) : IsIso (DerivedCategory.Q.map (η.app M)) := by
-    have : QuasiIso (η.app M) :=
-      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
-    infer_instance
-  obtain ⟨j, hj⟩ := localized_hom_evaluation DerivedCategory.Q
-    (HomologicalComplex.quasiIso A (.up ℤ))
-    (homComplexFunctor (R := Y.toRingedSpace.sheaf))
-    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)
-    T η _ e d hη
+  obtain ⟨j, hj⟩ := sheaf_hom_evaluation
+    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf _ e
   refine ⟨j, ?_⟩
   intro B k I hI
-  have : I.IsKInjective := hI
-  have : (T.obj I).IsKInjective :=
-    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A I
-  have : QuasiIso (η.app I) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A I).2
-  let LB := (CochainComplex.singleFunctor A 0).obj B
-  have : QuasiIso
-      (((homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op LB)).map (η.app I)) := by
-    have hid := (homComplexFunctor (R := Y.toRingedSpace.sheaf)).map_id (op LB)
-    simpa only [op_id, hid, NatTrans.id_app, Category.id_comp] using
-      quasiIso_homComplex_map (R := Y.toRingedSpace.sheaf)
-        (show I ⟶ T.obj I from η.app I) (𝟙 LB)
-  exact hj LB ((CochainComplex.singleFunctor A 0).map k) I inferInstance
+  exact hj _ ((CochainComplex.singleFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k) I hI
 
 end AlgebraicGeometry
