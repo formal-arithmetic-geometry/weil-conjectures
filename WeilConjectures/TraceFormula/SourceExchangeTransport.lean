@@ -117,11 +117,7 @@ lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinit
     by simp only [classTest, classTransportMap, uncurry_curry, Equiv.symm_apply_apply]
   rw [classTest_comp]
   rw [hΦ]
-  rw [hψ]
-  rw [Functor.map_comp]
-  have hnat := (classTransport ℓ f K).naturality ψ
-  have hnat' := congrArg
-    (fun t ↦ t ≫ (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K (𝟙 _))) hnat
-  simpa only [Category.assoc, Functor.map_comp] using hnat'
+  conv_rhs => rw [hψ, Functor.map_comp]
+  exact (classTransport ℓ f K).naturality_assoc ψ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
