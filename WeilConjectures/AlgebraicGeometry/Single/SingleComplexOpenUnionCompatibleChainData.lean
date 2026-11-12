@@ -121,6 +121,31 @@ private theorem nested_arrow_iso
   obtain ⟨a, b, hab⟩ := transport
   exact ⟨Arrow.isoMk a b hab.symm⟩
 
+-- Normalize the nested comparison to the relative-arrow interface once, at a variable open.
+private theorem unionChain_local_arrow
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X X' S S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (sq : IsPullback g' f' f g)
+    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
+    (φ : (derivedPullback g').obj K ⟶ K') (W Z : X.Opens) (hZW : Z ≤ W) :
+    let fW := W.ι ≫ f
+    let p := pullback.fst g' W.ι
+    let q := pullback.snd g' W.ι
+    let fW' := p ≫ f'
+    let sqW : IsPullback q fW' fW g :=
+      (IsPullback.of_hasPullback g' W.ι).flip.paste_vert sq
+    let KW := (derivedPullback W.ι).obj K
+    let KW' := (derivedPullback p).obj K'
+    let φW := (relativeMVComp q W.ι).hom.app K ≫
+      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)
+        (pullback.condition (f := g') (g := W.ι)).symm) ≫
+      (relativeMVComp p g').inv.app K ≫ (derivedPullback p).map φ
+    Nonempty (relativeMVLocalArrow fW fW' g q sqW KW KW' φW (W.ι ⁻¹ᵁ Z) ≅
+      Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)) := by
+  exact ⟨(Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W Z hZW)).symm⟩
+
 -- Assemble the cone model over abstract arrows, before specializing to scheme comparisons.
 private theorem unionChain_of_rows
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
@@ -199,7 +224,6 @@ private theorem unionChain_of_rows
       DerivedCategory.Q.map (CochainComplex.mappingCone.descShortComplex P) ≫
         e₃.hom ≫ jUV.hom.left ≫ aUV.hom
     rw [← jUV.hom.w]
-
 
 set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
@@ -290,16 +314,13 @@ theorem singleComplexOpenComparison_union_compatible_chain_data
     exact W.ι_preimage_self
   obtain ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', hα, hU, hV, hγ⟩ :=
     relativeMV_cover_rows fW fW' g q sqW KW KW' φW A B hcover
-  let iU := Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W U le_sup_left)
-  let iV := Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W V le_sup_right)
-  let iUV := Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W (U ⊓ V)
-    (inf_le_left.trans le_sup_left))
   let b := relativeMVLocalArrow fW fW' g q sqW KW KW' φW
   let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦
     Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)
-  let jU : b A ≅ a U := iU.symm
-  let jV : b B ≅ a V := iV.symm
-  let jUV : b (A ⊓ B) ≅ a (U ⊓ V) := iUV.symm
+  let jU := Classical.choice (unionChain_local_arrow f f' g g' sq K K' φ W U le_sup_left)
+  let jV := Classical.choice (unionChain_local_arrow f f' g g' sq K K' φ W V le_sup_right)
+  let jUV := Classical.choice (unionChain_local_arrow f f' g g' sq K K' φ W (U ⊓ V)
+    (inf_le_left.trans le_sup_left))
   exact unionChain_of_rows (a (U ⊔ V)) (a U) (a V) (a (U ⊓ V))
     (b A) (b B) (b (A ⊓ B)) P P' m e₁ e₂ e₃ e₁' e₂' e₃'
     hP hP' hα hU hV hγ jU jV jUV
