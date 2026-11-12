@@ -38,6 +38,8 @@ def nativeRingedChainBridgeSquare :
   NatIso.mapHomologicalComplex D.b.square (.up ℤ)
 
 -- Both normalized site tensors occur in this square.
+set_option synthInstance.maxHeartbeats 200000 in
+set_option maxHeartbeats 1600000 in
 -- The degreewise comparison crosses three concrete total constructions.
 /-- The normalized comparisons commute for a single pair of native complexes.
 Source: Stacks 06YS, 06YU and 0FPT
@@ -108,7 +110,8 @@ theorem native_weil_tensor_ringed_binary_chain_square
           (o.tensor.hom.app (U.obj P, U.obj Q)).f n
   rw [← D.b.forget.map_comp_assoc, hs]
   simp only [nativeRingedTensorSign]
-  simp only [Functor.map_zsmul, Functor.map_comp]
+  trace_state
+  erw [D.b.forget.map_zsmul, D.b.forget.map_comp]
   simp only [Preadditive.zsmul_comp, Category.assoc]
   erw [reassoc_of% hr]
   dsimp only [nativeChainForgetC, Iso.trans_hom, HomologicalComplex.comp_f]
