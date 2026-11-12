@@ -33,7 +33,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 
 variable (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
 
-set_option trace.profiler true in
+-- Check scalar restriction before specializing to the quotient-ring instances.
 private def brownLevelConstantRestrictionIso (W : Scheme.{u})
     (A B : CommRingCat.{u + 1}) (f : A ⟶ B) :
     SheafOfModules.restrictScalars.{u + 1}
@@ -56,7 +56,6 @@ private def brownLevelConstantRestrictionIso (W : Scheme.{u})
     ext U x
     rfl
 
-set_option trace.profiler true in
 private theorem brownLevelConstantRestrictionIso_sections (W : Scheme.{u})
     (A B : CommRingCat.{u + 1}) (f : A ⟶ B)
     (M : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1} W.smallEtaleTopology
@@ -65,7 +64,6 @@ private theorem brownLevelConstantRestrictionIso_sections (W : Scheme.{u})
     HEq (((brownLevelConstantRestrictionIso W A B f).hom.app M).hom.app U x) x :=
   HEq.rfl
 
-set_option trace.profiler true in
 private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     coefficientRestriction (J := W.smallEtaleTopology) O t h ⋙
       strictEtaleBrownConstant O t W n ≅
@@ -73,6 +71,7 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
       Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h) :=
   brownLevelConstantRestrictionIso W _ _ (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))
 
+-- Construct the mate and prove its equation before specializing the categories.
 private def brownLevelInverseMateIso
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
@@ -91,7 +90,6 @@ private theorem brownLevelInverseMateIso_mate
     (mateEquiv a b (.mk _ _ _ _ (brownLevelInverseMateIso a b e).inv)) = e.hom :=
   (mateEquiv a b).apply_symm_apply _
 
-set_option trace.profiler true in
 -- The normalization transports adjunctions between two concrete derived-category universes.
 /-- Normalize the comparison maps while retaining the supplied derived functors and
 factorizations. Arbitrary comparison isomorphisms are not automatically normalized.
