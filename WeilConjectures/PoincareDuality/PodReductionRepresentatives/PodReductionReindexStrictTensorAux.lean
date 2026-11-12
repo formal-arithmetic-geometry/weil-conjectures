@@ -67,6 +67,28 @@ theorem ordinaryReduction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
     ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
       (coefficientSequenceEvaluation l E W n).map f) U x
 
+/-- Equality on a quotient unit gives equality of the corresponding transpose sections. -/
+theorem ordinaryReduction_homEquiv_apply_eq (W : Scheme.{u}) (n : ℕ)
+    (M : integralTowerModules l E W) (N : coefficientSequenceModules l E W)
+    (f g : (pullbackTensorOrdinaryReduction l E W).obj M ⟶ N)
+    (U : W.ProEtᵒᵖ) (x : M.val.obj U)
+    (h : f.val.app (op (n, U.unop))
+        (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app U
+          (unrestrictedIntegralTensorSection l E W n M U 1 x)) =
+      g.val.app (op (n, U.unop))
+        (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app U
+          (unrestrictedIntegralTensorSection l E W n M U 1 x))) :
+    (((pullbackTensorFiniteAdjunction l E W n).homEquiv M
+      ((coefficientSequenceEvaluation l E W n).obj N)
+      ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
+        (coefficientSequenceEvaluation l E W n).map f)).val.app U) x =
+    (((pullbackTensorFiniteAdjunction l E W n).homEquiv M
+      ((coefficientSequenceEvaluation l E W n).obj N)
+      ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
+        (coefficientSequenceEvaluation l E W n).map g)).val.app U) x := by
+  rw [ordinaryReduction_homEquiv_apply, ordinaryReduction_homEquiv_apply]
+  exact h
+
 
 /-- Degreewise, the complex-level reduction evaluation is the termwise one.
 Source: Stacks 0941. -/
@@ -137,11 +159,8 @@ theorem reduction_total_hom_ext (W : Scheme.{u})
     intro p q hpq V x y
     let z : M.val.obj V := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq V x y
-    have e₁ := ordinaryReduction_homEquiv_apply l E W n M N h₁ V z
-    have e₂ := ordinaryReduction_homEquiv_apply l E W n M N h₂ V z
-    apply e₁.trans
-    apply (h n p q hpq V.unop x y).trans
-    exact e₂.symm
+    exact ordinaryReduction_homEquiv_apply_eq l E W n M N h₁ h₂ V z
+      (h n p q hpq V.unop x y)
   apply SheafOfModules.hom_ext
   ext ⟨n, V⟩ r
   exact congrArg (fun f ↦ f.val.app (op V) r) (hn n)
