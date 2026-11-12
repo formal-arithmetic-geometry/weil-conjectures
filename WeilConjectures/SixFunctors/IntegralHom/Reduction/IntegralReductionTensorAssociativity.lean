@@ -36,7 +36,7 @@ private theorem map_hom_comp_of_symm_eq
     {X Y : C} (e : X ≅ Y) (f : Y ≅ X) (h : e.symm = f) :
     F.map e.hom ≫ F.map f.hom = 𝟙 (F.obj X) := by
   subst f
-  rw [← F.map_comp, e.hom_inv_id, F.map_id]
+  rw [Iso.symm_hom, ← F.map_comp, e.hom_inv_id, F.map_id]
 
 private theorem transportedTensorComparison_square
     {C D : Type*} [Category C] [Category D]
@@ -389,11 +389,17 @@ private theorem nativeReductionMonoidal
         rw [hTS']
         exact hrepS.symm
       run_tac Lean.logInfo "PH324: before cancellation"
-      have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
-          𝟙 _ := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta) (κ.app (P, Q)) hbκ
+      have hcan := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta) (κ.app (P, Q)) hbκ
       run_tac Lean.logInfo "PH324: before generic square"
+      dsimp only [integralDerivedReduction, completedIntegralCommRingSheaf,
+        totalTensor, coefficientTotalTensor, ordinaryTensor,
+        CategoryTheory.Functor.uncurry_obj_obj] at hnorm
       with_unfolding_all
-        exact transportedTensorComparison_square F e f m.mu
+        simpa only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
+          F, integralDerivedReduction, AS, CoefficientClosedStructure.tensor,
+          totalTensor, coefficientTotalTensor, ordinaryTensor,
+          CategoryTheory.Functor.uncurry_obj_obj] using
+          (transportedTensorComparison_square F e f m.mu
           (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))
           (TR.iso J R AR P Q hP hQ).hom
           (m.target.representative.app (⟨_, hEP⟩, ⟨_, hEQ⟩)) cS hcr hcs
@@ -403,7 +409,7 @@ private theorem nativeReductionMonoidal
           (finiteCochainModel_reductionCounit l E Y D hl n P hP)
           (finiteCochainModel_reductionCounit l E Y D hl n Q hQ)
           (finiteCochainModel_reductionCounit l E Y D hl n _
-            (coefficientTotalTensor_isKFlat J R P Q hP hQ)))
+            (coefficientTotalTensor_isKFlat J R P Q hP hQ))))
   run_tac Lean.logInfo "PH324: before final tensorator"
   refine ⟨core, ?_⟩
   intro X Z
