@@ -24,7 +24,7 @@ local instance trChartHomFromSquareObjZero (X : Scheme.{u}) (M : X.Modules) :
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
--- Tensor-resolution comparisons require substantial definitional reduction.
+set_option profiler true in
 /-- Naturality of chart homology follows from the tensor-model chain square. -/
 theorem tensorResolutionChartHomologyIso_naturality_of_square
     (Y : Scheme.{u}) (N : Y.Modules) [N.IsQuasicoherent]
