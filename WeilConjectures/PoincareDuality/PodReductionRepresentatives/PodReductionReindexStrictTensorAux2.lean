@@ -100,7 +100,6 @@ private theorem reductionEvaluationComplex_inv_unitSection (W : Scheme.{u}) (n :
     (coefficientIntegralScalarUnitSection l E W n (C.X k) U z))
     ((pullbackTensorReductionEvaluationComplex l E W n).app C).hom_inv_id
 
-set_option profiler true in
 private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q k : ℤ)
     (hpq : p + q = k) (V : W.ProEt)
@@ -152,8 +151,8 @@ private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
       ((congrArg (fun s ↦ (c.inv.f k).val.app (op V) ((b.f k).val.app (op V) s)) hs).trans
         ((congrArg ((c.inv.f k).val.app (op V)) hm').trans hi))
 
-set_option profiler true in
-private theorem strictMap_reducedUnit_generator (W : Scheme.{u})
+/-- The strict reduction map on sequence-site unit generators. -/
+theorem strictMap_reducedUnit_generator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q k : ℤ)
     (hpq : p + q = k) (V : W.ProEt)
     (x : (P.X p).val.obj (op V)) (y : (Q.X q).val.obj (op V)) :
@@ -179,7 +178,6 @@ private theorem strictMap_reducedUnit_generator (W : Scheme.{u})
     n (op V) _).symm.trans
       (hc.trans (tensorReductionFiniteComponent_generator l E W P Q n p q k hpq V x y))
 
-set_option profiler true in
 -- The finite component unfolds four transported tensor comparisons.
 /-- The strict reduction tensor map sends the reduction of `1 ⊗ (x ⊗ y)` to the tensor of the
 reductions of `1 ⊗ x` and `1 ⊗ y`.
