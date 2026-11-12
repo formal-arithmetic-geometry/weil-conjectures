@@ -275,7 +275,7 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     rfl
   have hm := congrArg
     (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr
-  run_tac do
+  run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
     let some h := (← Lean.getLCtx).findFromUserName? `hs | throwError "missing hs"
     for (label, ty) in [("target", target), ("hs", h.type)] do
