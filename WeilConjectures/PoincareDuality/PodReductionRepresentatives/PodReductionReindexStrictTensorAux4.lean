@@ -65,6 +65,7 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h1.symm.trans
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
+-- Fix the target section type before specializing evaluation to a reduction object.
 private def sequenceEvaluation_hom_apply (W : Scheme.{u}) (n : ℕ)
     {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
     (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N) (V : W.ProEt)
@@ -77,7 +78,6 @@ private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
     ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
       M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
 
-set_option profiler true in
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
 Source: Stacks 06YY and 0941. -/
 theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
@@ -104,6 +104,7 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     ((pullbackTensorOrdinaryReduction l E W).obj M) i
     (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V)
       (unrestrictedIntegralTensorSection l E W n M (op V) 1 z))
+  -- Reduce carriers first so that composing equalities does not compare transported scalar actions.
   dsimp only [Functor.comp_obj, coefficientSequenceEvaluation, SheafOfModules.pushforward,
     PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
     PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
@@ -112,7 +113,6 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h0.symm.trans (h1.symm.trans h4)
 
 
-set_option profiler true in
 /-- Two maps out of the reduction of a total tensor degree agree once they agree on reduced
 pure tensors over every object postcomposed along an isomorphism of schemes.
 Source: Stacks 03EK, 06YY, 09A5 and 0941. -/
