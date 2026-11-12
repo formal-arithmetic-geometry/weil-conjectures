@@ -63,6 +63,20 @@ private theorem relativeTensorPullback_kFlat_counit
     (DerivedCategory.quotientCompQhIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))).app _
 
+private theorem relativeTensorPullback_model_homology
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    (W : C ⥤ E) (V : D ⥤ E) [W.Additive] [V.Additive]
+    [PreservesFiniteLimits W] [PreservesFiniteColimits W]
+    [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    (Z : CochainComplex C ℤ) (Z' : CochainComplex D ℤ)
+    (e : (W.mapHomologicalComplex (.up ℤ)).obj Z ≅
+      (V.mapHomologicalComplex (.up ℤ)).obj Z') (i : ℤ) :
+    Nonempty (W.obj (Z.homology i) ≅ V.obj (Z'.homology i)) :=
+  ⟨((Z.sc i).mapHomologyIso W).symm ≪≫
+    (HomologicalComplex.homologyFunctor E (.up ℤ) i).mapIso e ≪≫
+    (Z'.sc i).mapHomologyIso V⟩
+
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
@@ -112,9 +126,11 @@ theorem relativeTensorPullback_kFlat_model
               (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i)) := by
   classical
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  have : Abelian C := inferInstance
   let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf
   let B := (sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+  have : Abelian (SheafOfModules.{u} B) := inferInstance
   let V := SheafOfModules.toSheaf B
   let W := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
   have hV := CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u}
@@ -146,10 +162,8 @@ theorem relativeTensorPullback_kFlat_model
   let := SheafOfModules.monoidalCategory R
   let Z' := CochainComplex.mapBifunctor
     ((U.mapHomologicalComplex (.up ℤ)).obj A) IL (curriedTensor (SheafOfModules.{u} B))
+  obtain ⟨eh⟩ := relativeTensorPullback_model_homology W V Z Z' eb i
   exact ⟨W.mapIso ((DerivedCategory.homologyFunctor C i).mapIso ed ≪≫
-      (DerivedCategory.homologyFunctorFactors C i).app Z) ≪≫
-    ((Z.sc i).mapHomologyIso W).symm ≪≫
-    (HomologicalComplex.homologyFunctor _ (.up ℤ) i).mapIso eb ≪≫
-    (Z'.sc i).mapHomologyIso V⟩
+      (DerivedCategory.homologyFunctorFactors C i).app Z) ≪≫ eh⟩
 
 end AlgebraicGeometry.Scheme
