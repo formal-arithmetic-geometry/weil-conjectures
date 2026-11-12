@@ -46,8 +46,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The chosen geometric square compares derived pullback and explicit tensor quotients.
 /-- For fixed strictly perfect affine models `m`, `m'`, the coefficient arrows have chain
 representatives `φ i`, and there are geometric fibre comparisons `e`, `ei` intertwining the
@@ -131,7 +129,6 @@ theorem picard_residue_homology_chosen_geometric_maps
   obtain ⟨φ, e, ei, h⟩ := picard_residue_homology_chosen_geometric_fibre_data
     f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m'
   refine ⟨φ, e, ei, fun i ↦ ⟨(h i).1, (h i).2.2, fun z ↦ ?_⟩⟩
-  simp only [AddEquiv.trans_apply]
-  rw [(h i).2.1 z, (h i).2.2]
+  exact (h i).2.2 z
 
 end AlgebraicGeometry.Scheme
