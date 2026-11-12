@@ -57,6 +57,7 @@ section HomologyFunctor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The commutation `H^n ⋙ f^* ≅ Lf^* ⋙ H^n` of the exact pullbacks of module objects with
 homology is compatible with the composition isomorphisms, at an object. -/
