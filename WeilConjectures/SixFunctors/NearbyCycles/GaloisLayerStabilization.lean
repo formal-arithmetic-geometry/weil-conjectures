@@ -173,7 +173,7 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
     ((IntermediateField.mem_fixingSubgroup_iff L' σ).1 hσ x x.2)
 
 -- Build the derived identity pullback once, including its graded tensor instances.
-private noncomputable def stabilizationIdentityPullback (T : Scheme.{u}) :
+private noncomputable abbrev stabilizationIdentityPullback (T : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T)) ⥤
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
@@ -215,10 +215,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
       ((stabilizationIdentityPullback Λ X).obj C)
     have h1 : (N.galoisLayerAut h L' (σ.restrictNormal L')).autAction Λ
         ((stabilizationIdentityPullback Λ X).obj C) = 𝟙 _ :=
-      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ ((stabilizationIdentityPullback Λ X).obj C))
+      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ
+        ((stabilizationIdentityPullback Λ X).obj C))
         (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
           (N.galoisLayerAction_one Λ h L' _)
-    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ ((stabilizationIdentityPullback Λ X).obj ((stabilizationIdentityPullback Λ X).obj C)) =
+    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ
+        ((stabilizationIdentityPullback Λ X).obj ((stabilizationIdentityPullback Λ X).obj C)) =
         𝟙 _ := eq_id_of_intertwining_of_epi_aux (stabilizationIdentityPullback Λ X') _ _ _ hc h1
     exact eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality Λ _ g)
       ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
