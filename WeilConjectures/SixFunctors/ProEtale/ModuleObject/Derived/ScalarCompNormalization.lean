@@ -24,6 +24,7 @@ open Scheme
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
   Mod.derivedExtendMapDerivedCategoryAdjunction
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- Comparing the internal module-object derived functors needs this elaboration budget.
 set_option synthInstance.maxHeartbeats 200000 in
