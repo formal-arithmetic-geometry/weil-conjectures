@@ -71,7 +71,7 @@ private theorem transport_compactSupport_baseChange
         ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ≅
       (rightDerivedLowerShriekOfCompactification Λ c').obj
         ((upperStar Λ g').leftDerivedFunctor.obj K)) := by
-  let a := e.inv.hom
+  let a : Λ' ⟶ Λ := e.inv.hom
   have : IsMonHom a := inferInstanceAs (IsMonHom e.inv.hom)
   have : IsIso a := inferInstanceAs (IsIso ((Mon.forget _).map e.inv))
   let (T : Scheme.{u}) : IsIso (coefficientMap a T) :=
@@ -148,7 +148,7 @@ theorem nonempty_iso_compactSupport_baseChange_of_coefficientIso
         ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ≅
       (rightDerivedLowerShriekOfCompactification Λ c').obj
         ((upperStar Λ g'.left).leftDerivedFunctor.obj K)) := by
-  rcases hΛ with ⟨e⟩ | ⟨e⟩
+  rcases hΛ with ⟨⟨e⟩⟩ | ⟨⟨e⟩⟩
   · refine transport_compactSupport_baseChange e f.left g.left f'.left g'.left c c'
       (fun L hL ↦ ?_) K hK
     let L' : BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E)
