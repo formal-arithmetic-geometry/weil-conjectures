@@ -58,6 +58,18 @@ open Scheme
 
 namespace Etale
 
+/-- A morphism into an object isomorphic to the constant complex vanishes if all its
+derived pullbacks to geometric points vanish. -/
+lemma constantComplex_eq_zero_of_leftDerivedUpperStar_map_eq_zero
+    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : K ≅ constantComplex Λ X) (φ : constantComplex Λ X ⟶ K)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
+      (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = 0) :
+    φ = 0 := by
+  exact constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq e fun Ω _ _ x ↦ by
+    rw [h Ω x, Functor.map_zero]
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : Scheme.{u})
   [HasInvertibleExponent Λ Y] {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
   [LocallyOfFiniteType aY]
@@ -125,18 +137,6 @@ theorem isZero_homology_rightDerivedUpperShriek_affineLineZeroLocus
     ((_root_.DerivedCategory.homologyFunctor _ n).mapIso
       ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app _) ≪≫
       (_root_.DerivedCategory.homologyFunctorFactors _ n).app _)
-
-/-- A morphism into an object isomorphic to the constant complex vanishes if all its
-derived pullbacks to geometric points vanish. -/
-lemma constantComplex_eq_zero_of_leftDerivedUpperStar_map_eq_zero
-    {X : Scheme.{u}}
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (e : K ≅ constantComplex Λ X) (φ : constantComplex Λ X ⟶ K)
-    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
-      (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = 0) :
-    φ = 0 := by
-  exact constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq e fun Ω _ _ x ↦ by
-    rw [h Ω x, Functor.map_zero]
 
 include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
