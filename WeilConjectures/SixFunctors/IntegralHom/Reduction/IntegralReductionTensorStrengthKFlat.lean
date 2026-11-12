@@ -296,6 +296,34 @@ private theorem transpose_iso_target (X Y : A) (f : F.obj X ⟶ F.obj Y)
   simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   exact transpose_comparison q r F V a L U adj e h X (F.obj Y) f hunit
 end Comparison
+
+private theorem cochainCounit_quotient
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ) :
+    L.map ((DerivedCategory.quotientCompQhIso C).app P).inv ≫
+        ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).app P).hom ≫
+        ((DerivedCategory.quotientCompQhIso D).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P)).hom =
+      ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
+  change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+
+private theorem quotientRestrictionFactors
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive]
+    [CategoryTheory.Limits.PreservesFiniteLimits F]
+    [CategoryTheory.Limits.PreservesFiniteColimits F] (P : CochainComplex C ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
+      F.mapDerivedCategoryFactors.hom.app P := by
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  change F.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
+  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+
 end StrengthGenericMate
 
 /- Compare the derived scalar counit and unit with their ordinary
@@ -347,36 +375,13 @@ private theorem restrictionComparison_eq
   have hc : reductionCounit l E X D hl n P =
       (scalarReductionCounit l E X n).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
-    unfold reductionCounit
-    change (scalarReductionDerivedExtension l E X n).map (𝟙 _) ≫
-        (scalarReductionCounit l E X n).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-        (DerivedCategory.Qh (C := scalarReductionTarget l E X n)).map
-          (𝟙 (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫ 𝟙 _ = _
-    erw [(scalarReductionDerivedExtension l E X n).map_id,
-      (DerivedCategory.Qh (C := scalarReductionTarget l E X n)).map_id]
-    simp only [Category.id_comp, Category.comp_id]
-    exact Category.comp_id _
-  have hf : (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.hom.app
-        (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P) := by
-    change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P)) = _
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change (scalarReductionDerivedRestriction l E X n).map (𝟙 _) ≫
-      (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.hom.app _ ≫
-      𝟙 _ ≫ (DerivedCategory.Qh (C := scalarReductionSource l E X)).map
-        (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)).obj
-            (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P)))) = _
-    erw [(scalarReductionDerivedRestriction l E X n).map_id,
-      (DerivedCategory.Qh (C := scalarReductionSource l E X)).map_id]
-    simp only [Category.id_comp]
-    exact Category.comp_id _
+    exact StrengthGenericMate.cochainCounit_quotient
+      (integralReductionChangeOfRings l E X D hl n)
+      (integralDerivedReduction l E X D hl n)
+      (integralDerivedReductionCounit l E X D hl n) P
+  have hf := StrengthGenericMate.quotientRestrictionFactors
+    (scalarReductionRestriction l E X n)
+    (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P)
   change _ = (scalarReductionDerivedRestriction l E X n).map
     ((scalarReductionCounit l E X n).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ _
@@ -501,9 +506,8 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
     exact congrArg (fun f ↦ f.val.app U
       ((adj.unit.app ((PresheafOfModules.restrictScalars.{max u (t + 1)} α.hom).obj P)).app U
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))) e.hom_inv_id
-  change (SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
-    (R := R) (coefficient X R S c) M).inv.val.app U
-    ((a.map (rawIso X R S c M).hom).val.app U (e.inv.val.app U _)) = _
+  dsimp only [coefficientIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   rw [hei]
   have hn := congrArg (fun f ↦ f.app U
     (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))
@@ -542,11 +546,9 @@ private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
     (U : X.ProEtᵒᵖ) (s : (level X l E n).obj.obj U) (x : M.val.obj U) :
     (levelIso X l E n M).hom.val.app U (strengthReductionTensor l E X n M U s x) =
       pair.{t, u} X (base X l E) (coeff X l E n) M U s x := by
-  let h := (scalarReductionExistence.{t, u} l E X n).choose_spec.choose M
-  change (coefficientIso X (base X l E) (level X l E n)
-    (projection X l E n) M).hom.val.app U
-      (((eqToHom h.symm ≫ eqToHom h).val.app U) _) = _
-  simp only [eqToHom_trans, eqToHom_refl]
+  dsimp only [levelIso, strengthReductionTensor, Iso.trans_hom, Functor.mapIso_hom,
+    eqToIso.hom, SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  rw [SheafOfModules.eqToHom_val_app_eqToHom_symm]
   exact coefficientIso_pure X (base X l E) (level X l E n) (projection X l E n) M U s x
 
 private theorem levelIso_inv_pure (n : ℕ) (M : scalarReductionSource l E X)
@@ -674,9 +676,8 @@ private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
       (((scalarReductionExtension_adjunction l E X n).choose.unit.app M).val.app W y) =
         strengthReductionTensor l E X n M W 1 y :=
     (scalarReductionExtension_adjunction l E X n).choose_spec M W y
-  change _ = _ at h
-  rw [hu, hu] at h
-  exact h.symm
+  exact (congrArg (((scalarReductionExtension l E X n).obj M).val.map i)
+    (hu V x)).symm.trans (h.symm.trans (hu W (M.val.map i x)))
 
 private theorem beta_restricted (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -1100,8 +1101,19 @@ private theorem restrictionTensor_mate_model
   let t' : F.obj Z ⟶ F.obj Q := (adj₀.homEquiv Z (F.obj Q)).symm t
   have hZ₀ : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
   have normZ := m.normalization P Z hP hZ₀
-  obtain ⟨hFP, hFZ, betaZ₀, hiZ₀, hbZ, hnZ⟩ := normZ
-  obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := m.normalization P Q hP hQ
+  have hFP := normZ.choose
+  have hFZ := normZ.choose_spec.choose
+  let betaZ₀ := normZ.choose_spec.choose_spec.choose
+  have hiZ₀ := normZ.choose_spec.choose_spec.choose_spec.1
+  have hbZ := normZ.choose_spec.choose_spec.choose_spec.2.1
+  have hnZ := normZ.choose_spec.choose_spec.choose_spec.2.2
+  have normQ := m.normalization P Q hP hQ
+  have hFP' := normQ.choose
+  have hFQ := normQ.choose_spec.choose
+  let betaQ₀ := normQ.choose_spec.choose_spec.choose
+  have hiQ₀ := normQ.choose_spec.choose_spec.choose_spec.1
+  have hbQ := normQ.choose_spec.choose_spec.choose_spec.2.1
+  have hnQ := normQ.choose_spec.choose_spec.choose_spec.2.2
   let betaZ : T'.obj (F.obj Z) ⟶ F.obj (TP.obj Z) := betaZ₀
   let betaQ : T'.obj (F.obj Q) ⟶ F.obj (TP.obj Q) := betaQ₀
   have hiZ : IsIso betaZ := hiZ₀
@@ -1288,8 +1300,10 @@ theorem scalarTensorStrength_on_kflat_representatives
   let UC := U₀.mapHomologicalComplex (.up ℤ)
   let T := totalTensor.{t, u} X R
   let TS := totalTensor.{t, u} X S
-  obtain ⟨hEP, hEQ, beta, hbeta, hsec, _⟩ := m.normalization P Q hP hQ
-  have : IsIso beta := hbeta
+  have norm := m.normalization P Q hP hQ
+  let beta := norm.choose_spec.choose_spec.choose
+  have : IsIso beta := norm.choose_spec.choose_spec.choose_spec.1
+  have hsec := norm.choose_spec.choose_spec.choose_spec.2.1
   obtain ⟨bc, _, hbc⟩ := CategoryTheory.tensorComplexCancellation
     (completedIntegralCommRingProjectionUnrestricted l E X n) E₀
     (scalarReductionExistence l E X n).choose_spec.choose
