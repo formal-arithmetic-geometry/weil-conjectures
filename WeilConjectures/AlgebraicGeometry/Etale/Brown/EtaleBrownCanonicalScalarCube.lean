@@ -63,9 +63,26 @@ private lemma mateEquiv_app_cube_converse_of_eq
   rw [hσr, hαf', hαf, hσs]
   exact h K
 
+set_option profiler true in
+private lemma brown_scalarPullback_mate
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
+    {V W : Scheme.{u}} (g : V ⟶ W) :
+    mateEquiv
+        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ))
+        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ))
+        (.mk _ _ _ _ (Etale.scalarPullbackIso φ g).inv) =
+      .mk _ _ _ _ (Etale.scalarRestrictionPullbackIso φ g).hom := by
+  let an := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ)
+  let av := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ)
+  have he := congrArg Iso.inv (Etale.scalarPullback_eq φ g)
+  change (mateEquiv an av).symm
+      (.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso φ g).hom) =
+    (Etale.scalarPullbackIso φ g).inv at he
+  rw [← he]
+  exact (mateEquiv _ _).apply_symm_apply _
+
 -- Compare four independently normalized adjunctions.
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 /-- The scalar mate of the exact ordinary restriction square respects normalized
 Brown inverse-image realizations.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4.
@@ -151,16 +168,7 @@ theorem strictEtaleBrownCanonicalScalarCube
   have ht : (mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
       (.mk _ _ _ _ τ)) = δ.hom :=
     ((mateEquiv _ _).apply_symm_apply _)
-  have hs : (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)) =
-        (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom := by
-    have he := congrArg Iso.inv
-      (Etale.scalarPullback_eq (strictEtaleBrownRingMap O t h) g)
-    change ((mateEquiv an av).symm (.mk _ _ _ _
-      (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom)) =
-        (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv at he
-    rw [← he]
-    exact ((mateEquiv _ _).apply_symm_apply _)
+  have hs := brown_scalarPullback_mate (strictEtaleBrownRingMap O t h) g
   have hc := strictEtaleBrownCanonicalRestrictionCube O t g A PW PV B RV RW rg hinverse h
   intro Y
   have hr : (mateEquiv (PV.scalar h).derivedAdj av
@@ -169,17 +177,12 @@ theorem strictEtaleBrownCanonicalScalarCube
   have hw : (mateEquiv (PW.scalar h).derivedAdj an
       (.mk _ _ _ _ (RW.scalar h).inv)) = .mk _ _ _ _ (RW.val.restriction h).hom :=
     RW.property.2.2 h
-  apply mateEquiv_app_cube_converse (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
+  exact mateEquiv_app_cube_converse_of_eq
+    (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
     τ (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
-    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv ?_ Y
-  intro X
-  change pn.inv.app _ ≫ (RV.derived n).map
-      ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-        (.mk _ _ _ _ τ)).app X) ≫
-      (mateEquiv (PV.scalar h).derivedAdj av (.mk _ _ _ _ (RV.scalar h).inv)).app _ =
-    _ ≫ (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)).app _ ≫ _
-  rw [ht, hr, hw, hs]
-  exact hc X
+    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv
+    δ.hom (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom
+    (RV.val.restriction h).hom (RW.val.restriction h).hom
+    ht hs hw hr hc Y
 
 end AlgebraicGeometry
