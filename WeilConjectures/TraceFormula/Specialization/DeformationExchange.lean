@@ -272,6 +272,13 @@ private lemma supportCompactSupportExchange_component_identity
     Ξ' := lowerStarLowerShriekCompIso ℓ (hc.specialFixedLocus k').isPullback.w,
     M' := (boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
+    T' := (boundedConstructibleLowerStar ℓ
+      (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)).obj
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
+    T₂' := (boundedConstructibleLowerStar ℓ
+      ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
+        diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))).obj
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
     hχΔ := hχΔ', hχg := hχg, hχdj := hχdj,
     hF2 := hF2, hF2' := hF2map, hL := hL, hL' := hL', hF1 := hF1, hF3 := hF3,
     t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
