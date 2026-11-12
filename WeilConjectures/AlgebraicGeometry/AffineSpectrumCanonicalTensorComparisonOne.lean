@@ -277,6 +277,7 @@ private theorem canonicalSpectrumStalkComplexIso_one
     simp only [canonicalSpectrumStalkEquiv, eqToIso_refl, Iso.refl_trans,
       RingEquiv.toRingHom_eq_coe, Iso.commRingCatIsoToRingEquiv_toRingHom, asIso_hom]
   unfold canonicalSpectrumStalkComplexIso
+  -- Apply the cast identity directly, avoiding a rewrite motive for the whole complex.
   refine (restrictScalarsIso_cast_apply _ _ hr _ _
     (isoPullbackModuleStalkComplexIso X.isoSpec.inv y P) _ k t).trans ?_
   dsimp [isoPullbackModuleStalkComplexIso]

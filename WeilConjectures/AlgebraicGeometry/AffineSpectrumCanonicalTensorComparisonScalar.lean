@@ -41,7 +41,6 @@ private theorem isoPullbackAdditiveStalkIso_smul
   rw [Scheme.Modules.restrictStalkNatIso_inv_smul, map_smul]
   rfl
 
-set_option profiler true in
 -- Identifying the complex composition factors reduces several stalk functor types.
 /-- Scalar compatibility of the fixed additive comparison; this assertion does not involve
 input-complex coordinates or the coefficient-one equation.
@@ -150,6 +149,7 @@ theorem canonicalSpectrum_tensor_comparison_smul
   have hd : (j.stalkMap z0).hom d = canonicalSpectrumStalkEquiv X' z z0 rfl d := by
     simp only [canonicalSpectrumStalkEquiv, eqToIso_refl, Iso.refl_trans]
     rfl
+  -- Keep the scalar identities typed as linear maps before composing them.
   have ha := a.hom.map_smul d t
   have hc := c.hom.map_smul ((j.stalkMap z0).hom d) (b (a t))
   have he := e.hom.map_smul ((j.stalkMap z0).hom d) (c (b (a t)))
