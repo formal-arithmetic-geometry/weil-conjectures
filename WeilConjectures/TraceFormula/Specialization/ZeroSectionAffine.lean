@@ -63,6 +63,33 @@ lemma range_subset_range_coprod_desc_right {A B C : Scheme.{u}} (f : A ⟶ C) (g
   rintro _ ⟨s, rfl⟩
   exact ⟨(coprod.inr : B ⟶ A ⨿ B).base s, by rw [← Scheme.Hom.comp_apply, coprod.inr_desc]⟩
 
+/-- Membership in the image on constant special fibres can be checked on the ambient scheme. -/
+lemma mem_range_centreSpecialFibreMap_iff {k : Type u} [Field k]
+    (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
+    (f : X' ⟶ X) (I : X.left.IdealSheafData)
+    (y : (deformationSpecialFibre (centre X I) ⊥ k').left) :
+    y ∈ Set.range (centreSpecialFibreMap f I k').left.base ↔
+      I.subschemeι (constantSpecialFibreProj k' (centre X I) y) ∈ Set.range f.left.base := by
+  rw [range_centreSpecialFibreMap_eq_preimage, range_centreMap]
+  rfl
+
+/-- Projection to the ambient scheme commutes with the map on constant special fibres. -/
+lemma centreSpecialFibreMap_toBase_apply {k : Type u} [Field k]
+    (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
+    (f : X' ⟶ X) (I : X.left.IdealSheafData)
+    (x : (deformationSpecialFibre (centre X' (I.comap f.left)) ⊥ k').left) :
+    I.subschemeι (constantSpecialFibreProj k' (centre X I)
+      ((centreSpecialFibreMap f I k').left x)) =
+      f.left ((centreι X' (I.comap f.left)).left
+        (constantSpecialFibreProj k' (centre X' (I.comap f.left)) x)) := by
+  have h := congrArg (fun g ↦ g.base x)
+    (centreSpecialFibreMap_constantSpecialFibreProj k' f I)
+  change constantSpecialFibreProj k' (centre X I) ((centreSpecialFibreMap f I k').left x) =
+    (centreMap f I).left (constantSpecialFibreProj k' (centre X' (I.comap f.left)) x) at h
+  rw [h]
+  exact congrArg (fun g ↦ g.left (constantSpecialFibreProj k'
+    (centre X' (I.comap f.left)) x)) (centreMap_centreι f I)
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   [hk' : Fact (ringChar k').Prime] [hk'ℓ : Fact (ringChar k' ≠ ℓ)]
@@ -106,8 +133,6 @@ theorem isZero_specializationDefect_polyAffine_zero
     hP _ _ (0 : specializationDefect (polyAffine k 1) (polyAffineHyperplane k 0) k'
       (Profinite.padicAlgClRingObj ℓ) L₀.obj ⟶ 0) this)).1
 
-set_option maxHeartbeats 1000000 in
--- The elaboration of the support condition needs more than the default heartbeats.
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`, after
 the generic vanishing and the Noether normalisation: let `ψ` be an automorphism of `𝔸^{N+2}_k`,
 `v : 𝔸^{N+2}_k ⟶ ℙ¹_{𝔸^{N+1}_k}` the composite of `ψ` and the compactification of `X₀`, and
@@ -194,46 +219,30 @@ theorem isZero_specializationDefect_of_isFinite (N : ℕ)
   have hyv : y ∈ Set.range (centreSpecialFibreMap v H k').left.base := by
     have h₁ : H.subschemeι (constantSpecialFibreProj k' (centre _ H) y) ∉
         Set.range (overProjectiveLineInfinity (polyAffine k (N + 1))).left.base := by
-      rintro ⟨m, hm⟩
-      refine hy₁ ?_
-      rw [range_centreSpecialFibreMap_eq_preimage, range_centreMap]
-      exact ⟨m, hm⟩
+      intro h
+      exact hy₁ ((mem_range_centreSpecialFibreMap_iff k' _ H y).2 h)
     have h₂ : Set.range v.left.base = Set.range (polyAffineChart k (N + 1)).left.base := by
       change Set.range (ψ.hom.left ≫ (polyAffineChart k (N + 1)).left).base = _
-      rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
-        Set.range_eq_univ.mpr (Surjective.surj (f := ψ.hom.left)), Set.image_univ]
-    rw [range_centreSpecialFibreMap v H k', Set.mem_preimage, ← Category.assoc,
-      Scheme.Hom.comp_apply, h₂, range_polyAffineChart, Set.mem_compl_iff]
+      rw [← Scheme.Hom.coe_opensRange, Scheme.Hom.opensRange_comp_of_isIso,
+        Scheme.Hom.coe_opensRange]
+    rw [mem_range_centreSpecialFibreMap_iff k' v H, h₂, range_polyAffineChart]
     exact h₁
-  obtain ⟨x, hxy⟩ := Set.mem_range.mp hyv
+  rcases hyv with ⟨x, hxy⟩
   by_cases hx : constantSpecialFibreProj k' (centre _ _) x ∈ U
   · -- over `U` the defect vanishes
-    obtain ⟨x', hx'⟩ : x ∈ Set.range ((constantSpecialFibreProj k'
-        (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι.base := by
-      rw [Scheme.Opens.range_ι]
-      exact hx
     refine ⟨_, ((constantSpecialFibreProj k'
       (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι ≫
-      (centreSpecialFibreMap v H k').left, inferInstance, ⟨x', by
-        rw [Scheme.Hom.comp_apply, hx', hxy]⟩, ?_⟩
+      (centreSpecialFibreMap v H k').left, inferInstance, ⟨⟨x, hx⟩, hxy⟩, ?_⟩
     exact (hU.of_iso ((L((((constantSpecialFibreProj k'
       (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι)^*⟦Λ⟧)).mapIso
       e₁.symm)).of_iso ((leftDerivedUpperStarComp Λ _ _).app C)
   · -- outside `U`, the point lies over `a`
-    obtain ⟨s, hs⟩ := hY ⟨_, hx, rfl⟩
     refine absurd ?_ hy₂
-    rw [← hxy, range_centreSpecialFibreMap_eq_preimage, range_centreMap]
-    refine ⟨s, ?_⟩
-    have h₁ : constantSpecialFibreProj k' (centre _ H) ((centreSpecialFibreMap v H k').left x) =
-        (centreMap v H).left (constantSpecialFibreProj k' (centre _ (H.comap v.left)) x) := by
-      rw [← Scheme.Hom.comp_apply, centreSpecialFibreMap_constantSpecialFibreProj,
-        Scheme.Hom.comp_apply]
-    have h₂ (w : (centre (polyAffine k (N + 2)) (H.comap v.left)).left) :
-        H.subschemeι ((centreMap v H).left w) =
-          v.left ((centreι (polyAffine k (N + 2)) (H.comap v.left)).left w) :=
-      congrArg (fun f ↦ f.left w) (centreMap_centreι v H)
-    change v.left (a s) = _
-    rw [hs, h₁, h₂]
+    apply (mem_range_centreSpecialFibreMap_iff k' aO H y).2
+    rw [← hxy, centreSpecialFibreMap_toBase_apply]
+    change v.left.base _ ∈ Set.range (a ≫ v.left).base
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+    exact Set.mem_image_of_mem v.left.base (hY ⟨_, hx, rfl⟩)
 
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`. -/
 theorem isZero_specializationDefect_polyAffine_succ (N : ℕ)
