@@ -12,6 +12,7 @@ import all WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 import all WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -310,7 +311,9 @@ private theorem cochainCounit_quotient
           ((F.mapHomologicalComplex (.up ℤ)).obj P)).hom =
       ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
   change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
-  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+  erw [L.map_id, (DerivedCategory.Qh (C := D)).map_id]
+  simp only [Category.id_comp, Category.comp_id]
+  exact Category.comp_id _
 
 private theorem quotientRestrictionFactors
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -322,7 +325,9 @@ private theorem quotientRestrictionFactors
       F.mapDerivedCategoryFactors.hom.app P := by
   rw [Functor.mapDerivedCategoryFactorsh_hom_app]
   change F.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+  erw [F.mapDerivedCategory.map_id, (DerivedCategory.Qh (C := D)).map_id]
+  simp only [Category.id_comp]
+  exact Category.comp_id _
 
 end StrengthGenericMate
 
@@ -506,7 +511,7 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
     exact congrArg (fun f ↦ f.val.app U
       ((adj.unit.app ((PresheafOfModules.restrictScalars.{max u (t + 1)} α.hom).obj P)).app U
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))) e.hom_inv_id
-  dsimp only [coefficientIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+  simp only [coefficientIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   rw [hei]
   have hn := congrArg (fun f ↦ f.app U
@@ -546,8 +551,10 @@ private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
     (U : X.ProEtᵒᵖ) (s : (level X l E n).obj.obj U) (x : M.val.obj U) :
     (levelIso X l E n M).hom.val.app U (strengthReductionTensor l E X n M U s x) =
       pair.{t, u} X (base X l E) (coeff X l E n) M U s x := by
-  dsimp only [levelIso, strengthReductionTensor, Iso.trans_hom, Functor.mapIso_hom,
-    eqToIso.hom, SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  simp only [levelIso, strengthReductionTensor, Iso.trans_hom, Functor.mapIso_hom,
+    eqToIso.hom, SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    scalarReductionRestriction, SheafOfModules.restrictScalars,
+    PresheafOfModules.restrictScalars_map_app]
   rw [SheafOfModules.eqToHom_val_app_eqToHom_symm]
   exact coefficientIso_pure X (base X l E) (level X l E n) (projection X l E n) M U s x
 
@@ -662,6 +669,12 @@ private theorem beta_scalar (n : ℕ)
   rw [reduction_smul X l E n (Q.X j) V s y]
   erw [totalPair_smul_right, map_smul, hbeta]
   exact (reduction_smul X l E n _ V s _).symm
+
+private theorem reductionUnit_section (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
+    (n : ℕ) (M : scalarReductionSource l E X) (V : X.ProEtᵒᵖ) (x : M.val.obj V) :
+    (reductionUnit l E X D hl n M).val.app V x =
+      strengthReductionTensor l E X n M V 1 x :=
+  (scalarReductionExtension_adjunction l E X n).choose_spec M V x
 
 set_option profiler true in
 -- The unit normalization crosses the finite coefficient wrappers.
@@ -1123,17 +1136,11 @@ private theorem restrictionTensor_mate_model
     apply StrengthOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ b
     · intro i j W x z
       have hh := hbZ i j W x z
-      dsimp only [reductionUnit] at hh
-      erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
+      simp only [StrengthOrdinary.reductionUnit_section] at hh
       exact hh
     · intro i j W x y
       have hh := hbQ i j W x y
-      dsimp only [reductionUnit] at hh
-      erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
+      simp only [StrengthOrdinary.reductionUnit_section] at hh
       exact hh
     · exact hb
   let repZ := m.target.representative.app (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩)
@@ -1304,10 +1311,12 @@ theorem scalarTensorStrength_on_kflat_representatives
   let beta := norm.choose_spec.choose_spec.choose
   have : IsIso beta := norm.choose_spec.choose_spec.choose_spec.1
   have hsec := norm.choose_spec.choose_spec.choose_spec.2.1
-  obtain ⟨bc, _, hbc⟩ := CategoryTheory.tensorComplexCancellation
+  have cancellation := CategoryTheory.tensorComplexCancellation
     (completedIntegralCommRingProjectionUnrestricted l E X n) E₀
     (scalarReductionExistence l E X n).choose_spec.choose
     (scalarReductionExistence l E X n).choose_spec.choose_spec.choose
+  let bc := cancellation.choose
+  have hbc := cancellation.choose_spec.2
   let b : (T.obj P).obj (UC.obj (EC.obj Q)) ≅ UC.obj (EC.obj ((T.obj P).obj Q)) :=
     bc P (EC.obj Q) ≪≫ UC.mapIso (asIso beta)
   have hb (i j : ℤ) (V : X.ProEtᵒᵖ) (s : S.obj.obj V)
@@ -1332,10 +1341,7 @@ theorem scalarTensorStrength_on_kflat_representatives
     apply StrengthOrdinary.beta_scalar X l E n P Q beta
     intro i j V x y
     have hh := hsec i j V x y
-    dsimp only [reductionUnit] at hh
-    erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-      (scalarReductionExtension_adjunction l E X n).choose_spec,
-      (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
+    simp only [StrengthOrdinary.reductionUnit_section] at hh
     exact hh
   obtain ⟨e, _, he⟩ := restrictionTensor_mate_model l E X D hl a P hP
   have hpq := he n m Q hQ b.hom hb
