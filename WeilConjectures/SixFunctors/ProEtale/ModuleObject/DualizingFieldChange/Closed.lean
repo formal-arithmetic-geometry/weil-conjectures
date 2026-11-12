@@ -90,6 +90,16 @@ variable {C D C' D' T T' : Type*} [Category* C] [Category* D] [Category* C'] [Ca
   [Category* T'] [Preadditive T'] [HasZeroObject T'] [HasShift T' ℤ]
   [∀ n : ℤ, (shiftFunctor T' n).Additive] [Pretriangulated T']
 
+/-- The first term of a distinguished triangle on the unit of an adjunction vanishes after
+applying the left adjoint, if the counit at the pulled-back object is invertible. -/
+lemma isZero_map_obj_of_distinguished_unit_triangle {F : T ⥤ T'} {G : T' ⥤ T}
+    [F.CommShift ℤ] [F.IsTriangulated] (adj : F ⊣ G) {X M : T} (f : X ⟶ M)
+    (h : G.obj (F.obj M) ⟶ X⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk f (adj.unit.app M) h ∈ distTriang T)
+    [IsIso (adj.counit.app (F.obj M))] : IsZero (F.obj X) := by
+  refine Triangle.isZero₁_of_isIso₂ _ (F.map_distinguished _ hT) ?_
+  exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adj.left_triangle_components M)
+
 /-- In the situation of
 `CategoryTheory.Pretriangulated.isIso_of_adjunction_triangle_of_fullyFaithful`,
 the counit `ι (L (R B)) ⟶ ι B` is the first map of the triangle, up to isomorphism. -/
@@ -417,16 +427,6 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
     (hP : IsPullback πP P'.hom P.hom (Spec.map (CommRingCat.ofHom (algebraMap F L))))
     (sq : IsPullback πZ i'.left i.left πP) (M : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((upperShriekBaseChangeOfMap ℓ sq).app M) := by
-  -- Cache the tensor facts used repeatedly when elaborating the derived pullbacks.
-  have : ∀ X₁ X₂ X₃ X₄ : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left)),
-      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
-  have : ∀ X₁ X₂ X₃ : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left)),
-      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
-  have : ∀ X₁ X₂ X₃ : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left)),
-      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
   /- The open complement `V` of `i` and its preimage `V'` in `P'`. -/
   let V : P.left.Opens :=
     ⟨(Set.range i.left.base)ᶜ, i.left.isClosedEmbedding.isClosed_range.isOpen_compl⟩
@@ -449,9 +449,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   /- The triangle `X ⟶ M ⟶ Rj_* j^* M ⟶`. -/
   let adjV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
   obtain ⟨X, f, h, hT⟩ := distinguished_cocone_triangle₁ (adjV.unit.app M.obj)
-  have hjX : IsZero ((L((V.ι)^*⟦𝐐⟧)).obj X) := by
-    refine Triangle.isZero₁_of_isIso₂ _ ((L((V.ι)^*⟦𝐐⟧)).map_distinguished _ hT) ?_
-    exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adjV.left_triangle_components M.obj)
+  have hjX := isZero_map_obj_of_distinguished_unit_triangle adjV f h hT
   have hiX : IsIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X) :=
     isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero _ V.ι i.left hcompl hjX
   have : LocallyOfFiniteType (Over.mk (V.ι ≫ P.hom)).hom :=
@@ -461,8 +459,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   have : IsSeparated (Over.mk (V.ι ≫ P.hom)).hom :=
     inferInstanceAs (IsSeparated (V.ι ≫ P.hom))
   have hjM := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ V.ι M.obj M.property
-  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
-    boundedConstructible_rightDerivedLowerStar_obj ℓ
+  have hRj := boundedConstructible_rightDerivedLowerStar_obj ℓ
       (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
   have hX : boundedConstructible _ X :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₁ _ hT M.property hRj
@@ -489,9 +486,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   have hbcU : IsIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) := by
     exact_mod_proofs isIso_baseChangeMap_app_padicAlgCl_of_fieldExtension P.hom P'.hom hP ℓ sqV
       (isUnit_natCast_spec ℓ F) _ hjM
-  let e₃ : ((L((πP)^*⟦𝐐⟧)).mapTriangle.obj Tr).obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
-      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
-    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
+  let e₃ := asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sq
   exact isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
     (lowerStarUpperShriekAdjunction ℓ i') (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq)
