@@ -180,16 +180,17 @@ lemma liftExchange_comp_map_compIso_of_rebase (φ : N₂.Hom M₁ c p) (φ' : N�
       (boundedConstructibleUpperStarOfMap ℓ (X := Z₀) (Y := W₀) p).map (ρ.app A) ≫
         α'.app ((boundedConstructibleUpperStarOfMap ℓ (X := Z₁) (Y := Zη) π).obj A) := by
   subst hα hα'
-  refine comp_eq_of_component_hom_eq (liftExchange_app_hom _ _ _ _ _ _) ?_ ?_
-    (liftExchange_app_hom _ _ _ _ _ _) ?_
-  · exact (boundedConstructibleNearbyCycles_map_hom' hN₂ _).trans
+  -- Compute the components separately, so no rewrite motive contains the whole square.
+  have hE := (boundedConstructibleNearbyCycles_map_hom' hN₂
+      (boundedConstructibleUpperStarOfMapCompIso ℓ (X := Z₁) (Y := Z₂) (Z := Zη) hc A).hom).trans
       (congrArg (N₂.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
         (boundedConstructibleUpperStarOfMapCompIso_hom_hom (Zη := Zη) (Z₂ := Z₂) hc A))
-  · exact (congrArg (·.hom)
+  have hP := (congrArg (·.hom)
       (boundedConstructibleUpperStarOfMap_map ℓ (X := Z₀) (Y := W₀) p (ρ.app A))).trans
       (congrArg L((p)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (hρ A))
-  · transport_exact
-      pullbackExchange_app_comp_map_compOfEq_of_rebase _ φ φ' ψ hc htot hgen A.obj
+  refine comp_eq_of_component_hom_eq (liftExchange_app_hom _ _ _ _ _ _) hE hP
+    (liftExchange_app_hom _ _ _ _ _ _) ?_
+  transport_exact pullbackExchange_app_comp_map_compOfEq_of_rebase _ φ φ' ψ hc htot hgen A.obj
 
 end BoundedConstructible
 
