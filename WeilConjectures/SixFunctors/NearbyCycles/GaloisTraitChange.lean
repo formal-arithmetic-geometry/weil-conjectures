@@ -266,12 +266,14 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
   trace "PH329: simplified naturality"
   let α := (τ.pullbackExchange Λ).app C
-  trace "PH329: starting helper application"
+  let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
+  let H := DerivedCategory.homologyFunctor A
+  trace "PH329: specialized homology functors"
+  have hcons {X Y : DerivedCategory A} (g : X ⟶ Y) :
+      (∀ q, IsIso ((H q).map g)) → IsIso g := (DerivedCategory.isIso_iff A g).2
+  trace "PH329: specialized conservativity"
   with_reducible
-    have key₀ := isIso_of_invariant_summands_square
-      (fun q ↦ DerivedCategory.homologyFunctor
-        (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')) q)
-      (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
+    have key₀ := isIso_of_invariant_summands_square H (fun g hg ↦ hcons g hg)
       L((f')^*⟦Λ⟧) Ψ₂Ω
   trace "PH329: specialized abstract categories"
   with_reducible
