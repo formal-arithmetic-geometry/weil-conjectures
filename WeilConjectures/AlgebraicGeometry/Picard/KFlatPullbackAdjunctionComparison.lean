@@ -107,11 +107,11 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
     (((Classical.choose
       (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomotopyCategory
         (.up ℤ)).homEquiv _ _)
-      (HomotopyCategory.quotient
+      ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) (.up ℤ)).map
         ((((Classical.choose
           (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
-            (.up ℤ)).homEquiv _ _).symm α) =
+            (.up ℤ)).homEquiv _ _).symm α)) =
       (HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map α := by
   rw [Adjunction.homEquiv_apply]
