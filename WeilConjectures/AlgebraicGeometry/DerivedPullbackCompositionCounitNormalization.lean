@@ -119,12 +119,16 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
+  run_tac Lean.logInfo m!"before normalization: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have he := derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K
+  run_tac Lean.logInfo m!"after normalization: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have hl := derivedPullbackComposition_localized_counit.{u, w} f g K
+  run_tac Lean.logInfo m!"after localized counit: {(← Lean.getRemainingHeartbeats) / 1000}"
   exact normalizeCounitPrecomposition
     (C := DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
     ((canonicalDerivedPullbackComposition f g).hom.app
       (((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).mapHomotopyCategory
         (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K))
-    (derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K)
-    (derivedPullbackComposition_localized_counit.{u, w} f g K)
+    he hl
 
 end AlgebraicGeometry
