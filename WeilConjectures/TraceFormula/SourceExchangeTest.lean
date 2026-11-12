@@ -108,8 +108,8 @@ lemma classTest_correspondenceClassEquiv_symm {C : Over (Spec (.of k))} [Locally
     Functor.map_comp, Category.assoc] at ⊢
   have hn := (boundedConstructibleLowerShriekComp_padicAlgCl ℓ s prod.fst).inv.naturality w
   simp only [Functor.comp_map] at hn
-  trace_state
-  rw [hP, ← Category.assoc ((boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).map
+  simp only [hP]
+  rw [← Category.assoc ((boundedConstructibleLowerShriek ℓ (prod.fst : S ⨯ S ⟶ S)).map
     ((boundedConstructibleLowerShriek ℓ s).map w)), hn, Category.assoc]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
