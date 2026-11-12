@@ -62,9 +62,21 @@ lemma finiteCoefficientDerivedEquivalence_map_eqToHom_comp_leftDerivedUpperStarI
   erw [Category.id_comp]
   exact (finiteCoefficientDerivedUpperStarIso_hom_app_id T Y M).symm
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- unifying the derived comparison `Φ` with `D(Φ)` in the composition coherence is expensive
+-- Prove the cancellation with abstract objects, so rewriting does not unfold the
+-- derived equivalence and pullback constructions.
+private lemma map_inv_comp_of_section_coherence
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {X Y Z : C} {X' Y' W Z' : D} (e : X ≅ Y) (e' : X' ≅ Y')
+    (b : F.obj X ⟶ X') (c₁ : F.obj Y ⟶ W) (c₂ : W ⟶ Y')
+    (z : X ⟶ Z) (t₁ : X' ⟶ Z') (t₂ : Z' ⟶ F.obj Z)
+    (H : b ≫ e'.hom = F.map e.hom ≫ c₁ ≫ c₂)
+    (I : F.map z = b ≫ t₁ ≫ t₂) :
+    F.map (e.inv ≫ z) = c₁ ≫ c₂ ≫ e'.inv ≫ t₁ ≫ t₂ := by
+  rw [Functor.map_comp]
+  apply (cancel_epi (F.map e.hom)).1
+  rw [← Functor.map_comp_assoc, e.hom_inv_id, F.map_id, Category.id_comp,
+    I, ← reassoc_of% H, e'.hom_inv_id_assoc]
+
 /-- **The finite-coefficient comparison carries the section isomorphisms of module objects to
 those of sheaves of `T`-modules.** For a section `s` of `p : X ⟶ Y` and `M` in the derived
 category of module objects over `T̲` on `Y`, the image under `Φ` of
@@ -97,19 +109,12 @@ theorem finiteCoefficientDerivedEquivalence_map_compSectionIso {X Y : Scheme.{u}
         (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) s).leftDerivedFunctor.map
           ((β p).hom.app M) :=
     finiteCoefficientDerivedUpperStarIso_compCoherence T s p M
-  have I := finiteCoefficientDerivedEquivalence_map_eqToHom_comp_leftDerivedUpperStarId T h M
-  rw [Functor.map_comp, I]
-  have H' : (β s).hom.app ((CondensedRing.upperStar (Profinite.continuousMapRingObj T)
-          p).leftDerivedFunctor.obj M) ≫
-        (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) s).leftDerivedFunctor.map
-          ((β p).hom.app M) =
-      Φ.map ((CondensedRing.leftDerivedUpperStarComp
-          (Profinite.continuousMapRingObj T) s p).inv.app M) ≫ (β (s ≫ p)).hom.app M ≫
-        (leftDerivedUpperStarComp (ModuleCat.{u + 1} (ULift.{u + 1} T)) s p).hom.app (Φ.obj M) := by
-    rw [H, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp]
-  rw [reassoc_of% H']
   simp only [leftDerivedUpperStarCompSectionIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  erw [Iso.hom_inv_id_app_assoc]
+  exact map_inv_comp_of_section_coherence Φ
+    ((CondensedRing.leftDerivedUpperStarComp (Profinite.continuousMapRingObj T) s p).app M)
+    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} (ULift.{u + 1} T)) s p).app (Φ.obj M))
+    _ _ _ _ _ _ H
+    (finiteCoefficientDerivedEquivalence_map_eqToHom_comp_leftDerivedUpperStarId T h M)
+
 
 end AlgebraicGeometry.ProEtale
