@@ -94,6 +94,11 @@ theorem localized_complex_qc_homology_extension
     (S.X₂.homology n).IsQuasicoherent := by
   let e := Scheme.Modules.overEquiv U
   let F := e.functor
+  have : PreservesLimitsOfSize.{0, 0} F :=
+    e.symm.toAdjunction.rightAdjoint_preservesLimits
+  have : PreservesColimitsOfSize.{0, 0} F :=
+    e.toAdjunction.leftAdjoint_preservesColimits
+  have : F.PreservesZeroMorphisms := e.fullyFaithfulFunctor.preservesZeroMorphisms
   let P : ObjectProperty U.toScheme.Modules :=
     fun M ↦ M.IsQuasicoherent
   let : P.IsClosedUnderIsomorphisms :=
