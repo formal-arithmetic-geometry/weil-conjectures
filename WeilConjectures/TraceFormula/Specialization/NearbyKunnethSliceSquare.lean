@@ -52,10 +52,29 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 800000 in
--- the statement involves the Künneth maps of the product and of its slice, whose instances
--- on module objects over the slice need a long search
-set_option synthInstance.maxHeartbeats 200000 in
+-- Derive these tensor-existence facts once for an arbitrary scheme, so that the
+-- pullbacks below do not repeat the generic colimit search on each slice.
+lemma sliceSquare_hasTensorFour (T : Scheme.{u})
+    (A B C D : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasTensor₄ObjExt A B C D := by
+  infer_instance
+
+lemma sliceSquare_hasGoodTensorLeft (T : Scheme.{u})
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := by
+  infer_instance
+
+lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := by
+  infer_instance
+
+attribute [local instance 2000] sliceSquare_hasTensorFour sliceSquare_hasGoodTensorLeft
+  sliceSquare_hasGoodTensorRight
+
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
@@ -135,6 +154,6 @@ lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver
       (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
       ((Category.comp_id f₂).trans (Category.id_comp f₂).symm)
       (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A B
-  exact h
+  cast_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
