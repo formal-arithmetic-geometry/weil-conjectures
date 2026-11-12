@@ -89,6 +89,25 @@ private theorem iso_of_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.{u} X)
         congr 1)
   exact ⟨eF.symm ≪≫ eG⟩
 
+private theorem exists_localizedEquiv_mk {R M N : Type*} [CommRing R]
+    [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N]
+    (T : Submonoid R) (e : M ≃ₗ[R] N) :
+    ∃ L : LocalizedModule T M ≃ₗ[Localization T] LocalizedModule T N,
+      ∀ (y : M) (h : T), L (mk y h) = mk (e y) h := by
+  refine ⟨IsLocalizedModule.mapEquiv T (mkLinearMap _ M) (mkLinearMap _ N)
+    (Localization T) e, ?_⟩
+  intro y h
+  exact LocalizedModule.map_mk _ _ _ _
+
+private theorem exists_away_fraction {R M : Type*} [CommRing R] [AddCommGroup M]
+    [Module R M] (f : R) (x : LocalizedModule.Away f M) :
+    ∃ (y : M) (m : ℕ), x = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := by
+  induction x using LocalizedModule.induction_on with
+  | h y s =>
+    obtain ⟨m, hm⟩ := s.property
+    have hs : s = (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := Subtype.ext hm.symm
+    exact ⟨y, m, by rw [hs]⟩
+
 private theorem addEquiv_of_matching_ranges
     {M N P Q : Type*} [AddCommGroup M] [AddCommGroup N] [AddCommGroup P] [AddCommGroup Q]
     (A : M →+ P) (B : N →+ Q) (hA : Function.Injective A) (hB : Function.Injective B)
@@ -236,14 +255,12 @@ theorem graded_chart_comparison (k : Type u) [Field k]
   let 𝒜 := homogeneousSubmodule (Fin 2) k
   let I := {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
   let D (f : I) := basicOpen 𝒜 f.val.1
-  let L (f : I) : LocalizedModule.Away f.val.1 M ≃ₗ[Localization.Away f.val.1]
-      LocalizedModule.Away f.val.1 N :=
-    IsLocalizedModule.mapEquiv (Submonoid.powers f.val.1)
-      (mkLinearMap _ M) (mkLinearMap _ N) (Localization.Away f.val.1) e
-  have hL (f : I) (y : M) (h : Submonoid.powers f.val.1) :
-      L f (mk y h) = mk (e y) h := by
-    change LocalizedModule.map (Submonoid.powers f.val.1) e.toLinearMap (mk y h) = _
-    exact LocalizedModule.map_mk _ _ _ _
+  have hL_exists (f : I) :
+      ∃ L : LocalizedModule.Away f.val.1 M ≃ₗ[Localization.Away f.val.1]
+          LocalizedModule.Away f.val.1 N,
+        ∀ (y : M) (h : Submonoid.powers f.val.1), L (mk y h) = mk (e y) h :=
+    exists_localizedEquiv_mk (Submonoid.powers f.val.1) e
+  choose L hL using hL_exists
   let A (f : I) := alpha f.val.1 f.val.2 f.property.1 f.property.2
   let B (f : I) := beta f.val.1 f.val.2 f.property.1 f.property.2
   have hrange (f : I) (x : LocalizedModule.Away f.val.1 M) :
@@ -280,19 +297,12 @@ theorem graded_chart_comparison (k : Type u) [Field k]
   have hlin (f g : I) (inc : D g ≤ D f) (s : F.val.obj (op (D f))) :
       lin g (F.val.map (homOfLE inc).op s) =
         G.val.map (homOfLE inc).op (lin f s) := by
-    obtain ⟨e', c, a, he', ha, hrel⟩ :=
+    have hrelation : ∃ (e' c : ℕ) (a : S),
+        0 < e' ∧ a ∈ 𝒜 c ∧ g.val.1 ^ e' = a * f.val.1 :=
       ((standardOpenProperties.{u, u, u} 𝒜).2.2.1 f.val.1 g.val.1 f.val.2 g.val.2
         f.property.1 g.property.1 f.property.2 g.property.2).1.mp inc
-    have hx : A f s ∈ degreeZeroFractions (fun n ↦ (𝒜 n : Set S)) 𝓜
-        (Submonoid.powers f.val.1) := by
-      rw [← (halpha f.val.1 f.val.2 f.property.1 f.property.2).2]
-      exact ⟨s, rfl⟩
-    obtain ⟨n, y, h, _, _, hy⟩ := hx
-    obtain ⟨m, hm⟩ := h.property
-    have hh : h = (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) :=
-      Subtype.ext hm.symm
-    have hs : A f s = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) := by
-      rw [← hy, hh]
+    obtain ⟨e', c, a, he', ha, hrel⟩ := hrelation
+    obtain ⟨y, m, hs⟩ := exists_away_fraction f.val.1 (A f s)
     have ht : B f (lin f s) =
         mk (e y) (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) := by
       change B f (phi f s) = _
