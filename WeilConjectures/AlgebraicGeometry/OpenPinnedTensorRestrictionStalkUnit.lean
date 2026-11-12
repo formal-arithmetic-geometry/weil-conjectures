@@ -94,6 +94,7 @@ private theorem restriction_pushforward_transport
   exact Subsingleton.elim _ _
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Section transport uses the restriction API rather than unfolding its sheaf data.
 -- Work with abstract left adjoints when taking section components of the mate identity.
 private theorem unit_sections_of_conjugate

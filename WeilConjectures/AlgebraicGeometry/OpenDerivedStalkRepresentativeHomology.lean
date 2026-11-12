@@ -146,6 +146,7 @@ private theorem exact_representative_homology_hom
   erw [← Iso.app_inv, complex_homology_iso]
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- Localization comparison evaluation needs additional elaboration heartbeats.
 /-- On a complex, the constructed derived comparison is homology of the inverse
 additive restriction-stalk map, conjugated by the exact forgetful comparisons.
