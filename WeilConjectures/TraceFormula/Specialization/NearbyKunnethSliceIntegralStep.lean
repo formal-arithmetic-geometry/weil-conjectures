@@ -68,6 +68,7 @@ set_option hygiene false in
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the square of the Künneth maps of the slice is a large term
 /-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de
