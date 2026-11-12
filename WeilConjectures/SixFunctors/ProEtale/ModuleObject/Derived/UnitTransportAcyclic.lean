@@ -52,6 +52,16 @@ lemma comp_eq_comp_of_naturality {C : Type*} [Category C] {P₀ P₁ P₂ P₃ P
     e ≫ u ≫ r ≫ φ ≫ t₁ ≫ t₂ ≫ t₃ = w ≫ e' ≫ u' ≫ r' ≫ φ' := by
   rw [hn, reassoc_of% h, reassoc_of% hq]
 
+/-- Transport a comparison square along a morphism using naturality, without expanding the
+components of the natural transformation. -/
+lemma comp_eq_comp_of_app_naturality {C D : Type*} [Category C] [Category D]
+    {F G : C ⥤ D} (τ : F ⟶ G) {X Y : C} (f : X ⟶ Y) {P₀ P₁ P₂ Q₀ Q₁ Q₂ : D}
+    (e : P₀ ⟶ P₁) (u : P₁ ⟶ P₂) (r : P₂ ⟶ F.obj X) (w : P₀ ⟶ Q₀)
+    (e' : Q₀ ⟶ Q₁) (u' : Q₁ ⟶ Q₂) (r' : Q₂ ⟶ G.obj X) (x : P₁ ⟶ Q₁)
+    (h : u ≫ r ≫ τ.app X = x ≫ u' ≫ r') (hq : w ≫ e' = e ≫ x) :
+    e ≫ u ≫ r ≫ F.map f ≫ τ.app Y = w ≫ e' ≫ u' ≫ r' ≫ G.map f := by
+  rw [← τ.naturality, reassoc_of% h, reassoc_of% hq]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -84,9 +94,7 @@ lemma unitTransport_mapHomotopyCategory_app_quotient {X Y Y' : Scheme.{u}} (s : 
     ← Functor.map_comp, ← Functor.map_comp]
   congr 1
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- the derived functors and the derived unit transport are large terms
 /-- **The derived unit transport on acyclic complexes**: for a bounded below complex `K` such that
 all `g^*(Kⁿ)` are `g_*`-acyclic and all `p₁^*(Kⁿ)` are `p₁_*`-acyclic, the derived unit transport
 along `s` (for `s ≫ g = p₁`) at `K` is, through the isomorphisms
@@ -114,14 +122,12 @@ theorem derivedUnitIso_hom_comp_derivedUnitTransport {X Y Y' : Scheme.{u}} (s : 
       (HomotopyCategory.quasiIso _ _) _ _ M) ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
   rw [unitTransportHomotopyCompatible Λ s g,
     unitTransport_mapHomotopyCategory_app_quotient] at h
-  have hn := (derivedUnitTransportNatTrans Λ s g g).naturality
-    ((DerivedCategory.quotientCompQhIso _).hom.app K)
-  simp only [derivedUnitTransportNatTrans, Functor.comp_map, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc, Functor.comp_obj] at hn
   rw [derivedUnitTransport_rfl]
+  change _ ≫ (derivedUnitTransportNatTrans Λ s g g).app (DerivedCategory.Q.obj K) = _
   simp only [Adjunction.derivedUnitIso, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, asIso_hom,
     Functor.mapIso_hom, Iso.app_hom, asIso_inv, Functor.map_comp, Category.assoc]
-  exact comp_eq_comp_of_naturality _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ hn h
+  exact comp_eq_comp_of_app_naturality (derivedUnitTransportNatTrans Λ s g g)
+    ((DerivedCategory.quotientCompQhIso _).hom.app K) _ _ _ _ _ _ _ _ h
     (DerivedCategory.quotientCompQhIso_inv_naturality _)
 
 /-- **The derived unit transport along `s` with `s ≫ g = g` on acyclic complexes**: for a bounded
