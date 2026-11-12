@@ -256,8 +256,11 @@ theorem mixedSections_left_unit_normalization
   dsimp only [p]
   rw [← Functor.map_comp]
   erw [he]
-  have hK := mixedSections_moduleDirectImage_comp_obj f.toLRSHom.toShHom g.toLRSHom.toShHom K
+  have hK : (Dfg.mapHomotopyCategory (.up ℤ)).obj K =
+      ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj
+        ((Df.mapHomotopyCategory (.up ℤ)).obj K) :=
+    mixedSections_moduleDirectImage_comp_obj f.toLRSHom.toShHom g.toLRSHom.toShHom K
   dsimp only [HZ, schemeDerivedGlobalSections] at h ⊢
-  convert h
+  convert h using 1 <;> simp only [hK]
 
 end AlgebraicGeometry
