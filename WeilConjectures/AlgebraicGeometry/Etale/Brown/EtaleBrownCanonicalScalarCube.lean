@@ -154,17 +154,11 @@ theorem strictEtaleBrownCanonicalScalarCube
           (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m))
             g).leftDerivedFunctor.map ((RW.scalar h).inv.app X) ≫
           pm.inv.app ((PW.scalar h).derived.obj X) := by
-  dsimp only
+  intro pn pm τ
   let an := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
   let av := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
-  let pn := (rg n).inverse.symm ≪≫ isoWhiskerLeft (RW.derived n)
-    (Etale.leftDerivedUpperStarIsoMapDerivedCategory
-      (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).symm
-  let pm := (rg m).inverse.symm ≪≫ isoWhiskerLeft (RW.derived m)
-    (Etale.leftDerivedUpperStarIsoMapDerivedCategory
-      (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).symm
   let δ := strictEtaleBrownCanonicalRestriction O t g A PW PV B h
   have hs := brown_scalarPullback_mate (strictEtaleBrownRingMap O t h) g
   have hc := strictEtaleBrownCanonicalRestrictionCube O t g A PW PV B RV RW rg hinverse h
