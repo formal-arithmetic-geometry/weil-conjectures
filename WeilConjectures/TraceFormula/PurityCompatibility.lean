@@ -148,31 +148,28 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
   have hx' := ((boundedConstructibleUpperShriekAdjunction ℓ
     (prod.fst : X ⨯ Y ⟶ X)).homEquiv_counit
       (g := prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y))).symm.trans hx
-  have key : exceptionalKunnethAdjoint ℓ (Y := Y) M =
-      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
-        ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
-          prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y)) ≫
-        ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv
-          _ _).symm (upperShriekUnitTensorMap ℓ (prod.fst : X ⨯ Y ⟶ X) M) := by
-    rw [upperShriekUnitTensorMap, Equiv.symm_apply_apply]
-    unfold exceptionalKunnethAdjoint
-    exact exceptionalKunnethMap_factorization_aux
-      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)) M
-      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
-      (prodUpperShriekBaseChangeUnit ℓ)
-      (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
-        ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-          (dualizingComplex' ℓ Y))).app M)
-      (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
-        ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M)
-      (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _
-        (prodUpperShriekBaseChangeUnit ℓ) M)
-      ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
-      ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-        ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
-      ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).counit.app (𝟙_ _)) hx'
-  rw [exceptionalKunnethMap, key, Adjunction.homEquiv_naturality_left, Equiv.apply_symm_apply]
+  have key := exceptionalKunnethMap_factorization_aux
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X)) M
+    ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
+    (prodUpperShriekBaseChangeUnit ℓ)
+    (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
+        (dualizingComplex' ℓ Y))).app M)
+    (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
+      ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M)
+    (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _
+      (prodUpperShriekBaseChangeUnit ℓ) M)
+    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
+    ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
+    ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).counit.app (𝟙_ _)) hx'
+  unfold exceptionalKunnethMap exceptionalKunnethAdjoint upperShriekUnitTensorMap
+  refine (congrArg
+    ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv _ _)
+    key).trans ?_
+  exact (boundedConstructibleUpperShriekAdjunction ℓ
+    (prod.fst : X ⨯ Y ⟶ X)).homEquiv_naturality_left _ _
 
 /-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
 `Y` be smooth over `k`. The exceptional Künneth map
