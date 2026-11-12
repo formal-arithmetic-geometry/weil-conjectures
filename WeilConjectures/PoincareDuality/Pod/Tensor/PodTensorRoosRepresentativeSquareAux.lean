@@ -373,7 +373,9 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
     podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
     integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-    ObjectProperty.lift, ObjectProperty.ι_obj] at finish hc ⊢
+    ObjectProperty.lift, ObjectProperty.ι_obj, scalarReductionSource, integralTowerModules,
+    scalarReductionSourceDerived, integralTowerHasDerivedCategory,
+    integralOperationsCommHasDerivedCategory] at finish hc ⊢
   have final := finish.trans hc
   run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
