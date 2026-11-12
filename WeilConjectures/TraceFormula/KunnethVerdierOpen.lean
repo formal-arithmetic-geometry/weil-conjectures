@@ -209,7 +209,6 @@ lemma prodMapUpperStarSndIso_hom_eq (j : U ⟶ Y) (h : boundedConstructibleUpper
   unfold prodMapUpperStarSndIso
   simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]
 
-set_option profiler true in
 -- the tensor structures of the composite pullbacks are compared through `(f ≫ g).left`
 /-- The composition isomorphism `L(𝟙 × j)^* Lp_Y^* ≅ Lp_U^* Lj^*` is compatible with the tensor
 structures of the pullbacks. -/
@@ -376,7 +375,6 @@ lemma kunnethVerdierMap_eq_curry_swapEvPairing (M : Dᵇc(X.left)⟦Profinite.pa
       (exceptionalKunnethMap ℓ M) N) :=
   rfl
 
-set_option profiler true in
 -- the final comparison with the statement of `kunnethVerdierMap` is made termwise
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction (`ExceptionalKunnethMapRestriction`), then for every `N` the square
