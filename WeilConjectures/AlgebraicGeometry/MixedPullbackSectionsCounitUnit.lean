@@ -35,12 +35,17 @@ private theorem mixedSections_homEquiv_unit
     (h : adj.homEquiv _ _ (ε ≫ Q'.map (𝟙 _)) =
       Q.map (adj₀.homEquiv _ _ (𝟙 _)) ≫ β) :
     adj.unit.app (Q.obj M) ≫ R.map ε = Q.map (adj₀.unit.app M) ≫ β := by
-  simpa only [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id,
-    Adjunction.homEquiv_unit] using h
+  erw [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id,
+    Adjunction.homEquiv_unit] at h
+  exact h
 
 private theorem mixedSections_mapHomotopyCategory_unit
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Preadditive A] [Preadditive B] [Preadditive D]
+    [(HomotopyCategory.quotient A (.up ℤ)).IsLocalization
+      (HomologicalComplex.homotopyEquivalences A (.up ℤ))]
+    [(HomotopyCategory.quotient B (.up ℤ)).IsLocalization
+      (HomologicalComplex.homotopyEquivalences B (.up ℤ))]
     (K : A ⥤ B) (F : B ⥤ A) (H : A ⥤ D) [K.Additive] [F.Additive] [H.Additive]
     (adj : K ⊣ F) (C : CochainComplex A ℤ) :
     (H.mapHomotopyCategory (.up ℤ)).map
@@ -148,8 +153,6 @@ private theorem normalizationRestriction_factors_inv
     rfl
   exact hR
 
-set_option profiler true in
--- Comparing the scheme and sheaf presentations of module categories needs extra reduction.
 /-- Apply sections to a pullback counit satisfying the underived unit factorization.
 Source: Stacks Project, Tags 079W (derived adjunction) and 0D5T (Leray composition).
 (blueprint: lem-sc-mixed-pullback-sections-counit-unit).
