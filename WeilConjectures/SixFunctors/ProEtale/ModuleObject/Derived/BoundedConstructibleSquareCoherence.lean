@@ -335,6 +335,7 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ‚ü∂ Y) (Œ
     arg 2
     arg 2
     arg 2
+    arg 2
     rw [h_coherence]
 end Coherence
 
