@@ -133,7 +133,6 @@ theorem isZero_specializationDefect_polyAffine_zero
     hP _ _ (0 : specializationDefect (polyAffine k 1) (polyAffineHyperplane k 0) k'
       (Profinite.padicAlgClRingObj ℓ) L₀.obj ⟶ 0) this)).1
 
-set_option profiler true in
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`, after
 the generic vanishing and the Noether normalisation: let `ψ` be an automorphism of `𝔸^{N+2}_k`,
 `v : 𝔸^{N+2}_k ⟶ ℙ¹_{𝔸^{N+1}_k}` the composite of `ψ` and the compactification of `X₀`, and
