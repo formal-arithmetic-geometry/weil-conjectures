@@ -306,8 +306,6 @@ private theorem tower_etale_restrictionPlus_hom [Finite Λ]
   dsimp only [Functor.comp_obj] at he ⊢
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   erw [he]
-  try simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
   have hu : DerivedCategory.Plus.ι.map
       ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
         (ModuleCat.{u + 1} Λ) b).unit.app E) =

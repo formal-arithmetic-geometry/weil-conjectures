@@ -895,7 +895,7 @@ private theorem pbcAdjunction_complexUnit
       Category.comp_id, Category.id_comp]
     erw [(pbcRestrict φ).mapDerivedCategory.map_id, DerivedCategory.Qh.map_id,
       Category.id_comp] at hp
-    repeat' first | erw [Category.comp_id] at hp | erw [Category.id_comp] at hp
+    repeat' erw [Category.comp_id] at hp
     exact hp
   have he : d = pbcDerivedScalarAdjunction φ :=
     (pbcDerivedScalarAdjunction_exists φ).unique (fun K _ ↦ hn K)

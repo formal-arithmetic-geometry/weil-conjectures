@@ -761,11 +761,6 @@ private theorem underived_mate
   have := @cachedEtaleSheafify.{u}
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) φ)
-    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   simp only [upperStarRestrictScalarsIso, conjugateIsoEquiv_symm_apply_hom, Iso.refl_hom,
     TwoSquare.mk]
@@ -1808,7 +1803,6 @@ private theorem restriction_plus_mate
   repeat first
     | erw [CategoryTheory.Functor.map_id]
     | erw [Category.id_comp]
-    | erw [Category.comp_id]
   have ha : (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).derivedAdjunction.ofNatIsoLeft
       (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorIsoMapDerivedCategory =
       mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f := by

@@ -78,7 +78,7 @@ lemma isIso_mateEquiv_natTrans (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     [IsIso adj₂.unit] (α : TwoSquare G L₁ L₂ H) [IsIso α] :
     IsIso (mateEquiv adj₁ adj₂ α) := by
   have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).app d) := by
-    simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app]
+    simp only [mateEquiv_apply, NatTrans.comp_app]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
