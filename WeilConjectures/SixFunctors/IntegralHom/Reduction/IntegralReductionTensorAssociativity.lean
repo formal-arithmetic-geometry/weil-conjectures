@@ -132,7 +132,6 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
 
 -- Comparing the fixed localization models requires many definitional equalities.
-attribute [local reducible] totalPair reductionUnit
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem nativeIso_representative
     (Y : AlgebraicGeometry.Scheme.{t})
@@ -195,7 +194,8 @@ private theorem normalizedBeta_eq (n : ℕ)
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
-    change ((inv beta).f (i + j)).val.app U _ = _
+    have h_inv : (asIso beta).symm.hom = inv beta := rfl
+    rw [h_inv]
     have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
       (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
         (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
