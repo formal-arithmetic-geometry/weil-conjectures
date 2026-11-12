@@ -107,8 +107,10 @@ private theorem directImage_constantInterchange_inverse_factors
         (NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H) (.up ℤ)).symm := rfl
   dsimp only [H] at hsymm hh
   rw [hsymm] at hh ⊢
-  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.symm_hom,
-    ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id, Category.comp_id] using hh
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.symm_hom,
+    ← Functor.map_comp, Iso.hom_inv_id_app] at hh
+  erw [Functor.map_id, Category.comp_id] at hh
+  exact hh
 
 private theorem directImage_augmentation_factors (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
