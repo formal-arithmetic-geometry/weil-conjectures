@@ -29,24 +29,22 @@ namespace AlgebraicGeometry
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem derivedOpenGluing_overFunctor_additive
-    {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (U : C) :
-    (SheafOfModules.overFunctor.{u} R U).Additive := by
-  constructor
-  intro M N f g
-  ext W x
-  rfl
+    {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (U : C)
+    [Preadditive (SheafOfModules.{u} R)] [Preadditive (SheafOfModules.{u} (R.over U))] :
+    (SheafOfModules.overFunctor.{u} R U).Additive :=
+  Functor.additive_of_preserves_binary_products _
 
 private theorem derivedOpenGluing_overMap_additive
     {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
-    {U V : C} (i : U ⟶ V) :
-    (SheafOfModules.overMap.{u} R i).Additive := by
-  constructor
-  intro M N f g
-  ext W x
-  rfl
+    {U V : C} (i : U ⟶ V)
+    [Preadditive (SheafOfModules.{u} (R.over U))]
+    [Preadditive (SheafOfModules.{u} (R.over V))] :
+    (SheafOfModules.overMap.{u} R i).Additive :=
+  Functor.additive_of_preserves_binary_products _
 
 private theorem derivedOpenGluing_equivalence_additive
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] (e : C ≌ D) :
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryProducts C] [HasZeroObject C] (e : C ≌ D) :
     e.functor.Additive :=
   Functor.additive_of_preserves_binary_products _
 
