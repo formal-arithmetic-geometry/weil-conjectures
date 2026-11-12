@@ -33,9 +33,56 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 variable [∀ S : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
 
-set_option maxHeartbeats 500000 in
+-- Establish the chosen counit equation for one morphism before specializing to a
+-- composite. This avoids reducing the composite sheaf instances inside the Hom formula.
 set_option profiler true in
--- The selected adjunctions and composite sheaf instances need a larger budget.
+private theorem derivedPullback_chosen_counit_normalization
+    {X Y : Scheme.{u}} (s : X ⟶ Y)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (ComplexShape.up ℤ)) :
+    let ε := (Classical.choose
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
+    let b := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction s)).mapHomotopyCategory
+      (ComplexShape.up ℤ)
+    (derivedPullback s).map
+        ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) ≫
+      (schemeHomPullbackAdjunction s).counit.app (DerivedCategory.Qh.obj K) =
+      ε.app (((Scheme.Modules.pushforward s).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Qh.map (b.counit.app K) := by
+  classical
+  let ε {A B : Scheme.{u}} (s : A ⟶ B) :=
+    (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
+  let b {A B : Scheme.{u}} (s : A ⟶ B) :=
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction s)).mapHomotopyCategory
+      (ComplexShape.up ℤ)
+  let a {A B : Scheme.{u}} (s : A ⟶ B) := schemeHomPullbackAdjunction.{u, w} s
+  have hc (M : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
+      (J : HomotopyCategory
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))
+      (t : ((Scheme.Modules.tensorPullback s).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj M ⟶ J) :
+      (a s).homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj J)
+        ((ε s).app M ≫ DerivedCategory.Qh.map t) =
+      (DerivedCategory.Qh
+        (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).map
+          ((b s).homEquiv M J t) ≫
+        (RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app J := by
+    dsimp only [a]
+    delta schemeHomPullbackAdjunction
+    exact Classical.choose_spec (exists_schemeDerivedAdjunction s
+      (hAdd := (Classical.choose exists_derivedPullbackComposition) s)
+      (ε s) ((Classical.choose (Classical.choose_spec
+        (Classical.choose_spec exists_derivedPullbackComposition))) s)) M J t
+  have he := counit_of_normalization (b s) (a s)
+    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
+    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+    (ε s)
+    (RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit hc K
+  dsimp only [a] at he
+  exact he
+
+set_option profiler true in
 /-- The chosen pullback comparison and composite direct-image unit transpose to the
 explicit pasted underived counits.
 Source: Stacks Project, Tags 079W, 0D5S and 0D5T.
@@ -65,37 +112,7 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
-  classical
-  let ε {A B : Scheme.{u}} (s : A ⟶ B) :=
-    (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
-  let b {A B : Scheme.{u}} (s : A ⟶ B) :=
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction s)).mapHomotopyCategory
-      (ComplexShape.up ℤ)
-  let a {A B : Scheme.{u}} (s : A ⟶ B) := schemeHomPullbackAdjunction.{u, w} s
-  have hc (M : HomotopyCategory
-      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ))
-      (J : HomotopyCategory
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))
-      (t : ((Scheme.Modules.tensorPullback (f ≫ g)).mapHomotopyCategory
-        (ComplexShape.up ℤ)).obj M ⟶ J) :
-      (a (f ≫ g)).homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj J)
-        ((ε (f ≫ g)).app M ≫ DerivedCategory.Qh.map t) =
-      (DerivedCategory.Qh
-        (C := SheafOfModules.{u} (moduleRings Z.toRingedSpace))).map
-          ((b (f ≫ g)).homEquiv M J t) ≫
-        (RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app J := by
-    dsimp only [a]
-    delta schemeHomPullbackAdjunction
-    exact Classical.choose_spec (exists_schemeDerivedAdjunction (f ≫ g)
-      (hAdd := (Classical.choose exists_derivedPullbackComposition) (f ≫ g))
-      (ε (f ≫ g)) ((Classical.choose (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition))) (f ≫ g))) M J t
-  have he := counit_of_normalization (b (f ≫ g)) (a (f ≫ g))
-    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
-    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    (ε (f ≫ g))
-    (RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit hc K
-  dsimp only [a] at he
+  have he := derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K
   exact (congrArg
     (fun t ↦ (canonicalDerivedPullbackComposition f g).hom.app
       (DerivedCategory.Qh.obj

@@ -143,16 +143,25 @@ private meta partial def conversionCongruence
         a.getAppFn.constName! == b.getAppFn.constName!)
     if sameHead && a.isApp && a.getAppNumArgs == b.getAppNumArgs then
       try
-        let aa := a.getAppArgs
-        let bb := b.getAppArgs
-        let key := (a.getAppFn, aa.size)
+        let allA := a.getAppArgs
+        let allB := b.getAppArgs
+        -- Keep the common parameters fixed in the congruence theorem. In particular,
+        -- do not quantify again over identical categories and their instances.
+        let mut common := 0
+        if a.getAppFn == b.getAppFn then
+          while common < allA.size && allA[common]! == allB[common]! do
+            common := common + 1
+        let head := Lean.mkAppN a.getAppFn (allA.extract 0 common)
+        let aa := allA.extract common allA.size
+        let bb := allB.extract common allB.size
+        let key := (head, aa.size)
         let ct ← match (← congrCache.get).get? key with
           | some ct => pure ct
           | none => do
-            let ct ← if a.getAppFn.hasFVar then
-                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
+            let ct ← if head.hasFVar then
+                Lean.Meta.mkHCongrWithArity head aa.size
               else Lean.Meta.withLCtx {} {} <|
-                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
+                Lean.Meta.mkHCongrWithArity head aa.size
             let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
               (kind? := `_finiteCongruence)
             let ct := { ct with proof := proof }
@@ -383,7 +392,6 @@ end NativePasting
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 1100000 in
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
