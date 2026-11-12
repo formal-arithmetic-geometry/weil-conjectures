@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
-public import WeilConjectures.TraceFormula.Specialization.SliceSpecialPullback
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 
 /-!
@@ -196,8 +195,7 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
   obtain ⟨V, hzV, ιV, _, cV, -, hcVi, hcV⟩ := hm (M.i z)
   have : QuasiCompact V.ι := inferInstance
   have hR := h.restrictOpen V
-  have hRM : (M.restrictOpen V).IsTraitModelOver (V.ι ≫ q) ((M.j ⁻¹ᵁ V).ι ≫ g) :=
-    hR.isTraitModelOver
+  have hRM := hR.isTraitModelOver
   let coord : ιV → ((M.restrictOpen V).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) :=
     fun a ↦ cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')
   have hcoord : ∀ a, coord a ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = V.ι ≫ q :=
@@ -233,16 +231,10 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     have hT₁ := L((r')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT
     have hT₂ := L((sliceSpecialMap (traitSliceCoord k') hRM (hcoord a))^*⟦
       Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT₁
-    have hz := Triangle.isZero₃_of_isIso₁ _ hT₂ hs'
-    have hcoord_a := hcoord a
-    have hpb := isPullback_sliceSpecialMap_traitSlicePoint (traitSliceCoord k') hRM hcoord_a
-    let l : pullback (specialCoordinate hRM (coord a) hcoord_a)
-        (traitSlicePoint (traitSliceCoord k')) ⟶ sliceSpecial (traitSliceCoord k') (coord a) :=
-      hpb.lift (pullback.fst _ _) (pullback.snd _ _) (by
-        exact pullback.condition)
-    have hl : l ≫ sliceSpecialMap (traitSliceCoord k') hRM hcoord_a = pullback.fst _ _ := by
-      dsimp [l]
-      simp
+    have hz : IsZero (L((sliceSpecialMap (traitSliceCoord k') hRM (hcoord a))^*⟦
+        Profinite.padicAlgClRingObj ℓ⟧).obj (L((r')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) :=
+      Triangle.isZero₃_of_isIso₁ _ hT₂ hs'
+    obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hRM (hcoord a)
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
       ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hl).app _)
 
