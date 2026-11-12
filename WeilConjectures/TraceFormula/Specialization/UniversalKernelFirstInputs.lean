@@ -76,6 +76,7 @@ noncomputable abbrev specializationSndExchange :
       (deformationModel_exists_comp_ε X x.left.ker k'))
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the lax tensor maps of the restricted nearby cycles are matched against the ambient ones
 /-- **The pullback exchange of the second projection is monoidal**, in the lax form:
 `(α ⊗ α) ≫ μ ≫ Sp(μ) = μ ≫ p_{2s}^*(μ) ≫ α`. -/
