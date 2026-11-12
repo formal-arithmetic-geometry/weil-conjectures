@@ -55,23 +55,28 @@ open Scheme
 
 -- Derived pullbacks repeatedly request these same graded tensor properties. Prove them
 -- once for module objects, instead of rebuilding their colimit instances at each use.
-private instance finiteSupportTensorFour (T : Scheme.{u})
+/-- Graded tensor products of module objects admit the fourfold tensor comparison. -/
+lemma finiteSupportTensorFour (T : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (W X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasTensor₄ObjExt W X Y Z := by
   infer_instance
 
-private instance finiteSupportTensorLeft (T : Scheme.{u})
+/-- Graded tensor products of module objects preserve the left associativity colimits. -/
+lemma finiteSupportTensorLeft (T : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensor₁₂Tensor X Y Z := by
   infer_instance
 
-private instance finiteSupportTensorRight (T : Scheme.{u})
+/-- Graded tensor products of module objects preserve the right associativity colimits. -/
+lemma finiteSupportTensorRight (T : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensorTensor₂₃ X Y Z := by
   infer_instance
+
+attribute [local instance] finiteSupportTensorFour finiteSupportTensorLeft finiteSupportTensorRight
 
 set_option profiler true in
 /-- A morphism between bounded constructible complexes is invertible away from finitely many
@@ -310,6 +315,16 @@ end Restriction
 
 /-! ### The finite-support step -/
 
+/-- Slicing an affine chart at one coordinate gives local embeddings with that coordinate
+removed. Keep the choice of the immersion inside this geometric lemma. -/
+private lemma locallyEmbedsInAffineSpace_slice_coordinate {T S S' : Scheme.{u}}
+    {ι : Type u} [Finite ι] (c : T ⟶ 𝔸(ι; S)) [IsImmersion c] (a : ι)
+    (σ : S' ⟶ 𝔸(ULift.{u} (Fin 1); S)) :
+    (pullback.snd (c ≫ AffineSpace.reindex (fun _ ↦ a) S) σ).LocallyEmbedsInAffineSpace
+      (Nat.card {j : ι // j ≠ a}) := by
+  obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex c a σ
+  exact Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc'
+
 section FiniteSupport
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
@@ -481,23 +496,19 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
           (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
           (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))) := by
       rcases i with a | a
-      · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
-          (traitSlice (traitSliceCoord k'))
-        have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
+      · have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact (hslice (by omega)).isIso ψ₁ ψ₂ hMV hNW hpbU hPU hgenU inferInstance
           inferInstance inferInstance
           (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
-          (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
+          (by omega) (locallyEmbedsInAffineSpace_slice_coordinate cV a _)
           (hm'.restrict W) heMV heNW hA' hB'
-      · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cW a
-          (traitSlice (traitSliceCoord k'))
-        have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
+      · have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
           (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW]) _
           (hslice (by omega)) (by omega) (hm.restrict V)
-          (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
+          (locallyEmbedsInAffineSpace_slice_coordinate cW a _) heMV heNW hA' hB'
     refine isIso_map_specialCoordinate_of_isIso_sliceSpecialMap _ (traitSliceCoord k')
       hPU (hcoord i) _ ?_
     exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR _ A B).2 hslice
