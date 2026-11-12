@@ -572,6 +572,25 @@ private noncomputable def rawIso (M : Modules.{t, u} X R) :
     | tmul s x =>
       exact (Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap c M f) s x))
 
+private theorem rawIso_apply (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
+    (s : S.obj.obj U) (x : M.val.obj U) :
+    (rawIso X R S c M).hom.app U (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x) =
+      s ⊗ₜ[R.obj.obj U] x := rfl
+
+private theorem sheafification_map_unit_section
+    (A : Sheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)})
+    (P Q : PresheafOfModules.{max u (t + 1)} A.obj) (f : P ⟶ Q)
+    (U : X.ProEtᵒᵖ) (x : P.obj U) :
+    (((PresheafOfModules.sheafification (𝟙 A.obj)).map f).val.app U)
+        (((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.app P).app U x) =
+      ((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.app Q).app U
+        (f.app U x) := by
+  have h := congrArg (fun g ↦ g.app U x)
+    ((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.naturality f)
+  simpa only [Functor.id_map, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    Functor.comp_map, SheafOfModules.forget, PresheafOfModules.restrictScalars_map_app,
+    ModuleCat.restrictScalars.map_apply] using h.symm
+
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in
 private noncomputable def coefficientIso (M : Modules.{t, u} X R) :
@@ -627,11 +646,12 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
   simp only [coefficientIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   erw [hei]
-  have hn := congrArg (fun f ↦ f.app U
-    (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))
-    (adj.unit.naturality (rawIso X R S c M).hom)
+  have hn := sheafification_map_unit_section X A _ _ (rawIso X R S c M).hom U
+    (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x)
+  rw [rawIso_apply] at hn
+  dsimp only [pair]
   exact congrArg ((SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
-    (R := R) (coefficient X R S c) M).inv.val.app U) hn.symm
+    (R := R) (coefficient X R S c) M).inv.val.app U) hn
 
 section Levels
 
@@ -664,11 +684,12 @@ private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
     (U : X.ProEtᵒᵖ) (s : (level X l E n).obj.obj U) (x : M.val.obj U) :
     (levelIso X l E n M).hom.val.app U (strengthReductionTensor l E X n M U s x) =
       pair.{t, u} X (base X l E) (coeff X l E n) M U s x := by
+  let h := (scalarReductionExistence.{t, u} l E X n).choose_spec.choose M
   simp only [levelIso, strengthReductionTensor, Iso.trans_hom, Functor.mapIso_hom,
     eqToIso.hom, SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    scalarReductionRestriction, SheafOfModules.restrictScalars,
+    SheafOfModules.restrictScalars,
     PresheafOfModules.restrictScalars_map_app, ModuleCat.restrictScalars.map_apply]
-  erw [SheafOfModules.eqToHom_val_app_eqToHom_symm]
+  erw [SheafOfModules.eqToHom_val_app_eqToHom_symm h U]
   exact coefficientIso_pure X (base X l E) (level X l E n) (projection X l E n) M U s x
 
 private theorem levelIso_inv_pure (n : ℕ) (M : scalarReductionSource l E X)
@@ -1379,7 +1400,9 @@ theorem scalarTensorStrength_on_kflat_representatives
       (((bc P (EC.obj Q)).hom.f (i+j)).val.app V _) = _
     erw [← hi']
     exact StrengthOrdinary.normalized_beta_scalar X l E D hl n P Q beta hsec i j V s x y
-  obtain ⟨e, _, he⟩ := restrictionTensor_mate_model l E X D hl a P hP
+  have model := restrictionTensor_mate_model l E X D hl a P hP
+  let e := model.choose
+  have he := model.choose_spec.2
   have hpq := he n m Q hQ b.hom hb
   have hTPQ : flat.{t, u} X R ((T.obj P).obj Q) :=
     coefficientTotalTensor_isKFlat.{u, t + 1, t} J R P Q hP hQ
