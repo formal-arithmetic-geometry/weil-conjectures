@@ -250,14 +250,17 @@ theorem podTensorReindexAt_generators
       exact dite_eq_right h
     rw [ht]
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
+
+-- Transport and cancel before specializing to the completed tensor constructions.
 private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Category D]
     (T : C × C ⥤ D) {P Q P' Q' : C} {A B Z : D}
     (eP : P ≅ P') (eQ : Q ≅ Q') (e : T.obj (P', Q') ≅ B)
-    (k : A ⟶ T.obj (P, Q)) (t : A ⟶ B)
-    (h : k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom = t)
+    (k : A ⟶ T.obj (P, Q)) {α : Type*} (x y : α) (hxy : x = y)
+    (t : α → (A ⟶ B))
+    (h : HEq (k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom) (t x))
     (f : T.obj (P, Q) ⟶ Z) :
-    t ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
-  rw [← h]
+    t y ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
+  rw [← hxy, ← eq_of_heq h]
   simp only [Category.assoc, e.hom_inv_id_assoc]
   rw [← T.map_comp_assoc]
   simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
@@ -320,15 +323,20 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
-  dsimp only [podReindexingTensorFrame] at hs
-  rw [podTensorReindexAt_tower] at hs
-  refine (podTensorRepresentative_cancel (integralCompletedTensor l E X)
+  exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
     ((integralCompletedTensorComparison l E X).app
       ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q))
-    _ _ ?_ _).trans
+    (podReindexingLimitTensorComparisonHom l E g D hD
+      (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
+    _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
+    (fun τ' ↦ (podOrdinaryReindex l E g).map
+        ((integralCompletedTensorComparison l E Y).hom.app (P, Q)) ≫
+      (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app _ ≫
+      DerivedCategory.Q.map
+        ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
+          integralOperationsRoosFunctor.map τ'.hom)) hs _).trans
       (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
-  exact eq_of_heq hs
 
 end WeilConjectures
