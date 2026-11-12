@@ -43,6 +43,7 @@ lemma δ_leftDerivedUpperStar {W V : Scheme.{u}} (h : W ⟶ V)
     δ L((h)^*⟦Λ⟧) K M = ((leftDerivedUpperStarTensor Λ h).app K).app M :=
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- unfolding the comultiplication of the derived pullback built from `leftDerivedUpperStarTensor`
 /-- The composition isomorphism of the derived pullbacks is compatible with the comultiplications,
@@ -56,6 +57,7 @@ lemma leftDerivedUpperStarComp_δ
         δ (L((g)^*⟦Λ⟧) ⋙ L((f)^*⟦Λ⟧)) K M := by
   exact leftDerivedUpperStarTensor_comp Λ f g K M
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- matching the conjugate of the composite adjunction
 /-- **The proper projection morphism of a composite** (blueprint `prop-sf-pf-coherence`,
