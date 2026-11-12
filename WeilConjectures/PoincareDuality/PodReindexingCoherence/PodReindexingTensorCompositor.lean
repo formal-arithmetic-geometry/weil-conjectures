@@ -282,8 +282,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   Functor.mapHomologicalComplexUpToQuasiIso Functor.mapHomologicalComplexUpToQuasiIsoFactors
   CoefficientClosedStructure.tensor SheafOfModules.monoidalCategory
   podReindexingHomModel homComplexFunctor homComplexπ derivedInternalHomOfUniverses
-attribute [local semireducible] podReindexingFunctor podReindexingComplexFunctor
-  podReindexingDerivedFunctor podReindexingDerivedFactors
 
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -349,7 +347,8 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingComplexFunctor l E h s).map (cg.tensorChain P L).hom ≫
           (ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
             ((podReindexingComplexFunctor l E g s).obj L)).hom := by
-  apply (cancel_epi (cgh.tensorChain P L).inv).1
+  let c := cgh.tensorChain P L
+  apply (cancel_epi c.inv).1
   ext n : 1
   apply ScalarHomTensor.total_pure_hom_ext
     (P := (podReindexingComplexFunctor l E (h ≫ g) s).obj P)
