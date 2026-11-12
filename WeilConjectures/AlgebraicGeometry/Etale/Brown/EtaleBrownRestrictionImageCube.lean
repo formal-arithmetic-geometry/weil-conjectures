@@ -289,41 +289,36 @@ theorem etaleBrownRestrictionImageCube
   have : IsGrothendieckAbelian.{u + 1} (strictEtaleLevel V O t m) :=
     isGrothendieckAbelian_coefficientUniverse _
   have : Abelian.HasKInjectiveResolutions (strictEtaleLevel V O t m) := inferInstance
-  let qV := coefficientRestriction.{u + 1, u, u + 1} (J := V.smallEtaleTopology) O t h
-  let qW := coefficientRestriction.{u + 1, u, u + 1} (J := W.smallEtaleTopology) O t h
-  let eV (k : ℕ) := strictEtaleBrownConstant O t V k
-  let eW (k : ℕ) := strictEtaleBrownConstant O t W k
-  let rV := Sheaf.restrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h)
-  let rW := Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h)
-  let dV := Sheaf.derivedRestrictScalars V.smallEtaleTopology
-    (strictEtaleBrownRingMap O t h)
-  let dW := Sheaf.derivedRestrictScalars W.smallEtaleTopology
-    (strictEtaleBrownRingMap O t h)
-  let G (k : ℕ) := Etale.lowerStar
-    (ModuleCat.{u + 1} (strictEtaleBrownRing O t k)) g
-  let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
-    (.mk _ _ _ _ (A.restrictInverse h).hom))
-  have cube := normalized_full_cube
-    (A := strictEtaleLevel V O t m) (B := strictEtaleLevel W O t m)
-    (C := strictEtaleLevel V O t n) (D := strictEtaleLevel W O t n)
-    (E := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)))
-    (F := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)))
-    (G := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)))
-    (H := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)))
-    (A.right m) (A.right n) (G m) (G n)
-    qV qW (eV m) (eW m) (eV n) (eW n) rV rW
+  exact normalized_full_cube (A.right m) (A.right n)
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g)
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)
+    (coefficientRestriction.{u + 1, u, u + 1} (J := V.smallEtaleTopology) O t h)
+    (coefficientRestriction.{u + 1, u, u + 1} (J := W.smallEtaleTopology) O t h)
+    (strictEtaleBrownConstant O t V m) (strictEtaleBrownConstant O t W m)
+    (strictEtaleBrownConstant O t V n) (strictEtaleBrownConstant O t W n)
+    (Sheaf.restrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
+    (Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
     (B.level m).direct (B.level n).direct
-    (G m).rightDerivedFunctor (G n).rightDerivedFunctor
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).rightDerivedFunctor
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).rightDerivedFunctor
     (PV.scalar h).restriction (PW.scalar h).restriction
-    (RV.derived m) (RW.derived m) (RV.derived n) (RW.derived n) dV dW
+    (RV.derived m) (RW.derived m) (RV.derived n) (RW.derived n)
+    (Sheaf.derivedRestrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
+    (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
     (B.level m).directUnit (B.level n).directUnit
-    (rightUnitNT (G m)) (rightUnitNT (G n)) (B.level m).computes
+    (rightUnitNT (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g))
+    (rightUnitNT (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g))
+    (B.level m).computes
     (PV.scalar h).restrictionFactors (PW.scalar h).restrictionFactors
     (RV.factors m) (RW.factors m) (RV.factors n) (RW.factors n)
-    rV.mapDerivedCategoryFactors rW.mapDerivedCategoryFactors
+    (Sheaf.restrictScalars V.smallEtaleTopology
+      (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
+    (Sheaf.restrictScalars W.smallEtaleTopology
+      (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
     (RV.val.restriction h) (RW.val.restriction h) (B.restrictedDirect h) δ
     (rg m).right.hom (rg n).right.hom
-    α (rg m).val.ordinaryRight.hom (rg n).val.ordinaryRight.hom
+    (mateEquiv (A.levelAdj m) (A.levelAdj n) (.mk _ _ _ _ (A.restrictInverse h).hom))
+    (rg m).val.ordinaryRight.hom (rg n).val.ordinaryRight.hom
     (Etale.lowerStarRestrictScalarsIso (strictEtaleBrownRingMap O t h) g).hom
     (coefficient_right_normalized O t g A PW PV B h)
     (brown_image_normalized O t g A PW PV B RV RW rg m)
@@ -332,6 +327,5 @@ theorem etaleBrownRestrictionImageCube
     (RV.val.ordinaryRestriction h) (RW.val.ordinaryRestriction h)
     (RV.property.2.1 h) (RW.property.2.1 h)
     (etaleBrownOrdinaryRestrictionCube O t g A PW PV B RV RW rg h)
-  exact cube
 
 end AlgebraicGeometry
