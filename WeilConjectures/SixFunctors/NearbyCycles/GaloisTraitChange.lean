@@ -259,20 +259,22 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
     rfl
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
-  have key := isIso_of_invariant_summands_square
-    (fun q ↦ DerivedCategory.homologyFunctor _ q)
-    (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
-    L((f')^*⟦Λ⟧) Ψ₂Ω ((τ.pullbackExchange Λ).app C) α₁ r₁ hr₁ α₂ r₂ hr₂
-    cA cB cB' I' _ _ _ hnat hIA β hsq
-    (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
-    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
-      (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
-      (L((𝟙 X₂)^*⟦Λ⟧).obj (L((f)^*⟦Λ⟧).obj C)))
-    (fun k ↦ (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
-      (σ k).1 (σ k).2 (hσ k) _).symm)
-    (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
-    (fun k ↦ he₂ (σ k).2) he₁
+  let α := (τ.pullbackExchange Λ).app C
+  with_reducible
+    have key := isIso_of_invariant_summands_square
+      (fun q ↦ DerivedCategory.homologyFunctor _ q)
+      (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
+      L((f')^*⟦Λ⟧) Ψ₂Ω α α₁ r₁ hr₁ α₂ r₂ hr₂
+      cA cB cB' I' _ _ _ hnat hIA β hsq
+      (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
+      (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
+        (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
+      (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
+        (L((𝟙 X₂)^*⟦Λ⟧).obj (L((f)^*⟦Λ⟧).obj C)))
+      (fun k ↦ (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
+        (σ k).1 (σ k).2 (hσ k) _).symm)
+      (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
+      (fun k ↦ he₂ (σ k).2) he₁
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
