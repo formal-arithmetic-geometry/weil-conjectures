@@ -32,6 +32,9 @@ under conjugation by the Frobenius lift, hence zero
 
 ## Main statements
 
+- `AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_finiteDimensional`: a continuous
+  homomorphism `π₁(C) → E` to a finite-dimensional `ℚ_ℓ`-vector space invariant under
+  conjugation by the Frobenius lift is zero.
 - `AlgebraicGeometry.WeilGroup.exists_pow_eq_one_of_continuous` and
   `AlgebraicGeometry.WeilGroup.finite_range_of_continuous`: finite geometric image.
 - `AlgebraicGeometry.WeilGroup.frobeniusWeight_eq_of_continuous`: the local weights of a
@@ -105,6 +108,32 @@ theorem eq_one_of_conj_invariant_of_continuous (b : W.geometric →* Multiplicat
   have h3 : f g = 0 := (mul_eq_zero.mp h2).resolve_left
     (pow_ne_zero _ (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero))
   exact Multiplicative.toAdd.injective h3
+
+/-- Blueprint `lemma-invariant-additive-characters`: Invariant additive characters.
+
+Let `E` be a finite-dimensional `ℚ_ℓ`-vector space with a Hausdorff vector space topology, for
+instance a finite extension of `ℚ_ℓ`. A continuous additive homomorphism `a : π₁(C) → E`
+invariant under conjugation by the Frobenius lift is zero: its coordinates in a `ℚ_ℓ`-basis of
+`E` are continuous invariant homomorphisms `π₁(C) → ℚ_ℓ`, which vanish by
+`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_continuous`. -/
+theorem eq_one_of_conj_invariant_of_finiteDimensional {E : Type*} [AddCommGroup E]
+    [Module ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [TopologicalSpace E] [IsTopologicalAddGroup E]
+    [ContinuousSMul ℚ_[l] E] [T2Space E] (a : W.geometric →* Multiplicative E)
+    (hcont : Continuous a)
+    (ha : ∀ g h : W.geometric, (h : W.carrier) = W.frobeniusLift⁻¹ * g * W.frobeniusLift →
+      a h = a g) :
+    a = 1 := by
+  ext g
+  let B := Module.finBasis ℚ_[l] E
+  suffices (a g).toAdd = 0 from congrArg Multiplicative.ofAdd this
+  refine B.ext_elem fun i ↦ ?_
+  let b : W.geometric →* Multiplicative ℚ_[l] :=
+    ((B.coord i).toAddMonoidHom.toMultiplicative).comp a
+  have hb : Continuous b := continuous_ofAdd.comp
+    ((LinearMap.continuous_of_finiteDimensional (B.coord i)).comp (continuous_toAdd.comp hcont))
+  have h1 := W.eq_one_of_conj_invariant_of_continuous b hb fun g h hgh ↦ by
+    simp [b, ha g h hgh]
+  simpa [b] using congrArg (fun φ ↦ (φ g).toAdd) h1
 
 /-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
 rank-one Weil character on a curve.
@@ -181,39 +210,30 @@ theorem exists_pow_eq_one_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
         one_mul]
     have hu : u h = u g := Subtype.ext (Units.ext (Subtype.ext (by simp [u, ψ, ψ₀, this])))
     simp only [lam, hu]
-  -- its coordinates vanish
-  have hcoord (t : E →ₗ[ℚ_[l]] ℚ_[l]) (g : W.geometric) : t (lam g) = 0 := by
-    let b : W.geometric →* Multiplicative ℚ_[l] :=
-      { toFun g := .ofAdd (t (lam g))
-        map_one' := by simp [hlam_one]
-        map_mul' g h := by simp [hlam_mul, ofAdd_add] }
-    have ht : Continuous t := LinearMap.continuous_of_finiteDimensional t
-    have hb : Continuous b := by
-      refine continuous_of_continuousAt_one b ?_
-      rw [ContinuousAt, map_one, Metric.tendsto_nhds]
+  -- it is a continuous homomorphism invariant under conjugation by the Frobenius lift
+  let a : W.geometric →* Multiplicative E :=
+    { toFun g := .ofAdd (lam g)
+      map_one' := by simp [hlam_one]
+      map_mul' g h := by simp [hlam_mul, ofAdd_add] }
+  have hacont : Continuous a := by
+    refine continuous_of_continuousAt_one a ?_
+    rw [ContinuousAt, map_one]
+    have hχN : Filter.Tendsto (fun g : W.geometric ↦ (χ g : PadicAlgCl l) ^ N - 1)
+        (nhds 1) (nhds 0) := by
+      have h : Continuous fun g : W.geometric ↦ (χ g : PadicAlgCl l) ^ N - 1 :=
+        (hχ.pow N).sub continuous_const
+      simpa using h.tendsto 1
+    have hlam : Filter.Tendsto lam (nhds 1) (nhds 0) := by
+      rw [Metric.tendsto_nhds]
       intro ε hε
-      obtain ⟨δ, hδ, hδε⟩ := Metric.continuous_iff.mp ht 0 ε hε
-      have hχN : Filter.Tendsto (fun g : W.geometric ↦ (χ g : PadicAlgCl l) ^ N - 1)
-          (nhds 1) (nhds 0) := by
-        have h : Continuous fun g : W.geometric ↦ (χ g : PadicAlgCl l) ^ N - 1 :=
-          (hχ.pow N).sub continuous_const
-        simpa using h.tendsto 1
-      filter_upwards [Metric.tendsto_nhds.mp hχN δ hδ] with g hg
-      have h1 : dist (lam g) 0 < δ := by
-        rw [dist_zero_right]
-        rw [dist_zero_right] at hg
-        exact (hlam_norm g).trans_lt hg
-      have h2 := hδε (lam g) h1
-      rw [map_zero] at h2
-      exact h2
-    have h1 := W.eq_one_of_conj_invariant_of_continuous b hb fun g h hgh ↦ by
-      simp [b, hlam_conj g h hgh]
-    exact congrArg (fun φ ↦ (φ g).toAdd) h1
+      filter_upwards [Metric.tendsto_nhds.mp hχN ε hε] with g hg
+      rw [dist_zero_right] at hg ⊢
+      exact (hlam_norm g).trans_lt hg
+    exact (continuous_ofAdd.tendsto 0).comp hlam
+  have h1 := W.eq_one_of_conj_invariant_of_finiteDimensional (l := l) a hacont fun g h hgh ↦ by
+    simp [a, hlam_conj g h hgh]
   refine ⟨N, Nat.pos_of_ne_zero hN0, fun g ↦ ?_⟩
-  have hlam0 : lam g = 0 := by
-    let B := Module.finBasis ℚ_[l] E
-    refine B.ext_elem fun i ↦ ?_
-    simpa using hcoord (B.coord i) g
+  have hlam0 : lam g = 0 := congrArg (fun φ ↦ (φ g).toAdd) h1
   have hu1 : u g = 1 := by
     refine Subtype.ext (PadicAlgCl.injOn_smallLog l E (u g).2 (one_mem _) ?_)
     change lam g = PadicAlgCl.smallLog l E (((1 : Eˣ) : E) - 1)
