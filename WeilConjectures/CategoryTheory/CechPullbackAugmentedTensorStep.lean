@@ -49,6 +49,7 @@ private theorem ringedExtendedCech_succ_tensor
           (ringedExtendedCech O r (fun i ↦ b i.succ)).2 ≫
           (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom⟩) := rfl
 
+set_option profiler true in
 /-- One successor step of the finite Cech comparison, including its augmentation.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
 Proof: expand the successor clause of ringedExtendedCech. The adjunction makes F additive
