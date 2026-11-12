@@ -180,7 +180,7 @@ private theorem tensorHom_pullback_evaluation
   dsimp only [Functor.comp_map, Functor.prod_map, tensor] at hn
   rw [F.map_id] at hn
   simp only [Category.assoc]
-  rw [reassoc_of% hn, ← F.map_comp, ht]
+  rw [reassoc_of% hn, reassoc_of% (map_pair_comp F (t ⊗ₘ 𝟙 P) v), ht]
 
 set_option profiler true in
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
