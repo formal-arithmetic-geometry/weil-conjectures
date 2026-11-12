@@ -22,6 +22,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
+set_option profiler true in
 set_option synthInstance.maxHeartbeats 200000 in
 -- Elaborate the two site tensors through their comparison APIs.
 set_option maxHeartbeats 1200000 in
@@ -55,6 +56,7 @@ structure NativeRingedForgetTensorChainComparison where
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ F.obj N) ≫
         (α_ (F.obj P) (F.obj Q) (F.obj N)).hom
 
+set_option profiler true in
 set_option synthInstance.maxHeartbeats 200000 in
 -- Elaborate the two site tensors through their comparison APIs.
 set_option maxHeartbeats 1200000 in
