@@ -139,7 +139,7 @@ set_option profiler true in
 private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
-    (R : StrictEtaleBrownRealization O t W P) :=
+    (R : StrictEtaleBrownRealization O t W P) : _ :=
   @R.property.1
 
 private theorem brown_underlying_right_section
