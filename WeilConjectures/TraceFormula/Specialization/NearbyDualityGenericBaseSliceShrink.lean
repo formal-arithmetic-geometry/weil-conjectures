@@ -129,6 +129,17 @@ private lemma map_iso_hom_comp_inv {D E : Type*} [Category D] [Category E]
     F.map e.hom ≫ F.map (e.inv ≫ f) = F.map f := by
   rw [← Functor.map_comp, Iso.hom_inv_id_assoc]
 
+private lemma fullSubcategory_square_of_hom {D : Type*} [Category D] {P : ObjectProperty D}
+    {A B C E F : P.FullSubcategory} {a : A ⟶ B} {b : B ⟶ C} {c : C ⟶ E}
+    {d : A ⟶ F} {e : F ⟶ E} {a' : A.obj ⟶ B.obj} {b' : B.obj ⟶ C.obj}
+    {c' : C.obj ⟶ E.obj} {d' : A.obj ⟶ F.obj} {e' : F.obj ⟶ E.obj}
+    (ha : a.hom = a') (hb : b.hom = b') (hc : c.hom = c') (hd : d.hom = d')
+    (he : e.hom = e') (h : a' ≫ b' ≫ c' = d' ≫ e') : a ≫ b ≫ c = d ≫ e := by
+  apply ObjectProperty.hom_ext
+  dsimp only [ObjectProperty.FullSubcategory.comp_hom]
+  rw [ha, hb, hc, hd, he]
+  exact h
+
 end Abstract
 
 section AmbientShrink
@@ -141,6 +152,25 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 private lemma leftDerivedUpperStarCompOfEq_rfl :
     leftDerivedUpperStarCompOfEq Λ (rfl : c ≫ j = c ≫ j) =
       leftDerivedUpperStarComp Λ c j := rfl
+
+private lemma specialIdExchange_map_comp (πc : P'.Hom P π (𝟙 Sc))
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology Zc) Ab.{u + 1}) (condensedRingObj Λ Zc))) :
+    L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).inv.app ((P.nearbyCycles Λ).obj C)) ≫
+      L((j')^*⟦Λ⟧).map ((πc.pullbackExchange Λ).app C) =
+      L((j')^*⟦Λ⟧).map (πc.specialIdExchange Λ C) := by
+  rw [← Functor.map_comp]
+  rfl
+
+private lemma nearbyCycles_map_shrinkSquare_hom (hb : sb ≫ π = c ≫ j)
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology Zc) Ab.{u + 1}) (condensedRingObj Λ Zc))) :
+    (N.nearbyCycles Λ).map ((leftDerivedUpperStarCompOfEq Λ hb).hom.app C) ≫
+      (N.nearbyCycles Λ).map ((leftDerivedUpperStarCompOfEq Λ hb).inv.app C ≫
+        (leftDerivedUpperStarComp Λ c j).hom.app C) =
+      (N.nearbyCycles Λ).map
+        ((leftDerivedUpperStarCompOfEq Λ (rfl : c ≫ j = c ≫ j)).hom.app C) := by
+  rw [leftDerivedUpperStarCompOfEq_rfl]
+  exact map_iso_hom_comp_inv (N.nearbyCycles Λ)
+    ((leftDerivedUpperStarCompOfEq Λ hb).app C) ((leftDerivedUpperStarComp Λ c j).hom.app C)
 
 /-- **The exchange square of an open sub-model and of its shrunk model** (ambient): for morphisms
 of models `ψ : N ⟶ M` over `c` and `𝟙`, `r : M ⟶ P` over `j, j'`, `s : N ⟶ P'` over `sb, j'`
@@ -165,19 +195,8 @@ lemma specialIdExchange_comp_pullbackExchange_square (ψ : N.Hom M c (𝟙 S))
     ((P.nearbyCycles Λ).obj C)
   have hn := (leftDerivedUpperStarId Λ S).inv.naturality ((r.pullbackExchange Λ).app C)
   dsimp only [Functor.id_obj, Functor.id_map, Functor.comp_obj] at hn
-  have h₁ : L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).inv.app ((P.nearbyCycles Λ).obj C)) ≫
-      L((j')^*⟦Λ⟧).map ((πc.pullbackExchange Λ).app C) =
-      L((j')^*⟦Λ⟧).map (πc.specialIdExchange Λ C) := by
-    rw [← Functor.map_comp]
-    rfl
-  have h₀ : (N.nearbyCycles Λ).map ((leftDerivedUpperStarCompOfEq Λ hb).hom.app C) ≫
-      (N.nearbyCycles Λ).map ((leftDerivedUpperStarCompOfEq Λ hb).inv.app C ≫
-        (leftDerivedUpperStarComp Λ c j).hom.app C) =
-      (N.nearbyCycles Λ).map
-        ((leftDerivedUpperStarCompOfEq Λ (rfl : c ≫ j = c ≫ j)).hom.app C) := by
-    rw [leftDerivedUpperStarCompOfEq_rfl]
-    exact map_iso_hom_comp_inv (N.nearbyCycles Λ)
-      ((leftDerivedUpperStarCompOfEq Λ hb).app C) ((leftDerivedUpperStarComp Λ c j).hom.app C)
+  have h₁ := specialIdExchange_map_comp Λ (j' := j') πc C
+  have h₀ := nearbyCycles_map_shrinkSquare_hom Λ (N := N) hb C
   have h₃ : L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).hom.app ((P.nearbyCycles Λ).obj C)) ≫
       L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).inv.app ((P.nearbyCycles Λ).obj C)) =
       𝟙 _ :=
@@ -255,14 +274,14 @@ private lemma boundedConstructibleSpecialIdExchange_square
           (boundedConstructibleShrinkSquareIso ℓ hb A).hom =
       (r.boundedConstructiblePullbackExchange ℓ hM hP).app A ≫
         ρψ.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A) := by
-  apply ObjectProperty.hom_ext
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom, hρc,
-    Hom.boundedConstructiblePullbackExchange_app_hom,
-    Hom.boundedConstructiblePullbackExchange_app_hom, boundedConstructibleNearbyCycles_map_hom''',
-    boundedConstructibleShrinkSquareIso_hom_hom, hρψ]
-  transport_exact specialIdExchange_comp_pullbackExchange_square
-    (Profinite.padicAlgClRingObj ℓ) ψ r s πc hb htot hgen A.obj
+  refine fullSubcategory_square_of_hom ?_ ?_ ?_ ?_ ?_
+    (specialIdExchange_comp_pullbackExchange_square
+      (Profinite.padicAlgClRingObj ℓ) ψ r s πc hb htot hgen A.obj)
+  · rw [boundedConstructibleUpperStar_map_hom, hρc]
+  · exact Hom.boundedConstructiblePullbackExchange_app_hom _ _ _ _ _
+  · rw [boundedConstructibleNearbyCycles_map_hom''', boundedConstructibleShrinkSquareIso_hom_hom]
+  · exact Hom.boundedConstructiblePullbackExchange_app_hom _ _ _ _ _
+  · exact hρψ _
 
 end BoundedConstructibleShrink
 
@@ -642,7 +661,7 @@ theorem exists_θ_eq_shrink_of_openSubmodel (D : NearbyDualizingDataOfGenericBas
   have hρψ : ∀ A, ((h.shrinkExchange ℓ hcε).app A).hom =
       (h.shrinkHom hcε).specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj :=
     fun _ ↦ by unfold shrinkExchange; exact ObjectProperty.homMk_hom _
-  have key := exists_θ_eq_of_openSubmodel_of_rebase
+  refine exists_θ_eq_of_openSubmodel_of_rebase
     (Ψc := boundedConstructibleNearbyCycles (hc.preservesBoundedConstructible (ℓ := ℓ)))
     (ΨM := boundedConstructibleNearbyCycles (h.preservesBoundedConstructible (ℓ := ℓ)))
     (Ψη := boundedConstructibleNearbyCycles
@@ -666,7 +685,6 @@ theorem exists_θ_eq_shrink_of_openSubmodel (D : NearbyDualizingDataOfGenericBas
       (hc.isTraitModelOfGenericBase_rebase.preservesBoundedConstructible (ℓ := ℓ)))
     (hc.rebaseExchange ℓ) (h.shrinkExchange ℓ hcε)
     (boundedConstructibleShrinkSquareIso ℓ hsb (dualizingComplex ℓ Xc)) ?_ ?_ ?_ ?_
-  · exact key
   · exact h₁
   · exact h₂
   · exact h₃
