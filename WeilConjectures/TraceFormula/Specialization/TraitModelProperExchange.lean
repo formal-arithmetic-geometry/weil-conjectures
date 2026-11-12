@@ -177,8 +177,8 @@ lemma Hom.isIso_pushforwardExchange_app_of_square [L((e')^*⟦Λ⟧).ReflectsIso
       (baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A)) := by
     rw [key]
     exact IsIso.comp_isIso' hα₁ (IsIso.comp_isIso' (Functor.map_isIso _ _) hχ')
-  have := IsIso.of_isIso_comp_right _ ((baseChangeMap Λ ⟨hs⟩).app _ ≫
-    R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A))
+  have := IsIso.of_isIso_comp_right (L((e')^*⟦Λ⟧).map ((ψ.pushforwardExchange Λ).app A))
+    ((baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A))
   exact isIso_of_reflects_iso _ L((e')^*⟦Λ⟧)
 
 end Square
@@ -232,15 +232,14 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     exact isIso_baseChangeMap_of_weaklyEtale 𝐐 hsq
   -- the proper exchange of the model of the geometric generic fibre is invertible
   have hC₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme 𝐐 e A hA
-  have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) (L((e)^*⟦𝐐⟧).obj A) hC₀
-  have iso :=
-    (eqToIso (congrArg (fun f : M.generic ⟶ X.left ↦ L((f)^*⟦𝐐⟧)) he.symm)).app A ≪≫
-      (leftDerivedUpperStarComp 𝐐 M.j e).app A
-  have hχgen : IsIso ((hM.toTraitGeneric.pushforwardExchange 𝐐).app (L((M.ε)^*⟦𝐐⟧).obj A)) :=
-    NatTrans.isIso_app_of_iso' _ iso
-  have : L((𝟙 (point k').left)^*⟦𝐐⟧).IsEquivalence :=
-    Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 _).symm
-  exact Hom.isIso_pushforwardExchange_app_of_square 𝐐 (toGenericSelfHom M) h.toTrait
+  have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) _ hC₀
+  have hχgen := @NatTrans.isIso_app_of_iso' _ _ _ _ _ _
+    (hM.toTraitGeneric.pushforwardExchange 𝐐) _ _
+    ((leftDerivedUpperStarCompOfEq 𝐐 he).app A) h₀
+  have := Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 (point k').left).symm
+  exact Hom.isIso_pushforwardExchange_app_of_square
+    (X₁ := (point k).left) (X₁' := (point k').left) (Z₁' := (point k').left)
+    𝐐 (toGenericSelfHom M) h.toTrait
     hM.toTraitGeneric (traitGenericModelHom k k')
     (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs A
     (by infer_instance) (by infer_instance) (by infer_instance) pbc hχgen
