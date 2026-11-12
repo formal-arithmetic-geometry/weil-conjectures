@@ -28,6 +28,15 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (H : Functor.uncurry.obj (ordinaryIhomBifunctor l Y) ⋙ E.functor ≅
     E.functor.op.prod E.functor ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
+-- Share the concrete cochain structures across the comparison fields.
+local instance ordinaryRingedTensorSourceMonoidal :
+    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
+  Mod.monoidalCategoryCochainComplex
+
+local instance ordinaryRingedTensorTargetMonoidal :
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
+  HomologicalComplex.monoidalCategory _ (.up ℤ)
+
 /-- A binary comparison fixed uniquely by its tensor--Hom mate.
 Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
 structure OrdinaryRingedTensorUnderivedData where
