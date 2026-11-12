@@ -227,6 +227,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
+  have := hstab
   have : Normal L L' := inferInstance
   constructor
   · intro σ hσ
