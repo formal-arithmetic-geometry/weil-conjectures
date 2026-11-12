@@ -37,6 +37,7 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
 set_option maxHeartbeats 700000 in
+set_option trace.profiler true in
 -- Nested chart conversions arise in the explicit tensor-section normalization.
 /-- Completed composition and descent to all raw rational fraction arrows.
 Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15.
