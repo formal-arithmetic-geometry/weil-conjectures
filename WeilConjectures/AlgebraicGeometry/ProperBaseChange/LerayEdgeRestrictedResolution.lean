@@ -92,6 +92,8 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
           ((RingedSpace.openModuleSections Z.toRingedSpace T).mapHomologicalComplex
             (ComplexShape.up ℕ)).obj I.cocomplex) e)) p := by
   subst U
+  let := RingedSpace.globalSectionsFunctor_additive Z.toRingedSpace
+  let := RingedSpace.globalSectionsFunctor_additive (h ⁻¹ᵁ V).toScheme.toRingedSpace
   let L := ((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let a := (forget₂ _ AddCommGrpCat.{u}).map
@@ -129,7 +131,7 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
       (congrArg (fun q ↦ a ≫ b ≫ H.map q) hrmap)
   have hn : H.map rY ≫ t V = t ⊤ ≫
       (L.homology p).presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op :=
-    sectionClass_restriction L V p
+    (sectionClass_restriction L V p).trans (Category.assoc _ _ _).symm
   unfold resolutionSectionClass
   dsimp only
   simp only [Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id]
@@ -189,7 +191,7 @@ theorem lerayEdge_restrictedResolution {X S : Scheme.{u}} (f : X ⟶ S)
     ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
   let φ := (I.isoRightDerivedObj (pushforward f) n).inv
   let c := resolutionSectionClass I K ⊤ (Iso.refl _) n
-  let r := ((((pushforward f).rightDerived n).obj F).presheaf.map
+  let r := (((pushforward f).rightDerived n).obj F).presheaf.map
     (homOfLE (show V ≤ ⊤ from le_top)).op
   have hr := restrictedResolution_sectionClass f I V U hU R n
   have hn := (Hom.mapPresheaf φ).naturality (homOfLE (show V ≤ ⊤ from le_top)).op
