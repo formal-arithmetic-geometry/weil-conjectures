@@ -101,10 +101,14 @@ theorem exists_forall_isIso_derivedReduction_map
   let red (n : ℕ) := (Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctor
   let T (n : ℕ) := (red (n + 1)).obj K ≅ (red (n + 1)).obj L
   let r (n : ℕ) : T (n + 1) → T n := fun s ↦
-    @asIso _ _ _ _ (derivedReductionStep (n + 1) (K := K) (L := L) s.hom)
-      (isIso_derivedReductionStep (n + 1) (K := K) (L := L) s.hom)
-  obtain ⟨t, ht⟩ := exists_compatible_isos_of_finite r hfin hne
-  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq (K := K) (L := L) hL
+    @asIso _ _ _ _ (derivedReductionStep (X := X) (ℓ := ℓ) (E := E)
+      (n + 1) (K := K) (L := L) s.hom)
+      (isIso_derivedReductionStep (X := X) (ℓ := ℓ) (E := E)
+        (n + 1) (K := K) (L := L) s.hom)
+  obtain ⟨t, ht⟩ := exists_compatible_isos_of_finite
+    (K := fun n ↦ (red (n + 1)).obj K) (L := fun n ↦ (red (n + 1)).obj L) r hfin hne
+  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq
+    (X := X) (ℓ := ℓ) (E := E) (K := K) (L := L) hL
     (fun n ↦ (t n).hom) fun n ↦ by
     rw [← congrArg Iso.hom (ht n)]
     exact Mod.map_comp_derivedReductionTransition_app

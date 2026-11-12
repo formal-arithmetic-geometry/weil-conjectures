@@ -120,7 +120,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
   rw [Functor.map_comp] at hα
-  exact exists_invariant_retraction_of_conjugate (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
+  exact exists_invariant_retraction_of_conjugate
+    (A := L((N.ε)^*⟦Λ⟧).obj C)
+    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦Λ⟧).obj
+      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦Λ⟧).obj
+        (L((N.ε)^*⟦Λ⟧).obj C)))
+    (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C)
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
     (N.galoisLayerExchangeIso h Ω Λ C) _ R hα hR
