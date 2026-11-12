@@ -138,51 +138,6 @@ instance isIso_pullbackExchange_traitGenericModelHom :
   unfold Hom.pullbackExchange
   infer_instance
 
-section Square
-
-variable {X X' X₁ X₁' Z Z' Z₁ Z₁' : Scheme.{u}} {M : NearbyCyclesModel X X'}
-  {M₁ : NearbyCyclesModel X₁ X₁'} {P : NearbyCyclesModel Z Z'} {P₁ : NearbyCyclesModel Z₁ Z₁'}
-  {f₀ : Z ⟶ X} {f₀' : Z' ⟶ X'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'} {k₀ : Z ⟶ Z₁}
-  {k₀' : Z' ⟶ Z₁'} {e : Z₁ ⟶ X₁} {e' : Z₁' ⟶ X₁'}
-
-/-- In a square of exchanges whose pullback along `e'` reflects isomorphisms, invertibility
-of the other five maps implies invertibility of the remaining pushforward exchange. -/
-lemma Hom.isIso_pushforwardExchange_app_of_square [L((e')^*⟦Λ⟧).ReflectsIsomorphisms]
-    (φ₀ : P.Hom M f₀ f₀')
-    (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k₀ k₀') (φ₁ : P₁.Hom M₁ e e')
-    (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)
-    (hgen : φ₀.generic ≫ ψ.generic = ψ'.generic ≫ φ₁.generic) (hb : f₀ ≫ g = k₀ ≫ e)
-    (hs : f₀' ≫ g' = k₀' ≫ e')
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)))
-    (hα₀ : IsIso ((φ₀.pullbackExchange Λ).app A))
-    (hbc' : IsIso ((baseChangeMap Λ ⟨hs⟩).app ((M.nearbyCycles Λ).obj A)))
-    (hα₁ : IsIso ((φ₁.pullbackExchange Λ).app (R((g)_*⟦Λ⟧).obj A)))
-    (hbc : IsIso ((baseChangeMap Λ ⟨hb⟩).app A))
-    (hχ' : IsIso ((ψ'.pushforwardExchange Λ).app (L((f₀)^*⟦Λ⟧).obj A))) :
-    IsIso ((ψ.pushforwardExchange Λ).app A) := by
-  have key := pushforwardExchange_square_aux
-    (derivedUpperStarLowerStarAdjunction Λ g) (derivedUpperStarLowerStarAdjunction Λ k₀)
-    (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ k₀')
-    (φ₀.pullbackExchange Λ) (φ₁.pullbackExchange Λ) (ψ.pullbackExchange Λ)
-    (ψ'.pullbackExchange Λ) (ψ.pushforwardExchange Λ) (ψ'.pushforwardExchange Λ)
-    (ψ.map_pushforwardExchange_app_comp_counit_app Λ)
-    (ψ'.map_pushforwardExchange_app_comp_counit_app Λ)
-    (pullbackSquareComparison Λ ⟨hb⟩).hom (pullbackSquareComparison Λ ⟨hs⟩).hom
-    (baseChangeMap Λ ⟨hb⟩) (baseChangeMap Λ ⟨hs⟩)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (fun C ↦ Hom.pullbackExchange_square Λ φ₀ ψ ψ' φ₁ htot hgen hb hs C) A
-  have hcomp : IsIso (L((e')^*⟦Λ⟧).map ((ψ.pushforwardExchange Λ).app A) ≫
-      (baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A)) := by
-    rw [key]
-    exact IsIso.comp_isIso' hα₁ (IsIso.comp_isIso' (Functor.map_isIso _ _) hχ')
-  have := IsIso.of_isIso_comp_right (L((e')^*⟦Λ⟧).map ((ψ.pushforwardExchange Λ).app A))
-    ((baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k₀')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A))
-  exact isIso_of_reflects_iso _ L((e')^*⟦Λ⟧)
-
-end Square
-
 variable {k k'} (ℓ : ℕ) [Fact ℓ.Prime]
   {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X.left X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -210,43 +165,21 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
     (hA : boundedConstructible _ A) :
     IsIso ((h.toTrait.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app A) := by
-  have hM := h.isTraitModelOver
-  obtain ⟨e, he, -⟩ := h.exists_comp_ε
-  have hb : M.ε ≫ (toPoint X).left = g ≫ (traitModel k k').ε := h.toTrait.comm_ε.symm
-  have hs : 𝟙 X'.left ≫ (toPoint X').left = X'.hom ≫ 𝟙 (point k').left := by simp
+  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
+  have : IsProper h.toTrait.total := ‹IsProper q›
   have hgen' : IsPullback M.ε g (toPoint X).left (traitModel k k').ε := by
     have e₀ : (traitModel k k').ε = traitGenericPoint k' ≫ traitToBase k k' :=
       (traitModel_j_traitToBase k k').symm
     rw [e₀, toPoint_left]
     exact hgen
-  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
-  have pbc := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ
-    (𝟙 (point k).left) (traitGenericPoint k' ≫ traitToBase k' k') ⟨hb⟩ hgen' A hA
-  -- the base change morphisms are invertible
-  have : IsIso (baseChangeMap 𝐐 ⟨hs⟩) := by
-    have : WeaklyEtale (𝟙 X'.left) := MorphismProperty.id_mem _ _
-    have : WeaklyEtale (𝟙 (point k').left) := MorphismProperty.id_mem _ _
-    have hsq : IsPullback (𝟙 X'.left) X'.hom (toPoint X').left (𝟙 (point k').left) := by
-      rw [toPoint_left]
-      exact IsPullback.of_id_fst
-    exact isIso_baseChangeMap_of_weaklyEtale 𝐐 hsq
-  -- the proper exchange of the model of the geometric generic fibre is invertible
-  have hC₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme 𝐐 e A hA
-  have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) (L((e)^*⟦𝐐⟧).obj A) hC₀
-  have iso : L((M.ε)^*⟦𝐐⟧).obj A ≅ L((M.j)^*⟦𝐐⟧).obj (L((e)^*⟦𝐐⟧).obj A) :=
-    (leftDerivedUpperStarCompOfEq 𝐐 he).app A
-  have hχgen : IsIso ((hM.toTraitGeneric.pushforwardExchange 𝐐).app (L((M.ε)^*⟦𝐐⟧).obj A)) :=
-    NatTrans.isIso_app_of_iso' _ iso
-  have := Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 (point k').left).symm
-  cast_proofs Hom.isIso_pushforwardExchange_app_of_square
-    𝐐 (toGenericSelfHom M) h.toTrait
-    hM.toTraitGeneric (traitGenericModelHom k k')
-    (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs A
-    (by infer_instance) (by infer_instance)
+  exact h.toTrait.isIso_pushforwardExchange_app_of_isProper (ℓ := ℓ)
+    (𝟙 (point k).left) h.isTraitModelOver.isTraitModel.exists_over
+    (isTraitModel_traitModel k k').exists_over
     (by
-      cast_proofs NatIso.isIso_app_of_isIso ((traitGenericModelHom k k').pullbackExchange 𝐐)
-        (R(((toPoint X).left)_*⟦𝐐⟧).obj A))
-    (by cast_proofs pbc) (by cast_proofs hχgen)
+      change IsPullback M.i (toPoint X').left q (traitClosedPoint k')
+      rw [toPoint_left]
+      exact h.isTraitModelOver.isPullback_i)
+    hgen' hA
 
 /-- **Proper exchange for a proper trait model over the base**: if `X` is proper over `k`, the
 total space of the trait model `M` over the base is proper over the trait and its geometric
