@@ -81,7 +81,13 @@ private lemma supportCompactSupportExchange_component_identity
       (specializationProd (ℓ := ℓ) k' (y ≫ c.c₁)).map
         ((lowerStarLowerShriekCompIso ℓ F.isPullback.w).hom.app
           ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
-      (diagPushforwardExchange ℓ X k' (y ≫ c.c₁)).app
+      ((deformationDiagModelHom X (y ≫ c.c₁).left.ker k').boundedConstructiblePushforwardExchange ℓ
+        ((deformationModel X (y ≫ c.c₁).left.ker k').preservesBoundedConstructible_of_isTraitModel
+          (ℓ := ℓ) (isTraitModel_deformationModel X _ k') (deformationModel_exists_comp_ε X _ k'))
+        (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
+          (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+          (isTraitModel_deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+          (deformationProdModel_exists_comp_ε X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k'))).app
           ((boundedConstructibleLowerShriek ℓ F.d).obj
             ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
       (boundedConstructibleLowerStar ℓ
@@ -136,7 +142,9 @@ private lemma supportCompactSupportExchange_component_identity
               eqToHom (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
                 ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)))
                   (hc.componentSpecialLift_comp_d_deformation k' F j hb))) := by
-  rw [diagPushforwardExchange]
+  run_tac do
+    let n ← Lean.getRemainingHeartbeats
+    Lean.logInfo m!"support after statement: {n / 1000} heartbeats remain"
   have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
     (ℓ := ℓ) (isTraitModel_deformationModel B _ k') (deformationModel_exists_comp_ε B _ k')
   have hN := (deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
@@ -208,6 +216,9 @@ private lemma supportCompactSupportExchange_component_identity
       (deformationDiagModelHom X (y ≫ c.c₁).left.ker k') hXm hXXm
   have hχdj := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (componentPointModelHom k' j hb) hM hXm
+  run_tac do
+    let n ← Lean.getRemainingHeartbeats
+    Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
   apply_by_match CategoryTheory.supportIdentity_aux [hF1 := hF1, hF3 := hF3, hF2 := hF2,
     hF2' := hF2', hL := hL, hL' := hL', hχΔ := hχΔ, hχdj := hχdj, hχg := hχg,
     t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
