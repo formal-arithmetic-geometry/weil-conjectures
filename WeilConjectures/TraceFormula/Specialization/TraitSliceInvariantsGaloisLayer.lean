@@ -72,8 +72,25 @@ private lemma autAction_eq_id_of_pullbackExchange_intertwines
   have hτ' : τ.autAction Λ A = 𝟙 _ :=
     eq_id_of_naturality_of_iso _ (fun f ↦ Hom.autAction_naturality Λ τ f)
       ((leftDerivedUpperStarId Λ X).app A).symm hτ
-  rw [hτ', Functor.map_id, Category.id_comp] at hint
+  rw [hτ', CategoryTheory.Functor.map_id, Category.id_comp] at hint
   exact (cancel_epi _).1 (hint.trans (Category.comp_id _).symm)
+
+/-- Restriction through a Galois equivalence has the expected kernel and lifted section. -/
+private lemma exists_surjective_galoisRestriction_of_equiv
+    {G L Ω : Type*} [Group G] [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (eG : G ≃* Gal(Ω/L)) (L₁ : FiniteGaloisIntermediateField L Ω) :
+    ∃ π : G →* Gal(L₁.toIntermediateField/L), Function.Surjective π ∧
+      (∀ σ ∈ π.ker, eG σ ∈ L₁.toIntermediateField.fixingSubgroup) ∧
+      ∀ τ : Gal(L₁.toIntermediateField/L), π (eG.symm (τ.liftNormal Ω)) = τ := by
+  let π := (AlgEquiv.restrictNormalHom (F := L) (K₁ := Ω) L₁.toIntermediateField).comp
+    eG.toMonoidHom
+  refine ⟨π, (AlgEquiv.restrictNormalHom_surjective Ω).comp eG.surjective, ?_, ?_⟩
+  · intro σ hσ
+    rw [← IntermediateField.restrictNormalHom_ker]
+    exact hσ
+  · intro τ
+    simp only [π, MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.apply_symm_apply]
+    exact τ.restrict_liftNormal Ω
 
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
   {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
@@ -197,6 +214,8 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
+  let : Algebra (traitTensorCompositum (PowerSeries K) (traitGenericField k')
+      (traitGenericField K)) L₁.toIntermediateField := L₁.toIntermediateField.algebra
   have htriv := hL₁.1
   have hSA := hL₁.2
   let eG := GenericAut.galoisEquiv (k' := k') (K := K)
@@ -234,18 +253,10 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       (Profinite.padicAlgClRingObj ℓ) (τ.liftNormal _) D)).elim fun r hravg ↦ ?_
   have hr := hravg.1
   have havg := hravg.2
-  obtain ⟨π, hπdef⟩ : ∃ π : GenericAut k' K →* (L₁.toIntermediateField ≃ₐ[traitTensorCompositum
-      (PowerSeries K) (traitGenericField k') (traitGenericField K)] L₁.toIntermediateField),
-      π = (AlgEquiv.restrictNormalHom L₁.toIntermediateField).comp
-        eG.toMonoidHom := ⟨_, rfl⟩
-  have hπ : Function.Surjective π := by
-    rw [hπdef]
-    exact (AlgEquiv.restrictNormalHom_surjective _).comp (eG).surjective
-  have hker (σ : GenericAut k' K) (hσ : σ ∈ π.ker) :
-      eG σ ∈ L₁.toIntermediateField.fixingSubgroup := by
-    rw [← IntermediateField.restrictNormalHom_ker]
-    rw [hπdef] at hσ
-    exact hσ
+  refine (exists_surjective_galoisRestriction_of_equiv eG L₁).elim fun π hπdata ↦ ?_
+  have hπ := hπdata.1
+  have hker := hπdata.2.1
+  have hsection := hπdata.2.2
   have _ : Fintype (GenericAut k' K ⧸ π.ker) :=
     Fintype.ofEquiv _ (QuotientGroup.quotientKerEquivOfSurjective π hπ).toEquiv.symm
   refine ⟨π.ker, inferInstance, fun σ hσ ↦ htriv' σ (hker σ hσ), r, by transport_exact hr, ?_⟩
@@ -256,9 +267,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       refine (congrArg (· ≫ _) ?_).trans (Category.id_comp _)
       exact_mod_proofs htriv' w (hker w hw))
     (fun τ ↦ eG.symm (τ.liftNormal _))
-    (fun τ ↦ by
-      simp only [hπdef, MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.apply_symm_apply]
-      exact τ.restrict_liftNormal _) (fun _ ↦ rfl)
+    hsection (fun _ ↦ rfl)
   transport_exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
