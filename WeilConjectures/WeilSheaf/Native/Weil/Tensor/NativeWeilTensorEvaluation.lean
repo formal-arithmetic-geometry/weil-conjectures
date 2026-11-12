@@ -73,6 +73,7 @@ private theorem evaluation_of_uncurry
   apply congrArg S'.tensor.map
   ext <;> simp
 
+-- Cancel a representative model before specializing the evaluation identity.
 private theorem evaluation_of_representative
     {E : Type a} [Category.{b} E] {H' : Eᵒᵖ × E ⥤ E}
     (S' : CoefficientClosedStructure H') (F : D ⥤ E)

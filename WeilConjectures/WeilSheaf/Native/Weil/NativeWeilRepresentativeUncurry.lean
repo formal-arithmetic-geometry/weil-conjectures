@@ -169,6 +169,8 @@ private theorem localized_uncurry
       rw [← Category.assoc e'.hom, hloc', ← hu]
       rfl
 
+-- Assemble the model and localization squares in arbitrary categories, so their
+-- rewrites do not unfold the concrete derived-category instances.
 private theorem localized_uncurry_of_representatives
     {C C' E : Type a} [Category.{b} C] [Category.{b} C'] [Category.{b} E]
     {H' : Eᵒᵖ × E ⥤ E} (S' : CoefficientClosedStructure H')
@@ -219,7 +221,6 @@ end TensorEvaluationFormal
 open TensorEvaluation
 variable {k₀ l X}
 
-set_option profiler true in
 -- The proof combines both normalizations and their dependent representative isomorphisms.
 /-- Forgetting commutes with inverse transposition on K-flat tensor representatives
 and a K-injective target.
@@ -267,6 +268,7 @@ theorem native_weil_representative_uncurry
             χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I)) := by
   let F := nativeForget k₀ l X
   let δ := (U (k₀ := k₀) (l := l) (X := X)).mapDerivedCategoryFactors
+  -- Projections keep the witnesses shared without constructing large elimination motives.
   have hsources := native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI
   have hUI := hsources.choose
   let c := hsources.choose_spec.choose

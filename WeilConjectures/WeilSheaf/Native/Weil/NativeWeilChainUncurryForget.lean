@@ -21,6 +21,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 open TensorEvaluation
 variable {k₀ l X}
 
+-- Cancel the comparison before specializing to the concrete tensor complexes.
 private theorem uncurry_summand_comparison
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
     {A B T : C} {A' B' : D} (e : F.obj B ≅ B') (a : F.obj A ≅ A')
