@@ -241,6 +241,7 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   have := hβ
   subst hC₂
   obtain ⟨r₂, hr₂, he₂⟩ := h₂split
+  trace "PH329: destructured retractions"
   -- the composition isomorphisms
   let cA := (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f)).app C
   let cB := (leftDerivedUpperStarCompOfEq Λ (Category.comp_id f)).app C
@@ -250,16 +251,22 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   let α₁ := ((N₁.galoisLayerHom h₁ Ω₁).pullbackExchange Λ).app C
   let α₂ := ((N₂.galoisLayerHom h₂ Ω₂).pullbackExchange Λ).app (L((f)^*⟦Λ⟧).obj C)
   let β := ((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app (L((𝟙 X₁)^*⟦Λ⟧).obj C)
+  trace "PH329: named functors and maps"
   have hsq := pullbackExchange_galoisLayerMap_square Λ Ω₁ Ω₂ ω hω τ hτ C
   have hA' := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId_self Λ
     (Category.id_comp f') ((N₁.nearbyCycles Λ).obj C)
+  trace "PH329: square and unit identities"
   have hIA : (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f')).hom.app
       ((N₁.nearbyCycles Λ).obj C) = (leftDerivedUpperStarId Λ X₂').inv.app _ := by
     rw [← cancel_mono ((leftDerivedUpperStarId Λ X₂').hom.app _), hA', Iso.inv_hom_id_app]
     rfl
+  trace "PH329: proved hIA"
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
+  trace "PH329: obtained naturality"
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
+  trace "PH329: simplified naturality"
   let α := (τ.pullbackExchange Λ).app C
+  trace "PH329: starting helper application"
   with_reducible
     have key := isIso_of_invariant_summands_square
       (fun q ↦ DerivedCategory.homologyFunctor
@@ -276,6 +283,7 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
         (σ k).1 (σ k).2 (hσ k) _).symm)
       (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
       (fun k ↦ he₂ (σ k).2) he₁
+  trace "PH329: assembled helper application"
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
