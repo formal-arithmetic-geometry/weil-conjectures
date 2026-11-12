@@ -469,6 +469,18 @@ private lemma restricted_scalar_pull_computes
     Functor.whiskerRight_app, Functor.whiskerLeft_app, betaMap] using
     finiteFreeScalar_restrictedCounit_pullback D a f C
 
+-- Transport a commuting square through a natural comparison before substituting
+-- the concrete complexes, whose two presentations have expensive conversions.
+private lemma factors_naturality_square
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (Q : A ⥤ C) (R : B ⥤ D) (F : A ⥤ B) (G : C ⥤ D)
+    (η : Q ⋙ G ⟶ F ⋙ R) {P E : A} {T : B}
+    (w : P ⟶ E) (q : F.obj E ⟶ T) (e : F.obj P ⟶ T)
+    (h : F.map w ≫ q = e) :
+    G.map (Q.map w) ≫ η.app E ≫ R.map q = η.app P ≫ R.map e := by
+  rw [← Category.assoc, η.naturality w]
+  simp only [Functor.comp_map, Category.assoc, ← R.map_comp, h]
+
 private lemma coherence
     {A B : Type*} [Category A] [Category B]
     [MonoidalCategory A] [MonoidalCategory B]
@@ -569,15 +581,13 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     have hs := congrArg (fun g ↦ (scalarSixPull Λ f).map g) hNY
     simp only [Functor.map_comp] at hs
     rw [reassoc_of% hs]
-    erw [reassoc_of% F.mapDerivedCategoryFactors.hom.naturality wY]
-    have haug := congrArg (fun g ↦ DerivedCategory.Q.map g)
-      (augmented_tensor_pull a S t f C)
-    dsimp only [wY]
-    simp only [Functor.map_comp, Category.assoc] at haug ⊢
-    exact congrArg
+    have hnat := factors_naturality_square DerivedCategory.Q DerivedCategory.Q
+      (F.mapHomologicalComplex (.up ℤ)) F.mapDerivedCategory
+      F.mapDerivedCategoryFactors.hom wY _ _ (augmented_tensor_pull a S t f C)
+    simp only [Functor.map_comp, Category.assoc] at hnat
+    simpa only [scalarSixPull, F, Category.assoc] using congrArg
       (fun k ↦ (scalarSixPull Λ f).map
-        (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫
-        F.mapDerivedCategoryFactors.hom.app (complex Λ S Y ⊗ C) ≫ k) haug
+        (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫ k) hnat
   have hn : (β X).hom.app ((scalarSixPull Λ f).obj (DerivedCategory.Q.obj C)) ≫
       (restriction a X).map ((scalarSixChange a X).map c) =
     (𝟙 (DerivedCategory.Q.obj (complex Λ S X)) ⊗ₘ c) ≫
