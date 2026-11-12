@@ -277,15 +277,15 @@ set_option profiler true in
 private theorem integralScalarTensorIso_unique (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (b : ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj
-        (((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≅
-      ((totalTensor Y (integralCoefficientCommRingSheaf l E Y n)).obj
+        (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≅
+      ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
         (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
         (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q))
     (h : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
       (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
       (b.hom.f (i + j)).val.app U
         ((reductionUnit l E Y D hl n
-          ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
+          ((((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
             (i + j))).val.app U
           (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) =
       totalPair Y (integralCoefficientCommRingSheaf l E Y n)
@@ -423,12 +423,8 @@ private theorem nativeReductionMonoidal
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       trace "native: beta theorem applied"
-      have hkc := hc P Q
-      dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-        integralReductionChangeOfRings, integralReductionExistence,
-        scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hb hkc
-      dsimp only [D', finiteCochainModel] at hkc
-      have hbκ := (hkc.trans hb.symm).symm
+      have hbκ : κ.app (P, Q) = (asIso beta).symm := by
+        with_unfolding_all exact (hc P Q).trans hb.symm
       trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
       trace "native: preservation supplied"
@@ -454,7 +450,7 @@ private theorem nativeReductionMonoidal
           f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) :=
         (congrArg Iso.hom hTS').trans hrepS.symm
       have hcan := CategoryTheory.map_comp_eq_id_of_inverse DerivedCategory.Q
-        (asIso beta) (κ.hom.app (P, Q)) (congrArg Iso.hom hbκ)
+        (asIso beta) (κ.hom.app (P, Q)) (congrArg Iso.hom hbκ.symm)
       exact CategoryTheory.transport_tensor_normalization
         a.tensor AR.tensor m.target.tensor AS.tensor F e f m.mu
         (a.representative.app (⟨P, hP⟩, ⟨Q, hQ⟩))
