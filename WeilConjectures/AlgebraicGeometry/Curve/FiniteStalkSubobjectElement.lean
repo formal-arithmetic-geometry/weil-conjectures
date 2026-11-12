@@ -144,8 +144,8 @@ theorem torsion_exists_finite_stalk_subobject_element
           i.hom.app M := by
         rw [i.hom.naturality, Iso.inv_hom_id_app_assoc]
       _ = e.hom ≫ R.map inc ≫ i.hom.app M := by
-        rw [Functor.comp_map, hf, R.map_comp]
-        simp only [e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+        simp only [Functor.comp_map, hf, R.map_comp, e, Iso.trans_hom, Iso.symm_hom,
+          Functor.mapIso_hom, Category.assoc]
         rfl
   let N := Subobject.mk f
   let eN : Φ.obj (N : Sheaf (Spec (.of K)).smallEtaleTopology
