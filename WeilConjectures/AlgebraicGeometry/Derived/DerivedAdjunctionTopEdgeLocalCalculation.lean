@@ -46,8 +46,16 @@ private theorem transpose_top_square
   rw [← a.homEquiv_naturality_right, Category.assoc, ← H'.map_comp, ← hd,
     H'.map_comp, ← Category.assoc, hi, Category.assoc, a.homEquiv_naturality_left]
 
-set_option maxHeartbeats 500000 in
--- The pinned sheaf pullback and adjunction require extra elaboration heartbeats.
+omit [∀ X : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
+private theorem paste_naturality_squares
+    {C : Type*} [Category C] {X Y P Q M N : C}
+    {f : X ⟶ Y} {p : X ⟶ P} {q : Y ⟶ Q} {g : P ⟶ Q}
+    {a : P ⟶ M} {b : Q ⟶ N} {k : M ⟶ N}
+    (h₁ : f ≫ q = p ≫ g) (h₂ : g ≫ b = a ≫ k) :
+    f ≫ (q ≫ b) = (p ≫ a) ≫ k := by
+  rw [← Category.assoc, h₁, Category.assoc, h₂, ← Category.assoc]
+
 private theorem truncatedCounit_naturality {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) {K K' : schemeDerivedCategory T} (k : K ⟶ K') :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -103,7 +111,7 @@ private theorem truncatedCounit_naturality {T S : Scheme.{u}} (g : T ⟶ S)
       a.homEquiv _ _ (inv (derivedPullbackTopCohomology g q P' hP') ≫ HT.map d')) =
     (inv (HS.map i) ≫
       a.homEquiv _ _ (inv (derivedPullbackTopCohomology g q P hP) ≫ HT.map d)) ≫ _
-  rw [← Category.assoc, hf, Category.assoc, ← hh, Category.assoc]
+  exact paste_naturality_squares hf hh.symm
 
 omit [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
