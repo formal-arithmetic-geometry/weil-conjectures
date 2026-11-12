@@ -114,6 +114,11 @@ noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens} [N
     MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
   Ideal.pointwiseDistribMulAction.toMulAction
 
+lemma comp_map_sub_for_hb_cleanup {A B D : Type*} [Ring A] [Ring B] [Ring D]
+    (r : B →+* D) (f : A →+* B) (a b : A) :
+    r (f a - f b) = r (f (a - b)) := by
+  exact congrArg r (f.map_sub a b).symm
+
 -- the rewriting of morphisms between spectra of rings of invariants is slow
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
@@ -179,7 +184,7 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       intro hu
       exact hnonunit (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField)
         (Q := Q) (a := c) hσF hu))
-    have hmap := congrArg r (τ.map_sub a b)
+    have hmap := comp_map_sub_for_hb_cleanup r τ a b
     have hτzero' : r (τ (a - b)) = 0 := by
       change r (τ c) = 0
       exact hτzero
