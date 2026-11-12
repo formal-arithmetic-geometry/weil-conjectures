@@ -114,7 +114,6 @@ private lemma diagPushforwardExchange_eq_of_preserves (x : RationalPoint X)
       (deformationDiagModelHom X x.left.ker k').boundedConstructiblePushforwardExchange
         ℓ hXm hXXm := rfl
 
-set_option profiler true in
 private lemma supportCompactSupportExchange_component_identity
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
     (j : B ⟶ F.F) [IsOpenImmersion j.left] [IsProper j.left]
@@ -146,7 +145,8 @@ private lemma supportCompactSupportExchange_component_identity
               ((deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
                 (ℓ := ℓ) (isTraitModel_deformationModel B _ k')
                 (deformationModel_exists_comp_ε B _ k'))
-              ((deformationModel X (y ≫ c.c₁).left.ker k').preservesBoundedConstructible_of_isTraitModel
+              ((deformationModel X (y ≫ c.c₁).left.ker k')
+                |>.preservesBoundedConstructible_of_isTraitModel
                 (ℓ := ℓ) (isTraitModel_deformationModel X _ k')
                 (deformationModel_exists_comp_ε X _ k'))).app (𝟙_ _)) =
       (boundedConstructibleLowerShriek ℓ (hc.specialCorrespondence k').support).map
@@ -183,9 +183,6 @@ private lemma supportCompactSupportExchange_component_identity
               eqToHom (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
                 ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)))
                   (hc.componentSpecialLift_comp_d_deformation k' F j hb))) := by
-  run_tac do
-    let n ← Lean.getRemainingHeartbeats
-    Lean.logInfo m!"support after statement: {n / 1000} heartbeats remain"
   have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
     (ℓ := ℓ) (isTraitModel_deformationModel B _ k') (deformationModel_exists_comp_ε B _ k')
   have hN := (deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
@@ -225,13 +222,15 @@ private lemma supportCompactSupportExchange_component_identity
     isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
     supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
+  -- Fix the ambient fibre before instantiating the route, keeping its category parameters uniform.
   have hF2' := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ
     (C := deformationSpecialFibre c.C y.left.ker k')
     (hc.componentSpecialLift k' j hb) (hc.componentSpecialLift_ι k' j hb)
     (hc.specialFixedLocus k').isPullback.w (hc.supportClosureSpecialι k')
     (supportClosureSpecialMap c y k') (hc.supportClosureSpecialι_comp k')
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+      (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
           (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
   instantiate_by_match eq_fullSubcategory_hom_to_map [h := hF2'] as hF2map
@@ -245,7 +244,8 @@ private lemma supportCompactSupportExchange_component_identity
     (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))
     (componentPointModelHom_comp_diag_special hc k' j hb)
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+      (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
           (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
   have hχg := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
@@ -258,9 +258,6 @@ private lemma supportCompactSupportExchange_component_identity
       (diagPushforwardExchange_eq_of_preserves k' (y ≫ c.c₁) hXm hXXm)).trans (hχΔ T)
   have hχdj := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (componentPointModelHom k' j hb) hM hXm
-  run_tac do
-    let n ← Lean.getRemainingHeartbeats
-    Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
   apply_by_match CategoryTheory.supportIdentity_aux
     [Sp := specialization (ℓ := ℓ) k' y,
     Ts := specializationProd (ℓ := ℓ) k' (y ≫ c.c₁),
@@ -300,18 +297,17 @@ private lemma supportCompactSupportExchange_component_identity
       (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').ι
         (hc.componentSpecialLift_ι k' j hb))
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
-    tr := eqToHom (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+    tr := eqToHom (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp),
     hback' := NatIso.hom_app_comp_inv_app_comp_map_eqToHom_eq (boundedConstructibleLowerStarComp ℓ
       (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)
       (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')))
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))
-      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+      (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
-      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+      (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)]
 
-set_option profiler true in
 private lemma fixedLocusExchange_component_factorization
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
     (j : B ⟶ F.F) [IsOpenImmersion j.left] [IsProper j.left]
@@ -340,7 +336,8 @@ private lemma fixedLocusExchange_component_factorization
                 (hc.specialFixedLocus k').ι (hc.componentSpecialLift_ι k' j hb)).inv.app
                   ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
             (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-              (hc.specialFixedLocus k').ι).counit.app ((boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
+              (hc.specialFixedLocus k').ι).counit.app
+                ((boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
                 ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)))) ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
             (hc.componentSpecialLift k' j hb)).inv.app
@@ -353,15 +350,6 @@ private lemma fixedLocusExchange_component_factorization
           ((lowerShriekCompOfEq ℓ j (toPoint F.F) (comp_toPoint j)).hom.app (𝟙_ _)) := by
   have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
     (ℓ := ℓ) (isTraitModel_deformationModel B _ k') (deformationModel_exists_comp_ε B _ k')
-  have hN := (deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
-    (ℓ := ℓ) (isTraitModel_deformationModel c.C _ k') (deformationModel_exists_comp_ε c.C _ k')
-  have hXm := (deformationModel X (y ≫ c.c₁).left.ker k')
-    |>.preservesBoundedConstructible_of_isTraitModel
-    (ℓ := ℓ) (isTraitModel_deformationModel X _ k') (deformationModel_exists_comp_ε X _ k')
-  have hXXm := NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
-      (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
-      (isTraitModel_deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
-      (deformationProdModel_exists_comp_ε X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
   have : IsProper (j ≫ F.d).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
     isProper_left_of_isProper_of_isSeparated _
@@ -384,7 +372,7 @@ private lemma fixedLocusExchange_component_factorization
     (comp_toPoint (deformationSpecialFibreMap (j ≫ F.d)
       (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k'))
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))
-    (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+    (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
   have hac := boundedConstructibleLowerStarCompOfEq_hom_app_rfl ℓ j F.ι
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -393,7 +381,6 @@ private lemma fixedLocusExchange_component_factorization
     [h := hFPE, hS3 := hS3, hS4 := hS4, hac := hac]
 
 set_option Elab.async false in
-set_option profiler true in
 -- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
 -- (`Elab.async false`), which keeps the memory below 4 GB
