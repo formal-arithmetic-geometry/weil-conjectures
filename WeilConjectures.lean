@@ -16936,8 +16936,13 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
+public import WeilConjectures.DeligneLaumon.Reduction.MixedDual
+public import WeilConjectures.DeligneLaumon.Reduction.MixedLisseOpen
+public import WeilConjectures.DeligneLaumon.Reduction.MixedNoetherianInduction
 public import WeilConjectures.DeligneLaumon.Reduction.MixedOperations
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
+public import WeilConjectures.DeligneLaumon.Reduction.MixedTensor
+public import WeilConjectures.DeligneLaumon.Reduction.MixedWeightsIn
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
@@ -17949,6 +17954,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ExtensionsMap
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteExtensionClosure
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteLisseFiltration
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
@@ -26083,6 +26089,7 @@ public import WeilConjectures.WeilSheaf.KaroubianPointer
 public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LSeries
 public import WeilConjectures.WeilSheaf.LisseAbelian
+public import WeilConjectures.WeilSheaf.LisseDualExact
 public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseExtension
 public import WeilConjectures.WeilSheaf.LisseFiltration
