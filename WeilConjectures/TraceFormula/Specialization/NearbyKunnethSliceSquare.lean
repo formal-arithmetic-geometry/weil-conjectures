@@ -72,7 +72,7 @@ private lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
     GradedObject.HasGoodTensorTensor₂₃ A B C := by
   infer_instance
 
-attribute [local instance] sliceSquare_hasTensorFour sliceSquare_hasGoodTensorLeft
+attribute [local instance 2000] sliceSquare_hasTensorFour sliceSquare_hasGoodTensorLeft
   sliceSquare_hasGoodTensorRight
 
 set_option trace.profiler true in
