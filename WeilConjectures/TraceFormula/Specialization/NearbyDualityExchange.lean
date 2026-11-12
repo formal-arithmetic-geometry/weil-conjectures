@@ -118,7 +118,12 @@ private lemma liftExchange_tensor_oplax_aux
       Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f')
           _ _ ≫ (β.app A ⊗ₘ β.app B) ≫ boundedConstructibleTensorMap hM _ _ := by
   subst hβ
-  exact ObjectProperty.hom_ext _ (hα A.obj B.obj)
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
+    boundedConstructibleUpperStar_δ_hom, ObjectProperty.tensorHom_hom', liftExchange_app_hom,
+    boundedConstructibleNearbyCycles, ObjectProperty.lift_map, ObjectProperty.homMk_hom,
+    Functor.comp_map, ObjectProperty.ι_map, boundedConstructibleTensorMap]
+  exact hα A.obj B.obj
 
 /-- **The restricted pullback exchange is monoidal**, in the oplax form: the restriction of
 `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`. -/
