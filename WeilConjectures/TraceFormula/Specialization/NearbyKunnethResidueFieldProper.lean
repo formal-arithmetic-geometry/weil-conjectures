@@ -67,7 +67,6 @@ set_option hygiene false in
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
 -- the Künneth maps of the product are large terms
-set_option profiler true in
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
 Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`, `N` of finite
@@ -108,6 +107,10 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
   have hT : IsField (PadicAlgCl.integersResidueField ℓ E.1) := Field.toIsField _
   have hAe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hA₀
   have hBe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hB₀
+  let A₁ := (Mod.extendScalars (coefficientMap
+    (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀
+  let B₁ := (Mod.extendScalars (coefficientMap
+    (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj B₀
   -- bounds below of `A₀`, `B₀` and of their external product
   have : A₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
@@ -123,11 +126,7 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
   -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
   have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
       (w : W), h w = z ∧ IsIso ((L((h)^*⟦𝔽⟧)).map (kunnethMap 𝔽 φ₁ φ₂
-        ((Mod.extendScalars (coefficientMap
-          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
-        ((Mod.extendScalars (coefficientMap
-          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj
-            B₀))) := fun z hz ↦ by
+        A₁ B₁)) := fun z hz ↦ by
     have key := exists_isIso_map_kunnethMap_of_not_isClosed 𝒪 (M := M) (N := N) (P := P)
       (φ₁ := φ₁) (φ₂ := φ₂) (A := A₀) (B := B₀) hM hN hpb hP hgen hm hm' hslice heM heN hA₀ hB₀ z hz
     refine key.imp fun W ↦ Exists.imp fun h ↦ Exists.imp fun w hw ↦ ⟨hw.1, ?_⟩
