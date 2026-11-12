@@ -98,6 +98,7 @@ private theorem stabilized_map_restriction
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Derived composition comparisons and their additivity instances require this budget.
 /-- The affine construction produces a perfect supported source on the union itself.

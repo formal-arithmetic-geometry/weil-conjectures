@@ -52,6 +52,7 @@ private theorem map_lift_transport
       rw [hn]
       rfl
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Derived restriction transport elaborates across several chosen localizations.
 set_option synthInstance.maxSize 2048 in
