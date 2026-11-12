@@ -36,6 +36,26 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures.PodReductionRepresentatives
+-- Prove the section formulas before specializing the rings and module functors.
+private theorem unaryPushforward_smul
+    {C D : Type*} [Category* C] [Category* D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {F : C ⥤ D} [F.IsContinuous J K]
+    {R : Sheaf K RingCat.{u}} {S : Sheaf J RingCat.{u}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R)
+    (M : SheafOfModules.{u} R) (U : Cᵒᵖ) (r : S.obj.obj U)
+    (m : M.val.obj (F.op.obj U)) :
+    r • @id (((SheafOfModules.pushforward φ).obj M).val.obj U) m =
+      φ.hom.app U r • m := rfl
+
+private theorem unaryIso_inv_section
+    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {M N : SheafOfModules.{u} R} (e : M ≅ N) (U : Cᵒᵖ)
+    (x : M.val.obj U) (y : N.val.obj U) (h : e.hom.val.app U x = y) :
+    e.inv.val.app U y = x := by
+  exact (congrArg (fun z ↦ e.inv.val.app U z) h).symm.trans
+    (congrArg (fun f ↦ f.val.app U x) e.hom_inv_id)
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
@@ -116,7 +136,6 @@ private theorem inverseImage_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
     ((inverseImageIntegralModules l E g).map h).val.app (op U) x =
       h.val.app (op ((proEtaleIsoPostcompose g).obj U)) x := rfl
 
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
 -- The comparison is the left-adjoint mate of the tower unit; the unit generators are
 -- traced through the actual limit projections.
@@ -167,10 +186,7 @@ private theorem reindex_normalized_aux {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
     unit_projection_section l E Y MY N n (op ((proEtaleIsoPostcompose g).obj U)) x,
     (integralTowerInverseImageUnit_existsUnique l E g).exists.choose_spec] at hs
   unfold integralComparisonRestrictedSection at hs
-  rw [← (cast_inj _).mp hs]
-  exact congrArg (fun k ↦ k.val.app (op (n, U))
-    (PodQuotientTransition.unitSection l E X MX
-      ((inverseImageIntegralModules l E g).obj N) n (op U) x)) (e.hom_inv_id_app N)
+  exact unaryIso_inv_section (e.app N) (op (n, U)) _ _ ((cast_inj _).mp hs)
 
 
 /-- Unit generators are compatible with an equality of modules.
@@ -214,7 +230,6 @@ private theorem evaluationRing_app (W : Scheme.{u}) (n : ℕ) (V : W.ProEt) :
   rw [ObjectProperty.eqToHom_hom, eqToHom_app]
   rfl
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- Unfolding the pushforward module structure of a quotient level is slow.
 /-- Scalars of a quotient level act through the sequence ring.
@@ -224,11 +239,9 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     (m : M.val.obj (op (n, V))) :
     r • @id (((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) m =
       @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) r • m := by
-  have h : r • @id (((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) m =
-      ((eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom.app (op V) r) • m :=
-    rfl
-  rw [h, evaluationRing_app]
-  rfl
+  exact (unaryPushforward_smul
+    (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m).trans
+      (congrArg (fun b ↦ b • m) (congrArg (fun f ↦ f r) (evaluationRing_app l E W n V)))
 
 /-- The sequence inverse-image generator is semilinear.
 Source: Stacks 03D6 and 0941. -/
@@ -275,7 +288,6 @@ private theorem sequenceRing_comma {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n
   rw [sequenceRing_vertical]
   exact congrArg (fun f ↦ f.hom.app (op U) a) (towerFiniteCoefficientMap_eq l E g n)
 
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
 -- Scalar linearity of every map involved, followed by the unit normalization.
 /-- A unit-normalized reindexing comparison is fixed on every scalar tensor generator.
