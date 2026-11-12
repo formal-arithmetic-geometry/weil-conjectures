@@ -31,15 +31,14 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-private theorem affine_algebra_restrict_quasicoherent_iff
-    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
-    (M : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) :
-    M.IsQuasicoherent ↔
-      ((SheafOfModules.restrictScalars
+private lemma finite_affine_moduleDirectImage_restrictScalars_eq
+    {X Y : Scheme.{v}} (f : X ⟶ Y) :
+    RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙
+      SheafOfModules.restrictScalars
         (R := moduleRings Y.toRingedSpace)
         (R' := moduleRings (directImageAlgebraSpace f))
-        ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj M).IsQuasicoherent :=
-  (Scheme.Modules.affine_module_correspondence f).1 M
+        ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ =
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
 
 set_option profiler true in
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
@@ -112,10 +111,11 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
   have hT : ∀ M, pA M → schemeDerivedQCohProperty Y (T.rightDerivedFunctor.obj M) := by
     intro M hM n
     let e := (T.rightDerivedFunctorHomologyFunctorIso n).app M
-    have hq := (affine_algebra_restrict_quasicoherent_iff f _).mp (hM n)
+    have hq := ((Scheme.Modules.affine_module_correspondence f).1 _).mp (hM n)
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso e hq
   have underived : RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙ T ≅
-      RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
+    eqToIso (finite_affine_moduleDirectImage_restrictScalars_eq f)
   let comparison : R ⋙ T.rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
     Functor.isoWhiskerLeft R T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
       (Functor.rightDerivedFunctorCompMapDerivedCategoryIso
@@ -133,7 +133,7 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
             (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).obj K) :=
       (T.rightDerivedFunctorHomologyFunctorIso n).app (R.obj K) ≪≫
       H.mapIso (comparison.app K) ≪≫ e
-    apply (affine_algebra_restrict_quasicoherent_iff f _).mpr
+    apply ((Scheme.Modules.affine_module_correspondence f).1 _).mpr
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso c.symm hq
   obtain ⟨P, hP, hmap, hadd, L, ε, hderived, hflat, ⟨adj⟩⟩ :=
     RingedSpace.derivedModulePullback_adjunction (toDirectImageAlgebraSpace f)

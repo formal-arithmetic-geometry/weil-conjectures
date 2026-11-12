@@ -36,7 +36,6 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
   DerivedCategory.homologyFunctor Functor.mapHomologicalComplex
 
 
-set_option profiler true in
 /-- A bounded finite free resolution on an open computes restricted Ext
 naturally in every coefficient sheaf.
 Source: Stacks Project, Tag 08DL (restriction of derived internal Hom), and
