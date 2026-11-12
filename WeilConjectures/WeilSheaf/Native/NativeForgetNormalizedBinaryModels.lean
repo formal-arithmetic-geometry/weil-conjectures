@@ -85,6 +85,24 @@ private theorem map_normalization
   simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.comp_obj,
     Category.comp_id, ← F.map_comp, h]
 
+private theorem remove_hom_model_natural
+    {B D E : Type a} [Category.{b} B] [Category.{b} D] [Category.{b} E]
+    (Q : B ⥤ D) (V : B ⥤ E) (F : D ⥤ E) (δ : Q ⋙ F ≅ V)
+    (H : Eᵒᵖ × E ⥤ E) {P T I J : B} {A : D} {B' : E}
+    (e : A ≅ Q.obj J) (e' : H.obj (op (V.obj T), V.obj I) ≅ B')
+    (c : V.obj J ⟶ B')
+    (x : F.obj A ⟶ H.obj (op (F.obj (Q.obj T)), F.obj (Q.obj I)))
+    (h : x ≫ H.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)) ≫ e'.hom =
+      F.map e.hom ≫ δ.hom.app J ≫ c) (φ : P ⟶ J) :
+    F.map (Q.map φ ≫ e.inv) ≫ x =
+      δ.hom.app P ≫ (V.map φ ≫ c ≫ e'.inv) ≫
+        H.map (Prod.mkHom (δ.hom.app T).op (δ.inv.app I)) := by
+  have hm := TensorEvaluationFormal.remove_model_natural Q V F δ e e' c
+    (x ≫ H.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)))
+    (by simpa only [Category.assoc] using h) φ
+  apply TensorEvaluationFormal.invert_hom_square H (δ.app T) (δ.app I)
+  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using hm
+
 private theorem normalized_binary_model_square
     {B D E : Type a} [Category.{b} B] [Category.{b} D] [Category.{b} E]
     {HD : Dᵒᵖ × D ⥤ D} {HE : Eᵒᵖ × E ⥤ E}
@@ -279,8 +297,11 @@ private theorem normalized_binary_forget_uncurry
   have hqp : q + p = n := by omega
   change U.map (HomologicalComplex.ιMapBifunctor P T
       (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫ U.map (j.f n) = _
+  have hi := hv p q n hpq
+  change U.map (HomologicalComplex.ιMapBifunctor P T
+      (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫ v.hom.f n = _ at hi
   simp only [HomologicalComplex.comp_f]
-  rw [← Category.assoc, hv p q n hpq, Linear.units_smul_comp, hψ' q p n hqp]
+  rw [← Category.assoc, hi, Linear.units_smul_comp, hψ' q p n hqp]
   rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
   change (p * q).negOnePow • _ = (q * p).negOnePow • _
   rw [mul_comm q p]
@@ -378,6 +399,9 @@ theorem native_forget_normalized_binary_models
             (((Endofunctor.IsoAlgebra.forget
                 (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj T)   := by
   classical
+  let N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ :=
+    ((nativeTensorTotal k₀ l X).obj P).obj T
+  obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective N
   let : (nativeTensorBifunctor k₀ l X).Additive := by
     constructor
     intro A B f g
@@ -424,9 +448,6 @@ theorem native_forget_normalized_binary_models
       unfold C nativeDerivedClosedComparison
       exact (native_closed_forgetful k₀ l X).2.2.2.2.choose_spec
     let a := nativeTensorParametrizedAdjunction k₀ l X
-    let N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ :=
-      ((nativeTensorTotal k₀ l X).obj P).obj T
-    obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective N
     let θ := (HomologicalComplex.mapBifunctorFlipIso T P
       (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
     let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
@@ -450,24 +471,13 @@ theorem native_forget_normalized_binary_models
           (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I) =
         δ.hom.app P ≫ f' ≫ M.ordinaryHom.map
           (Prod.mkHom (δ.hom.app T).op (δ.inv.app I)) := by
-      have hm := TensorEvaluationFormal.remove_model_natural DerivedCategory.Q
-        (V ⋙ DerivedCategory.Q) F δ (M.weilRepresentatives.model T I hI)
+      have hm := remove_hom_model_natural DerivedCategory.Q (V ⋙ DerivedCategory.Q)
+        F δ M.ordinaryHom (M.weilRepresentatives.model T I hI)
         (M.ordinaryRepresentatives.model (V.obj T) (V.obj I) hUI)
         (DerivedCategory.Q.map χ.hom)
-        (C.homComparison.hom.app (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I) ≫
-          M.ordinaryHom.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)))
-        (by simpa only [Category.assoc] using hs) φ
-      have hm' : F.map f ≫ C.homComparison.hom.app
-            (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I) ≫
-            M.ordinaryHom.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)) =
-          δ.hom.app P ≫ f' := by
-        simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, f, f', φ'] using hm
-      simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using
-        TensorEvaluationFormal.invert_hom_square M.ordinaryHom (δ.app T) (δ.app I)
-        (F.map f ≫ C.homComparison.hom.app
-          (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I))
-        (δ.hom.app P ≫ f')
-        (by simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using hm')
+        (C.homComparison.hom.app (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I))
+        hs φ
+      simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, f, f', φ'] using hm
     have hunc := uncurry_comparison C.weilClosed C.ordinaryClosed F C.tensorComparison
       C.homComparison hC.1 (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T)
       (DerivedCategory.Q.obj I) f
