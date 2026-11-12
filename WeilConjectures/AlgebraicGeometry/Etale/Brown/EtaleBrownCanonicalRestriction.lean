@@ -82,7 +82,6 @@ theorem strictEtaleBrownCanonicalRestriction_rep
     (PV.scalar h).restrictionFactors (A.restrictInverse h)).choose_spec K
 
 -- Transposing the scalar adjunction exposes several localization factors.
-set_option trace.profiler true in
 /-- The tensor comparison is the scalar mate of the exact restriction square.
 Source: Zheng, Construction 4.1; Stacks 06YY and 07A4.
 (blueprint: lem-pur-etale-brown-canonical-restriction-mate).
@@ -156,7 +155,8 @@ theorem strictEtaleBrownCanonicalRestriction_mate :
   funext X
   obtain ⟨P, q, hP, hf, hq, _⟩ :=
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients
-      (DerivedCategory.Q.objPreimage X)
+      (R := coefficientQuotientSheaf (J := W.smallEtaleTopology) O t n)
+      (DerivedCategory.Q.objPreimage X : CochainComplex (strictEtaleLevel W O t n) ℤ)
   have := hq
   let e : DerivedCategory.Q.obj P ≅ X :=
     asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso X

@@ -32,6 +32,17 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
+private theorem coefficientInverseFactors_transpose
+    {C : Type*} {D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{u} C] [HasDerivedCategory.{u} D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive] {adj : F ⊣ G}
+    (B : CoefficientDerivedImage F G adj) (K : CochainComplex C ℤ) :
+    B.adjunction.homEquiv _ _ (B.inverseFactors.hom.app K) =
+      DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app K) ≫
+        B.directUnit.app ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+  simpa only [Functor.map_id, Category.comp_id, Adjunction.homEquiv_unit] using
+    B.transpose K ((F.mapHomologicalComplex (.up ℤ)).obj K) (𝟙 _)
+
 /-- The ordinary inverse comparison is the mate of the supplied sectionwise direct
 comparison. Source: Zheng, Construction 5.15; Stacks 07A4.
 (blueprint: lem-pur-etale-brown-inverse-representative). -/
@@ -53,7 +64,6 @@ abbrev strictEtaleBrownOrdinaryInverse
       (.mk _ _ _ _ R.val.ordinaryRight.hom))
 
 -- The transpose compares all four realization factors.
-set_option trace.profiler true in
 /-- The inverse Brown comparison is the exact localization of its ordinary mate.
 Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
 (blueprint: lem-pur-etale-brown-inverse-representative).
@@ -110,15 +120,8 @@ theorem strictEtaleBrownInverse_representative
     exact
       ((mateEquiv B.adjunction bd).symm_apply_eq.mpr he.symm)
   have he : B.adjunction.homEquiv _ _ (B.inverseFactors.hom.app K) =
-      DerivedCategory.Q.map (a.unit.app K) ≫ B.directUnit.app (F.obj K) := by
-    have hh := B.transpose K (F.obj K) (𝟙 (F.obj K))
-    change B.adjunction.homEquiv _ _
-      (B.inverseFactors.hom.app K ≫ DerivedCategory.Q.map (𝟙 (F.obj K))) = _ at hh
-    erw [DerivedCategory.Q.map_id, Category.comp_id] at hh
-    change _ = DerivedCategory.Q.map (a.unit.app K ≫
-      ((A.right n).mapHomologicalComplex (.up ℤ)).map (𝟙 (F.obj K))) ≫ _ at hh
-    erw [CategoryTheory.Functor.map_id, Category.comp_id] at hh
-    exact hh
+      DerivedCategory.Q.map (a.unit.app K) ≫ B.directUnit.app (F.obj K) :=
+    coefficientInverseFactors_transpose B K
   apply (bd.homEquiv _ _).injective
   rw [← Category.assoc, bd.homEquiv_naturality_right, ← hm,
     adjunctionMate_transpose, he, CategoryTheory.Functor.map_comp, Category.assoc]
