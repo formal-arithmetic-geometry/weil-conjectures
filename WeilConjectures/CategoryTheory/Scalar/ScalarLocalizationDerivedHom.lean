@@ -530,8 +530,16 @@ private theorem exact_adjunction_descends
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
+section
+
+-- Use the linear structure's scalar action directly, avoiding repeated comparisons
+-- of the inherited additive structures during scalar-action instance search.
+local instance scalarLocalizationSheafHomSMul
+    (A : Type v) [CommRing A] (R : Sheaf J RingCat.{u})
+    [Linear A (SheafOfModules.{u} R)] (M N : SheafOfModules.{u} R) :
+    SMul A (M ⟶ N) := (Linear.homModule (R := A) M N).toSMul
+
 set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Match the coefficient actions through the sheaf restriction functor.
 private theorem restrict_scalar_identity
     (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
@@ -569,6 +577,8 @@ private theorem restrict_scalar_identity
     exact IsLocalization.Away.lift_eq (S := Localization.Away t) t
       (scalarLocalizationSections_isUnit A R a t) r
   exact congrArg (fun z ↦ z.val V • (show N.val.obj V from x)) h
+
+end
 
 private theorem left_adjoint_semilinear
     {B T : Type*} [Category B] [Category T] [Preadditive B] [Preadditive T]
