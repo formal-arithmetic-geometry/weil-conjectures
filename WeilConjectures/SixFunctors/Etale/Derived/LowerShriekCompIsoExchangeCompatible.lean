@@ -19,12 +19,18 @@ The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` built from the chos
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso_eq_unboundedEtaleLowerShriekCompIso_symm`).
 Hence the compactly supported base change maps of two stacked cartesian squares and of their
 pasting are compatible with these composition isomorphisms
-(`AlgebraicGeometry.Etale.exchangeCompCompatible_rightDerivedLowerShriekCompIso`).
+(`AlgebraicGeometry.Etale.exchangeCompCompatible_rightDerivedLowerShriekCompIso`), also after
+transport along equalities `f ≫ g = h` (`AlgebraicGeometry.Etale.exchangeCompCompatible_of_eq`).
 
 The identity and tower laws of the comparisons of compactifications hold for any schemes: they
 are those of the private compact-support formalism of
 `WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement`,
 whose public statements carry unused noetherian hypotheses.
+
+TODO: drop the unused noetherian hypotheses of
+`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_tower` and
+`AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_comparison_coherence`, then use them here
+in place of the `import all` and the private lemmas below.
 -/
 
 @[expose] public section
@@ -125,5 +131,33 @@ theorem exchangeCompCompatible_rightDerivedLowerShriekCompIso
       Category.id_comp]
     -- the identity is stated at `R.obj (LvX^* M)`, the map at `(LvX^* ⋙ R).obj M`
     erw [Category.comp_id]
+
+/-- Transport of `ExchangeCompCompatible` along equalities `f ≫ g = h`, `f' ≫ g' = h'`: the
+composition isomorphisms become `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIsoOfEq`. -/
+theorem exchangeCompCompatible_of_eq {h : X ⟶ Z} {h' : X' ⟶ Z'}
+    (w : f ≫ g = h) (w' : f' ≫ g' = h')
+    [HasCompactification f] [HasCompactification g] [HasCompactification h]
+    [HasCompactification f'] [HasCompactification g'] [HasCompactification h']
+    [QuasiCompact h] [QuasiCompact h'] [QuasiCompact f'] [QuasiCompact g']
+    (sqf : IsPullback vX f' f vY) (sqg : IsPullback vY g' g vZ)
+    (sqh : IsPullback vX h' h vZ) (sqgf : IsPullback vX (f' ≫ g') (f ≫ g) vZ)
+    (H : letI : HasCompactification (f ≫ g) := HasCompactification.of_eq w.symm
+      letI : HasCompactification (f' ≫ g') := HasCompactification.of_eq w'.symm
+      letI : QuasiCompact (f ≫ g) := by rw [w]; infer_instance
+      letI : QuasiCompact (f' ≫ g') := by rw [w']; infer_instance
+      Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
+        (rightDerivedLowerShriekBaseChangeMap Λ sqg)
+        (rightDerivedLowerShriekBaseChangeMap Λ sqgf)
+        (rightDerivedLowerShriekCompIso Λ f g) (rightDerivedLowerShriekCompIso Λ f' g')) :
+    Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
+      (rightDerivedLowerShriekBaseChangeMap Λ sqg) (rightDerivedLowerShriekBaseChangeMap Λ sqh)
+      (rightDerivedLowerShriekCompIsoOfEq Λ f g h w)
+      (rightDerivedLowerShriekCompIsoOfEq Λ f' g' h' w') := by
+  subst w w'
+  refine ⟨fun M ↦ ?_⟩
+  have hM := H.comp M
+  simp only [rightDerivedLowerShriekCompIsoOfEq, Iso.trans_hom, eqToIso_refl, Iso.refl_hom,
+    Category.id_comp]
+  exact hM
 
 end AlgebraicGeometry.Etale

@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.CompIsoExchangeCompatible
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoExchangeCompatible
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPasteHoriz
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.IdentitySquareBaseChange
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompConjugate
 
 /-!
 # The diagonal of a smooth morphism under base change
@@ -25,11 +27,6 @@ with the exceptional base change, for any such square:
   (`rightDerivedUpperShriekDualizingComplexIsoOfCompEqId_diagonal_baseChange`),
   from the vertical pasting of `Ex_!` along `Δ ≫ p₁ = 𝟙`, the identity square and the horizontal
   pasting of the exceptional base change along the rectangle `p₁' / f`.
-
-These generalise the statements of
-`WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeIso` and
-`WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalCompIsoBaseChange` from isomorphisms of
-squares of noetherian schemes to arbitrary cartesian squares.
 -/
 
 @[expose] public section
@@ -77,6 +74,20 @@ lemma isPullback_diagonal_fst_map :
 
 end Geometry
 
+-- `rfl` compares the tensor unit of `constantComplex` with the one inside the definition, which
+-- needs a deep (but fast: elaboration and type checking well below 0.1 s, measured) recursion.
+set_option maxRecDepth 20000 in
+/-- The unfolding of
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`. -/
+lemma IsoSquare.compEqId_eq (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}}
+    (p : V ⟶ B) [HasCompactification p] (s : B ⟶ V) [HasCompactification s] (hs : s ≫ p = 𝟙 B) :
+    rightDerivedUpperShriekDualizingComplexIsoOfCompEqId Λ p s hs =
+      (conjugateIsoEquiv ((rightDerivedUpperShriekAdjunction Λ s).comp
+          (rightDerivedUpperShriekAdjunction Λ p)) (rightDerivedUpperShriekAdjunction Λ (𝟙 B))
+          (rightDerivedLowerShriekCompIsoOfEq Λ s p (𝟙 B) hs)).app (constantComplex Λ B) ≪≫
+        (rightDerivedUpperShriekIdIso Λ B).app (constantComplex Λ B) :=
+  rfl
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y X' Y' : Scheme.{u}} {g' : X' ⟶ X}
   {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (d : ℕ)
   [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension d f'] [HasCompactification f]
@@ -108,7 +119,14 @@ noncomputable def dualizingComplexPullbackFstBaseChangeIso
 /-- **The smooth base change identifications `𝒞(p₁, Δ) ≅ ω_f` are compatible with base
 change**, for the identification
 `AlgebraicGeometry.Etale.dualizingComplexPullbackFstBaseChangeIso` of the dualizing complexes of
-the first projections. -/
+the first projections:
+```
+Lg'^* LΔ^* ω_{p₁} ──────────────Lg'^* c_f─────────────▶ Lg'^* ω_f
+        ≅ │                                                │ vω
+          ▼                                                ▼
+LΔ'^* Le^* ω_{p₁} ──LΔ'^* vω₁──▶ LΔ'^* ω_{p₁'} ──c_{f'}──▶ ω_{f'}
+```
+where `c_f : 𝒞(p₁, Δ) = LΔ^* ω_{p₁} ≅ ω_f` and `vω₁` is induced by `vω`. -/
 theorem sectionInvariantDiagonalIso_baseChange
     (vω : (L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ f) ≅ dualizingComplex Λ f') :
     (L((g')^*[ModuleCat.{u + 1} Λ])).map (sectionInvariantDiagonalIso Λ f d).hom ≫ vω.hom =
@@ -285,7 +303,15 @@ lemma mate_paste_unit_diagonal :
 /-- **The composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` are compatible with base change**
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId` for the diagonal,
 a section of the first projection), through the exceptional base change and the identification
-`AlgebraicGeometry.Etale.dualizingComplexPullbackFstBaseChangeIso`. -/
+`vω₁ : Le^* ω_{p₁} ≅ ω_{p₁'}` of
+`AlgebraicGeometry.Etale.dualizingComplexPullbackFstBaseChangeIso`:
+```
+Lg'^* RΔ^! ω_{p₁} ────────────Lg'^* ε────────────▶ Lg'^* Λ_X
+         β │                                          │ ≅
+           ▼                                          ▼
+RΔ'^! Le^* ω_{p₁} ──RΔ'^! vω₁──▶ RΔ'^! ω_{p₁'} ──ε'──▶ Λ_{X'}
+```
+-/
 theorem rightDerivedUpperShriekDualizingComplexIsoOfCompEqId_diagonal_baseChange :
     (L((g')^*[ModuleCat.{u + 1} Λ])).map
           (rightDerivedUpperShriekDualizingComplexIsoOfCompEqId Λ (pullback.fst f f)

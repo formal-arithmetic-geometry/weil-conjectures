@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unitor
 
 /-!
 # Base change of products of Kummer boundaries
@@ -57,19 +58,6 @@ lemma derivedTensor_map_app_unit_injective {X : Scheme.{u}}
     f = f' := by
   rw [derivedTensor_map_app, derivedTensor_map_app] at h
   rw [← cancel_epi (ρ_ K).hom, ← rightUnitor_naturality, h, rightUnitor_naturality]
-
-/-- The left unitality of the oplax monoidal derived pullback
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarOplaxMonoidal`), stated with the left unitor of the
-derived tensor product. -/
-lemma leftDerivedUpperStar_map_derivedTensorLeftUnitor_hom {Y Z : Scheme.{u}} (g : Z ⟶ Y)
-    [(g)^*[A].PreservesFlat] (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarOplaxMonoidal A g
-    (L((g)^*[A])).map (derivedTensorLeftUnitor A Y K).hom =
-      (leftDerivedUpperStarTensorIso A g _ K).hom ≫
-        ((derivedTensor A Z).map (η L((g)^*[A]))).app _ ≫
-          (derivedTensorLeftUnitor A Z _).hom := by
-  let := leftDerivedUpperStarOplaxMonoidal A g
-  exact (left_unitality_hom L((g)^*[A]) K).symm
 
 end Unitor
 

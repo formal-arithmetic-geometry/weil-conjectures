@@ -6,8 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualityBaseChange
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusAdjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unitor
 
 /-!
 # Base change of the tensor maps of the exceptional inverse image
@@ -104,7 +103,14 @@ private lemma dualizingComplexTensorMap_baseChange_aux {C : Type*} [Category* C]
 (`AlgebraicGeometry.Etale.dualizingComplexTensorMap`): the base change map
 `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` intertwines `Lg'^* μ_{f,K}` with `μ_{f', Lg^* K}`, through the
 tensor structure of `Lg'^*`, the base change `Lg'^* ω_f ⟶ Rf'^! Lg^* Λ_Y ≅ ω_{f'}` of the
-dualizing complexes and `Lg'^* Lf^* ≅ Lf'^* Lg^*`. -/
+dualizing complexes and `Lg'^* Lf^* ≅ Lf'^* Lg^*`:
+```
+Lg'^*(ω_f ⊗ Lf^* K) ───Lg'^* μ_{f,K}───▶ Lg'^* Rf^! K ──────β──────▶ Rf'^! Lg^* K
+        ≅ │                                                            ‖
+          ▼                                                            ‖
+Lg'^* ω_f ⊗ Lg'^* Lf^* K ──β ⊗ κ──▶ ω_{f'} ⊗ Lf'^* Lg^* K ──μ_{f', Lg^* K}──▶ Rf'^! Lg^* K
+```
+-/
 theorem dualizingComplexTensorMap_baseChange
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTensorMap Λ f K) ≫

@@ -166,7 +166,14 @@ omit [Finite Λ] [HasKummerClass.IsNormalized Λ] in
 /-- The twist reassociation `M(m)[2m] ≅ M ⊗ᴸ Λ_Y(m)[2m]`
 (`AlgebraicGeometry.Etale.twistShiftObjIso`) commutes with the derived pullback: through the
 tensor structure of `Lf^*` and `Lf^*(Λ_Y(m)[2m]) ≅ Λ_X(m)[2m]`, its pullback is the twist
-reassociation of `Lf^* M`. -/
+reassociation of `Lf^* M`:
+```
+Lf^*(M(m)[2m]) ──Lf^* r──▶ Lf^*(M ⊗ Λ_Y(m)[2m]) ──≅──▶ Lf^* M ⊗ Lf^*(Λ_Y(m)[2m])
+      ≅ │                                                       │ ≅
+        ▼                                                       ▼
+(Lf^* M)(m)[2m] ───────────────r──────────────▶ Lf^* M ⊗ Λ_X(m)[2m]
+```
+-/
 lemma leftDerivedUpperStar_map_twistShiftObjIso_hom (f : X ⟶ Y) (m : ℤ)
     (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (twistShiftObjIso Λ Y m M).hom ≫
