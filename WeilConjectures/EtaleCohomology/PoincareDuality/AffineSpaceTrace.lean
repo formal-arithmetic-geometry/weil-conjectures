@@ -148,12 +148,17 @@ end TateOrientation
 dimension `r = #n` over a field `k`, a finite coefficient ring `Λ` with exponent invertible on
 `k` and any Tate orientation `γ : Λ(r)[2r] ≅ Ra^! Λ`, the untwisted smooth trace
 `(Ra_! Λ)[2r] ⟶ Λ(-r)` is an isomorphism: the isomorphism `RΓ_c(𝔸^r, Λ) ≅ Λ(-r)[-2r]` is the
-trace map for compactly supported cohomology. -/
+trace map for compactly supported cohomology.
+
+This is the étale, finite-coefficient form of the clause. The `ℚ̄_ℓ`-Weil isomorphism of
+`lemma-integral-linear-character--1`
+(`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction`)
+is only known to exist, so it is not identified with this trace map here. -/
 theorem TateOrientation.isIso_untwistedSmoothTrace_affineSpace [HasTateTwist Λ]
     {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] (n : Type u) [Fintype n]
-    [HasInvertibleExponent Λ 𝔸(n; Spec (.of k))]
     (γ : TateOrientation Λ (𝔸(n; Spec (.of k)) ↘ Spec (.of k)) (Fintype.card n)) :
     IsIso γ.untwistedSmoothTrace := by
+  have : HasInvertibleExponent Λ 𝔸(n; Spec (.of k)) := .of_hom (𝔸(n; Spec (.of k)) ↘ Spec (.of k))
   have := isIso_rightDerivedUpperShriekAdjunction_counit_affineSpace (Λ := Λ) n
     (Spec (.of k))
   exact isIso_untwistedSmoothTrace_of_isIso_counit γ

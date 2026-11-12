@@ -313,7 +313,13 @@ isomorphism `x^* (ℒ_{ψ,f} ⊗ ℒ_{ψ,g}) ≅ x^* ℒ_{ψ,f} ⊗ x^* ℒ_{ψ,
 trivializations `x^* ℒ_{ψ,h} ≅ ℚ̄_ℓ` (`AlgebraicGeometry.artinSchreierOfTrivialization`), is
 the unit isomorphism `ℚ̄_ℓ ⊗ ℚ̄_ℓ ≅ ℚ̄_ℓ`. For `X = 𝔸²`, `f = x₁`, `g = x₂` and `x = (0, 0)`,
 this is the statement that `m^* ℒ_ψ ≅ pr₁^* ℒ_ψ ⊗ pr₂^* ℒ_ψ` respects the trivializations at
-zero: the root `0` over `0` of the Artin–Schreier cover is sent to `0 + 0 = 0`. -/
+zero: the root `0` over `0` of the Artin–Schreier cover is sent to `0 + 0 = 0`.
+
+The statement carries no information beyond `lemma-artin-schreier-character-sheaf--2` and the
+trivializations: any isomorphism `A ≅ B` with `x^* B` trivial can be rescaled to be normalized
+at `x`, and this is how it is proved. It is stated this way because the multiplication
+isomorphism of `--2` is only known to exist. When `X` is connected, isomorphisms of rank-one
+sheaves are unique up to a scalar, so the normalized isomorphism is unique. -/
 theorem exists_iso_tensorObj_artinSchreierOf_compatible {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (f g : Γ(X, ⊤)) (x : Spec (CommRingCat.of k₀) ⟶ X) [x.IsOver (Spec (CommRingCat.of k₀))]
@@ -336,7 +342,12 @@ theorem exists_iso_tensorObj_artinSchreierOf_compatible {X : Scheme.{u}}
 `δ : ℒ_{ψ(a x)}^∨ ≅ ℒ_{ψ⁻¹(a x)}` whose pullback to the origin, read through the canonical
 isomorphism `0^* (ℒ^∨) ≅ (0^* ℒ)^∨` and the specified trivializations at zero
 (`AlgebraicGeometry.artinSchreierZeroIso`) of `ℒ_{ψ(a x)}` and `ℒ_{ψ⁻¹(a x)}`, is the canonical
-isomorphism `ℚ̄_ℓ^∨ ≅ ℚ̄_ℓ`. -/
+isomorphism `ℚ̄_ℓ^∨ ≅ ℚ̄_ℓ`.
+
+As for `exists_iso_tensorObj_artinSchreierOf_compatible`, this only rescales the duality
+isomorphism of `lemma-artin-schreier-character-sheaf--3`, which is only known to exist, so that
+it is normalized at zero; rank-one isomorphisms on the connected `𝔸¹` are unique up to a
+scalar. -/
 theorem exists_iso_dual_artinSchreier_compatible (a : k₀) :
     ∃ δ : (artinSchreier ψ a).dual (isLisse_artinSchreier ψ a) ≅ artinSchreier ψ⁻¹ a,
       (WeilSheaf.upperStar (affineLine.zero k₀)).mapIso δ =

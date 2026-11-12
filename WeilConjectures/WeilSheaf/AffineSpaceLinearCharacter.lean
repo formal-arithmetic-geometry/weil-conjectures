@@ -71,6 +71,22 @@ omit [Finite k₀] in
 lemma linearFunction_zero : linearFunction k₀ (0 : n → k₀) = 0 := by
   simp [linearFunction]
 
+omit [Finite k₀] in
+/-- `linearFunction` is the linear form `AffineSpace.linearForm` along `𝟙 (Spec k₀)`, read on
+`𝔸ⁿ` through the isomorphism `𝔸ⁿ ×_{k₀} k₀ ≅ 𝔸ⁿ`. -/
+lemma linearFunction_eq_appTop_linearForm (c : n → k₀) :
+    linearFunction k₀ c = (inv (pullback.fst (𝔸(n; Spec (CommRingCat.of k₀)) ↘
+      Spec (CommRingCat.of k₀)) (𝟙 _))).appTop (linearForm (𝟙 _)
+        fun j ↦ (Scheme.ΓSpecIso (CommRingCat.of k₀)).inv.hom (c j)) := by
+  set p := 𝔸(n; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀)
+  have hsnd : inv (pullback.fst p (𝟙 _)) ≫ pullback.snd p (𝟙 _) = p := by
+    rw [IsIso.inv_comp_eq, ← Category.comp_id (pullback.snd _ _), ← pullback.condition]
+  rw [linearForm, map_sum, linearFunction]
+  refine (Finset.sum_congr rfl fun j _ ↦ ?_).symm
+  rw [map_mul, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← CommRingCat.comp_apply,
+    ← Scheme.Hom.comp_appTop, IsIso.inv_hom_id, hsnd, Scheme.Hom.id_appTop,
+    CommRingCat.id_apply]
+
 end AffineSpace
 
 namespace WeilSheaf
@@ -102,14 +118,14 @@ variable {n : Type u} [Fintype n]
 `c = 0`, on `𝔸ⁿ` over `k₀` with structure morphism `p`, the compactly supported cohomology of
 `ℒ_{ψ,λ}` is `Rp₀! ℒ_{ψ,λ} ≅ ℚ̄_ℓ(-r)[-2r]`, `r = #n`. -/
 theorem nonempty_iso_derivedLowerShriek_artinSchreierOf_linearFunction
-    (ψ : AddChar k₀ (PadicAlgCl l)) {c : n → k₀} (hc : c = 0) :
+    (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((derivedLowerShriek k₀ l
         (𝔸(n; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))).obj
-        (WeilSheaf.toComplex.obj (artinSchreierOf ψ (AffineSpace.linearFunction k₀ c))) ≅
+        (WeilSheaf.toComplex.obj
+          (artinSchreierOf ψ (AffineSpace.linearFunction k₀ (0 : n → k₀)))) ≅
       ((tateTwist k₀ l (Spec (CommRingCat.of k₀)) (-(Fintype.card n : ℤ))).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))))⟦
           -(2 * (Fintype.card n : ℤ))⟧) := by
-  subst hc
   rw [AffineSpace.linearFunction_zero]
   let p := 𝔸(n; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀)
   obtain ⟨e₀⟩ := nonempty_iso_artinSchreierOf_zero (k₀ := k₀) (l := l)
@@ -155,12 +171,8 @@ theorem isZero_derivedLowerShriek_artinSchreierOf_linearFunction
       AffineSpace.linearFunction k₀ c := by
     rw [map_one, one_mul, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
       AffineSpace.map_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
-      AffineSpace.linearCoordHom_appTop_coord, AffineSpace.linearForm, map_sum,
-      AffineSpace.linearFunction]
-    refine Finset.sum_congr rfl fun j _ ↦ ?_
-    rw [map_mul, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← CommRingCat.comp_apply,
-      ← Scheme.Hom.comp_appTop, IsIso.inv_hom_id, hsnd, Scheme.Hom.id_appTop,
-      CommRingCat.id_apply]
+      AffineSpace.linearCoordHom_appTop_coord]
+    exact (AffineSpace.linearFunction_eq_appTop_linearForm c).symm
   have h₀ := isZero_derivedLowerShriek_tensorLisse_artinSchreierOf_upperStar ψ hψ π s hpb 1
     isUnit_one (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l B))
   rw [hlin] at h₀
