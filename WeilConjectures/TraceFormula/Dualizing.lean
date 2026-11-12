@@ -267,7 +267,7 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
         ((boundedConstructibleUpperShriekAdjunction ℓ a).homEquiv _ _).symm α =
       α ≫ (upperShriekUnitIsoOfEqId ℓ a ha).hom := by
   subst ha
-  change _ = α ≫ (boundedConstructibleUpperShriekId ℓ (point k)).hom.app (𝟙_ _)
+  simp only [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom]
   refine Eq.trans ?_ (integral_conjugate_id
     (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     (boundedConstructibleLowerShriekId ℓ (point k)) α)

@@ -119,7 +119,7 @@ lemma pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app {ΦZ : Z �
     (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K)
     (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K) w.w.symm hi K
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the categories of sheaves make the rewriting slow
 /-- The relative Frobenius part of `θ_f` at a fibre (blueprint
 `lem-trf-weil-shriek-operator-fibres`, proof of (2)): under the base change to the fibre `Z`
