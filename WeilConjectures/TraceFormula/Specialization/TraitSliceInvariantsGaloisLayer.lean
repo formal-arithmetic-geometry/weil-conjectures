@@ -49,29 +49,6 @@ attribute [local instance] traitGenericFieldAlgebra
 elab "ph112_remaining" label:str : tactic => do
   Lean.logInfo m!"{label.getString}: {(← Lean.getRemainingHeartbeats) / 1000}"
 
--- Derived pullbacks repeatedly need these graded tensor colimit facts. Prove them once
--- for a general coefficient ring, before specializing to the concrete Galois models.
-/-- Fourfold graded tensor compatibility for modules over a condensed coefficient ring. -/
-abbrev gradedTensorFour_condensedModules (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (W X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))) : GradedObject.HasTensor₄ObjExt W X Y Z := inferInstance
-
-/-- Left-associated graded tensor products preserve the defining coproducts. -/
-abbrev gradedTensorLeft_condensedModules (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))) : GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
-
-/-- Right-associated graded tensor products preserve the defining coproducts. -/
-abbrev gradedTensorRight_condensedModules (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))) : GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
-
-attribute [local instance] gradedTensorFour_condensedModules gradedTensorLeft_condensedModules
-  gradedTensorRight_condensedModules
-
 /-- Constructibility of a derived pullback passes to any further factorization. -/
 private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
     {Z Y X : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X) (fg : Z ⟶ X) (hfg : f ≫ g = fg)
@@ -283,8 +260,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (Profinite.padicAlgClRingObj ℓ) A hA
   ph112_remaining "PH112 constructible"
   -- Direct elimination keeps the large dependent types in their original form.
-  refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB
-    (by convert (config := {closePre := false}) eB using 3)
+  refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB
     (by cast_proofs hC)).elim fun E hE ↦ ?_
   refine hE.elim fun K₀ hK₀ ↦ ?_
   refine hK₀.elim fun e htors ↦ ?_
