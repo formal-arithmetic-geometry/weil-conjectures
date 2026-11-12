@@ -22,6 +22,14 @@ satisfies `|ι α| ≤ q_x^{a/2}`. Then the trace energies grow at most like `q^
   `S_n(K) ≤ C q^{nB}` gives `‖K‖ ≤ B - 1`.
 - `AlgebraicGeometry.WeilComplex.exists_traceEnergy_le_of_finite_support`: `S_n(K) ≤ C q^{na}`.
 - `AlgebraicGeometry.WeilComplex.l2Weight_le_of_finite_support`: `‖K‖ ≤ a - 1`.
+
+## Implementation details
+
+For the energy bound, at an `𝔽_{qⁿ}`-point `y` over a closed point `x` the trace `t_K(y)` is the
+alternating sum of the traces of `F_x^{n / deg x}` on the stalks `𝓗ʲ(K)_x̄`, hence
+`|ι t_K(y)| ≤ N q^{na/2}` with `N` the sum over `j` of the ranks of the stalks, and it vanishes
+unless `x` lies in the support; over each closed point `x` there are at most `deg x` such
+points `y`.
 -/
 
 @[expose] public section
@@ -36,9 +44,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The trace energy bound `S_m(K) ≤ C q^{mB}` for `m ≥ 1` bounds the `L²`-weight parameter of
-a Weil complex: `‖K‖ ≤ B - 1`. For `β > B - 1` the ratios `S_m / q^{m(β + 1)}` are at most
-`C q^{m(B - β - 1)}`, which tends to `0`. This is the analogue for complexes of
-`AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le`. -/
+a Weil complex: `‖K‖ ≤ B - 1`. -/
 theorem l2Weight_le_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     {C B : ℝ} (hS : ∀ n : ℕ, 1 ≤ n → K.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * B)) :
     K.l2Weight ι ≤ ((B - 1 : ℝ) : EReal) := by
@@ -70,13 +76,7 @@ variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 /-- Let `K` be a Weil complex on `X₀`, of finite type over `k₀`, supported at finitely many
 closed points, such that every eigenvalue `α` of the local Frobenius `F_x` on every stalk
 `𝓗ʲ(K)_x̄` satisfies `|ι α| ≤ q_x^{a/2}`. Then there is a constant `C` with
-`S_n(K) ≤ C q^{na}` for all `n`.
-
-At an `𝔽_{qⁿ}`-point `y` over a closed point `x` the trace `t_K(y)` is the alternating sum of
-the traces of `F_x^{n / deg x}` on the stalks `𝓗ʲ(K)_x̄`, hence `|ι t_K(y)| ≤ N q^{na/2}` with
-`N` the sum over `j` of the ranks of the stalks, and it vanishes unless `x` lies in the support;
-over each closed point `x` there are at most `deg x` such points `y`.
-(blueprint: `lemma-bounds-squared-traces--3`) -/
+`S_n(K) ≤ C q^{na}` for all `n`. -/
 theorem exists_traceEnergy_le_of_finite_support (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (hK : {x : X.finitePoints | ∃ j : ℤ, Nontrivial (K.stalk j x).carrier}.Finite) {a : ℝ}
     (ha : ∀ (j : ℤ) (x : X.finitePoints),
@@ -159,10 +159,7 @@ theorem exists_traceEnergy_le_of_finite_support (ι : PadicAlgCl l →+* ℂ) (K
 
 /-- Let `K` be a Weil complex on `X₀`, of finite type over `k₀`, supported at finitely many
 closed points, such that every eigenvalue `α` of the local Frobenius `F_x` on every stalk
-`𝓗ʲ(K)_x̄` satisfies `|ι α| ≤ q_x^{a/2}`. Then `‖K‖ ≤ a - 1`, by
-`AlgebraicGeometry.WeilComplex.exists_traceEnergy_le_of_finite_support` and
-`AlgebraicGeometry.WeilComplex.l2Weight_le_of_traceEnergy_le`.
-(blueprint: `lemma-bounds-squared-traces--4`) -/
+`𝓗ʲ(K)_x̄` satisfies `|ι α| ≤ q_x^{a/2}`. Then `‖K‖ ≤ a - 1`. -/
 theorem l2Weight_le_of_finite_support (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (hK : {x : X.finitePoints | ∃ j : ℤ, Nontrivial (K.stalk j x).carrier}.Finite) {a : ℝ}
     (ha : ∀ (j : ℤ) (x : X.finitePoints),
