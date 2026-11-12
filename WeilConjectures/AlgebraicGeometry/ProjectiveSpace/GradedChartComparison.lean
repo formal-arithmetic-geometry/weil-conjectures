@@ -188,8 +188,6 @@ private theorem iso_of_indexed_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.
   intro U V h s
   exact hlin' (idx U) (idx V) U.val V.val (hidx U) (hidx V) h s
 
-set_option profiler true in
--- Localized equivalences and dependent chart transports require more elaboration heartbeats.
 /-- A linear equivalence preserving numerator degrees compares sheaves given by charts.
 Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U;
 steps 2 and 3 of lem-sc-p1-homogeneous-basis-proj-coproduct.
