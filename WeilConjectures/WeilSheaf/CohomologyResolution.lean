@@ -80,7 +80,7 @@ lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
 
 /-- Global sections identify the Frobenius transported through a commuting square of adic
 pushforwards with the Frobenius on the source. -/
-lemma adicFrobeniusNatTrans_app_of_comm {Z W : Scheme.{u}} (g : Z ⟶ W)
+lemma adicFrobeniusNatTrans_eq_of_comm {Z W : Scheme.{u}} (g : Z ⟶ W)
     (hW : W ⟶ W) (hZ : Z ⟶ Z) (comm : hZ ≫ g = g ≫ hW)
     (e : adicLowerStar l g ⋙ adicLowerStar l hW ≅
       adicLowerStar l hZ ⋙ adicLowerStar l g)
@@ -88,13 +88,16 @@ lemma adicFrobeniusNatTrans_app_of_comm {Z W : Scheme.{u}} (g : Z ⟶ W)
       (lowerStarComp (WeilCoefficients.{u} l) g hW).hom.app M.X ≫
         (lowerStarCongr (WeilCoefficients.{u} l) comm.symm).hom.app M.X ≫
           (lowerStarComp (WeilCoefficients.{u} l) hZ g).inv.app M.X)
-    (X : IsoAlgebra (adicLowerStar l hZ)) :
-    (IsoAlgebra.frobeniusNatTrans e (AdicSheaf.forget W ⋙ Sheaf.Γ _ _)
+    (τ : IsoAlgebra.forget (adicLowerStar l hZ) ⋙ AdicSheaf.forget Z ⋙ Sheaf.Γ _ _ ⟶
+      IsoAlgebra.forget (adicLowerStar l hZ) ⋙ AdicSheaf.forget Z ⋙ Sheaf.Γ _ _)
+    (hτ : ∀ X, τ.app X = (globalSectionsLowerStarIso _ hZ).inv.app X.carrier.X ≫
+      (Sheaf.Γ _ _).map X.str.hom.hom) :
+    IsoAlgebra.frobeniusNatTrans e (AdicSheaf.forget W ⋙ Sheaf.Γ _ _)
       (AdicSheaf.forget Z ⋙ Sheaf.Γ _ _)
       (Functor.isoWhiskerLeft (AdicSheaf.forget Z) (globalSectionsLowerStarIso _ g))
-      (Functor.whiskerLeft (AdicSheaf.forget W) (globalSectionsLowerStarIso _ hW).inv)).app X =
-      (globalSectionsLowerStarIso _ hZ).inv.app X.carrier.X ≫
-        (Sheaf.Γ _ _).map X.str.hom.hom := by
+      (Functor.whiskerLeft (AdicSheaf.forget W) (globalSectionsLowerStarIso _ hW).inv) = τ := by
+  refine NatTrans.ext (funext fun X ↦ ?_)
+  rw [hτ]
   change (globalSectionsLowerStarIso _ g).inv.app X.carrier.X ≫
     (globalSectionsLowerStarIso _ hW).inv.app ((adicLowerStar l g).obj X.carrier).X ≫
       (Sheaf.Γ _ _).map ((e.hom.app X.carrier).hom ≫
@@ -133,15 +136,15 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
         (Spec (CommRingCat.of k₀) ↘
           Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
-  refine NatTrans.ext (funext fun X ↦ ?_)
-  exact adicFrobeniusNatTrans_app_of_comm
+  exact adicFrobeniusNatTrans_eq_of_comm
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm _
     (fun M ↦ adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
-      (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _) M) X
+      (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _) M)
+    (ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y) (fun _ ↦ rfl)
 
 
 set_option profiler true in
