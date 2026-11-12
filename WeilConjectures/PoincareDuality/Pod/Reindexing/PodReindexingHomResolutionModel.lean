@@ -1075,8 +1075,6 @@ theorem podReindexing_resolution_preservation {X Y : Scheme.{u}} (g : X ⟶ Y) [
     infer_instance
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1200000 in
--- Elaborating the product comparison and fixed derived models needs a larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual Hom-complex and derived localization comparisons, with their
 projection, naturality, quasi-isomorphism, and resolution-model laws.
@@ -1275,9 +1273,6 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
       _ = _ := congrArg (fun f ↦ FD.map κ.hom ≫ f) hd
 
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- The theorem combines the separately stated tensor/Hom and derived comparison data.
-set_option maxHeartbeats 800000 in
 -- The theorem combines the two strictly smaller comparison packages above.
 /-- Tensor and Hom comparisons, the actual unbounded product Hom-complex comparison,
 and its natural derived descent with the specified K-injective resolution model.
