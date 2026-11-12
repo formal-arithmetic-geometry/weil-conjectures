@@ -130,7 +130,10 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
   have hθ : θp.hom.app ((T k).obj M) ≫
       (openTensorRestrictionSquareIso k U).hom.app M =
     βp.inv.app M ≫ βq.hom.app M ≫ (T q).map (θj.hom.app M) := by
-    simp [openTensorRestrictionSquareIso, θp, θj, βp, βq, p, q, T]
+    simp only [openTensorRestrictionSquareIso, θp, θj, βp, βq, p, q, T,
+      Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Iso.hom_inv_id_app_assoc, Category.assoc]
   rw [← Functor.map_comp_assoc, hθ]
   rw [cP.hom.naturality]
   erw [reassoc_of% hcP]
