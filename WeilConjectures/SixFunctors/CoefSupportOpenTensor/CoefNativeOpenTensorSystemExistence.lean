@@ -122,6 +122,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The original existential statement names a witness unused by True.
 set_option linter.unusedVariables false in
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Native specialization compares the canonical module and cochain tensor instances.
 /-- The localized sequence sites admit the ordinary native open tensor datum.
