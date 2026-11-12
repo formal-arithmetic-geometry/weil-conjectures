@@ -104,6 +104,7 @@ lemma sc_g_sectionsAddEquiv (f : constantIntSheaf _ ⟶ (forgetAb k₀ l Y).obj 
     sectionsAddEquiv_comp]
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- unifying the terms of the image of a resolution with the images of its terms is slow
 lemma extMk_eq_zero_iff_sectionsAddEquiv
@@ -189,6 +190,7 @@ lemma extAddEquivHomology_extMk
   InjectiveResolution.extAddEquivHomology_extMk _ _ _ _ _ _ f hf c hc
 
 set_option maxRecDepth 4000 in
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the terms of the image of a resolution are only definitionally the images of its terms
 /-- `extAddEquivHomology` is `ℚ̄_ℓ`-linear: multiplication by `c` on the coefficients corresponds
@@ -315,6 +317,7 @@ variable [Fact (ringChar k₀ ≠ l)] {Y : Scheme.{u}} [Y.Over (Spec (CommRingCa
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the carriers of the homology of global sections are only definitionally equal
 /-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, with its Frobenius.** For an injective
@@ -336,6 +339,7 @@ theorem exists_addEquiv_adicConstantH_cohomology
   erw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- `AdicConstantH` is only definitionally the `Ext` group of the underlying abelian sheaf
 /-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, `ℚ̄_ℓ`-linearly, with its Frobenius.**
