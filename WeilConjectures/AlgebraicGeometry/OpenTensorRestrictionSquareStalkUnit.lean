@@ -89,8 +89,6 @@ private def square_unit_cancel_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
   let H {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.pushforward a
   let θp := openTensorRestrictionIso p
   let θj := openTensorRestrictionIso U.ι
-  let βp := Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl
-  let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm
   ak.unit.app M ≫ (H k).map (ap.unit.app ((T k).obj M)) ≫
       (H p ⋙ H k).map (θp.hom.app ((T k).obj M)) ≫
       (H p ⋙ H k).map (θ.hom.app M) ≫ cP.hom.app _ =
@@ -118,8 +116,6 @@ private def square_unit_mid_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
       (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
       cQ.hom.app _
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
 private theorem square_unit_mid_to_pre {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
