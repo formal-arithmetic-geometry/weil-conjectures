@@ -14209,6 +14209,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.SectionProj
 public import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.TensorProjectionRightTransport
 public import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.UnitAdjunctTensorAction
 public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatible
+public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
 public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
 public import WeilConjectures.CategoryTheory.Adjunction.TowerTransitionTransport
@@ -23641,6 +23642,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Profinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ProperBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ReductionToFiniteCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ResidueFieldEtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.SectionCoherence
