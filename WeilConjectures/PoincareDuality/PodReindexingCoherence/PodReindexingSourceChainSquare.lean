@@ -110,9 +110,12 @@ private theorem source_chain_conjugate {D : Type*} [Category D]
     (f : B ⟶ C) (k : C ⟶ D₀) (h : A ⟶ E₀)
     (w : e.hom ≫ f ≫ k = h ≫ e'.hom) : f ≫ k ≫ e'.inv = e.inv ≫ h := by
   apply (cancel_epi e.hom).mp
-  simp only [← Category.assoc]
-  rw [w, Category.assoc, e'.hom_inv_id, Category.comp_id, e.hom_inv_id,
-    Category.id_comp]
+  calc
+    e.hom ≫ (f ≫ k ≫ e'.inv) = (e.hom ≫ f ≫ k) ≫ e'.inv := by
+      simp only [Category.assoc]
+    _ = (h ≫ e'.hom) ≫ e'.inv := congrArg (fun t ↦ t ≫ e'.inv) w
+    _ = e.hom ≫ (e.inv ≫ h) := by
+      simp only [Category.assoc, e'.hom_inv_id, Category.comp_id, e.hom_inv_id_assoc]
 
 private lemma source_complexShift_projection
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Option ℕ)
@@ -136,7 +139,8 @@ private lemma source_complexShift_projection
   have hid := SheafOfModules.homObjMap_id (R := podReindexingRing l E X s)
     (M := ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧)).X p)
     (N := ((podReindexingComplexFunctor l E g s).obj I).X q)
-  simpa only [hid, Category.comp_id] using hmap
+  erw [hid, Category.comp_id] at hmap
+  exact hmap
 
 private lemma source_chain_leftFormula
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
