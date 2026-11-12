@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidueIff
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedPointsDetection
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobalTorsion
@@ -49,6 +50,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Reuse the tensor and colimit instances needed by the derived pullback functors.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k' : Type u}
   [Field k'] [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)] {X Y Z : Scheme.{u}}
   {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
@@ -67,19 +73,6 @@ set_option hygiene false in
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
 -- the Künneth maps of the product are large terms
-private theorem boundedConstructible_kunnethMap_residueField [IsNoetherian X] [IsNoetherian Y]
-    [TopologicalSpace.NoetherianSpace Z]
-    {A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj 𝒪 X))} (hA₀ : boundedConstructible (condensedRingObj 𝒪 X) A₀)
-    {B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj 𝒪 Y))} (hB₀ : boundedConstructible (condensedRingObj 𝒪 Y) B₀) :
-    boundedConstructible (condensedRingObj 𝒪 Z)
-      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
-  boundedConstructible_tensorObj
-    (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
-
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
 Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`, `N` of finite
@@ -109,61 +102,54 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
   have : TopologicalSpace.NoetherianSpace Y := inferInstance
   have ha : A₀.IsGE hA₀.1.1.choose := hA₀.1.1.choose_spec
   have ha' : B₀.IsGE hB₀.1.1.choose := hB₀.1.1.choose_spec
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have hqc : QuasiCompact (traitGenericPoint k') := inferInstance
+  have hqs : QuasiSeparated (traitGenericPoint k') := inferInstance
+  have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip hqc
+  have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip hqs
+  have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip hqc
+  have : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip hqs
+  have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip hqc
+  have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip hqs
   have hT : IsField (PadicAlgCl.integersResidueField ℓ E.1) := Field.toIsField _
   have hAe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hA₀
   have hBe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hB₀
-  let A₁ := (Mod.extendScalars (coefficientMap
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀
-  let B₁ := (Mod.extendScalars (coefficientMap
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj B₀
   -- bounds below of `A₀`, `B₀` and of their external product
-  let n : ℤ := min hA₀.1.1.choose hB₀.1.1.choose
-  have : A₀.IsGE n :=
+  have : A₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
-  have : B₀.IsGE n :=
+  have : B₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right _ _)
-  have hAB := boundedConstructible_kunnethMap_residueField E (f₁ := f₁) (f₂ := f₂) hA₀ hB₀
-  obtain ⟨c, hc⟩ := exists_isGE_of_boundedConstructible hAB
+  have hAB : boundedConstructible (condensedRingObj 𝒪 Z)
+      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
+    boundedConstructible_tensorObj
+      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
+  let c := hAB.1.1.choose
+  have hc : (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀).IsGE c :=
+    hAB.1.1.choose_spec
   -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
   have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
       (w : W), h w = z ∧ IsIso ((L((h)^*⟦𝔽⟧)).map (kunnethMap 𝔽 φ₁ φ₂
-        A₁ B₁)) := fun z hz ↦ by
-    letI : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-    letI : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-    letI : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-    letI : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-    letI : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
-    letI : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
+        ((Mod.extendScalars (coefficientMap
+          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
+        ((Mod.extendScalars (coefficientMap
+          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj
+            B₀))) := fun z hz ↦ by
     have key := exists_isIso_map_kunnethMap_of_not_isClosed 𝒪 (M := M) (N := N) (P := P)
       (φ₁ := φ₁) (φ₂ := φ₂) (A := A₀) (B := B₀) hM hN hpb hP hgen hm hm' hslice heM heN hA₀ hB₀ z hz
     refine key.imp fun W ↦ Exists.imp fun h ↦ Exists.imp fun w hw ↦ ⟨hw.1, ?_⟩
     have := hw.2
     exact (isIso_map_map_kunnethMap_iff_residueField ℓ E φ₁ φ₂ h A₀ B₀
-      n c).1 (Functor.map_isIso _ _)
+      (min hA₀.1.1.choose hB₀.1.1.choose) c).1 (Functor.map_isIso _ _)
   -- its global sections are invertible
-  have hΓ := by
-    letI : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-    letI : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-    letI : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-    letI : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-    letI : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
-    letI : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
-    exact isIso_lowerStar_kunnethMap_residueField ℓ E hM hN hpb hP hgen
-      (boundedConstructible_derivedExtendScalars_residueField X ℓ E.1 A₀ hA₀)
-      (boundedConstructible_derivedExtendScalars_residueField Y ℓ E.1 B₀ hB₀)
-  have hs := by
-    letI : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-    letI : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-    letI : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-    letI : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-    exact plusEtaleOrigin_kunnethMap_source _ (M := M) (N := N) (f₁' := f₁') (f₂' := f₂')
-      hT hAe hBe
-  have ht := by
-    letI : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
-    letI : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
-    exact plusEtaleOrigin_kunnethMap_target _ (P := P) (f₁ := f₁) (f₂ := f₂) hT hAe hBe
-  letI : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
-    hP.locallyOfFiniteType
+  have hΓ := isIso_lowerStar_kunnethMap_residueField ℓ E hM hN hpb hP hgen
+    (boundedConstructible_derivedExtendScalars_residueField X ℓ E.1 A₀ hA₀)
+    (boundedConstructible_derivedExtendScalars_residueField Y ℓ E.1 B₀ hB₀)
+  have hs := plusEtaleOrigin_kunnethMap_source _ (M := M) (N := N) (f₁' := f₁') (f₂' := f₂')
+    hT hAe hBe
+  have ht := plusEtaleOrigin_kunnethMap_target _ (P := P) (f₁ := f₁) (f₂ := f₂) hT hAe hBe
   exact isIso_of_isIso_leftDerivedUpperStar_map_of_not_isClosed _ Z'.hom _ hs ht hpt hΓ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
