@@ -207,7 +207,6 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
-  let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   have he := (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
@@ -219,13 +218,6 @@ theorem mixedSections_left_unit_normalization
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
-  have hA : DerivedCategory.Qh.obj ((HZ.mapHomotopyCategory (.up ℤ)).obj
-        ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K))) =
-      (Sg.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj
-        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) := by
-    rfl
-  have hp := generic_first_layer Df Dg Dfg HY HZ Sg (by rfl) e
-    (mixedGlobalSectionsDirectImageIso g) K (heq_of_eq he) hA (heq_of_eq hg₀)
   have hg : p ≫ (mixedGlobalSectionsDirectImageIso g).hom.app
         ((schemeDerivedDirectImage f).obj F) =
       Sg.mapDerivedCategoryFactorsh.inv.app
@@ -235,7 +227,12 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
     dsimp only [p]
-    simpa only [Category.assoc] using eq_of_heq hp
+    simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc, he, Functor.map_comp_assoc]
+    have hn := (mixedGlobalSectionsDirectImageIso g).hom.naturality
+      (Df.rightDerivedFunctorUnit.app K)
+    simp only [Functor.comp_map] at hn
+    rw [hn, ← Category.assoc, ← Category.assoc, hg₀]
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
