@@ -42,15 +42,7 @@ private theorem mapCompIdApply
 
 set_option profiler true in
 set_option maxHeartbeats 800000 in
-/-- The finite quotient augmentation agrees on each degree after the two comparisons.
-Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
-(blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
-Proof: test equality on an ordinary adjunction-unit section. The normalized module
-comparison restricts it along the site counit. Naturality of the quotient augmentation
-moves this restriction to the reduced section. The insertion formula and naturality
-of the finite pullback unit then cancel the site unit and counit by the right triangle.
-Both remaining sections are the finite pullback generator of the unit tensor. -/
-theorem isomorphismOrdinaryFiniteAugmentation
+private theorem isomorphismOrdinaryFiniteAugmentation_section
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -65,22 +57,18 @@ theorem isomorphismOrdinaryFiniteAugmentation
     (a : (tower l E Y none).obj P ⋙ trfInverseImageComplex l E g ≅
       (integralOperationsPullbackTowerFunctor l E g).obj P)
     (ha : ∀ k : ℕ, a.hom.app (op k) = QuotientTensor.insertion l E g k
-      ((unrestrictedIntegralFiniteComplex l E Y k).obj P)) (i : ℤ) :
-    b.hom.app (P.X i) ≫ (inverseImageIntegralModules l E g).map
-        ((((augmentation l E Y none).app P).app (op n)).f i) ≫
-          (a.hom.app (op n)).f i =
-      (((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i := by
-  apply ((ordinaryAdjunction l E g).homEquiv _ _).injective
-  dsimp only [Adjunction.homEquiv, Equiv.coe_fn_mk]
-  ext V x
-  dsimp only [ordinaryPush]
-  change (((a).hom.app (op n)).f i).val.app
-      (op ((proEtaleBaseChange g).obj V.unop))
+      ((unrestrictedIntegralFiniteComplex l E Y k).obj P)) (i : ℤ)
+    (V : Y.ProEtᵒᵖ) (x : (P.X i).val.obj V) :
+    (((a).hom.app (op n)).f i).val.app
+        (op ((proEtaleBaseChange g).obj V.unop))
       (((((augmentation l E Y none).app P).app (op n)).f i).val.app
         (op ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V.unop)))
         (((b).hom.app (P.X i)).val.app
           (op ((proEtaleBaseChange g).obj V.unop))
-          (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x))) = _
+          (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x))) =
+      (((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i).val.app
+        (op ((proEtaleBaseChange g).obj V.unop))
+        (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x) := by
   erw [hb, ha]
   let adj := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
     (inferInstance : WeaklyEtale g) trivial
@@ -121,5 +109,39 @@ theorem isomorphismOrdinaryFiniteAugmentation
   have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
     P n i V.unop x
   exact (congrArg (integralOperationsPullbackGenerator l E g n M V.unop) haug).trans hord.symm
+
+/-- The finite quotient augmentation agrees on each degree after the two comparisons.
+Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
+(blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
+Proof: test equality on an ordinary adjunction-unit section. The normalized module
+comparison restricts it along the site counit. Naturality of the quotient augmentation
+moves this restriction to the reduced section. The insertion formula and naturality
+of the finite pullback unit then cancel the site unit and counit by the right triangle.
+Both remaining sections are the finite pullback generator of the unit tensor. -/
+theorem isomorphismOrdinaryFiniteAugmentation
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (b : ordinaryPull l E g ≅ inverseImageIntegralModules l E g)
+    (hb :
+    ∀ (M : integralTowerModules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)),
+      (b.hom.app M).val.app (op ((proEtaleBaseChange g).obj V))
+        (((ordinaryAdjunction l E g).unit.app M).val.app (op V) x) =
+      M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+        (inferInstance : WeaklyEtale g) trivial).counit.app V).op x)
+    (P : Cx l E Y none) (n : ℕ)
+    (a : (tower l E Y none).obj P ⋙ trfInverseImageComplex l E g ≅
+      (integralOperationsPullbackTowerFunctor l E g).obj P)
+    (ha : ∀ k : ℕ, a.hom.app (op k) = QuotientTensor.insertion l E g k
+      ((unrestrictedIntegralFiniteComplex l E Y k).obj P)) (i : ℤ) :
+    b.hom.app (P.X i) ≫ (inverseImageIntegralModules l E g).map
+        ((((augmentation l E Y none).app P).app (op n)).f i) ≫
+          (a.hom.app (op n)).f i =
+      (((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i := by
+  apply ((ordinaryAdjunction l E g).homEquiv _ _).injective
+  dsimp only [Adjunction.homEquiv, Equiv.coe_fn_mk]
+  ext V x
+  dsimp only [ordinaryPush]
+  exact isomorphismOrdinaryFiniteAugmentation_section l E g b hb P n a ha i V x
 
 end WeilConjectures.IntegralOnSlice
