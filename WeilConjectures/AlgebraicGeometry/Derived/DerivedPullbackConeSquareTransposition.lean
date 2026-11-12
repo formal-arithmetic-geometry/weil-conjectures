@@ -93,6 +93,8 @@ private theorem mappingCone_map_isIso
     {E : Type*} [Category E] [Preadditive E] [Abelian E] [HasBinaryBiproducts E]
     [HasDerivedCategory E]
     {P Q A B : CochainComplex E ℤ}
+    [∀ i, P.HasHomology i] [∀ i, Q.HasHomology i]
+    [∀ i, A.HasHomology i] [∀ i, B.HasHomology i]
     (p : P ⟶ Q) (t : A ⟶ B) (x : P ⟶ A) (y : Q ⟶ B)
     (h : p ≫ y = x ≫ t) (hx : QuasiIso x) (hy : QuasiIso y) :
     IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.map p t x y h)) := by
