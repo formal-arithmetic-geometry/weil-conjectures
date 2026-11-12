@@ -226,12 +226,6 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
         exact map_comp_factor L' c.derived γ v _ hbase
   refine ⟨c.derived ≫ γ, adj'.homEquiv _ _ v ≫ (eqToIso canonical').inv.app _, ?_⟩
   unfold modelLocalAdjunct modelExchange derivedExchange
-  change (derivedUpper Λ hS).map
-      (adj.homEquiv _ _ (cF.derived ≫ eX.localChern l X z) ≫
-        (eqToIso canonical).inv.app _) ≫
-      ((derivedUpper Λ hS).map ((eqToIso canonical).hom.app _) ≫
-        (Adjunction.exchangeRight adj adj' θ).app _ ≫
-        (eqToIso canonical').inv.app _) ≫ D'.R.map line.shift = _
   rw [conjugated_exchange_adjunct]
   refine (congrArg (fun a ↦ adj'.homEquiv _ _ a ≫
     (eqToIso canonical').inv.app _) hlocal).trans ?_
