@@ -63,6 +63,29 @@ lemma range_subset_range_coprod_desc_right {A B C : Scheme.{u}} (f : A ⟶ C) (g
   rintro _ ⟨s, rfl⟩
   exact ⟨(coprod.inr : B ⟶ A ⨿ B).base s, by rw [← Scheme.Hom.comp_apply, coprod.inr_desc]⟩
 
+/-- Membership in the image on constant special fibres can be checked on the ambient scheme. -/
+lemma mem_range_centreSpecialFibreMap_iff {k : Type u} [Field k]
+    (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
+    (f : X' ⟶ X) (I : X.left.IdealSheafData)
+    (y : (deformationSpecialFibre (centre X I) ⊥ k').left) :
+    y ∈ Set.range (centreSpecialFibreMap f I k').left.base ↔
+      I.subschemeι (constantSpecialFibreProj k' (centre X I) y) ∈ Set.range f.left.base := by
+  rw [range_centreSpecialFibreMap_eq_preimage, range_centreMap]
+
+/-- Projection to the ambient scheme commutes with the map on constant special fibres. -/
+lemma centreSpecialFibreMap_toBase_apply {k : Type u} [Field k]
+    (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
+    (f : X' ⟶ X) (I : X.left.IdealSheafData)
+    (x : (deformationSpecialFibre (centre X' (I.comap f.left)) ⊥ k').left) :
+    I.subschemeι (constantSpecialFibreProj k' (centre X I)
+      ((centreSpecialFibreMap f I k').left x)) =
+      f.left ((centreι X' (I.comap f.left)).left
+        (constantSpecialFibreProj k' (centre X' (I.comap f.left)) x)) := by
+  rw [← Scheme.Hom.comp_apply, centreSpecialFibreMap_constantSpecialFibreProj,
+    Scheme.Hom.comp_apply]
+  exact congrArg (fun g ↦ g.left (constantSpecialFibreProj k'
+    (centre X' (I.comap f.left)) x)) (centreMap_centreι f I)
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   [hk' : Fact (ringChar k').Prime] [hk'ℓ : Fact (ringChar k' ≠ ℓ)]
@@ -193,16 +216,13 @@ theorem isZero_specializationDefect_of_isFinite (N : ℕ)
   have hyv : y ∈ Set.range (centreSpecialFibreMap v H k').left.base := by
     have h₁ : H.subschemeι (constantSpecialFibreProj k' (centre _ H) y) ∉
         Set.range (overProjectiveLineInfinity (polyAffine k (N + 1))).left.base := by
-      rintro ⟨m, hm⟩
-      refine hy₁ ?_
-      rw [range_centreSpecialFibreMap_eq_preimage, range_centreMap]
-      exact ⟨m, hm⟩
+      intro h
+      exact hy₁ ((mem_range_centreSpecialFibreMap_iff k' _ H y).2 h)
     have h₂ : Set.range v.left.base = Set.range (polyAffineChart k (N + 1)).left.base := by
       change Set.range (ψ.hom.left ≫ (polyAffineChart k (N + 1)).left).base = _
-      rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
-        Set.range_eq_univ.mpr (Surjective.surj (f := ψ.hom.left)), Set.image_univ]
-    rw [range_centreSpecialFibreMap v H k', Set.mem_preimage, ← Category.assoc,
-      Scheme.Hom.comp_apply, h₂, range_polyAffineChart, Set.mem_compl_iff]
+      rw [← Scheme.Hom.coe_opensRange, Scheme.Hom.opensRange_comp_of_isIso,
+        Scheme.Hom.coe_opensRange]
+    rw [mem_range_centreSpecialFibreMap_iff k' v H, h₂, range_polyAffineChart]
     exact h₁
   rcases hyv with ⟨x, hxy⟩
   by_cases hx : constantSpecialFibreProj k' (centre _ _) x ∈ U
@@ -216,18 +236,10 @@ theorem isZero_specializationDefect_of_isFinite (N : ℕ)
   · -- outside `U`, the point lies over `a`
     rcases hY ⟨_, hx, rfl⟩ with ⟨s, hs⟩
     refine absurd ?_ hy₂
-    rw [← hxy, range_centreSpecialFibreMap_eq_preimage, range_centreMap]
+    apply (mem_range_centreSpecialFibreMap_iff k' aO H y).2
     refine ⟨s, ?_⟩
-    have h₁ : constantSpecialFibreProj k' (centre _ H) ((centreSpecialFibreMap v H k').left x) =
-        (centreMap v H).left (constantSpecialFibreProj k' (centre _ (H.comap v.left)) x) := by
-      rw [← Scheme.Hom.comp_apply, centreSpecialFibreMap_constantSpecialFibreProj,
-        Scheme.Hom.comp_apply]
-    have h₂ (w : (centre (polyAffine k (N + 2)) (H.comap v.left)).left) :
-        H.subschemeι ((centreMap v H).left w) =
-          v.left ((centreι (polyAffine k (N + 2)) (H.comap v.left)).left w) :=
-      congrArg (fun f ↦ f.left w) (centreMap_centreι v H)
     change v.left (a s) = _
-    rw [hs, h₁, h₂]
+    rw [← hxy, centreSpecialFibreMap_toBase_apply, hs]
 
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`. -/
 theorem isZero_specializationDefect_polyAffine_succ (N : ℕ)
