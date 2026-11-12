@@ -322,7 +322,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-set_option maxHeartbeats 1200000 in
 set_option trace.profiler true in
 -- Comparing tensor objects and both derived scalar actions requires extensive instance search.
 /-- Restriction of localized coefficients is the normalized scalar telescope.
