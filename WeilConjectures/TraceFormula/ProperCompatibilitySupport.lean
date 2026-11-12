@@ -47,7 +47,6 @@ namespace Correspondence.FixedLocus
 
 variable {c : Correspondence ℓ K} (F : c.FixedLocus)
 
-set_option profiler true in
 /-- **The exceptional adjoint of the support isomorphism** (blueprint
 `def-trf-kernel-pushforward-maps`, item 8, last assertion): the `Rc_! ⊣ Rc^!`-adjoint of
 `ζ_c : Rι_* ω_Fix(c) ⟶ Rc^! RΔ_* ω_X` is
@@ -116,7 +115,6 @@ lemma lowerStarDualizingComplexTrace_eq (a : Xc ⟶ Yb) [IsProper a.left] :
         lowerShriekDualizingComplexTrace ℓ a := by
   rw [lowerStarDualizingComplexTrace, lowerShriekDualizingComplexTrace]
 
-set_option profiler true in
 /-- The exchange of the support isomorphisms along a map of squares, in terms of the
 exceptional adjoints of the support isomorphisms (blueprint `lem-trf-trace-map-exchange`, (2),
 proof): the two maps `Rb_! Rg_* Rιc_* ω ⟶ RΔb_* ω` agree. -/
@@ -189,7 +187,6 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
   (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
 
-set_option profiler true in
 /-- **Exchange of the support isomorphisms** (blueprint `lem-trf-trace-map-exchange`, (2)):
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`, read through `g ∘ i_c = i_b ∘ h`. -/
 theorem lowerStar_map_supportIso_comp_exchange :
@@ -231,11 +228,10 @@ theorem lowerStar_map_supportIso_comp_exchange :
       eqToHom (by rw [P.diag_comp_prodMap]) ≫
       (boundedConstructibleLowerStarComp ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
       (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
-  rw [Category.id_comp] at hm
-  rw [lowerStarUpperShriekExchange, ← hm]
-  rw [Equiv.symm_apply_apply]
+  simp only [Category.id_comp] at hm
+  simp only [lowerStarUpperShriekExchange, ← hm, Equiv.symm_apply_apply]
   simp only [Adjunction.homEquiv_naturality_left_symm]
-  rw [Fc.homEquiv_symm_supportIso_hom, Fb.homEquiv_symm_supportIso_hom,
+  simp only [Fc.homEquiv_symm_supportIso_hom, Fb.homEquiv_symm_supportIso_hom,
     CategoryTheory.Functor.map_id, Category.id_comp]
   have key := lowerStar_square_trace_exchange ℓ Fc.ι_support Fb.ι_support P.g_comp_support
     P.diag_comp_prodMap (P.fixMap_ι Fc Fb).symm whd
