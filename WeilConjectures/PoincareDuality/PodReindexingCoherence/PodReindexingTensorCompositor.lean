@@ -329,7 +329,7 @@ private theorem generator_restrict (W : Scheme.{u})
         ((SheafOfModules.tensorObjIsoSheafification (R := R) (P.X p) (L.X q)).inv.val.app V)
         hu.symm))))
 
--- The three transported total-complex presentations need additional elaboration time.
+-- Compose the pure-section equations directly, without rewriting the transported total complexes.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
 private theorem tensor_chain_square {X Y Z : Scheme.{u}}
@@ -415,13 +415,13 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
 private theorem tensor_compositor_paste {C : Type*} [Category C]
     {A₀ A B D B' D' T H F G K U V W M N S D₁ : C}
     (u : A₀ ⟶ A) [Epi u] (t : D ⟶ D') [Mono t]
-    (c : A ⟶ B) (d : B ⟶ D) (k : A ⟶ V) (g : V ⟶ W) (h : W ⟶ D)
-    (a : A₀ ⟶ T) (qH : T ⟶ H) (rH : H ⟶ B') (vA : B ⟶ B')
-    (vK : B' ⟶ D') (qT : H ⟶ U) (rZ : U ⟶ D')
-    (qk : T ⟶ K) (qG : K ⟶ S) (qh : S ⟶ U)
-    (k₀ : A₀ ⟶ F) (e : F ⟶ G) (f : G ⟶ K) (r : F ⟶ V)
-    (vE : D ⟶ D₁) (vF : D₁ ⟶ D') (gE : W ⟶ N) (h' : N ⟶ D₁)
-    (gq : G ⟶ M) (gr : M ⟶ N) (f' : M ⟶ S)
+    {c : A ⟶ B} {d : B ⟶ D} {k : A ⟶ V} {g : V ⟶ W} {h : W ⟶ D}
+    {a : A₀ ⟶ T} {qH : T ⟶ H} {rH : H ⟶ B'} {vA : B ⟶ B'}
+    {vK : B' ⟶ D'} {qT : H ⟶ U} {rZ : U ⟶ D'}
+    {qk : T ⟶ K} {qG : K ⟶ S} {qh : S ⟶ U}
+    {k₀ : A₀ ⟶ F} {e : F ⟶ G} {f : G ⟶ K} {r : F ⟶ V}
+    {vE : D ⟶ D₁} {vF : D₁ ⟶ D'} {gE : W ⟶ N} {h' : N ⟶ D₁}
+    {gq : G ⟶ M} {gr : M ⟶ N} {f' : M ⟶ S}
     (hs : d ≫ t = vA ≫ vK)
     (hc : u ≫ c ≫ vA = a ≫ qH ≫ rH)
     (hr : qT ≫ rZ = rH ≫ vK)
@@ -555,9 +555,7 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
   have hkNat := k.derived.hom.naturality rY
   change H.map rY ≫ k.derived.hom.app _ =
     k.derived.hom.app _ ≫ G.map (F.map rY) at hkNat
-  exact tensor_compositor_paste (H.map rY) t
-    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-    hs hc hr hchain hk hkNat ht' hn hga hb hf
+  exact tensor_compositor_paste (H.map rY) t hs hc hr hchain hk hkNat ht' hn hga hb hf
 
 -- The representative argument involves three exact derived functors.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
