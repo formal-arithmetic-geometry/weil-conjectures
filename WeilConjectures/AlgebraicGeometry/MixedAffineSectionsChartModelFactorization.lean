@@ -28,6 +28,7 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- The chart carrier and the two localization universes require additional elaboration.
 /-- Localization transports the ordinary unit equation to the fixed mixed
