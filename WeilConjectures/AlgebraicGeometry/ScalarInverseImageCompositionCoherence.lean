@@ -75,8 +75,6 @@ private theorem constant_homEquiv (k : Type w) [Field k]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
-set_option maxHeartbeats 500000 in
 -- The two coherence computations unfold several composed sheaf adjunctions.
 /-- The normalized inverse-image comparison respects constant units and module coefficients.
 Source: Stacks Project, Tags 008I and 0097, composition of pullback adjunctions.
