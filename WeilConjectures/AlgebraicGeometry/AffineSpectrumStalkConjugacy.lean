@@ -85,7 +85,6 @@ private theorem postcompose_comparison_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
 -- The two squares require elaborating distinct nested stalk cohomology models.
 /-- Pointwise comparison arrows are conjugate when the spectrum representatives
 are the termwise pullbacks. This does not construct such representatives, nor
