@@ -136,6 +136,7 @@ set_option quotPrecheck false in
 set_option hygiene false in
 local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 
+set_option trace.profiler true in
 set_option maxHeartbeats 2000000 in
 -- The representative assembles several large localized and sectionwise comparisons.
 /-- The whole-system reduction mate has an ordinary quotient representative.
