@@ -302,7 +302,7 @@ theorem etaleBrownRestrictionImageCube
     (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).rightDerivedFunctor
     (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).rightDerivedFunctor
     (PV.scalar h).restriction (PW.scalar h).restriction
-    (RV.derived m) (RW.derived m) (RV.derived n) (RW.derived n)
+    (RV.val.derived m) (RW.val.derived m) (RV.val.derived n) (RW.val.derived n)
     (Sheaf.derivedRestrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
     (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
     (B.level m).directUnit (B.level n).directUnit
@@ -310,7 +310,7 @@ theorem etaleBrownRestrictionImageCube
     (rightUnitNT (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g))
     (B.level m).computes
     (PV.scalar h).restrictionFactors (PW.scalar h).restrictionFactors
-    (RV.factors m) (RW.factors m) (RV.factors n) (RW.factors n)
+    (RV.val.factors m) (RW.val.factors m) (RV.val.factors n) (RW.val.factors n)
     (Sheaf.restrictScalars V.smallEtaleTopology
       (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
     (Sheaf.restrictScalars W.smallEtaleTopology
@@ -323,7 +323,7 @@ theorem etaleBrownRestrictionImageCube
     (coefficient_right_normalized O t g A PW PV B h)
     (brown_image_normalized O t g A PW PV B RV RW rg m)
     (brown_image_normalized O t g A PW PV B RV RW rg n)
-    (by rw [hδ]; exact geometric_restriction_normalized _ g)
+    (hδ.symm ▸ geometric_restriction_normalized (strictEtaleBrownRingMap O t h) g)
     (RV.val.ordinaryRestriction h) (RW.val.ordinaryRestriction h)
     (RV.property.2.1 h) (RW.property.2.1 h)
     (etaleBrownOrdinaryRestrictionCube O t g A PW PV B RV RW rg h)
