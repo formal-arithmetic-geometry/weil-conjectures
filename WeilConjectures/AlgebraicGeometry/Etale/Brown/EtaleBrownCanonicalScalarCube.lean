@@ -169,12 +169,17 @@ theorem strictEtaleBrownCanonicalScalarCube
   have hw : (mateEquiv (PW.scalar h).derivedAdj an
       (.mk _ _ _ _ (RW.scalar h).inv)) = .mk _ _ _ _ (RW.val.restriction h).hom :=
     RW.property.2.2 h
-  exact mateEquiv_app_cube_converse_of_eq
-    (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
+  apply mateEquiv_app_cube_converse (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
     τ (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
-    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv
-    δ.hom (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom
-    (RV.val.restriction h).hom (RW.val.restriction h).hom
-    ht hs hw hr hc Y
+    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv ?_ Y
+  intro X
+  change pn.inv.app _ ≫ (RV.derived n).map
+      ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
+        (.mk _ _ _ _ τ)).app X) ≫
+      (mateEquiv (PV.scalar h).derivedAdj av (.mk _ _ _ _ (RV.scalar h).inv)).app _ =
+    _ ≫ (mateEquiv an av (.mk _ _ _ _
+      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)).app _ ≫ _
+  rw [ht, hr, hw, hs]
+  exact hc X
 
 end AlgebraicGeometry
