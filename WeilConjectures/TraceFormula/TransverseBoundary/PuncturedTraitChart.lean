@@ -249,7 +249,9 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     simp only [u, IsUnit.unit_spec, hι, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Iso.op_hom, Scheme.Spec_map, Quiver.Hom.unop_op, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
-    rw [hcancel hU.isoPullback, hnat, hnat]
+    rw [hcancel hU.isoPullback]
+    rw [hnat]
+    rw [hnat]
     congr 2
     exact (IsLocalization.map_eq (S := Localization.Away (ρ.hom t)) (Q := Sm)
       (Submonoid.le_comap_map _) (ρ.hom t)).trans (eK.symm.commutes π).symm
