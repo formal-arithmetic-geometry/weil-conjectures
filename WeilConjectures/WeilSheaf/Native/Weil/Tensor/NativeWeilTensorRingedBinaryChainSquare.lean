@@ -37,10 +37,7 @@ def nativeRingedChainBridgeSquare :
       nativeChainForgetU (T := T) ⋙ D.b.ordinary.functor.mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex D.b.square (.up ℤ)
 
-set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
 -- Both normalized site tensors occur in this square.
-set_option maxHeartbeats 1600000 in
 -- The degreewise comparison crosses three concrete total constructions.
 /-- The normalized comparisons commute for a single pair of native complexes.
 Source: Stacks 06YS, 06YU and 0FPT
