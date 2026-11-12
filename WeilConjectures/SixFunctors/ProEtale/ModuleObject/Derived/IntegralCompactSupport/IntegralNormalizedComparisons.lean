@@ -57,6 +57,13 @@ attribute [local irreducible] DerivedCategory.monoidalClosed
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+private def restrict_comparison {C D : Type*} [Category C] [Category D]
+    {P Q : ObjectProperty C} (h : P ≤ Q) {F G : C ⥤ D}
+    (e : Q.ι ⋙ F ≅ Q.ι ⋙ G) : P.ι ⋙ F ≅ P.ι ⋙ G :=
+  NatIso.ofComponents (fun K ↦ e.app ((ObjectProperty.ιOfLE h).obj K)) (by
+    intro K L a
+    exact e.hom.naturality ((ObjectProperty.ιOfLE h).map a))
+
 private theorem iso_eq_of_hom_inv {C : Type*} [Category C] {X Y : C}
     (a b : X ≅ Y) (h : a.hom ≫ b.inv = 𝟙 X) : a = b := by
   apply Iso.ext
@@ -162,9 +169,7 @@ private theorem comparisonsForCoefficient
     let φ (c d : Compactifications k f) :
         candidate Λ k (X := X) (Y := Y) (f := f) c ≅
           candidate Λ k (X := X) (Y := Y) (f := f) d :=
-      NatIso.ofComponents (fun K ↦ (ψ ⟨c⟩ ⟨d⟩).app (J.obj K)) (by
-        intro K L a
-        exact (ψ ⟨c⟩ ⟨d⟩).hom.naturality (J.map a))
+      restrict_comparison (le_of_eq he.symm) (ψ ⟨c⟩ ⟨d⟩)
     refine ⟨φ, ?_, ?_, ?_⟩
     · intro c
       apply Iso.ext
