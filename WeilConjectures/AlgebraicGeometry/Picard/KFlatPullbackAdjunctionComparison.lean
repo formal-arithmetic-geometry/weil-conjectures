@@ -147,7 +147,8 @@ private theorem kFlat_pullback_adjunction_comparison_naturality
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map α) ≫
         (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) :
-    DerivedCategory.Q.{w}.map a =
+    (DerivedCategory.Q.{w}
+      (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).map a =
       (kFlat_pullback_adjunction_comparison_iso g ε P hεP).hom ≫
         (adj.homEquiv _ _).symm
           (DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I) := by
