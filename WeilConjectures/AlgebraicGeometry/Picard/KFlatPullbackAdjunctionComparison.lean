@@ -116,7 +116,7 @@ private theorem kFlat_pullback_adjunction_comparison_iso_inv
         (DerivedCategory.quotientCompQhIso
           (SheafOfModules.{u} (moduleRings S'.toRingedSpace))).hom.app
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) := by
-  dsimp [kFlat_pullback_adjunction_comparison_iso, Iso.trans_inv, Iso.symm_inv,
+  simp [kFlat_pullback_adjunction_comparison_iso, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -213,6 +213,7 @@ theorem kFlat_pullback_adjunction_comparison
   let hεP_inst : IsIso (ε.app (q.obj P)) := hεP P hP
   dsimp only [e]
   rw [kFlat_pullback_adjunction_comparison_iso_inv]
+  dsimp only [Functor.mapIso_inv]
   simp only [Category.assoc]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality a]
   rw [Adjunction.homEquiv_naturality_left]
