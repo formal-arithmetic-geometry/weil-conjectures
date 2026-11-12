@@ -189,11 +189,6 @@ private theorem localized_cone_square_transposition
           (Category.assoc _ _ _)
     · exact he _ hconeP _ _
 
--- Cache the finite biproduct instance used by all three cone comparisons.
-local instance coneSquare_hasBinaryBiproducts (S : Scheme.{u}) :
-    HasBinaryBiproducts (SheafOfModules.{u} (moduleRings S.toRingedSpace)) :=
-  inferInstance
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
@@ -267,6 +262,8 @@ theorem derivedPullback_cone_square_transposition
   exact localized_cone_square_transposition
     (E := SheafOfModules.{u} (moduleRings S.toRingedSpace))
     (E' := SheafOfModules.{u} (moduleRings S'.toRingedSpace))
+    (L := Scheme.Modules.tensorPullback g)
+    (R := RingedSpace.moduleDirectImage g.toLRSHom.toShHom)
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g))
     (relativeMVAdj g) (schemeMVDirectImageLocalization g)
     (CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf)) e he
