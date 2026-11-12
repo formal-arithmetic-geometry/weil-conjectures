@@ -55,6 +55,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
 
 set_option Elab.async false in
+set_option maxHeartbeats 2000000 in
 set_option profiler true in
 -- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
@@ -76,26 +77,11 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
       (pointCompactSupportExchangeOfSeparated (y ≫ c.c₁) k') F j := by
   have hmem : (F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k)) ∈
       Set.range j.left.base := by rw [hB]; rfl
-  obtain ⟨b, hbj⟩ : ∃ b : RationalPoint B, b ≫ j = F.liftPoint y hc.comp_c₁_eq_comp_c₂ := by
-    have hh : Set.range (F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base ⊆
-        Set.range j.left.base := by
-      rintro _ ⟨p, rfl⟩
-      rwa [Subsingleton.elim (α := Spec (.of k)) p default]
-    exact ⟨Over.homMk (IsOpenImmersion.lift j.left _ hh) (by
-      rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac, Over.w]),
-      Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)⟩
+  obtain ⟨b, hbj, hbr⟩ := RationalPoint.exists_lift_of_range_eq_singleton j
+    (F.liftPoint y hc.comp_c₁_eq_comp_c₂) hB
   have hb : b ≫ j ≫ F.ι = y := by rw [← Category.assoc, hbj, FixedLocus.liftPoint_ι]
   have hI := hc.isIso_ΨF_map_componentCounit k' (hc.supportCompactSupportExchange k')
       (pointCompactSupportExchangeOfSeparated (y ≫ c.c₁) k') F j hmem
-  have hbr : Set.range b.left.base = Set.univ := by
-    refine Set.eq_univ_of_forall fun p ↦ ?_
-    obtain ⟨q, hq⟩ : j.left.base p ∈ Set.range j.left.base := ⟨p, rfl⟩
-    have h1 : j.left.base p ∈ ({((F.liftPoint y hc.comp_c₁_eq_comp_c₂).left.base
-        (default : Spec (.of k)))} : Set _) := hB ▸ ⟨p, rfl⟩
-    refine ⟨(default : Spec (.of k)), j.left.isOpenEmbedding.injective ?_⟩
-    rw [Set.mem_singleton_iff] at h1
-    rw [h1, ← hbj]
-    rfl
   have : IsProper (deformationTotalToTrait B b.left.ker k') :=
     isProper_deformationTotalToTrait_ker B k' hbr
   have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
@@ -221,6 +207,7 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
       (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as hSI
+  run_tac Lean.logInfo (← Lean.Meta.inferType (← Lean.Elab.Tactic.elabTerm (← `(hSI)) none))
   -- fact (II): the factorization of `ν_F` on `j_! ℚ̄_ℓ`
   have : IsProper (deformationSpecialFibreMap (j ≫ F.d)
       (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k').left := by
@@ -244,8 +231,10 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   instantiate_by_match CategoryTheory.exchange_app_eq_of_fixedSquare_aux
     [h := hFPE, hS3 := hS3, hS4 := hS4, hac := hac] as h1
+  run_tac Lean.logInfo (← Lean.Meta.inferType (← Lean.Elab.Tactic.elabTerm (← `(h1)) none))
   -- fact (III) glued to the unit class identity of `ν_B`
   instantiate_by_match CategoryTheory.comp_map_comp_comp_eq_of_eq' [h := h3, h' := hD] as h2
+  run_tac Lean.logInfo (← Lean.Meta.inferType (← Lean.Elab.Tactic.elabTerm (← `(h2)) none))
   -- the cancellation
   apply_by_match TraceSpecialization.specializesComponentClass_of_eq [j := j, hI := hI,
     h₁ := h1, h₂ := h2]
