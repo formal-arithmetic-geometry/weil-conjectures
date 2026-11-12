@@ -52,6 +52,7 @@ attribute [local irreducible] moduleCohomologyFMap sectionCohomologyTheta
 
 set_option backward.defeqAttrib.useBackward false in
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Compare the cycle kernels in the module, presheaf, and additive group categories.
 private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (n : ℕ)
@@ -128,6 +129,7 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [hp, hclass, hc]
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The edge formula and the resolution comparison use definitionally equal section functors.
 /-- The whole-open resolution section class is the cocycle-defined Leray edge.
 Source: Stacks Project, cohomology.tex, Tags 01E4 and 01F4.
