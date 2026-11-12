@@ -352,7 +352,7 @@ variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-omit [IsCurve (U ↘ Spec (.of K))] in
+omit [IsCurve (U ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] in
 /-- A compatible Galois conjugate of a chart gives a boundary neighbourhood for the conjugated
 Frobenius lift. -/
 lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.range j.base)
