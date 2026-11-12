@@ -65,7 +65,7 @@ private theorem composition_unit {X Y Z : Scheme.{u}}
 
 section
 
-private abbrev square_unit_cancel_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
+private def square_unit_cancel_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
         Scheme.Modules.restrictFunctor (pullback.fst k U.ι) ≅
