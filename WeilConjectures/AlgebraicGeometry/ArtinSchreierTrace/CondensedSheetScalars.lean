@@ -75,7 +75,6 @@ private theorem pointEnd_pullback_unit
   unfold regularUnitIso
   convert h using 1 <;> rfl
 
-set_option maxHeartbeats 400000 in
 -- Internal-module coefficient comparisons need additional kernel conversion.
 /-- Constant coefficient multiplication commutes with restriction to a sheet.
 Source: blueprint lem-fd-as-characters, weighted character averaging

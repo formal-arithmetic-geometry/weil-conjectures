@@ -35,7 +35,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Affine carrier identifications require additional instance search.
 -- Affine carrier identifications require additional elaboration heartbeats.
 /-- K-flat extension models respect the extension adjunction unit.

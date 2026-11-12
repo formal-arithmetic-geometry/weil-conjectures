@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 open Modules
 
-set_option maxHeartbeats 500000 in
 -- Comparing the independent Ext instances exceeds the default elaboration heartbeat budget.
 /-- The explicit comparison map, rather than an arbitrary family of equivalences,
 intertwines the two structure-sheaf pullback operations.

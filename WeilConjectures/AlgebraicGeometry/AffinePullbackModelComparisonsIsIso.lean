@@ -76,9 +76,7 @@ def affineModelPullbackComparison {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R
       ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫
     (DerivedCategory.quotientCompQhIso _).hom.app _
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Affine carrier identifications require additional instance search.
-set_option maxHeartbeats 400000 in
 -- Affine carrier identifications require additional elaboration heartbeats.
 /-- The two canonical comparison maps used to form the affine pullback sections model
 are invertible on a K-flat associated-sheaf complex.

@@ -167,7 +167,6 @@ section ExtensionByZeroLimit
 
 variable {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search for the sections of the sheafified Kan extension is slow
 /-- **A section of an extension by zero vanishes on a cover of the complement.** For a section
 `r` of `j_! G` over an object `B` of the affine pro-étale site, there is a morphism `B' ⟶ B` of

@@ -173,7 +173,6 @@ private meta def coefficientCongrGoal : TacticM Unit := do
 attribute [local irreducible] coefficient line firstProjection secondProjection square
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
 
-set_option maxHeartbeats 400000 in
 -- Keep the large coefficient constructions folded during the mate specialization.
 /-- The scalar exchange preserves the positive Chern generator equation in the
 some coefficient case.

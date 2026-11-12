@@ -274,7 +274,6 @@ private theorem homEquiv_identity_factorization
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Match the affine sheaf module carriers in the pinned adjunction.
 -- Match the chosen left-derived counit across the scheme module abbreviation.
 private theorem pinned_unit_fac
@@ -308,9 +307,7 @@ private theorem pinned_unit_fac
 
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Affine carrier identifications require additional instance search.
-set_option maxHeartbeats 400000 in
 -- Affine carrier identifications require additional elaboration heartbeats.
 /-- Before cancelling comparisons, the normalized derived pullback unit agrees with
 its ordinary model. This identity holds for every complex, without K-flatness.

@@ -48,7 +48,6 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
-set_option maxHeartbeats 400000 in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

@@ -22,7 +22,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 400000 in
 -- The chart restriction scalar structures require extra elaboration fuel.
 /-- The chart-associated module has its original module as sections on the chart.
 Source: Stacks Project, Tag 01I7, lemma-compare-constructions; Tag 01HV,

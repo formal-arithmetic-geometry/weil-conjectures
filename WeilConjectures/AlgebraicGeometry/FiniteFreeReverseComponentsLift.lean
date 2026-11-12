@@ -56,7 +56,6 @@ private theorem transport_lift
         (T.mapIso bN).hom ≫ (T.mapIso bN).inv ≫ (e.app N).inv = _
       simp only [Iso.hom_inv_id_assoc]
 
-set_option maxHeartbeats 400000 in
 -- Termwise restriction and pullback require additional definitional-equality checks.
 /-- Lift a family of reverse-degree maps, without any equations involving the differential.
 
