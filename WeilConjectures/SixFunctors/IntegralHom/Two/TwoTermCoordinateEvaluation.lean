@@ -59,9 +59,32 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
 
+/-- Test a total-tensor component after postcomposition into a Hom-complex term.
+The tensor and Hom extensionality reductions are shared by all four coordinates. -/
+private theorem twoTermCoordinate_component_ext
+    (A P I : CochainComplex (Modules.{t, u} Y R) ℤ)
+    (a b j n : ℤ) (hab : a + b = j) {M : Modules.{t, u} Y R}
+    (f : (((totalTensor Y R).obj A).obj Q).X j ⟶ M)
+    {g : M ⟶ (homComplex (R := R) P I).X n}
+    {g' : (((totalTensor Y R).obj A).obj Q).X j ⟶ (homComplex (R := R) P I).X n}
+    (h : ∀ (p : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+      (v : (A.X a).val.obj U) (z : (Q.X b).val.obj U) (x : (P.X p).val.obj U),
+      localEvaluation Y R _ _ U
+        ((g ≫ homComplexπ (R := R) P I n p (p + n) rfl).val.app U
+          (f.val.app U (generator Y R A Q a b j hab U v z))) x =
+      localEvaluation Y R _ _ U
+        ((homComplexπ (R := R) P I n p (p + n) rfl).val.app U
+          (g'.val.app U (generator Y R A Q a b j hab U v z))) x) :
+    CochainComplex.ιMapBifunctor A Q (ordinaryTensor Y R) a b j hab ≫ f ≫ g =
+      CochainComplex.ιMapBifunctor A Q (ordinaryTensor Y R) a b j hab ≫ g' := by
+  apply homComplex_hom_ext (R := R)
+  intro p q hpq
+  subst q
+  apply tensorHomEvaluation_ext.{t + 1, t, u} R
+  intro U v z x
+  exact h p U v z x
+
 set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Four coordinate checks use sheafified tensors and Hom products; elapsed time stays below 60 s.
 /-- A homogeneous signed evaluation map has the two invertible finite coordinates.
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1; Stacks 0A8X.
 (blueprint: lem-sf-two-term-coordinate-evaluation).
@@ -117,23 +140,10 @@ theorem twoTermCoordinate_isIso
     · subst b
       obtain rfl : a = j + 1 := by omega
       apply biprod.hom_ext
-      · apply homComplex_hom_ext (R := R)
-        intro p q hpq
-        subst q
-        apply tensorHomEvaluation_ext.{t + 1, t, u} R
-        intro U v z x
-        dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
-          ModuleCat.comp_apply]
-        change localEvaluation Y R _ _ U
-          ((((twoTermHomIso Y R P I Q hzero eNeg eZero j).hom ≫ biprod.fst ≫
-            homComplexπ (R := R) P I (j + 1) p (p + (j + 1)) rfl).val.app U)
-              (f.val.app U (generator Y R H Q (j + 1) (-1) j (by omega) U v z))) x =
-          localEvaluation Y R _ _ U
-            ((homComplexπ (R := R) P I (j + 1) p (p + (j + 1)) rfl).val.app U
-              ((((twoTermTensorIso Y R H Q hzero eNeg eZero j).hom ≫
-                biprod.fst).val.app U)
-                  (generator Y R H Q (j + 1) (-1) j (by omega) U v z))) x
-        rw [hom_fst_evaluation, generator_neg_fst]
+      · simp only [Category.assoc]
+        apply twoTermCoordinate_component_ext Y R Q H P I (j + 1) (-1) j (j + 1) (by omega) f
+        intro p U v z x
+        rw [Category.assoc, hom_fst_evaluation, generator_neg_fst]
         have hs := hgen (j + 1) (-1) (by omega) p U v z x
         rw [hs]
         simp only [neg_one_mul, Int.negOnePow_neg, Units.smul_def, map_zsmul]
@@ -142,23 +152,10 @@ theorem twoTermCoordinate_isIso
         simp only [map_smul, LinearMap.smul_apply]
         rw [localEvaluation_π]
         simp
-      · apply homComplex_hom_ext (R := R)
-        intro p q hpq
-        subst q
-        apply tensorHomEvaluation_ext.{t + 1, t, u} R
-        intro U v z x
-        dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
-          ModuleCat.comp_apply]
-        change localEvaluation Y R _ _ U
-          ((((twoTermHomIso Y R P I Q hzero eNeg eZero j).hom ≫ biprod.snd ≫
-            homComplexπ (R := R) P I j p (p + j) rfl).val.app U)
-              (f.val.app U (generator Y R H Q (j + 1) (-1) j (by omega) U v z))) x =
-          localEvaluation Y R _ _ U
-            ((homComplexπ (R := R) P I j p (p + j) rfl).val.app U
-              ((((twoTermTensorIso Y R H Q hzero eNeg eZero j).hom ≫
-                biprod.snd).val.app U)
-                  (generator Y R H Q (j + 1) (-1) j (by omega) U v z))) x
-        rw [hom_snd_evaluation, generator_neg_snd]
+      · simp only [Category.assoc]
+        apply twoTermCoordinate_component_ext Y R Q H P I (j + 1) (-1) j j (by omega) f
+        intro p U v z x
+        rw [Category.assoc, hom_snd_evaluation, generator_neg_snd]
         have hs := hgen (j + 1) (-1) (by omega) p U v z x
         rw [hs]
         simp only [Units.smul_def, map_zsmul]
@@ -169,45 +166,19 @@ theorem twoTermCoordinate_isIso
         have ha : a = j := by omega
         subst a
         apply biprod.hom_ext
-        · apply homComplex_hom_ext (R := R)
-          intro p q hpq
-          subst q
-          apply tensorHomEvaluation_ext.{t + 1, t, u} R
-          intro U v z x
-          dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
-            ModuleCat.comp_apply]
-          change localEvaluation Y R _ _ U
-            ((((twoTermHomIso Y R P I Q hzero eNeg eZero j).hom ≫ biprod.fst ≫
-              homComplexπ (R := R) P I (j + 1) p (p + (j + 1)) rfl).val.app U)
-                (f.val.app U (generator Y R H Q j 0 j (by simp) U v z))) x =
-            localEvaluation Y R _ _ U
-              ((homComplexπ (R := R) P I (j + 1) p (p + (j + 1)) rfl).val.app U
-                ((((twoTermTensorIso Y R H Q hzero eNeg eZero j).hom ≫
-                  biprod.fst).val.app U)
-                    (generator Y R H Q j 0 j (by simp) U v z))) x
-          rw [hom_fst_evaluation, generator_zero_fst]
+        · simp only [Category.assoc]
+          apply twoTermCoordinate_component_ext Y R Q H P I j 0 j (j + 1) (by omega) f
+          intro p U v z x
+          rw [Category.assoc, hom_fst_evaluation, generator_zero_fst]
           have hs := hgen j 0 (by simp) p U v z x
           rw [hs]
           simp only [zero_mul, Int.negOnePow_zero, one_smul]
           rw [generator_zero_fst]
           simp only [map_zero, LinearMap.zero_apply, smul_zero]
-        · apply homComplex_hom_ext (R := R)
-          intro p q hpq
-          subst q
-          apply tensorHomEvaluation_ext.{t + 1, t, u} R
-          intro U v z x
-          dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
-            ModuleCat.comp_apply]
-          change localEvaluation Y R _ _ U
-            ((((twoTermHomIso Y R P I Q hzero eNeg eZero j).hom ≫ biprod.snd ≫
-              homComplexπ (R := R) P I j p (p + j) rfl).val.app U)
-                (f.val.app U (generator Y R H Q j 0 j (by simp) U v z))) x =
-            localEvaluation Y R _ _ U
-              ((homComplexπ (R := R) P I j p (p + j) rfl).val.app U
-                ((((twoTermTensorIso Y R H Q hzero eNeg eZero j).hom ≫
-                  biprod.snd).val.app U)
-                    (generator Y R H Q j 0 j (by simp) U v z))) x
-          rw [hom_snd_evaluation, generator_zero_snd]
+        · simp only [Category.assoc]
+          apply twoTermCoordinate_component_ext Y R Q H P I j 0 j j (by omega) f
+          intro p U v z x
+          rw [Category.assoc, hom_snd_evaluation, generator_zero_snd]
           have hs := hgen j 0 (by simp) p U v z x
           rw [hs]
           simp only [zero_mul, Int.negOnePow_zero, one_smul]
