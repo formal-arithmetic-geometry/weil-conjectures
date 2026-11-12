@@ -300,7 +300,9 @@ private lemma pointComplexComp_naturality (Λ : ScalarSixRing.{u})
     (pointComplexComp Λ f C).hom ≫
       ((pointPull Λ X).mapHomologicalComplex (.up ℤ)).map g := by
   have h := (Functor.mapHomologicalComplexCompIso (pointModuleComp Λ f) (.up ℤ)).hom.naturality g
-  simpa only [pointComplexComp, Functor.comp_map] using h
+  dsimp only [pointComplexComp, Iso.app_hom, Functor.comp_map, Functor.comp_obj] at h ⊢
+  run_tac withMainContext do
+    structuralCast (← getMainGoal) (← getLocalDeclFromUserName `h).toExpr
 
 -- The ordinary square on complexes is determined by its degree-zero coefficient summand.
 private lemma total_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
@@ -495,6 +497,7 @@ private lemma coherence
       rw [Functor.LaxMonoidal.μ_natural_left]
 
 -- Compute the localized ordinary square independently of the final counit cancellation.
+set_option profiler true in
 private lemma normalized_beta_pullback_computes
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
@@ -526,8 +529,6 @@ private lemma normalized_beta_pullback_computes
       DerivedCategory.Q.map ((betaTotalNatIso a S t X).hom.app FC) := by
   dsimp only
   let F := CondensedRing.upperStar Λ.X f
-  let FC := (F.mapHomologicalComplex (.up ℤ)).obj C
-  let c := F.mapDerivedCategoryFactors.hom.app C
   let wY : complex Λ S Y ⊗ C ⟶
       ((Mod.comap (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj
         (((Mod.extendScalars (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj C) :=
