@@ -392,7 +392,8 @@ private theorem fixedRestriction_unit_comp (T : Scheme.{u}) (O : Type (u + 1)) [
     ((unit T (coefficient O t n)).app U).hom.comp (quotientMap O t h) =
       ((coefficientQuotientMap (J := T.smallEtaleTopology) O t h).hom.app U).hom.comp
         ((unit T (coefficient O t m)).app U).hom := by
-  ext a
+  apply RingHom.ext
+  intro a
   exact ConcreteCategory.congr_hom (congr_app
     (toSheafify_naturality T.smallEtaleTopology
       ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
@@ -441,6 +442,9 @@ private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     have (U : T.Etaleᵒᵖ) : IsIso ((α.app M).hom.app U) :=
       inferInstanceAs (IsIso (fixedRestrictionSection T O t h M U).hom)
     have : IsIso (α.app M).hom := NatIso.isIso_of_isIso_app _
+    have : IsIso ((sheafToPresheaf T.smallEtaleTopology
+        (ModuleCat.{u + 1} (coefficient O t m))).map (α.app M)) :=
+      inferInstanceAs (IsIso (α.app M).hom)
     exact isIso_of_reflects_iso _ (sheafToPresheaf T.smallEtaleTopology _)
   let := NatIso.isIso_of_isIso_app α
   exact asIso α
