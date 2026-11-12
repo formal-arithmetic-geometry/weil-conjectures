@@ -97,8 +97,8 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
   dsimp only [Functor.comp_obj, coefficientSequenceEvaluation, SheafOfModules.pushforward,
     PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
     PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
-    PresheafOfModules.restrictScalarsObj] at h1 h4 ⊢
-  trace_state
+    PresheafOfModules.restrictScalarsObj, ModuleCat.ofHom_apply,
+    CategoryTheory.Prod.sectR, Functor.op] at h1 h4 ⊢
   exact h1.symm.trans h4
 
 
