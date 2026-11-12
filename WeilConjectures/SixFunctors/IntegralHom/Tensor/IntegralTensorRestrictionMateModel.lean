@@ -1186,12 +1186,15 @@ theorem restrictionTensor_mate_model
   obtain ⟨Z, t, hZ, _, ht, _⟩ := hres
   have : IsIso (q.map t) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso (Modules.{u, u} X R) t).2 ht
-  have hcP : IsIso (c.app P) :=
-    MateDerived.reductionCounit_isIso l E X D hl n P hP
-  have hcZ : IsIso (c.app Z) :=
-    MateDerived.reductionCounit_isIso l E X D hl n Z hZ
-  have hcQ : IsIso (c.app Q) :=
-    MateDerived.reductionCounit_isIso l E X D hl n Q hQ
+  have hcP : IsIso (c.app P) := by
+    simpa only [c, MateDerived.reductionNat_app] using
+      (MateDerived.reductionCounit_isIso l E X D hl n P hP)
+  have hcZ : IsIso (c.app Z) := by
+    simpa only [c, MateDerived.reductionNat_app] using
+      (MateDerived.reductionCounit_isIso l E X D hl n Z hZ)
+  have hcQ : IsIso (c.app Q) := by
+    simpa only [c, MateDerived.reductionNat_app] using
+      (MateDerived.reductionCounit_isIso l E X D hl n Q hQ)
   let t' : F.obj Z ⟶ F.obj Q := (adj₀.homEquiv Z (F.obj Q)).symm t
   have hZ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
   have normZ := m.normalization P Z hP hZ₀
