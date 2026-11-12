@@ -324,7 +324,7 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
     rw [h_tensor]
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
   clear h_tensor
-  set_option pp.maxSteps 100 in
+  set_option pp.maxSteps 1000 in
     trace_state
   have h_coherence₁ := boundedConstructibleUpperStarComp_square_coherence_comp
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
