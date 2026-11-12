@@ -141,6 +141,7 @@ theorem stalkAtIhomPairing_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     LinearEquiv.coe_coe, stalkAtIhomPairing_apply, stalkAtIhomPairing_apply]
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The kernel needs more time to check the instantiation of the Frobenius compatibility.
 /-- The trace of the Frobenius on the stalk of the internal hom `[D, F]` out of a lisse Weil
