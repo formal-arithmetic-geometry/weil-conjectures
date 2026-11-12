@@ -80,6 +80,7 @@ private theorem restrictedSection_naturality
     rfl
   exact cast_map e f x
 
+set_option profiler true in
 private theorem inverseImageRoosComparisonComplex_fst_coordinate
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
