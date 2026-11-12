@@ -36,8 +36,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
 set_option linter.style.haveILetI false in
-set_option maxHeartbeats 1400000 in
--- Model selection and its nested derived-category terms exceed the default heartbeat limit.
 /-- Choose common affine residue models and representatives for the finite family.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
 (blueprint: new-picard-derived-fibre-residue-bridge)
@@ -113,14 +111,14 @@ theorem picard_derived_fibre_residue_bridge
                   (ui i) (hui i))).left) 1
               ((affineResidueModelEquiv W w U hwU hU p hpEq _ K hK m).trans e z) := by
   classical
-  dsimp only
-  obtain ⟨U, hwU, hU, p, hp, hpEq, K, C, hK, hC, hE, hCi⟩ :=
-    picard_derived_fibre_residue_model_data f Xi fi ui hui L W k w s hw τ
-  letI : p.IsPrime := hp
-  obtain ⟨φ, e, ei, hnat⟩ :=
-    picard_derived_fibre_residue_bridge_core f Xi fi ui hui L W k w s hw τ
-      U hwU hU p hpEq K C hK hC hE.some (fun i ↦ (hCi i).some)
-  exact ⟨U, hwU, hU, p, hp, hpEq, K, C, hK, hC, hE.some, fun i ↦ (hCi i).some,
-    φ, e, ei, hnat⟩
+  exact (picard_derived_fibre_residue_model_data f Xi fi ui hui L W k w s hw τ).elim
+    fun U h ↦ h.elim fun hwU h ↦ h.2.elim fun p h' ↦ h'.elim fun hp h' ↦
+      h'.elim fun hpEq h' ↦ h'.elim fun K h' ↦ h'.elim fun C h' ↦ by
+        letI : p.IsPrime := hp
+        exact ⟨U, hwU, h.1, p, hp, hpEq, K, C, h'.1, h'.2.1,
+          h'.2.2.1.some, fun i ↦ (h'.2.2.2 i).some,
+          picard_derived_fibre_residue_bridge_core f Xi fi ui hui L W k w s hw τ
+            U hwU h.1 p hpEq K C h'.1 h'.2.1 h'.2.2.1.some
+            (fun i ↦ (h'.2.2.2 i).some)⟩
 
 end AlgebraicGeometry.Scheme
