@@ -238,7 +238,6 @@ end MateCalculus
 variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
 -- The representative comparison unfolds both normalized derived open adjunctions.
 private theorem open_evaluation_mate
@@ -296,7 +295,6 @@ private theorem open_evaluation_mate
   rw [← DerivedCategory.Q.map_comp, Iso.hom_inv_id_app]
   erw [DerivedCategory.Q.map_id, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
 -- Two successive Hom transposes involve the full strict etale derived packages.
 /-- Explicit mate-pasting remainder for the open singleton evaluation.
