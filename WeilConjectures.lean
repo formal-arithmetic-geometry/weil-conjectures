@@ -18258,6 +18258,7 @@ public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.RingHom.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import WeilConjectures.Mathlib.RingTheory.SimpleModule.Basic
 public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
@@ -22111,6 +22112,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchangeFinite
 public import WeilConjectures.SixFunctors.NearbyCycles.ProperTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.PushforwardExchangeSquare
 public import WeilConjectures.SixFunctors.NearbyCycles.RestrictOpens
+public import WeilConjectures.SixFunctors.NearbyCycles.RestrictScalars
 public import WeilConjectures.SixFunctors.NearbyCycles.StrictlyHenselianTrait
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeFiniteCoefficient
@@ -23758,6 +23760,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTran
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldUpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldUpperStarCompForget
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueReductionBounded
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RestrictScalarsMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.StalkZeroLocus
@@ -25448,6 +25451,7 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentSpecializatio
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.TraceFormula.Specialization.ConstantFamilySmoothUnit
+public import WeilConjectures.TraceFormula.Specialization.ConstantFixedLocus
 public import WeilConjectures.TraceFormula.Specialization.ContractingFixedComponent
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.ContractingSquaring
@@ -25480,6 +25484,8 @@ public import WeilConjectures.TraceFormula.Specialization.ExceptionalExchangeCom
 public import WeilConjectures.TraceFormula.Specialization.ExceptionalTensor
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
+public import WeilConjectures.TraceFormula.Specialization.FiniteCoefficientConstantComap
+public import WeilConjectures.TraceFormula.Specialization.FiniteCoefficientConstantTriangle
 public import WeilConjectures.TraceFormula.Specialization.FinitePointConservative
 public import WeilConjectures.TraceFormula.Specialization.FinitePointReflection
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
@@ -25705,6 +25711,7 @@ public import WeilConjectures.TraceFormula.Specialization.SliceTraitValuation
 public import WeilConjectures.TraceFormula.Specialization.SmoothBaseChangePadicAlgCl
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
+public import WeilConjectures.TraceFormula.Specialization.SpecializedCoefficient
 public import WeilConjectures.TraceFormula.Specialization.SpecializedCorrespondenceSection
 public import WeilConjectures.TraceFormula.Specialization.StructuralProduct
 public import WeilConjectures.TraceFormula.Specialization.SupportClosureProper
@@ -25724,6 +25731,7 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowModel
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginReducedUnit
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginRestrictedUnit
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginTorsionModule
 public import WeilConjectures.TraceFormula.Specialization.TraceClassSpecialization
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
@@ -25803,6 +25811,7 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionCartier
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
+public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishingOfIsZero
 public import WeilConjectures.TraceFormula.SquaringFixedLocus
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.StalkDualizable

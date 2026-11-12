@@ -130,10 +130,10 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
   [Finite T]
 
 /-- **The thick origin for a finite free module, with finite coefficients** (blueprint
-`lemma-case-z-v-x-m`, for `M = T^J` with `J` finite and `T` a finite ring killed by a prime
-`ℓ ≠ char k'`): for `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(⨁_J T̲)` vanishes. -/
+`lemma-case-z-v-x-m`, for `M = T^J` with `J` finite and `T` a finite ring killed by a power of a
+prime `ℓ ≠ char k'`): for `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(⨁_J T̲)` vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_biproduct_unit_finiteCoefficient
-    (hT : (ℓ : T) = 0) {m : ℕ} (hm : 0 < m) (J : Type*) [Finite J] :
+    {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) (J : Type*) [Finite J] :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'
       (Profinite.continuousMapRingObj.{u} T) (⨁ fun _ : J ↦ 𝟙_ _)) :=
   isZero_specializationDefect_biproduct _ _ k' _ _ fun _ ↦
@@ -141,21 +141,21 @@ theorem isZero_specializationDefect_polyAffineThickOrigin_biproduct_unit_finiteC
 
 /-- **The thick origin for the constant complex of a finite free module, with finite
 coefficients** (blueprint `lemma-case-z-v-x-m`, for `M` finite free over a finite ring `T` killed
-by a prime `ℓ ≠ char k'`; every finite `T`-module is free when `T` is a field): for `m ≥ 1`, the
-defect `C_{𝔸¹, V(x^m)}(M_X)` of the constant complex `M_X` vanishes. -/
+by a power of a prime `ℓ ≠ char k'`; every finite `T`-module is free when `T` is a field):
+for `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(M_X)` of the constant complex `M_X` vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_finiteCoefficientConstant
-    (hT : (ℓ : T) = 0) {m : ℕ} (hm : 0 < m) (M : ModuleCat.{u + 1} (ULift.{u + 1} T))
+    {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) (M : ModuleCat.{u + 1} (ULift.{u + 1} T))
     [Module.Free (ULift.{u + 1} T) M] [Module.Finite (ULift.{u + 1} T) M] :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'
       (Profinite.continuousMapRingObj.{u} T)
       ((finiteCoefficientConstantFunctor T (polyAffine k 1).left).obj M)) := by
   let G := finiteCoefficientConstantFunctor T (polyAffine k 1).left
   let R := ModuleCat.of (ULift.{u + 1} T) (ULift.{u + 1} T)
-  let n := Fintype.card (Module.Free.ChooseBasisIndex (ULift.{u + 1} T) M)
+  let r := Fintype.card (Module.Free.ChooseBasisIndex (ULift.{u + 1} T) M)
   let b := (Module.Free.chooseBasis (ULift.{u + 1} T) M).reindex
     (Fintype.equivFin (Module.Free.ChooseBasisIndex (ULift.{u + 1} T) M))
-  have e : M ≅ ⨁ fun _ : Fin n ↦ R :=
-    b.equivFun.toModuleIso ≪≫ (ModuleCat.biproductIsoPi fun _ : Fin n ↦ R).symm
+  have e : M ≅ ⨁ fun _ : Fin r ↦ R :=
+    b.equivFun.toModuleIso ≪≫ (ModuleCat.biproductIsoPi fun _ : Fin r ↦ R).symm
   have hR : IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'
       (Profinite.continuousMapRingObj.{u} T) (G.obj R)) :=
     (vanishingDefect (polyAffine k 1) (polyAffineThickOrigin k m) k' _).prop_of_iso

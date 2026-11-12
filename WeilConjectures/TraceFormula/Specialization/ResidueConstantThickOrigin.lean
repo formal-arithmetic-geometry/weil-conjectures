@@ -15,9 +15,9 @@ import WeilConjectures.Tactic.ExactModProofs
 
 # The thick origin with finite coefficients
 
-Let `T` be a finite discrete commutative ring in which a prime `ℓ ≠ char k'` vanishes, for instance
-the residue field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`. This file proves the thick origin
-(blueprint `det-sp-thick-origin`) with coefficients `T̲`: for `m ≥ 1`, the defect
+Let `T` be a finite discrete commutative ring killed by a power of a prime `ℓ ≠ char k'`, for
+instance the residue field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`. This file proves the thick
+origin (blueprint `det-sp-thick-origin`) with coefficients `T̲`: for `m ≥ 1`, the defect
 `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes
 (`ProEtale.CondensedRing.isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient`).
 
@@ -129,7 +129,7 @@ smooth over the trait, so by the smooth exchange with finite coefficients the pu
 `𝒟 ⟶ 𝒟_⊥ (Spec k)` is invertible at the unit, and the specialization unit of the trait is an
 isomorphism. -/
 theorem isIso_deformationModel_polyAffineThickOrigin_one_unit_finiteCoefficient
-    (hT : (ℓ : T) = 0) :
+    {n : ℕ} (hT : (ℓ : T) ^ n = 0) :
     IsIso ((deformationModel (polyAffine k 1) (polyAffineThickOrigin k 1) k').unit
       (Profinite.continuousMapRingObj.{u} T)) := by
   have hφ := isIso_pullbackExchange_deformationModel_app_of_smooth_finiteCoefficient k' T
@@ -149,8 +149,8 @@ theorem isIso_deformationModel_polyAffineThickOrigin_one_unit_finiteCoefficient
 /-- The specialization unit of the power model `𝒲` of the thick origin, with finite coefficients,
 is an isomorphism: its restriction along the universal homeomorphism `c` is the specialization unit
 of the deformation of the origin. -/
-theorem isIso_thickOriginPowSourceModel_unit_finiteCoefficient (hT : (ℓ : T) = 0) {m : ℕ}
-    (hm : m ≠ 0) :
+theorem isIso_thickOriginPowSourceModel_unit_finiteCoefficient {n : ℕ} (hT : (ℓ : T) ^ n = 0)
+    {m : ℕ} (hm : m ≠ 0) :
     IsIso ((thickOriginPowSourceModel k k' hm).unit (Profinite.continuousMapRingObj.{u} T)) := by
   have : IsIso ((thickOriginToPowSourceModel k k' hm).total) := inferInstanceAs (IsIso (𝟙 _))
   have : IsIso ((thickOriginToPowSourceModel k k' hm).generic) := inferInstanceAs (IsIso (𝟙 _))
@@ -161,7 +161,7 @@ theorem isIso_thickOriginPowSourceModel_unit_finiteCoefficient (hT : (ℓ : T) =
 coefficients**: for the deformation `𝒟` of `V(x^m) ⊆ 𝔸¹_k` over `Spec k'⟦t⟧`, the restriction
 `Le^* σ_𝒟` of the specialization unit to the zero section is an isomorphism. -/
 theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin_finiteCoefficient
-    (hT : (ℓ : T) = 0) {m : ℕ} (hm : m ≠ 0) :
+    {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : m ≠ 0) :
     IsIso (L(((zeroSectionSpecialFibreMap (polyAffine k 1) (polyAffineThickOrigin k m)
       k').left)^*⟦Profinite.continuousMapRingObj.{u} T⟧).map ((deformationModel (polyAffine k 1)
         (polyAffineThickOrigin k m) k').unit (Profinite.continuousMapRingObj.{u} T))) := by
@@ -194,10 +194,10 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin_finiteCoefficient
   exact isIso_leftDerivedUpperStar_map_of_comp _ _ _ _ ho
 
 /-- **The thick origin with finite coefficients** (blueprint `det-sp-thick-origin`, with
-coefficients in a finite ring `T` killed by a prime `ℓ ≠ char k'`): for `m ≥ 1`, the defect
-`C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes. -/
+coefficients in a finite ring `T` killed by a power of a prime `ℓ ≠ char k'`): for `m ≥ 1`, the
+defect `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient
-    (hT : (ℓ : T) = 0) {m : ℕ} (hm : 0 < m) :
+    {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'
       (Profinite.continuousMapRingObj.{u} T) (𝟙_ _)) := by
   have := isIso_upperStar_zeroSection_unit_polyAffineThickOrigin_finiteCoefficient (k := k) T k' hT
