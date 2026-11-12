@@ -184,6 +184,15 @@ private theorem compositor_assoc_iff
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
       Functor.whiskerRight_app, Category.id_comp, Functor.map_comp] using h N
 
+-- Keep the objects in the two paths abstract while assembling their comparison.
+private theorem comp_pair_eq_triple
+    {C : Type*} [Category C] {A B D E F : C}
+    {a a' : A ⟶ B} {b b' : B ⟶ F} {c c' : A ⟶ D}
+    {d d' : D ⟶ E} {e e' : E ⟶ F}
+    (ha : a = a') (hb : b = b') (hc : c = c') (hd : d = d') (he : e = e')
+    (h : a' ≫ b' = c' ≫ d' ≫ e') : a ≫ b = c ≫ d ≫ e := by
+  rw [ha, hb, hc, hd, he, h]
+
 set_option profiler true in
 private theorem push_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)
@@ -214,11 +223,9 @@ private theorem push_assoc {S X T W : RingedVertex.{u}}
   have hm : (SheafOfModules.toSheaf _).map (a.push.map ((pushComp b d).hom.app N)) =
       (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map
         ((SheafOfModules.toSheaf _).map ((pushComp b d).hom.app N)) := rfl
-  exact (congrArg₂ (· ≫ ·) hab ha).trans (H.trans
-    (congrArg₂ (· ≫ ·)
-      (hm.trans (congrArg
-        (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map hbd))
-      (congrArg₂ (· ≫ ·) hb hc)).symm)
+  exact comp_pair_eq_triple hab ha
+    (hm.trans (congrArg
+      (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map hbd)) hb hc H
 
 attribute [local irreducible] proEtaleRingModuleDirectImage
 
