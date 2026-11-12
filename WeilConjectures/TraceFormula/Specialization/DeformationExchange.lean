@@ -55,7 +55,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
 
 set_option Elab.async false in
-set_option maxHeartbeats 2000000 in
 set_option profiler true in
 -- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
