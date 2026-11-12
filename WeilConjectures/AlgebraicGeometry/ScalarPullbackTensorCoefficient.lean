@@ -126,8 +126,9 @@ private theorem scalar_tensor_comparison_of_sections (t : Y ⟶ X)
   funext U
   apply ModuleCat.MonoidalCategory.tensor_ext
   intro s r
-  simpa only [NatTrans.comp_app, ModuleCat.comp_apply,
-    Monoidal.FunctorCategory.tensorHom_app, ModuleCat.MonoidalCategory.tensorHom_tmul] using h U s r
+  simp only [NatTrans.comp_app, ModuleCat.comp_apply]
+  erw [Monoidal.FunctorCategory.tensorHom_app, ModuleCat.MonoidalCategory.tensorHom_tmul]
+  exact h U s r
 
 private theorem scalar_pullback_adjunct_app
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -139,6 +140,7 @@ private theorem scalar_pullback_adjunct_app
   unfold scalarPullbackCoefficient
   exact Classical.choose_spec (exists_scalarPullbackCoefficient f g t ht H) U.unop z
 
+set_option profiler true in
 /-- The scalar tensor coefficient commutes with the normalized module pullback
 comparison. This is an equality of coefficient sheaf morphisms, with no Ext classes.
 Source: Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
@@ -172,6 +174,7 @@ theorem scalarPullbackCoefficient_tensor
           scalarPullbackCoefficient f g t ht G) ≫
         scalarTensorCoefficient g ((tensorPullback t).obj F)
           ((tensorPullback t).obj G) := by
+  dsimp only [id]
   apply scalar_tensor_comparison_of_adjoints
   apply scalar_tensor_comparison_of_sections
   intro U s r
