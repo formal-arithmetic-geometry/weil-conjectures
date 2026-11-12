@@ -207,13 +207,13 @@ theorem derivedPullback_cone_square_transposition
       e _ hconeP ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map c)), ?_, ?_, ?_⟩
   · have hh := he P hP A' (x ≫ α)
     apply iso_comp_homEquiv (L := derivedPullback g)
-      (R := (relativeMVAdj g).right) (adj := relativeMVAdj g)
+      (R := schemeDerivedDirectImage g) (adj := relativeMVAdj g)
       (e := e P hP) (i := DerivedCategory.Q.map x)
       (f := DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app A')
     simpa only [Functor.map_comp, ac, adj₀, E, L] using hh
   · have hh := he Q hQ B' (y ≫ β)
     apply iso_comp_homEquiv (L := derivedPullback g)
-      (R := (relativeMVAdj g).right) (adj := relativeMVAdj g)
+      (R := schemeDerivedDirectImage g) (adj := relativeMVAdj g)
       (e := e Q hQ) (i := DerivedCategory.Q.map y)
       (f := DerivedCategory.Q.map β ≫ (schemeMVDirectImageLocalization g).app B')
     simpa only [Functor.map_comp, ac, adj₀, E, L] using hh
@@ -225,8 +225,9 @@ theorem derivedPullback_cone_square_transposition
     rw [hcone]
     have hh := congrArg (fun k ↦ DerivedCategory.Q.map
       (CochainComplex.mappingCone.mapHomologicalComplexIso p E).inv ≫ k) h
-    rw [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
-      Functor.map_comp, Adjunction.homEquiv_naturality_left_symm, Category.assoc]
-    exact hh
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
+      Functor.map_comp, Adjunction.homEquiv_naturality_left_symm, Category.assoc,
+      adj₀, E, L, c, F, G] at hh ⊢
+    convert hh using 2
 
 end AlgebraicGeometry
