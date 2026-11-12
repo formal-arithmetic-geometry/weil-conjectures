@@ -33,6 +33,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 
 -- Compare four independently normalized adjunctions.
 set_option profiler true in
+set_option maxHeartbeats 1600000 in
 /-- The scalar mate of the exact ordinary restriction square respects normalized
 Brown inverse-image realizations.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4.
