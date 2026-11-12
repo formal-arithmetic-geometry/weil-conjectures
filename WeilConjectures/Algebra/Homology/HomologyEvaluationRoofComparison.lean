@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Algebra.Homology.HomologyEvaluationRestrictionComparison
 import WeilConjectures.Algebra.Homology.HomologyEvaluationRoofNaturality
-import WeilConjectures.Algebra.Homology.HomComplexComponents
 
 /-! # Compatibility of homology evaluation with a quasi-isomorphism roof
 
@@ -23,6 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory
 
+-- Reuse the native Abelian structures without repeating the sheafification instance search.
 noncomputable local instance homologyEvaluationRoofComparisonAbelian (X : Scheme.{u}) :
     Abelian X.Modules :=
   SheafOfModules.instAbelian X.ringCatSheaf
@@ -170,13 +170,14 @@ theorem homologyEvaluation_roof_comparison (X : Scheme.{u})
     (asIso (HomologicalComplex.homologyMap p (-n))).op).app
       (((moduleOpenOverComplexFunctor X V W).obj J).homology 0))
   have hs : g ≫ bq.hom = Qmap ≫ inv Pmap ≫ f ≫ bp.hom := by
+    let π := Classical.choose
+      (homComplex_projections_exists.{u, u, u, u} (R := V.toScheme.sheaf.over W))
+    have hπ := Classical.choose_spec
+      (homComplex_projections_exists.{u, u, u, u} (R := V.toScheme.sheaf.over W))
     exact homologyEvaluation_roof_naturality (R := V.toScheme.sheaf.over W)
       ((moduleOpenOverComplexFunctor X V W).obj T) E L
       ((moduleOpenOverComplexFunctor X V W).obj J)
-      (homComplexπ (R := V.toScheme.sheaf.over W))
-      (homComplex_d_π (R := V.toScheme.sheaf.over W))
-      (fun _ _ _ _ ↦ homComplexFunctor_map_f_π (R := V.toScheme.sheaf.over W))
-      n q p g d f c hd hd' hc hc'
+      π hπ.2.1 hπ.2.2 n q p g d f c hd hd' hc hc'
   refine ⟨a₀ ≪≫ asIso Qmap ≪≫ (asIso Pmap).symm, b₀ ≪≫ bq ≪≫ bp.symm, ?_⟩
   exact homologyEvaluation_compose_roof_square (((Scheme.Modules.restrictFunctor V.ι).map e).over W)
     g f a₀ b₀ (asIso Qmap) (asIso Pmap) bq bp h₀ hs
