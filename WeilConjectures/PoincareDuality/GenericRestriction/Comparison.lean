@@ -246,6 +246,7 @@ variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmer
   {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the dévissage elaborates many derived functors of module objects
 omit [IsOpenImmersion j'] in
 /-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be a quasi-compact open immersion with
