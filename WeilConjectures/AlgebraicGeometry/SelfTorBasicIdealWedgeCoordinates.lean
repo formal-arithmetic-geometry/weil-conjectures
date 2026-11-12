@@ -83,7 +83,6 @@ private theorem conormal_wedge_coordinate_restrict
   rw [hz] at hs
   exact hs
 
-set_option maxHeartbeats 400000 in
 -- Keep the nested derived tensor and chart identifications folded during elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -181,7 +180,8 @@ theorem exists_basic_ideal_wedge_selfTor_coordinates
   have hU := conormal_wedge_coordinate_restrict i n U V h
     ((T U).obj _) (s U) b
   dsimp only at hU
-  rw [hs U b] at hU
+  have hU := hU.trans
+    (congrArg (((T U).obj _).val.map d.op) (hs U b))
   have hV := hs V bV
   have hm := PresheafOfModules.naturality_apply ((T U).map (c U)).val d.op
     (selfTorAffineSection i U _ (selfTorIdealWedge i U n b))
@@ -196,8 +196,13 @@ theorem exists_basic_ideal_wedge_selfTor_coordinates
         ((s V).hom.val.app (op (Over.mk (𝟙 _)))
           (Scheme.Modules.wedge (M := N) (r := n) (U := (i ⁻¹ᵁ V.1)) (fun j ↦ η.val.app (op V.1)
               (bV j)))))
-  rw [hU, hV, hm, hc, selfTorAffineSection_map]
-  exact ht V U h hbasic b
+  have hU' := (congrArg (((T U).map (c U)).val.app (op (i ⁻¹ᵁ V.1))) hU).trans
+    (hm.trans (congrArg (((T U).obj _).val.map d.op) hc))
+  have hV' := (congrArg (((T V).map (c V)).val.app (op (i ⁻¹ᵁ V.1))) hV).trans
+    (selfTorAffineSection_map i V (c V) (selfTorIdealWedge i V n bV))
+  exact (congrArg ((t U).hom.val.app (op (Over.mk d))) hU').trans
+    ((ht V U h hbasic b).trans
+      (congrArg ((t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))) hV').symm)
 
 
 end AlgebraicGeometry
