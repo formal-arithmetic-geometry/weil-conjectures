@@ -168,14 +168,14 @@ lemma μ_map_exceptionalKunnethMap_comp_restriction (j : U ⟶ Y) [IsOpenImmersi
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hα : ExceptionalKunnethMapRestriction ℓ j M) :
     Functor.LaxMonoidal.μ (boundedConstructibleUpperStar
-    (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)) _ _ ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).map
-      (exceptionalKunnethMap ℓ (Y := Y) M) ≫ (exceptionalKunnethTargetRestrictionIso ℓ j M).hom =
-    ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
-      ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
-      exceptionalKunnethMap ℓ (Y := U) M := by
+        (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)) _ _ ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).map
+        (exceptionalKunnethMap ℓ (Y := Y) M) ≫ (exceptionalKunnethTargetRestrictionIso ℓ j M).hom =
+      ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
+        ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
+        exceptionalKunnethMap ℓ (Y := U) M := by
   rw [hα, exceptionalKunnethSourceRestrictionIso_hom]
   simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
 
@@ -406,17 +406,18 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
     ((prodMapUpperStarSndIso ℓ j).app N) (kunnethVerdierSourceRestrictionIso ℓ j M N).hom
     (exceptionalKunnethTargetRestrictionIso ℓ j M).hom ?_
   simp only [kunnethVerdierSourceRestrictionIso_hom, verdierDualUpperStarIso_hom]
-  exact μ_map_swapEvPairing
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y))
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
-      (μ_boundedConstructibleUpperStar_braiding ℓ (prod.map (𝟙 X) j))
-      (prodMapUpperStarSndIso ℓ j).hom (μ_prodMapUpperStarSndIso_hom_app ℓ j)
-      ((prodMapUpperStarFstIso ℓ j).hom.app M) (dualizingComplexUpperStarIso ℓ j).hom
-      (exceptionalKunnethTargetRestrictionIso ℓ j M).hom (exceptionalKunnethMap ℓ (Y := Y) M)
-      (exceptionalKunnethMap ℓ (Y := U) M)
-      (μ_map_exceptionalKunnethMap_comp_restriction ℓ j M hα) N
+  have key := μ_map_swapEvPairing
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y))
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
+    (μ_boundedConstructibleUpperStar_braiding ℓ (prod.map (𝟙 X) j))
+    (prodMapUpperStarSndIso ℓ j).hom (μ_prodMapUpperStarSndIso_hom_app ℓ j)
+    ((prodMapUpperStarFstIso ℓ j).hom.app M) (dualizingComplexUpperStarIso ℓ j).hom
+    (exceptionalKunnethTargetRestrictionIso ℓ j M).hom (exceptionalKunnethMap ℓ (Y := Y) M)
+    (exceptionalKunnethMap ℓ (Y := U) M)
+    (μ_map_exceptionalKunnethMap_comp_restriction ℓ j M hα) N
+  convert key <;> rfl
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
