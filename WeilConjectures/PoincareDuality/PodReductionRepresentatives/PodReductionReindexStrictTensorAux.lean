@@ -75,6 +75,7 @@ theorem reductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     NatIso.mapHomologicalComplex_inv_app_f]
   exact Category.id_comp _
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- Elaborating the sections of the transported reduction maps is expensive.
 /-- Maps out of the ordinary reduction of a degree of a total tensor are determined by the
