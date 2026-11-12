@@ -134,6 +134,7 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 
 open CategoryTheory.RingedDerivedNative
 
+set_option profiler true in
 -- Compare the two Hom-complex models without unfolding the derived internal Hom.
 /-- Unsigned representative uncurrying agrees with the normalized right-tensor adjunction.
 
