@@ -53,7 +53,6 @@ noncomputable def integralScalarSMul (x : Padic.coefficientExtensionIntegers l L
     (R := completedIntegralCommRingSheafUnrestricted l L Y)
     (fun V ↦ integralScalarConstant l L Y V x) (fun g ↦ integralScalarConstant_map l L Y g x)
 
-set_option trace.profiler true in
 /-- Coordinates for the completed coefficient extension: the extension ⊣ restriction
 adjunction `Ord ⊣ Res`, an `𝒪_E`-basis `b` of `𝒪_L`, and coordinate maps `π j` with
 `π j ∘ ι i = δ i j` and `∑ j, ι j ∘ π j = 1`, where `ι i = Res (b i •) ∘ unit`.
@@ -100,9 +99,8 @@ theorem integralOrdinaryScalar_coordinates :
   have hobj₀ (M : integralTowerModules l E Y) :
       F.obj M = SheafOfModules.changeOfRings φ M := rfl
   have hmap₀ {M N : integralTowerModules l E Y} (f : M ⟶ N) :
-      F.map f =
-        eqToHom (hobj₀ M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
-          eqToHom (hobj₀ N).symm := by
+      F.map f = eqToHom (hobj₀ M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
+        eqToHom (hobj₀ N).symm := by
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     rfl
   obtain ⟨-, -, hO⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
@@ -122,8 +120,8 @@ theorem integralOrdinaryScalar_coordinates :
     have h := ha M (F.obj M) (𝟙 (F.obj M)) U m
     rw [eqToHom_refl, Category.id_comp, Adjunction.homEquiv_id] at h
     exact h
-  refine ⟨d, b, a, fun j ↦ Functor.whiskerRight (Functor.whiskerLeft
-    F (σ j)) _ ≫ εF, hb, ?_, ?_⟩
+  refine ⟨d, b, a,
+    fun j ↦ Functor.whiskerRight (Functor.whiskerLeft F (σ j)) _ ≫ εF, hb, ?_, ?_⟩
   · intro i j M
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
     apply SheafOfModules.hom_ext
