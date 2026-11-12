@@ -202,11 +202,11 @@ theorem representative_uncurry_evaluation
     have hn := chainEquiv_symm_naturality.{t + 1, t, u} J R
       P P L L I ((coefficientHomResolution.{u, t + 1, t} J R).obj I)
         (𝟙 P) (𝟙 L) r φ
-    simp only [op_id] at hn
-    erw [(homComplexFunctor (R := R)).map_id, NatTrans.id_app] at hn
-    simp only [Category.id_comp] at hn
-    erw [← prod_id', (coefficientTotalTensor.{u, t + 1, t} J R).map_id,
-      Category.id_comp] at hn
+    have htensor : (coefficientTotalTensor.{u, t + 1, t} J R).map
+        (X := (P, L)) (Y := (P, L)) (𝟙 P, 𝟙 L) = 𝟙 _ :=
+      (coefficientTotalTensor.{u, t + 1, t} J R).map_id (P, L)
+    rw [htensor] at hn
+    simp only [op_id, Functor.map_id, NatTrans.id_app, Category.id_comp] at hn
     change (chainEquiv.{t + 1, t, u} J R P L _).symm φ' =
       (chainEquiv.{t + 1, t, u} J R P L I).symm φ ≫ r at hn
     rw [hn] at hsquare
