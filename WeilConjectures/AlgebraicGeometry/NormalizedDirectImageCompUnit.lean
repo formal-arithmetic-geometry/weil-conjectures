@@ -48,6 +48,7 @@ local instance (Z : Scheme.{u}) : IsGrothendieckAbelian.{u} Z.Modules :=
   SheafOfModules.isGrothendieckAbelian _
 local instance (Z : Scheme.{u}) : Abelian.HasKInjectiveResolutions Z.Modules :=
   Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- The chosen composition comparison unfolds the two module-category presentations.
 /-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
