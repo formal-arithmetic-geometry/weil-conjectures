@@ -27,9 +27,7 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
--- Elaborating the fixed derived-adjunction choices requires additional heartbeats.
 /-- Naturality in the object of the canonical derived base-change map.
 Source: Stacks Project, cohomology.tex, Remark 08HY.
 (blueprint: lem-sc-mixed-tensor-pairing-base-change-naturality).
@@ -74,10 +72,7 @@ theorem mixedTensorPairing_baseChange_naturality
   have hq := q.naturality a
   dsimp only [Functor.comp_map, Functor.id_map] at hq
   unfold schemeDerivedBaseChangeMap
-  change _ ≫ (adj f').homEquiv _ _ _ = (adj f').homEquiv _ _ _ ≫ _
-  rw [← (adj f').homEquiv_naturality_left,
-    ← (adj f').homEquiv_naturality_right]
-  apply congrArg ((adj f').homEquiv _ _)
+  refine (adj f').homEquiv_naturality_left_square _ _ _ _ ?_
   dsimp only [q, t, eqToIso, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_inv_app, Functor.leftUnitor_hom_app] at hq
   simpa only [Category.id_comp, Category.comp_id, Category.assoc, eqToHom_app] using hq

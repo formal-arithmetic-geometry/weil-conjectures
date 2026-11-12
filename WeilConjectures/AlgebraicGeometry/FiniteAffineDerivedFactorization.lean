@@ -27,9 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- Unfolding the two ring-sheaf presentations and the derived composition consumes extra heartbeats.
 /-- Scalar restriction of the algebra-valued derived pushforward is the scheme pushforward.
 Source: Stacks Project, Tag 0AVW, final pushforward identification
 (blueprint: lem-sc-finite-affine-derived-factorization).
@@ -75,9 +73,12 @@ theorem finite_affine_derived_factorization {X Y : Scheme.{u}}
       (Under.mk (⟨f.c⟩ : Y.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf))
   let e : F ⋙ S ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
-  exact ⟨Functor.isoWhiskerLeft F.rightDerivedFunctor
-      S.rightDerivedFunctorIsoMapDerivedCategory ≪≫
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S).symm ≪≫
-    Functor.rightDerivedFunctorNatIso e⟩
+  let eS : S.rightDerivedFunctor ≅ S.mapDerivedCategory :=
+    S.rightDerivedFunctorIsoMapDerivedCategory
+  let eComp : (F ⋙ S).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ S.mapDerivedCategory :=
+    Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S
+  let eF : (F ⋙ S).rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
+    Functor.rightDerivedFunctorNatIso e
+  exact ⟨Functor.isoWhiskerLeft F.rightDerivedFunctor eS ≪≫ eComp.symm ≪≫ eF⟩
 
 end AlgebraicGeometry
