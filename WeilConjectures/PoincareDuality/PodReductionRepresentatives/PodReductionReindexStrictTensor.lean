@@ -275,7 +275,11 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have hR3 := congrArg (fun z ↦
     ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
       (reducedUnitSection l E X n _ (op U) z)) r4
-  have hR := hNat.symm.trans (hR1.trans (hR2.trans (hR3.trans r5)))
+  have hR01 := hNat.symm.trans hR1
+  have hR012 := hR01.trans hR2
+  have hR0123 := hR012.trans hR3
+  have hR := hR0123.trans r5
+  trace "PH199: right side completed"
   exact hL.trans hR.symm
 
 end WeilConjectures.PodReductionRepresentatives
