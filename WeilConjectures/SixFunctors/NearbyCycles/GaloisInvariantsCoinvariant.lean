@@ -134,7 +134,8 @@ private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
   rw [← adj.unit.naturality_assoc e.inv]
   rw [← Category.assoc (adj.unit.app A) R e.hom]
   rw [hR, Category.id_comp]
-  simpa only [Functor.id_map] using e.inv_hom_id
+  change e.inv ≫ e.hom = 𝟙 B
+  exact e.inv_hom_id
 
 -- the derived functors of the tower are large terms
 /-- **The derived trace projector is the projector onto the invariants, after any continuous
@@ -226,7 +227,8 @@ private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
   rw [← adj.unit.naturality_assoc e.inv]
   rw [← Category.assoc (adj.unit.app A) R e.hom]
   rw [hR, Category.id_comp]
-  simpa only [Functor.id_map] using e.inv_hom_id
+  change e.inv ≫ e.hom = 𝟙 B
+  exact e.inv_hom_id
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
