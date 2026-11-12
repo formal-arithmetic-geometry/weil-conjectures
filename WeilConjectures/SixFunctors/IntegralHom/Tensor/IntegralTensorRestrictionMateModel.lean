@@ -403,7 +403,6 @@ private theorem reductionNat_app
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (reductionNat l E X D hl n).app P = reductionCounit l E X D hl n P := rfl
 
-set_option profiler true in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionCounit_isIso
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -414,7 +413,6 @@ private theorem reductionCounit_isIso
     (IsIso.comp_isIso' (integralDerivedReduction_counit_isIso l E X D hl n P hP)
       (IsIso.comp_isIso' (Functor.map_isIso _ _) inferInstance))
 
-set_option profiler true in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem restrictionComparison_eq
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
@@ -711,7 +709,6 @@ private theorem beta_scalar (n : ℕ)
   erw [totalPair_smul_right, map_smul, hbeta]
   exact (reduction_smul X l E n _ V s _).symm
 
-set_option profiler true in
 -- The unit normalization crosses the finite coefficient wrappers.
 private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
     {V W : X.ProEtᵒᵖ} (i : V ⟶ W) (x : M.val.obj V) :
@@ -1079,7 +1076,6 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   completedIntegralCommRingSheafUnrestricted integralCoefficientCommRingSheaf
   integralCoefficientSheaf
 
-set_option profiler true in
 -- Keep the coefficient wrappers folded while elaborating the comparison squares.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
 This is a one-level calculation: no consecutive quotient map occurs in it.
@@ -1211,7 +1207,6 @@ theorem restrictionTensor_mate_model
   have ho :=
     MateOrdinary.ordinary_square_reductionUnits X l E D hl n P Q Z t betaZ betaQ
       (b Q) hbZ hbQ (hb Q)
-  trace "PH045: ordinary square complete"
   let repZ := m.target.representative.app (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩)
   let repQ := m.target.representative.app (⟨F.obj P, hFP'⟩, ⟨F.obj Q, hFQ⟩)
   have hr' := GenericMate.tensor_representative_naturality_second
@@ -1219,18 +1214,17 @@ theorem restrictionTensor_mate_model
     m.target.representative hFP hFZ hFQ t'
   have hTPZ : flat.{u, u} X R (TP.obj Z) :=
     coefficientTotalTensor_isKFlat.{u, u + 1, u} (Scheme.ProEt.topology X) R P Z hP hZ
-  trace "PH045: before generic mate"
   have hm := GenericMate.representative_mate a.tensor m.target.tensor L V adj m.mu
     q r F U adj₀ c h P Q Z TP T' e t (b Q) betaZ betaQ
     (a.representative.app (⟨P, hP⟩, ⟨Z, hZ⟩))
     (a.representative.app (⟨P, hP⟩, ⟨Q, hQ⟩)) (he Z hZ) (he Q hQ) repZ repQ
+  -- Rewrite the counit wrapper before matching the concrete normalization proofs.
   simp only [c, MateDerived.reductionNat_app] at hm
   have huZ := MateDerived.unit_compatibility l E X D hl n Z hZ
   have huTPZ := MateDerived.unit_compatibility l E X D hl n (TP.obj Z)
     hTPZ
   simp only [MateDerived.reductionNat_app] at huZ huTPZ
   have hh := hm hnZ hnQ hr' ho huZ huTPZ
-  trace "PH045: generic mate complete"
   have hc (K : CochainComplex (scalarReductionSource l E X) ℤ) :
       V.map (reductionCounit l E X D hl n K) ≫ h.hom.app (F.obj K) =
         sfReductionRepresentativeComparison l E X n K :=
