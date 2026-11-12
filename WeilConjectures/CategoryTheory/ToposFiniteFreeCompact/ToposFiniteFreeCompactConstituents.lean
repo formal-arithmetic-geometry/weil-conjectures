@@ -1063,9 +1063,9 @@ private theorem restriction_compositor_of_underlying_isos
     (hA.hom ≫ k ≫ F.map eA.inv ≫ fA.inv) ≫ n ≫ (fA'.hom ≫ fB.inv) =
       (hA.hom ≫ hB.inv) ≫ (hB.hom ≫ k ≫ F.map eB.inv ≫ fB.inv) := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
-  rw [← reassoc_of% hn, hm]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    ← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp]
+  rw [← reassoc_of% hn, hm, F.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← F.map_comp_assoc, eA.inv_hom_id, F.map_id, Category.id_comp]
 
 set_option profiler true in
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
