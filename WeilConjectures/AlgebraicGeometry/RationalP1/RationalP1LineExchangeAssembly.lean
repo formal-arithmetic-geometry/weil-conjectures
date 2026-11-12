@@ -494,7 +494,6 @@ private theorem option_exchange_paste
 end ProofHelpers
 
 -- Assemble and normalize the exchange before specializing the coefficient rings.
-set_option profiler true in
 private theorem option_line_exchange_square
     (l : ℕ) [Fact l.Prime] (c c' : Option (PadicAlgCl.FiniteIntermediateField l))
     (a : (coefficient.{u} l c).X ⟶ (coefficient l c').X) [IsMonHom a]
@@ -524,7 +523,6 @@ private theorem option_line_exchange_square
 set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
-set_option profiler true in
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
 This is the line-only substep of the rational P1 closure naturality proof; it has
