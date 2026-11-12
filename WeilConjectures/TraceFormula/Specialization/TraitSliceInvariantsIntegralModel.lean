@@ -47,6 +47,25 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+-- Share the tensor instances used by every derived pullback and extension of scalars.
+private instance integralModelTensorFour (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt P Q S U := by
+  infer_instance
+
+private instance integralModelTensorAssocLeft (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor P Q S := by
+  infer_instance
+
+private instance integralModelTensorAssocRight (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ P Q S := by
+  infer_instance
+
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 set_option profiler true in
@@ -241,6 +260,6 @@ lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
         ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C := by
   simpa only [MulEquiv.apply_symm_apply] using
     pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ
-      (GenericAut.galoisEquiv.symm τ) C
+      ((GenericAut.galoisEquiv (k' := k') (K := K)).symm τ) C
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
