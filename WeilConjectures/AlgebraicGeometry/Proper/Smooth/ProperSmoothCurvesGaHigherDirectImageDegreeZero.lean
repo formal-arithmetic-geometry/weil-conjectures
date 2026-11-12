@@ -50,6 +50,10 @@ attribute [local instance]
 
 namespace Scheme.Modules
 
+private theorem etaleTensorSectionsSheaf_map_eq {X : Scheme.{u}} (F : X.Modules)
+    [F.IsQuasicoherent] {U V : X.Etaleᵒᵖ} (g : U ⟶ V) :
+    (etaleTensorSectionsSheaf F).obj.map g = etaleTensorSectionsRestriction F g.unop := rfl
+
 private theorem exists_sections_addEquiv_of_isIso_unit {Y : Scheme.{u}} {M : Y.Modules}
     (f : M ⟶ SheafOfModules.unit Y.ringCatSheaf) [IsIso f] :
     ∃ b : Γ(M, ⊤) ≃+ Γ(Y, ⊤),
@@ -87,7 +91,7 @@ theorem exists_etaleTensorUnit_sections_natural_smul (X : Scheme.{u}) :
       (tensorPullbackObjUnitToUnit U.unop.hom)
   refine ⟨b, ?_, ?_⟩
   · intro U V g x
-    erw [hb, hb]
+    erw [etaleTensorSectionsSheaf_map_eq, hb, hb]
     exact etaleTensorUnitRestriction_equation g.unop x
   · intro U a x
     exact hs (op U) a x
