@@ -68,7 +68,7 @@ lemma Hom.boundedConstructiblePullbackExchange_lax_tensor
           (Functor.LaxMonoidal.μ (boundedConstructibleNearbyCycles hM) A B) ≫
         (φ.boundedConstructiblePullbackExchange ℓ hN hM).app (A ⊗ B) := by
   rw [boundedConstructibleNearbyCycles_μ, boundedConstructibleNearbyCycles_μ]
-  exact φ.boundedConstructiblePullbackExchange_tensor hN hM A B
+  transport_exact φ.boundedConstructiblePullbackExchange_tensor hN hM A B
 
 end NearbyCyclesModel
 
