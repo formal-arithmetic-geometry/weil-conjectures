@@ -956,9 +956,8 @@ private theorem identity_square_conjugate_sections {P T : Scheme.{u}} (p : P ⟶
   intro V
   apply ConcreteCategory.hom_ext
   intro m
-  simpa only [f, g, SheafOfModules.comp_val, PresheafOfModules.comp_app,
-    ModuleCat.comp_apply] using
-    (identity_square_conjugate_section_value p R S c a b e ha hb N V m)
+  change f.val.app V m = g.val.app V m
+  exact identity_square_conjugate_section_value p R S c a b e ha hb N V m
 
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
 private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
