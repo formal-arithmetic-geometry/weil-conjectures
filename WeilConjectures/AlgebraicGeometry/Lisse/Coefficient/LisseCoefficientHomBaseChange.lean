@@ -331,6 +331,31 @@ private theorem quotientCoordinateSheaf_tmul (b : Module.Basis ι R S) (I : Idea
   exact h.trans (ringQuotientCoordinate_tmul b I _ _ i s m)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
+private theorem quotientCoordinateSheaf_tmul_explicit (b : Module.Basis ι R S) (I : Ideal R)
+    (M : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} R))
+    (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥) (i : ι)
+    (U : Y.Etale) (s : S) (m : M.obj.obj (op U)) :
+    (quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
+      (((toSheafification Y.smallEtaleTopology
+        (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
+          (M.obj ⋙ ModuleCat.ringExtendScalars.{d + 1, d + 1}
+            (algebraMap R (S ⧸ I.map (algebraMap R S))))).app (op U)
+        (ModuleCat.ringExtensionTmul.{d + 1, d + 1}
+          (algebraMap R (S ⧸ I.map (algebraMap R S))) _ (Ideal.Quotient.mk _ s) m)) =
+      b.repr s i • m := by
+  have h := congrArg (fun v ↦ v.app (op U)
+      (ModuleCat.ringExtensionTmul.{d + 1, d + 1}
+        (algebraMap R (S ⧸ I.map (algebraMap R S)))
+          (M.obj.obj (op U)) (Ideal.Quotient.mk _ s) m))
+    (show Functor.whiskerRight (toSheafify Y.smallEtaleTopology
+        (M.obj ⋙ ModuleCat.ringExtendScalars.{d + 1, d + 1} _))
+          (ModuleCat.restrictScalars.{d + 1} _) ≫ (quotientCoordinateSheaf Y b I M hM i).hom =
+        quotientCoordinatePresheaf Y b I M hM i by
+      dsimp only [quotientCoordinateSheaf]
+      rw [← Category.assoc, sheafComposeIso_inv_fac, toSheafify_sheafifyLift])
+  exact h.trans (ringQuotientCoordinate_tmul b I _ _ i s m)
+
+omit [IsNoetherian Y] [Y.IsSeparated] in
 private theorem sheaf_sum_apply {A : Type (d + 1)} [Ring A]
     {M N : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A)}
     {α : Type*} (t : Finset α) (f : α → (M ⟶ N)) (U : Y.Etale)
@@ -448,11 +473,7 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
             (algebraMap R (S ⧸ I.map (algebraMap R S))) _ 1 (b.repr s i • x)) := by
       apply Finset.sum_congr rfl
       intro i _
-      change (quotientReconstructMap Y b I M i).hom.app (op U)
-        ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
-          (lisseCoherence_quotientScalarGenerator Y _ _ M U
-            (Ideal.Quotient.mk _ s) x)) = _
-      rw [quotientCoordinateSheaf_tmul]
+      rw [quotientCoordinateSheaf_tmul_explicit]
       dsimp only [quotientReconstructMap, ObjectProperty.FullSubcategory.comp_hom,
         NatTrans.comp_app]
       erw [ModuleCat.comp_apply, lisseCoherence_scalarSheafUnit_apply]
