@@ -566,7 +566,9 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     have hs := congrArg (fun g ↦ (scalarSixPull Λ f).map g) hNY
     simp only [Functor.map_comp] at hs
     rw [reassoc_of% hs]
-    erw [reassoc_of% F.mapDerivedCategoryFactors.hom.naturality wY]
+    have hnat := F.mapDerivedCategoryFactors.hom.naturality wY
+    dsimp only [Functor.comp_map] at hnat
+    rw [reassoc_of% hnat]
     have haug := congrArg (fun g ↦ DerivedCategory.Q.map g)
       (augmented_tensor_pull a S t f C)
     dsimp only [wY]
