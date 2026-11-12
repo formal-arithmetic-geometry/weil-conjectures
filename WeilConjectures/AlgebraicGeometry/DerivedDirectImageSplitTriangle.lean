@@ -112,6 +112,25 @@ private lemma directImageComparison_naturality (g : X ⟶ Y)
     Iso.inv_hom_id_assoc, ← Category.assoc, ← h, Category.assoc,
     Iso.inv_hom_id, Category.comp_id]
 
+private lemma comparison_boundary_of_epi
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (R : D ⥤ E) (F : C ⥤ E) (α : F ⟶ Q ⋙ R)
+    {K L M : C} (d : K ⟶ L) (t : K ⟶ M) [Epi (F.map d)]
+    (eL : R.obj (Q.obj L) ≅ F.obj L) (eM : R.obj (Q.obj M) ≅ F.obj M)
+    (hL : α.app L = eL.inv) (hM : α.app M = eM.inv)
+    (b : Q.obj L ⟶ Q.obj M) (hdt : Q.map d ≫ b = Q.map t)
+    {N : E} (s : F.obj M ⟶ N) (δ : F.obj L ⟶ N)
+    (hδ : F.map d ≫ δ = F.map t ≫ s) :
+    R.map b ≫ eM.hom ≫ s = eL.hom ≫ δ := by
+  apply (cancel_epi eL.inv).mp
+  rw [eL.inv_hom_id_assoc, ← hL]
+  apply (cancel_epi (F.map d)).mp
+  rw [← Category.assoc, α.naturality]
+  change (α.app K ≫ R.map (Q.map d)) ≫ (R.map b ≫ eM.hom ≫ s) = F.map d ≫ δ
+  rw [Category.assoc, ← R.map_comp_assoc, hdt, ← Category.assoc, ← α.naturality]
+  rw [Category.assoc, hM, eM.inv_hom_id_assoc]
+  exact hδ.symm
+
 set_option profiler true in
 -- Cone comparison identities elaborate through the module-sheaf instances.
 set_option backward.defeqAttrib.useBackward true in
@@ -248,46 +267,23 @@ theorem derivedModuleDirectImage_termwise_split_ses_triangle (g : X ⟶ Y)
         Functor.map_comp]
       have := CochainComplex.mappingCone.quasiIso_descShortComplex hImage
       infer_instance
-    have hnD := (directImageComparison g).naturality d
-    have hnT := (directImageComparison g).naturality t
-    simp only [Functor.comp_map] at hnD hnT
     have hdt : DerivedCategory.Q.map d ≫ DerivedCategory.triangleOfSESδ hS ≫
         (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app S.X₁ =
       DerivedCategory.Q.map t := by
       dsimp [d, t]
       rw [DerivedCategory.descShortComplex_triangleOfSESδ_assoc, Iso.hom_inv_id_app]
       exact Category.comp_id _
-    let R := derivedModuleDirectImage g
-    let a := directImageComparison g
-    let e := derivedModuleDirectImageKInjectiveIso g S.X₃
-    let e' := derivedModuleDirectImageKInjectiveIso g (S.X₁⟦(1 : ℤ)⟧)
-    let s := (moduleDirectImageLocalizedShiftIso g S.X₁).hom
-    let b := DerivedCategory.triangleOfSESδ hS
-    let q := (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app S.X₁
-    apply (cancel_epi e.inv).mp
-    apply (cancel_epi (DerivedCategory.Q.map (F.map d))).mp
-    calc
-      _ = (DerivedCategory.Q.map (F.map d) ≫ a.app S.X₃) ≫
-          (R.map b ≫ R.map q ≫ e'.hom ≫ s) := by
-        rw [directImageComparison_app, Category.assoc]
-      _ = (a.app (CochainComplex.mappingCone S.f) ≫ R.map (DerivedCategory.Q.map d)) ≫
-          (R.map b ≫ R.map q ≫ e'.hom ≫ s) :=
-        congrArg (fun f ↦ f ≫ (R.map b ≫ R.map q ≫ e'.hom ≫ s)) hnD
-      _ = a.app (CochainComplex.mappingCone S.f) ≫
-          R.map (DerivedCategory.Q.map d ≫ b ≫ q) ≫ e'.hom ≫ s := by
-        simp only [Functor.map_comp, Category.assoc]
-      _ = a.app (CochainComplex.mappingCone S.f) ≫
-          R.map (DerivedCategory.Q.map t) ≫ e'.hom ≫ s :=
-        congrArg (fun f ↦ a.app (CochainComplex.mappingCone S.f) ≫
-          R.map f ≫ e'.hom ≫ s) hdt
-      _ = (DerivedCategory.Q.map (F.map t) ≫ a.app (S.X₁⟦(1 : ℤ)⟧)) ≫
-          e'.hom ≫ s := by
-        rw [hnT, Category.assoc]
-      _ = DerivedCategory.Q.map (F.map t) ≫ s := by
-        rw [directImageComparison_app, Category.assoc, Iso.inv_hom_id_assoc]
-      _ = DerivedCategory.Q.map (F.map d) ≫ DerivedCategory.triangleOfSESδ hImage :=
-        (directImage_boundary g S hImage).symm
-      _ = _ := by rw [Iso.inv_hom_id_assoc]
+    simpa only [Functor.map_comp, Category.assoc] using
+      comparison_boundary_of_epi DerivedCategory.Q (derivedModuleDirectImage g)
+        (F ⋙ DerivedCategory.Q) (directImageComparison g) d t
+        (derivedModuleDirectImageKInjectiveIso g S.X₃)
+        (derivedModuleDirectImageKInjectiveIso g (S.X₁⟦(1 : ℤ)⟧))
+        (directImageComparison_app g S.X₃)
+        (directImageComparison_app g (S.X₁⟦(1 : ℤ)⟧))
+        (DerivedCategory.triangleOfSESδ hS ≫
+          (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app S.X₁) hdt
+        (moduleDirectImageLocalizedShiftIso g S.X₁).hom
+        (DerivedCategory.triangleOfSESδ hImage) (directImage_boundary g S hImage)
   let e : derivedModuleDirectImageSplitTriangle g S hS ≅
       DerivedCategory.triangleOfSES hImage :=
     Triangle.isoMk _ _ (derivedModuleDirectImageKInjectiveIso g S.X₁)
