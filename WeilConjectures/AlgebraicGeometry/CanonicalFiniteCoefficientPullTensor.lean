@@ -70,6 +70,7 @@ private theorem canonicalFixed_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
 
 set_option synthInstance.maxHeartbeats 0 in
 -- The composite adjunctions require large monoidal instance arguments.
+set_option profiler true in
 set_option maxHeartbeats 0 in
 -- The two composite adjunctions carry large monoidal structures.
 /-- The adjoint-normalized finite coefficient pullback comparison is monoidal
