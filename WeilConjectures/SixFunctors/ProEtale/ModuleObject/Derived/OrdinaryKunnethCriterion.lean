@@ -187,19 +187,24 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit
         ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))) ≫
         (pullbackSquareComparison Λ w).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
           L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A) := by
-  simp only [pullbackSquareComparison_hom_app]
-  simp only [← Category.assoc]
-  have hcomp := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-    (R((aX)_*⟦Λ⟧).obj A) (h := by rw [← sq₁.w])
-  have hcomp' := congrArg (fun z ↦ z ≫
-      ((leftDerivedUpperStarComp Λ p₁ aX).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
-        L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A))) hcomp
-  have hcomp'' := congrArg (fun z ↦
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app
-          (L((𝟙 S)^*⟦Λ⟧).obj (R((aX)_*⟦Λ⟧).obj A)) ≫ z) hcomp'
-  rw [hcomp'']
-  rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-    ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A)))]
+  let K := R((aX)_*⟦Λ⟧).obj A
+  let C := (leftDerivedUpperStarComp Λ p₁ aX).hom.app K ≫
+    L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A)
+  have hs := pullbackSquareComparison_hom_app Λ sq₁ K
+  have hw := pullbackSquareComparison_hom_app Λ w K
+  have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY) K
+    (h := by rw [← sq₁.w])
+  have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
+    ((leftDerivedUpperStarId Λ S).hom.app K)
+  calc
+    _ = _ := congrArg (fun z ↦
+      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hs
+    _ = _ := congrArg (fun z ↦
+      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hc
+    _ = _ := congrArg (fun z ↦ z ≫ C) hn
+    _ = _ := congrArg (fun z ↦
+      L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
+        ((leftDerivedUpperStarId Λ S).hom.app K)) ≫ z ≫ C) hw
 
 lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
     {p₂ : P ⟶ Y} {aY : Y ⟶ S}
@@ -212,20 +217,21 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
         ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)) ≫
         (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _ := by
-  simp only [pullbackSquareComparison_hom_app]
-  simp only [← Category.assoc]
-  have hcomp := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-    (R((aY)_*⟦Λ⟧).obj B) (h := by rw [← sq₂.w])
-  have hcomp' := congrArg (fun z ↦ z ≫
-      ((leftDerivedUpperStarComp Λ p₂ aY).hom.app (R((aY)_*⟦Λ⟧).obj B) ≫
-        L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B))) hcomp
-  have hcomp'' := congrArg (fun z ↦
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app
-          (L((𝟙 S)^*⟦Λ⟧).obj (R((aY)_*⟦Λ⟧).obj B)) ≫ z) hcomp'
-  rw [hcomp'']
-  rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-    ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)))]
-  simp
+  let K := R((aY)_*⟦Λ⟧).obj B
+  let C := (leftDerivedUpperStarComp Λ p₂ aY).hom.app K ≫
+    L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
+  have hs := pullbackSquareComparison_hom_app Λ sq₂ K
+  have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY) K
+    (h := by rw [← sq₂.w])
+  have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
+    ((leftDerivedUpperStarId Λ S).hom.app K)
+  calc
+    _ = _ := congrArg (fun z ↦
+      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hs
+    _ = _ := congrArg (fun z ↦
+      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫ z ≫ C) hc
+    _ = _ := by
+      simpa using congrArg (fun z ↦ z ≫ C) hn
 
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
