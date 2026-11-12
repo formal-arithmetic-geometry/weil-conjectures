@@ -78,30 +78,6 @@ lemma map_counit_eq_of_baseChange {A B : Type*} [Category A] [Category B]
   simp only [Category.assoc]
   rw [hδ, reassoc_of% e.naturality (θ.app M)]
 
-/-- Counit compatibility and base change compatibility imply compatibility after applying
-the functors to the point. -/
-lemma compToPoint_inv_app_comp_counit_comp_pullback {A B C : Type*}
-    [Category A] [Category B] [Category C] {jL : A ⥤ B}
-    {H : A ⥤ A} {H' : B ⥤ B} {aX : B ⥤ C} {aU : A ⥤ C}
-    {N N' : A} {M : B} (ε : jL.obj N ⟶ M) (ε' : jL.obj N' ⟶ H'.obj M)
-    (θ : H.obj N ⟶ N') (β : jL ⋙ H' ⟶ H ⋙ jL)
-    (pΦ : aX ⟶ H' ⋙ aX) (pΦU : aU ⟶ H ⋙ aU) (c : jL ⋙ aX ≅ aU)
-    (hε : H'.map ε = β.app N ≫ jL.map θ ≫ ε')
-    (hB : pΦ.app (jL.obj N) ≫ aX.map (β.app N) ≫ c.hom.app (H.obj N) =
-      c.hom.app N ≫ pΦU.app N) :
-    c.inv.app N ≫ aX.map ε ≫ pΦ.app M =
-      pΦU.app N ≫ aU.map θ ≫ c.inv.app N' ≫ aX.map ε' := by
-  have hp := pΦ.naturality ε
-  have hn := c.inv.naturality θ
-  have hB' : pΦ.app (jL.obj N) ≫ aX.map (β.app N) =
-      c.hom.app N ≫ pΦU.app N ≫ c.inv.app (H.obj N) := by
-    rw [← reassoc_of% hB, Iso.hom_inv_id_app]
-    simp
-  simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hp hn
-  rw [hp, hε]
-  simp only [Functor.map_comp]
-  rw [reassoc_of% hB', Iso.inv_hom_id_app_assoc, reassoc_of% hn]
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
@@ -251,22 +227,29 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
     (counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j K)
     (counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j _) hC1 hEx
   rw [weilUpperStarComparison_hom_app_eq ℓ j hj sq.toCommSq.flip]
-  have hfinal := compToPoint_inv_app_comp_counit_comp_pullback
-    (jL := boundedConstructibleLowerShriek ℓ j)
-    (H := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU)
-    (H' := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
-    (aX := boundedConstructibleLowerShriek ℓ (toPoint X))
-    (aU := boundedConstructibleLowerShriek ℓ (toPoint U))
+  have hcp := (compactPullback ℓ Φ).naturality
     (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
       (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app K)
-    (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
-      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app _)
+  have hn := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
     ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
       sq.toCommSq.flip).hom.app K)
-    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
-    (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
-    (boundedConstructibleLowerShriekCompToPoint ℓ j) hε hB
-  exact hfinal
+  have hB' : (compactPullback ℓ Φ).app ((boundedConstructibleLowerShriek
+        ℓ j).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ≫
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) =
+      (boundedConstructibleLowerShriekCompToPoint ℓ j).hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
+        (compactPullback ℓ ΦU).app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K) ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app _ := by
+    rw [← reassoc_of% hB, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hcp hn
+  rw [hcp, hε]
+  simp only [Functor.map_comp]
+  rw [reassoc_of% hB', Iso.inv_hom_id_app_assoc, reassoc_of% hn]
 
 end OpenImmersion
 
