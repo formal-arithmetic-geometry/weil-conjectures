@@ -51,7 +51,6 @@ attribute [local irreducible] moduleCohomologyFMap sectionCohomologyTheta
   resolutionSectionClass
 
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 500000 in
 -- Compare the cycle kernels in the module, presheaf, and additive group categories.
 private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (n : ℕ)
@@ -80,10 +79,13 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
   let E := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
     (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
   let P := (K.sc n).map (SheafOfModules.forget.{u} Y.ringCatSheaf)
-  let k := (P.isoCyclesOfIsLimit (KernelFork.mapIsLimit _ (K.sc n).cyclesIsKernel
-    (SheafOfModules.forget.{u} Y.ringCatSheaf))).inv
-  let c := (P.mapCyclesIso E).hom ≫ E.map k
-  let t := ((S.sc n).mapCyclesIso U).inv s
+  let k : P.cycles ⟶ (SheafOfModules.forget.{u} Y.ringCatSheaf).obj (K.cycles n) :=
+    (P.isoCyclesOfIsLimit (KernelFork.mapIsLimit _ (K.sc n).cyclesIsKernel
+      (SheafOfModules.forget.{u} Y.ringCatSheaf))).inv
+  let c : (P.map E).cycles ⟶
+      E.obj ((SheafOfModules.forget.{u} Y.ringCatSheaf).obj (K.cycles n)) :=
+    (P.mapCyclesIso E).hom ≫ E.map k
+  let t : (P.map E).cycles := ((S.sc n).mapCyclesIso U).inv s
   have hi : c ≫ Hom.app (K.iCycles n) ⊤ = (P.map E).iCycles := by
     change ((P.mapCyclesIso E).hom ≫ E.map k) ≫
       E.map ((SheafOfModules.forget.{u} Y.ringCatSheaf).map (K.iCycles n)) = _
@@ -103,12 +105,10 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hc : c t = z := by
     apply (AddCommGrpCat.mono_iff_injective (Hom.app (K.iCycles n) ⊤)).mp hm
     have hi' := ConcreteCategory.congr_hom hi t
-    change Hom.app (K.iCycles n) ⊤ (c t) = (P.map E).iCycles t at hi'
-    rw [hi', ht]
     have hz' := hz
     simp only [eqToHom_refl] at hz'
     rw [(I.cocomplex.X n).presheaf.map_id] at hz'
-    exact hz'
+    exact hi'.trans (ht.trans hz')
   have hp := ConcreteCategory.congr_hom (mapHomologyIso_inv_homologyπ U (S.sc n)) s
   have hclass := ConcreteCategory.congr_hom (section_comparison_cycles K n ⊤) t
   change (E.map (sectionCohomologyTheta K n))
@@ -125,9 +125,10 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [Iso.inv_hom_id_apply]
   change ((S.sc n).mapHomologyIso U).inv (S.homologyπ n s) =
     (P.map E).homologyπ t at hp
-  rw [hp, hclass, hc]
+  exact (congrArg (fun x ↦ (E.map (sectionCohomologyTheta K n))
+    ((P.mapHomologyIso E).hom x)) hp).trans
+      (hclass.trans (congrArg (Hom.app (K.homologyπ n) ⊤) hc))
 
-set_option maxHeartbeats 800000 in
 -- The edge formula and the resolution comparison use definitionally equal section functors.
 /-- The whole-open resolution section class is the cocycle-defined Leray edge.
 Source: Stacks Project, cohomology.tex, Tags 01E4 and 01F4.
@@ -155,11 +156,14 @@ theorem whole_open_leray_edge {X Y : Scheme.{u}} (f : X ⟶ Y)
   let K : CochainComplex (SheafOfModules.{u} Y.ringCatSheaf) ℕ :=
     ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
   let S := RingedSpace.globalSectionsComplex I
+  let U := forget₂ (ModuleCat ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+    AddCommGrpCat.{u}
+  -- Compare after the epimorphisms from cycles to cohomology.
+  apply (cancel_epi (U.map
+    (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv)).1
+  apply (cancel_epi (U.map (S.homologyπ n))).1
   apply ConcreteCategory.hom_ext
-  intro x
-  obtain ⟨y, rfl⟩ := (ConcreteCategory.bijective_of_isIso
-    (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv).2 x
-  obtain ⟨s, rfl⟩ := (ModuleCat.epi_iff_surjective (S.homologyπ n)).mp inferInstance y
+  intro s
   obtain ⟨z, hz, he⟩ :=
     (Classical.choose_spec (exists_lerayEdge_isIso_of_vanishing f)).1 n F I K rfl s
   have hc := sectionClass_top_cycle f I n s z hz
@@ -167,11 +171,9 @@ theorem whole_open_leray_edge {X Y : Scheme.{u}} (f : X ⟶ Y)
     (resolutionSectionClass I K ⊤ (Iso.refl _) n
       ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv
         (S.homologyπ n s))) = _
-  rw [hc]
   have he' := he.symm
   simp only [eqToHom_refl, HomologicalComplex.homologyMap_id,
-    Category.id_comp] at he'
-  rw [CategoryTheory.Functor.map_comp] at he'
-  exact he'
+    Category.id_comp, CategoryTheory.Functor.map_comp, ConcreteCategory.comp_apply] at he'
+  exact (congrArg (Hom.app (I.isoRightDerivedObj (pushforward f) n).inv ⊤) hc).trans he'
 
 end AlgebraicGeometry.Scheme.Modules
