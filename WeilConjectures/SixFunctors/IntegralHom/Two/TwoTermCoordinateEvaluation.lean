@@ -62,19 +62,18 @@ variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
 /-- Test a tensor component after postcomposition into a Hom-complex term.
 The tensor and Hom extensionality reductions are shared by all four coordinates. -/
 private theorem twoTermCoordinate_component_ext
-    (A B M N : Modules.{t, u} Y R) (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
+    (A B M N T : Modules.{t, u} Y R) (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
     (n : ℤ) (ι : ((ordinaryTensor Y R).obj A).obj B ⟶ M) (f : M ⟶ N)
-    {g : N ⟶ (homComplex (R := R) P I).X n}
-    {g' : M ⟶ (homComplex (R := R) P I).X n}
+    {g : N ⟶ T} {g' : M ⟶ T} {π : T ⟶ (homComplex (R := R) P I).X n}
     (h : ∀ (p : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
       (v : A.val.obj U) (z : B.val.obj U) (x : (P.X p).val.obj U),
       localEvaluation Y R _ _ U
-        ((g ≫ homComplexπ (R := R) P I n p (p + n) rfl).val.app U
+        ((g ≫ π ≫ homComplexπ (R := R) P I n p (p + n) rfl).val.app U
           (f.val.app U (ι.val.app U (pair Y R A B U v z)))) x =
       localEvaluation Y R _ _ U
         ((homComplexπ (R := R) P I n p (p + n) rfl).val.app U
-          (g'.val.app U (ι.val.app U (pair Y R A B U v z)))) x) :
-    ι ≫ f ≫ g = ι ≫ g' := by
+          ((g' ≫ π).val.app U (ι.val.app U (pair Y R A B U v z)))) x) :
+    (ι ≫ f ≫ g) ≫ π = (ι ≫ g') ≫ π := by
   apply homComplex_hom_ext (R := R)
   intro p q hpq
   subst q
@@ -138,7 +137,7 @@ theorem twoTermCoordinate_isIso
     · subst b
       obtain rfl : a = j + 1 := by omega
       apply biprod.hom_ext
-      · apply twoTermCoordinate_component_ext Y R _ _ _ _ P I (j + 1) _ f
+      · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I (j + 1) _ f
         intro p U v z x
         rw [hom_fst_evaluation, generator_neg_fst]
         have hs := hgen (j + 1) (-1) (by omega) p U v z x
@@ -149,7 +148,7 @@ theorem twoTermCoordinate_isIso
         simp only [map_smul, LinearMap.smul_apply]
         rw [localEvaluation_π]
         simp
-      · apply twoTermCoordinate_component_ext Y R _ _ _ _ P I j _ f
+      · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I j _ f
         intro p U v z x
         rw [hom_snd_evaluation, generator_neg_snd]
         have hs := hgen (j + 1) (-1) (by omega) p U v z x
@@ -162,7 +161,7 @@ theorem twoTermCoordinate_isIso
         have ha : a = j := by omega
         subst a
         apply biprod.hom_ext
-        · apply twoTermCoordinate_component_ext Y R _ _ _ _ P I (j + 1) _ f
+        · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I (j + 1) _ f
           intro p U v z x
           rw [hom_fst_evaluation, generator_zero_fst]
           have hs := hgen j 0 (by simp) p U v z x
@@ -170,7 +169,7 @@ theorem twoTermCoordinate_isIso
           simp only [zero_mul, Int.negOnePow_zero, one_smul]
           rw [generator_zero_fst]
           simp only [map_zero, LinearMap.zero_apply, smul_zero]
-        · apply twoTermCoordinate_component_ext Y R _ _ _ _ P I j _ f
+        · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I j _ f
           intro p U v z x
           rw [hom_snd_evaluation, generator_zero_snd]
           have hs := hgen j 0 (by simp) p U v z x
