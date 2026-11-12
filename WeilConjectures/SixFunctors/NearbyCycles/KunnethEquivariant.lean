@@ -80,6 +80,7 @@ section Abstract
 
 variable {S D : Type*} [Category S] [MonoidalCategory S] [Category D]
 
+-- Perform the tensor-composition calculation before specializing to derived categories.
 private lemma δ_comp_tensorHom_of_comp {T U₁ U₂ V₁ V₂ W₁ W₂ : S}
     (δ : T ⟶ U₁ ⊗ U₂) (p₁ : U₁ ⟶ V₁) (p₂ : U₂ ⟶ V₂)
     (q₁ : V₁ ⟶ W₁) (q₂ : V₂ ⟶ W₂) (r₁ : U₁ ⟶ W₁) (r₂ : U₂ ⟶ W₂)
@@ -147,7 +148,6 @@ lemma kunnethMap_comp_map_tensorHom (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom 
   exact kunnethMap_comp_map_tensorHom_aux (φ₁.pullbackExchange Λ) (φ₂.pullbackExchange Λ)
     (P.tensorMap Λ) (fun x y ↦ P.tensorMap_natural Λ x y) a b
 
-set_option trace.profiler true in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The comultiplication of `L(𝟙)^*` followed by the pullback comparisons of the squares with
 identity sides and the identity isomorphisms `L(𝟙)^* ≅ 𝟭` is the identity isomorphism. -/
@@ -168,7 +168,6 @@ lemma δ_comp_pullbackSquareComparison_id (h₁ : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f
     (pullbackSquareComparison_id_hom_app_comp_map Λ f₂ h₂ B)
     (δ_leftDerivedUpperStarId Λ Z _ _)
 
-set_option trace.profiler true in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Equivariance of the Künneth map of nearby cycles**: for morphisms of models `σ_M`, `σ_N`,
 `σ_P` over the identities compatible with `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N`, the Künneth map
@@ -193,6 +192,8 @@ lemma kunnethMap_autAction (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f�
   have hs₂ : f₂' ≫ 𝟙 Y' = 𝟙 Z' ≫ f₂' := by simp
   have h := map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁ φ₂ σM σN σP htot₁.symm hgen₁.symm
     htot₂.symm hgen₂.symm hb₁ hs₁ hb₂ hs₂ A B
+  -- Infer the intermediate morphisms from the compatibilities below, reusing their derived
+  -- pullbacks instead of synthesizing the graded tensor instances for each occurrence.
   have key := kunnethMap_autAction_aux (leftDerivedUpperStarId Λ Z') (P.nearbyCycles Λ)
     _ _ _ _ _
     (kunnethMap_comp_map_tensorHom Λ φ₁ φ₂
