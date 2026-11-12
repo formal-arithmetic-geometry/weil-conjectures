@@ -58,6 +58,7 @@ private theorem evaluationSection_zsmul
   unfold coefficientEvaluationSection
   apply ab_eqToHom_zsmul
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Keep coefficient-site transport abstract during the pure-section calculation.
 private theorem evaluation_signed
@@ -164,6 +165,7 @@ private theorem restrictedLevel_natural
         ((coefficientSequenceEvaluation l E X n).map (b.f k))
   exact (eqToIso (coefficientSequenceRestriction_evaluation l E X n)).hom.naturality (b.f k)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Assemble the three finite comparison squares without unfolding their choices.
 /-- Coherent signed total interchange commutes with the prescribed strict tower comparison.
