@@ -236,11 +236,11 @@ lemma weilCoefficientsForgetAb_map_lowerStarCongr_inv_app {g g' : S ⟶ T} (h : 
 lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T) :
     (adicSheafEquivCondensedMod l T).functor.map
         ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app x) ≫
-      (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) =
-      (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e).unit.app
-          ((adicSheafEquivCondensedMod l T).functor.obj x) ≫
+      (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) ≫
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
-          ((adicLowerStarCompCondensedModIso l e.inv).inv.app x) := by
+          ((adicLowerStarCompCondensedModIso l e.inv).hom.app x) =
+      (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e).unit.app
+        ((adicSheafEquivCondensedMod l T).functor.obj x) := by
   rw [Equivalence.toAdjunction_unit, Equivalence.symm_unit,
     CondensedRing.lowerStarInvAdjunction_unit_app]
   refine Mod.Hom.ext ?_
@@ -261,20 +261,6 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
   rfl
 
-private lemma mateEquiv_adicLowerStarCompCondensedModIso_inv_unit_comp (e : S ≅ T)
-    (x : AdicSheaf l T) :
-    (adicSheafEquivCondensedMod l T).functor.map
-        ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app x) ≫
-      (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) ≫
-        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
-          ((adicLowerStarCompCondensedModIso l e.inv).hom.app x) =
-      (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e).unit.app
-        ((adicSheafEquivCondensedMod l T).functor.obj x) := by
-  rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
-    ← Functor.map_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  rfl
-
 /-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
 adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
 lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
@@ -287,7 +273,11 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
     (adj₂ := CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
     (α := TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv)
     (γ := TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom)
-    (fun x ↦ mateEquiv_adicLowerStarCompCondensedModIso_inv_unit_comp l e x)
+    fun x ↦ by
+      rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
+        ← Functor.map_comp, Iso.hom_inv_id_app]
+      erw [CategoryTheory.Functor.map_id, Category.comp_id]
+      rfl
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/
