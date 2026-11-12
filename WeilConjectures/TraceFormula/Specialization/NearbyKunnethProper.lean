@@ -193,6 +193,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- the triangle of the Künneth map has large terms
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie

@@ -157,6 +157,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- The elaboration of the derived functors with coefficients `𝔽_E` on the nested open subschemes
 -- is expensive.
