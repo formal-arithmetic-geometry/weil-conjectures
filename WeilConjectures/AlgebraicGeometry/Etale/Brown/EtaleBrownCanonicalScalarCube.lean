@@ -175,6 +175,6 @@ theorem strictEtaleBrownCanonicalScalarCube
     (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv
     δ.hom (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom
     (RV.val.restriction h).hom (RW.val.restriction h).hom
-    ht hs hw hr (fun X ↦ hc X) Y
+    ht hs hw hr hc Y
 
 end AlgebraicGeometry
