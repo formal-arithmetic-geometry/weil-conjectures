@@ -112,6 +112,12 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
       ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
         Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId)
     let A := (EV.trans ES).trans EO.symm
+    have : A.functor.Additive := inferInstance
+    have : A.inverse.Additive := inferInstance
+    have : PreservesFiniteLimits A.functor := inferInstance
+    have : PreservesFiniteColimits A.functor := inferInstance
+    have : PreservesFiniteLimits A.inverse := inferInstance
+    have : PreservesFiniteColimits A.inverse := inferInstance
     let K' := (A.inverse.mapHomologicalComplex (.up ℤ)).obj K₀
     have unitIso : A.functor.obj
         (SheafOfModules.unit ((moduleRings W.toScheme.toRingedSpace).over V)) ≅
@@ -134,9 +140,7 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
             (R := (moduleRings X.toRingedSpace).over O₀) (ULift.{u} (Fin m))) ≅
             SheafOfModules.free
               (R := (moduleRings W.toScheme.toRingedSpace).over V) (ULift.{u} (Fin m)) :=
-          (asIso (sigmaComparison A.inverse (fun _ : ULift.{u} (Fin m) ↦
-            SheafOfModules.unit ((moduleRings X.toRingedSpace).over O₀)))).symm ≪≫
-              Sigma.mapIso (fun _ ↦ unitIso')
+          (SheafOfModules.mapFreeIso A.inverse (ULift.{u} (Fin m)) unitIso'.symm).symm
         refine ⟨m, A.inverse.map j ≫ c.hom, c.inv ≫ A.inverse.map p, ?_⟩
         change (A.inverse.map j ≫ c.hom) ≫ c.inv ≫ A.inverse.map p =
           𝟙 (A.inverse.obj (K₀.X n))
