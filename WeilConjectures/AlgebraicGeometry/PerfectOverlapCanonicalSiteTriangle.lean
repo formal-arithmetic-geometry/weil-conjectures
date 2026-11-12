@@ -33,6 +33,7 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- The statement elaborates two derived site categories and their equivalence.
 /-- A local comparison transported to the overlap agrees with the fixed
@@ -98,6 +99,7 @@ theorem perfectOverlapCanonicalSiteTriangleU
       (perfectOverlapApex_siteTail_cancel_for g pX pY b hg U V U inf_le_left
         ((derivedPullback (g ∣_ U)).obj A) E φ))
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- The second statement also elaborates two derived site categories.
 /-- The second-open site triangle follows by the same return, nested-counit,
