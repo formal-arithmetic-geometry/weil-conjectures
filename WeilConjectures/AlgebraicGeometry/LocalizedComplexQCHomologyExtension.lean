@@ -69,7 +69,7 @@ private theorem mapped_homology_mem_of_shortExact
     ((hS.homology_exact₃ n (n + 1) (by simp)).map F)
     (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
 
 Source: Stacks Project, Tag 0117, long exact sequence, and Tag 01IE, extension closure.
@@ -92,15 +92,9 @@ theorem localized_complex_qc_homology_extension
     (h₁ : ∀ i : ℤ, (S.X₁.homology i).IsQuasicoherent)
     (h₃ : ∀ i : ℤ, (S.X₃.homology i).IsQuasicoherent) (n : ℤ) :
     (S.X₂.homology n).IsQuasicoherent := by
+  let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
   let e := Scheme.Modules.overEquiv U
   let F := e.functor
-  have : PreservesLimitsOfSize.{0, 0} F :=
-    e.symm.toAdjunction.rightAdjoint_preservesLimits
-  have : PreservesColimitsOfSize.{0, 0} F :=
-    e.toAdjunction.leftAdjoint_preservesColimits
-  have : F.Full := e.full_functor
-  have : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full F
-  have : F.PreservesHomology := Functor.preservesHomologyOfExact F
   let P : ObjectProperty U.toScheme.Modules :=
     fun M ↦ M.IsQuasicoherent
   let : P.IsClosedUnderIsomorphisms :=
@@ -108,20 +102,20 @@ theorem localized_complex_qc_homology_extension
       (SheafOfModules.isQuasicoherent U.toScheme.ringCatSheaf).IsClosedUnderIsomorphisms
   let : P.IsClosedUnderKernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
-    let : M.IsQuasicoherent := hM
-    let : N.IsQuasicoherent := hN
+    let := hM
+    let := hN
     exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
       (Scheme.Modules.isQuasicoherent_kernel f)⟩
   let : P.IsClosedUnderCokernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
-    let : M.IsQuasicoherent := hM
-    let : N.IsQuasicoherent := hN
+    let := hM
+    let := hN
     exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
       (Scheme.Modules.isQuasicoherent_cokernel f)⟩
   let : P.IsClosedUnderExtensions := ⟨by
     intro T hT h₁ h₃
-    let : T.X₁.IsQuasicoherent := h₁
-    let : T.X₃.IsQuasicoherent := h₃
+    let := h₁
+    let := h₃
     exact Scheme.Modules.isQuasicoherent_of_shortExact (S := T) hT⟩
   have hqc : P (F.obj (S.X₂.homology n)) :=
     mapped_homology_mem_of_shortExact F P S hS
