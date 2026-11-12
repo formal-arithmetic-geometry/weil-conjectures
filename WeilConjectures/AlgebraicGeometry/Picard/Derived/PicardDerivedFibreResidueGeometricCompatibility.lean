@@ -163,9 +163,19 @@ theorem picard_derived_fibre_residue_geometric_compatibility
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{v} (moduleRings (Spec (W.residueField w)).toRingedSpace)) 1 ⋙
     SheafOfModules.evaluation (moduleRings (Spec (W.residueField w)).toRingedSpace) (.op ⊤)
-  exact transport_square_family_of_exists H
-    (fun i ↦ (derivedPullback (W.fromSpecResidueField w)).map
-      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)) _
+  let E := (schemeDerivedDirectImage (pullback.snd f k)).obj
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
+        ((Modules.tensorPullback (pullback.fst f k)).obj L))
+  let Ei := fun i ↦ (schemeDerivedDirectImage (pullback.snd (fi i) k)).obj
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
+        ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
+          ((Modules.tensorPullback (ui i)).obj L)))
+  let F := derivedPullback (W.fromSpecResidueField w)
+  let u : ∀ i, F.obj E ⟶ F.obj (Ei i) := fun i ↦
+    F.map (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)
+  exact transport_square_family_of_exists H u _
     (picard_derived_residue_normalization f Xi fi ui hui L W k
       (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
       eF heFfst heFsnd eFi heFifst heFisnd τ)

@@ -128,7 +128,10 @@ theorem picard_derived_fibre_residue_bridge_core
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                 (ui i) (hui i))).left) 1
             ((affineResidueModelEquiv W w U hwU hU p hp _ K hK m).trans e z) := by
-  refine residue_bridge_of_naturality (Φ := fun i ↦ K ⟶ C i) _
+  refine residue_bridge_of_naturality (Φ := fun i ↦ K ⟶ C i)
+    (fun i φ ↦ DerivedCategory.Q.map φ = m.inv ≫
+      (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.map
+        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ (m' i).hom)
     (affineResidueModelEquiv W w U hwU hU p hp _ K hK m)
     (fun i ↦ affineResidueModelEquiv W w U hwU hU p hp _ (C i) (hC i) (m' i))
     (fun i ↦ (derivedFiberCohomologyFunctor W w 1).map
