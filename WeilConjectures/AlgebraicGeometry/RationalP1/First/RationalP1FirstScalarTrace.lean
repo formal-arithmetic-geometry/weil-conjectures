@@ -277,6 +277,7 @@ private theorem ordinary_endpoint_square
 end OrdinaryEndpointSquare
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Identify the two exact-derived composition paths on a single module.
 private theorem derivedPull_single
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -304,6 +305,7 @@ private theorem derivedPull_single
   rw [reassoc_of% (Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj _ _ _)]
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Normalize both scalar endpoints and paste the exact single comparisons.
 private theorem endpoint_pull_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
