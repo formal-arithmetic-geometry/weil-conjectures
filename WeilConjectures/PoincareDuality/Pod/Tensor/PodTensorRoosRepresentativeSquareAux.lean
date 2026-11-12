@@ -251,6 +251,22 @@ theorem podTensorReindexAt_generators
     rw [ht]
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
 
+-- Record the good-representative endpoints before using the tensor comparison.
+private def podRepresentativeReindexFactors
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (D : PodCompletionReindex l E g)
+    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
+    (podOrdinaryReindex l E g).obj (DerivedCategory.Q.obj P.obj) ≅
+      DerivedCategory.Q.obj (((podGoodReindex l E g D).obj P).obj) := by
+  let : (isoReductionIntegralInverse l E g).Additive :=
+    isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom
+  let : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=
+    isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom
+  let : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=
+    isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom
+  unfold podOrdinaryReindex podGoodReindex
+  exact (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj
+
 -- Cancel the comparison isomorphisms without expanding the strict Roos morphism.
 private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Category D]
     (T : C × C ⥤ D) {P Q P' Q' : C} {A B Z : D}
@@ -320,40 +336,34 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
         ((integralCompletedTensor l E Y).obj
           (DerivedCategory.Q.obj P.obj,DerivedCategory.Q.obj Q.obj)) ≫
       ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom := by
-  dsimp only [podReindexingTensorFrame, integralOperationsTensorOnGood,
-    integralOperationsTensorComplexFunctor,
-    integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
-    podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-    ObjectProperty.ι_obj, ObjectProperty.lift, ObjectProperty.lift_obj_obj] at *
+  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, integralOperationsRoosFunctor,
+    Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at *
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
   dsimp only [podReindexingTensorFrame, integralOperationsTensorOnGood,
-    integralOperationsTensorComplexFunctor,
-    integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
-    podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-    ObjectProperty.ι_obj, ObjectProperty.lift, ObjectProperty.lift_obj_obj] at hs
-  let eP := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj
-  let eQ := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj
+    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+    integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj] at hs
+  let eP := podRepresentativeReindexFactors l E g D P
+  let eQ := podRepresentativeReindexFactors l E g D Q
   let e := (integralCompletedTensorComparison l E X).app
     ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q)
-  dsimp only [podOrdinaryReindex, integralOperationsTensorOnGood,
-    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
-    isoReductionIntegralComplex, podGoodReindex, integralOperationsRoosFunctor,
-    Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj,
-    ObjectProperty.lift_obj_obj] at eP eQ e
+  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, integralOperationsRoosFunctor,
+    Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at e
   let k := podReindexingLimitTensorComparisonHom l E g D hD
     (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)
-  dsimp only [podReindexingTensorFrame, podOrdinaryReindex] at k
+  dsimp only [podReindexingTensorFrame] at k
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
   let fQ := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)
-  dsimp only [podOrdinaryReindex] at fP fQ
   generalize ht : (podTensorReindexAt l E g D hD P Q τ).tower P Q = τ' at hs
   have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     eP eQ e k τ' τ (ht.symm.trans (podTensorReindexAt_tower l E g D hD P Q τ))
     _ hs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
   have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
-  dsimp only [podReindexingTensorFrame, podOrdinaryReindex] at hc
+  dsimp only [podReindexingTensorFrame] at hc
   exact finish.trans hc
 
 end WeilConjectures
