@@ -77,8 +77,6 @@ private theorem sectionClass_restriction {Y : Scheme.{u}}
     (fun t ↦ ((A.sc p).mapHomologyIso (E ⋙ ev.obj (op ⊤))).hom ≫ t) hn
 
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
--- Comparing section complexes unfolds both the scheme and ringed-space interfaces.
 private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
     (h : Z ⟶ Y) {G : Z.Modules} (I : InjectiveResolution G)
     (V : Y.Opens) (U : Z.Opens) (e : U = h ⁻¹ᵁ V)
@@ -96,6 +94,7 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
   let := RingedSpace.globalSectionsFunctor_additive (h ⁻¹ᵁ V).toScheme.toRingedSpace
   let L := ((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
+  -- Fix the section complexes before composing their homology comparisons.
   let C := ((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
     forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   let D := ((RingedSpace.openModuleSections Z.toRingedSpace (h ⁻¹ᵁ V)).mapHomologicalComplex
@@ -159,8 +158,6 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
         H.map R.sections.hom) ≫ tV := congrArg (fun q ↦ q ≫ tV) hr.symm
     _ = _ := by simp only [Category.assoc]
 
-set_option profiler true in
--- The naturality square compares the scheme and ringed-space section interfaces.
 /-- Restricting a global class and applying the restricted-resolution class map
 computes the restriction of its classical Leray edge. This concerns a single morphism,
 with no square, derived pullback, top-degree bound or derived adjunction.
