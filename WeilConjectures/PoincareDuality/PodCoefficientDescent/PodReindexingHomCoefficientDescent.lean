@@ -1425,11 +1425,6 @@ private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D �
   rw [← hc]
   simp
 
--- Use the same cached category for the rational and stage presentations.
-local instance podCoefficientStageCategory (W : Scheme.{u}) (L : Index l Ω) :
-    Category (sfRationalConstructibleCategory l (Coefficient.{u} l Ω L) W) :=
-  stageCategory l Ω W L
-
 set_option profiler true in
 /-- The pullback comparisons are compatible with one further transition.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
@@ -1445,7 +1440,10 @@ private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCatego
       ((stageSystem l Ω X).assoc h k).hom.app
         ((rationalDerivedPullback l (Coefficient.{u} l Ω K.stage) g).obj K.obj) ≫
       (commonStagePullbackComparison l Ω g K M (h.trans k)).hom := by
-  obtain ⟨b, hb, hcoh⟩ := commonStagePullback_comparison_data l Ω g
+  have hd := commonStagePullback_comparison_data l Ω g
+  let b := hd.choose
+  have hb := hd.choose_spec.1
+  have hcoh := hd.choose_spec.2
   have h1 : (b h).hom.app K.obj = (commonStagePullbackComparison l Ω g K L h).hom :=
     eq_of_heq (hb h K.obj).1
   have h2 : (b (h.trans k)).hom.app K.obj =
@@ -1454,15 +1452,22 @@ private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCatego
   have h3 : (b k).hom.app (K.toStage h) =
       (commonStagePullbackComparison l Ω g ⟨L, K.toStage h⟩ M k).hom :=
     eq_of_heq (hb k (K.toStage h)).1
-  have hc := hcoh h k K.obj
-  rw [h1, h2, h3, pullbackComparison_hom_eq l Ω g ⟨L, K.toStage h⟩ M k] at hc
-  erw [stageT_map l Ω X k (commonStagePullbackComparison l Ω g K L h).hom] at hc
+  have h3' := h3.trans (pullbackComparison_hom_eq l Ω g ⟨L, K.toStage h⟩ M k)
+  have ht := (stageT_map l Ω X k
+    (commonStagePullbackComparison l Ω g K L h).hom).symm.trans
+      (congrArg ((stageSystem l Ω X).T k).map h1.symm)
   unfold inputStep
-  exact step_algebra (rationalDerivedPullback l (Coefficient.{u} l Ω M) g)
+  refine step_algebra (rationalDerivedPullback l (Coefficient.{u} l Ω M) g)
     ((operationStageTransitionIso l Ω X L M k).app _) _
     ((operationStageTransitionIso l Ω X L M k).app _) _
     ((operationStageTransitionIso l Ω Y L M k).app (K.toStage h)).symm
-    (((stageSystem l Ω Y).assoc h k).app K.obj) _ _ hc
+    (((stageSystem l Ω Y).assoc h k).app K.obj) _ _ ?_
+  exact (congrArg₂ (fun f c ↦ f ≫ c ≫
+    (rationalDerivedPullback l (Coefficient.{u} l Ω M) g).map
+      (((stageSystem l Ω Y).assoc h k).hom.app K.obj)) ht h3'.symm).trans
+        ((hcoh h k K.obj).trans (congrArg (fun c ↦
+          ((stageSystem l Ω X).assoc h k).hom.app
+            ((rationalDerivedPullback l (Coefficient.{u} l Ω K.stage) g).obj K.obj) ≫ c) h2))
 
 end CommonComparisonProof
 
