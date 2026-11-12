@@ -182,9 +182,9 @@ private theorem localBoundaryLinearEquiv_frobenius
     {N H Q : FrobeniusModule.{max u v, v} K}
     (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) (q : K)
     (x : M.carrier) (hΨ : Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) (y : Q.carrier) :
-    (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap)
-        (M.frobenius x) (Q.frobenius y) =
-      q * (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x y := by
+    localBoundaryPairingEquiv Ψ S ψ (M.frobenius x) (Q.frobenius y) =
+      q * localBoundaryPairingEquiv Ψ S ψ x y := by
+  simp only [localBoundaryPairingEquiv]
   simp only [LinearEquiv.trans_apply]
   rw [hΨ, map_smul, S.map_frobenius]
   erw [LinearEquiv.dualMap_apply]
@@ -192,6 +192,13 @@ private theorem localBoundaryLinearEquiv_frobenius
     FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
     LinearEquiv.symm_apply_apply, smul_eq_mul]
   rfl
+
+private noncomputable def localBoundaryPairingEquiv
+    {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
+    {N H Q : FrobeniusModule.{max u v, v} K}
+    (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) :
+    M.carrier ≃ₗ[K] Module.Dual K Q.carrier :=
+  Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap
 
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 set_option profiler true in
@@ -336,7 +343,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
         (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).Equiv (H.stalk zf).dual := by
     rw [hone]
     exact (FrobeniusModule.rescaleOneEquiv ((H.dual hH).stalk zf)).trans S₅
-  refine ⟨Ψ.toLinearEquiv ≪≫ₗ S₅'.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap,
+  refine ⟨localBoundaryPairingEquiv Ψ.toLinearEquiv S₅' ψ,
     fun a b ↦ ?_⟩
   have hΨ := Ψ.map_frobenius a
   rw [show ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).rescale
