@@ -109,8 +109,30 @@ private theorem baseChange_naturality
     ← adj'.homEquiv_naturality_right, ht]
 
 
-set_option maxHeartbeats 500000 in
--- Tensor representative transport needs additional instance and equality elaboration.
+-- Construct tensor-total coproducts directly, avoiding repeated colimit instance searches.
+private theorem relativelyFlat_tensorHasMapBifunctor (X : Scheme.{u})
+    (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    CochainComplex.HasMapBifunctor P G
+      (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)) := by
+  intro n
+  exact ((hasColimitsOfSizeShrink.{0, 0, u, u}
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))).has_colimits_of_shape _).has_colimit _
+
+attribute [local instance] relativelyFlat_tensorHasMapBifunctor
+
+private theorem relativelyFlat_isIso_transport
+    {C D : Type*} [Category C] [Category D] (F : D ⥤ C)
+    {A B U V : D} (a : A ≅ B) (b : U ≅ V) (c : B ⟶ U) (t : A ⟶ V)
+    {S T : C} (s : S ≅ T) (x : S ⟶ F.obj A) (y : T ⟶ F.obj B)
+    (ht : a.hom ≫ c ≫ b.hom = t)
+    (hn : s.hom ≫ y = x ≫ F.map a.hom)
+    (h : IsIso (x ≫ F.map t)) : IsIso (y ≫ F.map c) := by
+  have hcomp : IsIso ((s.hom ≫ (y ≫ F.map c)) ≫ F.map b.hom) := by
+    simpa only [← ht, Functor.map_comp, Category.assoc, reassoc_of% hn] using h
+  have : IsIso (s.hom ≫ (y ≫ F.map c)) :=
+    (isIso_comp_right_iff _ (F.map b.hom)).mp hcomp
+  exact IsIso.of_isIso_comp_left s.hom _
+
 /-- The canonical base-change map for a relatively flat bounded-above complex is
 invertible. `P` is a K-flat representative of `E` (`e`), so the total tensor complex
 `Tot(P ⊗ G)` represents `E ⊗^L G`; `α` is any identification of the two (invertibility
@@ -218,44 +240,14 @@ theorem relativelyFlat_derivedBaseChange_complex
       (tensor_cancel_iso ((derivedPullback (pullback.fst f g)).mapIso e)
         ((SingleComplexBaseChange.counit (pullback.fst f g)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))
-  erw [← hab] at hi
-  have := hi
-  have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
-      (pullback.fst f g) pullback.condition (E ⊗ DerivedCategory.Q.obj G) ≫
-      (schemeDerivedDirectImage (pullback.snd f g)).map
-        ((derivedPullback (pullback.fst f g)).map a.hom) ≫
-      (schemeDerivedDirectImage (pullback.snd f g)).map
-        ((SingleComplexBaseChange.counit (pullback.fst f g)).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
-    exact (isIso_comp_right_iff _
-      ((schemeDerivedDirectImage (pullback.snd f g)).map b.hom)).mp
-        (by simpa only [a, Iso.trans_hom, Functor.map_comp, Category.assoc] using hi)
   have hn := baseChange_naturality f (pullback.snd f g) g (pullback.fst f g)
     pullback.condition a.hom
-  have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
-      (pullback.fst f g) pullback.condition (DerivedCategory.Q.obj
-        (CochainComplex.mapBifunctor P G
-          (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫
-      (schemeDerivedDirectImage (pullback.snd f g)).map
-        ((SingleComplexBaseChange.counit (pullback.fst f g)).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
-    have hcomp : IsIso
-        (((derivedPullback g).map ((schemeDerivedDirectImage f).map a.hom) ≫
-          schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
-            pullback.condition (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G
-              (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))) ≫
-          (schemeDerivedDirectImage (pullback.snd f g)).map
-            ((SingleComplexBaseChange.counit (pullback.fst f g)).app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-                (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
-      rw [hn, Category.assoc]
-      infer_instance
-    simp only [Category.assoc] at hcomp
-    have := hcomp
-    exact IsIso.of_isIso_comp_left
-      ((derivedPullback g).map ((schemeDerivedDirectImage f).map a.hom)) _
+  have := relativelyFlat_isIso_transport (schemeDerivedDirectImage (pullback.snd f g))
+    ((derivedPullback (pullback.fst f g)).mapIso a) b
+    ((SingleComplexBaseChange.counit (pullback.fst f g)).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
+        (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))) _
+    ((derivedPullback g).mapIso ((schemeDerivedDirectImage f).mapIso a)) _ _ hab hn hi
   infer_instance
 
 end AlgebraicGeometry
