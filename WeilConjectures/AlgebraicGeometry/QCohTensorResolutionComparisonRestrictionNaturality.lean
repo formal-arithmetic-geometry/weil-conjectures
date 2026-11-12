@@ -93,16 +93,20 @@ theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
   let f₃ := tensorResolutionRestrictionTensorMap j K F K' F' k f
   let f₄ := tensorResolutionRestrictionTensorMap j K N K' N' k t
   have h₀ : RC.map a₀ ≫ f₀ = f₁ ≫ b₀ := by
-    simpa only [a₀, b₀, f₀, f₁, tensorResolutionRestrictionTensorMap, Category.assoc] using
+    dsimp only [a₀, b₀, f₀, f₁, tensorResolutionRestrictionTensorMap]
+    simpa only [Category.assoc] using
       tensorResolution_restrictedTensor_square j (𝟙 E) s (𝟙 E') s' e e f t (by simp) hss
   have h₁ : RC.map a₁ ≫ f₂ = f₁ ≫ b₁ := by
-    simpa only [a₁, b₁, f₁, f₂, tensorResolutionRestrictionTensorMap, Category.assoc] using
+    dsimp only [a₁, b₁, f₁, f₂, tensorResolutionRestrictionTensorMap]
+    simpa only [Category.assoc] using
       tensorResolution_restrictedTensor_square j r (𝟙 F) r' (𝟙 F') e m f f hrr (by simp)
   have h₂ : RC.map a₂ ≫ f₂ = f₃ ≫ b₂ := by
-    simpa only [a₂, b₂, f₂, f₃, tensorResolutionRestrictionTensorMap, Category.assoc] using
+    dsimp only [a₂, b₂, f₂, f₃, tensorResolutionRestrictionTensorMap]
+    simpa only [Category.assoc] using
       tensorResolution_restrictedTensor_square j q (𝟙 F) q' (𝟙 F') k m f f hqq (by simp)
   have h₃ : RC.map a₃ ≫ f₄ = f₃ ≫ b₃ := by
-    simpa only [a₃, b₃, f₃, f₄, tensorResolutionRestrictionTensorMap, Category.assoc] using
+    dsimp only [a₃, b₃, f₃, f₄, tensorResolutionRestrictionTensorMap]
+    simpa only [Category.assoc] using
       tensorResolution_restrictedTensor_square j (𝟙 K) s (𝟙 K') s' k k f t (by simp) hss
   have : QuasiIso a₀ := tensorResolution_quasiIso_tensor_left s hs hE
   have : QuasiIso a₂ := tensorResolution_quasiIso_tensor_right q hq hF
