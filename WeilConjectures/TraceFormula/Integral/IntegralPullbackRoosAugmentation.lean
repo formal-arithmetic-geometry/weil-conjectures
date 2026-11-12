@@ -80,7 +80,104 @@ private theorem restrictedSection_naturality
     rfl
   exact cast_map e f x
 
--- The sectionwise chase through the tower unit and q needs more than the default.
+private theorem inverseImageRoosComparisonComplex_fst_coordinate
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {W Z : Scheme.{u}} (h : Z ⟶ W) [IsIso h]
+    (P : CochainComplex (integralTowerModules l E W) ℤ)
+    (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (κ : ∀ n : ℕ,
+      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
+        (unrestrictedIntegralFiniteComplex l E W n).obj P)
+    (b : ((Functor.const ℕᵒᵖ : scalarReductionSource l E W ⥤
+        ℕᵒᵖ ⥤ scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj P ⟶
+      ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)
+    (hb : ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ) (x : (P.X i).val.obj U),
+      (((b.f i).app (op n)).val.app U) x =
+        integralComparisonRestrictedSection l E W (C.X i) n U
+          (integralComparisonSequenceSection l E W (C.X i) n U
+            (((κ n).inv.f i).val.app U
+              (unrestrictedIntegralTensorSection l E W n (P.X i) U 1 x))))
+    (q : (((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+        (((integralComparisonSequencePullback l E h).mapHomologicalComplex
+          (.up ℤ)).obj C)).asFunctor ≅
+      (integralOperationsPullbackTowerFunctor l E h).obj P)
+    (hq : ∀ (n : ℕ) (i : ℤ) (U : W.ProEt)
+        (x : (C.X i).val.obj (op (n, U))),
+        ((q.hom.app (op n)).f i).val.app (op ((proEtaleBaseChange h).obj U))
+          (integralComparisonRestrictedSection l E Z
+            ((integralComparisonSequencePullback l E h).obj (C.X i)) n
+            (op ((proEtaleBaseChange h).obj U))
+            (integralComparisonSequenceGenerator l E h (C.X i) n U x)) =
+          integralOperationsPullbackGenerator l E h n
+            (((unrestrictedIntegralFiniteComplex l E W n).obj P).X i) U
+            (((κ n).hom.f i).val.app (op U)
+              (coefficientEvaluationSection l E W (C.X i) n (op U) x)))
+    (n : ℕ) :
+    let T := ((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+      (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C)
+    let A := ((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P
+    let c := (NatTrans.mapHomologicalComplex
+        (Functor.compConstIso ℕᵒᵖ (inverseImageIntegralModules l E h)).hom (.up ℤ)).app P ≫
+      ((integralTowerInverseImage l E h).mapHomologicalComplex (.up ℤ)).map b ≫
+      (NatTrans.mapHomologicalComplex (integralTowerInverseImageUnit l E h).hom
+        (.up ℤ)).app C
+    let adj := (constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E Z)).mapHomologicalComplex
+      (.up ℤ)
+    let a := adj.homEquiv A T c
+    (a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app T) ≫ q.hom.app (op n) =
+      inverseImageReductionTheta l E h n P := by
+  dsimp only
+  let T := ((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+    (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C)
+  let A := ((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P
+  let c := (NatTrans.mapHomologicalComplex
+      (Functor.compConstIso ℕᵒᵖ (inverseImageIntegralModules l E h)).hom (.up ℤ)).app P ≫
+    ((integralTowerInverseImage l E h).mapHomologicalComplex (.up ℤ)).map b ≫
+    (NatTrans.mapHomologicalComplex (integralTowerInverseImageUnit l E h).hom
+      (.up ℤ)).app C
+  let adj := (constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E Z)).mapHomologicalComplex
+    (.up ℤ)
+  let a := adj.homEquiv A T c
+  have ha (n : ℕ) (i : ℤ) :
+      a.f i ≫ limit.π (T.X i) (op n) = (c.f i).app (op n) := by
+    have h := (adj.homEquiv A T).symm_apply_apply c
+    rw [Adjunction.homEquiv_counit] at h
+    exact congrArg (fun f ↦ (f.f i).app (op n)) h
+  change (a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app T) ≫
+    q.hom.app (op n) = _
+  ext i U x
+  let V := (proEtaleIsoPostcompose h).obj U.unop
+  let t := unrestrictedIntegralTensorSection l E W n (P.X i) (op V) 1 x
+  let y := integralComparisonSequenceSection l E W (C.X i) n (op V)
+    (((κ n).inv.f i).val.app (op V) t)
+  let N := (integralComparisonSequencePullback l E h).obj (C.X i)
+  have hθ := (inverseImageReductionTheta_existsUnique l E h n P).exists.choose_spec
+    i U.unop x
+  have hu := (integralTowerInverseImageUnit_existsUnique l E h).exists.choose_spec
+    (C.X i) n U.unop y
+  have hr := restrictedSection_naturality l E Z N n (proEtaleIsoCommaArrow h U.unop).op
+    (integralComparisonSequenceGenerator l E h (C.X i) n V y)
+  have hn := PresheafOfModules.naturality_apply ((q.hom.app (op n)).f i).val
+    (proEtaleIsoCommaArrow h U.unop).op
+    (integralComparisonRestrictedSection l E Z N n
+      (op ((proEtaleBaseChange h).obj V))
+      (integralComparisonSequenceGenerator l E h (C.X i) n V y))
+  have hk : ((κ n).hom.f i).val.app (op V) (((κ n).inv.f i).val.app (op V) t) = t :=
+    congrArg (fun k ↦ (k.f i).val.app (op V) t) (κ n).inv_hom_id
+  have hbx := hb n i (op V) x
+  have e1 : ((a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n))
+      (.up ℤ)).app T) ≫ q.hom.app (op n)).f i =
+      (c.f i).app (op n) ≫ (q.hom.app (op n)).f i := by
+    rw [HomologicalComplex.comp_f, ← ha]
+    rfl
+  rw [e1]
+  refine Eq.trans ?_ hθ.symm
+  refine Eq.trans ?_ (hn.trans (congrArg _ ((hq n i V y).trans (congrArg _ hk))))
+  exact congrArg (fun z ↦ ((q.hom.app (op n)).f i).val.app U z)
+    ((congrArg (fun z ↦ (((integralTowerInverseImageUnit l E h).hom.app (C.X i)).app
+      (op n)).val.app U z) hbx).trans (hu.trans hr.symm))
+
 /-- The defining Roos lift of the inverse-image comparison is the limit lift of the
 inverse image of a strict quotient presentation, followed by the whole-tower tensor
 unit and the normalized pullback tower identification.
@@ -194,37 +291,7 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
           congrArg (fun z ↦ a ≫ z ≫ q.hom.app (op n)) (hi.1 n)
       _ = _ := by
         rw [inverseImageReductionProduct, Pi.lift_comp_π]
-        ext i U x
-        let V := (proEtaleIsoPostcompose h).obj U.unop
-        let t := unrestrictedIntegralTensorSection l E W n (P.X i) (op V) 1 x
-        let y := integralComparisonSequenceSection l E W (C.X i) n (op V)
-          (((κ n).inv.f i).val.app (op V) t)
-        let N := (integralComparisonSequencePullback l E h).obj (C.X i)
-        have hθ := (inverseImageReductionTheta_existsUnique l E h n P).exists.choose_spec
-          i U.unop x
-        have hu := (integralTowerInverseImageUnit_existsUnique l E h).exists.choose_spec
-          (C.X i) n U.unop y
-        have hr := restrictedSection_naturality l E Z N n (proEtaleIsoCommaArrow h U.unop).op
-          (integralComparisonSequenceGenerator l E h (C.X i) n V y)
-        have hn := PresheafOfModules.naturality_apply ((q.hom.app (op n)).f i).val
-          (proEtaleIsoCommaArrow h U.unop).op
-          (integralComparisonRestrictedSection l E Z N n
-            (op ((proEtaleBaseChange h).obj V))
-            (integralComparisonSequenceGenerator l E h (C.X i) n V y))
-        have hk : ((κ n).hom.f i).val.app (op V) (((κ n).inv.f i).val.app (op V) t) = t :=
-          congrArg (fun k ↦ (k.f i).val.app (op V) t) (κ n).inv_hom_id
-        have hbx := hb n i (op V) x
-        have e1 : ((a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n))
-            (.up ℤ)).app T) ≫ q.hom.app (op n)).f i =
-            (c.f i).app (op n) ≫ (q.hom.app (op n)).f i := by
-          rw [HomologicalComplex.comp_f, ← ha]
-          rfl
-        rw [e1]
-        refine Eq.trans ?_ hθ.symm
-        refine Eq.trans ?_ (hn.trans (congrArg _ ((hq n i V y).trans (congrArg _ hk))))
-        exact congrArg (fun z ↦ ((q.hom.app (op n)).f i).val.app U z)
-          ((congrArg (fun z ↦ (((integralTowerInverseImageUnit l E h).hom.app (C.X i)).app
-            (op n)).val.app U z) hbx).trans (hu.trans hr.symm))
+        exact inverseImageRoosComparisonComplex_fst_coordinate l E h P C κ b hb q hq n
   · intro i
     calc
       _ = 0 := by
