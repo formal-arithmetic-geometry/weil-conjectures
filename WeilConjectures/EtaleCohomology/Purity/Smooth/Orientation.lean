@@ -126,6 +126,7 @@ theorem isZero_homology_rightDerivedUpperShriek_affineLineZeroLocus
       ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app _) ≪≫
       (_root_.DerivedCategory.homologyFunctorFactors _ n).app _)
 
+set_option profiler true in
 set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
@@ -157,6 +158,7 @@ theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
     (asIso (affineLineOrientation Λ Y)).symm fun Ω _ _ x ↦ by
       rw [h Ω x, Functor.map_zero]
 
+set_option profiler true in
 set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
