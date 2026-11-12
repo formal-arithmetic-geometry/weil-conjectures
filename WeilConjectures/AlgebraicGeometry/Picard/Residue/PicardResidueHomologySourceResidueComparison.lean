@@ -46,22 +46,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap
 
-private theorem compose_residue_comparisons
-    {ι Φ A B D : Type*} {C E F : ι → Type*}
-    [Add A] [Add B] [Add D] [∀ i, Add (C i)] [∀ i, Add (E i)] [∀ i, Add (F i)]
-    {P : Φ → ι → Prop} {ψ : Φ → ∀ i, A → C i}
-    {d : ∀ i, B → E i} {g : ∀ i, D → F i}
-    (a : A ≃+ B) (ai : ∀ i, C i ≃+ E i)
-    (h : ∃ (φ : Φ) (e : B ≃+ D) (ei : ∀ i, E i ≃+ F i),
-      ∀ i, P φ i ∧ (∀ z, ai i (ψ φ i z) = d i (a z)) ∧
-        ∀ z, ei i (d i z) = g i (e z)) :
-    ∃ (φ : Φ) (e : B ≃+ D) (ei : ∀ i, E i ≃+ F i),
-      ∀ i, P φ i ∧ (∀ z, ei i (d i z) = g i (e z)) ∧
-        ∀ z, ((ai i).trans (ei i)) (ψ φ i z) = g i (a.trans e z) := by
-  obtain ⟨φ, e, ei, h⟩ := h
-  exact ⟨φ, e, ei, fun i ↦ ⟨(h i).1, (h i).2.2, fun z ↦
-    (congrArg (ei i) ((h i).2.1 z)).trans ((h i).2.2 (a z))⟩⟩
-
+set_option profiler true in
 -- The chosen geometric square compares derived pullback and explicit tensor quotients.
 /-- For fixed strictly perfect affine models `m`, `m'`, the coefficient arrows have chain
 representatives `φ i`, and there are geometric fibre comparisons `e`, `ei` intertwining the
@@ -141,8 +126,10 @@ theorem picard_residue_homology_chosen_geometric_maps
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                 (ui i) (hui i))).left) 1
             ((affineResidueModelEquiv W w U hwU hU p hp _ K hK m).trans e z) := by
-  exact compose_residue_comparisons _ _
-    (picard_residue_homology_chosen_geometric_fibre_data
-      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m')
+  have hdata := picard_residue_homology_chosen_geometric_fibre_data
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m'
+  obtain ⟨φ, e, ei, h⟩ := hdata
+  refine ⟨φ, e, ei, fun i ↦ ⟨(h i).1, (h i).2.2, fun z ↦ ?_⟩⟩
+  exact (congrArg (ei i) ((h i).2.1 z)).trans ((h i).2.2 _)
 
 end AlgebraicGeometry.Scheme

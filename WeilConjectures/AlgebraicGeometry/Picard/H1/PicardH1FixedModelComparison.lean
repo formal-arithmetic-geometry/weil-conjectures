@@ -362,10 +362,7 @@ theorem picard_h1_fixed_model_comparison
     have hcompare := picard_residue_homology_chosen_geometric_maps
       f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
       (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
-    let φ := hcompare.choose
-    let e := hcompare.choose_spec.choose
-    let ei := hcompare.choose_spec.choose_spec.choose
-    have hmaps := hcompare.choose_spec.choose_spec.choose_spec
+    obtain ⟨φ, e, ei, hmaps⟩ := hcompare
     refine residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
       (fun i ↦ (hC i).2.2.1) e0 e1 _ _
       (fun i ↦ structureSheafCohomologyPullback
