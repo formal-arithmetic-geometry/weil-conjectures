@@ -560,7 +560,7 @@ private theorem restrictPresentation_sections (X : Scheme.{u}) (E : Type) [Norme
 attribute [local irreducible] continuousRingModuleEquivalence continuousRingRegularIso
   upperStar upperStarComp comapUpperStarIso pullIso Mod.extendScalars Mod.extendRestrictAdjunction
 
-set_option trace.profiler true in
+set_option profiler true in
 private theorem freeCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [TotallyDisconnectedSpace E] (Y : Scheme.{u})
