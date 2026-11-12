@@ -251,8 +251,6 @@ lemma eqToHom_comp_δ_boundedConstructibleUpperStar {r r' : X ⟶ Y} (h : r = r'
   subst h
   simp
 
-set_option maxHeartbeats 2000000 in
--- the tensor comparisons of composite pullbacks are unfolded
 /-- The tensor form of `boundedConstructibleUpperStarComp_square_coherence_comp`: the two
 identifications `Lf^* LΔ_Y^* (Lp₁^* A ⊗ Lp₂^* B) ⟶ K ⊗ N` in the square `ΔX ≫ q = f ≫ ΔY` with
 `q ≫ pᵢ = p'ᵢ ≫ f`, `ΔY ≫ pᵢ = 𝟙` and `ΔX ≫ p'ᵢ = 𝟙`, through `φ : Lf^* A ⟶ K` and
@@ -309,22 +307,21 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
               ℓ u).obj B) h₃') ≫
           (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).hom.app B)) ≫
       δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) _ _ ≫ (φ ⊗ₘ ψ) := by
-  rw [← reassoc_of% (δ_natural (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΔX)
-      _ _)]
-  rw [← reassoc_of% (δ_natural (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) _
-      _)]
-  rw [← reassoc_of% (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ ΔX q _ _)]
-  rw [reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar ℓ h₁
+  -- Simplifier matching avoids unfolding the pullback constructions at unrelated occurrences.
+  simp only [← Functor.OplaxMonoidal.δ_natural_assoc]
+  simp only [← reassoc_of% (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ ΔX q _ _)]
+  simp only [reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar ℓ h₁
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₁).obj A)
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B))]
-  rw [    reassoc_of% (boundedConstructibleUpperStarComp_inv_app_tensor_δ ℓ f ΔY
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B))]
+  simp only [reassoc_of% (boundedConstructibleUpperStarComp_inv_app_tensor_δ ℓ f ΔY
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₁).obj A)
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B))]
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B))]
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
-  rw [boundedConstructibleUpperStarComp_square_coherence_comp (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
-      ΔY q p₁ p₁' h₁ h₂ h₃ h₄,
-    boundedConstructibleUpperStarComp_square_coherence_comp (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
-        ΔY q p₂ p₂' h₁ h₂' h₃' h₄']
+  simp only [boundedConstructibleUpperStarComp_square_coherence_comp
+      (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX ΔY q p₁ p₁' h₁ h₂ h₃ h₄,
+    boundedConstructibleUpperStarComp_square_coherence_comp
+      (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX ΔY q p₂ p₂' h₁ h₂' h₃' h₄']
+
 end Coherence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
