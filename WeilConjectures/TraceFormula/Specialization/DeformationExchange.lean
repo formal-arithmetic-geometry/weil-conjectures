@@ -312,7 +312,25 @@ private lemma supportCompactSupportExchange_component_identity
         let vty ← Lean.Meta.inferType v
         for i in [0:3] do
           Lean.logInfo m!"Eq part {i} at {(← Lean.getRemainingHeartbeats) / 1000}"
-          synMatch (ety.getArg! i) (vty.getArg! i)
+          if i == 1 then
+            let rec probe (p t : Lean.Expr) (path : String) (fuel : Nat) : Lean.Meta.MetaM Unit := do
+              let p ← Lean.instantiateMVars p
+              if p == t then return
+              Lean.logInfo m!"probe {path}: {p.getAppFn}/{p.getAppNumArgs} vs {t.getAppFn}/{t.getAppNumArgs}, {(← Lean.getRemainingHeartbeats) / 1000}"
+              match fuel with
+              | 0 => synMatch p t
+              | fuel + 1 =>
+                if p.getAppFn == t.getAppFn && p.getAppNumArgs == t.getAppNumArgs && p.isApp then
+                  for a in [0:p.getAppNumArgs] do
+                    if ← Lean.Meta.isProof (t.getArg! a) then
+                      synMatch (p.getArg! a) (t.getArg! a)
+                    else
+                      probe (p.getArg! a) (t.getArg! a) (path ++ "/" ++ toString a) fuel
+                else
+                  synMatch p t
+            probe (ety.getArg! i) (vty.getArg! i) "lhs" 4
+          else
+            synMatch (ety.getArg! i) (vty.getArg! i)
       else
         synMatch ety (← Lean.Meta.inferType v)
       mvs[idx]!.mvarId!.assign v
