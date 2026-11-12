@@ -68,7 +68,6 @@ private theorem composite_counit_of_associativity
           (derivedPullback i).map (b t s hf) ≫
             (picardTermwiseCounit i).app (picardTermwiseModel W U K s) := by
   classical
-  set_option profiler true in
   dsimp only
   intro T T' i t t' s s' ht hs hf hf'
   subst t' s' t
@@ -99,7 +98,8 @@ private theorem composite_counit_of_associativity
     NatTrans.id_app, Category.id_comp, Functor.map_comp, Category.assoc]
   have hn := (c i s).inv.naturality e
   dsimp only [Functor.comp_map, Functor.comp_obj] at hn
-  simp only [reassoc_of% h, ← reassoc_of% hn, hc]
+  simp only [reassoc_of% h, ← reassoc_of% hn]
+  rw [hc]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
