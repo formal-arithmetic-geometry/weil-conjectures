@@ -36,7 +36,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
 set_option linter.style.haveILetI false in
-set_option maxHeartbeats 1400000 in
 -- Model selection and its nested derived-category terms exceed the default heartbeat limit.
 /-- Choose common affine residue models and representatives for the finite family.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.

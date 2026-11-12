@@ -29,7 +29,6 @@ variable [∀ Y : Scheme.{v},
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The dependent complex comparisons require substantial instance elaboration.
 private theorem composite_counit_of_associativity
     (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)
