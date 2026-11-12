@@ -328,18 +328,23 @@ private theorem normalizedReductionComparison_square
     totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
   run_tac
-    let rec firstDiff (fuel : Nat) (a b : Lean.Expr) : Option (Lean.Expr × Lean.Expr) :=
-      if a == b then none else
-      match fuel, a, b with
-      | n + 1, .app f x, .app g y => (firstDiff n f g).orElse (fun _ ↦ firstDiff n x y)
-      | n + 1, .mdata _ x, _ => firstDiff n x b
-      | n + 1, _, .mdata _ y => firstDiff n a y
-      | _, _, _ => some (a, b)
-    let ty := (← Lean.Meta.getLocalDeclFromUserName `hs).type
-    let target ← Lean.Elab.Tactic.getMainTarget
-    if let some (a, b) := firstDiff 64 ty target then
-      Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
-      Lean.logInfo m!"PH324 heads: {repr a.getAppFn}\nversus: {repr b.getAppFn}"
+    let mut a := (← Lean.Meta.getLocalDeclFromUserName `hs).type
+    let mut b ← Lean.Elab.Tactic.getMainTarget
+    for _ in [:64] do
+      if a != b then
+        match a, b with
+        | .app f x, .app g y =>
+          if f != g then
+            a := f
+            b := g
+          else
+            a := x
+            b := y
+        | .mdata _ x, _ => a := x
+        | _, .mdata _ y => b := y
+        | _, _ => pure ()
+    Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
+    Lean.logInfo m!"PH324 heads: {repr a.getAppFn}\nversus: {repr b.getAppFn}"
   dsimp only [scalarReductionSourceDerived, scalarReductionTargetDerived,
     integralReductionSourceHasDerivedCategory, integralReductionTargetHasDerivedCategory,
     coefficientFiniteHasDerived, derivedCategory] at hs ⊢
