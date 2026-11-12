@@ -162,6 +162,39 @@ private theorem pushLine_complete (l : ℕ) [Fact l.Prime]
   let := hpush V hV
   exact (Iso.homCongr (Iso.refl V) c).injective.subsingleton
 
+-- Perform the factorization algebra with abstract objects and functors.
+private theorem base_factor_map_calculation
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (F : C ⥤ D) (L : E ⥤ D) {U V W : C} {A B T : E}
+    (z : U ⟶ V) (b : V ⟶ W) (kS : F.obj V ⟶ L.obj B) (J : B ⟶ T)
+    (kX : F.obj W ⟶ L.obj T) [IsIso kX] (u : F.obj U ⟶ L.obj A) (θ : A ⟶ B)
+    (hb : F.map b = kS ≫ L.map J ≫ inv kX)
+    (hz : F.map z ≫ kS = u ≫ L.map θ) :
+    F.map (z ≫ b) ≫ kX = u ≫ L.map (θ ≫ J) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hb]
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  rw [← Category.assoc, hz, Category.assoc]
+
+private theorem limit_comparison_naturality
+    {C0 C1 D0 D1 E0 E1 : Type*}
+    [Category* C0] [Category* C1] [Category* D0] [Category* D1]
+    [Category* E0] [Category* E1]
+    (R : C0 ⥤ C1) (U : C0 ⥤ D0) (F : C1 ⥤ D1) (T : D0 ⥤ D1)
+    (K : E0 ⥤ D0) (L : E1 ⥤ D1) (Q : E0 ⥤ E1)
+    (σ : R ⋙ F ⟶ U ⋙ T) (τ : K ⋙ T ⟶ Q ⋙ L)
+    {Z : C1} {X Y : C0} {X' Y' : E0}
+    (b : Z ⟶ R.obj X) (w : X ⟶ Y) (k : U.obj Y ⟶ K.obj Y')
+    (u : U.obj X ⟶ K.obj X') (θ : X' ⟶ Y')
+    (hw : U.map w ≫ k = u ≫ K.map θ) :
+    F.map (b ≫ R.map w) ≫ (σ.app Y ≫ T.map k ≫ τ.app Y') =
+      (F.map b ≫ σ.app X ≫ T.map u ≫ τ.app X') ≫ L.map (Q.map θ) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (σ.naturality w)]
+  rw [← T.map_comp_assoc, hw, T.map_comp]
+  simp only [Category.assoc]
+  rw [τ.naturality θ]
+
 set_option profiler true in
 private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
@@ -261,21 +294,17 @@ private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
       p.coefficientsS.unitMap l E p.LS ≫
         p.LS.R.map (p.restrictionS.F.mapDerivedCategory.map (θS ≫ t) ≫
           p.varying.hom.app _) := by
-    simp only [Functor.map_comp, Category.assoc]
-    rw [hb]
-    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-    rw [← Category.assoc, hz]
-    simp only [J, Functor.map_comp, Category.assoc, θS, E]
+    simpa only [J, Functor.map_comp, Category.assoc] using
+      base_factor_map_calculation F p.LS.R z b.hom kS J kX
+        (p.coefficientsS.unitMap l E p.LS) (p.restrictionS.F.mapDerivedCategory.map θS) hb hz
   rw [hleft, ← hc]
   symm
-  dsimp only [kX, DiagonalTrace.Presentation.sourceMap]
-  simp only [Functor.map_comp, Category.assoc]
-  have hn := p.completed.iso.hom.naturality w
-  have hlim := p.limits.iso.hom.naturality (p.restrictionX.F.mapDerivedCategory.map θX)
-  erw [reassoc_of% hn]
-  erw [← p.Rf.R.map_comp_assoc, hw, p.Rf.R.map_comp]
-  simp only [Category.assoc]
-  erw [hlim]
+  change F.map (b₀ ≫ p.Rc.R.map w) ≫
+    (p.completed.iso.hom.app _ ≫ p.Rf.R.map _ ≫ p.limits.iso.hom.app _) = _
+  rw [limit_comparison_naturality p.Rc.R (diagonalCompletedUnderlying l X) F
+    p.Rf.R p.LX.R p.LS.R p.Rt.R p.completed.iso.hom p.limits.iso.hom
+    b₀ w _ (p.coefficientsX.unitMap l E p.LX)
+    (p.restrictionX.F.mapDerivedCategory.map θX) hw]
   have hv := p.varying.hom.naturality θX
   simp only [Functor.comp_map] at hv
   have hvL := congrArg (fun k ↦ p.LS.R.map k) hv

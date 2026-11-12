@@ -352,6 +352,7 @@ theorem completed_adjunct_square
       s.q_square.derived.iso.hom.app (DiagonalTrace.completedUnit l (ProjectiveLine Y)) ≫
         s.zl.Rq.R.map iP.hom =
     s.completedY.singleUnit l Y ≫ coefficientUnitPush _ Y s.zl.Rq := by
+    unfold CompletedRealization.singleUnit coefficientUnitPush
     exact realization_unit_square s.completedP.F s.completedY.F t.Rc s.zl.Rq
       s.q_square.ordinary s.q_square.derived UP UY _ _
       s.completedP.unitIso s.completedY.unitIso m (coefficientOrdinaryUnit _ Y) hm
