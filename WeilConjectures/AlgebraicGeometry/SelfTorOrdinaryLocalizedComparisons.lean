@@ -300,26 +300,27 @@ theorem exists_selfTor_ordinary_localized_comparisons
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
   classical
-  intro inst B S Q
+  intro B S Q
   let T := S.obj B
   have hT : ∀ j : ℤ, 0 < j → IsZero (T.X j) := by
     intro j hj
     exact HomologicalComplex.isZero_single_obj_X _ _ _ j (by omega)
-  rcases exists_nonpositive_flat_quasiIso Y T hT with ⟨E, r, hflat, hbound, hr⟩
+  rcases exists_nonpositive_flat_quasiIso Y T hT with ⟨E, r, hEr⟩
   have hE : E.IsKFlatTensor := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
-    Y.toRingedSpace E ⟨0, hbound⟩ hflat
-  rcases tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq (-(n : ℤ)) with ⟨e⟩
-  rcases exists_selfTor_nonpositive_flat_sections i E r hbound hflat hr n with ⟨d, hd⟩
+    Y.toRingedSpace E ⟨0, hEr.2.1⟩ hEr.1
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  rcases tensor_homology_iso_of_resolutions Y E K T T r q hE hK hEr.2.2 hq (-(n : ℤ)) with ⟨e⟩
+  rcases exists_selfTor_nonpositive_flat_sections i E r hEr.2.1 hEr.1 hEr.2.2 n with ⟨d, hd⟩
   refine ⟨fun U ↦ (d U).trans (Scheme.Modules.appLinearEquivOfIso e U.1), ?_⟩
   intro V U h hbasic A C I J φ PU PV TA TC
   have hI : ∀ x ∈ I, φ x ∈ J := by
     intro x hx
     exact i.ker.ideal_le_comap_ideal h hx
   rcases exists_quotient_resolution_tensor_comparison A C I J φ hI PU PV with
-    ⟨ψ, a, k, hψ, ha, hk⟩
-  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+    ⟨ψ, a, k, hlift⟩
+  refine ⟨ψ, a, k, hlift.1, hlift.2.1, hlift.2.2, ?_⟩
   intro e' x
-  have hn := hd V U h hbasic ψ a k hψ ha hk x
+  have hn := hd V U h hbasic ψ a k hlift.1 hlift.2.1 hlift.2.2 x
   have hs := PresheafOfModules.naturality_apply e.hom.val (homOfLE h).op (d U x)
   change _ = e.hom.val.app (op V.1) _
   exact hs.symm.trans (congrArg (e.hom.val.app (op V.1)) hn)

@@ -114,22 +114,22 @@ theorem exists_selfTor_ordinary_resolution_sections
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
-  intro inst B S Q
+  intro B S Q
   obtain ⟨c, hc⟩ := exists_selfTor_ordinary_localized_comparisons i K q hK hq n
   refine ⟨c, ?_⟩
   intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk
-  obtain ⟨ψ₀, a₀, k₀, hψ₀, ha₀, hk₀, hc₀⟩ := hc V U h hbasic
+  obtain ⟨ψ₀, a₀, k₀, hlift⟩ := hc V U h hbasic
   have hψeq : ψ₀ = ψ := by
     apply RingHom.ext
     intro y
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
-    exact (hψ₀ x).trans (hψ x).symm
+    exact (hlift.1 x).trans (hψ x).symm
   subst ψ₀
   obtain ⟨H⟩ := ModuleCat.quotient_tensor_resolution_lift_homotopy
-    I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+    I J φ P R ψ a₀ a k₀ k hψ hlift.2.1 ha hlift.2.2.1 hk
   have heq := H.homologyMap_eq n
   intro e x
-  exact (hc₀ x).trans (congrArg (fun k ↦ c V (e.hom (k x))) heq)
+  exact (hlift.2.2.2 x).trans (congrArg (fun k ↦ c V (e.hom (k x))) heq)
 
 
 end AlgebraicGeometry

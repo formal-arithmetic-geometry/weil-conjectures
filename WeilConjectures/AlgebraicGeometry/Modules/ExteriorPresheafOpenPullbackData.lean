@@ -322,7 +322,7 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
   (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
 /-- Identify restricted sections before applying the exterior-power functor. -/
-private def openSectionTransportIso {X : Scheme.{v}} (M : X.Modules)
+private noncomputable def openSectionTransportIso {X : Scheme.{v}} (M : X.Modules)
     (U : X.Opens) (V : U.toScheme.Opensᵒᵖ) :
     (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
       (M.val.obj (U.ι.opensFunctor.op.obj V)) ≅ (M.restrict U.ι).val.obj V :=
