@@ -87,6 +87,10 @@ theorem kFlat_condensedRealization_mapHomologicalComplex
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (hP : NativeIsKFlat k₀ l X P) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((condensedRealization k₀ l X).mapHomologicalComplex (.up ℤ)).obj P) := by
+  have : HasColimitsOfSize.{0, 0}
+      (Mod (Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+        Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
   obtain ⟨τ⟩ := nonempty_condensedTensorIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
   have h := native_two_sided_kflat_forget k₀ l X P hP
   have := Functor.flip_additive

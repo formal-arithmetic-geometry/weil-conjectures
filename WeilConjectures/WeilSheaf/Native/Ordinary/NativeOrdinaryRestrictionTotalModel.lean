@@ -85,6 +85,24 @@ private theorem exact_total_tensor_square
   erw [Category.comp_id]
   exact Functor.Monoidal.δ_μ_assoc F.mapDerivedCategory _ _ _
 
+private theorem exact_total_tensor_square_transport
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.Monoidal]
+    {M N P T L V : C} {K P' T' W Z : D}
+    (f : M ⟶ P) (g : N ⟶ T) (t : L ⟶ M ⊗ N)
+    (i : K ≅ F.obj M ⊗ F.obj N)
+    (a : F.obj P ⟶ P') (b : F.obj T ⟶ T') (μ : P' ⊗ T' ⟶ W)
+    (q : P ⊗ T ⟶ V) (k : F.obj V ⟶ Z) (r : Z ⟶ W)
+    (h : Functor.OplaxMonoidal.δ F P T ≫ (a ⊗ₘ b) ≫ μ = F.map q ≫ k ≫ r) :
+    (F.map t ≫ Functor.OplaxMonoidal.δ F M N ≫ i.inv) ≫ i.hom ≫
+        ((F.map f ≫ a) ⊗ₘ (F.map g ≫ b)) ≫ μ =
+      F.map (t ≫ (f ⊗ₘ g) ≫ q) ≫ k ≫ r := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← tensorHom_comp_tensorHom]
+  simp only [Category.assoc]
+  rw [Functor.OplaxMonoidal.δ_natural_assoc, h]
+  simp only [Functor.map_comp, Category.assoc]
+
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
@@ -188,34 +206,14 @@ theorem native_ordinary_restriction_total_model
       (Scheme.Hom.geometricFiberMap j (comp_over j
         (Spec (CommRingCat.of k₀))))).isLeftAdjoint
   letI := R.exactClosedDerivedMonoidal
-  have h := exact_total_tensor_square R P T
-  change (R.mapDerivedCategory.map ((dZ.tensorIso k₀ l).hom.app (M, N)) ≫
-      Functor.OplaxMonoidal.δ R.mapDerivedCategory M N ≫
-      (dU.tensorIso k₀ l).inv.app (R.mapDerivedCategory.obj M,
-        R.mapDerivedCategory.obj N)) ≫
-      (dU.tensorIso k₀ l).hom.app (R.mapDerivedCategory.obj M, R.mapDerivedCategory.obj N) ≫
-      (MonoidalCategory.tensor _).map
-        (Prod.mkHom (R.mapDerivedCategory.map f.hom ≫ R.mapDerivedCategoryFactors.hom.app P)
-          (R.mapDerivedCategory.map g.hom ≫ R.mapDerivedCategoryFactors.hom.app T)) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((R.mapHomologicalComplex (.up ℤ)).obj P)
-        ((R.mapHomologicalComplex (.up ℤ)).obj T) = _
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  change R.mapDerivedCategory.map ((dZ.tensorIso k₀ l).hom.app (M, N)) ≫
-      Functor.OplaxMonoidal.δ R.mapDerivedCategory M N ≫
-      ((R.mapDerivedCategory.map f.hom ≫ R.mapDerivedCategoryFactors.hom.app P) ⊗ₘ
-        (R.mapDerivedCategory.map g.hom ≫ R.mapDerivedCategoryFactors.hom.app T)) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((R.mapHomologicalComplex (.up ℤ)).obj P)
-        ((R.mapHomologicalComplex (.up ℤ)).obj T) =
-    R.mapDerivedCategory.map
-      ((dZ.tensorIso k₀ l).hom.app (M, N) ≫ (f.hom ⊗ₘ g.hom) ≫
-        Functor.LaxMonoidal.μ DerivedCategory.Q P T) ≫
-      R.mapDerivedCategoryFactors.hom.app (P ⊗ T) ≫
-      DerivedCategory.Q.map (R.mapCochainComplexμIso P T).inv
-  rw [← tensorHom_comp_tensorHom]
-  simp only [Category.assoc]
-  rw [Functor.OplaxMonoidal.δ_natural_assoc, h]
-  simp only [Functor.map_comp, Category.assoc]
+  exact exact_total_tensor_square_transport R.mapDerivedCategory f.hom g.hom
+    ((dZ.tensorIso k₀ l).hom.app (M, N))
+    ((dU.tensorIso k₀ l).app (R.mapDerivedCategory.obj M, R.mapDerivedCategory.obj N))
+    (R.mapDerivedCategoryFactors.hom.app P) (R.mapDerivedCategoryFactors.hom.app T)
+    (Functor.LaxMonoidal.μ DerivedCategory.Q _ _)
+    (Functor.LaxMonoidal.μ DerivedCategory.Q P T)
+    (R.mapDerivedCategoryFactors.hom.app (P ⊗ T))
+    (DerivedCategory.Q.map (R.mapCochainComplexμIso P T).inv)
+    (exact_total_tensor_square R P T)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
