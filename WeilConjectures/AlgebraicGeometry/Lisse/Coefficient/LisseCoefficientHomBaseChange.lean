@@ -448,6 +448,10 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
             (algebraMap R (S ⧸ I.map (algebraMap R S))) _ 1 (b.repr s i • x)) := by
       apply Finset.sum_congr rfl
       intro i _
+      change (quotientReconstructMap Y b I M i).hom.app (op U)
+        ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
+          (lisseCoherence_quotientScalarGenerator Y _ _ M U
+            (Ideal.Quotient.mk _ s) x)) = _
       rw [quotientCoordinateSheaf_tmul]
       dsimp only [quotientReconstructMap, ObjectProperty.FullSubcategory.comp_hom,
         NatTrans.comp_app]
