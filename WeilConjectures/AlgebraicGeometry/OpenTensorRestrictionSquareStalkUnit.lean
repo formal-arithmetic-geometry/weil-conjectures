@@ -64,9 +64,6 @@ private theorem composition_unit {X Y Z : Scheme.{u}}
     Scheme.Modules.tensorPullbackCompositionIso, conjugateIsoEquiv_symm_apply_hom] using t
 
 section
-attribute [local irreducible] Scheme.Modules.tensorPullback
-  Scheme.Modules.tensorPullbackCompositionIso Scheme.Modules.pushforward
-  Scheme.Modules.pushforwardComp Scheme.Modules.pushforwardCongr
 
 private theorem square_unit_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
