@@ -310,9 +310,7 @@ theorem zeroLocusMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Alge
   rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
     homMulEquiv_zeroLocusMulEquiv_comp]
 
-set_option synthInstance.maxHeartbeats 400000 in
-set_option trace.profiler true in
--- the group structure on points of the quotient scheme makes instance search slow
+set_option profiler true in
 /-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
 (`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
@@ -326,6 +324,7 @@ theorem containsCommutators_subgroupSchemeHom
     IsMonHom.ContainsCommutators (subgroupSchemeHom h) := by
   refine ⟨fun {X} a b ↦ ?_⟩
   obtain ⟨R, _, _, t, ht⟩ := Over.exists_bijective_comp_toSpecΓ X
+  let : Group ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) := Hom.group
   obtain ⟨a', rfl⟩ := (ht _).2 a
   obtain ⟨b', rfl⟩ := (ht _).2 b
   set x := (zeroLocusMulEquiv I R).symm a'
@@ -483,11 +482,7 @@ Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J
 instance : (derivedIdeal I).IsHopfIdeal k :=
   Ideal.isHopfIdeal_sSup fun _ ⟨hJ, _, _⟩ ↦ hJ
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the group structure on points of the quotient scheme makes instance search slow
-set_option maxHeartbeats 900000 in
-set_option trace.profiler true in
--- the factorisation through `Spec Γ(X)` and the commutator computation are slow to elaborate
+set_option profiler true in
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 
 Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
@@ -496,6 +491,7 @@ Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where the
 instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
   refine ⟨fun {X} a b ↦ ?_⟩
   obtain ⟨R, _, _, t, ht⟩ := Over.exists_bijective_comp_toSpecΓ X
+  let : Group ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) := Hom.group
   obtain ⟨a', rfl⟩ := (ht _).2 a
   obtain ⟨b', rfl⟩ := (ht _).2 b
   have hγ : (t ≫ a') * (t ≫ b') * (t ≫ a')⁻¹ * (t ≫ b')⁻¹ =
