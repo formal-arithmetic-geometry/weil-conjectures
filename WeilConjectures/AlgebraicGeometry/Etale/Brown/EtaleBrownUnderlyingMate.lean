@@ -178,6 +178,32 @@ private theorem brown_underlying_restriction_section
       HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x) ∧
       brown_underlying_localization_coherence O t W P R ∧
       brown_underlying_scalar_coherence O t W P R := hR
+  run_tac
+    let a ← Lean.Elab.Tactic.getLocalDeclFromUserName `hR
+    let b ← Lean.Elab.Tactic.getLocalDeclFromUserName `hR'
+    let count ← IO.mkRef (0 : Nat)
+    let rec diff (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
+      if fuel == 0 || a == b || (← count.get) >= 12 then return
+      let a ← Lean.Meta.whnf a
+      let b ← Lean.Meta.whnf b
+      if a == b then return
+      match fuel, a, b with
+      | k + 1, .app .., .app .. =>
+        if a.getAppFn == b.getAppFn && a.getAppNumArgs == b.getAppNumArgs then
+          for (x, y) in a.getAppArgs.zip b.getAppArgs do diff k x y
+        else
+          count.modify (· + 1)
+          Lean.logInfo m!"coherence difference: {a} versus {b}"
+      | k + 1, .forallE _ a₁ a₂ _, .forallE _ b₁ b₂ _ =>
+        diff k a₁ b₁
+        diff k a₂ b₂
+      | k + 1, .lam _ a₁ a₂ _, .lam _ b₁ b₂ _ =>
+        diff k a₁ b₁
+        diff k a₂ b₂
+      | _, _, _ =>
+        count.modify (· + 1)
+        Lean.logInfo m!"coherence difference: {a} versus {b}"
+    diff 30 a.type b.type
   exact @hR'.1
 
 private theorem brown_underlying_right_section
