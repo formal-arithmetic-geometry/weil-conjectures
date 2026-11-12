@@ -100,6 +100,12 @@ private lemma retraction_of_comp_of_isIso_aux {DX DM DT DS : Type*} [Category DX
       ← reassoc_of% (hact i (c₀.hom.app A)), ← Ψ.map_comp, Iso.hom_inv_id_app, Ψ.map_id,
       Category.comp_id]
 
+private lemma eq_id_of_intertwining_of_epi_aux {D E : Type*} [Category D] [Category E]
+    (F : D ⥤ E) {A : D} {B : E} (f : A ⟶ A) (g : B ⟶ B) (e : F.obj A ⟶ B)
+    [Epi e] (h : e ≫ g = F.map f ≫ e) (hf : f = 𝟙 A) : g = 𝟙 B := by
+  rw [hf, F.map_id, Category.id_comp] at h
+  exact (cancel_epi e).1 (h.trans (Category.comp_id e).symm)
+
 variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
   (L' : IntermediateField L Ω)
@@ -166,7 +172,6 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
   exact (AlgEquiv.restrictNormal_commutes σ L' x).trans
     ((IntermediateField.mem_fixingSubgroup_iff L' σ).1 hσ x x.2)
 
--- the pullback exchanges of the three layers are large terms
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
 of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible at `L(𝟙)^* C` (stabilization at the
@@ -194,19 +199,18 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
+  have : Normal L L' := inferInstance
   constructor
   · intro σ hσ
     have hc := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       (L((𝟙 X)^*⟦Λ⟧).obj C)
-    rw [restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ] at hc
-    have h1 : (N.galoisLayerAut h L' 1).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _ :=
-      N.galoisLayerAction_one Λ h L' _
-    rw [h1, CategoryTheory.Functor.map_id, Category.id_comp] at hc
+    have h1 : (N.galoisLayerAut h L' (σ.restrictNormal L')).autAction Λ
+        (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _ :=
+      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
+        (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
+          (N.galoisLayerAction_one Λ h L' _)
     have h2 : (N.galoisLayerAut h Ω σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) =
-        𝟙 _ := by
-      rw [← cancel_epi (((N.galoisLayerRestrict h Ω L').pullbackExchange Λ).app
-        (L((𝟙 X)^*⟦Λ⟧).obj C)), hc]
-      exact (Category.comp_id _).symm
+        𝟙 _ := eq_id_of_intertwining_of_epi_aux L((𝟙 X')^*⟦Λ⟧) _ _ _ hc h1
     exact eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality Λ _ g)
       ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
   · obtain ⟨r, hr, havg⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
