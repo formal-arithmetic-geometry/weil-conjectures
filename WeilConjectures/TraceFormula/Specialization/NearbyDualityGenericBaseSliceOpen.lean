@@ -572,7 +572,11 @@ lemma boundedConstructiblePullbackExchange_square (φ₀ : M₂.Hom M c p)
           A).hom := by
   subst hα hαc
   apply ObjectProperty.hom_ext
-  exact pullbackExchange_square' ℓ φ₀ ψ ψ' φ₁ htot hgen hb hs A.obj
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
+    ObjectProperty.homMk_hom, boundedConstructibleUpperStar_map_hom, liftExchange_app_hom,
+    Hom.boundedConstructiblePullbackExchange_app_hom,
+    boundedConstructibleUpperStarSquareIso_hom_hom, boundedConstructibleNearbyCycles_map_hom'']
+  transport_exact pullbackExchange_square' ℓ φ₀ ψ ψ' φ₁ htot hgen hb hs A.obj
 
 end SquareExchange
 
@@ -626,12 +630,10 @@ lemma Hom.liftExchange_zeroTwistSpecializationMap (φ : N.Hom M f f')
         (boundedConstructibleTateTwistZeroUpperStarIso ℓ (X := X) (Y := Y) f n).inv := by
   subst hβ
   apply ObjectProperty.hom_ext
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, liftExchange_app_hom, boundedConstructibleNearbyCycles_map_hom'']
-  unfold boundedConstructibleTateTwistZeroUpperStarIso zeroTwistSpecializationMap
-  rw [ObjectProperty.isoMk_inv, ObjectProperty.homMk_hom, ObjectProperty.homMk_hom,
-    ObjectProperty.isoMk_inv, ObjectProperty.homMk_hom, ObjectProperty.homMk_hom]
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarOfMap_map,
+    ObjectProperty.homMk_hom, liftExchange_app_hom, boundedConstructibleNearbyCycles_map_hom'',
+    boundedConstructibleTateTwistZeroUpperStarIso, ObjectProperty.isoMk_inv,
+    zeroTwistSpecializationMap]
   transport_exact φ.pullbackExchange_ambientZeroTwistSpecializationMap (ℓ := ℓ) n
 
 /-- **The twist isomorphisms `κ` and the pullback exchange** on bounded constructible complexes:
