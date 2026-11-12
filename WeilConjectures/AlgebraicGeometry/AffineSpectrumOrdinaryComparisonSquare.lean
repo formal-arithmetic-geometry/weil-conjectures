@@ -72,6 +72,17 @@ private theorem compose_maps_square
       F.map (b ≫ s ≫ c) ≫ j ≫ F0.map (H0.map (epsilon ≫ delta)) := by
   simpa only [Functor.map_comp, Category.assoc] using h
 
+private theorem cancel_transport_factors
+    {C C0 D : Type*} [Category* C] [Category* C0] [Category* D]
+    (F : C ⥤ D) (F0 : C0 ⥤ D) {A B : C} {A0 B0 : C0} {U : D}
+    (c : A ≅ B) (cE : A0 ≅ B0) (e : F.obj A ≅ F0.obj A0)
+    (d : U ≅ F0.obj A0) :
+    F.map c.hom ≫ (F.mapIso c.symm ≪≫ e ≪≫ F0.mapIso cE).hom ≫ F0.map cE.inv =
+      (e.hom ≫ d.inv) ≫ d.hom := by
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
+    ← F.map_comp_assoc, ← F0.map_comp, Iso.hom_inv_id, Functor.map_id,
+    Category.id_comp, Category.comp_id, Iso.inv_hom_id_assoc]
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
@@ -154,17 +165,11 @@ private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [Is
       Localization.liftNatTrans_app]
     rfl
   rw [h]
-  change F.map c.hom ≫ ((F.mapIso c.symm ≪≫ e ≪≫ F0.mapIso cE).hom) ≫
-    F0.map cE.inv = _
-  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc]
-  erw [← F.map_comp_assoc c.hom c.inv, c.hom_inv_id, F.map_id, Category.id_comp]
-  erw [← F0.map_comp cE.hom cE.inv, cE.hom_inv_id, F0.map_id, Category.comp_id]
-  erw [← F0.map_comp, ← H0.map_comp, Iso.inv_hom_id_app,
-    H0.map_id, F0.map_id, Category.comp_id]
+  exact cancel_transport_factors F F0 c cE e
+    (F0.mapIso (H0.mapIso ((isoPullbackComplexCounitIso j).app P)))
 
 
-set_option profiler true in
--- Unifying the two stalk-ring diagrams and their tensor models needs this budget.
+-- Unifying the two stalk-ring diagrams and their tensor models.
 /-- The base-derived tensor comparison is invariant under affine spectrum coordinates
 before introducing either inverse counit for g'. No K-flatness is needed here.
 
@@ -246,8 +251,8 @@ theorem exists_affineSpectrum_ordinaryComparison_square
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
   let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
-  obtain ⟨eR, eA, eB, eD, q, t, hA, hB, hD, ht, hcoord⟩ :=
-    exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
+  have hcoordinates := exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
+  rcases hcoordinates with ⟨eR, eA, eB, eD, q, t, hA, hB, hD, ht, hcoord⟩
   obtain ⟨l, hl⟩ := ModuleCat.exists_baseDerivedTensor_ringIso_square.{u, u + 1}
     eR eA eB eD hA hB hD (stalkComplex g' z P)
     (stalkComplex (Spec.map g'.appTop) z0 P0) q M M0 t ht i
