@@ -95,9 +95,17 @@ private theorem isIso_open_module_mate_of_isPullback
     have hW := IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback h W
     have hh : Scheme.Modules.Hom.app (α.app M) W =
         M.val.presheaf.map (eqToHom hW).op := by
+      let V := B.ι ''ᵁ W
+      let U := p ⁻¹ᵁ V
+      have hc : p' ⁻¹ᵁ (B.ι ⁻¹ᵁ V) = i ⁻¹ᵁ U :=
+        congrArg (fun k : X' ⟶ Y ↦ k ⁻¹ᵁ V) h.w
+      let a := (homOfLE (i.image_preimage_le U)).op
+      let b := (i.opensFunctor.map (eqToHom hc)).op
+      let d := (i.opensFunctor.map ((TopologicalSpace.Opens.map p'.base).map
+        (eqToHom (B.ι.preimage_image_eq W).symm))).op
       ext x
-      change M.val.presheaf.map _
-        (M.val.presheaf.map _ (M.val.presheaf.map _ x)) = _
+      change M.val.presheaf.map d
+        (M.val.presheaf.map b (M.val.presheaf.map a x)) = _
       simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
       congr 1
     rw [hh]

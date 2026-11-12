@@ -36,7 +36,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- Under the cohomology comparison, the derived affine algebra counit is the
 underived counit applied to the cohomology module.
 Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
