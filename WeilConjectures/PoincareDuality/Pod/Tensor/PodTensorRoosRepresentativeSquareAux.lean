@@ -380,7 +380,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
     let actual ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type
-    for i in [0, 2, 1] do
+    for i in ([0, 2, 1] : List Nat) do
       Lean.logInfo m!"comparing equality argument {i}"
       let matched ← Lean.Meta.isDefEq actual.getAppArgs[i]! target.getAppArgs[i]!
       Lean.logInfo m!"comparison {i}: {matched}"
