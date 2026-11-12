@@ -85,7 +85,6 @@ private theorem tensorStalkIso_naturality (z : X')
     ((Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.naturality
       (a.f i))
 
-set_option profiler true in
 private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
     (derivedPullback g' ⋙ comparisonDerivedStalk X' z).IsLeftDerivedFunctor
       ((Functor.associator DerivedCategory.Qh (derivedPullback g')
@@ -117,8 +116,10 @@ private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
     HomologicalComplex.monoidalCategory A₀ (.up ℤ)
   have : HasColimitsOfShape ℤ A₀ := inferInstance
   have : HasExactColimitsOfShape ℤ A₀ := inferInstance
-  have (M : A₀) : PreservesColimitsOfShape ℤ ((curriedTensor A₀).obj M) := inferInstance
-  have (M : A₀) : PreservesColimitsOfShape ℤ ((curriedTensor A₀).flip.obj M) := inferInstance
+  have (M : A₀) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor A₀).obj M) := inferInstance
+  have (M : A₀) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor A₀).flip.obj M) := inferInstance
   have : W.localizerMorphismKFlat.IsLeftDerivabilityStructure := inferInstance
   let G : A₀ ⥤ B₀ := Scheme.Modules.tensorPullback g'
   have : G.Additive := tensorPullbackAdditive.{u, w} g'
@@ -146,7 +147,6 @@ private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
 -- Keep the original named proof binders, even though they do not occur in the conclusion.
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
-set_option profiler true in
 /-- A natural comparison with the specified K-flat representative equation, without an
 invertibility assertion.
 

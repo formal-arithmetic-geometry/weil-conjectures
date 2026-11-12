@@ -16,6 +16,7 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
+
 private theorem image_resolution_normalization
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
     {I E : C} {A B : D} (e : I ≅ E) (a : F.obj I ≅ A) (b : B ≅ F.obj E)
