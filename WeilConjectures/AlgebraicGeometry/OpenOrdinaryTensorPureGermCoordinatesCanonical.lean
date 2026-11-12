@@ -112,6 +112,7 @@ private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toSch
 
 set_option maxHeartbeats 700000 in
 -- Stalk scalar transport elaborates two specified tensor-stalk components.
+set_option profiler true in
 /-- The unit-scalar section-germ generator equation for the pinned comparison.
 
 Expand the tensor-stalk and pinned restriction maps on a section germ. Their
