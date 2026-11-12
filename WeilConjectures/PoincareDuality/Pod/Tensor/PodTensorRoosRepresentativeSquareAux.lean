@@ -340,9 +340,16 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
     isoReductionIntegralComplex, podGoodReindex, integralOperationsRoosFunctor,
     Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at a b eP eQ e
-  have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
+  have cancel := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
     (DerivedCategory.Q (C := scalarReductionSource l E X))
+    (A := (podOrdinaryReindex l E g).obj ((integralCompletedTensor l E Y).obj
+      (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)))
+    (B := (podOrdinaryReindex l E g).obj (DerivedCategory.Q.obj (integralOperationsRoos
+      ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))))
+    (Z := (integralCompletedTensor l E X).obj
+      ((integralDerivedPullback l E g).obj (DerivedCategory.Q.obj P.obj),
+        (integralDerivedPullback l E g).obj (DerivedCategory.Q.obj Q.obj)))
     (U := (podReindexTower l E g).obj
       ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))
     (V := (integralOperationsTensorTowerFunctor l E X).obj
@@ -351,9 +358,11 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (integralOperationsRoos
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
     eP eQ e
+  have cancel' := cancel
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
+  have finish := cancel'
     _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
     (by
       simpa only [a, b, eP, eQ, e, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
