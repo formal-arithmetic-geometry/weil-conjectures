@@ -85,6 +85,50 @@ private theorem tensorStalkIso_naturality (z : X')
     ((Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.naturality
       (a.f i))
 
+set_option profiler true in
+private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
+    (derivedPullback g' ⋙ comparisonDerivedStalk X' z).IsLeftDerivedFunctor
+      ((Functor.associator DerivedCategory.Qh (derivedPullback g')
+        (comparisonDerivedStalk X' z)).inv ≫
+        Functor.whiskerRight (counit g') (comparisonDerivedStalk X' z))
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) := by
+  let A₀ := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let B₀ := SheafOfModules.{u} (moduleRings X'.toRingedSpace)
+  let W := HomotopyCategory.quasiIso A₀ (.up ℤ)
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let : MonoidalCategory A₀ := SheafOfModules.monoidalCategory X.sheaf
+  let : SymmetricCategory A₀ := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive A₀ := Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed A₀ := Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : HasColimitsOfSize.{0, 0} A₀ :=
+    hasColimitsOfSizeShrink.{0, 0, u, u} A₀
+  have : Abelian.HasFunctorialFlatResolution A₀ := schemeModule_hasFunctorialFlatResolution X
+  have : IsGrothendieckAbelian.{u} A₀ :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  let G : A₀ ⥤ B₀ := Scheme.Modules.tensorPullback g'
+  have : G.Additive := tensorPullbackAdditive.{u, w} g'
+  have : (derivedPullback g').IsLeftDerivedFunctor (counit g') W :=
+    (Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition))) g'
+  have : G.PreservesKFlatQuasiIso := by
+    refine ⟨?_⟩
+    intro P Q hP hQ s hs
+    have toIsKFlat (P : CochainComplex A₀ ℤ)
+        (hP : (HomologicalComplex.quasiIso A₀ (.up ℤ)).kFlat P) :
+        CochainComplex.IsKFlatTensor (R := X.sheaf) P := by
+      intro F hF
+      have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+        ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)).mp
+          ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
+      exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+        (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
+    exact tensorPullback_quasiIso_of_isKFlat g' s (toIsKFlat P hP) (toIsKFlat Q hQ) hs
+  exact W.localizerMorphismKFlat
+    |>.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure (counit g')
+      (fun P ↦ G.derives_kFlat.isIso_of_isLeftDerivedFunctor (counit g') P)
+      (comparisonDerivedStalk X' z)
+
 -- Keep the original named proof binders, even though they do not occur in the conclusion.
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
@@ -167,39 +211,8 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
   let α := (Functor.associator DerivedCategory.Qh (derivedPullback g')
     (comparisonDerivedStalk X' z)).inv ≫
     Functor.whiskerRight (counit g') (comparisonDerivedStalk X' z)
-  have hT : T.IsLeftDerivedFunctor α W := by
-    dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-    let : MonoidalCategory A₀ := SheafOfModules.monoidalCategory X.sheaf
-    let : SymmetricCategory A₀ := SheafOfModules.symmetricCategory X.sheaf
-    have : MonoidalPreadditive A₀ := Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
-    let : MonoidalClosed A₀ := Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
-    have : HasColimitsOfSize.{0, 0} A₀ :=
-      hasColimitsOfSizeShrink.{0, 0, u, u} A₀
-    have : Abelian.HasFunctorialFlatResolution A₀ := schemeModule_hasFunctorialFlatResolution X
-    have : IsGrothendieckAbelian.{u} A₀ :=
-      SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-    let G : A₀ ⥤ B₀ := Scheme.Modules.tensorPullback g'
-    have : G.Additive := tensorPullbackAdditive.{u, w} g'
-    have : (derivedPullback g').IsLeftDerivedFunctor (counit g') W :=
-      (Classical.choose (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition))) g'
-    have : G.PreservesKFlatQuasiIso := by
-      refine ⟨?_⟩
-      intro P Q hP hQ s hs
-      have toIsKFlat (P : CochainComplex A₀ ℤ)
-          (hP : (HomologicalComplex.quasiIso A₀ (.up ℤ)).kFlat P) :
-          CochainComplex.IsKFlatTensor (R := X.sheaf) P := by
-        intro F hF
-        have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
-          ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)).mp
-            ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
-        exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
-          (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
-      exact tensorPullback_quasiIso_of_isKFlat g' s (toIsKFlat P hP) (toIsKFlat Q hQ) hs
-    exact W.localizerMorphismKFlat
-      |>.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure (counit g')
-        (fun P ↦ G.derives_kFlat.isIso_of_isLeftDerivedFunctor (counit g') P)
-        (comparisonDerivedStalk X' z)
+  have hT : T.IsLeftDerivedFunctor α W :=
+    derivedPullback_stalk_isLeftDerivedFunctor g' z
   have := hT
   let Sc := St.mapHomologicalComplex (.up ℤ)
   let Pc := (Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)
@@ -241,9 +254,6 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
       (stalkComplex g' z P)) = 𝟙 _ := DerivedCategory.Qh.map_id _
   have hq' : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} (C z))).hom.app
       (tensorComplex f f' g g' sq z P) = 𝟙 _ := rfl
-  rw [hq, hE, hq', Category.id_comp, Category.id_comp, Category.id_comp]
-  exact hcoord
-
-
+  simpa only [hq, hE, hq', Category.id_comp] using hcoord
 
 end AlgebraicGeometry.SingleComplexBaseChange
