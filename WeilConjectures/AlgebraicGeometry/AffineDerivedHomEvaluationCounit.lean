@@ -130,13 +130,19 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
       ∃ d : L.obj (R.obj (DerivedCategory.Q.obj K)) ≅ B.obj (op M, DerivedCategory.Q.obj K),
         d.hom ≫ p.app (DerivedCategory.Q.obj K) ≫ ι.hom.app (DerivedCategory.Q.obj K) =
           adj.counit.app (DerivedCategory.Q.obj K) := by
-  obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
-    exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
+  refine (exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f).elim fun H₀ h₀ ↦ ?_
+  refine h₀.elim fun hH₀ h₁ ↦ ?_
   let _ := hH₀
-  refine ⟨R, L, affineScalarLocalizationIso.{u, wY, wA} f L t, adj, ?_⟩
-  intro ι K
-  exact affine_derivedHom_localized_evaluation.{u, wY, wA}
-    f H₀ iH adj₀ h_eval R β L t adj hR h_counit ι K
+  refine h₁.elim fun iH h₂ ↦ ?_
+  refine h₂.elim fun adj₀ h₃ ↦ ?_
+  refine h₃.2.elim fun R h₄ ↦ ?_
+  refine h₄.elim fun β h₅ ↦ ?_
+  refine h₅.elim fun L h₆ ↦ ?_
+  refine h₆.elim fun t h₇ ↦ ?_
+  refine h₇.elim fun adj h₈ ↦ ?_
+  exact ⟨R, L, affineScalarLocalizationIso.{u, wY, wA} f L t, adj, fun ι K ↦
+    affine_derivedHom_localized_evaluation.{u, wY, wA}
+      f H₀ iH adj₀ h₃.1 R β L t adj h₈.1 h₈.2.2.2 ι K⟩
 
 set_option profiler true in
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
