@@ -334,7 +334,6 @@ private theorem residue_open_image
   exact ⟨hbc, min a b, max b a + d, hta⟩
 
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.
-set_option profiler true in
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
@@ -424,9 +423,10 @@ theorem integral_open_direct_image
     (X ↘ Spec (.of k))
   let : IsNoetherian U := ⟨⟩
   let : IsNoetherian X := ⟨⟩
-  obtain ⟨hχ, hpush⟩ := internal_integral_direct_image_limits l E j
-  change IsIso (reductionPullbackMap l E j) at hχ
-  let := hχ
+  have hlimits := internal_integral_direct_image_limits l E j
+  have hχ : IsIso (reductionPullbackMap l E j) := hlimits.choose
+  letI := hχ
+  have hpush := hlimits.choose_spec
   let adj := (CondensedRing.derivedUpperStarLowerStarAdjunction
     (DerivedNakayama.integerRing l E) j).ofNatIsoLeft
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
