@@ -66,6 +66,7 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- The sequence-site restriction of reduced sections unfolds evaluation.
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
 Source: Stacks 06YY and 0941. -/
@@ -90,6 +91,7 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
 
 
 set_option maxHeartbeats 4000000 in
+set_option profiler true in
 -- Transport along the site equivalence elaborates several reduced sections.
 /-- Two maps out of the reduction of a total tensor degree agree once they agree on reduced
 pure tensors over every object postcomposed along an isomorphism of schemes.
