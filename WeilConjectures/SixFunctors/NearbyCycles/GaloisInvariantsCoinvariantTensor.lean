@@ -44,12 +44,32 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Cache the graded tensor properties used to construct the derived functors. Without these
+-- instances, elaborating each derived functor repeats the colimit-preservation searches.
+private theorem galoisTensorHasTensor₄ObjExt (Y : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) : GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+
+private theorem galoisTensorHasGoodTensor₁₂Tensor (Y : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) : GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+
+private theorem galoisTensorHasGoodTensorTensor₂₃ (Y : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) : GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
+
+attribute [local instance] galoisTensorHasTensor₄ObjExt galoisTensorHasGoodTensor₁₂Tensor
+  galoisTensorHasGoodTensorTensor₂₃
+
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
@@ -186,7 +206,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     hφ'
 
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
 [Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
