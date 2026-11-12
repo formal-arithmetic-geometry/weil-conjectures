@@ -86,16 +86,6 @@ theorem exchangeTowerRes_isIso_iff (T : Scheme.{t})
   have := exchangeTowerModuleRes_reflectsIsomorphisms d T
   exact derivedReflectsIso (exchangeTowerModuleRes d T) f h
 
-/-- The quotient completion unit is natural.
-Source: blueprint completed pullback (blueprint: thm-cbc-complete-proetale). -/
-theorem completionUnit_naturality (T : Scheme.{t}) {K L : d.derived T} (f : K ⟶ L) :
-    f ≫ d.completionUnit T L = d.completionUnit T K ≫
-      (completedRlim T (d.completedRing T)).map ((completedReductionTower T d).map f) := by
-  have h := ((d.constantRlimAdjunction T).unit ≫ Functor.whiskerRight
-    (completedReductionAugmentation d T) (completedRlim T (d.completedRing T))).naturality f
-  simpa only [AdicCoefficientDatum.completionUnit, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.comp_map, Functor.id_map, Category.assoc] using h
-
 /-- A map of quotient-tower complete objects is invertible if its reduction tower is.
 Source: Stacks 099N; blueprint step 8 (blueprint: thm-cbc-complete-proetale). -/
 theorem isIso_of_reductionTower_isIso (T : Scheme.{t}) {K L : d.derived T} (f : K ⟶ L)
@@ -104,7 +94,7 @@ theorem isIso_of_reductionTower_isIso (T : Scheme.{t}) {K L : d.derived T} (f : 
   have : IsIso (d.completionUnit T K) := hK
   have : IsIso (d.completionUnit T L) := hL
   have : IsIso (f ≫ d.completionUnit T L) := by
-    rw [completionUnit_naturality]
+    rw [d.completionUnit_naturality]
     infer_instance
   exact IsIso.of_isIso_comp_right f (d.completionUnit T L)
 

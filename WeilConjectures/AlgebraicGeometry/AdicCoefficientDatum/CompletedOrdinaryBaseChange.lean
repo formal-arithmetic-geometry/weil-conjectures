@@ -30,17 +30,6 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The completion unit is natural. -/
-theorem AdicCoefficientDatum.completionUnit_naturality {T : Scheme.{t}} {K L : d.derived T}
-    (a : K ⟶ L) :
-    a ≫ d.completionUnit T L = d.completionUnit T K ≫
-      (completedRlim T (d.completedRing T)).map ((completedReductionTower T d).map a) := by
-  have h := (d.constantRlimAdjunction T).unit.naturality a
-  dsimp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] at h
-  rw [AdicCoefficientDatum.completionUnit, AdicCoefficientDatum.completionUnit,
-    reassoc_of% h, Category.assoc, ← Functor.map_comp, ← Functor.map_comp,
-    (completedReductionAugmentation d T).naturality a]
-
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
@@ -49,6 +38,12 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 completion maps `g^* Rf_* K ⟶ ĝ^* Rf_* K` and `Rf'_* g'^* K ⟶ Rf'_* ĝ'^* K` commutes. This holds
 for every `K`; on the inputs of the proper base change theorem for complete complexes the
 completed base change map is `AdicCoefficientDatum.completedBaseChangeMap`.
+```
+  g^* Rf_* K ----------------> Rf'_* g'^* K
+      |                             |
+      v                             v
+  ĝ^* Rf_* K ----------------> Rf'_* ĝ'^* K
+```
 
 Both maps are built from the counit of `f^* ⊣ Rf_*`: the completion map followed by the
 reduction/pullback identification is the completion unit
@@ -84,7 +79,7 @@ theorem AdicCoefficientDatum.ordinaryToCompleted_comp_completedExchange (K : d.d
     ← Functor.map_comp_assoc, Iso.hom_inv_id_assoc, Category.assoc]
   rw [Functor.map_comp_assoc, ← Category.assoc (d.ordinaryToCompleted _ _),
     OrderedExchange.ordinaryToCompleted_reconstruction, Functor.map_comp_assoc,
-    ← Category.assoc (d.completionUnit _ _), ← d.completionUnit_naturality,
+    ← Category.assoc (d.completionUnit _ _), ← d.completionUnit_naturality _,
     Category.assoc, Functor.map_comp_assoc, reassoc_of% hproj, hg', Functor.map_comp]
   exact congrArg
     (fun x ↦ (d.integralExchange sq).app K ≫ (d.push f').map (d.completionUnit X' M) ≫ x) hdir
