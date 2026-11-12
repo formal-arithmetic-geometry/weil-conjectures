@@ -147,12 +147,12 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
       (f : (SemilinearSections.evaluation.{u + 1, u, u + 1}
         J D σ n).obj
           (c.scalar.model.E.obj c.rootModule) ⟶ N) :
-      Φ N f = e.hom ≫ (SheafOfModules.toSheaf _).map (Ψ N f) := by
+      Φ N f = e.hom ≫
+        (SheafOfModules.toSheaf (SemilinearSections.ring J (Rlevel l T n))).map (Ψ N f) := by
     dsimp only [Φ]
     erw [Equiv.trans_apply, Equiv.trans_apply, constantResidueHomEquiv_apply,
       Iso.homCongr_apply]
     simp only [Iso.symm_inv, Iso.refl_hom, Category.comp_id]
-    dsimp only [Rrings, Functor.ofOpSequence_obj]
   refine ⟨Φ, ?_, ?_⟩
   · intro N N' f g
     erw [hΦ, hΦ, hΨ]

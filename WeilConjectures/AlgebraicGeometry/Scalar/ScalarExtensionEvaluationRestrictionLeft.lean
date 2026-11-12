@@ -144,7 +144,6 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 
 include he
 
-set_option profiler true in
 private theorem evaluatedTensorRestriction_left
     {U V : Cᵒᵖ} (f : U ⟶ V)
     (x : ((evaluation.{c, v, max c v r} J B τ n).obj M).val.obj U) :

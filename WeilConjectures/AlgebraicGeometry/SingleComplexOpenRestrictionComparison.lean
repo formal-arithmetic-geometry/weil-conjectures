@@ -27,7 +27,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restricting a single-complex base-change problem to compatible base opens gives
