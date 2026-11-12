@@ -377,8 +377,13 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     (fun v ↦ (((total l E Z s).map
       (Prod.mkHom (k.complex P).hom (k.complex L).hom)).f n).val.app U v)
     (cgh.tensorChain_pure P L p q n hpq U.unop x y)
-  trace_state
-  sorry
+  calc
+    _ = (((total l E Z s).map
+        (Prod.mkHom (k.complex P).hom (k.complex L).hom)).f n).val.app U
+      (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Z)
+        (podReindexingRing l E Z s) ((podReindexingComplexFunctor l E (h ≫ g) s).obj P)
+        ((podReindexingComplexFunctor l E (h ≫ g) s).obj L) p q n hpq U x y) := hcg'
+    _ = _ := by sorry
 
 set_option maxHeartbeats 8000000 in
 -- Paste the three tensor models across the exact-functor factorization maps.
