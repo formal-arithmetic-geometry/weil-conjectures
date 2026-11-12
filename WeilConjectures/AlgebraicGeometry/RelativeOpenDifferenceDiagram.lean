@@ -27,8 +27,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
 private theorem isIso_split_matrix
     {C : Type*} [Category C] [Preadditive C] [HasBinaryBiproducts C]
     {P Q R S : C} (f : P ⟶ R) (a : P ⟶ S) (b : Q ⟶ S)
@@ -221,11 +219,12 @@ theorem relative_open_difference_diagram
     adjW.homEquiv _ _ (eU.inv.app AU ≫ sU.map (adjU.counit.app A) ≫ c.hom)
   let b : BV ⟶ (schemeDerivedDirectImage (U ⊓ V).ι).obj (sV.obj B) :=
     adjW.homEquiv _ _ (eV.inv.app BV ≫ sV.map (adjV.counit.app B))
-  obtain ⟨hU, hV⟩ := derived_open_cross_components_isIso X U V A B c adjU adjV adjW
+  have h : IsIso (rU.map b) ∧ IsIso (rV.map a) :=
+    derived_open_cross_components_isIso X U V A B c adjU adjV adjW
   refine ⟨biprod.desc a (-b),
     rU.map biprod.fst ≫ adjU.counit.app A,
     rV.map biprod.snd ≫ adjV.counit.app B, adjW.counit.app (sV.obj B), ?_, ?_, ?_⟩
-  · have : IsIso (rU.map b) := hU
+  · have : IsIso (rU.map b) := h.1
     have : IsIso (rU.map (-b)) := by
       rw [Functor.map_neg]
       exact (-asIso (rU.map b)).isIso_hom
@@ -234,7 +233,7 @@ theorem relative_open_difference_diagram
     have : PreservesBinaryBiproducts rU :=
       preservesBinaryBiproducts_of_preservesBinaryProducts rU
     exact isIso_mapped_split_matrix rU (adjU.counit.app A) a (-b)
-  · have : IsIso (rV.map a) := hV
+  · have : IsIso (rV.map a) := h.2
     have : IsIso (adjV.counit.app B) := open_counit_isIso X V adjV B
     have : rV.IsLeftAdjoint := adjV.isLeftAdjoint
     have : PreservesBinaryBiproducts rV :=
