@@ -154,6 +154,7 @@ private theorem open_resolution_numerator
     using hh
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Normalization of the composed derived and open functors needs extra heartbeats.
 private theorem open_resolution_denominator_intersection
     [∀ Z : Scheme.{u},
