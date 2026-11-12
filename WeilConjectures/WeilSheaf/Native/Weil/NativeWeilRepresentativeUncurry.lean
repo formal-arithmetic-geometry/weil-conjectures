@@ -223,12 +223,22 @@ theorem native_weil_representative_uncurry
   let F := nativeForget k₀ l X
   let δ := (U (k₀ := k₀) (l := l) (X := X)).mapDerivedCategoryFactors
   let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model P I hI).inv
-  rcases native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI with ⟨hUI, c, hc, hs⟩
+  have hsources := native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI
+  have hUI := hsources.choose
+  let c := hsources.choose_spec.choose
+  have hc := hsources.choose_spec.choose_spec.1
+  have hs := hsources.choose_spec.choose_spec.2
   let φ' := (UC).map φ ≫ c.hom
   let f' := DerivedCategory.Q.map φ' ≫ (M.ordinaryRepresentatives.model _ _ hUI).inv
-  rcases hW P Q I hP hQ hI φ with ⟨ψ, hψ, hloc⟩
-  rcases N.ordinaryNormalization ((UC).obj P) ((UC).obj Q)
-    ((UC).obj I) (N.preserves_flat P hP) (N.preserves_flat Q hQ) hUI φ' with ⟨ψ', hψ', hloc'⟩
+  have hnorm := hW P Q I hP hQ hI φ
+  let ψ := hnorm.choose
+  have hψ := hnorm.choose_spec.1
+  have hloc := hnorm.choose_spec.2
+  have hnorm' := N.ordinaryNormalization ((UC).obj P) ((UC).obj Q)
+    ((UC).obj I) (N.preserves_flat P hP) (N.preserves_flat Q hQ) hUI φ'
+  let ψ' := hnorm'.choose
+  have hψ' := hnorm'.choose_spec.1
+  have hloc' := hnorm'.choose_spec.2
   have hchain := native_weil_chain_uncurry_forget M S W t N P Q I c hc φ ψ ψ' hψ hψ'
   have hchain' : (UC).map ψ = (N.chain P Q).hom ≫ ψ' := by
     rw [← hchain, Iso.hom_inv_id_assoc]
