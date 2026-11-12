@@ -224,7 +224,8 @@ private theorem native_normalized_uncurry_map
     (j : ((nativeTensorTotal k₀ l X).obj P).obj T ⟶ I) :
     ∃ φ : P ⟶ CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) T I,
       (∀ (p q n : ℤ) (hpq : p + q = n),
-        nativeOpenTensorInsertion k₀ l X P T p q n hpq ≫ j.f n =
+        HomologicalComplex.ιMapBifunctor P T (nativeTensorBifunctor k₀ l X).flip
+          (.up ℤ) p q n hpq ≫ j.f n =
           (p * q).negOnePow • (((nativeTensorBifunctor k₀ l X).obj (T.X q)).map
             (φ.f p ≫ CochainComplex.bifunctorHomπ (ihomBifunctor k₀ l X)
               T I p q n (by omega)) ≫
