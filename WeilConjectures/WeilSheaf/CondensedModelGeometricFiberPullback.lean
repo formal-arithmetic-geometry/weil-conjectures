@@ -268,16 +268,23 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
         (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
         (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
-  exact CategoryTheory.mateEquiv_eq_of_unit_comp_map
-    (adj₁ := (adicLowerStarEquivalence l e).symm.toAdjunction)
-    (adj₂ := CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
-    (α := TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv)
-    (β := TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom)
-    (h := fun x ↦ by
-      rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
-        ← Functor.map_comp, Iso.hom_inv_id_app]
-      erw [CategoryTheory.Functor.map_id, Category.comp_id]
-      rfl)
+  rw [← Equiv.eq_symm_apply]
+  refine NatTrans.ext (funext fun x ↦ ?_)
+  have h :
+      (adicSheafEquivCondensedMod l T).functor.map
+          ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app x) ≫
+        (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) =
+      (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e).unit.app
+          ((adicSheafEquivCondensedMod l T).functor.obj x) ≫
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
+          ((adicLowerStarCompCondensedModIso l e.inv).inv.app x) := by
+    rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
+      ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [CategoryTheory.mateEquiv_symm_natTrans_app]
+  change _ = (adicLowerStarCompCondensedModIso l e.inv).inv.app x
+  rw [← Functor.map_comp_assoc, h]
+  simp
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/
