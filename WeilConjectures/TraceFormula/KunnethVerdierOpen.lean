@@ -129,6 +129,17 @@ noncomputable def exceptionalKunnethSourceRestrictionIso (j : U ⟶ Y) [IsOpenIm
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (prod.snd : X ⨯ U ⟶ U)).mapIso (dualizingComplexUpperStarIso ℓ j))
 
+/-- The isomorphism `exceptionalKunnethSourceRestrictionIso`, componentwise. -/
+lemma exceptionalKunnethSourceRestrictionIso_hom (j : U ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (exceptionalKunnethSourceRestrictionIso ℓ j M).hom =
+      Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (prod.map (𝟙 X) j)) _ _ ≫ ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
+        ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) :=
+  rfl
+
 /-- The restriction to `X ⨯ U` of the target of the exceptional Künneth map:
 `L(𝟙 × j)^* Rp_X^! M ≅ R(𝟙 × j)^! Rp_X^! M ≅ R((𝟙 × j) ≫ p_X)^! M = Rp_X^! M`. -/
 noncomputable def exceptionalKunnethTargetRestrictionIso (j : U ⟶ Y) [IsOpenImmersion j.left]
@@ -377,9 +388,8 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
         exceptionalKunnethMap ℓ (Y := U) M := by
-    rw [hα, exceptionalKunnethSourceRestrictionIso]
-    simp only [Iso.trans_hom, Iso.symm_hom, Functor.Monoidal.μIso_inv, tensorIso_hom,
-      Iso.app_hom, Functor.mapIso_hom, Category.assoc, Functor.Monoidal.μ_δ_assoc]
+    rw [hα, exceptionalKunnethSourceRestrictionIso_hom]
+    simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
   have key := map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
     (swapEvPairing (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -400,7 +410,8 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
       (exceptionalKunnethMap ℓ (Y := U) M) hα' N)
   simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierSourceRestrictionIso_hom,
     verdierDualUpperStarIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing, Category.assoc]
-  simpa only [Category.assoc] using key
+  simp only [Category.assoc] at key
+  exact_mod_proofs key
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
