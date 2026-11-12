@@ -259,7 +259,6 @@ lemma geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_pow [Fintype K] (n : ℕ)
   rw [← h, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow, AlgEquiv.aut_inv,
     AlgEquiv.symm_apply_apply]
 
-set_option profiler true in
 /-- A Galois lift of a Frobenius power makes a boundary chart compatible with its geometric
 residue point. -/
 lemma exists_boundaryChart_galois_compatible (x : C.finitePoints)
@@ -353,13 +352,12 @@ variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-set_option profiler true in
 omit [IsCurve (U ↘ Spec (.of K))] in
 /-- A compatible Galois conjugate of a chart gives a boundary neighbourhood for the conjugated
 Frobenius lift. -/
 lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.range j.base)
     (c : BoundaryChart (C ↘ Spec (.of K)) j x.1) (σF : Gal(Ω/C.functionField))
-    (hσF : σF ∈ MulAction.stabilizer Gal(Ω/C.functionField) c.point)
+    (hσF : σF • c.point = c.point)
     (hFk : ∀ y, σF (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j
       (letI := Fintype.ofFinite K
        (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^
@@ -370,6 +368,8 @@ lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.ra
       Nonempty (BoundaryNeighbourhood (K := K) j ((σ • c.point).inertia Gal(Ω/C.functionField))
         (σ * σF * σ⁻¹) x) := by
   let _ := Fintype.ofFinite K
+  let : MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
+  let : MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) := inferInstance
   obtain ⟨σ, n, hσ, hQ⟩ := exists_boundaryChart_galois_compatible j x c
   refine ⟨σ, n, mem_weilGroup_of_forall_genericEmb j sU GU σ n hσ, ?_⟩
   have : (σ • c.point).IsMaximal := by
@@ -384,13 +384,12 @@ lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.ra
     rw [← h, ← AlgEquiv.mul_apply, inv_mul_cancel, AlgEquiv.one_apply]
   refine nonempty_boundaryNeighbourhood_of_compatible j hz c x rfl (σ • c.point) hQ
     (σ * σF * σ⁻¹) ?_ ?_
-  · rw [MulAction.mem_stabilizer_iff, mul_smul, mul_smul, inv_smul_smul,
-      MulAction.mem_stabilizer_iff.1 hσF]
+  · change (σ * σF * σ⁻¹) • (σ • c.point) = σ • c.point
+    rw [mul_smul, mul_smul, inv_smul_smul, hσF]
   · intro y
     rw [AlgEquiv.mul_apply, AlgEquiv.mul_apply, hσinv, hFk, hσ, ← AlgEquiv.mul_apply,
       ← AlgEquiv.mul_apply, (Commute.pow_pow_self Φ n _).eq, mul_assoc, mul_inv_cancel, mul_one]
 
-set_option profiler true in
 omit [IsCurve (U ↘ Spec (.of K))] in
 /-- **Strictly henselian neighbourhoods of boundary points exist** (blueprint
 `lem-wf-boundary-stalk-invariants`). For a boundary point `z` with closed point `x`, there is
