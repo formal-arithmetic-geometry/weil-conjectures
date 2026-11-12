@@ -367,7 +367,7 @@ theorem structure_derived_image_module_naturality
     φ 1 (topEdgeTruncatedCounit (𝟙 T) 1
       (globalLerayImage qY (SheafOfModules.unit Y.ringCatSheaf)))
     (topEdgeTruncatedCounit_localClass (𝟙 T) 1 _) ((affineLerayEquiv q).symm z)
-  rw [← affineLerayEquiv_apply qY, ← affineLerayEquiv_apply q] at hg
+  simp only [← affineLerayEquiv_apply qY, ← affineLerayEquiv_apply q] at hg
   have hg' : affineLerayEquiv qY
       (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) =
       Γ.map edge (H.map α z) := by
