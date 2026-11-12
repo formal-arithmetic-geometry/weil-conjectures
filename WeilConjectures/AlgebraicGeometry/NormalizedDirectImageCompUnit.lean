@@ -69,8 +69,7 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
-  rw [schemeCompUnit_app]
-  exact Classical.choose_spec
+  exact (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       A.toRingedSpace B.toRingedSpace C.toRingedSpace
       (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
@@ -79,7 +78,8 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
       (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
-      s.toLRSHom.toShHom t.toLRSHom.toShHom) K
+      s.toLRSHom.toShHom t.toLRSHom.toShHom) K).trans
+    (schemeCompUnit_app s t K).symm
 
 
 
