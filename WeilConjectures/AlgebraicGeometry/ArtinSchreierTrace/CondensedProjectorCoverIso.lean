@@ -66,6 +66,7 @@ private lemma pull_hom
     ProEtale.CondensedRing.lowerStarCongr_hom_app_hom]
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Iterated scheme pushforward transports need extra elaboration heartbeats.
 private lemma functionPull_comp

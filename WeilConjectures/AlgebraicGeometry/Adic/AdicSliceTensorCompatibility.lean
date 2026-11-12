@@ -155,6 +155,7 @@ private lemma tensor_map_second {X : Scheme.{u}}
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A) (𝟙 _)).unit.naturality
         (SheafOfModules.siteTensorSecondMap M.val g.val))).symm
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the two section models requires several nested equivalence transports.
 /-- The explicitly constructed tensor restriction iso preserves local pure tensors.

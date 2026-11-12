@@ -205,6 +205,7 @@ private theorem reflectEquivalenceIso
   have := ha
   exact isIso_of_reflects_iso a e.functor
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Comparing explicit localization choices needs extra definitional-equality reductions.
 /-- Pullback preserves arrows which become invertible on the given open. -/
