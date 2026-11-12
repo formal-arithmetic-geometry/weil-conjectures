@@ -387,8 +387,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
   refine (hmain (F₃ ⋙
     DerivedCategory.homologyFunctor _ q)).2 φ (fun φ' hφ' ↦ ?_) hφ
   let Hq := DerivedCategory.homologyFunctor _ q
+  let Gq := F₁ ⋙ F₂ ⋙ F₃ ⋙ Hq
+  letI : Gq.Additive := inferInstance
   have hkey := (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
-    (Λ) hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e (F₁ ⋙ F₂ ⋙ F₃ ⋙ Hq)
+    (Λ) hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e Gq
     (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N (galoisTower Ω h) K
       hcab a f' q).some
     (fun k ↦ pullbackAction h _ specGaloisAction_comp (act k))
