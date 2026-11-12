@@ -43,6 +43,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
+set_option profiler true in
+set_option maxHeartbeats 1600000 in
 -- The canonical adjunction comparisons involve large functors on the two scheme sites.
 private theorem homEquiv_conjugate
     {C D : Type*} [Category C] [Category D]

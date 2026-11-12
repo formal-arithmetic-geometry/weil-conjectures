@@ -184,6 +184,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.lazyWhnfCore false in
+set_option profiler true in
+set_option maxHeartbeats 600000 in
 -- Elaborating the canonical factorization unfolds the two ring-sheaf presentations.
 /-- Lift an algebra-valued derived isomorphism between single complexes, keeping
 track of the scalar adjunction counit through the canonical pushforward factorization.
