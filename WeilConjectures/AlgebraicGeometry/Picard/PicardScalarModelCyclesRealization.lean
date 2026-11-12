@@ -121,7 +121,10 @@ theorem picard_scalar_model_cycles_realization
   have c := Classical.choose hcData
   have hc := Classical.choose_spec hcData
   let hqData := picard_direct_image_test_sections f L W k w
-  have q := Classical.choose hqData
+  let q : ∀ {T : Scheme.{v}} (t : T ⟶ W),
+      picardDerivedModelSections E t ≃+
+        Γ((Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L, ⊤) :=
+    Classical.choose hqData
   have hq := Classical.choose_spec hqData
   refine ⟨(q (W.fromSpecResidueField w)).symm.trans c, ?_⟩
   intro V hwV hVU
