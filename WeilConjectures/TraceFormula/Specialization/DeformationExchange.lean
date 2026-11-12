@@ -199,7 +199,8 @@ private lemma supportCompactSupportExchange_component_identity
     (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
       (supportClosureMap c ≫ Limits.prod.snd))
     (by rw [prodLift_supportClosureMap, supportClosureι_map])
-    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (componentSupport_lowerStar_obj_eq F j _)
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (componentSupport_lowerStar_obj_eq F j
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
   have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
     diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left :=
     isProper_left_of_isProper_of_isSeparated _
@@ -216,17 +217,22 @@ private lemma supportCompactSupportExchange_component_identity
     (hc.specialFixedLocus k').isPullback.w (hc.supportClosureSpecialι k')
     (supportClosureSpecialMap c y k') (hc.supportClosureSpecialι_comp k')
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb _)
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
+          (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
   have hfsp := hc.componentSpecialLift_comp_d_deformation k' F j hb
   have hL := eqToHom_comp_map_lowerStarComp_inv ℓ (j ≫ F.d) (j ≫ F.d) rfl (diag X)
     (componentPointModelHom_comp_diag_left j) (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (componentSupport_lowerStar_obj_eq F j _)
+    (componentSupport_lowerStar_obj_eq F j
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
   have hL' := eqToHom_comp_map_lowerStarComp_inv ℓ
     (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) _ hfsp
     (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))
     (componentPointModelHom_comp_diag_special hc k' j hb)
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb _)
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
+          (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
   have hχg := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (componentModelHom k' j hb) hM hN
   have hχΔ := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
