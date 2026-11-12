@@ -12,11 +12,10 @@ public import WeilConjectures.WeilSheaf.MiddleExtension
 /-!
 # The punctual part of a Weil sheaf on a smooth curve
 
-Let `X` be a smooth curve over `k₀`. Every Weil sheaf `F` on `X` has a maximal punctual subsheaf
-`P`: a subsheaf of finite support such that `F / P` has no nonzero subsheaf of finite support.
-For a dense open `j : U ↪ X` on which `F` is lisse, `P` is the kernel of the unit
-`F ⟶ j_* j^* F`. This is the sheaf-theoretic input of the perverse t-structure on `X`
-(blueprint `lemma-perverse-sheaves-curve--1`).
+Let `X` be a smooth curve over `k₀`. This file proves the two inputs for the punctual part
+`ker(F ⟶ j_* j^* F)` of a Weil sheaf `F` on `X` (see
+`WeilConjectures.DeligneLaumon.AffineLine.PunctualPart`): a sheaf vanishing on a dense open is
+punctual, and a punctual sheaf maps to zero in the direct image of a lisse sheaf.
 
 ## Main statements
 
@@ -26,8 +25,6 @@ For a dense open `j : U ↪ X` on which `F` is lisse, `P` is the kernel of the u
   smooth curve vanishing on a dense open is punctual.
 - `AlgebraicGeometry.WeilSheaf.eq_zero_of_support_finite_of_isLisse`: every morphism from a
   punctual Weil sheaf to the direct image of a lisse sheaf on an open of a smooth curve vanishes.
-- `AlgebraicGeometry.WeilSheaf.exists_mono_support_finite_cokernel`: the maximal punctual
-  subsheaf.
 -/
 
 @[expose] public section
@@ -236,35 +233,6 @@ theorem eq_zero_of_support_finite_of_isLisse
     change adj.homEquiv _ _ φ = 0
     rw [hφ0, Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
   exact ObjectProperty.hom_ext _ <| ObjectProperty.hom_ext _ <| Endofunctor.Algebra.Hom.ext hf
-
-
-attribute [local instance 1000] IsSeparated.isSeparated_of_mono in
-/-- **Maximal punctual subsheaves on a smooth curve** (input to
-`lemma-perverse-sheaves-curve--1`): a Weil sheaf `F` on a smooth curve has a subsheaf `P` of
-finite support such that `F / P` has no nonzero subsheaf of finite support. For a dense open
-`j : V ↪ X` on which `F` is lisse, `P` is the kernel of the unit `F ⟶ j_* j^* F`, which vanishes
-on `V`, and `F / P` embeds into `j_* j^* F`, which has no nonzero punctual subsheaf. -/
-theorem exists_mono_support_finite_cokernel [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l X) :
-    ∃ (P : WeilSheaf k₀ l X) (i : P ⟶ F), Mono i ∧ P.support.Finite ∧
-      ∀ (G : WeilSheaf k₀ l X) (j : G ⟶ cokernel i), Mono j → G.support.Finite → IsZero G := by
-  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k₀))
-  have : Smooth (X ↘ Spec (CommRingCat.of k₀)) := SmoothOfRelativeDimension.smooth 1 _
-  have : IsReduced X := isReduced_of_smooth (X ↘ Spec (CommRingCat.of k₀))
-  obtain ⟨V, hV, hVl⟩ := exists_dense_isLisse_upperStar F
-  set adj := upperStarLowerStarAdjunction (k₀ := k₀) (l := l) V.ι
-  set η := adj.unit.app F
-  have : IsIso ((upperStar V.ι).map η) := Adjunction.isIso_map_unit_app_of_isIso_counit_app _ F
-  have : Mono ((upperStar V.ι).map η) := IsIso.mono_of_iso _
-  have hker : (kernel η).support.Finite := by
-    refine support_finite_of_isZero_upperStar_of_dense V.ι (by rwa [Scheme.Opens.range_ι]) _ ?_
-    exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso (upperStar (k₀ := k₀) (l := l)
-      V.ι) _)
-  refine ⟨kernel η, kernel.ι η, inferInstance, hker, fun G j _ hG ↦ ?_⟩
-  exact IsZero.of_mono_eq_zero j ((cancel_mono (Abelian.factorThruCoimage η)).1
-    ((eq_zero_of_support_finite_of_isLisse V.ι hVl hG _).trans zero_comp.symm))
 
 end WeilSheaf
 

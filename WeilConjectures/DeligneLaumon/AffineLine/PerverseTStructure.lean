@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.CurvePunctualPart
+public import WeilConjectures.DeligneLaumon.AffineLine.PunctualPart
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
@@ -29,7 +29,7 @@ lies in `ᵖD^{≤0}`. The abelianness of the heart is the general fact
 
 The only sheaf-theoretic input is the existence of the maximal punctual subsheaf of a Weil sheaf,
 `AlgebraicGeometry.WeilSheaf.exists_mono_support_finite_cokernel`: it is the kernel of the unit
-`F ⟶ j_* j^* F` of a dense open on which `F` is lisse.
+`F ⟶ j_* j^* F` of a dense open on which `F` is lisse, the punctual part of `F`.
 
 ## Main declarations
 
@@ -37,9 +37,8 @@ The only sheaf-theoretic input is the existence of the maximal punctual subsheaf
 - `AlgebraicGeometry.WeilComplex.exists_tStructure_of_punctual`: the curve perverse classes form
   a bounded t-structure with abelian heart, given maximal punctual subsheaves.
 - `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure`: the clause
-  `lemma-perverse-sheaves-curve--1` on a smooth curve.
-- `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure_affineLine`: the same clause on
-  the affine line.
+  `lemma-perverse-sheaves-curve--1` on a smooth curve, and its instance
+  `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure_affineLine` on the affine line.
 -/
 
 @[expose] public section
@@ -284,43 +283,11 @@ theorem exists_tStructure_of_punctual
 
 end TStructure
 
-end WeilComplex
-
-namespace WeilSheaf
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-attribute [local instance 1000] IsSeparated.isSeparated_of_mono in
-/-- **Maximal punctual subsheaves on the affine line**: for a dense open `j : U₀ ↪ 𝔸¹` on which
-`F` is lisse, the kernel `P` of the unit `F ⟶ j_* j^* F` is punctual, and `F / P` embeds into
-`j_* j^* F`, which has no nonzero punctual subsheaf. -/
-theorem exists_mono_support_finite_cokernel_affineLine (F : WeilSheaf k₀ l (affineLine k₀)) :
-    ∃ (P : WeilSheaf k₀ l (affineLine k₀)) (i : P ⟶ F), Mono i ∧ P.support.Finite ∧
-      ∀ (G : WeilSheaf k₀ l (affineLine k₀)) (j : G ⟶ cokernel i), Mono j →
-        G.support.Finite → IsZero G := by
-  have : IsNoetherian (affineLine k₀) :=
-    isNoetherian_of_locallyOfFiniteType (affineLine k₀ ↘ Spec (.of k₀))
-  obtain ⟨U, hU, hUl⟩ := exists_dense_isLisse_upperStar F
-  have : IsDominant U.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
-  set η := (upperStarLowerStarAdjunction (k₀ := k₀) (l := l) U.ι).unit.app F
-  refine ⟨kernel η, kernel.ι η, inferInstance, support_finite_kernel_unit_app U.ι F,
-    fun G j _ hG ↦ ?_⟩
-  have : Mono (Abelian.factorThruCoimage η) := inferInstance
-  exact IsZero.of_mono_eq_zero j ((cancel_mono (Abelian.factorThruCoimage η)).1
-    ((eq_zero_of_support_finite_lowerStar U.ι hUl hG _).trans zero_comp.symm))
-
-end WeilSheaf
-
-namespace WeilComplex
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
 /-- **The perverse t-structure on a smooth curve** (blueprint `lemma-perverse-sheaves-curve--1`):
 on a smooth curve `X` over `k₀`, the classes `ᵖD^{≤0}` and `ᵖD^{≥0}` form a bounded t-structure
 on the Weil complexes, with `≤ n` and `≥ n` parts their shifts, and its heart, the category of
 perverse sheaves on `X`, is abelian. -/
-theorem exists_curvePerverse_tStructure {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+theorem exists_curvePerverse_tStructure [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
     ∃ t : TStructure (WeilComplex k₀ l X),
@@ -348,7 +315,7 @@ theorem exists_curvePerverse_tStructure_affineLine :
         h.toPreadditive = (inferInstance : Preadditive t.heart.FullSubcategory) := by
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
     simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
-  exact exists_tStructure_of_punctual WeilSheaf.exists_mono_support_finite_cokernel_affineLine
+  exact exists_curvePerverse_tStructure
 
 end WeilComplex
 
