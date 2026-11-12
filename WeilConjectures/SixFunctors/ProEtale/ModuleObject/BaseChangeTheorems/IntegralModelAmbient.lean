@@ -31,6 +31,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme PadicAlgCl
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the existential statement is matched against the large types of the coefficient changes
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
