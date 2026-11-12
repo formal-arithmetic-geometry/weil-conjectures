@@ -270,6 +270,7 @@ private theorem scalar_unit_pull_native_hom
   have hu' : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
     eq_of_heq hu_global
   erw [hU, hu']
+  exact HEq.rfl
 
 set_option profiler true in
 -- Normalize the native module-object tensor instances and derived-functor comparisons.
@@ -301,7 +302,7 @@ private theorem scalar_unit_pull_adjunct
       (Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
         (CondensedRing.upperStar Λ (ProjectiveLine Y ↘ Y))).symm
   change ad.homEquiv _ _ _ = _
-  rw [ha, Adjunction.homEquiv_ofNatIsoLeft_apply]
+  erw [ha, Adjunction.homEquiv_ofNatIsoLeft_apply]
   simp only [Iso.symm_hom]
   erw [CondensedRing.leftDerivedUpperStarUnitIso_hom_eq,
     ← Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh]
