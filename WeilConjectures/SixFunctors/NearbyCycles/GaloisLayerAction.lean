@@ -442,16 +442,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom'
     ∃ r, ((N.galoisLayerHom h L').pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h L').pullbackExchange Λ).app C) =
         ∑ σ, (N.galoisLayerAut h L' σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
-  have key (σ : L' ≃ₐ[L] L') :
-      (N.galoisLayerExchangeIso h L' Λ C).inv ≫ L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map
-        ((derivedGaloisAction Λ (pullback.fst _ _)
-          (pullbackAction_fst h _ specGaloisAction_comp) (e σ)).app (L((N.ε)^*⟦Λ⟧).obj C))) ≫
-        (N.galoisLayerExchangeIso h L' Λ C).hom =
-      (N.galoisLayerAut h L' σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) :=
+  have key (σ : L' ≃ₐ[L] L') :=
     (congrArg (fun z ↦ (N.galoisLayerExchangeIso h L' Λ C).inv ≫
       L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map z) ≫ (N.galoisLayerExchangeIso h L' Λ C).hom)
         (hact σ)).symm.trans (galoisLayerAut_autAction Λ N h L' σ C).symm
-  obtain ⟨r, hr₁, hr₂⟩ := exists_retraction_pullbackExchange_galoisLayerHom N h L' Λ C
+  have base := exists_retraction_pullbackExchange_galoisLayerHom N h L' Λ C
+  obtain ⟨r, hr₁, hr₂⟩ := base
   exact ⟨r, hr₁, hr₂.trans ((Equiv.sum_comp e _).symm.trans
     (Finset.sum_congr rfl fun σ _ ↦ key σ))⟩
 
