@@ -49,7 +49,7 @@ lemma projectionMorphism_eq_of_iso_comp
         G₂.map (a₁.projectionMorphism A (F₂.obj B)) ≫
         (conjugateIsoEquiv (a₂.comp a₁) a e).hom.app _ ≫ G.map (A ◁ e.inv.app B) := by
   rw [projectionMorphism_eq_of_iso a (a₂.comp a₁) e he, projectionMorphism_comp]
-  simp only [Category.assoc]
+  simp only [Category.assoc, Functor.comp_obj]
 
 end CategoryTheory.Adjunction
 
@@ -76,8 +76,7 @@ lemma leftDerivedUpperStarComp_δ
         ((leftDerivedUpperStarComp Λ f g).hom.app K ⊗ₘ (leftDerivedUpperStarComp Λ f g).hom.app M) =
       (leftDerivedUpperStarComp Λ f g).hom.app (K ⊗ M) ≫
         δ (L((g)^*⟦Λ⟧) ⋙ L((f)^*⟦Λ⟧)) K M := by
-  rw [Functor.OplaxMonoidal.comp_δ]
-  simp only [δ_leftDerivedUpperStar, Category.assoc]
+  simp only [Functor.OplaxMonoidal.comp_δ, δ_leftDerivedUpperStar]
   exact leftDerivedUpperStarTensor_comp Λ f g K M
 
 set_option profiler true in
