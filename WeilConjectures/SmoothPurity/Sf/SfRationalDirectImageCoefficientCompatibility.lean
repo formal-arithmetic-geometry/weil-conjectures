@@ -62,7 +62,6 @@ private theorem rightMate_transport
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.refl_symm,
     Functor.isoWhiskerRight_refl, Iso.refl_trans, Iso.trans_refl] using hi
 
-set_option profiler true in
 -- The transported coefficient structures are unfolded with `respectTransparency false`.
 /-- Coherent coefficient pullback comparisons and invertible direct-image mates.
 Source: Bhatt--Scholze 6.8.14(2), Remark 6.8.15; finite-free scalar change
