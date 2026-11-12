@@ -24,6 +24,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
+-- Cache sheaf preservation instead of repeating the limit-preservation instance search.
+private theorem cechPullbackHasSheafCompose {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
+attribute [local instance 20000] cechPullbackHasSheafCompose
+
 private theorem ringedExtendedCech_succ_tensor
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)
