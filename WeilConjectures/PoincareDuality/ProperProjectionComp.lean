@@ -66,7 +66,6 @@ lemma δ_leftDerivedUpperStar {W V : Scheme.{u}} (h : W ⟶ V)
     δ L((h)^*⟦Λ⟧) K M = ((leftDerivedUpperStarTensor Λ h).app K).app M :=
   rfl
 
-set_option profiler true in
 /-- The composition isomorphism of the derived pullbacks is compatible with the comultiplications,
 in the form used by `CategoryTheory.Adjunction.projectionMorphism_eq_of_iso`. -/
 lemma leftDerivedUpperStarComp_δ
@@ -79,7 +78,6 @@ lemma leftDerivedUpperStarComp_δ
   simp only [Functor.OplaxMonoidal.comp_δ, δ_leftDerivedUpperStar]
   exact leftDerivedUpperStarTensor_comp Λ f g K M
 
-set_option profiler true in
 /-- **The proper projection morphism of a composite** (blueprint `prop-sf-pf-coherence`,
 composition clause, for the pullback–pushforward adjunctions). -/
 lemma properProjectionMorphism_comp
