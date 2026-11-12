@@ -46,6 +46,9 @@ open Scheme PadicAlgCl
 
 attribute [local instance] traitGenericFieldAlgebra
 
+elab "ph112_remaining" label:str : tactic => do
+  Lean.logInfo m!"{label.getString}: {(← Lean.getRemainingHeartbeats) / 1000}"
+
 /-- Constructibility of a derived pullback passes to any further factorization. -/
 private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
     {Z Y X : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X) (fg : Z ⟶ X) (hfg : f ≫ g = fg)
@@ -211,7 +214,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
             (Profinite.padicAlgClRingObj ℓ)).app A) =
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
-  run_tac do Lean.logInfo m!"PH112 start remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112 start remaining:"
   have finish := exists_subgroup_pullbackExchange_of_galois_average
     (M'' := baseChange hM b hb v hv) (N₁ := baseChangeGaloisLayer hM b hb v hv)
     (N := baseChangeGaloisModel hM b hb v hv) (M := M)
@@ -222,7 +225,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
     (baseChangeHom hM b hb v hv) A hM1
-  run_tac do Lean.logInfo m!"PH112: cartesian comparison accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: cartesian comparison accepted; remaining:"
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -258,6 +261,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     QuasiCompact.compactSpace_of_compactSpace (baseChangeSpecial b v).hom
   have : QuasiSeparatedSpace (baseChangeSpecial b v).left :=
     quasiSeparatedSpace_of_quasiSeparated (baseChangeSpecial b v).hom
+  ph112_remaining "PH112 geometry"
   have hC := boundedConstructible_leftDerivedUpperStar_obj_of_factorization
     (Z := (baseChangeGaloisModel hM b hb v hv).generic)
     ((baseChangeHom hM b hb v hv).traitChangeThickening (traitGenericField K)
@@ -265,10 +269,12 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _)
     M.ε (baseChangeGaloisModel hM b hb v hv).ε (Category.assoc _ _ _)
     (Profinite.padicAlgClRingObj ℓ) A hA
+  ph112_remaining "PH112 constructible"
   -- Direct elimination keeps the large dependent types in their original form.
   refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC).elim fun E hE ↦ ?_
   refine hE.elim fun K₀ hK₀ ↦ ?_
   refine hK₀.elim fun e htors ↦ ?_
+  ph112_remaining "PH112 integral model"
   refine ((baseChangeGaloisModel hM b hb v hv)
     |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
       (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
@@ -280,49 +286,49 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
-  run_tac do Lean.logInfo m!"PH112: finite layer ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: finite layer ready; remaining:"
   let eG := GenericAut.galoisEquiv (k' := k') (K := K)
-  run_tac do Lean.logInfo m!"PH112: equivalence ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: equivalence ready; remaining:"
   let act := baseChangeAut hM b hb v hv
-  run_tac do Lean.logInfo m!"PH112: base action ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: base action ready; remaining:"
   let actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
     (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
     (baseChangeGaloisResidue hM b hb v hv)
     (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
-  run_tac do Lean.logInfo m!"PH112: layer action ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: layer action ready; remaining:"
   have geometricFinish := finish
     (by
-      run_tac do Lean.logInfo m!"PH112: total; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: total; remaining:"
       exact baseChangeToGaloisModel_comp_total hM b hb v hv)
     (by
-      run_tac do Lean.logInfo m!"PH112: generic; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: generic; remaining:"
       exact baseChangeToGaloisModel_comp_generic hM b hb v hv)
     (by
-      run_tac do Lean.logInfo m!"PH112: rho; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: rho; remaining:"
       exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
-  run_tac do Lean.logInfo m!"PH112: geometry accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: geometry accepted; remaining:"
   have equivFinish := geometricFinish eG
-  run_tac do Lean.logInfo m!"PH112: equivalence accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: equivalence accepted; remaining:"
   have fieldFinish := equivFinish L₁
-  run_tac do Lean.logInfo m!"PH112: finite field accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: finite field accepted; remaining:"
   have actFinish := fieldFinish act
-  run_tac do Lean.logInfo m!"PH112: base action accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: base action accepted; remaining:"
   have avgFinish := actFinish actΩ
-  run_tac do Lean.logInfo m!"PH112: layer action accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: layer action accepted; remaining:"
   have result := avgFinish
     (by
-      run_tac do Lean.logInfo m!"PH112: multiplication; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: multiplication; remaining:"
       exact autAction_baseChangeAut_mul hM b hb v hv _)
     (by
-      run_tac do Lean.logInfo m!"PH112: intertwining; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: intertwining; remaining:"
       exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
     (by
-      run_tac do Lean.logInfo m!"PH112: triviality; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: triviality; remaining:"
       exact hL₁.1)
     (by
-      run_tac do Lean.logInfo m!"PH112: average; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      ph112_remaining "PH112: average; remaining:"
       exact hL₁.2)
-  run_tac do Lean.logInfo m!"PH112: averaging application accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  ph112_remaining "PH112: averaging application accepted; remaining:"
   exact result
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
