@@ -88,13 +88,22 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
         (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj
           (F ⊞ F⟦(1 : ℤ)⟧)).val.presheaf x))) := by
   classical
+  have : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
   let G := schemeOpenRestriction X W
+  have : G.Additive := schemeOpenRestriction_additive X W
+  have : PreservesFiniteLimits G := schemeOpenRestriction_preservesFiniteLimits X W
+  have : PreservesFiniteColimits G := schemeOpenRestriction_preservesFiniteColimits X W
   let F := G.mapDerivedCategory.obj R
   have hF : IsPerfect W.toScheme F := by
     intro x
     obtain ⟨O, hxO, K, hK, ⟨eK⟩⟩ := hR x.val x.property
     let V := W.ι ⁻¹ᵁ O
     let O₀ := W.ι ''ᵁ V
+    have : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O₀)) :=
+      inferInstance
+    have : Abelian (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over V)) :=
+      inferInstance
     have hO₀ : O₀ ≤ O := by
       rintro y ⟨z, hz, rfl⟩
       exact hz
@@ -149,6 +158,12 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
     refine ⟨V, hxO, K', hK', ?_⟩
     let H := SheafOfModules.overFunctor.{u} (moduleRings W.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) O₀
+    have : H.Additive := inferInstance
+    have : PreservesFiniteLimits H := inferInstance
+    have : PreservesFiniteColimits H := inferInstance
+    have : L.Additive := inferInstance
+    have : PreservesFiniteLimits L := inferInstance
+    have : PreservesFiniteColimits L := inferInstance
     have fac : s.inv ≫ V.ι ≫ W.ι = O₀.ι := by
       rw [← Category.assoc, W.isoImage_ι_inv_ι V]
       exact X.homOfLE_ι _
