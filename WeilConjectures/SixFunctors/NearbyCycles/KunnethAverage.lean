@@ -45,7 +45,13 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-attribute [local instance 100000] DerivedCategory.instPreadditive
+noncomputable local instance kunnethDerivedMonoidal (T : Scheme.{u}) :
+    MonoidalCategory (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T))) := inferInstance
+
+noncomputable local instance kunnethDerivedPreadditive (T : Scheme.{u}) :
+    Preadditive (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T))) := inferInstance
 
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
