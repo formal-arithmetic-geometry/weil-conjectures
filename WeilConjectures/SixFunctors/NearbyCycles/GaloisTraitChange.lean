@@ -155,7 +155,7 @@ private lemma map_inv_app_comp_map_hom_app {C D E : Type*} [Category C] [Categor
     F.map (e.inv.app X) ≫ F.map (e.hom.app X) = 𝟙 _ := by
   rw [← F.map_comp, Iso.inv_hom_id_app, F.map_id]
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the statement involves several large derived functor objects
 /-- **Change of trait on the invariant summands** (SGA 4½, [Th. finitude], proof of 3.7, 3.8). Let
 `τ : N₂ ⟶ N₁` be a morphism of models over `Spec l`, `ω : Ω₁ ⟶ Ω₂` a homomorphism of extensions
@@ -213,15 +213,16 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
     rw [← cancel_mono ((leftDerivedUpperStarId Λ X₂').hom.app _), hA', Iso.inv_hom_id_app]
     rfl
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
-  refine isIso_of_comp_eq_comp_of_coinvariant (fun q ↦ DerivedCategory.homologyFunctor _ q)
-    (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg) ((τ.pullbackExchange Λ).app C)
-    (cB'.hom ≫ L((f')^*⟦Λ⟧).map α₁) (L((f')^*⟦Λ⟧).map r₁ ≫ cB'.inv) ?_
-    (I'.inv ≫ α₂ ≫ Ψ₂Ω.map (cA.inv ≫ cB.hom)) (Ψ₂Ω.map (cB.inv ≫ cA.hom) ≫ r₂ ≫ I'.hom) ?_ β
-    ?_ (fun k ↦ L((f')^*⟦Λ⟧).map
-      (N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-    (fun k ↦ ⟨k, (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
-      (σ k).1 (σ k).2 (hσ k) _).symm⟩) (fun k ↦ ?_) (fun q W φ hφ ↦ ?_)
+  with_reducible
+    refine isIso_of_comp_eq_comp_of_coinvariant (fun q ↦ DerivedCategory.homologyFunctor _ q)
+      (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg) ((τ.pullbackExchange Λ).app C)
+      (cB'.hom ≫ L((f')^*⟦Λ⟧).map α₁) (L((f')^*⟦Λ⟧).map r₁ ≫ cB'.inv) ?_
+      (I'.inv ≫ α₂ ≫ Ψ₂Ω.map (cA.inv ≫ cB.hom)) (Ψ₂Ω.map (cB.inv ≫ cA.hom) ≫ r₂ ≫ I'.hom) ?_ β
+      ?_ (fun k ↦ L((f')^*⟦Λ⟧).map
+        (N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
+      (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
+      (fun k ↦ ⟨k, (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
+        (σ k).1 (σ k).2 (hσ k) _).symm⟩) (fun k ↦ ?_) (fun q W φ hφ ↦ ?_)
   · simp only [Category.assoc]
     rw [← Functor.map_comp_assoc, show α₁ ≫ r₁ = 𝟙 _ from hr₁]
     simp
