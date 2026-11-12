@@ -50,7 +50,7 @@ private theorem restrictionUnderlying_inv_section
     HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x :=
   finiteBoundary_cast_heq (r.underlying M n U).symm x
 
-set_option profiler true in
+set_option trace.profiler true in
 -- Compare the finite scalar-extension unit with the normalized root evaluation.
 private theorem normalizedRootSection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
@@ -71,24 +71,16 @@ private theorem normalizedRootSection
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
   have hx : HEq x' x := (finiteBoundary_cast_heq
     (c.reduction.forget.sections c.rootModule n U) x').symm
-  let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule
-  have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x' hx
-  have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n
-    (lineModule l (ULift.{u} (Padic l)) c) U _ _ hf
-  have hu : η.val.app (op (n, U.unop)) x =
-      SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
-        (coefficientSystemMap l (ULift.{u} (Padic l)) T)
-        c.scalar c.rootModule (op (n, U.unop)) x :=
-    scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
-      (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
+      (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
+    SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+      (coefficientSystemMap l (ULift.{u} (Padic l)) T) c.scalar c.rootModule
+      (op (n, U.unop)) x
   let w := ((restrictionUnderlying l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   have hw : HEq w v := restrictionUnderlying_inv_section l T r n
     (lineModule l (ULift.{u} (Padic l)) c) U v
-  have ht := k.line_tensor n U x x' w hx.symm
-    (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
+  have ht := k.line_tensor n U x x' w hx.symm hw
   have hz := (addSectionEquiv (c.rootForget.app (op n)) U).apply_symm_apply z
   have hw' : w = (k.lineForget.inv.app (op n)).hom.app U z := by
     exact (addSectionEquiv (k.lineForget.app (op n)) U).injective
@@ -100,7 +92,7 @@ private theorem normalizedRootSection
       (lineModule l (ULift.{u} (Padic l)) c)) U).apply_symm_apply v
   have hnorm := (lineEvaluation_existsUnique l (ULift.{u} (Padic l)) c n).exists.choose_spec
     U 1 x x' v hx.symm
-    (by simpa only [one_smul] using (heq_of_eq he).trans (heq_of_eq hu))
+    (by simpa only [one_smul] using (HEq.rfl : HEq v v))
   have hsection := (congrArg
     (((restrictionUnderlying l T r n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U) hw'.symm).trans hv
@@ -109,7 +101,7 @@ private theorem normalizedRootSection
       (Scheme.tateFiniteTensor T l (FiniteRing l (ULift.{u} (Padic l)) n) n
         (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1) hz))
 
-set_option profiler true in
+set_option trace.profiler true in
 -- Compare the line sections in the two scalar restrictions and finite evaluations.
 private theorem horizontal_varying_root_square
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
