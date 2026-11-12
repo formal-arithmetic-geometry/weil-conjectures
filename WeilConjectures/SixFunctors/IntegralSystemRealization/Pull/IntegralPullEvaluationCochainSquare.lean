@@ -22,6 +22,15 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
+private theorem cochainSquare_of_components
+    {A : Type*} [Category A] [HasZeroMorphisms A]
+    {P Q R S T : CochainComplex A ℤ}
+    (a : P ⟶ Q) (b : Q ⟶ T) (c : P ⟶ R) (d : R ⟶ S) (e : S ⟶ T)
+    (h : ∀ i, a.f i ≫ b.f i = c.f i ≫ d.f i ≫ e.f i) :
+    a ≫ b = c ≫ d ≫ e := by
+  apply HomologicalComplex.hom_ext
+  exact h
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
@@ -75,7 +84,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  apply HomologicalComplex.hom_ext
+  apply cochainSquare_of_components
   intro i
   exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
 

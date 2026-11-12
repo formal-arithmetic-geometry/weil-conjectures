@@ -122,7 +122,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The original existential statement names a witness unused by True.
 set_option linter.unusedVariables false in
-set_option trace.profiler true in
+set_option profiler true in
 /-- The localized sequence sites admit the ordinary native open tensor datum.
 Source: Stacks sites-modules.tex 0E8I, sites-cohomology.tex 0GL1 and 0G7E,
 and Homology 012Z.
