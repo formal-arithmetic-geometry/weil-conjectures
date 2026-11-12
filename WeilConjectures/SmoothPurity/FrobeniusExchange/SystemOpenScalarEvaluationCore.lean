@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOperationExchangeRealization
 public import WeilConjectures.SmoothPurity.FrobeniusExchange.SystemScalarFiniteEvaluation
+import WeilConjectures.SixFunctors.FrobeniusExchange.SystemScalarPullbackGeneralMate
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 import all WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbackMate
 
 /-! # Inverse-mate reduction for open scalar evaluation
@@ -300,7 +302,6 @@ section FiniteEvaluationMate
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-set_option maxHeartbeats 1000000 in
 -- the evaluation comparison unfolds the chosen scalar systems
 /-- The normalized finite evaluation of system scalar extension is the inverse mate of
 restriction evaluation along the normalized system and finite scalar adjunctions. -/
@@ -340,12 +341,19 @@ end FiniteEvaluationMate
 
 section ScalarModelUniqueness
 
+/-- An invertible map detects the unit of an adjunction through its transpose. -/
+private theorem openScalar_unit_eq_of_transpose_eq
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (a b : L ⊣ R) {P : C} {K : D} (f : L.obj P ⟶ K) [IsIso f]
+    (h : a.homEquiv P K f = b.homEquiv P K f) : a.unit.app P = b.unit.app P := by
+  apply (cancel_mono (R.map f)).mp
+  simpa only [Adjunction.homEquiv_unit] using h
+
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 
-set_option maxHeartbeats 1000000 in
 -- comparing the two derived adjunctions unfolds large derived functor types
 /-- Two system scalar models with the same cochain model have the same normalized
 derived adjunction: the transpose of the counit on K-flat complexes fixes the unit. -/
@@ -371,21 +379,9 @@ theorem sequenceSystemScalarModel_adjunction_heq (l : ℕ) [Fact l.Prime]
   apply sequenceDerived_kflat_ext l E W
   intro P hP
   have : IsIso (M.ε.app P) := M.computes P hP
-  have key (a : M.T ⊣ (SheafOfModules.restrictScalars.{u + 1}
-      ((sheafCompose (coefficientSequenceTopology (ProEt.topology W))
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-        (integralComparisonSequenceScalarMap l E L ι W))).mapDerivedCategory) :
-      a.unit.app (DerivedCategory.Q.obj P) =
-        a.homEquiv _ _ (M.ε.app P ≫
-          DerivedCategory.Q.map (𝟙 ((M.E.mapHomologicalComplex (.up ℤ)).obj P))) ≫
-          (SheafOfModules.restrictScalars.{u + 1}
-            ((sheafCompose (coefficientSequenceTopology (ProEt.topology W))
-              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-              (integralComparisonSequenceScalarMap l E L ι W))).mapDerivedCategory.map
-            (inv (M.ε.app P)) := by
-    rw [← Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_unit]
-    simp
-  rw [key a₁, key a₂, t₁, t₂]
+  apply openScalar_unit_eq_of_transpose_eq a₁ a₂
+    (M.ε.app P ≫ DerivedCategory.Q.map (𝟙 ((M.E.mapHomologicalComplex (.up ℤ)).obj P)))
+  exact (t₁ P _ (𝟙 _)).trans (t₂ P _ (𝟙 _)).symm
 
 end ScalarModelUniqueness
 
@@ -399,7 +395,6 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory WeilConjectures.integralComparisonSequenceScalarModel
 
-set_option maxHeartbeats 5000000 in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of the
 restriction/pullback comparison, along the normalized adjunctions of the given
@@ -446,98 +441,10 @@ private theorem systemScalarPullback_eq_mate_of_models (l : ℕ) [Fact l.Prime]
           ((MB.E.mapHomologicalComplex (.up ℤ)).obj P)) :
     S.hom = ((mateEquiv σB σX).symm (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso q).inv)) := by
-  subst hAB hAX
-  obtain rfl := eq_of_heq hσB
-  obtain rfl := eq_of_heq hσX
-  have hoB : oB.unit = AB.ordinaryAdj.unit := by
-    ext P U x
-    rw [huB, AB.unit_normalized]
-  have hoX : oX.unit = AX.ordinaryAdj.unit := by
-    ext P U x
-    rw [huX, AX.unit_normalized]
-  unfold integralComparisonDerivedSequencePullback at S hS ⊢
-  apply sequenceDerived_kflat_ext l E B
-  intro P hP
-  have : IsIso (AB.model.ε.app P) := AB.model.computes P hP
-  let K := (AB.model.E.mapHomologicalComplex (.up ℤ)).obj P
-  let kP : (AX.model.E.mapHomologicalComplex (.up ℤ)).obj
-      (((integralComparisonSequencePullback l E j).mapHomologicalComplex (.up ℤ)).obj P) ⟶
-      ((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K :=
-    (NatIso.mapHomologicalComplex a (.up ℤ)).hom.app P
-  let qK : ((integralComparisonSequencePullback l E j).mapHomologicalComplex (.up ℤ)).obj
-      (((sequenceRestriction l E L ι B).mapHomologicalComplex (.up ℤ)).obj K) ⟶
-      ((sequenceRestriction l E L ι X).mapHomologicalComplex (.up ℤ)).obj
-        (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K) :=
-    (NatTrans.mapHomologicalComplex q.inv (.up ℤ)).app K
-  have hS' : AX.model.T.map
-        ((integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.hom.app P) ≫
-      AX.model.ε.app (((integralComparisonSequencePullback l E j).mapHomologicalComplex
-        (.up ℤ)).obj P) ≫ DerivedCategory.Q.map kP =
-      S.hom.app (DerivedCategory.Q.obj P) ≫
-        (integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
-        (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K :=
-    hS P hP
-  have h1 : AB.adjunction.homEquiv (DerivedCategory.Q.obj P)
-      (DerivedCategory.Q.obj ((AB.model.E.mapHomologicalComplex (.up ℤ)).obj P))
-      (AB.model.ε.app P) =
-      DerivedCategory.Q.map ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-        (sequenceRestriction l E L ι B).mapDerivedCategoryFactors.inv.app K := by
-    have e1 : AB.model.ε.app P ≫ DerivedCategory.Q.map (𝟙 K) = AB.model.ε.app P := by
-      rw [CategoryTheory.Functor.map_id]
-      exact Category.comp_id _
-    rw [← e1]
-    refine (AB.transpose P _ (𝟙 _)).trans ?_
-    rw [Adjunction.homEquiv_id]
-  have h2 := (Functor.mapDerivedCategorySquareIso q).inv.naturality (AB.model.ε.app P)
-  simp only [Functor.comp_map] at h2
-  have h3 := AlgebraicGeometry.Scheme.mapDerivedCategorySquareIso_hom_app_factors
-    (integralComparisonSequencePullback l L j) (sequenceRestriction l E L ι X)
-    (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l E j) q K
-  have h3' : (sequenceRestriction l E L ι X).mapDerivedCategory.map
-      ((integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K) =
-      ((Functor.mapDerivedCategorySquareIso q).hom.app _ ≫
-        (integralComparisonSequencePullback l E j).mapDerivedCategory.map
-          ((sequenceRestriction l E L ι B).mapDerivedCategoryFactors.hom.app K) ≫
-        (integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.hom.app
-          (((sequenceRestriction l E L ι B).mapHomologicalComplex (.up ℤ)).obj K)) ≫
-        DerivedCategory.Q.map qK ≫
-        (sequenceRestriction l E L ι X).mapDerivedCategoryFactors.inv.app
-          (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K) :=
-    (Iso.eq_comp_inv ((sequenceRestriction l E L ι X).mapDerivedCategoryFactors.app
-      (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K) ≪≫
-      DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex q (.up ℤ)).app K))).2 h3.symm
-  have h5 := (integralComparisonSequencePullback l E j).mapDerivedCategoryFactors_hom_naturality
-    ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P)
-  apply (cancel_mono
-    ((integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
-    (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K)).1
-  rw [← hS']
-  apply (AX.adjunction.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_naturality_left]
-  refine (congrArg (_ ≫ ·) (AX.transpose _ _ _)).trans ?_
-  rw [Adjunction.homEquiv_naturality_right, AX.adjunction.homEquiv_unit]
-  have hm := (unit_mateEquiv_symm AB.adjunction AX.adjunction
-    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).inv)
-    (DerivedCategory.Q.obj P)).symm
-  dsimp only [Functor.id_obj] at hm
-  erw [hm]
-  rw [CategoryTheory.Functor.map_comp, Category.assoc, ← reassoc_of% h2,
-    ← CategoryTheory.Functor.map_comp_assoc, ← Adjunction.homEquiv_unit, h1, h3']
-  simp only [Category.assoc]
-  rw [Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc, Category.assoc,
-    Iso.inv_hom_id_app]
-  erw [Category.comp_id]
-  rw [reassoc_of% h5, ← DerivedCategory.Q.map_comp_assoc]
-  congr 2
-  refine congrArg DerivedCategory.Q.map ?_
-  rw [Adjunction.homEquiv_unit]
-  apply HomologicalComplex.hom_ext
-  intro n
-  have hu := unit_mateEquiv_symm oB oX (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
-  rw [hoB, hoX] at hu
-  simpa [kP, qK, K, ha] using hu.symm
-
-
+  apply systemScalarPullback_eq_mate_general l E L ι j AB AX MB MX hAB hAX σB σX
+    hσB hσX oB oX huB huX q.inv (Functor.mapDerivedCategorySquareIso q).inv ?_ a ha S hS
+  simpa only [Functor.mapDerivedCategorySquareIso_symm, Iso.symm_hom] using
+    Functor.isDerivedSquareOf_mapDerivedCategorySquareIso q.symm
 
 /-- The fixed finite-evaluation scalar adjunction is the adjunction of the chosen model. -/
 private theorem finiteEvaluationSystemScalarAdjunction_heq (l : ℕ) [Fact l.Prime]
@@ -550,7 +457,6 @@ private theorem finiteEvaluationSystemScalarAdjunction_heq (l : ℕ) [Fact l.Pri
   unfold finiteEvaluationSystemScalarAdjunction
   exact eq_mpr_heq_self _ _
 
-set_option maxHeartbeats 1000000 in
 -- the scalar/pullback comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the inverse mate, along the fixed
 finite-evaluation scalar adjunctions, of the derived restriction/pullback square. -/
