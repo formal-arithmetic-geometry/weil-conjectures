@@ -216,12 +216,12 @@ private theorem finiteTorIntegralShift_compatibility_cached
 
 private theorem ordinary_completed_scalar_shift_cached
     (l : ℕ) [Fact l.Prime]
-    (E L : Type (max u v)) [Field E] [Algebra (ℚ_[l]) E]
+    (E L : Type u) [Field E] [Algebra (ℚ_[l]) E]
       [FiniteDimensional (ℚ_[l]) E] [Field L] [Algebra (ℚ_[l]) L]
       [FiniteDimensional (ℚ_[l]) L]
-    (i : E →ₐ[ℚ_[l]] L) (T : Scheme.{max u v}) :
+    (i : E →ₐ[ℚ_[l]] L) (T : Scheme.{u}) :
     letI : (AlgebraicGeometry.Scheme.pbcDerivedExtend
-        (completedCoefficientMap.{max u v, max u v} l E L i T)).CommShift ℤ :=
+        (completedCoefficientMap.{u, u} l E L i T)).CommShift ℤ :=
       PurCompactSupport.scalarCommShift (completedCoefficientMap l E L i T)
     ∃ e : integralOrdinaryDerivedScalar l E L i T ≅
         AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap l E L i T),
@@ -276,9 +276,6 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
-set_option maxHeartbeats 400000 in
-set_option profiler true in
-set_option diagnostics true in
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
 Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
 (blueprint: lem-sf-canonical-integral-scalar-square).
@@ -355,7 +352,8 @@ theorem canonical_integral_scalar_square
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
   let θ : S.functor ⋙ JX ≅ IX ⋙ B := S.realization
   letI := canonicalIntegralScalarShift_compatibility l Ω S
-  obtain ⟨e₀, hχ, heO⟩ := ordinary_completed_scalar_shift_cached l E.carrier L.carrier i T
+  obtain ⟨e₀, hχ, heO⟩ :=
+    ordinary_completed_scalar_shift_cached (u := max u v) l E.carrier L.carrier i T
   let eO := e₀
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
