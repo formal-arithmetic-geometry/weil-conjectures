@@ -255,8 +255,14 @@ private lemma supportCompactSupportExchange_component_identity
   run_tac do
     let n ← Lean.getRemainingHeartbeats
     Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
-  apply_by_match CategoryTheory.supportIdentity_aux [hF1 := hF1, hF3 := hF3, hF2 := hF2,
-    hF2' := hF2', hL := hL, hL' := hL', hχΔ := hχΔ', hχdj := hχdj, hχg := hχg,
+  apply_by_match CategoryTheory.supportIdentity_aux
+    [Sp := specialization (ℓ := ℓ) k' y,
+    Ts := specializationProd (ℓ := ℓ) k' (y ≫ c.c₁),
+    SX := specialization (ℓ := ℓ) k' (y ≫ c.c₁),
+    SB := NearbyCyclesModel.boundedConstructibleNearbyCycles hM,
+    χΔ := diagPushforwardExchange ℓ X k' (y ≫ c.c₁),
+    hχΔ := hχΔ', hχg := hχg, hχdj := hχdj,
+    hF2 := hF2, hF2' := hF2', hL := hL, hL' := hL', hF1 := hF1, hF3 := hF3,
     t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
     hι := (ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj
       (Profinite.padicAlgClRingObj ℓ) (deformationSpecialFibre X (y ≫ c.c₁).left.ker k' ⨯
