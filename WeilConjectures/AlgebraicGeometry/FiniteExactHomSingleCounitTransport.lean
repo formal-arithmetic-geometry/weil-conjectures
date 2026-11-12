@@ -190,14 +190,6 @@ private theorem directImageAlgebra_factorization {X Y : Scheme.{u}} (f : X ⟶ Y
         (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom =
       RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
 
-private theorem directImageAlgebra_factorization_iso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (show RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙
-      SheafOfModules.restrictScalars.{u}
-        (R := moduleRings Y.toRingedSpace)
-        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom ≅
-      RingedSpace.moduleDirectImage f.toLRSHom.toShHom from Iso.refl _) =
-      eqToIso (directImageAlgebra_factorization f) := rfl
-
 private theorem directImageAlgebra_restrictScalars_reflects
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (SheafOfModules.restrictScalars.{u}
@@ -311,7 +303,7 @@ theorem finite_exactHom_single_counit_transport
   have hFT : F ⋙ T = RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
     directImageAlgebra_factorization f
   have hf := affine_singlePushforward_unit_isIso f M hM
-  rw [directImageAlgebra_factorization_iso] at hγ
+  rw [← eqToIso_refl] at hγ
   have result := CategoryTheory.assembly_transport F T H
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) adjH M L hFT hf γ hγ e
   simpa only [eqToHom_refl, Category.id_comp, cast_eq] using result
