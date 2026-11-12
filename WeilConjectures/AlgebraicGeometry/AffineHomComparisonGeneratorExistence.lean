@@ -140,6 +140,7 @@ private theorem restrict_scalar_naturality {R : CommRingCat.{u}} {X : Scheme.{u}
     rfl
   exact congrArg (fun k ↦ k ((Scheme.ΓSpecIso R).inv r)) hh
 
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Elaborating the chart's dependent module structures needs more than the default heartbeats.
 set_option backward.isDefEq.respectTransparency false in
