@@ -46,9 +46,41 @@ private theorem scalar_pushforward_tensor (t : Y ⟶ X) (A B : KSheaf Y k) :
     (Opens.map t.base) (ModuleCat.{w} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y) A B U
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Tensor comparison rewrites need extra heartbeats to infer the sheaf module instances.
+private theorem scalar_tensor_comparison_of_adjoints (t : Y ⟶ X)
+    {A B H : KSheaf X k} {C D I J : KSheaf Y k}
+    (a : A ⊗ B ⟶ H) (b : (scalarInverseImage t).obj H ⟶ I) (c : I ⟶ J)
+    (jA : (scalarInverseImage t).obj A ⟶ C) (jB : (scalarInverseImage t).obj B ⟶ D)
+    (d : C ⊗ D ⟶ J)
+    (h : a ≫ ((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).homEquiv H I b ≫
+        ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).map c =
+      (((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).homEquiv A C jA ⊗ₘ
+        ((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).homEquiv B D jB) ≫
+        Functor.LaxMonoidal.μ ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)) C D ≫
+        ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).map d) :
+    (scalarInverseImage t).map a ≫ b ≫ c =
+      ((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).leftAdjointOplaxMonoidal.δ
+          A B ≫ (jA ⊗ₘ jB) ≫ d := by
+  let adj := (Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
+  apply (adj.homEquiv _ _).injective
+  dsimp only [scalarInverseImage]
+  rw [Adjunction.homEquiv_naturality_left,
+    Adjunction.homEquiv_naturality_right,
+    Adjunction.leftAdjointOplaxMonoidal_δ,
+    Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← Functor.LaxMonoidal.μ_natural_assoc,
+    tensorHom_comp_tensorHom_assoc]
+  simpa only [← Adjunction.homEquiv_unit] using h
+
 /-- The scalar tensor coefficient commutes with the normalized module pullback
 comparison. This is an equality of coefficient sheaf morphisms, with no Ext classes.
 Source: Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
@@ -84,17 +116,7 @@ theorem scalarPullbackCoefficient_tensor
           ((tensorPullback t).obj G) := by
   let adj := (Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
-  apply (adj.homEquiv _ _).injective
-  dsimp only [scalarInverseImage, id]
-  rw [Adjunction.homEquiv_naturality_left,
-    Adjunction.homEquiv_naturality_right,
-    Adjunction.leftAdjointOplaxMonoidal_δ,
-    Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rw [← Functor.LaxMonoidal.μ_natural_assoc,
-    tensorHom_comp_tensorHom_assoc]
-  simp only [← Adjunction.homEquiv_unit]
+  apply scalar_tensor_comparison_of_adjoints
   apply Sheaf.hom_ext_of_μ_comp
   simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom]
   have hn {A B C D : KSheaf X k} (a : A ⟶ C) (b : B ⟶ D) :

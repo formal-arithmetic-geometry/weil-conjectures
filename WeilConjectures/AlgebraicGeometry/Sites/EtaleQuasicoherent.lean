@@ -61,14 +61,14 @@ noncomputable def etaleRestrict (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) :
   map_zero' := by simp
   map_add' φ ψ := by simp [Preadditive.add_comp, Preadditive.comp_add]
 
-set_option profiler true in
-set_option maxHeartbeats 700000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 lemma etaleRestrict_eq (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) (φ : EtaleSections F V) :
-    etaleRestrict F g φ = (etaleHom (X := X) (unitObj X) F).map g.op φ :=
-  (modulesPseudofunctor_pullHom_eq_pullbackCompOfEq (M₁ := unit X) (M₂ := F) φ g.left W.hom
-    W.hom (MorphismProperty.Over.w g) (MorphismProperty.Over.w g)).symm
+    etaleRestrict F g φ = (etaleHom (X := X) (unitObj X) F).map g.op φ := by
+  simp only [etaleHom, Functor.comp_map, Functor.op_map, Pseudofunctor.presheafHom_map,
+    TypeCat.ofHom_apply, Quiver.Hom.unop_op]
+  rw [modulesPseudofunctor_pullHom_eq_pullbackCompOfEq]
+  rfl
 
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
