@@ -28,13 +28,25 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
   schemeOpenRestriction_additive schemeOpenRestriction_preservesFiniteLimits
   schemeOpenRestriction_preservesFiniteColimits
 
+private theorem paste_return_six_with_edges
+    {C₀ : Type*} [Category* C₀]
+    {A B C D E F G H I J K L : C₀}
+    {p : A ⟶ B} {a : B ⟶ C} {r : C ⟶ D} {t : D ⟶ E}
+    {c : E ⟶ F} {d : F ⟶ G} {f : G ⟶ H} {q : H ⟶ J}
+    {x : C ⟶ K} {y : K ⟶ L} {z : L ⟶ F} {s : B ⟶ I} {v : I ⟶ H}
+    (hreturn : r ≫ t ≫ c = x ≫ y ≫ z)
+    (htail : a ≫ x ≫ y ≫ z ≫ d ≫ f = s ≫ v) :
+    p ≫ a ≫ r ≫ t ≫ c ≫ d ≫ f ≫ q = p ≫ s ≫ v ≫ q := by
+  have h := congrArg (fun k ↦ p ≫ a ≫ k ≫ d ≫ f ≫ q) hreturn
+  simp only [Category.assoc] at h
+  exact h.trans (paste_six_with_edges htail)
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- The statement elaborates two derived site categories and their equivalence.
 /-- A local comparison transported to the overlap agrees with the fixed
 scheme comparison after returning from the open site. Expand the prescribed
@@ -82,25 +94,18 @@ theorem perfectOverlapCanonicalSiteTriangleU
                 ((derivedPullback (g ∣_ U)).obj A))) ≫
           ((perfectOverlapStageObjectIso g pX pY b hg U V U inf_le_left).app A).hom := by
   intro P Q i RU RW SP LU τ eW apex cart M κ θ hθ
-  let W := P ⊓ Q
-  let Rw := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W
-  let σ := schemeDerivedOpenRestrictionCompIso X i
-  let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
-  let ω := openSiteOverlapIso X i
   rw [hθ]
   unfold perfectOverlapApexObjectIso
   simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   simp only [id, Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc, Iso.app_hom]
-  slice_lhs 3 5 =>
-    exact perfectOverlapApex_overlapReturn_comp g pX pY b hg U V E
   simpa only [Functor.comp_map, Category.assoc, Iso.symm_hom] using
-    (paste_six_with_edges
+    (paste_return_six_with_edges
+      (perfectOverlapApex_overlapReturn_comp g pX pY b hg U V E)
       (perfectOverlapApex_siteTail_cancel_for g pX pY b hg U V U inf_le_left
         ((derivedPullback (g ∣_ U)).obj A) E φ))
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- The second statement also elaborates two derived site categories.
 /-- The second-open site triangle follows by the same return, nested-counit,
 and local-isomorphism pasting, using the inclusion `U ⊓ V ≤ V`. 
@@ -149,11 +154,9 @@ theorem perfectOverlapCanonicalSiteTriangleV
   simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   simp only [id, Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc, Iso.app_hom]
-  slice_lhs 3 5 =>
-    exact perfectOverlapApex_overlapReturn_comp_for g pX pY b hg
-      U V V inf_le_right E
   simpa only [Functor.comp_map, Category.assoc, Iso.symm_hom] using
-    (paste_six_with_edges
+    (paste_return_six_with_edges
+      (perfectOverlapApex_overlapReturn_comp_for g pX pY b hg U V V inf_le_right E)
       (perfectOverlapApex_siteTail_cancel_for g pX pY b hg U V V inf_le_right
         ((derivedPullback (g ∣_ V)).obj B) E φ))
 
