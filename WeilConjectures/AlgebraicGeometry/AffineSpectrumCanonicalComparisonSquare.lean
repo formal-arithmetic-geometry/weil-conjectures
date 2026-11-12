@@ -47,8 +47,6 @@ private theorem comparisonIntoPullback_eq
   simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
 
 set_option profiler true in
-set_option maxHeartbeats 1100000 in
--- The comparison expands several nested stalk and localization functors.
 /-- The comparison square for the termwise spectrum pullback with its canonical counit.
 
 Proof: isoSpec naturality and stalkMap_comp identify the four stalk rings and
@@ -151,6 +149,6 @@ theorem exists_affineSpectrum_canonicalComparison_square
   simp only [comparisonIntoPullback_eq, Functor.map_comp, Category.assoc,
     eqToIso_refl, Iso.trans_hom, Iso.refl_hom, Iso.app_hom, Iso.symm_hom,
     Category.id_comp, c0, d0, b, a0, P0, T, F, F0, H0, z] at hh ⊢
-  convert hh using 1 <;> rfl
+  exact hh
 
 end AlgebraicGeometry.SingleComplexBaseChange

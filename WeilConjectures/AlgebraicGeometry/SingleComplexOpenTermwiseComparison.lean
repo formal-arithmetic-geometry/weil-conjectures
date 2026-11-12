@@ -73,8 +73,6 @@ private theorem comparison_square_cancel
     _ = l ≫ p ≫ e := by rw [← h]
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Elaborating the localized tensor and derived-stalk comparisons needs this budget.
 set_option linter.unusedVariables false in
 -- Keep the original unused local H in the statement unchanged.
 /-- Open restriction transports the normalized tensor comparison on the literal
@@ -189,7 +187,7 @@ theorem exists_singleComplexOpen_termwise_comparison
     have : (Scheme.Modules.tensorPullback g').Additive := tensorPullbackAdditive g'
     have : (Scheme.Modules.tensorPullback j).Additive := tensorPullbackAdditive j
     dsimp only at hcompat
-    erw [termwise_counit_transport
+    simp only [termwise_counit_transport
       (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
       (D := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
       (Scheme.Modules.tensorPullback g') (derivedPullback g') (counit g') P,
