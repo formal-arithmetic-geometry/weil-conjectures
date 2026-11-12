@@ -261,7 +261,7 @@ private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Categor
   simp only [Category.assoc, e.hom_inv_id_assoc]
   rw [← T.map_comp_assoc]
   simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
-    ← Prod.id_eq, T.map_id, Category.id_comp]
+    ← prod_id', T.map_id, Category.id_comp]
 
 set_option profiler true in
 /-- The representative square, assembled from the strict Roos normalization and the
@@ -320,14 +320,15 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
+  dsimp only [podReindexingTensorFrame] at hs
   rw [podTensorReindexAt_tower] at hs
-  have hs' := eq_of_heq hs
-  exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
+  refine (podTensorRepresentative_cancel (integralCompletedTensor l E X)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
     ((integralCompletedTensorComparison l E X).app
       ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q))
-    _ _ hs' _).trans
+    _ _ ?_ _).trans
       (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
+  exact eq_of_heq hs
 
 end WeilConjectures

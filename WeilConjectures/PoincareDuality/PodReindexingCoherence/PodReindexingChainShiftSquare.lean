@@ -195,7 +195,12 @@ theorem chain_shift_reindexing_square
         (((c.chain P I).hom.f (r+(b-a))).val.app U
           (((sY.iso P I a b).hom.f r).val.app
             (op ((proEtaleIsoPostcompose g).obj U.unop)) z))).app V).hom x
-  rw [chain_projection', chain_projection']
+  have hleft := chain_projection' l E g s c (P⟦a⟧) (I⟦b⟧)
+    r t (t + r) rfl U V z x
+  have hright := chain_projection' l E g s c P I
+    (r + (b - a)) (t + a) (t + r + b) (by omega) U V
+    (((sY.iso P I a b).hom.f r).val.app
+      (op ((proEtaleIsoPostcompose g).obj U.unop)) z) x
   have hy := congrArg
     (fun f ↦ ((f.val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) z).app
       (op (Over.mk ((proEtaleIsoPostcompose g).map V.unop.hom)))).hom x)
@@ -204,6 +209,7 @@ theorem chain_shift_reindexing_square
     (proj l E Y s (P⟦a⟧) (I⟦b⟧) r t (t + r) rfl) (a * r).negOnePow
     (op ((proEtaleIsoPostcompose g).obj U.unop)) z
     (op (Over.mk ((proEtaleIsoPostcompose g).map V.unop.hom))) x
-  exact (hy.trans hs).symm
+  exact (congrArg ((a * r).negOnePow • ·) hleft).trans
+    ((hy.trans hs).symm.trans hright.symm)
 
 end WeilConjectures.PodReindexingCoherence
