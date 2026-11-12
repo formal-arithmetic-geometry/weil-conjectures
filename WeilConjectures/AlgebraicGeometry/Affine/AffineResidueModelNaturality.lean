@@ -23,6 +23,19 @@ universe v
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
+private theorem affineResidueModel_map_square
+    {D₀ D₁ D₂ : Type*} [Category D₀] [Category D₁] [Category D₂]
+    (R : D₀ ⥤ D₁) (H : D₁ ⥤ D₂) (A : D₀ ⥤ D₂) (θ : R ⋙ H ≅ A)
+    {E E' : D₀} (b : E ⟶ E') {K C : D₁}
+    (m : R.obj E ≅ K) (m' : R.obj E' ≅ C) (f : K ⟶ C)
+    (hf : f = m.inv ≫ R.map b ≫ m'.hom) :
+    H.map f ≫ (H.mapIso m'.symm ≪≫ θ.app E').hom =
+      (H.mapIso m.symm ≪≫ θ.app E).hom ≫ A.map b := by
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  rw [hf, H.map_comp, H.map_comp]
+  simp only [Category.assoc]
+  rw [← H.map_comp_assoc m'.hom m'.inv, m'.hom_inv_id, H.map_id, Category.id_comp]
+  exact congrArg (fun a ↦ H.map m.inv ≫ a) (θ.hom.naturality b)
 
 variable
   [∀ Y : Scheme.{v},
@@ -92,8 +105,6 @@ theorem affineResidueModelEquiv_naturality
       (derivedFiberCohomologyFunctor W w 1).map b
         (affineResidueModelEquiv W w U hwU hU p hp E K hK m z) := by
   classical
-  let : Abelian (SheafOfModules.{v} (moduleRings W.toRingedSpace)) := inferInstance
-  let : Abelian (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) := inferInstance
   let R := (SheafOfModules.overFunctor.{v}
     (moduleRings W.toRingedSpace) U).mapDerivedCategory
   let H := localDerivedFiberCohomologyFunctor W w U hwU 1
@@ -115,15 +126,7 @@ theorem affineResidueModelEquiv_naturality
       (t.hom.naturality (X := ⟨K, hK⟩) (Y := ⟨C, hC⟩) (ObjectProperty.homMk φ))
         (q K z)
   have hsquare : H.map (DerivedCategory.Q.map φ) ≫ oC.hom = oK.hom ≫ A.map b := by
-    dsimp only [oC, oK, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
-    rw [hφ]
-    simp only [H.map_comp]
-    simp only [Category.assoc]
-    rw [← H.map_comp_assoc m'.hom m'.inv, m'.hom_inv_id, H.map_id, Category.id_comp]
-    have hn := θ.hom.naturality b
-    dsimp only [Functor.comp_map] at hn
-    change H.map (R.map b) ≫ (θ.app E').hom = (θ.app E).hom ≫ A.map b at hn
-    exact congrArg (fun a ↦ H.map m.inv ≫ a) hn
+    exact affineResidueModel_map_square R H A θ b m m' _ hφ
   change oC.hom (eC (affineResidueCycleHomologyMap φ z)) = A.map b (oK.hom (eK z))
   rw [hlocal]
   exact ConcreteCategory.congr_hom hsquare (eK z)
