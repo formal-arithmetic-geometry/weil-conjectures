@@ -89,40 +89,46 @@ private theorem relativeTensorPullback_model_homology
     (HomologicalComplex.homologyFunctor E (.up ℤ) i).mapIso e ≪≫
     (Z'.sc i).mapHomologyIso V⟩
 
-set_option trace.profiler true in
--- Derived and ordinary homology comparisons involve several nested functors.
-/-- On K-flat representatives in both source module categories, the balanced tensor
-identity computes the underlying homology of derived tensor with derived pullback.
-This is only the representative calculation: no replacement of the restricted first
-complex by an arbitrary K-flat resolution is asserted here.
-Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-
-Proof: the K-flat counit for derived pullback identifies Lf*(Q(L)) with Q(f*L).
-The K-flat first-factor comparison then identifies Q(A) tensor Q(f*L) with
-Q(Tot(A tensor f*L)). In each bidegree the balanced tensor isomorphism
-A^p tensor over O_X (O_X tensor over f-inverse O_S f-inverse L^q)
-is A^p restricted to f-inverse O_S tensor f-inverse L^q. Its naturality
-commutes with both differentials; the same sign (-1)^p occurs on both sides.
-Restriction of scalars preserves coproducts, so these summand identifications
-induce an isomorphism of total complexes. Exact restriction of scalars commutes
-with homology, and forgetting to abelian sheaves removes the scalar action.
-Compose these identifications with the localization homology comparison.
-The construction is valid for unbounded complexes and empty schemes; it does not
-require the restriction of A to be K-flat.
-(blueprint: lem-pc-relative-tensor-pullback-kflat-model) -/
-theorem relativeTensorPullback_kFlat_model
+private theorem relativeTensorPullback_kFlat_derived
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     (A : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hA : CochainComplex.IsKFlatTensor (R := X.sheaf) A)
     (L : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-    (hL : CochainComplex.IsKFlatTensor (R := S.sheaf) L) (i : ℤ) :
+    (hL : CochainComplex.IsKFlatTensor (R := S.sheaf) L) :
+    ∃ (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
+        SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (hG : ∀ M, G.obj M = Modules.tensorPullbackObj f M)
+      (_ : ∀ {M N} (a : M ⟶ N),
+        G.map a = eqToHom (hG M) ≫ Modules.tensorPullbackMap f a ≫ eqToHom (hG N).symm)
+      (_ : G.Additive),
+      Nonempty (DerivedCategory.Q.obj A ⊗ (derivedPullback f).obj (DerivedCategory.Q.obj L) ≅
+        DerivedCategory.Q.obj (CochainComplex.mapBifunctor A
+          ((G.mapHomologicalComplex (.up ℤ)).obj L)
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))))) := by
+  obtain ⟨G, hG, hGmap, hGadd, ⟨ep⟩⟩ := relativeTensorPullback_kFlat_counit f L hL
+  have := hGadd
+  obtain ⟨et⟩ := relativeTensorPullback_kFlat_tensor X A
+    ((G.mapHomologicalComplex (.up ℤ)).obj L) hA
+  exact ⟨G, hG, hGmap, hGadd,
+    ⟨(tensorLeft (DerivedCategory.Q.obj A)).mapIso ep ≪≫ et⟩⟩
+
+private theorem relativeTensorPullback_ordinary_homology
+    {X S : Scheme.{u}} (f : X ⟶ S)
+    (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    (hG : ∀ M, G.obj M = Modules.tensorPullbackObj f M)
+    (hGmap : ∀ {M N} (a : M ⟶ N),
+      G.map a = eqToHom (hG M) ≫ Modules.tensorPullbackMap f a ≫ eqToHom (hG N).symm)
+    [G.Additive]
+    (A : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (L : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) (i : ℤ) :
     Nonempty
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj
-          ((DerivedCategory.homologyFunctor _ i).obj
-            (DerivedCategory.Q.obj A ⊗ (derivedPullback f).obj
-              (DerivedCategory.Q.obj L))) ≅
+          ((CochainComplex.mapBifunctor A
+            ((G.mapHomologicalComplex (.up ℤ)).obj L)
+            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)))).homology i) ≅
         (SheafOfModules.toSheaf
           ((sheafCompose (Opens.grothendieckTopology X)
             (forget₂ CommRingCat.{u} RingCat.{u})).obj
@@ -170,16 +176,9 @@ theorem relativeTensorPullback_kFlat_model
   have (M N : CochainComplex (SheafOfModules.{u} B) ℤ) :
       CochainComplex.HasMapBifunctor M N
         (@curriedTensor _ _ (SheafOfModules.monoidalCategory R)) := fun _ ↦ inferInstance
-  obtain ⟨G, hG, hGmap, hGadd, ⟨ep⟩⟩ := relativeTensorPullback_kFlat_counit f L hL
-  have := hGadd
-  let T := G
-  let TL := (T.mapHomologicalComplex (.up ℤ)).obj L
-  obtain ⟨et⟩ := relativeTensorPullback_kFlat_tensor X A TL hA
-  let ed : DerivedCategory.Q.obj A ⊗ (derivedPullback f).obj (DerivedCategory.Q.obj L) ≅
-      DerivedCategory.Q.obj (CochainComplex.mapBifunctor A TL (curriedTensor C)) :=
-    (tensorLeft (DerivedCategory.Q.obj A)).mapIso ep ≪≫ et
   obtain ⟨eb⟩ := relativeTensorPullback_complex_comparison f G hG hGmap A L
-  let Z := CochainComplex.mapBifunctor A TL (curriedTensor C)
+  let Z := CochainComplex.mapBifunctor A
+    ((G.mapHomologicalComplex (.up ℤ)).obj L) (curriedTensor C)
   let U := SheafOfModules.restrictScalars
     ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f))
@@ -188,8 +187,60 @@ theorem relativeTensorPullback_kFlat_model
   let := SheafOfModules.monoidalCategory R
   let Z' := CochainComplex.mapBifunctor
     ((U.mapHomologicalComplex (.up ℤ)).obj A) IL (curriedTensor (SheafOfModules.{u} B))
-  obtain ⟨eh⟩ := relativeTensorPullback_model_homology W V Z Z' eb i
-  exact ⟨W.mapIso ((DerivedCategory.homologyFunctor C i).mapIso ed ≪≫
-      (DerivedCategory.homologyFunctorFactors C i).app Z) ≪≫ eh⟩
+  exact relativeTensorPullback_model_homology W V Z Z' eb i
+
+-- Derived and ordinary homology comparisons involve several nested functors.
+/-- On K-flat representatives in both source module categories, the balanced tensor
+identity computes the underlying homology of derived tensor with derived pullback.
+This is only the representative calculation: no replacement of the restricted first
+complex by an arbitrary K-flat resolution is asserted here.
+Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
+
+Proof: the K-flat counit for derived pullback identifies Lf*(Q(L)) with Q(f*L).
+The K-flat first-factor comparison then identifies Q(A) tensor Q(f*L) with
+Q(Tot(A tensor f*L)). In each bidegree the balanced tensor isomorphism
+A^p tensor over O_X (O_X tensor over f-inverse O_S f-inverse L^q)
+is A^p restricted to f-inverse O_S tensor f-inverse L^q. Its naturality
+commutes with both differentials; the same sign (-1)^p occurs on both sides.
+Restriction of scalars preserves coproducts, so these summand identifications
+induce an isomorphism of total complexes. Exact restriction of scalars commutes
+with homology, and forgetting to abelian sheaves removes the scalar action.
+Compose these identifications with the localization homology comparison.
+The construction is valid for unbounded complexes and empty schemes; it does not
+require the restriction of A to be K-flat.
+(blueprint: lem-pc-relative-tensor-pullback-kflat-model) -/
+theorem relativeTensorPullback_kFlat_model
+    {X S : Scheme.{u}} (f : X ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    (A : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hA : CochainComplex.IsKFlatTensor (R := X.sheaf) A)
+    (L : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
+    (hL : CochainComplex.IsKFlatTensor (R := S.sheaf) L) (i : ℤ) :
+    Nonempty
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj
+          ((DerivedCategory.homologyFunctor _ i).obj
+            (DerivedCategory.Q.obj A ⊗ (derivedPullback f).obj
+              (DerivedCategory.Q.obj L))) ≅
+        (SheafOfModules.toSheaf
+          ((sheafCompose (Opens.grothendieckTopology X)
+            (forget₂ CommRingCat.{u} RingCat.{u})).obj
+              (TopCat.Sheaf.inverseImageRing f.base S.sheaf))).obj
+          ((CochainComplex.mapBifunctor
+            (((SheafOfModules.restrictScalars
+              ((sheafCompose (Opens.grothendieckTopology X)
+                (forget₂ CommRingCat.{u} RingCat.{u})).map
+                  (Modules.tensorPullbackRingMap f))).mapHomologicalComplex
+                    (ComplexShape.up ℤ)).obj A)
+            (((TopCat.Sheaf.inverseImageModuleFunctor f.base S.sheaf).mapHomologicalComplex
+               (ComplexShape.up ℤ)).obj L)
+            (@curriedTensor _ _ (SheafOfModules.monoidalCategory
+              (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i)) := by
+  obtain ⟨G, hG, hGmap, hGadd, ⟨ed⟩⟩ := relativeTensorPullback_kFlat_derived f A hA L hL
+  have := hGadd
+  obtain ⟨eh⟩ := relativeTensorPullback_ordinary_homology f G hG hGmap A L i
+  exact ⟨(SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).mapIso
+    ((DerivedCategory.homologyFunctor _ i).mapIso ed ≪≫
+      (DerivedCategory.homologyFunctorFactors _ i).app _) ≪≫ eh⟩
 
 end AlgebraicGeometry.Scheme
