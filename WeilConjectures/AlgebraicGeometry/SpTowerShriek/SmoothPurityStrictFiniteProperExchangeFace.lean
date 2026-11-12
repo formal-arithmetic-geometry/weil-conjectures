@@ -386,7 +386,12 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
         exactByConversion h)
-    (by sorry)
+    (by
+      intro M
+      have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+        exactByConversion h)
     N (coordinates.property f n) (coordinates.property f' n)
   sorry
 
