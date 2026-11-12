@@ -93,6 +93,8 @@ private def square_unit_cancel_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
       (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
       cQ.hom.app _
 
+set_option profiler true in
+set_option maxHeartbeats 600000 in
 private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
