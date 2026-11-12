@@ -135,7 +135,9 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
   unfold resolutionSectionClass
   dsimp only
   simp only [Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id]
-  change (a ≫ b ≫ H.map (𝟙 _) ≫ t ⊤) ≫ _ =
+  change (a ≫ b ≫ H.map (𝟙 (((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        I.cocomplex)) ≫ t ⊤) ≫ _ =
     moduleCohomologyRestriction (h ⁻¹ᵁ V) G p ≫ a' ≫ b' ≫ H.map R.sections.hom ≫ t V
   rw [H.map_id, Category.id_comp]
   calc
