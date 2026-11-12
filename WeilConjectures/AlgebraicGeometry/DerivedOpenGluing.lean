@@ -46,6 +46,7 @@ private theorem compatible_composites
   simpa only [Category.assoc] using
     congrArg (fun t => t ≫ SV.map b ≫ eV.hom.app E) ht
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
