@@ -169,10 +169,11 @@ end OpenRestriction
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
   exact inverseMate_isIso_of_left_adjoints_explicit
-    (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
-      (sequenceQuotient l L) j)
-    (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
-      (sequenceQuotient l E) j)
+    (L₁ := integralComparisonSequencePullback l L j)
+    (R₁ := integralComparisonSequenceDirectImage l L j)
+    (L₂ := integralComparisonSequencePullback l E j)
+    (R₂ := integralComparisonSequenceDirectImage l E j)
+    (G := sequenceRestriction l E L ι B) (H := sequenceRestriction l E L ι X)
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
       (sequenceQuotient l L) j)
