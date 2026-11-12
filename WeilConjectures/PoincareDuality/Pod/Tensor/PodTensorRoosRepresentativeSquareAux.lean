@@ -392,16 +392,22 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have finish := cancel'
     _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
     (by
-      simpa only [a, b, eP, eQ, e, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
-        integralOperationsGoodLocalization, Functor.comp_obj, Functor.prod_obj,
-        Iso.app_hom] using hs)
+      dsimp only [a, b, eP, eQ, e, integralOperationsTensorOnGood,
+        integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+        podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
+        integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+        ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj, Iso.app_hom]
+      exact hs)
     ((integralCompletedTensor l E X).map
       (Prod.mkHom
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))))
-  simpa only [a, b, eP, eQ, e, podOrdinaryReindex, integralOperationsTensorComplexFunctor,
-    integralOperationsGoodLocalization, Functor.comp_obj, Functor.prod_obj,
-    Iso.app_hom, Iso.app_inv] using finish.trans
-      (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
+  dsimp only [a, b, eP, eQ, e, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+    podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
+    integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj, Iso.app_hom, Iso.app_inv] at finish
+  exact finish.trans
+    (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
 
 end WeilConjectures
