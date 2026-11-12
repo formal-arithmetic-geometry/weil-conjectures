@@ -209,6 +209,7 @@ private theorem abstractCycle_naturality
       (termIso_map W U p φ 1 x.val).symm
     _ = _ := (abstractCycle_i W U p C (affineResidueCycleMap φ x)).symm
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1300000 in
 -- The statement compares tensor-product and quotient module structures.
 set_option backward.isDefEq.respectTransparency true in
