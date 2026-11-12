@@ -211,6 +211,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
             (Profinite.padicAlgClRingObj ℓ)).app A) =
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
+  run_tac do Lean.logInfo m!"PH112 start remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   have finish := exists_subgroup_pullbackExchange_of_galois_average
     (M'' := baseChange hM b hb v hv) (N₁ := baseChangeGaloisLayer hM b hb v hv)
     (N := baseChangeGaloisModel hM b hb v hv) (M := M)
@@ -221,7 +222,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
     (baseChangeHom hM b hb v hv) A hM1
-  trace "PH112: cartesian comparison accepted"
+  run_tac do Lean.logInfo m!"PH112: cartesian comparison accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -279,37 +280,49 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
-  trace "PH112: finite layer ready"
+  run_tac do Lean.logInfo m!"PH112: finite layer ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   let eG := GenericAut.galoisEquiv (k' := k') (K := K)
-  trace "PH112: equivalence ready"
+  run_tac do Lean.logInfo m!"PH112: equivalence ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   let act := baseChangeAut hM b hb v hv
-  trace "PH112: base action ready"
+  run_tac do Lean.logInfo m!"PH112: base action ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   let actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
     (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
     (baseChangeGaloisResidue hM b hb v hv)
     (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
-  trace "PH112: layer action ready"
+  run_tac do Lean.logInfo m!"PH112: layer action ready; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   have geometricFinish := finish
-    (by trace "PH112: total"; exact baseChangeToGaloisModel_comp_total hM b hb v hv)
-    (by trace "PH112: generic"; exact baseChangeToGaloisModel_comp_generic hM b hb v hv)
-    (by trace "PH112: rho"; exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
-  trace "PH112: geometry accepted"
-  have equivFinish := geometricFinish eG
-  trace "PH112: equivalence accepted"
-  have fieldFinish := equivFinish L₁
-  trace "PH112: finite field accepted"
-  have actFinish := fieldFinish act
-  trace "PH112: base action accepted"
-  have avgFinish := actFinish actΩ
-  trace "PH112: layer action accepted"
-  have result := avgFinish
-    (by trace "PH112: multiplication"; exact autAction_baseChangeAut_mul hM b hb v hv _)
     (by
-      trace "PH112: intertwining"
+      run_tac do Lean.logInfo m!"PH112: total; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      exact baseChangeToGaloisModel_comp_total hM b hb v hv)
+    (by
+      run_tac do Lean.logInfo m!"PH112: generic; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      exact baseChangeToGaloisModel_comp_generic hM b hb v hv)
+    (by
+      run_tac do Lean.logInfo m!"PH112: rho; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
+  run_tac do Lean.logInfo m!"PH112: geometry accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have equivFinish := geometricFinish eG
+  run_tac do Lean.logInfo m!"PH112: equivalence accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have fieldFinish := equivFinish L₁
+  run_tac do Lean.logInfo m!"PH112: finite field accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have actFinish := fieldFinish act
+  run_tac do Lean.logInfo m!"PH112: base action accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have avgFinish := actFinish actΩ
+  run_tac do Lean.logInfo m!"PH112: layer action accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+  have result := avgFinish
+    (by
+      run_tac do Lean.logInfo m!"PH112: multiplication; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      exact autAction_baseChangeAut_mul hM b hb v hv _)
+    (by
+      run_tac do Lean.logInfo m!"PH112: intertwining; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
       exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
-    (by trace "PH112: triviality"; exact hL₁.1)
-    (by trace "PH112: average"; exact hL₁.2)
-  trace "PH112: averaging application accepted"
+    (by
+      run_tac do Lean.logInfo m!"PH112: triviality; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      exact hL₁.1)
+    (by
+      run_tac do Lean.logInfo m!"PH112: average; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
+      exact hL₁.2)
+  run_tac do Lean.logInfo m!"PH112: averaging application accepted; remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   exact result
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
