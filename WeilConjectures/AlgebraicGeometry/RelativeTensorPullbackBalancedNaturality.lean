@@ -62,6 +62,7 @@ private def balancedUnit (α : R ⟶ B) (N : SheafOfModules.{u} (𝓡 R)) :
   (PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
     (changeOfRingsPresheaf.{u, u, u} α N)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Bilinearity involves both coefficient-ring actions and the module sheafification unit.
 private def balancedPairing (α : R ⟶ B)
@@ -208,6 +209,7 @@ private theorem balancedUnit_map (α : R ⟶ B)
   rw [ModuleCat.ExtendScalars.map_tmul] at hx
   exact hx.symm
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The tensor calculation compares both sheafification units and both ring actions.
 private theorem balancedMap_natural (α : R ⟶ B)
