@@ -320,7 +320,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (φ := baseChangeHom hM b hb v hv)
     (A := A) (hχ := by
       ph112_data_diff "cartesian" hM1
-      cast_proofs hM1)
+      convert (config := {closePre := false, typeEqs := true}) hM1 using 6)
     (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
     (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
     (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
@@ -333,7 +333,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (hint := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
     (htriv := hL₁.1) (hSA := by
       ph112_data_diff "average" hL₁.2
-      cast_proofs hL₁.2)
+      convert (config := {closePre := false, typeEqs := true}) hL₁.2 using 10)
   ph112_remaining "PH112 average ready"
   ph112_data_diff "conclusion" result
   cast_proofs result
