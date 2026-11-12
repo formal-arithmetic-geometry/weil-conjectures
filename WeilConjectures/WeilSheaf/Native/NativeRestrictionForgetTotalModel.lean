@@ -934,7 +934,7 @@ private theorem native_restriction_goal_proof
       (totalRestriction P T) (restriction_model' P T hP hT)
       cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) (by
         simp only [ha, ← prod_id, Category.id_comp]
-        erw [Functor.map_id, Category.comp_id]
+        erw [CategoryTheory.Functor.map_id, Category.comp_id]
         exact hchain) mZ rfl
   exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
