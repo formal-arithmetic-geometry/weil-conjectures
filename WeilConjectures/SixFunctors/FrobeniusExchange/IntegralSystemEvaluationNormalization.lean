@@ -129,7 +129,8 @@ private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
   rw [ProEtale.VaryingRing.square_symm]
   exact ProEtale.VaryingRing.evalPMate_isIso R q f n
 
-set_option profiler true in
+/-- Transfer the reference mate in its native module categories, before specializing the tower.
+This keeps comparisons of the coefficient presentations out of the derived construction. -/
 private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     (q : ∀ n, R (n + 1) ⟶ R n) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     {L : ProEtale.VaryingRing.Modules R q Y ⥤ ProEtale.VaryingRing.Modules R q X}
@@ -175,7 +176,6 @@ private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     θ (ProEtale.VaryingRing.moduleEvalG R q f n).symm hT hS hG hH hθ hb
     (varyingDerivedMateIso R q f n)
 
-set_option profiler true in
 /-- An ordinary invertible evaluation mate for strict integral systems has an
 invertible canonical right-derived mate for the actual integral pullback models.
 Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7
