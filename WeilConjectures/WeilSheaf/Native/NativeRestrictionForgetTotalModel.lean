@@ -580,7 +580,6 @@ private theorem ordinary_sheaf_restriction_tensor
 
 end OrdinarySheafRestriction
 
-set_option profiler true in
 -- Keep the concrete presentation types folded while transporting the restriction fields.
 private theorem native_restriction_data
     (R0 : ProEtaleWeilSheaf k₀ l Z ⥤ ProEtaleWeilSheaf k₀ l U) [R0.Additive]
@@ -659,7 +658,13 @@ variable (α : (ProEtale.adicUpperStar l
     (ProEtale.adicUpperStar l
       (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))))
 local notation "Lα" => Endofunctor.IsoAlgebra.mapOfNatIso α
-set_option profiler true in
+
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- The restriction square for the normalized total complexes, before localization. -/
 private theorem native_restriction_chain
     (hL : (Lα).IsLeftAdjoint)
@@ -680,7 +685,7 @@ private theorem native_restriction_chain
     ∀ (tr : ((Lα).mapHomologicalComplex (.up ℤ)).obj
           (((nativeTensorTotal k₀ l Z).obj P).obj T) ≅
         ((nativeTensorTotal k₀ l U).obj RP).obj RT)
-      (hs : ∀ (p q n : ℤ) (hpq : p + q = n),
+      (_hs : ∀ (p q n : ℤ) (hpq : p + q = n),
         FU.map ((Lα).map (nativeOpenTensorInsertion k₀ l Z P T p q n hpq)) ≫
             FU.map (tr.hom.f n) =
           FU.map (sr (P.X p) (T.X q)).hom ≫
@@ -691,13 +696,13 @@ private theorem native_restriction_chain
           (((nativeTensorTotal k₀ l U).obj RP).obj RT) ≅
         (FU.mapHomologicalComplex (.up ℤ)).obj RP ⊗
           (FU.mapHomologicalComplex (.up ℤ)).obj RT)
-      (hcZ : ∀ (p q n : ℤ) (hpq : p + q = n),
+      (_hcZ : ∀ (p q n : ℤ) (hpq : p + q = n),
         Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
             (F.map (nativeOpenTensorInsertion k₀ l Z P T p q n hpq)).hom ≫
             (cZ.hom.f n).hom =
           Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
             (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom)
-      (hcU : ∀ (p q n : ℤ) (hpq : p + q = n),
+      (_hcU : ∀ (p q n : ℤ) (hpq : p + q = n),
         Mod.tensorπ (RP.X p).carrier (RT.X q).carrier ≫
             (FU.map (nativeOpenTensorInsertion k₀ l U RP RT p q n hpq)).hom ≫
             (cU.hom.f n).hom =
@@ -801,7 +806,6 @@ private theorem native_restriction_chain
   convert hfinal using 1
   rfl
 
-set_option profiler true in
 private theorem native_restriction_goal_proof
     (hL : (Endofunctor.IsoAlgebra.mapOfNatIso α).IsLeftAdjoint) :
   ∀ (_hR : ∀ T, NativeIsKFlat k₀ l Z T →
@@ -929,11 +933,11 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
       cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) (by
-        simpa only [ha, ← prod_id, Functor.map_id, Category.comp_id, Category.id_comp]
-          using hchain) mZ rfl
+        simp only [ha, ← prod_id, Category.id_comp]
+        erw [Functor.map_id, Category.comp_id]
+        exact hchain) mZ rfl
   exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
-set_option profiler true in
 -- Preserve the named restriction functor when specializing the Frobenius comparison.
 /-- Match the named pullback in the inputs before transporting its Frobenius comparison. -/
 private theorem native_restriction_goal_transport
