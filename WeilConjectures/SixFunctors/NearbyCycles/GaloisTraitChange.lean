@@ -155,7 +155,7 @@ private lemma map_inv_app_comp_map_hom_app {C D E : Type*} [Category C] [Categor
     F.map (e.inv.app X) ≫ F.map (e.hom.app X) = 𝟙 _ := by
   rw [← F.map_comp, Iso.inv_hom_id_app, F.map_id]
 
-set_option profiler true in
+set_option maxHeartbeats 1600000 in
 -- the statement involves several large derived functor objects
 /-- **Change of trait on the invariant summands** (SGA 4½, [Th. finitude], proof of 3.7, 3.8). Let
 `τ : N₂ ⟶ N₁` be a morphism of models over `Spec l`, `ω : Ω₁ ⟶ Ω₂` a homomorphism of extensions
