@@ -74,6 +74,7 @@ lemma classTest_curry {Z : Dᵇc((S ⨯ S).left)⟦Profinite.padicAlgClRingObj �
   rw [classTest, uncurry_curry, Equiv.symm_apply_apply]
 
 -- the compactly supported direct images are unfolded in the defeq checks
+set_option profiler true in
 /-- The test map of a class: the left projection morphism of the support, the composition law
 and the exceptional adjoint of the coefficient map. -/
 lemma classTest_correspondenceClassEquiv_symm {C : Over (Spec (.of k))} [LocallyOfFiniteType C.hom]
