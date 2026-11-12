@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness
 
 /-!
 # Derived scalar extension and `Rf^!`
@@ -121,25 +123,58 @@ theorem eq_rightDerivedUpperShriekExtendScalarsMap_iff
   · intro h
     exact (rightDerivedUpperShriekHomEquiv f hΨfK hΨK).symm.injective h
 
+section Constructible
+
+variable {k : Type u} [Field k] [HasInvertibleExponent R (Spec (.of k))]
+  (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [LocallyOfFiniteType f]
+  [QuasiCompact f] {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R))}
+  (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) Y K)
+
+include aY hK
+
+omit [CompactSpace Y] [LocallyOfFiniteType f] in
+/-- For `K ∈ Dᵇctf(Y, R)`, the exceptional inverse image `Rf^! K` is in `Dᵇctf(X, R)`. -/
+lemma constructibleFiniteTor_rightDerivedUpperShriek_obj_of_field :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X ((R(f)^![R]).obj K) :=
+  haveI : HasInvertibleExponent R Y := .of_hom aY
+  constructibleFiniteTor_rightDerivedUpperShriek R aY f hK
+
+omit [CompactSpace Y] in
+/-- For `K ∈ Dᵇctf(Y, R)`, the scalar extension `Ψ (Rf^! K)` is in `Dᵇctf(X, S)`. -/
+lemma constructibleFiniteTor_leftDerivedSheafExtendScalars_rightDerivedUpperShriek_obj :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} S) X
+      ((L(sheafExtendScalars (algebraMap R S) X)).obj ((R(f)^![R]).obj K)) :=
+  haveI : HasInvertibleExponent R X := .of_hom (f ≫ aY)
+  constructibleFiniteTor_leftDerivedSheafExtendScalars (f ≫ aY)
+    (constructibleFiniteTor_rightDerivedUpperShriek_obj_of_field aY hK)
+
+omit [CompactSpace Y] in
+/-- For `K ∈ Dᵇctf(Y, R)`, the scalar extension `Ψ K` is in `Dᵇctf(Y, S)`. -/
+lemma constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} S) Y
+      ((L(sheafExtendScalars (algebraMap R S) Y)).obj K) :=
+  haveI : HasInvertibleExponent R Y := .of_hom aY
+  constructibleFiniteTor_leftDerivedSheafExtendScalars aY hK
+
 /-- Blueprint `lemma-sp-reduction--2`: for `K ∈ Dᵇctf(Y, R)`, `f` separated of finite type
 between schemes of finite type over a field `k` in which the exponents of `R` and `S` are
-invertible, the comparison `c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)` is an **isomorphism**.
+invertible, the comparison `c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)` is an **isomorphism**. The
+hypotheses of `rightDerivedUpperShriekExtendScalarsMap` follow from `K ∈ Dᵇctf(Y, R)`.
 
-TODO: the blueprint proof restricts to smooth charts `f|_U = p_d ∘ e`, where the counit is built
-from the trace of the projective line, which commutes with extension of scalars. -/
-theorem isIso_rightDerivedUpperShriekExtendScalarsMap {k : Type u} [Field k]
-    [HasInvertibleExponent R (Spec (.of k))] [HasInvertibleExponent S (Spec (.of k))]
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
-    (hK₀ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) Y K)
-    (hK : DerivedCategory.TStructure.t.plus K)
-    (hfK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X ((R(f)^![R]).obj K))
-    (hΨfK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} S) X
-      ((L(sheafExtendScalars (algebraMap R S) X)).obj ((R(f)^![R]).obj K)))
-    (hΨK : DerivedCategory.TStructure.t.plus
-      ((L(sheafExtendScalars (algebraMap R S) Y)).obj K)) :
-    IsIso (rightDerivedUpperShriekExtendScalarsMap R S f K hK hfK hΨfK hΨK) := by
+TODO: restricted back to `R`, `c_{R,S}(K)` is the tensor map `Rf^! K ⊗ᴸ S_X ⟶ Rf^!(K ⊗ᴸ S_Y)` for
+the constant sheaf `S_Y`, whose étale counterpart is an isomorphism by the exceptional Künneth
+formula (`AlgebraicGeometry.Etale.isExceptionalKunneth`). This needs the commutation of
+restriction of scalars with the pro-étale `Rf^!`, the identification of `b` restricted to `R`
+with the projection map, and the comparison of both with their étale counterparts. -/
+theorem isIso_rightDerivedUpperShriekExtendScalarsMap
+    [HasInvertibleExponent S (Spec (.of k))] [IsSeparated aY] [IsSeparated f] :
+    IsIso (rightDerivedUpperShriekExtendScalarsMap R S f K hK.plus
+      (constructibleFiniteTor_rightDerivedUpperShriek_obj_of_field aY hK)
+      (constructibleFiniteTor_leftDerivedSheafExtendScalars_rightDerivedUpperShriek_obj aY
+        hK).plusEtaleOrigin
+      (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field (S := S) aY hK).plus) := by
   sorry
+
+end Constructible
 
 end AlgebraicGeometry.ProEtale

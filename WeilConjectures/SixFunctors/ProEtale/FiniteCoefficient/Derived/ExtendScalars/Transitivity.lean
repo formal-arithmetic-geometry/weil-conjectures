@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriekTransitivity
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.UpperShriek
 
 /-!
@@ -40,86 +41,10 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-section Comp
-
-variable {R S T : Type (u + 1)} [CommRing R] [CommRing S] [CommRing T] (φ : R →+* S)
-  (ψ : S →+* T) (χ : R →+* T) (h : χ = ψ.comp φ) (X : Scheme.{u})
-
-/-- Restriction of scalars of pro-étale sheaves along `χ = ψ ∘ φ` is restriction along `ψ` followed
-by restriction along `φ`. -/
-noncomputable def sheafRestrictScalarsCompIso :
-    sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} ψ) ⋙
-        sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ) ≅
-      sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} χ) where
-  hom := sheafCompose_map (Scheme.ProEt.topology X)
-    (ModuleCat.restrictScalarsComp'.{u + 1} φ ψ χ h).inv
-  inv := sheafCompose_map (Scheme.ProEt.topology X)
-    (ModuleCat.restrictScalarsComp'.{u + 1} φ ψ χ h).hom
-  hom_inv_id := by
-    rw [← sheafCompose_comp, Iso.inv_hom_id, sheafCompose_id]
-    rfl
-  inv_hom_id := by
-    rw [← sheafCompose_comp, Iso.hom_inv_id, sheafCompose_id]
-
-/-- Extension of scalars of pro-étale sheaves along `ψ ∘ φ` is extension along `φ` followed by
-extension along `ψ`: the conjugate of `sheafRestrictScalarsCompIso`. -/
-noncomputable def sheafExtendScalarsCompIso :
-    sheafExtendScalars χ X ≅ sheafExtendScalars φ X ⋙ sheafExtendScalars ψ X :=
-  (conjugateIsoEquiv ((sheafExtendScalarsAdjunction φ X).comp (sheafExtendScalarsAdjunction ψ X))
-    (sheafExtendScalarsAdjunction χ X)).symm (sheafRestrictScalarsCompIso φ ψ χ h X)
-
-end Comp
-
 variable {R S T : Type (u + 1)} [CommRing R] [CommRing S] [CommRing T] [Algebra R S]
   [Algebra S T] [Algebra R T] [IsScalarTower R S T]
-
-variable (R S T) in
-/-- The comparison `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}` of the derived extensions of scalars of
-pro-étale sheaves along `R → S → T`: the morphism into the left derived functor `Ψ_{R,T}` induced
-by the composite of the counits of `Ψ_{R,S}` and `Ψ_{S,T}` and the isomorphism
-`T ⊗_S (S ⊗_R -) ≅ T ⊗_R -` (`sheafExtendScalarsCompIso`). -/
-noncomputable def leftDerivedSheafExtendScalarsCompMap (X : Scheme.{u}) :
-    L(sheafExtendScalars (algebraMap R S) X) ⋙ L(sheafExtendScalars (algebraMap S T) X) ⟶
-      L(sheafExtendScalars (algebraMap R T) X) :=
-  (L(sheafExtendScalars (algebraMap R T) X)).leftDerivedLift
-    (sheafExtendScalars (algebraMap R T) X).leftDerivedFunctorCounit
-    (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
-    (L(sheafExtendScalars (algebraMap R S) X) ⋙ L(sheafExtendScalars (algebraMap S T) X))
-    (Functor.whiskerRight (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorCounit
-        L(sheafExtendScalars (algebraMap S T) X) ≫
-      Functor.whiskerLeft
-        ((sheafExtendScalars (algebraMap R S) X).mapHomotopyCategory (ComplexShape.up ℤ))
-        (sheafExtendScalars (algebraMap S T) X).leftDerivedFunctorCounit ≫
-      Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso
-        (sheafExtendScalarsCompIso (algebraMap R S) (algebraMap S T) (algebraMap R T)
-          (IsScalarTower.algebraMap_eq R S T) X).symm (ComplexShape.up ℤ)).hom
-        DerivedCategory.Qh)
-
-variable [Finite R] [Finite S] [Finite T] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-
-/-- Blueprint `lemma-sp-reduction--4`: **transitivity of the comparison for `Rf_!`**. For
-`R → S → T` and `M ∈ Dᵇctf(X, R)`, the comparison `b_{R,T}(M)` is the composite of `b_{R,S}`
-and `b_{S,T}`, along `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`:
-
-`b_{R,T}(M) ∘ τ(Rf_! M) = Rf_!(τ(M)) ∘ b_{S,T}(Ψ_{R,S} M) ∘ Ψ_{S,T}(b_{R,S}(M))`.
-
-TODO: both comparisons are built through the compactification from the base change maps of the
-extensions of scalars along `Rg_*` and from their commutation with `i_!`; associativity of the
-tensor product identifies the direct comparison with the successive ones. -/
-theorem rightDerivedLowerShriekExtendScalarsMap_trans
-    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
-    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X M) :
-    (leftDerivedSheafExtendScalarsCompMap R S T Y).app ((R(f)_![ModuleCat.{u + 1} R]).obj M) ≫
-        (rightDerivedLowerShriekExtendScalarsMap R T f).app M =
-      (L(sheafExtendScalars (algebraMap S T) Y)).map
-          ((rightDerivedLowerShriekExtendScalarsMap R S f).app M) ≫
-        (rightDerivedLowerShriekExtendScalarsMap S T f).app
-          ((L(sheafExtendScalars (algebraMap R S) X)).obj M) ≫
-        (R(f)_![ModuleCat.{u + 1} T]).map
-          ((leftDerivedSheafExtendScalarsCompMap R S T X).app M) := by
-  sorry
-
-variable [CompactSpace Y]
+  [Finite R] [Finite S] [Finite T] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  [CompactSpace Y]
 
 /-- Blueprint `lemma-sp-reduction--5`: **transitivity of the comparison for `Rf^!`**. For
 `R → S → T` and `K` such that the comparisons `c_{R,S}(K)`, `c_{R,T}(K)` and `c_{S,T}(Ψ_{R,S} K)`
@@ -185,11 +110,55 @@ theorem rightDerivedUpperShriekExtendScalarsMap_trans
   simp only [Functor.comp_obj, Functor.comp_map] at hτ
   rw [hτ]
   -- transitivity of `b` at `M = Rf^! K`
-  have htr := rightDerivedLowerShriekExtendScalarsMap_trans (R := R) (S := S) (T := T) f _ hfK
+  have htr :=
+    rightDerivedLowerShriekExtendScalarsMap_trans (R := R) (S := S) (T := T) f ((R(f)^![R]).obj K)
   rw [← cancel_epi ((L(sheafExtendScalars (algebraMap S T) Y)).map
       ((rightDerivedLowerShriekExtendScalarsMap R S f).app ((R(f)^![R]).obj K)))]
   simp only [← Functor.map_comp_assoc, IsIso.hom_inv_id, CategoryTheory.Functor.map_id,
     Category.id_comp]
   rw [← reassoc_of% htr, IsIso.hom_inv_id_assoc]
+
+section Constructible
+
+variable {k : Type u} [Field k] [HasInvertibleExponent R (Spec (.of k))]
+  [HasInvertibleExponent S (Spec (.of k))] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
+  [QuasiCompact aY] [LocallyOfFiniteType f] [QuasiCompact f]
+
+/-- Blueprint `lemma-sp-reduction--5` for `K ∈ Dᵇctf(Y, R)`, over a scheme `Y` of finite type over
+a field in which the exponents of `R` and `S` are invertible: the hypotheses of
+`rightDerivedUpperShriekExtendScalarsMap_trans` follow from `K ∈ Dᵇctf(Y, R)`. -/
+theorem rightDerivedUpperShriekExtendScalarsMap_trans_of_constructibleFiniteTor
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) Y K) :
+    (leftDerivedSheafExtendScalarsCompMap R S T X).app ((R(f)^![R]).obj K) ≫
+        rightDerivedUpperShriekExtendScalarsMap R T f K hK.plus
+          (constructibleFiniteTor_rightDerivedUpperShriek_obj_of_field aY hK)
+          (constructibleFiniteTor_leftDerivedSheafExtendScalars_rightDerivedUpperShriek_obj aY
+            hK).plusEtaleOrigin
+          (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field (S := T) aY hK).plus =
+      (L(sheafExtendScalars (algebraMap S T) X)).map
+          (rightDerivedUpperShriekExtendScalarsMap R S f K hK.plus
+            (constructibleFiniteTor_rightDerivedUpperShriek_obj_of_field aY hK)
+            (constructibleFiniteTor_leftDerivedSheafExtendScalars_rightDerivedUpperShriek_obj aY
+              hK).plusEtaleOrigin
+            (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field (S := S) aY
+              hK).plus) ≫
+        rightDerivedUpperShriekExtendScalarsMap S T f _
+          (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field (S := S) aY hK).plus
+          (constructibleFiniteTor_rightDerivedUpperShriek_obj_of_field aY
+            (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field aY hK))
+          (constructibleFiniteTor_leftDerivedSheafExtendScalars_rightDerivedUpperShriek_obj aY
+            (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field aY
+              hK)).plusEtaleOrigin
+          (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field (S := T) aY
+            (constructibleFiniteTor_leftDerivedSheafExtendScalars_obj_of_field aY hK)).plus ≫
+        (R(f)^![T]).map ((leftDerivedSheafExtendScalarsCompMap R S T Y).app K) :=
+  haveI : HasInvertibleExponent S X := .of_hom (f ≫ aY)
+  have hΨfK :=
+    constructibleFiniteTor_leftDerivedSheafExtendScalars_rightDerivedUpperShriek_obj (S := S) aY hK
+  rightDerivedUpperShriekExtendScalarsMap_trans f K _ _ _ _ _ _ _ _ _ hΨfK
+    (constructibleFiniteTor_leftDerivedSheafExtendScalars (S := T) (f ≫ aY) hΨfK).plusEtaleOrigin
+
+end Constructible
 
 end AlgebraicGeometry.ProEtale
