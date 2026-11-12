@@ -387,33 +387,37 @@ lemma galoisLayerAut_autAction (σ : L' ≃ₐ[L] L')
           (pullbackAction_fst h _ specGaloisAction_comp σ)
           (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))) ≫
         (N.galoisLayerExchangeIso h L' Λ C).hom := by
-  have hp : pullbackAction h _ specGaloisAction_comp σ ≫ (N.galoisLayer h L').j =
+  let p' := Spec.map (CommRingCat.ofHom (algebraMap L L'))
+  let p := pullback.fst h p'
+  let s := pullbackAction h p' specGaloisAction_comp σ
+  let g := pullbackAction_fst h p' specGaloisAction_comp σ
+  let F := L((N.i)^*⟦Λ⟧)
+  let Rj := R((p ≫ N.j)_*⟦Λ⟧)
+  let Lε := L((p ≫ N.ε)^*⟦Λ⟧)
+  have hp : s ≫ (N.galoisLayer h L').j =
       (N.galoisLayer h L').j := (N.galoisLayerAut h L' σ).comm_j.trans (Category.comp_id _)
-  have hq : pullbackAction h _ specGaloisAction_comp σ ≫ (N.galoisLayer h L').ε =
+  have hq : s ≫ (N.galoisLayer h L').ε =
       (N.galoisLayer h L').ε := (N.galoisLayerAut h L' σ).comm_ε.trans (Category.comp_id _)
   have h1 := Hom.autAction_eq_derivedUnitTransport Λ (N.galoisLayer h L') _ hp hq
     (N.galoisLayerAut h L' σ) rfl rfl C
-  have h2 : derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ) hp hq C =
-      R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.j)_*⟦Λ⟧).map
+  have h2 : derivedUnitTransport Λ s hp hq C =
+      Rj.map
           ((leftDerivedUpperStarComp Λ _ N.ε).hom.app C) ≫
         (rightDerivedLowerStarComp Λ _ N.j).inv.app _ ≫
         R((N.j)_*⟦Λ⟧).map (derivedUnitTransport Λ
-          (pullbackAction h _ specGaloisAction_comp σ)
-          (pullbackAction_fst h _ specGaloisAction_comp σ)
-          (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C)) ≫
+          s g g (L((N.ε)^*⟦Λ⟧).obj C)) ≫
         (rightDerivedLowerStarComp Λ _ N.j).hom.app _ ≫
-        R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.j)_*⟦Λ⟧).map
+        Rj.map
           ((leftDerivedUpperStarComp Λ _ N.ε).inv.app C) :=
-    derivedUnitTransport_comp Λ _ _ _ (pullbackAction_fst h _ specGaloisAction_comp σ) N.j N.ε C
+    derivedUnitTransport_comp Λ s p p g N.j N.ε C
   have hn := Hom.autAction_naturality Λ (N.galoisLayerAut h L' σ) (A' := C)
     ((leftDerivedUpperStarId Λ X).hom.app C)
   rw [h1, h2] at hn
-  exact eq_inv_comp_map_comp_hom_of_comp_map_eq L((N.i)^*⟦Λ⟧)
-    R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.j)_*⟦Λ⟧)
-    (L((_ ≫ N.ε)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app C))
-    (L((_ ≫ N.ε)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).inv.app C))
+  exact eq_inv_comp_map_comp_hom_of_comp_map_eq F Rj
+    (Lε.map ((leftDerivedUpperStarId Λ X).hom.app C))
+    (Lε.map ((leftDerivedUpperStarId Λ X).inv.app C))
     (by rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id])
-    ((leftDerivedUpperStarComp Λ _ N.ε).hom.app C) ((leftDerivedUpperStarComp Λ _ N.ε).inv.app C)
+    ((leftDerivedUpperStarComp Λ p N.ε).hom.app C) ((leftDerivedUpperStarComp Λ p N.ε).inv.app C)
     ((rightDerivedLowerStarComp Λ _ N.j).inv.app _) ((rightDerivedLowerStarComp Λ _ N.j).hom.app _)
     _ _ hn _ rfl rfl
 
