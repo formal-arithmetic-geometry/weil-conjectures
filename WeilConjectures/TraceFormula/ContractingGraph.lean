@@ -64,8 +64,8 @@ variable {A B : Type*} [Category A] [Category B] {L : A ⥤ B} {R : B ⥤ A} {G 
 `G ⋙ L ⟶ L ⋙ H`. -/
 lemma mateEquiv_symm_app_of_isoId (adj : L ⊣ R) (eG : G ≅ 𝟭 A) (eH : H ≅ 𝟭 B)
     (β : TwoSquare R H G R)
-    (hβ : ∀ N, β.natTrans.app N ≫ R.map (eH.hom.app N) = eG.hom.app (R.obj N)) (M : A) :
-    ((mateEquiv adj adj).symm β).natTrans.app M =
+    (hβ : ∀ N, β.app N ≫ R.map (eH.hom.app N) = eG.hom.app (R.obj N)) (M : A) :
+    ((mateEquiv adj adj).symm β).app M =
       L.map (eG.hom.app M) ≫ eH.inv.app (L.obj M) := by
   apply (adj.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
