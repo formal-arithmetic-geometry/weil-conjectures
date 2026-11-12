@@ -83,14 +83,29 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)).app
         K) := by
+  have tensor₄ (T : Scheme.{u})
+      (W X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))) :
+      GradedObject.HasTensor₄ObjExt W X Y Z := by infer_instance
+  have tensor₁₂ (T : Scheme.{u})
+      (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))) :
+      GradedObject.HasGoodTensor₁₂Tensor X Y Z := by infer_instance
+  have tensor₂₃ (T : Scheme.{u})
+      (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))) :
+      GradedObject.HasGoodTensorTensor₂₃ X Y Z := by infer_instance
   have hamb : IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq).app K.obj) := by
     have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ) hsq
     infer_instance
+  unfold baseChangeMap at hamb
+  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso] at hamb
   have hθ (K : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-        K).hom = (pullbackSquareComparison
-          (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison]
+        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+          (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)).hom.app K.obj := by
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
+      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
   have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
