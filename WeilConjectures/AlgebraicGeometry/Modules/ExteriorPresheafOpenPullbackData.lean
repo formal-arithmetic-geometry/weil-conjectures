@@ -320,6 +320,35 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
           (fun i ↦ M.val.map f (a i)) :=
   (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
+/-- Scalar transport on exterior powers, expressed in the actual section modules. -/
+private noncomputable def openExteriorComponent {X : Scheme.{v}} (M : X.Modules)
+    (n : ℕ) (U : X.Opens) (V : U.toScheme.Opensᵒᵖ) :
+    ((openPresheafRestriction U.ι).obj
+      (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).obj V ≅
+      (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).obj V := by
+  change _ ≅ ModuleCat.of (U.toScheme.presheaf.obj V)
+    (⋀[U.toScheme.presheaf.obj V]^n ((M.restrict U.ι).val.obj V))
+  rw [show (M.restrict U.ι).val.obj V =
+    (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
+      (M.val.obj (U.ι.opensFunctor.op.obj V)) from rfl]
+  exact ringTransportIso
+    (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
+    (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
+
+/-- The section comparison takes a pure wedge to the same sections after restriction. -/
+private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
+    (n : ℕ) (U : X.Opens) (V : U.toScheme.Opensᵒᵖ)
+    (a : Fin n → M.val.obj (U.ι.opensFunctor.op.obj V)) :
+    (openExteriorComponent M n U V).hom
+      (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a) =
+      exteriorPower.ιMulti (U.toScheme.presheaf.obj V) n
+        (M := (M.restrict U.ι).val.obj V) a := by
+  dsimp only [openExteriorComponent]
+  rw [show (M.restrict U.ι).val.obj V =
+    (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
+      (M.val.obj (U.ι.opensFunctor.op.obj V)) from rfl]
+  exact ringTransportInverse_wedge _ _ _ _ n a
+
 set_option profiler true in
 -- The comparison unfolds section modules and their transported scalar actions.
 set_option backward.isDefEq.respectTransparency false in
@@ -353,39 +382,21 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
     ((openPresheafRestrictionAdjunction U.ι).leftAdjointUniq
       (PresheafOfModules.pullbackPushforwardAdjunction.{v}
         U.ι.toRingCatSheafHom.hom)).symm.app P
-  let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) := by
-    refine PresheafOfModules.isoMk (fun V ↦ ?_) ?_
-    · change Q.obj V ≅ ModuleCat.of (U.toScheme.presheaf.obj V)
-        (⋀[U.toScheme.presheaf.obj V]^n ((M.restrict U.ι).val.obj V))
-      rw [show (M.restrict U.ι).val.obj V =
-        (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
-          (M.val.obj (U.ι.opensFunctor.op.obj V)) from rfl]
-      exact ringTransportIso
+  let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) :=
+    PresheafOfModules.isoMk (openExteriorComponent M n U) (by
+      intro V W f
+      apply ringTransport_ext
         (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
         (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
-    ·
-        intro V W f
-        apply ringTransport_ext
-          (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-          (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
-        intro a
-        change ringTransportInverse
-            (X.presheaf.obj (U.ι.opensFunctor.op.obj W)) (U.toScheme.presheaf.obj W)
-            (U.ι.appIso W.unop) (M.val.obj (U.ι.opensFunctor.op.obj W)) n
-            (((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map
-                (U.ι.opensFunctor.op.map f))
-              (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n
-                (M := M.val.obj (U.ι.opensFunctor.op.obj V)) a)) =
-          ((_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f)
-            (ringTransportInverse
-              (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-              (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
-              (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n
-                (M := M.val.obj (U.ι.opensFunctor.op.obj V)) a))
-        rw [restriction_wedge]
-        refine (ringTransportInverse_wedge _ _ _ _ n _).trans ?_
-        conv_rhs => rw [ringTransportInverse_wedge]
-        exact (restriction_wedge (M.restrict U.ι) n f a).symm
+      intro a
+      change (openExteriorComponent M n U W).hom
+          (P.map (U.ι.opensFunctor.op.map f)
+            (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a)) =
+        ((_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f)
+          ((openExteriorComponent M n U V).hom
+            (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a))
+      rw [restriction_wedge, openExteriorComponent_wedge, openExteriorComponent_wedge]
+      exact (restriction_wedge (M.restrict U.ι) n f a).symm)
   let e := e₀ ≪≫ e₁
   exact ⟨fun V ↦ (PresheafOfModules.evaluation _ V).mapIso e, fun f ↦ e.hom.naturality f⟩
 

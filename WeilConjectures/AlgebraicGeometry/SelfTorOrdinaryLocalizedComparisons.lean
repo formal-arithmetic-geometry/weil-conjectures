@@ -307,20 +307,19 @@ theorem exists_selfTor_ordinary_localized_comparisons
   have hT : ∀ j : ℤ, 0 < j → IsZero (T.X j) := by
     intro j hj
     exact HomologicalComplex.isZero_single_obj_X _ _ _ j (by omega)
-  obtain ⟨E, r, hflat, hbound, hr⟩ := exists_nonpositive_flat_quasiIso Y T hT
+  rcases exists_nonpositive_flat_quasiIso Y T hT with ⟨E, r, hflat, hbound, hr⟩
   have hE : E.IsKFlatTensor := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
     Y.toRingedSpace E ⟨0, hbound⟩ hflat
   let := SheafOfModules.monoidalCategory Y.sheaf
-  obtain ⟨e⟩ := tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq
-    (-(n : ℤ))
-  obtain ⟨d, hd⟩ := exists_selfTor_nonpositive_flat_sections i E r hbound hflat hr n
+  rcases tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq (-(n : ℤ)) with ⟨e⟩
+  rcases exists_selfTor_nonpositive_flat_sections i E r hbound hflat hr n with ⟨d, hd⟩
   refine ⟨fun U ↦ (d U).trans (Scheme.Modules.appLinearEquivOfIso e U.1), ?_⟩
   intro V U h hbasic A C I J φ PU PV TA TC
   have hI : ∀ x ∈ I, φ x ∈ J := by
     intro x hx
     exact i.ker.ideal_le_comap_ideal h hx
-  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
-    A C I J φ hI PU PV
+  rcases exists_quotient_resolution_tensor_comparison A C I J φ hI PU PV with
+    ⟨ψ, a, k, hψ, ha, hk⟩
   refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
   intro e' x
   have hn := hd V U h hbasic ψ a k hψ ha hk x
