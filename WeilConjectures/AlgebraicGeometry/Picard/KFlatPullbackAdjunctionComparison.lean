@@ -50,6 +50,31 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
   rw [← he]
   infer_instance
 
+private noncomputable def kFlat_pullback_adjunction_comparison_iso
+    {S S' : Scheme.{u}} (g : S' ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
+    [hL : (Scheme.Modules.tensorPullback g).Additive]
+    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
+      (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
+    (hε : (derivedPullback g).IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso _ (.up ℤ)))
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) :
+    (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj
+        ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P ≅
+      (derivedPullback g).obj (DerivedCategory.Q.obj P) := by
+  let q := HomotopyCategory.quotient
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
+  let uS := DerivedCategory.quotientCompQhIso
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace))
+  let uT := DerivedCategory.quotientCompQhIso
+    (SheafOfModules.{u} (moduleRings S'.toRingedSpace))
+  have hεP : IsIso (ε.app (q.obj P)) := counit_isIso g ε hε P hP
+  exact (uT.app (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
+    (asIso (ε.app (q.obj P))).symm ≪≫ (derivedPullback g).mapIso (uS.app P)
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
@@ -98,28 +123,17 @@ theorem kFlat_pullback_adjunction_comparison
   let ε := (Classical.choose (Classical.choose_spec (exists_derivedPullbackComposition))) g
   have hε := (Classical.choose (Classical.choose_spec
     (Classical.choose_spec (exists_derivedPullbackComposition)))) g
-  let E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings S'.toRingedSpace) := Scheme.Modules.tensorPullback g
-  have : E.Additive := hL g
+  have : (Scheme.Modules.tensorPullback g).Additive := hL g
   let q := HomotopyCategory.quotient
     (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
   let q' := HomotopyCategory.quotient
     (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) (.up ℤ)
-  let uS := DerivedCategory.quotientCompQhIso
-    (SheafOfModules.{u} (moduleRings S.toRingedSpace))
-  let uT := DerivedCategory.quotientCompQhIso
-    (SheafOfModules.{u} (moduleRings S'.toRingedSpace))
-  have hεP (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-      (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) : IsIso (ε.app (q.obj P)) :=
-    counit_isIso g ε hε P hP
   let e (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
       (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) :
       (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj
-        ((E.mapHomologicalComplex (.up ℤ)).obj P) ≅
-          (derivedPullback g).obj (DerivedCategory.Q.obj P) := by
-    have := hεP P hP
-    exact (uT.app ((E.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
-      (asIso (ε.app (q.obj P))).symm ≪≫ (derivedPullback g).mapIso (uS.app P)
+        (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≅
+          (derivedPullback g).obj (DerivedCategory.Q.obj P) :=
+    kFlat_pullback_adjunction_comparison_iso g ε hε P hP
   let A := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
   refine ⟨hL g, e, ?_⟩
   intro P hP I α
