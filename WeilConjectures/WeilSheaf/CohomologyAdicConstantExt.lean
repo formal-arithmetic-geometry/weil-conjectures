@@ -231,11 +231,13 @@ lemma extAddEquivHomology_comp_smul (c : PadicAlgCl l)
     extAddEquivHomology I r (x.comp (Ext.mk₀ ((smulNatTrans k₀ l Y c).app K)) (add_zero r)) =
       (ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • extAddEquivHomology I r x := by
   exact InjectiveResolution.extAddEquivHomology_comp_mk₀
-    (I.map (forgetAb k₀ l Y)) _ (sectionsAddEquiv _)
+    (I.map (forgetAb k₀ l Y)) (n := r)
+    ((I.cocomplex.sc r).map (globalSectionsWeilFunctor k₀ l Y))
+    (sectionsAddEquiv (I.cocomplex.X r))
     (sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.next ℕ r).symm))
     (sc_g_sectionsAddEquiv I r) (extMk_eq_zero_iff_sectionsAddEquiv I r)
     (InjectiveResolution.mapHomOfNatTrans (smulNatTrans k₀ l Y c) I) (ULift.up c)
-    (sectionsAddEquiv_comp_smulNatTrans c) x
+    (sectionsAddEquiv_comp_smulNatTrans c (M := I.cocomplex.X r)) x
 
 lemma smulNatTrans_app_adicConstant (c : PadicAlgCl l) :
     (smulNatTrans k₀ l Y c).app (ProEtaleWeilSheaf.adicConstant k₀ l Y) =
