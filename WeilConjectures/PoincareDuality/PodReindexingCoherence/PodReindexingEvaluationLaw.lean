@@ -423,9 +423,8 @@ private theorem normalized_uncurry (W : Scheme.{u})
   rw [uncurry_formula] at he
   simpa only [Category.assoc, Iso.hom_inv_id_assoc] using he
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the fixed Hom and tensor model equations across the two sites.
-set_option profiler true in
+set_option trace.profiler true in
 private theorem evaluation_representatives {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)
@@ -477,7 +476,7 @@ private theorem evaluation_representatives {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
           QX.map (c.chain P I).hom ≫ jX.inv ≫
             (podReindexingDerivedHom l E X s).map
               (Prod.mkHom ((η.app P).hom.op) (η.app I).inv) at hh
-      rw [hh, ← F.map_comp_assoc, jY.inv_hom_id, F.map_id, Category.id_comp]
+      exact (F.mapIso jY).inv_comp_eq.mpr hh
     change F.map (QY.map φ ≫ jY.inv) ≫ _ = _
     rw [F.map_comp, Category.assoc, hj]
     have hn := η.hom.naturality φ
