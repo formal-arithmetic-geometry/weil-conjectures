@@ -156,6 +156,39 @@ private theorem pushforward_unit_forget
     a b (Iso.refl _) e h G
   exact erase_middle_id _ _ _ hh
 
+/-- The module pushforward pasting comparison has the prescribed map on underlying sheaves. -/
+private theorem pushforward_comparison_forget
+    {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+    (J₁ : GrothendieckTopology C₁) (J₂ : GrothendieckTopology C₂)
+    (J₃ : GrothendieckTopology C₃) (f : C₁ ⥤ C₂) (g : C₂ ⥤ C₃) (h : C₁ ⥤ C₃)
+    [f.IsContinuous J₁ J₂] [g.IsContinuous J₂ J₃]
+    [h.IsContinuous J₁ J₃] [(f ⋙ g).IsContinuous J₁ J₃]
+    (α : f ⋙ g ≅ h)
+    (S₁ : Sheaf J₁ RingCat.{u + 1}) (S₂ : Sheaf J₂ RingCat.{u + 1})
+    (S₃ : Sheaf J₃ RingCat.{u + 1})
+    (φ : S₁ ⟶ (f.sheafPushforwardContinuous RingCat J₁ J₂).obj S₂)
+    (ψ : S₂ ⟶ (g.sheafPushforwardContinuous RingCat J₂ J₃).obj S₃)
+    (χ : S₁ ⟶ (h.sheafPushforwardContinuous RingCat J₁ J₃).obj S₃)
+    (hr : χ ≫ (Functor.sheafPushforwardContinuousNatTrans α.hom RingCat J₁ J₃).app S₃ =
+      φ ≫ (f.sheafPushforwardContinuous RingCat J₁ J₂).map ψ)
+    (δ : h.sheafPushforwardContinuous AddCommGrpCat.{u + 1} J₁ J₃ ⟶
+      g.sheafPushforwardContinuous AddCommGrpCat J₂ J₃ ⋙
+        f.sheafPushforwardContinuous AddCommGrpCat J₁ J₂)
+    (hδ : ∀ F W, (δ.app F).hom.app W = F.obj.map (α.hom.app W.unop).op)
+    (F : SheafOfModules.{u + 1} S₃) :
+    (SheafOfModules.toSheaf S₁).map
+        (((SheafOfModules.pushforwardCongr₂ χ α hr ≪≫
+          (SheafOfModules.pushforwardComp (J := J₁) (K := J₂) (K' := J₃)
+            (F := f) (G := g) φ ψ).symm).hom.app F)) =
+      δ.app ((SheafOfModules.toSheaf S₃).obj F) := by
+  ext W x
+  change (((SheafOfModules.pushforwardComp (J := J₁) (K := J₂) (K' := J₃)
+    (F := f) (G := g) φ ψ).inv.app F).val.app W).hom
+      ((((SheafOfModules.pushforwardCongr₂ χ α hr).hom.app F).val.app W).hom x) = _
+  simp only [SheafOfModules.pushforwardComp_inv_app_val_app,
+    SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply, hδ]
+  rfl
+
 /-- Pasting a naturality square with a unit comparison. -/
 private theorem paste_rectangle
     {A : Type*} [Category A] {X P Q R S : A}
@@ -512,15 +545,9 @@ theorem etaleInverseImageCompositionModuleLinearCore
       (K := JY) (K' := JZ) (F := f) (G := g) phi psi).symm
   let c : LU ⋙ LV ≅ LUV := (conjugateIsoEquiv aUV (aU.comp aV)).symm d
   have hd : ∀ F, UX.map (d.hom.app F) = d0.hom.app (UZ.obj F) := by
-    intro F
-    ext W x
-    change (((SheafOfModules.pushforwardComp (J := JX) (K := JY) (K' := JZ)
-      (F := f) (G := g) phi psi).inv.app F).val.app W).hom
-      ((((SheafOfModules.pushforwardCongr₂ chi alpha hr').hom.app F).val.app W).hom x) = _
-    simp only [SheafOfModules.pushforwardComp_inv_app_val_app,
-      SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply,
-      d0, Iso.symm_hom, Etale.lowerStarComp_inv_app_hom_app]
-    rfl
+    exact pushforward_comparison_forget JX JY JZ f g h alpha SX SY SZ phi psi chi hr'
+      d0.hom (fun F W ↦ Etale.lowerStarComp_inv_app_hom_app
+        AddCommGrpCat.{u + 1} vMap uMap (vMap ≫ uMap) rfl F W)
   have hu : ∀ G, (aU.comp aV).unit.app G ≫
       (SheafOfModules.pushforward psi ⋙ SheafOfModules.pushforward phi).map
         (c.hom.app G) = aUV.unit.app G ≫ d.hom.app (LUV.obj G) := by
