@@ -67,6 +67,7 @@ private theorem conjugate_map
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Nested restriction comparisons require additional elaboration heartbeats.
 /-- A degreewise family already defined near x becomes a chain map after shrinking

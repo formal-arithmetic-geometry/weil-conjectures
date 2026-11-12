@@ -46,6 +46,7 @@ private theorem transpose_top_square
   rw [← a.homEquiv_naturality_right, Category.assoc, ← H'.map_comp, ← hd,
     H'.map_comp, ← Category.assoc, hi, Category.assoc, a.homEquiv_naturality_left]
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The pinned sheaf pullback and adjunction require extra elaboration heartbeats.
 private theorem truncatedCounit_naturality {T S : Scheme.{u}} (g : T ⟶ S)
