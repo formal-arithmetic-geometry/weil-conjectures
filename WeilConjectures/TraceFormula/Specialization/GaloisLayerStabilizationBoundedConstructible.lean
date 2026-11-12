@@ -201,8 +201,8 @@ private theorem integralModel_induction (X : Scheme.{u}) [IsNoetherian X]
     (ℓ : ℕ) [Fact ℓ.Prime] (K : PadicAlgClConstructible X ℓ) {P : Prop}
     (step : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
       (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)),
-      (constructibleToPadicAlgCl X ℓ E).obj
-        ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K → P) : P := by
+      ((constructibleToPadicAlgCl X ℓ E).obj
+        ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K) → P) : P := by
   obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X ℓ K
   exact step E K₀ e
 
