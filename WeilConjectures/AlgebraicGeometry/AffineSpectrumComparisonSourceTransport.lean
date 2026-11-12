@@ -76,8 +76,6 @@ private theorem transport_representatives
 set_option linter.unusedVariables false in
 -- The quantified proof hypotheses occur only in the proof, not in the conclusion.
 set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
--- Elaborating the stalk tensor-model instances and their scalar extensions needs this budget.
 /-- Transport the localized tensor comparison into derived pullback, independently
 of any coefficient morphism or target representative.
 
@@ -180,7 +178,7 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
   have ha : a.hom ≫ d.hom ≫ (derivedPullback j).map e.hom = e0.hom := by
     simp only [a, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp, Iso.inv_hom_id]
-    rw [CategoryTheory.Functor.map_id, Category.comp_id]
+    simp only [Functor.map_id, Category.comp_id]
   have hb := congrArg (fun k ↦ F0.map k) hn.symm
   simp only [Functor.map_comp] at hb
   change l0.hom ≫ F0.map

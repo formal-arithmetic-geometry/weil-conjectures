@@ -78,7 +78,6 @@ private theorem square_of_normalizations
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
 -- The two squares require elaborating distinct nested stalk cohomology models.
 /-- Pointwise comparison arrows are conjugate when the spectrum representatives
 are the termwise pullbacks. This does not construct such representatives, nor
@@ -179,11 +178,11 @@ theorem nonempty_affineSpectrum_stalkComparison_arrow_iso
     have hl' := congrArg (fun a => a ≫
       F0.map (H0.map (affineSpectrumDerivedMorphism g' K K' φ))) hl
     simp only [Functor.map_comp, Category.assoc] at hl'
-    rw [hk] at hl'
+    simp only [hk] at hl'
     have hn' : T.hom.app ((derivedPullback g').obj K) ≫
         F0.map (H0.map ((derivedPullback X'.isoSpec.inv).map φ)) =
       F.map (H.map φ) ≫ T.hom.app K' := hn.symm
-    rw [hn'] at hl'
+    simp only [hn'] at hl'
     exact square_of_normalizations l.hom _ _ _ _ _ _ _ hcF hdF
       (by simpa only [Category.assoc] using hl')
   refine ⟨Arrow.isoMk l r ?_⟩

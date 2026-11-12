@@ -139,8 +139,6 @@ private theorem map_comp_square
   rw [Functor.map_comp, Category.assoc, hn, Category.assoc]
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
--- The tensor-cohomology transports require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The two tensor-cohomology transports require a larger elaboration budget.
@@ -262,7 +260,7 @@ theorem exists_singleComplexOpen_normalized_transport
   have hb : (derivedPullback j).map b.hom ≫ βK =
       (derivedPullback j).map a.hom ≫ θ := by
     dsimp only [βK, b, Iso.trans_hom, Iso.symm_hom]
-    rw [← Functor.map_comp_assoc]
+    simp only [← Functor.map_comp_assoc]
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   refine ⟨ν, d ≪≫ l, ?_⟩
   have h := combine_transport_squares (H₀ ⋙ F₀) (H ⋙ F) RX'.mapDerivedCategory ν
