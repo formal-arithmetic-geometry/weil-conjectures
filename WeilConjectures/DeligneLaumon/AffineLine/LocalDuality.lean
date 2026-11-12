@@ -177,6 +177,13 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (ProEtaleWeilSheaf.constantTwistCompLowerStarIso k₀ l φ b).app P.obj ≪≫
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
+private noncomputable def localBoundaryPairingEquiv
+    {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
+    {N H Q : FrobeniusModule.{max u v, v} K}
+    (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) :
+    M.carrier ≃ₗ[K] Module.Dual K Q.carrier :=
+  Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap
+
 private theorem localBoundaryLinearEquiv_frobenius
     {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
     {N H Q : FrobeniusModule.{max u v, v} K}
@@ -192,13 +199,6 @@ private theorem localBoundaryLinearEquiv_frobenius
     FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
     LinearEquiv.symm_apply_apply, smul_eq_mul]
   rfl
-
-private noncomputable def localBoundaryPairingEquiv
-    {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
-    {N H Q : FrobeniusModule.{max u v, v} K}
-    (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) :
-    M.carrier ≃ₗ[K] Module.Dual K Q.carrier :=
-  Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap
 
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 set_option profiler true in
