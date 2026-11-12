@@ -46,6 +46,7 @@ private theorem scalar_pushforward_tensor (t : Y ⟶ X) (A B : KSheaf Y k) :
     (Opens.map t.base) (ModuleCat.{w} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y) A B U
 
+/-- Perform the monoidal adjunction calculation with abstract coefficient sheaves. -/
 private theorem scalar_tensor_comparison_of_adjoints (t : Y ⟶ X)
     {A B H : KSheaf X k} {C D I J : KSheaf Y k}
     (a : A ⊗ B ⟶ H) (b : (scalarInverseImage t).obj H ⟶ I) (c : I ⟶ J)
@@ -81,6 +82,7 @@ private theorem scalar_tensor_comparison_of_adjoints (t : Y ⟶ X)
     tensorHom_comp_tensorHom_assoc]
   simpa only [← Adjunction.homEquiv_unit] using h
 
+/-- Reduce the pushforward tensor comparison to pure tensors before specializing the sheaves. -/
 private theorem scalar_tensor_comparison_of_sections (t : Y ⟶ X)
     {A B H : KSheaf X k} {C D I J : KSheaf Y k}
     (a : A ⊗ B ⟶ H)
@@ -130,6 +132,7 @@ private theorem scalar_tensor_comparison_of_sections (t : Y ⟶ X)
   erw [Monoidal.FunctorCategory.tensorHom_app, ModuleCat.MonoidalCategory.tensorHom_tmul]
   exact h U s r
 
+/-- The scalar pullback adjunct evaluates to the normalized module pullback unit. -/
 private theorem scalar_pullback_adjunct_app
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (t : Y ⟶ X) (ht : t ≫ f = g) (H : X.Modules) (U : (Opens X)ᵒᵖ) (z : H.val.obj U) :
@@ -140,7 +143,25 @@ private theorem scalar_pullback_adjunct_app
   unfold scalarPullbackCoefficient
   exact Classical.choose_spec (exists_scalarPullbackCoefficient f g t ht H) U.unop z
 
-set_option profiler true in
+/-- The normalized tensor comparison agrees with the scalar tensor coefficient on unit sections. -/
+private theorem scalar_tensor_pullback_unit
+    (g : Y ⟶ Spec (CommRingCat.of k)) (t : Y ⟶ X) (F G : X.Modules)
+    (U : (Opens X)ᵒᵖ) (s : F.val.obj U) (r : G.val.obj U) :
+    (scalarHom g ((Classical.choose (module_pullback_tensor t)) F G).hom).hom.app
+      (Opposite.op (t ⁻¹ᵁ U.unop))
+      (((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app (F ⊗ G)).val.app
+        U (tmulSection s r)) =
+    (scalarTensorCoefficient g ((tensorPullback t).obj F) ((tensorPullback t).obj G)).hom.app
+      (Opposite.op (t ⁻¹ᵁ U.unop))
+      ((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology Y)
+        (ModuleCat.{w} k)) (scalarSheaf g ((tensorPullback t).obj F))
+          (scalarSheaf g ((tensorPullback t).obj G))).app (Opposite.op (t ⁻¹ᵁ U.unop))
+        ((((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app F).val.app U s)
+          ⊗ₜ[k] (((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app G).val.app
+            U r))) := by
+  erw [exists_scalarTensorCoefficient]
+  exact (Classical.choose_spec (module_pullback_tensor t)).2 F G U.unop s r
+
 /-- The scalar tensor coefficient commutes with the normalized module pullback
 comparison. This is an equality of coefficient sheaf morphisms, with no Ext classes.
 Source: Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
@@ -181,19 +202,7 @@ theorem scalarPullbackCoefficient_tensor
   erw [exists_scalarTensorCoefficient f F G U.unop s r]
   erw [scalar_pullback_adjunct_app f g t ht (F ⊗ G) U (tmulSection s r),
     scalar_pullback_adjunct_app f g t ht F U s, scalar_pullback_adjunct_app f g t ht G U r]
-  change (scalarHom g ((Classical.choose (module_pullback_tensor t)) F G).hom).hom.app
-      (Opposite.op (t ⁻¹ᵁ U.unop))
-      (((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app (F ⊗ G)).val.app
-        U (tmulSection s r)) =
-    (scalarTensorCoefficient g ((tensorPullback t).obj F) ((tensorPullback t).obj G)).hom.app
-      (Opposite.op (t ⁻¹ᵁ U.unop))
-      ((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology Y)
-        (ModuleCat.{w} k)) (scalarSheaf g ((tensorPullback t).obj F))
-          (scalarSheaf g ((tensorPullback t).obj G))).app (Opposite.op (t ⁻¹ᵁ U.unop))
-        ((((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app F).val.app U s)
-          ⊗ₜ[k] (((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app G).val.app U r)))
-  erw [exists_scalarTensorCoefficient]
-  exact (Classical.choose_spec (module_pullback_tensor t)).2 F G U.unop s r
+  exact scalar_tensor_pullback_unit g t F G U s r
 
 
 end
