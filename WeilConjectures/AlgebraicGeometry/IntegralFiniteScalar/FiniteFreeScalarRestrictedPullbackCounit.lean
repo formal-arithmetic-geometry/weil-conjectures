@@ -143,8 +143,8 @@ theorem finiteFreeScalar_restrictedCounit_pullback
       scalarCounit a X FC =
     (scalarSixPull Λ' f).map (scalarCounit a Y C) ≫
       G.mapDerivedCategoryFactors.hom.app EC ≫ DerivedCategory.Q.map p := by
-    let e := ((pullIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).mapHomologicalComplex
-      (.up ℤ)).app C
+    let e := (NatIso.mapHomologicalComplex
+      (pullIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f) (.up ℤ)).app C
     have h := scalarCounit_inverseSquare ((D.theta a f).app (DerivedCategory.Q.obj C))
       (DerivedCategory.Q.mapIso e)
       ((scalarSixChange a X).map (F.mapDerivedCategoryFactors.hom.app C))
