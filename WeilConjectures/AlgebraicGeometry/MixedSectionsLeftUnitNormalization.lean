@@ -30,8 +30,8 @@ private theorem paste_unit_naturality
     {A B : C} {U V : D} {P Q : E}
     {u : U ⟶ V} {v : V ⟶ G.obj B} {a : U ⟶ G.obj A} {t : A ⟶ B}
     {η : P ⟶ H.obj U} {b : P ⟶ Q} {x : Q ⟶ T.obj A}
-    (he : u ≫ v = a ≫ G.map t)
-    (hg : η ≫ H.map a ≫ c.app A = b ≫ x) :
+    (hg : η ≫ H.map a ≫ c.app A = b ≫ x)
+    (he : u ≫ v = a ≫ G.map t) :
     (η ≫ H.map u ≫ H.map v) ≫ c.app B = b ≫ x ≫ T.map t := by
   simp only [Category.assoc]
   rw [← H.map_comp_assoc, he, H.map_comp_assoc]
@@ -246,7 +246,7 @@ theorem mixedSections_left_unit_normalization
     have h := paste_unit_naturality (schemeDerivedDirectImage g)
       (schemeDerivedGlobalSections Z)
       (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
-      (mixedGlobalSectionsDirectImageIso g).hom he hg₀
+      (mixedGlobalSectionsDirectImageIso g).hom hg₀ he
     exact h
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
