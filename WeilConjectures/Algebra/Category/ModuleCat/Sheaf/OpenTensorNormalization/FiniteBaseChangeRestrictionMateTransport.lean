@@ -29,14 +29,14 @@ private theorem mate_eq_of_unit
     (s : E ⋙ L' ⟶ L ⋙ F) (r : R ⋙ E ⟶ F ⋙ R')
     (h : ∀ K, E.map (a.unit.app K) ≫ r.app (L.obj K) =
       b.unit.app (E.obj K) ≫ R'.map (s.app K)) :
-    (mateEquiv a b s).natTrans = r := by
-  have hs : s = ((mateEquiv a b).symm r).natTrans := by
+    (mateEquiv a b s) = r := by
+  have hs : s = ((mateEquiv a b).symm r) := by
     ext K
     apply (b.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit]
     exact (h K).symm.trans (unit_mateEquiv_symm a b r K)
   rw [hs]
-  exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply r)
+  exact ((mateEquiv a b).apply_symm_apply r)
 
 private theorem inverse_mate_eq_of_homEquiv
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -45,7 +45,7 @@ private theorem inverse_mate_eq_of_homEquiv
     (s : E ⋙ L' ⟶ L ⋙ F) (r : R ⋙ E ⟶ F ⋙ R')
     (h : ∀ K, b.homEquiv _ _ (s.app K) =
       E.map (a.unit.app K) ≫ r.app (L.obj K)) :
-    ((mateEquiv a b).symm r).natTrans = s := by
+    ((mateEquiv a b).symm r) = s := by
   ext K
   apply (b.homEquiv _ _).injective
   rw [h, Adjunction.homEquiv_unit]
@@ -76,7 +76,7 @@ private theorem transport_from_unit
       Pb.map (adjb.unit.app X) ≫ bb.app (Jb.obj X))
     (hb : ∀ Y,
       p.hom.app (U.obj Y) ≫ Pb.map (r.hom.app Y) ≫ bb.app (EB.functor.obj Y) =
-        EC.functor.map ((mateEquiv adj adj' β).natTrans.app Y) ≫
+        EC.functor.map ((mateEquiv adj adj' β).app Y) ≫
           r'.hom.app (Q.obj Y) ≫ Ub'.map (q.hom.app Y)) (X : A) :
     j'.hom.app (P.obj X) ≫ Jb'.map (p.hom.app X) ≫ γ.app (EA.functor.obj X) =
       ED.functor.map (β.app X) ≫ q.hom.app (J.obj X) ≫ Qb.map (j.hom.app X) := by
@@ -84,14 +84,14 @@ private theorem transport_from_unit
     adj adj' adjb adjb' r r' j j'
     (mate_eq_of_unit adj adjb j.inv r.hom hj)
     (mate_eq_of_unit adj' adjb' j'.inv r'.hom hj') P Q Pb Qb p q
-    (mateEquiv adj adj' β).natTrans bb hb).1 X
+    (mateEquiv adj adj' β) bb hb).1 X
   have hβ : ((mateEquiv adj adj').symm
-      (mateEquiv adj adj' β)).natTrans = β :=
-    congrArg TwoSquare.natTrans ((mateEquiv adj adj').symm_apply_apply β)
+      (mateEquiv adj adj' β)) = β :=
+    ((mateEquiv adj adj').symm_apply_apply β)
   have hγ' := inverse_mate_eq_of_homEquiv adjb adjb' γ bb hγ
   change ED.functor.map (((mateEquiv adj adj').symm
-      (mateEquiv adj adj' β)).natTrans.app X) ≫ _ =
-    _ ≫ _ ≫ (((mateEquiv adjb adjb').symm bb).natTrans.app _) at h
+      (mateEquiv adj adj' β)).app X) ≫ _ =
+    _ ≫ _ ≫ (((mateEquiv adjb adjb').symm bb).app _) at h
   rw [hβ, hγ'] at h
   exact h.symm
 
@@ -138,7 +138,7 @@ private theorem mate_transport_abstract
     (h : ∀ M : FiniteModules A X',
       p.hom.app (Uf.obj M) ≫ Pb.map (r.hom.app M) ≫
         bb.hom.app (e.realizeX'.equivalence.functor.obj M) =
-      e.realizeU.equivalence.functor.map ((mateEquiv adj adj' β.hom).natTrans.app M) ≫
+      e.realizeU.equivalence.functor.map ((mateEquiv adj adj' β.hom).app M) ≫
         r'.hom.app (Q.obj M) ≫ Ub'.map (q.hom.app M))
     (N : FiniteModules A X) :
     jj'.hom.app (P.obj N) ≫ Jb'.map (p.hom.app N) ≫
@@ -179,7 +179,7 @@ theorem finite_base_change_restriction_mate_transport
           ((mateEquiv
             (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
             (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
-            (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom).natTrans.app M) ≫
+            (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom).app M) ≫
         e.pullU_pin.right.hom.app
           ((ProEtale.upperStar (ModuleCat.{u + 1} A) j').obj M) ≫
         (direct .ordinary gU _ _ (cornerCoefficient t)).map

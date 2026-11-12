@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.CategoryTheory.Retract
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerEvaluationAdjoint

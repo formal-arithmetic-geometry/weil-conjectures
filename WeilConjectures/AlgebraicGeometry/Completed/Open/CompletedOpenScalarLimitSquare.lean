@@ -96,7 +96,7 @@ private def limitMap {E E' : Type*} [Category E] [Abelian E] [HasLimits E]
   letI : (lim : (ℕᵒᵖ ⥤ E') ⥤ E').Additive :=
     Functor.additive_of_preserves_binary_products _
   (mateEquiv (constAdj (E := E)) (constAdj (E := E'))
-    (TwoSquare.mk _ _ _ _ (UnboundedExactTower.constantInterchange V).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (UnboundedExactTower.constantInterchange V).inv))
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 

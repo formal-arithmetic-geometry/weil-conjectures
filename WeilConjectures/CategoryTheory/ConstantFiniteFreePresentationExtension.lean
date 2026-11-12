@@ -12,6 +12,8 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.AlgebraicGeometry.ScalarExtensionBinaryCoherence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-! # Constant finite free presentations after scalar extension
 

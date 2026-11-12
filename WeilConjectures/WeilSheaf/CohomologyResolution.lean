@@ -51,11 +51,11 @@ pro-étale Weil sheaf `(M, φ)`. -/
 noncomputable def globalSectionsFrobeniusNatTrans :
     globalSectionsWeilFunctor k₀ l Y ⟶ globalSectionsWeilFunctor k₀ l Y where
   app X := (globalSectionsLowerStarIso _
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app X.carrier.X ≫
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app X.carrier.X ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map X.str.hom)
   naturality X X' φ := by
     have h₁ := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality φ.hom.f.hom
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality φ.hom.f.hom
     have h₂ := φ.hom.h
     simp only [Functor.comp_obj, Functor.comp_map] at h₁ ⊢
     erw [reassoc_of% h₁]
@@ -104,7 +104,8 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
         (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
           (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))))
       (Functor.whiskerLeft (AdicSheaf.forget _) (globalSectionsLowerStarIso _
-        (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv) =
+        (Spec (CommRingCat.of k₀) ↘
+          Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
   refine NatTrans.ext (funext fun X ↦ ?_)
   have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
@@ -112,8 +113,8 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
-    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
     ((AdicSheaf.forget _).map X.str.hom)
   simp only [IsoAlgebra.frobeniusNatTrans_app,
@@ -148,7 +149,8 @@ theorem exists_linearEquiv_cohomology_resolution (F : WeilSheaf k₀ l Y)
         (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
           (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))))
       (Functor.whiskerLeft (AdicSheaf.forget _) (globalSectionsLowerStarIso _
-        (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv)
+        (Spec (CommRingCat.of k₀) ↘
+          Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv)
       I r
   rw [frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans] at h
   refine ⟨WeilCoefficients.linearEquivOfIso (IsoAlgebra.globalSectionsHomologyIso

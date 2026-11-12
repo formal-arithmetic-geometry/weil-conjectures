@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import WeilConjectures.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 import WeilConjectures.AlgebraicGeometry.PerfectNoetherianCohomology

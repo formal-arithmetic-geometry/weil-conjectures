@@ -8,7 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.Sites.RingedSitePoint
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import all WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import all WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
 import WeilConjectures.Algebra.Homology.RingedSitePointUniversalTensor

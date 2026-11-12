@@ -58,13 +58,13 @@ private theorem scalarInverseMateEqOfUnit
     (d : P ⋙ E ⟶ E' ⋙ P') (q : F ⋙ E' ≅ E ⋙ F')
     (hq : ∀ N, E.map (a.unit.app N) ≫ d.app (F.obj N) ≫
       P'.map (q.hom.app N) = b.unit.app (E.obj N)) :
-    ((mateEquiv a b).symm d).natTrans = q.inv := by
+    ((mateEquiv a b).symm d) = q.inv := by
   apply NatTrans.ext
   funext N
   apply (b.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   have hu : E.map (a.unit.app N) ≫ d.app (F.obj N) =
-      b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).natTrans.app N) :=
+      b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).app N) :=
     unit_mateEquiv_symm a b d N
   rw [← hu]
   apply (cancel_mono (P'.map (q.hom.app N))).mp
@@ -103,8 +103,7 @@ private theorem inverseMateCube
     simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.id_app,
-      Category.id_comp, Category.assoc,
-      TwoSquare.natTrans, TwoSquare.mk, Functor.comp_obj]
+      Category.id_comp, Category.assoc, Functor.comp_obj]
     erw [R₃.map_id]
     simpa only [Category.comp_id, Category.assoc] using hc N
   intro M
@@ -113,7 +112,7 @@ private theorem inverseMateCube
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.id_app,
     Category.id_comp, Category.comp_id, Category.assoc, CategoryTheory.Functor.map_id,
-    TwoSquare.natTrans, TwoSquare.mk, Functor.comp_obj] using hm
+    TwoSquare.mk, Functor.comp_obj] using hm
 
 section CanonicalEvaluation
 attribute [local irreducible] proEtaleRingDirectImageMap proEtaleConstantDirectImageMap
@@ -156,7 +155,7 @@ private theorem single_evaluation_inverse_isIso
     IsIso (((mateEquiv (Adjunction.ofIsRightAdjoint P)
       (proEtaleRingModuleAdjunction f (VaryingRing.coefficients C Y n)
         (VaryingRing.coefficients C X n) (StrictTower.constantRingIso (C n) f))).symm
-          (TwoSquare.mk _ _ _ _ d.hom)).natTrans) := by
+          (TwoSquare.mk _ _ _ _ d.hom))) := by
   subst P
   simp only [eqToIso_refl, Iso.refl_trans] at hd
   subst d
@@ -167,7 +166,7 @@ private theorem single_evaluation_inverse_isIso
     (VaryingRing.moduleEvalP C τ f n).hom (VaryingRing.moduleEvalG C τ f n)
     (VaryingRing.moduleEvalG_existsUnique C τ f n).choose_spec.1
   change IsIso (((mateEquiv (VaryingRing.moduleAdj C τ f) _).symm
-    (VaryingRing.moduleEvalP C τ f n).hom).natTrans)
+    (VaryingRing.moduleEvalP C τ f n).hom))
   exact (congrArg IsIso hm).mpr inferInstance
 
 private theorem normalized_six_functions
@@ -290,10 +289,10 @@ theorem restriction_inverse_mate_eval_isIso
     IsIso ((VaryingRing.eval CE τE X n).map
       ((((mateEquiv (SemilinearProperOpen.ordinaryAdj CF τF f)
         (SemilinearProperOpen.ordinaryAdj CE τE f)).symm
-          (TwoSquare.mk _ _ _ _ d.inv)).natTrans).app M)) := by
+          (TwoSquare.mk _ _ _ _ d.inv))).app M)) := by
   let adjE := SemilinearProperOpen.ordinaryAdj CE τE f
   let adjF := SemilinearProperOpen.ordinaryAdj CF τF f
-  let t := ((mateEquiv adjF adjE).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans
+  let t := ((mateEquiv adjF adjE).symm (TwoSquare.mk _ _ _ _ d.inv))
   change IsIso ((VaryingRing.eval CE τE X n).map (t.app M))
   let aE := proEtaleRingModuleAdjunction f (VaryingRing.coefficients CE Y n)
     (VaryingRing.coefficients CE X n) (StrictTower.constantRingIso (CE n) f)
@@ -303,8 +302,8 @@ theorem restriction_inverse_mate_eval_isIso
     CE τE n f (SemilinearProperOpen.push CE τE f) (ordinary_push_eq CE τE f)
   obtain ⟨dF, hdF, hcF⟩ := level_push_evaluation_local
     CF τF n f (SemilinearProperOpen.push CF τF f) (ordinary_push_eq CF τF f)
-  let bE := ((mateEquiv adjE aE).symm (TwoSquare.mk _ _ _ _ dE.hom)).natTrans
-  let bF := ((mateEquiv adjF aF).symm (TwoSquare.mk _ _ _ _ dF.hom)).natTrans
+  let bE := ((mateEquiv adjE aE).symm (TwoSquare.mk _ _ _ _ dE.hom))
+  let bF := ((mateEquiv adjF aF).symm (TwoSquare.mk _ _ _ _ dF.hom))
   have : (SemilinearProperOpen.push CE τE f).IsRightAdjoint :=
     SemilinearProperOpen.push_isRightAdjoint CE τE f
   have : (SemilinearProperOpen.push CF τF f).IsRightAdjoint :=
@@ -409,14 +408,14 @@ theorem restriction_inverse_mate_eval_isIso
         aY aX (StrictTower.constantRingIso (CE n) f)
         (StrictTower.constantRingIso (CF n) f) hs
       have h₁' : (mateEquiv adjF adjE
-          (TwoSquare.mk _ _ _ _ (t))).natTrans =
+          (TwoSquare.mk _ _ _ _ (t))) =
           d.inv := by
         dsimp only [t]
-        exact congrArg TwoSquare.natTrans h₁
-      have h₂' : (mateEquiv adjE aE (TwoSquare.mk _ _ _ _ bE)).natTrans =
-          dE.hom := congrArg TwoSquare.natTrans h₂
-      have h₃' : (mateEquiv adjF aF (TwoSquare.mk _ _ _ _ bF)).natTrans =
-          dF.hom := congrArg TwoSquare.natTrans h₃
+        exact h₁
+      have h₂' : (mateEquiv adjE aE (TwoSquare.mk _ _ _ _ bE)) =
+          dE.hom := h₂
+      have h₃' : (mateEquiv adjF aF (TwoSquare.mk _ _ _ _ bF)) =
+          dF.hom := h₃
       exact (congrArg₂ (fun a c ↦ (VaryingRing.eval CE τE Y n).map a ≫ c ≫
         (StrictTower.moduleDirectImage (CE n) f).map (eX.hom.app N))
           (congr_app h₁' N) (congr_app h₂' ((SemilinearSections.res rX).obj N))).trans

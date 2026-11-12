@@ -716,7 +716,7 @@ private theorem identity_mate {C D : Type*} [Category C] [Category D]
     (B : C ⥤ C) (H : D ⥤ D) (b : B ≅ 𝟭 C) (h : H ≅ 𝟭 D)
     (θ : B ⋙ L ≅ L ⋙ H)
     (hθ : ∀ M, θ.hom.app M ≫ h.hom.app (L.obj M) = L.map (b.hom.app M)) (M : D) :
-    (mateEquiv a a (TwoSquare.mk B L L H θ.hom)).natTrans.app M ≫
+    (mateEquiv a a (TwoSquare.mk B L L H θ.hom)).app M ≫
         R.map (h.hom.app M) = b.hom.app (R.obj M) := by
   dsimp [mateEquiv]
   simp only [Category.id_comp, Category.comp_id, Category.assoc]
@@ -744,7 +744,7 @@ private theorem localized_exchange
       (mateEquiv (proEtaleRingDerivedAdjunction f r.RY r.RX r.cf)
         (proEtaleRingDerivedAdjunction f' r.RY' r.RX' r.cf')
         (TwoSquare.mk _ _ _ _
-          (Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare).hom)).natTrans := by
+          (Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare).hom)) := by
   unfold exchange proEtaleAmbientRingedExchange
   rw [r.ambientSquare_localization]
 

@@ -38,9 +38,9 @@ variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* 
 
 /-- The mate of a natural transformation commuting with shifts, with respect to adjunctions
 commuting with shifts, commutes with shifts. -/
-lemma mateEquiv (α : TwoSquare G L₁ L₂ H) [NatTrans.CommShift α.natTrans A] :
-    NatTrans.CommShift (mateEquiv adj₁ adj₂ α).natTrans A := by
-  dsimp only [CategoryTheory.mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
+lemma mateEquiv (α : TwoSquare G L₁ L₂ H) [NatTrans.CommShift α A] :
+    NatTrans.CommShift (mateEquiv adj₁ adj₂ α) A := by
+  dsimp only [CategoryTheory.mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk]
   infer_instance
 
 end NatTrans.CommShift
@@ -60,7 +60,7 @@ instance conjugateEquiv (α : L₂ ⟶ L₁) [NatTrans.CommShift α A] :
     (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv))
   have e : CategoryTheory.conjugateEquiv adj₁ adj₂ α = R₁.rightUnitor.inv ≫
       (CategoryTheory.mateEquiv adj₁ adj₂
-        (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv))).natTrans ≫
+        (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv))) ≫
       R₂.leftUnitor.hom := rfl
   rw [e]
   infer_instance

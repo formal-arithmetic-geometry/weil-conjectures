@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 public import WeilConjectures.RingTheory.DualContent
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # The Hilbert functor of a closed subscheme

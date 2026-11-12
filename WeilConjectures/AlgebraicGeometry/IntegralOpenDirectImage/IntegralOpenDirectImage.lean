@@ -234,7 +234,7 @@ def reductionPullbackMap :
     (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U 0))).symm
       (TwoSquare.mk _ _ _ _
         (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E 1) j).inv)
-    ).natTrans
+    )
 
 private theorem unique_mate
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']

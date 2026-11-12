@@ -236,11 +236,11 @@ private theorem inverse_mate_eq {A B C D : Type*}
     (α : G ⋙ L₂ ⟶ L₁ ⋙ H) (γ : R₁ ⋙ G ⟶ H ⋙ R₂)
     (h : ∀ a, G.map (adj₁.unit.app a) ≫ γ.app (L₁.obj a) =
       adj₂.unit.app (G.obj a) ≫ R₂.map (α.app a)) :
-    ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ γ)).natTrans = α := by
+    ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ γ)) = α := by
   have hm := mateEquiv_eq_of_unit adj₁ adj₂ (TwoSquare.mk _ _ _ _ α)
     (TwoSquare.mk _ _ _ _ γ) h
   rw [← hm]
-  exact congrArg TwoSquare.natTrans (Equiv.symm_apply_apply _ _)
+  exact (Equiv.symm_apply_apply _ _)
 
 private theorem formalism_exchange_app (F : AlgebraicGeometry.CompactSupportFormalism)
     [F.HasProperExchange]
@@ -250,16 +250,16 @@ private theorem formalism_exchange_app (F : AlgebraicGeometry.CompactSupportForm
     (K : F.obj X) :
     letI := AlgebraicGeometry.CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := F) (c.isPullback_i_ofIsPullback sq)
-    (F.shriekBaseChangeOfIsPullback sq c).natTrans.app K =
+    (F.shriekBaseChangeOfIsPullback sq c).app K =
       (F.pfBaseChange (pullback.fst c.g g) (c.ofIsPullback sq).g c.g g
-        (c.isPullback_g_ofIsPullback sq).flip.w).natTrans.app ((F.sh c.i).obj K) ≫
+        (c.isPullback_g_ofIsPullback sq).flip.w).app ((F.sh c.i).obj K) ≫
       (F.pf (c.ofIsPullback sq).g).map
         ((inv (F.baseChange g' (c.ofIsPullback sq).i c.i (pullback.fst c.g g)
-          (c.isPullback_i_ofIsPullback sq).w).natTrans).app K) := by
+          (c.isPullback_i_ofIsPullback sq).w)).app K) := by
   simp only [AlgebraicGeometry.CompactSupportFormalism.shriekBaseChangeOfIsPullback,
     AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange,
     CategoryTheory.ExchangeFormalism.shriekBaseChange,
-    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id]
@@ -272,14 +272,14 @@ private theorem formalism_exchange_app_eq (F : AlgebraicGeometry.CompactSupportF
     (p : F.pf c.g ⋙ F.pb g ⟶ F.pb (pullback.fst c.g g) ⋙ F.pf (c.ofIsPullback sq).g)
     (β : F.sh c.i ⋙ F.pb (pullback.fst c.g g) ⟶ F.pb g' ⋙ F.sh (c.ofIsPullback sq).i)
     (hp : (F.pfBaseChange (pullback.fst c.g g) (c.ofIsPullback sq).g c.g g
-      (c.isPullback_g_ofIsPullback sq).flip.w).natTrans = p)
+      (c.isPullback_g_ofIsPullback sq).flip.w) = p)
     (ho :
       letI := AlgebraicGeometry.CompactSupportFormalism.HasBaseChange.isIso_baseChange
         (F := F) (c.isPullback_i_ofIsPullback sq)
       inv (F.baseChange g' (c.ofIsPullback sq).i c.i (pullback.fst c.g g)
-        (c.isPullback_i_ofIsPullback sq).w).natTrans = β)
+        (c.isPullback_i_ofIsPullback sq).w) = β)
     (K : F.obj X) :
-    (F.shriekBaseChangeOfIsPullback sq c).natTrans.app K =
+    (F.shriekBaseChangeOfIsPullback sq c).app K =
       p.app ((F.sh c.i).obj K) ≫ (F.pf (c.ofIsPullback sq).g).map (β.app K) := by
   rw [formalism_exchange_app, hp, ho]
 
@@ -301,10 +301,10 @@ private theorem etale_formalism_exchange_app (A : Type*) [Category.{u + 1} A]
         (F := AlgebraicGeometry.Etale.derivedPlusFormalism A) (c.isPullback_i_ofIsPullback sq)
       inv ((AlgebraicGeometry.Etale.derivedPlusFormalism A).baseChange g'
         (c.ofIsPullback sq).i c.i (pullback.fst c.g g)
-        (c.isPullback_i_ofIsPullback sq).w).natTrans = β)
+        (c.isPullback_i_ofIsPullback sq).w) = β)
     :
     ((AlgebraicGeometry.Etale.derivedPlusFormalism A).shriekBaseChangeOfIsPullback
-      sq c).natTrans =
+      sq c) =
       Functor.whiskerLeft
         (AlgebraicGeometry.Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus
         (AlgebraicGeometry.Etale.baseChange A
@@ -512,7 +512,7 @@ private theorem formalism_open_hom (Λ : Type (u + 1)) [CommRing Λ]
     {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b) :
-    ((Etale.derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b sq.w).natTrans =
+    ((Etale.derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b sq.w) =
       (Functor.mapDerivedCategoryPlusSquareIso _ _ _ _
         (@asIso _ _ _ _ _ (Etale.isIso_openImmersionLowerShriekBaseChangeMap
           (ModuleCat.{u + 1} Λ) sq))).hom := by
@@ -524,7 +524,7 @@ private theorem formalism_open_hom (Λ : Type (u + 1)) [CommRing Λ]
       (Etale.openImmersionLowerShriekUpperStarAdjunction A r).mapDerivedCategoryPlusAdjunction
       (Etale.openImmersionLowerShriekUpperStarAdjunction A l).mapDerivedCategoryPlusAdjunction).symm
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryPlusSquareIso _ _ _ _
-          (Etale.squareUpperStarIso A sq.toCommSq.flip)).hom)).natTrans = _
+          (Etale.squareUpperStarIso A sq.toCommSq.flip)).hom)) = _
     apply inverse_mate_eq
     intro K
     symm
@@ -543,7 +543,7 @@ private theorem formalism_open_inv (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b) :
     let := Etale.isIso_derivedPlusFormalism_baseChange Λ sq
-    inv (((Etale.derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b sq.w).natTrans) =
+    inv (((Etale.derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b sq.w)) =
       (Etale.extensionZeroBaseChangeDerivedPlusIso Λ sq).hom := by
   with_unfolding_all
     let := Etale.isIso_derivedPlusFormalism_baseChange Λ sq

@@ -66,7 +66,7 @@ private theorem chartRawAdj_pullback {S X B T T' : Scheme.{u}}
   let adj' := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
     (pullback.snd f g'')).derivedPlus
   let θ := TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{u + 1} sq).hom
-  have hβ : (mateEquiv adj adj' θ).natTrans =
+  have hβ : (mateEquiv adj adj' θ) =
       derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq := by
     apply derivedBaseChangeMapPlus_ext AddCommGrpCat.{u + 1} sq
     intro K
@@ -75,7 +75,7 @@ private theorem chartRawAdj_pullback {S X B T T' : Scheme.{u}}
       (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (pullback.snd f g''))
       (TwoSquare.mk _ _ _ _ (squareUpperStarIso AddCommGrpCat.{u + 1} sq).hom)
       θ (pullbackSquareComparison_hom_app_factorsh AddCommGrpCat.{u + 1} sq) K
-  let : NatTrans.CommShift (mateEquiv adj adj' θ).natTrans ℤ := by
+  let : NatTrans.CommShift (mateEquiv adj adj' θ) ℤ := by
     rw [hβ]
     infer_instance
   let δ := (DerivedCategory.Plus.singleFunctor _ 0).map
@@ -90,7 +90,7 @@ private theorem chartRawAdj_pullback {S X B T T' : Scheme.{u}}
       (pullback.fst f g'') (cartesianImageProjection_fst f g' g'' b wb).symm).inv.app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
   rw [hβ] at hm
-  dsimp only [θ, TwoSquare.mk, TwoSquare.natTrans, δ] at hm
+  dsimp only [θ, TwoSquare.mk, δ] at hm
   have ht := actualTransport_eq AddCommGrpCat.{u + 1}
     (pullbackSquareComparison AddCommGrpCat.{u + 1} sq).hom a a' ha
     (pullback.fst f g') (pullback.fst f g'')

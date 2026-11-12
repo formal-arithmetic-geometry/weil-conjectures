@@ -306,17 +306,17 @@ theorem exact_localization_inverse_mate
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (d : R₁ ⋙ G ≅ H ⋙ R₂)
-    [IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans] :
+    [IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom))] :
     IsIso ((mateEquiv
       (exactLocalizationDerivedAdjunction a₁)
       (exactLocalizationDerivedAdjunction a₂)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans ∧
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)) ∧
     ((mateEquiv
       (exactLocalizationDerivedAdjunction a₁)
       (exactLocalizationDerivedAdjunction a₂)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)) =
       (Functor.mapDerivedCategorySquareIso
-        (asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans)).hom ∧
+        (asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)))).hom ∧
     (∀ (K : CochainComplex A ℤ) (L : CochainComplex B ℤ)
       (f : (L₁.mapHomologicalComplex (.up ℤ)).obj K ⟶ L),
       (exactLocalizationDerivedAdjunction a₁).homEquiv
@@ -331,14 +331,14 @@ theorem exact_localization_inverse_mate
           (L₂.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map f) =
         DerivedCategory.Q.map ((a₂.mapHomologicalComplex (.up ℤ)).homEquiv _ _ f) ≫
           R₂.mapDerivedCategoryFactors.inv.app L) := by
-  let β := asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans
+  let β := asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom))
   have hβ : ∀ K, a₂.unit.app (G.obj K) ≫ R₂.map (β.hom.app K) =
       G.map (a₁.unit.app K) ≫ d.hom.app (L₁.obj K) := fun K =>
     (unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ d.hom) K).symm
   have heq : ((mateEquiv
       (exactLocalizationDerivedAdjunction a₁)
       (exactLocalizationDerivedAdjunction a₂)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)) =
       (Functor.mapDerivedCategorySquareIso β).hom := by
     apply Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso A (.up ℤ))

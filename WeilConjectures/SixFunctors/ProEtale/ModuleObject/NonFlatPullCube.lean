@@ -89,7 +89,7 @@ noncomputable def derivedUpperStarExtendScalarsPushHom {X Y : Scheme.{u}} (h : X
     R((h)_*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a Y)) ⟶
       L(Mod.extendScalars (coefficientMap a X)) ⋙ R((h)_*⟦Λ'⟧) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ h) (derivedUpperStarLowerStarAdjunction Λ' h)
-    (derivedUpperStarExtendScalarsIso a h).inv).natTrans
+    (derivedUpperStarExtendScalarsIso a h).inv)
 
 /-- The isomorphisms `derivedUpperStarExtendScalarsIso a` commute with the `eqToHom`s induced by
 an equality `u = v` of morphisms of schemes. -/

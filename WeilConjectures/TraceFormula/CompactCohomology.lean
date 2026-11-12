@@ -404,8 +404,7 @@ lemma globalOperator_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
     [IsFinite (frobeniusIterate Φ 1).left] [IsUniversalHomeomorphism (frobeniusIterate Φ 1).left] :
     K.globalOperator m =
-      (show End ((boundedConstructibleLowerShriek ℓ
-          (toPoint X)).obj K.carrier) from K.globalOperator 1) ^ m := by
+      (End.of (K.globalOperator 1) ^ m).asHom := by
   have : IsFinite Φ.left := by
     rw [← frobeniusIterate_one Φ]
     infer_instance

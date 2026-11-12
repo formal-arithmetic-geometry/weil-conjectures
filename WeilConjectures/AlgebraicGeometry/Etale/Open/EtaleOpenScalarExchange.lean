@@ -95,7 +95,7 @@ private theorem openScalarRestriction_eq
         (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ j)).hom =
         TwoSquare.mk _ _ _ _
           (Functor.whiskerLeft (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)
-            e.inv ≫ x.natTrans ≫
+            e.inv ≫ x ≫
             Functor.whiskerRight e'.hom
               (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)) := by
       ext M
@@ -109,7 +109,7 @@ private theorem openScalarRestriction_eq
     unfold openScalarRestrictionMap openDerivedRestrictScalarsIso
     rw [derived_square_symm φ j (Iso.ext (openRestrictScalarsIso_inv_eq φ j))]
     rw [heq, inverse_mate_transport a b x e e']
-    have hm : ((mateEquiv a b).symm x).natTrans = (scalarPullbackIso φ j).inv :=
+    have hm : ((mateEquiv a b).symm x) = (scalarPullbackIso φ j).inv :=
       congrArg Iso.inv (scalarPullback_eq φ j)
     rw [hm]
     ext M

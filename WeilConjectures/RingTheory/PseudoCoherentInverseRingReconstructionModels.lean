@@ -342,7 +342,6 @@ private theorem marked_lift_surjective
         c.hom.app ((HomotopyCategory.quotient _ _).obj P) ≫
         DerivedCategory.Q.map θ₀.hom := by
     have hm := hmark
-    try simp only [Category.id_comp] at hm
     have hr := hright
     change DerivedCategory.Qh.map
         (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomotopyCategoryFactors

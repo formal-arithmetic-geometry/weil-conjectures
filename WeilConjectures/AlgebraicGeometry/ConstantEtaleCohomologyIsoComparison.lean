@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.ConstructibleSheaf.Defs
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Comparison of constant etale cohomology along an isomorphism
 

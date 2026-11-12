@@ -182,7 +182,7 @@ noncomputable def ordinaryIhomBifunctorMapIso :
     naturality_right a {b b'} g := by
       have h := (OrdinaryModuleHom.ihomIso a).hom.naturality g
       have h' :=
-        (Functor.LaxMonoidal.ihomComparison (ordinaryCondensedFunctor l Y) a).natTrans.naturality g
+        (Functor.LaxMonoidal.ihomComparison (ordinaryCondensedFunctor l Y) a).naturality g
       simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Functor.Monoidal.ihomObjIso_hom,
         Functor.Monoidal.commIhom, asIso_hom]
       erw [← Functor.map_comp_assoc, h, Functor.map_comp, assoc, h']

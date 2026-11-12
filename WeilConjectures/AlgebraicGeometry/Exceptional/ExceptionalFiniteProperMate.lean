@@ -423,7 +423,7 @@ private theorem finiteConstantLeft (n : ℕ) :
   obtain ⟨β, _⟩ := finiteConstantRight p O ell A n
   let a := A.levelAdj n
   let b := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous p (ModuleCat B) J K
-  let α := ((mateEquiv a b).symm (.mk _ _ _ _ β.hom)).natTrans
+  let α := ((mateEquiv a b).symm (.mk _ _ _ _ β.hom))
   have : IsIso α := isIso_inverseMate_of_equivalences a b β
   exact ⟨(asIso α).symm⟩
 
@@ -494,9 +494,9 @@ private theorem finiteMateTransport
     simp only [Functor.comp_obj, Category.comp_id]
   have h := exchangeMate_cube adj adjK adj' adjK' a b c d pF pG pH pK
     θ.hom α.hom hc E
-  have hmF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)).natTrans :=
+  have hmF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)) :=
     isIso_mateEquiv_of_isEquivalence adj adj' (.mk _ _ _ _ pF.inv)
-  have hmK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)).natTrans :=
+  have hmK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)) :=
     isIso_mateEquiv_of_isEquivalence adjK adjK' (.mk _ _ _ _ pK.inv)
   have := hfixed α
   have hi : IsIso

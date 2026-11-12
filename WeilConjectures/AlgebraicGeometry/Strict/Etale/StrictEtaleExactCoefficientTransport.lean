@@ -131,7 +131,7 @@ private def scalarSuccessor {m n : ℕ} (h : n ≤ m) :
       scalarStageExtension a (T := T) n ⋙
         coefficientRestriction (J := T.smallEtaleTopology) O' mu h :=
   ((mateEquiv (scalarStageAdj a (T := T) n) (scalarStageAdj a (T := T) m)).symm
-    (.mk _ _ _ _ (scalarRestrictionSquare a (T := T) h).hom)).natTrans
+    (.mk _ _ _ _ (scalarRestrictionSquare a (T := T) h).hom))
 
 private def scalarOrdinary :
     strictEtaleCoefficientSystem T O ell ⥤ strictEtaleCoefficientSystem T O' mu where

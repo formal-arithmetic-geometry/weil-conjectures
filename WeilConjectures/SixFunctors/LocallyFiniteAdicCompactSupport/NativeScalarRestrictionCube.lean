@@ -170,8 +170,7 @@ theorem nativeScalarRestrictionCube
   have h := (hk g).choose_spec.choose_spec
   refine ⟨NativeScalarDerivedRestriction.forwardIntegralPush l E a P g x,
     NativeScalarDerivedRestriction.forwardClosurePush l E a P g y, ?_⟩
-  apply TwoSquare.ext
-  intro N
+  refine NatTrans.ext (funext fun N ↦ ?_)
   have hf := forwardCube
     (liftEquivalence (P.closureEquivalence U)) (liftEquivalence (P.integralEquivalence U))
     (liftEquivalence (P.closureEquivalence V)) (liftEquivalence (P.integralEquivalence V))
@@ -193,7 +192,7 @@ theorem nativeScalarRestrictionCube
     (NativeScalarDerivedRestriction.positiveSquare l E g)
     (NativeScalarDerivedRestriction.inverseCube l E a P k g x y h) N
   simpa only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.map_id, Category.id_comp, Category.comp_id,
     nativeRingRestrictionSquare, nativeScalarCompositeRestrictionSquare,

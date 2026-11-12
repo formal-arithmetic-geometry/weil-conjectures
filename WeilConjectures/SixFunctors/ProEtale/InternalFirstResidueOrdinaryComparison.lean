@@ -83,7 +83,7 @@ private def ordinarySmallExtensionIso (X : Scheme.{u})
     (IntegralModelsStacks.smallMap X f)
   let β := smallRestrictionIso X f
   let α := ((mateEquiv (Mod.extendRestrictAdjunction f) adj).symm
-    (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ β.hom))
   have : IsIso α := InternalAbelianSheafModule.inverseMate_isIso
     (Mod.extendRestrictAdjunction f) adj β
   exact (asIso α).symm

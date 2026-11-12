@@ -73,10 +73,10 @@ private theorem internal_scalar_apply
     (M : Mod (Sheaf J AddCommGrpCat.{u}) R) (U : Cᵒᵖ)
     (x : ((InternalAbelianSheafModule.sectionModuleFunctor J R).obj M).val.obj U) :
     (((InternalAbelianSheafModule.sectionModuleFunctor J R).map
-      ((λ_ M).inv ≫ d ▷ M ≫ (λ_ M).hom)).val.app U) x =
+      ((λ_ M).inv ≫ d.asHom ▷ M ≫ (λ_ M).hom)).val.app U) x =
         @SMul.smul _ _
           (((InternalAbelianSheafModule.sectionModuleFunctor J R).obj M).val.obj U).isModule.toSMul
-          ((((InternalAbelianSheafModule.sectionModuleFunctor J R).map d).val.app U)
+          ((((InternalAbelianSheafModule.sectionModuleFunctor J R).map d.asHom).val.app U)
             (1 : (InternalAbelianSheafModule.sectionRingSheaf J R).obj.obj U)) x := by
   let F := InternalAbelianSheafModule.sectionModuleFunctor J R
   let r : (InternalAbelianSheafModule.sectionRingSheaf J R).obj.obj U := 1
@@ -93,7 +93,7 @@ private theorem internal_scalar_apply
     rw [hz] at he
     exact he
   change ((F.map (λ_ M).hom).val.app U)
-    (((F.map (d ▷ M)).val.app U) (((F.map (λ_ M).inv).val.app U) x)) = _
+    (((F.map (d.asHom ▷ M)).val.app U) (((F.map (λ_ M).inv).val.app U) x)) = _
   rw [hinv]
   rw [← tensorHom_id]
   rw [InternalAbelianSheafModule.comparison_internalTmul_natural]
@@ -116,11 +116,11 @@ private theorem small_principal_reflection
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
     (μ : End P) (ν : End Q)
     (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x = @SMul.smul (R.obj.obj U) ((P.X q).val.obj U)
+      (μ.asHom.f q).val.app U x = @SMul.smul (R.obj.obj U) ((P.X q).val.obj U)
         ((P.X q).val.obj U).isModule.toSMul
         (a.val U) x)
     (hν : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (Q.X q).val.obj U),
-      (ν.f q).val.app U x = @SMul.smul (R.obj.obj U) ((Q.X q).val.obj U)
+      (ν.asHom.f q).val.app U x = @SMul.smul (R.obj.obj U) ((Q.X q).val.obj U)
         ((Q.X q).val.obj U).isModule.toSMul
         (a.val U) x) :
     Function.Bijective (fun f :
@@ -128,8 +128,8 @@ private theorem small_principal_reflection
       DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion ν) ↦
       DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ) ≫ f) := by
   let := principalLocalTestSliceDerived R
-  let I := image (ringedKoszulScalar R a)
-  let ι := image.ι (ringedKoszulScalar R a)
+  let I := image (ringedKoszulScalar R a).asHom
+  let ι := image.ι (ringedKoszulScalar R a).asHom
   obtain ⟨D, hC, hbij, _, _⟩ := ringedKoszulCompletionReflector R 1 (fun _ ↦ a)
     I ι (principal_generators R a)
   let b : (SheafOfModules.unit
@@ -205,28 +205,28 @@ attribute [local instance] sectionTransport_isEquivalence
 
 private def scalarAtUnit (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     End (𝟙_ (Modules l E X)) :=
-  (DerivedNakayama.regularPullbackIso l E X).inv ≫
-    (DerivedNakayama.pullback l E X).map d ≫
-      (DerivedNakayama.regularPullbackIso l E X).hom
+  .of ((DerivedNakayama.regularPullbackIso l E X).inv ≫
+    (DerivedNakayama.pullback l E X).map d.asHom ≫
+      (DerivedNakayama.regularPullbackIso l E X).hom)
 
 private def scalarSection (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     ((sectionRing l E X).obj ⋙ forget CommRingCat).sections where
-  val U := (((sectionEquiv l E X).functor.map (scalarAtUnit l E X d)).val.app U)
+  val U := (((sectionEquiv l E X).functor.map (scalarAtUnit l E X d).asHom).val.app U)
     (1 : (sectionRing l E X).obj.obj U)
   property {U V} f := by
     have h := NatTrans.naturality_apply
       ((PresheafOfModules.toPresheaf _).map
-        ((sectionEquiv l E X).functor.map (scalarAtUnit l E X d)).val) f
+        ((sectionEquiv l E X).functor.map (scalarAtUnit l E X d).asHom).val) f
       (1 : (sectionRing l E X).obj.obj U)
     have h' := h.symm
     change (sectionRing l E X).obj.map f
-      ((((sectionEquiv l E X).functor.map (scalarAtUnit l E X d)).val.app U)
+      ((((sectionEquiv l E X).functor.map (scalarAtUnit l E X d).asHom).val.app U)
         (1 : (sectionRing l E X).obj.obj U)) =
-        (((sectionEquiv l E X).functor.map (scalarAtUnit l E X d)).val.app V)
+        (((sectionEquiv l E X).functor.map (scalarAtUnit l E X d).asHom).val.app V)
           ((sectionRing l E X).obj.map f (1 : (sectionRing l E X).obj.obj U)) at h'
     exact h'.trans (congrArg
       (fun x : (sectionRing l E X).obj.obj V ↦
-        (((sectionEquiv l E X).functor.map (scalarAtUnit l E X d)).val.app V) x)
+        (((sectionEquiv l E X).functor.map (scalarAtUnit l E X d).asHom).val.app V) x)
       ((sectionRing l E X).obj.map f).hom.map_one)
 
 private def smallScalarSection
@@ -269,16 +269,16 @@ so neither P nor Q needs K-flatness, boundedness, or termwise flatness. -/
 theorem internal_principal_cone_hom_reflection
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (f : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) f).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) f).down s =
         Padic.coefficientExtensionUniformizer l E * f.down s)
     (P Q : CochainComplex (Modules l E X) ℤ) :
     Function.Bijective (fun f :
       DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion
-        (DerivedNakayama.scalarOnComplex l E X d P)) ⟶
+        (End.of (DerivedNakayama.scalarOnComplex l E X d P))) ⟶
       DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion
-        (DerivedNakayama.scalarOnComplex l E X d Q)) ↦
+        (End.of (DerivedNakayama.scalarOnComplex l E X d Q))) ↦
       DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-        (DerivedNakayama.scalarOnComplex l E X d P)) ≫ f) := by
+        (End.of (DerivedNakayama.scalarOnComplex l E X d P))) ≫ f) := by
   have _ := hd
   clear hd
   let R := smallSectionRing l E X
@@ -294,18 +294,18 @@ theorem internal_principal_cone_hom_reflection
   let G := H.mapHomologicalComplex (.up ℤ)
   let μ := End.of (DerivedNakayama.scalarOnComplex l E X d P)
   let ν := End.of (DerivedNakayama.scalarOnComplex l E X d Q)
-  let μ' := End.of (G.map μ)
-  let ν' := End.of (G.map ν)
+  let μ' := End.of (G.map μ.asHom)
+  let ν' := End.of (G.map ν.asHom)
   let : CountableAB4Star (Modules l E X) := modules_countableAB4Star l E X
   let : HasExactLimitsOfShape (Discrete ℕ) A :=
     HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) H.asEquivalence
   have hμ : ∀ (q : ℤ) (U : (AsSmall.{u + 1} X.ProEt)ᵒᵖ)
       (x : ((G.obj P).X q).val.obj U),
-      (μ'.f q).val.app U x = @SMul.smul _ _ (((G.obj P).X q).val.obj U).isModule.toSMul
+      (μ'.asHom.f q).val.app U x = @SMul.smul _ _ (((G.obj P).X q).val.obj U).isModule.toSMul
         ((smallScalarSection l E X d).val U) x := scalar_section_apply l E X d P
   have hν : ∀ (q : ℤ) (U : (AsSmall.{u + 1} X.ProEt)ᵒᵖ)
       (x : ((G.obj Q).X q).val.obj U),
-      (ν'.f q).val.app U x = @SMul.smul _ _ (((G.obj Q).X q).val.obj U).isModule.toSMul
+      (ν'.asHom.f q).val.app U x = @SMul.smul _ _ (((G.obj Q).X q).val.obj U).isModule.toSMul
         ((smallScalarSection l E X d).val U) x := scalar_section_apply l E X d Q
   obtain ⟨cP, hcP⟩ := CochainComplex.principalCompletionMap H μ
   obtain ⟨cQ, _⟩ := CochainComplex.principalCompletionMap H ν

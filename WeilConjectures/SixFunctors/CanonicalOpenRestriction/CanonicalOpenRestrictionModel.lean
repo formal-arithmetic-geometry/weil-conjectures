@@ -109,7 +109,7 @@ private theorem eq_mate_of_counit_on_good_complexes
           SX.reduction.map ((openAdjunction l E j o).counit.app
             (DerivedCategory.Q.obj Q))) :
     s = (mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
-      (TwoSquare.mk _ _ _ _ r.inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ r.inv)) := by
   apply eq_of_good_complexes l E
   intro Q hQ
   apply ((systemAdjunction l E j o).homEquiv _ _).symm.injective
@@ -180,7 +180,7 @@ theorem canonicalOpenRestrictionModel
         (κD n).hom.f i ≫ (tensor.ordinary n).hom.app (Q.X i))) :
     ∃ s : star l E j o ⋙ SU.reduction ≅ SX.reduction ⋙ P l E j o,
       s.hom = (mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
-        (TwoSquare.mk _ _ _ _ r.inv)).natTrans ∧
+        (TwoSquare.mk _ _ _ _ r.inv)) ∧
       (∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ)
     (hQ : integralOperationsGoodComplex l E X Q),
     ∃ (hRes : integralOperationsGoodComplex l E U

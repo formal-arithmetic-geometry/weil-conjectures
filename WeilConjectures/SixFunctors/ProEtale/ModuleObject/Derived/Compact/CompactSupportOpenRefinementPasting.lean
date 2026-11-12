@@ -476,7 +476,7 @@ private theorem ambient_exchange_eq
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
         (derivedUpperStarLowerStarAdjunction Λ f')
         (TwoSquare.mk L((v)^*⟦Λ⟧) L((f)^*⟦Λ⟧) L((f')^*⟦Λ⟧) L((u')^*⟦Λ⟧)
-          (condensedAmbientPullbackComparison Λ sq).hom)).natTrans := by
+          (condensedAmbientPullbackComparison Λ sq).hom)) := by
   rfl
 
 set_option backward.defeqAttrib.useBackward true in

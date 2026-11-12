@@ -136,7 +136,7 @@ private theorem inverseConjugate_shift
     (e : R₁ ≅ R₂) [NatTrans.CommShift e.hom ℤ] :
     NatTrans.CommShift (((conjugateIsoEquiv ad₁ ad₂).symm e).hom) ℤ := by
   dsimp [conjugateIsoEquiv, conjugateEquiv, mateEquiv, Iso.homCongr,
-    TwoSquare.equivNatTrans, TwoSquare.natTrans, TwoSquare.mk]
+    TwoSquare.mk]
   infer_instance
 
 private theorem identity_comparison
@@ -342,8 +342,8 @@ private theorem push_pasting_canonical
       Category.id_comp, Iso.inv_hom_id_app_assoc]
     rw [← G.map_comp, Iso.hom_inv_id_app, G.map_id]
     rfl
-  have hgamma : gamma.natTrans = Adjunction.pushHomOfComapIso cx cy kc :=
-    congrArg TwoSquare.natTrans ((mateEquiv cx cy).injective
+  have hgamma : gamma = Adjunction.pushHomOfComapIso cx cy kc :=
+    ((mateEquiv cx cy).injective
       (he.trans ((mateEquiv cx cy).apply_symm_apply _).symm))
   intro K
   have hh := congr_app hgamma K

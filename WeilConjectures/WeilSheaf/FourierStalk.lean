@@ -278,7 +278,7 @@ theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint
     ((fourierTransform ψ).obj K))
   set s := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y
   have hs₁ : s ≫ ((Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      1).hom = (specGeometricFrobenius k₀ ^ 1).hom ≫ s :=
+      1).asIso.hom = (specGeometricFrobenius k₀ ^ 1).asIso.hom ≫ s :=
     hdy ▸ Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ y
   have : IsIso s := by
     have : IsIso (pullback.snd (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))

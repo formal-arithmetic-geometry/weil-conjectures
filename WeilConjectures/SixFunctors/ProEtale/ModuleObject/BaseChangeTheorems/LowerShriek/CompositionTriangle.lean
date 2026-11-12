@@ -191,7 +191,7 @@ noncomputable abbrev compShriekTriangle :
 lemma isIso_baseChange_compShriekTriangle :
     IsIso ((𝔽).baseChange (compShriekTriangle c c' d hd).p₁ (compShriekTriangle c c' d hd).q
       (compShriekTriangle c c' d hd).i₂ (compShriekTriangle c c' d hd).r
-      (compShriekTriangle c c' d hd).w).natTrans :=
+      (compShriekTriangle c c' d hd).w) :=
   isIso_baseChange_boundedConstructibleExchangeFormalism ℓ hd
 
 /-- The exchange map of the square of the triangle `compShriekTriangle` is an isomorphism when
@@ -202,7 +202,7 @@ lemma isIso_exchange_compShriekTriangle
     haveI := isIso_baseChange_compShriekTriangle ℓ c c' d hd
     IsIso ((𝔽).exchange (compShriekTriangle c c' d hd).p₁ (compShriekTriangle c c' d hd).q
       (compShriekTriangle c c' d hd).i₂ (compShriekTriangle c c' d hd).r
-      (compShriekTriangle c c' d hd).w).natTrans := by
+      (compShriekTriangle c c' d hd).w) := by
   have h : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
       ℓ hd) := inferInstance
   rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq_exchange] at h
@@ -269,7 +269,7 @@ lemma isIso_baseChange_triangleShriekTriangle
     (T : AlgebraicGeometry.Compactification.Triangle f.left g.left) :
     IsIso ((𝔽).baseChange (triangleShriekTriangle T).p₁ (triangleShriekTriangle T).q
       (triangleShriekTriangle T).i₂ (triangleShriekTriangle T).r
-      (triangleShriekTriangle T).w).natTrans :=
+      (triangleShriekTriangle T).w) :=
   isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
     (Compactification.Triangle.isPullback_over T)
 
@@ -280,7 +280,7 @@ lemma isIso_exchange_triangleShriekTriangle
     haveI := isIso_baseChange_triangleShriekTriangle ℓ T
     IsIso ((𝔽).exchange (triangleShriekTriangle T).p₁ (triangleShriekTriangle T).q
       (triangleShriekTriangle T).i₂ (triangleShriekTriangle T).r
-      (triangleShriekTriangle T).w).natTrans := by
+      (triangleShriekTriangle T).w) := by
   have h := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (Compactification.Triangle.isPullback_over T)
   rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchange] at h
@@ -340,18 +340,18 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
   have e := AlgebraicGeometry.Compactification.overCompObjIso c c' d
   have h1 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk c.overI)
       (SepFinType.homMk c.overI) (𝟙 _)
-      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wf).natTrans :=
+      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wf) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨by simp⟩ : IsPullback (𝟙 X) c.overI c.overI (𝟙 _))
   have h2 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk Y)) (SepFinType.homMk c'.overI)
       (SepFinType.homMk c'.overI) (𝟙 _)
-      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wg).natTrans :=
+      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wg) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨by simp⟩ : IsPullback (𝟙 Y) c'.overI c'.overI (𝟙 _))
   have h3 : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk (c.overComp c' d).overI)
       (SepFinType.homMk (c.overI ≫ d.overI))
       (SepFinType.homMk (AlgebraicGeometry.Compactification.overCompObjIso c c' d).hom)
-      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wfg).natTrans :=
+      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).wfg) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨by simp⟩ : IsPullback (𝟙 X) (c.overComp c' d).overI
         (c.overI ≫ d.overI) (AlgebraicGeometry.Compactification.overCompObjIso c c' d).hom)
@@ -359,7 +359,7 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
       (SepFinType.homMk (Compactification.Triangle.overQ (triangleOfCompactifications c c' d hd)))
       (SepFinType.homMk d.overI)
       (SepFinType.homMk (AlgebraicGeometry.Compactification.overCompObjIso c c' d).hom)
-      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).q_comm).natTrans :=
+      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).q_comm) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_horiz_isIso ⟨Over.OverMorphism.ext (by
         simp [AlgebraicGeometry.Compactification.overCompObjIso,
@@ -372,7 +372,7 @@ lemma boundedConstructibleLowerShriekCompOfCompactifications_padicAlgCl_hom_eq :
       (SepFinType.homMk c'.overI)
       (SepFinType.homMk (Compactification.Triangle.overP (triangleOfCompactifications c c' d hd)) ≫
         𝟙 _)
-      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).big_w).natTrans :=
+      (triangleShriekTriangleHomCompShriekTriangle c c' d hd).big_w) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (by simpa using
         Compactification.Triangle.isPullback_over (triangleOfCompactifications c c' d hd))
@@ -498,7 +498,7 @@ lemma compIso_triangleShriekTriangle_naturality :
   have : IsIso ((𝔽).baseChange (triangleShriekTriangle T').p₁ (triangleShriekTriangle T').q
       (triangleShriekTriangle T).i₂
       ((triangleShriekTriangle T').r ≫ (triangleShriekTriangleHom φ).rg)
-      (triangleShriekTriangleHom φ).big_w).natTrans :=
+      (triangleShriekTriangleHom φ).big_w) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism
       ℓ (isPullback_triangleHom_big φ)
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ

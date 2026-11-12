@@ -27,7 +27,7 @@ private def scalarTranspose
     (ax : Sx ⊣ Rx) (ay : Sy ⊣ Ry)
     {P₀ : C₀ ⥤ D₀} {P₁ : C₁ ⥤ D₁}
     (r : Rx ⋙ P₀ ⟶ P₁ ⋙ Ry) : P₀ ⋙ Sy ⟶ Sx ⋙ P₁ :=
-  ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ r)).natTrans
+  ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ r))
 
 private theorem scalarTranspose_app
     {C₀ C₁ D₀ D₁ : Type*}
@@ -42,7 +42,7 @@ private theorem scalarTranspose_app
   apply (ay.homEquiv _ _).injective
   erw [Equiv.apply_symm_apply]
   simpa only [Adjunction.homEquiv_unit, scalarTranspose, TwoSquare.mk,
-    TwoSquare.natTrans, Functor.id_obj, Functor.comp_obj] using
+    Functor.id_obj, Functor.comp_obj] using
     (unit_mateEquiv_symm ax ay (TwoSquare.mk _ _ _ _ r) K).symm
 
 private theorem openScalar_transport_base

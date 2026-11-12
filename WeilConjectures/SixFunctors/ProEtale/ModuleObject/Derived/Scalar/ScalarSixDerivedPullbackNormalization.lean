@@ -161,8 +161,7 @@ private theorem scalarSixOrdinaryRestrictionTowerSquare
     (comapUpperStarIso_mate (Λ := Λ.X) (Λ' := Λ''.X) (a ≫ b).hom.hom f)
     (scalarSixOrdinaryRestrictionTower a b Y) (scalarSixOrdinaryRestrictionTower a b X)
     ?_ N
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   apply Mod.hom_ext
   simp only [TwoSquare.vComp, TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -294,8 +293,7 @@ private theorem scalarSixMateTower
       mateEquiv_hcomp aY aX bY bX]
     simp only [α, β, δ, Adjunction.pushHomOfComapIso,
       Equiv.apply_symm_apply, τY, τX, conjugateIsoEquiv_symm_apply_hom]
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     have hh := congrArg (fun e ↦ e.hom.app M) ht
     simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -306,7 +304,7 @@ private theorem scalarSixMateTower
   simpa only [α, β, δ, τX, τY, TwoSquare.vComp, TwoSquare.whiskerLeft,
     TwoSquare.whiskerRight, TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    TwoSquare.natTrans, Category.assoc, Category.id_comp, Category.comp_id] using hK.symm
+    Category.assoc, Category.id_comp, Category.comp_id] using hK.symm
 
 attribute [local irreducible] Mod.derivedExtendMapDerivedCategoryAdjunction
   Mod.derivedExtendRestrictAdjunction Mod.extendScalars

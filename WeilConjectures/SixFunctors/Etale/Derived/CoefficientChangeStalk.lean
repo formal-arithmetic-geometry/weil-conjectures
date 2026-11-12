@@ -114,14 +114,14 @@ noncomputable abbrev constantSheafRestrictScalarsMate :
 /-- The comparison of constant sheaf functors with restriction of scalars is an isomorphism, as
 the mate of an isomorphism along equivalences. -/
 instance isIso_constantSheafRestrictScalarsMate :
-    IsIso (constantSheafRestrictScalarsMate ρ (k := k)).natTrans := by
+    IsIso (constantSheafRestrictScalarsMate ρ (k := k)) := by
   have (M : ModuleCat.{u + 1} Λ') :
-      IsIso ((constantSheafRestrictScalarsMate ρ (k := k)).natTrans.app M) := by
+      IsIso ((constantSheafRestrictScalarsMate ρ (k := k)).app M) := by
     have h := mateEquiv_counit (globalSectionsConstantSheafAdjunction Λ' (k := k))
       (globalSectionsConstantSheafAdjunction Λ) (globalSectionsRestrictScalarsSquare ρ) M
     simp only [Equivalence.toAdjunction_counit] at h
     have : IsIso (((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-        (op (etalePoint k))).map ((constantSheafRestrictScalarsMate ρ).natTrans.app M)) := by
+        (op (etalePoint k))).map ((constantSheafRestrictScalarsMate ρ).app M)) := by
       rw [(IsIso.eq_comp_inv _).2 h]
       infer_instance
     exact isIso_of_reflects_iso _
@@ -158,10 +158,10 @@ lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
           (G₂ := ModuleCat.restrictScalars.{u + 1} ρ) (Iso.refl _)).hom.app M') :=
     fun N ↦ Adjunction.bijective_comp_map_of_unit_comp_map (adj Λ') (adj Λ) _
       (Functor.mapDerivedCategorySquareIso
-        (asIso (constantSheafRestrictScalarsMate ρ (k := k)).natTrans)).hom
+        (asIso (constantSheafRestrictScalarsMate ρ (k := k)))).hom
       (Adjunction.mapDerivedCategoryAdjunction_mate (globalSectionsConstantSheafAdjunction Λ')
         (globalSectionsConstantSheafAdjunction Λ)
-        (asIso (constantSheafRestrictScalarsMate ρ (k := k)).natTrans) (Iso.refl _) hβ) θ hθ N
+        (asIso (constantSheafRestrictScalarsMate ρ (k := k))) (Iso.refl _) hβ) θ hθ N
   have h := (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ (k := k)).hom.naturality θ
   rw [derivedRestrictScalarsCompRightDerivedGlobalSectionsIso, Iso.trans_hom, Iso.trans_hom,
     NatTrans.comp_app, NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,

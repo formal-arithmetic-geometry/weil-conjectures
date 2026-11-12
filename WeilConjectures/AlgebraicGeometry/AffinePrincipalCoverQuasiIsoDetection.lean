@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Sites.LocalProperties
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Detection of quasi-isomorphisms on an affine principal-open cover
 
