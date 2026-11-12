@@ -35,12 +35,12 @@ lemma CategoryTheory.ObjectProperty.braided_lift_comp
     [Category* E] [MonoidalCategory E] [BraidedCategory E]
     (P : ObjectProperty C) [P.IsMonoidal] (Q : ObjectProperty D) [Q.IsMonoidal]
     (R : ObjectProperty E) [R.IsMonoidal]
-    (F : C ⥤ D) [F.Monoidal] [F.Braided] (G : D ⥤ E) [G.Monoidal] [G.Braided]
+    (F : C ⥤ D) [F.Braided] (G : D ⥤ E) [G.Braided]
     (hF : ∀ K : P.FullSubcategory, Q (F.obj K.obj))
-    (hG : ∀ K : Q.FullSubcategory, R (G.obj K.obj)) :
-    ((Q.lift (P.ι ⋙ F) hF) ⋙ (R.lift (Q.ι ⋙ G) hG)).Braided := by
-  constructor
-  intro K M
+    (hG : ∀ K : Q.FullSubcategory, R (G.obj K.obj)) (K M : P.FullSubcategory) :
+    let T := Q.lift (P.ι ⋙ F) hF ⋙ R.lift (Q.ι ⋙ G) hG
+    Functor.LaxMonoidal.μ T K M ≫ T.map (β_ K M).hom =
+      (β_ (T.obj K) (T.obj M)).hom ≫ Functor.LaxMonoidal.μ T M K := by
   apply ObjectProperty.hom_ext
   exact Functor.LaxBraided.braided (F := F ⋙ G) K.obj M.obj
 
@@ -52,6 +52,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 private lemma integral_qbar_biduality_map_hom
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {K M : BoundedConstructible
@@ -108,12 +110,14 @@ theorem integral_qbar_biduality_comparison
       (boundedConstructibleUpperShriek ℓ a).mapIso
         (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
   let : T.Braided := by
+    constructor
+    intro K M
     exact ObjectProperty.braided_lift_comp (boundedConstructible _) (boundedConstructible _)
       (boundedConstructible _)
       (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor
       (derivedExtendScalarsToPadicAlgCl X.left ℓ E)
       (boundedConstructible_derivedExtendScalars_obj X.left ℓ E)
-      (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E)
+      (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E) K M
   -- Both dual comparisons are invertible on bounded constructible objects.
   have hβ (K : BoundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)) :
