@@ -74,7 +74,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-private instance normalizationExtendScalars_preservesKFlatQuasiIso
+local instance normalizationExtendScalars_preservesKFlatQuasiIso
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     (ModuleCat.extendScalars.{u, u, u} f).PreservesKFlatQuasiIso := by
   constructor
@@ -237,8 +237,6 @@ private theorem normalizationExtension_unit
         erw [Category.comp_id]
   exact ⟨d, hstd⟩
 
-set_option profiler true in
--- The derived unit calculation elaborates several affine carrier identifications.
 /-- The extension counit computes the affine chart source, and intertwines Hom transposes.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7.
 (blueprint: lem-sc-mixed-affine-extension-unit-normalization).

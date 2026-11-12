@@ -39,7 +39,6 @@ private theorem chartModelFactorization_of_units
   rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
   exact h
 
-set_option profiler true in
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7 and 0D5T.

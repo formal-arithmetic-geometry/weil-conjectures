@@ -220,30 +220,15 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
   erw [sectionsComplexUnit_eq, sectionsComplexUnit_eq]
   rw [he]
   have hL := mixedSections_leray_unit g N
-  change (schemeHomPullbackAdjunction.{u, w} g).homEquiv
-      (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj N)
-      (ε.app M ≫ DerivedCategory.Qh.map (𝟙 N)) =
-      DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).homEquiv M N (𝟙 N)) ≫
-      β.app N at hunit
-  have hu : η.app (DerivedCategory.Qh.obj M) ≫
-      (schemeDerivedDirectImage g).map (ε.app M) =
-      DerivedCategory.Qh.map a ≫ β.app N := by
-    erw [CategoryTheory.Functor.map_id, Category.comp_id,
-      Adjunction.homEquiv_id, Adjunction.homEquiv_unit] at hunit
-    exact hunit
-  have hh : s.app M ≫ (schemeDerivedGlobalSections S).map
-      (η.app (DerivedCategory.Qh.obj M)) ≫
-      L.hom.app ((derivedPullback g).obj (DerivedCategory.Qh.obj M)) ≫
-      (schemeGlobalScalarRestriction g).map
-        ((schemeDerivedGlobalSections T).map (ε.app M)) =
-      DerivedCategory.Qh.map ((H.mapHomotopyCategory (.up ℤ)).map a) ≫
-      R.mapDerivedCategoryFactorsh.inv.app ((J.mapHomotopyCategory (.up ℤ)).obj N) ≫
-      (schemeGlobalScalarRestriction g).map (t.app N) := by
-    exact mixedSections_unit_naturality DerivedCategory.Qh
-      (H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
-      (schemeDerivedGlobalSections S) (schemeDerivedDirectImage g)
-      (schemeDerivedGlobalSections T) (schemeGlobalScalarRestriction g)
-      s L a (ε.app M) (η.app (DerivedCategory.Qh.obj M)) (β.app N) _ hu hL
+  have hu := hunit
+  erw [CategoryTheory.Functor.map_id, Category.comp_id,
+    Adjunction.homEquiv_id, Adjunction.homEquiv_unit] at hu
+  have hh := mixedSections_unit_naturality DerivedCategory.Qh
+    (H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (schemeDerivedGlobalSections S) (schemeDerivedDirectImage g)
+    (schemeDerivedGlobalSections T) (schemeGlobalScalarRestriction g)
+    s L a (ε.app M) (η.app (DerivedCategory.Qh.obj M)) (β.app N) _ hu hL
+  dsimp only [Functor.comp_map] at hh
   have ha : (H.mapHomotopyCategory (.up ℤ)).map a =
       (HomotopyCategory.quotient _ (.up ℤ)).map
         ((d.mapHomologicalComplex (.up ℤ)).app C) := by
