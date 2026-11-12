@@ -181,6 +181,7 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
+set_option profiler true in
 -- the conjugates of the composition isomorphisms of derived pullbacks are large terms
 /-- **Associativity of the composition isomorphisms of derived pushforwards**: the two ways of
 identifying `R(a ≫ b ≫ c)_*` with `Ra_* ⋙ Rb_* ⋙ Rc_*` agree. It is the conjugate of the
@@ -246,6 +247,7 @@ lemma derivedUnitTransport_eq_conjugate {G G' T S : Scheme.{u}} (s : G ⟶ G') {
   subst hp hq
   exact Category.comp_id _
 
+set_option profiler true in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The unit transport of a composite**: the unit transport along `s` of `R(g' ≫ j)_*
 L(g' ≫ ε)^*` is `Rj_*` of the unit transport along `s` of `Rg'_* Lg'^*` at `Lε^* A`, up to the
@@ -374,6 +376,7 @@ lemma Hom.autAction_eq_derivedUnitTransport (M : NearbyCyclesModel X X')
 variable (N : NearbyCyclesModel X X') {L : Type u} [Field L] (h : N.generic ⟶ Spec (.of L))
   (L' : Type u) [Field L'] [Algebra L L']
 
+set_option profiler true in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The Galois action on the nearby cycles of a finite Galois layer** is, through the
 canonical isomorphism `κ` (`NearbyCyclesModel.galoisLayerExchangeIso`), `Li^* Rj_*` of the unit
