@@ -55,7 +55,7 @@ open Scheme
 
 -- Derived pullbacks repeatedly request these same graded tensor properties. Prove them
 -- once for module objects, instead of rebuilding their colimit instances at each use.
-/-- Graded tensor products of module objects admit the fourfold tensor comparison. -/
+/-- Graded tensor products of module objects have the fourfold tensor comparison. -/
 lemma finiteSupportTensorFour (T : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (W X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
@@ -178,6 +178,28 @@ lemma isClosed_singleton_of_isImmersion (hM : M.IsTraitModelOver q g) {n : Type 
   exact AffineSpace.isClosed_singleton_of_forall_isClosed_singleton_reindex
     (⟨0⟩ : ULift.{u} (Fin 1)) _ fun a ↦ by
     simpa using hx a
+
+/-- Closed special coordinates of a pulled-back chart give a closed image point. -/
+private lemma isClosed_singleton_image_of_closed_specialCoordinates
+    (hM : M.IsTraitModelOver q g) {Z : Scheme.{u}} {Z' : Over (Spec (.of k'))}
+    {P : NearbyCyclesModel Z Z'.left} {f : Z ⟶ X} {f' : Z'.left ⟶ X'.left}
+    (φ : P.Hom M f f') {qP : P.total ⟶ trait k'}
+    {gP : P.generic ⟶ Spec (.of (traitGenericField k'))} (hP : P.IsTraitModelOver qP gP)
+    (hqP : qP = φ.total ≫ q) {ι : Type u} (c : M.total ⟶ 𝔸(ι; trait k')) [IsImmersion c]
+    (hc : c ≫ 𝔸(ι; trait k') ↘ trait k' = q) (z : Z'.left)
+    (hcoord : ∀ a : ι, (φ.total ≫ c ≫ AffineSpace.reindex
+      (fun _ : ULift.{u} (Fin 1) ↦ a) (trait k')) ≫
+        𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = qP)
+    (hz : ∀ a, IsClosed {(specialCoordinate hP
+      (φ.total ≫ c ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (hcoord a)) z}) :
+    IsClosed {f' z} := by
+  refine isClosed_singleton_of_isImmersion hM c hc _ fun a ↦ ?_
+  have h := hz a
+  rwa [show specialCoordinate hP
+      (φ.total ≫ c ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (hcoord a) =
+      f' ≫ specialCoordinate hM c hc ≫ AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
+    rw [← specialCoordinate_comp_reindex hM c hc]
+    exact specialCoordinate_comp_hom hM φ hP hqP _ _, Scheme.Hom.comp_apply] at h
 
 end SpecialCoordinate
 
@@ -325,6 +347,85 @@ private lemma locallyEmbedsInAffineSpace_slice_coordinate {T S S' : Scheme.{u}}
   obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex c a σ
   exact Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc'
 
+section ChartCoordinates
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {k' : Type u} [Field k'] {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
+  {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
+  {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X} {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y}
+  {f₂' : Z'.left ⟶ Y'.left} {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂'}
+  {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
+  {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
+
+/-- Global affine charts give coordinates detecting closed points on the special fibre of a
+product, with invertible Künneth maps on their generic fibres. -/
+private theorem exists_coordinates_isIso_kunnethMap_of_charts
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
+    [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
+    (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
+    (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula Λ k' (m + m' - 1))
+    {ιV ιW : Type u} [Finite ιV] [Finite ιW]
+    (cV : M.total ⟶ 𝔸(ιV; trait k')) [IsImmersion cV]
+    (hcV : cV ≫ 𝔸(ιV; trait k') ↘ trait k' = qM) (hcardV : Nat.card ιV ≤ m)
+    (cW : N.total ⟶ 𝔸(ιW; trait k')) [IsImmersion cW]
+    (hcW : cW ≫ 𝔸(ιW; trait k') ↘ trait k' = qN) (hcardW : Nat.card ιW ≤ m')
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (hA : boundedConstructible (condensedRingObj Λ X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))} (hB : boundedConstructible (condensedRingObj Λ Y) B) :
+    ∃ (ι : Type u) (_ : Finite ι) (b : ι → (Z'.left ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))),
+      (∀ i, LocallyOfFiniteType (b i)) ∧
+      (∀ v : Z'.left, (∀ i, IsClosed {b i v}) → IsClosed {v}) ∧
+      ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))
+        (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧
+        IsIso (L((pullback.fst (b i) ξ)^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) := by
+  let coord : ιV ⊕ ιW → (P.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) :=
+    Sum.elim (fun a ↦ φ₁.total ≫ cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
+      (fun a ↦ φ₂.total ≫ cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
+  have hcoord : ∀ i, coord i ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' =
+      φ₁.total ≫ qM := by
+    rintro (a | a)
+    · simp [coord, hcV]
+    · simp [coord, hcW, hpb.w]
+  refine ⟨ιV ⊕ ιW, inferInstance, fun i ↦ specialCoordinate hP (coord i) (hcoord i),
+    fun i ↦ ?_, fun v hv ↦ ?_, fun i ↦ ?_⟩
+  · have : LocallyOfFiniteType Z'.hom :=
+      MorphismProperty.of_isPullback hP.isPullback_i hP.locallyOfFiniteType
+    have : LocallyOfFiniteType (specialCoordinate hP (coord i) (hcoord i) ≫
+        𝔸(ULift.{u} (Fin 1); Spec (.of k')) ↘ Spec (.of k')) := by
+      rw [specialCoordinate_over]
+      infer_instance
+    exact locallyOfFiniteType_of_comp _ (𝔸(ULift.{u} (Fin 1); Spec (.of k')) ↘ Spec (.of k'))
+  · exact isClosed_singleton_special hM hN hpb hP v
+      (isClosed_singleton_image_of_closed_specialCoordinates hM φ₁ hP rfl cV hcV v
+        (fun a ↦ hcoord (.inl a)) (fun a ↦ hv (.inl a)))
+      (isClosed_singleton_image_of_closed_specialCoordinates hN φ₂ hP hpb.w cW hcW v
+        (fun a ↦ hcoord (.inr a)) (fun a ↦ hv (.inr a)))
+  · refine ⟨traitSliceField k', inferInstance, traitSlicePoint (traitSliceCoord k'),
+      ⟨⊥, Ideal.isPrime_bot⟩, isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
+    refine isIso_map_specialCoordinate_of_isIso_sliceSpecialMap Λ (traitSliceCoord k')
+      hP (hcoord i) _ ?_
+    rcases i with a | a
+    · have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
+        Finite.card_subtype_lt (x := a) (by simp)
+      exact (hslice (by omega)).isIso φ₁ φ₂ hM hN hpb hP hgen inferInstance
+        inferInstance inferInstance
+        (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
+        (by omega) (locallyEmbedsInAffineSpace_slice_coordinate cV a _) hm' heM heN hA hB
+    · have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
+        Finite.card_subtype_lt (x := a) (by simp)
+      exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hM hN hpb hP hgen
+        (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW]) Λ
+        (hslice (by omega)) (by omega) hm
+        (locallyEmbedsInAffineSpace_slice_coordinate cW a _) heM heN hA hB
+
+end ChartCoordinates
+
 section FiniteSupport
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
@@ -398,120 +499,38 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
-  have : LocallyOfFiniteType X'.hom := MorphismProperty.of_isPullback
-    hM.isPullback_i hM.locallyOfFiniteType
-  have : LocallyOfFiniteType Y'.hom := MorphismProperty.of_isPullback
-    hN.isPullback_i hN.locallyOfFiniteType
-  have : JacobsonSpace X'.left := LocallyOfFiniteType.jacobsonSpace X'.hom
-  have : JacobsonSpace Y'.left := LocallyOfFiniteType.jacobsonSpace Y'.hom
   have := hM.isTraitModel.isNoetherian_total
   have := hN.isTraitModel.isNoetherian_total
   have := hP.isTraitModel.isNoetherian_total
   have := hM.locallyOfFiniteType
   have := hN.locallyOfFiniteType
   refine exists_finset_isIso_of_forall_exists_coordinates Z' _ hsrc htgt fun z ↦ ?_
-  -- local charts around the images of `z` in the total spaces
   obtain ⟨V, hzV, ιV, _, cV, hcardV, hcVi, hcV⟩ := hm (φ₁.total (P.i z))
   obtain ⟨W, hzW, ιW, _, cW, hcardW, hcWi, hcW⟩ := hm' (φ₂.total (P.i z))
   have : QuasiCompact V.ι := inferInstance
   have : QuasiCompact W.ι := inferInstance
   have : QuasiCompact (productOpen φ₁ φ₂ V W).ι := inferInstance
-  -- the restriction of the product to `V ×_S W`
-  set U := productOpen φ₁ φ₂ V W
-  set ψ₁ := φ₁.restrictOpen U V inf_le_left
-  set ψ₂ := φ₂.restrictOpen U W inf_le_right
+  let U := productOpen φ₁ φ₂ V W
+  let ψ₁ := φ₁.restrictOpen U V inf_le_left
+  let ψ₂ := φ₂.restrictOpen U W inf_le_right
   have hMV := hM.restrictOpen V
   have hNW := hN.restrictOpen W
   have hpbU : IsPullback ψ₁.total ψ₂.total (V.ι ≫ qM) (W.ι ≫ qN) := isPullback_resLE_inf hpb V W
   have hPU := isTraitModelOver_restrictOpen_productOpen (φ₂ := φ₂) hP V W
   have heMV : (M.restrictOpen V).j ≫ V.ι ≫ eM = (M.restrictOpen V).ε := by simp [← heM]
   have heNW : (N.restrictOpen W).j ≫ W.ι ≫ eN = (N.restrictOpen W).ε := by simp [← heN]
-  have hR := isKunnethRestriction_restrictOpen φ₁ φ₂ V W
   have hgenU : ψ₂.generic ≫ (N.j ⁻¹ᵁ W).ι ≫ gN = ψ₁.generic ≫ (M.j ⁻¹ᵁ V).ι ≫ gM := by
     simp [ψ₁, ψ₂, Scheme.Hom.resLE_comp_ι_assoc, hgen]
-  -- the coordinates of `V ×_S W`
-  let coord : ιV ⊕ ιW →
-      ((P.restrictOpen U).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) :=
-    Sum.elim (fun a ↦ ψ₁.total ≫ cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
-      (fun a ↦ ψ₂.total ≫ cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
-  have hcoord : ∀ i, coord i ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' =
-      ψ₁.total ≫ V.ι ≫ qM := by
-    rintro (a | a)
-    · simp [coord, hcV]
-    · simp [coord, hcW, hpbU.w]
-  refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ιV ⊕ ιW, inferInstance,
-    fun i ↦ specialCoordinate hPU (coord i) (hcoord i), fun i ↦ ?_, fun v hv ↦ ?_, fun i ↦ ?_⟩
-  · -- the coordinates are locally of finite type
-    have : LocallyOfFiniteType (P.restrictSpecialFibre U).hom :=
-      MorphismProperty.of_isPullback hPU.isPullback_i hPU.locallyOfFiniteType
-    have h := specialCoordinate_over hPU (coord i) (hcoord i)
-    have : LocallyOfFiniteType (specialCoordinate hPU (coord i) (hcoord i) ≫
-        𝔸(ULift.{u} (Fin 1); Spec (.of k')) ↘ Spec (.of k')) := by
-      rw [h]
-      infer_instance
-    exact locallyOfFiniteType_of_comp _ (𝔸(ULift.{u} (Fin 1); Spec (.of k')) ↘ Spec (.of k'))
-  · -- the coordinates detect closed points
-    have hx : IsClosed {φ₁.restrictOpenSpecial U V inf_le_left v} := by
-      refine isClosed_singleton_of_isImmersion hMV cV hcV _ fun a ↦ ?_
-      have := hv (Sum.inl a)
-      dsimp only at this
-      rwa [show specialCoordinate hPU (coord (Sum.inl a)) (hcoord (Sum.inl a)) =
-          φ₁.restrictOpenSpecial U V inf_le_left ≫ specialCoordinate hMV cV hcV ≫
-            AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
-        rw [← specialCoordinate_comp_reindex hMV cV hcV]
-        exact specialCoordinate_comp_hom hMV ψ₁ hPU rfl _ _, Scheme.Hom.comp_apply] at this
-    have hy : IsClosed {φ₂.restrictOpenSpecial U W inf_le_right v} := by
-      refine isClosed_singleton_of_isImmersion hNW cW hcW _ fun a ↦ ?_
-      have := hv (Sum.inr a)
-      dsimp only at this
-      rwa [show specialCoordinate hPU (coord (Sum.inr a)) (hcoord (Sum.inr a)) =
-          φ₂.restrictOpenSpecial U W inf_le_right ≫ specialCoordinate hNW cW hcW ≫
-            AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
-        rw [← specialCoordinate_comp_reindex hNW cW hcW]
-        exact specialCoordinate_comp_hom hNW ψ₂ hPU hpbU.w _ _, Scheme.Hom.comp_apply] at this
-    have hx' := (M.i ⁻¹ᵁ V).ι.closedPoints_subset_preimage_closedPoints hx
-    have hy' := (N.i ⁻¹ᵁ W).ι.closedPoints_subset_preimage_closedPoints hy
-    have hx'' : IsClosed {f₁' ((P.i ⁻¹ᵁ U).ι v)} := by
-      have h : φ₁.restrictOpenSpecial U V inf_le_left ≫ (M.i ⁻¹ᵁ V).ι = (P.i ⁻¹ᵁ U).ι ≫ f₁' :=
-        Scheme.Hom.resLE_comp_ι _ _
-      change IsClosed {((P.i ⁻¹ᵁ U).ι ≫ f₁') v}
-      rw [← h]
-      exact hx'
-    have hy'' : IsClosed {f₂' ((P.i ⁻¹ᵁ U).ι v)} := by
-      have h : φ₂.restrictOpenSpecial U W inf_le_right ≫ (N.i ⁻¹ᵁ W).ι = (P.i ⁻¹ᵁ U).ι ≫ f₂' :=
-        Scheme.Hom.resLE_comp_ι _ _
-      change IsClosed {((P.i ⁻¹ᵁ U).ι ≫ f₂') v}
-      rw [← h]
-      exact hy'
-    exact (P.i ⁻¹ᵁ U).ι.isClosed_singleton_of_isClosed_singleton
-      (isClosed_singleton_special hM hN hpb hP _ hx'' hy'')
-  · -- the map is invertible over the generic point of each coordinate line
-    refine ⟨traitSliceField k', inferInstance, traitSlicePoint (traitSliceCoord k'),
-      ⟨⊥, Ideal.isPrime_bot⟩,
-      isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
-    have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
-    have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-    have hslice : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
-        Profinite.padicAlgClRingObj ℓ⟧).map (kunnethMap (Profinite.padicAlgClRingObj ℓ) ψ₁ ψ₂
-          (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
-          (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))) := by
-      rcases i with a | a
-      · have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
-          Finite.card_subtype_lt (x := a) (by simp)
-        exact (hslice (by omega)).isIso ψ₁ ψ₂ hMV hNW hpbU hPU hgenU inferInstance
-          inferInstance inferInstance
-          (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
-          (by omega) (locallyEmbedsInAffineSpace_slice_coordinate cV a _)
-          (hm'.restrict W) heMV heNW hA' hB'
-      · have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
-          Finite.card_subtype_lt (x := a) (by simp)
-        exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
-          (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW]) _
-          (hslice (by omega)) (by omega) (hm.restrict V)
-          (locallyEmbedsInAffineSpace_slice_coordinate cW a _) heMV heNW hA' hB'
-    refine isIso_map_specialCoordinate_of_isIso_sliceSpecialMap _ (traitSliceCoord k')
-      hPU (hcoord i) _ ?_
-    exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR _ A B).2 hslice
+  have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
+  have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
+  obtain ⟨ι, hι, b, hb, hcl, hgen⟩ := exists_coordinates_isIso_kunnethMap_of_charts
+    (Profinite.padicAlgClRingObj ℓ) hMV hNW hpbU hPU hgenU (hm.restrict V) (hm'.restrict W)
+    hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB'
+  refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ι, hι, b, hb, hcl, fun i ↦ ?_⟩
+  obtain ⟨K, hK, ξ, t, ht, hi⟩ := hgen i
+  refine ⟨K, hK, ξ, t, ht, ?_⟩
+  exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _
+    (isKunnethRestriction_restrictOpen φ₁ φ₂ V W) _ A B).2 hi
 
 end FiniteSupport
 
