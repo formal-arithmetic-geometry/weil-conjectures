@@ -250,7 +250,14 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
   let C₀ := L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C
   have hC₀ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) N.generic
       ((finiteCoefficientDerivedEquivalence N.generic T₀).functor.obj C₀) := hC
-  obtain ⟨K, a, hKa, hterms, he⟩ := extract_complex_of_plusEtaleOrigin T₀ C₀ hC₀
+  let hcomplex := extract_complex_of_plusEtaleOrigin T₀ C₀ hC₀
+  let K := hcomplex.choose
+  have hcomplexK := hcomplex.choose_spec
+  let a := hcomplexK.choose
+  have hcomplexa := hcomplexK.choose_spec
+  have hKa := hcomplexa.1
+  have hterms := hcomplexa.2.1
+  have he := hcomplexa.2.2
   let e := he.some
   choose F₀ hF₀ using hterms
   have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
