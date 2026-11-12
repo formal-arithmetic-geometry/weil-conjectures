@@ -192,7 +192,7 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q
   CochainComplex.IsKFlatIndependentCoefficients homComplex homComplexFunctor
   derivedInternalHomOfUniverses SheafOfModules.monoidalCategory
   coefficientHomResolution coefficientHomResolutionIso coefficientHomResolutionInverse
-  coefficientHomSectionEvaluation
+  coefficientHomSectionEvaluation CoefficientTensorUncurryModel
 
 -- The independent-universe representative square has large dependent module types.
 def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -228,9 +228,12 @@ theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : Grothendieck
         (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q)) ⋙ T.tensor))
     (hcomparison : comparison = tensorModelsComparison J R S T M) :
     CoefficientTensorUncurryModel.{r, c, v, w} J R T comparison := by
+  let source : CoefficientTensorUncurryModel.{r, c, v, w} J R S M.comparison :=
+    M.uncurry_model
+  unfold CoefficientTensorUncurryModel at source ⊢
   rw [hcomparison]
   intro P L N φ
-  obtain ⟨ψ, hψ, he⟩ := M.uncurry_model P L N φ
+  obtain ⟨ψ, hψ, he⟩ := source P L N φ
   refine ⟨ψ, hψ, ?_⟩
   change (M.comparison.hom.app (P, L) ≫
     (CoefficientClosedStructure.comparison S T).hom.app
