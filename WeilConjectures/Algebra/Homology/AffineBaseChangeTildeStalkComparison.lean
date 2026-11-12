@@ -29,6 +29,8 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option profiler true in
+set_option maxHeartbeats 800000 in
 -- Comparing the explicit stalk and module composites unfolds several derived functors.
 private theorem affineBaseChangeTildeModuleMap_localized_aux2
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
@@ -61,6 +63,10 @@ private theorem affineBaseChangeTildeModuleMap_localized_aux2
           (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ)
     (m : ModuleCat.BaseDerivedTensorCohomologyModel R A R' M A')
     (p : PrimeSpectrum A') :
+    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+      (@id (ModuleCat.{u} A ⥤
+        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+        (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)
     let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩
     let V := (affineDerivedCohomologyModules A' i).obj L
     let U := affineBaseChangeTildeModule R A R' A' M m i
@@ -69,10 +75,7 @@ private theorem affineBaseChangeTildeModuleMap_localized_aux2
     let r := affineBaseChangeIntoPullback
         (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom φf'))
         (Spec.map (CommRingCat.ofHom (algebraMap R R'))) (Spec.map (CommRingCat.ofHom φg'))
-        sq K ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-      (@id (ModuleCat.{u} A ⥤
-        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-        (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) e hc p i
+        sq K P e hc p i
     ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left,
       ∀ x, affineDerivedCohomologyStalkIso A' i p L
         (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)  := by
@@ -92,7 +95,7 @@ private theorem affineBaseChangeTildeModuleMap_localized_aux2
       a₀ ≫ b.hom := by
     dsimp only [affineBaseChangeTildeModuleMap, affineBaseChangeTildeModule, a₀,
       Iso.refl_hom]
-    simp only [Category.comp_id, Category.assoc]
+    erw [Category.comp_id, Category.assoc]
   have hloc : LocalizedModule.map p.asIdeal.primeCompl
       (affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b).hom x =
         LocalizedModule.map p.asIdeal.primeCompl b.hom.hom
@@ -229,6 +232,10 @@ theorem affineBaseChangeTildeModuleMap_localized
           SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
           (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ)
     (m : ModuleCat.BaseDerivedTensorCohomologyModel R A R' M A') :
+    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+      (@id (ModuleCat.{u} A ⥤
+        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+        (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)
     let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩
     let V := (affineDerivedCohomologyModules A' i).obj L
     let U := affineBaseChangeTildeModule R A R' A' M m i
@@ -238,10 +245,7 @@ theorem affineBaseChangeTildeModuleMap_localized
       let r := affineBaseChangeIntoPullback
         (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom φf'))
         (Spec.map (CommRingCat.ofHom (algebraMap R R'))) (Spec.map (CommRingCat.ofHom φg'))
-        sq K ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-      (@id (ModuleCat.{u} A ⥤
-        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-        (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) e hc p i
+        sq K P e hc p i
       ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left,
         ∀ x, affineDerivedCohomologyStalkIso A' i p L
           (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)  := by
