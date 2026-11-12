@@ -220,6 +220,43 @@ theorem derivedLowerShriekHom_comp_app (hc : a ≫ b = c)
     reassoc_of% hn]
   rfl
 
+/-- Blueprint `proposition-six-operations-change-coefficients--11`: **the `f^!` comparison is
+transitive in the coefficients.** Let `Rf_! ⊣ f^!` be right adjoints of the compactly supported
+direct images over `Λ`, `Λ'` and `Λ''`, and suppose that the (Shriek) comparisons for `a`, `b`
+and `c = a ≫ b` are isomorphisms (as they are on bounded constructible complexes). The `f^!`
+comparisons `f^! ⋙ T ⟶ T ⋙ f^!`, defined as the mates of the inverses of the (Shriek)
+comparisons, compose: the one for `c` is the composite of those for `a` and `b`, up to the
+transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars on `X` and on
+`Y`. This is the formal consequence of `derivedLowerShriekHom_comp_app` given by
+`mateEquiv_inv_app_comp_of_hom_app_comp`. -/
+theorem mateEquiv_inv_derivedLowerShriekHom_comp_app (hc : a ≫ b = c)
+    {UΛ : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}
+    {UΛ' : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ' Y)) ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))}
+    {UΛ'' : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ'' Y)) ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ'' X))}
+    (adj : R(f)_!⟦Λ⟧ ⊣ UΛ) (adj' : R(f)_!⟦Λ'⟧ ⊣ UΛ') (adj'' : R(f)_!⟦Λ''⟧ ⊣ UΛ'')
+    [IsIso (derivedLowerShriekHom a f)] [IsIso (derivedLowerShriekHom b f)]
+    [IsIso (derivedLowerShriekHom c f)]
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom c f)))).natTrans.app K =
+      (Mod.derivedExtendScalarsCompIso (coefficientMap a X) (coefficientMap b X)
+          (coefficientMap c X) (coefficientMap_comp_eq a b c hc X)).hom.app (UΛ.obj K) ≫
+        L(Mod.extendScalars (coefficientMap b X)).map ((mateEquiv adj adj'
+          (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom a f)))).natTrans.app K) ≫
+        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom b f)))).natTrans.app
+          (L(Mod.extendScalars (coefficientMap a Y)).obj K) ≫
+        UΛ''.map ((Mod.derivedExtendScalarsCompIso (coefficientMap a Y) (coefficientMap b Y)
+          (coefficientMap c Y) (coefficientMap_comp_eq a b c hc Y)).inv.app K) := by
+  have h := derivedLowerShriekHom_comp_app a b c f hc
+  have h2 := mateEquiv_inv_app_comp_of_app_comp adj adj' adj''
+    (Mod.derivedExtendScalarsCompIso _ _ _ (coefficientMap_comp_eq a b c hc X))
+    (Mod.derivedExtendScalarsCompIso _ _ _ (coefficientMap_comp_eq a b c hc Y))
+    (derivedLowerShriekHom a f) (derivedLowerShriekHom b f) (derivedLowerShriekHom c f)
+  have h3 := h2 (fun M => by rw [h M]) K
+  exact h3
+
 end LowerShriek
 
 end AlgebraicGeometry.ProEtale.CondensedRing

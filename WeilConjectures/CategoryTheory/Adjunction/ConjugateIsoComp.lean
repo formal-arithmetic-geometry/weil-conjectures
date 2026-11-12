@@ -186,6 +186,87 @@ lemma mateEquiv_inv_app_comp_of_hom_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq 
   rw [← cancel_mono (RX.map (cH.hom.app K)), hc]
   simp
 
+
+
+/-- The form of `mateEquiv_inv_app_comp_of_hom_app_comp` for natural transformations of left
+adjoints which are isomorphisms. -/
+lemma mateEquiv_inv_app_comp_of_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ Hq ⋙ Hp)
+    (αq : LZ ⋙ Hq ⟶ Gq ⋙ LY) (αp : LY ⋙ Hp ⟶ Gp ⋙ LX) (αpq : LZ ⋙ Hpq ⟶ Gpq ⋙ LX) [IsIso αq]
+    [IsIso αp] [IsIso αpq]
+    (h : ∀ M, αpq.app M = cH.hom.app (LZ.obj M) ≫ Hp.map (αq.app M) ≫
+      αp.app (Gq.obj M) ≫ LX.map (cG.inv.app M)) (K : BZ) :
+    (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _ (inv αpq))).natTrans.app K =
+      cG.hom.app (RZ.obj K) ≫
+        Gp.map ((mateEquiv adjZ adjY (TwoSquare.mk _ _ _ _ (inv αq))).natTrans.app K) ≫
+        (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ (inv αp))).natTrans.app (Hq.obj K) ≫
+        RX.map (cH.inv.app K) :=
+  mateEquiv_inv_app_comp_of_hom_app_comp adjZ adjY adjX cG cH (asIso αq) (asIso αp) (asIso αpq)
+    h K
 end CompCoherence
+
+section VerticalComp
+
+variable {AX AY AZ BX BY BZ : Type*} [Category* AX] [Category* AY] [Category* AZ]
+  [Category* BX] [Category* BY] [Category* BZ]
+  {Lf : AX ⥤ AY} {Rf : AY ⥤ AX} {Lg : AY ⥤ AZ} {Rg : AZ ⥤ AY} {Lgf : AX ⥤ AZ} {Rgf : AZ ⥤ AX}
+  {Lfₜ : BX ⥤ BY} {Rfₜ : BY ⥤ BX} {Lgₜ : BY ⥤ BZ} {Rgₜ : BZ ⥤ BY} {Lgfₜ : BX ⥤ BZ}
+  {Rgfₜ : BZ ⥤ BX} {TX : AX ⥤ BX} {TY : AY ⥤ BY} {TZ : AZ ⥤ BZ}
+  (adjf : Lf ⊣ Rf) (adjg : Lg ⊣ Rg) (adjgf : Lgf ⊣ Rgf) (adjfₜ : Lfₜ ⊣ Rfₜ) (adjgₜ : Lgₜ ⊣ Rgₜ)
+  (adjgfₜ : Lgfₜ ⊣ Rgfₜ)
+
+/-- **Right adjoint comparisons defined as mates are compatible with composition.** Let
+`ι : L ⋙ T ≅ T ⋙ Lₜ` be commutation isomorphisms of left adjoints (e.g. the comparisons
+`Rf_! ⋙ T ≅ T ⋙ Rf_!` for morphisms `f`, `g` and `g ∘ f`), compatible with composition
+isomorphisms `e : L_{gf} ≅ L_f ⋙ L_g` and `eₜ` (hypothesis `h`, e.g. with `R(gf)_! ≅ Rg_! Rf_!`).
+Then the right adjoint comparisons `ρ : R ⋙ T ⟶ T ⋙ Rₜ` defined as the mates of the inverses
+`ι⁻¹` (e.g. the comparisons `f^! ⋙ T ⟶ T ⋙ f^!`) are compatible with the conjugate composition
+isomorphisms `R_{gf} ≅ R_g ⋙ R_f` (e.g. `(gf)^! ≅ f^! g^!`). -/
+lemma mateEquiv_inv_app_comp_conjugateIsoEquiv (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ)
+    (ιg : Lg ⋙ TZ ≅ TY ⋙ Lgₜ) (ιgf : Lgf ⋙ TZ ≅ TX ⋙ Lgfₜ) (e : Lgf ≅ Lf ⋙ Lg)
+    (eₜ : Lgfₜ ≅ Lfₜ ⋙ Lgₜ)
+    (h : NatTrans.SquareCompatible ιgf (Functor.pasteSquareIso ιf ιg) e.hom eₜ.hom) (K : AZ) :
+    TX.map ((conjugateIsoEquiv adjgf (adjf.comp adjg) e.symm).hom.app K) ≫
+        (mateEquiv adjf adjfₜ (TwoSquare.mk _ _ _ _ ιf.inv)).natTrans.app (Rg.obj K) ≫
+        Rfₜ.map ((mateEquiv adjg adjgₜ (TwoSquare.mk _ _ _ _ ιg.inv)).natTrans.app K) =
+      (mateEquiv adjgf adjgfₜ (TwoSquare.mk _ _ _ _ ιgf.inv)).natTrans.app K ≫
+        (conjugateIsoEquiv adjgfₜ (adjfₜ.comp adjgₜ) eₜ.symm).hom.app (TZ.obj K) := by
+  have hS : TwoSquare.mk _ _ _ _ ιgf.inv =
+      (((TwoSquare.mk _ _ _ _ ιf.inv) ≫ᵥ (TwoSquare.mk _ _ _ _ ιg.inv)).whiskerLeft
+        e.inv).whiskerRight eₜ.hom := by
+    ext M
+    have hM := h M
+    simp only [Functor.pasteSquareIso_hom_app] at hM
+    dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
+      TwoSquare.natTrans, TwoSquare.mk]
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+      Functor.comp_obj]
+    rw [← cancel_epi (ιgf.hom.app M), Iso.hom_inv_id_app, ← cancel_mono (TZ.map (e.hom.app M)),
+      Category.id_comp, Category.assoc, Category.assoc, Category.assoc, ← TZ.map_comp,
+      Iso.inv_hom_id_app]
+    dsimp only [Functor.comp_obj]
+    simp only [CategoryTheory.Functor.map_id, Category.comp_id]
+    rw [← reassoc_of% hM]
+    simp
+  have key := congr_arg (mateEquiv adjgf adjgfₜ) hS
+  rw [mateEquiv_conjugateEquiv_vcomp adjgf (adjfₜ.comp adjgₜ) adjgfₜ,
+    conjugateEquiv_mateEquiv_vcomp adjgf (adjf.comp adjg) (adjfₜ.comp adjgₜ),
+    mateEquiv_hcomp] at key
+  have keyK := NatTrans.congr_app (congr_arg TwoSquare.natTrans key) K
+  dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
+    TwoSquare.natTrans, TwoSquare.mk] at keyK
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Functor.comp_obj] at keyK
+  rw [keyK, conjugateIsoEquiv_apply_hom, conjugateIsoEquiv_apply_hom]
+  have hc : ((conjugateEquiv (adjfₜ.comp adjgₜ) adjgfₜ) eₜ.hom).app (TZ.obj K) ≫
+      ((conjugateEquiv adjgfₜ (adjfₜ.comp adjgₜ)) eₜ.inv).app (TZ.obj K) = 𝟙 _ := by
+    rw [← NatTrans.comp_app, conjugateEquiv_comp, Iso.inv_hom_id,
+      conjugateEquiv_id, NatTrans.id_app]
+  simp only [Iso.symm_hom, Category.assoc, hc]
+  dsimp only [Functor.comp_obj]
+  simp only [Category.comp_id]
+
+end VerticalComp
 
 end CategoryTheory
