@@ -51,13 +51,14 @@ private theorem signed_summand_of_comparison
     (c₀ : F.obj X ⟶ X') (c₁ : F.obj Y ⟶ Y') [Mono c₁]
     (u₀ : F.obj Z ⟶ Z') (u₁ : F.obj W ⟶ W')
     (j₀ : Z' ⟶ X') (j₁ : W' ⟶ Y') (b : X' ⟶ Y') (t : Z' ⟶ W')
-    (a e : ℤ)
+    (a a' e : ℤ) (ha : a = a')
     (hc : F.map f ≫ c₁ = c₀ ≫ b)
     (hi₀ : F.map i₀ ≫ c₀ = a • (u₀ ≫ j₀))
-    (hi₁ : F.map i₁ ≫ c₁ = a • (u₁ ≫ j₁))
+    (hi₁ : F.map i₁ ≫ c₁ = a' • (u₁ ≫ j₁))
     (hb : j₀ ≫ b = e • (t ≫ j₁))
     (hs : F.map s ≫ u₁ = u₀ ≫ t) :
     i₀ ≫ f = e • (s ≫ i₁) := by
+  subst a'
   apply F.map_injective
   apply (cancel_mono c₁).1
   simp only [Functor.map_comp, Functor.map_zsmul, Preadditive.zsmul_comp,
@@ -125,9 +126,9 @@ theorem nativeRingedSwapComplex_summand
   refine signed_summand_of_comparison E _ s.hom _ _
     ((A.chain Q P).hom.f n) ((A.chain P Q).hom.f n)
     (A.underived (Q.X q) (P.X p)).hom (A.underived (P.X p) (Q.X q)).hom
-    _ _ _ _ ((p * q).negOnePow : ℤ) _ h ?_ ?_
+    _ _ _ _ ((q * p).negOnePow : ℤ) ((p * q).negOnePow : ℤ) _
+    (by rw [mul_comm q p]) h
+    (A.summand Q P q p n hqp hpq) (A.summand P Q p q n hpq hqp)
     (ringedSwap_summand b.J b.R (Ec.obj P) (Ec.obj Q) p q n hpq hqp) hs
-  · simpa only [nativeRingedTensorSign, mul_comm q p] using A.summand Q P q p n hqp hpq
-  · exact A.summand P Q p q n hpq hqp
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
