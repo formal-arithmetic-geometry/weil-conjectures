@@ -326,7 +326,6 @@ private theorem castExtension_gamma
   exact HEq.rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 -- This assembly combines totalization, two localizations and the fixed-model square.
 private theorem extensionAbstract
     (E : ProEtaleWeilSheaf k₀ l U ⥤ ProEtaleWeilSheaf k₀ l Z)
