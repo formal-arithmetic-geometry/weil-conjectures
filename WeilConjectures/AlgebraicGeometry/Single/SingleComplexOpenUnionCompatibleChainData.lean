@@ -121,9 +121,7 @@ private theorem nested_arrow_iso
   obtain ⟨a, b, hab⟩ := transport
   exact ⟨Arrow.isoMk a b hab.symm⟩
 
-set_option maxHeartbeats 1200000 in
 set_option profiler true in
--- Nested scheme and derived-category comparisons need additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible chain models before the short exact cylinder construction.
@@ -212,10 +210,10 @@ theorem singleComplexOpenComparison_union_compatible_chain_data
     exact W.ι_preimage_self
   obtain ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', hα, hU, hV, hγ⟩ :=
     relativeMV_cover_rows fW fW' g q sqW KW KW' φW A B hcover
-  obtain ⟨iU⟩ := nested_arrow_iso f f' g g' sq.w K K' φ W U le_sup_left
-  obtain ⟨iV⟩ := nested_arrow_iso f f' g g' sq.w K K' φ W V le_sup_right
-  obtain ⟨iUV⟩ := nested_arrow_iso f f' g g' sq.w K K' φ W (U ⊓ V)
-    (inf_le_left.trans le_sup_left)
+  let iU := Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W U le_sup_left)
+  let iV := Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W V le_sup_right)
+  let iUV := Classical.choice (nested_arrow_iso f f' g g' sq.w K K' φ W (U ⊓ V)
+    (inf_le_left.trans le_sup_left))
   let b := relativeMVLocalArrow fW fW' g q sqW KW KW' φW
   let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦
     Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)
