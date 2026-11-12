@@ -31,6 +31,13 @@ private theorem reduction_iso_inv_section_of_hom_section
   rw [← h]
   exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
 
+private theorem map_hom_comp_of_symm_eq
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y : C} (e : X ≅ Y) (f : Y ≅ X) (h : e.symm = f) :
+    F.map e.hom ≫ F.map f.hom = 𝟙 (F.obj X) := by
+  subst f
+  rw [← F.map_comp, e.hom_inv_id, F.map_id]
+
 private theorem transportedTensorComparison_square
     {C D : Type*} [Category C] [Category D]
     {T T' : C × C ⥤ C} {S S' : D × D ⥤ D} (F : C ⥤ D)
@@ -383,13 +390,8 @@ private theorem nativeReductionMonoidal
         exact hrepS.symm
       run_tac Lean.logInfo "PH324: before cancellation"
       have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
-          𝟙 _ := by
-        rw [← Functor.map_comp]
-        have hh : beta ≫ κ.hom.app (P, Q) = 𝟙 _ := by
-          change beta ≫ (κ.app (P, Q)).hom = _
-          rw [← hbκ]
-          exact (asIso beta).hom_inv_id
-        rw [hh, CategoryTheory.Functor.map_id]
+          𝟙 _ := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta) (κ.app (P, Q)) hbκ
+      run_tac Lean.logInfo "PH324: before generic square"
       with_unfolding_all
         exact transportedTensorComparison_square F e f m.mu
           (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))
@@ -402,6 +404,7 @@ private theorem nativeReductionMonoidal
           (finiteCochainModel_reductionCounit l E Y D hl n Q hQ)
           (finiteCochainModel_reductionCounit l E Y D hl n _
             (coefficientTotalTensor_isKFlat J R P Q hP hQ)))
+  run_tac Lean.logInfo "PH324: before final tensorator"
   refine ⟨core, ?_⟩
   intro X Z
   have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
