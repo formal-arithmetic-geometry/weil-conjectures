@@ -170,7 +170,6 @@ end ScalarConjugation
 
 -- Identify the comparison before installing shift structures: this is a naturality
 -- calculation independent of the chosen shifts.
-set_option trace.profiler true in
 private theorem integralScalarConjugation_eq
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -246,6 +245,7 @@ private theorem integralScalarConjugation_eq
   have hc := isomorphismComparison_scalarExtension l (Coefficient.{u} l Ω E)
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
     g hX hY K.obj K.property
+  dsimp only [SY] at hkL
   simp only [← hαK, ← hkE, ← hkL] at hc
   have hf : χF.hom = (scalarCompletion l (Coefficient.{u} l Ω E)
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) X).app (FE.obj K.obj) :=
@@ -266,7 +266,6 @@ private theorem integralScalarConjugation_eq
       convert hc using 1)
   exact H.trans (integralScalarConjugation_hom_app eE eL χY χX b K).symm
 
-set_option trace.profiler true in
 /-- The integral scalar comparison preserves the supplied integral pullback shifts.
 Source: the final automorphism sentence in the current blueprint proof of constructible
 truncations, and steps 1--2 of `lem-pod-isomorphism-pullback-scalar-shift`.
