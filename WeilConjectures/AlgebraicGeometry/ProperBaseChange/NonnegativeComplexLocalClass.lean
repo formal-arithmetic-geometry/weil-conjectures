@@ -74,7 +74,6 @@ private theorem localClass_of_cycles {C : Type*} [Category C]
   rw [hd, ← Category.assoc z k, ← Category.assoc (z ≫ k) zD,
     Category.assoc z k zD, hz]
 
-set_option profiler true in
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
 with extension by zero and exact evaluation. No derived category or acyclicity
@@ -231,7 +230,10 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
   have hleft : C.homologyπ q ≫
       ((M.mapHomologyIso E').hom ≫ E'.map (sectionCohomologyTheta B q)) =
       zM ≫ E.map (F.map (B.homologyπ q)) := by
-    simpa only [zM, Category.assoc] using section_comparison_cycles B q V
+    have h := section_comparison_cycles B q V
+    change C.homologyπ q ≫ (M.mapHomologyIso E').hom ≫
+      E'.map (sectionCohomologyTheta B q) = zM ≫ E.map (F.map (B.homologyπ q)) at h
+    exact h
   have hd : E.map (F.map (J.homologyπ (q : ℤ))) ≫ E.map (F.map d.hom) =
       E.map (F.map zD) ≫ E.map (F.map (B.homologyπ q)) := by
     simpa only [Functor.map_comp] using congrArg (fun f ↦ E.map (F.map f)) hdπ

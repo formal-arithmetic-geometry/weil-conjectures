@@ -206,6 +206,19 @@ private theorem transport_equation {C : Type*} [Category C]
   rw [hden, hnum]
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ sL) hn
 
+private theorem transport_roof_comparisons {C : Type*} [Category C]
+    {A B M N P Q PZ QZ R RZ : C}
+    (m : A ⟶ B) (rI : A ⟶ M) (rJ : B ⟶ N) (nI : M ⟶ P) (nJ : N ⟶ Q)
+    (sI : P ⟶ PZ) (sJ : Q ⟶ QZ) (sL : R ⟶ RZ)
+    (betaN : P ⟶ R) (ellN : Q ⟶ R) (betaZ : PZ ⟶ RZ) (ellZ : QZ ⟶ RZ)
+    (uI : A ⟶ PZ) (uJ : B ⟶ QZ)
+    (hI : uI = rI ≫ nI ≫ sI) (hJ : uJ = rJ ≫ nJ ≫ sJ)
+    (hn : m ≫ rJ ≫ nJ ≫ ellN = rI ≫ nI ≫ betaN)
+    (hden : sJ ≫ ellZ = ellN ≫ sL) (hnum : sI ≫ betaZ = betaN ≫ sL) :
+    m ≫ uJ ≫ ellZ = uI ≫ betaZ := by
+  rw [hI, hJ]
+  exact transport_equation m rI rJ nI nJ sI sJ sL betaN ellN betaZ ellZ hn hden hnum
+
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom
 attribute [local irreducible] moduleCohomologyFMap sectionExtendIso
@@ -227,6 +240,9 @@ private theorem pushforward_sectionExtendIso_naturality
   intro E Γ H
   dsimp only [Scheme.Modules, Scheme.Modules.Hom, Scheme.Modules.instCategory,
     Scheme.Modules.instAbelian] at *
+  let : E.Additive := inferInstanceAs
+    (RingedSpace.openModuleSections X.toRingedSpace U).Additive
+  let : (pushforward v).Additive := inferInstanceAs (pushforward v).Additive
   exact sectionExtendIso_comp_naturality (pushforward v) E J ell q
 
 private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Modules}
@@ -250,7 +266,6 @@ private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Module
   dsimp only [Iso.trans, Iso.symm, Functor.mapIso]
   exact regroup_five (C := AddCommGrpCat.{u}) _ _ _ _ _
 
-set_option profiler true in
 -- The proof transports the natural-indexed section equation through fixed integer models.
 /-- Restriction of an augmented roof computes the classical h-map on an arbitrary open.
 There is one scheme morphism, no direct-image square, and no total derived functor.
@@ -334,10 +349,10 @@ theorem restrictedCoefficient_roof {X Z : Scheme.{u}} (v : Z ⟶ X)
   have hn := restrictedCoefficient_natRoof v F G φ I J L hL ell hell beta hbeta U R R' q
   let m := moduleCohomologyFMap (v.resLE U (v ⁻¹ᵁ U) le_rfl)
     (restrictedDirectImageMap v φ U) q
-  exact (congrArg (fun z ↦ m ≫ z ≫ H.map (Γ.map ellZ)) hJ).trans
-    ((transport_equation m rI.hom rJ.hom (HN.map R.sections.hom) (HN.map R'.sections.hom)
-      sI.hom sJ.hom sL.hom (HN.map (EN.map beta)) (HN.map (EN.map ell))
-      (H.map (Γ.map betaZ)) (H.map (Γ.map ellZ)) hn hdenom hβ).trans
-        (congrArg (fun z ↦ z ≫ H.map (Γ.map betaZ)) hI).symm)
+  exact transport_roof_comparisons m rI.hom rJ.hom
+    (HN.map R.sections.hom) (HN.map R'.sections.hom) sI.hom sJ.hom sL.hom
+    (HN.map (EN.map beta)) (HN.map (EN.map ell)) (H.map (Γ.map betaZ)) (H.map (Γ.map ellZ))
+    (squareResolutionCohomologyIso I U R q).hom
+    (squareResolutionCohomologyIso J (v ⁻¹ᵁ U) R' q).hom hI hJ hn hdenom hβ
 
 end AlgebraicGeometry

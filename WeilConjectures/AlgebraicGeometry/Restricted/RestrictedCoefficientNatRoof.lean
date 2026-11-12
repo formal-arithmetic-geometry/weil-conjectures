@@ -131,7 +131,6 @@ private theorem coefficientData_roof_formula {X Y : Scheme.{u}} {v : X ⟶ Y}
     (roof_formula_cancel rI rJ (H.map (Γ.map D.β))
       (H.map (D.a.hom ≫ Γ.map D.lambda)) (hmu := D.invertible q))
 
-set_option profiler true in
 -- Compare the explicit scheme-restriction and section-functor presentations.
 /-- Restricting an augmented injective roof computes the classical coefficient map.
 Source: Stacks Project, Tags 01E4 and 01FB
