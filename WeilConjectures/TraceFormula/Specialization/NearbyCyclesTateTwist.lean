@@ -115,6 +115,7 @@ noncomputable def twistSpecializationMap
   L((M.i)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app W ≫
     R((M.j)_*⟦Λ⟧).map e.inv)
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the derived functors of the model unfold to large terms when rewriting
 attribute [local instance] DerivedCategory.braidedCategory' in

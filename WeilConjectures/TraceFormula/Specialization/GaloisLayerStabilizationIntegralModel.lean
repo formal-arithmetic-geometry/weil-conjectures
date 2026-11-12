@@ -42,6 +42,7 @@ open Scheme PadicAlgCl
 variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients, at a given integral
