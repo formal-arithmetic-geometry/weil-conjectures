@@ -80,7 +80,6 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
-set_option maxHeartbeats 600000 in
 -- Profiling at 400000 heartbeats passes the sheaf square and naturality (21s);
 -- reserve the cumulative budget needed to close the final summand calculation.
 include hmu hsheaf in
