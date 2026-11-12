@@ -105,6 +105,25 @@ lemma _root_.CategoryTheory.Adjunction.isIso_homEquiv_δ_tensorHom_of_isIso {C�
     IsIso (adjQ.homEquiv _ _ (δ Q' U V ≫ (c₁ ⊗ₘ c₂))) :=
   adjR.isIso_homEquiv_δ_tensorHom adjS adjQ e he c₁ c₂ d₂ i₂ hc₂
 
+/-- Normalize a comparison through an identity pullback using naturality. -/
+private lemma pullbackComparison_id_comp_aux {C : Type*} [Category C]
+    {I J K L M N O : C} (i : I ⟶ J) (a : J ⟶ K) (e : K ⟶ M) (b : M ⟶ N)
+    (m : J ⟶ L) (e' : L ⟶ M) (j : I ⟶ O) (i' : O ⟶ L)
+    (u : J ⟶ N) (v : O ⟶ N) (hu : u = a ≫ e ≫ b) (hc : a ≫ e = m ≫ e')
+    (hn : j ≫ i' = i ≫ m) (hv : v = i' ≫ e' ≫ b) : i ≫ u = j ≫ v := by
+  rw [hu, hv, ← Category.assoc a, hc]
+  simp only [Category.assoc]
+  rw [← reassoc_of% hn]
+
+/-- The same normalization when the final comparison is an inverse pair. -/
+private lemma pullbackComparison_id_self_aux {C : Type*} [Category C]
+    {I J K L O : C} (i : I ⟶ J) (a : J ⟶ K) (e : K ⟶ L) (b : L ⟶ O)
+    (m : J ⟶ L) (j : I ⟶ O) (i' : O ⟶ L) (u : J ⟶ O)
+    (hu : u = a ≫ e ≫ b) (hc : a ≫ e = m ≫ 𝟙 L)
+    (hn : j ≫ i' = i ≫ m) (hb : i' ≫ b = 𝟙 O) : i ≫ u = j := by
+  rw [hu, ← Category.assoc a, hc, Category.comp_id]
+  rw [← Category.assoc, ← hn, Category.assoc, hb, Category.comp_id]
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 section Transpose
@@ -175,6 +194,38 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' {W : Scheme.{u}} (f : W 
         eqToHom ((congrArg (fun φ ↦ L((φ)^*⟦Λ⟧).obj K) (Category.comp_id f)).symm.trans h) := by
   rw [← leftDerivedUpperStarComp_inv_app_comp_eqToHom_id Λ f K, Category.assoc, eqToHom_trans]
 
+/-- Remove the identity pullback from the comparison of a square over `S`. -/
+lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id
+    {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {aX : X ⟶ S} {aY : Y ⟶ S}
+    (sq : CommSq p₁ (p₂ ≫ aY) aX (𝟙 S)) (w : CommSq p₁ p₂ aX aY)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))) :
+    (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫
+        (pullbackSquareComparison Λ sq).hom.app K =
+      L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ S).hom.app K)) ≫
+        (pullbackSquareComparison Λ w).hom.app K :=
+  pullbackComparison_id_comp_aux _ _ _ _ _ _ _ _ _ _
+    (pullbackSquareComparison_hom_app Λ sq K)
+    (leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY) K
+      (T := L((p₁ ≫ aX)^*⟦Λ⟧).obj K) (by rw [sq.w]))
+    ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality ((leftDerivedUpperStarId Λ S).hom.app K))
+    (pullbackSquareComparison_hom_app Λ w K)
+
+/-- Remove the identity pullback from the comparison of a factorization. -/
+lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self
+    {p₂ : P ⟶ Y} {aY : Y ⟶ S} (sq : CommSq p₂ (p₂ ≫ aY) aY (𝟙 S))
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))) :
+    (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫
+        (pullbackSquareComparison Λ sq).hom.app K =
+      L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ S).hom.app K)) :=
+  pullbackComparison_id_self_aux _ _ _ _ _ _ _ _
+    (pullbackSquareComparison_hom_app Λ sq K)
+    (leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY) K
+      (T := L((p₂ ≫ aY)^*⟦Λ⟧).obj K) (by rw [Category.comp_id]))
+    ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality ((leftDerivedUpperStarId Λ S).hom.app K))
+    ((leftDerivedUpperStarComp Λ p₂ aY).inv_hom_id_app K)
+
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
 `p₂ ≫ a_Y = q ≫ 𝟙` and `p₁ ≫ a_X = p₂ ≫ a_Y`, the Künneth map
@@ -194,9 +245,6 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
     (h₃ : IsIso ((derivedUpperStarLowerStarAdjunction Λ aY).projectionMorphism B
       (R((aX)_*⟦Λ⟧).obj A))) :
     IsIso (lowerStarKunnethMap' Λ sq₁ sq₂ A B) := by
-  letI := h₁
-  letI := h₂
-  letI := h₃
   obtain rfl : q = p₂ ≫ aY := by simpa using sq₂.w.symm
   rw [lowerStarKunnethMap'_eq_homEquiv_counit]
   let KX := R((aX)_*⟦Λ⟧).obj A
@@ -209,26 +257,19 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
         ((leftDerivedUpperStarId Λ S).hom.app KX)) ≫
         (pullbackSquareComparison Λ w).hom.app KX ≫ cA := by
-    have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-      KX (h := by rw [← sq₁.w])
-    have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-      ((leftDerivedUpperStarId Λ S).hom.app KX)
-    have hs₁ := pullbackSquareComparison_hom_app Λ sq₁ KX
-    have hw := pullbackSquareComparison_hom_app Λ w KX
-    simp only [hs₁, hw, reassoc_of% hc, reassoc_of% hn, Category.assoc]
+    exact (Category.assoc _ _ _).symm.trans
+      ((congrArg (fun f ↦ f ≫ cA)
+        (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id Λ sq₁ w KX)).trans
+          (Category.assoc _ _ _))
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
   have e₂ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KY) ≫
       (pullbackSquareComparison Λ sq₂).hom.app KY ≫ cB =
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
         ((leftDerivedUpperStarId Λ S).hom.app KY) ≫
         (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _ := by
-    have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-      KY (h := by rw [← sq₂.w])
-    have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-      ((leftDerivedUpperStarId Λ S).hom.app KY)
-    have hs₂ := pullbackSquareComparison_hom_app Λ sq₂ KY
-    simp only [hs₂, reassoc_of% hc, reassoc_of% hn, Category.assoc]
-    simp
+    rw [← Category.assoc,
+      leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self Λ sq₂ KY]
+    exact (L((p₂)^*⟦Λ⟧).map_comp _ _).symm.trans (Category.comp_id _).symm
   have t₁ : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
       ((leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KX) ≫
         (pullbackSquareComparison Λ sq₁).hom.app KX ≫ cA)) := by
