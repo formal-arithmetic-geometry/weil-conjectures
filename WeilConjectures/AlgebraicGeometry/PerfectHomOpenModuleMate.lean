@@ -74,7 +74,6 @@ def perfectHomOpenModuleMate {S Y T : Scheme.{u}}
     (schemeOpenModuleAdjunction Y B)).symm
       (TwoSquare.mk _ _ _ _ (perfectHomOpenModuleComposition s B r).hom))
 
-set_option profiler true in
 private theorem isIso_open_module_mate_of_isPullback
     {X X' Y : Scheme.{u}} (B : Y.Opens) (p : X ⟶ Y) (p' : X' ⟶ B.toScheme)
     (i : X' ⟶ X) [IsOpenImmersion i] (h : IsPullback p' i B.ι p) :
@@ -95,6 +94,7 @@ private theorem isIso_open_module_mate_of_isPullback
     have hW := IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback h W
     have hh : Scheme.Modules.Hom.app (α.app M) W =
         M.val.presheaf.map (eqToHom hW).op := by
+      -- Name the restriction arrows before unfolding the mate on sections.
       let V := B.ι ''ᵁ W
       let U := p ⁻¹ᵁ V
       have hc : p' ⁻¹ᵁ (B.ι ⁻¹ᵁ V) = i ⁻¹ᵁ U :=
@@ -115,7 +115,6 @@ private theorem isIso_open_module_mate_of_isPullback
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-set_option profiler true in
 /-- The ordinary open-square mate is the sectionwise direct-image/restriction identity.
 Source: Stacks Project, Cohomology, Tag 08FE, proof of
 `lemma-restrict-direct-image-open`.
