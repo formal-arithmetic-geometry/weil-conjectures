@@ -383,17 +383,20 @@ theorem scalarLocalization_telescopeOfUniverses
       (∀ {K L} (f : K ⟶ L) (r : A),
         F.mapDerivedCategory.map (r • f) =
           algebraMap A (Localization.Away t) r • F.mapDerivedCategory.map f)  := by
-  intro srcLinear tgtLinear
   classical
   let φ := ringedLocalizationRingUnitOfUniverses R (a t)
   let U := SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
-  obtain ⟨hUlim, hUcol, hadj⟩ :=
+  have hU :=
     SheafOfModules.scalarLocalizationCoefficientAdjunctionOfUniverses φ
-  have : PreservesFiniteLimits U := hUlim
-  have : PreservesFiniteColimits U := hUcol
-  obtain ⟨adj, hnorm⟩ := hadj F hF _hmap
-  obtain ⟨d, hd⟩ := exact_adjunction_descends F U adj
+  have : PreservesFiniteLimits U := hU.choose
+  have : PreservesFiniteColimits U := hU.choose_spec.choose
+  have hadj := hU.choose_spec.choose_spec F hF _hmap
+  let adj := hadj.choose
+  have hnorm := hadj.choose_spec
+  have hderived := exact_adjunction_descends F U adj
+  let d := hderived.choose
+  have hd := hderived.choose_spec
   let η := fun K ↦ (adj.mapHomologicalComplex (.up ℤ)).unit.app K
   have hsections : ∀ K i,
       scalarLocalizationUnitSectionsOfUniverses φ (K.X i) (F.obj (K.X i)) (hF (K.X i))
@@ -413,6 +416,11 @@ theorem scalarLocalization_telescopeOfUniverses
   let : Linear A B := scalarLocalizationCoefficientLinearOfUniverses A R a
   let : Linear (Localization.Away t) B' :=
     scalarLocalizationCoefficientLinearOfUniverses (Localization.Away t)
+      (ringedLocalizationRingOfUniverses R (a t))
+      (scalarLocalizationCoefficientMapOfUniverses A R a t)
+  let : Linear A (DerivedCategory B) := scalarLocalizationDerivedLinearOfUniverses A R a
+  let : Linear (Localization.Away t) (DerivedCategory B') :=
+    scalarLocalizationDerivedLinearOfUniverses (Localization.Away t)
       (ringedLocalizationRingOfUniverses R (a t))
       (scalarLocalizationCoefficientMapOfUniverses A R a t)
   have : IsGrothendieckAbelian.{u} B :=

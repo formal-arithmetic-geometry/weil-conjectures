@@ -534,10 +534,10 @@ section
 
 -- Recover the Hom module directly from the sheaf category, without searching through
 -- the definition of a restricted module to infer its ambient category.
-local instance scalarLocalizationSheafHomModule
+local instance scalarLocalizationSheafHomSMul
     (A : Type v) [CommRing A] (R : Sheaf J RingCat.{u})
     [Linear A (SheafOfModules.{u} R)] (M N : SheafOfModules.{u} R) :
-    Module A (M ⟶ N) := Linear.homModule M N
+    SMul A (M ⟶ N) := (Linear.homModule (R := A) M N).toSMul
 
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
