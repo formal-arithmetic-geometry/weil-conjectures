@@ -179,6 +179,7 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
   exact boundedConstructibleBaseChange_id ℓ
 
+set_option profiler true in
 -- the identification of the trivial compactification of `f` with `f` unfolds the functors
 /-- **`Ex_!` for open immersions**, on the trivial compactifications: the compact-support exchange
 map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R(𝟙)_* ≅ 𝟭` and the
