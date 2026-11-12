@@ -264,7 +264,37 @@ private theorem identity_complex_sections (X : Scheme.{u})
   rw [k.degree]
   exact eq_of_heq (k.sections (P.X n) U x)
 
--- Cancel the inverse comparison before evaluating on pure generators.
+-- Check a map out of a tensor presentation using chosen preimages of its generators.
+set_option profiler true in
+private theorem identity_tensor_iso_hom_ext (X : Scheme.{u})
+    [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
+    (A P Q H : K l E X s) (e : A ≅ (total l E X s).obj (P, Q))
+    (f : (total l E X s).obj (P, Q) ⟶ H) (g : A ⟶ H)
+    (hh : ∀ (n p q : ℤ) (hpq : p + q = n) (U : X.ProEtᵒᵖ)
+      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),
+      ∃ z : (A.X n).val.obj U,
+        (e.hom.f n).val.app U z =
+          coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+            (podReindexingRing l E X s) P Q p q n hpq U x y ∧
+        (f.f n).val.app U
+          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+            (podReindexingRing l E X s) P Q p q n hpq U x y) =
+          (g.f n).val.app U z) :
+    e.hom ≫ f = g := by
+  apply (cancel_epi e.inv).mp
+  rw [Iso.inv_hom_id_assoc]
+  ext n : 1
+  apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
+    (R := podReindexingRing l E X s)
+  intro p q hpq U x y
+  obtain ⟨z, hz, hf⟩ := hh n p q hpq U x y
+  have hi := congrArg (fun a ↦ (a.f n).val.app U z) e.hom_inv_id
+  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
+  rw [hf, ← hz]
+  exact congrArg (fun z ↦ (g.f n).val.app U z) hi.symm
+
+-- Evaluate the two routes directly on the preimages of pure generators.
 set_option profiler true in
 private theorem identity_tensor_chain (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
@@ -274,30 +304,12 @@ private theorem identity_tensor_chain (X : Scheme.{u})
     (c.tensorChain P Q).hom ≫
         (total l E X s).map ((k.complex P).hom, (k.complex Q).hom) =
       (k.complex ((total l E X s).obj (P, Q))).hom := by
-  apply (cancel_epi (c.tensorChain P Q).inv).mp
-  rw [Iso.inv_hom_id_assoc]
-  ext n : 1
-  apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
-    (R := podReindexingRing l E X s)
-  intro p q hpq U x y
-  change (P.X p).val.obj (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) at x
-  change (Q.X q).val.obj (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) at y
-  let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+  apply identity_tensor_iso_hom_ext l E X s _ _ _ _ (c.tensorChain P Q)
+  intro n p q hpq U x y
+  refine ⟨coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
     (podReindexingRing l E X s) P Q p q n hpq
-      (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) x y
-  have hcancel := congrArg (fun a ↦ (a.f n).val.app U z)
-    (c.tensorChain P Q).hom_inv_id
-  have hi := congrArg
-    (fun z ↦ (((c.tensorChain P Q).inv.f n).val.app U) z)
-    (c.tensorChain_pure P Q p q n hpq U.unop x y)
-  have hi' : (((c.tensorChain P Q).inv.f n).val.app U)
-      (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
-        (podReindexingRing l E X s) ((podReindexingComplexFunctor l E (𝟙 X) s).obj P)
-        ((podReindexingComplexFunctor l E (𝟙 X) s).obj Q) p q n hpq U x y) = z :=
-    hi.symm.trans hcancel
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rw [hi']
+      (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) x y,
+    c.tensorChain_pure P Q p q n hpq U.unop x y, ?_⟩
   erw [ScalarHomTensor.tensor_generator_map]
   erw [identity_complex_sections, identity_complex_sections, identity_complex_sections]
   exact (identity_generator_restrict l E X s P Q p q n hpq
