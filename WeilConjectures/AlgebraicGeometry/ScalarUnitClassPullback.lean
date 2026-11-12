@@ -49,6 +49,7 @@ private theorem augmentation_cocycle {C : Type*} [Category C] [Abelian C]
         (by simp)]
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hp).eq_of_src _ _
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The cohomology-to-Ext comparison unfolds several derived-category equivalences.
 /-- The augmented section one corresponds to the scalar-unit morphism in degree-zero Ext.

@@ -57,6 +57,7 @@ private noncomputable def mixedTensorHomCore (S : Scheme.{u}) (K : schemeDerived
           Category.id_comp, Equiv.apply_symm_apply] using
           (he.1 A A K K L L' (𝟙 A) (𝟙 K) c ((e A K L).symm h)).symm }
 
+set_option profiler true in
 set_option maxHeartbeats 1100000 in
 -- Elaborating the shared derived tensor instances requires additional heartbeats.
 /-- The evaluation-mate map on sheaf internal Hom is invertible for perfect M.

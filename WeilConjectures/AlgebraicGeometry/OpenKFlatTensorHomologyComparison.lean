@@ -158,6 +158,7 @@ private theorem site_kFlat_tensor_quasiIso
     exact (((curriedTensor _).map₂CochainComplex.map α).naturality s).symm
 
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The roof uses large inferred total-tensor instances over the localized module category.
 /-- A roof identifying a local K-flat complex T with the restriction of Q identifies
