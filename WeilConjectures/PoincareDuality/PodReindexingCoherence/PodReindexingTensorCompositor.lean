@@ -372,6 +372,7 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
   simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
     PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
   rw [hi']
+  clear hcancel hi hi'
   trace_state
   sorry
 
