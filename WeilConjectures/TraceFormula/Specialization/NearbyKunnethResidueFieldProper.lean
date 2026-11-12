@@ -66,7 +66,6 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
-set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the product are large terms
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of

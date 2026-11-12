@@ -63,7 +63,6 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
-set_option maxHeartbeats 4000000 in
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
 /-- **From the geometric slice to the slice over a generic slice trait** (SGA 4½,
