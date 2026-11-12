@@ -63,6 +63,18 @@ private theorem relativeTensorPullback_kFlat_counit
     (DerivedCategory.quotientCompQhIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))).app _
 
+private theorem relativeTensorPullback_kFlat_tensor (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (A L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hA : CochainComplex.IsKFlatTensor (R := X.sheaf) A) :
+    Nonempty (DerivedCategory.Q.obj A ⊗ DerivedCategory.Q.obj L ≅
+      DerivedCategory.Q.obj (CochainComplex.mapBifunctor A L
+        (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))))) := by
+  obtain ⟨e⟩ := kFlat_derivedTensor_comparison_natIso X
+    ((CategoryTheory.Functor.const (Discrete PUnit.{1})).obj A)
+    ((CategoryTheory.Functor.const (Discrete PUnit.{1})).obj L) (fun _ ↦ hA)
+  exact ⟨(e.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩⟩
+
 private theorem relativeTensorPullback_model_homology
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -77,6 +89,7 @@ private theorem relativeTensorPullback_model_homology
     (HomologicalComplex.homologyFunctor E (.up ℤ) i).mapIso e ≪≫
     (Z'.sc i).mapHomologyIso V⟩
 
+set_option profiler true in
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
@@ -145,12 +158,7 @@ theorem relativeTensorPullback_kFlat_model
   have := hGadd
   let T := G
   let TL := (T.mapHomologicalComplex (.up ℤ)).obj L
-  obtain ⟨ec⟩ := kFlat_derivedTensor_comparison_natIso X
-    ((CategoryTheory.Functor.const (Discrete PUnit.{1})).obj A)
-    ((CategoryTheory.Functor.const (Discrete PUnit.{1})).obj TL) (fun _ ↦ hA)
-  let et : DerivedCategory.Q.obj A ⊗ DerivedCategory.Q.obj TL ≅
-      DerivedCategory.Q.obj (CochainComplex.mapBifunctor A TL (curriedTensor C)) :=
-    (ec.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩
+  obtain ⟨et⟩ := relativeTensorPullback_kFlat_tensor X A TL hA
   let ed := (tensorLeft (DerivedCategory.Q.obj A)).mapIso ep ≪≫ et
   obtain ⟨eb⟩ := relativeTensorPullback_complex_comparison f G hG hGmap A L
   let Z := CochainComplex.mapBifunctor A TL (curriedTensor C)
