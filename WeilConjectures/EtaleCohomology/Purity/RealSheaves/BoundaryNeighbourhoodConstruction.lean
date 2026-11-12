@@ -101,10 +101,71 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       hhalg, hσε, ← Category.assoc, hhalg]
 
-set_option maxHeartbeats 3200000 in
--- the rewriting of morphisms between spectra of rings of invariants is slow
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
+/-- An endomorphism preserving the section and nonunits descends to the residue map. -/
+lemma residueMap_equivariant_of_section {A L : Type*} [CommRing A] [CommRing L]
+    (ε : L →+* A) (r : A →+* L) (σ : A →+* A) (Φ : L →+* L)
+    (hrε : r.comp ε = RingHom.id L) (hr : ∀ a, r a = 0 ↔ ¬ IsUnit a)
+    (hσ : ∀ a, IsUnit (σ a) → IsUnit a) (hσε : ∀ y, σ (ε y) = ε (Φ y))
+    (a : A) : r (σ a) = Φ (r a) := by
+  have h0 : r (a - ε (r a)) = 0 := by
+    rw [r.map_sub, show r (ε (r a)) = r a from RingHom.congr_fun hrε _, sub_self]
+  have h1 : r (σ (a - ε (r a))) = 0 :=
+    (hr _).2 fun hu ↦ (hr _).1 h0 (hσ _ hu)
+  rw [σ.map_sub, r.map_sub, sub_eq_zero] at h1
+  exact h1.trans ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε _))
+
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [IsIntegral C] in
+/-- Ring-level equivariance gives the three spectrum identities of a Frobenius lift. -/
+lemma exists_specMap_frobeniusLift {A R E : Type u} [CommRing A] [CommRing R] [CommRing E]
+    (g : Spec (.of R) ⟶ C) (alg : R →+* A) (σ : A →+* A)
+    (hσalg : ∀ a, σ (alg a) = alg a)
+    (ε : AlgebraicClosure K →+* A) (r : A →+* AlgebraicClosure K)
+    (γ : A →+* E) (τ : E →+* E) (Φ : AlgebraicClosure K →+* AlgebraicClosure K) (n : ℕ)
+    (hΦ : (specGeometricFrobenius K ^ n).asIso.hom = Spec.map (CommRingCat.ofHom Φ))
+    (hσε : ∀ y, σ (ε y) = ε (Φ y)) (hrσ : ∀ a, r (σ a) = Φ (r a))
+    (hγσ : ∀ a, γ (σ a) = τ (γ a))
+    (h : Spec (.of A) ⟶ (C ↘ Spec (.of K)).geometricFiber)
+    (hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj =
+      Spec.map (CommRingCat.ofHom alg) ≫ g)
+    (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
+      Spec.map (CommRingCat.ofHom ε)) :
+    ∃ α : Spec (.of A) ⟶ Spec (.of A),
+      α ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso.hom ∧
+      (specGeometricFrobenius K ^ n).asIso.hom ≫ Spec.map (CommRingCat.ofHom r) =
+        Spec.map (CommRingCat.ofHom r) ≫ α ∧
+      Spec.map (CommRingCat.ofHom τ) ≫ Spec.map (CommRingCat.ofHom γ) =
+        Spec.map (CommRingCat.ofHom γ) ≫ α := by
+  have hσalg' : CommRingCat.ofHom alg ≫ CommRingCat.ofHom σ = CommRingCat.ofHom alg :=
+    CommRingCat.hom_ext (RingHom.ext hσalg)
+  have hσε' : CommRingCat.ofHom ε ≫ CommRingCat.ofHom σ =
+      CommRingCat.ofHom Φ ≫ CommRingCat.ofHom ε :=
+    CommRingCat.hom_ext (RingHom.ext hσε)
+  have hrσ' : CommRingCat.ofHom r ≫ CommRingCat.ofHom Φ =
+      CommRingCat.ofHom σ ≫ CommRingCat.ofHom r :=
+    CommRingCat.hom_ext (RingHom.ext fun a ↦ (hrσ a).symm)
+  have hγσ' : CommRingCat.ofHom γ ≫ CommRingCat.ofHom τ =
+      CommRingCat.ofHom σ ≫ CommRingCat.ofHom γ :=
+    CommRingCat.hom_ext (RingHom.ext fun a ↦ (hγσ a).symm)
+  refine ⟨Spec.map (CommRingCat.ofHom σ), ?_, ?_, ?_⟩
+  · exact specMap_comp_eq_comp_geometricGaloisFrobenius_pow g _ _ hσalg' _ n (by
+      rw [hΦ, ← Spec.map_comp, ← Spec.map_comp, hσε']) h hhproj hhalg
+  · rw [hΦ, ← Spec.map_comp, ← Spec.map_comp, hrσ']
+  · rw [← Spec.map_comp, ← Spec.map_comp, hγσ']
+
+-- Select the standard actions directly, avoiding searches through unrelated actions.
+noncomputable local instance boundaryIdealMulSemiringActionConstruction {W : C.Opens} [Nonempty W]
+    [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] :
+    MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, W) Ω) := by
+  let : SMulCommClass Gal(Ω/C.functionField) Γ(C, W) Ω :=
+    AlgEquiv.smulCommClass_of_isScalarTower Γ(C, W) C.functionField Ω
+  infer_instance
+
+noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens} [Nonempty W]
+    [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] :
+    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
+  Ideal.pointwiseDistribMulAction.toMulAction
+
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
   [Smooth (C ↘ Spec (.of K))] in
 /-- **The Frobenius lift on `Spec B_Q^{I_Q}`.** Let `σ_F` be an element of the decomposition
@@ -137,56 +198,175 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         Spec.map (CommRingCat.ofHom
           (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) ≫ α := by
   let _ := Fintype.ofFinite K
-  obtain ⟨Φ, hΦ⟩ : ∃ Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K,
-      Φ = FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n :=
-    ⟨_, rfl⟩
+  let Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K :=
+    FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n
   have hσε (y : AlgebraicClosure K) :
       Ideal.inertiaInvariantsMap C.functionField Q hσF (ε y) = ε (Φ y) :=
     Ideal.injective_inertiaInvariantsToField _ Q (by
-      rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk, hΦ])
-  have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
-      r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
-    have h0 : r (a - ε (r a)) = 0 := by
-      rw [map_sub, show r (ε (r a)) = r a from RingHom.congr_fun hrε _, sub_self]
-    have h1 : ¬ IsUnit (Ideal.inertiaInvariantsMap C.functionField Q hσF (a - ε (r a))) :=
-      fun hu ↦ (hr _).1 h0 (Ideal.isUnit_of_isUnit_inertiaInvariantsMap hσF hu)
-    have h2 : r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
-        Ideal.inertiaInvariantsMap C.functionField Q hσF (ε (r a))) = 0 := by
-      rw [← map_sub]
-      exact (hr _).2 h1
-    exact (sub_eq_zero.1 ((RingHom.map_sub r _ _).symm.trans h2)).trans
-      ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
-  have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
-      ≫ CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF) =
-      CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q)) :=
-    CommRingCat.hom_ext (RingHom.ext (Ideal.inertiaInvariantsMap_algebraMap hσF))
-  have hσεc : CommRingCat.ofHom ε ≫ CommRingCat.ofHom
-      (Ideal.inertiaInvariantsMap C.functionField Q hσF) =
-      CommRingCat.ofHom Φ.toRingEquiv.toRingHom ≫ CommRingCat.ofHom ε :=
-    CommRingCat.hom_ext (RingHom.ext hσε)
-  have hrσc : CommRingCat.ofHom r ≫ CommRingCat.ofHom Φ.toRingEquiv.toRingHom =
-      CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF) ≫
-        CommRingCat.ofHom r :=
-    CommRingCat.hom_ext (RingHom.ext fun a ↦ (hrσ a).symm)
-  have htfc : CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom ≫
-      CommRingCat.ofHom (σF : Ω →+* Ω) =
-      CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF) ≫
-        CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom :=
-    CommRingCat.hom_ext (RingHom.ext fun a ↦
-      (Ideal.inertiaInvariantsToField_inertiaInvariantsMap hσF a).symm)
-  refine ⟨Spec.map (CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF)),
-    ?_, ?_, ?_⟩
-  · exact specMap_comp_eq_comp_geometricGaloisFrobenius_pow hW.fromSpec _ _ hσalg _ n (by
-      rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hσεc]) h
-      hhproj hhalg
-  · rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hrσc]
-  · rw [← Spec.map_comp, ← Spec.map_comp]
-    exact congrArg Spec.map htfc
+      rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk])
+  have hrσ : ∀ a : Ideal.inertiaInvariants C.functionField Q,
+      r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) :=
+    residueMap_equivariant_of_section ε r
+      (Ideal.inertiaInvariantsMap C.functionField Q hσF) Φ.toRingEquiv.toRingHom
+      hrε hr (fun _ ↦ Ideal.isUnit_of_isUnit_inertiaInvariantsMap hσF) hσε
+  exact exists_specMap_frobeniusLift hW.fromSpec
+    (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
+    (Ideal.inertiaInvariantsMap C.functionField Q hσF)
+    (Ideal.inertiaInvariantsMap_algebraMap hσF) ε r
+    (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom (σF : Ω →+* Ω)
+    Φ.toRingEquiv.toRingHom n (specGeometricFrobenius_pow_hom K n) hσε hrσ
+    (Ideal.inertiaInvariantsToField_inertiaInvariantsMap hσF) h hhproj hhalg
 
-set_option maxHeartbeats 3200000 in
--- the construction assembles many morphisms of schemes over `C̄` and `Ū`
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
+omit [Finite K] [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [IsIntegral C] in
+/-- A section of the residue map identifies the lifted geometric point by its projections. -/
+lemma specMap_eq_geometricFiberPoint_of_projections {A : Type u} [CommRing A]
+    (ε : AlgebraicClosure K →+* A) (r : A →+* AlgebraicClosure K)
+    (hrε : r.comp ε = RingHom.id _) (x : C.finitePoints)
+    (h : Spec (.of A) ⟶ (C ↘ Spec (.of K)).geometricFiber)
+    (hproj : Spec.map (CommRingCat.ofHom r) ≫ h ≫
+        (C ↘ Spec (.of K)).geometricFiberProj =
+      (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x ≫
+        (C ↘ Spec (.of K)).geometricFiberProj)
+    (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
+      Spec.map (CommRingCat.ofHom ε)) :
+    Spec.map (CommRingCat.ofHom r) ≫ h =
+      𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x := by
+  rw [Category.id_comp]
+  apply Scheme.Hom.geometricFiber_hom_ext
+  · exact (Category.assoc _ _ _).trans hproj
+  · rw [Category.assoc, hhalg, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hrε,
+      Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure,
+      CommRingCat.ofHom_id, Spec.map_id]
+
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] in
+/-- The map on the punctured neighbourhood is the geometric generic point. -/
+lemma genericGeomPoint_eq_of_projections {W : C.Opens} (hW : IsAffineOpen W) [Nonempty W]
+    {A : Type u} [CommRing A] (alg : Γ(C, W) →+* A)
+    (ε : AlgebraicClosure K →+* A) (γ : A →+* Ω)
+    (hγalg : γ.comp alg = algebraMap Γ(C, W) Ω)
+    (hγε : γ.comp ε = genericEmb (U ↘ Spec (.of K)) j)
+    (h : Spec (.of A) ⟶ (C ↘ Spec (.of K)).geometricFiber)
+    (hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj =
+      Spec.map (CommRingCat.ofHom alg) ≫ hW.fromSpec)
+    (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
+      Spec.map (CommRingCat.ofHom ε))
+    {T : Scheme.{u}} (s : Spec (.of Ω) ⟶ T) (e : T ⟶ pullback h j̄)
+    (hfst : s ≫ e ≫ pullback.fst h j̄ = Spec.map (CommRingCat.ofHom γ)) :
+    s ≫ (e ≫ pullback.snd h j̄) = genericGeomPoint (U ↘ Spec (.of K)) j := by
+  have hgen : genericBasePoint j ≫ j =
+      Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) Ω)) ≫ hW.fromSpec := by
+    rw [Category.assoc, genericPointLift_comp, hW.fromSpecFunctionField_eq, ← Category.assoc,
+      ← Spec.map_comp]
+    congr 2
+  apply Scheme.Hom.geometricFiber_hom_ext
+  · rw [genericGeomPoint_geometricFiberProj, ← cancel_mono j, hgen]
+    rw [Category.assoc, Category.assoc, Category.assoc,
+      ← Scheme.Hom.geometricFiberMap_comp_geometricFiberProj j (comp_over j _)]
+    rw [← pullback.condition_assoc, hhproj, reassoc_of% hfst, ← Spec.map_comp_assoc,
+      ← CommRingCat.ofHom_comp, hγalg]
+  · rw [genericGeomPoint_geometricFiberToAlgebraicClosure]
+    rw [Category.assoc, Category.assoc,
+      ← Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure j (comp_over j _),
+      ← pullback.condition_assoc, hhalg, reassoc_of% hfst, ← Spec.map_comp,
+      ← CommRingCat.ofHom_comp, hγε]
+
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] in
+/-- Assemble a boundary neighbourhood from a residue map and a punctured spectrum. -/
+lemma nonempty_boundaryNeighbourhood_of_spectrum_data
+    (I : Subgroup Gal(Ω/C.functionField)) (σF : Gal(Ω/C.functionField)) (x : C.finitePoints)
+    {A : Type u} [CommRing A] [IsStrictlyHenselianLocalRing A]
+    (r : A →+* AlgebraicClosure K) (hr : ∀ a, r a = 0 ↔ ¬ IsUnit a)
+    (γ : A →+* Ω) (h : Spec (.of A) ⟶ (C ↘ Spec (.of K)).geometricFiber) [WeaklyEtale h]
+    (hw : Spec.map (CommRingCat.ofHom r) ≫ h =
+      𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)
+    (L : IntermediateField C.functionField Ω) [Algebra.IsSeparable L Ω] [Normal L Ω]
+    (e' : Spec (.of L) ≅ pullback h j̄)
+    (hspec : specFieldMap L Ω ≫ (e'.hom ≫ pullback.snd h j̄) =
+      genericGeomPoint (U ↘ Spec (.of K)) j)
+    (hfst : specFieldMap L Ω ≫ e'.hom ≫ pullback.fst h j̄ =
+      Spec.map (CommRingCat.ofHom γ))
+    (hmem : ∀ σ : Gal(Ω/C.functionField), σ ∈ I ↔
+      ∀ b : L, σ (algebraMap L Ω b) = algebraMap L Ω b)
+    (α : Spec (.of A) ⟶ Spec (.of A))
+    (hα : α ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^
+      (C ↘ Spec (.of K)).degreeOver x.1).asIso.hom)
+    (hcα : (specGeometricFrobenius K ^ (C ↘ Spec (.of K)).degreeOver x.1).asIso.hom ≫
+      Spec.map (CommRingCat.ofHom r) = Spec.map (CommRingCat.ofHom r) ≫ α)
+    (hεα : Spec.map (CommRingCat.ofHom (σF : Ω →+* Ω)) ≫ Spec.map (CommRingCat.ofHom γ) =
+      Spec.map (CommRingCat.ofHom γ) ≫ α) :
+    Nonempty (BoundaryNeighbourhood (K := K) j I σF x) := by
+  let t : ProEt.mk (𝟙 (Spec (.of (AlgebraicClosure K)))) ⟶
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤
+        ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)).obj (ProEt.mk h) :=
+    MorphismProperty.Over.homMk (pullback.lift (Spec.map (CommRingCat.ofHom r)) (𝟙 _) hw)
+      (pullback.lift_snd _ _ _)
+  have htl : t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) =
+      Spec.map (CommRingCat.ofHom r) := pullback.lift_fst _ _ _
+  let k := e'.hom ≫ pullback.snd h j̄
+  let e : ProEt.mk k ≅ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ j̄).obj (ProEt.mk h) :=
+    MorphismProperty.Over.isoMk e' rfl
+  refine ⟨{
+    A := A
+    h := h
+    t := t
+    ht := by rw [htl]; exact specMap_closedPoint_of_forall_eq_zero_iff r hr
+    K' := L
+    exists_algebraMap_eq := fun a ↦ ⟨algebraMap C.functionField L a,
+      (IsScalarTower.algebraMap_apply C.functionField L Ω a).symm⟩
+    k := k
+    e := e
+    specFieldMap_comp := hspec
+    mem_iff := hmem
+    α := α
+    hα := hα
+    hcα := by rw [htl]; exact hcα
+    hεα := by
+      change Spec.map _ ≫ (specFieldMap L Ω ≫ e'.hom ≫ pullback.fst h j̄) =
+        (specFieldMap L Ω ≫ e'.hom ≫ pullback.fst h j̄) ≫ α
+      rw [hfst]
+      exact hεα }⟩
+
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] in
+/-- The constants embedding lifts the spectrum of inertia invariants to the geometric fibre. -/
+lemma exists_geometricFiber_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen W) [Nonempty W]
+    [IsDedekindDomain Γ(C, W)] (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal]
+    (x : C.finitePoints) (hxW : x.1 ∈ W)
+    [Q.LiesOver (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal]
+    (ε : AlgebraicClosure K →+* Ideal.inertiaInvariants C.functionField Q)
+    (hφ : (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q)).comp
+      (sectionsStructHom (k₀ := K) hW) = ε.comp (algebraMap K (AlgebraicClosure K))) :
+    ∃ h : Spec (.of (Ideal.inertiaInvariants C.functionField Q)) ⟶
+        (C ↘ Spec (.of K)).geometricFiber, WeaklyEtale h ∧
+      h ≫ (C ↘ Spec (.of K)).geometricFiberProj = specInertiaInvariantsTo hW Q ∧
+      h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
+        Spec.map (CommRingCat.ofHom ε) := by
+  have hgAp : specInertiaInvariantsTo hW Q ≫ (C ↘ Spec (.of K)) =
+      Spec.map (CommRingCat.ofHom ε) ≫ (Scheme.specAlgebraicClosure K).hom := by
+    have hfp : hW.fromSpec ≫ (C ↘ Spec (.of K)) =
+        Spec.map (CommRingCat.ofHom (sectionsStructHom (k₀ := K) hW)) := by
+      rw [CommRingCat.ofHom_hom, Spec.map_preimage]
+    simp only [specInertiaInvariantsTo, Category.assoc, hfp, Scheme.specAlgebraicClosure,
+      Over.mk_hom, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ]
+  exact ⟨_, weaklyEtale_specInertiaInvariantsToGeometricFiber hW Q x hxW ε hgAp,
+    pullback.lift_fst _ _ _, pullback.lift_snd _ _ _⟩
+
+omit [Finite K] [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] in
+/-- The inclusion of inertia invariants into the fixed field recovers the map to the closure. -/
+lemma specFieldMap_inertiaInvariants_comp {W : C.Opens} [Nonempty W]
+    (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal] :
+    specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
+      Spec.map (CommRingCat.ofHom (algebraMap (Ideal.inertiaInvariants C.functionField Q)
+        (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))))) =
+      Spec.map (CommRingCat.ofHom
+        (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) := by
+  rw [← Spec.map_comp]
+  rfl
+
 omit [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- **A strictly henselian neighbourhood of a boundary point from a compatible point.** Let `c`
 be an affine chart at the boundary point `z` with closed point `x`, `Q` a maximal ideal over `z`
@@ -219,88 +399,22 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
       (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
     rw [genericEmb_comp_algebraMap, genericStructHom_eq j hW]
   obtain ⟨ε, r, hrε, hr, hε, hφ⟩ := exists_algebraicClosure_inertiaInvariants hW Q x hxW _ hε₀
-  have hgAp : specInertiaInvariantsTo hW Q ≫ (C ↘ Spec (.of K)) =
-      Spec.map (CommRingCat.ofHom ε) ≫ (Scheme.specAlgebraicClosure K).hom := by
-    have hfp : hW.fromSpec ≫ (C ↘ Spec (.of K)) =
-        Spec.map (CommRingCat.ofHom (sectionsStructHom (k₀ := K) hW)) := by
-      rw [CommRingCat.ofHom_hom, Spec.map_preimage]
-    simp only [specInertiaInvariantsTo, Category.assoc, hfp, Scheme.specAlgebraicClosure,
-      Over.mk_hom, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ]
-  -- the neighbourhood `h`
-  obtain ⟨h, hhW, hhproj, hhalg⟩ : ∃ h : Spec (.of (Ideal.inertiaInvariants C.functionField Q)) ⟶
-      (C ↘ Spec (.of K)).geometricFiber, WeaklyEtale h ∧
-      h ≫ (C ↘ Spec (.of K)).geometricFiberProj = specInertiaInvariantsTo hW Q ∧
-      h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
-        Spec.map (CommRingCat.ofHom ε) :=
-    ⟨_, weaklyEtale_specInertiaInvariantsToGeometricFiber hW Q x hxW ε hgAp,
-      pullback.lift_fst _ _ _, pullback.lift_snd _ _ _⟩
+  obtain ⟨h, hhW, hhproj, hhalg⟩ := exists_geometricFiber_inertiaInvariants hW Q x hxW ε hφ
   -- the lift of `x̄`
   have hpt := specMap_comp_specInertiaInvariantsTo_of_compatible hW Q x hxW _ ε r hrε hr hε _ hQ
-  have hw : Spec.map (CommRingCat.ofHom r) ≫ h =
-      𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x := by
-    rw [Category.id_comp]
-    apply Scheme.Hom.geometricFiber_hom_ext
-    · rw [Category.assoc, hhproj, hpt,
-        Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj]
-    · rw [Category.assoc, hhalg, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hrε,
-        Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure,
-        CommRingCat.ofHom_id, Spec.map_id]
-  let t : ProEt.mk (𝟙 (Spec (.of (AlgebraicClosure K)))) ⟶
-      (MorphismProperty.Over.pullback @WeaklyEtale ⊤
-        ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)).obj (ProEt.mk h) :=
-    MorphismProperty.Over.homMk (pullback.lift (Spec.map (CommRingCat.ofHom r)) (𝟙 _) hw)
-      (pullback.lift_snd _ _ _)
-  have htl : t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) =
-      Spec.map (CommRingCat.ofHom r) :=
-    pullback.lift_fst _ _ _
-  have ht : (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
-      (closedPoint (AlgebraicClosure K)) =
-        closedPoint (Ideal.inertiaInvariants C.functionField Q) := by
-    rw [htl]
-    exact specMap_closedPoint_of_forall_eq_zero_iff r hr
+  have hw := specMap_eq_geometricFiberPoint_of_projections ε r hrε x h (by
+    rw [hhproj, hpt, Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj]) hhalg
   -- the punctured neighbourhood
   obtain ⟨e', he'⟩ := exists_iso_pullback_geometricFiberMap hW Q x hxW j c.ϖ (c.opensRange_inf hz)
     c.ϖ_mem (c.ϖ_ne_zero hz) h hhproj
-  let k := e'.hom ≫ pullback.snd h j̄
-  let e : ProEt.mk k ≅ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ j̄).obj (ProEt.mk h) :=
-    MorphismProperty.Over.isoMk e' rfl
-  have hfst : specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
-      e'.hom ≫ pullback.fst h j̄ = Spec.map (CommRingCat.ofHom
-        (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) := by
-    rw [he', ← Spec.map_comp]
-    rfl
-  have hsnd : e'.hom ≫ pullback.snd h j̄ ≫ j̄ = e'.hom ≫ pullback.fst h j̄ ≫ h := by
-    rw [pullback.condition]
-  have hgen : genericBasePoint j ≫ j =
-      Spec.map (CommRingCat.ofHom (algebraMap Γ(C, c.W) Ω)) ≫ hW.fromSpec := by
-    rw [pointOfAlgebra_comp_eq_specAtPrime j hW Q, specAtPrime, ← Category.assoc, ← Spec.map_comp]
-    congr 2
-    ext a
-    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.comp_apply]
-    rw [IsScalarTower.algebraMap_apply Γ(C, c.W) (integralClosure Γ(C, c.W) Ω)
-      (Localization.AtPrime Q), Ideal.atPrimeToField_algebraMap]
-    rfl
-  have hspec : specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
-      k = genericGeomPoint (U ↘ Spec (.of K)) j := by
-    apply Scheme.Hom.geometricFiber_hom_ext
-    · rw [genericGeomPoint_geometricFiberProj, ← cancel_mono j, hgen]
-      change specFieldMap _ Ω ≫ (e'.hom ≫ pullback.snd h j̄) ≫ _ ≫ j = _
-      rw [← Scheme.Hom.geometricFiberMap_comp_geometricFiberProj j (comp_over j _)]
-      simp only [Category.assoc]
-      rw [← pullback.condition_assoc, hhproj, reassoc_of% hfst, specInertiaInvariantsTo,
-        ← Spec.map_comp_assoc]
-      simp only [← CommRingCat.ofHom_comp, AlgHom.toRingHom_eq_coe, AlgHom.comp_algebraMap]
-    · rw [genericGeomPoint_geometricFiberToAlgebraicClosure]
-      change specFieldMap _ Ω ≫ (e'.hom ≫ pullback.snd h j̄) ≫ _ = _
-      rw [← Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure j (comp_over j _)]
-      simp only [Category.assoc]
-      have hεc : CommRingCat.ofHom ε ≫
-          CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom =
-          CommRingCat.ofHom (genericEmb (U ↘ Spec (.of K)) j) :=
-        CommRingCat.hom_ext (RingHom.ext hε)
-      rw [reassoc_of% hsnd]
-      simp only [hhalg]
-      rw [reassoc_of% hfst, ← Spec.map_comp, hεc]
+  have hfst := (congrArg (fun f ↦
+    specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫ f)
+    he').trans (specFieldMap_inertiaInvariants_comp Q)
+  have hspec := genericGeomPoint_eq_of_projections j hW
+    (algebraMap Γ(C, c.W) (Ideal.inertiaInvariants C.functionField Q)) ε
+    (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom
+    (Ideal.inertiaInvariantsToField C.functionField Q).comp_algebraMap
+    (RingHom.ext hε) h hhproj hhalg _ e'.hom hfst
   -- the Galois group of `Ω / K'` is the inertia group
   have hmem (σ : Gal(Ω/C.functionField)) : σ ∈ Q.inertia Gal(Ω/C.functionField) ↔
       ∀ b : IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField)),
@@ -311,25 +425,9 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   -- the Frobenius lift
   obtain ⟨α, hα, hcα, hεα⟩ := exists_frobeniusLift_inertiaInvariants hW Q hσF _ ε r hrε hr hε _
     hσFk h hhproj hhalg
-  refine ⟨{
-    A := Ideal.inertiaInvariants C.functionField Q
-    h := h
-    t := t
-    ht := ht
-    K' := IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))
-    exists_algebraMap_eq := fun a ↦ ⟨⟨algebraMap _ Ω a,
-      (IntermediateField.mem_fixedField_iff _ _).2 fun σ _ ↦ σ.commutes a⟩, rfl⟩
-    k := k
-    e := e
-    specFieldMap_comp := hspec
-    mem_iff := hmem
-    α := α
-    hα := hα
-    hcα := by rw [htl]; exact hcα
-    hεα := by
-      change Spec.map _ ≫ (specFieldMap _ Ω ≫ e'.hom ≫ pullback.fst h (j̄)) =
-        (specFieldMap _ Ω ≫ e'.hom ≫ pullback.fst h (j̄)) ≫ α
-      rw [hfst]
-      exact hεα }⟩
+  exact nonempty_boundaryNeighbourhood_of_spectrum_data j _ σF x r hr
+    (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom h hw
+    (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) e' hspec hfst hmem
+    α hα hcα hεα
 
 end AlgebraicGeometry.WeilGroup
