@@ -178,7 +178,6 @@ private theorem termwise_counit_square
       ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫ x ≫ y)
     (termwise_homotopy_square_inv e P) htarget)
 
-set_option profiler true in
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
 stalks and cohomology; it needs neither a base-change square nor K-flatness.

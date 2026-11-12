@@ -134,6 +134,7 @@ theorem exists_singleComplexOpen_ordinary_comparison
   let := HasDerivedCategory.standard (ModuleCat.{u} (B (f' ∣_ V') z))
   let := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z.val))
   let := HasDerivedCategory.standard (ModuleCat.{u} (B f' z.val))
+  -- Select the data without nested existential eliminations over the large comparison goal.
   choose eR eA eB eC hRA hRB hCA hCB α hα τ hτ ht using
     exists_openOrdinaryTensor_germ_transport f f' g g' sq V V' hV' j hj sq₀ P z i
   let M := cohomologyModel (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
