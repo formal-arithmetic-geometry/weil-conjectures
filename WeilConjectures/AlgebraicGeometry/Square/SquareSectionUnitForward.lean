@@ -128,7 +128,6 @@ private theorem square_unitQ {X S Z T : Scheme.{u}}
         (pushforwardComp k g).inv) (.up ℤ)).app I =
       (NatTrans.mapHomologicalComplex
         ((pushforwardCongr h).hom ≫ (pushforwardComp k g).inv) (.up ℤ)).app I := by
-    ext n U x
     rfl
   rw [he]
   convert hh using 1 <;> first
@@ -162,13 +161,10 @@ private theorem sections_unit {X S : Scheme.{u}} (f : X ⟶ S)
   have hstd := NatTrans.congr_app
     (RingedSpace.sectionStandardDirectImageIso_fac f.toLRSHom.toShHom)
       ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-  unfold RingedSpace.inverseOpenUnitQ Functor.rightDerivedFunctorUnitQ
-  simp only [NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, quotient_hom, quotient_inv,
-    CategoryTheory.Functor.map_id, Category.id_comp]
+  change (localComplexUnit (D ⋙ F)
+    (RingedSpace.localSectionsEnoughKInjectives X.toRingedSpace)).app K ≫ _ = _
+  rw [localComplexUnit_app_eq, unitQ_eq]
   dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hfac hstd
-  erw [Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_id,
-    Category.comp_id]
   erw [reassoc_of% hfac]
   simp only [RingedSpace.localLerayCompositeUnit, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -278,6 +274,18 @@ private theorem sections_unitAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
           RingedSpace.localAbelianSections S.toRingedSpace).mapHomologicalComplex
             (.up ℤ)).obj K)).app (op V) ≫ z) hu
 
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem squareForward_map_pasting {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {B I K : C} {PB PI PK : D}
+    (u : PB ⟶ PK) (v : B ⟶ K) (e : PK ≅ PI) (r : K ≅ I)
+    (c : PB ⟶ F.obj B) (d : PI ⟶ F.obj I) (p : PB ⟶ PI) (q : B ⟶ I)
+    (hp : u ≫ e.hom = p) (hq : v ≫ r.hom = q)
+    (hn : p ≫ d = c ≫ F.map q) :
+    u ≫ (e.hom ≫ d ≫ F.map r.inv) = c ≫ F.map v := by
+  rw [← Category.assoc u e.hom, hp, ← Category.assoc, hn, Category.assoc,
+    ← F.map_comp, ← hq, Category.assoc, r.hom_inv_id, Category.comp_id]
+
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option profiler true in
 private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
@@ -334,15 +342,14 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
       (RingedSpace.localHypercohomologyPresheaf X.toRingedSpace q).map r.inv ≫ _ = _
     rw [← Functor.map_comp_assoc, ← hb]
     exact hf
-  apply (cancel_mono (W.map (RingedSpace.topEdgeLocalModel X.toRingedSpace q K).hom)).1
+  have hn := (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.naturality
+    ((F.mapHomologicalComplex (.up ℤ)).map b)
+  rw [← Category.assoc]
   unfold squareInverseOpenComparison
-  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom,
-    Category.assoc]
-  erw [reassoc_of% hp']
-  erw [← W.map_comp, Iso.inv_hom_id, W.map_id, Category.comp_id]
-  erw [← W.map_comp, Category.assoc, hf']
-  convert (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.naturality
-    ((F.mapHomologicalComplex (.up ℤ)).map b) using 1 <;> rfl
+  exact squareForward_map_pasting W _ _
+    (RingedSpace.topEdgeInverseModel f.toLRSHom.toShHom q K)
+    (RingedSpace.topEdgeLocalModel X.toRingedSpace q K) _ _ _ _
+    ((Category.assoc _ _ _).trans hp') ((Category.assoc _ _ _).trans hf') hn
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option profiler true in
@@ -583,7 +590,7 @@ private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
               (schemeDerivedDirectImage v).map a) ≫
           (derivedSquareRightComparison f k g v h).hom.app K)).app (op V) ≫ L ≫ C := by
       rw [sections_unitAt]
-      simp only [H, A, I, a, K, L, C, Functor.map_comp, NatTrans.comp_app, Category.assoc]
+      simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
       rfl
     _ = cochainLocalSectionUnitAt S (q : ℤ) V A ≫
         (H.map (DerivedCategory.Q.map e ≫
