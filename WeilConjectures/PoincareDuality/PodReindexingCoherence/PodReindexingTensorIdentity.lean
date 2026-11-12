@@ -255,7 +255,16 @@ private theorem identity_generator_restrict (X : Scheme.{u})
   erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
   rfl
 
--- Pure generators cross the sectionwise coefficient transports in the rewrites.
+private theorem identity_complex_sections (X : Scheme.{u})
+    [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ) (k : Identity l E X s)
+    (P : K l E X s) (n : ℤ) (U : X.ProEt)
+    (x : (P.X n).val.obj (op ((proEtaleIsoPostcompose (𝟙 X)).obj U))) :
+    ((k.complex P).hom.f n).val.app (op U) x =
+      (P.X n).val.map ((siteId X).inv.app U).op x := by
+  rw [k.degree]
+  exact eq_of_heq (k.sections (P.X n) U x)
+
+-- Cancel the inverse comparison before evaluating on pure generators.
 set_option profiler true in
 private theorem identity_tensor_chain (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
@@ -266,6 +275,7 @@ private theorem identity_tensor_chain (X : Scheme.{u})
         (total l E X s).map ((k.complex P).hom, (k.complex Q).hom) =
       (k.complex ((total l E X s).obj (P, Q))).hom := by
   apply (cancel_epi (c.tensorChain P Q).inv).mp
+  rw [Iso.inv_hom_id_assoc]
   ext n : 1
   apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
     (R := podReindexingRing l E X s)
@@ -286,15 +296,10 @@ private theorem identity_tensor_chain (X : Scheme.{u})
   simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
     PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
   rw [hi']
-  dsimp only [z]
-  erw [c.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
-  rw [k.degree, k.degree, k.degree]
-  erw [eq_of_heq (k.sections _ U.unop z)]
-  erw [identity_generator_restrict]
-  have hx := eq_of_heq (k.sections (P.X p) U.unop x)
-  have hy := eq_of_heq (k.sections (Q.X q) U.unop y)
-  erw [hx, hy]
-  rfl
+  erw [ScalarHomTensor.tensor_generator_map]
+  erw [identity_complex_sections, identity_complex_sections, identity_complex_sections]
+  exact (identity_generator_restrict l E X s P Q p q n hpq
+    ((siteId X).inv.app U.unop).op x y).symm
 
 private theorem identity_representative_square
     {C : Type*} [Category C] (F : C ⥤ C) (B : C × C ⥤ C)
