@@ -61,7 +61,8 @@ theorem finiteBoundary_target_endpoint
   simp only [Functor.mapIso_inv, ← Functor.map_comp]
   apply congrArg S.map
   rw [← finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    Functor.map_id, Category.id_comp]
   apply Sheaf.hom_ext
   ext U z
   trace "target: extensionality complete"

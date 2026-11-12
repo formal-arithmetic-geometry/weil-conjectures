@@ -32,7 +32,6 @@ private theorem finiteBoundarySourceRestriction_inv_section
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
 
-set_option profiler true in
 /-- Source endpoint transport.  This is the coefficient-one calculation: the
 finite quotient followed by the restricted evaluation comparison is the
 integer coefficient map.  The proof is the coefficient-one section calculation,
@@ -76,7 +75,6 @@ theorem finiteBoundary_source_endpoint
   rw [Int.cast_one] at hi
   dsimp only [x, x', z, U] at ha
   dsimp only [U] at hi
-  trace_state
   exact ha.trans hi.symm
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
