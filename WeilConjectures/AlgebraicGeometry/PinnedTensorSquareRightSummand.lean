@@ -132,7 +132,7 @@ theorem pinned_tensor_square_right_summand
       (𝟙 _ ⊗ₘ (S.map a).f q) ≫
       HomologicalComplex.ιMapBifunctor (S.obj (H.obj P)) (S.obj N)
         (curriedTensor _) (.up ℤ) p q n h ≫ (e' (H.obj P) N).inv.f n  := by
-  extract_lets _ _ _ _ _ R A B C F S U V t H e' ρ G ι
+  extract_lets R A B C F S U V t H e' ρ G ι
   exact extendScalars_tensor_summand _ U V
     (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z P).hom
     (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z Q).hom

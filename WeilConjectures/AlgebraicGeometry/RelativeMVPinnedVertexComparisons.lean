@@ -158,8 +158,8 @@ theorem relativeMV_pinned_vertex_comparisons
         congrArg ((derivedPullback g).map)
           (relativeMVExactOpenIso_restriction f (W := U ⊓ V) (U := V) inf_le_right K)
   · change G.map (biprod.lift _ _) ≫ _ = _
-    simp only [map_lift_comparison, htUnit U, htUnit V]
-    rfl
+    refine (map_lift_comparison G (t U) (t V) _ _).trans ?_
+    exact congrArg₂ biprod.lift (htUnit U) (htUnit V)
   · change G.map (biprod.desc _ (-_)) ≫ _ = _
     apply map_desc_comparison
     · exact htRestriction (U ⊓ V) U inf_le_left
