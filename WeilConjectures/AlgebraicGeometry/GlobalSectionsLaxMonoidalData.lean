@@ -82,9 +82,9 @@ private theorem globalSectionsTensor_associativity
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj P ≫
       moduleCup_sectionTensorMap X (M ⊗ N) P ≫
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (α_ M N P).hom =
-      (α_ (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M
-        (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N
-        (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj P).hom ≫
+      (α_ ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)
+        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N)
+        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj P)).hom ≫
       (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M ◁
         moduleCup_sectionTensorMap X N P ≫ moduleCup_sectionTensorMap X M (N ⊗ P) := by
   apply ModuleCat.hom_ext
@@ -102,8 +102,8 @@ private theorem globalSectionsTensor_associativity
 
 private theorem globalSectionsTensor_left_unitality
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
-    (λ_ (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M).hom =
-      ModuleCat.ofHom (unitSectionsEquiv (X := X) ⊤).toLinearMap ▷
+    (λ_ ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)).hom =
+      ModuleCat.ofHom (R := Γ(X, ⊤)) (unitSectionsEquiv (X := X) ⊤).toLinearMap ▷
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M ≫
       moduleCup_sectionTensorMap X (𝟙_ _) M ≫
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (λ_ M).hom := by
@@ -121,9 +121,9 @@ private theorem globalSectionsTensor_left_unitality
 
 private theorem globalSectionsTensor_right_unitality
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
-    (ρ_ (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M).hom =
+    (ρ_ ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)).hom =
       (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M ◁
-        ModuleCat.ofHom (unitSectionsEquiv (X := X) ⊤).toLinearMap ≫
+        ModuleCat.ofHom (R := Γ(X, ⊤)) (unitSectionsEquiv (X := X) ⊤).toLinearMap ≫
       moduleCup_sectionTensorMap X M (𝟙_ _) ≫
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (ρ_ M).hom := by
   apply ModuleCat.hom_ext

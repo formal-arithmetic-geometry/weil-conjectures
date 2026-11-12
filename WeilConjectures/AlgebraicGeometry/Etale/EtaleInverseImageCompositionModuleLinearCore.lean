@@ -170,6 +170,49 @@ private theorem comparison_forget_of_units
   exact (paste_rectangle a (d.hom.app N) (r.map e.hom) (r'.map e.hom)
     (d.hom.app (l'.obj G)) (b'.unit.app G) (d.hom.naturality e.hom) he).trans hm.symm
 
+/-- Maps of constant ring sheaves agreeing on constant sections respect pullback pasting. -/
+private theorem constantSheaf_composition_map
+    {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+    (J₁ : GrothendieckTopology C₁) (J₂ : GrothendieckTopology C₂)
+    (J₃ : GrothendieckTopology C₃)
+    [HasWeakSheafify J₁ CommRingCat.{u + 1}]
+    [HasWeakSheafify J₂ CommRingCat.{u + 1}]
+    [HasWeakSheafify J₃ CommRingCat.{u + 1}]
+    (f : C₁ ⥤ C₂) (g : C₂ ⥤ C₃) (h : C₁ ⥤ C₃)
+    [f.IsContinuous J₁ J₂] [g.IsContinuous J₂ J₃]
+    [h.IsContinuous J₁ J₃] [(f ⋙ g).IsContinuous J₁ J₃]
+    (α : f ⋙ g ≅ h) (R : CommRingCat.{u + 1})
+    (γ₁ : (constantSheaf J₁ CommRingCat).obj R ⟶
+      (f.sheafPushforwardContinuous CommRingCat J₁ J₂).obj
+        ((constantSheaf J₂ CommRingCat).obj R))
+    (γ₂ : (constantSheaf J₂ CommRingCat).obj R ⟶
+      (g.sheafPushforwardContinuous CommRingCat J₂ J₃).obj
+        ((constantSheaf J₃ CommRingCat).obj R))
+    (γ₃ : (constantSheaf J₁ CommRingCat).obj R ⟶
+      (h.sheafPushforwardContinuous CommRingCat J₁ J₃).obj
+        ((constantSheaf J₃ CommRingCat).obj R))
+    (h₁ : ∀ W r, γ₁.hom.app W ((toSheafify J₁ ((Functor.const C₁ᵒᵖ).obj R)).app W r) =
+      (toSheafify J₂ ((Functor.const C₂ᵒᵖ).obj R)).app (f.op.obj W) r)
+    (h₂ : ∀ W r, γ₂.hom.app W ((toSheafify J₂ ((Functor.const C₂ᵒᵖ).obj R)).app W r) =
+      (toSheafify J₃ ((Functor.const C₃ᵒᵖ).obj R)).app (g.op.obj W) r)
+    (h₃ : ∀ W r, γ₃.hom.app W ((toSheafify J₁ ((Functor.const C₁ᵒᵖ).obj R)).app W r) =
+      (toSheafify J₃ ((Functor.const C₃ᵒᵖ).obj R)).app (h.op.obj W) r) :
+    γ₃ ≫ (Functor.sheafPushforwardContinuousNatTrans α.hom CommRingCat J₁ J₃).app
+        ((constantSheaf J₃ CommRingCat).obj R) =
+      γ₁ ≫ (f.sheafPushforwardContinuous CommRingCat J₁ J₂).map γ₂ := by
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext J₁ _ _
+    (((f ⋙ g).sheafPushforwardContinuous CommRingCat J₁ J₃).obj
+      ((constantSheaf J₃ CommRingCat).obj R)).property
+  ext W r
+  change ((constantSheaf J₃ CommRingCat).obj R).obj.map (α.hom.app W.unop).op
+      (γ₃.hom.app W ((toSheafify J₁ ((Functor.const C₁ᵒᵖ).obj R)).app W r)) =
+    γ₂.hom.app (f.op.obj W)
+      (γ₁.hom.app W ((toSheafify J₁ ((Functor.const C₁ᵒᵖ).obj R)).app W r))
+  rw [h₃, h₁, h₂]
+  exact congrArg (fun k ↦ k r)
+    ((toSheafify J₃ ((Functor.const C₃ᵒᵖ).obj R)).naturality (α.hom.app W.unop).op).symm
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -404,22 +447,8 @@ theorem etaleInverseImageCompositionModuleLinearCore
         JX JZ).app RZ =
       gammaU ≫ (f.sheafPushforwardContinuous CommRingCat.{u + 1}
         JX JY).map gammaV := by
-    apply Sheaf.hom_ext
-    apply sheafify_hom_ext JX _ _
-      (((f ⋙ g).sheafPushforwardContinuous CommRingCat.{u + 1}
-        JX JZ).obj RZ).property
-    ext W r
-    change RZ.obj.map (alpha.hom.app W.unop).op
-        (gammaUV.hom.app W ((toSheafify JX
-          ((Functor.const X.Etaleᵒᵖ).obj R)).app W r)) =
-      gammaV.hom.app (f.op.obj W)
-        (gammaU.hom.app W ((toSheafify JX
-          ((Functor.const X.Etaleᵒᵖ).obj R)).app W r))
-    erw [hUV, hU, hV]
-    exact congrArg (fun k => k r)
-      ((toSheafify JZ
-        ((Functor.const Z.Etaleᵒᵖ).obj R)).naturality
-        (alpha.hom.app W.unop).op).symm
+    exact constantSheaf_composition_map JX JY JZ f g h alpha R
+      gammaU gammaV gammaUV hU hV hUV
   have hr' : chi ≫
       (Functor.sheafPushforwardContinuousNatTrans alpha.hom RingCat.{u + 1}
         JX JZ).app
@@ -488,6 +517,7 @@ theorem etaleInverseImageCompositionModuleLinearCore
         ((lv.map (eU.inv.app G) ≫ eV.inv.app (LU.obj G)) ≫ UZ.map (c.hom.app G)) = _
       rw [Category.assoc, ← hcomp G (LUV.obj G) (c.hom.app G),
         (aU.comp aV).homEquiv_apply, hu G, UX.map_comp, hd (LUV.obj G)]
+    rw [← Category.assoc]
     exact comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
       (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
 
