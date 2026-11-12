@@ -388,16 +388,8 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
         exceptionalKunnethMap ℓ (Y := U) M := by
-    calc
-      _ = Functor.LaxMonoidal.μ (boundedConstructibleUpperStar
-            (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)) _ _ ≫
-          (exceptionalKunnethSourceRestrictionIso ℓ j M).hom ≫
-            exceptionalKunnethMap ℓ (Y := U) M :=
-        congrArg (Functor.LaxMonoidal.μ (boundedConstructibleUpperStar
-          (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)) _ _ ≫ ·) hα
-      _ = _ := by
-        simp only [exceptionalKunnethSourceRestrictionIso_hom, Category.assoc,
-          Functor.Monoidal.μ_δ_assoc]
+    rw [hα, exceptionalKunnethSourceRestrictionIso_hom]
+    simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
   have key := map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
     (swapEvPairing (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
