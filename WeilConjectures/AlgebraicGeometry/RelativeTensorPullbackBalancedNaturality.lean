@@ -66,7 +66,7 @@ private theorem balancedSectionPairing_bilinear
     {A C : Type u} [CommRing A] [CommRing C] (φ : A →+* C)
     (M : ModuleCat C) (N : ModuleCat A) (P Q : ModuleCat C)
     (η : (ModuleCat.extendScalars φ).obj N →ₗ[C] P)
-    (p : M ⊗[C] P →ₗ[C] Q) :
+    (p : TensorProduct C M P →ₗ[C] Q) :
     IsBilinearMap A (fun (m : (ModuleCat.restrictScalars φ).obj M) (n : N) ↦
       (show (ModuleCat.restrictScalars φ).obj Q from
         p ((show M from m) ⊗ₜ[C] η ((1 : C) ⊗ₜ[A, φ] n)))) where
@@ -95,7 +95,6 @@ private def balancedPairing (α : R ⟶ B)
       N.val.obj W →ₗ[R.obj.obj W]
         ((restrictScalars (𝓻 α)).obj
           ((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N))).val.obj W :=
-
   (balancedSectionPairing_bilinear (α.hom.app W).hom (M.val.obj W) (N.val.obj W)
     ((changeOfRings.{u, u, u} α N).val.obj W)
     (((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N)).val.obj W)
