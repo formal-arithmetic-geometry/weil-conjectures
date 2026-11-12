@@ -158,67 +158,8 @@ private theorem completedChern_mul_normalization (l : ℕ) [Fact l.Prime]
   simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
   exact congrArg₂ (· + ·) hw (by simpa only [ModelLocalChernNormalized] using hz)
 
-set_option profiler true in
-/-- Factor the base contribution before taking the derived adjunction. -/
-private theorem diagonalLocalChern_pullback_sum_factorization (l : ℕ) [Fact l.Prime]
-    {X S X' S' : Scheme.{u}}
-    [IsNoetherian X] [IsNoetherian S] [IsNoetherian X'] [IsNoetherian S']
-    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
-    [DiagonalTraceLocalizations l X'] [DiagonalTraceLocalizations l S']
-    (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)
-    (h : f' ≫ hS = hX ≫ f)
-    (hunit : IsUnit (l : Γ(S, ⊤))) (hunit' : IsUnit (l : Γ(S', ⊤)))
-    (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
-    (p' : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f')
-    (eX : CompletedRealization l X) (eX' : CompletedRealization l X')
-    (cF : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
-    (cF' : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f')
-    (line : PullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) hX
-      (zlLine l X) (zlLine l X') (spIntegralComparison hX l (bottomField l)))
-    (c : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) hS)
-    (hPic : ∃ M : S'.Pic,
-      Scheme.Pic.map hX
-          (Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S)) =
-        Scheme.Pic.map f' M *
-          Scheme.Pic.map p'.model.model.hom (SpTowerClasses.hyperplanePic S'))
-    (z : DiagonalTrace.completedUnit l X ⟶
-      (DiagonalTrace.completedLine l X)⟦(2 : ℤ)⟧)
-    (z' : DiagonalTrace.completedUnit l X' ⟶
-      (DiagonalTrace.completedLine l X')⟦(2 : ℤ)⟧)
-    (hz : ModelLocalChernNormalized l p z) (hz' : ModelLocalChernNormalized l p' z') :
-    let Λ := Profinite.continuousMapRingObj.{u} ℤ_[l]
-    let L' := derivedUpper Λ f'
-    let θ := (CondensedRing.leftDerivedUpperStarComp Λ f' hS).symm ≪≫
-      Functor.leftDerivedFunctorNatIso _ (CondensedRing.upperStarCongr Λ h) ≪≫
-      CondensedRing.leftDerivedUpperStarComp Λ hX f
-    let V := ((DerivedCategory.singleFunctor (Modules Λ S') 0).obj
-      (zlLine l S'))⟦(2 : ℤ)⟧
-    let T := ((DerivedCategory.singleFunctor (Modules Λ X') 0).obj
-      (zlLine l X'))⟦(2 : ℤ)⟧
-    ∃ (γ : unit Λ S' ⟶ V) (v : L'.obj V ⟶ T),
-      θ.hom.app (unit Λ S) ≫
-          (derivedUpper Λ hX).map (cF.derived ≫ eX.localChern l X z) ≫ line.shift =
-        L'.map (c.derived ≫ γ) ≫ v +
-          L'.map c.derived ≫ (cF'.derived ≫ eX'.localChern l X' z') := by
-  dsimp only
-  let Λ := Profinite.continuousMapRingObj.{u} ℤ_[l]
-  let L' := derivedUpper Λ f'
-  obtain ⟨M, hM⟩ := hPic
-  have hX' : IsUnit (l : Γ(X', ⊤)) := by
-    simpa only [map_natCast] using hunit'.map f'.appTop.hom
-  obtain ⟨w, hw, _⟩ := DiagonalTrace.diagonalCompletedLocalChern_lift l p' hX'
-    (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p'.chernX (Scheme.Pic.map f' M))
-  have hsum := completedChern_mul_normalization l p' _ _ hM w z' hw hz'
-  have hpull := diagonalLocalChern_horizontal_realization l f f' hX hS h
-    hunit hunit' p p' eX eX' cF cF' line c z (w + z') hz hsum
-  obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f' hunit'
-    p' eX' cF' M w hw
-  refine ⟨γ, v, hpull.trans ?_⟩
-  rw [localChern_add]
-  simp only [Preadditive.comp_add]
-  exact congrArg₂ (· + ·) (map_comp_factor L' c.derived γ v _ hbase) rfl
-
 set_option linter.unusedVariables false in
+set_option profiler true in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base.
 
@@ -295,8 +236,20 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
   let adj := CondensedRing.derivedUpperStarLowerStarAdjunction Λ f
   let adj' := CondensedRing.derivedUpperStarLowerStarAdjunction Λ f'
   have : L'.Additive := adj'.left_adjoint_additive
-  obtain ⟨γ, v, hlocal⟩ := diagonalLocalChern_pullback_sum_factorization
-    l f f' hX hS h hunit hunit' p p' eX eX' cF cF' line c hPic z z' hz hz'
+  obtain ⟨M, hM⟩ := hPic
+  have hX' : IsUnit (l : Γ(X', ⊤)) := by
+    simpa only [map_natCast] using hunit'.map f'.appTop.hom
+  obtain ⟨w, hw, _⟩ := DiagonalTrace.diagonalCompletedLocalChern_lift l p' hX'
+    (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p'.chernX (Scheme.Pic.map f' M))
+  have hsum := completedChern_mul_normalization l p' _ _ hM w z' hw hz'
+  have hpull := diagonalLocalChern_horizontal_realization l f f' hX hS h
+    hunit hunit' p p' eX eX' cF cF' line c z (w + z') hz hsum
+  obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f' hunit'
+    p' eX' cF' M w hw
+  have hlocal := hpull
+  rw [localChern_add] at hlocal
+  simp only [Preadditive.comp_add] at hlocal
+  rw [map_comp_factor L' c.derived γ v _ hbase] at hlocal
   refine ⟨c.derived ≫ γ, adj'.homEquiv _ _ v ≫ (eqToIso canonical').inv.app _, ?_⟩
   unfold modelLocalAdjunct modelExchange derivedExchange
   apply exchange_components_finish (c := c.derived) (γ := γ)
