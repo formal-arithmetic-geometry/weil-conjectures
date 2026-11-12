@@ -265,7 +265,6 @@ private lemma coefficient_square_under_iso
       e ≫ (Q.mapIso s ≪≫ Q.mapIso t ≪≫ cX).hom := by
   simpa only [mapIso_composite_hom] using h
 
-set_option maxHeartbeats 1600000 in
 -- Retain the native degree-zero object throughout the coefficient square.
 private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))
@@ -287,7 +286,6 @@ private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
   run_tac withMainContext do
     structuralCast (← getMainGoal) (← getLocalDeclFromUserName `h).toExpr
 
-set_option maxHeartbeats 600000 in
 -- Prove naturality for abstract complexes before inserting the mapping-cone augmentation.
 private lemma pointComplexComp_naturality (Λ : ScalarSixRing.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y) {C D : CochainComplex (PointModules Λ) ℤ}
@@ -305,7 +303,6 @@ private lemma pointComplexComp_naturality (Λ : ScalarSixRing.{u})
   run_tac withMainContext do
     structuralCast (← getMainGoal) (← getLocalDeclFromUserName `h).toExpr
 
-set_option maxHeartbeats 800000 in
 -- The ordinary square on complexes is determined by its degree-zero coefficient summand.
 private lemma total_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))
@@ -485,7 +482,6 @@ private lemma coherence
       simp only [tensorHom_id]
       rw [Functor.LaxMonoidal.μ_natural_left]
 
-set_option maxHeartbeats 2000000 in
 -- The composition compares exact and total derived realizations of the same complexes.
 /--
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
