@@ -89,6 +89,29 @@ private theorem cone_precompose
   · simp [CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.map,
       Category.assoc]
 
+private theorem mappingCone_map_isIso
+    {E : Type*} [Category E] [Preadditive E] [HasBinaryBiproducts E]
+    [HasDerivedCategory E]
+    {P Q A B : CochainComplex E ℤ}
+    (p : P ⟶ Q) (t : A ⟶ B) (x : P ⟶ A) (y : Q ⟶ B)
+    (h : p ≫ y = x ≫ t) (hx : QuasiIso x) (hy : QuasiIso y) :
+    IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.map p t x y h)) := by
+  have hxiso : IsIso (DerivedCategory.Q.map x) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ x).2 hx
+  have hyiso : IsIso (DerivedCategory.Q.map y) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ y).2 hy
+  let m := DerivedCategory.Q.mapTriangle.map
+    (CochainComplex.mappingCone.triangleMap p t x y h)
+  have h₁ : IsIso m.hom₁ := by
+    change IsIso (DerivedCategory.Q.map x)
+    exact hxiso
+  have h₂ : IsIso m.hom₂ := by
+    change IsIso (DerivedCategory.Q.map y)
+    exact hyiso
+  exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
+    (DerivedCategory.mappingCone_triangle_distinguished p)
+    (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
@@ -169,22 +192,8 @@ theorem derivedPullback_cone_square_transposition
   obtain ⟨H', htrans⟩ := CochainComplex.additiveAdjunction_cone_square
     adj₀ p t' (x ≫ α) (y ≫ β) H₀
   let c := CochainComplex.mappingCone.map p t x y hc
-  have hxiso : IsIso (DerivedCategory.Q.map x) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ x).2 hx
-  have hyiso : IsIso (DerivedCategory.Q.map y) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ y).2 hy
-  have : IsIso (DerivedCategory.Q.map c) := by
-    let m := DerivedCategory.Q.mapTriangle.map
-      (CochainComplex.mappingCone.triangleMap p t x y hc)
-    have h₁ : IsIso m.hom₁ := by
-      change IsIso (DerivedCategory.Q.map x)
-      exact hxiso
-    have h₂ : IsIso m.hom₂ := by
-      change IsIso (DerivedCategory.Q.map y)
-      exact hyiso
-    exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
-      (DerivedCategory.mappingCone_triangle_distinguished p)
-      (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
+  have : IsIso (DerivedCategory.Q.map c) :=
+    mappingCone_map_isIso p t x y hc hx hy
   have hconeP := CochainComplex.isKFlat_mappingCone p hP hQ
   refine ⟨L.obj P, L.obj Q, L.map p, (ac.homEquiv _ _).symm (x ≫ α),
     (ac.homEquiv _ _).symm (y ≫ β), H',
