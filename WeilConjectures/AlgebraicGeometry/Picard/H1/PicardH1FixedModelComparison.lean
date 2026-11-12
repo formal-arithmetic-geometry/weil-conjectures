@@ -353,9 +353,11 @@ theorem picard_h1_fixed_model_comparison
                       (ui i) (hui i))).left) 1 (α z) := by
   set_option backward.isDefEq.respectTransparency true in
     classical
-    obtain ⟨C, hC⟩ := Classical.axiomOfChoice fun i ↦
+    -- Share the types of the geometric data before eliminating the existentials.
+    have htargets := Classical.axiomOfChoice fun i ↦
       picard_affine_target_normalization (fi i) (hOi i)
         ((Modules.tensorPullback (ui i)).obj L) W k U hU (htrivial i)
+    obtain ⟨C, hC⟩ := htargets
     let p := RingHom.ker (W.evaluation U w hwU).hom
     let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
     let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
@@ -363,15 +365,15 @@ theorem picard_h1_fixed_model_comparison
       f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
       (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
     obtain ⟨φ, e, ei, hmaps⟩ := hcompare
-    refine residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
-      (fun i ↦ (hC i).2.2.1) e0 e1 _ _
-      (fun i ↦ structureSheafCohomologyPullback
-        (((Over.pullback (S.fromSpecResidueField s)).map
-          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-            (ui i) (hui i))).left) 1)
-      ((affineResidueModelEquiv W w U hwU hU p rfl _ K hK hE.some).trans e)
-      (fun i ↦ (affineResidueModelEquiv W w U hwU hU p rfl _ (C i) (hC i).1
-        (hC i).2.2.2.some).trans (ei i)) φ (fun i ↦ (hmaps i).2.2) ?_
-    exact affine_betti_model_residue_minimality W _ w U hwU hU K hK.1 hrank hE
+    have hreszero := affine_betti_model_residue_minimality W _ w U hwU hU K hK.1 hrank hE
+    let B := Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1
+    let D := fun i ↦ Sheaf.H
+      (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1
+    let g : ∀ i, B → D i := fun i ↦ structureSheafCohomologyPullback
+      (((Over.pullback (S.fromSpecResidueField s)).map
+        (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+          (ui i) (hui i))).left) 1
+    exact residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
+      (fun i ↦ (hC i).2.2.1) e0 e1 B D g _ _ φ (fun i ↦ (hmaps i).2.2) hreszero
 
 end AlgebraicGeometry.Scheme
