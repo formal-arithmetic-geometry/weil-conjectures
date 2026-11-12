@@ -819,7 +819,8 @@ private theorem coefficientCofinal_reconstruct
       ((lisseCoherence_scalarSheafUnit Y _ (F.obj.obj (op n))).hom.app (op U)
         ((quotientCoordinateSheaf Y b _ _ _ i).hom.app (op U)
           (e.hom.hom.app (op U) z)))) = _
-  rw [sheaf_iso_hom_inv_app_apply]
+  congr 1
+  exact sheaf_iso_hom_inv_app_apply e U _
 
 private def coefficientHomCoordinate
     (b : letI := (lisseIntegerInclusion l E L ι).toAlgebra
