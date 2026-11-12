@@ -841,9 +841,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro m
+    refine ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)
     simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
     change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
