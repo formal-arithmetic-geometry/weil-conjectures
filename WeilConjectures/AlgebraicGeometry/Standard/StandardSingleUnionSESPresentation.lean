@@ -274,6 +274,7 @@ theorem standardSingle_union_ses_presentation
       DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ aUV.hom := by
   let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  exact cyl_presentation _ _ _ (standardSingle_union_ses_chain_data p g U V N)
+  exact cyl_presentation (Arrow.mk _) (Arrow.mk _) (Arrow.mk _)
+    (standardSingle_union_ses_chain_data p g U V N)
 
 end AlgebraicGeometry

@@ -86,6 +86,7 @@ theorem normalizedDirectImageSquare_component
     ((schemeNormalizedDirectImageCompIso gX f).app (DerivedCategory.Qh.obj K))
     ((schemeNormalizedDirectImageCompIso f' g).app (DerivedCategory.Qh.obj K))
     _ _ _ _ _ _ h₁ h₂ ?_
-  simpa only [directImageSquareIso] using ht
+  simp only [directImageSquareIso] at ht
+  exact ht
 
 end AlgebraicGeometry
