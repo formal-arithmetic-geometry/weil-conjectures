@@ -102,7 +102,6 @@ lemma map_comp_reductionTransition_derivedReductionStep (n : ℕ)
     (integersModPowReduction X ℓ E n)
     (integersModPowReduction_comp_integersModPowTransition X ℓ E n) (A := L) (B := K) s
 
-set_option profiler true in
 /-- **Lifting isomorphisms of reductions** (König's lemma): if `L` is derived complete, and for
 every `n` the reductions `red_{n+1} K`, `red_{n+1} L` are isomorphic with finitely many morphisms
 between them, there is `f : K ⟶ L` all of whose reductions are isomorphisms. -/

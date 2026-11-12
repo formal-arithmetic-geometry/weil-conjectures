@@ -90,7 +90,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
 
-set_option profiler true in
 /-- **Invariant retractions of the derived unit give invariant retractions of the exchange.** Let
 `R : Rg_* Lg^* A ⟶ A` be a retraction of the derived unit at `A = Lε^* C`, for the projection
 `g : G_Ω ⟶ N.generic`, which is invariant under the derived unit transports along all the
