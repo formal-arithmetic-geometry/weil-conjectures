@@ -97,37 +97,26 @@ private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 variable (k : Type u) [Field k]
 set_option profiler true in
--- The explicit comparison family has several large derived-category instance arguments.
 attribute [-instance] CategoryTheory.catToReflQuiver in
-private theorem comparisonsForCoefficient
+private theorem comparisonsForMorphism
     (ℓ : ℕ) [Fact ℓ.Prime] (hadm : IsLocalizingAdmissibleCoefficient ℓ Λ)
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    (hclosure : ∀ X : Spaces k,
-      localizingClosureProEtale Λ X.obj.left = localizing Λ X.obj.left) :
-    ∃ φ : Comparisons Λ k,
-      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),
-    φ f c c = Iso.refl _) ∧
-      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c d e : Compactifications k f),
-    φ f c d ≪≫ φ f d e = φ f c e) ∧
-      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c d : Compactifications k f)
-    (r : c.obj.Refinement d.obj)
-    (_boundary : r.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange)
-    (K : (localizing Λ X.obj.left).FullSubcategory),
-      ∃ e : (extend Λ d.obj.i).obj K.obj ≅
-          (push Λ r.hom).obj ((extend
-            Λ c.obj.i).obj K.obj),
-        (openAdjunction Λ d.obj.i).homEquiv _ _ e.hom ≫
-            refinementRestriction Λ r K.obj =
-              (openAdjunction Λ c.obj.i).unit.app K.obj ∧
-          (φ f c d).app K = refinementIso Λ r K.obj e) := by
+    {X Y : Spaces k} (f : X ⟶ Y)
+    (hclosure : localizingClosureProEtale Λ X.obj.left = localizing Λ X.obj.left) :
+    ∃ φ : ∀ c d : Compactifications k f,
+        candidate Λ k (X := X) (Y := Y) (f := f) c ≅
+          candidate Λ k (X := X) (Y := Y) (f := f) d,
+      (∀ c, φ c c = Iso.refl _) ∧
+      (∀ c d e, φ c d ≪≫ φ d e = φ c e) ∧
+      (∀ (c d : Compactifications k f) (r : c.obj.Refinement d.obj)
+        (hb : r.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange)
+        (K : (localizing Λ X.obj.left).FullSubcategory),
+        ∃ e : (extend Λ d.obj.i).obj K.obj ≅
+            (push Λ r.hom).obj ((extend Λ c.obj.i).obj K.obj),
+          (openAdjunction Λ d.obj.i).homEquiv _ _ e.hom ≫
+              refinementRestriction Λ r K.obj = (openAdjunction Λ c.obj.i).unit.app K.obj ∧
+            (φ c d).app K = refinementIso Λ r K.obj e) := by
   classical
-  simp only [← forall_and]
-  refine Classical.axiomOfChoice (α := Spaces k) ?_
-  intro X
-  refine Classical.axiomOfChoice (α := Spaces k) ?_
-  intro Y
-  refine Classical.axiomOfChoice (α := X ⟶ Y) ?_
-  intro f
   have : IsSeparated X.obj.hom := X.property.1
   have : LocallyOfFiniteType X.obj.hom := X.property.2.1
   have : QuasiCompact X.obj.hom := X.property.2.2
@@ -154,7 +143,7 @@ private theorem comparisonsForCoefficient
   have : IsSeparated f.hom.left := IsSeparated.of_comp _ Y.obj.hom
   have : QuasiCompact f.hom.left :=
     QuasiCompact.of_comp (f := f.hom.left) (g := Y.obj.hom)
-  have he := hclosure X
+  have he := hclosure
   let J := ObjectProperty.ιOfLE (le_of_eq he.symm)
   obtain ⟨ψ, hiso, hn, hi, hc⟩ :=
     compactification_coherence_cocycle Λ ℓ hadm k f.hom.left
@@ -162,36 +151,62 @@ private theorem comparisonsForCoefficient
       candidate Λ k (X := X) (Y := Y) (f := f) c ≅
         candidate Λ k (X := X) (Y := Y) (f := f) d :=
     restrict_comparison (le_of_eq he.symm) (ψ ⟨c⟩ ⟨d⟩)
-  refine ⟨φ, ?_⟩
-  intro c
-  refine ⟨?_, ?_⟩
-  · apply Iso.ext
+  refine ⟨φ, ?_, ?_, ?_⟩
+  · intro c
+    apply Iso.ext
     apply NatTrans.ext
     funext K
     exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hi ⟨c⟩)
-  · intro d
-    constructor
-    · intro e
-      apply Iso.ext
-      apply NatTrans.ext
-      funext K
-      exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩)
-    · intro r hb K
-      let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
-        ⟨ObjectProperty.homMk r, hb⟩
-      let L := J.obj K
-      obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
-        f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
-      obtain ⟨e, he, hinv⟩ := integral_boundaryRefinement_normalization Λ k ℓ hadm
-        f c d r hb K L.property
-      refine ⟨e, he, ?_⟩
-      have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
-      have hn' : (ψ ⟨c⟩ ⟨d⟩).hom.app L ≫
-          compactificationRefinementComponent Λ r' K.obj = 𝟙 _ :=
-        cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
-          (refinementComponent_comp Λ ℓ hadm r' a L.obj)
-      exact iso_eq_of_inv _ _ _ hn'
-        hinv
+  · intro c d e
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩)
+  · intro c d r hb K
+    let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
+      ⟨ObjectProperty.homMk r, hb⟩
+    let L := J.obj K
+    obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
+      f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
+    obtain ⟨e, he, hinv⟩ := integral_boundaryRefinement_normalization Λ k ℓ hadm
+      f c d r hb K L.property
+    refine ⟨e, he, ?_⟩
+    have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
+    have hn' : (ψ ⟨c⟩ ⟨d⟩).hom.app L ≫
+        compactificationRefinementComponent Λ r' K.obj = 𝟙 _ :=
+      cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
+        (refinementComponent_comp Λ ℓ hadm r' a L.obj)
+    exact iso_eq_of_inv _ _ _ hn'
+      hinv
+
+-- The explicit comparison family has several large derived-category instance arguments.
+attribute [-instance] CategoryTheory.catToReflQuiver in
+private theorem comparisonsForCoefficient
+    (ℓ : ℕ) [Fact ℓ.Prime] (hadm : IsLocalizingAdmissibleCoefficient ℓ Λ)
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hclosure : ∀ X : Spaces k,
+      localizingClosureProEtale Λ X.obj.left = localizing Λ X.obj.left) :
+    ∃ φ : Comparisons Λ k,
+      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),
+    φ f c c = Iso.refl _) ∧
+      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c d e : Compactifications k f),
+    φ f c d ≪≫ φ f d e = φ f c e) ∧
+      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c d : Compactifications k f)
+    (r : c.obj.Refinement d.obj)
+    (_boundary : r.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange)
+    (K : (localizing Λ X.obj.left).FullSubcategory),
+      ∃ e : (extend Λ d.obj.i).obj K.obj ≅
+          (push Λ r.hom).obj ((extend
+            Λ c.obj.i).obj K.obj),
+        (openAdjunction Λ d.obj.i).homEquiv _ _ e.hom ≫
+            refinementRestriction Λ r K.obj =
+              (openAdjunction Λ c.obj.i).unit.app K.obj ∧
+          (φ f c d).app K = refinementIso Λ r K.obj e) := by
+  classical
+  have per_morphism {X Y : Spaces k} (f : X ⟶ Y) :=
+    comparisonsForMorphism Λ k ℓ hadm f (hclosure X)
+  choose φ hi hc hn using @per_morphism
+  exact ⟨φ, hi, hc, hn⟩
 
 /-- Normalized comparison maps and their groupoid equations.
 
