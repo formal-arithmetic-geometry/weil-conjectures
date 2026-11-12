@@ -165,7 +165,6 @@ private theorem tensor_counit_compatibility
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option trace.profiler true in
--- Independent localization instances require extra elaboration heartbeats.
 /-- Tensor comparison and counit descend together before taking an adjunction transpose.
 Source: Stacks Project, Tag 08EU, first sentence of proof; Tag 08FE.
 Proof: construct rhoX and rhoY naturally on K-flat total tensor models, using exact
@@ -220,8 +219,8 @@ theorem exists_openRestriction_tensor_counit_descent
   let WY : MorphismProperty (schemeDerivedCategory.{u, w} Y) := (MorphismProperty.isomorphisms
     (schemeDerivedCategory.{u, u} U.toScheme)).inverseImage rY
   have hloc : rY.IsLocalization WY := schemeDerivedOpenRestriction_isLocalization.{u, w, u} Y U
-  obtain ⟨rhoY⟩ := derivedTensor_openRestriction_natIso.{u, w, u} Y U
-  obtain ⟨rhoX⟩ := derivedTensor_openRestriction_natIso.{u, w, u} X (f ⁻¹ᵁ U)
+  let rhoY := Classical.choice (derivedTensor_openRestriction_natIso.{u, w, u} Y U)
+  let rhoX := Classical.choice (derivedTensor_openRestriction_natIso.{u, w, u} X (f ⁻¹ᵁ U))
   obtain ⟨s, ht⟩ := @tensor_descent
     (schemeDerivedCategory.{u, w} Y) (schemeDerivedCategory.{u, w} X)
     (schemeDerivedCategory.{u, u} U.toScheme) (schemeDerivedCategory.{u, u} (f ⁻¹ᵁ U).toScheme)
