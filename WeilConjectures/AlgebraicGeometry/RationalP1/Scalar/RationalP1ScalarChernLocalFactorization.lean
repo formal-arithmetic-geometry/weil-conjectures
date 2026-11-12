@@ -222,7 +222,6 @@ private theorem unitEndpoint_nonempty
   exact ⟨nativeUnitPullEndpoint Λ f⟩
 
 -- Realize the normalized adjunct before specializing the scheme and coefficient diagrams.
-set_option profiler true in
 private theorem realize_local_regular_adjunct (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -331,7 +330,6 @@ private theorem canonical_q_local_adjunct
   rw [unitPullEndpoint_eq Λ Y cF]
 
 -- Compare the canonical adjunct and the monoidal endpoint before specializing coefficients.
-set_option profiler true in
 private theorem canonical_p2_local_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})
@@ -352,7 +350,6 @@ private theorem canonical_p2_local_adjunct
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (secondProjection Y)).homEquiv
       (unit Λ (ProjectiveLine Y)) T (e ≫ z)) (native_p2_endpoint Λ Y cF)
 
-set_option profiler true in
 -- Concrete coefficient conversions cross the named derived functor interfaces.
 /-- A normalized completed adjunct comes from its local section class, and this
 factorization survives realization and both finite-field scalar changes.
@@ -405,6 +402,7 @@ theorem scalar_chern_local_factorization
     simpa only [map_natCast] using hY.map (ProjectiveLine Y ↘ Y).appTop.hom
   have hW : IsUnit (l : Γ(diagonalSurface Y, ⊤)) := by
     simpa only [map_natCast] using hP.map (secondProjection Y).appTop.hom
+  -- Keep witness selection independent of the full factorization proposition.
   have ez := completed_local_chern_exists l r.tq.toPresentation hP
   have ew := completed_local_chern_exists l r.t₂.toPresentation hW
   let z := ez.choose
@@ -443,6 +441,7 @@ theorem scalar_chern_local_factorization
       (Profinite.continuousMapRingObj.{u} E.1) (secondProjection Y)
       (family.rational E).R₂ (family.rational E).p₂_canonical (family.rational E).p₂_unit
       (scalarP2UnitIso _ Y).hom (native_p2_endpoint _ Y) hq
+    -- Reduce the identity wrappers in the named pushforward comparison explicitly.
     unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
     dsimp only
     simpa only [coefficient, line, secondProjection, diagonalSurface, Modules, id_eq,
