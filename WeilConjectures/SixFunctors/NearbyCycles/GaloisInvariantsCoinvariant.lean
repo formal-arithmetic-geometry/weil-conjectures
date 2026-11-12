@@ -182,6 +182,23 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso (a : ℤ
   exact map_iso_inv_comp_map_eq_of_map_comp_eq G
     (R((ginf)_*⟦Λ⟧).mapIso (L((ginf)^*⟦Λ⟧).mapIso e)) φ key
 
+private lemma unit_comp_derivedRetraction_of_iso (a : ℤ) [K.IsStrictlyGE a]
+    (hK : ∀ n, ((ginf)_*⟦Λ⟧).rightAcyclic (((ginf)^*⟦Λ⟧).obj (K.X n)))
+    (C : DerivedCategory
+      (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (e : DerivedCategory.Q.obj K ≅ C) :
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app C ≫
+      (R((ginf)_*⟦Λ⟧).map (L((ginf)^*⟦Λ⟧).map e.inv) ≫
+        Adjunction.derivedUnitRetraction K a hK (T.complexTrace Λ hd K hc) ≫ e.hom) = 𝟙 C := by
+  have hR : (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app
+      (DerivedCategory.Q.obj K) ≫
+        Adjunction.derivedUnitRetraction K a hK (T.complexTrace Λ hd K hc) = 𝟙 _ :=
+    Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction K a hK _
+      (CondensedRing.upperStarLowerStarAdjunction Λ ginf) (T.unit_comp_complexTrace Λ hd K hc)
+  have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.naturality e.inv
+  simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
+  rw [← reassoc_of% hn, reassoc_of% hR, e.inv_hom_id]
+
 end AlgebraicGeometry.ProEtale.GaloisTower
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
@@ -195,7 +212,7 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
 
 private lemma coinvariant_degree_isIso
     (hp : ∀ L' : FiniteGaloisIntermediateField L Ω, IsUnit ((Module.finrank L L' : ℕ) : T₀))
-    (j : (galoisTower Ω h).J) {Z : Scheme.{u}}
+    (j : FiniteGaloisIntermediateField L Ω) {Z : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)) :
     IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := by
@@ -208,7 +225,7 @@ private lemma coinvariant_degree_isIso
 
 private lemma coinvariant_action_lift {κ : Type*} (act : κ → (Ω ≃ₐ[L] Ω))
     (hact : ∀ (L' : FiniteGaloisIntermediateField L Ω) (a : L' ≃ₐ[L] L'),
-      ∃ k, ∀ x : L', act k x = a x) (j : (galoisTower Ω h).J)
+      ∃ k, ∀ x : L', act k x = a x) (j : FiniteGaloisIntermediateField L Ω)
     (b : (galoisTower Ω h).Γ j) :
     ∃ k, pullbackAction h _ specGaloisAction_comp (act k) ≫ (galoisTower Ω h).π j =
       (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := by
@@ -254,7 +271,7 @@ private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
   choose F₀ hF₀ using hterms
-  have hd := fun j M ↦ coinvariant_degree_isIso T₀ N h Ω hp j M
+  have hd := fun j M ↦ coinvariant_degree_isIso T₀ N h Ω hp j (Z := N.generic) M
   have hdZ := fun j M ↦ coinvariant_degree_isIso T₀ N h Ω hp j (Z := Z) M
   have hc := fun n ↦ isColimitModuleCocone_galoisTower Ω h T₀ (K.X n)
     (essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some)
@@ -267,28 +284,8 @@ private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
   have hlift := coinvariant_action_lift N h Ω act hact
-  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction K a hK
-    ((galoisTower Ω h).complexTrace (Profinite.continuousMapRingObj T₀) hd K hc)
-    (CondensedRing.upperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))))
-    ((galoisTower Ω h).unit_comp_complexTrace (Profinite.continuousMapRingObj T₀) hd K hc)
-  have hRC : (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
-        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) ≫
-      (R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
-          Profinite.continuousMapRingObj T₀⟧).map
-        (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
-          Profinite.continuousMapRingObj T₀⟧).map e.inv) ≫
-        Adjunction.derivedUnitRetraction K a hK
-          ((galoisTower Ω h).complexTrace (Profinite.continuousMapRingObj T₀) hd K hc) ≫
-          e.hom) = 𝟙 _ := by
-    have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj T₀)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.naturality e.inv
-    simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
-    rw [← reassoc_of% hn]
-    erw [reassoc_of% hadj]
-    exact e.inv_hom_id
+  have hRC := (galoisTower Ω h).unit_comp_derivedRetraction_of_iso
+    (Profinite.continuousMapRingObj T₀) hd K hc a hK _ e
   have hmain := fun (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) ⥤
         Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
