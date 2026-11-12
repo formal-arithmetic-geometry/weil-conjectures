@@ -415,7 +415,6 @@ lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
   simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp, Category.assoc,
     Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instances on the ambient derived category of modules are found through long searches
 /-- **The trace is the supertrace on the graded pieces**: for an object `Y` of `D(Mod_{ℚ̲̄_ℓ,s})`
 which is a finite direct sum of shifts `𝟙⟦nⱼ⟧` of the unit, the categorical trace of an

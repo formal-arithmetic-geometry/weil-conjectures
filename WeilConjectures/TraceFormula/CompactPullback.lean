@@ -245,7 +245,6 @@ lemma compactPullback_comp_aux {DX DY DZ S : Type*} [Category DX] [Category DY] 
     ← cgh.hom.naturality, ← AX.map_comp_assoc, key]
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
 
-set_option maxHeartbeats 1000000 in
 -- matching the unit of the composite adjunction unfolds the restricted `ℚ̲̄_ℓ`-functors
 /-- **Compatibility of the pullbacks with composition** (blueprint `prop-trf-graph-operator`):
 `(g ≫ h)^♯` is `h^♯` followed by `g^♯` and the composition isomorphism

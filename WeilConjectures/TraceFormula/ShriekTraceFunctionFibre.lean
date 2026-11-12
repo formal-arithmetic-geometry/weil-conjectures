@@ -69,7 +69,6 @@ instance faithful_single_comp_quotient_comp_qh (C : Type*) [Category C] [Abelian
   Functor.Faithful.of_iso ((DerivedCategory.singleFunctorIsoCompQ C 0).trans
     (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso C).symm))
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
 omit [IsSeparated X.hom] in
 /-- Placing an endomorphism of the unit module in degree `0` is injective. -/
@@ -250,7 +249,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   (hZ : IsPullback i (toPoint Z) ((geometricBaseChange k (AlgebraicClosure k)).map f)
     (geometricBaseChangePoint y.1 y.2.1))
 
-set_option maxHeartbeats 400000 in
 -- the carriers of the Weil objects are compared up to unfolding
 include hZ in
 /-- **The local trace of the lower shriek as a trace on the geometric fibre**: placed in degree
@@ -307,7 +305,6 @@ lemma trace_weilStalk_frobenius_congr {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   obtain rfl : hx = hx' := rfl
   rfl
 
-set_option maxHeartbeats 800000 in
 -- the carriers of the Weil objects are compared up to unfolding
 set_option linter.overlappingInstances false in
 include hZ in

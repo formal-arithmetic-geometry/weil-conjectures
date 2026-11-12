@@ -240,7 +240,6 @@ variable {V W : Over (Spec (.of k'))} [LocallyOfFiniteType V.hom] [QuasiCompact 
   [IsSeparated V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   (i : V ⟶ W) [IsOpenImmersion i.left]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The projection map of `j_! ⊣ Lj^*` on `Dᵇc` is invertible
 (`isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction`),

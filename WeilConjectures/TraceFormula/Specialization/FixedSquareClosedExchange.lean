@@ -306,7 +306,6 @@ theorem fixedSquareExchange_app_comp_eq (M : Dᵇc(F.F.left)⟦Profinite.padicAl
     (lowerStarLowerShriekCompIso ℓ F.isPullback.w) F.lowerShriekBaseChangeIso_hom_app_eq M g t ht
   exact h
 
-set_option maxHeartbeats 400000 in
 -- elaborating the base change identity of `F'` against the expected hypothesis is slow
 /-- **The exchange of the fixed square on pushforwards from the fixed locus, both sides**: if
 `ν_c(Rι_* M) ≫ Ψ_{X×X}(Ξ(M)) ≫ χ_Δ(Rd_! M) ≫ RΔ'_*(g) = Rc'_!(u) ≫ Ξ'(M') ≫ RΔ'_*(g')` for
@@ -375,7 +374,6 @@ theorem fixedLocusToPointCompactSupportExchange_app_comp_map
   rw [fixedLocusToPointCompactSupportExchange_app]
   exact comp_map_comp_app_comp_map_eq _ _ νX _ _ κ (Iso.inv_hom_id_app _ _)
 
-set_option maxHeartbeats 500000 in
 -- unifying the hypotheses with the hand-written statement is slow
 /-- **`ν_F` on pushforwards from the fixed locus**: let `κ : Rd_! N ⟶ T`, `χ : Ψ_X T ⟶ G'`,
 `u : Ψ_C Rι_* N ⟶ Rι'_* M'` and `g' : Rd'_! M' ⟶ G'` satisfy the support identity

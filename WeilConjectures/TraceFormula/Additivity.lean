@@ -414,7 +414,6 @@ lemma eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar
         e.inv)), zero_comp, comp_zero]
   exact eq_zero_of_shift_openImmersionLowerShriek_to_lowerStar _ ℓ j i hcompl.disjoint _ _ _ _
 
-set_option maxHeartbeats 1000000 in
 -- the triangles are compared through the inclusions of the bounded constructible categories
 variable (ℓ) in
 /-- **The Frobenius endomorphisms of the localization triangle commute with its connecting
