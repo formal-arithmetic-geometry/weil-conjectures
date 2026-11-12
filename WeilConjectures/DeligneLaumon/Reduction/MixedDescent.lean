@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.FieldTheory.Finite.Basic
-public import Mathlib.RingTheory.Etale.Field
+public import WeilConjectures.AlgebraicGeometry.GaloisFieldCover
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.WeilSheaf.UpperStarSurjective
 
@@ -84,23 +84,6 @@ theorem IsMixed.of_upperStar_of_surjective (g : X' ⟶ X) [IsFinite g] [Etale g]
   let ⟨w, hw⟩ := hG
   ⟨w, hw.of_upperStar_of_surjective g⟩
 
-/-- For a finite extension `k'` of the finite field `k₀`, the morphism `Spec k' ⟶ Spec k₀` is
-finite, étale and surjective. -/
-theorem isFinite_etale_surjective_specMap_algebraMap (k' : Type u) [Field k'] [Finite k']
-    [Algebra k₀ k'] :
-    IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))) ∧
-      Etale (Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))) ∧
-      Surjective (Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))) := by
-  have : Algebra.FormallyEtale k₀ k' := Algebra.FormallyEtale.of_isSeparable k₀ k'
-  have : Algebra.FinitePresentation k₀ k' :=
-    Algebra.FinitePresentation.of_finiteType.mp inferInstance
-  have : Algebra.Etale k₀ k' := {}
-  refine ⟨?_, ?_, ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩⟩
-  · rw [IsFinite.SpecMap_iff]
-    exact RingHom.finite_algebraMap.mpr inferInstance
-  · rw [HasRingHomProperty.Spec_iff (P := @Etale)]
-    exact RingHom.etale_algebraMap.mpr this
-
 /-- **Mixedness descends along finite constant extensions** (blueprint:
 `lemma-mixedness-descends-constant-extension`). Let `k'` be a finite extension of the finite
 field `k₀`, let `g : X' ⟶ X` be the finite constant extension `X' = X ⊗_{k₀} k' ⟶ X` of a
@@ -108,17 +91,22 @@ field `k₀`, let `g : X' ⟶ X` be the finite constant extension `X' = X ⊗_{k
 on `X`. If `g^* G` is `ι`-mixed, then so is `G`.
 
 The unit `G ⟶ g_* g^* G` is a monomorphism and `g_* g^* G` is mixed since `g` is finite
-(`AlgebraicGeometry.WeilSheaf.IsMixed.of_upperStar_of_surjective`). -/
+(`AlgebraicGeometry.WeilSheaf.IsMixed.of_upperStar_of_surjective`).
+
+The instance arguments `[X'.Over k₀]` and `[LocallyOfFiniteType (X' ↘ _)]` carry no extra
+assumption: given `[g.IsOver k₀]`, the structure morphism of `X'` is `g` followed by that of `X`,
+and it is locally of finite type since `g` is the base change of the finite morphism
+`Spec k' ⟶ Spec k₀` along `hg`. -/
 theorem IsMixed.of_upperStar_of_isPullback (k' : Type u) [Field k'] [Finite k'] [Algebra k₀ k']
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (g : X' ⟶ X)
     [g.IsOver (Spec (CommRingCat.of k₀))] (p : X' ⟶ Spec (CommRingCat.of k'))
     (hg : IsPullback g p (X ↘ Spec (CommRingCat.of k₀))
       (Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))))
     {G : WeilSheaf k₀ l X} (hG : ((WeilSheaf.upperStar g).obj G).IsMixed ι) : G.IsMixed ι := by
-  obtain ⟨h₁, h₂, h₃⟩ := isFinite_etale_surjective_specMap_algebraMap (k₀ := k₀) k'
-  have : IsFinite g := MorphismProperty.of_isPullback hg.flip h₁
-  have : Etale g := MorphismProperty.of_isPullback hg.flip h₂
-  have : Surjective g := MorphismProperty.of_isPullback hg.flip h₃
+  have : FiniteDimensional k₀ k' := .of_finite
+  have : IsFinite g := MorphismProperty.of_isPullback hg.flip inferInstance
+  have : Etale g := MorphismProperty.of_isPullback hg.flip inferInstance
+  have : Surjective g := MorphismProperty.of_isPullback hg.flip inferInstance
   exact hG.of_upperStar_of_surjective g
 
 /-- **Mixedness on an open and its complement** (blueprint: `lemma-mixedness-open-closed`). Let
