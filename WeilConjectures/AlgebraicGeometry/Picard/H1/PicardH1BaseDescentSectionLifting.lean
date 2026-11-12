@@ -28,7 +28,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option profiler true in
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
 This asserts surjectivity of restriction, not existence of a generating section.
 Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0.
@@ -100,6 +99,7 @@ theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) 
                         ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app
                           (Opposite.op ⊤) σ)) = τ := by
   classical
+  -- Explicit existential elimination avoids generalizing the dependent section types.
   refine (picard_h1_base_descent_cycle_presentation
     f Xi fi ui hui hO hOi L W k w s hw hLi hLs hH).elim fun U hU ↦ ?_
   refine hU.elim fun hwU hU ↦ ?_

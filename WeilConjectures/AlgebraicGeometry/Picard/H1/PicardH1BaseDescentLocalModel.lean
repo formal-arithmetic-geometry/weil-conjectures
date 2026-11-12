@@ -38,8 +38,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-set_option profiler true in
--- Comparing the derived direct-image expressions and localized module instances is expensive.
 /-- Construct the local finite-free model and its degree-one comparison square, without
 assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
 Source: Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91,
@@ -117,6 +115,7 @@ theorem picard_h1_base_descent_local_model
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                       (ui i) (hui i))).left) 1 (α z) := by
+  -- Explicit existential elimination avoids generalizing the large dependent conclusion.
   refine (picard_h1_common_minimal_model
     f Xi fi ui hui hO hOi L W k w s hw hLi hLs).elim fun U hmodel ↦ ?_
   refine hmodel.elim fun hwU hmodel ↦ ?_
