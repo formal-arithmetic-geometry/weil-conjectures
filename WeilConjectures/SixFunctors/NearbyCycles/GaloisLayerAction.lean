@@ -181,6 +181,7 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
+set_option profiler true in
 -- the conjugates of the composition isomorphisms of derived pullbacks are large terms
 /-- **Associativity of the composition isomorphisms of derived pushforwards**: the two ways of
 identifying `R(a ≫ b ≫ c)_*` with `Ra_* ⋙ Rb_* ⋙ Rc_*` agree. It is the conjugate of the
