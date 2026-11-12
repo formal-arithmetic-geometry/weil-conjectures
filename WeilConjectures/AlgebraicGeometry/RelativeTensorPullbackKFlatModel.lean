@@ -161,6 +161,14 @@ theorem relativeTensorPullback_kFlat_model
     (moduleRings X.toRingedSpace)
   have : PreservesFiniteLimits W := hW.2.1
   have : PreservesFiniteColimits W := hW.2.2.1
+  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0, u, u} C
+  have : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} B) :=
+    hasColimitsOfSizeShrink.{0, 0, u, u} (SheafOfModules.{u} B)
+  have (M N : CochainComplex C ℤ) :
+      CochainComplex.HasMapBifunctor M N (curriedTensor C) := fun _ ↦ inferInstance
+  have (M N : CochainComplex (SheafOfModules.{u} B) ℤ) :
+      CochainComplex.HasMapBifunctor M N
+        (@curriedTensor _ _ (SheafOfModules.monoidalCategory R)) := fun _ ↦ inferInstance
   obtain ⟨G, hG, hGmap, hGadd, ⟨ep⟩⟩ := relativeTensorPullback_kFlat_counit f L hL
   have := hGadd
   let T := G
