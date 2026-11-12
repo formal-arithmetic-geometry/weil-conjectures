@@ -52,6 +52,8 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+set_option profiler true in
 private noncomputable def kFlat_pullback_adjunction_comparison_iso
     {S S' : Scheme.{u}} (g : S' ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
