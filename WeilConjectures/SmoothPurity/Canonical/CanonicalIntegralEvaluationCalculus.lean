@@ -147,6 +147,7 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q HasDerivedCatego
   coefficientHomResolutionIso coefficientHomResolutionInverse derivedInternalHomOfUniverses
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Comparison uniqueness uses two large dependent uncurrying squares.
 private theorem tensorModels_unique
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
