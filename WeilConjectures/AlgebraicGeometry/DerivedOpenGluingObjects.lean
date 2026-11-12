@@ -87,6 +87,7 @@ private theorem compatible_of_difference
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
+set_option trace.profiler true in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
 set_option maxHeartbeats 800000 in
