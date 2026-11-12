@@ -13971,6 +13971,7 @@ public import WeilConjectures.Blowup.Affine.ReesPieceLocalization
 public import WeilConjectures.Blowup.Affine.StrictTransformChart
 public import WeilConjectures.Blowup.BaseChange
 public import WeilConjectures.Blowup.BlowupUniversal
+public import WeilConjectures.Blowup.CommonAdmissibleBlowup
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.DisjointnessBlowup
@@ -22900,6 +22901,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataRings
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.RefinementCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.SchematicClosure
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
