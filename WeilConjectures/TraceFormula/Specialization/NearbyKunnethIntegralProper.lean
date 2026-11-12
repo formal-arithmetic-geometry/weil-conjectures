@@ -56,8 +56,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- the Künneth maps of the product are large terms
 /-- **Gabber's Künneth formula for proper models with `𝒪_E`-coefficients** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
 Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`, `N` of finite
@@ -92,12 +90,12 @@ theorem isIso_kunnethMap_padicIntegers_of_isProper [IsNoetherian X] [IsNoetheria
     IsIso (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A B) := by
   have : TopologicalSpace.NoetherianSpace X := inferInstance
   have : TopologicalSpace.NoetherianSpace Y := inferInstance
-  have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-  have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
-  have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-  have : QuasiSeparated N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
-  have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
-  have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
+  have : QuasiCompact M.j := hM.isTraitModel.quasiCompact_j
+  have : QuasiSeparated M.j := hM.isTraitModel.quasiSeparated_j
+  have : QuasiCompact N.j := hN.isTraitModel.quasiCompact_j
+  have : QuasiSeparated N.j := hN.isTraitModel.quasiSeparated_j
+  have : QuasiCompact P.j := hP.isTraitModel.quasiCompact_j
+  have : QuasiSeparated P.j := hP.isTraitModel.quasiSeparated_j
   -- bounds below of `A`, `B` and of their external product
   have ha : A.IsGE hA.1.1.choose := hA.1.1.choose_spec
   have ha' : B.IsGE hB.1.1.choose := hB.1.1.choose_spec
@@ -112,14 +110,16 @@ theorem isIso_kunnethMap_padicIntegers_of_isProper [IsNoetherian X] [IsNoetheria
       (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A hA)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B hB)
-  obtain ⟨c, hc⟩ := hAB.1.1
-  refine isIso_of_isIso_extendScalars_residueField_padicAlgCl ℓ E _ ?_ ?_
+  have hc : (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A ⊗
+      L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B).IsGE hAB.1.1.choose :=
+    hAB.1.1.choose_spec
+  refine isIso_of_isIso_extendScalars_residueField_padicAlgCl ℓ E (X := Z'.left) _ ?_ ?_
   · exact (isIso_map_kunnethMap_iff_residueField ℓ E φ₁ φ₂ A B
-      (min hA.1.1.choose hB.1.1.choose) c).2
+      (min hA.1.1.choose hB.1.1.choose) hAB.1.1.choose).2
       (isIso_kunnethMap_residueField_of_isProper E hM hN hpb hP hgen hm hm'
         (fun h ↦ hslice h E) heM heN hA hB)
   · exact (isIso_map_map_kunnethMap_iff_padicAlgCl ℓ E φ₁ φ₂ A B
-      (min hA.1.1.choose hB.1.1.choose) c).2
+      (min hA.1.1.choose hB.1.1.choose) hAB.1.1.choose).2
       (isIso_kunnethMap_padicAlgCl_of_isProper hM hN hpb hP hgen hm hm' hsliceQ heM heN
         (boundedConstructible_extendScalars_padicAlgCl_obj ℓ E hA)
         (boundedConstructible_extendScalars_padicAlgCl_obj ℓ E hB))
