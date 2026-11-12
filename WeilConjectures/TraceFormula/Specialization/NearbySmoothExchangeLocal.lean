@@ -56,7 +56,6 @@ section Paste
 variable {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
   {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
-set_option trace.profiler true in
 /-- **Pointwise pasting of base change morphisms**: for two horizontally pasted squares
 ```
 X'' --h'--> X' --g'--> X
@@ -71,6 +70,7 @@ theorem isIso_baseChangeMap_app_paste_iff (sq₁ : CommSq g' f' f g) (sq₂ : Co
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) [IsIso (baseChangeMap Λ sq₂)] (M : 𝔻(X)) :
     IsIso ((baseChangeMap Λ sq).app M) ↔
       IsIso ((L((h)^*⟦Λ⟧)).map ((baseChangeMap Λ sq₁).app M)) := by
+  -- Infer the horizontal functors from the comparisons to avoid repeating derived-functor synthesis.
   have key := Adjunction.isIso_exchangeRight_app_paste_iff
     (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (derivedUpperStarLowerStarAdjunction Λ f'')
