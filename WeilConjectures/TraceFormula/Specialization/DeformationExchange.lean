@@ -273,11 +273,12 @@ private lemma supportCompactSupportExchange_component_identity
         ("hχg", "hχg")] do
       let some idx := names.findIdx? (· == Lean.Name.mkSimple binder)
         | throwError "missing binder"
-      let ety ← Lean.Meta.instantiateMVars (← Lean.Meta.inferType mvs[idx]!)
+      let ety ← Lean.instantiateMVars (← Lean.Meta.inferType mvs[idx]!)
       let v ← Lean.Meta.getFVarFromUserName (Lean.Name.mkSimple value)
       synMatch ety (← Lean.Meta.inferType v)
       mvs[idx]!.mvarId!.assign v
       measurements := measurements.push (binder, (← Lean.getRemainingHeartbeats) / 1000)
+      Lean.logInfo m!"matched {binder}: {(← Lean.getRemainingHeartbeats) / 1000}"
     saved.restore
     Lean.logInfo m!"matching budgets: {measurements}"
   apply_by_match CategoryTheory.supportIdentity_aux
