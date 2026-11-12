@@ -251,7 +251,7 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
     (counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j K)
     (counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j _) hC1 hEx
   rw [weilUpperStarComparison_hom_app_eq ℓ j hj sq.toCommSq.flip]
-  refine compToPoint_inv_app_comp_counit_comp_pullback
+  have hfinal := compToPoint_inv_app_comp_counit_comp_pullback
     (jL := boundedConstructibleLowerShriek ℓ j)
     (H := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU)
     (H' := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
@@ -265,9 +265,8 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
       sq.toCommSq.flip).hom.app K)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
     (compactPullback ℓ Φ) (compactPullback ℓ ΦU)
-    (boundedConstructibleLowerShriekCompToPoint ℓ j) ?_ ?_
-  · exact hε
-  · exact hB
+    (boundedConstructibleLowerShriekCompToPoint ℓ j) hε hB
+  exact hfinal
 
 end OpenImmersion
 
