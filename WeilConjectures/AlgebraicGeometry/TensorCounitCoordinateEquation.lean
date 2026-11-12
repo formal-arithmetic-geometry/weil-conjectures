@@ -338,7 +338,7 @@ theorem tensorCounit_coordinateEquation
     (modelMap_natural X P0 G0 P G r s)
     (hε _ _ t)
     (by simpa only [Functor.map_comp] using
-      congrArg (fun f ↦ DerivedCategory.Q.map f) hchain)
+      congrArg (fun f ↦ DerivedCategory.Q.{w}.map f) hchain)
     (hτ.2 _ _ _ _ (DerivedCategory.Q.map r) (DerivedCategory.Q.map s))
     (hε _ _ r) (hε _ _ s)
     (modelMap_natural T (F.obj P0) (F.obj G0) (F.obj P) (F.obj G) (F.map r) (F.map s))
