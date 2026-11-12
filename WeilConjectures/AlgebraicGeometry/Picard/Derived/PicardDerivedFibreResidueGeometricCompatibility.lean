@@ -91,8 +91,6 @@ private theorem residue_fibre_isomorphisms
   exact ⟨r, hr, e, ei, hef, hes, heif, heis⟩
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Comparing the derived and concrete homology functors needs extra elaboration heartbeats.
 
 /-- Degree-one derived fibre cohomology of the coefficient direct images is identified with
 structure-sheaf cohomology of the fibres, compatibly with the coefficient arrows.

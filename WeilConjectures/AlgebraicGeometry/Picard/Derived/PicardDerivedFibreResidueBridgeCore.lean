@@ -36,7 +36,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option profiler true in
-set_option maxHeartbeats 1500000 in
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives, and the canonical affine residue comparisons followed by geometric fibre
@@ -117,7 +116,6 @@ theorem picard_derived_fibre_residue_bridge_core
   obtain ⟨e, ei, he⟩ := picard_derived_fibre_residue_geometric_compatibility
     f Xi fi ui hui L W k w s hw τ
   refine ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, he i, fun z ↦ ?_⟩⟩
-  simp only [AddEquiv.trans_apply]
-  rw [(hφ i).2 z, he i]
+  exact (congrArg (ei i) ((hφ i).2 z)).trans (he i _)
 
 end AlgebraicGeometry.Scheme
