@@ -252,14 +252,18 @@ theorem podTensorReindexAt_generators
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
 
 -- Transport and cancel before specializing to the completed tensor constructions.
-private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Category D]
-    (T : C × C ⥤ D) {P Q P' Q' : C} {A B Z : D}
-    (eP : P ≅ P') (eQ : Q ≅ Q') (e : T.obj (P', Q') ≅ B)
-    (k : A ⟶ T.obj (P, Q)) {α : Type*} (x y : α) (hxy : x = y)
-    (t : α → (A ⟶ B))
-    (h : HEq (k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom) (t x))
+private lemma podTensorRepresentative_cancel {C D J K : Type*}
+    [Category C] [Category D] [Category J] [Category K]
+    (T : C × C ⥤ D) (R : K ⥤ J) (F : J ⥤ D)
+    {P Q P' Q' : C} {A B Z : D} {U V : K} {W : J}
+    (eP : P ≅ P') (eQ : Q ≅ Q') (e : T.obj (P', Q') ≅ F.obj (R.obj V))
+    (k : A ⟶ T.obj (P, Q)) (a : A ⟶ B) (b : B ⟶ F.obj W) (r : W ⟶ R.obj U)
+    (x y : U ≅ V) (hxy : x = y)
+    (h : HEq (k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom)
+      (a ≫ b ≫ F.map (r ≫ R.map x.hom)))
     (f : T.obj (P, Q) ⟶ Z) :
-    t y ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
+    (a ≫ b ≫ F.map (r ≫ R.map y.hom)) ≫ e.inv ≫
+      T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
   rw [← hxy, ← eq_of_heq h]
   simp only [Category.assoc, e.hom_inv_id_assoc]
   rw [← T.map_comp_assoc]
@@ -328,26 +332,20 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   let b := (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app
     (integralOperationsRoos
       ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))
-  let r (τ' : (podReindexTower l E g).obj
-      ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)) ≅
-      (integralOperationsTensorTowerFunctor l E X).obj
-        (((podGoodReindex l E g D).obj P).obj, ((podGoodReindex l E g D).obj Q).obj)) :=
-    (DerivedCategory.Q (C := scalarReductionSource l E X)).map
-      ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
-        (integralOperationsRoosFunctor (A := scalarReductionSource l E X)).map τ'.hom)
   dsimp only [podOrdinaryReindex, integralOperationsTensorOnGood,
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
-    Functor.comp_obj, Functor.prod_obj] at a b r
-  let t := fun τ' ↦ a ≫ b ≫ r τ'
+    Functor.comp_obj, Functor.prod_obj] at a b
   exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
+    (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
+    (DerivedCategory.Q (C := scalarReductionSource l E X))
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
     ((integralCompletedTensorComparison l E X).app
       ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q))
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
-    _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
-    t hs _).trans
+    a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
+    _ τ (podTensorReindexAt_tower l E g D hD P Q τ) hs _).trans
       (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
 
 end WeilConjectures
