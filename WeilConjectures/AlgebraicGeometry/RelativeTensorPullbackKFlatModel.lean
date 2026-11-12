@@ -89,7 +89,6 @@ private theorem relativeTensorPullback_model_homology
     (HomologicalComplex.homologyFunctor E (.up ℤ) i).mapIso e ≪≫
     (Z'.sc i).mapHomologyIso V⟩
 
-set_option trace.profiler true in
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
@@ -138,6 +137,14 @@ theorem relativeTensorPullback_kFlat_model
             (@curriedTensor _ _ (SheafOfModules.monoidalCategory
               (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i)) := by
   classical
+  -- The module and tensor instances share these sheafification hypotheses.
+  have : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
+  have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    inferInstance
+  have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify (Opens.grothendieckTopology S) AddCommGrpCat.{u} := inferInstance
+  have : (Opens.grothendieckTopology S).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    inferInstance
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let : Abelian C := inferInstance
   let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf
