@@ -40,7 +40,6 @@ private lemma finite_affine_moduleDirectImage_restrictScalars_eq
         ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ =
       RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
 
-set_option profiler true in
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
 its direct-image algebra. Its functor is induced by `Rg_*` for the canonical morphism
 `g : (X, O_X) → (Y, f_* O_X)`. Restricting scalars recovers `Rf_*`.
