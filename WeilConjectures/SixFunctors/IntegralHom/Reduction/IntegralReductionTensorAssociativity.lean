@@ -314,13 +314,23 @@ private theorem normalizedReductionComparison_square
       reductionCounit l E Y D hl n
           (((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≫
         DerivedCategory.Q.map (coefficientScalarTensorIso l E Y n P Q).hom := by
+  have hb := normalizedBeta_eq l E Y D hl n
+  dsimp only [reductionExtension_eq_scalarExtension] at hb
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hb
   obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
+  dsimp only [reductionExtension_eq_scalarExtension] at beta hbeta hgen
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at beta hgen
   let := hbeta
-  have he := normalizedBeta_eq l E Y D hl n P Q beta hgen
+  have he := hb P Q beta hgen
+  run_tac Lean.logInfo "PH324: beta identified"
   have hcan := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta)
     (coefficientScalarTensorIso l E Y n P Q) he
+  run_tac Lean.logInfo "PH324: mapped inverse"
   refine ⟨hEP, hEQ, ?_⟩
-  exact comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
+  run_tac Lean.logInfo "PH324: witnesses"
+  exact comp_of_right_inverse
+    (C := DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)))
+    _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
 
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
