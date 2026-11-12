@@ -32,6 +32,12 @@ attribute [local instance_reducible] IntegralOnSlice.Site IntegralOnSlice.topolo
   IntegralOnSlice.restrict IntegralOnSlice.ring
 attribute [local instance_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 
+private theorem mapCompIdApply
+    {C : Type*} [Category C] (F : C ⥤ Type*) {A B : C}
+    (f : A ⟶ B) (h : B ⟶ A) (hcomp : f ≫ h = 𝟙 _) (x : F.obj A) :
+    F.map h (F.map f x) = x := by
+  rw [← F.map_comp_apply, hcomp, F.map_id_apply]
+
 /-- The finite quotient augmentation agrees on each degree after the two comparisons.
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
 (blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
@@ -105,8 +111,9 @@ theorem isomorphismOrdinaryFiniteAugmentation
       (N.val.map ((proEtaleBaseChange g).map c).op
         (integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x))) =
       integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x) := by
-    erw [← PresheafOfModules.map_comp_apply, ht, PresheafOfModules.map_id]
-    rfl
+    let F := N.val.presheaf
+    change F.map _ (F.map _ _) = _
+    exact mapCompIdApply F _ _ ht _
   erw [hv]
   have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
   have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
