@@ -272,6 +272,7 @@ private theorem restrictionInverseSection (l : ℕ) [Fact l.Prime] (T : Scheme.{
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
 -- Converting the three concrete sheaf module presentations requires extra reduction.
+set_option trace.profiler true in
 private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -504,6 +505,7 @@ private def siteIntegralGenerator (A : Type (u + 1)) [CommRing A] (T : Scheme.{u
     (cartierForget A T).map (finiteEtaleConstantIso A T).hom
 
 -- Compare the terminal generators in the two sheafification presentations.
+set_option trace.profiler true in
 private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (x : ULift.{u + 1} ℤ) :
     (siteIntegralGenerator A T).hom.app (op (Scheme.ProEt.mk (𝟙 T)))
@@ -545,6 +547,7 @@ private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
   exact hc
 
 -- Match the concrete evaluation and scalar-restriction module presentations.
+set_option trace.profiler true in
 private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
