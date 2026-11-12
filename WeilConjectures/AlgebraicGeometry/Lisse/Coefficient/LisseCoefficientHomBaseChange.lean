@@ -425,7 +425,7 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
           (lisseCoherence_quotientScalarGenerator Y _ _ M U (Ideal.Quotient.mk _ s) x)) := by
       apply Finset.sum_congr rfl
       intro i _
-      rfl
+      rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
         ((toSheafification Y.smallEtaleTopology
           (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
