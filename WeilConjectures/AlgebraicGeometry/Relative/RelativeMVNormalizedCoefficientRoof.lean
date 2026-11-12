@@ -32,6 +32,31 @@ private lemma normalized_localization_naturality
     q ≫ ηL ≫ F.map e.hom = ηI ≫ F.map p := by
   rw [← Category.assoc, hn, Category.assoc, ← F.map_comp, hr]
 
+private lemma normalized_roof_square_transport
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (G : C ⥤ E) (H : E ⥤ D) (δ : F ⟶ G ⋙ H)
+    {J K : C} {A B T P : D} {Y : E}
+    (c : B ≅ A) (m : B ⟶ T) (d : T ⟶ F.obj K)
+    (l : B ⟶ P) (p : P ⟶ F.obj J) (n : A ⟶ H.obj Y)
+    (b : Y ⟶ G.obj J) (e : J ⟶ K)
+    (hfs : m ≫ d = l ≫ p ≫ F.map e)
+    (hunit : l ≫ p ≫ δ.app J = c.hom ≫ n ≫ H.map b) :
+    (c.inv ≫ m) ≫ d ≫ δ.app K = n ≫ H.map (b ≫ G.map e) := by
+  have hd := δ.naturality e
+  dsimp only [Functor.comp_map] at hd
+  calc
+    (c.inv ≫ m) ≫ d ≫ δ.app K = c.inv ≫ (m ≫ d) ≫ δ.app K := by
+      simp only [Category.assoc]
+    _ = c.inv ≫ l ≫ p ≫ F.map e ≫ δ.app K := by
+      rw [hfs]
+      simp only [Category.assoc]
+    _ = c.inv ≫ l ≫ p ≫ δ.app J ≫ H.map (G.map e) := by rw [hd]
+    _ = c.inv ≫ (l ≫ p ≫ δ.app J) ≫ H.map (G.map e) := by
+      simp only [Category.assoc]
+    _ = n ≫ H.map (b ≫ G.map e) := by
+      rw [hunit]
+      simp only [Category.assoc, c.inv_hom_id_assoc, H.map_comp]
+
 private lemma normalized_roof_of_comparison
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
     {A B T A' B' : D} {Y Y' : C}
@@ -152,45 +177,25 @@ theorem relativeMV_normalized_coefficient_roof
       ((schemeMVDirectImageLocalization f).app _)
       ((schemeMVDirectImageLocalization f).app L) hn hns
     simpa only [Functor.map_comp] using ht
-  have hd := δ.naturality eJ.hom
-  dsimp only [Functor.comp_map] at hd
   have hunit := relativeMV_direct_image_square_localization f f' g g' h J
   have hvn : DerivedCategory.Q.map v ≫ d.hom ≫ δ.app E' =
       (schemeMVDirectImageLocalization g).app (Ff'.obj J) ≫
         (schemeDerivedDirectImage g).map b.hom := by
-    calc
-      _ = DerivedCategory.Q.map (c.inv.app J) ≫
-          (schemeMVDirectImageLocalization f).app
-            (((RingedSpace.moduleDirectImage g'.toLRSHom.toShHom).mapHomologicalComplex
-              (.up ℤ)).obj J) ≫
-          (schemeDerivedDirectImage f).map ((schemeMVDirectImageLocalization g').app J) ≫
-          (schemeDerivedDirectImage f).map ((schemeDerivedDirectImage g').map eJ.hom) ≫
-          δ.app E' := by
-        dsimp only [v, d, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
-        rw [DerivedCategory.Q.map_comp, ← schemeMVDirectImageLocalization_app f L]
-        simpa only [Category.assoc] using
-          congrArg (fun t ↦ DerivedCategory.Q.map (c.inv.app J) ≫ t ≫ δ.app E') hfs
-      _ = DerivedCategory.Q.map (c.inv.app J) ≫
-          (schemeMVDirectImageLocalization f).app
-            (((RingedSpace.moduleDirectImage g'.toLRSHom.toShHom).mapHomologicalComplex
-              (.up ℤ)).obj J) ≫
-          (schemeDerivedDirectImage f).map ((schemeMVDirectImageLocalization g').app J) ≫
-          δ.app (DerivedCategory.Q.obj J) ≫
-          (schemeDerivedDirectImage g).map ((schemeDerivedDirectImage f').map eJ.hom) := by
-        rw [hd]
-      _ = DerivedCategory.Q.map (c.inv.app J) ≫ DerivedCategory.Q.map (c.hom.app J) ≫
-          (schemeMVDirectImageLocalization g).app (Ff'.obj J) ≫
-          (schemeDerivedDirectImage g).map ((schemeMVDirectImageLocalization f').app J) ≫
-          (schemeDerivedDirectImage g).map ((schemeDerivedDirectImage f').map eJ.hom) := by
-        simpa only [Category.assoc] using congrArg (fun t ↦
-          DerivedCategory.Q.map (c.inv.app J) ≫ t ≫
-            (schemeDerivedDirectImage g).map ((schemeDerivedDirectImage f').map eJ.hom))
-          hunit
-      _ = _ := by
-        rw [← DerivedCategory.Q.map_comp_assoc, Iso.inv_hom_id_app,
-          DerivedCategory.Q.map_id, Category.id_comp, ← Functor.map_comp]
-        dsimp only [b, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
-        rw [schemeMVDirectImageLocalization_app f' J]
+    have ht := normalized_roof_square_transport
+      (schemeDerivedDirectImage g' ⋙ schemeDerivedDirectImage f)
+      (schemeDerivedDirectImage f') (schemeDerivedDirectImage g) δ
+      (DerivedCategory.Q.mapIso (c.app J)) (DerivedCategory.Q.map (Ff.map s))
+      ((schemeMVDirectImageLocalization f).app L ≫ (schemeDerivedDirectImage f).map eL.hom)
+      ((schemeMVDirectImageLocalization f).app
+        (((RingedSpace.moduleDirectImage g'.toLRSHom.toShHom).mapHomologicalComplex
+          (.up ℤ)).obj J))
+      ((schemeDerivedDirectImage f).map ((schemeMVDirectImageLocalization g').app J))
+      ((schemeMVDirectImageLocalization g).app (Ff'.obj J))
+      ((schemeMVDirectImageLocalization f').app J) eJ.hom hfs hunit
+    simpa only [v, d, b, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+      Functor.mapIso_inv, Iso.app_inv, Functor.map_comp,
+      schemeMVDirectImageLocalization_app f L, schemeMVDirectImageLocalization_app f' J]
+      using ht
   exact normalized_roof_of_comparison (schemeDerivedDirectImage g)
     (DerivedCategory.Q.map (Ff.map r)) (DerivedCategory.Q.map v)
     ((schemeMVDirectImageLocalization g).app (Ff'.obj J)) a b d
