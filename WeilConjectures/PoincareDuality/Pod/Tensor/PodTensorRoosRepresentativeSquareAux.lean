@@ -375,7 +375,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
     ObjectProperty.lift, ObjectProperty.ι_obj] at finish hc ⊢
   have final := finish.trans hc
-  run_tac
+  run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
     let actual := (← Lean.Meta.getLocalDeclFromUserName `final).type
     let mut work := #[(actual, target, "eq")]
