@@ -88,6 +88,7 @@ private theorem pushforwardCongr_eqToIso
   ext M V x
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- Comparing the two chosen pullback adjunctions unfolds the sectionwise pushforward models.
 private theorem finitePullback_native
