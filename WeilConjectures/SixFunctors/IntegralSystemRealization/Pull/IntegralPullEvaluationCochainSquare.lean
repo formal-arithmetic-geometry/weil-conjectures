@@ -34,7 +34,7 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Extensionality unfolds the cochain comparison components and needs extra heartbeats.
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding

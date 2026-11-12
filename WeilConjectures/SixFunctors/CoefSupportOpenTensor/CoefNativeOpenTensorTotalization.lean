@@ -129,7 +129,7 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
   SemilinearSections.sequenceSmall SemilinearSections.sliceSmall
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Comparing the two canonical total-tensor presentations uses colimit-instance elaboration.
 /-- Totalize an ordinary natural extension/tensor isomorphism, with its summand equation.
 Source: Stacks, sites-cohomology.tex Tag 0GL1 and Homology Tag 012Z.
