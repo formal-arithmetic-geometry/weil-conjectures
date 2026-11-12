@@ -204,7 +204,6 @@ private theorem normalizedBeta_eq (n : ℕ)
     rw [show (asIso beta).hom = beta from rfl,
       show (asIso beta).inv = inv beta from rfl] at hh
     dsimp only [HomologicalComplex.comp_f] at hh
-    simp only [ConcreteCategory.comp_apply] at hh
     rw [hbeta i j U x y] at hh
     exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
