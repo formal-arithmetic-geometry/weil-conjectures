@@ -63,6 +63,7 @@ theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
   exact Mod.extendRestrictAdjunction_unit_app_hom (inclusion l E T) M
 
 set_option profiler true in
+set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
 termwise on every complex, and their adjunction unit is the localized termwise unit.
@@ -92,6 +93,7 @@ def DerivedScalarData : Prop :=
           (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
 set_option profiler true in
+set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- All-complex derived computation and the normalized derived unit.
 Source: exact derived functor comparisons and the exact derived adjunction unit.
