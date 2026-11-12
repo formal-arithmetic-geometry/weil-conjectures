@@ -70,7 +70,7 @@ noncomputable def padicSubfieldPointFibre (K : Type u) [Field K] :
     Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
         (condensedRingObj (Profinite.continuousMapRingObj E.1) (Spec (.of K))) ⥤
       ModuleCat.{u + 1} E.1 :=
-  Mod.regularCoyoneda (padicSubfieldConstSection ℓ E (Spec (.of K)))
+  Mod.regularCoyoneda (padicSubfieldConstSectionRingHom ℓ E (Spec (.of K)))
 
 /-- The fibre functor `N ↦ Hom(𝒪_{E,Spec K}, N) = Γ(Spec K, N)` on `𝒪_{E,Spec K}`-modules, as
 `𝒪_E`-modules, `𝒪_E` acting through the constant sections of `𝒪_{E,Spec K}`. -/
@@ -78,7 +78,7 @@ noncomputable def padicIntegersPointFibre (K : Type u) [Field K] :
     Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) (Spec (.of K))) ⥤
       ModuleCat.{u + 1} (integers ℓ E.1) :=
-  Mod.regularCoyoneda (padicIntegersConstSection ℓ E (Spec (.of K)))
+  Mod.regularCoyoneda (padicIntegersConstSectionRingHom ℓ E (Spec (.of K)))
 
 /-- The elements of the fibre of an `E_{Spec K}`-module `N` are the morphisms
 `E_{Spec K} ⟶ N`. -/
