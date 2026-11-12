@@ -352,8 +352,6 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   AlgebraicGeometry.Scheme.residueField WeilConjectures.coefficientSequenceCommRingSheaf
   WeilConjectures.coefficientSequenceCommRingPresheaf
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The ambient comparison elaborates several dependent coefficient-stage identifications.
 /-- The canonical finite evaluation intertwines the left exceptional scalar mate.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, reduction compatibility.
