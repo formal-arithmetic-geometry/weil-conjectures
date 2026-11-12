@@ -421,6 +421,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 set_option linter.all false in
 set_option cleanup.letToHave false in
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
 unit for p_* followed by affine sections. This formula does not involve the derived

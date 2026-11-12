@@ -84,6 +84,7 @@ private theorem localized_hom_evaluation
 
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
