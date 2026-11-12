@@ -1065,17 +1065,10 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     h.liftB.moduleUnderlying.inv.app M ≫
       (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
   rw [c.underlyingB, Iso.inv_hom_id_app_assoc]
-  have hn :
-      f.liftA.moduleUnderlying.inv.app (g.liftA.modules.obj ((res A B Z.toSite).obj M)) ≫
-          (underlying (constantRing T.J A)).map
-            (f.liftA.modules.map (g.restriction.hom.app M)) =
-        f.inverse.map ((underlying (constantRing W.J A)).map (g.restriction.hom.app M)) ≫
-          f.liftA.moduleUnderlying.inv.app
-            ((res A B W.toSite).obj (g.liftB.modules.obj M)) := by
-    simpa only [Functor.comp_map] using
-      (f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)).symm
-  rw [reassoc_of% hn]
-  rw [g.restrictionFormula]
+  have hn := f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)
+  dsimp only [Functor.comp_map] at hn
+  erw [← reassoc_of% hn]
+  erw [g.restrictionFormula]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   rfl
 
