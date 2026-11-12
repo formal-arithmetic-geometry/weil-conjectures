@@ -10,11 +10,13 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Conjugates of composition isomorphisms
 
-Two formal facts about conjugate natural transformations of composite adjunctions:
+Three formal facts about conjugate natural transformations of composite adjunctions:
 
 * `CategoryTheory.conjugateIsoEquiv_comp_left_hom_app`: if `c : L_F ≅ G ⋙ L_h` and `ι : G ≅ 𝟭`
   compose to `e : L_F ≅ L_h`, then the conjugates compose to the conjugate of `e` (the left unit
   law of conjugate composition isomorphisms);
+* `CategoryTheory.conjugateIsoEquiv_comp_right_hom_app`: the corresponding right unit law, for
+  `c : L_F ≅ L_h ⋙ G`;
 * `CategoryTheory.Adjunction.ofNatIsoRight_comp_unit_app`: for adjunctions `L ⊣ S` obtained from
   adjunctions `L ⊣ R` through isomorphisms `S ≅ R`, a composition isomorphism `c_S` of the `S`
   which corresponds to the conjugate of a composition isomorphism `c_L` of the `L` is compatible
@@ -64,6 +66,40 @@ lemma conjugateIsoEquiv_comp_left_hom_app {LF Lh : C ⥤ D} {RF Rh : D ⥤ C} {G
   erw [reassoc_of% hn]
 
 end Left
+
+section Right
+
+variable {C D : Type*} [Category C] [Category D]
+
+/-- Let `c : L_F ≅ L_h ⋙ G` and `ι : G ≅ 𝟭` be isomorphisms of left adjoints whose composite is
+`e : L_F ≅ L_h`. Then the conjugates `R_F ≅ R_G ⋙ R_h` of `c` and `R_G ≅ 𝟭` of `ι` compose to
+the conjugate `R_F ≅ R_h` of `e`. This is the right unit law; the left unit law is
+`CategoryTheory.conjugateIsoEquiv_comp_left_hom_app`. -/
+lemma conjugateIsoEquiv_comp_right_hom_app {LF Lh : C ⥤ D} {RF Rh : D ⥤ C} {G RG : D ⥤ D}
+    (adjF : LF ⊣ RF) (adjh : Lh ⊣ Rh) (adjG : G ⊣ RG) (c : LF ≅ Lh ⋙ G) (ι : G ≅ 𝟭 D)
+    (e : LF ≅ Lh) (hc : ∀ K, c.hom.app K ≫ ι.hom.app (Lh.obj K) = e.hom.app K) (K' : D) :
+    (conjugateIsoEquiv adjF (adjh.comp adjG) c.symm).hom.app K' ≫
+        Rh.map ((conjugateIsoEquiv adjG Adjunction.id ι.symm).hom.app K') =
+      (conjugateIsoEquiv adjF adjh e.symm).hom.app K' := by
+  have he : ∀ K, ι.inv.app (Lh.obj K) ≫ c.inv.app K = e.inv.app K := fun K ↦ by
+    rw [← cancel_mono (e.hom.app K), Category.assoc, Iso.inv_hom_id_app, ← hc,
+      Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
+    rfl
+  simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom, conjugateEquiv_apply_app,
+    Adjunction.comp_unit_app, Adjunction.id_unit, Functor.comp_obj, Functor.id_obj,
+    Functor.comp_map, Functor.id_map, NatTrans.id_app, Category.id_comp, Functor.map_comp,
+    Category.assoc]
+  simp only [← Functor.map_comp]
+  congr 2
+  have hn := ι.inv.naturality (adjG.unit.app (Lh.obj (RF.obj K')) ≫
+    RG.map (c.inv.app (RF.obj K')) ≫ RG.map (adjF.counit.app K'))
+  simp only [Functor.id_obj, Functor.id_map, Category.assoc] at hn
+  rw [reassoc_of% hn, ← he, Category.assoc]
+  congr 1
+  simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality,
+    Adjunction.counit_naturality_assoc, Adjunction.left_triangle_components_assoc]
+
+end Right
 
 section Units
 
