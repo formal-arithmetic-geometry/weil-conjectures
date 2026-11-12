@@ -35,7 +35,6 @@ private theorem map_three_square {C D : Type*} [Category C] [Category D]
   rw [h2]
   simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ d') h1
 
-set_option maxHeartbeats 800000 in
 -- Comparing the six dependent restriction isomorphism types needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 /-- Restriction identifies the cycle-evaluation diagram before choosing any evaluation

@@ -90,7 +90,6 @@ private theorem affineMate_naturality
     NatTrans.comp_app, eqToIso.hom, eqToHom_app, Functor.comp_obj, Functor.comp_map,
     Functor.id_obj, Category.assoc] using hn
 
-set_option maxHeartbeats 800000 in
 -- Explicit cohomology coordinates require additional definitional-equality work.
 /-- The source tensor model transports the affine derived mate to the ordinary
 coefficient map followed by the actual right-derived pushforward unit. This

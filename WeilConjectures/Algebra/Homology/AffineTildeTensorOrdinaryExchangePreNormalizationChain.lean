@@ -91,7 +91,6 @@ private theorem presheaf_map_id_apply {X : Scheme.{u}} (F : X.Modules)
 
 attribute [local irreducible] Scheme.Modules.tensorPullback affineTildePushforwardComparison
 
-set_option maxHeartbeats 800000 in
 -- The sectionwise mate calculation traverses both affine comparison interfaces.
 private theorem affine_exchange_degree
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
@@ -204,7 +203,6 @@ def affineTildePushforwardComplexMap
   exact { f := fun i ↦ σ.hom.app (C.X i)
           comm' := fun i j _ ↦ (σ.hom.naturality (C.d i j)).symm }
 
-set_option maxHeartbeats 800000 in
 -- The degreewise comparison includes the chosen tensor and pushforward functors.
 /-- The ordinary termwise exchange chain map in affine tensor coordinates.
 Source: Stacks Project, Tags 06Y6 and 08HY.

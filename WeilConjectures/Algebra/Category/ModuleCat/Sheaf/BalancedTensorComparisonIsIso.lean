@@ -63,7 +63,6 @@ private theorem tensor_sections_hom_ext
   intro x y
   exact h W x y
 
-set_option maxHeartbeats 400000 in
 -- The mixed scalar structures require additional definitional equality checks.
 /-- The map inserting `1` in the scalar-extension factor is invertible.
 Source: Stacks Project, Cohomology, Tag 08DE, proof; Modules on Sites, Tag 0GMW.

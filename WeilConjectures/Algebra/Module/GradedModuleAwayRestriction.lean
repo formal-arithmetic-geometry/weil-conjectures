@@ -25,7 +25,6 @@ universe u v
 
 namespace LocalizedModule
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the nested localization scalar actions needs more than the default heartbeats.
 set_option linter.unusedVariables false in
 /-- Restriction maps, their principal localization comparisons, and compatibility.

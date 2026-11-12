@@ -174,7 +174,6 @@ private lemma homologyFactorsh
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
 -- The nested exact homology comparisons require additional elaboration heartbeats.
 /-- Applying homology to the raw tensor counit gives precisely the module
 comparison, coefficient homology map and normalized ordinary pushforward map.

@@ -317,13 +317,9 @@ private theorem resolving_fullyFaithful :
     (NatIso.prod (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso (MR)))
       (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso (MR)))) hff
 
-set_option maxHeartbeats 1000000 in
 -- Comparing the total-tensor and monoidal cochain presentations needs extra heartbeats.
-set_option maxHeartbeats 1000000 in
 -- Comparing the total-tensor and monoidal cochain presentations needs extra heartbeats.
-set_option maxHeartbeats 1000000 in
 -- Converting the published total tensor to its cochain monoidal presentation is costly.
-set_option maxHeartbeats 1000000 in
 -- Converting the published total tensor to its cochain monoidal presentation is costly.
 attribute [local irreducible] HasCanonicalTensorShifts IsNormalized
 

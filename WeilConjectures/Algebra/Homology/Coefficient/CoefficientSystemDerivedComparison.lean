@@ -183,7 +183,6 @@ private theorem coefficientEvaluation_detectsIso
     intro n
     exact (NatIso.isIso_map_iff (coefficientEvaluation_derivedIso O ell P n) f).1 (hf n)
 
-set_option maxHeartbeats 800000 in
 -- Instantiate both sites and all ordinary/derived coherence structures.
 /-- Derived direct image commutes canonically with every evaluation, with the specified
 unit, counit and coefficient-change compatibility; bounded-below objects of levelwise
