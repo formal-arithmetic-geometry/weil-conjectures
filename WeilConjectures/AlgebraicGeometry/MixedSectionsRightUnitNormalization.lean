@@ -25,14 +25,14 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 -- Perform cancellation before specializing to the concrete localization functors.
-private theorem map_comparison_cancel {C D E : Type*}
+private theorem map_comparison_cancel {C : Type*} {D : Type*} {E : Type*}
     [Category C] [Category D] [Category E] (Q : D ⥤ E)
     {F G : C ⥤ D} (e : F ≅ G) (K : C) {A B : E}
     (a : Q.obj (F.obj K) ⟶ A) (b : A ⟶ B) :
     Q.map (e.hom.app K ≫ e.inv.app K) ≫ a ≫ b = a ≫ b := by
   rw [Iso.hom_inv_id_app, Q.map_id, Category.id_comp]
 
-private theorem right_unit_paste {C D : Type*} [Category C] [Category D]
+private theorem right_unit_paste {C : Type*} {D : Type*} [Category C] [Category D]
     (H : C ⥤ D) {U V W : C} (e : V ≅ W) {A B E F G J : D}
     (a : A ⟶ H.obj U) (u : U ⟶ W) (c : H.obj W ⟶ B) (s : B ⟶ E)
     (d : A ⟶ F) (v : F ⟶ B) (t : F ⟶ G) (q : G ⟶ E)
@@ -120,7 +120,9 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [c₀] at he
   conv at hc => rhs; rw [he]
   simp only [Iso.refl_symm] at hc
-  exact hc.trans (map_comparison_cancel DerivedCategory.Qh
+  exact hc.trans (map_comparison_cancel
+    (DerivedCategory.Qh
+      (C := ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))))
     (Functor.mapHomotopyCategoryCompIso
       (Iso.refl (D ⋙ RingedSpace.globalSectionsFunctor Y.toRingedSpace)) (.up ℤ)) K
     (S.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj K))
