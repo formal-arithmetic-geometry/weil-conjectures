@@ -354,6 +354,7 @@ private lemma lowerStar_preservesKInjectives
 attribute [local instance] lowerStar_preservesKInjectives
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborating the module-object derived adjunctions repeats exactness instance searches.
 private lemma derived_lowerStar_conjugate
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
