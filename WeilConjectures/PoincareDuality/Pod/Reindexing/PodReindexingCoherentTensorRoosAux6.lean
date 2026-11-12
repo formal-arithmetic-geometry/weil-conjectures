@@ -73,9 +73,7 @@ theorem towerSheafIso_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckTo
   have h := congrArg (fun f ↦ ((f.app n).f k).val.app U z) e.hom_inv_id
   exact h
 
-set_option maxHeartbeats 1000000 in
-set_option trace.profiler true in
--- Matching the two presentations of section maps of the chain-level model is expensive.
+set_option profiler true in
 /-- The tower map induced by the chain-level model of the system tensor comparison sends the
 total tensor of two unit-inserted original sections to the same total tensor after reindexing.
 Source: Stacks 03EK, 07A4, 0941. -/
@@ -118,12 +116,25 @@ theorem podCoherentTower_unitTensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (p + q)).val.app (op ((proEtaleIsoPostcompose g).obj U)) z) hY).symm.trans
     (towerSheafIso_inv_hom_apply (pullbackTensorTensorTower l E Y P.obj Q.obj) (op n) (p + q)
       (op ((proEtaleIsoPostcompose g).obj U)) _)
+  let f := (PodReductionRepresentatives.systemChain l E g).hom.app
+    ((R[Y]).obj P.obj, (R[Y]).obj Q.obj) ≫
+    (S[X]).map (Prod.mkHom (βP ≪≫ (R[X]).mapIso (podReindexComplexIso l E g P.obj)).hom
+      (βQ ≪≫ (R[X]).mapIso (podReindexComplexIso l E g Q.obj)).hom)
+  let b := (((A.restricted ((S[Y]).obj ((R[Y]).obj P.obj, (R[Y]).obj Q.obj))).hom.app
+    (op n)).f (p + q)).val.app (op U)
+  let c := (((coefficientSequenceRestriction l E X).map (f.f (p + q))).app
+    (op n)).val.app (op U)
+  let d := (((pullbackTensorTensorTower l E X ((podGoodReindex l E g A).obj P).obj
+    ((podGoodReindex l E g A).obj Q).obj).hom.app (op n)).f (p + q)).val.app (op U)
   refine (towerSheafHom_comp₄_apply _ _ _ _ _ _ _ _).trans ?_
-  erw [hs₁]
-  erw [hA ((S[Y]).obj ((R[Y]).obj P.obj, (R[Y]).obj Q.obj)) n (p + q) U]
-  erw [coefficientSequenceRestriction_map_restrictedSection']
+  refine (congrArg (fun z ↦ d (c (b z))) hs₁).trans ?_
+  refine (congrArg (fun z ↦ d (c z))
+    (hA ((S[Y]).obj ((R[Y]).obj P.obj, (R[Y]).obj Q.obj)) n (p + q) U _)).trans ?_
+  refine (congrArg (fun z ↦ d z)
+    (coefficientSequenceRestriction_map_restrictedSection' l E (f.f (p + q)) n (op U) _)).trans ?_
   have hc := podChainModel_generator l E g P.obj Q.obj βP βQ hβP hβQ n p q U x y
-  erw [hc]
+  refine (congrArg (fun z ↦ d (integralComparisonRestrictedSection l E X _ n (op U) z))
+    hc).trans ?_
   exact pullbackTensorTensorTower_hom_reducedUnit l E X ((podGoodReindex l E g A).obj P).obj
     ((podGoodReindex l E g A).obj Q).obj n p q U x y
 
