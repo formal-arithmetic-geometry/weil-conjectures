@@ -594,7 +594,6 @@ private theorem restriction_mate_component
 
 set_option backward.defeqAttrib.useBackward true in
 -- Derived adjunctions require additional definitional comparison during specialization.
-set_option profiler true in
 private theorem triangle_restriction_mate_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -636,7 +635,6 @@ private theorem triangle_restriction_mate_nat
 attribute [local irreducible] limit limit.cone
 
 -- Specialize coherent pullback and restriction identities at the functor level.
-set_option profiler true in
 private theorem pullRestriction_baseChange_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -725,7 +723,6 @@ private theorem coefficient_refinement_of_natural_comparisons
 
 set_option backward.defeqAttrib.useBackward true in
 -- Specializing four derived adjunctions compares large module category expressions.
-set_option profiler true in
 private theorem local_refinement_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
