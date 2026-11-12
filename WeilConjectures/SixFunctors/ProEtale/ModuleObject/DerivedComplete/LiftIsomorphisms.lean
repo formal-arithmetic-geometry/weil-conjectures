@@ -59,6 +59,7 @@ lemma isIso_derivedReductionStep (n : ℕ)
   dsimp only [derivedReductionStep, Mod.derivedExtendScalarsReduction]
   infer_instance
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the reductions `red_{n+1}` are elaborated at several levels
 /-- **Lifting isomorphisms of reductions** (König's lemma): if `L` is derived complete, and for
