@@ -195,6 +195,9 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
     (h₃ : IsIso ((derivedUpperStarLowerStarAdjunction Λ aY).projectionMorphism B
       (R((aX)_*⟦Λ⟧).obj A))) :
     IsIso (lowerStarKunnethMap' Λ sq₁ sq₂ A B) := by
+  letI := h₁
+  letI := h₂
+  letI := h₃
   obtain rfl : q = p₂ ≫ aY := by simpa using sq₂.w.symm
   rw [lowerStarKunnethMap'_eq_homEquiv_counit]
   -- the transported counit of the first square is the one of `w`, up to `L(𝟙)^* ≅ 𝟭`
