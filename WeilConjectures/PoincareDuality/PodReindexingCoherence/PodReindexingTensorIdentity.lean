@@ -255,7 +255,6 @@ private theorem identity_generator_restrict (X : Scheme.{u})
   erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Pure generators cross the sectionwise coefficient transports in the rewrites.
 private theorem identity_tensor_chain (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
@@ -318,7 +317,6 @@ private theorem identity_representative_square
       simp only [Category.assoc]
     _ = _ := by rw [hδ, Category.assoc, hd, Category.assoc]; rfl
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the K-flat model square unfolds the fixed derived-category transports.
 private theorem identity_tensor_representative (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
