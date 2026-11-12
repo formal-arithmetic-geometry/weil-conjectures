@@ -143,7 +143,8 @@ theorem operationCore_exists
   have hh := congrArg (fun t ↦ (EX.counitIso.app K.obj).inv ≫ EX.functor.map t) hn
   change IX.map (adj.homEquiv K N v) ≫
     (Iso.isoCompInverse (G := G ⋙ IX) (H := EX.symm) rG).hom.app N = _
-  rw [transportRightRealization_hom]
+  refine (transportRightRealization_hom EX (F := G ⋙ IX) rG N
+    (IX.map (adj.homEquiv K N v))).trans ?_
   dsimp only [sfFiniteOperationsHomEquiv, sfFiniteOperationsRealization,
     Functor.comp_map, Functor.comp_obj] at hh
   simpa only [Functor.map_comp, Category.assoc] using hh
