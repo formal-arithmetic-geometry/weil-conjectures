@@ -197,8 +197,9 @@ theorem IsMixedOfWeightsAtMost.of_iso (e : F ≅ G) (h : F.IsMixedOfWeightsAtMos
 
 /-- In an exact sequence `A ⟶ B ⟶ C` of Weil sheaves whose outer terms are mixed of weights at
 most `w`, the middle term is mixed of weights at most `w`: the kernel of `B ⟶ C` is a quotient
-of `A`, and the cokernel of its inclusion is a subobject of `C`
-(blueprint: `lem-zl-morphism-open-closed-reduction`, step 0). -/
+of `A`, and the cokernel of its inclusion is a subobject of `C` (blueprint:
+`lemma-weights-exact-sequence` and its clause `lemma-weights-exact-sequence--1`; formerly
+`lem-zl-morphism-open-closed-reduction`, step 0). -/
 theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact)
     (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w) (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) :
     S.X₂.IsMixedOfWeightsAtMost ι w :=
@@ -209,7 +210,8 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
 
 /-- The middle term of a short exact sequence `0 ⟶ G' ⟶ G ⟶ G'' ⟶ 0` of Weil sheaves whose outer
 terms are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtration of
-`G'` with the inverse image of that of `G''` (blueprint: `lem-a1-mixed-direct-summand`, part 2). -/
+`G'` with the inverse image of that of `G''` (blueprint: `lem-a1-mixed-direct-summand`, part 2;
+the short exact case of `lemma-weights-exact-sequence--1`). -/
 theorem IsMixedOfWeightsAtMost.of_shortExact {S : ShortComplex (WeilSheaf k₀ l X)}
     (hS : S.ShortExact) (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w)
     (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) : S.X₂.IsMixedOfWeightsAtMost ι w :=

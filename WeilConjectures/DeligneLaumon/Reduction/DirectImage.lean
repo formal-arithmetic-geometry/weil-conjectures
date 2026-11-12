@@ -37,7 +37,7 @@ whenever the bounded constructible Weil complex `K` is.
 ## Main statements
 
 - `AlgebraicGeometry.hasDirectImageWeightBound_over_finiteField`: blueprint
-  `sk-thm-dl-general-sheaf` and `cor-zl-rfshriek-sheaf`.
+  `theorem-direct-image-mixed-sheaf` (formerly `sk-thm-dl-general-sheaf`, `cor-zl-rfshriek-sheaf`).
 - `AlgebraicGeometry.exists_hasDirectImageWeightBound_opensι_comp`: the generic step of its
   Noetherian induction.
 - `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: blueprint
@@ -256,7 +256,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- For a separated finite-type morphism `f : X ⟶ Y` of schemes of finite type over `k₀ = 𝔽_q` and
 a constructible Weil sheaf `F` on `X` mixed of weights at most `w`, the sheaf `Rʳf₀!F` is mixed of
-weights at most `w + r`, for every `r` (blueprint: `sk-thm-dl-general-sheaf`,
+weights at most `w + r`, for every `r` (blueprint: `theorem-direct-image-mixed-sheaf` and its
+clause `theorem-direct-image-mixed-sheaf--1`; formerly `sk-thm-dl-general-sheaf`,
 `cor-zl-rfshriek-sheaf`).
 
 Noetherian induction on the closed subsets of `X`: for a reduced closed subscheme `T` of `X`, the
