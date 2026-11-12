@@ -332,8 +332,9 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     simp
   let Ψ := S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))
   let ψ := S₆.trans S₇
-  let S₅' : (((H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ))).stalk zf).Equiv
-      (H.stalk zf).dual := by
+  let S₅' : (((H.dual hH).stalk zf).rescale
+      (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
+        (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).Equiv (H.stalk zf).dual := by
     rw [hone]
     exact (FrobeniusModule.rescaleOneEquiv ((H.dual hH).stalk zf)).trans S₅
   refine ⟨Ψ.toLinearEquiv ≪≫ₗ S₅'.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap,
