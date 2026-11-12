@@ -333,7 +333,6 @@ private theorem residue_open_image
   obtain ⟨hbc, hta⟩ := hd (min a b) (max b a) (by omega) K hK ht'
   exact ⟨hbc, min a b, max b a + d, hta⟩
 
-set_option maxHeartbeats 800000 in
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
