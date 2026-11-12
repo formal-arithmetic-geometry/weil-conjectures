@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.ResidueFieldBaseChangeLift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerStabilization
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegral
@@ -47,6 +48,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+-- Reuse the tensor and colimit instances for each occurrence of a derived functor.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod
+  hasGoodTensorTensor₂₃_mod hasColimitsOfShape_int_mod
+  preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
 
 namespace NearbyCyclesModel
 
@@ -85,7 +91,6 @@ lemma quasiSeparated_galoisLayer_j [QuasiSeparated N.j] (L' : Type u) [Field L']
 
 variable (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
--- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**. Let `C` be a
 `ℚ̄_ℓ`-complex whose restriction `Lε^* C` to the noetherian generic fibre is bounded constructible.
 Assume that for every finite subextension `E ⊆ ℚ̄_ℓ` and every bounded constructible

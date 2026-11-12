@@ -217,7 +217,6 @@ theorem exists_finrank_traitTensorCompositum_eq_pow {p : ℕ} (hp : p.Prime)
   exact exists_finrank_eq_pow_of_forall_mem_range (F := FractionRing (PowerSeries K))
     (mem_range_traitTensorCompositum_of_isSeparable hpk) L₁
 
--- the instances `Module L L₁` for the concrete composita are found slowly
 /-- The degrees of the finite Galois subextensions of `L^sep / L` are invertible in every ring in
 which `p` is invertible. -/
 theorem isUnit_finrank_traitTensorCompositum {p : ℕ} (hp : p.Prime)
