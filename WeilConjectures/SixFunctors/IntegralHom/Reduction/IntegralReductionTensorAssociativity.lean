@@ -335,8 +335,7 @@ private theorem normalizedReductionComparison_square
       | n + 1, .mdata _ x, _ => diffs n x b
       | n + 1, _, .mdata _ y => diffs n a y
       | _, _, _ => [(a, b)]
-    let h ← Lean.Elab.Tactic.getFVarId `hs
-    let ty ← Lean.Meta.inferType (.fvar h)
+    let ty := (← Lean.getLocalDeclFromUserName `hs).type
     let target ← Lean.Elab.Tactic.getMainTarget
     for (a, b) in (diffs 64 ty target).take 12 do
       Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
