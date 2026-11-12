@@ -33,7 +33,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 220000 in
 set_option profiler true in
 -- Comparing the two derived Hom interfaces unfolds the chosen derived pullback functors.
 /-- A connective strictly perfect model with a scalar degree-zero basis realizes its
@@ -116,15 +115,16 @@ theorem picard_scalar_model_cycles_realization
     ((DerivedCategory.singleFunctor
       (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
         ((Modules.tensorPullback (pullback.fst f k)).obj L))
-  obtain ⟨c, hc⟩ := picard_scalar_derived_cycles W E w U hwU hU m d K hK hneg
-    e0 e1 hE hd hdw
-  obtain ⟨q, hq⟩ := picard_direct_image_test_sections f L W k w
+  refine (picard_scalar_derived_cycles W E w U hwU hU m d K hK hneg
+    e0 e1 hE hd hdw).elim fun c hc ↦ ?_
+  refine (picard_direct_image_test_sections f L W k w).elim fun q hq ↦ ?_
   refine ⟨(q (W.fromSpecResidueField w)).symm.trans c, ?_⟩
   intro V hwV hVU
-  obtain ⟨j, hj, e, he⟩ := hq V hwV
-  refine ⟨j, hj, e, ?_⟩
+  refine (hq V hwV).elim fun j hj ↦ ?_
+  refine hj.2.elim fun e he ↦ ?_
+  refine ⟨j, hj.1, e, ?_⟩
   intro a ha
-  obtain ⟨ξ, hξ⟩ := hc V hwV hVU a ha
+  refine (hc V hwV hVU a ha).elim fun ξ hξ ↦ ?_
   refine ⟨q V.ι ξ, ?_⟩
   exact (he ξ).trans (congrArg (q (W.fromSpecResidueField w)) hξ)
 

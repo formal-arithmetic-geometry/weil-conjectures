@@ -120,8 +120,6 @@ theorem picard_h1_base_descent_local_model
                       (ui i) (hui i))).left) 1 (α z) := by
   obtain ⟨U, hwU, hU, htrivial, m, K, hbounded, hbetti, hrank, e0, e1, hE, hdw⟩ :=
     picard_h1_common_minimal_model f Xi fi ui hui hO hOi L W k w s hw hLi hLs
-  let : Abelian (SheafOfModules.{v}
-      ((moduleRings W.toRingedSpace).over U)) := inferInstance
   have hK : IsStrictlyPerfect W U K := by
     refine ⟨hbounded, fun j ↦ ?_⟩
     obtain ⟨e⟩ := hrank j
