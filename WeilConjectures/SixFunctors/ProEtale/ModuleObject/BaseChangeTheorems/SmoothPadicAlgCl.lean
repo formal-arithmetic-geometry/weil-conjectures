@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangePasting
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangeCoherence
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!

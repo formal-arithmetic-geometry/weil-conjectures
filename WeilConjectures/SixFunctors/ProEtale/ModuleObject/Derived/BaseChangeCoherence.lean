@@ -26,8 +26,9 @@ a condensed ring `Λ`:
 
 These are blueprint `lemma-naturality-pasting-comparison--1` and
 `lemma-naturality-pasting-comparison--2`, in the form of `lemma-identity-pasting`. The formal
-parts are the abstract statements `CategoryTheory.Adjunction.exchangeRight_app_of_iso_id` and
-`CategoryTheory.Adjunction.exchangeRight_app_paste_vert` about exchange morphisms.
+parts are the abstract statements `CategoryTheory.mateEquiv_app_of_isoId`,
+`CategoryTheory.Adjunction.exchangeRight_app_paste_of_eq` and
+`CategoryTheory.Adjunction.exchangeRight_app_paste_vert` about mates and exchange morphisms.
 -/
 
 @[expose] public section
@@ -38,38 +39,28 @@ open CategoryTheory
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+namespace CategoryTheory
+
+/-- The mate of a transformation `θ : G ⋙ L ⟶ L ⋙ H` of the form `L(I₁) ≫ I₂⁻¹`, for isomorphisms
+`I₁ : G ≅ 𝟭` and `I₂ : H ≅ 𝟭`, is `I₁(R) ≫ R(I₂⁻¹)`. -/
+lemma mateEquiv_app_of_isoId {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (a : L ⊣ R) {G : C ⥤ C} {H : D ⥤ D} (I₁ : G ≅ 𝟭 C) (I₂ : H ≅ 𝟭 D) (θ : G ⋙ L ⟶ L ⋙ H)
+    (hθ : ∀ B, θ.app B = L.map (I₁.hom.app B) ≫ I₂.inv.app (L.obj B)) (Y : D) :
+    (mateEquiv a a θ).natTrans.app Y = I₁.hom.app (R.obj Y) ≫ R.map (I₂.inv.app Y) := by
+  apply (a.homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, mateEquiv_counit, hθ,
+    Functor.map_comp, Category.assoc, Category.assoc, a.counit_naturality]
+  have h := I₂.inv.naturality (a.counit.app Y)
+  simp only [Functor.id_map, Functor.id_obj] at h
+  rw [h]
+  simp
+
+end CategoryTheory
+
 namespace CategoryTheory.Adjunction
 
 /-! The statements below are about natural transformations `bc` *equal* to exchange morphisms,
 so that they apply to base change maps defined as exchange morphisms without unfolding them. -/
-
-section Identity
-
-variable {A B : Type*} [Category* A] [Category* B] {Lf : B ⥤ A} {Rf : A ⥤ B}
-
-/-- **The exchange morphism of an identity square.** If the horizontal functors `G` and `G'` are
-identified with the identity functors by `i` and `i'`, compatibly with `θ : G ⋙ Lf ≅ Lf ⋙ G'`,
-then the exchange morphism `bc` of `θ` is `Rf ⋙ G ≅ Rf ≅ G' ⋙ Rf`. -/
-lemma exchangeRight_app_of_iso_id {G : B ⥤ B} {G' : A ⥤ A} (af : Lf ⊣ Rf)
-    (θ : G ⋙ Lf ≅ Lf ⋙ G') (i : G ≅ 𝟭 B) (i' : G' ≅ 𝟭 A)
-    (h : ∀ N : B, θ.hom.app N ≫ i'.hom.app (Lf.obj N) = Lf.map (i.hom.app N))
-    (bc : Rf ⋙ G ⟶ G' ⋙ Rf) (hbc : bc = exchangeRight af af θ) (K : A) :
-    bc.app K = i.hom.app (Rf.obj K) ≫ Rf.map (i'.inv.app K) := by
-  subst hbc
-  have hθ : θ.hom.app (Rf.obj K) =
-      Lf.map (i.hom.app (Rf.obj K)) ≫ i'.inv.app (Lf.obj (Rf.obj K)) := by
-    rw [← h]
-    simp
-  have hG : G'.map (af.counit.app K) =
-      i'.hom.app (Lf.obj (Rf.obj K)) ≫ af.counit.app K ≫ i'.inv.app K := by
-    rw [← reassoc_of% (i'.hom.naturality (af.counit.app K)), Iso.hom_inv_id_app]
-    simp
-  have hη := af.unit.naturality (i.hom.app (Rf.obj K))
-  simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hη
-  rw [exchangeRight_app, hθ, hG, ← Rf.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc,
-    Functor.map_comp, ← reassoc_of% hη, Functor.map_comp, right_triangle_components_assoc]
-
-end Identity
 
 section Horizontal
 
@@ -230,17 +221,41 @@ section Identity
 
 variable {X Y : Scheme.{u}}
 
-/-- The pullback comparison of the identity square with vertical maps `f, f` is the identity,
-through the identity isomorphisms `L(𝟙)^* ≅ 𝟭`. -/
-lemma pullbackSquareComparison_hom_app_comp_leftDerivedUpperStarId (f : X ⟶ Y)
-    (sq : CommSq (𝟙 X) f f (𝟙 Y)) (N : 𝔻(Y)) :
-    (pullbackSquareComparison Λ sq).hom.app N ≫
-        (leftDerivedUpperStarId Λ X).hom.app (L((f)^*⟦Λ⟧).obj N) =
-      L((f)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app N) := by
-  rw [pullbackSquareComparison_hom_app, Category.assoc, Category.assoc,
-    leftDerivedUpperStarComp_id_left_app, eqToHom_trans,
-    ← cancel_epi ((leftDerivedUpperStarComp Λ f (𝟙 Y)).hom.app N), Iso.hom_inv_id_app_assoc,
-    leftDerivedUpperStarComp_id_right_app]
+/-- The pullback comparison `Lp^* L(𝟙)^* ≅ L(𝟙)^* Lp^*` of the square `p ≫ 𝟙 = 𝟙 ≫ p` is
+`I ≫ Lp^*(I⁻¹)`, for the identity isomorphisms `I : L(𝟙)^* ≅ 𝟭`. -/
+lemma pullbackSquareComparison_hom_app_id_right (p : X ⟶ Y)
+    (sq : CommSq p (𝟙 X) (𝟙 Y) p)
+    (B : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (pullbackSquareComparison Λ sq).hom.app B =
+      (leftDerivedUpperStarId Λ X).hom.app (L((p)^*⟦Λ⟧).obj B) ≫
+        L((p)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).inv.app B) := by
+  have h₁ := leftDerivedUpperStarComp_id_left_app Λ p B
+  have h₂ := leftDerivedUpperStarComp_id_right_app Λ p B
+  simp only [pullbackSquareComparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    eqToIso.hom, eqToHom_app]
+  rw [← cancel_epi ((leftDerivedUpperStarComp Λ (𝟙 X) p).hom.app B), Iso.hom_inv_id_app_assoc,
+    reassoc_of% h₁]
+  rw [← cancel_mono (L((p)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B))]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, h₂, eqToHom_trans]
+  simp
+
+/-- The pullback comparison `L(𝟙)^* Lp^* ≅ Lp^* L(𝟙)^*` of the square `𝟙 ≫ p = p ≫ 𝟙` is
+`Lp^*(I) ≫ I⁻¹`, for the identity isomorphisms `I : L(𝟙)^* ≅ 𝟭`. -/
+lemma pullbackSquareComparison_hom_app_id_left (p : X ⟶ Y)
+    (sq : CommSq (𝟙 X) p p (𝟙 Y))
+    (B : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (pullbackSquareComparison Λ sq).hom.app B =
+      L((p)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B) ≫
+        (leftDerivedUpperStarId Λ X).inv.app (L((p)^*⟦Λ⟧).obj B) := by
+  have h₁ := leftDerivedUpperStarComp_id_left_app Λ p B
+  have h₂ := leftDerivedUpperStarComp_id_right_app Λ p B
+  simp only [pullbackSquareComparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    eqToIso.hom, eqToHom_app]
+  rw [← cancel_epi ((leftDerivedUpperStarComp Λ p (𝟙 Y)).hom.app B), Iso.hom_inv_id_app_assoc,
+    reassoc_of% h₂]
+  rw [← cancel_mono ((leftDerivedUpperStarId Λ X).hom.app (L((p)^*⟦Λ⟧).obj B))]
+  simp only [Category.assoc, Iso.inv_hom_id_app, h₁, eqToHom_trans]
+  simp
 
 /-- Blueprint `lemma-naturality-pasting-comparison--2`, identity square: the pro-étale base
 change map of the square with vertical maps `f, f` and horizontal maps `𝟙 X, 𝟙 Y` is the
@@ -250,10 +265,11 @@ lemma baseChangeMap_app_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) (K 
     (baseChangeMap Λ sq).app K =
       (leftDerivedUpperStarId Λ Y).hom.app (R((f)_*⟦Λ⟧).obj K) ≫
         R((f)_*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).inv.app K) :=
-  Adjunction.exchangeRight_app_of_iso_id (derivedUpperStarLowerStarAdjunction Λ f)
-    (pullbackSquareComparison Λ sq) (leftDerivedUpperStarId Λ Y) (leftDerivedUpperStarId Λ X)
-    (pullbackSquareComparison_hom_app_comp_leftDerivedUpperStarId Λ f sq) (baseChangeMap Λ sq)
-    (baseChangeMap_eq_exchangeRight Λ sq) K
+  (congrArg (fun t ↦ t.app K) ((baseChangeMap_eq_exchangeRight Λ sq).trans
+    (Adjunction.exchangeRight_eq_mateEquiv _ _ _))).trans
+    (mateEquiv_app_of_isoId (derivedUpperStarLowerStarAdjunction Λ f) (leftDerivedUpperStarId Λ Y)
+      (leftDerivedUpperStarId Λ X) (pullbackSquareComparison Λ sq).hom
+      (pullbackSquareComparison_hom_app_id_left Λ f sq) K)
 
 end Identity
 
