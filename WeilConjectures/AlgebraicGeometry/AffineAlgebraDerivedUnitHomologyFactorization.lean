@@ -50,8 +50,6 @@ private theorem restriction_exact {Z : TopCat.{v}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
--- The scalar-restriction comparison unfolds the ringed-space and sheaf category instances.
 /-- Under the cohomology comparison, the derived affine algebra unit is the
 underived unit applied to the cohomology module.
 Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
@@ -132,6 +130,7 @@ theorem affine_algebra_derived_unit_homology_factorization
       ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩
     let := hlim
     let := hcolim
+    -- Compare sections to avoid unfolding both functor records in a definitional equality.
     let underived : R ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
       NatIso.ofComponents (fun _ ↦
         (SheafOfModules.fullyFaithfulForget _).preimageIso
@@ -156,17 +155,31 @@ theorem affine_algebra_derived_unit_homology_factorization
   have hε : IsIso (adj.counit.app (L.obj M)) := by
     rw [← adj.leftAdjointUniq_hom_app_counit adjD (L.obj M)]
     infer_instance
-  have hLu : IsIso (L.map (adj.unit.app M)) :=
-    IsIso.of_isIso_fac_right (adj.left_triangle_components M)
+  have hLu : IsIso (L.map (adj.unit.app M)) := by
+    have : IsIso (L.map (adj.unit.app M) ≫ adj.counit.app (L.obj M)) := by
+      rw [adj.left_triangle_components M]
+      exact ⟨⟨𝟙 _, by simp, by simp⟩⟩
+    exact IsIso.of_isIso_comp_right _ (adj.counit.app (L.obj M))
   have hPu : IsIso (P.map (HA.map (adj.unit.app M))) := by
-    apply (NatIso.isIso_map_iff eH (adj.unit.app M)).mpr
-    change IsIso (HX.map (L.map (adj.unit.app M)))
-    infer_instance
+    have he := eH.hom.naturality (adj.unit.app M)
+    dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at he
+    have : IsIso (P.map (HA.map (adj.unit.app M)) ≫
+        eH.hom.app (RD.obj (L.obj M))) := by
+      rw [he]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (eH.hom.app (RD.obj (L.obj M)))
   have hu₀ : IsIso (a.unit.app (HA.obj M)) := hunit _ (hM n)
   have hu₁ : IsIso (a.unit.app (HA.obj (RD.obj (L.obj M)))) :=
     hunit _ (hR _ hLM n)
-  have hu : IsIso (HA.map (adj.unit.app M)) :=
-    IsIso.of_isIso_fac_right (a.unit.naturality (HA.map (adj.unit.app M)))
+  have hu : IsIso (HA.map (adj.unit.app M)) := by
+    have : IsIso (HA.map (adj.unit.app M) ≫
+        a.unit.app (HA.obj (RD.obj (L.obj M)))) := by
+      have he := a.unit_naturality (HA.map (adj.unit.app M))
+      change a.unit.app (HA.obj M) ≫ R.map (P.map (HA.map (adj.unit.app M))) =
+        HA.map (adj.unit.app M) ≫ a.unit.app (HA.obj (RD.obj (L.obj M))) at he
+      rw [← he]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (a.unit.app (HA.obj (RD.obj (L.obj M))))
   refine ⟨(asIso (HA.map (adj.unit.app M))).symm ≪≫
     asIso (a.unit.app (HA.obj M)), ?_⟩
   change HA.map (adj.unit.app M) ≫
