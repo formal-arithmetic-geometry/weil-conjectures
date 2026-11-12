@@ -101,6 +101,15 @@ private lemma componentSupport_special_lowerStar_obj_eq
   rw [hphg']
   rfl
 
+private lemma diagPushforwardExchange_eq_of_preserves (x : RationalPoint X)
+    (hXm : (deformationModel X x.left.ker k').PreservesBoundedConstructible
+      (Profinite.padicAlgClRingObj ℓ))
+    (hXXm : (deformationProdModel X x.left.ker X x.left.ker k').PreservesBoundedConstructible
+      (Profinite.padicAlgClRingObj ℓ)) :
+    diagPushforwardExchange ℓ X k' x =
+      (deformationDiagModelHom X x.left.ker k').boundedConstructiblePushforwardExchange
+        ℓ hXm hXXm := rfl
+
 set_option profiler true in
 private lemma supportCompactSupportExchange_component_identity
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
@@ -237,6 +246,7 @@ private lemma supportCompactSupportExchange_component_identity
       (componentModelHom k' j hb) hM hN
   have hχΔ := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (deformationDiagModelHom X (y ≫ c.c₁).left.ker k') hXm hXXm
+  rw [← diagPushforwardExchange_eq_of_preserves k' (y ≫ c.c₁) hXm hXXm] at hχΔ
   have hχdj := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (componentPointModelHom k' j hb) hM hXm
   run_tac do
