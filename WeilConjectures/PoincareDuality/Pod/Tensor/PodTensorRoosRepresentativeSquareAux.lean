@@ -391,8 +391,9 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
   have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
   run_tac Lean.Elab.Tactic.withMainContext do
-    let ha := (← Lean.Meta.getLocalDeclFromUserName `hs).type
-    let .forallE _ he _ _ := (← Lean.Meta.getLocalDeclFromUserName `cancelTower).type
+    let ha ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `hs).type
+    let hc ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `cancelTower).type
+    let .forallE _ he _ _ := hc
       | throwError "expected normalization hypothesis"
     Lean.logInfo m!"actual left type: {ha.getAppArgs[0]!}"
     Lean.logInfo m!"actual right type: {ha.getAppArgs[2]!}"
