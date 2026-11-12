@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoinvariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 

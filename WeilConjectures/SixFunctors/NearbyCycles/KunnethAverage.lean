@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 import WeilConjectures.Tactic.ExactModProofs
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuityNoetherian
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
