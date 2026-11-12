@@ -94,6 +94,7 @@ private theorem top_restriction_faithful (X : Scheme.{u})
   change F.mapDerivedCategory.Faithful
   exact inferInstance
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The induction compares restriction functors at four opens and arbitrary integer shifts.
 /-- Maps from a perfect complex into a quasi-coherent complex supported on `V(f)` are
