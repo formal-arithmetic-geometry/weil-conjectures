@@ -65,9 +65,13 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h1.symm.trans
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
-set_option maxHeartbeats 2000000 in
+private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
+    (M : coefficientSequenceModules l E W) {V V' : W.ProEt} (i : V' ⟶ V)
+    (z : M.val.obj (op (n, V))) :
+    ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
+      M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
+
 set_option profiler true in
--- The sequence-site restriction of reduced sections unfolds evaluation.
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
 Source: Stacks 06YY and 0941. -/
 theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
@@ -81,6 +85,9 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
   have h1 := PresheafOfModules.naturality_apply
     ((pullbackTensorReductionEvaluation l E W n).hom.app M).val i.op
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)
+  change _ = ((coefficientSequenceEvaluation l E W n).obj
+    ((pullbackTensorOrdinaryReduction l E W).obj M)).val.map i.op _ at h1
+  rw [sequenceEvaluation_map_apply] at h1
   have h2 := PresheafOfModules.naturality_apply
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val i.op z
   have h3 := (finiteAdjunction_unit_apply l E W n M (op V') (M.val.map i.op z)).symm.trans
@@ -90,9 +97,7 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3.symm)
 
 
-set_option maxHeartbeats 4000000 in
 set_option profiler true in
--- Transport along the site equivalence elaborates several reduced sections.
 /-- Two maps out of the reduction of a total tensor degree agree once they agree on reduced
 pure tensors over every object postcomposed along an isomorphism of schemes.
 Source: Stacks 03EK, 06YY, 09A5 and 0941. -/
@@ -133,42 +138,29 @@ theorem reduction_total_hom_ext_postcompose {X Y : Scheme.{u}} (g : X ⟶ Y) [Is
     rw [← PresheafOfModules.map_comp_apply, ← op_comp, i.inv_hom_id, op_id,
       PresheafOfModules.map_id]
     rfl
-  have hs : ((pullbackTensorReductionEvaluation l E Y n).hom.app _).val.app (op V)
-      (unrestrictedIntegralTensorSection l E Y n _ (op V) 1
+  let T : integralTowerModules l E Y :=
+    (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)
+      (completedIntegralCommRingSheafUnrestricted l E Y)).obj (P, Q)).X k)
+  let sectionAt (V : Y.ProEt) (x : (P.X p).val.obj (op V))
+      (y : (Q.X q).val.obj (op V)) :=
+    ((pullbackTensorReductionEvaluation l E Y n).hom.app T).val.app (op V)
+      (unrestrictedIntegralTensorSection l E Y n T (op V) 1
         (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-          (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V) x y)) =
-      ((pullbackTensorOrdinaryReduction l E Y).obj
-        (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)
-          (completedIntegralCommRingSheafUnrestricted l E Y)).obj (P, Q)).X k)).val.map
+          (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V) x y))
+  have hs : sectionAt V x y =
+      ((pullbackTensorOrdinaryReduction l E Y).obj T).val.map
         (CategoryTheory.Prod.mkHom (𝟙 n) i.inv).op
-          (((pullbackTensorReductionEvaluation l E Y n).hom.app _).val.app
-            (op ((proEtaleIsoPostcompose g).obj U))
-            (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1
-              (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-                (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-                (op ((proEtaleIsoPostcompose g).obj U))
-                ((P.X p).val.map i.hom.op x) ((Q.X q).val.map i.hom.op y)))) := by
+        (sectionAt _ ((P.X p).val.map i.hom.op x) ((Q.X q).val.map i.hom.op y)) := by
+    dsimp only [sectionAt]
     rw [reduction_restrict_unitSection]
     erw [coefficientTensorGenerator_restrict (ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq i.inv.op]
     rw [hx, hy]
-  have key (f : (pullbackTensorOrdinaryReduction l E Y).obj
-      (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)
-        (completedIntegralCommRingSheafUnrestricted l E Y)).obj (P, Q)).X k) ⟶ N) :
-      f.val.app (op (n, V))
-        (((pullbackTensorReductionEvaluation l E Y n).hom.app _).val.app (op V)
-          (unrestrictedIntegralTensorSection l E Y n _ (op V) 1
-            (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-              (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V) x y))) =
+  have key (f : (pullbackTensorOrdinaryReduction l E Y).obj T ⟶ N) :
+      f.val.app (op (n, V)) (sectionAt V x y) =
       N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i.inv).op
         (f.val.app (op (n, (proEtaleIsoPostcompose g).obj U))
-          (((pullbackTensorReductionEvaluation l E Y n).hom.app _).val.app
-            (op ((proEtaleIsoPostcompose g).obj U))
-            (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1
-              (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-                (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-                (op ((proEtaleIsoPostcompose g).obj U))
-                ((P.X p).val.map i.hom.op x) ((Q.X q).val.map i.hom.op y))))) := by
+          (sectionAt _ ((P.X p).val.map i.hom.op x) ((Q.X q).val.map i.hom.op y))) := by
     exact (congrArg (f.val.app (op (n, V))) hs).trans
       (PresheafOfModules.naturality_apply f.val _ _)
   exact (key h₁).trans ((congrArg (N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i.inv).op)
