@@ -322,6 +322,7 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
