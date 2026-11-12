@@ -174,7 +174,6 @@ lemma adicLowerStarCongr_inv_app_hom_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
       M.X.obj.map ((MorphismProperty.Over.pullbackCongr h.symm).inv.app V.unop).op :=
   lowerStarCongr_hom_app_hom_app _ h.symm M.X V
 
-set_option profiler true in
 /-- `AlgebraicGeometry.ProEtale.lowerStarComp_exchange'` for sheaves of `ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
     (r : T₁ ⟶ T₃) (hr : p ≫ q = r)
@@ -197,6 +196,8 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
   have key := congrArg (fun φ ↦ φ.hom.app V)
     (lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X)
+  -- Normalize each layer in order, retaining explicit rewrite proofs for the kernel.
+  -- `rewrite` avoids attempting reflexivity after every step through the large composites.
   repeat' rewrite [Functor.map_comp]
   repeat' rewrite [Mod.comp_hom']
   repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]

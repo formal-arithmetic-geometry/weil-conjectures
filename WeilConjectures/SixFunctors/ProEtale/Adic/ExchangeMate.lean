@@ -178,7 +178,6 @@ lemma adicLowerStarEquivalence_symm_unit_app_hom_hom_app {X : Scheme.{u}} (e : X
     adicLowerStarCongr_inv_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
     ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp]
 
-set_option profiler true in
 /-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two
 sides of `J ≫ b⁻¹ = a⁻¹ ≫ J` is the mate, under the equivalences `(a⁻¹)_* ⊣ a_*` and
 `(b⁻¹)_* ⊣ b_*`, of the composition isomorphism along the two sides of `a ≫ J = J ≫ b`. -/
@@ -204,6 +203,8 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
       ((adicLowerStarEquivalence l e).symm.functor.obj N).X.obj.map φ =
         N.X.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.inv).map φ.unop).op :=
     rfl
+  -- Expose components before normalizing module, sheaf, and section compositions in order.
+  -- `rewrite` retains explicit proofs without attempting reflexivity after every step.
   repeat' rewrite [Iso.trans_hom]
   repeat' rewrite [Iso.symm_hom]
   repeat' rewrite [NatTrans.comp_app]
