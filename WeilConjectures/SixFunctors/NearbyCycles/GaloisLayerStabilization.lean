@@ -213,15 +213,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
   · intro σ hσ
     have hc := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       ((stabilizationIdentityPullback Λ X).obj C)
-    have h1 : (N.galoisLayerAut h L' (σ.restrictNormal L')).autAction Λ
-        ((stabilizationIdentityPullback Λ X).obj C) = 𝟙 _ :=
-      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ
+    have h1 := (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ
         ((stabilizationIdentityPullback Λ X).obj C))
         (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
           (N.galoisLayerAction_one Λ h L' _)
-    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ
-        ((stabilizationIdentityPullback Λ X).obj ((stabilizationIdentityPullback Λ X).obj C)) =
-        𝟙 _ := eq_id_of_intertwining_of_epi_aux (stabilizationIdentityPullback Λ X') _ _ _ hc h1
+    have h2 := eq_id_of_intertwining_of_epi_aux (stabilizationIdentityPullback Λ X') _ _ _ hc h1
     exact eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality Λ _ g)
       ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
   · obtain ⟨r, hr, havg⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
@@ -236,7 +232,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
       (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ ((stabilizationIdentityPullback Λ X).obj C))
       (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
       (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
-      (fun τ ↦ by
-        rw [N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ (lift τ), hlift])
+      (fun τ ↦ (N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ
+        (lift τ) ((stabilizationIdentityPullback Λ X).obj C)).trans
+          (congrArg (fun σ ↦ (stabilizationIdentityPullback Λ X').map
+            ((N.galoisLayerAut h L' σ).autAction Λ ((stabilizationIdentityPullback Λ X).obj C)) ≫
+              ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ).app
+                ((stabilizationIdentityPullback Λ X).obj C)) (hlift τ)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
