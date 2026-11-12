@@ -65,8 +65,6 @@ private theorem quotient_section_coordinates
 
 set_option linter.unusedVariables false in
 set_option profiler true in
-set_option maxHeartbeats 700000 in
--- Affine scalar structures and tensor localization need additional elaboration fuel.
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented
 lift of the canonical quotient restriction on each basic inclusion.
 This theorem only constructs one compatible augmented lift on each basic inclusion;
@@ -164,25 +162,31 @@ theorem exists_derived_selfTor_chosen_affine_coordinates
   let := HasDerivedCategory.standard M
   let := SheafOfModules.monoidalCategory Y.sheaf
   let N := (CochainComplex.singleFunctor M 0).obj B
-  obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
+  refine (CochainComplex.exists_isKFlatResolution N).elim fun K hK' ↦
+    hK'.elim fun q hK' ↦ ?_
+  have hK := hK'.1
+  have hq := hK'.2.2.1
   have : QuasiIso q := hq
-  obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y
+  refine (kFlat_derivedTensor_comparison_natIso Y
     ((Functor.const (Discrete Unit)).obj K)
-    ((Functor.const (Discrete Unit)).obj N) (fun _ ↦ hK)
+    ((Functor.const (Discrete Unit)).obj N) (fun _ ↦ hK)).elim fun comparison ↦ ?_
   let d := asIso (DerivedCategory.Q.map q)
   let H := DerivedCategory.homologyFunctor M (-(n : ℤ))
   let e := (H.mapIso ((tensorIso d (Iso.refl _)).symm ≪≫
     (comparison.app ⟨()⟩).app ⟨()⟩) ≪≫
       (DerivedCategory.homologyFunctorFactors M (-(n : ℤ))).app _).symm
-  obtain ⟨c₀, hc⟩ := exists_qcoh_ordinary_tensor_resolution_coordinates
-    Y B B MA MA s s P K q hK hq n
+  refine (exists_qcoh_ordinary_tensor_resolution_coordinates
+    Y B B MA MA s s P K q hK hq n).elim fun c₀ hc ↦ ?_
   let c := fun U : Y.affineOpens ↦
     (c₀ U).trans (Scheme.Modules.appLinearEquivOfIso e U.1)
   refine ⟨c, ?_⟩
   intro V U h hbasic A C I J φ PU PV TA TC ψ
   have hI : ∀ x ∈ I, φ x ∈ J := fun x hx ↦ i.ker.ideal_le_comap_ideal h hx
-  obtain ⟨ψ₀, a, k, hψ₀, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
-    A C I J φ hI PU PV
+  refine (exists_quotient_resolution_tensor_comparison A C I J φ hI PU PV).elim
+    fun ψ₀ hψ₀ ↦ hψ₀.elim fun a ha ↦ ha.elim fun k hk' ↦ ?_
+  have hψ₀ := hk'.1
+  have ha := hk'.2.1
+  have hk := hk'.2.2
   have hψeq : ψ₀ = ψ := by
     apply RingHom.ext
     intro y

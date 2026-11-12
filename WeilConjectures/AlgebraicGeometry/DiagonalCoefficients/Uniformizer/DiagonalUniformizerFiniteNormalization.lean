@@ -32,8 +32,6 @@ attribute [local irreducible] quotientLine quotientLineMap derivedScalars
   QuotientLineRealization FiniteDiagonalComparison
 
 set_option profiler true in
-set_option maxHeartbeats 500000 in
--- Repeated inherited coefficient-ring instance conversions exceed the default heartbeat budget.
 /-- Identify a supplied scalar-compatible quotient diagram with the positive finite
 Cartier class and trace, at the fixed annihilating exponent. No quotient diagram or
 scalar compatibility is constructed by this statement.
@@ -112,20 +110,18 @@ theorem diagonalUniformizer_finiteNormalization
         (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) hA Y hYpow hWpow
         (quotientLine l E π n) d eY eP eW (lineP.iso l) (lineW.iso l) := by
   let B := completedResidue l E π n
-  let : CommRing B := inferInstance
-  let : TopologicalSpace B := inferInstance
-  let : IsTopologicalRing B := inferInstance
   let A := ULift.{u + 1} B
-  let : CommRing A := inferInstance
   let R := Profinite.continuousMapRingObj.{u} B
-  let : MonObj R := inferInstance
-  let : IsCommMonObj R := inferInstance
   let := hfinite
-  obtain ⟨eY, eP, eW, lineP, lineW, ⟨sourceComparison⟩, ⟨ordinarySquare⟩⟩ :=
-    diagonalUniformizer_finiteModels l Y hY E π hπ n hA hYpow hWpow rootsP rootsW
-  obtain ⟨presentation⟩ := finiteTracePresentation_exists
+  refine (diagonalUniformizer_finiteModels l Y hY E π hπ n hA hYpow hWpow
+    rootsP rootsW).elim fun eY heY ↦ heY.elim fun eP heP ↦ heP.elim fun eW heW ↦
+      heW.elim fun lineP hlineP ↦ hlineP.elim fun lineW hlineW ↦ ?_
+  refine hlineW.1.elim fun sourceComparison ↦
+    hlineW.2.elim fun ordinarySquare ↦ ?_
+  refine (finiteTracePresentation_exists
     R A l (Fact.out : l.Prime)
-    (n + 1) (Nat.succ_pos n) hA Y hYpow (quotientLine l E π n) d eY eP ordinarySquare
+    (n + 1) (Nat.succ_pos n) hA Y hYpow (quotientLine l E π n) d eY eP
+    ordinarySquare).elim fun presentation ↦ ?_
   refine ⟨eY, eP, eW, lineP, lineW, ?_⟩
   apply finiteDiagonalComparison_of_equations
     R A
