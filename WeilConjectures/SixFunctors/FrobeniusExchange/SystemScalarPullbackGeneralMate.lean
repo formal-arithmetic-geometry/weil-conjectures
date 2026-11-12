@@ -307,6 +307,35 @@ theorem derivedCube_of_isDerivedSquareOf
       (HomologicalComplex.quasiIso A' (ComplexShape.up ℤ)) (fun K ↦ key K)
   exact congr_app h M
 
+/-- The ordinary mate transpose lifts degreewise, independently of adjunctions with
+identical units. -/
+theorem cochain_mate_transpose_of_unit_eq
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    {E₁ : A ⥤ B} {E₂ : C ⥤ D} {R₁ : B ⥤ A} {R₂ : D ⥤ C}
+    (F : A ⥤ C) (G : B ⥤ D)
+    [E₁.Additive] [E₂.Additive] [R₁.Additive] [R₂.Additive] [F.Additive] [G.Additive]
+    (o₁ a₁ : E₁ ⊣ R₁) (o₂ a₂ : E₂ ⊣ R₂)
+    (h₁ : o₁.unit = a₁.unit) (h₂ : o₂.unit = a₂.unit)
+    (q : R₁ ⋙ F ⟶ G ⋙ R₂) (a : F ⋙ E₂ ⟶ E₁ ⋙ G)
+    (ha : a = (mateEquiv o₁ o₂).symm (TwoSquare.mk _ _ _ _ q))
+    (P : CochainComplex A ℤ) :
+    (a₂.mapHomologicalComplex (.up ℤ)).homEquiv
+        ((F.mapHomologicalComplex (.up ℤ)).obj P)
+        ((G.mapHomologicalComplex (.up ℤ)).obj ((E₁.mapHomologicalComplex (.up ℤ)).obj P))
+        ((NatTrans.mapHomologicalComplex a (.up ℤ)).app P) =
+      (F.mapHomologicalComplex (.up ℤ)).map
+          ((a₁.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
+        (NatTrans.mapHomologicalComplex q (.up ℤ)).app
+          ((E₁.mapHomologicalComplex (.up ℤ)).obj P) := by
+  rw [Adjunction.homEquiv_unit]
+  apply HomologicalComplex.hom_ext
+  intro n
+  change a₂.unit.app _ ≫ R₂.map (a.app (P.X n)) =
+    F.map (a₁.unit.app (P.X n)) ≫ q.app (E₁.obj (P.X n))
+  rw [← h₁, ← h₂, ha]
+  exact (unit_mateEquiv_symm o₁ o₂ (TwoSquare.mk _ _ _ _ q) (P.X n)).symm
+
 /-- A localized right square identifies left mates through their cochain transposes. -/
 theorem derivedMate_app_of_transpose
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -343,13 +372,17 @@ theorem derivedMate_app_of_transpose
     (G.mapDerivedCategory.map ε₁ ≫ G.mapDerivedCategoryFactors.hom.app K)).1
   rw [← hs]
   apply (d₂.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_naturality_left, h₂, ← Category.assoc,
+  rw [Adjunction.homEquiv_naturality_left]
+  dsimp only [Functor.comp_obj]
+  rw [h₂, ← Category.assoc
+    (((mateEquiv d₁ d₂).symm (TwoSquare.mk _ _ _ _ Qd)).app (DerivedCategory.Q.obj P)),
     Adjunction.homEquiv_naturality_right, adjunctionMate_transpose, h₁]
   rw [← cancel_mono (R₂.mapDerivedCategoryFactors.hom.app
     ((G.mapHomologicalComplex (.up ℤ)).obj K))]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  rw [hQd K, Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc,
-    Iso.inv_hom_id_app, Functor.map_id, Category.id_comp,
+  rw [hQd K, F.mapDerivedCategory.map_comp, Category.assoc,
+    ← F.mapDerivedCategory.map_comp_assoc _ (R₁.mapDerivedCategoryFactors.inv.app K),
+    Iso.inv_hom_id_app, F.mapDerivedCategory.map_id, Category.id_comp,
     F.mapDerivedCategoryFactors_hom_naturality_assoc]
   rw [Functor.map_comp]
 
@@ -566,6 +599,20 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory WeilConjectures.integralComparisonSequenceScalarModel
 
+/-- The model counit transposes to the localized ordinary adjunction unit. -/
+private theorem systemScalarModel_transpose_counit (W : Scheme.{u})
+    (A : SheafOfModules.SystemScalarModel.{u + 1, u, u + 1}
+      (integralComparisonSequenceScalarMap l E L ι W))
+    (P : CochainComplex (coefficientSequenceModules l E W) ℤ) :
+    A.adjunction.homEquiv (DerivedCategory.Q.obj P)
+        (DerivedCategory.Q.obj ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P))
+        (A.model.ε.app P) =
+      DerivedCategory.Q.map ((A.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
+        (sequenceRestriction l E L ι W).mapDerivedCategoryFactors.inv.app
+          ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) := by
+  have h := A.transpose P _ (𝟙 ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P))
+  simpa only [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id] using h
+
 set_option profiler true in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of any localization
@@ -643,13 +690,8 @@ theorem systemScalarPullback_eq_mate_general {X B : Scheme.{u}} (j : X ⟶ B)
       (DerivedCategory.Q.obj ((AB.model.E.mapHomologicalComplex (.up ℤ)).obj P))
       (AB.model.ε.app P) =
       DerivedCategory.Q.map ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-        (sequenceRestriction l E L ι B).mapDerivedCategoryFactors.inv.app K := by
-    have e1 : AB.model.ε.app P ≫ DerivedCategory.Q.map (𝟙 K) = AB.model.ε.app P := by
-      rw [CategoryTheory.Functor.map_id]
-      exact Category.comp_id _
-    rw [← e1]
-    refine (AB.transpose P _ (𝟙 _)).trans ?_
-    rw [Adjunction.homEquiv_id]
+        (sequenceRestriction l E L ι B).mapDerivedCategoryFactors.inv.app K :=
+    systemScalarModel_transpose_counit l E L ι B AB P
   refine Functor.derivedMate_app_of_transpose
     (sequenceRestriction l E L ι B) (sequenceRestriction l E L ι X)
     (integralComparisonSequencePullback l E j) (integralComparisonSequencePullback l L j)
@@ -662,15 +704,9 @@ theorem systemScalarPullback_eq_mate_general {X B : Scheme.{u}} (j : X ⟶ B)
   apply congrArg (fun f ↦ DerivedCategory.Q.map f ≫
     (sequenceRestriction l E L ι X).mapDerivedCategoryFactors.inv.app
       (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K))
-  rw [Adjunction.homEquiv_unit]
-  apply HomologicalComplex.hom_ext
-  intro n
-  change AX.ordinaryAdj.unit.app _ ≫
-      (sequenceRestriction l E L ι X).map (a.hom.app (P.X n)) =
-    (integralComparisonSequencePullback l E j).map (AB.ordinaryAdj.unit.app (P.X n)) ≫
-      q.app (AB.model.E.obj (P.X n))
-  rw [← hoB, ← hoX, ha]
-  exact (unit_mateEquiv_symm oB oX (TwoSquare.mk _ _ _ _ q) (P.X n)).symm
+  exact Functor.cochain_mate_transpose_of_unit_eq
+    (integralComparisonSequencePullback l E j) (integralComparisonSequencePullback l L j)
+    oB AB.ordinaryAdj oX AX.ordinaryAdj hoB hoX q a.hom ha P
 
 
 
@@ -888,6 +924,28 @@ theorem eqToIso_hom_app_val_app_heq {C : Type*} [Category C] (K : Type u) [Field
   subst h
   rfl
 
+/-- Evaluating the inverse restriction comparison still gives the identity on sections. -/
+private theorem sequenceScalarPullbackRight_inv_evaluation_heq
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (N : coefficientSequenceModules l L X)
+    (U : Y.ProEtᵒᵖ)
+    (x : ((coefficientSequenceEvaluation l E Y n).obj
+      ((sequenceRestriction l E L ι Y).obj
+        ((integralComparisonSequenceDirectImage l L f).obj N))).val.obj U) :
+    HEq ((((coefficientSequenceEvaluation l E Y n).map
+      ((sequenceScalarPullbackRight l E L ι f).inv.app N)).val.app U).hom x) x :=
+  (heq_of_eq (sequenceEvaluation_map_val_app l E Y n _ U x)).trans
+    (heq_of_eq (sequenceScalarPullbackRight_inv_app l E L ι f N _ x))
+
+/-- The finite direct-image restriction comparison is the identity on sections. -/
+private theorem coefficientDirectImageComparison_app_heq
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B)
+    (N : proEtaleRingModules X (proEtaleConstantRing X B)) (U : Y.ProEtᵒᵖ)
+    (x : N.val.obj ((proEtaleBaseChange f).op.obj U)) :
+    HEq (((proEtaleCoefficientDirectImageComparison f φ).hom.app N).val.app U x) x :=
+  heq_of_eq ((Classical.choose_spec
+    (proEtaleCoefficientDirectImageComparison_existsUnique f φ)).1 N U x)
+
 /-- Two triples of sectionwise identity maps have the same composite. -/
 private theorem sheafOfModules_comp_three_eq_of_heq
     {C : Type*} [Category C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
@@ -948,9 +1006,7 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
       (proEtaleCoefficientDirectImageComparison f (integralScalarQuotientMap l E L ι n)).hom.app
         ((coefficientSequenceEvaluation l L X n).obj N) := by
   apply sheafOfModules_comp_three_eq_of_heq
-  · intro W x
-    rw [sequenceEvaluation_map_val_app]
-    exact heq_of_eq (sequenceScalarPullbackRight_inv_app l E L ι f N _ x)
+  · exact sequenceScalarPullbackRight_inv_evaluation_heq l E L ι f n N
   · exact pdE _
   · intro W x
     rw [directImage_map_val_app]
@@ -960,10 +1016,7 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
   · intro W x
     rw [normalizedRestrictScalars_map_val_app]
     exact pdL N W x
-  · intro W x
-    exact heq_of_eq ((Classical.choose_spec
-      (proEtaleCoefficientDirectImageComparison_existsUnique f
-        (integralScalarQuotientMap l E L ι n))).1 _ W x)
+  · exact coefficientDirectImageComparison_app_heq f (integralScalarQuotientMap l E L ι n) _
 
 end OrdinaryCube
 
