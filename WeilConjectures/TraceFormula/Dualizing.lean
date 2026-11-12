@@ -158,7 +158,7 @@ noncomputable def dualizingComplexComp (f : X ⟶ Y) :
 noncomputable def upperShriekUnitIsoOfEqId (a : point k ⟶ point k) (ha : a = 𝟙 (point k)) :
     (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _) ≅
       𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  eqToIso (by rw [ha]) ≪≫ (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
+  ha ▸ (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
 variable (k) in
 /-- The dualizing complex of the base point is the unit, `ω_s ≅ ℚ̄_ℓ,s`: the structure morphism
@@ -266,8 +266,7 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
       (𝟙 (point k))).homEquiv _ _).symm α)
   rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
     ← conjugateIsoEquiv_apply_hom] at h
-  rw [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom,
-    boundedConstructibleUpperShriekId]
+  rw [upperShriekUnitIsoOfEqId, Iso.app_hom, boundedConstructibleUpperShriekId]
   rw [h]
   have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ
