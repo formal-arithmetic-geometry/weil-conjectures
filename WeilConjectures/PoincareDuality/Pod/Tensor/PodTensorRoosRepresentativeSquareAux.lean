@@ -348,6 +348,10 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
     isoReductionIntegralComplex, podGoodReindex, integralOperationsRoosFunctor,
     Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at a b eP eQ e
+  run_tac Lean.Elab.Tactic.withMainContext do
+    for n in [`eP, `eQ, `e] do
+      let d ← Lean.Meta.getLocalDeclFromUserName n
+      Lean.logInfo m!"{n} : {d.type}"
   have cancel := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
     (DerivedCategory.Q (C := scalarReductionSource l E X))
@@ -367,10 +371,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (integralOperationsRoos
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
     eP eQ e
+  trace "cancel supplied"
   have cancel' := cancel
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
+  trace "cancel maps supplied"
   have finish := cancel'
     _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
     (by
