@@ -183,7 +183,8 @@ lemma _root_.CategoryTheory.comp_chain_eq_of_eq {C : Type*} [Category C]
     (h₁ : u = a ≫ e ≫ b) (h₂ : a ≫ e = m ≫ e')
     (h₃ : i ≫ m = j ≫ i') (h₄ : v = i' ≫ e'' ≫ b) (h₅ : e' = e'') :
     i ≫ u ≫ c = j ≫ v ≫ c := by
-  simp only [h₁, h₂, h₃, h₄, h₅, Category.assoc]
+  simp only [← Category.assoc]
+  rw [h₁, h₄, h₂, h₃, h₅]
 
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
