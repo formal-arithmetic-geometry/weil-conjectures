@@ -90,6 +90,18 @@ private theorem supported_unit_isIso_iff
   · intro hz
     exact IsZero.isIso hz htarget _
 
+-- Cache the module and restriction instances used repeatedly in the criterion's type.
+local instance supportCriterionModuleAbelian (X : Scheme.{u}) :
+    Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+
+local instance supportCriterionOverModuleAbelian (X : Scheme.{u}) (U : X.Opens) :
+    Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
+
+local instance supportCriterionRestrictionPreservesZero (X : Scheme.{u}) (U : X.Opens) :
+    (schemeOpenRestriction X U).PreservesZeroMorphisms := by
+  letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U
+  exact Functor.preservesZeroMorphisms_of_additive _
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
