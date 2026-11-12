@@ -146,9 +146,7 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q HasDerivedCatego
   coefficientTotalTensor coefficientTensorGenerator coefficientHomResolution
   coefficientHomResolutionIso coefficientHomResolutionInverse derivedInternalHomOfUniverses
 
-set_option maxHeartbeats 800000 in
 set_option trace.profiler true in
--- Comparison uniqueness uses two large dependent uncurrying squares.
 private theorem tensorModels_unique
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (M N : CoefficientTensorModels.{r, c, v, w} J R S) : M = N := by
@@ -160,15 +158,18 @@ private theorem tensorModels_unique
     let I := (coefficientTotalTensor.{r, c, v} J R).obj (P.obj, L.obj)
     let ξ := S.transpose (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)
       (DerivedCategory.Q.obj I) (M.iso J R S P.obj L.obj P.property L.property).inv
-    obtain ⟨φ, hφ⟩ := RingedDerivedNative.representativeHom_surjective.{c, v, r, w}
-      J R P.obj L.obj I L.property ξ
-    obtain ⟨ψ, hψ, hm⟩ := M.uncurry_model P L I φ
-    obtain ⟨χ, hχ, hn⟩ := N.uncurry_model P L I φ
+    -- Eliminate the witnesses directly, without generalizing the dependent model context.
+    refine (RingedDerivedNative.representativeHom_surjective.{c, v, r, w}
+      J R P.obj L.obj I L.property ξ).elim fun φ hφ ↦ ?_
+    refine (M.uncurry_model P L I φ).elim fun ψ hψ ↦ ?_
+    refine (N.uncurry_model P L I φ).elim fun χ hχ ↦ ?_
+    have hm := hψ.2
+    have hn := hχ.2
     have hc : ψ = χ := by
       apply CategoryTheory.tensorGenerator_ext.{c, v, r} J R P.obj L.obj _ ψ χ
       intro p q k hpq U x y
-      exact (hψ p q k hpq (by omega) U x y).trans
-        (hχ p q k hpq (by omega) U x y).symm
+      exact (hψ.1 p q k hpq (by omega) U x y).trans
+        (hχ.1 p q k hpq (by omega) U x y).symm
     rw [hφ] at hm hn
     dsimp only [ξ] at hm hn
     rw [Equiv.symm_apply_apply] at hm hn
