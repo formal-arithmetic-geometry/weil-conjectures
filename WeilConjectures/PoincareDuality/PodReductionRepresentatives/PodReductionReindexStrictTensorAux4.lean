@@ -102,9 +102,9 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     ((pullbackTensorOrdinaryReduction l E W).obj M) i
     (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V)
       (unrestrictedIntegralTensorSection l E W n M (op V) 1 z))
-  have h4 := h1.symm.trans (congrArg
-    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3)
-  exact h0.symm.trans h4
+  have h4 := congrArg
+    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3
+  exact h0.symm.trans (h1.symm.trans h4)
 
 
 set_option profiler true in
