@@ -73,8 +73,26 @@ end General
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
-set_option maxHeartbeats 1600000 in
-set_option profiler true in
+private lemma exists_tensor_isGE_of_boundedConstructible
+    {ℓ : ℕ} [Fact ℓ.Prime] {X Y Z : Scheme.{u}}
+    {f₁ : Z ⟶ X} {f₂ : Z ⟶ Y} (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    {A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
+    (hA₀ : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) A₀)
+    {B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))}
+    (hB₀ : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y) B₀) :
+    ∃ c : ℤ, (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+      L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀).IsGE c := by
+  have hAB : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Z)
+      (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
+        L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) :=
+    boundedConstructible_tensorObj
+      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
+  exact hAB.1.1
+
 private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
@@ -98,14 +116,7 @@ private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
     DerivedCategory.TStructure.t.isGE_of_ge A₀.obj _ _ (min_le_left _ _)
   have : B₀.obj.IsGE (min A₀.2.1.1.choose B₀.2.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀.obj _ _ (min_le_right _ _)
-  have hAB : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Z)
-      (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀.obj ⊗
-        L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀.obj) :=
-    boundedConstructible_tensorObj
-      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀.obj A₀.2)
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀.obj B₀.2)
-  obtain ⟨c, hc⟩ := hAB.1.1
+  obtain ⟨c, hc⟩ := exists_tensor_isGE_of_boundedConstructible E A₀.2 B₀.2
   have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
   have : QuasiSeparated M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
   have : QuasiCompact N.j := MorphismProperty.of_isPullback hN.isPullback_j.flip inferInstance
