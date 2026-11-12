@@ -185,7 +185,6 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
     simp only [rationalTensorTransition_hom_app l X C k]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.comp_map, Functor.comp_obj]
     simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
-    simp only [Category.assoc]
     dsimp only [S, q, q', q'', T, Q, Q'] at hq
     simp only [hq, Functor.map_comp]
     have hf := (rationalTensorIntegral l X C M).inv.naturality

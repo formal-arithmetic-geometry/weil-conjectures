@@ -108,7 +108,6 @@ private theorem closureSectionComparison_factor (A : FiniteCondensedData l X)
   unfold finiteCondensedClosureSectionComparison finiteCondensedClosureEncoding
   exact whisker_factor _ _ _ _ _ _ _ _ _
 
-set_option profiler true in
 private theorem finiteScalarEncoding_map (A : FiniteCondensedData l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E) :
