@@ -775,8 +775,6 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
   erw [← R.map_comp_assoc, Iso.inv_hom_id_app, R.map_id, Category.id_comp]
   exact Category.id_comp _
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.defeqAttrib.useBackward false in
 private theorem identity_square_conjugate_section_value {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology P) CommRingCat.{u + 1})
@@ -874,7 +872,6 @@ private theorem identity_square_conjugate_section_value {P T : Scheme.{u}} (p : 
   let idT := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop
   let idP := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
     ((proEtaleBaseChange p).obj V.unop)
-  set_option backward.isDefEq.respectTransparency false in
   have hcombine :
       N.val.map comp.op
         (N.val.map ((proEtaleBaseChange p).map idT).op
@@ -957,6 +954,8 @@ private theorem identity_square_conjugate_sections {P T : Scheme.{u}} (p : P ⟶
   change f.val.app V m = g.val.app V m
   exact identity_square_conjugate_section_value p R S c a b e ha hb N V m
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward false in
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
 private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
