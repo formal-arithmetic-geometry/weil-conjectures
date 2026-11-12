@@ -262,6 +262,7 @@ private theorem open_pullback_sections_transport {X Y : Scheme.{u}} (g : X ⟶ Y
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Transporting the kernel and its unit elaborates nested module functor applications.
 /-- Restrict the actual kernel pullback to a chart where the morphism is closed.
