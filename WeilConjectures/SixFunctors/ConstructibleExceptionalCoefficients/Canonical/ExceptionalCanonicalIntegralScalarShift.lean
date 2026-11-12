@@ -366,8 +366,10 @@ theorem canonical_integral_scalar_square
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
   let θ : S.functor ⋙ JX ≅ IX ⋙ B := S.realization
   letI := canonicalIntegralScalarShift_compatibility l Ω S
-  obtain ⟨e₀, hχ, heO⟩ :=
-    ordinary_completed_scalar_shift_cached l E.carrier L.carrier i T
+  let ordinaryData := ordinary_completed_scalar_shift_cached l E.carrier L.carrier i T
+  let e₀ := ordinaryData.choose
+  have hχ := ordinaryData.choose_spec.1
+  have heO := ordinaryData.choose_spec.2
   let eO := e₀
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
