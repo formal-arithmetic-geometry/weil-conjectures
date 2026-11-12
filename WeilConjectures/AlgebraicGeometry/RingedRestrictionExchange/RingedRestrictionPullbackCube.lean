@@ -157,42 +157,6 @@ private theorem push_congr_forget {S X : RingedVertex.{u}}
 attribute [local irreducible] RingedMap.pullComp
   exchangeModuleComposition
 
--- Expand compositor coherence before specializing to the concrete module functors.
-private theorem compositor_assoc_iff
-    {A B C D E : Type*} [Category A] [Category B] [Category C] [Category D] [Category E]
-    {Ra : C ⥤ D} {Rb : B ⥤ C} {Rd : A ⥤ B}
-    {Rab : B ⥤ D} {Rbd : A ⥤ C} {Rl Rr : A ⥤ D}
-    (F : D ⥤ E) [F.Faithful]
-    (cab : Rb ⋙ Ra ≅ Rab) (cbd : Rd ⋙ Rb ≅ Rbd)
-    (cl : Rd ⋙ Rab ≅ Rl) (cr : Rbd ⋙ Ra ≅ Rr) (e : Rr ≅ Rl) :
-    Functor.associator Rd Rb Ra ≪≫ Functor.isoWhiskerLeft Rd cab ≪≫ cl =
-        Functor.isoWhiskerRight cbd Ra ≪≫ cr ≪≫ e ↔
-      ∀ N, F.map (cab.hom.app (Rd.obj N)) ≫ F.map (cl.hom.app N) =
-        F.map (Ra.map (cbd.hom.app N)) ≫ F.map (cr.hom.app N) ≫ F.map (e.hom.app N) := by
-  constructor
-  · intro h N
-    have hh := congrArg (fun z ↦ F.map (z.hom.app N)) h
-    simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
-      Functor.whiskerRight_app, Category.id_comp, Functor.map_comp] using hh
-  · intro h
-    apply Iso.ext
-    apply NatTrans.ext
-    funext N
-    apply F.map_injective
-    simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
-      Functor.whiskerRight_app, Category.id_comp, Functor.map_comp] using h N
-
--- Keep the objects in the two paths abstract while assembling their comparison.
-private theorem comp_pair_eq_triple
-    {C : Type*} [Category C] {A B D E F : C}
-    {a a' : A ⟶ B} {b b' : B ⟶ F} {c c' : A ⟶ D}
-    {d d' : D ⟶ E} {e e' : E ⟶ F}
-    (ha : a = a') (hb : b = b') (hc : c = c') (hd : d = d') (he : e = e')
-    (h : a' ≫ b' = c' ≫ d' ≫ e') : a ≫ b = c ≫ d ≫ e := by
-  rw [ha, hb, hc, hd, he, h]
-
 set_option profiler true in
 private theorem push_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)
@@ -202,30 +166,28 @@ private theorem push_assoc {S X T W : RingedVertex.{u}}
         Functor.isoWhiskerLeft d.push (pushComp a b) ≪≫ pushComp (a.comp b) d =
       Functor.isoWhiskerRight (pushComp b d) a.push ≪≫ pushComp a (b.comp d) ≪≫
         (eqToIso (congrArg RingedMap.push h)).symm := by
-  apply (compositor_assoc_iff (SheafOfModules.toSheaf _) (pushComp a b) (pushComp b d)
-    (pushComp (a.comp b) d) (pushComp a (b.comp d))
-    (eqToIso (congrArg RingedMap.push h)).symm).2
-  intro N
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply (SheafOfModules.toSheaf _).map_injective
   have hc := push_congr_forget h.symm N
   have ha := pushComp_forget (a.comp b) d N
   have hb := pushComp_forget a (b.comp d) N
   have hab := pushComp_forget a b (d.push.obj N)
   have hbd := pushComp_forget b d N
-  have H := (compositor_assoc_iff (𝟭 _)
-    (AlgebraicGeometry.ProEtale.lowerStarComp AddCommGrpCat.{u + 1} b.hom a.hom)
-    (AlgebraicGeometry.ProEtale.lowerStarComp AddCommGrpCat.{u + 1} d.hom b.hom)
-    (AlgebraicGeometry.ProEtale.lowerStarComp AddCommGrpCat.{u + 1} d.hom (b.hom ≫ a.hom))
-    (AlgebraicGeometry.ProEtale.lowerStarComp AddCommGrpCat.{u + 1} (d.hom ≫ b.hom) a.hom)
-    (AlgebraicGeometry.ProEtale.lowerStarCongr AddCommGrpCat.{u + 1}
-      (Category.assoc d.hom b.hom a.hom))).1
+  have H := congrArg (fun e ↦ e.hom.app ((SheafOfModules.toSheaf _).obj N))
     (AlgebraicGeometry.ProEtale.legacy_lowerStarComp_assoc
-      AddCommGrpCat.{u + 1} d.hom b.hom a.hom) ((SheafOfModules.toSheaf _).obj N)
+      AddCommGrpCat.{u + 1} d.hom b.hom a.hom)
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Category.id_comp, Functor.map_comp] at H ⊢
+  have hh : (eqToIso (congrArg RingedMap.push h)).inv =
+      (eqToIso (congrArg RingedMap.push h.symm)).hom := by
+    rfl
   have hm : (SheafOfModules.toSheaf _).map (a.push.map ((pushComp b d).hom.app N)) =
       (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map
         ((SheafOfModules.toSheaf _).map ((pushComp b d).hom.app N)) := rfl
-  exact comp_pair_eq_triple hab ha
-    (hm.trans (congrArg
-      (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map hbd)) hb hc H
+  simpa only [hab, ha, hb, Iso.symm_hom, hh, hc, hm, hbd] using H
 
 attribute [local irreducible] proEtaleRingModuleDirectImage
 
