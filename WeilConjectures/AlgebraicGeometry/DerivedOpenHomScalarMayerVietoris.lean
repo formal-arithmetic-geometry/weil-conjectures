@@ -125,6 +125,7 @@ private theorem boundary_of_adjunction_triangle
     change eW (eO.symm (aO s γ) ≫ d) = aW s (eW (eO.symm γ ≫ d))
     rw [hn, Category.assoc, hw]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Instantiating the four derived adjunctions compares large localization functors.
 /-- The boundary for Hom on an open union commutes with global scalar endomorphisms.
