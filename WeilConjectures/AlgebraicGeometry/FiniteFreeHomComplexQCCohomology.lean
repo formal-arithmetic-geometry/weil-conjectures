@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Comparing finite-column Hom complexes requires substantial definitional reduction.
 /-- Hom from a bounded complex of finite free modules preserves quasi-coherent cohomology.
 

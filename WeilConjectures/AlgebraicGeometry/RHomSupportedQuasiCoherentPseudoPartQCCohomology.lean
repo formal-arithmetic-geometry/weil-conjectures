@@ -128,7 +128,7 @@ private theorem homComplex_trunc_homology_isIso
     hmid (show Mono (f.f ((ComplexShape.up ℤ).next n)) from inferInstance)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The homology comparisons elaborate several presentations of the localized sheaf carrier.
 /-- The degreewise quasi-coherence calculation for RHom from a pseudo-coherent complex.
 
