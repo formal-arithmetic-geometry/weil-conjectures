@@ -254,7 +254,7 @@ theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
           (ordinaryIsoPullbackStalkHomologyIso j z0 i Pg).hom ≫
           F0.map (HomologicalComplex.homologyMap
             ((S0.mapHomologicalComplex (.up ℤ)).map alpha.inv) i)).hom x := by
-  intro z P0 Pg j S0 F F0 alpha _ _ _ _ _ _ _ _ _ _ R0 A0 B0 D0 Q Q0 V0
+  intro z P0 Pg j S0 F F0 alpha R0 A0 B0 D0 Q Q0 V0
     eR eA eB eD q t h hc x
   let V := tensorComplex f f' g g' sq z P
   let s := (tensorStalkIso f f' g g' sq z P).hom

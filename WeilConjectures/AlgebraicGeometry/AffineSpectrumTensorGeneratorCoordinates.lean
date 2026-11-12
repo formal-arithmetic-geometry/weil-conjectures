@@ -163,7 +163,7 @@ theorem exists_affineSpectrum_tensor_generator_coordinates
         eD d ⊗ₜ[A0, (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
           (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
           (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by
-  intro z P0 Pg j S0 F F0 alpha _ _ _ _ _ _ _ _ _ _ R0 A0 B0 D0 Q Q0 V0 H
+  intro z P0 Pg j S0 F F0 alpha R0 A0 B0 D0 Q Q0 V0 H
   let hA : g' z = X.isoSpec.inv ((Spec.map g'.appTop) z0) :=
     (congrArg (fun k : Spec Γ(X', ⊤) ⟶ X ↦ k z0)
       (Scheme.isoSpec_inv_naturality g')).symm
