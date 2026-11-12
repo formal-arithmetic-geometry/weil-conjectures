@@ -52,7 +52,7 @@ private lemma integralModel_extendScalars_iso (T : Scheme.{u}) (ℓ : ℕ) [Fact
         ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) T)).leftDerivedFunctor.obj K₀.obj) ≅
             K.obj) := by
-  exact_mod_proofs Nonempty.intro ((boundedConstructible (padicAlgClRingObj T ℓ)).ι.mapIso e)
+  exact ⟨(boundedConstructible (padicAlgClRingObj T ℓ)).ι.mapIso e⟩
 
 set_option profiler true in
 /-- Lift residue-field base change at a pulled-back integral model, then transport it
@@ -175,7 +175,11 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_integralModel
       (N.galoisLayerHom h L'.toIntermediateField).generic).obj
         (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
-  exact_mod_proofs hgen
+  clear e hL' K₀ E
+  revert C hC hgen
+  normalize_precoherent
+  intro C hC hgen
+  exact hgen
 
 end NearbyCyclesModel
 
