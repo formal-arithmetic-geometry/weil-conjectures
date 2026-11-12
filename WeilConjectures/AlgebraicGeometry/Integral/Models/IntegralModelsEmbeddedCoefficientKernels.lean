@@ -332,6 +332,7 @@ private theorem residue_kernel_comparison (φ : R ⟶ B) (q : R ⟶ S) (p : B �
 
 end ResidueKernels
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The reconstructed coefficient-map types require additional definitional-equality checks.
 attribute [-instance] integralModel_coefficientMonObj in
