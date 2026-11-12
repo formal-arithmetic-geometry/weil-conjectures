@@ -100,6 +100,81 @@ theorem exists_linearEquiv_dual_of_linearEquiv_dual (M : FrobeniusModule k) {N :
     (show Module.Dual k M.carrier from φ) (c.symm (ψ ∘ₗ T.toLinearMap))
   rw [dual_frobenius_apply, LinearMap.comp_apply, LinearEquiv.coe_toLinearMap, key]
 
+/-- Dualising invariant sections of a contragredient representation gives coinvariants,
+compatibly with the action of a group element. -/
+private theorem exists_linearEquiv_dual_of_invariants {G : Type*} [Group G] {V V' : Type*}
+    [AddCommGroup V] [Module k V]
+    [FiniteDimensional k V] [AddCommGroup V'] [Module k V'] (ρ : Representation k G V)
+    (ρ' : Representation k G V') (H : Subgroup G) [H.Normal] (γ : G)
+    (b : ρ'.Equiv ρ.dual) (M : FrobeniusModule k)
+    (a : M.carrier ≃ₗ[k] Representation.invariants (ρ'.comp H.subtype))
+    (ha : ∀ v, (a (M.frobenius v) : V') = ρ' γ (a v)) :
+    ∃ f : M.dual.carrier ≃ₗ[k] Representation.Coinvariants (ρ.comp H.subtype),
+      ∀ v, f (M.dual.frobenius v) = ρ.toCoinvariants H γ (f v) := by
+  let bL := b.toLinearEquiv
+  have hb (g : G) (u) : bL (ρ' g u) = ρ.dual g (bL u) :=
+    Representation.IntertwiningMap.isIntertwining _ _ b.toIntertwiningMap g u
+  have hdual (g : G) (φ : Module.Dual k V) (w) : ρ.dual g φ w = φ (ρ g⁻¹ w) := by
+    rw [Representation.dual_apply]
+    rfl
+  -- the linear forms coming from invariants of `ρ'` are invariant
+  have hinv (u : Representation.invariants (ρ'.comp H.subtype)) (h : H) (w) :
+      bL u.1 (ρ h w) = bL u.1 w := by
+    have h1 : ρ' ((h⁻¹ : H) : G) u.1 = u.1 := u.2 h⁻¹
+    have h2 := congrArg (fun z ↦ bL z w) h1
+    rw [hb, hdual, Subgroup.coe_inv, inv_inv] at h2
+    exact h2
+  have hmk (h : H) (v : V) : Representation.Coinvariants.mk (ρ.comp H.subtype) (ρ h v) =
+      Representation.Coinvariants.mk (ρ.comp H.subtype) v :=
+    Representation.Coinvariants.mk_self_apply _ h v
+  -- invariant linear forms on `V` are the linear forms on the coinvariants
+  let toF : Representation.invariants (ρ'.comp H.subtype) →ₗ[k]
+      Module.Dual k (Representation.Coinvariants (ρ.comp H.subtype)) :=
+    { toFun u := Representation.Coinvariants.lift (ρ.comp H.subtype) (bL u.1)
+        (fun h ↦ LinearMap.ext fun v ↦ by
+          simp only [LinearMap.comp_apply, MonoidHom.comp_apply, Subgroup.coe_subtype]
+          rw [hinv u h])
+      map_add' u u' := Representation.Coinvariants.hom_ext (LinearMap.ext fun v ↦ by
+        simp [Representation.Coinvariants.lift_mk])
+      map_smul' r u := Representation.Coinvariants.hom_ext (LinearMap.ext fun v ↦ by
+        simp [Representation.Coinvariants.lift_mk]) }
+  have htoF (u) (v : V) : toF u (Representation.Coinvariants.mk _ v) = bL u.1 v :=
+    rfl
+  let invF : Module.Dual k (Representation.Coinvariants (ρ.comp H.subtype)) →ₗ[k]
+      Representation.invariants (ρ'.comp H.subtype) :=
+    { toFun φ := ⟨bL.symm (φ ∘ₗ Representation.Coinvariants.mk _), fun h ↦ by
+        change ρ' (h : G) _ = _
+        apply bL.injective
+        rw [hb, LinearEquiv.apply_symm_apply]
+        refine LinearMap.ext fun w ↦ ?_
+        rw [hdual]
+        simp only [LinearMap.comp_apply]
+        rw [← Subgroup.coe_inv, hmk]⟩
+      map_add' φ φ' := Subtype.ext (by simp [LinearMap.add_comp])
+      map_smul' r φ := Subtype.ext (by simp [LinearMap.smul_comp]) }
+  let d : Representation.invariants (ρ'.comp H.subtype) ≃ₗ[k]
+      Module.Dual k (Representation.Coinvariants (ρ.comp H.subtype)) :=
+    LinearEquiv.ofLinearMap toF invF
+    (LinearMap.ext fun φ ↦ Representation.Coinvariants.hom_ext (LinearMap.ext fun v ↦ by
+      change bL (bL.symm _) v = _
+      rw [LinearEquiv.apply_symm_apply]
+      simp))
+    (LinearMap.ext fun u ↦ Subtype.ext (by
+      change bL.symm (toF u ∘ₗ Representation.Coinvariants.mk _) = u.1
+      rw [LinearEquiv.symm_apply_eq]
+      refine LinearMap.ext fun v ↦ ?_
+      simp only [LinearMap.comp_apply, htoF]))
+  -- the Frobenius `ρ (γ)` on the coinvariants
+  let Q := ρ.toCoinvariants H
+  let T := LinearEquiv.ofBijective (Q γ) (Q.apply_bijective γ)
+  have hc (m : M.carrier) (n : Representation.Coinvariants (ρ.comp H.subtype)) :
+      (a.trans d) (M.frobenius m) (T n) = (a.trans d) m n := by
+    refine Representation.Coinvariants.induction_on n fun v ↦ ?_
+    change toF (a _) (Q γ (Representation.Coinvariants.mk _ v)) =
+      toF (a m) (Representation.Coinvariants.mk _ v)
+    rw [Representation.toCoinvariants_mk, htoF, htoF, ha, hb, hdual, ρ.inv_self_apply]
+  exact exists_linearEquiv_dual_of_linearEquiv_dual M T (a.trans d) hc
+
 end FrobeniusModule
 
 namespace AlgebraicGeometry
@@ -312,8 +387,6 @@ private theorem repLinearEquivOfIso_apply {k G : Type*} [CommRing k] [Monoid G]
 
 variable {W l}
 
-set_option maxHeartbeats 400000 in
--- the final transport through the duals unfolds large `let`-bound linear equivalences
 /-- A lisse representation `ρ` of `W(C₀)` is the Weil fundamental representation of a lisse Weil
 sheaf `ℱ` on `C₀`: the local Frobenius `F_x` on the stalk `ℱ_x̄` has the characteristic
 polynomial of `ρ (Frob_x)` at every closed point `x`, and the geometric coinvariants
@@ -343,97 +416,24 @@ theorem exists_weilSheaf_of_isLisse {V : Type u} [AddCommGroup V] [Module (Padic
     repLinearEquivOfIso ((ObjectProperty.ι _).mapIso (e.counitIso.app X))
   have hψ (g : W.carrier) (v : (e.functor.obj F).obj.V) : ψ (ρF g v) = ρ g (ψ v) :=
     Rep.hom_comm_apply ((ObjectProperty.ι _).mapIso (e.counitIso.app X)).hom g v
-  have hψ' (g : W.carrier) (v : V) : ψ.symm (ρ g v) = ρF g (ψ.symm v) := by
-    rw [LinearEquiv.symm_apply_eq, hψ, LinearEquiv.apply_symm_apply]
   refine ⟨F.obj, F.property, fun x ↦ ?_, ?_⟩
   · obtain ⟨f, hf⟩ := hst F x
     refine LinearMap.charpoly_eq_of_comp_eq (f.trans ψ) (LinearMap.ext fun v ↦ ?_)
     rw [LinearMap.comp_apply, LinearMap.comp_apply, FrobeniusModule.frobeniusEnd_apply,
       LinearEquiv.coe_toLinearMap, LinearEquiv.trans_apply, hf, hψ, LinearEquiv.trans_apply]
-  · set G := W.geometric
-    set Fd : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) :=
+  · let Fd : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) :=
       ⟨F.obj.dual F.property, F.property.dual⟩
-    set ρd := (e.functor.obj Fd).obj.ρ
     obtain ⟨a, ha⟩ := hse Fd
     obtain ⟨b⟩ := hdu F
-    let bL := b.toLinearEquiv
-    have hb (g : W.carrier) (u) : bL (ρd g u) = ρF.dual g (bL u) :=
-      Representation.IntertwiningMap.isIntertwining _ _ b.toIntertwiningMap g u
-    have hdual (g : W.carrier) (φ : Module.Dual (PadicAlgCl l) (e.functor.obj F).obj.V) (w) :
-        ρF.dual g φ w = φ (ρF g⁻¹ w) := by
-      rw [Representation.dual_apply]
-      rfl
-    -- the linear forms coming from invariants of `ρ^∨` are invariant
-    have hinv (u : Representation.invariants (ρd.comp G.subtype)) (h : G) (w) :
-        bL u.1 (ρF h w) = bL u.1 w := by
-      have h1 : ρd ((h⁻¹ : G) : W.carrier) u.1 = u.1 := u.2 h⁻¹
-      have h2 := congrArg (fun z ↦ bL z w) h1
-      rw [hb, hdual, Subgroup.coe_inv, inv_inv] at h2
-      exact h2
-    have hmk (h : G) (v : V) : Representation.Coinvariants.mk (ρ.comp G.subtype) (ρ h v) =
-        Representation.Coinvariants.mk (ρ.comp G.subtype) v :=
-      Representation.Coinvariants.mk_self_apply _ h v
-    -- invariant linear forms on `V` are the linear forms on the coinvariants
-    let toF : Representation.invariants (ρd.comp G.subtype) →ₗ[PadicAlgCl l]
-        Module.Dual (PadicAlgCl l) (Representation.Coinvariants (ρ.comp G.subtype)) :=
-      { toFun u := Representation.Coinvariants.lift (ρ.comp G.subtype)
-          (bL u.1 ∘ₗ ψ.symm.toLinearMap) (fun h ↦ LinearMap.ext fun v ↦ by
-            simp only [LinearMap.comp_apply, LinearEquiv.coe_toLinearMap, MonoidHom.comp_apply,
-              Subgroup.coe_subtype]
-            rw [hψ', hinv u h])
-        map_add' u u' := Representation.Coinvariants.hom_ext (LinearMap.ext fun v ↦ by
-          simp [Representation.Coinvariants.lift_mk])
-        map_smul' r u := Representation.Coinvariants.hom_ext (LinearMap.ext fun v ↦ by
-          simp [Representation.Coinvariants.lift_mk]) }
-    have htoF (u) (v : V) : toF u (Representation.Coinvariants.mk _ v) = bL u.1 (ψ.symm v) :=
-      rfl
-    let invF : Module.Dual (PadicAlgCl l) (Representation.Coinvariants (ρ.comp G.subtype)) →ₗ[
-        PadicAlgCl l] Representation.invariants (ρd.comp G.subtype) :=
-      { toFun φ := ⟨bL.symm (φ ∘ₗ Representation.Coinvariants.mk _ ∘ₗ ψ.toLinearMap), fun h ↦ by
-          change ρd (h : W.carrier) _ = _
-          apply bL.injective
-          rw [hb, LinearEquiv.apply_symm_apply]
-          refine LinearMap.ext fun w ↦ ?_
-          rw [hdual]
-          simp only [LinearMap.comp_apply, LinearEquiv.coe_toLinearMap]
-          rw [hψ, ← Subgroup.coe_inv, hmk]⟩
-        map_add' φ φ' := Subtype.ext (by simp [LinearMap.add_comp])
-        map_smul' r φ := Subtype.ext (by simp [LinearMap.smul_comp]) }
-    let d : Representation.invariants (ρd.comp G.subtype) ≃ₗ[PadicAlgCl l]
-        Module.Dual (PadicAlgCl l) (Representation.Coinvariants (ρ.comp G.subtype)) :=
-      LinearEquiv.ofLinearMap toF invF
-      (LinearMap.ext fun φ ↦ Representation.Coinvariants.hom_ext (LinearMap.ext fun v ↦ by
-        change bL (bL.symm _) (ψ.symm v) = _
-        rw [LinearEquiv.apply_symm_apply]
-        simp))
-      (LinearMap.ext fun u ↦ Subtype.ext (by
-        change bL.symm (toF u ∘ₗ Representation.Coinvariants.mk _ ∘ₗ ψ.toLinearMap) = u.1
-        rw [LinearEquiv.symm_apply_eq]
-        refine LinearMap.ext fun v ↦ ?_
-        simp only [LinearMap.comp_apply, LinearEquiv.coe_toLinearMap, htoF,
-          LinearEquiv.symm_apply_apply]))
-    -- the Frobenius `ρ (γ)` on the coinvariants
-    let Q := ρ.toCoinvariants G
-    let T : Representation.Coinvariants (ρ.comp G.subtype) ≃ₗ[PadicAlgCl l]
-        Representation.Coinvariants (ρ.comp G.subtype) :=
-      LinearEquiv.ofLinearMap (Q W.frobeniusLift) (Q W.frobeniusLift⁻¹)
-        (LinearMap.ext fun n ↦ by
-          rw [LinearMap.comp_apply, ← Module.End.mul_apply, ← map_mul, mul_inv_cancel, map_one,
-            Module.End.one_apply, LinearMap.id_apply])
-        (LinearMap.ext fun n ↦ by
-          rw [LinearMap.comp_apply, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one,
-            Module.End.one_apply, LinearMap.id_apply])
-    have hc (m : Fd.obj.globalSections.carrier)
-        (n : Representation.Coinvariants (ρ.comp G.subtype)) :
-        (a.trans d) (Fd.obj.globalSections.frobenius m) (T n) = (a.trans d) m n := by
-      refine Representation.Coinvariants.induction_on n fun v ↦ ?_
-      change toF (a _) (Q W.frobeniusLift (Representation.Coinvariants.mk _ v)) =
-        toF (a m) (Representation.Coinvariants.mk _ v)
-      rw [Representation.toCoinvariants_mk, htoF, htoF, ha, hb, hdual, hψ',
-        ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
-    obtain ⟨f, hf⟩ := FrobeniusModule.exists_linearEquiv_dual_of_linearEquiv_dual
-      Fd.obj.globalSections T (a.trans d) hc
-    exact ⟨f, hf⟩
+    -- Transport the contragredient once, before passing to invariants and coinvariants.
+    let dψ : ρF.dual.Equiv ρ.dual :=
+      .mk ψ.symm.dualMap fun g ↦ LinearMap.ext fun φ ↦ LinearMap.ext fun v ↦ by
+        change φ (ρF g⁻¹ (ψ.symm v)) = φ (ψ.symm (ρ g⁻¹ v))
+        congr 1
+        apply ψ.injective
+        rw [hψ, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
+    exact FrobeniusModule.exists_linearEquiv_dual_of_invariants ρ (e.functor.obj Fd).obj.ρ
+      W.geometric W.frobeniusLift (b.trans dψ) Fd.obj.globalSections a ha
 
 end WeilGroup
 
