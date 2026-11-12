@@ -218,7 +218,6 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
-set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4)): let `P` be the product over the henselian
