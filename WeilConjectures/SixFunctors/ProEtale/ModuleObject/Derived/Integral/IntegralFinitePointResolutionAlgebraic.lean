@@ -68,8 +68,8 @@ private theorem finite_torsion_pid_resolution
       let y : K := ⟨e x, hx⟩
       refine ⟨e.symm (k.symm y), ?_⟩
       change e.symm (K.subtype (k (e (e.symm (k.symm y))))) = x
-      simp only [LinearEquiv.apply_symm_apply, Submodule.coe_subtype,
-        LinearEquiv.symm_apply_apply]
+      rw [e.apply_symm_apply, k.apply_symm_apply]
+      exact e.symm_apply_apply x
     · rintro ⟨y, rfl⟩
       change g (e (e.symm (K.subtype (k (e y))))) = 0
       rw [e.apply_symm_apply]

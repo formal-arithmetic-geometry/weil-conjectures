@@ -56,13 +56,17 @@ private lemma comp_restrictPadicInt_free_eq_zero {W : Scheme.{u}} (g : W ⟶ T)
     {n : ℕ} {A : AdicSheaf l T} {Z : Sheaf (ProEt.topology T) Ab.{u + 1}}
     (Φ : Z ⟶ ((AdicSheaf.restrictPadicInt T l).obj A).X)
     (φ : A ⟶ (g)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ AdicSheaf.unit l W))
-    (h : ∀ (T' : T.ProEtᵒᵖ) (s : Z.obj.obj T'),
-      comps (B := W) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj T'.unop)
-        (φ.hom.hom.app T' (Φ.hom.app T' s)) = 0) :
+    (q : ∀ T' : T.ProEt, A.X.obj.obj (op T') → Fin n →
+      locallyFiniteFunctions l ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj T').left)
+    (hq : ∀ (T' : T.ProEt) (x : A.X.obj.obj (op T')),
+      comps (B := W) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj T')
+        (φ.hom.hom.app (op T') x) = q T' x)
+    (h : ∀ (T' : T.ProEt) (s : Z.obj.obj (op T')), q T' (Φ.hom.app (op T') s) = 0) :
     Φ ≫ ((AdicSheaf.restrictPadicInt T l).map φ).hom = 0 := by
   apply comp_restrictPadicInt_eq_zero Φ φ
   intro T' s
-  exact comps_injective ((h T' s).trans comps_zero.symm)
+  exact comps_injective
+    ((hq T'.unop (Φ.hom.app T' s)).trans ((h T'.unop s).trans comps_zero.symm))
 
 /-- **A criterion for landing in a descent**: a morphism of abelian sheaves into `f_* ℚ̄_ℓ,Vⁿ`
 whose sections satisfy `γ · ρ₁^* y = ρ₂^* y` is killed by the descent map of `γ`. -/
@@ -82,12 +86,12 @@ lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
         locallyFiniteFunctionsComp l (descentρ₁ f T').base.hom (y T' s j) =
       locallyFiniteFunctionsComp l (descentρ₂ f T').base.hom (y T' s i)) :
     Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom = 0 := by
-  apply comp_restrictPadicInt_free_eq_zero (pullback.fst f f ≫ f) Φ (descentMap f Γ)
+  refine comp_restrictPadicInt_free_eq_zero (pullback.fst f f ≫ f) Φ (descentMap f Γ)
+    _ (comps_descentMap f Γ) ?_
   intro T' s
-  refine (comps_descentMap f Γ T'.unop (Φ.hom.app T' s)).trans ?_
-  rw [hy T'.unop s]
+  rw [hy T' s]
   funext i
-  rw [h T'.unop s i, sub_self]
+  rw [h T' s i, sub_self]
   rfl
 
 end Descent
