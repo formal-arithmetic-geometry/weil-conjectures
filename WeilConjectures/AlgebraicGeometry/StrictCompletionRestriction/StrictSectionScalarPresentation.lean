@@ -310,7 +310,6 @@ section
 universe u
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
-set_option maxHeartbeats 400000 in
 -- Assembly of the scalar tower and both localized descents has many dependent fields.
 -- Elaborating the concrete tensor and localization interfaces needs extra heartbeats.
 private theorem section_scalar_value

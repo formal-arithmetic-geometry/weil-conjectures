@@ -1459,7 +1459,6 @@ private def roosTriangleIso
   let := cs
   exact TowerCalculus.coneTriangleIso roosF f (Φ f) (hc.2 f).1 (hc.2 f).2
 
-set_option maxHeartbeats 400000 in
 -- The final cone-triangle transport elaborates large mapping-cone triangle isomorphisms.
 /-- Principal completion descends with its specified augmentation, coherent shifts,
 and morphism of distinguished triangles.

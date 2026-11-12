@@ -275,7 +275,6 @@ private theorem compare_hom_complex
     (s (L.X p) (M.X (p + n))).hom (s (L.X p) (N.X (p + n))).hom
     (he' M n p (p + n) rfl) (he' N n p (p + n) rfl) (hmap M N f) hmap' hs'
 
-set_option maxHeartbeats 500000 in
 -- Specializing the generic Hom-complex interface requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- Assemble any natural termwise internal-Hom comparison through the specified

@@ -59,7 +59,6 @@ private lemma uncurry_chain_natural (X : Scheme.{u})
   conv_rhs => rw [← tensorHom_def_assoc]
   exact schemeTensorHomUncurryComponent_natural X P P' L L' M M' a b c φ p q n h'
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the canonical derived tensor and its compatible Q structures needs extra heartbeats.
 /-- The localized evaluation composite is natural for actual Hom-complex inputs.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90, and cohomology.tex, Tag 08DJ.

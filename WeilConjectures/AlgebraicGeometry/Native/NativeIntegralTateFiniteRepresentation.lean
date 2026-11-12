@@ -200,7 +200,6 @@ private theorem roots_power_representation (Y : Scheme.{u}) (N : ℕ) (hN : 0 < 
   exact ⟨c.pt, hfin, het,
     ⟨hFc.conePointUniqueUpToIso (productIsProduct _) ≪≫ Pi.mapIso (fun _ ↦ e)⟩⟩
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- The `Module A B` search in the statement explores the slow `ULift.module` branch first.
 private theorem quotient_basis (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ)

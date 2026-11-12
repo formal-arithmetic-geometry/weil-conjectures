@@ -299,7 +299,6 @@ set_option backward.isDefEq.lazyWhnfCore false
 set_option backward.defeqAttrib.useBackward true
 
 set_option linter.all false in
-set_option maxHeartbeats 500000 in
 -- Elaborating the composed complex functors and three vertex types needs extra heartbeats.
 /-- The normalized coefficient lifts determine the vertex comparison of their
 concrete roof. Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T.

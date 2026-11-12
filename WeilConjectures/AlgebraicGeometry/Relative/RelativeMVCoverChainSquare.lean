@@ -20,7 +20,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the resolved adjunction mates requires extra heartbeats.
 /-- Chain representatives for the unrestricted relative Mayer--Vietoris square.
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
