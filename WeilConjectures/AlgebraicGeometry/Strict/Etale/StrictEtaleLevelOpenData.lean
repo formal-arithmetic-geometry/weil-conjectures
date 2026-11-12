@@ -386,7 +386,6 @@ private abbrev quotientMap (O : Type (u + 1)) [CommRing O] (t : O)
     {m n : ℕ} (h : n ≤ m) : coefficient O t m →+* coefficient O t n :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-set_option profiler true in
 private theorem fixedRestriction_unit_comp (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) (U : T.Etaleᵒᵖ) :
     ((unit T (coefficient O t n)).app U).hom.comp (quotientMap O t h) =
@@ -398,7 +397,6 @@ private theorem fixedRestriction_unit_comp (T : Scheme.{u}) (O : Type (u + 1)) [
     (toSheafify_naturality T.smallEtaleTopology
       ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
 
-set_option profiler true in
 private def fixedRestrictionSection (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) (M : strictEtaleLevel T O t n) (U : T.Etaleᵒᵖ) :
     (((coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙
@@ -412,7 +410,6 @@ private def fixedRestrictionSection (T : Scheme.{u}) (O : Type (u + 1)) [CommRin
       ModuleCat.restrictScalarsComp'App (quotientMap O t h)
         ((unit T (coefficient O t n)).app U).hom _ rfl (M.val.obj U)
 
-set_option profiler true in
 -- Compare the two scalar restrictions through their composite ring homomorphisms.
 private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
@@ -430,7 +427,6 @@ private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     ext U x
     rfl
 
-set_option profiler true in
 -- The section comparisons are already isomorphisms.
 private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
