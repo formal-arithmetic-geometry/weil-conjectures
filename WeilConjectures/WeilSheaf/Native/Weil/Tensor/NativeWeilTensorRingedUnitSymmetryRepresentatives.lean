@@ -95,7 +95,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   Functor.mapDerivedCategoryFactors DerivedCategory DerivedCategory.Q
   instCategoryDerivedCategory NativeOrdinaryKFlat NativeTensorKFlat
 
-set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The normalization compares independently presented total-complex models.
 /-- Unit and signed-symmetry squares on native K-flat representatives.
 
