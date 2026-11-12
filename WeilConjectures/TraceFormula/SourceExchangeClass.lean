@@ -46,8 +46,6 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {ℓ} {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-set_option profiler true in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- The core of `class_pushforward`: the two ways of transporting `Rp₁'_! (Lp₂'^* K' ⊗ Rb_! 𝟙)`
 to `Rf_* Rc₁_! Lc₂^* K` agree. -/
 theorem class_pushforward_core :
@@ -112,11 +110,12 @@ theorem class_pushforward_core :
   refine congrArg (· ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.app _) ?_
   simp only [Category.assoc, Functor.map_comp, leftProjectionNatTrans, curriedTensor_map_app,
     curriedTensor_obj_obj]
-  conv_rhs => simp only [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
-    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
-    (Verdier.leftProjection_naturality_left
-        (boundedConstructibleExceptionalProjection ℓ c.support)
-      (prodUpperStarCounit ℓ (prod.map_snd P.f P.f) K) (𝟙_ _))]
+  conv_rhs =>
+    simp only [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
+      (Verdier.leftProjection_naturality_left
+          (boundedConstructibleExceptionalProjection ℓ c.support)
+        (prodUpperStarCounit ℓ (prod.map_snd P.f P.f) K) (𝟙_ _))]
   have hsq := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ
       (prod.map_fst P.f P.f)).hom.naturality
       (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ c.support)
@@ -159,8 +158,7 @@ theorem class_pushforward_core :
     P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
     (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
   refine Eq.trans ?_ (hcoh.trans ?_)
-  all_goals trace_state
-  all_goals simp only [coeff, pushforward_c₁, pushforward_c₂, Functor.comp_obj]
+  all_goals simp only [coeff, Functor.comp_obj]
   all_goals rfl
 
 end Correspondence.ProperPushforwardDiagram

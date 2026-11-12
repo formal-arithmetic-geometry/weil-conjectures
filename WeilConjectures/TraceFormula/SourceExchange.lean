@@ -80,13 +80,16 @@ theorem class_pushforward :
         (boundedConstructibleLowerStar ℓ (prod.map P.f P.f)).map c.class ≫
         classTransportMap ℓ P.f K := by
   apply classTest_injective
-  rewrite [classTest_comp, classTest_comp, classTest_map_comp_classTransportMap]
+  conv_rhs => rw [classTest_comp, classTest_comp]
+  simp only [classTest_map_comp_classTransportMap]
   simp only [Correspondence.class]
-  rewrite [classTest_correspondenceClassEquiv_symm, classTest_correspondenceClassEquiv_symm,
+  simp only [classTest_correspondenceClassEquiv_symm,
     lowerShriek_map_comp_comp_eqToHom_comp_counit ℓ P.pushforward.support_fst.symm,
     lowerShriek_map_comp_comp_eqToHom_comp_counit ℓ c.support_fst.symm]
   simp only [pushforwardCoeff, pushforwardCoeffCounit, lowerStarUpperShriekExchange]
-  rewrite [Adjunction.map_comp_mateEquiv_app_comp_counit]
+  simp only [Adjunction.map_comp_mateEquiv_app_comp_counit
+    (boundedConstructibleUpperShriekAdjunction ℓ c.c₁)
+    (boundedConstructibleUpperShriekAdjunction ℓ P.b₁)]
   have h := congrArg (· ≫ (boundedConstructibleLowerStar ℓ P.f).map
     ((boundedConstructibleLowerShriek ℓ c.c₁).map c.u ≫
       (boundedConstructibleUpperShriekAdjunction ℓ c.c₁).counit.app K)) P.class_pushforward_core
