@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -103,7 +104,7 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
     (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
       hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) s n hn
     (L((e₁')^*⟦Λ⟧).map rM ≫
-      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ hrP
+      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ ?_
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
     (fun i ↦ (σP i).autAction Λ _) (fun i ↦ (σP i).autAction Λ _)
     (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ havgP
@@ -111,6 +112,7 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
     simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at e
     simp only [Category.assoc, reassoc_of% e, Iso.hom_inv_id_app]
     rfl
+  · cast_proofs hrP
   · intro i
     have h := hequiv i
     simp only [hN i, CategoryTheory.Functor.map_id, tensorHom_id] at h
