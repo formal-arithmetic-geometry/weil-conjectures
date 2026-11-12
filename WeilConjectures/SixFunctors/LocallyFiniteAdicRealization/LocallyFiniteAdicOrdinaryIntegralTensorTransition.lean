@@ -172,9 +172,9 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
         finiteOrdinaryCoefficientIntegralModel l X A C E := by
   unfold finiteOrdinaryIntegralTensorModel finiteOrdinaryRawIntegralModel
     finiteOrdinaryCoefficientIntegralModel
-  extract_lets I r s t b d g m c f j k
-  have h := iso_factor_six b d g f j k
-  exact h
+  extract_lets
+  simp only [Iso.trans_assoc]
+  rfl
 
 /-- The ordinary finite closure comparison has the prescribed integral tensor map.
 
