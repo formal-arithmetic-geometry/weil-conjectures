@@ -50,7 +50,14 @@ private theorem restrictionUnderlying_inv_section
     HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x :=
   finiteBoundary_cast_heq (r.underlying M n U).symm x
 
-set_option trace.profiler true in
+private theorem finiteEvaluationSection_exists
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : M.val.obj (op (n, U.unop))) :
+    ∃ v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U,
+      HEq v x := ⟨x, HEq.rfl⟩
+
+set_option profiler true in
 -- Compare the finite scalar-extension unit with the normalized root evaluation.
 private theorem normalizedRootSection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
@@ -71,37 +78,69 @@ private theorem normalizedRootSection
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
   have hx : HEq x' x := (finiteBoundary_cast_heq
     (c.reduction.forget.sections c.rootModule n U) x').symm
-  let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
-      (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
-    SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+  obtain ⟨v, hv⟩ := finiteEvaluationSection_exists l T n
+    (lineModule l (ULift.{u} (Padic l)) c) U
+    (SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
       (coefficientSystemMap l (ULift.{u} (Padic l)) T) c.scalar c.rootModule
-      (op (n, U.unop)) x
+      (op (n, U.unop)) x)
   let w := ((restrictionUnderlying l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   have hw : HEq w v := restrictionUnderlying_inv_section l T r n
     (lineModule l (ULift.{u} (Padic l)) c) U v
-  have ht := k.line_tensor n U x x' w hx.symm hw
+  have ht := k.line_tensor n U x x' w hx.symm (hw.trans hv)
   have hz := (addSectionEquiv (c.rootForget.app (op n)) U).apply_symm_apply z
   have hw' : w = (k.lineForget.inv.app (op n)).hom.app U z := by
     exact (addSectionEquiv (k.lineForget.app (op n)) U).injective
       ((ht.trans hz).trans
         ((addSectionEquiv (k.lineForget.app (op n)) U).apply_symm_apply z).symm)
-  have hv : ((restrictionUnderlying l T r n).hom.app
+  have hwv : ((restrictionUnderlying l T r n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U w = v :=
-    (addSectionEquiv ((restrictionUnderlying l T r n).app
-      (lineModule l (ULift.{u} (Padic l)) c)) U).apply_symm_apply v
+    congrArg (fun q ↦ q.hom.app U v)
+      ((restrictionUnderlying l T r n).inv_hom_id_app
+        (lineModule l (ULift.{u} (Padic l)) c))
   have hnorm := (lineEvaluation_existsUnique l (ULift.{u} (Padic l)) c n).exists.choose_spec
     U 1 x x' v hx.symm
-    (by simpa only [one_smul] using (HEq.rfl : HEq v v))
+    (by simpa only [one_smul] using hv)
   have hsection := (congrArg
     (((restrictionUnderlying l T r n).hom.app
-      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U) hw'.symm).trans hv
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U) hw'.symm).trans hwv
   exact (congrArg ((lineEvaluation l (ULift.{u} (Padic l)) c n).hom.val.app U)
     hsection).trans (hnorm.trans (congrArg
       (Scheme.tateFiniteTensor T l (FiniteRing l (ULift.{u} (Padic l)) n) n
         (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1) hz))
 
-set_option trace.profiler true in
+-- Transport an arbitrary module morphism, without unfolding a Chern-line module.
+private theorem varyingPush_adjoint_section
+    (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
+    {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)
+    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
+    [DiagonalTraceLocalizations l X'] [DiagonalTraceLocalizations l S']
+    (p : Presentation l (ULift.{u} (Padic l)) f)
+    (p' : Presentation l (ULift.{u} (Padic l)) f')
+    (d : LocalChernPullbackData l hX p p') (n : ℕ)
+    (M : Systems X (Arings l (ULift.{u} (Padic l)) X))
+    (N : Systems X' (Arings l (ULift.{u} (Padic l)) X'))
+    (a : d.geometry.pull.obj M ⟶ N) (U : X.ProEtᵒᵖ)
+    (y : ((p.restrictionX.F.obj M).obj (op n)).obj.obj U)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X n).obj M).val.obj U)
+    (hx : HEq y x) :
+    HEq (((d.varyingPush.hom.app N).app (op n)).hom.app U
+      (((p.restrictionX.F.map (d.geometry.ordinaryAdjunction.homEquiv M N a)).app
+        (op n)).hom.app U y))
+      (adjointSection l (ULift.{u} (Padic l)) d.geometry a n U x) := by
+  let α := d.geometry.ordinaryAdjunction.homEquiv M N a
+  have hα := additive_transport_apply
+    (p.restrictionX.underlying M n U)
+    (p.restrictionX.underlying (d.geometry.push.obj N) n U)
+    (AddCommGrpCat.ofHom
+      ((((p.restrictionX.F.map α).app (op n)).hom.app U).hom.toAddMonoidHom))
+    (AddCommGrpCat.ofHom ((α.val.app (op (n, U.unop))).hom.toAddMonoidHom))
+    (p.restrictionX.morphisms α n U) y x hx
+  have hp := push_sections l (ULift.{u} (Padic l)) d.base d.geometry n N U
+    ((α.val.app (op (n, U.unop))) x)
+  exact (d.varyingPush_sections N n U _).trans (hα.trans hp.symm)
+
+set_option profiler true in
 -- Compare the line sections in the two scalar restrictions and finite evaluations.
 private theorem horizontal_varying_root_square
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
@@ -139,20 +178,11 @@ private theorem horizontal_varying_root_square
     let e := addSectionEquiv ((finiteForget l (ULift.{u} (Padic l)) X n).mapIso
       (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n)) U
     exact (e.symm_apply_apply x).symm.trans (congrArg e.symm hcoord)
-  have hα := additive_transport_apply
-    (p.restrictionX.underlying N n U)
-    (p.restrictionX.underlying (d.geometry.push.obj N') n U)
-    (AddCommGrpCat.ofHom
-      ((((p.restrictionX.F.map α).app (op n)).hom.app U).hom.toAddMonoidHom))
-    (AddCommGrpCat.ofHom ((α.val.app (op (n, U.unop))).hom.toAddMonoidHom))
-    (p.restrictionX.morphisms α n U) y x hx
-  have hp := push_sections l (ULift.{u} (Padic l)) d.base d.geometry n N' U
-    ((α.val.app (op (n, U.unop))) x)
   let v := (((d.varyingPush.hom.app N').app (op n)).hom.app U)
     (((p.restrictionX.F.map α).app (op n)).hom.app U y)
   have hv : HEq v (adjointSection l (ULift.{u} (Padic l)) d.geometry
       d.line.iso.hom n U x) :=
-    (d.varyingPush_sections N' n U _).trans (hα.trans hp.symm)
+    varyingPush_adjoint_section l hX p p' d n N N' d.line.iso.hom U y x hx
   let U' := (Scheme.proEtaleBaseChange hX).op.obj U
   let x' : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X' n).obj N').val.obj U' :=
     (((restrictionUnderlying l X' p'.restrictionX n).hom.app N').hom.app U') v
