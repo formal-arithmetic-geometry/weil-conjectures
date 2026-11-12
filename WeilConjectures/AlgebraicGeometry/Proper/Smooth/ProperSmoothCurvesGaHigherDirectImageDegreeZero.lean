@@ -85,7 +85,7 @@ theorem exists_etaleTensorUnit_sections_natural_smul (X : Scheme.{u}) :
     exists_sections_addEquiv_of_isIso_unit (tensorPullbackObjUnitToUnit U.unop.hom)
   refine ⟨b, ?_, ?_⟩
   · intro U V g x
-    rw [hb, hb]
+    erw [hb, hb]
     exact etaleTensorUnitRestriction_equation g.unop x
   · intro U a x
     exact hs (op U) a x
