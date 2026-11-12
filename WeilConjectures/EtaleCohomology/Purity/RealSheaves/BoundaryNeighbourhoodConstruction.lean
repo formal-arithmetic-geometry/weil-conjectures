@@ -169,16 +169,15 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         r (a - b) = r a - r b := r.map_sub _ _
         _ = r a - r a := congrArg (fun y => r a - y) hεr
         _ = 0 := sub_self _
-    have h1 : ¬ IsUnit
-        (Ideal.inertiaInvariantsMap C.functionField Q hσF (a - b)) := by
-      intro hu
-      exact (hr (a - b)).1 h0
-        (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField) (Q := Q)
-          (a := a - b) hσF hu)
     have h2 : r (τ a - τ b) = 0 := by
       calc
         r (τ a - τ b) = r (τ (a - b)) := congrArg r (τ.map_sub a b).symm
-        _ = 0 := (hr _).2 h1
+        _ = 0 := by
+          apply (hr (a - b)).2
+          intro hu
+          exact (hr (a - b)).1 h0
+            (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField) (Q := Q)
+              (a := a - b) hσF hu)
     exact (sub_eq_zero.1 ((r.map_sub _ _).symm.trans h2)).trans
       ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
   have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
