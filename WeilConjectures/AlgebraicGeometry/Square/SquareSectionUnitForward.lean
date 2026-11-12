@@ -393,11 +393,15 @@ private def squareForward_cochainComparison {X S : Scheme.{u}} (f : X ⟶ S) (q 
       (RingedSpace.localAbelianSections X.toRingedSpace).mapHomologicalComplex (.up ℤ) ⋙
         HomologicalComplex.homologyFunctor (X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}) (.up ℤ) q ⋙
         (Functor.whiskeringLeft S.Opensᵒᵖ X.Opensᵒᵖ AddCommGrpCat.{u}).obj
-          (TopologicalSpace.Opens.map f.base).op :=
-  Functor.whiskerLeft
-    ((RingedSpace.localAbelianSections X.toRingedSpace).mapHomologicalComplex (.up ℤ))
-    (((Functor.whiskeringLeft S.Opensᵒᵖ X.Opensᵒᵖ AddCommGrpCat.{u}).obj
-      (TopologicalSpace.Opens.map f.base).op).mapHomologicalComplexHomologyIso (.up ℤ) q).hom
+          (TopologicalSpace.Opens.map f.base).op := by
+  let F := RingedSpace.localAbelianSections X.toRingedSpace
+  let W := (Functor.whiskeringLeft S.Opensᵒᵖ X.Opensᵒᵖ AddCommGrpCat.{u}).obj
+    (TopologicalSpace.Opens.map f.base).op
+  refine { app := fun B ↦ (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app
+    ((F.mapHomologicalComplex (.up ℤ)).obj B), naturality := ?_ }
+  intro B I b
+  convert (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.naturality
+    ((F.mapHomologicalComplex (.up ℤ)).map b) using 1 <;> rfl
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option profiler true in
@@ -428,7 +432,8 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
   unfold squareInverseOpenComparison RingedSpace.topEdgeInverseModel RingedSpace.topEdgeLocalModel
   exact squareForward_cochain_comparison F P W
     (RingedSpace.localSectionsEnoughKInjectives X.toRingedSpace) q
-    (squareForward_cochainComparison f q) B I K (RingedSpace.topEdgeResolutionIso X.toRingedSpace K) a
+    (squareForward_cochainComparison f q) B I K
+    (RingedSpace.topEdgeResolutionIso X.toRingedSpace K) a
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option profiler true in
