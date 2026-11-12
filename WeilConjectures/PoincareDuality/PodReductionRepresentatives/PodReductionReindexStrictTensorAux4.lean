@@ -93,15 +93,17 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)
   have h2 := PresheafOfModules.naturality_apply
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val i.op z
-  have h3 := (finiteAdjunction_unit_apply l E W n M (op V') (M.val.map i.op z)).symm.trans
-    (h2.trans (congrArg (((unrestrictedIntegralReductionFunctor l E W n).obj M).val.map i.op)
-      (finiteAdjunction_unit_apply l E W n M (op V) z)))
+  have h3 : ((unrestrictedIntegralReductionFunctor l E W n).obj M).val.map i.op
+      (unrestrictedIntegralTensorSection l E W n M (op V) 1 z) =
+      unrestrictedIntegralTensorSection l E W n M (op V') 1 (M.val.map i.op z) := by
+    rw [← finiteAdjunction_unit_apply, ← finiteAdjunction_unit_apply]
+    exact h2.symm
   have h0 := sequenceEvaluation_map_apply l E W n
     ((pullbackTensorOrdinaryReduction l E W).obj M) i
     (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V)
       (unrestrictedIntegralTensorSection l E W n M (op V) 1 z))
   have h4 := h1.symm.trans (congrArg
-    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3.symm)
+    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3)
   exact h0.symm.trans h4
 
 
