@@ -105,7 +105,6 @@ def affineTensorPullbackHomologyStalkIso
     (s.mapIso (affineTensorPullbackHomologySheafIso A A' φ M i)).toLinearEquiv.toAddEquiv
 
 
-set_option profiler true in
 /-- Affine localization identifies the base-change coordinate with the stalk map
 of the inverse ordinary pullback counit.  This is the geometric localization
 identity from Stacks Tag 0DJ8; the remaining supplied representative isomorphism
@@ -160,6 +159,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
         (LocalizedModule.map p.asIdeal.primeCompl b.hom.hom y) =
       s.map (H.map ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))
         (z y) := by
+  -- Keep the composite c shared when applying the stalk-coordinate identity.
   intro L b P H E c s z y
   let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
   let d₀ := affineTensorPullbackHomologySheafIso A A' φg' M i
