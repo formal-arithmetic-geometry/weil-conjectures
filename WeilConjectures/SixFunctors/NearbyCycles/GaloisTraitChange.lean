@@ -268,11 +268,14 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   let α := (τ.pullbackExchange Λ).app C
   trace "PH329: starting helper application"
   with_reducible
-    have key := isIso_of_invariant_summands_square
+    have key₀ := isIso_of_invariant_summands_square
       (fun q ↦ DerivedCategory.homologyFunctor
         (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')) q)
       (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
-      L((f')^*⟦Λ⟧) Ψ₂Ω α α₁ r₁ hr₁ α₂ r₂ hr₂
+      L((f')^*⟦Λ⟧) Ψ₂Ω
+  trace "PH329: specialized abstract categories"
+  with_reducible
+    have key := key₀ α α₁ r₁ hr₁ α₂ r₂ hr₂
       cA cB cB' I' _ _ _ hnat hIA β hsq
       (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
       (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
