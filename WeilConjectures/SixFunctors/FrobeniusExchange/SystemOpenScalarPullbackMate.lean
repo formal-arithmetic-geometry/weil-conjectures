@@ -181,6 +181,7 @@ private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X �
       (sequenceQuotient l E) j)
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
     (openRestrictionMate_isIso l E L ι j)
+  unfold sequenceRestrictionPullbackInv
   exact h
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
