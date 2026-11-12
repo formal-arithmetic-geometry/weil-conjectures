@@ -217,6 +217,7 @@ theorem coe_homMulEquiv_inv {A : Type u} [CommRing A] (g : GL n A) (N : Matrix n
 
 set_option maxHeartbeats 400000 in
 -- the matrix computation over `k[ε, δ]` unfolds several dual-number layers
+set_option trace.profiler true in
 open scoped commutatorElement in
 theorem tangentMatrix_tangentBracket (p q : GrpObj.pointsKer 𝔾𝕃(n; k) GrpObj.aug₁) :
     tangentMatrix n k (GrpObj.tangentBracket p q) =
