@@ -94,7 +94,13 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
       ℓ E c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
   rw [ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
-  infer_instance
+  refine IsIso.comp_isIso'
+    (IsIso.comp_isIso' (IsIso.comp_isIso' (IsIso.comp_isIso' ?_ ?_) ?_) ?_) ?_
+  · infer_instance
+  · exact Functor.isIso_whiskerLeft _ _
+  · infer_instance
+  · exact Functor.isIso_whiskerRight _ _
+  · infer_instance
 
 /-- **The base change theorem for the compactly supported direct image attached to a
 compactification** of bounded constructible `ℚ̄_ℓ`-sheaves: for a
