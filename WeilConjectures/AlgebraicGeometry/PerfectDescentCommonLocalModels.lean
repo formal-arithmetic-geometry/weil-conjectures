@@ -25,9 +25,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option profiler true in
-set_option maxHeartbeats 700000 in
--- Elaborating the two dependent stage-model families exceeds the default heartbeat budget.
+set_option trace.profiler true in
 /-- Descend the two restrictions separately and move them to a common stage.
 This supplies no overlap isomorphism and no map into a derived direct image.
 Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
