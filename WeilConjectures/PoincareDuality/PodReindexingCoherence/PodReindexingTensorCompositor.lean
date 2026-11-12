@@ -371,20 +371,22 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     hi.symm.trans hcancel
   simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
     PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rewrite [hi']
-  rewrite (transparency := .default) [cgh.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
-  rewrite (transparency := .default) [k.degree, k.degree]
-  rewrite (transparency := .default) [eq_of_heq (k.sections (P.X p) U.unop x),
-    eq_of_heq (k.sections (L.X q) U.unop y)]
-  rewrite (transparency := .default) [k.degree]
-  rewrite (transparency := .default) [eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z)]
+  rw [hi']
   dsimp only [z]
-  rewrite (transparency := .default) [generator_restrict]
+  simp only [cgh.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
+  simp only [k.degree, k.degree]
+  simp only [eq_of_heq (k.sections (P.X p) U.unop x),
+    eq_of_heq (k.sections (L.X q) U.unop y)]
+  simp only [k.degree]
+  simp only [eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z)]
+  dsimp only [z]
+  simp only [generator_restrict]
   change _ = ((ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
     ((podReindexingComplexFunctor l E g s).obj L)).hom.f n).val.app U
       (((cg.tensorChain P L).hom.f n).val.app
         (op ((proEtaleIsoPostcompose h).obj U.unop)) _)
-  rewrite (transparency := .default) [cg.tensorChain_pure, ch.tensorChain_pure]
+  simp only [cg.tensorChain_pure, ch.tensorChain_pure]
+  rfl
 
 set_option maxHeartbeats 8000000 in
 -- Paste the three tensor models across the exact-functor factorization maps.
