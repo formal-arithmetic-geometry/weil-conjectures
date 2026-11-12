@@ -241,7 +241,6 @@ private theorem map_tensor_shift_cancel
   simp only [Functor.map_comp, Category.assoc]
   rw [← G.map_comp_assoc e.hom e.inv, e.hom_inv_id, G.map_id, Category.id_comp]
 
-set_option profiler true in
 -- The explicit categorical calculation shares the native tensor structures throughout.
 private theorem pullTwist_section
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -305,7 +304,7 @@ private theorem pullSectionTransportData_of_hom
       s₂.hom.app (T.obj M))
     (hb : G.map (U.map b.inv) ≫ (d (F₁.obj M)).hom =
       (d (F₂.obj M)).hom ≫ T.map (G.map b.inv)) :
-    ∃ data : PullSectionTransportData (G := G) (s₁ := s₁) (s₂ := s₂) T U M e₁ e₂ b,
+    ∃ _ : PullSectionTransportData (G := G) (s₁ := s₁) (s₂ := s₂) T U M e₁ e₂ b,
       True := by
   refine ⟨{ d₁ := d (F₁.obj M), d₂ := d (F₂.obj M), h₁ := ?_, h₂ := h₂, hb := ?_ },
     trivial⟩
@@ -315,7 +314,6 @@ private theorem pullSectionTransportData_of_hom
       congrArg (fun m ↦ G.map e₂.hom ≫ m ≫ T.map (s₁.hom.app M)) hb
 
 set_option linter.unusedVariables false in
-set_option profiler true in
 -- The calculation below is elaborated with the native tensor instances of this section.
 private theorem second_pull_section_transport_data_aux
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
