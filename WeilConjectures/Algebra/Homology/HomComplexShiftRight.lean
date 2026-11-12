@@ -83,6 +83,7 @@ private lemma shiftSign_sub {A : Type*} [AddCommGroup A]
     smul_smul n.negOnePow (k + n).negOnePow b, Int.negOnePow_add,
     mul_left_comm, Int.units_mul_self, mul_one]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The dependent product projections require elaborating the Hom-complex specification.
 set_option backward.isDefEq.respectTransparency true in
