@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.MateVCompOfIso
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 public import WeilConjectures.WeilSheaf.SmoothPurityCoefficientPullComp
 
@@ -101,14 +101,20 @@ theorem derivedUpperStarExtendScalarsPushHom_app_of_coefficient_comp (hc : a ≫
           (L(Mod.extendScalars (coefficientMap a X)).obj K) ≫
         R((f)_*⟦Λ''⟧).map ((Mod.derivedExtendScalarsCompIso (coefficientMap a X)
           (coefficientMap b X) (coefficientMap c X)
-          (coefficientMap_comp_eq a b c hc X)).inv.app K) :=
-  mateEquiv_app_eq_comp_of_vComp_iso (derivedUpperStarLowerStarAdjunction Λ f)
+          (coefficientMap_comp_eq a b c hc X)).inv.app K) := by
+  have hcomp := mateEquiv_app_comp_of_compCoherence (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ' f) (derivedUpperStarLowerStarAdjunction Λ'' f)
     (Mod.derivedExtendScalarsCompIso _ _ _ (coefficientMap_comp_eq a b c hc Y))
     (Mod.derivedExtendScalarsCompIso _ _ _ (coefficientMap_comp_eq a b c hc X))
     (derivedUpperStarExtendScalarsIso a f).inv (derivedUpperStarExtendScalarsIso b f).inv
-    (derivedUpperStarExtendScalarsIso c f).inv
-    (derivedUpperStarExtendScalarsIso_inv_app_of_coefficient_comp a b c f hc) K
+    (derivedUpperStarExtendScalarsIso c f).inv (fun M => by
+      simp [derivedUpperStarExtendScalarsIso_inv_app_of_coefficient_comp a b c f hc M]) K
+  rw [← cancel_mono (R((f)_*⟦Λ''⟧).map ((Mod.derivedExtendScalarsCompIso (coefficientMap a X)
+    (coefficientMap b X) (coefficientMap c X) (coefficientMap_comp_eq a b c hc X)).hom.app K))]
+  refine hcomp.trans ?_
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.comp_obj,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
 
 /-- Blueprint `lemma-change-coefficients-direct-image--6` (**composite coefficient maps**): for a
 composite `c = a ≫ b` of coefficient changes (no flatness assumed), the comparison

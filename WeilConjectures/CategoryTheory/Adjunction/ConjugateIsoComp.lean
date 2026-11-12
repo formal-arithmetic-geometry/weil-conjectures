@@ -64,7 +64,15 @@ variable {X₁ X₂ X₃ Y₁ Y₂ Y₃ : Type*} [Category* X₁] [Category* X�
 /-- **Composition of conjugates.** If `e_c : Q₃ ⋙ R_c ≅ R_c ⋙ Q₁` is the composite of `e_a` and
 `e_b` up to the composition isomorphisms `κ : R_b ⋙ R_a ≅ R_c` of the right adjoints, then the
 conjugate `P₁ ⋙ L_c ≅ L_c ⋙ P₃` of `e_c` is the composite of the conjugates of `e_a` and `e_b`,
-up to the conjugates `θ : L_c ≅ L_a ⋙ L_b` of `κ`. -/
+up to the conjugates `θ : L_c ≅ L_a ⋙ L_b` of `κ`. Writing `c_a`, `c_b`, `c_c` for the
+conjugates of `e_a`, `e_b`, `e_c`:
+```
+                                 c_c
+   L_c (P₁ K) ----------------------------------------------→ P₃ (L_c K)
+   θ_X ↓                                                          ↑ P₃ θ_Y⁻¹
+ L_b L_a (P₁ K) --L_b c_a--→ L_b P₂ (L_a K) --c_b--→ P₃ (L_b L_a K)
+```
+-/
 theorem conjugateIsoEquiv_symm_hom_app_eq_comp
     (h : ∀ K, ec.hom.app K = κY.inv.app (Q₃.obj K) ≫ RYa.map (eb.hom.app K) ≫
       ea.hom.app (RXb.obj K) ≫ Q₁.map (κX.hom.app K)) (K : Y₁) :
@@ -144,7 +152,14 @@ variable {AZ AY AX BZ BY BX : Type*} [Category* AZ] [Category* AY] [Category* AX
 
 /-- **Converse of `mateEquiv_app_comp_of_compCoherence`.** If the mates `R ⋙ G ⟶ H ⋙ R` of
 2-squares of left adjoints are compatible with composition isomorphisms `c_G` and `c_H`, then so
-are the 2-squares themselves. -/
+are the 2-squares themselves:
+```
+                          a_{pq}
+  L_X G_{pq} M ------------------------------------→ H_{pq} L_Z M
+ L_X c_G ↓                                               ↓ c_H
+  L_X G_p G_q M --a_p--→ H_p L_Y G_q M --H_p a_q--→ H_p H_q L_Z M
+```
+-/
 lemma compCoherence_of_mateEquiv_app_comp
     (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ Hq ⋙ Hp) (aq : TwoSquare Gq LZ LY Hq)
     (ap : TwoSquare Gp LY LX Hp) (apq : TwoSquare Gpq LZ LX Hpq)
@@ -170,7 +185,14 @@ lemma compCoherence_of_mateEquiv_app_comp
 composition isomorphisms `c_G : G_{pq} ≅ G_q ⋙ G_p` and `c_H : H_{pq} ≅ H_q ⋙ H_p` of the
 horizontal functors (hypothesis `h`). Then the right adjoint comparisons `R ⋙ G ⟶ H ⋙ R'`
 defined as the mates of the inverses `e⁻¹` (e.g. the comparisons `f^! ⋙ T ⟶ T ⋙ f^!`) are
-transitive with respect to the same composition isomorphisms. -/
+transitive with respect to the same composition isomorphisms; writing `ρ` for these mates:
+```
+                            ρ_{pq}
+  G_{pq} R_Z K ---------------------------------------→ R_X H_{pq} K
+   c_G ↓                                                     ↑ R_X c_H⁻¹
+  G_p G_q R_Z K --G_p ρ_q--→ G_p R_Y H_q K --ρ_p--→ R_X H_p H_q K
+```
+-/
 lemma mateEquiv_inv_app_comp_of_hom_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ Hq ⋙ Hp)
     (eq : LZ ⋙ Hq ≅ Gq ⋙ LY) (ep : LY ⋙ Hp ≅ Gp ⋙ LX) (epq : LZ ⋙ Hpq ≅ Gpq ⋙ LX)
     (h : ∀ M, epq.hom.app M = cH.hom.app (LZ.obj M) ≫ Hp.map (eq.hom.app M) ≫
@@ -191,8 +213,6 @@ lemma mateEquiv_inv_app_comp_of_hom_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq 
   rw [← cancel_mono (RX.map (cH.hom.app K)), hc]
   simp
 
-
-
 /-- The form of `mateEquiv_inv_app_comp_of_hom_app_comp` for natural transformations of left
 adjoints which are isomorphisms. -/
 lemma mateEquiv_inv_app_comp_of_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ Hq ⋙ Hp)
@@ -207,6 +227,7 @@ lemma mateEquiv_inv_app_comp_of_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ 
         RX.map (cH.inv.app K) :=
   mateEquiv_inv_app_comp_of_hom_app_comp adjZ adjY adjX cG cH (asIso αq) (asIso αp) (asIso αpq)
     h K
+
 end CompCoherence
 
 section VerticalComp
@@ -225,7 +246,15 @@ variable {AX AY AZ BX BY BZ : Type*} [Category* AX] [Category* AY] [Category* AZ
 isomorphisms `e : L_{gf} ≅ L_f ⋙ L_g` and `eₜ` (hypothesis `h`, e.g. with `R(gf)_! ≅ Rg_! Rf_!`).
 Then the right adjoint comparisons `ρ : R ⋙ T ⟶ T ⋙ Rₜ` defined as the mates of the inverses
 `ι⁻¹` (e.g. the comparisons `f^! ⋙ T ⟶ T ⋙ f^!`) are compatible with the conjugate composition
-isomorphisms `R_{gf} ≅ R_g ⋙ R_f` (e.g. `(gf)^! ≅ f^! g^!`). -/
+isomorphisms `U : R_{gf} ≅ R_g ⋙ R_f` (e.g. `(gf)^! ≅ f^! g^!`):
+```
+                  T_X U
+  T_X R_{gf} K ----------→ T_X R_f R_g K
+   ρ_{gf} ↓                     ↓ ρ_f ≫ R_fₜ ρ_g
+  R_{gf}ₜ T_Z K ---------→ R_fₜ R_gₜ T_Z K
+                   Uₜ
+```
+-/
 lemma mateEquiv_inv_app_comp_conjugateIsoEquiv (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ)
     (ιg : Lg ⋙ TZ ≅ TY ⋙ Lgₜ) (ιgf : Lgf ⋙ TZ ≅ TX ⋙ Lgfₜ) (e : Lgf ≅ Lf ⋙ Lg)
     (eₜ : Lgfₜ ≅ Lfₜ ⋙ Lgₜ)

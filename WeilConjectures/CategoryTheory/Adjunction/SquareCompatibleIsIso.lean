@@ -12,7 +12,15 @@ public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatible
 
 Let `α : F ⟶ G` and `α' : F' ⟶ G'` be compatible with commutation squares
 `ιF : F ⋙ T' ≅ T ⋙ F'` and `ιG : G ⋙ T' ≅ T ⋙ G'`
-(`CategoryTheory.NatTrans.SquareCompatible`). Then `T' (α_K)` is an isomorphism if and only if
+(`CategoryTheory.NatTrans.SquareCompatible`), i.e. for every `K` the square
+```
+           T' (α_K)
+  T' (F K) -------→ T' (G K)
+  ιF_K ↓               ↓ ιG_K
+  F' (T K) -------→ G' (T K)
+           α'_{T K}
+```
+commutes. Then `T' (α_K)` is an isomorphism if and only if
 `α'_{T K}` is one (`CategoryTheory.NatTrans.SquareCompatible.isIso_map_app_iff`). Consequently:
 
 * if `T'` reflects isomorphisms and `α'_{T K}` is an isomorphism, so is `α_K`

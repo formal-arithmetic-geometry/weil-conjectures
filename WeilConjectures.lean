@@ -14153,7 +14153,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateTransposeIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateTwoColimit
 public import WeilConjectures.CategoryTheory.Adjunction.MateUnitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
-public import WeilConjectures.CategoryTheory.Adjunction.MateVCompOfIso
 public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
 public import WeilConjectures.CategoryTheory.Adjunction.MatesHCompIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.NormalizedExactDerivedUnit
