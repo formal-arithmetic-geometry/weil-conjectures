@@ -35,7 +35,8 @@ private theorem derivedOpenGluing_additive_of_preservesFiniteLimits
     F.Additive :=
   Functor.additive_of_preserves_binary_products _
 
-private theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.Opens)
+/-- Restriction to an open subscheme is additive for the chosen preadditive structures. -/
+theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.Opens)
     [Preadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
@@ -45,7 +46,8 @@ private theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.O
         (Scheme.Modules.overEquiv U)).Additive := by
   apply derivedOpenGluing_additive_of_preservesFiniteLimits
 
-private theorem derivedOpenGluing_overlap_additive (X : Scheme.{u})
+/-- Restriction between open subschemes is additive for the chosen preadditive structures. -/
+theorem derivedOpenGluing_overlap_additive (X : Scheme.{u})
     (U V : X.Opens) (i : V ⟶ U)
     [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
     [Preadditive (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] :
