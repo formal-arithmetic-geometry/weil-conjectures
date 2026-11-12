@@ -66,7 +66,6 @@ noncomputable local instance (priority := 2000) integralModelTensorRightPreserve
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option profiler true in
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
 pullback (`ProEtale.CondensedRing.derivedUpperStarExtendScalarsIso`). -/
@@ -133,7 +132,6 @@ lemma baseChangeGaloisModel_j_comp_total :
   simp only [baseChangeGaloisModel, Hom.traitChangeModel_j, Hom.cartesianModel_j, Category.assoc]
   rw [pullback.condition]
 
-set_option profiler true in
 /-- The identification `L(j'')^* Lφ^* B ≅ L(ε'')^* A` on the generic fibre of `N''`. -/
 noncomputable def baseChangeGaloisModelPullbackIso
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -160,7 +158,6 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
-set_option profiler true in
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
 an integral model `K₀` (the pullback of an integral model of `B`) such that the nearby cycles of
@@ -240,14 +237,15 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
           ((derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
             (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
-set_option profiler true in
+set_option linter.style.whitespace false in
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
 `ρ : M'' ⟶ N''_{L^sep}` carries the action of `τ` on the Galois layer to that of the generic
 automorphism `galoisEquiv⁻¹ τ`. -/
 lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (τ : Gal(traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K) /
-      traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+    (τ : Gal(traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
+      (traitGenericField K)/traitTensorCompositum (PowerSeries K) (traitGenericField k')
+        (traitGenericField K)))
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C ≫
