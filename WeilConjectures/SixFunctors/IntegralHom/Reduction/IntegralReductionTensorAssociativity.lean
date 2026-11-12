@@ -264,9 +264,16 @@ private theorem normalizedBeta_eq (n : ℕ)
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
-    simpa only [CoefficientScalarTensorGenerators, reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      integral_totalPair_eq_generator, Iso.symm_hom, asIso_inv] using
-      (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j (i + j) rfl U x y)
+    have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta
+      i j (i + j) rfl U x y
+    rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
+    dsimp only [Iso.symm_hom, asIso_inv]
+    dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
+      integralReductionChangeOfRings, Functor.uncurry_obj_obj] at hh ⊢
+    exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
@@ -461,23 +468,18 @@ theorem reductionTensorStrength_associativity
     ∀ X V Z : completedIntegralDerivedCategory l E Y D hl,
       X ◁ p.app (V, Z) ≫ p.app (X, V ⊗ Z) ≫ B.map (α_ X V Z).inv =
         (α_ X V (B.obj Z)).inv ≫ p.app (X ⊗ V, Z) := by
-  let R := completedIntegralCommRingSheaf l E Y D hl
+  intro R monR e B p X V Z
   let S := integralCoefficientCommRingSheaf l E Y n
-  let : MonoidalCategory (completedIntegralDerivedCategory l E Y D hl) := by
-    with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
-      max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) R
   let : MonoidalCategory
       (DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n))) := by
     with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
       max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) S
-  let e : a.tensor ≅ tensor (completedIntegralDerivedCategory l E Y D hl) := by
-    with_unfolding_all exact tensorPresentationNativeIso Y R a
   let f := tensorPresentationNativeIso Y S m.target
   obtain ⟨core, hcore⟩ := nativeReductionMonoidal l E Y D hl a n m
-  with_unfolding_all exact (CategoryTheory.transportedTensorMate_assoc
+  exact (CategoryTheory.transportedTensorMate_assoc
     (C := completedIntegralDerivedCategory l E Y D hl)
     (D := DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)))
     a.tensor m.target.tensor
-    (derivedScalarExtensionRestrictionAdjunction l E Y n).choose m.mu e f core hcore)
+    (derivedScalarExtensionRestrictionAdjunction l E Y n).choose m.mu e f core hcore X V Z)
 
 end WeilConjectures.IntegralHom
