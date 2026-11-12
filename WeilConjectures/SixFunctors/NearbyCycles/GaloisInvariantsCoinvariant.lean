@@ -125,6 +125,14 @@ private lemma map_iso_inv_comp_map_eq_of_map_comp_eq
   rw [F.map_comp, F.map_comp, Category.assoc, Category.assoc, h,
     ← F.map_comp_assoc, i.inv_hom_id, F.map_id, Category.id_comp]
 
+private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
+    (adj : F ⊣ G) {A B : C} (e : A ≅ B) (R : G.obj (F.obj A) ⟶ A)
+    (hR : adj.unit.app A ≫ R = 𝟙 _) :
+    adj.unit.app B ≫ G.map (F.map e.inv) ≫ R ≫ e.hom = 𝟙 _ := by
+  rw [← adj.unit.naturality_assoc e.inv, Category.assoc, hR, Category.id_comp,
+    e.inv_hom_id]
+
 -- the derived functors of the tower are large terms
 /-- **The derived trace projector is the projector onto the invariants, after any continuous
 additive functor.** Let `R` be the retraction of the derived unit `K ⟶ Rg_{∞*} Lg_∞^* K` induced by
@@ -315,12 +323,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
           Profinite.continuousMapRingObj T₀⟧).map e.inv) ≫
         Adjunction.derivedUnitRetraction K a hK
           ((galoisTower Ω h).complexTrace (Profinite.continuousMapRingObj T₀) hd K hc) ≫
-          e.hom) = 𝟙 _ := by
-    erw [← (CondensedRing.derivedUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj T₀)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.naturality_assoc]
-    erw [reassoc_of% hadj]
-    exact e.inv_hom_id
+          e.hom) = 𝟙 _ :=
+    unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
+        (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))) e
+      (Adjunction.derivedUnitRetraction K a hK
+        ((galoisTower Ω h).complexTrace (Profinite.continuousMapRingObj T₀) hd K hc)) hadj
   have hmain := fun (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) ⥤
         Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
