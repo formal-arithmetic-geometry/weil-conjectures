@@ -81,6 +81,7 @@ private theorem roof_formula_cancel {C : Type*} [Category C] {A B I J K : C}
     (rI.hom ≫ b ≫ inv mu ≫ rJ.inv) ≫ rJ.hom ≫ mu = rI.hom ≫ b := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id, Category.comp_id]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Compare the explicit scheme-restriction and section-functor presentations.
 /-- Restricting an augmented injective roof computes the classical coefficient map.

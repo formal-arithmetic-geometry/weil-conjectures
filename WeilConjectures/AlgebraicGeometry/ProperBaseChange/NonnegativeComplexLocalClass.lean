@@ -26,6 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
