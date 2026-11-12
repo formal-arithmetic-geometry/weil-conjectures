@@ -299,7 +299,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   ph112_remaining "PH112 finite layer ready"
-  apply exists_subgroup_pullbackExchange_of_galois_average
+  have result := exists_subgroup_pullbackExchange_of_galois_average
     (Λ := Profinite.padicAlgClRingObj ℓ)
     (ρ := baseChangeToGaloisLayer hM b hb v hv)
     (ψ := (baseChangeGaloisModel hM b hb v hv).galoisLayerHom
@@ -308,19 +308,20 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
       (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
       (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
+    (φ := baseChangeHom hM b hb v hv)
     (A := A) (hχ := by cast_proofs hM1)
+    (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
+    (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
+    (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
+    (act := baseChangeAut hM b hb v hv)
     (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁)
     (actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
       (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-  · ph112_remaining "PH112 apply accepted"
-    exact baseChangeToGaloisModel_comp_total hM b hb v hv
-  · exact baseChangeToGaloisModel_comp_generic hM b hb v hv
-  · exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _
-  · exact autAction_baseChangeAut_mul hM b hb v hv _
-  · exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _
-  · exact hL₁.1
-  · ph112_remaining "PH112 before average"
-    cast_proofs hL₁.2
+    (hmul := autAction_baseChangeAut_mul hM b hb v hv _)
+    (hint := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
+    (htriv := hL₁.1) (hSA := by cast_proofs hL₁.2)
+  ph112_remaining "PH112 average ready"
+  cast_proofs result
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
