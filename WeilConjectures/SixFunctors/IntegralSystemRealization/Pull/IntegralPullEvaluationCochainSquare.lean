@@ -29,10 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
-    Functor.isoWhiskerLeft
-      ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
-      (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
+  ordinaryPullEvaluationComplex l E f n
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
