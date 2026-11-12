@@ -59,6 +59,11 @@ private theorem comap_delta {R S : C} [MonObj R] [MonObj S]
 
 -- Construct the component structure explicitly before assembling composites: the conclusions
 -- below need these instances before their proof bodies are elaborated.
+private local instance mapModLaxMonoidal (F : C ⥤ D) [F.Braided]
+    [PreservesColimitsOfShape WalkingParallelPair F] (R : C) [MonObj R] [IsCommMonObj R] :
+    (F.mapMod R).LaxMonoidal :=
+  (Functor.monoidal_mapMod F).toLaxMonoidal
+
 private local instance mapModCompLaxMonoidal (F : C ⥤ D) [F.Braided]
     [PreservesColimitsOfShape WalkingParallelPair F] (R : C) [MonObj R] [IsCommMonObj R]
     (K : Mod D (F.obj R) ⥤ E) [K.LaxMonoidal] :
