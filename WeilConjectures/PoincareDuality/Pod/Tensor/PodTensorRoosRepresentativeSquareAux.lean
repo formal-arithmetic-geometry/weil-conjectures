@@ -324,14 +324,16 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
         ((integralCompletedTensor l E Y).obj
           (DerivedCategory.Q.obj P.obj,DerivedCategory.Q.obj Q.obj)) ≫
       ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom := by
-  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+  dsimp only [podReindexingTensorFrame, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor,
     integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
     podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
     ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj] at *
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
-  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+  dsimp only [podReindexingTensorFrame, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor,
     integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
     podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
     ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj] at hs
@@ -390,24 +392,13 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
   have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let ha ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `hs).type
-    let hc ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `cancelTower).type
-    let .forallE _ he _ _ := hc
-      | throwError "expected normalization hypothesis"
-    Lean.logInfo m!"actual left type: {ha.getAppArgs[0]!}"
-    Lean.logInfo m!"actual right type: {ha.getAppArgs[2]!}"
-    Lean.logInfo m!"expected left type: {he.getAppArgs[0]!}"
-    Lean.logInfo m!"expected right type: {he.getAppArgs[2]!}"
-    for n in [`a, `b, `eP, `eQ, `e] do
-      let some v := (← Lean.Meta.getLocalDeclFromUserName n).value? | continue
-      Lean.logInfo m!"{n} value: {v}"
   have finish := cancelTower hs
     ((integralCompletedTensor l E X).map
       (Prod.mkHom
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))))
-  exact finish.trans
-    (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
+  have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
+  dsimp only [podReindexingTensorFrame, podOrdinaryReindex] at hc
+  exact finish.trans hc
 
 end WeilConjectures
