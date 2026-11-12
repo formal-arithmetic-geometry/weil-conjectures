@@ -34,7 +34,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option profiler true in
 -- Derived tensor transport unfolds the large sheaf and derived category instance terms.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
