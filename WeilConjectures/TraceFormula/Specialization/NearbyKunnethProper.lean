@@ -64,19 +64,19 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 -- Share the graded tensor instances used by every derived pullback.
-private instance properHasTensorFour (T : Scheme.{u})
+private instance (priority := 10000) properHasTensorFour (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasTensor₄ObjExt A B C D := by
   infer_instance
 
-private instance properHasGoodTensor12 (T : Scheme.{u})
+private instance (priority := 10000) properHasGoodTensor12 (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensor₁₂Tensor A B C := by
   infer_instance
 
-private instance properHasGoodTensor23 (T : Scheme.{u})
+private instance (priority := 10000) properHasGoodTensor23 (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensorTensor₂₃ A B C := by
@@ -212,7 +212,6 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
-set_option trace.profiler true in
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product `P` over the
 strictly henselian trait of models `M`, `N` of finite type along proper structure morphisms, with
