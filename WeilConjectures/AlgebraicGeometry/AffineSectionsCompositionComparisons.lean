@@ -193,21 +193,27 @@ theorem exists_affineSectionsCompositionComparisons
           Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (𝟙 (Spec B)))
             (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory).hom.app
           (DerivedCategory.Qh.obj J))  := by
-  obtain ⟨t, ht⟩ := underivedSectionsComparison f
-  obtain ⟨z, hz⟩ := underivedSectionsComparison (pullback.snd f g)
-  obtain ⟨b, hb⟩ := deriveSectionsComparison
+  let t := (underivedSectionsComparison f).choose
+  have ht := (underivedSectionsComparison f).choose_spec
+  let z := (underivedSectionsComparison (pullback.snd f g)).choose
+  have hz := (underivedSectionsComparison (pullback.snd f g)).choose_spec
+  have hb₀ := deriveSectionsComparison
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom)
     (affineGlobalSections (𝟙 (Spec R))) (affineGlobalSections f)
     (affineDerivedGlobalSections (𝟙 (Spec R))) (affineDerivedGlobalSections f)
     (affineGlobalSectionsDerivedIso (𝟙 (Spec R))) (affineGlobalSectionsDerivedIso f)
     t (affineSectionsAcyclic f)
-  obtain ⟨d, hd⟩ := deriveSectionsComparison
+  let b := hb₀.choose
+  have hb := hb₀.choose_spec
+  have hd₀ := deriveSectionsComparison
     (RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom)
     (affineGlobalSections (𝟙 (Spec B))) (affineGlobalSections (pullback.snd f g))
     (affineDerivedGlobalSections (𝟙 (Spec B)))
     (affineDerivedGlobalSections (pullback.snd f g))
     (affineGlobalSectionsDerivedIso (𝟙 (Spec B)))
     (affineGlobalSectionsDerivedIso (pullback.snd f g)) z (affineSectionsAcyclic _)
+  let d := hd₀.choose
+  have hd := hd₀.choose_spec
   let α := ((Scheme.ΓSpecIso R).inv ≫ ((𝟙 (Spec R)) : Spec R ⟶ Spec R).appTop).hom
   let δ := g.appTop.hom
   let β := ((Scheme.ΓSpecIso B).inv ≫ ((𝟙 (Spec B)) : Spec B ⟶ Spec B).appTop).hom
@@ -225,7 +231,7 @@ theorem exists_affineSectionsCompositionComparisons
       (affineGlobalSections (𝟙 (Spec B))) (ModuleCat.restrictScalars.{u} ρ) ≪≫
     Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (𝟙 (Spec B)))
       (ModuleCat.restrictScalars.{u} ρ).mapDerivedCategory
-  obtain ⟨r, hr⟩ := deriveSectionsComparison
+  have hr₀ := deriveSectionsComparison
     (RingedSpace.moduleDirectImage g.toLRSHom.toShHom)
     (affineGlobalSections (𝟙 (Spec R)))
     (affineGlobalSections (𝟙 (Spec B)) ⋙ ModuleCat.restrictScalars.{u} ρ)
@@ -233,6 +239,8 @@ theorem exists_affineSectionsCompositionComparisons
     (affineDerivedGlobalSections (𝟙 (Spec B)) ⋙
       (ModuleCat.restrictScalars.{u} ρ).mapDerivedCategory)
     (affineGlobalSectionsDerivedIso (𝟙 (Spec R))) ur v (affineSectionsAcyclic g)
+  let r := hr₀.choose
+  have hr := hr₀.choose_spec
   exact ⟨t, b, z, d, v, r, ht, hb, hz, hd, fun M x ↦ rfl, hr⟩
 
 end AlgebraicGeometry

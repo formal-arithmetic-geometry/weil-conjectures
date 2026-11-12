@@ -176,7 +176,9 @@ theorem affine_derivedHom_localized_evaluation
   have : IsGrothendieckAbelian.{u}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
     SheafOfModules.isGrothendieckAbelian _
-  obtain ⟨j, hj⟩ := affine_hom_kInjective_evaluation f H iH adj₀ h_eval
+  have hj₀ := affine_hom_kInjective_evaluation f H iH adj₀ h_eval
+  let j := hj₀.choose
+  have hj := hj₀.choose_spec
   let I := (CochainComplex.kInjectiveResolutionFunctor.{u}
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace))).obj K
   let s := (CochainComplex.toKInjectiveResolution.{u}
@@ -186,7 +188,8 @@ theorem affine_derivedHom_localized_evaluation
     (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ K).2
   have : IsIso (DerivedCategory.Q.map s) := inferInstance
   have : IsIso (β.app I) := comparison_isIso_on_kInjective H R β hR I
-  obtain ⟨c, hc⟩ := hj I inferInstance
+  let c := (hj I inferInstance).choose
+  have hc := (hj I inferInstance).choose_spec
   let q : DerivedCategory.Q.obj K ≅ DerivedCategory.Q.obj I :=
     asIso (DerivedCategory.Q.map s)
   let F := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
@@ -218,7 +221,9 @@ theorem affine_derivedHom_localized_evaluation
         (c.hom ≫ _ ≫ _) = _
     rw [hc, ← h_counit I]
     rw [← L.map_comp_assoc, IsIso.inv_hom_id, L.map_id, Category.id_comp]
-  obtain ⟨d₀, hd₀⟩ := transport_evaluation (R ⋙ L) G U adj.counit v j q dI hdI
+  have hd := transport_evaluation (R ⋙ L) G U adj.counit v j q dI hdI
+  let d₀ := hd.choose
+  have hd₀ := hd.choose_spec
   exact change_evaluation_iso G U v j ι d₀ (adj.counit.app _) hd₀
 
 end AlgebraicGeometry

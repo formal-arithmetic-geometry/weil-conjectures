@@ -132,16 +132,22 @@ theorem perfect_internalHom_pullback_isIso
   set_option backward.isDefEq.respectTransparency.types false in
   exact (by
     classical
-    obtain ⟨adj, _, adj', hadj, _, _, hadj'⟩ :=
-      scheme_derivedInternalHom_adjunction X
+    have ha := scheme_derivedInternalHom_adjunction X
+    let adj := ha.choose
+    let adj' := ha.choose_spec.choose_spec.choose
+    have hadj := ha.choose_spec.choose_spec.choose_spec.1
+    have hadj' := ha.choose_spec.choose_spec.choose_spec.2.2.2
     let P : schemeDerivedQCohCategory X :=
       ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩
-    obtain ⟨D, _, _, _, _, _, _, _, _, _, _, _, _, _, _,
-      ⟨p, _, _⟩, _⟩ :=
-      perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
+    have hp := perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
+    let D := hp.choose
+    let p := hp.choose_spec.choose_spec.choose_spec.2.2.choose_spec.2.2.2.choose_spec.2.2
+      |>.choose_spec.2.2.1.choose
     let := p
-    obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization g
+    have hm₀ := canonicalPullbackTensor_monoidal_realization g
       (fun A B ↦ t.hom.app (A, B)) ht
+    let m := hm₀.choose
+    have hm := hm₀.choose_spec
     let := m.toMonoidal
     have htensor (A B : schemeDerivedCategory X) :
         t.inv.app (A, B) = Functor.LaxMonoidal.μ (derivedPullback g) A B := by
