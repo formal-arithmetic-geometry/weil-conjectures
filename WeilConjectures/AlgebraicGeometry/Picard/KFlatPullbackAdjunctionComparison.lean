@@ -52,6 +52,7 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
 /-- For a K-flat source, the localized ordinary transpose computes the pinned derived
 transpose. The comparison is independent of the target complex and the chain map.
