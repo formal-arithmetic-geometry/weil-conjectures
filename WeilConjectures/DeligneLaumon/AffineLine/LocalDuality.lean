@@ -177,7 +177,6 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (ProEtaleWeilSheaf.constantTwistCompLowerStarIso k₀ l φ b).app P.obj ≪≫
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
-set_option maxHeartbeats 1000000 in
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
@@ -350,7 +349,6 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   rw [hqd]
   rfl
 
-set_option maxHeartbeats 1600000 in
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
 of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
