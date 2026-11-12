@@ -298,7 +298,6 @@ private theorem pullback_tensor_total_composition_chain
       reassoc_of% hθ', hi, reassoc_of% hm, reassoc_of% hb, hφ']
   exact hchain
 
-set_option profiler true in
 private theorem pullback_tensor_total_composition_localized_of_chain
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
@@ -390,9 +389,7 @@ private theorem pullback_tensor_total_composition_localized_of_chain
       DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap
         (b.hom.app P) (b.hom.app N) (curriedTensor _) (.up ℤ)) = _
   rw [hsol, Functor.map_comp, Functor.map_comp, Functor.map_comp]
-  rfl
 
-set_option profiler true in
 /-- Localization of the ordinary tensor/composition square.
 Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.
 (blueprint: lem-sc-pullback-tensor-total-composition-localized).
