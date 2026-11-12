@@ -23,9 +23,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   DerivedCategory.singleFunctors DerivedCategory.singleFunctorIsoCompQ
 attribute [local implicit_reducible] spCoefficientCommRings
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- Matching the concrete evaluation and restriction presentations needs extra reduction.
 /-- Source endpoint transport.  This is the coefficient-one calculation: the
 finite quotient followed by the restricted evaluation comparison is the
 integer coefficient map.  The proof is the coefficient-one section calculation,
@@ -44,7 +42,7 @@ theorem finiteBoundary_source_endpoint
         k.coefficientForget.inv.app (op n)) := by
   intro S e
   rw [← S.map_comp]
-  congr 1
+  apply congrArg S.map
   rw [← Iso.app_inv k.coefficientForget, Iso.eq_comp_inv]
   apply constantAb_ext_one
   let U := op (Scheme.ProEt.mk (𝟙 T))
@@ -62,7 +60,6 @@ theorem finiteBoundary_source_endpoint
     (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
   have ha := k.coefficient_one n U x (hx.trans hx')
   have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
-  change (k.coefficientForget.hom.app (op n)).hom.app U x = _
-  rw [ha, hi, Int.cast_one]
+  exact ha.trans ((hi.trans (Int.cast_one _)).symm)
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

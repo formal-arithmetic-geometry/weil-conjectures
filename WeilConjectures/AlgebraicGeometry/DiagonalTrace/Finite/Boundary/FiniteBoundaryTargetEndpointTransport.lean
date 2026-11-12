@@ -23,9 +23,7 @@ attribute [local implicit_reducible] spCoefficientCommRings
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
   cartierProRootMap
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- Converting the concrete sheaf module presentations requires extra reduction.
 /-- Target endpoint transport.  The finite root map, the inverse line
 comparison, the inverse restriction comparison and the coefficient lineForget
 map, followed by the Cartier root map, equal the Cartier root map.  The proof
@@ -52,7 +50,7 @@ theorem finiteBoundary_target_endpoint
         (pow_pos (Fact.out : l.Prime).pos _) hN) := by
   intro S e
   simp only [Functor.mapIso_inv, ← Functor.map_comp]
-  congr 1
+  apply congrArg S.map
   rw [← finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
   apply Sheaf.hom_ext
@@ -81,9 +79,7 @@ theorem finiteBoundary_target_endpoint
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
-  change ((cartierProRootMap _ _ _ _ _ _).hom.app U)
-    ((k.lineForget.hom.app (op n)).hom.app U w) = _
-  rw [ht, hi]
-  rfl
+  exact congrArg ((cartierProRootMap A (l ^ (n + 1)) hA T
+    (pow_pos (Fact.out : l.Prime).pos _) hN).hom.app U) (ht.trans hi)
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
