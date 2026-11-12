@@ -149,7 +149,7 @@ private theorem integralScalarConjugation_hom_app (K : C₁) :
     (integralScalarConjugation e₁ e₂ χ₁ χ₂ b).hom.app K =
       χ₂.inv.app (F₁.obj K) ≫ T₂.map (e₁.inv.app K) ≫ b.hom.app (I₁.obj K) ≫
         G₂.map (χ₁.hom.app K) ≫ e₂.hom.app (S₁.obj K) := by
-  simp [integralScalarConjugation, Category.assoc]
+  simp [integralScalarConjugation]
 
 variable [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ] [HasShift C₄ ℤ]
   [HasShift D₁ ℤ] [HasShift D₂ ℤ] [HasShift D₃ ℤ] [HasShift D₄ ℤ]
