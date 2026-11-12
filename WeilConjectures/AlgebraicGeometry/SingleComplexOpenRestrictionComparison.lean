@@ -107,7 +107,7 @@ theorem singleComplexBaseChange_openRestrictionComparison
     have hφ : singleComplexRestrictedCoefficient g' K K' φ
         (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj = δ ≫ R'.map φ := by
       dsimp only [δ, singleComplexRestrictedCoefficient, R']
-      simp only [Functor.map_id, Category.comp_id, Category.assoc]
+      simp only [R'.map_id, Category.comp_id, Category.assoc]
     simp only [Functor.map_comp, hb, hφ]
     have hn := b.inv.naturality φ
     dsimp only [Functor.comp_map] at hn
