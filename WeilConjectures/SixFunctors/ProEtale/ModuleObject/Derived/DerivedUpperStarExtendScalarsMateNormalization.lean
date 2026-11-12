@@ -41,6 +41,7 @@ private theorem derived_unique_fac
     Iso.refl_hom, NatTrans.id_app, Category.comp_id] using
     Functor.leftDerivedNatTrans_app LF LF' c c' W (𝟙 _) K
 
+set_option profiler true in
 /-- The specified nonflat derived scalar pullback comparison has the specified restriction mate.
 
 Source: proof step 2 of `lem-sp-original-integral-finite-quotient-mate-transport`, above
