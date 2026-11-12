@@ -381,13 +381,18 @@ theorem structure_derived_image_module_naturality
     let y : (H₁.obj K).val.presheaf.obj (op ⊤) :=
       Modules.Hom.app (topEdgeTruncatedCounit (𝟙 T) 1 K) ⊤
       (Modules.Hom.app (H₁.map α) ⊤ (affineLerayEquiv q ((affineLerayEquiv q).symm z)))
-    with_reducible change (H₁.obj K).val.presheaf.map (𝟙 (op ⊤)) y = y
+    with_unfolding_all change (H₁.obj K).val.presheaf.map (𝟙 (op ⊤)) y = y
     with_unfolding_all exact
       ConcreteCategory.congr_hom ((H₁.obj K).val.presheaf.map_id (op ⊤)) y
   rw [AddEquiv.apply_symm_apply] at hg'
-  rw [hg', hb, H.map_comp]
-  change Γ.map edge (H.map ψ.inv (H.map ψ.hom (H.map α z))) = _
-  have hh := ConcreteCategory.congr_hom (H.mapIso ψ).hom_inv_id (H.map α z)
-  exact congrArg (fun x ↦ Γ.map edge x) hh
+  calc
+    θ (H.map b z) = Γ.map edge (H.map α z) := by
+      dsimp only [θ, θiso]
+      rw [hb, H.map_comp]
+      change Γ.map edge (H.map ψ.inv (H.map ψ.hom (H.map α z))) = _
+      have hh := ConcreteCategory.congr_hom (H.mapIso ψ).hom_inv_id (H.map α z)
+      exact congrArg (fun x ↦ Γ.map edge x) hh
+    _ = affineLerayEquiv qY
+        (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) := hg'.symm
 
 end AlgebraicGeometry.Scheme
