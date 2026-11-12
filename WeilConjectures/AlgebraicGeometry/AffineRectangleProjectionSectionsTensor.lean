@@ -54,7 +54,6 @@ private theorem externalTensorAlgebraEquiv_tmul
     LinearEquiv.refl_apply]
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- Affine section comparisons require several nested scalar restriction instances.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary section modules of the two projection pullbacks on an affine rectangle
