@@ -94,8 +94,6 @@ structure FiniteComparison [G : NativeGeometry.{u} l]
       HEq (gamma.hom.app A) ((alpha A.stage).hom.app A.obj)) →
     IntegralNormalization l D hl P c F.source F.target stage F.change gamma
 
-set_option maxHeartbeats 400000 in
-set_option profiler true in
 -- Forgetting endpoint certificates compares two coefficient-category presentations.
 private theorem integralNormalization_of_components [G : NativeGeometry.{u} l]
     (F : CoefficientFamily l c) (stage : StageAction l D hl P c)
@@ -116,11 +114,15 @@ private theorem integralNormalization_of_components [G : NativeGeometry.{u} l]
     (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj
       ((rationalization.{u, u} l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K))
   have hcomponent := eq_of_heq h
-  rcases hnormal E K with ⟨A, B, r, hr, M₁, M₂, M₃, M₄, M₅,
-    a₀, a₁, a₂, a₃, a₄, a₅, h₀, h₁, h₂, h₃, h₄, h₅, hm⟩
-  exact ⟨A, B, r, hr.heq, M₁, M₂, M₃, M₄, M₅,
-    a₀, a₁, a₂, a₃, a₄, a₅, h₀.heq, h₁.heq, h₂.heq, h₃.heq, h₄.heq, h₅.heq,
-      (congrArg (sections l Y).mapDerivedCategory.map hcomponent).trans hm⟩
+  exact (hnormal E K).elim fun A hA ↦ hA.elim fun B hB ↦ hB.elim fun r hr ↦
+    hr.2.elim fun M₁ hM₁ ↦ hM₁.elim fun M₂ hM₂ ↦ hM₂.elim fun M₃ hM₃ ↦
+    hM₃.elim fun M₄ hM₄ ↦ hM₄.elim fun M₅ hM₅ ↦
+    hM₅.elim fun a₀ ha₀ ↦ ha₀.elim fun a₁ ha₁ ↦ ha₁.elim fun a₂ ha₂ ↦
+    ha₂.elim fun a₃ ha₃ ↦ ha₃.elim fun a₄ ha₄ ↦ ha₄.elim fun a₅ ha₅ ↦
+    ⟨A, B, r, hr.1.heq, M₁, M₂, M₃, M₄, M₅,
+      a₀, a₁, a₂, a₃, a₄, a₅, ha₅.1.heq, ha₅.2.1.heq, ha₅.2.2.1.heq,
+      ha₅.2.2.2.1.heq, ha₅.2.2.2.2.1.heq, ha₅.2.2.2.2.2.1.heq,
+      (congrArg (sections l Y).mapDerivedCategory.map hcomponent).trans ha₅.2.2.2.2.2.2⟩
 
 /-- The proper/open scalar mate is invertible on finite rational constructible inputs.
 Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15;

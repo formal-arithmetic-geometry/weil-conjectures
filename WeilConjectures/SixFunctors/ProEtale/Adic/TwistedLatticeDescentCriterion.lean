@@ -42,9 +42,16 @@ lemma comp_restrictPadicInt_map_hom_app {A B : AdicSheaf l T}
       φ.hom.hom.app T' (Φ.hom.app T' s) :=
   rfl
 
-set_option maxHeartbeats 2000000 in
-set_option profiler true in
--- The kernel unfolds the sections of the pushforward in the descent map.
+private lemma comp_restrictPadicInt_eq_zero {A B : AdicSheaf l T}
+    {Z : Sheaf (ProEt.topology T) Ab.{u + 1}}
+    (Φ : Z ⟶ ((AdicSheaf.restrictPadicInt T l).obj A).X) (φ : A ⟶ B)
+    (h : ∀ (T' : T.ProEtᵒᵖ) (s : Z.obj.obj T'),
+      φ.hom.hom.app T' (Φ.hom.app T' s) = 0) :
+    Φ ≫ ((AdicSheaf.restrictPadicInt T l).map φ).hom = 0 := by
+  ext T' s
+  rw [comp_restrictPadicInt_map_hom_app, h]
+  simp
+
 /-- **A criterion for landing in a descent**: a morphism of abelian sheaves into `f_* ℚ̄_ℓ,Vⁿ`
 whose sections satisfy `γ · ρ₁^* y = ρ₂^* y` is killed by the descent map of `γ`. -/
 lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
@@ -63,19 +70,15 @@ lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
         locallyFiniteFunctionsComp l (descentρ₁ f T').base.hom (y T' s j) =
       locallyFiniteFunctionsComp l (descentρ₂ f T').base.hom (y T' s i)) :
     Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom = 0 := by
-  ext T' s
-  have key : ((Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom).hom.app T') s =
-      0 := by
-    rw [comp_restrictPadicInt_map_hom_app]
-    refine comps_injective (B := pullback f f) (n := n)
-      (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (pullback.fst f f ≫ f)).obj T'.unop) ?_
-    refine (comps_descentMap f Γ T'.unop (Φ.hom.app T' s)).trans ?_
-    rw [comps_zero, hy T'.unop s]
-    funext i
-    rw [h T'.unop s i, sub_self]
-    rfl
-  rw [key]
-  simp
+  apply comp_restrictPadicInt_eq_zero Φ (descentMap f Γ)
+  intro T' s
+  refine comps_injective (B := pullback f f) (n := n)
+    (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (pullback.fst f f ≫ f)).obj T'.unop) ?_
+  refine (comps_descentMap f Γ T'.unop (Φ.hom.app T' s)).trans ?_
+  rw [comps_zero, hy T'.unop s]
+  funext i
+  rw [h T'.unop s i, sub_self]
+  rfl
 
 end Descent
 
