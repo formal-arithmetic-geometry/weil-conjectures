@@ -96,12 +96,10 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
       (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A₀.obj B₀.obj)) := by
     exact (h E).isIso φ₁ φ₂ hM hN hpb hP hgen hX hY hZ hb hle h₁ h₂ heM heN A₀.2 B₀.2
   -- bounds below of `A₀`, `B₀` and of their external product
-  obtain ⟨a, ha⟩ := A₀.2.1.1
-  obtain ⟨a', ha'⟩ := B₀.2.1.1
-  have : A₀.obj.IsGE (min a a') :=
-    DerivedCategory.TStructure.t.isGE_of_ge A₀.obj _ _ (min_le_left a a')
-  have : B₀.obj.IsGE (min a a') :=
-    DerivedCategory.TStructure.t.isGE_of_ge B₀.obj _ _ (min_le_right a a')
+  have : A₀.obj.IsGE (min A₀.2.1.1.choose B₀.2.1.1.choose) :=
+    DerivedCategory.TStructure.t.isGE_of_ge A₀.obj _ _ (min_le_left _ _)
+  have : B₀.obj.IsGE (min A₀.2.1.1.choose B₀.2.1.1.choose) :=
+    DerivedCategory.TStructure.t.isGE_of_ge B₀.obj _ _ (min_le_right _ _)
   have hAB : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Z)
       (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀.obj ⊗
         L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀.obj) :=
@@ -117,8 +115,7 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
   have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
   have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
   have key := (isIso_map_map_map_kunnethMap_iff_padicAlgCl ℓ E φ₁ φ₂
-    s
-    A₀.obj B₀.obj (min a a') c).1 (Functor.map_isIso _ _)
+    s A₀.obj B₀.obj (min A₀.2.1.1.choose B₀.2.1.1.choose) c).1 (Functor.map_isIso _ _)
   simpa only [s] using isIso_map_kunnethMap_of_iso _ _ φ₁ φ₂ eA.symm eB.symm key
 
 -- the Künneth maps of the derived categories of module objects are large terms
