@@ -179,6 +179,7 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
   exact boundedConstructibleBaseChange_id ℓ
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the identification of the trivial compactification of `f` with `f` unfolds the functors
 /-- **`Ex_!` for open immersions**, on the trivial compactifications: the compact-support exchange
