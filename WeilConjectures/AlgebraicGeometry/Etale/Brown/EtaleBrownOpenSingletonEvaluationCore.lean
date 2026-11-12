@@ -330,8 +330,7 @@ end MateCalculus
 variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-set_option profiler true in
--- The representative comparison unfolds both normalized derived open adjunctions.
+-- Compare representatives, then cancel using the abstract categorical identity.
 private theorem open_evaluation_mate
     (S : StrictEtaleCompactSupport O t c) (n : ℕ) :
     ((mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)).symm
@@ -377,8 +376,7 @@ private theorem open_evaluation_mate
   · rw [Category.assoc]
     exact S.property.2.2.2.2 n P
 
-set_option profiler true in
--- Two successive Hom transposes involve the full strict etale derived packages.
+-- Perform the two Hom transposes in the abstract mate-pasting lemma.
 /-- Explicit mate-pasting remainder for the open singleton evaluation.
 Source: Zheng, Construction 5.14 and Lemma 5.16.
 (blueprint: lem-pur-etale-brown-open-singleton-evaluation-core).
