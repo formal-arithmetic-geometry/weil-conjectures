@@ -34,9 +34,6 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the large existential adjunction type needs additional heartbeats.
 /--
 Source: literature/stacks-project/duality.tex, Tags 0AX2 and 0AX3
 (blueprint: lem-sc-finite-duality-derived-hom).
@@ -112,6 +109,14 @@ theorem finite_duality_derived_hom {X Y : Scheme.{u}}
           ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor.map
             φ.hom ≫ adjA.counit.app K.obj =
         comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom := by
+  let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) :=
+    inferInstance
+  let : Abelian.HasKInjectiveResolutions
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
+  let : Abelian.HasKInjectiveResolutions
+      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) := inferInstance
   obtain ⟨H, adjH, ι, hH⟩ :=
     exists_affine_derivedHom_evaluation_counit.{u, wY, wA} f
   obtain ⟨dH, hdH⟩ := hH K.obj

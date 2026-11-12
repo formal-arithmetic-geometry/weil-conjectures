@@ -109,10 +109,35 @@ private theorem compare_by_homEquiv
   rw [← Category.assoc, b.homEquiv_naturality_right]
   exact h
 
+/-- Forgetful compatibility of left comparisons follows from the two mate unit equations. -/
+private theorem comparison_forget_of_units
+    {M N A B : Type*} [Category M] [Category N] [Category A] [Category B]
+    (U : M ⥤ A) (V : N ⥤ B)
+    {L L' : M ⥤ N} {R R' : N ⥤ M} (a : L ⊣ R) (a' : L' ⊣ R')
+    {l l' : A ⥤ B} {r r' : B ⥤ A} (b : l ⊣ r) (b' : l' ⊣ r')
+    (e : L ⋙ V ≅ U ⋙ l) (e' : L' ⋙ V ≅ U ⋙ l')
+    (d : R' ≅ R) (c : L ≅ L') (d₀ : r' ≅ r) (c₀ : l ≅ l')
+    (hd : ∀ F, U.map (d.hom.app F) = d₀.hom.app (V.obj F))
+    (hu : ∀ G, a.unit.app G ≫ R.map (c.hom.app G) =
+      a'.unit.app G ≫ d.hom.app (L'.obj G))
+    (hc : ∀ G F (k : L.obj G ⟶ F), U.map (a.homEquiv G F k) =
+      b.homEquiv (U.obj G) (V.obj F) (e.inv.app G ≫ V.map k))
+    (he : ∀ G, U.map (a'.unit.app G) ≫ r'.map (e'.hom.app G) =
+      b'.unit.app (U.obj G))
+    (hm : ∀ G, b.unit.app G ≫ r.map (c₀.hom.app G) =
+      b'.unit.app G ≫ d₀.hom.app (l'.obj G)) (G : M) :
+    V.map (c.hom.app G) ≫ e'.hom.app G = e.hom.app G ≫ c₀.hom.app (U.obj G) := by
+  apply compare_by_homEquiv b (U.obj G) (e.app G) (e'.app G)
+    (V.map (c.hom.app G)) (c₀.hom.app (U.obj G))
+  rw [← hc G (L'.obj G) (c.hom.app G), a.homEquiv_apply, hu G, U.map_comp,
+    hd (L'.obj G), b.homEquiv_apply]
+  exact (paste_rectangle (U.map (a'.unit.app G))
+    (d₀.hom.app (V.obj (L'.obj G))) (r.map (e'.hom.app G))
+    (r'.map (e'.hom.app G)) (d₀.hom.app (l'.obj (U.obj G)))
+    (b'.unit.app (U.obj G)) (d₀.hom.naturality (e'.hom.app G))
+    (he G)).trans (hm (U.obj G)).symm
+
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- The dependent comparison package requires additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms for inverse
@@ -429,32 +454,22 @@ theorem etaleInverseImageCompositionModuleLinearCore
   · intro F
     ext W x
     rfl
-  · clear_value d c
+  · let ec : (LU ⋙ LV) ⋙ UZ ≅ UX ⋙ (lu ⋙ lv) :=
+      Functor.associator LU LV UZ ≪≫ isoWhiskerLeft LU eV ≪≫
+        (Functor.associator LU UY lv).symm ≪≫ isoWhiskerRight eU lv ≪≫
+        Functor.associator UX lu lv
+    have hc : ∀ G F (k : (LU ⋙ LV).obj G ⟶ F),
+        UX.map ((aU.comp aV).homEquiv G F k) =
+        (au.comp av).homEquiv (UX.obj G) (UZ.obj F) (ec.inv.app G ≫ UZ.map k) := by
+      intro G F k
+      simpa only [ec, Iso.trans_inv, NatTrans.comp_app, isoWhiskerLeft_inv,
+        isoWhiskerRight_inv, Functor.associator_inv_app, Functor.associator_hom_app,
+        Functor.id_obj, Category.id_comp, Category.comp_id, Category.assoc] using hcomp G F k
     intro G
-    let ec := eV.app (LU.obj G) ≪≫
-      lv.mapIso (eU.app G)
-    have hec : ec.inv = lv.map (eU.inv.app G) ≫ eV.inv.app (LU.obj G) := rfl
-    change UZ.map (c.hom.app G) ≫ eUV.hom.app G =
-      eV.hom.app (LU.obj G) ≫ lv.map (eU.hom.app G) ≫ c0.hom.app (UX.obj G)
-    rw [← Category.assoc]
-    change UZ.map (c.hom.app G) ≫ eUV.hom.app G = ec.hom ≫ c0.hom.app (UX.obj G)
-    apply compare_by_homEquiv (au.comp av) (UX.obj G) ec (eUV.app G)
-      (UZ.map (c.hom.app G)) (c0.hom.app (UX.obj G))
-    rw [hec, Category.assoc]
-    change (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
-      (lv.map (eU.inv.app G) ≫
-        eV.inv.app (LU.obj G) ≫ UZ.map (c.hom.app G)) ≫ _ = _
-    rw [← hcomp G (LUV.obj G) (c.hom.app G), (aU.comp aV).homEquiv_apply,
-      hu G, UX.map_comp]
-    conv_lhs =>
-      arg 1
-      arg 2
-      rw [hd (LUV.obj G)]
-    conv_rhs => erw [(au.comp av).homEquiv_apply]
-    exact (paste_rectangle (UX.map (aUV.unit.app G))
-      (d0.hom.app (UZ.obj (LUV.obj G))) ((pv ⋙ pu).map (eUV.hom.app G))
-      (puv.map (eUV.hom.app G)) (d0.hom.app (luv.obj (UX.obj G)))
-      (auv.unit.app (UX.obj G)) (d0.hom.naturality (eUV.hom.app G))
-      (hunit G)).trans (hmate (UX.obj G)).symm
+    have hh := comparison_forget_of_units UX UZ (aU.comp aV) aUV (au.comp av) auv
+      ec eUV d c d0 c0 hd hu hc hunit hmate G
+    simpa only [ec, Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+      isoWhiskerRight_hom, Functor.associator_inv_app, Functor.associator_hom_app,
+      Functor.id_obj, Category.id_comp, Category.comp_id, Category.assoc] using hh
 
 end AlgebraicGeometry

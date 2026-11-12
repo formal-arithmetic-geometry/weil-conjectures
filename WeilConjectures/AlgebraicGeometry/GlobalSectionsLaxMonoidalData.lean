@@ -39,9 +39,6 @@ local instance globalSectionsLaxDataClosed :
     MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Comparing evaluated tensor maps with section identities requires extra reduction steps.
 /-- The canonical lax structure has the concrete unit and tensor maps.
 Source: Stacks, Section 17.16 (Tag 01CA), the sheaf tensor construction;
 WeilConjectures.AlgebraicGeometry.Modules.TensorSection, the section tensor identities.
@@ -78,27 +75,62 @@ theorem globalSectionsFunctor_laxMonoidal_data
     apply ModuleCat.hom_ext
     apply TensorProduct.ext'
     intro x y
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
+      ModuleCat.MonoidalCategory.whiskerLeft_apply,
+      ModuleCat.MonoidalCategory.whiskerRight_apply,
+      ModuleCat.MonoidalCategory.associator_hom_apply,
+      ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
+      ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
+      moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
     exact (whiskerRight_app_tmulSection (X := X) (N := P) (U := ⊤) f x y).symm
   · intro M N P f
     apply ModuleCat.hom_ext
     apply TensorProduct.ext'
     intro x y
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
+      ModuleCat.MonoidalCategory.whiskerLeft_apply,
+      ModuleCat.MonoidalCategory.whiskerRight_apply,
+      ModuleCat.MonoidalCategory.associator_hom_apply,
+      ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
+      ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
+      moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
     exact (whiskerLeft_app_tmulSection (X := X) (M := P) (U := ⊤) f x y).symm
   · intro M N P
     apply ModuleCat.hom_ext
     apply TensorProduct.ext_threefold
     intro x y z
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
+      ModuleCat.MonoidalCategory.whiskerLeft_apply,
+      ModuleCat.MonoidalCategory.whiskerRight_apply,
+      ModuleCat.MonoidalCategory.associator_hom_apply,
+      ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
+      ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
+      moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
     exact associator_hom_app_tmulSection (X := X) (M := M) (N := N) (P := P)
       (U := ⊤) x y z
   · intro M
     apply ModuleCat.hom_ext
     apply TensorProduct.ext'
     intro r s
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
+      ModuleCat.MonoidalCategory.whiskerLeft_apply,
+      ModuleCat.MonoidalCategory.whiskerRight_apply,
+      ModuleCat.MonoidalCategory.associator_hom_apply,
+      ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
+      ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
+      moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
     exact (leftUnitor_hom_app_tmulSection (X := X) (M := M) (U := ⊤) r s).symm
   · intro M
     apply ModuleCat.hom_ext
     apply TensorProduct.ext'
     intro s r
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
+      ModuleCat.MonoidalCategory.whiskerLeft_apply,
+      ModuleCat.MonoidalCategory.whiskerRight_apply,
+      ModuleCat.MonoidalCategory.associator_hom_apply,
+      ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
+      ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
+      moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
     exact (rightUnitor_hom_app_tmulSection (X := X) (M := M) (U := ⊤) r s).symm
 
 end
