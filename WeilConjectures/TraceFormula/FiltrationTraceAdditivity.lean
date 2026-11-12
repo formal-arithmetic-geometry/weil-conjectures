@@ -19,7 +19,8 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` with 
   pieces `K_U = j_! Lj^* K` and `K_Z = Ri_* Li^* K` of the localization triangle
   `K_U ⟶ K ⟶ K_Z ⟶` compatible with `u`; they are the open piece coefficient `u_U` and the
   pushforward `u_Z` of the restriction `u_{|Z}` of `u` to `Z`, whose exceptional adjoint is
-  `Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K`
+  `Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K`, and `(u_U, u, u_Z)` is a
+  morphism of the localization triangles under `Lc₂^*` and `Rc₁^!`
   (`ProEtale.CondensedRing.Correspondence.openPieceCoeff_closedPieceCoeff_spec`, blueprint
   `lemma-lift-correspondence-invariant-decomposition--1`).
 * For a finite filtration `0 = M₀ ⟶ M₁ ⟶ ⋯ ⟶ Mₙ` given by distinguished triangles
@@ -27,9 +28,10 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` with 
   forming morphisms of these triangles, the trace class of the coefficient map on `Mₙ` is the sum
   of the trace classes of the graded pieces, provided the corner morphism groups of
   `Correspondence.traceClass_eq_add_of_distTriang` vanish at each step
-  (`ProEtale.CondensedRing.Correspondence.traceClassWithCoeff_eq_sum_of_distTriang`, blueprint
-  `proposition-additivity-trace-classes--1`). The vanishing of the corner groups replaces the
-  lift of the coefficient maps to the filtered derived category used in the blueprint.
+  (`ProEtale.CondensedRing.Correspondence.traceClassWithCoeff_eq_sum_of_distTriang`). This is
+  the case of blueprint `proposition-additivity-trace-classes--1` under these vanishing
+  hypotheses; the node itself assumes only a lift of the coefficient maps to the filtered derived
+  category, which is not yet available, and stays open.
 
 -/
 
@@ -71,7 +73,16 @@ with open complement `U` such that `c₂` maps `C_Z = c₁⁻¹(Z)` into `Z` (so
 2. the closed piece coefficient `u_Z = [i, i']_! u_{|Z}` is the unique coefficient map on
    `K_Z = Ri_* Li^* K` compatible with `u` along the unit `K ⟶ K_Z`;
 3. the exceptional adjoint of the restriction `u_{|Z}` of `u` to the correspondence
-   `c_Z : C_Z ⟶ Z × Z` is `Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K`. -/
+   `c_Z : C_Z ⟶ Z × Z` is `Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K`;
+4. for every distinguished localization triangle `T = (K_U ⟶ K ⟶ K_Z ⟶)`, the maps
+   `(u_U, u, u_Z)` form a morphism of triangles `Lc₂^* T ⟶ Rc₁^! T`, so they are the graded
+   pieces of a lift of `u` to the two-step filtered object `T`.
+
+The first three items are `eq_openPieceCoeff_of_comp_map_counit`,
+`eq_closedPieceCoeff_of_upperStar_map_unit_comp` and
+`homEquiv_symm_restrictedCoeffOfIsPullback`. As in the rest of this API, the set-theoretic
+condition `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)` of the blueprint is replaced by the scheme-theoretic factorisation
+`w₂ : i' ≫ c₂ = c_{2Z} ≫ i`. -/
 theorem openPieceCoeff_closedPieceCoeff_spec (U : X.left.Opens)
     (hUi : IsCompl (Set.range (opensOverι U).left.base) (Set.range i.left.base))
     (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i) :
@@ -95,44 +106,63 @@ theorem openPieceCoeff_closedPieceCoeff_spec (U : X.left.Opens)
           c.u ≫ (boundedConstructibleUpperShriek ℓ c.c₁).map
             ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) ↔
         v = (c.closedPieceDiagram sq w₂).pushforwardCoeff) ∧
-    haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-    ((boundedConstructibleUpperShriekAdjunction ℓ c₁Z).homEquiv _ _).symm
-        (c.restrictClosed sq w₂).u =
-      (boundedConstructibleLowerShriek ℓ c₁Z).map (upperStarIsoOfComm w₂ K).hom ≫
-        inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K)) ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
-          (((boundedConstructibleUpperShriekAdjunction ℓ c.c₁).homEquiv _ _).symm c.u) := by
-  refine ⟨fun v ↦ ⟨c.eq_openPieceCoeff_of_comp_map_counit U hUi sq w₂ v, ?_⟩,
-    fun v ↦ ⟨c.eq_closedPieceCoeff_of_upperStar_map_unit_comp U hUi sq w₂ v, ?_⟩,
-    homEquiv_symm_restrictedCoeffOfIsPullback sq w₂ K c.u⟩
+    (haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq;
+      ((boundedConstructibleUpperShriekAdjunction ℓ c₁Z).homEquiv _ _).symm
+          (c.restrictClosed sq w₂).u =
+        (boundedConstructibleLowerShriek ℓ c₁Z).map (upperStarIsoOfComm w₂ K).hom ≫
+          inv ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K)) ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
+            (((boundedConstructibleUpperShriekAdjunction ℓ c.c₁).homEquiv _ _).symm c.u)) ∧
+    ∀ δ, Triangle.mk
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+          (opensOverι U)).counit.app K)
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) δ ∈ distTriang _ →
+      ∃ φ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).mapTriangle.obj
+          (Triangle.mk
+            ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+              (opensOverι U)).counit.app K)
+            ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) δ) ⟶
+        (boundedConstructibleUpperShriek ℓ c.c₁).mapTriangle.obj
+          (Triangle.mk
+            ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
+              (opensOverι U)).counit.app K)
+            ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) δ),
+        φ.hom₁ = c.openPieceCoeff U (c.preimage_le_of_isPullback U hUi sq w₂) ∧
+          φ.hom₂ = c.u ∧ φ.hom₃ = (c.closedPieceDiagram sq w₂).pushforwardCoeff := by
+  have h₂ := fun v ↦ (⟨c.eq_closedPieceCoeff_of_upperStar_map_unit_comp U hUi sq w₂ v,
+    by rintro rfl; exact c.upperStar_map_unit_comp_closedPieceCoeff sq w₂⟩ :
+      _ ↔ v = (c.closedPieceDiagram sq w₂).pushforwardCoeff)
+  refine ⟨fun v ↦ ⟨c.eq_openPieceCoeff_of_comp_map_counit U hUi sq w₂ v, ?_⟩, h₂,
+    homEquiv_symm_restrictedCoeffOfIsPullback sq w₂ K c.u, fun δ hT ↦ ?_⟩
   · rintro rfl
     exact c.openPieceCoeff_comp_map_counit U _
-  · rintro rfl
-    exact c.upperStar_map_unit_comp_closedPieceCoeff sq w₂
+  obtain ⟨w, hw₂, hw₃⟩ := complete_distinguished_triangle_morphism _ _
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map_distinguished
+      _ hT)
+    ((boundedConstructibleUpperShriek ℓ c.c₁).map_distinguished _ hT)
+    (c.openPieceCoeff U (c.preimage_le_of_isPullback U hUi sq w₂)) c.u
+    (c.openPieceCoeff_comp_map_counit U _).symm
+  have hw : w = (c.closedPieceDiagram sq w₂).pushforwardCoeff := (h₂ w).1 hw₂
+  subst hw
+  exact ⟨Triangle.homMk _ _ (c.openPieceCoeff U (c.preimage_le_of_isPullback U hUi sq w₂)) c.u
+    (c.closedPieceDiagram sq w₂).pushforwardCoeff (c.openPieceCoeff_comp_map_counit U _).symm
+    hw₂ hw₃, rfl, rfl, rfl⟩
 
 end Decomposition
 
-variable {c} in
-/-- The trace class of a coefficient map on a zero object vanishes. -/
-lemma FixedLocus.traceClassWithCoeff_eq_zero_of_isZero (F : c.FixedLocus)
-    {M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hM : IsZero M)
-    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj M ⟶
-      (boundedConstructibleUpperShriek ℓ c.c₁).obj M) :
-    F.traceClassWithCoeff M v = 0 := by
-  have h : IsZero (externalProduct ℓ M (verdierDual ℓ M)) := by
-    rw [IsZero.iff_id_eq_zero, ← externalProductMap_id, hM.eq_of_src (𝟙 M) 0,
-      externalProductMap_zero_left]
-  rw [FixedLocus.traceClassWithCoeff_eq, h.eq_of_src (evaluationKernel ℓ M) 0, comp_zero,
-    map_zero]
-
-/-- **Additivity of trace classes along a finite filtration** (blueprint
-`proposition-additivity-trace-classes--1`): let `0 = M₀ ⟶ M₁ ⟶ ⋯ ⟶ Mₙ` be a finite filtration
-with graded pieces `G_a`, given by distinguished triangles `M_a ⟶ M_{a+1} ⟶ G_a ⟶`, and let
-`v_a`, `w_a` be coefficient maps on the support of `c` on `M_a` and `G_a` forming, at each step,
-a morphism of the triangles `Lc₂^* (-)` and `Rc₁^! (-)`. If the corner morphism groups of
+/-- **Additivity of trace classes along a finite filtration, under vanishing hypotheses** (the
+case of blueprint `proposition-additivity-trace-classes--1` where the corner morphism groups
+vanish): let `0 = M₀ ⟶ M₁ ⟶ ⋯ ⟶ Mₙ` be a finite filtration with graded pieces `G_a`, given by
+distinguished triangles `M_a ⟶ M_{a+1} ⟶ G_a ⟶`, and let `v_a`, `w_a` be coefficient maps on the
+support of `c` on `M_a` and `G_a` forming, at each step, a morphism of the triangles
+`Lc₂^* (-)` and `Rc₁^! (-)`. If the corner morphism groups of
 `Correspondence.traceClass_eq_add_of_distTriang` vanish at each step, then
-`Tr_c(vₙ) = ∑_a Tr_c(w_a)`. -/
+`Tr_c(vₙ) = ∑_a Tr_c(w_a)`.
+
+The blueprint node assumes instead only a lift of the coefficient map to the filtered derived
+category, which is not available; these vanishing hypotheses are much stronger and fail for
+typical filtrations, so this is not the node itself. -/
 theorem traceClassWithCoeff_eq_sum_of_distTriang (F : c.FixedLocus) (n : ℕ)
     (M G : ℕ → Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (ι : ∀ a, M a ⟶ M (a + 1))
     (π : ∀ a, M (a + 1) ⟶ G a) (δ : ∀ a, G a ⟶ (M a) ⟦(1 : ℤ)⟧)
@@ -156,7 +186,8 @@ theorem traceClassWithCoeff_eq_sum_of_distTriang (F : c.FixedLocus) (n : ℕ)
     F.traceClassWithCoeff (M n) (v n) =
       ∑ a ∈ Finset.range n, F.traceClassWithCoeff (G a) (w a) := by
   induction n with
-  | zero => exact F.traceClassWithCoeff_eq_zero_of_isZero hM (v 0)
+  | zero =>
+    exact (c.withCoeff (M 0) (v 0)).traceClass_eq_zero_of_isZero _ (Functor.map_isZero _ hM)
   | succ n ih =>
     have hn := Nat.lt_succ_self n
     rw [Finset.sum_range_succ, ← ih (fun a ha ↦ hT a (ha.trans hn)) (fun a ha ↦ hv a (ha.trans hn))
