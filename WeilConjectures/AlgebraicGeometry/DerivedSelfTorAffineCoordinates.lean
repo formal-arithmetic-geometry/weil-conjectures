@@ -33,9 +33,7 @@ namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
 -- The nested hypotheses keep their documented names although the conclusion is nondependent.
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Elaborating the two restricted tensor lifts needs additional heartbeats.
 /-- The intrinsic derived self-tensor of a closed-immersion quotient has normalized
 projective-resolution coordinates on affine opens. The restriction equation holds
 for any augmented quotient-resolution comparison, whose existence is not asserted here.
@@ -107,10 +105,10 @@ theorem exists_derived_selfTor_affine_coordinates
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
-  obtain ⟨c, hc⟩ := exists_derived_selfTor_chosen_affine_coordinates i n
+  rcases exists_derived_selfTor_chosen_affine_coordinates i n with ⟨c, hc⟩
   refine ⟨c, ?_⟩
   intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk
-  obtain ⟨a₀, k₀, ha₀, hk₀, hnat⟩ := hc V U h hbasic
+  rcases hc V U h hbasic with ⟨a₀, k₀, ha₀, hk₀, hnat⟩
   have hψeq : Ideal.quotientMap J φ
       (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx) = ψ := by
     apply RingHom.ext
@@ -118,8 +116,10 @@ theorem exists_derived_selfTor_affine_coordinates
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
     exact (hψ x).symm
   rw [hψeq] at ha₀ hk₀
-  obtain ⟨H⟩ := ModuleCat.quotient_tensor_resolution_lift_homotopy
-    I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+  have hH : Nonempty (Homotopy k₀ k) :=
+    ModuleCat.quotient_tensor_resolution_lift_homotopy
+      (A := A) (C := C) I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+  rcases hH with ⟨H⟩
   have heq := H.homologyMap_eq n
   intro e x
   simpa only [heq] using hnat x
