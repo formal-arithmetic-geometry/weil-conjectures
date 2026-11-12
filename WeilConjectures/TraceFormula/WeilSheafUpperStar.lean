@@ -62,7 +62,6 @@ attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod 
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option trace.profiler true in
 /-- The commutation `H^n ⋙ f^* ≅ Lf^* ⋙ H^n` of the exact pullbacks of module objects with
 homology is compatible with the composition isomorphisms, at an object. -/
 lemma leftDerivedFunctorHomologyFunctorIso_upperStarComp {X Y Z : Scheme.{u}} (a : X ⟶ Y)
