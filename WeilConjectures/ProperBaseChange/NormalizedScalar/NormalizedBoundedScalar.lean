@@ -172,8 +172,6 @@ instance boundedExtensionTriangulated : (boundedExtension l E T).IsTriangulated 
   unfold boundedExtension
   infer_instance
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- Comparing the inherited full-subcategory actions unfolds the large coefficient tensor functor.
 /-- Derived scalar extension preserves each integral scalar identity with its actual value.
 Source: termwise scalar balancing.
