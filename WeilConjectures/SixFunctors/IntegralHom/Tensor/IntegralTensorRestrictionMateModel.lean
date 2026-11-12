@@ -231,6 +231,22 @@ private theorem transpose_iso_target (X Y : A) (f : F.obj X ⟶ F.obj Y)
   exact transpose_comparison q r F V a L U adj e h X (F.obj Y) f hunit
 end Comparison
 
+private theorem tensor_representative_naturality_second
+    (K : ObjectProperty C) (B : C ⥤ C ⥤ C) (q : C ⥤ D) (S : D × D ⥤ D)
+    (rep : (K.ι.prod K.ι) ⋙ Functor.uncurry.obj B ⋙ q ≅
+      (K.ι ⋙ q).prod (K.ι ⋙ q) ⋙ S)
+    {P Z Q : C} (hP : K P) (hZ : K Z) (hQ : K Q) (f : Z ⟶ Q) :
+    (rep.app (⟨P, hP⟩, ⟨Z, hZ⟩)).hom ≫
+        S.map (Prod.mkHom (𝟙 (q.obj P)) (q.map f)) =
+      q.map ((B.obj P).map f) ≫ (rep.app (⟨P, hP⟩, ⟨Q, hQ⟩)).hom := by
+  have hn := rep.hom.naturality
+    (X := (⟨P, hP⟩, ⟨Z, hZ⟩)) (Y := (⟨P, hP⟩, ⟨Q, hQ⟩))
+    (𝟙 _, ObjectProperty.homMk f)
+  change q.map ((B.map (𝟙 P)).app Z ≫ (B.obj P).map f) ≫ _ =
+    _ ≫ S.map (Prod.mkHom (q.map (𝟙 P)) (q.map f)) at hn
+  erw [B.map_id, NatTrans.id_app, Category.id_comp, q.map_id] at hn
+  exact hn.symm
+
 section Representatives
 variable {A B : Type*} [Category A] [Category B]
 
@@ -1131,11 +1147,11 @@ theorem restrictionTensor_mate_model
   have hF : integralReductionChangeOfRings l E X D hl n =
       scalarReductionExtension l E X n := rfl
   have normZ := m.normalization P Z hP hZ₀
-  rw [hF] at normZ
+  dsimp only [hF] at normZ
   obtain ⟨hFP, hFZ, betaZ₀, hiZ₀, hbZ, hnZ⟩ := normZ
   have hQ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Q := hQ
   have normQ := m.normalization P Q hP hQ₀
-  rw [hF] at normQ
+  dsimp only [hF] at normQ
   obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := normQ
   let betaZ := betaZ₀
   let betaQ := betaQ₀
@@ -1150,18 +1166,9 @@ theorem restrictionTensor_mate_model
     MateOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ (b Q) hbZ hbQ (hb Q)
   let repZ := m.target.representative.app (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩)
   let repQ := m.target.representative.app (⟨F.obj P, hFP'⟩, ⟨F.obj Q, hFQ⟩)
-  have hr := m.target.representative.hom.naturality
-    (X := (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩))
-    (Y := (⟨F.obj P, hFP'⟩, ⟨F.obj Q, hFQ⟩)) (𝟙 _, ObjectProperty.homMk t')
-  have hr' : repZ.hom ≫ m.target.tensor.map
-      (Prod.mkHom (𝟙 (r.obj (F.obj P))) (r.map t')) =
-        r.map (T'.map t') ≫ repQ.hom := by
-    change r.map ((((totalTensor.{u, u} X S).map (𝟙 (F.obj P))).app (F.obj Z)) ≫
-      T'.map t') ≫ repQ.hom = repZ.hom ≫
-      m.target.tensor.map (Prod.mkHom (r.map (𝟙 (F.obj P))) (r.map t')) at hr
-    erw [(totalTensor.{u, u} X S).map_id, NatTrans.id_app, Category.id_comp,
-      r.map_id] at hr
-    exact hr.symm
+  have hr' := GenericMate.tensor_representative_naturality_second
+    (flat.{u, u} X S) (totalTensor.{u, u} X S) r m.target.tensor
+    m.target.representative hFP hFZ hFQ t'
   have hTPZ : flat.{u, u} X R (TP.obj Z) :=
     coefficientTotalTensor_isKFlat.{u, u + 1, u} (Scheme.ProEt.topology X) R P Z hP hZ
   have hh := GenericMate.representative_mate a.tensor m.target.tensor L V adj m.mu
