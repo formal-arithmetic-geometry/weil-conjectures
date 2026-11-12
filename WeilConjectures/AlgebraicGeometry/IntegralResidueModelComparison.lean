@@ -437,7 +437,6 @@ attribute [local irreducible] scalarMap residueMap IntegralConstantModel.modules
   residueExtensionIso residueDerivedComposite residueDerivedSquare residueDiscreteIso
   residueSiteScalarSquare residueScalarSquare residueSmallScalarSquare
 
-set_option maxHeartbeats 400000 in
 -- The exact restriction squares instantiate several derived scalar adjunctions.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective

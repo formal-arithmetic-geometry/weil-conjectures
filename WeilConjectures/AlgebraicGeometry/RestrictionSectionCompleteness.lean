@@ -272,7 +272,6 @@ private theorem completeElement_iff_towerIso
     (eL.symm.op.prod eK.symm)
   exact ⟨fun h ↦ h.of_iso eH.symm, fun h ↦ h.of_iso eH⟩
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the four exact-functor factorization squares exceeds the default heartbeats.
 /-- Local completeness at one section is unchanged by restricting scalars.
 Source: Stacks Project, algebraization.tex, Tag 099C, proof, last two sentences.

@@ -478,7 +478,6 @@ open Etale
 
 variable {X : Scheme.{u}}
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the colimits of shape `J` in the category of sheaves are found by a long instance search
 /-- **Filtered unions of subsheaves, indexed by a large category.** The variant of
 `AlgebraicGeometry.Etale.isColimitOfMonoOfLocallySurjective` for filtered diagrams indexed by a

@@ -79,9 +79,7 @@ private lemma sectionEquiv_zero {X : Scheme.{u}} (U : X.Opens)
   have h := sectionEquiv_comp U (0 : (freeAbelianSheaf X).obj U ⟶ F) (0 : F ⟶ F)
   simpa using h
 
-set_option maxHeartbeats 400000 in
 -- Comparing Ext and section cocycles elaborates several adjunctions and the derived category.
-set_option synthInstance.maxHeartbeats 2000000 in
 /-- Section cocycles of an injective resolution represent object cohomology, naturally
 in the open, and section coboundaries represent zero.
 
@@ -181,7 +179,6 @@ private theorem exact_sheaf_section_locally_boundary {X : Scheme.{u}}
         ((Limits.kernel S.g).obj.map f.op k) := congrArg _ ht
     _ = S.X₂.obj.map f.op s := by rw [hnat, hk]
 
-set_option synthInstance.maxHeartbeats 2000000 in
 -- Cohomology uses the Ext localization instance for Zariski sheaves.
 /-- Positive-degree cohomology classes on a scheme are locally zero.
 

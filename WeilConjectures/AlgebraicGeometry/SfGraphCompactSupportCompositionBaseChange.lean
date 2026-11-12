@@ -281,7 +281,6 @@ private noncomputable def elementaryInterchange
     Functor.isoWhiskerRight (Functor.associator _ _ _) _ ≪≫
     Functor.associator _ _ _
 
-set_option maxHeartbeats 800000 in
 -- Comparing the explicit interchange words requires their full component normalization.
 private theorem elementaryInterchange_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -837,7 +836,6 @@ private theorem paste_word
     reassoc_of% hn, ← reassoc_of% hg]
 
 -- The component calculation instantiates five derived exchange identities.
-set_option maxHeartbeats 800000 in
 -- The explicit factorwise derived-category calculation exceeds the default heartbeat budget.
 private theorem diagramRawInterchange_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]

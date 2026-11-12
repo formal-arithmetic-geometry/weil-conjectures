@@ -70,7 +70,6 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] CondensedRing.upperStarLowerStarAdjunction
   CondensedRing.comapUpperStarIso CondensedRing.comapLowerStarIso
   profinitePointModuleForgetPullbackIso
-set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
 private theorem comapUpperStar_forget
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -118,7 +117,6 @@ private theorem comapUpperStar_inv_forget_private
 (used by `import all` importers; linter.privateModule). -/
 alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
 
-set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
 private theorem ordinary_vertical_unit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
