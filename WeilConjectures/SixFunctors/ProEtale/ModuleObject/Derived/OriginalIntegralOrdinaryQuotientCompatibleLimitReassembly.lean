@@ -193,7 +193,7 @@ private theorem quotient_sections_separated
     funext n
     change T.map (Pi.π Q n.as) (T.map (Pi.lift q) x) =
       T.map (Pi.π Q n.as) (T.map (Pi.lift q) y)
-    have hp := congrArg T.map (Pi.lift_π q n.as)
+    have hp := congrArg T.map (Pi.lift_comp_π q n.as)
     rw [Functor.map_comp] at hp
     exact (ConcreteCategory.congr_hom hp x).trans
       ((hxy n.as).trans (ConcreteCategory.congr_hom hp y).symm)
@@ -245,6 +245,7 @@ private theorem quotient_hom_lifts_finitePresentation
     intro n
     simpa [A, OriginalIntegralQuotientSequence.augmentation] using
       congrArg (fun t ↦ t ≫ Pi.π _ n) hg)
+  have : Mono (Pi.lift qN) := hA
   have sep := quotient_sections_separated F N
     (fun n ↦ cokernel (ell ^ (n + 1) • 𝟙 N)) qN
   obtain ⟨g, hg⟩ := lift_sectionwise (F.functor.obj N) (F.functor.obj W)
@@ -256,6 +257,135 @@ private theorem quotient_hom_lifts_finitePresentation
   refine ⟨F.functor.preimage g, fun n ↦ ?_⟩
   apply F.functor.map_injective
   simpa only [Functor.map_comp, Functor.map_preimage] using hg n
+
+private theorem quotient_lift_obstruction_map_zero
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasLimitsOfShape (Discrete ℕ) C]
+    (ell : ℕ) (L : C ⥤ D) [L.Additive] [PreservesFiniteColimits L]
+    [PreservesLimitsOfShape (Discrete ℕ) L]
+    (M W : C) (a : ℕ → (W ⟶ M))
+    (ha : ∀ n m, n ≤ m → a m ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M) =
+      a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M))
+    (hcomplete : ∀ b : ℕ → (L.obj W ⟶ L.obj M),
+      (∀ n m, n ≤ m → b m ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M)) =
+        b n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M))) →
+      ∃ g : L.obj W ⟶ L.obj M, ∀ n,
+        g ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M)) =
+          b n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M))) :
+    L.map (Pi.lift (fun n ↦ a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M)) ≫
+      cokernel.π (OriginalIntegralQuotientSequence.augmentation ell M)) = 0 := by
+  let Q (n : ℕ) := cokernel (ell ^ (n + 1) • 𝟙 M)
+  let q (n : ℕ) := cokernel.π (ell ^ (n + 1) • 𝟙 M)
+  let A := OriginalIntegralQuotientSequence.augmentation ell M
+  let t : W ⟶ ∏ᶜ Q := Pi.lift (fun n ↦ a n ≫ q n)
+  have hcompat (n m : ℕ) (hnm : n ≤ m) :
+      L.map (a m) ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M)) =
+        L.map (a n) ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M)) := by
+    have hz : (a m - a n) ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M) = 0 := by
+      rw [Preadditive.sub_comp, ha n m hnm, sub_self]
+    have h := map_quotient_zero L (a m - a n) _ hz
+    simpa only [Functor.map_sub, Preadditive.sub_comp, sub_eq_zero] using h
+  obtain ⟨g, hg⟩ := hcomplete (fun n ↦ L.map (a n)) hcompat
+  have he : g ≫ L.map A = L.map t := by
+    apply (isLimitOfPreserves L (limit.isLimit (Discrete.functor Q))).hom_ext
+    intro n
+    change (g ≫ L.map A) ≫ L.map (Pi.π Q n.as) =
+      L.map t ≫ L.map (Pi.π Q n.as)
+    rw [Category.assoc, ← L.map_comp, ← L.map_comp]
+    have hπ : A ≫ Pi.π Q n.as = q n.as := by
+      simp [A, q, Q, OriginalIntegralQuotientSequence.augmentation]
+    rw [hπ]
+    simpa only [t, q, Pi.lift_comp_π, L.map_comp] using
+      quotient_lift_map L g (a n.as) (ell ^ (n.as + 1)) (hg n.as)
+  exact map_cokernel_zero_of_factor L A t g he
+
+private theorem proetale_cover_detects_zero {Y : Scheme.{u}} (C : Scheme.Cover.{u} proetalePrecoverage Y)
+      {F G : Sheaf (ProEt.topology Y) Ab.{u + 1}} (q : F ⟶ G)
+      (hq : ∀ j, (C.f j)^*[Ab.{u + 1}].map q = 0) : q = 0 := by
+    have (j : C.I₀) : WeaklyEtale (C.f j) :=
+      Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ (.mk j)
+    have hk (j : C.I₀) : IsIso ((C.f j)^*[Ab.{u + 1}].map (kernel.ι q)) := by
+      have : IsIso (kernel.ι ((C.f j)^*[Ab.{u + 1}].map q)) :=
+        kernel.ι_of_zero (hq j)
+      have heq : (C.f j)^*[Ab.{u + 1}].map (kernel.ι q) =
+          (PreservesKernel.iso (C.f j)^*[Ab.{u + 1}] q).hom ≫
+            kernel.ι ((C.f j)^*[Ab.{u + 1}].map q) := by
+        rw [← PreservesKernel.iso_inv_ι (C.f j)^*[Ab.{u + 1}] q]
+        simp
+      rw [heq]
+      infer_instance
+    have : IsIso (kernel.ι q) := by
+      apply ProEtale.isIso_of_isIso_localizationRestriction Ab.{u + 1}
+        (kernel.ι q) C.f C.mem₀
+      intro j
+      exact (NatIso.isIso_map_iff
+        (ProEtale.upperStarIsoLocalizationRestriction Ab.{u + 1} (C.f j) inferInstance)
+        (kernel.ι q)).1 (hk j)
+    exact eq_zero_of_epi_kernel q
+
+private theorem quotient_obstruction_zero_of_constructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u})
+    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsConstructibleModuleObject (condensedRingObj Λ X) M)
+    {W V : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (v : W ⟶ V)
+    (hpull : ∀ {Y : Scheme.{u}} (f : Y ⟶ X),
+      [PreservesLimitsOfShape (Discrete ℕ) ((f)^*[Ab.{u + 1}])] →
+      Mod.IsFinitelyPresented (condensedRingObj Λ Y) ((f)^*⟦Λ⟧.obj M) →
+      (f)^*⟦Λ⟧.map v = 0) : v = 0 := by
+  classical
+  have hraw {Y : Scheme.{u}} (f : Y ⟶ X)
+      [PreservesLimitsOfShape (Discrete ℕ) ((f)^*[Ab.{u + 1}])]
+      (hfp : Mod.IsFinitelyPresented (condensedRingObj Λ Y) ((f)^*⟦Λ⟧.obj M)) :
+      (f)^*[Ab.{u + 1}].map v.hom = 0 := by
+    have hn := (upperStarForgetIso Λ f).hom.naturality v
+    change (f)^*[Ab.{u + 1}].map v.hom ≫
+        (upperStarForgetIso Λ f).hom.app V =
+      (upperStarForgetIso Λ f).hom.app W ≫ ((f)^*⟦Λ⟧.map v).hom at hn
+    rw [hpull f hfp] at hn
+    apply (cancel_mono ((upperStarForgetIso Λ f).hom.app V)).1
+    simpa using hn
+  obtain ⟨S, hS⟩ := hM
+  choose C hC using hS
+  have hstr (a : Fin S.n) : (S.immersion a)^*[Ab.{u + 1}].map v.hom = 0 := by
+    apply proetale_cover_detects_zero (C a)
+    intro j
+    have hfp := isFinitelyPresented_upperStar_of_comap_iso Λ ((C a).f j)
+      (condensedPullbackHom Λ (S.immersion a))
+      (comapUpperStarObjIso Λ (S.immersion a) M) (hC a j)
+    have hfpc : Mod.IsFinitelyPresented (condensedRingObj Λ ((C a).X j))
+        (((C a).f j ≫ S.immersion a)^*⟦Λ⟧.obj M) :=
+      hfp.of_iso ((upperStarComp Λ ((C a).f j) (S.immersion a)).app M).symm
+    have : PreservesLimitsOfSize.{u + 1, u + 1}
+        ((S.immersion a)^*[Ab.{u + 1}]) :=
+      (Scheme.proEtale_immersion_inverseImage_preservesLimits (S.immersion a)).2.1
+    have : PreservesLimitsOfSize.{0, 0} ((S.immersion a)^*[Ab.{u + 1}]) :=
+      preservesSmallestLimits_of_preservesLimits _
+    have : WeaklyEtale ((C a).f j) :=
+      Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ (C a).mem₀ (.mk j)
+    have : PreservesLimitsOfShape (Discrete ℕ)
+        (((C a).f j ≫ S.immersion a)^*[Ab.{u + 1}]) :=
+      preservesLimitsOfShape_of_natIso
+        (ProEtale.upperStarComp Ab.{u + 1} ((C a).f j) (S.immersion a)).symm
+    have hn := (ProEtale.upperStarComp Ab.{u + 1} ((C a).f j)
+      (S.immersion a)).hom.naturality v.hom
+    simp only [Functor.comp_map, hraw _ hfpc, zero_comp] at hn
+    apply (cancel_epi ((ProEtale.upperStarComp Ab.{u + 1} ((C a).f j)
+      (S.immersion a)).app W.X).hom).1
+    simpa using hn.symm
+  -- Constructibility makes every stratum immersion quasi-compact.
+  have : ∀ a : Fin S.n, QuasiCompact (S.immersion a) := fun a ↦ ⟨fun U hU hc ↦ by
+    rw [(S.immersion a).isEmbedding.isCompact_iff, Set.image_preimage_eq_inter_range,
+      S.range_immersion a, Set.inter_comm]
+    exact (S.isConstructible_stratum a).isRetrocompact hc hU⟩
+  apply (Mod.forget _).map_injective
+  change v.hom = 0
+  apply ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp S.immersion
+  · intro x
+    obtain ⟨a, ha⟩ := Set.mem_iUnion.mp (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
+    exact ⟨a, (S.range_immersion a).symm ▸ ha⟩
+  · exact hstr
 
 set_option profiler true in
 
@@ -333,102 +463,10 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
         (f)^*⟦Λ⟧.map v = 0 := by
       let L := (f)^*⟦Λ⟧
       have : PreservesLimitsOfShape (Discrete ℕ) L := pullback_products Λ f
-      have hcompat (n m : ℕ) (hnm : n ≤ m) :
-          L.map (a m) ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M)) =
-            L.map (a n) ≫ cokernel.π (ell ^ (n + 1) • 𝟙 (L.obj M)) := by
-        have hz : (a m - a n) ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M) = 0 := by
-          rw [Preadditive.sub_comp, ha n m hnm, sub_self]
-        have h := map_quotient_zero L (a m - a n) _ hz
-        simpa only [Functor.map_sub, Preadditive.sub_comp, sub_eq_zero] using h
-      obtain ⟨g, hg⟩ := quotient_hom_lifts_finitePresentation ell E
-        (L.obj M) hfp (hlocal Y (L.obj M) hfp) (L.obj W) (fun n ↦ L.map (a n)) hcompat
-      have he : g ≫ L.map A = L.map t := by
-        apply (isLimitOfPreserves L (limit.isLimit (Discrete.functor Q))).hom_ext
-        intro n
-        change (g ≫ L.map A) ≫ L.map (Pi.π Q n.as) =
-          L.map t ≫ L.map (Pi.π Q n.as)
-        rw [Category.assoc, ← L.map_comp, ← L.map_comp]
-        have hπ : A ≫ Pi.π Q n.as = q n.as := by
-          simp [A, q, Q, OriginalIntegralQuotientSequence.augmentation]
-        rw [hπ]
-        simpa only [t, q, Pi.lift_comp_π, L.map_comp] using
-          quotient_lift_map L g (a n.as) (ell ^ (n.as + 1)) (hg n.as)
-      exact map_cokernel_zero_of_factor L A t g he
-    have hraw {Y : Scheme.{u}} (f : Y ⟶ X)
-        [PreservesLimitsOfShape (Discrete ℕ) ((f)^*[Ab.{u + 1}])]
-        (hfp : Mod.IsFinitelyPresented (condensedRingObj Λ Y) ((f)^*⟦Λ⟧.obj M)) :
-        (f)^*[Ab.{u + 1}].map v.hom = 0 := by
-      have hn := (upperStarForgetIso Λ f).hom.naturality v
-      change (f)^*[Ab.{u + 1}].map v.hom ≫
-          (upperStarForgetIso Λ f).hom.app (cokernel A) =
-        (upperStarForgetIso Λ f).hom.app W ≫ ((f)^*⟦Λ⟧.map v).hom at hn
-      rw [hpull f hfp] at hn
-      apply (cancel_mono ((upperStarForgetIso Λ f).hom.app (cokernel A))).1
-      simpa using hn
-    have hv : v = 0 := by
-      have hcover {Y : Scheme.{u}} (C : Scheme.Cover.{u} proetalePrecoverage Y)
-          {F G : Sheaf (ProEt.topology Y) Ab.{u + 1}} (q : F ⟶ G)
-          (hq : ∀ j, (C.f j)^*[Ab.{u + 1}].map q = 0) : q = 0 := by
-        have (j : C.I₀) : WeaklyEtale (C.f j) :=
-          Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ (.mk j)
-        have hk (j : C.I₀) : IsIso ((C.f j)^*[Ab.{u + 1}].map (kernel.ι q)) := by
-          have : IsIso (kernel.ι ((C.f j)^*[Ab.{u + 1}].map q)) :=
-            kernel.ι_of_zero (hq j)
-          have heq : (C.f j)^*[Ab.{u + 1}].map (kernel.ι q) =
-              (PreservesKernel.iso (C.f j)^*[Ab.{u + 1}] q).hom ≫
-                kernel.ι ((C.f j)^*[Ab.{u + 1}].map q) := by
-            rw [← PreservesKernel.iso_inv_ι (C.f j)^*[Ab.{u + 1}] q]
-            simp
-          rw [heq]
-          infer_instance
-        have : IsIso (kernel.ι q) := by
-          apply ProEtale.isIso_of_isIso_localizationRestriction Ab.{u + 1}
-            (kernel.ι q) C.f C.mem₀
-          intro j
-          exact (NatIso.isIso_map_iff
-            (ProEtale.upperStarIsoLocalizationRestriction Ab.{u + 1} (C.f j) inferInstance)
-            (kernel.ι q)).1 (hk j)
-        exact eq_zero_of_epi_kernel q
-      obtain ⟨S, hS⟩ := hM
-      choose C hC using hS
-      have hstr (a : Fin S.n) : (S.immersion a)^*[Ab.{u + 1}].map v.hom = 0 := by
-        apply hcover (C a)
-        intro j
-        have hfp := isFinitelyPresented_upperStar_of_comap_iso Λ ((C a).f j)
-          (condensedPullbackHom Λ (S.immersion a))
-          (comapUpperStarObjIso Λ (S.immersion a) M) (hC a j)
-        have hfpc : Mod.IsFinitelyPresented (condensedRingObj Λ ((C a).X j))
-            (((C a).f j ≫ S.immersion a)^*⟦Λ⟧.obj M) :=
-          hfp.of_iso ((upperStarComp Λ ((C a).f j) (S.immersion a)).app M).symm
-        have : PreservesLimitsOfSize.{u + 1, u + 1}
-            ((S.immersion a)^*[Ab.{u + 1}]) :=
-          (Scheme.proEtale_immersion_inverseImage_preservesLimits (S.immersion a)).2.1
-        have : PreservesLimitsOfSize.{0, 0} ((S.immersion a)^*[Ab.{u + 1}]) :=
-          preservesSmallestLimits_of_preservesLimits _
-        have : WeaklyEtale ((C a).f j) :=
-          Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ (C a).mem₀ (.mk j)
-        have : PreservesLimitsOfShape (Discrete ℕ)
-            (((C a).f j ≫ S.immersion a)^*[Ab.{u + 1}]) :=
-          preservesLimitsOfShape_of_natIso
-            (ProEtale.upperStarComp Ab.{u + 1} ((C a).f j) (S.immersion a)).symm
-        have hn := (ProEtale.upperStarComp Ab.{u + 1} ((C a).f j)
-          (S.immersion a)).hom.naturality v.hom
-        simp only [Functor.comp_map, hraw _ hfpc, zero_comp] at hn
-        apply (cancel_epi ((ProEtale.upperStarComp Ab.{u + 1} ((C a).f j)
-          (S.immersion a)).app W.X).hom).1
-        simpa using hn.symm
-      -- Constructibility makes every stratum immersion quasi-compact.
-      have : ∀ a : Fin S.n, QuasiCompact (S.immersion a) := fun a ↦ ⟨fun U hU hc ↦ by
-        rw [(S.immersion a).isEmbedding.isCompact_iff, Set.image_preimage_eq_inter_range,
-          S.range_immersion a, Set.inter_comm]
-        exact (S.isConstructible_stratum a).isRetrocompact hc hU⟩
-      apply (Mod.forget _).map_injective
-      change v.hom = 0
-      apply ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp S.immersion
-      · intro x
-        obtain ⟨a, ha⟩ := Set.mem_iUnion.mp (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
-        exact ⟨a, (S.range_immersion a).symm ▸ ha⟩
-      · exact hstr
+      exact quotient_lift_obstruction_map_zero ell L M W a ha
+        (quotient_hom_lifts_finitePresentation ell E
+          (L.obj M) hfp (hlocal Y (L.obj M) hfp) (L.obj W))
+    have hv : v = 0 := quotient_obstruction_zero_of_constructible Λ X M hM v hpull
     refine ⟨Abelian.monoLift A t hv, fun n ↦ ?_⟩
     have h := congrArg (fun z ↦ z ≫ Pi.π Q n) (Abelian.monoLift_comp A t hv)
     simpa only [Category.assoc, A, OriginalIntegralQuotientSequence.augmentation,
