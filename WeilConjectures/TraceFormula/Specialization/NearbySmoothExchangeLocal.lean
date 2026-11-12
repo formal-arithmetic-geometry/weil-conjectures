@@ -57,6 +57,7 @@ variable {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' 
   {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Pointwise pasting of base change morphisms**: for two horizontally pasted squares
 ```
