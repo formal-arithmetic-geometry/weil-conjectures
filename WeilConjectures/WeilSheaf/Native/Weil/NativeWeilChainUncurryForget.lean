@@ -72,11 +72,10 @@ theorem native_weil_chain_uncurry_forget
             CochainComplex.bifunctorHomπ (H₁) ((UC₀).obj P) ((UC₀).obj I) q p n hpq) ≫
           (Mod.ihomAdjunction (((UC₀).obj P).X p)).counit.app (((UC₀).obj I).X n)),
     (N.chain P Q).inv ≫ (UC₀).map ψ = ψ' := by
+  dsimp only
   intro c hc φ ψ ψ' hψ hψ'
-  apply HomologicalComplex.hom_ext
-  intro n
-  apply HomologicalComplex.mapBifunctor.hom_ext
-  intro p q hpq
+  refine HomologicalComplex.hom_ext (fun n => ?_)
+  refine HomologicalComplex.mapBifunctor.hom_ext (K₁ := P) (K₂ := Q) (fun p q hpq => ?_)
   have hi : HomologicalComplex.ιMapBifunctor ((UC).obj P) ((UC).obj Q)
         (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
         (.up ℤ) p q n hpq ≫ (N.chain P Q).inv.f n =
