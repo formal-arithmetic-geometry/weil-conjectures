@@ -205,8 +205,9 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
         ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))) ≫
         (pullbackSquareComparison Λ w).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
           L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A) := by
-    rw [pullbackSquareComparison_hom_app Λ sq₁ (R((aX)_*⟦Λ⟧).obj A),
-      pullbackSquareComparison_hom_app Λ w (R((aX)_*⟦Λ⟧).obj A)]
+    have hc₁ := pullbackSquareComparison_hom_app Λ sq₁ (R((aX)_*⟦Λ⟧).obj A)
+    have hc₂ := pullbackSquareComparison_hom_app Λ w (R((aX)_*⟦Λ⟧).obj A)
+    rw [hc₁, hc₂]
     simp only [Category.assoc]
     rw [leftDerivedUpperStarComp_inv_app_comp_eqToHom_id'_assoc]
     rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
@@ -218,7 +219,8 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
         ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)) ≫
         (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _ := by
-    rw [pullbackSquareComparison_hom_app Λ sq₂ (R((aY)_*⟦Λ⟧).obj B)]
+    have hc := pullbackSquareComparison_hom_app Λ sq₂ (R((aY)_*⟦Λ⟧).obj B)
+    rw [hc]
     simp only [Category.assoc]
     rw [leftDerivedUpperStarComp_inv_app_comp_eqToHom_id'_assoc]
     rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
