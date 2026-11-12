@@ -259,7 +259,6 @@ private theorem tensorStalkIso_one
       (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).obj (P.X k)) x)
 
-set_option profiler true in
 -- The extension-restriction unit is lifted through several complex functor isomorphisms.
 private theorem canonicalSpectrumStalkComplexIso_one
     (X : Scheme.{u}) [IsAffine X] (x : X) (y : Spec Γ(X, ⊤))

@@ -150,10 +150,13 @@ theorem canonicalSpectrum_tensor_comparison_smul
   have hd : (j.stalkMap z0).hom d = canonicalSpectrumStalkEquiv X' z z0 rfl d := by
     simp only [canonicalSpectrumStalkEquiv, eqToIso_refl, Iso.refl_trans]
     rfl
-  exact (congrArg (fun v ↦ e (c (b v))) (map_smul a d t)).trans
+  have ha := a.hom.map_smul d t
+  have hc := c.hom.map_smul ((j.stalkMap z0).hom d) (b (a t))
+  have he := e.hom.map_smul ((j.stalkMap z0).hom d) (c (b (a t)))
+  exact (congrArg (fun v ↦ e (c (b v))) ha).trans
     ((congrArg (fun v ↦ e (c v)) hb).trans
-      ((congrArg e (map_smul c _ _)).trans
-        ((map_smul e _ _).trans (congrArg (fun r ↦ r • e (c (b (a t)))) hd))))
+      ((congrArg (fun v ↦ e v) hc).trans
+        (he.trans (congrArg (fun r ↦ r • e (c (b (a t)))) hd))))
 
 
 end AlgebraicGeometry.SingleComplexBaseChange
