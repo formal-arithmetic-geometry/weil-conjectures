@@ -89,7 +89,6 @@ def curryProdResolutionIso
 
 variable [HasDerivedCategory.{u} 𝒜] (L : CochainComplex 𝒜 ℤ)
 
-set_option profiler true in
 /-- `R𝓗om(Q L, -) ∘ Q ≅ Q ∘ 𝓗om^•(L, -) ∘ I`, where `I` is the functorial K-injective
 resolution used to define `derivedInternalHom`. -/
 noncomputable def derivedInternalHomCompQIso :
