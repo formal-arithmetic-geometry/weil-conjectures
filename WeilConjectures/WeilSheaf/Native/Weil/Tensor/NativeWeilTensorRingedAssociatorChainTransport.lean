@@ -176,6 +176,8 @@ theorem nativeChainForgetComponent_transport
     (n p q : ℤ) (h : p + q = n) :
     nativeChainForgetComponent D P Q N n p q h := by
   classical
+  dsimp only [nativeChainForgetComponent, nativeRingedAssociatorComponent] at hsquare ⊢
+  generalize (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom = a at hsquare ⊢
   let mO : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
     Mod.monoidalCategoryCochainComplex
@@ -198,9 +200,9 @@ theorem nativeChainForgetComponent_transport
   let G := D.b.ordinary.functor.mapHomologicalComplex (.up ℤ)
   let U := nativeChainForgetU (T := T)
   have ha := nativeRingedAssociatorComponent_normalize D P Q N
-    (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom hsquare
+    a hsquare
   have hc :
-      U.map (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ≫
+      U.map a ≫
           (nativeChainForgetC D P (nativeTensorComplex T Q N)).hom ≫
             (U.obj P ◁ (nativeChainForgetC D Q N).hom) =
         (nativeChainForgetC D (nativeTensorComplex T P Q) N).hom ≫
@@ -218,7 +220,7 @@ theorem nativeChainForgetComponent_transport
       (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
       (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
       (hb := ?_) (hμ := ?_) (hν := ?_) P Q N
-      (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ?_
+      a ?_
     · intro P Q
       exact native_weil_tensor_ringed_binary_chain_square D d o r P Q
     · exact r.associativity
