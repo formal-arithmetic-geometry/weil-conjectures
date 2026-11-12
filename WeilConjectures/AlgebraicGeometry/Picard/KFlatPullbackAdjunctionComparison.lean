@@ -50,10 +50,6 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
   rw [← he]
   infer_instance
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 private noncomputable def kFlat_pullback_adjunction_comparison_iso
     {S S' : Scheme.{u}} (g : S' ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
@@ -78,26 +74,6 @@ private noncomputable def kFlat_pullback_adjunction_comparison_iso
   exact (uT.app (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
     (asIso (ε.app (q.obj P))).symm ≪≫ (derivedPullback g).mapIso (uS.app P)
 
-private theorem kFlat_pullback_adjunction_comparison_iso_hom
-    {S S' : Scheme.{u}} (g : S' ⟶ S)
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
-    [hL : (Scheme.Modules.tensorPullback g).Additive]
-    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
-      (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
-        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
-    (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-    [hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))] :
-    (kFlat_pullback_adjunction_comparison_iso g ε P hεP).hom =
-      (DerivedCategory.quotientCompQhIso
-        (SheafOfModules.{u} (moduleRings S'.toRingedSpace))).inv.app
-          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≫
-        (asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).inv ≫
-        ((derivedPullback g).mapIso
-          ((DerivedCategory.quotientCompQhIso
-            (SheafOfModules.{u} (moduleRings S.toRingedSpace))).app P)).hom := by
-  rfl
-
 private theorem kFlat_pullback_adjunction_comparison_iso_inv
     {S S' : Scheme.{u}} (g : S' ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
@@ -121,8 +97,6 @@ private theorem kFlat_pullback_adjunction_comparison_iso_inv
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
 /-- For a K-flat source, the localized ordinary transpose computes the pinned derived
 transpose. The comparison is independent of the target complex and the chain map.
@@ -163,8 +137,8 @@ theorem kFlat_pullback_adjunction_comparison
           (e P hP).hom ≫ ((relativeMVAdj g).homEquiv _ _).symm
             (DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I) := by
   classical
-  letI : HasDerivedCategory.{w} S.Modules := d S
-  letI : HasDerivedCategory.{w} S'.Modules := d S'
+  let : HasDerivedCategory.{w} S.Modules := d S
+  let : HasDerivedCategory.{w} S'.Modules := d S'
   let hL := @Classical.choose _ _ (@exists_derivedPullbackComposition.{u, w} d)
   let ε := (Classical.choose (Classical.choose_spec (exists_derivedPullbackComposition))) g
   have hε := (Classical.choose (Classical.choose_spec
