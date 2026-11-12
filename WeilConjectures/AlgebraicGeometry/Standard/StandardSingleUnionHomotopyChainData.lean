@@ -48,6 +48,18 @@ private theorem transport_biprod_comparison
   · simpa only [Category.assoc, biprod.map_snd, biprod.map_snd_assoc] using
       congrArg (fun k ↦ biprod.snd ≫ k) i₂.hom.w.symm
 
+private noncomputable def relativeMV_cover_homotopy_data_cached
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {X S X' S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (hpull : IsPullback g' f' f g)
+    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
+    (φ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hcover : U ⊔ V = ⊤) :=
+  relativeMV_cover_homotopy_data f f' g g' hpull K K' φ U V hcover
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
 (blueprint: lem-pc-standard-single-union-homotopy-chain-data).
@@ -113,7 +125,7 @@ theorem standardSingle_union_homotopy_chain_data
   have hcover : (W.ι ⁻¹ᵁ U) ⊔ (W.ι ⁻¹ᵁ V) = ⊤ := by
     rw [← Scheme.Hom.preimage_sup]
     exact W.ι_preimage_self
-  have hdata := relativeMV_cover_homotopy_data f (pullback.snd f g) g (pullback.fst f g)
+  have hdata := relativeMV_cover_homotopy_data_cached f (pullback.snd f g) g (pullback.fst f g)
     (IsPullback.of_hasPullback f g) K K' φ (W.ι ⁻¹ᵁ U) (W.ι ⁻¹ᵁ V) hcover
   obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ := hdata
   obtain ⟨iU⟩ := standardSingle_open_relative_arrow p g W U le_sup_left N
