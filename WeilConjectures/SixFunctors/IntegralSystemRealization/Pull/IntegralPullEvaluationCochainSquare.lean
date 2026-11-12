@@ -77,14 +77,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
-  dsimp only [integralPullEvaluationComplex, HomologicalComplex.comp_f]
-  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let target ← Lean.Elab.Tactic.getMainTarget
-    let proof ← Lean.Elab.Term.elabTerm (← `(h)) none
-    let proofType ← Lean.Meta.inferType proof
-    Lean.logInfo m!"GOAL RAW: {repr target}"
-    Lean.logInfo m!"PROOF RAW: {repr proofType}"
-  exact h
+  convert integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i using 1 <;>
+    simp only [integralPullEvaluationComplex, HomologicalComplex.comp_f]
 
 end WeilConjectures.IntegralSystemRealization
