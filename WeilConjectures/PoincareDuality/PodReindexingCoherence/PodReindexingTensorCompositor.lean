@@ -354,7 +354,8 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
   apply ScalarHomTensor.total_pure_hom_ext
     (P := (podReindexingComplexFunctor l E (h ≫ g) s).obj P)
     (Q := (podReindexingComplexFunctor l E (h ≫ g) s).obj L)
-    (n := n) (H := podReindexingModules l E Z s)
+    (n := n)
+    (H := SheafOfModules.scalarModules (ProEt.topology Z) (podReindexingRing l E Z s))
     (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
   intro p q hpq U x y
   let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
