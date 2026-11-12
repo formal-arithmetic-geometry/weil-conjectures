@@ -256,6 +256,7 @@ lemma boundedConstructiblePullbackSquareComparison_inv_app_paste_vert {i : X ⟶
   simp only [eqToHom_trans_assoc]
 
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- the comparison of the projection formulas with their composition laws is slow
 /-- **The projection formula is compatible with base change, by factorisation**: for a cartesian
