@@ -48,6 +48,37 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
+private theorem translationCoefficient_naturality
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}}
+    (t : X ⟶ X) (f : X ⟶ Y) (h : t ≫ f = f) :
+    ((CondensedRing.lowerStar Λ f).map
+        (((CondensedRing.upperStarLowerStarAdjunction Λ t).homEquiv _ _)
+          (Functor.Monoidal.εIso (CondensedRing.upperStar Λ t)).inv) ≫
+      (CondensedRing.lowerStarComp Λ t f).hom.app _ ≫
+      eqToHom (congrArg (fun g ↦ (CondensedRing.lowerStar Λ g).obj
+        (Mod.regular (condensedRingObj Λ X))) h)).hom ≫
+        (ProEtale.lowerStar Ab.{u + 1} f).map (coefficientMap a X) =
+    (ProEtale.lowerStar Ab.{u + 1} f).map (coefficientMap a X) ≫
+      ((CondensedRing.lowerStar Λ' f).map
+        (((CondensedRing.upperStarLowerStarAdjunction Λ' t).homEquiv _ _)
+          (Functor.Monoidal.εIso (CondensedRing.upperStar Λ' t)).inv) ≫
+      (CondensedRing.lowerStarComp Λ' t f).hom.app _ ≫
+      eqToHom (congrArg (fun g ↦ (CondensedRing.lowerStar Λ' g).obj
+        (Mod.regular (condensedRingObj Λ' X))) h)).hom := by
+  simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]
+  erw [CondensedRing.homEquiv_εIso_inv_hom Λ t,
+    CondensedRing.homEquiv_εIso_inv_hom Λ' t]
+  rw [coefficientCongr a h]
+  rw [CondensedRing.lowerStarComp_hom_app_hom,
+    CondensedRing.lowerStarComp_hom_app_hom]
+  rw [← NatTrans.naturality_assoc]
+  simp only [Functor.comp_map]
+  rw [← Functor.map_comp_assoc,
+    condensedPushforwardHom_comp_map_coefficientMap a t, Functor.map_comp]
+  simp only [Category.assoc, unitUnderlying]
+
 set_option profiler true in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem translationCoefficient
@@ -63,17 +94,9 @@ private theorem translationCoefficient
           (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) ≫
         (condensedArtinSchreierTranslationAction Λ' k c).asHom.hom := by
   unfold condensedArtinSchreierTranslationAction
-  simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]
-  simp only [CondensedRing.homEquiv_εIso_inv_hom]
-  rw [coefficientCongr a (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)]
-  rw [CondensedRing.lowerStarComp_hom_app_hom,
-    CondensedRing.lowerStarComp_hom_app_hom]
-  rw [← NatTrans.naturality_assoc]
-  simp only [Functor.comp_map]
-  rw [← Functor.map_comp_assoc,
-    condensedPushforwardHom_comp_map_coefficientMap a (Etale.artinSchreierTranslation k c),
-    Functor.map_comp]
-  simp only [Category.assoc, unitUnderlying]
+  exact translationCoefficient_naturality a (Etale.artinSchreierTranslation k c)
+    (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))
+    (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)
 
 private theorem regularCoefficient
     {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C]
