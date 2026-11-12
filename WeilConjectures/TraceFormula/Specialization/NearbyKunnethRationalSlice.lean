@@ -50,7 +50,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- The image `G(Π_{A,B})` of the Künneth map under a functor `G` is invertible if `G(Π_{A',B'})`
 is, for `A ≅ A'` and `B ≅ B'`. -/
