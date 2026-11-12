@@ -275,10 +275,10 @@ private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
     ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))
   let c := WeilSheaf.cyclotomicUnit k₀ l ^ (1 : ℤ)
   let G := (F.dual hF).constantTwist c
-  obtain ⟨eU⟩ := WeilComplex.nonempty_verdierDual_toComplex_iso_of_isLisse 1 F hF
-  obtain ⟨eT⟩ := WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso F hF 1
-  obtain ⟨e₄⟩ := WeilComplex.nonempty_verdierDual_upperStar_derivedLowerStar_iso j i hc
-    (WeilSheaf.toComplex.obj F)
+  let eU := Classical.choice (WeilComplex.nonempty_verdierDual_toComplex_iso_of_isLisse 1 F hF)
+  let eT := Classical.choice (WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso F hF 1)
+  let e₄ := Classical.choice (WeilComplex.nonempty_verdierDual_upperStar_derivedLowerStar_iso j i hc
+    (WeilSheaf.toComplex.obj F))
   -- `𝔻_Z A(F) ≅ A(F^∨(1))[1]`, hence `𝓗⁻¹(𝔻_Z A(F)) ≅ i^*((j_* F^∨)(1))`
   let E₁ : (WeilComplex.verdierDual k₀ l Z).obj (op A) ≅
       (((WeilComplex.upperStar i).obj ((WeilComplex.derivedLowerStar j).obj
@@ -299,31 +299,31 @@ private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
   -- `𝔻_Z` is t-exact on the finite `Z`: `𝓗⁻¹(𝔻_Z A(F)) ≅ (𝓗¹ A(F))^∨`
   set H := (WeilComplex.homologySheaf 1).obj A
   have hH : H.IsLisse := WeilSheaf.isLisse_of_isFinite_of_isReduced H
-  obtain ⟨R₁⟩ := WeilComplex.nonempty_homologySheaf_neg_one_verdierDual_iso A
-  obtain ⟨R₂⟩ := WeilComplex.nonempty_verdierDual_toComplex_iso_of_isFinite H
-  obtain ⟨R₃⟩ := WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso H hH 0
+  let R₁ := Classical.choice (WeilComplex.nonempty_homologySheaf_neg_one_verdierDual_iso A)
+  let R₂ := Classical.choice (WeilComplex.nonempty_verdierDual_toComplex_iso_of_isFinite H)
+  let R₃ := Classical.choice (WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso H hH 0)
   let R : (WeilComplex.homologySheaf (-1)).obj ((WeilComplex.verdierDual k₀ l Z).obj (op A)) ≅
       (H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) :=
     R₁ ≪≫ (WeilComplex.homologySheaf 0).mapIso R₂ ≪≫
       WeilSheaf.toComplexCompHomologySheafIso.app _ ≪≫ R₃
   -- the stalks at `z`
-  have S₁ := (WeilSheaf.nonempty_equiv_stalk_upperStar i
-    (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c) zf s hz hdeg).some
-  have S₂ := (WeilSheaf.nonempty_equiv_stalk_constantTwist
-    ((WeilSheaf.lowerStar j).obj (F.dual hF)) c s).some
+  let S₁ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_upperStar i
+    (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c) zf s hz hdeg)
+  let S₂ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_constantTwist
+    ((WeilSheaf.lowerStar j).obj (F.dual hF)) c s)
   have S₃ : (((WeilSheaf.upperStar i).obj
       (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c)).stalk zf).Equiv
       (((H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ))).stalk zf) :=
-    (WeilSheaf.nonempty_equiv_stalk_of_iso (L.symm ≪≫ R) zf).some
-  have S₄ := (WeilSheaf.nonempty_equiv_stalk_constantTwist (H.dual hH)
-    (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) zf).some
-  have S₅ := (WeilSheaf.nonempty_equiv_stalk_dual hH zf).some
+    Classical.choice (WeilSheaf.nonempty_equiv_stalk_of_iso (L.symm ≪≫ R) zf)
+  let S₄ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_constantTwist (H.dual hH)
+    (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) zf)
+  let S₅ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_dual hH zf)
   have S₆ : (H.stalk zf).Equiv (((WeilSheaf.upperStar i).obj ((WeilComplex.homologySheaf 1).obj
       ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F)))).stalk zf) :=
-    (WeilSheaf.nonempty_equiv_stalk_of_iso (WeilComplex.homologySheafUpperStarIso i 1 _)
-      zf).some
-  have S₇ := (WeilSheaf.nonempty_equiv_stalk_upperStar i ((WeilComplex.homologySheaf 1).obj
-      ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))) zf s hz hdeg).some
+    Classical.choice (WeilSheaf.nonempty_equiv_stalk_of_iso (WeilComplex.homologySheafUpperStarIso i 1 _)
+      zf)
+  let S₇ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_upperStar i ((WeilComplex.homologySheaf 1).obj
+      ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))) zf s hz hdeg)
   -- the linear algebra
   set q : PadicAlgCl l := (Nat.card k₀ : PadicAlgCl l)
   set d := (C ↘ Spec (CommRingCat.of k₀)).degreeOver s.1
