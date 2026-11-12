@@ -65,6 +65,18 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h1.symm.trans
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
+private theorem pushforward_hom_naturality_apply
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D}
+    {R : Dᵒᵖ ⥤ RingCat.{u + 1}} {S : Cᵒᵖ ⥤ RingCat.{u + 1}}
+    (φ : S ⟶ F.op ⋙ R)
+    {M : PresheafOfModules.{u + 1} S} {N : PresheafOfModules.{u + 1} R}
+    (f : M ⟶ (PresheafOfModules.pushforward φ).obj N)
+    {V V' : C} (i : V' ⟶ V) (z : M.obj (op V)) :
+    N.map (F.map i).op (f.app (op V) z) = f.app (op V') (M.map i.op z) := by
+  have h := PresheafOfModules.naturality_apply f i.op z
+  exact (PresheafOfModules.pushforward_obj_map_apply φ N i.op (f.app (op V) z)).symm.trans
+    h.symm
+
 private def sequenceEvaluation_hom_apply (W : Scheme.{u}) (n : ℕ)
     {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
     (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N) (V : W.ProEt)
@@ -82,8 +94,12 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
         (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)) =
       ((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')
         (unrestrictedIntegralTensorSection l E W n M (op V') 1 (M.val.map i.op z)) := by
-  have h1 := PresheafOfModules.naturality_apply
-    ((pullbackTensorReductionEvaluation l E W n).hom.app M).val i.op
+  have h1 := pushforward_hom_naturality_apply
+    (F := CategoryTheory.Prod.sectR n W.ProEt)
+    (M := ((unrestrictedIntegralReductionFunctor l E W n).obj M).val)
+    (N := ((pullbackTensorOrdinaryReduction l E W).obj M).val)
+    (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom
+    ((pullbackTensorReductionEvaluation l E W n).hom.app M).val i
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)
   have h2 := PresheafOfModules.naturality_apply
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val i.op z
@@ -93,16 +109,9 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     rw [← finiteAdjunction_unit_apply, ← finiteAdjunction_unit_apply]
     exact h2.symm
   have h4 := congrArg
-    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3
-  dsimp only [Functor.comp_obj, coefficientSequenceEvaluation, SheafOfModules.pushforward,
-    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
-    PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
-    PresheafOfModules.restrictScalarsObj, ModuleCat.ofHom_apply,
-    ModuleCat.hom_ofHom, LinearMap.coe_mk, AddHom.coe_mk,
-    ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.RestrictScalars.map',
-    CategoryTheory.Prod.sectR, Functor.op] at h1 h4 ⊢
-  trace_state
-  exact h1.symm.trans h4
+    (sequenceEvaluation_hom_apply l E W n
+      ((pullbackTensorReductionEvaluation l E W n).hom.app M) V') h3
+  exact h1.trans h4
 
 
 set_option profiler true in
