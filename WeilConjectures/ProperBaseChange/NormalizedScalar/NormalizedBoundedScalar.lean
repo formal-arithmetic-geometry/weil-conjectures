@@ -172,7 +172,16 @@ instance boundedExtensionTriangulated : (boundedExtension l E T).IsTriangulated 
   unfold boundedExtension
   infer_instance
 
--- Comparing the inherited full-subcategory actions unfolds the large coefficient tensor functor.
+/-- Transport a scalar-identity equation without unfolding the concrete functors. -/
+private lemma map_scalar_identity_of_iso
+    {S : Type*} [Semiring S] {C D : Type*} [Category* C] [Category* D]
+    [Preadditive D] [Linear S D] {F G : C ⥤ D} (e : F ≅ G)
+    {X : C} (f : X ⟶ X) (s : S) (h : G.map f = s • 𝟙 (G.obj X)) :
+    F.map f = s • 𝟙 (F.obj X) := by
+  apply (cancel_mono (e.hom.app X)).1
+  rw [e.hom.naturality, h]
+  simp only [Linear.comp_smul, Linear.smul_comp, Category.id_comp, Category.comp_id]
+
 /-- Derived scalar extension preserves each integral scalar identity with its actual value.
 Source: termwise scalar balancing.
 (blueprint: lem-weil-pbc-normalized-bounded-scalar).
@@ -183,16 +192,12 @@ theorem boundedExtension_scalar (a : integers l E) (K : Integral l E T) :
     (boundedExtension l E T).map (a • 𝟙 K) =
       (a : E) • 𝟙 ((boundedExtension l E T).obj K) := by
   let F := Mod.extendScalars (inclusion l E T)
-  let e := F.leftDerivedFunctorIsoMapDerivedCategory
   have h := mapDerivedCategory_scalar (integers l E).subtype F
     (fun r M ↦ extension_scalar l E T r M) a K.obj
   have he : F.leftDerivedFunctor.map (a • 𝟙 K.obj) =
-      (a : E) • 𝟙 (F.leftDerivedFunctor.obj K.obj) := by
-    apply (cancel_mono (e.hom.app K.obj)).1
-    rw [e.hom.naturality]
-    rw [h]
-    simp only [Linear.comp_smul, Linear.smul_comp, Category.id_comp, Category.comp_id]
-    rfl
+      (a : E) • 𝟙 (F.leftDerivedFunctor.obj K.obj) :=
+    map_scalar_identity_of_iso F.leftDerivedFunctorIsoMapDerivedCategory
+      (a • 𝟙 K.obj) (a : E) h
   apply ObjectProperty.hom_ext (P := boundedConstructible (fieldRing l E T))
   change F.leftDerivedFunctor.map (a • 𝟙 K.obj) =
     (a : E) • 𝟙 (F.leftDerivedFunctor.obj K.obj)
