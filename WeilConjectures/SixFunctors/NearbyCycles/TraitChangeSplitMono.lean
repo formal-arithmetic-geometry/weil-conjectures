@@ -84,34 +84,9 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_map_exchangeRight_app (�
 variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'}
   {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
+set_option trace.Meta.synthInstance true in
+set_option maxHeartbeats 1000000 in
 -- the coefficient changes of the base change morphism are matched against large types
-open PadicAlgCl in
-private theorem splitMono_padicSubfield_of_integral
-    (φ : M.Hom N f f')
-    [QuasiCompact N.j] [QuasiSeparated N.j] [QuasiCompact M.j] [QuasiSeparated M.j]
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (K₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)))
-    (n₀ : ℤ) [K₀.IsGE n₀]
-    (h𝒪 : IsSplitMono ((L((M.i)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).map
-      ((Adjunction.exchangeRight
-        (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) N.j)
-        (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) M.j)
-        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) φ.commSq_j)).app
-          ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) :
-    IsSplitMono ((L((M.i)^*⟦Profinite.continuousMapRingObj E.1⟧)).map
-      ((Adjunction.exchangeRight
-        (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E.1) N.j)
-        (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E.1) M.j)
-        (pullbackSquareComparison (Profinite.continuousMapRingObj E.1) φ.commSq_j)).app
-          ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-            N.generic)).leftDerivedFunctor.obj
-            ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) := by
-  have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
-  fo_apply isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers
-    using ℓ, E, φ.commSq_j, M.i,
-      ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀), n₀, hn₀, h𝒪
-
 open PadicAlgCl in
 /-- **Split pullback exchanges from the integral case** (the mechanism of SGA 4½,
 [Th. finitude], Lemme 3.4, for `ℚ̄_ℓ`-coefficients). Let `φ : M ⟶ N` be a morphism of models
@@ -143,12 +118,16 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
           ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) :
     IsSplitMono ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) := by
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
-  have hE := splitMono_padicSubfield_of_integral φ E K₀ n₀ h𝒪
-  have hA := isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield ℓ E φ.commSq_j M.i
-    ((L(Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-      N.generic))).obj ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)) n₀
-    (isGE_leftDerivedFunctor_extendScalars_obj _ _ n₀) (by
-      fo_apply hE using hE)
+  fo_have hE := isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers
+    using ℓ, E, φ.commSq_j, M.i,
+      ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀), n₀, hn₀, h𝒪
+  fo_have hA := isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield
+    using ℓ, E, φ.commSq_j, M.i,
+      ((L(Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+        N.generic))).obj ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)), n₀,
+      (isGE_leftDerivedFunctor_extendScalars_obj
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+        ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀), hE
   -- `ℚ̄_ℓ ⊗ (E ⊗ Lε^* K₀) ≅ Lε^* B`
   have e' : (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       N.generic))).obj ((L(Mod.extendScalars (coefficientMap
