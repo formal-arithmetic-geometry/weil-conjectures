@@ -101,10 +101,9 @@ private theorem stageScalarArrow_heq
   subst u y v w
   have hf := eq_of_heq hβ
   subst f
-  simp only [eqToHom_refl, Functor.map_id, Category.comp_id]
+  simp only [eqToHom_refl, _root_.CategoryTheory.Functor.map_id, Category.comp_id]
   rw [map_isoToStage]
 
-set_option profiler true in
 -- Stage descent transports several dependent category presentations.
 /-- Pullback of a literal coefficient arrow is the localized integral scalar map,
 with the prescribed endpoint transports.
