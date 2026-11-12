@@ -85,10 +85,29 @@ private theorem map_comp_exchange {B : Type*} [Category* B] (F : A ⥤ B)
     a ≫ F.map (f ≫ g) = b ≫ d := by
   rw [Functor.map_comp, ← Category.assoc, h, Category.assoc, h']
 
+private theorem map_comp_swap_evaluation {B : Type*} [Category* B] (F : A ⥤ B)
+    {P Q I : A} {X Y : B} (c : F.obj P ≅ X) (d : F.obj Q ≅ Y)
+    (s : P ⟶ Q) (a : Q ⟶ I) (σ : X ⟶ Y) (e : Y ⟶ F.obj I)
+    (hs : c.hom ≫ σ = F.map s ≫ d.hom) (ha : d.hom ≫ e = F.map a) :
+    c.inv ≫ F.map (s ≫ a) = σ ≫ e := by
+  rw [Functor.map_comp, ← ha, ← Category.assoc (F.map s), ← hs]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+
 end Transport
 
 attribute [local irreducible] derivedInternalHomOfUniverses homComplexFunctor
   completedIntegralCommRingSheaf totalPair evaluate homModelMap
+
+private theorem totalPair_eq_coefficientTensorGenerator
+    (Y : AlgebraicGeometry.Scheme.{t})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ) (i j : ℤ)
+    (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    totalPair Y R P Q i j U x y = coefficientTensorGenerator.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
+  simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
+    CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  rfl
 
 set_option profiler true in
 private theorem tensor_presentation_parameter_evaluation_of_coefficients
@@ -138,35 +157,20 @@ private theorem tensor_presentation_parameter_evaluation_of_coefficients
   let ψ := huncurry.choose
   have hψ := huncurry.choose_spec.1
   have hu := huncurry.choose_spec.2
-  have hn : (T.iso J R S S' P hS hP).inv ≫ DerivedCategory.Q.map ψ =
-      (S.transpose (DerivedCategory.Q.obj S') (DerivedCategory.Q.obj P)
-        (DerivedCategory.Q.obj I)).symm
-          (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I) := by
-    rw [← hu]
-    exact (T.iso J R S S' P hS hP).inv_hom_id_assoc _
   refine ⟨s.hom ≫ ψ, ?_, ?_⟩
   · intro i j U x y
     change (ψ.f (i + j)).val.app U
       ((s.hom.f (i + j)).val.app U _) = _
     have hs' := hs i j (i + j) rfl (add_comm j i) U x y
-    rw [show totalPair.{t, u} Y R P S' i j U x y =
-      coefficientTensorGenerator.{u, t + 1, t} J R P S' i j (i + j) rfl U x y by
-      simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
-        CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-      rfl]
+    rw [totalPair_eq_coefficientTensorGenerator]
     rw [hs']
     simp only [Units.smul_def, map_zsmul]
     rw [hψ j i (i + j) (add_comm j i) rfl U y x]
-    rfl
+    simp only [evaluate, projection, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   · change (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map (s.hom ≫ ψ) = _
-    have hswap : (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map s.hom =
-        σ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj S') ≫
-          (T.iso J R S S' P hS hP).inv := by
-      apply (cancel_epi (T.iso J R S P S' hP hS).hom).1
-      apply (cancel_mono (T.iso J R S S' P hS hP).hom).1
-      simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id,
-        Category.comp_id] using hsq.symm
-    exact (map_comp_exchange DerivedCategory.Q _ _ _ _ s.hom ψ hswap hn).trans
+    exact (map_comp_swap_evaluation DerivedCategory.Q
+      (T.iso J R S P S' hP hS) (T.iso J R S S' P hS hP)
+      s.hom ψ _ _ hsq hu).trans
       ((swappedAdjunction_uncurry S σ (DerivedCategory.Q.obj P)
         (DerivedCategory.Q.obj S') (DerivedCategory.Q.obj I)
         (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)).symm.trans
