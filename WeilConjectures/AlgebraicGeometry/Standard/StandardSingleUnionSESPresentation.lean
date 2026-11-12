@@ -155,6 +155,7 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
       rw [← mappingCone.map_comp, ← mappingCone.map_comp]
       simp only [Category.id_comp, Category.comp_id, hc]
 
+/-- Turn a strict cone comparison into a comparison of short exact cylinder rows. -/
 private lemma cyl_presentation [HasDerivedCategory.{w} C]
     (a b c : Arrow (DerivedCategory C))
     (h : ∃ (A B A' B' : CochainComplex C ℤ)
@@ -202,7 +203,6 @@ private lemma cyl_presentation [HasDerivedCategory.{w} C]
 
 end
 
-set_option profiler true in
 /-- The three canonical comparisons are obtained from a morphism of short exact
 complexes, after identifying their localized vertices. No comparison is asserted
 invertible. The coefficients need not be quasi-coherent or relatively flat, and

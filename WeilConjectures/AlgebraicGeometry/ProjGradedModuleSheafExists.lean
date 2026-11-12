@@ -60,7 +60,6 @@ local notation "Rp[" x "]" => HomogeneousLocalization 𝒜 T[x]
 local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
 
-set_option profiler true in
 /-- The associated sheaf exists, with the canonical restrictions, chart and stalk
 identifications, uniqueness, quasi-coherence, and the degree-zero global-section map.
 Source: Stacks, Constructions, Section 01M3 before Definition 01M6; Lemmas 01M4,
