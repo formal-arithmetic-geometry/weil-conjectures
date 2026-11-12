@@ -155,11 +155,29 @@ lemma δ_comp_pullbackSquareComparison_id (h₁ : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f
         (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
           L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B)) =
       (leftDerivedUpperStarId Λ Z).hom.app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) := by
-  rw [Category.assoc]
-  rw [tensorHom_comp_tensorHom]
-  rw [pullbackSquareComparison_id_hom_app_comp_map Λ f₁ h₁ A]
-  rw [pullbackSquareComparison_id_hom_app_comp_map Λ f₂ h₂ B]
-  rw [δ_leftDerivedUpperStarId]
+  have h₁' := pullbackSquareComparison_id_hom_app_comp_map Λ f₁ h₁ A
+  have h₂' := pullbackSquareComparison_id_hom_app_comp_map Λ f₂ h₂ B
+  calc
+    _ = Functor.OplaxMonoidal.δ L((𝟙 Z)^*⟦Λ⟧) (L((f₁)^*⟦Λ⟧).obj A)
+          (L((f₂)^*⟦Λ⟧).obj B) ≫
+        ((pullbackSquareComparison Λ (⟨h₁⟩ : CommSq f₁ (𝟙 Z) (𝟙 X) f₁)).hom.app A ⊗ₘ
+          (pullbackSquareComparison Λ (⟨h₂⟩ : CommSq f₂ (𝟙 Z) (𝟙 Y) f₂)).hom.app B ≫
+            (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
+              L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B))) :=
+      Category.assoc _ _ _
+    _ = Functor.OplaxMonoidal.δ L((𝟙 Z)^*⟦Λ⟧) (L((f₁)^*⟦Λ⟧).obj A)
+          (L((f₂)^*⟦Λ⟧).obj B) ≫
+        ((pullbackSquareComparison Λ (⟨h₁⟩ : CommSq f₁ (𝟙 Z) (𝟙 X) f₁)).hom.app A ≫
+            L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A)) ⊗ₘ
+          ((pullbackSquareComparison Λ (⟨h₂⟩ : CommSq f₂ (𝟙 Z) (𝟙 Y) f₂)).hom.app B ≫
+            L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B)) := by
+      exact congrArg (_ ≫ ·) (tensorHom_comp_tensorHom _ _ _ _)
+    _ = Functor.OplaxMonoidal.δ L((𝟙 Z)^*⟦Λ⟧) (L((f₁)^*⟦Λ⟧).obj A)
+          (L((f₂)^*⟦Λ⟧).obj B) ≫
+        ((leftDerivedUpperStarId Λ Z).hom.app (L((f₁)^*⟦Λ⟧).obj A) ⊗ₘ
+          (leftDerivedUpperStarId Λ Z).hom.app (L((f₂)^*⟦Λ⟧).obj B)) := by
+      exact congrArg (_ ≫ ·) (congrArg₂ (· ⊗ₘ ·) h₁' h₂')
+    _ = _ := δ_leftDerivedUpperStarId Λ Z _ _
 
 set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
