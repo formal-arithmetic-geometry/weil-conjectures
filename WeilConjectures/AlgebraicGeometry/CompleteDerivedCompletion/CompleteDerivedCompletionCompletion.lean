@@ -438,7 +438,6 @@ private theorem principal_coneIso_inr
       b.hom ≫ CochainComplex.mappingCone.inr g :=
   (CochainComplex.mappingCone.triangleMap f g a.hom b.hom h).comm₂
 
-set_option profiler true in
 private theorem strictPrincipalLevels (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     ∃ b : ∀ n : ℕ, ((strictRed l E T).obj P).asFunctor.obj (op n) ≅

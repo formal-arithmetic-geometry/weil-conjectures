@@ -176,7 +176,6 @@ private theorem reduction_scalar_comp
   rw [coefficient_map_eq]
   rw [limit.w]
 
-set_option profiler true in
 private theorem ordinary_reduction_isIso
     (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
