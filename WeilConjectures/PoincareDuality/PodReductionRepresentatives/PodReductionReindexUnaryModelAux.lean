@@ -275,7 +275,14 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     rfl
   have hm := congrArg
     (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr
-  dsimp only [coefficientSequenceEvaluation, id]
+  run_tac do
+    let target ← Lean.Elab.Tactic.getMainTarget
+    let some h := (← Lean.getLCtx).findFromUserName? `hs | throwError "missing hs"
+    for (label, ty) in [("target", target), ("hs", h.type)] do
+      for i in [1, 2] do
+        let side := ty.getAppArgs[i]!
+        Lean.logInfo m!"{label} side {i} head: {repr side.getAppFn}"
+        Lean.logInfo m!"{label} side {i} action: {repr side.getAppArgs[3]!}"
   exact hs.trans hm
 
 -- Normalize the tensor before placing it inside the reindexing composite.
