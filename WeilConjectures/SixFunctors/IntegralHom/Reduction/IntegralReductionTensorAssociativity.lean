@@ -242,8 +242,10 @@ private theorem normalizedBeta_eq (n : ℕ)
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q  := by
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
-  · simpa only [CoefficientScalarTensorGenerators, coefficientIntegralScalarUnitSection, totalPair] using
-      (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta)
+  · intro i j k hij U x y
+    subst k
+    simpa only [CoefficientScalarTensorGenerators, coefficientIntegralScalarUnitSection, totalPair] using
+      (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j (i + j) rfl U x y)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
