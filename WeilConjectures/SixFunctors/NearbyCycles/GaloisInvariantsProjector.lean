@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariantTensor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -381,6 +382,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have := hasTensor₄ObjExt_mod.{u}
+  have := hasGoodTensor₁₂Tensor_mod.{u}
+  have := hasGoodTensorTensor₂₃_mod.{u}
+  have := hasColimitsOfShape_int_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
   exact exists_retraction_of_conjugate_invariant_eq
     (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C)
@@ -470,6 +477,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
+  have := hasTensor₄ObjExt_mod.{u}
+  have := hasGoodTensor₁₂Tensor_mod.{u}
+  have := hasGoodTensorTensor₂₃_mod.{u}
+  have := hasColimitsOfShape_int_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
   obtain ⟨r, hr₁, hr₂⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin T₀ N h Ω hp C hC
   refine ⟨r, hr₁, hr₂, fun {Z} f' q W φ κ S hS hφ ↦ ?_⟩
