@@ -242,7 +242,7 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
         exact pullback.condition)
     have hl : l ≫ sliceSpecialMap (traitSliceCoord k') hRM hcoord_a = pullback.fst _ _ := by
       dsimp [l]
-      exact hpb.lift_fst _ _ _
+      simp
     rw [← hl]
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
       ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)
