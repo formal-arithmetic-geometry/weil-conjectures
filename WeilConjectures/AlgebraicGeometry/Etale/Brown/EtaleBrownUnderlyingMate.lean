@@ -102,7 +102,6 @@ private theorem ordinary_restriction_mate (N : B₀) :
   erw [hn, Equiv.symm_apply_apply]
 
 end OrdinaryRightCube
-set_option maxHeartbeats 8000000 in
 -- Specializing the mate checks the concrete coefficient categories.
 /-- The underlying ordinary Brown mate after restriction. -/
 private theorem brown_underlying_cube
@@ -136,7 +135,6 @@ private theorem brown_underlying_cube
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
-set_option maxHeartbeats 8000000 in
 -- Check the section calculation independently of the derived assembly.
 /-- The ordinary Brown restriction/image cube, before deriving.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ.
