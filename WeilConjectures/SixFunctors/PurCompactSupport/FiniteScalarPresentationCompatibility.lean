@@ -113,7 +113,6 @@ private theorem finitePullback_native
       (sfIntrinsicConstantModuleAdjunction f A) M
     simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
       Functor.whiskerLeft_app] at h
-    rw [he] at h
     have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) x) h
     exact hv
   · exact (openSquarePullbackModel_existsUnique A f).exists.choose_spec
