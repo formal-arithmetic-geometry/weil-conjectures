@@ -26687,7 +26687,9 @@ public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
 public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Rationality
 public import WeilConjectures.ZetaFunction.RealizationIndependence
+public import WeilConjectures.ZetaFunction.ReciprocalRootsZeta
 public import WeilConjectures.ZetaFunction.RelativePurity
+public import WeilConjectures.ZetaFunction.RelativePurityMixed
 public import WeilConjectures.ZetaFunction.SixOperations
 public import WeilConjectures.ZetaFunction.SmoothProper
 public import WeilConjectures.ZetaFunction.TraceFormula
