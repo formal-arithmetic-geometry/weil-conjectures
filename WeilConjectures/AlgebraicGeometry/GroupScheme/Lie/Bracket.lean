@@ -739,7 +739,6 @@ theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := 
   rw [← (commute_tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
     aug₃_mon₃ mon₃_mul u q).eq, mul_inv_cancel_right]
 
-set_option profiler true in
 /-- The Hall–Witt identity after substitution into a local algebra, when the product of the
 three square-zero parameters kills the maximal ideal. -/
 theorem tangentMap_tangentBracket_hallWitt (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0)
@@ -781,7 +780,6 @@ theorem tangentMap_tangentBracket_hallWitt (m₁ m₂ m₃ : A) (h₁ : m₁ * m
   exact (map_mul t _ _).trans ((congrArg (· * t _) (map_mul t _ _)).trans
     (key _ _ _ _ _ _ (hc _ _) (hc _ _) (hc _ _) hw))
 
-set_option profiler true in
 /-- The Hall–Witt identity for tangent vectors: the Hall–Witt identity of the group of points
 over `k[α][β][γ]`, applied to `x^{(α)}`, `y^{(β)}` and `z^{(γ)}`. -/
 theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
