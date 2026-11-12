@@ -289,17 +289,18 @@ private theorem finiteCochainModel_reductionCounit (n : ℕ)
   simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   with_unfolding_all rfl
 
+set_option profiler true in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem normalizedReductionComparison_square
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)
-    (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
-    (hP : flat Y (completedIntegralCommRingSheaf l E Y D hl) P)
-    (hQ : flat Y (completedIntegralCommRingSheaf l E Y D hl) Q) :
+    (P Q : CochainComplex (scalarReductionSource l E Y) ℤ)
+    (hP : flat Y (completedIntegralCommRingSheafUnrestricted l E Y) P)
+    (hQ : flat Y (completedIntegralCommRingSheafUnrestricted l E Y) Q) :
     ∃ (hEP : flat Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P))
+        (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj P))
       (hEQ : flat Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)),
+        (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj Q)),
       (integralDerivedReduction l E Y D hl n).map
           (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
         m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
@@ -309,11 +310,12 @@ private theorem normalizedReductionComparison_square
       reductionCounit l E Y D hl n
           (((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≫
         DerivedCategory.Q.map (coefficientScalarTensorIso l E Y n P Q).hom := by
-  have hn := m.normalization
   have hb := normalizedBeta_eq l E Y D hl n
-  dsimp only [reductionExtension_eq_scalarExtension] at hn hb ⊢
-  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hn hb ⊢
-  obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := hn P Q hP hQ
+  dsimp only [reductionExtension_eq_scalarExtension] at hb
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hb
+  obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
+  dsimp only [reductionExtension_eq_scalarExtension] at beta hbeta hgen hEP hEQ hnorm
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at beta hgen
   let := hbeta
   have he := hb P Q beta hgen
   have hcan := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta)
@@ -388,13 +390,11 @@ private theorem nativeReductionMonoidal
       exact h
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
-  have hn := normalizedReductionComparison_square l E Y D hl a n m
-  dsimp only [reductionExtension_eq_scalarExtension] at hn
-  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hn
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
-      obtain ⟨hEP, hEQ, hnorm⟩ := hn P Q hP hQ
+      obtain ⟨hEP, hEQ, hnorm⟩ :=
+        normalizedReductionComparison_square l E Y D hl a n m P Q hP hQ
       rw [← hc P Q] at hnorm
       refine ⟨hEP, hEQ, ?_⟩
       have hrepR := nativeIso_representative Y R a P Q hP hQ
