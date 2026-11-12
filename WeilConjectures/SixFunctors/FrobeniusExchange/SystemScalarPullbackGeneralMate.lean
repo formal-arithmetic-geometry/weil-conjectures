@@ -611,9 +611,14 @@ private theorem systemScalarModel_transpose_counit (W : Scheme.{u})
       DerivedCategory.Q.map ((A.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
         (sequenceRestriction l E L ι W).mapDerivedCategoryFactors.inv.app
           ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) := by
-  have h := A.transpose P _ (𝟙 ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P))
-  erw [CategoryTheory.Functor.map_id, Category.comp_id, Adjunction.homEquiv_id] at h
-  exact h
+  have e1 : A.model.ε.app P ≫
+      DerivedCategory.Q.map (𝟙 ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P)) =
+      A.model.ε.app P := by
+    rw [CategoryTheory.Functor.map_id]
+    exact Category.comp_id _
+  rw [← e1]
+  refine (A.transpose P _ (𝟙 _)).trans ?_
+  rw [Adjunction.homEquiv_id]
 
 set_option profiler true in
 -- the derived mate comparison unfolds several large adjunction composites
@@ -1040,6 +1045,8 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
         (dL.app N) ≫
       (proEtaleCoefficientDirectImageComparison f (integralScalarQuotientMap l E L ι n)).hom.app
         ((coefficientSequenceEvaluation l L X n).obj N) := by
+  have := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
   apply sheafOfModules_comp_three_eq_of_heq
   · exact sequenceScalarPullbackRight_inv_evaluation_heq l E L ι f n N
   · exact pdE _
@@ -1048,8 +1055,10 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
   · intro W x
     exact heq_apply_of_heq_id _ (hρY _ W) rfl rfl x
   · exact normalizedRestrictScalars_map_heq l E L ι (W := Y) (n := n) (dL.app N) (pdL N)
-  · exact coefficientDirectImageComparison_app_heq f (integralScalarQuotientMap l E L ι n)
-      ((coefficientSequenceEvaluation l L X n).obj N)
+  · exact coefficientDirectImageComparison_app_heq
+      (A := Padic.coefficientExtensionRing l E (n + 1))
+      (B := Padic.coefficientExtensionRing l L (n + 1))
+      f (integralScalarQuotientMap l E L ι n) ((coefficientSequenceEvaluation l L X n).obj N)
 
 end OrdinaryCube
 
