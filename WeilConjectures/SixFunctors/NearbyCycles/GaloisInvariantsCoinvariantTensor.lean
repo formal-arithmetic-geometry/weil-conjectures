@@ -44,25 +44,27 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
--- Cache the graded tensor properties used to construct the derived functors. Without these
--- instances, elaborating each derived functor repeats the colimit-preservation searches.
-private theorem galoisTensorHasTensor₄ObjExt (Y : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) : GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+-- Resolve tensor colimit obligations directly, before instance search expands the graded
+-- tensor diagrams used in the construction of each derived pullback.
+private theorem galoisTensorModuleColimit (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    HasColimit F := inferInstance
 
-private theorem galoisTensorHasGoodTensor₁₂Tensor (Y : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) : GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+private theorem galoisTensorLeftColimit (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    PreservesColimit F ((curriedTensor _).obj M) := inferInstance
 
-private theorem galoisTensorHasGoodTensorTensor₂₃ (Y : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) : GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
+private theorem galoisTensorRightColimit (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    PreservesColimit F ((curriedTensor _).flip.obj M) := inferInstance
 
-attribute [local instance 2000] galoisTensorHasTensor₄ObjExt galoisTensorHasGoodTensor₁₂Tensor
-  galoisTensorHasGoodTensorTensor₂₃
+attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimit
+  galoisTensorRightColimit
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
