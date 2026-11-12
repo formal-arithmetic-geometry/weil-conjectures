@@ -70,6 +70,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   openTensorRestrictionIso openTensorRestrictionSquareIso
 
 -- Elaborate the two composition mates with their specified adjunction units.
+set_option profiler true in
 private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) :
     let p := pullback.fst k U.ι
