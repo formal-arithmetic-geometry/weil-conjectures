@@ -219,7 +219,7 @@ It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
 twist. (blueprint: `lem-a1-local-boundary-duality`, `sk-i-dl-a1-local`)
 -/
-theorem exists_linearEquiv_dual_stalk_higherDirectImage
+private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [IsDominant j]
@@ -229,14 +229,14 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
     (hsU : s.1 ∉ Set.range j.base) :
-    ∃ e : (((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
-        Module.Dual (PadicAlgCl l) (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier,
-      ∀ a b, e ((((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).frobenius a)
-          ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
+    ∃ e : (((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
+        Module.Dual (PadicAlgCl l) (((WeilComplex.homologySheaf 1).obj
+          ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))).stalk s).carrier,
+      ∀ a b, e ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a)
+          ((((WeilComplex.homologySheaf 1).obj
+            ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))).stalk s).frobenius b) =
         (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
   classical
-  rw [WeilSheaf.higherDirectImage_obj_eq, show ((1 : ℕ) : ℤ) = 1 from rfl,
-    show WeilSheaf.directImage (k₀ := k₀) (l := l) j = WeilSheaf.lowerStar j from rfl]
   -- the open `U` is a smooth separated curve
   have hjC : j ≫ C ↘ Spec (CommRingCat.of k₀) = U ↘ Spec (CommRingCat.of k₀) := comp_over j _
   have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by rw [← hjC]; infer_instance
@@ -389,6 +389,26 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
     (F.dual hF)).stalk s) Ψ.toLinearEquiv
     S₅' ψ (q ^ d) a hΨN b
+
+theorem exists_linearEquiv_dual_stalk_higherDirectImage
+    {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
+    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    [IsDominant j]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (C ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
+    (hsU : s.1 ∉ Set.range j.base) :
+    ∃ e : (((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
+        Module.Dual (PadicAlgCl l) (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier,
+      ∀ a b, e ((((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).frobenius a)
+          ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
+        (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
+  classical
+  rw [WeilSheaf.higherDirectImage_obj_eq, show ((1 : ℕ) : ℤ) = 1 from rfl,
+    show WeilSheaf.directImage (k₀ := k₀) (l := l) j = WeilSheaf.lowerStar j from rfl]
+  exact exists_linearEquiv_dual_stalk_higherDirectImage_core j F hF s hsU
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
