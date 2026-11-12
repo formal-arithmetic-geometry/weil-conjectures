@@ -62,7 +62,6 @@ private theorem compose_residue_comparisons
   exact ⟨φ, e, ei, fun i ↦ ⟨(h i).1, (h i).2.2, fun z ↦
     (congrArg (ei i) ((h i).2.1 z)).trans ((h i).2.2 (a z))⟩⟩
 
-set_option profiler true in
 -- The chosen geometric square compares derived pullback and explicit tensor quotients.
 /-- For fixed strictly perfect affine models `m`, `m'`, the coefficient arrows have chain
 representatives `φ i`, and there are geometric fibre comparisons `e`, `ei` intertwining the
