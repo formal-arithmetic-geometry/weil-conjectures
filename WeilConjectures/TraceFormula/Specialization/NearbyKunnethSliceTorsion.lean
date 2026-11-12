@@ -93,40 +93,40 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
+  let Aε := (L((M.ε)^*⟦𝔽⟧)).obj A
+  let Bε := (L((N.ε)^*⟦𝔽⟧)).obj B
+  let S₁ := pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a))
+  let A₁ := ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj Aε)
   have hAS : DerivedCategory.plusEtaleOrigin
       (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
-      (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
+      S₁
       ((finiteCoefficientDerivedEquivalence
-        (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
-        (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj
-          ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))) :=
+        S₁ (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj A₁) :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       _ (coordinateSliceTraitGeneric hM b hb D) hA
   have hτM : IsIso (((coordinateSliceTraitChangeHom hM b hb D).pullbackExchange 𝔽).app
-      ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))) :=
+      A₁) :=
     isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hAS
+  let S₂ := pullback (pullback.snd (φ₁.total ≫ b) D.toAffineLine)
+    (Spec.map (CommRingCat.ofHom D.a))
+  let P₁ :=
+    ((L((coordinateSliceTraitMapGeneric φ₁ b D)^*⟦𝔽⟧)).obj A₁ ⊗
+      (L((coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫
+        φ₂.generic)^*⟦𝔽⟧)).obj Bε)
   have hBP : DerivedCategory.plusEtaleOrigin
       (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
-      (pullback (pullback.snd (φ₁.total ≫ b) D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
+      S₂
       ((finiteCoefficientDerivedEquivalence
-        (pullback (pullback.snd (φ₁.total ≫ b) D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
-        (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj
-          ((L((coordinateSliceTraitMapGeneric φ₁ b D)^*⟦𝔽⟧)).obj
-            ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A)) ⊗
-          (L((coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫
-            φ₂.generic)^*⟦𝔽⟧)).obj ((L((N.ε)^*⟦𝔽⟧)).obj B))) :=
+        S₂ (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj P₁) :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_tensorObj_leftDerivedUpperStar
       _ (Field.toIsField _) _ _ hAS hB
   have hτP : IsIso (((coordinateSliceTraitChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
       D).pullbackExchange 𝔽).app
-        ((L((coordinateSliceTraitMapGeneric φ₁ b D)^*⟦𝔽⟧)).obj
-            ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A)) ⊗
-          (L((coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫
-            φ₂.generic)^*⟦𝔽⟧)).obj ((L((N.ε)^*⟦𝔽⟧)).obj B))) :=
+        P₁) :=
     isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hP (φ₁.total ≫ b)
       (comp_coordinate_fst hb) D E hBP
   have hτN : IsIso ((((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
-      (Category.comp_id _)).toGeneric).pullbackExchange 𝔽).app ((L((N.ε)^*⟦𝔽⟧)).obj B)) :=
+      (Category.comp_id _)).toGeneric).pullbackExchange 𝔽).app Bε) :=
     isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField hN E hB
   -- the square of Künneth maps along the changes of trait
   have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
@@ -144,8 +144,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
-    ((L((N.ε)^*⟦𝔽⟧)).obj B) hτM hτN hτP (𝟭 _)
+    A₁ Bε hτM hτN hτP (𝟭 _)
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   refine sq.2 ?_
   have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽 _ _ A B).1 h
