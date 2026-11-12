@@ -133,7 +133,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {P : NearbyCyclesModel Zc Sc} {P' : NearbyCyclesModel Zη Sc} {c : Y ⟶ Z₁} {j : Z₁ ⟶ Zc}
   {sb : Y ⟶ Zη} {π : Zη ⟶ Zc} {j' : S ⟶ Sc}
 
-set_option maxHeartbeats 1000000 in
 -- the composition laws and unit laws are instantiated on large derived-category terms
 /-- **The exchange square of an open sub-model and of its shrunk model** (ambient): for morphisms
 of models `ψ : N ⟶ M` over `c` and `𝟙`, `r : M ⟶ P` over `j, j'`, `s : N ⟶ P'` over `sb, j'`
@@ -550,7 +549,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType Xc.hom] [QuasiCompact Xc.hom] [IsSeparated Xc.hom]
   [LocallyOfFiniteType Xc'.hom] [QuasiCompact Xc'.hom] [IsSeparated Xc'.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the exchange square is checked on the large concrete goal
 /-- **The dualizing map of an open sub-model of a proper model and shrinking**: let `M` be an open
 sub-model of a proper trait model `M_c` over the generic base `(F, X_c, ι)` with proper `X_c`,
