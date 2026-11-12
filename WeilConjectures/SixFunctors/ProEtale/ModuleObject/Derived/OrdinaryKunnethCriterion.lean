@@ -230,22 +230,19 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
     simp only [hs₂, reassoc_of% hc, reassoc_of% hn, Category.assoc]
     simp
   have t₁ : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
-      ((leftDerivedUpperStarComp Λ p₂ aY).inv.app
-          (L((𝟙 S)^*⟦Λ⟧).obj (R((aX)_*⟦Λ⟧).obj A)) ≫
-        (pullbackSquareComparison Λ sq₁).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
-          L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A))) := by
+      ((leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KX) ≫
+        (pullbackSquareComparison Λ sq₁).hom.app KX ≫ cA)) := by
     have hg : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
-        ((pullbackSquareComparison Λ w).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
-          L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A))) := by
+        ((pullbackSquareComparison Λ w).hom.app KX ≫ cA)) := by
       rw [homEquiv_pullbackSquareComparison_comp_counit]
       exact h₁
     exact Adjunction.isIso_homEquiv_of_eq_map_comp _ _ _ _ e₁ (hg := hg)
   have t₂ := Adjunction.isIso_homEquiv_map_comp_counit (derivedUpperStarLowerStarAdjunction Λ aY)
-    ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B))
+    ((leftDerivedUpperStarId Λ S).hom.app KY)
   have t₃ := Adjunction.isIso_leftProjectionMorphism_of_isIso
     (derivedUpperStarLowerStarAdjunction Λ aY)
     (fun X Y ↦ (leftDerivedUpperStarTensor_braiding Λ aY X Y).symm) B
-    ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A)) (hpm := h₃)
+    ((leftDerivedUpperStarId Λ S).hom.app KX) (hpm := h₃)
   exact Adjunction.isIso_homEquiv_δ_tensorHom_of_isIso (derivedUpperStarLowerStarAdjunction Λ p₂)
     (derivedUpperStarLowerStarAdjunction Λ aY) (derivedUpperStarLowerStarAdjunction Λ (p₂ ≫ aY))
     (leftDerivedUpperStarComp Λ p₂ aY) (fun U V ↦ leftDerivedUpperStarTensor_comp Λ p₂ aY U V)
