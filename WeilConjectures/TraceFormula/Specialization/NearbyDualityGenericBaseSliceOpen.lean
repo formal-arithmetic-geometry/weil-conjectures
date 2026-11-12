@@ -573,14 +573,6 @@ lemma boundedConstructiblePullbackExchange_square (φ₀ : M₂.Hom M c p)
           A).hom := by
   subst hα hαc
   apply ObjectProperty.hom_ext
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    boundedConstructibleUpperStarOfMap_map, ObjectProperty.homMk_hom,
-    boundedConstructibleUpperStar_map_hom, liftExchange_app_hom, liftExchange_app_hom,
-    Hom.boundedConstructiblePullbackExchange_app_hom,
-    Hom.boundedConstructiblePullbackExchange_app_hom,
-    boundedConstructibleUpperStarSquareIso_hom_hom, boundedConstructibleNearbyCycles_map_hom'',
-    boundedConstructibleUpperStarSquareIso_hom_hom]
   transport_exact pullbackExchange_square' ℓ φ₀ ψ ψ' φ₁ htot hgen hb hs A.obj
 
 end SquareExchange
