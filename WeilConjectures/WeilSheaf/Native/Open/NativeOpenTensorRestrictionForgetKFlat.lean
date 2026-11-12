@@ -33,8 +33,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 2000000 in
--- The HEq transports and long categorical reassociation require the larger reduction budget.
+set_option profiler true in
 /-- The restriction/forgetting square on two actual K-flat complexes, for the
 ordinary comparison already constructed by normalized tensor--Hom adjunctions.
 
