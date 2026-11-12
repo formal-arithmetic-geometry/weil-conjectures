@@ -391,7 +391,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 attribute [local irreducible] integralExceptionalQuotient
 
-set_option profiler true in
 /-- Direct-image realization, uniquely determined by the given set-sheaf comparison
 on every section. This fixes its scalar normalization, not just its isomorphism class.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-etale-realization).
@@ -480,6 +479,7 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
     change (β.hom.app M).hom.app U x = _ at ha
     change (β.hom.app M).hom.app U y = _ at hb
     dsimp only [id] at h
+    -- Compose section equations directly to avoid rewriting through the sheaf constructions.
     let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
     exact ht.trans ((congrArg ε h).trans
       ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
