@@ -212,6 +212,31 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
 
+/-- Triviality of a base-change action passes through the invertible exchange to the slice. -/
+private lemma genericSliceAut_autAction_eq_id_of_baseChange
+    (A : DerivedCategory (Mod (Sheaf (ProEt.topology X₁.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X₁.left)))
+    (σ : GenericAut k' (traitSliceField k'))
+    (hσ : (baseChangeAut h.isTraitModelOver b hb (traitSlice (traitSliceCoord k'))
+      (traitSlice_over _) σ).autAction (Profinite.padicAlgClRingObj ℓ)
+        (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) = 𝟙 _) :
+    (genericSliceAut (traitSliceCoord k') hb σ).autAction (Profinite.padicAlgClRingObj ℓ)
+      (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) =
+        𝟙 _ := by
+  have hc := h.genericSliceModel_ε_comp_genericSliceBaseMap (traitSliceCoord k') hb
+  have hk := isIso_pullbackExchange_genericSliceToBaseChange (traitSliceCoord k')
+    h.isTraitModelOver hb (Profinite.padicAlgClRingObj ℓ) hc
+  have := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k')
+    h.isTraitModelOver hb hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
+    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+  refine eq_id_of_naturality_of_iso _ (fun f ↦ Hom.autAction_naturality _ _ f)
+    ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
+      (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb))).app A) ?_
+  exact eq_id_of_comp_eq_map_comp _ _ _ hσ
+    (pullbackExchange_genericSliceToBaseChange_app_comp_autAction (traitSliceCoord k')
+      h.isTraitModelOver hb (Profinite.padicAlgClRingObj ℓ) hc σ
+      (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+
 set_option profiler true in
 -- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
@@ -252,26 +277,9 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
   have hD2 := hD hA' hB.1 hB.2.some
   obtain ⟨V, hV, htriv, rB, hrB, havgB⟩ := hD2
   have hc := h.genericSliceModel_ε_comp_genericSliceBaseMap (traitSliceCoord k') hb
-  have hκ := fun σ ↦ pullbackExchange_genericSliceToBaseChange_app_comp_autAction
-    (traitSliceCoord k') hM hb (Profinite.padicAlgClRingObj ℓ) hc σ
-    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
-  have hk := isIso_pullbackExchange_genericSliceToBaseChange (traitSliceCoord k')
-    hM hb (Profinite.padicAlgClRingObj ℓ) hc
-  have := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
-    hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
-    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
-  -- triviality of the action of `V` on `Ψ_{M''} (c^* A)`
-  have htrivG : ∀ σ ∈ V, (genericSliceAut (traitSliceCoord k') hb σ).autAction
-      (Profinite.padicAlgClRingObj ℓ)
-      (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-        A) = 𝟙 _ := by
-    intro σ hσ
-    refine eq_id_of_naturality_of_iso _
-      (fun f ↦ Hom.autAction_naturality _ _ f)
-      ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
-        (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb))).app A) ?_
-    exact eq_id_of_comp_eq_map_comp _ _ _ (htriv σ hσ) (hκ σ)
-  refine ⟨V, Subgroup.finiteIndex_of_finite_quotient, htrivG, fun U hUV _ ↦ ?_⟩
+  refine ⟨V, Subgroup.finiteIndex_of_finite_quotient,
+    fun σ hσ ↦ genericSliceAut_autAction_eq_id_of_baseChange ℓ h hb A σ (htriv σ hσ),
+    fun U hUV _ ↦ ?_⟩
   have hs := sum_autAction_baseChangeAut_eq_relIndex_nsmul hM b hb
     (traitSlice (traitSliceCoord k')) (traitSlice_over _) (Profinite.padicAlgClRingObj ℓ) hUV
     (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) htriv
@@ -294,6 +302,8 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
       (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
         (traitSlice_over _)).generic = (h.genericSliceHom (traitSliceCoord k') hb).generic := by
     simp [genericSliceHom]
+  have hk := isIso_pullbackExchange_genericSliceToBaseChange (traitSliceCoord k')
+    hM hb (Profinite.padicAlgClRingObj ℓ) hc
   have hkA := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
     hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
     (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
