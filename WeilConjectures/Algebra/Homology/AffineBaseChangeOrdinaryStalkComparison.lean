@@ -102,6 +102,6 @@ theorem exists_affineBaseChangeOrdinaryStalkComparison
     R A R' A' φg' φf' hφg' hφf' sq M hM i m p τ hτ
   refine ⟨lU, ?_⟩
   intro x
-  exact (hcoord _).trans (congrArg _ (hsquare x))
+  exact (hcoord _).trans (congrArg _ (congrArg _ (hsquare x)))
 
 end AlgebraicGeometry
