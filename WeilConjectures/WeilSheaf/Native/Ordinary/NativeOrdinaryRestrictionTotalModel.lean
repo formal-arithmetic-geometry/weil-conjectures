@@ -125,7 +125,7 @@ def nativeOrdinaryRestrictionTotal
         (Spec (CommRingCat.of k₀))))).isLeftAdjoint
   exact (R.mapCochainComplexμIso P T).symm
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The native tensor comparisons contain large sheaf and derived-category instances.
 /-- The fixed ordinary derived restriction tensorator is the localization of the
 balanced total restriction map, including arbitrary input identification isomorphisms.

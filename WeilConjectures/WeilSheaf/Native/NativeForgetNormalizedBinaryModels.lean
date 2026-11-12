@@ -90,7 +90,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 5000000 in
+set_option profiler true in
 -- The fixed representative squares involve several nested localization functors.
 /-- The fixed native tensor model forgets to the canonical ordinary localization tensorator.
 The first conjunct specifies the canonical total comparison on all balanced summands;
