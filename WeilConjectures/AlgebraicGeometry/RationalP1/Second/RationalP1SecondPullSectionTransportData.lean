@@ -232,8 +232,16 @@ private theorem pullTwist_naturality
   have h := (nativePullTwistNatIso Λ f LS LX e).hom.naturality m
   simpa only [← Iso.app_hom, nativePullTwistNatIso_app, Functor.comp_map] using h
 
+private theorem map_tensor_shift_cancel
+    {C D : Type*} [Category C] [Category D] (G : C ⥤ D)
+    {A B X Y Z : C} {W : D}
+    (f : A ⟶ B) (g : B ⟶ X) (h : X ⟶ Y) (e : Y ≅ Z) (k : G.obj Y ⟶ W) :
+    G.map (f ≫ g ≫ h ≫ e.hom) ≫ G.map e.inv ≫ k =
+      G.map (f ≫ g ≫ h) ≫ k := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← G.map_comp_assoc e.hom e.inv, e.hom_inv_id, G.map_id, Category.id_comp]
+
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The explicit categorical calculation shares the native tensor structures throughout.
 private theorem pullTwist_section
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -279,13 +287,35 @@ private theorem pullTwist_section
     (by exact pullSectionIso_tensor Λ Y f h A B) hn he
     (nativeTensorShift_naturality Λ (ProjectiveLine Y) LS
       ((pullSectionIso Λ Y f h).hom.app A))
-  simp only [pullTwist_hom, Functor.map_comp, Category.assoc]
-  rw [← G.map_comp_assoc u.hom u.inv, u.hom_inv_id, G.map_id, Category.id_comp]
-  simpa only [Functor.map_comp, Category.assoc, tracePull] using ht
+  simp only [pullTwist_hom, Category.assoc]
+  exact (map_tensor_shift_cancel G _ _ _ u _).trans ht
+
+private theorem pullSectionTransportData_of_hom
+    {C D : Type*} [Category C] [Category D]
+    {F₁ F₂ : C ⥤ D} {G : D ⥤ C}
+    {s₁ : F₁ ⋙ G ≅ 𝟭 C} {s₂ : F₂ ⋙ G ≅ 𝟭 C}
+    (T : C ⥤ C) (U : D ⥤ D) (M : C)
+    (e₁ : F₁.obj (T.obj M) ≅ U.obj (F₁.obj M))
+    (e₂ : F₂.obj (T.obj M) ≅ U.obj (F₂.obj M))
+    (b : F₁.obj M ≅ F₂.obj M)
+    (d : ∀ N, G.obj (U.obj N) ≅ T.obj (G.obj N))
+    (h₁ : G.map e₁.hom ≫ (d (F₁.obj M)).hom ≫ T.map (s₁.hom.app M) =
+      s₁.hom.app (T.obj M))
+    (h₂ : G.map e₂.hom ≫ (d (F₂.obj M)).hom ≫ T.map (s₂.hom.app M) =
+      s₂.hom.app (T.obj M))
+    (hb : G.map (U.map b.inv) ≫ (d (F₁.obj M)).hom =
+      (d (F₂.obj M)).hom ≫ T.map (G.map b.inv)) :
+    ∃ data : PullSectionTransportData (G := G) (s₁ := s₁) (s₂ := s₂) T U M e₁ e₂ b,
+      True := by
+  refine ⟨{ d₁ := d (F₁.obj M), d₂ := d (F₂.obj M), h₁ := ?_, h₂ := h₂, hb := ?_ },
+    trivial⟩
+  · rw [← h₁]
+    simp only [← G.map_comp_assoc, e₁.inv_hom_id, G.map_id, Category.id_comp]
+  · simpa only [Category.assoc] using
+      congrArg (fun m ↦ G.map e₂.hom ≫ m ≫ T.map (s₁.hom.app M)) hb
 
 set_option linter.unusedVariables false in
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The calculation below is elaborated with the native tensor instances of this section.
 private theorem second_pull_section_transport_data_aux
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -348,17 +378,11 @@ private theorem second_pull_section_transport_data_aux
   have h₂ : G.map e₂.hom ≫ (d (F₂.obj M)).hom ≫ T.map (s₂.hom.app M) =
       s₂.hom.app (T.obj M) :=
     pullTwist_section Λ Y (secondProjection Y) _ _ _ _ eD he₂ M
-  refine ⟨{ d₁ := d (F₁.obj M), d₂ := d (F₂.obj M), h₁ := ?_, h₂ := h₂, hb := ?_ },
-    trivial⟩
-  · change G.map e₁.inv ≫ s₁.hom.app (T.obj M) =
-      (d (F₁.obj M)).hom ≫ T.map (s₁.hom.app M)
-    rw [← h₁]
-    simp only [← G.map_comp_assoc, e₁.inv_hom_id, G.map_id, Category.id_comp]
-  · have hn := pullTwist_naturality Λ (diagonalImmersion Y)
+  exact pullSectionTransportData_of_hom T U M e₁ e₂
+    ((ambientPullbackComparison Λ (square Y)).symm.app K) d h₁ h₂
+    (pullTwist_naturality Λ (diagonalImmersion Y)
       (line l c (diagonalSurface Y)) (line l c (ProjectiveLine Y)) eD
-      ((ambientPullbackComparison Λ (square Y)).symm.app K).inv
-    simpa only [Category.assoc, Functor.comp_obj, d, F₁, F₂, M] using
-      congrArg (fun m ↦ G.map e₂.hom ≫ m ≫ T.map (s₁.hom.app M)) hn
+      ((ambientPullbackComparison Λ (square Y)).symm.app K).inv)
 
 end AlgebraicGeometry.ProEtale.RationalP1
 
