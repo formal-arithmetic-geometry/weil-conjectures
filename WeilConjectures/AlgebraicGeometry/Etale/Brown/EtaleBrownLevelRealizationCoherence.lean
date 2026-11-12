@@ -33,33 +33,22 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 
 variable (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
 
-set_option maxHeartbeats 2000000 in
 set_option trace.profiler true in
--- Checking section identities unfolds the two constant-scalar restriction constructions.
-private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
-    coefficientRestriction (J := W.smallEtaleTopology) O t h ⋙
-      strictEtaleBrownConstant O t W n ≅
-    strictEtaleBrownConstant O t W m ⋙
-      Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h) := by
+private def brownLevelConstantRestrictionIso (W : Scheme.{u})
+    (A B : CommRingCat.{u + 1}) (f : A ⟶ B) :
+    SheafOfModules.restrictScalars.{u + 1}
+        ((sheafCompose W.smallEtaleTopology
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).map f)) ⋙
+      Etale.SystemProjection.constantModule W A ≅
+    Etale.SystemProjection.constantModule W B ⋙
+      Sheaf.restrictScalars W.smallEtaleTopology f.hom := by
   refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
-    (NatIso.ofComponents (fun U ↦ ?_) ?_)) ?_
-  · exact ModuleCat.isoMk (Iso.refl _) (fun a ↦ by
-      ext x
-      change ((M.val.obj U).smul
-          ((toSheafify W.smallEtaleTopology
-            ((Functor.const W.Etaleᵒᵖ).obj
-              (CommRingCat.of (strictEtaleBrownRing O t m)))).app U
-                (strictEtaleBrownRingMap O t h a))).asHom.hom x =
-        ((M.val.obj U).smul
-          ((coefficientQuotientMap (J := W.smallEtaleTopology) O t h).hom.app U
-            ((toSheafify W.smallEtaleTopology
-              ((Functor.const W.Etaleᵒᵖ).obj
-                (CommRingCat.of (strictEtaleBrownRing O t n)))).app U a))).asHom.hom x
-      have hu := congrArg (fun f ↦ f.app U a)
-        (toSheafify_naturality W.smallEtaleTopology
-          ((Functor.const W.Etaleᵒᵖ).map
-            (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))))
-      exact congrArg (fun r ↦ ((M.val.obj U).smul r).asHom.hom x) hu)
+    (NatIso.ofComponents (fun U ↦ ModuleCat.isoMk (Iso.refl _) (fun a ↦ ?_)) ?_)) ?_
+  · ext x
+    have hn := congrArg (fun g ↦ g.app U a)
+      (toSheafify_naturality W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).map f))
+    exact congrArg (fun b ↦ b • (show M.val.obj U from x)) hn
   · intro U V f
     ext x
     rfl
@@ -67,7 +56,32 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     ext U x
     rfl
 
-set_option maxHeartbeats 2000000 in
+set_option trace.profiler true in
+private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
+    coefficientRestriction (J := W.smallEtaleTopology) O t h ⋙
+      strictEtaleBrownConstant O t W n ≅
+    strictEtaleBrownConstant O t W m ⋙
+      Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h) :=
+  brownLevelConstantRestrictionIso W _ _ (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))
+
+private def brownLevelInverseMateIso
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
+    (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
+    L ⋙ G ≅ F ⋙ L' := by
+  let α := (mateEquiv a b).symm (.mk _ _ _ _ e.hom)
+  letI : IsIso α := isIso_inverseMate_of_equivalences a b e
+  exact (asIso α).symm
+
+private theorem brownLevelInverseMateIso_mate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
+    (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
+    (mateEquiv a b (.mk _ _ _ _ (brownLevelInverseMateIso a b e).inv)) = e.hom :=
+  (mateEquiv a b).apply_symm_apply _
+
 set_option trace.profiler true in
 -- The normalization transports adjunctions between two concrete derived-category universes.
 /-- Normalize the comparison maps while retaining the supplied derived functors and
@@ -101,14 +115,10 @@ theorem etaleBrownLevelRealizationCoherence_exists
   choose restriction hrestriction using @hd
   let scalar {m n : ℕ} (h : m ≤ n) :
       (P.scalar h).derived ⋙ R.derived m ≅
-      R.derived n ⋙ Etale.scalarExtension (strictEtaleBrownRingMap O t h) W := by
-    letI := isIso_inverseMate_of_equivalences (P.scalar h).derivedAdj
+      R.derived n ⋙ Etale.scalarExtension (strictEtaleBrownRingMap O t h) W :=
+    brownLevelInverseMateIso (P.scalar h).derivedAdj
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
         (strictEtaleBrownRingMap O t h))) (restriction h)
-    exact (asIso (((mateEquiv (P.scalar h).derivedAdj
-      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
-        (strictEtaleBrownRingMap O t h)))).symm
-      (.mk _ _ _ _ (restriction h).hom)))).symm
   let R' : StrictEtaleBrownRealizationData O t W P :=
     { ordinaryAdditive := R.ordinaryAdditive
       derived := R.derived
@@ -126,10 +136,8 @@ theorem etaleBrownLevelRealizationCoherence_exists
     exact HEq.rfl
   · exact hrestriction
   · intro m n h
-    exact congrArg (fun s ↦ s)
-      ((mateEquiv (P.scalar h).derivedAdj
-        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
-          (strictEtaleBrownRingMap O t h)))).apply_symm_apply
-            (.mk _ _ _ _ (restriction h).hom))
+    exact brownLevelInverseMateIso_mate (P.scalar h).derivedAdj
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h))) (restriction h)
 
 end AlgebraicGeometry
