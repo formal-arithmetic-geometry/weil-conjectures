@@ -249,9 +249,7 @@ private theorem normalized_full_cube
     _ _ _ _ _ _ hN hS a.hom d.hom hA hD hc
 
 end FullCube
-set_option trace.profiler true in
-set_option maxHeartbeats 3000000 in
--- The concrete normalization needs the coefficient-system elaboration budget.
+set_option profiler true in
 /-- Exact scalar restriction commutes with the normalized Brown image square.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E.
 (blueprint: lem-pur-brown-restriction-image-cube).
@@ -305,7 +303,14 @@ theorem etaleBrownRestrictionImageCube
     (ModuleCat.{u + 1} (strictEtaleBrownRing O t k)) g
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
     (.mk _ _ _ _ (A.restrictInverse h).hom))
-  exact normalized_full_cube (A.right m) (A.right n) (G m) (G n)
+  have cube := normalized_full_cube
+    (A := strictEtaleLevel V O t m) (B := strictEtaleLevel W O t m)
+    (C := strictEtaleLevel V O t n) (D := strictEtaleLevel W O t n)
+    (E := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)))
+    (F := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)))
+    (G := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)))
+    (H := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)))
+    (A.right m) (A.right n) (G m) (G n)
     qV qW (eV m) (eW m) (eV n) (eW n) rV rW
     (B.level m).direct (B.level n).direct
     (G m).rightDerivedFunctor (G n).rightDerivedFunctor
@@ -327,5 +332,6 @@ theorem etaleBrownRestrictionImageCube
     (RV.val.ordinaryRestriction h) (RW.val.ordinaryRestriction h)
     (RV.property.2.1 h) (RW.property.2.1 h)
     (etaleBrownOrdinaryRestrictionCube O t g A PW PV B RV RW rg h)
+  exact cube
 
 end AlgebraicGeometry
