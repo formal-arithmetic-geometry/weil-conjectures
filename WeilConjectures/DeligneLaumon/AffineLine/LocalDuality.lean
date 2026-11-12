@@ -361,8 +361,17 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
         (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
           (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius
         (Ψ.toLinearEquiv a) := by
-    rw [hone]
-    rw [FrobeniusModule.frobeniusEnd_rescale_apply one_ne_zero]
+    have hc0 : ((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) :
+        PadicAlgCl l) ^ (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 ≠ 0 := by
+      rw [hone]
+      exact one_ne_zero
+    have hrescale (x : (H.dual hH).stalk zf).carrier :
+        (((H.dual hH).stalk zf).rescale
+          (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
+            (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius x =
+          ((H.dual hH).stalk zf).frobenius x := by
+      rw [FrobeniusModule.frobeniusEnd_rescale_apply hc0, hone, one_smul]
+    rw [hrescale]
     exact hΨ'
   rw [← hqd]
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
