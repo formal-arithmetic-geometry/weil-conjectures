@@ -45,7 +45,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` and
@@ -88,7 +88,7 @@ theorem nonempty_arrowIso_map_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ 
     φ₁ φ₂ h A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
     (by exact_mod_proofs hAB)
   exact_mod_proofs k
-set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` and
