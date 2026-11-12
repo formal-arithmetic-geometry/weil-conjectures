@@ -87,7 +87,8 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Category.comp_id, Category.assoc]
   have hfac := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
   simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hfac
-  erw [Functor.map_id, Category.comp_id, Functor.map_id, Category.id_comp] at hfac
+  erw [CategoryTheory.Functor.map_id, Category.comp_id,
+    CategoryTheory.Functor.map_id, Category.id_comp] at hfac
   exact hfac
 
 
