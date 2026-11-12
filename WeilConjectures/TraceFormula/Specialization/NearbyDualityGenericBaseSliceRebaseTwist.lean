@@ -137,7 +137,6 @@ private lemma boundedConstructibleUpperStarOfMapCompIso_hom_hom (hc : c' ≫ π 
       (leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hc).hom.app A.obj :=
   rfl
 
-set_option profiler true in
 /-- **The exchange factorization of a composite** on bounded constructible complexes: for
 morphisms of models `φ = φ' ≫ ψ` as in
 `NearbyCyclesModel.pullbackExchange_app_comp_map_compOfEq_of_rebase`, and exchanges `α`, `α'`,
