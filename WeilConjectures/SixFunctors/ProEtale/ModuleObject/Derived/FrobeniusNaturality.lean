@@ -224,7 +224,8 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
     (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
     (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M]
   rw [upperStarCongr]
-  rw [Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
+  trace_state
+  sorry
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
