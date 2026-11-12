@@ -326,6 +326,7 @@ private theorem normalizedReductionComparison_square
     (coefficientScalarTensorIso l E Y n P Q) he
   refine ⟨hEP, hEQ, ?_⟩
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
+  dsimp only [Modules] at hs ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let mut a ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `hs).type
     let mut b ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
