@@ -422,6 +422,7 @@ private theorem power_on_complex (T : Scheme.{u})
     (((HomologicalComplex.eval (AdicCompletion.Modules l E T) (.up ℤ) j).mapEnd P).map_pow
       (principalScalar l E T P) (n + 1)).symm
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Comparing the nested tower, cone and evaluation functors needs extra elaboration fuel.
 private theorem strictPrincipalLevels (T : Scheme.{u})

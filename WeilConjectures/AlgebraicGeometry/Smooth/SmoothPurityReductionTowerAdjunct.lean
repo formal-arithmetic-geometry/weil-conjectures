@@ -157,6 +157,7 @@ private theorem reduction_scalar_comp
   rw [coefficient_map_eq]
   rw [limit.w]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Kernel checking the extracted ordinary reduction helper exceeds the default budget.
 private theorem ordinary_reduction_isIso
