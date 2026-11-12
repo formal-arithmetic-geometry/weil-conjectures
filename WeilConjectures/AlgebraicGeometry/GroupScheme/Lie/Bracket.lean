@@ -739,6 +739,7 @@ theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := 
   rw [← (commute_tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
     aug₃_mon₃ mon₃_mul u q).eq, mul_inv_cancel_right]
 
+set_option profiler true in
 set_option synthInstance.maxHeartbeats 200000 in
 -- The instances on points over `k[α][β][γ]` are slow to synthesize.
 set_option maxHeartbeats 1000000 in
