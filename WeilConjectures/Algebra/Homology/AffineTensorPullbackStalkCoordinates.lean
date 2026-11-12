@@ -105,7 +105,7 @@ def affineTensorPullbackHomologyStalkIso
     (s.mapIso (affineTensorPullbackHomologySheafIso A A' φ M i)).toLinearEquiv.toAddEquiv
 
 
--- Matching the explicit sheaf and native scheme-module functors needs extra heartbeats.
+set_option profiler true in
 /-- Affine localization identifies the base-change coordinate with the stalk map
 of the inverse ordinary pullback counit.  This is the geometric localization
 identity from Stacks Tag 0DJ8; the remaining supplied representative isomorphism
