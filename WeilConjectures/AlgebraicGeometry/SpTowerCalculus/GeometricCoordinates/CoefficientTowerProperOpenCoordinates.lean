@@ -220,6 +220,7 @@ private theorem ordinaryPushHorizontal {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((EE l E X (σgraph l E X) m).obj M) V
           (((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f m).hom.app M).val.app
             V x)) := by
+  dsimp only [SpTowerShriek.pushSection]
   exact SpTowerShriek.canonicalPushHorizontal
     (graphRings l E) (graphTransitions l E) f M h V x
 
@@ -233,7 +234,7 @@ private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
       (graphPushIso l E f).symm).hom.app M).val.app (op (n, V.unop)) x)
       (fun x ↦ (((EE l E Y (σgraph l E Y) n).map (d.hom.app M) ≫
         (VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app
-          V x) := by
+          V x)) := by
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app,
     Functor.rightUnitor_hom_app, Category.id_comp]
   apply heq_of_eq
