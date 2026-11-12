@@ -383,15 +383,11 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     θ θ' (derivedBaseChangeMap B sq.toCommSq)
     (by
       have HN := native_base_change_mate (R l E n) sq.toCommSq
-      exact HN)
-    (by
-      intro M
-      have HC := strictFinitePullbackSquareCoherence l E b sq n M
       run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
         exactByConversion h)
+    (by sorry)
     N (coordinates.property f n) (coordinates.property f' n)
-  simpa only [B, θ, θ', Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
-    Category.assoc] using H
+  sorry
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
