@@ -303,7 +303,7 @@ theorem finite_exactHom_single_counit_transport
   have hFT : F ⋙ T = RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
     directImageAlgebra_factorization f
   have hf := affine_singlePushforward_unit_isIso f M hM
-  rw [← eqToIso_refl] at hγ
+  rw [← eqToIso_refl (rfl : F ⋙ T = F ⋙ T)] at hγ
   have result := CategoryTheory.assembly_transport F T H
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) adjH M L hFT hf γ hγ e
   simpa only [eqToHom_refl, Category.id_comp, cast_eq] using result
