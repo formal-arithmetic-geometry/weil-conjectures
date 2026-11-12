@@ -272,14 +272,14 @@ private theorem restrictionInverseSection (l : ℕ) [Fact l.Prime] (T : Scheme.{
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
 
+/-- The inverse evaluation comparison is the recorded transport on each chart. -/
 private theorem evalIso_inv_app (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
     (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
     ((evalIso l T r n).inv.app M).hom.app U = eqToHom (r.underlying M n U).symm := by
   rfl
 
--- Converting the three concrete sheaf module presentations requires extra reduction.
-set_option profiler true in
+-- Express the restriction comparison as a section cast before applying line_tensor.
 private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -301,8 +301,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
           (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n) := by
   have hr := finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n
   rw [← hr]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
-    Functor.map_id, Category.id_comp]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
   have hline := diagonalFiniteForgetIso_transport l n (diagonalSurface Y)
     ((diagonalForget l (diagonalSurface Y)).obj
       ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)))
@@ -522,7 +521,6 @@ private def siteIntegralGenerator (A : Type (u + 1)) [CommRing A] (T : Scheme.{u
     (cartierForget A T).map (finiteEtaleConstantIso A T).hom
 
 -- Compare the terminal generators in the two sheafification presentations.
-set_option profiler true in
 private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (x : ULift.{u + 1} ℤ) :
     (siteIntegralGenerator A T).hom.app (op (Scheme.ProEt.mk (𝟙 T)))
@@ -563,13 +561,13 @@ private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
   erw [moduleForget_apply]
   exact hc
 
+/-- Forgetting scalars preserves the action of a module morphism on sections. -/
 private theorem diagonalForget_section (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     {M N : DiagonalMod l T} (f : M ⟶ N) (U : T.ProEtᵒᵖ) (x : M.obj.obj U) :
     ((diagonalForget l T).map f).hom.app U x = f.hom.app U x := by
   rfl
 
 -- Match the concrete evaluation and scalar-restriction module presentations.
-set_option profiler true in
 private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
