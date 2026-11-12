@@ -271,7 +271,6 @@ private theorem restrictionInverseSection (l : ℕ) [Fact l.Prime] (T : Scheme.{
     HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x := by
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
-set_option maxHeartbeats 1000000 in
 -- Converting the three concrete sheaf module presentations requires extra reduction.
 private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
@@ -504,7 +503,6 @@ private def siteIntegralGenerator (A : Type (u + 1)) [CommRing A] (T : Scheme.{u
     (forgetComparisonIso A T).hom.app (Etale.ordinaryFiniteConstant A T) ≫
     (cartierForget A T).map (finiteEtaleConstantIso A T).hom
 
-set_option maxHeartbeats 1000000 in
 -- Compare the terminal generators in the two sheafification presentations.
 private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (x : ULift.{u + 1} ℤ) :
@@ -546,7 +544,6 @@ private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
   erw [moduleForget_apply]
   exact hc
 
-set_option maxHeartbeats 1000000 in
 -- Match the concrete evaluation and scalar-restriction module presentations.
 private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
