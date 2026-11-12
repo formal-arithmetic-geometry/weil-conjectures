@@ -354,9 +354,7 @@ theorem tower_scalarPullback_counitLift
   simp only [t, v, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_inv_app,
     Functor.associator_hom_app, Category.comp_id] at h
-  repeat' first
-    | erw [Category.id_comp] at h
-    | erw [Category.comp_id] at h
+  repeat' erw [Category.id_comp] at h
   exact h
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
