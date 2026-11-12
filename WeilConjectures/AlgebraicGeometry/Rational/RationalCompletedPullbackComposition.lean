@@ -36,9 +36,13 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-set_option maxHeartbeats 700000 in
+-- Expose the unchanged carrier of scalar restriction before elaborating section applications.
+private local instance rationalCompletedRestrictionCoeFun {R S : Type*} [Ring R] [Ring S]
+    (φ : R →+* S) (M : ModuleCat.{u + 1} R) (N : ModuleCat.{u + 1} S) :
+    CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) (fun _ ↦ M → N) where
+  coe f := f.hom
+
 set_option trace.profiler true in
--- Nested chart conversions arise in the explicit tensor-section normalization.
 /-- Completed composition and descent to all raw rational fraction arrows.
 Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15.
 

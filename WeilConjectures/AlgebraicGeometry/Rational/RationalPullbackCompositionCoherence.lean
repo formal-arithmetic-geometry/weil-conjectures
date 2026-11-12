@@ -92,9 +92,13 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-set_option maxHeartbeats 700000 in
+-- Expose the unchanged carrier of scalar restriction before elaborating section applications.
+private local instance rationalCoherenceRestrictionCoeFun {R S : Type*} [Ring R] [Ring S]
+    (φ : R →+* S) (M : ModuleCat.{u + 1} R) (N : ModuleCat.{u + 1} S) :
+    CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) (fun _ ↦ M → N) where
+  coe f := f.hom
+
 set_option trace.profiler true in
--- Tensor-generator coordinates unfold nested inverse-image and scalar-extension sections.
 /-- The composition equation with all specified ordinary, completed and raw maps.
 The module formula uses generators on base-changed charts; sheafification and balancing
 extend it to local tensors. Derived normalization fixes the ambient comparison itself.
