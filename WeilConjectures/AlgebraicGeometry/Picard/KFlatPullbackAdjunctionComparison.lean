@@ -97,6 +97,9 @@ private theorem kFlat_pullback_adjunction_comparison_iso_inv
 
 private theorem kFlat_pullback_adjunction_comparison_transpose
     {S S' : Scheme.{u}} (g : S' ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
+    [hL : (Scheme.Modules.tensorPullback g).Additive]
     {P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ}
     {I : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ}
     {α : P ⟶ ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
@@ -202,13 +205,8 @@ theorem kFlat_pullback_adjunction_comparison
     exact Classical.choose_spec (exists_schemeDerivedAdjunction g ε hε)
       (q.obj P) (q'.obj I) (q'.map a)
   have ha : (ah.homEquiv _ _) (q'.map a) = q.map α := by
-    rw [Adjunction.homEquiv_apply]
-    erw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-    change q.map (ac.unit.app P) ≫ q.map
-      (((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
-        (.up ℤ)).map a) = q.map α
-    rw [← Functor.map_comp]
-    exact congrArg q.map ((ac.homEquiv _ _).apply_symm_apply α)
+    simpa only [A, ac, a, ah, q, q'] using
+      (kFlat_pullback_adjunction_comparison_transpose (g := g) (P := P) (I := I) (α := α))
   rw [ha] at h
   change ((relativeMVAdj g).homEquiv _ _)
     (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) = _ at h
