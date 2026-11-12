@@ -96,7 +96,6 @@ private theorem tensorHom_counit_evaluation
       (τ.hom.app (R.obj (H.obj (op P, Q)), R.obj P))
       (adj.counit.app (H.obj (op P, Q))) (adj.counit.app P) (e _ P Q (𝟙 _)))
 
-set_option profiler true in
 -- Evaluation crosses the two definitionally equal presentations of scheme module sheaves.
 private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
     (P Q : schemeDerivedCategory T) :
@@ -182,7 +181,6 @@ private theorem tensorHom_pullback_evaluation
   simp only [Category.assoc]
   rw [reassoc_of% hn, reassoc_of% (map_pair_comp F (t ⊗ₘ 𝟙 P) v), ht]
 
-set_option profiler true in
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
 /-- The exchange identity before applying global sections.
 Here `p` is the pullback of evaluation transposed by the fixed tensor-Hom bijection.
