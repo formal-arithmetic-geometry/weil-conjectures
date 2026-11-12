@@ -197,37 +197,15 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
   let q := HomotopyCategory.quotient A₀ (.up ℤ)
   let F := ((Scheme.Modules.tensorPullback g').mapHomotopyCategory (.up ℤ) ⋙
     DerivedCategory.Qh (C := B₀)) ⋙ comparisonDerivedStalk X' z
+  let δ : Sc ⋙ E.mapHomologicalComplex (.up ℤ) ⟶ Pc ⋙ Stc :=
+    { app := fun P ↦ (tensorStalkIso f f' g g' sq z P).hom
+      naturality := fun _ _ a ↦ tensorStalkIso_naturality f f' g g' sq z a }
   let βc : q ⋙ (DerivedCategory.Qh ⋙ (comparisonDerivedStalk X (g' z) ⋙ L)) ⟶
       q ⋙ F :=
-    { app := fun P ↦
-        L.map (St.mapDerivedCategoryFactors.hom.app P) ≫
-        ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (Sc.obj P)) ≫
-        DerivedCategory.Q.map (tensorStalkIso f f' g g' sq z P).hom ≫
-        St'.mapDerivedCategoryFactors.inv.app (Pc.obj P)
-      naturality := by
-        intro P Q a
-        change L.map (St.mapDerivedCategory.map (DerivedCategory.Q.map a)) ≫ _ =
-          _ ≫ St'.mapDerivedCategory.map (DerivedCategory.Q.map (Pc.map a))
-        rw [← L.map_comp_assoc, St.mapDerivedCategoryFactors_hom_naturality,
-          L.map_comp_assoc]
-        have hε := ε.naturality
-          ((HomotopyCategory.quotient _ (.up ℤ)).map (Sc.map a))
-        change L.map (DerivedCategory.Q.map (Sc.map a)) ≫
-            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (Sc.obj Q)) =
-          ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (Sc.obj P)) ≫
-            DerivedCategory.Q.map ((E.mapHomologicalComplex (.up ℤ)).map (Sc.map a)) at hε
-        rw [reassoc_of% hε]
-        erw [← DerivedCategory.Q.map_comp_assoc,
-          tensorStalkIso_naturality f f' g g' sq z a, DerivedCategory.Q.map_comp_assoc]
-        have hSt := St'.mapDerivedCategoryFactors.inv.naturality (Pc.map a)
-        change DerivedCategory.Q.map (Stc.map (Pc.map a)) ≫
-            St'.mapDerivedCategoryFactors.inv.app (Pc.obj Q) =
-          St'.mapDerivedCategoryFactors.inv.app (Pc.obj P) ≫
-            St'.mapDerivedCategory.map (DerivedCategory.Q.map (Pc.map a)) at hSt
-        simpa only [Category.assoc] using congrArg
-          (fun k ↦ L.map (St.mapDerivedCategoryFactors.hom.app P) ≫
-            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (Sc.obj P)) ≫
-            DerivedCategory.Q.map (tensorStalkIso f f' g g' sq z P).hom ≫ k) hSt }
+    Functor.whiskerRight St.mapDerivedCategoryFactors.hom L ≫
+      Functor.whiskerLeft (Sc ⋙ HomotopyCategory.quotient _ (.up ℤ)) ε ≫
+      Functor.whiskerRight δ DerivedCategory.Q ≫
+      Functor.whiskerLeft Pc St'.mapDerivedCategoryFactors.inv
   let β : DerivedCategory.Qh ⋙ (comparisonDerivedStalk X (g' z) ⋙ L) ⟶ F :=
     CategoryTheory.Quotient.natTransLift _ βc
   let j := T.leftDerivedLift α W (comparisonDerivedStalk X (g' z) ⋙ L) β
@@ -245,7 +223,8 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     (fun k ↦ L.map (St.mapDerivedCategoryFactors.inv.app P) ≫ k ≫
       inv ((comparisonDerivedStalk X' z).map ((counit g').app (q.obj P)))) hj
   simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id] at hcoord
-  dsimp only [βc] at hcoord
+  dsimp only [βc, δ, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app] at hcoord
   simp only [Category.assoc] at hcoord
   erw [← L.map_comp_assoc, Iso.inv_hom_id_app, L.map_id, Category.id_comp] at hcoord
   simp only [DerivedCategory.quotientCompQhIso,
