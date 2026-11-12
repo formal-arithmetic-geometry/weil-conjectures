@@ -162,12 +162,20 @@ private theorem comparisonsForCoefficient
     let φ (c d : Compactifications k f) :
         candidate Λ k (X := X) (Y := Y) (f := f) c ≅
           candidate Λ k (X := X) (Y := Y) (f := f) d :=
-      Functor.isoWhiskerLeft J (ψ ⟨c⟩ ⟨d⟩)
+      NatIso.ofComponents (fun K ↦ (ψ ⟨c⟩ ⟨d⟩).app (J.obj K)) (by
+        intro K L a
+        exact (ψ ⟨c⟩ ⟨d⟩).hom.naturality (J.map a))
     refine ⟨φ, ?_, ?_, ?_⟩
     · intro c
-      simp only [φ, hi, Functor.isoWhiskerLeft_refl]
+      apply Iso.ext
+      apply NatTrans.ext
+      funext K
+      exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hi ⟨c⟩)
     · intro c d e
-      simp only [φ, ← Functor.isoWhiskerLeft_trans, hc]
+      apply Iso.ext
+      apply NatTrans.ext
+      funext K
+      exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩)
     · intro c d r hb K
       let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
         ⟨ObjectProperty.homMk r, hb⟩
