@@ -238,18 +238,6 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
   ph112_remaining "PH112 start remaining:"
-  have finish := exists_subgroup_pullbackExchange_of_galois_average
-    (M'' := baseChange hM b hb v hv) (N₁ := baseChangeGaloisLayer hM b hb v hv)
-    (N := baseChangeGaloisModel hM b hb v hv) (M := M)
-    (f' := baseChangeSpecialMap hM b hb v hv)
-    (G := GenericAut k' K)
-    (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
-    (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
-    (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
-    ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
-      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (baseChangeHom hM b hb v hv) A hM1
-  ph112_remaining "PH112: cartesian comparison accepted; remaining:"
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -310,60 +298,23 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
           (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
-  ph112_remaining "PH112: finite layer ready; remaining:"
-  let eG := GenericAut.galoisEquiv (k' := k') (K := K)
-  ph112_remaining "PH112: equivalence ready; remaining:"
-  let act := baseChangeAut hM b hb v hv
-  ph112_remaining "PH112: base action ready; remaining:"
-  let actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
-    (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
-    (baseChangeGaloisResidue hM b hb v hv)
-    (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
-  ph112_remaining "PH112: layer action ready; remaining:"
-  have geometricFinish := finish
-    (by
-      ph112_remaining "PH112: total; remaining:"
-      exact baseChangeToGaloisModel_comp_total hM b hb v hv)
-    (by
-      ph112_remaining "PH112: generic; remaining:"
-      exact baseChangeToGaloisModel_comp_generic hM b hb v hv)
-    (by
-      ph112_remaining "PH112: rho; remaining:"
-      exact isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
-  ph112_remaining "PH112: geometry accepted; remaining:"
-  have equivFinish := geometricFinish eG
-  ph112_remaining "PH112: equivalence accepted; remaining:"
-  have fieldFinish := equivFinish L₁
-  ph112_remaining "PH112: finite field accepted; remaining:"
-  have actFinish := fieldFinish act
-  ph112_remaining "PH112: base action accepted; remaining:"
-  have avgFinish := actFinish actΩ
-  ph112_remaining "PH112: layer action accepted; remaining:"
-  have result := avgFinish
-    (by
-      ph112_remaining "PH112: multiplication; remaining:"
-      exact autAction_baseChangeAut_mul hM b hb v hv _)
-    (by
-      ph112_remaining "PH112: intertwining; remaining:"
-      exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
-    (by
-      ph112_remaining "PH112: triviality; remaining:"
-      exact hL₁.1)
-    (by
-      ph112_remaining "PH112: average; remaining:"
-      exact hL₁.2)
-  ph112_remaining "PH112: averaging application accepted; remaining:"
-  refine result.elim fun V hV ↦ ?_
-  refine hV.elim fun iV hV ↦ ?_
-  ph112_remaining "PH112 quotient witnesses"
-  refine ⟨V, iV, ?_, ?_⟩
-  · intro σ hσ
-    exact hV.1 σ hσ
-  · ph112_remaining "PH112 triviality transferred"
-    refine hV.2.elim fun r hr ↦ ?_
-    refine ⟨r, ?_, ?_⟩
-    · exact hr.1
-    · ph112_remaining "PH112 retraction transferred"
-      exact hr.2
+  ph112_remaining "PH112 finite layer ready"
+  apply exists_subgroup_pullbackExchange_of_galois_average
+    (Λ := Profinite.padicAlgClRingObj ℓ)
+    (ρ := baseChangeToGaloisLayer hM b hb v hv)
+    (ψ := (baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+      (baseChangeGaloisResidue hM b hb v hv)
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+    (hχ := hM1)
+    (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
+    (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
+    (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
+    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁)
+    (actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+      (baseChangeGaloisResidue hM b hb v hv)
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+    (hmul := autAction_baseChangeAut_mul hM b hb v hv _)
+    (hint := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
+    (htriv := hL₁.1) (hSA := hL₁.2)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
