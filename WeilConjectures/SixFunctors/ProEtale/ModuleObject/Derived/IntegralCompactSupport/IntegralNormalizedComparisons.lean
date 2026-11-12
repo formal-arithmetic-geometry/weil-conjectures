@@ -88,20 +88,6 @@ private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact ⟨ObjectProperty.homMk (Compactification.infFst c.obj.obj c.obj.obj),
     h.2.2.2.2.2.2.2.2.2.2.2.1⟩
 
-private theorem exists_comparison_family {C : Type*} [Category C]
-    {F : ∀ {X Y : C}, (X ⟶ Y) → Type*}
-    {P Q R : ∀ {X Y : C} (f : X ⟶ Y), F f → Prop}
-    (h : ∀ {X Y : C} (f : X ⟶ Y), ∃ φ, P f φ ∧ Q f φ ∧ R f φ) :
-    ∃ φ : ∀ {X Y : C} (f : X ⟶ Y), F f,
-      (∀ {X Y : C} (f : X ⟶ Y), P f (φ f)) ∧
-      (∀ {X Y : C} (f : X ⟶ Y), Q f (φ f)) ∧
-      (∀ {X Y : C} (f : X ⟶ Y), R f (φ f)) := by
-  classical
-  refine ⟨fun f ↦ (h f).choose, ?_, ?_, ?_⟩
-  · exact fun f ↦ (h f).choose_spec.1
-  · exact fun f ↦ (h f).choose_spec.2.1
-  · exact fun f ↦ (h f).choose_spec.2.2
-
 variable (k : Type u) [Field k]
 set_option profiler true in
 -- The explicit comparison family has several large derived-category instance arguments.
@@ -128,65 +114,81 @@ private theorem comparisonsForCoefficient
               (openAdjunction Λ c.obj.i).unit.app K.obj ∧
           (φ f c d).app K = refinementIso Λ r K.obj e) := by
   classical
-  apply exists_comparison_family
-  intro X Y f
-  have : IsSeparated X.obj.hom := X.property.1
-  have : LocallyOfFiniteType X.obj.hom := X.property.2.1
-  have : QuasiCompact X.obj.hom := X.property.2.2
-  have : IsSeparated Y.obj.hom := Y.property.1
-  have : LocallyOfFiniteType Y.obj.hom := Y.property.2.1
-  have : QuasiCompact Y.obj.hom := Y.property.2.2
-  have : IsSeparated (X.obj.left ↘ Spec (.of k)) := X.property.1
-  have : LocallyOfFiniteType (X.obj.left ↘ Spec (.of k)) := X.property.2.1
-  have : QuasiCompact (X.obj.left ↘ Spec (.of k)) := X.property.2.2
-  have : IsSeparated (Y.obj.left ↘ Spec (.of k)) := Y.property.1
-  have : LocallyOfFiniteType (Y.obj.left ↘ Spec (.of k)) := Y.property.2.1
-  have : QuasiCompact (Y.obj.left ↘ Spec (.of k)) := Y.property.2.2
-  have : CompactSpace X.obj.left := QuasiCompact.compactSpace_of_compactSpace X.obj.hom
-  have : CompactSpace Y.obj.left := QuasiCompact.compactSpace_of_compactSpace Y.obj.hom
-  have : QuasiSeparatedSpace X.obj.left := quasiSeparatedSpace_of_quasiSeparated X.obj.hom
-  have : QuasiSeparatedSpace Y.obj.left := quasiSeparatedSpace_of_quasiSeparated Y.obj.hom
-  have hft : LocallyOfFiniteType (f.hom.left ≫ Y.obj.hom) := by
-    rw [Over.w f.hom]
-    infer_instance
-  have hsep : IsSeparated (f.hom.left ≫ Y.obj.hom) := by
-    rw [Over.w f.hom]
-    infer_instance
-  have : LocallyOfFiniteType f.hom.left := locallyOfFiniteType_of_comp _ Y.obj.hom
-  have : IsSeparated f.hom.left := IsSeparated.of_comp _ Y.obj.hom
-  have : QuasiCompact f.hom.left :=
-    QuasiCompact.of_comp (f := f.hom.left) (g := Y.obj.hom)
-  have he := hclosure X
-  let J := ObjectProperty.ιOfLE (le_of_eq he.symm)
-  obtain ⟨ψ, hiso, hn, hi, hc⟩ :=
-    compactification_coherence_cocycle Λ ℓ hadm k f.hom.left
-  let φ (c d : Compactifications k f) :
-      candidate Λ k (X := X) (Y := Y) (f := f) c ≅
-        candidate Λ k (X := X) (Y := Y) (f := f) d :=
-    Functor.isoWhiskerLeft J (ψ ⟨c⟩ ⟨d⟩)
-  refine ⟨φ, ?_, ?_, ?_⟩
-  · intro c
-    exact (congrArg (Functor.isoWhiskerLeft J) (hi ⟨c⟩)).trans
-      (Functor.isoWhiskerLeft_refl J _)
-  · intro c d e
-    exact (Functor.isoWhiskerLeft_trans J (ψ ⟨c⟩ ⟨d⟩) (ψ ⟨d⟩ ⟨e⟩)).symm.trans
-      (congrArg (Functor.isoWhiskerLeft J) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩))
-  · intro c d r hb K
-    let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
-      ⟨ObjectProperty.homMk r, hb⟩
-    let L := J.obj K
-    obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
-      f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
-    obtain ⟨e, he, hinv⟩ := integral_boundaryRefinement_normalization Λ k ℓ hadm
-      f c d r hb K L.property
-    refine ⟨e, he, ?_⟩
-    have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
-    have hn' : (ψ ⟨c⟩ ⟨d⟩).hom.app L ≫
-        compactificationRefinementComponent Λ r' K.obj = 𝟙 _ :=
-      cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
-        (refinementComponent_comp Λ ℓ hadm r' a L.obj)
-    exact iso_eq_of_inv _ _ _ hn'
-      hinv
+  have per_morphism {X Y : Spaces k} (f : X ⟶ Y) :
+      ∃ φ : ∀ c d : Compactifications k f,
+          candidate Λ k (X := X) (Y := Y) (f := f) c ≅
+            candidate Λ k (X := X) (Y := Y) (f := f) d,
+        (∀ c, φ c c = Iso.refl _) ∧
+        (∀ c d e, φ c d ≪≫ φ d e = φ c e) ∧
+        (∀ (c d : Compactifications k f) (r : c.obj.Refinement d.obj)
+          (hb : r.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange)
+          (K : (localizing Λ X.obj.left).FullSubcategory),
+          ∃ e : (extend Λ d.obj.i).obj K.obj ≅
+              (push Λ r.hom).obj ((extend Λ c.obj.i).obj K.obj),
+            (openAdjunction Λ d.obj.i).homEquiv _ _ e.hom ≫
+                refinementRestriction Λ r K.obj = (openAdjunction Λ c.obj.i).unit.app K.obj ∧
+              (φ c d).app K = refinementIso Λ r K.obj e) := by
+    classical
+    have : IsSeparated X.obj.hom := X.property.1
+    have : LocallyOfFiniteType X.obj.hom := X.property.2.1
+    have : QuasiCompact X.obj.hom := X.property.2.2
+    have : IsSeparated Y.obj.hom := Y.property.1
+    have : LocallyOfFiniteType Y.obj.hom := Y.property.2.1
+    have : QuasiCompact Y.obj.hom := Y.property.2.2
+    have : IsSeparated (X.obj.left ↘ Spec (.of k)) := X.property.1
+    have : LocallyOfFiniteType (X.obj.left ↘ Spec (.of k)) := X.property.2.1
+    have : QuasiCompact (X.obj.left ↘ Spec (.of k)) := X.property.2.2
+    have : IsSeparated (Y.obj.left ↘ Spec (.of k)) := Y.property.1
+    have : LocallyOfFiniteType (Y.obj.left ↘ Spec (.of k)) := Y.property.2.1
+    have : QuasiCompact (Y.obj.left ↘ Spec (.of k)) := Y.property.2.2
+    have : CompactSpace X.obj.left := QuasiCompact.compactSpace_of_compactSpace X.obj.hom
+    have : CompactSpace Y.obj.left := QuasiCompact.compactSpace_of_compactSpace Y.obj.hom
+    have : QuasiSeparatedSpace X.obj.left := quasiSeparatedSpace_of_quasiSeparated X.obj.hom
+    have : QuasiSeparatedSpace Y.obj.left := quasiSeparatedSpace_of_quasiSeparated Y.obj.hom
+    have hft : LocallyOfFiniteType (f.hom.left ≫ Y.obj.hom) := by
+      rw [Over.w f.hom]
+      infer_instance
+    have hsep : IsSeparated (f.hom.left ≫ Y.obj.hom) := by
+      rw [Over.w f.hom]
+      infer_instance
+    have : LocallyOfFiniteType f.hom.left := locallyOfFiniteType_of_comp _ Y.obj.hom
+    have : IsSeparated f.hom.left := IsSeparated.of_comp _ Y.obj.hom
+    have : QuasiCompact f.hom.left :=
+      QuasiCompact.of_comp (f := f.hom.left) (g := Y.obj.hom)
+    have he := hclosure X
+    let J := ObjectProperty.ιOfLE (le_of_eq he.symm)
+    obtain ⟨ψ, hiso, hn, hi, hc⟩ :=
+      compactification_coherence_cocycle Λ ℓ hadm k f.hom.left
+    let φ (c d : Compactifications k f) :
+        candidate Λ k (X := X) (Y := Y) (f := f) c ≅
+          candidate Λ k (X := X) (Y := Y) (f := f) d :=
+      Functor.isoWhiskerLeft J (ψ ⟨c⟩ ⟨d⟩)
+    refine ⟨φ, ?_, ?_, ?_⟩
+    · intro c
+      exact (congrArg (Functor.isoWhiskerLeft J) (hi ⟨c⟩)).trans
+        (Functor.isoWhiskerLeft_refl J _)
+    · intro c d e
+      exact (Functor.isoWhiskerLeft_trans J (ψ ⟨c⟩ ⟨d⟩) (ψ ⟨d⟩ ⟨e⟩)).symm.trans
+        (congrArg (Functor.isoWhiskerLeft J) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩))
+    · intro c d r hb K
+      let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
+        ⟨ObjectProperty.homMk r, hb⟩
+      let L := J.obj K
+      obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
+        f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
+      obtain ⟨e, he, hinv⟩ := integral_boundaryRefinement_normalization Λ k ℓ hadm
+        f c d r hb K L.property
+      refine ⟨e, he, ?_⟩
+      have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
+      have hn' : (ψ ⟨c⟩ ⟨d⟩).hom.app L ≫
+          compactificationRefinementComponent Λ r' K.obj = 𝟙 _ :=
+        cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
+          (refinementComponent_comp Λ ℓ hadm r' a L.obj)
+      exact iso_eq_of_inv _ _ _ hn'
+        hinv
+  -- Assemble the independently normalized families for all morphisms.
+  choose φ hi hc hn using @per_morphism
+  exact ⟨φ, hi, hc, hn⟩
 
 /-- Normalized comparison maps and their groupoid equations.
 
