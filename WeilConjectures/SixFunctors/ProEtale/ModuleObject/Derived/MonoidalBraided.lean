@@ -106,7 +106,6 @@ lemma upperStarTensorHomotopyHom_braiding
           ((HomotopyCategory.quotient _ _).obj A) :=
   quotient_map_upperStarTensorComplexHom_braiding Λ f A B
 
-set_option trace.profiler true in
 /-- The comparison `upperStarTensorHomotopyHom` is an isomorphism on images of complexes. -/
 instance isIso_upperStarTensorHomotopyHom
     (A B : CochainComplex
@@ -131,7 +130,6 @@ lemma derivedBraiding_hom_μ_Qh {Z : Scheme.{u}}
     (β_ (Qh.obj K) (Qh.obj M)).hom ≫ μ Qh M K = μ Qh K M ≫ Qh.map (β_ K M).hom :=
   DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso _ _) K M
 
-set_option trace.profiler true in
 /-- The tensor comparison of `Lf^*` commutes with the derived braidings at images of K-flat
 complexes. -/
 lemma leftDerivedUpperStarTensor_braiding_Qh
@@ -164,7 +162,6 @@ lemma leftDerivedUpperStarTensor_braiding_Qh
     (derivedBraiding_hom_μ_Qh Λ _ _) (derivedBraiding_hom_μ_Qh Λ _ _)
     (upperStarTensorHomotopyHom_braiding Λ f A B)
 
-set_option trace.profiler true in
 /-- **The derived pullback of module objects is braided**: the tensor comparison
 `m : Lf^* (K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` commutes with the derived braidings,
 `Lf^* β_{K, M} ≫ m_{M, K} = m_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
