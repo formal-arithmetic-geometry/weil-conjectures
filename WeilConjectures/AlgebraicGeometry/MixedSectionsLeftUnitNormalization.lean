@@ -118,6 +118,12 @@ private theorem finish_unit_paste {C D : Type*} [Category C] [Category D]
   simp only [Category.assoc]
   rw [← S.map_comp, ← S.map_comp, hf, S.map_comp]
 
+-- Reuse the sheaf-module structure when elaborating the derived functors and units.
+private noncomputable abbrev mixedSectionsSheafAbelian (X : Scheme.{u}) :
+    Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+
+attribute [local instance] mixedSectionsSheafAbelian
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
@@ -153,6 +159,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
+set_option profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
