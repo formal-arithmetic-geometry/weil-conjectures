@@ -176,8 +176,9 @@ lemma extMk_eq_zero_iff_sectionsAddEquiv
     refine (sectionsAddEquivOfIso
       (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm)).toEquiv.exists_congr
         (fun g ↦ ?_)
-    rw [sc_f_sectionsAddEquiv]
-    exact (sectionsAddEquiv (I.cocomplex.X (p + 1))).injective.eq_iff.symm
+    exact (sectionsAddEquiv (I.cocomplex.X (p + 1))).injective.eq_iff.symm.trans
+      (congrArg (fun z ↦ z = sectionsAddEquiv (I.cocomplex.X (p + 1)) f)
+        (sc_f_sectionsAddEquiv I p g)).to_iff.symm
 
 /-- The `r`-th pro-étale `Ext` of `ℤ` into the underlying abelian sheaf of a pro-étale Weil sheaf
 `K` is the `r`-th homology of the complex of global sections of an injective resolution of `K`. -/
