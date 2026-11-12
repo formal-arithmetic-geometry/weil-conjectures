@@ -158,6 +158,7 @@ private theorem completedChern_mul_normalization (l : ℕ) [Fact l.Prime]
   simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
   exact congrArg₂ (· + ·) hw (by simpa only [ModelLocalChernNormalized] using hz)
 
+set_option profiler true in
 /-- Factor the base contribution before taking the derived adjunction. -/
 private theorem diagonalLocalChern_pullback_sum_factorization (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
