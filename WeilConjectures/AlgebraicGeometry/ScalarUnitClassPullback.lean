@@ -49,9 +49,17 @@ private theorem augmentation_cocycle {C : Type*} [Category C] [Abelian C]
         (by simp)]
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hp).eq_of_src _ _
 
-set_option profiler true in
-set_option maxHeartbeats 500000 in
--- The cohomology-to-Ext comparison unfolds several derived-category equivalences.
+private theorem augmentation_extMk {C : Type*} [Category C] [Abelian C] [HasExt C]
+    {A : C} (I : InjectiveResolution A) :
+    I.extMk (I.ι.f 0) 1 rfl I.ι_f_zero_comp_complex_d = Abelian.Ext.mk₀ (𝟙 A) := by
+  let := HasDerivedCategory.standard C
+  ext
+  rw [I.extMk_hom, Abelian.Ext.mk₀_hom]
+  simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.refl_inv,
+    NatTrans.id_app, ShiftedHom.mk₀_id_comp]
+  erw [augmentation_cocycle I, ShiftedHom.map_mk₀, ShiftedHom.mk₀_comp_mk₀]
+  simp
+
 /-- The augmented section one corresponds to the scalar-unit morphism in degree-zero Ext.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7.
 (blueprint: lem-sc-scalar-unit-class-pullback).
@@ -98,16 +106,7 @@ private theorem scalar_unit_class_ext {k : Type u} [Field k] {X : Scheme.{u}}
     ((moduleExtEquiv U 0 (scalarUnitCohomologyClass f)).mapExactFunctor
       (scalarFunctor f)) (zero_add 0) = _
   rw [hm]
-  have hi : I.extMk (I.ι.f 0) 1 rfl I.ι_f_zero_comp_complex_d =
-      Abelian.Ext.mk₀ (𝟙 U) := by
-    let := HasDerivedCategory.standard (SheafOfModules.{u} X.ringCatSheaf)
-    ext
-    rw [I.extMk_hom, Abelian.Ext.mk₀_hom]
-    simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.refl_inv,
-      NatTrans.id_app, ShiftedHom.mk₀_id_comp]
-    erw [augmentation_cocycle I, ShiftedHom.map_mk₀, ShiftedHom.mk₀_comp_mk₀]
-    simp
-  rw [hi, Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Functor.map_id,
+  rw [augmentation_extMk, Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Functor.map_id,
     Abelian.Ext.mk₀_comp_mk₀]
   erw [Category.comp_id]
 

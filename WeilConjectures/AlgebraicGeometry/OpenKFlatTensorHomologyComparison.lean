@@ -158,9 +158,6 @@ private theorem site_kFlat_tensor_quasiIso
     exact (((curriedTensor _).map₂CochainComplex.map α).naturality s).symm
 
 
-set_option profiler true in
-set_option maxHeartbeats 500000 in
--- The roof uses large inferred total-tensor instances over the localized module category.
 /-- A roof identifying a local K-flat complex T with the restriction of Q identifies
 its tensor homology with the open restriction of the tensor homology of any global
 K-flat resolution P of Q. Source: Stacks Project, Tags 06YH, 08CG and 06YB.
@@ -247,6 +244,7 @@ theorem open_kFlat_tensor_homology_comparison
   have hra : QuasiIso (r ≫ a) := inferInstance
   have hrb : QuasiIso (r ≫ b) := inferInstance
   let := SheafOfModules.monoidalCategory (R.over U)
+  let : MonoidalPreadditive M := Classical.choice (SheafOfModules.tensorClosed (R.over U)).1
   let N := (HomologicalComplex.single M (.up ℤ) 0).obj (V.obj F)
   let α := HomologicalComplex.mapBifunctorMap (r ≫ a) (𝟙 N) (curriedTensor _) (.up ℤ)
   let β := HomologicalComplex.mapBifunctorMap (r ≫ b) (𝟙 N) (curriedTensor _) (.up ℤ)
