@@ -134,6 +134,13 @@ private theorem finish_unit_paste {C D : Type*} [Category C] [Category D]
   simp only [Category.assoc]
   rw [← S.map_comp, ← S.map_comp, hf, S.map_comp]
 
+-- Cache the canonical structure at the site level, where instance search can match it directly.
+private noncomputable abbrev mixedSectionsSheafAbelian (T : TopCat.{u})
+    (R : Sheaf (Opens.grothendieckTopology T) RingCat.{u}) :
+    Abelian (SheafOfModules.{u} R) := inferInstance
+
+attribute [local instance 2000] mixedSectionsSheafAbelian
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
