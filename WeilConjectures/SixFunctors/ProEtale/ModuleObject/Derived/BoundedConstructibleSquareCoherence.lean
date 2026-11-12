@@ -329,18 +329,28 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
     let t ← g.getType
     let args := t.getAppArgs
     let mut e := args[args.size - 2]!
-    for i in [:20] do
+    for i in [:14] do
       let fn := e.getAppFn
       let name := match fn with
         | .const n _ => n.toString
         | .fvar _ => "fvar"
         | _ => "other"
-      Lean.logInfo m!"NODE {i}: {name} ({e.getAppNumArgs} args)"
       let es := e.getAppArgs
-      if es.isEmpty then
-        pure ()
+      if es.size < 2 then
+        Lean.logInfo m!"LEFT {i}: {name}"
       else
-        e := es[es.size - 1]!
+        let lfn := es[es.size - 2]!.getAppFn
+        let rfn := es[es.size - 1]!.getAppFn
+        let lname := match lfn with
+          | .const n _ => n.toString
+          | .fvar _ => "fvar"
+          | _ => "other"
+        let rname := match rfn with
+          | .const n _ => n.toString
+          | .fvar _ => "fvar"
+          | _ => "other"
+        Lean.logInfo m!"LEFT {i}: {name}  L={lname} R={rname}"
+        e := es[es.size - 2]!
   have h_coherence₁ := boundedConstructibleUpperStarComp_square_coherence_comp
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
       ΔY q p₁ p₁' h₁ h₂ h₃ h₄ (A := A) (K := K) φ
