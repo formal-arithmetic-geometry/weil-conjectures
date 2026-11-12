@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualityBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unitor
 
 /-!
 # Base change of the tensor maps of the exceptional inverse image
@@ -83,6 +84,54 @@ theorem rightDerivedUpperShriekTensorMap_baseChange
     (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N)
     (rightDerivedLowerShriekBaseChangeMap Λ sq) (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
     (fun M ↦ by simp [NatIso.isIso_inv_app]) hlib M N
+
+omit [Finite Λ] in
+/-- The monoidal computation behind
+`AlgebraicGeometry.Etale.dualizingComplexTensorMap_baseChange`. -/
+private lemma dualizingComplexTensorMap_baseChange_aux {C : Type*} [Category* C]
+    [MonoidalCategory C] {P Q Q₁ R R₂ R₃ R₄ W V U M M' : C} (lμ : P ⟶ Q₁) (lt : P ⟶ Q)
+    (ll : Q ⟶ Q₁) (bK : Q₁ ⟶ R) (b1K : Q ⟶ R₂) (rl : R₂ ⟶ R) (rτ : R₂ ⟶ R₃) (ru : R₃ ⟶ R₄)
+    (rl' : R₄ ⟶ R) (τ : P ⟶ W ⊗ M) (B : W ⟶ V) (c : M ⟶ M') (t : V ⊗ M' ⟶ R₃) (Ru : V ⟶ U)
+    (t₁ : U ⊗ M' ⟶ R₄) (μ : U ⊗ M' ⟶ R) (hμ : lμ = lt ≫ ll) (hμ' : μ = t₁ ≫ rl')
+    (hnat : ll ≫ bK = b1K ≫ rl) (hl : rl = rτ ≫ ru ≫ rl')
+    (h : lt ≫ b1K ≫ rτ = τ ≫ B ▷ M ≫ V ◁ c ≫ t) (hu : Ru ▷ M' ≫ t₁ = t ≫ ru) :
+    lμ ≫ bK = τ ≫ (B ≫ Ru) ▷ M ≫ U ◁ c ≫ μ := by
+  rw [hμ, hμ', Category.assoc, hnat, hl, reassoc_of% h, ← reassoc_of% hu, comp_whiskerRight,
+    Category.assoc, whisker_exchange_assoc]
+
+/-- **Base change of the canonical tensor map** `μ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`): the base change map
+`β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` intertwines `Lg'^* μ_{f,K}` with `μ_{f', Lg^* K}`, through the
+tensor structure of `Lg'^*`, the base change `Lg'^* ω_f ⟶ Rf'^! Lg^* Λ_Y ≅ ω_{f'}` of the
+dualizing complexes and `Lg'^* Lf^* ≅ Lf'^* Lg^*`:
+```
+Lg'^*(ω_f ⊗ Lf^* K) ───Lg'^* μ_{f,K}───▶ Lg'^* Rf^! K ──────β──────▶ Rf'^! Lg^* K
+        ≅ │                                                            ‖
+          ▼                                                            ‖
+Lg'^* ω_f ⊗ Lg'^* Lf^* K ──β ⊗ κ──▶ ω_{f'} ⊗ Lf'^* Lg^* K ──μ_{f', Lg^* K}──▶ Rf'^! Lg^* K
+```
+-/
+theorem dualizingComplexTensorMap_baseChange
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTensorMap Λ f K) ≫
+        (rightDerivedUpperShriekBaseChangeMap Λ sq).app K =
+      (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) g' _ _).hom ≫
+        ((rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _) ≫
+          (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom) ▷ _ ≫
+          _ ◁ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq K ≫
+            dualizingComplexTensorMap Λ f' ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have h := rightDerivedUpperShriekTensorMap_baseChange sq (𝟙_ _) K
+  have hnat := (rightDerivedUpperShriekBaseChangeMap Λ sq).naturality (λ_ K).hom
+  simp only [Functor.comp_map] at hnat
+  have hlu := leftDerivedUpperStar_map_derivedTensorLeftUnitor_hom g K
+  rw [derivedTensor_map_app, ← leftDerivedUpperStarUnitIso_hom_eq_η] at hlu
+  have hl := Adjunction.projectionTensorMap_naturality_left (rightDerivedUpperShriekAdjunction Λ f')
+    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f').app M).app N)
+    (projectionMap_app_app_naturality_left f') (leftDerivedUpperStarUnitIso _ g).hom
+    ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)
+  exact dualizingComplexTensorMap_baseChange_aux _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+    ((L((g')^*[ModuleCat.{u + 1} Λ])).map_comp _ _) rfl hnat
+    (by simp only [← Functor.map_comp]; exact congrArg (R(f')^![Λ]).map hlu) h hl
 
 end Etale
 

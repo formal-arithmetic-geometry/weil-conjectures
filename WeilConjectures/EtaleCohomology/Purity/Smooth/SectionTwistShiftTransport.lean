@@ -12,7 +12,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTran
 # Base change of the section invariant isomorphism `𝒞(g, s) ≅ Λ_B(c)[2c]`
 
 For `g : V ⟶ B` smooth of relative dimension `c` with a closed section `s`, and the base change
-`g' : V' ⟶ B'`, `s'` along an étale `eV : V' ⟶ V` (so that `eB ≫ s = s' ≫ eV` is cartesian), the
+`g' : V' ⟶ B'`, `s'` along any `eV : V' ⟶ V` (so that `eB ≫ s = s' ≫ eV` is cartesian), the
 section invariant isomorphisms `𝒞(g, s) ≅ Λ_B(c)[2c]` and `𝒞(g', s') ≅ Λ_{B'}(c)[2c]`
 (`AlgebraicGeometry.Etale.sectionInvariantTwistShiftIsoOfSection`) correspond under
 `LeB^* Ls^* ω_g ≅ Ls'^* LeV^* ω_g ≅ Ls'^* ω_{g'}` and `LeB^*(Λ_B(c)[2c]) ≅ Λ_{B'}(c)[2c]`
@@ -84,13 +84,13 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasCompactification g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
   (g' : V' ⟶ B') [SmoothOfRelativeDimension c g'] [HasCompactification g'] (s' : B' ⟶ V')
   [IsClosedImmersion s'] (hs' : s' ≫ g' = 𝟙 B')
-  (eV : V' ⟶ V) [AlgebraicGeometry.Etale eV] {eB : B' ⟶ B} (hsq : IsPullback eB s' s eV)
+  (eV : V' ⟶ V) {eB : B' ⟶ B} (hsq : IsPullback eB s' s eV)
   {k k' : Type u} [Field k] [Field k'] (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
   [LocallyOfFiniteType aB] (aB' : B' ⟶ Spec (.of k')) [IsSeparated aB']
   [LocallyOfFiniteType aB'] [HasInvertibleExponent Λ V] [HasInvertibleExponent Λ V']
   [HasInvertibleExponent Λ B] [HasInvertibleExponent Λ B']
 
-/-- **The section invariant isomorphism `𝒞(g, s) ≅ Λ_B(c)[2c]` is compatible with étale base
+/-- **The section invariant isomorphism `𝒞(g, s) ≅ Λ_B(c)[2c]` is compatible with base
 change**, given the compatibility `hε` of the composition isomorphisms `Rs^! ω_g ≅ Λ_B` with the
 exceptional base change (for `vω : LeV^* ω_g ≅ ω_{g'}`). The geometric form of
 `AlgebraicGeometry.Etale.SupportedCoefficientChange.map_sectionInvariantTwistShiftIsoOfSection`:

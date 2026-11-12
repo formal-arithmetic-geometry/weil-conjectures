@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unitor
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 
@@ -35,19 +36,6 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
-
-/-- The canonical isomorphism `Lg^* Λ_Y ≅ Λ_Z` is the counit `η` of the oplax monoidal derived
-pullback. -/
-lemma leftDerivedUpperStarUnitIso_hom_eq_η {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) g
-    (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) g).hom =
-      Functor.OplaxMonoidal.η (L((g)^*[ModuleCat.{u + 1} Λ])) := by
-  have h := leftDerivedUpperStarUnitIso_hom_comp_ε (ModuleCat.{u + 1} Λ) g
-  rw [leftDerivedUpperStar_η_eq]
-  simp only [← Category.assoc]
-  rw [IsIso.eq_comp_inv, h]
-  simp only [Category.assoc]
-  rfl
 
 variable {X Y : Scheme.{u}} {a : X ⟶ Y} {g : X ⟶ X} {h : Y ⟶ Y}
 

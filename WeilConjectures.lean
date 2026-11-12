@@ -17091,10 +17091,10 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeIso
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalCompIsoBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsTensor
@@ -17103,7 +17103,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationR
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionSupports
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPasteHoriz
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPasteVert
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImage
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImageGerm
@@ -21118,6 +21117,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangePaste
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoExchangeCompatible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompactificationExact
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
@@ -21348,6 +21348,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Pairin
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unitor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
