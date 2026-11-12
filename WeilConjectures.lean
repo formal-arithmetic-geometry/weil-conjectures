@@ -3349,6 +3349,7 @@ public import WeilConjectures.AlgebraicGeometry.CondensedCurve.GeometricCurveCom
 public import WeilConjectures.AlgebraicGeometry.CondensedCurve.GeometricCurveContext
 public import WeilConjectures.AlgebraicGeometry.CondensedCurve.InvariantFormsCoinvariants
 public import WeilConjectures.AlgebraicGeometry.CondensedCurvePerverse.CondensedCurvePerverseStatement
+public import WeilConjectures.AlgebraicGeometry.CondensedCurvePerverse.CondensedCurvePerverseWeil
 public import WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorComparison
 public import WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 public import WeilConjectures.AlgebraicGeometry.CondensedFieldEvaluationFunctors
@@ -14934,6 +14935,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunctionMate
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCompIso
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCreatesLimits
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCyclic
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCyclicChain
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunction
@@ -16826,6 +16828,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.DeligneLaumon.AffineLine.ExceptionalConstituents
 public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
+public import WeilConjectures.DeligneLaumon.AffineLine.FourierPerverseHeart
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierTopSupport
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.GeometricSMul
@@ -16834,6 +16837,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LinearCharacters
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
+public import WeilConjectures.DeligneLaumon.AffineLine.PerverseTStructure
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 public import WeilConjectures.DeligneLaumon.AffineLine.PunctualSupport
 public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
@@ -18043,6 +18047,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.ETrunc
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.TExact
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
