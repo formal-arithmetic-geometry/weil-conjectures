@@ -102,8 +102,8 @@ theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
       F.traceClassWithCoeff _ (K.closedPieceCoeff m x hx) +
         F.traceClassWithCoeff _ (K.openPieceCoeff j m sq ≫
           (boundedConstructibleUpperShriekId ℓ X).inv.app _) := by
-  obtain ⟨δ, hT⟩ := exists_distTriang_openImmersionLowerShriek_lowerStar
-    (ℓ := ℓ) j x hcompl K.carrier
+  refine (exists_distTriang_openImmersionLowerShriek_lowerStar
+    (ℓ := ℓ) j x hcompl K.carrier).elim (fun δ hT ↦ ?_)
   have hu := comp_inv_app_eq_of_comp_eq (boundedConstructibleUpperShriekId ℓ X)
     (K.openPieceCoeff_comp_counit j m sq)
   have hz := eq_comp_inv_app_comp_map (boundedConstructibleUpperShriekId ℓ X)
@@ -111,18 +111,18 @@ theorem traceClass_graph_eq_add (m : ℕ) (_hm : 1 ≤ m) (x : RationalPoint X)
   exact ((K.graph m).traceClass_eq_add_of_distTriang F hT
     (K.openPieceCoeff j m sq ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _)
     (K.closedPieceCoeff m x hx) hu hz
-    (eq_zero_of_lowerShriek_graph j x hcompl.disjoint
+    (eq_zero_of_lowerShriek_graph (ℓ := ℓ) j x hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
       ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier) (frobeniusIterate Φ m) hx)
-    (eq_zero_of_externalProduct_openPiece j x hcompl.disjoint
+    (eq_zero_of_externalProduct_openPiece (ℓ := ℓ) j x hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
       ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier) K.carrier
       ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier))
-    (eq_zero_of_externalProduct_closedPiece j x hcompl.disjoint
+    (eq_zero_of_externalProduct_closedPiece (ℓ := ℓ) j x hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
       ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier) K.carrier
       ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier))
-    (eq_zero_of_externalProduct_shift_to_diag j x hcompl.disjoint
+    (eq_zero_of_externalProduct_shift_to_diag (ℓ := ℓ) j x hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ j).obj K.carrier)
       ((boundedConstructibleUpperStar _ ℓ x).obj K.carrier))).trans (add_comm _ _)
 
