@@ -82,7 +82,7 @@ are only asserted to exist; they should be the maps induced by
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory Polynomial Pretriangulated Opposite TopologicalSpace
 
@@ -176,6 +176,19 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
     ((ProEtaleWeilSheaf.lowerStar k₀ l φ).mapIso (P.constantTwistObjIso b) ≪≫
       (ProEtaleWeilSheaf.constantTwistCompLowerStarIso k₀ l φ b).app P.obj ≪≫
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
+
+private theorem localBoundaryLinearEquiv_frobenius
+    {K : Type v} [Field K] {M N H Q : FrobeniusModule.{u, v} K}
+    (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) (q : K)
+    (hΨ : ∀ x, Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) :
+    ∀ x y, (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x (Q.frobenius y) =
+      q * (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x y := by
+  intro x y
+  rw [LinearEquiv.trans_apply, LinearEquiv.trans_apply, hΨ, map_smul, S.map_frobenius]
+  rw [LinearEquiv.dualMap_apply, LinearEquiv.dualMap_apply, LinearMap.smul_apply,
+    FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
+    FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
+    LinearEquiv.symm_apply_apply, smul_eq_mul]
 
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 set_option profiler true in
