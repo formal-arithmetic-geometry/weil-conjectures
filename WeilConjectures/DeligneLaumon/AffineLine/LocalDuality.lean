@@ -336,8 +336,9 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   have hone : ((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
       (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 = 1 := by
     simp
-  let Ψ := S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))
-  let ψ := S₆.trans S₇
+  let Ψ := Classical.choice (show Nonempty _ from
+    ⟨S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))⟩)
+  let ψ := Classical.choice (show Nonempty _ from ⟨S₆.trans S₇⟩)
   let S₅' : (((H.dual hH).stalk zf).rescale
       (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
         (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).Equiv (H.stalk zf).dual := by
