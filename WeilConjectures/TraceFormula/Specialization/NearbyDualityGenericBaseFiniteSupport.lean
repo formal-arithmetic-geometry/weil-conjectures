@@ -43,6 +43,24 @@ attribute [-instance] monoidalCategory_boundedConstructible
 
 namespace NearbyCyclesModel
 
+/-- Vanishing on the special fibre of a slice implies vanishing on the fibre of its special
+coordinate over the slice point. -/
+lemma isZero_upperStar_pullback_fst_of_sliceSpecialMap
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {k' K : Type u} [Field k'] [Field K] [Algebra k' K]
+    {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+    {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+    (x : K) (hM : M.IsTraitModelOver q g)
+    {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
+    (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X'.left) Ab.{u + 1})
+      (condensedRingObj Λ X'.left)))
+    (hC : IsZero (L((sliceSpecialMap x hM hb)^*⟦Λ⟧).obj C)) :
+    IsZero (L((pullback.fst (specialCoordinate hM b hb) (traitSlicePoint x))^*⟦Λ⟧).obj C) := by
+  obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap x hM hb
+  rw [← hl]
+  exact (L((l)^*⟦Λ⟧).map_isZero hC).of_iso ((leftDerivedUpperStarComp Λ l _).app C)
+
 variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of F))}
   {X' : Over (Spec (.of k'))} {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
   {M : NearbyCyclesModel X₁.left X'.left} {q : M.total ⟶ trait k'}
@@ -53,7 +71,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the triangles of the duality map live on large derived categories
 /-- **Finite support of the cone of the duality map over a generic base, from the generic
 slices** (blueprint `sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if, for every
@@ -145,10 +162,8 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase
     have hT₂ := L((sliceSpecialMap (traitSliceCoord k') hRM (hcoord a))^*⟦
       Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT₁
     have hz := Triangle.isZero₃_of_isIso₁ _ hT₂ hs'
-    obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hRM (hcoord a)
-    rw [← hl]
-    exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
-      ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)
+    exact isZero_upperStar_pullback_fst_of_sliceSpecialMap (Profinite.padicAlgClRingObj ℓ)
+      (traitSliceCoord k') hRM (hcoord a) _ hz
 
 /-- **The base case of the finite-support step over a generic base** (blueprint
 `sk-prop-tf-nearby-duality-foundation`, "This also supplies the base case `n = 0`"): if the
