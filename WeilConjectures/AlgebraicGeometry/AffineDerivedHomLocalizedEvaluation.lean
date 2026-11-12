@@ -85,8 +85,6 @@ private theorem change_evaluation_iso
     Category.assoc, ι.hom.naturality α.hom]
   simp [α, ← Category.assoc, hd]
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- The nested scheme/module category comparisons need additional elaboration heartbeats.
 /-- Evaluation compatibility on complex representatives for an already supplied derived
 sheaf-Hom adjunction. This does not construct the adjunction or the unit-Hom isomorphism.
