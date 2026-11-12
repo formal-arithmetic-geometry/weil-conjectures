@@ -92,9 +92,6 @@ private theorem cone_precompose
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- The functorial flat resolution and the concrete sheaf adjunction need more heartbeats.
 /-- Transpose a specified cone-square through derived pullback/direct image.
 This is independent of open covers and of base-change comparison maps.
 Source: Stacks Project, Cohomology, Tags 06YI and 06YJ (K-flat computations),
