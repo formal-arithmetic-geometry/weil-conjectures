@@ -132,6 +132,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Comparing the three exact homology constructions entails several large instance transports.
 /-- Exact affine stalk homology in scalar-extension coordinates, natural for every
 module map into ordinary cohomology. Source: Stacks Project, Tags 01I9 and 01AG.

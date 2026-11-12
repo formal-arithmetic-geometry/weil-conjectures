@@ -215,6 +215,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Comparing affine and scheme stalk presentations needs substantial instance elaboration.
 /-- Localize only the base and second factor of an already stalk-localized input.
 Source: Stacks Project, Tag 0DJ8, base and second-factor part of the localization
