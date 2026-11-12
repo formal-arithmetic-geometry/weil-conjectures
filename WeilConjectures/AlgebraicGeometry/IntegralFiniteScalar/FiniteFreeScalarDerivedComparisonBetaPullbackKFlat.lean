@@ -509,7 +509,6 @@ private lemma coherence
       rw [Functor.LaxMonoidal.μ_natural_left]
 
 -- Compute the localized ordinary square independently of the final counit cancellation.
-set_option profiler true in
 private lemma normalized_beta_pullback_computes
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
