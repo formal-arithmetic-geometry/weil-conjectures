@@ -122,12 +122,7 @@ theorem twoTermCoordinate_isIso
         (f.val.app U (generator Y R H Q a b j hab U v z)) x =
         (b * p).negOnePow • generator Y R I Q (p + a) b (p + j) (by omega) U
           (evaluate Y R P I a p U v x) z := by
-    have hh := hf a b hab p U v z x
-    rw [TwoTermCoordinates.generator_transport Y R (homComplex (R := R) P I) Q
-      a b j hab U v z] at hh
-    rw [TwoTermCoordinates.generator_transport Y R I Q (p + a) b (p + j)
-      (by omega) U (evaluate Y R P I a p U v x) z] at hh
-    exact hh
+    simpa only [generator_transport] using hf a b hab p U v z x
   have he : f ≫ (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom =
       (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom := by
     apply totalTensor_hom_ext Y R H Q _ j
@@ -137,7 +132,10 @@ theorem twoTermCoordinate_isIso
     · subst b
       obtain rfl : a = j + 1 := by omega
       apply biprod.hom_ext
-      · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I (j + 1) _ f
+      · refine twoTermCoordinate_component_ext Y R (H.X (j + 1)) (Q.X (-1)) _ _ _ P I
+          (j + 1) _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+          (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
+          (π := biprod.fst) ?_
         intro p U v z x
         rw [hom_fst_evaluation, generator_neg_fst]
         have hs := hgen (j + 1) (-1) (by omega) p U v z x
@@ -148,7 +146,10 @@ theorem twoTermCoordinate_isIso
         simp only [map_smul, LinearMap.smul_apply]
         rw [localEvaluation_π]
         simp
-      · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I j _ f
+      · refine twoTermCoordinate_component_ext Y R (H.X (j + 1)) (Q.X (-1)) _ _ _ P I
+          j _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+          (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
+          (π := biprod.snd) ?_
         intro p U v z x
         rw [hom_snd_evaluation, generator_neg_snd]
         have hs := hgen (j + 1) (-1) (by omega) p U v z x
@@ -161,7 +162,10 @@ theorem twoTermCoordinate_isIso
         have ha : a = j := by omega
         subst a
         apply biprod.hom_ext
-        · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I (j + 1) _ f
+        · refine twoTermCoordinate_component_ext Y R (H.X j) (Q.X 0) _ _ _ P I
+            (j + 1) _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+            (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
+            (π := biprod.fst) ?_
           intro p U v z x
           rw [hom_fst_evaluation, generator_zero_fst]
           have hs := hgen j 0 (by simp) p U v z x
@@ -169,7 +173,10 @@ theorem twoTermCoordinate_isIso
           simp only [zero_mul, Int.negOnePow_zero, one_smul]
           rw [generator_zero_fst]
           simp only [map_zero, LinearMap.zero_apply, smul_zero]
-        · apply twoTermCoordinate_component_ext Y R _ _ _ _ _ P I j _ f
+        · refine twoTermCoordinate_component_ext Y R (H.X j) (Q.X 0) _ _ _ P I
+            j _ f (g := (twoTermHomIso Y R P I Q hzero eNeg eZero j).hom)
+            (g' := (twoTermTensorIso Y R H Q hzero eNeg eZero j).hom)
+            (π := biprod.snd) ?_
           intro p U v z x
           rw [hom_snd_evaluation, generator_zero_snd]
           have hs := hgen j 0 (by simp) p U v z x
