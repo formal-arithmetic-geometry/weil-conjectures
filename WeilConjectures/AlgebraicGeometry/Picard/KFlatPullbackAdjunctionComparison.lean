@@ -63,7 +63,7 @@ private noncomputable def kFlat_pullback_adjunction_comparison_iso
     (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) :
     (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj
-        ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P ≅
+        (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≅
       (derivedPullback g).obj (DerivedCategory.Q.obj P) := by
   let q := HomotopyCategory.quotient
     (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
