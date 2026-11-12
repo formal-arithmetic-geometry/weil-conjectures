@@ -52,7 +52,6 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- The comparison is a morphism of exact five-term cohomology sequences.
 No component is assumed or asserted to be invertible.
 
