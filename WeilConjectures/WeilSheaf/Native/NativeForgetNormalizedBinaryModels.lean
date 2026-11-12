@@ -227,6 +227,68 @@ private theorem normalized_binary_forget_chain
     hchain T P q p n hqp]
   rfl
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] in
+private theorem normalized_binary_forget_uncurry
+    (P T I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
+    let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
+    let V := U.mapHomologicalComplex (.up ℤ)
+    let H := ihomBifunctor k₀ l X
+    let H' := ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+    let G := ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+    ∀ (χ : V.obj (CochainComplex.bifunctorHomObj H T I) ≅
+        CochainComplex.bifunctorHomObj H' (V.obj T) (V.obj I))
+      (hχ : ∀ (n p q : ℤ) (hpq : p + n = q),
+        χ.hom.f n ≫ CochainComplex.bifunctorHomπ H' (V.obj T) (V.obj I) n p q hpq =
+          U.map (CochainComplex.bifunctorHomπ H T I n p q hpq))
+      (φ : P ⟶ CochainComplex.bifunctorHomObj H T I)
+      (j : ((nativeTensorTotal k₀ l X).obj P).obj T ⟶ I)
+      (ψ : ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+        (V.obj T) (V.obj P) ⟶ V.obj I)
+      (v : V.obj (((nativeTensorTotal k₀ l X).obj P).obj T) ≅
+        ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+          (V.obj T) (V.obj P))
+      (hv : ∀ (p q n : ℤ) (hpq : p + q = n),
+        U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫ v.hom.f n =
+          (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
+            G (.up ℤ) q p n (by change q + p = n; omega))
+      (hψ : ∀ (p q n : ℤ) (hpq : p + q = n),
+        HomologicalComplex.ιMapBifunctor P T (nativeTensorBifunctor k₀ l X).flip
+            (.up ℤ) p q n hpq ≫ j.f n =
+          (p * q).negOnePow •
+            (((nativeTensorBifunctor k₀ l X).obj (T.X q)).map
+                (φ.f p ≫ CochainComplex.bifunctorHomπ H T I p q n (by omega)) ≫
+              (tensorIhomAdjunction k₀ l X (T.X q)).counit.app (I.X n)))
+      (hψ' : ∀ (q p n : ℤ) (hqp : q + p = n),
+        HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P) G (.up ℤ) q p n hqp ≫
+            ψ.f n =
+          (G.obj ((V.obj T).X q)).map
+              ((V.map φ ≫ χ.hom).f p ≫
+                CochainComplex.bifunctorHomπ H' (V.obj T) (V.obj I) p q n hqp) ≫
+            (Mod.ihomAdjunction ((V.obj T).X q)).counit.app ((V.obj I).X n)),
+      V.map j = v.hom ≫ ψ := by
+  dsimp only
+  intro χ hχ φ j ψ v hv hψ hψ'
+  let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply HomologicalComplex.mapBifunctor.hom_ext_of_map U
+  intro p q hpq
+  change p + q = n at hpq
+  have hqp : q + p = n := by omega
+  change U.map (HomologicalComplex.ιMapBifunctor P T
+      (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫ U.map (j.f n) = _
+  simp only [HomologicalComplex.comp_f]
+  rw [← Category.assoc, hv p q n hpq, Linear.units_smul_comp, hψ' q p n hqp]
+  rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
+  change (p * q).negOnePow • _ = (q * p).negOnePow • _
+  rw [mul_comm q p]
+  congr 1
+  dsimp only [HomologicalComplex.comp_f]
+  rw [Category.assoc, hχ p q n hqp]
+  rfl
+
 set_option profiler true in
 -- The fixed representative squares involve several nested localization functors.
 /-- The fixed native tensor model forgets to the canonical ordinary localization tensorator.
@@ -341,6 +403,10 @@ theorem native_forget_normalized_binary_models
   refine ⟨c, ?_, ?_⟩
   · intro p q n hpq
     have hqp : q + p = n := by omega
+    change Mod.tensorπ ((V.obj P).X p) ((V.obj T).X q) ≫
+        (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq)).hom ≫ (c.hom.f n).hom =
+      Mod.tensorObjπ ((V.obj P).X p) ((V.obj T).X q) ≫
+        (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom
     have hk := hκ (V.obj T) (V.obj P) q p n hqp hpq
     have hc := signed_composition_cancel (q * p).negOnePow
       (Int.units_mul_self _) hk
@@ -348,7 +414,7 @@ theorem native_forget_normalized_binary_models
     simp only [Mod.comp_hom', Units.smul_def, Mod.zsmul_hom] at hv
     simp only [Units.smul_def] at hc
     rw [← hv] at hc
-    simpa only [c, V, U, Iso.trans_hom, HomologicalComplex.comp_f, Mod.comp_hom',
+    simpa only [c, Iso.trans_hom, HomologicalComplex.comp_f, Mod.comp_hom',
       Category.assoc] using hc
   · let C := nativeDerivedClosedComparison k₀ l X
     let M := C.homModels
@@ -375,31 +441,8 @@ theorem native_forget_normalized_binary_models
     have hUT := native_two_sided_kflat_forget k₀ l X T hT
     obtain ⟨ψ', hψ', hloc'⟩ := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
     let v := chain P T
-    have hchain' : V.map j = v.hom ≫ ψ' := by
-      apply HomologicalComplex.hom_ext
-      intro n
-      apply HomologicalComplex.mapBifunctor.hom_ext_of_map U
-      intro p q hpq
-      change p + q = n at hpq
-      have hqp : q + p = n := by omega
-      change U.map (HomologicalComplex.ιMapBifunctor P T
-          (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
-          U.map (j.f n) = _
-      have hi : U.map (HomologicalComplex.ιMapBifunctor P T
-            (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫ v.hom.f n =
-          (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
-            (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-            (.up ℤ) q p n hqp := by
-        exact hchain P T p q n hpq
-      simp only [HomologicalComplex.comp_f]
-      rw [← Category.assoc, hi, Linear.units_smul_comp, hψ' q p n hqp]
-      rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
-      change (p * q).negOnePow • _ = (q * p).negOnePow • _
-      rw [mul_comm q p]
-      congr 1
-      dsimp only [φ', HomologicalComplex.comp_f]
-      rw [Category.assoc, hχ p q n hqp]
-      rfl
+    have hchain' := normalized_binary_forget_uncurry k₀ l X P T I
+      χ hχ φ j ψ' v (hchain P T) hψ hψ'
     let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model T I hI).inv
     let f' := DerivedCategory.Q.map φ' ≫
       (M.ordinaryRepresentatives.model (V.obj T) (V.obj I) hUI).inv
