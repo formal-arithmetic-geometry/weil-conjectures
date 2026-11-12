@@ -126,10 +126,69 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
   rw [← Functor.map_comp]
   exact congrArg q.map ((ac.homEquiv P I).apply_symm_apply α)
 
+private theorem kFlat_pullback_adjunction_comparison_naturality
+    {S S' : Scheme.{u}} (g : S' ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
+    [hL : (Scheme.Modules.tensorPullback g).Additive]
+    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
+      (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
+    (hε : (derivedPullback g).IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso _ (.up ℤ)))
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
+    (I : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)
+    (α : P ⟶ ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
+      (.up ℤ)).obj I)
+    [hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))] :
+    ((relativeMVAdj g).homEquiv _ _)
+      ((kFlat_pullback_adjunction_comparison_iso g ε P hεP).inv ≫
+        DerivedCategory.Q.map
+          ((((Classical.choose
+            (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
+              (.up ℤ)).homEquiv _ _).symm α)) =
+      DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I := by
+  let q := HomotopyCategory.quotient
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
+  let q' := HomotopyCategory.quotient
+    (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) (.up ℤ)
+  let A := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
+  let ac := A.mapHomologicalComplex (.up ℤ)
+  let a := (ac.homEquiv _ _).symm α
+  let ah := A.mapHomotopyCategory (.up ℤ)
+  let η := (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit
+  have h : (relativeMVAdj g).homEquiv _ _
+      (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) =
+      DerivedCategory.Qh.map ((ah.homEquiv _ _) (q'.map a)) ≫ η.app (q'.obj I) := by
+    exact Classical.choose_spec (exists_schemeDerivedAdjunction g ε hε)
+      (q.obj P) (q'.obj I) (q'.map a)
+  have ha : (ah.homEquiv _ _) (q'.map a) = q.map α := by
+    simpa only [A, ac, a, ah, q, q'] using
+      (kFlat_pullback_adjunction_comparison_transpose (g := g) (P := P) (I := I) (α := α))
+  rw [ha] at h
+  change ((relativeMVAdj g).homEquiv _ _)
+    (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) = _ at h
+  rw [kFlat_pullback_adjunction_comparison_iso_inv]
+  dsimp only [Functor.mapIso_inv]
+  simp only [Category.assoc]
+  erw [← DerivedCategory.quotientCompQhIso_hom_naturality a]
+  rw [Adjunction.homEquiv_naturality_left]
+  simp only [asIso_hom]
+  rw [← Category.assoc (ε.app (q.obj P))]
+  rw [Adjunction.homEquiv_naturality_right]
+  erw [h]
+  have hf : ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategoryFactors
+      (.up ℤ)).inv.app I = 𝟙 _ := rfl
+  dsimp only [schemeMVDirectImageLocalization]
+  simp only [NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.comp_obj,
+    Functor.whiskerRight_app, hf, Category.assoc]
+  erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
 /-- For a K-flat source, the localized ordinary transpose computes the pinned derived
 transpose. The comparison is independent of the target complex and the chain map.
@@ -199,38 +258,8 @@ theorem kFlat_pullback_adjunction_comparison
   simp only [Iso.inv_hom_id_assoc]
   apply ((relativeMVAdj g).homEquiv _ _).injective
   rw [Equiv.apply_symm_apply]
-  let ah := A.mapHomotopyCategory (.up ℤ)
-  let η := (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit
-  have h : (relativeMVAdj g).homEquiv _ _
-      (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) =
-      DerivedCategory.Qh.map ((ah.homEquiv _ _) (q'.map a)) ≫ η.app (q'.obj I) := by
-    exact Classical.choose_spec (exists_schemeDerivedAdjunction g ε hε)
-      (q.obj P) (q'.obj I) (q'.map a)
-  have ha : (ah.homEquiv _ _) (q'.map a) = q.map α := by
-    simpa only [A, ac, a, ah, q, q'] using
-      (kFlat_pullback_adjunction_comparison_transpose (g := g) (P := P) (I := I) (α := α))
-  rw [ha] at h
-  change ((relativeMVAdj g).homEquiv _ _)
-    (ε.app (q.obj P) ≫ DerivedCategory.Qh.map (q'.map a)) = _ at h
   let hεP_inst : IsIso (ε.app (q.obj P)) := hεP P hP
-  dsimp only [e]
-  rw [kFlat_pullback_adjunction_comparison_iso_inv]
-  dsimp only [Functor.mapIso_inv]
-  simp only [Category.assoc]
-  erw [← DerivedCategory.quotientCompQhIso_hom_naturality a]
-  rw [Adjunction.homEquiv_naturality_left]
-  simp only [asIso_hom]
-  rw [← Category.assoc (ε.app (q.obj P))]
-  rw [Adjunction.homEquiv_naturality_right]
-  erw [h]
-  have hf : ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomotopyCategoryFactors
-      (.up ℤ)).inv.app I = 𝟙 _ := rfl
-  dsimp only [schemeMVDirectImageLocalization]
-  simp only [NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.comp_obj,
-    Functor.whiskerRight_app, hf, Category.assoc]
-  erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
-  rfl
+  simpa only [e, a, ac, A] using
+    (kFlat_pullback_adjunction_comparison_naturality (g := g) ε hε P I α)
 
 end AlgebraicGeometry
