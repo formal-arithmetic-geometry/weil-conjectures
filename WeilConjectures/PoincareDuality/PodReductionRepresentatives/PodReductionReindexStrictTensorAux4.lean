@@ -98,6 +98,7 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
     PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
     PresheafOfModules.restrictScalarsObj] at h1 h4 ⊢
+  trace_state
   exact h1.symm.trans h4
 
 
