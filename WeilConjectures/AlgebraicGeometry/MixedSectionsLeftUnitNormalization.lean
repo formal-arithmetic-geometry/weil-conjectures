@@ -118,8 +118,44 @@ private theorem finish_unit_paste {C D : Type*} [Category C] [Category D]
   simp only [Category.assoc]
   rw [← S.map_comp, ← S.map_comp, hf, S.map_comp]
 
+-- Cache the canonical structure at the site level, where instance search can match it directly.
+private noncomputable abbrev mixedSectionsSheafAbelian (T : TopCat.{u})
+    (R : Sheaf (Opens.grothendieckTopology T) RingCat.{u}) :
+    Abelian (SheafOfModules.{u} R) := inferInstance
+
+attribute [local instance 2000] mixedSectionsSheafAbelian
+
+-- Keep the composition identification available without unfolding both pushforward functors.
+private theorem mixedSections_moduleDirectImage_comp
+    {X Y Z : RingedSpace.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    RingedSpace.moduleDirectImage (f ≫ g) =
+      RingedSpace.moduleDirectImage f ⋙ RingedSpace.moduleDirectImage g := rfl
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+
+-- Expose the chosen composition-unit equation with its two source objects kept separate.
+private theorem mixedSections_comp_unit_heq
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
+    HEq ((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫
+      (schemeNormalizedDirectImageCompIso f g).inv.app (DerivedCategory.Qh.obj K))
+      ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+          (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj K) ≫
+        (schemeDerivedDirectImage g).map
+          ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K)) := by
+  apply heq_of_eq
+  exact (Classical.choose_spec
+    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
+      X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› X)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Y)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
+      f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
+
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -153,8 +189,6 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
-set_option maxHeartbeats 700000 in
--- The statement expands sheaf, scalar, and localization instances.
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
@@ -203,24 +237,16 @@ theorem mixedSections_left_unit_normalization
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
   let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
-  have he := (Classical.choose_spec
-    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
-      X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› X)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Y)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
-      f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
+  have he := mixedSections_comp_unit_heq f g K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
   have hA : DerivedCategory.Qh.obj ((HZ.mapHomotopyCategory (.up ℤ)).obj
         ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K))) =
       (Sg.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj
         ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) := by
     rfl
-  have hp := generic_first_layer Df Dg Dfg HY HZ Sg (by rfl) e
-    (mixedGlobalSectionsDirectImageIso g) K (heq_of_eq he) hA (heq_of_eq hg₀)
+  have hp := generic_first_layer Df Dg Dfg HY HZ Sg
+    (mixedSections_moduleDirectImage_comp f.toLRSHom.toShHom g.toLRSHom.toShHom) e
+    (mixedGlobalSectionsDirectImageIso g) K he hA (heq_of_eq hg₀)
   have hg : p ≫ (mixedGlobalSectionsDirectImageIso g).hom.app
         ((schemeDerivedDirectImage f).obj F) =
       Sg.mapDerivedCategoryFactorsh.inv.app
