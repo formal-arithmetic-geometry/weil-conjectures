@@ -350,6 +350,11 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
   let c := cgh.tensorChain P L
   apply (cancel_epi c.inv).1
   ext n : 1
+  apply ScalarHomTensor.total_pure_hom_ext
+    (P := (podReindexingComplexFunctor l E (h ≫ g) s).obj P)
+    (Q := (podReindexingComplexFunctor l E (h ≫ g) s).obj L)
+    (n := n)
+    (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
   sorry
 
 set_option maxHeartbeats 8000000 in
