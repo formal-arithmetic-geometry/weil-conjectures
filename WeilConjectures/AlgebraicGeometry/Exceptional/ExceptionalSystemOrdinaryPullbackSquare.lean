@@ -609,6 +609,7 @@ private theorem coefficientRing_ext (n : ℕ)
     Equiv.apply_symm_apply] at hx
   exact congrArg (fun t ↦ t.app V PUnit.unit) hx
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Comparing constant generators unfolds several prescribed geometric inverse-image functors.
 private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)

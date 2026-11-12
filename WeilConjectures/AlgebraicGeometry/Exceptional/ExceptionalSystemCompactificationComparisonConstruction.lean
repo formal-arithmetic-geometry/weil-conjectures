@@ -194,6 +194,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CY : ExceptionalSystemSiteComparison O ell Y S.PY)
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- The system and level mate identities require simultaneous localization comparisons.
 /-- Construct the normalized proper and open compactification comparisons.
