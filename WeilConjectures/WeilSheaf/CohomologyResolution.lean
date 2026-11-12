@@ -87,8 +87,6 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
@@ -118,13 +116,13 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
     ((AdicSheaf.forget _).map X.str.hom)
-  simp only [IsoAlgebra.frobeniusNatTrans_app,
+  rw [IsoAlgebra.frobeniusNatTrans_app,
     ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.comp_map, Functor.map_comp, Category.assoc]
-  simp only [Mod.forget_map, adicLowerStar_map_hom]
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
+    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
   rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
-  simp only [Functor.map_comp, Category.assoc] at h ⊢
+  simp only [Category.assoc]
   exact h
 
 
