@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.DerivedOpenDifferenceDiagram
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
@@ -25,7 +26,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem isIso_fiber_projection
     {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
