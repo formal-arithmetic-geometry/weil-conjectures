@@ -98,13 +98,13 @@ private lemma exists_subgroup_pullbackExchange_of_galois_average
     {M : NearbyCyclesModel X S'} {f' : S ⟶ S'}
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (ρ : M''.Hom N₁ (𝟙 X) (𝟙 S)) (ψ : N₁.Hom N (𝟙 X) (𝟙 S))
-    (χ : N.Hom M (𝟙 X ≫ 𝟙 X) (𝟙 S ≫ f')) (φ : M''.Hom M (𝟙 X) f')
-    (htot : (ρ.total ≫ ψ.total) ≫ χ.total = φ.total)
-    (hgen : (ρ.generic ≫ ψ.generic) ≫ χ.generic = φ.generic)
+    {χ : N.Hom M (𝟙 X ≫ 𝟙 X) (𝟙 S ≫ f')} (φ : M''.Hom M (𝟙 X) f')
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
-    (hρ : ∀ C, IsIso ((ρ.pullbackExchange Λ).app C))
     (hχ : IsIso ((χ.pullbackExchange Λ).app A))
+    (htot : (ρ.total ≫ ψ.total) ≫ χ.total = φ.total)
+    (hgen : (ρ.generic ≫ ψ.generic) ≫ χ.generic = φ.generic)
+    (hρ : ∀ C, IsIso ((ρ.pullbackExchange Λ).app C))
     {G L Ω : Type*} [Group G] [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω]
     (eG : G ≃* Gal(Ω/L)) (L₁ : FiniteGaloisIntermediateField L Ω)
     (act : G → M''.Hom M'' (𝟙 X) (𝟙 S))
@@ -180,7 +180,6 @@ lemma baseChangeToGaloisModel_comp_generic :
   exact (baseChangeToGaloisLayer_generic_fst_fst_assoc hM b hb v hv _).trans
     (pullback.lift_fst _ _ _)
 
-set_option trace.profiler true in
 /-- **The slicing exchange is the inclusion of the invariants, given the cartesian step**: if the
 pullback exchange of the cartesian part `χ : N'' ⟶ M` of the base change is invertible at `A`
 (`hM1`) and `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space, a subgroup `V` of
@@ -277,18 +276,16 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
-      (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
-      (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
-    (baseChangeHom hM b hb v hv) (baseChangeToGaloisModel_comp_total hM b hb v hv)
-    (baseChangeToGaloisModel_comp_generic hM b hb v hv) A
-    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) (by exact_mod_proofs hM1)
+    (baseChangeHom hM b hb v hv) A hM1
+    (baseChangeToGaloisModel_comp_total hM b hb v hv)
+    (baseChangeToGaloisModel_comp_generic hM b hb v hv)
+    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
     (GenericAut.galoisEquiv (k' := k') (K := K)) L₁ (baseChangeAut hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
     (autAction_baseChangeAut_mul hM b hb v hv _)
     (pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
     hL₁.1 hL₁.2
-  exact_mod_proofs result
+  exact result
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
