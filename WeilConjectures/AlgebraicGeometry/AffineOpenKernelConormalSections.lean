@@ -33,8 +33,8 @@ private theorem affineOpen_conormal_transport_comp
     (r : R ≃+* A) (w : B ≃+* A) (ρ : A →+* S) (I : Ideal R)
     {C D H Q : Type*} [AddCommGroup C] [Module B C] [AddCommGroup D] [Module S D]
     (κ : H → A) (κ' : Q → B) (η : H → D) (η' : Q → C)
-    (hc : ∃ c : LinearEquiv (r.trans w.symm).toRingHom
-        (σ' := (r.trans w.symm).symm.toRingHom) I.Cotangent C,
+    (hc : ∃ c : LinearEquiv (r.trans w.symm : R →+* B)
+        (σ' := ((r.trans w.symm).symm : B →+* R)) I.Cotangent C,
       ∀ (a : I) (t : Q), κ' t = (r.trans w.symm) (a : R) →
         c (I.toCotangent a) = η' t)
     (hd : letI : Module B D := Module.compHom _ (ρ.comp w.toRingHom)
