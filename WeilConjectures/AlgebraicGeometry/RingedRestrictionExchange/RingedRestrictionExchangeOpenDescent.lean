@@ -830,8 +830,6 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let db := conjugateIsoEquiv ab (arrowAdj w) b
   let t := (eqToIso (congrArg arrowPush e)).symm
   have hc := conjugate_square_transport e ah ab a b
-  change conjugateIsoEquiv ah ab (b.symm ≪≫
-    eqToIso (congrArg arrowPull e) ≪≫ a) = _
   rw [hc]
   apply Iso.ext
   apply NatTrans.ext
