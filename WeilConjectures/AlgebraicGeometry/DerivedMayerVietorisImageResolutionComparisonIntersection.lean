@@ -16,6 +16,7 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Transport through the three derived comparison functors needs extra reduction heartbeats.
 /-- The restriction-induced intersection component realizes the canonical derived comparison.
