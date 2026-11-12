@@ -30,6 +30,7 @@ variable
   [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
     (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The comparison from the residue cycle homology of a strictly perfect affine model `K` of
@@ -72,7 +73,6 @@ Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
 Proof: naturality of `affinePerfectResidueModelIso` and of the evaluation comparison give the
 square for `Q(φ)` in local derived fibre cohomology; substituting the hypothesis on `Q(φ)` and
 using naturality of the open factorization gives the square for `b`. -/
-set_option profiler true in
 theorem affineResidueModelEquiv_naturality
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]
