@@ -198,11 +198,9 @@ theorem unary_model_core {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     have hfac := reductionFactorOfIso_mapDerived (podReindexingFunctor l E g none)
       (isoReductionIntegralInverse l E g) (podOrdinaryReindex l E g) hF h rfl P.obj
     have hfac2 : (factor l E g h).hom.app P.obj ≫ _ = _ := hfac
-    have hfac3 := congrArg (· ≫ DerivedCategory.Q.map
-      ((NatIso.mapHomologicalComplex (eqToIso hF) (.up ℤ)).inv.app P.obj)) hfac2
-    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, eqToHom_refl,
-      Category.id_comp] at hfac3
-    simp only [CategoryTheory.Functor.map_id, Category.comp_id] at hfac3
+    simp only [eqToHom_refl, Category.id_comp] at hfac2
+    have hfac3 := (Iso.eq_comp_inv
+      ((DerivedCategory.Q (C := scalarReductionSource l E X)).mapIso (e₀.app P.obj))).2 hfac2
     have key := congrArg (fun z ↦ A.reduction.hom.app (DerivedCategory.Q.obj P.obj) ≫ z ≫
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex b (.up ℤ)).hom.app P.obj)) hn
     simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
