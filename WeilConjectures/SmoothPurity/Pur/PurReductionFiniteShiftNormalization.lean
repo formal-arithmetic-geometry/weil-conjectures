@@ -243,7 +243,6 @@ private theorem finiteCochainModelAdditive (n : ℕ) :
 
 attribute [local instance] finiteRestrictionCommShift finiteCochainModelAdditive
 
-set_option maxHeartbeats 1200000 in
 set_option profiler true in
 -- Normalize the independently presented coefficient categories in the recorded unit equation.
 private theorem finite_adj_shift (n : ℕ)
@@ -314,7 +313,6 @@ private theorem sequence_projection_shift (n : ℕ) :
   dsimp only [coefficientSequenceProjection]
   infer_instance
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
 -- Unfold coefficient-category aliases when identifying the two forms of the finite shift square.
 /-- The shift of reduction adjoint to the canonical total-limit shift agrees with
