@@ -170,11 +170,7 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
     have : ∀ W, HasSheafify (J.over W) AddCommGrpCat.{u} := inferInstance
     have : ∀ W, (J.over W).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
     let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)
-    let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
-        ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over V)
-          (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over V))) _ _
-        (inferInstanceAs (HasDerivedCategory.{w} D))) :=
-      inferInstanceAs (Category.{w} (DerivedCategory D))
+    letI : HasDerivedCategory.{w} D := inferInstance
     let F := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V
     let QU := DerivedCategory.Q (C := D)
     obtain ⟨eP⟩ := he x
