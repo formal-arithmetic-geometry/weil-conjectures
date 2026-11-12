@@ -204,7 +204,7 @@ private theorem normalizedBeta_eq (n : ℕ)
     change ((inv beta).f (i + j)).val.app U
       ((beta.f (i + j)).val.app U _) = _ at hh
     rw [hbeta] at hh
-    with_unfolding_all exact hh
+    exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
