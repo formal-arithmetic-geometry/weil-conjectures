@@ -84,6 +84,35 @@ private theorem inverseMate_isIso_of_left_adjoints_explicit
   have := h
   exact inverseMate_isIso_of_left_adjoints a₁ b₁ a₂ b₂ w
 
+private theorem mate_eq_of_factorization
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+    {F : A ⥤ C} {G : B ⥤ D} (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
+    (q : G ⋙ R₂ ≅ R₁ ⋙ F)
+    {P V : A} {K : B} {W T U : C} {Z : D}
+    (e : L₁.obj P ⟶ K) (f : F.obj P ⟶ W)
+    (i : R₁.obj K ≅ V) (g : G.obj K ≅ Z) (r : F.obj V ≅ T) (s : R₂.obj Z ≅ U)
+    (a : P ⟶ V) (b : W ⟶ T) (c : T ⟶ U) (k : W ⟶ U) (d : L₂.obj W ⟶ Z)
+    (h₁ : a₁.homEquiv P K e = a ≫ i.inv)
+    (h₃ : R₂.map g.hom = (q.hom.app K ≫ F.map i.hom ≫ r.hom) ≫ c ≫ s.inv)
+    (h₅ : F.map a ≫ r.hom = f ≫ b)
+    (hk : k = b ≫ c) (hd : a₂.homEquiv W Z d = k ≫ s.inv) :
+    L₂.map f ≫ d = ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ q.inv)).app P ≫
+      G.map e ≫ g.hom := by
+  have h₂ := q.inv.naturality e
+  simp only [Functor.comp_map] at h₂
+  apply (a₂.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, hd]
+  rw [Adjunction.homEquiv_naturality_right, a₂.homEquiv_unit]
+  have hm := (unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ q.inv) P).symm
+  dsimp only [Functor.id_obj] at hm
+  erw [hm]
+  rw [Functor.map_comp, Category.assoc, ← reassoc_of% h₂,
+    ← Functor.map_comp_assoc, ← Adjunction.homEquiv_unit, h₁, h₃]
+  simp only [Category.assoc]
+  rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Category.assoc, i.inv_hom_id,
+    Functor.map_id, Category.comp_id, reassoc_of% h₅, hk]
+
 section Ordinary
 
 variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
@@ -184,7 +213,7 @@ private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X �
   unfold sequenceRestrictionPullbackInv
   dsimp only [TwoSquare.mk, integralComparisonSequenceDirectImage,
     AlgebraicGeometry.ProEtale.VaryingRing.push] at h ⊢
-  exact h
+  convert h using 1
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
 private theorem normalizedAdjointComparison_choose_eq
@@ -270,7 +299,6 @@ private theorem sequenceDerived_kflat_ext (W : Scheme.{u}) {D : Type*} [Category
   apply (cancel_epi (F.map (DerivedCategory.Q.map r))).mp
   rw [α.naturality, β.naturality, h P hP]
 
-set_option maxHeartbeats 5000000 in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of the
 restriction/pullback comparison, for any scalar models with normalized adjunctions. -/
@@ -348,8 +376,6 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
     rw [← e1]
     refine (AB.transpose P _ (𝟙 _)).trans ?_
     rw [Adjunction.homEquiv_id]
-  have h2 := (Functor.mapDerivedCategorySquareIso q).inv.naturality (AB.model.ε.app P)
-  simp only [Functor.comp_map] at h2
   have h3 := AlgebraicGeometry.Scheme.mapDerivedCategorySquareIso_hom_app_factors
     (integralComparisonSequencePullback l L j) (sequenceRestriction l E L ι X)
     (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l E j) q K
@@ -368,34 +394,34 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
       DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex q (.up ℤ)).app K))).2 h3.symm
   have h5 := (integralComparisonSequencePullback l E j).mapDerivedCategoryFactors_hom_naturality
     ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P)
+  have hk : DerivedCategory.Q.map
+      ((AX.ordinaryAdj.mapHomologicalComplex (.up ℤ)).homEquiv _ _ kP) =
+      DerivedCategory.Q.map
+        (((integralComparisonSequencePullback l E j).mapHomologicalComplex (.up ℤ)).map
+          ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P)) ≫
+        DerivedCategory.Q.map qK := by
+    rw [← DerivedCategory.Q.map_comp]
+    congr 1
+    rw [Adjunction.homEquiv_unit]
+    apply HomologicalComplex.hom_ext
+    intro n
+    have hu := unit_mateEquiv_symm oB oX (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
+    rw [hoB, hoX] at hu
+    simpa [kP, qK, K, ha] using hu
   apply (cancel_mono
     ((integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
     (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K)).1
   rw [← hS']
-  apply (AX.adjunction.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_naturality_left]
-  refine (congrArg (_ ≫ ·) (AX.transpose _ _ _)).trans ?_
-  rw [Adjunction.homEquiv_naturality_right, AX.adjunction.homEquiv_unit]
-  have hm := (unit_mateEquiv_symm AB.adjunction AX.adjunction
-    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).inv)
-    (DerivedCategory.Q.obj P)).symm
-  dsimp only [Functor.id_obj] at hm
-  erw [hm]
-  rw [CategoryTheory.Functor.map_comp, Category.assoc, ← reassoc_of% h2,
-    ← CategoryTheory.Functor.map_comp_assoc, ← Adjunction.homEquiv_unit, h1, h3']
-  simp only [Category.assoc]
-  rw [Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc, Category.assoc,
-    Iso.inv_hom_id_app]
-  erw [Category.comp_id]
-  rw [reassoc_of% h5, ← DerivedCategory.Q.map_comp_assoc]
-  congr 2
-  refine congrArg DerivedCategory.Q.map ?_
-  rw [Adjunction.homEquiv_unit]
-  apply HomologicalComplex.hom_ext
-  intro n
-  have hu := unit_mateEquiv_symm oB oX (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
-  rw [hoB, hoX] at hu
-  simpa [kP, qK, K, ha] using hu.symm
+  exact mate_eq_of_factorization AB.adjunction AX.adjunction
+    (Functor.mapDerivedCategorySquareIso q) (AB.model.ε.app P)
+    ((integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.hom.app P)
+    ((sequenceRestriction l E L ι B).mapDerivedCategoryFactors.app K)
+    ((integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.app K)
+    ((integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.app
+      (((sequenceRestriction l E L ι B).mapHomologicalComplex (.up ℤ)).obj K))
+    ((sequenceRestriction l E L ι X).mapDerivedCategoryFactors.app
+      (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K))
+    _ _ _ _ _ h1 h3' h5 hk (AX.transpose _ _ kP)
 
 end Derived
 
