@@ -32,15 +32,38 @@ private theorem ringedSwap_summand
     letI := SheafOfModules.isMonoidal_W_independentCoefficients R
     letI := SheafOfModules.monoidalCategory R
     letI := SheafOfModules.symmetricCategory R
-    RingedForgetTensorTransposition.tensorSummand J R P Q p q n hpq ≫
-        (CochainComplex.Monoidal.braiding P Q).hom.f n =
-      ((p * q).negOnePow : ℤ) • ((β_ (P.X p) (Q.X q)).hom ≫
-        RingedForgetTensorTransposition.tensorSummand J R Q P q p n hqp) := by
+    Eq (RingedForgetTensorTransposition.tensorSummand J R P Q p q n hpq ≫
+        (CochainComplex.Monoidal.braiding P Q).hom.f n)
+      (((p * q).negOnePow : ℤ) • ((β_ (P.X p) (Q.X q)).hom ≫
+        RingedForgetTensorTransposition.tensorSummand J R Q P q p n hqp)) := by
   letI := SheafOfModules.isMonoidal_W_independentCoefficients R
   letI := SheafOfModules.monoidalCategory R
   letI := SheafOfModules.symmetricCategory R
-  simpa only [RingedForgetTensorTransposition.tensorSummand, Preadditive.zsmul_comp] using
-    (CochainComplex.Monoidal.ι_braiding_hom (K := P) (L := Q) p q n hpq)
+  exact CochainComplex.Monoidal.ι_braiding_hom (K := P) (L := Q) p q n hpq
+
+private theorem signed_summand_of_comparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F : C ⥤ D) [F.Additive] [F.Faithful]
+    {X Y Z W : C} {X' Y' Z' W' : D}
+    (f : X ⟶ Y) (s : Z ⟶ W) (i₀ : Z ⟶ X) (i₁ : W ⟶ Y)
+    (c₀ : F.obj X ⟶ X') (c₁ : F.obj Y ⟶ Y') [Mono c₁]
+    (u₀ : F.obj Z ⟶ Z') (u₁ : F.obj W ⟶ W')
+    (j₀ : Z' ⟶ X') (j₁ : W' ⟶ Y') (b : X' ⟶ Y') (t : Z' ⟶ W')
+    (a e : ℤ)
+    (hc : F.map f ≫ c₁ = c₀ ≫ b)
+    (hi₀ : F.map i₀ ≫ c₀ = a • (u₀ ≫ j₀))
+    (hi₁ : F.map i₁ ≫ c₁ = a • (u₁ ≫ j₁))
+    (hb : j₀ ≫ b = e • (t ≫ j₁))
+    (hs : F.map s ≫ u₁ = u₀ ≫ t) :
+    i₀ ≫ f = e • (s ≫ i₁) := by
+  apply F.map_injective
+  apply (cancel_mono c₁).1
+  simp only [Functor.map_comp, Functor.map_zsmul, Preadditive.zsmul_comp,
+    Category.assoc]
+  rw [hc, ← Category.assoc, hi₀, hi₁]
+  simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp, Category.assoc]
+  rw [hb, reassoc_of% hs]
+  simp only [Preadditive.comp_zsmul, smul_comm]
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -96,21 +119,12 @@ theorem nativeRingedSwapComplex_summand
       Functor.map_preimage, Iso.trans_hom, Iso.symm_hom, Category.assoc,
       Iso.inv_hom_id, Category.comp_id]
   have h := congrArg (fun f ↦ f.f n) (nativeRingedSwapComplex_square b T adj A P Q)
-  change E.map ((nativeRingedSwapComplex b T adj A P Q).hom.f n) ≫
-    (A.chain P Q).hom.f n =
-      (A.chain Q P).hom.f n ≫
-        (CochainComplex.Monoidal.braiding (Ec.obj P) (Ec.obj Q)).hom.f n at h
-  apply E.map_injective
-  apply (cancel_mono ((A.chain P Q).hom.f n)).1
-  simp only [Functor.map_comp, Functor.map_zsmul, Preadditive.zsmul_comp,
-    Category.assoc]
-  rw [h, ← Category.assoc, A.summand Q P q p n hqp hpq]
-  rw [A.summand P Q p q n hpq hqp]
-  simp only [nativeRingedTensorSign, zsmul_eq_smul, Preadditive.comp_zsmul,
-    Preadditive.zsmul_comp, Category.assoc]
-  have hb := ringedSwap_summand b.J b.R (Ec.obj P) (Ec.obj Q) p q n hpq hqp
-  rw [hb, reassoc_of% hs]
-  simp only [Preadditive.comp_zsmul, mul_comm q p]
-  rfl
+  refine signed_summand_of_comparison E _ s _ _
+    ((A.chain Q P).hom.f n) ((A.chain P Q).hom.f n)
+    (A.underived (Q.X q) (P.X p)).hom (A.underived (P.X p) (Q.X q)).hom
+    _ _ _ _ ((p * q).negOnePow : ℤ) _ h ?_ ?_
+    (ringedSwap_summand b.J b.R (Ec.obj P) (Ec.obj Q) p q n hpq hqp) hs
+  · simpa only [nativeRingedTensorSign, mul_comm q p] using A.summand Q P q p n hqp hpq
+  · exact A.summand P Q p q n hpq hqp
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
