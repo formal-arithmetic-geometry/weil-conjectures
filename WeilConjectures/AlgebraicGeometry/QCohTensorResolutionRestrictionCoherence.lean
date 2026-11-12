@@ -48,6 +48,7 @@ theorem tensorResolution_presheaf_map_tmul {X : Scheme.{u}} (F G : X.Modules)
     tmulSection (F.presheaf.map i s) (G.presheaf.map i t) at ht
   exact ht
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The normalized tensor restriction comparisons respect successive affine restrictions. -/
