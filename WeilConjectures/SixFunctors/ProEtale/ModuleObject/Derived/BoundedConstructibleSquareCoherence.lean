@@ -329,7 +329,18 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX ΔY q p₂ p₂' h₁ h₂' h₃' h₄'
       (A := B) (K := N) ψ
   have h_coherence := congrArg₂ (fun a b ↦ a ⊗ₘ b) h_coherence₁ h_coherence₂
-  rw [h_coherence]
+  first
+  | conv_lhs => arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
+  | conv_lhs => arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; arg 2; rw [h_coherence]
 end Coherence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
