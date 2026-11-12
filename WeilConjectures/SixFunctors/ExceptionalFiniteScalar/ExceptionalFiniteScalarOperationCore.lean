@@ -56,7 +56,7 @@ private theorem transportRightRealization_hom
   dsimp only [Iso.isoCompInverse, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
     Functor.associator_inv_app, Functor.rightUnitor_inv_app]
-  simp only [Category.id_comp, Category.comp_id, Functor.map_comp]
+  simp only [Category.id_comp, Functor.map_comp]
   change v ≫ (e.counitIso.app (F.obj N)).inv ≫ e.functor.map (r.hom.app N) = _
   have hc := e.counitIso.inv.naturality v
   change v ≫ (e.counitIso.app (F.obj N)).inv =
@@ -74,7 +74,6 @@ abbrev OperationCore
     (c : Compactification f) := Operation l E n c
 
 set_option maxRecDepth 4096 in
-set_option profiler true in
 /-- Construction of the core from the existing finite exceptional operations theorem.
 Retain its normalized Hom formula while transporting the right realization back
 through the canonical coefficient equivalence and its counit.
