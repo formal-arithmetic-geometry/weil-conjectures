@@ -140,23 +140,23 @@ theorem exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     {κ : Type*} (act : κ → (Ω ≃ₐ[L] Ω))
     (hact : ∀ (j : FiniteGaloisIntermediateField L Ω) (a : j ≃ₐ[L] j),
       ∃ k, ∀ x : j, act k x = a x) :
-    let Λ := Profinite.continuousMapRingObj T₀
-    let g := pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
-    ∃ R : R((g)_*⟦Λ⟧).obj (L((g)^*⟦Λ⟧).obj A) ⟶ A,
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).unit.app A ≫ R = 𝟙 A ∧
+    ∃ R : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦(Profinite.continuousMapRingObj T₀)⟧).obj (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj A) ⟶ A,
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
+        (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app A ≫ R = 𝟙 A ∧
       ∀ {Z : Scheme.{u}} (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
-          (condensedRingObj Λ S)) ⥤
-            Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) [G.Additive],
+          (condensedRingObj (Profinite.continuousMapRingObj T₀) S)) ⥤
+            Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)) [G.Additive],
         (∀ (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
-            (condensedRingObj Λ S)) ℤ) (a : ℤ) [K.IsStrictlyGE a],
+            (condensedRingObj (Profinite.continuousMapRingObj T₀) S)) ℤ) (a : ℤ) [K.IsStrictlyGE a],
           (∀ n, IsColimit ((galoisTower Ω h).abCocone (K.X n).X)) →
             Nonempty (IsColimit ((DerivedCategory.Q ⋙ G).mapCocone
-              ((galoisTower Ω h).complexCocone Λ K)))) →
-        ∀ {W} (φ : G.obj (R((g)_*⟦Λ⟧).obj (L((g)^*⟦Λ⟧).obj A)) ⟶ W),
-          (∀ k, G.map (derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp (act k))
+              ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)))) →
+        ∀ {W} (φ : G.obj (R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦(Profinite.continuousMapRingObj T₀)⟧).obj (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj A)) ⟶ W),
+          (∀ k, G.map (derivedUnitTransport (Profinite.continuousMapRingObj T₀) (pullbackAction h _ specGaloisAction_comp (act k))
             (pullbackAction_fst h _ specGaloisAction_comp (act k))
             (pullbackAction_fst h _ specGaloisAction_comp (act k)) A) ≫ φ = φ) →
-          G.map (R ≫ (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).unit.app A) ≫ φ = φ := by
+          G.map (R ≫ (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
+        (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app A) ≫ φ = φ := by
   let Λ := Profinite.continuousMapRingObj T₀
   let g := pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ A hA
@@ -182,7 +182,10 @@ theorem exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     have := pullbackAction_comp_galoisLevelProjection h j (act k)
     rw [hres] at this
     exact this
-  refine ⟨_, galoisTower_derivedUnit_retraction_of_iso Λ g (galoisTower Ω h) hd K hc a hK e, ?_⟩
+  let R := R((g)_*⟦Λ⟧).map (L((g)^*⟦Λ⟧).map e.inv) ≫
+    Adjunction.derivedUnitRetraction (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK
+      ((galoisTower Ω h).complexTrace Λ hd K hc) ≫ e.hom
+  refine ⟨R, galoisTower_derivedUnit_retraction_of_iso Λ g (galoisTower Ω h) hd K hc a hK e, ?_⟩
   intro Z G _ hG W φ hφ
   exact (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
     Λ hd K hc a hK A e G (hG K a hcab).some
