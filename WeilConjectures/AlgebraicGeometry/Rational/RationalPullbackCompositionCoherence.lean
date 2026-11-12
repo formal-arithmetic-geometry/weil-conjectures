@@ -92,8 +92,19 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-set_option maxHeartbeats 700000 in
--- Tensor-generator coordinates unfold nested inverse-image and scalar-extension sections.
+/-- Apply a scalar-restricted module map with the original target carrier as its result type. -/
+def rationalCoherenceRestrictionApply {R S : Type*} [Ring R] [Ring S]
+    (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S)
+    (f : M ⟶ (ModuleCat.restrictScalars φ).obj N) (m : M) : N :=
+  f.hom m
+
+-- Keep expected-type propagation from unfolding the scalar-restriction object.
+local instance (priority := 2000) rationalCoherenceRestrictionCoeFun
+    {R S : Type*} [Ring R] [Ring S]
+    (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S) :
+    CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) (fun _ ↦ M → N) where
+  coe := rationalCoherenceRestrictionApply φ M N
+
 /-- The composition equation with all specified ordinary, completed and raw maps.
 The module formula uses generators on base-changed charts; sheafification and balancing
 extend it to local tensors. Derived normalization fixes the ambient comparison itself.
@@ -294,7 +305,8 @@ theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
       limit.lift_π _ (op n)
     rw [hc.completed_comp] at hp
     simpa only [Category.assoc] using hp
-  · simpa only [rationalCoherenceUnit, rationalCoherenceScalar, rationalCoherenceSmul]
+  · simpa only [rationalCoherenceUnit, rationalCoherenceScalar, rationalCoherenceSmul,
+      rationalCoherenceRestrictionApply]
       using hmodule
   · exact rationalCompletedPullbackComposition l E g h sX sY sZ ag ah ac
       hcoefficient moduleComp hmodule ambientComp hderived
