@@ -23,10 +23,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 set_option trace.profiler true in
-set_option synthInstance.maxHeartbeats 100000 in
--- The canonical sheaf tensor instances require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The canonical sheaf tensor instances require additional elaboration fuel.
 private theorem ringedSwap_summand
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -70,10 +66,6 @@ def nativeRingedSwapUnderived (P Q : ProEtaleWeilSheaf k₀ l X) :
     β_ (b.native.functor.obj P) (b.native.functor.obj Q) ≪≫ (A.underived P Q).symm)
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1200000 in
--- The mapped total-complex instances require additional elaboration fuel.
-set_option synthInstance.maxHeartbeats 100000 in
--- The mapped total-complex instances require additional elaboration fuel.
 /-- The native signed chain swap on one homogeneous tensor summand.
 Source: Stacks 06YU, 0FPT.
 (blueprint: new-sf-native-weil-ringed-swap-summand).
