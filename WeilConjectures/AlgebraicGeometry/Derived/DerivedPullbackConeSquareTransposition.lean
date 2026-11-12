@@ -159,6 +159,7 @@ theorem derivedPullback_cone_square_transposition
   obtain ⟨hL, e, he⟩ := kFlat_pullback_adjunction_comparison g
   let E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings S'.toRingedSpace) := Scheme.Modules.tensorPullback g
+  letI : E.Additive := hL
   let G := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   let L := E.mapHomologicalComplex (.up ℤ)
   let F := G.mapHomologicalComplex (.up ℤ)
