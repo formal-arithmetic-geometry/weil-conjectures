@@ -32,7 +32,6 @@ open Scheme PadicAlgCl CondensedRing
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
-set_option profiler true in
 /-- The derived pullback `Lj^*` along an open immersion preserves derived complete complexes: it
 is right adjoint to the extension by zero `Dj_!`, which commutes with the first derived
 reduction. -/
