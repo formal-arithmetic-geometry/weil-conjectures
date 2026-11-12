@@ -53,10 +53,10 @@ private theorem schemeCompUnit_app {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K =
-    (Scheme.Modules.pushforward t).rightDerivedFunctorUnit.app
-        (((Scheme.Modules.pushforward s).mapHomotopyCategory (.up ℤ)).obj K) ≫
-      (Scheme.Modules.pushforward t).rightDerivedFunctor.map
-        ((Scheme.Modules.pushforward s).rightDerivedFunctorUnit.app K) := by
+    (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+        (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj K) ≫
+      (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctor.map
+        ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
   exact compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K
 
 private theorem schemeNormalizedDirectImageCompIso_eq {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
