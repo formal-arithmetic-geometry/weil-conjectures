@@ -158,8 +158,10 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
       (DerivedCategory.Q.obj P) :=
     eqToIso (congrArg (fun W ↦ DerivedCategory.Q.obj W) hQ0) ≪≫
       (isoPullbackComplexCounitIso j).symm.app P
-  obtain ⟨l0, hl0⟩ := exists_affineSpectrum_canonicalComparison_square
+  have hcanonical := exists_affineSpectrum_canonicalComparison_square
     f f' g g' sq sq0 z0 i P Q hP hQ hcP hcQ hQ0
+  let l0 := hcanonical.choose
+  have hl0 := hcanonical.choose_spec
   change DerivedCategory.Q.obj Q ≅ (derivedPullback j).obj K at e0
   change DerivedCategory.Q.obj Q ≅ (derivedPullback j).obj (DerivedCategory.Q.obj P) at d
   let a : DerivedCategory.Q.obj Q ≅ DerivedCategory.Q.obj Q :=
@@ -169,7 +171,9 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
   let := (tensorMap f0 f0' s0 g0 sq0 z0).toAlgebra
   let := HasDerivedCategory.standard (ModuleCat.{u} (R f0 g0 z0))
   let := HasDerivedCategory.standard (ModuleCat.{u} (B f0' z0))
-  obtain ⟨c, hc, _⟩ := exists_comparisonSourceIso f0 f0' s0 g0 sq0 z0 Q Q a i
+  have hsource := (exists_comparisonSourceIso f0 f0' s0 g0 sq0 z0 Q Q a i).exists
+  let c := hsource.choose
+  have hc := hsource.choose_spec
   let E := ModuleCat.extendScalars.{u, u, u}
     (algebraMap (TensorProduct (R f0 g0 z0) (A g0 z0) (B f0' z0)) (C z0))
   let b := F0.mapIso (E.mapIso c)
