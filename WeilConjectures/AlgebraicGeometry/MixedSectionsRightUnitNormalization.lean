@@ -83,6 +83,7 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       (mixedGlobalSectionsDirectImageIso f).hom.app (DerivedCategory.Qh.obj K) =
     S.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj K) ≫
       (schemeGlobalScalarRestriction f).map (H.rightDerivedFunctorUnit.app K) := by
+  intro D H S
   let c₀ := Classical.choose (exists_mixedGlobalSectionsDirectImageIso f)
   have h₀ := (Classical.choose_spec (Classical.choose_spec
     (exists_mixedGlobalSectionsDirectImageIso f))).1
@@ -151,11 +152,9 @@ theorem mixedSections_right_unit_normalization
       (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫
       (schemeGlobalScalarRestrictionCompIso f g).hom.app
         ((schemeDerivedGlobalSections X).obj F) = b := by
-  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj I
-  let F := DerivedCategory.Qh.obj K
-  let HZ := schemeDerivedGlobalSections Z
-  let e := schemeNormalizedDirectImageCompIso f g
-  have he : HZ.map (e.inv.app F) ≫ HZ.map (e.hom.app F) = 𝟙 _ := by
+  intro K F Df Dfg HX HY HZ Sf Sg e p b
+  let HZ' := schemeDerivedGlobalSections Z
+  have he : HZ'.map (e.inv.app F) ≫ HZ'.map (e.hom.app F) = 𝟙 _ := by
     rw [← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app,
       CategoryTheory.Functor.map_id]
   dsimp only
