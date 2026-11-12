@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleModul
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConstructibleHeart
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.CategoryTheory.DerivedCategory.HomotopyColimit
+import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 
 /-!
 # Structure of integral constructible complexes
@@ -43,29 +45,6 @@ section Truncation
 
 variable {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
 
-/-- The homology of the truncation `τ^{≤ n} K` is that of `K` in degrees `≤ n`. -/
-private lemma isIso_homologyMap_truncLEι {C : Type*} [Category C] [Abelian C]
-    [HasDerivedCategory C] (K : DerivedCategory C) {n m : ℤ} (hm : m ≤ n) :
-    IsIso ((DerivedCategory.homologyFunctor C m).map
-      ((DerivedCategory.TStructure.t.triangleLEGT n).obj K).mor₁) := by
-  have : ((DerivedCategory.TStructure.t.triangleLEGT n).obj K).obj₃.IsGE (n + 1) :=
-    (inferInstance : DerivedCategory.TStructure.t.IsGE
-      ((DerivedCategory.TStructure.t.truncGT n).obj K) (n + 1))
-  exact DerivedCategory.isIso_homologyMap_mor₁ _
-    (DerivedCategory.TStructure.t.triangleLEGT_distinguished n K) (m - 1) m (by lia)
-    (DerivedCategory.isZero_of_isGE _ (n + 1) _ (by lia))
-    (DerivedCategory.isZero_of_isGE _ (n + 1) _ (by lia))
-
-/-- The homology of the truncation `τ^{≥ n} K` is that of `K` in degrees `≥ n`. -/
-private lemma isIso_homologyMap_truncGEπ {C : Type*} [Category C] [Abelian C]
-    [HasDerivedCategory C] (K : DerivedCategory C) {n m : ℤ} (hm : n ≤ m) :
-    IsIso ((DerivedCategory.homologyFunctor C m).map
-      ((DerivedCategory.TStructure.t.triangleLTGE n).obj K).mor₂) :=
-  DerivedCategory.isIso_homologyMap_mor₂ _
-    (DerivedCategory.TStructure.t.triangleLTGE_distinguished n K) m (m + 1) rfl
-    (DerivedCategory.isZero_of_isLE _ (n - 1) _ (by lia))
-    (DerivedCategory.isZero_of_isLE _ (n - 1) _ (by lia))
-
 /-- The truncation `τ^{≤ n} K` of a bounded constructible complex is bounded constructible. -/
 lemma boundedConstructible_truncLE
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}
@@ -74,13 +53,13 @@ lemma boundedConstructible_truncLE
   obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff R K).1 hK
   refine (mem_boundedConstructible_iff R _).2 ⟨⟨a, b, fun m hm ↦ ?_⟩, fun m ↦ ?_⟩ <;>
     by_cases hmn : m ≤ n
-  · have := isIso_homologyMap_truncLEι K hmn
+  · have := DerivedCategory.isIso_homologyFunctor_map_truncLEι_app n m hmn K
     exact (hab m hm).of_iso (asIso ((DerivedCategory.homologyFunctor _ m).map
-      ((DerivedCategory.TStructure.t.triangleLEGT n).obj K).mor₁))
+      ((DerivedCategory.TStructure.t.truncLEι n).app K)))
   · exact DerivedCategory.isZero_of_isLE _ n _ (by lia)
-  · have := isIso_homologyMap_truncLEι K hmn
+  · have := DerivedCategory.isIso_homologyFunctor_map_truncLEι_app n m hmn K
     exact constructible_of_iso (asIso ((DerivedCategory.homologyFunctor _ m).map
-      ((DerivedCategory.TStructure.t.triangleLEGT n).obj K).mor₁)).symm (hc m)
+      ((DerivedCategory.TStructure.t.truncLEι n).app K))).symm (hc m)
   · exact isConstructibleModuleObject_of_isZero R
       (DerivedCategory.isZero_of_isLE _ n _ (by lia))
 
@@ -92,13 +71,13 @@ lemma boundedConstructible_truncGE
   obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff R K).1 hK
   refine (mem_boundedConstructible_iff R _).2 ⟨⟨a, b, fun m hm ↦ ?_⟩, fun m ↦ ?_⟩ <;>
     by_cases hmn : n ≤ m
-  · have := isIso_homologyMap_truncGEπ K hmn
+  · have := DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K n m hmn
     exact (hab m hm).of_iso (asIso ((DerivedCategory.homologyFunctor _ m).map
-      ((DerivedCategory.TStructure.t.triangleLTGE n).obj K).mor₂)).symm
+      ((DerivedCategory.TStructure.t.truncGEπ n).app K))).symm
   · exact DerivedCategory.isZero_of_isGE _ n _ (by lia)
-  · have := isIso_homologyMap_truncGEπ K hmn
+  · have := DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K n m hmn
     exact constructible_of_iso (asIso ((DerivedCategory.homologyFunctor _ m).map
-      ((DerivedCategory.TStructure.t.triangleLTGE n).obj K).mor₂)) (hc m)
+      ((DerivedCategory.TStructure.t.truncGEπ n).app K))) (hc m)
   · exact isConstructibleModuleObject_of_isZero R
       (DerivedCategory.isZero_of_isGE _ n _ (by lia))
 
@@ -146,16 +125,12 @@ lemma isClosedUnderFiniteProducts_isConstructibleModuleObject_padicIntegersRingO
     ObjectProperty.IsClosedUnderFiniteProducts (IsConstructibleModuleObject 𝒪X) :=
   let P : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) 𝒪X) :=
     IsConstructibleModuleObject 𝒪X
-  have := (isConstructibleModuleObject_serre_padicIntegersRingObj ℓ X E).2.2
+  have : P.IsClosedUnderExtensions :=
+    (isConstructibleModuleObject_serre_padicIntegersRingObj ℓ X E).2.2
   have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ constructible_of_iso e h⟩
   have : P.ContainsZero :=
     ⟨0, isZero_zero _, isConstructibleModuleObject_of_isZero _ (isZero_zero _)⟩
-  have : P.IsClosedUnderBinaryProducts :=
-    ⟨fun _ ⟨F, hF⟩ ↦ P.prop_of_iso
-      (biprod.isoProd _ _ ≪≫ (HasLimit.isoOfNatIso (diagramIsoPair F.diag)).symm ≪≫
-        limit.isoLimitCone ⟨_, F.isLimit⟩)
-      (P.prop_biprod (hF ⟨.left⟩) (hF ⟨.right⟩))⟩
-  .mk'
+  P.isClosedUnderFiniteProducts_of_isClosedUnderExtensions
 
 /-- Blueprint `lemma-structure-integral-constructible-complexes--1`: for a finite subextension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian scheme `X`, `Dᵇc(X, 𝒪_E)` is a triangulated subcategory of

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.ObjectProperty.EpiMono
+public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import Mathlib.CategoryTheory.Abelian.Refinements
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
@@ -253,5 +254,27 @@ theorem prop_X₃_of_exact_of_fullyFaithful (F : C ⥤ D) [F.Full] [F.Faithful] 
 
 
 end FiveTerm
+
+section FiniteProducts
+
+open Limits
+
+/-- A property of objects of an abelian category which contains zero and is closed under
+isomorphisms and extensions is closed under finite products (a binary product is an extension).
+-/
+lemma isClosedUnderFiniteProducts_of_isClosedUnderExtensions (Q : ObjectProperty C)
+    [Q.ContainsZero] [Q.IsClosedUnderIsomorphisms] [Q.IsClosedUnderExtensions] :
+    Q.IsClosedUnderFiniteProducts := by
+  have : Q.IsClosedUnderBinaryProducts := by
+    refine ⟨fun X ⟨p⟩ ↦ ?_⟩
+    let a := p.diag.obj ⟨.left⟩
+    let b := p.diag.obj ⟨.right⟩
+    exact Q.prop_of_iso (biprod.isoProd a b ≪≫
+      (HasLimit.isoOfNatIso (diagramIsoPair p.diag)).symm ≪≫
+      (limit.isLimit p.diag).conePointUniqueUpToIso p.isLimit)
+      (Q.prop_biprod (p.prop_diag_obj _) (p.prop_diag_obj _))
+  exact .mk'
+
+end FiniteProducts
 
 end CategoryTheory.ObjectProperty

@@ -16,13 +16,12 @@ For bounded constructible `ℚ̄_ℓ`-sheaves, the composition isomorphisms
 the identity isomorphisms `R(𝟙 X)^! ≅ 𝟭`
 (`ProEtale.CondensedRing.boundedConstructibleUpperShriekId`): both unit laws hold. The left unit
 law is `ProEtale.CondensedRing.Correspondence.upperShriekComp_id_left_hom_app`; this file
-proves the right unit law by conjugating the right unit law of the lower shriek, and packages
+proves the right unit law by conjugating the right unit law of the lower shriek (using
+`CategoryTheory.conjugateIsoEquiv_comp_right_hom_app`), and packages
 both (blueprint `proposition-composition-open-restriction-compactifications-f--3`).
 
 ## Main statements
 
-- `CategoryTheory.conjugateIsoEquiv_comp_right_hom_app`: the right unit law of conjugate
-  composition isomorphisms.
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl_id_right_hom_app`
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl_unitality`
 -/
@@ -30,40 +29,6 @@ both (blueprint `proposition-composition-open-restriction-compactifications-f--3
 @[expose] public section
 
 universe u
-
-namespace CategoryTheory
-
-variable {C D : Type*} [Category C] [Category D]
-
-/-- Let `c : L_F ≅ L_h ⋙ G` and `ι : G ≅ 𝟭` be isomorphisms of left adjoints whose composite is
-`e : L_F ≅ L_h`. Then the conjugates `R_F ≅ R_G ⋙ R_h` of `c` and `R_G ≅ 𝟭` of `ι` compose to
-the conjugate `R_F ≅ R_h` of `e`. This is the right unit law; the left unit law is
-`CategoryTheory.conjugateIsoEquiv_comp_left_hom_app`. -/
-lemma conjugateIsoEquiv_comp_right_hom_app {LF Lh : C ⥤ D} {RF Rh : D ⥤ C} {G RG : D ⥤ D}
-    (adjF : LF ⊣ RF) (adjh : Lh ⊣ Rh) (adjG : G ⊣ RG) (c : LF ≅ Lh ⋙ G) (ι : G ≅ 𝟭 D)
-    (e : LF ≅ Lh) (hc : ∀ K, c.hom.app K ≫ ι.hom.app (Lh.obj K) = e.hom.app K) (K' : D) :
-    (conjugateIsoEquiv adjF (adjh.comp adjG) c.symm).hom.app K' ≫
-        Rh.map ((conjugateIsoEquiv adjG Adjunction.id ι.symm).hom.app K') =
-      (conjugateIsoEquiv adjF adjh e.symm).hom.app K' := by
-  have he : ∀ K, ι.inv.app (Lh.obj K) ≫ c.inv.app K = e.inv.app K := fun K ↦ by
-    rw [← cancel_mono (e.hom.app K), Category.assoc, Iso.inv_hom_id_app, ← hc,
-      Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
-    rfl
-  simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom, conjugateEquiv_apply_app,
-    Adjunction.comp_unit_app, Adjunction.id_unit, Functor.comp_obj, Functor.id_obj,
-    Functor.comp_map, Functor.id_map, NatTrans.id_app, Category.id_comp, Functor.map_comp,
-    Category.assoc]
-  simp only [← Functor.map_comp]
-  congr 2
-  have hn := ι.inv.naturality (adjG.unit.app (Lh.obj (RF.obj K')) ≫
-    RG.map (c.inv.app (RF.obj K')) ≫ RG.map (adjF.counit.app K'))
-  simp only [Functor.id_obj, Functor.id_map, Category.assoc] at hn
-  rw [reassoc_of% hn, ← he, Category.assoc]
-  congr 1
-  simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality,
-    Adjunction.counit_naturality_assoc, Adjunction.left_triangle_components_assoc]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

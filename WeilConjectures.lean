@@ -17953,6 +17953,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteExtens
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteLisseFiltration
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Ind
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.LocalizingHomTest
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Orthogonal
