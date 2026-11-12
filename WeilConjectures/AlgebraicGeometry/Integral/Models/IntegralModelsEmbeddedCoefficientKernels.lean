@@ -372,6 +372,7 @@ theorem integralModelsEmbeddedCoefficientKernels
             (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)).obj
             (SheafOfModules.unit (siteModuleRings _))) ∧
       I.IsQuotientIso φ ∧ I.extension φ = ConstantCompletion.kernelIdeal qB := by
+  dsimp only
   obtain ⟨e, r, hq, hw, hR, hB⟩ := integralModelsEmbeddedResidueSections ℓ E π hπ X
   let φ := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)
   let q := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.residueMap ℓ E π X)
