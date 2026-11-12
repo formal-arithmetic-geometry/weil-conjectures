@@ -199,46 +199,38 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
-  let : Abelian (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) := inferInstance
-  let : Abelian (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
-      (condensedRingObj Λ X')) := inferInstance
-  let : HasDerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) := inferInstance
-  let : HasDerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
-      (condensedRingObj Λ X')) := inferInstance
-  let : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) := inferInstance
-  let : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
-      (condensedRingObj Λ X'))) := inferInstance
   have : Normal L L' := inferInstance
+  let F := L((𝟙 X)^*⟦Λ⟧)
+  let F' := L((𝟙 X')^*⟦Λ⟧)
+  let act := N.galoisLayerAction Λ h Ω
+  let act₁ := N.galoisLayerAction Λ h L'
+  let β := (N.galoisLayerRestrict h Ω L').pullbackExchange Λ
   constructor
   · intro σ hσ
-    have hc := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
-      (L((𝟙 X)^*⟦Λ⟧).obj C)
-    have h1 : (N.galoisLayerAut h L' (σ.restrictNormal L')).autAction Λ
-        (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _ :=
-      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
-        (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
-          (N.galoisLayerAction_one Λ h L' _)
-    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) =
-        𝟙 _ := eq_id_of_intertwining_of_epi_aux L((𝟙 X')^*⟦Λ⟧) _ _ _ hc h1
+    have hc := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ (F.obj C)
+    have h1 := (congrArg (fun τ ↦ act₁ τ (F.obj C))
+      (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
+        (N.galoisLayerAction_one Λ h L' (F.obj C))
+    have h2 := eq_id_of_intertwining_of_epi_aux F' _ _ _ hc h1
     exact eq_id_of_naturality_of_iso (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
-      _ (fun g ↦ Hom.autAction_naturality Λ _ g)
+      (act σ) (fun g ↦ N.galoisLayerAction_naturality Λ h Ω σ g)
       ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
   · obtain ⟨r, hr, havg⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
     have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
       (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
       (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
-    exact retraction_of_comp_of_isIso_aux ((N.galoisLayerHom h Ω).pullbackExchange Λ)
-      ((N.galoisLayerHom h L').pullbackExchange Λ)
-      ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
+    exact retraction_of_comp_of_isIso_aux
+      (L₀ := F) (Lfg := F') (Lg := F') (Lf := F')
+      (ΨM := N.nearbyCycles Λ) (Ψ₁ := (N.galoisLayer h L').nearbyCycles Λ)
+      (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
+      ((N.galoisLayerHom h Ω).pullbackExchange Λ)
+      ((N.galoisLayerHom h L').pullbackExchange Λ) β
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx r hr Finset.univ _
-      (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
-      (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
-      (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
-      (fun τ ↦ by
-        rw [N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ (lift τ), hlift])
+      (fun τ ↦ act₁ τ (F.obj C)) (fun τ ↦ act (lift τ))
+      (fun τ _ _ g ↦ N.galoisLayerAction_naturality Λ h Ω (lift τ) g) havg
+      (fun τ ↦ (N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ
+        (lift τ) (F.obj C)).trans
+          (congrArg (fun σ ↦ F'.map (act₁ σ (F.obj C)) ≫ β.app (F.obj C)) (hlift τ)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
