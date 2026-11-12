@@ -138,6 +138,7 @@ private theorem trace_of_mapped_diagonal_components
   exact trace_of_diagonal_components (F.map a) (F.map b) a' b' e dB
     (F.map t) t' ha hb hat' hbt' hzero hlow hhigh
 
+-- Cancel an invertible endpoint comparison while the splitting maps are still abstract.
 private theorem trace_of_mapped_diagonal_components_factor
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [HasBinaryBiproducts C] [HasBinaryBiproducts D] (F : C ⥤ D) [F.Additive]
@@ -176,6 +177,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   CompletedRealization.singleUnit CompletedRealization.shiftedLine
   modelExchange TracePullback
 
+-- Use global invertibility in the coordinate criterion before specializing the splitting maps.
 private theorem completedTrace_lowCoordinate (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)
@@ -219,7 +221,6 @@ private theorem completedTrace_lowCoordinate (l : ℕ) [Fact l.Prime]
     instX instS instX' instS' f f' hX hS h s hs s' hs'
     D D' canonical canonical' line v b v' b' ‹_› ‹_› τ τ' hv hb hv' hb'
 
-set_option profiler true in
 -- Compare the independently normalized derived functor endpoints.
 /-- Pullback of one completed projective-line trace, expressed in its normalized
 condensed realization. This is a trace-only assertion for a Cartesian square of
