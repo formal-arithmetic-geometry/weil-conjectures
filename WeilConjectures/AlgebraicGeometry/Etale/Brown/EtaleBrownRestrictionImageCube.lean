@@ -250,7 +250,6 @@ private theorem normalized_full_cube
 
 end FullCube
 
-set_option profiler true in
 -- Expose the localization equation without unfolding the whole coherence package.
 private theorem brown_restriction_factors
     (O : Type (u + 1)) [CommRing O] (t : O) (V : Scheme.{u})
@@ -272,7 +271,6 @@ private theorem brown_restriction_factors
             ((NatIso.mapHomologicalComplex (R.val.ordinaryRestriction h) (.up ℤ)).hom.app I) :=
   R.property.2.1 h
 
-set_option profiler true in
 /-- Exact scalar restriction commutes with the normalized Brown image square.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E.
 (blueprint: lem-pur-brown-restriction-image-cube).
