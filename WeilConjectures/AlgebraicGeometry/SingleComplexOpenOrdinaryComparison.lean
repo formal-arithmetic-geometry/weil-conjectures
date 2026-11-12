@@ -135,11 +135,11 @@ theorem exists_singleComplexOpen_ordinary_comparison
   let := HasDerivedCategory.standard (ModuleCat.{u} (B (f' ∣_ V') z))
   let := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z.val))
   let := HasDerivedCategory.standard (ModuleCat.{u} (B f' z.val))
-  obtain ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ht⟩ :=
+  choose eR eA eB eC hRA hRB hCA hCB α hα τ hτ ht using
     exists_openOrdinaryTensor_germ_transport f f' g g' sq V V' hV' j hj sq₀ P z i
   let M := cohomologyModel (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
   let N := cohomologyModel f f' g g' sq z.val P
-  obtain ⟨l, hl⟩ := ModuleCat.exists_baseDerivedTensor_ring_transport
+  choose l hl using ModuleCat.exists_baseDerivedTensor_ring_transport
     (stalkComplex j z Q₀) (stalkComplex g' z.val P) M N
     eR eA eB eC hRA hRB hCA hCB α hα τ hτ i
   let F₀ := forget₂ (ModuleCat.{u} ((f' ⁻¹ᵁ V').toScheme.presheaf.stalk z)) AddCommGrpCat.{u}

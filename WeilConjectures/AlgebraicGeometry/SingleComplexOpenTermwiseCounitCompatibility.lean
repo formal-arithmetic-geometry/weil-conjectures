@@ -91,6 +91,18 @@ private theorem termwise_homotopy_square_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
   rfl
 
+private theorem counit_square_of_normalized
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D}
+    {A B : C} {S T V₁ V₂ V₃ V₄ : D}
+    {a : S ⟶ T} {t : T ⟶ F.obj A} {ε ε₀ : A ⟶ B}
+    {d₁ : S ⟶ V₁} {d₂ : V₁ ⟶ V₂} {d₃ : V₂ ⟶ V₃} {d₄ : V₃ ⟶ V₄}
+    {δ : S ⟶ V₄} {β : V₄ ⟶ F.obj B}
+    (hε : ε = ε₀) (hδ : d₁ ≫ d₂ ≫ d₃ ≫ d₄ = δ)
+    (h : a ≫ t ≫ F.map ε₀ = δ ≫ β) :
+    a ≫ t ≫ F.map ε = d₁ ≫ d₂ ≫ d₃ ≫ d₄ ≫ β := by
+  rw [hε, h, ← hδ]
+  simp only [Category.assoc]
+
 set_option profiler true in
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
@@ -157,17 +169,21 @@ theorem singleComplexOpen_termwise_counit_compatibility
     ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)
   dsimp only [singleComplexOpenTensorRestrictionMap]
-  erw [termwise_counit_transport (Scheme.Modules.tensorPullback g')
-    (derivedPullback g') (counit g') P,
-    termwise_counit_transport_assoc (Scheme.Modules.tensorPullback j)
+  refine counit_square_of_normalized
+    (F := (schemeOpenRestriction X' U').mapDerivedCategory)
+    (termwise_counit_transport (Scheme.Modules.tensorPullback g')
+      (derivedPullback g') (counit g') P)
+    (termwise_counit_transport (Scheme.Modules.tensorPullback j)
       (derivedPullback j) (counit j)
-      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)]
+      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ?_
   have hf : (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app
       ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) =
       (schemeOpenRestriction X U).mapDerivedCategoryFactors.hom.app P := by
     exact congrArg Iso.hom (termwise_exact_factors (schemeOpenRestriction X U) P)
-  rw [hf] at h
+  have h := h.trans (congrArg (fun k ↦ (derivedPullback j).map k ≫
+    (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+      (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P))) hf)
   have h' := cancel_counit_factors
     ((derivedPullback j).mapIso ((schemeOpenRestriction X U).mapDerivedCategoryFactors.app P))
     (singleComplexRestrictedCoefficient g' (DerivedCategory.Q.obj P)

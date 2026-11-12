@@ -43,7 +43,7 @@ private theorem isoPullbackComplexCounitIso_hom_app
     (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
     DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
   erw [(derivedPullback j).map_id, DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp, Category.comp_id]
+  erw [Category.id_comp, Category.comp_id, Category.comp_id]
 
 private theorem affine_counit_inverse_square
     {C : Type*} [Category C] {A B C₀ D E F : C}
