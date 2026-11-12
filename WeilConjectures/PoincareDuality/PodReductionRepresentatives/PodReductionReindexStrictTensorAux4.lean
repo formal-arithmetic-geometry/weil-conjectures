@@ -65,18 +65,6 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h1.symm.trans
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
-private theorem pushforward_hom_naturality_apply
-    {C D : Type*} [Category C] [Category D] {F : C ⥤ D}
-    {R : Dᵒᵖ ⥤ RingCat.{u + 1}} {S : Cᵒᵖ ⥤ RingCat.{u + 1}}
-    (φ : S ⟶ F.op ⋙ R)
-    {M : PresheafOfModules.{u + 1} S} {N : PresheafOfModules.{u + 1} R}
-    (f : M ⟶ (PresheafOfModules.pushforward φ).obj N)
-    {V V' : C} (i : V' ⟶ V) (z : M.obj (op V)) :
-    N.map (F.map i).op (f.app (op V) z) = f.app (op V') (M.map i.op z) := by
-  have h := PresheafOfModules.naturality_apply f i.op z
-  exact (PresheafOfModules.pushforward_obj_map_apply φ N i.op (f.app (op V) z)).symm.trans
-    h.symm
-
 private def sequenceEvaluation_hom_apply (W : Scheme.{u}) (n : ℕ)
     {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
     (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N) (V : W.ProEt)
@@ -87,15 +75,11 @@ private theorem sequenceEvaluation_hom_naturality (W : Scheme.{u}) (n : ℕ)
     {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
     (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N)
     {V V' : W.ProEt} (i : V' ⟶ V) (z : M.val.obj (op V)) :
-    N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op
-        (sequenceEvaluation_hom_apply l E W n f V z) =
-      sequenceEvaluation_hom_apply l E W n f V' (M.val.map i.op z) := by
-  dsimp only [sequenceEvaluation_hom_apply]
-  dsimp only [coefficientSequenceEvaluation, SheafOfModules.pushforward] at f
-  with_unfolding_all
-    exact pushforward_hom_naturality_apply
-      (F := CategoryTheory.Prod.sectR n W.ProEt) (M := M.val) (N := N.val)
-      _ f.val i z
+    N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op (f.val.app (op V) z) =
+      f.val.app (op V') (M.val.map i.op z) := by
+  have h := PresheafOfModules.naturality_apply f.val i.op z
+  simpa only [coefficientSequenceEvaluation, SheafOfModules.pushforward_obj_val,
+    PresheafOfModules.pushforward_obj_map_apply] using h.symm
 
 set_option profiler true in
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
@@ -119,10 +103,8 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     rw [← finiteAdjunction_unit_apply, ← finiteAdjunction_unit_apply]
     exact h2.symm
   have h4 := congrArg
-    (sequenceEvaluation_hom_apply l E W n
-      ((pullbackTensorReductionEvaluation l E W n).hom.app M) V') h3
-  with_unfolding_all
-    simpa only [sequenceEvaluation_hom_apply] using h1.trans h4
+    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3
+  exact h1.trans h4
 
 
 set_option profiler true in
