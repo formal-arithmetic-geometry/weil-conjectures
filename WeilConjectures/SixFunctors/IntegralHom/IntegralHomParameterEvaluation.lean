@@ -101,9 +101,14 @@ attribute [local irreducible] derivedInternalHomOfUniverses homComplexFunctor
 private theorem totalPair_eq_coefficientTensorGenerator
     (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    [EssentiallySmall.{t + 1} Y.ProEt]
+    [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)}]
+    [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)}]
     (P Q : CochainComplex (Modules.{t, u} Y R) ℤ) (i j : ℤ)
     (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
-    totalPair Y R P Q i j U x y = coefficientTensorGenerator.{u, t + 1, t}
+    totalPair.{t, u} Y R P Q i j U x y = coefficientTensorGenerator.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
   simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
     CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
@@ -138,7 +143,7 @@ private theorem tensor_presentation_parameter_evaluation_of_coefficients
           S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P))
             (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)) ≫
           (adj.adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I) := by
-  letI := derivedCategory.{t, u} Y R
+  let := derivedCategory.{t, u} Y R
   let J := AlgebraicGeometry.Scheme.ProEt.topology Y
   have hkoszul := ringedTensor_koszul_exists.{t + 1, t, u, (max u (t + 1)) + 1} J R S T
   let σ := hkoszul.choose
