@@ -128,12 +128,33 @@ private theorem homology_comp_iso
       rfl
     _ = _ := h₃.symm
 
+/-- Naturality of homology followed by the inverses for a composite exact functor. -/
+private theorem homology_composite_naturality
+    {B E H : Type*} [Category B] [Category E] [Category H]
+    [Abelian B] [Abelian E] [Abelian H]
+    (S : ShortComplex B) [S.HasHomology]
+    (F : B ⥤ H) [F.PreservesZeroMorphisms] [F.PreservesHomology]
+    (T : B ⥤ E) [T.PreservesZeroMorphisms] [T.PreservesHomology]
+    (G : E ⥤ H) [G.PreservesZeroMorphisms] [G.PreservesHomology]
+    [PreservesFiniteLimits (T ⋙ G)] [PreservesFiniteColimits (T ⋙ G)]
+    (θ : F ≅ T ⋙ G) :
+    θ.hom.app S.homology ≫ G.map (S.mapHomologyIso T).inv ≫
+        ((S.map T).mapHomologyIso G).inv =
+      (S.mapHomologyIso F).inv ≫ ShortComplex.homologyMap (S.mapNatTrans θ.hom) := by
+  have hcomp := homology_comp_iso S T G
+  have htail : (S.mapHomologyIso (T ⋙ G)).hom ≫
+      G.map (S.mapHomologyIso T).inv ≫ ((S.map T).mapHomologyIso G).inv = 𝟙 _ := by
+    rw [← hcomp]
+    simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id,
+      Category.id_comp]
+  rw [θ.hom.app_homology S]
+  simp only [Category.assoc]
+  rw [htail, Category.comp_id]
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
--- Comparing the three exact homology constructions entails several large instance transports.
 /-- Exact affine stalk homology in scalar-extension coordinates, natural for every
 module map into ordinary cohomology. Source: Stacks Project, Tags 01I9 and 01AG.
 (blueprint: lem-pc-affine-stalk-scalar-extension-coordinates).
@@ -252,35 +273,11 @@ theorem exists_affineStalkScalarExtensionCoordinates
     have hnum : (IsLocalizedModule.iso p.asIdeal.primeCompl t')
         (LocalizedModule.map p.asIdeal.primeCompl a.hom x) =
       (θ.app (C.homology i)).hom (F.map a (e U x)) := hloc.symm.trans hn.symm
-    have hθ := (θ.hom.app_homology (C.sc i))
-    have hcomp := homology_comp_iso (C.sc i) TB s
-    have hχ : HomologicalComplex.homologyMap χ.hom i =
-        ShortComplex.homologyMap ((C.sc i).mapNatTrans θ.hom) := rfl
-    have htail : ((C.sc i).mapHomologyIso (TB ⋙ s)).hom ≫
-        s.map ((C.sc i).mapHomologyIso TB).inv ≫
-        (((C.sc i).map TB).mapHomologyIso s).inv = 𝟙 _ := by
-      calc
-        _ = (((C.sc i).map TB).mapHomologyIso s).hom ≫
-            (s.map ((C.sc i).mapHomologyIso TB).hom ≫
-              s.map ((C.sc i).mapHomologyIso TB).inv) ≫
-            (((C.sc i).map TB).mapHomologyIso s).inv := by
-          rw [← hcomp]
-          simp only [Category.assoc]
-        _ = _ := by
-          rw [← s.map_comp, Iso.hom_inv_id]
-          rw [s.map_id]
-          simp only [Category.id_comp, Iso.hom_inv_id]
-          rfl
     have hH : (θ.app (C.homology i)).hom ≫
         s.map ((C.sc i).mapHomologyIso TB).inv ≫
         ((((TB.mapHomologicalComplex (.up ℤ)).obj C).sc i).mapHomologyIso s).inv =
-      ((C.sc i).mapHomologyIso F).inv ≫ HomologicalComplex.homologyMap χ.hom i := by
-      rw [hχ]
-      change θ.hom.app (C.sc i).homology ≫ _ ≫
-        (((C.sc i).map TB).mapHomologyIso s).inv = _
-      rw [hθ]
-      simp only [Category.assoc]
-      rw [htail, Category.comp_id]
+      ((C.sc i).mapHomologyIso F).inv ≫ HomologicalComplex.homologyMap χ.hom i :=
+      homology_composite_naturality (C.sc i) F TB s θ
     have hz : ∀ y : LocalizedModule p.asIdeal.primeCompl (C.homology i),
         affineTildeHomologyLocalization A C p i y =
           ((((TB.mapHomologicalComplex (.up ℤ)).obj C).sc i).mapHomologyIso s).inv
