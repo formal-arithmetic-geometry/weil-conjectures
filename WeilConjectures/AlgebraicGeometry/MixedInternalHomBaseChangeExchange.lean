@@ -67,6 +67,35 @@ private theorem tensor_evaluation_interchange
   simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.id_comp,
     Category.comp_id]
 
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
+private theorem tensorHom_counit_evaluation
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (H : Cᵒᵖ × C ⥤ C) (F : D ⥤ C) (R : C ⥤ D) (adj : F ⊣ R)
+    (τ : tensor D ⋙ F ≅ F.prod F ⋙ tensor C)
+    (e : ∀ A P Q : C, (A ⟶ H.obj (op P, Q)) ≃ (A ⊗ P ⟶ Q))
+    (he : ∀ (A A' P P' Q Q' : C) (a : A' ⟶ A) (b : P' ⟶ P) (d : Q ⟶ Q')
+      (z : A ⟶ H.obj (op P, Q)),
+      e A' P' Q' (a ≫ z ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A P Q z ≫ d)
+    (P Q : C) :
+    adj.homEquiv _ Q
+      (τ.hom.app (R.obj (H.obj (op P, Q)), R.obj P) ≫
+        (𝟙 _ ⊗ₘ adj.counit.app P) ≫
+          e _ P Q ((adj.homEquiv _ _).symm (𝟙 (R.obj (H.obj (op P, Q)))))) =
+    adj.homEquiv _ _
+      (τ.hom.app (R.obj (H.obj (op P, Q)), R.obj P) ≫
+        (adj.counit.app (H.obj (op P, Q)) ⊗ₘ adj.counit.app P)) ≫
+      R.map (e _ P Q (𝟙 _)) := by
+  have hn := he _ _ P P Q Q (adj.counit.app (H.obj (op P, Q))) (𝟙 P) (𝟙 Q) (𝟙 _)
+  change e _ P Q (_ ≫ 𝟙 _ ≫ H.map (𝟙 (op P, Q))) = _ at hn
+  simp only [Functor.map_id, Category.comp_id] at hn
+  rw [Adjunction.homEquiv_counit, F.map_id, Category.id_comp, hn,
+    ← adj.homEquiv_naturality_right]
+  exact congrArg (adj.homEquiv _ Q)
+    (tensor_evaluation_interchange
+      (τ.hom.app (R.obj (H.obj (op P, Q)), R.obj P))
+      (adj.counit.app (H.obj (op P, Q))) (adj.counit.app P) (e _ P Q (𝟙 _)))
+
 set_option profiler true in
 -- Evaluation crosses the two definitionally equal presentations of scheme module sheaves.
 private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
@@ -77,35 +106,15 @@ private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
       ((derivedInternalHom (Opens.grothendieckTopology T) T.sheaf).obj (op P, Q)) P ≫
       (schemeDerivedDirectImage h).map
         (schemeDerivedTensorHomEquiv T _ P Q (𝟙 _)) := by
-  let H : (schemeDerivedCategory T)ᵒᵖ × schemeDerivedCategory T ⥤
-      schemeDerivedCategory T := derivedInternalHom (Opens.grothendieckTopology T) T.sheaf
-  let adj := schemeHomPullbackAdjunction h
-  let E : schemeDerivedCategory T := H.obj (op P, Q)
   have hc := (Classical.choose_spec (exists_schemeHomDirectImageComparison h))
-    P Q ((schemeDerivedDirectImage h).obj E) (𝟙 _)
+    P Q ((schemeDerivedDirectImage h).obj
+      ((derivedInternalHom (Opens.grothendieckTopology T) T.sheaf).obj (op P, Q))) (𝟙 _)
   simp only [Category.id_comp] at hc
-  dsimp only [mixedHomDirectImageComparison]
-  rw [hc]
-  have he := schemeHomTensorHom_naturality T
-    E ((derivedPullback h).obj
-    ((schemeDerivedDirectImage h).obj E)) P P Q Q (adj.counit.app E)
-    (𝟙 P) (𝟙 Q) (𝟙 E)
-  have hid : H.map ((𝟙 P).op, 𝟙 Q) = 𝟙 (H.obj (op P, Q)) := H.map_id (op P, Q)
-  rw [hid] at he
-  rw [Category.comp_id, Category.comp_id] at he
-  have hi : (adj.homEquiv _ E).symm (𝟙 _) = adj.counit.app E := by
-    rw [Adjunction.homEquiv_counit]
-    simp
-  rw [Category.comp_id] at he
-  rw [hi, he]
-  dsimp only [mixedDirectImageTensorPairing]
-  rw [← adj.homEquiv_naturality_right]
-  congr 1
-  exact tensor_evaluation_interchange
-    ((mixedHomTensorPullbackIso h).hom.app
-      ((schemeDerivedDirectImage h).obj E, (schemeDerivedDirectImage h).obj P))
-    (adj.counit.app E) (adj.counit.app P)
-    (schemeDerivedTensorHomEquiv T E P Q (𝟙 E))
+  exact hc.trans (tensorHom_counit_evaluation
+    (derivedInternalHom (Opens.grothendieckTopology T) T.sheaf)
+    (derivedPullback h) (schemeDerivedDirectImage h) (schemeHomPullbackAdjunction h)
+    (mixedHomTensorPullbackIso h) (schemeDerivedTensorHomEquiv T)
+    (schemeHomTensorHom_naturality T) P Q)
 
 private theorem evaluation_formula (S : Scheme.{u})
     (A P Q : schemeDerivedCategory S)
@@ -220,7 +229,12 @@ theorem mixedInternalHom_baseChange_exchange
   simp only [Category.comp_id] at hl
   have hr := schemeHomTensorHom_naturality Y'
     _ _ _ _ _ _ (L.map t) (𝟙 _) (β N) b
-  have hc' := directImage_evaluation (pullback.snd f g) (L'.obj M) (L'.obj N)
+  have hc' : schemeDerivedTensorHomEquiv Y' (R'.obj E')
+      (R'.obj (L'.obj M)) (R'.obj (L'.obj N))
+      ((c (pullback.snd f g)).app (op (L'.obj M), L'.obj N)) =
+      mixedDirectImageTensorPairing (pullback.snd f g) E' (L'.obj M) ≫
+        R'.map (schemeDerivedTensorHomEquiv (pullback f g) E' (L'.obj M) (L'.obj N)
+          (𝟙 E')) := directImage_evaluation (pullback.snd f g) (L'.obj M) (L'.obj N)
   have hc := directImage_evaluation f M N
   simp only [z, Category.assoc] at hl ⊢
   rw [hl, hr, hc']
