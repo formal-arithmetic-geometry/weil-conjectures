@@ -53,6 +53,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+set_option trace.profiler true in
 /-- A morphism between bounded constructible complexes is invertible away from finitely many
 closed points if it is invertible over the generic points of local coordinate lines. -/
 private theorem exists_finset_isIso_of_forall_exists_coordinates
@@ -234,7 +235,7 @@ private lemma isIso_map_specialCoordinate_of_isIso_sliceSpecialMap
     IsIso (L((pullback.fst (specialCoordinate hM b hb) (traitSlicePoint x))^*⟦Λ⟧).map f) := by
   obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap x hM hb
   rw [← hl]
-  exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp Λ l _) f).1
+  exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp Λ l _) f).2
     (Functor.map_isIso L((l)^*⟦Λ⟧) _)
 
 end Slice
@@ -314,7 +315,7 @@ lemma isTraitModelOver_restrictOpen_productOpen
   convert hP.restrictOpen (productOpen φ₁ φ₂ V W) using 1 <;>
     simp [Scheme.Hom.resLE_comp_ι_assoc]
 
-set_option profiler true in
+set_option trace.profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
