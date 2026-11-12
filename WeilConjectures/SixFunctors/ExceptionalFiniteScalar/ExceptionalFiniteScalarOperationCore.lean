@@ -57,6 +57,7 @@ private theorem transportRightRealization_hom
     isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
     Functor.associator_inv_app, Functor.rightUnitor_inv_app]
   simp only [Category.id_comp, Category.comp_id, Functor.map_comp]
+  change v ≫ (e.counitIso.app (F.obj N)).inv ≫ e.functor.map (r.hom.app N) = _
   have hc := e.counitIso.inv.naturality v
   change v ≫ (e.counitIso.app (F.obj N)).inv =
     (e.counitIso.app K).inv ≫ e.functor.map (e.inverse.map v) at hc
@@ -111,8 +112,8 @@ theorem operationCore_exists
   let EX := sfIntrinsicDerivedEquivalence X A
   let IX := (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X).ι
   let IY := (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Y).ι
-  let right : G ⋙ IX ≅ IY ⋙ exceptional A c :=
-    Iso.isoCompInverse (H := EX.symm) rG
+  let right' := Iso.isoCompInverse (G := G ⋙ IX) (H := EX.symm) rG
+  let right : G ⋙ IX ≅ IY ⋙ exceptional A c := right'
   refine ⟨{
     F := F
     G := G
@@ -135,15 +136,13 @@ theorem operationCore_exists
       NatTrans.comp_app, isoWhiskerLeft_inv, isoWhiskerRight_inv, whiskerLeft_app,
       whiskerRight_app, Functor.associator_inv_app, Functor.associator_hom_app]
     simp only [Category.id_comp, Category.comp_id]
-    change (sfFiniteOperationsSupportComparison l ⟨E⟩ ⟨n + 1, Nat.succ_pos n⟩ c).inv.app K.obj ≫
-      (sfIntrinsicDerivedEquivalence Y A).inverse.map (left.inv.app K) = _
     exact congrArg (fun t ↦ t ≫
       (sfIntrinsicDerivedEquivalence Y A).inverse.map (left.inv.app K))
       (congrArg Iso.inv (supportComparison_app l ⟨E⟩ ⟨n + 1, Nat.succ_pos n⟩ c K.obj))
   rw [hleft] at hn
   have hh := congrArg (fun t ↦ (EX.counitIso.app K.obj).inv ≫ EX.functor.map t) hn
   change IX.map (adj.homEquiv K N v) ≫
-    (Iso.isoCompInverse (H := EX.symm) rG).hom.app N = _
+    (Iso.isoCompInverse (G := G ⋙ IX) (H := EX.symm) rG).hom.app N = _
   rw [transportRightRealization_hom]
   dsimp only [sfFiniteOperationsHomEquiv, sfFiniteOperationsRealization,
     Functor.comp_map, Functor.comp_obj] at hh
