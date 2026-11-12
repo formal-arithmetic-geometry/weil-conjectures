@@ -23,8 +23,27 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
+
+local instance cechPullbackHasSheafCompose {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
+local instance cechPullbackHasSheafify {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) : HasSheafify J AddCommGrpCat.{u} := inferInstance
+
+local instance cechPullbackWEquals {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) :
+    J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+
+local instance cechPullbackHasZeroObject {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) :
+    HasZeroObject (SheafOfModules.{u} R) := inferInstance
+
+local instance cechPullbackHasZeroMorphisms {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) :
+    HasZeroMorphisms (SheafOfModules.{u} R) := inferInstance
+
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
 -- The successor clause contains several chosen total-complex instances.
 /-- One successor step of the finite Cech comparison, including its augmentation.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
