@@ -340,7 +340,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
-set_option profiler true in
 /-- **The slice exchange is an averaging summand** (bounded constructible complexes): for a bounded
 constructible `A` on `X₁` there is a subgroup `V` of finite index of the pro-`p` kernel `P'` such
 that for every normal subgroup `U ≤ V` of finite index, the slice exchange
