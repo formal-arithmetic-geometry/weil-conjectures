@@ -103,7 +103,7 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_map, Category.id_comp,
     Category.comp_id, Category.assoc, leftProjectionNatTrans, curriedTensor_map_app,
     curriedTensor_obj_obj]
-  exact Functor.map_whiskerLeft_comp_naturality
+  have htransport := Functor.map_whiskerLeft_comp_naturality
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
     (boundedConstructibleLowerShriek ℓ (prod.map f f))
     (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
@@ -124,5 +124,7 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
       (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map
         ((ihom.ev K).app (dualizingComplex' ℓ X))))
     (exceptionalKunnethAdjoint ℓ K)
+  trace_state
+  exact htransport
 
 end AlgebraicGeometry.ProEtale.CondensedRing
