@@ -369,14 +369,14 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
     DerivedCategory.homologyFunctor _ 0)).1, fun q W φ hφ ↦ ?_⟩
   refine (hmain (L((f')^*⟦Λ⟧) ⋙
     DerivedCategory.homologyFunctor _ q)).2 φ (fun φ' hφ' ↦ ?_) hφ
-  exact (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
-    (Λ) hd K hc a hK _ e
-    (F₁ ⋙ F₂ ⋙
-        L((f')^*⟦Λ⟧) ⋙ DerivedCategory.homologyFunctor _ q)
+  let F₃ := L((f')^*⟦Λ⟧)
+  let Hq := DerivedCategory.homologyFunctor _ q
+  have hkey := (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
+    (Λ) hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e (F₁ ⋙ F₂ ⋙ F₃ ⋙ Hq)
     (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N (galoisTower Ω h) K
       hcab a f' q).some
     (fun k ↦ pullbackAction h _ specGaloisAction_comp (act k))
-    (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (act k)) hlift (fun j ↦ hdZ j W) φ'
-    hφ'
+    (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (act k)) hlift (fun j ↦ hdZ j W) φ' hφ'
+  exact hkey
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
