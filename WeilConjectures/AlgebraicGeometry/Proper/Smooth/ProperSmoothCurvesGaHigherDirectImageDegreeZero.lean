@@ -50,9 +50,18 @@ attribute [local instance]
 
 namespace Scheme.Modules
 
-set_option maxHeartbeats 2000000 in
-set_option profiler true in
--- The kernel check of the explicit section equivalences is slow.
+private theorem exists_sections_addEquiv_of_isIso_unit {Y : Scheme.{u}} {M : Y.Modules}
+    (f : M ⟶ SheafOfModules.unit Y.ringCatSheaf) [IsIso f] :
+    ∃ b : Γ(M, ⊤) ≃+ Γ(Y, ⊤),
+      (∀ x : Γ(M, ⊤), b x = f.app ⊤ x) ∧
+        ∀ (a : Γ(Y, ⊤)) (x : Γ(M, ⊤)), b (a • x) = a * b x := by
+  classical
+  let b : Γ(M, ⊤) ≃+ Γ(Y, ⊤) :=
+    AddEquiv.ofBijective (f.app ⊤).hom (ConcreteCategory.bijective_of_isIso (f.app ⊤))
+  refine ⟨b, fun _ ↦ rfl, ?_⟩
+  intro a x
+  exact Hom.app_smul f a x
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The sections of the étale sheaf of `𝒪_X` over an étale `X`-scheme `U` are `Γ(U, 𝒪_U)`,
@@ -72,17 +81,14 @@ theorem exists_etaleTensorUnit_sections_natural_smul (X : Scheme.{u}) :
   classical
   have hi (U : X.Etaleᵒᵖ) : IsIso (tensorPullbackObjUnitToUnit U.unop.hom) :=
     (tensorPullbackObjUnitToUnit_isIso U.unop.hom).1
-  let b : ∀ U : X.Etaleᵒᵖ,
-      (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U ≃+
-        Γ(U.unop.left, ⊤) := fun U ↦
-    AddEquiv.ofBijective ((tensorPullbackObjUnitToUnit U.unop.hom).app ⊤).hom
-      (ConcreteCategory.bijective_of_isIso
-        ((tensorPullbackObjUnitToUnit U.unop.hom).app ⊤))
+  choose b hb hs using fun U : X.Etaleᵒᵖ ↦
+    exists_sections_addEquiv_of_isIso_unit (tensorPullbackObjUnitToUnit U.unop.hom)
   refine ⟨b, ?_, ?_⟩
   · intro U V g x
+    rw [hb, hb]
     exact etaleTensorUnitRestriction_equation g.unop x
   · intro U a x
-    exact Hom.app_smul (tensorPullbackObjUnitToUnit U.hom) a x
+    exact hs (op U) a x
 
 end Scheme.Modules
 
