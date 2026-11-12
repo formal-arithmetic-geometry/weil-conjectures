@@ -124,11 +124,12 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
     IsSplitMono ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) := by
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
   have hE := isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E φ.commSq_j M.i
-    ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀ hn₀ (by exact_mod_proofs h𝒪)
+    _ n₀ hn₀ (by exact_mod_proofs h𝒪)
+  have hnE := isGE_leftDerivedFunctor_extendScalars_obj
+    (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+    ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀
   have hA := isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield ℓ E φ.commSq_j M.i
-    ((L(Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-      N.generic))).obj ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)) n₀
-    (isGE_leftDerivedFunctor_extendScalars_obj _ _ n₀) (by exact_mod_proofs hE)
+    _ n₀ hnE (by exact_mod_proofs hE)
   -- `ℚ̄_ℓ ⊗ (E ⊗ Lε^* K₀) ≅ Lε^* B`
   have e' :=
     (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
