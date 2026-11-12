@@ -49,6 +49,26 @@ attribute [local instance] traitGenericFieldAlgebra
 elab "ph112_remaining" label:str : tactic => do
   Lean.logInfo m!"{label.getString}: {(← Lean.getRemainingHeartbeats) / 1000}"
 
+-- Derived pullbacks repeatedly need these graded tensor colimit facts. Prove them once
+-- for a general coefficient ring, before specializing to the concrete Galois models.
+private lemma gradedTensorFour_condensedModules (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (W X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T))) : GradedObject.HasTensor₄ObjExt W X Y Z := inferInstance
+
+private lemma gradedTensorLeft_condensedModules (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T))) : GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
+
+private lemma gradedTensorRight_condensedModules (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T))) : GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
+
+attribute [local instance] gradedTensorFour_condensedModules gradedTensorLeft_condensedModules
+  gradedTensorRight_condensedModules
+
 /-- Constructibility of a derived pullback passes to any further factorization. -/
 private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
     {Z Y X : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X) (fg : Z ⟶ X) (hfg : f ≫ g = fg)
@@ -215,7 +235,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
   ph112_remaining "PH112 start remaining:"
-  have finishModels := exists_subgroup_pullbackExchange_of_galois_average
+  have finish := exists_subgroup_pullbackExchange_of_galois_average
     (M'' := baseChange hM b hb v hv) (N₁ := baseChangeGaloisLayer hM b hb v hv)
     (N := baseChangeGaloisModel hM b hb v hv) (M := M)
     (f' := baseChangeSpecialMap hM b hb v hv)
@@ -225,8 +245,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-  ph112_remaining "PH112 model specialization"
-  have finish := finishModels (baseChangeHom hM b hb v hv) A hM1
+    (baseChangeHom hM b hb v hv) A hM1
   ph112_remaining "PH112: cartesian comparison accepted; remaining:"
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
