@@ -156,8 +156,6 @@ private lemma tensor_map_second {X : Scheme.{u}}
         (SheafOfModules.siteTensorSecondMap M.val g.val))).symm
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Elaborating the two section models requires several nested equivalence transports.
 /-- The explicitly constructed tensor restriction iso preserves local pure tensors.
 Source: Stacks 03EL and 0E8H; the pure-tensor test in step 2 of the parent comparison.
 (blueprint: lem-sf-adic-slice-tensor).
@@ -230,11 +228,16 @@ theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
         ((adicSliceNativeTensorIso U M N).hom.hom.hom.app V
           (adicComparisonTmul m n V a b))
       have ht := nativeTensor_pullSection U M N V a b
-      rw [← hmap, hs, ht]
-      rw [P.tensor_sections]
-      rw [← r.slice_sections X U M V a, ← r.slice_sections X U N V b]
-      exact congrArg₂ (SheafOfModules.siteSheafTensorTmul (A := P.R)
-        (P.E.functor.obj M) (P.E.functor.obj N) W) hx hy
+      have hp := (congrArg
+        (fun t ↦ ((r.sliceIso X U).hom.app ((Mod.tensorLeft N).obj M)).val.app V t)
+        hmap.symm).trans (hs.trans (congrArg (P.sectionsEquiv _ W) ht))
+      exact (congrArg (fun t ↦ ((P.tensorIso N).hom.app M).val.app W t) hp).trans
+        ((P.tensor_sections M N W (adicComparisonPullSection U M V a)
+          (adicComparisonPullSection U N V b)).trans
+          (congrArg₂ (SheafOfModules.siteSheafTensorTmul (A := P.R)
+            (P.E.functor.obj M) (P.E.functor.obj N) W)
+            ((r.slice_sections X U M V a).symm.trans hx)
+            ((r.slice_sections X U N V b).symm.trans hy)))
   let k := ((Q.tensorIso n).app m).hom ≫
     (SheafOfModules.siteSheafTensorRight (A := Q.R) (Q.E.functor.obj n)).map sm.hom ≫
       SheafOfModules.siteSheafTensorSecondMap (A := Q.R) (F.obj (P.E.functor.obj M)) sn.hom
@@ -247,7 +250,6 @@ theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
     (F.obj (P.E.functor.obj M)) sn.hom).val.app V
       (((SheafOfModules.siteSheafTensorRight (A := Q.R) (Q.E.functor.obj n)).map
         sm.hom).val.app V (((Q.tensorIso n).hom.app m).val.app V z)) = _
-  rw [Q.tensor_sections]
   have hfirst := tensor_map_first (X := U.left) Q.R
     (M := Q.E.functor.obj m) (M' := F.obj (P.E.functor.obj M))
     (N := Q.E.functor.obj n) sm.hom V (Q.sectionsEquiv m V a) (Q.sectionsEquiv n V b)
@@ -256,8 +258,12 @@ theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
     (N' := F.obj (P.E.functor.obj N)) sn.hom V
     (sm.hom.val.app V (Q.sectionsEquiv m V a)) (Q.sectionsEquiv n V b)
   exact (congrArg (fun t ↦ (SheafOfModules.siteSheafTensorSecondMap (A := Q.R)
-    (F.obj (P.E.functor.obj M)) sn.hom).val.app V t) hfirst).trans
-      (hsecond.trans (congrArg₂ (SheafOfModules.siteSheafTensorTmul (A := Q.R)
-        (F.obj (P.E.functor.obj M)) (F.obj (P.E.functor.obj N)) V) hx hy))
+    (F.obj (P.E.functor.obj M)) sn.hom).val.app V
+      (((SheafOfModules.siteSheafTensorRight (A := Q.R) (Q.E.functor.obj n)).map
+        sm.hom).val.app V t)) (Q.tensor_sections m n V a b)).trans
+    ((congrArg (fun t ↦ (SheafOfModules.siteSheafTensorSecondMap (A := Q.R)
+      (F.obj (P.E.functor.obj M)) sn.hom).val.app V t) hfirst).trans
+        (hsecond.trans (congrArg₂ (SheafOfModules.siteSheafTensorTmul (A := Q.R)
+          (F.obj (P.E.functor.obj M)) (F.obj (P.E.functor.obj N)) V) hx hy)))
 
 end AlgebraicGeometry.ProEtale
