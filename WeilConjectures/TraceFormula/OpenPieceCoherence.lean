@@ -167,7 +167,6 @@ lemma weilUpperStarComparison_hom_app_eq {Φ : X ⟶ X} {ΦU : U ⟶ U} (hj : Φ
         sq).hom.app K := by
   rw [weilUpperStarComparison_hom_app, boundedConstructiblePullbackSquareComparison_hom_app]
 
-set_option profiler true in
 /-- **The extension by zero commutes with the pullbacks along the Frobenii** (blueprint
 `prop-trf-trace-additivity-open-closed`, Step 2(a), the open piece): for `Φ_U ≫ j = j ≫ Φ`, the
 map `RΓ_c(U, Lj^* K) ≅ RΓ_c(X, Rj_! Lj^* K) --RΓ_c(ε)--> RΓ_c(X, K)` intertwines `Φ_U^♯`
