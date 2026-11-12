@@ -79,10 +79,13 @@ theorem exists_etaleTensorUnit_sections_natural_smul (X : Scheme.{u}) :
         (x : Γ((tensorPullback U.hom).obj (SheafOfModules.unit X.ringCatSheaf), ⊤)),
         b (op U) (a • x) = a * b (op U) x := by
   classical
+  rw [etaleTensorSectionsSheaf, etaleTensorSectionsPresheaf]
   have hi (U : X.Etaleᵒᵖ) : IsIso (tensorPullbackObjUnitToUnit U.unop.hom) :=
     (tensorPullbackObjUnitToUnit_isIso U.unop.hom).1
   choose b hb hs using fun U : X.Etaleᵒᵖ ↦
-    exists_sections_addEquiv_of_isIso_unit (tensorPullbackObjUnitToUnit U.unop.hom)
+    exists_sections_addEquiv_of_isIso_unit (Y := U.unop.left)
+      (M := (tensorPullback U.unop.hom).obj (SheafOfModules.unit X.ringCatSheaf))
+      (tensorPullbackObjUnitToUnit U.unop.hom)
   refine ⟨b, ?_, ?_⟩
   · intro U V g x
     erw [hb, hb]
