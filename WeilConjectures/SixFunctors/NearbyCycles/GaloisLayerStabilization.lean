@@ -249,6 +249,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
   have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
     (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
     (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
+  have hfix (σ : Ω ≃ₐ[L] Ω) (hσ : σ ∈ L'.fixingSubgroup) :=
+    N.galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup h Ω L' Λ σ hσ
+      ((stabilizationIdentityPullback Λ X).obj C)
+  have hsplit := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
+  have hcomm (σ : Ω ≃ₐ[L] Ω) :=
+    N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
+      ((stabilizationIdentityPullback Λ X).obj C)
   exact stabilization_of_equivariant_iso_aux
     ((N.galoisLayerHom h Ω).pullbackExchange Λ)
     ((N.galoisLayerHom h L').pullbackExchange Λ)
@@ -258,11 +265,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift Finset.univ _
     (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ ((stabilizationIdentityPullback Λ X).obj C))
     (fun σ C' ↦ (N.galoisLayerAut h Ω σ).autAction Λ C')
-    (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g)
-    (fun σ hσ ↦ N.galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup h Ω L' Λ σ hσ
-      ((stabilizationIdentityPullback Λ X).obj C))
-    (N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C)
-    (fun σ ↦ N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
-      ((stabilizationIdentityPullback Λ X).obj C))
+    (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g) hfix hsplit hcomm
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
