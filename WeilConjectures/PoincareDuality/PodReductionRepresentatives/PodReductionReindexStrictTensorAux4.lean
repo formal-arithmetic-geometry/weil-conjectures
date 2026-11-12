@@ -65,12 +65,6 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
   exact h1.symm.trans
     (congrArg (((pullbackTensorReductionEvaluation l E W n).hom.app M').val.app (op V)) h3)
 
-private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
-    (M : coefficientSequenceModules l E W) {V V' : W.ProEt} (i : V' ⟶ V)
-    (z : ((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) :
-    ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
-      M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
-
 private def sequenceEvaluation_hom_apply (W : Scheme.{u}) (n : ℕ)
     {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
     (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N) (V : W.ProEt)
@@ -98,13 +92,13 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
       unrestrictedIntegralTensorSection l E W n M (op V') 1 (M.val.map i.op z) := by
     rw [← finiteAdjunction_unit_apply, ← finiteAdjunction_unit_apply]
     exact h2.symm
-  have h0 := sequenceEvaluation_map_apply l E W n
-    ((pullbackTensorOrdinaryReduction l E W).obj M) i
-    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V)
-      (unrestrictedIntegralTensorSection l E W n M (op V) 1 z))
   have h4 := congrArg
     (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3
-  exact h0.symm.trans (h1.symm.trans h4)
+  dsimp only [Functor.comp_obj, coefficientSequenceEvaluation, SheafOfModules.pushforward,
+    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
+    PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
+    PresheafOfModules.restrictScalarsObj] at h1 h4 ⊢
+  exact h1.symm.trans h4
 
 
 set_option profiler true in
