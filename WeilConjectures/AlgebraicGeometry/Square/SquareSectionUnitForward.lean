@@ -142,7 +142,6 @@ private theorem squareForward_compUnit_square
     squareForward_compUnitQ_app, NatTrans.mapHomotopyCategory_app, Category.assoc] at hh
   exact hh
 
-set_option profiler true in
 private theorem square_unitQ {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (I : CochainComplex Z.Modules ℤ) :
@@ -174,7 +173,6 @@ private theorem squareForward_inverseOpenUnitQ_eq {X S : Scheme.{u}} (f : X ⟶ 
   unfold RingedSpace.inverseOpenUnitQ localComplexUnit
   rfl
 
-set_option profiler true in
 private theorem sections_unit {X S : Scheme.{u}} (f : X ⟶ S)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     (RingedSpace.inverseOpenUnitQ f.toLRSHom.toShHom).app K ≫
@@ -410,7 +408,6 @@ private def squareForward_cochainComparison {X S : Scheme.{u}} (f : X ⟶ S) (q 
     ((F.mapHomologicalComplex (.up ℤ)).map b) using 1 <;> rfl
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-set_option profiler true in
 private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -442,7 +439,6 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (RingedSpace.topEdgeResolutionIso X.toRingedSpace K) a
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-set_option profiler true in
 private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)
     (a : DerivedCategory.Q.obj B ⟶ K) :
@@ -699,7 +695,6 @@ private theorem squareForward_injective_transport {X S Z T : Scheme.{u}}
   rw [eqToHom_map]
   exact injectiveComparison_transport k G q (g ⁻¹ᵁ V) J _ _
 
-set_option profiler true in
 private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (G : Z.Modules) (J : InjectiveResolution G) (q : ℕ) (V : S.Opens) :
