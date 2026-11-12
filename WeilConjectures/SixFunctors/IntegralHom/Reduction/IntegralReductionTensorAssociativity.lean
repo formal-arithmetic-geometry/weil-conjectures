@@ -204,7 +204,8 @@ private theorem normalizedBeta_eq (n : ℕ)
     rw [show (asIso beta).hom = beta from rfl,
       show (asIso beta).inv = inv beta from rfl] at hh
     dsimp only [HomologicalComplex.comp_f] at hh
-    have hcomp := congrArg ((inv beta).f (i + j)).val.app U (hbeta i j U x y)
+    have hcomp := congrArg (fun z ↦ ((inv beta).f (i + j)).val.app U z)
+      (hbeta i j U x y)
     rw [← ConcreteCategory.comp_apply] at hcomp
     rw [hcomp] at hh
     exact hh
