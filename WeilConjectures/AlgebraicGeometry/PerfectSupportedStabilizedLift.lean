@@ -26,6 +26,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the iterated derived restriction and the biproduct map equation needs this budget.
 set_option backward.isDefEq.respectTransparency false in

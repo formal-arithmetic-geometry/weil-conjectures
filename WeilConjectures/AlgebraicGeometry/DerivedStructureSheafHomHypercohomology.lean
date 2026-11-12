@@ -25,6 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.

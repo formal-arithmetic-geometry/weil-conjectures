@@ -32,6 +32,7 @@ namespace AlgebraicGeometry
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The transported restriction functors require extra elaboration heartbeats.
 /-- The injective representative gives a short exact sequence with comparisons of
