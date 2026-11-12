@@ -38,7 +38,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
 set_option profiler true in
-set_option maxHeartbeats 6000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- **The kernel pushforward and the Künneth–Verdier isomorphisms** (blueprint
 `lem-trf-trace-source-exchange`, identity (a)): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`. -/
@@ -49,7 +48,7 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
       (boundedConstructibleLowerStar ℓ (prod.map f f)).map (kunnethVerdierMap ℓ K K) ≫
         classTransportMap ℓ f K := by
   rw [kernelPushforward, Category.assoc, IsIso.inv_comp_eq]
-  apply classTest_injective
+  apply classTest_injective ℓ (M := (boundedConstructibleLowerStar ℓ f).obj K)
   rw [classTest_comp, classTest_comp, classTest_map_comp_classTransportMap,
     classTest_kunnethVerdierMap, classTest_kunnethVerdierMap]
   rewrite [← Functor.map_comp_assoc]
@@ -86,6 +85,8 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
   exact NatIso.map_map₆_comp_hom_app_comp_map_comp_hom_app
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
     (boundedConstructibleLowerShriek ℓ (prod.map f f))
-    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X)) _ _ _ _ _ _ _ _ _
+    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
+    (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f))
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f) _ _ _ _ _ _ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
