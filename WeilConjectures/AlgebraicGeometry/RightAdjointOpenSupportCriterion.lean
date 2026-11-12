@@ -99,7 +99,7 @@ local instance supportCriterionOverModuleAbelian (X : Scheme.{u}) (U : X.Opens) 
 
 private theorem supportCriterionRestrictionPreservesZero (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenRestriction X U).PreservesZeroMorphisms := by
-  letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U
+  have : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U
   exact Functor.preservesZeroMorphisms_of_additive _
 
 attribute [local instance] supportCriterionRestrictionPreservesZero
