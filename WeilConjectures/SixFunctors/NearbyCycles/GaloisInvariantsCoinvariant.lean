@@ -276,6 +276,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
   let F₁ := R((N.j)_*⟦Λ⟧)
   let F₂ := L((N.i)^*⟦Λ⟧)
   let κ := N.galoisLayerExchangeIso h Ω Λ C
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) := inferInstance
+  letI : Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj Λ X'))) := inferInstance
+  letI : Category (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z)) := inferInstance
   let C₀ := L((N.ε)^*⟦Λ⟧).obj C
   have hC₀ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) N.generic
       ((finiteCoefficientDerivedEquivalence N.generic T₀).functor.obj C₀) := hC
