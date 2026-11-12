@@ -81,6 +81,13 @@ private theorem erase_map_id
     (h : f ≫ 𝟙 (r.obj Y) ≫ r.map (𝟙 Y) = g) : f = g := by
   simpa only [r.map_id, Category.comp_id] using h
 
+/-- Insert the identity comparisons of a strictly commuting forgetful square. -/
+private theorem insert_map_id
+    {A B : Type*} [Category A] [Category B] (r : B ⥤ A)
+    {X : A} (Y : B) (f g : X ⟶ r.obj Y) (h : f = g) :
+    f ≫ 𝟙 (r.obj Y) ≫ r.map (𝟙 Y) = g := by
+  simpa only [r.map_id, Category.id_comp, Category.comp_id] using h
+
 private theorem erase_middle_id
     {A : Type*} [Category A] {X Y Z : A}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z)
@@ -177,6 +184,17 @@ private theorem compare_by_homEquiv
   apply (b.homEquiv G S).injective
   rw [← Category.assoc, b.homEquiv_naturality_right]
   exact h
+
+/-- The inverse of a conjugate comparison satisfies the corresponding unit equation. -/
+private theorem unit_of_conjugate_comparison
+    {A B : Type*} [Category A] [Category B]
+    {L L' : A ⥤ B} {R R' : B ⥤ A} (a : L ⊣ R) (b : L' ⊣ R')
+    (d : R ≅ R') (c : L' ≅ L)
+    (h : conjugateIsoEquiv b a c.symm = d.symm) (G : A) :
+    b.unit.app G ≫ R'.map (c.hom.app G) = a.unit.app G ≫ d.hom.app (L.obj G) := by
+  have hc : conjugateEquiv a b c.hom = d.hom := congrArg Iso.inv h
+  exact (unit_conjugateEquiv a b c.hom G).symm.trans
+    (congrArg (fun q : R ⟶ R' ↦ a.unit.app G ≫ q.app (L.obj G)) hc)
 
 /-- Map the unit description of a hom-equivalence without unfolding the adjunction. -/
 private theorem map_homEquiv_of_unit
@@ -504,9 +522,13 @@ theorem etaleInverseImageCompositionModuleLinearCore
     ext W x
     change (((SheafOfModules.pushforwardComp (J := JX) (K := JY) (K' := JZ)
       (F := f) (G := g) phi psi).inv.app F).val.app W).hom
-      ((((SheafOfModules.pushforwardCongr₂ chi alpha hr').hom.app F).val.app W).hom x) = _
+      ((((SheafOfModules.pushforwardCongr₂ chi alpha hr').hom.app F).val.app W).hom x) =
+      (((Etale.lowerStarComp AddCommGrpCat.{u + 1} vMap uMap).inv.app
+        (UZ.obj F)).hom.app W) x
     simp only [SheafOfModules.pushforwardComp_inv_app_val_app,
-      SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply]; rfl
+      SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply,
+      Etale.lowerStarComp_inv_app_hom_app]
+    rfl
   have hu : ∀ G, (aU.comp aV).unit.app G ≫
       (SheafOfModules.pushforward psi ⋙ SheafOfModules.pushforward phi).map
         (c.hom.app G) = aUV.unit.app G ≫ d.hom.app (LUV.obj G) := by
@@ -525,20 +547,15 @@ theorem etaleInverseImageCompositionModuleLinearCore
       auv.unit.app (UX.obj G) := by
     set_option backward.isDefEq.respectTransparency false in
       exact pushforward_unit_forget JX JZ h SX SZ chi LUV luv aUV auv eUV hLUV
-  have hconj : conjugateEquiv auv (au.comp av) c0.hom = d0.hom :=
-    congrArg Iso.inv
-      (Etale.conjugateIsoEquiv_upperStarComp AddCommGrpCat.{u + 1} vMap uMap)
   have hmate : ∀ G, (au.comp av).unit.app G ≫
       (pv ⋙ pu).map (c0.hom.app G) =
-      auv.unit.app G ≫ d0.hom.app (luv.obj G) := by
-    intro G
-    have hh := unit_conjugateEquiv auv (au.comp av) c0.hom G
-    exact hh.symm.trans (congrArg
-      (fun (q : puv ⟶ pv ⋙ pu) => auv.unit.app G ≫ q.app (luv.obj G)) hconj)
+      auv.unit.app G ≫ d0.hom.app (luv.obj G) :=
+    unit_of_conjugate_comparison auv (au.comp av) d0 c0
+      (Etale.conjugateIsoEquiv_upperStarComp AddCommGrpCat.{u + 1} vMap uMap)
   refine ⟨d, c, ?_, ?_, hu⟩
   · intro F
-    simpa only [Iso.refl_hom, NatTrans.id_app, Functor.map_id,
-      Category.id_comp, Category.comp_id] using hd F
+    exact insert_map_id pu (pv.obj (UZ.obj F))
+      (UX.map (d.hom.app F)) (d0.hom.app (UZ.obj F)) (hd F)
   · intro G
     let ec := eV.app (LU.obj G) ≪≫ lv.mapIso (eU.app G)
     have hc : (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
