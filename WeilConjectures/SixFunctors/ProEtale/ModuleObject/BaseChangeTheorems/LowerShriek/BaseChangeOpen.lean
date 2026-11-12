@@ -216,8 +216,14 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
       (Compactification.ofIsOpenImmersion f'.left).overI)
     (P' := boundedConstructibleLowerStar ℓ
       (Compactification.ofIsOpenImmersion f'.left).overG)
-    (boundedConstructibleLowerStarId ℓ Y) (boundedConstructibleLowerStarId ℓ Y') _
-    (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ) _ _ hb
+    (boundedConstructibleLowerStarId ℓ Y) (boundedConstructibleLowerStarId ℓ Y')
+    (E := boundedConstructibleBaseChange ℓ
+      (isPullback_ofIsOpenImmersion_overG (f := f) (f' := f') (g := g)).toCommSq)
+    (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ)
+    (β := boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+      (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_ofIsOpenImmersion_overI sq))
+    (θ := boundedConstructibleOpenImmersionLowerShriekBaseChange'
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) hb
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and
 `Rf'_! ≅ f'_!`, the compact-support base change of a cartesian square with `f` and `f'` open
