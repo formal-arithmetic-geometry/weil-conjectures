@@ -219,6 +219,21 @@ private theorem balancedUnit_map (α : R ⟶ B)
   rw [ModuleCat.ExtendScalars.map_tmul] at hx
   exact hx.symm
 
+private theorem balancedPairing_map (α : R ⟶ B)
+    {M M' : SheafOfModules.{u} (𝓡 B)} {N N' : SheafOfModules.{u} (𝓡 R)}
+    (f : M ⟶ M') (g : N ⟶ N')
+    (W : (Opens Z)ᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
+    balancedPairing α M' N' W (f.val.app W m) (g.val.app W n) =
+      ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
+        (balancedPairing α M N W m n) := by
+  change (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
+    (f.val.app W m ⊗ₜ[B.obj.obj W] (balancedUnit α N').app W _) = _
+  change _ =
+    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
+      ((balancedPure B M (changeOfRings.{u, u, u} α N)).app W
+        (m ⊗ₜ[B.obj.obj W] (balancedUnit α N).app W
+          ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))
+  rw [balancedPure_natural_apply, balancedUnit_map]
 -- The tensor calculation compares both sheafification units and both ring actions.
 private theorem balancedMap_natural (α : R ⟶ B)
     {M M' : SheafOfModules.{u} (𝓡 B)} {N N' : SheafOfModules.{u} (𝓡 R)}
@@ -235,15 +250,9 @@ private theorem balancedMap_natural (α : R ⟶ B)
         (m ⊗ₜ[R.obj.obj W] n))) =
     ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
       ((balancedMap α M N).val.app W _)
-  rw [balancedPure_natural_apply, balancedMap_pure, balancedMap_pure]
-  change (balancedPure B M' (changeOfRings.{u, u, u} α N')).app W
-    (f.val.app W m ⊗ₜ[B.obj.obj W] (balancedUnit α N').app W _) = _
-  change _ =
-    ((monoidalCategory B).tensorHom f (changeOfRingsHom.{u, u, u} α N g)).val.app W
-      ((balancedPure B M (changeOfRings.{u, u, u} α N)).app W
-        (m ⊗ₜ[B.obj.obj W] (balancedUnit α N).app W
-          ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))
-  rw [balancedPure_natural_apply, balancedUnit_map]
+  rw [balancedPure_natural_apply R ((restrictScalars (𝓻 α)).map f) g,
+    balancedMap_pure, balancedMap_pure]
+  exact balancedPairing_map α f g W m n
 
 private theorem balancedChangeHom_id (α : R ⟶ B) (N : SheafOfModules.{u} (𝓡 R)) :
     changeOfRingsHom.{u, u, u} α N (𝟙 N) = 𝟙 (changeOfRings.{u, u, u} α N) := by
