@@ -121,7 +121,9 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
       (HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map _ = _
   rw [← Functor.map_comp]
-  exact congrArg _
+  exact congrArg
+    (HomotopyCategory.quotient
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map
     (((Classical.choose
       (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
         (.up ℤ)).homEquiv _ _).apply_symm_apply α
