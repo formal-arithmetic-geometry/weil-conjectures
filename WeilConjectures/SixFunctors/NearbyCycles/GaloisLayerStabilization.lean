@@ -239,6 +239,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
   let F := L((𝟙 X)^*⟦Λ⟧)
+  let F' := L((𝟙 X')^*⟦Λ⟧)
   have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
     (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
     (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
@@ -250,6 +251,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       (F.obj C)
   exact stabilization_of_equivariant_iso_aux
+    (L₀ := F) (Lfg := F') (Lg := F') (Lf := F')
+    (ΨM := N.nearbyCycles Λ) (Ψ₁ := (N.galoisLayer h L').nearbyCycles Λ)
+    (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
+    (G := Ω ≃ₐ[L] Ω) (ι := L' ≃ₐ[L] L')
     ((N.galoisLayerHom h Ω).pullbackExchange Λ)
     ((N.galoisLayerHom h L').pullbackExchange Λ)
     ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
