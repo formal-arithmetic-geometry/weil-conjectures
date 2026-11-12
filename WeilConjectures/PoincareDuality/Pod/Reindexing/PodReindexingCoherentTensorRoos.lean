@@ -45,7 +45,26 @@ Source: Stacks 07A4 and 0941
   let q := podReindexingTensorFrame l E g A hA M N
   q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map q.w₁ ≫ q.RX.map q.w₂ ≫ q.dX.inv
 
-set_option trace.profiler true in
+private theorem podReindexingLimitTensorComparisonHom_eq
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A)
+    (M N : podReindexingDerived l E Y none) :
+    podReindexingLimitTensorComparisonHom l E g A hA M N =
+      (podOrdinaryReindex l E g).map ((podReindexingTensorModel l E Y).hom.app (M, N)) ≫
+        A.limit.hom.app ((podReindexCalculus l E Y).systemClosed.tensor.obj
+          ((podReindexCalculus l E Y).reduction.obj M,
+            (podReindexCalculus l E Y).reduction.obj N)) ≫
+        (coefficientSequenceLimit l E X).map ((podReindexingSystemTensor l E g).hom.app
+          ((podReindexCalculus l E Y).reduction.obj M,
+            (podReindexCalculus l E Y).reduction.obj N)) ≫
+        (coefficientSequenceLimit l E X).map ((podReindexCalculus l E X).systemClosed.tensor.map
+          (Prod.mkHom (A.reduction.hom.app M) (A.reduction.hom.app N))) ≫
+        (podReindexingTensorModel l E X).inv.app
+          ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N) := by
+  unfold podReindexingLimitTensorComparisonHom
+  rfl
+
+set_option profiler true in
 -- The proof assembles several large strict and derived equations.
 /-- On good complexes, the coherent tensor comparison is the prescribed strict Roos map.
 This is a calculation before descent: there is no constructibility assumption and
@@ -116,9 +135,6 @@ theorem podReindexing_tensor_roos_normalization
           (βQ ≪≫ ((pullbackTensorOrdinaryReduction l E X).mapHomologicalComplex (.up ℤ)).mapIso
             (podReindexComplexIso l E g Q.obj)).hom)) hσ hτ)
   apply heq_of_eq
-  unfold podReindexingLimitTensorComparisonHom
-  refine Eq.trans ?_ hroos
-  simp only [Category.assoc]
-  rfl
+  simpa only [podReindexingLimitTensorComparisonHom_eq, Category.assoc] using hroos
 
 end WeilConjectures

@@ -88,7 +88,24 @@ private lemma chain_projection' {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   subst q
   exact c.chain_projection P I n p U.unop V.unop.left V.unop.hom z x
 
-set_option trace.profiler true in
+private lemma source_hom_sections_ext (W : Scheme.{u}) (s : Option ℕ)
+    {A B D : podReindexingModules l E W s}
+    {f g : A ⟶ SheafOfModules.homObj (R := podReindexingRing l E W s) B D}
+    (h : ∀ (U : W.ProEtᵒᵖ) (z : A.val.obj U) (V : (Over U.unop)ᵒᵖ)
+      (x : B.val.obj (op V.unop.left)),
+      ((f.val.app U z).app V).hom x = ((g.val.app U z).app V).hom x) : f = g := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro z
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.hom_ext
+  exact LinearMap.ext (h U z V)
+
+set_option profiler true in
 -- The degreewise sheaf, presheaf, and linear-map extensionality needs extra elaboration fuel.
 /-- The signed source reindexings commute with the fixed sectionwise chain comparison.
 Source: Stacks 0A8X, 08JA and blueprint dual-Tate compatibility, Step 4.
@@ -150,17 +167,8 @@ theorem source_chain_square
     CochainComplex.shiftFunctor_map_f', complexShift_hom_f]
   erw [hmap, hid, Category.comp_id]
   rw [hX, Linear.comp_units_smul]
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro z
-  apply PresheafOfModules.hom_ext
-  intro V
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro x
+  apply source_hom_sections_ext l E X s
+  intro U z V x
   refine Eq.trans ?_ (hom_units l E X s
     ((c.chain P I).hom.f (r + -a) ≫
       proj l E X s ((podReindexingComplexFunctor l E g s).obj P)
