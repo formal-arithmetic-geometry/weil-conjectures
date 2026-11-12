@@ -16841,6 +16841,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
 public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
 public import WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
+public import WeilConjectures.DeligneLaumon.AffineLine.TwistedEnvelope
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
