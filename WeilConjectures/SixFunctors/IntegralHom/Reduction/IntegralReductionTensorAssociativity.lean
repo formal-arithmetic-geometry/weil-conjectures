@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Integral.IntegralReductionTensorStrength
 import Mathlib.CategoryTheory.Monoidal.Functor
+import all Mathlib.CategoryTheory.Limits.HasLimits
 import all WeilConjectures.SixFunctors.Coefficient.Finite.CoefficientFiniteTensorMonoidal
 import all WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 
@@ -324,12 +325,12 @@ private theorem normalizedReductionComparison_square
   have hcan := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta)
     (coefficientScalarTensorIso l E Y n P Q) he
   refine ⟨hEP, hEQ, ?_⟩
-  dsimp only [integralDerivedReduction, completedIntegralCommRingSheaf,
-    totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
   run_tac Lean.Elab.Tactic.withMainContext do
     let mut a ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `hs).type
     let mut b ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    a := a.replaceLevel (fun l ↦ some l.normalize)
+    b := b.replaceLevel (fun l ↦ some l.normalize)
     for _ in [:64] do
       if a != b then
         match a, b with
