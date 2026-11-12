@@ -325,9 +325,10 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
   have h_coherence₁ := boundedConstructibleUpperStarComp_square_coherence_comp
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
-      ΔY q p₁ p₁' h₁ h₂ h₃ h₄
+      ΔY q p₁ p₁' h₁ h₂ h₃ h₄ (A := A) (K := K) φ
   have h_coherence₂ := boundedConstructibleUpperStarComp_square_coherence_comp
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX ΔY q p₂ p₂' h₁ h₂' h₃' h₄'
+      (A := B) (K := N) ψ
   have h_coherence := congrArg₂ (fun a b ↦ a ⊗ₘ b) h_coherence₁ h_coherence₂
   rw [h_coherence]
 end Coherence
