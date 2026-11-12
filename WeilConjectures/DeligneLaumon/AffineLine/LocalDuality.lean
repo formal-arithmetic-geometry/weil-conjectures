@@ -413,7 +413,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
 private theorem exact_boundary_of_triangle
     (T : Triangle (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
     (hT : T ∈ distTriang (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
-    (U R : ℤ → FrobeniusModule.{u, 0} (PadicAlgCl l))
+    (U R : ℤ → FrobeniusModule.{u + 1, 0} (PadicAlgCl l))
     (EU : ∀ r, (T.obj₁.cohomologyFrobeniusModule r).Equiv (U r))
     (EZ : ∀ r, (T.obj₃.cohomologyFrobeniusModule r).Equiv (R r))
     (hZ : ∀ r, r ≠ 0 → Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier) :
