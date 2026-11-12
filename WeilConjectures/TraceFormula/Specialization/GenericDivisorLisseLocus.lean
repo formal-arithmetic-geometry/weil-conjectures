@@ -107,6 +107,22 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+-- Reuse tensor preservation of colimits throughout the graded tensor constructions.
+local instance (priority := 10000) lisseTensorLeftColimit (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimit V ((MonoidalCategory.curriedTensor _).obj M) := by
+  infer_instance
+
+local instance (priority := 10000) lisseTensorRightColimit (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimit V ((MonoidalCategory.curriedTensor _).flip.obj M) := by
+  infer_instance
+
+
 section Geometry
 
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))}
@@ -217,6 +233,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+set_option trace.profiler true in
 /-- **Reduction of the generic vanishing along a divisor to the lisse case** (the shrinking step
 of blueprint `det-sp-generic-divisor`): let `X` be normal, `Z = V(h)`, `j : X ∖ Z ⟶ X`, `ζ` a
 generic point of `Z` and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`.
