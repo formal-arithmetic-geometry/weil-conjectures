@@ -573,6 +573,8 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     rw [reassoc_of% hs]
     have hnat := F.mapDerivedCategoryFactors.hom.naturality wY
     dsimp only [Functor.comp_map] at hnat
+    change _ ≫ F.mapDerivedCategoryFactors.hom.app
+        (((Mod.comap (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj EC) = _ at hnat
     have hnat' := congrArg
       (fun k ↦ k ≫ DerivedCategory.Q.map q ≫
         DerivedCategory.Q.map
