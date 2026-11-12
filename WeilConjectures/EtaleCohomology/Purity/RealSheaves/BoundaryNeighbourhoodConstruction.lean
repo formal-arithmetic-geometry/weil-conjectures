@@ -217,7 +217,7 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
     Φ.toRingEquiv.toRingHom n (specGeometricFrobenius_pow_hom K n) hσε hrσ
     (Ideal.inertiaInvariantsToField_inertiaInvariantsMap hσF) h hhproj hhalg
 
-omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+omit [Finite K] [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
   [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [IsIntegral C] in
 /-- A section of the residue map identifies the lifted geometric point by its projections. -/
 lemma specMap_eq_geometricFiberPoint_of_projections {A : Type u} [CommRing A]
@@ -272,7 +272,8 @@ lemma genericGeomPoint_eq_of_projections {W : C.Opens} (hW : IsAffineOpen W) [No
       ← pullback.condition_assoc, hhalg, reassoc_of% hfst, ← Spec.map_comp,
       ← CommRingCat.ofHom_comp, hγε]
 
-omit [GeometricallyConnected (C ↘ Spec (.of K))] in
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] in
 /-- Assemble a boundary neighbourhood from a residue map and a punctured spectrum. -/
 lemma nonempty_boundaryNeighbourhood_of_spectrum_data
     (I : Subgroup Gal(Ω/C.functionField)) (σF : Gal(Ω/C.functionField)) (x : C.finitePoints)
@@ -361,7 +362,8 @@ lemma specFieldMap_inertiaInvariants_comp {W : C.Opens} [Nonempty W]
     specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
       Spec.map (CommRingCat.ofHom (algebraMap (Ideal.inertiaInvariants C.functionField Q)
         (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))))) =
-      Spec.map (CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) := by
+      Spec.map (CommRingCat.ofHom
+        (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) := by
   rw [← Spec.map_comp]
   rfl
 
