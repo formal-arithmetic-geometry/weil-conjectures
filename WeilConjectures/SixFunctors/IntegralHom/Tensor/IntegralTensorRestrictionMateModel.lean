@@ -295,7 +295,7 @@ private theorem representative_mate
   simp only [eZ, eQ, kZ, kQ, Iso.trans_hom, Iso.trans_inv,
     Functor.mapIso_hom, Functor.mapIso_inv, Iso.symm_hom, Iso.symm_inv,
     Iso.app_hom, Iso.app_inv, asIso_hom, asIso_inv, Category.assoc] at hμ
-  rw [reassoc_of% hr, Iso.hom_inv_id_assoc] at hμ
+  erw [reassoc_of% hr, Iso.hom_inv_id_assoc] at hμ
   simp only [← r.map_comp] at hμ
   have hf := transpose_iso_target q r F V a L U adj c h Z Q t' huZ
   rw [(a.homEquiv Z (F.obj Q)).apply_symm_apply t] at hf
@@ -336,7 +336,8 @@ private theorem counit_quotient_eq
         ((F.mapHomologicalComplex (.up ℤ)).obj P)).hom =
       ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
   change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
-  rw [Functor.map_id, Functor.map_id, Category.id_comp, Category.comp_id, Category.comp_id]
+  rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id, Category.comp_id]
 
 private theorem restrictionFactors_quotient_eq
     [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
@@ -344,7 +345,8 @@ private theorem restrictionFactors_quotient_eq
     F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
       F.mapDerivedCategoryFactors.hom.app P := by
   rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  erw [Functor.map_id, Category.id_comp, Category.id_comp, Functor.map_id, Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.comp_id]
 
 end Quotient
 end GenericMate
@@ -1094,7 +1096,7 @@ theorem restrictionTensor_mate_model
   let S := integralCoefficientCommRingSheaf l E X n
   let r := @DerivedCategory.Q (scalarReductionTarget.{u, u} l E X n) _ _
     (HasDerivedCategory.standard _)
-  let F := (integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)
+  let F := (scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)
   let U := (scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)
   let L := scalarReductionDerivedExtension l E X n
   let V := scalarReductionDerivedRestriction l E X n
@@ -1134,17 +1136,9 @@ theorem restrictionTensor_mate_model
   have hu (M : completedIntegralModuleSheaves l E X D hl) (W : X.ProEtᵒᵖ) (x : M.val.obj W) :
       (reductionUnit l E X D hl n M).val.app W x = sfReductionTensor l E X n M W 1 x :=
     (scalarReductionExtension_adjunction l E X n).choose_spec M W x
-  have ho : adj₀.homEquiv _ _ ψ = TP.map t ≫ b Q := by
-    apply MateOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ (b Q)
-    · intro i j W x z
-      have hh := hbZ i j W x z
-      rw [hu, hu, hu] at hh
-      exact hh
-    · intro i j W x y
-      have hh := hbQ i j W x y
-      rw [hu, hu, hu] at hh
-      exact hh
-    · exact hb Q
+  simp only [hu] at hbZ hbQ
+  have ho : adj₀.homEquiv _ _ ψ = TP.map t ≫ b Q :=
+    MateOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ (b Q) hbZ hbQ (hb Q)
   let repZ := m.target.representative.app (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩)
   let repQ := m.target.representative.app (⟨F.obj P, hFP'⟩, ⟨F.obj Q, hFQ⟩)
   have hr := m.target.representative.hom.naturality
