@@ -233,6 +233,7 @@ theorem readingIso_trans_right
   simp [readingIso, H]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Native derived pullback types need the allowance used by their coherence laws.
 /-- A family comparison, restricted and then read at the same section, gives the identity.
 Source: restriction of family constancy, using the compositor associativity and unit laws
