@@ -101,6 +101,7 @@ private theorem derivedUnit_transport
   rw [CondensedRing.upperStarCongr_self, Functor.leftDerivedFunctorNatIso_refl]
   simp
 
+-- Prove compositor cancellation before instantiating the large derived module categories.
 private theorem unit_square_of_compositors {C : Type*} [Category C]
     {A B D E T : C} (i : A ≅ B) (j : D ≅ E) (t : A ⟶ D)
     (a : E ⟶ T) (b : B ⟶ T) (u : A ⟶ T) (v : D ⟶ T)
@@ -108,7 +109,6 @@ private theorem unit_square_of_compositors {C : Type*} [Category C]
     (i.inv ≫ t ≫ j.hom) ≫ a = b := by
   rw [Category.assoc, Category.assoc, hj, ht, ← hi, Iso.inv_hom_id_assoc]
 
-set_option trace.profiler true in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem derivedUnit_square
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -195,7 +195,6 @@ private theorem realized_arrow_transport
   subst t'
   exact h
 
-set_option trace.profiler true in
 -- Assemble the independent tower, completed, and condensed comparison diagrams.
 /-- Whole-system pullback is preserved by the specified completed realizations.
 
@@ -257,6 +256,7 @@ theorem diagonalLocalChern_horizontal_realization (l : ℕ) [Fact l.Prime]
     simpa only [map_natCast] using hunit.map f.appTop.hom
   have hXunit' : IsUnit (l : Γ(X', ⊤)) := by
     simpa only [map_natCast] using hunit'.map f'.appTop.hom
+  -- Select witnesses without rebuilding the large square as an elimination motive.
   have r := Classical.choice (diagonalRealization_pullback l hX hXunit' hXunit eX' eX)
   have d := Classical.choice (diagonalLocalChern_pullback_data l hX p p' hXunit)
   have hu := diagonalLocalChern_coefficient_pullback l hX p p'
