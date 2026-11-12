@@ -183,6 +183,7 @@ private theorem horizontal_varying_root_square
   have hinput :=
     (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n) U).eq_symm_apply.mpr
       hcoord
+  dsimp only [moduleIsoSectionEquiv, Equiv.symm] at hinput
   let v := (((d.varyingPush.hom.app N').app (op n)).hom.app U)
     (((p.restrictionX.F.map α).app (op n)).hom.app U y)
   have hv : HEq v (adjointSection l (ULift.{u} (Padic l)) d.geometry
