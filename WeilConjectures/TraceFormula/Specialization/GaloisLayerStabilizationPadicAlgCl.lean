@@ -84,7 +84,7 @@ lemma quasiSeparated_galoisLayer_j [QuasiSeparated N.j] (L' : Type u) [Field L']
 
 variable (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option profiler true in
+set_option trace.profiler true in
 -- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**. Let `C` be a
 `ℚ̄_ℓ`-complex whose restriction `Lε^* C` to the noetherian generic fibre is bounded constructible.

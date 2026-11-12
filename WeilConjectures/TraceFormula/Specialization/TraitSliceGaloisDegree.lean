@@ -195,7 +195,11 @@ theorem mem_range_traitTensorCompositum_of_isSeparable {p : ℕ}
         (adjoin_simple_le_iff.2 (mem_traitGenericSepCompositum_of_pow_eq hd hρ) hγρ))
   exact ⟨⟨γ, hmem⟩, rfl⟩
 
--- the instances `Module L L₁` for the concrete composita are found slowly
+-- Resolve the canonical module before specializing to the concrete compositum tower.
+local instance finiteGaloisIntermediateFieldModule {F Ω : Type*} [Field F] [Field Ω]
+    [Algebra F Ω] (L₁ : FiniteGaloisIntermediateField F Ω) : Module F L₁ :=
+  inferInstanceAs (Module F L₁.toIntermediateField)
+
 /-- **Finite Galois subextensions of `L^sep / L` have `p`-power degree**, for a prime `p` such
 that every natural number vanishing in `k'` is divisible by `p`. -/
 theorem exists_finrank_traitTensorCompositum_eq_pow {p : ℕ} (hp : p.Prime)
