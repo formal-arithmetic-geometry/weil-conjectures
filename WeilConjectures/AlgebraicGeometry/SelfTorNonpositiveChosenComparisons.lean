@@ -127,11 +127,16 @@ theorem exists_selfTor_nonpositive_chosen_comparisons
   let F := (Functor.const PUnit.{1}).obj K
   let G := (Functor.const PUnit.{1}).obj T
   obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y F G (fun _ ↦ hK)
-  let e := (comparison.app PUnit.unit.{1}).app PUnit.unit.{1}
+  let e : DerivedCategory.Q.obj K ⊗ DerivedCategory.Q.obj T ≅
+      DerivedCategory.Q.obj (CochainComplex.mapBifunctor K T (curriedTensor M)) :=
+    (comparison.app PUnit.unit.{1}).app PUnit.unit.{1}
   have : QuasiIso q := hq
-  let d := asIso (DerivedCategory.Q.map q)
+  let d : DerivedCategory.Q.obj K ≅ DerivedCategory.Q.obj T :=
+    asIso (DerivedCategory.Q.map q)
   let H := DerivedCategory.homologyFunctor M (-(n : ℤ))
-  let eQ := H.mapIso ((MonoidalCategory.tensorIso d (Iso.refl _)).symm ≪≫ e) ≪≫
+  let eQ : H.obj (DerivedCategory.Q.obj T ⊗ DerivedCategory.Q.obj T) ≅
+      (CochainComplex.mapBifunctor K T (curriedTensor M)).homology (-(n : ℤ)) :=
+    H.mapIso ((MonoidalCategory.tensorIso d (Iso.refl _)).symm ≪≫ e) ≪≫
     (DerivedCategory.homologyFunctorFactors M (-(n : ℤ))).app _
   obtain ⟨c, hc⟩ := exists_derived_selfTor_affine_coordinates i n
   refine ⟨fun U ↦ (c U).trans (Scheme.Modules.appLinearEquivOfIso eQ U.1), ?_⟩
