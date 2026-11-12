@@ -131,6 +131,31 @@ private lemma map_comp_of_comp_eq_map_aux {C D : Type*} [Category C] [Category D
     i ≫ u ≫ F.map g = F.map (f ≫ g) ≫ 𝟙 _ := by
   rw [← Category.assoc, h, ← F.map_comp, Category.comp_id]
 
+open Functor.OplaxMonoidal in
+/-- Apply the composite Künneth criterion to counits transported through identity comparisons. -/
+private lemma kunneth_of_comparison_counits {C₁ C₂ C₃ : Type*}
+    [Category C₁] [Category C₂] [Category C₃] [MonoidalCategory C₁] [MonoidalCategory C₂]
+    [MonoidalCategory C₃] [BraidedCategory C₂] [BraidedCategory C₃]
+    {R' : C₂ ⥤ C₁} {R : C₁ ⥤ C₂} (adjR : R' ⊣ R) {S' : C₃ ⥤ C₂}
+    {S : C₂ ⥤ C₃} (adjS : S' ⊣ S) {Q' : C₃ ⥤ C₁} {Q : C₁ ⥤ C₃} (adjQ : Q' ⊣ Q)
+    [R'.OplaxMonoidal] [S'.OplaxMonoidal] [Q'.OplaxMonoidal] (e : Q' ≅ S' ⋙ R')
+    (he : ∀ U V : C₃, δ Q' U V ≫ (e.hom.app U ⊗ₘ e.hom.app V) =
+      e.hom.app (U ⊗ V) ≫ R'.map (δ S' U V) ≫ δ R' (S'.obj U) (S'.obj V))
+    (hb : ∀ U V : C₃, δ S' U V ≫ (β_ (S'.obj U) (S'.obj V)).hom =
+      S'.map (β_ U V).hom ≫ δ S' V U)
+    {U V K : C₃} {W : C₂} {A : C₁} (ι : U ≅ K) (ι' : V ≅ S.obj W)
+    (c₁ : Q'.obj U ⟶ A) (c₂ : Q'.obj V ⟶ R'.obj W) (g : R'.obj (S'.obj K) ⟶ A)
+    (hc₁ : e.inv.app U ≫ c₁ = R'.map (S'.map ι.hom) ≫ g)
+    (hc₂ : e.inv.app V ≫ c₂ = R'.map (S'.map ι'.hom ≫ adjS.counit.app W) ≫ 𝟙 _)
+    (h₁ : IsIso (adjR.homEquiv _ _ g)) (h₂ : IsIso (adjR.projectionMorphism A W))
+    (h₃ : IsIso (adjS.projectionMorphism W K)) :
+    IsIso (adjQ.homEquiv _ _ (δ Q' U V ≫ (c₁ ⊗ₘ c₂))) := by
+  have t₁ := adjR.isIso_homEquiv_of_eq_map_comp (S'.map ι.hom) g _ hc₁
+  have t₂ := adjS.isIso_homEquiv_map_comp_counit ι'.hom
+  have t₃ := adjS.isIso_leftProjectionMorphism_of_isIso hb W ι.hom
+  exact adjR.isIso_homEquiv_δ_tensorHom_of_isIso adjS adjQ e he c₁ c₂ _ (𝟙 _)
+    hc₂ t₂ t₃ t₁ h₂ inferInstance
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 section Transpose
@@ -267,19 +292,12 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
     (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self Λ sq₂ KY)
   have hg := h₁
   rw [← homEquiv_pullbackSquareComparison_comp_counit Λ w A] at hg
-  have t₁ := Adjunction.isIso_homEquiv_of_eq_map_comp
-    (derivedUpperStarLowerStarAdjunction Λ p₂)
-    (L((aY)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ S).hom.app KX)) _ _ e₁ (hg := hg)
-  have t₂ := Adjunction.isIso_homEquiv_map_comp_counit (derivedUpperStarLowerStarAdjunction Λ aY)
-    ((leftDerivedUpperStarId Λ S).hom.app KY)
-  have t₃ := Adjunction.isIso_leftProjectionMorphism_of_isIso
-    (derivedUpperStarLowerStarAdjunction Λ aY)
-    (fun X Y ↦ (leftDerivedUpperStarTensor_braiding Λ aY X Y).symm) B
-    ((leftDerivedUpperStarId Λ S).hom.app KX) (hpm := h₃)
-  exact Adjunction.isIso_homEquiv_δ_tensorHom_of_isIso (derivedUpperStarLowerStarAdjunction Λ p₂)
+  exact kunneth_of_comparison_counits (derivedUpperStarLowerStarAdjunction Λ p₂)
     (derivedUpperStarLowerStarAdjunction Λ aY) (derivedUpperStarLowerStarAdjunction Λ (p₂ ≫ aY))
     (leftDerivedUpperStarComp Λ p₂ aY) (fun U V ↦ leftDerivedUpperStarTensor_comp Λ p₂ aY U V)
-    _ _ _ (𝟙 _) e₂ t₂ t₃ t₁ h₂ inferInstance
+    (fun U V ↦ (leftDerivedUpperStarTensor_braiding Λ aY U V).symm)
+    ((leftDerivedUpperStarId Λ S).app KX) ((leftDerivedUpperStarId Λ S).app KY)
+    _ _ _ e₁ e₂ hg h₂ h₃
 
 end Criterion
 
