@@ -59,7 +59,6 @@ private theorem homologyEvaluation_compose_roof_square
     _ = a₀.hom ≫ (g ≫ bq.hom) ≫ bp.inv := by rw [h₀]; simp only [Category.assoc]
     _ = _ := by rw [hs]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
-set_option profiler true in
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
 invertibility hypothesis on the model evaluation is used.
