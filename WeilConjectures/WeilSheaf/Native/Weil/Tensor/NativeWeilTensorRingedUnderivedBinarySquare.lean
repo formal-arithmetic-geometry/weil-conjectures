@@ -233,6 +233,7 @@ private theorem binaryMate_forget
 
 -- Compare the two site tensor instances through the bridge.
 -- The normalized mates involve both concrete tensor constructions.
+set_option profiler true in
 /-- The two evaluation-normalized underived tensor comparisons form a binary square.
 Source: Stacks 06YS and 06YU
 (blueprint: new-sf-native-weil-tensor-ringed-underived-binary-square).
