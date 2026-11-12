@@ -767,15 +767,27 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
         (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
     have hγ'eq : γ' = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
         W.frobeniusLift := by
-      rw [detWeight_weightCharacter, eτ.det_apply, eτ.finrank_eq]
       have hτlisse : W.IsLisse l τ := hRlisse.of_equiv eτ.symm
-      exact HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
+      calc
+        γ' = W.detWeight l τ ι := HasDetWeight.eq (ρ := τ) ι hγ'
+          (hτlisse.hasDetWeight ι) x
+        _ = W.detWeight l (M₁.subquotient N₁) ι :=
+          (detWeight_of_equiv ι eτ).symm
+        _ = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
+            W.frobeniusLift := detWeight_eq_detWeight_weightCharacter ι _
     have hWM : Representation.weightMultiset (weightCharacter ι (Nat.card K)) W.frobeniusLift
         (Representation.directSumSummand Q) = ∑ i, Multiset.replicate (d i) (w i) := by
       simp only [Representation.weightMultiset]
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       have e := Representation.directSumSummandEquiv Q i
-      rw [detWeight_weightCharacter, e.det_apply, e.finrank_eq]
+      have hdet : (Representation.directSumSummand Q i).toRepresentation.detWeight
+          (weightCharacter ι (Nat.card K)) W.frobeniusLift = w i := by
+        calc
+          _ = (Q i).detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
+            e.detWeight_eq _ _
+          _ = w i := by
+            rw [detWeight_weightCharacter]
+      rw [e.finrank_eq, hdet]
     have hfilter : (∑ i, Multiset.replicate (d i) (w i)).filter (γ < ·) =
         ∑ i ∈ A, Multiset.replicate (d i) (w i) := by
       have key (s : Finset (Fin n)) : (∑ i ∈ s, Multiset.replicate (d i) (w i)).filter (γ < ·) =
