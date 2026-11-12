@@ -84,6 +84,45 @@ private theorem map_normalization
   simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.comp_obj,
     Category.comp_id, ← F.map_comp, h]
 
+-- Prove the signed inverse-transposition identity with abstract categories, so
+-- the summand rewrites do not reduce the native sheaf and localization instances.
+private theorem signed_normalization_uncurry
+    {A : Type a} [Category.{b} A] [Abelian A]
+    [HasCountableProducts A] [HasCountableCoproducts A]
+    {F : A ⥤ A ⥤ A} {H : Aᵒᵖ ⥤ A ⥤ A}
+    [F.Additive] [∀ A, (F.obj A).Additive]
+    [F.flip.Additive] [∀ A, (F.flip.obj A).Additive]
+    [H.Additive] [∀ A, (H.obj A).Additive]
+    (adj : F ⊣₂ H) (P T I : CochainComplex A ℤ)
+    (j ψ : CochainComplex.mapBifunctor P T F.flip ⟶ I)
+    (hψ : ∀ (p q n : ℤ) (hpq : p + q = n),
+      HomologicalComplex.ιMapBifunctor P T F.flip (.up ℤ) p q n hpq ≫ ψ.f n =
+        (p * q).negOnePow • ((F.obj (T.X q)).map
+          ((DerivedNativeTensorProof.internalHomEquiv adj T I P
+            ((HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).inv ≫ j)).f p ≫
+              CochainComplex.bifunctorHomπ H T I p q n (by omega)) ≫
+                (adj.adj (T.X q)).counit.app (I.X n))) : ψ = j := by
+  let θ := (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).inv ≫ j
+  have hθ : (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).hom ≫ θ = j := by
+    simp [θ]
+  rw [← hθ]
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  change p + q = n at hpq
+  have hqp : q + p = n := by omega
+  have hu := DerivedNativeTensorProof.internalHomEquiv_f_π adj θ p q n hqp
+  have hv := congrArg ((adj.adj (T.X q)).homEquiv (P.X p) (I.X n)).symm hu
+  simp only [DerivedNativeTensorProof.curry, Adjunction.homAddEquiv_apply,
+    Equiv.symm_apply_apply] at hv
+  rw [hψ p q n hpq]
+  simp only [HomologicalComplex.comp_f, ← Category.assoc]
+  rw [HomologicalComplex.ι_mapBifunctorFlipIso_hom,
+    Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
+  change (p * q).negOnePow • _ = (q * p).negOnePow • _
+  rw [mul_comm q p]
+
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -275,27 +314,7 @@ theorem native_forget_normalized_binary_models
     let ψ := hnormalized.choose
     have hψ := hnormalized.choose_spec.1
     have hloc := hnormalized.choose_spec.2
-    have hψj : ψ = j := by
-      have hθ : (HomologicalComplex.mapBifunctorFlipIso T P
-          (nativeTensorBifunctor k₀ l X) (.up ℤ)).hom ≫ θ = j := by
-        simp [θ]
-      rw [← hθ]
-      apply HomologicalComplex.hom_ext
-      intro n
-      apply HomologicalComplex.mapBifunctor.hom_ext
-      intro p q hpq
-      change p + q = n at hpq
-      have hqp : q + p = n := by omega
-      have hu := DerivedNativeTensorProof.internalHomEquiv_f_π a θ p q n hqp
-      have hv := congrArg ((a.adj (T.X q)).homEquiv (P.X p) (I.X n)).symm hu
-      simp only [DerivedNativeTensorProof.curry, Adjunction.homAddEquiv_apply,
-        Equiv.symm_apply_apply] at hv
-      rw [hψ p q n hpq]
-      simp only [HomologicalComplex.comp_f, ← Category.assoc]
-      rw [HomologicalComplex.ι_mapBifunctorFlipIso_hom,
-        Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
-      change (p * q).negOnePow • _ = (q * p).negOnePow • _
-      rw [mul_comm q p]
+    have hψj : ψ = j := signed_normalization_uncurry a P T I j ψ hψ
     rw [hψj] at hloc hψ
     have hsources := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
