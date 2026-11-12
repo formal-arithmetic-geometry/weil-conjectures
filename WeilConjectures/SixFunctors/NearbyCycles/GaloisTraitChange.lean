@@ -273,11 +273,9 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   have key := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
     _ Ψ₂Ω H (fun g hg ↦ hcons g hg) α α₁ r₁ hr₁ α₂ r₂ hr₂
     cA cB cB' I' _ _ _ hnat hIA β hsq
-    (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
-    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
-      (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
-      (L((𝟙 X₂)^*⟦Λ⟧).obj (L((f)^*⟦Λ⟧).obj C)))
+    (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 _)
+    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 _)
+    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2 _)
     (fun k ↦ (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
       (σ k).1 (σ k).2 (hσ k) _).symm)
     (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
