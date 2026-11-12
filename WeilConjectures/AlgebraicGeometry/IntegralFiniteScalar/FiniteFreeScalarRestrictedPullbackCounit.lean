@@ -74,7 +74,6 @@ private theorem restrictedCounit_paste
   rw [reassoc_of% hq]
   simp only [Functor.map_comp, Category.assoc]
 
-set_option profiler true in
 -- Compute the scalar mate before using any K-flat invertibility.
 /-- Restricted scalar counits commute with exact geometric pullback and the normalized
 scalar mate.
