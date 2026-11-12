@@ -501,15 +501,13 @@ private theorem option_line_exchange_square
     [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
-    [∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x)]
-    [∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x)]
     {mP : (line l c (ProjectiveLine Y)).X ⟶ (line l c' (ProjectiveLine Y)).X}
     {mW : (line l c (diagonalSurface Y)).X ⟶ (line l c' (diagonalSurface Y)).X}
     (cP : Endpoint a (line l c (ProjectiveLine Y)) (line l c' (ProjectiveLine Y)) mP)
     (cW : Endpoint a (line l c (diagonalSurface Y)) (line l c' (diagonalSurface Y)) mW)
-    (hr : (upperStar Ab.{u + 1} (firstProjection Y)).map mP ≫
-        abelianComparison l c' (firstProjection Y) =
-      abelianComparison l c (firstProjection Y) ≫ mW) :
+    (he : PullEndpointSquare (derivedPullIso a (firstProjection Y)).hom
+      (cP.shift a) (firstLineComparisonForTrace l c k p hpl Y).hom
+      (firstLineComparisonForTrace l c' k p hpl Y).hom (cW.shift a)) :
     PullArrowSquare (derivedPullIso a (ProjectiveLine Y ↘ Y))
       ((derivedPushHom a (ProjectiveLine Y ↘ Y)).app _ ≫
         (moduleObjectDerivedPushforward (coefficient l c').X (ProjectiveLine Y ↘ Y)).map
@@ -518,11 +516,7 @@ private theorem option_line_exchange_square
       ((derivedPushHom a (secondProjection Y)).app _ ≫
         (moduleObjectDerivedPushforward (coefficient l c').X (secondProjection Y)).map
           (cW.shift a)) := by
-  have he := option_shifted_line_square l c c' a (firstProjection Y) cP cW hr
-  have h := option_exchange_paste l c c' a k p hpl Y cP cW (by
-    unfold firstLineComparisonForTrace
-    unfold PullEndpointSquare at he ⊢
-    coefficient_finish he)
+  have h := option_exchange_paste l c c' a k p hpl Y cP cW he
   unfold PullArrowSquare at h ⊢
   coefficient_finish h
 
@@ -590,10 +584,14 @@ theorem rational_p1_line_exchange_assembly
   let : ∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x) :=
     fun x ↦ (residueIsUnit l k p hpl _
       (firstProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible
-  have h := option_line_exchange_square l (some E) none a k p hpl Y cP cW
+  have he := option_shifted_line_square l (some E) none a (firstProjection Y) cP cW
     (by
       dsimp only [abelianComparison]
       exact (adicComparison l (firstProjection Y)).qbar_coprojection E)
+  have h := option_line_exchange_square l (some E) none a k p hpl Y cP cW (by
+    unfold firstLineComparisonForTrace
+    unfold PullEndpointSquare at he ⊢
+    coefficient_finish he)
   unfold LineExchangeSquare finiteSecondTraceExchange closureSecondTraceExchange
   unfold PullArrowSquare at h ⊢
   dsimp only [coefficient, line] at h
