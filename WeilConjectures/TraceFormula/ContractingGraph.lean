@@ -168,7 +168,7 @@ lemma integral_traceClass_ofEnd_of_eq_eqToHom
     {M N : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm)
     [HasRightDual N] :
-    ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = trace g := by
+    ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = End.of (trace g) := by
   rw [traceClass_ofEnd_of_eq_eqToHom e hfg]
   exact integral_traceClass_ofEnd g
 
@@ -361,7 +361,7 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
       {(F.liftPoint x hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     ((ofGraph K h v).traceClass F).localTerm j =
-      trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) := by
+      End.of (trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc))) := by
   rw [localTerm_traceClass_eq_integral_of_restrict_eq F hc.comp_c₁_eq_comp_c₂ j hB _
     fun e _ he ↦ restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt h v F hc j e he hB]
   exact integral_traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)
