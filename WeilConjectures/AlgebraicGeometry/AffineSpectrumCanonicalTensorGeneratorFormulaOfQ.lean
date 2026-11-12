@@ -25,8 +25,6 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option profiler true in
--- Comparing the fixed stalk complex types needs substantial definitional reduction.
 /-- The canonical affine-spectrum comparison respects tensor generators for the explicitly
 constructed input coordinates, not for arbitrary chain isomorphisms.
 Proof: the coefficient-one identity is the composition-unit germ calculation. The

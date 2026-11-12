@@ -135,6 +135,8 @@ private theorem ordinary_homology_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
 attribute [local irreducible] ordinaryIsoPullbackStalkComplexIso
   ordinaryIsoPullbackStalkHomologyIso
 
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
 /-- Transport a commuting diagram with three arrows along its vertex isomorphisms. -/
 private theorem transport_three_comp_of_coherence
     {D : Type u} [Category.{w} D]
@@ -159,8 +161,6 @@ private theorem transport_three_comp_of_coherence
   rw [← na]
   simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ ca.hom) hc
 
-set_option profiler true in
--- The two stalk-ring diagrams require a larger elaboration budget.
 /-- The homology transport equation for supplied affine coordinate data.
 Source: Stacks Project, Tag 0098.
 (blueprint: lem-pc-affine-spectrum-tensor-coordinate-homology-pointwise).
