@@ -95,6 +95,7 @@ structure FiniteComparison [G : NativeGeometry.{u} l]
     IntegralNormalization l D hl P c F.source F.target stage F.change gamma
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Forgetting endpoint certificates compares two coefficient-category presentations.
 private theorem integralNormalization_of_components [G : NativeGeometry.{u} l]
     (F : CoefficientFamily l c) (stage : StageAction l D hl P c)

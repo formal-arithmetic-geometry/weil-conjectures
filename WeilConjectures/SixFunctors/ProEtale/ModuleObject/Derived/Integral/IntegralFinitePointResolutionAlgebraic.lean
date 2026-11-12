@@ -21,6 +21,7 @@ universe u
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The finite-presentation and PID elaboration needs a larger heartbeat budget.
 /-- A finite integral algebra admits an equal-rank ordinary free resolution.
 

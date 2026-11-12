@@ -43,6 +43,7 @@ lemma comp_restrictPadicInt_map_hom_app {A B : AdicSheaf l T}
   rfl
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- The kernel unfolds the sections of the pushforward in the descent map.
 /-- **A criterion for landing in a descent**: a morphism of abelian sheaves into `f_* ℚ̄_ℓ,Vⁿ`
 whose sections satisfy `γ · ρ₁^* y = ρ₂^* y` is killed by the descent map of `γ`. -/
