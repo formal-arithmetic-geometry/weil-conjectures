@@ -62,9 +62,10 @@ lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
             ((L((ε)^*⟦Λ₁⟧)).obj K₀)))))) :
     IsIso ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
       (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
-      (pullbackSquareComparison Λ₃ sq)).app ((L((ε)^*⟦Λ₃⟧)).obj K))) :=
-  isIso_map_app_of_iso _ _ ((leftDerivedUpperStarExtendScalarsExtendScalarsIso a b ε K₀).symm ≪≫
-    (L((ε)^*⟦Λ₃⟧)).mapIso e.some) h
+      (pullbackSquareComparison Λ₃ sq)).app ((L((ε)^*⟦Λ₃⟧)).obj K))) := by
+  let e₀ := leftDerivedUpperStarExtendScalarsExtendScalarsIso a b ε K₀
+  let eK := (L((ε)^*⟦Λ₃⟧)).mapIso e.some
+  exact isIso_map_app_of_iso (baseChangeMap Λ₃ sq) (L((i)^*⟦Λ₃⟧)) (e₀.symm ≪≫ eK) h
 
 end Generic
 
