@@ -182,6 +182,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
         (s.map d₀.hom ((IsLocalizedModule.iso p.asIdeal.primeCompl
           (StructureSheaf.toStalkₗ A' (C.homology i) p)) y)))
       simp only [Functor.map_comp, ModuleCat.comp_apply]
+      rfl
 
 
 /-- The canonical target coordinate commutes with stalk localization.
