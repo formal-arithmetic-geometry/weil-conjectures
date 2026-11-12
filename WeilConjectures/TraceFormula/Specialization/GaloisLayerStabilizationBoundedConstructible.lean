@@ -110,6 +110,12 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀.obj).symm) ?_
   transport_exact h₁
 
+private lemma isIso_card_nsmul_derived_padicAlgClRingObj
+    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) {n : ℕ} (hn : n ≠ 0)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))) : IsIso (n • 𝟙 K) :=
+  isIso_nsmul_id_derived_padicAlgClRingObj ℓ X hn K
+
 -- the statement involves several large derived functor objects
 set_option profiler true in
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
@@ -158,7 +164,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) N.generic)) :=
     L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C
   letI : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K) :=
-    isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
+    isIso_card_nsmul_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     K
   have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
