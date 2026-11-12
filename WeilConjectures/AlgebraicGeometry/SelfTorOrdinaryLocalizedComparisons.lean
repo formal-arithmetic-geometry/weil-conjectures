@@ -200,6 +200,20 @@ private theorem tensor_homology_iso_of_resolutions
     asIso (HomologicalComplex.homologyMap β j)⟩
 
 
+/-- Specialize the functorial flat replacement to one nonpositive complex. -/
+private theorem exists_nonpositive_flat_quasiIso (Y : Scheme.{u})
+    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (hT : ∀ j : ℤ, 0 < j → IsZero (T.X j)) :
+    ∃ (E : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (r : E ⟶ T),
+      (∀ j : ℤ, SheafOfModules.IsFlat (E.X j)) ∧
+      (∀ j : ℤ, 0 < j → IsZero (E.X j)) ∧ QuasiIso r := by
+  obtain ⟨F, ε, hF⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
+    (Opens.grothendieckTopology Y.carrier) Y.sheaf 0
+  exact ⟨F.obj ⟨T, hT⟩, ε.app ⟨T, hT⟩,
+    (hF ⟨T, hT⟩).1, (hF ⟨T, hT⟩).2.1, (hF ⟨T, hT⟩).2.2.2⟩
+
+
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -290,16 +304,10 @@ theorem exists_selfTor_ordinary_localized_comparisons
   let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
   let S := CochainComplex.singleFunctor M 0
   let T := S.obj B
-  let P : ObjectProperty (CochainComplex M ℤ) :=
-    fun F ↦ ∀ j : ℤ, 0 < j → IsZero (F.X j)
-  have hT : P T := by
+  have hT : ∀ j : ℤ, 0 < j → IsZero (T.X j) := by
     intro j hj
     exact HomologicalComplex.isZero_single_obj_X _ _ _ j (by omega)
-  obtain ⟨F, ε, hF⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
-    (Opens.grothendieckTopology Y.carrier) Y.sheaf 0
-  let E := F.obj ⟨T, hT⟩
-  let r := ε.app ⟨T, hT⟩
-  obtain ⟨hflat, hbound, _, hr⟩ := hF ⟨T, hT⟩
+  obtain ⟨E, r, hflat, hbound, hr⟩ := exists_nonpositive_flat_quasiIso Y T hT
   have hE : E.IsKFlatTensor := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
     Y.toRingedSpace E ⟨0, hbound⟩ hflat
   let := SheafOfModules.monoidalCategory Y.sheaf

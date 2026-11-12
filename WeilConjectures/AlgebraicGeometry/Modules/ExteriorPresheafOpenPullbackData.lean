@@ -355,9 +355,11 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
         U.ι.toRingCatSheafHom.hom)).symm.app P
   let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) := by
     refine PresheafOfModules.isoMk (fun V ↦ ?_) ?_
-    · dsimp only [_root_.PresheafOfModules.exteriorPower, restrict, restrictFunctor,
-        SheafOfModules.pushforward, PresheafOfModules.pushforward_obj_obj,
-        openPresheafRestriction, openRingRestriction, P, Q]
+    · change Q.obj V ≅ ModuleCat.of (U.toScheme.presheaf.obj V)
+        (⋀[U.toScheme.presheaf.obj V]^n ((M.restrict U.ι).val.obj V))
+      rw [show (M.restrict U.ι).val.obj V =
+        (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
+          (M.val.obj (U.ι.opensFunctor.op.obj V)) from rfl]
       exact ringTransportIso
         (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
         (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
