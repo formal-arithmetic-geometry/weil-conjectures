@@ -66,6 +66,7 @@ noncomputable def koszulScalarExtCoefficientMap
         (𝟙 _, (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map μ)))
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Matching the derived stalk model unfolds both coefficient objects and tensor pullback.
 /-- The canonical coefficient comparison is bijective on a stalk in a length-n

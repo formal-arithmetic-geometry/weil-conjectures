@@ -48,6 +48,7 @@ private theorem adjustComparison {C : Type*} [Category C] {K : C ⥤ C}
   simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Unfold the sheaf carrier encodings in the two comparison isomorphisms.
 /-- Degreewise affine Hom comparison data.
