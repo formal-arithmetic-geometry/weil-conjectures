@@ -198,8 +198,6 @@ private lemma liftExchange_paste_horiz_aux
     boundedConstructibleUpperStarOfMapComp_hom_app_hom, boundedConstructibleLowerStar_map_hom]
   exact h K.obj
 
-set_option maxHeartbeats 1000000 in
--- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Horizontal pasting of base change maps** on bounded constructible complexes: for two
 horizontally pasted commutative squares
 ```
@@ -222,23 +220,18 @@ lemma boundedConstructibleBaseChangeOfMap_app_paste (sq₁ : CommSq πZ f'.left 
     (boundedConstructibleBaseChangeOfMap ℓ sq).app K ≫
       (boundedConstructibleLowerStar ℓ f'').map
         ((boundedConstructibleUpperStarOfMapComp ℓ πZ πZ').hom.app K) := by
-  have e₁ : baseChangeMap 𝐐 sq₁ = Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction 𝐐 f.left)
-      (derivedUpperStarLowerStarAdjunction 𝐐 f'.left) (pullbackSquareComparison 𝐐 sq₁) := rfl
-  have e₂ : baseChangeMap 𝐐 sq₂ = Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction 𝐐 f'.left)
-      (derivedUpperStarLowerStarAdjunction 𝐐 f''.left) (pullbackSquareComparison 𝐐 sq₂) := rfl
-  have e : baseChangeMap 𝐐 sq = Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction 𝐐 f.left)
-      (derivedUpperStarLowerStarAdjunction 𝐐 f''.left) (pullbackSquareComparison 𝐐 sq) := rfl
   have hamb : ∀ K, (leftDerivedUpperStarComp 𝐐 πP' πP).hom.app (R((f.left)_*⟦𝐐⟧).obj K) ≫
       L((πP')^*⟦𝐐⟧).map ((baseChangeMap 𝐐 sq₁).app K) ≫
         (baseChangeMap 𝐐 sq₂).app (L((πZ)^*⟦𝐐⟧).obj K) =
       (baseChangeMap 𝐐 sq).app K ≫
         R((f''.left)_*⟦𝐐⟧).map ((leftDerivedUpperStarComp 𝐐 πZ' πZ).hom.app K) := by
     intro K
-    rw [e₁, e₂, e]
+    -- Unfold directly to avoid expensive rewrite matching through derived functor objects.
+    unfold baseChangeMap
     exact_mod_proofs Adjunction.exchangeRight_app_paste
+      (G₁ := L((πP)^*⟦𝐐⟧)) (G₁' := L((πZ)^*⟦𝐐⟧))
+      (G₂ := L((πP')^*⟦𝐐⟧)) (G₂' := L((πZ')^*⟦𝐐⟧))
+      (G := L((πP' ≫ πP)^*⟦𝐐⟧)) (G' := L((πZ' ≫ πZ)^*⟦𝐐⟧))
       (derivedUpperStarLowerStarAdjunction 𝐐 f.left)
       (derivedUpperStarLowerStarAdjunction 𝐐 f'.left)
       (derivedUpperStarLowerStarAdjunction 𝐐 f''.left)
