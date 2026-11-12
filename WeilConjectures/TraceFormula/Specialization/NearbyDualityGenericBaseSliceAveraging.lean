@@ -127,6 +127,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k₁ k₁' k₂ k₂' : Type u} [Field k�
   {Y' : Over (Spec (.of k₂'))} {M : NearbyCyclesModel X.left X'.left}
   {N : NearbyCyclesModel Y.left Y'.left} {j : Y.left ⟶ X.left} {j' : Y'.left ⟶ X'.left}
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **Averaging splittings on bounded constructible complexes**: let `β` be the restriction
