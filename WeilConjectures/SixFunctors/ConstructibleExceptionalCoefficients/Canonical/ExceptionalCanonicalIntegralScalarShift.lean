@@ -346,7 +346,7 @@ theorem canonical_integral_scalar_square
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
   have rfShift : rF.hom.CommShift ℤ :=
     finiteTorIntegralShift_compatibility l Ω E T
-  have rgShift := finiteTorIntegralShift_compatibility_cached l Ω L T
+  letI := finiteTorIntegralShift_compatibility_cached l Ω L T
   obtain ⟨e, hs, he⟩ := restriction_iso IX IY JX JY IE IL S.functor SI O B
     (sC1 := sE) (sC2 := siE) (sC3 := sL) (sC4 := siL)
     (sIX := ixShift) (sIY := iyShift) (sJX := jxShift) (sJY := jyShift)
@@ -355,7 +355,7 @@ theorem canonical_integral_scalar_square
       (integralOrdinaryScalar l E.carrier L.carrier i T))
     (fullJY := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.full)
     (faithfulJY := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.faithful)
-    rF rG χ θ eO (hRF := rfShift) (hRG := rgShift)
+    rF rG χ θ eO (hRF := rfShift)
     (hChi := chiShift) (hTheta := thetaShift) (hOrd := heO)
   refine ⟨e, ?_, hs⟩
   intro K
