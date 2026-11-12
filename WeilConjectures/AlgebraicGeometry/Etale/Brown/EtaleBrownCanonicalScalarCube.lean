@@ -40,19 +40,22 @@ private lemma mateEquiv_app_cube_converse_of_eq
     (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (bf : Mf ⊣ Sf) (bf' : Mf' ⊣ Sf')
     {Gr : DY ⥤ DY'} {Hr : DX ⥤ DX'} {Gs : EY ⥤ EY'} {Hs : EX ⥤ EX'}
     {PY : DY ⥤ EY} {PX : DX ⥤ EX} {PY' : DY' ⥤ EY'} {PX' : DX' ⥤ EX'}
-    (σr : Gr ⋙ Lf' ⟶ Lf ⋙ Hr) (σs : Gs ⋙ Mf' ⟶ Mf ⋙ Hs)
+    (σs : Gs ⋙ Mf' ⟶ Mf ⋙ Hs)
     (αf : PY ⋙ Mf ⟶ Lf ⋙ PX) (αf' : PY' ⋙ Mf' ⟶ Lf' ⋙ PX')
     (αg : PY ⋙ Gs ⟶ Gr ⋙ PY') (αg' : PX ⋙ Hs ⟶ Hr ⋙ PX')
     (sr : Rf ⋙ Gr ⟶ Hr ⋙ Rf') (ss : Sf ⋙ Gs ⟶ Hs ⋙ Sf')
     (sf : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (sf₀ : Rf ⋙ PY ⟶ PX ⋙ Sf)
-    (hσr : mateEquiv af af' (.mk _ _ _ _ σr) = .mk _ _ _ _ sr)
     (hσs : mateEquiv bf bf' (.mk _ _ _ _ σs) = .mk _ _ _ _ ss)
     (hαf : mateEquiv af bf (.mk _ _ _ _ αf) = .mk _ _ _ _ sf₀)
     (hαf' : mateEquiv af' bf' (.mk _ _ _ _ αf') = .mk _ _ _ _ sf)
     (h : ∀ K, αg.app (Rf.obj K) ≫ PY'.map (sr.app K) ≫ sf.app (Hr.obj K) =
       Gs.map (sf₀.app K) ≫ ss.app (PX.obj K) ≫ Sf'.map (αg'.app K)) (M : DY) :
-    Mf'.map (αg.app M) ≫ αf'.app (Gr.obj M) ≫ PX'.map (σr.app M) =
+    Mf'.map (αg.app M) ≫ αf'.app (Gr.obj M) ≫
+        PX'.map (((mateEquiv af af').symm (.mk _ _ _ _ sr)).app M) =
       σs.app (PY.obj M) ≫ Hs.map (αf.app M) ≫ αg'.app (Lf.obj M) := by
+  let σr := (mateEquiv af af').symm (.mk _ _ _ _ sr)
+  have hσr : mateEquiv af af' σr = .mk _ _ _ _ sr :=
+    (mateEquiv af af').apply_symm_apply _
   apply mateEquiv_app_cube_converse af af' bf bf' σr σs αf αf' αg αg' ?_ M
   intro K
   change αg.app (Rf.obj K) ≫ PY'.map
@@ -163,11 +166,6 @@ theorem strictEtaleBrownCanonicalScalarCube
     (Etale.leftDerivedUpperStarIsoMapDerivedCategory
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).symm
   let δ := strictEtaleBrownCanonicalRestriction O t g A PW PV B h
-  let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ δ.hom))
-  have ht : (mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-      (.mk _ _ _ _ τ)) = δ.hom :=
-    ((mateEquiv _ _).apply_symm_apply _)
   have hs := brown_scalarPullback_mate (strictEtaleBrownRingMap O t h) g
   have hc := strictEtaleBrownCanonicalRestrictionCube O t g A PW PV B RV RW rg hinverse h
   intro Y
@@ -179,10 +177,10 @@ theorem strictEtaleBrownCanonicalScalarCube
     RW.property.2.2 h
   exact mateEquiv_app_cube_converse_of_eq
     (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
-    τ (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
+    (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
     (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv
     δ.hom (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom
     (RV.val.restriction h).hom (RW.val.restriction h).hom
-    ht hs hw hr hc Y
+    hs hw hr hc Y
 
 end AlgebraicGeometry
