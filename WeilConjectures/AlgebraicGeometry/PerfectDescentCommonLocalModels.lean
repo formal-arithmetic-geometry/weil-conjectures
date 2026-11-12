@@ -32,7 +32,6 @@ private theorem of_common_upper_bound
   obtain ⟨k, hak, hbk⟩ := exists_ge_ge a b
   exact h k hak hbk
 
-set_option profiler true in
 /-- Descend the two restrictions separately and move them to a common stage.
 This supplies no overlap isomorphism and no map into a derived direct image.
 Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
