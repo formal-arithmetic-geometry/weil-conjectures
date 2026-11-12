@@ -202,7 +202,7 @@ theorem finiteTorIntegralShift_compatibility
   unfold finiteTorIntegralShift
   exact hc
 
-private theorem finiteTorIntegralShift_compatibility_cached
+private def finiteTorIntegralShift_compatibility_cached
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :=
