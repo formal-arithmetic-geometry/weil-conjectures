@@ -60,7 +60,6 @@ private theorem model_inv (W : Scheme.{u})
 attribute [local irreducible] podReindexingHomModel podReindexingCoefficient
   Padic Padic.coefficientExtensionIntegers
 
-set_option maxHeartbeats 1500000 in
 -- The explicit model transports require many dependent functor-map equalities.
 /-- The left route of the source-shift square on localized Hom models.
 

@@ -88,7 +88,6 @@ private lemma chain_projection' {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   subst q
   exact c.chain_projection P I n p U.unop V.unop.left V.unop.hom z x
 
-set_option maxHeartbeats 800000 in
 -- The degreewise sheaf, presheaf, and linear-map extensionality needs extra elaboration fuel.
 /-- The signed source reindexings commute with the fixed sectionwise chain comparison.
 Source: Stacks 0A8X, 08JA and blueprint dual-Tate compatibility, Step 4.

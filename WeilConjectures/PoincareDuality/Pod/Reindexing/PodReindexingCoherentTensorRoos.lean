@@ -45,7 +45,6 @@ Source: Stacks 07A4 and 0941
   let q := podReindexingTensorFrame l E g A hA M N
   q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map q.w₁ ≫ q.RX.map q.w₂ ≫ q.dX.inv
 
-set_option maxHeartbeats 400000 in
 -- The proof assembles several large strict and derived equations.
 /-- On good complexes, the coherent tensor comparison is the prescribed strict Roos map.
 This is a calculation before descent: there is no constructibility assumption and
