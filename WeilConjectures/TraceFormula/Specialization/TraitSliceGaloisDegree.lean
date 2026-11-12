@@ -196,9 +196,9 @@ theorem mem_range_traitTensorCompositum_of_isSeparable {p : ℕ}
   exact ⟨⟨γ, hmem⟩, rfl⟩
 
 -- Resolve the canonical module before specializing to the concrete compositum tower.
-local instance finiteGaloisIntermediateFieldModule {F Ω : Type*} [Field F] [Field Ω]
-    [Algebra F Ω] (L₁ : FiniteGaloisIntermediateField F Ω) : Module F L₁ :=
-  inferInstanceAs (Module F L₁.toIntermediateField)
+local instance (priority := high) intermediateFieldBaseModule {F Ω : Type*} [Field F]
+    [Field Ω] [Algebra F Ω] (M : IntermediateField F Ω) : Module F M :=
+  inferInstanceAs (Module F M.toSubalgebra)
 
 /-- **Finite Galois subextensions of `L^sep / L` have `p`-power degree**, for a prime `p` such
 that every natural number vanishing in `k'` is divisible by `p`. -/
