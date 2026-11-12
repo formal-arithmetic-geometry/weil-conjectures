@@ -207,11 +207,13 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
         ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))) ≫
         (pullbackSquareComparison Λ w).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
           L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A) := by
+    have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
+      (R((aX)_*⟦Λ⟧).obj A) (h := by rw [← sq₁.w])
+    have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
+      ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))
     rw [pullbackSquareComparison_hom_app, pullbackSquareComparison_hom_app]
     simp only [Category.assoc]
-    rw [leftDerivedUpperStarComp_inv_app_comp_eqToHom_id'_assoc]
-    rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-      ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A)))]
+    rw [reassoc_of% hc, reassoc_of% hn]
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
   have e₂ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj (R((aY)_*⟦Λ⟧).obj B)) ≫
       (pullbackSquareComparison Λ sq₂).hom.app (R((aY)_*⟦Λ⟧).obj B) ≫
@@ -219,11 +221,13 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
         ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)) ≫
         (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _ := by
+    have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
+      (R((aY)_*⟦Λ⟧).obj B) (h := by rw [← sq₂.w])
+    have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
+      ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B))
     rw [pullbackSquareComparison_hom_app]
     simp only [Category.assoc]
-    rw [leftDerivedUpperStarComp_inv_app_comp_eqToHom_id'_assoc]
-    rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-      ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)))]
+    rw [reassoc_of% hc, reassoc_of% hn]
     simp
   have t₁ : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
       ((leftDerivedUpperStarComp Λ p₂ aY).inv.app
