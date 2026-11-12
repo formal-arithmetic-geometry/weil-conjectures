@@ -325,30 +325,9 @@ private theorem normalizedReductionComparison_square
   have hcan := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta)
     (coefficientScalarTensorIso l E Y n P Q) he
   refine ⟨hEP, hEQ, ?_⟩
-  have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
-  dsimp only [Modules, integralCoefficientCommRingSheaf, integralCoefficientSheaf,
-    CategoryTheory.sheafCompose, CommRingCat.hasForgetToRingCat] at hs ⊢
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let mut a ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `hs).type
-    let mut b ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
-    a := a.replaceLevel (fun l ↦ some l.normalize)
-    b := b.replaceLevel (fun l ↦ some l.normalize)
-    for _ in [:64] do
-      if a != b then
-        match a, b with
-        | .app f x, .app g y =>
-          if f != g then
-            a := f
-            b := g
-          else
-            a := x
-            b := y
-        | .mdata _ x, _ => a := x
-        | _, .mdata _ y => b := y
-        | _, _ => pure ()
-    Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
-    Lean.logInfo m!"PH324 heads: {repr a.getAppFn}\nversus: {repr b.getAppFn}"
-  with_unfolding_all exact hs
+  apply comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _
+  · exact hnorm
+  · exact hcan
 
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
