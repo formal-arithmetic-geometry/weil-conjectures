@@ -49,7 +49,6 @@ local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => (Proj 𝒜).Modules
 
-set_option profiler true in
 /-- Common localization descriptions give linear comparisons of principal-open sections.
 Keeping the sheaves abstract avoids unfolding their constructions in the comparison proof. -/
 private theorem basisComparison_of_common_localizations
@@ -105,7 +104,6 @@ private theorem basisComparison_of_common_localizations
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- On each principal open of a fixed chart, there is a bijective linear comparison
 extending the same additive comparison on whole-chart sections.
 
