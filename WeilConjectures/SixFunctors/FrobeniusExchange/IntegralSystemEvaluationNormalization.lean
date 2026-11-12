@@ -184,7 +184,7 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
   have hb := ProEtale.VaryingRing.moduleEvalP_hom_isIso (rs l E) (qs l E) f n
   rw [← varyingModuleEvalMate (rs l E) (qs l E) f n] at hb
   have hi := varyingDerivedMateIso (rs l E) (qs l E) f n
-  apply derivedMate_isIso_of_rightEqualities
+  exact derivedMate_isIso_of_rightEqualities
     (G := G) (H := H)
     (G' := ProEtale.VaryingRing.eval (rs l E) (qs l E) Y n)
     (H' := ProEtale.VaryingRing.eval (rs l E) (qs l E) X n)
@@ -216,8 +216,5 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (ProEtale.VaryingRing.coefficients (rs l E) X n)
     (ProEtale.StrictTower.constantRingIso (rs l E n) f)) θ
     (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).symm
-    (by rfl) (finitePush_eq l E f n) (by rfl) (by rfl) hθ hb
-    ?_
-  clear hb
-  exact hi
+    (by rfl) (finitePush_eq l E f n) (by rfl) (by rfl) hθ hb hi
 end WeilConjectures.FrobeniusExchange
