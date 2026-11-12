@@ -263,7 +263,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Transporting the kernel and its unit elaborates nested module functor applications.
 /-- Restrict the actual kernel pullback to a chart where the morphism is closed.
 Source: Stacks Project, Tags 01R3 (1), 00A0 and 0096.
@@ -340,11 +339,11 @@ theorem open_kernel_conormal_transport {X Y : Scheme.{u}} (g : X ⟶ Y)
     change e (((tensorPullback i).map δ.inv).app ⊤
       (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
         i.ker.toModules).app ⊤ t)) = _
-    erw [hn]
     have ht : δ.inv.app ⊤ t = s₀ := by
       exact ConcreteCategory.congr_hom
         (congrArg (fun q ↦ q.app ⊤) δ.hom_inv_id) s₀
-    rw [ht]
-    exact he s
+    exact (congrArg e hn.symm).trans
+      ((congrArg (fun z ↦ e (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
+        L).app ⊤ z)) ht).trans (he s))
 
 end AlgebraicGeometry.Scheme.Modules

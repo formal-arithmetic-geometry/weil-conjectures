@@ -29,7 +29,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Open-section identifications and semilinear scalar transports need extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -135,7 +134,6 @@ theorem affineOpen_kernel_conormal_sections {X Y : Scheme.{u}} (g : X ⟶ Y)
     rw [ht, hs]
     rfl
   change d (c (I.toCotangent a)) = _
-  rw [hc a t ht']
-  exact hu
+  exact (congrArg d (hc a t ht')).trans hu
 
 end AlgebraicGeometry.Scheme.Modules
