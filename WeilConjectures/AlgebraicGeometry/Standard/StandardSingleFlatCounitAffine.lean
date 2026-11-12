@@ -131,6 +131,7 @@ private theorem affine_single_unit_iso
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- The scheme-module and ringed-space derived category instances need extra elaboration.
 /-- The single complex of the actual affine direct image realizes the pinned comparison.
 Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY,

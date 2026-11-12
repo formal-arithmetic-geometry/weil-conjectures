@@ -130,6 +130,7 @@ private theorem sheafification_normalization
   simpa only [Category.assoc] using hh.symm
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- This compares homology in module sheaves, abelian sheaves and abelian presheaves.
 private theorem sheafification_unit_of_resolution
     {Y : RingedSpace.{u}}

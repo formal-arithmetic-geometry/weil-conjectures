@@ -34,6 +34,7 @@ private theorem flat_restrict_iso {R T : CommRingCat.{u}} (e : R ≅ T)
   exact Module.Flat.trans T R _
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The ring and derived-category transports require additional elaboration heartbeats.
 set_option linter.unusedVariables false in
 /-- Homology identifications and counit compatibility for fixed stalk data.
