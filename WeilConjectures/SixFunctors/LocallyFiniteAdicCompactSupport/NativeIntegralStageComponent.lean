@@ -144,6 +144,8 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
     (fun {_ _} d ↦ IntegralTargetBoundary l c source E KE d)
     (hboundE KE).1 (hboundE KE).2 hfE
   run_tac Lean.logInfo m!"PH070 transport: {← IO.getNumHeartbeats}"
+  dsimp only [Ki, Ke, finiteField] at hh ⊢
+  run_tac Lean.logInfo m!"PH070 normalized: {← IO.getNumHeartbeats}"
   exact hh
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
