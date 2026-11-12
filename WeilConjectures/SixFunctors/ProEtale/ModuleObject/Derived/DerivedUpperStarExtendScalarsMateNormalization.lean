@@ -85,9 +85,10 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc]
-  simpa only [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Functor.map_id,
-    Category.comp_id, Category.id_comp] using
-    derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
+  have hfac := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
+  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hfac
+  erw [Functor.map_id, Category.comp_id, Functor.map_id, Category.id_comp] at hfac
+  exact hfac
 
 
 end AlgebraicGeometry.ProEtale.CondensedRing
