@@ -586,7 +586,6 @@ private theorem systemScalarPullback_hom_eq_finiteMate (l : ℕ) [Fact l.Prime]
 
 end ExplicitMate
 
-set_option maxHeartbeats 1000000 in
 -- unfolding the open scalar mate compares large derived functor composites
 /-- The inverse open scalar mate is the iterated mate of the derived restriction/pullback
 square along the open and fixed scalar adjunctions. -/
