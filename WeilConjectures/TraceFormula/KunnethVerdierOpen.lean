@@ -163,6 +163,22 @@ def ExceptionalKunnethMapRestriction (j : U ⟶ Y) [IsOpenImmersion j.left]
       (exceptionalKunnethMap ℓ (Y := Y) M) ≫ (exceptionalKunnethTargetRestrictionIso ℓ j M).hom =
     (exceptionalKunnethSourceRestrictionIso ℓ j M).hom ≫ exceptionalKunnethMap ℓ (Y := U) M
 
+/-- The exceptional restriction compatibility after precomposing with the tensor comparison. -/
+lemma μ_map_exceptionalKunnethMap_comp_restriction (j : U ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hα : ExceptionalKunnethMapRestriction ℓ j M) :
+    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar
+    (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)) _ _ ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).map
+      (exceptionalKunnethMap ℓ (Y := Y) M) ≫ (exceptionalKunnethTargetRestrictionIso ℓ j M).hom =
+    ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
+      ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
+      exceptionalKunnethMap ℓ (Y := U) M := by
+  rw [hα, exceptionalKunnethSourceRestrictionIso_hom]
+  simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
+
 /-! ### Monoidality of the pullbacks -/
 
 /-- The identification `Lf^* = Lf'^*` for `f = f'` is compatible with the tensor structures. -/
@@ -379,17 +395,6 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
         (kunnethVerdierMap ℓ (Y := Y) M N) ≫ (kunnethVerdierTargetRestrictionIso ℓ j M N).hom =
       (kunnethVerdierSourceRestrictionIso ℓ j M N).hom ≫ kunnethVerdierMap ℓ (Y := U) M
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N) := by
-  have hα' : Functor.LaxMonoidal.μ (boundedConstructibleUpperStar
-      (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)) _ _ ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j)).map
-        (exceptionalKunnethMap ℓ (Y := Y) M) ≫ (exceptionalKunnethTargetRestrictionIso ℓ j M).hom =
-      ((prodMapUpperStarFstIso ℓ j).hom.app M ⊗ₘ
-        ((prodMapUpperStarSndIso ℓ j).hom.app _ ≫
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-            (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
-        exceptionalKunnethMap ℓ (Y := U) M := by
-    rw [hα, exceptionalKunnethSourceRestrictionIso_hom]
-    simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
   simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing]
   refine map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
@@ -410,7 +415,8 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
       (prodMapUpperStarSndIso ℓ j).hom (μ_prodMapUpperStarSndIso_hom_app ℓ j)
       ((prodMapUpperStarFstIso ℓ j).hom.app M) (dualizingComplexUpperStarIso ℓ j).hom
       (exceptionalKunnethTargetRestrictionIso ℓ j M).hom (exceptionalKunnethMap ℓ (Y := Y) M)
-      (exceptionalKunnethMap ℓ (Y := U) M) hα' N
+      (exceptionalKunnethMap ℓ (Y := U) M)
+      (μ_map_exceptionalKunnethMap_comp_restriction ℓ j M hα) N
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
