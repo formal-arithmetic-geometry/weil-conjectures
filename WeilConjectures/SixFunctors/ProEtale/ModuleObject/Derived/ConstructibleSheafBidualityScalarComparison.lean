@@ -20,6 +20,30 @@ open CategoryTheory MonoidalCategory MonoidalClosed
 open scoped CategoryTheory.Obj
 attribute [local instance] DerivedCategory.braidedCategory'
 attribute [local irreducible] DerivedCategory.monoidalClosed
+
+/-- Forgetting membership in a full monoidal closed subcategory preserves biduality. -/
+lemma CategoryTheory.ObjectProperty.toIhomIhom_hom
+    {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+    {P : ObjectProperty C} [P.IsMonoidal] [P.IsMonoidalClosed]
+    (W L : P.FullSubcategory) :
+    (toIhomIhom W L).hom = toIhomIhom W.obj L.obj := rfl
+
+/-- A composite of restrictions of braided functors is braided. -/
+lemma CategoryTheory.ObjectProperty.braided_lift_comp
+    {C D E : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
+    [Category* D] [MonoidalCategory D] [BraidedCategory D]
+    [Category* E] [MonoidalCategory E] [BraidedCategory E]
+    (P : ObjectProperty C) [P.IsMonoidal] (Q : ObjectProperty D) [Q.IsMonoidal]
+    (R : ObjectProperty E) [R.IsMonoidal]
+    (F : C ⥤ D) [F.Monoidal] [F.Braided] (G : D ⥤ E) [G.Monoidal] [G.Braided]
+    (hF : ∀ K : P.FullSubcategory, Q (F.obj K.obj))
+    (hG : ∀ K : Q.FullSubcategory, R (G.obj K.obj)) :
+    ((Q.lift (P.ι ⋙ F) hF) ⋙ (R.lift (Q.ι ⋙ G) hG)).Braided := by
+  constructor
+  intro K M
+  apply ObjectProperty.hom_ext
+  exact Functor.LaxBraided.braided (F := F ⋙ G) K.obj M.obj
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
@@ -28,9 +52,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
-set_option maxHeartbeats 1600000 in
-set_option profiler true in
--- Matching the bounded-constructible closed structure with the ambient one is slow.
+private lemma integral_qbar_biduality_map_hom
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    {K M : BoundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)} (f : K ⟶ M) :
+    ((boundedConstructibleExtendScalars X.left ℓ E ⋙
+      constructibleToPadicAlgCl X.left ℓ E).map f).hom =
+      ((Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
+        derivedExtendScalarsToPadicAlgCl X.left ℓ E).map f.hom := rfl
+
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
 Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark
@@ -78,12 +108,12 @@ theorem integral_qbar_biduality_comparison
       (boundedConstructibleUpperShriek ℓ a).mapIso
         (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
   let : T.Braided := by
-    constructor
-    intro K M
-    apply ObjectProperty.hom_ext
-    exact Functor.LaxBraided.braided (F :=
-      (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
-        derivedExtendScalarsToPadicAlgCl X.left ℓ E) K.obj M.obj
+    exact ObjectProperty.braided_lift_comp (boundedConstructible _) (boundedConstructible _)
+      (boundedConstructible _)
+      (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor
+      (derivedExtendScalarsToPadicAlgCl X.left ℓ E)
+      (boundedConstructible_derivedExtendScalars_obj X.left ℓ E)
+      (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E)
   -- Both dual comparisons are invertible on bounded constructible objects.
   have hβ (K : BoundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)) :
@@ -101,6 +131,9 @@ theorem integral_qbar_biduality_comparison
   have h : toIhomIhom W' (T.obj L) = T.map (toIhomIhom W L) ≫ c.hom := by
     dsimp only [c, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
     rw [map_toIhomIhom_comp_dualComparison_assoc, IsIso.hom_inv_id, Category.comp_id]
-  exact congrArg (fun f ↦ f.hom) h
+  have h' := congrArg (fun f ↦ f.hom) h
+  rw [ObjectProperty.toIhomIhom_hom, ObjectProperty.comp_hom,
+    integral_qbar_biduality_map_hom, ObjectProperty.toIhomIhom_hom] at h'
+  exact h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
