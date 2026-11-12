@@ -82,7 +82,7 @@ private theorem iso_eq_of_inv {C : Type*} [Category C] {A B : C}
   iso_eq_of_hom_inv a b ((congrArg (fun z ↦ a.hom ≫ z) (eq_of_heq hb)).trans h)
 
 private theorem exists_iso_eq_of_inv {C : Type*} [Category C] {A B : C}
-    {E : Sort*} {P : E → Prop} {F : E → A ≅ B}
+    {E : Sort*} {P : E → Prop} {F : E → (A ≅ B)}
     (a : A ≅ B) (g : B ⟶ A) (h : a.hom ≫ g = 𝟙 A)
     (he : ∃ e, P e ∧ HEq (F e).inv g) : ∃ e, P e ∧ a = F e := by
   obtain ⟨e, he, hinv⟩ := he
