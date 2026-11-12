@@ -837,11 +837,9 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
   let v := (identityDirect T R).inv.app
     ((proEtaleRingModuleDirectImage p R S c).obj N)
-  let daN := da.hom.app N
-  let tN := t.hom.app N
-  let dbN := db.hom.app N
-  let f := daN ≫ tN
-  let g := u ≫ v ≫ dbN
+  let f := da.hom.app N ≫ t.hom.app N
+  let g := u ≫ v ≫ db.hom.app N
+  set_option backward.isDefEq.respectTransparency false in
   have hfg : f = g := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -850,14 +848,15 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     intro m
     simp only [f, g, SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
-    change tN.val.app V (daN.val.app V m) = dbN.val.app V (v.val.app V (u.val.app V m))
+    change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
+      (db.hom.app N).val.app V (v.val.app V (u.val.app V m))
     have hda := ha N V.unop m
-    change daN.val.app V m = _ at hda
+    change (da.hom.app N).val.app V m = _ at hda
     rw [hda]
     have htr := direct_transport e.symm N V.unop
       (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
         (𝟙 P) p).hom.app V.unop).op m)
-    change tN.val.app V
+    change (t.hom.app N).val.app V
         (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
           (𝟙 P) p).hom.app V.unop).op m) = _ at htr
     rw [htr]
@@ -875,7 +874,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
         ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
         (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
           ((proEtaleBaseChange p).obj V.unop)).op m))
-    change dbN.val.app V _ = _ at hdb
+    change (db.hom.app N).val.app V _ = _ at hdb
     erw [hdb]
     let comp := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
       p (𝟙 T)).hom.app V.unop
@@ -897,7 +896,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
       N.val.map k.op m)
       (site_identity p (congrArg Sigma.fst e) V.unop)
   have h : da.hom.app N ≫ t.hom.app N = u ≫ v ≫ db.hom.app N := by
-    simpa only [f, g, daN, tN, dbN] using hfg
+    simpa only [f, g] using hfg
   change da.hom.app N ≫ t.hom.app N ≫ db.inv.app N = _
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
