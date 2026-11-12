@@ -153,6 +153,46 @@ private theorem section_limit_transport
   rw [hc', hc']
   exact hx k
 
+private theorem section_limit_of_cover
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    (N : Sheaf J Ab.{u + 1}) (Q : ℕ → Sheaf J Ab.{u + 1}) (q : ∀ n, N ⟶ Q n)
+    (hsep : ∀ (V : Cᵒᵖ) (x y : N.obj.obj V),
+      (∀ n, (q n).hom.app V x = (q n).hom.app V y) → x = y)
+    (U : Cᵒᵖ) {ι : Type*} (W : ι → C) (a : ∀ i, W i ⟶ U.unop)
+    (hcov : Sieve.ofArrows W a ∈ J U.unop) (b : ℕ → N.obj.obj U)
+    (x : ∀ i, N.obj.obj (Opposite.op (W i)))
+    (hx : ∀ i n, (q n).hom.app (Opposite.op (W i)) (x i) =
+      (q n).hom.app (Opposite.op (W i)) (N.obj.map (a i).op (b n))) :
+    ∃ z : N.obj.obj U, ∀ n, (q n).hom.app U z = (q n).hom.app U (b n) := by
+  have hmatch : Presieve.Arrows.Compatible (N.obj ⋙ forget Ab.{u + 1}) a x := by
+    intro i j V f g hfg
+    apply hsep (Opposite.op V)
+    intro n
+    change (q n).hom.app (Opposite.op V) (N.obj.map f.op (x i)) =
+      (q n).hom.app (Opposite.op V) (N.obj.map g.op (x j))
+    rw [NatTrans.naturality_apply (q n).hom f.op,
+      NatTrans.naturality_apply (q n).hom g.op, hx i n, hx j n,
+      NatTrans.naturality_apply (q n).hom (a i).op,
+      NatTrans.naturality_apply (q n).hom (a j).op]
+    simp only [← Functor.map_comp_apply, ← CategoryTheory.op_comp, hfg]
+  have hs : Presieve.IsSheaf J (N.obj ⋙ forget Ab.{u + 1}) :=
+    (isSheaf_iff_isSheaf_of_type _ _).mp
+      (Presheaf.isSheaf_comp_of_isSheaf J N.obj (forget Ab.{u + 1}) N.property)
+  obtain ⟨z, hz, _⟩ := (Presieve.isSheafFor_arrows_iff _ _).mp
+    ((Presieve.isSheafFor_iff_generate _).mpr (hs _ hcov)) x hmatch
+  change ∀ i, N.obj.map (a i).op z = x i at hz
+  refine ⟨z, fun n ↦ ?_⟩
+  have hQ : Presieve.IsSheaf J ((Q n).obj ⋙ forget Ab.{u + 1}) :=
+    (isSheaf_iff_isSheaf_of_type _ _).mp
+      (Presheaf.isSheaf_comp_of_isSheaf J (Q n).obj (forget Ab.{u + 1}) (Q n).property)
+  apply ((Presieve.isSheafFor_iff_generate _).mpr (hQ _ hcov)).isSeparatedFor.ext
+  rintro V f ⟨i⟩
+  change (Q n).obj.map (a i).op ((q n).hom.app U z) =
+    (Q n).obj.map (a i).op ((q n).hom.app U (b n))
+  rw [← NatTrans.naturality_apply (q n).hom (a i).op,
+    ← NatTrans.naturality_apply (q n).hom (a i).op, hz]
+  exact hx i n
+
 private theorem sections_separated
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))
@@ -366,39 +406,8 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_finitePresentation
     rw [NatTrans.naturality_apply q (a i).op, NatTrans.naturality_apply q (a i).op,
       hb n m hnm]
   choose x hx using hlocal
-  have hmatch : Presieve.Arrows.Compatible (N.X.obj ⋙ forget Ab.{u + 1}) a x := by
-    intro i j V f g hfg
-    apply sections_separated ell E Y N hN (Opposite.op V)
-    intro n
-    change (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app (Opposite.op V)
-        (N.X.obj.map f.op (x i)) =
-      (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app (Opposite.op V)
-        (N.X.obj.map g.op (x j))
-    let q := (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom
-    rw [NatTrans.naturality_apply q f.op, NatTrans.naturality_apply q g.op, hx i n,
-      hx j n, NatTrans.naturality_apply q (a i).op, NatTrans.naturality_apply q (a j).op]
-    simp only [← Functor.map_comp_apply, ← CategoryTheory.op_comp, hfg]
-  have hs : Presieve.IsSheaf (ProEt.topology Y) (N.X.obj ⋙ forget Ab.{u + 1}) :=
-    (isSheaf_iff_isSheaf_of_type _ _).mp
-      (Presheaf.isSheaf_comp_of_isSheaf (ProEt.topology Y) N.X.obj
-        (forget Ab.{u + 1}) N.X.property)
-  obtain ⟨z, hz, _⟩ := (Presieve.isSheafFor_arrows_iff _ _).mp
-    ((Presieve.isSheafFor_iff_generate _).mpr (hs _ hcov)) x hmatch
-  change ∀ i, N.X.obj.map (a i).op z = x i at hz
-  refine ⟨z, fun n ↦ ?_⟩
-  let Q := cokernel (ell ^ (n + 1) • 𝟙 N)
-  have hQ : Presieve.IsSheaf (ProEt.topology Y) (Q.X.obj ⋙ forget Ab.{u + 1}) :=
-    (isSheaf_iff_isSheaf_of_type _ _).mp
-      (Presheaf.isSheaf_comp_of_isSheaf (ProEt.topology Y) Q.X.obj
-        (forget Ab.{u + 1}) Q.X.property)
-  apply ((Presieve.isSheafFor_iff_generate _).mpr (hQ _ hcov)).isSeparatedFor.ext
-  rintro V f ⟨i⟩
-  change Q.X.obj.map (a i).op
-      ((cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app U z) =
-    Q.X.obj.map (a i).op
-      ((cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom.app U (b n))
-  let q := (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom.hom
-  rw [← NatTrans.naturality_apply q (a i).op, ← NatTrans.naturality_apply q (a i).op, hz]
-  exact hx i n
+  exact section_limit_of_cover N.X (fun n ↦ (cokernel (ell ^ (n + 1) • 𝟙 N)).X)
+    (fun n ↦ (cokernel.π (ell ^ (n + 1) • 𝟙 N)).hom)
+    (sections_separated ell E Y N hN) U W a hcov b x hx
 
 end AlgebraicGeometry.ProEtale.CondensedRing
