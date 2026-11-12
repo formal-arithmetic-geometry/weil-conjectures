@@ -245,7 +245,6 @@ end Transport
 
 section Constant
 
-set_option maxHeartbeats 800000 in
 -- the iterated Weil structures unfold through several module-object isomorphisms
 variable (k₀ l) in
 /-- The iterated Weil structure of the constant Weil sheaf is the identification
