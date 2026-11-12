@@ -127,8 +127,6 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
   exact h
 
 
-set_option maxHeartbeats 1600000 in
--- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 /-- **Weil cohomology from an injective resolution.** Let `I` be an injective resolution of a
 Weil sheaf `F` by pro-étale Weil sheaves. Then `Hʳ(Y ⊗ k̄, F)` is the `r`-th cohomology of the
 complex `Γ(Ȳ, I)`, and its geometric Frobenius is induced by the Frobenius
