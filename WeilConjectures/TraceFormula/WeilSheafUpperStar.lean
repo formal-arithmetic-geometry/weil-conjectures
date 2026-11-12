@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.PullbackFamily
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.HomologyFunctorCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -54,10 +55,13 @@ lemma pullbackAssoc_upperStar (ℓ : ℕ) [Fact ℓ.Prime] :
 
 section HomologyFunctor
 
+-- Reuse the tensor and colimit instances at each occurrence of a derived pullback.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 1000000 in
--- the instances of the general lemmas are found for each of the categories of module objects
 /-- The commutation `H^n ⋙ f^* ≅ Lf^* ⋙ H^n` of the exact pullbacks of module objects with
 homology is compatible with the composition isomorphisms, at an object. -/
 lemma leftDerivedFunctorHomologyFunctorIso_upperStarComp {X Y Z : Scheme.{u}} (a : X ⟶ Y)
