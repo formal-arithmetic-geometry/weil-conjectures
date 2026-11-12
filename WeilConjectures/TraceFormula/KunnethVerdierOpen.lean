@@ -393,9 +393,15 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
   simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing]
   refine map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
-    _ _ ((prodMapUpperStarSndIso ℓ j).app N) _ _ ?_
-  simpa only [kunnethVerdierSourceRestrictionIso_hom, verdierDualUpperStarIso_hom] using
-    (μ_map_swapEvPairing
+    (swapEvPairing (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.snd : X ⨯ Y ⟶ Y)) (exceptionalKunnethMap ℓ (Y := Y) M) N)
+    (swapEvPairing (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (prod.snd : X ⨯ U ⟶ U)) (exceptionalKunnethMap ℓ (Y := U) M)
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N))
+    ((prodMapUpperStarSndIso ℓ j).app N) (kunnethVerdierSourceRestrictionIso ℓ j M N).hom
+    (exceptionalKunnethTargetRestrictionIso ℓ j M).hom ?_
+  simp only [kunnethVerdierSourceRestrictionIso_hom, verdierDualUpperStarIso_hom]
+  exact μ_map_swapEvPairing
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y))
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)
@@ -404,7 +410,7 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
       (prodMapUpperStarSndIso ℓ j).hom (μ_prodMapUpperStarSndIso_hom_app ℓ j)
       ((prodMapUpperStarFstIso ℓ j).hom.app M) (dualizingComplexUpperStarIso ℓ j).hom
       (exceptionalKunnethTargetRestrictionIso ℓ j M).hom (exceptionalKunnethMap ℓ (Y := Y) M)
-      (exceptionalKunnethMap ℓ (Y := U) M) hα' N)
+      (exceptionalKunnethMap ℓ (Y := U) M) hα' N
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
