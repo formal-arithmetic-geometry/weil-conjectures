@@ -116,17 +116,15 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
         (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map α := by
   rw [Adjunction.homEquiv_apply]
   erw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-  change (HomotopyCategory.quotient
-      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map _ ≫
-      (HomotopyCategory.quotient
-        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map _ = _
+  let q := HomotopyCategory.quotient
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)
+  let ac := (Classical.choose
+    (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex (.up ℤ)
+  change q.map (ac.unit.app P) ≫ q.map
+    (((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
+      (.up ℤ)).map ((ac.homEquiv P I).symm α)) = q.map α
   rw [← Functor.map_comp]
-  exact congrArg
-    (HomotopyCategory.quotient
-      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map
-    (((Classical.choose
-      (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
-        (.up ℤ)).homEquiv P I).apply_symm_apply α
+  exact congrArg q.map (ac.homEquiv P I).apply_symm_apply α
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
