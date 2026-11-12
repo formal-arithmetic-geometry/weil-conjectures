@@ -244,7 +244,14 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     ((R[X]).obj ((F[g]).obj P)) ((R[X]).obj ((F[g]).obj Q)) p q k hpq (op (n, U)))
     rP rQ
   trace "PH199: scalar normalization prepared"
-  have hL := hL1.trans (hL2.trans (hL3.trans (hL4.trans hL5)))
+  have hL12 := hL1.trans hL2
+  trace "PH199: left steps 1-2 joined"
+  have hL123 := hL12.trans hL3
+  trace "PH199: left steps 1-3 joined"
+  have hL1234 := hL123.trans hL4
+  trace "PH199: left steps 1-4 joined"
+  have hL := hL1234.trans hL5
+  trace "PH199: left steps 1-5 joined"
   have rT := generators_unitSection l E g ((T[Y]).obj (P, Q)) βT hβT n k U
     (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y)
