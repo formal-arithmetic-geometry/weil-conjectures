@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLocalChernPullbackData
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientConePush
-import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryEndpointMaps
+import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryForgetComparison
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLinePullbackLowerTensor
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
@@ -68,7 +68,7 @@ private def moduleIsoSectionEquiv
   right_inv x := congrArg (fun q : N ⟶ N ↦ q.val.app U x) e.inv_hom_id
 
 set_option profiler true in
--- Compare the finite scalar-extension unit with the normalized root evaluation.
+-- Compare the scalar-extension root section with its normalized finite evaluation.
 private theorem normalizedRootSection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
@@ -180,12 +180,9 @@ private theorem horizontal_varying_root_square
   have hx : HEq y x :=
     (restrictionUnderlying_hom_section l X p.restrictionX n N U y).symm
   have hcoord := normalizedRootSection l X p.chernX p.restrictionX p.coefficientsX n U z
-  have hinput : x =
-      (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U
-        (Scheme.tateFiniteTensor X l (FiniteRing l (ULift.{u} (Padic l)) n) n
-          (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1 z) := by
-    let e := moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n) U
-    exact (e.symm_apply_apply x).symm.trans (congrArg e.symm hcoord)
+  have hinput :=
+    (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n) U).eq_symm_apply.mpr
+      hcoord
   let v := (((d.varyingPush.hom.app N').app (op n)).hom.app U)
     (((p.restrictionX.F.map α).app (op n)).hom.app U y)
   have hv : HEq v (adjointSection l (ULift.{u} (Padic l)) d.geometry
