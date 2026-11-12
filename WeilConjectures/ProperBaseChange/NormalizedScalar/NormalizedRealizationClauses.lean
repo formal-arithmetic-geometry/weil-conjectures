@@ -62,7 +62,29 @@ theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
   intro M
   exact Mod.extendRestrictAdjunction_unit_app_hom (inclusion l E T) M
 
-set_option maxHeartbeats 1000000 in
+theorem scalarData_extensionAdditive : (ordinaryExtension l E T).Additive :=
+  (scalar_adjunction_data l E T).1
+
+theorem scalarData_restrictionAdditive : (ordinaryRestriction l E T).Additive :=
+  (scalar_adjunction_data l E T).2.1
+
+theorem scalarData_extensionLimits : PreservesFiniteLimits (ordinaryExtension l E T) :=
+  (scalar_adjunction_data l E T).2.2.1
+
+theorem scalarData_extensionColimits : PreservesFiniteColimits (ordinaryExtension l E T) :=
+  (scalar_adjunction_data l E T).2.2.2.1
+
+theorem scalarData_restrictionLimits : PreservesFiniteLimits (ordinaryRestriction l E T) :=
+  (scalar_adjunction_data l E T).2.2.2.2.1
+
+theorem scalarData_restrictionColimits :
+    PreservesFiniteColimits (ordinaryRestriction l E T) :=
+  (scalar_adjunction_data l E T).2.2.2.2.2.1
+
+attribute [local instance] scalarData_extensionAdditive scalarData_restrictionAdditive
+  scalarData_extensionLimits scalarData_extensionColimits
+  scalarData_restrictionLimits scalarData_restrictionColimits
+
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
 termwise on every complex, and their adjunction unit is the localized termwise unit.
@@ -91,7 +113,6 @@ def DerivedScalarData : Prop :=
         ((NatTrans.mapHomologicalComplex
           (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
-set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- All-complex derived computation and the normalized derived unit.
 Source: exact derived functor comparisons and the exact derived adjunction unit.
