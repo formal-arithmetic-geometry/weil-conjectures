@@ -194,6 +194,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_isNoethe
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀).symm) ?_
   transport_exact h₁
 
+set_option profiler true in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients.** Under the hypotheses of
