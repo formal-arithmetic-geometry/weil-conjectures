@@ -202,10 +202,16 @@ theorem finiteTorIntegralShift_compatibility
   unfold finiteTorIntegralShift
   exact hc
 
-private def finiteTorIntegralShift_compatibility_cached
+private theorem finiteTorIntegralShift_compatibility_cached
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :=
+    (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
+    letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
+    letI := constructionInclusionShift l Ω T (.integral E)
+    letI := finiteTorIntegralShift l Ω E T
+    NatTrans.CommShift (show PurCompactSupport.finiteTorIntegralInclusion l E.carrier T ⋙
+      (sfIntegralConstructible l E.carrier T).ι ≅
+        RingStage.inclusion.{u, v} l Ω T (.integral E) from Iso.refl _).hom ℤ :=
   finiteTorIntegralShift_compatibility l Ω E T
 
 /-- The shift on an integral scalar functor induced by its specified ordinary realization.
