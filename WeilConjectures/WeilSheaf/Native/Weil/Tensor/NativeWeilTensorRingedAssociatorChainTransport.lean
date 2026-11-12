@@ -173,13 +173,6 @@ theorem nativeChainForgetComponent_transport
           ((nativeChainForgetC D P Q).hom ▷ U.obj N) ≫
             (α_ (U.obj P) (U.obj Q) (U.obj N)).hom := by
     have hτ := nativeRingedChainBridgeSquare D
-    have hb (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
-        F.map (D.A.chain Q P).hom ≫ r.tensor.hom.app (E.obj P, E.obj Q) ≫
-            (hτ.hom.app P ⊗ₘ hτ.hom.app Q) =
-          hτ.hom.app (nativeTensorComplex T P Q) ≫
-            G.map (nativeChainForgetC D P Q).hom ≫
-              o.tensor.hom.app (U.obj P, U.obj Q) := by
-      simpa only using (native_weil_tensor_ringed_binary_chain_square D d o r P Q)
     have hμ := r.associativity
     have hν := o.associativity
     have ha' := (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom
@@ -194,7 +187,9 @@ theorem nativeChainForgetComponent_transport
       E U F G r.tensor o.tensor
       hτ (nativeTensorComplex T)
       (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
-      hb hμ hν P Q N ha' ha
+      (fun P Q ↦ by
+        exact native_weil_tensor_ringed_binary_chain_square D d o r P Q)
+      hμ hν P Q N ha' ha
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
       (HomologicalComplex.ιMapBifunctor N (Q.mapBifunctor P T) T
