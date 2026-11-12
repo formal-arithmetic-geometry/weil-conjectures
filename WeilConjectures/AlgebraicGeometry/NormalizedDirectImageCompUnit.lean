@@ -48,6 +48,16 @@ local instance (Z : Scheme.{u}) : IsGrothendieckAbelian.{u} Z.Modules :=
   SheafOfModules.isGrothendieckAbelian _
 local instance (Z : Scheme.{u}) : Abelian.HasKInjectiveResolutions Z.Modules :=
   Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
+
+private theorem schemeCompUnit_app {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
+    (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
+      (Scheme.Modules.pushforward t)).app K =
+    (Scheme.Modules.pushforward t).rightDerivedFunctorUnit.app
+        (((Scheme.Modules.pushforward s).mapHomotopyCategory (.up ℤ)).obj K) ≫
+      (Scheme.Modules.pushforward t).rightDerivedFunctor.map
+        ((Scheme.Modules.pushforward s).rightDerivedFunctorUnit.app K) := by
+  exact compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K
 -- The chosen composition comparison unfolds the two module-category presentations.
 /-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
 Source: Stacks Project, Cohomology, Tag 0D5T.
@@ -59,20 +69,7 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
-  obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  dsimp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
-  have hi : (Functor.mapHomotopyCategoryCompIso
-      (Iso.refl (Scheme.Modules.pushforward s ⋙ Scheme.Modules.pushforward t)) (.up ℤ)).inv.app
-      ((HomotopyCategory.quotient _ _).obj L) = 𝟙 _ := by
-    have h := Iso.inv_hom_id_app
-      (Functor.mapHomotopyCategoryCompIso
-        (Iso.refl (Scheme.Modules.pushforward s ⋙ Scheme.Modules.pushforward t)) (.up ℤ))
-      ((HomotopyCategory.quotient _ _).obj L)
-    erw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at h
-    exact h
-  erw [hi, CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [schemeCompUnit_app]
   exact Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       A.toRingedSpace B.toRingedSpace C.toRingedSpace
@@ -82,7 +79,7 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
       (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
-      s.toLRSHom.toShHom t.toLRSHom.toShHom) _
+      s.toLRSHom.toShHom t.toLRSHom.toShHom) K
 
 
 
