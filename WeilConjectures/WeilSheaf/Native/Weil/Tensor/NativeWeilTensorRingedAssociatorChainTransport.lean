@@ -172,6 +172,11 @@ theorem nativeChainForgetComponent_transport
         (nativeChainForgetC D (nativeTensorComplex T P Q) N).hom ≫
           ((nativeChainForgetC D P Q).hom ▷ U.obj N) ≫
             (α_ (U.obj P) (U.obj Q) (U.obj N)).hom := by
+    have hτ := nativeRingedChainBridgeSquare D
+    have hb := native_weil_tensor_ringed_binary_chain_square D d o r
+    have hμ := r.associativity
+    have hν := o.associativity
+    have ha' := (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom
     exact tensor_square_pasting
       (C := CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
       (B := CochainComplex
@@ -181,11 +186,9 @@ theorem nativeChainForgetComponent_transport
       (O := CochainComplex
         (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
       E U F G r.tensor o.tensor
-      (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
+      hτ (nativeTensorComplex T)
       (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
-      (native_weil_tensor_ringed_binary_chain_square D d o r)
-      r.associativity o.associativity P Q N
-      (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ha
+      hb hμ hν P Q N ha' ha
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
       (HomologicalComplex.ιMapBifunctor N (Q.mapBifunctor P T) T
