@@ -210,6 +210,7 @@ private theorem restricted_transition_section (W : Scheme.{t})
     (integralComparisonRestrictedSectionType l E W M n U) hf' hx).trans hy.symm)
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem reduction_step
     (S : CoefficientDerivedSystemReduction l E W)
@@ -255,6 +256,7 @@ private theorem reduction_step
     (limit.w I (homOfLE (Nat.le_succ n)).op)
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem reduction_section_step
     (S : CoefficientDerivedSystemReduction l E W)
@@ -484,6 +486,7 @@ private theorem cochainIso_inv_section
     (congrArg (fun z : P ⟶ P ↦ (z.f k).val.app U x) e.hom_inv_id)
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem tensorLevel_transition
     (S : CoefficientDerivedSystemReduction l E W)
