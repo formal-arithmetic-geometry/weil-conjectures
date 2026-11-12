@@ -394,6 +394,15 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
   dsimp only [a, b, eP, eQ, e, Iso.app, podOrdinaryReindex, podGoodReindex,
     ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj] at cancelTower
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let ha ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `hs).type
+    let hc ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `cancelTower).type
+    let .forallE _ he _ _ := hc | throwError "expected normalization hypothesis"
+    for i in [0, 2, 1, 3] do
+      let v := ha.getAppArgs[i]!
+      let w := he.getAppArgs[i]!
+      Lean.logInfo m!"HEq {i}, actual: {v}; expected: {w}"
+      Lean.logInfo m!"HEq {i} equal: {← Lean.Meta.isDefEq v w}"
   have cancelHs := cancelTower hs
   trace "normalization supplied"
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
