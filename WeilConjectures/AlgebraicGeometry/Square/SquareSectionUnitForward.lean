@@ -96,6 +96,7 @@ private theorem unitQ_eq {C D : Type*} [Category C] [Category D] [Abelian C] [Ab
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+-- Normalize the composite unit before specializing its categories to scheme modules.
 private theorem squareForward_compUnitQ_app
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -325,6 +326,8 @@ private theorem squareForward_map_pasting {C D : Type*} [Category C] [Category D
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+-- Compare the units on an arbitrary K-injective representative. This keeps the
+-- functorial resolution construction out of the naturality and cancellation proofs.
 private theorem squareForward_cochain_comparison
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -386,6 +389,7 @@ private theorem squareForward_cochain_comparison
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+-- Explicit components identify the two cochain carriers one complex at a time.
 private def squareForward_cochainComparison {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ) :
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
       RingedSpace.localAbelianSections S.toRingedSpace).mapHomologicalComplex (.up ℤ) ⋙
@@ -397,8 +401,10 @@ private def squareForward_cochainComparison {X S : Scheme.{u}} (f : X ⟶ S) (q 
   let F := RingedSpace.localAbelianSections X.toRingedSpace
   let W := (Functor.whiskeringLeft S.Opensᵒᵖ X.Opensᵒᵖ AddCommGrpCat.{u}).obj
     (TopologicalSpace.Opens.map f.base).op
-  refine { app := fun B ↦ (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app
-    ((F.mapHomologicalComplex (.up ℤ)).obj B), naturality := ?_ }
+  refine
+    { app := fun B ↦ (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj B)
+      naturality := ?_ }
   intro B I b
   convert (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.naturality
     ((F.mapHomologicalComplex (.up ℤ)).map b) using 1 <;> rfl
