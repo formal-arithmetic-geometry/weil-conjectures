@@ -245,9 +245,7 @@ section Devissage
 variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
   {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- the dévissage elaborates many derived functors of module objects
 omit [IsOpenImmersion j'] in
 /-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be a quasi-compact open immersion with
 closed complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*`
@@ -281,6 +279,11 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
         (condensedRingObj Λ W)), boundedConstructible (condensedRingObj Λ W) X →
       IsIso (ihomUpperStarComparison Λ gZ K ((R((i)_*⟦Λ⟧)).obj X))) :
     IsIso (ihomUpperStarComparison Λ gZ K M) := by
+  -- Reuse the derived monoidal structures throughout the internal-hom comparisons.
+  let (X : Scheme.{u}) : MonoidalCategory (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := inferInstance
+  let (X : Scheme.{u}) : MonoidalClosed (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := inferInstance
   -- the triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`
   obtain ⟨C, v', w, hT⟩ := distinguished_cocone_triangle
     ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M)
