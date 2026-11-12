@@ -57,7 +57,10 @@ lemma CategoryTheory.Functor.whiskerLeft_comp_whiskerRight_comp_aux {A B A' B' :
     Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.assoc, Functor.comp_obj]
-  rw [reassoc_of% hn, hθ', Category.comp_id, hE']
+  rw [reassoc_of% hn]
+  rw [hθ']
+  rw [Category.comp_id]
+  rw [hE']
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
