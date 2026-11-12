@@ -66,8 +66,15 @@ noncomputable def koszulScalarExtCoefficientMap
         (𝟙 _, (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map μ)))
 
-set_option profiler true in
-set_option maxHeartbeats 500000 in
+private theorem koszul_bijective_of_square
+    {A B C D : Type*} (f : A → B) (g : C → D) (eF : A ≃ C) (eG : B ≃ D)
+    (hcomm : ∀ x, eG (f x) = g (eF x)) (hbase : Function.Bijective g) :
+    Function.Bijective f := by
+  have h : eG ∘ f = g ∘ eF := funext hcomm
+  apply (eG.bijective.of_comp_iff' f).mp
+  rw [h]
+  exact hbase.comp eF.bijective
+
 -- Matching the derived stalk model unfolds both coefficient objects and tensor pullback.
 /-- The canonical coefficient comparison is bijective on a stalk in a length-n
 Koszul-regular affine chart. This is solely a local assertion about a specified map.
@@ -122,16 +129,6 @@ theorem koszulRegularImmersion_ext_coefficient_stalk_iso
   let e := LinearEquiv.ofBijective q.hom hbij
   have hbase : Function.Bijective (q.hom.baseChange R) := by
     exact (LinearEquiv.baseChange A R _ _ e).bijective
-  constructor
-  · intro x y hxy
-    apply eF.injective
-    apply hbase.1
-    exact (hcomm x).symm.trans ((congrArg eG hxy).trans (hcomm y))
-  · intro y
-    obtain ⟨t, ht⟩ := hbase.2 (eG y)
-    refine ⟨eF.symm t, eG.injective ?_⟩
-    have hc := hcomm (eF.symm t)
-    simp only [eF.apply_symm_apply] at hc
-    exact hc.trans ht
+  exact koszul_bijective_of_square _ _ eF.toEquiv eG.toEquiv hcomm hbase
 
 end AlgebraicGeometry

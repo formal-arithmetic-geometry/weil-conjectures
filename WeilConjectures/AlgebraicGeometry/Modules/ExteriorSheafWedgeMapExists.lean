@@ -52,8 +52,71 @@ private theorem wedgeMul_wedge {R M : Type v} [CommRing R] [AddCommGroup M]
   apply Subtype.ext
   exact ExteriorAlgebra.ιMulti_mul_ιMulti a c
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
+private theorem wedge_bilinear_naturality {X : Scheme.{v}} {A B : X.Modules}
+    (f : A ⟶ B) (r s : ℕ)
+    (b : ∀ U : X.Opensᵒᵖ,
+      (A.val.exteriorPower (R := X.presheaf) r).obj U →ₗ[X.presheaf.obj U]
+        (B.val.exteriorPower (R := X.presheaf) s).obj U →ₗ[X.presheaf.obj U]
+          (exteriorPower B (r + s)).val.obj U)
+    (hb : ∀ (U : X.Opensᵒᵖ) (a : Fin r → A.val.obj U) (c : Fin s → B.val.obj U),
+      b U (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a)
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c) =
+      wedge (M := B) (r := r + s) (U := U.unop)
+        (Fin.append (fun j ↦ f.val.app U (a j)) c)) :
+    ∀ {U V : X.Opensᵒᵖ} (g : U ⟶ V) (x y),
+      b V ((A.val.exteriorPower (R := X.presheaf) r).map g x)
+        ((B.val.exteriorPower (R := X.presheaf) s).map g y) =
+      (exteriorPower B (r + s)).val.map g (b U x y) := by
+  intro U V g x y
+  have hpure (a : Fin r → A.val.obj U) (c : Fin s → B.val.obj U) :
+      b V ((A.val.exteriorPower (R := X.presheaf) r).map g
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a))
+        ((B.val.exteriorPower (R := X.presheaf) s).map g
+          (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c)) =
+      (exteriorPower B (r + s)).val.map g
+        (b U (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a)
+          (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c)) := by
+    rw [restriction_wedge A r g a, restriction_wedge B s g c]
+    erw [hb V (fun i ↦ A.val.map g (a i)) (fun i ↦ B.val.map g (c i)), hb U a c]
+    let d := Fin.append (fun j ↦ f.val.app U (a j)) c
+    change wedge _ = (exteriorPower B (r + s)).presheaf.map g (wedge d)
+    rw [wedge_map g.unop d]
+    apply congrArg (wedge (M := B) (r := r + s) (U := V.unop))
+    funext i
+    refine Fin.addCases (fun j ↦ ?_) (fun j ↦ ?_) i
+    · simp only [d, Fin.append_left]
+      exact PresheafOfModules.naturality_apply f.val g (a j)
+    · simp only [d, Fin.append_right]
+  have hfirst (a : Fin r → A.val.obj U) : ∀ y,
+      b V ((A.val.exteriorPower (R := X.presheaf) r).map g
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a))
+        ((B.val.exteriorPower (R := X.presheaf) s).map g y) =
+      (exteriorPower B (r + s)).val.map g
+        (b U (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a) y) := by
+    intro y
+    have hy : y ∈ Submodule.span (X.presheaf.obj U)
+        (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s)) := by
+      rw [_root_.exteriorPower.ιMulti_span]; trivial
+    induction hy using Submodule.span_induction with
+    | mem y hy => obtain ⟨c, rfl⟩ := hy; exact hpure a c
+    | zero => simp only [map_zero]
+    | add y z _ _ hy hz => simp only [map_add, hy, hz]
+    | smul k y _ hy =>
+      rw [PresheafOfModules.map_smul, (b V _).map_smul,
+        (b U _).map_smul, PresheafOfModules.map_smul, hy]
+      rfl
+  have hx : x ∈ Submodule.span (X.presheaf.obj U)
+      (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r)) := by
+    rw [_root_.exteriorPower.ιMulti_span]; trivial
+  induction hx using Submodule.span_induction with
+  | mem x hx => obtain ⟨a, rfl⟩ := hx; exact hfirst a y
+  | zero => simp only [map_zero, LinearMap.zero_apply]
+  | add x z _ _ hx hz => simp only [map_add, LinearMap.add_apply, hx, hz]
+  | smul k x _ hx =>
+    rw [PresheafOfModules.map_smul, (b V).map_smul, LinearMap.smul_apply,
+      (b U).map_smul, LinearMap.smul_apply, PresheafOfModules.map_smul, hx]
+    rfl
+
 -- Comparing the scheme and ring-sheaf scalar structures requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Wedge the image of the first tuple with the second tuple, without choosing quotient lifts.
@@ -107,68 +170,7 @@ theorem exteriorSheaf_wedgeMap_exists {X : Scheme.{v}} {A B : X.Modules}
         (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c)) = _
     rw [_root_.exteriorPower.map_apply_ιMulti, wedgeMul_wedge]
     rfl
-  have hbmap : ∀ {U V : X.Opensᵒᵖ} (g : U ⟶ V) (x y),
-      b V ((A.val.exteriorPower (R := X.presheaf) r).map g x)
-        ((B.val.exteriorPower (R := X.presheaf) s).map g y) =
-      (exteriorPower B (r + s)).val.map g (b U x y) := by
-    intro U V g x y
-    have hpure (a : Fin r → A.val.obj U) (c : Fin s → B.val.obj U) :
-        b V ((A.val.exteriorPower (R := X.presheaf) r).map g
-          (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a))
-          ((B.val.exteriorPower (R := X.presheaf) s).map g
-            (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c)) =
-        (exteriorPower B (r + s)).val.map g
-          (b U (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a)
-            (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c)) := by
-      rw [restriction_wedge A r g a, restriction_wedge B s g c]
-      erw [hb V (fun i ↦ A.val.map g (a i)) (fun i ↦ B.val.map g (c i)), hb U a c]
-      let d := Fin.append (fun j ↦ f.val.app U (a j)) c
-      have hn := PresheafOfModules.naturality_apply
-        (η.app ((B.val.exteriorPower (R := X.presheaf) (r + s)))) g
-        (_root_.exteriorPower.ιMulti (X.presheaf.obj U) (r + s) d)
-      apply Eq.trans ?_ hn
-      apply congrArg ((η.app ((B.val.exteriorPower (R := X.presheaf) (r + s)))).app V)
-      change _root_.exteriorPower.ιMulti (X.presheaf.obj V) (r + s)
-          (Fin.append (fun j ↦ f.val.app V (A.val.map g (a j)))
-            (fun j ↦ B.val.map g (c j))) =
-        ((B.val.exteriorPower (R := X.presheaf) (r + s)).map g)
-          (_root_.exteriorPower.ιMulti (X.presheaf.obj U) (r + s) d)
-      rw [restriction_wedge B (r + s) g d]
-      apply congrArg (_root_.exteriorPower.ιMulti (X.presheaf.obj V) (r + s))
-      funext i
-      refine Fin.addCases (fun j ↦ ?_) (fun j ↦ ?_) i
-      · simp only [d, Fin.append_left]
-        exact PresheafOfModules.naturality_apply f.val g (a j)
-      · simp only [d, Fin.append_right]
-    have hfirst (a : Fin r → A.val.obj U) : ∀ y,
-        b V ((A.val.exteriorPower (R := X.presheaf) r).map g
-          (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a))
-          ((B.val.exteriorPower (R := X.presheaf) s).map g y) =
-        (exteriorPower B (r + s)).val.map g
-          (b U (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r a) y) := by
-      intro y
-      have hy : y ∈ Submodule.span (X.presheaf.obj U)
-          (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s)) := by
-        rw [_root_.exteriorPower.ιMulti_span]; trivial
-      induction hy using Submodule.span_induction with
-      | mem y hy => obtain ⟨c, rfl⟩ := hy; exact hpure a c
-      | zero => simp only [map_zero]
-      | add y z _ _ hy hz => simp only [map_add, hy, hz]
-      | smul k y _ hy =>
-        rw [PresheafOfModules.map_smul, (b V _).map_smul,
-          (b U _).map_smul, PresheafOfModules.map_smul, hy]
-        rfl
-    have hx : x ∈ Submodule.span (X.presheaf.obj U)
-        (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj U) r)) := by
-      rw [_root_.exteriorPower.ιMulti_span]; trivial
-    induction hx using Submodule.span_induction with
-    | mem x hx => obtain ⟨a, rfl⟩ := hx; exact hfirst a y
-    | zero => simp only [map_zero, LinearMap.zero_apply]
-    | add x z _ _ hx hz => simp only [map_add, LinearMap.add_apply, hx, hz]
-    | smul k x _ hx =>
-      rw [PresheafOfModules.map_smul, (b V).map_smul, LinearMap.smul_apply,
-        (b U).map_smul, LinearMap.smul_apply, PresheafOfModules.map_smul, hx]
-      rfl
+  have hbmap := wedge_bilinear_naturality f r s b hb
   obtain ⟨β, ⟨hβ, hβunit⟩, _⟩ :=
     PresheafOfModules.existsUnique_bilinear_sheafification_extension
       X.presheaf X.sheaf (𝟙 X.ringCatSheaf.obj)
