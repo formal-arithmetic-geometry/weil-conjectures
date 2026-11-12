@@ -62,24 +62,6 @@ private theorem transport_square_apply
   rw [hφ]
   exact (congrArg ei (map_square_apply H u a.hom b.hom t h (eK z))).trans (hg _)
 
-private theorem transport_square_family
-    {C D : Type*} [Category* C] [Category* D] {R : Type*} [Ring R]
-    (F : C ⥤ D) (H : D ⥤ ModuleCat R)
-    {I : Type*} {A : C} {B : I → C} {A' : D} {B' : I → D}
-    (u : ∀ i, A ⟶ B i) (a : F.obj A ≅ A') (b : ∀ i, F.obj (B i) ≅ B' i)
-    (t : ∀ i, A' ⟶ B' i) (h : ∀ i, F.map (u i) ≫ (b i).hom = a.hom ≫ t i)
-    {P : Type*} {Q : I → Type*} [Add P] [∀ i, Add (Q i)]
-    (e : H.obj A' ≃+ P) (ei : ∀ i, H.obj (B' i) ≃+ Q i) (g : ∀ i, P → Q i)
-    (hg : ∀ i z, ei i (H.map (t i) z) = g i (e z)) :
-    ∃ (d : H.obj (F.obj A) ≃+ P) (di : ∀ i, H.obj (F.obj (B i)) ≃+ Q i),
-      ∀ i z, di i (H.map (F.map (u i)) z) = g i (d z) := by
-  refine ⟨(H.mapIso a).toLinearEquiv.toAddEquiv.trans e,
-    fun i ↦ (H.mapIso (b i)).toLinearEquiv.toAddEquiv.trans (ei i), ?_⟩
-  intro i
-  exact transport_square_apply H (F.map (u i)) a (b i) (t i) (h i)
-    (AddEquiv.refl _) (AddEquiv.refl _) (H.map (F.map (u i))) (fun _ ↦ rfl)
-    e (ei i) (g i) (hg i)
-
 private theorem residue_fibre_isomorphisms
     {X S W : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
@@ -109,19 +91,23 @@ private theorem residue_fibre_isomorphisms
   exact ⟨r, hr, e, ei, hef, hes, heif, heis⟩
 
 private theorem transport_square_family_of_exists
-    {C D : Type*} [Category* C] [Category* D] {R : Type*} [Ring R]
-    (F : C ⥤ D) (H : D ⥤ ModuleCat R)
-    {I : Type*} {A : C} {B : I → C} {A' : D} {B' : I → D}
+    {D : Type*} [Category* D] {R : Type*} [Ring R] (H : D ⥤ ModuleCat R)
+    {I : Type*} {A A' : D} {B B' : I → D}
     (u : ∀ i, A ⟶ B i) {J : Sort*} (t : J → ∀ i, A' ⟶ B' i)
-    (h : ∃ (a : F.obj A ≅ A') (b : ∀ i, F.obj (B i) ≅ B' i),
-      ∃ j : J, ∀ i, F.map (u i) ≫ (b i).hom = a.hom ≫ t j i)
+    (h : ∃ (a : A ≅ A') (b : ∀ i, B i ≅ B' i),
+      ∃ j : J, ∀ i, u i ≫ (b i).hom = a.hom ≫ t j i)
     {P : Type*} {Q : I → Type*} [Add P] [∀ i, Add (Q i)]
     (e : H.obj A' ≃+ P) (ei : J → ∀ i, H.obj (B' i) ≃+ Q i) (g : ∀ i, P → Q i)
     (hg : ∀ j i z, ei j i (H.map (t j i) z) = g i (e z)) :
-    ∃ (d : H.obj (F.obj A) ≃+ P) (di : ∀ i, H.obj (F.obj (B i)) ≃+ Q i),
-      ∀ i z, di i (H.map (F.map (u i)) z) = g i (d z) := by
+    ∃ (d : H.obj A ≃+ P) (di : ∀ i, H.obj (B i) ≃+ Q i),
+      ∀ i z, di i (H.map (u i) z) = g i (d z) := by
   obtain ⟨a, b, j, h⟩ := h
-  exact transport_square_family F H u a b (t j) h e (ei j) g (hg j)
+  refine ⟨(H.mapIso a).toLinearEquiv.toAddEquiv.trans e,
+    fun i ↦ (H.mapIso (b i)).toLinearEquiv.toAddEquiv.trans (ei j i), ?_⟩
+  intro i
+  exact transport_square_apply H (u i) a (b i) (t j i) (h i)
+    (AddEquiv.refl _) (AddEquiv.refl _) (H.map (u i)) (fun _ ↦ rfl)
+    e (ei j i) (g i) (hg j i)
 
 set_option profiler true in
 
@@ -172,14 +158,14 @@ theorem picard_derived_fibre_residue_geometric_compatibility
   obtain ⟨r, hr, eF, eFi, heFfst, heFsnd, heFifst, heFisnd⟩ :=
     residue_fibre_isomorphisms f Xi fi k w s hw
   let q := pullback.snd f (S.fromSpecResidueField s) ≫ r.inv
-  let qi := fun i ↦ pullback.snd (fi i) (S.fromSpecResidueField s) ≫ r.inv
   let j := fun i ↦ ((Over.pullback (S.fromSpecResidueField s)).map
     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{v} (moduleRings (Spec (W.residueField w)).toRingedSpace)) 1 ⋙
     SheafOfModules.evaluation (moduleRings (Spec (W.residueField w)).toRingedSpace) (.op ⊤)
-  exact transport_square_family_of_exists (derivedPullback (W.fromSpecResidueField w)) H
-    (fun i ↦ picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) _
+  exact transport_square_family_of_exists H
+    (fun i ↦ (derivedPullback (W.fromSpecResidueField w)).map
+      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)) _
     (picard_derived_residue_normalization f Xi fi ui hui L W k
       (W.fromSpecResidueField w) (S.fromSpecResidueField s) r hr
       eF heFfst heFsnd eFi heFifst heFisnd τ)
