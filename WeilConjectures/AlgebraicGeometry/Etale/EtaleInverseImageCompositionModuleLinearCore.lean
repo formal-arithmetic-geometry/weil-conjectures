@@ -81,13 +81,6 @@ private theorem erase_map_id
     (h : f ≫ 𝟙 (r.obj Y) ≫ r.map (𝟙 Y) = g) : f = g := by
   simpa only [r.map_id, Category.comp_id] using h
 
-/-- Insert the identity comparisons of a strictly commuting forgetful square. -/
-private theorem insert_map_id
-    {A B : Type*} [Category A] [Category B] (r : B ⥤ A)
-    {X : A} (Y : B) (f g : X ⟶ r.obj Y) (h : f = g) :
-    f ≫ 𝟙 (r.obj Y) ≫ r.map (𝟙 Y) = 𝟙 X ≫ g := by
-  simpa only [r.map_id, Category.id_comp, Category.comp_id] using h
-
 private theorem erase_middle_id
     {A : Type*} [Category A] {X Y Z : A}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z)
@@ -523,12 +516,10 @@ theorem etaleInverseImageCompositionModuleLinearCore
     ext W x
     change (((SheafOfModules.pushforwardComp (J := JX) (K := JY) (K' := JZ)
       (F := f) (G := g) phi psi).inv.app F).val.app W).hom
-      ((((SheafOfModules.pushforwardCongr₂ chi alpha hr').hom.app F).val.app W).hom x) =
-      (((Etale.lowerStarComp AddCommGrpCat.{u + 1} vMap uMap).inv.app
-        (UZ.obj F)).hom.app W) x
+      ((((SheafOfModules.pushforwardCongr₂ chi alpha hr').hom.app F).val.app W).hom x) = _
     simp only [SheafOfModules.pushforwardComp_inv_app_val_app,
       SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply,
-      Etale.lowerStarComp_inv_app_hom_app]
+      d0, Iso.symm_hom, Etale.lowerStarComp_inv_app_hom_app]
     rfl
   have hu : ∀ G, (aU.comp aV).unit.app G ≫
       (SheafOfModules.pushforward psi ⋙ SheafOfModules.pushforward phi).map
@@ -555,8 +546,8 @@ theorem etaleInverseImageCompositionModuleLinearCore
       (Etale.conjugateIsoEquiv_upperStarComp AddCommGrpCat.{u + 1} vMap uMap)
   refine ⟨d, c, ?_, ?_, hu⟩
   · intro F
-    exact insert_map_id pu (pv.obj (UZ.obj F))
-      (UX.map (d.hom.app F)) (d0.hom.app (UZ.obj F)) (hd F)
+    ext W x
+    rfl
   · intro G
     let ec := eV.app (LU.obj G) ≪≫ lv.mapIso (eU.app G)
     have hc : (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
@@ -565,12 +556,18 @@ theorem etaleInverseImageCompositionModuleLinearCore
       change (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
         ((lv.map (eU.inv.app G) ≫ eV.inv.app (LU.obj G)) ≫ UZ.map (c.hom.app G)) = _
       rw [Category.assoc]
-      exact (hcomp G (LUV.obj G) (c.hom.app G)).symm.trans
-        ((map_homEquiv_of_unit UX (aU.comp aV) G (LUV.obj G) (c.hom.app G)
-          (aUV.unit.app G) (d.hom.app (LUV.obj G)) (hu G)).trans
-          (congrArg (fun k ↦ UX.map (aUV.unit.app G) ≫ k) (hd (LUV.obj G))))
-    rw [← Category.assoc]
-    exact comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
-      (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
+      calc
+        _ = UX.map ((aU.comp aV).homEquiv G (LUV.obj G) (c.hom.app G)) :=
+          (hcomp G (LUV.obj G) (c.hom.app G)).symm
+        _ = UX.map (aUV.unit.app G) ≫ UX.map (d.hom.app (LUV.obj G)) :=
+          map_homEquiv_of_unit UX (aU.comp aV) G (LUV.obj G) (c.hom.app G)
+            (aUV.unit.app G) (d.hom.app (LUV.obj G)) (hu G)
+        _ = _ := congrArg (fun k ↦ UX.map (aUV.unit.app G) ≫ k) (hd (LUV.obj G))
+    calc
+      _ = ec.hom ≫ c0.hom.app (UX.obj G) :=
+        comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
+          (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
+      _ = _ := Category.assoc (eV.hom.app (LU.obj G)) (lv.map (eU.hom.app G))
+        (c0.hom.app (UX.obj G))
 
 end AlgebraicGeometry
