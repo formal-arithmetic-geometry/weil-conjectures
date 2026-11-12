@@ -95,6 +95,34 @@ private lemma integral_qbar_biduality_braided
     (boundedConstructible_derivedExtendScalars_obj X.left ℓ E)
     (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E) K M
 
+private lemma integral_qbar_biduality_comparison_bounded
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (L W : BoundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left))
+    (W' : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
+    (w : (boundedConstructibleExtendScalars X.left ℓ E ⋙
+      constructibleToPadicAlgCl X.left ℓ E).obj W ≅ W') :
+    let T := boundedConstructibleExtendScalars X.left ℓ E ⋙
+      constructibleToPadicAlgCl X.left ℓ E
+    ∃ c : T.obj ((ihom ((ihom L).obj W)).obj W) ≅
+        (ihom ((ihom (T.obj L)).obj W')).obj W',
+      toIhomIhom W' (T.obj L) = T.map (toIhomIhom W L) ≫ c.hom := by
+  let T := boundedConstructibleExtendScalars X.left ℓ E ⋙
+    constructibleToPadicAlgCl X.left ℓ E
+  let : T.Braided := by
+    constructor
+    intro K M
+    exact integral_qbar_biduality_braided ℓ E K M
+  have hβ (K : BoundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)) :
+      IsIso (dualComparison T w.hom K) := by
+    have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K
+    unfold dualComparison
+    infer_instance
+  have := hβ L
+  have := hβ ((ihom L).obj W)
+  exact exists_biduality_comparison T w.hom L
+
 set_option profiler true in
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
@@ -140,21 +168,8 @@ theorem integral_qbar_biduality_comparison
       (asIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E a)).app (𝟙_ _) ≪≫
       (boundedConstructibleUpperShriek ℓ a).mapIso
         (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
-  let : T.Braided := by
-    constructor
-    intro K M
-    exact integral_qbar_biduality_braided ℓ E K M
-  -- Both dual comparisons are invertible on bounded constructible objects.
-  have hβ (K : BoundedConstructible
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)) :
-      IsIso (dualComparison T w.hom K) := by
-    have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K
-    unfold dualComparison
-    infer_instance
-  have := hβ L
-  have := hβ ((ihom L).obj W)
   -- The lax braided bidual square gives the compatibility before forgetting.
-  obtain ⟨c, h⟩ := exists_biduality_comparison T w.hom L
+  obtain ⟨c, h⟩ := integral_qbar_biduality_comparison_bounded ℓ E L W W' w
   refine ⟨(boundedConstructible _).ι.mapIso c, ?_⟩
   have h' := congrArg (fun f ↦ f.hom) h
   rw [ObjectProperty.toIhomIhom_hom, ObjectProperty.comp_hom,
