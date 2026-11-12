@@ -22970,6 +22970,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDes
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDescentFiniteSubfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRetraction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ShriekCompositionPushforwardData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ShriekCompositionToPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBiproductUnit

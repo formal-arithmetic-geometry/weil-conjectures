@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarEtaleOrigin
 
 /-!
@@ -30,6 +31,7 @@ which has finite Tor amplitude since `ν^*` detects Tor amplitude
 
 - `AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerStar`
 - `AlgebraicGeometry.ProEtale.constructibleFiniteTor_tensor`
+- `AlgebraicGeometry.ProEtale.DerivedCategoryFiniteTor.upperStarLowerStarAdjunction`
 -/
 
 @[expose] public section
@@ -103,5 +105,28 @@ theorem constructibleFiniteTor_tensor {X : Scheme.{u}}
       ((ProEtale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso e')
     (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_tensor Λ X hG hG'))
+
+/-- Blueprint `proposition-six-operations-dctf--16`, the finite coefficients: for a finite ring
+`Λ` whose exponent is invertible on `Y` and a separated morphism `f : X ⟶ Y` of finite-type
+`k`-schemes, the adjunction `Lf^* ⊣ Rf_*` on `Dctf(-_proét, Λ)`, the restriction of the ambient
+adjunction `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` on the pro-étale
+derived categories: both functors preserve `Dctf`
+(`AlgebraicGeometry.ProEtale.constructibleFiniteTor_leftDerivedFunctor_upperStar_obj`,
+`AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerStar`). -/
+noncomputable def DerivedCategoryFiniteTor.upperStarLowerStarAdjunction {k : Type u} [Field k]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [HasInvertibleExponent Λ Y] :
+    (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).lift
+        ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).ι ⋙
+          L((f)^*[ModuleCat.{u + 1} Λ]))
+        (fun K ↦ constructibleFiniteTor_leftDerivedFunctor_upperStar_obj f K.property) ⊣
+      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).lift
+        ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).ι ⋙
+          R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f))
+        (fun K ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf K.property) :=
+  (ProEtale.derivedUpperStarLowerStarAdjunction _ f).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
 
 end AlgebraicGeometry.ProEtale
