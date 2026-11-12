@@ -178,9 +178,21 @@ lemma adicLowerStarEquivalence_symm_unit_app_hom_hom_app {X : Scheme.{u}} (e : X
     adicLowerStarCongr_inv_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
     ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp]
 
+/-- Forgetting the module structure identifies the unit with the sheaf pushforward unit. -/
+lemma adicLowerStarEquivalence_symm_unit_app_hom {X : Scheme.{u}} (e : X ≅ X)
+    (N : AdicSheaf l X) :
+    ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app N).hom =
+      (lowerStarId (WeilCoefficients.{u} l) X).inv.app N.X ≫
+        (lowerStarCongr (WeilCoefficients.{u} l) e.inv_hom_id.symm).hom.app N.X ≫
+          (lowerStarComp (WeilCoefficients.{u} l) e.inv e.hom).inv.app N.X := by
+  change ((adicLowerStarEquivalence l e).counitIso.inv.app N).hom = _
+  rw [adicLowerStarEquivalence_counitIso_inv_app_hom]
+  change (((lowerStarId (WeilCoefficients.{u} l) X).inv ≫
+    (lowerStarCongr (WeilCoefficients.{u} l) e.inv_hom_id.symm).hom) ≫
+      (lowerStarComp (WeilCoefficients.{u} l) e.inv e.hom).inv).app N.X = _
+  rw [NatTrans.comp_app, NatTrans.comp_app, Category.assoc]
+
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
--- Rewriting both sides down to sections takes many elaboration steps.
 /-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two
 sides of `J ≫ b⁻¹ = a⁻¹ ≫ J` is the mate, under the equivalences `(a⁻¹)_* ⊣ a_*` and
 `(b⁻¹)_* ⊣ b_*`, of the composition isomorphism along the two sides of `a ≫ J = J ≫ b`. -/
@@ -192,50 +204,13 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
           (adicLowerStarComp l a.inv J).symm).hom)) =
     (adicLowerStarComp l a.hom J).hom ≫ (adicLowerStarCongr l c).hom ≫
       (adicLowerStarComp l J b.hom).inv := by
-  -- Both sides are compared on sections, where they are restriction maps of `M.X`; see
-  -- `AlgebraicGeometry.ProEtale.adicLowerStarComp_exchange`.
-  refine (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
-    fun M ↦ Mod.hom_ext _ _ (ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))))
-  have key := congrArg (fun φ ↦ φ.hom.app V)
-    (lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X)
-  have hi (X : Scheme.{u}) (e : X ≅ X) {N N' : AdicSheaf l X} (φ : N ⟶ N') (W : X.ProEtᵒᵖ) :
-      ((adicLowerStarEquivalence l e).symm.inverse.map φ).hom.hom.app W =
-        φ.hom.hom.app (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.hom).obj W.unop)) :=
-    rfl
-  have hf (X : Scheme.{u}) (e : X ≅ X) (N : AdicSheaf l X) {W W' : X.ProEtᵒᵖ} (φ : W ⟶ W') :
-      ((adicLowerStarEquivalence l e).symm.functor.obj N).X.obj.map φ =
-        N.X.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.inv).map φ.unop).op :=
-    rfl
-  repeat' first
-    | rw [Iso.trans_hom]
-    | rw [Iso.symm_hom]
-    | rw [Functor.map_comp]
-    | rw [Mod.comp_hom']
-    | rw [ObjectProperty.FullSubcategory.comp_hom]
-    | rw [NatTrans.comp_app]
-    | rw [adicLowerStar_map_hom_hom_app]
-    | rw [hi]
-    | rw [adicLowerStarEquivalence_symm_unit_app_hom_hom_app]
-    | rw [adicLowerStarComp_hom_app_hom_hom_app]
-    | rw [adicLowerStarComp_inv_app_hom_hom_app]
-    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
-    | rw [adicLowerStar_obj_X_obj_map]
-    | rw [hf]
-  repeat' first
-    | rw [Functor.map_comp] at key
-    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
-    | rw [NatTrans.comp_app] at key
-    | rw [lowerStar_map_hom_app'] at key
-    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_hom_app_hom_app] at key
-    | rw [lowerStarComp_inv_app_hom_app] at key
-    | rw [lowerStarCongr_hom_app_hom_app] at key
-    | rw [lowerStarId_inv_app_hom_app] at key
-    | rw [lowerStar_obj_obj_map'] at key
-  simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
-  exact key
+  refine mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _) fun M ↦ ?_
+  apply Mod.hom_ext
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Mod.comp_hom',
+    adicLowerStar_map_hom, adicLowerStarComp_hom_app_hom,
+    adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom,
+    adicLowerStarEquivalence_symm_unit_app_hom]
+  exact lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X
 
 /-- The exchange isomorphism
 `AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso` of the pushforwards

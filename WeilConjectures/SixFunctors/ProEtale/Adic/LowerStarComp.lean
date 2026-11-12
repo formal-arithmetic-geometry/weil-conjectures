@@ -175,8 +175,6 @@ lemma adicLowerStarCongr_inv_app_hom_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
   lowerStarCongr_hom_app_hom_app _ h.symm M.X V
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- Rewriting both sides down to sections takes many elaboration steps.
 /-- `AlgebraicGeometry.ProEtale.lowerStarComp_exchange'` for sheaves of `ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
     (r : T₁ ⟶ T₃) (hr : p ≫ q = r)
@@ -192,36 +190,10 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
               (adicLowerStarCongr l h₁).hom.app M ≫ (adicLowerStarComp l a₁ p).inv.app M) ≫
               (adicLowerStarComp l p q).hom.app ((a₁)_*ᵃ[l].obj M) ≫
                 (adicLowerStarCongr l hr).hom.app ((a₁)_*ᵃ[l].obj M) := by
-  -- Both sides are compared on sections: there they are restriction maps of `M.X` along
-  -- morphisms of the site. Comparing the `Mod`-level composites with the sheaf-level ones
-  -- directly makes the kernel unfold every composition.
   apply Mod.hom_ext
-  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
-  have key := congrArg (fun φ ↦ φ.hom.app V)
-    (lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X)
-  repeat' first
-    | rw [Functor.map_comp]
-    | rw [Mod.comp_hom']
-    | rw [ObjectProperty.FullSubcategory.comp_hom]
-    | rw [NatTrans.comp_app]
-    | rw [adicLowerStar_map_hom_hom_app]
-    | rw [adicLowerStarComp_hom_app_hom_hom_app]
-    | rw [adicLowerStarComp_inv_app_hom_hom_app]
-    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
-    | rw [adicLowerStar_obj_X_obj_map]
-  repeat' first
-    | rw [Functor.map_comp] at key
-    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
-    | rw [NatTrans.comp_app] at key
-    | rw [lowerStar_map_hom_app'] at key
-    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_hom_app_hom_app] at key
-    | rw [lowerStarComp_inv_app_hom_app] at key
-    | rw [lowerStarCongr_hom_app_hom_app] at key
-  simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
-  exact key
+  simp only [Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarComp_hom_app_hom,
+    adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+  exact lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X
 
 end ProEtale
 
