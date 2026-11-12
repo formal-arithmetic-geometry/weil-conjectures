@@ -343,6 +343,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
     have := pullbackAction_comp_galoisLevelProjection h j (act k)
     rw [hres] at this
     exact this
+  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction K a hK
+    ((galoisTower Ω h).complexTrace (Λ) hd K hc)
+    (CondensedRing.upperStarLowerStarAdjunction (Λ)
+      (g))
+    ((galoisTower Ω h).unit_comp_complexTrace (Λ) hd K hc)
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
