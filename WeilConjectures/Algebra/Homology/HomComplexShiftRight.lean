@@ -84,7 +84,6 @@ private lemma shiftSign_sub {A : Type*} [AddCommGroup A]
     mul_left_comm, Int.units_mul_self, mul_one]
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The dependent product projections require elaborating the Hom-complex specification.
 set_option backward.isDefEq.respectTransparency true in
 /-- The Hom-complex bifunctor commutes with shifts in its second complex.
@@ -109,9 +108,9 @@ theorem homComplex_shift_right
         shiftFunctor _ n ≅
       (𝟭 _).prod (shiftFunctor _ n) ⋙
         Functor.uncurry.obj (homComplexFunctor (C := C) (J := J) (R := R))) := by
-  obtain ⟨π, hprod, hd, hmap⟩ :=
-    homComplex_projections_exists (C := C) (J := J) (R := R)
-  let F := homComplexFunctor (C := C) (J := J) (R := R)
+  have hFπ := homComplex_projections_exists (C := C) (J := J) (R := R)
+  generalize homComplexFunctor (C := C) (J := J) (R := R) = F at hFπ ⊢
+  obtain ⟨π, hprod, hd, hmap⟩ := hFπ
   let e (L M : _) (k : ℤ) :=
     productComparisonIso
       (Limits.Fan.mk (((F.obj (op L)).obj M).X (k + n))
