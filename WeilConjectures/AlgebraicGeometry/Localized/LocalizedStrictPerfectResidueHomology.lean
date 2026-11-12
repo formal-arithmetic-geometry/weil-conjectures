@@ -81,7 +81,6 @@ private theorem strictlyPerfect_overEquiv_isKFlat (S : Scheme.{u}) (U : S.Opens)
     infer_instance
   exact CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat C hbounded hflat B hB
 
-set_option profiler true in
 /-- An invertible counit on selected complexes gives natural homology comparisons. -/
 private theorem exists_homology_comparison_of_counit
     {C A B D : Type*} [Category* C] [Category* A] [Category* B] [Category* D]
@@ -150,7 +149,6 @@ private theorem exists_homology_comparison_of_counit
   dsimp only [t, Iso.symm_hom, asIso_inv]
   exact inverse_naturality_of_isIso_app τ α
 
-set_option profiler true in
 /-- Termwise residue stalk homology of strictly perfect localized complexes agrees
 naturally with localized derived residue homology. The comparisons are simultaneous
 for all strictly perfect complexes and all their chain maps.
