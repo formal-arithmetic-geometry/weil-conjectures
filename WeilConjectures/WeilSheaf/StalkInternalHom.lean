@@ -187,7 +187,8 @@ theorem trace_frobeniusEnd_stalkAt_ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse
   intro v x
   have h := LinearMap.congr_fun (stalkAtIhomLinearEquiv_frobenius s m hs D hD F v)
     ((D.stalkAt s m hs).frobenius x)
-  simpa only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply] using h
+  simpa only [FrobeniusModule.frobeniusEnd, LinearMap.comp_apply, LinearEquiv.coe_coe,
+    LinearEquiv.symm_apply_apply] using h
 
 /-- The trace of the Frobenius on the stalk of `[G^∨, F] = G ⊗ F`, for a lisse Weil sheaf `G`,
 is the product of the traces on the stalks of `G` and `F`. -/
