@@ -169,19 +169,19 @@ theorem derivedPullback_cone_square_transposition
   obtain ⟨H', htrans⟩ := CochainComplex.additiveAdjunction_cone_square
     adj₀ p t' (x ≫ α) (y ≫ β) H₀
   let c := CochainComplex.mappingCone.map p t x y hc
-  have : IsIso (DerivedCategory.Q.map x) :=
+  have hxiso : IsIso (DerivedCategory.Q.map x) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ x).2 hx
-  have : IsIso (DerivedCategory.Q.map y) :=
+  have hyiso : IsIso (DerivedCategory.Q.map y) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ y).2 hy
   have : IsIso (DerivedCategory.Q.map c) := by
     let m := DerivedCategory.Q.mapTriangle.map
       (CochainComplex.mappingCone.triangleMap p t x y hc)
     have h₁ : IsIso m.hom₁ := by
       change IsIso (DerivedCategory.Q.map x)
-      infer_instance
+      exact hxiso
     have h₂ : IsIso m.hom₂ := by
       change IsIso (DerivedCategory.Q.map y)
-      infer_instance
+      exact hyiso
     exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
       (DerivedCategory.mappingCone_triangle_distinguished p)
       (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
