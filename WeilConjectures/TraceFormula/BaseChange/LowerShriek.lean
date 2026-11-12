@@ -204,8 +204,7 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq [Fact ℓ.Prim
         eqToHom (congrArg (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj)
           (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
         (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).hom.app K.obj := by
-  rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_comp
-    (a := a) (b := b) (c := c) (d := d) ℓ (Profinite.padicAlgClRingObj ℓ) sq K]
+  rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_comp]
 
 end SquareComparison
 
