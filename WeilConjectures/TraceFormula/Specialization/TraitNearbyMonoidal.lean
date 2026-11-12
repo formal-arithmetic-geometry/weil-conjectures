@@ -142,6 +142,7 @@ lemma isDualizable_shift_unit_derivedCategory (X : Scheme.{u}) (d : ℤ) :
 variable (k' : Type u) [Field k'] [IsSepClosed k']
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- the derived functors of the trait unfold to large terms
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism for
