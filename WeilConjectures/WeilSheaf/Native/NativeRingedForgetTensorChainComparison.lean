@@ -18,8 +18,33 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
--- Expose the total-tensor abbreviation when elaborating the summand endpoints.
-attribute [local reducible] coefficientTotalTensor
+-- Use the same sheaf tensor presentation as the summand comparison.
+attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
+  SheafOfModules.monoidalCategory
+attribute [local instance 4000] HomologicalComplex.monoidalCategory
+attribute [local instance 5000] MonoidalCategory.toMonoidalCategoryStruct
+
+-- Share the total tensor instance instead of reconstructing its colimit data at
+-- every occurrence of a tensor product in the comparison fields.
+private def nativeChainCochainMonoidal {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ) :=
+  { HomologicalComplex.monoidalCategory _ _ with
+    tensorObj P Q := (coefficientTotalTensor.{u, u, u} J R).obj (P, Q) }
+
+attribute [local instance 5000] nativeChainCochainMonoidal
+
+private def nativeChainModulesMonoidalStruct {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
+    MonoidalCategoryStruct (RingedTensorModules.{u, u, u} J R) :=
+  (SheafOfModules.monoidalCategory R).toMonoidalCategoryStruct
+
+private def nativeChainCochainMonoidalStruct {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
+    MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ) :=
+  (nativeChainCochainMonoidal J R).toMonoidalCategoryStruct
+
+attribute [local instance 10000] nativeChainModulesMonoidalStruct nativeChainCochainMonoidalStruct
 
 -- Construct and prove coherence with abstract monoidal categories, so the
 -- categorical identities do not unfold either site's sheafification tensor.
@@ -74,13 +99,13 @@ private theorem nativeChainTensorComparison
       MonoidalCategory.tensor (CochainComplex B ℤ) :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
       intro P Q f
-      simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using
+      simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp, tensor_map] using
         (RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2))
   let iA : Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex) ≅
       MonoidalCategory.tensor (CochainComplex A ℤ) :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
       intro P Q f
-      simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using
+      simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp, tensor_map] using
         (RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2))
   let ε := Functor.isoWhiskerRight iB.symm F ≪≫ δ ≪≫
     Functor.isoWhiskerLeft (F.prod F) iA
@@ -151,6 +176,12 @@ private theorem nativeChainTensorComparison
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
+
+#synth MonoidalCategory (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
+#synth MonoidalCategoryStruct (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
+#synth MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ)
+#synth MonoidalCategoryStruct (CochainComplex
+  (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ)
 
 set_option profiler true in
 set_option genInjectivity false in
