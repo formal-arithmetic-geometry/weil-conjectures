@@ -338,6 +338,13 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
     (integralOperationsRoosFunctor (A := scalarReductionSource l E X))
     (DerivedCategory.Q (C := scalarReductionSource l E X))
+    (U := (podReindexTower l E g).obj
+      ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)))
+    (V := (integralOperationsTensorTowerFunctor l E X).obj
+      (((podGoodReindex l E g D).obj P).obj, ((podGoodReindex l E g D).obj Q).obj))
+    (W := (isoReductionIntegralComplex l E g).obj
+      (integralOperationsRoos
+        ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
     ((integralCompletedTensorComparison l E X).app
