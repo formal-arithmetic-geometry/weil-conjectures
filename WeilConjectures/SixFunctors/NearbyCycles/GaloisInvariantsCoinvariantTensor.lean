@@ -66,12 +66,22 @@ private theorem galoisTensorRightColimit (Y : Scheme.{u})
 attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimit
   galoisTensorRightColimit
 
+section
+variable (Y : Scheme.{u})
+  (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+  (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+  (F : Discrete ℤ ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+#synth PreservesColimit F ((curriedTensor _).obj M)
+#synth ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)),
+  GradedObject.HasTensor₄ObjExt A B C D
+end
+
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
@@ -246,12 +256,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
-  obtain ⟨r, hr, hcoinv⟩ :=
-    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
-      hact
-  refine ⟨r, hr, ?_⟩
+  refine Exists.imp ?_
+    (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
+      T₀ N h Ω hp C hC act hact)
+  intro r hr
+  refine ⟨hr.1, ?_⟩
   intro q V b hV W φ hφ
-  refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
+  refine hr.2 (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q) ?_ φ hφ
   intro K a _ hcab
   -- the cohomology of the tensor product is continuous along the finite layers
