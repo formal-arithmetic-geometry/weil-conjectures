@@ -81,6 +81,64 @@ private theorem scalar_tensor_comparison_of_adjoints (t : Y ⟶ X)
     tensorHom_comp_tensorHom_assoc]
   simpa only [← Adjunction.homEquiv_unit] using h
 
+private theorem scalar_tensor_comparison_of_sections (t : Y ⟶ X)
+    {A B H : KSheaf X k} {C D I J : KSheaf Y k}
+    (a : A ⊗ B ⟶ H)
+    (b : H ⟶ ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).obj I)
+    (c : I ⟶ J)
+    (jA : A ⟶ ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).obj C)
+    (jB : B ⟶ ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).obj D)
+    (d : C ⊗ D ⟶ J)
+    (h : ∀ (U : (Opens X)ᵒᵖ) (s : A.obj.obj U) (r : B.obj.obj U),
+      c.hom.app ((Opens.map t.base).op.obj U)
+        (b.hom.app U (a.hom.app U
+          ((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
+            (ModuleCat.{w} k)) A B).app U (s ⊗ₜ[k] r)))) =
+      d.hom.app ((Opens.map t.base).op.obj U)
+        ((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology Y)
+          (ModuleCat.{w} k)) C D).app ((Opens.map t.base).op.obj U)
+            (jA.hom.app U s ⊗ₜ[k] jB.hom.app U r))) :
+    a ≫ b ≫ ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).map c =
+    (jA ⊗ₘ jB) ≫
+      Functor.LaxMonoidal.μ ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)) C D ≫
+      ((Opens.map t.base).sheafPushforwardContinuous (ModuleCat.{w} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).map d := by
+  apply Sheaf.hom_ext_of_μ_comp
+  simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom]
+  have hn {A B C D : KSheaf X k} (a : A ⟶ C) (b : B ⟶ D) :
+      Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
+        (ModuleCat.{w} k)) A B ≫ (a ⊗ₘ b).hom =
+      (a.hom ⊗ₘ b.hom) ≫
+        Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
+          (ModuleCat.{w} k)) C D :=
+    (Functor.LaxMonoidal.μ_natural
+      (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{w} k)) a b).symm
+  simp only [← Category.assoc]
+  rw [hn]
+  simp only [Category.assoc]
+  rw [scalar_pushforward_tensor_assoc]
+  apply NatTrans.ext
+  funext U
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  intro s r
+  simpa only [NatTrans.comp_app, ModuleCat.comp_apply,
+    Monoidal.FunctorCategory.tensorHom_app, ModuleCat.MonoidalCategory.tensorHom_tmul] using h U s r
+
+private theorem scalar_pullback_adjunct_app
+    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
+    (t : Y ⟶ X) (ht : t ≫ f = g) (H : X.Modules) (U : (Opens X)ᵒᵖ) (z : H.val.obj U) :
+    ((((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).homEquiv _ _)
+        (scalarPullbackCoefficient f g t ht H)).hom.app U z =
+      ((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app H).val.app U z := by
+  unfold scalarPullbackCoefficient
+  exact Classical.choose_spec (exists_scalarPullbackCoefficient f g t ht H) U.unop z
+
 /-- The scalar tensor coefficient commutes with the normalized module pullback
 comparison. This is an equality of coefficient sheaf morphisms, with no Ext classes.
 Source: Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
@@ -114,36 +172,12 @@ theorem scalarPullbackCoefficient_tensor
           scalarPullbackCoefficient f g t ht G) ≫
         scalarTensorCoefficient g ((tensorPullback t).obj F)
           ((tensorPullback t).obj G) := by
-  let adj := (Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
-    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
   apply scalar_tensor_comparison_of_adjoints
-  apply Sheaf.hom_ext_of_μ_comp
-  simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom]
-  have hn {A B C D : KSheaf X k} (a : A ⟶ C) (b : B ⟶ D) :
-      Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
-        (ModuleCat.{w} k)) A B ≫ (a ⊗ₘ b).hom =
-      (a.hom ⊗ₘ b.hom) ≫
-        Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
-          (ModuleCat.{w} k)) C D :=
-    (Functor.LaxMonoidal.μ_natural
-      (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{w} k)) a b).symm
-  simp only [← Category.assoc]
-  rw [hn]
-  simp only [Category.assoc]
-  rw [scalar_pushforward_tensor_assoc]
-  apply NatTrans.ext
-  funext U
-  apply ModuleCat.MonoidalCategory.tensor_ext
-  intro s r
-  simp only [NatTrans.comp_app, ModuleCat.comp_apply]
+  apply scalar_tensor_comparison_of_sections
+  intro U s r
   erw [exists_scalarTensorCoefficient f F G U.unop s r]
-  erw [Monoidal.FunctorCategory.tensorHom_app, ModuleCat.MonoidalCategory.tensorHom_tmul]
-  have hj (H : X.Modules) (z : H.val.obj U) :
-      ((adj.homEquiv _ _) (scalarPullbackCoefficient f g t ht H)).hom.app U z =
-        ((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app H).val.app U z := by
-    unfold scalarPullbackCoefficient
-    exact Classical.choose_spec (exists_scalarPullbackCoefficient f g t ht H) U.unop z
-  erw [hj (F ⊗ G) (tmulSection s r), hj F s, hj G r]
+  erw [scalar_pullback_adjunct_app f g t ht (F ⊗ G) U (tmulSection s r),
+    scalar_pullback_adjunct_app f g t ht F U s, scalar_pullback_adjunct_app f g t ht G U r]
   change (scalarHom g ((Classical.choose (module_pullback_tensor t)) F G).hom).hom.app
       (Opposite.op (t ⁻¹ᵁ U.unop))
       (((Classical.choose (exists_tensorPullbackAdjunction t)).unit.app (F ⊗ G)).val.app
