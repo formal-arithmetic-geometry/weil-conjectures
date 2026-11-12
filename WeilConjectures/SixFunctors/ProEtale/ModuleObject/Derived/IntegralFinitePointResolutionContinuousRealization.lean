@@ -223,8 +223,10 @@ private lemma resolution_conjugate_exact
       simpa only [map_zero] using hb
     obtain ⟨c, hc⟩ := (h _).1 hb'
     refine ⟨e.symm c, ?_⟩
+    change e.symm (F (e (e.symm c))) = b
     rw [AddEquiv.apply_symm_apply, hc, AddEquiv.symm_apply_apply]
   · rintro ⟨c, rfl⟩
+    change d.symm (G (e (e.symm (F (e c))))) = 0
     rw [AddEquiv.apply_symm_apply, (h _).2 ⟨e c, rfl⟩, map_zero]
 
 private lemma resolution_conjugate_zero
@@ -338,7 +340,8 @@ theorem integralFinitePointResolution_continuous_realization
           (b.down.comp q.unop.hom.hom)))).down x i).down =
           ((F P.unop (e P.unop b)).down (q.unop.hom.hom x) i).down
         exact congrArg (fun v ↦ (v i).down)
-          ((hF Q.unop _ x).trans (hF P.unop _ (q.unop.hom.hom x)).symm) }⟩
+          ((hF Q.unop (e Q.unop (ULift.up (b.down.comp q.unop.hom.hom))) x).trans
+            (hF P.unop (e P.unop b) (q.unop.hom.hom x)).symm) }⟩
   let GG : resolutionAb S ⟶ resolutionAb T :=
     ⟨{ app P := AddCommGrpCat.ofHom
         ((d P.unop).symm.toAddMonoidHom.comp ((G P.unop).comp
@@ -351,7 +354,8 @@ theorem integralFinitePointResolution_continuous_realization
           (b.down.comp q.unop.hom.hom)))).down x).down =
           ((G P.unop (e P.unop b)).down (q.unop.hom.hom x)).down
         exact congrArg ULift.down
-          ((hG Q.unop _ x).trans (hG P.unop _ (q.unop.hom.hom x)).symm) }⟩
+          ((hG Q.unop (e Q.unop (ULift.up (b.down.comp q.unop.hom.hom))) x).trans
+            (hG P.unop (e P.unop b) (q.unop.hom.hom x)).symm) }⟩
   let FM : M ⟶ M := resolutionModMap R S S (resolutionDiagonal O r)
     (resolutionDiagonal O r) FF (by
       intro P c b

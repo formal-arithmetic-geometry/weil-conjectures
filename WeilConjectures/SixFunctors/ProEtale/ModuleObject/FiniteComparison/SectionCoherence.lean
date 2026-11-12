@@ -116,5 +116,4 @@ theorem finiteCoefficientDerivedEquivalence_map_compSectionIso {X Y : Scheme.{u}
     _ _ _ _ _ _ H
     (finiteCoefficientDerivedEquivalence_map_eqToHom_comp_leftDerivedUpperStarId T h M)
 
-
 end AlgebraicGeometry.ProEtale
