@@ -66,16 +66,6 @@ private theorem galoisTensorRightColimit (Y : Scheme.{u})
 attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimit
   galoisTensorRightColimit
 
-section
-variable (Y : Scheme.{u})
-  (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-  (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
-  (F : Discrete ℤ ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
-#synth PreservesColimit F ((curriedTensor _).obj M)
-#synth ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)),
-  GradedObject.HasTensor₄ObjExt A B C D
-end
-
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
@@ -125,7 +115,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
               (Profinite.continuousMapRingObj T₀)).app C) ≫ φ = φ := by
   let Λ := Profinite.continuousMapRingObj T₀
   let g := pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
-  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ _ hC
+  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀
+    (L((N.ε)^*⟦Λ⟧).obj C) hC
   choose F₀ hF₀ using hterms
   have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
       (M : Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
@@ -158,13 +149,15 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     have := pullbackAction_comp_galoisLevelProjection h j (act k)
     rw [hres] at this
     exact this
-  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction K a hK
+  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction
+    (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK
     ((galoisTower Ω h).complexTrace Λ hd K hc)
     (CondensedRing.upperStarLowerStarAdjunction Λ
       g)
     ((galoisTower Ω h).unit_comp_complexTrace Λ hd K hc)
   let R := R((g)_*⟦Λ⟧).map (L((g)^*⟦Λ⟧).map e.inv) ≫
-    Adjunction.derivedUnitRetraction K a hK ((galoisTower Ω h).complexTrace Λ hd K hc) ≫ e.hom
+    Adjunction.derivedUnitRetraction (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK
+      ((galoisTower Ω h).complexTrace Λ hd K hc) ≫ e.hom
   have hRC : (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).unit.app
       (L((N.ε)^*⟦Λ⟧).obj C) ≫ R = 𝟙 _ := by
     dsimp only [R]
@@ -194,7 +187,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
       (fun k ↦ N.galoisLayerAction Λ h Ω (act k)
         (L((𝟙 X)^*⟦Λ⟧).obj C))
       (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
-  refine ⟨r, (hmain (DerivedCategory.homologyFunctor _ 0)).1, ?_⟩
+  refine ⟨r, (hmain (Z := X') (DerivedCategory.homologyFunctor _ 0)).1, ?_⟩
   intro Z G _ hG W φ hφ
   have hdZ : ∀ (j : FiniteGaloisIntermediateField L Ω)
       (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -206,10 +199,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     rw [hc]
     exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
       (hp j) M
-  refine (hmain G).2 φ ?_ hφ
+  refine (hmain (Z := Z) G).2 (B := W) φ ?_ hφ
   intro φ' hφ'
   exact (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
-    Λ hd K hc a hK _ e
+    Λ hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e
     (R((N.j)_*⟦Λ⟧) ⋙
       L((N.i)^*⟦Λ⟧) ⋙ G)
     (hG K a hcab).some
@@ -262,7 +255,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   intro r hr
   refine ⟨hr.1, ?_⟩
   intro q V b hV W φ hφ
-  refine hr.2 (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
+  refine hr.2 (Z := Z) (W := W) (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q) ?_ φ hφ
   intro K a _ hcab
   -- the cohomology of the tensor product is continuous along the finite layers
