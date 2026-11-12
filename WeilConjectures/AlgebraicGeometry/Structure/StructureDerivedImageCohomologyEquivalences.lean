@@ -279,7 +279,6 @@ noncomputable def affineLerayTargetEquiv
     ((H₁ ⋙ Γ).mapIso ψ.symm ≪≫ Γ.mapIso edgeIso)).addCommGroupIsoToAddEquiv).trans
       (affineLerayEquiv qY).symm
 
-set_option maxHeartbeats 700000 in
 -- The large comparison square needs extra heartbeats for category transports.
 /-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
 `affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
