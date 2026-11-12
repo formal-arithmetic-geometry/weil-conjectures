@@ -67,8 +67,8 @@ private theorem braiding_of_iso {P Q P' Q' : B} (e : P ≅ P') (e' : Q ≅ Q')
 private theorem braiding_model_of_iso {P Q P' Q' Z Z' : D}
     (a : P ≅ P') (a' : Q ≅ Q') (o : P' ⊗ Q' ≅ Z) (o' : Q' ⊗ P' ≅ Z')
     (s : Z ⟶ Z') (h : (β_ P' Q').hom ≫ o'.hom = o.hom ≫ s) :
-    (β_ P Q).hom ≫ ((tensor D).mapIso (a'.prod a) ≪≫ o').hom =
-      ((tensor D).mapIso (a.prod a') ≪≫ o).hom ≫ s := by
+    (β_ P Q).hom ≫ ((MonoidalCategory.tensor D).mapIso (a'.prod a) ≪≫ o').hom =
+      ((MonoidalCategory.tensor D).mapIso (a.prod a') ≪≫ o).hom ≫ s := by
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, tensor_map, Category.assoc]
   rw [← BraidedCategory.braiding_naturality_assoc, h]
 
@@ -104,7 +104,6 @@ attribute [local irreducible] Functor.mapDerivedCategory
   Functor.mapDerivedCategoryFactors DerivedCategory DerivedCategory.Q
   instCategoryDerivedCategory NativeOrdinaryKFlat NativeTensorKFlat
 
-set_option trace.profiler true in
 -- The normalization compares independently presented total-complex models.
 /-- Unit and signed-symmetry squares on native K-flat representatives.
 
