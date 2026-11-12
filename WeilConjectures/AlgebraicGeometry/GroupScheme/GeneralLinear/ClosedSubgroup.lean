@@ -453,6 +453,8 @@ end Conjugation
 
 section Derived
 
+open scoped commutatorElement
+
 /-! ### The derived subgroup
 
 The *derived subgroup* `[G, G]` of `G = V(I)` is the smallest closed subgroup scheme `D ⊆ G` whose
@@ -495,8 +497,7 @@ instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) 
   let : Group ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) := Hom.group
   obtain ⟨a', rfl⟩ := (ht _).2 a
   obtain ⟨b', rfl⟩ := (ht _).2 b
-  have hγ : ⁅t ≫ a', t ≫ b'⁆ =
-      t ≫ ⁅a', b'⁆ := by
+  have hγ : ⁅t ≫ a', t ≫ b'⁆ = t ≫ ⁅a', b'⁆ := by
     simp only [commutatorElement_def, MonObj.comp_mul, GrpObj.comp_inv]
   obtain ⟨ψ, hψ⟩ := Spec.mapMulEquiv.surjective ⁅a', b'⁆
   obtain ⟨ψ, rfl⟩ : ∃ ψ₀, toConv ψ₀ = ψ := ⟨_, toConv_ofConv ψ⟩
