@@ -332,8 +332,9 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
     (ihomUpperStarComparison_naturality Λ gZ K _)
     (ihomUpperStarComparison_naturality Λ gZ K _) ?_ hφ₁ hU
   -- the third term is `Rj'_*` of an object, and `Lj'^*` kills the first one
+  let ebc := @asIso _ _ _ _ _ hbc
   let eB := (ihom (gStar.obj K)).mapIso
-      (asIso ((baseChangeMap Λ sqU.toCommSq).app (jStar.obj M))) ≪≫
+      ebc ≪≫
     ihomRightDerivedLowerStarIso Λ j' _ _
   have hz₀ : IsZero (jStar.obj ((ihom K).obj (C⟦(-1 : ℤ)⟧))) :=
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
