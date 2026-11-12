@@ -53,6 +53,7 @@ private theorem externalTensorAlgebraEquiv_tmul
     TensorProduct.congr_tmul, Algebra.IsPushout.cancelBaseChange_tmul, one_smul,
     LinearEquiv.refl_apply]
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Affine section comparisons require several nested scalar restriction instances.
 set_option backward.isDefEq.respectTransparency.types false in

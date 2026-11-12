@@ -27,6 +27,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the nested scheme/module comparisons needs additional heartbeats.
 set_option backward.isDefEq.respectTransparency false in
