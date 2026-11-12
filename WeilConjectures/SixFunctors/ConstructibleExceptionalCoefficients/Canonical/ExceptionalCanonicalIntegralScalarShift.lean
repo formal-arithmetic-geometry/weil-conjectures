@@ -202,6 +202,12 @@ theorem finiteTorIntegralShift_compatibility
   unfold finiteTorIntegralShift
   exact hc
 
+private theorem finiteTorIntegralShift_compatibility_cached
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :=
+  finiteTorIntegralShift_compatibility l Ω E T
+
 /-- The shift on an integral scalar functor induced by its specified ordinary realization.
 This is an actual fully faithful lift of the ambient scalar shift, independent of any
 shift stored in the scalar record. Source: Zheng, Construction 6.2, and the canonical
