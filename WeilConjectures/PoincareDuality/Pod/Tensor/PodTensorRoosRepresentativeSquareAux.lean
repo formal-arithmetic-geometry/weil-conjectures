@@ -250,9 +250,20 @@ theorem podTensorReindexAt_generators
       exact dite_eq_right h
     rw [ht]
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
-set_option maxHeartbeats 2000000 in
+private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Category D]
+    (T : C × C ⥤ D) {P Q P' Q' : C} {A B Z : D}
+    (eP : P ≅ P') (eQ : Q ≅ Q') (e : T.obj (P', Q') ≅ B)
+    (k : A ⟶ T.obj (P, Q)) (t : A ⟶ B)
+    (h : k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom = t)
+    (f : T.obj (P, Q) ⟶ Z) :
+    t ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
+  rw [← h]
+  simp only [Category.assoc, e.hom_inv_id_assoc]
+  rw [← T.map_comp_assoc]
+  simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
+    ← Prod.id_eq, T.map_id, Category.id_comp]
+
 set_option profiler true in
--- The two sides of the strict normalization have types equal only after unfolding.
 /-- The representative square, assembled from the strict Roos normalization and the
 adjunction calculation of the canonical completed comparison.
 Source: blueprint lem-pod-tensor-roos-representative-square. -/
@@ -311,12 +322,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
   rw [podTensorReindexAt_tower] at hs
   have hs' := eq_of_heq hs
-  have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
-  rw [← hs']
-  refine Eq.trans ?_ hc
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [← Functor.map_comp_assoc]
-  simp only [Prod.mkHom, prod_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
+    ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
+    ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
+    ((integralCompletedTensorComparison l E X).app
+      ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q))
+    _ _ hs' _).trans
+      (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
 
 end WeilConjectures

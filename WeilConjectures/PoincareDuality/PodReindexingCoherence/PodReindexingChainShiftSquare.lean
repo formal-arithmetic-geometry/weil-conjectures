@@ -114,9 +114,7 @@ private lemma chain_projection' {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   subst q
   exact c.chain_projection P I n p U.unop V.unop.left V.unop.hom z x
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Elaborate the unbounded product projections over both coefficient sites.
 /-- The supplied signed shifts satisfy the chain reindexing square.
 
 For each product projection, both routes reindex the source factor from `p`
