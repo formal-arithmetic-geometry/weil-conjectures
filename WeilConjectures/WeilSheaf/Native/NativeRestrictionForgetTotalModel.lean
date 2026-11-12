@@ -637,6 +637,20 @@ private instance restriction_adicComplexMonoidal (X : Scheme.{u})
     MonoidalCategoryStruct (CochainComplex
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
 
+private instance restriction_nativeTensorZero (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] :
+    (nativeTensorBifunctor k₀ l X).flip.PreservesZeroMorphisms := inferInstance
+
+private instance restriction_nativeTensorObjZero (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] (M : ProEtaleWeilSheaf k₀ l X) :
+    ((nativeTensorBifunctor k₀ l X).flip.obj M).PreservesZeroMorphisms := inferInstance
+
+private instance restriction_nativeTotal (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
+    HomologicalComplex.HasMapBifunctor P T (nativeTensorBifunctor k₀ l X).flip (.up ℤ) :=
+  inferInstance
+
 section AbstractTransport
 variable (α : (ProEtale.adicUpperStar l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))) ⋙
