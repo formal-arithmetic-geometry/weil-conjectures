@@ -86,7 +86,7 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
@@ -127,7 +127,7 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
   exact h
 
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 /-- **Weil cohomology from an injective resolution.** Let `I` be an injective resolution of a
 Weil sheaf `F` by pro-étale Weil sheaves. Then `Hʳ(Y ⊗ k̄, F)` is the `r`-th cohomology of the
