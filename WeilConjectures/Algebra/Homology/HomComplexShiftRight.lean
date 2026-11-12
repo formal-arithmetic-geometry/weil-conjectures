@@ -141,7 +141,6 @@ theorem homComplex_shift_right
       SheafOfModules.homObjMap (R := R) (𝟙 (L.X p))
         (M.XIsoOfEq (show (p + k) + n = p + (k + n) by omega)).inv = _
     exact hπinv L M (k + n) p (p + (k + n)) ((p + k) + n) rfl (by omega)
-  clear_value e
   refine ⟨NatIso.ofComponents (fun X ↦
     HomologicalComplex.Hom.isoOfComponents (e X.1.unop X.2) ?_) ?_⟩
   · intro k l hkl
@@ -158,23 +157,33 @@ theorem homComplex_shift_right
     rw [Category.assoc,
       hd X.1.unop (X.2⟦n⟧) k l p (p + l) (p + k) (p + 1)
         hkl' rfl rfl (by omega),
-      Preadditive.comp_sub, Linear.comp_units_smul]
+      Preadditive.comp_sub]
+    conv_lhs =>
+      rhs
+      rw [Linear.comp_units_smul]
     conv_lhs =>
       lhs
       rw [← Category.assoc, he X.1.unop X.2 k p (p + k) rfl]
     conv_lhs =>
       rhs
+      rhs
       rw [← Category.assoc, he X.1.unop X.2 k (p + 1) (p + l) (by omega)]
     conv_rhs =>
-      rw [Category.assoc, he X.1.unop X.2 l p (p + l) rfl, Linear.units_smul_comp,
-        hd X.1.unop X.2 (k + n) (l + n) p ((p + l) + n) ((p + k) + n) (p + 1)
+      rw [Category.assoc, he X.1.unop X.2 l p (p + l) rfl, Linear.units_smul_comp]
+      rhs
+      rw [hd X.1.unop X.2 (k + n) (l + n) p ((p + l) + n) ((p + k) + n) (p + 1)
           (by omega) (by omega) (by omega) (by omega)]
     simp only [CochainComplex.shiftFunctor_obj_d']
     dsimp only [CochainComplex.shiftFunctor_obj_X']
     conv_lhs =>
       lhs
-      rw [homObjMap_units_smul_right (R := R) (𝟙 (X.1.unop.X p))
-        (X.2.d ((p + k) + n) ((p + l) + n)) n.negOnePow, Linear.comp_units_smul]
+      congr
+      · skip
+      · rw [homObjMap_units_smul_right (R := R) (𝟙 (X.1.unop.X p))
+          (X.2.d ((p + k) + n) ((p + l) + n)) n.negOnePow]
+    conv_lhs =>
+      lhs
+      rw [Linear.comp_units_smul]
     let a := π X.1.unop X.2 (k + n) p ((p + k) + n) (by omega) ≫
       SheafOfModules.homObjMap (R := R) (𝟙 (X.1.unop.X p))
         (X.2.d ((p + k) + n) ((p + l) + n))
