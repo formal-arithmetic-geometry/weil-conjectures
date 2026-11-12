@@ -79,6 +79,7 @@ noncomputable local instance : MonoidalCategory (HomotopyCategory 𝒜 (.up ℤ)
 
 variable [HasDerivedCategory.{u} 𝒜] (L : CochainComplex 𝒜 ℤ)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Matching the identities of `(CochainComplex 𝒜 ℤ)ᵒᵖ` in the naturality square needs
 -- unification up to the universe presentation `max u u u` of `homComplexFunctor`.
