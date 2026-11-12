@@ -92,7 +92,7 @@ private theorem cone_precompose
 private theorem iso_comp_homEquiv
     {C D : Type*} [Category C] [Category D]
     (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R)
-    {X A B : C} {Y : D} (q : X ⟶ Y)
+    {X Y : D} {A B : C} (q : X ⟶ Y)
     (e : X ≅ L.obj A) (i : A ⟶ B) [IsIso i] (f : B ⟶ R.obj Y)
     (h : q = e.hom ≫ (adj.homEquiv _ _).symm (i ≫ f)) :
     q = (e ≪≫ L.mapIso (asIso i)).hom ≫ (adj.homEquiv _ _).symm f := by
