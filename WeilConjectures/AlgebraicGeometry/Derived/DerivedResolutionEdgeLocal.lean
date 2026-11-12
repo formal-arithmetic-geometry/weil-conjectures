@@ -201,7 +201,6 @@ private theorem section_edge_square {T S : Scheme.{u}} (g : T ⟶ S)
 -- Transport the section edge along arbitrary choices of homology models.
 -- Keeping the complex and comparison isomorphisms as parameters avoids repeatedly
 -- reducing the fixed derived resolutions in this ordinary categorical calculation.
-set_option profiler true in
 private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ) (q : ℤ) :
     let D := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
@@ -257,7 +256,6 @@ private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-set_option profiler true in
 /-- The kernel/cokernel resolution edge has the fixed local-class description.
 Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
 construction and local Leray comparison; Tag 079W, normalization by the derived unit.
