@@ -634,7 +634,7 @@ private instance restriction_adicTensor (X : Scheme.{u})
 
 private instance restriction_adicComplexMonoidal (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] :
-    MonoidalCategory (CochainComplex
+    MonoidalCategoryStruct (CochainComplex
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
 
 section AbstractTransport
