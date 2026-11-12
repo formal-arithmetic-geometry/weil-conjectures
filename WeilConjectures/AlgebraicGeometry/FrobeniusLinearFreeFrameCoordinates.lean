@@ -54,7 +54,7 @@ private theorem frobenius_expansion_natural
     (r : R →+* T) (g : M →+ N) (fM : M →+ M) (fN : N →+ N)
     (hg : ∀ m i, eN (g m) i = r (eM m i))
     (hf : ∀ m, fN (g m) = g (fM m))
-    (hs : ∀ c m, fN (c • m) = c ^ p • fN m) (m : N) (i : Fin n) :
+    (hs : ∀ (c : T) (m : N), fN (c • m) = c ^ p • fN m) (m : N) (i : Fin n) :
     eN (fN m) i = ∑ j, r (eM (fM (eM.symm (Pi.single j 1))) i) * (eN m j) ^ p := by
   classical
   have hv (j : Fin n) : g (eM.symm (Pi.single j 1)) = eN.symm (Pi.single j 1) := by

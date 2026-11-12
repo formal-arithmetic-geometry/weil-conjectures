@@ -45,46 +45,48 @@ private noncomputable def soleFactorIso {B : Type u} [Category B]
     rw [hc.fac]
     simp
 
-set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
-set_option backward.isDefEq.respectTransparency.types true in
-/-- The single-source Hom comparison is natural in both the sheaf and the complex.
-
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, Hom-complex product
-and functoriality formulas. (blueprint: lem-sc-hom-complex-single-naturality)
-
-Proof: For each sheaf P and complex I, project the product defining Hom(P[0],I)
-to its degree-zero source factor. All other factors are zero, because P[0]^p
-is zero for p different from zero. The inverse is the product lift with this
-component and zero elsewhere. The product universal property gives both inverse
-identities. The differential formula reduces to postcomposition by d_I, as the
-source differential vanishes. Naturality in I follows from the postcomposition
-formula for the product projections. For k:Q → P, the precomposition formula for
-those same projections identifies Hom(k[0],I) with degreewise internal Hom(k,I).
-These arguments apply to unbounded I, zero P or Q, and the empty scheme. -/
-theorem homComplex_single_precomposition_iso (Y : Scheme.{u})
+private theorem single_hom_functor_iso (Y : Scheme.{u})
+    (F : (CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)ᵒᵖ ⥤
+      CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ ⥤
+      CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (π : ∀ (L M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (n p q : ℤ), p + n = q →
+        (((F.obj (op L)).obj M).X n ⟶ SheafOfModules.homObj (L.X p) (M.X q)))
+    (hlim : ∀ (L M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (n : ℤ), Nonempty (CategoryTheory.Limits.IsLimit
+        (CategoryTheory.Limits.Fan.mk (((F.obj (op L)).obj M).X n)
+          (fun p : ℤ ↦ π L M n p (p + n) rfl))))
+    (hdiff : ∀ (L M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (n m p q q' p' : ℤ) (_hnm : n + 1 = m) (hpq : p + m = q)
+      (hq' : p + n = q') (hp' : p' + n = q),
+      ((F.obj (op L)).obj M).d n m ≫ π L M m p q hpq =
+        π L M n p q' hq' ≫ SheafOfModules.homObjMap (𝟙 (L.X p)) (M.d q' q) -
+          n.negOnePow • (π L M n p' q hp' ≫
+            SheafOfModules.homObjMap (L.d p p') (𝟙 (M.X q))))
+    (hnat : ∀ (L L' M M' :
+      CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (f : L' ⟶ L) (g : M ⟶ M') (n p q : ℤ) (hpq : p + n = q),
+      (((F.map f.op).app M) ≫ (F.obj (op L')).map g).f n ≫ π L' M' n p q hpq =
+        π L M n p q hpq ≫ SheafOfModules.homObjMap (f.f p) (g.f q))
     (P Q : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (k : Q ⟶ P)
     [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).Additive]
     [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).Additive] :
-    ∃ bP : (homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).obj
+    ∃ bP : F.obj
         (op ((CochainComplex.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P)) ≅
       ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).mapHomologicalComplex (.up ℤ),
-    ∃ bQ : (homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).obj
+    ∃ bQ : F.obj
         (op ((CochainComplex.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj Q)) ≅
       ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).mapHomologicalComplex (.up ℤ),
       ∀ I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-      ((homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).map
+      (F.map
           ((CochainComplex.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op).app I ≫ bQ.hom.app I =
         bP.hom.app I ≫
           (NatTrans.mapHomologicalComplex
             ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).map k.op) (.up ℤ)).app I := by
   classical
-  let F := homComplexFunctor.{u, u, u, u} (R := Y.sheaf)
-  obtain ⟨π, hlim, hdiff, hnat⟩ :=
-    homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf)
   let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let S := CochainComplex.singleFunctor A 0
   let T (P : A) := (SheafOfModules.homFunctor Y.sheaf).obj (op P)
@@ -146,5 +148,46 @@ theorem homComplex_single_precomposition_iso (Y : Scheme.{u})
   rw [(F.obj (op (S.obj Q))).map_id] at h
   simp only [Category.comp_id] at h
   exact h
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The single-source Hom comparison is natural in both the sheaf and the complex.
+
+Source: Stacks Project, sites-cohomology.tex, Section 0A8X, Hom-complex product
+and functoriality formulas. (blueprint: lem-sc-hom-complex-single-naturality)
+
+Proof: For each sheaf P and complex I, project the product defining Hom(P[0],I)
+to its degree-zero source factor. All other factors are zero, because P[0]^p
+is zero for p different from zero. The inverse is the product lift with this
+component and zero elsewhere. The product universal property gives both inverse
+identities. The differential formula reduces to postcomposition by d_I, as the
+source differential vanishes. Naturality in I follows from the postcomposition
+formula for the product projections. For k:Q → P, the precomposition formula for
+those same projections identifies Hom(k[0],I) with degreewise internal Hom(k,I).
+These arguments apply to unbounded I, zero P or Q, and the empty scheme. -/
+theorem homComplex_single_precomposition_iso (Y : Scheme.{u})
+    (P Q : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (k : Q ⟶ P)
+    [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).Additive]
+    [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).Additive] :
+    ∃ bP : (homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).obj
+        (op ((CochainComplex.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P)) ≅
+      ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).mapHomologicalComplex (.up ℤ),
+    ∃ bQ : (homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).obj
+        (op ((CochainComplex.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj Q)) ≅
+      ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).mapHomologicalComplex (.up ℤ),
+      ∀ I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
+      ((homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).map
+          ((CochainComplex.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op).app I ≫ bQ.hom.app I =
+        bP.hom.app I ≫
+          (NatTrans.mapHomologicalComplex
+            ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).map k.op) (.up ℤ)).app I := by
+  obtain ⟨π, hlim, hdiff, hnat⟩ :=
+    homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf)
+  exact single_hom_functor_iso Y (homComplexFunctor (R := Y.sheaf)) π hlim hdiff hnat P Q k
 
 end AlgebraicGeometry
