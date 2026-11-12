@@ -53,6 +53,7 @@ abbrev strictEtaleBrownOrdinaryInverse
       (.mk _ _ _ _ R.val.ordinaryRight.hom))
 
 -- The transpose compares all four realization factors.
+set_option trace.profiler true in
 /-- The inverse Brown comparison is the exact localization of its ordinary mate.
 Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
 (blueprint: lem-pur-etale-brown-inverse-representative).
