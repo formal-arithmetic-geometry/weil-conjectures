@@ -349,23 +349,11 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
       (q ^ d) • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) := by
     rw [← hΨ, smul_smul, show q ^ d * (c : PadicAlgCl l) ^ d = 1 by
       rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
-  simp only [LinearEquiv.trans_apply]
-  refine (congrArg (fun v ↦ ψ.toLinearEquiv.symm.dualMap (S₅.toLinearEquiv v) _) hΨ').trans ?_
-  rw [map_smul, S₅.map_frobenius]
-  have key (v : Module.Dual (PadicAlgCl l) (H.stalk zf).carrier) :
-      ψ.toLinearEquiv.symm.dualMap (q ^ d • (H.stalk zf).dual.frobenius v)
-          ((((WeilComplex.homologySheaf 1).obj ((WeilComplex.derivedLowerStar j).obj
-            (WeilSheaf.toComplex.obj F))).stalk s).frobenius b) =
-        q ^ d * ψ.toLinearEquiv.symm.dualMap v b := by
-    rw [LinearEquiv.dualMap_apply, LinearEquiv.dualMap_apply, LinearMap.smul_apply,
-      FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
-      FrobeniusModule.Equiv.symm_map_frobenius ψ b, LinearEquiv.coe_coe,
-      LinearEquiv.symm_apply_apply, smul_eq_mul]
   have hqd : q ^ d = ((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l) := by
     simp [Scheme.Hom.residueCard, q, d]
-  refine (key _).trans ?_
   rw [hqd]
-  rfl
+  exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
+    (F.dual hF)).stalk s) Ψ.toLinearEquiv S₅ ψ (q ^ d) hΨ' a b
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
