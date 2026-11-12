@@ -122,12 +122,14 @@ private lemma comparison_boundary_of_epi
     {N : E} (s : F.obj M ⟶ N) (δ : F.obj L ⟶ N)
     (hδ : F.map d ≫ δ = F.map t ≫ s) :
     R.map b ≫ eM.hom ≫ s = eL.hom ≫ δ := by
+  have ht := α.naturality t
+  simp only [Functor.comp_map] at ht
   apply (cancel_epi eL.inv).mp
   rw [eL.inv_hom_id_assoc, ← hL]
   apply (cancel_epi (F.map d)).mp
   rw [← Category.assoc, α.naturality]
   change (α.app K ≫ R.map (Q.map d)) ≫ (R.map b ≫ eM.hom ≫ s) = F.map d ≫ δ
-  rw [Category.assoc, ← R.map_comp_assoc, hdt, ← Category.assoc, ← α.naturality]
+  rw [Category.assoc, ← R.map_comp_assoc, hdt, ← Category.assoc, ← ht]
   rw [Category.assoc, hM, eM.inv_hom_id_assoc]
   exact hδ.symm
 
@@ -261,7 +263,8 @@ theorem derivedModuleDirectImage_termwise_split_ses_triangle (g : X ⟶ Y)
     let d := CochainComplex.mappingCone.descShortComplex S
     let t : CochainComplex.mappingCone S.f ⟶ S.X₁⟦(1 : ℤ)⟧ :=
       (CochainComplex.mappingCone.triangle S.f).mor₃
-    have hd : IsIso (DerivedCategory.Q.map (F.map d)) := by
+    have hd : IsIso ((F ⋙ DerivedCategory.Q).map d) := by
+      change IsIso (DerivedCategory.Q.map (F.map d))
       dsimp [d, F]
       rw [← CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex,
         Functor.map_comp]
