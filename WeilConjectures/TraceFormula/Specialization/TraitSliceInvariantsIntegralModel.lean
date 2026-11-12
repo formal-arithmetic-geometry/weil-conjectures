@@ -47,10 +47,25 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+-- Tensoring preserves each colimit directly, avoiding repeated searches through adjoints.
+noncomputable local instance (priority := 2000) integralModelTensorLeftPreservesColimit
+    {J : Type} [SmallCategory J] (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    PreservesColimit F (MonoidalCategory.tensorLeft P) := by
+  infer_instance
+
+noncomputable local instance (priority := 2000) integralModelTensorRightPreservesColimit
+    {J : Type} [SmallCategory J] (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    PreservesColimit F (MonoidalCategory.tensorRight P) := by
+  infer_instance
+
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option maxHeartbeats 1000000 in
--- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
 pullback (`ProEtale.CondensedRing.derivedUpperStarExtendScalarsIso`). -/
@@ -96,6 +111,9 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
+attribute [local instance 2000] integralModelTensorLeftPreservesColimit
+  integralModelTensorRightPreservesColimit
+
 attribute [local instance] traitGenericFieldAlgebra
 
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
@@ -114,8 +132,6 @@ lemma baseChangeGaloisModel_j_comp_total :
   simp only [baseChangeGaloisModel, Hom.traitChangeModel_j, Hom.cartesianModel_j, Category.assoc]
   rw [pullback.condition]
 
-set_option maxHeartbeats 1000000 in
--- the derived pullbacks along the large composites of the base change model are large terms
 /-- The identification `L(j'')^* Lφ^* B ≅ L(ε'')^* A` on the generic fibre of `N''`. -/
 noncomputable def baseChangeGaloisModelPullbackIso
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -142,8 +158,6 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
-set_option maxHeartbeats 4000000 in
--- the integral model is transported along several derived pullbacks of the base change model
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
 an integral model `K₀` (the pullback of an integral model of `B`) such that the nearby cycles of
@@ -181,7 +195,9 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
                 (baseChangeGaloisModel hM b hb v hv).generic)).leftDerivedFunctor.obj
                   K₀.obj))) := by
   have : IsNoetherian M.total := hM.isTraitModel.isNoetherian_total
-  obtain ⟨E, B₀, ⟨e₀⟩⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB
+  refine (exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB).elim fun E hE ↦ ?_
+  refine hE.elim fun B₀ he₀ ↦ ?_
+  refine he₀.elim fun e₀ ↦ ?_
   have hK₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
     (baseChangeGaloisModel hM b hb v hv).j _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
@@ -190,8 +206,11 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
     (integralModelPullbackIso ℓ (baseChangeGaloisModel hM b hb v hv).j E _
       (integralModelPullbackIso ℓ (baseChangeHom hM b hb v hv).total E B₀.obj e₀) ≪≫
       baseChangeGaloisModelPullbackIso hM b hb v hv eB), ?_⟩
-  obtain ⟨p, hp, hpℓ, hpk⟩ := exists_prime_ne_dvd_of_natCast_eq_zero k'
-    (Fact.out : ringChar k' ≠ ℓ)
+  refine (exists_prime_ne_dvd_of_natCast_eq_zero k'
+    (Fact.out : ringChar k' ≠ ℓ)).elim fun p hp' ↦ ?_
+  have hp := hp'.1
+  have hpℓ := hp'.2.1
+  have hpk := hp'.2.2
   have : Fact p.Prime := ⟨hp⟩
   have := hasInvertibleExponent_integersResidueField (k' := k') E
   have hred := boundedConstructible_derivedExtendScalars_residueField M.total ℓ E.1 B₀.obj
@@ -202,7 +221,7 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
       (integersResidueField ℓ E.1)⟧).obj ((Mod.extendScalars (coefficientMap
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj
           B₀.obj))
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ (by exact_mod_proofs hred))
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hred)
   refine (boundedConstructible _).prop_of_iso
     (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
       (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
@@ -219,8 +238,6 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
             (baseChangeGaloisModel hM b hb v hv).j).app _).symm))) h
 
 set_option linter.style.whitespace false in
-set_option maxHeartbeats 2000000 in
--- comparing the Galois actions of `Gal(L^sep / L)` on the concrete layer is slow
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
 `ρ : M'' ⟶ N''_{L^sep}` carries the action of `τ` on the Galois layer to that of the generic
 automorphism `galoisEquiv⁻¹ τ`. -/
@@ -239,8 +256,8 @@ lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
             (traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
               (traitGenericField K)) τ).autAction Λ C) ≫
         ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C := by
-  obtain ⟨σ, rfl⟩ := GenericAut.galoisEquiv.surjective τ
-  rw [MulEquiv.symm_apply_apply]
-  exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ σ C
+  simpa only [MulEquiv.apply_symm_apply] using
+    pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ
+      ((GenericAut.galoisEquiv (k' := k') (K := K)).symm τ) C
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
