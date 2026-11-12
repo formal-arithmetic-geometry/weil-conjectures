@@ -60,7 +60,6 @@ private theorem localization_hom
     ((CatCommSq.iso G rX rY GO).hom.naturality v)
 
 
-set_option trace.profiler true in
 /-- The adjunction descends coherently to the inverse-image open.
 Source: Stacks Project, Tags 08EU (locality) and 08FE (direct-image restriction).
 Proof: both exact derived restriction functors are localizations at the maps they make

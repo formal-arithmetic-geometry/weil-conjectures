@@ -221,7 +221,7 @@ theorem exists_openRestriction_tensor_counit_descent
   have hloc : rY.IsLocalization WY := schemeDerivedOpenRestriction_isLocalization.{u, w, u} Y U
   let rhoY := Classical.choice (derivedTensor_openRestriction_natIso.{u, w, u} Y U)
   let rhoX := Classical.choice (derivedTensor_openRestriction_natIso.{u, w, u} X (f ⁻¹ᵁ U))
-  obtain ⟨s, ht⟩ := @tensor_descent
+  refine (@tensor_descent
     (schemeDerivedCategory.{u, w} Y) (schemeDerivedCategory.{u, w} X)
     (schemeDerivedCategory.{u, u} U.toScheme) (schemeDerivedCategory.{u, u} (f ⁻¹ᵁ U).toScheme)
     _ _ _ _
@@ -230,7 +230,7 @@ theorem exists_openRestriction_tensor_counit_descent
     (schemeDerivedTensorMonoidal.{u, u} (f ⁻¹ᵁ U).toScheme)
     (derivedPullback.{u, w} f) (derivedPullback.{u, u} (f ∣_ U))
     rY rX WY hloc (MorphismProperty.ContainsIdentities.inverseImage rY)
-    alpha t rhoY rhoX
+    alpha t rhoY rhoX).elim fun s ht ↦ ?_
   refine ⟨s, rhoY, rhoX, ?_⟩
   intro A B
   exact @tensor_counit_compatibility

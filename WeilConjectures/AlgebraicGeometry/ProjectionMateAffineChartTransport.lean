@@ -29,7 +29,6 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
 -- The two comparisons elaborate several independently chosen derived localizations.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
