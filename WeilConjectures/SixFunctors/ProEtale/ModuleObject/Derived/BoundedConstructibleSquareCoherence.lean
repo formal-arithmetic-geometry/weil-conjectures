@@ -251,6 +251,7 @@ lemma eqToHom_comp_δ_boundedConstructibleUpperStar {r r' : X ⟶ Y} (h : r = r'
   subst h
   simp
 
+set_option maxHeartbeats 2000000 in
 set_option profiler true in
 -- the tensor comparisons of composite pullbacks are unfolded
 /-- The tensor form of `boundedConstructibleUpperStarComp_square_coherence_comp`: the two
