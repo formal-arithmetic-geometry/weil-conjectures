@@ -318,6 +318,7 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
   rw [reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar ℓ h₁
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₁).obj A)
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B))]
+  trace_state
   have h_tensor := boundedConstructibleUpperStarComp_inv_app_tensor_δ ℓ f ΔY
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₁).obj A)
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B)
