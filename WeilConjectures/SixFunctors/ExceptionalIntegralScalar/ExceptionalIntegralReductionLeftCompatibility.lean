@@ -33,6 +33,32 @@ private theorem cancel_coordinates {D : Type*} [Category D] {A B C F G : D}
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id,
     Category.comp_id] using hh
 
+-- Paste the integral realization and counit squares before specializing to derived categories.
+private theorem reduction_comparison_pasting {C₀ C₁ : Type*} [Category C₀] [Category C₁]
+    {F G : C₀ ⥤ C₁} (δ : F ≅ G) {A B C D H : C₀} (r : A ≅ B)
+    (k : A ⟶ H) (b : B ⟶ C) (s : C ⟶ D) (t : D ⟶ H)
+    {Z₀ Z₁ Z₂ Z₃ Z₄ Z₅ Z₆ Z₇ Z₈ : C₁} (p : Z₀ ⟶ F.obj A)
+    (q : F.obj H ⟶ Z₁) (i : Z₁ ⟶ Z₂) (j : Z₂ ⟶ Z₃)
+    (u₁ : G.obj D ⟶ Z₄) (u₂ : Z₄ ⟶ Z₅)
+    (v₁ : G.obj C ⟶ Z₆) (v₂ : Z₆ ⟶ Z₇)
+    (v : Z₇ ⟶ Z₅) (w₁ : Z₅ ⟶ Z₈) (w₂ : Z₈ ⟶ Z₃)
+    (hi : r.inv ≫ k = b ≫ s ≫ t)
+    (hp : G.map t ≫ δ.inv.app H ≫ q ≫ i ≫ j = u₁ ≫ u₂ ≫ w₁ ≫ w₂)
+    (hm : G.map s ≫ u₁ ≫ u₂ = v₁ ≫ v₂ ≫ v) :
+    p ≫ F.map k ≫ q ≫ i ≫ j =
+      p ≫ δ.hom.app A ≫ G.map r.hom ≫ G.map b ≫ v₁ ≫ v₂ ≫ v ≫ w₁ ≫ w₂ := by
+  have hk : k = r.hom ≫ b ≫ s ≫ t := by
+    simpa only [Category.assoc, Iso.hom_inv_id_assoc] using
+      congrArg (fun z ↦ r.hom ≫ z) hi
+  calc
+    p ≫ F.map k ≫ q ≫ i ≫ j =
+        p ≫ δ.hom.app A ≫ G.map k ≫ δ.inv.app H ≫ q ≫ i ≫ j := by
+      rw [← δ.hom.naturality_assoc, Iso.hom_inv_id_app_assoc]
+    _ = _ := by
+      rw [hk]
+      simp only [Functor.map_comp, Category.assoc]
+      rw [hp, reassoc_of% hm]
+
 private theorem counit_coordinates (E : FieldStage.{u} l) (T : Scheme.{u})
     (R : Reconstruction l E T) (n : ℕ)
     (N : (sequenceProperty l E T).FullSubcategory) :
@@ -353,8 +379,6 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   WeilConjectures.coefficientSequenceCommRingPresheaf
 
 -- The ambient comparison elaborates several dependent coefficient-stage identifications.
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
 /-- The canonical finite evaluation intertwines the left exceptional scalar mate.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, reduction compatibility.
 Proof: apply the faithful finite full inclusion and substitute the scalar equality
@@ -507,41 +531,12 @@ theorem integralReductionLeftCompatibility
   have hSY := d.finiteScalar_normalized (s := .integral E) E
     ⟨n + 1, Nat.succ_pos n⟩ a ha false
   simp only [hSX, hSY] at hn
-  have hiT := congrArg TY.map hi
-  simp only [Functor.map_comp] at hiT
-  have hp := congrArg (fun z ↦ TY.map ((eqToIso RY.limit).hom.app NY) ≫
-    TY.map ((coefficientSequenceLimit l E.carrier Y).map
-      ((eqToIso (transport.support E)).hom.app N)) ≫ z) hproj
-  simp only [Functor.map_comp, Category.assoc] at hp
-  have hpμ := congrArg (fun z ↦ TY.map ((eqToIso RY.limit).hom.app NY) ≫ z ≫
-    (IntegralSystemRealization.supportEvaluation l E.carrier o c n).hom.app N.obj ≫
-    V.map ((eqToIso (RX.evaluation_eq n)).inv.app N ≫
-      (RX.evaluationRealization l E X n).hom.app K)) hμ
-  simp only [Functor.map_comp, Category.assoc] at hpμ
-  have hp := hp.trans hpμ
-  have hiT' := congrArg (fun z ↦ z ≫
-    δY.inv.app ((PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c).obj
-      K.obj) ≫ (PurCompactSupport.comparison a c).app K.obj ≫
-    ιX.hom.app ((pbcDerivedExtend (a.map X)).obj K.obj) ≫
-    V.map (δX.hom.app K.obj)) hiT
-  simp only [Category.assoc] at hiT'
-  have hp' := hiT'.trans hp
   let py := (eqToIso (d.finiteScalar_eq (s := .integral E) E
     ⟨n + 1, Nat.succ_pos n⟩ a ha false)).hom.app ((operation (.integral E)).F.obj K)
-  let ry := (finiteTorConstructibleIntegral l E.carrier Y).ι.map
-    ((transport.realizeF E).hom.app K)
-  have hcancel : TY.map ry ≫
-      TY.map ((finiteTorConstructibleIntegral l E.carrier Y).ι.map
-        ((transport.realizeF E).inv.app K)) = 𝟙 _ := by
-    dsimp only [ry]
-    rw [← TY.map_comp, ← Functor.map_comp, Iso.hom_inv_id_app,
-      CategoryTheory.Functor.map_id, TY.map_id]
-  have hp'' := congrArg (fun z ↦ py ≫
-    δY.hom.app ((operation (.integral E)).F.obj K).obj ≫ TY.map ry ≫ z) hp'
-  erw [reassoc_of% hcancel] at hp''
-  have hδ := δY.hom.naturality ((left (.integral E)).hom.app K)
-  erw [reassoc_of% hδ.symm] at hp''
-  erw [Iso.hom_inv_id_app_assoc] at hp''
+  have hp'' := reduction_comparison_pasting δY
+    ((finiteTorConstructibleIntegral l E.carrier Y).ι.mapIso ((transport.realizeF E).app K))
+    _ _ _ _ py _ _ _ _ _ _ _ _ _ _ hi hproj hμ
+  simp only [Functor.map_comp, Category.assoc] at hp''
   have hr := congrArg (fun z ↦
     IY.map (eY.hom.app ((operation (.integral E)).F.obj K)) ≫ z ≫
       VY.map ((eqToIso (transport.support E)).hom.app N) ≫
