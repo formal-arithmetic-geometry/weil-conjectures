@@ -132,6 +132,7 @@ private theorem pinnedSingle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.
   · simpa only [cast_eq] using Scheme.single_map_normalize f M
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The single-complex and homotopy-coordinate spellings require additional elaboration.
 private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {M N : Y.Modules} (k : M ⟶ N) :

@@ -122,6 +122,7 @@ private theorem nested_arrow_iso
   exact ⟨Arrow.isoMk a b hab.symm⟩
 
 set_option maxHeartbeats 1200000 in
+set_option profiler true in
 -- Nested scheme and derived-category comparisons need additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
