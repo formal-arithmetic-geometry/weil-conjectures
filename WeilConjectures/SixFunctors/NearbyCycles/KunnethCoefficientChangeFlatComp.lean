@@ -34,6 +34,36 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+private lemma flatComp_nonempty_arrowIso_map_trans {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {A B A' B' : C} {A'' B'' : D} {f : A ⟶ B} {g : A' ⟶ B'}
+    {h : A'' ⟶ B''} (k : Nonempty (Arrow.mk f ≅ Arrow.mk g))
+    (l : Nonempty (Arrow.mk (F.map g) ≅ Arrow.mk h)) :
+    Nonempty (Arrow.mk (F.map f) ≅ Arrow.mk h) :=
+  ⟨F.mapArrow.mapIso k.some ≪≫ l.some⟩
+
+-- Derived functors repeatedly request these graded tensor properties. Prove them once for
+-- module sheaves so elaborating each functor does not reconstruct the same colimit arguments.
+local instance flatComp_hasTensor₄ObjExt
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) :
+    ∀ K₁ K₂ K₃ K₄ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), GradedObject.HasTensor₄ObjExt K₁ K₂ K₃ K₄ := by
+  infer_instance
+
+local instance flatComp_hasGoodTensor₁₂Tensor
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) :
+    ∀ K₁ K₂ K₃ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), GradedObject.HasGoodTensor₁₂Tensor K₁ K₂ K₃ := by
+  infer_instance
+
+local instance flatComp_hasGoodTensorTensor₂₃
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) :
+    ∀ K₁ K₂ K₃ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), GradedObject.HasGoodTensorTensor₂₃ K₁ K₂ K₃ := by
+  infer_instance
+
 variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ₁]
   [IsCommMonObj Λ₁] [MonObj Λ₂] [IsCommMonObj Λ₂] [MonObj Λ₃] [IsCommMonObj Λ₃]
   (a₁ : Λ₁ ⟶ Λ₂) [IsMonHom a₁] (a₂ : Λ₂ ⟶ Λ₃) [IsMonHom a₂]
@@ -42,8 +72,6 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 1000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map under two successive flat changes of coefficients**: if the (Push)
 comparisons of `a₁` and `a₂` are invertible on bounded below objects along quasi-compact
 quasi-separated morphisms, then for models whose `j`s are quasi-compact and quasi-separated and
@@ -71,42 +99,33 @@ theorem nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat
           ((Mod.extendScalars (coefficientMap a₁ X)).leftDerivedFunctor.obj A₀))
         ((Mod.extendScalars (coefficientMap a₂ Y)).leftDerivedFunctor.obj
           ((Mod.extendScalars (coefficientMap a₁ Y)).leftDerivedFunctor.obj B₀)))) := by
+  let A₁ := (Mod.extendScalars (coefficientMap a₁ X)).leftDerivedFunctor.obj A₀
+  let B₁ := (Mod.extendScalars (coefficientMap a₁ Y)).leftDerivedFunctor.obj B₀
+  let C₀ := L((f₁)^*⟦Λ₁⟧).obj A₀ ⊗ L((f₂)^*⟦Λ₁⟧).obj B₀
+  let C₁ := L((f₁)^*⟦Λ₂⟧).obj A₁ ⊗ L((f₂)^*⟦Λ₂⟧).obj B₁
   -- the first step `a₁`
   have := isGE_leftDerivedUpperStar_obj _ M.ε A₀ n
   have := isGE_leftDerivedUpperStar_obj _ N.ε B₀ n
-  have := isGE_leftDerivedUpperStar_obj _ P.ε
-    (L((f₁)^*⟦Λ₁⟧).obj A₀ ⊗ L((f₂)^*⟦Λ₁⟧).obj B₀) m
+  have := isGE_leftDerivedUpperStar_obj _ P.ε C₀ m
   have k₁ := nonempty_arrowIso_map_kunnethMap_of_flat a₁ φ₁ φ₂ A₀ B₀
     (h₁ M.j _ n) (h₁ N.j _ n) (h₁ P.j _ m)
   -- the second step `a₂`, at the bounded below `T₁ A₀` and `T₁ B₀`
-  have := isGE_leftDerivedFunctor_extendScalars_obj a₁ A₀ n
-  have := isGE_leftDerivedFunctor_extendScalars_obj a₁ B₀ n
-  have := isGE_leftDerivedFunctor_extendScalars_obj a₁
-    (L((f₁)^*⟦Λ₁⟧).obj A₀ ⊗ L((f₂)^*⟦Λ₁⟧).obj B₀) m
-  have : (L((f₁)^*⟦Λ₂⟧).obj ((Mod.extendScalars (coefficientMap a₁ X)).leftDerivedFunctor.obj A₀) ⊗
-      L((f₂)^*⟦Λ₂⟧).obj
-        ((Mod.extendScalars (coefficientMap a₁ Y)).leftDerivedFunctor.obj B₀)).IsGE m :=
-    DerivedCategory.TStructure.t.isGE_of_iso (X := (Mod.extendScalars (coefficientMap a₁
-      Z)).leftDerivedFunctor.obj (L((f₁)^*⟦Λ₁⟧).obj A₀ ⊗ L((f₂)^*⟦Λ₁⟧).obj B₀))
+  have : A₁.IsGE n := isGE_leftDerivedFunctor_extendScalars_obj a₁ A₀ n
+  have : B₁.IsGE n := isGE_leftDerivedFunctor_extendScalars_obj a₁ B₀ n
+  have := isGE_leftDerivedFunctor_extendScalars_obj a₁ C₀ m
+  have : C₁.IsGE m :=
+    DerivedCategory.TStructure.t.isGE_of_iso
+      (X := (Mod.extendScalars (coefficientMap a₁ Z)).leftDerivedFunctor.obj C₀)
       (((derivedExtendScalarsTensorIso a₁ Z).app _).app _ ≪≫
         tensorIso ((derivedPullIso a₁ f₁).app A₀) ((derivedPullIso a₁ f₂).app B₀)) m
-  have := isGE_leftDerivedUpperStar_obj _ M.ε
-    ((Mod.extendScalars (coefficientMap a₁ X)).leftDerivedFunctor.obj A₀) n
-  have := isGE_leftDerivedUpperStar_obj _ N.ε
-    ((Mod.extendScalars (coefficientMap a₁ Y)).leftDerivedFunctor.obj B₀) n
-  have := isGE_leftDerivedUpperStar_obj _ P.ε
-    (L((f₁)^*⟦Λ₂⟧).obj ((Mod.extendScalars (coefficientMap a₁ X)).leftDerivedFunctor.obj A₀) ⊗
-      L((f₂)^*⟦Λ₂⟧).obj
-        ((Mod.extendScalars (coefficientMap a₁ Y)).leftDerivedFunctor.obj B₀)) m
-  have k₂ := nonempty_arrowIso_map_kunnethMap_of_flat a₂ φ₁ φ₂
-    ((Mod.extendScalars (coefficientMap a₁ X)).leftDerivedFunctor.obj A₀)
-    ((Mod.extendScalars (coefficientMap a₁ Y)).leftDerivedFunctor.obj B₀)
+  have := isGE_leftDerivedUpperStar_obj _ M.ε A₁ n
+  have := isGE_leftDerivedUpperStar_obj _ N.ε B₁ n
+  have := isGE_leftDerivedUpperStar_obj _ P.ε C₁ m
+  have k₂ := nonempty_arrowIso_map_kunnethMap_of_flat a₂ φ₁ φ₂ A₁ B₁
     (h₂ M.j _ n) (h₂ N.j _ n) (h₂ P.j _ m)
-  obtain ⟨e₁⟩ := k₁
-  obtain ⟨e₂⟩ := k₂
-  exact ⟨(Mod.extendScalars (coefficientMap a₂ Z')).leftDerivedFunctor.mapArrow.mapIso e₁ ≪≫ e₂⟩
-set_option maxHeartbeats 1000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
+  exact flatComp_nonempty_arrowIso_map_trans
+    (Mod.extendScalars (coefficientMap a₂ Z')).leftDerivedFunctor k₁ k₂
+
 /-- **The restricted Künneth map under two successive flat changes of coefficients**: under the
 hypotheses of `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat`, for every
 `h : W ⟶ Z'`, `T₂ T₁ Lh^* Π_{A₀,B₀}` and `Lh^* Π_{T₂ T₁ A₀, T₂ T₁ B₀}` are isomorphic arrows. -/
