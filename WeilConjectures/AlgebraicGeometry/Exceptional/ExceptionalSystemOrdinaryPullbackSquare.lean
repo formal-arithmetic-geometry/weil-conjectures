@@ -635,9 +635,10 @@ private theorem constantSection_comparison
   have hHmap := congrArg I.map hH
   simp only [Functor.map_comp] at hFmap hHmap
   simp only [Category.assoc]
-  rw [← reassoc_of% hG', reassoc_of% hFmap, γ.hom.naturality_assoc]
-  dsimp only [Functor.comp_map]
-  rw [reassoc_of% hHmap, hI, ← reassoc_of% hs]
+  have hγ := γ.hom.naturality s
+  dsimp only [Functor.comp_map] at hγ
+  rw [← reassoc_of% hG', reassoc_of% hFmap, reassoc_of% hγ,
+    reassoc_of% hHmap, hI, ← reassoc_of% hs]
 
 -- Comparing constant generators unfolds several prescribed geometric inverse-image functors.
 private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)
@@ -673,7 +674,7 @@ private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)
   apply coefficientRing_ext n
   intro x
   rw [hq]
-  erw [Functor.map_id, Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
   exact constantSection_comparison
       (ProEtale.comparisonCoefficientPullback (Type (u + 1)) U) L
       (Scheme.etaleSetPullback g) C γ
