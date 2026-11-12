@@ -379,6 +379,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
   (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (n : ℕ)
 
+private theorem reductionExtension_def :
+    integralReductionChangeOfRings l E X D hl n = scalarReductionExtension l E X n := rfl
+
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private def reductionNat :
     DerivedCategory.Q ⋙ scalarReductionDerivedExtension l E X n ⟶
@@ -940,22 +943,31 @@ private theorem ordinary_square (n : ℕ)
 private theorem ordinary_square_reductionUnits
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (n : ℕ)
     (P Q Z : CochainComplex (scalarReductionSource l E X) ℤ)
-    (t : Z ⟶ (U X l E n).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Q))
-    (betaZ : ((totalTensor.{u, u} X (S X l E n)).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
-      (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Z) ⟶
-      ((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj (((totalTensor.{u, u} X (B X l E)).obj P).obj Z))
+    (t : Z ⟶ (U X l E n).obj
+          ((F X l E n).obj Q))
+    (betaZ : ((totalTensor.{u, u} X (S X l E n)).obj
+          ((F X l E n).obj P)).obj
+     
+          ((F X l E n).obj Z) ⟶
+      (F X l E n).obj (((totalTensor.{u, u} X (B X l E)).obj P).obj Z))
     [IsIso betaZ]
-    (betaQ : ((totalTensor.{u, u} X (S X l E n)).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
-      (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Q) ⟶
-      ((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj (((totalTensor.{u, u} X (B X l E)).obj P).obj Q))
+    (betaQ : ((totalTensor.{u, u} X (S X l E n)).obj
+          ((F X l E n).obj P)).obj
+     
+          ((F X l E n).obj Q) ⟶
+      (F X l E n).obj (((totalTensor.{u, u} X (B X l E)).obj P).obj Q))
     (b : ((totalTensor.{u, u} X (B X l E)).obj P).obj
-        ((U X l E n).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Q)) ⟶
-      (U X l E n).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj
+        ((U X l E n).obj
+          ((F X l E n).obj Q)) ⟶
+      (U X l E n).obj
+          ((F X l E n).obj
         (((totalTensor.{u, u} X (B X l E)).obj P).obj Q)))
     (hZ : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ)
       (x : (P.X i).val.obj V) (z : (Z.X j).val.obj V),
       (betaZ.f (i + j)).val.app V
-        (totalPair.{u, u} X (S X l E n) (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj P) (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Z)
+        (totalPair.{u, u} X (S X l E n)
+          ((F X l E n).obj P)
+          ((F X l E n).obj Z)
           i j V ((reductionUnit l E X D hl n (P.X i)).val.app V x)
             ((reductionUnit l E X D hl n (Z.X j)).val.app V z)) =
       (reductionUnit l E X D hl n _).val.app V
@@ -963,7 +975,9 @@ private theorem ordinary_square_reductionUnits
     (hQ : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ)
       (x : (P.X i).val.obj V) (y : (Q.X j).val.obj V),
       (betaQ.f (i + j)).val.app V
-        (totalPair.{u, u} X (S X l E n) (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj P) (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+        (totalPair.{u, u} X (S X l E n)
+          ((F X l E n).obj P)
+          ((F X l E n).obj Q)
           i j V ((reductionUnit l E X D hl n (P.X i)).val.app V x)
             ((reductionUnit l E X D hl n (Q.X j)).val.app V y)) =
       (reductionUnit l E X D hl n _).val.app V
@@ -971,14 +985,16 @@ private theorem ordinary_square_reductionUnits
     (hb : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ) (s : (S X l E n).obj.obj V)
       (x : (P.X i).val.obj V) (y : (Q.X j).val.obj V),
       (b.f (i + j)).val.app V
-        (totalPair.{u, u} X (B X l E) P ((U X l E n).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Q))
+        (totalPair.{u, u} X (B X l E) P ((U X l E n).obj
+          ((F X l E n).obj Q))
           i j V x (sfReductionTensor l E X n (Q.X j) V s y)) =
       sfReductionTensor l E X n _ V s
         (totalPair.{u, u} X (B X l E) P Q i j V x y)) :
     let adj := (scalarReductionExtension_adjunction l E X n).choose.mapHomologicalComplex (.up ℤ)
     let t' := (adj.homEquiv _ _).symm t
     adj.homEquiv _ _ (inv betaZ ≫
-        ((totalTensor.{u, u} X (S X l E n)).obj (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj P)).map t' ≫ betaQ) =
+        ((totalTensor.{u, u} X (S X l E n)).obj
+          ((F X l E n).obj P)).map t' ≫ betaQ) =
       ((totalTensor.{u, u} X (B X l E)).obj P).map t ≫ b := by
   have hu (M : completedIntegralModuleSheaves l E X D hl) (W : X.ProEtᵒᵖ)
       (x : M.val.obj W) :
@@ -1167,7 +1183,7 @@ theorem restrictionTensor_mate_model
   let S := integralCoefficientCommRingSheaf l E X n
   let r := @DerivedCategory.Q (scalarReductionTarget.{u, u} l E X n) _ _
     (HasDerivedCategory.standard _)
-  let F := (integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)
+  let F := (scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)
   let U := (scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)
   let L := scalarReductionDerivedExtension l E X n
   let V := scalarReductionDerivedRestriction l E X n
@@ -1195,9 +1211,11 @@ theorem restrictionTensor_mate_model
   let t' : F.obj Z ⟶ F.obj Q := (adj₀.homEquiv Z (F.obj Q)).symm t
   have hZ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
   have normZ := m.normalization P Z hP hZ₀
+  dsimp only [MateDerived.reductionExtension_def] at normZ
   obtain ⟨hFP, hFZ, betaZ₀, hiZ₀, hbZ, hnZ⟩ := normZ
   have hQ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Q := hQ
   have normQ := m.normalization P Q hP hQ₀
+  dsimp only [MateDerived.reductionExtension_def] at normQ
   obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := normQ
   let betaZ := betaZ₀
   let betaQ := betaQ₀
