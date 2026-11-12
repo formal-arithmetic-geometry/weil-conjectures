@@ -37,6 +37,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
+set_option profiler true in
 set_option maxHeartbeats 6000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- **The kernel pushforward and the Künneth–Verdier isomorphisms** (blueprint

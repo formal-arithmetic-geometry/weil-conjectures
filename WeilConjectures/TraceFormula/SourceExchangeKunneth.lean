@@ -74,6 +74,7 @@ lemma classTest_kunnethVerdierMap :
 
 end Test
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- the adjunctions of bounded constructible complexes are unfolded in the defeq checks
 /-- The left projection morphism of a proper morphism after a unit. -/

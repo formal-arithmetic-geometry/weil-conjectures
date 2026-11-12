@@ -186,6 +186,7 @@ lemma map_unit_comp_lowerShriekIsoLowerStar_inv (g : C ⟶ D) [IsProper g.left]
   rewrite [reassoc_of% h₁, ← (boundedConstructibleLowerStar ℓ g).map_comp_assoc, h₂]
   simp only [Functor.map_comp, Category.assoc]
 
+set_option profiler true in
 set_option maxHeartbeats 4000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The coherence part of the class of the coefficient pushforward: for `g ≫ b = c ≫ q`,
