@@ -400,7 +400,7 @@ theorem native_forget_normalized_binary_models
     have hloc := hn.choose_spec.2
     have hψj : ψ = j := normalized_binary_uncurry_eq a P T I j ψ hψ
     change hn.choose = j at hψj
-    rw [hψj] at hψ hloc
+    have hψquasi : QuasiIso hn.choose := hψj.symm ▸ hj
     have heval := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
     have hUI := heval.choose
@@ -415,7 +415,7 @@ theorem native_forget_normalized_binary_models
     have hψ' := ho.choose_spec.1
     have hloc' := ho.choose_spec.2
     let v := chain P T
-    have hchain' : V.map j = v.hom ≫ ψ' := by
+    have hchain' : V.map hn.choose = v.hom ≫ ψ' := by
       dsimp only [ψ']
       apply HomologicalComplex.hom_ext
       intro n
@@ -425,7 +425,7 @@ theorem native_forget_normalized_binary_models
       have hqp : q + p = n := by omega
       change U.map (HomologicalComplex.ιMapBifunctor P T
           (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
-          U.map (j.f n) = _
+          U.map (hn.choose.f n) = _
       have hi : U.map (HomologicalComplex.ιMapBifunctor P T
             (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫ v.hom.f n =
           (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
@@ -467,8 +467,7 @@ theorem native_forget_normalized_binary_models
       rw [Category.assoc, ← DerivedCategory.Q.map_comp, Iso.inv_hom_id]
       rw [CategoryTheory.Functor.map_id, Category.comp_id]
     have hψiso : IsIso (DerivedCategory.Q.map ψ') := by
-      have : QuasiIso j := hj
-      have : IsIso (DerivedCategory.Q.map (V.map j)) := by infer_instance
+      have : IsIso (DerivedCategory.Q.map (V.map hn.choose)) := by infer_instance
       rw [hchain', Functor.map_comp] at this
       exact (isIso_comp_left_iff (DerivedCategory.Q.map v.hom)
         (DerivedCategory.Q.map ψ')).mp this
@@ -476,7 +475,7 @@ theorem native_forget_normalized_binary_models
       DerivedCategory.Q F (V ⋙ DerivedCategory.Q) δ C.tensorComparison
       (nativeOpenTensorModel k₀ l X P T hP hT)
       (model (V.obj T) (V.obj P) hUT) (DerivedCategory.Q.mapIso v)
-      j (DerivedCategory.Q.map ψ') f f' hloc hloc'
+      hn.choose (DerivedCategory.Q.map ψ') f f' hloc hloc'
       (by simpa only [Functor.comp_map, Functor.map_comp, Functor.mapIso_hom] using
         congrArg DerivedCategory.Q.map hchain') hunc
     have hh := congrArg
