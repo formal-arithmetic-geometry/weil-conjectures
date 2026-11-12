@@ -160,7 +160,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel h Ω ℓ hdeg C hC E
     K₀ e htors).elim fun L' hL' ↦ ⟨L', ?_⟩
   let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
-  letI : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K.obj) :=
+  let : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K.obj) :=
     isIso_card_nsmul_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     K.obj
