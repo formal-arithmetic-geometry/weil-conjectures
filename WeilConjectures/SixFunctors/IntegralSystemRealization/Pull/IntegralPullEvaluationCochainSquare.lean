@@ -31,7 +31,6 @@ Source: Stacks 03D2 and 0941
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   ordinaryPullEvaluationComplex l E f n
 
-set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
 Lemma 4.10, p. 23; Stacks 03D2 and 0941
