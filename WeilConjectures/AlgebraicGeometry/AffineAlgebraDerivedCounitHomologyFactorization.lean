@@ -35,7 +35,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The scalar-restriction comparison elaborates several sheaf category instances.
 /-- Under the cohomology comparison, the derived affine algebra counit is the
