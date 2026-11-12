@@ -122,7 +122,6 @@ noncomputable def prodUpperShriekBaseChangeUnit :
     (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
-set_option profiler true in
 /-- Transposing the base change map at the unit gives the inverse compact-support base
 change, followed by the pulled-back counit and the monoidal unit isomorphism. -/
 private lemma prodUpperShriekBaseChangeUnit_homEquiv_symm :
@@ -139,7 +138,6 @@ private lemma prodUpperShriekBaseChangeUnit_homEquiv_symm :
   congr 1
   simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
 
-set_option profiler true in
 /-- The exceptional Künneth map `α : Lp_X^* M ⊗ Lp_Y^* ω_Y ⟶ Rp_X^! M` factors as the exceptional
 base change map of the product square at the unit, `Lp_Y^* ω_Y ⟶ Rp_X^! ℚ̄_ℓ`, followed by the
 purity map `γ_{p_X, M} : Lp_X^* M ⊗ Rp_X^! ℚ̄_ℓ ⟶ Rp_X^! M`. -/
@@ -169,7 +167,8 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
     ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).counit.app (𝟙_ _)) hx'
   rw [exceptionalKunnethMap, exceptionalKunnethAdjoint, key,
-    Adjunction.homEquiv_naturality_left, upperShriekUnitTensorMap]
+    Adjunction.homEquiv_naturality_left]
+  rfl
 
 /-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
 `Y` be smooth over `k`. The exceptional Künneth map
