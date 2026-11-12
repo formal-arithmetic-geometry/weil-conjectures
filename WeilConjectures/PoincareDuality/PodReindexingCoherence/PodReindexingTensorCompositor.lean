@@ -355,7 +355,6 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     (P := (podReindexingComplexFunctor l E (h ≫ g) s).obj P)
     (Q := (podReindexingComplexFunctor l E (h ≫ g) s).obj L)
     (n := n)
-    (H := SheafOfModules.scalarModules (ProEt.topology Z) (podReindexingRing l E Z s))
     (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
   intro p q hpq U x y
   let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
