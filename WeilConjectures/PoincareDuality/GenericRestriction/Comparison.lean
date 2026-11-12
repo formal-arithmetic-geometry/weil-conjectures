@@ -327,13 +327,10 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
   have hT₁ := gStar.map_distinguished _ ((ihom K).map_distinguished _ hT')
   have hT₂ := (ihom (gStar.obj K)).map_distinguished _
     (gStar.map_distinguished _ hT')
-  have : IsIso (ihomUpperStarComparison Λ gZ K
-      (Triangle.mk ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M) v' w).invRotate.obj₁) :=
-    hφ₁
-  refine Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton hT₁ hT₂ _ _
+  refine @Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton _ _ _ _ _ _ _ _ _ hT₁ hT₂ _ _
     (ihomUpperStarComparison Λ gZ K (jPush.obj (jStar.obj M)))
     (ihomUpperStarComparison_naturality Λ gZ K _)
-    (ihomUpperStarComparison_naturality Λ gZ K _) ?_
+    (ihomUpperStarComparison_naturality Λ gZ K _) ?_ hφ₁ hU
   -- the third term is `Rj'_*` of an object, and `Lj'^*` kills the first one
   let eB := (ihom (gStar.obj K)).mapIso
       (asIso ((baseChangeMap Λ sqU.toCommSq).app (jStar.obj M))) ≪≫
