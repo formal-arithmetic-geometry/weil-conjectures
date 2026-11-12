@@ -158,6 +158,7 @@ end CategoryTheory
 
 namespace SheafOfModules
 
+set_option profiler true in
 set_option maxHeartbeats 2000000 in
 -- Checking the dependent tensor comparison unfolds large sheafification constructions.
 /-- Localization at an arbitrary sheaf commutes with ordinary ringed-topos pullback.
