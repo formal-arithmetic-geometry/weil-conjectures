@@ -155,7 +155,6 @@ def IntegralComparisonPullbackGeneratorEquation {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((κ n).hom.f i).val.app (op U)
           (coefficientEvaluationSection l E Y (C.X i) n (op U) x))
 
-set_option maxHeartbeats 12000000 in
 set_option profiler true in
 -- Elaborating the finite-generator reindexing requires large coefficient-functor comparisons.
 /-- Finite generator normalization fixes the signed Roos shift square.
