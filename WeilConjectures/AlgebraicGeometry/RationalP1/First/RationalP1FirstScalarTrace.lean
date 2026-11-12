@@ -276,7 +276,7 @@ private theorem ordinary_endpoint_square
 
 end OrdinaryEndpointSquare
 
-set_option trace.profiler true in
+set_option profiler true in
 -- Identify the two exact-derived composition paths on a single module.
 private theorem derivedPull_single
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -308,7 +308,30 @@ private theorem derivedPull_single
   rw [reassoc_of% (Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
     (CondensedRing.upperStar Λ f) (Mod.extendScalars (coefficientMap a X)) M)]
 
-set_option trace.profiler true in
+-- Paste naturality squares before specializing to the concrete derived functors.
+private theorem comparison_endpoint_paste
+    {B C D B' C' D' : Type*}
+    [Category B] [Category C] [Category D] [Category B'] [Category C'] [Category D']
+    (G : B ⥤ D) (I : C ⥤ D) (SB : B ⥤ B') (SC : C ⥤ C') (SD : D ⥤ D')
+    (LG : B' ⥤ D') (LI : C' ⥤ D')
+    (cG : SB ⋙ LG ⟶ G ⋙ SD) (cI : SC ⋙ LI ⟶ I ⋙ SD)
+    {M N : B} {M' N' : C} {Q : D} {K : D'}
+    (x : K ⟶ LG.obj (SB.obj M)) (y : K ⟶ LI.obj (SC.obj M'))
+    (c : G.obj M ⟶ I.obj M') (e : M ⟶ N) (m : M' ⟶ N')
+    (n : G.obj N ⟶ Q) (r : I.obj N' ⟶ Q)
+    (hc : y ≫ cI.app M' = x ≫ cG.app M ≫ SD.map c)
+    (ho : c ≫ I.map m ≫ r = G.map e ≫ n) :
+    y ≫ LI.map (SC.map m) ≫ cI.app N' ≫ SD.map r =
+      x ≫ LG.map (SB.map e) ≫ cG.app N ≫ SD.map n := by
+  have hi := cI.naturality m
+  have hg := cG.naturality e
+  dsimp only [Functor.comp_map] at hi hg
+  rw [reassoc_of% hi, reassoc_of% hc]
+  have hh := congrArg SD.map ho
+  simp only [Functor.map_comp] at hh
+  rw [hh, ← reassoc_of% hg]
+
+set_option profiler true in
 -- Normalize both scalar endpoints and paste the exact single comparisons.
 private theorem endpoint_pull_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -326,25 +349,29 @@ private theorem endpoint_pull_square
     (derivedPullIso a f).hom.app ((DerivedCategory.singleFunctor (Modules Λ S) 0).obj M) ≫
         (derivedUpper Λ' f).map cS.iso.hom ≫ e'.derived =
       (derivedScalars a X).map e.derived ≫ cX.iso.hom := by
-  rw [endpoint_hom a cS, endpoint_hom a cX]
-  unfold PullEndpoint.derived singlePullback
-  simp only [Functor.map_comp, Category.assoc, Iso.app_hom]
-  have hS := NatTrans.naturality
+  have h := comparison_endpoint_paste
+    (Mod.extendScalars (coefficientMap a X)) (CondensedRing.upperStar Λ' f)
+    (DerivedCategory.singleFunctor (Modules Λ X) 0)
+    (DerivedCategory.singleFunctor (Modules Λ' S) 0)
+    (DerivedCategory.singleFunctor (Modules Λ' X) 0)
+    (derivedScalars a X) (derivedUpper Λ' f)
+    (Mod.extendScalars (coefficientMap a X)).singleFunctorCompLeftDerivedFunctorIso.hom
     (CondensedRing.upperStar Λ' f).singleFunctorCompLeftDerivedFunctorIso.hom
+    ((derivedScalars a X).map
+      ((CondensedRing.upperStar Λ f).singleFunctorCompLeftDerivedFunctorIso.hom.app M))
+    ((derivedPullIso a f).hom.app ((DerivedCategory.singleFunctor (Modules Λ S) 0).obj M) ≫
+      (derivedUpper Λ' f).map
+        ((Mod.extendScalars (coefficientMap a S)).singleFunctorCompLeftDerivedFunctorIso.hom.app M))
+    ((CondensedRing.pullIso a f).hom.app M) e.iso.hom
     (((Mod.extendRestrictAdjunction (coefficientMap a S)).homEquiv M M').symm
       cS.semilinear.hom)
-  dsimp only [Functor.comp_map] at hS
-  erw [reassoc_of% hS]
-  erw [reassoc_of% (derivedPull_single a f M)]
-  have hX := NatTrans.naturality
-    (Mod.extendScalars (coefficientMap a X)).singleFunctorCompLeftDerivedFunctorIso.hom
-    e.iso.hom
-  dsimp only [Functor.comp_map] at hX
-  erw [reassoc_of% hX]
-  have hh := congrArg (fun z ↦ (DerivedCategory.singleFunctor (Modules Λ' X) 0).map z)
+    (((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv N N').symm
+      cX.semilinear.hom) e'.iso.hom
+    (by simpa only [Category.assoc] using derivedPull_single a f M)
     (ordinary_endpoint_square a f cS.semilinear cX.semilinear e e' hr)
-  simp only [Functor.map_comp] at hh
-  rw [hh]
+  rw [endpoint_hom a cS, endpoint_hom a cX]
+  unfold PullEndpoint.derived singlePullback
+  simpa only [Functor.map_comp, Category.assoc, Iso.app_hom] using h
 
 -- Supply the shift compatibilities of the full derived composite adjunctions.
 private theorem derivedPull_commShift
