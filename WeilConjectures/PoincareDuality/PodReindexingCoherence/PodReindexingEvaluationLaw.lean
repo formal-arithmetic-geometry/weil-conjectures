@@ -424,7 +424,6 @@ private theorem normalized_uncurry (W : Scheme.{u})
   simpa only [Category.assoc, Iso.hom_inv_id_assoc] using he
 
 -- Elaborate the fixed Hom and tensor model equations across the two sites.
-set_option trace.profiler true in
 private theorem evaluation_representatives {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)
