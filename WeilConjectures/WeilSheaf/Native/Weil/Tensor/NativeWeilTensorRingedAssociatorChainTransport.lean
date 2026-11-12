@@ -182,19 +182,15 @@ theorem nativeChainForgetComponent_transport
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
     Mod.monoidalCategoryCochainComplex
   let := mO.toMonoidalCategoryStruct
-  let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.R
-  let := SheafOfModules.monoidalCategory D.b.R
-  let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.Q
-  let := SheafOfModules.monoidalCategory D.b.Q
   let mB : MonoidalCategory (CochainComplex
       (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R) ℤ) := inferInstance
   let := mB.toMonoidalCategoryStruct
   let mA : MonoidalCategory (CochainComplex
       (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.K D.b.Q) ℤ) := inferInstance
   let := mA.toMonoidalCategoryStruct
-  obtain ⟨d⟩ := native_ordinary_ringed_tensor_underived_data D.b
-  obtain ⟨o⟩ := native_ordinary_ringed_tensor_chain_comparison D.b D.κ D.hκ d
-  obtain ⟨r⟩ := native_ringed_forget_tensor_chain_comparison D.b
+  let d := Classical.choice (native_ordinary_ringed_tensor_underived_data D.b)
+  let o := Classical.choice (native_ordinary_ringed_tensor_chain_comparison D.b D.κ D.hκ d)
+  let r := Classical.choice (native_ringed_forget_tensor_chain_comparison D.b)
   let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
   let F := D.b.forget.mapHomologicalComplex (.up ℤ)
   let G := D.b.ordinary.functor.mapHomologicalComplex (.up ℤ)
