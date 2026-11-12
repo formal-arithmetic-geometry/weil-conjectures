@@ -53,7 +53,27 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-set_option trace.profiler true in
+-- Derived pullbacks repeatedly request these same graded tensor properties. Prove them
+-- once for module objects, instead of rebuilding their colimit instances at each use.
+private instance finiteSupportTensorFour (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (W X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt W X Y Z := by
+  infer_instance
+
+private instance finiteSupportTensorLeft (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor X Y Z := by
+  infer_instance
+
+private instance finiteSupportTensorRight (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (X Y Z : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ X Y Z := by
+  infer_instance
+
+set_option profiler true in
 /-- A morphism between bounded constructible complexes is invertible away from finitely many
 closed points if it is invertible over the generic points of local coordinate lines. -/
 private theorem exists_finset_isIso_of_forall_exists_coordinates
@@ -315,7 +335,7 @@ lemma isTraitModelOver_restrictOpen_productOpen
   convert hP.restrictOpen (productOpen φ₁ φ₂ V W) using 1 <;>
     simp [Scheme.Hom.resLE_comp_ι_assoc]
 
-set_option trace.profiler true in
+set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
