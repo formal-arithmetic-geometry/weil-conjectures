@@ -79,7 +79,6 @@ private theorem self_overlap {t : ℕ} (φ : R →+* S) (f : Fin t → R)
   simpa only [localMap, T, P, d, LinearEquiv.coe_coe, IsLocalizedModule.map_LocalizedModules,
     LocalizedModule.mkLinearMap_apply] using he
 
-set_option maxHeartbeats 600000 in
 -- Finite-product localization and restricted tensor scalars need extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- A chart section becomes the projection of a global compatible section after

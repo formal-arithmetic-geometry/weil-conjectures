@@ -93,7 +93,6 @@ end ResidueField
 
 section BaseChangeSurjective
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The faithful flatness of `κ(q)` over `κ(p)` goes through the residue field algebra
 -- instances on localizations, which makes the instance search exceed the default limit.
 /-- If `Spec A → Spec R` is surjective, so is any base change `Spec (S ⊗[R] A) → Spec S`.
