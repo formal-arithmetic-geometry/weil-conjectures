@@ -31,6 +31,46 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+set_option profiler true in
+private theorem quotient_tensor_coordinates_of_chosen
+    {A C : Type u} [CommRing A] [CommRing C] {T : Type*}
+    (I : Ideal A) (J : Ideal C) (φ : A →+* C)
+    (hφ : I ≤ J.comap φ)
+    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))
+    (R : ProjectiveResolution (ModuleCat.of C (C ⧸ J))) (n : ℕ) :
+    let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)
+    let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex (.down ℕ)
+    let F := (ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)
+    let ψ₀ := Ideal.quotientMap J φ hφ
+    ∀ (f : (TA.obj P.complex).homology n → T)
+      (g : (F.obj (TC.obj R.complex)).homology n → T),
+      (∃ (a₀ : P.complex ⟶ F.obj R.complex)
+        (k₀ : TA.obj P.complex ⟶ F.obj (TC.obj R.complex)),
+        (∀ x : P.complex.X 0, R.π.f 0 (a₀.f 0 x) = ψ₀ (P.π.f 0 x)) ∧
+        (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),
+          k₀.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a₀.f j x) ⊗ₜ[C] (ψ₀ y)) ∧
+        ∀ x, f x = g (HomologicalComplex.homologyMap k₀ n x)) →
+      ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))
+        (a : P.complex ⟶ F.obj R.complex)
+        (k : TA.obj P.complex ⟶ F.obj (TC.obj R.complex))
+        (hψ : ∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x))
+        (ha : ∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x))
+        (hk : ∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),
+          k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)),
+        ∀ x, f x = g (HomologicalComplex.homologyMap k n x) := by
+  intro TA TC F ψ₀ f g hc ψ a k hψ ha hk
+  rcases hc with ⟨a₀, k₀, ha₀, hk₀, hnat⟩
+  have hψeq : ψ₀ = ψ := by
+    apply RingHom.ext
+    intro y
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
+    exact (hψ x).symm
+  rw [hψeq] at ha₀ hk₀
+  rcases ModuleCat.quotient_tensor_resolution_lift_homotopy
+    I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk with ⟨H⟩
+  intro x
+  exact (hnat x).trans (congrArg g (ConcreteCategory.congr_hom (H.homologyMap_eq n) x))
+
 set_option linter.unusedVariables false in
 -- The nested hypotheses keep their documented names although the conclusion is nondependent.
 set_option profiler true in
@@ -105,24 +145,14 @@ theorem exists_derived_selfTor_affine_coordinates
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  intro inst B S D Q
   rcases exists_derived_selfTor_chosen_affine_coordinates i n with ⟨c, hc⟩
   refine ⟨c, ?_⟩
-  intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk
-  rcases hc V U h hbasic with ⟨a₀, k₀, ha₀, hk₀, hnat⟩
-  have hψeq : Ideal.quotientMap J φ
-      (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx) = ψ := by
-    apply RingHom.ext
-    intro y
-    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
-    exact (hψ x).symm
-  rw [hψeq] at ha₀ hk₀
-  have hH : Nonempty (Homotopy k₀ k) :=
-    ModuleCat.quotient_tensor_resolution_lift_homotopy
-      (A := A) (C := C) I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
-  rcases hH with ⟨H⟩
-  have heq := H.homologyMap_eq n
-  intro e x
-  simpa only [heq] using hnat x
+  intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk e x
+  exact quotient_tensor_coordinates_of_chosen I J φ
+    (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx) P R n
+    (fun x ↦ Q.val.map (homOfLE h).op (c U x)) (fun x ↦ c V (e.hom x))
+    (hc V U h hbasic) ψ a k hψ ha hk x
 
 
 end AlgebraicGeometry
