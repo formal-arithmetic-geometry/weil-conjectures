@@ -148,7 +148,6 @@ private noncomputable def contractionPresheaf
             ⊗ₜ[R.obj.obj V] (show N.val.obj V from N.val.map i n)) (M.val.map_smul i b m).symm
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- The coefficient comparison and tensor sheafification require extra equality checks.
 /-- The sectionwise balanced contraction descends to the sheaf tensor.
 Source: Stacks Project, Cohomology, Tag 08DE, proof; Modules on Sites, Tag 0GMW.
@@ -247,9 +246,15 @@ theorem exists_balancedTensorContraction (α : R ⟶ B)
         (contractionApp α M N W t) =
     (SR.map (contractionPresheaf α M N)).val.app W uR at he
   change c.val.app W (j.inv.val.app W (q.inv.val.app W pB)) = _
-  rw [hiq, hij]
+  refine (congrArg (c.val.app W)
+    ((congrArg (j.inv.val.app W) hiq).trans hij)).trans ?_
   change (tensorObjIsoSheafification ((restrictScalars (𝓻 α)).obj M) N).inv.val.app W
     ((SR.map (contractionPresheaf α M N)).val.app W uR) = _
-  rw [← he, contractionApp_tmul α M N W m b n]
+  exact congrArg
+    ((tensorObjIsoSheafification ((restrictScalars (𝓻 α)).obj M) N).inv.val.app W)
+    (he.symm.trans (congrArg
+      (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 R).obj)).unit.app
+        (((restrictScalars (𝓻 α)).obj M).val ⊗ N.val)).app W)
+      (contractionApp_tmul α M N W m b n)))
 
 end SheafOfModules
