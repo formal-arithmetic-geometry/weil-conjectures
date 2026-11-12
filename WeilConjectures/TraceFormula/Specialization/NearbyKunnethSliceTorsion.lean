@@ -70,7 +70,6 @@ set_option hygiene false in
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
 -- the Künneth maps of the two product configurations are large terms
-set_option profiler true in
 omit [Fact (ringChar k').Prime] in
 /-- **From the geometric slice to the slice over a generic slice trait** (SGA 4½,
 [Th. finitude], 3.7; `𝔽_E`-coefficients): if the Künneth map of the geometric slice of the product
@@ -102,19 +101,11 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
   have hAS :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       _ (coordinateSliceTraitGeneric hM b hb D) hA
-  have hτM :=
-    isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hAS
   have hBP :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_tensorObj_leftDerivedUpperStar
       _ (Field.toIsField _) (coordinateSliceTraitMapGeneric φ₁ b D)
       (coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫ φ₂.generic)
       hAS hB
-  have hτP :=
-    isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hP (φ₁.total ≫ b)
-      (comp_coordinate_fst hb) D E hBP
-  have hτN :=
-    isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField (K := traitSliceField k')
-      hN E hB
   -- the square of Künneth maps along the changes of trait
   have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
     (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
@@ -132,11 +123,15 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
     ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
-    ((L((N.ε)^*⟦𝔽⟧)).obj B) hτM hτN hτP (𝟭 _)
+    ((L((N.ε)^*⟦𝔽⟧)).obj B)
+    (isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hAS)
+    (isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField hN E hB)
+    (isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hP (φ₁.total ≫ b)
+      (comp_coordinate_fst hb) D E hBP) (𝟭 _)
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   refine sq.2 ?_
-  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽 _ _ A B).1 h
-  exact isIso_kunnethMap_of_iso 𝔽 _ _
+  exact isIso_kunnethMap_of_iso 𝔽
+    (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app
       ((L((M.ε)^*⟦𝔽⟧)).obj A)).symm ≪≫
       ((leftDerivedUpperStarCompOfEq 𝔽
@@ -144,7 +139,8 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
           (traitSlice_over (traitSliceCoord k'))).generic) (q := M.ε) rfl).app A).symm)
     ((leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
       (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
-    h₀
+    ((isIso_kunnethMap_iff_toGeneric 𝔽 (sliceFst hM hP hb)
+      (sliceSnd hN hpb hP hgen hb) A B).1 h)
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
