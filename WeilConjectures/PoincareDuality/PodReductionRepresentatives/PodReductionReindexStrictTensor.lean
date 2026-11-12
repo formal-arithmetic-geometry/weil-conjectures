@@ -86,6 +86,28 @@ theorem proEtaleIsoCommaArrow_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (
     @AlgebraicGeometry.WeaklyEtale ⊤ g
     (inferInstance : AlgebraicGeometry.WeaklyEtale g) trivial).unit.app U))
 
+private theorem generators_unitSection {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (P : CochainComplex (scalarReductionSource l E Y) ℤ)
+    (β : (I[g]).obj ((R[Y]).obj P) ≅ (R[X]).obj ((F[g]).obj P))
+    (hβ : Generators l E g P β) (n : ℕ) (i : ℤ) (U : X.ProEt)
+    (x : (P.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))) :
+    ((β.hom.f i).val.app (op (n, U)))
+      (((integralComparisonSequencePullback l E g).obj
+          ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i))).val.map
+        (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+        (integralComparisonSequenceGenerator.{u, u} l E g
+          ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i)) n
+          ((proEtaleIsoPostcompose g).obj U)
+          (((pullbackTensorReductionEvaluation l E Y n).hom.app (P.X i)).val.app
+            (op ((proEtaleIsoPostcompose g).obj U))
+            (unrestrictedIntegralTensorSection l E Y n (P.X i)
+              (op ((proEtaleIsoPostcompose g).obj U)) 1 x)))) =
+      ((pullbackTensorReductionEvaluation l E X n).hom.app (((F[g]).obj P).X i)).val.app
+        (op U) (unrestrictedIntegralTensorSection l E X n (((F[g]).obj P).X i) (op U) 1 x) := by
+  exact (hβ n i U 1 x).trans (congrArg (fun a ↦
+    ((pullbackTensorReductionEvaluation l E X n).hom.app (((F[g]).obj P).X i)).val.app (op U)
+      (unrestrictedIntegralTensorSection l E X n _ (op U) a x)) (map_one _))
+
 set_option profiler true in
 -- The generator calculation passes through several transported comparison maps.
 /-- Scalar-generator normalization implies the tensor equation before localization.
@@ -186,24 +208,12 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op,
     ← PresheafOfModules.naturality_apply (βQ.hom.f q).val
     (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op]
-  have h1 : ((isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
-      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U)) 1 = 1 :=
-    map_one _
-  have rP := (hβP n p U 1 x).trans (congrArg (fun a ↦
-    ((pullbackTensorReductionEvaluation l E X n).hom.app (((F[g]).obj P).X p)).val.app (op U)
-      (unrestrictedIntegralTensorSection l E X n _ (op U) a x)) h1)
-  have rQ := (hβQ n q U 1 y).trans (congrArg (fun a ↦
-    ((pullbackTensorReductionEvaluation l E X n).hom.app (((F[g]).obj Q).X q)).val.app (op U)
-      (unrestrictedIntegralTensorSection l E X n _ (op U) a y)) h1)
-  have rT := (hβT n k U 1 (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-    (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-    (op ((proEtaleIsoPostcompose g).obj U)) x y)).trans (congrArg (fun a ↦
-    ((pullbackTensorReductionEvaluation l E X n).hom.app
-      (((F[g]).obj ((T[Y]).obj (P, Q))).X k)).val.app (op U)
-      (unrestrictedIntegralTensorSection l E X n _ (op U) a
-        (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-          (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-          (op ((proEtaleIsoPostcompose g).obj U)) x y))) h1)
+  have rP := generators_unitSection l E g P βP hβP n p U x
+  have rQ := generators_unitSection l E g Q βQ hβQ n q U y
+  have rT := generators_unitSection l E g ((T[Y]).obj (P, Q)) βT hβT n k U
+    (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+      (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
+      (op ((proEtaleIsoPostcompose g).obj U)) x y)
   erw [rP]
   erw [rQ]
   refine Eq.trans ?_ (PresheafOfModules.naturality_apply ((βT.hom ≫ (R[X]).map t.hom ≫
