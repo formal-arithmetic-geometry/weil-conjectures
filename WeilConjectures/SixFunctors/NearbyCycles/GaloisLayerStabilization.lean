@@ -174,27 +174,27 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
 
 -- Cache the graded tensor hypotheses of `leftDerivedFunctor`: rebuilding them for every
 -- pullback in the statement and proof dominates elaboration.
-@[local instance 20000] abbrev stabilizationHasTensorFour (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationHasTensorFour (T : Scheme.{u}) :
     ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasTensor₄ObjExt A B C D := by
   infer_instance
 
-@[local instance 20000] abbrev stabilizationHasGoodTensor12 (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationHasGoodTensor12 (T : Scheme.{u}) :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasGoodTensor₁₂Tensor A B C := by
   infer_instance
 
-@[local instance 20000] abbrev stabilizationHasGoodTensor23 (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationHasGoodTensor23 (T : Scheme.{u}) :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasGoodTensorTensor₂₃ A B C := by
   infer_instance
 
-@[local instance 20000] abbrev stabilizationTensorLeftSequential (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationTensorLeftSequential (T : Scheme.{u}) :
     ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := by
   infer_instance
 
-@[local instance 20000] abbrev stabilizationTensorRightSequential (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationTensorRightSequential (T : Scheme.{u}) :
     ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := by
   infer_instance
@@ -245,7 +245,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
       (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
       (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
-    exact retraction_of_comp_of_isIso_aux ((N.galoisLayerHom h Ω).pullbackExchange Λ)
+    exact retraction_of_comp_of_isIso_aux
+      (L₀ := L((𝟙 X)^*⟦Λ⟧)) (Lf := L((𝟙 X')^*⟦Λ⟧))
+      ((N.galoisLayerHom h Ω).pullbackExchange Λ)
       ((N.galoisLayerHom h L').pullbackExchange Λ)
       ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
