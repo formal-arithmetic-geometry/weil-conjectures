@@ -138,9 +138,9 @@ theorem affineBaseChangeTildeModuleMap_localized
         (C := SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace))).map
       (((Scheme.Modules.tensorPullback
         (Spec.map (CommRingCat.ofHom φg'))).mapHomotopyCategoryFactors (.up ℤ)).inv.app X))) =
-        𝟙 _ := fun _ ↦
-    (congrArg _ ((congrArg _ (CategoryTheory.Functor.map_id _ _)).trans
-      (CategoryTheory.Functor.map_id _ _))).trans (CategoryTheory.Functor.map_id _ _)
+        𝟙 _ := by
+    intro X
+    simp
   simp only [affineBaseChangeIntoPullback, Category.assoc, Functor.map_comp, hid,
     Functor.comp_obj]
   rfl
