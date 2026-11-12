@@ -27,8 +27,7 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem map_lift_transport
     {C D H : Type*} [Category C] [Category D] [Category H]
@@ -53,8 +52,6 @@ private theorem map_lift_transport
       rfl
 
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- Derived restriction transport elaborates across several chosen localizations.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Construct the affine member and its compatible overlap map; no object on the union

@@ -25,8 +25,7 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -99,8 +98,6 @@ private theorem stabilized_map_restriction
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- Derived composition comparisons and their additivity instances require this budget.
 /-- The affine construction produces a perfect supported source on the union itself.
 There is no ambient extension in this statement. The supplied natural comparison `c`
 identifies iterated restriction through the union with direct restriction to `U`.

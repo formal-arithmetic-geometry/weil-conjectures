@@ -25,8 +25,7 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem restrict_map_comparison
     {C D B : Type*} [Category C] [Category D] [Category B]
@@ -50,8 +49,6 @@ private theorem restrict_map_comparison
 
 set_option synthInstance.maxSize 2048 in
 set_option trace.profiler true in
-set_option maxHeartbeats 1100000 in
--- The three-fold exact restriction comparison needs a larger elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- Attaching a single affine open extends the source plus its shift.
 The input source need only be perfect and supported on the old open; its behaviour
@@ -143,44 +140,12 @@ theorem exists_supported_map_affine_attachment
   obtain ⟨hY, ⟨hYO⟩⟩ := open_derived_localization_data X Y
   let := hY
   let := hYO
-  let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Y ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Y))
-      (D := SheafOfModules.{u} (moduleRings Y.toScheme.toRingedSpace))
-      (Modules.overEquiv Y)
-  let H := Equivalence.inverse
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Y))
-      (D := SheafOfModules.{u} (moduleRings Y.toScheme.toRingedSpace))
-      (Modules.overEquiv Y) ⋙
-    SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-      (homOfLE (le_trans hUW le_sup_left)) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)
-  let J := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)
-  let c₀ : L ⋙ H ≅ J :=
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft
-      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Y)
-      ((Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (Modules.overEquiv Y).unitIso.symm _ ≪≫
-          Functor.leftUnitor _) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight
-      (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace)
-        (homOfLE (le_trans hUW le_sup_left)))
-      (Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Modules.overEquiv U))
+  let L := schemeOpenRestriction X Y
+  let H := schemeOpenOverlapRestriction X
+    (homOfLE (le_trans hUW le_sup_left) : U ⟶ Y)
+  let J := schemeOpenRestriction X U
   let c : L.mapDerivedCategory ⋙ H.mapDerivedCategory ≅ J.mapDerivedCategory :=
-    Functor.mapDerivedCategoryCompIso L H ≪≫
-      Functor.mapDerivedCategoryNatIso c₀
+    schemeDerivedOpenRestrictionCompIso X (homOfLE (le_trans hUW le_sup_left) : U ⟶ Y)
   obtain ⟨F, α, hF, hFT, e, he⟩ :=
     exists_supported_map_affine_union_gluing X U W V hUW hW hV T hT hTc E R β hR hRT c
   obtain ⟨R', β', hR', hRT', d, hd⟩ :=
