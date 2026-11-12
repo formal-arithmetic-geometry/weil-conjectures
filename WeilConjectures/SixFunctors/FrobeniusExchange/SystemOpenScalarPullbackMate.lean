@@ -153,6 +153,7 @@ private theorem openRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
 
 end OpenRestriction
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- elaborating the mate of the restriction adjunction is slow
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
@@ -252,6 +253,7 @@ private theorem sequenceDerived_kflat_ext (W : Scheme.{u}) {D : Type*} [Category
   apply (cancel_epi (F.map (DerivedCategory.Q.map r))).mp
   rw [α.naturality, β.naturality, h P hP]
 
+set_option profiler true in
 set_option maxHeartbeats 5000000 in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of the
