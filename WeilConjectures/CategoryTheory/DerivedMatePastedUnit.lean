@@ -76,7 +76,7 @@ private lemma homotopy_mate_app
     (ah : H ⊣ P) (ag : G ⊣ Q) (m : F ⋙ G ⟶ H ⋙ K)
     (X : HomotopyCategory C' (.up ℤ)) :
     (NatTrans.mapHomotopyCategory
-      (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m)).natTrans (.up ℤ)).app X =
+      (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m)) (.up ℤ)).app X =
     (ag.mapHomotopyCategory (.up ℤ)).unit.app
         ((F.mapHomotopyCategory (.up ℤ)).obj ((P.mapHomotopyCategory (.up ℤ)).obj X)) ≫
       (Q.mapHomotopyCategory (.up ℤ)).map
@@ -148,9 +148,9 @@ theorem derivedMate_pastedUnit :
     rightDerivedFunctorCompUnit P F ≫ whiskerLeft DerivedCategory.Qh
       (mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
         ag.mapDerivedCategoryRightDerivedAdjunction
-          (TwoSquare.mk _ _ _ _ β)).natTrans =
+          (TwoSquare.mk _ _ _ _ β)) =
     whiskerRight (NatTrans.mapHomotopyCategory
-      (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m)).natTrans (.up ℤ))
+      (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m)) (.up ℤ))
         DerivedCategory.Qh ≫ rightDerivedFunctorCompUnit K Q := by
   -- The unit and counit equations of the exact-left-adjoint derived adjunctions.
   have hη (Y : HomotopyCategory D (.up ℤ)) :
@@ -198,7 +198,6 @@ theorem derivedMate_pastedUnit :
     Category.id_comp, Category.assoc]
   dsimp only [TwoSquare.mk, Functor.comp_obj]
   erw [Category.comp_id]
-  dsimp only [TwoSquare.natTrans]
   erw [Category.id_comp, Category.id_comp]
   erw [ag.mapDerivedCategoryRightDerivedAdjunction.unit.naturality_assoc]
   dsimp only [Functor.comp_map]

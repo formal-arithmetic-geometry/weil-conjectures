@@ -84,9 +84,9 @@ private theorem inverse_mate_transport
     (r : RX ⋙ G' ⟶ H' ⋙ RU) (M : C) :
     LU.map (e.inv.app M) ≫
       (((mateEquiv aX aU).symm (TwoSquare.mk _ _ _ _
-        (Functor.whiskerLeft RX e.hom ≫ r ≫ Functor.whiskerRight f.inv RU))).natTrans.app M) ≫
+        (Functor.whiskerLeft RX e.hom ≫ r ≫ Functor.whiskerRight f.inv RU))).app M) ≫
       f.hom.app (LX.obj M) =
-    (((mateEquiv aX aU).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M) := by
+    (((mateEquiv aX aU).symm (TwoSquare.mk _ _ _ _ r)).app M) := by
   let t := Functor.whiskerLeft RX e.hom ≫ r ≫ Functor.whiskerRight f.inv RU
   apply (aU.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]
@@ -110,7 +110,7 @@ private theorem geometric_mate_transport
     (K : D) :
     ((a'.ofNatIsoLeft f).homEquiv _ _
       (inv (c.app (R.obj K)) ≫ H.map ((a.ofNatIsoLeft e).counit.app K))) =
-    (mateEquiv a a' (TwoSquare.mk _ _ _ _ b.hom)).natTrans.app K := by
+    (mateEquiv a a' (TwoSquare.mk _ _ _ _ b.hom)).app K := by
   rw [Adjunction.homEquiv_ofNatIsoLeft_apply]
   have he : b.hom.app (R.obj K) =
       f.hom.app (G.obj (R.obj K)) ≫ inv (c.app (R.obj K)) ≫
@@ -123,9 +123,9 @@ private theorem geometric_mate_transport
   apply (a'.homEquiv _ _).symm.injective
   rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
   have hm := mateEquiv_counit a a' (TwoSquare.mk _ _ _ _ b.hom) K
-  change L'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ b.hom)).natTrans.app K) ≫
+  change L'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ b.hom)).app K) ≫
     a'.counit.app (H.obj K) = _ at hm
-  change _ = L'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ b.hom)).natTrans.app K) ≫
+  change _ = L'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ b.hom)).app K) ≫
     a'.counit.app (H.obj K)
   rw [hm, he]
   simp only [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app,
@@ -215,7 +215,7 @@ private theorem normalized_inverse_exact
         ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ j).hom.app M) ≫
       (((mateEquiv (QuotientChange.scalarAdj a X)
         (QuotientChange.scalarAdj a U)).symm
-        (TwoSquare.mk _ _ _ _ (CondensedRing.derivedComapUpperStarIso a j).inv)).natTrans.app M) ≫
+        (TwoSquare.mk _ _ _ _ (CondensedRing.derivedComapUpperStarIso a j).inv)).app M) ≫
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' j).inv.app
         ((QuotientChange.D a X).obj M) := by
   rw [QuotientChange.normalized_inverse a j b hb]

@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import WeilConjectures.Compactification.ValuativeCriterion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Valuation probes at closure points of a quasi-compact immersion

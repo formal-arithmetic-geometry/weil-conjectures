@@ -247,16 +247,16 @@ def freeCochainEquiv {C : Type v} [Category.{w} C] [Preadditive C]
   classical
   let forward := fun (z : CochainComplex.HomComplex.Cochain K K q)
       (k : Σ i : ↥(Finset.Icc a b), Fin (r i.val) × Fin (r (i.val + q))) ↦
-    biproduct.components
+    End.of (biproduct.components
       ((e k.1.val).inv ≫ z.v k.1.val (k.1.val + q) rfl ≫ (e (k.1.val + q)).hom)
-        k.2.1 k.2.2
+        k.2.1 k.2.2)
   let backward :
       ((Σ i : ↥(Finset.Icc a b), Fin (r i.val) × Fin (r (i.val + q))) → End R) →
         CochainComplex.HomComplex.Cochain K K q := fun x ↦
     CochainComplex.HomComplex.Cochain.mk fun i j hij ↦ by
       subst j
       exact if hi : i ∈ Finset.Icc a b then
-        (e i).hom ≫ biproduct.matrix (fun s t ↦ x ⟨⟨i, hi⟩, s, t⟩) ≫ (e (i + q)).inv
+        (e i).hom ≫ biproduct.matrix (fun s t ↦ (x ⟨⟨i, hi⟩, s, t⟩).asHom) ≫ (e (i + q)).inv
       else 0
   refine ⟨forward, backward, ?_, ?_⟩
   · intro z
@@ -276,6 +276,7 @@ def freeCochainEquiv {C : Type v} [Category.{w} C] [Preadditive C]
   · intro x
     funext k
     rcases k with ⟨i, s, t⟩
+    apply End.ext
     dsimp only [forward, backward, CochainComplex.HomComplex.Cochain.mk_v]
     rw [dite_eq_left i.property]
     simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
@@ -340,11 +341,12 @@ theorem evaluation_bijective (W : Scheme.{u})
           (z.map (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl
             k.2.1 k.2.2)) := by
     funext k
+    apply End.ext
     change biproduct.components
       ((e k.1.val).inv ≫
         ((e k.1.val).hom ≫ biproduct.matrix (fun s t ↦
-          coefficientEndEquiv l E W n
-            (z.map (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl s t))) ≫
+          (coefficientEndEquiv l E W n
+            (z.map (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl s t))).asHom) ≫
           (e (k.1.val + q)).inv) ≫ (e (k.1.val + q)).hom) k.2.1 k.2.2 = _
     simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
       Category.comp_id, biproduct.matrix_components]

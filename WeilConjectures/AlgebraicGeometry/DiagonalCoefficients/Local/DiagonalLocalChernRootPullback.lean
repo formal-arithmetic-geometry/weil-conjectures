@@ -271,7 +271,7 @@ private theorem scalar_mate_homEquiv
     (adj'.homEquiv (G.obj M) (H.obj N)) (s.hom.app M ≫ H.map m) =
       G.map ((adj.homEquiv M N) m) ≫
         (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).app N := by
-  let β := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans
+  let β := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom))
   have hn := β.naturality m
   simp only [Functor.comp_map] at hn
   have hu := unit_mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom) M
@@ -314,7 +314,6 @@ private theorem horizontal_root_cone
     d.varyingOrdinary d.line.iso.hom
   have hcm := d.completedMate
   have hvm := d.varyingMate
-  dsimp only [TwoSquare.natTrans] at hcm hvm
   dsimp only [adj] at hc hv
   rw [hcm] at hc
   rw [hvm] at hv

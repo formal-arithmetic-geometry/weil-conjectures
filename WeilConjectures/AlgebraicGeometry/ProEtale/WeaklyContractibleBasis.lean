@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 import WeilConjectures.AlgebraicGeometry.ProEtale.Projective
 import WeilConjectures.AlgebraicGeometry.WContractibleAffineCover
+public import Mathlib.CategoryTheory.Sites.Subcanonical
 
 /-!
 # Enough affine weakly contractible objects

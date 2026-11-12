@@ -64,13 +64,13 @@ isomorphism `D(N_D) ⋙ D(F') ≅ D(F) ⋙ D(N_C)` induced by `α` under the der
 `D(F) ⊣ RG` and `D(F') ⊣ RG'`, is an isomorphism. -/
 theorem isIso_mateEquiv_mapDerivedCategorySquareIso (adj : F ⊣ G) (adj' : F' ⊣ G')
     (α : N_D ⋙ F' ≅ F ⋙ N_C) [N_C.PreservesKInjectiveComplexes]
-    [IsIso (mateEquiv adj adj' α.hom).natTrans] :
+    [IsIso (mateEquiv adj adj' α.hom)] :
     IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (Functor.mapDerivedCategorySquareIso α).hom).natTrans := by
+      (Functor.mapDerivedCategorySquareIso α).hom) := by
   let β := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
     adj'.mapDerivedCategoryRightDerivedAdjunction
-    (Functor.mapDerivedCategorySquareIso α).hom).natTrans
+    (Functor.mapDerivedCategorySquareIso α).hom)
   have hI (I : CochainComplex C ℤ) (hI : I.IsKInjective) :
       IsIso (β.app (DerivedCategory.Q.obj I)) := by
     have : CochainComplex.IsKInjective ((N_C.mapHomologicalComplex (.up ℤ)).obj I) :=
@@ -84,9 +84,9 @@ theorem isIso_mateEquiv_mapDerivedCategorySquareIso (adj : F ⊣ G) (adj' : F' �
       unfold UnboundedExactTower.cochainUnit
       infer_instance
     have hc : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' α.hom).natTrans (.up ℤ)).app I) :=
+        (mateEquiv adj adj' α.hom) (.up ℤ)).app I) :=
       inferInstanceAs (IsIso ((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv adj adj' α.hom).natTrans) (.up ℤ)).hom.app I))
+        (asIso (mateEquiv adj adj' α.hom)) (.up ℤ)).hom.app I))
     have ht : IsIso (N_D.mapDerivedCategoryFactors.inv.app
         ((G.mapHomologicalComplex (.up ℤ)).obj I) ≫
         N_D.mapDerivedCategory.map (UnboundedExactTower.cochainUnit G I) ≫
@@ -134,10 +134,10 @@ derived adjunction `LF' ⊣ RG'` is the mate of `D(N_D) ⋙ D(F') ≅ D(F) ⋙ D
 lemma mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso (adj : F ⊣ G) (adj' : F' ⊣ G')
     (α : N_D ⋙ F' ≅ F ⋙ N_C) :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction adj'.derivedAdjunction
-      (Functor.leftDerivedFunctorSquareIso α).hom).natTrans =
+      (Functor.leftDerivedFunctorSquareIso α).hom) =
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
-        (Functor.mapDerivedCategorySquareIso α).hom).natTrans := by
+        (Functor.mapDerivedCategorySquareIso α).hom) := by
   rw [derivedAdjunction_eq_ofNatIsoLeft]
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit, Functor.leftDerivedFunctorSquareIso]
@@ -148,9 +148,9 @@ K-injective complexes, then the mate `RG ⋙ D(N_D) ⟶ D(N_C) ⋙ RG'` of
 `CategoryTheory.Functor.leftDerivedFunctorSquareIso α` is an isomorphism. -/
 theorem isIso_mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso (adj : F ⊣ G)
     (adj' : F' ⊣ G') (α : N_D ⋙ F' ≅ F ⋙ N_C) [N_C.PreservesKInjectiveComplexes]
-    [IsIso (mateEquiv adj adj' α.hom).natTrans] :
+    [IsIso (mateEquiv adj adj' α.hom)] :
     IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction adj'.derivedAdjunction
-      (Functor.leftDerivedFunctorSquareIso α).hom).natTrans := by
+      (Functor.leftDerivedFunctorSquareIso α).hom) := by
   rw [mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso]
   exact isIso_mateEquiv_mapDerivedCategorySquareIso adj adj' α
 
@@ -358,11 +358,11 @@ variable {C₁ C₂ C₃ C₄ : Type*}
 with the adjunction induced on homotopy categories, of the morphism induced by the square. -/
 lemma mapHomotopyCategory_mateEquiv_app (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' G') (K : HomotopyCategory C₁ (.up ℤ)) :
-    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K =
+    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K =
       (adj'.mapHomotopyCategory (.up ℤ)).unit.app
           ((G.mapHomotopyCategory (.up ℤ)).obj ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
-          ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app
+          ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app
             ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
           ((G'.mapHomotopyCategory (.up ℤ)).map
@@ -413,28 +413,28 @@ lemma mapDerivedCategoryRightDerivedAdjunction_mateEquiv_app_fac (adj : L ⊣ R)
     (θ : TwoSquare G.mapDerivedCategory L.mapDerivedCategory L'.mapDerivedCategory
       G'.mapDerivedCategory)
     (hθ : ∀ N : HomotopyCategory C₂ (.up ℤ),
-      θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+      θ.app (DerivedCategory.Qh.obj N) ≫
           G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫
           G'.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =
         L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
           L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N))
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N))
     (K : HomotopyCategory C₁ (.up ℤ)) :
     G.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫
         (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app
+          adj'.mapDerivedCategoryRightDerivedAdjunction θ).app
           (DerivedCategory.Qh.obj K) =
       G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
-          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K) ≫
+          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K) ≫
         R'.rightDerivedFunctorUnit.app ((G'.mapHomotopyCategory (.up ℤ)).obj K) ≫
         R'.rightDerivedFunctor.map (G'.mapDerivedCategoryFactorsh.inv.app K) := by
   have hmate (Z : DerivedCategory C₁) :
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app Z =
+          adj'.mapDerivedCategoryRightDerivedAdjunction θ).app Z =
         adj'.mapDerivedCategoryRightDerivedAdjunction.unit.app
             (G.mapDerivedCategory.obj (R.rightDerivedFunctor.obj Z)) ≫
-          R'.rightDerivedFunctor.map (θ.natTrans.app (R.rightDerivedFunctor.obj Z)) ≫
+          R'.rightDerivedFunctor.map (θ.app (R.rightDerivedFunctor.obj Z)) ≫
           R'.rightDerivedFunctor.map (G'.mapDerivedCategory.map
             (adj.mapDerivedCategoryRightDerivedAdjunction.counit.app Z)) := by
     simp [mateEquiv_apply]
@@ -442,7 +442,7 @@ lemma mapDerivedCategoryRightDerivedAdjunction_mateEquiv_app_fac (adj : L ⊣ R)
   set u := R.rightDerivedFunctorUnit.app K
   have h₁ := adj'.mapDerivedCategoryRightDerivedAdjunction.unit.naturality
     (G.mapDerivedCategory.map u)
-  have h₂ := θ.natTrans.naturality u
+  have h₂ := θ.naturality u
   have h₃ := (adj.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
     (HomotopyCategory.quasiIso C₁ (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
     R.rightDerivedFunctorUnit K
@@ -451,7 +451,7 @@ lemma mapDerivedCategoryRightDerivedAdjunction_mateEquiv_app_fac (adj : L ⊣ R)
     _ at h₃
   have h₄ := mapHomotopyCategory_mateEquiv_app adj adj' σ K
   have h₅ := R'.rightDerivedFunctorUnit.naturality
-    ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N ≫
+    ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N ≫
       (G'.mapHomotopyCategory (.up ℤ)).map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K))
   have h₆ := (adj'.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
     (HomotopyCategory.quasiIso C₄ (.up ℤ)) L'.mapDerivedCategoryFactorsh.hom
@@ -473,12 +473,12 @@ lemma mapDerivedCategoryRightDerivedAdjunction_mateEquiv_app_fac (adj : L ⊣ R)
   erw [Functor.map_comp DerivedCategory.Qh, Category.assoc, reassoc_of% h₅]
   erw [← reassoc_of% h₆, reassoc_of% h₇]
   congr 1
-  have key : θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+  have key : θ.app (DerivedCategory.Qh.obj N) ≫
       G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N ≫
         DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) =
       L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
         L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N) ≫
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N) ≫
         DerivedCategory.Qh.map
           ((G'.mapHomotopyCategory (.up ℤ)).map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) ≫
         G'.mapDerivedCategoryFactorsh.inv.app K := by
@@ -498,11 +498,11 @@ of `R(R')`. -/
 lemma derivedBaseChange_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R') (e : G ⋙ L' ≅ L ⋙ G')
     (K : HomotopyCategory C₁ (.up ℤ)) :
     G.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫
-        (adj.derivedBaseChange adj' e).natTrans.app (DerivedCategory.Qh.obj K) =
+        (adj.derivedBaseChange adj' e).app (DerivedCategory.Qh.obj K) =
       G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory
-            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans (.up ℤ)).app K) ≫
+            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) (.up ℤ)).app K) ≫
         R'.rightDerivedFunctorUnit.app ((G'.mapHomotopyCategory (.up ℤ)).obj K) ≫
         R'.rightDerivedFunctor.map (G'.mapDerivedCategoryFactorsh.inv.app K) :=
   mapDerivedCategoryRightDerivedAdjunction_mateEquiv_app_fac adj adj' _ _
@@ -514,13 +514,13 @@ preserves K-injective complexes, then the derived base change morphism
 `R(R) ⋙ D(G) ⟶ D(G') ⋙ R(R')` is an isomorphism. -/
 theorem isIso_derivedBaseChange_app (adj : L ⊣ R) (adj' : L' ⊣ R') (e : G ⋙ L' ≅ L ⋙ G')
     [G'.PreservesKInjectiveComplexes]
-    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans]
+    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom))]
     (M : DerivedCategory C₁) :
-    IsIso ((adj.derivedBaseChange adj' e).natTrans.app M) := by
+    IsIso ((adj.derivedBaseChange adj' e).app M) := by
   let β := mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)
   let eh : (R ⋙ G).mapHomotopyCategory (.up ℤ) ≅ (G' ⋙ R').mapHomotopyCategory (.up ℤ) :=
-    { hom := NatTrans.mapHomotopyCategory β.natTrans _
-      inv := NatTrans.mapHomotopyCategory (inv β.natTrans) _
+    { hom := NatTrans.mapHomotopyCategory β _
+      inv := NatTrans.mapHomotopyCategory (inv β) _
       hom_inv_id := by
         rw [← NatTrans.mapHomotopyCategory_comp, IsIso.hom_inv_id,
           NatTrans.mapHomotopyCategory_id]
@@ -528,7 +528,7 @@ theorem isIso_derivedBaseChange_app (adj : L ⊣ R) (adj' : L' ⊣ R') (e : G �
         rw [← NatTrans.mapHomotopyCategory_comp, IsIso.inv_hom_id,
           NatTrans.mapHomotopyCategory_id] }
   have : IsIso (NatTrans.mapHomotopyCategory
-      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans (.up ℤ)) := eh.isIso_hom
+      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) (.up ℤ)) := eh.isIso_hom
   obtain ⟨K₀, ⟨eK⟩⟩ : ∃ K₀ : CochainComplex C₁ ℤ, Nonempty (DerivedCategory.Q.obj K₀ ≅ M) :=
     ⟨_, ⟨DerivedCategory.Q.objObjPreimageIso M⟩⟩
   obtain ⟨I, _, i, _, _⟩ := HasKInjectiveResolutions.exists_isKInjective K₀
@@ -541,7 +541,7 @@ theorem isIso_derivedBaseChange_app (adj : L ⊣ R) (adj' : L' ⊣ R') (e : G �
       ((G'.mapHomologicalComplex (.up ℤ)).obj I))))
   have : IsIso (G.mapDerivedCategory.map
       (R.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I)) ≫
-        (adj.derivedBaseChange adj' e).natTrans.app
+        (adj.derivedBaseChange adj' e).app
           (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I))) := by
     rw [derivedBaseChange_app_fac]
     infer_instance

@@ -248,7 +248,7 @@ theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
       (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules S R' ⥤ _) ⊣
         completedTowerLimit S R').mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso (Functor.compConstIso ℕᵒᵖ F)).hom)).natTrans := by
+        (Functor.mapDerivedCategorySquareIso (Functor.compConstIso ℕᵒᵖ F)).hom)) := by
   have := ambient_exact T R
   have := ambient_exact S R'
   have : PreservesLimitsOfShape (Discrete ℕ) F := natProducts F hphi
@@ -267,19 +267,19 @@ theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
   let bb := (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules S R' ⥤ _) ⊣ lim)
   let s := Functor.compConstIso ℕᵒᵖ F
   let tau := preservesLimitNatIso F (J := ℕᵒᵖ)
-  have hm : (mateEquiv aa bb (TwoSquare.mk _ _ _ _ s.hom)).natTrans = tau.hom := by
+  have hm : (mateEquiv aa bb (TwoSquare.mk _ _ _ _ s.hom)) = tau.hom := by
     apply NatTrans.ext
     funext M
     apply limit.hom_ext
     intro n
     have h := congrArg (fun z ↦ z.app n)
       (mateEquiv_counit aa bb (TwoSquare.mk _ _ _ _ s.hom) M)
-    change (mateEquiv aa bb (TwoSquare.mk _ _ _ _ s.hom)).natTrans.app M ≫
+    change (mateEquiv aa bb (TwoSquare.mk _ _ _ _ s.hom)).app M ≫
       limit.π _ n = _ at h
     exact h.trans (preservesLimitIso_hom_π F M n).symm
   have heq : c.lambda.hom = (mateEquiv
       aa.mapDerivedCategoryRightDerivedAdjunction bb.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)) := by
     apply derived_comp_ext (completedTowerLimit T R) F
       (cbcTowerDerived F ⋙ completedRlim S R')
     intro K

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Coproduct generators of shifted free quotient complexes

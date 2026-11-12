@@ -47,8 +47,8 @@ theorem CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv (e
     (d : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) :
     let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
       Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
-    Functor.rightDerivedFunctorPlusBaseChange (mateEquiv e d σ.hom).natTrans =
-      (mateEquiv e.derivedPlus d.derivedPlus θ.hom).natTrans := by
+    Functor.rightDerivedFunctorPlusBaseChange (mateEquiv e d σ.hom) =
+      (mateEquiv e.derivedPlus d.derivedPlus θ.hom) := by
   dsimp only
   let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
     Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
@@ -70,7 +70,7 @@ theorem CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv (e
   apply NatTrans.ext
   funext M
   have hf := congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac
-    (mateEquiv e d σ.hom).natTrans) M
+    (mateEquiv e d σ.hom)) M
   have hm := Adjunction.derivedPlus_mateEquiv_app_fac e d σ.hom θ.hom hθ M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.comp_id] at hf ⊢
@@ -149,7 +149,7 @@ theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
     lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ) =
       (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
         (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).hom).natTrans := by
+        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).hom) := by
   apply NatTrans.ext
   funext K
   apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _).symm.injective

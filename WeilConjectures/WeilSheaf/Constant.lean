@@ -55,7 +55,7 @@ the geometric fiber `X̄`, with the canonical isomorphism `Fr_X^* ℚ̄_ℓ = (F
 as Weil structure. -/
 noncomputable def ProEtaleWeilSheaf.adicConstant : ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mk (AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
+    (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)
 
 lemma ProEtaleWeilSheaf.adicConstant_carrier :
     (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier =
@@ -116,7 +116,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 lemma WeilSheaf.adicConstant_str_hom_hom :
     (Endofunctor.IsoAlgebra.str (WeilSheaf.adicConstant k₀ l X).obj).hom.hom =
       (ProEtale.adicConstantSheafLowerStarIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom :=
   rfl
 
 end AlgebraicGeometry

@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.QuotSMulTop
 import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Colon
 
 /-!
 # Associated primes of quotients by powers of an element

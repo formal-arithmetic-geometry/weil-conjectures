@@ -26,7 +26,7 @@ private theorem properComparison_mate {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     (mateEquiv (proEtaleRingDerivedAdjunction g (R.ring V) (R.ring U) (R.pull g))
       (proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g))
-      (TwoSquare.mk _ _ _ _ (scalarPull a g).inv)).natTrans = properComparison a g := by
+      (TwoSquare.mk _ _ _ _ (scalarPull a g).inv)) = properComparison a g := by
   let ar := proEtaleRingDerivedAdjunction g (R.ring V) (R.ring U) (R.pull g)
   let bs := proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g)
   ext M
@@ -45,8 +45,7 @@ private theorem properComparison_mate_square {R S : Coefficients.{u}} (a : Chang
       (proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g))
       (TwoSquare.mk _ _ _ _ (scalarPull a g).inv) =
         TwoSquare.mk _ _ _ _ (properComparison a g) := by
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   exact congrArg (fun t ↦ t.app M) (properComparison_mate a g)
 
 /-- The scalar mate commutes with inverse proper composition, including equality transport.
@@ -122,7 +121,7 @@ theorem properComparison_inverse_composition
   dsimp only [ar, br, cr, as₀, bs, cs, ellh, ellk, ellhk] at hm
   rw [properComparison_mate_square, properComparison_mate_square,
     properComparison_mate_square] at hm
-  have he := congrArg (fun z ↦ z.natTrans.app M) hm
+  have he := congrArg (fun z ↦ z.app M) hm
   dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj] at he

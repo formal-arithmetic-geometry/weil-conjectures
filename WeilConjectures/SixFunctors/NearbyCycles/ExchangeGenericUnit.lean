@@ -45,7 +45,7 @@ lemma mateEquiv_app_of_isoId_comp {C D E : Type*} [Category C] [Category D] [Cat
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (ag : Lg ⊣ Rg) {G : C ⥤ C} (I : G ≅ 𝟭 C)
     (c : L₂ ≅ L₁ ⋙ Lg) (θ : G ⋙ L₂ ⟶ L₁ ⋙ Lg)
     (hθ : ∀ B, θ.app B = L₂.map (I.hom.app B) ≫ c.hom.app B) (Y : D) :
-    (mateEquiv a₁ a₂ θ).natTrans.app Y = I.hom.app (R₁.obj Y) ≫ R₁.map (ag.unit.app Y) ≫
+    (mateEquiv a₁ a₂ θ).app Y = I.hom.app (R₁.obj Y) ≫ R₁.map (ag.unit.app Y) ≫
       (conjugateIsoEquiv (a₁.comp ag) a₂ c).hom.app (Lg.obj Y) := by
   apply (a₂.homEquiv _ _).symm.injective
   rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, mateEquiv_counit, hθ]

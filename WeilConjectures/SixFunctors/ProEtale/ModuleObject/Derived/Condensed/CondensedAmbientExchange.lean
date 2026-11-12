@@ -63,6 +63,6 @@ def condensedAmbientExchange (sq : ChosenCartesianSquare g' f' f g) :
       (upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ f').rightDerivedFunctor :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f')
-    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ sq).hom))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

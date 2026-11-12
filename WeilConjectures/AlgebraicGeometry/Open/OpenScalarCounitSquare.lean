@@ -115,7 +115,7 @@ private theorem scalarOpenTranspose
     b.unit.app (SU.obj K) ≫ JB.map
         (((a.comp x).leftAdjointUniq ((u.comp b).ofNatIsoRight q)).inv.app K) =
       SU.map (a.unit.app K) ≫
-        ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans.app (LA.obj K) := by
+        ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).app (LA.obj K) := by
   apply (u.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]
   have h := Adjunction.unit_leftAdjointUniq_hom_app
@@ -135,7 +135,7 @@ private theorem scalarOpenTranspose
   have hm := unit_mateEquiv_symm x u (TwoSquare.mk _ _ _ _ q.inv) (LA.obj K)
   change JA.map (x.unit.app (LA.obj K)) ≫ q.inv.app (SX.obj (LA.obj K)) =
     u.unit.app (JA.obj (LA.obj K)) ≫ RU.map
-      (((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans.app (LA.obj K)) at hm
+      (((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).app (LA.obj K)) at hm
   have hu := u.unit.naturality (a.unit.app K)
   dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hu
   rw [← reassoc_of% hu, ← hm]

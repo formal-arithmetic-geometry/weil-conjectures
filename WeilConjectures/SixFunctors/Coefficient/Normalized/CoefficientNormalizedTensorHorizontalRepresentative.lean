@@ -392,7 +392,6 @@ private theorem paste_horizontal {B C : Type*} [Category B] [Category C]
   apply (cancel_mono (Bn.map (Prod.mkHom fn.hom gn.hom))).1
   simp only [Category.assoc, ← Bn.map_comp, prod_comp, hp, hq]
   rw [map_pair_comp]
-  try simp only [Category.assoc]
   rw [← reassoc_of% hn, ← F.map_comp_assoc, ← F.map_comp_assoc]
   try simp only [Category.assoc]
   rw [hem, F.map_comp]

@@ -101,9 +101,9 @@ theorem boundary_derivation_square_zero (X : Scheme.{u})
       (∀ (U V : X.Opens) (j : V ⟶ U) (f : C.right.obj.obj (op U)) (x : I.val.obj (op U)),
         I.val.map j.op (σ U f x) = σ V (C.right.obj.map j.op f) (I.val.map j.op x)) ∧
       (∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens) (x : I.val.obj (op U)),
-        (μ f).val.app (op U) x = σ U (C.right.obj.map (homOfLE le_top).op f) x) ∧
+        (μ f).asHom.val.app (op U) x = σ U (C.right.obj.map (homOfLE le_top).op f) x) ∧
       (∀ f : C.right.obj.obj (op ⊤), ρ f =
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f)).hom) ∧
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f).asHom).hom) ∧
       (∀ f : C.right.obj.obj (op ⊤), δ f =
         (((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
             (commAlgebraSheafModule X.sheaf C) ≫

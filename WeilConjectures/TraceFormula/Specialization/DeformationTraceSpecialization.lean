@@ -181,8 +181,10 @@ theorem restrict_eq_zero_of_sp_eq_zero {B : Over (Spec (.of k))} [QuasiCompact B
       (exceptionalExchange ℓ c.support (hc.specialCorrespondence k').support νc)
       (supportSpecializationUnit k') νX) j hS z hz
   obtain ⟨b, -, hb⟩ := RationalPoint.exists_lift_of_range_eq_singleton j _ hB
-  exact BorelMooreSection.integral_injective b hb (((traitSpecialization_map_eq_zero_iff k k'
-    _).mp h').trans BorelMooreSection.integral_zero.symm)
+  apply BorelMooreSection.integral_injective b hb
+  apply End.ext
+  exact ((traitSpecialization_map_eq_zero_iff k k' _).mp h').trans
+    (congrArg End.asHom (BorelMooreSection.integral_zero (ℓ := ℓ) (X := B))).symm
 
 end IsContractingAt
 

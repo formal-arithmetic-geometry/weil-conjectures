@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 
 module
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 public import WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
 

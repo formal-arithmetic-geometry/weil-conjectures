@@ -58,14 +58,14 @@ theorem mateEquiv_isIso_of_paste {A B C D E F : Type*} [Category A] [Category B]
     ext X
     simp [TwoSquare.hComp]
   rw [h, mateEquiv_vcomp adj₁ adj₂ adj₃]
-  have h1 : IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ ρ.hom)).natTrans :=
+  have h1 : IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ ρ.hom)) :=
     inferInstanceAs (IsIso (mateEquiv adj₁ adj₂ ρ.hom))
-  have h2 : IsIso (mateEquiv adj₂ adj₃ (TwoSquare.mk _ _ _ _ ε.inv)).natTrans :=
+  have h2 : IsIso (mateEquiv adj₂ adj₃ (TwoSquare.mk _ _ _ _ ε.inv)) :=
     inferInstanceAs (IsIso (mateEquiv adj₂ adj₃ ε.inv))
   have : ∀ X, IsIso ((TwoSquare.vComp (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ ρ.hom))
-      (mateEquiv adj₂ adj₃ (TwoSquare.mk _ _ _ _ ε.inv))).natTrans.app X) := by
+      (mateEquiv adj₂ adj₃ (TwoSquare.mk _ _ _ _ ε.inv))).app X) := by
     intro X
-    simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk, NatTrans.comp_app,
+    simp only [TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app,
       Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app,
       Category.id_comp, Category.comp_id]

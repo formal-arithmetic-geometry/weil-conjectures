@@ -62,11 +62,11 @@ along `s` followed by the pullback along the automorphism `σᵐ` of `Spec k̄`,
 change global sections. -/
 noncomputable def stalkSheafFunctorSpecFrobeniusPowIso (m : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    stalkSheafFunctor k₀ l X ((specGeometricFrobenius k₀ ^ m).hom ≫ s) ≅
+    stalkSheafFunctor k₀ l X ((specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) ≅
       stalkSheafFunctor k₀ l X s :=
-  Functor.isoWhiskerRight (upperStarComp _ (specGeometricFrobenius k₀ ^ m).hom s) _ ≪≫
+  Functor.isoWhiskerRight (upperStarComp _ (specGeometricFrobenius k₀ ^ m).asIso.hom s) _ ≪≫
     Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (globalSectionsUpperStarIso _ (specGeometricFrobenius k₀ ^ m))
+    Functor.isoWhiskerLeft _ (globalSectionsUpperStarIso _ (specGeometricFrobenius k₀ ^ m).asIso)
 
 variable (k₀ l X) in
 /-- The isomorphism `G_{s ≫ Frᵐ} ≅ ((Fr⁻ᵐ)_* G)_s` of stalk functors, from the composition of
@@ -74,24 +74,24 @@ pullbacks and `(Frᵐ)^* ≅ (Fr⁻ᵐ)_*`. -/
 noncomputable def stalkSheafFunctorFrobeniusPowIso (m : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     stalkSheafFunctor k₀ l X (s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        m).hom) ≅
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_] ⋙
+        m).asIso.hom) ≅
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_] ⋙
         stalkSheafFunctor k₀ l X s :=
   Functor.isoWhiskerRight (upperStarComp _ s
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom) _ ≪≫
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerRight (upperStarIsoLowerStarInv _
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)) _
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso) _
 
 variable (k₀ l X) in
 /-- The isomorphism `G_s ≅ G_{σᵐ ≫ s} = G_{s ≫ Frᵐ} ≅ ((Fr⁻ᵐ)_* G)_s` of stalk functors at a
 geometric point with `s ≫ Frᵐ = σᵐ ≫ s`. -/
 noncomputable def stalkFrobeniusIso
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     stalkSheafFunctor k₀ l X s ≅
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_] ⋙
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_] ⋙
         stalkSheafFunctor k₀ l X s :=
   (stalkSheafFunctorSpecFrobeniusPowIso k₀ l X m s).symm ≪≫
     Functor.isoWhiskerRight (upperStarCongr _ hs.symm) _ ≪≫
@@ -115,8 +115,8 @@ instance isMonoidal_stalkSheafFunctorFrobeniusPowIso_hom :
 
 /-- The isomorphism `G_s ≅ ((Fr⁻ᵐ)_* G)_s` of stalk functors is monoidal. -/
 instance isMonoidal_stalkFrobeniusIso_hom
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     NatTrans.IsMonoidal (stalkFrobeniusIso k₀ l X s m hs).hom := by
   dsimp only [stalkFrobeniusIso, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom]
   infer_instance
@@ -126,8 +126,8 @@ end Monoidal
 section Frobenius
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
 
 lemma stalkObjSpecFrobeniusPowIso_eq (F : WeilSheaf k₀ l X) :
     F.stalkObjSpecFrobeniusPowIso m s =
@@ -181,13 +181,13 @@ omit [Fact (ringChar k₀ ≠ l)] in
 `(Fr⁻ᵐ)_* Q ≅ Q` and `(Fr⁻ᵐ)_* R ≅ R` induces a pairing of stalks compatible with the induced
 automorphisms of the stalks. -/
 theorem stalkPairing_frobenius
-    (φP : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj P ⟶ P)
-    (φQ : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj Q ⟶ Q)
-    (φR : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj R ⟶ R)
+    (φP : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].obj P ⟶ P)
+    (φQ : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].obj Q ⟶ Q)
+    (φR : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].obj R ⟶ R)
     (e : P ⊗ Q ⟶ R)
     (h : (φP ⊗ₘ φQ) ≫ e = μ (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        m).inv)_*[WeilCoefficients.{u} l] P Q ≫
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].map e ≫ φR) :
+        m).asIso.inv)_*[WeilCoefficients.{u} l] P Q ≫
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].map e ≫ φR) :
     (((stalkFrobeniusIso k₀ l X s m hs).hom.app P ≫ (stalkSheafFunctor k₀ l X s).map φP) ⊗ₘ
         ((stalkFrobeniusIso k₀ l X s m hs).hom.app Q ≫ (stalkSheafFunctor k₀ l X s).map φQ)) ≫
         μ (stalkSheafFunctor k₀ l X s) P Q ≫ (stalkSheafFunctor k₀ l X s).map e =
@@ -204,11 +204,12 @@ omit [Fact (ringChar k₀ ≠ l)] in
 /-- A unit `η : 𝟙 ⟶ R` compatible with an isomorphism `(Fr⁻ᵐ)_* R ≅ R` induces an element of
 the stalk fixed by the induced automorphism of the stalk. -/
 theorem stalkUnit_frobenius
-    (φR : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj R ⟶ R)
+    (φR : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].obj R ⟶ R)
     (η : 𝟙_ _ ⟶ R)
     (h : ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        m).inv)_*[WeilCoefficients.{u} l] ≫
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].map η ≫ φR = η) :
+        m).asIso.inv)_*[WeilCoefficients.{u} l] ≫
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].map η ≫
+        φR = η) :
     (ε (stalkSheafFunctor k₀ l X s) ≫ (stalkSheafFunctor k₀ l X s).map η) ≫
         (stalkFrobeniusIso k₀ l X s m hs).hom.app R ≫ (stalkSheafFunctor k₀ l X s).map φR =
       ε (stalkSheafFunctor k₀ l X s) ≫ (stalkSheafFunctor k₀ l X s).map η := by

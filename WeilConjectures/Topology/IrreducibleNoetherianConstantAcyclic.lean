@@ -14,6 +14,7 @@ import WeilConjectures.Topology.IrreducibleConstantSections
 
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 import WeilConjectures.Topology.FlasqueZariskiAcyclic
+public import Mathlib.Algebra.Category.Grp.Zero
 
 @[expose] public section
 

@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 import WeilConjectures.AlgebraicGeometry.ModuleCupGodementModelQuasiIso
 import WeilConjectures.AlgebraicGeometry.ModuleCupGodementObjectFlasque
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Godement augmentation on principal affine intersections
 

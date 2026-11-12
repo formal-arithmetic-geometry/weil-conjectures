@@ -31,17 +31,17 @@ noncomputable def purityTateFrobeniusPull :
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber) ⥤
       CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology a.geometricFiber) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber) :=
-  upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom
+  upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.hom
 
 lemma purityTateFrobeniusPull_eq :
     purityTateFrobeniusPull ℓ a =
-      upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom := (rfl)
+      upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.hom := (rfl)
 
 /-- The comparison of the two Frobenius conventions in the module interface. -/
 noncomputable def purityTateFrobeniusCompare :
     purityTateFrobeniusPull ℓ a ≅
-      lowerStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.inv :=
-  upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius
+      lowerStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.inv :=
+  upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso
 
 /-- The descent datum on the pulled-back Tate power. -/
 noncomputable def purityTatePulledDatum (d : ℕ) :
@@ -67,7 +67,7 @@ variable [NeZero (ℓ : k)] [NeZero (ℓ : AlgebraicClosure k)]
 noncomputable def purityTateRootDatum (d : ℕ) :
     (purityTateFrobeniusPull ℓ a).obj (tateTwistNat a.geometricFiber ℓ d) ≅
       tateTwistNat a.geometricFiber ℓ d :=
-  upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
+  upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.asIso.hom
     a.geometricFiberToAlgebraicClosure d
 
 lemma purityTateRootDatum_pullback (d : ℕ) :
@@ -83,7 +83,7 @@ lemma purityTateRootDatum_pullback (d : ℕ) :
 
 /-- The root pair in the inverse-Frobenius pushforward convention. -/
 noncomputable def purityTateRootPair (d : ℕ) :
-    IsoAlgebra (lowerStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.inv) :=
+    IsoAlgebra (lowerStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.inv) :=
   IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
     (((purityTateFrobeniusCompare ℓ a).app _).symm ≪≫ purityTateRootDatum ℓ a d)
 
@@ -98,8 +98,8 @@ lemma purityTateRootPair_eq (d : ℕ) :
     purityTateRootPair ℓ a d =
       IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
         (((upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ)
-          a.geometricGaloisFrobenius).app _).symm ≪≫
-          upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
+          a.geometricGaloisFrobenius.asIso).app _).symm ≪≫
+          upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.asIso.hom
             a.geometricFiberToAlgebraicClosure d) := (rfl)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -230,7 +230,7 @@ structure LocalChernPullbackData (l : ℕ) [Fact l.Prime]
         (asIso (diagonalCompletedCoefficientMap l hX)))
       (upperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) hX)
-      (TwoSquare.mk _ _ _ _ completedOrdinary.hom)).natTrans = completedPush.hom
+      (TwoSquare.mk _ _ _ _ completedOrdinary.hom)) = completedPush.hom
   varyingOrdinary : p.restrictionX.F ⋙ ((Functor.whiskeringRight ℕᵒᵖ (DiagonalMod l X)
       (DiagonalMod l X')).obj
         (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) hX)) ≅
@@ -245,7 +245,7 @@ structure LocalChernPullbackData (l : ℕ) [Fact l.Prime]
     (mateEquiv geometry.ordinaryAdjunction
       ((upperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) hX).whiskerRight ℕᵒᵖ)
-      (TwoSquare.mk _ _ _ _ varyingOrdinary.hom)).natTrans = varyingPush.hom
+      (TwoSquare.mk _ _ _ _ varyingOrdinary.hom)) = varyingPush.hom
   [towerLimits : PreservesFiniteLimits (((Functor.whiskeringRight ℕᵒᵖ (DiagonalMod l X)
       (DiagonalMod l X')).obj
         (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) hX)))]

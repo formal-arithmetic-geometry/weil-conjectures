@@ -177,8 +177,7 @@ private theorem restrictionComparison_comp
           (proEtaleRingRestrictionPullbackInv k RV SV RW SW aV aW ckR ckS hk)) =
         TwoSquare.mk _ _ _ _
           (proEtaleRingRestrictionDirectImage k RV SV RW SW aV aW ckR ckS hk).hom := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       exact congrArg (fun z ↦ z.app N) hk'
     have hhq : mateEquiv (proEtaleRingModuleAdjunction h SW SZ chS)
         (proEtaleRingModuleAdjunction h RW RZ chR)
@@ -186,8 +185,7 @@ private theorem restrictionComparison_comp
           (proEtaleRingRestrictionPullbackInv h RW SW RZ SZ aW aZ chR chS hh)) =
         TwoSquare.mk _ _ _ _
           (proEtaleRingRestrictionDirectImage h RW SW RZ SZ aW aZ chR chS hh).hom := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       exact congrArg (fun z ↦ z.app N) hh'
     have hcq : mateEquiv
         (proEtaleRingModuleAdjunction (h ≫ k) SV SZ
@@ -200,15 +198,13 @@ private theorem restrictionComparison_comp
             (proEtaleRingCompositeCoefficients h k SV SW SZ ckS chS)
             (restrictionComposite_comm h k RV SV RW SW RZ SZ
               aV aW aZ ckR chR ckS chS hk hh)).hom := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       exact congrArg (fun z ↦ z.app N) hc'
     rw [hkq, hhq, hcq]
     change ((TwoSquare.mk _ _ _ _ _).hComp (TwoSquare.mk _ _ _ _ _)).whiskerBottom
         (restrictionRComp h k RV RW RZ ckR chR).hom =
       (TwoSquare.mk _ _ _ _ _).whiskerTop (restrictionRComp h k SV SW SZ ckS chS).hom
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro Y
@@ -217,7 +213,7 @@ private theorem restrictionComparison_comp
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    simp only [ModuleCat.comp_apply]
     erw [restrictionDirect_apply k RV SV RW SW aV aW ckR ckS hk _ Y n]
     change ((restrictionRComp h k RV RW RZ ckR chR).hom.app
         ((proEtaleRingRestrictScalars aZ).obj N)).val.app Y
@@ -816,7 +812,7 @@ private theorem scalarTranspose
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     {r : C ⥤ E} {s : D ⥤ F} (a : L ⊣ R) (b : L' ⊣ R')
     (e : L ⋙ s ≅ r ⋙ L') (c : R ⋙ r ≅ s ⋙ R')
-    (he : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans = e.inv)
+    (he : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)) = e.inv)
     {X : C} {Y : D} (x : X ⟶ R.obj Y) :
     e.inv.app X ≫ s.map ((a.homEquiv X Y).symm x) =
       L'.map (r.map x ≫ c.hom.app Y) ≫ b.counit.app (s.obj Y) := by
@@ -825,7 +821,7 @@ private theorem scalarTranspose
   simp only [Functor.comp_map, Category.assoc]
   have hc := mateEquiv_counit_symm a b (TwoSquare.mk _ _ _ _ c.hom) Y
   change L'.map (c.hom.app Y) ≫ b.counit.app (s.obj Y) =
-    (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans.app _) ≫
+    (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).app _) ≫
       s.map (a.counit.app Y) at hc
   rw [he] at hc
   rw [← hc, Functor.map_comp, Category.assoc]
@@ -839,8 +835,8 @@ private theorem termwiseMate
       (TwoSquare.mk _ _ _ _
         (Functor.whiskeringRightObjCompIso _ _ ≪≫
           (Functor.whiskeringRight I _ _).mapIso c ≪≫
-            (Functor.whiskeringRightObjCompIso _ _).symm).hom)).natTrans.app M).app n =
-      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans.app (M.obj n)) := by
+            (Functor.whiskeringRightObjCompIso _ _).symm).hom)).app M).app n =
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).app (M.obj n)) := by
   simp [mateEquiv, Adjunction.whiskerRight]
 
 private theorem localizedMate
@@ -859,20 +855,20 @@ private theorem localizedMate
     [PreservesFiniteLimits r] [PreservesFiniteColimits r]
     [PreservesFiniteLimits s] [PreservesFiniteColimits s]
     (a : L ⊣ R) (b : L' ⊣ R') (e : L ⋙ s ≅ r ⋙ L') (c : R ⋙ r ≅ s ⋙ R')
-    (he : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans = e.inv) :
+    (he : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)) = e.inv) :
     ((mateEquiv
       (a.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
         R.rightDerivedFunctorIsoMapDerivedCategory)
       (b.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
         R'.rightDerivedFunctorIsoMapDerivedCategory)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso c).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso c).hom)) =
       (Functor.mapDerivedCategorySquareIso e).inv := by
-  have : IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans := by
+  have : IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)) := by
     rw [he]
     infer_instance
   have hd := (exact_localization_inverse_mate a b c).2.1
   have hi : asIso ((mateEquiv a b).symm
-      (TwoSquare.mk _ _ _ _ c.hom)).natTrans = e.symm := Iso.ext he
+      (TwoSquare.mk _ _ _ _ c.hom)) = e.symm := Iso.ext he
   rw [hi] at hd
   rw [ProEtale.SemilinearProperOpen.exact_adjunction_eq a,
     ProEtale.SemilinearProperOpen.exact_adjunction_eq b]
@@ -882,7 +878,7 @@ private theorem localizedMate
 private theorem scalarMate {V W : Scheme.{u}} (i : V ⟶ W) [IsOpenImmersion i] :
     ((mateEquiv (cbcRealizationTowerAdj d i)
       (ProEtale.StrictTower.jAdj A i)).symm
-      (TwoSquare.mk _ _ _ _ (exchangeResPull d i).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (exchangeResPull d i).hom)) =
       (cbcRealizationTowerScalarOpen d i).inv := by
   let a := (cbcRealizationOpenAdj d i).whiskerRight ℕᵒᵖ
   let b := (ProEtale.StrictTower.moduleJAdj A i).whiskerRight ℕᵒᵖ
@@ -890,7 +886,7 @@ private theorem scalarMate {V W : Scheme.{u}} (i : V ⟶ W) [IsOpenImmersion i] 
     (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (cbcRealizationScalarOpen d i) ≪≫
     (Functor.whiskeringRightObjCompIso _ _).symm
   have hm : ((mateEquiv a b).symm
-      (TwoSquare.mk _ _ _ _ (exchangeModuleResPull d i).hom)).natTrans = e.inv := by
+      (TwoSquare.mk _ _ _ _ (exchangeModuleResPull d i).hom)) = e.inv := by
     apply NatTrans.ext
     funext M
     apply NatTrans.ext
@@ -922,14 +918,14 @@ private theorem scalarUnit
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     {r : C ⥤ E} {s : D ⥤ F} (a : L ⊣ R) (b : L' ⊣ R')
     (e : L ⋙ s ≅ r ⋙ L') (c : R ⋙ r ≅ s ⋙ R')
-    (he : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans = e.inv)
+    (he : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)) = e.inv)
     (X : C) :
     r.map (a.unit.app X) ≫ c.hom.app (L.obj X) ≫ R'.map (e.hom.app X) =
       b.unit.app (r.obj X) := by
   have hu := unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ c.hom) X
   change r.map (a.unit.app X) ≫ c.hom.app (L.obj X) =
     b.unit.app (r.obj X) ≫ R'.map
-      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans.app X) at hu
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ c.hom)).app X) at hu
   rw [he] at hu
   rw [reassoc_of% hu, ← R'.map_comp, Iso.inv_hom_id_app]
   erw [R'.map_id, Category.comp_id]

@@ -98,15 +98,14 @@ theorem heartPull_comp (e : Mon.mk R ≅ Mon.mk (coefficient A))
       rw [heartPull_mate, heartPull_mate, heartPull_mate]
       rw [← conjugateIsoEquiv_apply_hom, CondensedRing.conjugateIsoEquiv_upperStarComp,
         ← conjugateIsoEquiv_apply_hom, conjugateIsoEquiv_upperStarComp]
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       simpa only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
         NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
         Functor.associator_hom_app, Functor.associator_inv_app, Category.comp_id,
         Category.id_comp, Category.assoc] using heartPush_comp A R e f g EX EY EZ N
   have hh := congr_app hw M
   dsimp only [wi, wg, wf, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
-    TwoSquare.vComp, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerRight_app,
+    TwoSquare.vComp, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app,
     Functor.associator_inv_app] at hh
   simp only [Category.id_comp, Category.comp_id] at hh

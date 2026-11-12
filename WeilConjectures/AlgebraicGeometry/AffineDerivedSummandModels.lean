@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Mathlib.CategoryTheory.MorphismProperty.Retract
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Lifting a derived decomposition on an affine open to modules
 

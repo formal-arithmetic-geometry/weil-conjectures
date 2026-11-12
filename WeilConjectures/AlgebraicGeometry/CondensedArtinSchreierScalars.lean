@@ -63,7 +63,7 @@ private theorem regularEnd_eq_smul
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (a : MonObj.Γ Λ) :
     let := Mod.linearOfRingHom (MonObj.Γ.mapFunctor (upperStarFromPoint X) (R := Λ))
-    Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (upperStarFromPoint X) a) =
+    (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (upperStarFromPoint X) a)).asHom =
       a • 𝟙 (Mod.regular (condensedRingObj Λ X)) := by
   exact Mod.regularEndRingHom_eq_smul
       (MonObj.Γ.mapFunctor (upperStarFromPoint X) (R := Λ)) a
@@ -103,6 +103,8 @@ theorem condensedArtinSchreierProjector_eq_sum
   simp only [condensedArtinSchreierPushforward] at *
   apply Finset.sum_congr rfl
   intro a _
+  apply End.ext
+  simp only [End.smul_asHom]
   rw [regularEnd_eq_smul, Functor.map_smul, CategoryTheory.Functor.map_id,
     Linear.comp_smul]
   erw [Category.comp_id]

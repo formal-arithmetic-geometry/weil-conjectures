@@ -83,7 +83,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
             (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
-              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).natTrans.app K)) ≫
+              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).app K)) ≫
       (smallModel_strictLocalBaseChangeTargetIso f s K n).hom =
     H.map (DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex b (.up ℤ)).app M)) ≫
@@ -102,7 +102,7 @@ theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} 
         (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
       (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
         (IsPullback.of_hasPullback f
-          (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).natTrans.app K
+          (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).app K
     have hn := (G.mapDerivedCategoryHomologyFunctorIso n).inv.naturality
       (DerivedCategory.Plus.ι.map m)
     dsimp only [Functor.comp_map] at hn

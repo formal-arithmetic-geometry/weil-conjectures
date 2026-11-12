@@ -54,7 +54,7 @@ theorem WeilSheaf.isAdicConstructibleSheaf_frobeniusPullback_obj
     (hH : ProEtale.IsAdicConstructibleSheaf H) :
     ProEtale.IsAdicConstructibleSheaf ((WeilSheaf.frobeniusPullback k₀ l X).obj H) :=
   (hH.upperStar _).of_iso ((ProEtale.adicUpperStarIsoLowerStarInv l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).app H)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).app H)
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- A sheaf whose Frobenius pullback is constructible is constructible. -/
@@ -62,7 +62,7 @@ theorem WeilSheaf.isAdicConstructibleSheaf_of_frobeniusPullback_obj
     {H : ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hH : ProEtale.IsAdicConstructibleSheaf ((WeilSheaf.frobeniusPullback k₀ l X).obj H)) :
     ProEtale.IsAdicConstructibleSheaf H :=
-  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
   (hH.upperStar Fr.inv).of_iso ((ProEtale.adicUpperStarIsoLowerStarInv l Fr.symm).app _ ≪≫
     ((ProEtale.adicLowerStarEquivalence l Fr.symm).unitIso.app H).symm)
 

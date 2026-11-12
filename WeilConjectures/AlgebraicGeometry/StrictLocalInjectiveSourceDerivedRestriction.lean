@@ -71,7 +71,7 @@ theorem strictLocalInjectiveSourceIso_derivedRestriction {X S : Scheme.{v}}
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-                |>.natTrans.app K))) ≫
+                |>.app K))) ≫
         (strictLocalBaseChangeTargetIso f s K n).hom =
             (strictLocalInjectiveSourceIso f s K n J q i).hom ≫
               representativeSectionsComparison

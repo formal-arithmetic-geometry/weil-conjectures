@@ -25,7 +25,7 @@ Source: Stacks 03CZ, finite-basis calculation
 def ordinary {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasWeakSheafify J CommRingCat.{r}]
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-    (B : CommRingCat.{r}) (b : B) : CatCenter (modules (constantRing J B)) where
+    (B : CommRingCat.{r}) (b : B) : CatCenter (modules (constantRing J B)) := .of {
   app M := { val :=
     { app := fun V ↦ ModuleCat.ofHom
         (LinearMap.lsmul _ _ ((toSheafify J ((Functor.const Cᵒᵖ).obj B)).app V b))
@@ -44,6 +44,7 @@ def ordinary {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     apply ModuleCat.hom_ext
     ext x
     exact ((f.val.app V).hom.map_smul _ x).symm
+}
 
 /-- The termwise scalar endomorphism on unbounded cochain complexes.
 Source: Stacks 07A6 (blueprint: def-pur-constant-module-scalar-center). -/
@@ -51,13 +52,14 @@ def cochain {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasWeakSheafify J CommRingCat.{r}]
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
     (B : CommRingCat.{r}) (b : B) :
-    CatCenter (CochainComplex (modules (constantRing J B)) ℤ) where
+    CatCenter (CochainComplex (modules (constantRing J B)) ℤ) := .of {
   app K := { f n := (ordinary J B b).app (K.X n)
              comm' i j _ := ((ordinary J B b).naturality (K.d i j)).symm }
   naturality {K L} f := by
     apply HomologicalComplex.Hom.ext
     funext n
     exact (ordinary J B b).naturality (f.f n)
+}
 
 /-- Scalar multiplication on the ordinary unbounded derived category, obtained by
 localizing its termwise endomorphism. No representatives are chosen.

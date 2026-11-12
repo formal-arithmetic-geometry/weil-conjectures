@@ -70,9 +70,9 @@ lemma mateEquiv_conjugateIsoEquiv_comp_app
       T₃.map (c.hom.app M) ≫ e₂₃.hom.app (L₁₂.obj M) ≫ L₂₃'.map (e₁₂.hom.app M))
     (N : C₃) :
     T₁.map ((conjugateIsoEquiv (adj₁₂.comp adj₂₃) adj₁₃ c).hom.app N) ≫
-        (mateEquiv adj₁₃ adj₁₃' (.mk _ _ _ _ e₁₃.inv)).natTrans.app N =
-      (mateEquiv adj₁₂ adj₁₂' (.mk _ _ _ _ e₁₂.inv)).natTrans.app (R₃₂.obj N) ≫
-        R₂₁'.map ((mateEquiv adj₂₃ adj₂₃' (.mk _ _ _ _ e₂₃.inv)).natTrans.app N) ≫
+        (mateEquiv adj₁₃ adj₁₃' (.mk _ _ _ _ e₁₃.inv)).app N =
+      (mateEquiv adj₁₂ adj₁₂' (.mk _ _ _ _ e₁₂.inv)).app (R₃₂.obj N) ≫
+        R₂₁'.map ((mateEquiv adj₂₃ adj₂₃' (.mk _ _ _ _ e₂₃.inv)).app N) ≫
         (conjugateIsoEquiv (adj₁₂'.comp adj₂₃') adj₁₃' c').hom.app (T₃.obj N) := by
   have key : (TwoSquare.mk _ _ _ _ e₁₃.inv : TwoSquare T₁ L₁₃ L₁₃' T₃) =
       ((TwoSquare.vComp (TwoSquare.mk _ _ _ _ e₁₂.inv : TwoSquare T₁ L₁₂ L₁₂' T₂)
@@ -81,13 +81,13 @@ lemma mateEquiv_conjugateIsoEquiv_comp_app
     ext M
     rw [← cancel_epi (e₁₃.hom.app M)]
     dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-      TwoSquare.natTrans, TwoSquare.mk]
+      TwoSquare.mk]
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.assoc,
       Functor.comp_obj, Iso.hom_inv_id_app]
     rw [reassoc_of% h]
     simp [← Functor.map_comp, ← Functor.map_comp_assoc]
-  have := NatTrans.congr_app (congrArg TwoSquare.natTrans
+  have := NatTrans.congr_app (
     (congrArg (mateEquiv adj₁₃ adj₁₃') key)) N
   rw [conjugateEquiv_mateEquiv_vcomp adj₁₃ (adj₁₂.comp adj₂₃) adj₁₃',
     mateEquiv_conjugateEquiv_vcomp (adj₁₂.comp adj₂₃) (adj₁₂'.comp adj₂₃') adj₁₃',
@@ -107,7 +107,7 @@ isomorphism `e : L ⋙ T' ≅ T ⋙ L'` carries `T` of the unit of `L ⊣ R` to 
 lemma map_unit_comp_mateEquiv_app_comp {C D C' D' : Type*} [Category* C] [Category* D]
     [Category* C'] [Category* D'] {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
     {T : C ⥤ C'} {T' : D ⥤ D'} (adj : L ⊣ R) (adj' : L' ⊣ R') (e : L ⋙ T' ≅ T ⋙ L') (K : C) :
-    T.map (adj.unit.app K) ≫ (mateEquiv adj adj' (.mk _ _ _ _ e.inv)).natTrans.app (L.obj K) ≫
+    T.map (adj.unit.app K) ≫ (mateEquiv adj adj' (.mk _ _ _ _ e.inv)).app (L.obj K) ≫
         R'.map (e.hom.app K) =
       adj'.unit.app (T.obj K) := by
   rw [← Category.assoc, unit_mateEquiv, Category.assoc, ← R'.map_comp]
@@ -143,9 +143,9 @@ lemma map_unitTransport_comp_mateEquiv_app
     TT.map (Rp.map (adjs.unit.app (Lq.obj K)) ≫
         (conjugateIsoEquiv (adjp.comp adjs) adjsp cp).hom.app (Ls.obj (Lq.obj K)) ≫
         Rsp.map (cq.inv.app K)) ≫
-        (mateEquiv adjsp adjsp' (.mk _ _ _ _ esp.inv)).natTrans.app (Lsq.obj K) ≫
+        (mateEquiv adjsp adjsp' (.mk _ _ _ _ esp.inv)).app (Lsq.obj K) ≫
           Rsp'.map (esq.hom.app K) =
-      ((mateEquiv adjp adjp' (.mk _ _ _ _ ep.inv)).natTrans.app (Lq.obj K) ≫
+      ((mateEquiv adjp adjp' (.mk _ _ _ _ ep.inv)).app (Lq.obj K) ≫
         Rp'.map (eq.hom.app K)) ≫
         Rp'.map (adjs'.unit.app (Lq'.obj (TS.obj K))) ≫
         (conjugateIsoEquiv (adjp'.comp adjs') adjsp' cp').hom.app (Ls'.obj (Lq'.obj (TS.obj K))) ≫
@@ -154,8 +154,8 @@ lemma map_unitTransport_comp_mateEquiv_app
       es.hom.app (Lq.obj K) ≫ Ls'.map (eq.hom.app K) ≫ cq'.inv.app (TS.obj K) := by
     rw [← cancel_epi (TG.map (cq.hom.app K)), ← TG.map_comp_assoc, Iso.hom_inv_id_app,
       TG.map_id, Category.id_comp, ← reassoc_of% (hq K), Iso.hom_inv_id_app, Category.comp_id]
-  have hβ := (mateEquiv adjsp adjsp' (.mk _ _ _ _ esp.inv)).natTrans.naturality (cq.inv.app K)
-  have hβp := (mateEquiv adjp adjp' (.mk _ _ _ _ ep.inv)).natTrans.naturality
+  have hβ := (mateEquiv adjsp adjsp' (.mk _ _ _ _ esp.inv)).naturality (cq.inv.app K)
+  have hβp := (mateEquiv adjp adjp' (.mk _ _ _ _ ep.inv)).naturality
     (adjs.unit.app (Lq.obj K))
   have hρ := (conjugateIsoEquiv (adjp'.comp adjs') adjsp' cp').hom.naturality
     (Ls'.map (eq.hom.app K))

@@ -92,8 +92,8 @@ lemma WeilSheaf.globalSectionsFrobeniusHom_lowerStar_comp (G : WeilSheaf k₀ l 
         globalSectionsFrobeniusHom G := by
   have key := ProEtale.globalSectionsLowerStarIso_exchange (WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ _) G.obj.carrier.X
   have nat := (ProEtale.globalSectionsLowerStarIso _
     (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).hom.naturality
@@ -106,11 +106,11 @@ lemma WeilSheaf.globalSectionsFrobeniusHom_lowerStar_comp (G : WeilSheaf k₀ l 
       (Sheaf.Γ _ (WeilCoefficients.{u} l)).map
         ((ProEtale.lowerStarComp (WeilCoefficients.{u} l)
           (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
-          (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+          (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr (WeilCoefficients.{u} l)
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ _) ≪≫
           (ProEtale.lowerStarComp (WeilCoefficients.{u} l)
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
             (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).symm).hom.app G.obj.carrier.X) :=
     rfl
   rw [hε]
@@ -127,11 +127,11 @@ lemma WeilSheaf.globalSectionsFrobeniusHom_lowerStar_comp (G : WeilSheaf k₀ l 
     nat
   have := CategoryTheory.Iso.inv_comp_comp_eq_of_hom_comp_eq
     ((ProEtale.globalSectionsLowerStarIso _
-      (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app
         ((ProEtale.lowerStar (WeilCoefficients.{u} l)
           (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).obj G.obj.carrier.X))
     ((ProEtale.globalSectionsLowerStarIso _
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app G.obj.carrier.X)
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app G.obj.carrier.X)
     _ _ _ _ key nat'
   exact this
 

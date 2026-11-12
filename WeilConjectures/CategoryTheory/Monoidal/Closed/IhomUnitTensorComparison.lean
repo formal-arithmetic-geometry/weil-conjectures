@@ -55,11 +55,11 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
 then `G` of the comparison map `[X, 𝟙] ⊗ Z ⟶ [X, Z]` is an isomorphism if and only if the
 comparison map `[G X, 𝟙] ⊗ G Z ⟶ [G X, G Z]` is. -/
 theorem isIso_map_ihomUnitTensorToIhom_iff (X Z : C)
-    [IsIso ((ihomComparison G X).natTrans.app (𝟙_ C))]
-    [IsIso ((ihomComparison G X).natTrans.app Z)] :
+    [IsIso ((ihomComparison G X).app (𝟙_ C))]
+    [IsIso ((ihomComparison G X).app Z)] :
     IsIso (G.map (ihomUnitTensorToIhom X Z)) ↔
       IsIso (ihomUnitTensorToIhom (G.obj X) (G.obj Z)) := by
-  rw [← isIso_comp_right_iff _ ((ihomComparison G X).natTrans.app Z),
+  rw [← isIso_comp_right_iff _ ((ihomComparison G X).app Z),
     map_ihomUnitTensorToIhom_comp, isIso_comp_left_iff, isIso_comp_left_iff]
 
 end CategoryTheory.Functor.Monoidal

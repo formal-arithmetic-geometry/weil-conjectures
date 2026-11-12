@@ -73,7 +73,7 @@ Source: Zheng, Lemma 5.22 and Construction 5.15
 (blueprint: lem-pur-etale-system-evaluation-bound). -/
 def strictEtaleBrownQuotientMate {m n : ℕ} (h : n ≤ m) :
     g m ⋙ (S.PX.scalar h).derived ⟶ (S.PY.scalar h).derived ⋙ g n :=
-  (mateEquiv (adjN m) (adjN n) (.mk _ _ _ _ (B.projection h).hom)).natTrans
+  (mateEquiv (adjN m) (adjN n) (.mk _ _ _ _ (B.projection h).hom))
 
 /-- The prescribed finite-level transition word `g_n(t_M) b`, using the scalar-adjoint
 of the actual derived strict transition of `M`, including nonflat quotient maps.
@@ -171,14 +171,13 @@ private theorem right_lower_bound
 
 private theorem evaluationIso_mate (n : ℕ) :
     (evaluationIso B adj adjN n).hom =
-      (mateEquiv adj (adjN n) (.mk _ _ _ _ (S.evaluation n).inv)).natTrans := by
+      (mateEquiv adj (adjN n) (.mk _ _ _ _ (S.evaluation n).inv)) := by
   change conjugateEquiv ((S.PX.derivedAdj n).comp adj)
     ((adjN n).comp (S.PY.derivedAdj n)) (B.leftExtension n).inv = _
   rw [← iterated_mateEquiv_conjugateEquiv (S.PX.derivedAdj n)
     (S.PY.derivedAdj n) (adjN n) adj]
-  apply congrArg (fun z ↦ (mateEquiv adj (adjN n) z).natTrans)
-  apply TwoSquare.ext
-  intro K
+  apply congrArg (fun z ↦ (mateEquiv adj (adjN n) z))
+  refine NatTrans.ext (funext fun K ↦ ?_)
   exact congrArg (fun z ↦ z.app K) (etaleBrownEvaluationMate B n).2
 
 private theorem evaluationIso_counit (n : ℕ) M :

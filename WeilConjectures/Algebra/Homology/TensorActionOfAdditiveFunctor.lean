@@ -103,14 +103,14 @@ theorem tensorAction_of_additiveFunctor
   let M := K.obj Q
   let κ : End Q →+* End M :=
     { K.mapEnd Q with
-      map_zero' := K.map_zero Q Q
-      map_add' := fun _ _ ↦ K.map_add }
+      map_zero' := End.ext (K.map_zero Q Q)
+      map_add' := fun _ _ ↦ End.ext K.map_add }
   let φ : A →+* Module.End B M :=
     (endRingEquiv M).toRingHom.comp (κ.comp (algebraMap A (End Q)))
   have hφ : ∀ r : R, φ (algebraMap R A r) =
       algebraMap B (Module.End B M) (algebraMap R B r) := by
     intro r
-    change (K.map (algebraMap A (End Q) (algebraMap R A r))).hom = _
+    change (K.map ((algebraMap A (End Q) (algebraMap R A r))).asHom).hom = _
     rw [Algebra.algebraMap_eq_smul_one]
     change (K.map (algebraMap R A r • 𝟙 Q)).hom = _
     rw [hR]
@@ -120,7 +120,7 @@ theorem tensorAction_of_additiveFunctor
   intro a
   convert he a using 1
   change e.hom ≫ K.map (a • 𝟙 Q) =
-    e.hom ≫ K.map (algebraMap A (End Q) a)
+    e.hom ≫ K.map ((algebraMap A (End Q) a)).asHom
   rw [Algebra.algebraMap_eq_smul_one]
   rfl
 

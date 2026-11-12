@@ -50,17 +50,18 @@ section StalkFrobenius
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
 
 /-- A pairing of underlying sheaves of Weil sheaves compatible with the Weil structures induces a
 pairing of stalks compatible with the local Frobenius. -/
 lemma stalkAt_pairing_frobenius (P Q R : WeilSheaf k₀ l X)
     (e : P.obj.carrier.X ⊗ Q.obj.carrier.X ⟶ R.obj.carrier.X)
     (h : (P.obj.str.hom.hom ⊗ₘ Q.obj.str.hom.hom) ≫ e =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘
+        Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           P.obj.carrier.X Q.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map e ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map e ≫
           R.obj.str.hom.hom)
     (p : (P.stalkAt s m hs).carrier) (q : (Q.stalkAt s m hs).carrier) :
     ((stalkSheafFunctor k₀ l X s).map e).hom ((μ (stalkSheafFunctor k₀ l X s) _ _).hom
@@ -75,8 +76,9 @@ lemma stalkAt_pairing_frobenius (P Q R : WeilSheaf k₀ l X)
 /-- A unit of the underlying sheaf of a Weil sheaf compatible with the Weil structure induces an
 element of the stalk fixed by the local Frobenius. -/
 lemma stalkAt_unit_frobenius (R : WeilSheaf k₀ l X) (η : 𝟙_ _ ⟶ R.obj.carrier.X)
-    (h : ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map η ≫
+    (h : ε ((X ↘
+        Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map η ≫
         R.obj.str.hom.hom = η) :
     (R.stalkAt s m hs).frobenius (((stalkSheafFunctor k₀ l X s).map η).hom
         ((ε (stalkSheafFunctor k₀ l X s)).hom (1 : ULift.{u + 1} (PadicAlgCl l)))) =
@@ -242,8 +244,8 @@ lemma germ_lowerStar_toIhomDualSection
 of the local Frobenius on the stalk `(φ_* F)_s` of the pushforward of a lisse Weil sheaf `F`, then
 `α ^ k` is an eigenvalue of the local Frobenius on `(φ_* (F^{⊗ k}))_s`. -/
 theorem hasEigenvalue_stalkAt_lowerStar_tensorPow {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
-    (m : ℕ) (hs : s ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) {α : PadicAlgCl l}
+    (m : ℕ) (hs : s ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) {α : PadicAlgCl l}
     (hα : (((lowerStar φ).obj F).stalkAt s m hs).frobeniusEnd.HasEigenvalue α) (k : ℕ) :
     (((lowerStar φ).obj (F.tensorPow hF k)).stalkAt s m hs).frobeniusEnd.HasEigenvalue
       (α ^ k) := by

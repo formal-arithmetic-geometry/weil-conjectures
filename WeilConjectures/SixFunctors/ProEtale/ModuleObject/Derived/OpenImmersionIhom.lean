@@ -116,7 +116,7 @@ functor `Lj^*` is an isomorphism. -/
 theorem isIso_ihomComparison_leftDerivedUpperStar_of_isOpenImmersion
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    IsIso (Functor.LaxMonoidal.ihomComparison L((j)^*⟦Λ⟧) M).natTrans :=
+    IsIso (Functor.LaxMonoidal.ihomComparison L((j)^*⟦Λ⟧) M) :=
   Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j) M
 
@@ -176,7 +176,7 @@ isomorphism. -/
 theorem isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
     (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar
-        (Profinite.padicAlgClRingObj ℓ) ℓ i) M).natTrans :=
+        (Profinite.padicAlgClRingObj ℓ) ℓ i) M) :=
   Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ)
         ℓ i) M
