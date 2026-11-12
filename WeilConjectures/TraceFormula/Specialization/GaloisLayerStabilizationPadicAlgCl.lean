@@ -175,15 +175,17 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
     (N.galoisLayerRestrict h Ω L'.toIntermediateField).commSq_j (N.galoisLayer h Ω).i
     (N.galoisLayerHom h L'.toIntermediateField).generic K₀.obj
     (K := L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)
-  -- reduction to the restricted base change map at `Lg^* (Lε^* C)`
-  refine Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ _ C ?_
-  refine isIso_map_app_of_iso _ _ (A := L(upperStar (Profinite.padicAlgClRingObj ℓ)
-      (N.galoisLayerHom h L'.toIntermediateField).generic).obj
-        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
-    (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
   -- Identify the proof arguments at each interface without transporting the whole context.
   have hresult := hgen (by cast_proofs e') (by cast_proofs h₃)
-  cast_proofs hresult
+  -- Reduce to the restricted base change map at `Lg^* (Lε^* C)`.
+  have hfinal := Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app
+    (Profinite.padicAlgClRingObj ℓ) (N.galoisLayerRestrict h Ω L'.toIntermediateField) C (by
+      refine isIso_map_app_of_iso _ _ (A := L(upperStar (Profinite.padicAlgClRingObj ℓ)
+          (N.galoisLayerHom h L'.toIntermediateField).generic).obj
+            (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
+        (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
+      cast_proofs hresult)
+  cast_proofs hfinal
 
 end NearbyCyclesModel
 
