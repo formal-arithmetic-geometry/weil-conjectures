@@ -261,6 +261,6 @@ theorem mixedSections_left_unit_normalization
         ((Df.mapHomotopyCategory (.up ℤ)).obj K) :=
     mixedSections_moduleDirectImage_comp_obj f.toLRSHom.toShHom g.toLRSHom.toShHom K
   dsimp only [HZ, schemeDerivedGlobalSections] at h ⊢
-  convert h using 1 <;> simp only [hK]
+  convert h using 1 <;> try simp only [hK]
 
 end AlgebraicGeometry
