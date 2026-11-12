@@ -299,29 +299,30 @@ private theorem quotient_lift_obstruction_map_zero
       quotient_lift_map L g (a n.as) (ell ^ (n.as + 1)) (hg n.as)
   exact map_cokernel_zero_of_factor L A t g he
 
-private theorem proetale_cover_detects_zero {Y : Scheme.{u}} (C : Scheme.Cover.{u} proetalePrecoverage Y)
-      {F G : Sheaf (ProEt.topology Y) Ab.{u + 1}} (q : F ⟶ G)
-      (hq : ∀ j, (C.f j)^*[Ab.{u + 1}].map q = 0) : q = 0 := by
-    have (j : C.I₀) : WeaklyEtale (C.f j) :=
-      Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ (.mk j)
-    have hk (j : C.I₀) : IsIso ((C.f j)^*[Ab.{u + 1}].map (kernel.ι q)) := by
-      have : IsIso (kernel.ι ((C.f j)^*[Ab.{u + 1}].map q)) :=
-        kernel.ι_of_zero (hq j)
-      have heq : (C.f j)^*[Ab.{u + 1}].map (kernel.ι q) =
-          (PreservesKernel.iso (C.f j)^*[Ab.{u + 1}] q).hom ≫
-            kernel.ι ((C.f j)^*[Ab.{u + 1}].map q) := by
-        rw [← PreservesKernel.iso_inv_ι (C.f j)^*[Ab.{u + 1}] q]
-        simp
-      rw [heq]
-      infer_instance
-    have : IsIso (kernel.ι q) := by
-      apply ProEtale.isIso_of_isIso_localizationRestriction Ab.{u + 1}
-        (kernel.ι q) C.f C.mem₀
-      intro j
-      exact (NatIso.isIso_map_iff
-        (ProEtale.upperStarIsoLocalizationRestriction Ab.{u + 1} (C.f j) inferInstance)
-        (kernel.ι q)).1 (hk j)
-    exact eq_zero_of_epi_kernel q
+private theorem proetale_cover_detects_zero {Y : Scheme.{u}}
+    (C : Scheme.Cover.{u} proetalePrecoverage Y)
+    {F G : Sheaf (ProEt.topology Y) Ab.{u + 1}} (q : F ⟶ G)
+    (hq : ∀ j, (C.f j)^*[Ab.{u + 1}].map q = 0) : q = 0 := by
+  have (j : C.I₀) : WeaklyEtale (C.f j) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ (.mk j)
+  have hk (j : C.I₀) : IsIso ((C.f j)^*[Ab.{u + 1}].map (kernel.ι q)) := by
+    have : IsIso (kernel.ι ((C.f j)^*[Ab.{u + 1}].map q)) :=
+      kernel.ι_of_zero (hq j)
+    have heq : (C.f j)^*[Ab.{u + 1}].map (kernel.ι q) =
+        (PreservesKernel.iso (C.f j)^*[Ab.{u + 1}] q).hom ≫
+          kernel.ι ((C.f j)^*[Ab.{u + 1}].map q) := by
+      rw [← PreservesKernel.iso_inv_ι (C.f j)^*[Ab.{u + 1}] q]
+      simp
+    rw [heq]
+    infer_instance
+  have : IsIso (kernel.ι q) := by
+    apply ProEtale.isIso_of_isIso_localizationRestriction Ab.{u + 1}
+      (kernel.ι q) C.f C.mem₀
+    intro j
+    exact (NatIso.isIso_map_iff
+      (ProEtale.upperStarIsoLocalizationRestriction Ab.{u + 1} (C.f j) inferInstance)
+      (kernel.ι q)).1 (hk j)
+  exact eq_zero_of_epi_kernel q
 
 private theorem quotient_obstruction_zero_of_constructible
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -386,8 +387,6 @@ private theorem quotient_obstruction_zero_of_constructible
     obtain ⟨a, ha⟩ := Set.mem_iUnion.mp (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
     exact ⟨a, (S.range_immersion a).symm ▸ ha⟩
   · exact hstr
-
-set_option profiler true in
 
 /-- Reassembly of individual section limits over a constructible module.
 Source: Hemo--Richarz--Scholbach, Proposition 5.1, proof for constructible sheaves;
