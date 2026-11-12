@@ -314,7 +314,7 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
           (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
             (Profinite.padicAlgClRingObj ℓ) f).inv := by
       transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
-    rw [← Category.assoc, hu0, Iso.inv_hom_id_assoc]
+    rw [hu0, Iso.inv_hom_id_assoc]
   simpa only [hM, hN, hf', hf] using hu
 
 
