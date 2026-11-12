@@ -135,7 +135,6 @@ private def trace_scalar_shift
 
 attribute [local instance] trace_pull_shift trace_push_shift trace_scalar_shift
 
-set_option maxHeartbeats 800000 in
 -- Compare the full derived-unit normalization before cancelling the single comparison.
 private theorem endpoint_hom
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -186,7 +185,6 @@ private theorem endpoint_hom
   let c := ((Mod.comap (coefficientMap a X)).mapDerivedCategorySingleFunctor 0).app N
   exact hn.trans ((c.eq_comp_inv).2 hv).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep both composite adjunctions fixed while identifying the normalized conjugate.
 private theorem derivedPull_eq_path
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -231,7 +229,6 @@ section OrdinaryEndpointSquare
 set_option allowUnsafeReducibility true in
 attribute [local reducible] CondensedRing.lowerStar Mod.comap
 
-set_option maxHeartbeats 800000 in
 -- Transpose the module square twice without expanding sheafification data.
 private theorem ordinary_endpoint_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -344,7 +341,6 @@ private theorem endpoint_pull_square
   simp only [Functor.map_comp] at hh
   rw [hh]
 
-set_option maxHeartbeats 800000 in
 -- Supply the shift compatibilities of the full derived composite adjunctions.
 private theorem derivedPull_commShift
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -456,7 +452,6 @@ private theorem nativePullEndpointShift_formula
   unfold nativePullEndpointShift PullEndpoint.shift PullEndpoint.derived
   rw [pullbackShift_eq]
 
-set_option maxHeartbeats 800000 in
 -- Transport the normalized endpoint square through the specified shift structures.
 private theorem endpoint_pull_square_shift
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -584,7 +579,6 @@ private def nativeUnitPullEndpoint
     erw [CondensedRing.homEquiv_εIso_inv_hom Λ f]
     exact hu
 
-set_option maxHeartbeats 800000 in
 -- Compare the normalized degree-zero unit with the native monoidal unit map.
 private theorem unitPullEndpoint_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -923,7 +917,6 @@ private def closurePullEndpoint (l : ℕ) [Fact l.Prime]
   chosenPullEndpoint_normalized _ f _ _ _ (adicComparison l f).qbar_cartesian
     (lineComparison l none f) rfl
 
-set_option maxHeartbeats 800000 in
 -- Unfold only the selected coefficient and line when fixing the native endpoints.
 private def nativeRationalEndpoint (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) {X S : Scheme.{u}} (f : X ⟶ S)
@@ -936,7 +929,6 @@ private def nativeRationalEndpoint (l : ℕ) [Fact l.Prime]
   unfold coefficient line at e
   exact e
 
-set_option maxHeartbeats 800000 in
 -- Unfold only the selected coefficient and line when fixing the native endpoints.
 private def nativeClosureEndpoint (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
@@ -1046,7 +1038,6 @@ private def NativeTraceSquare
 
 attribute [local irreducible] derivedPullIso derivedPushHom
 
-set_option maxHeartbeats 800000 in
 -- Paste normalized squares while keeping the coefficient category instances folded.
 private theorem nativeTraceSquare_scalar
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -1121,7 +1112,6 @@ private theorem nativeTraceSquare_scalar
   simp only [Category.assoc] at hh ⊢
   coefficient_finish hh
 
-set_option maxHeartbeats 800000 in
 -- Compose equalities of the two boundaries without dependent rewriting of the square.
 private theorem nativeTraceSquare_of_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -1173,7 +1163,6 @@ private theorem nativeTraceSquare_to_first
     Category.assoc, Iso.inv_hom_id, Category.comp_id, id_eq] at ht' ⊢
   coefficient_finish ht'
 
-set_option maxHeartbeats 800000 in
 -- Assemble the integral, rational, and closure squares in their fixed coefficient types.
 private theorem native_scalar_trace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -1262,7 +1251,6 @@ private theorem native_scalar_trace
       exact hc
   exact ht
 
-set_option maxHeartbeats 0 in
 -- Assemble the completed square and the three concrete scalar transports.
 /-- Base change of the normalized q trace to the first projection.
 

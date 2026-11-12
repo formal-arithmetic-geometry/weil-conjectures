@@ -394,7 +394,6 @@ private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
   simp only [Iso.inv_hom_id_assoc]
   exact inverseOpen_unit f q B K a
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem sections_to_inverseAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)

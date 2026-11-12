@@ -102,7 +102,6 @@ private theorem identity_presheaf_square (T : Scheme.{v}) (M : T.Modules)
     (Functor.leftUnitor P).hom ≫ θ
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Sheafification comparisons cross several presentations of the module category.
 /-- Over an identity base the truncated top-edge counit is invertible. -/
 instance isIso_topEdgeTruncatedCounit_id

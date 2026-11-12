@@ -558,7 +558,6 @@ variable {A B Ap Bp : Type*}
   [Abelian A] [Abelian B] [Abelian Ap] [Abelian Bp]
   [HasDerivedCategory A] [HasDerivedCategory B]
   [HasDerivedCategory Ap] [HasDerivedCategory Bp]
-set_option maxHeartbeats 10000000 in
 -- Normalize the four exact-derived factorization isomorphisms.
 private theorem brown_squareFactors
     (Fp : Bp ⥤ Ap) (F : B ⥤ A) (r : Ap ⥤ A) (s : Bp ⥤ B)
@@ -706,7 +705,6 @@ private theorem brown_right_section_normalized
         ((A.rightUnderlying n).hom.app M).hom.app U x :=
   r.property.1
 
-set_option maxHeartbeats 1600000 in
 -- Cache the derived restriction normalization before specializing a cube face.
 private theorem brown_restriction_derived_normalized
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
@@ -738,7 +736,6 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (rg : ∀ k, StrictEtaleBrownImageRealization O t g k A (B.level k) RV RW)
   {m n : ℕ} (h : m ≤ n)
 
-set_option maxHeartbeats 10000000 in
 -- Comparing the two transported ordinary adjunctions unfolds coefficient equivalences.
 private theorem ordinary_inverse_isIso (k : ℕ) :
     IsIso (strictEtaleBrownOrdinaryInverse O t g k A (B.level k) (rg k)) := by
@@ -821,7 +818,6 @@ private theorem ordinary_right_cube (N : strictEtaleLevel V O t m) :
     (fun M U x ↦ brown_right_section_normalized O t g n A (B.level n) RV RW
       (rg n) M U x) N
 
-set_option maxHeartbeats 10000000 in
 -- Compare ordinary sectionwise normalizations with the abstract inverse-mate cube.
 private theorem ordinary_inverse_cube (M : strictEtaleLevel W O t m) :
     (strictEtaleBrownOrdinaryInverse O t g n A (B.level n) (rg n)).app
@@ -851,7 +847,6 @@ private theorem ordinary_inverse_cube (M : strictEtaleLevel W O t m) :
     (Etale.underived_mate (strictEtaleBrownRingMap O t h) g)
     (ordinary_right_cube O t g A PW PV B RV RW rg h) M
 
-set_option maxHeartbeats 1600000 in
 -- Specialize the inverse-face identity to the ordinary comparisons.
 private theorem ordinary_inverse_symm_cube (M : strictEtaleLevel W O t m) :
       (strictEtaleBrownConstant O t V n).map ((A.restrictInverse h).hom.app M) ≫
@@ -890,7 +885,6 @@ private theorem ordinary_inverse_symm_cube (M : strictEtaleLevel W O t m) :
 
 end OrdinaryCube
 
-set_option maxHeartbeats 1600000 in
 -- Invert the normalized cochain comparison at the exact functor factors.
 private theorem brown_inverse_cochain_face
     (O : Type (u + 1)) [CommRing O] (t : O)
@@ -962,7 +956,6 @@ private theorem brown_inverse_cochain_face
   simpa only [Category.assoc, Iso.app_inv, Functor.mapIso_inv,
     NatIso.mapHomologicalComplex, Iso.symm_hom] using hh
 
-set_option maxHeartbeats 1600000 in
 -- Specialize the ordinary-functor localization cube to coefficient sheaves.
 private theorem brown_exact_restriction_cube
     (O : Type (u + 1)) [CommRing O] (t : O)
@@ -1080,7 +1073,6 @@ private theorem brown_exact_restriction_cube
       (Etale.upperStarRestrictScalarsIsoSheaf φ g)) (h6 := hcan)
     (comm := ordinary)
 
-set_option maxHeartbeats 1600000 in
 -- The localization cube simultaneously compares twelve factorization isomorphisms.
 /-- The exact ordinary restriction cube commutes after Brown realization.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 05RU and 07A4.
