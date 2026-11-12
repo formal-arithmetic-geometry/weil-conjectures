@@ -479,6 +479,18 @@ private lemma factors_naturality_square
   dsimp only [Functor.comp_map] at hn
   rw [← Category.assoc, hn, Category.assoc, ← R.map_comp, h]
 
+private lemma normalized_pullback_paste
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (Q : A ⥤ C) (R : B ⥤ D) (F : A ⥤ B) (G : C ⥤ D)
+    (η : Q ⋙ G ⟶ F ⋙ R) {P E : A} {T : B} {U V : C}
+    (b : V ⟶ U) (r : U ⟶ Q.obj E) (k : G.obj U ⟶ R.obj T)
+    (m : V ⟶ Q.obj P) (w : P ⟶ E) (q : F.obj E ⟶ T) (e : F.obj P ⟶ T)
+    (hb : b ≫ r = m ≫ Q.map w)
+    (hr : k = G.map r ≫ η.app E ≫ R.map q) (hw : F.map w ≫ q = e) :
+    G.map b ≫ k = G.map m ≫ η.app P ≫ R.map e := by
+  rw [hr, ← G.map_comp_assoc, hb, G.map_comp, Category.assoc,
+    factors_naturality_square Q R F G η w q e hw]
+
 private lemma coherence
     {A B : Type*} [Category A] [Category B]
     [MonoidalCategory A] [MonoidalCategory B]
@@ -541,20 +553,14 @@ private lemma normalized_beta_pullback_computes
     rw [DerivedCategory.Q.map_comp]
     exact normalized_beta_computes a S t Y β hβ C hC
   have hr := restricted_scalar_pull_computes D a f C
-  have hr' := congrArg
-    (fun k ↦ (scalarSixPull Λ f).map
-      (β.hom.app (DerivedCategory.Q.obj C)) ≫ k) hr
-  refine hr'.trans ?_
-  have hs := congrArg (fun g ↦ (scalarSixPull Λ f).map g) hNY
-  simp only [Functor.map_comp] at hs
-  rw [reassoc_of% hs]
-  have hnat := factors_naturality_square DerivedCategory.Q DerivedCategory.Q
+  have hOrd := augmented_tensor_pull a S t f C
+  have h := normalized_pullback_paste DerivedCategory.Q DerivedCategory.Q
     (F.mapHomologicalComplex (.up ℤ)) F.mapDerivedCategory
-    F.mapDerivedCategoryFactors.hom wY _ _ (augmented_tensor_pull a S t f C)
-  simp only [Functor.map_comp, Category.assoc] at hnat
-  simpa only [scalarSixPull, F, Category.assoc] using congrArg
-    (fun k ↦ (scalarSixPull Λ f).map
-      (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫ k) hnat
+    F.mapDerivedCategoryFactors.hom
+    (β.hom.app (DerivedCategory.Q.obj C)) ((betaRestrictedCounit a Y).app C) _
+    (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) wY _ _ hNY
+    (by simpa only [Functor.map_comp, Category.assoc, scalarSixPull, F] using hr) hOrd
+  simpa only [Functor.map_comp, Category.assoc, scalarSixPull, F] using h
 
 -- The composition compares exact and total derived realizations of the same complexes.
 /--
