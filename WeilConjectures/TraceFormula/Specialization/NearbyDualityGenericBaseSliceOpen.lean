@@ -315,11 +315,12 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
     rw [hf']
     simp
   have hM' := congrArg (fun z ↦ (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
-    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map z ≫
-      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hM
+    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map z) hM
+  have hM'' := congrArg (fun z ↦ z ≫
+    (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hM'
   have hN' := congrArg (fun z ↦ z ≫
     (N.nearbyCycles _).map (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv) hN
-  apply hM'.trans
+  apply hM''.trans
   apply Eq.trans ?_ hN'.symm
   rw [← Category.assoc, hunit'']
   calc
