@@ -299,7 +299,8 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
     (kunneth_isIso_of_eq_aux (homEquiv_pullbackSquareComparison_comp_counit Λ w A) h₁) h₂ h₃
   · exact (reassoc_of% (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id
       Λ sq₁ w (R((aX)_*⟦Λ⟧).obj A))) _
-  · exact map_comp_of_comp_eq_map_aux _ _ _ _ _
+  · exact map_comp_of_comp_eq_map_aux L((p₂)^*⟦Λ⟧) _ _ _
+      ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
       (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self
         Λ sq₂ (R((aY)_*⟦Λ⟧).obj B))
 
