@@ -194,8 +194,6 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_isNoethe
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀).symm) ?_
   transport_exact h₁
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients.** Under the hypotheses of
@@ -245,7 +243,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_padicAlgCl_of_isNoethe
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_isNoetherianObject h Ω
     ℓ hdeg C hC htors).elim fun L' hL' ↦ ⟨L', ?_⟩
-  have := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
+  letI := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)
   have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
