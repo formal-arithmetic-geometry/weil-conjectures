@@ -250,7 +250,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
   have hcomm (σ : Ω ≃ₐ[L] Ω) :=
     N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       (F.obj C)
-  exact stabilization_of_equivariant_iso_aux
+  have key := stabilization_of_equivariant_iso_aux
     (L₀ := F) (Lfg := F') (Lg := F') (Lf := F')
     (ΨM := N.nearbyCycles Λ) (Ψ₁ := (N.galoisLayer h L').nearbyCycles Λ)
     (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
@@ -264,5 +264,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (F.obj C))
     (fun σ C' ↦ (N.galoisLayerAut h Ω σ).autAction Λ C')
     (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g) hfix hsplit hcomm
+  exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
