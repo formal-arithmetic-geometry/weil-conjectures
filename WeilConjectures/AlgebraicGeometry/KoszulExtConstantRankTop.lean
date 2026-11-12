@@ -35,6 +35,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Unfolding the two derived coefficient objects requires additional elaboration fuel.
 /-- The top scalar Ext on a constant conormal-rank open is its dual determinant.
