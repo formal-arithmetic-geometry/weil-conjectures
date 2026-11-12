@@ -23,9 +23,25 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
-set_option maxHeartbeats 2000000 in
-set_option profiler true in
--- The successor clause contains several chosen total-complex instances.
+
+private theorem ringedExtendedCech_succ_tensor
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u}) (r : ℕ)
+    (b : Fin (r + 1) → (O.obj ⋙ forget CommRingCat).sections) :
+    ringedExtendedCech O (r + 1) b =
+      (letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
+          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+          SheafOfModules.isGrothendieckAbelian _
+       letI := SheafOfModules.monoidalCategory O
+       letI := SheafOfModules.symmetricCategory O
+       letI := Classical.choice (SheafOfModules.tensorClosed O).1
+       letI := Classical.choice (SheafOfModules.tensorClosed O).2.1
+       ⟨HomologicalComplex.tensorObj (ringedLocalizationTwoTerm O (b 0))
+          (ringedExtendedCech O r (fun i ↦ b i.succ)).1,
+        HomologicalComplex.tensorHom (ringedLocalizationTwoTermAugmentation O (b 0))
+          (ringedExtendedCech O r (fun i ↦ b i.succ)).2 ≫
+          (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom⟩) := rfl
+
 /-- One successor step of the finite Cech comparison, including its augmentation.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
 Proof: expand the successor clause of ringedExtendedCech. The adjunction makes F additive
@@ -95,6 +111,7 @@ theorem cech_pullback_augmented_tensor_step
             (SheafOfModules.unit
               ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ≫
           (HomologicalComplex.single _ (.up ℤ) 0).map v.hom := by
+  rw [ringedExtendedCech_succ_tensor R, ringedExtendedCech_succ_tensor S]
   have : IsGrothendieckAbelian.{u} (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
     SheafOfModules.isGrothendieckAbelian _
