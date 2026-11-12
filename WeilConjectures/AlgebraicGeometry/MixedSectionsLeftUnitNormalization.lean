@@ -38,7 +38,7 @@ private theorem paste_unit_naturality
   simp only [Functor.map_comp, Category.assoc]
   have hn := c.naturality t
   simp only [Functor.comp_map] at hn
-  rw [hn]
+  rw [← Category.assoc (H.map (G.map t)) (c.app Y), hn]
   simp only [← Category.assoc] at hg ⊢
   rw [hg]
   simp only [Category.assoc]
@@ -181,7 +181,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
