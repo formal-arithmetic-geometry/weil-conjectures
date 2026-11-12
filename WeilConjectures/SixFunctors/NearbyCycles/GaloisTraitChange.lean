@@ -160,9 +160,9 @@ The diagram chase is carried out with abstract functors, before specializing to 
 pullbacks and nearby cycles. -/
 private lemma isIso_of_invariant_summands_square {D E₁ E : Type*} [Category D]
     [Category E₁] [Category E] {ι : Type*} {A : ι → Type*} [∀ q, Category (A q)]
-    (H : ∀ q, E ⥤ A q)
+    (F : E₁ ⥤ E) (Ψ : D ⥤ E) (H : ∀ q, E ⥤ A q)
     (hcons : ∀ {X Y : E} (g : X ⟶ Y), (∀ q, IsIso ((H q).map g)) → IsIso g)
-    (F : E₁ ⥤ E) (Ψ : D ⥤ E) {P Q R S : E} {A₁ B₁ : E₁} {T U V : D}
+    {P Q R S : E} {A₁ B₁ : E₁} {T U V : D}
     (α : P ⟶ Q) (α₁ : A₁ ⟶ B₁) (r₁ : B₁ ⟶ A₁) (hr₁ : α₁ ≫ r₁ = 𝟙 _)
     (α₂ : R ⟶ Ψ.obj U) (r₂ : Ψ.obj U ⟶ R) (hr₂ : α₂ ≫ r₂ = 𝟙 _)
     (cA : T ≅ U) (cB : T ≅ V) (cB' : P ≅ F.obj A₁) (I' : R ≅ Q)
@@ -273,8 +273,8 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
       (∀ q, IsIso ((H q).map g)) → IsIso g := (DerivedCategory.isIso_iff A g).2
   trace "PH329: specialized conservativity"
   with_reducible
-    have key₀ := isIso_of_invariant_summands_square H (fun g hg ↦ hcons g hg)
-      L((f')^*⟦Λ⟧) Ψ₂Ω
+    have key₀ := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
+      L((f')^*⟦Λ⟧) Ψ₂Ω H (fun g hg ↦ hcons g hg)
   trace "PH329: specialized abstract categories"
   with_reducible
     have key := key₀ α α₁ r₁ hr₁ α₂ r₂ hr₂
