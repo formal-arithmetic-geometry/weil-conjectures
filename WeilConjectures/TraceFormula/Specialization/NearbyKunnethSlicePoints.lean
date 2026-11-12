@@ -53,8 +53,98 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
+/-- Slicing an immersion along one coordinate gives a chart with that coordinate removed. -/
+private lemma locallyEmbedsInAffineSpace_pullback_reindex {T S S' : Scheme.{u}}
+    {ι : Type u} [Finite ι] (c : T ⟶ 𝔸(ι; S)) [IsImmersion c] (a : ι)
+    (σ : S' ⟶ 𝔸(ULift.{u} (Fin 1); S)) :
+    (pullback.snd (c ≫ AffineSpace.reindex (fun _ ↦ a) S) σ).LocallyEmbedsInAffineSpace
+      (Nat.card {j : ι // j ≠ a}) := by
+  obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex c a σ
+  exact Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc'
+
+/-- Closed coordinates of a chart, pulled back along a morphism of models, detect a closed
+image point on the special fibre. -/
+private lemma isClosed_singleton_of_specialCoordinate_comp_hom
+    (hM : M.IsTraitModelOver qM gM) (φ : P.Hom M f₁ f₁')
+    {qP : P.total ⟶ trait k'} {gP : P.generic ⟶ Spec (.of (traitGenericField k'))}
+    (hP : P.IsTraitModelOver qP gP) (hqP : qP = φ.total ≫ qM)
+    {ι : Type u} (c : M.total ⟶ 𝔸(ι; trait k')) [IsImmersion c]
+    (hc : c ≫ 𝔸(ι; trait k') ↘ trait k' = qM) (z : Z'.left)
+    (hcoord : ∀ a : ι, (φ.total ≫ c ≫ AffineSpace.reindex
+      (fun _ : ULift.{u} (Fin 1) ↦ a) (trait k')) ≫
+        𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = qP)
+    (hz : ∀ a, IsClosed {specialCoordinate hP
+      (φ.total ≫ c ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (hcoord a) z}) :
+    IsClosed {f₁' z} := by
+  refine isClosed_singleton_of_isImmersion hM c hc _ fun a ↦ ?_
+  have h := hz a
+  rwa [show specialCoordinate hP
+      (φ.total ≫ c ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (hcoord a) =
+      f₁' ≫ specialCoordinate hM c hc ≫
+        AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
+    rw [← specialCoordinate_comp_reindex hM c hc]
+    exact specialCoordinate_comp_hom hM φ hP hqP _ _, Scheme.Hom.comp_apply] at h
+
+/-- On global affine charts, a non-closed point is reached by a slice on which the Künneth
+map is invertible. -/
+private theorem exists_isIso_map_kunnethMap_of_not_isClosed_of_charts
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
+    [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
+    (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
+    (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula Λ k' (m + m' - 1))
+    {ι κ : Type u} [Finite ι] [Finite κ]
+    (cM : M.total ⟶ 𝔸(ι; trait k')) [IsImmersion cM]
+    (hcM : cM ≫ 𝔸(ι; trait k') ↘ trait k' = qM) (hcardM : Nat.card ι ≤ m)
+    (cN : N.total ⟶ 𝔸(κ; trait k')) [IsImmersion cN]
+    (hcN : cN ≫ 𝔸(κ; trait k') ↘ trait k' = qN) (hcardN : Nat.card κ ≤ m')
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (hA : boundedConstructible (condensedRingObj Λ X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))} (hB : boundedConstructible (condensedRingObj Λ Y) B)
+    (z : Z'.left) (hz : ¬ IsClosed ({z} : Set Z'.left)) :
+    ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left) (w : W), h w = z ∧
+      IsIso (L((h)^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) := by
+  let coord : ι ⊕ κ → (P.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) :=
+    Sum.elim (fun a ↦ φ₁.total ≫ cM ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
+      (fun a ↦ φ₂.total ≫ cN ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
+  have hcoord : ∀ i, coord i ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' =
+      φ₁.total ≫ qM := by
+    rintro (a | a)
+    · simp [coord, hcM]
+    · simp [coord, hcN, hpb.w]
+  obtain ⟨i, hi⟩ : ∃ i, ¬ IsClosed {specialCoordinate hP (coord i) (hcoord i) z} := by
+    by_contra hall
+    simp only [not_exists, not_not] at hall
+    apply hz
+    exact isClosed_singleton_special hM hN hpb hP z
+      (isClosed_singleton_of_specialCoordinate_comp_hom hM φ₁ hP rfl cM hcM z
+        (fun a ↦ hcoord (.inl a)) (fun a ↦ hall (.inl a)))
+      (isClosed_singleton_of_specialCoordinate_comp_hom hN φ₂ hP hpb.w cN hcN z
+        (fun a ↦ hcoord (.inr a)) (fun a ↦ hall (.inr a)))
+  obtain ⟨w, hw⟩ := mem_range_sliceSpecialMap (traitSliceCoord k')
+    (transcendental_traitSliceCoord k') hP (hcoord i) z
+    (AffineSpace.isGenericPoint_of_not_isClosed hi)
+  refine ⟨_, sliceSpecialMap (traitSliceCoord k') hP (hcoord i), w, hw, ?_⟩
+  rcases i with a | a
+  · have hlt : Nat.card {j : ι // j ≠ a} < Nat.card ι :=
+      Finite.card_subtype_lt (x := a) (by simp)
+    exact (hslice (by omega)).isIso φ₁ φ₂ hM hN hpb hP hgen inferInstance inferInstance
+      inferInstance (b := cM ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcM])
+      (by omega) (locallyEmbedsInAffineSpace_pullback_reindex cM a _)
+      hm' heM heN hA hB
+  · have hlt : Nat.card {j : κ // j ≠ a} < Nat.card κ :=
+      Finite.card_subtype_lt (x := a) (by simp)
+    exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hM hN hpb hP hgen
+      (b := cN ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcN]) _
+      (hslice (by omega)) (by omega) hm
+      (locallyEmbedsInAffineSpace_pullback_reindex cN a _) heM heN hA hB
+
 set_option profiler true in
--- the restricted Künneth maps are large terms
 /-- **The non-closed points are reached by generic slices**: under the generic-slicing step in
 chart dimension `m + m' - 1` with coefficients `Λ`, every point `z` of the special fibre of the
 product which is not closed is the image of a point under a morphism `h : W ⟶ X_s × Y_s` along
@@ -80,121 +170,41 @@ theorem exists_isIso_map_kunnethMap_of_not_isClosed [TopologicalSpace.Noetherian
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : JacobsonSpace Z'.left := LocallyOfFiniteType.jacobsonSpace Z'.hom
-  have : LocallyOfFiniteType X'.hom := MorphismProperty.of_isPullback
-    hM.isPullback_i hM.locallyOfFiniteType
-  have : LocallyOfFiniteType Y'.hom := MorphismProperty.of_isPullback
-    hN.isPullback_i hN.locallyOfFiniteType
-  have : JacobsonSpace X'.left := LocallyOfFiniteType.jacobsonSpace X'.hom
-  have : JacobsonSpace Y'.left := LocallyOfFiniteType.jacobsonSpace Y'.hom
   have := hM.isTraitModel.isNoetherian_total
   have := hN.isTraitModel.isNoetherian_total
   have := hP.isTraitModel.isNoetherian_total
-  have := hM.locallyOfFiniteType
-  have := hN.locallyOfFiniteType
-  -- local charts around the images of `z` in the total spaces
+  -- Choose charts before applying the argument for abstract, globally charted models.
   obtain ⟨V, hzV, ιV, _, cV, hcardV, hcVi, hcV⟩ := hm (φ₁.total (P.i z))
   obtain ⟨W, hzW, ιW, _, cW, hcardW, hcWi, hcW⟩ := hm' (φ₂.total (P.i z))
   have : QuasiCompact V.ι := inferInstance
   have : QuasiCompact W.ι := inferInstance
   have : QuasiCompact (productOpen φ₁ φ₂ V W).ι := inferInstance
-  -- the restriction of the product to `V ×_S W`
-  set U := productOpen φ₁ φ₂ V W
-  set ψ₁ := φ₁.restrictOpen U V inf_le_left
-  set ψ₂ := φ₂.restrictOpen U W inf_le_right
+  let U := productOpen φ₁ φ₂ V W
+  let ψ₁ := φ₁.restrictOpen U V inf_le_left
+  let ψ₂ := φ₂.restrictOpen U W inf_le_right
   have hMV := hM.restrictOpen V
   have hNW := hN.restrictOpen W
   have hpbU : IsPullback ψ₁.total ψ₂.total (V.ι ≫ qM) (W.ι ≫ qN) := isPullback_resLE_inf hpb V W
   have hPU := isTraitModelOver_restrictOpen_productOpen (φ₂ := φ₂) hP V W
   have heMV : (M.restrictOpen V).j ≫ V.ι ≫ eM = (M.restrictOpen V).ε := by simp [← heM]
   have heNW : (N.restrictOpen W).j ≫ W.ι ≫ eN = (N.restrictOpen W).ε := by simp [← heN]
-  have hR := isKunnethRestriction_restrictOpen φ₁ φ₂ V W
   have hgenU : ψ₂.generic ≫ (N.j ⁻¹ᵁ W).ι ≫ gN = ψ₁.generic ≫ (M.j ⁻¹ᵁ V).ι ≫ gM := by
     simp [ψ₁, ψ₂, Scheme.Hom.resLE_comp_ι_assoc, hgen]
-  -- the coordinates of `V ×_S W`
-  let coord : ιV ⊕ ιW →
-      ((P.restrictOpen U).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) :=
-    Sum.elim (fun a ↦ ψ₁.total ≫ cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
-      (fun a ↦ ψ₂.total ≫ cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k'))
-  have hcoord : ∀ i, coord i ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' =
-      ψ₁.total ≫ V.ι ≫ qM := by
-    rintro (a | a)
-    · simp [coord, hcV]
-    · simp [coord, hcW, hpbU.w]
-  -- the point `z` of the restricted special fibre
-  have hzU : z ∈ P.i ⁻¹ᵁ U := ⟨hzV, hzW⟩
-  let v : P.i ⁻¹ᵁ U := ⟨z, hzU⟩
-  have hv : (P.i ⁻¹ᵁ U).ι v = z := rfl
-  -- some coordinate sends `v` to the generic point of the special-fibre line
-  obtain ⟨i, hi⟩ : ∃ i, ¬ IsClosed {specialCoordinate hPU (coord i) (hcoord i) v} := by
-    by_contra hall
-    simp only [not_exists, not_not] at hall
-    refine hz ?_
-    have hx : IsClosed {φ₁.restrictOpenSpecial U V inf_le_left v} := by
-      refine isClosed_singleton_of_isImmersion hMV cV hcV _ fun a ↦ ?_
-      have := hall (Sum.inl a)
-      rwa [show specialCoordinate hPU (coord (Sum.inl a)) (hcoord (Sum.inl a)) =
-          φ₁.restrictOpenSpecial U V inf_le_left ≫ specialCoordinate hMV cV hcV ≫
-            AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
-        rw [← specialCoordinate_comp_reindex hMV cV hcV]
-        exact specialCoordinate_comp_hom hMV ψ₁ hPU rfl _ _, Scheme.Hom.comp_apply] at this
-    have hy : IsClosed {φ₂.restrictOpenSpecial U W inf_le_right v} := by
-      refine isClosed_singleton_of_isImmersion hNW cW hcW _ fun a ↦ ?_
-      have := hall (Sum.inr a)
-      rwa [show specialCoordinate hPU (coord (Sum.inr a)) (hcoord (Sum.inr a)) =
-          φ₂.restrictOpenSpecial U W inf_le_right ≫ specialCoordinate hNW cW hcW ≫
-            AffineSpace.reindex (fun _ ↦ a) (Spec (.of k')) by
-        rw [← specialCoordinate_comp_reindex hNW cW hcW]
-        exact specialCoordinate_comp_hom hNW ψ₂ hPU hpbU.w _ _, Scheme.Hom.comp_apply] at this
-    have hx' := (M.i ⁻¹ᵁ V).ι.closedPoints_subset_preimage_closedPoints hx
-    have hy' := (N.i ⁻¹ᵁ W).ι.closedPoints_subset_preimage_closedPoints hy
-    have hx'' : IsClosed {f₁' ((P.i ⁻¹ᵁ U).ι v)} := by
-      have h : φ₁.restrictOpenSpecial U V inf_le_left ≫ (M.i ⁻¹ᵁ V).ι = (P.i ⁻¹ᵁ U).ι ≫ f₁' :=
-        Scheme.Hom.resLE_comp_ι _ _
-      change IsClosed {((P.i ⁻¹ᵁ U).ι ≫ f₁') v}
-      rw [← h]
-      exact hx'
-    have hy'' : IsClosed {f₂' ((P.i ⁻¹ᵁ U).ι v)} := by
-      have h : φ₂.restrictOpenSpecial U W inf_le_right ≫ (N.i ⁻¹ᵁ W).ι = (P.i ⁻¹ᵁ U).ι ≫ f₂' :=
-        Scheme.Hom.resLE_comp_ι _ _
-      change IsClosed {((P.i ⁻¹ᵁ U).ι ≫ f₂') v}
-      rw [← h]
-      exact hy'
-    exact isClosed_singleton_special hM hN hpb hP _ hx'' hy''
-  have hgv := AffineSpace.isGenericPoint_of_not_isClosed hi
-  obtain ⟨w, hw⟩ := mem_range_sliceSpecialMap (traitSliceCoord k')
-    (transcendental_traitSliceCoord k') hPU (hcoord i) v hgv
-  let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι
-  refine ⟨_, sliceSpecialMap (traitSliceCoord k') hPU (hcoord i) ≫ r', w, ?_, ?_⟩
-  · rw [Scheme.Hom.comp_apply, hw]
-    rfl
-  -- the restricted Künneth map is invertible on the slice
+  let v : P.i ⁻¹ᵁ U := ⟨z, hzV, hzW⟩
+  have hv : ¬ IsClosed ({v} : Set (P.i ⁻¹ᵁ U)) := fun h ↦
+    hz ((P.i ⁻¹ᵁ U).ι.closedPoints_subset_preimage_closedPoints h)
   have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
   have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-  have hslice' : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦Λ⟧).map
-      (kunnethMap Λ ψ₁ ψ₂ (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B))) := by
-    rcases i with a | a
-    · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
-        (traitSlice (traitSliceCoord k'))
-      have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
-        Finite.card_subtype_lt (x := a) (by simp)
-      exact (hslice (by omega)).isIso ψ₁ ψ₂ hMV hNW hpbU hPU hgenU inferInstance
-        inferInstance inferInstance
-        (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
-        (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
-        (hm'.restrict W) heMV heNW hA' hB'
-    · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cW a
-        (traitSlice (traitSliceCoord k'))
-      have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
-        Finite.card_subtype_lt (x := a) (by simp)
-      exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
-        (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW]) _
-        (hslice (by omega)) (by omega) (hm.restrict V)
-        (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
-  rw [← isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR] at hslice'
-  have hslice'' : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦Λ⟧).map
-      (L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) := by
-    exact_mod_proofs hslice'
-  exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp Λ
-    (sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)) r') _).2 hslice''
+  obtain ⟨T, t, w, hw, ht⟩ := exists_isIso_map_kunnethMap_of_not_isClosed_of_charts Λ
+    hMV hNW hpbU hPU hgenU (hm.restrict V) (hm'.restrict W) hslice
+    cV hcV hcardV cW hcW hcardW heMV heNW hA' hB' v hv
+  let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι
+  refine ⟨T, t ≫ r', w, ?_, ?_⟩
+  · rw [Scheme.Hom.comp_apply, hw]
+    rfl
+  have hR := isKunnethRestriction_restrictOpen φ₁ φ₂ V W
+  have ht' : IsIso (L((t)^*⟦Λ⟧).map (L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) := by
+    exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction Λ hR _ A B).2 ht
+  exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp Λ t r') _).2 ht'
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
