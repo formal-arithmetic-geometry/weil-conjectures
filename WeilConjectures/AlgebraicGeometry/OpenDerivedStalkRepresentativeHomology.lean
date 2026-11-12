@@ -238,15 +238,15 @@ theorem openDerivedStalk_representative_homology
   have hn := (additiveStalkCohomologyIso Y y i).inv.naturality
     (R.mapDerivedCategoryFactors.hom.app N)
   simp only [Functor.comp_map] at hn
-  erw [← hn]
+  conv_lhs => arg 2; arg 2; arg 2; arg 2; erw [← hn]
   have ht := (Scheme.Modules.restrictStalkNatIso j y).inv.naturality
     ((DerivedCategory.homologyFunctorFactors _ i).inv.app N)
   simp only [Functor.comp_map] at ht
-  erw [reassoc_of% ht]
+  conv_lhs => arg 2; erw [reassoc_of% ht]
   have hr := exact_representative_homology_hom R i N
   have hr' := congrArg (fun k ↦ (L0 ⋙ F0).map k) hr
   simp only [Functor.map_comp] at hr'
-  erw [reassoc_of% hr']
+  conv_lhs => arg 2; arg 2; erw [reassoc_of% hr']
   have hy : (L0 ⋙ F0).map
         ((DerivedCategory.homologyFunctorFactors _ i).inv.app
           ((R.mapHomologicalComplex (.up ℤ)).obj N)) ≫
@@ -261,7 +261,7 @@ theorem openDerivedStalk_representative_homology
     simp only [Category.assoc, Iso.hom_inv_id_app,
       ← F0.map_comp_assoc, Iso.hom_inv_id, F0.map_id, Category.id_comp]
     erw [Category.comp_id]
-  erw [hy]
+  conv_lhs => arg 2; arg 2; arg 2; erw [hy]
   simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ F0.map (comparisonStalkHomologyIso Y y
     ((R.mapHomologicalComplex (.up ℤ)).obj N) i).inv)
     (ordinary_representative_homology R L L0 F F0 (N.sc i)

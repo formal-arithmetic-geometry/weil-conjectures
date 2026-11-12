@@ -150,7 +150,6 @@ private theorem unit_sections_of_conjugate
   conv_rhs at hv => arg 2; rw [← reassoc_of% hnJ]
   have hR := restrict_image_unit U.ι M W
   conv_rhs at hv => erw [reassoc_of% hR]
-  simp only [Category.id_comp] at hv
   let hW : U'.ι ''ᵁ (j ⁻¹ᵁ W) ≤ k ⁻¹ᵁ A := by
     rintro x ⟨y, hy, rfl⟩
     exact ⟨j y, hy, congrArg (fun q : U'.toScheme ⟶ X ↦ q y) hj⟩
