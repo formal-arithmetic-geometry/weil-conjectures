@@ -105,7 +105,6 @@ private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X 
         T.rightDerivedFunctorIsoMapDerivedCategory.symm
 
 
-set_option profiler true in
 private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -125,7 +124,7 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
         (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)
     ∃ (R : DerivedCategory C ⥤ DerivedCategory A)
       (L : DerivedCategory A ⥤ DerivedCategory C)
-      (e : L ≅ S.rightDerivedFunctor) (adj : L ⊣ R),
+      (_e : L ≅ S.rightDerivedFunctor) (adj : L ⊣ R),
       ∀ (ι : (Functor.curry.obj B).obj (op U) ≅ 𝟭 _) (K : CochainComplex C ℤ),
       ∃ d : L.obj (R.obj (DerivedCategory.Q.obj K)) ≅ B.obj (op M, DerivedCategory.Q.obj K),
         d.hom ≫ p.app (DerivedCategory.Q.obj K) ≫ ι.hom.app (DerivedCategory.Q.obj K) =
@@ -144,7 +143,6 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
     affine_derivedHom_localized_evaluation.{u, wY, wA}
       f H₀ iH adj₀ h₃.1 R β L t adj h₈.1 h₈.2.2.2 ι K⟩
 
-set_option profiler true in
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
 This lemma involves neither a quasi-coherent right adjoint of pushforward nor its
 comparison with scalar restriction.
