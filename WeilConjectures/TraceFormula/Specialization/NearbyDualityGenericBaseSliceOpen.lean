@@ -308,9 +308,6 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
       (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hM
   have hN' := congrArg (fun z ↦ z ≫
     (N.nearbyCycles _).map (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv) hN
-  have hf'' := congrArg (fun z ↦ z ≫
-    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
-      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hf'
   have hf''' := congrArg (fun z ↦ N.unit _ ≫ (N.nearbyCycles _).map z) hf
   have hunit'' : L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
       (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
@@ -319,25 +316,30 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
           (Profinite.padicAlgClRingObj ℓ) f).inv := by
     transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
   have hunit' := congrArg (fun z ↦
-      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫ z) hunit''
-  have hcancel := congrArg (fun z ↦
-    (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
-      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ z) hf'''.symm
+    (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫ z) hunit''
+  have houter : (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom = 𝟙 _ := by
+    rw [hf']
+    simp
   calc
     _ = (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
         L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
           (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) := hM'
-    _ = (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
-        L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
-          (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) := hf''
-    _ = (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
+    _ = (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
         ((leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
           (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
             (Profinite.padicAlgClRingObj ℓ) f).inv) := by
       simpa only [Category.assoc] using hunit'
     _ = N.unit _ ≫ (N.nearbyCycles _).map
         (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv := by
-      simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hcancel
+      calc
+        _ = ((leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
+          (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom) ≫
+            (N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+              (Profinite.padicAlgClRingObj ℓ) f).inv) := by simp only [Category.assoc]
+        _ = N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+              (Profinite.padicAlgClRingObj ℓ) f).inv := by rw [houter, Category.id_comp]
+        _ = _ := hf'''.symm
     _ = _ := hN'.symm
 
 -- the shifts of the derived categories of module objects unfold deeply
