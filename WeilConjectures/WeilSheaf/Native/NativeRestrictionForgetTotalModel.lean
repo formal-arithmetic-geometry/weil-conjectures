@@ -580,8 +580,7 @@ private theorem ordinary_sheaf_restriction_tensor
 
 end OrdinarySheafRestriction
 
-set_option maxHeartbeats 2000000 in
-set_option trace.profiler true in
+set_option profiler true in
 -- Keep the concrete presentation types folded while transporting the restriction fields.
 private theorem native_restriction_data
     (R0 : ProEtaleWeilSheaf k₀ l Z ⥤ ProEtaleWeilSheaf k₀ l U) [R0.Additive]
@@ -633,9 +632,7 @@ variable (α : (ProEtale.adicUpperStar l
     (ProEtale.adicUpperStar l
       (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))))
 local notation "Lα" => Endofunctor.IsoAlgebra.mapOfNatIso α
-set_option maxHeartbeats 4000000 in
-set_option trace.profiler true in
--- Concrete sheaf and derived-category instances require a larger elaboration budget.
+set_option profiler true in
 private theorem native_restriction_goal_proof
     (hL : (Endofunctor.IsoAlgebra.mapOfNatIso α).IsLeftAdjoint) :
   ∀ (_hR : ∀ T, NativeIsKFlat k₀ l Z T →
@@ -885,8 +882,7 @@ private theorem native_restriction_goal_proof
   refine ⟨mZ, mU, hmZ', hmU', ?_⟩
   exact hsquare
 
-set_option maxHeartbeats 2000000 in
-set_option trace.profiler true in
+set_option profiler true in
 -- Preserve the named restriction functor when specializing the Frobenius comparison.
 /-- Match the named pullback in the inputs before transporting its Frobenius comparison. -/
 private theorem native_restriction_goal_transport
