@@ -81,12 +81,10 @@ private theorem map_eq_zero_of_comp_iso
     (L : C ⥤ E) (e : F ⋙ G ≅ L) {A B : C} (f : A ⟶ B)
     (hf : F.map f = 0) : L.map f = 0 := by
   apply (cancel_mono (e.inv.app B)).mp
-  change L.map f ≫ e.inv.app B = 0 ≫ e.inv.app B
   rw [zero_comp, e.inv.naturality]
   change e.inv.app A ≫ G.map (F.map f) = 0
   rw [hf, Functor.map_zero, comp_zero]
 
-set_option profiler true in
 /-- If every map from a global perfect complex into K vanishes after restriction to a
 quasi-compact open U, every cohomology stalk of K on U is zero.
 Source: Stacks Project, Tags 09IS, 09IM, and the proof of Tag 0E4G.

@@ -97,7 +97,6 @@ private theorem isIso_restricted_adjoint
   rw [← Category.assoc, hn, Category.assoc, ← RX.map_comp, he]
   infer_instance
 
-set_option profiler true in
 /-- A global perfect model and its limit comparison provide local gluing data.
 Source: Stacks Project, Tag 09RF, adjunction construction of local maps.
 (blueprint: lem-pc-perfect-open-gluing-data-global-model).

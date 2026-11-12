@@ -25,7 +25,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- Descend the two restrictions separately and move them to a common stage.
 This supplies no overlap isomorphism and no map into a derived direct image.
 Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
@@ -98,7 +98,7 @@ theorem perfect_descent_common_local_models
     (W := V) (dW := dV) (Z := Z) (f := f) (hW := hVr) (E := E) (hE := hE)
   obtain ⟨jW, hiW, mW⟩ := stepW
   obtain ⟨jV, hiV, mV⟩ := stepV
-  obtain ⟨k, hWk, hVk⟩ := IsDirected.directed (r := (· ≤ ·)) jW jV
+  obtain ⟨k, hWk, hVk⟩ : ∃ k : I, jW ≤ k ∧ jV ≤ k := exists_ge_ge jW jV
   let hik := hiW.trans hWk
   let Y := pullback (f ≫ s) (Spec.map (R.map (homOfLE hik)))
   let p : Y ⟶ Z := pullback.fst (f ≫ s) (Spec.map (R.map (homOfLE hik)))
