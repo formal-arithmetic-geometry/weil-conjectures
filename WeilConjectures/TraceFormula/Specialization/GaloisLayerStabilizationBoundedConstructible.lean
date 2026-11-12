@@ -116,6 +116,37 @@ private lemma isIso_card_nsmul_derived_padicAlgClRingObj
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))) : IsIso (n • 𝟙 K) :=
   isIso_nsmul_id_derived_padicAlgClRingObj ℓ X hn K
 
+private theorem retraction_of_stabilization
+    {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
+    (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (L' : FiniteGaloisIntermediateField L Ω)
+    [IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) •
+      𝟙 (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))]
+    (hL' : IsIso (((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app C)) :
+    (∀ σ ∈ L'.toIntermediateField.fixingSubgroup,
+      (N.galoisLayerAut h Ω σ).autAction (Profinite.padicAlgClRingObj ℓ)
+        (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) = 𝟙 _) ∧
+    ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app C ≫ r =
+        𝟙 _ ∧
+      Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) •
+          (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app C) =
+        ∑ τ : L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField,
+          (N.galoisLayerAut h Ω (τ.liftNormal Ω)).autAction (Profinite.padicAlgClRingObj ℓ)
+          (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
+  have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
+    ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app C).symm
+  have hstab := (NatTrans.isIso_app_iff_of_iso
+    ((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)) e).1 hL'
+  have key := N.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso h Ω
+    L'.toIntermediateField (Profinite.padicAlgClRingObj ℓ) C (by cast_proofs hstab)
+    (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
+  cast_proofs key
+
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles at an
@@ -164,15 +195,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
     isIso_card_nsmul_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     K.obj
-  have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
-    ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app C).symm
-  have hstab := (NatTrans.isIso_app_iff_of_iso
-    ((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
-      (Profinite.padicAlgClRingObj ℓ)) e).1 hL'
-  have key := N.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso h Ω
-    L'.toIntermediateField (Profinite.padicAlgClRingObj ℓ) C (by cast_proofs hstab)
-    (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
-  cast_proofs key
+  exact retraction_of_stabilization N h Ω ℓ C L' hL'
 
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
