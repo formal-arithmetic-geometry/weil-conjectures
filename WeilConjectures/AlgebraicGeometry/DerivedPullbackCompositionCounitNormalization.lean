@@ -112,12 +112,7 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
-  have he := derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K
-  exact (congrArg
-    (fun t ↦ (canonicalDerivedPullbackComposition f g).hom.app
-      (DerivedCategory.Qh.obj
-        (((Scheme.Modules.pushforward (f ≫ g)).mapHomotopyCategory
-          (ComplexShape.up ℤ)).obj K)) ≫ t) he).trans
-    (derivedPullbackComposition_localized_counit.{u, w} f g K)
+  rw [derivedPullback_chosen_counit_normalization]
+  exact derivedPullbackComposition_localized_counit.{u, w} f g K
 
 end AlgebraicGeometry

@@ -458,17 +458,8 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     (comparisonFinitePull l E b g n) (comparisonFinitePull l E b (pullback.fst c.g g) n)
     (comparisonFinitePull l E b h n) (comparisonFiniteOpen l E b (c.ofIsPullback sq).i n)
     (coordinates.val (c.ofIsPullback sq).g n).right N
-    (by
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hp) none
-        exactByConversion h)
-    (by
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `ho) none
-        exactByConversion h)
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+    hp ho
+  exact H
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
