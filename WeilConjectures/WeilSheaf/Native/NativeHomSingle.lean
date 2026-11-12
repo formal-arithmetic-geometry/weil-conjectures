@@ -139,8 +139,6 @@ lemma nativeWeilHom_map_model_hom (P : CochainComplex (ProEtaleWeilSheaf k₀ l 
     Category.id_comp] at h
   exact h
 
-set_option maxHeartbeats 1000000 in
--- Matching the composites of morphisms in the derived category of pro-étale Weil sheaves is slow.
 /-- **The native internal hom out of a single sheaf**: for a pro-étale Weil sheaf `A` placed in
 degree `d`, the native derived internal hom `RHom(A[-d], -)` is `R𝓗om(A, -)[d]`, naturally. On a
 K-injective complex `I` it is the hom complex into `I`
@@ -159,29 +157,16 @@ noncomputable def nativeWeilHomSingleIso (A : ProEtaleWeilSheaf k₀ l X) (d : �
         (((ihomFunctor k₀ l X A).mapHomologicalComplex (.up ℤ)).obj I) ≪≫
       (shiftFunctor _ d).mapIso ((ihomFunctor k₀ l X A).rightDerivedFunctorObjQIso I).symm)
     (fun I I' _ _ g ↦ by
-      have hP : DerivedCategory.Q.map (CochainComplex.bifunctorHomMapRight
-            (H := ihomBifunctor k₀ l X) (K := (CochainComplex.singleFunctor _ d).obj A) g) ≫
-          DerivedCategory.Q.map (singleHomProjection A d I') =
-          DerivedCategory.Q.map (singleHomProjection A d I) ≫
-            DerivedCategory.Q.map
-              ((((ihomFunctor k₀ l X A).mapHomologicalComplex (.up ℤ)).map g)⟦d⟧') := by
-        rw [← Functor.map_comp, ← Functor.map_comp, bifunctorHomMapRight_singleHomProjection]
-      have hS := (Functor.commShiftIso (DerivedCategory.Q (C := ProEtaleWeilSheaf k₀ l X))
-        d).hom.naturality (((ihomFunctor k₀ l X A).mapHomologicalComplex (.up ℤ)).map g)
-      have hR : (DerivedCategory.Q.map
-            (((ihomFunctor k₀ l X A).mapHomologicalComplex (.up ℤ)).map g))⟦d⟧' ≫
-          (((ihomFunctor k₀ l X A).rightDerivedFunctorObjQIso I').inv)⟦d⟧' =
-          (((ihomFunctor k₀ l X A).rightDerivedFunctorObjQIso I).inv)⟦d⟧' ≫
-            ((ihomFunctor k₀ l X A).rightDerivedFunctor.map (DerivedCategory.Q.map g))⟦d⟧' := by
-        rw [← Functor.map_comp, ← Functor.map_comp]
-        congr 1
-        rw [Iso.comp_inv_eq, Category.assoc,
-          Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_hom, Iso.inv_hom_id_assoc]
-      simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Iso.symm_hom, Iso.app_hom,
-        Functor.comp_map, Category.assoc]
-      rw [reassoc_of% (nativeWeilHom_map_model_hom ((CochainComplex.singleFunctor _ d).obj A) g),
-        reassoc_of% hP]
-      simp only [Functor.comp_map] at hS
-      rw [reassoc_of% hS, hR])
+      have hM := CommSq.mk
+        (nativeWeilHom_map_model_hom ((CochainComplex.singleFunctor _ d).obj A) g)
+      have hP := (CommSq.mk (bifunctorHomMapRight_singleHomProjection A d g)).map
+        DerivedCategory.Q
+      have hS := CommSq.mk
+        ((Functor.commShiftIso (DerivedCategory.Q (C := ProEtaleWeilSheaf k₀ l X))
+          d).hom.naturality (((ihomFunctor k₀ l X A).mapHomologicalComplex (.up ℤ)).map g))
+      have hR := (CommSq.mk (Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_inv
+        (ihomFunctor k₀ l X A) g)).map (shiftFunctor _ d)
+      simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Iso.symm_hom, Iso.app_hom,
+        Functor.comp_map] using (hM.vert_comp (hP.vert_comp (hS.vert_comp hR))).w)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
