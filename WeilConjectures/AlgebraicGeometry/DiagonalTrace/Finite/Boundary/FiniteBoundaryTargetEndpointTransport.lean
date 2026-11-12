@@ -31,7 +31,6 @@ private theorem finiteBoundaryTargetRestriction_inv_app
       eqToHom (r.underlying M n U).symm := by
   rfl
 
-set_option profiler true in
 /-- Target endpoint transport.  The finite root map, the inverse line
 comparison, the inverse restriction comparison and the coefficient lineForget
 map, followed by the Cartier root map, equal the Cartier root map.  The proof
@@ -60,8 +59,7 @@ theorem finiteBoundary_target_endpoint
   simp only [Functor.mapIso_inv, ← Functor.map_comp]
   apply congrArg S.map
   rw [← finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
-    Functor.map_id, Category.id_comp]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
   dsimp only [abEvaluation, Functor.comp_map, evaluation_obj_map]
   apply Sheaf.hom_ext
   ext U z
@@ -70,40 +68,31 @@ theorem finiteBoundary_target_endpoint
   dsimp only [e]
   rw [finiteBoundaryTargetRestriction_inv_app l T r n
     (lineModule l (ULift.{u} (Padic l)) c) U]
-  trace "target: extensionality complete"
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
   have hx : HEq x' x := (finiteBoundary_cast_heq
     (c.reduction.forget.sections c.rootModule n U) x').symm
-  trace "target: root transport complete"
   let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule
   have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x' hx
-  trace "target: forget map complete"
   have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n
     (lineModule l (ULift.{u} (Padic l)) c) U _ _ hf
-  trace "target: scalar comparison complete"
   have hu : η.val.app (op (n, U.unop)) x =
       SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
         (coefficientSystemMap l (ULift.{u} (Padic l)) T)
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  trace "target: scalar unit complete"
   let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
       (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
     ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
         (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
-  trace "target: scalar section named"
   let w := (eqToHom (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm) v
-  trace "target: restricted section named"
   have hw : HEq w v := finiteBoundary_cast_heq
     (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm v
-  trace "target: restriction comparison complete"
   dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
-  trace "target: tensor normalization complete"
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
   dsimp only [w, v, η, x'] at ht hi
