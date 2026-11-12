@@ -1236,10 +1236,12 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   let := HasDerivedCategory.standard.{u+1,u+2} (podReindexingModules l E X s)
   have hp := podReindexing_resolution_preservation.{u,0,0} l E g s
   let : PreservesLimitsOfSize.{0,0} F := hp.2.2.2.2.1
-  obtain ⟨γ, hγ⟩ := CategoryTheory.bundledProductHomRestrictionComparison F
+  have hγdata := CategoryTheory.bundledProductHomRestrictionComparison F
     (CategoryTheory.nativeHomInterface.{u+1,u,u+1} (ProEt.topology Y) R)
     (CategoryTheory.nativeHomInterface.{u+1,u,u+1} (ProEt.topology X) S) η
     (fun a b ↦ podReindexingHomNaturality l E g s η hη a b)
+  let γ := hγdata.choose
+  have hγ := hγdata.choose_spec
   let : IsGrothendieckAbelian.{u+1} (podReindexingModules l E Y s) :=
     (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u+1,u,u}
       (ProEt.topology Y) R).1
@@ -1247,7 +1249,7 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   let η₀ := CochainComplex.toKInjectiveResolution.{u+1} (podReindexingModules l E Y s)
   have hFI (I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) :
       CochainComplex.IsKInjective (FC.obj I) := hp.2.2.2.2.2.2.2.2.1 I hI
-  obtain ⟨δ, hδ⟩ := CategoryTheory.homRestrictionDescent Q QX FD FC
+  have hδdata := CategoryTheory.homRestrictionDescent Q QX FD FC
     ((HomologicalComplex.quasiIso _ (.up ℤ)).op.prod
       (HomologicalComplex.quasiIso _ (.up ℤ)))
     (Functor.uncurry.obj (podReindexingHom l E Y s))
@@ -1272,6 +1274,8 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
         (CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u+1} _ M)
       exact RingedHomUniverses.ordinaryComparison_isIso.{u+1,u,u+1,u+2} (ProEt.topology X) S
         (FC.obj L) (FC.obj (I₀.obj M)))
+  let δ := hδdata.choose
+  have hδ := hδdata.choose_spec
   refine ⟨fun K I _ ↦ γ.app (op K, I), δ, ?_, ?_, ?_, ?_⟩
   · intro K I hI r p
     exact hγ K I r p (p+r) rfl
@@ -1291,11 +1295,7 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
     rw [← podReindexingHomModel_inv l E Y s K I hI,
       ← podReindexingHomModel_inv l E X s (FC.obj K) (FC.obj I) (hFI I hI)] at hd
     let κ := @podReindexingHomModel l _ E _ _ _ Y s K I hI
-    calc
-      δ.hom.app _ = FD.map κ.hom ≫ (FD.map κ.inv ≫ δ.hom.app _) := by
-        simp only [← Category.assoc, ← FD.map_comp, Iso.hom_inv_id,
-          FD.map_id, Category.id_comp]
-      _ = _ := congrArg (fun f ↦ FD.map κ.hom ≫ f) hd
+    exact (FD.mapIso κ).inv_comp_eq.mp hd
 
 set_option trace.profiler true in
 -- The theorem combines the two strictly smaller comparison packages above.
