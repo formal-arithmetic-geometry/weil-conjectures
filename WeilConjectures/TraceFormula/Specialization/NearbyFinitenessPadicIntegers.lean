@@ -45,6 +45,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- instance synthesis for the derived extensions of scalars on the three schemes of the model
 /-- **Nearby cycles commute with extension of scalars** along a coefficient change `a : Λ ⟶ Λ'`,
 at a complex `K` at which `Rj_*` commutes with the extension of scalars: then
