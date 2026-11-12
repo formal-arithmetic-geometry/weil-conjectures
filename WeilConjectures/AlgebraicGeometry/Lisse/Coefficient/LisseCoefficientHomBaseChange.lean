@@ -426,6 +426,7 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
       apply Finset.sum_congr rfl
       intro i _
       rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+      rfl
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
         ((toSheafification Y.smallEtaleTopology
           (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
