@@ -419,9 +419,6 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
       (ModuleCat.ringExtensionTmul.{d + 1, d + 1} _ _ (Ideal.Quotient.mk _ s) x))
   simp only [map_sum, map_smul, ringQuotientCoordinate_tmul] at hh
   rw [sheaf_sum_apply]
-  change (∑ i, (quotientReconstructMap Y b I M i).hom.app (op U)
-    ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
-      (lisseCoherence_quotientScalarGenerator Y _ _ M U (Ideal.Quotient.mk _ s) x))) = _
   simp only [quotientCoordinateSheaf_tmul]
   calc
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
