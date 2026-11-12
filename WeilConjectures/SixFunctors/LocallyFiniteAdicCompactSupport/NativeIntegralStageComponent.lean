@@ -136,6 +136,11 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
         (integralStageObject l X i E h Ki).symm
   run_tac Lean.logInfo m!"PH070 stage equality: {← IO.getNumHeartbeats}"
   have hh := component_transport
+    (U := (PurCompactSupport.image (PurCompactSupport.completed l
+      (Coefficient.{u} l (PadicAlgCl l) E)) c ⋙
+        pbcDerivedExtend ((target.coefficient E).integralMap l Y)).obj KE.obj)
+    (V := (pbcDerivedExtend ((source.coefficient E).integralMap l X) ⋙
+      PurCompactSupport.image (nativeCoefficients l) c).obj KE.obj)
     (Functor.whiskerRight alpha (sections l Y).mapDerivedCategory) hQ
     (bE.hom.app Ke)
     (nativeScalarComponent l c source target E (change E) hs ht KE.obj)
@@ -146,7 +151,11 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
   run_tac Lean.logInfo m!"PH070 transport: {← IO.getNumHeartbeats}"
   dsimp only [Ki, Ke, finiteField, Functor.comp_obj, Functor.whiskerRight_app] at hh ⊢
   run_tac Lean.logInfo m!"PH070 normalized: {← IO.getNumHeartbeats}"
-  trace_state
+  run_tac do
+    let actual ← (← Lean.Elab.Tactic.getFVarId `hh).getType
+    let expected ← Lean.Elab.Tactic.getMainTarget
+    Lean.logInfo m!"PH070 actual source: {actual.getAppArgs[0]!}"
+    Lean.logInfo m!"PH070 expected source: {expected.getAppArgs[0]!}"
   exact hh
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
