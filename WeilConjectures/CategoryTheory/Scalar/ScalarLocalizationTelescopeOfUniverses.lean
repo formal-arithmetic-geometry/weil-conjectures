@@ -383,6 +383,7 @@ theorem scalarLocalization_telescopeOfUniverses
       (∀ {K L} (f : K ⟶ L) (r : A),
         F.mapDerivedCategory.map (r • f) =
           algebraMap A (Localization.Away t) r • F.mapDerivedCategory.map f)  := by
+  intro srcLinear tgtLinear
   classical
   let φ := ringedLocalizationRingUnitOfUniverses R (a t)
   let U := SheafOfModules.restrictScalars
@@ -412,11 +413,6 @@ theorem scalarLocalization_telescopeOfUniverses
   let : Linear A B := scalarLocalizationCoefficientLinearOfUniverses A R a
   let : Linear (Localization.Away t) B' :=
     scalarLocalizationCoefficientLinearOfUniverses (Localization.Away t)
-      (ringedLocalizationRingOfUniverses R (a t))
-      (scalarLocalizationCoefficientMapOfUniverses A R a t)
-  let : Linear A (DerivedCategory B) := scalarLocalizationDerivedLinearOfUniverses A R a
-  let : Linear (Localization.Away t) (DerivedCategory B') :=
-    scalarLocalizationDerivedLinearOfUniverses (Localization.Away t)
       (ringedLocalizationRingOfUniverses R (a t))
       (scalarLocalizationCoefficientMapOfUniverses A R a t)
   have : IsGrothendieckAbelian.{u} B :=
