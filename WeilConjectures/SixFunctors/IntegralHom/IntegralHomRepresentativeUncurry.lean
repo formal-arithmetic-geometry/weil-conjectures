@@ -207,7 +207,7 @@ theorem representative_uncurry_evaluation
       (coefficientTotalTensor.{u, t + 1, t} J R).map_id (P, L)
     rw [htensor] at hn
     simp only [op_id] at hn
-    erw [(homComplexFunctor (R := R)).map_id, NatTrans.id_app] at hn
+    erw [Functor.map_id, NatTrans.id_app] at hn
     simp only [Category.id_comp] at hn
     change (chainEquiv.{t + 1, t, u} J R P L _).symm φ' =
       (chainEquiv.{t + 1, t, u} J R P L I).symm φ ≫ r at hn
@@ -220,7 +220,7 @@ theorem representative_uncurry_evaluation
     change _ ≫ (S.transpose _ _ _).symm
       (DerivedCategory.Q.map φ' ≫ (coefficientHomResolutionIso J R L I).inv) = _ at hsquare
     dsimp only [φ'] at hsquare
-    simp only [Functor.map_comp] at hsquare
+    erw [Functor.map_comp] at hsquare
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
       simpa only [Category.assoc, homModelMap, r] using hsquare
