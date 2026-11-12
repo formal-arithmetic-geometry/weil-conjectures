@@ -88,8 +88,8 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
         (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj
           (F ⊞ F⟦(1 : ℤ)⟧)).val.presheaf x))) := by
   classical
-  have : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
-  have : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
   let G := schemeOpenRestriction X W
   have : G.Additive := schemeOpenRestriction_additive X W
   have : PreservesFiniteLimits G := schemeOpenRestriction_preservesFiniteLimits X W
@@ -100,9 +100,9 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
     obtain ⟨O, hxO, K, hK, ⟨eK⟩⟩ := hR x.val x.property
     let V := W.ι ⁻¹ᵁ O
     let O₀ := W.ι ''ᵁ V
-    have : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O₀)) :=
+    let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O₀)) :=
       inferInstance
-    have : Abelian (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over V)) :=
+    let : Abelian (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over V)) :=
       inferInstance
     have hO₀ : O₀ ≤ O := by
       rintro y ⟨z, hz, rfl⟩
