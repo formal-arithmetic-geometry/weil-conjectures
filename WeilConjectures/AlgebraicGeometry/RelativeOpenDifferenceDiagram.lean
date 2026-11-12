@@ -27,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem isIso_split_matrix
     {C : Type*} [Category C] [Preadditive C] [HasBinaryBiproducts C]
@@ -125,10 +124,6 @@ private theorem open_counit_isIso (X : Scheme.{u}) (O : X.Opens)
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option trace.profiler true in
-set_option synthInstance.maxHeartbeats 400000 in
--- The threefold transported restriction needs additional instance search.
-set_option maxHeartbeats 600000 in
--- The derived restriction functors and their comparisons need this elaboration budget.
 /-- The difference arrow has split normal form on each of the two opens.
 The middle and last objects are the explicit direct-image sum and overlap image.
 This constructs their maps, not a glued object.
