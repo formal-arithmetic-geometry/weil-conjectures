@@ -30,6 +30,28 @@ universe u
 
 open CategoryTheory Limits Opposite
 
+namespace CategoryTheory
+
+/-- A sequence of nonempty finite sets of isomorphisms has a compatible family. -/
+lemma exists_compatible_isos_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
+    {K L : ∀ n, C n} (r : ∀ n, (K (n + 1) ≅ L (n + 1)) → (K n ≅ L n))
+    (hfin : ∀ n, Finite (K n ⟶ L n)) (hne : ∀ n, Nonempty (K n ≅ L n)) :
+    ∃ t : ∀ n, K n ≅ L n, ∀ n, r n (t (n + 1)) = t n := by
+  let F : ℕᵒᵖ ⥤ Type _ :=
+    Functor.ofOpSequence (X := fun n ↦ K n ≅ L n) fun n ↦ TypeCat.ofHom (r n)
+  have : ∀ j, Finite (F.obj j) := fun j ↦ by
+    have := hfin j.unop
+    exact Finite.of_injective (fun e : K j.unop ≅ L j.unop ↦ e.hom)
+      fun _ _ h ↦ Iso.ext h
+  have : ∀ j, Nonempty (F.obj j) := fun j ↦ hne j.unop
+  obtain ⟨s, hs⟩ := nonempty_sections_of_finite_inverse_system F
+  refine ⟨fun n ↦ s (op n), fun n ↦ ?_⟩
+  have h := hs (homOfLE (Nat.le_add_right n 1)).op
+  rw [Functor.ofOpSequence_map_homOfLE_succ] at h
+  exact h
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl CondensedRing
@@ -60,8 +82,6 @@ lemma isIso_derivedReductionStep (n : ℕ)
   infer_instance
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the reductions `red_{n+1}` are elaborated at several levels
 /-- **Lifting isomorphisms of reductions** (König's lemma): if `L` is derived complete, and for
 every `n` the reductions `red_{n+1} K`, `red_{n+1} L` are isomorphic with finitely many morphisms
 between them, there is `f : K ⟶ L` all of whose reductions are isomorphisms. -/
@@ -83,17 +103,7 @@ theorem exists_forall_isIso_derivedReduction_map
       (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L
   let r (n : ℕ) : T (n + 1) → T n := fun s ↦
     @asIso _ _ _ _ (derivedReductionStep (n + 1) s.hom) (isIso_derivedReductionStep (n + 1) s.hom)
-  let F : ℕᵒᵖ ⥤ Type _ := Functor.ofOpSequence (X := T) fun n ↦ TypeCat.ofHom (r n)
-  have : ∀ j, Finite (F.obj j) := fun j ↦ by
-    have := hfin j.unop
-    exact Finite.of_injective (fun e : T j.unop ↦ e.hom) fun e e' h ↦ Iso.ext h
-  have : ∀ j, Nonempty (F.obj j) := fun j ↦ hne j.unop
-  obtain ⟨s, hs⟩ := nonempty_sections_of_finite_inverse_system F
-  let t (n : ℕ) : T n := s (op n)
-  have ht (n : ℕ) : r n (t (n + 1)) = t n := by
-    have := hs (homOfLE (Nat.le_add_right n 1)).op
-    rw [Functor.ofOpSequence_map_homOfLE_succ] at this
-    exact this
+  obtain ⟨t, ht⟩ := exists_compatible_isos_of_finite r hfin hne
   obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL (fun n ↦ (t n).hom) fun n ↦ by
     rw [← congrArg Iso.hom (ht n)]
     exact Mod.map_comp_derivedReductionTransition_app _ _ _ _ _
