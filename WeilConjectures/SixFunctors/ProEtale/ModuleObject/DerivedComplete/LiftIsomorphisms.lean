@@ -55,6 +55,19 @@ lemma exists_compatible_isIso_homs_of_finite {C : ℕ → Type*} [∀ n, Categor
   rw [Functor.ofOpSequence_map_homOfLE_succ] at h
   exact congrArg Iso.hom h
 
+/-- If compatible families of morphisms lift, a compatible family of isomorphisms gives a
+lift whose image is an isomorphism at every stage. -/
+lemma exists_isIso_maps_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
+    {K L : ∀ n, C n} (hfin : ∀ n, Finite (K n ⟶ L n))
+    (hne : ∀ n, Nonempty (K n ≅ L n))
+    (r : ∀ n, (K (n + 1) ⟶ L (n + 1)) → (K n ⟶ L n))
+    (hiso : ∀ n s, IsIso s → IsIso (r n s)) {S : Type*} {map : S → ∀ n, K n ⟶ L n}
+    (hlift : ∀ t, (∀ n, r n (t (n + 1)) = t n) → ∃ f, ∀ n, map f n = t n) :
+    ∃ f, ∀ n, IsIso (map f n) := by
+  obtain ⟨t, hi, ht⟩ := exists_compatible_isIso_homs_of_finite hfin hne r hiso
+  obtain ⟨f, hf⟩ := hlift t ht
+  exact ⟨f, fun n ↦ (hf n) ▸ hi n⟩
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
@@ -118,14 +131,13 @@ theorem exists_forall_isIso_derivedReduction_map
     ∃ f : K ⟶ L, ∀ n : ℕ,
       IsIso ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map
         f) := by
-  obtain ⟨t, hi, ht⟩ := exists_compatible_isIso_homs_of_finite hfin hne
+  refine exists_isIso_maps_of_finite hfin hne
     (fun n ↦ derivedReductionStep (X := X) (ℓ := ℓ) (E := E) (n + 1) (K := K) (L := L))
-    (fun n s hs ↦ isIso_derivedReductionStep (n + 1) s)
-  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq
-    (X := X) (ℓ := ℓ) (E := E) (K := K) (L := L) hL
-    t fun n ↦ by
-    rw [← ht n]
-    exact map_comp_reductionTransition_derivedReductionStep (n + 1) (t (n + 1))
-  exact ⟨f, fun n ↦ (hf n) ▸ hi n⟩
+    (fun n s hs ↦ isIso_derivedReductionStep (n + 1) s) ?_
+  intro t ht
+  apply exists_derivedReduction_map_eq (X := X) (ℓ := ℓ) (E := E) (K := K) (L := L) hL t
+  intro n
+  rw [← ht n]
+  exact map_comp_reductionTransition_derivedReductionStep (n + 1) (t (n + 1))
 
 end AlgebraicGeometry.ProEtale

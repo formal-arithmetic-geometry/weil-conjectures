@@ -90,6 +90,26 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
 
+/-- The Galois layer exchange is the image of the derived unit, transported by the identity
+and Galois layer exchange isomorphisms. -/
+lemma pullbackExchange_galoisLayerHom_app_eq_map_unit
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  rw [Functor.map_comp] at hα
+  dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
+    Iso.symm, Iso.app]
+  exact hα
+
 /-- **Invariant retractions of the derived unit give invariant retractions of the exchange.** Let
 `R : Rg_* Lg^* A ⟶ A` be a retraction of the derived unit at `A = Lε^* C`, for the projection
 `g : G_Ω ⟶ N.generic`, which is invariant under the derived unit transports along all the
@@ -115,18 +135,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant
         (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) ≫
             N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C) =
           r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C := by
-  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
-    (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp] at hα
-  rw [Functor.map_comp] at hα
   exact exists_invariant_retraction_of_conjugate (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
-    (N.galoisLayerExchangeIso h Ω Λ C) (by
-      dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
-        Iso.symm, Iso.app]
-      exact hα) _ hinv
+    (N.galoisLayerExchangeIso h Ω Λ C)
+    (pullbackExchange_galoisLayerHom_app_eq_map_unit Λ N h Ω C) _ hinv
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
     (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
