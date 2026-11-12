@@ -123,34 +123,50 @@ private theorem scalar_conjugation
   simp only [Category.assoc, ← F.map_comp_assoc, Iso.hom_inv_id, Category.id_comp]
   rw [F.map_id, Category.id_comp]
 
+section ScalarConjugation
+
+variable {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*}
+  [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+  [Category D₁] [Category D₂] [Category D₃] [Category D₄]
+  {I₁ : C₁ ⥤ D₁} {I₂ : C₂ ⥤ D₂} {I₃ : C₃ ⥤ D₃} {I₄ : C₄ ⥤ D₄}
+  {F₁ : C₁ ⥤ C₂} {F₂ : C₃ ⥤ C₄} {S₁ : C₁ ⥤ C₃} {S₂ : C₂ ⥤ C₄}
+  {G₁ : D₁ ⥤ D₂} {G₂ : D₃ ⥤ D₄} {T₁ : D₁ ⥤ D₃} {T₂ : D₂ ⥤ D₄}
+  (e₁ : I₁ ⋙ G₁ ≅ F₁ ⋙ I₂) (e₂ : I₃ ⋙ G₂ ≅ F₂ ⋙ I₄)
+  (χ₁ : I₁ ⋙ T₁ ≅ S₁ ⋙ I₃) (χ₂ : I₂ ⋙ T₂ ≅ S₂ ⋙ I₄)
+  (b : G₁ ⋙ T₂ ≅ T₁ ⋙ G₂)
+
+-- Form and normalize the conjugation with abstract functors, so that its coherence
+-- maps do not repeatedly elaborate the concrete derived categories.
+private def integralScalarConjugation : (F₁ ⋙ S₂) ⋙ I₄ ≅ (S₁ ⋙ F₂) ⋙ I₄ :=
+  Functor.associator F₁ S₂ I₄ ≪≫ Functor.isoWhiskerLeft F₁ χ₂.symm ≪≫
+    (Functor.associator F₁ I₂ T₂).symm ≪≫ Functor.isoWhiskerRight e₁.symm T₂ ≪≫
+    Functor.associator I₁ G₁ T₂ ≪≫ Functor.isoWhiskerLeft I₁ b ≪≫
+    (Functor.associator I₁ T₁ G₂).symm ≪≫ Functor.isoWhiskerRight χ₁ G₂ ≪≫
+    Functor.associator S₁ I₃ G₂ ≪≫ Functor.isoWhiskerLeft S₁ e₂ ≪≫
+    (Functor.associator S₁ F₂ I₄).symm
+
+private theorem integralScalarConjugation_hom_app (K : C₁) :
+    (integralScalarConjugation e₁ e₂ χ₁ χ₂ b).hom.app K =
+      χ₂.inv.app (F₁.obj K) ≫ T₂.map (e₁.inv.app K) ≫ b.hom.app (I₁.obj K) ≫
+        G₂.map (χ₁.hom.app K) ≫ e₂.hom.app (S₁.obj K) := by
+  simp [integralScalarConjugation, Category.assoc]
+
+variable [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ] [HasShift C₄ ℤ]
+  [HasShift D₁ ℤ] [HasShift D₂ ℤ] [HasShift D₃ ℤ] [HasShift D₄ ℤ]
+  [I₁.CommShift ℤ] [I₂.CommShift ℤ] [I₃.CommShift ℤ] [I₄.CommShift ℤ]
+  [F₁.CommShift ℤ] [F₂.CommShift ℤ] [S₁.CommShift ℤ] [S₂.CommShift ℤ]
+  [G₁.CommShift ℤ] [G₂.CommShift ℤ] [T₁.CommShift ℤ] [T₂.CommShift ℤ]
+
 private theorem integralScalarConjugation_commShift
-    {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*}
-    [Category C₁] [Category C₂] [Category C₃] [Category C₄]
-    [Category D₁] [Category D₂] [Category D₃] [Category D₄]
-    [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ] [HasShift C₄ ℤ]
-    [HasShift D₁ ℤ] [HasShift D₂ ℤ] [HasShift D₃ ℤ] [HasShift D₄ ℤ]
-    {I₁ : C₁ ⥤ D₁} {I₂ : C₂ ⥤ D₂} {I₃ : C₃ ⥤ D₃} {I₄ : C₄ ⥤ D₄}
-    {F₁ : C₁ ⥤ C₂} {F₂ : C₃ ⥤ C₄} {S₁ : C₁ ⥤ C₃} {S₂ : C₂ ⥤ C₄}
-    {G₁ : D₁ ⥤ D₂} {G₂ : D₃ ⥤ D₄} {T₁ : D₁ ⥤ D₃} {T₂ : D₂ ⥤ D₄}
-    [I₁.CommShift ℤ] [I₂.CommShift ℤ] [I₃.CommShift ℤ] [I₄.CommShift ℤ]
-    [F₁.CommShift ℤ] [F₂.CommShift ℤ] [S₁.CommShift ℤ] [S₂.CommShift ℤ]
-    [G₁.CommShift ℤ] [G₂.CommShift ℤ] [T₁.CommShift ℤ] [T₂.CommShift ℤ]
-    (e₁ : I₁ ⋙ G₁ ≅ F₁ ⋙ I₂) (e₂ : I₃ ⋙ G₂ ≅ F₂ ⋙ I₄)
-    (χ₁ : I₁ ⋙ T₁ ≅ S₁ ⋙ I₃) (χ₂ : I₂ ⋙ T₂ ≅ S₂ ⋙ I₄)
-    (b : G₁ ⋙ T₂ ≅ T₁ ⋙ G₂)
     [NatTrans.CommShift e₁.hom ℤ] [NatTrans.CommShift e₂.hom ℤ]
     [NatTrans.CommShift χ₁.hom ℤ] [NatTrans.CommShift χ₂.hom ℤ]
     [NatTrans.CommShift b.hom ℤ] :
-    NatTrans.CommShift
-      (Functor.associator F₁ S₂ I₄ ≪≫ Functor.isoWhiskerLeft F₁ χ₂.symm ≪≫
-        (Functor.associator F₁ I₂ T₂).symm ≪≫ Functor.isoWhiskerRight e₁.symm T₂ ≪≫
-        Functor.associator I₁ G₁ T₂ ≪≫ Functor.isoWhiskerLeft I₁ b ≪≫
-        (Functor.associator I₁ T₁ G₂).symm ≪≫ Functor.isoWhiskerRight χ₁ G₂ ≪≫
-        Functor.associator S₁ I₃ G₂ ≪≫ Functor.isoWhiskerLeft S₁ e₂ ≪≫
-        (Functor.associator S₁ F₂ I₄).symm).hom ℤ := by
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom]
+    NatTrans.CommShift (integralScalarConjugation e₁ e₂ χ₁ χ₂ b).hom ℤ := by
+  simp only [integralScalarConjugation, Iso.trans_hom, Iso.symm_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
   infer_instance
+
+end ScalarConjugation
 
 set_option trace.profiler true in
 /-- The integral scalar comparison preserves the supplied integral pullback shifts.
@@ -221,18 +237,7 @@ theorem isomorphismPullbackScalarIntegralShift
   have : NatTrans.CommShift b.hom ℤ := by
     dsimp only [b, isomorphismScalarTensorDerived, Iso.trans_hom, Iso.symm_hom]
     infer_instance
-  let δ : (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g ⋙
-      GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω X E L h) ⋙
-        (sfIntegralConstructible l (Coefficient.{u} l Ω L) X).ι ≅
-      (GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω Y E L h ⋙
-        constructibleIntegralPullback l (Coefficient.{u} l Ω L) g) ⋙
-          (sfIntegralConstructible l (Coefficient.{u} l Ω L) X).ι :=
-    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ χX.symm ≪≫
-      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eE.symm _ ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ b ≪≫
-      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight χY _ ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ eL ≪≫
-      (Functor.associator _ _ _).symm
+  let δ := integralScalarConjugation eE eL χY χX b
   have : NatTrans.CommShift δ.hom ℤ :=
     integralScalarConjugation_commShift eE eL χY χX b
   have hd : Functor.whiskerRight α.hom
@@ -288,16 +293,9 @@ theorem isomorphismPullbackScalarIntegralShift
           GeneralAlgebraicallyClosedCoefficients.integralTransition,
           scalar_restrict_obj, pullback_restrict_obj] at hc ⊢
         convert hc using 1)
-    simp only [δ, χF, κE, κL, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-      Functor.associator_hom_app, Functor.associator_inv_app,
-      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,
-      Iso.app_hom, Iso.app_inv, OX, invL, ObjectProperty.ι_map,
-      Category.id_comp, SX, FE,
-      GeneralAlgebraicallyClosedCoefficients.integralTransition, ObjectProperty.ι_obj,
-      scalar_restrict_obj, pullback_restrict_obj] at H ⊢
-    erw [Category.comp_id]
-    convert H using 1
+    change (α.hom.app K).hom = (integralScalarConjugation eE eL χY χX b).hom.app K
+    rw [integralScalarConjugation_hom_app]
+    exact H
   have ha : NatTrans.CommShift α.hom ℤ := by
     have : NatTrans.CommShift (Functor.whiskerRight α.hom
         (sfIntegralConstructible l (Coefficient.{u} l Ω L) X).ι) ℤ := by
