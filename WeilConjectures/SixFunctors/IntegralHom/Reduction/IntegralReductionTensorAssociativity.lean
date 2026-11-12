@@ -207,7 +207,7 @@ private theorem normalizedBeta_eq (n : ℕ)
     have hcomp := congrArg (fun z ↦ ((inv beta).f (i + j)).val.app U z)
       (hbeta i j U x y)
     rw [← ConcreteCategory.comp_apply] at hcomp
-    trace_state
+    change (ConcreteCategory.hom ((beta.f (i + j) ≫ (inv beta).f (i + j)).val.app U)) _ = _ at hcomp
     rw [hcomp] at hh
     exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
