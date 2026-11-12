@@ -243,7 +243,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_padicAlgCl_of_isNoethe
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_isNoetherianObject h Ω
     ℓ hdeg C hC htors).elim fun L' hL' ↦ ⟨L', ?_⟩
-  letI := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
+  have := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)
   have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
