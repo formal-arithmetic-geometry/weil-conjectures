@@ -50,6 +50,8 @@ local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => (Proj 𝒜).Modules
 
 set_option profiler true in
+/-- Common localization descriptions give linear comparisons of principal-open sections.
+Keeping the sheaves abstract avoids unfolding their constructions in the comparison proof. -/
 private theorem basisComparison_of_common_localizations
     (R : CommRingCat.{u}) (N : ModuleCat.{u} R)
     (X : Scheme.{u}) (e : X ≅ Spec R) (E G : X.Modules)
@@ -97,8 +99,8 @@ private theorem basisComparison_of_common_localizations
   refine ⟨l.toLinearMap, l.bijective, ?_⟩
   intro s
   apply d.injective
-  change d (d.symm (c (E.val.map _ s))) =
-    d (G.val.map _ (bG.symm (bE s)))
+  change d (d.symm (c (E.val.map (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r).leTop.op s))) =
+    d (G.val.map (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r).leTop.op (bG.symm (bE s)))
   rw [d.apply_symm_apply, hcres, hdres, bG.apply_symm_apply]
 
 set_option backward.isDefEq.respectTransparency false in
