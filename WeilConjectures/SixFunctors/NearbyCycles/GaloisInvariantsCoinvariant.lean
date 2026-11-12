@@ -249,6 +249,7 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
+omit [DiscreteTopology T₀] [Finite T₀] in
 private lemma coinvariant_degree_isIso
     (hp : ∀ L' : FiniteGaloisIntermediateField L Ω, IsUnit ((Module.finrank L L' : ℕ) : T₀))
     (j : FiniteGaloisIntermediateField L Ω) {Z : Scheme.{u}}
@@ -290,7 +291,8 @@ private lemma galoisLayerExchange_factorization
   have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp, Functor.map_comp] at hα
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  rw [Functor.map_comp] at hα
   exact hα
 
 /-- Transport the coinvariant property of a retraction of the derived unit through the
@@ -299,10 +301,8 @@ private lemma coinvariant_pullbackExchange_of_unit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
-    (R : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
-        Λ⟧).obj
-      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
-        Λ⟧).obj
+    (R : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦Λ⟧).obj
+      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦Λ⟧).obj
         (L((N.ε)^*⟦Λ⟧).obj C)) ⟶
           L((N.ε)^*⟦Λ⟧).obj C)
     (hR : (derivedUpperStarLowerStarAdjunction Λ
@@ -343,8 +343,8 @@ private lemma coinvariant_pullbackExchange_of_unit
     (fun k ↦ N.galoisLayerAction Λ h Ω (act k) (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
 
-private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_complex [QuasiCompact N.j]
-    [QuasiSeparated N.j]
+private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_complex
+    [QuasiCompact N.j] [QuasiSeparated N.j]
     (hp : ∀ L' : FiniteGaloisIntermediateField L Ω, IsUnit ((Module.finrank L L' : ℕ) : T₀))
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X)))
@@ -407,7 +407,6 @@ private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of
     (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (act k)) hlift (fun j ↦ hdZ j W) φ'
     hφ'
 
-
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (SGA 4½, [Th. finitude],
 Lemme 3.4; torsion coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
 `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback exchange
@@ -441,7 +440,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
         (DerivedCategory.homologyFunctor _ q).map
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
-              (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ  := by
+              (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ _ hC
   exact exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_complex
     T₀ N h Ω hp C K a hterms e f' act hact
