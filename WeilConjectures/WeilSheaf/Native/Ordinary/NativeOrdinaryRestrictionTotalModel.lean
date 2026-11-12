@@ -85,6 +85,23 @@ private theorem exact_total_tensor_square
   erw [Category.comp_id]
   exact Functor.Monoidal.δ_μ_assoc F.mapDerivedCategory _ _ _
 
+private theorem exact_total_tensor_square_transport
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.Monoidal]
+    {M N P T L : C} {K P' T' W : D}
+    (f : M ⟶ P) (g : N ⟶ T) (t : L ⟶ M ⊗ N)
+    (i : K ≅ F.obj M ⊗ F.obj N)
+    {a : F.obj P ⟶ P'} {b : F.obj T ⟶ T'} {μ : P' ⊗ T' ⟶ W}
+    {q : F.obj (P ⊗ T) ⟶ W}
+    (h : Functor.OplaxMonoidal.δ F P T ≫ (a ⊗ₘ b) ≫ μ = q) :
+    (F.map t ≫ Functor.OplaxMonoidal.δ F M N ≫ i.inv) ≫ i.hom ≫
+        ((F.map f ≫ a) ⊗ₘ (F.map g ≫ b)) ≫ μ =
+      F.map t ≫ F.map (f ⊗ₘ g) ≫ q := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← tensorHom_comp_tensorHom]
+  simp only [Category.assoc]
+  rw [Functor.OplaxMonoidal.δ_natural_assoc, h]
+
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
@@ -125,7 +142,6 @@ def nativeOrdinaryRestrictionTotal
         (Spec (CommRingCat.of k₀))))).isLeftAdjoint
   exact (R.mapCochainComplexμIso P T).symm
 
-set_option maxHeartbeats 800000 in
 -- The native tensor comparisons contain large sheaf and derived-category instances.
 /-- The fixed ordinary derived restriction tensorator is the localization of the
 balanced total restriction map, including arbitrary input identification isomorphisms.
@@ -189,6 +205,10 @@ theorem native_ordinary_restriction_total_model
         (Spec (CommRingCat.of k₀))))).isLeftAdjoint
   letI := R.exactClosedDerivedMonoidal
   have h := exact_total_tensor_square R P T
+  have hfinal := exact_total_tensor_square_transport R.mapDerivedCategory f.hom g.hom
+    ((dZ.tensorIso k₀ l).hom.app (M, N))
+    ((dU.tensorIso k₀ l).app (R.mapDerivedCategory.obj M, R.mapDerivedCategory.obj N))
+    h
   change (R.mapDerivedCategory.map ((dZ.tensorIso k₀ l).hom.app (M, N)) ≫
       Functor.OplaxMonoidal.δ R.mapDerivedCategory M N ≫
       (dU.tensorIso k₀ l).inv.app (R.mapDerivedCategory.obj M,
@@ -213,9 +233,7 @@ theorem native_ordinary_restriction_total_model
         Functor.LaxMonoidal.μ DerivedCategory.Q P T) ≫
       R.mapDerivedCategoryFactors.hom.app (P ⊗ T) ≫
       DerivedCategory.Q.map (R.mapCochainComplexμIso P T).inv
-  rw [← tensorHom_comp_tensorHom]
-  simp only [Category.assoc]
-  rw [Functor.OplaxMonoidal.δ_natural_assoc, h]
-  simp only [Functor.map_comp, Category.assoc]
+  simpa only [Functor.map_comp, Category.assoc, Iso.app_hom, Iso.app_inv,
+    Iso.inv_hom_id_app_assoc] using hfinal
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
