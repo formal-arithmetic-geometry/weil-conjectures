@@ -82,27 +82,22 @@ theorem exists_relative_open_gluing
   dsimp only
   intro c E a b hab
   obtain ⟨G, jW, jV, ht⟩ := exists_ambient_open_gluing_object X W V A B c
+  let SW := (schemeOpenOverlapRestriction X
+    (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory
+  let SV := (schemeOpenOverlapRestriction X
+    (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory
+  let sW := schemeDerivedOpenRestrictionCompIso X
+    (homOfLE inf_le_left : W ⊓ V ⟶ W)
+  let sV := schemeDerivedOpenRestrictionCompIso X
+    (homOfLE inf_le_right : W ⊓ V ⟶ V)
   have hcompat :
-      (schemeDerivedOpenRestrictionCompIso X
-        (homOfLE inf_le_left : W ⊓ V ⟶ W)).inv.app G ≫
-          (schemeOpenOverlapRestriction X
-            (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory.map (jW.hom ≫ a) ≫
-          (schemeDerivedOpenRestrictionCompIso X
-            (homOfLE inf_le_left : W ⊓ V ⟶ W)).hom.app E =
-      (schemeDerivedOpenRestrictionCompIso X
-        (homOfLE inf_le_right : W ⊓ V ⟶ V)).inv.app G ≫
-          (schemeOpenOverlapRestriction X
-            (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory.map (jV.hom ≫ b) ≫
-          (schemeDerivedOpenRestrictionCompIso X
-            (homOfLE inf_le_right : W ⊓ V ⟶ V)).hom.app E := by
+      sW.inv.app G ≫ SW.map (jW.hom ≫ a) ≫ sW.hom.app E =
+      sV.inv.app G ≫ SV.map (jV.hom ≫ b) ≫ sV.hom.app E := by
     simp only [Functor.map_comp, Category.assoc]
     rw [hab]
     simpa only [Category.assoc] using congrArg
       (fun t ↦ t ≫
-        (schemeOpenOverlapRestriction X
-          (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory.map b ≫
-        (schemeDerivedOpenRestrictionCompIso X
-          (homOfLE inf_le_right : W ⊓ V ⟶ V)).hom.app E) ht
+        SV.map b ≫ sV.hom.app E) ht
   obtain ⟨α, hW, hV⟩ := exists_open_union_hom X W V G E
     (jW.hom ≫ a) (jV.hom ≫ b) hcompat
   refine ⟨(schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory.obj G, α,
