@@ -69,7 +69,6 @@ private theorem changeCoordinates_comp
 include K₀ hl
 -- The existing statement retains the geometric hypotheses of its source.
 set_option linter.unusedSectionVars false in
-set_option maxHeartbeats 600000 in
 set_option profiler true in
 -- Elaborate the explicit paste across the two equivalent sequence-site presentations.
 
@@ -155,9 +154,7 @@ theorem qcqsCompactSupport_strictReductionData :
         (comparison a c).app K ≫ (image A c).map (ρX.inv.app K) := by
     dsimp only [β, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app]
-    simp only [Functor.map_comp, Category.assoc]
-    erw [evY.map_id, Category.id_comp, evY.map_id, Category.id_comp,
-      evY.map_id, Category.id_comp]
+    simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
     change evY.map (βP.app (J.obj K)) ≫
       evY.map (Ps.map (βJ.app K)) ≫ eP.hom.app (Js.obj (SX.reduction.obj K)) ≫
         Pn.map (eJ.hom.app (SX.reduction.obj K)) = _
