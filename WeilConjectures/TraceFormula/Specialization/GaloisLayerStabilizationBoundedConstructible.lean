@@ -197,29 +197,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
     K.obj
   exact retraction_of_stabilization N h Ω ℓ C L' hL'
 
-private theorem retraction_of_integral_model_data
-    [IsNoetherian N.generic] [CompactSpace N.total] [QuasiSeparatedSpace N.total]
-    [CompactSpace X'] [QuasiSeparatedSpace X'] [QuasiCompact N.j] [QuasiSeparated N.j]
-    (hdeg : ∀ M : IntermediateField L Ω, FiniteDimensional L M → ¬ ℓ ∣ Module.finrank L M)
-    (C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
-    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) N.generic)
-      (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) N.generic))
-    (e : (constructibleToPadicAlgCl N.generic ℓ E).obj
-      ((boundedConstructibleExtendScalars N.generic ℓ E).obj K₀) ≅ ⟨_, hC⟩)
-    (htors : boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) X')
-      ((((N.toGenericWithSpecial N.i).galoisLayer h Ω).nearbyCycles
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))).obj
-        (L((𝟙 N.generic)^*⟦Profinite.continuousMapRingObj.{u}
-          (integersResidueField ℓ E.1)⟧).obj
-          ((Mod.extendScalars (coefficientMap
-            (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-              N.generic)).leftDerivedFunctor.obj K₀.obj)))) :=
-  N.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel h Ω ℓ hdeg C hC E K₀ e htors
-
+set_option profiler true in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles of all
@@ -261,7 +239,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_forall
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
   obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel N.generic ℓ K
-  exact N.retraction_of_integral_model_data h Ω ℓ hdeg C hC E K₀ e
+  exact N.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel h Ω ℓ hdeg C hC E K₀ e
     (htors E K₀.obj K₀.property)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
