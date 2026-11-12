@@ -194,8 +194,18 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CY : ExceptionalSystemSiteComparison O ell Y S.PY)
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
+-- Invert the two vertical sides of a square using only the category laws.
+private theorem inverseSquare_eq
+    {C : Type*} [Category C] {A B D E F G : C}
+    (a : A ⟶ B) (b : D ⟶ E) [IsIso a] [IsIso b]
+    (e : F ≅ A) (f : E ≅ G) (s : F ⟶ D) (t : B ⟶ G)
+    (h : e.hom ≫ a ≫ t = s ≫ b ≫ f.hom) :
+    inv a ≫ e.inv ≫ s = t ≫ f.inv ≫ inv b := by
+  have hh := congrArg (fun k ↦ inv a ≫ e.inv ≫ k ≫ f.inv ≫ inv b) h
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
+    IsIso.inv_hom_id_assoc, IsIso.hom_inv_id, Category.comp_id] using hh.symm
+
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- The system and level mate identities require simultaneous localization comparisons.
 /-- Construct the normalized proper and open compactification comparisons.
 Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
@@ -356,19 +366,15 @@ theorem exceptionalSystemCompactificationComparison_exists
         simp only [Category.assoc, Iso.inv_hom_id_app]
         erw [(CX.proEvaluation.evaluation n).map_id, Category.id_comp, Category.comp_id]
         exact (RO.property.2.2.2.1 n K).symm) M
-    have hh := congrArg (fun k ↦
-      (CZ.proEvaluation.evaluation n).map (inv (α.app M)) ≫
-        (P.val.openDerivedEvaluation n).hom.app (CX.image.system.inverse.obj M) ≫
-        k ≫ (CZ.image.level n).inverse.map ((S.openDerivedEvaluation n).hom.app M) ≫
-        inv ((αn n).app ((S.PX.evaluation n).obj M))) hc
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
-      Iso.inv_hom_id_app, IsIso.inv_hom_id] at hh
-    erw [(CZ.proEvaluation.evaluation n).map_id, Category.id_comp,
-      (CZ.image.level n).inverse.map_id, Category.id_comp,
-      IsIso.hom_inv_id, Category.comp_id] at hh
-    simpa only [record, e, en, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app,
-      Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
-      Iso.inv_hom_id_app, Functor.map_id, Category.id_comp, Category.comp_id,
-      IsIso.inv_hom_id_assoc, IsIso.hom_inv_id, IsIso.inv_hom_id] using hh.symm
+    have hh := inverseSquare_eq
+      ((CZ.proEvaluation.evaluation n).map (α.app M))
+      ((αn n).app ((S.PX.evaluation n).obj M))
+      ((P.val.openDerivedEvaluation n).app (CX.image.system.inverse.obj M)).symm
+      ((CZ.image.level n).inverse.mapIso ((S.openDerivedEvaluation n).app M)).symm
+      ((P.val.levelDerivedOpen n).map ((CX.image.inverseEvaluation n).hom.app M))
+      ((CZ.image.inverseEvaluation n).hom.app (S.derivedOpen.obj M)) hc
+    simpa only [record, e, en, Iso.symm_hom, Iso.symm_inv, asIso_inv,
+      NatIso.isIso_inv_app, Functor.mapIso_hom, Functor.map_inv, Category.assoc] using hh
+
 
 end AlgebraicGeometry

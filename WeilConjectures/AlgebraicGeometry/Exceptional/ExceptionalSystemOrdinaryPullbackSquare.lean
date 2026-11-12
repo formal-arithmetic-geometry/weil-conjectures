@@ -609,8 +609,36 @@ private theorem coefficientRing_ext (n : ℕ)
     Equiv.apply_symm_apply] at hx
   exact congrArg (fun t ↦ t.app V PUnit.unit) hx
 
+-- Check the constant generators in an abstract square, before specializing its functors.
+private theorem constantSection_comparison
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (F : A ⥤ B) (G : B ⥤ D) (H : A ⥤ C) (I : C ⥤ D)
+    (γ : F ⋙ G ≅ H ⋙ I)
+    {S R : A} {SB RB : B} {SC RC : C} {SD RD : D}
+    (eFS : F.obj S ≅ SB) (eGS : G.obj SB ≅ SD)
+    (eHS : H.obj S ≅ SC) (eIS : I.obj SC ≅ SD)
+    (eFR : F.obj R ≅ RB) (eGR : G.obj RB ≅ RD)
+    (eHR : H.obj R ≅ RC) (eIR : I.obj RC ≅ RD)
+    (hs : G.map eFS.hom ≫ eGS.hom = γ.hom.app S ≫ I.map eHS.hom ≫ eIS.hom)
+    (s : S ⟶ R) (sB : SB ⟶ RB) (sC : SC ⟶ RC) (sD : SD ⟶ RD)
+    (hF : F.map s ≫ eFR.hom = eFS.hom ≫ sB)
+    (hG : G.map sB ≫ eGR.hom = eGS.hom ≫ sD)
+    (hH : H.map s ≫ eHR.hom = eHS.hom ≫ sC)
+    (hI : I.map sC ≫ eIR.hom = eIS.hom ≫ sD) :
+    sD ≫ eGR.inv ≫ G.map eFR.inv ≫ γ.hom.app R ≫ I.map eHR.hom ≫ eIR.hom = sD := by
+  apply (cancel_epi (G.map eFS.hom ≫ eGS.hom)).1
+  have hF' := congrArg (· ≫ eFR.inv) hF
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hF'
+  have hG' := congrArg (· ≫ eGR.inv) hG
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hG'
+  simp only [Category.assoc]
+  rw [← reassoc_of% hG', ← G.map_comp_assoc, ← hF',
+    γ.hom.naturality_assoc]
+  dsimp only [Functor.comp_map]
+  rw [← I.map_comp_assoc, hH, I.map_comp, Category.assoc, hI,
+    ← reassoc_of% hs]
+
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Comparing constant generators unfolds several prescribed geometric inverse-image functors.
 private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)
     {PX : StrictEtaleEvaluation X O ell} {PU : StrictEtaleEvaluation U O ell}
@@ -644,24 +672,20 @@ private theorem coefficientComparisonRing_id {U : Scheme.{u}} (g : X ⟶ U)
       γ.hom.app _ ≫ C.map E.singleton.hom ≫ CX.ordinary.singleton.hom := ht.hom_ext _ _
   apply coefficientRing_ext n
   intro x
-  apply (cancel_epi (L.map CU.ordinary.singleton.hom ≫ P.singleton.hom)).1
-  have hcui := congrArg (· ≫ (CU.ordinary.lift n).ringUnderlying.inv)
-    (CU.ordinary.constants n x)
-  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hcui
-  have hcu := congrArg L.map hcui.symm
-  have he := congrArg C.map (E.constants n x)
-  simp only [Functor.map_comp] at hcu he
-  simp only [Category.assoc]
-  have hp := congrArg (· ≫ (P.lift n).ringUnderlying.inv) (P.constants n x)
-  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at hp
   rw [hq]
-  erw [← reassoc_of% hp]
-  rw [reassoc_of% hcu]
-  erw [γ.hom.naturality_assoc]
-  dsimp only [Functor.comp_map]
-  erw [reassoc_of% he, CX.ordinary.constants n x]
-  erw [← reassoc_of% hsingle]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  simpa only [Functor.map_id, Category.comp_id] using
+    constantSection_comparison
+      (ProEtale.comparisonCoefficientPullback (Type (u + 1)) U) L
+      (Scheme.etaleSetPullback g) C γ
+      CU.ordinary.singleton P.singleton E.singleton CX.ordinary.singleton
+      (CU.ordinary.lift n).ringUnderlying (P.lift n).ringUnderlying
+      (E.lift n).ringUnderlying (CX.ordinary.lift n).ringUnderlying hsingle
+      (coefficientConstantSection (J := U.smallEtaleTopology) O ell n x)
+      (coefficientConstantSection (J := Scheme.ProEt.topology U) O ell n x)
+      (coefficientConstantSection (J := X.smallEtaleTopology) O ell n x)
+      (coefficientConstantSection (J := Scheme.ProEt.topology X) O ell n x)
+      (CU.ordinary.constants n x) (P.constants n x) (E.constants n x)
+      (CX.ordinary.constants n x)
 
 -- Transporting the two algebraic presentations requires large sheaf-functor conversions.
 private theorem finiteComparison
