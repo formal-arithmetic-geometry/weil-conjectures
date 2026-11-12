@@ -52,6 +52,7 @@ local notation "ModX" => (Proj 𝒜).Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The large dependent chart-section signature and comparison require extra elaboration budget.
 /-- On each principal open of a fixed chart, there is a bijective linear comparison
 extending the same additive comparison on whole-chart sections.
