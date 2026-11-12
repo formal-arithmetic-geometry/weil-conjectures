@@ -121,7 +121,6 @@ private theorem open_counit_isIso (X : Scheme.{u}) (O : X.Opens)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option trace.profiler true in
 /-- The difference arrow has split normal form on each of the two opens.
 The middle and last objects are the explicit direct-image sum and overlap image.
 This constructs their maps, not a glued object.
