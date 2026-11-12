@@ -156,7 +156,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   CompletedRealization.singleUnit CompletedRealization.shiftedLine
   modelExchange TracePullback
 
-set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Compare the independently normalized derived functor endpoints.
 /-- Pullback of one completed projective-line trace, expressed in its normalized
 condensed realization. This is a trace-only assertion for a Cartesian square of
