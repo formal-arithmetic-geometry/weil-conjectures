@@ -154,7 +154,12 @@ theorem perfect_descent_open_eventual_model
     derivedPullback_preserve_perfect q E hE
   have dr := dW O.toScheme r hr
   dsimp only [r] at dr
-  obtain ⟨j, hij, Ej, hEj, ⟨eEj⟩⟩ := dr Eo hEo
+  have descent := dr Eo hEo
+  let j := descent.choose
+  have hij : i ≤ j := descent.choose_spec.choose
+  let Ej := descent.choose_spec.choose_spec.choose
+  have hEj := descent.choose_spec.choose_spec.choose_spec.1
+  let eEj := descent.choose_spec.choose_spec.choose_spec.2.some
   refine ⟨j, hij, ?_⟩
   intro k hjk
   let Tj : Over (Spec (R.obj i)) := Over.mk (Spec.map (R.map (homOfLE hij)))

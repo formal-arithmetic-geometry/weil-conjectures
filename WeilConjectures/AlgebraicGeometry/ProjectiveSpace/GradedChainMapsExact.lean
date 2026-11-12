@@ -260,15 +260,15 @@ theorem graded_chain_maps_exact (k : Type u) [Field k]
     Fin.cases (alphaE 2 f d hd hf)
       (Fin.cases (alphaE 1 f d hd hf) (Fin.cases (alphaE 0 f d hd hf) (fun i ↦ Fin.elim0 i)))
   have hN : ∀ j, DirectSum.IsInternal (H j) := by
-    exact Fin.cases (h𝒢 2) (Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) Fin.elim0))
+    exact Fin.cases (h𝒢 2) (Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) (fun i ↦ Fin.elim0 i)))
   have hNs : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N j),
       a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H j z → a • y ∈ H j (n + z) := by
-    exact Fin.cases (hA_smul 2) (Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) Fin.elim0))
+    exact Fin.cases (hA_smul 2) (Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (fun i ↦ Fin.elim0 i)))
   have ha : ∀ j, Function.Injective (a j) ∧ Set.range (a j) = degreeZeroFractions
       (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
       (fun n : ℕ ↦ (H j n : Set (N j))) (Submonoid.powers f) := by
     exact Fin.cases (hcharts 2 f d hd hf)
-      (Fin.cases (hcharts 1 f d hd hf) (Fin.cases (hcharts 0 f d hd hf) Fin.elim0))
+      (Fin.cases (hcharts 1 f d hd hf) (Fin.cases (hcharts 0 f d hd hf) (fun i ↦ Fin.elim0 i)))
   obtain ⟨hexL, hinjL, _⟩ := proj_away_degreeZero_exact_pair k (fun j ↦ N j) H hN hNs f d hd hf
     (fun j ↦ (T j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) a ha
     f₂ f₁ hf₂ hf₁ hex₂
@@ -284,15 +284,15 @@ theorem graded_chain_maps_exact (k : Type u) [Field k]
     Fin.cases (alphaE 1 f d hd hf)
       (Fin.cases (alphaE 0 f d hd hf) (Fin.cases (alpha f d hd hf) (fun i ↦ Fin.elim0 i)))
   have hN' : ∀ j, DirectSum.IsInternal (H' j) := by
-    exact Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) (Fin.cases h𝓜 Fin.elim0))
+    exact Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) (Fin.cases h𝓜 (fun i ↦ Fin.elim0 i)))
   have hNs' : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N' j),
       a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H' j z → a • y ∈ H' j (n + z) := by
-    exact Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (Fin.cases hsmul Fin.elim0))
+    exact Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (Fin.cases hsmul (fun i ↦ Fin.elim0 i)))
   have ha' : ∀ j, Function.Injective (a' j) ∧ Set.range (a' j) = degreeZeroFractions
       (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
       (fun n : ℕ ↦ (H' j n : Set (N' j))) (Submonoid.powers f) := by
     exact Fin.cases (hcharts 1 f d hd hf)
-      (Fin.cases (hcharts 0 f d hd hf) (Fin.cases (halpha f d hd hf) Fin.elim0))
+      (Fin.cases (hcharts 0 f d hd hf) (Fin.cases (halpha f d hd hf) (fun i ↦ Fin.elim0 i)))
   obtain ⟨hexR, _, hsurjR⟩ := proj_away_degreeZero_exact_pair k (fun j ↦ N' j) H' hN' hNs' f d hd hf
     (fun j ↦ (T' j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) a' ha'
     f₁ f₀ hf₁ hf₀ hex₁'

@@ -162,10 +162,13 @@ theorem schemeGlobalHom_shiftedHypercohomology_equiv
           (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X) X.sheaf).map
             ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
               ((𝟙 (P⟦m⟧)).op, q⟦n⟧')) (c P Q m n x) := by
-  obtain ⟨e, he⟩ := @derivedInternalHom_shift_comparison.{u, w} X.Opens _
+  classical
+  have comparison := @derivedInternalHom_shift_comparison.{u, w} X.Opens _
     (Opens.grothendieckTopology X) X.sheaf
     (inferInstanceAs (HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))))
+  let e := comparison.choose
+  have he := comparison.choose_spec
   let H := ringedSiteZerothHypercohomology (Opens.grothendieckTopology X) X.sheaf
   let F := derivedInternalHom (Opens.grothendieckTopology X) X.sheaf
   let a (P Q : schemeDerivedCategory X) (m n : ℤ) :=
