@@ -85,7 +85,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' Y Y' : Scheme.{u}} {M : NearbyCycles
   {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 -- the coefficient changes of the base change morphism are matched against large types
-open PadicAlgCl
+set_option profiler true in
+set_option maxHeartbeats 1000000 in
+open PadicAlgCl in
 /-- **Split pullback exchanges from the integral case** (the mechanism of SGA 4½,
 [Th. finitude], Lemme 3.4, for `ℚ̄_ℓ`-coefficients). Let `φ : M ⟶ N` be a morphism of models
 whose schemes are quasi-compact and quasi-separated, and let `B ≅ ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)`
@@ -116,16 +118,14 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
           ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) :
     IsSplitMono ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) := by
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
-  fo_have hE := isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers
-    using ℓ, E, φ.commSq_j, M.i,
-      ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀), n₀, hn₀, h𝒪
-  fo_have hA := isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield
-    using ℓ, E, φ.commSq_j, M.i,
-      ((L(Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        N.generic))).obj ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)), n₀,
-      (isGE_leftDerivedFunctor_extendScalars_obj
-        (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀), hE
+  have hE := isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E φ.commSq_j M.i
+    ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀ hn₀ (by
+      fo_apply h𝒪 using h𝒪)
+  have hA := isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield ℓ E φ.commSq_j M.i
+    ((L(Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+      N.generic))).obj ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)) n₀
+    (isGE_leftDerivedFunctor_extendScalars_obj _ _ n₀) (by
+      fo_apply hE using hE)
   -- `ℚ̄_ℓ ⊗ (E ⊗ Lε^* K₀) ≅ Lε^* B`
   have e' : (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       N.generic))).obj ((L(Mod.extendScalars (coefficientMap
