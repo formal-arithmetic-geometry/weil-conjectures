@@ -245,9 +245,11 @@ theorem nativeChainForgetComponent_transport
     nativeChainForgetComponent D P Q N n p q h := by
   have hc := nativeChainForget_transport_map D P Q N
     (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom hsquare
+  have hn := congrArg (fun f ↦ f.f n) hc
+  dsimp only [nativeChainForgetComponent]
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
       (HomologicalComplex.ιMapBifunctor N (Q.mapBifunctor P T) T
-        (.up ℤ) p q n h) ≫ f.f n) hc
+        (.up ℤ) p q n h) ≫ f) hn
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
