@@ -146,8 +146,6 @@ set_option hygiene false in
 /-- The condensed field `ℚ̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
-set_option profiler true in
--- the square law of the exchanges is instantiated on the ambient derived categories
 /-- **Proper exchange for a proper trait model over the base**, on the ambient derived
 categories: if the total space of the trait model `M` over the base is proper over the trait and
 its geometric generic fibre is all of `X ×_k Spec Ω`, the proper exchange
