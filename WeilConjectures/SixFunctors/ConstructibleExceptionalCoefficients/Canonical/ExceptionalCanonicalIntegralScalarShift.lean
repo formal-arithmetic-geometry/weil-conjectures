@@ -226,21 +226,6 @@ private theorem finiteTorIntegralShift_compatibility_cached
         RingStage.inclusion.{u, v} l Ω T (.integral E) from Iso.refl _).hom ℤ :=
   finiteTorIntegralShift_compatibility l Ω E T
 
-private theorem ordinary_completed_scalar_shift_cached
-    (l : ℕ) [Fact l.Prime]
-    (E L : Type u) [Field E] [Algebra (ℚ_[l]) E]
-      [FiniteDimensional (ℚ_[l]) E] [Field L] [Algebra (ℚ_[l]) L]
-      [FiniteDimensional (ℚ_[l]) L]
-    (i : E →ₐ[ℚ_[l]] L) (T : Scheme.{u}) :
-    letI : (AlgebraicGeometry.Scheme.pbcDerivedExtend
-        (completedCoefficientMap.{u, u} l E L i T)).CommShift ℤ :=
-      PurCompactSupport.scalarCommShift (completedCoefficientMap l E L i T)
-    ∃ e : integralOrdinaryDerivedScalar l E L i T ≅
-        AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap l E L i T),
-      e.hom ≫ completedScalarComparison l E L i T = scalarCompletion l E L i T ∧
-      e.hom.CommShift ℤ :=
-  ordinary_completed_scalar_shift l E L i T
-
 /-- The shift on an integral scalar functor induced by its specified ordinary realization.
 This is an actual fully faithful lift of the ambient scalar shift, independent of any
 shift stored in the scalar record. Source: Zheng, Construction 6.2, and the canonical
@@ -364,7 +349,7 @@ theorem canonical_integral_scalar_square
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
   let θ : S.functor ⋙ JX ≅ IX ⋙ B := S.realization
   letI := canonicalIntegralScalarShift_compatibility l Ω S
-  let ordinaryData := ordinary_completed_scalar_shift_cached l E.carrier L.carrier i T
+  let ordinaryData := ordinary_completed_scalar_shift l E.carrier L.carrier i T
   let e₀ := ordinaryData.choose
   have hχ := ordinaryData.choose_spec.1
   have heO := ordinaryData.choose_spec.2
