@@ -157,8 +157,10 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
       erw [CategoryTheory.Functor.map_id, Category.id_comp, hr]
       simp only [Category.assoc]
       erw [Iso.inv_hom_id_app_assoc]
-    let πP (j : Fin d) :=
-      Res.mapDerivedCategory.map (fO.hom.app P) ≫ fR.hom.app OP ≫ DerivedCategory.Q.map (πC j)
+    let cP := Res.mapDerivedCategory.map (fO.hom.app P)
+    let dP := fR.hom.app OP
+    let eP (j : Fin d) := DerivedCategory.Q.map (πC j)
+    let πP (j : Fin d) := cP ≫ dP ≫ eP j
     have hAc (i j : Fin d) : unitP ≫ (Res.mapHomologicalComplex (.up ℤ)).map (smulC i) ≫ πC j =
         if i = j then 𝟙 P else 0 := by
       ext n : 1
