@@ -168,8 +168,6 @@ theorem relativeMV_resolved_roof_middle_mate_comparison
     exact hq.symm
   have : IsIso (biprod.map qU qV) := by rw [hd]; infer_instance
   obtain ⟨hqU, hqV⟩ := relativeMV_biprod_components_isIso qU qV
-  have := hqU
-  have := hqV
   have hqU' := hqU
   dsimp only [qU, wU, T, H, Ff, Ff', F, G, c, JU, J, sU, L] at hqU'
   obtain ⟨eU, eU', hU⟩ := relativeMV_resolved_open_roof_comparison
