@@ -343,6 +343,13 @@ private theorem sheaf_sum_apply {A : Type (d + 1)} [Ring A]
   exact map_sum ev f t
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
+private theorem sheaf_comp_app_apply {A : Type (d + 1)} [Ring A]
+    {M N P : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A)}
+    (f : M ⟶ N) (g : N ⟶ P) (U : Y.Etale) (x : M.obj.obj (op U)) :
+    (f ≫ g).hom.app (op U) x = g.hom.app (op U) (f.hom.app (op U) x) := by
+  rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ModuleCat.comp_apply]
+
+omit [IsNoetherian Y] [Y.IsSeparated] in
 private theorem restrictedScalarSheaf_ext
     {A B : Type (d + 1)} [CommRing A] [CommRing B] (f : A →+* B)
     (M N : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A))
@@ -419,9 +426,19 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
       (ModuleCat.ringExtensionTmul.{d + 1, d + 1} _ _ (Ideal.Quotient.mk _ s) x))
   simp only [map_sum, map_smul, ringQuotientCoordinate_tmul] at hh
   rw [sheaf_sum_apply]
-  simp_rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    ModuleCat.comp_apply]
   calc
+    _ = ∑ i, (quotientReconstructMap Y b I M i).hom.app (op U)
+        ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
+          (((toSheafification Y.smallEtaleTopology
+            (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
+              (M.obj ⋙ ModuleCat.ringExtendScalars.{d + 1, d + 1}
+                (algebraMap R (S ⧸ I.map (algebraMap R S))))).app (op U)
+            (ModuleCat.ringExtensionTmul.{d + 1, d + 1}
+              (algebraMap R (S ⧸ I.map (algebraMap R S))) _
+              (Ideal.Quotient.mk _ s) x))) := by
+      apply Finset.sum_congr rfl
+      intro i _
+      rw [sheaf_comp_app_apply]
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
         ((toSheafification Y.smallEtaleTopology
           (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
