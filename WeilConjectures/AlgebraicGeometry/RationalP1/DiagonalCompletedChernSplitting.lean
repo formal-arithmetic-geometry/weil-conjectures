@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1Scal
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceComparisonLimitIsos
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.DiagonalCompletedChernLift
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceTwistedSplittingComponents
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIso
 
 /-! # Splitting off a normalized completed Chern adjunct
 
@@ -46,7 +47,32 @@ private theorem map_split
   rw [he]
   infer_instance
 
-set_option profiler true in
+/-- The completed line remains scalar-orthogonal after shifting by two. -/
+private theorem completed_line_shift_complete (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
+    [IsNoetherian S] [DiagonalTraceLocalizations l S] (hS : IsUnit (l : Γ(S, ⊤))) :
+    ∀ V : DerivedCategory (DiagonalMod l S), IsIso (l • 𝟙 V) →
+      Subsingleton (V ⟶ (diagonalCompletedUnderlying l S).obj
+        ((DiagonalTrace.completedLine l S) ⟦(2 : ℤ)⟧)) := by
+  let : ∀ x : S, Invertible (l : S.residueField x) := fun x ↦
+    (show IsUnit (l : S.residueField x) from by
+      let ψ := (S.residue x).hom.comp (S.presheaf.germ ⊤ x trivial).hom
+      simpa only [map_natCast] using hS.map ψ).invertible
+  have hfree := (Scheme.pur_twist_sheaf_locally_free.{u, u} S l
+    (ULift.{u} (Padic l))).2.1.2.1
+  have hline := DiagonalTrace.diagonalCompletedLine_complete l S _ hfree
+  let G := diagonalCompletedUnderlying l S
+  let adj : shiftFunctor (DerivedCategory (DiagonalMod l S)) (-2 : ℤ) ⊣
+      shiftFunctor (DerivedCategory (DiagonalMod l S)) (2 : ℤ) :=
+    (shiftEquiv' (DerivedCategory (DiagonalMod l S)) (-2 : ℤ) (2 : ℤ)
+      (by decide)).toAdjunction
+  have hshift := DiagonalTrace.complete_rightAdjoint adj l
+    (G.obj (DiagonalTrace.completedLine l S)) hline
+  intro V hV
+  let e := Iso.homCongr (Iso.refl V)
+    ((G.commShiftIso (2 : ℤ)).app (DiagonalTrace.completedLine l S))
+  have := hshift V hV
+  exact e.injective.subsingleton
+
 -- The derived biproduct structure on completed coefficients is found by unfolding.
 /-- A normalized completed Chern adjunct is the second component of a splitting.
 
@@ -142,46 +168,12 @@ theorem completed_chern_splitting
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l S), IsIso (l • 𝟙 V) → Subsingleton (V ⟶ G.obj M)
   obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l S
-  have hSfree := (Scheme.pur_twist_sheaf_locally_free.{u, u} S l E).2.1.2.1
-  have hV₀ := DiagonalTrace.diagonalCompletedLine_complete l S _ hSfree
-  have hV : P ((DiagonalTrace.completedLine l S) ⟦(2 : ℤ)⟧) := by
-    let adj : shiftFunctor (DerivedCategory (DiagonalMod l S)) (-2 : ℤ) ⊣
-        shiftFunctor (DerivedCategory (DiagonalMod l S)) (2 : ℤ) :=
-      (shiftEquiv' (DerivedCategory (DiagonalMod l S)) (-2 : ℤ) (2 : ℤ)
-        (by decide)).toAdjunction
-    have hshift := DiagonalTrace.complete_rightAdjoint adj l
-      (G.obj (DiagonalTrace.completedLine l S)) hV₀
-    intro V hV
-    let e := Iso.homCongr (Iso.refl V)
-      ((G.commShiftIso (2 : ℤ)).app (DiagonalTrace.completedLine l S))
-    constructor
-    intro a b
-    apply e.injective
-    exact @Subsingleton.elim _ (hshift V hV) (e a) (e b)
+  have hV : P ((DiagonalTrace.completedLine l S) ⟦(2 : ℤ)⟧) :=
+    completed_line_shift_complete l S hS
   have hX : IsUnit (l : Γ(X, ⊤)) := by
     simpa only [map_natCast] using hS.map f.appTop.hom
-  let : ∀ x : X, Invertible (l : X.residueField x) := fun x ↦
-    (show IsUnit (l : X.residueField x) from by
-      let ψ := (X.residue x).hom.comp (X.presheaf.germ ⊤ x trivial).hom
-      simpa only [map_natCast] using hX.map ψ).invertible
-  have hXfree := (Scheme.pur_twist_sheaf_locally_free.{u, u} X l E).2.1.2.1
-  have hline₀ := DiagonalTrace.diagonalCompletedLine_complete l X _ hXfree
   let GX := diagonalCompletedUnderlying l X
-  have hline : ∀ V : DerivedCategory (DiagonalMod l X), IsIso (l • 𝟙 V) →
-      Subsingleton (V ⟶ GX.obj ((DiagonalTrace.completedLine l X) ⟦(2 : ℤ)⟧)) := by
-    let adj : shiftFunctor (DerivedCategory (DiagonalMod l X)) (-2 : ℤ) ⊣
-        shiftFunctor (DerivedCategory (DiagonalMod l X)) (2 : ℤ) :=
-      (shiftEquiv' (DerivedCategory (DiagonalMod l X)) (-2 : ℤ) (2 : ℤ)
-        (by decide)).toAdjunction
-    have hshift := DiagonalTrace.complete_rightAdjoint adj l
-      (GX.obj (DiagonalTrace.completedLine l X)) hline₀
-    intro V hV
-    let e := Iso.homCongr (Iso.refl V)
-      ((GX.commShiftIso (2 : ℤ)).app (DiagonalTrace.completedLine l X))
-    constructor
-    intro a b
-    apply e.injective
-    exact @Subsingleton.elim _ (hshift V hV) (e a) (e b)
+  have hline := completed_line_shift_complete l X hX
   have hK : P (p.Rc.R.obj ((DiagonalTrace.completedLine l X) ⟦(2 : ℤ)⟧)) := by
     let adj := (ProEtale.upperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).mapDerivedCategoryRightDerivedAdjunction
@@ -201,18 +193,7 @@ theorem completed_chern_splitting
     intro M N f g h
     ext U x
     exact congrArg (fun k ↦ (k.hom.app U).hom x) h⟩
-  have hreflect : G.ReflectsIsomorphisms := by
-    constructor
-    intro M N f hf
-    rw [DerivedCategory.isIso_iff]
-    intro n
-    have hi : IsIso ((diagonalCompletedRestriction l S).map
-        ((DerivedCategory.homologyFunctor _ n).map f)) :=
-      (NatIso.isIso_map_iff
-        ((diagonalCompletedRestriction l S).mapDerivedCategoryHomologyFunctorIso n) f).2
-        (by change IsIso ((DerivedCategory.homologyFunctor _ n).map (G.map f))
-            infer_instance)
-    exact isIso_of_reflects_iso _ (diagonalCompletedRestriction l S)
+  have hreflect : G.ReflectsIsomorphisms := inferInstance
   let : PreservesBinaryBiproducts G :=
     preservesBinaryBiproducts_of_preservesBiproducts G
   have he : G.map (biprod.desc v'.hom b) =

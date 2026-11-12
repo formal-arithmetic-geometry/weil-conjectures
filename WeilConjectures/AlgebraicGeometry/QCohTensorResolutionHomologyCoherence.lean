@@ -110,12 +110,14 @@ theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
       (tensorResolutionChartRestrictionIso Y V U h).hom.app
         ((CochainComplex.mapBifunctor E F (curriedTensor Y.Modules)).homology i) ≫
           (tensorResolutionNormalizedRestrictHomologyIso V.2.fromSpec E F i).hom := by
-  exact tensorResolution_normalized_homology_naturality
+  have hn := tensorResolution_normalized_homology_naturality
     (Scheme.Modules.restrictFunctor U.2.fromSpec)
     (Scheme.Modules.restrictFunctor (Spec.map (Y.presheaf.map (homOfLE h).op)))
     (Scheme.Modules.restrictFunctor V.2.fromSpec)
-    (tensorResolutionChartRestrictionIso Y V U h) (.up ℤ) i _ _ _
+    (tensorResolutionChartRestrictionIso Y V U h) (.up ℤ) i
+    (CochainComplex.mapBifunctor E F (curriedTensor Y.Modules)) _ _
     (tensorResolutionRestrictionTotalIso U.2.fromSpec E F)
     (tensorResolutionRestrictionTotalIso V.2.fromSpec E F) _ hc
+  exact hn
 
 end AlgebraicGeometry
