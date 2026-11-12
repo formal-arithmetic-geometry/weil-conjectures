@@ -265,10 +265,10 @@ private lemma supportCompactSupportExchange_component_identity
     let e ← Lean.Meta.mkConstWithFreshMVarLevels ``CategoryTheory.supportIdentity_aux
     let ty ← Lean.Meta.inferType e
     let mut names : Array Lean.Name := #[]
-    let mut t := ty
-    while t.isForall do
-      names := names.push t.bindingName!
-      t := t.bindingBody!
+    let mut binderTy := ty
+    while binderTy.isForall do
+      names := names.push binderTy.bindingName!
+      binderTy := binderTy.bindingBody!
     let (mvs, _, concl) ← Lean.Meta.forallMetaTelescope ty
     for (binder, value) in #[
         ("Sp", "specialization (ℓ := ℓ) k' y"),
