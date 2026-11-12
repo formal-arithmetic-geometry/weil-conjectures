@@ -37,7 +37,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 400000 in
 set_option profiler true in
 -- Keep tensor instances as local abbreviations during the representative computation.
 private theorem affinePerfectTensorRoof_aux
@@ -93,17 +92,9 @@ private theorem affinePerfectTensorRoof_aux
   obtain ⟨J, hJ, hperfect, u, ξ, hu, hξ⟩ :=
     affine_koszul_section_roof X U hU ⟨H, hH⟩ (e.symm α)
   obtain ⟨γ, hβ, hγ⟩ := he J hJ u hu ξ (e.symm α) hξ
-  let B := DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J (curriedTensor _))
-  let β : B ⟶ A := DerivedCategory.Q.map
-    (HomologicalComplex.mapBifunctorMap (𝟙 P) u (curriedTensor _) (ComplexShape.up ℤ)) ≫
-    DerivedCategory.Q.map (HomologicalComplex.rightUnitor P).hom ≫ eA.hom
-  have : IsIso (R.map β) := hβ
-  refine ⟨J, hJ, hperfect, u, γ, asIso (R.map β), rfl, ?_⟩
-  change α = (asIso (R.map β)).inv ≫ R.map γ
-  have hγ' : R.map β ≫ α = R.map γ := by
-    simpa only [Equiv.apply_symm_apply] using hγ
-  rw [← hγ']
-  simp
+  refine ⟨J, hJ, hperfect, u, γ, @asIso _ _ _ _ _ hβ, rfl, ?_⟩
+  apply (Iso.eq_inv_comp _).2
+  simpa only [Equiv.apply_symm_apply] using hγ
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
