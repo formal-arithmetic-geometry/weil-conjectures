@@ -67,6 +67,7 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   (Fb : P.pushforward.FixedLocus)
 
 set_option maxHeartbeats 3000000 in
+set_option profiler true in
 -- composite functors on bounded constructible complexes are unfolded
 /-- The point `T_b = 𝔱 ∘ ũ` of the pushed correspondence is obtained from that of `c` by
 transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
@@ -109,6 +110,7 @@ lemma mate_comp_traceMap_pushforward :
   simpa only [Category.assoc] using e5
 
 set_option maxHeartbeats 3000000 in
+set_option profiler true in
 -- composite functors on bounded constructible complexes are unfolded
 /-- **Proper pushforward compatibility of the trace class** (blueprint
 `thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
