@@ -273,6 +273,7 @@ private theorem local_limit
     (hz k)
   simpa only [Mod.comp_hom', ← Category.assoc, Sheaf.unitHomEval_comp, ha] using hh
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the pullback comparison and sheaf gluing exceeds the default heartbeat limit.
 /-- Convergence of individual sections of a finitely presented integral module.
