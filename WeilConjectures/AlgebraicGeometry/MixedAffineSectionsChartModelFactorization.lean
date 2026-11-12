@@ -28,7 +28,11 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-attribute [local instance 1000] Functor.preservesZeroMorphisms_of_additive
+attribute [-instance] Functor.preservesZeroMorphisms_of_additive
+
+local instance chartPreservesZeroMorphisms {C D : Type*} [Category C] [Category D]
+    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive] : F.PreservesZeroMorphisms where
+  map_zero X Y := (F.mapAddHom : (X ⟶ Y) →+ (F.obj X ⟶ F.obj Y)).map_zero
 
 -- The chart carrier and the two localization universes require additional elaboration.
 /-- Localization transports the ordinary unit equation to the fixed mixed
