@@ -93,11 +93,14 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
 -- Expose the unchanged carrier of scalar restriction before elaborating section applications.
-private local instance (priority := 2000) rationalCoherenceRestrictionCoeFun
+private local instance rationalCoherenceRestrictionFunLike
     {R S : Type*} [Ring R] [Ring S]
     (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S) :
-    CoeFun (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) (fun _ ↦ M → N) where
+    FunLike (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) M N where
   coe f := f.hom
+  coe_injective' _ _ h := ModuleCat.hom_ext (DFunLike.coe_injective h)
+
+attribute [local instance 2000] DFunLike.toCoeFun
 
 set_option trace.profiler true in
 /-- The composition equation with all specified ordinary, completed and raw maps.
