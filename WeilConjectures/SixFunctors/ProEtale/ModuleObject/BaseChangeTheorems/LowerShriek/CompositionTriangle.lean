@@ -548,7 +548,7 @@ section AnyTriangle
 
 variable (f g)
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the comparison through a common refinement unfolds the composition isomorphisms
 /-- **The composition isomorphism of the lower shriek is computed by any triangle of
 compactifications** `T` of `f` and `g`: it is the comparison with the compactification
