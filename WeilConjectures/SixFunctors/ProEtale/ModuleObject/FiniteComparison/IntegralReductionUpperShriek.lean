@@ -132,7 +132,6 @@ lemma boundedConstructibleUnitCompatible (hη : IntegersModPowPullUnitCompatible
   have h := hη M.obj
   exact h
 
--- the hypothesis `hδ` is stated with the unbounded commutation
 /-- **The connecting morphisms commute with the pullback on bounded constructible complexes**,
 given that they do on the full derived categories. -/
 lemma boundedConstructibleδCompatible (hδ : IntegersModPowPullδCompatible ℓ E n p.left)

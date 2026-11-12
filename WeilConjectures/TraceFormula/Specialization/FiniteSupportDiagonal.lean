@@ -85,7 +85,6 @@ lemma isClosedImmersion_left_of_comp_eq_id {W Y : Over (Spec (.of k))} [IsSepara
   exact IsClosedImmersion.of_comp σ.left p.left
 
 -- The last step identifies `Rp_* Rσ_*` with `R(σ ≫ p)_*`, which unfolds the pro-étale pullback.
--- see the comment above
 /-- **Sections with open image split off**: let `σ` be a section of `p : W ⟶ Y` whose image is
 open. If `Rp_* G = 0`, then `Lσ^* G = 0`. Indeed the connecting morphism of the open–closed
 triangle `j_! Lj^* G ⟶ G ⟶ Rσ_* Lσ^* G ⟶` of `σ` vanishes, since `j_! Lj^* G` vanishes on the

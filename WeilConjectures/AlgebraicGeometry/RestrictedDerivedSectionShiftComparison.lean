@@ -24,7 +24,6 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
--- Elaborating the explicit derived functors needs this budget.
 /-- On a shifted single sheaf, the constructed natural pullback is the explicitly
 constructed restricted cohomology map.
 Source: Stacks Project, Tags 07A6 and 0D6F; Tag 03Q8 for restriction of cohomology.
