@@ -238,19 +238,25 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
+  run_tac Lean.logInfo "PH135 proof begins"
   let F := L((𝟙 X)^*⟦Λ⟧)
   let F' := L((𝟙 X')^*⟦Λ⟧)
+  run_tac Lean.logInfo "PH135 pullbacks elaborated"
   have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
     (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
     (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
+  run_tac Lean.logInfo "PH135 composition fact elaborated"
   have hfix (σ : Ω ≃ₐ[L] Ω) (hσ : σ ∈ L'.fixingSubgroup) :=
     N.galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup h Ω L' Λ σ hσ
       (F.obj C)
+  run_tac Lean.logInfo "PH135 fixer fact elaborated"
   have hsplit := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
+  run_tac Lean.logInfo "PH135 split fact elaborated"
   have hcomm (σ : Ω ≃ₐ[L] Ω) :=
     N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       (F.obj C)
-  have k0 := stabilization_of_equivariant_iso_aux
+  run_tac Lean.logInfo "PH135 equivariance fact elaborated"
+  have p0 := stabilization_of_equivariant_iso_aux
     (L₀ := F) (Lfg := F') (Lg := F') (Lf := F')
     (ΨM := N.nearbyCycles Λ) (Ψ₁ := (N.galoisLayer h L').nearbyCycles Λ)
     (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
@@ -259,7 +265,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ((N.galoisLayerHom h L').pullbackExchange Λ)
     ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
-    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab
+    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C
+  run_tac Lean.logInfo "PH135 categorical data elaborated"
+  have p1 := p0 hx
+  run_tac Lean.logInfo "PH135 composition supplied"
+  have k0 := p1 hstab
   run_tac Lean.logInfo "PH135 prefix elaborated"
   have k1 := k0
     (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift Finset.univ (Fintype.card (L' ≃ₐ[L] L'))
