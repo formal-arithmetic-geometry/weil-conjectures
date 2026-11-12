@@ -110,6 +110,38 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
+private theorem normalized_binary_forget_chain
+    [(nativeTensorBifunctor k₀ l X).Additive]
+    [∀ P, ((nativeTensorBifunctor k₀ l X).obj P).Additive] :
+    let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
+    let V := U.mapHomologicalComplex (.up ℤ)
+    ∃ chain : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,
+        V.obj (((nativeTensorTotal k₀ l X).obj P).obj T) ≅
+          ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+            (V.obj T) (V.obj P),
+      ∀ (P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+        (p q n : ℤ) (hpq : p + q = n),
+        U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
+            (chain P T).hom.f n =
+          (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
+            (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+            (.up ℤ) q p n (by omega) := by
+  let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
+  let V := U.mapHomologicalComplex (.up ℤ)
+  obtain ⟨chain, hchain⟩ := native_weil_tensor_chain k₀ l X
+    (nativeTensorBifunctor k₀ l X) (tensorBifunctorForget k₀ l X)
+  refine ⟨fun P T ↦ V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
+    (nativeTensorBifunctor k₀ l X) (.up ℤ)) ≪≫ chain T P, ?_⟩
+  intro P T p q n hpq
+  have hqp : q + p = n := by omega
+  change U.map (HomologicalComplex.ιMapBifunctor P T
+      (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
+      (V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
+        (nativeTensorBifunctor k₀ l X) (.up ℤ)) ≪≫ chain T P).hom.f n = _
+  rw [map_flip_total_insertion _ U P T (chain T P) p q n hpq hqp,
+    hchain T P q p n hqp]
+  rfl
+
 set_option profiler true in
 -- The fixed representative squares involve several nested localization functors.
 /-- The fixed native tensor model forgets to the canonical ordinary localization tensorator.
@@ -227,8 +259,7 @@ theorem native_forget_normalized_binary_models
         (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (.up ℤ) := by
     intro n
     infer_instance
-  obtain ⟨chain, hchain⟩ := native_weil_tensor_chain k₀ l X
-    (nativeTensorBifunctor k₀ l X) (tensorBifunctorForget k₀ l X)
+  obtain ⟨chain, hchain⟩ := normalized_binary_forget_chain k₀ l X
   rcases d with ⟨⟨m, adjO, evO⟩, βO, hm, hmodels⟩
   dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hm
   subst m
@@ -238,37 +269,27 @@ theorem native_forget_normalized_binary_models
   obtain ⟨model, swap, hnorm, hswap, hbraid, κ, hκ, hmodel⟩ := hmodels
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)
-  let flip : V.obj (((nativeTensorTotal k₀ l X).obj P).obj T) ≅
-      V.obj (CochainComplex.mapBifunctor T P (nativeTensorBifunctor k₀ l X)) :=
-    V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
-      (nativeTensorBifunctor k₀ l X) (.up ℤ))
   let c : V.obj (((nativeTensorTotal k₀ l X).obj P).obj T) ≅ V.obj P ⊗ V.obj T :=
-    (flip ≪≫ chain T P) ≪≫ κ (V.obj T) (V.obj P)
+    (chain P T) ≪≫ κ (V.obj T) (V.obj P)
   refine ⟨c, ?_, ?_⟩
   · intro p q n hpq
     have hqp : q + p = n := by omega
     have hv : U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-          (flip ≪≫ chain T P).hom.f n =
+          (chain P T).hom.f n =
         (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
           (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
           (.up ℤ) q p n hqp := by
-      change U.map (HomologicalComplex.ιMapBifunctor P T
-          (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
-          (V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
-            (nativeTensorBifunctor k₀ l X) (.up ℤ)) ≪≫ chain T P).hom.f n = _
-      rw [map_flip_total_insertion _ U P T (chain T P) p q n hpq hqp,
-        hchain T P q p n hqp]
-      rfl
+      exact hchain P T p q n hpq
     have hk := hκ (V.obj T) (V.obj P) q p n hqp hpq
     have hc : Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
         (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-          (flip ≪≫ chain T P).hom.f n).hom ≫
+          (chain P T).hom.f n).hom ≫
         ((κ (V.obj T) (V.obj P)).hom.f n).hom =
           Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
             (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom := by
       change Mod.tensorπ ((V.obj P).X p) ((V.obj T).X q) ≫
           (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-            (flip ≪≫ chain T P).hom.f n).hom ≫
+            (chain P T).hom.f n).hom ≫
           ((κ (V.obj T) (V.obj P)).hom.f n).hom =
         Mod.tensorObjπ ((V.obj P).X p) ((V.obj T).X q) ≫
           (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom
@@ -330,7 +351,7 @@ theorem native_forget_normalized_binary_models
     have hUP := native_two_sided_kflat_forget k₀ l X P hP
     have hUT := native_two_sided_kflat_forget k₀ l X T hT
     obtain ⟨ψ', hψ', hloc'⟩ := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
-    let v := flip ≪≫ chain T P
+    let v := chain P T
     have hchain' : V.map j = v.hom ≫ ψ' := by
       apply HomologicalComplex.hom_ext
       intro n
@@ -346,13 +367,7 @@ theorem native_forget_normalized_binary_models
           (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
             (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
             (.up ℤ) q p n hqp := by
-        change U.map (HomologicalComplex.ιMapBifunctor P T
-            (nativeTensorBifunctor k₀ l X).flip (.up ℤ) p q n hpq) ≫
-            (V.mapIso (HomologicalComplex.mapBifunctorFlipIso T P
-              (nativeTensorBifunctor k₀ l X) (.up ℤ)) ≪≫ chain T P).hom.f n = _
-        rw [map_flip_total_insertion _ U P T (chain T P) p q n hpq hqp,
-          hchain T P q p n hqp]
-        rfl
+        exact hchain P T p q n hpq
       simp only [HomologicalComplex.comp_f]
       rw [← Category.assoc, hi, Linear.units_smul_comp, hψ' q p n hqp]
       rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
