@@ -34,6 +34,7 @@ attribute [local implicit_reducible] spCoefficientCommRings SpTowerShriek.tau
   Functor.ofOpSequence Functor.ofSequence SemilinearSections.evaluation
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Compare the finite scalar-extension unit with the normalized root evaluation.
 private theorem normalizedRootSection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
@@ -96,6 +97,7 @@ private theorem normalizedRootSection
   exact hnorm.trans (by rw [hz])
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Compare the line sections in the two scalar restrictions and finite evaluations.
 private theorem horizontal_varying_root_square
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
