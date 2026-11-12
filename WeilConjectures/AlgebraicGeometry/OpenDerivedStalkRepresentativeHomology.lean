@@ -262,10 +262,12 @@ theorem openDerivedStalk_representative_homology
       ← F0.map_comp_assoc, Iso.hom_inv_id, F0.map_id, Category.id_comp]
     erw [Category.comp_id]
   conv_lhs => arg 2; arg 2; arg 2; erw [hy]
-  simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ F0.map (comparisonStalkHomologyIso Y y
+  have h := congrArg (fun k ↦ k ≫ F0.map (comparisonStalkHomologyIso Y y
     ((R.mapHomologicalComplex (.up ℤ)).obj N) i).inv)
     (ordinary_representative_homology R L L0 F F0 (N.sc i)
       (show (L ⋙ F) ⟶ (R ⋙ L0 ⋙ F0) from
         (Scheme.Modules.restrictStalkNatIso j y).inv))
+  simp only [Category.assoc] at h
+  exact h
 
 end AlgebraicGeometry.SingleComplexBaseChange

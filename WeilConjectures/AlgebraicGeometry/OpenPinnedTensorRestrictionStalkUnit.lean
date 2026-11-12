@@ -93,7 +93,6 @@ private theorem restriction_pushforward_transport
   apply congrArg Q.presheaf.map
   exact Subsingleton.elim _ _
 
-set_option profiler true in
 -- Section transport uses the restriction API rather than unfolding its sheaf data.
 -- Work with abstract left adjoints when taking section components of the mate identity.
 private theorem unit_sections_of_conjugate
