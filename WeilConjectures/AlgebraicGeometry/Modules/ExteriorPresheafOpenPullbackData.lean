@@ -343,10 +343,6 @@ private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
       (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a) =
       exteriorPower.ιMulti (U.toScheme.presheaf.obj V) n
         (M := (M.restrict U.ι).val.obj V) a := by
-  dsimp only [openExteriorComponent]
-  rw [show (M.restrict U.ι).val.obj V =
-    (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
-      (M.val.obj (U.ι.opensFunctor.op.obj V)) from rfl]
   exact ringTransportInverse_wedge _ _ _ _ n a
 
 set_option profiler true in
