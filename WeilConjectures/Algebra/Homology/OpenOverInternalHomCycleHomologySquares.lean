@@ -58,7 +58,6 @@ Proof: Restriction is exact by the localization finite-limit and finite-colimit
  squares to obtain the four equations. This uses neither the Hom complex nor its
  products or differential. No finiteness or nonempty-open assumption is needed;
  zero and identity maps satisfy the same naturality equations. -/
-set_option profiler true in
 /-- (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares) -/
 theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
@@ -186,7 +185,7 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   · dsimp only [t, H, Iso.trans_hom, Iso.refl_hom]
     refine (openOver_comp_naturality
       (he _ _ _ _ (T.iCycles (-n)) (𝟙 (J.X 0))) _).trans ?_
-    simp only [Category.assoc, hc,
+    simp only [hc,
       Functor.map_id, Category.id_comp]
     congr 2
     exact zi T (-n)
