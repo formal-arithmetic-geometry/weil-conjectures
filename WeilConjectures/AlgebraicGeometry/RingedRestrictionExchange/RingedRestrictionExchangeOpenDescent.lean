@@ -777,8 +777,6 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward false in
-set_option profiler true in
-set_option maxHeartbeats 1300000 in
 private theorem identity_square_conjugate_sections {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology P) CommRingCat.{u + 1})
@@ -956,7 +954,6 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     ((proEtaleRingModuleDirectImage p R S c).obj N)
   let f := da.hom.app N ≫ t.hom.app N
   let g := u ≫ v ≫ db.hom.app N
-  set_option backward.isDefEq.respectTransparency false in
   have hfg : f = g := by
     simpa only [f, g] using
       (identity_square_conjugate_sections p R S c a b e ha hb N)
