@@ -134,7 +134,6 @@ private theorem summand_chase {C : Type*} [Category C]
   simp only [Category.assoc]
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ l ≫ j) hm
 
-set_option profiler true in
 -- The component transports elaborate several nested tensor functors.
 /-- Pullback route on one tensor summand, in explicit stalk coordinates.
 
