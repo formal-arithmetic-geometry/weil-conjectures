@@ -68,7 +68,6 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap b X))]
   {T X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option profiler true in
 /-- The restricted base change map with coefficients `Λ₃` is invertible at `Lε^* K` as soon as
 it is invertible at `T_b (T_a (Lε^* K₀))` for some `K₀` with `T_b (T_a K₀) ≅ K`. -/
 lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
