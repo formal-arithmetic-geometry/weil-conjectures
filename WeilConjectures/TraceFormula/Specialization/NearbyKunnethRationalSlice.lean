@@ -96,6 +96,8 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
       (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A₀.obj B₀.obj)) := by
     exact (h E).isIso φ₁ φ₂ hM hN hpb hP hgen hX hY hZ hb hle h₁ h₂ heM heN A₀.2 B₀.2
   -- bounds below of `A₀`, `B₀` and of their external product
+  have ha : A₀.obj.IsGE A₀.2.1.1.choose := A₀.2.1.1.choose_spec
+  have ha' : B₀.obj.IsGE B₀.2.1.1.choose := B₀.2.1.1.choose_spec
   have : A₀.obj.IsGE (min A₀.2.1.1.choose B₀.2.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge A₀.obj _ _ (min_le_left _ _)
   have : B₀.obj.IsGE (min A₀.2.1.1.choose B₀.2.1.1.choose) :=
