@@ -29,8 +29,6 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Comparing the explicit stalk and module composites unfolds several derived functors.
 private theorem affineBaseChangeTildeModuleMap_localized_aux2
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
@@ -107,6 +105,7 @@ private theorem affineBaseChangeTildeModuleMap_localized_aux2
         (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _) a₀.hom b.hom.hom)
   rw [hloc]
   have hcoord := affineTensorPullbackHomologyStalkIso_coordinates A A' φg' K hL M e hc i p
+    (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x)
   rw [hcoord]
   rw [hlU]
   have hid : ∀ X, ((Spec (.of A')).toRingedSpace.moduleStalkFunctor p).map
