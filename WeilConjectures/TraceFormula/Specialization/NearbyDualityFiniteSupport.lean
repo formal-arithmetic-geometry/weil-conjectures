@@ -239,7 +239,6 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     let l : pullback (specialCoordinate hRM (coord a) hcoord_a)
         (traitSlicePoint (traitSliceCoord k')) ⟶ sliceSpecial (traitSliceCoord k') (coord a) :=
       hpb.lift (pullback.fst _ _) (pullback.snd _ _) (by
-        rw [Category.assoc]
         exact pullback.condition)
     have hl : l ≫ sliceSpecialMap (traitSliceCoord k') hRM hcoord_a = pullback.fst _ _ := by
       dsimp [l]
