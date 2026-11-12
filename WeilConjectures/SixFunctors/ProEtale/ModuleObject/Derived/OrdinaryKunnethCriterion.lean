@@ -233,6 +233,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self
     ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality ((leftDerivedUpperStarId Λ S).hom.app K))
     ((leftDerivedUpperStarComp Λ p₂ aY).inv_hom_id_app K)
 
+set_option profiler true in
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
 `p₂ ≫ a_Y = q ≫ 𝟙` and `p₁ ≫ a_X = p₂ ≫ a_Y`, the Künneth map
