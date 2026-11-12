@@ -75,7 +75,6 @@ lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
 attribute [local instance 2000] sliceSquare_hasTensorFour sliceSquare_hasGoodTensorLeft
   sliceSquare_hasGoodTensorRight
 
-set_option trace.profiler true in
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
@@ -139,7 +138,7 @@ lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver
                 (Category.comp_id _)).pullbackExchange Λ).app B))) ≫
         kunnethMap Λ (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
           (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B) := by
-  exact map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ (sliceFst hM hP hb)
+  have h := map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ (sliceFst hM hP hb)
       (sliceSnd hN hpb hP hgen hb)
       (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
         (traitSlice_over (traitSliceCoord k')))
@@ -155,5 +154,6 @@ lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver
       (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
       ((Category.comp_id f₂).trans (Category.id_comp f₂).symm)
       (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A B
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
