@@ -311,6 +311,7 @@ theorem zeroLocusMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Alge
     homMulEquiv_zeroLocusMulEquiv_comp]
 
 set_option synthInstance.maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- the group structure on points of the quotient scheme makes instance search slow
 /-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
@@ -485,6 +486,7 @@ instance : (derivedIdeal I).IsHopfIdeal k :=
 set_option synthInstance.maxHeartbeats 400000 in
 -- the group structure on points of the quotient scheme makes instance search slow
 set_option maxHeartbeats 900000 in
+set_option trace.profiler true in
 -- the factorisation through `Spec Γ(X)` and the commutator computation are slow to elaborate
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 
