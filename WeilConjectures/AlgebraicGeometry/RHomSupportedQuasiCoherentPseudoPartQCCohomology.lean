@@ -157,6 +157,13 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
       ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
         X.toRingedSpace.sheaf).obj (op K, L))).IsQuasicoherent := by
   classical
+  let J := Opens.grothendieckTopology X.toRingedSpace
+  have : HasSheafify J AddCommGrpCat.{u} := inferInstance
+  have : J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, HasSheafify (J.over V) AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  have : ∀ V W, HasSheafify ((J.over V).over W) AddCommGrpCat.{u} := inferInstance
+  have : ∀ V W, ((J.over V).over W).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   choose U hx P hb hf he using hK
   let H := (DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
@@ -164,19 +171,7 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
         X.toRingedSpace.sheaf).obj (op K, L))
   have hlocal (x : X) : (H.over (U x)).IsQuasicoherent := by
     let V := U x
-    let J := (Opens.grothendieckTopology X.toRingedSpace).over V
-    have : HasSheafify J AddCommGrpCat.{u} := inferInstance
-    have : J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
-    have : ∀ W, HasSheafify (J.over W) AddCommGrpCat.{u} := inferInstance
-    have : ∀ W, (J.over W).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
     let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)
-    let hAll : ∀ U : X.Opens,
-        HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
-    let hD : HasDerivedCategory.{w} D := hAll V
-    letI : HasDerivedCategory.{w} D := hD
-    letI : HasDerivedCategory.{w} (SheafOfModules.{u}
-        ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over V)
-          (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over V))) := hD
     let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
         ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over V)
           (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over V))) _ _
@@ -259,16 +254,11 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
       (F.mapDerivedCategory.obj K) (F.mapDerivedCategory.obj L)
       (P x) I inferInstance eP.symm eI
     obtain ⟨eR⟩ := derivedInternalHom_restrict_open X.toRingedSpace V K L
-    let eRI := eR.symm ≪≫ eHom
-    let eHomology := (DerivedCategory.homologyFunctor D n).mapIso eRI
-    let eFactors := (DerivedCategory.homologyFunctorFactors D n).app
-      (homComplex (R := X.toRingedSpace.sheaf.over V) (P x) I)
-    let eFirst := (F.mapDerivedCategoryHomologyFunctorIso n).app _
-    let eSecond := eFirst ≪≫ eHomology
-    let eTotal := eSecond ≪≫ eFactors
-    let qcoh := SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over V)
-    apply qcoh.prop_of_iso eTotal.symm
-    exact hPI
+    exact (SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over V)).prop_of_iso
+      (((F.mapDerivedCategoryHomologyFunctorIso n).app _) ≪≫
+        (DerivedCategory.homologyFunctor D n).mapIso (eR.symm ≪≫ eHom) ≪≫
+        ((DerivedCategory.homologyFunctorFactors D n).app
+          (homComplex (R := X.toRingedSpace.sheaf.over V) (P x) I))).symm hPI
   have : ∀ x : X, (H.over (U x)).IsQuasicoherent := hlocal
   apply SheafOfModules.IsQuasicoherent.of_coversTop H U
   apply (Opens.coversTop_iff _ U).mpr
