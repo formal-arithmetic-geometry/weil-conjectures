@@ -55,6 +55,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the product are large terms
 /-- **Gabber's Künneth formula for proper models with `𝒪_E`-coefficients** (blueprint
