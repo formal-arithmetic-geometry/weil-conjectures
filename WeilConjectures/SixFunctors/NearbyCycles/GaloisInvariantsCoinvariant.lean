@@ -195,7 +195,7 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso (a : ℤ
         (Adjunction.derivedUnitRetraction K a hK (T.complexTrace Λ hd K hc) ≫
           (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app
             (DerivedCategory.Q.obj K)) ≫ R((ginf)_*⟦Λ⟧).map (L((ginf)^*⟦Λ⟧).map e.hom) := by
-    simp only [Category.assoc, hn]
+    rw [← reassoc_of% hn]
   let E := (R((ginf)_*⟦Λ⟧).mapIso (L((ginf)^*⟦Λ⟧).mapIso e))
   rw [h]
   exact map_iso_inv_comp_map_eq_of_map_comp_eq G E φ key
@@ -320,7 +320,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
       (Profinite.continuousMapRingObj T₀)
       (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.naturality e.inv
     simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
-    simp only [Category.assoc, hn]
+    rw [← hn]
     erw [reassoc_of% hadj]
     exact e.inv_hom_id
   have hmain := fun (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
