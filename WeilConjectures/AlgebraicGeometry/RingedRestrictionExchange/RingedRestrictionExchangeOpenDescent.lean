@@ -838,7 +838,6 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let v := (identityDirect T R).inv.app
     ((proEtaleRingModuleDirectImage p R S c).obj N)
   have h : da.hom.app N ≫ t.hom.app N = u ≫ v ≫ db.hom.app N := by
-    apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
     refine ModuleCat.hom_ext (LinearMap.ext fun m ↦ ?_)
