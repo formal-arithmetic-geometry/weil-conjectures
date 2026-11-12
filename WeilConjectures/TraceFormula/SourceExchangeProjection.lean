@@ -150,7 +150,6 @@ lemma leftProjection_lowerShriek_unit (g : C ⟶ Y) [IsProper g.left]
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
     (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The left projection morphism of a composite `g ≫ b` with `g` proper at the unit point. -/
 lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : Y ⟶ Z)
