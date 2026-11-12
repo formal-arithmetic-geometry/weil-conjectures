@@ -38,10 +38,11 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+/-- Cancel after applying functors, then transport the equality along an isomorphism. -/
 private lemma map_eq_of_epi_of_intertwining
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (Q : C ⥤ D) (F : D ⥤ E) {A B : C} {Z : D}
-    (i : A ⟶ B) (_hi : Epi ((Q ⋙ F).map i)) (e : Q.obj B ≅ Z)
+    (i : A ⟶ B) [hi : Epi ((Q ⋙ F).map i)] (e : Q.obj B ≅ Z)
     {u v : B ⟶ B} {x y : Z ⟶ Z} (huv : i ≫ u = i ≫ v)
     (hx : e.hom ≫ x = Q.map u ≫ e.hom) (hy : e.hom ≫ y = Q.map v ≫ e.hom) :
     F.map x = F.map y := by
@@ -93,9 +94,6 @@ lemma restrictNormal_eq_one_of_forall_apply_eq (L' : FiniteGaloisIntermediateFie
   AlgEquiv.ext fun x ↦
     (algebraMap L' Ω).injective ((AlgEquiv.restrictNormal_commutes σ L' x).trans (hσ x))
 
-set_option profiler true in
--- matching the derived functors of the Galois layer with those of the field tower (as in
--- `exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`)
 /-- **Continuity of the Galois action on a noetherian cohomology sheaf of nearby cycles**
 (torsion coefficients). If `Lε^* C` is bounded below of étale origin and `Hᵠ(Ψ_{N_Ω} C)` is a
 noetherian object, there is a finite Galois subextension `L'` of `Ω/L` such that every
@@ -143,8 +141,8 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       (Profinite.continuousMapRingObj T₀) K a hK _ e
       (pullbackAction h _ specGaloisAction_comp τ)
       (pullbackAction_fst h _ specGaloisAction_comp τ)
-  have hA := map_eq_of_epi_of_intertwining DerivedCategory.Q Ψ
-    (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j) hj eK
+  have hA := map_eq_of_epi_of_intertwining (hi := hj) DerivedCategory.Q Ψ
+    (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j) eK
     ((hU σ hσ).trans (hU 1 fun _ ↦ rfl).symm) (he σ) (he 1)
   have hact (τ : Ω ≃ₐ[L] Ω) := congrArg H.map
     (galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω τ C)
@@ -152,7 +150,6 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
   exact (hact σ).trans ((congrArg (fun f ↦ H.map κ.inv ≫ f ≫ H.map κ.hom) hA).trans
     ((hact 1).symm.trans ((congrArg H.map
       (N.galoisLayerAction_one (Profinite.continuousMapRingObj T₀) h Ω _)).trans (H.map_id _))))
-
 
 /-- **Continuity of the Galois action on noetherian cohomology sheaves of nearby cycles**, for
 finitely many degrees at once: if the `Hᵠ(Ψ_{N_Ω} C)` are noetherian for `q ∈ s`, there is a single
