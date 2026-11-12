@@ -52,19 +52,19 @@ elab "ph112_remaining" label:str : tactic => do
 -- Derived pullbacks repeatedly need these graded tensor colimit facts. Prove them once
 -- for a general coefficient ring, before specializing to the concrete Galois models.
 /-- Fourfold graded tensor compatibility for modules over a condensed coefficient ring. -/
-lemma gradedTensorFour_condensedModules (T : Scheme.{u})
+abbrev gradedTensorFour_condensedModules (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (W X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))) : GradedObject.HasTensor₄ObjExt W X Y Z := inferInstance
 
 /-- Left-associated graded tensor products preserve the defining coproducts. -/
-lemma gradedTensorLeft_condensedModules (T : Scheme.{u})
+abbrev gradedTensorLeft_condensedModules (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))) : GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
 
 /-- Right-associated graded tensor products preserve the defining coproducts. -/
-lemma gradedTensorRight_condensedModules (T : Scheme.{u})
+abbrev gradedTensorRight_condensedModules (T : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))) : GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
