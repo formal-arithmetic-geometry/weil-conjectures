@@ -158,7 +158,6 @@ private theorem affine_iso_of_chart_coordinates {Y : Scheme.{u}} (U : Y.affineOp
   rw [← hd x, ht]
   exact congrArg c (d.symm_apply_apply x)
 
-set_option profiler true in
 /-- The affine quotient tensor resolutions compute the ambient homology sheaf,
 before any pullback to the closed subscheme.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG, and Tag 00LS.

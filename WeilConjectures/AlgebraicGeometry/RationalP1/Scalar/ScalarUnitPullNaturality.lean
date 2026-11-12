@@ -262,6 +262,7 @@ private theorem scalar_unit_pull_native_hom
   have hP := (singleUnit_existsUnique Λ (ProjectiveLine Y)).exists.choose_spec
   unfold singleUnitIso internalMonoidal internalTensorBundle nativeTensorBundle at hY hP ⊢
   erw [eq_of_heq hY, eq_of_heq hP]
+  simp only [Iso.symm_hom]
   erw [native_single_unit_hom, native_single_unit_inv]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   unfold internalMonoidal internalTensorBundle nativeTensorBundle
@@ -286,7 +287,6 @@ private theorem scalar_unit_pull_adjunct
   let : MonoidalClosed (Modules Λ Y) := scalar_module_closed Λ Y
   let : MonoidalClosed (Modules Λ (ProjectiveLine Y)) :=
     scalar_module_closed Λ (ProjectiveLine Y)
-  unfold internalMonoidal internalTensorBundle nativeTensorBundle
   erw [eq_of_heq (scalar_unit_pull_native_hom Λ Y)]
   let ad := CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)
   let ad' := (Adjunction.mapDerivedCategoryRightDerivedAdjunction
