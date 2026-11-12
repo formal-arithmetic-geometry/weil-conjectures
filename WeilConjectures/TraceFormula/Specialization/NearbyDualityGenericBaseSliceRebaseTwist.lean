@@ -56,6 +56,16 @@ namespace NearbyCyclesModel
 
 section Abstract
 
+private lemma comp_eq_of_component_hom_eq {C : Type*} [Category C] {P : ObjectProperty C}
+    {X Y Y' Z : P.FullSubcategory} {f : X ⟶ Y} {g : Y ⟶ Z}
+    {f' : X ⟶ Y'} {g' : Y' ⟶ Z}
+    {a : X.obj ⟶ Y.obj} {b : Y.obj ⟶ Z.obj}
+    {a' : X.obj ⟶ Y'.obj} {b' : Y'.obj ⟶ Z.obj}
+    (hf : f.hom = a) (hg : g.hom = b) (hf' : f'.hom = a') (hg' : g'.hom = b')
+    (h : a ≫ b = a' ≫ b') : f ≫ g = f' ≫ g' := by
+  apply ObjectProperty.hom_ext
+  exact (congrArg₂ (· ≫ ·) hf hg).trans (h.trans (congrArg₂ (· ≫ ·) hf' hg').symm)
+
 /-- `NearbyCyclesModel.exists_twist_of_rebase` with the twist equation for a transformation `α''`
 equal to `α'`. -/
 lemma exists_twist_of_rebase_of_eq {DX DXη DS Ds D₂ : Type*} [Category DX] [Category DXη]
@@ -127,9 +137,7 @@ private lemma boundedConstructibleUpperStarOfMapCompIso_hom_hom (hc : c' ≫ π 
       (leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hc).hom.app A.obj :=
   rfl
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- the motive checks of the rewrites in the proof take a few seconds each on the large goal
 /-- **The exchange factorization of a composite** on bounded constructible complexes: for
 morphisms of models `φ = φ' ≫ ψ` as in
 `NearbyCyclesModel.pullbackExchange_app_comp_map_compOfEq_of_rebase`, and exchanges `α`, `α'`,
@@ -172,14 +180,16 @@ lemma liftExchange_comp_map_compIso_of_rebase (φ : N₂.Hom M₁ c p) (φ' : N�
       (boundedConstructibleUpperStarOfMap ℓ (X := Z₀) (Y := W₀) p).map (ρ.app A) ≫
         α'.app ((boundedConstructibleUpperStarOfMap ℓ (X := Z₁) (Y := Zη) π).obj A) := by
   subst hα hα'
-  apply ObjectProperty.hom_ext
-  -- `rw` rather than `simp only`: the definitional unfoldings done by `simp` with these `rfl`
-  -- lemmas are left to the kernel, which then unfolds the derived categories.
-  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    liftExchange_app_hom, liftExchange_app_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, hρ, boundedConstructibleNearbyCycles_map_hom',
-    boundedConstructibleUpperStarOfMapCompIso_hom_hom]
-  transport_exact pullbackExchange_app_comp_map_compOfEq_of_rebase _ φ φ' ψ hc htot hgen A.obj
+  refine comp_eq_of_component_hom_eq (liftExchange_app_hom _ _ _ _ _ _) ?_ ?_
+    (liftExchange_app_hom _ _ _ _ _ _) ?_
+  · exact (boundedConstructibleNearbyCycles_map_hom' hN₂ _).trans
+      (congrArg (N₂.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+        (boundedConstructibleUpperStarOfMapCompIso_hom_hom (Zη := Zη) (Z₂ := Z₂) hc A))
+  · exact (congrArg (·.hom)
+      (boundedConstructibleUpperStarOfMap_map ℓ (X := Z₀) (Y := W₀) p (ρ.app A))).trans
+      (congrArg L((p)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (hρ A))
+  · transport_exact
+      pullbackExchange_app_comp_map_compOfEq_of_rebase _ φ φ' ψ hc htot hgen A.obj
 
 end BoundedConstructible
 
