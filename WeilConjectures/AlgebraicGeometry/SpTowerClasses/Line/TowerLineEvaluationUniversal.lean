@@ -152,7 +152,7 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
     erw [Equiv.trans_apply, Equiv.trans_apply, constantResidueHomEquiv_apply,
       Iso.homCongr_apply]
     simp only [Iso.symm_inv, Iso.refl_hom, Category.comp_id]
-    dsimp only [Rrings, Functor.ofOpSequence]
+    dsimp only [Rrings, Functor.ofOpSequence_obj]
   refine ⟨Φ, ?_, ?_⟩
   · intro N N' f g
     erw [hΦ, hΦ, hΨ]
