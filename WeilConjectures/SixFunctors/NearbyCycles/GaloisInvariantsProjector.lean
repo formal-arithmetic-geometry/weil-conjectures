@@ -317,22 +317,20 @@ theorem galoisProjectorTensorLeftColimit (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
-    PreservesColimit F ((curriedTensor _).obj M) := inferInstance
+    PreservesColimit F ((MonoidalCategory.curriedTensor _).obj M) := inferInstance
 
 /-- Tensoring on the right preserves small colimits of module objects. -/
 theorem galoisProjectorTensorRightColimit (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
-    PreservesColimit F ((curriedTensor _).flip.obj M) := inferInstance
-
-attribute [local instance 2000] galoisProjectorHasColimit galoisProjectorTensorLeftColimit
-  galoisProjectorTensorRightColimit
+    PreservesColimit F ((MonoidalCategory.curriedTensor _).flip.obj M) := inferInstance
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
 
+set_option profiler true in
 -- matching the objects of the Galois layer with the unfolded composite of derived functors
 -- (`κ`, `α`) is a large defeq check
 /-- `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant`, with the
@@ -364,6 +362,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  haveI := galoisProjectorHasColimit
+  haveI := galoisProjectorTensorLeftColimit
+  haveI := galoisProjectorTensorRightColimit
   have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
@@ -372,9 +373,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
     L((N.i)^*⟦Λ⟧) (α := ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C)
       (i := (leftDerivedUpperStarId Λ X').app _) (c := _)
       (κ := (N.galoisLayerExchangeIso h Ω Λ C))
-    rfl _ R (by
-      simpa only [galoisLayer, galoisLayerExchangeIso, Functor.comp_map, Functor.mapIso_hom,
-        Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Functor.map_comp] using hα) hR
+    rfl _ R hα hR
     (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
@@ -461,6 +460,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
+  haveI := galoisProjectorHasColimit
+  haveI := galoisProjectorTensorLeftColimit
+  haveI := galoisProjectorTensorRightColimit
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ _ hC
   choose F₀ hF₀ using hterms
   have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
