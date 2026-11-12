@@ -83,10 +83,8 @@ private theorem compatible_composites
   simpa only [Category.assoc] using
     congrArg (fun t => t ≫ SV.map b ≫ eV.hom.app E) ht
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
--- Additivity of the three-fold composite restriction functors exceeds the default size.
 /-- Derived complexes and compatible morphisms glue across a two-open cover of a scheme.
 D(O_X), D(O_U), D(O_V), D(O_(U ∩ V)) are `schemeDerivedCategory` of `X`, `U.toScheme`,
 `V.toScheme`, `(U ⊓ V).toScheme`. Restriction from X to an open W is restriction to the
