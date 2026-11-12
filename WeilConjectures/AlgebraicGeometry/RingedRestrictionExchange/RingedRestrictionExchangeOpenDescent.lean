@@ -838,7 +838,12 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
       (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N) ≫
         (identityDirect T R).inv.app
           ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N := by
-    ext V m
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro V
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro m
     simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
     change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
@@ -898,8 +903,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
-    Category.assoc]
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app]
   rw [← Category.assoc, h]
   simp
 
