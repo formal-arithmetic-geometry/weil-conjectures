@@ -29,6 +29,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option profiler true in
 -- Comparing the explicit stalk and module composites unfolds several derived functors.
 /-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, last displayed localization identity;
@@ -100,7 +101,8 @@ theorem affineBaseChangeTildeModuleMap_localized
         ∀ x, affineDerivedCohomologyStalkIso A' i p L
           (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)  := by
   have _ := hK
-  rintro p
+  dsimp only
+  intro p
   obtain ⟨lU, hlU⟩ := exists_affineBaseChangeOrdinaryStalkComparison
     R A R' A' φg' φf' hφg' hφf' sq M hM i m p
   refine ⟨lU, ?_⟩
