@@ -120,7 +120,7 @@ private def square_unit_mid_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
 
 set_option profiler true in
 set_option maxHeartbeats 600000 in
-private theorem square_unit_pre_to_mid {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
+private theorem square_unit_mid_to_pre {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
         Scheme.Modules.restrictFunctor (pullback.fst k U.ι) ≅
@@ -134,7 +134,9 @@ private theorem square_unit_pre_to_mid {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
             (pullback.fst k U.ι ≫ k) pullback.condition.symm).hom.app M ≫
           (Scheme.Modules.tensorPullback (pullback.snd k U.ι)).map
             ((openTensorRestrictionIso U.ι).hom.app M)) :
-    square_unit_mid_statement k U M := by
+    square_unit_mid_statement k U M →
+      square_unit_cancel_statement k U M θ := by
+  intro hmid
   let p := pullback.fst k U.ι
   let q := pullback.snd k U.ι
   let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
@@ -150,7 +152,7 @@ private theorem square_unit_pre_to_mid {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
   let θj := openTensorRestrictionIso U.ι
   let βp := Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl
   let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm
-  unfold square_unit_mid_statement
+  unfold square_unit_cancel_statement
   dsimp only
   have hcP := composition_unit p k (p ≫ k) rfl M
   have hθ' : θp.hom.app ((T k).obj M) ≫ θ.hom.app M =
@@ -162,12 +164,10 @@ private theorem square_unit_pre_to_mid {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
   simp only [← Functor.map_comp]
   have hb := βp.hom_inv_id_app_assoc M (βq.hom.app M ≫ (T q).map (θj.hom.app M))
   rw [hb]
-  simpa only [βq, aj, aq, H, T, cQ]
+  simpa only [square_unit_mid_statement, βq, aj, aq, H, T, cQ] using hmid
 
-private theorem square_unit_mid_to_cancel {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
-    (M : X.Modules) (hmid : square_unit_mid_statement k U M) :
-    square_unit_cancel_statement k U
-      M (openTensorRestrictionSquareIso k U) := by
+private theorem square_unit_mid_proof {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
+    (M : X.Modules) : square_unit_mid_statement k U M := by
   let p := pullback.fst k U.ι
   let q := pullback.snd k U.ι
   let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
@@ -179,7 +179,7 @@ private theorem square_unit_mid_to_cancel {X X' : Scheme.{u}} (k : X' ⟶ X) (U 
   let θj := openTensorRestrictionIso U.ι
   let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k)
     pullback.condition.symm
-  unfold square_unit_cancel_statement
+  unfold square_unit_mid_statement
   dsimp only
   have hn := aq.unit_naturality (θj.hom.app M)
   have hn' : (H U.ι).map (θj.hom.app M) ≫
@@ -256,8 +256,8 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
   simp only [Functor.comp_obj, Category.assoc, Functor.map_comp]
   erw [Iso.inv_hom_id_app, Category.comp_id]
   simp only [← Functor.comp_map]
-  have hmid := square_unit_pre_to_mid k U M (openTensorRestrictionSquareIso k U) hθ
-  exact square_unit_mid_to_cancel k U M hmid
+  have hmid := square_unit_mid_proof k U M
+  exact (square_unit_mid_to_pre k U M (openTensorRestrictionSquareIso k U) hθ) hmid
 
 end
 
