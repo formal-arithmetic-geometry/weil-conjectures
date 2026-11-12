@@ -73,6 +73,17 @@ theorem inverseMate_isIso_of_left_adjoints
     · infer_instance
     · exact (Functor.isoWhiskerRight (a₁.leftAdjointUniq b₁).symm H).isIso_hom
 
+private theorem inverseMate_isIso_of_left_adjoints_explicit
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ L₁' : A ⥤ B} {R₁ : B ⥤ A} {L₂ L₂' : C ⥤ D} {R₂ : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
+    (w : TwoSquare R₁ H G R₂)
+    (h : IsIso ((mateEquiv b₁ b₂).symm w)) :
+    IsIso ((mateEquiv a₁ a₂).symm w) := by
+  letI := h
+  exact inverseMate_isIso_of_left_adjoints a₁ b₁ a₂ b₂ w
+
 section Ordinary
 
 variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
@@ -157,16 +168,15 @@ end OpenRestriction
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
-  let pL := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j)
-  let bL := AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
-    (sequenceQuotient l L) j
-  let pE := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j)
-  let bE := AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
-    (sequenceQuotient l E) j
-  let w := TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv
-  letI : IsIso ((mateEquiv bL bE).symm w) := openRestrictionMate_isIso l E L ι j
-  change IsIso ((mateEquiv pL pE).symm w)
-  exact inverseMate_isIso_of_left_adjoints pL bL pE bE w
+  exact inverseMate_isIso_of_left_adjoints_explicit
+    (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
+    (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
+      (sequenceQuotient l L) j)
+    (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))
+    (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
+      (sequenceQuotient l E) j)
+    (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
+    (openRestrictionMate_isIso l E L ι j)
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
 private theorem normalizedAdjointComparison_choose_eq
