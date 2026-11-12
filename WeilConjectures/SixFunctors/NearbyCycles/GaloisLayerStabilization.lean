@@ -172,32 +172,13 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
   exact (AlgEquiv.restrictNormal_commutes σ L' x).trans
     ((IntermediateField.mem_fixingSubgroup_iff L' σ).1 hσ x x.2)
 
--- Cache the graded tensor hypotheses of `leftDerivedFunctor`: rebuilding them for every
--- pullback in the statement and proof dominates elaboration.
-@[local instance 20000] private theorem stabilizationHasTensorFour (T : Scheme.{u}) :
-    ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))), GradedObject.HasTensor₄ObjExt A B C D := by
-  infer_instance
-
-@[local instance 20000] private theorem stabilizationHasGoodTensor12 (T : Scheme.{u}) :
-    ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))), GradedObject.HasGoodTensor₁₂Tensor A B C := by
-  infer_instance
-
-@[local instance 20000] private theorem stabilizationHasGoodTensor23 (T : Scheme.{u}) :
-    ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))), GradedObject.HasGoodTensorTensor₂₃ A B C := by
-  infer_instance
-
-@[local instance 20000] private theorem stabilizationTensorLeftSequential (T : Scheme.{u}) :
-    ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
-      Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := by
-  infer_instance
-
-@[local instance 20000] private theorem stabilizationTensorRightSequential (T : Scheme.{u}) :
-    ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
-      Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := by
-  infer_instance
+-- Build the derived identity pullback once, including its graded tensor instances.
+private noncomputable def stabilizationIdentityPullback (T : Scheme.{u}) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T)) ⥤
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T)) :=
+  L((𝟙 T)^*⟦Λ⟧)
 
 set_option profiler true in
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
@@ -231,14 +212,14 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
   constructor
   · intro σ hσ
     have hc := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
-      (L((𝟙 X)^*⟦Λ⟧).obj C)
+      ((stabilizationIdentityPullback Λ X).obj C)
     have h1 : (N.galoisLayerAut h L' (σ.restrictNormal L')).autAction Λ
-        (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _ :=
-      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
+        ((stabilizationIdentityPullback Λ X).obj C) = 𝟙 _ :=
+      (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ ((stabilizationIdentityPullback Λ X).obj C))
         (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
           (N.galoisLayerAction_one Λ h L' _)
-    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) =
-        𝟙 _ := eq_id_of_intertwining_of_epi_aux L((𝟙 X')^*⟦Λ⟧) _ _ _ hc h1
+    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ ((stabilizationIdentityPullback Λ X).obj ((stabilizationIdentityPullback Λ X).obj C)) =
+        𝟙 _ := eq_id_of_intertwining_of_epi_aux (stabilizationIdentityPullback Λ X') _ _ _ hc h1
     exact eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality Λ _ g)
       ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
   · obtain ⟨r, hr, havg⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
@@ -250,7 +231,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
       ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx r hr Finset.univ _
-      (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
+      (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ ((stabilizationIdentityPullback Λ X).obj C))
       (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
       (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
       (fun τ ↦ by
