@@ -182,7 +182,6 @@ lemma prodMapUpperStarSndIso_hom_eq (j : U ⟶ Y) (h : boundedConstructibleUpper
   unfold prodMapUpperStarSndIso
   simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- the tensor structures of the composite pullbacks are compared through `(f ≫ g).left`
 /-- The composition isomorphism `L(𝟙 × j)^* Lp_Y^* ≅ Lp_U^* Lj^*` is compatible with the tensor
@@ -212,9 +211,8 @@ lemma μ_prodMapUpperStarSndIso_hom_app (j : U ⟶ Y)
       (prod.map (𝟙 X) j ≫ prod.snd) =
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd ≫ j) := by
     rw [prod.map_snd]
-  rw [prodMapUpperStarSndIso_hom_eq ℓ j h]
-  simp only [NatTrans.comp_app]
-  rw [Functor.Monoidal.μ_comp_inv_app_of_δ_assoc _ _ _ _
+  simp only [prodMapUpperStarSndIso_hom_eq ℓ j h, NatTrans.comp_app,
+    Functor.Monoidal.μ_comp_inv_app_of_δ_assoc _ _ _ _
       (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ
         (prod.map (𝟙 X) j) prod.snd),
     μ_boundedConstructibleUpperStar_eqToHom_app_assoc ℓ (prod.map_snd (𝟙 X) j) h,
@@ -352,7 +350,6 @@ lemma kunnethVerdierMap_eq_curry_swapEvPairing (M : Dᵇc(X.left)⟦Profinite.pa
       (exceptionalKunnethMap ℓ M) N) :=
   rfl
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- the final comparison with the statement of `kunnethVerdierMap` is made termwise
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
@@ -381,8 +378,7 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
         exceptionalKunnethMap ℓ (Y := U) M := by
-    rw [hα, exceptionalKunnethSourceRestrictionIso]
-    simp only [Iso.trans_hom, Iso.symm_hom, Functor.Monoidal.μIso_inv, tensorIso_hom,
+    simp only [hα, exceptionalKunnethSourceRestrictionIso, Iso.trans_hom, Iso.symm_hom, Functor.Monoidal.μIso_inv, tensorIso_hom,
       Iso.app_hom, Functor.mapIso_hom, Category.assoc, Functor.Monoidal.μ_δ_assoc]
   have key := map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
@@ -402,9 +398,9 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
       ((prodMapUpperStarFstIso ℓ j).hom.app M) (dualizingComplexUpperStarIso ℓ j).hom
       (exceptionalKunnethTargetRestrictionIso ℓ j M).hom (exceptionalKunnethMap ℓ (Y := Y) M)
       (exceptionalKunnethMap ℓ (Y := U) M) hα' N)
-  rw [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierSourceRestrictionIso_hom,
-    verdierDualUpperStarIso_hom]
-  convert key <;> rfl
+  simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierSourceRestrictionIso_hom,
+    verdierDualUpperStarIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing, Category.assoc]
+  exact key
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
