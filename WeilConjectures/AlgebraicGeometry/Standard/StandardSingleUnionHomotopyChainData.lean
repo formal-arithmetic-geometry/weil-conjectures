@@ -50,7 +50,7 @@ private theorem transport_biprod_comparison
 
 private noncomputable def relativeMV_cover_homotopy_data_cached
     [∀ Z : Scheme.{u},
-      HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+      HasDerivedCategory (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (hpull : IsPullback g' f' f g)
