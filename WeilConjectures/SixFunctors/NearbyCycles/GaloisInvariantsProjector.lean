@@ -348,9 +348,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
   have key := exists_retraction_of_eq_comp_map_comp_of_invariant_eq R((N.j)_*⟦Λ⟧)
     L((N.i)^*⟦Λ⟧) ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C
       ((leftDerivedUpperStarId Λ X').app _) _ (N.galoisLayerExchangeIso h Ω Λ C)
-    rfl _ R (by
-      dsimp only [galoisLayer, galoisLayerExchangeIso, Functor.comp_map, Functor.mapIso_hom,
-        Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]) hR
+    rfl _ R (by simpa only [Functor.map_comp] using hα) hR
     (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
