@@ -154,14 +154,14 @@ theorem class_pushforward_core :
   unfold pushforwardCoeffUnit
   dsimp only [Functor.comp_obj]
   have hcoh := lowerShriek_pushforwardCoeff_coherence ℓ P.g P.pushforward.support c.support
-    (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd P.pushforward.support_fst
+    (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd
+    (b₁ := P.b₁) (b₂ := P.b₂) (c₁ := c.c₁) (c₂ := c.c₂) P.pushforward.support_fst
     P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
     (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
   refine Eq.trans ?_ (hcoh.trans ?_)
-  all_goals
-    trace_state
-    repeat' apply congrArg₂ (fun a b ↦ a ≫ b)
-    all_goals rfl
+  all_goals trace_state
+  all_goals simp only [coeff, pushforward_c₁, pushforward_c₂, Functor.comp_obj]
+  all_goals rfl
 
 end Correspondence.ProperPushforwardDiagram
 
