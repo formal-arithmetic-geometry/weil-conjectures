@@ -109,7 +109,6 @@ private theorem closureSectionComparison_factor (A : FiniteCondensedData l X)
   exact whisker_factor _ _ _ _ _ _ _ _ _
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 private theorem finiteScalarEncoding_map (A : FiniteCondensedData l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E) :
@@ -128,8 +127,8 @@ private theorem finiteScalarEncoding_map (A : FiniteCondensedData l X)
           K) := by
   unfold finiteCondensedScalarComparison
   dsimp only [ProEtale.constructibleExtendScalars]
-  rw [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,
     Functor.comp_map, Category.assoc]
