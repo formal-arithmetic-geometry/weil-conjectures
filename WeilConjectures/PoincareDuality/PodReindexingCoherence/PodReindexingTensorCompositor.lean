@@ -372,7 +372,7 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
   simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
     PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
   rw [hi']
-  erw [cgh.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
+  erw [cgh.tensorChain_pure]
   sorry
 
 set_option maxHeartbeats 8000000 in
