@@ -26,8 +26,16 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
+private theorem map_comp_through {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {K L M N P : C} {Q : D}
+    (k : Q ⟶ F.obj K) (i : K ⟶ L) (j : M ⟶ P) (f : K ⟶ M)
+    (a : L ⟶ N) (b : N ⟶ P) (i' : Q ⟶ F.obj L)
+    (hf : f ≫ j = i ≫ a ≫ b) (hk : k ≫ F.map i = i') :
+    k ≫ F.map f ≫ F.map j = i' ≫ F.map a ≫ F.map b := by
+  rw [← F.map_comp, hf]
+  simp only [F.map_comp, ← Category.assoc, hk]
+
+set_option profiler true in
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
 with extension by zero and exact evaluation. No derived category or acyclicity
@@ -89,28 +97,11 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
           (RingedSpace.localSectionComplexSheafificationIso Y.toRingedSpace (q : ℤ) J).hom).app
             (op V) ≫
         ((RingedSpace.localAbelianSections Y.toRingedSpace).map d.hom).app (op V) := by
-  dsimp only
+  intro P hP E Γ hΓ B a J d
   let F := RingedSpace.localAbelianSections Y.toRingedSpace
-  let P := D ⋙ F
-  let E := (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
-  let Γ := P ⋙ E
-  let B := (D.mapHomologicalComplex (.up ℕ)).obj L
   let I := L.extend ComplexShape.embeddingUpNat
-  let J := (D.mapHomologicalComplex (.up ℤ)).obj I
   let A := (P.mapHomologicalComplex (.up ℤ)).obj I
   let C := (Γ.mapHomologicalComplex (.up ℕ)).obj L
-  let a :=
-    (((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj L).extendHomologyIso
-      ComplexShape.embeddingUpNat (j := q) rfl).symm ≪≫
-    (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ)
-      (q : ℤ)).mapIso (L.mapExtendIso ComplexShape.embeddingUpNat Γ).symm ≪≫
-    (((P.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-      (L.extend ComplexShape.embeddingUpNat)).sc (q : ℤ)).mapHomologyIso E
-  let d :=
-    (HomologicalComplex.homologyFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) (q : ℤ)).mapIso
-      (L.mapExtendIso ComplexShape.embeddingUpNat D) ≪≫
-    B.extendHomologyIso ComplexShape.embeddingUpNat (j := q) rfl
   let z := (C.extendCyclesIso ComplexShape.embeddingUpNat (j := q) rfl).inv ≫
     HomologicalComplex.cyclesMap (L.mapExtendIso ComplexShape.embeddingUpNat Γ).inv
       (q : ℤ) ≫ ((A.sc (q : ℤ)).mapCyclesIso E).hom
@@ -175,10 +166,11 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
         A.iCycles (q : ℤ) ≫
           F.map ((L.mapExtendIso ComplexShape.embeddingUpNat D).hom.f (q : ℤ)) ≫
           F.map (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom := by
-      erw [← F.map_comp zD (B.iCycles q), hdz, F.map_comp, F.map_comp]
-      erw [← Category.assoc k (F.map (J.iCycles (q : ℤ))),
-        ((J.sc (q : ℤ)).map F).isoCyclesOfIsLimit_inv_ι]
-      rfl
+      exact map_comp_through F k (J.iCycles (q : ℤ)) (B.iCycles q) zD
+        ((L.mapExtendIso ComplexShape.embeddingUpNat D).hom.f (q : ℤ))
+        (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom
+        (A.iCycles (q : ℤ)) hdz
+        (((J.sc (q : ℤ)).map F).isoCyclesOfIsLimit_inv_ι _)
     have hhE := congrArg E.map hh
     simp only [Functor.map_comp] at hhE
     calc

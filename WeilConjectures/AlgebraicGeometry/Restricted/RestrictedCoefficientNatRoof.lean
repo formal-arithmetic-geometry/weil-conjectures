@@ -81,8 +81,7 @@ private theorem roof_formula_cancel {C : Type*} [Category C] {A B I J K : C}
     (rI.hom ≫ b ≫ inv mu ≫ rJ.inv) ≫ rJ.hom ≫ mu = rI.hom ≫ b := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id, Category.comp_id]
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Compare the explicit scheme-restriction and section-functor presentations.
 /-- Restricting an augmented injective roof computes the classical coefficient map.
 Source: Stacks Project, Tags 01E4 and 01FB
@@ -155,9 +154,11 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
   let P := (pushforward (v.resLE U (v ⁻¹ᵁ U) le_rfl)).mapHomologicalComplex
     (ComplexShape.up ℕ)
   let bc := pushforwardRestrictIso (coefficient_restriction_pullback v U)
-  let c := (NatIso.mapHomologicalComplex bc (ComplexShape.up ℕ)).app J.cocomplex ≪≫
-    P.mapIso R'.comparison.symm
-  let lambda := c.inv ≫ rC.map ell
+  let c : rC.obj (((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+      J.cocomplex) ≅ P.obj R'.resolution.cocomplex :=
+    (NatIso.mapHomologicalComplex bc (ComplexShape.up ℕ)).app J.cocomplex ≪≫
+      P.mapIso R'.comparison.symm
+  let lambda : P.obj R'.resolution.cocomplex ⟶ rC.obj L := c.inv ≫ rC.map ell
   let betaU := R.comparison.hom ≫ rC.map beta
   let a := pushforward_sections_iso (v.resLE U (v ⁻¹ᵁ U) le_rfl) R'.resolution.cocomplex
   let ΓU := (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
@@ -273,7 +274,6 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
     unfold moduleCohomologyFMap
     exact moduleCohomologyFMap_independent _ (restrictedDirectImageMap v φ U)
       (Classical.choice (moduleCohomologyFMapData_nonempty _ _ _ _)) D q
-  rw [hi]
   have : IsIso (H.map (a.hom ≫ ΓU.map lambda)) := D.invertible q
   have he : D.map q = rI.hom ≫ H.map (ΓU.map betaU) ≫
       inv (H.map (a.hom ≫ ΓU.map lambda)) ≫ rJ.inv := by
@@ -282,11 +282,13 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
     exact regroup_six _ _ _ _ _ _
   have hD : D.map q ≫ rJ.hom ≫ H.map (a.hom ≫ ΓU.map lambda) =
       rI.hom ≫ H.map (ΓU.map betaU) := by
-    rw [he]
-    exact roof_formula_cancel rI rJ (H.map (ΓU.map betaU))
-      (H.map (a.hom ≫ ΓU.map lambda)) (hmu := D.invertible q)
+    exact (congrArg (fun f ↦ f ≫ rJ.hom ≫ H.map (a.hom ≫ ΓU.map lambda)) he).trans
+      (roof_formula_cancel rI rJ (H.map (ΓU.map betaU))
+        (H.map (a.hom ≫ ΓU.map lambda)) (hmu := D.invertible q))
   let Γ' := (RingedSpace.globalSectionsFunctor (v ⁻¹ᵁ U).toScheme.toRingedSpace ⋙
     forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+  refine (congrArg (fun f ↦ f ≫ rJ.hom ≫ H.map R'.sections.hom ≫ H.map (Γ.map ell))
+    hi).trans ?_
   exact roof_transport H
     (I := ΓU.obj R.resolution.cocomplex)
     (J := Γ'.obj R'.resolution.cocomplex)
