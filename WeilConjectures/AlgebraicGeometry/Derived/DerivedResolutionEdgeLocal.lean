@@ -241,21 +241,15 @@ private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
     exact iso_target (G.mapIso c) (a.inv ≫ t)
       (ShortComplex.leftExactHomologyEdge G (I.sc q))
       (by simpa only [Functor.mapIso_hom, Category.assoc] using hc)
-  let m := (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app
-    ((G.mapHomologicalComplex (.up ℤ)).obj I)
-  have hs : ShortComplex.leftExactHomologyEdge F (J.sc q) ≫
-        F.map (ShortComplex.leftExactHomologyEdge D (I.sc q)) =
-      m ≫ W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)) :=
-    section_edge_square g I q
+  have hs := section_edge_square g I q
+  dsimp only at hs
   have hw : W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)) ≫ F.map (D.map c.inv) =
       W.map (a.inv ≫ t) := by
     change W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)) ≫ W.map (G.map c.inv) = _
     exact (W.map_comp _ _).symm.trans (congrArg W.map hc')
-  simpa only [Functor.map_comp] using
-    paste_edges l.hom b.hom m s (F.map d.hom)
-      (ShortComplex.leftExactHomologyEdge F (J.sc q))
-      (F.map (ShortComplex.leftExactHomologyEdge D (I.sc q))) (F.map (D.map c.inv))
-      (W.map (ShortComplex.leftExactHomologyEdge G (I.sc q))) (W.map (a.inv ≫ t)) ht hs hw
+  rw [Functor.map_comp, Functor.map_comp, ← Category.assoc s (F.map d.hom), ht]
+  simp only [Category.assoc]
+  rw [reassoc_of% hs, hw]
 
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
