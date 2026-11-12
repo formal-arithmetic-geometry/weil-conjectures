@@ -97,6 +97,7 @@ variable [EssentiallySmall.{t + 1} Y.ProEt]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 -- The representative square elaborates independent site and coefficient universes.
+set_option profiler true in
 /-- The signed representative evaluation uses an adjunction natural in its tensor parameter.
 
 Source: Stacks Tags 08J9 and 06YU; the normalized Koszul exchange construction.

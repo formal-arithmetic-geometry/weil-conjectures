@@ -106,6 +106,7 @@ variable
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R S)
 
 -- Keep the representative calculation separate from construction of the adjunction.
+set_option profiler true in
 private theorem evaluation_for_adj
     (S : CoefficientClosedStructure
       (derivedInternalHomOfUniverses.{t + 1, t, u, (max u (t + 1)) + 1}
