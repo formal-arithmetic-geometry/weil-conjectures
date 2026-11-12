@@ -43,7 +43,6 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map under two successive flat changes of coefficients**: if the (Push)
 comparisons of `a₁` and `a₂` are invertible on bounded below objects along quasi-compact
@@ -107,7 +106,6 @@ theorem nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat
   obtain ⟨e₂⟩ := k₂
   exact ⟨(Mod.extendScalars (coefficientMap a₂ Z')).leftDerivedFunctor.mapArrow.mapIso e₁ ≪≫ e₂⟩
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map under two successive flat changes of coefficients**: under the
 hypotheses of `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat`, for every
