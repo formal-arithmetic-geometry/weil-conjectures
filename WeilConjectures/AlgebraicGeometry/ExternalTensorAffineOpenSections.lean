@@ -197,6 +197,7 @@ private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
   intro s t
   change tensorSectionsMap P' Q' K (e (s ⊗ₜ[k] t)) = _
   rw [he, tensorSectionsMap_tmul]
+  rfl
 
 /-- On one affine product open, the external tensor-section map is an additive
 isomorphism, normalized by the original projection adjunction units.
