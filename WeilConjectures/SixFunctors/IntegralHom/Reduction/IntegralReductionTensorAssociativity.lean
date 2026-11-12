@@ -327,7 +327,22 @@ private theorem normalizedReductionComparison_square
   dsimp only [integralDerivedReduction, completedIntegralCommRingSheaf,
     totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
-  trace_state
+  run_tac
+    let rec diffs (fuel : Nat) (a b : Lean.Expr) : List (Lean.Expr × Lean.Expr) :=
+      if a == b then [] else
+      match fuel, a, b with
+      | n + 1, .app f x, .app g y => diffs n f g ++ diffs n x y
+      | n + 1, .mdata _ x, _ => diffs n x b
+      | n + 1, _, .mdata _ y => diffs n a y
+      | _, _, _ => [(a, b)]
+    let h ← Lean.Elab.Tactic.getFVarId `hs
+    let ty ← Lean.Meta.inferType (.fvar h)
+    let target ← Lean.Elab.Tactic.getMainTarget
+    for (a, b) in (diffs 64 ty target).take 12 do
+      Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
+  dsimp only [scalarReductionSourceDerived, scalarReductionTargetDerived,
+    integralReductionSourceHasDerivedCategory, integralReductionTargetHasDerivedCategory,
+    coefficientFiniteHasDerived, derivedCategory] at hs ⊢
   exact hs
 
 set_option profiler true in
