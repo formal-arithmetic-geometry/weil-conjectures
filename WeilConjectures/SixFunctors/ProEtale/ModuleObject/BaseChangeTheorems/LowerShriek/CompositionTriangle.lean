@@ -630,8 +630,18 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
       T.cf T₀.cf T''.cf
     have hcg := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
       T.cg T₀.cg T''.cg
+    have hcf' :
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T₀.cf).hom ≫
+            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf T''.cf).hom =
+          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf).hom := by
+      simpa only [Iso.trans_hom] using congrArg Iso.hom hcf
+    have hcg' :
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T₀.cg).hom ≫
+            (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg T''.cg).hom =
+          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg).hom := by
+      simpa only [Iso.trans_hom] using congrArg Iso.hom hcg
     exact (NatTrans.exchange _ _ _ _).symm.trans
-      (congrArg₂ NatTrans.hcomp (congrArg Iso.hom hcf) (congrArg Iso.hom hcg))
+      (congrArg₂ NatTrans.hcomp hcf' hcg')
 
 end AnyTriangle
 
