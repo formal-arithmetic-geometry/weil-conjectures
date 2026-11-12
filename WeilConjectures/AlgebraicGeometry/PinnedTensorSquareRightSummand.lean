@@ -42,6 +42,7 @@ local instance pinnedTensorSquareRightSummandInstance2 (Y : Scheme.{u}) :
 attribute [local instance] pinnedTensorSquareLeftSummandInstance3
   pinnedTensorSquareLeftSummandInstance4
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- Nested tensor-complex functors require additional elaboration heartbeats.
 /-- Scalar-tensor route on one summand, in explicit stalk coordinates.

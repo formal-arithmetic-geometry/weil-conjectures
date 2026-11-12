@@ -56,6 +56,7 @@ private theorem map_desc_comparison
     biprod.mapBiprod_inv_map_desc]
   ext <;> simp [biprod.mapIso, hU, hV]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the four derived-category vertex comparisons needs a larger budget.
 /-- Vertex comparisons for the canonical exact-restriction presentation of the

@@ -30,6 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- Transporting the four vertex comparisons and their shift data needs extra elaboration.
 /-- The pinned relative restriction maps are the first two arrows of a functorial
