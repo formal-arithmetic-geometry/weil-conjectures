@@ -218,12 +218,12 @@ theorem homComplex_shift_right
       rhs
       rw [he Y.1.unop Y.2 k p (p + k) rfl]
     conv_lhs =>
-      rw [hmap X.1.unop Y.1.unop X.2 Y.2 f.1.unop f.2 (k + n) p ((p + k) + n)
+      erw [hmap X.1.unop Y.1.unop X.2 Y.2 f.1.unop f.2 (k + n) p ((p + k) + n)
         (by omega)]
     conv_rhs =>
       rw [Category.assoc]
       rhs
-      rw [hmap X.1.unop Y.1.unop (X.2⟦n⟧) (Y.2⟦n⟧) f.1.unop (f.2⟦n⟧') k p (p + k) rfl]
+      erw [hmap X.1.unop Y.1.unop (X.2⟦n⟧) (Y.2⟦n⟧) f.1.unop (f.2⟦n⟧') k p (p + k) rfl]
     conv_rhs =>
       rw [← Category.assoc]
       lhs
