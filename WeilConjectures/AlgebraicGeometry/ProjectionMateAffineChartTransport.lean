@@ -103,6 +103,7 @@ theorem projectionMate_affineChart_transport
     (SheafOfModules.{u} (moduleRings Z.toRingedSpace))
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+  -- Explicit eliminators avoid reconstructing the dependent comparison types.
   refine (exists_derivedProjectionMate_openRestriction_comparison f p t M L V
     (f ⁻¹ᵁ V).toScheme (f ∣_ V) rfl HEq.rfl).elim fun pV hV ↦ ?_
   refine hV.elim fun tV hV ↦ ?_
