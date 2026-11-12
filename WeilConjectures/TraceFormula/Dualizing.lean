@@ -158,7 +158,7 @@ noncomputable def dualizingComplexComp (f : X ⟶ Y) :
 noncomputable def upperShriekUnitIsoOfEqId (a : point k ⟶ point k) (ha : a = 𝟙 (point k)) :
     (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _) ≅
       𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  ha ▸ (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
+  eqToIso (by rw [ha]) ≪≫ (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
 variable (k) in
 /-- The dualizing complex of the base point is the unit, `ω_s ≅ ℚ̄_ℓ,s`: the structure morphism
@@ -244,6 +244,7 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
+set_option maxHeartbeats 1000000 in
 -- the `erw` step unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
 its structure morphism. -/
@@ -258,7 +259,7 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ a).inv.app (𝟙_ _) ≫
         ((boundedConstructibleUpperShriekAdjunction ℓ a).homEquiv _ _).symm α =
       α ≫ (upperShriekUnitIsoOfEqId ℓ a ha).hom := by
-  subst a
+  subst ha
   have h := homEquiv_comp_conjugateEquiv_app
     (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
@@ -266,7 +267,9 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
       (𝟙 (point k))).homEquiv _ _).symm α)
   rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
     ← conjugateIsoEquiv_apply_hom] at h
-  rw [upperShriekUnitIsoOfEqId, Iso.app_hom, boundedConstructibleUpperShriekId]
+  trace_state
+  rw [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom,
+    boundedConstructibleUpperShriekId]
   rw [h]
   have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ
