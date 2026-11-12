@@ -31,7 +31,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 set_option profiler true in
-set_option maxHeartbeats 0 in
 -- The coefficient and compactification comparisons elaborate large instance terms.
 private theorem transport_compactSupport_baseChange
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -84,9 +83,7 @@ private theorem transport_compactSupport_baseChange
     let J' := openImmersionLowerShriek Λ' d.i
     let P' := lowerStar Λ' d.g
     let j : J.mapDerivedCategory ⋙ U d.Z ≅ U T ⋙ J'.mapDerivedCategory :=
-      Functor.mapDerivedCategoryCompIso _ _ ≪≫
-        Functor.mapDerivedCategoryNatIso (comapOpenImmersionLowerShriekIso a d.i) ≪≫
-        (Functor.mapDerivedCategoryCompIso _ _).symm
+      Functor.mapDerivedCategorySquareIso (comapOpenImmersionLowerShriekIso a d.i)
     exact Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft J.mapDerivedCategory (derivedComapLowerStarIso a d.g) ≪≫
       (Functor.associator _ _ _).symm ≪≫
@@ -102,7 +99,6 @@ private theorem transport_compactSupport_baseChange
     ((ec c').app ((upperStar Λ g').leftDerivedFunctor.obj K)).symm
 
 set_option profiler true in
-set_option maxHeartbeats 0 in
 -- The coefficient and compactification comparisons elaborate large instance terms.
 /-- Compact-support base change on bounded constructible complexes is independent
 of the chosen compactifications and of an isomorphic presentation of E or Qlbar.
