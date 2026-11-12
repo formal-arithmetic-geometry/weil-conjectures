@@ -357,6 +357,7 @@ lemma isIso_of_square {C : Type*} [Category C] {W X₁ X₂ X₃ Y₁ Y₂ : C} 
   exact IsIso.of_isIso_comp_left b c
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step, abstractly**: for the product `P` over the trait of models `M`,
 `N` of finite type, with projections compatible with the structure morphisms to `Spec Ω`, the
@@ -437,6 +438,7 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
