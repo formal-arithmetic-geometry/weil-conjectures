@@ -245,7 +245,7 @@ section Devissage
 variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
   {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
 
-set_option profiler true in
+set_option trace.profiler true in
 omit [IsOpenImmersion j'] in
 /-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be a quasi-compact open immersion with
 closed complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*`
