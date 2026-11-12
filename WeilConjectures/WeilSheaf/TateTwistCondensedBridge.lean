@@ -65,7 +65,7 @@ lemma scalarPow_regularSmulIso_hom (b : (PadicAlgCl l)ˣ) :
 noncomputable abbrev geometricFiberFrobeniusIso :
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
 
 /-- The comparison `Fr_X^* ≅ (Fr_X⁻¹)_*` of the two Frobenius functors of the condensed model. -/
 noncomputable abbrev frobeniusUpperStarIsoLowerStarInv :
@@ -80,7 +80,7 @@ noncomputable abbrev frobeniusUpperStarIsoLowerStarInv :
 `(Fr_X⁻¹)_*` model of condensed Weil sheaves. -/
 noncomputable def tateTwistLowerPair (d : ℕ) :
     IsoAlgebra (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv) :=
   IsoAlgebra.mk (tateTwistNat (X ↘ Spec (CommRingCat.of k₀)).geometricFiber l d)
     (((frobeniusUpperStarIsoLowerStarInv k₀ l X).app _).symm ≪≫
       upperStarTateTwistNatIso l (geometricFiberFrobeniusIso k₀ X).hom
