@@ -308,8 +308,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
 
-set_option maxHeartbeats 1600000 in
-set_option profiler true in
 -- matching the objects of the Galois layer with the unfolded composite of derived functors
 -- (`κ`, `α`) is a large defeq check
 /-- `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant`, with the
@@ -388,7 +386,7 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
       L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`,
 with a projector onto all the invariants** (torsion coefficients in which the degrees of the
