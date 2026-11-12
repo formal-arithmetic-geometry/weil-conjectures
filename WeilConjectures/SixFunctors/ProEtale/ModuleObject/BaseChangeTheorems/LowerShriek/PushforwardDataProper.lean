@@ -230,11 +230,8 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
   rewrite [P.baseChange_eq_pfBaseChange,
     P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
-  have hpb : (𝔽).pb (SepFinType.homMk (ofIsProperBaseChangeHom sq)) =
-      boundedConstructibleUpperStar Λ ℓ g' :=
-    boundedConstructibleUpperStar_ofIsProperBaseChangeHom sq
-  erw [hpb] at key
-  exact key
+  ext K : 1
+  exact congr_app key K
 
 variable {P}
 
