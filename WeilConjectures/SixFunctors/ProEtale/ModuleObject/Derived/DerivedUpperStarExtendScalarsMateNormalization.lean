@@ -86,7 +86,7 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc]
   simpa only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] using
+    DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp] using
     derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
 
 
