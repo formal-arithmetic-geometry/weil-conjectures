@@ -47,26 +47,19 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
--- Resolve the families of tensor instances once, before specializing the coefficients.
-private instance (priority := 2000) integralModelTensorFour (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] :
-    ∀ P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T)), GradedObject.HasTensor₄ObjExt P Q S U := by
-  intros
+-- Share colimit preservation for tensor products before specializing the coefficients.
+private noncomputable instance (priority := 2000) integralModelTensorLeftColimits
+    (T : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft P) := by
   infer_instance
 
-private instance (priority := 2000) integralModelTensorAssocLeft (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] :
-    ∀ P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T)), GradedObject.HasGoodTensor₁₂Tensor P Q S := by
-  intros
-  infer_instance
-
-private instance (priority := 2000) integralModelTensorAssocRight (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] :
-    ∀ P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T)), GradedObject.HasGoodTensorTensor₂₃ P Q S := by
-  intros
+private noncomputable instance (priority := 2000) integralModelTensorRightColimits
+    (T : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight P) := by
   infer_instance
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
@@ -214,8 +207,11 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
     (integralModelPullbackIso ℓ (baseChangeGaloisModel hM b hb v hv).j E _
       (integralModelPullbackIso ℓ (baseChangeHom hM b hb v hv).total E B₀.obj e₀) ≪≫
       baseChangeGaloisModelPullbackIso hM b hb v hv eB), ?_⟩
-  obtain ⟨p, hp, hpℓ, hpk⟩ := exists_prime_ne_dvd_of_natCast_eq_zero k'
-    (Fact.out : ringChar k' ≠ ℓ)
+  refine (exists_prime_ne_dvd_of_natCast_eq_zero k'
+    (Fact.out : ringChar k' ≠ ℓ)).elim fun p hp' ↦ ?_
+  have hp := hp'.1
+  have hpℓ := hp'.2.1
+  have hpk := hp'.2.2
   have : Fact p.Prime := ⟨hp⟩
   have := hasInvertibleExponent_integersResidueField (k' := k') E
   have hred := boundedConstructible_derivedExtendScalars_residueField M.total ℓ E.1 B₀.obj
