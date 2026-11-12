@@ -31,6 +31,24 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+private theorem exists_padicAlgCl_iso_integralModel_obj_aux (ℓ : ℕ) [Fact ℓ.Prime]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (hK : boundedConstructible _ K) :
+    ∃ (E : FiniteIntermediateField ℓ)
+      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)),
+      Nonempty ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+          (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj K₀.obj) ≅ K) := by
+  exact exists_padicAlgCl_iso_integralModel_obj ℓ X K hK
+
+private theorem derivedCompleteIntegers_boundedConstructible_aux (ℓ : ℕ) [Fact ℓ.Prime]
+    {X : Scheme.{u}} [IsNoetherian X] {E : FiniteIntermediateField ℓ}
+    {K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)} :
+    derivedCompleteIntegers ℓ E X K₀.obj :=
+  derivedCompleteIntegers_of_boundedConstructible K₀.property
+
 private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ) [Fact ℓ.Prime]
     {X : Scheme.{u}} [IsNoetherian X] [TopologicalSpace.NoetherianSpace X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -40,11 +58,14 @@ private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ)
         (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ),
       derivedCompleteIntegers ℓ E X K₀ ∧ K₀.IsGE n ∧ boundedConstructible _ K₀ ∧
-    Nonempty ((L(Mod.extendScalars (coefficientMap
+        Nonempty ((L(Mod.extendScalars (coefficientMap
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀) ≅ K) := by
-  sorry
+  obtain ⟨E, K₀, he⟩ := exists_padicAlgCl_iso_integralModel_obj_aux ℓ X K hK
+  obtain ⟨n, hn⟩ := K₀.property.1.1
+  exact ⟨E, K₀.obj, n, derivedCompleteIntegers_boundedConstructible_aux ℓ, hn,
+    K₀.property, he⟩
 
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
