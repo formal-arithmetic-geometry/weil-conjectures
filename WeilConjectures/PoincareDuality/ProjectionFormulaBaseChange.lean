@@ -256,7 +256,6 @@ lemma boundedConstructiblePullbackSquareComparison_inv_app_paste_vert {i : X ⟶
   simp only [eqToHom_trans_assoc]
 
 
-set_option trace.profiler true in
 /-- **The projection formula is compatible with base change, by factorisation**: for a cartesian
 square `g' ≫ f = f' ≫ g` and factorisations `f = i ≫ p`, `f' = i' ≫ p'` into open immersions
 followed by proper maps, through cartesian squares `g' ≫ i = i' ≫ gZ` and `gZ ≫ p = p' ≫ g`, the
@@ -305,9 +304,11 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
     (boundedConstructibleUpperStarCompOfEq ℓ (rfl : i' ≫ p' = i' ≫ p'))
     ?_ ?_ ?_ ?_ ?_ ?_
   · intro K B
-    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ (rfl : i ≫ p = i ≫ p) K B
+    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ
+      (rfl : i ≫ p = i ≫ p) K B
   · intro K B
-    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ (rfl : i' ≫ p' = i' ≫ p') K B
+    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ
+      (rfl : i' ≫ p' = i' ≫ p') K B
   · exact fun M ↦ boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert_of_eq ℓ sq s₁ s₂
       rfl rfl M
   · exact fun B ↦ boundedConstructiblePullbackSquareComparison_inv_app_paste_vert ℓ sq.toCommSq
