@@ -143,12 +143,7 @@ Source: Stacks 03D3 and 06YY. -/
 private def sequenceRestrictionPullbackInv {X B : Scheme.{u}} (j : X ⟶ B) :
     sequenceRestriction l E L ι B ⋙ integralComparisonSequencePullback l E j ⟶
       integralComparisonSequencePullback l L j ⋙ sequenceRestriction l E L ι X :=
-  ((mateEquiv
-    (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
-      (sequenceQuotient l L) j)
-    (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
-      (sequenceQuotient l E) j)
-    (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
+  ((mateEquiv (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv))
 
@@ -200,15 +195,31 @@ private theorem openRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
 
 end OpenRestriction
 
+private theorem sequenceOpenRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
+    [IsOpenImmersion j] :
+    IsIso ((mateEquiv
+      (R₁ := integralComparisonSequenceDirectImage l L j)
+      (R₂ := integralComparisonSequenceDirectImage l E j)
+      (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
+        (sequenceQuotient l L) j)
+      (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
+        (sequenceQuotient l E) j)).symm
+      (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)) := by
+  apply NatIso.isIso_of_isIso_app
+  intro M
+  apply sheafOfModules_isIso_of_bijective
+  intro U
+  have key := openRestrictionMate_app_apply l E L ι j M U
+  refine ⟨fun x y hxy ↦ ?_, fun y ↦ ⟨y, key y⟩⟩
+  rw [key, key] at hxy
+  exact hxy
+
 -- elaborating the mate of the restriction adjunction is slow
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
-  have h := inverseMate_isIso_of_left_adjoints_explicit
-    (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
-      (sequenceQuotient l L) j)
-    (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
-      (sequenceQuotient l E) j)
+  have := sequenceOpenRestrictionMate_isIso l E L ι j
+  exact inverseMate_isIso_of_left_adjoints
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
       (sequenceQuotient l L) j)
@@ -216,8 +227,6 @@ private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X �
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
       (sequenceQuotient l E) j)
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
-    (openRestrictionMate_isIso l E L ι j)
-  exact h
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
 private theorem normalizedAdjointComparison_choose_eq
@@ -243,12 +252,8 @@ private theorem sequenceScalarPullback_hom_eq {X B : Scheme.{u}} (j : X ⟶ B) :
   have hY := sequenceScalarAdjunction_unit l E L ι B
   let adjZ := (sequenceScalarAdjunction l E L ι X).choose
   have hZ := sequenceScalarAdjunction_unit l E L ι X
-  let pE : integralComparisonSequencePullback l E j ⊣
-      AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E) (sequenceQuotient l E) j :=
-    Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j)
-  let pL : integralComparisonSequencePullback l L j ⊣
-      AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L) (sequenceQuotient l L) j :=
-    Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j)
+  let pE := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j)
+  let pL := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j)
   let adj₁ := pE.comp adjZ
   let adj₂ := adjY.comp pL
   let e := sequenceScalarPullbackRight l E L ι j
