@@ -101,6 +101,7 @@ private theorem single_pullback_naturality
     simpa only [Scheme.Modules.canonicalSinglePullbackMap, cast_eq, Category.assoc] using! hh
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The right-derived unit is compared with localized single-complex morphisms.
 private theorem single_directImage_naturality
     [∀ Y : Scheme.{u},
@@ -133,6 +134,7 @@ private theorem single_directImage_naturality
     (DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings B.toRingedSpace))).map hc.symm
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Naturality rewrites elaborate the selected derived functors and localization maps.
 /-- The canonical structure maps commute with the pinned derived exchange map.
 No cartesianness, flatness, vanishing or invertibility assumption is needed.
