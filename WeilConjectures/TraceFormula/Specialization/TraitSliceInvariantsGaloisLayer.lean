@@ -166,7 +166,9 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _)
     M.ε (baseChangeGaloisModel hM b hb v hv).ε (Category.assoc _ _ _)
     (Profinite.padicAlgClRingObj ℓ) A hA
-  obtain ⟨E, K₀, e, htors⟩ := exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC
+  refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC).elim fun E hE ↦ ?_
+  refine hE.elim fun K₀ hK₀ ↦ ?_
+  refine hK₀.elim fun e htors ↦ ?_
   obtain ⟨L₁, htriv, hSA⟩ := (baseChangeGaloisModel hM b hb v hv)
     |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
       (baseChangeGaloisResidue hM b hb v hv) _ ℓ
