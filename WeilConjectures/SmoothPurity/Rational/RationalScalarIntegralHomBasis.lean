@@ -180,7 +180,9 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
       simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
         Adjunction.mapHomologicalComplex_unit_app_f, NatTrans.mapHomologicalComplex_app_f,
         smulC, πC, unitP, R, integralScalarChainAction_app_f]
-      exact hB (P.X n)
+      simpa only [Functor.mapHomologicalComplex_map_f, Adjunction.mapHomologicalComplex_unit_app_f,
+        NatTrans.mapHomologicalComplex_app_f, smulC, πC, unitP, R,
+        integralScalarChainAction_app_f] using hB (P.X n)
     have hAP (i j : Fin d) : ιZ i (DerivedCategory.Q.obj P) ≫ πP j = if i = j then 𝟙 _ else 0 := by
       rw [hιQ]
       simp only [πP, Category.assoc]
