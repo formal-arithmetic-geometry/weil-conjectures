@@ -133,9 +133,10 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {P : NearbyCyclesModel Zc Sc} {P' : NearbyCyclesModel Zη Sc} {c : Y ⟶ Z₁} {j : Z₁ ⟶ Zc}
   {sb : Y ⟶ Zη} {π : Zη ⟶ Zc} {j' : S ⟶ Sc}
 
-set_option maxHeartbeats 1000000 in
-set_option profiler true in
--- the composition laws and unit laws are instantiated on large derived-category terms
+private lemma leftDerivedUpperStarCompOfEq_rfl :
+    leftDerivedUpperStarCompOfEq Λ (rfl : c ≫ j = c ≫ j) =
+      leftDerivedUpperStarComp Λ c j := rfl
+
 /-- **The exchange square of an open sub-model and of its shrunk model** (ambient): for morphisms
 of models `ψ : N ⟶ M` over `c` and `𝟙`, `r : M ⟶ P` over `j, j'`, `s : N ⟶ P'` over `sb, j'`
 and `π_c : P' ⟶ P` over `π` and `𝟙` with `s ≫ π_c = ψ ≫ r` and `sb ≫ π = c ≫ j`, the exchanges
@@ -169,12 +170,12 @@ lemma specialIdExchange_comp_pullbackExchange_square (ψ : N.Hom M c (𝟙 S))
         (leftDerivedUpperStarComp Λ c j).hom.app C) =
       (N.nearbyCycles Λ).map
         ((leftDerivedUpperStarCompOfEq Λ (rfl : c ≫ j = c ≫ j)).hom.app C) := by
+    rw [leftDerivedUpperStarCompOfEq_rfl]
     rw [← Functor.map_comp, Iso.hom_inv_id_app_assoc]
-    rfl
   have h₃ : L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).hom.app ((P.nearbyCycles Λ).obj C)) ≫
       L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).inv.app ((P.nearbyCycles Λ).obj C)) =
-      𝟙 _ := by
-    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+      𝟙 _ :=
+    ((leftDerivedUpperStarId Λ Sc).app ((P.nearbyCycles Λ).obj C)).map_hom_inv_id _
   exact specialIdExchange_square_aux h₀ ha hb' hl hr (Iso.hom_inv_id_app _ _) h₃ hn h₁ rfl
 
 end AmbientShrink
@@ -221,6 +222,41 @@ private lemma boundedConstructibleNearbyCycles_map_hom''' {X X' : Scheme.{u}}
     ((boundedConstructibleNearbyCycles hN).map f).hom =
       (N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map f.hom :=
   rfl
+
+private lemma boundedConstructibleSpecialIdExchange_square
+    (ψ : N.Hom M c (𝟙 S.left)) (r : M.Hom P j.left j'.left)
+    (s : N.Hom P' sb.left j'.left) (πc : P'.Hom P π (𝟙 Sc.left))
+    (hb : sb.left ≫ π = c ≫ j.left)
+    (htot : s.total ≫ πc.total = ψ.total ≫ r.total)
+    (hgen : s.generic ≫ πc.generic = ψ.generic ≫ r.generic)
+    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hP : P.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hP' : P'.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (ρc : boundedConstructibleNearbyCycles hP ⟶
+      boundedConstructibleUpperStarOfMap ℓ (X := Zc) (Y := Zη) π ⋙
+        boundedConstructibleNearbyCycles hP')
+    (ρψ : boundedConstructibleNearbyCycles hM ⟶
+      boundedConstructibleUpperStarOfMap ℓ (X := Z₁) (Y := Y) c ⋙
+        boundedConstructibleNearbyCycles hN)
+    (hρc : ∀ A, (ρc.app A).hom = πc.specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj)
+    (hρψ : ∀ A, (ρψ.app A).hom = ψ.specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj)
+    (A : Dᵇc(Zc.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j').map (ρc.app A) ≫
+        (s.boundedConstructiblePullbackExchange ℓ hN hP').app
+          ((boundedConstructibleUpperStarOfMap ℓ (X := Zc) (Y := Zη) π).obj A) ≫
+        (boundedConstructibleNearbyCycles hN).map
+          (boundedConstructibleShrinkSquareIso ℓ hb A).hom =
+      (r.boundedConstructiblePullbackExchange ℓ hM hP).app A ≫
+        ρψ.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A) := by
+  apply ObjectProperty.hom_ext
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom, hρc,
+    Hom.boundedConstructiblePullbackExchange_app_hom,
+    Hom.boundedConstructiblePullbackExchange_app_hom, boundedConstructibleNearbyCycles_map_hom''',
+    boundedConstructibleShrinkSquareIso_hom_hom, hρψ]
+  transport_exact specialIdExchange_comp_pullbackExchange_square
+    (Profinite.padicAlgClRingObj ℓ) ψ r s πc hb htot hgen A.obj
 
 end BoundedConstructibleShrink
 
@@ -551,9 +587,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType Xc.hom] [QuasiCompact Xc.hom] [IsSeparated Xc.hom]
   [LocallyOfFiniteType Xc'.hom] [QuasiCompact Xc'.hom] [IsSeparated Xc'.hom]
 
-set_option maxHeartbeats 1000000 in
-set_option profiler true in
--- the exchange square is checked on the large concrete goal
 /-- **The dualizing map of an open sub-model of a proper model and shrinking**: let `M` be an open
 sub-model of a proper trait model `M_c` over the generic base `(F, X_c, ι)` with proper `X_c`,
 `X_c'` and full generic fibre, through open immersions `j`, `j'` and `r : M ⟶ M_c`, and let
@@ -603,10 +636,6 @@ theorem exists_θ_eq_shrink_of_openSubmodel (D : NearbyDualizingDataOfGenericBas
   have hρψ : ∀ A, ((h.shrinkExchange ℓ hcε).app A).hom =
       (h.shrinkHom hcε).specialIdExchange (Profinite.padicAlgClRingObj ℓ) A.obj :=
     fun _ ↦ by unfold shrinkExchange; exact ObjectProperty.homMk_hom _
-  have hsq := specialIdExchange_comp_pullbackExchange_square (Profinite.padicAlgClRingObj ℓ)
-    (h.shrinkHom hcε) r (shrinkRebaseHom hc h r hg hcε sb hsb) hc.rebaseHom hsb
-    ((Category.comp_id _).trans (Category.id_comp _).symm)
-    ((Category.comp_id _).trans (Category.id_comp _).symm) (dualizingComplex ℓ Xc).obj
   have key := exists_θ_eq_of_openSubmodel_of_rebase
     (Ψc := boundedConstructibleNearbyCycles (hc.preservesBoundedConstructible (ℓ := ℓ)))
     (ΨM := boundedConstructibleNearbyCycles (h.preservesBoundedConstructible (ℓ := ℓ)))
@@ -635,13 +664,11 @@ theorem exists_θ_eq_shrink_of_openSubmodel (D : NearbyDualizingDataOfGenericBas
   · exact h₁
   · exact h₂
   · exact h₃
-  · apply ObjectProperty.hom_ext
-    rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-      ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom, hρc,
-      Hom.boundedConstructiblePullbackExchange_app_hom,
-      Hom.boundedConstructiblePullbackExchange_app_hom, boundedConstructibleNearbyCycles_map_hom''',
-      boundedConstructibleShrinkSquareIso_hom_hom, hρψ]
-    transport_exact hsq
+  · exact boundedConstructibleSpecialIdExchange_square (h.shrinkHom hcε) r
+      (shrinkRebaseHom hc h r hg hcε sb hsb) hc.rebaseHom hsb
+      ((Category.comp_id _).trans (Category.id_comp _).symm)
+      ((Category.comp_id _).trans (Category.id_comp _).symm)
+      _ _ _ _ _ _ hρc hρψ _
 
 end OpenSubmodel
 
