@@ -304,6 +304,31 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Resolve colimit obligations before instance search expands the graded tensor diagrams
+-- in the construction of each derived pullback.
+/-- Small colimits of pro-étale module objects. -/
+theorem galoisProjectorHasColimit (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    HasColimit F := inferInstance
+
+/-- Tensoring on the left preserves small colimits of module objects. -/
+theorem galoisProjectorTensorLeftColimit (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    PreservesColimit F ((curriedTensor _).obj M) := inferInstance
+
+/-- Tensoring on the right preserves small colimits of module objects. -/
+theorem galoisProjectorTensorRightColimit (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    PreservesColimit F ((curriedTensor _).flip.obj M) := inferInstance
+
+attribute [local instance 2000] galoisProjectorHasColimit galoisProjectorTensorLeftColimit
+  galoisProjectorTensorRightColimit
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
