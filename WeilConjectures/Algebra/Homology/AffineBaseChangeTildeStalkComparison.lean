@@ -106,21 +106,23 @@ private theorem affineBaseChangeTildeModuleMap_localized_aux2
   rw [hloc]
   have hcoord := affineTensorPullbackHomologyStalkIso_coordinates A A' φg' K hL M e hc i p
     (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x)
-  rw [hcoord]
-  rw [hlU]
-  have hid : ∀ X, ((Spec (.of A')).toRingedSpace.moduleStalkFunctor p).map
-      ((DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).map
-      ((DerivedCategory.Qh
-        (C := SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace))).map
-      (((Scheme.Modules.tensorPullback
-        (Spec.map (CommRingCat.ofHom φg'))).mapHomotopyCategoryFactors (.up ℤ)).inv.app X))) =
-        𝟙 _ := fun _ ↦
-    (congrArg _ ((congrArg _ (CategoryTheory.Functor.map_id _ _)).trans
-      (CategoryTheory.Functor.map_id _ _))).trans (CategoryTheory.Functor.map_id _ _)
-  simp only [affineBaseChangeIntoPullback, Category.assoc, Functor.map_comp,
-    hid, Functor.comp_obj]
-  rfl
+  calc
+    _ = _ := hcoord
+    _ = _ := by rw [hlU]
+    _ = _ := by
+      have hid : ∀ X, ((Spec (.of A')).toRingedSpace.moduleStalkFunctor p).map
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).map
+          ((DerivedCategory.Qh
+            (C := SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace))).map
+          (((Scheme.Modules.tensorPullback
+            (Spec.map (CommRingCat.ofHom φg'))).mapHomotopyCategoryFactors (.up ℤ)).inv.app X))) =
+            𝟙 _ := fun _ ↦
+        (congrArg _ ((congrArg _ (CategoryTheory.Functor.map_id _ _)).trans
+          (CategoryTheory.Functor.map_id _ _))).trans (CategoryTheory.Functor.map_id _ _)
+      simp only [affineBaseChangeIntoPullback, Category.assoc, Functor.map_comp,
+        hid, Functor.comp_obj]
+      rfl
 
 
 private theorem affineBaseChangeTildeModuleMap_localized_aux
