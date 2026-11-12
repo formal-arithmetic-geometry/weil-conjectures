@@ -105,14 +105,17 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
   have hK (n : ℤ) :=
     rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
   obtain ⟨hΦ⟩ := N.nonempty_isColimit_homology_nearbyCycles_galoisTower T₀ h Ω K a hKe q
+  let H := DerivedCategory.homologyFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) q
   let Ψ := R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q
+    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ H
   let Φ := DerivedCategory.Q ⋙ Ψ
   let eK := GaloisTower.derivedTraceIso (Profinite.continuousMapRingObj T₀) K a hK _ e
+  let κ := N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C
   have : IsNoetherianObject (Φ.mapCocone
       ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
-    isNoetherianObject_of_mono (Ψ.map eK.hom ≫ (DerivedCategory.homologyFunctor _ q).map
-      (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom)
+    isNoetherianObject_of_mono (Ψ.map eK.hom ≫ H.map κ.hom)
   obtain ⟨j, hj⟩ := exists_epi_ι_of_isNoetherianObject hΦ
   let L' : FiniteGaloisIntermediateField L Ω := j
   refine ⟨L', fun σ hσ ↦ ?_⟩
@@ -144,14 +147,13 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport]
     exact (Ψ.map_comp _ _).trans ((congrArg (fun f ↦ f ≫ Ψ.map eK.hom) hG).trans
       (Ψ.map_comp _ _).symm)
-  have hσ1 : (DerivedCategory.homologyFunctor _ q).map
-      (N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω σ
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) =
-      (DerivedCategory.homologyFunctor _ q).map
-      (N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω 1
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
-    simp only [galoisLayerAction, galoisLayerAut_autAction, Functor.map_comp, hA]
-  rw [hσ1, galoisLayerAction_one, CategoryTheory.Functor.map_id]
+  have hact (τ : Ω ≃ₐ[L] Ω) := congrArg H.map
+    (galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω τ C)
+  simp only [H.map_comp] at hact
+  exact (hact σ).trans ((congrArg (fun f ↦ H.map κ.inv ≫ f ≫ H.map κ.hom) hA).trans
+    ((hact 1).symm.trans ((congrArg H.map
+      (N.galoisLayerAction_one (Profinite.continuousMapRingObj T₀) h Ω _)).trans (H.map_id _))))
+
 
 /-- **Continuity of the Galois action on noetherian cohomology sheaves of nearby cycles**, for
 finitely many degrees at once: if the `Hᵠ(Ψ_{N_Ω} C)` are noetherian for `q ∈ s`, there is a single
