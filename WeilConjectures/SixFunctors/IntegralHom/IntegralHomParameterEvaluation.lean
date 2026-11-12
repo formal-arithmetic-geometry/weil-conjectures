@@ -10,6 +10,7 @@ import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorKoszulExistence
 import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurryNormalization
 import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationCoefficient
 import WeilConjectures.SixFunctors.IntegralHom.HomComplexTensorPureEquivalence
+import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRepresentativeUncurry
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
 /-! Coherent evaluation for the integral tensor presentation.
@@ -147,45 +148,16 @@ theorem tensor_presentation_parameter_evaluation
   let s := hrepresentative.choose
   have hs := hrepresentative.choose_spec.1
   have hsq := hrepresentative.choose_spec.2
-  have hpure := homComplexTensor_pure_equivalence.{t, u} Y R S' P I
-  change ∃ e : ((coefficientTotalTensor.{u, t + 1, t} J R).obj (S', P) ⟶ I) ≃
-      (S' ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I),
-    ∀ (f : (coefficientTotalTensor.{u, t + 1, t} J R).obj (S', P) ⟶ I)
-      (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (x : (S'.X i).val.obj U) (y : (P.X j).val.obj U),
-      evaluate.{t, u} Y R P I i j U (((e f).f i).val.app U x) y =
-        (f.f (j + i)).val.app U
-          (coefficientTensorGenerator.{u, t + 1, t} J R S' P i j (j + i)
-            (add_comm i j) U x y) at hpure
-  let e := hpure.choose
-  have he := hpure.choose_spec
-  let ψ : (coefficientTotalTensor.{u, t + 1, t} J R).obj (S', P) ⟶ I := e.symm q
-  have hψ : IsCoefficientTensorCurry.{u, t + 1, t} J R S' P I ψ q := by
-    intro a b U x y
-    have hc := (he ψ a b U x y).symm
-    change _ = evaluate.{t, u} Y R P I a b U (((e (e.symm q)).f a).val.app U x) y at hc
-    rw [Equiv.apply_symm_apply] at hc
-    have hc' (k : ℤ) (h : b + a = k) :
-        (ψ.f k).val.app U
-          (coefficientTensorGenerator.{u, t + 1, t} J R S' P a b k
-            ((add_comm a b).trans h) U x y) =
-        coefficientHomSectionApply.{u, t + 1, t} J R (P.X b) (I.X k) U
-          ((coefficientHomComponent.{u, t + 1, t} J R P I a b k h).val.app U
-            ((q.f a).val.app U x)) y := by
-      subst k
-      rw [evaluate_eq_coefficient] at hc
-      exact hc
-    exact hc' (a + b) (add_comm b a)
-  have hn := coefficientTensorCurry_normalize.{u, t + 1, t, (max u (t + 1)) + 1}
-    J R S T S' P I hS hP ψ q hψ
-  have hinput : DerivedCategory.Q.map
-        (q ≫ ((homComplexFunctor (R := R)).obj (op P)).map
-          ((coefficientHomAugmentation.{u, t + 1, t} J R).app I)) ≫
-        (coefficientHomResolutionIso.{u, t + 1, t, (max u (t + 1)) + 1} J R P I).inv =
-      DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I := by
-    simp only [Functor.map_comp, Category.assoc, homModelMap, coefficientHomAugmentation]
-    rfl
-  rw [hinput] at hn
+  have huncurry := representative_uncurry_evaluation Y R S T S' P I hS hP q
+  let ψ := huncurry.choose
+  have hψ := huncurry.choose_spec.1
+  have hu := huncurry.choose_spec.2
+  have hn : (T.iso J R S S' P hS hP).inv ≫ DerivedCategory.Q.map ψ =
+      (S.transpose (DerivedCategory.Q.obj S') (DerivedCategory.Q.obj P)
+        (DerivedCategory.Q.obj I)).symm
+          (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I) := by
+    rw [← hu]
+    exact (T.iso J R S S' P hS hP).inv_hom_id_assoc _
   refine ⟨s.hom ≫ ψ, ?_, ?_⟩
   · intro i j U x y
     change (ψ.f (i + j)).val.app U
@@ -199,10 +171,7 @@ theorem tensor_presentation_parameter_evaluation
     rw [hs']
     simp only [Units.smul_def, map_zsmul]
     congr 1
-    have hc := (he ψ j i U y x).symm
-    change _ = evaluate.{t, u} Y R P I j i U (((e (e.symm q)).f j).val.app U y) x at hc
-    rw [Equiv.apply_symm_apply] at hc
-    exact hc
+    exact hψ j i (i + j) (add_comm j i) rfl U y x
   · change (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map (s.hom ≫ ψ) = _
     have hswap : (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map s.hom =
         σ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj S') ≫
@@ -211,7 +180,7 @@ theorem tensor_presentation_parameter_evaluation
       apply (cancel_mono (T.iso J R S S' P hS hP).hom).1
       simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id,
         Category.comp_id] using hsq.symm
-    exact (map_comp_exchange DerivedCategory.Q _ _ _ _ s.hom ψ hswap hn.symm).trans
+    exact (map_comp_exchange DerivedCategory.Q _ _ _ _ s.hom ψ hswap hn).trans
       ((swappedAdjunction_uncurry S σ (DerivedCategory.Q.obj P)
         (DerivedCategory.Q.obj S') (DerivedCategory.Q.obj I)
         (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)).symm.trans

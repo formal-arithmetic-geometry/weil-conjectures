@@ -144,8 +144,14 @@ private theorem evaluation_for_adj
   letI := S.monoidal
   letI := β
   intro P I S' hP hS hI q
-  obtain ⟨s, hs, hsq⟩ := hβ P S' hP hS
-  obtain ⟨a, ha, hu⟩ := representative_uncurry_evaluation Y R S T S' P I hS hP q
+  have hswap := hβ P S' hP hS
+  let s := hswap.choose
+  have hs := hswap.choose_spec.1
+  have hsq := hswap.choose_spec.2
+  have huncurry := representative_uncurry_evaluation Y R S T S' P I hS hP q
+  let a := huncurry.choose
+  have ha := huncurry.choose_spec.1
+  have hu := huncurry.choose_spec.2
   refine ⟨s.hom ≫ a, ?_, ?_⟩
   · intro i j U x y
     change (a.f (i + j)).val.app U
