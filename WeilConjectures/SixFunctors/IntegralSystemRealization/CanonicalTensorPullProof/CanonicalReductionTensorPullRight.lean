@@ -26,7 +26,19 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 1000000 in
+-- Normalize the two model equations before substituting the coefficient functors.
+private theorem map_pair_factorization {C D : Type*} [Category C] [Category D]
+    (B : C × C ⥤ D) {P₀ P₁ P₂ P₃ P₄ Q₀ Q₁ Q₂ Q₃ Q₄ : C}
+    {aP : P₀ ⟶ P₁} {bP : P₁ ⟶ P₄}
+    {pP : P₀ ⟶ P₂} {eP : P₂ ⟶ P₃} {dP : P₃ ⟶ P₄}
+    {aQ : Q₀ ⟶ Q₁} {bQ : Q₁ ⟶ Q₄}
+    {pQ : Q₀ ⟶ Q₂} {eQ : Q₂ ⟶ Q₃} {dQ : Q₃ ⟶ Q₄}
+    (hP : aP ≫ bP = pP ≫ eP ≫ dP) (hQ : aQ ≫ bQ = pQ ≫ eQ ≫ dQ) :
+    B.map (Prod.mkHom aP aQ) ≫ B.map (Prod.mkHom bP bQ) =
+      B.map (Prod.mkHom pP pQ) ≫ B.map (Prod.mkHom eP eQ) ≫
+        B.map (Prod.mkHom dP dQ) := by
+  rw [← map_pair_comp, hP, hQ, map_pair_comp, map_pair_comp]
+
 -- The representative equations compare independently specified derived models.
 /-- The right derived path is the localization of its ordinary cochain path.
 Source: the representative normalizations in lem-sf-canonical-reduction-tensor-pull.
@@ -132,9 +144,10 @@ theorem right_on_representatives
       B.map (Prod.mkHom ((m.reductionPull f).hom.app _) ((m.reductionPull f).hom.app _))) ≫
         B.map (Prod.mkHom (S.map (eV P) ≫ s (RV.obj P.obj))
           (S.map (eV Q) ≫ s (RV.obj Q.obj))) = _
-  simp only [← B.map_comp, prod_comp, Category.assoc]
-  erw [hδP, hδQ]
-  simp only [map_pair_comp]
+  simp only [Category.assoc]
+  refine (congrArg (fun t ↦ R'.map (F.map rV) ≫
+    R'.map ((ringedTensorPull l E d f).hom.app _) ≫ (mu l E d U).app _ ≫ t)
+      (map_pair_factorization B hδP hδQ)).trans ?_
   exact paste_right hμ hr hμU he hz
 
 end WeilConjectures.IntegralSystemRealization.CanonicalTensorPullProof
