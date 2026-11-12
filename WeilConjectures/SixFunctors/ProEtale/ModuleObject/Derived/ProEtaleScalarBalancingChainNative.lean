@@ -146,6 +146,7 @@ private lemma balancingIso_pairing : IsCondensedScalarBalancing a f (balancingIs
   erw [tensorHom_comp_whiskerLeft_assoc, balancingCoefficientIso_unit a f]
   rfl
 
+omit [IsCommMonObj Λ'] in
 private lemma balancingIso_hom_eq :
     (balancingIso a f).hom =
       Functor.OplaxMonoidal.δRightNatTrans (upperStar Λ f) (balancingCoefficient a Y) ≫
@@ -254,8 +255,9 @@ private lemma balancingIso_scalar_projection
         (f)^*[Ab.{u + 1}].map (Mod.extendπ (coefficientMap a Y) M)) ≫ ·) hb
   rw [Category.assoc]
   erw [balancingPull_projection a f M]
-  erw [reassoc_of% (balancingIso_pairing a f M),
-    balancingExtensionIso_pairing a X ((upperStar Λ f).obj M)]
+  conv_rhs =>
+    erw [reassoc_of% (balancingIso_pairing a f M),
+      balancingExtensionIso_pairing a X ((upperStar Λ f).obj M)]
   rw [Functor.map_braiding, Category.assoc, Category.assoc,
     Functor.Monoidal.μ_δ_assoc, BraidedCategory.braiding_naturality_assoc]
 
@@ -337,11 +339,10 @@ private lemma balancingChain_normalization
   have hcomp : HomologicalComplex.mapBifunctorMap (𝟙 K) (q ≫ r)
       (curriedTensor _) (.up ℤ) =
       HomologicalComplex.mapBifunctorMap (𝟙 K) q (curriedTensor _) (.up ℤ) ≫
-        HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) :=
-    by
-      simp only [HomologicalComplex.mapBifunctorMap, CategoryTheory.Functor.map_id,
-        NatTrans.id_app, Category.id_comp, CategoryTheory.Functor.map_comp,
-        HomologicalComplex₂.total.map_comp]
+        HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) := by
+    simp only [HomologicalComplex.mapBifunctorMap, CategoryTheory.Functor.map_id,
+      NatTrans.id_app, Category.id_comp, CategoryTheory.Functor.map_comp,
+      HomologicalComplex₂.total.map_comp]
   change (F.mapHomologicalComplex (.up ℤ)).map
     (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) M P).hom ≫
       (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P =
@@ -438,7 +439,4 @@ theorem condensedScalarBalancingChain :
   · exact balancingChain_normalization (upperStar Λ f) (balancingCoefficient a Y)
       (balancingCoefficient a X) (balancingCoefficientIso a f) (balancingIso a f)
       (balancingIso_hom_eq a f)
-
-
-
 end AlgebraicGeometry.ProEtale.CondensedRing
