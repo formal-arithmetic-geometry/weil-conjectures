@@ -124,7 +124,7 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
     (((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
       (.up ℤ)).map ((ac.homEquiv P I).symm α)) = q.map α
   rw [← Functor.map_comp]
-  exact congrArg q.map (ac.homEquiv P I).apply_symm_apply α
+  exact congrArg q.map ((ac.homEquiv P I).apply_symm_apply α)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
