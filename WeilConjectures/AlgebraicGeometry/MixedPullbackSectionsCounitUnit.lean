@@ -26,6 +26,31 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem mixedSections_homEquiv_unit
+    {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
+    {L₀ : C₀ ⥤ D₀} {R₀ : D₀ ⥤ C₀} {L : C ⥤ D} {R : D ⥤ C}
+    (adj₀ : L₀ ⊣ R₀) (adj : L ⊣ R) (Q : C₀ ⥤ C) (Q' : D₀ ⥤ D) (M : C₀)
+    (ε : L.obj (Q.obj M) ⟶ Q'.obj (L₀.obj M))
+    (β : Q.obj (R₀.obj (L₀.obj M)) ⟶ R.obj (Q'.obj (L₀.obj M)))
+    (h : adj.homEquiv _ _ (ε ≫ Q'.map (𝟙 _)) =
+      Q.map (adj₀.homEquiv _ _ (𝟙 _)) ≫ β) :
+    adj.unit.app (Q.obj M) ≫ R.map ε = Q.map (adj₀.unit.app M) ≫ β := by
+  simpa only [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id,
+    Adjunction.homEquiv_unit] using h
+
+private theorem mixedSections_mapHomotopyCategory_unit
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    [Preadditive A] [Preadditive B] [Preadditive D]
+    (K : A ⥤ B) (F : B ⥤ A) (H : A ⥤ D) [K.Additive] [F.Additive] [H.Additive]
+    (adj : K ⊣ F) (C : CochainComplex A ℤ) :
+    (H.mapHomotopyCategory (.up ℤ)).map
+        ((adj.mapHomotopyCategory (.up ℤ)).unit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj C)) =
+      (HomotopyCategory.quotient _ (.up ℤ)).map
+        (((Functor.whiskerRight adj.unit H).mapHomologicalComplex (.up ℤ)).app C) := by
+  rw [Adjunction.mapHomotopyCategory_unit_app_quotient, Functor.mapHomotopyCategory_map]
+  rfl
+
 private theorem mixedSections_unit_naturality
     {A B C D E : Type*} [Category A] [Category B] [Category C] [Category D] [Category E]
     (Q : A ⥤ B) (H₀ : A ⥤ D) (H : B ⥤ D) (F : C ⥤ B) (J : C ⥤ E) (R : E ⥤ D)
@@ -220,22 +245,16 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
   erw [sectionsComplexUnit_eq, sectionsComplexUnit_eq]
   rw [he]
   have hL := mixedSections_leray_unit g N
-  have hu := hunit
-  erw [CategoryTheory.Functor.map_id, Category.comp_id,
-    Adjunction.homEquiv_id, Adjunction.homEquiv_unit] at hu
+  have hu := mixedSections_homEquiv_unit (adj.mapHomotopyCategory (.up ℤ))
+    (schemeHomPullbackAdjunction g) DerivedCategory.Qh DerivedCategory.Qh M
+    (ε.app M) (β.app N) hunit
   have hh := mixedSections_unit_naturality DerivedCategory.Qh
     (H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     (schemeDerivedGlobalSections S) (schemeDerivedDirectImage g)
     (schemeDerivedGlobalSections T) (schemeGlobalScalarRestriction g)
     s L a (ε.app M) (η.app (DerivedCategory.Qh.obj M)) (β.app N) _ hu hL
   dsimp only [Functor.comp_map] at hh
-  have ha : (H.mapHomotopyCategory (.up ℤ)).map a =
-      (HomotopyCategory.quotient _ (.up ℤ)).map
-        ((d.mapHomologicalComplex (.up ℤ)).app C) := by
-    dsimp only [a, M]
-    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-    rw [Functor.mapHomotopyCategory_map]
-    congr 1
+  have ha := mixedSections_mapHomotopyCategory_unit K F H adj C
   have hR := normalizationRestriction_factors_inv g.appTop.hom E
   erw [ha, hR] at hh
   exact hh
