@@ -142,8 +142,6 @@ theorem stalkAtIhomPairing_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
--- The kernel needs more time to check the instantiation of the Frobenius compatibility.
 /-- The trace of the Frobenius on the stalk of the internal hom `[D, F]` out of a lisse Weil
 sheaf: `tr(F | [D, F]_s) = tr(F | F_s) tr(F⁻¹ | D_s)`, the stalk being `Hom(D_s, F_s)` with the
 Frobenius `f ↦ F ∘ f ∘ F⁻¹`. -/
@@ -152,7 +150,9 @@ theorem trace_frobeniusEnd_stalkAt_ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse
     LinearMap.trace (PadicAlgCl l) _ ((D.ihom hD F).stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd *
         LinearMap.trace (PadicAlgCl l) _ (D.stalkAt s m hs).frobenius.symm.toLinearMap :=
-  FrobeniusModule.trace_frobeniusEnd_eq_mul_of_bijective _
+  FrobeniusModule.trace_frobeniusEnd_eq_mul_of_bijective
+    (V := (D.ihom hD F).stalkAt s m hs) (M := D.stalkAt s m hs) (N := F.stalkAt s m hs)
+    (stalkAtIhomPairing s m hs D hD F)
     (bijective_stalkAtIhomPairing s m hs D hD F) (stalkAtIhomPairing_frobenius s m hs D hD F)
 
 /-- The trace of the Frobenius on the stalk of `[G^∨, F] = G ⊗ F`, for a lisse Weil sheaf `G`,
