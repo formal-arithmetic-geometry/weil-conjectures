@@ -46,7 +46,7 @@ private theorem unaryPushforward_smul
     (M : SheafOfModules.{u} R) (U : Cᵒᵖ) (r : S.obj.obj U)
     (m : M.val.obj (F.op.obj U)) :
     r • @id (((SheafOfModules.pushforward φ).obj M).val.obj U) m =
-      φ.hom.app U r • m := rfl
+      (φ.hom.app U r • m : M.val.obj (F.op.obj U)) := rfl
 
 private theorem unaryMap_smul
     {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
@@ -263,7 +263,19 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     (m : M.val.obj (op (n, V))) :
     r • @id (((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) m =
       @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) r • m := by
-  rfl
+  have hs := unaryPushforward_smul (F := Prod.sectR n W.ProEt)
+    (S := integralCoefficientSheaf l E W n)
+    (R := (sheafCompose (coefficientSequenceTopology (ProEt.topology W))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (coefficientSequenceCommRingSheaf l E W))
+    (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m
+  have hr : (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom.app
+      (op V) r = @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) r := by
+    rw [evaluationRing_app]
+    rfl
+  have hm := congrArg
+    (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr
+  exact hs.trans hm
 
 -- Normalize the tensor before placing it inside the reindexing composite.
 private theorem unitSection_tensor_smul (W : Scheme.{u})
