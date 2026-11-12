@@ -691,12 +691,8 @@ private theorem native_restriction_chain
             (HomologicalComplex.ιTensorObj
               ((FU.mapHomologicalComplex (.up ℤ)).obj RP)
               ((FU.mapHomologicalComplex (.up ℤ)).obj RT) p q n hpq).hom),
-      let a := complex_square (Lα) FU F R
-        (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α);
-      (FU.mapHomologicalComplex (.up ℤ)).map tr.hom ≫ cU.hom ≫
-          (MonoidalCategory.tensor _).map (Prod.mkHom (a.hom.app P) (a.hom.app T)) =
-        a.hom.app (((nativeTensorTotal k₀ l Z).obj P).obj T) ≫
-          (R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫
+      (FU.mapHomologicalComplex (.up ℤ)).map tr.hom ≫ cU.hom =
+        (R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫
           (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom := by
   let := hL
   dsimp only
@@ -721,139 +717,75 @@ private theorem native_restriction_chain
   let μR := (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).symm
   let RP := ((Lα).mapHomologicalComplex (.up ℤ)).obj P
   let RT := ((Lα).mapHomologicalComplex (.up ℤ)).obj T
-  let e : (Lα) ⋙ FU ≅ F ⋙ R :=
-    Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α
-  let a : (Lα).mapHomologicalComplex (.up ℤ) ⋙
-      FU.mapHomologicalComplex (.up ℤ) ≅
-      F.mapHomologicalComplex (.up ℤ) ⋙ R.mapHomologicalComplex (.up ℤ) :=
-    Functor.mapHomologicalComplexCompIso e (.up ℤ) ≪≫
-      (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm
-  have ha (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) (n : ℤ) :
-      (a.hom.app K).f n = 𝟙 _ := by
-    simp only [a, e, Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
-      Iso.refl_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
-      Functor.mapHomologicalComplexCompIso_inv_app_f, Iso.refl_inv,
-      NatTrans.id_app]
-    erw [Category.comp_id]
-    rfl
-  let b := (MonoidalCategory.tensor _).mapIso ((a.app P).prod (a.app T))
-  have hb (p q n : ℤ) (hpq : p + q = n) :
-      HomologicalComplex.ιTensorObj
-          ((FU.mapHomologicalComplex (.up ℤ)).obj RP)
-          ((FU.mapHomologicalComplex (.up ℤ)).obj RT) p q n hpq ≫ b.hom.f n =
-        HomologicalComplex.ιTensorObj
-          ((R.mapHomologicalComplex (.up ℤ)).obj P₀)
-          ((R.mapHomologicalComplex (.up ℤ)).obj T₀) p q n hpq := by
-    change HomologicalComplex.ιMapBifunctor _ _ _ _ p q n hpq ≫
-      (HomologicalComplex.mapBifunctorMap (a.hom.app P) (a.hom.app T) _ _).f n = _
-    rw [HomologicalComplex.ι_mapBifunctorMap, ha, ha]
-    simp only [CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
-    rfl
-  let ztotal := (((nativeTensorTotal k₀ l Z).obj P).obj T)
-  let utotal := (((nativeTensorTotal k₀ l U).obj RP).obj RT)
-  let source := (FU.mapHomologicalComplex (.up ℤ)).obj
-    (((Lα).mapHomologicalComplex (.up ℤ)).obj ztotal)
-  let target := (R.mapHomologicalComplex (.up ℤ)).obj P₀ ⊗
-    (R.mapHomologicalComplex (.up ℤ)).obj T₀
-  let t₀ : source ⟶ (FU.mapHomologicalComplex (.up ℤ)).obj utotal :=
-    (FU.mapHomologicalComplex (.up ℤ)).map tr.hom
-  let t₁ : source ⟶ (FU.mapHomologicalComplex (.up ℤ)).obj RP ⊗
-      (FU.mapHomologicalComplex (.up ℤ)).obj RT := t₀ ≫ cU.hom
-  let t₂ : source ⟶ target := t₁ ≫ b.hom
-  let r₀ : (R.mapHomologicalComplex (.up ℤ)).obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj ztotal) ⟶
-        (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) :=
-    (R.mapHomologicalComplex (.up ℤ)).map cZ.hom
-  let r₁ : source ⟶ (R.mapHomologicalComplex (.up ℤ)).obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj ztotal) := a.hom.app ztotal
-  let r₂ : source ⟶ (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) := r₁ ≫ r₀
-  let r₃ : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶ target :=
-    (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom
-  let r₄ : source ⟶ target := r₂ ≫ r₃
   dsimp only [nativeOpenTensorInsertion] at restriction_summands hcZ hcU
   dsimp only [RP, RT, Functor.mapHomologicalComplex_obj_X] at hcU
-  have hchain : t₂ = r₄ := by
-    dsimp only [t₂, t₁, t₀, r₄, r₂, r₁, r₀, r₃, ztotal]
-    simp only [Category.assoc]
-    ext n : 1
-    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-      ha]
-    apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
-      (F := (nativeTensorBifunctor k₀ l Z).flip)
-    intro p q hpq
-    dsimp only [Functor.comp_map]
-    conv_rhs =>
-      arg 2
-      erw [Category.id_comp]
-    rw [reassoc_of% (restriction_summands p q n hpq)]
-    let r := (ProEtale.adicUpperStarTensorLeftIso l
-      (Scheme.Hom.geometricFiberMap j (comp_over j _)) (T.X q).carrier).app
-        (P.X p).carrier
-    have hs : FU.map (sr (P.X p) (T.X q)).hom = r.hom := by
-      exact eq_of_heq (hsr (P.X p) (T.X q))
-    conv_lhs =>
-      arg 1
-      rw [hs]
-    apply (cancel_mono (μR.hom.f n)).1
-    simp only [Category.assoc]
-    conv_rhs =>
-      arg 1
-      change R.map (F.map (HomologicalComplex.ιMapBifunctor P T
-        (nativeTensorBifunctor k₀ l Z).flip (.up ℤ) p q n hpq))
-    conv_rhs =>
-      arg 2
-      arg 2
-      arg 1
-      change μR.inv.f n
-    have hcancel := congrArg
-      (fun f : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶
-        (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ↦ f.f n)
-      (Iso.inv_hom_id μR)
-    simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hcancel
-    conv_rhs =>
-      arg 2
-      arg 2
-      rw [hcancel]
-    conv_rhs =>
-      arg 2
-      erw [Category.comp_id]
-    apply (cancel_epi r.inv).1
-    conv_lhs => rw [Iso.inv_hom_id_assoc]
-    apply Mod.tensorLeft_obj_hom_ext
-    simp only [Mod.comp_hom']
-    erw [reassoc_of% (hcU p q n hpq)]
-    rw [← (reassoc_of% (Mod.comp_hom' (HomologicalComplex.ιTensorObj
-      ((FU.mapHomologicalComplex (.up ℤ)).obj RP)
-      ((FU.mapHomologicalComplex (.up ℤ)).obj RT) p q n hpq) (b.hom.f n))),
-      hb p q n hpq]
-    erw [reassoc_of% (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
-      (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
-        (P.X p).carrier (T.X q).carrier)]
-    simp only [R, ProEtale.adicUpperStar_map_hom]
-    have hcz := congrArg (fun f ↦ G.map f) (hcZ p q n hpq)
-    simp only [Functor.map_comp] at hcz
-    rw [hcz]
-    have hι := congrArg
-      (fun f :
-        (((R.mapHomologicalComplex (.up ℤ)).obj P₀).X p ⊗
-          ((R.mapHomologicalComplex (.up ℤ)).obj T₀).X q) ⟶
-          ((R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀)).X n ↦ f.hom)
-      (R.ιTensorObj_mapCochainComplexμIso_hom_f P₀ T₀ p q n hpq)
-    simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
-    conv_lhs =>
-      arg 2
-      rw [hι]
-    have hsheaf := ordinary_sheaf_restriction_tensor k₀ l j
-      (P.X p).carrier (T.X q).carrier
-    have hfinal := congrArg
-      (fun f ↦ f ≫ G.map (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom) hsheaf
-    simp only [Category.assoc] at hfinal
-    convert hfinal using 1
-    rfl
-  dsimp only [t₂, t₁, t₀, r₄, r₂, r₁, r₀, r₃, ztotal] at hchain
-  simp only [Category.assoc] at hchain
-  exact hchain
+  ext n : 1
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+  apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
+    (F := (nativeTensorBifunctor k₀ l Z).flip)
+  intro p q hpq
+  dsimp only [Functor.comp_map]
+  rw [reassoc_of% (restriction_summands p q n hpq)]
+  let r := (ProEtale.adicUpperStarTensorLeftIso l
+    (Scheme.Hom.geometricFiberMap j (comp_over j _)) (T.X q).carrier).app
+      (P.X p).carrier
+  have hs : FU.map (sr (P.X p) (T.X q)).hom = r.hom := by
+    exact eq_of_heq (hsr (P.X p) (T.X q))
+  conv_lhs =>
+    arg 1
+    rw [hs]
+  apply (cancel_mono (μR.hom.f n)).1
+  simp only [Category.assoc]
+  conv_rhs =>
+    arg 1
+    change R.map (F.map (HomologicalComplex.ιMapBifunctor P T
+      (nativeTensorBifunctor k₀ l Z).flip (.up ℤ) p q n hpq))
+  conv_rhs =>
+    arg 2
+    arg 2
+    arg 1
+    change μR.inv.f n
+  have hcancel := congrArg
+    (fun f : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶
+      (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ↦ f.f n)
+    (Iso.inv_hom_id μR)
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hcancel
+  conv_rhs =>
+    arg 2
+    arg 2
+    rw [hcancel]
+  conv_rhs =>
+    arg 2
+    erw [Category.comp_id]
+  apply (cancel_epi r.inv).1
+  conv_lhs => rw [Iso.inv_hom_id_assoc]
+  apply Mod.tensorLeft_obj_hom_ext
+  simp only [Mod.comp_hom']
+  erw [reassoc_of% (hcU p q n hpq)]
+  erw [reassoc_of% (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
+    (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
+      (P.X p).carrier (T.X q).carrier)]
+  simp only [R, ProEtale.adicUpperStar_map_hom]
+  have hcz := congrArg (fun f ↦ G.map f) (hcZ p q n hpq)
+  simp only [Functor.map_comp] at hcz
+  rw [hcz]
+  have hι := congrArg
+    (fun f :
+      (((R.mapHomologicalComplex (.up ℤ)).obj P₀).X p ⊗
+        ((R.mapHomologicalComplex (.up ℤ)).obj T₀).X q) ⟶
+        ((R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀)).X n ↦ f.hom)
+    (R.ιTensorObj_mapCochainComplexμIso_hom_f P₀ T₀ p q n hpq)
+  simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
+  conv_lhs =>
+    arg 2
+    rw [hι]
+  have hsheaf := ordinary_sheaf_restriction_tensor k₀ l j
+    (P.X p).carrier (T.X q).carrier
+  have hfinal := congrArg
+    (fun f ↦ f ≫ G.map (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom) hsheaf
+  simp only [Category.assoc] at hfinal
+  convert hfinal using 1
+  rfl
 
 set_option profiler true in
 private theorem native_restriction_goal_proof
@@ -958,6 +890,21 @@ private theorem native_restriction_goal_proof
   have hmU := hmodelsU.choose_spec.2
   let e : (Lα) ⋙ FU ≅ F ⋙ R :=
     Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α
+  let a : (Lα).mapHomologicalComplex (.up ℤ) ⋙
+      FU.mapHomologicalComplex (.up ℤ) ≅
+      F.mapHomologicalComplex (.up ℤ) ⋙ R.mapHomologicalComplex (.up ℤ) :=
+    Functor.mapHomologicalComplexCompIso e (.up ℤ) ≪≫
+      (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm
+  have ha (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) :
+      a.hom.app K = 𝟙 _ := by
+    ext n : 1
+    simp only [HomologicalComplex.id_f, a, e, Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
+      Iso.refl_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
+      Functor.mapHomologicalComplexCompIso_inv_app_f, Iso.refl_inv,
+      NatTrans.id_app]
+    erw [Category.comp_id]
+    rfl
   let ztotal := (((nativeTensorTotal k₀ l Z).obj P).obj T)
   let utotal := (((nativeTensorTotal k₀ l U).obj RP).obj RT)
   have hchain := native_restriction_chain k₀ l j α hL P T sr hsr
@@ -971,7 +918,12 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l Z P T hP hT)
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
-      cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) hchain mZ rfl
+      cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) (by
+        change _ ≫ cU.hom ≫ (MonoidalCategory.tensor _).map
+            (Prod.mkHom (a.hom.app P) (a.hom.app T)) = a.hom.app ztotal ≫ _
+        rw [ha, ha, ha]
+        change _ ≫ cU.hom ≫ (MonoidalCategory.tensor _).map (𝟙 _) = 𝟙 _ ≫ _
+        simpa only [Functor.map_id, Category.comp_id, Category.id_comp] using hchain) mZ rfl
   exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
 set_option profiler true in
