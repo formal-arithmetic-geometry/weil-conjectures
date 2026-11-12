@@ -29,7 +29,7 @@ local instance TensorResolutionComparisonRestrictionNaturality_localInst4
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
--- The four tensor squares need a larger elaboration budget.
+set_option profiler true in
 /-- The common K-flat zigzag respects three compatible restriction squares.
 
 Source: Stacks Tags 06YT and 08DX(2), functoriality of comparison through a common
