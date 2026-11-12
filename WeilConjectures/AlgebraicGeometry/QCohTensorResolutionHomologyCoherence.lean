@@ -43,7 +43,6 @@ noncomputable def tensorResolutionNormalizedRestrictHomologyIso {X Y : Scheme.{u
   (HomologicalComplex.homologyFunctor X.Modules (.up ℤ) i).mapIso
     (tensorResolutionRestrictionTotalIso j E F)
 
-set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Nested chart restriction is compatible with normalized tensor homology. -/
 theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
