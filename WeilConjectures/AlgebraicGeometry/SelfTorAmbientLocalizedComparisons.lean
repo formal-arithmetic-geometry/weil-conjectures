@@ -105,11 +105,11 @@ theorem exists_selfTor_ambient_localized_comparisons
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  intro B S Q
   classical
   let := SheafOfModules.monoidalCategory Y.sheaf
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let : Abelian C := inferInstance
-  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
   let N := (CochainComplex.singleFunctor C 0).obj B
   obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
   have : QuasiIso q := hq

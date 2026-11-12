@@ -140,7 +140,6 @@ private theorem restrict_scalar_naturality {R : CommRingCat.{u}} {X : Scheme.{u}
     rfl
   exact congrArg (fun k ↦ k ((Scheme.ΓSpecIso R).inv r)) hh
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Global linear maps extend to a morphism into the internal Hom sheaf.
 Source: Stacks Project, Tag 01I7 (mapping property) and Tag 01HV (4)-(5).

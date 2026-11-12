@@ -110,6 +110,7 @@ theorem exists_selfTor_ambient_section_coordinates
                 (e.hom (HomologicalComplex.homologyMap k n
                   ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))
           ∀ x, Q.val.map (homOfLE h).op (c U x) = c V (q x) := by
+  intro B S Q
   obtain ⟨d, hc⟩ := exists_selfTor_ambient_localized_comparisons.{u, w} i n
   let c := fun U : Y.affineOpens ↦
     ((projectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)
