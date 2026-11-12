@@ -392,31 +392,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
   have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
-  dsimp only [a, b, eP, eQ, e, Iso.app, podOrdinaryReindex, podGoodReindex,
-    ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj] at cancelTower
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let ha ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `hs).type
-    let hc ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `cancelTower).type
-    let .forallE _ he _ _ := hc | throwError "expected normalization hypothesis"
-    let count ← IO.mkRef 0
-    let rec differences (fuel : Nat) (v w : Lean.Expr) (path : String) : Lean.MetaM Unit := do
-      if v == w || (← count.get) ≥ 20 then return
-      match fuel with
-      | 0 =>
-        count.modify (· + 1)
-        Lean.logInfo m!"{path}: {v}; expected: {w}"
-      | n + 1 =>
-        let va := v.getAppArgs
-        let wa := w.getAppArgs
-        if v.getAppFn == w.getAppFn && va.size == wa.size && !va.isEmpty then
-          for i in [:va.size] do
-            differences n va[i]! wa[i]! s!"{path}/{v.getAppFn}/{i}"
-        else
-          count.modify (· + 1)
-          Lean.logInfo m!"{path}: {v}; expected: {w}"
-    differences 6 ha.getAppArgs[3]! he.getAppArgs[3]! "right"
+  dsimp only [a, b, eP, eQ, e, Iso.app, podReindexingTensorFrame,
+    integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, podOrdinaryReindex, isoReductionIntegralComplex,
+    podGoodReindex, integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj, ObjectProperty.lift, ObjectProperty.lift_obj_obj] at cancelTower
   have cancelHs := cancelTower hs
-  trace "normalization supplied"
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
   let fQ := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)
   dsimp only [podOrdinaryReindex] at fP fQ
