@@ -86,6 +86,7 @@ private theorem trace_square_of_generators
       ← F.map_comp_assoc, hct, F.map_id, Category.id_comp]
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The full derived-category endpoint comparisons exceed the default heartbeat budget.
 /-- The scalar exchange is invertible and carries the normalized second trace to
 pullback of the normalized q trace. There is no arbitrary object K or tensor action
