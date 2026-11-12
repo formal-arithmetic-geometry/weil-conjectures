@@ -42,8 +42,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-
-set_option profiler true in
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` is invertible if and
 only if `Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
@@ -67,7 +65,6 @@ theorem isIso_map_kunnethMap_iff_residueField (φ₁ : P.Hom M f₁ f₁') (φ�
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_kunnethMap_residueField ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
-set_option profiler true in
 /-- **The restricted Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: under the hypotheses of
 `NearbyCyclesModel.isIso_map_kunnethMap_iff_residueField`, for every `h : W ⟶ Z'`,
 `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
