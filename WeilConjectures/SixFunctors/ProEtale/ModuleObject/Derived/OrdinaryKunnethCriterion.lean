@@ -199,33 +199,36 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
   letI := h₃
   obtain rfl : q = p₂ ≫ aY := by simpa using sq₂.w.symm
   rw [lowerStarKunnethMap'_eq_homEquiv_counit]
+  let KX := R((aX)_*⟦Λ⟧).obj A
+  let KY := R((aY)_*⟦Λ⟧).obj B
+  let cA := (leftDerivedUpperStarComp Λ p₁ aX).hom.app KX ≫
+    L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A)
+  let cB := (leftDerivedUpperStarComp Λ p₂ aY).hom.app KY ≫
+    L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
   -- the transported counit of the first square is the one of `w`, up to `L(𝟙)^* ≅ 𝟭`
-  have e₁ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj (R((aX)_*⟦Λ⟧).obj A)) ≫
-      (pullbackSquareComparison Λ sq₁).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
-        L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A) =
+  have e₁ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KX) ≫
+      (pullbackSquareComparison Λ sq₁).hom.app KX ≫ cA =
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
-        ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))) ≫
-        (pullbackSquareComparison Λ w).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
-          L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A) := by
+        ((leftDerivedUpperStarId Λ S).hom.app KX)) ≫
+        (pullbackSquareComparison Λ w).hom.app KX ≫ cA := by
     have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-      (R((aX)_*⟦Λ⟧).obj A) (h := by rw [← sq₁.w])
+      KX (h := by rw [← sq₁.w])
     have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-      ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))
-    have hs₁ := pullbackSquareComparison_hom_app Λ sq₁ (R((aX)_*⟦Λ⟧).obj A)
-    have hw := pullbackSquareComparison_hom_app Λ w (R((aX)_*⟦Λ⟧).obj A)
+      ((leftDerivedUpperStarId Λ S).hom.app KX)
+    have hs₁ := pullbackSquareComparison_hom_app Λ sq₁ KX
+    have hw := pullbackSquareComparison_hom_app Λ w KX
     simp only [hs₁, hw, reassoc_of% hc, reassoc_of% hn, Category.assoc]
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
-  have e₂ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj (R((aY)_*⟦Λ⟧).obj B)) ≫
-      (pullbackSquareComparison Λ sq₂).hom.app (R((aY)_*⟦Λ⟧).obj B) ≫
-        L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) =
+  have e₂ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KY) ≫
+      (pullbackSquareComparison Λ sq₂).hom.app KY ≫ cB =
       L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
-        ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)) ≫
+        ((leftDerivedUpperStarId Λ S).hom.app KY) ≫
         (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _ := by
     have hc := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-      (R((aY)_*⟦Λ⟧).obj B) (h := by rw [← sq₂.w])
+      KY (h := by rw [← sq₂.w])
     have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-      ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B))
-    have hs₂ := pullbackSquareComparison_hom_app Λ sq₂ (R((aY)_*⟦Λ⟧).obj B)
+      ((leftDerivedUpperStarId Λ S).hom.app KY)
+    have hs₂ := pullbackSquareComparison_hom_app Λ sq₂ KY
     simp only [hs₂, reassoc_of% hc, reassoc_of% hn, Category.assoc]
     simp
   have t₁ : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
