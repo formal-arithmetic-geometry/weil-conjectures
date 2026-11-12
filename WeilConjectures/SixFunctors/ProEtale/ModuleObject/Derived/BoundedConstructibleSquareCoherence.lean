@@ -324,8 +324,18 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
     rw [h_tensor]
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
   clear h_tensor
-  set_option pp.maxSteps 1000 in
-    trace_state
+  run_tac
+    let g ← Lean.Elab.Tactic.getMainGoal
+    let t ← instantiateMVars (← g.getType)
+    let rec tree (e : Expr) (d : Nat) : String :=
+      if d = 0 then "…" else
+        match e with
+        | .app f x => s!"({tree f (d - 1)} {tree x (d - 1)})"
+        | .const n _ => n.toString
+        | .fvar n _ => n.toString
+        | .sort _ => "Sort"
+        | _ => "other"
+    Lean.logInfo m!"TREE {tree t 18}"
   have h_coherence₁ := boundedConstructibleUpperStarComp_square_coherence_comp
     (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
       ΔY q p₁ p₁' h₁ h₂ h₃ h₄ (A := A) (K := K) φ
