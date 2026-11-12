@@ -231,10 +231,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
-  have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
+  obtain ⟨K, a, hKa, hterms, he⟩ := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
     (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
-  obtain ⟨K, a, hKa, hterms, e⟩ := hcomplex
-  obtain ⟨e⟩ := e
+  let e := he.some
   choose F₀ hF₀ using hterms
   have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
       (M : Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
