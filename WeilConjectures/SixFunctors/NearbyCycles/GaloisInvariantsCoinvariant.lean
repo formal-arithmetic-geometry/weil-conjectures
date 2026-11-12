@@ -50,6 +50,45 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Transport a split unit and its coinvariant property along a functor and two isomorphisms. -/
+private lemma coinvariant_retraction_of_conjugate
+    {C D A : Type*} [Category C] [Category D] [Category A] (F : C ⥤ D) (G : D ⥤ A)
+    {S T : C} {P Q : D} (η : S ⟶ T) (R : T ⟶ S) (i : P ≅ F.obj S) (e : F.obj T ≅ Q)
+    (α : P ⟶ Q) (hα : α = i.hom ≫ F.map η ≫ e.hom) (hR : η ≫ R = 𝟙 S)
+    {κ : Type*} (u : κ → (T ⟶ T)) (ρ : κ → (Q ⟶ Q))
+    (hρ : ∀ k, ρ k = e.inv ≫ F.map (u k) ≫ e.hom) :
+    let r := e.inv ≫ F.map R ≫ i.inv
+    α ≫ r = 𝟙 P ∧
+      ∀ {W : A} (φ : G.obj Q ⟶ W),
+        (∀ φ' : G.obj (F.obj T) ⟶ W,
+          (∀ k, G.map (F.map (u k)) ≫ φ' = φ') →
+            G.map (F.map (R ≫ η)) ≫ φ' = φ') →
+        (∀ k, G.map (ρ k) ≫ φ = φ) → G.map (r ≫ α) ≫ φ = φ := by
+  dsimp only
+  have he : (e.inv ≫ F.map R ≫ i.inv) ≫ α = e.inv ≫ F.map (R ≫ η) ≫ e.hom := by
+    rw [hα]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, F.map_comp]
+  refine ⟨?_, ?_⟩
+  · rw [hα]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← F.map_comp_assoc, hR, F.map_id, Category.id_comp, i.hom_inv_id]
+  · intro W φ hco hφ
+    have key := hco (G.map e.hom ≫ φ) fun k ↦ by
+      have h := hφ k
+      rw [hρ k, G.map_comp, G.map_comp] at h
+      simp only [Category.assoc] at h
+      calc
+        _ = G.map e.hom ≫
+            (G.map e.inv ≫ G.map (F.map (u k)) ≫ G.map e.hom ≫ φ) := by
+          rw [← G.map_comp_assoc e.hom e.inv, e.hom_inv_id, G.map_id, Category.id_comp]
+        _ = _ := by rw [h]
+    rw [he, G.map_comp, G.map_comp, Category.assoc, Category.assoc, key,
+      ← G.map_comp_assoc, e.inv_hom_id, G.map_id, Category.id_comp]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
@@ -238,6 +277,22 @@ private lemma coinvariant_action_lift {κ : Type*} (act : κ → (Ω ≃ₐ[L] �
   rw [hres] at h
   exact h
 
+private lemma galoisLayerExchange_factorization
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp, Functor.map_comp] at hα
+  exact hα
+
 /-- Transport the coinvariant property of a retraction of the derived unit through the
 Galois layer exchange isomorphism. The retraction is independent of the functor `G`. -/
 private lemma coinvariant_pullbackExchange_of_unit
@@ -276,22 +331,16 @@ private lemma coinvariant_pullbackExchange_of_unit
         (∀ k, G.map (N.galoisLayerAction Λ h Ω (act k)
           (L((𝟙 X)^*⟦Λ⟧).obj C)) ≫ φ = φ) →
         G.map (r ≫ α) ≫ φ = φ := by
-  dsimp only
-  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
-    (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp] at hα
-  exact retraction_of_eq_comp_map_comp_of_coinvariant
-    R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧)
-    G _ ((leftDerivedUpperStarId Λ X').app _) _
-    (N.galoisLayerExchangeIso h Ω Λ C) rfl _ R hα hR
+  exact CategoryTheory.coinvariant_retraction_of_conjugate
+    (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)) G _ R
+    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
+    (N.galoisLayerExchangeIso h Ω Λ C) _ (galoisLayerExchange_factorization N h Ω Λ C) hR
     (fun k ↦ derivedUnitTransport Λ
       (pullbackAction h _ specGaloisAction_comp (act k))
       (pullbackAction_fst h _ specGaloisAction_comp (act k))
       (pullbackAction_fst h _ specGaloisAction_comp (act k))
       (L((N.ε)^*⟦Λ⟧).obj C))
-    (fun k ↦ N.galoisLayerAction Λ h Ω (act k)
-      (L((𝟙 X)^*⟦Λ⟧).obj C))
+    (fun k ↦ N.galoisLayerAction Λ h Ω (act k) (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
 
 private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_complex [QuasiCompact N.j]
