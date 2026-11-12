@@ -294,42 +294,24 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
       (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
         (traitSlice_over _)).generic = (h.genericSliceHom (traitSliceCoord k') hb).generic := by
     simp [genericSliceHom]
-  have hx := (genericSliceToBaseChange (traitSliceCoord k') hM hb
-    hc).pullbackExchange_comp_app_of_eq (Profinite.padicAlgClRingObj ℓ)
-    (baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
-    (h.genericSliceHom (traitSliceCoord k') hb) (Category.comp_id _) hspec htot hgen A
   have hkA := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
     hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
     (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
-  have key := exists_retraction_of_averaging_comp (ι := GenericAut k' (traitSliceField k') ⧸ U)
-    ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
-    ((baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)).pullbackExchange
-      (Profinite.padicAlgClRingObj ℓ))
-    ((genericSliceToBaseChange (traitSliceCoord k') hM hb hc).pullbackExchange
-      (Profinite.padicAlgClRingObj ℓ))
-    (leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hspec)
-    (leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
-      (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb)))
-    (leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ)
-      (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).left) A
-    (by exact_mod_proofs hx) (by exact_mod_proofs hkA) rB (by exact_mod_proofs hrB) Finset.univ
-    (Fintype.card (GenericAut k' (traitSliceField k') ⧸ U))
-    (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦ (baseChangeAut hM b hb
-      (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out).autAction
-        (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
-    (U.relIndex V) (Fintype.card (GenericAut k' (traitSliceField k') ⧸ V)) hn _
-    (by exact_mod_proofs hs) (by exact_mod_proofs havgB)
+  have havgU := (congrArg (fun z ↦ U.relIndex V • z) havgB).trans hs.symm
+  rw [← mul_smul, ← hn] at havgU
+  exact exists_retraction_pullbackExchange_comp_of_isIso_left (Profinite.padicAlgClRingObj ℓ)
+    (genericSliceToBaseChange (traitSliceCoord k') hM hb hc)
+    (baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
+    (h.genericSliceHom (traitSliceCoord k') hb) (Category.comp_id _) hspec htot hgen A
+    (by exact_mod_proofs hkA) Finset.univ
     (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦
-      (genericSliceAut (traitSliceCoord k') hb σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
-        (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          A))
-    (fun σ ↦ (genericSliceAut (traitSliceCoord k') hb σ.out).autAction
-      (Profinite.padicAlgClRingObj ℓ)
-        (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)))
-    (fun σ ↦ by exact_mod_proofs hκ σ.out) (fun σ ↦ Hom.autAction_naturality _ _ _)
-  obtain ⟨r, hr₁, hr₂⟩ := key
-  exact ⟨r, by exact_mod_proofs hr₁, by exact_mod_proofs hr₂⟩
+      genericSliceAut (traitSliceCoord k') hb σ.out)
+    (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦
+      baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out)
+    (Fintype.card (GenericAut k' (traitSliceField k') ⧸ U))
+    (by exact ⟨rB, hrB, havgU⟩)
+    (fun σ D ↦ pullbackExchange_genericSliceToBaseChange_app_comp_autAction
+      (traitSliceCoord k') hM hb (Profinite.padicAlgClRingObj ℓ) hc σ.out D)
 
 end Ambient
 
