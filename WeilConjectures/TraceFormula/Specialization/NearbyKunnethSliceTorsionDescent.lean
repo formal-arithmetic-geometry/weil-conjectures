@@ -115,8 +115,6 @@ lemma isIso_kunnethMap_leftDerivedUpperStar_id {X₀ Y₀ Z₀ X₀' Y₀' Z₀'
     ((leftDerivedUpperStarId Λ Y₀).app _ ≪≫ (leftDerivedUpperStarId Λ Y₀).app _ ≪≫
       (leftDerivedUpperStarId Λ Y₀).app _) h
 
-set_option trace.profiler true in
--- the Künneth maps of the three product configurations are large terms
 /-- **The Künneth map descends along a Galois slice** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, identification (2) and projection formula (3); finite field
 coefficients `T₀`): in the situation of the module docstring, if the Künneth map of
@@ -148,6 +146,7 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
     (hS : IsIso (kunnethMap Λ μS νS ((L((σM)^*⟦Λ⟧)).obj A) B)) :
     IsIso (L((rP')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) := by
   subst hrM hrP
+  -- Share the derived functors and their module-category instances across the two squares.
   let pullX := L((𝟙 X)^*⟦Λ⟧)
   let pullY := L((𝟙 Y)^*⟦Λ⟧)
   have := hBa
@@ -186,6 +185,7 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
   let r := hret.choose
   have hr := hret.choose_spec.1
   have hco := hret.choose_spec.2
+  -- Infer each intermediate complex from its bound instead of rebuilding the derived functors.
   have hB₁GE := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) B a
   have hB₂GE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 Y) _ a hB₁GE
   have hNGE := @isGE_nearbyCycles_obj Λ _ _ _ _ N _ a hB₂GE
