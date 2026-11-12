@@ -37,19 +37,16 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
 -- Expose the unchanged carrier of scalar restriction before elaborating section applications.
+def rationalCompletedRestrictionApply {R S : Type*} [Ring R] [Ring S]
+    (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S)
+    (f : M ⟶ (ModuleCat.restrictScalars φ).obj N) (m : M) : N :=
+  f.hom m
+
 local instance (priority := 2000) rationalCompletedRestrictionCoeFun
     {R S : Type*} [Ring R] [Ring S]
     (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S) :
     CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) (fun _ ↦ M → N) where
-  coe f := f.hom
-
-#print rationalCompletedRestrictionCoeFun
-section
-variable {R S : Type*} [Ring R] [Ring S] (φ : R →+* S)
-  (M : ModuleCat.{u} R) (N : ModuleCat.{u} S)
-#synth CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) _
-#synth CoeFun (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) _
-end
+  coe := rationalCompletedRestrictionApply φ M N
 
 set_option trace.profiler true in
 /-- Completed composition and descent to all raw rational fraction arrows.
