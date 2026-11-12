@@ -36,7 +36,6 @@ private theorem exists_iso_square_trans {C : Type*} [Category* C]
   obtain ⟨c, d, hcd⟩ := hg
   exact ⟨a ≪≫ c, b ≪≫ d, (CommSq.vert_comp ⟨hab⟩ ⟨hcd⟩).w⟩
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Applying internal Hom to the sheafified coefficient quotient gives the
