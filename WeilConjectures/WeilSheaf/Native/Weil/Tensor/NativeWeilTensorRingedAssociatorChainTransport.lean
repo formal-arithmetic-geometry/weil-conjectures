@@ -175,7 +175,6 @@ theorem nativeChainForgetComponent_transport
     have hτ := nativeRingedChainBridgeSquare D
     have hμ := r.associativity
     have hν := o.associativity
-    have ha' := (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom
     exact tensor_square_pasting
       (C := CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
       (B := CochainComplex
@@ -189,7 +188,7 @@ theorem nativeChainForgetComponent_transport
       (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
       (fun P Q ↦ by
         exact native_weil_tensor_ringed_binary_chain_square D d o r P Q)
-      hμ hν P Q N ha' ha
+      hμ hν P Q N (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ha
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
       (HomologicalComplex.ιMapBifunctor N (Q.mapBifunctor P T) T
