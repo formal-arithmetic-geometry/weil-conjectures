@@ -72,7 +72,6 @@ private theorem comparison_square_cancel
     _ = l ≫ o := ho
     _ = l ≫ p ≫ e := by rw [← h]
 
-set_option profiler true in
 set_option linter.unusedVariables false in
 -- Keep the original unused local H in the statement unchanged.
 /-- Open restriction transports the normalized tensor comparison on the literal

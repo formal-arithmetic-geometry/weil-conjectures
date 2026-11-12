@@ -127,6 +127,7 @@ theorem exists_affineSpectrum_canonicalComparison_square
     f f' g g' sq sq0 z0 i P
   let l := hs.choose
   have hl := hs.choose_spec
+  change l.hom ≫ _ = _ at hl
   refine ⟨l, ?_⟩
   have hn := T.hom.naturality
     (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
@@ -151,6 +152,6 @@ theorem exists_affineSpectrum_canonicalComparison_square
   simp only [comparisonIntoPullback_eq, Functor.map_comp, Category.assoc,
     eqToIso_refl, Iso.trans_hom, Iso.refl_hom, Iso.app_hom, Iso.symm_hom,
     Category.id_comp, c0, d0, b, a0, P0, T, F, F0, H0, z] at hh ⊢
-  convert hh using 1 <;> rfl
+  exact hh
 
 end AlgebraicGeometry.SingleComplexBaseChange
