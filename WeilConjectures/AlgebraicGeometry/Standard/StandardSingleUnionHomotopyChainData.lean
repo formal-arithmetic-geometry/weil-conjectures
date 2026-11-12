@@ -50,7 +50,6 @@ private theorem transport_biprod_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- Transporting the relative comparison requires additional elaboration heartbeats.
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
 (blueprint: lem-pc-standard-single-union-homotopy-chain-data).
@@ -102,8 +101,9 @@ theorem standardSingle_union_homotopy_chain_data
         DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =
           e₃.hom ≫ aUV.hom := by
   classical
-  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  letI inst : ∀ X : Scheme.{u}, HasDerivedCategory.standard
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := fun X ↦
+    HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings X.toRingedSpace))
   let W := U ⊔ V
   let f := W.ι ≫ p
   let K := (DerivedCategory.singleFunctor
