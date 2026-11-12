@@ -830,7 +830,8 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let t := (eqToIso (congrArg arrowPush e)).symm
   have hc := conjugate_square_transport e ah ab a b
   rw [hc]
-  apply Iso.ext
+  set_option profiler true in
+    apply Iso.ext
   apply NatTrans.ext
   funext N
   let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
@@ -842,8 +843,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
-    set_option profiler true in
-      apply ConcreteCategory.hom_ext
+    apply ConcreteCategory.hom_ext
     intro m
     simp only [f, g, SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
