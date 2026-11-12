@@ -398,11 +398,23 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     let ha ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `hs).type
     let hc ← Lean.Meta.whnf (← Lean.Meta.getLocalDeclFromUserName `cancelTower).type
     let .forallE _ he _ _ := hc | throwError "expected normalization hypothesis"
-    for i in [0, 2, 1, 3] do
-      let v := ha.getAppArgs[i]!
-      let w := he.getAppArgs[i]!
-      Lean.logInfo m!"HEq {i}, actual: {v}; expected: {w}"
-      Lean.logInfo m!"HEq {i} equal: {← Lean.Meta.isDefEq v w}"
+    let count ← IO.mkRef 0
+    let rec differences (fuel : Nat) (v w : Lean.Expr) (path : String) : Lean.MetaM Unit := do
+      if v == w || (← count.get) ≥ 20 then return
+      match fuel with
+      | 0 =>
+        count.modify (· + 1)
+        Lean.logInfo m!"{path}: {v}; expected: {w}"
+      | n + 1 =>
+        let va := v.getAppArgs
+        let wa := w.getAppArgs
+        if v.getAppFn == w.getAppFn && va.size == wa.size && !va.isEmpty then
+          for i in [:va.size] do
+            differences n va[i]! wa[i]! s!"{path}/{v.getAppFn}/{i}"
+        else
+          count.modify (· + 1)
+          Lean.logInfo m!"{path}: {v}; expected: {w}"
+    differences 6 ha.getAppArgs[3]! he.getAppArgs[3]! "right"
   have cancelHs := cancelTower hs
   trace "normalization supplied"
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
