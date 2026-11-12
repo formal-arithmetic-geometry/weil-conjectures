@@ -99,8 +99,7 @@ private theorem composite_counit_of_associativity
     NatTrans.id_app, Category.id_comp, Functor.map_comp, Category.assoc]
   have hn := (c i s).inv.naturality e
   dsimp only [Functor.comp_map, Functor.comp_obj] at hn
-  rw [reassoc_of% h, ← reassoc_of% hn]
-  rw [hc]
+  simp only [reassoc_of% h, ← reassoc_of% hn, hc]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
