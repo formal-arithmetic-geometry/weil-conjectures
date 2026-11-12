@@ -28,7 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (H : Functor.uncurry.obj (ordinaryIhomBifunctor l Y) ⋙ E.functor ≅
     E.functor.op.prod E.functor ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
--- Share the concrete cochain structures across the comparison fields.
+-- Share the concrete cochain structures before the fields introduce large tensor expressions.
 local instance ordinaryRingedTensorSourceMonoidal :
     MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
   Mod.monoidalCategoryCochainComplex
@@ -49,6 +49,7 @@ local instance ordinaryRingedTensorTargetStruct :
     MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
   (ordinaryRingedTensorTargetMonoidal J R).toMonoidalCategoryStruct
 
+-- Infer the sign action with abstract endpoints, without unfolding total-tensor objects.
 local instance ordinaryRingedTensorHomSMul
     (M N : RingedTensorModules.{u + 1, u + 1, u + 1} J R) :
     HSMul ℤˣ (M ⟶ N) (M ⟶ N) := inferInstance
@@ -73,7 +74,6 @@ structure OrdinaryRingedTensorUnderivedData where
           (E.functor.obj Q) (E.functor.obj I)).symm
             (E.functor.map f ≫ H.hom.app (op P, I))
 
-set_option profiler true in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- A normalized comparison on the existing ordinary and ringed cochain tensors.
@@ -99,6 +99,7 @@ structure OrdinaryRingedTensorChainComparison
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
       (by
+        -- Normalize the hom type before elaborating its scalar action.
         change E.functor.obj (((ordinaryTensorBifunctor l Y).obj (P.X p)).obj (Q.X q)) ⟶
           ((coefficientTotalTensor J R).obj
             ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q,
@@ -115,7 +116,6 @@ structure OrdinaryRingedTensorChainComparison
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ G.obj N) ≫
         (α_ (G.obj P) (G.obj Q) (G.obj N)).hom
 
-set_option profiler true in
 /-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
 The normalization equations fix every tensorator uniquely. The first clause retains
 symmetry relative to the actual ordinary balanced tensor. This is a property of
