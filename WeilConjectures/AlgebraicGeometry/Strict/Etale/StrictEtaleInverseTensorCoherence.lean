@@ -399,9 +399,9 @@ private theorem ordinary_composition {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n �
   simp only [Functor.map_comp]
   erw [← reassoc_of% hn, ← L.map_comp_assoc,
     ← L.map_comp_assoc]
-  erw [Category.assoc (insertion J h₁ M), insertion_comp J PW h₁ h₂ M,
+  rw [Category.assoc (insertion J h₁ M), insertion_comp J PW h₁ h₂ M,
     tensor_insertion PW PV A E (h₂.trans h₁) M]
-  erw [reassoc_of% tensor_insertion PW PV A E h₂ ((tensor J h₁).obj M),
+  rw [reassoc_of% tensor_insertion PW PV A E h₂ ((tensor J h₁).obj M),
     ← reassoc_of% hi, reassoc_of% tensor_insertion PW PV A E h₁ M,
     insertion_comp K PV h₁ h₂ ((A.lift r).modules.obj M)]
 
