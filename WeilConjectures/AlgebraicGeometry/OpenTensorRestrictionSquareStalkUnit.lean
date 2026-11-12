@@ -69,8 +69,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.pushforwardComp Scheme.Modules.pushforwardCongr
   openTensorRestrictionIso openTensorRestrictionSquareIso
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
 private theorem square_unit_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
@@ -192,7 +190,7 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
   simp only [openTensorRestrictionSquareIso, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    Iso.hom_inv_id_app_assoc, Category.assoc]
+    Iso.hom_inv_id_app_assoc]
 
 end
 
