@@ -48,8 +48,6 @@ private theorem unionEquation_factor
 set_option linter.unusedVariables false in
 -- Preserve the original names of the nondependent forall proof binders.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-set_option maxHeartbeats 500000 in
--- The literal local comparison vertices require a larger elaboration budget.
 /-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and
 counit data for a bounded flat union complex (Stacks, Tag 0DJ9).
 (blueprint: new-pc-standard-single-flat-counit-union-equation).
@@ -115,8 +113,8 @@ theorem standardSingleFlatCounitUnionEquation
   intro K hbounded hflat e
   obtain ⟨d₁, d₂, d₃, d₁', d₂', d₃', hT, hT', φ, h₁, h₂, h₃, hU, hV, hUV⟩ :=
     standardSingleFlatCounitUnionTriangles p g U V N hN hPU hPV hPUV
-  have hm : IsIso φ.hom₂ := h₂.symm ▸ unionEquation_isIso_biprod_map hU hV
-  have ho : IsIso φ.hom₃ := h₃.symm ▸ hUV
+  have hm := unionEquation_isIso_of_eq h₂.symm (unionEquation_isIso_biprod_map hU hV)
+  have ho := unionEquation_isIso_of_eq h₃.symm hUV
   have hbc := unionEquation_isIso_of_eq h₁
     (Pretriangulated.isIso₁_of_isIso₂₃ φ hT hT' hm ho)
   have hK := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
