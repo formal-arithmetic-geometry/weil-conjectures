@@ -36,6 +36,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap structureSheafAb structureSheafCohomologyPullback
 
+/-- Combine independent witnesses with a compatible choice for each index. -/
 private theorem exists_compatible_family
     {ι A E : Type*} {B : ι → Type*} {P Q : A → ι → Prop}
     {R : E → (i : ι) → B i → Prop}
@@ -46,7 +47,6 @@ private theorem exists_compatible_family
   exact ⟨a, e, fun i ↦ Classical.choose (he i),
     fun i ↦ ⟨(ha i).1, (ha i).2, Classical.choose_spec (he i)⟩⟩
 
-set_option profiler true in
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives intertwining the canonical affine residue comparisons, and geometric fibre
 comparisons `e`, `ei` intertwine the derived coefficient arrows with structure-sheaf pullback.

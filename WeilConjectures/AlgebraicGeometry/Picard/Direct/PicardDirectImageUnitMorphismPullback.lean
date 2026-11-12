@@ -75,6 +75,7 @@ private theorem singlePullback_naturality
 end Modules
 end
 
+/-- Compare two factorizations through an epimorphism using a faithful functor. -/
 private theorem cancel_single_comparison
     {C D : Type*} [Category C] [Category D] (H : C ⥤ D) [H.Faithful]
     {A B B' N : C} {Z : D} (P : Z ⟶ H.obj A) [Epi P]
@@ -86,7 +87,6 @@ private theorem cancel_single_comparison
   apply (cancel_epi P).mp
   simpa only [Functor.map_comp, Category.assoc, hr, hs] using h
 
-set_option profiler true in
 set_option maxRecDepth 2048 in
 attribute [local irreducible] Modules.tensorPullback picardDirectImageUnitMorphism in
 set_option cleanup.letToHave false in
