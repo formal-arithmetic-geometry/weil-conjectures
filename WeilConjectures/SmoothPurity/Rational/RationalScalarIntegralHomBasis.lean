@@ -168,7 +168,7 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
       ext n : 1
       simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
         Adjunction.mapHomologicalComplex_unit_app_f, NatTrans.mapHomologicalComplex_app_f,
-        smulC, πC, unitP, integralScalarChainAction_app_f]
+        smulC, πC, unitP, R, integralScalarChainAction_app_f]
       refine (hA i j (P.X n)).trans ?_
       split_ifs <;> simp
     have hBc : ∑ j, πC j ≫ unitP ≫ R.map (smulC j) = 𝟙 _ := by
@@ -179,7 +179,7 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
       change ∑ j, (πC j ≫ unitP ≫ R.map (smulC j)).f n = _
       simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
         Adjunction.mapHomologicalComplex_unit_app_f, NatTrans.mapHomologicalComplex_app_f,
-        smulC, πC, unitP, integralScalarChainAction_app_f]
+        smulC, πC, unitP, R, integralScalarChainAction_app_f]
       exact hB (P.X n)
     have hAP (i j : Fin d) : ιZ i (DerivedCategory.Q.obj P) ≫ πP j = if i = j then 𝟙 _ else 0 := by
       rw [hιQ]
