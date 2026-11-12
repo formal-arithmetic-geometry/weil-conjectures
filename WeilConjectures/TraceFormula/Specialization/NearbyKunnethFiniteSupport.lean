@@ -525,7 +525,10 @@ private theorem exists_local_coordinates_isIso_kunnethMap
     have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
     have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
     refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ?_⟩
-    refine exists_generic_coordinates_mono (fun T r hi ↦ ?_)
+    refine exists_generic_coordinates_mono (Y := (P.restrictSpecialFibre U).left)
+      (Q := fun T r ↦ IsIso (L((r)^*⟦Λ⟧).map
+        (kunnethMap Λ ψ₁ ψ₂ (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B))))
+      (fun T r hi ↦ ?_)
       (exists_coordinates_isIso_kunnethMap_of_charts Λ hMV hNW hpbU hPU hgenU
         (hm.restrict V) (hm'.restrict W) hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB')
     exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction Λ
