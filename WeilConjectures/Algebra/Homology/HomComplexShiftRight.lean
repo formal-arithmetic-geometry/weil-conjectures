@@ -141,6 +141,7 @@ theorem homComplex_shift_right
       SheafOfModules.homObjMap (R := R) (𝟙 (L.X p))
         (M.XIsoOfEq (show (p + k) + n = p + (k + n) by omega)).inv = _
     exact hπinv L M (k + n) p (p + (k + n)) ((p + k) + n) rfl (by omega)
+  clear_value e
   refine ⟨NatIso.ofComponents (fun X ↦
     HomologicalComplex.Hom.isoOfComponents (e X.1.unop X.2) ?_) ?_⟩
   · intro k l hkl
