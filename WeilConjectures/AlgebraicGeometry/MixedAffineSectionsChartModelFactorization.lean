@@ -108,6 +108,8 @@ theorem exists_mixedAffineSections_chart_model_factorization
       letI : J.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive J
       letI : E.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive E
       letI : K.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive K
+      letI : (F ⋙ H ⋙ E).PreservesZeroMorphisms := by infer_instance
+      letI : (F ⋙ K ⋙ J).PreservesZeroMorphisms := by infer_instance
       let C := (F.mapHomologicalComplex (.up ℤ)).obj P
       let Q := DerivedCategory.Q.obj C
       ∃ (a : (mixedGlobalExtension g).obj ((schemeDerivedGlobalSections S).obj Q) ≅
