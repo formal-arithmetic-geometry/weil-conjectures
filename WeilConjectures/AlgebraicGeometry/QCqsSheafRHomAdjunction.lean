@@ -121,6 +121,7 @@ private theorem trace_bijective_of_projection
   exact (show (fun α ↦ α ≫ c ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K).hom)) = e
     from funext he) ▸ e.bijective
 
+/-- Naturality of the trace is a categorical identity, independent of derived tensor structures. -/
 private theorem trace_naturality_of_counit
     {C D : Type*} [Category* C] [Category* D]
     (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)
@@ -146,7 +147,6 @@ private theorem trace_naturality_of_counit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
 /-- For qcqs schemes and a qcqs morphism `f`, let `adj : Rf_* ⊣ a` be the restricted
 adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `Rf_* RHom_X(L, M) ⟶ RHom_Y(Rf_* L, Rf_* M)`, tied by the mate equation `hc` of

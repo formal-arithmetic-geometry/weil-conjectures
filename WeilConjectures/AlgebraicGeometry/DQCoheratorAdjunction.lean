@@ -325,6 +325,7 @@ private noncomputable def isoHomAddEquiv
     map_add' f g := by simp [Iso.homCongr, Preadditive.comp_add, Preadditive.add_comp] }
 
 open CochainComplex HomComplex in
+/-- The cohomology-to-derived-Hom equivalence for an arbitrary source complex. -/
 private noncomputable def classDerivedEquiv
     {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory.{w} C]
     (S I : CochainComplex C ℤ) [I.IsKInjective] (i : ℤ) :
@@ -343,6 +344,7 @@ private noncomputable def classDerivedEquiv
       (DerivedCategory.Q.obj S) (DerivedCategory.Q.obj I)).symm
 
 open CochainComplex HomComplex in
+/-- Prove naturality before specializing the abelian category to sheaves of modules. -/
 private lemma classDerivedEquiv_naturality
     {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory.{w} C]
     (S : CochainComplex C ℤ) {I J : CochainComplex C ℤ}
@@ -395,7 +397,6 @@ private noncomputable def unitClassDerivedEquiv (Y : Scheme.{u})
 
 open CochainComplex HomComplex in
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {I J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
