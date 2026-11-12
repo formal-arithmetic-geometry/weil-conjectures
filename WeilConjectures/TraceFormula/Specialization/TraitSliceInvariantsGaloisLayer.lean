@@ -46,6 +46,17 @@ open Scheme PadicAlgCl
 
 attribute [local instance] traitGenericFieldAlgebra
 
+/-- Constructibility of a derived pullback passes to any further factorization. -/
+private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
+    {Z Y X : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X) (fg : Z ⟶ X) (hfg : f ≫ g = fg)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (hA : boundedConstructible (condensedRingObj Λ Y) (L((g)^*⟦Λ⟧).obj A)) :
+    boundedConstructible (condensedRingObj Λ Z) (L((fg)^*⟦Λ⟧).obj A) :=
+  (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarCompOfEq Λ hfg).app A).symm
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f _ hA)
+
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
   {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -148,15 +159,13 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     QuasiCompact.compactSpace_of_compactSpace (baseChangeSpecial b v).hom
   have : QuasiSeparatedSpace (baseChangeSpecial b v).left :=
     quasiSeparatedSpace_of_quasiSeparated (baseChangeSpecial b v).hom
-  have hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      (baseChangeGaloisModel hM b hb v hv).generic)
-      (L(((baseChangeGaloisModel hM b hb v hv).ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) :=
-    (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarCompOfEq
-      (Profinite.padicAlgClRingObj ℓ) (Category.assoc _ _ _ : ((baseChangeHom hM b hb v
-        hv).traitChangeThickening (traitGenericField K) (baseChangeTotalStructure hM b hb v hv) q
-          g hM.isPullback_j.w (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
-            (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hA)
+  have hC := boundedConstructible_leftDerivedUpperStar_obj_of_factorization
+    (Z := (baseChangeGaloisModel hM b hb v hv).generic)
+    ((baseChangeHom hM b hb v hv).traitChangeThickening (traitGenericField K)
+      (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+      (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _)
+    M.ε (baseChangeGaloisModel hM b hb v hv).ε (Category.assoc _ _ _)
+    (Profinite.padicAlgClRingObj ℓ) A hA
   obtain ⟨E, K₀, e, htors⟩ := exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC
   obtain ⟨L₁, htriv, hSA⟩ := (baseChangeGaloisModel hM b hb v hv)
     |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
