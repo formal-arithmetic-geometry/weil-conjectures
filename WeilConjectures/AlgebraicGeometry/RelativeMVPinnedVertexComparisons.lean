@@ -57,8 +57,6 @@ private theorem map_desc_comparison
   ext <;> simp [biprod.mapIso, hU, hV]
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
--- Elaborating the four derived-category vertex comparisons needs a larger budget.
 /-- Vertex comparisons for the canonical exact-restriction presentation of the
 relative Mayer--Vietoris rows. The overlap component satisfies the vertical-pasting
 identity. No boundary, distinguishedness, or morphism of triangles is asserted.
@@ -133,8 +131,12 @@ theorem relativeMV_pinned_vertex_comparisons
   have : PreservesBinaryBiproducts F := preservesBinaryBiproducts_of_preservesBiproducts F
   have : PreservesBinaryBiproducts G := preservesBinaryBiproducts_of_preservesBiproducts G
   let s (W : X.Opens) := (derivedPullback g).mapIso (relativeMVExactOpenIso f W K)
-  obtain ⟨t, htUnit, htRestriction, htPaste⟩ :=
+  have ht :=
     relativeMV_inverse_open_comparisons f f' g g' hpull K K' φ
+  let t := Classical.choose ht
+  have htUnit := (Classical.choose_spec ht).1
+  have htRestriction := (Classical.choose_spec ht).2.1
+  have htPaste := (Classical.choose_spec ht).2.2
   refine ⟨F.mapBiprod _ _ ≪≫ biprod.mapIso (s U) (s V), s (U ⊓ V),
     G.mapBiprod _ _ ≪≫ biprod.mapIso (t U) (t V), t (U ⊓ V), ?_, ?_, ?_, ?_,
     htPaste (U ⊓ V)⟩
@@ -156,7 +158,7 @@ theorem relativeMV_pinned_vertex_comparisons
         congrArg ((derivedPullback g).map)
           (relativeMVExactOpenIso_restriction f (W := U ⊓ V) (U := V) inf_le_right K)
   · change G.map (biprod.lift _ _) ≫ _ = _
-    rw [map_lift_comparison, htUnit U, htUnit V]
+    simp only [map_lift_comparison, htUnit U, htUnit V]
     rfl
   · change G.map (biprod.desc _ (-_)) ≫ _ = _
     apply map_desc_comparison

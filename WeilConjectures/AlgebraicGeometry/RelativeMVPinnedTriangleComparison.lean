@@ -31,8 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
--- Transporting the four vertex comparisons and their shift data needs extra elaboration.
 /-- The pinned relative restriction maps are the first two arrows of a functorial
 pair of distinguished triangles. Their morphism has the prescribed global, open,
 and overlap components. This is a derived-category statement, with no assertion
@@ -129,8 +127,7 @@ theorem relativeMV_pinned_triangle_comparison
         (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).hom ≫ e₃'.inv := by
       apply (cancel_mono e₃'.hom).mp
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-      rw [h₃]
-      simp only [Iso.inv_hom_id_assoc]
+      simp only [h₃, Iso.inv_hom_id_assoc]
     have hd' : (F.mapTriangle.obj T).mor₃ ≫
         (relativeMVGlobalArrow f f' g g' hpull K K' φ).hom⟦(1 : ℤ)⟧' =
         mvBaseChangeOpenMap f f' g g' hpull.w K K' φ (U ⊓ V) ≫
@@ -138,7 +135,9 @@ theorem relativeMV_pinned_triangle_comparison
       simpa only [Functor.mapTriangle, T, T', mvBaseChangeTriangle, Triangle.mk,
         Functor.id_obj, relativeMVGlobalArrow, Arrow.mk_hom, F, G, Category.assoc] using hd
     dsimp only [δ, δ']
-    rw [Category.assoc, hd', ← Category.assoc, hi, Category.assoc]
+    simp only [Category.assoc, hd']
+    simpa only [Category.assoc] using
+      congrArg (fun k ↦ k ≫ (G.mapTriangle.obj T').mor₃) hi
   refine ⟨δ, δ', ?_, ?_, ?_⟩
   · apply isomorphic_distinguished _ hT
     refine (Triangle.isoMk (F.mapTriangle.obj T)
@@ -148,7 +147,7 @@ theorem relativeMV_pinned_triangle_comparison
         Iso.refl_hom, Category.id_comp] using hf
     · simp only [Iso.refl_hom, Triangle.mk_mor₃, δ,
         Iso.hom_inv_id_assoc]
-      rw [(shiftFunctor _ (1 : ℤ)).map_id, Category.comp_id]
+      simp only [Functor.map_id, Category.comp_id]
   · apply isomorphic_distinguished _ hT'
     refine (Triangle.isoMk (G.mapTriangle.obj T')
       (Triangle.mk (relativeMVTargetFirst g' f' U V K')
@@ -157,7 +156,7 @@ theorem relativeMV_pinned_triangle_comparison
         Iso.refl_hom, Category.id_comp] using hf'
     · simp only [Iso.refl_hom, Triangle.mk_mor₃, δ',
         Iso.hom_inv_id_assoc]
-      rw [(shiftFunctor _ (1 : ℤ)).map_id, Category.comp_id]
+      simp only [Functor.map_id, Category.comp_id]
   · exact ⟨Triangle.homMk _ _
       (relativeMVGlobalArrow f f' g g' hpull K K' φ).hom
       (biprod.map (relativeMVLocalArrow f f' g g' hpull K K' φ U).hom
