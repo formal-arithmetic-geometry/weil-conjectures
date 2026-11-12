@@ -302,6 +302,7 @@ variable {X X'a X'b X'ab Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [IsSeparated X'ab.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the categories of sheaves make the rewriting slow
 /-- **Base change of the relative pullback** (blueprint `lem-trf-weil-shriek-iterates`, Step 2):
 for cartesian squares `p ≫ r = t ≫ q` (with `r` and `t` proper) and `q ≫ f'' = f' ≫ a`, the
@@ -489,6 +490,7 @@ variable {X Y X'a X'b X'ab : Over (Spec (.of k))}
   [IsSeparated X'ab.hom]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the categories of sheaves make the rewriting slow
 /-- **The composition law of the Frobenius comparisons** (blueprint `sk-i-relative-frob` (1),
 `lem-trf-weil-shriek-iterates` (1)): for two pairs of endomorphisms `a_X, a_Y` and `b_X, b_Y`
