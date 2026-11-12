@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.HopkinsLevitzki
 
 /-!
 # Weakly étale algebras over a field

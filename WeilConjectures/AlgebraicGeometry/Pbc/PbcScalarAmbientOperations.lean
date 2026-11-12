@@ -434,7 +434,7 @@ def pbcScalarOrdinaryRestrictionPull :
     (TwoSquare.mk _ _ _ _ (pbcActualScalarOrdinaryPullIso g (pbcIntegralDatum l E)
       (pbcIntegralDatum l F) (pbcScalarCoefficientMap l E F i Y)
       (pbcScalarCoefficientMap l E F i X)
-      (pbcScalarCoefficientStructureSquare l E F i g)).inv)).natTrans
+      (pbcScalarCoefficientStructureSquare l E F i g)).inv))
 
 /-- Transport of an iterated mate along an equality of left adjoints with compatible units. -/
 private theorem iteratedMate_transport {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂]
@@ -447,8 +447,8 @@ private theorem iteratedMate_transport {C₁ C₂ D₁ D₂ : Type*} [Category C
     (huF : ∀ M, adjF'.unit.app M ≫ PF.map ((eqToHom hF).app M) = adjF.unit.app M)
     (δ : PF ⋙ ResY ⟶ ResX ⋙ PE) :
     whiskerLeft ResY (eqToHom hE) ≫ (mateEquiv aY aX (TwoSquare.mk _ _ _ _
-        ((conjugateEquiv (aY.comp adjF) (adjE.comp aX)).symm δ))).natTrans =
-      ((mateEquiv adjF' adjE').symm (TwoSquare.mk _ _ _ _ δ)).natTrans ≫
+        ((conjugateEquiv (aY.comp adjF) (adjE.comp aX)).symm δ))) =
+      ((mateEquiv adjF' adjE').symm (TwoSquare.mk _ _ _ _ δ)) ≫
         whiskerRight (eqToHom hF) ResX := by
   subst hE hF
   obtain rfl : adjE' = adjE := Adjunction.ext (by ext M; simpa using huE M)
@@ -461,7 +461,7 @@ private theorem iteratedMate_transport {C₁ C₂ D₁ D₂ : Type*} [Category C
       (TwoSquare.mk _ _ _ _ ((conjugateEquiv (aY.comp adjF') (adjE'.comp aX)).symm δ))) =
       TwoSquare.mk _ _ _ _ δ :=
     h.trans (Equiv.apply_symm_apply (conjugateEquiv (aY.comp adjF') (adjE'.comp aX)) δ)
-  exact congrArg TwoSquare.natTrans ((Equiv.eq_symm_apply _).2 h')
+  exact ((Equiv.eq_symm_apply _).2 h')
 
 /-- The ring-module and published module adjunctions have compatible units. -/
 private theorem pbcModuleAdjunction_unit_compat {A : Type (u + 1)} [CommRing A]
@@ -613,7 +613,7 @@ theorem pbcScalarOrdinaryRestrictionPull_eq :
       (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) φY φX
       (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
       (pbcScalarCoefficientInverseSquare l E F i g) =
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ dd.hom)).natTrans := by
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ dd.hom)) := by
     apply NatTrans.ext
     funext M
     let s := (mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ dd.hom)
@@ -628,7 +628,7 @@ theorem pbcScalarOrdinaryRestrictionPull_eq :
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
       Category.id_comp]
-    dsimp only [TwoSquare.natTrans, Functor.comp_map]
+    dsimp only [Functor.comp_map]
     try simp only [CategoryTheory.Functor.map_id, Category.id_comp]
     unfold proEtaleRingRestrictionPullbackApp
     rfl
@@ -673,11 +673,11 @@ private theorem scalarPullMate_generic {C₁ C₂ D₁ D₂ : Type*} [Category C
     (R' : rn ⟶ z) (hfac : RX.map oi ≫ RX.map Pε ≫ fXt = fXn ≫ R')
     (om : m ⟶ z) (hmate : ηM ≫ R' = om) :
     LA.map f ≫ cA ≫ om =
-      (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app k ≫ RX.map cBk ≫ fXt := by
+      (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ e.inv)).app k ≫ RX.map cBk ≫ fXt := by
   have he' : e.inv.app p ≫ LB.map cY ≫ cBq = EX.map cA ≫ cX ≫ oi := by
     rw [← cancel_epi (e.hom.app p), Iso.hom_inv_id_app_assoc, reassoc_of% he, hoi]
     simp
-  have hm : (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app k =
+  have hm : (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ e.inv)).app k =
       adjX.unit.app _ ≫ RX.map (e.inv.app _) ≫ RX.map (LB.map (adjY.counit.app k)) := by
     simp [mateEquiv]
   have huX {a b : D₁} (g : a ⟶ b) : adjX.unit.app a ≫ RX.map (EX.map g) = g ≫ adjX.unit.app b :=
@@ -775,7 +775,7 @@ theorem pbcScalarPullMate_app
         (pbcScalarOrdinaryRestrictionPull l E F i g) (.up ℤ)).app K) =
     (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
-        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).app
           (DerivedCategory.Q.obj K) ≫
       (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X)).map
         (pbcActualPullComplexCounit g (pbcIntegralDatum l F) K) ≫
@@ -961,7 +961,7 @@ theorem pbcScalarPullMate_restriction_app
         (pbcPullComparison g (pbcIntegralDatum l E)) ≫
       (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
-        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).natTrans).app
+        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv))).app
         (DerivedCategory.Q.obj K) =
     ((pbcScalarRestrictionPullback l E F i g).inv ≫
       whiskerRight (pbcPullComparison g (pbcIntegralDatum l F))
@@ -1054,7 +1054,7 @@ theorem pbcScalarPullMate_restriction :
         (pbcPullComparison g (pbcIntegralDatum l E)) ≫
       (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
-        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).natTrans =
+        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)) =
     (pbcScalarRestrictionPullback l E F i g).inv ≫
       whiskerRight (pbcPullComparison g (pbcIntegralDatum l F))
         (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X)) := by
@@ -1071,9 +1071,9 @@ private theorem scalarMate_change_left
     {G : A ⥤ C} {H : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
     (β : TwoSquare G L₁ L₂ H) (γ : TwoSquare G L₁' L₂' H)
-    (h : whiskerLeft G ((conjugateEquiv a₂ b₂).symm (𝟙 R₂)) ≫ β.natTrans =
-      γ.natTrans ≫ whiskerRight ((conjugateEquiv a₁ b₁).symm (𝟙 R₁)) H) :
-    (mateEquiv a₁ a₂ β).natTrans = (mateEquiv b₁ b₂ γ).natTrans := by
+    (h : whiskerLeft G ((conjugateEquiv a₂ b₂).symm (𝟙 R₂)) ≫ β =
+      γ ≫ whiskerRight ((conjugateEquiv a₁ b₁).symm (𝟙 R₁)) H) :
+    (mateEquiv a₁ a₂ β) = (mateEquiv b₁ b₂ γ) := by
   have h₁ := mateEquiv_conjugateEquiv_vcomp a₁ a₂ b₂ β ((conjugateEquiv a₂ b₂).symm (𝟙 R₂))
   have h₂ := conjugateEquiv_mateEquiv_vcomp a₁ b₁ b₂ ((conjugateEquiv a₁ b₁).symm (𝟙 R₁)) γ
   have hw : β.whiskerRight ((conjugateEquiv a₂ b₂).symm (𝟙 R₂)) =
@@ -1082,7 +1082,7 @@ private theorem scalarMate_change_left
     exact NatTrans.congr_app h K
   rw [hw, h₂, Equiv.apply_symm_apply, Equiv.apply_symm_apply] at h₁
   ext K
-  have hk := NatTrans.congr_app (congrArg TwoSquare.natTrans h₁) K
+  have hk := NatTrans.congr_app (h₁) K
   simpa [TwoSquare.whiskerTop, TwoSquare.whiskerBottom] using hk.symm
 
 private theorem scalarMate_adjunct
@@ -1097,7 +1097,7 @@ private theorem scalarMate_adjunct
   have hu := unit_mateEquiv adj adj' s M
   dsimp only [Functor.id_obj] at hu
   rw [← Category.assoc, ← hu, Category.assoc]
-  have hn := (mateEquiv adj adj' s).natTrans.naturality t
+  have hn := (mateEquiv adj adj' s).naturality t
   dsimp only [Functor.comp_map] at hn
   rw [← hn, ← Category.assoc, ← G.map_comp]
 
@@ -1113,7 +1113,7 @@ theorem pbcScalarRestrictionDirectImage_mate :
       (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l E))
         (pbcAdicCompletion X (pbcIntegralDatum l E))
         (pbcCompletedCoefficientIso g (pbcIntegralDatum l E)))
-      (TwoSquare.mk _ _ _ _ (pbcScalarRestrictionPullback l E F i g).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pbcScalarRestrictionPullback l E F i g).inv)) =
     (pbcScalarRestrictionDirectImage l E F i g).hom := by
   let aS := proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l F))
     (pbcAdicCompletion X (pbcIntegralDatum l F))
@@ -1188,7 +1188,7 @@ normalized derived pullback comparison, which is computed above. -/
 theorem pbcScalarDirectImageMap_scalarMate :
     (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
-        (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g))).natTrans =
+        (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g))) =
       (pbcScalarRestrictionDirectImage l E F i g).inv := by
   have h := iterated_mateEquiv_conjugateEquiv
     (pbcActualDerivedAdjunction g (pbcIntegralDatum l E))
@@ -1197,7 +1197,7 @@ theorem pbcScalarDirectImageMap_scalarMate :
     (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
     (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).hom)
   rw [← pbcScalarOrdinaryPullIso_conjugate]
-  refine Eq.trans ?_ (congrArg TwoSquare.natTrans h)
+  refine Eq.trans ?_ (h)
   simp only [pbcScalarDirectImageMap, pbcActualScalarDirectImageMap, pbcScalarOrdinaryPullIso]
 
 /-- The canonical scalar/direct-image mate is invertible for finite coefficient extensions.
@@ -1219,10 +1219,10 @@ use the finite perfect projection formula and the tensor-unit normalization. -/
         TwoSquare.mk _ _ _ _ δ.inv := by
     ext K
     exact NatTrans.congr_app (pbcScalarDirectImageMap_scalarMate l E F i g) K
-  have hμ := congrArg TwoSquare.natTrans (((mateEquiv
+  have hμ := (((mateEquiv
     (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
     (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))).eq_symm_apply).2 hs)
-  change IsIso (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g)).natTrans
+  change IsIso (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g))
   rw [hμ]
   exact hiso
 

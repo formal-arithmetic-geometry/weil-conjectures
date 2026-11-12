@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Stalk
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Points and stalks of a coefficient-localized cartesian square -/
 

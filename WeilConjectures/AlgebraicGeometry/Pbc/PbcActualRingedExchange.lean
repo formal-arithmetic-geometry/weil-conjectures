@@ -362,7 +362,7 @@ def pbcActualCompletedAmbientExchange :
     pbcActualDerivedPush f d ⋙ pbcActualDerivedPull g d ⟶
       pbcActualDerivedPull g' d ⋙ pbcActualDerivedPush f' d :=
   (mateEquiv (pbcActualDerivedAdjunction f d) (pbcActualDerivedAdjunction f' d)
-    (TwoSquare.mk _ _ _ _ (pbcActualCompletedPullSquareIso d sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (pbcActualCompletedPullSquareIso d sq).hom))
 
 /-- Completed exchange is the ambient mate followed by completion and its direct-image
 comparison, with the canonical pullback-completion identifications on both sides.

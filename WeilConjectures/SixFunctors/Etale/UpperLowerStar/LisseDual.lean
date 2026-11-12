@@ -171,7 +171,7 @@ theorem isFiniteLocallyConstantSheaf_ihom_unit_of_flat
       Mᘁ M
     have := isIso_ihomComparison_upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i) F
     exact Sheaf.isConstant_of_iso _ (X := Mᘁ)
-      (asIso ((Functor.LaxMonoidal.ihomComparison G F).natTrans.app (𝟙_ _)) ≪≫
+      (asIso ((Functor.LaxMonoidal.ihomComparison G F).app (𝟙_ _)) ≪≫
         (ihom (G.obj F)).mapIso (Functor.Monoidal.εIso G).symm ≪≫
         ihomIsoOfIsoLeft eM.symm _ ≪≫ ihomObjUnitIso _ _)
   toIsFiniteSheaf := by

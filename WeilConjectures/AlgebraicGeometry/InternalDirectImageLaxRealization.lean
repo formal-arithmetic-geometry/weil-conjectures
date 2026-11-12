@@ -284,7 +284,7 @@ Proof:
 -/
 theorem internal_direct_image_lax_realization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
-      (.mk _ _ _ _ (pullComparison Λ f).inv)).natTrans = (pushComparison Λ f).hom ∧
+      (.mk _ _ _ _ (pullComparison Λ f).inv)) = (pushComparison Λ f).hom ∧
     (∀ M : internalModules Λ Y,
       (equivalence Λ Y).functor.map
           ((CondensedRing.upperStarLowerStarAdjunction Λ f).unit.app M) ≫

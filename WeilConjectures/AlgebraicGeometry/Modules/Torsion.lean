@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde

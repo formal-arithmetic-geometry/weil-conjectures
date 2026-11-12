@@ -131,7 +131,7 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
   change ((Q : ZMod N) - 1) * (T.monodromy s G (ρ σ)).toAdd.down = 0
   -- a primitive `N`-th root of unity of `k`, in the function field and in `Ω`
   have : NeZero (N : k) := ⟨hN⟩
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   set F := C.functionField
   let ι : F →+* Ω := algebraMap F Ω
   let κ : k →+* F := (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp

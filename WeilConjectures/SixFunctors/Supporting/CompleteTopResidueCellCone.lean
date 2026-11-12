@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index

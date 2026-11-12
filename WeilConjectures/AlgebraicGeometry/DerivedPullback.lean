@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.Tactic.IrreducibleDef
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Derived pullback of modules on schemes
 

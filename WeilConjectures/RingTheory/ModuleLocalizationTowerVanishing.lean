@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.RingTheory.ModuleLocalizationFilteredColimit
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Localization detects vanishing of the multiplication tower

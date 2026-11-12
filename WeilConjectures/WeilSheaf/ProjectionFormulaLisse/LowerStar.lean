@@ -49,7 +49,7 @@ noncomputable def adicUpperStarIhomComparisonNatTrans (M : AdicSheaf l Y) :
 isomorphism `g^*(- ⊗ M) ≅ g^* - ⊗ g^* M` under the tensor–hom adjunctions. -/
 lemma mateEquiv_adicUpperStarTensorLeftIso_inv (M : AdicSheaf l Y) :
     (mateEquiv (Mod.ihomAdjunction M) (Mod.ihomAdjunction ((g)^*ᵃ[l].obj M))
-      (TwoSquare.mk _ _ _ _ (adicUpperStarTensorLeftIso l g M).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (adicUpperStarTensorLeftIso l g M).inv)) =
       adicUpperStarIhomComparisonNatTrans l g M := by
   ext N
   simp only [mateEquiv_apply]
@@ -62,7 +62,7 @@ comparison `g^* 𝓗om(M, -) ⟶ 𝓗om(g^* M, g^* -)` is an isomorphism
 `g^*(- ⊗ M) ≅ g^* - ⊗ g^* M` (`CategoryTheory.iterated_mateEquiv_conjugateEquiv`). -/
 instance isIso_mateEquiv_adicUpperStarIhomComparison (M : AdicSheaf l Y) :
     IsIso (mateEquiv (adicUpperStarLowerStarAdjunction l g) (adicUpperStarLowerStarAdjunction l g)
-      (TwoSquare.mk _ _ _ _ (adicUpperStarIhomComparisonNatTrans l g M))).natTrans := by
+      (TwoSquare.mk _ _ _ _ (adicUpperStarIhomComparisonNatTrans l g M))) := by
   rw [← mateEquiv_adicUpperStarTensorLeftIso_inv, iterated_mateEquiv_conjugateEquiv]
   infer_instance
 
@@ -84,7 +84,7 @@ noncomputable def lowerStarCompIhomFunctorHom (A : ProEtaleWeilSheaf k₀ l Y)
     lowerStar k₀ l φ ⋙ ihomFunctor k₀ l Y A ⟶
       ihomFunctor k₀ l X ((upperStar k₀ l φ).obj A) ⋙ lowerStar k₀ l φ :=
   (mateEquiv (upperStarLowerStarAdjunction k₀ l φ) (upperStarLowerStarAdjunction k₀ l φ)
-    (TwoSquare.mk _ _ _ _ (ihomFunctorCompUpperStarIso φ A hA).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (ihomFunctorCompUpperStarIso φ A hA).hom))
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
@@ -98,7 +98,7 @@ lemma lowerStarCompIhomFunctorHom_app_hom_f (A : ProEtaleWeilSheaf k₀ l Y)
         (ProEtale.adicUpperStarLowerStarAdjunction l
           (Scheme.Hom.geometricFiberMap φ (comp_over φ _)))
         (TwoSquare.mk _ _ _ _ (ProEtale.adicUpperStarIhomComparisonNatTrans l
-          (Scheme.Hom.geometricFiberMap φ (comp_over φ _)) A.carrier))).natTrans.app
+          (Scheme.Hom.geometricFiberMap φ (comp_over φ _)) A.carrier))).app
         N.carrier := by
   simp only [lowerStarCompIhomFunctorHom, mateEquiv_apply]
   rfl

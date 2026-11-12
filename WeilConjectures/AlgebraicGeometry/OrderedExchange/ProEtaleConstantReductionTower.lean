@@ -53,7 +53,7 @@ private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
   let α := TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom
   let β := TwoSquare.mk _ _ _ _
     (quotientEvaluationPull (A := A) f n).inv
-  have h := congrArg (fun z ↦ z.natTrans.app K) (mateEquiv_vcomp a b a α β)
+  have h := congrArg (fun z ↦ z.app K) (mateEquiv_vcomp a b a α β)
   have hp : (mateEquiv a b α).app K = projection d f K := by
     unfold projection
     exact (b.homEquiv _ _).symm_apply_eq.mp (mateEquiv_counit a b α K)
@@ -63,7 +63,7 @@ private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
       TwoSquare.mk _ _ _ _ (quotientTensorPull d f n).hom := by
     rfl
   rw [hab] at h
-  simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk,
+  simp only [TwoSquare.vComp, TwoSquare.mk,
     NatTrans.comp_app, Functor.associator_inv_app, Functor.associator_hom_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp,
     Category.comp_id] at h

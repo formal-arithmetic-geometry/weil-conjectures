@@ -201,7 +201,7 @@ Source: Stacks 0GMX (blueprint: lem-pur-shifted-line-site-inverse). -/
 def dualComparison (L : Sheaf T.smallEtaleTopology B) :
     (inverseImage B T).obj ((ihom L).obj (𝟙_ _)) ⟶
       (ihom ((inverseImage B T).obj L)).obj (𝟙_ _) :=
-  (Functor.LaxMonoidal.ihomComparison (inverseImage B T) L).natTrans.app (𝟙_ _) ≫
+  (Functor.LaxMonoidal.ihomComparison (inverseImage B T) L).app (𝟙_ _) ≫
     (ihom ((inverseImage B T).obj L)).map (Functor.OplaxMonoidal.η (inverseImage B T))
 
 /-- Pullback of a sheaf pairing, with the canonical tensor and coefficient-unit maps.

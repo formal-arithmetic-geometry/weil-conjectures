@@ -83,8 +83,8 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 `Fr^* = (Fr⁻¹)_*` of sheaves of `ℚ̄_ℓ`-modules: both composites are the pushforward along
 `φ̄ ≫ Fr_Y⁻¹ = Fr_X⁻¹ ≫ φ̄`. -/
 noncomputable def adicLowerStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)_*ᵃ[l] ⋙ (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ≅
-      (f.geometricGaloisFrobenius.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)_*ᵃ[l] :=
+    (Scheme.Hom.geometricFiberMap φ h)_*ᵃ[l] ⋙ (g.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ≅
+      (f.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)_*ᵃ[l] :=
   adicLowerStarComp l _ _ ≪≫
     adicLowerStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
     (adicLowerStarComp l _ _).symm
@@ -93,12 +93,12 @@ noncomputable def adicLowerStarGeometricFiberMapCompFrobeniusIso :
 `Fr^* = (Fr⁻¹)_*` of sheaves of `ℚ̄_ℓ`-modules: identifying `(Fr⁻¹)_*` with `Fr^*`, both
 composites are the pullback along `Fr_X ≫ φ̄ = φ̄ ≫ Fr_Y`. -/
 noncomputable def adicUpperStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ⋙ (f.geometricGaloisFrobenius.inv)_*ᵃ[l] ≅
-      (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] :=
-  Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius).symm ≪≫
+    (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ⋙ (f.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ≅
+      (g.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] :=
+  Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.asIso).symm ≪≫
     (adicUpperStarComp l _ _).symm ≪≫
     adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm ≪≫
     adicUpperStarComp l _ _ ≪≫
-    Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius) _
+    Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.asIso) _
 
 end AlgebraicGeometry.ProEtale

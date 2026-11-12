@@ -53,7 +53,7 @@ theorem isIso_ihomComparison_leftDerivedUpperStar_of_etale {U X : Scheme.{u}}
     (u : U ⟶ X) [Etale u]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) u
-    IsIso (Functor.LaxMonoidal.ihomComparison L((u)^*[ModuleCat.{u + 1} Λ]) M).natTrans := by
+    IsIso (Functor.LaxMonoidal.ihomComparison L((u)^*[ModuleCat.{u + 1} Λ]) M) := by
   let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) u
   have := isIso_projectionMap_derivedEtaleLowerShriek (A := ModuleCat.{u + 1} Λ) u M
   exact Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap

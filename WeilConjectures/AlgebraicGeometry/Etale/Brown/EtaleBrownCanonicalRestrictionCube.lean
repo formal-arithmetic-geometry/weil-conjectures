@@ -436,7 +436,7 @@ private theorem brownRestrictionMate_underlying (N : B₀) :
     Ua.map ((mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).app N) ≫
       γ₁.hom.app (RB.obj N) ≫ V.map (rb.hom.app N) =
         ra.hom.app (G₀.obj N) ≫ γ₀.hom.app N := by
-  let α := (mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).natTrans
+  let α := (mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom))
   let M := G₀.obj N
   let ε := a₀.counit.app N
   have ha : α.app N = a₁.homEquiv _ _
@@ -447,7 +447,7 @@ private theorem brownRestrictionMate_underlying (N : B₀) :
       Functor.leftUnitor_hom_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.comp_obj]
     simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.id_comp]
-    dsimp only [Functor.comp_map, TwoSquare.natTrans]
+    dsimp only [Functor.comp_map]
     erw [Category.comp_id]
   rw [ha]
   erw [← Category.assoc, h₁]
@@ -518,9 +518,9 @@ private theorem brown_inverse_cube
     (ra : RA ⋙ U₁ ≅ U₀ ⋙ SA) (rb : RB ⋙ V₁ ≅ V₀ ⋙ SB)
     (γ₀ : G₀ ⋙ U₀ ≅ V₀ ⋙ R₀) (γ₁ : G₁ ⋙ U₁ ≅ V₁ ⋙ R₁)
     (ε : R₀ ⋙ SA ≅ SB ⋙ R₁)
-    (h₀ : (mateEquiv a₀ b₀ α₀).natTrans = γ₀.hom)
-    (h₁ : (mateEquiv a₁ b₁ α₁).natTrans = γ₁.hom)
-    (hτ : (mateEquiv b₀ b₁ τ.hom).natTrans = ε.hom)
+    (h₀ : (mateEquiv a₀ b₀ α₀) = γ₀.hom)
+    (h₁ : (mateEquiv a₁ b₁ α₁) = γ₁.hom)
+    (hτ : (mateEquiv b₀ b₁ τ.hom) = ε.hom)
     (comm : ∀ N, U₁.map ((mateEquiv a₀ a₁ σ.hom).app N) ≫
         γ₁.hom.app (RB.obj N) ≫ R₁.map (rb.hom.app N) =
       ra.hom.app (G₀.obj N) ≫ SA.map (γ₀.hom.app N) ≫ ε.hom.app (V₀.obj N))
@@ -809,7 +809,7 @@ private theorem ordinary_right_cube (N : strictEtaleLevel V O t m) :
     (strictEtaleBrownRing O t m) (strictEtaleBrownRingMap O t h) g
     (A.right m) (A.right n)
     (mateEquiv (A.levelAdj m) (A.levelAdj n)
-      (.mk _ _ _ _ (A.restrictInverse h).hom)).natTrans
+      (.mk _ _ _ _ (A.restrictInverse h).hom))
     (A.rightUnderlying m) (A.rightUnderlying n)
     (RW.val.ordinaryRestriction h) (RV.val.ordinaryRestriction h)
     (rg m).val.ordinaryRight (rg n).val.ordinaryRight
@@ -846,8 +846,8 @@ private theorem ordinary_inverse_cube (M : strictEtaleLevel W O t m) :
     (RW.val.ordinaryRestriction h) (RV.val.ordinaryRestriction h)
     (rg m).val.ordinaryRight (rg n).val.ordinaryRight
     (Etale.lowerStarRestrictScalarsIso (strictEtaleBrownRingMap O t h) g)
-    (congrArg TwoSquare.natTrans ((mateEquiv _ _).apply_symm_apply _))
-    (congrArg TwoSquare.natTrans ((mateEquiv _ _).apply_symm_apply _))
+    (((mateEquiv _ _).apply_symm_apply _))
+    (((mateEquiv _ _).apply_symm_apply _))
     (Etale.underived_mate (strictEtaleBrownRingMap O t h) g)
     (ordinary_right_cube O t g A PW PV B RV RW rg h) M
 

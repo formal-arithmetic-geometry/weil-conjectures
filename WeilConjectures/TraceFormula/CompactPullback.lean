@@ -69,8 +69,8 @@ lemma mateEquiv_symm_app_of_iso_aux (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ 
     (h₁ : ∀ M, adj₁.unit.app M ≫ eR₁.hom.app (L₁.obj M) = eL₁.inv.app M)
     (h₂ : ∀ N, adj₂.unit.app N ≫ eR₂.hom.app (L₂.obj N) = eL₂.inv.app N)
     (β : TwoSquare R₁ G G R₂)
-    (hβ : ∀ N, β.natTrans.app N ≫ eR₂.hom.app (G.obj N) = G.map (eR₁.hom.app N)) (M : C) :
-    eL₂.inv.app (G.obj M) ≫ ((mateEquiv adj₁ adj₂).symm β).natTrans.app M =
+    (hβ : ∀ N, β.app N ≫ eR₂.hom.app (G.obj N) = G.map (eR₁.hom.app N)) (M : C) :
+    eL₂.inv.app (G.obj M) ≫ ((mateEquiv adj₁ adj₂).symm β).app M =
       G.map (eL₁.inv.app M) := by
   rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom]
   apply (adj₂.homEquiv _ _).injective
@@ -596,8 +596,7 @@ lemma frobeniusCompactOperator_eq_pow [IsProper Φ.left]
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
     (m : ℕ) :
     frobeniusCompactOperator ℓ ψ m =
-      (show End ((boundedConstructibleLowerShriek ℓ
-        (toPoint X)).obj K) from frobeniusCompactOperator ℓ ψ 1) ^ m := by
+      (End.of (frobeniusCompactOperator ℓ ψ 1) ^ m).asHom := by
   induction m with
   | zero => exact frobeniusCompactOperator_zero ℓ ψ
   | succ m ih =>
@@ -618,7 +617,9 @@ isomorphism `φ` as a Frobenius coefficient morphism (blueprint
 lemma iterateStr_hom_eq_frobeniusCoefficientIterate (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
     (K.iterateStr m).hom = frobeniusCoefficientIterate K.str.hom m := by
   induction m with
-  | zero => exact (Category.id_comp _).symm
+  | zero =>
+    simp only [iterateStr, frobeniusCoefficientIterate, Iso.app_hom, eqToHom_refl,
+      Category.id_comp]
   | succ m ih =>
     simp only [iterateStr, frobeniusCoefficientIterate, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
       Functor.mapIso_hom, ih]

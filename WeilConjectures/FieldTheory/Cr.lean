@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Norm.Basic
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Algebra.Central.ReducedNorm
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # `Cᵣ` fields

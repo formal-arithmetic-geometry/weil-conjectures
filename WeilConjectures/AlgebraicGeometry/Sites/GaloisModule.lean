@@ -120,14 +120,16 @@ lemma galoisPointActHom_app_down (σ : Gal(Ω/K)) {X : (Spec (.of K)).Etale}
 
 /-- The action of `Gal(Ω/K)` on the fibre functor of `galoisPoint K Ω`. -/
 noncomputable def galoisPointAct : Gal(Ω/K) →* End (galoisPoint K Ω).fiber where
-  toFun := galoisPointActHom K Ω
+  toFun σ := .of (galoisPointActHom K Ω σ)
   map_one' := by
+    apply End.ext
     refine NatTrans.ext (funext fun X ↦ ?_)
     ext x
     refine ULift.ext ?_
     change galoisOverHom 1 ≫ x.down = x.down
     rw [galoisOverHom_one, Category.id_comp]
   map_mul' σ τ := by
+    apply End.ext
     refine NatTrans.ext (funext fun X ↦ ?_)
     ext x
     refine ULift.ext ?_
@@ -137,7 +139,7 @@ noncomputable def galoisPointAct : Gal(Ω/K) →* End (galoisPoint K Ω).fiber w
 @[simp]
 lemma galoisPointAct_app_down (σ : Gal(Ω/K)) {X : (Spec (.of K)).Etale}
     (x : (galoisPoint K Ω).fiber.obj X) :
-    ((galoisPointAct K Ω σ).app X x).down = galoisOverHom σ ≫ x.down :=
+    ((galoisPointAct K Ω σ).asHom.app X x).down = galoisOverHom σ ≫ x.down :=
   rfl
 
 /-- The fibre functor of `galoisPoint K Ω` reflects isomorphisms of abelian étale sheaves. -/
@@ -182,7 +184,7 @@ lemma galoisPointFiberSpec_down_left :
 variable {K Ω E} in
 /-- The stabiliser of `x_E` is the fixing subgroup `Gal(Ω/E)` of `E`. -/
 lemma galoisPointAct_galoisPointFiberSpec_eq_iff (σ : Gal(Ω/K)) :
-    (galoisPointAct K Ω σ).app _ (galoisPointFiberSpec K Ω E) = galoisPointFiberSpec K Ω E ↔
+    (galoisPointAct K Ω σ).asHom.app _ (galoisPointFiberSpec K Ω E) = galoisPointFiberSpec K Ω E ↔
       σ ∈ E.fixingSubgroup := by
   rw [IntermediateField.mem_fixingSubgroup_iff]
   constructor
@@ -207,7 +209,7 @@ variable {K Ω E} in
 `E → Ω` extends to an automorphism of `Ω`. -/
 lemma exists_galoisPointAct_galoisPointFiberSpec_eq
     (y : (galoisPoint K Ω).fiber.obj (galoisEtaleSpec K Ω E)) :
-    ∃ σ : Gal(Ω/K), (galoisPointAct K Ω σ).app _ (galoisPointFiberSpec K Ω E) = y := by
+    ∃ σ : Gal(Ω/K), (galoisPointAct K Ω σ).asHom.app _ (galoisPointFiberSpec K Ω E) = y := by
   have : IsSepClosure K Ω := ⟨‹_›, ‹_›⟩
   obtain ⟨ψ, hψ⟩ : ∃ ψ, Spec.map ψ = y.down.left := ⟨_, Spec.map_preimage y.down.left⟩
   have hw : CommRingCat.ofHom (algebraMap K E) ≫ ψ = CommRingCat.ofHom (algebraMap K Ω) := by
@@ -291,7 +293,8 @@ variable {K Ω} in
 lemma galoisPointAct_fiber_map_galoisPointFiberSpec {E : IntermediateField K Ω}
     [FiniteDimensional K E] {X : (Spec (.of K)).Etale} (g : galoisEtaleSpec K Ω E ⟶ X)
     {σ : Gal(Ω/K)} (hσ : σ ∈ E.fixingSubgroup) :
-    (galoisPointAct K Ω σ).app X ((galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E)) =
+    (galoisPointAct K Ω σ).asHom.app X
+        ((galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E)) =
       (galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E) := by
   rw [NatTrans.naturality_apply, (galoisPointAct_galoisPointFiberSpec_eq_iff σ).2 hσ]
 
@@ -337,11 +340,11 @@ lemma isIso_galoisPoint_fromEquivariantSheaf (M : DiscreteModule.{u + 1} Gal(Ω/
     obtain ⟨E, _, hEU⟩ := (krullTopology_mem_nhds_one_iff K Ω _).1 hU
     choose τ hτ using fun y ↦ exists_galoisPointAct_galoisPointFiberSpec_eq (E := E) y
     have key (σ : Gal(Ω/K)) (y : (galoisPoint K Ω).fiber.obj (galoisEtaleSpec K Ω E))
-        (hσ : (galoisPointAct K Ω σ).app _ (galoisPointFiberSpec K Ω E) = y) :
-        (M.obj.ρ σ).hom m = (M.obj.ρ (τ y)).hom m := by
+        (hσ : (galoisPointAct K Ω σ).asHom.app _ (galoisPointFiberSpec K Ω E) = y) :
+        (M.obj.ρ σ).asHom.hom m = (M.obj.ρ (τ y)).asHom.hom m := by
       have h : (τ y)⁻¹ * σ ∈ E.fixingSubgroup := by
         set t := τ y
-        have ht : (galoisPointAct K Ω t).app _ (galoisPointFiberSpec K Ω E) = y := hτ y
+        have ht : (galoisPointAct K Ω t).asHom.app _ (galoisPointFiberSpec K Ω E) = y := hτ y
         rw [← galoisPointAct_galoisPointFiberSpec_eq_iff, act_mul_app, hσ, ← ht,
           ← act_mul_app, inv_mul_cancel, act_one_app]
       have h' := Action.mem_stabilizer.1 (hEU h)
@@ -350,13 +353,13 @@ lemma isIso_galoisPoint_fromEquivariantSheaf (M : DiscreteModule.{u + 1} Gal(Ω/
       rw [← Action.ρ_mul_apply, ← Action.ρ_mul_apply, mul_inv_cancel, one_mul]
     let f : ((galoisPoint K Ω).equivariantPresheaf (galoisPointAct K Ω) M.obj).obj
         (op (galoisEtaleSpec K Ω E)) :=
-      ⟨fun y ↦ (M.obj.ρ (τ y)).hom m, fun σ y ↦ by
+      ⟨fun y ↦ (M.obj.ρ (τ y)).asHom.hom m, fun σ y ↦ by
         dsimp only
         rw [← key (σ * τ y) _ (by rw [act_mul_app, hτ y]), Action.ρ_mul_apply]⟩
     refine ⟨(galoisPoint K Ω).toPresheafFiber _ (galoisPointFiberSpec K Ω E)
       ((galoisPoint K Ω).equivariantPresheaf (galoisPointAct K Ω) M.obj) f, ?_⟩
     rw [toPresheafFiber_fromEquivariantSheaf_hom_apply]
-    change (M.obj.ρ (τ _)).hom m = m
+    change (M.obj.ρ (τ _)).asHom.hom m = m
     rw [← key 1 _ (act_one_app _ _ _ _), Action.ρ_one_apply]
 
 /-- **The geometric point of the spectrum of a field is a Galois point.** -/

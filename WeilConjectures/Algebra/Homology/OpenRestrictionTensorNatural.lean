@@ -12,6 +12,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.Algebra.Homology.OpenRestrictionSheafification
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Natural tensor comparison on an open localized site
 

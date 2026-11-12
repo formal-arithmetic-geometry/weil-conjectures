@@ -75,7 +75,7 @@ private theorem transportBasis
     (h : ∀ M, IsIso (biproduct.desc fun i : Fin r ↦
       adj'.unit.app M ≫ R'.map (coeff i • 𝟙 _))) (M : C) :
     IsIso (biproduct.desc fun i : Fin r ↦ adj.unit.app M ≫ R.map (coeff i • 𝟙 _)) := by
-  let alpha := ((mateEquiv adj adj').symm beta.hom).natTrans
+  let alpha := ((mateEquiv adj adj').symm beta.hom)
   have : IsIso alpha := isIso_inverseMate_of_equivalences adj adj' beta
   have hu := unit_mateEquiv_symm adj adj' beta.hom M
   change F.map (adj.unit.app M) ≫ beta.hom.app (L.obj M) =

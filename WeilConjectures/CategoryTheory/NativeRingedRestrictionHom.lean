@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.Algebra.Homology.HomComplexProjections
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Restriction of Hom complexes along equivalences of sites
 

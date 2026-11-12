@@ -152,8 +152,7 @@ theorem comapUpperStarIso_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
   apply (mateEquiv (upperStarLowerStarAdjunction Λ' f)
     (upperStarLowerStarAdjunction Λ f)).symm.injective
   simp only [Equiv.symm_apply_apply]
-  apply TwoSquare.ext
-  intro N
+  refine NatTrans.ext (funext fun N ↦ ?_)
   apply ((upperStarLowerStarAdjunction Λ f).homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   exact (hu N).symm.trans (unit_mateEquiv_symm

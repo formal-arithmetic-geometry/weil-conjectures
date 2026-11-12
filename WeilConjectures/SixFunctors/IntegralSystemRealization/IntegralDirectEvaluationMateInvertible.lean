@@ -82,7 +82,7 @@ private theorem finiteGood {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 private theorem ordinaryMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (mateEquiv (pullbackTensorSequenceAdjunction l E f)
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
-      (TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv)) := by
   let a := pullbackTensorSequenceAdjunction l E f
   let b := sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1))
   let b₀ := coefficientProEtaleModuleAdjunction.{u, u} f
@@ -91,8 +91,7 @@ private theorem ordinaryMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   let R := proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 1))
   have he : (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom) =
       TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     apply (b.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit]
     erw [← unit_mateEquiv_symm]
@@ -115,7 +114,7 @@ private theorem ordinaryMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       M).symm
   have hh := congrArg (mateEquiv a b) he
   rw [Equiv.apply_symm_apply] at hh
-  rw [← congrArg TwoSquare.natTrans hh]
+  rw [← hh]
   infer_instance
 
 private theorem derivedEvaluation_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
@@ -171,7 +170,7 @@ quotient ring, boundedness or cartesianness is used. -/
 theorem integralDirectEvaluationMate_invertible {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : Direct l E f) (n : ℕ) :
     IsIso (mateEquiv d.adj (finiteAdj l E f n)
-      (TwoSquare.mk _ _ _ _ (pullbackTensorDerivedEvaluation l E f n).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (pullbackTensorDerivedEvaluation l E f n).inv)) := by
   let d₁ := evaluationExtension l E Y n
   let d₂ := evaluationExtension l E X n
   let G := sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f
@@ -184,7 +183,7 @@ theorem integralDirectEvaluationMate_invertible {X Y : Scheme.{u}} (f : X ⟶ Y)
   let δ := (ordinaryEvaluation l E f n).symm
   let δD := (pullbackTensorDerivedEvaluation l E f n).symm
   let a := ((mateEquiv d₁.ordinaryAdj d₂.ordinaryAdj).symm
-    (TwoSquare.mk _ _ _ _ δ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δ.hom))
   have ha : IsIso a := by
     have h := iterated_mateEquiv_conjugateEquiv d₁.ordinaryAdj d₂.ordinaryAdj
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
@@ -203,7 +202,7 @@ theorem integralDirectEvaluationMate_invertible {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((sfIntrinsicConstantModuleAdjunction f
         (finiteCoefficientRing l E (n + 1))).comp d₂.ordinaryAdj) a
   let aD := ((mateEquiv d₁.adjunction d₂.adjunction).symm
-    (TwoSquare.mk _ _ _ _ δD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δD.hom))
   have haD : IsIso aD := by
     refine SheafOfModules.derivedExtensionMate_isIso d₁ d₂ G H G.mapDerivedCategory
       G.mapDerivedCategoryFactors δD.hom δ.hom ?_
@@ -228,7 +227,7 @@ theorem integralDirectEvaluationMate_invertible {X Y : Scheme.{u}} (f : X ⟶ Y)
       (TwoSquare.mk _ _ _ _ δD.hom))
   rw [Equiv.apply_symm_apply] at h
   change IsIso (mateEquiv d.adj (finiteAdj l E f n)
-    (TwoSquare.mk _ _ _ _ δD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δD.hom))
   rw [h]
   infer_instance
 

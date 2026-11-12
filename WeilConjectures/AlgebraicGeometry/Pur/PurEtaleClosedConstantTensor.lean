@@ -429,14 +429,14 @@ private theorem mate_symm_monoidal
     (adj : L ⊣ R) (adj' : L' ⊣ R') (F : V ⥤ V') (G : W ⥤ W')
     [L.Monoidal] [R.LaxMonoidal] [L'.Monoidal] [R'.LaxMonoidal]
     [F.LaxMonoidal] [G.LaxMonoidal] [adj.IsMonoidal] [adj'.IsMonoidal]
-    (β : TwoSquare R G F R') [β.natTrans.IsMonoidal] :
-    NatTrans.IsMonoidal ((mateEquiv adj adj').symm β).natTrans := by
+    (β : TwoSquare R G F R') [β.IsMonoidal] :
+    NatTrans.IsMonoidal ((mateEquiv adj adj').symm β) := by
   change NatTrans.IsMonoidal
     ((Functor.leftUnitor _).inv ≫
       Functor.whiskerRight adj.unit (F ⋙ L') ≫
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (Functor.associator _ _ _).hom _ ≫
-      Functor.whiskerRight (Functor.whiskerLeft L β.natTrans) L' ≫
+      Functor.whiskerRight (Functor.whiskerLeft L β) L' ≫
       Functor.whiskerRight (Functor.associator _ _ _).inv _ ≫
       (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft (L ⋙ G) adj'.counit ≫
@@ -448,7 +448,7 @@ private theorem basechange_monoidal
     {C' C X' X : Scheme.{u}} {q : C' ⟶ C} {r : C' ⟶ X'}
     {i : C ⟶ X} {v : X' ⟶ X} (sq : CommSq q r i v) :
     NatTrans.IsMonoidal (baseChangeMap (ModuleCat.{u + 1} A) sq) := by
-  change NatTrans.IsMonoidal (baseChangeSquare (ModuleCat.{u + 1} A) sq).natTrans
+  change NatTrans.IsMonoidal (baseChangeSquare (ModuleCat.{u + 1} A) sq)
   rw [baseChangeSquare_eq_mateEquiv_symm]
   have : NatTrans.IsMonoidal (squareLowerStarIso (ModuleCat.{u + 1} A) sq).hom := by
     dsimp only [squareLowerStarIso, Iso.trans_hom, Iso.symm_hom]
@@ -540,7 +540,6 @@ private theorem ordinary_coherence (A : Type (u + 1)) [CommRing A]
   constructor
   · apply (cancel_epi ((closedConstantSectionMap A i ⊗ₘ closedConstantSectionMap A j) ⊗ₘ
       closedConstantSectionMap A k)).1
-    try simp only [Category.assoc]
     erw [tensorHom_comp_tensorHom_assoc]
     erw [tensor_unit A i j]
     simp only [Category.comp_id]
@@ -554,7 +553,6 @@ private theorem ordinary_coherence (A : Type (u + 1)) [CommRing A]
     monoidal
   · apply (cancel_epi (closedConstantSectionMap A i ⊗ₘ
       closedConstantSectionMap A j)).1
-    try simp only [Category.assoc]
     erw [BraidedCategory.braiding_naturality_assoc, tensor_unit_assoc A j i]
     rw [hs]
     erw [tensor_unit A i j]
@@ -573,7 +571,6 @@ private theorem ordinary_pullback_square (A : Type (u + 1)) [CommRing A]
   have := epi_pair (closedConstantSectionMap A i) (closedConstantSectionMap A j)
   apply (cancel_epi (F.map (closedConstantSectionMap A i ⊗ₘ
     closedConstantSectionMap A j))).1
-  try simp only [Category.assoc]
   erw [← Functor.map_comp_assoc, tensor_unit A i j, Functor.map_comp]
   erw [Category.assoc, pullback_unit_assoc A (intersectionSupport i j) v]
   have hs : closedConstantSectionMap A (pullback.fst v (intersectionSupport i j)) ≫
@@ -627,7 +624,6 @@ private theorem pullback_coherence (A : Type (u + 1)) [CommRing A]
   have := section_epi A i
   constructor
   · apply (cancel_epi ((upperStar B (𝟙 X)).map (closedConstantSectionMap A i))).1
-    try simp only [Category.assoc]
     erw [pullback_unit_assoc A i (𝟙 X)]
     have hs : closedConstantSectionMap A (pullback.fst (𝟙 X) i) ≫
         closedConstantIdentitySupportMap A i = closedConstantSectionMap A i := by
@@ -646,7 +642,6 @@ private theorem pullback_coherence (A : Type (u + 1)) [CommRing A]
     exact congrArg (fun f ↦ f ≫ closedConstantSectionMap A i) hu
   · intro X' X'' v w
     apply (cancel_epi ((upperStar B (w ≫ v)).map (closedConstantSectionMap A i))).1
-    try simp only [Category.assoc]
     erw [pullback_unit_assoc A i (w ≫ v)]
     have hs : closedConstantSectionMap A (pullback.fst (w ≫ v) i) ≫
         closedConstantCompositionSupportMap A i v w =

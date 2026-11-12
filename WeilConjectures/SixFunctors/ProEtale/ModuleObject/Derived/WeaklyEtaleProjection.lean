@@ -64,9 +64,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 the comparison `g^* Hom_{Λ_X}(M, N) ⟶ Hom_{Λ_W}(g^* M, g^* N)` is an isomorphism. -/
 instance isIso_ihomComparison_upperStar_of_weaklyEtale
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    IsIso (Functor.LaxMonoidal.ihomComparison (g)^*⟦Λ⟧ M).natTrans := by
+    IsIso (Functor.LaxMonoidal.ihomComparison (g)^*⟦Λ⟧ M) := by
   have (Z : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-      IsIso (Functor.LaxMonoidal.ihomComparison (g)^*[Ab.{u + 1}] Z).natTrans :=
+      IsIso (Functor.LaxMonoidal.ihomComparison (g)^*[Ab.{u + 1}] Z) :=
     ProEtale.isIso_ihomComparison_upperStar Ab.{u + 1} g Z
   rw [NatTrans.isIso_iff_isIso_app]
   intro N

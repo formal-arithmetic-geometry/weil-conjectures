@@ -10,6 +10,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Module.StablyFree.Basic
 public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.LinearAlgebra.Basis.Prod
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.RingTheory.Finiteness.Prod
 import WeilConjectures.AlgebraicGeometry.ComplexLiftClassProjective

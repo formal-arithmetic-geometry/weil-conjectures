@@ -71,9 +71,9 @@ theorem tensorGradedAction_kernel_second {X Z : Scheme.{u}} (j : Z ⟶ X)
         b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
-    μ (tensorGradedSection T D e x) ≫ (T.degree (n * ((e + 1) + 1))).τ₁ =
+    (μ (tensorGradedSection T D e x)).asHom ≫ (T.degree (n * ((e + 1) + 1))).τ₁ =
       (T.degree (n * (0 + 1))).τ₁ ≫
         tensorBoundaryKernelMap j L hI n 0 (e + 1) (F ◁ x) := by
   set_option backward.isDefEq.respectTransparency false in
@@ -81,7 +81,7 @@ theorem tensorGradedAction_kernel_second {X Z : Scheme.{u}} (j : Z ⟶ X)
       dsimp only
       apply Cofan.IsColimit.hom_ext T.k_colimit
       intro d
-      change T.k d ≫ (μ (tensorGradedSection T D e x) ≫ _) = T.k d ≫ (_ ≫ _)
+      change T.k d ≫ ((μ (tensorGradedSection T D e x)).asHom ≫ _) = T.k d ≫ (_ ≫ _)
       by_cases hd : d = n * (0 + 1)
       · subst d
         rw [← Category.assoc,
@@ -94,7 +94,7 @@ theorem tensorGradedAction_kernel_second {X Z : Scheme.{u}} (j : Z ⟶ X)
         have hdeg : d + n * (e + 1) ≠ n * ((e + 1) + 1) := by
           simp only [Nat.mul_add, Nat.mul_one] at *
           omega
-        change T.k d ≫ μ (tensorGradedSection T D e x) = _ at hv
+        change T.k d ≫ (μ (tensorGradedSection T D e x)).asHom = _ at hv
         rw [← Category.assoc, hv, Category.assoc, T.k_orthogonal _ _ hdeg,
           comp_zero, ← Category.assoc, T.k_orthogonal _ _ hd, zero_comp]
 

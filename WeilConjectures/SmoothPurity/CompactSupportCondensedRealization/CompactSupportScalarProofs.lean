@@ -90,9 +90,9 @@ theorem inverse_mate_isIso_of_support
     (a : L ⊣ R) (b : l ⊣ r) (F : A ⥤ D) (G : B ⥤ E)
     (e : R ⋙ F ≅ G ⋙ r) [IsIso a.unit]
     (hc : ∀ M, IsIso (b.counit.app (G.obj (L.obj M)))) :
-    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
+    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)) := by
   have hi (M : A) : IsIso
-      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans.app M) := by
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).app M) := by
     have : IsIso (a.unit.app M) := inferInstance
     have : IsIso (b.counit.app (G.obj (L.obj M))) := hc M
     change IsIso (𝟙 _ ≫ l.map (F.map (a.unit.app M)) ≫
@@ -426,17 +426,17 @@ private theorem resolved_derived_mate_isIso
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
-    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans]
+    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom))]
     (hres : ∀ I : CochainComplex B ℤ, I.IsKInjective →
       ∀ J : CochainComplex D ℤ, J.IsKInjective →
       ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
         QuasiIso j → QuasiIso ((R'.mapHomologicalComplex (.up ℤ)).map j)) :
     IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)) := by
   let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
     adj'.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom))
   change IsIso m
   have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
       IsIso (m.app (_root_.DerivedCategory.Q.obj I)) := by
@@ -450,9 +450,9 @@ private theorem resolved_derived_mate_isIso
       chainDerivedUnit_isIso_of_resolution R' _ J j
     have hinjective : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
     have hchainmate : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app I) := by
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app I) := by
       change IsIso (((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans)
+        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)))
         (.up ℤ)).app I).hom)
       infer_instance
     have hi : G.mapDerivedCategory.map (chainDerivedUnit R I) ≫
@@ -465,7 +465,7 @@ private theorem resolved_derived_mate_isIso
       rw [hi]
       exact (G.mapDerivedCategoryFactors.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≪≫
         (DerivedCategory.Q (C := C)).mapIso (@asIso _ _ _ _ ((NatTrans.mapHomologicalComplex
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app I)
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app I)
             hchainmate) ≪≫
         @asIso _ _ _ _ (chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I))
           hrestricted).isIso_hom
@@ -514,7 +514,7 @@ theorem derived_mate_isIso_of_resolution
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
-    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans]
+    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom))]
     (hres : ∀ (I : CochainComplex B ℤ), I.IsKInjective →
       ∀ (J : CochainComplex D ℤ), J.IsKInjective →
       ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
@@ -522,7 +522,7 @@ theorem derived_mate_isIso_of_resolution
     IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso s.symm).inv)).natTrans := by
+        (Functor.mapDerivedCategorySquareIso s.symm).inv)) := by
   rw [← derived_square_symm_hom s.symm]
   exact resolved_derived_mate_isIso adj adj' s hres
 

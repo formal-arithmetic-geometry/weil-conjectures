@@ -114,7 +114,7 @@ theorem upperStar_map_supportedRestriction_eq_zero_of_iso (F : c.FixedLocus)
       (F.supportedRestriction Q) = 0 := by
   have hn := (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ c.support)
     (boundedConstructibleUpperShriekAdjunction ℓ F.d)
-    (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).natTrans.naturality e.hom
+    (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).naturality e.hom
   rw [← F.supportedRestriction_eq_mateEquiv, ← F.supportedRestriction_eq_mateEquiv] at hn
   dsimp only [Functor.comp_map] at hn
   have h1 := congrArg (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map hn

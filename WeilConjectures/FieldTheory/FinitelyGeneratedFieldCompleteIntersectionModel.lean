@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.FieldTheory.TriangularFieldModelPresentation
 import WeilConjectures.FieldTheory.TriangularFieldModelWeakRegularity
+public import Mathlib.Algebra.Ring.Hom.InjSurj
 
 /-!
 # Complete-intersection models of finitely generated fields

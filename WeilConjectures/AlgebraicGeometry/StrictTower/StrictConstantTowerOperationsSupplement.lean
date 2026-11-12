@@ -233,7 +233,7 @@ private theorem homotopy_mate
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv))).app K =
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).hom.app K ≫
         (NatTrans.mapHomotopyCategory
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K ≫
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app K := by
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app, Functor.comp_obj,
@@ -300,7 +300,7 @@ private theorem derived_mate_factorsh
       DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).hom.app K ≫
           (NatTrans.mapHomotopyCategory
-            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K ≫
+            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K ≫
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app K) ≫
       R'.rightDerivedFunctorUnit.app ((H.mapHomotopyCategory (.up ℤ)).obj K) := by
   rw [← homotopy_mate adj adj' s K]
@@ -631,7 +631,7 @@ private theorem evaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
         (coefficients B X) (constantRingIso B f)).whiskerRight ℕᵒᵖ)
       (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
         (coefficients B X) (constantRingIso B f))
-      (TwoSquare.mk _ _ _ _ (eqToIso (evaluationPullback B f n)).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (eqToIso (evaluationPullback B f n)).inv)) =
         𝟙 ((evaluation ℕᵒᵖ (Modules B X)).obj (op n) ⋙ moduleDirectImage B f) := by
   apply NatTrans.ext
   funext T
@@ -685,7 +685,7 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       ((HomotopyCategory.quotient _ (.up ℤ)).obj
         ((E'.mapHomologicalComplex (.up ℤ)).obj I)))
     infer_instance
-  have hm : (mateEquiv a a' (TwoSquare.mk _ _ _ _ s.hom)).natTrans =
+  have hm : (mateEquiv a a' (TwoSquare.mk _ _ _ _ s.hom)) =
       𝟙 (E' ⋙ P') := evaluation_mate B f n
   have hs : (Functor.mapDerivedCategoryCompIso E L' ≪≫
       Functor.mapDerivedCategoryNatIso s ≪≫
@@ -696,7 +696,7 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     rfl
   have hh : IsIso
       ((NatTrans.mapHomotopyCategory
-        (mateEquiv a a' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app H) := by
+        (mateEquiv a a' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app H) := by
     rw [hm]
     change IsIso ((HomotopyCategory.quotient _ (.up ℤ)).map
       ((NatTrans.mapHomologicalComplex (𝟙 (E' ⋙ P')) (.up ℤ)).app I))
@@ -710,7 +710,7 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     change IsIso (E.mapDerivedCategory.map (P.rightDerivedFunctorUnit.app H) ≫
       (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
         a'.mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ (evalG B f n).inv)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (evalG B f n).inv)).app
           (DerivedCategory.Qh.obj H) ≫
         P'.rightDerivedFunctor.map (E'.mapDerivedCategoryFactorsh.hom.app H))
     rw [← hs, hfac]

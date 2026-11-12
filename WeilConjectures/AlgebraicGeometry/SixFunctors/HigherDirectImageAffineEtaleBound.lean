@@ -47,7 +47,7 @@ private theorem module_vanishing {X Y : Scheme.{u}} (g : X ⟶ Y) (c : ℕ)
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
   let N := Φ.obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) V.hom).obj M)
   have hN : N.IsTorsion := Sheaf.IsTorsion.of_iso
-    (asIso ((Etale.upperStarForget₂ Λ V.hom).natTrans.app M))
+    (asIso ((Etale.upperStarForget₂ Λ V.hom).app M))
     (Etale.isTorsion_upperStar V.hom hM)
   have hsub := hc W.hom N hN (n + 1) (by omega)
   obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso V.left (n + 1)

@@ -95,15 +95,14 @@ theorem restrictionPullbackInv_mate :
       TwoSquare.mk _ _ _ _
         (proEtaleRingRestrictionDirectImage f RY SY RX SX aY aX cRf cSf commf).hom := by
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_symm_apply, proEtaleRingRestrictionPullbackInv,
     proEtaleRingRestrictionPullbackApp, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
     Category.id_comp]
   simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   exact (Category.comp_id _).symm
 
@@ -178,8 +177,7 @@ theorem restrictionPullbackInv_comp
     dsimp only [q]
     rw [mateEquiv_hcomp, restrictionPullbackInv_mate, restrictionPullbackInv_mate,
       restrictionPullbackInv_mate]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro W
@@ -188,7 +186,7 @@ theorem restrictionPullbackInv_comp
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    simp only [ModuleCat.comp_apply]
     have dirApply {U V : Scheme.{u}} (q : U ⟶ V)
         (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
         (RU SU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})

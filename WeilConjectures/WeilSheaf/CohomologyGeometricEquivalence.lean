@@ -103,7 +103,7 @@ induced by the Weil structure of the cohomology sheaf `𝓗ⁱ(Ra_* ℚ̄_ℓ)`.
 lemma cohomology_adicConstant_frobenius (i : ℤ) :
     ((adicConstant k l X).cohomology i).frobenius = WeilCoefficients.linearEquivOfIso
       ((IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
-        (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).app
+        (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)).app
           ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X))) :=
   rfl
 
@@ -114,15 +114,15 @@ Under `Hⁱ(X ⊗ k̄, ℚ̄_ℓ) ≅ Hⁱ RΓ(X̄, ℚ̄_ℓ)`, the Frobenius i
 `RΓ(X̄, ℚ̄_ℓ)` along the inverse of the geometric Frobenius of `X̄`. -/
 lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
     (IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
-        (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).hom.app
+        (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)).hom.app
           ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X)) ≫
         (cohomologyCarrierIso k l X i).hom =
       (cohomologyCarrierIso k l X i).hom ≫ (DerivedCategory.homologyFunctor _ i).map
         (ProEtale.derivedGlobalSectionsUnitIso l
-          (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm).hom := by
+          (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm).hom := by
   have hG := Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_naturality
     (IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
-      (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)) i
+      (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)) i
     (derivedLowerStarAdicConstant k l X)
   have hB := IsoAlgebra.mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_obj
     (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l (X ↘ Spec (.of k))
@@ -131,9 +131,9 @@ lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
       (Scheme.Hom.geometricFiberMap (X ↘ Spec (.of k))
         (comp_over (X ↘ Spec (.of k)) (Spec (.of k)))))
     (ProEtale.adicLowerStarCompGlobalSectionsIso l
-      (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)
+      (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)
     (ProEtale.adicLowerStarCompGlobalSectionsIso l
-      (X ↘ Spec (.of k)).geometricGaloisFrobenius.inv)
+      (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)
     (fun M ↦ ProEtale.adicLowerStarCompGlobalSectionsIso_inv_app_comm l _ _ _ _ _ M)
     ((DerivedCategory.singleFunctor _ 0).obj (ProEtaleWeilSheaf.adicConstant k l X))
   simp only [cohomologyCarrierIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
@@ -154,7 +154,7 @@ lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
     Functor.mapIso_hom]
   have hn := (Functor.rightDerivedFunctorIsoMapDerivedCategoryComp
     (ProEtale.adicLowerStarCompGlobalSectionsIso l
-      (X ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).hom.naturality
+      (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)).hom.naturality
     (((IsoAlgebra.forget (frobeniusPullback k l X)).mapDerivedCategorySingleFunctor 0).hom.app
       (ProEtaleWeilSheaf.adicConstant k l X))
   erw [reassoc_of% hn]

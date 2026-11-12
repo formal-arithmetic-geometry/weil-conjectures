@@ -144,7 +144,7 @@ lemma isIso_mateEquiv_app_of_isIso (M : C) [IsIso (adj_C.unit.app M)]
   rw [← hit] at hconj
   have : IsIso ((mateEquiv adj_C adj_D (mateEquiv adj adj' α.hom)).app (N_C.obj M)) :=
     NatIso.isIso_app_of_isIso
-      (mateEquiv adj_C adj_D (mateEquiv adj adj' α.hom)).natTrans _
+      (mateEquiv adj_C adj_D (mateEquiv adj adj' α.hom)) _
   have : IsIso (R_D.map ((mateEquiv adj adj' α.hom).app M)) := by
     have : IsIso (adj_D.unit.app (G.obj M) ≫ R_D.map ((mateEquiv adj adj' α.hom).app M)) := by
       dsimp at hu

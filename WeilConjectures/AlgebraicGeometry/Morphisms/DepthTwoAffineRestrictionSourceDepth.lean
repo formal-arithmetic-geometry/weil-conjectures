@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.RingTheory.Nakayama
 
 /-! # Affine comparison for the restriction source
 

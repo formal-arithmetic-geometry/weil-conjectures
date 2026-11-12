@@ -111,7 +111,7 @@ private theorem exact_natTrans_nilpotent
 
 private def centralScalar {D : Type*} [Category D] [MonoidalCategory D]
     (s : End (𝟙_ D)) : 𝟭 D ⟶ 𝟭 D :=
-  (rightUnitorNatIso D).inv ≫ (tensoringRight D).map s ≫ (rightUnitorNatIso D).hom
+  (rightUnitorNatIso D).inv ≫ (tensoringRight D).map s.asHom ≫ (rightUnitorNatIso D).hom
 
 private theorem tensor_unit_on_killed
     {D : Type*} [Category D] [Abelian D] [MonoidalCategory D]
@@ -119,10 +119,10 @@ private theorem tensor_unit_on_killed
     [∀ M : D, PreservesFiniteColimits (tensorLeft M)]
     {P : D} (u : 𝟙_ D ⟶ P) {r : ℕ} (s : Fin r → End (𝟙_ D))
     (hQ : IsIso (((rightUnitorNatIso D).inv ≫ (tensoringRight D).map u).app
-      (cokernel (Sigma.desc s))))
+      (cokernel (Sigma.desc (fun j ↦ (s j).asHom)))))
     (M : D) (hM : ∀ j, (centralScalar (s j)).app M = 0) :
     IsIso (((rightUnitorNatIso D).inv ≫ (tensoringRight D).map u).app M) := by
-  let t := Sigma.desc s
+  let t := Sigma.desc (fun j ↦ (s j).asHom)
   let Q := cokernel t
   let η : 𝟭 D ⟶ tensorRight P :=
     (rightUnitorNatIso D).inv ≫ (tensoringRight D).map u
@@ -134,7 +134,7 @@ private theorem tensor_unit_on_killed
     simp only [ι_comp_sigmaComparison_assoc, ← Functor.map_comp, Sigma.ι_comp_desc,
       comp_zero]
     have h := hM j
-    change (ρ_ M).inv ≫ M ◁ s j ≫ (ρ_ M).hom = 0 at h
+    change (ρ_ M).inv ≫ M ◁ (s j).asHom ≫ (ρ_ M).hom = 0 at h
     apply (cancel_epi (ρ_ M).inv).1
     apply (cancel_mono (ρ_ M).hom).1
     simpa using h
@@ -222,7 +222,7 @@ private theorem sectionScalar_central
   let := monoidalCategory R
   let S := PresheafOfModules.sheafification (𝟙 (rings R).obj)
   let ε := (PresheafOfModules.sheafificationAdjunction (𝟙 (rings R).obj)).counit
-  have hpre : M.val ◁ (scalar R s).val ≫ (ρ_ M.val).hom =
+  have hpre : M.val ◁ (scalar R s).asHom.val ≫ (ρ_ M.val).hom =
       (ρ_ M.val).hom ≫ ((sectionScalar R s).app M).val := by
     apply PresheafOfModules.hom_ext
     intro U
@@ -232,11 +232,11 @@ private theorem sectionScalar_central
     change (a * (show R.obj.obj U from s.val U)) • x =
       (show R.obj.obj U from s.val U) • (a • x)
     rw [mul_smul, smul_comm]
-  change (ρ_ M).inv ≫ M ◁ scalar R s ≫ (ρ_ M).hom = _
+  change (ρ_ M).inv ≫ M ◁ (scalar R s).asHom ≫ (ρ_ M).hom = _
   apply (cancel_epi (ρ_ M).hom).1
   simp only [Iso.hom_inv_id_assoc]
   rw [← tensor_rightUnitor_hom R M]
-  erw [whiskerLeft_tensorObjIsoSheafification_hom_assoc (R := R) M (scalar R s)]
+  erw [whiskerLeft_tensorObjIsoSheafification_hom_assoc (R := R) M (scalar R s).asHom]
   rw [← Functor.map_comp_assoc, hpre, Functor.map_comp]
   have hε := ε.naturality ((sectionScalar R s).app M)
   change S.map ((sectionScalar R s).app M).val ≫ ε.app M =
@@ -248,19 +248,19 @@ private theorem sectionScalar_central
 private theorem centralScalar_left
     {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D]
     (s : End (𝟙_ D)) (M : D) :
-    s ▷ M ≫ (λ_ M).hom = (λ_ M).hom ≫ (centralScalar s).app M := by
-  change s ▷ M ≫ (λ_ M).hom =
-    (λ_ M).hom ≫ ((ρ_ M).inv ≫ M ◁ s ≫ (ρ_ M).hom)
+    s.asHom ▷ M ≫ (λ_ M).hom = (λ_ M).hom ≫ (centralScalar s).app M := by
+  change s.asHom ▷ M ≫ (λ_ M).hom =
+    (λ_ M).hom ≫ ((ρ_ M).inv ≫ M ◁ s.asHom ≫ (ρ_ M).hom)
   rw [← braiding_rightUnitor M]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  exact BraidedCategory.braiding_naturality_left_assoc s M (ρ_ M).hom
+  exact BraidedCategory.braiding_naturality_left_assoc s.asHom M (ρ_ M).hom
 
 private theorem scalar_leftUnitor
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (s : (unit (rings R)).sections)
     (M : CategoryTheory.ringedSiteModules.{u} (rings R)) :
     letI := monoidalCategory R
-    scalar R s ▷ M ≫ (λ_ M).hom = (λ_ M).hom ≫ (sectionScalar R s).app M := by
+    (scalar R s).asHom ▷ M ≫ (λ_ M).hom = (λ_ M).hom ≫ (sectionScalar R s).app M := by
   let := monoidalCategory R
   let := symmetricCategory R
   exact (centralScalar_left (scalar R s) M).trans

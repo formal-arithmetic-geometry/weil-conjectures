@@ -117,7 +117,7 @@ private theorem localization_comparison_zero (ℓ : ℕ)
       ((Cocone.precompose (Mod.smulSequenceCompIso G K ℓ).inv).obj
         (G.mapCocone (scalarLocalizationUnitCocone ℓ adjX K))).ι.app 0 := by
   simp only [scalarLocalizationUnitCocone, Functor.comp_obj, Functor.const_obj_obj, pow_zero,
-    End.one_def, CategoryTheory.Functor.map_id, Category.comp_id, Mod.smulSequenceCompIso,
+    End.one_asHom, CategoryTheory.Functor.map_id, Category.comp_id, Mod.smulSequenceCompIso,
     NatIso.ofComponents_inv_app, Iso.refl_inv, Cocone.precompose_obj_pt, Functor.mapCocone_pt,
     Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app]
   change adjY.unit.app (G.obj K) ≫ g = 𝟙 _ ≫ G.map (adjX.unit.app K)

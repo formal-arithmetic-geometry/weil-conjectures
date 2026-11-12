@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-!
 # Injective sheaves of modules are flasque

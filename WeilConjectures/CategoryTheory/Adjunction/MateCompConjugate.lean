@@ -67,9 +67,9 @@ theorem mateEquiv_inv_comp_conjugate
     (Exh : Lh ⋙ Gc ⟶ Ga ⋙ Lh') [IsIso Exh] (e : Lh ≅ Lf ⋙ Lg) (e' : Lh' ≅ Lf' ⋙ Lg')
     (hEx : ExchangeCompCompatible Exf Exg Exh e e') (K : Cz) :
     Ga.map ((conjugateIsoEquiv (adjf.comp adjg) adjh e).inv.app K) ≫
-        (mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj K) ≫
-        Rf'.map ((mateEquiv adjg adjg' (inv Exg)).natTrans.app K) =
-      (mateEquiv adjh adjh' (inv Exh)).natTrans.app K ≫
+        (mateEquiv adjf adjf' (inv Exf)).app (Rg.obj K) ≫
+        Rf'.map ((mateEquiv adjg adjg' (inv Exg)).app K) =
+      (mateEquiv adjh adjh' (inv Exh)).app K ≫
         (conjugateIsoEquiv (adjf'.comp adjg') adjh' e').inv.app (Gc.obj K) :=
   mateEquiv_inv_comp adjf adjg adjh adjf' adjg' adjh' (inv Exf) (inv Exg) (inv Exh) e e'
     (ExchangeCompCompatible.inv_app_comp Exf Exg Exh e e' hEx) _

@@ -77,14 +77,14 @@ private theorem derivedMate_isIso_of_rightEqualities
     (a : L ⊣ R) (b : L' ⊣ R') (c : Q ⊣ T) (d : Q' ⊣ S)
     (θ : G ⋙ L' ≅ L ⋙ H) (ψ : G' ⋙ Q' ≅ Q ⋙ H')
     (hT : R = T) (hR : R' = S) (hG : G = G') (hH : H = H')
-    (ha : IsIso (mateEquiv a b θ.hom).natTrans)
-    (hb : IsIso (mateEquiv c d ψ.hom).natTrans)
+    (ha : IsIso (mateEquiv a b θ.hom))
+    (hb : IsIso (mateEquiv c d ψ.hom))
     (hi : IsIso (mateEquiv c.mapDerivedCategoryRightDerivedAdjunction
       d.mapDerivedCategoryRightDerivedAdjunction
-      (Functor.mapDerivedCategorySquareIso ψ).hom).natTrans) :
+      (Functor.mapDerivedCategorySquareIso ψ).hom)) :
     IsIso (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
-      (Functor.mapDerivedCategorySquareIso θ).hom).natTrans := by
+      (Functor.mapDerivedCategorySquareIso θ).hom) := by
   subst T
   subst S
   subst G'
@@ -97,7 +97,7 @@ private theorem varyingModuleEvalMate (R : ℕ → CommRingCat.{u + 1})
       (proEtaleRingModuleAdjunction f (ProEtale.VaryingRing.coefficients R Y n)
         (ProEtale.VaryingRing.coefficients R X n)
         (ProEtale.StrictTower.constantRingIso (R n) f))
-      (ProEtale.VaryingRing.moduleEvalG R q f n).inv).natTrans =
+      (ProEtale.VaryingRing.moduleEvalG R q f n).inv) =
         (ProEtale.VaryingRing.moduleEvalP R q f n).hom := by
   let a := ProEtale.VaryingRing.moduleAdj R q f
   let b := proEtaleRingModuleAdjunction f (ProEtale.VaryingRing.coefficients R Y n)
@@ -111,12 +111,11 @@ private theorem varyingModuleEvalMate (R : ℕ → CommRingCat.{u + 1})
   have he : (mateEquiv a b).symm
       (TwoSquare.mk _ _ _ _ (ProEtale.VaryingRing.moduleEvalP R q f n).hom) =
       TwoSquare.mk _ _ _ _ (ProEtale.VaryingRing.moduleEvalG R q f n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app hh M
   have he' := congrArg (mateEquiv a b) he
   rw [Equiv.apply_symm_apply] at he'
-  exact (congrArg TwoSquare.natTrans he').symm
+  exact (he').symm
 
 private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
     (q : ∀ n, R (n + 1) ⟶ R n) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
@@ -126,7 +125,7 @@ private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
         (ProEtale.VaryingRing.coefficients R X n)
         (ProEtale.StrictTower.constantRingIso (R n) f)).mapDerivedCategoryRightDerivedAdjunction
       (Functor.mapDerivedCategorySquareIso
-        (ProEtale.VaryingRing.moduleEvalG R q f n).symm).hom).natTrans := by
+        (ProEtale.VaryingRing.moduleEvalG R q f n).symm).hom) := by
   rw [ProEtale.VaryingRing.square_symm]
   exact ProEtale.VaryingRing.evalPMate_isIso R q f n
 
@@ -151,7 +150,7 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (θ : coefficientSequenceEvaluation l E Y n ⋙
         sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) f ≅
       integralComparisonSequencePullback l E f ⋙ coefficientSequenceEvaluation l E X n)
-    (hθ : IsIso (mateEquiv a b θ.hom).natTrans) :
+    (hθ : IsIso (mateEquiv a b θ.hom)) :
     letI := sfIntrinsicPullback_additive (Padic.coefficientExtensionRing l E (n + 1)) f
     letI := sfIntrinsicPullback_preservesFiniteLimits
       (Padic.coefficientExtensionRing l E (n + 1)) f
@@ -171,7 +170,7 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
         Functor.mapDerivedCategoryNatIso θ ≪≫
         (Functor.mapDerivedCategoryCompIso
           (integralComparisonSequencePullback l E f)
-          (coefficientSequenceEvaluation l E X n)).symm).hom)).natTrans := by
+          (coefficientSequenceEvaluation l E X n)).symm).hom)) := by
   let : Abelian.HasKInjectiveResolutions (normalizedDVRModules l E X n) :=
     proEtaleRingModules_hasKInjectiveResolutions X
       (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1)))
@@ -188,7 +187,7 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (ProEtale.VaryingRing.coefficients (rs l E) Y n)
     (ProEtale.VaryingRing.coefficients (rs l E) X n)
     (ProEtale.StrictTower.constantRingIso (rs l E n) f))
-      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv).natTrans =
+      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv) =
       (ProEtale.VaryingRing.moduleEvalP (rs l E) (qs l E) f n).hom := by
     exact varyingModuleEvalMate (rs l E) (qs l E) f n
   have hb : IsIso (mateEquiv
@@ -196,7 +195,7 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     (ProEtale.VaryingRing.coefficients (rs l E) Y n)
     (ProEtale.VaryingRing.coefficients (rs l E) X n)
     (ProEtale.StrictTower.constantRingIso (rs l E n) f))
-      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv).natTrans := by
+      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv) := by
     rw [h₂]
     exact ProEtale.VaryingRing.moduleEvalP_hom_isIso (rs l E) (qs l E) f n
   have hi := varyingDerivedMateIso (rs l E) (qs l E) f n

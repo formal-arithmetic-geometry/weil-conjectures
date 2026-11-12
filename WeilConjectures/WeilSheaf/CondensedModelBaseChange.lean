@@ -333,23 +333,23 @@ lemma whiskerRight_isoMkOfForget_hom_forget {P Q : B ⥤ IsoAlgebra F}
 
 variable {l : B ⥤ B'} {r : B' ⥤ B} (adjB : l ⊣ r) {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
   (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
-  (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = eR.hom)
+  (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) = eR.hom)
   {PB : B ⥤ IsoAlgebra F} {PB' : B' ⥤ IsoAlgebra G}
 
 /-- The mate along a lifted adjunction of algebras is computed on underlying objects. -/
 lemma mateEquiv_mapOfNatIsoAdjunction_app_hom_f
     (α : TwoSquare PB l (mapOfNatIso eL) PB') (b' : B') :
-    ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h) α).natTrans.app b').hom.f =
+    ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h) α).app b').hom.f =
       (mateEquiv adjB adj (TwoSquare.mk (PB ⋙ forget F) l L (PB' ⋙ forget G)
-        (Functor.whiskerRight α.natTrans (forget G)))).natTrans.app b' := by
+        (Functor.whiskerRight α (forget G)))).app b' := by
   simp [mateEquiv_apply, mapOfNatIsoAdjunction]
 
 /-- The inverse mate along a lifted adjunction of algebras is computed on underlying objects. -/
 lemma mateEquiv_symm_mapOfNatIsoAdjunction_app_hom_f
     (β : TwoSquare r PB' PB (mapOfNatIso eR)) (b : B) :
-    (((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)).symm β).natTrans.app b).hom.f =
+    (((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)).symm β).app b).hom.f =
       ((mateEquiv adjB adj).symm (TwoSquare.mk r (PB' ⋙ forget G) (PB ⋙ forget F) R
-        (Functor.whiskerRight β.natTrans (forget F)))).natTrans.app b := by
+        (Functor.whiskerRight β (forget F)))).app b := by
   simp [mateEquiv_symm_apply, mapOfNatIsoAdjunction]
 
 
@@ -362,23 +362,23 @@ lemma isIso_mateEquiv_mapOfNatIsoAdjunction {P₀ : B ⥤ C} {P₀' : B' ⥤ D}
     (θ : l ⋙ PB' ≅ PB ⋙ mapOfNatIso eL) (θ₀ : l ⋙ P₀' ≅ P₀ ⋙ L)
     (hθ : ∀ b, (θ.inv.app b).hom.f = eqToHom (by rw [← hP]; rfl) ≫ θ₀.inv.app b ≫
       eqToHom (by rw [← hP']; rfl))
-    [IsIso (mateEquiv adjB adj (TwoSquare.mk _ _ _ _ θ₀.inv)).natTrans] :
+    [IsIso (mateEquiv adjB adj (TwoSquare.mk _ _ _ _ θ₀.inv))] :
     IsIso (mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)
-      (TwoSquare.mk _ _ _ _ θ.inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ θ.inv)) := by
   subst hP hP'
   have hθ' : Functor.whiskerRight θ.inv (forget G) = θ₀.inv := by
     ext b
     simpa using hθ b
   have (b' : B') : IsIso ((forget F).map
       ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)
-        (TwoSquare.mk _ _ _ _ θ.inv)).natTrans.app b')) := by
+        (TwoSquare.mk _ _ _ _ θ.inv)).app b')) := by
     have e := mateEquiv_mapOfNatIsoAdjunction_app_hom_f adjB adj eL eR h
       (TwoSquare.mk _ _ _ _ θ.inv) b'
     rw [hθ'] at e
     rw [forget_map, e]
     infer_instance
   have (b' : B') : IsIso ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)
-      (TwoSquare.mk _ _ _ _ θ.inv)).natTrans.app b') :=
+      (TwoSquare.mk _ _ _ _ θ.inv)).app b') :=
     isIso_of_reflects_iso _ (forget F)
   exact NatIso.isIso_of_isIso_app _
 
@@ -390,23 +390,23 @@ lemma isIso_mateEquiv_symm_mapOfNatIsoAdjunction {P₀ : B ⥤ C} {P₀' : B' �
     (θ : r ⋙ PB ≅ PB' ⋙ mapOfNatIso eR) (θ₀ : r ⋙ P₀ ≅ P₀' ⋙ R)
     (hθ : ∀ b', (θ.hom.app b').hom.f = eqToHom (by rw [← hP]; rfl) ≫ θ₀.hom.app b' ≫
       eqToHom (by rw [← hP']; rfl))
-    [IsIso ((mateEquiv adjB adj).symm (TwoSquare.mk _ _ _ _ θ₀.hom)).natTrans] :
+    [IsIso ((mateEquiv adjB adj).symm (TwoSquare.mk _ _ _ _ θ₀.hom))] :
     IsIso ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)).symm
-      (TwoSquare.mk _ _ _ _ θ.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ θ.hom)) := by
   subst hP hP'
   have hθ' : Functor.whiskerRight θ.hom (forget F) = θ₀.hom := by
     ext b
     simpa using hθ b
   have (b : B) : IsIso ((forget G).map
       (((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)).symm
-        (TwoSquare.mk _ _ _ _ θ.hom)).natTrans.app b)) := by
+        (TwoSquare.mk _ _ _ _ θ.hom)).app b)) := by
     have e := mateEquiv_symm_mapOfNatIsoAdjunction_app_hom_f adjB adj eL eR h
       (TwoSquare.mk _ _ _ _ θ.hom) b
     rw [hθ'] at e
     rw [forget_map, e]
     infer_instance
   have (b : B) : IsIso (((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR h)).symm
-      (TwoSquare.mk _ _ _ _ θ.hom)).natTrans.app b) :=
+      (TwoSquare.mk _ _ _ _ θ.hom)).app b) :=
     isIso_of_reflects_iso _ (forget G)
   exact NatIso.isIso_of_isIso_app _
 
@@ -485,7 +485,7 @@ noncomputable def geometricFiberUpperStarComparison :
 (`AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilLowerStar`) with the Weil structure
 of `geometricFiberMapWeilUpperStar φ (p_Y^* N)`. -/
 def UpperStarWeilCompatible : Prop :=
-  ∀ N, (lowerStar Λ s.geometricGaloisFrobenius.inv).map
+  ∀ N, (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv).map
       ((geometricFiberUpperStarComparison Λ φ h).hom.app N) ≫
       ((geometricFiberMapWeilUpperStar Λ φ h).obj
         ((geometricFiberWeilLowerStar Λ t).obj N)).str.hom =
@@ -518,7 +518,7 @@ noncomputable def lowerStarGeometricFiberWeilBaseChange (hc : UpperStarWeilCompa
     (TwoSquare.mk (geometricFiberWeilLowerStar Λ t) (φ)^*⟦Λ⟧
       (Endofunctor.IsoAlgebra.mapOfNatIso (upperStarGeometricFiberMapCompFrobeniusIso Λ φ h))
       (geometricFiberWeilLowerStar Λ s)
-      (upperStarCompGeometricFiberWeilLowerStarIso hc).inv)).natTrans
+      (upperStarCompGeometricFiberWeilLowerStarIso hc).inv))
 
 /-- Weakly étale base change for the pushforward of Weil objects: the base change morphism
 `geometricFiberWeil (φ_* M) ⟶ geometricFiberMapWeilLowerStar φ (geometricFiberWeil M)` is an
@@ -528,7 +528,7 @@ instance isIso_lowerStarGeometricFiberWeilBaseChange (hc : UpperStarWeilCompatib
     IsIso (lowerStarGeometricFiberWeilBaseChange hc) := by
   have : IsIso (mateEquiv (upperStarLowerStarAdjunction Λ φ)
       (upperStarLowerStarAdjunction Λ (Scheme.Hom.geometricFiberMap φ h))
-      (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ φ h).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ φ h).inv)) := by
     rw [geometricFiberUpperStarComparison, Iso.symm_inv, ← Adjunction.exchangeRight_eq_mateEquiv,
       ← lowerStarBaseChange_eq]
     exact isIso_lowerStarBaseChange_of_isPullback Λ
@@ -566,7 +566,7 @@ noncomputable def geometricFiberWeilExtensionByZeroBaseChange
       (Endofunctor.IsoAlgebra.mateEquiv_leftMateIso_inv _ _))).symm
     (TwoSquare.mk (φ)^*⟦Λ⟧ (geometricFiberWeilLowerStar Λ t) (geometricFiberWeilLowerStar Λ s)
       (Endofunctor.IsoAlgebra.mapOfNatIso (upperStarGeometricFiberMapCompFrobeniusIso Λ φ h))
-      (upperStarCompGeometricFiberWeilLowerStarIso hc).hom)).natTrans
+      (upperStarCompGeometricFiberWeilLowerStarIso hc).hom))
 
 /-- Extension by zero commutes with the pullback to the geometric fibres on Weil objects: the
 base change morphism is an isomorphism. Its underlying morphism is the inverse mate of the
@@ -586,13 +586,15 @@ instance isIso_geometricFiberWeilExtensionByZeroBaseChange (hc : UpperStarWeilCo
       (upperStarLowerStarAdjunction Λ t.geometricFiberProj))
       ((upperStarLowerStarAdjunction Λ s.geometricFiberProj).comp
         (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap φ h)))
-      α.natTrans) := by
+      α) := by
     rw [← hc', Equiv.apply_symm_apply, geometricFiberUpperStarComparison, Iso.symm_hom,
-      upperStarSquareComparison_flip_inv, ← Adjunction.exchangeRight_eq_mateEquiv,
-      ← lowerStarBaseChange_eq]
-    exact isIso_lowerStarBaseChange_of_isPullback Λ
+      upperStarSquareComparison_flip_inv (Λ := Λ)
+        (Scheme.Hom.isPullback_geometricFiberMap φ h).toCommSq]
+    have hb := isIso_lowerStarBaseChange_of_isPullback Λ
       (Scheme.Hom.isPullback_geometricFiberMap φ h)
-  have : IsIso α.natTrans := conjugateEquiv_of_iso
+    rw [lowerStarBaseChange_eq, Adjunction.exchangeRight_eq_mateEquiv] at hb
+    exact hb
+  have : IsIso α := conjugateEquiv_of_iso
     ((openImmersionLowerShriekUpperStarAdjunction Λ φ).comp
       (upperStarLowerStarAdjunction Λ t.geometricFiberProj))
     ((upperStarLowerStarAdjunction Λ s.geometricFiberProj).comp
@@ -657,8 +659,8 @@ the geometric fibres, attached to a compactification `X₀ ⟶[i] Z₀ ⟶[g] Y�
 `k`-schemes; for `Λ = ℚ̲̄_ℓ` it is
 `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRightDerivedLowerShriek`. -/
 noncomputable def weilRightDerivedLowerShriek (c : Compactification f) (h : f ≫ t = s) :
-    DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ s.geometricGaloisFrobenius.inv)) ⥤
-      DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ t.geometricGaloisFrobenius.inv)) :=
+    DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv)) ⥤
+      DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ t.geometricGaloisFrobenius.asIso.inv)) :=
   (weilExtensionByZero Λ c.i (c.i_comp_g_comp h)).mapDerivedCategory ⋙
     (geometricFiberMapWeilLowerStar Λ c.g (rfl : c.g ≫ t = c.g ≫ t)).rightDerivedFunctor
 

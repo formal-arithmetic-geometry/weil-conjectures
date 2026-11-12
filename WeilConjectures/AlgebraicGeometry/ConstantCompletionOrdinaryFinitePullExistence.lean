@@ -123,7 +123,7 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
     ⟨asIso (inverseRestriction F a), fun _ ↦ rfl⟩
   -- The right mate becomes an underlying-sheaf isomorphism by normalization.
   let pr : PS ⋙ res a ⟶ res (F.rings.map a) ⋙ PR :=
-    (mateEquiv amS amR (TwoSquare.mk _ _ _ _ ri.hom)).natTrans
+    (mateEquiv amS amR (TwoSquare.mk _ _ _ _ ri.hom))
   have hpr (N : Mod (F.rings.obj S)) :
       (underlying R).map (pr.app N) ≫
           eR.hom.app ((res (F.rings.map a)).obj N) = eS.hom.app N := by
@@ -170,7 +170,7 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
   let b : (F.algebra R).modules ⋙ change (F.rings.map a) ⟶
       change a ⋙ (F.algebra S).modules :=
     ((mateEquiv amA amB).symm
-      (TwoSquare.mk _ _ _ _ ri.hom)).natTrans
+      (TwoSquare.mk _ _ _ _ ri.hom))
   have he : conjugateEquiv (amA.comp amS)
       (amR.comp amB) b = pr := by
     let β := (mateEquiv amA amB).symm
