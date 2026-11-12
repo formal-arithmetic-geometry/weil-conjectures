@@ -67,6 +67,7 @@ private theorem restriction_stalk_smul
   exact PresheafOfModules.germ_smul (R := Y.presheaf) M.val _ _ _ _ _
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The explicit comparison of mapped stalk complexes requires more definitional checks.
 /-- The canonical additive open restriction comparison is a semilinear chain iso,
 with the same-germ component formula, including transport of the ambient point.
