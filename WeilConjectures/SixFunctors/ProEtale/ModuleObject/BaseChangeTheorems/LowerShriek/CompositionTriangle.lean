@@ -620,19 +620,30 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
   let u₀ := NatIso.hcomp hcf₁ hcg₁
   let u := NatIso.hcomp hcf₂ hcg₂
   let v := NatIso.hcomp hcf₀ hcg₀
-  refine Iso.trans_symm_eq_of_comm a₀ a a'' hcfg₂ hcfg₃ u₀ u hcfg₀ hcfg₁ v n₁ n₂ ?_ ?_
-  · exact congrArg Iso.hom
-      ((boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-          (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
-          (Compactification.Triangle.overCfg T'')).trans
-        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-          (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
-          (Compactification.Triangle.overCfg T'')).symm)
-  · exact (NatTrans.exchange _ _ _ _).symm.trans (congrArg₂ NatTrans.hcomp
-      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        T.cf T₀.cf T''.cf))
-      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        T.cg T₀.cg T''.cg)))
+  have hcfg :=
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+      (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
+      (Compactification.Triangle.overCfg T'')).trans
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+        (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
+        (Compactification.Triangle.overCfg T'')).symm
+  have hz := congrArg Iso.hom hcfg
+  have hcf := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+    T.cf T₀.cf T''.cf
+  have hcg := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+    T.cg T₀.cg T''.cg
+  have hv := (NatTrans.exchange _ _ _ _).symm.trans
+    (congrArg₂ NatTrans.hcomp (congrArg Iso.hom hcf) (congrArg Iso.hom hcg))
+  have e₁ : a₀.inv = hcfg₂.hom ≫ a''.inv ≫ u₀.inv := by
+    rw [← cancel_epi a₀.hom, Iso.hom_inv_id, reassoc_of% n₁]
+    simp
+  have e₂ : a''.inv = hcfg₃.inv ≫ a.inv ≫ u.hom := by
+    rw [← cancel_epi hcfg₃.hom, Iso.hom_inv_id_assoc, ← cancel_epi a.hom,
+      reassoc_of% n₂]
+    simp
+  rw [e₁, reassoc_of% hz, e₂]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, ← hv]
+  simp
 
 end AnyTriangle
 
