@@ -59,7 +59,6 @@ private theorem exists_relative_gluing_of_ambient
   · simpa only [Iso.trans_hom, Iso.app_hom, Category.assoc] using hW
   · simpa only [Iso.trans_hom, Iso.app_hom, Category.assoc] using hV
 
-set_option profiler true in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Glue derived objects and compatible maps on the union, using ambient relative
