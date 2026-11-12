@@ -19,7 +19,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [local instance] Mod.monoidalCategoryCochainComplex
-attribute [local implicit_reducible] coefficientTotalTensor
 
 variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)
@@ -31,8 +30,9 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 
 -- Share the concrete cochain structures across the comparison fields.
 local instance ordinaryRingedTensorSourceMonoidal :
-    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
-  Mod.monoidalCategoryCochainComplex
+    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) where
+  toMonoidalCategoryStruct := HomologicalComplex.monoidalCategoryStruct _ (.up ℤ)
+  __ := Mod.monoidalCategoryCochainComplex
 
 local instance ordinaryRingedTensorSourceStruct :
     MonoidalCategoryStruct (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
@@ -43,8 +43,9 @@ local instance ordinaryRingedTensorTargetCoefficients :
   SheafOfModules.monoidalCategory R
 
 local instance ordinaryRingedTensorTargetMonoidal :
-    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
-  HomologicalComplex.monoidalCategory _ (.up ℤ)
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) where
+  toMonoidalCategoryStruct := HomologicalComplex.monoidalCategoryStruct _ (.up ℤ)
+  __ := HomologicalComplex.monoidalCategory _ (.up ℤ)
 
 local instance ordinaryRingedTensorTargetStruct :
     MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
