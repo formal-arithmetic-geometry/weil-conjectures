@@ -162,8 +162,7 @@ private theorem pushLine_complete (l : ℕ) [Fact l.Prime]
   let := hpush V hV
   exact (Iso.homCongr (Iso.refl V) c).injective.subsingleton
 
-set_option maxHeartbeats 500000 in
--- Concrete derived-category comparisons require additional elaboration heartbeats.
+set_option trace.profiler true in
 private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

@@ -273,8 +273,7 @@ private theorem completed_map_injective
   exact congrArg (fun k => k.hom) (ff.map_injective (X := ⟨_, hunit⟩)
     (Y := ⟨_, hsource⟩) (show (P.ι ⋙ F).map ⟨a⟩ = (P.ι ⋙ F).map ⟨b⟩ from h))
 
-set_option maxHeartbeats 400000 in
--- The completed and condensed localization comparisons have large endpoint types.
+set_option trace.profiler true in
 /-- Realizing the normalized completed adjunct gives the condensed adjunct of the local arrow.
 Source: diagonal tower coefficient changes (1), and diagonal tower trace proof (1).
 (blueprint: lem-diagonal-completed-adjunct-square).
