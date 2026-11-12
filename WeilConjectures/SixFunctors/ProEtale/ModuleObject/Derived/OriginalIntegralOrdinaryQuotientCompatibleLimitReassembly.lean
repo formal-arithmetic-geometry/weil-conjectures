@@ -173,10 +173,6 @@ private theorem pullback_products
   exact preservesLimitsOfShape_of_reflects_of_preserves _ (Mod.forget _)
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- Chartwise transport and product-cone descent require a larger elaboration budget.
-set_option synthInstance.maxHeartbeats 100000 in
--- Coefficient and limit-preservation instances involve several transported equivalences.
 
 /-- Reassembly of individual section limits over a constructible module.
 Source: Hemo--Richarz--Scholbach, Proposition 5.1, proof for constructible sheaves;
