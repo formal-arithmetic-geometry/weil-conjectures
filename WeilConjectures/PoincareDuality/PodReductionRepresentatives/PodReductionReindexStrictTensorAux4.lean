@@ -98,7 +98,10 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
     PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
     PresheafOfModules.restrictScalarsObj, ModuleCat.ofHom_apply,
+    ModuleCat.hom_ofHom, LinearMap.coe_mk, AddHom.coe_mk,
+    ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.RestrictScalars.map',
     CategoryTheory.Prod.sectR, Functor.op] at h1 h4 ⊢
+  trace_state
   exact h1.symm.trans h4
 
 
