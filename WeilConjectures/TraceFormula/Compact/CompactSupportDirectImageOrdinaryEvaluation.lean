@@ -32,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures
 
+-- Prove the section formulas over abstract sheaves before specializing the ring maps.
+-- This avoids reducing the nested sequence-site scalar restrictions in the concrete proof.
 private theorem compactSupportPushforwardComp_sections
     {C : Type v} [Category C] {D : Type w} [Category D] {B : Type*} [Category B]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -82,7 +84,6 @@ private theorem compactSupportIsoTrans_sections
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option profiler true in
 /-- The ordinary direct-image comparison is sectionwise the identity.
 
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941.
