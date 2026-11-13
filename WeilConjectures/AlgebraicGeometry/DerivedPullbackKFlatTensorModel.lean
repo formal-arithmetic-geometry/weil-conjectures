@@ -241,6 +241,7 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) _
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Elaborating the representative comparison requires several concrete tensor structures.
 /-- The comparison on K-flat cochain representatives, before localization in either
 variable. Source: Stacks Project, Cohomology, Tags 079U, 06YC and 06YH; steps 1 and 2
