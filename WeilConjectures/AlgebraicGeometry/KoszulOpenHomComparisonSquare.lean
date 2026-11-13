@@ -80,14 +80,15 @@ theorem koszulOpenHom_comparison_square
         R.map (koszulOpenUnit A r f e) ≫ ψ = R.map φ →
         b ψ = H.map c (H.map (DerivedCategory.Q.map (colimit.ι D e)) (a e φ)) := by
   classical
-  let R := ((SheafOfModules.overFunctor.{uMain}
-    (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
-    Equivalence.functor
+  let F₀ := SheafOfModules.overFunctor.{uMain}
+    (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)
+  let G₀ := Equivalence.functor
       (C := SheafOfModules.{uMain}
         ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
       (D := SheafOfModules.{uMain}
         (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-      (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
+      (Scheme.Modules.overEquiv (koszulOpen A r f))
+  let R := (F₀ ⋙ G₀).mapDerivedCategory
   let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0
   let D := koszulCechHomDiagram A r f
     (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)
