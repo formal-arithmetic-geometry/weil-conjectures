@@ -400,7 +400,7 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
       q.inv.app ((SheafOfModules.toSheaf A ⋙
         sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M) ≫
       v.map (em.inv.app ((proEtaleModuleToModel A).obj M)) := by
-    exact scalarGraph_comparison_inv (Ls ⋙ v) _ _
+    rfl
   rw [hE]
   exact h₁.trans (hg.trans (congrArg₂ (fun (r : Bm.obj.obj (AsSmall.up.op.obj V))
       (m : Nm.val.obj (AsSmall.up.op.obj V)) ↦ r • m) h₂.symm h₃.symm))
