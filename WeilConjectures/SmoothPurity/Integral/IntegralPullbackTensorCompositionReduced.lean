@@ -99,8 +99,6 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
             ((constructibleIntegralPullback l E f).obj M)
             ((constructibleIntegralPullback l E f).obj N)).hom) := by
   have key := reducedPullbackTensorComposition_of_systemLaw
-    (DY := coefficientSequenceDerived l E Y) (DX := coefficientSequenceDerived l E X)
-    (DZ := coefficientSequenceDerived l E Z)
     (integralSystemReduction l E Y) (integralSystemReduction l E X)
     (integralSystemReduction l E Z)
     (constructibleIntegralPullback l E f) (constructibleIntegralPullback l E h)
@@ -133,7 +131,7 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
       simp only [← finiteSystemDerivedComposition_eq l E h f] at hσ
       dsimp only [integralSystemTensorComparison_finite, finiteSystemDerivedPullback,
         integralComparisonDerivedSequencePullback] at hσ ⊢
-      exact hσ) M N
+      with_unfolding_all exact hσ) M N
   exact key
 
 /-- Reduced form of the integral pullback/tensor composition equation.
