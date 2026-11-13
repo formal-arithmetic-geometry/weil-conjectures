@@ -46,7 +46,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-
 /-- Forgetting constructibility identifies an integral model with its two scalar extensions. -/
 private lemma integralModel_scalarExtension_iso (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -144,8 +143,6 @@ lemma quasiSeparated_galoisLayer_j [QuasiSeparated N.j] (L' : Type u) [Field L']
 
 variable (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option trace.profiler true in
--- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**. Let `C` be a
 `ℚ̄_ℓ`-complex whose restriction `Lε^* C` to the noetherian generic fibre is bounded constructible.
 Assume that for every finite subextension `E ⊆ ℚ̄_ℓ` and every bounded constructible
@@ -224,12 +221,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
   refine Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ _ C ?_
   refine isIso_map_app_of_iso _ _ ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
-  -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
-  clear e hL' K₀ E hres hC
-  revert C hgen
-  normalize_precoherent
-  intro C hgen
-  dsimp only [Functor.comp_obj] at hgen ⊢
+  dsimp only [Functor.comp_obj]
   exact_mod_proofs hgen
 
 end NearbyCyclesModel
