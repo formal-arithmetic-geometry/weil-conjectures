@@ -135,7 +135,9 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
       have hσ := integralSystemTensorComparison_comp l E h f A B
       simp only [← finiteSystemDerivedComposition_eq l E h f] at hσ
       dsimp only [integralSystemTensorComparison_finite]
-      convert hσ using 3 <;> rfl) M N
+      generalize finiteSystemDerivedComposition (integralSystemRings l E)
+        (integralSystemTransition l E) h f = a at hσ ⊢
+      exact hσ) M N
   exact key
 
 /-- Reduced form of the integral pullback/tensor composition equation.
