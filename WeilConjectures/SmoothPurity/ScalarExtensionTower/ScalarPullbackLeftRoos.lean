@@ -67,8 +67,6 @@ private theorem scalarCompletionIso_hom (Y : Scheme.{u})
 
 attribute [local irreducible] integralScalarExtension
 
-set_option maxHeartbeats 800000 in
--- The coefficient-functor comparisons exceed the default elaboration budget.
 /-- Compute the route using scalar normalization at Y and pullback normalization
 with coefficients L. There is no scalar model at X or pullback model for E here.
 Source: Stacks 07A4, 0941; the left route in realization step 8 of
@@ -128,36 +126,37 @@ theorem scalarPullbackLeftRoos (W : Bool → Scheme.{u})
       scalarPullbackRoosCoordinate l E L ι f P C SE (ML.roos true) K.obj eP eC q =
     scalarPullbackRoosChain l E L ι f P K.obj eP hF := by
   classical
-  let Y := W false
-  let X := W true
-  let T := coefficientSequenceLimit.{u, u} l L X
+  -- Keep the schemes syntactically aligned with the presentation hypotheses to avoid
+  -- unfolding coefficient functors when checking definitional equality.
+  let T := coefficientSequenceLimit.{u, u} l L (W true)
   let B := integralComparisonDerivedSequencePullback.{u, u} l L f
-  let A := integralComparisonDerivedSequenceScalar.{u, u} l E L ι Y
-  let PS := ((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P.obj
-  let CS := ((integralComparisonSequenceScalarModel.{u, u} l E L ι Y).E.mapHomologicalComplex
-    (.up ℤ)).obj C
-  let d := (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj
+  let A := integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W false)
+  let PS := ((integralOrdinaryScalar l E L ι (W false)).mapHomologicalComplex (.up ℤ)).obj P.obj
+  let CS :=
+    ((integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).E.mapHomologicalComplex
+      (.up ℤ)).obj C
+  let d := (integralOrdinaryScalar l E L ι (W false)).mapDerivedCategoryFactors.hom.app P.obj
   let t : A.obj (DerivedCategory.Q.obj C) ⟶ DerivedCategory.Q.obj CS :=
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι Y).ε.app C
+    (integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).ε.app C
   let b : B.obj (DerivedCategory.Q.obj CS) ⟶ DerivedCategory.Q.obj
       (((integralComparisonSequencePullback l L f).mapHomologicalComplex (.up ℤ)).obj CS) :=
     (integralComparisonSequencePullback.{u, u} l L f).mapDerivedCategoryFactors.hom.app CS
-  let r := (integralComparisonRoosBridge.{u, u} l L X (ML.roos true)
+  let r := (integralComparisonRoosBridge.{u, u} l L (W true) (ML.roos true)
     (((integralComparisonSequencePullback.{u, u} l L f).mapHomologicalComplex (.up ℤ)).obj CS)).hom
   let z := DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom)
   obtain ⟨eS, κS, hpS, hcS, hκS, heS⟩ :=
-    scalarCompletionQuotientPresentation l E L ι Y SE (ML.calculus false)
+    scalarCompletionQuotientPresentation l E L ι (W false) SE (ML.calculus false)
       (ML.roos false) SY P C eC κ hp hc
-  let GP : (integralOperationsGoodComplex l L Y).FullSubcategory :=
-    ⟨PS, scalarGood l E L ι Y P⟩
+  let GP : (integralOperationsGoodComplex l L (W false)).FullSubcategory :=
+    ⟨PS, scalarGood l E L ι (W false) P⟩
   obtain ⟨qL, hqL, hML⟩ := (ML.pullback f).normalization GP CS eS κS hpS hcS
   have hqL' : ScalarPullbackQuotientFormula l E L ι f P C κ qL := by
     intro n i U x
-    let y := integralComparisonSequenceTensorSection.{u, u} l E L ι Y (C.X i)
+    let y := integralComparisonSequenceTensorSection.{u, u} l E L ι (W false) (C.X i)
       (op (n, U)) 1
-      (integralComparisonSequenceSection.{u, u} l E Y (C.X i) n (op U)
+      (integralComparisonSequenceSection.{u, u} l E (W false) (C.X i) n (op U)
         (((κ n).inv.f i).val.app (op U)
-          (unrestrictedIntegralTensorSection.{u, u} l E Y n (P.obj.X i) (op U) 1 x)))
+          (unrestrictedIntegralTensorSection.{u, u} l E (W false) n (P.obj.X i) (op U) 1 x)))
     exact (hqL n i U y).trans (congrArg
       (integralOperationsPullbackGenerator l L f n _ U) (hκS n i U x))
   have hqq : q = qL := scalarPullbackQuotient_ext l E L ι f P C κ q qL hq hqL'
@@ -170,25 +169,25 @@ theorem scalarPullbackLeftRoos (W : Bool → Scheme.{u})
     exact scalarPullbackRoosCoordinate_system l E L ι f P C SE (ML.roos true)
       K.obj eP eC q κ
   have hn : (integralDerivedPullback.{u, u} l L f).map
-        ((scalarCompletion l E L ι Y).app (DerivedCategory.Q.obj P.obj)) ≫
+        ((scalarCompletion l E L ι (W false)).app (DerivedCategory.Q.obj P.obj)) ≫
       (ML.pullback f).realization.hom.app
-        ((integralScalarExtension.{u} l E L ι Y).obj (DerivedCategory.Q.obj P.obj)) ≫
-      T.map (B.map (scalarReduction l E L ι Y SE (ML.calculus false)
+        ((integralScalarExtension.{u} l E L ι (W false)).obj (DerivedCategory.Q.obj P.obj)) ≫
+      T.map (B.map (scalarReduction l E L ι (W false) SE (ML.calculus false)
         (ML.roos false) SY (DerivedCategory.Q.obj P.obj) ≫ A.map eC.hom ≫ t)) ≫
       T.map b ≫ r ≫ z =
       (integralDerivedPullback.{u, u} l L f).map d ≫
         (integralDerivedPullbackComparison.{u, u} l L f).hom.app
           GP := by
     have hχ := (ML.pullback f).realization.hom.naturality
-      ((scalarCompletion l E L ι Y).app (DerivedCategory.Q.obj P.obj))
+      ((scalarCompletion l E L ι (W false)).app (DerivedCategory.Q.obj P.obj))
     have hd := (ML.pullback f).realization.hom.naturality d
     dsimp only [Functor.comp_map] at hχ hd
     erw [← Category.assoc, ← Category.assoc, ← Category.assoc, ← Category.assoc, hχ]
     simp only [Category.assoc]
     change (ML.pullback f).realization.hom.app _ ≫
       T.map (B.map ((ML.calculus false).reduction.map
-        ((scalarCompletion l E L ι Y).app (DerivedCategory.Q.obj P.obj)))) ≫
-      T.map (B.map (scalarReduction l E L ι Y SE (ML.calculus false)
+        ((scalarCompletion l E L ι (W false)).app (DerivedCategory.Q.obj P.obj)))) ≫
+      T.map (B.map (scalarReduction l E L ι (W false) SE (ML.calculus false)
         (ML.roos false) SY (DerivedCategory.Q.obj P.obj) ≫ A.map eC.hom ≫ t)) ≫
       T.map b ≫ r ≫ z = _
     erw [← T.map_comp_assoc, ← B.map_comp]
@@ -197,26 +196,26 @@ theorem scalarPullbackLeftRoos (W : Bool → Scheme.{u})
     erw [← reassoc_of% hd]
     exact congrArg ((integralDerivedPullback.{u, u} l L f).map d ≫ ·) hML
   let F := integralDerivedPullback.{u, u} l L f
-  let O := integralOrdinaryDerivedScalar l E L ι Y
-  let χ := scalarCompletion l E L ι Y
+  let O := integralOrdinaryDerivedScalar l E L ι (W false)
+  let χ := scalarCompletion l E L ι (W false)
   let ν := (ML.pullback f).realization.hom
-  let δ := scalarReduction l E L ι Y SE (ML.calculus false) (ML.roos false) SY K.obj
-  have hδ := scalarReduction_naturality l E L ι Y SE (ML.calculus false)
+  let δ := scalarReduction l E L ι (W false) SE (ML.calculus false) (ML.roos false) SY K.obj
+  have hδ := scalarReduction_naturality l E L ι (W false) SE (ML.calculus false)
     (ML.roos false) SY eP.inv
   have hδa : δ ≫ A.map a ≫ t =
       (ML.calculus false).reduction.map
-          ((integralScalarExtension.{u} l E L ι Y).map eP.inv) ≫
-        scalarReduction l E L ι Y SE (ML.calculus false) (ML.roos false) SY
+          ((integralScalarExtension.{u} l E L ι (W false)).map eP.inv) ≫
+        scalarReduction l E L ι (W false) SE (ML.calculus false) (ML.roos false) SY
           (DerivedCategory.Q.obj P.obj) ≫ A.map eC.hom ≫ t := by
     simpa only [δ, A, a, Functor.map_comp, Category.assoc] using
       congrArg (fun g ↦ g ≫ A.map eC.hom ≫ t) hδ.symm
   have hnK : F.map (χ.app K.obj) ≫
-      ν.app ((integralScalarExtension.{u} l E L ι Y).obj K.obj) ≫
+      ν.app ((integralScalarExtension.{u} l E L ι (W false)).obj K.obj) ≫
       T.map (B.map δ) ≫ T.map (B.map (A.map a ≫ t) ≫ b) ≫ r ≫ z =
       F.map (O.map eP.inv) ≫ F.map d ≫
         (integralDerivedPullbackComparison.{u, u} l L f).hom.app
           GP := by
-    have hν := ν.naturality ((integralScalarExtension.{u} l E L ι Y).map eP.inv)
+    have hν := ν.naturality ((integralScalarExtension.{u} l E L ι (W false)).map eP.inv)
     have hχ := χ.naturality eP.inv
     dsimp only [Functor.comp_map] at hν
     erw [T.map_comp]
@@ -241,7 +240,7 @@ theorem scalarPullbackLeftRoos (W : Bool → Scheme.{u})
     Functor.mapIso_hom, scalarPullbackRoosChain]
   simp only [Category.assoc]
   erw [scalarCompletionIso_hom]
-  change (scalarCompletionIso l E L ι X _ hF).inv ≫
+  change (scalarCompletionIso l E L ι (W true) _ hF).inv ≫
       (scalarPullbackOrdinary l E L ι f).hom.app K.obj ≫
       F.map (χ.app K.obj) ≫ ν.app _ ≫ T.map (B.map δ) ≫
       T.map (B.map (A.map a ≫ t) ≫ b) ≫ r ≫ z = _
