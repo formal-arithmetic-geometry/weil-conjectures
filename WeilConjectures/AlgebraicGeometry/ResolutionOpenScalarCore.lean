@@ -100,7 +100,7 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
     dsimp only at hs
     dsimp only [h] at hb'
     simp only [hb', map_pow] at hs
-    simpa only [ConcreteCategory.comp_apply] using hs
+    simpa only [eA, A, raw, H, eB, B, E, K, b, ConcreteCategory.comp_apply] using hs
   have hh (y : (H.obj ((S.mapHomologicalComplex (.up ℕ)).obj
       R.resolution.cocomplex))) :
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
