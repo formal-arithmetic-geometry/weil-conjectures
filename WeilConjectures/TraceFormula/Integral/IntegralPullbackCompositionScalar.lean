@@ -142,11 +142,15 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
       ((integralSystemScalarIso l E L ι V).hom.app K)
   have CL := (integralPullbackComposition l L).choose_spec.2.2 h k (SV.obj K)
   simp only [integralPullbackSystemComparison_choose] at CL
-  have eE := congrArg (fun a ↦ a.hom.app ((integralSystemReduction l E V).obj K))
-    (finiteSystemDerivedComposition_eq_integralComparison l E h k)
-  have eL := congrArg (fun a ↦ a.hom.app ((integralComparisonDerivedSequenceScalar l E L ι V).obj
-      ((integralSystemReduction l E V).obj K)))
-    (finiteSystemDerivedComposition_eq_integralComparison l L h k)
+  have eE := NatTrans.congr_app (congrArg Iso.hom
+    (finiteSystemDerivedComposition_eq_integralComparison l E h k))
+      ((integralSystemReduction l E V).obj K)
+  have eL := NatTrans.congr_app (congrArg Iso.hom
+    (finiteSystemDerivedComposition_eq_integralComparison l L h k))
+      ((integralComparisonDerivedSequenceScalar l E L ι V).obj
+        ((integralSystemReduction l E V).obj K))
+  dsimp only [Functor.comp_map, Functor.comp_obj, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Ng Np mix Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   have paste := scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
