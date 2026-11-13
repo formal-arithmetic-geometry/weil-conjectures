@@ -32,6 +32,7 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The comparison expands several derived-functor and full-subcategory composites.
 set_option backward.isDefEq.respectTransparency false in
