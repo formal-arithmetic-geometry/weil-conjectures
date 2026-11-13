@@ -404,7 +404,6 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
-set_option profiler true in
 /-- All four finite coefficient descent assertions, including the rational identification
 and the ordinary-category filtered two-colimit.
 Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit, assertions (1)--(4)
@@ -478,10 +477,10 @@ theorem finiteCoefficientDescentTwoColimit
       constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
         boundedConstructible (padicSubfieldRingObj X ℓ E) := by
     intro E
-    exact constantModel_eq_of_localFree _ (finite_lf ℓ E) X
+    exact constantModel_eq_of_localFree (Profinite.continuousMapRingObj E) (finite_lf ℓ E) X
   have hΩ : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
       boundedConstructible (padicAlgClRingObj X ℓ) := by
-    exact constantModel_eq_of_localFree _ (algcl_lf ℓ) X
+    exact constantModel_eq_of_localFree (Profinite.padicAlgClRingObj ℓ) (algcl_lf ℓ) X
   refine ⟨(coefficient_finite_descent_lisse X ℓ).1, ?_,
     (coefficient_finite_descent_objects k p ℓ hp hpℓ X).1, ?_⟩
   · intro E C D r
@@ -492,9 +491,10 @@ theorem finiteCoefficientDescentTwoColimit
     let D' : BoundedConstructible (padicSubfieldRingObj X ℓ E) :=
       ⟨D.obj⟦r⟧, (boundedConstructible _).le_shift r D.obj
         ((congrFun (hE E) D.obj).mp D.property)⟩
-    obtain ⟨hs, hi⟩ :=
+    have hh :=
       (coefficient_finite_descent_hom X ℓ (k := k) p hpℓ E C' D' 0).2.2.2.2.2
-    dsimp only [C', D'] at hs hi
+    have hs := hh.1
+    have hi := hh.2
     constructor
     · intro ψ
       obtain ⟨F, h, f, hf⟩ := hs (ψ ≫ (shiftFunctorZero _ ℤ).inv.app _)
