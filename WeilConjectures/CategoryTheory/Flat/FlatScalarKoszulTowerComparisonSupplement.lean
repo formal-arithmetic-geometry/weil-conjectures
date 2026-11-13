@@ -928,6 +928,7 @@ private theorem normalizedProjectionSquare (φ : R ⟶ B) (r : ℕ)
     rw [← t₁.naturality, ← t₂.naturality, hI I hi]
   exact NatTrans.congr_app ht M
 
+set_option trace.profiler true in
 -- Assemble the independently normalized comparisons without unfolding their models.
 /-- Scalar restriction identifies strict Koszul towers, with the identity on each ordered
 exterior coordinate, their coaugmentations, and their normalized total derived limits.
