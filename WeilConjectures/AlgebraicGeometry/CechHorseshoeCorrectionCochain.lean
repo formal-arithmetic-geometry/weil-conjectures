@@ -335,10 +335,8 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
   · have : Mono (α.f 0) := (hrows 0).mono_f
     apply cechMap_injective U (α.f 0) 1
     have hcomm := ConcreteCategory.congr_hom ((F.map (α.f 0)).comm 0 1) t
-    dsimp only [moduleCechDouble, F, A₀, B₀] at hcomm ⊢
-    calc
-      _ = B₀.d 0 1 ((F.map (α.f 0)).f 0 t) := hcomm.symm
-      _ = B₀.d 0 1 v := congrArg (B₀.d 0 1) hαt
+    dsimp only [moduleCechDouble, F, A₀, B₀] at hcomm
+    rw [← hcomm, hαt]
     dsimp only [v]
     rw [map_sub]
     have hzero := ConcreteCategory.congr_hom
