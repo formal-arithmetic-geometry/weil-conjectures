@@ -35,11 +35,13 @@ namespace RingTheory
 private theorem maximalIdeal_eq_span_of_unramified
     {R T : Type u} [CommRing R] [CommRing T] [IsLocalRing R] [IsLocalRing T]
     [Algebra R T] [IsLocalHom (algebraMap R T)] [Algebra.FormallyUnramified R T]
+    [Algebra.EssFiniteType R T]
     (t : R) (ht : IsLocalRing.maximalIdeal R = Ideal.span {t}) :
     IsLocalRing.maximalIdeal T = Ideal.span {algebraMap R T t} := by
   rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := R), ht,
     Ideal.map_span, Set.image_singleton]
 
+set_option trace.profiler true in
 /-- The root generates the maximal ideal of an integral-closure local factor.
 
 Source: Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
