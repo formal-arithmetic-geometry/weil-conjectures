@@ -161,7 +161,6 @@ private theorem counit_projection_transport
     α.app Y = F.map e.inv ≫ α.app X ≫ G.map e.hom := by
   rw [← α.naturality, ← F.map_comp_assoc, e.inv_hom_id, F.map_id, Category.id_comp]
 
-set_option profiler true in
 private theorem counit_projection_on_representative {X Y : Scheme.{u}} (f : X ⟶ Y)
     (S : CoefficientDerivedSystemCalculus l E Y)
     (ρ : IntegralComparisonRoosModel l E X)
@@ -274,7 +273,6 @@ private theorem counit_projection_on_representative {X Y : Scheme.{u}} (f : X �
     exact h
   exact hproj
 
-set_option profiler true in
 /-- Evaluating normalized realization followed by the coherent counit gives
 exactly the scalar adjunct of the defining pullback-tower projection. This is
 a map equality; it asserts neither invertibility nor a system isomorphism.
