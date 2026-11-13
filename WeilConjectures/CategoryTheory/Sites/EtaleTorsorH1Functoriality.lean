@@ -30,9 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace CategoryTheory.Sheaf.Torsor
 
-set_option profiler true in
--- The naturality of the pullback comparison `σ` identifies sections of the pushforward of the
--- sheaf inverse image with those of `Scheme.etaleSetPullback`, which unfolds both constructions.
 /-- The canonical torsor class is compatible with scheme pullback and change of coefficients.
 The inverse-image torsor is identified with the sheafified set inverse image, with its action
 specified by equivariance on the sections pulled back by the adjunction units. The contracted
@@ -107,6 +104,7 @@ theorem etale_torsor_h1_functoriality :
         T'.sheaf.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop)) :=
       fun W x ↦ eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop))
         (ε.hom.app W x)
+    -- Specify the morphism and section to avoid inferring them through sheafification.
     have hσ : ∀ ⦃W V : X.Etaleᵒᵖ⦄ (h : W ⟶ V) (x : T.sheaf.obj.obj W),
         T'.sheaf.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map h.unop).op (σ W x) =
           σ V (T.sheaf.obj.map h x) := fun W V h x ↦
