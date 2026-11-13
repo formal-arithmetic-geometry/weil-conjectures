@@ -630,42 +630,44 @@ private theorem open_exchange_inverse (b : Base l E)
     (comparisonLevelOpenAdjunction l E b j n)
     (comparisonLevelOpenAdjunction l E b j' n)
     (leftDerivedUpperStarSquareIso B sq.toCommSq).symm
-    (proEtaleConstantRingPullbackComposition h j (R l E n) ≪≫
+    (proEtaleConstantRingPullbackComposition j' g (R l E n) ≪≫
       eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
-        sq.w) ≪≫
-      (proEtaleConstantRingPullbackComposition j' g (R l E n)).symm)
+        sq.w.symm) ≪≫
+      (proEtaleConstantRingPullbackComposition h j (R l E n)).symm).symm
     (comparisonFiniteOpen l E b j n).inv (comparisonFiniteOpen l E b j' n).inv
     (leftDerivedOpenImmersionLowerShriekBaseChangeIso B sq).hom
     (levels.openExchange h j' j g sq n).inv
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
       exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
       exact HU)
     (by
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
         exactByConversion h)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
-      simpa only [Adjunction.homEquiv_unit] using he)
+      dsimp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
+        Iso.symm_inv, NatTrans.comp_app, eqToIso.inv,
+        Functor.comp_obj, Functor.id_obj] at he ⊢
+      simp only [Category.assoc] at he ⊢
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+        exactByConversion h)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
-        NatTrans.comp_app, Category.assoc, eqToIso.inv, eqToIso.hom] at HC ⊢
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h) N
-  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj]
+      exact HC) N
+  dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj, Functor.id_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
