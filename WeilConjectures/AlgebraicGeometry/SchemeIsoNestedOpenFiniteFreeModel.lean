@@ -26,6 +26,45 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+-- Transport a complex model through an exact functor square before specializing to sheaves.
+private theorem nestedOpenModel_localizationIso
+    {C₀ C₁ C₂ C₃ C₄ : Type*}
+    [Category C₀] [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃] [Abelian C₄]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+    [HasDerivedCategory C₃] [HasDerivedCategory C₄]
+    (R : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₂ ⥤ C₃) (F : C₃ ⥤ C₄) (L : C₀ ⥤ C₄)
+    [R.Additive] [G.Additive] [H.Additive] [F.Additive] [L.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (c : ((R ⋙ G) ⋙ H) ⋙ F ≅ L)
+    (C : CochainComplex C₁ ℤ) (D : CochainComplex C₀ ℤ) (P : CochainComplex C₃ ℤ)
+    (hC : C ≅ (R.mapHomologicalComplex (.up ℤ)).obj D)
+    (hiso : H.mapDerivedCategory.obj (G.mapDerivedCategory.obj (DerivedCategory.Q.obj C)) ≅
+      DerivedCategory.Q.obj P) :
+    Nonempty (L.mapDerivedCategory.obj (DerivedCategory.Q.obj D) ≅
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) := by
+  let eC : (G.mapHomologicalComplex (.up ℤ)).obj C ≅
+      ((R ⋙ G).mapHomologicalComplex (.up ℤ)).obj D :=
+    (G.mapHomologicalComplex (.up ℤ)).mapIso hC ≪≫
+      (Functor.mapHomologicalComplexCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).app D
+  let eH : (H.mapHomologicalComplex (.up ℤ)).obj
+      ((G.mapHomologicalComplex (.up ℤ)).obj C) ≅
+      (((R ⋙ G) ⋙ H).mapHomologicalComplex (.up ℤ)).obj D :=
+    (H.mapHomologicalComplex (.up ℤ)).mapIso eC ≪≫
+      (Functor.mapHomologicalComplexCompIso (Iso.refl ((R ⋙ G) ⋙ H)) (.up ℤ)).app D
+  let q : DerivedCategory.Q.obj
+      ((((R ⋙ G) ⋙ H).mapHomologicalComplex (.up ℤ)).obj D) ≅ DerivedCategory.Q.obj P :=
+    DerivedCategory.Q.mapIso eH.symm ≪≫
+      (H.mapDerivedCategoryFactors.app _).symm ≪≫
+      H.mapDerivedCategory.mapIso (G.mapDerivedCategoryFactors.app C).symm ≪≫ hiso
+  exact ⟨L.mapDerivedCategoryFactors.app D ≪≫
+    DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso c (.up ℤ)).app D).symm ≪≫
+    (F.mapDerivedCategoryFactors.app _).symm ≪≫
+    F.mapDerivedCategory.mapIso q ≪≫ F.mapDerivedCategoryFactors.app P⟩
+
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Transport one specified bounded-above finite-free model on a nested open across a
@@ -93,11 +132,6 @@ theorem exists_scheme_iso_nested_open_finite_free_model
   classical
   let j := U.ι ≫ s.hom
   let W := j ''ᵁ V
-  -- The free modules and abelian structures use the same two sheafification sites.
-  let : ((Opens.grothendieckTopology U.toScheme.toRingedSpace).over V).WEqualsLocallyBijective
-      AddCommGrpCat.{u} := inferInstance
-  let : ((Opens.grothendieckTopology Y.toRingedSpace).over W).WEqualsLocallyBijective
-      AddCommGrpCat.{u} := inferInstance
   let a := j.isoImage V
   let EV := Modules.overEquiv V
   let EW := Modules.overEquiv W
@@ -188,23 +222,6 @@ theorem exists_scheme_iso_nested_open_finite_free_model
           Functor.rightUnitor L
     obtain ⟨hC⟩ := hC
     obtain ⟨hiso⟩ := hiso
-    let eC : (G.mapHomologicalComplex (.up ℤ)).obj C ≅
-        (GY.mapHomologicalComplex (.up ℤ)).obj D :=
-      (G.mapHomologicalComplex (.up ℤ)).mapIso hC ≪≫
-        (Functor.mapHomologicalComplexCompIso (Iso.refl GY) (.up ℤ)).app D
-    let eH : (H.mapHomologicalComplex (.up ℤ)).obj
-        ((G.mapHomologicalComplex (.up ℤ)).obj C) ≅
-        ((GY ⋙ H).mapHomologicalComplex (.up ℤ)).obj D :=
-      (H.mapHomologicalComplex (.up ℤ)).mapIso eC ≪≫
-        (Functor.mapHomologicalComplexCompIso (Iso.refl (GY ⋙ H)) (.up ℤ)).app D
-    let q : DerivedCategory.Q.obj
-        (((GY ⋙ H).mapHomologicalComplex (.up ℤ)).obj D) ≅ DerivedCategory.Q.obj P :=
-      DerivedCategory.Q.mapIso eH.symm ≪≫
-        (H.mapDerivedCategoryFactors.app _).symm ≪≫
-        H.mapDerivedCategory.mapIso (G.mapDerivedCategoryFactors.app C).symm ≪≫ hiso
-    exact ⟨L.mapDerivedCategoryFactors.app D ≪≫
-      DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso c (.up ℤ)).app D).symm ≪≫
-      (A.functor.mapDerivedCategoryFactors.app _).symm ≪≫
-      A.functor.mapDerivedCategory.mapIso q ≪≫ A.functor.mapDerivedCategoryFactors.app P⟩
+    exact nestedOpenModel_localizationIso R G H A.functor L c C D P hC hiso
 
 end AlgebraicGeometry.Scheme
