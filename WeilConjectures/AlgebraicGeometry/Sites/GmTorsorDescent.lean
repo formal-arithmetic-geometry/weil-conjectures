@@ -356,19 +356,10 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
       goal.withContext do
         let ctx ← Lean.getLCtx
         let some decl := ctx.findFromUserName? `hc | throwError "missing hc"
-        let target ← goal.getType
-        let rec firstDiff (a b : Lean.Expr) : Option (Lean.Expr × Lean.Expr) :=
-          if a == b then none else
-          match a, b with
-          | .app f x, .app g y => (firstDiff f g).orElse fun _ ↦ firstDiff x y
-          | .lam _ t x _, .lam _ u y _ => (firstDiff t u).orElse fun _ ↦ firstDiff x y
-          | .forallE _ t x _, .forallE _ u y _ => (firstDiff t u).orElse fun _ ↦ firstDiff x y
-          | .mdata _ x, y => firstDiff x y
-          | x, .mdata _ y => firstDiff x y
-          | _ , _ => some (a, b)
-        if let some (a, b) := firstDiff decl.type target then
-          Lean.logInfo m!"hypothesis difference: {repr a}"
-          Lean.logInfo m!"goal difference: {repr b}"
+        let actual ← Lean.instantiateMVars decl.type
+        let target ← Lean.instantiateMVars (← goal.getType)
+        Lean.logInfo m!"HYP RAW: {repr actual}"
+        Lean.logInfo m!"GOAL RAW: {repr target}"
     exact hc
 
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
