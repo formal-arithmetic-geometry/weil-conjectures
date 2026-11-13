@@ -61,6 +61,11 @@ private lemma adicBaseChange_modIsoTrans_hom_app {C D : Type*}
       (e₁.hom.app M).hom ≫ (e₂.hom.app M).hom ≫ (e₃.inv.app M).hom :=
   rfl
 
+private lemma adicBaseChange_isoTrans_app {C D : Type*} [Category* C] [Category* D]
+    {F₁ F₂ F₃ F₄ : C ⥤ D} (e₁ : F₁ ≅ F₂) (e₂ : F₂ ≅ F₃) (e₃ : F₄ ≅ F₃) (M : C) :
+    (e₁ ≪≫ e₂ ≪≫ e₃.symm).hom.app M =
+      e₁.hom.app M ≫ e₂.hom.app M ≫ e₃.inv.app M := rfl
+
 variable (l : ℕ) [Fact l.Prime]
 
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
@@ -73,15 +78,23 @@ noncomputable def adicSquareLowerStarIso (sq : CommSq g' j' j g'') :
     (adicLowerStarComp l g' j).symm
 
 set_option profiler true in
+private lemma adicSquareLowerStarIso_hom_app (sq : CommSq g' j' j g'')
+    (M : AdicSheaf l U') :
+    (adicSquareLowerStarIso l sq).hom.app M =
+      (adicLowerStarComp l j' g'').hom.app M ≫
+        (adicLowerStarCongr l sq.w.symm).hom.app M ≫ (adicLowerStarComp l g' j).inv.app M :=
+  adicBaseChange_isoTrans_app _ _ _ _
+
+set_option profiler true in
 private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
-  exact (adicBaseChange_modIsoTrans_hom_app (adicLowerStarComp l j' g'')
-    (adicLowerStarCongr l sq.w.symm) (adicLowerStarComp l g' j) M).trans
-    (congrArg₂ (fun f g ↦ f ≫ g) (adicLowerStarComp_hom_app_hom j' g'' M)
-      (congrArg₂ (fun f g ↦ f ≫ g) (adicLowerStarCongr_hom_app_hom sq.w.symm M)
-        (adicLowerStarComp_inv_app_hom g' j M)))
+  rewrite [adicSquareLowerStarIso_hom_app]
+  repeat' rewrite [Mod.comp_hom']
+  rewrite [adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
+    adicLowerStarComp_inv_app_hom]
+  exact (adicBaseChange_isoTrans_app _ _ _ _).symm
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
