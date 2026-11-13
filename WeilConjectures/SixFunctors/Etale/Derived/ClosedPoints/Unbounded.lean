@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Hypercohomology
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Products
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Products
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
@@ -36,8 +37,6 @@ only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `lem-kun-0f1g`, Stacks 0F1G)
 
 - `DerivedCategory.isIso_homologyFunctor_map_π_of_isHomotopyLimit_of_isIso`: the Milnor
   sequence for an essentially constant tower in `D(R)`.
-- `CategoryTheory.Functor.preservesLimitsOfShape_discrete_nat_rightDerivedFunctor`: unbounded
-  right derived functors to `D(R)` preserve countable products.
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`:
   the abstract form of Stacks 0BKZ.
 - `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic`
@@ -225,63 +224,6 @@ end DerivedCategory
 
 namespace CategoryTheory.Functor
 
-section Products
-
-variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-  [Abelian.HasKInjectiveResolutions C] [HasLimitsOfShape (Discrete ℕ) C]
-  {R : Type v} [Ring R] [HasDerivedCategory (ModuleCat.{v} R)]
-  [Abelian.HasKInjectiveResolutions (ModuleCat.{v} R)]
-
-/-- The unbounded right derived functor of an additive functor `F : C ⥤ ModuleCat R` preserving
-countable products preserves countable products: it is computed by applying `F` termwise to
-K-injective complexes, these are closed under products, and products of complexes of modules are
-products in `D(R)` since products of modules are exact. -/
-lemma preservesLimitsOfShape_discrete_nat_rightDerivedFunctor (F : C ⥤ ModuleCat.{v} R)
-    [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F] :
-    PreservesLimitsOfShape (Discrete ℕ) F.rightDerivedFunctor := by
-  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
-  let q := HomotopyCategory.quotient C (ComplexShape.up ℤ)
-  let a : G ⋙ DerivedCategory.Q ≅
-      q ⋙ (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) :=
-    Functor.isoWhiskerLeft G (DerivedCategory.quotientCompQhIso (ModuleCat.{v} R)).symm ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors _).symm DerivedCategory.Qh ≪≫
-      Functor.associator _ _ _
-  let β : G ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
-    a.hom ≫ Functor.whiskerLeft q F.rightDerivedFunctorUnit ≫
-      (Functor.associator _ _ _).inv ≫
-      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C) F.rightDerivedFunctor).hom
-  have hβ (I : CochainComplex C ℤ) [I.IsKInjective] : IsIso (β.app I) := by
-    dsimp [β, a]
-    infer_instance
-  have hfamily (K : ℕ → DerivedCategory C) :
-      PreservesLimit (Discrete.functor K) F.rightDerivedFunctor := by
-    choose I hI e using fun n ↦ DerivedCategory.exists_iso_Q_obj_of_isKInjective (K n)
-    have : ∀ n, (I n).IsKInjective := hI
-    have : ∀ n, IsIso (β.app (I n)) := fun n ↦ hβ (I n)
-    have : (∏ᶜ I).IsKInjective := CochainComplex.isKInjective_of_isLimitFan (productIsProduct I)
-    have : IsIso (β.app (∏ᶜ I)) := hβ _
-    have hQ := DerivedCategory.isLimitFanMkQObjOfIsKInjective (productIsProduct I)
-    let hK : IsLimit (Fan.mk (DerivedCategory.Q.obj (∏ᶜ I))
-        fun n ↦ DerivedCategory.Q.map (Pi.π I n) ≫ (e n).some.inv) :=
-      Fan.IsLimit.ofIsos hQ (fun n ↦ (e n).some) (Iso.refl _) fun n ↦ by simp
-    have hG : IsLimit (Fan.mk (G.obj (∏ᶜ I)) fun n ↦ G.map (Pi.π I n)) :=
-      isLimitFanMkObjOfIsLimit G _ _ (productIsProduct I)
-    have hQG := DerivedCategory.isLimitFanMkQObj hG
-    have hR : IsLimit (Fan.mk (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj (∏ᶜ I)))
-        fun n ↦ F.rightDerivedFunctor.map (DerivedCategory.Q.map (Pi.π I n) ≫ (e n).some.inv)) :=
-      Fan.IsLimit.ofIsos hQG
-        (fun n ↦ F.rightDerivedFunctor.mapIso (e n).some ≪≫ (asIso (β.app (I n))).symm)
-        (asIso (β.app (∏ᶜ I))).symm fun n ↦ by
-          have hn := β.naturality (Pi.π I n)
-          dsimp at hn ⊢
-          rw [IsIso.inv_comp_eq, ← F.rightDerivedFunctor.map_comp_assoc, assoc, Iso.inv_hom_id,
-            comp_id, ← reassoc_of% hn, IsIso.hom_inv_id, comp_id]
-    exact preservesLimit_of_preserves_limit_cone hK ((isLimitMapConeFanMkEquiv _ _ _).symm hR)
-  exact preservesLimitsOfShape_of_discrete _
-
-end Products
-
 section Truncation
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -422,7 +364,7 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι 
       IsIso ((DerivedCategory.homologyFunctor _ m).map
         ((Γ j).rightDerivedFunctor.map (c.π.app (op n)))) := by
     let RΓ := (Γ j).rightDerivedFunctor
-    have := preservesLimitsOfShape_discrete_nat_rightDerivedFunctor (Γ j)
+    have := preservesLimitsOfShape_discrete_rightDerivedFunctor (J := ℕ) (Γ j)
     let n₀ := (1 - m).toNat
     have hc' := (hc.map RΓ).whiskerAdd n₀
     have hall (p : ℤ) (hp : m - 1 ≤ p) (a b : ℕ) (hab : a ≤ b) :
