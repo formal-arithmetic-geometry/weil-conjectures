@@ -132,7 +132,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    A B hτM hτN hτP (𝟭 _)
+    A B hτM hτN (by cast_proofs hτP) (𝟭 _)
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   exact sq.2 h
 
@@ -181,7 +181,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
   have result := isIso_kunnethMap_of_iso 𝔽
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (eA.app A) (eB.app B) h₀
-  exact result
+  cast_proofs result
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
