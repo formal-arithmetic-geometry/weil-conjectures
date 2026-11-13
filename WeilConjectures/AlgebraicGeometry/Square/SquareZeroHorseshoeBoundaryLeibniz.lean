@@ -118,7 +118,117 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
   have h := boundary_eq_of_comparison _ _ _ _
     (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1) _
     (heq 0) (htriangle S hS 0)
-  exact h
+  simpa only [Category.assoc] using h
+
+set_option profiler true in
+private theorem cech_cycles_leibniz (X : Scheme.{u})
+    (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
+    (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    (i : I ⟶ commAlgebraSheafModule X.sheaf B)
+    (hw : i ≫ (commAlgebraSheafModuleFunctor X.sheaf).map p = 0)
+    (hS : (ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw).ShortExact)
+    (μ : C.right.obj.obj (op ⊤) →+* End I)
+    (hlift : ∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens)
+      (b : B.right.obj.obj (op U)) (x : I.val.obj (op U)),
+      p.right.hom.app (op U) b = C.right.obj.map (homOfLE le_top).op f →
+      @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).asHom.val.app (op U) x)) =
+        b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x))
+    {ι : Type u} (U : ι → X.Opens) (f g : C.right.obj.obj (op ⊤))
+    (b c : ∀ a, B.right.obj.obj (op (U a)))
+    (hb : ∀ a, p.right.hom.app (op (U a)) (b a) =
+      C.right.obj.map (homOfLE le_top).op f)
+    (hc : ∀ a, p.right.hom.app (op (U a)) (c a) =
+      C.right.obj.map (homOfLE le_top).op g) :
+    let K := (CategoryTheory.cechComplexFunctor U).obj (show X.Modules from I).presheafModuleCat
+    let act (s : C.right.obj.obj (op ⊤)) := (CategoryTheory.cechComplexFunctor U).map
+      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (μ s).asHom.val)
+    ∀ zf zg zfg : K.cycles 1,
+      (∀ y : Fin 2 → ι,
+        i.val.app (op (∏ᶜ fun k : Fin 2 ↦ U (y k)))
+          (TopCat.Presheaf.cechComplexFunctorπ U
+            (show X.Modules from I).presheafModuleCat 1 y (K.iCycles 1 zf)) =
+          B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (b (y 1)) -
+            B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (b (y 0))) →
+      (∀ y : Fin 2 → ι,
+        i.val.app (op (∏ᶜ fun k : Fin 2 ↦ U (y k)))
+          (TopCat.Presheaf.cechComplexFunctorπ U
+            (show X.Modules from I).presheafModuleCat 1 y (K.iCycles 1 zg)) =
+          B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (c (y 1)) -
+            B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (c (y 0))) →
+      (∀ y : Fin 2 → ι,
+        i.val.app (op (∏ᶜ fun k : Fin 2 ↦ U (y k)))
+          (TopCat.Presheaf.cechComplexFunctorπ U
+            (show X.Modules from I).presheafModuleCat 1 y (K.iCycles 1 zfg)) =
+          B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (b (y 1) * c (y 1)) -
+            B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (b (y 0) * c (y 0))) →
+      zfg = HomologicalComplex.cyclesMap (act f) 1 zg +
+        HomologicalComplex.cyclesMap (act g) 1 zf := by
+  classical
+  intro K act zf zg zfg hzf hzg hzfg
+  have hinj : Function.Injective (K.iCycles 1) :=
+    (ModuleCat.mono_iff_injective _).mp inferInstance
+  apply hinj
+  apply TopCat.Presheaf.cechComplexFunctor_ext U
+    (show X.Modules from I).presheafModuleCat
+  intro y
+  let W := ∏ᶜ fun k : Fin 2 ↦ U (y k)
+  let π := TopCat.Presheaf.cechComplexFunctorπ U
+    (show X.Modules from I).presheafModuleCat 1 y
+  let bf := fun k : Fin 2 ↦ B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) k).op
+    (b (y k))
+  let cg := fun k : Fin 2 ↦ B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) k).op
+    (c (y k))
+  have hlb (k : Fin 2) : p.right.hom.app (op W) (bf k) =
+      C.right.obj.map (homOfLE le_top).op f := by
+    dsimp [bf]
+    rw [← ConcreteCategory.comp_apply, p.right.hom.naturality]
+    simp only [ConcreteCategory.comp_apply, hb]
+    simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+    rfl
+  have hlc (k : Fin 2) : p.right.hom.app (op W) (cg k) =
+      C.right.obj.map (homOfLE le_top).op g := by
+    dsimp [cg]
+    rw [← ConcreteCategory.comp_apply, p.right.hom.naturality]
+    simp only [ConcreteCategory.comp_apply, hc]
+    simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+    rfl
+  have hφ (s : C.right.obj.obj (op ⊤)) (z : K.cycles 1) :
+      π (K.iCycles 1 (HomologicalComplex.cyclesMap (act s) 1 z)) =
+        (μ s).asHom.val.app (op W) (π (K.iCycles 1 z)) := by
+    have hi := congrArg (fun m ↦ m z) (HomologicalComplex.cyclesMap_i (act s) 1)
+    have hp := TopCat.Presheaf.cechComplexFunctor_map_f_π U
+      (show X.Modules from I).presheafModuleCat
+      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+        (μ s).asHom.val) 1 y
+    dsimp only [act] at hi
+    simp only [ConcreteCategory.comp_apply] at hi
+    erw [hi]
+    exact congrArg (fun m ↦ m (K.iCycles 1 z)) hp
+  have hm : Mono i := hS.mono_f
+  let E := SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op W)
+  have hii : Function.Injective (i.val.app (op W)) :=
+    (ModuleCat.mono_iff_injective (E.map i)).mp inferInstance
+  apply hii
+  change i.val.app (op W) (π (K.iCycles 1 zfg)) =
+    i.val.app (op W) (π (K.iCycles 1
+      (HomologicalComplex.cyclesMap (act f) 1 zg +
+        HomologicalComplex.cyclesMap (act g) 1 zf)))
+  rw [map_add, map_add, map_add, hφ, hφ]
+  simp only [id_eq] at hlift
+  erw [hlift f W (bf 0) _ (hlb 0), hlift g W (cg 1) _ (hlc 1)]
+  have hf' := hzf y
+  have hg' := hzg y
+  have hfg' := hzfg y
+  change i.val.app (op W) (π (K.iCycles 1 zf)) = bf 1 - bf 0 at hf'
+  change i.val.app (op W) (π (K.iCycles 1 zg)) = cg 1 - cg 0 at hg'
+  change i.val.app (op W) (π (K.iCycles 1 zfg)) =
+    B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (b (y 1) * c (y 1)) -
+      B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op
+        (b (y 0) * c (y 0)) at hfg'
+  rw [hf', hg', hfg']
+  simp only [map_mul]
+  change bf 1 * cg 1 - bf 0 * cg 0 = bf 0 * (cg 1 - cg 0) + cg 1 * (bf 1 - bf 0)
+  ring
 
 set_option profiler true in
 private theorem canonical_boundary_leibniz (X : Scheme.{u})
@@ -136,7 +246,6 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
       p.right.hom.app (op U) b = C.right.obj.map (homOfLE le_top).op f →
       @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).asHom.val.app (op U) x)) =
         b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x)) :
-
     let S := ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw
     let d := (RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
       (commAlgebraSheafModule X.sheaf C) ≫
@@ -164,72 +273,8 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
   let act (f : C.right.obj.obj (op ⊤)) :=
     (CategoryTheory.cechComplexFunctor U).map
       ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (μ f).asHom.val)
-  have hz : zfg = HomologicalComplex.cyclesMap (act f) 1 zg +
-      HomologicalComplex.cyclesMap (act g) 1 zf := by
-    have hinj : Function.Injective (K.iCycles 1) :=
-      (ModuleCat.mono_iff_injective _).mp inferInstance
-    apply hinj
-    apply TopCat.Presheaf.cechComplexFunctor_ext U
-      (show X.Modules from I).presheafModuleCat
-    intro y
-    let W := ∏ᶜ fun k : Fin 2 ↦ U (y k)
-    let π := TopCat.Presheaf.cechComplexFunctorπ U
-      (show X.Modules from I).presheafModuleCat 1 y
-    let bf := fun k : Fin 2 ↦ B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) k).op
-      (b (y k))
-    let cg := fun k : Fin 2 ↦ B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) k).op
-      (c (y k))
-    have hlb (k : Fin 2) : p.right.hom.app (op W) (bf k) =
-        C.right.obj.map (homOfLE le_top).op f := by
-      dsimp [bf]
-      rw [← ConcreteCategory.comp_apply, p.right.hom.naturality]
-      simp only [ConcreteCategory.comp_apply, hb]
-      simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
-      rfl
-    have hlc (k : Fin 2) : p.right.hom.app (op W) (cg k) =
-        C.right.obj.map (homOfLE le_top).op g := by
-      dsimp [cg]
-      rw [← ConcreteCategory.comp_apply, p.right.hom.naturality]
-      simp only [ConcreteCategory.comp_apply, hc]
-      simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
-      rfl
-    have hφ (s : C.right.obj.obj (op ⊤)) (z : K.cycles 1) :
-        π (K.iCycles 1 (HomologicalComplex.cyclesMap (act s) 1 z)) =
-          (μ s).asHom.val.app (op W) (π (K.iCycles 1 z)) := by
-      have hi := congrArg (fun m ↦ m z) (HomologicalComplex.cyclesMap_i (act s) 1)
-      have hp := TopCat.Presheaf.cechComplexFunctor_map_f_π U
-        (show X.Modules from I).presheafModuleCat
-        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
-          (μ s).asHom.val) 1 y
-      dsimp only [act] at hi
-      simp only [ConcreteCategory.comp_apply] at hi
-      erw [hi]
-      exact congrArg (fun m ↦ m (K.iCycles 1 z)) hp
-    have hm : Mono i := hS.mono_f
-    let E := SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op W)
-    have hii : Function.Injective (i.val.app (op W)) :=
-      (ModuleCat.mono_iff_injective (E.map i)).mp inferInstance
-    apply hii
-    change i.val.app (op W) (π (K.iCycles 1 zfg)) =
-      i.val.app (op W) (π (K.iCycles 1
-        (HomologicalComplex.cyclesMap (act f) 1 zg +
-          HomologicalComplex.cyclesMap (act g) 1 zf)))
-    rw [map_add, map_add, map_add, hφ, hφ]
-    simp only [id_eq] at hlift
-    erw [hlift f W (bf 0) _ (hlb 0), hlift g W (cg 1) _ (hlc 1)]
-    have hf' := hzf y
-    have hg' := hzg y
-    have hfg' := hzfg y
-    change i.val.app (op W) (π (K.iCycles 1 zf)) = bf 1 - bf 0 at hf'
-    change i.val.app (op W) (π (K.iCycles 1 zg)) = cg 1 - cg 0 at hg'
-    change i.val.app (op W) (π (K.iCycles 1 zfg)) =
-      B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (b (y 1) * c (y 1)) -
-        B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op
-          (b (y 0) * c (y 0)) at hfg'
-    rw [hf', hg', hfg']
-    simp only [map_mul]
-    change bf 1 * cg 1 - bf 0 * cg 0 = bf 0 * (cg 1 - cg 0) + cg 1 * (bf 1 - bf 0)
-    ring
+  have hz := cech_cycles_leibniz X B C p I i hw hS μ hlift U f g b c hb hc
+    zf zg zfg hzf hzg hzfg
   have hclass : K.homologyπ 1 zfg =
       HomologicalComplex.homologyMap (act f) 1 (K.homologyπ 1 zg) +
         HomologicalComplex.homologyMap (act g) 1 (K.homologyπ 1 zf) := by
@@ -246,7 +291,7 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
     exact congrArg (fun m ↦ m (K.homologyπ 1 z)) (hnatural I I (μ s).asHom)
   have he := congrArg (fun z ↦ cmp I z) hclass
   rw [map_add, hn, hn, hcf, hcg, hcfg] at he
-  exact he
+  simpa only [ModuleCat.comp_apply] using he
 
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
@@ -323,6 +368,6 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
   intro f g
   have he := canonical_boundary_leibniz X B C p I i hw hS μ hlift f g
   simp only [ModuleCat.comp_apply, hd]
-  exact he
+  simpa only [ModuleCat.comp_apply] using he
 
 end AlgebraicGeometry
