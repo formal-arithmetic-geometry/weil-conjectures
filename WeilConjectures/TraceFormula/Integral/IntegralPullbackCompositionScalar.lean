@@ -246,7 +246,7 @@ private theorem integralCompositionFinite_mixed
     [∀ w : W, Invertible (l : W.residueField w)]
     [∀ z : Z, Invertible (l : Z.residueField z)]
     (h : Z ⟶ W) (k : W ⟶ V)
-    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
+    (M : coefficientSequenceDerived l E V) :
     (integralCompositionFiniteScalar l E L ι Z).map
         ((finiteSystemDerivedComposition (integralSystemRings l E)
           (integralSystemTransition l E) h k).hom.app M) ≫
@@ -260,8 +260,10 @@ private theorem integralCompositionFinite_mixed
         (finiteSystemDerivedComposition (integralSystemRings l L)
           (integralSystemTransition l L) h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  unfold integralCompositionFiniteScalar integralCompositionFiniteScalarPullback
-  apply scalar_mixed_of_compositor_eq (integralCompositionFiniteScalar l E L ι Z)
+  apply scalar_mixed_of_compositor_eq
+    (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
+    (D := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) Z)
+    (integralCompositionFiniteScalar l E L ι Z)
     (finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k M)
     (finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
       ((integralCompositionFiniteScalar l E L ι V).obj M))
