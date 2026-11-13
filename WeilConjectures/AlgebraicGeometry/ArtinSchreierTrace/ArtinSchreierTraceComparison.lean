@@ -80,10 +80,10 @@ def condensedProjector (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (G : Type v) [AddGroup G] [Fintype G]
     {X : Scheme.{u}} (Y : Over X) (σ : G → (Y ⟶ Y)) (χ : AddChar G (MonObj.Γ Λ)) :
     End ((ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left)) :=
-  ∑ c : G, condensedPull Λ (σ c) ≫
+  ∑ c : G, End.of (condensedPull Λ (σ c) ≫
     (ProEtale.CondensedRing.lowerStar Λ Y.hom).map
       (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left)
-        (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))))
+        (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c)))).asHom)
 
 /-- Evaluation of a condensed eigensection at a chosen root, in internal modules.
 Source: blueprint lem-wft-as-comparison (3), evaluation trivializations
@@ -114,6 +114,6 @@ def condensedSheafOf (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       (image (condensedProjector Λ k
         (Over.mk (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k)))
         (fun c ↦ Over.homMk (Etale.artinSchreierTranslation k c)
-          (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)) χ))
+          (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)) χ).asHom)
 
 end AlgebraicGeometry.ArtinSchreierTrace

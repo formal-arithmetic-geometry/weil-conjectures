@@ -36,7 +36,7 @@ theorem of_flat_of_faithfullyFlat_module (R S M : Type*) [CommRing R] [CommRing 
     [Module.FaithfullyFlat S M] : Module.Flat R S := by
   rw [Module.Flat.iff_lTensor_preserves_injective_linearMap]
   intro N P _ _ _ _ f hf
-  rw [← LinearMap.baseChange_eq_ltensor,
+  rw [← LinearMap.baseChange_eq_lTensor,
     ← Module.FaithfullyFlat.lTensor_injective_iff_injective S M]
   have h' : (LinearMap.lTensor M (f.baseChange S) : _ → _) =
       (AlgebraTensorModule.cancelBaseChange R S S M P).symm ∘

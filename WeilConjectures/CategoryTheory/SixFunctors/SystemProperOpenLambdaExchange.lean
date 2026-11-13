@@ -45,7 +45,7 @@ private theorem mate_formula
     {Lp : D ⥤ B} {Rp : B ⥤ D} {Lr : C ⥤ A} {Rr : A ⥤ C}
     (ap : Lp ⊣ Rp) (ar : Lr ⊣ Rr) (Pi : D ⥤ C) (Pk : B ⥤ A)
     (t : Pi ⋙ Lr ⟶ Lp ⋙ Pk) (M : B) :
-    (mateEquiv ap ar (TwoSquare.mk _ _ _ _ t)).natTrans.app M =
+    (mateEquiv ap ar (TwoSquare.mk _ _ _ _ t)).app M =
       ar.unit.app (Pi.obj (Rp.obj M)) ≫ Rr.map (t.app (Rp.obj M)) ≫
         Rr.map (Pk.map (ap.counit.app M)) := by
   simp [mateEquiv]
@@ -59,8 +59,8 @@ private theorem composite_mate_formula
     let t : Pi ⋙ (Pq ⋙ Ps) ⟶ Lp ⋙ Pk :=
       (Functor.associator _ _ _).inv ≫ Functor.whiskerRight theta Ps ≫
         (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Lp c.hom
-    (mateEquiv ap (aq.comp as_) (TwoSquare.mk _ _ _ _ t)).natTrans.app M =
-      (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta)).natTrans.app M ≫
+    (mateEquiv ap (aq.comp as_) (TwoSquare.mk _ _ _ _ t)).app M =
+      (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta)).app M ≫
         Rq.map (as_.unit.app (Pb.obj M)) ≫ Rq.map (Rs.map (c.hom.app M)) := by
   intro t
   rw [mate_formula, mate_formula]
@@ -94,8 +94,8 @@ private theorem factor_mate_formula
     (theta : Pi ⋙ Pq ⟶ Lp ⋙ Pb) (c : Pb ⋙ Ps ≅ Pk)
     (e : Lr ≅ Pq ⋙ Ps) (t : Pi ⋙ Lr ⟶ Lp ⋙ Pk)
     (ht : SquareFactorFormula Lp Lr Pq Ps Pi Pb Pk theta c e t) (M : B) :
-    (mateEquiv ap ar (TwoSquare.mk _ _ _ _ t)).natTrans.app M =
-      (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta)).natTrans.app M ≫
+    (mateEquiv ap ar (TwoSquare.mk _ _ _ _ t)).app M =
+      (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta)).app M ≫
         Rq.map (as_.unit.app (Pb.obj M)) ≫
         (conjugateIsoEquiv (aq.comp as_) ar e).hom.app (Ps.obj (Pb.obj M)) ≫
         Rr.map (c.hom.app M) := by
@@ -104,14 +104,13 @@ private theorem factor_mate_formula
       (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Lp c.hom
   have he : TwoSquare.mk _ _ _ _ t =
       (TwoSquare.mk _ _ _ _ t₀).whiskerRight e.hom := by
-    apply TwoSquare.ext
-    intro N
-    simpa only [t₀, TwoSquare.whiskerRight, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    refine NatTrans.ext (funext fun N ↦ ?_)
+    simpa only [t₀, TwoSquare.whiskerRight, TwoSquare.mk, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp] using ht N
   rw [he, mateEquiv_conjugateEquiv_vcomp]
-  change (mateEquiv ap (aq.comp as_) (TwoSquare.mk _ _ _ _ t₀)).natTrans.app M ≫
+  change (mateEquiv ap (aq.comp as_) (TwoSquare.mk _ _ _ _ t₀)).app M ≫
     (conjugateIsoEquiv (aq.comp as_) ar e).hom.app (Pk.obj M) = _
   rw [composite_mate_formula]
   simp only [Category.assoc]
@@ -176,7 +175,7 @@ private theorem cartesian_mate_generic
     (beta : Ji ⋙ Pp ≅ Pq ⋙ Jb) (theta : Pi ⋙ Pq ≅ Pp ⋙ Pb)
     (hbeta : ∀ M : C, ab.homEquiv _ _ (beta.inv.app M) =
       Pq.map (ai.unit.app M) ≫ theta.hom.app (Ji.obj M)) :
-    (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta.hom)).natTrans =
+    (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta.hom)) =
       (conjugateIsoEquiv (ai.comp ap) (aq.comp ab) beta.symm).hom := by
   have hb : mateEquiv ai ab (TwoSquare.mk _ _ _ _ beta.inv) =
       TwoSquare.mk _ _ _ _ theta.hom := by
@@ -245,13 +244,13 @@ private theorem lambda_assembly
     (t : Pi ⋙ Lr ⟶ Lp ⋙ Pk) (z : Rp ⋙ Pi ≅ Pb ⋙ Rq)
     (rho : Jk ⋙ Pb ≅ Js) (cl : Js ≅ Rs) (delta : Rs ⋙ Rq ≅ Rr)
     (ht : SquareFactorFormula Lp Lr Pq Ps Pi Pb Pk theta c e t)
-    (hz : (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta)).natTrans = z.hom)
+    (hz : (mateEquiv ap aq (TwoSquare.mk _ _ _ _ theta)) = z.hom)
     (hu : OpenUnitCompositeFormula Js Ps Jb Pb Jk Pk us ub uk d c)
     (hrho : RestrictIsoFormula Js Jb Jk Pb d ub rho)
     (hcl : ∀ M : A, cl.hom.app M = as_.homEquiv _ _ (us.inv.app M))
     (hdelta : conjugateIsoEquiv (aq.comp as_) ar e = delta) :
     OpenExchangeUnitFormula Jk Rp Pi Pk Rr uk
-      (mateEquiv ap ar (TwoSquare.mk _ _ _ _ t)).natTrans
+      (mateEquiv ap ar (TwoSquare.mk _ _ _ _ t))
       (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft Jk z ≪≫
         (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight rho Rq ≪≫
         Functor.isoWhiskerRight cl Rq ≪≫ delta) := by

@@ -51,7 +51,6 @@ private theorem cochainUnit_eq
   erw [DerivedCategory.Qh.map_id, Category.id_comp]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Native and level module categories share a concrete sequence-site presentation.
 /-- Native ordinary direct evaluation satisfies the derived unit equation.
 Source: Zheng, Construction 4.1; Stacks 0D6E and 0D6J.
@@ -77,7 +76,7 @@ theorem compactSupportRawDirectNormalization
     (ProEtale.VaryingRing.coefficients R Z n)
     (ProEtale.StrictTower.constantRingIso (R n) g)
   have hm : (mateEquiv a b (TwoSquare.mk _ _ _ _
-      (ProEtale.VaryingRing.moduleEvalG R q g n).inv)).natTrans =
+      (ProEtale.VaryingRing.moduleEvalG R q g n).inv)) =
         (ProEtale.VaryingRing.moduleEvalP R q g n).hom := by
     have hi := ProEtale.VaryingRing.inverseMateEqOfUnit a b
       (ProEtale.VaryingRing.eval R q Y n) (ProEtale.VaryingRing.eval R q Z n)

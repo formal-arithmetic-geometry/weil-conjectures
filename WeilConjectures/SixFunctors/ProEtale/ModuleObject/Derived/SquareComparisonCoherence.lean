@@ -135,7 +135,6 @@ section Composition
 
 variable {R S T : Scheme.{u}}
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The composition isomorphism `L(a ≫ h)^* ≅ Lh^* ⋙ La^*` commutes with the `eqToHom`s induced
 by an equality `h = h'`. -/
@@ -149,7 +148,6 @@ lemma leftDerivedUpperStarComp_hom_app_map_eqToHom (a : R ⟶ S) {h h' : S ⟶ T
   rw [eqToHom_refl, eqToHom_refl, L((a)^*⟦Λ⟧).map_id]
   exact (Category.comp_id _).trans (Category.id_comp _).symm
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The composition isomorphism `L(h ≫ b)^* ≅ Lb^* ⋙ Lh^*` commutes with the `eqToHom`s induced
 by an equality `h = h'`. -/
@@ -196,7 +194,6 @@ lemma pullbackSquareComparison_flip (sq : CommSq g' p' p g) :
     ((pullbackSquareComparison Λ sq).inv_hom_id_app K) (pullbackSquareComparison_hom_app Λ sq K)
     (pullbackSquareComparison_hom_app Λ sq.flip K)))
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- `L(a)^*` of the pullback comparison, in terms of the triple composition isomorphisms
 `L(a ≫ p' ≫ g)^* ≅ Lg^* ⋙ Lp'^* ⋙ La^*` and `L(a ≫ g' ≫ p)^* ≅ Lp^* ⋙ Lg'^* ⋙ La^*`. -/
@@ -231,7 +228,6 @@ lemma pullbackSquareComparison_hom_app_obj {V : Scheme.{u}} (sq : CommSq g' p' p
     (pullbackSquareComparison_hom_app Λ sq (L((b)^*⟦Λ⟧).obj K))
     (leftDerivedUpperStarComp_hom_app_eqToHom Λ sq.w.symm b K) _ _
     (leftDerivedUpperStarComp_assoc_app Λ g' p b K)
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The tensor comparison of the derived pullback along `h` commutes with the `eqToHom`s induced
 by an equality `h = h'`. -/
@@ -246,7 +242,6 @@ lemma leftDerivedUpperStarTensor_app_app_comp_eqToHom {h h' : X' ⟶ Y} (e : h =
   rw [eqToHom_refl, eqToHom_refl, eqToHom_refl, id_tensorHom_id]
   exact (Category.comp_id _).trans (Category.id_comp _).symm
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **The pullback comparison is monoidal**: it is compatible with the tensor comparisons
 `m : Lf^* (K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` of the derived pullbacks. -/
@@ -276,7 +271,6 @@ variable {P' M' P₁' M₁' P M P₁ M₁ : Scheme.{u}} {iP : P' ⟶ P} {iM : M'
   {iM₁ : M₁' ⟶ M₁} {f' : P' ⟶ M'} {g' : M' ⟶ M₁'} {k' : P' ⟶ P₁'} {e' : P₁' ⟶ M₁'}
   {f : P ⟶ M} {g : M ⟶ M₁} {k : P ⟶ P₁} {e : P₁ ⟶ M₁}
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Cube coherence of the pullback comparisons**: for a commutative cube of schemes with top
 face `top`, bottom face `bot` and side faces `sf`, `sg`, `sk`, `se`, the two composites

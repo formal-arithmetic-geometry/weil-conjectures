@@ -82,7 +82,7 @@ Source: Stacks Tags 00YV and 07A6, uniqueness of adjoints.
       (eqToIso (finiteScalarConstantPushforward_eq R p)).symm
   let α := ((mateEquiv a b).symm
     (TwoSquare.mk _ (sfIntrinsicModuleEquivalence X R).functor
-      (sfIntrinsicModuleEquivalence Y R).functor _ r.hom)).natTrans
+      (sfIntrinsicModuleEquivalence Y R).functor _ r.hom))
   have : IsIso α := isIso_inverseMate_of_equivalences a b r
   exact asIso α
 

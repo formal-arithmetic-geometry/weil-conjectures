@@ -130,7 +130,7 @@ Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
 def rho (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) :
     F Λ f ⋙ D a Y ⟶ D a X ⋙ F Λ' f :=
-  (mateEquiv (adj Λ f) (adj Λ' f) (TwoSquare.mk _ _ _ _ b.hom)).natTrans
+  (mateEquiv (adj Λ f) (adj Λ' f) (TwoSquare.mk _ _ _ _ b.hom))
 
 end AlgebraicGeometry.ProEtale.QuotientChange
 namespace AlgebraicGeometry.ProEtale.QuotientChange
@@ -174,7 +174,6 @@ def compute (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (DerivedCategory.quotientCompQhIso (Modules Λ' T)).hom.app
       (((extension a T).mapHomologicalComplex (.up ℤ)).obj P)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Total tensor colimit search needs the same bound as the upstream module-object API.
 /-- Total tensor with the actual degree-zero coefficient is termwise tensor.
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/

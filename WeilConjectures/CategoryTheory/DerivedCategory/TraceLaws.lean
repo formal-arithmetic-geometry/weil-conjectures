@@ -89,8 +89,9 @@ theorem trace_eq_trace_add_trace_of_shortExact
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace S.X₁ φ.τ₁ s hs₁ hfree₁ hfin₁ K₁ w₁ e₁ hw₁,
     trace_eq_algebraMap_sum_negOnePow_linearMapTrace S.X₂ φ.τ₂ s hs hfree₂ hfin₂ K₂ w₂ e₂ hw₂,
     trace_eq_algebraMap_sum_negOnePow_linearMapTrace S.X₃ φ.τ₃ s hs₃ hfree₃ hfin₃ K₃ w₃ e₃ hw₃]
-  refine (congrArg (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))) ?_).trans
-    (map_add _ _ _)
+  refine congrArg End.asHom
+    ((congrArg (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))) ?_).trans
+      (map_add _ _ _))
   rw [← Finset.sum_add_distrib]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [← smul_add]
@@ -117,9 +118,9 @@ theorem trace_eq_algebraMap_sum_negOnePow_trace_homologyMap
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
     letI := braidedCategory' (ModuleCat.{u} Λ)
     MonoidalCategory.trace w =
-      algebraMap Λ (End (𝟙_ (DerivedCategory (ModuleCat.{u} Λ))))
+      (algebraMap Λ (End (𝟙_ (DerivedCategory (ModuleCat.{u} Λ))))
         (∑ i ∈ s, (i.negOnePow : ℤ) •
-          LinearMap.trace Λ (P.homology i) (HomologicalComplex.homologyMap v i).hom) := by
+          LinearMap.trace Λ (P.homology i) (HomologicalComplex.homologyMap v i).hom)).asHom := by
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace P v s hs (fun _ ↦ inferInstance) hfin K w e
     hw, CochainComplex.sum_negOnePow_smul_trace_f_eq_sum_negOnePow_smul_trace_homologyMap P v s hs
     hfin]

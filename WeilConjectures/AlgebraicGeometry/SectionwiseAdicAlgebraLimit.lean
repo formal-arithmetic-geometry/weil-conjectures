@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.RingTheory.Flat.Basic

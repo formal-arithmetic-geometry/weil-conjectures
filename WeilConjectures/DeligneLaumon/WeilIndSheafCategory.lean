@@ -218,8 +218,8 @@ semilinearity does not require either Frobenius to be k-linear. -/
 theorem zlFrobenius_naturality {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
-    (D.geometricFrobenius X₀).hom ≫ zlFiberMap D f₀ =
-      zlFiberMap D f₀ ≫ (D.geometricFrobenius Y₀).hom := by
+    (D.geometricFrobenius X₀).asIso.hom ≫ zlFiberMap D f₀ =
+      zlFiberMap D f₀ ≫ (D.geometricFrobenius Y₀).asIso.hom := by
   apply pullback.hom_ext
   · simp [zlFiberMap, FiniteFieldDatum.geometricFrobenius,
       FiniteFieldDatum.galoisMap, Over.pullback_map_left, baseChangeMap, Category.assoc]
@@ -236,11 +236,11 @@ def zlFrobeniusSquare {X₀ Y₀ : Over (Spec (.of D.k₀))}
       sfCommonStageWeilFrobeniusPullback D l hl Y₀ Ω ⋙ zlPull D l hl Ω f₀ :=
   letI := fun x ↦ sfWeilPrimeInvertible D l hl X₀ x
   letI := fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y
-  (zlPullComp l Ω (D.geometricFrobenius X₀).hom (zlFiberMap D f₀)).symm ≪≫
+  (zlPullComp l Ω (D.geometricFrobenius X₀).asIso.hom (zlFiberMap D f₀)).symm ≪≫
     eqToIso (congrArg
       (fun f : (D.geometricFiber X₀).left ⟶ (D.geometricFiber Y₀).left ↦
         commonStageDerivedPullback l Ω f) (zlFrobenius_naturality D f₀)) ≪≫
-      zlPullComp l Ω (zlFiberMap D f₀) (D.geometricFrobenius Y₀).hom
+      zlPullComp l Ω (zlFiberMap D f₀) (D.geometricFrobenius Y₀).asIso.hom
 
 section IndExtension
 attribute [-instance] Functor.hasLeftKanExtension_of_preserves

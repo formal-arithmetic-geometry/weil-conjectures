@@ -221,7 +221,6 @@ lemma modulesPseudofunctor_mapComp'_inv_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg :
     Pseudofunctor.mapComp'_eq_mapComp _ _ _
   rw [this, modulesPseudofunctor_mapComp_inv_app]
   simp [pullbackCompOfEq, pullbackCongr]
-  try rfl
 
 /-- The comparison `mapComp'` of `modulesPseudofunctor` is the inverse of `pullbackCompOfEq`:
 `(mapComp' f g fg).hom.app M = (pullbackCompOfEq g f fg h M).inv : fg^* M ⟶ g^* f^* M`. -/
@@ -235,7 +234,6 @@ lemma modulesPseudofunctor_mapComp'_hom_app_eq (f : Y ⟶ X) (g : Z ⟶ Y) (fg :
     Pseudofunctor.mapComp'_eq_mapComp _ _ _
   rw [this, modulesPseudofunctor_mapComp_hom_app]
   simp [pullbackCompOfEq, pullbackCongr]
-  try rfl
 
 /-- `pullbackCompOfEq` on global sections in the image of the units:
 

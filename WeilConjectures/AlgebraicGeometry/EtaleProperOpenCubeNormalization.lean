@@ -404,12 +404,12 @@ private theorem derived_mate_unit
     (adj : L ⊣ R) (adj' : L' ⊣ R') (e : G ⋙ L' ≅ L ⋙ H)
  :
     ProperOpenUnitNormalized R R' H G
-      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom))
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
           Functor.mapDerivedCategoryNatIso e ≪≫
-          (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans := by
+          (Functor.mapDerivedCategoryCompIso L H).symm).hom)) := by
   intro X
   exact Adjunction.derivedExact_mateEquiv_app_fac adj adj'
     (TwoSquare.mk _ _ _ _ e.hom)

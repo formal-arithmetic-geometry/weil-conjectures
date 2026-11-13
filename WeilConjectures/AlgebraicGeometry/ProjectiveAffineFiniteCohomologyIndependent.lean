@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveFiniteSourceCohomologySegment
 import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Projective cohomology finiteness over an affine base
 

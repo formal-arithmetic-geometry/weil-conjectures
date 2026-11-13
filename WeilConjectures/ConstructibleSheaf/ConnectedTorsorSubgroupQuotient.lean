@@ -168,10 +168,10 @@ theorem Scheme.GaloisCover.exists_connected_subgroup_quotient
   have := c.isFinite
   let P : U.FiniteEtale := ⟨Etale.mk c.π, c.isFinite⟩
   let τ : H →* End P :=
-    { toFun h := ObjectProperty.homMk
-        (MorphismProperty.Over.homMk (c.smul ⟨h.val⟩) (c.smul_π ⟨h.val⟩))
-      map_one' := Scheme.FiniteEtale.hom_ext c.one_smul
-      map_mul' h k := Scheme.FiniteEtale.hom_ext (c.mul_smul ⟨h.val⟩ ⟨k.val⟩) }
+    { toFun h := End.of (ObjectProperty.homMk
+        (MorphismProperty.Over.homMk (c.smul ⟨h.val⟩) (c.smul_π ⟨h.val⟩)))
+      map_one' := End.ext (Scheme.FiniteEtale.hom_ext c.one_smul)
+      map_mul' h k := End.ext (Scheme.FiniteEtale.hom_ext (c.mul_smul ⟨h.val⟩ ⟨k.val⟩)) }
   let D := SingleObj.functor τ
   let T := (Scheme.FiniteEtale.quotientCocone D).pt
   let φ : P ⟶ T := (Scheme.FiniteEtale.quotientCocone D).ι.app (SingleObj.star H)
@@ -186,7 +186,7 @@ theorem Scheme.GaloisCover.exists_connected_subgroup_quotient
   have hsp (h : H) : c.smul ⟨h.val⟩ ≫ p = p := by
     have hn := (Scheme.FiniteEtale.quotientCocone D).ι.naturality
       (X := SingleObj.star H) (Y := SingleObj.star H) h
-    change τ h ≫ φ = φ ≫ 𝟙 T at hn
+    change (τ h).asHom ≫ φ = φ ≫ 𝟙 T at hn
     rw [Category.comp_id] at hn
     exact congrArg (fun f ↦ f.hom.left) hn
   obtain ⟨a⟩ := (inferInstance : Nonempty U)

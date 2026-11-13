@@ -217,7 +217,7 @@ def ExceptionalProCompactSupportCoherence
     -- openTranspose
     (∀ n, (record.openImage.inverseEvaluation n).hom =
       (mateEquiv record.openAdjunction (record.levelOpenAdjunction n)
-        (.mk _ _ _ _ (record.openEvaluation n).inv)).natTrans) ∧
+        (.mk _ _ _ _ (record.openEvaluation n).inv))) ∧
     -- derivedOpenTranspose
     (∀ P K
       (h : (record.openExtension.mapHomologicalComplex (.up ℤ)).obj P ⟶ K),
@@ -523,11 +523,11 @@ def ExceptionalSystemCompactificationComparisonCoherence
     (record : ExceptionalSystemCompactificationComparisonData S CX CY CZ P) : Prop :=
     -- openMate
     ((mateEquiv S.derivedOpenAdjunction P.val.derivedOpenAdjunction
-    (.mk _ _ _ _ record.openComparison.inv)).natTrans = record.openSquare.square.inv) ∧
+    (.mk _ _ _ _ record.openComparison.inv)) = record.openSquare.square.inv) ∧
     -- levelOpenMate
     (∀ n,
     (mateEquiv (S.levelDerivedOpenAdjunction n) (P.val.levelDerivedOpenAdjunction n)
-      (.mk _ _ _ _ (record.levelOpenComparison n).inv)).natTrans =
+      (.mk _ _ _ _ (record.levelOpenComparison n).inv)) =
       (record.openSquare.derivedLevel n).inv) ∧
     -- openEvaluation
     (∀ n M,
@@ -619,7 +619,7 @@ def exceptionalSystemComparison
   (Functor.associator _ _ _).hom ≫
     whiskerLeft S.derivedOpen
       (mateEquiv S.properDerived.system.adjunction P.val.properDerived.system.adjunction
-        (.mk _ _ _ _ R.properSquare.square.hom)).natTrans ≫
+        (.mk _ _ _ _ R.properSquare.square.hom)) ≫
     (Functor.associator _ _ _).inv ≫
     whiskerRight R.openComparison.hom P.val.properDerived.system.direct ≫
     (Functor.associator _ _ _).hom
@@ -654,7 +654,7 @@ def exceptionalSystemLevelComparison
   (Functor.associator _ _ _).hom ≫
     whiskerLeft (S.levelDerivedOpen n)
       (mateEquiv (S.properDerived.level n).adjunction (P.val.properDerived.level n).adjunction
-        (.mk _ _ _ _ (R.properSquare.derivedLevel n).hom)).natTrans ≫
+        (.mk _ _ _ _ (R.properSquare.derivedLevel n).hom)) ≫
     (Functor.associator _ _ _).inv ≫
     whiskerRight (R.levelOpenComparison n).hom (P.val.properDerived.level n).direct ≫
     (Functor.associator _ _ _).hom

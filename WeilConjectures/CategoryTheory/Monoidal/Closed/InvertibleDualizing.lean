@@ -178,7 +178,7 @@ the comparison map `F [X, 𝟙_ C] ⟶ [F X, F 𝟙_ C]`
 (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) followed by `F 𝟙_ C ≅ 𝟙_ D`. -/
 noncomputable def ihomUnitComparison (X : C) :
     F.obj ((ihom X).obj (𝟙_ C)) ⟶ (ihom (F.obj X)).obj (𝟙_ D) :=
-  (ihomComparison F X).natTrans.app (𝟙_ C) ≫ (ihom (F.obj X)).map (η F)
+  (ihomComparison F X).app (𝟙_ C) ≫ (ihom (F.obj X)).map (η F)
 
 variable {T W : C} (γ : T ≅ W) (hT : IsInvertible T) {T' W' : D} (γ' : T' ≅ W')
   (hT' : IsInvertible T') (e : F.obj T ≅ T') (eW : F.obj W ≅ W')
@@ -204,7 +204,7 @@ compatibility of `θ` with shifts under a change of coefficients is not yet stat
 to be done before the change-of-coefficients clause of `thm-sf-dual-perfect` is complete. -/
 lemma map_ihomIsoIhomUnitTensor_hom (h : F.map γ.hom ≫ eW.hom = e.hom ≫ γ'.hom) (X : C) :
     F.map (ihomIsoIhomUnitTensor γ hT X).hom ≫ δ F _ _ ≫ (ihomUnitComparison F X ⊗ₘ e.hom) =
-      (ihomComparison F X).natTrans.app W ≫ (ihom (F.obj X)).map eW.hom ≫
+      (ihomComparison F X).app W ≫ (ihom (F.obj X)).map eW.hom ≫
         (ihomIsoIhomUnitTensor γ' hT' (F.obj X)).hom := by
   have core : F.obj X ◁ μ F _ T ≫ μ F X _ ≫
       F.map ((α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ T ≫ (λ_ T).hom) =
@@ -217,7 +217,7 @@ lemma map_ihomIsoIhomUnitTensor_hom (h : F.map γ.hom ≫ eW.hom = e.hom ≫ γ'
       comp_whiskerRight]
     erw [Functor.Monoidal.μ_δ_assoc, Functor.Monoidal.μ_δ_assoc]
   have key : μ F _ _ ≫ F.map (ihomIsoIhomUnitTensor γ hT X).inv ≫
-      (ihomComparison F X).natTrans.app W ≫ (ihom (F.obj X)).map eW.hom =
+      (ihomComparison F X).app W ≫ (ihom (F.obj X)).map eW.hom =
         (ihomUnitComparison F X ⊗ₘ e.hom) ≫ (ihomIsoIhomUnitTensor γ' hT' (F.obj X)).inv := by
     apply uncurry_injective
     have h₁ : X ◁ (ihomIsoIhomUnitTensor γ hT X).inv ≫ (ihom.ev X).app W =

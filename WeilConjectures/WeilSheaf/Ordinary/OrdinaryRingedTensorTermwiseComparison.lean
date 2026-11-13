@@ -23,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite WeilConjectu
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local instance] Mod.monoidalCategoryCochainComplex
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option synthInstance.maxHeartbeats 200000 in
 -- The native and ringed tensor instances have separate coefficient and site universes.
 /-- Transport a normalized tensor comparison termwise, without asserting associativity.
 Source: Stacks 03EO and 0FPQ.

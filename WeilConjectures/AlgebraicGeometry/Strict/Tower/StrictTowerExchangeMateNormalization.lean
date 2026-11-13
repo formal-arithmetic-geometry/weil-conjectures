@@ -544,12 +544,12 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
   (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
     adj'.mapDerivedCategoryRightDerivedAdjunction
     (TwoSquare.mk _ _ _ _
-      (Functor.mapDerivedCategorySquareIso s).hom)).natTrans
+      (Functor.mapDerivedCategorySquareIso s).hom))
 
 private theorem exactDerivedMate_factors
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
     (τ : R ⋙ G ≅ H ⋙ R')
-    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom)
+    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) = τ.hom)
     (K : CochainComplex B ℤ) :
     G.mapDerivedCategory.map (exchangeDerivedUnit R K) ≫
       (exactDerivedMate adj adj' s).app (DerivedCategory.Q.obj K) ≫
@@ -566,7 +566,7 @@ private theorem exactDerivedMate_factors
 private theorem exactDerivedMate_eq
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
     (τ : R ⋙ G ≅ H ⋙ R')
-    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom)
+    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) = τ.hom)
     (e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
     (he : ExchangeDerivedPushNormalized R R' G H τ e) :
@@ -598,7 +598,7 @@ private theorem exactDerivedMate_existsUnique
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H) [H.PreservesKInjectiveComplexes]
     (τ : R ⋙ G ≅ H ⋙ R')
-    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom) :
+    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) = τ.hom) :
     ∃! e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
         H.mapDerivedCategory ⋙ R'.rightDerivedFunctor,
       ExchangeDerivedPushNormalized R R' G H τ e := by
@@ -640,7 +640,7 @@ private theorem exchangeModuleResPull_mate {U V : Scheme.{t}} (f : U ⟶ V) :
     (mateEquiv (d.towerModuleAdjunction f)
       (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
         (exchangeConstantRing U A) (exchangeConstantIso f A))
-      (TwoSquare.mk _ _ _ _ (exchangeModuleResPull d f).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (exchangeModuleResPull d f).inv)) =
         (exchangeModuleResPush d f).hom := by
   apply NatTrans.ext
   funext M

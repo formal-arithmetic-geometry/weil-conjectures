@@ -252,7 +252,7 @@ private theorem ordinary_mate (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (adicUpperStarLowerStarAdjunction l f)
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
-      (TwoSquare.mk _ _ _ _ (NativeEncoding.pullComparison l f).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (NativeEncoding.pullComparison l f).inv)) =
         (NativeEncoding.pushComparison l f).hom := by
   exact (Classical.choose_spec
     (Classical.choose_spec (NativeEncoding.encoding_ordinary_operations l f)).2).1
@@ -268,7 +268,7 @@ private theorem derived_mate (l : ℕ) [Fact l.Prime]
       (CondensedRing.upperStarLowerStarAdjunction
         (Profinite.padicAlgClRingObj l) f).mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso (NativeEncoding.pullComparison l f)).inv)).natTrans =
+        (Functor.mapDerivedCategorySquareIso (NativeEncoding.pullComparison l f)).inv)) =
         (NativeEncoding.derivedPushComparison l f).hom := by
   exact Adjunction.derived_exact_forget_mate
     (adicUpperStarLowerStarAdjunction l f)
@@ -430,7 +430,7 @@ private theorem native_exact_arrow (l : ℕ) [Fact l.Prime]
     ?_⟩
   simpa only [adicDerivedBaseChange, exactCondensedExchange, Iso.trans_hom,
     Functor.mapIso_hom, Iso.app_hom, Arrow.mk_hom, Arrow.mk_left, Arrow.mk_right,
-    TwoSquare.natTrans, CondensedRing.moduleObjectDerivedPushforward, Category.assoc] using h.symm
+    CondensedRing.moduleObjectDerivedPushforward, Category.assoc] using h.symm
 
 attribute [local irreducible] CondensedRing.boundedConstructibleUpperStarComp
 

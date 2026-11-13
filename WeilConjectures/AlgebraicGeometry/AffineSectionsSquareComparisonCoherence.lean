@@ -29,7 +29,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option maxHeartbeats 400000 in
 -- The exposed derived-scalar construction increases signature elaboration work.
 /-- Normalized sections comparisons commute with the right-adjoint comparison of
 an arbitrary fibre-product object. This assertion has no pullback units and no

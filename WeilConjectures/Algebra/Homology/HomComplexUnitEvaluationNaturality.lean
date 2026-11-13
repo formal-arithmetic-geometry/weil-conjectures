@@ -38,7 +38,6 @@ lemma evaluation_naturality
   ext X φ : 3
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Dependent projection and sheaf types require extra elaboration steps.
 /-- Degreewise evaluation at one commutes with a chain map.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.

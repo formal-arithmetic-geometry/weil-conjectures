@@ -225,8 +225,6 @@ private theorem tensorComparisonSheafIso_unit (U : Scheme.{u})
   have h' := congrArg (fun q ↦ (q.app W).hom x) h
   exact h'
 
-set_option maxHeartbeats 400000 in
--- The dependent functor comparison requires extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- Identify extension along a ring isomorphism using a restriction comparison.
 Source: Stacks Project, Definition 03D6 and Lemma 03D7; the tensor-restriction

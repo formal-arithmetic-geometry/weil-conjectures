@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Abelian.Projective.Extend
 import Mathlib.Algebra.Category.ModuleCat.Projective

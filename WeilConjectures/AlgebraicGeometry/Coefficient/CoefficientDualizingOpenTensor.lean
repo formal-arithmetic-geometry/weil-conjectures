@@ -69,10 +69,10 @@ private theorem scalarOpenInverseMate
     (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
     (q : JB ⋙ RU ≅ RX ⋙ JA) :
     ((mateEquiv a b).symm
-      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans =
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))) =
       ((a.comp x).leftAdjointUniq ((u.comp b).ofNatIsoRight q)).inv := by
   rw [uniq_eq_conjugate]
-  exact congrArg TwoSquare.natTrans
+  exact
     (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
 
 private theorem derivedEvaluation
@@ -93,9 +93,9 @@ private theorem derivedEvaluation
   let α := (mateEquiv x u).symm
     (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)
   have h := mateEquiv_counit_symm a b α T
-  have hm : ((mateEquiv a b).symm α).natTrans = (openScalarExtension φ j).inv :=
+  have hm : ((mateEquiv a b).symm α) = (openScalarExtension φ j).inv :=
     scalarOpenInverseMate a b x u (openDerivedRestrictScalarsIso φ j)
-  change _ = ((mateEquiv a b).symm α).natTrans.app _ ≫ _ at h
+  change _ = ((mateEquiv a b).symm α).app _ ≫ _ at h
   rw [hm] at h
   change (derivedExtension (A := B) j).map ((openScalarRestrictionMap φ j).app T) ≫
       (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j).counit.app
@@ -120,22 +120,22 @@ private theorem ordinaryEvaluation
   let u := ProEtale.etaleSheafExtendScalarsAdjunction φ U
   let α := (mateEquiv x u).symm
     (TwoSquare.mk _ _ _ _ (openRestrictScalarsIso φ j).inv)
-  have hr : α.natTrans = (openScalarRestrictionZero φ j).hom := by
+  have hr : α = (openScalarRestrictionZero φ j).hom := by
     dsimp only [α]
     rw [openRestrictScalarsIso_inv_eq, ordinary_reverse_eq]
     have hh := uniq_eq_conjugate
       (x.comp (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) j))
       ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).comp u) (Iso.refl _)
     exact congrArg Iso.inv hh.symm
-  have hm : ((mateEquiv a b).symm α).natTrans = (openScalarExtensionZero φ j).inv :=
+  have hm : ((mateEquiv a b).symm α) = (openScalarExtensionZero φ j).inv :=
     scalarOpenInverseMate a b x u (openRestrictScalarsIso φ j)
   apply NatTrans.ext
   funext T
   have h := mateEquiv_counit_symm a b α T
-  change _ = ((mateEquiv a b).symm α).natTrans.app _ ≫ _ at h
+  change _ = ((mateEquiv a b).symm α).app _ ≫ _ at h
   rw [hm] at h
   change (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).map
-      (α.natTrans.app T) ≫ _ = _ at h
+      (α.app T) ≫ _ = _ at h
   rw [hr] at h
   change (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).map
       ((openScalarRestrictionZero φ j).hom.app T) ≫ b.counit.app

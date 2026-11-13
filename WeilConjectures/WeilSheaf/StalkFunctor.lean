@@ -143,8 +143,8 @@ instance epi_stalkMap (f : F ⟶ G) [Epi f] : Epi (stalkMap s f) :=
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The iterated Weil structure `φ_m : (Frᵐ)^* F ≅ F` is natural in `F`. -/
 theorem frobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].map f.hom.hom.f ≫
-      (G.frobeniusPowIso m).hom =
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].map
+      f.hom.hom.f ≫ (G.frobeniusPowIso m).hom =
       (F.frobeniusPowIso m).hom ≫ f.hom.hom.f := by
   induction m with
   | zero =>
@@ -194,28 +194,30 @@ omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 private theorem stalkObjFrobeniusPowIso_hom_eq (m : ℕ) :
     (F.stalkObjFrobeniusPowIso m s).hom =
       (Sheaf.Γ _ _).map ((ProEtale.upperStarComp _ s
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom).hom.app
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom).hom.app
           F.obj.carrier.X ≫
         (s)^*[_].map ((ProEtale.upperStarIsoLowerStarInv _
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)).hom.app F.obj.carrier.X ≫
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso).hom.app
+            F.obj.carrier.X ≫
             (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)) :=
   rfl
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The isomorphism `F_{s ≫ Frᵐ} ≅ F_s` is natural in `F`. -/
 theorem stalkObjFrobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
-    stalkMap (s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom) f ≫
+    stalkMap (s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom) f ≫
       (G.stalkObjFrobeniusPowIso m s).hom =
       (F.stalkObjFrobeniusPowIso m s).hom ≫ stalkMap s f := by
   rw [stalkObjFrobeniusPowIso_hom_eq, stalkObjFrobeniusPowIso_hom_eq]
   -- the objects are given as `F.obj.carrier`, matching the stalks, to keep the kernel fast
   exact map_comp_map_naturality (Sheaf.Γ (Scheme.ProEt.topology _) (WeilCoefficients.{u} l))
     ((s)^*[WeilCoefficients.{u} l])
-    ((s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)^*[
+    ((s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)^*[
       WeilCoefficients.{u} l]) _ _
-    (ProEtale.upperStarComp _ s ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
+    (ProEtale.upperStarComp _ s
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
     (ProEtale.upperStarIsoLowerStarInv _
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m))
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso)
     (A := F.obj.carrier.X) (B := G.obj.carrier.X) f.hom.hom.f.hom
     ((ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)
     ((ProEtale.AdicSheaf.forget _).map (G.frobeniusPowIso m).hom)
@@ -227,11 +229,11 @@ theorem stalkObjFrobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The isomorphism `F_{σᵐ ≫ s} ≅ F_s` is natural in `F`. -/
 theorem stalkObjSpecFrobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
-    stalkMap ((specGeometricFrobenius k₀ ^ m).hom ≫ s) f ≫
+    stalkMap ((specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) f ≫
       (G.stalkObjSpecFrobeniusPowIso m s).hom =
       (F.stalkObjSpecFrobeniusPowIso m s).hom ≫ stalkMap s f :=
   globalSections_upperStar_naturality (φ := f.hom.hom.f.hom) (t := s)
-    (specGeometricFrobenius k₀ ^ m)
+    (specGeometricFrobenius k₀ ^ m).asIso
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The identification of the stalks at equal geometric points is natural. -/
@@ -246,8 +248,8 @@ omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The isomorphism `F_s ≅ F_s` underlying the Frobenius of the stalk
 `AlgebraicGeometry.WeilSheaf.stalkAt` is natural in `F`. -/
 theorem stalkAt_iso_naturality (f : F ⟶ G) (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
         F.stalkObjFrobeniusPowIso m s).hom ≫ stalkMap s f =
       stalkMap s f ≫
@@ -258,7 +260,7 @@ theorem stalkAt_iso_naturality (f : F ⟶ G) (m : ℕ)
   have h3 := stalkObjSpecFrobeniusPowIso_hom_naturality s f m
   simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]
   have h3' : (F.stalkObjSpecFrobeniusPowIso m s).inv ≫
-      stalkMap ((specGeometricFrobenius k₀ ^ m).hom ≫ s) f =
+      stalkMap ((specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) f =
         stalkMap s f ≫ (G.stalkObjSpecFrobeniusPowIso m s).inv := by
     rw [Iso.inv_comp_eq, ← Category.assoc, ← h3, Category.assoc, Iso.hom_inv_id,
       Category.comp_id]
@@ -273,8 +275,8 @@ private theorem linearEquivOfIso_apply {M N : WeilCoefficients.{u} l} (e : M ≅
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 private theorem stalkAt_frobenius_eq (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso
       ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
         F.stalkObjFrobeniusPowIso m s) :=
@@ -282,8 +284,8 @@ private theorem stalkAt_frobenius_eq (m : ℕ)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 private theorem stalkAt_frobenius_apply (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
     (F.stalkAt s m hs).frobenius x = ((WeilCoefficients.toModuleCat l).map
       ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
         F.stalkObjFrobeniusPowIso m s).hom).hom x :=
@@ -293,8 +295,8 @@ omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The map induced by a morphism `f : F ⟶ G` on the stalks at a geometric point `s`
 commutes with the Frobenius of the stalks. -/
 theorem stalkAt_frobenius_map (f : F ⟶ G) (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
     ((WeilCoefficients.toModuleCat l).map (stalkMap s f)).hom
         ((F.stalkAt s m hs).frobenius x) =
       (G.stalkAt s m hs).frobenius
@@ -317,8 +319,8 @@ theorem surjective_stalkMap (f : F ⟶ G) [Epi f] :
 
 section StalkAt
 
-variable (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-  (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+variable (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+  (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
 
 /-- The map induced by `f : F ⟶ G` on the stalks at `s`, as a linear map between the underlying
 spaces of the Frobenius modules `AlgebraicGeometry.WeilSheaf.stalkAt`. -/

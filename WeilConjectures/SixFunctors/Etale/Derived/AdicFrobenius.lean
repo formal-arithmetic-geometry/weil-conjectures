@@ -437,10 +437,11 @@ theorem exists_trace_eq_globalOperatorFamily (sq : IsPullback g aX aX h)
     (hV : (S.compactSupportTower aX α hα).IsLift c (F.globalOperatorFamily sq α hα) V) :
     ∃ r : R,
       MonoidalCategory.trace V =
-        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r ∧
+        (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r).asHom ∧
       ∀ n, MonoidalCategory.trace (F.globalOperatorFamily sq α hα n) =
-        algebraMap (R ⧸ I ^ (n + 1))
-          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))) (I.powSuccMk n r) :=
+        (algebraMap (R ⧸ I ^ (n + 1))
+          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))))))
+            (I.powSuccMk n r)).asHom :=
   (S.compactSupportTower aX α hα).exists_trace_eq_of_isAdicComplete hϖ hI hc
     (F.isCompatible_globalOperatorFamily sq α hα hα') hV
 
@@ -461,10 +462,11 @@ theorem exists_trace_eq_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫
     {V : c.pt ⟶ c.pt} (hV : (S.stalkTower x β hβ).IsLift c (F.localOperatorFamily hx β hβ) V) :
     ∃ r : R,
       MonoidalCategory.trace V =
-        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r ∧
+        (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r).asHom ∧
       ∀ n, MonoidalCategory.trace (F.localOperatorFamily hx β hβ n) =
-        algebraMap (R ⧸ I ^ (n + 1))
-          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))) (I.powSuccMk n r) :=
+        (algebraMap (R ⧸ I ^ (n + 1))
+          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))))))
+            (I.powSuccMk n r)).asHom :=
   (S.stalkTower x β hβ).exists_trace_eq_of_isAdicComplete hϖ hI hc
     (F.isCompatible_localOperatorFamily hx β hβ hβ') hV
 

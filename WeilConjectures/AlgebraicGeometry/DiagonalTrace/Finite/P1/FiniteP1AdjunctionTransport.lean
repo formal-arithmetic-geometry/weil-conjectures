@@ -94,7 +94,7 @@ theorem finiteAdjunctionCoordinates
     ∃ q : H ⋙ R' ≅ R ⋙ F,
       ∀ M, b.unit.app (F.obj M) ≫ R'.map (p.hom.app M) ≫
         q.hom.app (L.obj M) = F.map (a.unit.app M) := by
-  let m := (mateEquiv a b (TwoSquare.mk _ _ _ _ p.hom)).natTrans
+  let m := (mateEquiv a b (TwoSquare.mk _ _ _ _ p.hom))
   have : IsIso m := isIso_mateEquiv_of_isEquivalence a b _
   refine ⟨(asIso m).symm, ?_⟩
   intro M

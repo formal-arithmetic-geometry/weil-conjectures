@@ -78,7 +78,7 @@ noncomputable def derivedHomUpperStarComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
     (L((g)^*[A])).obj ((RHom(X)[A].obj (op K)).obj M) ⟶
       (RHom(Y)[A].obj (op ((L((g)^*[A])).obj K))).obj ((L((g)^*[A])).obj M) :=
   letI := leftDerivedUpperStarMonoidal A g
-  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.app M
+  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).app M
 
 /-- Blueprint `lem-weil-geometric-generic-exchange`: the internal-hom comparison preserves
 evaluation. The square
@@ -107,7 +107,7 @@ lemma derivedHomUpperStarComparison_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)
       derivedHomUpperStarComparison A g K M ≫
         (RHom(Y)[A].obj (op ((L((g)^*[A])).obj K))).map ((L((g)^*[A])).map f) :=
   letI := leftDerivedUpperStarMonoidal A g
-  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.naturality f
+  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).naturality f
 
 /-- The internal-hom comparison is an isomorphism at `(K, M)` if and only if it is one at any
 `(K, M')` with `M ≅ M'`. -/

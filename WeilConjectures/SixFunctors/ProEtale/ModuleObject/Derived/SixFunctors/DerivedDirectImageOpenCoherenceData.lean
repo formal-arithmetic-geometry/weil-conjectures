@@ -70,7 +70,7 @@ noncomputable def directImageOpenRestriction
     {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :
     lowerStar Λ f ⋙ upperStar Λ j ⟶ upperStar Λ i ⋙ lowerStar Λ f' :=
   (mateEquiv (upperStarLowerStarAdjunction Λ f) (upperStarLowerStarAdjunction Λ f')
-    (TwoSquare.mk _ _ _ _ (openCoherencePullbackSquare Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (openCoherencePullbackSquare Λ sq).hom))
 
 /-- The same pullback square comparison after exact, termwise passage to derived categories.
 Source: blueprint composition proof (blueprint: lem-sfb-derived-direct-image-open-coherence). -/
@@ -93,7 +93,7 @@ noncomputable def derivedDirectImageOpenRestriction
   (mateEquiv
     (upperStarLowerStarAdjunction Λ f).mapDerivedCategoryRightDerivedAdjunction
     (upperStarLowerStarAdjunction Λ f').mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (derivedOpenCoherencePullbackSquare Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedOpenCoherencePullbackSquare Λ sq).hom))
 
 /-- Open restriction preserves K-injectives because exact extension by zero is its left
 adjoint. Source: Stacks Tag 08BJ (blueprint: lem-sfb-derived-direct-image-open-coherence). -/

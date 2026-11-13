@@ -170,7 +170,7 @@ private theorem linearUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
 attribute [local instance] linearUpperStar
 
 private theorem scalarEnd (X : Scheme.{u}) (a : MonObj.Γ Λ) :
-    Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (upperStarFromPoint X) a) =
+    (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (upperStarFromPoint X) a)).asHom =
       a • 𝟙 (Mod.regular (condensedRingObj Λ X)) := by
   rw [Mod.linearOfRingHom_smul_id (scalars Λ X)]
   apply Mod.hom_ext
@@ -425,7 +425,7 @@ private theorem tensor_adjoint_isIso {X Y : Scheme.{u}} (π : Y ⟶ X)
 variable (k : Type u) [Field k] [Fintype k]
 
 private theorem translation_mapOver (a : k) :
-    ProEtale.condensedArtinSchreierTranslationAction Λ k a =
+    (ProEtale.condensedArtinSchreierTranslationAction Λ k a).asHom =
       mapOver Λ
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))
@@ -436,9 +436,9 @@ private theorem translation_mapOver (a : k) :
   rfl
 
 private theorem translation_add (a b : k) :
-    ProEtale.condensedArtinSchreierTranslationAction Λ k a ≫
-      ProEtale.condensedArtinSchreierTranslationAction Λ k b =
-        ProEtale.condensedArtinSchreierTranslationAction Λ k (a + b) := by
+    (ProEtale.condensedArtinSchreierTranslationAction Λ k a).asHom ≫
+      (ProEtale.condensedArtinSchreierTranslationAction Λ k b).asHom =
+        (ProEtale.condensedArtinSchreierTranslationAction Λ k (a + b)).asHom := by
   rw [translation_mapOver, translation_mapOver, translation_mapOver, ← mapOver_comp]
   apply mapOver_congr
   rw [← Etale.artinSchreierTranslation_add, add_comm]
@@ -468,17 +468,19 @@ private theorem sum_eigen
 private theorem image_eigen
     [Invertible (Fintype.card k : MonObj.Γ Λ)]
     (ψ : AddChar k (MonObj.Γ Λ)) (b : k) :
-    image.ι (ProEtale.condensedArtinSchreierProjector Λ k ψ) ≫
-      ProEtale.condensedArtinSchreierTranslationAction Λ k b =
-        ψ b • image.ι (ProEtale.condensedArtinSchreierProjector Λ k ψ) := by
+    image.ι (ProEtale.condensedArtinSchreierProjector Λ k ψ).asHom ≫
+      (ProEtale.condensedArtinSchreierTranslationAction Λ k b).asHom =
+        ψ b • image.ι (ProEtale.condensedArtinSchreierProjector Λ k ψ).asHom := by
   classical
   rw [← cancel_epi (factorThruImage _), image.fac_assoc, Linear.comp_smul, image.fac]
-  have hp : ProEtale.condensedArtinSchreierProjector Λ k ψ =
+  have hp : (ProEtale.condensedArtinSchreierProjector Λ k ψ).asHom =
       ∑ a : k, (⅟(Fintype.card k : MonObj.Γ Λ) * ψ (-a)) •
-        ProEtale.condensedArtinSchreierTranslationAction Λ k a :=
-    ProEtale.condensedArtinSchreierProjector_eq_sum Λ k ψ
+        (ProEtale.condensedArtinSchreierTranslationAction Λ k a).asHom := by
+    simpa only [End.sum_asHom, End.smul_asHom] using
+      congrArg End.asHom (ProEtale.condensedArtinSchreierProjector_eq_sum Λ k ψ)
   simpa only [hp] using sum_eigen
-    (ProEtale.condensedArtinSchreierTranslationAction Λ k) (translation_add Λ k)
+    (fun a ↦ (ProEtale.condensedArtinSchreierTranslationAction Λ k a).asHom)
+    (translation_add Λ k)
     ψ (⅟(Fintype.card k : MonObj.Γ Λ)) b
 
 
@@ -490,7 +492,7 @@ local notation "𝔸₂[" K "]" =>
 
 /- Pull back the universal product torsor and its translation action. -/
 private def universalAction : Multiplicative (k × k) →* Aut (Over.mk (artinSchreierMapProd k)) where
-  toFun a :=
+  toFun a := Aut.of
     { hom := Over.homMk (artinSchreierTranslationProd k a.toAdd)
       inv := Over.homMk (artinSchreierTranslationProd k (-a.toAdd))
       hom_inv_id := by
@@ -521,10 +523,10 @@ private theorem coverGeometry (k : Type u) [Field k] [Fintype k]
       ∃ σ : Multiplicative (k × k) →* Aut Y,
         (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
           (s t : Spec (.of Ω) ⟶ Y.left), s ≫ Y.hom = t ≫ Y.hom →
-            ∃ a : k × k, s = t ≫ (σ (Multiplicative.ofAdd a)).hom.left) ∧
+            ∃ a : k × k, s = t ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left) ∧
         ∃ t : Y.left ⟶ 𝔸₂[k],
           t ≫ Etale.artinSchreierMapProd k = Y.hom ≫ h ∧
-          ∀ a : k × k, (σ (Multiplicative.ofAdd a)).hom.left ≫ t =
+          ∀ a : k × k, (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ t =
             t ≫ Etale.artinSchreierTranslationProd k a := by
   let q := Etale.artinSchreierMapProd k
   let Y : Over X := Over.mk (pullback.snd q h)
@@ -536,11 +538,11 @@ private theorem coverGeometry (k : Type u) [Field k] [Fintype k]
   have : Surjective q := ⟨surjective_artinSchreierMapProd⟩
   let σ : Multiplicative (k × k) →* Aut Y :=
     ((Over.pullback h).mapAut (Over.mk q)).comp (universalAction k)
-  have hfst (a : k × k) : (σ (Multiplicative.ofAdd a)).hom.left ≫ pullback.fst q h =
+  have hfst (a : k × k) : (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ pullback.fst q h =
       pullback.fst q h ≫ artinSchreierTranslationProd k a := by
     change pullback.lift _ _ _ ≫ _ = _
     exact pullback.lift_fst _ _ _
-  have hsnd (a : k × k) : (σ (Multiplicative.ofAdd a)).hom.left ≫ pullback.snd q h =
+  have hsnd (a : k × k) : (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ pullback.snd q h =
       pullback.snd q h := by
     change pullback.lift _ _ _ ≫ _ = _
     exact pullback.lift_snd _ _ _
@@ -580,7 +582,7 @@ private theorem eigenmap_of_smul {X : Scheme.{u}} (Y : Over X)
     (σ : Multiplicative G →* Aut Y) (χ : AddChar G (MonObj.Γ Λ))
     {F : modules Λ X} (φ : F ⟶ (CondensedRing.lowerStar Λ Y.hom).obj (reg Λ Y.left))
     (hφ : ∀ a : G, φ ≫ mapOver Λ Y.hom Y.hom
-      (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = χ a • φ)
+      (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = χ a • φ)
     [IsIso ((CondensedRing.upperStar Λ Y.hom).map φ ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ Y.hom).counit.app (reg Λ Y.left))] :
     CondensedEigenmap Λ Y G σ χ φ := by
@@ -598,7 +600,7 @@ private def asInclusion (ψ : AddChar k (MonObj.Γ Λ)) :
       (CondensedRing.lowerStar Λ
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).obj
         (reg Λ (𝔸₁[k])) :=
-  image.ι (ProEtale.condensedArtinSchreierProjector Λ k ψ)
+  image.ι (ProEtale.condensedArtinSchreierProjector Λ k ψ).asHom
 
 private theorem asInclusion_evaluation
     [Invertible (Fintype.card k : MonObj.Γ Λ)] (ψ : AddChar k (MonObj.Γ Λ)) :
@@ -743,12 +745,12 @@ private theorem rootMapForFunction
       Y.hom ≫ v)
     (ψ : AddChar k (MonObj.Γ Λ)) (σ : Multiplicative (k × k) →* Aut Y)
     (b : k × k → k)
-    (hb : ∀ a, (σ (Multiplicative.ofAdd a)).hom.left ≫ r =
+    (hb : ∀ a, (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ r =
       r ≫ Etale.artinSchreierTranslation k (b a)) :
     ∃ φ : ProEtale.condensedArtinSchreierSheafOf Λ k X ψ f ⟶
         (CondensedRing.lowerStar Λ Y.hom).obj (reg Λ Y.left),
       (∀ a, φ ≫ mapOver Λ Y.hom Y.hom
-        (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = ψ (b a) • φ) ∧
+        (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = ψ (b a) • φ) ∧
       IsIso ((CondensedRing.upperStar Λ Y.hom).map φ ≫
         (CondensedRing.upperStarLowerStarAdjunction Λ Y.hom).counit.app (reg Λ Y.left)) := by
   refine ⟨functionRootMap Λ k Y.hom _ v e r hr ψ, ?_, ?_⟩
@@ -781,11 +783,11 @@ private theorem combineRootMaps {X : Scheme.{u}} (Y : Over X)
     (φg : M ⟶ (CondensedRing.lowerStar Λ Y.hom).obj (reg Λ Y.left))
     (φs : N ⟶ (CondensedRing.lowerStar Λ Y.hom).obj (reg Λ Y.left))
     (hφf : ∀ a : k × k, φf ≫ mapOver Λ Y.hom Y.hom
-      (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = ψ a.1 • φf)
+      (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = ψ a.1 • φf)
     (hφg : ∀ a : k × k, φg ≫ mapOver Λ Y.hom Y.hom
-      (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = ψ a.2 • φg)
+      (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = ψ a.2 • φg)
     (hφs : ∀ a : k × k, φs ≫ mapOver Λ Y.hom Y.hom
-      (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = ψ (a.1 + a.2) • φs)
+      (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = ψ (a.1 + a.2) • φs)
     [IsIso ((CondensedRing.upperStar Λ Y.hom).map φf ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ Y.hom).counit.app (reg Λ Y.left))]
     [IsIso ((CondensedRing.upperStar Λ Y.hom).map φg ≫
@@ -807,7 +809,7 @@ private theorem combineRootMaps {X : Scheme.{u}} (Y : Over X)
   · apply eigenmap_of_smul
     intro a
     change φs ≫ mapOver Λ Y.hom Y.hom
-      (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = (ψ a.1 * ψ a.2) • φs
+      (σ (Multiplicative.ofAdd a)).asIso.hom.left (Over.w _) = (ψ a.1 * ψ a.2) • φs
     simpa only [AddChar.map_add_eq_mul] using hφs a
 
 -- The nontriviality hypothesis is part of the recorded statement but is not needed.
@@ -843,7 +845,7 @@ theorem condensed_artinSchreier_tensor_eigenmaps
       ∃ σ : Multiplicative (k × k) →* Aut Y,
         (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
           (s t : Spec (.of Ω) ⟶ Y.left), s ≫ Y.hom = t ≫ Y.hom →
-            ∃ a : k × k, s = t ≫ (σ (Multiplicative.ofAdd a)).hom.left) ∧
+            ∃ a : k × k, s = t ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left) ∧
         ∃ φ₁ : ProEtale.condensedArtinSchreierSheafOf Λ k X ψ f ⊗
             ProEtale.condensedArtinSchreierSheafOf Λ k X ψ g ⟶
             (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left),
@@ -872,17 +874,17 @@ theorem condensed_artinSchreier_tensor_eigenmaps
     dsimp only [q, m]
     rw [Category.assoc, Etale.add_comp_artinSchreierMap,
       ← Category.assoc, ht, Category.assoc]
-  have hc₁ (a : k × k) : (σ (Multiplicative.ofAdd a)).hom.left ≫ (t ≫ p₁) =
+  have hc₁ (a : k × k) : (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ (t ≫ p₁) =
       (t ≫ p₁) ≫ Etale.artinSchreierTranslation k a.1 := by
     dsimp only [p₁]
     rw [← Category.assoc, hτt, Category.assoc,
       Etale.artinSchreierTranslationProd_fst, Category.assoc]
-  have hc₂ (a : k × k) : (σ (Multiplicative.ofAdd a)).hom.left ≫ (t ≫ p₂) =
+  have hc₂ (a : k × k) : (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ (t ≫ p₂) =
       (t ≫ p₂) ≫ Etale.artinSchreierTranslation k a.2 := by
     dsimp only [p₂]
     rw [← Category.assoc, hτt, Category.assoc,
       Etale.artinSchreierTranslationProd_snd, Category.assoc]
-  have hc₃ (a : k × k) : (σ (Multiplicative.ofAdd a)).hom.left ≫ (t ≫ m) =
+  have hc₃ (a : k × k) : (σ (Multiplicative.ofAdd a)).asIso.hom.left ≫ (t ≫ m) =
       (t ≫ m) ≫ Etale.artinSchreierTranslation k (a.1 + a.2) := by
     dsimp only [m]
     rw [← Category.assoc, hτt, Category.assoc,

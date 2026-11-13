@@ -16,6 +16,7 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.AlgebraicGeometry.AffineOpenPerfectSourceModel
 import WeilConjectures.AlgebraicGeometry.AffineOpenSupportedTargetModel
 import WeilConjectures.AlgebraicGeometry.AffineOpenRealizationScalar
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Affine module models with supported cohomology
 

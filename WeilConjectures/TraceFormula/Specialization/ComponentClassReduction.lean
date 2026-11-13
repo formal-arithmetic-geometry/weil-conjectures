@@ -158,7 +158,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
     Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   (σpt : 𝟙_ _ ⟶ Ψpt.obj (𝟙_ _))
 
-set_option maxHeartbeats 800000 in
 -- the objects `𝟙_ _` of the statement come with different instance paths, and checking the
 -- cancellation `comp_map_comp_app_eq_of_eq_comp'` against them unfolds the derived categories
 /-- **The class identity from facts (I)–(III)** (`comp_map_comp_app_eq_of_eq_comp'` for the

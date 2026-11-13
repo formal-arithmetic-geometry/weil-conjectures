@@ -82,7 +82,6 @@ private noncomputable def coefficientIso (M : Modules.{u, u} X R) :
     (SheafOfModules.tensorObjIsoSheafification.{u, u + 1, u + 1}
       (R := R) (coefficient X R S c) M).symm
 
-set_option maxHeartbeats 800000 in
 -- Compare the scalar and module sheafifications explicitly.
 private theorem coefficientIso_pure (M : Modules.{u, u} X R) (U : X.ProEtᵒᵖ)
     (s : S.obj.obj U) (x : M.val.obj U) :

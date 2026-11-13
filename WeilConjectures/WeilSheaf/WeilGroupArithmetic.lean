@@ -107,26 +107,27 @@ noncomputable def geomAut :
   pullbackPathHom (X ↘ Spec (.of K)).geometricFiberProj B.t
 
 lemma geomAut_apply (g : Aut (fiber B.t)) :
-    B.geomAut g = pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj g :=
+    B.geomAut g = .of (pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj g.asIso) :=
   rfl
 
 /-- The push-down `F₀ ∈ π₁(X₀, t ≫ p)` of the path `β : F_t ≅ F_{t ≫ Fr}`, using
 `t ≫ Fr ≫ p = t ≫ p`: a lift of the geometric Frobenius
 (`AlgebraicGeometry.FrobeniusBasePoint.mem_weilGroup_frobAut`). -/
 noncomputable def frobAut : Aut (fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)) :=
-  pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj B.frobPath ≪≫
+  .of (pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj B.frobPath ≪≫
     eqToIso (congrArg fiber (by
-      rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj]))
+      rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj])))
 
 /-- Conjugation by `F₀` is the Frobenius transport of loops at `t`:
 `p_*(β ≫ Fr_* g ≫ β⁻¹) = F₀⁻¹ p_*(g) F₀`. -/
 theorem geomAut_frobConj (g : Aut (fiber B.t)) :
     B.geomAut (B.frobConj g) = B.frobAut⁻¹ * B.geomAut g * B.frobAut := by
-  rw [geomAut_apply, geomAut_apply, frobAut, frobConj_apply]
+  apply Aut.ext
+  simp only [geomAut_apply, frobAut, frobConj_apply, Aut.mul_asIso, Aut.inv_asIso]
   rw [pullbackPathIso_trans, pullbackPathIso_trans, pullbackPathIso_symm,
     pullbackPathIso_pullbackPathIso_of_comp_eq
       (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _)]
-  simp only [Aut.Aut_mul_def, Aut.Aut_inv_def, Iso.trans_symm, eqToIso_symm', Iso.trans_assoc]
+  simp only [Iso.trans_symm, eqToIso_symm', Iso.trans_assoc]
 
 /-- **The Weil group in the arithmetic fundamental group**: `(g, n) ↦ p_*(g) F₀ⁿ`. -/
 noncomputable def arithHom :
@@ -210,7 +211,7 @@ lemma geomAut_eq_fundamentalGroupMap [ConnectedSpace (X ↘ Spec (.of K)).geomet
     ⟨(pullbackFiberIso _ B.t).inv.app P y,
       ConcreteCategory.congr_hom ((pullbackFiberIso _ B.t).inv_hom_id_app P) y⟩
   have hg (x : (fiber B.t).obj ((pullback (X ↘ Spec (.of K)).geometricFiberProj).obj P)) :
-      (toAutMulEquiv (fiber B.t) G').symm g • x = g.hom.app _ x := by
+      (toAutMulEquiv (fiber B.t) G').symm g • x = g.asIso.hom.app _ x := by
     rw [← toAut_hom_app_apply, ← toAutMulEquiv_apply, MulEquiv.apply_symm_apply]
   rw [toAutMulEquiv_apply, toAut_hom_app_apply, fundamentalGroupMap_smul, hg, geomAut_apply]
   simp only [pullbackPathIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,

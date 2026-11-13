@@ -64,7 +64,6 @@ private lemma coordinate_d {S : TopCat.{w}} {ι : Type w} {R : Type w} [Ring R]
     ((TopCat.Presheaf.cechComplexFunctorIso U P).hom.comm n (n + 1))
   exact (congrFun hh.symm y).trans (TopCat.Presheaf.cechComplex_d_apply U _ n _ y)
 
-set_option maxHeartbeats 400000 in
 -- The section identity carries several scalar-restriction instances.
 /-- Any degreewise maps with the external pure-tensor section normalization commute
 with the Cech differentials. This uses no affine or quasi-coherent hypotheses and

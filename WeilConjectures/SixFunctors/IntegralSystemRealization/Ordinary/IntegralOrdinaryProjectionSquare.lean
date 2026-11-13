@@ -203,7 +203,7 @@ theorem ordinaryProjectionSquare
     (ordinaryPushReduction l E o a.realizationModel f.left)
     (projectionMateCompatibility l E o a f)
     (fun M ↦ by
-      simpa only [ordinaryPushReduction, TwoSquare.natTrans] using
+      simpa only [ordinaryPushReduction] using
         mateEquiv_counit (ringedAdj l E f.left) (o.direct f.left).adj
           (TwoSquare.mk _ _ _ _ (a.realizationModel.reductionPull f.left).inv) M)
     (e.ringedObj l E a.ringedModels K) (t.ringedObj l E a.ringedModels K)

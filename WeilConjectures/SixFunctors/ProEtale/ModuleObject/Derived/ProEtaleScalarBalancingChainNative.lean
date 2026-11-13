@@ -103,7 +103,6 @@ private def balancingCoefficientIso :
         Category.assoc, hs]
       rw [whisker_exchange_assoc])
 
-set_option maxHeartbeats 600000 in
 -- Avoid repeatedly expanding the concrete coefficient transports during elaboration.
 omit [IsCommMonObj Λ'] in
 private lemma balancingCoefficientIso_unit :
@@ -133,7 +132,6 @@ private def balancingIso :
         rw [← Functor.OplaxMonoidal.δ_natural_left_assoc,
           Category.assoc, whisker_exchange])
 
-set_option maxHeartbeats 600000 in
 -- Avoid repeatedly expanding the concrete coefficient transports during elaboration.
 omit [IsCommMonObj Λ'] in
 private lemma balancingIso_pairing : IsCondensedScalarBalancing a f (balancingIso a f) := by
@@ -173,7 +171,6 @@ private lemma balancingExtensionIso_pairing (Z : Scheme.{u})
   exact congrArg ((β_ M.X (condensedRingObj Λ' Z)).hom ≫ ·)
     (Mod.tensorObjπ_unit_projectionHom_hom_leftUnitor_hom (coefficientMap a Z) M)
 
-set_option maxHeartbeats 600000 in
 -- Avoid repeatedly expanding the concrete coefficient transports during elaboration.
 private lemma balancingPull_unit
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :

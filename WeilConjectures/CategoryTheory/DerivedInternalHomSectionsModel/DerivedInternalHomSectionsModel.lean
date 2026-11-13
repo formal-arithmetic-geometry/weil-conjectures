@@ -232,7 +232,6 @@ private noncomputable def precompHomologyData
     ext z
     change (z.precomp f).1 = (CategoryTheory.externalMap f (𝟙 B)).f n z.1
     simp [CategoryTheory.externalMap, Cocycle.precomp]
-    rfl
   commf' := by
     rw [← cancel_mono (HomComplex.leftHomologyData A' B n).i]
     simp only [Category.assoc, ShortComplex.LeftHomologyData.f'_i]
@@ -246,7 +245,6 @@ private noncomputable def precompHomologyData
       ext z
       change (z.precomp f).1 = (CategoryTheory.externalMap f (𝟙 B)).f n z.1
       simp [CategoryTheory.externalMap, Cocycle.precomp]
-      rfl
     rw [hi, ShortComplex.LeftHomologyData.f'_i_assoc]
     exact ((HomologicalComplex.shortComplexFunctor _ _ n).map
       (CategoryTheory.externalMap f (𝟙 B))).comm₁₂.symm
@@ -464,7 +462,6 @@ private theorem globalMap_quasiIso
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 300000 in
 -- Naturality compares several composites through product functors and localization.
 /-- Natural K-injective models for the internal Hom, its full derived global sections,
 and all of its hypercohomology groups. The third comparison identifies the ordinary

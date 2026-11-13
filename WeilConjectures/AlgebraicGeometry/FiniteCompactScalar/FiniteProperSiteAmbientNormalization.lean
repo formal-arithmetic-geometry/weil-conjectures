@@ -58,7 +58,7 @@ theorem properSiteIso_hom_ambient
       ProEtale.directImageComparisonAmbientPullbackIso,
       ProEtale.leftDerivedUpperStarIsoMapDerivedCategory,
       Etale.leftDerivedUpperStarIsoMapDerivedCategory,
-      ProEtale.BoundaryComparison.comparison, TwoSquare.mk, TwoSquare.natTrans] using h
+      ProEtale.BoundaryComparison.comparison, TwoSquare.mk] using h
   have hhh := congrArg (fun t ↦ (intrinsicSiteFunctorIso A Y).hom.app _ ≫
     (sfIntrinsicDerivedEquivalence Y A).functor.map t ≫
       (sfIntrinsicDerivedDirectImageComparison g A).inv.app

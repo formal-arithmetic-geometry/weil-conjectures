@@ -14,6 +14,7 @@ public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Algebra.Homology.OpenCoverMateModuleShortExact
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The complex-level open-cover sequence with its canonical mate maps
 

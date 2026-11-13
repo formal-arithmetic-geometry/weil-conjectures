@@ -89,7 +89,7 @@ exchange `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` is an isomorphism: it is the mate of
 theorem isIso_derivedBaseChangeMap_of_isIso (sq : CommSq g' f' f g) [IsIso g] [IsIso g'] :
     IsIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq) :=
   have : IsIso (TwoSquare.mk _ _ _ _
-      (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom).natTrans :=
+      (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom) :=
     inferInstanceAs (IsIso (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom)
   isIso_mateEquiv_of_isEquivalence _ _ _
 
@@ -144,7 +144,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso [HasCompactification
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) [IsIso g]
     [IsIso g'] : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
   have : IsIso (TwoSquare.mk _ _ _ _
-      (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv).natTrans :=
+      (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv) :=
     inferInstanceAs (IsIso (rightDerivedLowerShriekBaseChangeNatIso Λ sq).inv)
   isIso_mateEquiv_of_isEquivalence _ _ _
 end Exchange

@@ -105,11 +105,12 @@ theorem condensedFourierKernel_boundedConstructible
       rw [Mod.one_comp_regularLift]
       simp
     have hz : condensedArtinSchreierProjector Λ k₀ ψ = 0 := by
+      apply End.ext
       simp [condensedArtinSchreierProjector, Ring.inverse_non_unit _ hq, hzero]
     have hi : IsZero (condensedArtinSchreierSheaf Λ k₀ ψ) := by
-      apply IsZero.of_mono_eq_zero (image.ι (condensedArtinSchreierProjector Λ k₀ ψ))
-      apply (cancel_epi (factorThruImage (condensedArtinSchreierProjector Λ k₀ ψ))).mp
-      simpa using hz
+      apply IsZero.of_mono_eq_zero (image.ι (condensedArtinSchreierProjector Λ k₀ ψ).asHom)
+      apply (cancel_epi (factorThruImage (condensedArtinSchreierProjector Λ k₀ ψ).asHom)).mp
+      simpa using congrArg End.asHom hz
     apply boundedConstructible_singleFunctor_zero_obj
     exact isConstructibleModuleObject_of_isZero _
       ((upperStar Λ

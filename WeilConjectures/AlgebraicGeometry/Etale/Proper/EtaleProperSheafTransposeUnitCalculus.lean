@@ -182,9 +182,9 @@ private lemma mixed_mate_unit_normal
       T.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ β)).natTrans.app (DerivedCategory.Qh.obj K) =
+        (TwoSquare.mk _ _ _ _ β)).app (DerivedCategory.Qh.obj K) =
     DerivedCategory.Qh.map
-      (((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans.mapHomotopyCategory
+      (((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).mapHomotopyCategory
         (.up ℤ)).app K) ≫
       P.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K) ≫
       P.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.inv.app K) := by

@@ -102,7 +102,8 @@ lemma tensorStalkLinearMap_rep (F G : WeilSheaf K l C) (hF : F.IsLisse) (hG : G.
     (g : Aut (fiber B.t)) (d v) :
     tensorStalkLinearMap B F G hF hG (M.rep B.t _ g d) (M.rep B.t _ g v) =
       M.rep B.t (G.toLisse hG) g (tensorStalkLinearMap B F G hF hG d v) :=
-  M.mono_evaluationPairing g ((F.dual hF).toLisse hF.dual) (G.toLisse hG) (hF.tensorObj hG) d v
+  M.mono_evaluationPairing g.asIso ((F.dual hF).toLisse hF.dual) (G.toLisse hG)
+    (hF.tensorObj hG) d v
 
 /-- The evaluation pairing of the stalks at the base point is equivariant for the Frobenius
 `Φ`. -/

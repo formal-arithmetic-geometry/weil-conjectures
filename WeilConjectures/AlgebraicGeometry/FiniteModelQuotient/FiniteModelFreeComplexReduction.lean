@@ -34,7 +34,6 @@ private lemma flat_finite_biproduct (T : Scheme.{u}) (r : ℕ) :
     ((Sigma.whiskerEquiv Equiv.ulift.symm (fun _ ↦ Iso.refl _)).symm ≪≫
       (biproduct.isoCoproduct _).symm) h
 
-set_option maxHeartbeats 800000 in
 -- The derived reduction unfolds the two-term free model complex and its matrix.
 /-- Derived reduction of the literal two-term free model complex keeps its matrix.
 

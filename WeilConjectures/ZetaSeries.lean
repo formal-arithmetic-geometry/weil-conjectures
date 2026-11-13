@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Order.Ring.Star
 public import Mathlib.AlgebraicGeometry.ResidueField
-public import Mathlib.Data.Rat.Star
 public import Mathlib.FieldTheory.Finite.GaloisField
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import Mathlib.RingTheory.Flat.TorsionFree

@@ -76,7 +76,6 @@ private theorem map_of_basis
   ext s
   exact ConcreteCategory.congr_hom (ha' i) s
 
-set_option maxHeartbeats 400000 in
 -- Extending chart maps elaborates many dependent section and localization types.
 /-- A degree-preserving map induces a map between any two sheaves with the prescribed charts.
 Source: Stacks Project, Tag 01M7 (functoriality), and Tag 009U.

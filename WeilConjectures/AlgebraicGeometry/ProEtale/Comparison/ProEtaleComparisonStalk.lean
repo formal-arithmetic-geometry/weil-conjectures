@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Functor.TypeValuedFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.CategoryTheory.RingedSiteModules

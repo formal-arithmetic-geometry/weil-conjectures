@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Module.Projective
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.Algebra.Homology.CochainComplexOpposite
 import Mathlib.Algebra.Homology.Factorizations.CM5a
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Bounded-above projective models of derived module objects

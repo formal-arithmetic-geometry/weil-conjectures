@@ -43,8 +43,6 @@ private theorem quotient_map_unique
   ext x
   exact congrArg (fun z : C ⧸ J.map f →+* Q ↦ z (Ideal.Quotient.mk _ x)) he
 
-set_option maxHeartbeats 800000 in
--- The full-subcategory and quotient-map instances require additional elaboration heartbeats.
 /-- A section of an étale algebra over one neighbourhood extends to the vertex of
 any cocone of pair neighbourhoods with unchanged quotient.
 Source: Stacks Project, Tag 0A02, verification of condition (2) of Tag 09XI

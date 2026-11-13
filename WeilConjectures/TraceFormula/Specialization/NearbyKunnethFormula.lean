@@ -170,7 +170,6 @@ lemma comp_coordinate_snd :
     (φ₂.total ≫ b) ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = φ₁.total ≫ qM := by
   rw [Category.assoc, hb, hpb.w]
 
-set_option maxHeartbeats 1000000 in
 -- rewriting the special map of the swapped product in the slice statement is slow
 include hM hN hpb hP hgen in
 /-- **The generic-slicing step, coordinate of the second factor**: the generic-slicing step

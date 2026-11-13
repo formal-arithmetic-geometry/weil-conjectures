@@ -14,6 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Comparing the two encodings of constant-coefficient module sheaves
 

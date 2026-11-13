@@ -93,7 +93,6 @@ private theorem groupEqToHom_section {A B : AddCommGrpCat} (h : A = B) (x : A) :
   subst h
   rfl
 
-set_option maxHeartbeats 600000 in
 -- Identify section transports without unfolding the scalar-extension witnesses.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem restriction_section
@@ -145,7 +144,6 @@ private theorem normalized_tower_map
   exact congrArg (((kappa n).hom.f i).val.app U)
     (restriction_section l E Y (K.X i) n U x).symm
 
-set_option maxHeartbeats 300000 in
 -- Explicit comparison between the two published strict quotient presentations.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The actual adjunction unit in the normalized strict quotient cone.

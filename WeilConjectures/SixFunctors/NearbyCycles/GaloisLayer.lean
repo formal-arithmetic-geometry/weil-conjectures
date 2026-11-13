@@ -148,7 +148,6 @@ noncomputable def galoisLayerExchangeIso
 
 variable [FiniteDimensional L L'] [IsGalois L L']
 
-set_option maxHeartbeats 400000 in
 -- the pullback exchange and the derived Galois data are large terms
 /-- **The pullback exchange of a finite Galois layer is split by the averaged Galois action.**
 If multiplication by `|Gal(L'/L)|` is invertible on `Lε^* C`, the pullback exchange

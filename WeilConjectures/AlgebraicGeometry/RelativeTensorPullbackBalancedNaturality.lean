@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Naturality of the ordinary balanced tensor comparison
 

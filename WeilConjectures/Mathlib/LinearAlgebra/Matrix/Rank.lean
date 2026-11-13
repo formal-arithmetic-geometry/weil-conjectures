@@ -61,7 +61,7 @@ theorem exists_submatrix_det_ne_zero_of_le_rank [Finite m] (A : Matrix m n K) {r
     have hc : (A.submatrix id e₂).col = fun i ↦ A.col (e₂ i) := rfl
     rw [rank_transpose, rank_eq_finrank_span_cols, hc, finrank_span_eq_card h₂, Fintype.card_fin]
   obtain ⟨e₁, h₁⟩ := (A.submatrix id e₂)ᵀ.exists_linearIndependent_col_of_le_rank hB
-  exact ⟨e₁, e₂, ((isUnit_iff_isUnit_det _).1 (linearIndependent_rows_iff_isUnit.1 h₁)).ne_zero⟩
+  exact ⟨e₁, e₂, ((isUnit_iff_isUnit_det _).1 (linearIndependent_row_iff_isUnit.1 h₁)).ne_zero⟩
 
 /-- A matrix over a field with a nonvanishing `r × r` minor has rank at least `r`. -/
 theorem le_rank_of_submatrix_det_ne_zero (A : Matrix m n K) {r : ℕ} (e₁ : Fin r → m)

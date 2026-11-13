@@ -219,7 +219,6 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   {B : Type (u + 1)} [CommRing B] {R : Sheaf J CommRingCat.{u + 1}}
   (a : realizationRing J B ⟶ R)
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the concrete sheaf tensor and scalar-extension structures needs extra reduction.
 private theorem scalarBraided : Nonempty (SheafOfModules.flatScalarExtension J a).Braided := by
   let E := CategoryTheory.CochainPullback.extensionFunctor.{u + 1, u + 1, u} (J := J) a

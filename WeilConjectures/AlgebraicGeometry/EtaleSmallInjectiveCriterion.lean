@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSmallGeneratorSections
 import WeilConjectures.AlgebraicGeometry.EtaleSmallGeneratorSeparating
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Preadditive.Injective.LiftingProperties
 
 /-! Small-valued test objects for injectivity on the small étale site. -/
 

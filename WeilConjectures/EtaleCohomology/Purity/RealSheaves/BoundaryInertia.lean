@@ -269,7 +269,6 @@ section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- The decomposition group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of
 the stabiliser of `Q`. -/
@@ -331,7 +330,7 @@ theorem localKernel_le_topologicalClosure_normalClosure (hz : z ∉ Set.range j.
   -- so inertia acts trivially on the generic fibre of `Z`
   have hIZ : ∀ σ ∈ Q.inertia Gal(Ω/C.functionField),
       ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
-        (galoisToAut (genericPointLift j) σ).hom.app Z t = t := by
+        (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t := by
     intro σ hσ t
     apply ((ConcreteCategory.isIso_iff_bijective ((genericPath j sU).hom.app Z)).1
       inferInstance).1

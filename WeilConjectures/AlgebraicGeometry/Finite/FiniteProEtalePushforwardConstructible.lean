@@ -75,7 +75,7 @@ def finitePushforwardDerivedComparison (B : Type (u + 1)) [CommRing B]
       (Etale.upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctorIsoMapDerivedCategory)
     ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).ofNatIsoLeft
       (upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctorIsoMapDerivedCategory)
-    (finitePushforwardDerivedPullbackComparison B f).hom).natTrans
+    (finitePushforwardDerivedPullbackComparison B f).hom)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -84,16 +84,16 @@ private theorem isIso_mate_change_adjunction
     {l : A ⥤ D} {r : D ⥤ A} {p : E ⥤ F} {t : F ⥤ E}
     {a : A ⥤ E} {b : D ⥤ F}
     (e e' : l ⊣ r) (d d' : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) (K : D)
-    (h : IsIso ((mateEquiv e' d' σ.hom).natTrans.app K)) :
-    IsIso ((mateEquiv e d σ.hom).natTrans.app K) := by
+    (h : IsIso ((mateEquiv e' d' σ.hom).app K)) :
+    IsIso ((mateEquiv e d σ.hom).app K) := by
   let c := conjugateIsoEquiv e e' (Iso.refl l)
   let q := conjugateIsoEquiv d d' (Iso.refl p)
   have hh := mateEquiv_whiskerTop_conjugateEquiv e e' d d'
     (𝟙 l) (𝟙 p) σ.hom σ.hom (by ext; simp)
-  have ht := congrArg (fun w : TwoSquare r b a t ↦ w.natTrans.app K) hh
-  change a.map (c.hom.app K) ≫ (mateEquiv e' d' σ.hom).natTrans.app K =
-    (mateEquiv e d σ.hom).natTrans.app K ≫ q.hom.app (b.obj K) at ht
-  have : IsIso ((mateEquiv e d σ.hom).natTrans.app K ≫ q.hom.app (b.obj K)) := by
+  have ht := congrArg (fun w : TwoSquare r b a t ↦ w.app K) hh
+  change a.map (c.hom.app K) ≫ (mateEquiv e' d' σ.hom).app K =
+    (mateEquiv e d σ.hom).app K ≫ q.hom.app (b.obj K) at ht
+  have : IsIso ((mateEquiv e d σ.hom).app K ≫ q.hom.app (b.obj K)) := by
     rw [← ht]
     infer_instance
   exact IsIso.of_isIso_comp_right _ (q.hom.app (b.obj K))
@@ -187,7 +187,7 @@ theorem finite_proetale_pushforward_constructible
         (ModuleCat.{u + 1} B) f).mapDerivedCategoryRightDerivedAdjunction)
     have hh := unboundedDirectImageComparison_boundedBelow B f L a
     simpa only [unboundedDirectImageComparisonMap, Adjunction.homEquiv_unit,
-      mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
       Functor.comp_obj, Functor.comp_map, Functor.map_comp, Functor.map_id,

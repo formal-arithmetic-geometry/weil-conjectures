@@ -80,11 +80,11 @@ private theorem normalization
     (ht : ∀ M : D, F.map (tY.hom.app M) ≫ Functor.OplaxMonoidal.δ F M BY =
       q.app (U.obj M) ≫ S.map (p.hom.app M) ≫ tX.hom.app (F.obj M))
     (K : C) :
-    V.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ p.hom)).natTrans.app K) ≫
+    V.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ p.hom)).app K) ≫
         r.app (T.obj K) ≫ G.map (tX.hom.app K) =
       tY.hom.app (G.obj K) ≫
         ((a.rightAdjointProjectionMap (Functor.OplaxMonoidal.δNatTrans F)).app K).app BY := by
-  let push := (mateEquiv a a' (TwoSquare.mk _ _ _ _ p.hom)).natTrans
+  let push := (mateEquiv a a' (TwoSquare.mk _ _ _ _ p.hom))
   have hc := mateEquiv_counit a a' (TwoSquare.mk _ _ _ _ p.hom) K
   change F'.map (push.app K) ≫ a'.counit.app (T.obj K) =
     p.hom.app (G.obj K) ≫ T.map (a.counit.app K) at hc
@@ -119,7 +119,7 @@ private theorem normalization_family
       ∀ K : C,
         ∃ (s : V.obj (U.obj (G.obj K)) ≅ G.obj K ⊗ BY)
           (e : S.obj (T.obj K) ≅ K ⊗ F.obj BY),
-          V.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ p.inv)).natTrans.app K) ≫
+          V.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ p.inv)).app K) ≫
               (((b'.comp a').rightAdjointUniq
                 ((a.comp b).ofNatIsoLeft p)).hom.app (T.obj K)) ≫ G.map e.hom =
             s.hom ≫

@@ -27,7 +27,7 @@ private theorem universal_of_isIso_scalarMate
     {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
     (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂) {F : A ⥤ C} {G : B ⥤ D}
     (τ : U₁ ⋙ F ⟶ G ⋙ U₂)
-    [IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans)]
+    [IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)))]
     {P : A} {N : B} (d : P ⟶ U₁.obj N)
     (h : StructuredArrow.IsUniversal (StructuredArrow.mk d)) :
     Nonempty (StructuredArrow.IsUniversal
@@ -35,7 +35,7 @@ private theorem universal_of_isIso_scalarMate
   let e := (mkInitialOfLeftAdjoint _ a₁ P).uniqueUpToIso h
   let α : E₁.obj P ≅ N := (StructuredArrow.proj P U₁).mapIso e
   have hα : a₁.unit.app P ≫ U₁.map α.hom = d := e.hom.w
-  let m := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans
+  let m := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ))
   let t : E₂.obj (F.obj P) ≅ G.obj N := (asIso m).app P ≪≫ G.mapIso α
   have ht : a₂.unit.app (F.obj P) ≫ U₂.map t.hom = F.map d ≫ τ.app N := by
     have hu := unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ τ) P
@@ -71,12 +71,12 @@ private theorem etaleNormalizationScalarMate_isIso (Z : Scheme.{u})
       (ProEtale.scalarDerivedAdjunctionData Z.smallEtaleTopology q).adjunction
       (ProEtale.scalarDerivedAdjunctionData V.left.smallEtaleTopology q).adjunction).symm
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
-        (normalizationEtaleCoefficientIso Z q V)).hom)).natTrans) := by
+        (normalizationEtaleCoefficientIso Z q V)).hom))) := by
   let c := normalizationEtaleCoefficientIso Z q V
   have hOrd : IsIso (((mateEquiv
       (ProEtale.scalarAdjunction Z.smallEtaleTopology q)
       (ProEtale.scalarAdjunction V.left.smallEtaleTopology q)).symm
-      (TwoSquare.mk _ _ _ _ c.hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ c.hom))) := by
     let F := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ V.hom
     have : F.IsContinuous Z.smallEtaleTopology V.left.smallEtaleTopology :=
       Etale.isContinuous_overPullback V.hom
@@ -94,14 +94,14 @@ private theorem etaleNormalizationScalarMate_isIso (Z : Scheme.{u})
       (Sheaf.restrictScalars Z.smallEtaleTopology q)
       (F.sheafPushforwardContinuous (ModuleCat.{u + 1} R)
         Z.smallEtaleTopology V.left.smallEtaleTopology) (𝟙 _)
-    change IsIso ((mateEquiv aS aR ((mateEquiv aS aR).symm γ)).natTrans)
+    change IsIso ((mateEquiv aS aR ((mateEquiv aS aR).symm γ)))
     rw [Equiv.apply_symm_apply]
     change IsIso (𝟙 _)
     infer_instance
   have : IsIso (((mateEquiv
       (ProEtale.scalarAdjunction Z.smallEtaleTopology q)
       (ProEtale.scalarAdjunction V.left.smallEtaleTopology q)).symm
-      (TwoSquare.mk _ _ _ _ c.symm.inv)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ c.symm.inv))) := by
     simpa only [Iso.symm_inv] using hOrd
   have h := ProEtale.derived_mate_isIso_of_flat
     (A := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R))

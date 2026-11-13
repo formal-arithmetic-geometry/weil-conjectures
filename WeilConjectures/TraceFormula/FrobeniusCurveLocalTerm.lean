@@ -107,7 +107,7 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero (h : X ⟶ X)
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)]
     (hU : (F.traceClassWithCoeff _ (graphOpenPieceCoeff K v hx ≫
       (boundedConstructibleUpperShriekId ℓ X).inv.app _)).localTerm j = 0) :
-    ((ofGraph K h v).traceClass F).localTerm j = trace (graphStalkMap K h v x hx) := by
+    ((ofGraph K h v).traceClass F).localTerm j = .of (trace (graphStalkMap K h v x hx)) := by
   rw [traceClass_ofGraph_eq_add K v hx F, BorelMooreSection.localTerm_add, hU, add_zero]
   refine (localTerm_traceClass_eq_integral_of_restrict_eq
     (F.withCoeff _ (graphClosedPieceCoeff K v hx)) ((Category.comp_id x).trans hx.symm)
@@ -141,7 +141,7 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_subsingleton [Subsingleton X.le
     (hB : Set.range j.left.base =
       {(F.liftPoint x ((Category.comp_id x).trans hx.symm)).left.base (default : Spec (.of k))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
-    ((ofGraph K h v).traceClass F).localTerm j = trace (graphStalkMap K h v x hx) := by
+    ((ofGraph K h v).traceClass F).localTerm j = .of (trace (graphStalkMap K h v x hx)) := by
   refine localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero h v F x hx j hB ?_
   have hx' : Set.range x.left.base = Set.univ :=
     Set.eq_univ_of_forall fun y ↦ ⟨(default : Spec (.of k)), Subsingleton.elim _ _⟩
@@ -215,7 +215,7 @@ theorem localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth [IsAlgClosed k]
       {(F.liftPoint x ((Category.comp_id x).trans hx.symm)).left.base (default : Spec (.of k))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j =
-      trace (graphStalkMap K (frobeniusIterate Φ m) v x hx) :=
+      .of (trace (graphStalkMap K (frobeniusIterate Φ m) v x hx)) :=
   localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero _ v F x hx j hB
     (localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth (K := pointOpenPiece K x) hΦ hm
       (graphOpenPieceCoeff K v hx) (F.withCoeff _ _) x hx j hB

@@ -40,7 +40,7 @@ def properExchange (o : Operations l E) (c : Compositors l E o)
     (h : k ≫ p = r ≫ i) :
     Operations.push l E o p ⋙ pull l E i ⟶ pull l E k ⋙ Operations.push l E o r :=
   (mateEquiv (o.direct p).adj (o.direct r).adj
-    (TwoSquare.mk _ _ _ _ (c.square l E k r p i h).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (c.square l E k r p i h).hom))
 
 /-- The proper projection is the published counit-defined right-adjoint projection mate.
 Source: Stacks 0E48; def-exchange-projection
@@ -378,7 +378,7 @@ inductive BasicPair : {W : Over B} → (e t : Expression B I X W) →
       ((properExchange l E o c k.left r.left p.left i.left w).app
         (e.systemObj l E o M))
       ((mateEquiv (ringedAdj l E p.left) (ringedAdj l E r.left)
-        (TwoSquare.mk _ _ _ _ (ringedSquare l E k.left r.left p.left i.left w).hom)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (ringedSquare l E k.left r.left p.left i.left w).hom)).app
           (e.ringedObj l E d K))
   | projection {U V : Over B} (f : U ⟶ V) (hf : IsProper f.left)
       (e : Expression B I X U) (t : Expression B I X V) :

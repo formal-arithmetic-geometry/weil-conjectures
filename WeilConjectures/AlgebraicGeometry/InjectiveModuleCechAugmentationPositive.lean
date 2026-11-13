@@ -13,6 +13,7 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 import WeilConjectures.Topology.Sheaves.CechFlasque
 import WeilConjectures.Topology.Sheaves.CechComparison
+public import Mathlib.Algebra.Category.Grp.Zero
 
 @[expose] public section
 

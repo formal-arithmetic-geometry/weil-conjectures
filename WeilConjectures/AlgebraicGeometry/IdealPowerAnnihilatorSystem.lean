@@ -58,7 +58,7 @@ theorem ideal_power_annihilator_system
             s ∈ Set.range ((a n).app W) ↔
               ∀ (W' : X.Opens) (h : W' ≤ W)
                 (b : Γ((idealSheafPower ι n).1, W')),
-                (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom
+                (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).asHom.hom
                   (F.presheaf.map (homOfLE h).op s) = 0) ∧
           (∀ (n m : ℕ), n ≤ m → ∃ t : A n ⟶ A m, t ≫ a m = a n) ∧
           (∀ (n : ℕ) (W : X.Opens), W ≤ U → Subsingleton Γ(A n, W)) ∧
@@ -75,7 +75,7 @@ theorem ideal_power_annihilator_system
   have himage (n : ℕ) (W : X.Opens) (s : Γ(F, W)) :
       s ∈ Set.range ((a n).app W) ↔
         ∀ (V : X.Opens) (h : V ≤ W) (b : Γ((idealSheafPower ι n).1, V)),
-          (F.smul (U := V) ((idealSheafPower ι n).2.val.app (op V) b)).hom
+          (F.smul (U := V) ((idealSheafPower ι n).2.val.app (op V) b)).asHom.hom
             (F.presheaf.map (homOfLE h).op s) = 0 := by
     change (∃ t : idealAnnihilatorSections (idealSheafPower ι n).2 F W, t.val = s) ↔
       s ∈ idealAnnihilatorSections (idealSheafPower ι n).2 F W

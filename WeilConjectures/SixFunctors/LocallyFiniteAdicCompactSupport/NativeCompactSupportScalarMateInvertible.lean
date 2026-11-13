@@ -43,7 +43,7 @@ private theorem open_scalar_mate_isIso
       (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j))
   have : IsIso ((mateEquiv
       (PurCompactSupport.openAdjunction S j) (PurCompactSupport.openAdjunction R j)).symm
-      (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ d.symm.hom)) := by
     change IsIso (PurCompactSupport.openRestrictionMap a j)
     infer_instance
   have hm := (exact_localization_inverse_mate
@@ -54,7 +54,7 @@ private theorem open_scalar_mate_isIso
     (PurCompactSupport.openDerivedAdjunction R j)).symm
     (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback
       j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
-        (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)).hom)).natTrans =
+        (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)).hom)) =
     (PurCompactSupport.openRestriction a j).hom at hm
   let δ := TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback
     j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
@@ -69,13 +69,13 @@ private theorem open_scalar_mate_isIso
     (PurCompactSupport.openDerivedAdjunction R j)
     (PurCompactSupport.openDerivedAdjunction S j) δ
   erw [hm'] at h
-  have hh := congrArg TwoSquare.natTrans h
+  have hh := h
   change PurCompactSupport.openComparison a j =
     (conjugateEquiv
       ((pbcDerivedScalarAdjunction (a.map U)).comp
         (PurCompactSupport.openDerivedAdjunction S j))
       ((PurCompactSupport.openDerivedAdjunction R j).comp
-        (pbcDerivedScalarAdjunction (a.map V)))).symm δ.natTrans at hh
+        (pbcDerivedScalarAdjunction (a.map V)))).symm δ at hh
   rw [hh]
   infer_instance
 

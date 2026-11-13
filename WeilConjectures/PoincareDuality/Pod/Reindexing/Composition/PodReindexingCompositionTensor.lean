@@ -106,7 +106,6 @@ private theorem tensor_composition_transport
 
 end RepresentativeTransport
 
-set_option maxHeartbeats 800000 in
 -- The representative transport involves three derived reindexing functors.
 /-- The completed-tensor equation on complete constructible inputs.
 Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;

@@ -41,11 +41,11 @@ private theorem projection_boundary
     haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sq
     haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) so
     (F.pf g).map ((F.sh j).map ((F.pfComp' x q h hxq).hom.app M) ≫
-        (F.exchange q b j p sq.w).natTrans.app ((F.pf x).obj M)) ≫
+        (F.exchange q b j p sq.w).app ((F.pf x).obj M)) ≫
       (F.pfComp' p g d hpg).inv.app ((F.sh b).obj ((F.pf x).obj M)) ≫
-      (F.pf d).map ((F.exchange x k b z sx.w).natTrans.app M) ≫
+      (F.pf d).map ((F.exchange x k b z sx.w).app M) ≫
       (F.pfComp' z d rg hzd).inv.app ((F.sh k).obj M) =
-    (F.pf g).map ((F.exchange h k j v so.w).natTrans.app M) ≫
+    (F.pf g).map ((F.exchange h k j v so.w).app M) ≫
       (F.pfComp' v g rg hvg).inv.app ((F.sh k).obj M) := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sx
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sq
@@ -57,7 +57,7 @@ private theorem projection_boundary
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Functor.comp_obj] at hp
   have hn := (F.pfComp' p g d hpg).inv.naturality
-    ((F.exchange x k b z sx.w).natTrans.app M)
+    ((F.exchange x k b z sx.w).app M)
   simp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
   rw [F.pfComp'_assoc_inv_app z p g v d rg hzp hpg hvg hzd]
@@ -79,9 +79,9 @@ private theorem refinement_projection_boundary
     haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sq
     (F.pf s.g).map ((F.sh s.i).map ((F.pfId X).inv.app M ≫
         (F.pfComp' x q (𝟙 X) hxq).hom.app M) ≫
-        (F.exchange q b s.i p sq.w).natTrans.app ((F.pf x).obj M)) ≫
+        (F.exchange q b s.i p sq.w).app ((F.pf x).obj M)) ≫
       (F.pfComp' p s.g d hpg).inv.app ((F.sh b).obj ((F.pf x).obj M)) ≫
-      (F.pf d).map ((F.exchange x r.i b z sx.w).natTrans.app M) ≫
+      (F.pf d).map ((F.exchange x r.i b z sx.w).app M) ≫
       (F.pfComp' z d r.g hzd).inv.app ((F.sh r.i).obj M) =
     (F.refinementComparison rs hs).app M := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) sx

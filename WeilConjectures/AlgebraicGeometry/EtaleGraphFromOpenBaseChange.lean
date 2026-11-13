@@ -48,7 +48,7 @@ private def ExchangeWord.comp
   top := w.top ⋙ z.top
   bot := w.bot ⋙ z.bot
   exchange := (TwoSquare.hComp (TwoSquare.mk _ _ _ _ w.exchange)
-    (TwoSquare.mk _ _ _ _ z.exchange)).natTrans
+    (TwoSquare.mk _ _ _ _ z.exchange))
 
 private def ExchangeWord.id
     {C C' : Type*} [Category C] [Category C'] (P : C ⥤ C') : ExchangeWord P P where
@@ -104,7 +104,7 @@ private def ExchangeIso.comp
     have he := congr_app e.comm K
     have hd := congr_app d.comm (w'.top.obj K)
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at he hd
-    simp only [ExchangeWord.comp, TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans,
+    simp only [ExchangeWord.comp, TwoSquare.hComp, TwoSquare.mk,
       Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp,
@@ -219,7 +219,7 @@ private def openComp
   comm := by
     ext K
     simpa only [openWord, ExchangeWord.comp, TwoSquare.hComp, TwoSquare.mk,
-      TwoSquare.natTrans, Iso.symm_hom, NatTrans.comp_app,
+      Iso.symm_hom, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc] using
       sfExactExchangePasting.2.2 A sq₁ sq₂ K
@@ -267,7 +267,7 @@ private def cartesianInterchange
     have hc := h.2.2.2.2.2.2.2 k r p i k' r' p' i' d a c b
       sq.toCommSq.flip sq'.toCommSq.flip sk si sp sr
     rw [h.2.2.1 k r p i sq, h.2.2.1 k' r' p' i' sq'] at hc
-    simpa only [ExchangeWord.comp, TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans,
+    simpa only [ExchangeWord.comp, TwoSquare.hComp, TwoSquare.mk,
       properWord, openWord, openImmersionLowerShriekLowerStarExchangeIso, asIso_hom,
       Category.assoc] using hc
 
@@ -333,7 +333,7 @@ private def openId
     have hh := unbounded_open_base_change A (IsPullback.id_vert v)
     rw [h] at hh
     simp only [openId_normalization, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
-      TwoSquare.mk, TwoSquare.natTrans] at hh
+      TwoSquare.mk] at hh
     change Functor.whiskerLeft D((v)^*[ModuleCat.{u + 1} A])
         (mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) X').hom ≫
       ((Functor.rightUnitor D((v)^*[ModuleCat.{u + 1} A])).hom ≫
@@ -737,7 +737,7 @@ theorem etaleGraphFromOpen_baseChange
       Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
   rw [htop, hbot] at hc
   simpa only [Rid, Jj, Rc, Ra, Je, Rp, ExchangeWord.comp, properWord, openWord,
-    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans,
+    TwoSquare.hComp, TwoSquare.mk,
     etaleGraphPresentationExchange, EtaleGraphPresentation.ofCompactificationBaseChange,
     EtaleGraphPresentation.functor, EtaleGraphPresentation.ofCompactification, c', z]
     using hc

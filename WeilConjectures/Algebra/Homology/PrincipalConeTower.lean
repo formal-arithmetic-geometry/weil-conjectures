@@ -25,18 +25,20 @@ variable {A : Type u} [Category.{v} A] [Abelian A]
 
 /-- The positive-power cone at level n, representing exponent n+1.
 Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
-def level (n : ℕ) := mappingCone (μ ^ (n + 1))
+def level (n : ℕ) := mappingCone (μ ^ (n + 1)).asHom
 
 /-- The square (μ,1) between consecutive powers commutes.
 Source: Stacks 0A0E (auxiliary; not a blueprint node).
 Proof: the power recursion in the endomorphism monoid is composition. -/
-theorem square (n : ℕ) : (μ ^ (n + 1 + 1)) ≫ 𝟙 P = μ ≫ (μ ^ (n + 1)) := by
-  simpa only [Category.comp_id, End.mul_def] using pow_succ μ (n + 1)
+theorem square (n : ℕ) :
+    (μ ^ (n + 1 + 1)).asHom ≫ 𝟙 P = μ.asHom ≫ (μ ^ (n + 1)).asHom := by
+  simpa only [Category.comp_id, End.mul_asHom] using
+    congrArg End.asHom (pow_succ μ (n + 1))
 
 /-- The transition acts by μ on the source and by 1 on the target.
 Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
 def step (n : ℕ) : level μ (n + 1) ⟶ level μ n :=
-  mappingCone.map _ _ μ (𝟙 P) (square μ n)
+  mappingCone.map _ _ μ.asHom (𝟙 P) (square μ n)
 
 /-- The inverse tower, indexed by positive powers.
 Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
@@ -46,8 +48,8 @@ def tower : ℕᵒᵖ ⥤ CochainComplex A ℤ := CategoryTheory.Functor.ofOpSeq
 Source: Stacks 0A0E (auxiliary; not a blueprint node).
 Proof: the target map of each cone square is the identity. -/
 theorem compatible (n : ℕ) :
-    mappingCone.inr (μ ^ (n + 1 + 1)) ≫ step μ n =
-      mappingCone.inr (μ ^ (n + 1)) := by
+    mappingCone.inr (μ ^ (n + 1 + 1)).asHom ≫ step μ n =
+      mappingCone.inr (μ ^ (n + 1)).asHom := by
   simp [step, mappingCone.map]
 
 variable [HasCountableProducts A]
@@ -55,7 +57,7 @@ variable [HasCountableProducts A]
 /-- The product of degree-zero inclusions.
 Source: Stacks 0941 (auxiliary; not a blueprint node). -/
 def productUnit : P ⟶ ∏ᶜ (fun n : ℕ ↦ (tower μ).obj (op n)) :=
-  Pi.lift (fun n ↦ mappingCone.inr (μ ^ (n + 1)))
+  Pi.lift (fun n ↦ mappingCone.inr (μ ^ (n + 1)).asHom)
 
 /-- One minus the transition shift.
 Source: Stacks 0941 (auxiliary; not a blueprint node). -/

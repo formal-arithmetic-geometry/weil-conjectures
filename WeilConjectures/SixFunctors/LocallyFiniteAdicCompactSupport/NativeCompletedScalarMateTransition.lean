@@ -32,7 +32,7 @@ private def localOpenMap (R S : Coefficients.{u})
   ((mateEquiv (openAdjunction S c.i) (openAdjunction R c.i)).symm
     (TwoSquare.mk _ _ _ _ (inv (proEtaleRingRestrictionPullbackInv
       c.i (R.ring c.Z) (S.ring c.Z) (R.ring X) (S.ring X)
-        az ax (R.pull c.i) (S.pull c.i) hi)))).natTrans
+        az ax (R.pull c.i) (S.pull c.i) hi))))
 
 private def localComparison (R S : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -56,7 +56,7 @@ private def localComparison (R S : Coefficients.{u})
         Functor.isoWhiskerLeft (openExtension S c.i).mapDerivedCategory
           (proEtaleRingRestrictionDerivedDirectImage c.g
             (R.ring Y) (S.ring Y) (R.ring c.Z) (S.ring c.Z)
-            ay az (R.pull c.g) (S.pull c.g) hg).symm).hom))).natTrans
+            ay az (R.pull c.g) (S.pull c.g) hg).symm).hom)))
 
 private theorem localComparison_heq (R S : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.LowerStarComp
@@ -410,8 +411,8 @@ lemma affineLine.geometricNegIso_comp_geometricTranslationIso (c : k₀) :
 /-- The reflection of the geometric affine line commutes with the geometric Frobenius. -/
 lemma affineLine.geometricNegIso_inv_comp_frobenius_inv :
     (affineLine.geometricNegIso k₀).inv ≫
-        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv =
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≫
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv =
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≫
         (affineLine.geometricNegIso k₀).inv :=
   Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ (comp_over _ _)
 
@@ -463,7 +464,7 @@ lemma WeilSheaf.adicConstant_carrier_congr_hom {Z : Scheme.{u}}
 lemma WeilSheaf.adicConstant_str_hom :
     (Endofunctor.IsoAlgebra.str (WeilSheaf.adicConstant k₀ l X).obj).hom =
       (ProEtale.adicLowerStarUnitIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom :=
   rfl
 
 end Carrier
@@ -480,8 +481,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 lemma WeilSheaf.lowerStar_adicConstant_obj_obj_str :
     ((WeilSheaf.lowerStar φ).obj (WeilSheaf.adicConstant k₀ l X)).obj.obj.str =
       ProEtale.adicLowerStarExchange (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) := by
   rw [← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str, Iso.trans_hom,
     Iso.app_hom, ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.trans_hom,
@@ -498,8 +499,8 @@ Frobenius. -/
 lemma WeilSheaf.artinSchreierPushforward_obj_obj_str :
     (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str =
       ProEtale.adicLowerStarExchange ĀS
-        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) :=
   WeilSheaf.lowerStar_adicConstant_obj_obj_str (affineLine.artinSchreierMap k₀)
 

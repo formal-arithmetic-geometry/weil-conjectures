@@ -116,7 +116,6 @@ private theorem coefficientAugmentation
   rw [r.map_comp, Category.assoc, ← Category.assoc _ (c.hom.app (op L, Q)), hc]
   simpa only [N, Q, Functor.id_obj, Category.assoc] using hh
 
-set_option maxHeartbeats 400000 in
 -- The sectionwise formula compares the two scalar actions and the product projections.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

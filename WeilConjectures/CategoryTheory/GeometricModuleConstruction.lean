@@ -721,7 +721,6 @@ open GeometricConstruction
 
 -- Keep the pre-existing named nondependent forall binder `hRing` unchanged.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
 -- The statement records every operation and its underlying comparison.
 /-- Construct the transported module functors and their operation comparisons.
 Source: Stacks Project, Tags 03D1 and 03D2, `lemma-pushforward-module`

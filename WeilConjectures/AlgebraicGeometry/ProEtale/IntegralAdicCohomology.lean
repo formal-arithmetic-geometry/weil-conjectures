@@ -115,13 +115,13 @@ noncomputable def continuousSheafRingHom {R : Type*} [Ring R]
     (μ : R → ContinuousAddMonoidHom A A) (h1 : ∀ x, μ 1 x = x)
     (hmul : ∀ r s x, μ (r * s) x = μ r (μ s x)) (h0 : ∀ x, μ 0 x = 0)
     (hadd : ∀ r s x, μ (r + s) x = μ r x + μ s x) : R →+* End (continuousSheaf S A) where
-  toFun r := continuousSheafMap S (μ r)
-  map_one' := (continuousSheafMap_congr S h1).trans (continuousSheafMap_id S)
-  map_mul' r s := (continuousSheafMap_congr S (hmul r s)).trans
-    (continuousSheafMap_comp S (μ s) (μ r))
-  map_zero' := (continuousSheafMap_congr S h0).trans (continuousSheafMap_zero S)
-  map_add' r s := (continuousSheafMap_congr S (hadd r s)).trans
-    (continuousSheafMap_add S (μ r) (μ s))
+  toFun r := .of (continuousSheafMap S (μ r))
+  map_one' := End.ext ((continuousSheafMap_congr S h1).trans (continuousSheafMap_id S))
+  map_mul' r s := End.ext ((continuousSheafMap_congr S (hmul r s)).trans
+    (continuousSheafMap_comp S (μ s) (μ r)))
+  map_zero' := End.ext ((continuousSheafMap_congr S h0).trans (continuousSheafMap_zero S))
+  map_add' r s := End.ext ((continuousSheafMap_congr S (hadd r s)).trans
+    (continuousSheafMap_add S (μ r) (μ s)))
 
 /-- The action of `ℤ_p` on the sheaf `C(-, ℤ_p)`. -/
 noncomputable def integralSmulRingHom : ℤ_[p] →+* End (continuousSheaf S ℤ_[p]) :=
@@ -169,8 +169,8 @@ noncomputable abbrev reductionSheafMap (m : ℕ) :
   continuousSheafMap S (openAddSubgroupQuotientMk (powOpenAddSubgroup p) m)
 
 lemma reductionSheafMap_comm (m : ℕ) (c : ℤ_[p]) :
-    integralSmulRingHom S p c ≫ reductionSheafMap S p m =
-      reductionSheafMap S p m ≫ finiteSmulRingHom S p m c :=
+    (integralSmulRingHom S p c).asHom ≫ reductionSheafMap S p m =
+      reductionSheafMap S p m ≫ (finiteSmulRingHom S p m c).asHom :=
   (continuousSheafMap_comp S _ _).symm.trans
     ((continuousSheafMap_congr S fun _ ↦ rfl).trans (continuousSheafMap_comp S _ _))
 
@@ -188,18 +188,20 @@ lemma reduction_apply (m n : ℕ) (x : IntegralAdicH S p n) :
 /-- `pᵐ` kills `Hⁿ(S, ℤ/pᵐ)`. -/
 lemma pow_smul_finiteAdicH (m n : ℕ) (y : FiniteAdicH S p m n) : (p : ℤ_[p]) ^ m • y = 0 := by
   have h : finiteSmulRingHom S p m ((p : ℤ_[p]) ^ m) = 0 := by
+    apply End.ext
     refine (continuousSheafMap_congr S fun x ↦ ?_).trans (continuousSheafMap_zero S)
     induction x using QuotientAddGroup.induction_on with
     | H a =>
       refine (QuotientAddGroup.eq_zero_iff _).2 ?_
       exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _)
-  change Ext.comp y (Ext.mk₀ (finiteSmulRingHom S p m ((p : ℤ_[p]) ^ m))) (add_zero n) = 0
-  rw [h, Ext.mk₀_zero, Ext.comp_zero]
+  change Ext.comp y (Ext.mk₀ (finiteSmulRingHom S p m ((p : ℤ_[p]) ^ m)).asHom)
+    (add_zero n) = 0
+  rw [h, End.zero_asHom, Ext.mk₀_zero, Ext.comp_zero]
 
 /-- The Bockstein short complex `C(-, ℤ_p) --pᵐ--> C(-, ℤ_p) ⟶ C(-, ℤ_p / pᵐ)`. -/
 noncomputable def bocksteinShortComplex (m : ℕ) :
     ShortComplex (Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1}) :=
-  ShortComplex.mk (integralSmulRingHom S p ((p : ℤ_[p]) ^ m)) (reductionSheafMap S p m)
+  ShortComplex.mk (integralSmulRingHom S p ((p : ℤ_[p]) ^ m)).asHom (reductionSheafMap S p m)
     ((continuousSheafMap_comp S _ _).symm.trans
       ((continuousSheafMap_congr S fun _ ↦ (QuotientAddGroup.eq_zero_iff _).2
         (Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _))).trans

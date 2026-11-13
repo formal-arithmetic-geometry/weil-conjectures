@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+import Mathlib.RingTheory.Localization.Finiteness
 import WeilConjectures.RingTheory.DepthOneOfMaximalNotAssociated
 import WeilConjectures.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
 

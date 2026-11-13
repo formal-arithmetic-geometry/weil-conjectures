@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Algebra-module quasi-coherence from exact scalar restriction
 
