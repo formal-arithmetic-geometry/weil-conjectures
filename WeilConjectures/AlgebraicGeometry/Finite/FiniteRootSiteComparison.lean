@@ -774,6 +774,7 @@ private theorem sigmaMap_generator (A : Type (u + 1)) [CommRing A] (m : ℕ)
   exact hn.trans (congrArg (finiteRootProGenerator A m hm hA T W a) hz.symm)
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The section equivalence elaborates two evaluated inverse-image and kernel isomorphisms.
 private theorem rootComparison_sections (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)
