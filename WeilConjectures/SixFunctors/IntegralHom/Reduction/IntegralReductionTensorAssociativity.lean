@@ -256,6 +256,7 @@ private theorem normalizedBeta_eq (n : ℕ)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem finiteCochainModel_reductionCounit (n : ℕ)
     (A : CochainComplex (scalarReductionSource l E Y) ℤ)
     (hA : A.IsKFlatIndependentCoefficients) :
@@ -373,8 +374,9 @@ private theorem nativeReductionMonoidal
           D'.ε.app A = reductionCounit l E Y D hl n A :=
         finiteCochainModel_reductionCounit l E Y D hl n A hA
       trace "PH805: counit rewrites"
-      rw [heps P hP, heps Q hQ, heps _
+      simp only [heps P hP, heps Q hQ, heps _
         (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
+      trace "PH805: counits rewritten"
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
       let cS := (TS.iso J S AS _ _ hEP hEQ).hom
