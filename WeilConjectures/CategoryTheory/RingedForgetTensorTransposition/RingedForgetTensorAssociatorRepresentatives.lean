@@ -179,6 +179,24 @@ private theorem coefficient_total_eq :
     coefficientTotalTensor.{r, c, v} J R = SheafOfModules.KFlatTotalTensorModel.total R := by
   rfl
 
+private theorem ringed_tensor_both_naturality
+    [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
+    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, wb} J R))
+    (T : CoefficientTensorModels.{r, c, v, wb} J R S)
+    (β : @SymmetricCategory _ _ S.monoidal)
+    (coh : RingedDerivedTensorCoherence.{c, v, r, wb} J R S T β)
+    (P Q P' Q' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)
+    (hP' : P'.IsKFlatIndependentCoefficients) (hQ' : Q'.IsKFlatIndependentCoefficients)
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map (f, g)) ≫
+        (T.iso J R S P' Q' hP' hQ').hom =
+      (T.iso J R S P Q hP hQ).hom ≫
+        S.tensor.map (DerivedCategory.Q.map f, DerivedCategory.Q.map g) := by
+  have h := coh.tensorIso_naturality P Q P' Q' (Or.inl hP) (Or.inl hP') f g
+  rw [coh.tensorIso_both P Q hP hQ, coh.tensorIso_both P' Q' hP' hQ'] at h
+  exact h
+
 variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)
   [HasSheafify J' AddCommGrpCat.{max d vd s}]
   [J'.WEqualsLocallyBijective AddCommGrpCat.{max d vd s}]
@@ -386,14 +404,12 @@ theorem ringed_forget_tensor_associator_representatives
   have hmQN := hμ Q N hQ hN hUQ hUN fQ fN
   have hmL := hμ PQ N hPQ hN hUPQ hUN fPQ fN
   have hmR := hμ P QN hP hQN hUP hUQN fP fQN
-  have hnL := cA.tensorIso_naturality (V.obj PQ) (V.obj N)
-    (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inl hUPQ) (Or.inl hAPQ)
+  have hnL := ringed_tensor_both_naturality J' R' SA TA βA cA
+    (V.obj PQ) (V.obj N) (A.obj (V.obj P, V.obj Q)) (V.obj N) hUPQ hUN hAPQ hUN
     (chain.hom.app (P, Q)) (𝟙 (V.obj N))
-  rw [cA.tensorIso_both _ _ hUPQ hUN, cA.tensorIso_both _ _ hAPQ hUN] at hnL
-  have hnR := cA.tensorIso_naturality (V.obj P) (V.obj QN)
-    (V.obj P) (A.obj (V.obj Q, V.obj N)) (Or.inl hUP) (Or.inl hUP)
+  have hnR := ringed_tensor_both_naturality J' R' SA TA βA cA
+    (V.obj P) (V.obj QN) (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hUQN hUP hAQN
     (𝟙 (V.obj P)) (chain.hom.app (Q, N))
-  rw [cA.tensorIso_both _ _ hUP hUQN, cA.tensorIso_both _ _ hUP hAQN] at hnR
   simp only [CoefficientClosedStructure.tensor, tensor_map,
     DerivedCategory.Q.map_id] at hnL
   erw [tensorHom_id] at hnL
