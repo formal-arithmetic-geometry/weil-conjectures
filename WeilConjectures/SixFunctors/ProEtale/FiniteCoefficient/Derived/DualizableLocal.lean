@@ -136,7 +136,7 @@ theorem exists_isDualizable_iff_isIso
     have := (upperStarLeftAdjointAdjunction (Λ := Λ) g).leftAdjoint_preservesColimits
     have := Adjunction.left_adjoint_additive (upperStarLeftAdjointAdjunction (Λ := Λ) g)
     have (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
-        IsIso (Functor.LaxMonoidal.ihomComparison G F).natTrans :=
+        IsIso (Functor.LaxMonoidal.ihomComparison G F) :=
       isIso_ihomComparison_upperStar _ g F
     have hGP : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
         ((HomotopyCategory.quotient _ (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj P)) :=

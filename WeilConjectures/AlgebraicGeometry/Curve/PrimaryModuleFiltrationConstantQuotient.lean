@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.ConstructibleSheaf.Defs

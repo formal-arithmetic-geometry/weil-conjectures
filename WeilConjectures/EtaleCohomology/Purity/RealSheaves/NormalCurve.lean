@@ -70,7 +70,7 @@ theorem exists_section_of_isIsomorphic_mapIso_of_isIntegrallyClosed_stalk {K : T
     (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
     (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
       ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
-    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) (n : ℕ) :
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n)) (n : ℕ) :
     ∃ σ : p.geometricFiber ⟶ (t n).P, σ ≫ (t n).π = 𝟙 _ :=
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hU hdim
   exists_section_of_isIsomorphic_mapIso p l s G t ht hfix n

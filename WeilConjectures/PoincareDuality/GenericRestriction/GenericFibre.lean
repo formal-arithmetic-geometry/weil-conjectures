@@ -139,7 +139,7 @@ theorem isIso_nearbyDualityMap_upperStarOfMap_id_of_isIso {P : Over (Spec (.of k
       (𝟙 ((boundedConstructibleUpperStarOfMap ℓ g).obj N)) A) := by
   rw [Verdier.nearbyDualityMap_id_eq_ihomComparison]
   have : IsIso ((boundedConstructible _).ι.map ((Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).natTrans.app N)) := by
+      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).app N)) := by
     rw [ι_map_ihomComparison_upperStarOfMap_app]
     exact h
   exact isIso_of_reflects_iso _ (boundedConstructible _).ι

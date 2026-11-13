@@ -42,8 +42,7 @@ private theorem mate_of_unit {C D E F : Type*}
       a₂.unit.app (G.obj N) ≫ R₂.map (α.app N)) :
     mateEquiv a₁ a₂ α = β := by
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro N
+  refine NatTrans.ext (funext fun N ↦ ?_)
   apply (a₂.homEquiv _ _).injective
   simpa only [Adjunction.homEquiv_unit, Functor.id_obj, Functor.comp_obj] using
     (h N).symm.trans (unit_mateEquiv_symm a₁ a₂ β N)
@@ -184,8 +183,7 @@ theorem ordinaryModuleEvalG_comp (n : ℕ) {X Y Z : Scheme.{u}}
       rw [ordinaryLevelAdj_eq, ordinaryLevelAdj_eq, ordinaryLevelAdj_eq]
       exact Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
     rw [hG, hG']
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -194,7 +192,7 @@ theorem ordinaryModuleEvalG_comp (n : ℕ) {X Y Z : Scheme.{u}}
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app,
-      ModuleCat.comp_apply, TwoSquare.natTrans]
+      ModuleCat.comp_apply]
     obtain ⟨U⟩ := U
     let y := ((moduleEvalP R φ g n).hom.app ((push R φ f).obj M)).val.app (op U) x
     let a := ((StrictTower.moduleRComp (R n) f g).hom.app
@@ -226,7 +224,7 @@ theorem ordinaryModuleEvalG_comp (n : ℕ) {X Y Z : Scheme.{u}}
   simp only [q, TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.comp_id, TwoSquare.natTrans] at hm
+    Category.comp_id] at hm
   let u := (moduleEvalG R φ f n).app ((pull R φ g).obj N) ≪≫
     (StrictTower.modulePullback (R n) f).mapIso ((moduleEvalG R φ g n).app N)
   let v := (moduleEvalG R φ (f ≫ g) n).app N

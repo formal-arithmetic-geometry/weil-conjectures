@@ -123,7 +123,6 @@ private theorem total_summand (P Q : CochainComplex (proEtaleRingModules Y R) â„
 
 attribute [local irreducible] tensorIso complexPullback proEtaleTensorPullbackTotalIso
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the three termwise tensor comparisons with their coefficient universes.
 /-- The normalized restriction tensor map commutes with ordinary geometric tensor
 pullback, as an equality of chain maps before localization.

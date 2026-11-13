@@ -115,7 +115,7 @@ theorem H.baseChange_mayerVietoris
       rw [Module.Flat.lTensor_exact S (hex n).2.1 x]
       constructor
       · rintro ⟨y, hy⟩
-        exact ⟨E n y, by simpa [dt, LinearMap.baseChange_eq_ltensor] using hy⟩
+        exact ⟨E n y, by simpa [dt, LinearMap.baseChange_eq_lTensor] using hy⟩
       · rintro ⟨y, hy⟩
         exact ⟨(E n).symm y, hy⟩
     · intro x

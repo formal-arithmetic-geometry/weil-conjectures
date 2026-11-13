@@ -28,7 +28,6 @@ attribute [local irreducible] HasDerivedCategory.standard
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.PurCompactSupport
-attribute [local implicit_reducible] TwoSquare
 attribute [local instance 100000] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
   SheafOfModules.instAbelian
 attribute [local irreducible] geometricPullComposition scalarPull openComparison properComparison

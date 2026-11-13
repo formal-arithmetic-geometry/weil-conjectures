@@ -30,9 +30,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- The finite quotient proper/open comparison is invertible on its finite-Tor domain.
 Source: Zheng, Lemma 5.22; finite scalar mates, Construction 2.26 and Proposition 2.29.
 

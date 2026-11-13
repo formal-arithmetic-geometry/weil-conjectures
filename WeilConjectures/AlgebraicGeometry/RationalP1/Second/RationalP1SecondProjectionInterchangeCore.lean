@@ -84,7 +84,6 @@ def secondTraceStrengthTail
       (α_ (F.obj K) Q T).inv ≫
       (tensorShiftIso Λ (ProjectiveLine Y) L (F.obj K ⊗ Q)).hom
 
-set_option maxHeartbeats 800000 in
 -- The expanded monoidal coherence proof needs a larger elaboration budget.
 /-- Monoidal strength naturality for an arbitrary morphism in the second factor.
 The statement is independent of the projective-line projection and is the

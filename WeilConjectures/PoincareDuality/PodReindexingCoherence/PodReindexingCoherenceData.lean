@@ -116,7 +116,6 @@ attribute [local semireducible] podReindexingFunctor podReindexingComplexFunctor
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] podReindexingDerivedFunctor podReindexingDerivedFactors
 
-set_option maxHeartbeats 700000 in
 -- Elaborate the representative normalization across the two ringed sites.
 /-- Comparisons with their actual product, tensor-generator, and localization
 normalizations. These are presentation data, not an assumed preservation property.

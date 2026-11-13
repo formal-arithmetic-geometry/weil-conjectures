@@ -48,7 +48,6 @@ open PodTensorShiftNormalization
 
 attribute [local irreducible] integralOperationsRoos
 
-set_option maxHeartbeats 600000 in
 -- Keep sharing in the dependent coefficient-category expressions.
 /-- The right-slot source path formula, proved from its model law.
 Use the arbitrary-presentation path calculation.

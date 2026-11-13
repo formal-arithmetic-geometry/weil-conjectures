@@ -84,7 +84,7 @@ private theorem scalar_projection_ambient
     Category.assoc] at hp hm
   rw [hp] at hm
   simpa only [scalarMate, scalarRestrictionDirectImageMap, adj, T, b,
-    TwoSquare.mk, TwoSquare.natTrans, Functor.map_comp,
+    TwoSquare.mk, Functor.map_comp,
     Category.assoc] using hm
 
 private theorem scalar_directImage_isIso
@@ -97,7 +97,7 @@ private theorem scalar_directImage_isIso
   let z := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
   let α := (mateEquiv x z).symm
     (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ f).hom)
-  have : IsIso α.natTrans := (ProEtale.scalarPullbackReverse_isIso φ f).2
+  have : IsIso α := (ProEtale.scalarPullbackReverse_isIso φ f).2
   have h := iterated_mateEquiv_conjugateEquiv x z a b α
   rw [Equiv.apply_symm_apply] at h
   change scalarRestrictionDirectImageMap φ f = _ at h
@@ -154,7 +154,7 @@ private theorem scalar_unit_directImage
     ((mateEquiv x z).symm (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ f).hom))
   rw [Equiv.apply_symm_apply] at hd
   have hα : ((mateEquiv x z).symm
-      (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ f).hom)).natTrans = α.inv := by
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ f).hom)) = α.inv := by
     exact congrArg Iso.inv (scalarPullback_eq φ f)
   have hsq : (mateEquiv x z).symm
       (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ f).hom) =
@@ -162,7 +162,7 @@ private theorem scalar_unit_directImage
   rw [hsq] at hd
   have h := unit_mateEquiv z x
     (mateEquiv a b (TwoSquare.mk _ _ _ _ α.hom)) K
-  dsimp +instances only [TwoSquare.mk, TwoSquare.natTrans] at he h
+  dsimp +instances only [TwoSquare.mk] at he h
   rw [he] at h
   change R(lowerStar (ModuleCat.{u + 1} A) f).map (z.unit.app K) ≫
       (conjugateIsoEquiv (a.comp z) (x.comp b) α).hom.app

@@ -23,6 +23,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Homology
 import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Mathlib.Topology.Sheaves.LocallySurjective
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Cohomology of the algebra-valued Koszul dual
 

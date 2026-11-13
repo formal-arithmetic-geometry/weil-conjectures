@@ -45,7 +45,7 @@ lemma Adjunction.homEquiv_symm_map_comp_mateEquiv_app {A B A' B' : Type*} [Categ
     {L' : A' ⥤ B'} {R' : B' ⥤ A'} (adj' : L' ⊣ R') (G : A ⥤ A') (H : B ⥤ B')
     (τ : L ⋙ H ≅ G ⋙ L') {M : A} {N : B} (f : M ⟶ R.obj N) :
     (adj'.homEquiv _ _).symm
-        (G.map f ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv)).natTrans.app N) =
+        (G.map f ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv)).app N) =
       τ.inv.app M ≫ H.map ((adj.homEquiv _ _).symm f) := by
   rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
     mateEquiv_counit, Functor.map_comp]
@@ -97,7 +97,7 @@ morphisms with `M`-torsion mapping cone, adjunctions `L ⊣ R` and `L' ⊣ R'` w
 adjoints, and an isomorphism `τ : L ⋙ T₂ ≅ T₁ ⋙ L'`, the mate `R ⋙ T₁ ⟶ T₂ ⋙ R'` of `τ⁻¹` is an
 isomorphism. On `Hom(T₁ A, -)` it is the localization at `M` of the adjunction bijection. -/
 theorem isIso_mateEquiv_of_isLocalization :
-    IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv)).natTrans := by
+    IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv)) := by
   have hadj (A : C₁) (B : C₂) (m : ℤ) (f : A ⟶ R.obj B) :
       (adj.homEquiv _ _).symm (m • f) = m • (adj.homEquiv _ _).symm f := by
     rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, Functor.map_zsmul,
@@ -108,7 +108,7 @@ theorem isIso_mateEquiv_of_isLocalization :
       Linear.smul_comp]
   have key (A : C₁) (B : C₂) (f : A ⟶ R.obj B) :=
     Adjunction.homEquiv_symm_map_comp_mateEquiv_app adj adj' T₁ T₂ τ f
-  set β := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv)).natTrans
+  set β := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ τ.inv))
   have hA (A : C₁) (B : C₂) :
       Function.Bijective (fun x : T₁.obj A ⟶ T₁.obj (R.obj B) ↦ x ≫ β.app B) := by
     have h0 : (adj'.homEquiv (T₁.obj A) (T₂.obj B)).symm 0 = 0 := by

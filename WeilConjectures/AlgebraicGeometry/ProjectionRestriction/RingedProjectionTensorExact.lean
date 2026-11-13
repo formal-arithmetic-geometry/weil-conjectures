@@ -117,9 +117,7 @@ private theorem representativeSecondShift (a : TensorModel R) [sa : TensorShifts
       Functor.comp_obj, inclusionShift,
       Functor.curry_obj_obj_map, Iso.app_hom,
       Category.assoc]
-  all_goals first
-    | rfl
-    | (erw [CategoryTheory.Functor.map_id, Category.id_comp]; rfl)
+  all_goals (erw [CategoryTheory.Functor.map_id, Category.id_comp]; rfl)
 
 private theorem resolvingExact (a : TensorModel R) [sa : TensorShifts a]
     (P : CochainComplex (Mod R) ℤ) (hp : resolving R P) :

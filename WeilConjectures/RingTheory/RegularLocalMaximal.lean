@@ -12,6 +12,7 @@ import WeilConjectures.RingTheory.RegularThroughLocalization
 import WeilConjectures.RingTheory.LocalizationRegular
 import WeilConjectures.RingTheory.FibreRingNoetherian
 import WeilConjectures.RingTheory.GeometricallyRegularFibersOfMaximal
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Regular ring maps are local on the target

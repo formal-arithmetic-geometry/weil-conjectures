@@ -111,7 +111,7 @@ structure SmallModelStrictLocalMateProjectionData
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
-                |>.natTrans.app K))) =
+                |>.app K))) =
       (e i).hom ≫
       (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map
         ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}

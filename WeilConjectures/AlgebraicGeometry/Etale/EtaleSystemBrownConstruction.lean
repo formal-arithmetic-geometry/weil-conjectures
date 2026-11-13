@@ -213,7 +213,7 @@ structure StrictEtaleBrownConstruction (S : StrictEtaleCompactSupport O t c) whe
         c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
           (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
             c.i).rightDerivedFunctorIsoMapDerivedCategory)
-      (.mk _ _ _ _ (openComparison n).inv)).natTrans = (openRealization n).inverse.inv
+      (.mk _ _ _ _ (openComparison n).inv)) = (openRealization n).inverse.inv
   levelComparison : ∀ n, S.levelFunctor n ⋙ realizationY.derived n ≅
     realizationX.derived n ⋙ Etale.rightDerivedLowerShriekOfCompactification
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) c
@@ -226,14 +226,14 @@ structure StrictEtaleBrownConstruction (S : StrictEtaleCompactSupport O t c) whe
       S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived
   openMate : ∀ {m n : ℕ} (h : m ≤ n),
     (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-      (.mk _ _ _ _ (openProjection h).hom)).natTrans = (S.openDerived.derivedTensor h).inv
+      (.mk _ _ _ _ (openProjection h).hom)) = (S.openDerived.derivedTensor h).inv
   properProjection : ∀ {m n : ℕ} (h : m ≤ n),
     (S.PZ.scalar h).derived ⋙ (S.properDerived.level m).direct ≅
       (S.properDerived.level n).direct ⋙ (S.PY.scalar h).derived
   properMate : ∀ {m n : ℕ} (h : m ≤ n),
     (properProjection h).inv =
       (mateEquiv (S.properDerived.level n).adjunction (S.properDerived.level m).adjunction
-        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom)).natTrans
+        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom))
   projection : ∀ {m n : ℕ} (h : m ≤ n),
     (S.PX.scalar h).derived ⋙ S.levelFunctor m ≅
       S.levelFunctor n ⋙ (S.PY.scalar h).derived
@@ -267,7 +267,7 @@ structure StrictEtaleBrownConstruction (S : StrictEtaleCompactSupport O t c) whe
   properInsertionMate_def : ∀ n : ℕ,
     (properInsertionMate n).hom =
       (mateEquiv (S.properDerived.level n).adjunction S.properDerived.system.adjunction
-        (.mk _ _ _ _ (properInsertion n).hom)).natTrans
+        (.mk _ _ _ _ (properInsertion n).hom))
   openInsertion : ∀ n : ℕ,
     S.PX.derivedExtension n ⋙ S.derivedOpen ≅
       S.levelDerivedOpen n ⋙ S.PZ.derivedExtension n

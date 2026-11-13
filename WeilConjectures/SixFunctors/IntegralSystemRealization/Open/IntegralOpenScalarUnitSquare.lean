@@ -72,9 +72,9 @@ private theorem scalarOpen_unit
     (hq : ∀ M, P.map (e.unit.app M) ≫ d.hom.app (G.obj M) =
       c.unit.app (P.obj M) ≫ U.map (q.app M)) (K : A) :
     F.map (a.unit.app K) ≫ q.app (J.obj K) ≫ P'.map
-      (((mateEquiv c e).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app K) =
+      (((mateEquiv c e).symm (TwoSquare.mk _ _ _ _ r)).app K) =
       b.unit.app (F.obj K) := by
-  let t := ((mateEquiv c e).symm (TwoSquare.mk _ _ _ _ r)).natTrans
+  let t := ((mateEquiv c e).symm (TwoSquare.mk _ _ _ _ r))
   have ht := unit_mateEquiv_symm c e (TwoSquare.mk _ _ _ _ r) K
   change J.map (c.unit.app K) ≫ r.app (F.obj K) =
     e.unit.app (J.obj K) ≫ V.map (t.app K) at ht
@@ -226,7 +226,7 @@ private theorem coefficientOpen_unit
       (WeilConjectures.PurCompactSupport.openAdjunction R j)).symm
       (TwoSquare.mk _ _ _ _ (asIso (proEtaleRingRestrictionPullbackInv
         j (R.ring Y) (S.ring Y) (R.ring X) (S.ring X)
-          (a.map Y) (a.map X) (R.pull j) (S.pull j) (a.square j))).symm.hom)).natTrans := by
+          (a.map Y) (a.map X) (R.pull j) (S.pull j) (a.square j))).symm.hom)) := by
     change IsIso (WeilConjectures.PurCompactSupport.openRestrictionMap a j)
     infer_instance
   have hm := (exact_localization_inverse_mate
@@ -240,7 +240,7 @@ private theorem coefficientOpen_unit
     (WeilConjectures.PurCompactSupport.openDerivedAdjunction R j)).symm
     (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback
       j (R.ring Y) (S.ring Y) (R.ring X) (S.ring X)
-        (a.map Y) (a.map X) (R.pull j) (S.pull j) (a.square j)).hom)).natTrans =
+        (a.map Y) (a.map X) (R.pull j) (S.pull j) (a.square j)).hom)) =
     (WeilConjectures.PurCompactSupport.openRestriction a j).hom at hm
   apply scalarOpen_unit
     (WeilConjectures.PurCompactSupport.openDerivedAdjunction R j)
@@ -259,7 +259,7 @@ private theorem coefficientOpen_unit
         j (R.ring Y) (S.ring Y) (R.ring X) (S.ring X)
           (a.map Y) (a.map X) (R.pull j) (S.pull j) (a.square j)).hom) N
     change _ = _ ≫ (WeilConjectures.PurCompactSupport.pull R j).map
-      (((mateEquiv _ _).symm _).natTrans.app N) at h
+      (((mateEquiv _ _).symm _).app N) at h
     rw [hm] at h
     exact h
   · intro M

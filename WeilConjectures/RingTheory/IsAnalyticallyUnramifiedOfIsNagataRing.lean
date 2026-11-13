@@ -8,6 +8,10 @@ module
 
 public import WeilConjectures.RingTheory.NagataRing
 public import WeilConjectures.RingTheory.AnalyticallyUnramified
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv

@@ -56,8 +56,9 @@ noncomputable def etaleFieldGeometricAction (X : Scheme.Etale (Spec (CommRingCat
     Action (Type u) (Gal(Ksep/K)) where
   V := etaleFieldBasePoint K Ksep ⟶ (Scheme.Etale.forget _).obj X
   ρ :=
-    { toFun := fun g ↦ ↾(fun x ↦ etaleFieldPointAutomorphism K Ksep g ≫ x)
+    { toFun := fun g ↦ End.of (↾(fun x ↦ etaleFieldPointAutomorphism K Ksep g ≫ x))
       map_one' := by
+        apply End.ext
         apply ConcreteCategory.hom_ext
         intro x
         change etaleFieldPointAutomorphism K Ksep 1 ≫ x = x
@@ -68,6 +69,7 @@ noncomputable def etaleFieldGeometricAction (X : Scheme.Etale (Spec (CommRingCat
         rw [h, Category.id_comp]
       map_mul' := by
         intro g h
+        apply End.ext
         apply ConcreteCategory.hom_ext
         intro x
         change etaleFieldPointAutomorphism K Ksep (g * h) ≫ x =

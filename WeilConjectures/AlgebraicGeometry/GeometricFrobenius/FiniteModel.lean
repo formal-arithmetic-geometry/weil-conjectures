@@ -142,8 +142,8 @@ theorem exists_finiteModel_of_isClosedImmersion {k₀ : Type u} [Field k₀] [Fi
       ∃ (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L) (e : g.geometricFiber ≅ C),
         e.hom ≫ i ≫ f.geometricFiberToAlgebraicClosure =
           g.geometricFiberToAlgebraicClosure ≫ Spec.map (CommRingCat.ofHom θ.toRingHom) ∧
-        (e.hom ≫ i) ≫ (f.geometricGaloisFrobenius ^ Module.finrank k₀ L).hom =
-          g.geometricGaloisFrobenius.hom ≫ e.hom ≫ i := by
+        (e.hom ≫ i) ≫ (f.geometricGaloisFrobenius ^ Module.finrank k₀ L).asIso.hom =
+          g.geometricGaloisFrobenius.asIso.hom ≫ e.hom ≫ i := by
   classical
   obtain ⟨R, _, _, eR, heR⟩ := exists_iso_Spec_of_isAffine f
   set K := AlgebraicClosure k₀
@@ -239,7 +239,8 @@ theorem exists_finiteModel_of_isClosedImmersion {k₀ : Type u} [Field k₀] [Fi
     rw [← heR, Category.assoc, Iso.inv_hom_id_assoc, ← Spec.map_comp, ← Spec.map_comp]
     congr 1
     ext c
-    simp only [hom_comp, hom_ofHom, RingHom.comp_apply, ← IsScalarTower.algebraMap_apply, ρ]
+    simp only [CommRingCat.hom_comp, hom_ofHom, RingHom.comp_apply,
+      ← IsScalarTower.algebraMap_apply, ρ]
     exact congrArg (Ideal.Quotient.mk J₀) (Algebra.TensorProduct.includeRight.commutes c)
   let ιY := geometricFiberExtensionMap g (g ≫ Spec.map (ofHom (algebraMap k₀ L))) rfl θ'
   have he : e.hom ≫ i = ιY ≫ geometricFiberMap h hh := by

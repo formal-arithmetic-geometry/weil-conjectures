@@ -77,7 +77,7 @@ theorem isIso_ihomComparison_derivedExtendScalarsSubfield
     letI := Mod.extendScalarsMonoidal (padicSubfieldRingObjMap X ℓ h)
     letI := (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctorMonoidal
     IsIso
-      (Functor.LaxMonoidal.ihomComparison (derivedExtendScalarsSubfield X ℓ h) A).natTrans := by
+      (Functor.LaxMonoidal.ihomComparison (derivedExtendScalarsSubfield X ℓ h) A) := by
   let := Mod.extendScalarsMonoidal (padicSubfieldRingObjMap X ℓ h)
   let := (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctorMonoidal
   have : (derivedExtendScalarsSubfield X ℓ h).Additive :=

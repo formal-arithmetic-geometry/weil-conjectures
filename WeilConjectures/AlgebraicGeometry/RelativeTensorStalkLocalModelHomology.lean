@@ -17,6 +17,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.RelativeTensorStalkGlobalHomology
 import WeilConjectures.AlgebraicGeometry.RelativeTensorGlobalLocalStalkDerivedIso
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Relative tensor homology compared with a local stalk model
 

@@ -317,6 +317,6 @@ noncomputable def proEtaleAmbientRingedExchange
     (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f')
     (TwoSquare.mk _ _ _ _
       (proEtaleAmbientRingedPullbackComparison sq R_X R_Y R_X' R_Y'
-        c_f c_g c_g' c_f' hcoeff).hom)).natTrans
+        c_f c_g c_g' c_f' hcoeff).hom))
 
 end AlgebraicGeometry.Scheme

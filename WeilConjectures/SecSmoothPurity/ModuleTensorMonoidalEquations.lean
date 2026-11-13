@@ -124,7 +124,6 @@ private theorem productElements {A : Type uE} [Category.{vE} A] [HasBinaryProduc
     change (e.hom (e.inv (x, y))).2 = y
     rw [Iso.inv_hom_id_apply]
 
-set_option maxHeartbeats 600000 in
 -- Tensoring the three transported scalar extensions needs dependent conversions.
 private theorem triple_hom_ext (f : RingedPullback R S) (k : Comparison f)
     (M N P : Modules R) (H : Modules S)
@@ -202,7 +201,6 @@ private theorem generator_triple_elements (f : RingedPullback R S) (k : Comparis
     have hi := congrArg (fun v ↦ v.hom.app W p) (f.I.moduleUnderlying.hom_inv_id_app P)
     exact congrArg ((k.q P).hom.app W) hi
 
-set_option maxHeartbeats 600000 in
 -- Triple generators require dependent conversions through scalar extension.
 /-- The ordinary normalized module tensor comparison respects associativity and symmetry.
 Source: Stacks 03EL, lemma-tensor-product-pullback, with the tensor structure of 03EK.

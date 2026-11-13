@@ -63,7 +63,7 @@ noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (g'')_*ᵃ[l] ⋙ (j)^*ᵃ[l] ⟶ (j')^*ᵃ[l] ⋙ (g')_*ᵃ[l] :=
   ((mateEquiv (adicUpperStarLowerStarAdjunction l j')
     (adicUpperStarLowerStarAdjunction l j)).symm
-    (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom))
 
 set_option maxHeartbeats 1600000 in
 -- The kernel needs time to unfold the module structures of the lifted functors.

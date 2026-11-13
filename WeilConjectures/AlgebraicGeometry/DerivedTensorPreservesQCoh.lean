@@ -37,7 +37,6 @@ noncomputable local instance DerivedTensorPreservesQCoh_monoidalCategory (X : Sc
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- The independent localizations and their tensor instances require extra elaboration steps.
 set_option synthInstance.maxSize 2048 in
 /-- Affine-local cohomology calculation for a K-flat tensor representative.

@@ -47,7 +47,7 @@ theorem projection_naturality {U V : Scheme.{t}} (u : U ⟶ V) {M N : D (A := A)
     (exchangeConstantRing U A) (exchangeConstantIso u A)
   let ar := proEtaleRingDerivedAdjunction u (exchangeConstantRing V A)
     (exchangeConstantRing U A) (exchangeConstantIso u A)
-  let pi0 := (mateEquiv ar aj (TwoSquare.mk _ _ _ _ (reductionPullIso d u).hom)).natTrans
+  let pi0 := (mateEquiv ar aj (TwoSquare.mk _ _ _ _ (reductionPullIso d u).hom))
   have hpi (M : D (A := A) U) : pi0.app M = projection d u M := by
     apply (aj.homEquiv _ _).symm.injective
     change (aj.homEquiv _ _).symm (pi0.app M) =

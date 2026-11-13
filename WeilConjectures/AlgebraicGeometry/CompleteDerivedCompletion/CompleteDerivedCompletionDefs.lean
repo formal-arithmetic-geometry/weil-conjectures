@@ -477,7 +477,7 @@ Source: blueprint Assertion 3 (blueprint: det-pbc-complete-derived-completion). 
 def pushEvaluationMap {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
     rpush l E f ⋙ dev l E T n ⟶ dev l E T' n ⋙ rpushModule l E f :=
   (mateEquiv (towerAdjunction l E f) (moduleAdjunction l E f)
-    (.mk _ _ _ _ (pullEvaluation l E f n).inv)).natTrans
+    (.mk _ _ _ _ (pullEvaluation l E f n).inv))
 
 /-- The exact-localization comparison between an exact functor and constant towers.
 Source: blueprint Assertions 4--5 (blueprint: det-pbc-complete-derived-completion). -/

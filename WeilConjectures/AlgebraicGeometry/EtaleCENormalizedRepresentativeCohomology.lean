@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Prescribed normalized CE presentations compute pullback on individual cycle
 representatives. This does not identify any supplied first-page map.

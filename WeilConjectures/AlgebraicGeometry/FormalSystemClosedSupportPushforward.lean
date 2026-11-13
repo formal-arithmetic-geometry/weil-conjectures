@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Direct image of a formal system with closed ambient support
 

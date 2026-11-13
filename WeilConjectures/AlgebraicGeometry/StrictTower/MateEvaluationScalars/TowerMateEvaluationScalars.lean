@@ -560,7 +560,7 @@ def scalarG (φ : B →+* Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
 Source: Stacks 03DI (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
 def scalarJInv (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     moduleRes φ U ⋙ moduleJ B f ⟶ moduleJ Λ f ⋙ moduleRes φ X :=
-  ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm (scalarGModule φ f).hom).natTrans
+  ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm (scalarGModule φ f).hom)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -580,11 +580,11 @@ theorem scalarJInv_app_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     let β := FiniteOpenScalars.fixedPull (A := B) f
     let γ := FiniteOpenScalars.fixedPull (A := Λ) f
     let δ := TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom
-    have : IsIso α.natTrans := by dsimp only [α, TwoSquare.mk]; infer_instance
-    have : IsIso β.natTrans := FiniteOpenScalars.fixedPull_isIso f
-    have : IsIso γ.natTrans := FiniteOpenScalars.fixedPull_isIso f
-    have : IsIso δ.natTrans := by dsimp only [δ, TwoSquare.mk]; infer_instance
-    have : IsIso (TwoSquare.hComp γ δ).natTrans := by
+    have : IsIso α := by dsimp only [α, TwoSquare.mk]; infer_instance
+    have : IsIso β := FiniteOpenScalars.fixedPull_isIso f
+    have : IsIso γ := FiniteOpenScalars.fixedPull_isIso f
+    have : IsIso δ := by dsimp only [δ, TwoSquare.mk]; infer_instance
+    have : IsIso (TwoSquare.hComp γ δ) := by
       dsimp only [TwoSquare.hComp, TwoSquare.mk]
       infer_instance
     let oa := moduleJAdj Λ f
@@ -596,50 +596,50 @@ theorem scalarJInv_app_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     have := fixedRestriction_equivalence Λ U
     have := fixedRestriction_equivalence Λ X
     have : IsIso ((mateEquiv oa od).symm
-        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv γ.natTrans))).natTrans :=
+        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv γ))) :=
       inverseMate_isIso_of_equivalences oa od _
     have : IsIso ((mateEquiv od oc).symm
-        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv δ.natTrans))).natTrans := by
-      simp only [δ, TwoSquare.mk, TwoSquare.natTrans, IsIso.Iso.inv_hom]
+        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv δ))) := by
+      simp only [δ, TwoSquare.mk, IsIso.Iso.inv_hom]
       rw [← scalarPullbackModel_eq B f Λ φ]
       exact scalarOpenModel_isIso B f Λ φ
     have hw : IsIso ((mateEquiv oa oc).symm
         (TwoSquare.mk _ _ _ _
-          (CategoryTheory.inv (TwoSquare.hComp γ δ).natTrans))).natTrans := by
+          (CategoryTheory.inv (TwoSquare.hComp γ δ)))) := by
       rw [inv_hComp, inverseMate_vComp oa od oc]
       dsimp only [TwoSquare.hComp, TwoSquare.mk]
       infer_instance
-    let w := TwoSquare.mk _ _ _ _ (CategoryTheory.inv (TwoSquare.hComp γ δ).natTrans)
+    let w := TwoSquare.mk _ _ _ _ (CategoryTheory.inv (TwoSquare.hComp γ δ))
     let t := TwoSquare.hComp α β
-    have : IsIso t.natTrans := by
+    have : IsIso t := by
       dsimp only [t, TwoSquare.hComp, TwoSquare.mk]
       infer_instance
     let z := Functor.isoWhiskerRight (FiniteOpenScalars.resFixed φ X) _ ≪≫
-      asIso (TwoSquare.hComp γ δ).natTrans ≪≫
+      asIso (TwoSquare.hComp γ δ) ≪≫
       Functor.isoWhiskerLeft (modulePullback Λ f) (FiniteOpenScalars.resFixed φ U).symm
-    have ht : CategoryTheory.inv t.natTrans =
+    have ht : CategoryTheory.inv t =
         ((w.whiskerRight (FiniteOpenScalars.resFixed φ U).hom).whiskerLeft
-          (FiniteOpenScalars.resFixed φ X).inv).natTrans := by
-      have hz : t.natTrans = z.hom :=
-        congrArg TwoSquare.natTrans (FiniteOpenScalars.resPull_fixed φ f)
+          (FiniteOpenScalars.resFixed φ X).inv) := by
+      have hz : t = z.hom :=
+        (FiniteOpenScalars.resPull_fixed φ f)
       calc
-        CategoryTheory.inv t.natTrans = CategoryTheory.inv z.hom :=
+        CategoryTheory.inv t = CategoryTheory.inv z.hom :=
           IsIso.inv_eq_inv.mpr hz
         _ = _ := by
           simp only [IsIso.Iso.inv_hom, z, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
             Functor.isoWhiskerRight_inv, Iso.symm_inv, asIso_inv, w,
             TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk, Category.assoc]
     have hi : IsIso ((mateEquiv oa oc).symm
-        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans))).natTrans := by
+        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t))) := by
       rw [ht]
       exact inverseMate_iso_edges oa oc (FiniteOpenScalars.resFixed φ U)
         (FiniteOpenScalars.resFixed φ X).symm w
     let x := (mateEquiv oa ob).symm (TwoSquare.mk _ _ _ _ (FiniteOpenScalars.pullRes φ f).inv)
     let y := (mateEquiv ob oc).symm
-      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β.natTrans))
-    have : IsIso y.natTrans := inverseMate_isIso_of_equivalences ob oc _
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β))
+    have : IsIso y := inverseMate_isIso_of_equivalences ob oc _
     have he : (mateEquiv oa oc).symm
-        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans)) = TwoSquare.hComp x y := by
+        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t)) = TwoSquare.hComp x y := by
       dsimp only [t]
       rw [inv_hComp]
       exact inverseMate_vComp oa ob oc _ _
@@ -701,7 +701,7 @@ theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X
         (dJAdj B f).counit.app ((Res φ X).obj Q) =
       (Res φ X).map ((dJAdj Λ f).counit.app Q))) := by
   have hm : ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
-      (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)) =
       (scalarJModule φ f).inv := rfl
   have he := SheafOfModules.RingedOpenScalar.equations_of_inverseMate
     (scalarJModule φ f) (scalarGModule φ f).symm
@@ -718,7 +718,7 @@ theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X
         (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom) L
       change _ = _ ≫ (modulePullback B f).map
         (((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
-          (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans.app L) at hh
+          (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).app L) at hh
       rw [hm] at hh
       exact hh.symm) K
   apply SheafOfModules.RingedOpenScalar.equations_of_inverseMate

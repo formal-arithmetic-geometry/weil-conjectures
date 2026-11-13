@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Abelian.Injective.Extend
 import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The immersion ideal annihilates scalar Ext
 

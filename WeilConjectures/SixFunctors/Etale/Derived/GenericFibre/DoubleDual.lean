@@ -90,8 +90,8 @@ of `G` are isomorphisms, then `G δ_X` is an isomorphism if and only if the doub
 `G` is `CategoryTheory.MonoidalClosed.isIso_map_toIhomIhom_iff`. -/
 theorem isIso_map_toIhomIhom_iff_of_iso_tensor (G : C ⥤ D) [G.LaxBraided] {W : C} {W' L : D}
     (hL : IsInvertible L) (e : G.obj W ≅ W' ⊗ L) (X : C)
-    (h₁ : IsIso ((Functor.LaxMonoidal.ihomComparison G X).natTrans.app W))
-    (h₂ : IsIso ((Functor.LaxMonoidal.ihomComparison G ((ihom X).obj W)).natTrans.app W)) :
+    (h₁ : IsIso ((Functor.LaxMonoidal.ihomComparison G X).app W))
+    (h₂ : IsIso ((Functor.LaxMonoidal.ihomComparison G ((ihom X).obj W)).app W)) :
     IsIso (G.map (toIhomIhom W X)) ↔ IsIso (toIhomIhom W' (G.obj X)) := by
   have : IsIso (dualComparison G e.hom X) := by
     rw [dualComparison]

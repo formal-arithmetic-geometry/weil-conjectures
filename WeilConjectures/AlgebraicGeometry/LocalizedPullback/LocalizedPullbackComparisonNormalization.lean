@@ -204,7 +204,7 @@ Stacks, Tags 03CE, 03CF and 04J0.
 private theorem beta_mate :
     (mateEquiv (localizationRestrictionLowerStarAdjunction D e inferInstance)
       (Etale.localizationRestrictionLowerStarAdjunction D e inferInstance)
-      (TwoSquare.mk _ _ _ _ (beta A e).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (beta A e).hom)) =
         (supportSiteComparisonCoefficientDirectImageIso D e).hom := by
   let r := Etale.localizationRestrictionLowerStarAdjunction D e inferInstance
   let s := localizationRestrictionLowerStarAdjunction D e inferInstance
@@ -236,7 +236,7 @@ and 04J0.
 private theorem chi_mate :
     (mateEquiv (Scheme.proEtaleSiteComparisonModules T A)
       (Scheme.proEtaleSiteComparisonModules U A)
-      (TwoSquare.mk _ _ _ _ (chi A e).hom)).natTrans = (beta A e).hom := by
+      (TwoSquare.mk _ _ _ _ (chi A e).hom)) = (beta A e).hom := by
   let r := Etale.localizationRestrictionLowerStarAdjunction D e inferInstance
   let s := localizationRestrictionLowerStarAdjunction D e inferInstance
   let n := Scheme.proEtaleSiteComparisonModules T A
@@ -256,10 +256,10 @@ private theorem inverse_horizontal_paste
     {G₁ : C₁ ⥤ C₂} {P₁ : C₁ ⥤ C₃} {P₂ : C₂ ⥤ C₄} {H₁ : C₃ ⥤ C₄}
     {G₂ : C₂ ⥤ C₅} {P₃ : C₅ ⥤ C₆} {H₂ : C₄ ⥤ C₆}
     (i : P₁ ⋙ H₁ ≅ G₁ ⋙ P₂) (β : TwoSquare G₂ P₂ P₃ H₂)
-    [IsIso (TwoSquare.hComp i.inv β).natTrans] :
-    inv (TwoSquare.hComp i.inv β).natTrans ≫ Functor.whiskerLeft G₁ β.natTrans =
+    [IsIso (TwoSquare.hComp i.inv β)] :
+    inv (TwoSquare.hComp i.inv β) ≫ Functor.whiskerLeft G₁ β =
       Functor.whiskerRight i.hom H₂ := by
-  apply (cancel_epi (TwoSquare.hComp i.inv β).natTrans).1
+  apply (cancel_epi (TwoSquare.hComp i.inv β)).1
   simp only [← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
   apply NatTrans.ext
   funext X
@@ -276,7 +276,7 @@ private theorem coefficient_comparison [TopologicalSpace A] [DiscreteTopology A]
         ((mateEquiv (supportSiteProEtaleComparisonAdjunction (ModuleCat.{u + 1} A) e)
           (Scheme.proEtaleRingModuleAdjunction e (StrictTower.coefficients A T)
             (StrictTower.coefficients A U) (StrictTower.constantRingIso A e))).symm
-          (StrictTower.cDirect A e A (RingHom.id A)).hom).natTrans ∧
+          (StrictTower.cDirect A e A (RingHom.id A)).hom) ∧
       (@inv _ _ _ _ (StrictTower.hPullbackInv A e A (RingHom.id A))
         (StrictTower.hPullbackInv_isIso A e A (RingHom.id A))) ≫
           Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} A) T) j.hom =
@@ -289,14 +289,14 @@ private theorem coefficient_comparison [TopologicalSpace A] [DiscreteTopology A]
     (StrictTower.coefficients A U) (StrictTower.constantRingIso A e)
   let α := (supportSiteComparisonCoefficientPullbackIso D e).inv
   let β := (mateEquiv b c).symm (StrictTower.cDirect A e A (RingHom.id A)).hom
-  have hi : IsIso β.natTrans := StrictTower.cPullback_isIso A e A (RingHom.id A)
-  let j := asIso β.natTrans
+  have hi : IsIso β := StrictTower.cPullback_isIso A e A (RingHom.id A)
+  let j := asIso β
   have : IsIso (StrictTower.hPullbackInv A e A (RingHom.id A)) :=
     StrictTower.hPullbackInv_isIso A e A (RingHom.id A)
   have hp := mateEquiv_vcomp a b c α β
   rw [Equiv.apply_symm_apply] at hp
   have he : StrictTower.hPullbackInv A e A (RingHom.id A) =
-      (TwoSquare.hComp α β).natTrans := by
+      (TwoSquare.hComp α β) := by
     apply (mateEquiv a c).injective
     change (mateEquiv a c) ((mateEquiv a c).symm
       (StrictTower.hDirect A e A (RingHom.id A))) = _
@@ -308,13 +308,13 @@ private theorem coefficient_comparison [TopologicalSpace A] [DiscreteTopology A]
           Functor.whiskerLeft (comparisonUpperStar D T) j.hom =
       Functor.whiskerRight (supportSiteComparisonCoefficientPullbackIso D e).hom
         (StrictTower.C A U A (RingHom.id A)) := by
-    have : IsIso (TwoSquare.hComp α β).natTrans := by
+    have : IsIso (TwoSquare.hComp α β) := by
       rw [← he]
       infer_instance
     have hinv :
         (@inv _ _ _ _ (StrictTower.hPullbackInv A e A (RingHom.id A))
           (StrictTower.hPullbackInv_isIso A e A (RingHom.id A))) =
-        inv (TwoSquare.hComp α β).natTrans := (IsIso.inv_eq_inv).2 he
+        inv (TwoSquare.hComp α β) := (IsIso.inv_eq_inv).2 he
     rw [hinv]
     exact inverse_horizontal_paste (supportSiteComparisonCoefficientPullbackIso D e) β
   exact ⟨j, rfl, htransport⟩
@@ -359,7 +359,7 @@ theorem normalization [TopologicalSpace A] [DiscreteTopology A] :
       ((beta A e).hom.app G).hom.app (op W) = 𝟙 _) ∧
     (mateEquiv (Scheme.proEtaleSiteComparisonModules T A)
       (Scheme.proEtaleSiteComparisonModules U A)
-      (TwoSquare.mk _ _ _ _ (chi A e).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (chi A e).hom)) =
         (beta A e).hom ∧
     (∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
       (Scheme.proEtaleSiteComparisonModules U A).unit.app
@@ -374,7 +374,7 @@ theorem normalization [TopologicalSpace A] [DiscreteTopology A] :
         ((mateEquiv (supportSiteProEtaleComparisonAdjunction (ModuleCat.{u + 1} A) e)
           (Scheme.proEtaleRingModuleAdjunction e (StrictTower.coefficients A T)
             (StrictTower.coefficients A U) (StrictTower.constantRingIso A e))).symm
-          (StrictTower.cDirect A e A (RingHom.id A)).hom).natTrans ∧
+          (StrictTower.cDirect A e A (RingHom.id A)).hom) ∧
       (@inv _ _ _ _ (StrictTower.hPullbackInv A e A (RingHom.id A))
         (StrictTower.hPullbackInv_isIso A e A (RingHom.id A))) ≫
           Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} A) T) j.hom =
@@ -405,7 +405,7 @@ theorem normalization [TopologicalSpace A] [DiscreteTopology A] :
       (TwoSquare.mk _ _ _ _ (chi A e).hom) F
     change _ ≫ ((mateEquiv (Scheme.proEtaleSiteComparisonModules T A)
       (Scheme.proEtaleSiteComparisonModules U A)
-      (TwoSquare.mk _ _ _ _ (chi A e).hom)).natTrans).app _ = _ at h
+      (TwoSquare.mk _ _ _ _ (chi A e).hom))).app _ = _ at h
     rw [hmate] at h
     exact h.symm
   · obtain ⟨j, hj, htransport⟩ := coefficient_comparison A e

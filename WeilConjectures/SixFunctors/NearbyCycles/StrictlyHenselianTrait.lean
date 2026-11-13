@@ -138,7 +138,7 @@ private lemma Hom.isIso_pullbackExchange_app_of_isIso_map_baseChangeMap_app
   isIso_pullbackExchange_app_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     _ (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ)
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl K h
 

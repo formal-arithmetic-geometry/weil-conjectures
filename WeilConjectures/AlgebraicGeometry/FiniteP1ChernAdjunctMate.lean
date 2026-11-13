@@ -47,8 +47,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
-      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α) =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)) := by
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
@@ -142,10 +142,10 @@ private theorem adjunct_mate
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (adj : L ⊣ R) (adj' : L' ⊣ R') (G : C ⥤ E) (H : D ⥤ F)
     (θ : TwoSquare G L L' H) {A : C} {K : D} (z : L.obj A ⟶ K) :
-    G.map (adj.homEquiv A K z) ≫ (mateEquiv adj adj' θ).natTrans.app K =
-      adj'.homEquiv (G.obj A) (H.obj K) (θ.natTrans.app A ≫ H.map z) := by
+    G.map (adj.homEquiv A K z) ≫ (mateEquiv adj adj' θ).app K =
+      adj'.homEquiv (G.obj A) (H.obj K) (θ.app A ≫ H.map z) := by
   rw [adj.homEquiv_unit, G.map_comp, Category.assoc]
-  have hn := (mateEquiv adj adj' θ).natTrans.naturality z
+  have hn := (mateEquiv adj adj' θ).naturality z
   simp only [Functor.comp_map] at hn
   rw [hn]
   rw [← Category.assoc, unit_mateEquiv, Category.assoc, ← R'.map_comp,
@@ -159,9 +159,9 @@ private lemma adjunct_mate_square
     (θ : TwoSquare G L L' H) {P : C} {Q K : D} {P' : E} {Q' K' : F}
     (a : L.obj P ⟶ Q) (b : G.obj P ⟶ P') (a' : L'.obj P' ⟶ Q')
     (v : H.obj Q ⟶ Q') (c : Q ⟶ K) (c' : Q' ⟶ K') (d : H.obj K ⟶ K')
-    (hs : θ.natTrans.app P ≫ H.map a ≫ v = L'.map b ≫ a')
+    (hs : θ.app P ≫ H.map a ≫ v = L'.map b ≫ a')
     (hc : H.map c ≫ d = v ≫ c') :
-    G.map (adj.homEquiv _ _ (a ≫ c)) ≫ (mateEquiv adj adj' θ).natTrans.app K ≫
+    G.map (adj.homEquiv _ _ (a ≫ c)) ≫ (mateEquiv adj adj' θ).app K ≫
       R'.map d = b ≫ adj'.homEquiv _ _ (a' ≫ c') := by
   rw [reassoc_of% adjunct_mate adj adj' G H θ (a ≫ c)]
   rw [← adj'.homEquiv_naturality_right, ← adj'.homEquiv_naturality_left]

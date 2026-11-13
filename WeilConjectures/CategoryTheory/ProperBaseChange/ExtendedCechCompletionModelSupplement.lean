@@ -368,7 +368,6 @@ private theorem compose_three_squares {D : Type*} [Category D]
     _ = a ≫ b ≫ (h ≫ c') := by rw [hb]; simp only [Category.assoc]
     _ = _ := by rw [hc]; simp only [Category.assoc]
 
-set_option maxHeartbeats 1200000 in
 -- Descending evaluation compares several expanded product-localization functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem unit_isIso_of_complete_universal

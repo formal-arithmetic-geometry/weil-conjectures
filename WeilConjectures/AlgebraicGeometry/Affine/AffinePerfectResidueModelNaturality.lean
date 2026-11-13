@@ -184,7 +184,6 @@ variable
   [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
     (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]
 
-set_option maxHeartbeats 500000 in
 -- The natural comparison traverses complex, homotopy and derived localization functors.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

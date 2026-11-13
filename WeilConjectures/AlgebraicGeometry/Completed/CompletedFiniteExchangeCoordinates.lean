@@ -88,8 +88,8 @@ private theorem inverseMate_isIso_change_left
     {G : C ⥤ E} {H : D ⥤ F}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (b' : L₂' ⊣ R₂)
     (α : TwoSquare R₁ H G R₂)
-    (hα : IsIso ((mateEquiv a b).symm α).natTrans) :
-    IsIso ((mateEquiv a b').symm α).natTrans := by
+    (hα : IsIso ((mateEquiv a b).symm α)) :
+    IsIso ((mateEquiv a b').symm α) := by
   let w := (mateEquiv a b').symm α
   have h := mateEquiv_leftAdjointUniq a a b b' w
   have hself : a.leftAdjointUniq a = Iso.refl _ :=
@@ -97,15 +97,15 @@ private theorem inverseMate_isIso_change_left
   rw [hself] at h
   simp only [Iso.refl_inv, Functor.whiskerRight_id', Category.comp_id,
     w, Equiv.apply_symm_apply] at h
-  have h' := congrArg TwoSquare.natTrans ((mateEquiv a b).injective
+  have h' := ((mateEquiv a b).injective
     (h.trans (Equiv.apply_symm_apply (mateEquiv a b) α).symm))
-  change Functor.whiskerLeft G (b.leftAdjointUniq b').hom ≫ w.natTrans =
-    ((mateEquiv a b).symm α).natTrans at h'
-  have : IsIso (Functor.whiskerLeft G (b.leftAdjointUniq b').hom ≫ w.natTrans) := by
+  change Functor.whiskerLeft G (b.leftAdjointUniq b').hom ≫ w =
+    ((mateEquiv a b).symm α) at h'
+  have : IsIso (Functor.whiskerLeft G (b.leftAdjointUniq b').hom ≫ w) := by
     rw [h']
     exact hα
   exact (isIso_comp_left_iff
-    (Functor.whiskerLeft G (b.leftAdjointUniq b').hom) w.natTrans).mp inferInstance
+    (Functor.whiskerLeft G (b.leftAdjointUniq b').hom) w).mp inferInstance
 
 private theorem finiteProjection_pullback {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     completedCoefficientMap f d ≫ cbcFiniteProjection d S n =
@@ -221,7 +221,7 @@ def cbcFinitePullRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
   ((mateEquiv
     (proEtaleRingModuleAdjunction f _ _ (constantRingIso (cbcFiniteRing d n) f))
     (cbcModulePullbackAdjunction d f)).symm
-      (TwoSquare.mk _ _ _ _ (cbcFiniteDirectRes d f n).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (cbcFiniteDirectRes d f n).hom))
 
 /-- The ordinary pullback mate is invertible at finite coefficients.
 Source: Stacks 03EK, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates).
@@ -255,12 +255,12 @@ constant-ring comparison and balancing make these maps mutually inverse. -/
     (cbcFiniteProjection d T n) (cbcFiniteProjection d S n) c cB h
   have hβ : IsIso β := proEtaleRingRestrictionPullbackInv_isIso
     f R B RS B' (cbcFiniteProjection d T n) (cbcFiniteProjection d S n) c cB h
-  have hm : (mateEquiv a b (TwoSquare.mk _ _ _ _ β)).natTrans = z.hom :=
+  have hm : (mateEquiv a b (TwoSquare.mk _ _ _ _ β)) = z.hom :=
     restrictionPullback_mate f R B RS B'
       (cbcFiniteProjection d T n) (cbcFiniteProjection d S n) c cB h
   have hm' : mateEquiv a b (TwoSquare.mk _ _ _ _ β) =
-      TwoSquare.mk _ _ _ _ z.hom := (TwoSquare.equivNatTrans _ _ _ _).injective hm
-  have hi : IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ z.hom)).natTrans := by
+      TwoSquare.mk _ _ _ _ z.hom := hm
+  have hi : IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ z.hom)) := by
     rw [← hm', Equiv.symm_apply_apply]
     exact hβ
   have hi' := inverseMate_isIso_change_left a b (cbcModulePullbackAdjunction d f)
@@ -638,7 +638,7 @@ def cbcFiniteOpenRes {W T : Scheme.{u}}
       (@moduleJ.{u} (cbcFiniteRing d n) _ W T e he) ⋙ cbcFiniteRes d T n :=
   ((mateEquiv (@moduleJAdj.{u} (cbcFiniteRing d n) _ W T e he)
     (cbcOpenAdjunction d e he)).symm
-      (TwoSquare.mk _ _ _ _ (cbcFiniteOpenRestriction d e he n).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (cbcFiniteOpenRestriction d e he n).hom))
 
 private def finiteSliceRing (T : Scheme.{u}) (W : T.ProEt) (n : ℕ) :
     (coefficients (cbcFiniteRing d n) T).over W ≅

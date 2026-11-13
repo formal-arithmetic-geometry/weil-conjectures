@@ -41,9 +41,9 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
   have := HasBaseChange.isIso_baseChange (F := F) 𝒯.isPullback_fg
   have := HasBaseChange.isIso_baseChange (F := F) 𝒯.isPullback_gh
   have := HasBaseChange.isIso_baseChange (F := F) 𝒯.isPullback_mid
-  have : IsIso (F.baseChange 𝒯.cf.g (𝒯.q ≫ 𝒯.q') 𝒯.cgh.i 𝒯.p₁ 𝒯.f_gh.isPullback.w).natTrans :=
+  have : IsIso (F.baseChange 𝒯.cf.g (𝒯.q ≫ 𝒯.q') 𝒯.cgh.i 𝒯.p₁ 𝒯.f_gh.isPullback.w) :=
     HasBaseChange.isIso_baseChange (F := F) 𝒯.f_gh.isPullback
-  have : IsIso (F.baseChange 𝒯.cfg.g 𝒯.q' 𝒯.ch.i (𝒯.p₁ ≫ 𝒯.p₂) 𝒯.fg_h.isPullback.w).natTrans :=
+  have : IsIso (F.baseChange 𝒯.cfg.g 𝒯.q' 𝒯.ch.i (𝒯.p₁ ≫ 𝒯.p₂) 𝒯.fg_h.isPullback.w) :=
     HasBaseChange.isIso_baseChange (F := F) 𝒯.fg_h.isPullback
   ext K
   have hV := congr_app (F.exchange_paste_vert 𝒯.cf.g 𝒯.p 𝒯.p₁ 𝒯.q 𝒯.cg.i 𝒯.q' 𝒯.q₂
@@ -66,10 +66,10 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
   have hSC := F.shComp'_assoc_inv_app 𝒯.cf.i 𝒯.q 𝒯.q' 𝒯.cfg.i (𝒯.q ≫ 𝒯.q') 𝒯.cfgh.i 𝒯.i_q rfl
     𝒯.i_q' 𝒯.f_gh.i_q K
   -- naturality
-  have hεgh := (F.exchange 𝒯.cg.g 𝒯.q₂ 𝒯.ch.i 𝒯.p₂ 𝒯.isPullback_gh.w).natTrans.naturality
-    ((F.exchange 𝒯.cf.g 𝒯.q 𝒯.cg.i 𝒯.p 𝒯.isPullback_fg.w).natTrans.app ((F.sh 𝒯.cf.i).obj K) ≫
+  have hεgh := (F.exchange 𝒯.cg.g 𝒯.q₂ 𝒯.ch.i 𝒯.p₂ 𝒯.isPullback_gh.w).naturality
+    ((F.exchange 𝒯.cf.g 𝒯.q 𝒯.cg.i 𝒯.p 𝒯.isPullback_fg.w).app ((F.sh 𝒯.cf.i).obj K) ≫
       (F.pf 𝒯.p).map ((F.shComp' 𝒯.cf.i 𝒯.q 𝒯.cfg.i 𝒯.i_q).inv.app K))
-  have hεR := (F.exchange 𝒯.p 𝒯.q' 𝒯.q₂ 𝒯.p₁ 𝒯.isPullback_mid.w).natTrans.naturality
+  have hεR := (F.exchange 𝒯.p 𝒯.q' 𝒯.q₂ 𝒯.p₁ 𝒯.isPullback_mid.w).naturality
     ((F.shComp' 𝒯.cf.i 𝒯.q 𝒯.cfg.i 𝒯.i_q).inv.app K)
   have hP := (F.pfComp' 𝒯.p₁ 𝒯.p₂ (𝒯.p₁ ≫ 𝒯.p₂) rfl).inv.naturality
     ((F.shComp' 𝒯.cfg.i 𝒯.q' 𝒯.cfgh.i 𝒯.i_q').inv.app K)

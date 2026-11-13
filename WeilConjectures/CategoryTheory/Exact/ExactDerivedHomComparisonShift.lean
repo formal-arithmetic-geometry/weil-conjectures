@@ -33,8 +33,8 @@ private theorem mate_naturality
     (G : C ⥤ D) (α : L₂ ⟶ L₁) (δ : L₄ ⟶ L₃)
     (t₁ : TwoSquare G L₁ L₃ G) (t₂ : TwoSquare G L₂ L₄ G)
     (h : t₂.whiskerLeft α = t₁.whiskerRight δ) :
-    whiskerRight (conjugateEquiv a₁ a₂ α) G ≫ (mateEquiv a₂ a₄ t₂).natTrans =
-      (mateEquiv a₁ a₃ t₁).natTrans ≫ whiskerLeft G (conjugateEquiv a₃ a₄ δ) := by
+    whiskerRight (conjugateEquiv a₁ a₂ α) G ≫ (mateEquiv a₂ a₄ t₂) =
+      (mateEquiv a₁ a₃ t₁) ≫ whiskerLeft G (conjugateEquiv a₃ a₄ δ) := by
   have hh := congrArg (mateEquiv a₁ a₄) h
   rw [conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp] at hh
   exact hh
@@ -57,7 +57,7 @@ private theorem shift_mate
     {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
     (G : C ⥤ D) [G.CommShift ℤ] (n : ℤ) :
     (mateEquiv (shiftEquiv C n).toAdjunction (shiftEquiv D n).toAdjunction
-      ((G.commShiftIso n).inv)).natTrans = (G.commShiftIso (-n)).hom := by
+      ((G.commShiftIso n).inv)) = (G.commShiftIso (-n)).hom := by
   ext M
   have h : (shiftFunctorCompIsoId D n (-n) (add_neg_cancel n)).inv.app
         (G.obj ((shiftFunctor C (-n)).obj M)) ≫
@@ -98,8 +98,8 @@ private theorem sourceShift_comparison (K M : C) (n : ℤ)
         ((G.commShiftIso n).inv.app K ▷ G.obj X) ≫ LaxMonoidal.μ G (K⟦n⟧) X) :
     G.map ((siteHomSourceShift K n).hom.app M) ≫
         (G.commShiftIso (-n)).hom.app ((ihom K).obj M) ≫
-        ((LaxMonoidal.ihomComparison G K).natTrans.app M)⟦-n⟧' =
-      (LaxMonoidal.ihomComparison G (K⟦n⟧)).natTrans.app M ≫
+        ((LaxMonoidal.ihomComparison G K).app M)⟦-n⟧' =
+      (LaxMonoidal.ihomComparison G (K⟦n⟧)).app M ≫
         (pre ((G.commShiftIso n).inv.app K)).app (G.obj M) ≫
         (siteHomSourceShift (G.obj K) n).hom.app (G.obj M) := by
   let eC := (tensorLeft K).commShiftIso n ≪≫ (siteHomTensorParameterShift K n).symm
@@ -115,7 +115,7 @@ private theorem sourceShift_comparison (K M : C) (n : ℤ)
       ext X
       dsimp [t, TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
         eC, eD, LaxMonoidal.μTwoSquare]
-      simpa only [TwoSquare.natTrans, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
         Category.id_comp, Category.comp_id, Category.assoc] using ht X)
   have hc : conjugateEquiv (ihom.adjunction (K⟦n⟧)) aC eC.hom =
       (siteHomSourceShift K n).hom := (sourceShift_conjugate K n).symm
@@ -128,7 +128,7 @@ private theorem sourceShift_comparison (K M : C) (n : ℤ)
   rw [hc, hd] at h
   change whiskerRight (siteHomSourceShift K n).hom G ≫
     (mateEquiv ((shiftEquiv C n).toAdjunction.comp (ihom.adjunction K))
-      ((shiftEquiv D n).toAdjunction.comp (ihom.adjunction (G.obj K))) t).natTrans = _ at h
+      ((shiftEquiv D n).toAdjunction.comp (ihom.adjunction (G.obj K))) t) = _ at h
   rw [show t = TwoSquare.vComp ((G.commShiftIso n).inv)
     (LaxMonoidal.μTwoSquare G K) from rfl, mateEquiv_hcomp] at h
   have hs : mateEquiv (shiftEquiv C n).toAdjunction (shiftEquiv D n).toAdjunction
@@ -137,7 +137,7 @@ private theorem sourceShift_comparison (K M : C) (n : ℤ)
   have hh := NatTrans.congr_app h M
   dsimp only [TwoSquare.hComp, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
     associator_hom_app, associator_inv_app] at hh
-  simpa only [shiftEquiv'_inverse, Functor.comp_obj, TwoSquare.natTrans,
+  simpa only [shiftEquiv'_inverse, Functor.comp_obj,
     LaxMonoidal.ihomComparison, Category.id_comp, Category.comp_id, Category.assoc] using hh
 end Generic
 section Derived

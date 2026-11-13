@@ -14,6 +14,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Algebra.Homology.OpenRestrictionTensorNatural
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Open restriction of ordinary tensor homology
 

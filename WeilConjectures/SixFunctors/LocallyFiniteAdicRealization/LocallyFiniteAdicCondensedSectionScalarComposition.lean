@@ -727,7 +727,6 @@ private def finiteSectionRestrictionIso
     (ProEtale.CondensedRing.sectionModuleComapIso X
       (ProEtale.padicSubfieldRingObjMap X l h))
 
-set_option maxHeartbeats 1600000 in
 private theorem finiteSection_isMate
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     mateEquiv
@@ -761,7 +760,6 @@ private def closureSectionRestrictionIso (E : Index l (PadicAlgCl l)) :
   exact Functor.mapDerivedCategorySquareIso
     (ProEtale.CondensedRing.sectionModuleComapIso X
       (ProEtale.padicSubfieldRingObjToPadicAlgCl X l E))
-set_option maxHeartbeats 1600000 in
 private theorem closureSection_isMate (E : Index l (PadicAlgCl l)) :
     mateEquiv
       (closureSectionAdjunction l X E)
@@ -784,7 +782,6 @@ private theorem closureSection_isMate (E : Index l (PadicAlgCl l)) :
     (InternalAbelianSheafModule.sectionModuleEquivalence (ProEt.topology X)
       (ProEtale.padicAlgClRingObj X l)).functor.mapDerivedCategory _
 
-set_option maxHeartbeats 1600000 in
 private theorem finiteClosureSectionScalarComparison_comp
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -1097,7 +1094,6 @@ Source: BS 6.8.2, the section scalar adjunction and the finite coefficient cocon
     Functor.isoWhiskerRight (eqToIso (finiteCondensedEncoding_functor l X A E)).symm
       (pbcDerivedExtend (A.closure.leg E))
 
-set_option maxHeartbeats 1600000 in
 /-- The section scalar mate preserves composition to the closure.
 Source: BS 6.8.2 and tensor transitivity in 6.8.14(2).
 (blueprint: lem-sf-finite-condensed-section-scalar-composition).

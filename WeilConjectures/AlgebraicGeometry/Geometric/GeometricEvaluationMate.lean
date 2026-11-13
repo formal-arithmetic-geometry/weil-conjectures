@@ -107,7 +107,7 @@ theorem geometricEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ) :
     IsIso (mateEquiv O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction
       (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        ((geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O) n).inv)).natTrans := by
+        ((geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O) n).inv)) := by
   classical
   let d := singletonModel.{c, v, r} J B τ n
   let d' := singletonModel.{c, v, r} J' O.coefficients O.coefficientTransition n
@@ -115,11 +115,11 @@ theorem geometricEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ) :
   let δ := (O.ordinaryPullEvaluation n).symm
   let δD := (geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O n).symm
   let a := ((mateEquiv d.ordinaryAdj d'.ordinaryAdj).symm
-    (TwoSquare.mk _ _ _ _ δ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δ.hom))
   have ha : IsIso a := geometricOrdinaryEvaluationMate_isIso
     J B τ J' uInv uPush adjSet O n d.ordinary d'.ordinary d.ordinaryAdj d'.ordinaryAdj
   let aD := ((mateEquiv d.adjunction d'.adjunction).symm
-    (TwoSquare.mk _ _ _ _ δD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δD.hom))
   have hflat (P : CochainComplex (Mod.{c, v, max c v r} J (B n)) ℤ)
       (hP : SheafOfModules.systemLevelKFlat.{c, v, max c v r} (rings.{c, v, max c v r} J B τ) n P) :
       SheafOfModules.systemLevelKFlat.{c, v, max c v r}
@@ -150,7 +150,7 @@ theorem geometricEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ) :
   rw [Equiv.apply_symm_apply] at h
   change IsIso (mateEquiv O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction
     (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ δD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δD.hom))
   rw [h]
   infer_instance
 

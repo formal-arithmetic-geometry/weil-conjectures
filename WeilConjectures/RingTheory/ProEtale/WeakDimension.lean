@@ -18,6 +18,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.SimpleRing.Principal
 public import Mathlib.RingTheory.TotallySplit
 public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.LinearAlgebra.TensorProduct.Prod
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Weak dimension of a commutative ring

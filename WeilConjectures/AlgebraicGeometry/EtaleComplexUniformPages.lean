@@ -31,7 +31,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 -- Elaborate the dependent presentation family and its naturality equations.
 set_option linter.unusedVariables false in
 /-- Uniform pages and natural graded comparisons, before choosing any class representatives.

@@ -40,7 +40,7 @@ continuous homogeneous cochains with values in `N`. It is the composite of
 `DiscreteModule.discreteContinuousRepEquivalence`. -/
 noncomputable def hAddEquivContinuousCohomology (M : DiscreteModule.{w} G)
     (N : TopRep.{max u t} ℤ G) [DiscreteTopology N.V] (e : M.obj.V ≃+ N.V)
-    (he : ∀ (g : G) (x : M.obj.V), e ((M.obj.ρ g).hom x) = N.ρ g (e x)) (n : ℕ) :
+    (he : ∀ (g : G) (x : M.obj.V), e ((M.obj.ρ g).asHom.hom x) = N.ρ g (e x)) (n : ℕ) :
     H G M n ≃+ continuousCohomology n N :=
   (hAddEquivRightDerivedInvariants G M n).trans <|
     Rep.rightDerivedAddEquivContinuousCohomology G (DiscreteModule.{w} G)

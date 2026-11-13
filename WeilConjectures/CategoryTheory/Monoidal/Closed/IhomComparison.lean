@@ -169,8 +169,8 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
 the comparison map `F [𝟙_ C, Q] ⟶ [F (𝟙_ C), F Q]` is an isomorphism, since composed with
 `[ε F, F Q]` and evaluation it is `F` applied to the evaluation `[𝟙_ C, Q] ≅ Q`. -/
 theorem isIso_ihomComparison_app_unit [IsIso (ε F)] (Q : C) :
-    IsIso ((ihomComparison F (𝟙_ C)).natTrans.app Q) := by
-  have h : (ihomComparison F (𝟙_ C)).natTrans.app Q ≫ (pre (ε F)).app (F.obj Q) ≫
+    IsIso ((ihomComparison F (𝟙_ C)).app Q) := by
+  have h : (ihomComparison F (𝟙_ C)).app Q ≫ (pre (ε F)).app (F.obj Q) ≫
       (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q) =
       F.map ((λ_ _).inv ≫ (ihom.ev (𝟙_ C)).app Q) := by
     rw [leftUnitor_inv_naturality_assoc, leftUnitor_inv_naturality_assoc,
@@ -180,7 +180,7 @@ theorem isIso_ihomComparison_app_unit [IsIso (ε F)] (Q : C) :
       ← left_unitality_inv_assoc]
   have := isIso_leftUnitor_inv_comp_ev (F.obj Q)
   have := isIso_leftUnitor_inv_comp_ev Q
-  have : IsIso ((ihomComparison F (𝟙_ C)).natTrans.app Q ≫ (pre (ε F)).app (F.obj Q) ≫
+  have : IsIso ((ihomComparison F (𝟙_ C)).app Q ≫ (pre (ε F)).app (F.obj Q) ≫
       (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q)) := by
     rw [h]
     infer_instance
@@ -190,22 +190,22 @@ theorem isIso_ihomComparison_app_unit [IsIso (ε F)] (Q : C) :
 /-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `B` if and only if it is one
 at any `B'` isomorphic to `B`. -/
 lemma isIso_ihomComparison_app_iff_of_iso_right (A : C) {B B' : C} (e : B ≅ B') :
-    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F A).natTrans.app B') :=
+    IsIso ((ihomComparison F A).app B) ↔ IsIso ((ihomComparison F A).app B') :=
   NatTrans.isIso_app_iff_of_iso _ e
 
 /-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `A` if and only if it is one
 at any `A'` isomorphic to `A`
 (`CategoryTheory.Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app`). -/
 lemma isIso_ihomComparison_app_iff_of_iso_left {A A' : C} (e : A ≅ A') (B : C) :
-    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F A').natTrans.app B) := by
+    IsIso ((ihomComparison F A).app B) ↔ IsIso ((ihomComparison F A').app B) := by
   have h := map_pre_app_comp_ihomComparison_app F e.hom B
   constructor
   · intro _
-    have : IsIso ((ihomComparison F A').natTrans.app B ≫ (pre (F.map e.hom)).app (F.obj B)) := by
+    have : IsIso ((ihomComparison F A').app B ≫ (pre (F.map e.hom)).app (F.obj B)) := by
       rw [← h]; infer_instance
     exact IsIso.of_isIso_comp_right _ ((pre (F.map e.hom)).app (F.obj B))
   · intro _
-    have : IsIso (F.map ((pre e.hom).app B) ≫ (ihomComparison F A).natTrans.app B) := by
+    have : IsIso (F.map ((pre e.hom).app B) ≫ (ihomComparison F A).app B) := by
       rw [h]; infer_instance
     exact IsIso.of_isIso_comp_left (F.map ((pre e.hom).app B)) _
 
@@ -217,11 +217,11 @@ variable [Preadditive C] [Preadditive D] [MonoidalPreadditive C] [MonoidalPreadd
 objects out of which it preserves internal homs: an inverse of the comparison map of `⨁ P` is
 assembled from the inverses for the summands, `[-, Q]` being additive. -/
 theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type} [Finite J] (P : J → C)
-    [HasBiproduct P] (Q : C) [∀ j, IsIso ((ihomComparison F (P j)).natTrans.app Q)] :
-    IsIso ((ihomComparison F (⨁ P)).natTrans.app Q) := by
+    [HasBiproduct P] (Q : C) [∀ j, IsIso ((ihomComparison F (P j)).app Q)] :
+    IsIso ((ihomComparison F (⨁ P)).app Q) := by
   have := Fintype.ofFinite J
   refine ⟨∑ j, (pre (F.map (biproduct.ι P j))).app (F.obj Q) ≫
-    CategoryTheory.inv ((ihomComparison F (P j)).natTrans.app Q) ≫
+    CategoryTheory.inv ((ihomComparison F (P j)).app Q) ≫
       F.map ((pre (biproduct.π P j)).app Q),
     ?_, ?_⟩
   · rw [Preadditive.comp_sum]
@@ -251,22 +251,22 @@ comparison map is then a morphism between two kernels of isomorphic morphisms. -
 theorem isIso_ihomComparison_app_of_isColimit [F.PreservesZeroMorphisms] {P₁ P₀ P : C}
     {f : P₁ ⟶ P₀} {π : P₀ ⟶ P} (w : f ≫ π = 0) (hπ : IsColimit (CokernelCofork.ofπ π w))
     (Q : C) [PreservesLimit (parallelPair ((pre f).app Q) 0) F] [Epi (F.map π)]
-    [IsIso ((ihomComparison F P₀).natTrans.app Q)]
-    [IsIso ((ihomComparison F P₁).natTrans.app Q)] :
-    IsIso ((ihomComparison F P).natTrans.app Q) := by
+    [IsIso ((ihomComparison F P₀).app Q)]
+    [IsIso ((ihomComparison F P₁).app Q)] :
+    IsIso ((ihomComparison F P).app Q) := by
   have ht : IsLimit (KernelFork.ofι (f := F.map ((pre f).app Q)) (F.map ((pre π).app Q))
       (by rw [← F.map_comp, ← NatTrans.comp_app, ← pre_map, w, pre_zero_app, F.map_zero])) :=
     KernelFork.mapIsLimit _ (isLimitKernelForkPreApp w hπ Q) F
   have := mono_pre_app (F.map π) (F.obj Q)
   have h₀ := map_pre_app_comp_ihomComparison_app F π Q
-  have h₁ : CategoryTheory.inv ((ihomComparison F P₀).natTrans.app Q) ≫
+  have h₁ : CategoryTheory.inv ((ihomComparison F P₀).app Q) ≫
       F.map ((pre f).app Q) = (pre (F.map f)).app (F.obj Q) ≫
-        CategoryTheory.inv ((ihomComparison F P₁).natTrans.app Q) := by
+        CategoryTheory.inv ((ihomComparison F P₁).app Q) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, IsIso.eq_comp_inv,
       map_pre_app_comp_ihomComparison_app]
   obtain ⟨d, hd⟩ := KernelFork.IsLimit.lift' ht
     ((pre (F.map π)).app (F.obj Q) ≫
-      CategoryTheory.inv ((ihomComparison F P₀).natTrans.app Q)) (by
+      CategoryTheory.inv ((ihomComparison F P₀).app Q)) (by
       rw [Category.assoc, h₁, ← Category.assoc, ← NatTrans.comp_app,
         ← pre_map, ← F.map_comp, w, F.map_zero, pre_zero_app, zero_comp])
   simp only [Fork.ι_ofι] at hd

@@ -74,7 +74,7 @@ noncomputable def supportedRestrictionIntegral
   (CategoryTheory.mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1
       c.support)
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
-    (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoIntegral E).inv)).natTrans.app P
+    (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoIntegral E).inv)).app P
 
 /-- **The supported restriction under `𝒪_E ⟶ E`**: the extension of scalars `T` of the
 `𝒪_E`-supported restriction of `P`, followed by the `f^!`-exchange for `d` and the pullback

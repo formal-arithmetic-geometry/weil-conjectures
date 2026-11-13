@@ -28,7 +28,6 @@ attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   constantSheaf presheafToSheaf Functor.leftAdjoint HasDerivedCategory.standard
 
-set_option maxHeartbeats 800000 in
 -- The comparison passes through localization functors and K-injective resolutions.
 /-- The specified scalar direct-image comparison satisfies the canonical unit equation.
 Source: Stacks Project, Tags 0D6E and 0D6J.

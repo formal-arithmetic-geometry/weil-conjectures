@@ -51,6 +51,6 @@ noncomputable def exactDerivedBaseChangeMap
     R((f)_*[A]) ⋙ D((g)^*[A]) ⟶ D((g')^*[A]) ⋙ R((f')_*[A]) :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction A f)
     (mapDerivedUpperStarLowerStarAdjunction A f')
-    (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso A sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso A sq).hom))
 
 end AlgebraicGeometry.Etale

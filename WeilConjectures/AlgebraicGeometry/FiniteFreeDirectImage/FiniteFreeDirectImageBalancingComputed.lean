@@ -279,7 +279,7 @@ private theorem homotopy_mate
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv))).app K =
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).hom.app K ≫
         (NatTrans.mapHomotopyCategory
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K ≫
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app K := by
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app, Functor.comp_obj,
@@ -339,25 +339,25 @@ private theorem mate_factors
       α₁.app (F₁.obj K) ≫ Q₂.map (a₁.counit.app K))
     (σ : TwoSquare H₁ G₁ G₂ H₂) (θ : TwoSquare T₁ L₁ L₂ T₂)
     (K : C₂)
-    (hθ : θ.natTrans.app (Q₁.obj (F₁.obj K)) ≫ T₂.map (α₁.app (F₁.obj K)) ≫
+    (hθ : θ.app (Q₁.obj (F₁.obj K)) ≫ T₂.map (α₁.app (F₁.obj K)) ≫
         γ₂.app (G₁.obj (F₁.obj K)) =
       L₂.map (γ₁.app (F₁.obj K)) ≫ α₂.app (H₁.obj (F₁.obj K)) ≫
-        Q₄.map (σ.natTrans.app (F₁.obj K))) :
-    T₁.map (β₁.app K) ≫ (mateEquiv b₁ b₂ θ).natTrans.app (Q₂.obj K) ≫
+        Q₄.map (σ.app (F₁.obj K))) :
+    T₁.map (β₁.app K) ≫ (mateEquiv b₁ b₂ θ).app (Q₂.obj K) ≫
         R₂.map (γ₂.app K) =
-      γ₁.app (F₁.obj K) ≫ Q₃.map ((mateEquiv a₁ a₂ σ).natTrans.app K) ≫
+      γ₁.app (F₁.obj K) ≫ Q₃.map ((mateEquiv a₁ a₂ σ).app K) ≫
         β₂.app (H₂.obj K) := by
-  have hmate (Z : D₂) : (mateEquiv b₁ b₂ θ).natTrans.app Z =
-      b₂.unit.app (T₁.obj (R₁.obj Z)) ≫ R₂.map (θ.natTrans.app (R₁.obj Z)) ≫
+  have hmate (Z : D₂) : (mateEquiv b₁ b₂ θ).app Z =
+      b₂.unit.app (T₁.obj (R₁.obj Z)) ≫ R₂.map (θ.app (R₁.obj Z)) ≫
         R₂.map (T₂.map (b₁.counit.app Z)) := by simp [mateEquiv_apply]
-  have hmate' : (mateEquiv a₁ a₂ σ).natTrans.app K =
-      a₂.unit.app (H₁.obj (F₁.obj K)) ≫ F₂.map (σ.natTrans.app (F₁.obj K)) ≫
+  have hmate' : (mateEquiv a₁ a₂ σ).app K =
+      a₂.unit.app (H₁.obj (F₁.obj K)) ≫ F₂.map (σ.app (F₁.obj K)) ≫
         F₂.map (H₂.map (a₁.counit.app K)) := by simp [mateEquiv_apply]
   have h₁ := b₂.unit.naturality (T₁.map (β₁.app K))
-  have h₂ := θ.natTrans.naturality (β₁.app K)
+  have h₂ := θ.naturality (β₁.app K)
   have h₄ := γ₂.naturality (a₁.counit.app K)
   have h₅ := b₂.unit.naturality (γ₁.app (F₁.obj K))
-  have h₇ := β₂.naturality (σ.natTrans.app (F₁.obj K) ≫ H₂.map (a₁.counit.app K))
+  have h₇ := β₂.naturality (σ.app (F₁.obj K) ≫ H₂.map (a₁.counit.app K))
   simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map]
     at h₁ h₂ h₄ h₅ h₇
   rw [hmate]
@@ -379,17 +379,15 @@ private theorem scalar_mate_of_conjugate
     (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂)
     (d : U₂ ⋙ R₁ ≅ R₂ ⋙ U₁) :
     (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _
-      (((conjugateIsoEquiv (adj₁.comp adj₄) (adj₃.comp adj₂)).symm d).hom))).natTrans =
-    ((mateEquiv adj₄ adj₃).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans := by
-  apply congrArg TwoSquare.natTrans
+      (((conjugateIsoEquiv (adj₁.comp adj₄) (adj₃.comp adj₂)).symm d).hom))) =
+    ((mateEquiv adj₄ adj₃).symm (TwoSquare.mk _ _ _ _ d.hom)) := by
   apply (mateEquiv adj₄ adj₃).injective
-  apply TwoSquare.ext
-  intro X
+  refine NatTrans.ext (funext fun X ↦ ?_)
   have h := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄
     (TwoSquare.mk _ _ _ _
       (((conjugateIsoEquiv (adj₁.comp adj₄) (adj₃.comp adj₂)).symm d).hom))
   rw [Equiv.apply_symm_apply]
-  change ((mateEquiv adj₄ adj₃) _).natTrans.app X = d.hom.app X
+  change ((mateEquiv adj₄ adj₃) _).app X = d.hom.app X
   rw [h]
   exact congr_app ((conjugateEquiv (adj₁.comp adj₄)
     (adj₃.comp adj₂)).apply_symm_apply d.hom) X
@@ -418,7 +416,7 @@ private theorem ordinary_scalar_mate {Z W : Scheme.{u}} {q : Z ⟶ W}
     {R S : Coefficients q} (a : CoefficientMap R S) :
     (mateEquiv (sW.normalization.ordinaryAdjunction a.target)
       (sZ.normalization.ordinaryAdjunction a.source)
-      (TwoSquare.mk _ _ _ _ (ordinaryBalancing sW sZ a).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (ordinaryBalancing sW sZ a).inv)) =
     proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
       a.target a.source R.identification S.identification a.comm := by
   simp only [ordinaryBalancing, Iso.symm_inv]
@@ -438,17 +436,15 @@ private theorem derived_scalar_mate {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :
     (mateEquiv (sW.adjunction a.target) (sZ.adjunction a.source)
-      (TwoSquare.mk _ _ _ _ (balancing sW sZ a).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (balancing sW sZ a).inv)) =
     (proEtaleRingRestrictionDerivedPullback q R.target S.target R.source S.source
       a.target a.source R.identification S.identification a.comm).inv := by
   simp only [balancing, Iso.symm_inv]
   rw [scalar_mate_of_conjugate]
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv (proEtaleRingDerivedAdjunction q S.target S.source S.identification)
     (proEtaleRingDerivedAdjunction q R.target R.source R.identification)).injective
   rw [Equiv.apply_symm_apply]
-  apply TwoSquare.ext
-  intro N
+  refine NatTrans.ext (funext fun N ↦ ?_)
   have h := (proEtaleRingSheafChangeAdjunction q R.target S.target R.source S.source
     a.target a.source R.identification S.identification a.comm).2.2
       _ N ((proEtaleRingDerivedAdjunction q S.target S.source S.identification).counit.app N)
@@ -527,18 +523,18 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
         (Iso.refl ((sW.presentation a.target).ordinary ⋙ LS)) (.up ℤ)).inv)
   let θ := TwoSquare.mk _ _ _ _ β.inv
   have hθ (H : HomotopyCategory (proEtaleRingModules W R.target) (.up ℤ)) :
-      θ.natTrans.app (DerivedCategory.Qh.obj H) ≫
+      θ.app (DerivedCategory.Qh.obj H) ≫
         LS.mapDerivedCategory.map ((sW.presentation a.target).counit.app H) ≫
         LS.mapDerivedCategoryFactorsh.hom.app
           (((sW.presentation a.target).ordinary.mapHomotopyCategory (.up ℤ)).obj H) =
       (sZ.presentation a.source).derived.map (LR.mapDerivedCategoryFactorsh.hom.app H) ≫
         (sZ.presentation a.source).counit.app
           ((LR.mapHomotopyCategory (.up ℤ)).obj H) ≫
-        DerivedCategory.Qh.map (σ.natTrans.app H) := by
+        DerivedCategory.Qh.map (σ.app H) := by
     have h := hβ H
     have h := congrArg (fun f ↦ β.inv.app (DerivedCategory.Qh.obj H) ≫ f ≫
-      DerivedCategory.Qh.map (σ.natTrans.app H)) h
-    dsimp only [θ, σ, TwoSquare.mk, TwoSquare.natTrans] at h ⊢
+      DerivedCategory.Qh.map (σ.app H)) h
+    dsimp only [θ, σ, TwoSquare.mk] at h ⊢
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc] at h
     let b₀ : ((sW.presentation a.target).ordinary ⋙ LS).mapHomotopyCategory (.up ℤ) ≅
         (LR ⋙ (sZ.presentation a.source).ordinary).mapHomotopyCategory (.up ℤ) :=
@@ -565,7 +561,7 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     erw [CategoryTheory.Functor.map_id] at h
     repeat erw [Category.comp_id] at h
     exact h.symm
-  have hm : (mateEquiv (sW.adjunction a.target) (sZ.adjunction a.source) θ).natTrans =
+  have hm : (mateEquiv (sW.adjunction a.target) (sZ.adjunction a.source) θ) =
       (proEtaleRingRestrictionDerivedPullback q R.target S.target R.source S.source
         a.target a.source R.identification S.identification a.comm).inv := by
     apply Localization.natTrans_ext DerivedCategory.Qh
@@ -608,10 +604,9 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     repeat erw [Category.id_comp]
   have hi : β.inv = (balancing sW sZ a).inv := by
     suffices TwoSquare.mk _ _ _ _ β.inv =
-        TwoSquare.mk _ _ _ _ (balancing sW sZ a).inv from congrArg TwoSquare.natTrans this
+        TwoSquare.mk _ _ _ _ (balancing sW sZ a).inv from this
     apply (mateEquiv (sW.adjunction a.target) (sZ.adjunction a.source)).injective
-    apply TwoSquare.ext
-    intro X
+    refine NatTrans.ext (funext fun X ↦ ?_)
     exact congr_app (hm.trans (derived_scalar_mate sW sZ a).symm) X
   have h := congrArg Iso.symm (Iso.ext hi : β.symm = (balancing sW sZ a).symm)
   exact h

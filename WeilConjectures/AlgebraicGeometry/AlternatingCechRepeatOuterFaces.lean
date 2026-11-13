@@ -68,7 +68,6 @@ private theorem firstRepeat_face {I : Type v} [LinearOrder I] {p : ℕ}
   · have h₁ : j.succAbove b = a := by
       apply Fin.ext
       rw [face_val]
-      try dsimp only [Fin.val_mk]
       split_ifs at * <;> omega
     have h₂ : j.succAbove (⟨b.val + 1, hb'⟩ : Fin (p + 1)) =
         (⟨a.val + 1, ha'⟩ : Fin (p + 2)) := by
@@ -80,7 +79,6 @@ private theorem firstRepeat_face {I : Type v} [LinearOrder I] {p : ℕ}
   · intro k hk
     have hka : (j.succAbove k).val < a.val := by
       rw [face_val]
-      try dsimp only [Fin.val_mk]
       split_ifs at * <;> omega
     have hle : (⟨(j.succAbove k).val + 1, by omega⟩ : Fin (p + 2)) ≤
         j.succAbove (⟨k.val + 1, by omega⟩ : Fin (p + 1)) := by

@@ -565,7 +565,6 @@ private theorem abCounit_forget (A : Sheaf K AddCommGrpCat.{u}) :
     rw [← L.map_comp_assoc ((abSheafLiftSetIso J (U K ⋙ R)).inv.app _)
       ((abSheafLiftSetIso J (U K ⋙ R)).hom.app _), Iso.inv_hom_id_app,
       L.map_id, Category.id_comp]
-    try simp only [Category.id_comp]
     erw [← Category.assoc (L.map (R.map ((abSheafLiftSetIso K (U J ⋙ L)).inv.app A)))
       (adj.counit.app _)]
     erw [show L.map (R.map ((abSheafLiftSetIso K (U J ⋙ L)).inv.app A)) ≫
@@ -600,12 +599,10 @@ private theorem abCounit_forget (A : Sheaf K AddCommGrpCat.{u}) :
     rw [← R.map_comp_assoc ((abSheafLiftSetIso K (U J ⋙ L)).inv.app _)
       ((abSheafLiftSetIso K (U J ⋙ L)).hom.app _), Iso.inv_hom_id_app,
       R.map_id, Category.id_comp]
-    try simp only [R.map_id, Category.comp_id]
     erw [← Category.assoc, show adj.unit.app ((U J).obj ((abDirect K J R).obj A)) ≫
         R.map (L.map ((abSheafLiftSetIso J (U K ⋙ R)).hom.app A)) =
       (abSheafLiftSetIso J (U K ⋙ R)).hom.app A ≫ adj.unit.app _ from
         (adj.unit.naturality ((abSheafLiftSetIso J (U K ⋙ R)).hom.app A)).symm]
-    try simp only [R.map_id, Category.comp_id]
     simp only [Category.assoc, R.map_id, Category.comp_id,
       adj.right_triangle_components_assoc]
     erw [R.map_id, Category.comp_id]

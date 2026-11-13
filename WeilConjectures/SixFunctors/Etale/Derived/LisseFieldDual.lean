@@ -103,7 +103,7 @@ lemma derivedHomUpperStarComparison_naturality_left {X Y : Scheme.{u}} (g : Y ‚ü
   -- keeps the kernel from unfolding the derived internal hom to compare the two sides.
   have h (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
       derivedHomUpperStarComparison A g K M =
-        (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.app M := rfl
+        (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).app M := rfl
   have hX : (RHom(X)[A]).map f.op = MonoidalClosed.pre f := rfl
   have hY : (RHom(Y)[A]).map ((L((g)^*[A])).map f).op =
       MonoidalClosed.pre ((L((g)^*[A])).map f) := rfl

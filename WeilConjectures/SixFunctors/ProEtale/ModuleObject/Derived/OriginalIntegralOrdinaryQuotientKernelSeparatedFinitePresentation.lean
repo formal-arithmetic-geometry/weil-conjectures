@@ -54,8 +54,8 @@ private theorem separated_cokernel_sections
   let y := Projective.factorThru x (cokernel.π A)
   have hy : y ≫ cokernel.π A = x := Projective.factorThru_comp _ _
   let t : Matrix (Fin n) (Fin m) C(S, R) := fun i j ↦
-    e.symm (biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i)
-  let b : Fin n → C(S, R) := fun i ↦ e.symm (y ≫ biproduct.π (fun _ ↦ P) i)
+    e.symm (.of (biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i))
+  let b : Fin n → C(S, R) := fun i ↦ e.symm (.of (y ≫ biproduct.π (fun _ ↦ P) i))
   have hsum {p : ℕ} {Y Z : C} (f : Y ⟶ ⨁ fun _ : Fin p ↦ P)
       (g : (⨁ fun _ : Fin p ↦ P) ⟶ Z) :
       f ≫ g = ∑ a, (f ≫ biproduct.π (fun _ ↦ P) a) ≫
@@ -64,12 +64,12 @@ private theorem separated_cokernel_sections
     rw [Preadditive.sum_comp, Preadditive.comp_sum]
     simp only [Category.assoc]
   have happ (z : P ⟶ ⨁ fun _ : Fin m ↦ P) (i : Fin n) :
-      e (∑ j, t i j * e.symm (z ≫ biproduct.π (fun _ ↦ P) j)) =
+      (e (∑ j, t i j * e.symm (.of (z ≫ biproduct.π (fun _ ↦ P) j)))).asHom =
         z ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
-    rw [map_sum, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
+    rw [map_sum, End.sum_asHom, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
     apply Finset.sum_congr rfl
     intro j _
-    simp only [map_mul, RingEquiv.apply_symm_apply, End.mul_def, t]
+    simp only [map_mul, RingEquiv.apply_symm_apply, End.mul_asHom, t]
   have hb : ∀ k : ℕ, ∃ a : Fin m → C(S, R), ∃ c : Fin n → C(S, R),
       ∀ i, b i = (∑ j, t i j * a j) + (r : R) ^ k • c i := by
     intro k
@@ -89,23 +89,27 @@ private theorem separated_cokernel_sections
       (ShortComplex.cokernelSequence_exact A).liftFromProjective _ hz
     have hza : z ≫ A = y - r ^ k • c :=
       (ShortComplex.cokernelSequence_exact A).liftFromProjective_comp _ hz
-    refine ⟨fun j ↦ e.symm (z ≫ biproduct.π (fun _ ↦ P) j),
-      fun i ↦ e.symm (c ≫ biproduct.π (fun _ ↦ P) i), fun i ↦ ?_⟩
+    refine ⟨fun j ↦ e.symm (.of (z ≫ biproduct.π (fun _ ↦ P) j)),
+      fun i ↦ e.symm (.of (c ≫ biproduct.π (fun _ ↦ P) i)), fun i ↦ ?_⟩
     apply e.injective
-    rw [map_add, show (r : R) ^ k • e.symm (c ≫ biproduct.π (fun _ ↦ P) i) =
-      r ^ k • e.symm (c ≫ biproduct.π (fun _ ↦ P) i) by
-        rw [← Nat.cast_pow, Nat.cast_smul_eq_nsmul], map_nsmul, happ, ← Category.assoc, hza,
+    apply End.ext
+    rw [map_add, show (r : R) ^ k • e.symm (.of (c ≫ biproduct.π (fun _ ↦ P) i)) =
+      r ^ k • e.symm (.of (c ≫ biproduct.π (fun _ ↦ P) i)) by
+        rw [← Nat.cast_pow, Nat.cast_smul_eq_nsmul], map_nsmul,
+      End.add_asHom, End.nsmul_asHom, happ, ← Category.assoc, hza,
       Preadditive.sub_comp, Preadditive.nsmul_comp]
     simp only [b, RingEquiv.apply_symm_apply, sub_add_cancel]
   obtain ⟨a, ha⟩ := ContinuousMap.exists_matrix_solution_of_forall_pow t b (r : R) hr hb
-  let z : P ⟶ ⨁ fun _ : Fin m ↦ P := biproduct.lift fun j ↦ e (a j)
+  let z : P ⟶ ⨁ fun _ : Fin m ↦ P := biproduct.lift fun j ↦ (e (a j)).asHom
   have hzy : z ≫ A = y := by
     apply biproduct.hom_ext
     intro i
-    have hh : e (∑ j, t i j * a j) = z ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
-      simpa only [z, biproduct.lift_π, RingEquiv.symm_apply_apply] using happ z i
+    have hh := happ z i
+    simp only [z, biproduct.lift_π] at hh
+    change (e (∑ j, t i j * e.symm (e (a j)))).asHom = _ at hh
+    simp only [RingEquiv.symm_apply_apply] at hh
     rw [ha i] at hh
-    simpa only [Category.assoc] using hh.symm.trans (e.apply_symm_apply _)
+    simpa only [b, RingEquiv.apply_symm_apply, Category.assoc] using hh.symm
   rw [← hy, ← hzy, Category.assoc, cokernel.condition, comp_zero]
 
 private theorem map_quotient_zero

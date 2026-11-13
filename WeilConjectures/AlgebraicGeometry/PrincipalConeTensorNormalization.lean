@@ -7,7 +7,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import WeilConjectures.Algebra.Homology.ReductionIsoShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
-import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 
 /-! # Signed principal cones and derived tensor
 
@@ -45,47 +45,59 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
 @[instance_reducible] private def scalarRing : CommRing (End (𝟙_ A)) :=
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
-      have h := unitEndAction_naturality a b
-      simpa only [End.mul_def, unitEndAction_unit] using h }
+      apply End.ext
+      have h := unitEndAction_naturality a.asHom b
+      simpa only [End.mul_asHom, unitEndAction_unit] using h }
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 private instance principalConeTensorNormalizationInst1 : CommRing (Scalars A) := scalarRing A
 private def centerHom : Scalars A →+* CatCenter A where
   toFun a :=
-    { app := fun X ↦ unitEndAction X a
-      naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
-  map_one' := by ext X; exact (unitEndAction X).map_one
-  map_mul' a b := by ext X; exact (unitEndAction X).map_mul a b
-  map_zero' := by ext X; exact (unitEndRingHom X).map_zero
-  map_add' a b := by ext X; exact (unitEndRingHom X).map_add a b
+    .of
+      { app := fun X ↦ (unitEndAction X a).asHom
+        naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
+  map_one' := by
+    apply CatCenter.ext
+    intro X
+    exact congrArg End.asHom (unitEndAction X).map_one
+  map_mul' a b := by
+    apply CatCenter.ext
+    intro X
+    exact congrArg End.asHom ((unitEndAction X).map_mul a b)
+  map_zero' := by
+    apply CatCenter.ext
+    intro X
+    exact congrArg End.asHom (unitEndRingHom X).map_zero
+  map_add' a b := by
+    apply CatCenter.ext
+    intro X
+    exact congrArg End.asHom ((unitEndRingHom X).map_add a b)
 private instance (priority := 2000) scalarLinear : Linear (Scalars A) A :=
   Linear.ofRingMorphism (centerHom A)
-private theorem unit_smul_id (a : Scalars A) : a • 𝟙 (𝟙_ A) = a := by
-  change unitEndAction (𝟙_ A) a ≫ 𝟙 _ = a
+private theorem unit_smul_id (a : Scalars A) : a • 𝟙 (𝟙_ A) = a.asHom := by
+  change (unitEndAction (𝟙_ A) a).asHom ≫ 𝟙 _ = a.asHom
   rw [unitEndAction_unit, Category.comp_id]
 private theorem smul_eq {X Y : A} (a : Scalars A) (f : X ⟶ Y) :
-    a • f = unitEndAction X a ≫ f := rfl
+    a • f = (unitEndAction X a).asHom ≫ f := rfl
 variable [BraidedCategory A]
 omit [Preadditive A] [MonoidalPreadditive A] [BraidedCategory A] in
 private theorem action_tensor_right (X Y : A) (a : End (𝟙_ A)) :
-    X ◁ unitEndAction Y a = unitEndAction (X ⊗ Y) a := by
+    X ◁ (unitEndAction Y a).asHom = (unitEndAction (X ⊗ Y) a).asHom := by
   simp only [unitEndAction_apply, whiskerLeft_comp]
-  change (𝟙_ A ⟶ 𝟙_ A) at a
   monoidal
 omit [Preadditive A] [MonoidalPreadditive A] in
 private theorem action_left (X : A) (a : End (𝟙_ A)) :
-    unitEndAction X a = (λ_ X).inv ≫ a ▷ X ≫ (λ_ X).hom := by
+    (unitEndAction X a).asHom = (λ_ X).inv ≫ a.asHom ▷ X ≫ (λ_ X).hom := by
   apply (cancel_epi (λ_ X).hom).mp
   apply (cancel_mono (ρ_ X).inv).mp
   simpa only [unitEndAction_apply, Category.assoc, Iso.hom_inv_id_assoc,
     Iso.hom_inv_id, Category.comp_id, braiding_tensorUnit_left] using
-    (braiding_naturality_left a X).symm
+    (braiding_naturality_left a.asHom X).symm
 omit [Preadditive A] [MonoidalPreadditive A] in
 private theorem action_tensor_left (X Y : A) (a : End (𝟙_ A)) :
-    unitEndAction X a ▷ Y = unitEndAction (X ⊗ Y) a := by
+    (unitEndAction X a).asHom ▷ Y = (unitEndAction (X ⊗ Y) a).asHom := by
   rw [action_left, action_left]
   simp only [comp_whiskerRight]
-  change (𝟙_ A ⟶ 𝟙_ A) at a
   monoidal
 private instance (priority := 2000) scalarMonoidal :
     MonoidalLinear (Scalars A) A where
@@ -98,23 +110,23 @@ end ScalarTools
 
 private def scalar (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     UnitEndScalars.Scalars (AdicCompletion.Modules l E X) :=
-  (DerivedNakayama.regularPullbackIso l E X).inv ≫
-    (DerivedNakayama.pullback l E X).map d ≫
-    (DerivedNakayama.regularPullbackIso l E X).hom
+  End.of ((DerivedNakayama.regularPullbackIso l E X).inv ≫
+    (DerivedNakayama.pullback l E X).map d.asHom ≫
+    (DerivedNakayama.regularPullbackIso l E X).hom)
 
 private theorem scalar_complex (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     DerivedNakayama.scalarOnComplex l E X d M = scalar l E X d • 𝟙 M := by
   apply HomologicalComplex.Hom.ext
   funext j
-  change (λ_ (M.X j)).inv ≫ scalar l E X d ▷ M.X j ≫ (λ_ (M.X j)).hom =
+  change (λ_ (M.X j)).inv ≫ (scalar l E X d).asHom ▷ M.X j ≫ (λ_ (M.X j)).hom =
     scalar l E X d • 𝟙 (M.X j)
   rw [UnitEndScalars.smul_eq, Category.comp_id, UnitEndScalars.action_left]
 
 private theorem coefficient_exact
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) a).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
         Padic.coefficientExtensionUniformizer l E * a.down s) (n : ℕ) :
     ∃ w : (scalar l E X (d ^ (n + 1)) • 𝟙 _) ≫
         AdicCompletion.finiteUnit l E X n = 0,
@@ -123,6 +135,7 @@ private theorem coefficient_exact
     DerivedNakayama.derived_nakayama_resolution l E
   have he : d₀ = d := by
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    apply End.ext
     apply Mod.hom_ext
     apply Sheaf.hom_ext
     apply NatTrans.ext
@@ -140,7 +153,7 @@ private theorem coefficient_exact
   simp only [hr'] at w hw
   let e := DerivedNakayama.regularPullbackIso l E X
   have hs : scalar l E X (d ^ (n + 1)) • 𝟙 (𝟙_ (AdicCompletion.Modules l E X)) =
-      e.inv ≫ (DerivedNakayama.pullback l E X).map (d ^ (n + 1)) ≫ e.hom :=
+      e.inv ≫ (DerivedNakayama.pullback l E X).map (d ^ (n + 1)).asHom ≫ e.hom :=
     UnitEndScalars.unit_smul_id _ _
   have w' : (scalar l E X (d ^ (n + 1)) • 𝟙 _) ≫
       AdicCompletion.finiteUnit l E X n = 0 := by
@@ -159,16 +172,17 @@ private theorem coefficient_exact
 private theorem scalar_mul
     (a b : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     scalar l E X (a * b) = scalar l E X a * scalar l E X b := by
+  apply End.ext
   change (DerivedNakayama.regularPullbackIso l E X).inv ≫
-      (DerivedNakayama.pullback l E X).map (a * b) ≫
+      (DerivedNakayama.pullback l E X).map (a * b).asHom ≫
       (DerivedNakayama.regularPullbackIso l E X).hom =
     ((DerivedNakayama.regularPullbackIso l E X).inv ≫
-      (DerivedNakayama.pullback l E X).map b ≫
+      (DerivedNakayama.pullback l E X).map b.asHom ≫
       (DerivedNakayama.regularPullbackIso l E X).hom) ≫
     (DerivedNakayama.regularPullbackIso l E X).inv ≫
-      (DerivedNakayama.pullback l E X).map a ≫
+      (DerivedNakayama.pullback l E X).map a.asHom ≫
       (DerivedNakayama.regularPullbackIso l E X).hom
-  rw [End.mul_def, Functor.map_comp]
+  rw [End.mul_asHom, Functor.map_comp]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
 
 section Generic
@@ -294,7 +308,7 @@ unbounded input complexes are covered, including the zero complex. -/
 theorem principal_cone_tensor_normalization
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) a).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
         Padic.coefficientExtensionUniformizer l E * a.down s)
     (hs : ∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),
       DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M =

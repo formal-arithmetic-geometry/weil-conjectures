@@ -86,9 +86,7 @@ noncomputable def isColimitIntegralCoeffSmulSequenceCocone :
     change x s * (ℓ : E) ^ n = (a s : E) at ha'
     have key : (ℓ : E)⁻¹ ^ n * (a s : E) = x s := by
       rw [← ha', inv_pow, inv_mul_eq_iff_eq_mul₀ (pow_ne_zero n hℓ), mul_comm]
-    first
-      | exact key
-      | exact key.symm
+    exact key.symm
   · intro k x y h
     refine ⟨k, 𝟙 k, ?_⟩
     rw [CategoryTheory.Functor.map_id]

@@ -1471,7 +1471,6 @@ attribute [local irreducible] ringedSiteRestrictionTensorIso ringedSiteRestricti
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1200000 in
 -- The natural comparison maps retain dependent localization and coefficient types.
 /-- Canonical maps commute with exact slice restriction. The functor F is specified
 by termwise restriction and localization. Its tensor and Hom comparisons are the

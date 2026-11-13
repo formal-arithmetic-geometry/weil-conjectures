@@ -86,7 +86,7 @@ private theorem scalar_complexUnit {W : Scheme.{u}}
       Category.comp_id, Category.id_comp]
     erw [(pbcRestrict φ).mapDerivedCategory.map_id, DerivedCategory.Qh.map_id,
       Category.id_comp] at hp
-    repeat' first | erw [Category.comp_id] at hp | erw [Category.id_comp] at hp
+    repeat' erw [Category.comp_id] at hp
     erw [Category.comp_id]
     exact hp
   have he : d = pbcDerivedScalarAdjunction φ :=

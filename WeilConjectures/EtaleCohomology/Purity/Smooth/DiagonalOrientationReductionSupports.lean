@@ -92,7 +92,7 @@ noncomputable def derivedExtendScalarsLowerStarMap :
       derivedExtendScalars hρ ha Z ⋙ R((i)_*[ModuleCat.{u + 1} Λ']) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') i)
-    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsPullbackIso hρ ha i).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsPullbackIso hρ ha i).inv))
 
 omit [IsClosedImmersion i] in
 /-- The comparison `Ψ Ri_* ⟶ Ri_* Ψ` followed by the counit of `Li^* ⊣ Ri_*`. -/
@@ -182,7 +182,7 @@ adjunctions `Ri_! ⊣ Ri^!`, of the commutation `Ψ ⋙ Ri_! ≅ Ri_! ⋙ Ψ`. -
 noncomputable def derivedExtendScalarsUpperShriekMap :
     R(i)^![Λ] ⋙ derivedExtendScalars hρ ha Z ⟶ derivedExtendScalars hρ ha X ⋙ R(i)^![Λ'] :=
   (mateEquiv (rightDerivedUpperShriekAdjunction Λ i) (rightDerivedUpperShriekAdjunction Λ' i)
-    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsLowerShriekIso hρ ha i).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsLowerShriekIso hρ ha i).inv))
 
 /-- The comparison `Ψ Ri^! ⟶ Ri^! Ψ` is compatible with the counits of `Ri_! ⊣ Ri^!`. -/
 lemma map_derivedExtendScalarsUpperShriekMap_app_comp_counit (L : 𝐃(X, Λ)) :

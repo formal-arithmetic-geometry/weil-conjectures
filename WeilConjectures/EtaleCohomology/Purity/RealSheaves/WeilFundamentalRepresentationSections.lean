@@ -43,7 +43,7 @@ lemma rep_sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseShe
     (g : Aut (fiber t)) (a) :
     M.rep t G g (sectionsRes t G a) = sectionsRes t G a := by
   have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom a)
-    (M.mono_globalSections g G)
+    (M.mono_globalSections g.asIso G)
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h
 
@@ -133,24 +133,25 @@ omit [IsCurve (C ↘ Spec (.of K))] [Fact (ringChar K ≠ l)] in
 identification `Γ(C, ℱ) ≅ Γ(C, (Fr⁻¹)_* ℱ)`. -/
 lemma globalSectionsToUpperStar_frobenius_comp (X : Sheaf (Scheme.ProEt.topology
     (C ↘ Spec (.of K)).geometricFiber) (WeilCoefficients.{u} l)) :
-    (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom).app X ≫
+    (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom).app X ≫
       (Sheaf.Γ _ _).map ((upperStarIsoLowerStarInv _
-        (C ↘ Spec (.of K)).geometricGaloisFrobenius).hom.app X) =
-    (globalSectionsLowerStarIso _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.inv).inv.app X := by
+        (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).hom.app X) =
+    (globalSectionsLowerStarIso _
+      (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv).inv.app X := by
   have h' := globalSectionsToUpperStar_app_comp_globalSectionsUpperStarIso
-    (WeilCoefficients.{u} l) (C ↘ Spec (.of K)).geometricGaloisFrobenius X
+    (WeilCoefficients.{u} l) (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso X
   simp only [globalSectionsUpperStarIso, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app] at h'
   rw [← Category.assoc] at h'
   exact (Iso.comp_hom_eq_id ((globalSectionsLowerStarIso _
-    (C ↘ Spec (.of K)).geometricGaloisFrobenius.inv).app _)).1 h'
+    (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv).app _)).1 h'
 
 omit [IsCurve (C ↘ Spec (.of K))] in
 /-- The underlying morphism of sheaves of the Weil structure `Fr^* ℱ ≅ ℱ` of a lisse Weil
 sheaf. -/
 lemma lisseFrobStr_hom_hom_hom (F : WeilSheaf K l C) (hF : F.IsLisse) :
     (F.lisseFrobStr hF).hom.hom.hom =
-      (upperStarIsoLowerStarInv _ (C ↘ Spec (.of K)).geometricGaloisFrobenius).hom.app
+      (upperStarIsoLowerStarInv _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).hom.app
         F.obj.carrier.X ≫ (AdicSheaf.forget _).map F.obj.str.hom := by
   rw [← adicUpperStarIsoLowerStarInv_hom_app_hom]
   rfl
@@ -161,17 +162,17 @@ a global section under the Frobenius `Γ(C, ℱ) ≅ Γ(C, (Fr⁻¹)_* ℱ) → 
 applying `Φ` to its restriction. -/
 lemma globalSections_frobenius_comp_res (F : WeilSheaf K l C) (hF : F.IsLisse) :
     ((globalSectionsLowerStarIso _
-        (C ↘ Spec (.of K)).geometricGaloisFrobenius.inv).symm.app F.obj.carrier.X ≪≫
+        (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv).symm.app F.obj.carrier.X ≪≫
         (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso F.obj.str)).hom ≫
       (globalSectionsToUpperStar _ B.t).app F.obj.carrier.X =
     (globalSectionsToUpperStar _ B.t).app F.obj.carrier.X ≫ (frobStalkIso M B F hF).hom := by
   have e₁ : (globalSectionsToUpperStar _ B.t).app F.obj.carrier.X ≫
       (M.mono B.frobPath).hom.app (F.toLisse hF) =
-      (globalSectionsToUpperStar _ (B.t ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)).app
-        F.obj.carrier.X :=
+      (globalSectionsToUpperStar _
+        (B.t ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)).app F.obj.carrier.X :=
     M.mono_globalSections B.frobPath (F.toLisse hF)
   have e₂ := globalSectionsToUpperStar_comp (WeilCoefficients.{u} l) B.t
-    (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom F.obj.carrier.X
+    (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom F.obj.carrier.X
   have e₃ : (lisseStalk l B.t).map (F.lisseFrobStr hF).hom =
       (Sheaf.Γ _ _).map (((B.t)^*[WeilCoefficients.{u} l]).map
         ((F.lisseFrobStr hF).hom.hom.hom)) := rfl
@@ -193,7 +194,7 @@ lemma globalSections_frobenius_eq' [QuasiCompact (C ↘ Spec (.of K))]
     [LocallyOfFiniteType (C ↘ Spec (.of K))] (F : WeilSheaf K l C) :
     F.globalSections.frobenius = WeilCoefficients.linearEquivOfIso
       ((globalSectionsLowerStarIso _
-        (C ↘ Spec (.of K)).geometricGaloisFrobenius.inv).symm.app F.obj.carrier.X ≪≫
+        (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv).symm.app F.obj.carrier.X ≪≫
         (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso F.obj.str)) :=
   rfl
 

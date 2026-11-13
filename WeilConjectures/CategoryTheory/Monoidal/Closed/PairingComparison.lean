@@ -54,7 +54,7 @@ G [X, 𝟙_ C] ──ihomComparison──▶ [G X, G 𝟙_ C] ──[G X, e]─�
 noncomputable def unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X)
     (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
     G.obj ((ihom X).obj (𝟙_ C)) ⟶ (ihom X').obj (𝟙_ D) :=
-  (ihomComparison G X).natTrans.app (𝟙_ C) ≫ (ihom (G.obj X)).map e ≫ (pre cX).app (𝟙_ D)
+  (ihomComparison G X).app (𝟙_ C) ≫ (ihom (G.obj X)).map e ≫ (pre cX).app (𝟙_ D)
 
 lemma uncurry_unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X) (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
     uncurry (unitDualComparison G cX e) =

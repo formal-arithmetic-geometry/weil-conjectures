@@ -101,13 +101,13 @@ private theorem mate_pasting_eval
     (t : U ⋙ GA ⟶ GB ⋙ U') (s : V ⋙ HA ⟶ HB ⋙ V')
     (h : (ab.hComp i).whiskerTop t = (k.hComp aa).whiskerBottom s)
     (N : CB) :
-    LA'.map (t.app N) ≫ i.natTrans.app (GB.obj N) ≫ V'.map (ab.natTrans.app N) =
-      aa.natTrans.app (U.obj N) ≫ HA.map (k.natTrans.app N) ≫ s.app (LB.obj N) := by
+    LA'.map (t.app N) ≫ i.app (GB.obj N) ≫ V'.map (ab.app N) =
+      aa.app (U.obj N) ≫ HA.map (k.app N) ≫ s.app (LB.obj N) := by
   simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc] using
-    congrArg (fun w ↦ w.natTrans.app N) h
+    congrArg (fun w ↦ w.app N) h
 
 -- Cancel mapped isomorphisms in small abstract categories before specialization.
 private theorem rotate_right_mapped_square
@@ -148,7 +148,7 @@ theorem etaleBrownProperScalarSquare
     (p : (PV.scalar h).derived ⋙ (B.level m).direct ≅
       (B.level n).direct ⋙ (PW.scalar h).derived)
     (hp : p.inv = (mateEquiv (B.level n).adjunction (B.level m).adjunction
-      (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans) :
+      (.mk _ _ _ _ (B.derivedTensor h).hom))) :
     ∀ P : DerivedCategory (strictEtaleLevel V O t n),
       (RW.derived m).map (p.inv.app P) ≫
           (rg m).right.hom.app ((PV.scalar h).derived.obj P) ≫
@@ -163,7 +163,7 @@ theorem etaleBrownProperScalarSquare
     Etale.scalarMate_restrictionTranspose (strictEtaleBrownRingMap O t h) g
   have hp' :
       (mateEquiv (PV.scalar h).derivedAdj (PW.scalar h).derivedAdj
-        (.mk _ _ _ _ p.inv)).natTrans = (B.restrictedDirect h).hom := by
+        (.mk _ _ _ _ p.inv)) = (B.restrictedDirect h).hom := by
     rw [hp, iterated_mateEquiv_conjugateEquiv]
     exact congrArg Iso.hom (brown_scalar_conjugate
       (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj

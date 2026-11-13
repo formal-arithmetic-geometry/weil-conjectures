@@ -60,7 +60,6 @@ attribute [local implicit_reducible] integralOperationsTensorTowerFunctor
 attribute [local irreducible] integralOperationsTotalTensorSection
   unrestrictedIntegralTensorSection integralOperationsTensorSection
 
-set_option maxHeartbeats 600000 in
 -- The sectionwise tensor calculation keeps three coefficient transports explicit.
 /-- Composition of the strict tensor-tower maps, before Roos realization.
 Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;

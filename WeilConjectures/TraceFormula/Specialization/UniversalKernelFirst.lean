@@ -53,7 +53,6 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (x : RationalPoint X) (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
-set_option maxHeartbeats 1000000 in
 -- the abstract statement is matched against the concrete functors
 /-- **Nearby cycles of the universal kernel**, first identity (blueprint
 `det-tf-sp-universal-kernel`): for an exceptional exchange `β_{p₁} : Sp_{X×X} p₁^! ⟶ p_{1s}^! Sp_X`

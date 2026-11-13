@@ -253,7 +253,7 @@ theorem exists_finset_lTensor_eq_zero [IsNoetherianRing R₀] [Flat A (A ⊗[R�
       (TensorProduct.comm R₀ S₀ p ξ) = ψ.rTensor S₀ ((Submodule.inclusion hPQ).rTensor S₀ t) := by
     rw [LinearMap.rTensor_comp, LinearMap.comp_apply, LinearMap.rTensor_comp, LinearMap.comp_apply]
   rw [← hψ, ← (TensorProduct.comm R₀ p S₀).apply_symm_apply ξ, TensorProduct.comm_symm,
-    LinearMap.lTensor_comm, key, hQ, map_zero, map_zero]
+    LinearMap.lTensor_comm, key, hQ, LinearMap.map_zero, LinearEquiv.map_zero]
 
 end Module
 
