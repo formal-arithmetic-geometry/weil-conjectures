@@ -92,8 +92,12 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
   have hθ (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
         sq).hom.app K).hom =
-        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq').hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison]
+        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq').hom.app K.obj :=
+    (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+      ℓ (Profinite.padicIntegersRingObj ℓ E) sq K).trans
+        (congrArg (fun s ↦
+          (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) s).hom.app K.obj)
+          (Subsingleton.elim _ sq'))
   apply isIso_exchangeRight_of_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
