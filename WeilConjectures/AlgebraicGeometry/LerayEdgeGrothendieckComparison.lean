@@ -48,7 +48,6 @@ private theorem moduleCocycleComparison
   rw [haz, hez]
   exact (CategoryTheory.congr_fun ht z).symm
 
-set_option trace.profiler true in
 -- Comparing resolution maps unfolds composed module and forgetful functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -93,6 +92,7 @@ theorem leray_edge_grothendieck_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
         (ε q).app F = (e q).hom.app F ≫
           (forget₂ _ AddCommGrpCat).map ((D.grothendieckLeftEdgeMap G hFG q).app F) := by
   classical
+  -- Share the category structures throughout the resolution comparison.
   let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
   let _ : Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
   let _ : Abelian (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) :=

@@ -59,11 +59,9 @@ private theorem rightDerivedComparisonOfHomology
   classical
   let ε : G.rightDerived q ⋙ U ⟶ D.rightDerived q ⋙ T :=
     { app := fun F ↦
-        U.map
-            ((injectiveResolution F).isoRightDerivedObj G q).hom ≫
+        U.map ((injectiveResolution F).isoRightDerivedObj G q).hom ≫
           τ.app (injectiveResolution F).cocomplex ≫
-          T.map
-            ((injectiveResolution F).isoRightDerivedObj D q).inv
+          T.map ((injectiveResolution F).isoRightDerivedObj D q).inv
       naturality := by
         intro F F' a
         let I := injectiveResolution F
@@ -73,8 +71,8 @@ private theorem rightDerivedComparisonOfHomology
           simp [φ]
         have hG := InjectiveResolution.isoRightDerivedObj_hom_naturality a I J φ comm G q
         have hD := InjectiveResolution.isoRightDerivedObj_inv_naturality a I J φ comm D q
-        have hG' := congrArg (U.map) hG
-        have hD' := congrArg (T.map) hD
+        have hG' := congrArg U.map hG
+        have hD' := congrArg T.map hD
         simp only [Functor.map_comp] at hG' hD'
         change U.map ((G.rightDerived q).map a) ≫
             U.map (J.isoRightDerivedObj G q).hom ≫
@@ -106,8 +104,8 @@ private theorem rightDerivedComparisonOfHomology
     (𝟙 F) I J φ comm D q
   rw [(G.rightDerived q).map_id, Category.comp_id] at hG
   rw [(D.rightDerived q).map_id, Category.comp_id] at hD
-  have hG' := congrArg (U.map) hG
-  have hD' := congrArg (T.map) hD
+  have hG' := congrArg U.map hG
+  have hD' := congrArg T.map hD
   simp only [Functor.map_comp] at hG' hD'
   change U.map (I.isoRightDerivedObj G q).inv ≫
       (U.map (J.isoRightDerivedObj G q).hom ≫
