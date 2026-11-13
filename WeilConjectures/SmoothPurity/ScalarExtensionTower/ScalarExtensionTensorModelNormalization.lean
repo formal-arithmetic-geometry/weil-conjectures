@@ -291,6 +291,7 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     ((integralCompletedTensorComparison l E W).hom.app (P, Q))
     ((Category.assoc _ _ _).trans hm) hr' hq hreference
   apply heq_of_eq
-  simpa only [tensorModelRealization_hom] using hfinal
+  simpa only [tensorModelRealization_hom, L, H, T, j, δ, Functor.comp_map,
+    Functor.comp_obj] using hfinal
 
 end WeilConjectures.ScalarExtensionTower
