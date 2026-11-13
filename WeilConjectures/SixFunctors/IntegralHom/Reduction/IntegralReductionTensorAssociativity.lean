@@ -35,7 +35,7 @@ private theorem reduction_map_inverse_cancel
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
     {X Y : C} (e : X ≅ Y) (f : Y ≅ X) (h : e.symm = f) :
     F.map e.hom ≫ F.map f.hom = 𝟙 (F.obj X) := by
-  rw [← h, ← F.map_comp, e.hom_inv_id, F.map_id]
+  rw [← h, Iso.symm_hom, ← F.map_comp, e.hom_inv_id, F.map_id]
 
 private theorem reduction_tensorComparison_transport
     {C D : Type*} [Category C] [Category D]
@@ -386,12 +386,15 @@ private theorem nativeReductionMonoidal
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
       let cS := (TS.iso J S AS _ _ hEP hEQ).hom
+      trace "PH805: target comparison"
       have hcs : cS = m.target.representative.hom.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫
           f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
         dsimp only [cS]
         rw [hTS']
         exact hrepS.symm
+      trace "PH805: target comparison proved"
       have hcan := reduction_map_inverse_cancel DerivedCategory.Q (asIso beta) _ hbκ
+      trace "PH805: cancellation proved"
       let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
         m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
           m.target.tensor.map (Prod.mkHom εP εQ)
