@@ -100,7 +100,8 @@ theorem isSheaf_etaleStructurePresheaf_aux :
           exact ⟨c, hc.symm⟩⟩
   refine Presieve.isSheaf_iso _ (NatIso.ofComponents (fun V ↦ (eqv V).toIso) ?_).symm h
   intro V W f
-  ext a
+  apply ConcreteCategory.hom_ext
+  intro a
   dsimp only [types_comp_apply, Equiv.toIso_hom_hom_apply, eqv, Equiv.ofBijective_apply,
     etaleHom, Functor.comp_map, Functor.op_map, Pseudofunctor.presheafHom_map,
     TypeCat.ofHom_apply, Quiver.Hom.unop_op, CommRingCat.forget_map_apply, Scheme.Γ_map,
