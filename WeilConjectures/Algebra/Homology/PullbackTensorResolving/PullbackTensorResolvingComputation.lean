@@ -363,6 +363,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The derived-change-of-rings comparison needs more time after the upstream bump.
 /-- The prescribed complex-level derived-pullback counit is invertible on every
 flat-term K-flat complex, with independent site and coefficient universes.
