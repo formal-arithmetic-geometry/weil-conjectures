@@ -155,6 +155,7 @@ private theorem naturality_transport
   apply (cancel_mono eM'.inv).mp
   simpa only [Category.assoc, hc'] using h
 
+-- Keep the functorial composition calculation independent of resolution instances.
 private theorem map_comp_naturality_of_lift
     {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
     {P P' I I' : C} {H H' : D}
@@ -165,8 +166,6 @@ private theorem map_comp_naturality_of_lift
   simp only [Functor.map_comp, Category.assoc]
   rw [hg, ← Category.assoc (Q.map φ), hφ]
 
-
-set_option trace.profiler true in
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
 The input `f` is an arbitrary derived morphism; the three variable maps are chain maps.
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
@@ -243,11 +242,9 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
       t (Q.obj F') (Q.obj N') (Q.obj M')
         (Q.map a₀ ≫ f₀ ≫
           (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-            X.toRingedSpace.sheaf).map ((Q.map b₀).op,
-              Q.map c)) =
+            X.toRingedSpace.sheaf).map ((Q.map b₀).op, Q.map c)) =
       (Q.map a₀ ⊗ₘ Q.map b₀) ≫
-        t (Q.obj F) (Q.obj N) (Q.obj M) f₀ ≫
-          Q.map c := by
+        t (Q.obj F) (Q.obj N) (Q.obj M) f₀ ≫ Q.map c := by
     have : IsGrothendieckAbelian.{u}
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
       SheafOfModules.isGrothendieckAbelian _
@@ -260,8 +257,8 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
       (homComplex (R := X.sheaf) N ((schemeHomKInjectiveResolution X).obj M))
       (f₀ ≫ (schemeDerivedInternalHomResolutionIso X N M).hom)
     have hf : Q.map φ ≫
-        (schemeDerivedInternalHomResolutionIso X N M).inv = f₀ := by
-      exact (Iso.comp_inv_eq _).2 hφ
+        (schemeDerivedInternalHomResolutionIso X N M).inv = f₀ :=
+      (Iso.comp_inv_eq _).2 hφ
     let ψ : F' ⟶ homComplex (R := X.sheaf) N'
         ((schemeHomKInjectiveResolution X).obj M') :=
       a₀ ≫ φ ≫ (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map
@@ -272,8 +269,7 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
         (schemeDerivedInternalHomResolutionIso X N' M').inv =
         Q.map a₀ ≫ f₀ ≫
           (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-            X.toRingedSpace.sheaf).map ((Q.map b₀).op,
-              Q.map c) := by
+            X.toRingedSpace.sheaf).map ((Q.map b₀).op, Q.map c) := by
       exact map_comp_naturality_of_lift Q a₀ φ _ _ _ _ f₀
         (hom_model_natural X N N' M M' b₀ c) hf
     rw [← hψ, ht F' N' M' hF' ψ, ← hf, ht F N M hF φ]
