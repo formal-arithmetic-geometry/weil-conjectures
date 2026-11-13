@@ -265,7 +265,6 @@ private lemma transportEquivalence
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
     [HasDerivedCategory H] [HasDerivedCategory I]
     (A : C ⥤ D) (e : D ≌ E) (T : D ⥤ H) (v : H ≌ I) (B : C ⥤ H)
-    [A.Additive] [T.Additive] [B.Additive]
     [PreservesFiniteLimits A] [PreservesFiniteColimits A]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]
     [PreservesFiniteLimits B] [PreservesFiniteColimits B]
@@ -295,7 +294,6 @@ end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option profiler true in
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
 Source: Stacks Project, Cohomology, Tag 08BW, canonical local Hom restriction maps;
@@ -381,7 +379,6 @@ theorem scheme_derived_hom_restriction_transport
           (derivedOpenHomRestriction X.toRingedSpace i
             (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app E))) ≫
           qW.inv.app E := by
-  intro R_U S_U eU e eW qU qW a
   exact RestrictionTransport.transportEquivalence
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)
     (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
@@ -390,6 +387,6 @@ theorem scheme_derived_hom_restriction_transport
     (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
       SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) from Scheme.Modules.overEquiv W)
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W)
-    (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i) F E a
+    (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i) F E
 
 end AlgebraicGeometry
