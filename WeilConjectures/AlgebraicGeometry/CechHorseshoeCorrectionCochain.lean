@@ -117,8 +117,6 @@ private theorem cechZeroπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
   erw [hh]
   rfl
 
-set_option maxHeartbeats 400000 in
-set_option profiler true in
 -- The sectionwise and two cochain calculations repeatedly compare categorical product modules.
 set_option backward.isDefEq.respectTransparency false in
 /-- A Cech zero cochain with prescribed resolution and Cech differentials.
