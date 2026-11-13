@@ -101,6 +101,55 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] SheafOfModules.monoidalCategory
   constantSheaf HasDerivedCategory.standard unrestrictedIntegralReductionExistence
 
+universe a₁ b₁ a₂ b₂
+
+-- Totalization uses only the additive tensor comparison and the adjunction.
+set_option profiler true in
+private theorem tensorTotalComparisonOfAdjunction
+    {A : Type a₁} [Category.{b₁} A] [Abelian A] [MonoidalCategory A]
+    {B : Type a₂} [Category.{b₂} B] [Abelian B] [MonoidalCategory B]
+    [MonoidalPreadditive A] [MonoidalPreadditive B]
+    [HasCoproducts.{0} A] [HasCoproducts.{0} B]
+    (F : A ⥤ B) [F.Additive]
+    (e : ∀ M N : A, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N)
+    (he : ∀ {M M' N N' : A} (f : M ⟶ M') (g : N ⟶ N'),
+      F.map (f ⊗ₘ g) ≫ (e M' N').hom =
+        (e M N).hom ≫ (F.map f ⊗ₘ F.map g))
+    (G : B ⥤ A) (adj : F ⊣ G) :
+    ∃ b : Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex) ⋙
+        F.mapHomologicalComplex (.up ℤ) ≅
+      (F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex),
+      ∀ (P Q : CochainComplex A ℤ) (p q k : ℤ) (h : p + q = k),
+        F.map (CochainComplex.ιMapBifunctor P Q (curriedTensor A) p q k h) ≫
+          (b.hom.app (P, Q)).f k =
+        (e (P.X p) (Q.X q)).hom ≫
+          CochainComplex.ιMapBifunctor
+            ((F.mapHomologicalComplex (.up ℤ)).obj P)
+            ((F.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor B) p q k h := by
+  let EC := F.mapHomologicalComplex (.up ℤ)
+  let tR := Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex)
+  let tS := Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex)
+  have hiso (P Q : CochainComplex A ℤ) : IsIso (tensorPullbackTotal F e he P Q) :=
+    tensorPullbackTotal_isIso F e he G adj P Q
+  let b0 : (EC.prod EC) ⋙ tS ≅ tR ⋙ EC := NatIso.ofComponents
+    (fun P ↦ @asIso _ _ _ _ (tensorPullbackTotal F e he P.1 P.2) (hiso P.1 P.2)) (by
+      intro P Q f
+      dsimp only [EC, tR, tS, Functor.comp_map, Functor.prod_map, Functor.prod_obj]
+      simp only [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex, asIso_hom,
+        ScalarHomTensor.tensorMap_factor]
+      exact ScalarHomTensor.tensorPullbackTotal_naturality F e he f.1 f.2)
+  refine ⟨b0.symm, ?_⟩
+  intro P Q p q k h
+  let ι := CochainComplex.ιMapBifunctor P Q (curriedTensor A) p q k h
+  let ι' := CochainComplex.ιMapBifunctor (EC.obj P) (EC.obj Q) (curriedTensor B) p q k h
+  let z := (HomologicalComplex.eval B (.up ℤ) k).mapIso (b0.app (P, Q))
+  have hz : ι' ≫ z.hom = (e (P.X p) (Q.X q)).inv ≫ F.map ι := by
+    change ι' ≫ tensorPullbackTotalComponent F e P Q k = _
+    exact HomologicalComplex.ι_mapBifunctorDesc _ p q h
+  exact (Iso.comp_inv_eq z).2
+    (((Iso.eq_inv_comp (e (P.X p) (Q.X q))).1 hz).symm.trans (Category.assoc _ _ _).symm)
+
 section ScalarTotal
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -285,43 +334,22 @@ private theorem scalarTensorTotal
   have := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
   have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
   obtain ⟨am, e, he, hu, hgen⟩ := scalarTensorAdjunctionComparison.{c, v, r} a F hF hmF
-  let EC := F.mapHomologicalComplex (.up ℤ)
-  let tR := coefficientTotalTensor.{r, c, v} J R
-  let tS := coefficientTotalTensor.{r, c, v} J S
-  have hiso (P Q : CochainComplex A ℤ) :
-      IsIso (tensorPullbackTotal (A := A) (B := B) F e he P Q) :=
-    tensorPullbackTotal_isIso (A := A) (B := B) F e he
-      _ am P Q
-  let b0 : (EC.prod EC) ⋙ tS ≅ tR ⋙ EC := NatIso.ofComponents
-    (fun P ↦ @asIso _ _ _ _ (tensorPullbackTotal (A := A) (B := B)
-      F e he P.1 P.2) (hiso P.1 P.2)) (by
-        intro P Q f
-        dsimp only [EC, tR, tS, Functor.comp_map, Functor.prod_map, Functor.prod_obj]
-        simp only [coefficientTotalTensor, Functor.uncurry_obj_map,
-          Functor.map₂HomologicalComplex, asIso_hom]
-        rw [ScalarHomTensor.tensorMap_factor, ScalarHomTensor.tensorMap_factor]
-        exact ScalarHomTensor.tensorPullbackTotal_naturality (A := A) (B := B)
-          F e he f.1 f.2)
-  refine ⟨b0.symm, ?_⟩
+  obtain ⟨b, hb⟩ := tensorTotalComparisonOfAdjunction F e he _ am
+  refine ⟨b, ?_⟩
   intro P Q p q k h V x y
   rw [hu, hu, hu]
+  let EC := F.mapHomologicalComplex (.up ℤ)
   let ι := CochainComplex.ιMapBifunctor P Q (curriedTensor A) p q k h
   let ι' := CochainComplex.ιMapBifunctor (EC.obj P) (EC.obj Q) (curriedTensor B) p q k h
-  let z := (HomologicalComplex.eval B (.up ℤ) k).mapIso (b0.app (P, Q))
-  have hz : ι' ≫ z.hom = (e (P.X p) (Q.X q)).inv ≫ F.map ι := by
-    change ι' ≫ tensorPullbackTotalComponent F e P Q k = _
-    exact HomologicalComplex.ι_mapBifunctorDesc _ p q h
-  have hi : F.map ι ≫ z.inv = (e (P.X p) (Q.X q)).hom ≫ ι' := by
-    apply (cancel_mono z.hom).mp
-    erw [Category.assoc, z.inv_hom_id, Category.comp_id, Category.assoc, hz,
-      Iso.hom_inv_id_assoc]
+  have hi : F.map ι ≫ (b.hom.app (P, Q)).f k = (e (P.X p) (Q.X q)).hom ≫ ι' :=
+    hb P Q p q k h
   have hu' := congrArg (fun f ↦ f.val.app V
     (SheafOfModules.ScalarHomOrdinary.pure R (P.X p) (Q.X q) V x y))
     (am.unit.naturality ι)
   have hh := congrArg (fun f ↦ f.val.app V
     (((am.unit.app _).val.app V)
       (SheafOfModules.ScalarHomOrdinary.pure R (P.X p) (Q.X q) V x y))) hi
-  change z.inv.val.app V
+  change ((b.hom.app (P, Q)).f k).val.app V
     (((am.unit.app _).val.app V)
       (ι.val.app V (SheafOfModules.ScalarHomOrdinary.pure R (P.X p) (Q.X q) V x y))) = _
   change ((am.unit.app _).val.app V)
