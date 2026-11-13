@@ -576,7 +576,7 @@ theorem pbcExchangeStageSquare_integral
   have hτF₁ := eq_of_heq
     (hτ F ((pbcIntegralScalarExtension l Ω X dX.out iX.out h).obj K))
   simp only [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
-  simp only [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
+  erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
     (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
   set_option backward.isDefEq.respectTransparency false in
   simp only [Functor.map_comp, eqToHom_map, Category.comp_id,
