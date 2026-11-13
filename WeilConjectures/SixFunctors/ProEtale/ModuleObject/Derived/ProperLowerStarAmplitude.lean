@@ -76,7 +76,6 @@ variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [IsCommMonObj
   [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
 
-set_option profiler true in
 /-- **Amplitude along an exact change of coefficients.** Let `a : Λ ⟶ Λ'` have exact extensions
 of scalars, and let `p : Z ⟶ Y` have invertible (Push) comparisons on bounded below complexes. If
 `Rp_*` sends the constructible `Λ_Z`-modules, in degree `0`, into degrees `≤ d`, it sends `N[0]`
