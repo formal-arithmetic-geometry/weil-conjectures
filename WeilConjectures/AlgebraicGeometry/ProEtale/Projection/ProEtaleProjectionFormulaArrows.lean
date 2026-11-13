@@ -326,6 +326,7 @@ theorem proEtaleStrictPerfect_flat
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The resolution comparison elaborates several large total-tensor naturality squares.
 /-- Mixed tensor representatives, normalized at every flat K-flat resolution.
 Source: definition 1264, displayed representatives C and J
