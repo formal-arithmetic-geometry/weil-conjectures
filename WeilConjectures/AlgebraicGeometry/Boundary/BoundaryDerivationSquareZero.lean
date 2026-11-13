@@ -42,6 +42,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The large existential target needs extra elaboration heartbeats.
 /-- The boundary of a square-zero extension is a derivation for the induced action.
