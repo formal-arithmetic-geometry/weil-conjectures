@@ -67,7 +67,6 @@ private theorem scalarCompletionIso_hom (Y : Scheme.{u})
 
 attribute [local irreducible] integralScalarExtension
 
-set_option trace.profiler true in
 /-- Compute the route using scalar normalization at Y and pullback normalization
 with coefficients L. There is no scalar model at X or pullback model for E here.
 Source: Stacks 07A4, 0941; the left route in realization step 8 of
@@ -127,12 +126,15 @@ theorem scalarPullbackLeftRoos (W : Bool → Scheme.{u})
       scalarPullbackRoosCoordinate l E L ι f P C SE (ML.roos true) K.obj eP eC q =
     scalarPullbackRoosChain l E L ι f P K.obj eP hF := by
   classical
+  -- Keep the schemes syntactically aligned with the presentation hypotheses to avoid
+  -- unfolding coefficient functors when checking definitional equality.
   let T := coefficientSequenceLimit.{u, u} l L (W true)
   let B := integralComparisonDerivedSequencePullback.{u, u} l L f
   let A := integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W false)
   let PS := ((integralOrdinaryScalar l E L ι (W false)).mapHomologicalComplex (.up ℤ)).obj P.obj
-  let CS := ((integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).E.mapHomologicalComplex
-    (.up ℤ)).obj C
+  let CS :=
+    ((integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).E.mapHomologicalComplex
+      (.up ℤ)).obj C
   let d := (integralOrdinaryScalar l E L ι (W false)).mapDerivedCategoryFactors.hom.app P.obj
   let t : A.obj (DerivedCategory.Q.obj C) ⟶ DerivedCategory.Q.obj CS :=
     (integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).ε.app C
