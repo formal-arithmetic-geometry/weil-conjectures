@@ -35,56 +35,6 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
 set_option profiler true in
-private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
-    (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
-        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅
-      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙
-        normalizedDVRModuleRes l E Y (Nat.le_succ n))
-    (hr₀ : HEq r₀ (proEtaleCoefficientDirectImageComparison f
-      (Padic.coefficientExtensionTransition l E (n + 1))).symm)
-    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
-    (NatTrans.mapHomologicalComplex
-        (coefficientSequenceTransition l E X (Nat.le_succ n)) (.up ℤ)).app
-        (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      ((normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ)).map
-        ((ordinaryPullEvaluationComplex l E f n).hom.app P) =
-    (ordinaryPullEvaluationComplex l E f (n + 1)).hom.app P ≫
-      ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 2)) f).mapHomologicalComplex
-        (.up ℤ)).map
-        ((NatTrans.mapHomologicalComplex
-          (coefficientSequenceTransition l E Y (Nat.le_succ n)) (.up ℤ)).app P) ≫
-      (NatTrans.mapHomologicalComplex
-        ((mateEquiv
-            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
-            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
-        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  apply HomologicalComplex.hom_ext
-  intro i
-  simp only [HomologicalComplex.comp_f]
-  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
-    let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
-    let tr := target.consumeMData.appArg!.consumeMData
-    let sr := source.consumeMData.appArg!.consumeMData
-    let ts := tr.getAppArgs.back!.consumeMData.getAppArgs
-    let ss := sr.getAppArgs.back!.consumeMData.getAppArgs
-    let td := ts[ts.size - 2]!.consumeMData
-    let sd := ss[ss.size - 2]!.consumeMData
-    let tf := td.getAppArgs
-    let sf := sd.getAppArgs
-    let tm := tf[tf.size - 2]!.consumeMData
-    let sm := sf[sf.size - 2]!.consumeMData
-    Lean.logInfo m!"MAP HEADS {tm.getAppFn} / {sm.getAppFn}"
-    let ta := tm.getAppArgs
-    let sa := sm.getAppArgs
-    for j in [:min ta.size sa.size] do
-      if ta[j]! != sa[j]! then
-        Lean.logInfo m!"ARG {j} TARGET {ta[j]!}\nSOURCE {sa[j]!}"
-  exact h
-
-set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
 Lemma 4.10, p. 23; Stacks 03D2 and 0941
@@ -128,7 +78,11 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  simpa only [integralPullEvaluationComplex, ordinaryPullEvaluationComplex] using
-    ordinaryPullEvaluation_cochainSquare l E f n r₀ hr₀ P
+  apply HomologicalComplex.hom_ext
+  intro i
+  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  dsimp only [Nat.succ_eq_add_one, integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
+    HomologicalComplex.comp_f] at h ⊢
+  exact h
 
 end WeilConjectures.IntegralSystemRealization
