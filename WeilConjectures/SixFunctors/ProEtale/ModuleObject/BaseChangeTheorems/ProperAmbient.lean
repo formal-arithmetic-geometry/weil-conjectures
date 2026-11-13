@@ -56,6 +56,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the categories of module objects are found for the ambient lemmas
 /-- On the ambient derived categories, the pullback comparison of a commutative square on bounded
 constructible complexes is the pullback comparison `pullbackSquareComparison` of the underlying
@@ -81,6 +82,7 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquare
     boundedConstructibleUpperStarComp_hom_app_hom, e]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the bounded constructible and the ambient exchange morphisms are unified
 /-- The base change map of the ambient derived categories of module objects over `ℚ̲̄_ℓ` at a
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
