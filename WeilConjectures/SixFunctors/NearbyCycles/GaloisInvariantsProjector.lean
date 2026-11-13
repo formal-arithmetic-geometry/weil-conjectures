@@ -540,7 +540,7 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
           (∀ (L' : FiniteGaloisIntermediateField L Ω) (a : L' ≃ₐ[L] L'),
             ∃ k, ∀ x : L', S k x = a x) →
           (∀ k, H.map (ρ (S k)) ≫ φ = φ) → H.map (r ≫ α) ≫ φ = φ := by
-  dsimp only
+  intro Λ₀ α D ρ
   choose F₀ hF₀ using hterms
   have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
       (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -566,14 +566,13 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
     N h Ω C R hR hinv
   obtain ⟨r, hr₁, hr₂, hr₃⟩ := hret
   refine ⟨r, hr₁, hr₂, ?_⟩
-  intro Z f' q W φ κ S hS hφ
+  intro Z f' q H W φ κ S hS hφ
   obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
     K a hKe f' q
   rw [hr₃]
   exact map_galoisLayer_derivedTrace_projector (Profinite.continuousMapRingObj T₀) N h Ω
     (fun j M ↦ hW j M) C K hc a hK e
-    (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q)
-    hΦ (fun j ↦ hW j W) φ S hS hφ
+    H hΦ (fun j ↦ hW j W) φ S hS hφ
 
 /-- Use an étale-origin complex to construct the shared-map projector. -/
 private theorem exists_retraction_galoisLayer_projector_of_etaleOrigin
