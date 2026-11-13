@@ -111,6 +111,7 @@ private theorem comparison_formula (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t 
     ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W,(t.hom.app W).hom] m) = _
   rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
 
+open TopCat.Presheaf in
 private theorem stalkTensor_addHom_ext (r : D ⟶ C)
     (M : SheafOfModules.{u} (𝓡 D)) (x : T) {N : Type u} [AddCommGroup N]
     (g h : (ModuleCat.extendScalars
@@ -120,10 +121,10 @@ private theorem stalkTensor_addHom_ext (r : D ⟶ C)
     (hgh : ∀ (U : Opens T) (hx : x ∈ U) (c : C.obj.obj (Opposite.op U))
         (m : M.val.obj (Opposite.op U)),
       g (TopCat.Presheaf.germ C.obj U x hx c
-          ⊗ₜ[D.obj.stalk x,((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
+          ⊗ₜ[stalk D.obj x,((stalkFunctor CommRingCat x).map r.hom).hom]
           TopCat.Presheaf.germ M.val.presheaf U x hx m) =
       h (TopCat.Presheaf.germ C.obj U x hx c
-          ⊗ₜ[D.obj.stalk x,((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
+          ⊗ₜ[stalk D.obj x,((stalkFunctor CommRingCat x).map r.hom).hom]
           TopCat.Presheaf.germ M.val.presheaf U x hx m)) : g = h := by
   apply AddMonoidHom.ext
   intro z
