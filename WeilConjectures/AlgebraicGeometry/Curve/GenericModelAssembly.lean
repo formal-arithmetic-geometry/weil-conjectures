@@ -92,12 +92,14 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   -- the generic point of `V`
   have hjV : Set.range j ⊆ Set.range V.ι := by
     rintro _ ⟨x, rfl⟩
+    trace "before tactic 95"
     rw [Scheme.Opens.range_ι, hj]
     exact hηV
   let j' : Spec (.of L) ⟶ V.toScheme := IsOpenImmersion.lift V.ι j hjV
   have hj'V : j' ≫ V.ι = j := IsOpenImmersion.lift_fac _ _ _
   have hj' (x : Spec (.of L)) : j' x = genericPoint V := by
     apply V.ι.isOpenEmbedding.injective
+    trace "before tactic 101"
     rw [genericPoint_eq_of_isOpenImmersion V.ι, ← Scheme.Hom.comp_apply, hj'V, hj]
   -- the restricted objects
   let X' : X₀.Opens := F₀ ⁻¹ᵁ V
@@ -112,6 +114,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V := (morphismRestrict_comp _ _ _).symm
   -- smoothness and relative dimension of the pieces over `V`
   have hrel (a : ι) : SmoothOfRelativeDimension (d a) (p' a ≫ F') := by
+    trace "before tactic 115"
     rw [hcomp]
     have := hsm a
     have := hg a
@@ -134,16 +137,21 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     have : IsFinite (ν ≫ t) := by rw [hν]; exact hν'fin
     exact IsFinite.of_comp ν t
   have hν's : Surjective ν' := by
+    trace "before tactic 137"
     refine ⟨fun x ↦ ?_⟩
     obtain ⟨z, hz⟩ := hsurj (X'.ι x) x.2
     obtain ⟨w, hw₁, hw₂⟩ := Scheme.Pullback.exists_preimage_pullback (f := ν₀) (g := X'.ι) z x hz
     exact ⟨Hσ.isoPullback.inv w, by
+      trace "before tactic 141"
       rw [← Scheme.Hom.comp_apply, Hσ.isoPullback_inv_snd]
       exact hw₂⟩
   have hνs : Surjective ν := by
+    trace "before tactic 144"
     refine ⟨fun x ↦ ?_⟩
     obtain ⟨y, hy⟩ := hν's.surj (t x)
+    trace "before tactic 146"
     refine ⟨y, t.isClosedEmbedding.injective ?_⟩
+    trace "before tactic 147"
     rw [← Scheme.Hom.comp_apply, hν]
     exact hy
   -- the open `W'` of `X'` and the closed subscheme `D` of `T`
@@ -153,39 +161,48 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   let D := I.subscheme
   let dd : D ⟶ T := I.subschemeι
   have hrange : Set.range dd = (t ⁻¹ᵁ W' : Set T)ᶜ := by
+    trace "before tactic 156"
     rw [Scheme.IdealSheafData.range_subschemeι, Scheme.IdealSheafData.coe_support_vanishingIdeal]
     rfl
   have hopen : (⟨(Set.range dd.base)ᶜ, dd.isClosedEmbedding.isClosed_range.isOpen_compl⟩ :
       T.Opens) = t ⁻¹ᵁ W' := by
     ext x
     change x ∈ (Set.range dd)ᶜ ↔ _
+    trace "before tactic 162"
     rw [hrange, compl_compl]
   have hX'W : X'.ι ⁻¹ᵁ (W₀ ⊓ F₀ ⁻¹ᵁ V) = W' := by
     ext x
     exact ⟨fun h ↦ h.1, fun h ↦ ⟨h, x.2⟩⟩
+  trace "before tactic 166"
   refine ⟨T, t, htci, htsurj, hTred, ι, inferInstance, Y', ν, hνfin, hνs, D, dd, inferInstance,
     ?_, ?_, fun a ↦ ?_⟩
   · -- finiteness of `D` over `V`
     have : IsProper F' := inferInstance
     have : IsProper (dd ≫ t ≫ F') := inferInstance
     have : LocallyQuasiFinite (dd ≫ t ≫ F') := by
+      trace "before tactic 172"
       refine LocallyQuasiFinite.of_finite_preimage_singleton (dd ≫ t ≫ F') fun s ↦ ?_
+      trace "before tactic 173"
       refine ((hfin (V.ι s) s.2).preimage
         (f := fun y : D ↦ X'.ι (t (dd y))) ?_).subset ?_
       · intro y₁ _ y₂ _ hy
         exact dd.isClosedEmbedding.injective (t.isClosedEmbedding.injective
           (X'.ι.isOpenEmbedding.injective hy))
       · intro y hy
+        trace "before tactic 179"
         refine ⟨?_, ?_⟩
         · rw [← Scheme.Hom.comp_apply, ← morphismRestrict_ι]
           simp only [Set.mem_preimage, Set.mem_singleton_iff] at hy
+          trace "before tactic 182"
           rw [Scheme.Hom.comp_apply, ← hy]
           rfl
         · have hy' : dd y ∈ Set.range dd := ⟨y, rfl⟩
+          trace "before tactic 185"
           rw [hrange] at hy'
           exact hy'
     exact IsFinite.of_isProper_of_locallyQuasiFinite _
   · -- `ν` is an isomorphism outside `D`
+    trace "before tactic 189"
     rw [hopen]
     have hci' : IsClosedImmersion (ν' ∣_ W') := by
       obtain ⟨a', -, Ha'⟩ :=
@@ -201,18 +218,23 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     exact isIso_of_isClosedImmersion_of_surjective _
   · -- the pieces
     have he₀ : (Sigma.ι Y' a ≫ ν) ≫ t = p' a := by
+      trace "before tactic 204"
       rw [Category.assoc, hν]
       simp [ν']
     have he : Sigma.ι Y' a ≫ ν ≫ t ≫ F' = p' a ≫ F' := by
+      trace "before tactic 207"
       rw [← he₀]
       simp
+    trace "before tactic 209"
     refine ⟨?_, ?_⟩
     · have : IsFinite ((Sigma.ι Y' a ≫ ν) ≫ t) := by rw [he₀]; infer_instance
       exact IsFinite.of_comp _ t
+    trace "before tactic 212"
     rw [he]
     have := hrel a
     rcases Nat.le_one_iff_eq_zero_or_eq_one.mp (hd a) with h0 | h1
     · right
+      trace "before tactic 216"
       rw [h0] at this
       have : Etale (p' a ≫ F') := (Etale.iff_smoothOfRelativeDimension_zero _).mpr this
       exact ⟨IsFinite.of_isProper_of_locallyQuasiFinite _, this⟩
