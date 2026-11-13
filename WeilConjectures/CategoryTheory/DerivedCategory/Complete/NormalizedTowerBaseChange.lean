@@ -383,8 +383,8 @@ lemma isIso_Q_map_mappingCone_map_comp_restrictScalarsActionMap (f : R →+* B)
   infer_instance
 
 /-- A morphism to a restricted complex is a derived base change if its reduction followed by
- the action map is an isomorphism. -/
-lemma isDerivedBaseChange_of_isIso_reductionActionMap
+the action map is an isomorphism. -/
+private lemma isDerivedBaseChange_of_isIso_reductionActionMap
     (hψsurj : Function.Surjective ψ) (hker : RingHom.ker ψ = Ideal.span {ϖ ^ n})
     (Y : CochainComplex (Sheaf J (ModuleCat.{u + 1} B)) ℤ)
     {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
@@ -405,9 +405,9 @@ lemma isDerivedBaseChange_of_isIso_reductionActionMap
   replace hg : u ≫ F.mapDerivedCategory.map g =
       M.iso.hom ≫ η ≫ F.mapDerivedCategoryFactors.inv.app Y := hg
   have key : Q.map (D.complexMap M.P) ≫ resQ g = M.iso.hom ≫ η := by
-    change (Q.map (D.complexMap M.P) ≫ F.mapDerivedCategoryFactors.inv.app Z) ≫
+    change Q.map (D.complexMap M.P) ≫ F.mapDerivedCategoryFactors.inv.app Z ≫
       F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Y = _
-    rw [← assoc, hg, assoc, assoc, Iso.inv_hom_id_app, comp_id]
+    rw [← assoc, ← assoc, hg, assoc, assoc, Iso.inv_hom_id_app, comp_id]
   have hred : (reductionFunctor J I n).map M.iso.hom ≫
       ((reductionFunctor J I n).map η ≫ reductionActionMap hϖ hI n hψ Y) =
       ((reductionConeIso hϖ hI n M.P).hom ≫
