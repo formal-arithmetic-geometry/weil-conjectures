@@ -88,7 +88,7 @@ private theorem affinePerfectTensorRoof_aux
   obtain ⟨γ, hβ, hγ⟩ := he J hJ u hu ξ (e.symm α) hξ
   refine ⟨J, hJ, hperfect, u, γ, @asIso _ _ _ _ _ hβ, rfl, ?_⟩
   apply (Iso.eq_inv_comp _).2
-  simpa only [Equiv.apply_symm_apply] using hγ
+  simpa only [asIso_hom, Equiv.apply_symm_apply] using hγ
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
