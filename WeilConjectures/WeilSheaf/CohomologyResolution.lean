@@ -102,7 +102,6 @@ private lemma adicGlobalSectionsFrobeniusNatTransAppHB {Z W : Scheme.{u}} (g : Z
     comm.symm X.carrier.X ((AdicSheaf.forget _).map X.str.hom)
   rw [IsoAlgebra.frobeniusNatTrans_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
     Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
   rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
   simp only [Category.assoc] at h ⊢
