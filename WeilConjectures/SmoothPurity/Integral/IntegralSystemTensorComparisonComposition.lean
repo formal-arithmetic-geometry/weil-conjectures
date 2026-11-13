@@ -274,7 +274,7 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
 
 end Factors
 
-set_option maxHeartbeats 3000000 in
+set_option profiler true in
 -- Matching the strict law against the descent data unfolds instance paths of the
 -- abelian categories of strict quotient systems.
 /-- The coherent system pullback/tensor comparisons satisfy the composition law with the
