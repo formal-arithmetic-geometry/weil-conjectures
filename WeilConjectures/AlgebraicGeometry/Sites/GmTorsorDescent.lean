@@ -310,6 +310,17 @@ private lemma pullHom_twisted_comm {C : Type*} [Category C]
     ((F.map f₁.op.toLoc).toFunctor.map x₁) ((F.map f₂.op.toLoc).toFunctor.map x₂)
     s₁ s hs hc).symm
 
+private lemma torsorDescentData_hom {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
+    {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
+    {Y : Scheme.{u}} (q : Y ⟶ X) {i₁ i₂ : ι}
+    (f₁ : Y ⟶ (V i₁).left) (f₂ : Y ⟶ (V i₂).left)
+    (hf₁ : f₁ ≫ (V i₁).hom = q) (hf₂ : f₂ ≫ (V i₂).hom = q) :
+    (descentData T V t).hom q f₁ f₂ hf₁ hf₂ =
+      smulMor ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj
+        ((modulesPseudofunctor.map (V i₁).hom.op.toLoc).toFunctor.obj (Modules.unitObj X)))
+          (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)) ≫
+        (unitDescentData V).hom q f₁ f₂ hf₁ hf₂ := rfl
+
 set_option profiler true in
 private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
     {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
@@ -325,9 +336,9 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
       pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
         (f₁ := (V i₁).hom) (f₂ := (V i₁).hom) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
   have hc := φ.comm q f₁ f₂ hf₁ hf₂
-  dsimp only [descentData, unitDescentData, Pseudofunctor.toDescentData,
-    Pseudofunctor.DescentData.ofObj] at hc
-  exact pullHom_twisted_comm (F := modulesPseudofunctor)
+  simp only [torsorDescentData_hom, Pseudofunctor.toDescentData_obj,
+    Pseudofunctor.DescentData.ofObj_hom] at hc
+  exact pullHom_twisted_comm (F := modulesPseudofunctor) (O := Modules.unitObj X) (M := M)
     (V i₁).hom (V i₂).hom q f₁ f₂ hf₁ hf₂ (φ.hom i₁) (φ.hom i₂) _ _
     (smulMor_naturality (Y := Y)
       ((modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
@@ -337,13 +348,16 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     (M : modulesPseudofunctor.obj (.mk (op X)))
     [SheafOfModules.IsInvertible.{u, u, u} (M : X.Modules)]
-    {V Z : X.Etale} (a : Z ⟶ V) (x : (Modules.etaleIsoTorsor M).sheaf.obj.obj (op V)) :
-    Modules.etaleIsoTorsorVal M ((Modules.etaleIsoTorsor M).sheaf.obj.map a.op x) =
+    {V Z : X.Etale} (a : Z ⟶ V)
+    (ψ : (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj (Modules.unitObj X) ⟶
+      (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj M) (hψ : IsIso ψ) :
+    Modules.etaleIsoTorsorVal M
+        ((Modules.etaleIsoTorsor M).sheaf.obj.map a.op (Modules.etaleIsoTorsorMk M ψ hψ)) =
       pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
-        (f₁ := V.hom) (f₂ := V.hom) (Modules.etaleIsoTorsorVal M x) a.left Z.hom Z.hom
+        (f₁ := V.hom) (f₂ := V.hom) ψ a.left Z.hom Z.hom
         (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := by
   change (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
-    ((toProEt X ⋙ ProEt.forget X).map a).op (Modules.etaleIsoTorsorVal M x) = _
+    ((toProEt X ⋙ ProEt.forget X).map a).op ψ = _
   simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
   rfl
 

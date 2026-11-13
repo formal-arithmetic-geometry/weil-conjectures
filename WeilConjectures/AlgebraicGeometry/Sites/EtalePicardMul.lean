@@ -50,6 +50,7 @@ private lemma etaleIsoTorsorVal_map_mk {V Z : X.Etale} (a : Z ⟶ V)
   simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
   rfl
 
+omit [SheafOfModules.IsInvertible.{u, u, u} (A : X.Modules)] in
 private lemma homSection_eq_scalar_of_generators {Y : Scheme.{u}} (f : Y ⟶ X)
     {U₁ U₂ : X.Opens} (e₁ : Γ((A : X.Modules), U₁)) (e₂ : Γ((A : X.Modules), U₂))
     (he₁ : IsFreeGenerator e₁) (c : Γ(X, U₁ ⊓ U₂))
@@ -66,7 +67,6 @@ private lemma homSection_eq_scalar_of_generators {Y : Scheme.{u}} (f : Y ⟶ X)
   have hg : IsFreeGenerator (genSection f e₁ h₁) := (he₁.pullback_unit_app f).map _
   exact (Scheme.presheaf_map_id_apply (X := Y) _ _).symm.trans (hg.smul_left_injective k)
 
-set_option profiler true in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The difference of two trivialisations of `Isom(𝒪, A)` attached to generators `e₁`, `e₂` with
