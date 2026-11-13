@@ -379,6 +379,71 @@ private theorem restrictHomEquiv_map
     G.map (restrictHomEquiv F G E h f) = E (F.map f) :=
   Classical.choose_spec ((h (F.map f)).mp ⟨f, rfl⟩)
 
+private theorem linear_mate_iff
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
+    (V : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
+    [PreservesFiniteProducts L] [PreservesFiniteProducts V]
+    {R : Sheaf J CommRingCat.{u}} {S A : Sheaf K CommRingCat.{u}}
+    (eR : ringSets A ≅ L.obj (ringSets R)) (c : A ⟶ S)
+    (M : SheafOfModules.{u} (ringBase R)) (MI : SheafOfModules.{u} (ringBase A))
+    (H : SheafOfModules.{u} (ringBase S)) (PH : SheafOfModules.{u} (ringBase R))
+    (eM : (moduleSets A).obj MI ≅ L.obj ((moduleSets R).obj M))
+    (eH : (moduleSets R).obj PH ≅ V.obj ((moduleSets S).obj H))
+    (hI : ∃ (aM : (moduleSets R).obj M ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
+      (sM : ringSets R ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
+      (aI : (moduleSets A).obj MI ⨯ (moduleSets A).obj MI ⟶ (moduleSets A).obj MI)
+      (sI : ringSets A ⨯ (moduleSets A).obj MI ⟶ (moduleSets A).obj MI),
+      addSpec M aM ∧ smulSpec M sM ∧ addSpec MI aI ∧ smulSpec MI sI ∧
+      L.map aM = prodComparison L _ _ ≫ prod.map eM.inv eM.inv ≫ aI ≫ eM.hom ∧
+      L.map sM = prodComparison L _ _ ≫ prod.map eR.inv eM.inv ≫ sI ≫ eM.hom)
+    (hP : ∃ (aH : (moduleSets S).obj H ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
+      (sH : ringSets S ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
+      (aP : (moduleSets R).obj PH ⨯ (moduleSets R).obj PH ⟶ (moduleSets R).obj PH)
+      (sP : ringSets R ⨯ (moduleSets R).obj PH ⟶ (moduleSets R).obj PH)
+      (k : ringSets R ⨯ (moduleSets R).obj PH ⟶
+        V.obj (ringSets S ⨯ (moduleSets S).obj H)),
+      addSpec H aH ∧ smulSpec H sH ∧ addSpec PH aP ∧ smulSpec PH sP ∧
+      V.map aH = prodComparison V _ _ ≫ prod.map eH.inv eH.inv ≫ aP ≫ eH.hom ∧
+      k ≫ V.map prod.fst = prod.fst ≫ adj.homEquiv _ _
+        (eR.inv ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map c) ∧
+      k ≫ V.map prod.snd = prod.snd ≫ eH.hom ∧ sP ≫ eH.hom = k ≫ V.map sH)
+    (α : (moduleSets A).obj MI ⟶ (moduleSets S).obj H) :
+    (∃ f : MI ⟶ (restrictScalars ((sheafCompose K
+      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H, (moduleSets A).map f = α) ↔
+      ∃ g : M ⟶ PH, (moduleSets R).map g = mateIsoEquiv adj eM eH α := by
+  have : K.HasSheafCompose (CategoryTheory.forget CommRingCat.{u}) := inferInstance
+  obtain ⟨aM, sM, aI, sI, haM, hsM, haI, hsI, hLA, hLS⟩ := hI
+  obtain ⟨aH, sH, aP, sP, k, haH, hsH, haP, hsP, hVA, hk₁, hk₂, hks⟩ := hP
+  have hRightAdd := right_operation V eH aP aH hVA
+  have hk := right_pair V k
+    (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
+      (CategoryTheory.forget CommRingCat)).map c)) eH.hom hk₁ hk₂
+  have hRightSmul : sP ≫ eH.hom =
+      prod.map (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
+        (CategoryTheory.forget CommRingCat)).map c)) eH.hom ≫
+          inv (prodComparison V (ringSets S) ((moduleSets S).obj H)) ≫ V.map sH := by
+    rw [hks, hk]
+    simp only [Category.assoc]
+  let β := mateIsoEquiv adj eM eH α
+  have hm : adj.homEquiv _ _ (eM.inv ≫ α) = β ≫ eH.hom :=
+    mateIsoEquiv_equation adj eM eH α
+  have hAdd := binary_mate_iso_iff adj eM eM eM
+    eH.hom eH.hom eH aM aI aH aP
+    hLA hRightAdd α α α (β) (β) (β) hm hm hm
+  have hSmul := binary_mate_iso_iff adj eR eM eM
+    (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
+      (CategoryTheory.forget CommRingCat)).map c))
+    eH.hom eH sM sI sH sP hLS hRightSmul
+    ((sheafCompose K (CategoryTheory.forget CommRingCat)).map c) α α
+    (𝟙 (ringSets R)) (β) (β)
+    (by exact (Category.id_comp _).symm) hm hm
+  have hSame := linear_iff (𝟙 R) M PH aM aP sM sP
+    haM haP hsM hsP (β)
+  exact (linear_iff c MI H aI aH sI sH haI haH hsI hsH α).trans
+    ((and_congr hAdd hSmul).trans hSame.symm)
+
 end Helpers
 
 set_option trace.profiler true in
@@ -728,34 +793,8 @@ theorem geometric_module_transport
       (∃ f : I.obj M ⟶ (restrictScalars ((sheafCompose K
         (forget₂ CommRingCat RingCat)).map c)).obj H, (moduleSets A).map f = α) ↔
         ∃ g : M ⟶ P.obj H, (moduleSets R).map g = E M H α := by
-    obtain ⟨aM, sM, aI, sI, haM, hsM, haI, hsI, hLA, hLS⟩ := hI M
-    obtain ⟨aH, sH, aP, sP, k, haH, hsH, haP, hsP, hVA, hk₁, hk₂, hks⟩ := hP H
-    have hRightAdd := right_operation V (eP.app H) aP aH hVA
-    have hk := right_pair V k
-      (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
-        (CategoryTheory.forget CommRingCat)).map c)) (eP.hom.app H) hk₁ hk₂
-    have hRightSmul : sP ≫ eP.hom.app H =
-        prod.map (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
-          (CategoryTheory.forget CommRingCat)).map c)) (eP.hom.app H) ≫
-            inv (prodComparison V (ringSets S) ((moduleSets S).obj H)) ≫ V.map sH := by
-      rw [hks, hk]
-      simp only [Category.assoc]
-    have hm : adj.homEquiv _ _ (eI.inv.app M ≫ α) = E M H α ≫ eP.hom.app H :=
-      mateIsoEquiv_equation adj (eI.app M) (eP.app H) α
-    have hAdd := binary_mate_iso_iff adj (eI.app M) (eI.app M) (eI.app M)
-      (eP.hom.app H) (eP.hom.app H) (eP.app H) aM aI aH aP
-      hLA hRightAdd α α α (E M H α) (E M H α) (E M H α) hm hm hm
-    have hSmul := binary_mate_iso_iff adj eR (eI.app M) (eI.app M)
-      (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
-        (CategoryTheory.forget CommRingCat)).map c))
-      (eP.hom.app H) (eP.app H) sM sI sH sP hLS hRightSmul
-      ((sheafCompose K (CategoryTheory.forget CommRingCat)).map c) α α
-      (𝟙 (ringSets R)) (E M H α) (E M H α)
-      (by exact (Category.id_comp _).symm) hm hm
-    have hSame := linear_iff (𝟙 R) M (P.obj H) aM aP sM sP
-      haM haP hsM hsP (E M H α)
-    exact (linear_iff c (I.obj M) H aI aH sI sH haI haH hsI hsH α).trans
-      ((and_congr hAdd hSmul).trans hSame.symm)
+    exact linear_mate_iff L V adj eR c M (I.obj M) H (P.obj H)
+      (eI.app M) (eP.app H) (hI M) (hP H) α
   let B : ∀ M H, (I.obj M ⟶ (restrictScalars ((sheafCompose K
       (forget₂ CommRingCat RingCat)).map c)).obj H) ≃ (M ⟶ P.obj H) :=
     fun M H ↦ restrictHomEquiv (moduleSets A) (moduleSets R) (E M H) (hImage M H)
