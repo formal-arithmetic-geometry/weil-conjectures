@@ -86,6 +86,7 @@ private theorem exists_restricted_unit_support_enlargement
   exact ⟨_, enlarge_restricted_unit_support X R V U W Z hUV hWU hZU hZW I S T hST b a ha⟩
 
 set_option backward.isDefEq.respectTransparency true in
+set_option trace.profiler true in
 private theorem exists_finite_support_of_unit_support
     (X : Scheme.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (V U : X.Opens) (hUV : U ≤ V)
@@ -130,6 +131,7 @@ private theorem exists_finite_support_of_unit_support
     exists_restricted_unit_support_enlargement X R V U (W i) W' hUV (hWU i) hW'U (hW' i)
       I (S i) S' (hS i) (b i) (a i) (ha i)
   obtain ⟨A, hA⟩ := factor_restricted_free_map X R U J F
+    (M := (overMap R (homOfLE hUV)).obj (free (R := R.over V) I))
     (G.map (freeMap (R := R.over V) ((↑) : S' → I))) l a' ha'
   exact ⟨W', hW'U, hx', S', A, hA⟩
 
