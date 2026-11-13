@@ -108,8 +108,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Splitting over U first makes the minimality hypotheses unnecessary for this proof.
 set_option trace.profiler true in
-set_option maxHeartbeats 1800000 in
--- The nested normalization and iterated pullbacks require extra elaboration heartbeats.
 /-- The normalization test is split on the zero slice of its punctured open.
 This only gives an isomorphism after pulling back to the zero slice.
 
@@ -176,23 +174,11 @@ theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u
         (MvPowerSeries.constantCoeff (σ := Fin d)))) ∣_ V
       ∃ e : pullback (p ∣_ V) z ≅ pullback (r ∣_ V) z,
         e.hom ≫ pullback.snd (r ∣_ V) z = pullback.snd (p ∣_ V) z := by
-  let : IsFinite PA.obj.hom := PA.property
-  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
-    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
-      (inferInstance : QuasiCompact U.ι)
-  dsimp only
-  intro d t hb hz
-  let a := S.fromSpecStalk s
+  intro hPA hQC a n τ d t hb hz T F E V r p z
   let g := pullback.fst c a
   let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι
-  let n := pullback.snd f.fromNormalization g
-  let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))
-  let r := pullback.snd n t
-  let p := Sigma.desc (fun _ : G ↦ 𝟙 T)
-  let V := (t ≫ g) ⁻¹ᵁ (c ⁻¹ᵁ U)
   let ζ := Spec.map (CommRingCat.ofHom
     (MvPowerSeries.constantCoeff (σ := Fin d) (R := S.presheaf.stalk s)))
-  let z := ζ ∣_ V
   let v := z ≫ V.ι
   let Hc := (isPullback_morphismRestrict c U).flip
   let b : U.toScheme ⟶ (c ⁻¹ᵁ U).toScheme :=

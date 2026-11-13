@@ -131,8 +131,6 @@ private theorem residueSeparableAt_of_root_charts {X Y : Scheme.{u}} (n : X ⟶ 
   exact hcomp
 
 set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
--- Comparing the dependent normalization types needs this elaboration budget.
 /-- Residue extensions at points above the closed trait section are separable.
 
 Source: Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ.
@@ -189,14 +187,7 @@ theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : S
           ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
             (pullback.fst c a)).presheaf.stalk x)) := by
   classical
-  let : IsFinite PA.obj.hom := PA.property
-  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
-    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
-      (inferInstance : QuasiCompact U.ι)
-  dsimp only
-  intro hn x _hx
-  let a := S.fromSpecStalk s
-  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
+  intro hPA hQC a n τ hn x _hx
   obtain ⟨I, R, φ, hφ, hcover, hcharts⟩ :=
     GaloisCover.stalk_normalization_trait_charts
       c G hG q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr hn

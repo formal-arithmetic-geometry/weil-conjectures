@@ -83,8 +83,6 @@ private theorem root_maximalIdeal {R : Type u} [CommRing R] [IsLocalRing R]
       ((Ideal.span {t}).mul_mem_right _ (Ideal.subset_span (by simp))))
 
 set_option trace.profiler true in
-set_option maxHeartbeats 2400000 in
--- The dependent normalization stalks and the root presentation need this elaboration budget.
 /-- The tame local chart, before using splitting of the generic section fibre.
 
 Source: Stacks Project, Tag 0EYH, and the transverse section construction in 0EYI(2).
@@ -156,12 +154,7 @@ theorem GaloisCover.stalk_normalization_trait_section_chart_generic_factor {S C 
               Spec.map (CommRingCat.ofHom (algebraMap K
                 (AdjoinRoot ((Polynomial.X : Polynomial K) ^ e -
                   Polynomial.C (π : K))))) := by
-  let : IsFinite PA.obj.hom := PA.property
-  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
-    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
-      (inferInstance : QuasiCompact U.ι)
-  dsimp only
-  intro hn x hx
+  intro hPA hQC a n τ hn x hx B J
   obtain ⟨R, hR, f, e, he, hf, hD, β, hβlocal, hβflat, hlocal, hJ,
       A, hA, hAtrait, K, hK, hAK, hfrac, ϖ, π, b, hϖ, hπ, g, hg, hw⟩ :=
     GaloisCover.stalk_normalization_trait_section_root_presentation
@@ -177,11 +170,11 @@ theorem GaloisCover.stalk_normalization_trait_section_chart_generic_factor {S C 
   let := hAK
   let := hfrac
   let p := (Polynomial.X : Polynomial R) ^ e - Polynomial.C f
-  obtain ⟨hm, ht⟩ := root_maximalIdeal f e hf
+  have hroot := root_maximalIdeal f e hf
   refine ⟨CommRingCat.of (AdjoinRoot p), hD, β, hβlocal, hβflat,
     AdjoinRoot.root p, e, K, hK, Ring.ordOfUnits A K, π, b, he, ?_, ?_, ?_, g, hg, hw⟩
-  · exact hm.trans (congrArg (fun I ↦ I ⊔ Ideal.span {AdjoinRoot.root p}) hJ.symm)
-  · exact hJ.symm ▸ ht
+  · exact hroot.1.trans (congrArg (fun I ↦ I ⊔ Ideal.span {AdjoinRoot.root p}) hJ.symm)
+  · exact hJ.symm ▸ hroot.2
   · simp only [Ring.ordOfUnits_apply, hπ,
       Ring.ordOf_algebraMap_of_irreducible hϖ]
 
