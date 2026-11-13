@@ -64,7 +64,6 @@ private theorem adjunction_unit_map_augmentation
     adj.unit.naturality i
   rw [← Category.assoc, hn, Category.assoc, ← P.map_comp, ht, P.map_comp, Category.assoc]
 
-set_option profiler true in
 /-- Pushforward identifies the global-section complexes, with the inverse given by
 restriction along the inverse image of the top open. -/
 private theorem exists_pushforward_sections_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -145,7 +144,7 @@ private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
   congr 1
 
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
+set_option trace.profiler true in
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
 section complexes, before the map to a cohomology sheaf.
 Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
