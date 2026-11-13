@@ -178,6 +178,16 @@ end PresheafOfModules
 
 namespace SheafOfModules
 
+private lemma tensorComparison_naturality_right_kfg
+    {P S : Type*} [Category* P] [Category* S] [MonoidalCategory P] [MonoidalCategory S]
+    (F : P ⥤ S) [F.LaxMonoidal] {A T T' : S} {M N N' : P}
+    (a : A ⟶ F.obj M) (b : T ⟶ F.obj N) (b' : T' ⟶ F.obj N')
+    (f : T ⟶ T') (g : N ⟶ N') (h : f ≫ b' = b ≫ F.map g) :
+    A ◁ f ≫ (a ⊗ₘ b') ≫ Functor.LaxMonoidal.μ F M N' =
+      (a ⊗ₘ b) ≫ Functor.LaxMonoidal.μ F M N ≫ F.map (M ◁ g) := by
+  rw [← Functor.LaxMonoidal.μ_natural_right]
+  simp only [← Category.assoc, whiskerLeft_comp_tensorHom, tensorHom_comp_whiskerLeft, h]
+
 -- The underlying sheaf of rings of the sheaf of commutative rings `R`.
 set_option hygiene false in
 local notation "𝓡" => (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
@@ -193,25 +203,30 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 attribute [local instance] monoidalCategory symmetricCategory
 
-set_option maxHeartbeats 1000000 in
--- The tensor localization comparison has dependent sheafification instances.
+private noncomputable def sheafificationCounitIso_kfg (A : SheafOfModules.{max u v} 𝓡) :
+    (𝓢).obj A.val ≅ A :=
+  (asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit).app A
+
+private lemma tensorObjIsoSheafification_hom_eq_kfg (A T : SheafOfModules.{max u v} 𝓡) :
+    (tensorObjIsoSheafification A T).hom =
+      ((sheafificationCounitIso_kfg A).inv ⊗ₘ (sheafificationCounitIso_kfg T).inv) ≫
+        Functor.LaxMonoidal.μ (𝓢) A.val T.val := rfl
+
 /-- The tensor comparison is natural in the second factor. -/
 private lemma whiskerLeft_tensorObjIsoSheafification_hom_kfg (A : SheafOfModules.{max u v} 𝓡)
     {T T' : SheafOfModules.{max u v} 𝓡} (f : T ⟶ T') :
     A ◁ f ≫ (tensorObjIsoSheafification A T').hom =
       (tensorObjIsoSheafification A T).hom ≫ (𝓢).map (A.val ◁ f.val) := by
-  have h := (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit.naturality f
-  dsimp at h
-  simp only [tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom, tensorIso_inv,
-    Iso.app_inv, asIso_inv, Functor.Monoidal.μIso_hom, Category.assoc,
-    ← Functor.LaxMonoidal.μ_natural_right]
-  simp only [← Category.assoc]
-  congr 1
-  rw [← id_tensorHom, ← id_tensorHom, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
-  congr 1
-  simp only [NatIso.isIso_inv_app, IsIso.eq_inv_comp]
-  rw [← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
-  rfl
+  have h : f ≫ (sheafificationCounitIso_kfg T').inv =
+      (sheafificationCounitIso_kfg T).inv ≫ (𝓢).map f.val :=
+    (asIso (PresheafOfModules.sheafificationAdjunction.{max u v}
+      (𝟙 (𝓡).obj)).counit).inv.naturality f
+  rw [tensorObjIsoSheafification_hom_eq_kfg, tensorObjIsoSheafification_hom_eq_kfg,
+    Category.assoc]
+  exact tensorComparison_naturality_right_kfg (𝓢) (A := A) (T := T) (T' := T')
+    (M := A.val) (N := T.val) (N' := T'.val)
+    (sheafificationCounitIso_kfg A).inv (sheafificationCounitIso_kfg T).inv
+    (sheafificationCounitIso_kfg T').inv f f.val h
 
 /-- **The tensor-hom adjunction for sheaves of modules**: morphisms `A ⊗ T ⟶ N` correspond to
 morphisms `T ⟶ homObj A N`. A morphism `A ⊗ T ⟶ N` is a morphism `a(A ⊗ T) ⟶ N` out of the
