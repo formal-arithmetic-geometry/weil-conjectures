@@ -61,7 +61,6 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
-set_option profiler true in
 /-- Extension along ε supplies a functor and its canonical tensor unit after κ.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.
 Proof: Use change of rings along ε on P objects and sheafify id tensor P(a) on morphisms.

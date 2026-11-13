@@ -185,6 +185,12 @@ private theorem comparisons_from_objectwise
   obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
   exact ⟨α, β, ha, hc⟩
 
+private theorem tensorComparison_counit_naturality
+    (L : X.Modules ⥤ U.Modules) (adj : L ⊣ pushforward f)
+    {F F' : U.Modules} (k : F ⟶ F') :
+    L.map ((S).map ((R).map k)) ≫ adj.counit.app F' = adj.counit.app F ≫ k := by
+  exact adj.counit.naturality k
+
 set_option profiler true in
 private theorem tensorComparisons_from_objectwise
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
@@ -202,12 +208,7 @@ private theorem tensorComparisons_from_objectwise
       { app := fun F ↦ (adj₀).counit.app F
         naturality := by
           intro F F' k
-          change (tensorPullback f).map ((S).map ((R).map k)) ≫ _ = _
-          have hk : (S).map ((R).map k) = (pushforward f).map k := by
-            ext V m
-            rfl
-          rw [hk]
-          exact (adj₀).counit.naturality k }
+          exact tensorComparison_counit_naturality f (tensorPullback f) (adj₀) k }
     obtain ⟨α, ha⟩ := naturalFactor (R ⋙ (S ⋙ tensorPullback f)) (R ⋙ H)
       (Functor.whiskerLeft R γ) δ hf
     let τ : S ⟶ (H ⋙ R) ⋙ S :=
