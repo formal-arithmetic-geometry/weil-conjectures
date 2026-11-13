@@ -205,14 +205,6 @@ private theorem fibre_pullback_pushforward {Z X : TopCat.{u}} (f : Z ⟶ X)
       inv_hom_id := by apply Sheaf.hom_ext; exact IsIso.inv_hom_id η }
   exact ⟨e, fun _ _ ↦ rfl⟩
 
--- Cache the sheafification instances used repeatedly by the constant sheaves and lifting
--- torsors below, so elaboration does not repeat the general instance search at each occurrence.
-local instance hasSheafify_addCommGrp_opens (Y : TopCat.{u}) :
-    HasSheafify (Opens.grothendieckTopology Y) AddCommGrpCat.{u} := inferInstance
-
-local instance wEqualsLocallyBijective_addCommGrp_opens (Y : TopCat.{u}) :
-    (Opens.grothendieckTopology Y).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
-
 set_option trace.profiler true in
 /-- Direct image of an extension, pulled back along restriction of constant integer
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
@@ -298,6 +290,11 @@ theorem closedImmersion_extension_fibre_pushforward
                       ((Functor.const (Opens Z.carrier)ᵒᵖ).obj
                         (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)).vadd
                           (op ((Opens.map i.base).obj U)) g (e.hom.hom.app (op U) t)) := by
+  -- Reuse sheafification instances throughout the construction of the lifting torsors.
+  have (Y : TopCat.{u}) : HasSheafify (Opens.grothendieckTopology Y) AddCommGrpCat.{u} :=
+    inferInstance
+  have (Y : TopCat.{u}) :
+      (Opens.grothendieckTopology Y).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   have hD := shortExact_closedEmbedding i.base i.isClosedEmbedding
     (ShortComplex.mk a p w) hS
   obtain ⟨r, hr⟩ := constant_restriction Z.carrier X.carrier i.base
