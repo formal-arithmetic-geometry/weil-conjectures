@@ -86,26 +86,25 @@ private theorem evaluation_chain_natural (X : Scheme.{u})
         (schemeDerivedInternalHomResolutionIso X L N).hom =
       (schemeDerivedInternalHomResolutionIso X L M).hom ≫ DerivedCategory.Q.map h := by
     have := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-    let I := CochainComplex.kInjectiveResolutionFunctor.{u}
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-    let e := Localization.fac ((𝟭 _).prod I ⋙ H ⋙ DerivedCategory.Q)
-      (derivedInternalHom_inverts (Opens.grothendieckTopology X) X.sheaf I
+    have hn₀ := (Localization.fac _
+      (derivedInternalHom_inverts (Opens.grothendieckTopology X) X.sheaf
+        (CochainComplex.kInjectiveResolutionFunctor.{u}
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
         (CochainComplex.toKInjectiveResolution.{u} _)
         (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
           CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
-      (DerivedCategory.Q.op.prod DerivedCategory.Q)
-    have hn₀ := e.hom.naturality (X := (op L, M)) (Y := (op L, N))
-      (𝟙 (op L), f)
-    have hQ : (DerivedCategory.Q.op.prod DerivedCategory.Q).map
-        (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f) =
-        (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) := by
-      change ((DerivedCategory.Q.map (𝟙 L)).op, DerivedCategory.Q.map f) = _
-      rw [DerivedCategory.Q.map_id, op_id]
+      (DerivedCategory.Q.op.prod DerivedCategory.Q)).hom.naturality
+      (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f)
     change (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
         ((DerivedCategory.Q.op.prod DerivedCategory.Q).map
           (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f)) ≫
           (schemeDerivedInternalHomResolutionIso X L N).hom =
         (schemeDerivedInternalHomResolutionIso X L M).hom ≫ DerivedCategory.Q.map h at hn₀
+    have hQ : (DerivedCategory.Q.op.prod DerivedCategory.Q).map
+        (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f) =
+        (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) := by
+      change ((DerivedCategory.Q.map (𝟙 L)).op, DerivedCategory.Q.map f) = _
+      rw [DerivedCategory.Q.map_id, op_id]
     rw [hQ] at hn₀
     exact hn₀
   exact tensor_naturality _ _ _ _ _ _ _ hn he
