@@ -135,7 +135,6 @@ theorem exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_l
     Functor.mapIso _ (lowerShriekSingleIso _ c V c' L') ≪≫
     leftDerivedExtendScalarsSingleFunctorIso ℓ E _
 
-set_option profiler true in
 /-- Let `G₀` be a constructible `𝒪_{E,X}`-module on a scheme `X` locally of finite type over a
 perfect field, such that `Hom(G₀[0], -[q])` factors through filtered colimits and the morphisms
 `G₀[0] ⟶ B[n]` vanish for every constructible `𝒪_{E,X}`-module `B` and `n ≤ N`. Then the morphisms
@@ -188,7 +187,6 @@ theorem eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField {k
   let e := ((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).app B
   exact hom_eq_zero_of_target_iso e (hP n hn) f
 
-set_option profiler true in
 /-- Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`: on a noetherian scheme
 locally of finite type over a perfect field, the uniform `Ext` bound for constructible
 `E_X`-modules follows from the uniform bound and the continuity of `Ext` for constructible
