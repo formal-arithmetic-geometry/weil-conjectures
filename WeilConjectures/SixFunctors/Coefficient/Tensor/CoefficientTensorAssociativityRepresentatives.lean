@@ -151,7 +151,6 @@ private theorem coefficient_tensor_associativity_paste
         simp only [comp_whiskerRight, Category.assoc]
         erw [← reassoc_of% hnL]
         simp only [eL, lA, Iso.trans_hom, whiskerRightIso_hom, Category.assoc]
-        rfl
   have hR : F.map rB.hom ≫
       μ.hom.app (q.obj P, q.obj Q ⊗ q.obj N) ≫
       (F.obj (q.obj P) ◁ μ.hom.app (q.obj Q, q.obj N)) ≫
@@ -163,7 +162,6 @@ private theorem coefficient_tensor_associativity_paste
         simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
         erw [← reassoc_of% hnR]
         simp only [eR, rA, Iso.trans_hom, whiskerLeftIso_hom, Category.assoc]
-        rfl
   have hC : F.map (q.map aB.hom) ≫ eR =
       eL ≫ q'.map aA.hom := by
     have hf := e.naturality aB.hom
