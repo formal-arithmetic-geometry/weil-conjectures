@@ -1127,8 +1127,7 @@ section
 
 attribute [local semireducible] ConstantCompletion.pull
 
-set_option maxHeartbeats 1000000 in
--- The concrete quotient coefficient square needs extra normalization heartbeats.
+set_option profiler true in
 /-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
 on every inverse-image generator, not merely its objects.
 Source: Stacks 03D2, 0E48 (blueprint: lem-sp-completion-mate-comparison).
@@ -1333,8 +1332,7 @@ private theorem reductionPull_hom_ext {V U : Site.{u}} (f : Morphism V U)
   simpa only [η, ConstantCompletion.insertion_eq_unit, Category.assoc,
     ConstantCompletion.reduction, ConstantCompletion.finiteMap] using h
 
-set_option maxHeartbeats 2000000 in
--- Concrete quotient and tensor functor types require extra normalization heartbeats.
+set_option profiler true in
 /-- The ordinary strict reduction/pullback comparison is fixed on quotient-unit
 insertions at every level. Its source and target are actual strict diagrams.
 Source: Stacks 07A4, 099N(5) (blueprint: lem-sp-completion-mate-comparison).
