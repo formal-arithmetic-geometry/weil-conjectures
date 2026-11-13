@@ -232,6 +232,7 @@ private theorem complexColimits
 attribute [local instance 2000] complexColimits
 
 set_option profiler true in
+set_option synthInstance.maxSize 4096 in
 private theorem qcqsCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -396,6 +397,7 @@ private theorem qcqsCostalkContinuity
   exact isIso_of_reflects_iso _ ipush
 
 set_option profiler true in
+set_option synthInstance.maxSize 4096 in
 private theorem qcqsInjectiveCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -416,51 +418,11 @@ private theorem qcqsInjectiveCostalkContinuity
     (hq : QuasiIso (colimit.desc J c)) :
     QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
-  classical
-  let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
-  let B := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
-  have hJk (s : I) : (J.obj s).IsKInjective := by
-    have := hJ s
-    have := hJi s
-    exact CochainComplex.isKInjective_of_injective (J.obj s) a
-  have hck : c.pt.IsKInjective := by
-    have := hc
-    have := hci
-    exact CochainComplex.isKInjective_of_injective c.pt a
-  let d := condensedContinuityCocone J a
-  have hd : IsColimit d := canonicalContinuityIsColimit J a hJ
-  let g := hd.desc c
-  have hg : colimit.desc J d ≫ g = colimit.desc J c := by
-    apply colimit.hom_ext
-    intro s
-    simp only [colimit.ι_desc_assoc, colimit.ι_desc]
-    exact hd.fac c s
-  have hqd : IsIso (colimit.desc J d) := by
-    change IsIso ((IsColimit.coconePointUniqueUpToIso (colimit.isColimit J) hd).hom)
-    infer_instance
-  have hqg : QuasiIso g := by
-    rw [← quasiIso_iff_comp_left (colimit.desc J d) g, hg]
-    exact hq
-  let P := J ⋙ H.mapHomologicalComplex (.up ℤ)
-  let e : J ⋙ DerivedCategory.Q ⋙ H.rightDerivedFunctor ≅ P ⋙ DerivedCategory.Q :=
-    NatIso.ofComponents (fun s ↦ H.rightDerivedFunctorObjQIso (J.obj s))
-      (fun f ↦ rightDerivedObjQIso_naturality H (J.map f))
-  let ε := H.rightDerivedFunctor.mapIso (asIso (DerivedCategory.Q.map g)) ≪≫
-    H.rightDerivedFunctorObjQIso c.pt
-  have hcont (q : ℤ) : IsIso (condensedContinuityComparison J a
-      (DerivedCategory.Q ⋙ H.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q)) :=
-    qcqsCostalkContinuity T Λ i k hik H adj J a hJ q
-  apply condensedContinuityComparison_representatives J a H.rightDerivedFunctor
-    hcont P ((H.mapHomologicalComplex (.up ℤ)).obj c.pt) e ε
-    ((H.mapHomologicalComplex (.up ℤ)).mapCocone c).ι
-  intro s
-  dsimp only [e, NatIso.ofComponents_hom_app, ε, Iso.trans_hom,
-    Functor.mapIso_hom, asIso_hom]
-  rw [← H.rightDerivedFunctor.map_comp_assoc, ← DerivedCategory.Q.map_comp,
-    hd.fac c s]
-  exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
+  exact injectiveContinuity_of_derived H J c a hJ hJi hc hci hq
+    (fun q ↦ qcqsCostalkContinuity T Λ i k hik H adj J a hJ q)
 
 set_option profiler true in
+set_option synthInstance.maxSize 4096 in
 private theorem qcqsCostalkModel
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -522,60 +484,9 @@ private theorem qcqsCostalkModel
   obtain ⟨a, ha⟩ := hN
   have hNa (s : I) : (N.obj s).IsStrictlyGE a :=
     (CochainComplex.isStrictlyGE_iff _ _).2 (ha s)
-  have hNcol : (colimit N).IsStrictlyGE a := colimit_isStrictlyGE N a hNa
-  let Np : I ⥤ CochainComplex.Plus A :=
-    (CochainComplex.plus A).lift N (fun s ↦ ⟨a, hNa s⟩)
-  let cp : Cocone Np :=
-    { pt := ⟨colimit N, ⟨a, hNcol⟩⟩
-      ι := { app s := ⟨colimit.ι N s⟩
-             naturality s t f := by
-               apply ObjectProperty.hom_ext
-               exact (colimit.w N f).trans (Category.comp_id _).symm } }
   have : IsGrothendieckAbelian.{u + 1} A := Mod.isGrothendieckAbelian _
-  let S := CochainComplex.singleFunctor A 0
-  let E₀ := HomologicalComplex.eval A (ComplexShape.up ℤ) 0
-  let R₀ := CochainComplex.kInjectiveResolutionFunctor.{u + 1} A
-  let ηR := CochainComplex.toKInjectiveResolution.{u + 1} A
-  let J₀ := S ⋙ R₀ ⋙ E₀
-  let η : 𝟭 A ⟶ J₀ :=
-    (HomologicalComplex.singleCompEvalIsoSelf A (ComplexShape.up ℤ) 0).inv ≫
-      Functor.whiskerLeft S (Functor.whiskerRight ηR E₀)
-  have hη (M : A) : Mono (η.app M) := by
-    have hmono : Mono (ηR.app (S.obj M)) :=
-      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} A (S.obj M)).1
-    have hmapmono : Mono (E₀.map (ηR.app (S.obj M))) := by
-      change Mono ((ηR.app (S.obj M)).f 0)
-      infer_instance
-    have hisomono : Mono ((HomologicalComplex.singleCompEvalIsoSelf A (.up ℤ) 0).inv.app M) :=
-      inferInstanceAs (Mono (((HomologicalComplex.singleCompEvalIsoSelf A (.up ℤ) 0).app M).inv))
-    change Mono ((HomologicalComplex.singleCompEvalIsoSelf A (.up ℤ) 0).inv.app M ≫
-      E₀.map (ηR.app (S.obj M)))
-    exact @mono_comp _ _ _ _ _ _ hisomono _ hmapmono
-  have hJ₀ (M : A) : Injective (J₀.obj M) :=
-    CochainComplex.injective_kInjectiveResolutionFunctor_obj_X (S.obj M) 0
-  obtain ⟨R, α, hα, hRi, hRb⟩ :=
-    CochainComplex.exists_functorial_bounded_injective_resolution J₀ η hη hJ₀
-  let J := Np ⋙ R ⋙ CochainComplex.Plus.ι A
-  let c : Cocone J := ((R ⋙ CochainComplex.Plus.ι A).mapCocone cp)
-  let β : N ⟶ J := Functor.whiskerLeft Np α
-  let βv : colimit N ⟶ c.pt := α.app cp.pt
-  have hβ (s : I) : colimit.ι N s ≫ βv = β.app s ≫ c.ι.app s := by
-    exact α.naturality (cp.ι.app s)
-  have hJa (s : I) : (J.obj s).IsStrictlyGE a := hRb (Np.obj s) a (hNa s)
-  have hca : c.pt.IsStrictlyGE a := hRb cp.pt a hNcol
-  have hJi (s : I) (r : ℤ) : Injective ((J.obj s).X r) := hRi (Np.obj s) r
-  have hci (r : ℤ) : Injective (c.pt.X r) := hRi cp.pt r
-  have hβq (s : I) : QuasiIso (β.app s) := hα (Np.obj s)
-  have hβvq : QuasiIso βv := hα cp.pt
-  have hcolq : QuasiIso (colimMap β) :=
-    (HomologicalComplex.quasiIso A (.up ℤ)).colimMap β (fun s ↦ hβq s)
-  have heq : colimMap β ≫ colimit.desc J c = βv := by
-    apply colimit.hom_ext
-    intro s
-    simpa only [ι_colimMap_assoc, colimit.ι_desc] using (hβ s).symm
-  have hq : QuasiIso (colimit.desc J c) := by
-    rw [← quasiIso_iff_comp_left (colimMap β) (colimit.desc J c), heq]
-    exact hβvq
+  obtain ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩ :=
+    localPieceBoundedInjectiveCocone N a hNa
   have hH₀ := qcqsInjectiveCostalkContinuity T Λ i k hik H₀ ash J c a
     hJa hJi hca hci hq
   have : PreservesColimitsOfShape I (CondensedRing.upperStar Λ j) :=
@@ -599,6 +510,7 @@ private theorem qcqsCostalkModel
   · exact homCoconeOfInjectiveCocone E H adj P n N J c β βv hβ
 
 set_option profiler true in
+set_option synthInstance.maxSize 4096 in
 private theorem qcqsFiniteFreeHomEvaluation
     (X : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -639,6 +551,7 @@ private theorem qcqsFiniteFreeHomEvaluation
       (Γ.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ n)⟩
 
 set_option profiler true in
+set_option synthInstance.maxSize 4096 in
 private theorem qcqsFiniteFreeHomContinuity
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -656,6 +569,12 @@ private theorem qcqsFiniteFreeHomContinuity
     IsIso (colimit.desc _
       ((condensedShiftedHom Λ X
         ((DerivedCategory.singleFunctor _ 0).obj P) n).mapCocone (colimit.cocone N))) := by
+  have : HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    moduleColimits Λ X I
+  have : HasColimitsOfShape I (CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) :=
+    complexColimits Λ X I
   let H := Mod.ihom P
   have : PreservesColimitsOfSize.{u + 1, u + 1} H :=
     condensed_locally_free_ihom_preservesColimits (condensedRingObj Λ X) P hP
@@ -688,6 +607,7 @@ private theorem qcqsFiniteFreeHomContinuity
   apply (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.1
   exact ⟨IsColimit.mapCoconeEquiv e.symm hcomp⟩
 
+set_option synthInstance.maxSize 4096 in
 private theorem freeComap {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -701,6 +621,7 @@ private theorem freeComap {X : Scheme.{u}}
   simpa using Mod.regularIsoOfIsIso (inv φ)
 
 set_option profiler true in
+set_option synthInstance.maxSize 4096 in
 private theorem lisseRawCover
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
