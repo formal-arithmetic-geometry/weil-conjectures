@@ -63,6 +63,23 @@ private lemma specMap_commutes_of_ringHom {A B : CommRingCat.{u}}
     Spec.map τ ≫ Spec.map f = Spec.map f ≫ Spec.map σ := by
   rw [← Spec.map_comp, ← Spec.map_comp, hf]
 
+private lemma specMap_comp_geometricFiberPoint_of_section
+    {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
+    {A : CommRingCat.{u}} (x : C.finitePoints)
+    (ε : CommRingCat.of (AlgebraicClosure K) ⟶ A)
+    (r : A ⟶ CommRingCat.of (AlgebraicClosure K)) (hrε : ε ≫ r = 𝟙 _)
+    (h : Spec A ⟶ (C ↘ Spec (.of K)).geometricFiber)
+    (hproj : Spec.map r ≫ h ≫ (C ↘ Spec (.of K)).geometricFiberProj =
+      (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x ≫
+        (C ↘ Spec (.of K)).geometricFiberProj)
+    (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure = Spec.map ε) :
+    Spec.map r ≫ h = 𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x := by
+  rw [Category.id_comp]
+  apply Scheme.Hom.geometricFiber_hom_ext
+  · exact (Category.assoc _ _ _).trans hproj
+  · rw [Category.assoc, hhalg, ← Spec.map_comp, hrε, Spec.map_id,
+      Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure]
+
 variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} [C.Over (Spec (.of K))]
   [U.Over (Spec (.of K))] [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
   [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [IsIntegral C]
@@ -183,14 +200,16 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom :=
     CommRingCat.hom_ext (RingHom.ext fun a ↦
       (Ideal.inertiaInvariantsToField_inertiaInvariantsMap hσF a).symm)
+  have hΦ : (specGeometricFrobenius K ^ n).asIso.hom =
+      Spec.map (CommRingCat.ofHom Φ.toRingEquiv.toRingHom) :=
+    specGeometricFrobenius_pow_hom K n
   refine ⟨Spec.map (CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF)),
     ?_, ?_, ?_⟩
-  · exact specMap_comp_eq_comp_geometricGaloisFrobenius_pow hW.fromSpec _ _ hσalg _ n (by
-      rw [specGeometricFrobenius_pow_hom]
-      exact specMap_commutes_of_ringHom _ _ _ hσεc) h
-      hhproj hhalg
-  · rw [specGeometricFrobenius_pow_hom]
-    exact specMap_commutes_of_ringHom _ _ _ hrσc
+  · exact specMap_comp_eq_comp_geometricGaloisFrobenius_pow hW.fromSpec _ _ hσalg _ n
+      ((specMap_commutes_of_ringHom _ _ _ hσεc).trans
+        (congrArg (Spec.map (CommRingCat.ofHom ε) ≫ ·) hΦ.symm)) h hhproj hhalg
+  · exact (congrArg (· ≫ Spec.map (CommRingCat.ofHom r)) hΦ).trans
+      (specMap_commutes_of_ringHom _ _ _ hrσc)
   · exact specMap_commutes_of_ringHom _ _ _ htfc
 
 set_option profiler true in
@@ -246,14 +265,12 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   -- the lift of `x̄`
   have hpt := specMap_comp_specInertiaInvariantsTo_of_compatible hW Q x hxW _ ε r hrε hr hε _ hQ
   have hw : Spec.map (CommRingCat.ofHom r) ≫ h =
-      𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x := by
-    rw [Category.id_comp]
-    apply Scheme.Hom.geometricFiber_hom_ext
-    · rw [Category.assoc, hhproj, hpt,
-        Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj]
-    · rw [Category.assoc, hhalg, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hrε,
-        Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure,
-        CommRingCat.ofHom_id, Spec.map_id]
+      𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x :=
+    specMap_comp_geometricFiberPoint_of_section x (CommRingCat.ofHom ε) (CommRingCat.ofHom r)
+      (CommRingCat.hom_ext hrε) h
+      ((congrArg (Spec.map (CommRingCat.ofHom r) ≫ ·) hhproj).trans
+        (hpt.trans (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj
+          (C ↘ Spec (.of K)) x).symm)) hhalg
   let t : ProEt.mk (𝟙 (Spec (.of (AlgebraicClosure K)))) ⟶
       (MorphismProperty.Over.pullback @WeaklyEtale ⊤
         ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)).obj (ProEt.mk h) :=
