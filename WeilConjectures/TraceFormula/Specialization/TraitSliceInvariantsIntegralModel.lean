@@ -49,7 +49,7 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-noncomputable abbrev integralModelLeftDerivedUpperStar
+noncomputable def integralModelLeftDerivedUpperStar
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
     {Z W : Scheme.{u}} (w : Z ⟶ W) :
     DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ⥤
