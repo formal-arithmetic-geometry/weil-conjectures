@@ -146,7 +146,7 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
         (scalarSubstitution l E L ι S A β) (scalarSubstitution l E L ι S B γ) := by
   let SE := pullbackTensorCalculus l E W
   let SL := pullbackTensorCalculus l L W
-  obtain ⟨ρE⟩ := ambientRoos l E W SE
+  let ρE := (ambientRoos l E W SE).some
   let TE : ScalarExtensionTower.TensorModel l E W SE ρE :=
     ⟨ScalarExtensionTower.tensorModelRealization l E W SE,
       ScalarExtensionTower.tensorModelRealization_normalized l E W SE ρE⟩
