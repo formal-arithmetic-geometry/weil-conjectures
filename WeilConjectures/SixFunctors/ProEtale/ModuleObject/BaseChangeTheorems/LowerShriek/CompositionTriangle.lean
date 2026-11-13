@@ -630,7 +630,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
   have e₁ : a₀.inv = x.hom ≫ a''.inv ≫ u₀.inv := by
     rw [← cancel_epi a₀.hom, Iso.hom_inv_id]
     have h := congrArg (fun q => q ≫ a''.inv ≫ u₀.inv) n₁
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.id_comp,
+    simp only [a'', u₀, Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.id_comp,
       Category.comp_id] at h
     simpa only [a₀, x, a'', u₀, Category.assoc] using h.symm
   have e₂ : a''.inv = y.inv ≫ a.inv ≫ u.hom := by
