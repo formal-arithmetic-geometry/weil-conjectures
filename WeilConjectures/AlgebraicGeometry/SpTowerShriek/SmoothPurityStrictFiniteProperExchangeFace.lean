@@ -391,7 +391,6 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
         exactByConversion h)
     N (coordinates.property f n) (coordinates.property f' n)
-  simpa only [B, θ, θ', Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
-    Category.assoc] using H
+  exact H
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
