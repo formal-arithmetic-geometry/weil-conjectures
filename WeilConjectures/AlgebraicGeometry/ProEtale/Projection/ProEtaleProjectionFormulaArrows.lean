@@ -323,9 +323,24 @@ theorem proEtaleStrictPerfect_flat
   exact SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
     R F (b + 1) hflat
 
+private lemma tensorRepresentative_inv_naturality
+    {C D : Type*} [Category C] [Category D] (P : ObjectProperty C)
+    (Q : C ⥤ D) (T : C ⥤ C ⥤ C) (B : D × D ⥤ D)
+    (e : (P.ι.prod P.ι) ⋙ Functor.uncurry.obj T ⋙ Q ≅
+      ((P.ι ⋙ Q).prod (P.ι ⋙ Q)) ⋙ B)
+    {K L F : C} (hK : P K) (hL : P L) (hF : P F) (p : K ⟶ L) :
+    B.map (Prod.mkHom (Q.map p) (𝟙 (Q.obj F))) ≫ e.inv.app (⟨L, hL⟩, ⟨F, hF⟩) =
+      e.inv.app (⟨K, hK⟩, ⟨F, hF⟩) ≫ Q.map ((T.map p).app F) := by
+  simpa only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
+    ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
+    ObjectProperty.FullSubcategory.id_hom, Functor.uncurry_obj_map,
+    Functor.map_id, Category.comp_id] using
+    e.inv.naturality (Prod.mkHom
+      (ObjectProperty.homMk (X := ⟨K, hK⟩) (Y := ⟨L, hL⟩) p)
+      (𝟙 (⟨F, hF⟩ : P.FullSubcategory)))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The resolution comparison elaborates several large total-tensor naturality squares.
 /-- Mixed tensor representatives, normalized at every flat K-flat resolution.
 Source: definition 1264, displayed representatives C and J
 (blueprint: def-weil-pbc-projection-formula-arrows).
@@ -426,42 +441,14 @@ theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
       (𝟙 (DerivedCategory.Q.{u + 2}.obj F))))).1
     let T := ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
       (.up ℤ) (.up ℤ) (.up ℤ)).flip.obj F
-    have hn : a.tensor.map (Prod.mkHom
-        (DerivedCategory.Q.{u + 2}.map (Λ.resolutionFunctor.map p))
-        (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
-        a.representative.inv.app (⟨_, hres A⟩, ⟨F, hf⟩) =
-      a.representative.inv.app (⟨_, hres P⟩, ⟨F, hf⟩) ≫
-        DerivedCategory.Q.{u + 2}.map (T.map (Λ.resolutionFunctor.map p)) := by
-      have h := a.representative.inv.naturality
-        (Prod.mkHom (ObjectProperty.homMk (X := ⟨_, hres P⟩) (Y := ⟨_, hres A⟩)
-          (Λ.resolutionFunctor.map p))
-          (𝟙 (⟨F, hf⟩ : (proEtaleFlatRepresentatives Y R).FullSubcategory)))
-      simp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
-        ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
-        ObjectProperty.FullSubcategory.id_hom, Functor.uncurry_obj_map] at h
-      erw [DerivedCategory.Q.{u + 2}.map_id F,
-        (((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
-          (.up ℤ) (.up ℤ) (.up ℤ)).obj (Λ.resolutionFunctor.obj A)).map_id F,
-        Category.comp_id] at h
-      simpa only [T, Functor.flip_obj_map] using h
-    have hn' : a.tensor.map (Prod.mkHom
-        (DerivedCategory.Q.{u + 2}.map (q.app P))
-        (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
-        a.representative.inv.app (⟨P, hp⟩, ⟨F, hf⟩) =
-      a.representative.inv.app (⟨_, hres P⟩, ⟨F, hf⟩) ≫
-        DerivedCategory.Q.{u + 2}.map (T.map (q.app P)) := by
-      have h := a.representative.inv.naturality
-        (Prod.mkHom (ObjectProperty.homMk (X := ⟨_, hres P⟩) (Y := ⟨_, hp⟩)
-          (q.app P))
-          (𝟙 (⟨F, hf⟩ : (proEtaleFlatRepresentatives Y R).FullSubcategory)))
-      simp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
-        ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
-        ObjectProperty.FullSubcategory.id_hom, Functor.uncurry_obj_map] at h
-      erw [DerivedCategory.Q.{u + 2}.map_id F,
-        (((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
-          (.up ℤ) (.up ℤ) (.up ℤ)).obj (P)).map_id F,
-        Category.comp_id] at h
-      simpa only [T, Functor.flip_obj_map] using h
+    have hn := tensorRepresentative_inv_naturality (proEtaleFlatRepresentatives Y R)
+      DerivedCategory.Q ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
+        (.up ℤ) (.up ℤ) (.up ℤ)) a.tensor a.representative
+      (hres P) (hres A) hf (Λ.resolutionFunctor.map p)
+    have hn' := tensorRepresentative_inv_naturality (proEtaleFlatRepresentatives Y R)
+      DerivedCategory.Q ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
+        (.up ℤ) (.up ℤ) (.up ℤ)) a.tensor a.representative
+      (hres P) hp hf (q.app P)
     have heq : a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (q.app P))
         (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
           a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map p)
