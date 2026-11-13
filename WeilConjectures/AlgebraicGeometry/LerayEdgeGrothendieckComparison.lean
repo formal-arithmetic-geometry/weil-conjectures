@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
 -- Comparing resolution maps unfolds composed module and forgetful functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -71,6 +70,12 @@ theorem leray_edge_grothendieck_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
         (ε q).app F = (e q).hom.app F ≫
           (forget₂ _ AddCommGrpCat).map ((D.grothendieckLeftEdgeMap G hFG q).app F) := by
   classical
+  let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let _ : Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
+  let _ : Abelian (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) :=
+    inferInstance
+  let _ : Abelian (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) :=
+    inferInstance
   dsimp only
   intro hFG
   let grothX := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)

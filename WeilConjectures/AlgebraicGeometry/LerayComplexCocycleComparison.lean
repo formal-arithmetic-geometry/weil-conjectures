@@ -21,7 +21,6 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
 -- Elaborating the mapped kernel and cokernel lifts unfolds several composed functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison from cohomology of global sections to global sections of the
@@ -74,6 +73,12 @@ theorem leray_complex_cocycle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (q : �
               ((((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
                 (ComplexShape.up ℕ)).obj C).homologyπ q) z := by
   classical
+  let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let _ : Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
+  let _ : Abelian (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) :=
+    inferInstance
+  let _ : Abelian (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) :=
+    inferInstance
   let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
   let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
   let H := RingedSpace.globalSectionsFunctor Y.toRingedSpace
