@@ -311,7 +311,7 @@ private theorem canonicalPushHorizontal
     (transitionValue (ProEt.topology T) (VaryingRing.coefficients R' T)
       (VaryingRing.coefficientTransition R' φ T) h ((VaryingRing.push R' φ j).obj M) V x)
   have hm := (VaryingRing.moduleEvalP_existsUnique R' φ j m).choose_spec.1 M V.unop x
-  rw [hn, hm, transitionValue_eq, transitionValue_eq]
+  simp only [hn, hm, transitionValue_eq]
   change M.val.map
     (((VaryingRing.baseChange j).map (Prod.mkHom (homOfLE h) (𝟙 V.unop))).op) x =
     M.val.map
