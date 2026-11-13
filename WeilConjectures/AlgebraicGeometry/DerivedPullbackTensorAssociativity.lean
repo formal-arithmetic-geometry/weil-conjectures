@@ -383,7 +383,7 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
           QT.map (Functor.OplaxMonoidal.δ Fc K L) := by
     have hμ' := hμ K L hK hL
     have hi := (((μ.app (QX.obj K)).app (QX.obj L)).inv_comp_eq).2 hμ'.symm
-    simpa only [Functor.mapCochainComplex_δ, hφeq K L] using hi
+    simpa only [Functor.mapCochainComplex_δ, ← hφeq K L] using hi
   have hFE : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
   have hFp := pullback_preservesKFlat g F hFE
