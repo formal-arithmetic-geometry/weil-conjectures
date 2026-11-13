@@ -32,6 +32,26 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
+-- Reuse the graded tensor compatibility proofs needed by each derived functor.
+-- These are propositions, so sharing them preserves the derived functors definitionally.
+local instance residueIff_hasTensorFour (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt A B C D := by
+  infer_instance
+
+local instance residueIff_hasGoodTensorLeft (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := by
+  infer_instance
+
+local instance residueIff_hasGoodTensorRight (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := by
+  infer_instance
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
