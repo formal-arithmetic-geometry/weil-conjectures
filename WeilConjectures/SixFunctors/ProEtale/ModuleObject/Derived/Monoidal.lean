@@ -660,6 +660,31 @@ lemma leftDerivedUpperStarTensor_fac :
       leftDerivedUpperStarTensorLeftCounit Λ f :=
   Functor.leftDerived₂_fac _ _ _ _ _ _
 
+private lemma comp_four_cancel_last {C : Type*} [Category* C]
+    {A B D E F G H : C} {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} {d : E ⟶ F}
+    {u : F ⟶ G} {u' : G ⟶ F} {v : A ⟶ H} {w : H ⟶ G}
+    (h : a ≫ b ≫ c ≫ d ≫ u = v ≫ w) (hu : u ≫ u' = 𝟙 F) :
+    a ≫ b ≫ c ≫ d = v ≫ w ≫ u' := by
+  have h' := congrArg (· ≫ u') h
+  simpa only [Category.assoc, hu, Category.comp_id] using h'
+
+open DerivedCategory in
+private lemma leftDerivedUpperStarTensor_fac_components (A B : HomotopyCategory
+    (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)) :
+    ((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B) ≫
+        Qh.obj (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ◁
+          (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B ≫
+        Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
+        Qh.map ((HomotopyCategory.quotient _ _).map
+          (upperStarTensorComplexHom Λ f A.as B.as)) =
+      ((leftDerivedUpperStarTensorLeftCounit Λ f).app A).app B := by
+  have h := congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
+  simp only [NatTrans.comp_app] at h
+  rw [leftDerivedUpperStarTensorRightCounit_app_app] at h
+  exact h
+
 open DerivedCategory in
 private lemma upperStarTensorComplexHom_Qh_δ (A B : HomotopyCategory
     (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)) :
@@ -695,21 +720,9 @@ lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
         (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B) ≫
         Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
           (f)^*⟦Λ⟧).app A).app B) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
-  have h := congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
-  simp only [NatTrans.comp_app] at h
-  rw [leftDerivedUpperStarTensorRightCounit_app_app] at h
-  have hδ := upperStarTensorComplexHom_Qh_δ Λ f A B
-  have h' := congrArg
-    (· ≫ Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
-      (f)^*⟦Λ⟧).app A).app B)) h
-  simpa only [Category.assoc, hδ, Category.comp_id] using h'
+  exact comp_four_cancel_last (leftDerivedUpperStarTensor_fac_components Λ f A B)
+    (upperStarTensorComplexHom_Qh_δ Λ f A B)
+
 
 
 
