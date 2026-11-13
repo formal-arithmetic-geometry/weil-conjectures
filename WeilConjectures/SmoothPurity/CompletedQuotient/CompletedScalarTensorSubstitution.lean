@@ -112,7 +112,6 @@ private theorem prime_unit (W : Scheme.{u})
   rw [map_natCast]
   with_unfolding_all exact isUnit_of_invertible (l : W.residueField w)
 
-set_option profiler true in
 -- The calculation combines three naturality squares in the system derived category.
 /-- Scalar extension of tensor substitution is computed by the normalized strict sigma.
 Source: Stacks 07A4 and 0941; the tensor step of scalar route coordinates.
@@ -178,7 +177,6 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
     (integralComparisonSequenceScalarModel l E L ι W).ε.app (StrictQuotient.total l E A B) ≫
       DerivedCategory.Q.map (((ScalarExtensionTower.comparisons l).sigma E L ι W).hom.app
         (A, B)) ≫ d.hom at hnorm
-  trace "CHECKPOINT have hnorm' :"
   have hnorm' : FE.map e.inv ≫
         (integralComparisonSequenceScalarModel l E L ι W).ε.app
           (StrictQuotient.total l E A B) ≫
@@ -198,7 +196,6 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       α.hom.app (DerivedCategory.Q.obj A, DerivedCategory.Q.obj B) =
     α.hom.app (SE.reduction.obj M.obj, SE.reduction.obj N.obj) ≫
       U.map (Prod.mkHom (FE.map a) (FE.map b)) at hnat
-  trace "CHECKPOINT have hred :"
   have hred : reduction l E (tensorSubstitution l E A B hA hB β γ) =
       ScalarExtensionTower.tensorReduction l E W SE ρE TE M.obj N.obj ≫
         T.map (Prod.mkHom a b) ≫ e.inv := by
@@ -208,11 +205,10 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
         LE.map (T.map (Prod.mkHom a b)) ≫ LE.map e.inv) = _
     rewrite [← LE.map_comp, reduction_post]
     dsimp only [ScalarExtensionTower.tensorReduction, TE]
-    rewrite [fixed_tensor]
+    rewrite [fixed_tensor l E W]
     unfold reduction
     simp only [Category.assoc]
     rfl
-  trace "CHECKPOINT conv_lhs =>"
   conv_lhs => unfold scalarSubstitution
   rewrite [hred]
   change (S.realization.hom.app _ ≫ LL.map _) ≫ LL.map _ = _
@@ -222,21 +218,17 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       (integralComparisonSequenceScalarModel l E L ι W).ε.app
         (StrictQuotient.total l E A B))) ≫ LL.map _ = _
   simp only [FE.map_comp, Category.assoc, ← LL.map_comp]
-  trace "CHECKPOINT rewrite [hnorm',"
   rewrite [hnorm', reassoc_of% hnat]
   have hpost := congrArg (fun k ↦ k ≫ LL.map
     (U.map (Prod.mkHom (FE.map a) (FE.map b)) ≫
       U.map (Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B)) ≫ d.inv)) hlim.symm
   simp only [Functor.map_comp, Category.assoc] at hpost ⊢
-  trace "CHECKPOINT rewrite (transparency := .default) [hpost]"
-  rewrite (transparency := .default) [hpost]
-  trace "CHECKPOINT unfold tensorSubstitution"
+  refine hpost.trans ?_
   unfold tensorSubstitution
-  rewrite [scalar_reduction, scalar_reduction]
+  rewrite [scalar_reduction l E L ι S A β, scalar_reduction l E L ι S B γ]
   dsimp only [TL]
-  trace "CHECKPOINT rewrite [fixed_tensor]"
-  rewrite [fixed_tensor]
+  rewrite [fixed_tensor l L W]
   have hp : Prod.mkHom
         (ScalarExtensionTower.scalarReduction l E L ι W SE SL ρ S M.obj ≫ FE.map a ≫
           (integralComparisonSequenceScalarModel l E L ι W).ε.app A)
@@ -248,9 +240,7 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       Prod.mkHom (FE.map a) (FE.map b) ≫
       Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B) := rfl
-  trace "CHECKPOINT rewrite (transparency := .default) [hp]"
   rewrite (transparency := .default) [hp]
-  trace "CHECKPOINT simp only [Functor.map_comp, Category.assoc]"
   simp only [Functor.map_comp, Category.assoc]
   rfl
 
