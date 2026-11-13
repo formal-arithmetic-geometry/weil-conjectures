@@ -103,87 +103,88 @@ private theorem coefficient_tensor_associativity_paste
       μ.hom.app (q.obj P ⊗ q.obj Q, q.obj N) ≫
         (μ.hom.app (q.obj P, q.obj Q) ⊗ₘ 𝟙 (F.obj (q.obj N))) ≫
         (α_ (F.obj (q.obj P)) (F.obj (q.obj Q)) (F.obj (q.obj N))).hom := by
-  rw [id_tensorHom, tensorHom_id]
-  let PQ := T.obj (P, Q)
-  let QN := T.obj (Q, N)
-  let lB := bL ≪≫ whiskerRightIso bPQ (q.obj N)
-  let rB := bR ≪≫ whiskerLeftIso (q.obj P) bQN
-  let lA := aL ≪≫ whiskerRightIso aPQ (q'.obj (K.obj N))
-  let rA := aR ≪≫ whiskerLeftIso (q'.obj (K.obj P)) aQN
-  let e := ε
-  let tPQ := q'.map (chain.hom.app (P, Q))
-  let tQN := q'.map (chain.hom.app (Q, N))
-  let tL := q'.map (chain.hom.app (PQ, N))
-  let tR := q'.map (chain.hom.app (P, QN))
-  let eL := e.app (T.obj (PQ, N)) ≫ tL ≫
-    q'.map (T'.map (X := (K.obj PQ, K.obj N))
-      (Y := (T'.obj (K.obj P, K.obj Q), K.obj N))
-      (chain.hom.app (P, Q), 𝟙 (K.obj N)))
-  let eR := e.app (T.obj (P, QN)) ≫ tR ≫
-    q'.map (T'.map (X := (K.obj P, K.obj QN))
-      (Y := (K.obj P, T'.obj (K.obj Q, K.obj N)))
-      (𝟙 (K.obj P), chain.hom.app (Q, N)))
-  have hB : lB.hom ≫ (α_ (q.obj P) (q.obj Q)
-        (q.obj N)).hom = q.map aB.hom ≫ rB.hom := by
-    simpa only [lB, rB, Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom,
-      tensorHom_id, id_tensorHom,
-      Category.assoc] using heB
-  have hA : lA.hom ≫ (α_ (q'.obj (K.obj P))
-        (q'.obj (K.obj Q)) (q'.obj (K.obj N))).hom =
-      q'.map aA.hom ≫ rA.hom := by
-    simpa only [lA, rA, Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom,
-      tensorHom_id, id_tensorHom,
-      Category.assoc] using heA
-  simp only [Functor.map_id, tensorHom_id] at hnL
-  simp only [Functor.map_id, id_tensorHom] at hnR
-  have hL₀ := left_square F μ bPQ.hom bL.hom
-    (e.app P) (e.app Q) (e.app N) (e.app PQ)
-    (e.app (T.obj (PQ, N))) (tPQ ≫ aPQ.hom) (tL ≫ aL₀.hom) hmPQ hmL
-  have hR₀ := right_square F μ bQN.hom bR.hom
-    (e.app P) (e.app Q) (e.app N) (e.app QN)
-    (e.app (T.obj (P, QN))) (tQN ≫ aQN.hom) (tR ≫ aR₀.hom) hmQN hmR
-  have hL : F.map lB.hom ≫
-      μ.hom.app ((MonoidalCategory.tensor B).obj (q.obj P, q.obj Q),
-        q.obj N) ≫
-      (μ.hom.app (q.obj P, q.obj Q) ▷
-        F.obj (q.obj N)) ≫
-      (((e.app P) ⊗ₘ (e.app Q)) ⊗ₘ (e.app N)) = eL ≫ lA.hom := by
-    calc
-      _ = e.app (T.obj (PQ, N)) ≫ (tL ≫ aL₀.hom) ≫
-          ((tPQ ≫ aPQ.hom) ▷ q'.obj (K.obj N)) := hL₀
-      _ = _ := by
-        simp only [comp_whiskerRight, Category.assoc]
-        rw [← reassoc_of% hnL]
-        simp only [eL, lA, Iso.trans_hom, whiskerRightIso_hom, Category.assoc]
-        rfl
-  have hR : F.map rB.hom ≫
-      μ.hom.app (q.obj P,
-        (MonoidalCategory.tensor B).obj (q.obj Q, q.obj N)) ≫
-      (F.obj (q.obj P) ◁
-        μ.hom.app (q.obj Q, q.obj N)) ≫
-      ((e.app P) ⊗ₘ ((e.app Q) ⊗ₘ (e.app N))) = eR ≫ rA.hom := by
-    calc
-      _ = e.app (T.obj (P, QN)) ≫ (tR ≫ aR₀.hom) ≫
-          (q'.obj (K.obj P) ◁ (tQN ≫ aQN.hom)) := hR₀
-      _ = _ := by
-        simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
-        rw [← reassoc_of% hnR]
-        simp only [eR, rA, Iso.trans_hom, whiskerLeftIso_hom, Category.assoc]
-        rfl
-  have hC : F.map (q.map aB.hom) ≫ eR =
-      eL ≫ q'.map aA.hom := by
-    have hf := e.naturality aB.hom
-    change F.map (q.map aB.hom) ≫
-        e.app (T.obj (P, QN)) = e.app (T.obj (PQ, N)) ≫
-          q'.map (K.map aB.hom) at hf
-    dsimp only [eL, eR]
-    rw [reassoc_of% hf]
-    simpa only [Functor.map_comp, Category.assoc] using
-      congrArg (fun f ↦ e.app (T.obj (PQ, N)) ≫ q'.map f) hc
-  exact associativity_transport F μ lB rB (q.map aB.hom)
-    lA.hom rA.hom (q'.map aA.hom) (asIso (e.app P))
-    (asIso (e.app Q)) (asIso (e.app N))
-    eL eR hB hA hL hR hC
+  with_unfolding_all
+    rw [id_tensorHom, tensorHom_id]
+    let PQ := T.obj (P, Q)
+    let QN := T.obj (Q, N)
+    let lB := bL ≪≫ whiskerRightIso bPQ (q.obj N)
+    let rB := bR ≪≫ whiskerLeftIso (q.obj P) bQN
+    let lA := aL ≪≫ whiskerRightIso aPQ (q'.obj (K.obj N))
+    let rA := aR ≪≫ whiskerLeftIso (q'.obj (K.obj P)) aQN
+    let e := ε
+    let tPQ := q'.map (chain.hom.app (P, Q))
+    let tQN := q'.map (chain.hom.app (Q, N))
+    let tL := q'.map (chain.hom.app (PQ, N))
+    let tR := q'.map (chain.hom.app (P, QN))
+    let eL := e.app (T.obj (PQ, N)) ≫ tL ≫
+      q'.map (T'.map (X := (K.obj PQ, K.obj N))
+        (Y := (T'.obj (K.obj P, K.obj Q), K.obj N))
+        (chain.hom.app (P, Q), 𝟙 (K.obj N)))
+    let eR := e.app (T.obj (P, QN)) ≫ tR ≫
+      q'.map (T'.map (X := (K.obj P, K.obj QN))
+        (Y := (K.obj P, T'.obj (K.obj Q, K.obj N)))
+        (𝟙 (K.obj P), chain.hom.app (Q, N)))
+    have hB : lB.hom ≫ (α_ (q.obj P) (q.obj Q)
+          (q.obj N)).hom = q.map aB.hom ≫ rB.hom := by
+      simpa only [lB, rB, Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom,
+        tensorHom_id, id_tensorHom,
+        Category.assoc] using heB
+    have hA : lA.hom ≫ (α_ (q'.obj (K.obj P))
+          (q'.obj (K.obj Q)) (q'.obj (K.obj N))).hom =
+        q'.map aA.hom ≫ rA.hom := by
+      simpa only [lA, rA, Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom,
+        tensorHom_id, id_tensorHom,
+        Category.assoc] using heA
+    simp only [Functor.map_id, tensorHom_id] at hnL
+    simp only [Functor.map_id, id_tensorHom] at hnR
+    have hL₀ := left_square F μ bPQ.hom bL.hom
+      (e.app P) (e.app Q) (e.app N) (e.app PQ)
+      (e.app (T.obj (PQ, N))) (tPQ ≫ aPQ.hom) (tL ≫ aL₀.hom) hmPQ hmL
+    have hR₀ := right_square F μ bQN.hom bR.hom
+      (e.app P) (e.app Q) (e.app N) (e.app QN)
+      (e.app (T.obj (P, QN))) (tQN ≫ aQN.hom) (tR ≫ aR₀.hom) hmQN hmR
+    have hL : F.map lB.hom ≫
+        μ.hom.app ((MonoidalCategory.tensor B).obj (q.obj P, q.obj Q),
+          q.obj N) ≫
+        (μ.hom.app (q.obj P, q.obj Q) ▷
+          F.obj (q.obj N)) ≫
+        (((e.app P) ⊗ₘ (e.app Q)) ⊗ₘ (e.app N)) = eL ≫ lA.hom := by
+      calc
+        _ = e.app (T.obj (PQ, N)) ≫ (tL ≫ aL₀.hom) ≫
+            ((tPQ ≫ aPQ.hom) ▷ q'.obj (K.obj N)) := hL₀
+        _ = _ := by
+          simp only [comp_whiskerRight, Category.assoc]
+          rw [← reassoc_of% hnL]
+          simp only [eL, lA, Iso.trans_hom, whiskerRightIso_hom, Category.assoc]
+          rfl
+    have hR : F.map rB.hom ≫
+        μ.hom.app (q.obj P,
+          (MonoidalCategory.tensor B).obj (q.obj Q, q.obj N)) ≫
+        (F.obj (q.obj P) ◁
+          μ.hom.app (q.obj Q, q.obj N)) ≫
+        ((e.app P) ⊗ₘ ((e.app Q) ⊗ₘ (e.app N))) = eR ≫ rA.hom := by
+      calc
+        _ = e.app (T.obj (P, QN)) ≫ (tR ≫ aR₀.hom) ≫
+            (q'.obj (K.obj P) ◁ (tQN ≫ aQN.hom)) := hR₀
+        _ = _ := by
+          simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+          rw [← reassoc_of% hnR]
+          simp only [eR, rA, Iso.trans_hom, whiskerLeftIso_hom, Category.assoc]
+          rfl
+    have hC : F.map (q.map aB.hom) ≫ eR =
+        eL ≫ q'.map aA.hom := by
+      have hf := e.naturality aB.hom
+      change F.map (q.map aB.hom) ≫
+          e.app (T.obj (P, QN)) = e.app (T.obj (PQ, N)) ≫
+            q'.map (K.map aB.hom) at hf
+      dsimp only [eL, eR]
+      rw [reassoc_of% hf]
+      simpa only [Functor.map_comp, Category.assoc] using
+        congrArg (fun f ↦ e.app (T.obj (PQ, N)) ≫ q'.map f) hc
+    exact associativity_transport F μ lB rB (q.map aB.hom)
+      lA.hom rA.hom (q'.map aA.hom) (asIso (e.app P))
+      (asIso (e.app Q)) (asIso (e.app N))
+      eL eR hB hA hL hR hC
 
 attribute [local irreducible] homComplexFunctor homComplexπ derivedInternalHomOfUniverses
   coefficientHomResolutionIso
