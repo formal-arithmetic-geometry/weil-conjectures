@@ -61,7 +61,6 @@ private theorem map_pair_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option profiler true in
 /-- A short exact sequence of complexes representing the three direct-image terms
 on an arbitrary open union, with the first arrow identified by adjunction.
 No connecting morphism, integer shift, or distinguished triangle is asserted.
