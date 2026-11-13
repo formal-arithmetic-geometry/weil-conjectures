@@ -59,6 +59,22 @@ private theorem sectionTransport_natural
     N.presheaf.map (eqToHom hW).op ((g.app (principalSubsetOpen A r f S.val)) s) at hq
   exact (congrArg ((e.app N).app W) hq.symm).trans he
 
+-- Perform the total-complex calculation before specializing to the sheaf constructions.
+private theorem verticalTotal_conjugate {R : Type u} [Ring R]
+    (K : HomologicalComplex₂ (ModuleCat.{u} R) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
+    (p q q' n : ℤ) (hqq' : (ComplexShape.up ℤ).Rel q q')
+    (hpq : ComplexShape.π (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+      (ComplexShape.up ℤ) (p, q) = n)
+    (hpq' : ComplexShape.π (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+      (ComplexShape.up ℤ) (p, q') = n + 1)
+    {X Y : ModuleCat.{u} R} (e : (K.X p).X q ≅ X) (e' : (K.X p).X q' ≅ Y)
+    (a : X ⟶ Y) (hd : (K.X p).d q q' = e.hom ≫ a ≫ e'.inv) :
+    e.inv ≫ K.ιTotal (ComplexShape.up ℤ) p q n hpq ≫
+        K.D₂ (ComplexShape.up ℤ) n (n + 1) =
+      p.negOnePow • (a ≫ e'.inv ≫ K.ιTotal (ComplexShape.up ℤ) p q' (n + 1) hpq') := by
+  rw [HomologicalComplex₂.ι_D₂, K.d₂_eq (ComplexShape.up ℤ) p hqq' (n + 1) hpq', hd]
+  simp only [ComplexShape.ε₂, Linear.comp_units_smul, Category.assoc, Iso.inv_hom_id_assoc]
+
 private theorem principalSubsetInsertOne_vertical
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :
@@ -114,18 +130,6 @@ private theorem principalSubsetInsertOne_vertical
     change (p : ℤ) + q = n at hpq
     dsimp [q, q'] at *
     omega
-  change (((principalSubsetSectionTransport A r f (J.X q) S).hom ≫ v ≫
-    H.map e.inv ≫ H.map (K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q n hpq) ≫
-      H.map (K.D₂ (ComplexShape.up ℤ) n (n + 1))) x) =
-    (((principalSubsetSectionTransport A r f (J.X q') S).hom ≫ v' ≫
-      H.map e'.inv ≫ H.map (K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q' (n + 1) hpq'))
-        ((-1 : A) ^ p • (modulesSpecToSheaf.map (J.d q q')).hom.app (op (D S.val)) x))
-  with_unfolding_all
-    simp only [← H.map_comp, HomologicalComplex₂.ι_D₂]
-  with_unfolding_all
-    rw [K.d₂_eq (ComplexShape.up ℤ) (p : ℤ)
-      (show (ComplexShape.up ℤ).Rel q q' by change q + 1 = q'; dsimp [q, q']; omega)
-      (n + 1) hpq']
   let R := SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) V ⋙
     (Scheme.Modules.overEquiv V).functor
   let g := R.map (J.d q q')
@@ -135,10 +139,15 @@ private theorem principalSubsetInsertOne_vertical
     change (HomologicalComplex.extendMap (alternatingCechComplexMap U γ)
       ComplexShape.embeddingUpNat).f (p : ℤ) = _
     exact HomologicalComplex.extendMap_f _ _ rfl
-  with_unfolding_all
-    rw [hkd]
-    simp only [ComplexShape.ε₂, Linear.comp_units_smul,
-      Category.assoc, Iso.inv_hom_id_assoc]
+  change (H.map (e.inv ≫ K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q n hpq ≫
+      K.D₂ (ComplexShape.up ℤ) n (n + 1)))
+      (v ((principalSubsetSectionTransport A r f (J.X q) S).hom x)) =
+    (H.map (e'.inv ≫ K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q' (n + 1) hpq'))
+      (v' ((principalSubsetSectionTransport A r f (J.X q') S).hom
+        ((-1 : A) ^ p • (modulesSpecToSheaf.map (J.d q q')).hom.app (op (D S.val)) x)))
+  rw [verticalTotal_conjugate K (p : ℤ) q q' n
+    (show (ComplexShape.up ℤ).Rel q q' by change q + 1 = q'; dsimp [q, q']; omega)
+    hpq hpq' e e' a hkd]
   have ha (y : P.obj (op (alternatingCechIntersection U (principalSubsetTuple r S)))) :
       (H.map a) (v y) = v' ((γ.app
         (op (alternatingCechIntersection U (principalSubsetTuple r S)))).hom y) := by
