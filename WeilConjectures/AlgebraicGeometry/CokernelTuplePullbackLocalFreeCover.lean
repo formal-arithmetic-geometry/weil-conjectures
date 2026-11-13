@@ -105,7 +105,7 @@ private theorem tuple_over_eval (X : RingedSpace.{u})
 
 -- Enumerate finite free sources without unfolding the target or its construction.
 private theorem finite_free_cover_of_finite_coprod
-    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
     [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
     (I K : Type u) [Finite I] [Finite K] {M : SheafOfModules.{u} R}
     (p : SheafOfModules.free (R := R) I ⨿ SheafOfModules.free K ⟶ M) [Epi p] :
@@ -178,6 +178,13 @@ theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
             ((SheafOfModules.overMap (moduleRings X) (homOfLE hVU)).map
               ((cokernel.π f).over U))), Epi p := by
   classical
+  -- Reuse the sheafification instances throughout the restrictions and free constructions.
+  have hsheaf (V : Opens X) :
+      HasWeakSheafify ((Opens.grothendieckTopology X).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have hbijective (V : Opens X) :
+      ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    inferInstance
   -- Use generators of F directly; their images generate the kernel of the projection.
   obtain ⟨σ, hσ⟩ := hF.exists_localGeneratorsData
   obtain ⟨W, _, ⟨j, ⟨hj⟩⟩, hxW⟩ := σ.coversTop ⊤ x (by trivial)

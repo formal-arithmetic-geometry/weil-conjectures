@@ -54,7 +54,6 @@ private theorem isIso_of_overMap_app
   exact (SheafOfModules.evaluation.{u} (R.over U) (op A)).map_isIso
     ((overMap R j).map f)
 
-set_option profiler true in
 -- Sectionwise pullbacks require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 private theorem binarySubmodule_on_W

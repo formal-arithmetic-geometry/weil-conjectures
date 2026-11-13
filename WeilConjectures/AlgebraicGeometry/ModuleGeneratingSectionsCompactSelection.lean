@@ -114,7 +114,6 @@ private theorem freeMap_subset_epi
   have := hS
   exact epi_of_epi_fac hfac
 
-set_option profiler true in
 -- The slice-site section types require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- A specified global generating family has a finite subfamily generating on a
