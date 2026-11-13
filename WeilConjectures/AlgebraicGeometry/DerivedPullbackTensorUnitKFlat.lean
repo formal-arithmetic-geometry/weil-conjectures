@@ -394,7 +394,6 @@ private theorem tensorUnit_complex_coherence
     simpa only [a, b, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
       whiskerLeftIso, Category.assoc] using hr
 
-set_option trace.profiler true in
 /-- The explicitly constructed unit comparison satisfies both unit laws on Q(P)
 when P is K-flat. No statement about arbitrary derived objects is made here.
 Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product;
