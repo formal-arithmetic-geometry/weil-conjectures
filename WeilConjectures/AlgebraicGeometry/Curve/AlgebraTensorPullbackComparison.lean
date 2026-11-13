@@ -149,6 +149,7 @@ private theorem changeOfRingsIso_formula {T : TopCat.{u}} {A B : T.Sheaf CommRin
 end
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Comparing dependent inverse-image scalar actions requires extra elaboration steps.
 /-- Canonical algebra pushout comparison for the chosen tensor pullback adjunction.
 
