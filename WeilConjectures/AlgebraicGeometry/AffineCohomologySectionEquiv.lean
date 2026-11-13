@@ -47,7 +47,6 @@ private theorem exists_linearEquiv_of_scalar_transport
   exact ⟨LinearEquiv.ofBijective l (hbij.comp e.symm.bijective), fun _ ↦ rfl⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- The affine Leray comparison, normalized by any augmentation-preserving restricted
 resolution. This comparison is formed before any base change or scalar extension.
 Source: Stacks Project, Tags 01F4 (2), 01XJ (1), 01E4 and 03FD.

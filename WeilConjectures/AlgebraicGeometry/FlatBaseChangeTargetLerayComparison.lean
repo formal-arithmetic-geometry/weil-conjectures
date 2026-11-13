@@ -29,6 +29,15 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
+private theorem equiv_transport_commutative_square
+    {A B C D : Type*} (e : A ≃ B) {a : A → C} {k : B → C}
+    {b : C → D} {r : A → D}
+    (hk : ∀ x, a x = k (e x)) (hb : ∀ x, b (a x) = r x) :
+    ∀ y, b (k y) = r (e.symm y) := by
+  intro y
+  exact (congrArg b ((hk (e.symm y)).trans
+    (congrArg k (e.apply_symm_apply y)))).symm.trans (hb (e.symm y))
+
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
 set_option trace.profiler true in
@@ -105,34 +114,31 @@ theorem exists_flatBaseChange_target_leray_comparison
   classical
   letI : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
   intro h N Q
-  let T : Scheme.{u} := baseChangedScheme (S := Γ(S', W)) h
-  let M : T.Modules := baseChangedModule (S := Γ(S', W)) h N
   let c := (restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F
-  obtain ⟨E, E', hE, hE', hmap⟩ := exists_moduleCohomology_ext_pullback_comparison
-    (B := Γ(S', W)) h p
+  have comparison := exists_moduleCohomology_ext_pullback_comparison (B := Γ(S', W)) h p
+  let E := comparison.choose
+  let E' := comparison.choose_spec.choose
+  have hE := comparison.choose_spec.choose_spec.1
+  have hE' := comparison.choose_spec.choose_spec.2.1
+  have hmap := comparison.choose_spec.choose_spec.2.2
   let e0 : ((RingedSpace.moduleCohomology
       (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
         ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+ HOver h N p :=
     (E ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
     (H.mapLinearEquiv c p).toAddEquiv
   refine ⟨E, hE, e0, rfl, ?_⟩
-  obtain ⟨b, hb⟩ := exists_flatBaseChange_module_leray_comparison
+  have edge := exists_flatBaseChange_module_leray_comparison
     f g F I J p V W hV hW eVW D rfl E' hE'
+  let b := edge.choose
+  have hb := edge.choose_spec
   refine ⟨b, ?_⟩
-  intro xi
-  let x := e0.symm xi
+  apply equiv_transport_commutative_square e0.toEquiv (hb := hb)
+  intro x
   have hx : E N
       (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
-      = xi := by
-    rw [hE _ _ c.hom x]
-    exact e0.apply_symm_apply xi
-  have hp := hmap N
-    (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
-  have hb' := hb x
-  have hp' := congrArg (fun z : HOver (baseChangeSnd (S := Γ(S', W)) h) M p ↦ b z)
-    hp.symm
-  have hx' := congrArg (fun z : HOver h N p ↦
-    b (H.baseChangeLinear (S := Γ(S', W)) h N p z)) hx.symm
-  exact hx'.trans (hp'.trans hb')
+      = e0 x := hE _ _ c.hom x
+  exact (hmap N
+    (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)).trans
+      (congrArg (H.baseChangeLinear (S := Γ(S', W)) h N p) hx)
 
 end AlgebraicGeometry.Scheme.Modules
