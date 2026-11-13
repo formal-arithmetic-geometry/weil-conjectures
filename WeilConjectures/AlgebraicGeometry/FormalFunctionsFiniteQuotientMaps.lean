@@ -32,9 +32,6 @@ attribute [local irreducible] Scheme.Modules.moduleCohomologyFMap
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
-set_option trace.profiler true in
--- Nested cohomology restrictions and resolution comparisons need extra elaboration heartbeats.
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.
 (blueprint: lem-weil-pbc-formal-functions-finite-quotient-maps)
@@ -91,8 +88,7 @@ theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
       rho (r z) = t (rho' z) := (hrc z).trans (ht z).symm
   have hright := (congrArg t hl).trans (htx xi)
   have hresult := (hcomb _).trans hright
-  simpa only [rho, LinearMap.comp_apply, E, Scheme.Modules.moduleCohomologyRestriction]
-    using hresult
+  exact hresult
 
 
 end

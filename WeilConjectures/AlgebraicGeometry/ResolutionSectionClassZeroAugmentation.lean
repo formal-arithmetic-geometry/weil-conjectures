@@ -239,9 +239,6 @@ private theorem augmentation_comp_resolution
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 500000 in
-set_option trace.profiler true in
--- The resolution and evaluation comparisons use multiple concrete functor composites.
 /-- The class of an augmented restricted section is the direct-image augmentation
 of the same section on the original open.
 Source: Stacks Project, Cohomology, Tag 01E4 (lemma-describe-higher-direct-images).
@@ -282,7 +279,8 @@ theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y
   let E := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
     (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
   have : A.Additive := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace
-  have : D.Additive := inferInstanceAs ((pushforward f).Additive)
+  have : D.Additive where
+    map_add := by intros; rfl
   let C := (A.mapHomologicalComplex (.up ℕ)).obj R.resolution.cocomplex
   let K := (D.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
   let L := (P.mapHomologicalComplex (.up ℕ)).obj K
@@ -332,7 +330,8 @@ theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y
       (fun g => g ≫ E.map (P.map (I.isoRightDerivedObj D 0).inv)) ht
     simp only [Category.assoc] at ht'
     exact ht'
-  exact congrArg (fun g => g s) h
+  have hs := ConcreteCategory.congr_hom h s
+  exact hs
 
 
 end AlgebraicGeometry.Scheme.Modules
