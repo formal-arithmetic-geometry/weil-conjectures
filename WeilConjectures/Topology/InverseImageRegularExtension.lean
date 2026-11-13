@@ -103,7 +103,7 @@ theorem inverseImageRegularExtension
   let I := TopCat.Sheaf.inverseImageModule g A M
   let F := changeOfRings.{u, u, u} t I
   obtain ⟨E, hE, adj, hadj⟩ := exists_changeOfRingsAdjunction T C B t
-  obtain ⟨φ, hφ, _, _⟩ := moduleInverseImageAdjunction g A
+  obtain ⟨φ, hφ, _, hnφ⟩ := moduleInverseImageAdjunction g A
   let se (N : SheafOfModules.{u} (𝓡 B)) : N.sections ≃ (Q.obj (L.obj N)).sections :=
     Equiv.ofBijective ((Opens.map g).op.sectionsPrecomp)
       (Functor.bijective_sectionsPrecomp (Opens.map g).op
@@ -128,11 +128,10 @@ theorem inverseImageRegularExtension
     exact hadj I N a _ _
   have hnq (N N' : SheafOfModules.{u} (𝓡 B)) (a : F ⟶ N) (b : N ⟶ N') :
       q N' (a ≫ b) = q N a ≫ Q.map (L.map b) := by
-    ext V
-    change (q N' (a ≫ b)).val.app V (1 : A.obj.obj V) =
-      b.val.app ((Opens.map g).op.obj V) ((q N a).val.app V (1 : A.obj.obj V))
-    rw [hq, hq]
-    rfl
+    change φ M (L.obj N') (adj.homEquiv I N' (eqToHom (hE I) ≫ (a ≫ b))) =
+      φ M (L.obj N) (adj.homEquiv I N (eqToHom (hE I) ≫ a)) ≫ Q.map (L.map b)
+    rw [← Category.assoc, adj.homEquiv_naturality_right]
+    exact hnφ M (L.obj N) (L.obj N') _ (L.map b)
   let eqv (N : SheafOfModules.{u} (𝓡 B)) : (F ⟶ N) ≃ (unit (𝓡 B) ⟶ N) :=
     (q N).trans ((Q.obj (L.obj N)).unitHomEquiv.trans
       ((se N).symm.trans N.unitHomEquiv.symm))
@@ -158,9 +157,7 @@ theorem inverseImageRegularExtension
   change eqv (unit (𝓡 B)) e.hom = 𝟙 _ at h
   have hs := congrArg
     (fun z ↦ se (unit (𝓡 B)) ((unit (𝓡 B)).unitHomEquiv z)) h
-  dsimp only [eqv, Equiv.trans_apply] at hs
-  erw [(unit (𝓡 B)).unitHomEquiv.apply_symm_apply,
-    (se (unit (𝓡 B))).apply_symm_apply] at hs
+  rw [heqv] at hs
   have hv := congrArg (fun z ↦ z.val V) hs
   change (q (unit (𝓡 B)) e.hom).val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
