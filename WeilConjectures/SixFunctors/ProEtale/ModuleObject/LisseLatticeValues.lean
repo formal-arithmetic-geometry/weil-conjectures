@@ -75,7 +75,6 @@ lemma Γ_map_padicIntegersToPadicSubfield (W : Scheme.{u}) :
 
 /-! ### Values of endomorphisms of `E_W` -/
 
-set_option profiler true in
 /-- **Values of sections of `E_W`.** There are ring isomorphisms from the endomorphisms of the
 regular modules `E_W` onto the continuous functions `W → E`, compatible with restriction along
 morphisms `g : W' ⟶ W` (precomposition with `g`), such that an endomorphism whose function
