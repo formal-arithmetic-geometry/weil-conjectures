@@ -209,22 +209,18 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
     [∀ w : W, Invertible (l : W.residueField w)]
     [∀ z : Z, Invertible (l : Z.residueField z)]
     (h : Z ⟶ W) (k : W ⟶ V)
-    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
-    (integralCompositionFiniteScalar l E L ι Z).map
+    (M : coefficientSequenceDerived l E V) :
+    (integralComparisonDerivedSequenceScalar l E L ι Z).map
         ((integralComparisonSystemComposition l E h k).hom.app M) ≫
-      (integralCompositionFiniteScalarPullback l E L ι h).hom.app
-        ((finiteSystemDerivedPullback (integralSystemRings l E)
-          (integralSystemTransition l E) k).obj M) ≫
-      (finiteSystemDerivedPullback (integralSystemRings l L)
-        (integralSystemTransition l L) h).map
-          ((integralCompositionFiniteScalarPullback l E L ι k).hom.app M) =
-      (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
+      (integralComparisonSystemScalarPullback l E L ι h).hom.app
+        ((integralComparisonDerivedSequencePullback l E k).obj M) ≫
+      (integralComparisonDerivedSequencePullback l L h).map
+          ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
+      (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (integralComparisonSystemComposition l L h k).hom.app
-          ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  have mixed := NatTrans.congr_app
+          ((integralComparisonDerivedSequenceScalar l E L ι V).obj M) := by
+  exact NatTrans.congr_app
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
-  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at mixed
-  exact mixed
 
 private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
@@ -311,19 +307,9 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
     (integralCompositionFiniteScalar l E L ι Z) CE
   have eE' := congrArg (integralCompositionFiniteScalar l E L ι Z).map eE
-  apply scalar_composition_paste_mapped
-  · exact N1
-  · exact IIIk'
-  · exact IIIh
-  · exact Ng
-  · exact Np
-  · exact CE'
-  · exact mix
-  · exact eE'
-  · exact eL
-  · exact IIIhk
-  · exact Na
-  · exact CL
+  exact scalar_composition_paste_mapped (N1 := N1) (IIIk := IIIk') (IIIh := IIIh)
+    (Ng := Ng) (Np := Np) (CE := CE') (mix := mix) (eE := eE') (eL := eL)
+    (IIIhk := IIIhk) (Na := Na) (CL := CL)
 
 end SystemScalar
 
