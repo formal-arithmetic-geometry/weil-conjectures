@@ -130,6 +130,20 @@ private theorem scalarComplexCounit_app
   rfl
 
 -- Explicit counit normalizations compare several concrete derived functors.
+private theorem scalarExtensionComplexCounit_app (T : Scheme.{u})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (pbcModules T R) ℤ) :
+    (complexCounit (pbcExtend φ) (pbcDerivedExtend φ) (pbcExtensionCounit φ)).app P =
+      pbcComplexCounit φ P := by
+  rfl
+
+private theorem scalarPullComplexCounit_app
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
+    (complexCounit (pbcActualModulePull g d) (pbcActualDerivedPull g d)
+      (pbcActualPullCounit g d)).app P = pbcActualPullComplexCounit g d P := by
+  rfl
+
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
     (j : F →ₐ[ℚ_[l]] G)
 
@@ -437,10 +451,13 @@ private theorem scalarDerivedCoefficients
       (complexCounit (pbcExtend (χ X)) (pbcDerivedExtend (χ X)) (pbcExtensionCounit (χ X)))
       χEF.hom χFG.hom aY.symm aX.symm aY₁.symm aX₁.symm
       cEF.hom cFG.hom cEG.hom P
-      (by with_unfolding_all simpa only [Category.assoc] using nEF)
-      (by with_unfolding_all simpa only [Category.assoc] using nFG)
-      (by with_unfolding_all simpa only [Category.assoc] using nY')
-      (by with_unfolding_all simpa only [Category.assoc] using nX) hw.symm
+      (by simpa only [LE, LF, scalarExtensionComplexCounit_app, scalarPullComplexCounit_app]
+        using nEF)
+      (by simpa only [LF, LG, scalarExtensionComplexCounit_app, scalarPullComplexCounit_app]
+        using nFG)
+      (by simpa only [scalarExtensionComplexCounit_app, Category.assoc,
+        Functor.mapIso_inv, Iso.app_inv, Iso.symm_hom] using nY')
+      (by simpa only [scalarExtensionComplexCounit_app, Iso.symm_inv] using nX) hw.symm
     simpa only [v, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
         isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
         Functor.associator_hom_app, Functor.associator_inv_app,
