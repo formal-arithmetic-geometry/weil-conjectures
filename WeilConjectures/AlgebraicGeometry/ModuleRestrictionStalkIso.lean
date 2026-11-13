@@ -24,6 +24,7 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry.RingedSpace
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Identifying the slice-site restriction with the subspace presheaf unfolds colimit instances.
 set_option backward.defeqAttrib.useBackward true in
