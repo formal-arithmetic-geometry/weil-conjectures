@@ -75,7 +75,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-set_option profiler true in
 /-- The base change map of the ambient derived categories of module objects over `𝒪̲_E` at a
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
 constructible derived categories is an isomorphism at `K`: the latter is the restriction of the
@@ -91,6 +90,7 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
     IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq').app K.obj) := by
   unfold baseChangeMap
   rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
+  -- Infer the square isomorphism from the goal to reuse its derived-functor instances.
   refine isIso_exchangeRight_of_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
