@@ -380,7 +380,6 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
       erw [pullback.lift_snd]
       rw [hσt]
 
-
 end Scheme.Hom.Nbhd
 
 end AlgebraicGeometry

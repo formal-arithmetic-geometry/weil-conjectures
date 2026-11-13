@@ -96,7 +96,6 @@ private lemma terminalEvaluation_map_eq_res {C : Type*} [Category C]
   rw [he]
   exact Sheaf.ΓRes_map F f.op
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
