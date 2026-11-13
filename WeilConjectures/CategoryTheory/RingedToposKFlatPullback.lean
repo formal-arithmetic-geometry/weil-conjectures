@@ -497,6 +497,7 @@ private theorem h4_supplied_operations
   · simpa only [u, Equiv.apply_symm_apply] using
       (binary_mate_iff f.adj (msmul B (f.modules.obj H)) (msmul A H) f.ringMap u u).mp hs
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
 private theorem supplied_adjunction
