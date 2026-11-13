@@ -256,6 +256,17 @@ private theorem normalizedBeta_eq (n : ℕ)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
+private theorem finiteCochainModel_reductionCounit (n : ℕ)
+    (A : CochainComplex (scalarReductionSource l E Y) ℤ)
+    (hA : A.IsKFlatIndependentCoefficients) :
+    (finiteCochainModel l E Y n).ε.app A = reductionCounit l E Y D hl n A := by
+  rw [finiteCochainModel_counit l E Y n A hA]
+  unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+  change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  with_unfolding_all rfl
+
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -359,13 +370,8 @@ private theorem nativeReductionMonoidal
         exact hrepR.symm
       have heps (A : CochainComplex (scalarReductionSource l E Y) ℤ)
           (hA : A.IsKFlatIndependentCoefficients) :
-          D'.ε.app A = reductionCounit l E Y D hl n A := by
-        rw [finiteCochainModel_counit l E Y n A hA]
-        unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
-        dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
-        change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
-        simp only [CategoryTheory.Functor.map_id, Category.id_comp]
-        with_unfolding_all rfl
+          D'.ε.app A = reductionCounit l E Y D hl n A :=
+        finiteCochainModel_reductionCounit l E Y D hl n A hA
       trace "PH805: counit rewrites"
       rw [heps P hP, heps Q hQ, heps _
         (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
