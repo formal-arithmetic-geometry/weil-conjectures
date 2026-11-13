@@ -77,6 +77,8 @@ lemma pushforwardRestrictMapApp_app {W W' : X.Opens} (h : W' ≤ W) (M : X.Modul
     restrictAdjunction_unit_app_app, pushforwardComp_hom_app_app, pushforwardCongr_hom_app_app,
     restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app, restrict_map,
     Category.id_comp, ← Functor.map_comp]
+  erw [Category.id_comp]
+  simp only [← Functor.map_comp]
   rfl
 
 /-- The restriction map `f_{W,*} (M|_W) ⟶ f_{W',*} (M|_{W'})` for opens `W' ≤ W` of `X`, as a
