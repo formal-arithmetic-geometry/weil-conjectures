@@ -208,7 +208,7 @@ theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   rw [hC]
   dsimp only [ModuleCohomologyFMapData.map, C]
   simp only [CategoryTheory.Functor.map_id, Category.comp_id]
-  exact iso_homology_transport H
+  have htransport := iso_homology_transport H
     ((forget₂ _ AddCommGrpCat.{u}).mapIso
       (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p))
     ((((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso
@@ -219,5 +219,6 @@ theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
     ((((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
       (forget₂ _ AddCommGrpCat.{u})).symm)
     a ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map β) R.sections.hom r hc
+  exact htransport
 
 end AlgebraicGeometry.Scheme.Modules

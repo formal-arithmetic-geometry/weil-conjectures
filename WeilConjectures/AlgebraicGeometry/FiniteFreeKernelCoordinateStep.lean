@@ -113,6 +113,16 @@ private theorem exists_shortExact_kernel_split
       (S₂ := ShortComplex.mk a (b₀ ≫ e.hom) hw) (Iso.refl _) (Iso.refl _) e
       (by simp) (by simp)) hs₀
 
+/-- The image of a map from a quasi-coherent module to the unit is an ideal sheaf. -/
+private theorem quasiCoherent_image_ideal (X : Scheme.{u}) {M : X.Modules}
+    [M.IsQuasicoherent] (v : M ⟶ SheafOfModules.unit X.ringCatSheaf) :
+    ∃ J : X.IdealSheafData, J.toModules.IsQuasicoherent ∧
+      Nonempty (Abelian.image v ≅ J.toModules) := by
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := Scheme.Modules.isQuasicoherent_cokernel v
+  have := Scheme.Modules.isQuasicoherent_kernel (cokernel.π v)
+  exact quasiCoherent_submodule_ideal X (Abelian.image.ι v)
+
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
@@ -157,9 +167,7 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (Option I)
   have hqc := Scheme.Modules.isQuasicoherent_kernel p
-  have := Scheme.Modules.isQuasicoherent_cokernel v
-  have := Scheme.Modules.isQuasicoherent_kernel (cokernel.π v)
-  obtain ⟨J, hJ, he⟩ := quasiCoherent_submodule_ideal X (Abelian.image.ι v)
+  obtain ⟨J, hJ, he⟩ := quasiCoherent_image_ideal X v
   exact ⟨J, hJ, exists_shortExact_kernel_split inc r t s p hir hit hsplit (Classical.choice he)⟩
 
 end AlgebraicGeometry

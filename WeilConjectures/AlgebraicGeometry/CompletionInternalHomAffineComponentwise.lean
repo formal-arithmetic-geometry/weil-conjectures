@@ -115,6 +115,7 @@ private theorem completion_evaluation_component
     rw [hscalarM b a _ ha.symm]
     simp only [AdicCompletion.congr_apply, AdicCompletion.map_of, hEof]
     rw [hon]
+    rfl
   | add w z hw hz => simp only [map_add, LinearMap.add_apply, hw, hz]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -289,7 +290,7 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
     exact hcomponent (R.symm s) n x
   · intro n
     have hcoh := (formalCompletionSystem_coherent I G).1 n.unop
-    have :=
+    have : (formalModuleQuotient I (n.unop + 1) G.obj).IsQuasicoherent :=
       ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp hcoh).1
     exact (affine_internalHom_evaluation_bijective _ _ U.val U.property).1
 
