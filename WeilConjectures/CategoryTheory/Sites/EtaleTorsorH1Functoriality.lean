@@ -31,6 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory.Sheaf.Torsor
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The naturality of the pullback comparison `σ` identifies sections of the pushforward of the
 -- sheaf inverse image with those of `Scheme.etaleSetPullback`, which unfolds both constructions.
 /-- The canonical torsor class is compatible with scheme pullback and change of coefficients.
