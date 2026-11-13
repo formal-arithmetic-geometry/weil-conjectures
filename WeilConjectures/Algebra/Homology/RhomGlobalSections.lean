@@ -26,12 +26,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
--- Use the canonical additive structure directly, avoiding the search through larger
--- algebraic structures on morphisms when elaborating the repeated Hom binders.
-private local instance rhomGlobalSectionsHomAdd {A : Type u} [Category.{v} A]
-    [Preadditive A] (X Y : A) : Add (X ⟶ Y) :=
-  (Preadditive.homGroup X Y).toAdd
-
 set_option profiler true in
 private theorem rhomGlobalSectionsHomComparison
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
@@ -96,7 +90,6 @@ private theorem rhomGlobalSectionsHomComparison
   exact ⟨b⟩
 
 set_option profiler true in
-set_option backward.isDefEq.respectTransparency false in
 /-- The canonical additive identification `H⁰(C, R𝓗om(L, M)) ≃+ Hom_D(O)(L, M)`,
 natural contravariantly in `L` and covariantly in `M`.
 
@@ -170,9 +163,9 @@ theorem rhom_global_sections
   refine ⟨E, ?_⟩
   intro P P' f x
   have hz := ConcreteCategory.congr_hom (z.hom.naturality f) (ULift.up x)
-  simpa [E, F, G, H, U, V, Functor.uncurry, preadditiveCoyoneda,
-    preadditiveCoyonedaObj, AddCommGrpCat.uliftFunctor, AddEquiv.ulift,
-    Equiv.ulift, Iso.addCommGroupIsoToAddEquiv, AddCommGrpCat.Hom.hom, Category.assoc]
-    using congrArg ULift.down hz
+  have hz' := congrArg ULift.down hz
+  change E P' ((ringedSiteZerothHypercohomology J R).map
+    ((derivedInternalHom J R).map f) x) = (f.1.unop ≫ E P x) ≫ f.2 at hz'
+  simpa only [Category.assoc] using hz' 
 
 end CategoryTheory
