@@ -49,19 +49,7 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-noncomputable def integralModelLeftDerivedUpperStar
-    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-    {Z W : Scheme.{u}} (w : Z ⟶ W) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
-  L((w)^*⟦Λ⟧)
-
-noncomputable def integralModelDerivedUpperStarExtendScalarsIso
-    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-    [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
-    {Z W : Scheme.{u}} (w : Z ⟶ W) :=
-  derivedUpperStarExtendScalarsIso a w
-
+set_option maxHeartbeats 1000000 in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
@@ -78,15 +66,14 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
     (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         Z)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
-            ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
-      (integralModelLeftDerivedUpperStar w).obj B :=
+            (L((w)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) ≅
+      L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B :=
   (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       Z)).leftDerivedFunctor.mapIso
-      ((integralModelDerivedUpperStarExtendScalarsIso
-        (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app B₀) ≪≫
-    (integralModelDerivedUpperStarExtendScalarsIso
-      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
-    (integralModelLeftDerivedUpperStar w).mapIso e₀
+      ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
+        B₀) ≪≫
+    (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
+    L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso e₀
 
 /-- An isomorphism of an integral model in the ambient derived categories, as an isomorphism of
 bounded constructible complexes (the form required by the stabilization theorem). -/
@@ -154,6 +141,8 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
+-- the integral model is transported along several derived pullbacks of the base change model
+set_option maxHeartbeats 4000000 in
 -- the integral model is transported along several derived pullbacks of the base change model
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
