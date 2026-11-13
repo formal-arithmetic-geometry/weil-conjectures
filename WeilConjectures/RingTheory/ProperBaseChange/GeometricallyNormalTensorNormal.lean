@@ -628,7 +628,6 @@ private theorem integral_tensor_mem_range
   exact ⟨z, (eA.commutes z).symm.trans ((congrArg eA hz).trans ha)⟩
 
 -- Prove the total-fraction criterion with abstract algebras, before specializing to subalgebras.
-set_option trace.profiler true in
 private theorem integrallyClosed_tensor_of_normal_localizations
     {k A B K L : Type*} [Field k] [CommRing A] [CommRing B] [Field K] [Field L]
     [Algebra k A] [Algebra k B] [Algebra k K] [Algebra k L]
@@ -644,7 +643,6 @@ private theorem integrallyClosed_tensor_of_normal_localizations
   exact integral_tensor_mem_range (k := k) (A := A) (B := B)
     (K := K) (L := L) hKA hBL x hx
 
-set_option trace.profiler true in
 private theorem normal_domain_case_common
     {k : Type u} {A B : Type (max u v)} [Field k] [CommRing A] [CommRing B]
     [Algebra k A] [Algebra k B] [IsDomain A] [IsIntegrallyClosed A]
