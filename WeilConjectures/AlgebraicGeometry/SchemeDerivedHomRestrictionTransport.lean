@@ -295,6 +295,7 @@ end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
+set_option trace.profiler true in
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
 Source: Stacks Project, Cohomology, Tag 08BW, canonical local Hom restriction maps;
