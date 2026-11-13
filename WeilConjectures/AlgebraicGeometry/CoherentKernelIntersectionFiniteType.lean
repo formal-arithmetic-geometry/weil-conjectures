@@ -74,6 +74,12 @@ theorem coherent_kernel_intersection_finiteType
     inferInstance
   have : ((Opens.grothendieckTopology U).over V).WEqualsLocallyBijective
       AddCommGrpCat.{u} := inferInstance
+  have : ∀ B : Over Z,
+      HasSheafify (((Opens.grothendieckTopology X).over Z).over B) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ∀ B : Over Z,
+      (((Opens.grothendieckTopology X).over Z).over B).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let i : Z ⟶ W := homOfLE (by rw [hZ]; exact inf_le_left)
   let A : SheafOfModules.{u} (X.ringCatSheaf.over W) ⥤
       SheafOfModules.{u} (X.ringCatSheaf.over Z) :=
@@ -133,6 +139,12 @@ theorem coherent_kernel_intersection_finiteType
     E.inverse.mapIso ek.symm ≪≫ E.unitIso.symm.app (A.obj (kernel f))
   have : (A.obj (kernel f)).IsFiniteType := finiteType_of_iso (R := X.ringCatSheaf.over Z) ek'
   let D : Over W := Over.mk i
+  have : ∀ B : Over D,
+      HasSheafify ((((Opens.grothendieckTopology X).over W).over D).over B)
+        AddCommGrpCat.{u} := inferInstance
+  have : ∀ B : Over D,
+      ((((Opens.grothendieckTopology X).over W).over D).over B).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let H := SheafOfModules.pushforwardPushforwardEquivalence.{u}
     (Over.iteratedSliceEquiv D)
     (S := (X.ringCatSheaf.over W).over D) (R := X.ringCatSheaf.over D.left) (𝟙 _) (𝟙 _)
