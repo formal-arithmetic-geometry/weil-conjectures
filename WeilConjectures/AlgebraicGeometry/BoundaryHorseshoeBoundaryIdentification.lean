@@ -69,6 +69,10 @@ theorem boundary_horseshoe_boundary_identification (X : Scheme.{u})
     inferInstanceAs (PreservesFiniteLimits
       (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
   obtain ⟨G, hF, hhorse, htriangle⟩ := rightDerived_triangle_connecting v
+  rcases G with ⟨F, add, delta, mono, exm, exr, exl, nat⟩
+  dsimp only at hF
+  subst F
+  dsimp only at hhorse htriangle
   obtain ⟨hH, hδ⟩ := hhorse S hS IA IB IC α β hαβ hιA hιB hrows
   have ht := htriangle S hS 0
   have hd := hδ 0
