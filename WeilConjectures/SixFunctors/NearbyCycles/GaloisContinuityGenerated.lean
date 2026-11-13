@@ -115,7 +115,7 @@ theorem exists_forall_homology_galoisLayerAction_eq_id_of_isGenerated [QuasiComp
   have hKe (n : ℤ) := essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some
   have hK (n : ℤ) :=
     rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
-  obtain ⟨hΦ⟩ := N.nonempty_isColimit_homology_nearbyCycles_galoisTower T₀ h Ω K a hKe q
+  have hΦ := (N.nonempty_isColimit_homology_nearbyCycles_galoisTower T₀ h Ω K a hKe q).some
   let H := DerivedCategory.homologyFunctor
     (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) q
@@ -133,7 +133,9 @@ theorem exists_forall_homology_galoisLayerAction_eq_id_of_isGenerated [QuasiComp
   have hgen : IsGeneratedByFinitelyPresentable.{u} (Φ.mapCocone
       ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
     hfg.of_iso ((Ψ.mapIso eK) ≪≫ H.mapIso κ).symm
-  obtain ⟨j, hj⟩ := hgen.exists_epi_ι hΦ
+  have hj_exists := hgen.exists_epi_ι hΦ
+  let j := hj_exists.choose
+  have hj := hj_exists.choose_spec
   let L' : FiniteGaloisIntermediateField L Ω := j
   refine ⟨L', fun σ hσ ↦ ?_⟩
   have hU (τ : Ω ≃ₐ[L] Ω) (hτ : ∀ x : L', τ x = x) :=
