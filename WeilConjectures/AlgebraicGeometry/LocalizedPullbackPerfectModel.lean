@@ -94,7 +94,6 @@ private theorem ordinaryPullback_Q_iso {T X : Scheme.{u}} (g : T ⟶ X)
     (DerivedCategory.quotientCompQhIso _).app _ ≪≫
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex η (.up ℤ)).app P)⟩
 
-set_option trace.profiler true in
 /-- A specified local strictly perfect model computes derived pullback on its inverse-image
 open. This only identifies the derived object; preservation of strict perfectness of the
 ordinary pulled complex is a separate, elementary argument.
