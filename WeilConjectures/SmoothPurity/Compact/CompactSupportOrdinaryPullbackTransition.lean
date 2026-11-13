@@ -123,7 +123,7 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
         ((coefficientSequenceEvaluation l E Y n).obj N) := by
   let R := compactSupportSystemLevel l E
   let q := compactSupportSystemQuotient l E
-  refine horizontalLeftMate
+  apply horizontalLeftMate
     (Lm := ProEtale.StrictTower.modulePullback (R m) f)
     (Rm := ProEtale.StrictTower.moduleDirectImage (R m) f)
     (Ln := ProEtale.StrictTower.modulePullback (R n) f)
