@@ -131,7 +131,6 @@ private theorem rightDerivedComparisonOfHomology
     at hnat
   rw [← Category.assoc, hnat, Category.assoc, ← hD']
 
-set_option trace.profiler true in
 -- Resolution comparison unfolds both module-valued derived functors and forgetful maps.
 set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the cocycle Leray edge.

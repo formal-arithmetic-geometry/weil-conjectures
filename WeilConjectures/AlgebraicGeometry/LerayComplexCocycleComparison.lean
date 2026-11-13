@@ -136,7 +136,6 @@ private theorem homologyComparisonOfNatTrans
             exact (Category.assoc _ _ _).symm }
   exact ⟨τ, c, fun C ↦ ⟨hc C, hδ C⟩⟩
 
-set_option trace.profiler true in
 -- Elaborating the mapped kernel and cokernel lifts unfolds several composed functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison from cohomology of global sections to global sections of the

@@ -143,7 +143,8 @@ theorem leray_edge_grothendieck_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     obtain ⟨z, hz, hez⟩ := he q F I s
     exact ⟨z, hz, hez c hc⟩
   · have heq := congrArg (fun a ↦ a ≫ G.map (I.isoRightDerivedObj D q).inv) hcπ
-    simpa only [Category.assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id,
-      Category.comp_id] using heq
+    simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id] at heq
+    erw [Category.comp_id] at heq
+    exact heq
 
 end AlgebraicGeometry
