@@ -63,6 +63,15 @@ private theorem sum_singleton_subsets (r : ℕ)
     · simp [hT]
   · simp
 
+open Classical in
+private theorem map_sum_singleton_subsets
+    (r : ℕ) (M : (Fin 1 ↪o Fin r) → Type u) [∀ t, AddCommGroup (M t)]
+    {β : Type u} [AddCommGroup β] (b : (∀ t, M t) →+ β) (z : ∀ t, M t) :
+    (∑ S : {S : Finset (Fin r) // S.Nonempty},
+      b (if h : S.val.card = 1 then
+        Pi.single (S.val.orderEmbOfFin h) (z (S.val.orderEmbOfFin h)) else 0)) = b z := by
+  rw [← map_sum b, sum_singleton_subsets]
+
 private theorem principalSubsetInsertion_hom_apply
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ)
@@ -157,7 +166,7 @@ theorem principalSubsetInsertion_augmentation
         (map_zero (principalSubsetInsertOne A r f J n S).hom).trans (map_zero b.hom).symm
   change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
   simp_rw [hc]
-  rw [← map_sum b.hom, sum_singleton_subsets]
+  rw [map_sum_singleton_subsets r _ b.hom z]
   change (H.map (alternatingCechZero U (J'.X n) ≫ e.hom) ≫ b).hom
     ((principalOpenSectionTransport A V (J.X n)).hom s) = _
   dsimp only [b]
