@@ -69,6 +69,7 @@ private theorem scalar_restriction_counit (a : Λ ⟶ Λ') [IsMonHom a]
   erw [← reassoc_of% hn]
   erw [reassoc_of% hq]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- The counit calculation contains several nested derived functor comparisons.
 /-- The scalar route computes the ordinary balanced pullback map.
