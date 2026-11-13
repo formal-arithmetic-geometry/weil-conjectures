@@ -176,9 +176,9 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
   have hnX := ((V₀ a X).mapDerivedCategorySingleFunctor 0).hom.naturality
     (Functor.Monoidal.εIso (CondensedRing.upperStar Λ' f)).inv
   dsimp only [Functor.comp_map] at hn hnX
-  simp only [reassoc_of% hn]
-  simp only [hnX]
-  simp only [reassoc_of% restriction_pull_single a f (Mod.regular (condensedRingObj Λ' Y))]
+  erw [reassoc_of% hn]
+  erw [hnX]
+  erw [reassoc_of% restriction_pull_single a f (Mod.regular (condensedRingObj Λ' Y))]
   simp only [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app]
   simp only [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
 
