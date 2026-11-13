@@ -260,8 +260,6 @@ private theorem localPieceCostalkModelComplexColimits
   infer_instance
 
 set_option profiler true in
-set_option synthInstance.maxHeartbeats 100000 in
--- Internal module colimits require a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
