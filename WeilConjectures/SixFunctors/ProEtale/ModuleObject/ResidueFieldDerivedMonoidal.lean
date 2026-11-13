@@ -78,7 +78,6 @@ lemma residueFieldDerivedUpperStarIso_symm_eq :
     CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory,
     ProEtale.leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategoryNatIso_symm]
 
-set_option trace.profiler true in
 /-- **`D(G)` is monoidal, compatibly with the derived pullbacks**: there are isomorphisms
 `D(G_X)(A ⊗ᴸ B) ≅ D(G_X) A ⊗ᴸ D(G_X) B` such that the isomorphism
 `Lf^* ⋙ D(G_X) ≅ D(G_Y) ⋙ Lf^*` is compatible with them and with the tensor comparisons of the
@@ -105,6 +104,7 @@ theorem exists_comparisonCompatible_residueFieldDerivedUpperStarIso :
       (asIso ((residueFieldModuleSheaf Y ℓ E).leftDerivedTensorComparisonOfNatTrans
         (residueFieldModuleSheafTensorIso Y ℓ E).hom))
       (residueFieldModuleSheaf Y ℓ E).leftDerivedFunctorIsoMapDerivedCategory, ?_⟩
+  -- Simplify the named comparisons without unfolding the derived categories to match rewrites.
   simp only [residueFieldDerivedUpperStarIso_symm_eq,
     CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison
       (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f,
