@@ -149,8 +149,6 @@ end SiteHelpers
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Transport across iterated slice sites requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Quasi-coherence and finite type descend from the two members of a binary open cover.
@@ -181,7 +179,7 @@ theorem module_binary_local_properties
       ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
         (homOfLE (show V ≤ W ⊔ V from le_sup_right))).obj G).IsFiniteType) :
     G.IsQuasicoherent ∧ G.IsFiniteType := by
-  let R := moduleRings X.toRingedSpace
+  generalize moduleRings X.toRingedSpace = R at G hW hV ⊢
   let J := _root_.Opens.grothendieckTopology X
   have localProps (A : X.Opens) (hA : A ≤ W ⊔ V)
       (hq : ((overMap R (homOfLE hA)).obj G).IsQuasicoherent)
@@ -193,13 +191,7 @@ theorem module_binary_local_properties
     let E := Over.iteratedSliceEquiv (Over.mk (homOfLE hA : A ⟶ W ⊔ V))
     have : E.inverse.IsDenseSubsite (J.over A)
         ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) := by
-      refine { functorPushforward_mem_iff := ?_ }
-      intro T S
-      simp only [E, GrothendieckTopology.mem_over_iff, Sieve.overEquiv,
-        RelIso.coe_fn_mk, Equiv.coe_fn_mk]
-      dsimp [Over.iteratedSliceEquiv]
-      rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
-      rfl
+      infer_instance
     have : E.functor.IsContinuous
         ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A) := by
       infer_instance
