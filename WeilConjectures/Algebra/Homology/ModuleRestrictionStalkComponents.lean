@@ -52,7 +52,6 @@ private def restrictScalarsHomOfSemilinear {R S : CommRingCat.{u}} (e : R ≅ S)
         exact (h (e.inv r) m).trans
           (congrArg (fun t : S ↦ t • a m) (e.inv_hom_id_apply r)) }
 
-set_option profiler true in
 -- Comparing stalk module structures through restriction unfolds nested colimit instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
