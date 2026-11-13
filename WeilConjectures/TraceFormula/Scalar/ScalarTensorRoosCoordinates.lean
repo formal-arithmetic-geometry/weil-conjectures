@@ -204,7 +204,9 @@ private theorem scalarAssociatorCoordinate
     (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E F (j.comp ι) X).obj P).obj
       (op m)) n).f i).val.app U)
       (((CompletedLineTensor.associatorData l E X L ι F j).sheaf.hom.app
-        (P.X i)).val.app U _) = _
+        (P.X i)).val.app U
+        (completedScalarTensorSection l L F j X _ U s
+          (completedScalarTensorSection l E L ι X (P.X i) U t x))) = _
   have hOrd := (CompletedLineTensor.associatorData_existsUnique l E X L ι F j).exists.choose_spec.1
     (P.X i) U t s x
   change ((CompletedLineTensor.associatorData l E X L ι F j).sheaf.hom.app
