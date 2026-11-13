@@ -323,10 +323,65 @@ theorem proEtaleStrictPerfect_flat
   exact SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
     R F (b + 1) hflat
 
+private lemma tensorRepresentative_inv_naturality
+    {C D : Type*} [Category C] [Category D] (P : ObjectProperty C)
+    (Q : C ⥤ D) (T : C ⥤ C ⥤ C) (B : D × D ⥤ D)
+    (e : (P.ι.prod P.ι) ⋙ Functor.uncurry.obj T ⋙ Q ≅
+      ((P.ι ⋙ Q).prod (P.ι ⋙ Q)) ⋙ B)
+    {K L F : C} (hK : P K) (hL : P L) (hF : P F) (p : K ⟶ L) :
+    B.map (Prod.mkHom (Q.map p) (𝟙 (Q.obj F))) ≫ e.inv.app (⟨L, hL⟩, ⟨F, hF⟩) =
+      e.inv.app (⟨K, hK⟩, ⟨F, hF⟩) ≫ Q.map ((T.map p).app F) := by
+  have h := e.inv.naturality (Prod.mkHom
+    (ObjectProperty.homMk (X := ⟨K, hK⟩) (Y := ⟨L, hL⟩) p)
+    (𝟙 (⟨F, hF⟩ : P.FullSubcategory)))
+  simp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
+    ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
+    ObjectProperty.FullSubcategory.id_hom, Functor.uncurry_obj_map] at h
+  change B.map (Prod.mkHom (Q.map p) (Q.map (𝟙 F))) ≫ _ =
+    _ ≫ Q.map ((T.map p).app F ≫ (T.obj L).map (𝟙 F)) at h
+  simpa only [Q.map_id, (T.obj L).map_id, Category.comp_id] using h
+
+private lemma resolutionComparison_existsUnique
+    {C D : Type*} [Category C] [Category D] (P : ObjectProperty C)
+    (W : MorphismProperty C) (L : C ⥤ C) (q : L ⟶ 𝟭 C)
+    (hq : ∀ K, W (q.app K)) (hL : ∀ K, P (L.obj K)) (U V : C ⥤ D)
+    (i : ∀ K, P K → (U.obj K ≅ V.obj K))
+    (hi : ∀ {K K'} (hK : P K) (hK' : P K') (p : K ⟶ K'),
+      U.map p ≫ (i K' hK').hom = (i K hK).hom ≫ V.map p)
+    (A : C) [∀ K, IsIso (U.map (q.app K))] [IsIso (V.map (q.app A))] :
+    ∃! z : U.obj A ≅ V.obj A,
+      ∀ K (hK : P K) (p : K ⟶ A), W p →
+        U.map p ≫ z.hom = (i K hK).hom ≫ V.map p := by
+  let z := (asIso (U.map (q.app A))).symm ≪≫ i (L.obj A) (hL A) ≪≫
+    asIso (V.map (q.app A))
+  have hz : U.map (q.app A) ≫ z.hom = (i (L.obj A) (hL A)).hom ≫ V.map (q.app A) := by
+    exact IsIso.hom_inv_id_assoc _ _
+  refine ⟨z, ?_, ?_⟩
+  · intro K hK p _
+    apply (cancel_epi (U.map (q.app K))).1
+    have hU : U.map (q.app K) ≫ U.map p = U.map (L.map p) ≫ U.map (q.app A) := by
+      rw [← U.map_comp, ← U.map_comp]
+      exact congrArg U.map (q.naturality p).symm
+    have hV : V.map (L.map p) ≫ V.map (q.app A) = V.map (q.app K) ≫ V.map p := by
+      rw [← V.map_comp, ← V.map_comp]
+      exact congrArg V.map (q.naturality p)
+    calc
+      U.map (q.app K) ≫ U.map p ≫ z.hom =
+          U.map (L.map p) ≫ U.map (q.app A) ≫ z.hom := by
+        rw [← Category.assoc, hU, Category.assoc]
+      _ = U.map (L.map p) ≫ (i (L.obj A) (hL A)).hom ≫ V.map (q.app A) := by rw [hz]
+      _ = (i (L.obj K) (hL K)).hom ≫ V.map (L.map p) ≫ V.map (q.app A) := by
+        rw [← Category.assoc, hi (hL K) (hL A), Category.assoc]
+      _ = (i (L.obj K) (hL K)).hom ≫ V.map (q.app K) ≫ V.map p := by rw [hV]
+      _ = U.map (q.app K) ≫ (i K hK).hom ≫ V.map p := by
+        rw [← Category.assoc, ← hi (hL K) hK, Category.assoc]
+  · intro z' hz'
+    apply Iso.ext
+    apply (cancel_epi (U.map (q.app A))).1
+    exact (hz' (L.obj A) (hL A) (q.app A) (hq A)).trans hz.symm
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The resolution comparison elaborates several large total-tensor naturality squares.
 /-- Mixed tensor representatives, normalized at every flat K-flat resolution.
 Source: definition 1264, displayed representatives C and J
 (blueprint: def-weil-pbc-projection-formula-arrows).
@@ -392,120 +447,26 @@ theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
     intro i
     exact (ht i).of_iso
       (CochainComplex.mapBifunctorMappingCone₁Iso p F (proEtaleOrdinaryTensor Y R))
-  let q := Λ.resolutionNatTrans
-  let PA := Λ.resolutionFunctor.obj A
-  have hqA : QuasiIso (q.app A) := inferInstance
-  have hqp : IsIso (DerivedCategory.Q.{u + 2}.map (q.app A)) := by
-    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
-    exact hqA
-  have hqt : IsIso (DerivedCategory.Q.{u + 2}.map
-      (HomologicalComplex.mapBifunctorMap (q.app A) (𝟙 F)
-        (proEtaleOrdinaryTensor Y R) (.up ℤ))) := by
-    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
-    exact htensor _ hqA
-  let : IsIso (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (q.app A))
-    (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) :=
-      (Iso.prod (asIso (DerivedCategory.Q.{u + 2}.map (q.app A)))
-      (Iso.refl (DerivedCategory.Q.{u + 2}.obj F))).isIso_hom
-  let e := a.tensor.mapIso
-    (Iso.prod (asIso (DerivedCategory.Q.{u + 2}.map (q.app A)))
-      (Iso.refl (DerivedCategory.Q.{u + 2}.obj F)))
-  let z := e.symm ≪≫ (a.representative.app (⟨PA, hres A⟩, ⟨F, hf⟩)).symm ≪≫
-    asIso (DerivedCategory.Q.{u + 2}.map (HomologicalComplex.mapBifunctorMap (q.app A) (𝟙 F)
-      (proEtaleOrdinaryTensor Y R) (.up ℤ)))
-  refine ⟨z, ?_, ?_⟩
-  · intro P hp p hq
-    have hqP : QuasiIso (q.app P) := inferInstance
-    have : IsIso (DerivedCategory.Q.{u + 2}.map (q.app P)) := by
-      rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
-      exact hqP
-    let : IsIso (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (q.app P))
-      (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) :=
-        (Iso.prod (asIso (DerivedCategory.Q.{u + 2}.map (q.app P)))
+  let T := (proEtaleOrdinaryTensor Y R).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)
+  let U := DerivedCategory.Q ⋙ (Functor.curry.obj a.tensor).flip.obj (DerivedCategory.Q.obj F)
+  let V := T.flip.obj F ⋙ DerivedCategory.Q
+  have hq (K : CochainComplex M ℤ) : QuasiIso (Λ.resolutionNatTrans.app K) := inferInstance
+  have (K : CochainComplex M ℤ) : IsIso (U.map (Λ.resolutionNatTrans.app K)) := by
+    have : IsIso (DerivedCategory.Q.{u + 2}.map (Λ.resolutionNatTrans.app K)) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 (hq K)
+    let : IsIso (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (Λ.resolutionNatTrans.app K))
+        (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) :=
+      (Iso.prod (asIso (DerivedCategory.Q.{u + 2}.map (Λ.resolutionNatTrans.app K)))
         (Iso.refl (DerivedCategory.Q.{u + 2}.obj F))).isIso_hom
-    apply (cancel_epi (a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (q.app P))
-      (𝟙 (DerivedCategory.Q.{u + 2}.obj F))))).1
-    let T := ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
-      (.up ℤ) (.up ℤ) (.up ℤ)).flip.obj F
-    have hn : a.tensor.map (Prod.mkHom
-        (DerivedCategory.Q.{u + 2}.map (Λ.resolutionFunctor.map p))
-        (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
-        a.representative.inv.app (⟨_, hres A⟩, ⟨F, hf⟩) =
-      a.representative.inv.app (⟨_, hres P⟩, ⟨F, hf⟩) ≫
-        DerivedCategory.Q.{u + 2}.map (T.map (Λ.resolutionFunctor.map p)) := by
-      have h := a.representative.inv.naturality
-        (Prod.mkHom (ObjectProperty.homMk (X := ⟨_, hres P⟩) (Y := ⟨_, hres A⟩)
-          (Λ.resolutionFunctor.map p))
-          (𝟙 (⟨F, hf⟩ : (proEtaleFlatRepresentatives Y R).FullSubcategory)))
-      simp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
-        ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
-        ObjectProperty.FullSubcategory.id_hom, Functor.uncurry_obj_map] at h
-      erw [DerivedCategory.Q.{u + 2}.map_id F,
-        (((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
-          (.up ℤ) (.up ℤ) (.up ℤ)).obj (Λ.resolutionFunctor.obj A)).map_id F,
-        Category.comp_id] at h
-      simpa only [T, Functor.flip_obj_map] using h
-    have hn' : a.tensor.map (Prod.mkHom
-        (DerivedCategory.Q.{u + 2}.map (q.app P))
-        (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
-        a.representative.inv.app (⟨P, hp⟩, ⟨F, hf⟩) =
-      a.representative.inv.app (⟨_, hres P⟩, ⟨F, hf⟩) ≫
-        DerivedCategory.Q.{u + 2}.map (T.map (q.app P)) := by
-      have h := a.representative.inv.naturality
-        (Prod.mkHom (ObjectProperty.homMk (X := ⟨_, hres P⟩) (Y := ⟨_, hp⟩)
-          (q.app P))
-          (𝟙 (⟨F, hf⟩ : (proEtaleFlatRepresentatives Y R).FullSubcategory)))
-      simp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
-        ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
-        ObjectProperty.FullSubcategory.id_hom, Functor.uncurry_obj_map] at h
-      erw [DerivedCategory.Q.{u + 2}.map_id F,
-        (((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex
-          (.up ℤ) (.up ℤ) (.up ℤ)).obj (P)).map_id F,
-        Category.comp_id] at h
-      simpa only [T, Functor.flip_obj_map] using h
-    have heq : a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (q.app P))
-        (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
-          a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map p)
-            (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) =
-        a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map
-          (Λ.resolutionFunctor.map p)) (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫ e.hom := by
-      change _ = _ ≫ a.tensor.map _
-      rw [← a.tensor.map_comp, ← a.tensor.map_comp]
-      congr 1
-      apply Prod.ext
-      · change DerivedCategory.Q.map (q.app P) ≫ DerivedCategory.Q.map p =
-          DerivedCategory.Q.map (Λ.resolutionFunctor.map p) ≫
-            DerivedCategory.Q.map (q.app A)
-        simpa only [← Functor.map_comp, Functor.id_map] using
-          congrArg (fun v ↦ DerivedCategory.Q.{u + 2}.map v) (q.naturality p).symm
-      · simp
-    rw [← Category.assoc, heq, Category.assoc]
-    have hez : e.hom ≫ z.hom =
-        a.representative.inv.app (⟨PA, hres A⟩, ⟨F, hf⟩) ≫
-          DerivedCategory.Q.{u + 2}.map (T.map (q.app A)) := by
-      change e.hom ≫ (e.inv ≫ _) = _
-      rw [e.hom_inv_id_assoc]
-      rfl
-    rw [hez, ← Category.assoc, hn]
-    rw [← Category.assoc, hn', Category.assoc]
-    have hcomm : DerivedCategory.Q.{u + 2}.map (T.map (Λ.resolutionFunctor.map p)) ≫
-          DerivedCategory.Q.{u + 2}.map (T.map (q.app A)) =
-        DerivedCategory.Q.{u + 2}.map (T.map (q.app P)) ≫
-          DerivedCategory.Q.{u + 2}.map (T.map p) := by
-      simp only [← Functor.map_comp]
-      simpa only [Functor.id_map] using
-        congrArg (fun v ↦ DerivedCategory.Q.{u + 2}.map (T.map v)) (q.naturality p)
-    simpa only [Category.assoc, T, Functor.flip_obj_map,
-      Functor.map₂HomologicalComplex_map_app] using
-      congrArg (fun v ↦ a.representative.inv.app (⟨_, hres P⟩, ⟨F, hf⟩) ≫ v) hcomm
-  · intro z' hz'
-    apply Iso.ext
-    apply (cancel_epi (a.tensor.map (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (q.app A))
-      (𝟙 (DerivedCategory.Q.{u + 2}.obj F))))).1
-    rw [hz' PA (hres A) (q.app A) hqA]
-    change _ = e.hom ≫ (e.inv ≫ _)
-    rw [e.hom_inv_id_assoc]
-    rfl
+    change IsIso (a.tensor.map (Prod.mkHom _ _))
+    infer_instance
+  have : IsIso (V.map (Λ.resolutionNatTrans.app A)) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 (htensor _ (hq A))
+  exact resolutionComparison_existsUnique (proEtaleFlatRepresentatives Y R)
+    (HomologicalComplex.quasiIso M (.up ℤ)) Λ.resolutionFunctor Λ.resolutionNatTrans
+    hq hres U V (fun K hK ↦ (a.representative.app (⟨K, hK⟩, ⟨F, hf⟩)).symm)
+    (fun hK hK' p ↦ tensorRepresentative_inv_naturality (proEtaleFlatRepresentatives Y R)
+      DerivedCategory.Q T a.tensor a.representative hK hK' hf p) A
 
 /-- The unique mixed tensor comparison with the specified resolution normalization.
 Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
