@@ -32,8 +32,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 500000 in
--- Comparing finite-column Hom complexes requires substantial definitional reduction.
 /-- Hom from a bounded complex of finite free modules preserves quasi-coherent cohomology.
 
 Source: Stacks Project, Tag 0A6H (2), using the finite-column calculation in Tag 08I5.
@@ -62,6 +60,12 @@ theorem finiteFree_homComplex_qc_cohomology
     (hI : ∀ i : ℤ, (I.homology i).IsQuasicoherent) (n : ℤ) :
     ((homComplex (R := X.toRingedSpace.sheaf.over U) E I).homology n).IsQuasicoherent := by
   classical
+  -- Reuse the sheafification instances throughout the truncation induction.
+  let J := (Opens.grothendieckTopology X.toRingedSpace).over U
+  have : HasSheafify J AddCommGrpCat.{u} := inferInstance
+  have : J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, HasSheafify (J.over V) AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   let A := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
   have transport {K L : CochainComplex A ℤ} (e : K ≅ L)
       (hL : ∀ i : ℤ, (L.homology i).IsQuasicoherent) :

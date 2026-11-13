@@ -115,11 +115,128 @@ private theorem single_homology_iso
   rw [(DerivedCategory.homologyFunctor C q).map_id]
   simp only [Category.id_comp]
 
+-- Do the naturality calculation with abstract categories, before specializing to sheaves.
+private theorem resolutionEdge_unit_of_map
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (q : ℤ)
+    (J I : CochainComplex C ℤ) [I.IsKInjective]
+    (r : DerivedCategory.Q.obj I ≅ DerivedCategory.Q.obj J)
+    (b : J ⟶ I) (hb : DerivedCategory.Q.map b = r.inv) :
+    (DerivedCategory.homologyFunctor D q).map (F.complexDerivedUnit.app J) ≫
+      (((DerivedCategory.homologyFunctor D q).mapIso
+          (F.rightDerivedFunctor.mapIso r.symm ≪≫ F.rightDerivedFunctorObjQIso I) ≪≫
+        (DerivedCategory.homologyFunctorFactors D q).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj I)).hom ≫
+        ShortComplex.leftExactHomologyEdge F (I.sc q) ≫
+        F.map ((DerivedCategory.homologyFunctor C q).mapIso r.symm ≪≫
+          (DerivedCategory.homologyFunctorFactors C q).app I).inv) =
+      (DerivedCategory.homologyFunctorFactors D q).hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
+        ShortComplex.leftExactHomologyEdge F (J.sc q) ≫
+        F.map ((DerivedCategory.homologyFunctorFactors C q).inv.app J) := by
+  let H := DerivedCategory.homologyFunctor D q
+  let H' := DerivedCategory.homologyFunctor C q
+  have hn := F.complexDerivedUnit.naturality b
+  have hc : F.complexDerivedUnit.app J ≫
+      (F.rightDerivedFunctor.map r.inv ≫ (F.rightDerivedFunctorObjQIso I).hom) =
+      DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map b) := by
+    dsimp only [Functor.comp_map] at hn
+    rw [← hb, ← Category.assoc, ← hn, Category.assoc,
+      complexUnit_resolutionIso, Category.comp_id]
+  have ha : H.map (F.complexDerivedUnit.app J) ≫
+      ((DerivedCategory.homologyFunctor D q).mapIso
+          (F.rightDerivedFunctor.mapIso r.symm ≪≫ F.rightDerivedFunctorObjQIso I) ≪≫
+        (DerivedCategory.homologyFunctorFactors D q).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj I)).hom =
+      (DerivedCategory.homologyFunctorFactors _ q).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
+          HomologicalComplex.homologyMap ((F.mapHomologicalComplex (.up ℤ)).map b) q := by
+    have hf := (DerivedCategory.homologyFunctorFactors _ q).hom.naturality
+      ((F.mapHomologicalComplex (.up ℤ)).map b)
+    dsimp only [Iso.trans_hom, Iso.symm_hom,
+      Functor.mapIso_hom, Iso.app_hom, Functor.comp_obj,
+      HomologicalComplex.homologyFunctor_obj]
+    change H.map _ ≫ (H.map (_ ≫ _) ≫ _) = _
+    rw [← H.map_comp_assoc, hc]
+    exact hf
+  have he := ShortComplex.leftExactHomologyEdge_naturality F
+    ((HomologicalComplex.shortComplexFunctor _ (.up ℤ) q).map b)
+  have hr : HomologicalComplex.homologyMap b q ≫
+      ((DerivedCategory.homologyFunctor C q).mapIso r.symm ≪≫
+        (DerivedCategory.homologyFunctorFactors C q).app I).inv =
+      (DerivedCategory.homologyFunctorFactors _ q).inv.app J := by
+    have hf := (DerivedCategory.homologyFunctorFactors _ q).inv.naturality b
+    simp only [Functor.comp_map, Functor.comp_obj,
+      HomologicalComplex.homologyFunctor_map] at hf
+    dsimp only [Iso.trans_inv, Iso.symm_inv,
+      Functor.mapIso_inv, Iso.app_inv, Functor.comp_obj,
+      HomologicalComplex.homologyFunctor_obj]
+    change _ ≫ (_ ≫ H'.map r.hom) = _
+    rw [← Category.assoc, hf, Category.assoc, ← H'.map_comp, hb, Iso.inv_hom_id,
+      H'.map_id, Category.comp_id]
+  change H.map _ ≫ (_ ≫ _ ≫ _) = _
+  rw [← Category.assoc, ← Category.assoc, ha, Category.assoc]
+  dsimp only [Functor.comp_obj, HomologicalComplex.homologyFunctor_obj,
+    HomologicalComplex.homologyMap, HomologicalComplex.sc] at *
+  simp only [Category.assoc]
+  erw [reassoc_of% he]
+  have hh := congrArg (fun z ↦
+    (DerivedCategory.homologyFunctorFactors _ q).hom.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
+        ShortComplex.leftExactHomologyEdge F (J.sc q) ≫ F.map z) hr
+  simpa only [Functor.map_comp, Category.assoc, HomologicalComplex.homologyMap,
+    HomologicalComplex.sc] using hh
+
+private theorem single_homology_edge
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (M : C) (q : ℤ) :
+    let J := (CochainComplex.singleFunctor C q).obj M
+    let t := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) q).app M
+    (DerivedCategory.homologyFunctor D q).map (DerivedCategory.Q.map t.inv) ≫
+      ((DerivedCategory.homologyFunctorFactors D q).hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
+        ShortComplex.leftExactHomologyEdge F (J.sc q) ≫
+        F.map ((DerivedCategory.homologyFunctorFactors C q).inv.app J)) =
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso D q).hom.app (F.obj M) ≫
+        F.map ((DerivedCategory.singleFunctorCompHomologyFunctorIso C q).inv.app M) := by
+  dsimp only
+  let H := DerivedCategory.homologyFunctor D q
+  let J := (CochainComplex.singleFunctor C q).obj M
+  let t := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) q).app M
+  have hn := (DerivedCategory.homologyFunctorFactors _ q).hom.naturality t.inv
+  simp only [Functor.comp_map, Functor.comp_obj,
+    HomologicalComplex.homologyFunctor_map] at hn
+  change H.map (DerivedCategory.Q.map t.inv) ≫
+    (DerivedCategory.homologyFunctorFactors _ q).hom.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj J) =
+    (DerivedCategory.homologyFunctorFactors _ q).hom.app
+      ((CochainComplex.singleFunctor _ q).obj (F.obj M)) ≫
+      HomologicalComplex.homologyMap t.inv q at hn
+  rw [← Category.assoc, ← Category.assoc, hn, Category.assoc]
+  have hraw := single_raw_edge F M q
+  change HomologicalComplex.homologyMap t.inv q ≫
+    ShortComplex.leftExactHomologyEdge F (J.sc q) = _ at hraw
+  simp only [Category.assoc]
+  rw [reassoc_of% hraw]
+  change (DerivedCategory.homologyFunctorFactors _ q).hom.app
+    ((CochainComplex.singleFunctor _ q).obj (F.obj M)) ≫
+      (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q (F.obj M)).hom ≫
+        F.map (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q M).inv ≫
+          F.map ((DerivedCategory.homologyFunctorFactors _ q).inv.app J) =
+    ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ q).app (F.obj M)).hom ≫
+      F.map ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ q).app M).inv
+  rw [single_homology_iso, single_homology_iso]
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.app_hom, Iso.app_inv,
+    Functor.map_comp, Category.assoc]
+  rfl
+
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-set_option maxHeartbeats 600000 in
--- The fixed resolution and the two homology factorizations carry large module parameters.
+-- Specialize the abstract calculation to the fixed resolution.
 private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ) :
     let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
@@ -131,65 +248,12 @@ private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
           ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
         ShortComplex.leftExactHomologyEdge F (J.sc q) ≫
         F.map ((DerivedCategory.homologyFunctorFactors _ q).inv.app J) := by
-  dsimp only
-  let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
-  let H := DerivedCategory.homologyFunctor.{w, u, u + 1}
-    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q
-  let H' := DerivedCategory.homologyFunctor.{w, u, u + 1}
-    (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q
-  let K := DerivedCategory.Q.obj J
-  let I := RingedSpace.topEdgeResolution T.toRingedSpace K
-  let r := RingedSpace.topEdgeResolutionIso T.toRingedSpace K
+  let I := RingedSpace.topEdgeResolution T.toRingedSpace (DerivedCategory.Q.obj J)
+  let r := RingedSpace.topEdgeResolutionIso T.toRingedSpace (DerivedCategory.Q.obj J)
   obtain ⟨b, hb⟩ := RingedSpace.exists_complex_map_into_kInjective J I r.inv
-  have hn := F.complexDerivedUnit.naturality b
-  have hc : F.complexDerivedUnit.app J ≫
-      ((schemeDerivedDirectImage g).map r.inv ≫ (F.rightDerivedFunctorObjQIso I).hom) =
-      DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map b) := by
-    dsimp only [Functor.comp_map] at hn
-    rw [← hb, ← Category.assoc, ← hn, Category.assoc,
-      complexUnit_resolutionIso, Category.comp_id]
-  have ha : H.map (F.complexDerivedUnit.app J) ≫
-      (localClassDirectImageHomologyIso g q K).hom =
-      (DerivedCategory.homologyFunctorFactors _ q).hom.app
-        ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
-          HomologicalComplex.homologyMap ((F.mapHomologicalComplex (.up ℤ)).map b) q := by
-    have hf := (DerivedCategory.homologyFunctorFactors _ q).hom.naturality
-      ((F.mapHomologicalComplex (.up ℤ)).map b)
-    dsimp only [localClassDirectImageHomologyIso, Iso.trans_hom, Iso.symm_hom,
-      Functor.mapIso_hom, Iso.app_hom, Functor.comp_obj,
-      HomologicalComplex.homologyFunctor_obj]
-    change H.map _ ≫ (H.map (_ ≫ _) ≫ _) = _
-    rw [← H.map_comp_assoc, hc]
-    exact hf
-  have he := ShortComplex.leftExactHomologyEdge_naturality F
-    ((HomologicalComplex.shortComplexFunctor _ (.up ℤ) q).map b)
-  have hr : HomologicalComplex.homologyMap b q ≫
-      (localClassResolutionHomologyIso T q K).inv =
-      (DerivedCategory.homologyFunctorFactors _ q).inv.app J := by
-    have hf := (DerivedCategory.homologyFunctorFactors _ q).inv.naturality b
-    simp only [Functor.comp_map, Functor.comp_obj,
-      HomologicalComplex.homologyFunctor_map, I] at hf
-    dsimp only [localClassResolutionHomologyIso, Iso.trans_inv, Iso.symm_inv,
-      Functor.mapIso_inv, Iso.app_inv, Functor.comp_obj,
-      HomologicalComplex.homologyFunctor_obj]
-    change _ ≫ (_ ≫ H'.map r.hom) = _
-    rw [← Category.assoc, hf, Category.assoc, ← H'.map_comp, hb, Iso.inv_hom_id,
-      H'.map_id, Category.comp_id]
-  change H.map _ ≫ (_ ≫ _ ≫ _) = _
-  rw [← Category.assoc, ← Category.assoc, ha, Category.assoc]
-  dsimp only [Functor.comp_obj, HomologicalComplex.homologyFunctor_obj,
-    HomologicalComplex.homologyMap, HomologicalComplex.sc, F, I, K] at *
-  simp only [Category.assoc]
-  erw [reassoc_of% he]
-  have hh := congrArg (fun z ↦
-    (DerivedCategory.homologyFunctorFactors _ q).hom.app
-      ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
-        ShortComplex.leftExactHomologyEdge F (J.sc q) ≫ F.map z) hr
-  simpa only [Functor.map_comp, Category.assoc, HomologicalComplex.homologyMap,
-    HomologicalComplex.sc, F] using hh
+  exact resolutionEdge_unit_of_map
+    (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) q J I r b hb
 
-set_option maxHeartbeats 500000 in
--- Integer singles have several definitionally equal quotient and homotopy presentations.
 /-- The constructed edge on a single complex is normalized by the derived unit.
 Source: Stacks, Tags 0BKJ and 079W
 (blueprint: lem-weil-pbc-resolution-local-class-edge-single).
@@ -242,31 +306,6 @@ theorem resolutionLocalClassEdge_single {T S : Scheme.{u}} (g : T ⟶ S) (q : �
     (H.map (F.complexDerivedUnit.app J) ≫
       resolutionLocalClassEdge g q (DerivedCategory.Q.obj J)) = _
   rw [hunit]
-  have hn := (DerivedCategory.homologyFunctorFactors _ q).hom.naturality t.inv
-  simp only [Functor.comp_map, Functor.comp_obj,
-    HomologicalComplex.homologyFunctor_map] at hn
-  change H.map (DerivedCategory.Q.map t.inv) ≫
-    (DerivedCategory.homologyFunctorFactors _ q).hom.app
-      ((F.mapHomologicalComplex (.up ℤ)).obj J) =
-    (DerivedCategory.homologyFunctorFactors _ q).hom.app
-      ((CochainComplex.singleFunctor _ q).obj (F.obj M)) ≫
-      HomologicalComplex.homologyMap t.inv q at hn
-  rw [← Category.assoc, ← Category.assoc, hn, Category.assoc]
-  have hraw := single_raw_edge F M q
-  change HomologicalComplex.homologyMap t.inv q ≫
-    ShortComplex.leftExactHomologyEdge F (J.sc q) = _ at hraw
-  simp only [Category.assoc]
-  rw [reassoc_of% hraw]
-  change (DerivedCategory.homologyFunctorFactors _ q).hom.app
-    ((CochainComplex.singleFunctor _ q).obj (F.obj M)) ≫
-      ((HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q (F.obj M)).hom ≫
-        F.map (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q M).inv) ≫
-          F.map ((DerivedCategory.homologyFunctorFactors _ q).inv.app J) =
-    ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ q).app (F.obj M)).hom ≫
-      F.map ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ q).app M).inv
-  rw [single_homology_iso, single_homology_iso]
-  simp only [Iso.trans_hom, Iso.trans_inv, Iso.app_hom, Iso.app_inv,
-    Functor.map_comp, Category.assoc]
-  rfl
+  exact single_homology_edge F M q
 
 end AlgebraicGeometry

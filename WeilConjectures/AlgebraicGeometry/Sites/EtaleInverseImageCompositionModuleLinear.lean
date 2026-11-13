@@ -24,8 +24,30 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- The dependent core application exceeds the default heartbeat limit.
+/-- The unit equation uniquely determines an isomorphism of left adjoints. -/
+private theorem exists_comparison_with_unique_unit
+    {C D : Type*} [Category C] [Category D]
+    {L L' : C ⥤ D} {P P' : D ⥤ C} (a : L ⊣ P) (a' : L' ⊣ P')
+    (p : (P' ≅ P) → Prop) (q : (L ≅ L') → Prop)
+    (h : ∃ (d : P' ≅ P) (c : L ≅ L'), p d ∧ q c ∧
+      ∀ G, a.unit.app G ≫ P.map (c.hom.app G) =
+        a'.unit.app G ≫ d.hom.app (L'.obj G)) :
+    ∃ (d : P' ≅ P) (c : L ≅ L'), p d ∧ q c ∧
+      (∀ G, a.unit.app G ≫ P.map (c.hom.app G) =
+        a'.unit.app G ≫ d.hom.app (L'.obj G)) ∧
+      (∀ c' : L ≅ L',
+        (∀ G, a.unit.app G ≫ P.map (c'.hom.app G) =
+          a'.unit.app G ≫ d.hom.app (L'.obj G)) → c' = c) := by
+  obtain ⟨d, c, hd, hc, hu⟩ := h
+  refine ⟨d, c, hd, hc, hu, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext G
+  apply (a.homEquiv G (L'.obj G)).injective
+  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
+  exact (hc' G).trans (hu G).symm
+
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
 image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
@@ -190,18 +212,9 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
-  dsimp
   intros gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
-  obtain ⟨d, c, hd, hc, hu⟩ :=
-    etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
-      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
-  refine ⟨d, c, hd, hc, hu, ?_⟩
-  intro c' hc'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext G
-  apply ((aU.comp aV).homEquiv G (LUV.obj G)).injective
-  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
-  exact (hc' G).trans (hu G).symm
+  exact exists_comparison_with_unique_unit (aU.comp aV) aUV _ _
+    (etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
+      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV)
 
 end AlgebraicGeometry

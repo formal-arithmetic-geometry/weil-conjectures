@@ -31,7 +31,70 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-set_option maxHeartbeats 1600000 in
+-- Normalize the mate cube before specializing to the derived categories.
+private lemma mateEquiv_app_cube_converse_of_eq
+    {DY DX DY' DX' EY EX EY' EX' : Type*}
+    [Category* DY] [Category* DX] [Category* DY'] [Category* DX']
+    [Category* EY] [Category* EX] [Category* EY'] [Category* EX']
+    {Lf : DY ⥤ DX} {Rf : DX ⥤ DY} {Lf' : DY' ⥤ DX'} {Rf' : DX' ⥤ DY'}
+    {Mf : EY ⥤ EX} {Sf : EX ⥤ EY} {Mf' : EY' ⥤ EX'} {Sf' : EX' ⥤ EY'}
+    (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (bf : Mf ⊣ Sf) (bf' : Mf' ⊣ Sf')
+    {Gr : DY ⥤ DY'} {Hr : DX ⥤ DX'} {Gs : EY ⥤ EY'} {Hs : EX ⥤ EX'}
+    {PY : DY ⥤ EY} {PX : DX ⥤ EX} {PY' : DY' ⥤ EY'} {PX' : DX' ⥤ EX'}
+    (σs : Gs ⋙ Mf' ⟶ Mf ⋙ Hs)
+    (αf : PY ⋙ Mf ⟶ Lf ⋙ PX) (αf' : PY' ⋙ Mf' ⟶ Lf' ⋙ PX')
+    (αg : PY ⋙ Gs ⟶ Gr ⋙ PY') (αg' : PX ⋙ Hs ⟶ Hr ⋙ PX')
+    (sr : Rf ⋙ Gr ⟶ Hr ⋙ Rf') (ss : Sf ⋙ Gs ⟶ Hs ⋙ Sf')
+    (sf : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (sf₀ : Rf ⋙ PY ⟶ PX ⋙ Sf)
+    (hσs : mateEquiv bf bf' (.mk _ _ _ _ σs) = .mk _ _ _ _ ss)
+    (hαf : mateEquiv af bf (.mk _ _ _ _ αf) = .mk _ _ _ _ sf₀)
+    (hαf' : mateEquiv af' bf' (.mk _ _ _ _ αf') = .mk _ _ _ _ sf)
+    (h : ∀ K, αg.app (Rf.obj K) ≫ PY'.map (sr.app K) ≫ sf.app (Hr.obj K) =
+      Gs.map (sf₀.app K) ≫ ss.app (PX.obj K) ≫ Sf'.map (αg'.app K)) (M : DY) :
+    Mf'.map (αg.app M) ≫ αf'.app (Gr.obj M) ≫
+        PX'.map (((mateEquiv af af').symm (.mk _ _ _ _ sr)).app M) =
+      σs.app (PY.obj M) ≫ Hs.map (αf.app M) ≫ αg'.app (Lf.obj M) := by
+  let σr := (mateEquiv af af').symm (.mk _ _ _ _ sr)
+  have hσr : mateEquiv af af' σr = .mk _ _ _ _ sr :=
+    (mateEquiv af af').apply_symm_apply _
+  apply mateEquiv_app_cube_converse af af' bf bf' σr σs αf αf' αg αg' ?_ M
+  intro K
+  change αg.app (Rf.obj K) ≫ PY'.map
+      ((mateEquiv af af' (.mk _ _ _ _ σr)).app K) ≫
+      (mateEquiv af' bf' (.mk _ _ _ _ αf')).app (Hr.obj K) =
+    Gs.map ((mateEquiv af bf (.mk _ _ _ _ αf)).app K) ≫
+      (mateEquiv bf bf' (.mk _ _ _ _ σs)).app (PX.obj K) ≫ Sf'.map (αg'.app K)
+  rw [hσr, hαf', hαf, hσs]
+  exact h K
+
+private lemma brown_scalarPullback_mate
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
+    {V W : Scheme.{u}} (g : V ⟶ W) :
+    mateEquiv
+        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ))
+        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ))
+        (.mk _ _ _ _ (Etale.scalarPullbackIso φ g).inv) =
+      .mk _ _ _ _ (Etale.scalarRestrictionPullbackIso φ g).hom := by
+  let an := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ)
+  let av := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ)
+  have he := congrArg Iso.inv (Etale.scalarPullback_eq φ g)
+  change (mateEquiv an av).symm
+      (.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso φ g).hom) =
+    (Etale.scalarPullbackIso φ g).inv at he
+  rw [← he]
+  exact (mateEquiv _ _).apply_symm_apply _
+
+-- Share this projection: unfolding the full coherence predicate is expensive.
+private lemma brown_realization_scalar_mate
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealization O t W P)
+    {m n : ℕ} (h : m ≤ n) :
+    mateEquiv (P.scalar h).derivedAdj
+        (Adjunction.ofIsRightAdjoint
+          (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h)))
+        (.mk _ _ _ _ (R.scalar h).inv) = .mk _ _ _ _ (R.val.restriction h).hom :=
+  R.property.2.2 h
+
 -- Compare four independently normalized adjunctions.
 /-- The scalar mate of the exact ordinary restriction square respects normalized
 Brown inverse-image realizations.
@@ -101,55 +164,27 @@ theorem strictEtaleBrownCanonicalScalarCube
           (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m))
             g).leftDerivedFunctor.map ((RW.scalar h).inv.app X) ≫
           pm.inv.app ((PW.scalar h).derived.obj X) := by
-  dsimp only
+  intro pn pm τ
   let an := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
   let av := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
-  let pn := (rg n).inverse.symm ≪≫ isoWhiskerLeft (RW.derived n)
-    (Etale.leftDerivedUpperStarIsoMapDerivedCategory
-      (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).symm
-  let pm := (rg m).inverse.symm ≪≫ isoWhiskerLeft (RW.derived m)
-    (Etale.leftDerivedUpperStarIsoMapDerivedCategory
-      (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).symm
   let δ := strictEtaleBrownCanonicalRestriction O t g A PW PV B h
-  let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ δ.hom))
-  have ht : (mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-      (.mk _ _ _ _ τ)) = δ.hom :=
-    ((mateEquiv _ _).apply_symm_apply _)
-  have hs : (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)) =
-        (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom := by
-    have he := congrArg Iso.inv
-      (Etale.scalarPullback_eq (strictEtaleBrownRingMap O t h) g)
-    change ((mateEquiv an av).symm (.mk _ _ _ _
-      (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom)) =
-        (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv at he
-    rw [← he]
-    exact ((mateEquiv _ _).apply_symm_apply _)
+  have hs := brown_scalarPullback_mate (strictEtaleBrownRingMap O t h) g
   have hc := strictEtaleBrownCanonicalRestrictionCube O t g A PW PV B RV RW rg hinverse h
   intro Y
-  apply mateEquiv_app_cube_converse (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
-    τ (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
-    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv ?_ Y
-  intro X
-  change pn.inv.app _ ≫ (RV.derived n).map
-      ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-        (.mk _ _ _ _ τ)).app X) ≫
-      (mateEquiv (PV.scalar h).derivedAdj av (.mk _ _ _ _ (RV.scalar h).inv)).app _ =
-    _ ≫ (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)).app _ ≫ _
-  rw [show (mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj
-      (.mk _ _ _ _ τ)) = .mk _ _ _ _ δ.hom from ht,
-    show (mateEquiv (PV.scalar h).derivedAdj av (.mk _ _ _ _ (RV.scalar h).inv)) =
-      .mk _ _ _ _ (RV.val.restriction h).hom from RV.property.2.2 h,
-    show (mateEquiv (PW.scalar h).derivedAdj an (.mk _ _ _ _ (RW.scalar h).inv)) =
-      .mk _ _ _ _ (RW.val.restriction h).hom from RW.property.2.2 h,
-    show (mateEquiv an av (.mk _ _ _ _
-      (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv)) =
-      .mk _ _ _ _ (Etale.scalarRestrictionPullbackIso
-        (strictEtaleBrownRingMap O t h) g).hom from hs]
-  exact hc X
+  have hr : (mateEquiv (PV.scalar h).derivedAdj av
+      (.mk _ _ _ _ (RV.scalar h).inv)) = .mk _ _ _ _ (RV.val.restriction h).hom :=
+    brown_realization_scalar_mate O t V PV RV h
+  have hw : (mateEquiv (PW.scalar h).derivedAdj an
+      (.mk _ _ _ _ (RW.scalar h).inv)) = .mk _ _ _ _ (RW.val.restriction h).hom :=
+    brown_realization_scalar_mate O t W PW RW h
+  exact mateEquiv_app_cube_converse_of_eq
+    (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj an av
+    (Etale.scalarPullbackIso (strictEtaleBrownRingMap O t h) g).inv
+    (RW.scalar h).inv (RV.scalar h).inv pn.inv pm.inv
+    δ.hom (Etale.scalarRestrictionPullbackIso (strictEtaleBrownRingMap O t h) g).hom
+    (RV.val.restriction h).hom (RW.val.restriction h).hom
+    hs hw hr hc Y
 
 end AlgebraicGeometry

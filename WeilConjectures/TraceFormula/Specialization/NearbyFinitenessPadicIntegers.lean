@@ -44,8 +44,6 @@ namespace NearbyCyclesModel
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
-set_option maxHeartbeats 1000000 in
--- instance synthesis for the derived extensions of scalars on the three schemes of the model
 /-- **Nearby cycles commute with extension of scalars** along a coefficient change `a : Λ ⟶ Λ'`,
 at a complex `K` at which `Rj_*` commutes with the extension of scalars: then
 `Λ' ⊗ᴸ Ψ_M K ≅ Ψ_M (Λ' ⊗ᴸ K)`, the pullbacks commuting with extension of scalars
@@ -59,15 +57,9 @@ lemma nonempty_extendScalars_nearbyCycles_iso {X X' : Scheme.{u}} (M : NearbyCyc
         ((L((M.ε)^*⟦Λ⟧)).obj K))) :
     Nonempty ((L(Mod.extendScalars (coefficientMap a X'))).obj ((M.nearbyCycles Λ).obj K) ≅
       (M.nearbyCycles Λ').obj ((L(Mod.extendScalars (coefficientMap a X))).obj K)) := by
-  have e₁ : (L(Mod.extendScalars (coefficientMap a X'))).obj ((L((M.i)^*⟦Λ⟧)).obj
-        ((R((M.j)_*⟦Λ⟧)).obj ((L((M.ε)^*⟦Λ⟧)).obj K))) ≅
-      (L((M.i)^*⟦Λ'⟧)).obj ((L(Mod.extendScalars (coefficientMap a M.total))).obj
-        ((R((M.j)_*⟦Λ⟧)).obj ((L((M.ε)^*⟦Λ⟧)).obj K))) :=
-    (derivedUpperStarExtendScalarsIso a M.i).app _
-  have e₂ : (L(Mod.extendScalars (coefficientMap a M.generic))).obj ((L((M.ε)^*⟦Λ⟧)).obj K) ≅
-      (L((M.ε)^*⟦Λ'⟧)).obj ((L(Mod.extendScalars (coefficientMap a X))).obj K) :=
-    (derivedUpperStarExtendScalarsIso a M.ε).app K
-  exact ⟨e₁ ≪≫ (L((M.i)^*⟦Λ'⟧)).mapIso e ≪≫ (L((M.i)^*⟦Λ'⟧)).mapIso ((R((M.j)_*⟦Λ'⟧)).mapIso e₂)⟩
+  exact ⟨(derivedUpperStarExtendScalarsIso a M.i).app _ ≪≫
+    (L((M.i)^*⟦Λ'⟧)).mapIso
+      (e ≪≫ (R((M.j)_*⟦Λ'⟧)).mapIso ((derivedUpperStarExtendScalarsIso a M.ε).app K))⟩
 
 end NearbyCyclesModel
 

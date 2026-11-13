@@ -177,8 +177,53 @@ private theorem modelMap_natural
   let := pullbackDescentQLax X
   exact Functor.LaxMonoidal.μ_natural DerivedCategory.Q r s
 
-set_option maxHeartbeats 800000 in
--- Elaborating the recorded tensor and localization instances needs this heartbeat budget.
+private theorem tensorCounit_counit_natural
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X T : Scheme.{u}} (k : T ⟶ X)
+    (A B : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (a : A ⟶ B) :
+    (derivedPullback k).map (DerivedCategory.Q.map a) ≫
+        (SingleComplexBaseChange.counit k).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj B) =
+      (SingleComplexBaseChange.counit k).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj A) ≫
+        DerivedCategory.Q.map
+          (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).map a) :=
+  (SingleComplexBaseChange.counit k).naturality
+    ((HomotopyCategory.quotient _ (.up ℤ)).map a)
+
+private theorem tensorCounit_resolution_transfer
+    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
+    [MonoidalCategory C] [MonoidalCategory D] {L : C ⥤ D}
+    {A₀ A B₀ B U₀ U : C} {A₀' A' B₀' B' W₀ W V₀ V : D}
+    {r : A₀ ⟶ A} {s : B₀ ⟶ B} {t : U₀ ⟶ U}
+    {r' : A₀' ⟶ A'} {s' : B₀' ⟶ B'} {t' : W₀ ⟶ W} {v : V₀ ⟶ V}
+    {μ₀ : A₀ ⊗ B₀ ⟶ U₀} {μ : A ⊗ B ⟶ U}
+    {ε₀ : L.obj U₀ ⟶ W₀} {ε : L.obj U ⟶ W}
+    {φ₀ : W₀ ⟶ V₀} {φ : W ⟶ V}
+    {τ₀ : L.obj (A₀ ⊗ B₀) ⟶ L.obj A₀ ⊗ L.obj B₀}
+    {τ : L.obj (A ⊗ B) ⟶ L.obj A ⊗ L.obj B}
+    {εA₀ : L.obj A₀ ⟶ A₀'} {εA : L.obj A ⟶ A'}
+    {εB₀ : L.obj B₀ ⟶ B₀'} {εB : L.obj B ⟶ B'}
+    {ν₀ : A₀' ⊗ B₀' ⟶ V₀} {ν : A' ⊗ B' ⟶ V}
+    [Epi (L.map (r ⊗ₘ s))]
+    (hμ : (r ⊗ₘ s) ≫ μ = μ₀ ≫ t)
+    (hε : L.map t ≫ ε = ε₀ ≫ t')
+    (hφ : t' ≫ φ = φ₀ ≫ v)
+    (hτ : L.map (r ⊗ₘ s) ≫ τ = τ₀ ≫ (L.map r ⊗ₘ L.map s))
+    (hA : L.map r ≫ εA = εA₀ ≫ r')
+    (hB : L.map s ≫ εB = εB₀ ≫ s')
+    (hν : (r' ⊗ₘ s') ≫ ν = ν₀ ≫ v)
+    (heq : L.map μ₀ ≫ ε₀ ≫ φ₀ = τ₀ ≫ (εA₀ ⊗ₘ εB₀) ≫ ν₀) :
+    L.map μ ≫ ε ≫ φ = τ ≫ (εA ⊗ₘ εB) ≫ ν := by
+  apply (cancel_epi (L.map (r ⊗ₘ s))).1
+  rw [← Functor.map_comp_assoc, hμ, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% hε, hφ, reassoc_of% hτ]
+  rw [tensorHom_comp_tensorHom_assoc, hA, hB, ← tensorHom_comp_tensorHom_assoc, hν]
+  exact (reassoc_of% heq) v
+
 /-- The shared pullback counit is compatible with the localization tensor maps,
 without a K-flatness assumption on either argument. The chain comparison is
 specified on every tensor summand, so its underlying map is uniquely determined.
@@ -300,22 +345,19 @@ theorem tensorCounit_coordinateEquation
             ((HomotopyCategory.quotient _ (.up ℤ)).obj B) =
         (SingleComplexBaseChange.counit k).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj A) ≫
-          DerivedCategory.Q.map (F.map a) := by
-    exact (SingleComplexBaseChange.counit k).naturality
-      ((HomotopyCategory.quotient _ (.up ℤ)).map a)
-  apply (cancel_epi
-    ((derivedPullback k).map (DerivedCategory.Q.map r ⊗ₘ DerivedCategory.Q.map s))).1
-  rw [← Functor.map_comp_assoc,
-    modelMap_natural X P0 G0 P G r s, Functor.map_comp]
-  simp only [cast_eq, Category.assoc]
-  erw [reassoc_of% hε _ _ t]
-  rw [← Functor.map_comp, hchain, Functor.map_comp]
-  rw [reassoc_of% hτ.2 _ _ _ _ (DerivedCategory.Q.map r) (DerivedCategory.Q.map s)]
-  erw [tensorHom_comp_tensorHom_assoc, hε _ _ r, hε _ _ s,
-    ← tensorHom_comp_tensorHom_assoc]
-  erw [modelMap_natural T (F.obj P0) (F.obj G0) (F.obj P) (F.obj G)
-      (F.map r) (F.map s)]
-  exact (reassoc_of% heq) (DerivedCategory.Q.map v)
+          DerivedCategory.Q.map (F.map a) :=
+    tensorCounit_counit_natural k A B a
+  simp only [cast_eq] at heq ⊢
+  exact tensorCounit_resolution_transfer
+    (modelMap_natural X P0 G0 P G r s)
+    (hε _ _ t)
+    (by simpa only [Functor.map_comp] using
+      congrArg (fun f ↦ (DerivedCategory.Q.{w}
+        (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).map f) hchain)
+    (hτ.2 _ _ _ _ (DerivedCategory.Q.map r) (DerivedCategory.Q.map s))
+    (hε _ _ r) (hε _ _ s)
+    (modelMap_natural T (F.obj P0) (F.obj G0) (F.obj P) (F.obj G) (F.map r) (F.map s))
+    heq
 
 
 end AlgebraicGeometry

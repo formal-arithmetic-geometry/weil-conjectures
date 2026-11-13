@@ -55,6 +55,28 @@ private theorem tensorNatural₂
   simpa only [_root_.CategoryTheory.Functor.map_id, Functor.comp_obj, Functor.uncurry_obj_obj,
     Functor.prod_obj, Iso.app_inv, NatTrans.id_app, Category.id_comp] using h
 
+private theorem tensorNormalization_flat_onSite
+    (C : Type a) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    (D : Type b) [Category.{u + 1} D] [Abelian D] [IsGrothendieckAbelian.{u + 1} D]
+    [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [SymmetricCategory D]
+    [Abelian.HasFunctorialFlatResolution D] (X : Scheme.{u})
+    (F : Sheaf X.smallEtaleTopology C ⥤ Sheaf X.smallEtaleTopology D)
+    [F.Additive] [F.OplaxMonoidal] [F.IsLeftAdjoint]
+    (S : DerivedCategory (Sheaf X.smallEtaleTopology C) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology D))
+    (r : ∀ P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ,
+      S.obj (DerivedCategory.Q.obj P) ⟶
+        DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P))
+    (δ : Functor.uncurry.obj (Etale.derivedTensor C X) ⋙ S ≅
+      S.prod S ⋙ Functor.uncurry.obj (Etale.derivedTensor D X))
+    (hn : Etale.ExceptionalCoefficients.SiteTensorNormalizationAux C D X F S r δ) :
+    Etale.EtaleHomTensorModelNormalization C D X F S r
+      (fun K L ↦ (δ.app (K, L)).symm) := by
+  intro P Q _ _ _ _
+  exact (hn P Q).symm
+
 /-- The inverse exceptional tensorator is the ordinary scalar tensor comparison.
 Source: Stacks 07A4 and blueprint thm-coef-finite-hom, evaluation paragraph
 (blueprint: lem-coef-finite-hom-scalar-tensor-normalization).
@@ -71,11 +93,13 @@ theorem finiteHom_scalar_tensor_normalization {A B : Type (u + 1)} [CommRing A] 
     have he : δ = (Etale.ExceptionalCoefficients.tensorIso_existsUnique φ X).choose := by
       change (Etale.ExceptionalCoefficients.siteTensorIso_existsUnique φ X).choose = _
       exact eq_of_heq (Etale.ExceptionalCoefficients.siteTensorIso_existsUnique φ X).choose_spec.1
-    exact he.symm ▸ (Etale.ExceptionalCoefficients.tensorIso_existsUnique φ X).choose_spec.1
+    rw [he]
+    exact (Etale.ExceptionalCoefficients.tensorIso_existsUnique φ X).choose_spec.1
   have hc : Etale.IsEtaleHomTensorCanonical X φ (fun P Q ↦ (δ.app (P, Q)).symm) := by
     refine ⟨tensorNatural₁ _ _ _ δ, tensorNatural₂ _ _ _ δ, ?_⟩
-    intro P Q _ _ _ _
-    exact (hn P Q).symm
+    exact tensorNormalization_flat_onSite (ModuleCat.{u + 1} A) (ModuleCat.{u + 1} B)
+      X (AlgebraicGeometry.ProEtale.etaleSheafExtendScalars φ X)
+      (Etale.scalarExtension φ X) (Etale.scalarExtensionRepresentative φ X) δ hn
   have he := (Etale.etaleHomTensorComparison_existsUnique X φ).unique hc
     (Etale.etaleHomTensorComparison_existsUnique X φ).choose_spec.1
   unfold Etale.etaleHomTensorComparison

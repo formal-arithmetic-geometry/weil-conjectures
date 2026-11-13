@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareState
 public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 
 /-! # The totalized native pullback tensor square -/
 
@@ -24,6 +25,28 @@ universe u
 
 open CategoryTheory MonoidalCategory Limits
 open scoped CategoryTheory.Obj
+
+namespace CategoryTheory
+
+/-- Paste the restriction, realization and tensor squares on a totalization summand. -/
+private lemma tensorSquare_paste_summand {D : Type*} [Category* D]
+    {S T₀ T₁ T₂ U₀ U₁ U₂ V₀ V₁ V₂ W₀ W₁ : D}
+    {i : S ⟶ T₀} {m : T₀ ⟶ T₁} {z : T₁ ⟶ T₂} {f : T₂ ⟶ U₂}
+    {b : T₀ ⟶ U₀} {y : U₀ ⟶ U₁} {d : U₁ ⟶ U₂}
+    {v : S ⟶ V₀} {j : V₀ ⟶ T₁} {sz : V₀ ⟶ V₁} {iz : V₁ ⟶ T₂}
+    {aa : V₁ ⟶ V₂} {iR : V₂ ⟶ U₂} {a : S ⟶ W₀}
+    {sy : W₀ ⟶ W₁} {δ : W₁ ⟶ V₂} {ri : W₀ ⟶ U₀} {iy : W₁ ⟶ U₁}
+    (hu : i ≫ m = v ≫ j) (hz : j ≫ z = sz ≫ iz) (hf : iz ≫ f = aa ≫ iR)
+    (hs : v ≫ sz ≫ aa = a ≫ sy ≫ δ) (hb : i ≫ b = a ≫ ri)
+    (hy : ri ≫ y = sy ≫ iy) (hd : iy ≫ d = δ ≫ iR) :
+    i ≫ m ≫ z ≫ f = i ≫ b ≫ y ≫ d := by
+  calc
+    i ≫ m ≫ z ≫ f = v ≫ sz ≫ aa ≫ iR := by
+      rw [reassoc_of% hu, reassoc_of% hz, hf]
+    _ = a ≫ sy ≫ δ ≫ iR := by rw [reassoc_of% hs]
+    _ = i ≫ b ≫ y ≫ d := by rw [reassoc_of% hb, reassoc_of% hy, hd]
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
@@ -80,9 +103,6 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
-set_option maxHeartbeats 600000 in
--- Profiling at 400000 heartbeats passes the sheaf square and naturality (21s);
--- reserve the cumulative budget needed to close the final summand calculation.
 include hmu hsheaf in
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma projection_totalTensorSquare_of_sheaf
@@ -102,39 +122,28 @@ lemma projection_totalTensorSquare_of_sheaf
     (F := (nativeTensorBifunctor k₀ l Y).flip)
   intro p q hpq
   simp only [Functor.comp_map L (condensedRealization k₀ l Z)]
-  have hpull := hmu P T p q n hpq
-  have hpull' := (condensedRealization k₀ l Z).congr_map hpull
-  dsimp only [nativeOpenTensorInsertion] at hpull'
-  simp only [Functor.map_comp, Iso.app_hom, Functor.comp_obj,
-    Functor.prod_obj, Functor.uncurry_obj_obj] at hpull'
-  erw [reassoc_of% hpull']
+  have hpull' := Functor.map_comp_map_eq_map_comp_map (condensedRealization k₀ l Z)
+    (hmu P T p q n hpq)
+  dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hpull'
   have hnZ := condensedRealizationTotalTensorIso_summand k₀ l Z
     ((L.mapHomologicalComplex (.up ℤ)).obj P)
     ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnZ
-  conv_lhs =>
-    arg 2
-    erw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
-  conv_lhs =>
-    arg 2
-    arg 2
-    arg 1
-    erw [hcomp P p, hcomp T q]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs
-  erw [reassoc_of% hs]
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
   dsimp only [nativeOpenTensorInsertion] at hn
   simp only [Functor.comp_map L (condensedRealization k₀ l Z),
     Functor.comp_map (condensedRealization k₀ l Y) R] at hn
-  conv_rhs => erw [reassoc_of% hn]
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
-  conv_rhs =>
-    arg 2
-    erw [← R.map_comp_assoc, hnY, R.map_comp_assoc,
-      Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
-  try rfl
+  have hy := Functor.map_comp_map_eq_map_comp_map R hnY
+  have hd := Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f R
+    (((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)).obj P)
+    (((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
+  refine tensorSquare_paste_summand hpull' hnZ ?_ hs hn hy hd
+  erw [CochainComplex.ιTensorObj_tensorHom_f, hcomp P p, hcomp T q]
+  rfl
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

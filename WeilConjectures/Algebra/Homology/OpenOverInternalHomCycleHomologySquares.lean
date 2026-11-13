@@ -34,8 +34,13 @@ noncomputable local instance (priority := 2000) openOverInternalHomCycleHomology
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 attribute [local irreducible] homComplexFunctor
 
-/- Inference for the composite open-restriction comparisons exceeds the default heartbeats.
--/
+/-- Postcompose a commuting square without rewriting its object expressions. -/
+private theorem openOver_comp_naturality
+    {C : Type*} [Category C] {A B D E G : C}
+    {f : A ⟶ B} {g : B ⟶ E} {h : A ⟶ D} {i : D ⟶ E}
+    (sq : f ≫ g = h ≫ i) (j : E ⟶ G) : f ≫ g ≫ j = h ≫ i ≫ j := by
+  rw [← Category.assoc, sq, Category.assoc]
+
 /- Transport of source and target cycles and homology through internal Hom.
 Source: Stacks Project, Tag 08DL; step 2 of the parent restriction-diagram plan.
 (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares).
@@ -53,8 +58,6 @@ Proof: Restriction is exact by the localization finite-limit and finite-colimit
  squares to obtain the four equations. This uses neither the Hom complex nor its
  products or differential. No finiteness or nonempty-open assumption is needed;
  zero and identity maps satisfy the same naturality equations. -/
-set_option maxHeartbeats 400000 in
--- Inference for the composite open-restriction comparisons exceeds the default heartbeats.
 /-- (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares) -/
 theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
@@ -111,6 +114,12 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
             v.hom = b.hom ≫ SheafOfModules.homObjMap
               (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) := by
   classical
+  let : Category (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instCategory
+  let : Preadditive (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instPreadditive _
+  let : Abelian (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instAbelian _
   let O := SheafOfModules.overFunctor.{u} X.ringCatSheaf V
   let E := (Scheme.Modules.overEquiv V).functor
   let R := Scheme.Modules.restrictFunctor V.ι
@@ -130,6 +139,7 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   let : PreservesFiniteColimits F := comp_preservesFiniteColimits R B
   let : F.PreservesZeroMorphisms := moduleOpenOver_preservesZeroMorphisms X V W
   let : F.Additive := Functor.additive_of_preserves_binary_products F
+  have : F.PreservesHomology := inferInstance
   let A := (moduleOpenOverComplexFunctor X V W).obj T
   let K := (moduleOpenOverComplexFunctor X V W).obj J
   let z (L : CochainComplex X.Modules ℤ) (i : ℤ) :
@@ -144,12 +154,10 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (L.sc i).mapCyclesIso_hom_iCycles F
   have zp (L : CochainComplex X.Modules ℤ) (i : ℤ) :
       (z L i).inv ≫ F.map (L.homologyπ i) ≫ (d L i).hom =
-        ((moduleOpenOverComplexFunctor X V W).obj L).homologyπ i := by
-    have h := congrArg (fun f ↦ f ≫ ((L.sc i).mapHomologyIso F).inv)
-      ((L.sc i).homologyπ_mapHomologyIso_hom F).symm
-    simp only [Category.assoc] at h
-    erw [Iso.hom_inv_id, Category.comp_id] at h
-    exact h
+        ((moduleOpenOverComplexFunctor X V W).obj L).homologyπ i :=
+    (Category.assoc _ _ _).symm.trans
+      (((L.sc i).mapHomologyIso F).comp_inv_eq.mpr
+        ((L.sc i).homologyπ_mapHomologyIso_hom F).symm)
   let H {M M' N N' : SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)}
       (a : M ≅ M') (b : N ≅ N') :
       SheafOfModules.homObj (R := V.toScheme.sheaf.over W) M N ≅
@@ -175,13 +183,15 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   let v := e (T.cycles (-n)) (J.homology 0) ≪≫ H (z T (-n)) (d J 0)
   refine ⟨b, s, t, v, ?_, ?_, ?_, ?_⟩
   · dsimp only [t, H, Iso.trans_hom, Iso.refl_hom]
-    rw [← Category.assoc, he]
-    simp only [Category.assoc, hc,
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (T.iCycles (-n)) (𝟙 (J.X 0))) _).trans ?_
+    simp only [hc,
       Functor.map_id, Category.id_comp]
     congr 2
     exact zi T (-n)
   · dsimp only [t, s, H, Iso.trans_hom, Iso.refl_hom]
-    rw [← Category.assoc, he]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (𝟙 (T.cycles (-n))) (J.iCycles 0)) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
@@ -190,14 +200,16 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     erw [Category.comp_id]
     exact zi J 0
   · dsimp only [v, s, H, Iso.trans_hom]
-    rw [← Category.assoc, he]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (𝟙 (T.cycles (-n))) (J.homologyπ 0)) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
     apply (cancel_epi (z J 0).inv).1
     simpa only [Category.assoc, Iso.inv_hom_id_assoc] using zp J 0
   · dsimp only [v, b, H, Iso.trans_hom]
-    rw [← Category.assoc, he]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (T.homologyπ (-n)) (𝟙 (J.homology 0))) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2

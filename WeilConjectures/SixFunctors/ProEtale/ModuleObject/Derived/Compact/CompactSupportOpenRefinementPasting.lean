@@ -593,7 +593,6 @@ private theorem restriction_mate_component
     Functor.comp_obj, Category.assoc] using NatTrans.congr_app h M
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 1000000 in
 -- Derived adjunctions require additional definitional comparison during specialization.
 private theorem triangle_restriction_mate_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -628,17 +627,13 @@ private theorem triangle_restriction_mate_nat
     (pullTriangle Λ i h j e) (pullTriangle Λ i' h' j' e')
     (condensedAmbientPullbackComparison Λ si) (condensedAmbientPullbackComparison Λ sj)
     (condensedAmbientPullbackComparison Λ sh) (condensedAmbientExchange Λ sh) ?_ ?_
-  · intro M
-    dsimp only [detSfDerivedPullback]
-    exact ambient_exchange_counit Λ sh M
-  · simpa only [ambient_comparison_eq] using
-      pullSquare_triangle_nat Λ i h j i' h' j' u' va vb e e'
-        si.toCommSq sh.toCommSq sj.toCommSq
+  · exact ambient_exchange_counit Λ sh
+  · exact pullSquare_triangle_nat Λ i h j i' h' j' u' va vb e e'
+      si.toCommSq sh.toCommSq sj.toCommSq
 
 -- Keep scheme pullbacks as named objects while matching their derived-functor formulas.
 attribute [local irreducible] limit limit.cone
 
-set_option maxHeartbeats 1000000 in
 -- Specialize coherent pullback and restriction identities at the functor level.
 private theorem pullRestriction_baseChange_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -676,8 +671,6 @@ private theorem pullRestriction_baseChange_nat
   let sd := openPullSquare f v d.obj.obj
   let sh := compactSupportTrianglePullbackSquare h.hom.hom.hom c.obj.obj.g d.obj.obj.g
     h.hom.hom.hom_g v
-  rw [pulledRefinementExchange_eq]
-  simp only [pullRestriction_eq]
   exact triangle_restriction_mate_nat Λ
     d.obj.obj.i h.hom.hom.hom c.obj.obj.i d'.obj.obj.i r.hom.hom.hom c'.obj.obj.i
     (pullback.fst f v) (pullback.fst d.obj.obj.g v) (pullback.fst c.obj.obj.g v)
@@ -729,9 +722,7 @@ private theorem coefficient_refinement_of_natural_comparisons
     hA hB
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 1000000 in
 -- Specializing four derived adjunctions compares large module category expressions.
-set_option synthInstance.maxHeartbeats 100000 in
 private theorem local_refinement_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -778,10 +769,8 @@ private theorem local_refinement_pullback
     (localizingRefinementMap Λ r ((detSfDerivedPullback Λ (pullback.fst f v)).obj K))
     od oc ?_ ?_ ?_ ?_
   · exact pullRestriction_baseChange_nat Λ v h
-  · simpa only [detSfBoundaryCompactification, sd, hod] using
-      openBaseChange_exchangeLeft Λ f v d.obj.obj
-  · simpa only [detSfBoundaryCompactification, sc, hoc] using
-      openBaseChange_exchangeLeft Λ f v c.obj.obj
+  · exact hod.trans (openBaseChange_exchangeLeft Λ f v d.obj.obj)
+  · exact hoc.trans (openBaseChange_exchangeLeft Λ f v c.obj.obj)
   · exact pullRestriction_normalized Λ h K
   · exact pullRestriction_normalized Λ r
       ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)
