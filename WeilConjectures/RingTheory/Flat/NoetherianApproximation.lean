@@ -620,8 +620,11 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     rw [Ideal.comap_comap]
     congr 1
     exact RingHom.ext fun x ↦ map_val_map_inclusion h x
-  have hW {R R' : Subalgebra R₀ A} (h : R ≤ R') : W R ⊆ W R' := fun q hq ↦
-    flat_localizedModule_baseChange_map (Subalgebra.inclusion h) _ _ (hcomap h q.asIdeal) hq
+  have hW {R R' : Subalgebra R₀ A} (h : R ≤ R') : W R ⊆ W R' := by
+    intro q hq
+    apply flat_localizedModule_baseChange_map (M₀ := M₀)
+      (Subalgebra.inclusion h) _ _ (hcomap h q.asIdeal)
+    exact hq
   have hWopen (R : {R : Subalgebra R₀ A // R.FG}) : IsOpen (W R.1) := by
     have : Algebra.FiniteType R₀ R.1 := (Subalgebra.fg_iff_finiteType _).mp R.2
     have : IsNoetherianRing R.1 := Algebra.FiniteType.isNoetherianRing R₀ R.1
@@ -640,7 +643,7 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
   have : IsNoetherianRing R₁ := Algebra.FiniteType.isNoetherianRing R₀ R₁
   set U := {Q : PrimeSpectrum (R₁ ⊗[R₀] S₀) |
       Flat R₁ (LocalizedModule Q.asIdeal.primeCompl ((R₁ ⊗[R₀] S₀) ⊗[S₀] M₀))}
-  have hU : IsOpen U := isOpen_setOf_flat_localizedModule_baseChange R₁
+  have hU : IsOpen U := isOpen_setOf_flat_localizedModule_baseChange (M₀ := M₀) R₁
   set Z := Uᶜ
   set I := PrimeSpectrum.vanishingIdeal Z
   set φ₁ := Algebra.TensorProduct.map R₁.val (AlgHom.id R₀ S₀)
@@ -670,8 +673,8 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     rw [hcomp, ← Ideal.map_map, hI₂, Ideal.map_top]
   apply flat_of_forall_flat_localizedModule (S := R ⊗[R₀] S₀)
   intro Q _
-  refine flat_localizedModule_baseChange_map (Subalgebra.inclusion h₁) Q (Q.comap ρ.toRingHom)
-    rfl ?_
+  apply flat_localizedModule_baseChange_map (M₀ := M₀) (Subalgebra.inclusion h₁) Q
+    (Q.comap ρ.toRingHom) rfl
   by_contra hP
   have hPZ : (⟨Q.comap ρ.toRingHom, inferInstance⟩ : PrimeSpectrum (R₁ ⊗[R₀] S₀)) ∈ Z := hP
   have hIQ : I ≤ Q.comap ρ.toRingHom := fun x hx ↦
