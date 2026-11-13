@@ -142,7 +142,6 @@ private theorem finiteType_of_cover (M : SheafOfModules.{u} R) {I : Type v}
 
 -- Keep the ring sheaf abstract during iterated-slice transport, and perform
 -- the cover argument separately so the slice instances need not be reconstructed.
-set_option profiler true in
 private theorem localProperties_over_of_overMap
     (X : TopCat.{u}) (R : Sheaf (_root_.Opens.grothendieckTopology X) RingCat.{u})
     {A B : TopologicalSpace.Opens X} (f : A ⟶ B)
@@ -201,7 +200,6 @@ end SiteHelpers
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 -- Transport across iterated slice sites requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
