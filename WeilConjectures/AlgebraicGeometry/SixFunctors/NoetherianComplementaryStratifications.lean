@@ -151,7 +151,7 @@ Proof, following the eight reviewed DAG steps:
    locally closed subset is constructible (def-weil-constructible-subset, Stacks 005L).
 7. For a stratification of `U`, append the given `Z` and `i`. Injectivity of `j` preserves
    pairwise disjointness, and complementarity gives disjointness from `i(Z)` and coverage
-   of `T` (def-constructible-stratification). Steps 5 and 6 give all other fields.
+   of `T` (definition-constructible-sheaves--2). Steps 5 and 6 give all other fields.
 8. For a stratification of `Z`, append the given `U` and `j`, with the same argument using
    injectivity of `i`. Neither construction changes the old domains or source maps.
    Empty strata remain; when the old index set is empty only the complementary stratum

@@ -47,9 +47,9 @@ Proof:
    for qcqs and lem-weil-pbc-finite-affine-coproduct-spectrum for affineness.
    The empty coproduct is the spectrum of the zero ring, hence empty.
 2. The structural morphism is weakly etale: flatness and flatness of its diagonal
-   are checked on each open summand using def-weil-weakly-etale-morphism and
-   def-weil-flat-morphism. Finite unions respect def-weil-size-convention.
-3. The summand inclusions cover in def-weil-pbc-proetale-site. For an affine open
+   are checked on each open summand using definition-ind-etale-pro-etale-weakly--3 and
+   def-weil-flat-morphism. Finite unions respect prose-01-10.
+3. The summand inclusions cover in definition-small-pro-etale-site--1. For an affine open
    of the union, its intersections with summands are clopen and quasi-compact;
    finite affine covers of these intersections verify the covering criterion.
    The empty family covers the empty scheme, so its sections form a singleton.

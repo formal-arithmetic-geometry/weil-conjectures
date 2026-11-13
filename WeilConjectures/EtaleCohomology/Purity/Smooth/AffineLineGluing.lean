@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
 # Gluing comparisons along the affine line
 
-The inputs of the gluing half of blueprint `prop-pur-a1-invariance`
+The inputs of the gluing half of blueprint `lemma-section-normal-bundle--1`
 (`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`):
 
 * the unit section of `𝔸¹_S` is a closed immersion meeting every fibre, and the affine line

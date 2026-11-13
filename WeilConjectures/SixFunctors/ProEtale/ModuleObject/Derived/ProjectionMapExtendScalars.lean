@@ -31,8 +31,9 @@ projection formula with coefficients `Λ'` holds at `(T K, T M)` as soon as it h
 coefficients `Λ` at `(K, M)` and (Push) is invertible at `K` and at `K ⊗ᴸ Lf^* M`
 (`ProEtale.CondensedRing.isIso_projectionMap_app_app_extendScalars`).
 
-This is the formal part of blueprint `det-thm-sfb-proper-base-change-rational` (3), deducing the
-projection formula with coefficients `E` and `ℚ̄_ℓ` from the one with coefficients `𝒪_E`.
+This is the formal part of blueprint `proposition-proper-direct-image-constructible-complexes` (3),
+deducing the projection formula with coefficients `E` and `ℚ̄_ℓ` from the one with coefficients
+`𝒪_E`.
 -/
 
 @[expose] public section

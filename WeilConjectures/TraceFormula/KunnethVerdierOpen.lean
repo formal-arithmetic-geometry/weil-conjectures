@@ -17,7 +17,7 @@ Let `X, Y, U` be separated `k`-schemes of finite type, `j : U ⟶ Y` an open imm
 (`ProEtale.CondensedRing.isOpenImmersion_prodMap_left`). This file compares the Künneth–Verdier
 maps `κ^Y_{M,N}` on `X ⨯ Y` and `κ^U_{M,N'}` on `X ⨯ U`
 (`ProEtale.CondensedRing.kunnethVerdierMap`), the step of the dévissage of the Künneth–Verdier
-theorem (blueprint `thm-trf-kunneth-verdier`) along an open subscheme of `Y`.
+theorem (blueprint `lemma-external-duality-trace-morphism--1`) along an open subscheme of `Y`.
 
 ## The compatibility of the exceptional Künneth map with restriction
 

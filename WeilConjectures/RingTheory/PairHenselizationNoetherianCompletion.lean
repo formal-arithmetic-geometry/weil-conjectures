@@ -54,7 +54,7 @@ Proof (the seven steps of the node):
    lem-weil-pbc-lfp-affine-opens-finite-presentation and
    lem-weil-pbc-finite-type-algebra-noetherian.
 4. Each stage has the same completion as the base, by lem-weil-pbc-etale-algebra-flat
-   and lem-weil-pbc-flat-iso-mod-ideal-powers. Compatibility of coprojections shows
+   and theorem-finite-etale-covers-proper-henselian--2. Compatibility of coprojections shows
    that its comparison to the completion of the colimit is the same isomorphism.
 5. The completion map of each stage is flat by lem-weil-pbc-noetherian-completion-flat.
    Apply lem-weil-pbc-colimit-rings-flat to deduce flatness of the completion map of

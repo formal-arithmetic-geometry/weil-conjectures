@@ -58,13 +58,13 @@ namespace AddCommGroup
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (M : Type u) [AddCommGroup M]
 
-/-- Blueprint `def-tate-module-abelian-group`: Integral and rational Tate modules.
+/-- Blueprint `definition-tate-module`: Integral and rational Tate modules.
 
 The *Tate module* `T_ℓ M` of an abelian group `M` at a prime `ℓ` is the subgroup of the product
 `∀ n : ℕ, M` consisting of the compatible systems `t` of `ℓ ^ n`-torsion points, that is, those
 `t` with `ℓ ^ n • t n = 0` for all `n` and `ℓ • t (n + 1) = t n` for all `n`.
 
-This is also blueprint `def-tate-module-abelian-group`; the blueprint indexes from `n = 1`, and
+This is also blueprint `definition-tate-module`; the blueprint indexes from `n = 1`, and
 the extra coordinate `t 0` here is always `0`. -/
 def tateModule : AddSubgroup (∀ _ : ℕ, M) where
   carrier := {t | (∀ n, (ℓ : ℤ) ^ n • t n = 0) ∧ ∀ n, (ℓ : ℤ) • t (n + 1) = t n}
@@ -122,7 +122,7 @@ theorem appr_zsmul_coe_eq (t : tateModule ℓ M) (a : ℤ_[ℓ]) {n : ℕ} {x : 
     (a.appr n : ℤ) • (t : ∀ _ : ℕ, M) n = x • (t : ∀ _ : ℕ, M) n :=
   zsmul_coe_congr (dvd_sub_of_intCast_eq (by rw [Int.cast_natCast, natCast_appr, h]))
 
-/-- Blueprint `def-tate-module-abelian-group`: Integral and rational Tate modules.
+/-- Blueprint `definition-tate-module`: Integral and rational Tate modules.
 
 The Tate module `T_ℓ M` is a module over the ring `ℤ_[ℓ]` of `ℓ`-adic integers, acting
 coordinatewise: an `ℓ`-adic integer acts on the `n`-th coordinate through its reduction modulo
@@ -173,14 +173,15 @@ theorem pow_zsmul_coe_add (t : tateModule ℓ M) (n k : ℕ) :
   | succ k ih => rw [pow_succ', mul_smul, smul_comm, ← add_assoc, zsmul_coe_succ, ih]
 
 omit [Fact ℓ.Prime] in
-/-- Part of blueprint `lem-tate-module-no-fixed`: the Tate module has no `ℓ`-power torsion. -/
+/-- Part of blueprint `proposition-no-frobenius-fixed-vector`: the Tate module has no `ℓ`-power
+torsion. -/
 theorem eq_zero_of_pow_zsmul_eq_zero {t : tateModule ℓ M} {k : ℕ}
     (h : (ℓ : ℤ) ^ k • t = 0) : t = 0 :=
   Subtype.ext <| funext fun n ↦ by
     rw [← pow_zsmul_coe_add t n k]
     exact congr_fun (congr_arg Subtype.val h) (n + k)
 
-/-- Part of blueprint `lem-tate-module-no-fixed`: the Tate module is a torsion-free
+/-- Part of blueprint `proposition-no-frobenius-fixed-vector`: the Tate module is a torsion-free
 `ℤ_[ℓ]`-module, since a nonzero `ℓ`-adic integer is a unit times a power of `ℓ` and the Tate
 module has no `ℓ`-power torsion. -/
 instance : NoZeroSMulDivisors ℤ_[ℓ] (tateModule ℓ M) where
@@ -218,7 +219,7 @@ noncomputable def congr (e : M ≃+ N) : tateModule ℓ M ≃ₗ[ℤ_[ℓ]] tate
     (LinearMap.ext fun _ ↦ Subtype.ext <| funext fun _ ↦ by simp)
 
 variable (ℓ M) in
-/-- Blueprint `prop-av-tate-rank` (group-theoretic content): the Tate module of an
+/-- Blueprint `proposition-integral-tate-module--2` (group-theoretic content): the Tate module of an
 `ℓ`-divisible group is free.
 
 Let `M` be an abelian group on which multiplication by the prime `ℓ` is surjective and whose
@@ -302,7 +303,7 @@ theorem nonempty_linearEquiv_of_natCard_eq (hdiv : ∀ x : M, ∃ y : M, (ℓ : 
 
 end tateModule
 
-/-- Blueprint `def-tate-module-abelian-group`: Integral and rational Tate modules.
+/-- Blueprint `definition-tate-module`: Integral and rational Tate modules.
 
 The *rational Tate module* `V_ℓ M = ℚ_[ℓ] ⊗_{ℤ_[ℓ]} T_ℓ M`. -/
 def rationalTateModule : Type u :=
@@ -316,7 +317,7 @@ noncomputable instance : AddCommGroup (rationalTateModule ℓ M) :=
 noncomputable instance : Module ℚ_[ℓ] (rationalTateModule ℓ M) :=
   inferInstanceAs (Module ℚ_[ℓ] (ℚ_[ℓ] ⊗[ℤ_[ℓ]] (tateModule ℓ M)))
 
-/-- Part of blueprint `lem-tate-module-no-fixed`: since `T_ℓ M` is a torsion-free
+/-- Part of blueprint `proposition-no-frobenius-fixed-vector`: since `T_ℓ M` is a torsion-free
 `ℤ_[ℓ]`-module, the natural map `T_ℓ M → V_ℓ M = ℚ_[ℓ] ⊗ T_ℓ M`, `t ↦ 1 ⊗ t`, is injective. -/
 theorem injective_one_tmul :
     Function.Injective fun t : tateModule ℓ M ↦ (1 : ℚ_[ℓ]) ⊗ₜ[ℤ_[ℓ]] t := by
@@ -326,7 +327,7 @@ theorem injective_one_tmul :
   exact (smul_eq_zero.mp hc).resolve_left (nonZeroDivisors.ne_zero c.2)
 
 variable {ℓ M} in
-/-- Blueprint `def-tate-module-abelian-group`: rescaling a fraction. The fraction `ℓ ^ (-b) t`
+/-- Blueprint `definition-tate-module`: rescaling a fraction. The fraction `ℓ ^ (-b) t`
 equals `ℓ ^ (-(b + c)) (ℓ ^ c t)` in `V_ℓ M`. -/
 theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
     ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t =
@@ -339,7 +340,7 @@ theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
   ring
 
 variable {ℓ M} in
-/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
+/-- Blueprint `definition-tate-module`: Tate module of an abelian group.
 
 `V_ℓ M = T_ℓ M [1 / ℓ]`: every element of the rational Tate module is a fraction `ℓ ^ (-b) t`
 with `t ∈ T_ℓ M`. -/
@@ -358,7 +359,7 @@ theorem exists_eq_inv_pow_tmul (v : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) :
       inv_pow_tmul_eq_inv_pow_add_tmul c b, add_comm c b]
 
 variable {ℓ M} in
-/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
+/-- Blueprint `definition-tate-module`: Tate module of an abelian group.
 
 Equality of fractions in `V_ℓ M = T_ℓ M [1 / ℓ]`: `ℓ ^ (-b) t = ℓ ^ (-c) u` if and only if
 `ℓ ^ d (ℓ ^ c t - ℓ ^ b u) = 0` for some `d ≥ 0`. -/
@@ -396,7 +397,7 @@ theorem map_tmul (f : M →+ N) (a : ℚ_[ℓ]) (t : tateModule ℓ M) :
   rfl
 
 variable (ℓ) in
-/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
+/-- Blueprint `definition-tate-module`: Tate module of an abelian group.
 
 The fixed submodule `(V_ℓ M)^s` of an endomorphism `s` of `M` (in the blueprint an
 automorphism), which acts on `V_ℓ M` coordinatewise and on fractions through
@@ -410,9 +411,10 @@ theorem mem_fixedSubmodule {s : M →+ M} {v : rationalTateModule ℓ M} :
 
 
 variable (ℓ M) in
-/-- Blueprint `prop-av-tate-rank` (group-theoretic content, rational form): if multiplication by
-the prime `ℓ` is surjective on `M` and `M[ℓ]` has order `ℓ ^ r`, then `V_ℓ M ≅ ℚ_[ℓ] ^ r`. This
-is the base change to `ℚ_[ℓ]` of `AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
+/-- Blueprint `proposition-integral-tate-module--2` (group-theoretic content, rational form): if
+multiplication by the prime `ℓ` is surjective on `M` and `M[ℓ]` has order `ℓ ^ r`, then
+`V_ℓ M ≅ ℚ_[ℓ] ^ r`. This is the base change to `ℚ_[ℓ]` of
+`AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
 theorem nonempty_linearEquiv_of_natCard_eq (hdiv : ∀ x : M, ∃ y : M, (ℓ : ℤ) • y = x) (r : ℕ)
     (hr : Nat.card (AddSubgroup.torsionBy M (ℓ : ℤ)) = ℓ ^ r) :
     Nonempty (rationalTateModule ℓ M ≃ₗ[ℚ_[ℓ]] (Fin r → ℚ_[ℓ])) :=

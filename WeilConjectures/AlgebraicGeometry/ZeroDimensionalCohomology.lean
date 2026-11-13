@@ -43,7 +43,7 @@ has a section through that point, by topological invariance of the étale site a
 ## Main statements
 
 - `AlgebraicGeometry.zero_dimensional_etale_cohomology`
-  (blueprint `lem-weil-pbc-zero-dimensional-cohomology`): the statement above.
+  (blueprint `lemma-sheaves-finite-support-finite-morphisms--1`): the statement above.
 - `AlgebraicGeometry.Etale.isIso_piLift_toPresheafFiber`: on a finite discrete scheme with
   separably closed residue fields, the sections of a sheaf are the product of its stalks.
 -/
@@ -365,7 +365,7 @@ lemma Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero {k : Type u} [F
     inferInstance) Ω s hs F
   infer_instance
 
-/-- Blueprint `lem-weil-pbc-zero-dimensional-cohomology`: **Cohomology of zero-dimensional
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`: **Cohomology of zero-dimensional
 schemes.** Let `C` be a separated scheme of finite type over an algebraically closed field `k`
 with `dim C ≤ 0`. Then `C` has finitely many points, and for every abelian étale sheaf `F` on
 `C`, `Hᵠ(C, F) = 0` for `q > 0` while the canonical map `H⁰(C, F) ⟶ ∏_x F_{s x}` to the

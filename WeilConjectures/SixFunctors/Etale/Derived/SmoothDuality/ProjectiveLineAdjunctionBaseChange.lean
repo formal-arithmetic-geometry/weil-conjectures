@@ -16,11 +16,12 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceB
 For a normalized Tate twist, the projective-line adjunction `Rq_! ⊣ Lq^*(1)[2]` of
 `q : ℙ¹_S ⟶ S` (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`) commutes with every
 base change `S' ⟶ S`, in the sense of
-`AlgebraicGeometry.Etale.ProjectiveLineAdjunctionBaseChange` (blueprint `det-sp-p1-adjunction`,
-subsection `sk-prop-geo-p1-adjunction`): the counits of these adjunctions are the trace counits
-built from the trace of the projective line, which commutes with base change
-(`AlgebraicGeometry.Etale.projectiveLineTrace_lowerShriek_baseChange`), and so do the projection
-map and the identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K`
+`AlgebraicGeometry.Etale.ProjectiveLineAdjunctionBaseChange` (blueprint
+`proposition-adjunction-projective-line`, subsection `proposition-adjunction-projective-line`): the
+counits of these adjunctions are the trace counits built from the trace of the projective line,
+which commutes with base change
+(`AlgebraicGeometry.Etale.projectiveLineTrace_lowerShriek_baseChange`), and so do the projection map
+and the identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K`
 (`AlgebraicGeometry.Etale.lowerShriekTraceCounit_twistShift_baseChange`).
 
 ## Implementation notes
@@ -139,12 +140,12 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 attribute [local instance 20000] Etale.sheafBraidedCategory
 
-/-- **Base change of the projective-line counit** (blueprint `det-sp-p1-adjunction`). For
-`g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the counits
-`ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of `AlgebraicGeometry.Etale.projectiveLineCounit` are compatible
-with `Ex_!` and `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`: the trace commutes with base change
-(`AlgebraicGeometry.Etale.projectiveLineLowerShriekTrace_baseChange`), and so do the projection
-map and the identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K`
+/-- **Base change of the projective-line counit** (blueprint
+`proposition-adjunction-projective-line`). For `g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`,
+the counits `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of `AlgebraicGeometry.Etale.projectiveLineCounit` are
+compatible with `Ex_!` and `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`: the trace commutes with base
+change (`AlgebraicGeometry.Etale.projectiveLineLowerShriekTrace_baseChange`), and so do the
+projection map and the identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K`
 (`AlgebraicGeometry.Etale.lowerShriekTraceCounit_twistShift_baseChange`). -/
 theorem projectiveLineCounit_baseChange (g : S' ⟶ S)
     (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -169,8 +170,8 @@ end Braided
 
 end Counit
 
-/-- Compatibility required from `sk-prop-geo-p1-adjunction`:
-blueprint `det-sp-p1-adjunction`.
+/-- Compatibility required from `proposition-adjunction-projective-line`:
+blueprint `proposition-adjunction-projective-line`.
 
 **The projective-line adjunction commutes with base change.** For a normalized Tate twist and
 every scheme `S` on which the exponent of `Λ` is invertible, the adjunctions

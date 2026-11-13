@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 /-! # Formal consequences of the normalized closed comparison
 
 Source: the evaluation and transposition paragraph of
-cor-coef-verdier-weil-equivariance, native comparison steps 7--8
+prose-10-20, native comparison steps 7--8
 (blueprint: lem-sf-native-closed-transposition).
 -/
 

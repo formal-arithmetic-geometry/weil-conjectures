@@ -278,7 +278,7 @@ private theorem ordinaryArtinScalar
 function `b` is isomorphic to the Artin–Schreier sheaf of the induced `Q̄_ℓ`-character, also for
 a trivial character.
 
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
+Source: latest blueprint, lemma-fourier-transform-constant-sheaf proof, coefficient paragraph
 (blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
 Proof. `#k₀` is a unit in `E`, and a ring map preserves `Ring.inverse` of a unit; the
 constant-section ring maps commute with `E → Q̄_ℓ`. The regular Push comparison along the

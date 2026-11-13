@@ -64,9 +64,10 @@ private theorem transportComposition
 -- The concrete derived-module functors require more than the default elaboration budget.
 /-- Composition for the specified normalized comparison family.
 
-Source: blueprint sk-thm-sf-comp-composition, clause (1), the composition-isomorphism
-and canonicity paragraphs, specialized in det-prop-int-brown-construction step 6.
-(blueprint: lem-sfb-total-derived-compatible-composition).
+Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (1), the
+composition-isomorphism and canonicity paragraphs, specialized in
+proposition-construction-independence-rf-shriek step 6. (blueprint:
+lem-sfb-total-derived-compatible-composition).
 
 Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity
 coefficient isomorphism. Write he for the equality Loc(Dctf) = Loc(Dbc). Use the

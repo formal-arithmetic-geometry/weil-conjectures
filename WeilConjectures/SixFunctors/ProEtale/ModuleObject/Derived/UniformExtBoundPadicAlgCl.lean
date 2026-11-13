@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClUn
 /-!
 # The uniform `Ext` bound for constructible `ℚ̄_ℓ`-sheaves, by dévissage
 
-Blueprint `det-uniform-constructible-ext-rational`, coefficients `ℚ̄_ℓ`. Let `X` be a scheme with
+Blueprint `lemma-uniform-ext-bound`, coefficients `ℚ̄_ℓ`. Let `X` be a scheme with
 noetherian underlying space. If, for every finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, constructible
 `E_X`-modules satisfy the uniform `Ext` bound, so do constructible `ℚ̄_{ℓ,X}`-modules
 (`ProEtale.hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield`).
@@ -306,7 +306,7 @@ theorem eq_zero_of_singleFunctor_extendScalars_padicSubfieldRingObjToPadicAlgCl_
   rw [← cancel_mono e.inv, zero_comp]
   exact hP n hn _
 
-/-- Blueprint `det-uniform-constructible-ext-rational`, coefficients `ℚ̄_ℓ`: the uniform `Ext`
+/-- Blueprint `lemma-uniform-ext-bound`, coefficients `ℚ̄_ℓ`: the uniform `Ext`
 bound for constructible `ℚ̄_{ℓ,X}`-modules follows from the uniform bound over the finite
 subextensions `E ⊆ ℚ̄_ℓ`. Same statement as
 `ProEtale.hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield`,

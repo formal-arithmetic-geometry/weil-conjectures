@@ -30,7 +30,7 @@ sheaf `ω_ℙ = ⋀ᵈ Ω¹_{ℙ/A}` is invertible, with free generator
   transition rule `ηᵢ = (xᵢ / xⱼ)^{-(d+1)} ηⱼ` on `Uᵢ ∩ Uⱼ`.
 - `AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`: `ω_ℙ ≅ 𝒪(-d-1)`, `ηᵢ ↦ eᵢ^{(-d-1)}`.
 
-(blueprint: `lem-pc-projective-space-canonical`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -177,7 +177,7 @@ variable (S : Scheme.{u}) (d : ℕ)
 /-- **The canonical module of projective space**: `ω_ℙ = ⋀ᵈ Ω¹_{ℙ/S}` for `ℙ = ℙ(n; S)`, where
 `Nat.card n = d + 1`.
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def canonicalModule : ℙ(n; S).Modules :=
   (ℙ(n; S) ↘ S).relativeDifferentials.exteriorPower d
 
@@ -198,7 +198,7 @@ lemma coe_chartIndexEquiv (i : n) (m : Fin d) :
 `ℙ(n; Spec A)`: `ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)`, the wedge product being taken in increasing
 order of `k`, for the order on `n` given by `e : n ≃ Fin (d + 1)` (and `i` read as `e i`).
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def canonicalGenerator (i : n) : Γ(canonicalModule n (Spec (.of A)) d, standardOpen n _ i) :=
   ((-1 : Γ(ℙ(n; Spec (.of A)), standardOpen n _ i)) ^ (e i : ℕ)) •
     wedge fun m ↦ (ℙ(n; Spec (.of A)) ↘ Spec (.of A)).sectionsD _
@@ -218,7 +218,7 @@ lemma isFreeGenerator_wedge_sectionsD_coordRatio (i : n) :
 
 /-- **`ηᵢ` is a free generator of `ω_ℙ` on `Uᵢ`**; in particular `ω_ℙ` is invertible.
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma isFreeGenerator_canonicalGenerator (i : n) :
     IsFreeGenerator (canonicalGenerator A e i) := by
   have h := (isFreeGenerator_wedge_sectionsD_coordRatio A e i).units_smul ((-1) ^ (e i : ℕ))
@@ -231,7 +231,7 @@ distinct standard opens of `ℙ(n; Spec A)`, `ηᵢ = (xᵢ / xⱼ)^{-(d+1)} •
 for top forms `exteriorPower.ιMulti_chart_transition`, applied to the universal derivation and
 the coordinates `x_k / xᵢ`, `x_k / xⱼ`.
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem map_canonicalGenerator_eq_transitionUnit_smul {i j : n} (hij : i ≠ j) :
     (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE (inf_le_left :
         standardOpen n _ i ⊓ standardOpen n _ j ≤ _)).op
@@ -317,7 +317,7 @@ standard open `Uᵢ` (`canonicalModuleIsoTwist_hom_app`): both families have the
 (`Scheme.Modules.isoOfIsFreeGenerator`). The signs `(-1)ⁱ` refer to the order on `n` given by
 `e : n ≃ Fin (d + 1)`.
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def canonicalModuleIsoTwist :
     canonicalModule n (Spec (.of A)) d ≅ twist n (Spec (.of A)) (-(d : ℤ) - 1) :=
   isoOfIsFreeGenerator (iSup_standardOpen n _) (isFreeGenerator_canonicalGenerator A e)
@@ -329,7 +329,7 @@ def canonicalModuleIsoTwist :
 
 /-- **`ω_ℙ ≅ 𝒪(-d-1)` sends `ηᵢ` to `eᵢ^{(-d-1)}`** on the standard open `Uᵢ`.
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma canonicalModuleIsoTwist_hom_app (i : n) :
     (canonicalModuleIsoTwist A e).hom.app (standardOpen n _ i) (canonicalGenerator A e i) =
       twistGenerator n _ (-(d : ℤ) - 1) i :=
@@ -338,7 +338,7 @@ lemma canonicalModuleIsoTwist_hom_app (i : n) :
 /-- **Local description of `canonicalModuleIsoTwist`**: on an open `W ⊆ Uᵢ`, it sends
 `r • ηᵢ|_W` to `r • eᵢ^{(-d-1)}|_W`.
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma canonicalModuleIsoTwist_hom_app_smul (i : n) {W : ℙ(n; Spec (.of A)).Opens}
     (hW : W ≤ standardOpen n _ i) (r : Γ(ℙ(n; Spec (.of A)), W)) :
     (canonicalModuleIsoTwist A e).hom.app W

@@ -804,7 +804,7 @@ the transpose of the inclusion `J ⟶ 𝒪_X`, whose zero scheme is `D`: on an a
 As a witness we take `𝒪_X ≅ J ⊗ Jᵛ ⟶ 𝒪_X ⊗ Jᵛ ≅ Jᵛ`, the inclusion `J ⟶ 𝒪_X` twisted by `Jᵛ`,
 whose zero scheme is that of the inclusion, i.e. `D`.
 
-(blueprint: the canonical section `1` of `𝒪(D)` in `lem-pc-universal-adjoint-section`) -/
+(blueprint: the canonical section `1` of `𝒪(D)` in `proposition-divisors-degree-g-open-chart--1`) -/
 theorem IdealSheafData.IsInvertible.exists_zeroLocus_eq {X : Scheme.{u}} {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : ∃ s : 𝟙_ X.Modules ⟶ J.toModulesᵛ, Modules.Hom.zeroLocus s = J := by
   have := hJ.isInvertible_toModules

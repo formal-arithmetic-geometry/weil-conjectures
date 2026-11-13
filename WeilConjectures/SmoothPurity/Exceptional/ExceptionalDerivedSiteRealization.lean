@@ -7,7 +7,7 @@ module
 public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalSiteRealization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 /-! # Derived realization of the actual etale/pro-etale system comparison
-Source: blueprint def-weil-exceptional-inverse-image. All ordinary maps are fixed on
+Source: blueprint theorem-f-shriek-finite-coefficients. All ordinary maps are fixed on
 sections or by adjunction transposes; their derived maps retain the localization units.
 (blueprint: def-pur-adic-derived-site-realization).
 -/

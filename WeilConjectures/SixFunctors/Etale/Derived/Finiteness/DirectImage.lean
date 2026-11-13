@@ -23,28 +23,29 @@ without the invertibility the Artin–Schreier sequence already defeats construc
 `R¹f_*` in characteristic `p`.
 
 The proofs follow the blueprint: the finiteness of `Rf_*` is the theorem
-`thm-dg-finite-type-constructibility`, that of `Rf_! = Rg_* ∘ j_!` follows from it for the
+`proposition-six-operations-dctf--2`, that of `Rf_! = Rg_* ∘ j_!` follows from it for the
 proper `g` of a compactification together with the constructibility of extensions by zero, and
 the vanishing of `Rᵠf_!` above twice the fibre dimension is read off the sheaf case
-`sbc-thm-finiteness-finite-type` by a dévissage along the truncation triangles. The open case
-`cor-fin-deligne-open-finite-coefficients` is the sheaf case
+`theorem-results-from-etale-theory` by a dévissage along the truncation triangles. The open case
+`corollary-open-direct-image-over-field--1` is the sheaf case
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`
-(`cor-fin-deligne-open-over-field`) extended to complexes by
+(`corollary-open-direct-image-over-field--1`) extended to complexes by
 `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`. The vanishing clause
-of `sbc-thm-finiteness-finite-type` is `lem-dg-compact-support-amplitude`.
+of `theorem-results-from-etale-theory` is `theorem-results-from-etale-theory--5`.
 
-The sources of these inputs (blueprint `rem-exc-direct-image-input-sources`): the finiteness
+The sources of these inputs (blueprint `theorem-results-from-etale-theory`): the finiteness
 clause is the classical finiteness theorem (SGA 4, XIV, 1.1; Stacks, Tag 0GL0), proved here by
 Deligne's finite-boundary induction, with the proper case the comparison `obl-fin-comparison`;
 the cohomological-dimension clause is the bound for finite-type schemes over a separably closed
-field (Stacks, Tags 0F0V and 0F0P), proved from the affine bound `thm-sc-affine-torsion-cd`.
+field (Stacks, Tags 0F0V and 0F0P), proved from the affine bound
+`lemma-uniform-bounds-pro-etale-affines`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek`
-- `thm-fin-open-immersion`, both in the namespace `AlgebraicGeometry.Etale`:
+- `corollary-open-direct-image-over-field--1`, both in the namespace `AlgebraicGeometry.Etale`:
   `boundedConstructible_rightDerivedLowerStar_singleFunctor_of_isOpenImmersion` and
   `isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor`
 -/
@@ -69,17 +70,18 @@ section Finiteness
 
 variable [Finite Λ] {k : Type u} [Field k]
 
-/-! ### Inputs from the blueprint subsection `sk-prop-sf-cbc` -/
+/-! ### Inputs from the blueprint subsection `corollary-open-direct-image-over-field--1` -/
 
-/-- Blueprint `cor-fin-deligne-open-finite-coefficients`: Open direct images with arbitrary
+/-- Blueprint `corollary-open-direct-image-over-field--1`: Open direct images with arbitrary
 finite allowable coefficients.
 
 Let `Λ` be a finite ring annihilated by an integer invertible in the field `k`, and let
 `j : X ⟶ Y` be an open immersion of finite-type `k`-schemes (`X` is of finite type over `k` as
 soon as `Y` is, `Y` being noetherian). Then `Rj_*` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`.
 
-The sheaf case is `cor-fin-deligne-open-over-field`, stated for every finite `Λ` whose exponent is
-invertible, so no dévissage from `𝔽_ℓ` to `Λ` is needed; complexes follow by truncation. -/
+The sheaf case is `corollary-open-direct-image-over-field--1`, stated for every finite `Λ` whose
+exponent is invertible, so no dévissage from `𝔽_ℓ` to `Λ` is needed; complexes follow by
+truncation. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
     [HasInvertibleExponent Λ (Spec (.of k))] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (j : X ⟶ Y) [IsOpenImmersion j]
@@ -90,11 +92,11 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
   boundedConstructible_obj_of_forall_singleFunctor Λ _
     (fun F _ ↦ boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field Λ aY j F) hK
 
-/-- The separated case of `thm-dg-finite-type-constructibility`: for a separated morphism
+/-- The separated case of `proposition-six-operations-dctf--2`: for a separated morphism
 `f : X ⟶ Y` of finite-type `k`-schemes, factor `f` through a compactification
 `X ⟶[c.i] Z ⟶[c.g] Y` (Nagata); then `Rf_* = Rc.g_* ∘ Rc.i_*`, where the open direct image
-`Rc.i_*` preserves bounded constructibility (`cor-fin-deligne-open-finite-coefficients`) and so
-does the proper direct image `Rc.g_*` (`lem-fin-proper-bounded-constructible`). -/
+`Rc.i_*` preserves bounded constructibility (`corollary-open-direct-image-over-field--1`) and so
+does the proper direct image `Rc.g_*` (`theorem-results-from-etale-theory--3`). -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isSeparated
     [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) [IsSeparated f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -120,10 +122,10 @@ lemma boundedConstructible_rightDerivedLowerStar_of_isSeparated
     (boundedConstructible_rightDerivedLowerStar_of_isProper aY c.g h₁)
 
 open Pretriangulated in
-/-- The induction step of `thm-dg-finite-type-constructibility`, on the number `n` of affine opens
+/-- The induction step of `proposition-six-operations-dctf--2`, on the number `n` of affine opens
 needed to cover the source. For an affine open `j : U ⟶ X` of the cover, with closed complement
 `i : Z ⟶ X`, complete the unit to a distinguished triangle `K ⟶ Rj_* j^* K ⟶ C ⟶ K[1]`. The
-middle term is bounded constructible (`cor-fin-deligne-open-finite-coefficients`), and so is its
+middle term is bounded constructible (`corollary-open-direct-image-over-field--1`), and so is its
 direct image `R(jf)_* j^* K`, `j ≫ f` being separated. The cone `C` is bounded constructible and
 vanishes on `U`, so `C ≅ Ri_* i^* C` and `Rf_* C ≅ R(if)_* i^* C`, which is bounded constructible
 by induction, `Z` being covered by the `n - 1` affine opens `i⁻¹ V`, `V ≠ U`. -/
@@ -216,7 +218,7 @@ lemma boundedConstructible_rightDerivedLowerStar_of_card_le
     exact Q.ext_of_isTriangulatedClosed₁ _
       ((R((f)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hT) h₂' h₃
 
-/-- Blueprint `thm-dg-finite-type-constructibility`: Bounded constructibility of every
+/-- Blueprint `proposition-six-operations-dctf--2`: Bounded constructibility of every
 finite-type direct image.
 
 Let `f : X ⟶ Y` be a morphism between finite-type schemes over a field `k`, and let `Λ` be a
@@ -253,7 +255,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType
   · obtain ⟨U, hU, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
     exact ⟨U, Finset.mem_image_of_mem _ hU, hx⟩
 
-/-- Blueprint `sbc-thm-finiteness-finite-type`: Finiteness of higher direct images of
+/-- Blueprint `theorem-results-from-etale-theory`: Finiteness of higher direct images of
 finite-type morphisms, the vanishing clause.
 
 Let `f : X ⟶ Y` be a separated finite-type morphism (here: one admitting a compactification)
@@ -261,13 +263,14 @@ between finite-type schemes over a field `k`, let `Λ` be a finite ring whose ex
 invertible on `Y` and let `𝓕` be a sheaf of `Λ`-modules on `X_ét`. If the geometric fibres of
 `f` have dimension at most `e`, then `Rᵠf_! 𝓕 = 0` for `q > 2e`. Constructibility of `𝓕` is
 not needed: the bound only uses the dimensions of the original fibres (blueprint
-`lem-dg-compact-support-amplitude`).
+`theorem-results-from-etale-theory--5`).
 
-This is a node of the blueprint subsection `sk-prop-sf-cbc`, where it is proved. Its other
-clauses, the bounded constructibility of `Rf_* 𝓕` and of `Rf_! 𝓕`, are the sheaf cases of
+This is a node of the blueprint subsection `theorem-results-from-etale-theory`, where it is proved.
+Its other clauses, the bounded constructibility of `Rf_* 𝓕` and of `Rf_! 𝓕`, are the sheaf cases of
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType` and
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. The vanishing is
-`lem-dg-compact-support-amplitude`, which bounds `Rf_!` by the dimension of the original fibres. -/
+`theorem-results-from-etale-theory--5`, which bounds `Rf_!` by the dimension of the original
+fibres. -/
 theorem isZero_homology_rightDerivedLowerShriek_singleFunctor
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -409,14 +412,15 @@ lemma isZero_of_forall_isZero_upperStar (G : Sheaf Y.smallEtaleTopology (ModuleC
 
 /-! ### Open immersions -/
 
-/-- Blueprint `thm-fin-open-immersion`: Open-immersion direct images (constructibility).
+/-- Blueprint `corollary-open-direct-image-over-field--1`: Open-immersion direct images
+(constructibility).
 
 Let `j : X ⟶ Y` be an open immersion of finite-type schemes over a field `k`, and let `𝓕` be a
 constructible sheaf of `Λ`-modules on `X_ét`, for a finite `Λ` annihilated by an integer
 invertible in `k`. Then every higher direct image `Rᵠj_* 𝓕` is constructible, and they vanish
 for all sufficiently large `q`: `Rj_* 𝓕` is bounded constructible. This is
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion`
-(`cor-fin-deligne-open-finite-coefficients`) applied to `𝓕` in degree `0`. The vanishing of the
+(`corollary-open-direct-image-over-field--1`) applied to `𝓕` in degree `0`. The vanishing of the
 restrictions of the `Rᵠj_* 𝓕` to `X` for `q > 0` is
 `AlgebraicGeometry.Etale.isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor`. -/
 theorem boundedConstructible_rightDerivedLowerStar_singleFunctor_of_isOpenImmersion
@@ -429,7 +433,7 @@ theorem boundedConstructible_rightDerivedLowerStar_singleFunctor_of_isOpenImmers
     (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)
 
 omit [Finite Λ] in
-/-- Blueprint `thm-fin-open-immersion`: Open-immersion direct images (support).
+/-- Blueprint `corollary-open-direct-image-over-field--1`: Open-immersion direct images (support).
 
 For an open immersion `j : X ⟶ Y` and a sheaf `𝓕` of `Λ`-modules on `X_ét`, the restriction of
 `Rᵠj_* 𝓕` to `X` vanishes for `q ≠ 0`: restriction is exact, so it commutes with the homology
@@ -460,16 +464,17 @@ and let `f : X ⟶ Y` be a quasi-compact morphism between `k`-schemes locally of
 `Y` quasi-compact. Then `Rf_*` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`; separatedness of `f` is
 not needed. This is
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType`
-(`thm-dg-finite-type-constructibility`): `X` is quasi-compact since `f` and `Y` are, and the
+(`proposition-six-operations-dctf--2`): `X` is quasi-compact since `f` and `Y` are, and the
 exponent of `Λ` is invertible in `k` as soon as `X` is nonempty.
 
 Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_k ⟶ ⊔ₙ Spec k`, which is proper,
 `Rf_* Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded.
 
 The cohomological-dimension bound of the blueprint statement is
-`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt` (`thm-sc-finite-type-torsion-cd`),
-and its special case for the spectrum of a separably closed field is
-`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed` (`lem-kun-cd-sep-closed-point`). -/
+`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt`
+(`lemma-uniform-bounds-pro-etale-affines`), and its special case for the spectrum of a separably
+closed field is `AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`
+(`lemma-cohomological-dimension-base-field--1`). -/
 theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f : X ⟶ Y)
     [QuasiCompact f] [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
@@ -486,7 +491,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f :
     have : QuasiCompact aX := hf ▸ inferInstance
     exact boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType Λ f aX aY hf K hK
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
+/-- Blueprint `theorem-results-from-etale-theory`: Finiteness and constructibility
 
 **Finiteness of compactly supported direct images.** For `f : X ⟶ Y` admitting a
 compactification, between `k`-schemes locally of finite type with `Y` quasi-compact, `Rf_!`

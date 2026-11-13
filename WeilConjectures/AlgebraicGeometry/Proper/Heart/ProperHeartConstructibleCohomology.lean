@@ -16,7 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.Integral.IntegralIndConstructibleHe
 /-!
 # Constructibility of proper higher direct images with rational coefficients
 
-Source: blueprint main-20261015, sk-lem-proper-heart-bound, final paragraph
+Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph
 (blueprint: lem-proper-heart-constructible-cohomology).
 -/
 
@@ -55,9 +55,9 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 are again finite constant-model constructible, for finite extensions and the condensed
 algebraic closure.
 
-Source: blueprint main-20261015, sk-lem-proper-heart-bound, final paragraph, first sentence;
-sk-thm-sfb-proper-base-change, rational bounded-constructibility clause
-(blueprint: lem-proper-heart-constructible-cohomology).
+Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph, first
+sentence; proposition-proper-direct-image-constructible-complexes, rational bounded-constructibility
+clause (blueprint: lem-proper-heart-constructible-cohomology).
 
 Proof: place M in degree zero. Its degree-zero cohomology is isomorphic to M;
 all other cohomology modules are zero. Transport finite constant local models through

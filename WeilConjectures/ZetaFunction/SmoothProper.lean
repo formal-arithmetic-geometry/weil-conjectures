@@ -29,9 +29,10 @@ the functional equation and the Riemann hypothesis, and `Pᵢ` realizes the dete
 
 - `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_zero`,
   `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_two_mul`: the endpoint factors
-  `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T` (`prop-endpoints`).
+  `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T` (`theorem-weil-conjectures-smooth-proper-schemes`).
 - `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity
-  (`thm-weil-final-rh`, `prop-weight-purity-roots`).
+  (`theorem-weil-conjectures-smooth-proper-schemes`,
+  `corollary-purity-cohomology-smooth-proper-variety--1`).
 - `AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`: the Weil conjectures
   for `X₀`, with the realization of the factors for every `ℓ`.
 -/
@@ -53,8 +54,8 @@ section Endpoints
 variable (k₀) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The degree-zero endpoint of `prop-endpoints`: for `X₀` geometrically connected,
-`H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` with trivial Frobenius
+/-- The degree-zero endpoint of `theorem-weil-conjectures-smooth-proper-schemes`: for `X₀`
+geometrically connected, `H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` with trivial Frobenius
 (`AlgebraicGeometry.WeilSheaf.finrank_cohomology_zero_adicConstant`,
 `AlgebraicGeometry.WeilSheaf.frobenius_cohomology_zero_adicConstant`), so `P_{0,ℓ} = 1 - T`. -/
 theorem frobeniusCharpolyRev_zero [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -68,10 +69,10 @@ theorem frobeniusCharpolyRev_zero [IsSeparated (X ↘ Spec (CommRingCat.of k₀)
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, h, LinearMap.charpolyRev_one,
     WeilSheaf.finrank_cohomology_zero_adicConstant, pow_one]
 
-/-- The top-degree endpoint of `prop-endpoints`: for `X₀` smooth, proper and geometrically
-connected of pure dimension `d`, the trace `H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)` of Poincaré duality is
-a Frobenius-equivariant isomorphism onto a line on which Frobenius acts by `qᵈ`, so
-`P_{2d,ℓ} = 1 - qᵈ T`. -/
+/-- The top-degree endpoint of `theorem-weil-conjectures-smooth-proper-schemes`: for `X₀` smooth,
+proper and geometrically connected of pure dimension `d`, the trace
+`H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)` of Poincaré duality is a Frobenius-equivariant isomorphism onto a
+line on which Frobenius acts by `qᵈ`, so `P_{2d,ℓ} = 1 - qᵈ T`. -/
 theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
@@ -88,12 +89,13 @@ theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCa
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
     LinearMap.charpolyRev_smul_one, hfin, pow_one]
 
-/-- Blueprint `thm-weil-final-rh` and `prop-weight-purity-roots` (reciprocal roots have the
-weight-`i` absolute value): for `X₀` smooth, proper and geometrically connected of pure
-dimension `d` and every field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}`
-satisfies `|ι α| = q^{i/2}`; equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal
-roots are the Frobenius eigenvalues (`prop-weil-reciprocal-roots-eigenvalues`), which have this
-absolute value by `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`. -/
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` and
+`corollary-purity-cohomology-smooth-proper-variety--1` (reciprocal roots have the weight-`i`
+absolute value): for `X₀` smooth, proper and geometrically connected of pure dimension `d` and every
+field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}` satisfies `|ι α| = q^{i/2}`;
+equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal roots are the Frobenius eigenvalues
+(`prose-19-08`), which have this absolute value by
+`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`. -/
 theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
     [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]

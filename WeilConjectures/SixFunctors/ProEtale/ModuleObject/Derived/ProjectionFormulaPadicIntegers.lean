@@ -21,9 +21,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E` and residue field
 `𝔽_E`, and let `p : X ⟶ Y` be a proper morphism of separated `k`-schemes of finite type. This file
-proves the projection formula of blueprint `det-thm-sfb-proper-base-change-integral` (3): the
-projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism for bounded constructible
-`𝒪_E`-complexes `K` and `M`
+proves the projection formula of blueprint `proposition-proper-direct-image-constructible-complexes`
+(3): the projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism for bounded
+constructible `𝒪_E`-complexes `K` and `M`
 (`ProEtale.CondensedRing.isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible`).
 
 Both sides are bounded constructible, so by derived Nakayama
@@ -132,9 +132,10 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- **The projection formula for `𝒪_E`** (blueprint `det-thm-sfb-proper-base-change-integral` (3)):
-for a proper `p : X ⟶ Y` and bounded constructible `𝒪_E`-complexes `K` on `X` and `M` on `Y`, the
-projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. -/
+/-- **The projection formula for `𝒪_E`** (blueprint
+`proposition-proper-direct-image-constructible-complexes` (3)): for a proper `p : X ⟶ Y` and bounded
+constructible `𝒪_E`-complexes `K` on `X` and `M` on `Y`, the projection map
+`Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. -/
 theorem isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible (p : X ⟶ Y)
     [IsProper p.left]
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})

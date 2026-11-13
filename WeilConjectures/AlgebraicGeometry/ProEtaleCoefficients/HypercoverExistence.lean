@@ -20,9 +20,9 @@ import WeilConjectures.ProEtaleCoefficients.SingleAffineHypercover
 /-!
 # Hypercovers by single w-contractible affines
 
-Source: the blueprint of the Weil conjectures, chapter `sec-proetale-coefficients`,
-unit `sk-prop-pe-hypercover` (blueprint: det-pe-hypercover-existence); Stacks Project,
-Tag 09A1.
+Source: the blueprint of the Weil conjectures, chapter `chap-The-pro-etale-site`,
+unit `proposition-weakly-contractible-hypercovers` (blueprint: det-pe-hypercover-existence); Stacks
+Project, Tag 09A1.
 -/
 
 @[expose] public section
@@ -40,23 +40,23 @@ namespace AlgebraicGeometry
 /-- Hypercovers by single spectra of w-contractible rings.
 
 Source: Stacks Project, Tag 09A1, `lemma-w-contractible-hypercovering`, part (2);
-Tags 094K, 0DAV and 0DB2 (blueprint: det-pe-hypercover-existence).
+Tags 094K, 0DAV and 0DB2 (blueprint: proposition-weakly-contractible-hypercovers--1).
 The simplicial object is valued in `Over U`, so its augmentation is part of its data
 and its matching limits are relative to `U`. In degree one the matching object is
 `W₀ ×_U W₀`. Covering predicates are tested on the underlying arrows in `X.ProEt`.
 
 Proof:
 1. Apply the finite-product theorem
-   [det-pe-hypercover-product-wcontractible], proved directly using the disjoint-union
+   [proposition-weakly-contractible-hypercovers--1], proved directly using the disjoint-union
    decomposition of the prime spectrum and the evaluation-localization isomorphisms.
-2. Apply [det-pe-hypercover-single-cover]. Its proof starts with an affine singleton
+2. Apply [proposition-weakly-contractible-hypercovers--1]. Its proof starts with an affine singleton
    cover and composes it with the faithfully flat ind-etale w-contractible extension
    of its coordinate ring. Stability of the precoverage under composition gives the cover.
-3. Apply [det-pe-hypercover-single-affine] for the geometric simplicial construction
+3. Apply [proposition-weakly-contractible-hypercovers--1] for the geometric simplicial construction
    and its covering proper-face matching arrows. Its proof realizes the finite-basis
    formal hypercover, proves the matching coverings, and chooses spectrum representatives.
 4. In each degree rewrite by the supplied spectrum equality. The affine assertion of
-   [det-pe-weak-contractible-equivalences] supplies the required representable-sheaf
+   [lemma-w-contractible-affines-projective--2] supplies the required representable-sheaf
    splitting property. Assemble the three clauses.
 -/
 theorem exists_proetale_hypercover_single_affine

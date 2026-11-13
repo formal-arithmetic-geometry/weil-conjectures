@@ -28,7 +28,7 @@ while `Rp_* τ^{< 1} K₀` lies in degrees `≤ d` by dévissage
 (`DerivedCategory.isLE_obj_of_isLE_of_homologyProperty`).
 
 This is the passage from the integral to the rational coefficients, and from finite
-subextensions `E` to `ℚ̄_ℓ`, in the proof of blueprint `det-proper-heart-bound-rational`.
+subextensions `E` to `ℚ̄_ℓ`, in the proof of blueprint `lemma-uniform-bound-proper-direct-image--1`.
 -/
 
 @[expose] public section

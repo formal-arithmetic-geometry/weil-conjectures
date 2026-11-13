@@ -129,7 +129,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Exact principal completion and its canonical triangle map
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 `sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md`,
 Cones paragraph and shifts sentence; Stacks Tag 05RU
 (blueprint: lem-pe-completion-triangle-comparison).
@@ -1479,7 +1479,7 @@ Proof, following the nine steps of the updated DAG node:
    Descend both shifts and augmentation compatibility through the localization.
 5. Work in the actual internal-module category of the completion definition. Its adopted
    flat K-flat resolution supplies flat representatives without changing coefficient encoding.
-6. Pull back the exact coefficient sequence of det-pe-derived-nakayama-resolution and
+6. Pull back the exact coefficient sequence of lemma-reduction-derived-nakayama--1 and
    identify its scalar with the canonical principal scalar. Tensor exactness and the
    cone-to-quotient theorem give the cone-to-tensor quasi-isomorphism for flat complexes.
    Transfer this result to arbitrary K-flat complexes along a flat K-flat resolution,

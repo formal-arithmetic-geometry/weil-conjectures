@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Finite scalar restriction preserves pro-etale constructibility
 
-Source: current Weil blueprint, sec-proetale-coefficients,
+Source: current Weil blueprint, chap-The-pro-etale-site,
 `sk-prop-integral-criterion-reductions.proof.md`, second paragraph, last sentence;
 Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
 (blueprint: lem-pe-finite-scalar-restriction-constructible).
@@ -365,7 +365,7 @@ last sentence; Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
 (blueprint: lem-pe-finite-scalar-restriction-constructible).
 Proof:
 1. Restriction leaves the underlying abelian sheaf and maps unchanged. The kernel and
-sheafified cokernel constructions of lem-weil-pbc-module-sheaves-colimits-forgetful
+sheafified cokernel constructions of situation-conventions
 therefore commute with it. It is additive, exact and reflects zero objects.
 2. On every stratum, the canonical inverse-image identifications of the two constant
 rings commute with the coefficient map, since both composites agree on constant sections
@@ -379,7 +379,7 @@ covers trivialize the restricted sheaf, with the scalar-restricted constant modu
 4. Geometric stalks retain their underlying sets. A finitely generated module over finite
 B is a quotient of a finite power of B, hence finite. Its restriction is generated over A
 by the finite list of all its elements. This proves constructibility without surjectivity.
-5. Exact descent (lem-weil-pbc-exact-functor-derived-factorization) gives the existing
+5. Exact descent (situation-conventions) gives the existing
 termwise mapDerivedCategory on unbounded complexes. The exact-functor homology comparison
 (lem-weil-pbc-exact-functor-complex-cohomology) descends naturally through localization,
 giving the displayed natural isomorphisms in every degree, without a resolution bound.

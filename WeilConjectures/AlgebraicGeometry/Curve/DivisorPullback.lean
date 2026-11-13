@@ -92,7 +92,7 @@ theorem Hom.finrank_stalk_eq_finrank_residueField (f : X ⟶ Y) (x : X) (z : Y) 
 function fields.** For a finite flat morphism `f : X ⟶ Y` of integral schemes, the rank
 `d = f.finrank (genericPoint Y)` of `f_* 𝒪_X` is `[k(X) : k(Y)]`.
 
-(blueprint: `lem-sc-pullback-degree`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem Hom.finrank_genericPoint_eq_finrank_functionField [IsIntegral X] [IsIntegral Y]
     (f : X ⟶ Y) [Flat f] [IsFinite f] :
     letI := (f.functionFieldMap f.apply_genericPoint_of_flat).hom.toAlgebra
@@ -145,7 +145,7 @@ morphism `π`, where `e_x` is the ramification index
 (`AlgebraicGeometry.Scheme.Hom.ramificationIndex`).
 It has finite support since the fibres of `π` are finite.
 
-(blueprint: `lem-sc-pullback-degree`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 noncomputable def Divisor.pullback : Y.Divisor →+ X.Divisor where
   toFun D := Finsupp.ofSupportFinite
     (fun P ↦ D ⟨π P.1, π.isClosed_singleton_apply P.2⟩ * π.ramificationIndex P.1) <| by
@@ -174,7 +174,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [IsIntegral X] [IsLocallyNoether
 /-- **Degree of the pullback of a point.** `deg π^*[y] = d` for every closed point `y`, where
 `d = π.finrank (genericPoint Y)` is the degree of `π`.
 
-(blueprint: `lem-sc-pullback-degree`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem Divisor.degree_pullback_single
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -239,7 +239,7 @@ theorem Divisor.degree_pullback_single
 integral curves over an algebraically closed field `k`, of degree `d = π.finrank (genericPoint Y)`,
 `deg π^* D = d · deg D` for every divisor `D` on `Y`.
 
-(blueprint: `lem-sc-pullback-degree`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem Divisor.degree_pullback
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -256,7 +256,7 @@ theorem Divisor.degree_pullback
 integral curves over an algebraically closed field `k`, `deg π^* D = [k(X) : k(Y)] · deg D` for
 every divisor `D` on `Y`.
 
-(blueprint: `lem-sc-pullback-degree`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem Divisor.degree_pullback_eq_finrank_functionField_mul
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [Y.Over (Spec (.of k))]

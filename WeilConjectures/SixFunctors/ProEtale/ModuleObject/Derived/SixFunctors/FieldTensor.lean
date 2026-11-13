@@ -23,7 +23,8 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 # Tensor closure of rational localizing categories
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint: det-thm-sf-pf-field-tensor).
+`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint:
+proposition-projection-formula-rational-coefficients--1).
 -/
 
 @[expose] public section
@@ -166,7 +167,8 @@ private theorem constantModel_tensor_transport
 and its localizing closure is closed under derived tensor.
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint: det-thm-sf-pf-field-tensor).
+`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint:
+proposition-projection-formula-rational-coefficients--1).
 
 The coefficient hypothesis `hΛ` identifies `Λ` with the condensed ring of `E` or of the
 finite-subextension-valued `Q̄_ℓ` as commutative monoid objects (an isomorphism in `Mon`), so

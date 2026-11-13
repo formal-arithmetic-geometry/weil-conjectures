@@ -19,16 +19,16 @@ every étale sheaf `F` of `Λ`-modules on `X` and every `q > d`. This file prove
   `Λ`-modules, the projection map `Rf_* E ⊗ᴸ C_Y ⟶ Rf_*(E ⊗ᴸ C_X)` is an isomorphism
   (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantFunctor_obj`).
   Both sides are triangulated in `C` and commute with direct sums (`Rf_*` does, by the finite
-  cohomological dimension, `lem-kun-0f11`), and the map is an isomorphism for `C = Λ`, which
-  generates `D(Λ)`;
+  cohomological dimension, `proposition-open-direct-image-preserves-finite`), and the map is an
+  isomorphism for `C = Λ`, which generates `D(Λ)`;
 * for a finite ring `Λ`, `Rf_*` moves Tor amplitude from `[a, b]` to `[a, b + d]`
   (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension`), by
   the residue test.
 
-These are parts (1) and (2) of blueprint `det-cor-sf-direct-image-ctf-open-tor`, where `f` is an
-open immersion of schemes of finite type over a separably closed field (so that its
-cohomological dimension is finite, `lem-kun-0f10`). Part (3), on the pro-étale site, is in
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability`.
+These are parts (1) and (2) of blueprint `proposition-open-direct-image-preserves-finite`, where `f`
+is an open immersion of schemes of finite type over a separably closed field (so that its
+cohomological dimension is finite, `theorem-results-from-etale-theory--6`). Part (3), on the
+pro-étale site, is in `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability`.
 -/
 
 @[expose] public section
@@ -65,9 +65,9 @@ lemma hasFiniteCohomologicalDimensionMorphism_of_isZero_rightDerived :
 
 Both sides are triangulated functors of `C ∈ D(Λ)` commuting with direct sums: `Rf_*` does by
 the finite cohomological dimension
-(`AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar`, `lem-kun-0f11`), and so do
-the derived tensor products, `Lf^*` and the constant complex functor.
-The map is an isomorphism at `C = Λ`
+(`AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar`,
+`proposition-open-direct-image-preserves-finite`), and so do the derived tensor products, `Lf^*` and
+the constant complex functor. The map is an isomorphism at `C = Λ`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit`), and
 `Λ[0]` generates `D(Λ)` (`DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self`). -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantFunctor_obj

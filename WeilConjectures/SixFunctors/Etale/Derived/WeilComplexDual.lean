@@ -14,13 +14,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilDual
 Let `Λ` be a finite coefficient ring, `X` of finite type over an algebraically closed field `k`
 on which the exponent of `Λ` is invertible, and `g` an automorphism of `X` (the geometric
 Frobenius `g_γ`). For a strict Weil complex `(K, φ_K)` (`AlgebraicGeometry.Etale.WeilComplex`)
-this file packages the clauses of blueprint `prop-pod-dual-tate-data-compatibility` as
+this file packages the clauses of blueprint `theorem-poincare-duality-frobenius--2` as
 statements about strict Weil complexes:
 
 * `(K^∨, φ_{K^∨})` is a strict Weil complex
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual`): `K^∨ = RHom(K, Λ_X)` lies in
   `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_coefficientDual`) and its Weil
-  structure is the contragredient datum of `def-pod-dual-tate-datum`
+  structure is the contragredient datum of `theorem-poincare-duality-frobenius--1`
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual_frobenius_hom_hom`);
 * the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` is a morphism of strict Weil complexes
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientEvaluation`);
@@ -67,7 +67,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k)) [Local
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 include aX in
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 The coefficient dual `K^∨ = RHom(K, Λ_X)` of `K ∈ Dctf(X, Λ)` lies in `Dctf(X, Λ)`; for a
 perfect `K` it is again perfect
@@ -133,12 +133,12 @@ lemma unit_frobenius_hom_hom :
 
 variable {g}
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 The *dual strict Weil complex* `(K^∨, φ_{K^∨})` of a strict Weil complex `(K, φ_K)`: the internal
 hom `RHom(K, Λ_X)` of strict Weil complexes (`AlgebraicGeometry.Etale.WeilComplex.internalHom`)
 into the unit (`AlgebraicGeometry.Etale.WeilComplex.unit`). Its Weil structure is the
-contragredient datum of `def-pod-dual-tate-datum`
+contragredient datum of `theorem-poincare-duality-frobenius--1`
 (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual_frobenius_hom_hom`). -/
 noncomputable def coefficientDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     WeilComplex (ModuleCat.{u + 1} Λ) g :=
@@ -148,18 +148,18 @@ lemma coefficientDual_obj_obj (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientDual aX K).obj.obj = (DerivedCategory.coefficientDual _ X).obj (op K.obj.obj) :=
   rfl
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 The Weil structure of the dual strict Weil complex is the contragredient datum `φ_{K^∨}`
-(`AlgebraicGeometry.Etale.contragredientWeilDatum`) of `def-pod-dual-tate-datum`: the datum
-`φ_{K^∨}` defines a strict Weil complex `(K^∨, φ_{K^∨})`. -/
+(`AlgebraicGeometry.Etale.contragredientWeilDatum`) of `theorem-poincare-duality-frobenius--1`: the
+datum `φ_{K^∨}` defines a strict Weil complex `(K^∨, φ_{K^∨})`. -/
 theorem coefficientDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientDual aX K).frobenius.hom.hom =
       contragredientWeilDatum _ g.hom ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) :=
   (internalHomFrobenius_hom_hom aX K (unit Λ g)).trans
     (comp_map_unitOfConstructibleFiniteTor_frobenius_hom_hom g K (constructibleFiniteTor_unit Λ))
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 **The evaluation is a morphism of strict Weil complexes**: the coefficient evaluation
 `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` (`AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`) is a
@@ -180,7 +180,7 @@ lemma coefficientEvaluation_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientEvaluation aX K).hom.hom = DerivedCategory.coefficientEvaluation K.obj.obj :=
   rfl
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 The *twisted dual strict Weil complex* `(K^∨ ⊗ᴸ T, φ_{K^∨} ⊗ τ)` of a strict Weil complex
 `(K, φ_K)`, for a strict Weil complex `(T, τ)`; for the Tate line `(Λ_X(r), τ_r)` it is
@@ -190,7 +190,7 @@ noncomputable def twistedCoefficientDual (K T : WeilComplex (ModuleCat.{u + 1} �
     WeilComplex (ModuleCat.{u + 1} Λ) g :=
   ((tensor Λ g).obj (coefficientDual aX K)).obj T
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 The Weil structure of the twisted dual `K^∨ ⊗ᴸ T` is the tensor product of the contragredient
 datum `φ_{K^∨}` and of `τ`. -/
@@ -205,7 +205,7 @@ theorem twistedCoefficientDual_frobenius_hom_hom (K T : WeilComplex (ModuleCat.{
   rw [coefficientDual_frobenius_hom_hom]
   rfl
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 **The twisted evaluation is a morphism of strict Weil complexes**: for a strict Weil complex
 `(T, τ)` (the Tate line `(Λ_X(r), τ_r)`), the twisted evaluation `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T`

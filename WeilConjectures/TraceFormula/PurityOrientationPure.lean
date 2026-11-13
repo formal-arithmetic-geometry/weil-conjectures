@@ -32,12 +32,12 @@ for `ℚ̄_ℓ`-coefficients:
 ## Inputs
 
 - `ProEtale.CondensedRing.isDualizable_boundedConstructibleTateTwist`: the Tate twist
-  `ℚ̄_ℓ,X(d)` is invertible (blueprint `det-def-sp-tate-twist-locally-free` (3), subsection
-  `sk-prop-an`).
+  `ℚ̄_ℓ,X(d)` is invertible (blueprint `definition-tate-twists` (3), subsection
+  `proposition-purity-vector-bundles`).
 - `ProEtale.CondensedRing.smoothOrientation_baseChange`: the compatibility of the orientation
   `γ_f` with base change (SGA 4, Exposé XVIII, Théorème 2.9 (Var 4); blueprint
-  `sk-prop-sp-purity-bc` at the unit), required from the smooth purity section. Since the purity
-  map is the orientation, this is
+  `proposition-compatibility-purity-base-change` at the unit), required from the smooth purity
+  section. Since the purity map is the orientation, this is
   `ProEtale.CondensedRing.exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange`.
 
 -/
@@ -66,8 +66,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- **The purity map is compatible with base change** (SGA 4, Exposé XVIII, Théorème 2.9
-(Var 4); blueprint `sk-prop-sp-purity-bc` at the unit): for a cartesian square with `f` (hence
-`f'`) smooth of pure relative dimension `d`, the pullback of the purity map
+(Var 4); blueprint `proposition-compatibility-purity-base-change` at the unit): for a cartesian
+square with `f` (hence `f'`) smooth of pure relative dimension `d`, the pullback of the purity map
 `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ`, followed by the exceptional base change map at the unit, is the purity
 map of `f'` up to an isomorphism of the Tate twists. The purity map is the orientation
 (`smoothPurityMap_eq_smoothOrientation`), so this is `smoothOrientation_baseChange`. -/

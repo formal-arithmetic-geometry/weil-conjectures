@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 # Strata of a flat constructible sheaf and generation of `Dctf` by `a_! L`
 
 Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. This file proves blueprint
-`det-sf-flat-model-generation`:
+`lemma-flat-models-generators--2`:
 
 1. a flat constructible sheaf `F` of `Λ`-modules on `X_ét` has a finite chain of opens
    `∅ = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m = X` such that `F` restricted to each locally closed stratum
@@ -145,7 +145,7 @@ section Strata
 
 variable [Finite Λ]
 
-/-- Blueprint `det-sf-flat-model-generation`, part (1): strata of a flat constructible sheaf.
+/-- Blueprint `lemma-flat-models-generators--2`, part (1): strata of a flat constructible sheaf.
 
 Let `X` be Noetherian and `F` a flat constructible sheaf of `Λ`-modules on `X_ét`. There is a
 finite chain of opens `∅ = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m = X` such that, for every locally closed stratum
@@ -188,7 +188,7 @@ section Generators
 variable [Finite Λ]
 
 variable (Λ) in
-/-- Blueprint `det-sf-flat-model-generation`, part (2): the generators lie in `Dctf`.
+/-- Blueprint `lemma-flat-models-generators--2`, part (2): the generators lie in `Dctf`.
 
 Let `X` be Noetherian, `a = j ≫ g : U ⟶ X` a locally closed immersion (an open immersion
 `j : U ⟶ Ū` followed by a closed immersion `g : Ū ⟶ X`) and `L` a flat finite locally constant
@@ -241,7 +241,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek [Is
       torAmplitudeIn_singleFunctor_obj_of_flat Λ _ hf⟩⟩
 
 variable (Λ) in
-/-- Blueprint `det-sf-flat-model-generation`, part (2): every generator of `ctfGenerators` (an
+/-- Blueprint `lemma-flat-models-generators--2`, part (2): every generator of `ctfGenerators` (an
 object `Rg_* Rj_! L ≅ a_! L`) lies in `Dctf(X, Λ)`, for `X` Noetherian. -/
 theorem constructibleFiniteTor_of_ctfGenerators [IsNoetherian X]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -251,7 +251,7 @@ theorem constructibleFiniteTor_of_ctfGenerators [IsNoetherian X]
     (constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek Λ j g L hL).2.2.2
 
 variable (Λ) in
-/-- Blueprint `det-sf-flat-model-generation`, part (2): a flat constructible sheaf `F` on a
+/-- Blueprint `lemma-flat-models-generators--2`, part (2): a flat constructible sheaf `F` on a
 Noetherian `X` is an iterated extension of the sheaves `a_! L` of its strata, in the form: every
 triangulated property of objects of `D(X_ét, Λ)`, closed under isomorphisms and holding for the
 generators `Rg_* Rj_! L ≅ a_! L` (`L` lisse and flat on a stratum), holds for `F` placed in
@@ -273,7 +273,7 @@ theorem prop_singleFunctor_of_flat [IsNoetherian X]
       ⊤ (𝟙 X) (by simp) F hF)
 
 variable (Λ) in
-/-- Blueprint `det-sf-flat-model-generation`: Strata of a flat constructible sheaf and
+/-- Blueprint `lemma-flat-models-generators--2`: Strata of a flat constructible sheaf and
 generation by `a_! L`, part (3).
 
 Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. Then `Dctf(X, Λ)` is the

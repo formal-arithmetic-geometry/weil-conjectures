@@ -11,7 +11,7 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLeve
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
 -/
 
@@ -62,7 +62,7 @@ attribute [local irreducible] integralOperationsTotalTensorSection
 
 -- The sectionwise tensor calculation keeps three coefficient transports explicit.
 /-- Composition of the strict tensor-tower maps, before Roos realization.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
 
 Proof: at every positive quotient, apply the tensor generator formula to a

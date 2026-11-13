@@ -82,7 +82,8 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 /-- **Stalk of the transform at the origin of the dual line.** At the origin `0'` the Fourier
 kernel `ℒ_{ψ(x · 0)}` is constant, so the stalk formula identifies the fibre of `FT_ψ(K)` at
 `0'` with `RΓ_c(𝔸¹, K)[1]`: in each degree `r`, the stalk of `𝓗^r FT_ψ(K)` at `0'` is
-`H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. (blueprint: `lem-fd-stalk-at-origin`) -/
+`H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. (blueprint:
+`proposition-base-change-fourier-inversion--3`) -/
 theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
     (K : WeilComplex k₀ l (affineLine k₀)) (r : ℤ) :
     Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk
@@ -100,7 +101,7 @@ theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
 /-- **Stalk of the transform at the origin of the dual line**, for a middle extension: the
 fibre of `FT_ψ((j_*M)[1])` at the origin has cohomology only in degrees `-1` and `0`, namely
 `H_c^1(𝔸¹ ⊗ k̄, j_*M)` and `H_c^2(𝔸¹ ⊗ k̄, j_*M)`; the group `H_c^0` vanishes.
-(blueprint: `lem-fd-stalk-at-origin`) -/
+(blueprint: `proposition-base-change-fourier-inversion--3`) -/
 theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleExtension_origin
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) :
     Nonempty ((((WeilComplex.homologySheaf (-1)).obj
@@ -144,7 +145,7 @@ dense open `U₀` has punctual weights at most `β`, then so has its direct imag
 closed point of the line, including the finitely many points outside `U₀`, where it may be
 singular. This is the case of the affine line of
 `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`.
-(blueprint: `lem-wf-boundary-semicontinuity`) -/
+(blueprint: `proposition-weights-j-boundary-points--1`) -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
     {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β := by
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
@@ -163,7 +164,7 @@ Moreover `H_c^2(𝔸¹, j_*M) = 0`.
 Indeed the fibre of `FT_ψ(K)` at `0'` is `RΓ_c(𝔸¹, K)[1]`, the kernel being trivial there, so
 the fibre of `FT_ψ((j_*M)[1])` has `H_c^1` in degree `-1` and `H_c^2` in degree `0`, while the
 fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`.
-(blueprint: `cor-fd-origin-stationary-phase`) -/
+(blueprint: `corollary-h-1-c-stalk-fourier`) -/
 theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (PadicAlgCl l))
     (D D' : LisseOnDenseOpen k₀ l) (hFT : D.IsFourierPartner ψ D') :
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
@@ -188,7 +189,7 @@ end WeilSheaf.LisseOnDenseOpen
 
 /-- If `M` is irreducible, nonexceptional for a nontrivial `ψ` and punctually `ι`-pure of
 weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
-`w + 1`. (blueprint: `sk-c-dl-a1-hc1`, `cor-a1-fourier-middle-hc1`) -/
+`w + 1`. (blueprint: `corollary-h-1-c-stalk-fourier--3`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse)
@@ -212,7 +213,8 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →
 /-- If `M` is irreducible, unramified at infinity, not geometrically constant and punctually
 `ι`-pure of weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights
 at most `w + 1`: such an `M` is nonexceptional for every nontrivial `ψ`
-(`AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`). (blueprint: `sk-c-dl-a1-hc1`) -/
+(`AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`). (blueprint:
+`corollary-h-1-c-stalk-fourier--3`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity
     (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)

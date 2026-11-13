@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 # Restricted subgroup representations and the fixed-field comparison
 
 Source: Stacks Project, Tags 04JQ, 03QT and 03SF; blueprint
-`lem-sc-affine-generic-second`, proof paragraphs 1--2.
+`theorem-cohomology-curves--2`, proof paragraphs 1--2.
 -/
 
 @[expose] public section

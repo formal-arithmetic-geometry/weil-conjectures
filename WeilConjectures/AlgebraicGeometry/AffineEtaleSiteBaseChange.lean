@@ -35,7 +35,7 @@ namespace Scheme
 Proof (step 1): the projection to `U` is a base change of the affine morphism `h`,
 so it is affine by lem-weil-pbc-affine-morphism-permanence(1). Its target is affine,
 so its source is affine by part (2) of that node. Étaleness of the structure map is
-already supplied by lem-weil-pbc-etale-base-change-finite-limits(1). -/
+already supplied by situation-conventions(1). -/
 theorem affineEtaleBaseChange_isAffine {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] (U : T.FullAffineEtale) :
     IsAffine (((MorphismProperty.Over.pullback @Etale ⊤ h).obj
@@ -155,21 +155,21 @@ Lemma 04HR; Sites 00WV, 00WX, 00X1; Étale Cohomology 03Q1(2)
 
 Proof:
 1. Restrict ordinary étale base change to affine objects using
-   lem-weil-pbc-etale-base-change-finite-limits(1) and
+   situation-conventions(1) and
    lem-weil-pbc-affine-morphism-permanence(1),(2), as in the definition above.
 2. Finite jointly surjective étale covering families remain such after base change
    (lem-weil-pbc-etale-covering-base-change). Their domains are affine by step 1.
    A pullback of affine objects over an affine object is affine: its projection is
    affine by pqf-def-affine-morphism and lem-weil-pbc-affine-morphism-permanence.
    It is étale, and the canonical base-change comparison is an isomorphism, by
-   lem-weil-pbc-etale-base-change-finite-limits(2),(3). This proves both covering
+   situation-conventions(2),(3). This proves both covering
    continuity conditions of def-weil-pbc-sites-and-cohomology(3).
 3. Precomposition preserves sheaves. The sheafified presheaf left Kan extension
    is left adjoint to it (lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction).
 4. Restriction from full small étale sites to the affine sites is an equivalence
    (lem-weil-pbc-affine-etale-site-topos). Full-site direct image and affine-site
    direct image agree under restriction: both evaluate a sheaf at `V ×_T T'`, with
-   the same restriction maps (lem-weil-pbc-etale-base-change-continuous(3)).
+   the same restriction maps (situation-conventions(3)).
    Uniqueness of left adjoints therefore identifies affine inverse image with
    full-site inverse image conjugated by these restriction equivalences.
    Full-site inverse image preserves finite limits and colimits

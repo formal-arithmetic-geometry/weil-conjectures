@@ -19,7 +19,7 @@ public import Mathlib.Tactic.IrreducibleDef
 # Constant-coefficient pro-etale pullback comparison
 
 Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
-pur713-def-pullback-comparison.md (blueprint: pur713-def-pullback-comparison).
+pur713-def-pullback-comparison.md (blueprint: proposition-compatibility-purity-base-change--1).
 -/
 
 @[expose] public section
@@ -61,7 +61,7 @@ The composite of the canonical constant-section coefficient comparisons is the
 canonical comparison for the composite morphism.
 Source: the constant-section clause of
 literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
-pur713-def-pullback-comparison.md (blueprint: pur713-def-pullback-comparison).
+pur713-def-pullback-comparison.md (blueprint: proposition-compatibility-purity-base-change--1).
 Proof: apply the defining constant-section formula for rho to k, h and h ≫ k.
 The adjoint of the composite coefficient map therefore sends a constant section a
 to the constant section a, just as the adjoint of c_(h ≫ k) does. A map from the
@@ -146,7 +146,7 @@ coefficients, in the direction from the iterated pullback to the pullback of
 the composite.
 Source: the composition clause of
 literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
-pur713-def-pullback-comparison.md (blueprint: pur713-def-pullback-comparison).
+pur713-def-pullback-comparison.md (blueprint: proposition-compatibility-purity-base-change--1).
 -/
 noncomputable irreducible_def proEtaleConstantRingPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
@@ -166,7 +166,7 @@ noncomputable irreducible_def proEtaleConstantRingPullbackComposition
 
 /-- The normalized coefficient compositor, characterized by the canonical ring-sheaf
 comparison and the constant-section coefficient transport. Source: blueprint
-(blueprint: pur713-def-pullback-comparison). -/
+(blueprint: proposition-compatibility-purity-base-change--1). -/
 theorem proEtaleConstantRingPullbackComposition_eq
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] :

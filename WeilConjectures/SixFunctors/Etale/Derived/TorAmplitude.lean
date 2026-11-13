@@ -150,7 +150,7 @@ lemma DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFinite
 
 variable (A X)
 
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
+/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
 
 The small category `Dctf(X, A)` of bounded constructible complexes of finite Tor amplitude, as
 a full subcategory of `D(X_ét)`. It is the category on which the six operations of the
@@ -166,7 +166,7 @@ noncomputable def DerivedCategoryFiniteTor.ι :
     DerivedCategoryFiniteTor A X ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (DerivedCategory.constructibleFiniteTor A X).ι
 
-/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `sk-def-sf-categories`. -/
+/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `definition-constructible-sheaves`. -/
 noncomputable def DerivedCategoryFiniteTor.toBoundedConstructible :
     DerivedCategoryFiniteTor A X ⥤ DerivedCategoryBoundedConstructible A X :=
   ObjectProperty.ιOfLE inf_le_left

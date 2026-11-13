@@ -20,7 +20,8 @@ import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 Over an algebraically closed field every geometric point of the base lifts to the
 Artin–Schreier cover, and any two lifts differ by a unique translation. In particular the
 cover is surjective.
-Source: blueprint, lem-fd-as-cover, step (4); lem-sc-artin-schreier-k.
+Source: blueprint, lemma-artin-schreier-character-sheaf, step (4);
+proposition-p-torsion-smooth-proper-curve--2.
 -/
 
 @[expose] public section

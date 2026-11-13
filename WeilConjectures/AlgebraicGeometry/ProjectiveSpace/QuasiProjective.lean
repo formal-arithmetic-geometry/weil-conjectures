@@ -44,7 +44,7 @@ variable {k K : Type u} [Field k] [Field K] [Algebra k K]
 /-- A scheme `X` over a field `k`, with structure morphism `f`, is *quasi-projective* if it
 admits an immersion over `Spec k`, that is a locally closed immersion, into a projective space
 `ℙ(β; Spec k)` with finitely many homogeneous coordinates; equivalently, an open immersion into
-a closed subscheme of such a projective space. (blueprint: `def-sc-quasi-projective`) -/
+a closed subscheme of such a projective space. (blueprint: `lemma-proper-smooth-model--1`) -/
 def IsQuasiProjective {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Prop :=
   ∃ (β : Type u) (_ : Finite β) (i : X ⟶ ℙ(β; Spec (.of k))),
     IsImmersion i ∧ i ≫ ℙ(β; Spec (.of k)) ↘ Spec (.of k) = f
@@ -66,8 +66,8 @@ scheme of finite type gives an immersion into projective space
 (`AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`).
 
 This is an input to the proof of Stacks 0BF7 (`AlgebraicGeometry.GrpObj.exists_isImmersion_
-projectiveSpace`), used for blueprint `lem-sc-abelian-variety-projective` and the subsection
-`lem-sc-abelian-variety-projective`. -/
+projectiveSpace`), used for blueprint `lemma-symmetric-ample-sheaf--1` and the subsection
+`lemma-symmetric-ample-sheaf--1`. -/
 @[stacks 0BDE]
 theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     {α : Type u} [Finite α]

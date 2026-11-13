@@ -14,9 +14,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 
 The Künneth map of nearby cycles `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)`
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.kunnethMap`) is compatible with
-direct images (blueprint `det-nearby-kunneth-proper`): for morphisms of models `M ⟶ M₁` over `g`,
-`N ⟶ N₁` over `h` and `P ⟶ P₁` over `k`, compatible with the morphisms `P ⟶ M, N` and
-`P₁ ⟶ M₁, N₁`, the square
+direct images (blueprint `lemma-kunneth-map-proper-direct-image--1`): for morphisms of models
+`M ⟶ M₁` over `g`, `N ⟶ N₁` over `h` and `P ⟶ P₁` over `k`, compatible with the morphisms `P ⟶ M, N`
+and `P₁ ⟶ M₁, N₁`, the square
 ```
 Ψ_{M₁} Rg_* A ⊠ Ψ_{N₁} Rh_* B --Π--> Ψ_{P₁} (Rg_* A ⊠ Rh_* B) --Ψ(κ)--> Ψ_{P₁} Rk_* (A ⊠ B)
         |χ ⊠ χ                                                               |χ
@@ -167,13 +167,13 @@ variable {X X' Y Y' Z Z' X₁ X₁' Y₁ Y₁' Z₁ Z₁' : Scheme.{u}} {M : Nea
   {e₂ : Z₁ ⟶ Y₁} {e₂' : Z₁' ⟶ Y₁'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'} {h : Y ⟶ Y₁} {h' : Y' ⟶ Y₁'}
   {k : Z ⟶ Z₁} {k' : Z' ⟶ Z₁'}
 
-/-- **The Künneth map of nearby cycles and direct images** (blueprint `det-nearby-kunneth-proper`):
-for morphisms of models `ψ_M : M ⟶ M₁`, `ψ_N : N ⟶ N₁`, `ψ_P : P ⟶ P₁` compatible with
-`φ₁ : P ⟶ M`, `φ₂ : P ⟶ N`, `φ₁' : P₁ ⟶ M₁`, `φ₂' : P₁ ⟶ N₁`, the Künneth maps `Π` of nearby
-cycles, the ordinary Künneth maps `κ` and the pushforward exchanges `χ` form a commutative square
-`Rk'_* Π_{A,B} ∘ κ ∘ (χ ⊠ χ) = χ ∘ Ψ_{P₁}(κ) ∘ Π_{Rg_* A, Rh_* B}`. For proper morphisms the
-exchanges `χ` are the proper exchange isomorphisms, and this identifies `R(g × h)_* Π_{A,B}`
-with `Π_{Rg_* A, Rh_* B}`. -/
+/-- **The Künneth map of nearby cycles and direct images** (blueprint
+`lemma-kunneth-map-proper-direct-image--1`): for morphisms of models `ψ_M : M ⟶ M₁`, `ψ_N : N ⟶ N₁`,
+`ψ_P : P ⟶ P₁` compatible with `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N`, `φ₁' : P₁ ⟶ M₁`, `φ₂' : P₁ ⟶ N₁`, the
+Künneth maps `Π` of nearby cycles, the ordinary Künneth maps `κ` and the pushforward exchanges `χ`
+form a commutative square `Rk'_* Π_{A,B} ∘ κ ∘ (χ ⊠ χ) = χ ∘ Ψ_{P₁}(κ) ∘ Π_{Rg_* A, Rh_* B}`. For
+proper morphisms the exchanges `χ` are the proper exchange isomorphisms, and this identifies
+`R(g × h)_* Π_{A,B}` with `Π_{Rg_* A, Rh_* B}`. -/
 lemma kunnethMap_comp_pushforwardExchange (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
     (φ₁' : P₁.Hom M₁ e₁ e₁') (φ₂' : P₁.Hom N₁ e₂ e₂') (ψM : M.Hom M₁ g g')
     (ψN : N.Hom N₁ h h') (ψP : P.Hom P₁ k k')

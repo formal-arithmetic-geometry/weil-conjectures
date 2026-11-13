@@ -114,7 +114,7 @@ inductive assertion; no constructibility hypothesis on it has been used.
 4. Proceed by noetherian induction on closed subspaces $V$ of $T$, with the assertion quantified
 over every constructible $E_V^c$-module $P$, every filtered diagram with a common cohomological
 lower bound, and every integer shift. The empty scheme has the zero module category, so is the
-base case. Let $(S_b)$ be a finite stratification as in [def-constructible-stratification]. For
+base case. Let $(S_b)$ be a finite stratification as in [definition-constructible-sheaves--2]. For
 each $b$, the boundary $F_b=\overline{S_b}\setminus S_b$ is closed in $V$ because $S_b$ is locally
 closed. It has empty interior: a nonempty open contained in $F_b$ would be a nonempty relatively
 open subset of $\overline{S_b}$ disjoint from its dense subset $S_b$. Set

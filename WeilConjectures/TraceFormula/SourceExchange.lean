@@ -15,9 +15,9 @@ public import WeilConjectures.TraceFormula.SourceExchangeKernel
 For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with `q = f × f`, the kernel class of
 the coefficient pushforward `[f, g]_! u` is the transported kernel class of `u`
 (`ProEtale.CondensedRing.Correspondence.ProperPushforwardDiagram.kernelClass_pushforward`,
-blueprint `lem-trf-trace-source-exchange`). It follows from the class of the coefficient
-pushforward (`class_pushforward`, identity (b)) and the compatibility of the kernel pushforward
-with the Künneth–Verdier isomorphisms
+blueprint `theorem-proper-pushforward-lefschetz-verdier--1`). It follows from the class of the
+coefficient pushforward (`class_pushforward`, identity (b)) and the compatibility of the kernel
+pushforward with the Künneth–Verdier isomorphisms
 (`ProEtale.CondensedRing.kernelPushforward_comp_kunnethVerdierMap`, identity (a)).
 
 -/
@@ -66,8 +66,9 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-/-- **The class of the coefficient pushforward** (blueprint `lem-trf-trace-source-exchange`,
-identity (b)): `[δ ∘ Rg_* u ∘ γ] = Φ ∘ Rq_* [u] ∘ Ξ ∘ Rb_! η_g`. -/
+/-- **The class of the coefficient pushforward** (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, identity (b)):
+`[δ ∘ Rg_* u ∘ γ] = Φ ∘ Rq_* [u] ∘ Ξ ∘ Rb_! η_g`. -/
 theorem class_pushforward :
     P.pushforward.class =
       (boundedConstructibleLowerShriek ℓ P.pushforward.support).map
@@ -93,8 +94,9 @@ theorem class_pushforward :
       (boundedConstructibleUpperShriekAdjunction ℓ c.c₁).counit.app K)) P.class_pushforward_core
   simpa only [Functor.map_comp, Category.assoc] using h
 
-/-- **Exchange of the trace-class sources** (blueprint `lem-trf-trace-source-exchange`): the
-kernel class of the coefficient pushforward `[f, g]_! u` is the transported kernel class of `u`,
+/-- **Exchange of the trace-class sources** (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`): the kernel class of the coefficient pushforward
+`[f, g]_! u` is the transported kernel class of `u`,
 `[[f, g]_! u]_P = ρ_f ∘ Rq_* [u]_P ∘ Ξ ∘ Rb_! η_g`. -/
 theorem kernelClass_pushforward :
     P.pushforward.kernelClass =

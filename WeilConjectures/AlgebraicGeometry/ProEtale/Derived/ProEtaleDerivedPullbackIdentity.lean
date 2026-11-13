@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInvers
 # Identity normalization of ordinary pro-etale derived pullback
 
 Source: Stacks Project, Tag 09A5, identity specialization of `section-morphism`;
-the final sentence of the blueprint proof of `lem-pur-diagonal-base-change`
-(blueprint: lem-pur-proetale-derived-pullback-identity).
+the final sentence of the blueprint proof of
+`proposition-exceptional-inverse-image-smooth-morphism--7` (blueprint:
+lem-pur-proetale-derived-pullback-identity).
 
 The coprojection formula fixes the module comparison before scalar extension.
 The tensor formulas fix its scalar-transport identification. The final equality
@@ -320,10 +321,10 @@ m tensor a to c inverse(a)m and sends m back to m tensor 1. Composing with eM gi
 with the two displayed tensor formulas, naturally in the module.
 (5) Alpha identifies pullback with the identity, so pullback is additive and exact.
 Its termwise maps commute with differentials by naturality, giving the complex
-isomorphism b (lem-weil-pbc-exact-functor-derived-factorization).
+isomorphism b (situation-conventions).
 (6) The localization universal property descends b and its inverse to gamma. Its
 representative formula is precisely the factorization followed by Q(b), as displayed
-(lem-weil-pbc-localization-universal-property and def-weil-pbc-proetale-operations).
+(lem-weil-pbc-localization-universal-property and prose-03-02).
 (7) No argument uses a point of X or a nonzero ring. For the zero ring all unitary
 modules are zero; for the empty scheme the empty-cover sheaf axiom gives the same
 degenerate comparisons. Both cases satisfy the formulas without extra hypotheses. -/

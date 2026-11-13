@@ -24,7 +24,7 @@ exchange `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has a retraction `r` 
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor`).
 
 This is the coinvariant property used for the projection formula `(E ⊗ B)^P = E^P ⊗ B` in the
-generic-slicing step of Gabber's Künneth formula (blueprint `det-nearby-kunneth-invariants`,
+generic-slicing step of Gabber's Künneth formula (blueprint `prose-E-10`,
 `NearbyCyclesModel.isIso_kunnethMap_of_isIso_galoisLayer`). The proof is that of
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant`, with the
 continuity of the cohomology sheaves of the tensor product along the finite layers
@@ -370,7 +370,7 @@ private lemma tensor_coinvariant_property (T₀ : Type)
     (fun K a _ hcab ↦ tensor_coinvariant_isColimit N T₀ T K a hcab f' V b hV q) φ hφ
 
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
-[Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
+[Th. finitude], Lemme 3.4; blueprint `prose-E-10`; finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
 origin on the generic fibre. The pullback exchange `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has
 a retraction `r` such that, on the cohomology sheaves of `Lf'^*(-) ⊗ V` for any `f' : Z ⟶ X'` and

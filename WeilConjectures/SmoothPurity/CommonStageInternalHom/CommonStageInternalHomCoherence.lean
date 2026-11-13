@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Common.CommonStageInternalHomData
 import all WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomCoherenceLemmas
 
 /-! The missing normalized Hom comparison coherence for common-stage transport.
-Source: the common-stage internal-Hom paragraph of def-weil-derived-pullback-tensor-hom.
+Source: the common-stage internal-Hom paragraph of prose-03-02.
 (blueprint: lem-weil-common-stage-internal-hom-coherence).
 -/
 
@@ -240,7 +240,7 @@ private theorem comparison_tower
   exact step_tower l Ω W P le_rfl h k
 
 /-- The normalized Hom comparison square at one coefficient extension.
-Source: the common-stage internal-Hom paragraph of def-weil-derived-pullback-tensor-hom;
+Source: the common-stage internal-Hom paragraph of prose-03-02;
 The specified rational scalar Hom tower and naturality supply the finite-stage equations.
 (blueprint: lem-weil-common-stage-internal-hom-coherence).
 

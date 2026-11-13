@@ -48,7 +48,7 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 /-! # Tensor addition of framed Cartier pairs
 
 Source: Stacks Project, Tags 01WT, 01WU, 03AJ, 010L, 0117 and 0G78;
-blueprint main-20261015, lem-pur-divisor-class, clause (b).
+blueprint main-20261015, lemma-cycle-class-cartier-divisor, clause (b).
 (blueprint: lem-pur-cartier-pair-tensor-addition)
 
 The geometric, framed-torsor, relative-class, extension-class and naturality clauses

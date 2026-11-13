@@ -184,7 +184,7 @@ import all Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
 sk-lem-constructible-ext-continuity-stratum.md and its proof
-(blueprint: det-lem-constructible-ext-continuity-stratum).
+(blueprint: lemma-continuity-ext-out-constructible-complex--1).
 
 The colimit is taken in complexes of coefficient modules, hence degreewise. Derived Hom
 is taken in the ordinary unbounded derived category, using the same extension i_* u_! L
@@ -696,7 +696,7 @@ is invertible, equivalently bijective, for every integer q and every diagram wit
 common strict lower bound. Here a!L is i_*u_!L placed in degree zero.
 
 Source: blueprint stratum continuity lemma and its proof
-(blueprint: det-lem-constructible-ext-continuity-stratum).
+(blueprint: lemma-continuity-ext-out-constructible-complex--1).
 Proof for stage 3, following the updated node:
 1. Closed i and the quasi-compact open uS make Z and S qcqs. The complementary
    open j is already quasi-compact by hypothesis.

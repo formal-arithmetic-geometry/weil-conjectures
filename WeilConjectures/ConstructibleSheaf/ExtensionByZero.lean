@@ -16,12 +16,13 @@ complementary pair `(j, i)` of an open and a closed immersion. Here the second m
 pair is constructed:
 
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact`
-  (blueprint `lem-fin-extension-by-zero`): the extension by zero `j_! F` of a constructible
+  (blueprint `proposition-six-operations-dctf--6`): the extension by zero `j_! F` of a constructible
   sheaf along a quasi-compact open immersion `j` is constructible; the complement is the closed
   complement `j.closedComplement`.
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact`
-  (blueprint `lem-fin-closed-immersion`, sheaf part): the pushforward `i_* G` of a constructible
-  sheaf along a closed immersion `i` with quasi-compact open complement is constructible.
+  (blueprint `proposition-proper-direct-image-finite-coefficients`, sheaf part): the pushforward
+  `i_* G` of a constructible sheaf along a closed immersion `i` with quasi-compact open complement
+  is constructible.
 
 Quasi-compactness of the open immersion (retrocompactness of its range) is needed because
 constructible sheaves are defined via stratifications by *constructible* locally closed subsets;
@@ -48,7 +49,7 @@ variable {X : Scheme.{u}}
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- Blueprint `lem-fin-extension-by-zero`: Extension by zero preserves constructibility.
+/-- Blueprint `proposition-six-operations-dctf--6`: Extension by zero preserves constructibility.
 
 Let `j : U ⟶ X` be an open immersion and `F` a constructible sheaf on `U_ét`. Then `j_! F` is
 constructible on `X_ét`. The open immersion is assumed quasi-compact, which is automatic on a
@@ -63,8 +64,8 @@ theorem IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact {U : Schem
 variable [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
 
-/-- Blueprint `lem-fin-closed-immersion`, constructibility part: closed immersions preserve
-constructibility.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`, constructibility part: closed
+immersions preserve constructibility.
 
 Let `i : Z ⟶ X` be a closed immersion and `G` a constructible sheaf on `Z_ét`. Then `i_* G` is
 constructible on `X_ét`. The open complement of `i` is assumed quasi-compact, which is automatic

@@ -18,10 +18,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 # Duals of complexes with finite locally constant cohomology
 
 Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on a scheme `T` whose
-cohomology sheaves are finite locally constant (blueprint `lem-fin-lisse-field-dual`). Then the
-derived dual `C^∨ = RHom(C, λ_T)` has finite locally constant cohomology sheaves
-`H^q(C^∨) ≅ 𝓗om(H^{-q}(C), λ_T)`, and for every morphism `v : T' ⟶ T` the canonical comparison
-`Lv^*(C^∨) ⟶ (Lv^* C)^∨` (`AlgebraicGeometry.Etale.coefficientDualComparison`) is an isomorphism.
+cohomology sheaves are finite locally constant (blueprint
+`lemma-smooth-morphisms-locally-constant-sheaves`). Then the derived dual `C^∨ = RHom(C, λ_T)` has
+finite locally constant cohomology sheaves `H^q(C^∨) ≅ 𝓗om(H^{-q}(C), λ_T)`, and for every morphism
+`v : T' ⟶ T` the canonical comparison `Lv^*(C^∨) ⟶ (Lv^* C)^∨`
+(`AlgebraicGeometry.Etale.coefficientDualComparison`) is an isomorphism.
 
 A finite locally constant sheaf `E` over a field is flat and dualizable with dual `[E, λ]`
 (`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`), hence so is `E`
@@ -609,8 +610,8 @@ lemma dualizableSheafClass_isFiniteLocallyConstantSheaf (hΛ : IsField Λ) :
 
 variable {T : Scheme.{u}}
 
-/-- Blueprint `lem-fin-lisse-field-dual`: Duals of complexes with finite locally constant
-cohomology.
+/-- Blueprint `lemma-smooth-morphisms-locally-constant-sheaves`: Duals of complexes with finite
+locally constant cohomology.
 
 Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on `T` whose cohomology
 sheaves are finite locally constant. Then the cohomology sheaves of the derived dual
@@ -634,8 +635,8 @@ theorem isFiniteLocallyConstantSheaf_homology_coefficientDual (hΛ : IsField Λ)
     ((_root_.DerivedCategory.homologyFunctor _ (-q)).obj C))
   exact ⟨IsFiniteLocallyConstantSheaf.of_iso e.some.symm, e⟩
 
-/-- Blueprint `lem-fin-lisse-field-dual`: Duals of complexes with finite locally constant
-cohomology.
+/-- Blueprint `lemma-smooth-morphisms-locally-constant-sheaves`: Duals of complexes with finite
+locally constant cohomology.
 
 Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on `T` whose cohomology
 sheaves are finite locally constant. For every morphism of schemes `v : T' ⟶ T`, the canonical

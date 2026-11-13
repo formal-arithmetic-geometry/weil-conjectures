@@ -698,7 +698,7 @@ Source proof (the original affine route):
 1. Finite type over a field makes X Noetherian
 (`lem-weil-pbc-finite-type-over-noetherian`), hence its components are finite in number
 (`lem-weil-pbc-noetherian-finitely-many-components`). Normalize their reduced structures
-using `lem-sc-normalization-exists`. Each resulting map is finite and surjective, as is
+using `lemma-proper-smooth-model--1`. Each resulting map is finite and surjective, as is
 its finite disjoint union. On affine charts the coordinate ring is the finite product of
 the integral closures of the component domains. This includes the empty coproduct.
 2. By `lem-weil-pbc-reduced-noetherian-total-ring-fractions` the total fraction ring is the

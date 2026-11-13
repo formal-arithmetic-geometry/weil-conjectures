@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Local lifting of units along reduction
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1.
 (blueprint: lem-sc-reduction-units-epi)
 -/
 

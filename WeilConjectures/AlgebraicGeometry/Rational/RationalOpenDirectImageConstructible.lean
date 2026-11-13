@@ -50,16 +50,16 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Rational derived direct image along a quasi-compact open immersion preserves bounded
 constructibility with finite constant scalar models, for both rational coefficient rings.
-Source: blueprint sk-prop-open-coefficients, rational paragraph
+Source: blueprint proposition-direct-image-along-open-immersion, rational paragraph
 (blueprint: lem-sfb-rational-open-direct-image-constructible).
 
 Proof:
-1. Clause (4) of [sk-thm-sfb-qlbar-two-colimit], applied to U and X, identifies
+1. Clause (4) of [lemma-descent-finite-coefficient-field], applied to U and X, identifies
    finite-constant-model bounded constructibility with ring-object bounded constructibility
    for both E and the algebraic closure. Its positive-characteristic hypothesis follows from
    primality of ringChar k, and the distinct-prime hypothesis is part of the standing setting.
 2. Regard j as a morphism over Spec k. For E, convert the input by the equality on U, apply
-   [lem-sfb-dc-lower-star-preserves] with the continuous E coefficient ring, and convert the
+   [proposition-six-operations-dctf--5] with the continuous E coefficient ring, and convert the
    output by the equality on X. The underlying morphism and derived direct image remain j
    and its ordinary right derived module direct image.
 3. Apply the same argument to the algebraic-closure coefficient ring and pair the results.

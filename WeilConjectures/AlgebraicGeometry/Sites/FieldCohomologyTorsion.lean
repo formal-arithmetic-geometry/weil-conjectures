@@ -95,7 +95,7 @@ lemma exists_nsmul_eq_zero_sheafH_one_of_field
 
 /-- **Étale cohomology of a field is torsion in positive degrees.** Every class in
 `Hᵠ⁺¹(Spec K_ét, F)` is killed by a positive integer.
-(used in blueprint `det-thm-br-field-units`) -/
+(used in blueprint `lemma-cohomology-multiplicative-group`) -/
 theorem exists_nsmul_eq_zero_sheafH_of_field (q : ℕ)
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : Sheaf.H F (q + 1)) : ∃ n : ℕ, 0 < n ∧ n • x = 0 := by
@@ -112,7 +112,7 @@ theorem exists_nsmul_eq_zero_sheafH_of_field (q : ℕ)
 
 /-- **Étale cohomology of a field is torsion in positive degrees.** Every class in
 `Hᵠ⁺¹(Spec K_ét, F)` has finite additive order.
-(used in blueprint `det-thm-br-field-units`) -/
+(used in blueprint `lemma-cohomology-multiplicative-group`) -/
 theorem isOfFinAddOrder_sheafH_of_field
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
     (x : Sheaf.H F (q + 1)) : IsOfFinAddOrder x :=

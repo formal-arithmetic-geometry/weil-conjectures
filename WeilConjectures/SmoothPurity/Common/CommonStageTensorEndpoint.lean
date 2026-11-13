@@ -68,7 +68,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The normalized tensor comparison followed by input associators is the pair endpoint.
 
-Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
+Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
 Proof: Expand the normalized tensor comparison, keeping its transition isomorphisms.
 Functoriality combines the two input corrections with the inverses of the transition
 isomorphisms. This is exactly the defining common-stage tensor endpoint. The calculation

@@ -16,7 +16,7 @@ public import WeilConjectures.Tactic.TransportExact
 For the specialization `Sp_{X,x}` to the normal cone of a rational point, the comparison
 `ρ = (1 ⊠ δ_K) ∘ Π⁻¹ : Sp(K ⊠ D K) ⟶ K' ⊠ D K'` of the universal kernels
 (`ProEtale.CondensedRing.universalKernelSpecialization`) satisfies the second identity of
-blueprint `det-tf-sp-universal-kernel`,
+blueprint `lemma-nearby-cycles-universal-kernel`,
 
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`
 
@@ -132,7 +132,7 @@ variable (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
 -- matching the abstract statements against the concrete functors
 /-- **Nearby cycles of the universal kernel**, second identity (blueprint
-`det-tf-sp-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
+`lemma-nearby-cycles-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`, with `K' = Sp_{X,x}(K)`. -/
 theorem universalKernelSpecialization_comp_evaluationKernel
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

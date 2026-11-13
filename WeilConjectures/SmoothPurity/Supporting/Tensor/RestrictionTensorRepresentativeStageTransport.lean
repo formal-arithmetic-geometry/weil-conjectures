@@ -18,7 +18,7 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Stage transport of restriction tensor representatives
 
-Source: def-pur-section-invariant, common-stage subargument, steps 3--5
+Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3--5
 (blueprint: lem-pur-restriction-tensor-representative-transport).
 
 The stage-level transport identity used by the quotient representative theorem.

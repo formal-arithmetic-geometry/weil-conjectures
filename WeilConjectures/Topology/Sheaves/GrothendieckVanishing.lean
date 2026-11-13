@@ -17,7 +17,7 @@ Let `X` be a noetherian topological space of dimension `d` in which every irredu
 subset has a generic point (for instance the underlying space of a noetherian scheme). Then
 `Hᵠ(X, F) = 0` for every abelian sheaf `F` on `X` and every `q > d`
 (`TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt`, blueprint
-`lem-sc-zariski-dimension-bound`).
+`lemma-uniform-bounds-pro-etale-affines`).
 -/
 
 @[expose] public section
@@ -309,7 +309,7 @@ theorem subsingleton_H_of_isSupportedIn (n : ℕ) :
 end Vanishing
 
 
-/-- Blueprint `lem-sc-zariski-dimension-bound`: The Zariski dimension bound (Grothendieck
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: The Zariski dimension bound (Grothendieck
 vanishing).
 
 Let `X` be a noetherian topological space of dimension at most `d`, in which every irreducible

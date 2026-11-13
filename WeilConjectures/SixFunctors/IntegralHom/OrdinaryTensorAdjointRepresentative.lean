@@ -281,7 +281,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized comparison of left adjoints is the signed total-tensor exchange
 on K-flat representatives.
 
-Source: Stacks 07A4, 08J9; blueprint thm-coef-rational-verdier, paragraph 1.
+Source: Stacks 07A4, 08J9; blueprint theorem-verdier-biduality--3, paragraph 1.
 Proof: take the existing Koszul exchange of total complexes. To identify its
 localization with the comparison of adjoints, postcompose with an injective
 resolution of the target. Every curried morphism into the resulting derived Hom

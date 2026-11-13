@@ -255,7 +255,7 @@ restriction of `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` to `U'` — the pullback `Le^
 `Λ_{U'} ≅ Le^* Λ_U`, the shift compatibility of `Le^*` and the restriction of supports
 `Le^* Ri_! Ri^! Λ_U(1) ⟶ Ri'_! Ri'^! Λ_{U'}(1)` (`AlgebraicGeometry.Etale.supportedRestriction`)
 — is `∂κ(e^* f)`. This is the step "the Kummer class is compatible with the pullback" of the
-proof of `prop-pur-affine-line-orientation-base-change`: the naturality of the Kummer class
+proof of `proposition-purity-vector-bundles`: the naturality of the Kummer class
 (`AlgebraicGeometry.Etale.kummerClass_square`) combined with the base change of the supported
 localization triangle (`AlgebraicGeometry.Etale.supportedLocalizationBoundary_baseChange`).
 

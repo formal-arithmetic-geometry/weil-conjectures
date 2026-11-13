@@ -20,12 +20,12 @@ chart `D₊(T₀) ≅ 𝔸¹_S` at infinity.
 
 *Sign.* Forgetting supports, the Kummer boundary `∂κ(f)` of a local equation `f` of a divisor
 `D` is `c₁(𝒪(-D)) = -c₁(𝒪(D))`, not `c₁(𝒪(D))`: the Kummer and the support connecting maps
-anticommute (blueprint `lem-pur-divisor-class` (b); the blueprint's class `c_D` of
-`lem-amb-cartier-kummer-map` is `-∂κ(f)`). Hence `h = -c₁(𝒪(1))`, and the trace
+anticommute (blueprint `lemma-cycle-class-cartier-divisor` (b); the blueprint's class `c_D` of
+`lemma-cycle-class-cartier-divisor` is `-∂κ(f)`). Hence `h = -c₁(𝒪(1))`, and the trace
 `AlgebraicGeometry.Etale.projectiveLineTrace`, normalized by `Tr_q ∘ h♭ = 1`, is `-t_q` for
-the trace `t_q` of blueprint `def-amb-p1-trace`, normalized by `t_q(c₁(𝒪(1))) = 1`. The
-definitions here use `h` consistently, so nothing below depends on the sign; it matters only
-when comparing with the blueprint's normalization.
+the trace `t_q` of blueprint `lemma-cohomology-projective-line-trace`, normalized by
+`t_q(c₁(𝒪(1))) = 1`. The definitions here use `h` consistently, so nothing below depends on the
+sign; it matters only when comparing with the blueprint's normalization.
 
 More precisely, let `V ⊆ X` be an open, `s` a function on `V` and `i : Z ⟶ V` the zero locus of
 `s`, and assume that `i' = i ≫ (V ⊆ X)` is a closed immersion (`Z` is closed in `X`). The Kummer
@@ -58,7 +58,7 @@ isomorphism is made.
 
 ## Main statements
 
-- The decomposition map is an isomorphism (blueprint `thm-amb-p1-decomposition`):
+- The decomposition map is an isomorphism (blueprint `lemma-cohomology-projective-line-trace`):
   `AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`, in
   `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomology`.
 -/
@@ -163,8 +163,8 @@ immersion `i' = i ≫ (V ⊆ X)` of the adjoint `Λ_Z ⟶ Ri^! Λ_V(1)[2]` of th
 `Λ_X ⟶ Λ_X(1)[2]`.
 
 No excision isomorphism is chosen. It is the blueprint's class `cl(Z)` of a divisor
-(`lem-pur-divisor-class`), which forgets supports to `c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`
-(`lem-pur-divisor-class` (b)), not to `c₁(𝒪_X(Z))`. -/
+(`lemma-cycle-class-cartier-divisor`), which forgets supports to `c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`
+(`lemma-cycle-class-cartier-divisor` (b)), not to `c₁(𝒪_X(Z))`. -/
 noncomputable def chartBoundaryClass : constantComplex Λ X ⟶ (tateObject Λ X 1)⟦(2 : ℤ)⟧ :=
   haveI : HasInvertibleExponent Λ V := .of_hom V.ι
   gysinClass Λ (V.toScheme.zeroLocusSubschemeι {V.topIso.inv s} ≫ V.ι) _ 2
@@ -186,7 +186,7 @@ section ProjectiveLine
 variable (S : Scheme.{u}) [HasInvertibleExponent Λ S]
 
 /-- *The hyperplane class of the projective line*, the class `h` of blueprint
-`thm-amb-p1-decomposition` up to sign:
+`lemma-cohomology-projective-line-trace` up to sign:
 
 `h = -c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
 
@@ -195,8 +195,8 @@ on `ℙ¹_S = ℙ(Option (ULift (Fin 1)); S)`, the class of the section at infin
 `s = T_∞ / T₀` of the chart `D₊(T₀)` at infinity, which is closed in `ℙ¹_S`, the complement of
 the standard chart `D₊(T_∞) ≅ 𝔸¹_S` (`AlgebraicGeometry.ProjectiveSpace.range_chartBoundaryι`).
 The sign comes from `AlgebraicGeometry.Etale.chartBoundaryClass`, which forgets supports to
-`c₁(𝒪(-Z))` (blueprint `lem-pur-divisor-class` (b)); the decomposition
-`thm-amb-p1-decomposition` holds for `h` and `-h` alike. -/
+`c₁(𝒪(-Z))` (blueprint `lemma-cycle-class-cartier-divisor` (b)); the decomposition
+`lemma-cohomology-projective-line-trace` holds for `h` and `-h` alike. -/
 noncomputable def projectiveLineHyperplaneClass :
     constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
       (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=
@@ -211,7 +211,7 @@ whose first component is the unit of `Lq^* ⊣ Rq_*` read through
 `Lq^*(Λ_S(1)[2]) ≅ Λ_{ℙ¹_S}(1)[2]`, and whose second component is adjoint to the hyperplane class
 `h : Lq^* Λ_S ≅ Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
 (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`). This is the twist by `(1)[2]` of the
-decomposition `Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}` of `thm-amb-p1-decomposition`. -/
+decomposition `Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}` of `lemma-cohomology-projective-line-trace`. -/
 noncomputable def projectiveLineDecompositionMap :
     (tateObject Λ S 1)⟦(2 : ℤ)⟧ ⊞ constantComplex Λ S ⟶
       (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
@@ -229,7 +229,7 @@ noncomputable def projectiveLineDecompositionMap :
       ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
         projectiveLineHyperplaneClass Λ S))
 
-/-- Blueprint `def-amb-p1-trace`: *the trace of the projective line*
+/-- Blueprint `lemma-cohomology-projective-line-trace`: *the trace of the projective line*
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
 isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`); it is
 characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`. As `h = -c₁(𝒪(1))`

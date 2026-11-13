@@ -21,7 +21,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 /-!
 # Canonical base-change mates for arbitrary pro-etale ring sheaves
 
-Source: blueprint det-sf-open-closed-sequence-ring-sheaf, proof part (4).
+Source: blueprint proposition-extension-zero-restriction-closed-subscheme, proof part (4).
 (blueprint: lem-sf-ring-sheaf-base-change-mates)
 -/
 
@@ -179,7 +179,7 @@ private theorem openUnit {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 -- The transported module actions involve several nested functor structures.
 /-- The canonical open and closed base-change mates are invertible.
-Source: blueprint det-sf-open-closed-sequence-ring-sheaf, proof part (4);
+Source: blueprint proposition-extension-zero-restriction-closed-subscheme, proof part (4);
 Stacks Tags 03CB and 03CC
 (blueprint: lem-sf-ring-sheaf-base-change-mates).
 

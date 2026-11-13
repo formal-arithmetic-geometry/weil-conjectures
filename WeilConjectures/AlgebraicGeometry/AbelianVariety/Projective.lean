@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 # Abelian varieties are projective
 
 An abelian variety admits a closed immersion into a projective space over the base field, hence
-carries an ample invertible module (blueprint `lem-sc-abelian-variety-projective`, Stacks 0BFA), and
+carries an ample invertible module (blueprint `lemma-symmetric-ample-sheaf--1`, Stacks 0BFA), and
 the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
@@ -65,7 +65,7 @@ noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpOb
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
-/-- Blueprint `lem-sc-abelian-variety-projective`: Abelian
+/-- Blueprint `lemma-symmetric-ample-sheaf--1`: Abelian
 varieties are projective.
 
 Every abelian variety `A` over a field `K` admits a closed immersion into a projective space
@@ -85,7 +85,7 @@ theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spe
   have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
   exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Blueprint `lem-sc-abelian-variety-projective`: Abelian
+/-- Blueprint `lemma-symmetric-ample-sheaf--1`: Abelian
 varieties are projective.
 
 Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the
@@ -103,8 +103,8 @@ theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
   rw [tensorPow_succ, tensorPow_zero]
   exact (ρ_ _).symm
 
-/-- Blueprint `lem-sc-ample-tensor`: A symmetric ample module (also
-`lem-sc-ample-tensor`).
+/-- Blueprint `lemma-symmetric-ample-sheaf--1`: A symmetric ample module (also
+`lemma-symmetric-ample-sheaf--1`).
 
 Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then the
 symmetrisation `L ⊗ [-1]^* L` is ample: `[-1]` is an automorphism, so `[-1]^* L` is ample, and a
@@ -119,8 +119,8 @@ theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpOb
   rw [Over.w ι[A]] at h
   exact hample.tensorObj h
 
-/-- Blueprint `lem-sc-ample-tensor`: A symmetric ample module (also
-`lem-sc-ample-tensor`).
+/-- Blueprint `lemma-symmetric-ample-sheaf--1`: A symmetric ample module (also
+`lemma-symmetric-ample-sheaf--1`).
 
 The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
 *symmetric*, that is `[-1]^* N ≅ N`: since `[-1] ∘ [-1] = id`, one has

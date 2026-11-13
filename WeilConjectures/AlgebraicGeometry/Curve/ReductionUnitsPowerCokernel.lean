@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
 
 /-! # Comparison of the multiplicative and additive nilradical-power cokernels
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-cokernel)
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The cokernel of the constructed inclusion of consecutive nilpotent-units kernels
 is the additive étale sheaf of the constructed module `N^(j+1)/N^(j+2)`.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-cokernel)
 
 Proof: On an affine étale object V over an affine open U of X, write A=Γ(U,O_X),

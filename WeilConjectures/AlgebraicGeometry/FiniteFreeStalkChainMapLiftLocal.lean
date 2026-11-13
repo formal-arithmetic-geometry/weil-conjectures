@@ -12,8 +12,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink
 
 /-! # Finite matrix extension to one neighbourhood
 
-Source: lem-pc-perfect-locus, finite matrix extension argument, expanded in
-lem-pc-finite-free-stalk-chain-map-lift.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension argument, expanded
+in lem-pc-finite-free-stalk-chain-map-lift.
 (blueprint: lem-pc-finite-free-stalk-chain-map-lift-local)
 -/
 
@@ -24,7 +24,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 /-- Finite matrix extension to one neighbourhood.
 
-Source: lem-pc-perfect-locus, extension of the finite calculation to a
+Source: lemma-coherent-base-change-invertible-sheaves--3, extension of the finite calculation to a
 neighbourhood, expanded in lem-pc-finite-free-stalk-chain-map-lift, steps 1--3.
 
 Proof: For each nonzero term choose its finite free presentation. Pullback preserves

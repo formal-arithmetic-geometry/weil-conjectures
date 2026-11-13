@@ -415,7 +415,7 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerBaseChan
 /-! # The ordinary etale projective-line decomposition
 
 Source: main-20261015, thm-amb-p1-decomposition.md and its proof
-(blueprint: thm-amb-p1-decomposition).
+(blueprint: lemma-cohomology-projective-line-trace).
 -/
 
 @[expose] public noncomputable section
@@ -462,13 +462,13 @@ private theorem biprodMap_desc {C D : Type*} [Category C] [Category D]
 every change of base, including non-Noetherian S'. The existential Chern morphisms
 are fixed by `ordinaryFiniteP1ChernSpec`, the actual scalar-extended Kummer boundary.
 Source: main-20261015, thm-amb-p1-decomposition.md and its proof
-(blueprint: thm-amb-p1-decomposition).
+(blueprint: lemma-cohomology-projective-line-trace).
 
 Proof:
 1. Use lem-asd-ordinary-finite-p1-adjunction for the twisted decomposition b_q.
    Projective space is proper (lemma-nagata-projective-space-base-change-proper),
    and its source is Noetherian by pqf-lem-locnoeth-lft and quasi-compactness.
-   Tensor b_q with A_S(-1)[-2], and apply lem-amb-proper-coproducts-projection.
+   Tensor b_q with A_S(-1)[-2], and apply lemma-cohomology-projective-line-trace.
    The normalized twist pullback and evaluation of lem-asd-etale-finite-twist-pullback
    identify the two summands with A_S and A_S(-1)[-2], and the target with Rq_*A_P.
    Counit naturality and the adjunction triangle identities identify the components:
@@ -485,7 +485,7 @@ Proof:
    its affine chart and unit ideal on the other; multiplication by s is injective
    over any ring and after every base change. Its dual ideal is the specified O(1).
    Hence lem-asd-ordinary-supported-kummer identifies the pulled-back class with
-   the class over S'. The mate formula in def-kun-unbounded-exchange identifies
+   the class over S'. The mate formula in definition-derived-base-change-map identifies
    the pulled-back closed-immersion unit with the new unit, so this also compares
    the unsupported Chern classes: for the divisor inclusion i, exchange composed
    with the pulled-back unit u_D equals u_D', since both have identity adjoint.

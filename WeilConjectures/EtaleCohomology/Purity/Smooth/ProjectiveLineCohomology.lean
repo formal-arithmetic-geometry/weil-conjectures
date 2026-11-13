@@ -18,8 +18,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
 /-!
 # The cohomology of the projective line
 
-Blueprint `thm-amb-p1-decomposition`: for a scheme `S` on which the exponent of the finite
-coefficient ring `Λ` is invertible and a normalized rank-one datum, the decomposition map
+Blueprint `lemma-cohomology-projective-line-trace`: for a scheme `S` on which the exponent of the
+finite coefficient ring `Λ` is invertible and a normalized rank-one datum, the decomposition map
 `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the projective line `q : ℙ¹_S ⟶ S`
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`).
@@ -300,9 +300,9 @@ theorem isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap :
 
 end GeometricPoint
 
-/-- Blueprint `thm-amb-p1-decomposition`: *the cohomology of the projective line*. For a scheme
-`S` on which the exponent of `Λ` is invertible and a normalized rank-one datum, the decomposition
-map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
+/-- Blueprint `lemma-cohomology-projective-line-trace`: *the cohomology of the projective line*. For
+a scheme `S` on which the exponent of `Λ` is invertible and a normalized rank-one datum, the
+decomposition map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an isomorphism. It is checked at
 the geometric points of `S`
 (`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap`). -/

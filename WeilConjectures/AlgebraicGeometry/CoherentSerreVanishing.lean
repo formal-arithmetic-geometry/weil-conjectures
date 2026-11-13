@@ -58,14 +58,14 @@ Proof:
    give coherence. By lem-weil-pbc-closed-immersion-coherent-equivalence their
    pushforwards along i are coherent.
 5. The projection formula (lem-pc-closed-immersion-coherent-cohomology) gives
-   i_*G_{r,t} ≅ i_*G_r ⊗ O_P(t), inductively using lem-pc-twist-tensor and the
-   trivialization O_P(0) ≅ O_P from def-pc-projective-space-twist. All tensor products
+   i_*G_{r,t} ≅ i_*G_r ⊗ O_P(t), inductively using theorem-riemann-roch-coherent-serre-duality and
+   the trivialization O_P(0) ≅ O_P from def-pc-projective-space-twist. All tensor products
    and exponent laws are those of def-pur-sheaf-tensor-product.
 6. For n = td + r the tensor exponent laws give F ⊗ L^{⊗ n} ≅ G_{r,t}.
    Functoriality of pqf-def-cohomology and the affine closed immersion comparison
    lem-weil-pbc-affine-morphism-cohomology-edge identify its degree-p cohomology
    with H^p(P, i_*G_r ⊗ O_P(t)).
-7. Apply lem-pc-projective-space-serre-vanishing to each coherent i_*G_r, obtaining
+7. Apply lemma-coherent-base-change-invertible-sheaves--1 to each coherent i_*G_r, obtaining
    bounds t_r for all p > 0. Let T be their finite maximum and n₀ = dT. For n ≥ n₀,
    division by d gives n = td + r, 0 ≤ r < d, and t ≥ T ≥ t_r. The comparison of
    step 6 therefore gives vanishing simultaneously in every positive degree. -/

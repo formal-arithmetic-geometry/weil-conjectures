@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-! # The approximation comparison is an epimorphism
 
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
 (blueprint: lem-sc-affine-limit-sheaf-approximation-epi). -/
 
 @[expose] public section
@@ -76,7 +76,7 @@ private theorem sheafHom_ext_of_lowerStar
   exact congrArg (fun k ↦ F.obj.map e.hom.op ≫ k) hi
 
 /-- The counits of the pull-push approximation jointly cover the limit sheaf.
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1.
 (blueprint: lem-sc-affine-limit-sheaf-approximation-epi).
 
 Proof: A final directed reindexing reduces descent of a qcqs étale object to

@@ -13,9 +13,9 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 /-!
 # Canonical constant-coefficient derived direct image
 
-Source: Weil conjectures blueprint, `def-weil-derived-direct-image`, order 1468;
+Source: Weil conjectures blueprint, `prose-03-02`, order 1468;
 Stacks Project, Cohomology on Sites, Section 07A5
-(blueprint: def-weil-pbc-proetale-operations).
+(blueprint: prose-03-02).
 
 The canonical constant-section structure map already defines module direct image.
 Its right derived functor needs no separately supplied coefficient identification.
@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Additivity of the canonical sectionwise direct image, from its recorded left-exactness
 statement. Source: blueprint order 1468; Stacks Tag 03DA
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance proEtaleConstantModuleDirectImage_additive {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : (proEtaleConstantModuleDirectImage f A).Additive :=
   (proEtaleConstantModuleDirectImage_additive_leftExact f A).1
@@ -42,8 +42,8 @@ noncomputable instance proEtaleConstantModuleDirectImage_additive {X Y : Scheme.
 /-- The ordinary uncompleted unbounded right derived direct image, constructed using
 K-injective resolutions in all modules over the constant coefficient sheaf. The module
 functor is the recorded sectionwise direct image through the constant-section map.
-Source: blueprint `def-weil-derived-direct-image`, order 1468; Stacks Section 07A5
-(blueprint: def-weil-pbc-proetale-operations). -/
+Source: blueprint `prose-03-02`, order 1468; Stacks Section 07A5
+(blueprint: prose-03-02). -/
 noncomputable abbrev proEtaleConstantDerivedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=
   (proEtaleConstantModuleDirectImage f A).rightDerivedFunctor
