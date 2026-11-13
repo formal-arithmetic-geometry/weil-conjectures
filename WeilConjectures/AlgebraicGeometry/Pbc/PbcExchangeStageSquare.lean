@@ -349,7 +349,6 @@ variable (X Y X' Y' : Scheme.{u})
   [dY' : Fact (∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))]
   [iY' : Fact (∀ t : Y', IsUnit (l : Y'.presheaf.stalk t))]
 
-set_option profiler true in
 /-- `pbcExchangeStageSquare` on integral objects, with the composite comparisons of
 `StageSystem.Morphism.comp` expanded.
 Source: blueprint main-20261015, order 1312, final exchange sentence and the
@@ -493,6 +492,7 @@ theorem pbcExchangeStageSquare_integral
   have rLg' := (pbcScalarCompletedPull_rational l (pbcFiniteField.{u} l Ω E)
     (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) g'
     dX'.out dX.out iX'.out iX.out (presLg' E) (presLg' F)).exists.choose_spec ⟨K⟩
+  -- Compose the heterogeneous specifications before transporting their endpoints.
   have eRf := hom_eq_of_heq_objects ?x₁ ?y₁ (bRf₀.trans rRf)
   rotate_left
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]
@@ -526,6 +526,7 @@ theorem pbcExchangeStageSquare_integral
     ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)) _ eLg'
+  -- Reduce record projections without unfolding the concrete stage functors.
   dsimp only
   refine comp_comp_hom_eq_hom_comp (C := pbcStageCategory l Ω Y' F)
     ((βLg h).app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩))
@@ -547,6 +548,7 @@ theorem pbcExchangeStageSquare_integral
       ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
         ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
           (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))) _ eRf'
+  -- Focus the rewrites on their components to avoid unfolding the whole square.
   conv_lhs =>
     arg 1
     erw [βLg_inv]
@@ -593,7 +595,7 @@ theorem pbcExchangeStageSquare_integral
     erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
       (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
   set_option backward.isDefEq.respectTransparency false in
-  simp only [Functor.map_comp, eqToHom_map, Category.comp_id,
+  simp only [Functor.map_comp, eqToHom_map,
     Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
   set_option backward.isDefEq.respectTransparency false in
   simp only [pbcDescentPullback_map_homMk, pbcDescentDirectImage_map_homMk]
