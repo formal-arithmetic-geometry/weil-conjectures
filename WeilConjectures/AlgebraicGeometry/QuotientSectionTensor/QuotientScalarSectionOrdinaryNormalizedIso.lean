@@ -38,8 +38,10 @@ private theorem adjunction_unit_square
   have ht := h M (L.obj M) (𝟙 _)
   rw [Adjunction.homEquiv_id, Q.map_id] at ht
   erw [Category.comp_id, Adjunction.homEquiv_unit] at ht
-  simpa only [Category.assoc, ← U'.map_comp, Iso.inv_hom_id_app, U'.map_id,
-    Category.comp_id] using congrArg (fun f ↦ f ≫ U'.map (comparison.hom.app M)) ht
+  have hu := congrArg (fun f ↦ f ≫ U'.map (comparison.hom.app M)) ht
+  simp only [Category.assoc, ← U'.map_comp, Iso.inv_hom_id_app] at hu
+  erw [U'.map_id, Category.comp_id] at hu
+  exact hu
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -87,7 +89,6 @@ private theorem section_pair_unit (T : Scheme.{u})
             ⊗ₜ[(ring Λ T).obj.obj W,((sectionQuotient a T).hom.app W).hom] m) := by
   simpa only [ModuleCat.extendRestrictScalarsAdj_unit_app_apply] using s.ordinaryUnit N W m
 
-set_option trace.profiler true in
 -- The unit square compares the ordinary components of two scalar adjunctions.
 private theorem canonical_section_extension (T : Scheme.{u}) (M : Modules Λ T) :
     ∃ c : (equivalence Λ' T).functor.obj ((extension a T).obj M) ⟶
