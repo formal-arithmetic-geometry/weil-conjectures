@@ -18,7 +18,11 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Surjectivity of ordinary higher direct image on coproducts
 
-Source: Stacks Project, Tag 07TB, with Tags 01FF and 01FE.
+## References
+
+* [Stacks, Tag 07TB](https://stacks.math.columbia.edu/tag/07TB)
+* [Stacks, Tag 01FF](https://stacks.math.columbia.edu/tag/01FF)
+* [Stacks, Tag 01FE](https://stacks.math.columbia.edu/tag/01FE)
 -/
 
 @[expose] public section
@@ -52,29 +56,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The restriction and derived-functor comparisons require substantial elaboration.
 /-- Ordinary higher direct image sends a module-sheaf coproduct cofan to a jointly
-surjective family. No quasi-coherence hypothesis is needed.
-Source: Stacks Project, Tag 07TB, proof using cohomology on inverse images of affine
-opens, with Tags 01FF and 01FE.
-
-Proof: Restriction to an open subspace preserves coproducts of module sheaves, since
-it is left adjoint to direct image for the open immersion. For an affine open V of Y,
-its inverse image under f is quasi-compact and quasi-separated. The cohomology
-coproduct theorem on this inverse image says that every class with coefficients in
-the restricted coproduct is a finite sum of classes coming from its summands.
-This theorem applies to all module sheaves, not only quasi-coherent ones.
-Compute the ordinary higher direct images with injective resolutions. Their
-cohomology presheaves have values H^p(f^{-1}(V), -); the canonical maps from these
-presheaves to the higher direct image sheaves induce isomorphisms after
-sheafification, naturally in the coefficient module. Thus every germ in the target
-higher direct image is represented, on some affine neighborhood, by a cohomology
-class on its inverse image. Express this class as a finite sum as above. Each
-summand class maps to a section of the corresponding higher direct image; their
-finite sum lifts the original germ through the sheaf coproduct comparison.
-Consequently the comparison is surjective on every stalk. A map of module sheaves
-surjective on stalks is epic, proving the assertion. For an empty family, its
-coproduct is zero and additivity makes the target zero; for p = 0 this is the same
-argument with ordinary sections. Naturality of the resolution comparison identifies
-the maps from summands with the displayed rightDerived functor maps. -/
+surjective family. No quasi-coherence hypothesis is needed (Stacks, Tag 07TB). -/
 theorem moduleHigherDirectImage_coproduct_epi
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (I : Type u) (M : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))

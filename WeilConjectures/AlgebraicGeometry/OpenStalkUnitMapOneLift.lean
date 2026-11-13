@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift
 
 /-! # One unit-source open-site stalk map lifts on one neighbourhood
 
-Source: Stacks Project, Modules Tag 01CP, and Sheaves Tag 00A0 (3).
+## References
+
+* [Stacks, Tag 01CP]
+* [Stacks, Sheaves, Tag 00A0]
 -/
 
 @[expose] public section
@@ -23,24 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- A map from the stalk of the unit module lifts on one neighbourhood.
-
-Source: Stacks Project, Modules Tag 01CP, `lemma-stalk-internal-hom`,
-rank-one case; Sheaves Tag 00A0 (3), `lemma-restrict`.
-
-Proof: Via the open-subspace equivalence, the unit module is the structure
-module on U. Its stalk is the ring O_U,x, and restriction of scalars along
-U.ι.stalkMap identifies this with the regular O_X,x-module because that
-ring map is invertible. The map t is therefore determined by the image of 1.
-Represent this image by a section of N on an open neighbourhood V of x
-inside U. Multiplication by this section defines a morphism from the unit
-on V to N on V. The overMapUnitIso identifies its source with the restricted
-unit on U. Choose the natural restriction-stalk comparison given by the
-same-germ formula. The stalk of the resulting morphism and t agree on 1,
-and hence agree by linearity. Compose with the inverse target comparison
-for the displayed equality. No finite intersection or finite-free
-coordinate decomposition is involved. Empty neighbourhoods are excluded
-by x in U; the zero target or zero map uses the zero section. -/
+/-- A map from the stalk of the unit module lifts on one neighbourhood. -/
 theorem exists_open_stalk_unit_map_one_lift
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

@@ -42,14 +42,7 @@ private def openShriekFiniteCoefficientModEquivalenceIso
       (ModuleCat.{u + 1} (ULift.{u + 1} A)) j)
   exact a.leftAdjointUniq (b.ofNatIsoRight kr.symm)
 
-/-- The canonical finite coefficient equivalence commutes with derived open extension.
-
-Proof: the finite coefficient equivalence commutes with restriction by the canonical
-pullback comparison. Compose the two open-extension adjunctions with the coefficient
-adjunctions, transport their right adjoints through that comparison, and use uniqueness
-of left adjoints. Both open extensions and coefficient equivalences are exact. Apply
-their termwise derived functors to this isomorphism and the functor-composition
-isomorphisms. The argument also applies to an empty open subscheme and the zero ring. -/
+/-- The canonical finite coefficient equivalence commutes with derived open extension. -/
 theorem finiteCoefficientDerivedOpenShriekComparison
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Nonempty (

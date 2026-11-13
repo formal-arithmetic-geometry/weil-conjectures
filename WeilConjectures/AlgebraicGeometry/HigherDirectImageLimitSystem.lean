@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitClassVanishing
 /-!
 # Higher direct images and inverse limits of schemes
 
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1.
+## References
+
+* Stacks Project, Lemma 59.51.7, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -29,22 +31,9 @@ namespace AlgebraicGeometry.Etale
 /-- For a directed inverse system of schemes over `S` with affine transitions and qcqs
 structure maps, and any compatible system of abelian etale sheaves, the canonical map
 from the colimit of their degree-`p` higher direct images to the higher direct image
-of their colimit on the limit scheme is an isomorphism.
-`H` records the pulled-back sheaf diagram via `eH` and `hH`; `K` records the higher
-image diagram via `eK` and `hK`; `η` records the canonical comparison cocone via `hη`.
-These are presentations of the diagrams and comparison map, not restrictions on the sheaves.
-Source: Stacks, Tag 09Z1.
-
-Proof:
-1. By sbc-lem-higher-direct-image-presheaf (Tag 03Q8), higher direct images are
-   sheafifications of `U ↦ H^p(U ×_S X_i, F_i)` and `U ↦ H^p(U ×_S X, F)`.
-2. Cover each etale object by affine etale objects `V`. Base change to `V` gives
-   qcqs schemes with affine transitions and limit `V ×_S X`. Apply
-   lem-weil-pbc-etale-cohomology-limit-complex-systems (Tag 09YQ) to the sheaves
-   as complexes concentrated in degree zero to identify the colimit cohomology.
-3. These canonical identifications commute with restriction. Sheafification commutes
-   with colimits, and the affine-basis identifications therefore identify the two
-   sheafifications and prove that the canonical comparison is an isomorphism. -/
+of their colimit on the limit scheme is an isomorphism (Stacks, Tag 09Z1).
+The data `eH`, `hH`, `eK`, `hK`, `hη` are presentations of the diagrams and the comparison
+map, not restrictions on the sheaves. -/
 theorem isIso_higherDirectImage_limit_system {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

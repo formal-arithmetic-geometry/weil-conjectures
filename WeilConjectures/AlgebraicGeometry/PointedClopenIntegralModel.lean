@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # An integral-base model of a pointed clopen piece
 
-Source: Stacks Project, Tag 055N, reduction to the reduced closure of a point.
+## References
+
+* Stacks Project, Tag 055N.
 -/
 
 @[expose] public section
@@ -29,22 +31,7 @@ namespace AlgebraicGeometry
 
 /-- Realize a relatively clopen piece as a finite type family over an integral base,
 with the prescribed generic fibre and a rational point on that fibre. No connectedness
-or persistence of connectedness is asserted.
-
-Source: Stacks Project, Tag 055N, reduction to the induced reduced closed subscheme.
-Proof: put the reduced closed subscheme structure on the closure of `y` and restrict
-it to the inverse image of `V`. This is a nonempty open of an integral scheme, with
-generic point mapping to `y`. Base change `g` to it. The projection is a locally
-closed immersion, hence identifies its underlying space
-with the inverse image of `V ∩ closure {y}`. Pull back `A` under this identification
-and take its open subscheme. It is also closed, so its inclusion is quasi-compact:
-its intersection with any quasi-compact open is closed in that open. The resulting
-morphism `f` is locally of finite type and quasi-compact by base change and composition.
-The base inclusion gives the open embedding `j` into the closure of `y`. Closed base
-change preserves residue fields, so the fibre homeomorphisms followed by restriction
-to `A` give the displayed homeomorphisms. The base-changed section at the generic
-point belongs to this open subscheme by `hpoint`; its factorization yields the
-rational point `r`, and the section equation yields the final equality. -/
+or persistence of connectedness is asserted (Stacks, Tag 055N). -/
 theorem exists_pointed_clopen_integral_model {P T : Scheme.{u}}
     (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) (V : Set T) (A : Set P)

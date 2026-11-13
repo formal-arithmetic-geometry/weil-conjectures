@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 
 /-! # Shift compatibility of the selected pullback composition comparison
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -19,8 +23,8 @@ noncomputable section
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The composition comparison selected by its left-derived universal property.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The composition comparison selected by its left-derived universal property
+(Stacks, Tag 0D5S). -/
 abbrev pinnedPullbackComposition
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -85,16 +89,8 @@ private theorem kanMap_commShift
   simp only [Category.assoc]
   rw [hα, ← Category.assoc, fac]
 
-/-- The selected pullback composition comparison commutes with the counit-compatible shifts.
-Source: Stacks Project, Tag 0D5S, canonical derived pullback composition.
-Proof: precompose both proposed shift equations with the localization functor Qh
-and then postcompose with the selected counit of the composite pullback. The
-factorization of the selected left-derived lift identifies each side with the
-successive counits followed by the termwise composition comparison. The assumed
-shift equations for the counits and the shift equation for termwise tensor
-reassociation identify these expressions. The left-derived universal property
-makes the two lifted maps equal. This proves the equation for each integer;
-no cartesian, flatness or boundedness hypothesis enters. -/
+/-- The selected pullback composition comparison commutes with the counit-compatible shifts
+(Stacks, Tag 0D5S). -/
 theorem pinnedPullbackComposition_commShift
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

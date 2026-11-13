@@ -12,7 +12,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 /-!
 # Descent of separatedness along a surjective universally closed morphism
 
-Source: Stacks Project, Morphisms, Lemma 09MQ, part (4).
+## References
+
+* Stacks Project, Morphisms, Lemma 09MQ, part (4).
 -/
 
 @[expose] public section
@@ -24,20 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Separatedness over a scheme descends along a surjective universally closed morphism.
-Source: Stacks Project, Morphisms, Lemma 09MQ, part (4), and Schemes, the discussion
-following Definition 01KK.
-
-Proof:
-1. Let `Δ_X` and `Δ_Y` be the diagonals of `p` and `q`. The induced map `f ×_S f`
-   satisfies `Δ_X ≫ (f ×_S f) = f ≫ Δ_Y` by the universal property of the fibre product.
-2. The map `f ×_S f` is universally closed as a composite of base changes of `f`, hence is a closed map.
-3. Since `p` is separated, `Δ_X` is a closed immersion, hence a closed map. Thus the image of
-   `Δ_X ≫ (f ×_S f)` is closed.
-4. By the commuting square and surjectivity of `f`, this image is precisely the image
-   of `Δ_Y`.
-5. The diagonal `Δ_Y` is an immersion. Its closed image
-   makes it a closed immersion,
-   so `q` is separated. -/
+(Stacks, Tag 09MQ) -/
 theorem isSeparated_of_surjective_universallyClosed {S X Y : Scheme.{u}}
     (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (h : f ≫ q = p)
     [Surjective f] [UniversallyClosed f] [IsSeparated p] : IsSeparated q := by

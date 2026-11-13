@@ -12,7 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.LocalMapPullbackFamily
 import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComposition
 
 /-! # Recovery on an iterated pulled-back cover
-Source: Stacks Project, Tags 01ZR, 0095 and 0096. -/
+
+## References
+
+* [Stacks, Tags 01ZR, 0095 and 0096]
+-/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -65,23 +69,7 @@ private theorem conjugate_transport {C D : Type*} [Category C] [Category D]
       simp only [Iso.inv_hom_id_app_assoc]
     _ = d₀F.inv ≫ L₀.map r ≫ d₀G.hom := by rw [heF, heG]
 
-/-- Recovery for two successive base changes, without an earlier base scheme.
-Source: Stacks Project, Tag 01ZR, first proof, base change of local lifts;
-Tags 0095 and 0096, functoriality of module pullback.
-Proof: For each index of U₀, construct the isomorphism from the iterated chart
-(U₀.pullback₁ q).pullback₁ p to the direct chart U₀.pullback₁ b as
-pullbackRightPullbackFstIso followed by pullback.congrHom wpq. Both projection
-equations follow by the pullback universal property. Form d₀ from the pulled-back
-direct restriction comparison, the chart comparison v, and the restriction of c;
-form d₁ from the two successive restriction comparisons. The restriction-composition
-square identifies d₀ with l followed by d₁. Naturality of l transports conjugation
-of r₀ by d₁ to conjugation of its direct pullback by d₀. Apply pullback along the
-constructed chart isomorphism to the original recovery equation and substitute it.
-Naturality of v at δ and cancellation of v.inv with v.hom give restriction of
-c.inv;δ;c.hom. Functoriality and identity cancellation identify the left side with
-the localMapPullbackFamily in the conclusion. No gluing or descent is asserted;
-empty covers are vacuous, and zero modules, empty charts and identity maps use
-the same categorical identities. -/
+/-- Recovery for two successive base changes, without an earlier base scheme. -/
 theorem localMapRecovery_composition
     {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (b : Z ⟶ X)
     (wpq : p ≫ q = b) (U₀ : X.OpenCover.{u}) (F G : X.Modules)

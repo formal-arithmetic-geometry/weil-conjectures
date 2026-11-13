@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartUnitIso
 
 /-! # Coefficient h-maps on the affine scalar-extension chart
 
-Source: Stacks Project, Tags 02KH, 0096 and 0097.
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
 -/
 
 @[expose] public section
@@ -102,29 +106,7 @@ attribute [local irreducible] pushforward pushforwardComp pushforwardCongr pushf
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- The affine base-change chart and its coefficient h-maps, before taking cohomology.
-Source: Stacks Project, Tags 02KH (first paragraph), 0096 and 0097.
-
-Proof: Restrict the original fibre-product square using isPullback_resLE. The
-inequality L <= U identifies L with the intersection of the two inverse-image
-opens. Transport this square by hV.isoSpec and hW.isoSpec; hAlgebra and
-Scheme.Opens.toSpecΓ_SpecMap_appLE identify its lower map with baseChangeMap.
-The resulting isoPullback supplies sigma and both projection equations.
-
-Undo the restriction/pullback comparison and the pushforward composition and
-congruence comparisons on D.psi followed by restriction to L, obtaining b.
-Define phi to be the inverse pullback adjunction hom-equivalence applied to b.
-The fixed-chart theorem isIso_flatBaseChange_chart_unit_adjoint supplies its
-invertibility. Construct psi using pushforward of phi inverse along sigma.inv
-and the inverse identity/composition comparisons. Naturality on sections and
-cancellation of equality transports prove the two reciprocal identities.
-The second projection equation on global sections identifies the scalars;
-pushforward_map_smulHom and smulHom_naturality then prove the scalar square.
-Finally apply_symm_apply for the adjunction gives its unit followed by
-pushforward(phi)=b. Cancel the comparison isomorphisms to obtain the displayed
-unit square. No cohomology, Leray edge or invertibility of a base-change unit
-is used. Only invertibility of this explicitly constructed coefficient map is
-split off in the new fixed-chart theorem.
-The construction also applies to empty opens and zero modules. -/
+(Stacks, Tags 02KH, 0096 and 0097.) -/
 theorem exists_flatBaseChange_chart_coefficient_transport
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     (F : X.Modules) (I : InjectiveResolution F)

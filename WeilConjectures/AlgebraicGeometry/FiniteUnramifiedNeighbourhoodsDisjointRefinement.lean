@@ -15,7 +15,11 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Disjoint refinement of finite unramified neighbourhoods
 
-Source: Stacks Project, Tags 04DG, 04HI and 01W6.
+## References
+
+* [Stacks Project, Tag 04DG](https://stacks.math.columbia.edu/tag/04DG)
+* [Stacks Project, Tag 04HI](https://stacks.math.columbia.edu/tag/04HI)
+* [Stacks Project, Tag 01W6](https://stacks.math.columbia.edu/tag/01W6)
 -/
 
 @[expose] public section
@@ -39,21 +43,10 @@ private theorem closedImmersion_restrict_of_le
     simpa [r, t] using (isPullback_morphismRestrict π B).flip
   exact MorphismProperty.of_isPullback H hA
 
-/-- Source: Stacks Project, Tag 04DG followed by the shrinking argument of Tag 04HI.
-
-Proof: apply `finite_unramified_one_point_closed` to each piece, using its unique fibre
-point and purely inseparable residue extension. Intersect the finitely many neighbourhoods
-of `u`. Replace all pieces by their base changes to this intersection. Their inclusions
-into the pullback are proper by `IsProper.of_comp`, since the projection is separated
-and each piece is a closed immersion over the base, hence proper. Thus these open pieces
-are also closed. Each pairwise intersection is closed in one piece; its image in the
-base is closed since that piece is finite. These images avoid `u`: uniqueness of each
-piece's fibre would otherwise equate two distinct marked points. Delete the finite union
-of these images and base change again. The pieces are now disjoint and still closed
-immersions. Open base change identifies them with opens of the new pullback and preserves
-their marked points and their exhaustion of all lifts of the listed points. For an empty
-family use the whole base open; exhaustion already asserts that there are no such lifts.
-No étaleness or local finite type is needed for the ambient morphism. -/
+/-- Disjoint refinement of finite unramified neighbourhoods: the pieces can be shrunk to be
+pairwise disjoint closed immersions over a neighbourhood of `u`, keeping their marked points
+and exhausting all lifts of the listed points. No étaleness or local finite type is needed
+for the ambient morphism. (Stacks, Tags 04DG and 04HI.) -/
 theorem exists_disjoint_closed_immersion_refinement
     {X S U : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (g : U ⟶ S) (u : U)
     (n : ℕ) (x : Fin n → X) (m : Fin n → ℕ)

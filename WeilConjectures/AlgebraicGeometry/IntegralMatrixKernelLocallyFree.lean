@@ -54,15 +54,7 @@ private theorem localFree_of_comap {X : Scheme.{u}}
     ((Mod.comapEquivalenceOfIsIso φ).unitIso.app M).symm
 
 /-- A map of finite free integral modules whose rational cokernel is locally free
-has locally free integral kernel.
-Source: Bhatt--Scholze, Section 6.8; the continuous matrix pivot construction.
-Proof. Induct on the source rank using integralMatrix_pivot_cover. On a zero-matrix
-piece the kernel is the source. On a nonzero piece, the monic pivot identifies the
-kernel with the kernel of the smaller Schur complement. After rationalization the
-pivot is invertible, so its cokernel agrees with that of the Schur complement.
-Thus the smaller matrix satisfies the same rational-cokernel hypothesis. Apply
-induction, transport across the kernel isomorphism, undo coefficient normalization,
-and compose the resulting pro-etale covers. Rank zero and empty pieces are included. -/
+has locally free integral kernel. (Bhatt--Scholze, Section 6.8) -/
 theorem integralMatrixKernel_locallyFree (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})
@@ -126,8 +118,7 @@ theorem integralMatrixKernel_locallyFree (ℓ : ℕ) [Fact ℓ.Prime]
   obtain ⟨n, hn⟩ := hA
   exact H n X A B a hn hB hLF
 
-/-- The kernel is locally free when the rationalized matrix is surjective.
-Source: the preceding pivot induction, with zero rational cokernel. -/
+/-- The kernel is locally free when the rationalized matrix is surjective. -/
 theorem integralMatrixKernel_locallyFree_of_rational_epi
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) (n m : ℕ)

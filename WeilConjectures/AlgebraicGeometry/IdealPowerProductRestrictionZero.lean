@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Restriction detects vanishing of ideal-power products
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YD;
-Schemes, Lemma 01I8; Modules, Lemma 01CD.
+## References
+
+* Stacks Project, Tags 01YD, 01I8 and 01CD
 -/
 
 @[expose] public section
@@ -120,22 +121,7 @@ private theorem single_product_restrict {X : Scheme.{u}} (K : X.IdealSheafData)
 
 /-- Restricting an ideal-power product to an open gives zero exactly when the
 corresponding product of the restricted ideal and module is zero.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YD;
-Schemes, Lemma 01I8; Modules, Lemma 01CD.
-
-Proof: Restriction computes sections on image opens, with scalars transported by
-the structure-ring isomorphism. Kernels are computed on sections, so restriction
-preserves kernels; its restriction/direct-image adjunction preserves cokernels.
-Thus it is exact and preserves images. The tensor comparison and unit comparison
-carry the multiplication map to restricted multiplication: on a pure tensor a ⊗ m
-both composites give a • m. Pure tensors determine maps from tensor products.
-The restricted inclusion of K is the inclusion of K.comap V.ι, as follows on each
-affine open of V from the section formula for a quasi-coherent ideal. Induct on n:
-for n = 0 the ideal is the structure sheaf with identity inclusion; for n = 1 use
-the preceding identification; for n + 2 apply the product comparison to K and its
-(n + 1)-st power and compose inclusions. Apply the same comparison once more to F.
-This gives an isomorphism between the two objects below, which preserves and
-reflects being a zero object. The argument also covers the empty open and F = 0. -/
+(Stacks, Tags 01YD, 01I8 and 01CD) -/
 theorem idealPowerProduct_restrict_isZero_iff {X : Scheme.{u}}
     (K : X.IdealSheafData) (F : X.Modules) [F.IsQuasicoherent]
     (V : X.Opens) (n : ℕ) :

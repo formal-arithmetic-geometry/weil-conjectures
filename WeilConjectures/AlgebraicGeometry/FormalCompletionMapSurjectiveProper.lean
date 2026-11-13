@@ -45,12 +45,8 @@ private theorem hom_sections_natural {X : Scheme.{u}}
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Auxiliary surjectivity part of formal completion full faithfulness.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0883.
-Proof: Let H be the internal Hom sheaf. Given a morphism between completed modules,
-invert the completion-internal-Hom bijection to obtain its compatible reductions and then
-invert formal functions to obtain a global section of H. The corresponding coherent-module
-morphism completes to the given morphism. -/
+/-- Completion induces a surjection on morphisms between coherent modules on a proper
+scheme over an adically complete Noetherian ring (Stacks, Tag 0883). -/
 theorem formalCompletion_map_surjective_of_proper
     {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]

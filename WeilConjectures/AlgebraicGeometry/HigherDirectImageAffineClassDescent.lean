@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Descent of affine higher-image sections
 
-Source: Stacks Project, Tags 09Z1, 03Q8 and 0738.
+## References
+
+* Stacks Project, Tags 09Z1, 03Q8 and 0738.
 -/
 
 @[expose] public section
@@ -27,27 +29,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Every section of the limit higher image on an affine etale object descends.
-Source: Stacks Project, Tag 09Z1, proof; Tag 0738(4).
-
-Proof:
-1. Construct the opposite-indexed diagram K with canonical higher-image transitions
-   and the cocone B with the limit higher image as its point. The transition
-   coherence theorem proves the functor laws and the cone equations prove naturality.
-2. Let ψ be the comparison from the sheaf colimit of K to B.pt. On an affine etale
-   object, any section of colimit K has a stage representative by the filtered
-   sheaf-colimit representative theorem. If ψ kills it, the existing affine
-   eventual-vanishing theorem kills that representative at a later stage.
-   The colimit relation then makes the original section zero. Thus ψ is monic
-   on every affine etale object. Restriction to the dense affine etale site is
-   an equivalence, so it reflects this pointwise monomorphism back to sheaves.
-3. The local-surjectivity comparison theorem makes ψ epic. Module sheaves are
-   abelian, hence balanced, so ψ is an isomorphism. Transport the colimit universal
-   property across ψ: B is a colimit cocone with precisely its canonical legs.
-4. Apply the filtered sheaf-colimit representative theorem again, now to B and
-   the given section on V. Its finite-cover gluing argument produces one stage
-   section. Unop its index; the cocone leg is definitionally the required
-   higherDirectImageOverMap. This includes negative degrees and empty V. -/
+/-- Every section of the limit higher image on an affine etale object descends to a stage
+section (Stacks, Tags 09Z1 and 0738). -/
 theorem exists_higher_image_affine_class_rep
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

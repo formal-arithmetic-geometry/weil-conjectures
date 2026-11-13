@@ -10,7 +10,9 @@ import Mathlib.CategoryTheory.Sites.SheafHom
 /-!
 # The map from a glued integral module to its rational sheaf
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -188,12 +190,7 @@ noncomputable def latticeCoverEmbeddingHom (i : latticeCoverIndex U r) :
   exact (SheafOfModules.pushforward (F := (latticeCoverObject U r i).iteratedSliceForward)
     (𝟙 _)).map (pairEmbedding a L i.1 (latticeCoverPair a L U r x i))
 
-/-- The local lattice embeddings glue to a morphism from the tuple module.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-Proof: compose each tuple projection with its local integral embedding. The
-transition formula and tuple compatibility identify these maps on all overlap
-tests. The sheaf Hom glues the underlying additive maps; scalar linearity can
-be checked on the covering family, so the glued map is a module morphism. -/
+/-- The local lattice embeddings glue to a morphism from the tuple module. -/
 theorem exists_gluedLatticeEmbedding (hr : r ∈ (Scheme.ProEt.topology X) U) :
     ∃ e : gluedLatticeModule a L ha U r x hx ⟶ N,
       ∀ (i : latticeCoverIndex U r) (W : Over U)

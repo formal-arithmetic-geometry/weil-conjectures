@@ -9,7 +9,9 @@ import all WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
 
 /-! # Pullback of a module-derived scalar Kummer Chern class
 
-Source: Stacks 03PL and 03FD; blueprint finite diagonal calculation, steps 2 and 3.
+## References
+
+* Stacks Project, Tags 03PL and 03FD.
 -/
 
 @[expose] public noncomputable section
@@ -40,23 +42,8 @@ def ordinaryFiniteLinePullbackMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (ordinaryFiniteShiftedLinePullback A N hA t f hY).hom
 
 /-- The normalized derived pullback realizes the Kummer class of the pulled-back line.
-This assertion involves no direct image, diagonal, trace, or projective-line splitting.
-Source: Stacks 03PL, 03FD, Kummer pullback;
-lem-sp-finite-p1-diagonal-kummer-component-formula, proof steps 2 and 3.
-
-Proof: compute a derived map from the free constant module by an injective module
-resolution, then forget coefficients and evaluate on the integral generator one.
-The underlying abelian resolution is section-acyclic, so this computes the stated
-ordinaryFiniteClass.
-Its inverse-image comparison sends one to one. The normalized
-line comparison sends a root tensor a to the pulled root tensor a, hence commutes
-with ordinaryFiniteRootMap. Thus the class of the displayed transported arrow is
-the cohomology pullback of the original scalar Kummer class. Naturality of the
-Kummer short exact sequence identifies pullback of its connecting class with the
-connecting class of the pulled Picard class. Naturality of the frame torsor/Picard
-comparison identifies this class with Pic.map f M. Combining these comparisons
-gives the equation. Exact inverse image suffices; no flatness, finiteness,
-Noetherianity, or nonzero coefficient assumption is needed. -/
+This assertion involves no direct image, diagonal, trace, or projective-line splitting
+(Stacks, Tags 03PL and 03FD). -/
 theorem ordinaryFiniteChern_pullback (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Y : Scheme.{u}} (f : X ⟶ Y)

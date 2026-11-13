@@ -17,7 +17,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-! # GabberPrincipalClassLocallyZero
 
-Source: Stacks Project, Tag 0GY0. -/
+## References
+
+* [Stacks Project, Tag 0GY0](https://stacks.math.columbia.edu/tag/0GY0)
+-/
 
 @[expose] public section
 
@@ -41,20 +44,8 @@ private theorem vanishing_of_factorization {X Y Z : Scheme.{u}}
   exact hi (he.symm.trans (map_zero _).symm)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Every positive-degree class locally vanishes on principal opens.
-
-Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label lemma-gabber-criterion,
-proof's local triviality paragraph; Lemma 03QO and the local-ring continuity
-argument in Lemma 09AX (using Tags 03Q6, 09YQ and 03F3).
-
-Proof: identify the stalk on D(h) at p with the prime localization R_p.
-Transport strict henselianity along this isomorphism. Positive-degree etale
-cohomology over its spectrum vanishes by 03QO, so the local pullback of the class
-is zero. Local-ring continuity spreads this vanishing to an open neighborhood U
-of p in D(h). Choose a basic open D(f) containing p inside the image of U in
-Spec R and refine to D(fh). Its inclusion into D(h) factors through U, hence
-pullback composition kills the class there. Membership in D(f) gives f outside p.
-This works also for h = 0: there are no primes avoiding h. -/
+/-- Every positive-degree class locally vanishes on principal opens
+(Stacks, Tags 0GY0, 03QO, 09AX). -/
 theorem gabber_principal_class_locally_zero
     (R : Type u) [CommRing R]
     (hR : ∀ (p : Ideal R) [p.IsPrime],

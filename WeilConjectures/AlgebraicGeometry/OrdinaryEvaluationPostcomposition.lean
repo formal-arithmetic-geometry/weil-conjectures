@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentFactorizatio
 
 /-! # Ordinary evaluation postcomposition
 
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+## References
+
+* Stacks Project, Tags 08DJ, 08DM and 08DQ.
 -/
 
 @[expose] public section
@@ -115,18 +117,7 @@ private theorem ordinaryEvaluation_component_postcomposition (X : Scheme.{u}) (U
   · simp only [localEvaluationComponent, dite_eq_right hr, comp_zero,
       zero_comp]
 
-/-- Ordinary evaluation is natural in the coefficient complex.
-Source: Stacks Project, cohomology.tex, Tag 08DJ and
-Tag 08DQ, component calculation.
-
-Proof: Use chain-map extensionality, total tensor coproduct inclusions in degrees
-(p,q), and the Hom product projections indexed by r. Naturality of tensor inclusions
-changes the source coefficient by t.f p. Naturality of the Hom projection changes
-the target by t.f (r+n). Substitute hf and hf' on the two sides. When r+q is nonzero
-both components vanish. Otherwise expand localEvaluationComponent. Naturality of
-the tensor-Hom equivalence, associator, braiding and right unitor moves t.f p
-through evaluation. The chain-object transport to degree r+n is natural, so the
-components agree. The projections and inclusions are jointly detecting. -/
+/-- Ordinary evaluation is natural in the coefficient complex (Stacks, Tags 08DJ and 08DQ). -/
 theorem ordinaryEvaluation_postcomposition (X : Scheme.{u}) (U : X.Opens)
     (P F F' : CochainComplex (localEvaluationModules X U) ℤ) (t : F ⟶ F')
     (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)

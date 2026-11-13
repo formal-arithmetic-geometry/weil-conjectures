@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCupRealizationComplexData
 
 /-! # Cochain obligations for resolution pairings
 
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
+## References
+
+* Stacks Project, Tag 0FKU (construction before Lemma 20.31.3).
 -/
 
 @[expose] public section
@@ -119,17 +121,8 @@ private theorem whiskerLeft_val {M N N' :
 
 set_option backward.isDefEq.respectTransparency.types false in
 -- Tensor sheaf instances and the three transported component formulas need extra elaboration.
-/-- The assembled component maps satisfy the signed chain equation by Leibniz. Source: Stacks
-Project, Tag 0FKU, construction before Lemma 20.31.3.
-Proof: equality of maps out of a total term can be tested on its coproduct inclusions.
-For a nonnegative bidegree, equality out of the tensor sheaf is tested after the
-sheafification unit, then on elementary tensors of sections on every open. The assumed
-section formula computes l on these tensors. The total tensor differential is the sum
-of the left differential and (-1)^p times the right differential; D.leibniz identifies
-these with the target differential of D.pair. The extension isomorphisms identify all
-nonnegative differentials with the original ones. A negative factor makes its summand
-zero, so its equation is automatic. Thus the coproduct equations prove the chain equation.
-In particular, degree zero has positive sign and all negative total degrees are zero. -/
+/-- The assembled component maps satisfy the signed chain equation by Leibniz
+(Stacks, Tag 0FKU). -/
 theorem moduleCup_component_chain_equation {F G : X.Modules} (D : CupResolutionPairing F G)
     (l : ∀ n : ℤ, (D.left.integerComplex ⊗ D.right.integerComplex).X n ⟶
       D.target.integerComplex.X n)

@@ -13,7 +13,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 /-! # Canonical transport of Hom groups in the base-change system.
-Source: Stacks Project, Cohomology, Tag 0D5S and perfect.tex, Tag 09RE.
+
+## References
+
+* Stacks Project, Cohomology, Tag 0D5S; Tag 09RE.
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The canonical arrow from the colimit affine scheme to a finite stage.
-Source: Stacks Project, Tag 09RE, the affine limit system. -/
+/-- The canonical arrow from the colimit affine scheme to a finite stage. -/
 noncomputable def overlapLimitArrow
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} (k : Set.Ici i) :

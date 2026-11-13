@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 
 /-! # Affine sections of a module completion
 
-Source: Stacks Project, Tags 01I8 and 01IC, and the quotient-limit definition of completion.
+## References
+
+* Stacks Project, Tags 01I8 and 01IC
 -/
 
 @[expose] public section
@@ -73,24 +75,8 @@ private theorem quotient_sections_iso {Y : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The affine quotient identifications give a canonical completion isomorphism.
-Source: Stacks Project, Tags 01I8 and 01IC; Cohomology of Schemes, Lemma 088B.
-
-Proof: Set A = Gamma(Y,U), I = J(U), and M = Gamma(U,H). On an affine open,
-quasi-coherent sheaves are modules, and affine sections are exact. The range of the
-inclusion of J^(n+1)H is I^(n+1)M: the ideal power formula and tensor section formula
-identify multiplication, and exactness identifies its image. Thus the actual quotient
-projection is surjective with kernel I^(n+1)M. Its first isomorphism theorem gives q_n,
-with the displayed projection equation. Cancel the surjective quotient projections to
-check that q_n commutes with all transitions. Evaluation preserves limits, so these
-compatible isomorphisms identify the evaluated sheaf limit with the limit of M/I^(n+1)M.
-This limit is the adic completion: the omitted exponent-zero quotient is zero, and
-inserting its unique zero coordinate gives the inverse identification. Its projections
-are exactly AdicCompletion.eval at n+1, which proves the final equation.
-For the zero ideal the systems are constant; for the unit ideal they are zero. The zero
-module and empty affine open give zero modules throughout; no nonzero-ring assumption
-is needed. No proper morphism or comparison map is used in this statement.
--/
+/-- The affine quotient identifications give a canonical completion isomorphism
+(Stacks, Tags 01I8 and 01IC; Tag 088B). -/
 theorem formalCompletion_affine_sections {Y : Scheme.{u}}
     (J : Y.IdealSheafData) (H : Y.Modules) [H.IsQuasicoherent]
     (U : Y.Opens) (hU : IsAffineOpen U) :

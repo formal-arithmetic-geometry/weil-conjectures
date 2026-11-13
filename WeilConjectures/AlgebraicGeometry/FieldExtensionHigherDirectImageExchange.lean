@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Relative higher-direct-image exchange for field extensions
 
-Source: Stacks Project, Tag 0F1C.
+## References
+
+* [Stacks Project, Tag 0F1C](https://stacks.math.columbia.edu/tag/0F1C)
 -/
 
 @[expose] public section
@@ -30,19 +32,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Relative exchange for a sheaf annihilated by an integer invertible in the base field.
-This compares higher direct images, without an injectivity or acyclicity hypothesis.
-Source: Stacks Project, Lemma 59.90.1, Tag 0F1C.
-
-Proof: View F as a complex concentrated in degree zero. Its stalks are annihilated by n,
-which is invertible in k because its image in the field is nonzero. Apply relative
-field-extension exchange to the qcqs morphism f and this bounded-below complex.
-Exactness of inverse image identifies the degree-q homology of the pulled-back derived
-direct image with inverse image of its degree-q homology. The single-complex comparison
-identifies the other side with the q-th right derived direct image of the inverse image
-of F. This gives the displayed isomorphism, including q = 0. The zero sheaf and the empty
-scheme give zero objects on both sides. If n = 1, the annihilation hypothesis forces F to
-be zero; n = 0 is ruled out by hn. This is relative exchange, not global cohomology
-invariance or acyclicity of pulled-back injectives. -/
+This compares higher direct images, without an injectivity or acyclicity hypothesis
+(Stacks, Tag 0F1C). -/
 theorem nonempty_fieldExtension_higherDirectImage_iso
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [Algebra k K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]

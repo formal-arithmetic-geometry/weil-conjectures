@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.HorizontalInverseSquareFixedPasting
 
 /-! # Rectangle inverse mate with fixed endpoint comparisons
 
-Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
+## References
+
+* Stacks Project, Tags 0ATR and 0ATM
 -/
 
 @[expose] public section
@@ -142,23 +144,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Transport of the rectangle second mate to the mate of the pasted inverse ordinary
 base-change square using the fixed source and target comparisons. There is no
 middle right adjoint in this statement.
-Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-
-Proof: Transpose the ordinary rectangle base-change map under the outer
-pullback/direct-image adjunction. Expand its counit definition and the two square
-base-change maps. The associativity law of the pinned derived pullback composition
-family and the two projection equations identify the transposes; injectivity of
-the Hom equivalence gives ordinary base-change pasting. Conjugate and invert these
-ordinary maps. Transport the upper adjunction through the pullback associativity
-isomorphism, using the conjugate direct-image comparison. The counit compatibility
-of right-adjoint uniqueness identifies this transport with
-horizontalMateRightAdjointIso, hence with horizontalMateTargetIso after composing
-the input pullbacks. Naturality of the units and counits gives the asserted
-identity of the rectangle mate with the mate of the pasted inverse square. The
-source comparison is exactly horizontalMateSourceIso by its construction from
-the same composition family. No middle right adjoint, or invertibility of a second
-mate, is used. All steps are natural transformation identities, so identity maps,
-zero objects and empty schemes require no additional hypotheses. -/
+(Stacks, Tags 0ATR and 0ATM) -/
 theorem horizontal_rectangle_inverse_mate_fixed_transport
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}

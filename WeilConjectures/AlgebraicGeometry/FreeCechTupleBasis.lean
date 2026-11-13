@@ -15,7 +15,9 @@ public import Mathlib.LinearAlgebra.DFinsupp
 
 /-! # Tuple generators of the evaluated free Čech object
 
-Source: Stacks Project, Tags 03AT and 03F5, the degreewise direct-sum decomposition.
+## References
+
+* Stacks Project, Tags 03AT and 03F5.
 -/
 
 @[expose] public section
@@ -28,20 +30,17 @@ namespace AlgebraicGeometry
 variable (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale) (U : ι → X.Etale)
   (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u}) (W : X.Etale)
 
-/-- The simplicial free presheaf module attached to the family.
-Source: Stacks Project, Tag 03F5. -/
+/-- The simplicial free presheaf module attached to the family. -/
 noncomputable abbrev freeCechModule : SimplicialObject (PresheafOfModules.{u} O) :=
   (FormalCoproduct.mk ι fun i ↦ Over.mk (f i)).cech ⋙
     (FormalCoproduct.eval (Over U₀) (PresheafOfModules.{u} O)).obj
       (Over.forget U₀ ⋙ yoneda ⋙ PresheafOfModules.free O)
 
-/-- Lifts of a fixed map to the base, retaining their family indices.
-Source: Stacks Project, Tag 03AT. -/
+/-- Lifts of a fixed map to the base, retaining their family indices. -/
 abbrev freeCechLifts (φ : W ⟶ U₀) := Σ i : ι, {g : W ⟶ U i // g ≫ f i = φ}
 
 /-- The generator associated to a tuple of lifts: map to their product in the over
-category, take its free generator, and inject into the coproduct summand.
-Source: Stacks Project, Tag 03AT. -/
+category, take its free generator, and inject into the coproduct summand. -/
 noncomputable def freeCechTupleGenerator (n : ℕ) (φ : W ⟶ U₀)
     (x : Fin (n + 1) → freeCechLifts X ι U₀ U f W φ) :
     ((freeCechModule X ι U₀ U f O).obj (op ⦋n⦌)).obj (op W) :=
@@ -55,8 +54,7 @@ noncomputable def freeCechTupleGenerator (n : ℕ) (φ : W ⟶ U₀)
     (ModuleCat.freeMk g.left)
 
 /-- Linear extension of the tuple generators, first within each block and then over
-all maps to the base.
-Source: Stacks Project, Tag 03AT. -/
+all maps to the base. -/
 noncomputable def freeCechTupleMap (n : ℕ) :
     (Π₀ φ : W ⟶ U₀,
       Algebra.powerSetComplexObject (O.obj (op W)) (freeCechLifts X ι U₀ U f W φ) n) →ₗ[
@@ -66,8 +64,7 @@ noncomputable def freeCechTupleMap (n : ℕ) :
     Finsupp.lift _ _ _ (freeCechTupleGenerator X ι U₀ U f O W n φ))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation of the linear extension on one block generator.
-Source: Stacks Project, Tag 03AT. -/
+/-- Evaluation of the linear extension on one block generator. -/
 @[simp]
 theorem freeCechTupleMap_single [DecidableEq (W ⟶ U₀)] (n : ℕ) (φ : W ⟶ U₀)
     (x : Fin (n + 1) → freeCechLifts X ι U₀ U f W φ) (r : O.obj (op W)) :
@@ -96,7 +93,7 @@ private theorem lifts_heq {φ ψ : W ⟶ U₀} (h : φ = ψ)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The basis-index bijection: lift tuples give product maps, and product maps give
-lift tuples by projection. Source: Stacks Project, Tags 03AT and 03F5. -/
+lift tuples by projection. -/
 private noncomputable def tupleIndexEquiv (n : ℕ) :
     (Σ φ : W ⟶ U₀, Fin (n + 1) → freeCechLifts X ι U₀ U f W φ) ≃
       (Σ i : Fin (n + 1) → ι,
@@ -147,19 +144,7 @@ private noncomputable def tupleIndexEquiv (n : ℕ) :
     exact congrArg Over.Hom.left hh
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The tuple-generator map is bijective in each degree.
-Source: Stacks Project, Tag 03AT, the decomposition preceding the homotopy;
-Tag 03F5, first proof, with coefficients in O(W).
-Proof: Evaluation preserves coproducts of presheaf modules. Each evaluated free
-representable is the free O(W)-module on morphisms from W. Its basis is thus the
-pairs (i,g) with i: Fin (n+1) → ι and g: W → the product over U₀ of U(i(a)).
-Send such a pair to the common composite φ and its tuple of projections. Conversely,
-from φ and a tuple of lifts form the product map in Over U₀ by Pi.lift. The projection
-and uniqueness identities for the product show these functions are inverse. The
-free-module extension of this bijection and the regrouping of finite support by φ
-are linear isomorphisms; their inverse is exactly the displayed tuple-generator map.
-This also handles an empty family, when both bases are empty, and the zero ring,
-when both modules are zero. No lift of an arbitrary φ is chosen. -/
+/-- The tuple-generator map is bijective in each degree. (Stacks, Tags 03AT and 03F5) -/
 theorem freeCechTupleMap_bijective (n : ℕ) :
     Function.Bijective (freeCechTupleMap X ι U₀ U f O W n) := by
   classical

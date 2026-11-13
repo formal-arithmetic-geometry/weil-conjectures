@@ -21,7 +21,10 @@ import WeilConjectures.RingTheory.KoszulCoefficientTopHomology
 
 /-! # Coefficient comparison for scalar Koszul Ext
 
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext. -/
+## References
+
+* Stacks Project, Tag 0BQZ.
+-/
 
 @[expose] public section
 
@@ -34,9 +37,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The scalar coefficient comparison, induced by O_Y -> i_* O_Z. Pullback is
-applied only to the degree-n cohomology map, not to the Hom complex.
-
-Source: Stacks Project, Tag 0BQZ, coefficient map in lemma-regular-immersion-ext. -/
+applied only to the degree-n cohomology map, not to the Hom complex. -/
 noncomputable def koszulScalarExtCoefficientMap
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -76,27 +77,7 @@ private theorem koszul_bijective_of_square
 
 -- Matching the derived stalk model unfolds both coefficient objects and tensor pullback.
 /-- The canonical coefficient comparison is bijective on a stalk in a length-n
-Koszul-regular affine chart. This is solely a local assertion about a specified map.
-
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, final coefficient
-comparison between the two dual Koszul complexes.
-
-Proof: Write A = O_Y(U), I = ker(i)(U), and B = A/I. The closed immersion
-identifies the closed preimage with Spec B. The sheafified augmented Koszul
-complex resolves i_* O_Z on U, and its terms are finite free. Restriction of
-derived internal Hom and the bounded finite free Hom comparison compute the
-coefficient morphism by Hom(K,A) -> Hom(K,B). Naturality identifies the specified
-map induced by the adjunction unit with reduction of cochains modulo I.
-The degree-n top term of Hom(K,A) is free of rank one, its incoming differential
-has image I times that term, and its outgoing term is zero. Hom(K,B) has zero
-differential; its degree-n term is the same rank-one module modulo I. Thus
-reduction induces a bijection in top cohomology. Exact associated-module
-sheafification preserves this comparison. These cohomology modules are already
-B-modules, so tensor pullback along Spec B -> Spec A preserves the bijection.
-Taking the stalk at z and restricting to V preserves it. Use the common
-K-injective Hom complex to transport the computation to the supplied derived
-universe. For n = 0, I = 0 and reduction is identity. The point z excludes an
-empty chart preimage; there are no assumptions at other points. -/
+Koszul-regular affine chart. This is solely a local assertion about a specified map. -/
 theorem koszulRegularImmersion_ext_coefficient_stalk_iso
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

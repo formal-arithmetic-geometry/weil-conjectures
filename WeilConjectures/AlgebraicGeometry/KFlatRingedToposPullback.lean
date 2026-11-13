@@ -22,7 +22,10 @@ import WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
 import WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
 /-!
 # Ringed-topos pullback preserves K-flat complexes with flat terms
-Source: Stacks Project, Cohomology on Sites, Tag 0G7E, lemma-pullback-K-flat.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0G7E.
 -/
 @[expose] public section
 universe uC vC uD vD w
@@ -236,19 +239,10 @@ private theorem flatOnSite_mappingCone
 end ConeHelpers
 
 /-- Termwise pullback along a morphism of ringed topoi preserves K-flatness and flat
-terms. Source: Stacks Project, Tag 0G7E, lemma-pullback-K-flat.
+terms (Stacks, Tag 0G7E).
 
 `I` presents the algebraic inverse image of rings and modules along `uInv`; `hobj`
-and `hmap` identify `uStar` with inverse image followed by scalar extension.
-
-Proof: choose a flat K-flat resolution q: L → P whose pullback is K-flat. Since q
-is a quasi-isomorphism, its cone A is acyclic. Tensor commutes with mapping cones;
-the acyclic subcategory is triangulated, so K-flatness of L and P makes A K-flat.
-Its terms are finite sums of terms of L and P, hence flat. The acyclic case of
-Stacks 0G7E makes uStar(A) K-flat. Additive functors commute with cones, so the cone
-of uStar(q) is K-flat. Cone two-out-of-three with uStar(L) now proves that uStar(P)
-is K-flat. Flatness in each degree follows separately from flat-module pullback.
--/
+and `hmap` identify `uStar` with inverse image followed by scalar extension. -/
 theorem isKFlat_ringedToposPullback
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]

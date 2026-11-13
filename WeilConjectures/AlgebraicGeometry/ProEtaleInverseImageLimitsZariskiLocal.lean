@@ -10,7 +10,9 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 /-!
 # Zariski locality of preservation of pro-etale inverse-image limits
 
-Source: Stacks Project, Tag 09AA, proof of lemma-closed-immersion.
+## References
+
+* Stacks Project, Tag 09AA.
 -/
 
 @[expose] public section
@@ -32,15 +34,8 @@ private noncomputable def inverseImageRestrictionIso {X Y : Scheme.{u}} (f : Y �
       (E := Type (u + 1)) (ProEt.topology Y) (ProEt.topology X)
   exact (proEtaleSheafAdjunction f (Type (u + 1))).leftAdjointUniq a
 
-/-- Restriction along a weakly etale morphism preserves all limits of the fixed size.
-
-Source: Stacks Project, Tag 09AA, using the pro-etale over-category map/base-change
-adjunction and sectionwise limit preservation of restriction.
-
-Proof: the inverse-image functor is identified with the sheaf pushforward induced by
-composition on pro-etale objects, by uniqueness of left adjoints.  This restriction
-functor preserves limits sectionwise, hence the inverse image preserves all limits.
--/
+/-- Restriction along a weakly etale morphism preserves all limits of the fixed size
+(Stacks, Tag 09AA). -/
 theorem restriction_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X)
     [WeaklyEtale f] :
     PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1))) := by
@@ -59,20 +54,8 @@ private noncomputable def inverseImageCompIso {X Y Z : Scheme.{u}}
   exact (proEtaleSheafAdjunction (f ≫ g) (Type (u + 1))).leftAdjointUniq
     (a.ofNatIsoRight e)
 
-/-- Preservation of small limits by inverse image is local on affine opens of the target.
-
-Source: Stacks Project, Tag 09AA, proof of lemma-closed-immersion.
-
-Proof: for every affine open U in X, the Cartesian square with Y restricted over U
-identifies the two composites of inverse images by uniqueness of adjoints.  Restriction
-along either open immersion is sectionwise, so commutes with limits.  Consequently the
-restriction of the limit comparison for f is the comparison for the restricted morphism,
-which is invertible by hypothesis.  The inverse images of the affine opens cover Y.
-On every pro-etale object over Y their pullbacks form a covering family; the local inverses
-of a sheaf morphism agree on pairwise intersections and glue uniquely.  Thus the original
-limit comparison is invertible, proving the claim for every diagram of the fixed size.
-This argument applies also to empty schemes and imposes no separation condition.
--/
+/-- Preservation of small limits by inverse image is local on affine opens of the target
+(Stacks, Tag 09AA). -/
 theorem proEtale_inverseImage_limits_zariski_local
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (h : ∀ U : X.affineOpens,

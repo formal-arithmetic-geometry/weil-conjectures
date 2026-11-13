@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionTransport
 
 /-! # Gluing morphisms between fixed objects on an open union
 
-Source: Stacks Project, Tag 08BW.
+## References
+
+* [Stacks, Tag 08BW]
 -/
 
 @[expose] public section
@@ -42,25 +44,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible local maps between restrictions of two fixed ambient objects glue on
 an open union. The conclusion constructs a map, and does not construct objects
-or local isomorphisms. No lift to a morphism on all of X is asserted.
-Source: Stacks Project, Tag 08BW, exactness at the local Hom pair, on W union V.
-
-Proof: Set Y = W union V and pull W and V back to covering opens of Y. Restrict
-G and E to Y. Transport the local morphisms a and b through the canonical derived
-equivalences for the pulled-back open schemes. Their transported forms are
-kW(G) followed by a followed by kW(E) inverse, and similarly for V. The canonical
-composition comparison for a chain of open inclusions is obtained from
-Modules.overMapCompOverEquiv, overFunctorEquiv, restrictFunctorComp and
-restrictFunctorCongr. Its naturality and the equivalence triangle identities
-identify compatibility of these transported maps with exactly the hypothesis
-using sW and sV. Apply scheme_derived_hom_gluing on Y to the two fixed objects
-L(G), L(E) and this compatible pair. Transport its two restriction equations
-back and compose on the right with kW(E) and kV(E); cancellation of each
-comparison and its inverse gives the displayed equations. Additional derived
-categories on the pulled-back opens in Hom universe w are obtained from
-nonempty_derivedOpenLocalization and open_derived_localization_adjunction.
-Empty opens, a disjoint intersection, and the empty union are included by
-Mayer--Vietoris exactness; uniqueness is neither needed nor asserted. -/
+or local isomorphisms. No lift to a morphism on all of `X` is asserted. -/
 theorem exists_open_union_hom
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

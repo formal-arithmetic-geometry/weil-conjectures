@@ -14,8 +14,10 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Local sum characterization of finite étale traces
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
+## References
+
+* Stacks Project, Tag 03SH
+* SGA 4, Exposé IX, 5.1
 -/
 
 @[expose] public section
@@ -48,19 +50,7 @@ private theorem cofan_index_eq {Z : Scheme.{u}} {J : Type u} (V : J → Scheme.{
 
 /-- A trace characterized by local sums satisfies the split formula for a splitting
 of the original finite cover, by pulling that splitting back to each site object.
-Source: Stacks Project, Section 03SH, after Definition 03SE, split case.
-
-Proof. Fix `W`. Pull every piece `V_j → Y` back along `W ×_X Y → Y`. Its new inclusion
-is open and closed by base change. The pullback pieces cover and are disjoint, since
-preimages preserve unions and intersections. The resulting cofan is a coproduct:
-open immersions with disjoint images covering a scheme exhibit it as their coproduct.
-The map of each new piece to `W` is the base change of the isomorphism `V_j → X`;
-its inverse has projections `id_W` and `W → X → V_j`. Hence its section into
-`W ×_X Y` is precisely `pullback.lift id_W (W.hom ≫ t j ≫ i j)`.
-Apply the local sum characterization to this splitting. Its sum is the displayed
-sum, since the universal property identifies the two descriptions of the sections.
-The same argument includes an empty family: then the pullback is empty and the sum
-in the characterization is zero. -/
+(Stacks, Section 03SH, after Definition 03SE.) -/
 theorem finiteEtaleTrace_sum_of_localSums {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hf : Etale f) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (τ : (lowerStar AddCommGrpCat.{u + 1} f).obj

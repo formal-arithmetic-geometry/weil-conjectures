@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenStagePresentation
 
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
-Source: Stacks Project, Tags 09RE and 08BW.
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -70,34 +72,10 @@ private theorem localComparison_of_stage_presentation
   exact hb j f
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Outer-column recognition for the actual geometric Mayer--Vietoris construction.
-The input consists of a representing cocone natural in every testing object and a
-family whose outer objects and maps are explicitly open direct images and restrictions.
-In particular this statement does not apply to arbitrary distinguished triangle cocones.
-It asserts nothing about distinguishedness or the central Hom comparison.
-
-Source: Stacks Project, perfect.tex Tag 09RE, Mayer--Vietoris induction;
-cohomology.tex Tag 08BW.
-
-Proof:
-1. Quasi-separatedness of s₀ over the affine base makes X quasi-separated.
-   Hence U intersection V is compact. It lies in the image U union V of t.
-2. The single-open stage presentation supplies perfect local objects, natural
-   stage and apex Hom equivalences, and the two canonical transport equations.
-   Apply it with shift -1 for column 1 and shift 0 for column 4.
-3. The definition of the Hom row identifies both columns with the intersection
-   direct image. The map_hom₃ equation identifies transitions and cocone legs
-   with the corresponding restriction/direct-image maps, independently of boundary
-   and of the chosen restriction adjunctions. Compose the stage and apex
-   equivalences with ULift.down.
-4. The tail is nonempty and directed. The forgetful functor from abelian groups
-   preserves its colimit, after shrinking the filtered-colimit universe. Thus the
-   underlying canonical group-colimit cocone is a set-colimit cocone. Use it for H
-   and d in PerfectHomLocalComparison; the source equivalence is the identity.
-   The colimit inclusion/desc equation reduces its pinning equation to the apex
-   equation of step 2. Apply PerfectHomLocalMap.basic on U intersection V.
-5. Equality of Fin values reduces the supplied index to 1 or 4. The preceding
-   construction covers both cases, including an empty intersection. -/
+/-- Outer-column recognition (odd case) for the geometric Mayer--Vietoris construction:
+given a representing cocone natural in every testing object and a family whose outer objects
+and maps are open direct images and restrictions, the outer columns are local filtered Hom
+comparisons (Stacks, Tags 09RE and 08BW). -/
 theorem perfect_hom_mayerVietoris_geometric_columns_odd
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.OpenCoverTensorComparisonCoherence
 
 /-! # Transport of a supplied chart map lift to later stages
 
-Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096,
-and Limits Tag 01ZR, persistence under further base change.
+## References
+
+* [Stacks, Tag 0095], [Stacks, Tag 0096], [Stacks, Tag 01ZR]
 -/
 
 set_option cleanup.letToHave false
@@ -193,34 +194,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A chart lift at a supplied stage persists at every later stage. This is
-functorial transport only: no finite-presentation, affine-chart, directedness,
-affine-limit or limit-universal-property hypothesis is assumed.
-Source: Stacks Project, Tags 0095, 0096 and 01ZR, first proof.
-
-Proof: Fix a later stage l with j ≤ l and k ≤ l. In the category over Spec R(i),
-form q:Tk → Tj, s:Tl → Tk and v:Tl → Tj from the ring-system maps. The ring
-functor composition law and Spec.map_comp give s ≫ q = v. Write pk, pl and h
-for the cone projections to Tk, Tl and Tj over Spec R(i). Cone naturality gives
-pl ≫ s = pk, pk ≫ q = h and pl ≫ v = h. Applying baseChangeMap f yields the
-same triangles for the fibre-product schemes.
-Let Uk and Ul be the pulled-back covers. Cartesian chart squares give a map
-d:Ul.X(a) → Uk.X(a) with d ≫ Uk.f(a) = Ul.f(a) ≫ baseChangeMap(f,s), and
- d ≫ Uj.pullbackHom(baseChangeMap(f,q),a) =
- Uj.pullbackHom(baseChangeMap(f,v),a).
-Pull back the supplied chart map rk along d. Restriction of moduleBaseChange(f,v)
-is canonically isomorphic to d-pullback of restriction of moduleBaseChange(f,q),
-by tensor-to-ordinary pullback comparison, pullback composition and the first
-triangle. Conjugating d-pullback(rk) by this comparison gives the required rl.
-At the cone vertex the two iterated pulled-back charts are canonically isomorphic
-by cartesian pasting. Their refinement triangle follows from pl ≫ s = pk.
-Pull rk's recovery equation back along this refinement. Naturality moves each
-comparison through rk; associativity identifies the remaining comparisons with
-the ones for pl and v. These comparisons are mates of the same pushforward
-composition isomorphisms under the pinned adjunctions, so pushforward
-associativity establishes their coherence. Thus rl has the displayed recovery
-equation. The supplied recovery assertion, not finite presentation or the limit
-property, is the only input concerning φ. Empty charts, zero modules, identity
-transitions and equivalent indices of the preorder are all included. -/
+functorial transport only: no finite-presentation, affine-chart or limit hypothesis is
+assumed (Stacks, Tags 0095, 0096, 01ZR). -/
 theorem openCover_map_lift_transport
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u})

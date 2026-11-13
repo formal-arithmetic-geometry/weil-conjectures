@@ -13,7 +13,9 @@ public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Localized Mayer--Vietoris endpoint families
 
-Source: Stacks Project, Tags 08BV and 08DR.
+## References
+
+* Stacks Project, Tags 08BV and 08DR.
 -/
 
 @[expose] public section
@@ -32,8 +34,8 @@ variable (Y : Scheme.{u})
     HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))]
 
 /-- Restrict to the localized site of an open and take derived direct image back.
-This uses the actual right adjoint to restriction, not an unspecified witness.
-Source: Stacks Project, Tag 08BV. -/
+This uses the actual right adjoint to restriction, not an unspecified witness
+(Stacks, Tag 08BV). -/
 def perfectGluingDirectImage (W : Y.Opens) :
     DerivedCategory (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W)) ⥤
       schemeDerivedCategory Y := by
@@ -50,8 +52,7 @@ def perfectGluingDirectImage (W : Y.Opens) :
   letI : G.Additive := Functor.additive_of_preserves_binary_products G
   exact G.rightDerivedFunctor
 
-/-- Restrict to an open and take its derived direct image.
-Source: Stacks Project, Tag 08BV. -/
+/-- Restrict to an open and take its derived direct image (Stacks, Tag 08BV). -/
 def perfectGluingLocalTerm (W : Y.Opens) :
     schemeDerivedCategory Y ⥤ schemeDerivedCategory Y :=
   (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) W).mapDerivedCategory ⋙
@@ -65,16 +66,14 @@ def perfectGluingRestrictionProperty (W : Y.Opens) :
     Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings Y.toRingedSpace) W).mapDerivedCategory.obj E.obj ≅ Z)
 
-/-- The possible middle terms in the two-open Mayer--Vietoris triangle.
-Source: Stacks Project, Tag 08BV. -/
+/-- The possible middle terms in the two-open Mayer--Vietoris triangle (Stacks, Tag 08BV). -/
 def perfectGluingMiddleProperty (A B : Y.Opens) :
     ObjectProperty (schemeDerivedCategory Y) := fun Z ↦
   ∃ E : schemeDerivedQCohCategory Y, IsPerfect Y E.obj ∧
     Nonempty (((perfectGluingLocalTerm Y A).obj E.obj ⊞
       (perfectGluingLocalTerm Y B).obj E.obj) ≅ Z)
 
-/-- The possible overlap terms in the two-open Mayer--Vietoris triangle.
-Source: Stacks Project, Tag 08BV. -/
+/-- The possible overlap terms in the two-open Mayer--Vietoris triangle (Stacks, Tag 08BV). -/
 def perfectGluingOverlapProperty (A B : Y.Opens) :
     ObjectProperty (schemeDerivedCategory Y) := fun Z ↦
   ∃ E : schemeDerivedQCohCategory Y, IsPerfect Y E.obj ∧

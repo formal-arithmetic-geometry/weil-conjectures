@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Perfect pushed-forward pairings split the evaluation counit
 
-Source: Stacks Project, Tag 0BDP, final paragraph, the lifted dual basis.
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -50,18 +52,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A perfect pushed-forward pairing gives a retraction of the counit at its first
 factor, provided that factor's direct image is finite locally free. No rank comparison
-between the first factor and its direct image is needed.
-
-Source: Stacks Project, Tag 0BDP, final paragraph, lifting the coordinate dual basis.
-
-Proof: A perfect pairing between p_*M and p_*D makes p_*D the dual of p_*M, since
-p_*M is finite locally free. Pulling this exact pairing back gives an exact pairing
-of p^*p_*M with p^*p_*D. The cup-product counit identity identifies this pairing
-with evaluation after the two counits. Transpose the counit on the second factor
-using the pulled-back perfect pairing: this is a map M to p^*p_*M. Composing it
-with the first counit gives the identity, by that evaluation identity and the
-injectivity of transposition. Thus the first counit is split injective. Empty bases
-and zero-rank modules are covered by the exact-pairing identities. -/
+between the first factor and its direct image is needed. (Stacks, Tag 0BDP) -/
 theorem isSplitMono_counit_of_isIso_picardPushforwardPairing
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (hO : IsIso ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app

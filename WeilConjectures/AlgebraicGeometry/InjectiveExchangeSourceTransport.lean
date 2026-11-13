@@ -12,7 +12,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Source transport on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
+## References
+
+* Stacks Project, Tags 03Q8 and 03Q9.
 -/
 
 @[expose] public section
@@ -24,19 +26,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Expand the inverse of the fixed injective direct-image comparison.
-
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation;
-`sourceInjectiveDirectImageIso` in StrictLocalInjectiveSourceComparison.
-
-Proof: the defining isomorphism is the image of the direct-image transport by
-q', followed by the inverse derived unit, then the homotopy and complex
-localization comparisons. Inverting reverses these factors. The inverse of the
-inverse unit is the unit itself. The homotopy functor comparison at a quotient
-complex is the identity, as is quotientCompQhIso at that complex. Functoriality
-and the identity laws therefore leave exactly the unit followed by transport
-by q'.inv. Only source injectivity is used to define the original isomorphism;
-no inverse image or target direct-image unit appears. -/
+/-- Expand the inverse of the fixed injective direct-image comparison
+`sourceInjectiveDirectImageIso`. -/
 theorem injectiveExchange_source_transport {X S : Scheme.{v}} (f : X ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (J : CochainComplex.Plus (InjectiveObject

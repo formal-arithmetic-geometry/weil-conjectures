@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 /-!
 # Restriction of integral lattice pairs
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -22,31 +24,23 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.ProEtale
-/-- Cache the existing strong additive sheafification instance on a slice.
-Source: Mathlib, sheafification on small sites.
-Proof: specialize the existing instance. -/
+/-- Cache the existing strong additive sheafification instance on a slice. -/
 local instance restrictionStrongSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
     HasSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
   infer_instance
 
-/-- Cache additive sheafification on an iterated slice.
-Source: Mathlib, sheafification on small sites.
-Proof: specialize the existing instance. -/
+/-- Cache additive sheafification on an iterated slice. -/
 local instance restrictionWeakSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
     HasWeakSheafify (((Scheme.ProEt.topology X).over U).over T) AddCommGrpCat.{u + 1} := by
   infer_instance
 
-/-- Cache the local bijectivity criterion on an iterated slice.
-Source: Mathlib, sheafification on small sites.
-Proof: specialize the existing instance. -/
+/-- Cache the local bijectivity criterion on an iterated slice. -/
 local instance restrictionWEqualsOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
     (((Scheme.ProEt.topology X).over U).over T).WEqualsLocallyBijective
       AddCommGrpCat.{u + 1} := by
   infer_instance
 
-/-- Cache strong additive sheafification on an iterated slice.
-Source: Mathlib, sheafification on small sites.
-Proof: specialize the existing instance. -/
+/-- Cache strong additive sheafification on an iterated slice. -/
 local instance restrictionStrongSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
     HasSheafify (((Scheme.ProEt.topology X).over U).over T) AddCommGrpCat.{u + 1} := by
   infer_instance
@@ -268,11 +262,7 @@ noncomputable def IntegralLatticePair.restrict
     (SheafOfModules.overMap 𝓢 f).mapIso P.rationalization ≪≫
     (SheafOfModules.overFunctorMap 𝓢 f).app L
 
-/-- Images of restricted pairs are the original images on the smaller slice.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-Proof: the slice tensor comparison sends each sheafified unit tensor to the
-same unit tensor on the original slice. Applying the original rationalization
-therefore gives the same section, so the two maps have equal ranges. -/
+/-- Images of restricted pairs are the original images on the smaller slice. -/
 theorem IntegralLatticePair.restrict_image
     {L : SheafOfModules.{u + 1} 𝓢} (P : IntegralLatticePair a L U)
     (T : (Over V)ᵒᵖ) :

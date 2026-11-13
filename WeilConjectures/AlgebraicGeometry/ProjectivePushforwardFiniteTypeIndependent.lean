@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Independent finite type of projective pushforward
 
-Source: Stacks Project, Tag 02O4, Lemma 30.16.3.
+## References
+
+* [Stacks Project, Tag 02O4](https://stacks.math.columbia.edu/tag/02O4)
 -/
 
 @[expose] public section
@@ -50,21 +52,7 @@ private theorem restrict_sections_smul {Y S : Scheme.{u}} (p : Y ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite type of projective pushforward, obtained from degree-zero cohomology finiteness
-without the general proper-coherence theorem.
-
-Source: Stacks Project, Tag 02O4, Lemma 30.16.3, with Tags 01XZ and 01XJ.
-
-Proof: restrict to an affine open V of S. Base change of the specified closed immersion
-embeds its inverse image in projective space over V. The projective cohomology finiteness
-argument (finite sums of twists and descending induction, Tag 01YS) in degree zero makes
-Gamma(p^{-1}V,F) a finite Gamma(V,O)-module. Pushforward is quasi-coherent by the
-localization theorem for quasi-compact separated morphisms (Tag 01XJ). Its restriction to
-V is therefore associated to this finite module. The affine finite-type criterion,
-applied on the covering of all affine opens of S, makes the pushforward finite type.
-In Lean, degree-zero cohomology is identified linearly with sections, and the
-open-subscheme section isomorphism transports finiteness to Gamma(p_*F,V). The scalar
-calculation is naturality of p.app. This proof uses neither proper coherence nor its
-higher-direct-image consequences. Empty coordinates give the zero module. -/
+without the general proper-coherence theorem (Stacks, Tag 02O4). -/
 theorem isFiniteType_projective_pushforward_independent
     {Y S : Scheme.{u}} [IsLocallyNoetherian S]
     (p : Y ⟶ S) (N : Type u) [Finite N]

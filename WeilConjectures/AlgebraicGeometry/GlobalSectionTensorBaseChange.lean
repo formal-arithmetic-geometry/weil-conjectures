@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionLocalizationFactor
 
 /-! # Base change of the actual tensor localization construction
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E, final paragraph;
-algebra.tex, Tag 00DK (localization commutes with base change).
+## References
+
+* Stacks Project, Tags 0996, 099E and 00DK.
 -/
 
 @[expose] public section
@@ -95,25 +96,7 @@ private theorem augmented_tensor_map
 -- The canonical tensor units and scalar-extension functor require several conversions.
 /-- Global-section scalar extension commutes with the ordered tensor construction.
 This assertion involves only the actual tensor complexes, not an arbitrary complex
-or any ordered coordinate identifications.
-Source: Stacks Project, algebraization.tex, Tags 0996, 099E, final paragraph;
-algebra.tex, Tag 00DK.
-
-Proof: use the normalized strong monoidal structure on module scalar extension and
-its preservation of the small coproducts defining total tensors. The existing additive
-monoidal lift gives the tensorator on complexes. Its inverse unit is the single-complex
-comparison followed by the single of the fixed module multiplication map, hence the
-specified scalar-extended augmentation on the identity. For one localization factor,
-use the scalar-multiplication sequential colimit: the fixed unit intertwines the
-scalar transitions, and scalar extension preserves this colimit. The colimit comparison
-commutes with the localization unit by the first fraction-leg identity. The existing
-generic two-term comparison gives an isomorphism compatible with the projections.
-Induct on the actual recursive tensor list. The empty case is the unit inverse identity.
-For a successor tensor the first-factor and tail isomorphisms, then compose with the
-complex tensorator. Tensorator naturality for the two augmentations and left-unitor
-coherence give the tensor of their scalar extensions. Composition of tensor morphisms
-and the two induction equations give the specified target augmentation. The colimit
-argument and induction include zero or repeated sections, zero rings and empty lists. -/
+or any ordered coordinate identifications (Stacks, Tags 0996, 099E and 00DK). -/
 theorem ringFamilyGlobalExtension_tensor_iso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

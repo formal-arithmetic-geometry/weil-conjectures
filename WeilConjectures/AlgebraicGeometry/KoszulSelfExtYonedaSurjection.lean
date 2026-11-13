@@ -26,7 +26,10 @@ import WeilConjectures.RingTheory.KoszulConormalBasis
 
 /-! # Surjectivity of the exterior Yoneda comparison
 
-Source: Stacks Project, Tags 0BQW and 0BQY. -/
+## References
+
+* Stacks Project, Tags 0BQW and 0BQY.
+-/
 
 @[expose] public section
 
@@ -106,28 +109,7 @@ private theorem exterior_dual_stalk_surjection
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The alternating Yoneda products give a surjection from the exterior sheaf to
-self Ext on the Koszul-regular open. This asserts generation, not injectivity.
-
-Source: Stacks Project, Tags 0BQW and 0BQY, the degree-one boundary and the
-contraction-product spanning argument.
-
-Proof: The second-order thickening sequence gives the intrinsic degree-one map
-from the conormal dual to self Ext by pushing out extensions. Compose n such
-classes using derived internal Hom composition. On a regular affine chart,
-represent these classes by the degree-one derivations of the augmented Koszul
-DG algebra. Each derivation squares to zero and distinct derivations anticommute.
-Thus the product vanishes when two arguments agree, even in characteristic two;
-it is alternating, rather than merely skew symmetric. The exterior universal
-property and module sheafification give a map on the regular locus. All maps
-come from the intrinsic boundary and composition, so they commute with restriction
-and agree on overlaps without a quasi-separatedness hypothesis. The resulting
-map is linear for the quotient action. Tensor pullback of cohomology preserves
-this action and restriction yields the displayed morphism on V.
-On a chart of length m, Hom of the Koszul resolution into the quotient has zero
-differentials. Products of n distinct contraction classes span its degree-n term,
-so the morphism is surjective on each stalk. Use a common K-injective Hom model
-to compare the given derived universe. For n=0 the empty product is the unit;
-for n>m the target stalk is zero. Empty V has no stalk obligations. -/
+self Ext on the Koszul-regular open. This asserts generation, not injectivity. -/
 theorem koszulRegularImmersion_self_ext_yoneda_surjection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

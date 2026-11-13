@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 
 /-! # Local degree-zero generators for the kernel action
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Z.
+## References
+
+* Stacks Project, Tag 087Z
 -/
 
 @[expose] public section
@@ -147,32 +149,7 @@ private theorem affine_restriction_span {X : Scheme.{u}} (G : X.Modules)
     exact Submodule.add_mem _ hx hy
 
 /-- A kernel action with the representative formula in module degree zero is locally
-finitely generated in degree zero.
-Source: Stacks Project, Lemma 087Z, affine finite-generation argument via Lemma 087W;
-https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/087W.
-
-Proof: Choose an affine neighbourhood U of the given point. Restrict the coherent
-formal system to U, and apply coherentFormalModules_affine to obtain its finite
-completion module N with projections having kernels I^(r+1)N. The tilde/global
-sections adjunction and the ideal-power and quotient affine-sections formulas
-identify B_n and K_n on U with the sheaves of I^n/I^(n+1) and I^n N/I^(n+1)N.
-In particular K_0 is N/IN. Choose a finite family generating N/IN, and lift it to N;
-its quotient classes give sections s of K_0 on U. The completed-module associated
-graded generator theorem says that every class in I^n N/I^(n+1)N is a sum of
-classes of a_i times those fixed lifted generators, with a_i in I^n. Under the
-identifications, hact identifies each such product with M.act n 0 of the coefficient
-class and s_i: apply hact to the projection of the fixed lift to F_(n+1).
-Thus the finite sum of these degree-n action maps is an epimorphism on U. Tilde,
-a left adjoint, preserves the relevant quotient epimorphisms. On any smaller open
-V and any q in V, local surjectivity of this sheaf epimorphism supplies an open
-W inside V containing q and coefficient sections a_i of B_n on W expressing the
-restriction of y. This is exactly IsLocallyGeneratedInDegreeZero, including its
-HEq for n+0=n. No global lift on V or generating family on X is required.
-For n=0 the same quotient-generator argument applies. For the zero module use an
-empty family. If I is the unit ideal, every formal term is zero by annihilation;
-if I=0, all positive kernel degrees vanish. Empty schemes have no points to check.
-Only the action formula with module degree zero is used; no formula in positive
-module degree, nor a new construction of A or M, is needed. -/
+finitely generated in degree zero. (Stacks, Tags 087Z and 087W.) -/
 theorem formalKernel_graded_action_local_generators {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (A : GradedSheafAlgebra (formalAssociatedGradedPiece I))

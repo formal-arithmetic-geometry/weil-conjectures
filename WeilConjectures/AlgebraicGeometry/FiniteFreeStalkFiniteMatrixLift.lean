@@ -258,29 +258,7 @@ private lemma stalk_appTop_eq_germ {Y : Scheme.{u}}
     Category.assoc, ΓSpecIso_naturality] at h
   exact (cancel_epi ((ΓSpecIso Γ(Y, U)).hom ≫ U.topIso.inv)).mp (by simpa using h)
 
-/-- A finite family of maps between standard finite free sheaves lifts to one open.
-
-Proof: PullbackFreeIso identifies the source and target of each f q with
-standard free sheaves over Spec O_{Y,y}. Express f q as a matrix in these
-standard bases, using freeMatrix. Its entries are global functions on
-Spec O_{Y,y}, hence elements of O_{Y,y}, via the global-sections isomorphism
-for Spec. For each entry choose an open neighbourhood of y inside V and a
-section representing its germ. There are finitely many entries, since the
-index type and every rank are finite. Take the intersection U of these opens
-and restrict the representative sections to U. Use the restricted standard
-bases, identified by restrictFreeIso, to define g q by the matrix of these
-sections. The theorem freeMatrix_pullback and the germ equalities identify
-the normalized stalk pullbacks of these maps with the normalized given maps.
-To compare with the specified natural isomorphism e, use naturality on the
-standard free inclusions. After normalization by restrictFreeIso and
-pullbackFreeIso, every component of e acts on each summand by the same
-endomorphism of the unit sheaf. Such endomorphisms commute, since they act
-by multiplication by a global function. This common scalar therefore
-commutes with every finite matrix, so conjugation by e gives the same
-normalized map. Cancel the free isomorphisms to obtain the required equalities.
-Empty index types and zero ranks have no coefficients; take U=V
-when the coefficient list is empty. There is no change of arbitrary bases,
-complex, boundedness condition, or reverse-degree support in this lemma. -/
+/-- A finite family of maps between standard finite free sheaves lifts to one open. -/
 theorem exists_finite_free_matrices_of_stalk_local
     {Y : Scheme.{u}} {ι : Type v} [Finite ι]
     (y : Y) (V : Y.Opens) (hyV : y ∈ V)

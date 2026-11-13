@@ -22,7 +22,9 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Evaluation at affine weakly contractible pro-etale objects
 
-Source: Stacks Project, Tags 0946 (1), 03DA and 0935 (2).
+## References
+
+* Stacks Project, Tags 0946 (1), 03DA and 0935 (2).
 -/
 
 @[expose] public section
@@ -238,13 +240,7 @@ private theorem affine_evaluation_preserves_coproducts
   exact preservesColimitsOfShape_of_discrete ev
 
 /-- Abelian evaluation at an affine weakly contractible object is exact and
-preserves small colimits.
-Source: Stacks Project, Tags 0946(1), 0935(2), and 002F.
-Proof: kernels are sectionwise. Epimorphisms become surjective by weak contractibility.
-For coproducts, finite covering refinement bounds the supports of local representatives;
-a split projection and separatedness give a finite support globally. Additivity handles
-finite coproducts. Their comparisons are therefore bijective, and the presentation by
-coproducts and coequalizers gives all small colimits, including the empty colimit. -/
+preserves small colimits (Stacks, Tags 0946, 0935 and 002F). -/
 theorem affine_weaklyContractible_abelian_evaluation_colimits
     (X : Scheme.{u}) (W : X.ProEt) [IsAffine W.left]
     (hW : ∀ (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),

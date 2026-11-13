@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ThickeningIntegral
 /-!
 # Finiteness across a cartesian finite order thickening
 
-Source: Stacks Project, More on Morphisms, Lemma 37.3.3 (Tag 09ZW), part (8).
+## References
+
+* [Stacks Project, Tag 09ZW](https://stacks.math.columbia.edu/tag/09ZW)
 -/
 
 @[expose] public section
@@ -27,19 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Finiteness is equivalent before and after base change along a finite order thickening.
-Source: Stacks Project, Tag 09ZW, part (8).
-
-Proof:
-1. If `f'` is finite, its base change is finite.
-2. Nilpotence of `i.ker` gives full support, hence surjectivity of the closed immersion
-   `i`. Its base change to `X'` is a surjective closed immersion.
-   Thus the cartesian square is a morphism of thickenings, as in Stacks Tag 09ZU.
-3. If the base change is finite, it is integral and locally of finite type.
-4. Integrality lifts along this morphism of thickenings
-   (lem-weil-pbc-thickening-integral, Stacks Tag 09ZV (5)).
-5. Local finite type lifts along the cartesian finite order thickening
-   (lem-weil-pbc-thickening-lft-cartesian, Stacks Tag 09ZW (2)).
-6. Hence `f'` is integral and locally of finite type, and therefore finite. Together with step 1 this gives the equivalence. -/
+(Stacks, Tag 09ZW, part (8).) -/
 theorem isFinite_iff_of_finiteOrderThickening {S S' X' : Scheme.{u}}
     (i : S ⟶ S') (f' : X' ⟶ S') (hi : IsFiniteOrderThickening i) :
     IsFinite (pullback.snd f' i) ↔ IsFinite f' := by

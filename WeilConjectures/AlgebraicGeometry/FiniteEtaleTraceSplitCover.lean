@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 /-!
 # The presieve of finite étale splittings covers
 
-Source: Stacks Project, Lemma 04HN, and Section 03SH after Definition 03SE.
+## References
+
+* Stacks Project, Tags 04HN and 03SH
 -/
 
 @[expose] public section
@@ -24,11 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Split domains form a covering presieve. Apply the étale local splitting theorem to
-`W ×[X] Y → W`, and identify its further pullback with `T ×[X] Y` using pullback pasting.
-The inverses of the piece projections supply the splitting data. The resulting arrows cover
-all points of `W`; the sieve criterion then gives the covering. The empty base is covered
-vacuously. Source: Stacks Project, Lemma 04HN, and Section 03SH after Definition 03SE. -/
+/-- Split domains form a covering presieve.
+(Stacks, Lemma 04HN, and Section 03SH after Definition 03SE.) -/
 theorem finiteEtaleTrace_split_cover {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hfin : IsFinite f) (hf : Etale f) (W : X.Etale) :
     Sieve.generate (finiteEtaleTraceSplitPresieve f W) ∈ X.smallEtaleTopology W := by

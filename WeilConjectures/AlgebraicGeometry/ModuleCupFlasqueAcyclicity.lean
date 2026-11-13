@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Flasque module sheaves are acyclic for module global sections
 
-Source: Stacks Project, Tag 01E1 (flasque modules) and Tag 03FD (comparison).
+## References
+
+* Stacks Project, Tag 01E1 (flasque modules) and Tag 03FD (comparison).
 -/
 
 @[expose] public section
@@ -26,13 +28,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Flasqueness of a module's underlying abelian sheaf implies module cohomology vanishes.
-Source: Stacks Project, Tags 01E1 and 03FD.
-Proof: compare the underlying abelian group of module cohomology with the cohomology
-of the underlying abelian sheaf. Flasque acyclicity makes the latter group zero in
-positive degrees, hence the former is zero. The forgetful functor reflects zero objects.
-Together with the acyclic-resolution comparison theorem, this makes any nonnegative
-exact augmented resolution with flasque terms a computing resolution. -/
+/-- Flasqueness of a module's underlying abelian sheaf implies module cohomology vanishes
+in positive degrees (Stacks, Tags 01E1 and 03FD). -/
 theorem moduleCup_flasque_acyclicity (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     [TopCat.Sheaf.IsFlasque ((SheafOfModules.toSheaf

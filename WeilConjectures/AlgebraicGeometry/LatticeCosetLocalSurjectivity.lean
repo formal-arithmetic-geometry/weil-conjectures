@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.LatticeMatrixNeighborhoods
 /-!
 # Local representatives by constant matrix lattices
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -26,21 +28,7 @@ namespace AlgebraicGeometry.ProEtale
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Every lattice class is locally a constant matrix lattice in a rational trivialization.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases and lattice stabilizers.
-Proof: represent a section by a pair using surjectivity of the class presentation.
-Choose a covering trivializing its integral module. On every nonempty member, the
-rationalized basis and the fixed rational trivialization give mutually inverse matrices
-of continuous rational coefficients. Evaluation at a point shows that the integral
-basis has the prescribed rational rank n. Thus its embedded image is g A^n for a
-continuous invertible matrix g, with the same formula after every further restriction.
-At any point t, the inverse image under g(t) inverse times g of the open stabilizer
-GL_n(A) is an open neighborhood. On it both change matrices have continuous integral
-entries and are inverse, so the lattice image agrees with the constant lattice g(t) A^n.
-These open neighborhoods give a pro-etale covering. Compose it with the integral-basis
-covering. Equality of the images identifies the corresponding restricted class with
-the image of the constant coset under latticeCosetMap. Therefore the image sieve covers.
-The empty object is handled by the empty covering; rank zero uses the empty matrices. -/
+/-- Every lattice class is locally a constant matrix lattice in a rational trivialization. -/
 theorem latticeCosetMap_locallySurjective (X : Scheme.{u})
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

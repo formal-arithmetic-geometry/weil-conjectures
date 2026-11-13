@@ -26,7 +26,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 /-!
 # Finiteness for a compatible graded cohomology action
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 0897.
 -/
 
 @[expose] public section
@@ -90,44 +92,8 @@ private theorem finite_moduleCohomology
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Naturality and scalar transport need additional elaboration heartbeats.
-/-- The compatible graded cohomology direct sum has a finitely generated top submodule.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897(1), relative-spectrum
-proof of finiteness, with the compatible action given as an input.
-
-Proof:
-1. Let X' = X times_(Spec A) Spec B, with projection pi to X and f' to Spec B.
-Properness is preserved by base change. Since B is finite type over Noetherian A,
-B is Noetherian, and the finite-type scheme X' over Spec B is Noetherian. Also X
-is quasi-compact and quasi-separated, since it is proper over the affine base.
-2. Form the sheaf direct sum F = directSum_m G_m. The homogeneous maps extend by
-finite sums to a B-action on F; hmu_add and hmu_mul give additivity and the product
-law, and hmu_scalar gives the unit and compatibility with A. On an affine open
-Spec C, this is the action of C tensor_A B on directSum_m G_m(Spec C).
-Quasi-coherence of each G_m and localization of direct sums show that these
-modules glue to a quasi-coherent module over the algebra sheaf f^* B~.
-The sections s_i in hfinite generate F over this algebra sheaf locally: their
-homogeneous multiples generate each degree by the given span condition, and a
-section of a sheaf direct sum is locally a finite sum of homogeneous sections.
-The coefficients from O_X are absorbed into f^* B~. Thus F is of finite type.
-3. Relative-spec base change identifies X' with Spec_X(f^* B~). The affine module
-correspondence realizes F as pi_* F' for a quasi-coherent module F' on X'.
-The affine finite-type correspondence makes F' finite type, hence coherent on
-the locally Noetherian scheme X'. Proper coherent cohomology finiteness for f'
-gives a finite B-module H^p(X', F').
-4. The affine cohomology edge isomorphism identifies H^p(X, F) with H^p(X', F').
-It intertwines B: for each b, multiplication on F' pushes forward to the
-multiplication map on F, and naturality of the edge map gives the commuting
-square with these endomorphisms. Since X is qcqs, the canonical direct-sum
-cohomology isomorphism identifies directSum_m H^p(X, G_m) with H^p(X, F).
-For homogeneous b, its square with the inclusion of G_m has other side mu m k b,
-so applying cohomology shows that this isomorphism intertwines exactly the
-homogeneous action stated in the hypothesis on mod. Every scalar in B and every
-vector are finite sums of homogeneous terms; distributivity therefore makes
-the composite isomorphism B-linear for the given mod, not an arbitrary action.
-The inverse images of a finite set of B-generators of H^p(X', F') generate the
-direct sum, proving Module.Finite for mod.
--/
+/-- The compatible graded cohomology direct sum has a finitely generated top submodule
+(Stacks, Cohomology of Schemes, Lemma 0897(1)). -/
 theorem gradedCohomologyModuleFinite_generators
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     [IsNoetherianRing A] [Algebra.FiniteType A B]
@@ -276,7 +242,8 @@ theorem gradedCohomologyModuleFinite_generators
     Module.Finite.equiv (LinearEquiv.ofBijective L hphi).symm
   exact Module.Finite.fg_top
 
-/-- -/
+/-- For a compatible action of the graded ring `B` on the direct sum of the cohomology groups
+`H^p(X, G_m)`, this direct sum is a finite `B`-module. -/
 theorem gradedCohomologyModuleFinite
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     [IsNoetherianRing A] [Algebra.FiniteType A B]

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackModelFlatnessComparison
 
 /-! # Flat-module descent over a directed preorder
 
-Source: Stacks Project, Tags 05LY, 0032, 01U8, 01JX and 0097.
+## References
+
+* Stacks Project, Tags 05LY, 0032, 01U8, 01JX and 0097
 -/
 
 @[expose] public section
@@ -27,28 +29,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Relative flatness of a fixed finitely presented module descends over a directed preorder.
-
-Source: Stacks Project, limits.tex, Tag 05LY;
-categories.tex, Tag 0032; morphisms.tex, Tag 01U8; schemes.tex, Tag 01JX; sheaves.tex, Tag 0097.
-
-Proof: The object i makes the directed preorder nonempty, hence its thin category is
-filtered. Tag 0032 gives a final functor from a nonempty directed partial order J.
-Choose an object of J with a morphism from i to its image using finality, and pull M
-back to that stage. Restrict the ring diagram and the spectrum cone along the final
-functor; its opposite is initial, so the restricted cone is still limiting. Tensor
-pullback composition and cartesian pasting identify the limit pullback of this module
-with the original limit pullback, hence it is flat. Apply partial-order flat descent
-(Tag 05LY) to this fixed pulled-back module. Its eventual stage maps to a stage j of I
-above i. For every k above j in I, cartesian base change preserves relative flatness
-(Tag 01U8); tensor-pullback composition identifies the result with the direct pullback
-of M from i to k. A cartesian-model comparison transfers relative flatness
-from the canonical pullback to any given cartesian square: the unique comparison
-isomorphism preserves the base projection and identifies section modules on affine
-opens as modules over the same base ring. Apply this both at the limit and at k.
-Thus k need not be in the image of J. Zero modules and empty source
-schemes remain flat, and i excludes an empty index category; no antisymmetry or
-flatness of the transition maps is used. -/
+/-- Relative flatness of a fixed finitely presented module descends over a directed preorder
+(Stacks, Tags 05LY, 0032, 01U8, 01JX and 0097). -/
 theorem exists_eventually_isFlatOver_of_isPullback_limit_preorder
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

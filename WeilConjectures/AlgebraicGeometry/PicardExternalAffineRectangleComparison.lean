@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalRectangleSections
 
 /-! # Affine rectangle comparison for external coefficients
 
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
+## References
+
+* Stacks Project, Tag 0BED.
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 set_option backward.isDefEq.respectTransparency.types true in
-/-- External pullback and tensoring preserve zero maps.
-Source: additive adjunctions. -/
+/-- External pullback and tensoring preserve zero maps. -/
 instance picardExternalRectangleComparison_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (G : Y.Modules) :
@@ -37,21 +38,7 @@ instance picardExternalRectangleComparison_zero
   infer_instance
 
 /-- The affine external-section comparison respects both arrows of a short complex.
-This statement does not assume exactness of the complex.
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; Schemes, Tags 01I4,
-01JQ, 01IA, and Modules, Tag 01BG.
-
-Proof: For each quasi-coherent term of S, the explicitly constructed map
-picardExternalRectangleSectionsMap is bijective by the affine rectangle section
-computation. ConcreteCategory.isIso_iff_bijective therefore makes each map an
-isomorphism. Use asIso on the three term maps and assemble them with
-ShortComplex.isoMk. The two arrow equations are precisely the coefficient
-naturality theorem for S.f and S.g, taken in the reverse direction. That naturality
-is proved from the pullback-unit naturality and tensor-section formulas and holds
-without an exactness hypothesis. No data is defined by choosing an unproved
-existence witness: the term maps are explicit and their inverses are determined
-by bijectivity. Empty opens and zero coefficients are included in the bijectivity
-statement and require no separate assumptions. -/
+This statement does not assume exactness of the complex. (Stacks, Tag 0BED) -/
 theorem picardExternal_affine_rectangle_comparison
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)

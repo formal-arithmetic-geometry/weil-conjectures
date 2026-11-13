@@ -42,30 +42,7 @@ noncomputable def tailSectionMap (F : Sheaf S.smallEtaleTopology A) (i : I)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Sections on a descended qcqs étale object form the canonical filtered colimit.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2, and
-Stacks Project, Étale Cohomology, Tag 09YQ; the coefficient-category generalization
-uses finite-limit exactness of filtered colimits.
-
-Proof: the over category of i is cofiltered and its forgetful functor is initial,
-so the restricted cone is still limiting. Form the presheaf diagram with objects
-(j→i)_* F_j; for a morphism k→j its map is the inverse-image unit for D_k→D_j,
-followed by the inverse-image composition isomorphism and pullback pasting. The
-unit equation and associativity of these isomorphisms prove the functor laws and
-naturality of the displayed limit comparison, giving P, e and ν.
-
-Restrict all sites to the qcqs finite-presentation étale basis. Descent of étale
-objects, maps, their equalities, and finite covering families identifies the
-limit basis with the filtered colimit of the stage bases. The inverse-image
-presheaf on this basis is therefore the pointwise filtered colimit. To see that
-it is already a sheaf, refine a cover of a qcqs object to a finite cover. Its
-matching diagram consists of a finite product of section objects and a finite
-product over overlaps; the overlaps are qcqs. AB5 commutes the filtered colimit
-with the finite equalizer describing matching families. Thus the pointwise
-colimit satisfies the sheaf condition on the basis. The universal property of
-inverse image identifies it with the restriction of the limit sheaf. The unit
-normalization makes the colimit legs exactly tailSectionMap. This construction
-is natural in the étale object. An empty cover gives the terminal, hence zero,
-section object, so empty schemes and empty étale objects are included. -/
+(Stacks, Étale Cohomology, Tag 09YQ) -/
 theorem exists_tail_section_colimit
     [IsCofiltered I] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
     (F : Sheaf S.smallEtaleTopology A)

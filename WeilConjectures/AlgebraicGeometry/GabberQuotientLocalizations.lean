@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 
 /-! # Strict henselianity of prime localizations of a quotient
 
-Source: Stacks Project, Lemma 09ZC, local-ring step.
+## References
+
+* [Stacks Project, Tag 09ZC](https://stacks.math.columbia.edu/tag/09ZC)
 -/
 
 @[expose] public section
@@ -24,19 +26,7 @@ Source: Stacks Project, Lemma 09ZC, local-ring step.
 universe u
 
 /-- Every prime localization of a quotient of a normal domain with separably closed
-fraction field is strictly henselian.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09ZC, second sentence of the proof;
-Algebra, Lemma 05WS.
-
-Proof: For a prime `p` of `R/I`, let `P` be its preimage in `R`. Then `R_P` is a normal
-local domain and has the same fraction field as `R`. Stacks 09Z9 makes it henselian
-with separably closed residue field. The localized quotient map identifies `(R/I)_p`
-with `R_P / I R_P`. Since `I` is contained in `P`, its extension lies in the maximal
-ideal of `R_P`. Apply the strictly henselian quotient theorem (05WS) and transfer
-strict henselianity along the displayed ring isomorphism. If `I` is the unit ideal,
-there are no primes of `R/I`, so the assertion is vacuous.
--/
+fraction field is strictly henselian (Stacks, Tags 09ZC, 05WS). -/
 theorem gabber_quotient_localizations
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     (hsep : IsSepClosed (FractionRing R)) (I : Ideal R)

@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The inverse ordinary base-change square on quasi-coherent derived categories
 
-Source: Stacks Project, Tag 0AA6, equation-base-change-map.
+## References
+
+* Stacks Project, Tag 0AA6.
 -/
 
 @[expose] public section
@@ -136,20 +138,8 @@ noncomputable def qcInverseBaseChange {X Y S : Scheme.{u}}
   have : IsIso β := NatIso.isIso_of_isIso_app β
   exact inv β
 
-/-- The fixed second mate is the mate of the inverse ordinary base-change square.
-Source: Stacks Project, Tag 0AA6, equation-base-change-map.
-
-Proof: Restrict the pinned pullback/direct-image adjunctions to the full
-quasi-coherent subcategories. Apply the iterated mates identity to the ordinary
-base-change transformation: its iterated mate is its conjugate under the two
-composite adjunctions. Conjugation carries the inverse ordinary transformation
-to the inverse conjugate. Taking its inverse mate under the two pullback
-adjunctions gives pullback of a applied to the base unit, followed by pullback
-of the inverse conjugate, followed by the upper counit. This is precisely the
-fixed definition. The other order of the same iterated mates correspondence
-is the mate of the inverse ordinary square under the direct-image/right-adjoint
-adjunctions. Thus their components agree, with no assumption on invertibility
-of the second mate. The argument is valid also for zero objects and empty schemes. -/
+/-- The fixed second mate is the mate of the inverse ordinary base-change square
+(Stacks, Tag 0AA6). -/
 theorem dualityEquationBaseChangeMap_eq_inverseSquareMate
     {X Y Y' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']

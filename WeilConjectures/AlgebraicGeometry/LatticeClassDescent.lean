@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.LatticePairEffectiveDescent
 /-!
 # Descent of integral lattice classes
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -26,17 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Integral lattice pairs admit an exact sheaf presentation by embedded images.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of lattice pairs.
-Proof: use the presheaf of image families represented by actual integral lattice pairs.
-The slice tensor comparison restricts pairs and their images. Equality of these image
-families is equivalent to intertwining integral isomorphism by image classification.
-Membership in each image is local, since a locally lifted section glues uniquely
-using injectivity of the integral embedding. This proves separatedness of the image
-presheaf. Effective descent supplies a representative for every compatible family,
-so the presheaf is a sheaf. Its class maps are surjective by their definition; image
-classification proves their exact kernel relation, and the restriction clause is
-exactly the definition of the presheaf maps. No rank condition on L is used. -/
+/-- Integral lattice pairs admit an exact sheaf presentation by embedded images. -/
 theorem exists_latticeClassPresentation (X : Scheme.{u})
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -22,7 +22,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Stalk criterion for scalar restriction on an open site
 
-Source: Stacks Project, Tags 05NE, 01CB, 01AG and 0098.
+## References
+
+* [Stacks, Tags 05NE, 01CB, 01AG and 0098]
 -/
 
 @[expose] public section
@@ -157,23 +159,7 @@ private theorem scalar_stalk_flat (X : RingedSpace.{u})
   have : Module.Flat (Y.presheaf.stalk x) M := h
   exact Module.Flat.of_linearEquiv e
 
-/-- Flatness of the restricted stalks implies flatness on the localized open site.
-Source: Stacks Project, Tags 05NE, 01CB, 01AG and 0098.
-
-Proof: Regard R as the structure sheaf of a ringed space Y on the same carrier.
-Restricting G scalars along φ gives an R-module H with the same additive presheaf.
-Represent a scalar and a module germ on a common neighborhood. The germ formula
-for φ and germ_smul show the identity of additive stalks is R_x-linear, so H_x
-is flat for x in U. For an exact short complex C on the localized site, apply
-exact extension by zero E, then tensor with H. In U, stalk tensor comparison
-and flatness give exactness. Outside U, the middle stalk of E(C) is zero, so its
-tensor is zero and the stalk complex is exact. Stalk detection gives ambient
-exactness. Apply exact restriction V and the natural tensor-restriction comparison.
-The invertible extension/restriction unit identifies C with V(E(C)), giving
-exactness of C tensor V(H). This additive tensor functor preserves homology,
-hence finite limits and colimits. Finally scalar restriction and open restriction
-commute sectionwise. The same argument covers U empty and G zero without any
-quasi-coherence hypothesis. -/
+/-- Flatness of the restricted stalks implies flatness on the localized open site. -/
 theorem isFlat_open_scalarRestriction_of_stalks
     (X : RingedSpace.{u}) (R : X.carrier.Sheaf CommRingCat.{u})
     (φ : R ⟶ X.sheaf) (U : Opens X) (G : Modules X)

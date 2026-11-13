@@ -11,7 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-! # The canonical degree-zero local-scheme comparison map
 
-Source: Stacks Project, Tag 03Q6, the pullback maps in Lemma 59.51.5.
+## References
+
+* [Stacks, Tag 03Q6]
 -/
 
 @[expose] public section
@@ -39,12 +41,7 @@ noncomputable def lift (U : OpenNhds x) :
   Scheme.Opens.fromSpecStalkOfMem U.1 x U.property ≫ (openIso i hi U.1).inv.left
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The neighbourhood lift lies over the canonical map to X.
-Source: Stacks Project, Tag 03Q6, the canonical degree-zero pullback maps.
-
-Proof: Compose the equality-induced inverse in Over X with the structure map.
-Its over-category compatibility reduces the composite to the canonical map to
-an open followed by its inclusion, which is Scheme.Opens.fromSpecStalkOfMem_ι. -/
+/-- The neighbourhood lift lies over the canonical map to X. -/
 lemma lift_fac (U : OpenNhds x) :
     lift i hi x U ≫ (i.obj U.1).hom = X.fromSpecStalk x := by
   have hw : (openIso i hi U.1).inv.left ≫ (i.obj U.1).hom = Scheme.Opens.ι U.1 :=
@@ -54,12 +51,7 @@ lemma lift_fac (U : OpenNhds x) :
 
 include hi in
 set_option backward.isDefEq.respectTransparency false in
-/-- The structural map of a supplied open object is monic.
-Source: Stacks Project, Tag 03Q6, identifying neighbourhoods with open subschemes.
-
-Proof: The equality-induced over-category isomorphism identifies the structural
-map with an isomorphism followed by the canonical open inclusion. Both are open
-immersions, and every open immersion is monic. -/
+/-- The structural map of a supplied open object is monic. -/
 lemma open_mono (U : X.Opens) : Mono (i.obj U).hom := by
   let e := openIso i hi U
   have he : IsIso e.hom.left := inferInstance
@@ -70,12 +62,7 @@ lemma open_mono (U : X.Opens) : Mono (i.obj U).hom := by
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Neighbourhood lifts commute with inclusions.
-Source: Stacks Project, Tag 03Q6, compatibility of degree-zero pullback maps.
-
-Proof: Postcompose both lifts with the larger neighbourhood's monic structural
-map. The over-category relation and lift_fac identify both composites with
-X.fromSpecStalk x. Cancel the monomorphism. -/
+/-- Neighbourhood lifts commute with inclusions. -/
 lemma lift_naturality {U V : OpenNhds x} (f : U ⟶ V) :
     lift i hi x U ≫ (i.map ((OpenNhds.inclusion x).map f)).left = lift i hi x V := by
   have := open_mono i hi V.1
@@ -96,12 +83,7 @@ noncomputable def baseChangeSection (U : OpenNhds x) :
     (by exact pullback.lift_snd _ _ _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The terminal-to-base-change sections commute with neighbourhood inclusions.
-Source: Stacks Project, Tag 03Q6, compatibility of degree-zero pullback maps.
-
-Proof: Compare the underlying scheme maps by the two pullback projections.
-The first projection is lift_naturality, and the second is the identity.
-The pullback universal property and faithfulness to schemes give equality. -/
+/-- The terminal-to-base-change sections commute with neighbourhood inclusions. -/
 lemma section_naturality {U V : OpenNhds x} (f : U ⟶ V) :
     baseChangeSection i hi x U ≫ (X.fromSpecStalk x).Etale.map
       (i.map ((OpenNhds.inclusion x).map f)) = baseChangeSection i hi x V := by
@@ -157,8 +139,7 @@ noncomputable def cocone (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map from neighbourhood germs to sections on the local scheme.
-It is induced by the adjunction unit and the canonical local-scheme maps to neighbourhoods.
-Source: Stacks Project, Tag 03Q6, the degree-zero pullback map of Lemma 59.51.5. -/
+It is induced by the adjunction unit and the canonical local-scheme maps to neighbourhoods. -/
 noncomputable def comparison :
     etaleObjectStalkSections X i x ⟶
       H ⋙ (sheafSections (Spec (X.presheaf.stalk x)).smallEtaleTopology
@@ -186,8 +167,7 @@ noncomputable def comparison :
     have hn := (H.map f).hom.naturality (baseChangeSection i hi x U.unop).op
     rw [← Category.assoc, hu, Category.assoc, ← hn, ← Category.assoc]
 
-/-- The comparison sends each neighbourhood section to its unit pullback.
-Source: Stacks Project, Tag 03Q6, the defining degree-zero pullback map. -/
+/-- The comparison sends each neighbourhood section to its unit pullback. -/
 @[reassoc]
 theorem ι_comparison (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (U : (OpenNhds x)ᵒᵖ) :

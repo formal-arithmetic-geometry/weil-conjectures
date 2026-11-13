@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.LocalImmersionLocus
 
 /-! # Gluing locally finitely presented immersion loci
 
-Source: Stacks Project, Tag 0BDL, final proof paragraph (gluing characterized loci).
+## References
+
+* [Stacks, Tag 0BDL]
 -/
 
 @[expose] public section
@@ -23,22 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A base-change-stable, source-local predicate represented locally by locally
-finitely presented immersions is represented by such an immersion over the entire base.
-Source: Stacks Project, Tag 0BDL, final proof paragraph, spelling out the gluing.
-
-Proof:
-1. Forget local finite presentation in hlocal and apply the existing
-   exists_localImmersionLocus. This supplies an immersion q:Z to S representing P,
-   including empty bases and empty test schemes.
-2. Choose the given local representatives j_i:W_i to U_i and form the open cover
-   of S indexed by its points. For each i, the pullback of q to U_i and j_i
-   represent the same predicate. The global and local representing equivalences
-   give a morphism a from the pullback to W_i and a morphism b from W_i to Z.
-   The pullback universal property lifts b and j_i to a reverse morphism c.
-   Cancelling the monomorphisms j_i and the pullback of q shows a and c are inverse.
-3. Thus the pullback of q is an isomorphism followed by j_i, so it is locally of
-   finite presentation. Apply target locality on the chosen open cover. The
-   immersion and representing equivalence are those already supplied in step 1. -/
+finitely presented immersions is represented by such an immersion over the entire base
+(Stacks, Tag 0BDL). -/
 theorem exists_localFinitelyPresentedImmersionLocus (S : Scheme.{u})
     (P : ∀ {T : Scheme.{u}}, (T ⟶ S) → Prop)
     (hbase : ∀ {T T' : Scheme.{u}} (g : T ⟶ S) (h : T' ⟶ T), P g → P (h ≫ g))

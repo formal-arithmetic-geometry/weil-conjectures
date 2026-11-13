@@ -21,8 +21,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteP1KummerSplitting
 /-!
 # Finite projective-line splitting and diagonal integrals over arbitrary bases
 
-proof.md, levelwise check.
-
 The splitting contains exactly its two normalized components. Its trace is the second
 projection of its inverse. No Noetherian hypothesis or adjunction datum is imposed.
 -/
@@ -218,29 +216,7 @@ def finiteP1DiagonalProperty (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- The finite Kummer splitting and both diagonal integrals over every N-invertible base.
 The supported boundary fixes the sign through its canonical relative Kummer construction.
-The maps alpha are the existing canonical composition identifications, explicitly isomorphisms.
-
-proof.md, levelwise finite diagonal check.
-
-Proof:
-1. Use exists_ordinaryFiniteP1SplittingMap, whose universal-Noetherian-base argument
-makes the specified twisted-unit/Chern map invertible and natural over all bases.
-Use its maps as the decomposition field of the required splitting records.
-2. The trace is the inverse decomposition followed by the second projection.
-Cancel the pulled-back decomposition in its naturality square; compatibility of the
-second projection with the two-summand comparison gives the trace square.
-3. For either product projection, the diagonal-chart comparison identifies its
-supported class with beta followed by the twisted unit plus the relative hyperplane
-Chern adjunct, by ordinaryFiniteP1_diagonal_chern_components. The diagonal ideal and
-its supported Kummer representative are the witnesses of that component calculation.
-4. The canonical alpha is invertible by isIso_projectiveLineDiagonalAlpha: the
-composite inverse image for projection after diagonal is naturally identity, and the
-two constant-object units are the composite adjunction unit followed by isomorphisms.
-5. The trace kills the first component and sends the Chern component to identity,
-by the two injection/projection identities of the biproduct decomposition. Distribute
-composition over the component sum to obtain each required integral. This uses no
-Noetherian hypothesis on the given base and no detection of general derived arrows
-by stalks. -/
+The maps alpha are the existing canonical composition identifications, explicitly isomorphisms. -/
 theorem exists_arbitraryBaseFiniteP1Integrals (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
     ∃ (t : OrdinaryFiniteTwistTransport A N hA)

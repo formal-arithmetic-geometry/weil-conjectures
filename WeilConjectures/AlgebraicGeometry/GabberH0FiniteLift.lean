@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.GabberH0ProjectionRestrictions
 
 /-! # Finite lifts with descent data in Gabber's degree-zero argument
 
-Source: Stacks Project, Tag 09ZF, final proof paragraph before finite descent.
+## References
+
+* Stacks Project, Tag 09ZF.
 -/
 
 @[expose] public section
@@ -61,48 +63,7 @@ private theorem unit_injective_terminal
 
 
 /-- A section on Z lifts on a finite surjective cover of X, with equal projection
-pullbacks. This stops before descending the section to X.
-Source: Stacks Project, Tag 09ZF, final proof paragraph through the equality of the
-pullbacks to X' ×_X X'.
-
-Proof:
-1. Every nonempty closed subset of X meets i(Z). Otherwise the pushforward from
-   that subset of the constant two-element sheaf has distinct constant global
-   sections with equal restrictions to Z. Stalks outside the subset are singletons;
-   inverse-image stalks and determination by germs give that equality, contradicting
-   hZar. Use `lem-weil-pbc-closed-pushforward-constant-stalks`,
-   `lem-weil-pbc-sets-inverse-image-stalk`, and
-   `lem-weil-pbc-sheaf-sections-determined-by-germs`.
-2. Locally represent t by sections s_j of F on étale X-schemes U_j and maps
-   V_j → U_j ×_X Z covering Z. Sheafification gives local representatives;
-   filtered-colimit surjectivity lifts them to F(U_j). Use
-   `lem-weil-pbc-site-sheafification-sections-local`,
-   `lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`,
-   `lem-weil-pbc-etale-base-change-finite-limits`,
-   `lem-weil-pbc-presheaf-pullback-sets-left-exact`, and
-   `lem-weil-pbc-filtered-colimit-sets-elementwise`.
-3. The image of V_j in U_j ×_X Z is open since this map is étale. Since
-   U_j ×_X Z → U_j is a closed immersion, shrink U_j to an open with precisely
-   that intersection. Now V_j surjects onto U_j ×_X Z, and the sheaf axiom gives
-   t|_{U_j ×_X Z} = i^*s_j. The union of the images of U_j is open and contains
-   i(Z); its closed complement is empty by step 1, so these U_j cover X.
-4. `lemma-weil-pbc-finite-refinement-etale-cover` gives a finite surjective h:X' → X
-   with an open cover W_alpha mapping to U_j over X. Pull back the s_j to
-   s'_alpha on W_alpha and t to t' on Z'. Composition-unit compatibility gives
-   equality of their restrictions on W_alpha ×_X Z.
-5. The injective Zariski-to-étale comparison for i' makes their Zariski restrictions
-   agree on overlaps in Z'. Glue them to a section of the Zariski inverse image.
-   hFinite lifts it to a global s' on X'. The comparison-unit equation shows
-   that i'^*s' = t'. Transporting both iterated pullbacks to the composite
-   inverse image gives exactly the second equality below.
-6. Both projection pullbacks of s' restrict to the same pullback of t on the
-   closed fibre of X' ×_X X'. This scheme is finite over X (finite base change
-   and composition). Apply `lem-weil-pbc-gabber-h0-etale-injective` with hFinite
-   for this finite X-scheme. Injectivity gives the first equality below.
-   All projection and pasting identifications use
-   `lem-weil-pbc-sets-etale-inverse-image-composition-units`.
-The witness is only a section on X' satisfying a descent equation; no section on X
-is asserted. Empty schemes and identity closed immersions are allowed. -/
+pullbacks. The section is not descended to X. (Stacks, Tag 09ZF) -/
 theorem gabber_h0_finite_lift
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

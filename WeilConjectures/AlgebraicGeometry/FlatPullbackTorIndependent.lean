@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Flat morphisms give stalkwise Tor-independent squares
-Source: Stacks Project, Tags 00M3 and 08IB.
+
+## References
+
+* Stacks Project, Tags 00M3 and 08IB
 -/
 
 @[expose] public section
@@ -21,16 +24,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Flatness of the left morphism makes every pair of stalks Tor independent.
-Source: Stacks Project, Algebra, Tag 00M3, and perfect.tex, Tag 08IB.
-
-Proof: the left stalk is flat over the base stalk by the stalk criterion for flat
-morphisms. By symmetry of Tor, resolve the other stalk by projectives and tensor
-with the flat left stalk. Tensoring preserves the exactness of the resolution
-in positive degrees. Its positive homology is therefore zero. Transport through
-Tor symmetry and the projective-resolution computation of Tor. This applies to
-all pairs over the same base point; the right stalk's transported scalar action
-requires no flatness assumption. For an empty scheme there are no such pairs. -/
+/-- Flatness of the left morphism makes every pair of stalks Tor independent
+(Stacks, Tags 00M3 and 08IB). -/
 theorem flat_pullback_torIndependent {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) [Flat f] :
     PullbackStalkTensor.IsTorIndependent f g := by
@@ -52,8 +47,8 @@ theorem flat_pullback_torIndependent {X S T : Scheme.{u}}
     exact Module.Flat.rTensor_shortComplex_exact A _ (P.exact_succ n)
   exact hz.of_iso ((e.app A).app B)
 
-/-- Flatness of the right morphism makes every pair of stalks Tor independent.
-Source: Stacks Project, Algebra, Tag 00M3, and perfect.tex, Tag 08IB. -/
+/-- Flatness of the right morphism makes every pair of stalks Tor independent
+(Stacks, Tags 00M3 and 08IB). -/
 theorem flat_right_pullback_torIndependent {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) [Flat g] :
     PullbackStalkTensor.IsTorIndependent f g := by

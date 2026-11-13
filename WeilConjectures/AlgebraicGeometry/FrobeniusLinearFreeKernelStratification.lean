@@ -20,7 +20,9 @@ import WeilConjectures.RingTheory.FrobeniusPolynomialEtale
 /-!
 # Frobenius-linear fixed points in an affine free frame
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
+## References
+
+* Stacks Project, Tags 0GKU and 03S0.
 -/
 
 @[expose] public section
@@ -34,28 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Fixed points in an affine finite free frame admit a finite constructible stratification.
-
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
-polynomial fixed-point representation and application of Tag 03S0.
-
-Proof: the supplied frame and its dual give coordinates on every étale test object.
-Naturality of the tensor/abstract pullback comparison makes these coordinates commute
-with all restrictions. Let a_ij be the coordinates of F on the frame. Semilinearity
-makes the fixed-point equations x_i - sum_j a_ij x_j^p = 0. The global-sections/affine-spectrum
-adjunction and the quotient universal property
-identify maps from a test object to the affine solution scheme over the base with
-solution vectors, naturally in the test object. Evaluation of the categorical abelian kernel gives
-the fixed-point subgroup,
-so this natural bijection identifies the underlying lifted kernel with the solution
-representable. The proved Frobenius polynomial Jacobian theorem, with b=0, makes the
-solution scheme étale over the affine base. It is affine and of finite presentation,
-so both schemes are qcqs. The étale stratified-finiteness theorem supplies a finite
-constructible immersed partition on which the solution scheme is finite étale.
-Representables commute with inverse image. Finite étale representables are finite
-locally constant, and forgetting abelian groups commutes with inverse image. Transport
-these properties across the kernel comparison to obtain each asserted stratum.
-Rank zero is the identity solution scheme; the empty affine base is vacuous.
--/
+(Stacks, Tag 0GKU) -/
 theorem frobenius_linear_free_kernel_stratification
     (p : ℕ) [Fact p.Prime] (S : Scheme.{u}) [IsAffine S] [CharP Γ(S, ⊤) p]
     (E : S.Modules) [E.IsQuasicoherent]

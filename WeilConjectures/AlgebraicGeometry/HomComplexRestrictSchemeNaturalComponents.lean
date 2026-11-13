@@ -129,11 +129,7 @@ private theorem factor_naturality
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction isomorphisms for ordinary Hom complexes can be chosen
-naturally in the second complex.
-Source: Stacks Project, Cohomology, Tag 08DL.
-Proof: choose the componentwise chain isomorphisms induced by restriction of
-local module maps. Naturality follows by checking every product projection;
-the two composites are restrictions of the same postcomposition map. -/
+naturally in the second complex. (Stacks, Tag 08DL) -/
 theorem homComplex_restrict_scheme_natural_components {Y : Scheme.{u}} (U : Y.Opens)
     (L : CochainComplex Y.Modules ℤ) :
     ∃ e : ∀ M : CochainComplex Y.Modules ℤ,

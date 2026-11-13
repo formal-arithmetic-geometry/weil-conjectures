@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Sections on an étale object as global sections on its base change
 
-Source: Stacks Project, Tags 03S2, 03CF and 03EF; naturality of restriction and pullback units.
+## References
+
+* Stacks Project, Tags 03S2, 03CF, 03EF and 00XZ.
 -/
 
 @[expose] public section
@@ -28,7 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluation at an étale object, followed by restriction to its base change and the
-inverse-image composition isomorphism. Source: Stacks Tags 03S2 and 00XZ. -/
+inverse-image composition isomorphism (Stacks, Tags 03S2 and 00XZ). -/
 noncomputable def pullbackSectionsEquiv {R X : Scheme.{u}}
     (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale) (f : X ⟶ R) :
     ((lowerStar AddCommGrpCat.{u + 1} f).obj
@@ -74,22 +76,8 @@ set_option linter.unusedVariables false in
 -- Projection equality proofs are referenced only through proof-irrelevant arguments.
 set_option maxRecDepth 4000 in
 -- The concrete abelian-sheaf functors require extra reduction during elaboration.
-/-- Evaluation of f_* f^* G at an étale object W identifies naturally with the global
-sections of the pullback of G to W ×_R X. This is a comparison for a single cartesian
-square, independent of any limit or compactness hypotheses.
-Source: Stacks Project, Tags 03S2, 03CF and 03EF.
-
-Proof: By the definition of direct image, the source is (f^* G)(W ×_R X). Restriction
-along the étale second projection identifies this with Γ(W ×_R X, p^* f^* G), using the
-étale inverse-image/restriction isomorphism and evaluation at the terminal object.
-Compose with the inverse-image composition isomorphism and the equality
-p ≫ f = fst ≫ W.hom to obtain the displayed additive equivalence. For a cartesian map m,
-apply the restriction/pullback-unit identity to the square over h. Naturality of the
-restriction isomorphism moves the composition isomorphism past restriction. Naturality
-of the unit moves the source composition isomorphism past pullback. Associativity of
-inverse-image composition identifies the resulting composites. The two projection
-equations specify the canonical cartesian map, so this proves the stated equality for
-any m satisfying them. Every map is additive, and hence the equivalences preserve zero. -/
+/-- Evaluation of `f_* f^* G` at an étale object `W` identifies naturally with the global
+sections of the pullback of `G` to `W ×_R X`, compatibly with cartesian maps. -/
 theorem pullbackSections_comparison (R : Scheme.{u})
     (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale) :
     let A := AddCommGrpCat.{u + 1}

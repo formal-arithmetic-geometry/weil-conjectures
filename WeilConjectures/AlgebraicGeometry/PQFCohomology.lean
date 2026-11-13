@@ -17,8 +17,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # Sheaf cohomology and higher direct images
 
-Source: Stacks Project, Cohomology, Tag 01DZ, equations cohomology-modules and
-higher-direct-image-modules; Tag 079W.
+## References
+
+* Stacks Project, Cohomology, Tag 01DZ, and Tag 079W.
 -/
 
 @[expose] public section
@@ -33,28 +34,9 @@ namespace AlgebraicGeometry
 `RingedSpace.moduleCohomology X.toRingedSpace p`, the right derived functors of global
 sections on `𝒪_X`-modules (by definition). They form a cohomological δ-functor, so a short
 exact sequence of `𝒪_X`-modules gives a long exact cohomology sequence. For a morphism
-`f: X ⟶ S`, the higher direct image `R^p f_* F = H^p(Rf_*(F[0]))` is naturally isomorphic
-to the `p`-th right derived functor of module direct image `f_*`.
-
-Source: Stacks Project, Cohomology, Tag 01DZ, equations cohomology-modules and
-higher-direct-image-modules; Tag 079W.
-
-Proof:
-1. Use def-sc-ringed-space-module-cohomology: an injective resolution followed by global
-sections computes H^p, independently of the resolution, as the right derived functor.
-2. Regard a scheme morphism as a morphism of ringed spaces. By
- def-pc-ringed-spaces-derived-direct-image, derived direct image is computed by applying
-module direct image to a K-injective resolution. Enough injectives is supplied by
-lem-sc-ringed-space-module-sheaves-enough-injectives. An injective resolution is bounded
-below and hence K-injective by lem-weil-pbc-bounded-below-injectives-kinjective. Taking
-p-th cohomology therefore computes the ordinary p-th right derived functor, naturally
-in the module; comparison of resolutions gives the displayed functor isomorphism.
-3. Global sections is additive and left exact (lem-sc-global-sections-left-exact;
-sectionwise kernels and finite products give the same assertion for module-valued
-sections). Apply lem-weil-pbc-right-derived-universal-delta-functor to obtain connecting
-maps and exactness for every short exact sequence. The cohomological delta-functor
-packages the initial monomorphism, all three repeating exactness positions, and
-naturality. Its degree functors are the established moduleCohomology functors. -/
+`f : X ⟶ S`, the higher direct image `R^p f_* F = H^p(Rf_*(F[0]))` is naturally isomorphic
+to the `p`-th right derived functor of module direct image `f_*`
+(Stacks, Tags 01DZ and 079W). -/
 theorem sheafCohomologyAndHigherDirectImages (X : Scheme.{u}) :
     (∃ G : CohomologicalDeltaFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))

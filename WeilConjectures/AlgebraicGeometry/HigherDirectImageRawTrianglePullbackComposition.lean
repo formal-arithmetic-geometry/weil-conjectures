@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransition
 
 /-! # Composition of raw triangle pullbacks with arbitrary coefficient maps
 
-Source: Stacks Project, Tags 03CB and 09Z1, canonical inverse-image comparisons.
+## References
+
+* Stacks Project, Tags 03CB and 09Z1
 -/
 
 @[expose] public section
@@ -70,24 +72,8 @@ private theorem rawTriangleMap_comp
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Raw triangle pullbacks compose when their coefficient maps are composed using
- the exact derived inverse-image comparison.
-
-Source: Stacks Project, Tags 03CB and 09Z1; the source and shift factors of
-lem-sbc-higher-image-raw-pullback-composition-formula, step 2.
-
-Proof: Expand both triangle pullbacks as `rawTriangleMap`. Map the inner four
-factors through the outer derived pullback, using functoriality. Naturality of
-its single-functor comparison moves the inner source morphism to the left.
-Composition of the single-functor comparisons identifies the source comparison
-for the composite. Associativity of underived pullback composition identifies
-its free-sheaf factor. Naturality of the derived composition isomorphism moves
-it past the arbitrary class. Naturality of commShiftIso moves the inner
-coefficient morphism past the outer shift comparison, and compatibility of the
-derived composition isomorphism with shifts identifies the two shift factors.
-The remaining shifted coefficient map is the composite displayed here.
-This argument uses neither a single-complex presentation of K nor any condition
-on the coefficient maps; zero objects, identity maps and negative degrees obey
-exactly the same naturality and coherence identities. -/
+the exact derived inverse-image comparison. No single-complex presentation of `K` and
+no condition on the coefficient maps is needed. (Stacks, Tags 03CB and 09Z1) -/
 theorem higherDirectImageRawTrianglePullback_comp
     (Λ : Type (u + 1)) [CommRing Λ] {X Y Z S : Scheme.{u}}
     (a : X ⟶ Y) (b : Y ⟶ Z) (h : Z ⟶ S) (hy : Y ⟶ S) (hx : X ⟶ S)

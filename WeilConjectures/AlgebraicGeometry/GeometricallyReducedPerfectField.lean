@@ -24,15 +24,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- let `X` be a reduced scheme locally of
-finite type over a perfect field `k`. Then for every field extension `L / k` the base change
-`X_L` is reduced, and `X ⟶ Spec k` is flat, locally of finite presentation and geometrically
-reduced.
-
-Proof: geometric reducedness over a perfect field is `GeometricallyReduced.of_perfectField`,
-which gives reducedness of `X_L`; every morphism to the spectrum of a field is flat
-(`Flat.of_field`); and `Spec k` is Noetherian, so locally of finite type is the same as locally
-of finite presentation. -/
+/-- Let `X` be a reduced scheme locally of finite type over a perfect field `k`. Then for every
+field extension `L / k` the base change `X_L` is reduced, and `X ⟶ Spec k` is flat, locally of
+finite presentation and geometrically reduced. -/
 theorem isReduced_pullback_and_flat_and_locallyOfFinitePresentation_of_perfectField
     {k : Type u} [Field k] [PerfectField k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [IsReduced X] [LocallyOfFiniteType f] :

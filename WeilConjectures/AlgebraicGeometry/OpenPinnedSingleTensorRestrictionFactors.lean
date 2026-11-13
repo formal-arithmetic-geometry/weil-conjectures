@@ -12,7 +12,11 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 
 /-! # Single-complex identities for exact restriction and tensor reassociation
-Source: Stacks Project, Tags 08DW and 08HY; Mathlib exact single comparison. -/
+
+## References
+
+* Stacks Project, Tags 08DW and 08HY.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -174,18 +178,7 @@ private lemma derived_single_square
   exact h
 
 /-- Termwise identities specializing the homotopy counit square to singles.
-Source: Stacks Project, Tags 08DW and 08HY; Mathlib ExactFunctor.
-Proof: expand mapDerivedCategorySingleFunctor and mapDerivedCategoryFactorsh.
-The quotientCompQhIso factors cancel, leaving Qh applied to the quotient of
-singleMapHomologicalComplex for exact restriction; this proves the first
-identity. For the second expand the target isomorphism and the homotopy
-composition comparisons. Naturality of the restriction factorization moves
-the mapped tensor single comparison past it. Naturality of the single
-comparison for the tensor restriction isomorphism and its compatibility with
-composition identify the rest. In degree zero both paths are the same tensor
-restriction map; in every other degree the maps are between zero objects.
-Apply the homotopy quotient and Qh and reassociate. The identities use only
-additive tensor pullback and exact restriction, without any derived counit. -/
+They use only additive tensor pullback and exact restriction, without any derived counit. -/
 private theorem open_pinned_single_tensor_restriction_factors_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

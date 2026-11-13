@@ -23,18 +23,7 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- Restriction to the residue-field fibre of an integral scheme over a henselian
-local ring is injective on module sections.
-Source: Stacks Tags 09XK and 0A0C, the henselian comparison in Tag 0EYP.
-
-Proof: Integrality makes Z affine. Write Z = Spec B by its canonical global-section
-presentation. The ring map A → B is integral. Set J = m_A B. Tag 09XK makes (B,J)
-a henselian pair. Apply isIso_globalSectionsUpperStarMap_of_henselianRing to the
-proper identity morphism of Spec B and J. Its fibre is Spec(B/J). The tensor-quotient
-isomorphism identifies this with the fibre over A/m_A. Transport the comparison
-through the affine presentation and the given Cartesian square. These section
-isomorphisms respect the inverse-image adjunction unit, so the displayed restriction
-is an isomorphism, in particular injective. For B = 0 all the schemes in question
-are empty and the section module is zero; the same argument applies. -/
+local ring is injective on module sections. (Stacks, Tags 09XK, 0A0C) -/
 theorem integralHenselianClosedFibreSections_injective
     (Λ : Type (u + 1)) [CommRing Λ]
     (A : Type u) [CommRing A] [HenselianLocalRing A]

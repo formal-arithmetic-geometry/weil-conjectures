@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # The distinguished section of a closed-point ideal quotient
 
-Source: Stacks Project, Tag 01XF, first paragraph of the proof.
+## References
+
+* Stacks Project, Tag 01XF.
 -/
 
 @[expose] public section
@@ -24,23 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The quotient of the two reduced vanishing ideals has a section with residue one.
-
-Source: Stacks Project, Tag 01XF, first paragraph, up to the application of H¹ vanishing.
-
-Proof: Set Z = X \ U and Z' = Z union {x}, and take their reduced vanishing ideals I
-and J. Their sections are functions whose residues vanish on the respective closed sets.
-The section 1 on U therefore lifts to a section sU of I. Take Q to be the cokernel of
-J into I, with quotient section qU on U. On V = X \ {x} the two ideals agree: every
-section of I vanishes also on Z', because no point of V is x. Their inclusion restricted
-to V is an isomorphism, so Q restricted to V is zero. Glue qU and zero on the cover U,V,
-using the zero sections of Q on the overlaps. This gives a global section q of Q.
-If s is a global lift of q, then s restricted to U minus sU is killed by the quotient
-map. Evaluation on any open preserves kernels, so this difference comes from a section
-of J on U. Its residue at x is zero. The image of sU is 1, so the residue of s is 1;
-restriction commutes with germs and residues. The argument works for any open U containing
-x, without affineness or separation assumptions. For U = X the same gluing applies;
-nonreduced schemes use the radical vanishing ideals, and x in U excludes empty cases. -/
+/-- The quotient of the two reduced vanishing ideals has a section with residue one
+(Stacks, Tag 01XF). -/
 theorem exists_closedPoint_ideal_quotient_section (X : Scheme.{u})
     (U : X.Opens) (x : X) (hxU : x ∈ U)
     (hx : IsClosed ({x} : Set X)) :

@@ -19,7 +19,10 @@ import Mathlib.Data.Finset.Order
 
 /-! # Eventual overlap equations
 
-Source: Stacks Project, Tags 01ZR and 05N7. -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -88,31 +91,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The local family eventually descends, including after composition with global maps.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, agreement on overlaps;
-Algebra, Tag 05N7 (3).
-
-Proof: First substitute the equality identifying A₀ with module base change.
-At stage k take the difference of the two restrictions of r₀ on each pairwise
-intersection of cover members. Their pullbacks to the limit agree, since both recover
-the restriction of the same global map δ. Pullback composition identifies the two
-restrictions, so their difference pulls back to zero. Quasi-separatedness makes each
-intersection quasi-compact. Restricted tensor pullbacks of Fj and Gj remain finitely
-presented and quasi-coherent. Apply finitePresentation_zero_map_descent to this
-intersection over Spec R_k, using the pullback universal properties to identify its
-identity-stage and later base changes. There are finitely many pairs. Directedness
-gives one common later stage, and functors preserve zero maps, so all defects vanish
-there. Every test scheme mapping to two cover members factors through their
-intersection. Pullback of its equality is the universal-test compatibility equation
-for the displayed family of pulled-back maps. Assemble its descent morphism with
-those components. The transition q is affine, as a base change of a map between
-affine schemes; hence the inverse images of the affine cover members are affine.
-For arbitrary F', G', κ and ρ in the conclusion, compose this descent morphism on
-the left with Q.map κ and on the right with Q.map ρ. The components of Q.map are
-ordinary restriction of the maps; functoriality and associativity give exactly the
-five displayed factors defining r. This uses no inverse or property of κ and ρ.
-The component identities follow from the construction. Empty covers impose no
-compatibility equations and use k itself. Empty intersections, zero modules and
-identity transitions cause no exceptions. No new-stage recovery is asserted. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem finitePresentation_local_maps_eventual_overlap_equations
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

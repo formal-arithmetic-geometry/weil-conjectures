@@ -28,17 +28,7 @@ universe u v w z
 
 open scoped TensorProduct
 
-/-- One scalar makes every generically nilpotent element nilpotent.
-
-Proof: Let C be the quotient of B tensor_A R0 by its nilradical. This is finite
-as an R0-module, since base extension and quotients preserve module finiteness.
-Its map to the reduction of B tensor_A F is localization at the nonzero elements
-of R0: tensor products and reduction commute with localization. The kernel N is
-therefore torsion. Since R0 is Noetherian, N is finitely generated. Choose finite
-module generators of N and a nonzero annihilator for each generator. Their product
-t is nonzero because R0 is a domain, and annihilates N by linearity. In the empty
-case choose t = 1. If x has nilpotent generic image, its class lies in N, so the
-class of t smul x is zero. Thus t smul x belongs to the nilradical, as asserted. -/
+/-- One scalar makes every generically nilpotent element nilpotent. -/
 theorem exists_generic_tensor_nilpotence_annihilator
     (A : Type u) [CommRing A]
     (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]

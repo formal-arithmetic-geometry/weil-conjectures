@@ -25,17 +25,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Local homotopy normal form after pullback at a good residue point.
-
-Proof: At the local ring at g(z), split a unit differential coefficient until none
-remain. Each cancellation lowers the finite total rank. The remaining residue
-differentials are zero, hence the residue hypothesis forces just r generators in
-degree i. All other terms have rank zero. The basis changes, their inverses, and
-contracting homotopies involve finitely many functions, so they extend to an open
-neighbourhood of g(z). Pull back that neighbourhood and the explicit homotopies
-along g. Restriction to the inverse image open gives the stated homotopy equivalence.
-This uses no reducedness. If r = 0 the minimal complex is zero; if i > d the
-hypothesis forces r = 0. There is no point to check on an empty source. -/
+/-- Local homotopy normal form after pullback at a good residue point. -/
 theorem exists_restrict_homotopyEquiv_single_of_residue
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

@@ -25,7 +25,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Constant-rank top scalar Koszul Ext
 
-Source: Stacks Project, Tag 0BQZ. -/
+## References
+
+* Stacks Project, Tag 0BQZ.
+-/
 
 @[expose] public section
 
@@ -35,20 +38,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The top scalar Ext on a constant conormal-rank open is its dual determinant.
-
-Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.
-
-Proof: Fix z in V and choose an affine Koszul chart of length m. The conormal
-basis and affine conormal frame compute its stalk finrank as m; hVrank gives
-m=n. The structure-sheaf coefficient map induces a morphism from scalar Ext to
-self-coefficient Ext. Restrict its tensor pullback to V. The local coefficient
-comparison is bijective on each stalk by the length-n Koszul calculation, hence
-this restricted morphism is an isomorphism. Self-coefficient Ext is canonically
-the exterior power of the conormal dual on the regular locus, in every degree.
-Compose these isomorphisms. This argument uses no rank or regularity away from V;
-empty V is covered by the vacuous stalk criterion, and n=0 by the empty Koszul
-coefficient calculation. -/
+/-- The top scalar Ext on a constant conormal-rank open is its dual determinant. -/
 theorem koszulRegularImmersion_ext_constantRank_top
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

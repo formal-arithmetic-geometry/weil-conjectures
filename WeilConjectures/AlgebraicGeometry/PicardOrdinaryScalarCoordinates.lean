@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PicardOrdinaryRawCoordinates
 
 /-! # Scalar coordinates for ordinary pulled-back cycles
 
-Source: Stacks Project, Tag 0BF2, degree-zero calculation; Tags 06Z0 and 0096.
+## References
+
+* Stacks Project, Tags 0BF2, 06Z0 and 0096
 -/
 
 @[expose] public section
@@ -25,25 +27,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Scalar coordinates identify all ordinary residue morphisms with the residue
 field. The residue differential vanishes, and every annihilating scalar on a smaller
 open is an ordinary cycle with the prescribed evaluated coordinate. There is no
-derived object or derived morphism in the conclusion.
-Source: Stacks Project, Tag 0BF2, degree-zero calculation; Tags 06Z0 and 0096.
-
-Proof: The terms of K are retracts of finite free modules, hence quasi-coherent on
-affine U. Under the affine tilde/Gamma equivalence the section bases e0 and e1
-therefore determine sheaf bases. In these bases hd says that the sheaf differential
-is multiplication by d. Tensor pullback carries these bases to bases on every V
-and on Spec κ(w). The source pulled back from W is the structure sheaf, via the
-canonical tensor-unit comparison. Its maps to the degree-zero target are its global
-sections. At the residue point the degree-zero coordinate is κ(w); denote the
-resulting additive equivalence of raw morphisms by b. Each d_i evaluates to zero,
-so postcomposition with the pulled-back differential kills every raw morphism.
-On V the basis sends a to a morphism x, and its postcomposition has coordinates
-a times d restricted to V; it vanishes by the scalar-cycle hypothesis. Pullback
-of x to the residue point has coordinate a(w): the structure-sheaf map of the
-residue lift is evaluation, and the tensor-unit and composition comparisons are
-the canonical ones from the adjunction. These facts give precisely the final
-equality. The argument works when m=0, when the outgoing module is zero, and for
-arbitrary nonaffine V, since sheaf bases restrict to every open. -/
+derived object or derived morphism in the conclusion (Stacks, Tag 0BF2). -/
 theorem picard_ordinary_scalar_coordinates
     (W : Scheme.{v}) (w : W)
     (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)

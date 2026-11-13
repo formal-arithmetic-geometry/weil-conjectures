@@ -21,7 +21,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Finite Grothendieck duality as derived internal Hom
 
-Source: literature/stacks-project/duality.tex, Tags 0AX2 and 0AX3.
+## References
+
+* Stacks Project, Tags 0AX2 and 0AX3
 -/
 
 @[expose] public section
@@ -54,27 +56,11 @@ private theorem assemble_finite_duality
   exact adjR.rightAdjointUniq_hom_app_counit adjH K
 
 /--
-Source: literature/stacks-project/duality.tex, Tags 0AX2 and 0AX3.
+Finite Grothendieck duality as derived internal Hom (Stacks, Tags 0AX2 and 0AX3).
 
-Let `f: X ⟶ Y` be finite with `X`, `Y` Noetherian, `A = f_* O_X`, and `K ∈ D^+_QCoh(Y)`.
-The right adjoint `f^! = a` of `Rf_*` on `D_QCoh` is given as in
-`finiteTwistedInverse_boundedBelow` (`R`, `comparison`, `a`, `adj`). Restriction of scalars
-`ρ: D(A) ⥤ D(O_Y)` along `O_Y → A` has the specified right adjoint `ρR` (`adjA`).
-
-The conclusion: there are the identification `ι: R𝓗om(O_Y, -) ≅ 𝟭` (natural; any two
-choices differ by an automorphism of `𝟭`, absorbed by `φ` and `d`), the identification
-`c: ρ ∘ Rg_* ≅ Rf_*` for `g: (X, O_X) → (Y, A)`, an isomorphism `φ: Rg_* (f^! K) ≅ ρR K`
-in `D(A)` (the `A`-linear structure) and `d: ρ (ρR K) ≅ R𝓗om_{O_Y}(A, K)` such that
-1. the counit of `ρ ⊣ ρR` at `K` is, through `d`, evaluation at the unit section
-   `1 ∈ A` (`R𝓗om(O_Y → A, K)` followed by `ι`), and
-2. through `c` and `ρ φ`, the counit of `ρ ⊣ ρR` is the counit of `Rf_* ⊣ f^!` at `K`.
-So `c⁻¹ ≫ ρ φ ≫ d: Rf_* f^! K ≅ R𝓗om_{O_Y}(A, K)` is `A`-linear and carries the counit of
-`Rf_* ⊣ f^!` to evaluation at `1`.
-
-Proof sketch: finite affine duality, the
-equivalence `D_QCoh(X) ≃ D_QCoh(A)`,
-bounded-below preservation and
-uniqueness of right adjoints.
+For `f : X ⟶ Y` finite with `X`, `Y` Noetherian, `A = f_* O_X` and `K ∈ D^+_QCoh(Y)`, there is
+an `A`-linear isomorphism `Rf_* f^! K ≅ R𝓗om_{O_Y}(A, K)` carrying the counit of
+`Rf_* ⊣ f^!` at `K` to evaluation at the unit section `1 ∈ A`.
 -/
 theorem finite_duality_derived_hom {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y]

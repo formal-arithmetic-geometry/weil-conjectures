@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.TensorFreeFrameCoordinates
 /-!
 # Natural coordinates from a specified tensor-pullback frame
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
+## References
+
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section
@@ -102,24 +104,7 @@ private theorem frobenius_coordinates_of_linear_coordinates
     (fun s ↦ congrArg (fun f ↦ f s) (F.naturality h.op)) (hF W) m i
 
 /-- A specified finite free frame gives a natural Frobenius matrix on the etale slice.
-
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
-first paragraph (the matrix description after choosing a frame).
-
-Proof: for h:W -> V, use the inverse unit-normalized tensor-pullback composition
-comparison, the tensor-to-abstract pullback comparison, the pullback of the given
-frame, and the free-pullback comparison to identify E_W with the free module on W.
-Apply global sections and reindex ULift (Fin n) by Fin n. Naturality of the
-adjunction units and their composition comparisons says that these identifications
-carry the restricted frame sections and dual coordinate maps to those on W. In
-particular they commute with restriction of every section over V, including h=id.
-Let a_ij be coordinate i of F applied to frame section j over V. Naturality of F
-shows that its value on the restricted frame is obtained by restricting these
-coefficients. Every section on W is the finite sum of its coefficients times the
-frame sections; additivity and F(cm)=c^p F(m) then give the displayed matrix formula.
-No affineness, characteristic assumption, or invertibility of F is needed for this
-frame comparison. Empty test objects and rank zero satisfy the same identities.
--/
+(Stacks, Tag 0GKU) -/
 theorem frobenius_linear_free_frame_coordinates
     (p : ℕ)
     (S : Scheme.{u})

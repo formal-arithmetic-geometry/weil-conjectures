@@ -21,24 +21,25 @@ public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 # Generic relative Noether normalization
 
 Noether normalization says that a finitely generated algebra over a field is finite over a
-polynomial subalgebra. This file states the relative, generic form of that statement for schemes: a
-dominant affine morphism `f: X ⟶ Y` of finite type between integral schemes whose generic fibre
-has dimension `r` becomes, after shrinking `Y` to a dense open `V` and replacing `X` by `f ⁻¹ᵁ V`, a
-finite surjective morphism to the `r`-fold relative affine line over `V` followed by the projection
-to `V`.
+polynomial subalgebra. This file states the relative, generic form of that statement for
+schemes: a dominant affine morphism `f : X ⟶ Y` of finite type between integral schemes whose
+generic fibre has dimension `r` becomes, after shrinking `Y` to a dense open `V` and replacing
+`X` by `f ⁻¹ᵁ V`, a finite surjective morphism to the `r`-fold relative affine line over `V`
+followed by the projection to `V`.
 
 Recording the target as `AlgebraicGeometry.iteratedAffineLine V r` rather than as the relative
 affine space `𝔸(ULift (Fin r); V)` is what makes the statement usable in the Deligne–Laumon
-reduction: the projection is then literally a composition of `r` affine-line projections, each of
-which can be fed to the relative affine-line bound one at a time, as the blueprint node requires.
+reduction: the projection is then literally a composition of `r` affine-line projections, each
+of which can be fed to the relative affine-line bound one at a time.
 
-## Implementation notes
+## Implementation details
 
-The blueprint derives this statement from a purely ring-theoretic one, `lem-zl-spread-normalization`
-("spreading affine normalization to a principal open"): for a domain `A` and a finitely generated
-`A`-algebra `B` there are `0 ≠ s ∈ A`, `d ≥ 0` and coordinates `t ∈ (B_s)^d` making `A_s[t] → B_s`
-finite. It is `Algebra.FiniteType.exists_finite_aeval_away` in
-`WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean`; the coordinates map of is `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`.
+The statement is derived from a purely ring-theoretic one (spreading affine normalization to a
+principal open): for a domain `A` and a finitely generated `A`-algebra `B` there are
+`0 ≠ s ∈ A`, `d ≥ 0` and coordinates `t ∈ (B_s)^d` making `A_s[t] → B_s` finite. It is
+`Algebra.FiniteType.exists_finite_aeval_away` in
+`WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean`; the coordinates map is
+`AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`.
 
 ## Main statements
 
@@ -161,13 +162,11 @@ end Affine
 
 /-- Generic relative Noether normalization over a principal open of an affine open.
 
-Let `f: X ⟶ Y` be an affine morphism locally of finite type to an integral scheme and `U` a
+Let `f : X ⟶ Y` be an affine morphism locally of finite type to an integral scheme and `U` a
 nonempty affine open of `Y`. Then there are `s₀ ≠ 0` in `Γ(Y, U)` and `d` such that over every
 principal open `D(s) ⊆ U` with `s₀ ∣ s`, `s ≠ 0`, the restriction of `f` factors through a finite
 morphism to the `d`-fold relative affine line. If `Γ(Y, U) → Γ(X, f⁻¹ U)` is injective, this finite
-morphism is surjective and `d` is the dimension of the generic fibre.
-
-This is the geometric form of `Algebra.FiniteType.exists_finite_aeval_away`, using the coordinates of -/
+morphism is surjective and `d` is the dimension of the generic fibre. -/
 theorem exists_isFinite_toIteratedAffineLine_basicOpen {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsIntegral Y] [IsAffineHom f] [LocallyOfFiniteType f] {U : Y.Opens} (hU : IsAffineOpen U)
     [Nonempty U] :
@@ -230,7 +229,7 @@ theorem exists_isFinite_toIteratedAffineLine_basicOpen {X Y : Scheme.{u}} (f : X
     topologicalKrullDim_fiber_of_isPullback (isPullback_morphismRestrict f _).flip,
     genericPoint_eq_of_isOpenImmersion] at h
 
-/-- Let `f: X ⟶ Y` be a dominant affine morphism of finite type between integral schemes whose
+/-- Let `f : X ⟶ Y` be a dominant affine morphism of finite type between integral schemes whose
 generic fibre has dimension `r`. Then there is a dense open `V ⊆ Y` over which `f` factors as a
 finite surjective morphism `ν` to the `r`-fold relative affine line over `V` followed by its
 projection to `V`:
@@ -243,7 +242,7 @@ f ⁻¹ᵁ V ----- ν -----> iteratedAffineLine V r
          \                     v
           `----------------->  V
 ```
-. -/
+-/
 @[stacks 07NA]
 theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegral X]
     [IsIntegral Y] [IsAffineHom f] [LocallyOfFiniteType f] [IsDominant f] (r : ℕ)
@@ -279,12 +278,8 @@ theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶
     exact hs
   exact ⟨Y.basicOpen s, (Y.basicOpen s).isOpen.dense hsY, ν, hfin, hsurj, hν⟩
 
-/-- a quasi-compact (e.g. Noetherian) scheme `X` has a finite
-partition by locally closed reduced affine subschemes.
-
-Choose a finite affine open cover `U₁, …, Uₙ` and take the `i`-th piece to be
-`Uᵢ ∖ ⋃_{j < i} Uⱼ` with its reduced closed subscheme structure inside `Uᵢ`. Every point lies in
-the piece indexed by the first `Uᵢ` containing it. -/
+/-- A quasi-compact (e.g. Noetherian) scheme `X` has a finite
+partition by locally closed reduced affine subschemes. -/
 theorem Scheme.exists_partition_isImmersion_isAffine_isReduced (X : Scheme.{u})
     [CompactSpace X] :
     ∃ (n : ℕ) (Z : Fin n → Scheme.{u}) (ι : ∀ i, Z i ⟶ X),
@@ -411,13 +406,8 @@ lemma Scheme.Hom.HasNoetherPartitionOver.union {Z₁ Z₂ : Set Y} (h : Disjoint
     · exact hν₁ a
     · exact hν₂ a
 
-/-- The induction step of: a nonempty closed subset `Z` of the
-target contains a nonempty subset `Z₁` with closed complement `Z ∖ Z₁` over which the partition
-exists.
-
-Take an irreducible component of `Z ∩ V` for an affine open `V = Spec A`, i.e. a minimal prime
-`p` over the ideal of `Z ∩ V`, and a function `f₀` vanishing on the other components only. Cover
-the base change of `f` to the integral scheme `Spec (A ⧸ p)` by finitely many reduced affine pieces, spread out Noether normalization for each of them and shrink to a common principal open `D(s)`. -/
+/-- The induction step: a nonempty closed subset `Z` of the target contains a nonempty
+subset `Z₁` with closed complement `Z ∖ Z₁` over which the partition exists. -/
 lemma Scheme.Hom.exists_hasNoetherPartitionOver_nonempty [IsNoetherian Y] [QuasiCompact f]
     [LocallyOfFiniteType f] {Z : Set Y} (hZ : IsClosed Z) (hne : Z.Nonempty) :
     ∃ Z₁ ⊆ Z, Z₁.Nonempty ∧ IsClosed (Z \ Z₁) ∧ f.HasNoetherPartitionOver Z₁ := by
@@ -587,13 +577,13 @@ lemma Scheme.Hom.hasNoetherPartitionOver_of_isClosed [IsNoetherian Y] [QuasiComp
   have := Scheme.Hom.HasNoetherPartitionOver.union f Set.disjoint_sdiff_right hP (ih Z₂ hlt)
   rwa [Set.union_sdiff_cancel hZ₁Z] at this
 
-/-- relative Noether normalization.
+/-- Relative Noether normalization.
 
-Let `f: X ⟶ Y` be a morphism of finite type to a Noetherian scheme (for instance a separated
+Let `f : X ⟶ Y` be a morphism of finite type to a Noetherian scheme (for instance a separated
 morphism of finite type between separated schemes of finite type over a field). There are finite
 partitions of `Y` and of `X` into reduced locally closed subschemes `T b ⟶ Y` and `S a ⟶ X` such
 that each source piece `S a` maps to the target piece `T (σ a)`, through a finite morphism
-`ν a: S a ⟶ 𝔸^{d a}_{T (σ a)}` followed by the `d a` coordinate projections
+`ν a : S a ⟶ 𝔸^{d a}_{T (σ a)}` followed by the `d a` coordinate projections
 `AlgebraicGeometry.iteratedAffineLineProj`. For `d a = 0` this is just a finite morphism
 `S a ⟶ T (σ a)`. -/
 theorem exists_partition_isFinite_toIteratedAffineLine [IsNoetherian Y] [QuasiCompact f]

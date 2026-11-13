@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Flatness of the fibre-product stalk over the tensor product of stalks
 
-Source: Stacks Project, Examples, Tag 0FLS; Schemes, Tag 01I4; Algebra, Tag 00HT.
+## References
+
+* Stacks Project, Tags 0FLS, 01I4 and 00HT.
 -/
 
 @[expose] public section
@@ -37,17 +39,7 @@ private theorem preimmersion_pullback_map
   rw [pullback_map_eq_pullbackFstFstIso_inv]
   infer_instance
 
-/-- The canonical tensor-product map to a fibre-product stalk is flat.
-Source: Stacks Project, Examples, Tag 0FLS, the paragraph on the canonical stalk map.
-
-Proof: Choose affine neighbourhoods Spec R₀ of the common image and Spec A₀, Spec B₀
-of the two projected points lying over it. Their fibre product is Spec(A₀ ⊗[R₀] B₀).
-Its local ring C at x' is the localization at the prime of x'. The rings R, A and B
-are the corresponding localizations of R₀, A₀ and B₀. Consequently A ⊗[R] B is
-obtained by inverting the elements of A₀ and B₀ outside the two projected primes in
-A₀ ⊗[R₀] B₀. All these elements are units in C, so C is a further localization of
-A ⊗[R] B. The four equations identify this map with the stipulated algebra map.
-Localization is flat. No flatness hypothesis on either scheme morphism is used. -/
+/-- The canonical tensor-product map to a fibre-product stalk is flat (Stacks, Tag 0FLS). -/
 theorem pullback_stalk_tensor_flat
     {S T X : Scheme.{u}} (g : T ⟶ S) (f : X ⟶ S)
     (x' : ↥(pullback f g))

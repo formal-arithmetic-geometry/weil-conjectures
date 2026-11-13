@@ -20,8 +20,9 @@ import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
 /-! # Upper semicontinuity of fibre homology of finite free complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI,
-`literature/stacks-project/perfect.tex` (affine finite-free specialization).
+## References
+
+Stacks Project, Derived Categories of Schemes, Tag 0BDI.
 -/
 
 @[expose] public section
@@ -93,21 +94,7 @@ private theorem rank_toMatrix {F : Type*} [Field F] {X Y : Type*}
   rw [Matrix.rank_eq_finrank_range_toLin _ eY eX, Matrix.toLin_toMatrix]
 
 /-- The two adjacent differentials of a finite free complex admit fixed finite matrices
-whose residue-field ranks compute the dimension of fibre homology.
-
-Source: Stacks Project, Tag 0BDI, proof of Lemma jump-loci in
-`literature/stacks-project/perfect.tex`, affine finite-free specialization.
-
-Proof: Choose finite bases in degrees `i - 1`, `i`, `i + 1`, with cardinalities
-`a`, `c`, `b`, respectively. Let `M` be the matrix of the outgoing differential and
-`N` that of the incoming differential. Tensoring the bases with a residue field gives
-bases indexed by the same finite sets. In those bases the differentials have matrices
-obtained by applying the residue-field map to every entry. In the resulting short
-complex the incoming image lies in the outgoing kernel. Rank-nullity for the outgoing
-map and for the quotient of its kernel by the incoming image gives
-`dim H + rank M + rank N = c`. The categorical homology is isomorphic to this quotient,
-so its finrank is the same. This works also with empty bases; no boundedness hypothesis
-is needed because only three terms enter the calculation. -/
+whose residue-field ranks compute the dimension of fibre homology. (Stacks, Tag 0BDI.) -/
 private theorem finiteFreeComplex_fibre_rank_formula
     (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{max u v} A) ℤ)
     (hfree : ∀ n : ℤ, Module.Free A (K.X n) ∧ Module.Finite A (K.X n)) (i : ℤ) :
@@ -237,28 +224,7 @@ private theorem principal_finite_union (A : Type u) [CommRing A] {ι : Type*}
 /-- For a bounded complex of finite free modules over a commutative ring, the dimension of
 its homology after extension to each residue field is upper semicontinuous. Every integer
 strict sublevel set is a finite union of principal opens, hence open and quasi-compact.
-
-Source: Stacks Project, Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI,
-`literature/stacks-project/perfect.tex` (affine finite-free specialization).
-
-Proof (the three steps of the node):
-1. Choose finite bases in degrees `i - 1`, `i`, and `i + 1`. Write the adjacent
-   differentials as matrices, with fibre ranks `r₀` and `r₁`.
-   Rank-nullity for the outgoing differential, and then for the quotient of its kernel
-   by the incoming image, gives the fibre
-   homology dimension `c - r₁ - r₀`, where `c` is the rank of the middle term.
-2. The locus where a matrix has fibre rank at least `s` is the finite union of `D(Δ)`
-   for its `s` by `s` minors. Laplace expansion gives the criterion
-   using minors of exactly size `s`; the size-zero minor is `1`. Determinants commute
-   with reduction to the residue field, and their reductions are nonzero exactly outside
-   the prime. Intersections remain finite unions because `D(f) ∩ D(g) = D(fg)`.
-3. For an integer threshold `r`, the inequality on the homology dimension is equivalent
-   to `r₁ + r₀ > c - r`, with this comparison made in the integers. Both matrix ranks
-   are bounded. Thus the sublevel set is the finite union over bounded pairs `(a, b)`
-   satisfying `a + b > c - r` of the intersections of the loci `r₁ ≥ a` and `r₀ ≥ b`.
-   Step 2 makes this a finite union of principal opens. Principal opens are open and
-   quasi-compact, so these sublevel sets are open and quasi-compact and the dimension
-   function is upper semicontinuous. -/
+(Stacks, Tag 0BDI.) -/
 theorem finiteFreeComplex_homology_upperSemicontinuous
     (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{max u v} A) ℤ)
     (hbounded : ∃ a b : ℤ, K.IsStrictlyGE a ∧ K.IsStrictlyLE b)

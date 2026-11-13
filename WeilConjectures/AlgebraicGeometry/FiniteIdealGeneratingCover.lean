@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.RingedIdealGenerators
 /-!
 # A cover with finite generating lists for an ideal sheaf
 
-Source: Stacks Project, algebraization.tex, Tag 099E, first paragraph.
+## References
+
+* Stacks Project, Tag 099E
 -/
 
 @[expose] public section
@@ -23,14 +25,8 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 /-- Local finite type gives a covering family with an explicitly indexed finite generating
-list on each slice. The indexing type of the covering stays in the universe of the site.
-Source: Stacks Project, Tag 099E, first paragraph.
-
-Proof: take Mathlib's local generators data of a finite-type module. Each generator
-index type is finite; choose its equivalence with Fin of its cardinality. Apply the ideal
-inclusion to the generator sections and evaluate them at the terminal object of the slice.
-These are exactly the witnesses required by IsRingedIdealGeneratingList. The cover is
-unchanged. Empty lists and an empty covering family require no separate assumption. -/
+list on each slice. The indexing type of the covering stays in the universe of the site
+(Stacks, Tag 099E). -/
 theorem exists_finiteIdealGeneratingCover
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -56,8 +52,7 @@ theorem exists_finiteIdealGeneratingCover
   dsimp only [f]
   rw [Equiv.symm_apply_apply]
 
-/-- An object with a specified finite generating list for the restricted ideal.
-Source: Stacks Project, Tag 099E, the finite-generator subsite. -/
+/-- An object with a specified finite generating list for the restricted ideal. -/
 structure RingedIdealGeneratingIndex
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -68,11 +63,7 @@ structure RingedIdealGeneratingIndex
   f : Fin r → O.obj.obj (op U)
   generates : IsRingedIdealGeneratingList O I ι U r f
 
-/-- All objects with specified finite generating lists form a covering family.
-Source: Stacks Project, Tag 099E, first paragraph.
-
-Proof: the finite generating cover gives a subfamily of this family. Enlarge its
-covering sieves to the sieves of all objects carrying generating lists. -/
+/-- All objects with specified finite generating lists form a covering family. -/
 theorem coversTop_ringedIdealGeneratingIndex
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

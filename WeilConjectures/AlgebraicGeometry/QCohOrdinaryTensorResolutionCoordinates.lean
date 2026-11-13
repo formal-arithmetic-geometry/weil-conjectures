@@ -20,7 +20,9 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # Affine ordinary tensor coordinates for quasi-coherent coefficients
 
-Source: Stacks Project, Tags 08DX(2), 08DV, 06YT and 01I9. -/
+## References
+
+* Stacks Project, Tags 08DX, 08DV, 06YT and 01I9. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -35,20 +37,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Affine algebraic resolutions compute ordinary tensor homology of a supplied
 K-flat resolution of a quasi-coherent sheaf, naturally for supplied augmented lifts.
-This statement concerns only complexes and ordinary homology. It neither constructs
-algebraic lifts nor compares any derived tensor objects.
-
-Source: Stacks Project, Tags 08DX(2), 08DV, 06YB, 06YT and 01I9.
-
-Proof: Choose a K-flat resolution F -> N[0] using
-CochainComplex.exists_isKFlatResolution. For each affine open U, take the explicitly
-constructed tensorResolutionCoordinateSections for P_U, K and F. These are the
-normalized coordinates from the exact affine sheaf comparison and the common
-K-flat tensor zigzag. Apply tensorResolutionCoordinateSections_naturality directly
-to each supplied b, a and k with their augmentation, coefficient and tensor
-formulas. This gives the required restriction equation for that coordinate family.
-No comparison witnesses or comparison-independence homotopy are needed. The same
-construction covers unbounded K, n=0, zero coefficients and empty affine opens. -/
+This statement concerns only complexes and ordinary homology
+(Stacks, Tags 08DX, 08DV, 06YB, 06YT and 01I9). -/
 theorem exists_qcoh_ordinary_tensor_resolution_coordinates
     (Y : Scheme.{u}) (M N : SheafOfModules.{u} (moduleRings Y.toRingedSpace))
     [M.IsQuasicoherent] [N.IsQuasicoherent]

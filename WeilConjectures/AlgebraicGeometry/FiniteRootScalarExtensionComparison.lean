@@ -10,14 +10,15 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalars
 
 /-! # Canonical scalar-extension comparison for the finite root line
 
-Source: the finite-coefficient Tate identification in Steps 1 and 4(iii) of
+## Implementation details
 
-sec-poincare-duality/sec-the-trace-map-in-top-degree/sk-cor-trace/sk-thm-regular/
-sk-thm-regular.proof.md; finite twists of Stacks, Section 03PK.
+These are the adjunction and sheafification constructions extracted from
+`NormalizedTateLineOverField`, so that statements can use them without citing a normalization
+theorem.
 
-These are the existing adjunction and sheafification constructions extracted from
-NormalizedTateLineOverField. Their data and proofs are unchanged. This module owns
-both definitions so statements can use them without citing a normalization theorem.
+## References
+
+* Stacks Project, Section 03PK (finite twists).
 -/
 
 @[expose] public section

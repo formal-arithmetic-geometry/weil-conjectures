@@ -30,20 +30,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical finite-twist transport furnished by the projective-line theorem.
-The roots inclusion and pure-tensor equations characterize this transport, so this
-selection does not introduce a choice of orientation or a primitive root.
-Source: -/
+/-- The canonical finite-twist transport furnished by the projective-line theorem. -/
 def projectiveLineTraceTransport (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
     OrdinaryFiniteTwistTransport A N hA :=
   Classical.choose (exists_ordinaryFiniteP1Adjunction N hN A hA)
 
-/-- The normalized decomposition from the recorded ordinary projective-line theorem.
-The Chern arrow is fixed by its cohomology realization, the decomposition by its two
-components, and the adjunction by its counit. Consequently all data used below are
-independent of the witness selected here, up to the equality of the specified arrows.
-Source: -/
+/-- The normalized decomposition datum from the ordinary projective-line theorem. -/
 def projectiveLineTraceDatum (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :

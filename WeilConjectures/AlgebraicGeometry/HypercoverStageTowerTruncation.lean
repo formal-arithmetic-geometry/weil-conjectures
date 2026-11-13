@@ -17,9 +17,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible finite replacement stages assemble without changing any finite skeleton.
-Source: Stacks 0DAV, assembly of split skeleta. Read each object and operator at
-any stage containing its degrees. Compatibility identifies these choices; the
-simplicial identities, splitting and matching properties are checked at that stage. -/
+(Stacks, Tag 0DAV) -/
 theorem exists_hypercover_of_stage_tower_with_truncation
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

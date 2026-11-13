@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PicardBaseChangeFactorization
 
 /-! # Counit formula for the canonical Picard base-change map
 
-Source: Stacks Project, Tags 0095, 0096, 08HY and 0BDP.
+## References
+
+* Stacks Project, Tags 0095, 0096, 08HY and 0BDP.
 -/
 
 @[expose] public section
@@ -85,8 +87,7 @@ private theorem baseChange_postcompose_counit {X S T X' : Scheme.{u}}
     (tensorAdj f').counit.naturality D
   rw [Functor.map_comp, Category.assoc, hn, ← Category.assoc]
 
-/-- The square comparison from the bottom composite pullback to the top composite.
-Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks. -/
+/-- The square comparison from the bottom composite pullback to the top composite. -/
 noncomputable def picardBaseChangeSquareIso
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (A : W.Modules) :
     (tensorPullback (Limits.pullback.snd f (h ≫ j))).obj ((tensorPullback h).obj A) ≅
@@ -97,8 +98,7 @@ noncomputable def picardBaseChangeSquareIso
       (by dsimp [picardBaseChangeTop]; rw [Limits.pullback.lift_snd])) ≪≫
     (picardTensorCompIso (picardBaseChangeTop f j h) (Limits.pullback.snd f j) A).symm
 
-/-- Identify the iterated top pullback of a coefficient with its pullback to X_T.
-Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks. -/
+/-- Identify the iterated top pullback of a coefficient with its pullback to X_T. -/
 noncomputable def picardBaseChangeCoefficientIso
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules) :
     (tensorPullback (picardBaseChangeTop f j h)).obj
@@ -108,22 +108,7 @@ noncomputable def picardBaseChangeCoefficientIso
     eqToIso (congrArg (fun k ↦ (tensorPullback k).obj M)
       (by dsimp [picardBaseChangeTop]; rw [Limits.pullback.lift_fst]))
 
-/-- The adjoint of the canonical base-change map for one coefficient.
-Source: Stacks Project, Tag 08HY, mate description; Tags 0095 and 0096,
-composition comparisons.
-
-Proof: Express the map as the mate of the pushforward square, as in its definition.
-Take its transpose along p_T. Naturality of the top unit and the bottom counit,
-and the two adjunction triangle identities, give the square pullback comparison
-followed by the pullback of the p_W counit. To identify the comparison, transport
-all four tensor pullbacks to ordinary pullbacks by leftAdjointUniq. Its unit and
-counit equations identify the transported mate with the ordinary pullback square;
-ordinary pullback composition is conjugate to sectionwise pushforward composition.
-Transport back to obtain picardBaseChangeSquareIso. Finally naturality of the
-p_T counit moves the coefficient comparison out of the pushed-forward factor,
-giving the final coefficient isomorphism. This argument is for an arbitrary
-module M and involves no evaluation, tensor pairing, or invertibility of the
-base-change map; it applies also to zero modules and empty schemes. -/
+/-- The adjoint of the canonical base-change map for one coefficient. -/
 theorem picardDirectImageBaseChangeMap_counit
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules) :
     (tensorPullback (Limits.pullback.snd f (h ≫ j))).map

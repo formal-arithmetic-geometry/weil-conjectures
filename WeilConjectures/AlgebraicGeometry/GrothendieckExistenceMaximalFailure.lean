@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealQuotient
 
 /-! # A maximal closed counterexample to proper algebraization
 
-Source: Stacks Project, Proposition 088C, first two paragraphs of the proof.
+## References
+
+* [Stacks Project, Tag 088C]
 -/
 
 @[expose] public section
@@ -32,26 +34,7 @@ namespace AlgebraicGeometry
 
 /-- Failure of proper existence reduces to a nonempty closed subscheme on which
 algebraization fails, but completion on every nonzero closed quotient is an equivalence.
-Source: Stacks Project, Proposition 088C, first two paragraphs of the proof.
-
-Proof:
-1. Identify the kernel ideal of Spec(A/I) with the ideal sheaf of I, using the
-Gamma-Spec naturality square and ker(A -> A/I) = I. Proper full faithfulness then
-turns failure of equivalence into an object outside the essential image.
-2. Consider the set of kernels of closed immersions j:Z -> X for which completion
-on Z is not an equivalence. The identity immersion shows that this set is nonempty.
-Apply Noetherian ACC to choose a maximal kernel L, retaining an immersion j with
-kernel L and failing completion. Properness supplies Noetherianity on X and Z.
-3. Z cannot be empty: an empty scheme embeds into projective space of dimension zero.
-Its structural map is j followed by f, by uniqueness of maps from the empty scheme.
-Projective existence would make its completion an equivalence, a contradiction.
-Proper full faithfulness supplies a formal module M outside the essential image on Z.
-4. For a nonzero ideal K on Z, the composite V(K) -> Z -> X has kernel containing L.
-Equality would make V(K) -> Z an isomorphism by the closed-immersion ideal correspondence,
-forcing K = 0. Thus the kernel strictly contains L. If its completion failed, this
-kernel would belong to the failing set, contradicting maximality. Ideal comap composition
-identifies its completion ideal with the one in the conclusion. Noetherian witnesses
-are propositions, so this argument holds for every such witness on V(K). -/
+(Stacks, Proposition 088C) -/
 theorem proper_existence_maximal_failure
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A] (X : Scheme.{u})

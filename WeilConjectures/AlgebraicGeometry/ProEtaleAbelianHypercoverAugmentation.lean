@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianHypercoverTotal
 /-!
 # The restriction augmentation into total hypercover sections
 
-Source: Stacks Project, Tag 09A2, lemma-compute-cohomology.
+## References
+
+* Stacks Project, Tag 09A2.
 -/
 
 @[expose] public section
@@ -28,16 +30,15 @@ variable (X : Scheme.{u})
   (W : X.ProEt) (U : SimplicialObject (Over W))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction to the vertices, with scalars restricted from the augmentation object.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction to the vertices, with scalars restricted from the augmentation object
+(Stacks, Tag 09A2). -/
 noncomputable def abelianHypercoverRestrictionZero
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     ((sheafSections (topology X) AddCommGrpCat.{u + 1}).obj (op W)).obj I ⟶
       ((abelianHypercoverSections X W U).obj I).obj ⦋0⦌ :=
   I.obj.map (U _⦋0⦌).hom.op
 
-/-- Restriction to vertices agrees with ordinary sheaf restriction.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction to vertices agrees with ordinary sheaf restriction (Stacks, Tag 09A2). -/
 @[simp]
 lemma abelianHypercoverRestrictionZero_apply
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1})
@@ -56,8 +57,8 @@ private theorem abelianHypercoverRestrictionZero_naturality
   simp only [AddCommGrpCat.comp_apply, abelianHypercoverRestrictionZero_apply]
   exact ConcreteCategory.congr_hom (f.hom.naturality (U _⦋0⦌).hom.op).symm x
 
-/-- The restriction to vertices is killed by the alternating face differential.
-Source: Stacks Project, Tag 01GE. -/
+/-- The restriction to vertices is killed by the alternating face differential
+(Stacks, Tag 01GE). -/
 theorem abelianHypercoverRestrictionZero_d
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     abelianHypercoverRestrictionZero X W U I ≫
@@ -79,8 +80,7 @@ theorem abelianHypercoverRestrictionZero_d
       congrArg Quiver.Hom.op ((U.δ 0).w.trans (U.δ 1).w.symm)
   rw [h]
 
-/-- Restriction into degree zero of the alternating section complex.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction into degree zero of the alternating section complex (Stacks, Tag 09A2). -/
 noncomputable def abelianHypercoverRowAugmentation
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     ((sheafSections (topology X) AddCommGrpCat.{u + 1}).obj (op W)).obj I ⟶
@@ -91,8 +91,8 @@ noncomputable def abelianHypercoverRowAugmentation
         ComplexShape.embeddingUpNat (i := 0) rfl).inv
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction into the extended section row is natural in the module sheaf.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction into the extended section row is natural in the module sheaf
+(Stacks, Tag 09A2). -/
 @[reassoc]
 lemma abelianHypercoverRowAugmentation_naturality
     {I J : Sheaf (topology X) AddCommGrpCat.{u + 1}}
@@ -108,8 +108,7 @@ lemma abelianHypercoverRowAugmentation_naturality
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The extended section-row differential kills the augmentation.
-Source: Stacks Project, Tag 01GE. -/
+/-- The extended section-row differential kills the augmentation (Stacks, Tag 01GE). -/
 @[reassoc (attr := simp)]
 lemma abelianHypercoverRowAugmentation_d
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
@@ -120,8 +119,8 @@ lemma abelianHypercoverRowAugmentation_d
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← Category.assoc, abelianHypercoverRestrictionZero_d, zero_comp]
 
-/-- The augmented row, with the augmentation object placed in degree zero.
-Source: Stacks Project, Tags 09A2 and 01GE. -/
+/-- The augmented row, with the augmentation object placed in degree zero
+(Stacks, Tags 09A2 and 01GE). -/
 noncomputable def abelianHypercoverRowAugmentationComplex
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     (HomologicalComplex.single _ (.up ℤ) 0).obj
@@ -135,8 +134,7 @@ noncomputable def abelianHypercoverRowAugmentationComplex
 -- The total augmentation expands the section, extension and total functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical augmentation of a coefficient complex into total hypercover sections.
-Its degree-n component is restriction into the (0,n) summand.
-Source: Stacks Project, Tag 09A2. -/
+Its degree-n component is restriction into the (0,n) summand (Stacks, Tag 09A2). -/
 noncomputable def abelianHypercoverAugmentation :
     ((sheafSections (topology X) AddCommGrpCat.{u + 1}).obj (op W)).mapHomologicalComplex
           (ComplexShape.up ℤ) ⟶ abelianHypercoverTotal X W U where

@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # Evaluation mates of normalized derived internal Hom
-Source: Stacks, Tags 08I3, 08DJ and 079U.
+
+## References
+
+* [Stacks, Tag 08I3], [Stacks, Tag 08DJ], [Stacks, Tag 079U]
 -/
 
 @[expose] public section
@@ -44,8 +47,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 include hx hy in
-/-- Transpose pulled-back evaluation in both Hom variables.
-Source: Stacks, Remark 08I3. -/
+/-- Transpose pulled-back evaluation in both Hom variables (Stacks, Tag 08I3). -/
 private theorem evaluationMate_exists :
     ∃ γ : H ⟶ F.op.prod F ⋙ J ⋙ R,
       ∀ K L : C,
@@ -109,20 +111,8 @@ variable [∀ Z : Scheme.{u},
 
 set_option maxHeartbeats 800000 in
 -- Comparing the normalized adjunctions unfolds their canonical tensor-Hom data.
-/-- The natural evaluation mate for fixed pullback and tensor-Hom adjunctions.
-This statement concerns only sheaf internal Hom, with no global sections or base rings.
-Source: Stacks, Remark 08I3, Lemmas 08DJ and 079U.
-Proof: use K-flat resolutions of both tensor inputs and the canonical degreewise
-pullback tensor isomorphism. The left-derived counits and localization tensor maps
-transport this to an invertible comparison on derived objects. Comparisons between
-K-flat resolutions give independence and naturality, hence a natural isomorphism t
-whose hom satisfies IsCanonicalPullbackTensorComparison. For each (K,L), precompose
-pullback of the evaluation counit by t.inv, transpose by bT, and then transpose by a.
-The displayed mate equation follows by cancellation of the Hom equivalences.
-For naturality, apply the inverse equivalence of a to the naturality square and
-uncurry by bT. Naturality of t and the three-variable naturality supplied by hS
-and hT reduce both sides to pullback of the same evaluation square. Injectivity
-of those equivalences gives equality of the two composites, defining gamma. -/
+/-- The natural evaluation mate for fixed pullback and tensor-Hom adjunctions, for sheaf
+internal Hom (Stacks, Tags 08I3, 08DJ, 079U). -/
 theorem exists_normalizedInternalHomPullbackComparison
     {T S : Scheme.{u}} (g : T ⟶ S)
     (a : derivedPullback g ⊣ schemeDerivedDirectImage g)

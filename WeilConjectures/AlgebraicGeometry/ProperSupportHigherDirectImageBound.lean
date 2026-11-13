@@ -24,7 +24,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-! # Eventual vanishing for a coherent module with proper support
 
-Source: Stacks Project, Tags 08E2, 0CYS and 01XJ.
+## References
+
+* [Stacks, Tag 08E2], [Stacks, Tag 0CYS], [Stacks, Tag 01XJ]
 -/
 
 @[expose] public section
@@ -36,24 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Higher direct images of one coherent module with proper support eventually vanish.
-Source: Stacks Project, Tag 08E2, boundedness-above paragraph, using Tags 0CYS and 01XJ.
-
-Proof:
-1. Local finite type over S makes X locally Noetherian. Coherence of M implies
-   quasi-coherence and finite type. By Tag 0CYS express M as i_*G for a closed immersion
-   i:Z -> X, where G is finite type and quasi-coherent and g=i followed by f is proper.
-2. A closed immersion is affine. The affine derived-cohomology comparison shows
-   Ri_*G[0] has cohomology only in degree zero, where it is i_*G. The heart equivalence
-   identifies Ri_*G[0] with M[0]. Derived direct-image composition then identifies
-   Rg_*G[0] with Rf_*M[0]. These identifications hold in the standard derived categories;
-   ordinary higher direct images agree with their cohomology by the single comparison.
-3. The proper morphism g is quasi-compact and quasi-separated. Since S is Noetherian
-   it is quasi-compact; the uniform derived bound of Tag 08D5 applies to G[0], whose
-   cohomology is quasi-coherent and nonpositive. Choose the positive bound N and apply
-   it in degrees p >= N.toNat. Transport vanishing through
-   the isomorphisms of step 2. Empty support and the zero module cause no exception:
-   the closed-immersion presentation then has zero G and all higher images are zero.
--/
+(Stacks, Tag 08E2) -/
 theorem moduleHigherDirectImage_eventually_isZero
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace))

@@ -34,18 +34,8 @@ private theorem transport_left_congr {X S T : Scheme.{u}} {f : X ⟶ S}
   cases he
   rfl
 
-/-- Effectivity follows from effective, transport-compatible affine-open restrictions.
-Source: Stacks Project, Descent, Tag 02W3, final paragraph of the general-base proof.
-
-First glue the models to obtain a global pullback projection q which is invariant
-for test schemes mapping into an affine open of S. For arbitrary test points
-f₁ and f₂ with the same image in S, cover their source T by the inverse images
-of the affine opens of S. On each member, lift f₁, f₂ and the given point of V
-to the chosen pullbacks. Local invariance of q gives the desired equality there.
-Naturality of D identifies this transported lifted point with the restriction
-of the original transported point. The morphism extensionality theorem for the
-open cover of T proves the equality globally. This supplies global transport
-invariance while retaining the pullback square, and hence proves effectivity. -/
+/-- Effectivity follows from effective, transport-compatible affine-open restrictions
+(Stacks, Descent, Tag 02W3). -/
 theorem fpqc_isEffective_of_affine_open_restrictions
     {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

@@ -23,23 +23,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A stalk homotopy of single-complex maps spreads inside a prescribed neighbourhood.
-
-Proof: The single complex Q has zero differentials, and its restrictions and
-pullbacks still have zero differentials. Thus the equations of the homotopy hQ
-say that the pullbacks of c and e agree in each degree. Outside degree i all
-terms are zero, so only the degree-i equation is relevant. Identify the degree-i
-term after restriction with the rank-r free sheaf, using restriction of the
-standard basis. In this basis the difference of the degree-i maps is a finite
-r by r matrix of sections on V. Pullback along V.fromSpecStalkOfMem evaluates
-its entries at their germs in O_{Y,y}; the degree-i equation of hQ therefore
-says that every entry has zero germ. For each of the finitely many entries,
-the germ equality criterion gives a neighbourhood inside V on which it is zero.
-Intersect them with U to get W containing y and contained in U. All degree-i
-entries vanish on W, hence the restricted maps agree there; in other degrees
-they agree since their source terms are zero. Homotopy.ofEq gives the asserted
-homotopy. If r=0 there are no entries and W=U suffices. Negative or arbitrarily
-large i do not matter: the complex is supported only in that one degree. -/
+/-- A stalk homotopy of single-complex maps spreads inside a prescribed neighbourhood. -/
 theorem exists_shrink_homotopy_Q_inside_of_stalk
     {Y : Scheme.{u}}
     (i : ℤ) (r : ℕ) (y : Y) (V : Y.Opens) (hyV : y ∈ V)

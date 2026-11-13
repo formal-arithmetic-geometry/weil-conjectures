@@ -16,8 +16,9 @@ import Mathlib.Order.Disjointed
 /-!
 # A finite surjective disjoint union of open immersions has a section
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma 59.80.6 (Tag 09ZA),
-proof, final paragraph.
+## References
+
+* Stacks Project, Tag 09ZA.
 -/
 
 @[expose] public section
@@ -28,29 +29,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: literature/stacks-project/etale-cohomology.tex, Lemma 59.80.6 (Tag 09ZA),
-proof, final paragraph.
-
-The finite coproduct decomposition is represented by a finite index `Fin n`, with
-open-and-closed coproduct injections `k`; the restrictions of `p` are the morphisms
-`pᵢ`, each an open immersion. The conclusion is a section of `p`.
-
-Proof:
-1. Put `Uᵢ = pᵢ(Vᵢ)`. These images are open by, and closed because `p` is a closed map by and each `Vᵢ` is closed in `V`.
-   They cover `Z` by and the coproduct decomposition.
-2. For each nonempty subset `A` of the indices, take the intersection of the `Uᵢ`
-   for `i ∈ A` and their complements for `i ∉ A`. These finite intersections are
-   clopen, pairwise disjoint, and cover `Z`: a point belongs to the unique stratum
-   indexed by the nonempty set of images containing it. Choose the least index in
-   `A`; its image contains that stratum. Empty strata cause no difficulty.
-3. By, the chosen `pᵢ` identifies `Vᵢ`
-   with `Uᵢ`. Factor the stratum inclusion through `Uᵢ` using, compose with the inverse
-   of this isomorphism and then with `kᵢ`. Its composite with `p` is the stratum
-   inclusion.
-4. These local sections agree on overlaps, which are empty for distinct strata;
-   the empty scheme has a unique morphism to `V`. Glue them using. The composite with `p` restricts to the
-   identity on every stratum, hence equals the identity by uniqueness of gluing.
--/
+/-- A finite surjective morphism `p : V ⟶ Z` whose source is a finite disjoint union of
+open-and-closed subschemes `Vᵢ`, on each of which `p` is an open immersion, has a section.
+(Stacks, Tag 09ZA.) -/
 theorem exists_section_of_finite_clopen_open_cover
     {n : ℕ} (Z V : Scheme.{u}) (p : V ⟶ Z)
     [IsFinite p] [Surjective p]

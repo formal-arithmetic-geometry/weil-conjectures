@@ -21,14 +21,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite lisse stratification can be refined so that every stratum is irreducible.
-This is the topological and scheme theoretic refinement step in the proof of
-`exists_irreducible_lisse_stratification`.
-
-Proof: refine each Noetherian lisse stratum by its finitely many irreducible
-components, removing earlier components and pulling back the sheaf; the resulting
-open pieces are nonempty irreducible locally closed subschemes and preserve finite
-local constancy under pullback. -/
+/-- A finite lisse stratification can be refined so that every stratum is irreducible. -/
 theorem exists_irreducible_refinement
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

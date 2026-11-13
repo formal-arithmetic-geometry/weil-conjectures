@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 
 /-! # Comparing open module stalks under restriction
 
-Source: Stacks Project, Tag 00A0(3), stalks of restrictions to open subspaces.
+## References
+
+* Stacks Project, Tag 00A0, stalks of restrictions to open subspaces.
 -/
 
 public section
@@ -137,20 +139,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restricting a module sheaf to a smaller open does not change its stalk,
 with both stalks regarded as modules over the ambient scheme's stalk ring.
-
-Source: Stacks Project, Tag 00A0(3) (restriction to an open subspace),
-also for sheaves of modules as specified there.
-
-Proof: Apply Scheme.Modules.overMapCompOverEquiv to identify restriction on
-slice sites with restriction along the open immersion V.toScheme to W.toScheme.
-The neighbourhoods of x contained in V are cofinal among those contained in W.
-The resulting colimit comparison on underlying abelian groups is the natural
-isomorphism Scheme.Modules.restrictStalkNatIso. Its formula on germs shows that
-it respects multiplication by germs of structure-sheaf sections. The composite
-of the two open-immersion stalk-ring maps is the ambient stalk-ring map, so after
-restriction of scalars both sides are modules over the identical ring O_X,x.
-This supplies inverse linear maps and their naturality on every sheaf morphism.
-The construction also applies to V=W, when the comparison is the identity. -/
+(Stacks, Tag 00A0) -/
 def openModuleStalkRestrictionComparison
     (X : Scheme.{u}) (W V : X.Opens) (hVW : V ≤ W)
     (x : X) (hxW : x ∈ W) (hxV : x ∈ V) :

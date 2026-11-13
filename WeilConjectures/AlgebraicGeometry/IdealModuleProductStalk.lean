@@ -21,8 +21,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-!
 # Stalks of ideal-module products, quotients, and powers
 
-Source: literature/stacks-project/modules.tex, Lemmas 01AG and 01CB, as used in
-Cohomology of Schemes, proof of Lemma 0CYV.
+## References
+
+* Stacks Project, Modules, Tags 01AG and 01CB, as used in the proof of Tag 0CYV
+  (Cohomology of Schemes).
 -/
 
 @[expose] public section
@@ -36,16 +38,14 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- The product `𝒥𝓕 ⊆ 𝓕` of a sheaf of ideals `ι: 𝒥 ⟶ 𝒪_X` and an `𝒪_X`-module `𝓕`:
-the image of the multiplication map `𝒥 ⊗ 𝓕 ⟶ 𝒪_X ⊗ 𝓕 ≅ 𝓕`, `a ⊗ s ↦ a s`.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0CYV. -/
+/-- The product `𝒥𝓕 ⊆ 𝓕` of a sheaf of ideals `ι : 𝒥 ⟶ 𝒪_X` and an `𝒪_X`-module `𝓕`:
+the image of the multiplication map `𝒥 ⊗ 𝓕 ⟶ 𝒪_X ⊗ 𝓕 ≅ 𝓕`, `a ⊗ s ↦ a s`. -/
 def idealModuleProduct {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) : X.Modules :=
   letI : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
   image (ι ▷ F ≫ (λ_ F).hom)
 
-/-- The inclusion `𝒥𝓕 ⟶ 𝓕` of the product of a sheaf of ideals and a module.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0CYV. -/
+/-- The inclusion `𝒥𝓕 ⟶ 𝓕` of the product of a sheaf of ideals and a module. -/
 def idealModuleProductι {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) :
     idealModuleProduct ι F ⟶ F :=
@@ -53,8 +53,7 @@ def idealModuleProductι {X : Scheme.{u}} {J : X.Modules}
   image.ι (ι ▷ F ≫ (λ_ F).hom)
 
 /-- The powers `𝒥ⁿ ⊆ 𝒪_X` of a sheaf of ideals, with their inclusions into `𝒪_X`:
-`𝒥¹ = 𝒥` and `𝒥ⁿ⁺¹ = 𝒥 · 𝒥ⁿ ⊆ 𝒥ⁿ ⊆ 𝒪_X`; the value at `0` is `𝒪_X` and is not used.
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0CYV. -/
+`𝒥¹ = 𝒥` and `𝒥ⁿ⁺¹ = 𝒥 · 𝒥ⁿ ⊆ 𝒥ⁿ ⊆ 𝒪_X`; the value at `0` is `𝒪_X`. -/
 def idealSheafPower {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) :
     ℕ → Σ P : X.Modules, P ⟶ SheafOfModules.unit X.ringCatSheaf
@@ -149,21 +148,12 @@ private theorem stalk_quotient {X : Scheme.{u}} {M N : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Stalks of ideal sheaves, of products `𝒥𝓕`, of quotients `𝓕/𝒥𝓕` and of powers.
-Let `ι: 𝒥 ⟶ 𝒪_X` be a sheaf of ideals, `𝓕` an `𝒪_X`-module and `x ∈ X`; `e` is the
+Let `ι : 𝒥 ⟶ 𝒪_X` be a sheaf of ideals, `𝓕` an `𝒪_X`-module and `x ∈ X`; `e` is the
 identification of the stalk of `𝒪_X` with `𝒪_{X,x}` (germs to germs) and `I` the image of
 `𝒥_x` in `𝒪_{X,x}`. Then `𝒥_x ⟶ 𝒪_{X,x}` and `(𝒥𝓕)_x ⟶ 𝓕_x` are injective,
 `(𝒥𝓕)_x = I 𝓕_x`, the stalk of `𝓕 ⟶ 𝓕/𝒥𝓕` induces `𝓕_x / I 𝓕_x ≅ (𝓕/𝒥𝓕)_x`, and for
 `n ≥ 1`: `(𝒥ⁿ)_x = Iⁿ`, `(𝒥ⁿ𝓕)_x = Iⁿ 𝓕_x` and `𝓕_x / Iⁿ 𝓕_x ≅ (𝓕/𝒥ⁿ𝓕)_x`.
-Source: Stacks Project, Modules, Lemmas 01AG and 01CB; Cohomology of Schemes,
-proof of Lemma 0CYV.
-
-Proof: the stalk functor is exact (Modules, Lemma 01AG), so it preserves monomorphisms,
-images and cokernels; this gives the injectivity of `𝒥_x ⟶ 𝒪_{X,x}` and of
-`(𝒥𝓕)_x ⟶ 𝓕_x`, and `(𝓕/𝒥𝓕)_x = 𝓕_x/(𝒥𝓕)_x`. By Lemma 01CB the stalk of
-`𝒥 ⊗ 𝓕 ⟶ 𝓕` is the multiplication `𝒥_x ⊗ 𝓕_x ⟶ 𝓕_x`, whose image is `𝒥_x 𝓕_x`;
-this is (2), and (3) follows. For (4) induct on `n`: `(𝒥ⁿ⁺¹)_x = 𝒥_x (𝒥ⁿ)_x =
-I · Iⁿ = Iⁿ⁺¹` by (2) applied to `𝓕 = 𝒥ⁿ`, and the remaining two claims are (2) and (3)
-for the ideal `𝒥ⁿ`. -/
+(Stacks, Tags 01AG, 01CB and 0CYV) -/
 theorem ideal_module_product_stalk {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] (F : X.Modules) (x : X) :
     let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x

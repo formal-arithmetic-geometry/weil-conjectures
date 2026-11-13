@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.MixedTensorPairingBaseChangeTransport
 import WeilConjectures.AlgebraicGeometry.MixedTensorPairingBaseChangeNaturality
 
 /-! # Base change preserves the direct-image tensor pairing
-Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
-duality.tex Tag 0AA8, final comparison diagrams.
+
+## References
+
+* Stacks Project, Tags 08I3, 08HY and 0AA8.
 -/
 
 @[expose] public section
@@ -28,8 +30,8 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The direct-image tensor pairing, constructed by transposing the tensor of counits.
-Source: Stacks Project, cohomology.tex Tag 079U and Remark 08HY. -/
+/-- The direct-image tensor pairing, constructed by transposing the tensor of counits
+(Stacks, Tags 079U and 08HY). -/
 def mixedDirectImageTensorPairing {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).obj A ⊗ (schemeDerivedDirectImage f).obj B ⟶
@@ -41,24 +43,8 @@ def mixedDirectImageTensorPairing {X Y : Scheme.{u}} (f : X ⟶ Y)
         (schemeHomPullbackAdjunction f).counit.app B))
 
 /-- Base change transports an arbitrary tensor pairing. This is independent of internal
-Hom: `a` is any morphism from a tensor product, with no closed structure involved.
-Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
-duality.tex Tag 0AA8, final comparison diagrams.
-
-Proof: first take a to be the identity on A tensor B and transpose under the f'
-pullback/direct-image adjunction. Expand both base-change components by Remark 08HY.
-Naturality of the f' counit and its triangle identity remove the f' unit-counit pairs.
-The tensor of the two remaining f counits agrees with the f counit used in the
-right-adjoint tensor pairing, by its definition. The remaining identity states that
-pullback-composition comparisons preserve the normalized tensorators. On K-flat
-representatives this is the ordinary module pullback-composition tensor identity:
-both composites send a pure tensor of sections to the tensor of the same two
-pulled-back sections. The normalization equations for the tensorators and the
-composition comparisons, and the invertible K-flat derived counits, transport the
-identity to the derived category. K-flat resolutions and naturality extend it to
-arbitrary A and B. Finally postcompose with direct image of pulled-back a. Naturality
-of the base-change mate in A tensor B moves a to the right side, and functoriality
-gives the stated identity. No base-change morphism is cancelled or assumed invertible. -/
+Hom: `a` is any morphism from a tensor product, with no closed structure involved
+(Stacks, Tags 08I3, 08HY and 0AA8). -/
 theorem mixedTensorPairing_baseChange
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (A B C : schemeDerivedCategory X) (a : A ⊗ B ⟶ C) :

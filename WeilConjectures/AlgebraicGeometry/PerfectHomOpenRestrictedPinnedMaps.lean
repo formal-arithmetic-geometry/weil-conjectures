@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFie
 import WeilConjectures.AlgebraicGeometry.PerfectHomOpenRestrictionTransport
 
 /-! # Pinned restriction comparisons
-Source: Stacks Tags 079W, 08FE and 09RE.
+
+## References
+
+* Stacks Project, Tags 079W, 08FE and 09RE.
 -/
 
 @[expose] public section
@@ -75,16 +78,7 @@ private theorem limit_natural
     (T := Over.mk (Spec.map (R.map (homOfLE j.property))))
     (T' := Over.mk (Spec.map (c.ι.app i))) _ g f
 
-/-- Pinned natural equivalences respect the restricted transition and cocone maps.
-
-Source: Stacks Project, Cohomology Tags 079W and 08FE; perfect.tex Tag 09RE.
-Proof: evaluate each transition equation at the identity of the restricted stage
-object. The pinned equations turn the two sides into restrictions of the original
-transition equation, using commutation of cartesian restriction and transport.
-For any testing morphism f on B, testing-object naturality expresses both sides
-as pullback(f) followed by those identity values. Naturality of conjugated Hom
-transport allows the same expression on the right. Thus the identity equation
-implies the equation for every f, without lifting f to Y. -/
+/-- Pinned natural equivalences respect the restricted transition and cocone maps. -/
 theorem perfect_hom_open_restricted_pinned_maps
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

@@ -162,7 +162,10 @@ set_option linter.privateModule false
 
 /-! # Constructibility under continuous integral section encoding
 
-Source: Bhatt--Scholze, Definition 6.8.10; Stacks Project, Tag 00YV.
+## References
+
+* Bhatt--Scholze, Definition 6.8.10
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section

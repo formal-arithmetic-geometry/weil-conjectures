@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AbelianFreeRepresentablePullback
 
 /-! # Pullback of derived Hom classes across a test-object square
 
-Source: Stacks Project, Tags 03CB, 03Q8 and 0EYM.
+## References
+
+* Stacks Project, Tags 03CB, 03Q8 and 0EYM
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 /-- The map on the free-sheaf sources of the derived Hom classes.
 The test-object arrow first maps the free sheaf on `W'` to the pullback of
 that on `W`. Pullback by `h'`, followed by inverse-image composition across
-`sq`, produces a morphism to `a^* h^* ℤ[W]`.
-Source: Stacks Project, Tags 03CB and 03Q8. -/
+`sq`, produces a morphism to `a^* h^* ℤ[W]`. -/
 noncomputable def higherImageCohomologySquareRawSource
     {Y Y' S S' : Scheme.{u}}
     {h : Y ⟶ S} {h' : Y' ⟶ S'} {a : Y' ⟶ Y} {b : S' ⟶ S}
@@ -46,9 +47,7 @@ noncomputable def higherImageCohomologySquareRawSource
     (upperStarComp AddCommGrpCat.{u + 1} a h (a ≫ h) rfl).hom.app A
 
 /-- The explicit raw square pullback. It uses only the free-sheaf source map,
-the exact inverse-image single and shift comparisons, and the coefficient map.
-No cohomology comparison or higher-direct-image exchange is used to define it.
-Source: Stacks Project, Tags 03Q8, 07A7 and 0EYM. -/
+the exact inverse-image single and shift comparisons, and the coefficient map. -/
 noncomputable def higherImageCohomologySquareRawMap
     {Y Y' S S' : Scheme.{u}}
     {h : Y ⟶ S} {h' : Y' ⟶ S'} {a : Y' ⟶ Y} {b : S' ⟶ S}

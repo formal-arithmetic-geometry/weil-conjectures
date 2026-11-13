@@ -20,7 +20,9 @@ set_option linter.privateModule false
 /-!
 # Detection by pro-etale covers of finitely many locally closed strata
 
-Source: Stacks Project, Tags 09AH and 09AB, followed by finite-stratum induction.
+## References
+
+* Stacks Project, Tags 09AH and 09AB.
 -/
 
 @[expose] public section
@@ -52,8 +54,8 @@ private noncomputable def modelSheafEquivalence (X : Scheme.{u})
     (modelSheafEquivalence Y D).fullyFaithfulFunctor
     (modelSheafEquivalence X D).fullyFaithfulFunctor (Iso.refl _) (Iso.refl _)
 
-/-- The ordinary localization at quasi-isomorphisms for modules over any ring sheaf.
-Source: Stacks, Tag 05RU. -/
+/-- The ordinary localization at quasi-isomorphisms for modules over any ring sheaf
+(Stacks, Tag 05RU). -/
 noncomputable instance proEtaleAllRingModules_hasDerivedCategory (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
     HasDerivedCategory (ringedSiteModules.{u + 1} R) :=

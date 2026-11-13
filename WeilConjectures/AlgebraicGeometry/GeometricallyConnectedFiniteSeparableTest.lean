@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Testing geometric connectedness by finite separable extensions
 
-Source: Stacks Project, Varieties, Lemma Tag 0389.
+## References
+
+* Stacks Project, Tag 0389.
 -/
 
 @[expose] public section
@@ -69,53 +71,7 @@ private theorem invariant_clopen_eq_empty_or_univ
     simpa only [h, Set.preimage_univ] using hpreA.symm
 
 /-- A scheme over a field is geometrically connected precisely when its base change to
- every finite separable field extension is connected.
-Source: Stacks Project, Varieties, Lemma Tag 0389.
-
-Proof:
-1. Geometric connectedness gives connectedness after every field extension, hence every
-   finite separable extension.
-2. Conversely, assume the finite separable tests hold. Choose a separable closure `ks/k`,
-   Galois over `k` and every intermediate field. The automorphisms of `ks/k` act on `Y_ks`
-   by base change, contravariantly, and fix its projection `p` to `Y`.
-   This projection is surjective.
-3. The degree-one test `k/k` makes `Y` nonempty, so `Y_ks` is nonempty too.
-4. If `Y` were not geometrically connected, `Y_ks` would be disconnected: otherwise
-   lem-weil-separably-closed-geometrically-connected and
-   lem-weil-geometrically-connected-check-after-extension imply geometric connectedness of `Y`.
-   Thus write `Y_ks` as the disjoint union of nonempty clopen subsets `Ubar` and `Vbar`.
-5. For every quasi-compact open `W` of `Y`, its inverse image `W_ks` is quasi-compact:
-   the projection is quasi-compact by lem-weil-pbc-qcqs-morphism-permanence, and `W` is a
-   finite union of affine opens. Its intersections with
-   `Ubar` and `Vbar` are quasi-compact by lem-weil-pbc-closed-in-quasi-compact. By
-   lem-weil-pbc-galois-base-change-qc-open-descends they are invariant under automorphisms
-   fixing some finite intermediate field `k_W`.
-6. Choose a point of `Ubar` and an affine neighbourhood `W0` of its image in `Y`.
-   Set `k' = k_W0` and `H = Aut(ks/k')`. This extension is finite and separable algebraic
-   by lem-weil-pbc-separable-closure-exists-galois; `W0_ks` intersected with `Ubar` is
-   nonempty and `H`-invariant.
-7. There are only finitely many `H`-translates of each intersection in step 5.
-   Indeed, if the inverses of two automorphisms agree on `k_W`, their translates agree,
-   since their quotient fixes `k_W`. There are finitely many embeddings of `k_W` into `ks`
-   by lem-weil-pbc-finite-extension-finitely-many-embeddings.
-8. Define `U_W` as the intersection of the translates of `W_ks` intersected with `Ubar`,
-   and `V_W` as the union of the translates of `W_ks` intersected with `Vbar`.
-   By step 7 these operations are finite, giving complementary clopen subsets of `W_ks`.
-   They are `H`-invariant by reindexing automorphisms. Also `U_W0` is nonempty, and
-   `V_W` contains `W_ks` intersected with `Vbar`.
-9. If `W` is contained in `W'`, invariance of `W_ks` and bijectivity of automorphisms
-   imply `W_ks` intersected with `U_W'` equals `U_W`, and similarly for `V`.
-   For arbitrary `W,W'`, apply this to the quasi-compact open `W` union `W'` to obtain
-   compatibility on their overlap.
-10. Take the unions of `U_W` and `V_W` over all quasi-compact opens. The compatibility
-    gives a complementary open, hence clopen, partition of `Y_ks`, since affine opens
-    cover `Y`. Both pieces are `H`-invariant. The first contains `U_W0`; the second
-    contains every point of `Vbar` by choosing an affine neighbourhood of its image.
-11. Pullback pasting identifies `Y_ks` with the base change of `Y_k'` to `ks`, with the same `H`-action.
-    By lem-weil-pbc-galois-invariant-closed-subset-descends the two pieces descend to closed
-    subsets of `Y_k'`. Surjectivity of `Y_ks` to `Y_k'` makes these subsets complementary and nonempty.
-    This contradicts the connectedness test for the finite separable extension `k'/k`.
--/
+every finite separable field extension is connected (Stacks, Tag 0389). -/
 theorem GeometricallyConnected.iff_connectedSpace_finite_separable
     (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
     GeometricallyConnected (Y ↘ Spec (.of k)) ↔

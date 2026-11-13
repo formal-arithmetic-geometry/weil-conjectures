@@ -11,7 +11,10 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Pullback preserves local invertibility on the image
 
-Source: Stacks Project, Tags 0097 and 04TN.
+## References
+
+* [Stacks, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+* [Stacks, Tag 04TN](https://stacks.math.columbia.edu/tag/04TN)
 -/
 
 @[expose] public section
@@ -27,18 +30,8 @@ private theorem isIso_tensorPullback_iff_pullback {X Y : Scheme.{u}} (f : X ⟶ 
   exact NatIso.isIso_map_iff (adj.leftAdjointUniq (pullbackPushforwardAdjunction f)) φ
 
 /-- Pulling a map back to a scheme whose image lies in its locally invertible open
-produces an isomorphism. No finite generation assumption is needed in this direction.
-Source: Stacks Project, Tag 0097 (composition of pullback), and Tag 04TN
-(isomorphisms are local on the source).
-
-Proof: The inverse images of all invertibility opens cover T by the range-containment
-hypothesis. On each, composition of pullbacks identifies the restricted pulled-back
-map with a further pullback of an invertible map, so it is invertible. Identify tensor
-pullback with Mathlib pullback by their adjunctions to the same pushforward; identify
-open pullback with restriction, and restriction with the over functor. Forgetting to
-abelian sheaves reflects isomorphisms. Their restrictions are invertible on a covering
-family, so Mathlib's sheaf locality theorem gives a global inverse. This also applies
-to empty T, with the empty family covering its empty top open. -/
+produces an isomorphism. No finite generation assumption is needed (Stacks, Tags 0097
+and 04TN). -/
 theorem isIso_tensorPullback_of_range_subset_moduleMapIsoLocus {W T : Scheme.{u}}
     {M N : W.Modules} (φ : M ⟶ N) (h : T ⟶ W)
     (hh : Set.range h ⊆ (moduleMapIsoLocus φ : Set W)) :

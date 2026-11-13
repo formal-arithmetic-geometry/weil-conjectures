@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 
 /-! # Ordinary evaluation and one part of the differential
 
-Source: Stacks Project, Tag 08DQ, and Section 20.41.
+## References
+
+* Stacks Project, Tag 08DQ, and Section 20.41.
 -/
 
 @[expose] public section
@@ -38,13 +40,7 @@ private theorem projectionHomMap_zero (X : Scheme.{u}) (U : X.Opens)
   ext W x
   rfl
 
-/-- The dual differential after its degree-zero projection.
-Source: Stacks Project, Tag 0A8X, section-hom-complexes, differential formula.
-Proof: apply the differential clause of homComplex_projections_exists to
-P and the structure sheaf in degree zero, with output indices r+q and 0,
-and input indices r and r+1. The single complex has zero differential, so
-its postcomposition term vanishes. The remaining term is precomposition
-by d_P with coefficient -(-1)^q. This uses no finiteness or nonzero condition. -/
+/-- The dual differential after its degree-zero projection (Stacks, Tag 0A8X). -/
 theorem ordinaryEvaluation_dual_projection_differential (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ)
     (q r : ℤ) (h : r + (q + 1) = 0) :

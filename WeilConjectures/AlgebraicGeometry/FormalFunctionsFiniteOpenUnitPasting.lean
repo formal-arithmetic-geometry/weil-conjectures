@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FormalFunctionsFinitePullback
 
 /-! # Finite open coefficient-map compatibility
 
-Source: Stacks Project, Tags 02OD, 01F7 and 01FB: factorization of finite
-neighbourhoods and restriction of the underlying sheaf maps.
+## References
+
+* Stacks Project, Tags 02OD, 01F7 and 01FB
 -/
 
 @[expose] public section
@@ -112,31 +113,7 @@ set_option maxHeartbeats 500000 in
 -- The instantiated sheaf functors require extra definitional-equality checks in the chase.
 /-- Restricting the finite coefficient h-map composes the two restricted
 pullback units. This is an identity of module-sheaf morphisms, before applying
-cohomology, and uses no resolutions beyond the unit-square fields of E and D.
-Source: Stacks Project, Tag 02OD, factorization through the local spectrum;
-Tags 01F7 and 01FB, composition and restriction of h-maps.
-
-Proof: Let g be the local projection, j the finite map, and i the finite
-projection; j followed by g equals i. Transpose the definition of
-formalFunctionsFiniteFMap along tensorPullback g. Its transpose is the i-unit,
-followed by the inverse pushforward-composition identification and the
-projection-equality identification. Thus the g-unit followed by g_* of the
-finite h-map is the i-unit with these identifications.
-Transpose the desired equation under the restriction adjunction for U. Use
-E.unit_square to replace the transpose of E.psi with the g-unit followed by
-the restriction unit for U'. Naturality of pushforwardComp and pushforwardCongr
-moves the pushed-forward restricted finite h-map past these identifications.
-The assumed square hτ replaces the U'-restriction unit followed by τ by the
-finite h-map followed by the W-restriction unit. The preceding global unit
-identity then gives the i-unit followed by that restriction unit. D.unit_square
-identifies this with the transpose of D.psi. The remaining composition
-identifications agree: on an open subset of U, each is the identity followed by
-the restriction map associated to the equality of the two inverse images.
-Their equality follows from the presheaf composition law and proof irrelevance.
-Cancel the invertible pushforward identifications and use injectivity of the
-restriction adjunction homEquiv to obtain the displayed equation.
-The argument also applies to empty opens and zero coefficients, when every
-component is the zero map; it does not assume any open contains y. -/
+cohomology. (Stacks, Tags 02OD, 01F7 and 01FB.) -/
 theorem formalFunctions_finite_open_unit_pasting {X Y : Scheme.{u}} (f : X ⟶ Y)
     (y : Y) (F : X.Modules) (n : ℕ) (I : InjectiveResolution F)
     (K : InjectiveResolution

@@ -14,10 +14,12 @@ import WeilConjectures.AlgebraicGeometry.ProperFibreIdempotentDescent
 /-!
 # Idempotents on a proper fibre come from a neighbourhood
 
-Source: Stacks Project, Tag 0G7X, Lemma 36.32.7.
-
 Image membership in the pushforward stalk is expressed by a representative section on
 an open neighbourhood of the base point. No idempotence is required of the representative.
+
+## References
+
+* [Stacks Project, Tag 0G7X](https://stacks.math.columbia.edu/tag/0G7X) (Lemma 36.32.7)
 -/
 
 @[expose] public section
@@ -31,28 +33,8 @@ namespace AlgebraicGeometry
 /-- Every idempotent on the scheme-theoretic fibre of a proper morphism is the restriction
 of a section over the inverse image of an open neighbourhood of the base point. Equivalently,
 it belongs to the image of the pushforward structure-sheaf stalk: every germ has such a
-representative, and the canonical stalk-to-fibre map restricts that representative.
-Source: Stacks Project, Tag 0G7X.
-
-Proof:
-1. In the locally Noetherian case choose an affine neighbourhood of `s`. Its local ring is
-   Noetherian.
-2. Lift `e` uniquely to the infinitesimal thickenings of the fibre; uniqueness makes these
-   lifts compatible.
-3. Formal functions identifies the completion of the pushforward stalk with the inverse
-   limit of the sections on these thickenings, compatibly with restriction to the fibre.
-4. Modulo the maximal ideal, a module and its completion agree. Choose a stalk element
-   agreeing with the completed lift modulo that ideal. The ideal kills fibre sections,
-   so its image is `e`.
-5. In general restrict the base to an affine neighbourhood of `s`; properness is preserved
-   and the stalk and fibre are unchanged.
-6. Use Noetherian approximation by proper morphisms over finite-type integer algebras.
-7. The residue field and fibre are the limits of the corresponding residue fields and
-   fibres, with affine transition maps.
-8. Global sections commute with this limit. Descend `e` to a section at a finite stage,
-   then descend its equation `e * e = e` at a later stage.
-9. Apply the Noetherian case there, represent the resulting germ on an open neighbourhood,
-   and pull the representative back. Compatibility of fibre maps gives image `e`. -/
+representative, and the canonical stalk-to-fibre map restricts that representative
+(Stacks, Tag 0G7X). -/
 theorem Scheme.Hom.exists_section_restricting_to_fiber_idempotent
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S)
     (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) :

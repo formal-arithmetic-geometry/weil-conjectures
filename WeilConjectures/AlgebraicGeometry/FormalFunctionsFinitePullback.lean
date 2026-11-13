@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FormalFunctionsLocalStalkCompari
 
 /-! # Finite-level pullback of a local cohomology class
 
-Source: Stacks Project, Tag 02OD, factorization of the infinitesimal neighbourhoods;
-Tags 01F7 and 01FB, functoriality of cohomology.
+## References
+
+* Stacks Project, Tags 02OD, 01F7 and 01FB
 -/
 
 @[expose] public section
@@ -26,7 +27,7 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- The map from the infinitesimal fibre to the local base change, by pullback pasting.
-Source: Stacks Project, Tag 02OD, factorization through Spec O_y. -/
+(Stacks, Tag 02OD.) -/
 def formalFunctionsFiniteι {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
     formalFibre f y n ⟶ pullback (Y.fromSpecStalk y) f :=
   pullback.lift
@@ -36,16 +37,14 @@ def formalFunctionsFiniteι {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
     (by simpa [formalFibreBaseMap, formalFibreι, Category.assoc] using
       (pullback.condition (f := formalFibreBaseMap Y y n) (g := f)))
 
-/-- The finite-level map has the expected projection to X.
-Source: Stacks Project, Tag 02OD; the second pullback projection. -/
+/-- The finite-level map has the expected projection to `X`. -/
 theorem formalFunctionsFiniteι_snd {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
     formalFunctionsFiniteι f y n ≫ pullback.snd (Y.fromSpecStalk y) f =
       formalFibreι f y n := by
   simp [formalFunctionsFiniteι]
 
-/-- The h-map from F' to the direct image of F_n, obtained by adjunction from
-F → i_n*F_n. This specifies the map without choosing a module isomorphism.
-Source: Stacks Project, Tags 02OD and 01F7. -/
+/-- The h-map from `F'` to the direct image of `F_n`, obtained by adjunction from
+`F → i_n*F_n`. -/
 def formalFunctionsFiniteFMap {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (n : ℕ) :
     (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F ⟶
@@ -62,7 +61,7 @@ def formalFunctionsFiniteFMap {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
           ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F))
 
 /-- The canonical finite-level pullback on the underlying cohomology groups.
-Source: Stacks Project, Tags 02OD and 01FB. -/
+(Stacks, Tags 02OD and 01FB.) -/
 def formalFunctionsFinitePullback {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p n : ℕ) :
     formalFunctionsLocalCohomology f y F p →+ formalFibreCohomologyLocal f y F p n :=

@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # Extending a linear map from a finite locally free stalk
 
-Source: Stacks Project, Tag 05GF, Lemma 10.79.2, finite matrix argument.
+## References
+
+* Stacks Project, Tag 05GF
 -/
 
 @[expose] public section
@@ -81,19 +83,7 @@ private lemma homFromSections_app {W : Scheme.{u}} (M N : W.Modules)
   rfl
 
 /-- Any linear map from a finite locally free stalk is represented near the point.
-Source: Stacks Project, Tag 05GF, Lemma 10.79.2.
-
-Proof: Choose a finite free frame for M on an open neighbourhood of x. Apply t to
-its finitely many basis germs. Each resulting germ of N is represented by a
-section on some neighbourhood. Intersect these neighbourhoods with the frame
-open, and restrict the chosen sections there. The free sheaf universal property
-extends the assignment of basis vectors to these sections to a module morphism.
-For any smaller open and any section of M, the frame writes that section as a
-finite sum of coefficient sections times basis vectors. Taking germs commutes
-with this sum and scalar multiplication. Linearity of t and the chosen germ
-representatives give the displayed equality. If the frame has rank zero, use
-the unique map out of the zero sheaf and keep the frame open. No finiteness
-condition on N is required. -/
+(Stacks, Tag 05GF) -/
 theorem exists_restrict_stalk_hom_lift
     {W : Scheme.{u}} (M N : W.Modules) [M.IsFiniteLocallyFree] (x : W)
     (t : (RingedSpace.moduleStalkFunctor W.toRingedSpace x).obj M ⟶

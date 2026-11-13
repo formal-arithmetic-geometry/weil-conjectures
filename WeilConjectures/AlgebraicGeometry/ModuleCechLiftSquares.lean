@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Commuting squares for a lift between module injective resolutions
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ, functoriality of alpha and beta.
+## References
+
+* [Stacks, Cohomology of Sheaves, Tag 01EQ]
 -/
 
 @[expose] public section
@@ -26,20 +28,7 @@ local instance localInst_ModuleCechLiftSquares_1 (R : Type u) [Ring R] (J : Type
   ModuleCat.hasLimitsOfShape
 
 /-- Applying the Cech functor and totalization to a lift of a module morphism gives
-commuting squares with both comparison augmentations.
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ, proof and final functoriality
-assertion.
-
-Proof: In total degree n, alpha lands in the (n,0) summand. The total map on this
-summand is the Cech map of the nth component of the lift. Restriction of a global
-section commutes with that component by naturality of a presheaf module morphism.
-The scalar restriction at the whole space is the identity, and its identification
-commutes with module maps. This proves the alpha square componentwise. Beta lands
-in the (0,n) summand. The total map on this summand is the degree-n Cech map of the
-zeroth component of the lift. Functoriality of the Cech functor and the equation
-relating that component to the two augmentations prove the beta square. Neither
-argument needs a covering hypothesis, including for the empty indexing family.
--/
+commuting squares with both comparison augmentations (Stacks, Tag 01EQ). -/
 theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F G : X.Modules} (φ : F ⟶ G) (I : InjectiveResolution F)
     (J : InjectiveResolution G) (ψ : I.cocomplex ⟶ J.cocomplex)

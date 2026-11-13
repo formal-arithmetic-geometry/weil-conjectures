@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 
 /-! # The augmented Koszul identity class is independent of the exponent
 
-Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
+## References
+
+* Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
 -/
 
 @[expose] public section
@@ -171,25 +173,7 @@ private theorem augmentation_transition
       (ModuleCat.of A A) (n + 1) (by omega)).eq_of_tgt _ _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Augmentation sends every explicit identity class to the same structure section.
-Source: Stacks Project, Tag 08D1 (Koszul-to-Cech cocone); Tag 08DC, equation 36.9.4.1.
-
-Proof: Use postcomposition naturality of the explicit stage-to-derived-sections
-class to rewrite augmentation of the identity class as the class of the augmentation
-chain map into the structure complex. The Koszul power transition from index zero to e
-commutes with augmentation: contraction is natural under the diagonal scaling map,
-the exponent identity e-0+1=e+1 identifies the linear forms, and the degree-zero
-exterior-power equivalence is natural. In positive tail degrees the target is zero.
-Transposition takes precomposition by the sheaf transition to precomposition by the
-module transition. The defining formula of koszulCechHomDiagram identifies its
-transition on cochains with this precomposition. Naturality of the cycles inclusion
-and homology projection proves the equality of Hom-chain classes; naturality of
-homologyFunctorFactors transports it to the specified derived stage class. The colimit
-cocone identity D.map(0 to e) followed by iota_e = iota_0 makes their colimit images
-equal. Applying the Cech-to-derived-sections map gives the displayed equality.
-No inverse augmentation or choice of evaluation equivalence is needed. The argument
-works at e=0, for r=0, for zero f_j, and for the zero ring: it uses only functor laws
-and the same Koszul contraction identity, without nonvanishing assumptions. -/
+/-- Augmentation sends every explicit identity class to the same structure section. -/
 theorem koszulOpen_augmented_identity_class
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison
 
 /-! # Module and Ext cohomology comparisons compatible with scheme maps
 
-Source: Stacks Project, Tags 03FD, 01FB and 01F7.
+## References
+
+* [Stacks, Tags 03FD, 01FB and 01F7]
 -/
 
 @[expose] public section
@@ -26,25 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 
 /-- The module/Ext comparison can be normalized on both schemes so that
-it intertwines the base-change unit h-map with exact abelian inverse image on Ext.
-
-Source: Stacks Project, Tag 03FD, Lemma 21.12.4; Tag 01FB, Remark 20.14.2;
-Tag 01F7, Section 20.14.
-
-Proof: On each scheme use the comparison of universal cohomological delta functors
-normalized in degree zero by evaluation of a section at the integer 1. Forgotten
-injective modules are section-acyclic, so their section complexes compute abelian
-cohomology. Identify the free abelian representable of the top open with the
-constant integer sheaf by this same evaluation. These comparisons are natural in
-module morphisms. For an h-map phi resolve both coefficients and the direct-image
-complex as in 01FB. Its augmentation-preserving lift beta and the invertible section
-comparison mu compute the module map as H(mu) inverse after H(beta). After forgetting
-modules the same diagram computes the abelian map. Under the degree-zero-normalized
-constant-sheaf identification, that map is exact inverse image on Ext followed by
-the adjoint coefficient map. Homotopy independence removes the choices. Use
-this normalization on Y and its base change; apply the argument to baseChangeUnit for each N,
-with no flatness assumption. Degree zero gives phi on sections;
-zero coefficients and empty schemes give zero complexes. -/
+it intertwines the base-change unit h-map with exact abelian inverse image on Ext
+(Stacks, Tags 03FD, 01FB and 01F7). -/
 theorem exists_moduleCohomology_ext_pullback_comparison
     {R B : Type u} [CommRing R] [CommRing B] [Algebra R B]
     {Y : Scheme.{u}} (h : Y ⟶ Spec (.of R)) (p : ℕ) :

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionChartComparisonIsoF
 
 /-! # K-flat chart comparison naturality
 
-Source: Stacks Project, Tags 08DX(2), 06YT and 01I9.
+## References
+
+* Stacks Project, Tags 08DX, 06YT and 01I9.
 -/
 
 @[expose] public section
@@ -85,27 +87,8 @@ private theorem tensorResolution_normalize_comparison
 
 -- The four tensor squares require a larger elaboration budget.
 
-/-- Naturality of the common K-flat comparison and normalized open restriction.
-
-Source: Stacks Tags 08DX(2), 06YT and 01I9: compare the two ordinary tensor
-calculations through a common K-flat resolution and use functorial restriction.
-
-Proof in words: the formula ha implies that the extended sheafification of a
-commutes with the two chart augmentations to M[0]; this is exactly
- tensorResolutionChartAugmentation_naturality. The restriction complex isomorphisms
-for K, F, M[0] and N[0] commute with q and s by naturality. Apply
- tensorResolution_restrictedTensor_square to these squares and the augmentation
-square. This gives the four commuting squares between the legs of the tensor
-zigzags through the same restricted F. Take homology, inserting the inverse
-exact-restriction homology isomorphism at each vertex. Every horizontal leg of
-the zigzag is invertible by K-flat tensor invariance. The elementary cancellation
-lemma tensorResolution_homology_zigzag therefore gives the comparison square.
-The normalized open-restriction homology isomorphism is itself natural by
- tensorResolutionNormalizedRestrictHomologyIso_naturality, using the total tensor
-restriction square tensorResolutionChartRestriction_total. Compose its inverse
-square with the comparison square and cancel adjacent inverse isomorphisms to
-obtain the displayed formula. Neither b, k nor a coefficient presentation of N
-is involved. The argument allows arbitrary n, zero complexes and unbounded K. -/
+/-- Naturality of the common K-flat comparison and normalized open restriction
+(Stacks, Tags 08DX, 06YT and 01I9). -/
 theorem tensorResolutionChartComparisonIso_naturality
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent]
     (MA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Localizing the actual kernel conormal
 
-Source: Stacks Project, Tags 01R3 (1), 00A0 and 0096.
+## References
+
+* Stacks Project, Tags 01R3, 00A0 and 0096.
 -/
 
 @[expose] public section
@@ -262,23 +264,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restrict the actual kernel pullback to a chart where the morphism is closed.
-Source: Stacks Project, Tags 01R3 (1), 00A0 and 0096.
-
-Proof: The preimage equality identifies the square of g and its restriction i
-with a Cartesian square of open immersions. Restriction of sheaves preserves
-kernels. On every open T of W the two maps on functions are identified by the
-open-section isomorphisms, so their kernels, including their inclusions, agree.
-Since i is closed, its actual kernel is its quasi-coherent ideal module.
-Thus restriction gives an isomorphism between the original kernel and this
-ideal module, taking s to the unique t with the displayed inclusion equation.
-Compose the two pullback adjunctions around the Cartesian square. The canonical
-isomorphism of left adjoints identifies their units; using the explicit units
-from exists_tensorPullbackAdjunction, both images of s are the sheafification
-of 1 ⊗ s. Pullback along the open inclusions is restriction. Take sections,
-identify sections on the open subschemes with sections on the ambient opens,
-and restrict scalars through the displayed map. This gives e and the unit
-identity. This construction does not require g to be globally closed or its
-kernel to be globally quasi-coherent. Empty opens give the zero-module maps. -/
+(Stacks, Tags 01R3, 00A0 and 0096) -/
 theorem open_kernel_conormal_transport {X Y : Scheme.{u}} (g : X ⟶ Y)
     (W : Y.Opens) (U : X.Opens) (h : U ≤ g ⁻¹ᵁ W) (hpre : g ⁻¹ᵁ W = U)
     [IsClosedImmersion (g.resLE W U h)] :

@@ -13,10 +13,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
-/-- Finite intersection gluing for a finite set of degrees, with explicit outside witnesses.
-Source: finite-free-stalk-chain-map-lift-local, finite intersection step.
-The proof intersects the finitely many neighbourhoods and transports each representative
-along restriction composition; outside the finite set the supplied witnesses are used. -/
+/-- Finite intersection gluing for a finite set of degrees, with explicit outside witnesses. -/
 theorem exists_degreewise_finite_aux
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (y : Y) (t : ∀ n : ℤ,

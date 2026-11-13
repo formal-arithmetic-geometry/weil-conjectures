@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.QcqsGeometricExchangeFactorization
 /-!
 # Proper exchange over a geometric point
 
-Source: Stacks Project, Tags 0A3T and 0A3U.
+## References
+
+* [Stacks Project, Tags 0A3T and 0A3U](https://stacks.math.columbia.edu/tag/0A3T)
 -/
 
 @[expose] public section
@@ -22,8 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- On an algebraically closed field the identity neighbourhood computes the stalk.
-Source: Stacks Project, Tag 03QO. -/
+/-- On an algebraically closed field the identity neighbourhood computes the stalk
+(Stacks, Tag 03QO). -/
 private theorem isIso_geometricPointGlobalGerm
     (Λ : Type (u + 1)) [CommRing Λ] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -65,24 +67,8 @@ private theorem isIso_geometricPointGlobalGerm
   unfold geometricPointGlobalGerm
   exact IsIso.comp_isIso
 
-/-- Proper exchange for base change to an algebraically closed field.
-
-Source: Stacks Project, Tags 0A3T and 0A3U, degree-zero stalk calculation.
-
-Proof: forget the module structure and compute the stalk of the direct image as the
-filtered colimit of sections on pointed affine etale neighbourhoods. Continuity of
-sections identifies this colimit with sections on the strict-henselian base change.
-Properness is preserved by base change. The henselian degree-zero comparison identifies
-these sections with sections on the closed fibre. Its residue field is separably closed;
-invariance of sections under extension of a separably closed field (Tag 0A3I) identifies
-these with sections on the fibre over the given algebraically closed field. On the small
-etale site of the spectrum of that field, sections at the terminal object compute the
-unique geometric stalk. Expanding the unit-square-counit definition of exchange shows
-that a section represented on a pointed neighbourhood is sent to its restriction on the
-same fibre. Consequently the actual exchange map, rather than an unspecified comparison,
-is bijective on that stalk. Conservativity gives the sheaf isomorphism; the forgetful
-functor from modules reflects isomorphisms. This argument needs no torsion hypothesis.
-It also applies to the empty fibre, whose section module is zero. -/
+/-- Proper exchange for base change to an algebraically closed field
+(Stacks, Tags 0A3T and 0A3U). -/
 theorem isIso_baseChangeMap_app_of_isProper_geometricPoint
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

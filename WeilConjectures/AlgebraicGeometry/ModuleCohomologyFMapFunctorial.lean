@@ -14,11 +14,13 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Functoriality of cohomology maps induced by scheme maps
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Lemma 01F8 and Remark 01FB.
-
 The comparison maps below account for the canonical identifications of successive
 pushforwards. The unit equations specify the pullback comparison and the restricted
 module map without choosing another implementation of either notion.
+
+## References
+
+* [Stacks, Cohomology of Sheaves, Lemma 01F8 and Remark 01FB]
 -/
 
 @[expose] public section
@@ -119,30 +121,8 @@ private theorem sectionsComparison_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
 
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tags 01F8 and 01FB.
-
-Proof: lifts with the same augmentation are homotopic by
-lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
-by lem-weil-pbc-homotopic-maps-equal-cohomology. For fixed I and J choose a degreewise
-monic lambda using lem-weil-pbc-complex-injective-resolution-mono; lift any other lambda
-across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equation and
-homotopy uniqueness compare beta, and invertibility from
-lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
-Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality. Changing I
-uses the same identity lift, then a comparison between the target complexes, cancelling
-its sections map and the resolution isomorphisms. This proves independence.
-For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
-resolutions of F, G, H and monic comparisons for the latter two systems. Resolve k_*K
-into a common injective complex and lift both routes into it. Their augmentations agree,
-so their cohomology maps agree; cancel the invertible vertical sections maps to obtain
-composition. Taking an identity scheme morphism and using
-lem-weil-pbc-module-cohomology-fmap-basic-properties gives the two module naturalities.
-Apply composition to the two adjunction units: the unit equation characterizes the
-canonical pullback comparison c, and target naturality supplies H(c).
-For restriction the restricted map exists sectionwise: on T inside V it is psi_T.
-Its unit square commutes since psi respects restrictions from T to T intersect V.
-Apply composition to both routes around that square to obtain the cohomology square. -/
+/-- The map on module cohomology induced by an `h`-map does not depend on the choice of
+resolution data (Stacks, Tags 01F8 and 01FB). -/
 theorem moduleCohomologyFMap_independent {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (pushforward h).obj F)
     (C C' : ModuleCohomologyFMapData h G F φ) (p : ℕ) :
@@ -290,30 +270,8 @@ private theorem moduleCohomologyFMap_comp_aux {X Y Z : Scheme.{u}}
 
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tags 01F8 and 01FB.
-
-Proof: lifts with the same augmentation are homotopic by
-lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
-by lem-weil-pbc-homotopic-maps-equal-cohomology. For fixed I and J choose a degreewise
-monic lambda using lem-weil-pbc-complex-injective-resolution-mono; lift any other lambda
-across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equation and
-homotopy uniqueness compare beta, and invertibility from
-lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
-Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality. Changing I
-uses the same identity lift, then a comparison between the target complexes, cancelling
-its sections map and the resolution isomorphisms. This proves independence.
-For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
-resolutions of F, G, H and monic comparisons for the latter two systems. Resolve k_*K
-into a common injective complex and lift both routes into it. Their augmentations agree,
-so their cohomology maps agree; cancel the invertible vertical sections maps to obtain
-composition. Taking an identity scheme morphism and using
-lem-weil-pbc-module-cohomology-fmap-basic-properties gives the two module naturalities.
-Apply composition to the two adjunction units: the unit equation characterizes the
-canonical pullback comparison c, and target naturality supplies H(c).
-For restriction the restricted map exists sectionwise: on T inside V it is psi_T.
-Its unit square commutes since psi respects restrictions from T to T intersect V.
-Apply composition to both routes around that square to obtain the cohomology square. -/
+/-- The maps on module cohomology induced by `h`-maps are compatible with composition of
+scheme maps (Stacks, Tags 01F8 and 01FB). -/
 theorem moduleCohomologyFMap_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z)
     {H : Z.Modules} {G : Y.Modules} {F : X.Modules}
     (ψ : H ⟶ (pushforward k).obj G) (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :
@@ -326,30 +284,8 @@ theorem moduleCohomologyFMap_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     (Classical.choice (moduleCohomologyFMapData_nonempty (h ≫ k) H F
       (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F))) p
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB.
-
-Proof: lifts with the same augmentation are homotopic by
-lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
-by lem-weil-pbc-homotopic-maps-equal-cohomology. For fixed I and J choose a degreewise
-monic lambda using lem-weil-pbc-complex-injective-resolution-mono; lift any other lambda
-across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equation and
-homotopy uniqueness compare beta, and invertibility from
-lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
-Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality. Changing I
-uses the same identity lift, then a comparison between the target complexes, cancelling
-its sections map and the resolution isomorphisms. This proves independence.
-For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
-resolutions of F, G, H and monic comparisons for the latter two systems. Resolve k_*K
-into a common injective complex and lift both routes into it. Their augmentations agree,
-so their cohomology maps agree; cancel the invertible vertical sections maps to obtain
-composition. Taking an identity scheme morphism and using
-lem-weil-pbc-module-cohomology-fmap-basic-properties gives the two module naturalities.
-Apply composition to the two adjunction units: the unit equation characterizes the
-canonical pullback comparison c, and target naturality supplies H(c).
-For restriction the restricted map exists sectionwise: on T inside V it is psi_T.
-Its unit square commutes since psi respects restrictions from T to T intersect V.
-Apply composition to both routes around that square to obtain the cohomology square. -/
+/-- Naturality of the map on module cohomology in the source coefficient module
+(Stacks, Tags 01F8 and 01FB). -/
 theorem moduleCohomologyFMap_source_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G' G : Y.Modules} {F : X.Modules} (a : G' ⟶ G)
     (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :
@@ -366,30 +302,8 @@ theorem moduleCohomologyFMap_source_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   rw [he] at hh
   exact hh.symm
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB.
-
-Proof: lifts with the same augmentation are homotopic by
-lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
-by lem-weil-pbc-homotopic-maps-equal-cohomology. For fixed I and J choose a degreewise
-monic lambda using lem-weil-pbc-complex-injective-resolution-mono; lift any other lambda
-across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equation and
-homotopy uniqueness compare beta, and invertibility from
-lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
-Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality. Changing I
-uses the same identity lift, then a comparison between the target complexes, cancelling
-its sections map and the resolution isomorphisms. This proves independence.
-For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
-resolutions of F, G, H and monic comparisons for the latter two systems. Resolve k_*K
-into a common injective complex and lift both routes into it. Their augmentations agree,
-so their cohomology maps agree; cancel the invertible vertical sections maps to obtain
-composition. Taking an identity scheme morphism and using
-lem-weil-pbc-module-cohomology-fmap-basic-properties gives the two module naturalities.
-Apply composition to the two adjunction units: the unit equation characterizes the
-canonical pullback comparison c, and target naturality supplies H(c).
-For restriction the restricted map exists sectionwise: on T inside V it is psi_T.
-Its unit square commutes since psi respects restrictions from T to T intersect V.
-Apply composition to both routes around that square to obtain the cohomology square. -/
+/-- Naturality of the map on module cohomology in the target coefficient module
+(Stacks, Tags 01F8 and 01FB). -/
 theorem moduleCohomologyFMap_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : Y.Modules} {F F' : X.Modules} (b : F ⟶ F')
     (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :
@@ -406,30 +320,8 @@ theorem moduleCohomologyFMap_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   rw [he] at hh
   exact hh.symm
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB.
-
-Proof: lifts with the same augmentation are homotopic by
-lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
-by lem-weil-pbc-homotopic-maps-equal-cohomology. For fixed I and J choose a degreewise
-monic lambda using lem-weil-pbc-complex-injective-resolution-mono; lift any other lambda
-across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equation and
-homotopy uniqueness compare beta, and invertibility from
-lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
-Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality. Changing I
-uses the same identity lift, then a comparison between the target complexes, cancelling
-its sections map and the resolution isomorphisms. This proves independence.
-For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
-resolutions of F, G, H and monic comparisons for the latter two systems. Resolve k_*K
-into a common injective complex and lift both routes into it. Their augmentations agree,
-so their cohomology maps agree; cancel the invertible vertical sections maps to obtain
-composition. Taking an identity scheme morphism and using
-lem-weil-pbc-module-cohomology-fmap-basic-properties gives the two module naturalities.
-Apply composition to the two adjunction units: the unit equation characterizes the
-canonical pullback comparison c, and target naturality supplies H(c).
-For restriction the restricted map exists sectionwise: on T inside V it is psi_T.
-Its unit square commutes since psi respects restrictions from T to T intersect V.
-Apply composition to both routes around that square to obtain the cohomology square. -/
+/-- Compatibility of the pullback maps on module cohomology with composition of scheme
+maps, given a pullback composition comparison `c` (Stacks, Tags 01F8 and 01FB). -/
 theorem moduleCohomologyPullback_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z)
     (H : Z.Modules)
     (c : (tensorPullback h).obj ((tensorPullback k).obj H) ⟶
@@ -465,30 +357,8 @@ private theorem moduleCohomologyFMap_congr {X Y : Scheme.{u}}
     simp
   rw [hc, Category.comp_id]
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB.
-
-Proof: lifts with the same augmentation are homotopic by
-lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
-by lem-weil-pbc-homotopic-maps-equal-cohomology. For fixed I and J choose a degreewise
-monic lambda using lem-weil-pbc-complex-injective-resolution-mono; lift any other lambda
-across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equation and
-homotopy uniqueness compare beta, and invertibility from
-lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
-Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality. Changing I
-uses the same identity lift, then a comparison between the target complexes, cancelling
-its sections map and the resolution isomorphisms. This proves independence.
-For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
-resolutions of F, G, H and monic comparisons for the latter two systems. Resolve k_*K
-into a common injective complex and lift both routes into it. Their augmentations agree,
-so their cohomology maps agree; cancel the invertible vertical sections maps to obtain
-composition. Taking an identity scheme morphism and using
-lem-weil-pbc-module-cohomology-fmap-basic-properties gives the two module naturalities.
-Apply composition to the two adjunction units: the unit equation characterizes the
-canonical pullback comparison c, and target naturality supplies H(c).
-For restriction the restricted map exists sectionwise: on T inside V it is psi_T.
-Its unit square commutes since psi respects restrictions from T to T intersect V.
-Apply composition to both routes around that square to obtain the cohomology square. -/
+/-- The map on module cohomology induced by an `h`-map is compatible with restriction to an
+open subset of the target (Stacks, Tags 01F8 and 01FB). -/
 theorem moduleCohomologyFMap_restriction {Y Z : Scheme.{u}} (k : Y ⟶ Z)
     {H : Z.Modules} {G : Y.Modules} (ψ : H ⟶ (pushforward k).obj G) (V : Z.Opens) :
     ∃ ψV : (restrictFunctor V.ι).obj H ⟶

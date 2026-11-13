@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionCompariso
 
 /-! # Transporting a supplied subscheme morphism to the open slice site
 
-Source: Stacks Project, Sheaves Tag 00A0 (3).
+## References
+
+* [Stacks, Sheaves, Tag 00A0]
 -/
 
 @[expose] public section
@@ -23,24 +25,7 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport a subscheme morphism to the slice site, with its canonical germ formula.
-
-Source: Stacks Project, Sheaves, Lemma 6.31.1, Tag 00A0 (2)-(3), including modules.
-
-Proof: Set V = U.ι ''ᵁ A, with hxV supplied by hxA and hVU by Opens.ι_image_le.
-The isomorphism U.ι.isoImage A identifies A.toScheme with V.toScheme over U.
-Restrict f along its inverse, and use restrictFunctorComp and restrictFunctorCongr
-with (U.ι.isoImage A).inv ≫ A.ι = X.homOfLE hVU to identify the two restricted
-sheaves with the restrictions to V of the original sheaves on U. Conjugate the
-restricted f by these identifications and overMapCompOverEquiv; the fully faithful
-functor (Modules.overEquiv V).functor then gives k. The canonical natural
-restriction-stalk comparison gives a. Its linearity follows from the composition
-of the open-immersion stalk ring maps and the germ scalar-action formula. For a
-section m over B in A, all the comparison maps send its germ to the germ of the
-same section under the corresponding image-open identification. Naturality of
-restriction-stalk comparison with respect to f therefore gives the displayed
-formula. This construction uses no prescribed map q on the stalk and no hypothesis
-that f realizes such a map. It is just the slice transport and its germ formula. -/
+/-- Transport a subscheme morphism to the slice site, with its canonical germ formula. -/
 private theorem exists_slice_hom_with_subscheme_germ_formula
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (F N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -208,22 +193,8 @@ private theorem exists_slice_hom_with_subscheme_germ_formula
 
 
 
-/-- Transport an already constructed local morphism from the open subscheme to the slice site.
-
-Source: Stacks Project, Sheaves Tag 00A0 (3), restriction to an open subspace.
-
-Proof: Put V = U.ι ''ᵁ A, so x belongs to V and V is contained in U. The open subscheme
-V is canonically isomorphic to A.toScheme over U.toScheme. Restrict f along this isomorphism.
-The natural isomorphism Modules.overMapCompOverEquiv identifies its source and target with
-those of the images of the slice restrictions of F and N under Modules.overEquiv V.
-Conjugate by these components and take the preimage under this fully faithful equivalence
-to obtain k. Use the canonical restriction-stalk comparison, constructed from the same-germ
-formula, for a. Every stalk element on V is represented by a section on a neighbourhood of
-x; transfer that section to A and apply hf. The germ formulas for restriction and the
-slice equivalence give S.map k followed by a_N = a_F followed by the scalar restriction
-of q. Linearity holds because the composite of the two open-immersion stalk ring maps is
-U.ι.stalkMap. Compose with a_N inverse to get the displayed equation. No local existence
-of f is proved here; f and its germ equation are inputs, for arbitrary F and N. -/
+/-- Transport an already constructed local morphism from the open subscheme to the slice
+site. -/
 theorem exists_open_stalk_hom_of_subscheme_lift
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (F N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

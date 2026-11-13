@@ -9,12 +9,19 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalKoszulRoosPresentationC
 import all WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
 import all WeilConjectures.AlgebraicGeometry.FiniteFreeQuotientTower
 import all WeilConjectures.AlgebraicGeometry.IntegralDerivedOperationsOnSlices
-/-! # The normalized scalar cone and tensor Koszul Roos comparison
+/-!
+# The normalized scalar cone and tensor Koszul Roos comparison
 
-Source: Stacks 0A0E and 0941.
+## Implementation details
 
 The finite tensor-cone comparison is kept behind its naturality and inclusion lemmas,
-so type checking does not repeatedly expand the total tensor construction. -/
+so type checking does not repeatedly expand the total tensor construction.
+
+## References
+
+* Stacks Project, Tag 0A0E, <https://stacks.math.columbia.edu/tag/0A0E>
+* Stacks Project, Tag 0941, <https://stacks.math.columbia.edu/tag/0941>
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -519,20 +526,8 @@ private theorem coneTowerRoosComparison
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The scalar cone completion and the tensor Koszul Roos model have the same unit.
-
-Source: Stacks 0A0E and 0941.
-
-Proof: tensoring a mapping cone with P commutes with that mapping cone, including
-its two inclusions. The unit-tensor isomorphism conjugates scalar multiplication
-on P to tensoring scalar multiplication on the unit. Taking powers therefore gives
-an isomorphism from each scalar cone to its tensor Koszul level. Naturality of the
-tensor-cone comparison identifies the (scalar,identity) transition squares, and its
-inclusion formula identifies the augmentations. Compare the products and their
-one-minus-shift endomorphisms, then their mapping cocones. The normalized comparison
-carries the zero-homotopy lift of the original augmentation to the tensor Koszul
-Roos unit. All finite level comparisons are isomorphisms; neither regularity of the
-scalar nor K-flatness or boundedness of P enters this calculation. -/
+/-- The scalar cone completion and the tensor Koszul Roos model have the same unit
+(Stacks, Tags 0A0E and 0941). -/
 theorem principalConeKoszulRoosComparison
     (P : CochainComplex 𝒜 ℤ)
     (a : (R.obj ⋙ forget CommRingCat).sections)

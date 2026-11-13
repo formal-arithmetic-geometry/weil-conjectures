@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Localization of the canonical homotopy pullback square
 
-Source: Stacks Project, Tags 0D5S and 0DVC.
+## References
+
+* Stacks Project, Tags 0D5S and 0DVC
 -/
 
 @[expose] public section
@@ -25,7 +27,7 @@ noncomputable section
 
 /-- The canonical pullback square, descended termwise to homotopy categories.
 Its composition comparisons are conjugate to the recorded pushforward comparisons.
-Source: Stacks Project, Tag 0D5S. -/
+(Stacks, Tag 0D5S) -/
 def moduleHomotopyPullbackSquare
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)
@@ -329,19 +331,7 @@ private theorem square_localization_aux
 /-- Localization carries the canonical pullback square to the pinned derived square,
 including the left-derived counits and any map out of the ordinary pullback.
 There are no pushforward units, derived adjunctions or acyclicity hypotheses here.
-Source: Stacks Project, Tag 0D5S, compatibility of composite derived pullbacks;
-Tag 0DVC, compatibility with localization.
-
-Proof: The defining left-derived lift factorization for c(f',g) identifies its
-composite with the counit for f' g with Lf'(delta_g) followed by delta_f' and
-localization of the ordinary composition comparison. Apply the same factorization
-to c(p,f), and cancel its invertible component to express its inverse followed by
-Lp(delta_f) and delta_p. Transport the composite counit across p f = f' g;
-equality elimination identifies both transports. Compose the two factorizations:
-the ordinary comparisons combine into moduleHomotopyPullbackSquare. Finally use
-naturality of delta_p at a and functoriality of Qh to move the localized a to the
-right. This is an identity of natural transformations, so it applies to arbitrary
-M, K and a, including zero complexes and identity squares. -/
+(Stacks, Tags 0D5S and 0DVC) -/
 theorem homotopyPullbackSquare_localization
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

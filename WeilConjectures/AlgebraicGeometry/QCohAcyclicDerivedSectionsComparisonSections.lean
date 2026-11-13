@@ -24,31 +24,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- On the full category of affine opens of Y, derived section cohomology of an
-object with quasi-coherent cohomology agrees with sections of its cohomology sheaf.
-
-Source: Stacks Project, Tags 08D4 and 08D5.
-
-Proof:
-1. Fix an affine open V and put U = f⁻¹V. Restriction of an injective resolution
-   to U computes cohomology there.
-   Open restriction commutes with derived direct image, so the positive higher direct images
-   of F|U vanish by hacyc. They are quasi-coherent by the quasi-coherence clause
-   of `lem-pc-finite-support-hi` (only this clause is used). Affine vanishing and the Leray edge give H^p(U,F|U) = 0 for every p > 0.
-   Sections on U commute with countable products, by their universal property.
-2. Shift the derived object to reduce to degree zero. Apply
-   `lem-pc-unbounded-derived-functor-cohomological-bound` with N = 1 to τ≤(-1)E.
-   Its derived sections vanish in degrees zero and one. The truncation triangle
-   therefore identifies H^0(RΓ(U,E)) with H^0(RΓ(U,τ≥0 E)).
-3. Apply `thm-sp-truncation-e2` to a bounded-below representative of τ≥0 E.
-   Its E₂ page is R^pΓ(U,H^q(E)); step 1 kills all p > 0, while negative p
-   and q vanish by the quadrant bounds. The finite filtration in total degree
-   zero has just its p = q = 0 piece, giving Γ(U,H^0(E)). Undo the shift.
-4. All comparisons come from the resolution, truncation maps and the natural
-   spectral-sequence edge. They commute with morphisms of derived objects and
-   restriction of affine opens. They are O_Y(V)-linear because these constructions
-   commute with scalar multiplication. Hence the component isomorphisms assemble
-   into the displayed natural isomorphism of module presheaves. -/
+/-- On the full category of affine opens of `Y`, derived section cohomology of an
+object with quasi-coherent cohomology agrees with sections of its cohomology sheaf
+(Stacks, Tags 08D4 and 08D5). -/
 theorem qcoh_acyclic_derived_sections_comparison_sections {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

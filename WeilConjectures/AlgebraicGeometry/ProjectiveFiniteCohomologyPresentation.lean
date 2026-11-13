@@ -21,8 +21,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveTwistFiniteCohomology
 
 /-! # A projective presentation with finite cohomology source
 
-Source: Stacks Project, Tag 01YS, proof of Lemma 30.14.1 (1) and (3),
-Tag 01Y6, Lemma 30.9.9, and Tag 01XT, Lemma 30.8.1.
+## References
+
+* Stacks Project, Tag 01YS (Lemma 30.14.1), Tag 01Y6 (Lemma 30.9.9) and
+  Tag 01XT (Lemma 30.8.1).
 -/
 
 @[expose] public section
@@ -78,19 +80,8 @@ private theorem finite_sections_pushforward_of_surjective {X Y : Scheme.{u}}
     { AddEquiv.refl _ with map_smul' _ _ := rfl :
       Γ(F, i ⁻¹ᵁ V) ≃ₗ[Γ(Y, V)] Γ((pushforward i).obj F, V) }
 
-/-- Closed pushforward preserves coherent modules on a locally Noetherian target.
-
-Source: Stacks Project, Tag 01Y6, Lemma 30.9.9.
-
-Proof: On an affine open Spec R of the target, the inverse image under the closed
-immersion is Spec(R/I). The restriction of F is associated to a finitely presented
-R/I-module M. Regard M as an R-module along the quotient map. Its generators over R/I
-also generate it over R because R surjects onto R/I. Since R is Noetherian, M is finitely
-presented over R. Localization of M as an R-module agrees with localization as an
-R/I-module on inverse-image principal opens, giving an identification of the closed
-pushforward with the associated R-module. These local identifications give
-quasi-coherence and finite presentation on an affine cover, hence globally. This uses
-only localization and sheaf gluing and no proper-cohomology finiteness. -/
+/-- Closed pushforward preserves coherent modules on a locally Noetherian target
+(Stacks, Tag 01Y6). -/
 private theorem closed_pushforward_coherent_independent {X Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (i : X ⟶ Y) [IsClosedImmersion i]
     (F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation] :
@@ -235,34 +226,7 @@ private theorem finite_H_sigma {X T : Scheme.{u}} (g : X ⟶ T)
   exact Module.Finite.equiv E'
 
 /-- The closed pushforward of a coherent module has an epimorphism from a module with
-finite cohomology over the affine base, with coherent kernel.
-
-Source: Stacks Project, Tag 01YS, proof of Lemma 30.14.1 (1) and (3),
-Tag 01Y6, Lemma 30.9.9, and Tag 01XT, Lemma 30.8.1.
-
-Proof: put A = Gamma(T,O). The canonical affine isomorphism T -> Spec A
-induces an isomorphism of projective spaces compatible with their projections.
-The projective space is locally Noetherian, as its projection is locally of
-finite type over the Noetherian affine base. Closed pushforward j_*F is
-quasi-coherent and finitely presented: on an affine chart a finite module over
-a quotient ring is finite over the Noetherian chart ring and hence finitely
-presented. Put G = j_*F and transport G to projective space over A.
-Choose finitely many generators on each standard affine chart. Clearing denominators
-extends each generator, after
-multiplication by a power of its coordinate section, to a homomorphism from a
-negative twist. The sum E of these finitely many twists maps epimorphically to G,
-since its images generate on each chart. The kernel is quasi-coherent, and is
-finitely presented because the standard charts are Noetherian. For each twist,
-the standard-cover monomial calculation identifies degree-q cohomology with a
-finite free A-module (or zero); when there is one coordinate, each twist is
-free of rank one on Spec A and has no positive cohomology. Finite sums commute with
-cohomology, so H^q(E)
-is finite. Transport the epimorphism and its kernel back along the projective
-isomorphism; the induced cohomology comparison is A-linear by naturality for
-multiplication by base sections. Thus the restricted action is exactly the one
-along the displayed projection. For an empty coordinate type the projective
-space is empty: G, E, and the kernel are zero, and all cohomology is zero.
-This argument does not use finiteness of any cohomology of G or of the kernel. -/
+finite cohomology over the affine base, with coherent kernel (Stacks, Tag 01YS). -/
 theorem exists_projective_finite_cohomology_presentation
     {Y T : Scheme.{u}} [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (N : Type u) [Finite N] (j : Y ⟶ ℙ(N; T)) [IsClosedImmersion j]

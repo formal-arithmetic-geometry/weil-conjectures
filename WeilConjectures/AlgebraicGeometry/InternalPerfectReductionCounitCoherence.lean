@@ -177,13 +177,7 @@ private theorem reductionComp_counit_chain (W : Scheme.{u})
   dsimp only at hc
   run_tac exactCertifiedCounit (Lean.mkIdent `hc)
 
-/-- Homotopy-level specialization of the scalar-extension counit composition square.
-
-Proof: unfold the ordinary reduction step and the derived reduction comparison,
-then apply the generic counit composition identity to the two quotient maps.
-The remaining conversion from the chain quotient to the homotopy quotient is the
-canonical quotient comparison naturality. This statement is strictly below the
-homotopy comparison theorem: it contains no endomorphism or localization data. -/
+/-- Homotopy-level specialization of the scalar-extension counit composition square. -/
 theorem internalPerfectReduction_counit_coherence
     (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)

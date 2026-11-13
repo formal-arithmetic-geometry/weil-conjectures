@@ -26,14 +26,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Intrinsic affine-local flatness of a quasi-coherent module implies tensor flatness.
-Source: Stacks Project, Tags 01U4 (affine-local flatness) and 05NE (flat stalks).
-
-Proof: On an affine neighbourhood of each point, evaluate IsFlatOver at equal affine
-opens. The identity ring map makes the section module flat over its own coordinate
-ring. Quasi-coherence identifies the stalk with its localization, hence each stalk
-is flat. Tensor products and exactness are computed on stalks, so tensoring with G
-preserves short exact sequences. The argument also applies on an empty scheme and
-to the zero module. -/
+(Stacks, Tags 01U4, 05NE) -/
 theorem isFlat_of_isFlatOver_identity {Y : Scheme.{u}} (G : Y.Modules)
     [SheafOfModules.IsQuasicoherent.{u} G]
     (hflat : Scheme.Modules.IsFlatOver G (𝟙 Y)) : SheafOfModules.IsFlat G :=

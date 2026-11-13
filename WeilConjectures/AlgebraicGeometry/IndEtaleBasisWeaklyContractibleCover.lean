@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 /-!
 # Weakly contractible covers in the affine ind-etale basis
 
-Source: Stacks Project, proetale.tex, Tag 0990, affine `S_app` clause;
-sites.tex, Tags 090L and 090K (2).
+## References
+
+* Stacks Project, Tag 0990 (affine `S_app` clause); Tags 090L and 090K.
 -/
 
 @[expose] public section
@@ -49,22 +50,7 @@ private theorem surjective_evaluation_of_full_site (S : Scheme.{u}) (V : S.Affin
     (ConcreteCategory.congr_hom eQ.inv_hom_id s))
 
 /-- Every object of the affine ind-etale basis of an affine scheme admits a covering
-by objects that are weakly contractible in this same basis site.
-Source: Stacks Project, Tag 0990, affine `S_app` clause, and Tags 090L, 090K (2).
-
-Proof:
-1. Apply `exists_isWContractibleRing` to the global sections of `U.left`, obtaining
-   a faithfully flat ind-etale algebra `D` in the same universe. Compose its spectrum
-   map with `U.left.isoSpec.inv` and `U.hom`. Ind-etale composition puts this object
-   in the affine basis; faithful flatness gives a surjective singleton pro-etale cover.
-2. `ProEt.isWeaklyContractible_of_iso` gives weak contractibility on the full small
-   pro-etale site of `S`, since the underlying scheme is literally `Spec D`.
-3. Restriction to the affine basis is a sheaf equivalence. Lift a basis-site epimorphism
-   by the inverse equivalence; it remains an epimorphism. Lift the section using full-site
-   weak contractibility, then apply the evaluated counit isomorphism. Counit naturality
-   and its inverse identity show that the resulting section maps to the original one.
-   No nonempty or nontrivial hypothesis is used, so the same proof covers empty `U`.
--/
+by objects that are weakly contractible in this same basis site. (Stacks, Tag 0990.) -/
 theorem exists_weaklyContractible_cover (S : Scheme.{u}) [IsAffine S]
     (U : S.AffineProEt) :
     ∃ (I : Type (u + 1)) (V : I → S.AffineProEt) (f : ∀ i, V i ⟶ U),

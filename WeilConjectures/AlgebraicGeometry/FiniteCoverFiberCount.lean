@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.FiniteCoverStalkRamification
 /-!
 # Counting the geometric points of an unramified fibre of a finite flat cover
 
-Let `p: C ⟶ Y` be a finite morphism, `Y₀ ⊆ Y` an affine open with `A = Γ(Y, Y₀)` a domain and
-`B = Γ(C, p⁻¹ Y₀)` flat over `A`, and `y: Spec k ⟶ Y` a `k`-rational point (a section of a
+Let `p : C ⟶ Y` be a finite morphism, `Y₀ ⊆ Y` an affine open with `A = Γ(Y, Y₀)` a domain and
+`B = Γ(C, p⁻¹ Y₀)` flat over `A`, and `y : Spec k ⟶ Y` a `k`-rational point (a section of a
 morphism `Y ⟶ Spec k`, `k` algebraically closed) in `Y₀` over which `p` is unramified. Then the
 number of geometric points of `C` over `y` is the rank of `B` over `A`
 (`AlgebraicGeometry.Scheme.Hom.natCard_geometricFiber_eq_finrank`): the sum of the products of
@@ -108,7 +108,7 @@ lemma primeIdealOf_geometricFiberEquivPointsOver_symm (p : C ⟶ Y) [IsAffineHom
   exact (geometricFiberEquivPointsOver_symm_apply_default p y hY₀ hy t).symm
 
 /-- **The number of geometric points in an unramified fibre of a finite flat cover is the
-rank.** Let `p: C ⟶ Y` be finite, `Y₀ ⊆ Y` an affine open with `Γ(Y, Y₀)` a domain over which
+rank.** Let `p : C ⟶ Y` be finite, `Y₀ ⊆ Y` an affine open with `Γ(Y, Y₀)` a domain over which
 `Γ(C, p⁻¹ Y₀)` is flat, and `y` a `k`-rational point of `Y₀` (`k` algebraically closed) such that
 `𝔪_{Y,y} 𝒪_{C,c} = 𝔪_{C,c}` at every point `c` over `y`. Then the geometric fibre of `p` over
 `y` has `rank_{Γ(Y, Y₀)} Γ(C, p⁻¹ Y₀)` points. -/

@@ -85,14 +85,7 @@ private theorem kummer_unit_scalar_naturality
     (ordinaryFiniteUnitPullback A f).hom a
 
 /-- Scalar faithfulness of the actual Kummer class implies scalar faithfulness
-of its specified Chern pushforward under the canonical derived adjunction.
-
-Proof: linearity of inverse image and of the single functors makes the constant
-comparison commute with scalar multiplication. Transpose an annihilated scalar
-multiple through the adjunction defining the Chern pushforward. Naturality and
-injectivity of its hom equivalence show that the same scalar annihilates the
-original representative. Apply ordinaryFiniteClass_scalar_faithful to the actual
-Kummer class specified by the Chern condition. -/
+of its specified Chern pushforward under the canonical derived adjunction. -/
 theorem ordinaryFiniteP1ChernPushforward_scalar_faithful
     (N : ℕ) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))

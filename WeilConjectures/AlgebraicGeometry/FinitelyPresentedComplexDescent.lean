@@ -21,8 +21,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteRelationDescent
 /-!
 # Descent of bounded finitely presented complexes
 
-Source: Stacks Project, Limits of Schemes, Lemma 32.10.2 (Tag 01ZR), in the
-Noetherian approximation setting of Lemma 32.10.4 (Tag 05LY).
+## References
+
+* [Stacks Project, Tag 01ZR](https://stacks.math.columbia.edu/tag/01ZR)
+* [Stacks Project, Tag 05LY](https://stacks.math.columbia.edu/tag/05LY)
 -/
 
 @[expose] public section
@@ -34,31 +36,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A bounded complex of finitely presented quasi-coherent modules on the limit base change
-of a finitely presented scheme descends to some later stage.
-Source: Stacks Project, Limits of Schemes, Tag 01ZR; Noetherian approximation setting of
-Tag 05LY.
-
-The functor `R` presents the inverse system of affine schemes contravariantly. Affine
-schemes are quasi-compact and quasi-separated, and the transition maps between spectra
-are affine. `c` is its limit cone; `IsAffine c.pt` expresses `S = Spec R` without choosing
-a coordinate ring. Finite presentation of `f` includes quasi-separatedness as specified
-by `def-pc-morphism-conventions`. A cochain complex includes the equations `d ≫ d = 0`.
-The isomorphism of complexes is expressed by termwise isomorphisms commuting with all
-differentials. Module base change is `moduleBaseChange`, hence tensor pullback, not the
-restriction-of-scalars functor `Scheme.Modules.pullback`.
-
-Proof:
-1. Boundedness leaves finitely many terms, differentials, and equations that consecutive
-   differentials compose to zero; these form finite module-and-map data.
-2. Apply part (1) of `lem-pc-fp-module-map-descent` to these terms, choosing a common later
-   stage by directedness. Apply part (2) to the differentials between these fixed models,
-   transported using their pullback isomorphisms. Choose another common stage, keeping
-   one model for each term shared by consecutive differentials.
-3. Apply `lem-pc-fp-relation-descent` to the finitely many equations `d ≫ d = 0`. They hold
-   after passing to one further stage, since their pullbacks are the zero composites of G.
-4. Extend by zero outside the finite interval. The terms and maps form the bounded complex
-   H; the termwise pullback isomorphisms commute with the differentials by step 2 and
-   therefore give an isomorphism of complexes. -/
+of a finitely presented scheme descends to some later stage. Here `c` is the limit cone of
+the inverse system of affine schemes `R`, and module base change is `moduleBaseChange`
+(tensor pullback), not `Scheme.Modules.pullback`.
+(Stacks, Tag 01ZR; Noetherian approximation setting of Tag 05LY.) -/
 theorem exists_finitelyPresented_complex_of_limit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

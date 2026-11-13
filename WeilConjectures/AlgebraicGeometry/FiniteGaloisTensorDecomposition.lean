@@ -20,7 +20,9 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 /-!
 # Tensor decomposition of a finite Galois field extension
 
-Source: Stacks Project, Fundamental Groups, Tag 03SF.
+## References
+
+* Stacks Project, Fundamental Groups, Tag 03SF
 -/
 
 @[expose] public section
@@ -71,18 +73,7 @@ by `Gal(E/L)`, taking `a ⊗ b` to `(a * q b)`, is an isomorphism. Its affine sp
 identifies the self-fibre-product of `Spec E` over `Spec L` with a finite disjoint union.
 For every sheaf on the small etale site, the corresponding bijection of sections takes
 restriction along the first projection to the constant family and restriction along the
-second projection to the family of Galois translates.
-
-For the algebraic part, choose a primitive element by the finite separable primitive-element
-lemma and identify `E` with its minimal-polynomial quotient (the primitive-element and
-quotient-field nodes). Base-change that quotient to `E` by the tensor universal property;
-the monomial bases on both sides show the resulting map is an isomorphism. Normality and
-separability identify the distinct roots with the `L`-automorphisms of `E` (the conjugate-root
-and finite-Galois fixed-field nodes). The distinct-linear-factor Chinese remainder theorem
-then gives the displayed tensor isomorphism and its formula on pure tensors. The affine
-tensor/pullback consequence identifies the components and both projection maps. Finally,
-the finite-separable-spectrum etale lemma supplies the site objects, and the finite-coproduct
-sheaf-sections theorem gives the bijection and both restriction formulas (Stacks, Tag 03SF). -/
+second projection to the family of Galois translates (Stacks, Tag 03SF). -/
 theorem finiteGaloisTensorDecomposition
     (L E : Type u) [Field L] [Field E] [Algebra L E]
     [FiniteDimensional L E] [IsGalois L E]

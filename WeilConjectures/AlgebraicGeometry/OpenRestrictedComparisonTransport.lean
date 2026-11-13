@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedRepresentativeData
 
 /-! # Comparison on the literal restriction of a complex
 
-Source: Stacks Project, Tag 0DJ8, locality of equation-bc; Tag 0DJ9.
+## References
+
+* Stacks Project, Tags 0DJ8 and 0DJ9.
 -/
 
 @[expose] public section
@@ -29,31 +31,7 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 set_option linter.unusedVariables false in
 /-- Open transport for the literal termwise restriction of a K-flat complex.
 Unlike transport to an arbitrary representative, this only compares a complex
-with its actual restriction, and constructs its derived identification.
-
-Proof: put j = U.ι, p = pullback.fst g′ j, q = pullback.snd g′ j. Since p and j
-are open immersions, their tensor pullbacks are the exact restriction functors:
-compare their adjunctions to direct image by uniqueness of left adjoints. The
-universal derived counits identify these exact restrictions with derived pullback.
-The additive restriction-stalk natural isomorphism on complexes consequently
-descends to the derived categories and cohomology, giving η independently of P.
-Let Q be the displayed literal restriction. It is K-flat by open restriction,
-so the specified pullback counit for q at Q is invertible. The exact restriction
-identification followed by derived pullback of eP gives eQ.
-At z the open-immersion stalk maps for j and p are ring isomorphisms. The
-pullback condition and stalkMap_comp identify the base rings and their actions.
-The restriction-stalk extension isomorphism identifies the stalk complexes of
-P and Q. Apply the universal derived base-ring extension, cohomology, final
-scalar extension and forgetting scalars to obtain l. The comparison_eq and
-localized_eq model equations identify the comparison arrows with the universal
-counit and its extension/restriction transpose. Their naturality, together with
-tensorStalkIso, gives the comparison square on these literal restrictions.
-The universal-counit characterization of derived composition identifies its
-right-hand transport with β. This proves the displayed equation. No change of
-representative is required here. Empty opens have no z; top opens, zero complexes
-and zero rings satisfy the same construction. No base-flatness is assumed.
-Source: Stacks Project, Tag 0DJ8 (locality of equation-bc), Tag 0DJ9 (source-open
-induction), and Tag 06YB (K-flatness can be checked on stalks). -/
+with its actual restriction, and constructs its derived identification. -/
 theorem exists_open_restricted_comparison_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

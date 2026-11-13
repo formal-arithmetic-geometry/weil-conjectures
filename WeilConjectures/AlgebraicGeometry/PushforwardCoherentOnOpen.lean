@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 
 /-! # Coherent pushforward from an open with closed ambient support
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ).
+## References
+
+* Stacks Project, Tag 0CYJ.
 -/
 
 @[expose] public section
@@ -27,20 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- If a coherent module on an open subscheme has support contained in a closed subset
 of the ambient scheme lying inside that open, its direct image is coherent. Its restriction
 back to the open is isomorphic to the original module, and its restriction to the complement
-of the closed subset is zero. Support is the nonzero-stalk locus, as in
-`def-weil-pbc-closed-subset-proper-over-base`; no properness assumption is needed here.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ).
-
-Proof:
-1. Mathlib's `restrictFunctorAdjCounitIso` identifies the restriction back to `U` with `F`.
-2. On an open `V` of `T.compl`, the restricted pushforward has the sections of `F` on
-   `U.ι ⁻¹ᵁ (T.compl.ι ''ᵁ V)`. Every point of this preimage lies outside `T`, so the support
-   hypothesis makes its stalk subsingleton. By Mathlib's `TopCat.Presheaf.section_ext`,
-   every section equals zero. Extensionality gives `𝟙 = 0`, hence this restriction is zero.
-3. The opens `U` and `T.compl` cover `X` because `T ⊆ U`. Coherence is invariant under
-   isomorphism, and the zero module is coherent, by
-   `lem-weil-pbc-coherent-modules-kernel-cokernel-sum`. Thus both restrictions are coherent.
-   Apply `lem-weil-pbc-coherent-module-local-on-open-cover` to this two-element cover. -/
+of the closed subset is zero (Stacks, Tag 0CYJ). -/
 theorem pushforward_coherent_on_open (X : Scheme.{u}) (U : X.Opens) (T : Closeds X)
     (hT : (T : Set X) ⊆ (U : Set X)) (F : U.toScheme.Modules)
     (hF : RingedSpace.IsCoherent U.toScheme.toRingedSpace F)

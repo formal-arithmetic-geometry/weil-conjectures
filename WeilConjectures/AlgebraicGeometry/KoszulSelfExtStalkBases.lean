@@ -28,7 +28,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeCompariso
 
 /-! # Finite bases for self Ext and exterior stalks on a Koszul chart
 
-Source: Stacks Project, Tags 0BQY, 062I and 01R3. -/
+## References
+
+* Stacks Project, Tags 0BQY, 062I and 01R3.
+-/
 
 @[expose] public section
 
@@ -295,27 +298,7 @@ end AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry
 
 /-- The self Ext stalk and exterior stalk have finite bases with the same index
-set on a single Koszul-regular chart. No compatibility of the two bases is asserted.
-
-Source: Stacks Project, Tag 0BQY, the zero-differential Hom calculation;
-Tags 062I and 01R3 for the conormal basis.
-
-Proof: Let A be the section ring of U, I its closed-immersion ideal and B=A/I.
-Sheafify the actual augmented Koszul projective resolution of B. Restriction of
-derived internal Hom and the bounded finite free Hom model compute self Ext on U
-as Hom of this resolution into B. The differential is zero because all regular
-generators act by zero on B. Its degree n is the dual of the nth exterior power
-of A^m with coefficients in B. The increasing wedge basis gives a B-basis indexed
-by n-element subsets of Fin m. Sheafification, tensor pullback after cohomology,
-restriction to V and then the stalk at z transport this to the first basis.
-Independently, the regular conormal classes form a B-basis of I/I². The affine
-conormal frame makes its sheaf locally free of rank m. Internal duality gives
-the dual frame and the exterior sheaf local-free comparison gives its increasing
-wedge frame with the same index set. Restrict and take germs of this frame to
-obtain the second basis. Finite coordinate projections and inclusions show that
-these germs form a basis over the stalk ring of V. Use a common K-injective model
-for derived-universe comparison. The index set is a singleton for n=0 and empty
-for n>m; empty charts cannot contain z. Only regularity on U is used. -/
+set on a single Koszul-regular chart. No compatibility of the two bases is asserted. -/
 theorem koszulRegularImmersion_self_ext_stalk_bases
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

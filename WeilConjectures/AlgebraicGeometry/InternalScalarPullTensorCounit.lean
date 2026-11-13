@@ -85,26 +85,8 @@ private theorem tensor_normalization_unique (a : Λ ⟶ Λ') [IsMonHom a]
   exact (cancel_epi ((D a T ⋙ V a T).map e.hom)).mp hn
 
 -- The comparison traverses several derived functors and tensor normalizations.
-/-- Normalize the X tensor presentation followed by the tensor-model target.
-
-Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3),
-first step of the scalar-route normalization.
-
-Proof. Naturality of the normalized tensor presentation moves the exact pullback
-computation counit to its input. On a cochain representative apply TensorNormalized,
-using the ordinary_hom field to identify the balanced scalar tensor presentation.
-Equivalently, compare this presentation with Mod.residueDerivedTensorIso on a
-K-flat resolution, where the localization tensor comparison is invertible, then
-extend the equality to arbitrary objects by naturality. Apply the defining
-counit identity of derivedTensorPresentationIso. The coefficient comparison
-scalarTensorRegularPullIso is the exact single-object pullback comparison of
-the restricted regular module: expand its restriction/pullback factors and use
-the exact singleFunctor comparison; the ordinary pullback unit agrees with the
-transported unit by the balanced coprojection formula. Naturality of the braiding
-then cancels the coefficient comparison against its inverse in the model target.
-What remains is the restricted X scalar counit, the exact restriction factor,
-and the ordinary balanced presentation followed by eH inverse on the coefficient.
-No tensor localization comparison at the arbitrary P is cancelled. -/
+/-- Normalize the `X` tensor presentation followed by the tensor-model target
+(Stacks, Tags 06YY, 0G7E and 07A6). -/
 theorem scalar_pull_tensor_counit (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (tX : TensorNormalization a X)
     (hX : TensorNormalized a X tX)

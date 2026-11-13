@@ -21,17 +21,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- Every left-derived counit for tensor pullback is invertible at a flat module
-placed in degree zero.
-Source: Stacks Project, Tags 06YD and 06YJ.
-
-Proof: The single complex on G is bounded above by zero. Its term in degree zero
-is isomorphic to G and is flat; the other terms are zero, hence flat. Apply
-flatComplexDerivedPullback to obtain an invertible counit on this complex.
-The specified object and map equalities identify its functor with tensorPullback.
-The universal property of left-derived functors supplies an invertible natural
-comparison between this counit and the given one. Its component at the single
-complex expresses the given counit as a composite of isomorphisms. This argument
-uses no nonzero point or term and includes the zero module and empty schemes. -/
+placed in degree zero (Stacks, Tags 06YD and 06YJ). -/
 theorem isIso_flat_single_derived_counit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

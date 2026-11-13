@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Coproduct presentation of the ordinary external direct image
 
-Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, degree-zero formula.
+## References
+
+* Stacks Project, Varieties, Tag 0BED.
 -/
 
 @[expose] public section
@@ -27,24 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary direct image of external coefficients is a coproduct of G.
-No positive-degree acyclicity of either coefficient is needed.
-Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the degree-zero
-case of the displayed derived-direct-image formula.
-
-Proof: Choose a k-basis of Gamma(X,F), indexed by a small type I. Each basis
-section defines a map G to pr2_* E: over V send t to the external product of the
-basis section with t. The adjunction-unit formulas commute with restrictions and
-are O_Y(V)-linear, so these are morphisms of module sheaves. On every affine V,
-the finite affine cover of X and affine-diagonal intersections identify sections
-of pr2_* E with Gamma(X,F) tensor_k G(V). This is the affine-right external
-section comparison; its pure-tensor formula identifies the displayed maps with
-basis inclusions. Basis expansion gives the algebraic direct sum of copies of
-G(V). The sheaf coproduct is obtained by sheafifying the presheaf coproduct.
-Its comparison to pr2_* E is an isomorphism on the affine basis, hence on stalks
-and therefore as a sheaf. Transfer the coproduct cofan along this isomorphism.
-This uses sheafification, not an assertion about arbitrary sections of an infinite
-sheaf coproduct. Zero Gamma(X,F) gives an empty basis and the zero coproduct;
-empty schemes and zero G satisfy the same construction. -/
+No positive-degree acyclicity of either coefficient is needed. (Stacks, Tag 0BED) -/
 theorem picardExternalCupCoefficients_pushforward_coproduct
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

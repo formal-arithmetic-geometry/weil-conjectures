@@ -9,8 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Base change preserves the direct-image tensor pairing
-Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
-duality.tex Tag 0AA8, final comparison diagrams.
+
+## References
+
+* Stacks Project, Tags 08I3, 08HY and 0AA8.
 -/
 
 @[expose] public section
@@ -26,14 +28,7 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Naturality in the object of the canonical derived base-change map.
-Source: Stacks Project, cohomology.tex, Remark 08HY.
-
-Proof: express the map as the adjoint transpose of the pullback-composition square
-comparison followed by the pulled-back counit. Naturality of the composition
-comparison moves the direct-image of a across the comparison. Naturality of the
-counit moves a across the counit. Functoriality of pullback combines these equations.
-Naturality of the adjunction Hom equivalence then gives the asserted equality. -/
+/-- Naturality in the object of the canonical derived base-change map (Stacks, Tag 08HY). -/
 theorem mixedTensorPairing_baseChange_naturality
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

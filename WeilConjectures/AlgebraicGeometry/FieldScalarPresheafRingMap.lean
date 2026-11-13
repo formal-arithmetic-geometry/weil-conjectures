@@ -11,7 +11,9 @@ public import Mathlib.Topology.Sheaves.Sheaf
 
 /-! # Scalar extension of module-valued sheaves
 
-Source: Stacks Project, Modules, tensor pullback and its adjunction, Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section

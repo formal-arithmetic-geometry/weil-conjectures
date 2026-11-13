@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 
 /-! # Scalar-extension comparison for global Hom over arbitrary affine bases
-Source: Stacks Project, perfect.tex, Tag 0AA7.
+
+## References
+
+* Stacks Project, Tag 0AA7.
 -/
 
 @[expose] public section
@@ -40,8 +43,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-/-- Evaluation-mate pullback followed by normalized Leray.
-Source: Stacks Tags 08I3 and 0B6A. -/
+/-- Evaluation-mate pullback followed by normalized Leray. (Stacks, Tags 08I3 and 0B6A.) -/
 def mixedGlobalHomPullbackComparison
     {S T : Scheme.{u}} (h : T ⟶ S) (P Q : schemeDerivedCategory S) :
     (schemeGlobalDerivedHom S).obj (op P, Q) ⟶
@@ -65,8 +67,8 @@ def mixedGlobalHomPullbackComparison
         (op ((derivedPullback h).obj P), (derivedPullback h).obj Q))
 
 /-- Transpose the restricted pullback comparison under derived scalar extension.
-The scalar-square iso gives its target the Y'-global-ring action.
-Source: Stacks Tag 0AA7. -/
+The scalar-square isomorphism gives its target the `Y'`-global-ring action.
+(Stacks, Tag 0AA7.) -/
 def mixedAffineGlobalHomBaseChangeMap {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) (g : Y' ⟶ Y) (M N : schemeDerivedCategory X) :
     (mixedGlobalExtension g).obj
@@ -81,18 +83,8 @@ def mixedAffineGlobalHomBaseChangeMap {X Y Y' : Scheme.{u}}
       (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)
         pullback.condition).hom.app _)
 
-/-- Scalar extension of global RHom commutes with a flat square over affine bases.
-Source: Stacks Project, perfect.tex, Tag 0AA7, case (1).
-
-Proof: identify Y and Y' with spectra of their global rings using their canonical
-isomorphisms. Flatness of f makes the square stalkwise Tor independent. For perfect M,
-RHom(M,N) is the perfect dual of M tensored with N. Apply Tor-independent tensor base
-change and restricted derived global sections. Pullback commutes with the perfect dual.
-The affine equivalences identify derived extension of global scalars with pullback;
-the extension/restriction adjunction identifies the resulting comparison with the
-transpose defined above. The normalized tensorator and Leray units give exactly the
-same map after transport back from spectra. This argument is independent of the
-localization morphism universes. Empty schemes and M = 0 give the unique zero isomorphism. -/
+/-- Scalar extension of global `RHom` commutes with a flat square over affine bases.
+(Stacks, Tag 0AA7, case (1).) -/
 theorem mixedAffineGlobalHomBaseChangeMap_isIso
     {X Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y']
     [CompactSpace X] [QuasiSeparatedSpace X]

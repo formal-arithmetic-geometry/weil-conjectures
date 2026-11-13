@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProjTwistDegreeDetection
 /-!
 # Descent of locally homogeneous fractions on a Proj basic open
 
-Source: Stacks Project, Tags 01MN and 01M7.
+## References
+
+* Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -24,18 +26,8 @@ universe v
 open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
 
-/-- A twist section on a positive-degree basic open descends to a homogeneous fraction.
-Source: Stacks Project, Definition 27.10.1, Tag 01MN, and Lemma 27.8.4, Tag 01M7.
-
-Proof: express the section locally as a fraction of homogeneous elements with degree
- difference k. Refine its neighborhoods to homogeneous basic opens inside D₊(f).
-The affine basic open D₊(f) is quasi-compact, so retain finitely many neighborhoods.
-Clear denominators and the finitely many equality witnesses on their intersections.
-The localization gluing argument gives one fraction with denominator a power of f;
-all operations preserve degree difference k. Its numerator lies in degree k+n where
-its denominator has degree n. Negative numerator degrees contribute only zero.
-The images of this fraction at every homogeneous prime are the given section.
-For nilpotent f the open and its localization are empty and zero respectively. -/
+/-- A twist section on a positive-degree basic open descends to a homogeneous fraction
+(Stacks, Tags 01MN, 01M7). -/
 theorem twist_fraction_descent
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

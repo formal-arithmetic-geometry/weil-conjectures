@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 
 /-! # Representing the stage pullback Hom functors on the original scheme
 
-Source: Stacks Project, Tags 079W, 0D5S and 09RE.
+## References
+
+* Stacks Project, Tags 079W, 0D5S and 09RE.
 -/
 
 @[expose] public section
@@ -35,11 +37,8 @@ variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
   [∀ Z : Scheme.{u},
     HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- A representable stage Hom cocone, natural in the testing object. Naturality in
-all testing objects is essential: it pins the representing maps by Yoneda, including
-what their open restrictions do. This is data about derived objects, not triangles
-or colimits of groups.
-Source: Stacks Project, Tags 079W and 0D5S. -/
+/-- A representable stage Hom cocone, natural in the testing object. This is data about
+derived objects, not triangles or colimits of groups (Stacks, Tags 079W and 0D5S). -/
 structure PerfectHomPushPullData (Q : schemeDerivedCategory Y)
     (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) where
   stageQCoh : ∀ j, schemeDerivedQCohProperty Y (F.obj j)
@@ -133,32 +132,7 @@ private theorem stage_composition (j k l : Set.Ici i) (hjk : j ≤ k) (hkl : k �
   rfl
 
 /-- The stage pullback Hom functors admit a coherent representing cocone of
-quasi-coherent derived objects on Y. No Mayer--Vietoris triangles, cover, perfect
-source object, or group-colimit comparisons are asserted.
-
-Source: Stacks Project, Tags 079W, 0D5S and 09RE.
-
-Proof: Write pi_j for the projection of Y_j = Y x Spec(R_j) to Y, and pi_inf
-for the limit projection. Represent Hom(Lpi_j* M,Lpi_j* Q) by
-Rpi_j* Lpi_j* Q, using the derived pullback/direct-image adjunction of Tag 079W.
-Use its Hom equivalence for every M; its left naturality gives stageNatural.
-For j <= k, transport on these Hom functors is perfectStageMap, which is natural
-in M by the naturality of the counit-pinned pullback composition comparison.
-Conjugate transport by the adjunction equivalences to obtain a natural map
-mu_M: Hom(M,B_j) -> Hom(M,B_k). Evaluate mu at M = B_j and id to define the
-representing arrow. Naturality with respect to f: M -> B_j says
-f followed by this arrow equals mu_M(f); this is the elementary Yoneda argument.
-The identity law is read from perfect_hom_stage_colimit at the identity arrow.
-The composition law follows from perfectHomMap_trans. Applying the injective
-adjunction equivalence proves both functor laws. Construct the cocone legs by the
-same evaluation at id, now using perfectLimitMap. Its stage compatibility proves
-the cocone laws. These evaluation identities give stageMap and limitMap.
-Perfectness of Q implies quasi-coherent cohomology. Derived pullback preserves it,
-and the projections are affine, hence qcqs, so their derived direct images also
-have quasi-coherent cohomology. This gives stageQCoh and limitQCoh. No finiteness,
-directedness or ring-colimit witness is needed. The objects are constructed as
-these specific derived direct images; no arbitrary existence witness is selected.
-The argument also works for Q = 0 and empty Y. -/
+quasi-coherent derived objects on `Y` (Stacks, Tags 079W, 0D5S and 09RE). -/
 theorem perfect_hom_pushPull_cocone
     [∀ W : Y.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))]

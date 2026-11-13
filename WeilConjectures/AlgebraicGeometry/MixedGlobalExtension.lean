@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # Derived extension and restriction of global scalars
-Source: Stacks Project, Tag 0AA7.
+
+## References
+
+* Stacks Project, Tag 0AA7.
 -/
 
 @[expose] public section
@@ -29,8 +32,7 @@ namespace AlgebraicGeometry
 
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-/-- The normalized derived extension/restriction adjunction.
-Source: Stacks Tag 0AA7, computed on K-flat resolutions. -/
+/-- The normalized derived extension/restriction adjunction (Stacks, Tag 0AA7). -/
 theorem mixedGlobalExtension_adjunction {R B : Type u} [CommRing R] [CommRing B]
     (ρ : R →+* B) :
     ∃ E : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B),
@@ -60,11 +62,11 @@ theorem mixedGlobalExtension_adjunction {R B : Type u} [CommRing R] [CommRing B]
   exact (ModuleCat.extendRestrictScalarsAdj ρ).derivedAdjunction.ofNatIsoRight
     (ModuleCat.restrictScalars.{u} ρ).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Derived extension of global scalars. Source: Stacks Tag 0AA7. -/
+/-- Derived extension of global scalars (Stacks, Tag 0AA7). -/
 def mixedGlobalExtension {T S : Scheme.{u}} (g : T ⟶ S) :=
   Classical.choose (mixedGlobalExtension_adjunction g.appTop.hom)
 
-/-- The extension/restriction adjunction for the global rings. Source: Stacks Tag 0AA7. -/
+/-- The extension/restriction adjunction for the global rings (Stacks, Tag 0AA7). -/
 def mixedGlobalExtensionAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :
     mixedGlobalExtension g ⊣ schemeGlobalScalarRestriction g :=
   Classical.choice (Classical.choose_spec (mixedGlobalExtension_adjunction g.appTop.hom))

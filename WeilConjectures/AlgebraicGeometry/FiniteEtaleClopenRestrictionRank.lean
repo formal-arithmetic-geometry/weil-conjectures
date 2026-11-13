@@ -12,9 +12,6 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleGraph
 
 /-! # Rank on a clopen restriction and its change of base
-
-Source: Mathlib Scheme.Hom.finrank_of_isPullback and isPullback_morphismRestrict;
-corrected finite-étale lifting steps 3 and 5.
 -/
 
 @[expose] public section

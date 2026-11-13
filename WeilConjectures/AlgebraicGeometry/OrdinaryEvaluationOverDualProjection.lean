@@ -12,7 +12,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The inverse open-site dual comparison on product projections
 
-Source: Stacks Project, Tags 0A8X and 08DL; Hom-complex product projections. -/
+## References
+
+* Stacks Project, Tags 0A8X and 08DL.
+-/
 
 @[expose] public section
 
@@ -49,22 +52,8 @@ attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
 set_option maxHeartbeats 600000 in
 -- The dependent Hom projections need extra elaboration steps on the concrete open site.
 set_option linter.unusedVariables false in
-/-- The inverse transported dual comparison recovers the unit-valued projection.
-Source: Stacks Project, Tags 0A8X and 08DL, product projections and open restriction.
-
-Proof: apply the functorial projection equation of homComplex_projections_exists
-with identity in the first variable and a.hom in the second variable. Compose
-on the left with the hom of b at the single unit. Its projection is hπ.
-Use naturality he for the singleObjXSelf map to move that output map across e.
-The degree-zero component of a, followed by singleObjXSelf on the scheme,
-is L(singleObjXSelf) followed by the inverse normalized unit isomorphism:
-expand the two factors of a, use singleMapHomologicalComplex_hom_app_self
-and single_map_f_self, and cancel singleObjXSelf with its inverse.
-Functoriality of homObjMap then identifies the resulting equation with
-d.hom.f q followed by the scheme unit-valued projection. Precompose with
-d.inv.f q and cancel using the degree-q component of d.inv_hom_id.
-This proves the displayed equation, without any tensorator or complex F.
-Empty opens and zero complexes require no separate assumptions. -/
+/-- The inverse transported dual comparison recovers the unit-valued projection
+(Stacks, Tags 0A8X and 08DL). -/
 theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :
     let L := Equivalence.functor

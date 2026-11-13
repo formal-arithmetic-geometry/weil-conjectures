@@ -314,37 +314,8 @@ end AlgebraicGeometry.ProEtale.CondensedRing
 namespace AlgebraicGeometry.ProEtale
 
 /-- A locally finitely presented integral coefficient module has a two-term locally free
-resolution. Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3),
-Remark 7.3.2 and Lemma 7.3.9 (finite locally constant sheaves are classical).
-
-Proof: choose N so the image I of multiplication by ℓ^N is locally finite free
-and Q = P/ℓ^N P has a finite locally constant underlying sheaf of sets. Construct
-B as the free module object on this sheaf of sets, using free abelian sheafification
-followed by the free module-object functor. Their composite is left adjoint to the
-faithful underlying-set functor, so its counit b : B → Q is epimorphic. Pullback
-commutes with this free construction. Finite constant generators give a finite
-biproduct of regular modules, so B is locally finite free.
-
-Set F₀ = P ×_Q B. The projection to B is an epimorphism with kernel I. After a
-common free cover, an epimorphism onto a finite free module locally splits by
-lifting the finitely many basis sections. Thus F₀ is locally finite free. Its
-projection g to P is epimorphic because b is. Its kernel is locally finitely
-presented by the integral kernel theorem. On a common presentation cover, present
-this kernel by a finite free module A and compose A → ker g with ker g → F₀.
-The resulting finite matrix δ has image ker g and cokernel P. Rationalizing P is
-locally finite free by the field finite-presentation theorem and noetherianity.
-
-Prove local freeness of image δ by induction on its source rank, using the existing
-integral pivot cover. The zero matrix has zero image. In the nonzero branch, row
-elimination changes the pivot block to [p, 0; c, d-rc], with p monic and rationally
-invertible. Its image is the direct sum of the regular module and image(d-rc), by
-an explicit epi-mono factorization. Rational inversion of p identifies its rational
-cokernel with that of d-rc, so induction applies at strictly smaller source rank.
-Images commute with the exact coefficient-normalized pullback functors, and binding
-the covers gives the required local freeness of ker g. Take F₁ = ker g and its
-inclusion into F₀ to obtain the short exact sequence. The constructions include
-rank zero and empty covers; no resolution object is defined by an unproved choice.
--/
+resolution. (Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), Remark 7.3.2 and
+Lemma 7.3.9) -/
 theorem integral_lfp_locallyFree_resolution
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]

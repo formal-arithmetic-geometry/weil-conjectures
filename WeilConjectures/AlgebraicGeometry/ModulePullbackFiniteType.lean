@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 /-!
 # Finite type is preserved by module pullback
 
-Source: Stacks Project, Modules, Lemma 01B6.
+## References
+
+* [Stacks, Tag 01B6](https://stacks.math.columbia.edu/tag/01B6)
 -/
 
 @[expose] public section
@@ -30,35 +32,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 600000 in
 -- The over-site equivalences and tensor-pullback object require extra definitional reductions.
-/-- For a morphism of schemes, the pullback of a finite type module is finite type.
-
-Source: Stacks Project, Modules, Lemma 01B6.
-
-The hypothesis `[G.IsFiniteType]` renders that every point of the target has an open
-neighbourhood on which a finite direct sum of the structure sheaf surjects onto `G`.
-The conclusion says the same for `tensorPullback f G`; the local proof takes the inverse
-image of the neighbourhood and uses the same finite number of summands. The second
-conjunct records this explicitly for every surjection on an open `V`: `(Opens.map f.base).obj V`
-is `f⁻¹ V`, and `free (ULift (Fin n))` is the direct sum of `n` structure sheaves.
-
-Proof, following the four steps of the node:
-1. For an open `V` of `Y`, put `U = f⁻¹ V` and let `f': U → V` be the restricted
-   morphism. The over-site equivalences, restriction-pullback and composition isomorphisms
-   identify pullback of `G.over V` along `f'` with `(pullback f G).over U`.
-   Uniqueness of left adjoints compares Mathlib pullback with `tensorPullback`.
-2. The functor between over-site module categories preserves colimits and epimorphisms.
-   Pullback of the unit sheaf is the unit sheaf, so `mapFreeIso` identifies the free
-   sheaves of the same rank. Composing these isomorphisms with the image of any epi
-   `φ` gives the epi on `U` required by the second conjunct, including rank zero.
-3. Choose finite local generators data for `G`. Identify each finite generating index
-   type with `ULift (Fin n)` and apply the local epi construction of step 2. The
-   resulting epis give finite generating sections on the inverse-image opens.
-4. The inverse-image opens cover: for `x ∈ W`, a covering open around `f(x)` pulls
-   back to one containing `x`; intersect it with `W` to verify the covering-sieve
-   condition. Apply `IsFiniteType.mk` to these finite local generators data.
-The explicit local-lifting criterion is not needed: generating sections are defined
-using categorical epimorphisms.
--/
+/-- For a morphism of schemes, the pullback of a finite type module is of finite type
+(Stacks, Tag 01B6). The second conjunct records that the pullback of any epimorphism from
+`free (ULift (Fin n))` over an open `V` is an epimorphism over `f⁻¹ V`. -/
 theorem tensorPullback_isFiniteType (X Y : Scheme.{u}) (f : X ⟶ Y) (G : Y.Modules)
     [G.IsFiniteType] :
     ((tensorPullback f).obj G).IsFiniteType ∧

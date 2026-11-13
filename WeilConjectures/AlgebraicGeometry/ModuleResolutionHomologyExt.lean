@@ -14,7 +14,10 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # A fixed module resolution computes Ext from the structure sheaf
 
-Source: Stacks Project, Cohomology, Tags 01DZ and 0B6A.
+## References
+
+* [Stacks, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+* [Stacks, Tag 0B6A](https://stacks.math.columbia.edu/tag/0B6A)
 -/
 
 @[expose] public section
@@ -199,27 +202,8 @@ private lemma forget_homologyπ
     ((h.map U).cyclesIso.hom ≫ U.map h.cyclesIso.inv) ≫ U.map S.homologyπ
   rw [Category.assoc, ← U.map_comp, h.π_comp_homologyIso_inv, U.map_comp]
 
-/-- A single fixed injective module resolution computes Ext from the structure sheaf.
-Source: Stacks Project, Cohomology, Tag 01DZ (cohomology of modules) and Tag 0B6A
-(cohomology as Ext from the structure sheaf).
-
-Proof: An O-linear map from the structure sheaf is determined by the image of 1
-on the whole space. Conversely a global section defines such a map by multiplying
-its restrictions by local functions. These maps are inverse and additive, and
-commute with the differentials of I. Thus cocycles in the sections complex identify
-with cocycle maps from the structure sheaf into I. Under this identification,
-boundaries identify with null-homotopic cocycle maps: in positive degree they are
-maps factoring through the preceding differential, and in degree zero both boundary
-subgroups are zero. Mathlib
-I.extMk_eq_zero_iff identifies this subgroup with the kernel of the additive map
-from cocycle morphisms to Ext, and I.extMk_surjective proves that map is onto.
-The quotient is therefore additively equivalent to Ext. Transport its inverse
-through the section-complex isomorphism and the homology comparison for the
-module-to-abelian-group forgetful functor. Naturality of homology projection
-proves the displayed formula. It also uniquely determines the equivalence
-because every homology class has a cycle representative. The argument includes
-zero modules and the empty scheme, where both groups are zero. No comparison
-between different resolutions is asserted here. -/
+/-- A single fixed injective module resolution computes Ext from the structure sheaf
+(Stacks, Tags 01DZ and 0B6A). -/
 theorem moduleResolutionHomologyExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf)
     (I : InjectiveResolution F) (n : ℕ) :
     ∃ e : (RingedSpace.globalSectionsComplex I).homology n ≃+

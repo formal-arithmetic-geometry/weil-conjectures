@@ -14,8 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 
 /-! # Tensoring the finite root-power cokernel
-
-Source: finite Kummer level, compatible root tower and tensor-cokernel argument.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -250,16 +248,7 @@ private theorem rootPower_map {X : Scheme.{u}} (l r k : ℕ) :
   simp only [rawPower, Functor.map_comp, eqToHom_map, rootsOfUnitySheafPow]
 
 /-- The specified root-power map becomes invertible after tensoring with coefficients
-annihilated by its target exponent.
-
- Proof: a compatible-root cover identifies the whole root diagram with the
-constant residue diagram. Integer reduction presents each cyclic group as a cokernel.
-The free coefficient module functor preserves this cokernel. Its relation is zero when
-the modulus kills the coefficient ring. Thus both integer-to-cyclic quotient arrows are
-isomorphisms after applying that functor, and their commuting triangle makes every
-residue transition an isomorphism. Naturality of the diagram basis gives the assertion
-on the cover. The monoidal free-module pullback comparison and conservativity of
-covering restrictions descend it. This includes k=0 and the empty scheme. -/
+annihilated by its target exponent. -/
 theorem free_rootPower_isIso (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (hl : IsUnit (l : Γ(X, ⊤)))
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]

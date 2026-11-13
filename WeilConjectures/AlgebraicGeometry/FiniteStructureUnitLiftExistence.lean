@@ -25,7 +25,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Lift the unit of finite structure sheaves
 
-Source: Stacks Project, Tag 09ZT.
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -88,31 +90,7 @@ private theorem compatible_family_change
   rw [he ⟨v, hv⟩] at h
   exact h
 
-/-- Existence part of the unit lift through a proper supporting quotient.
-Source: Stacks Project, Tag 09ZT, algebra structure paragraph, expanded using 088E, 088F
-and 0CYS.
-
-Proof: Since X is finite type over the Noetherian affine base, X is Noetherian.
-Proper support and coherence give a coherent ideal sheaf J annihilating G, with
-V(J) proper over A (0CYS). Put Q = O_X/J. This is coherent with proper support.
-The image of J in O_Xn annihilates j_n^*G, hence also p_n,* O_Yn through psi_n.
-Applying this annihilation to the section 1 shows that the structure map
-O_Xn to p_n,* O_Yn kills J. It therefore factors through j_n^*Q. Transport
-this map through psi_n inverse to obtain u_n: j_n^*Q to j_n^*G.
-The cartesian base-change map preserves units. The given transition equation
-for psi and the canonical composition comparison thus make the u_n compatible.
-Full faithfulness of completion on coherent modules with proper support (088E,
-088F) lifts this family to u: Q to G. Define eta as O_X to Q followed by u.
-Its reductions are exactly the structure maps. Adjunction and pushforward
-composition give the stated scalar formula, including the formula for r = 1.
-Let L be the module endomorphism of G given by left multiplication by eta(1).
-After tensor pullback to X_n and conjugation by psi_n, multiplicativity hmu
-identifies L with multiplication by 1 on p_n,* O_Yn, hence with its identity.
-Equality of these maps is checked locally on pure tensors, which generate the
-pullback tensor product. Faithfulness of completion on G gives L = identity;
-evaluating on sections proves the left-unit law. This uses proper support of
-Q and G, never properness of O_X. If G is zero (including an empty scheme),
-the quotient and all maps above are zero, and both asserted equations hold. -/
+/-- Existence part of the unit lift through a proper supporting quotient. -/
 theorem finite_structure_unit_lift_existence
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

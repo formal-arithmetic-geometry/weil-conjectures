@@ -15,8 +15,9 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # The qcqs subcategory of the small pro-etale site
 
-Source: Stacks Project, Tag 09A1, proof of lemma-w-contractible-hypercovering,
-qcqs subsite paragraph.
+## References
+
+* Stacks Project, Tag 09A1.
 -/
 
 @[expose] public section

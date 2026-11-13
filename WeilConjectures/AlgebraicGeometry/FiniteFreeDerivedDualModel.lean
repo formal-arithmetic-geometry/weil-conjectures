@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # The finite free complex computing a local derived dual
 
-Source: Stacks Project, Cohomology, Tags 08DQ and 08DM.
+## References
+
+Stacks Project, Cohomology, Tags 08DQ and 08DM.
 -/
 
 @[expose] public section
@@ -154,24 +156,7 @@ private theorem homComplex_dual_bounded_finiteFree
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived dual of a bounded finite free complex on an affine open is represented
 by a bounded finite free complex. The second argument is the restriction of the actual
-unit of the shared derived tensor structure.
-
-Source: Stacks Project, Cohomology, Tag 08DQ, proof of lemma-dual-perfect-complex,
-and Tag 08DM, lemma-RHom-strictly-perfect.
-Proof: let O[0] be the single complex on the unit module of the localized ringed site.
-Construct D as the ordinary Hom complex Hom(F,O[0]). In degree n its product has just
-one potentially nonzero factor, Hom(F^(-n),O), because O[0] is zero in every other
-degree. For a finite free F^(-n) of rank r this factor is finite free of rank r by the
-dual-basis isomorphism. Hence D is finite free in every degree, and bounds [a,b] for F
-give bounds [-b,-a] for D. A finite free term is its own finite free retract, so F is
-strictly perfect. Apply `lem-pc-rhom-strict-perfect-hom` to F and O[0] to identify Q(D)
-with RHom(Q(F),Q(O[0])). Exact open restriction carries the degree-zero unit module to
-that of the localized site. The shared K-flat derived tensor unit is represented by
-this degree-zero unit, so Q(O[0]) is canonically isomorphic to the displayed restriction
-of the global unit. Apply RHom in its second variable to this isomorphism and compose.
-The construction also applies to the zero complex and rank-zero terms; the signs in
-its differential are those of the ordinary Hom complex, not a termwise dual with an
-unspecified differential. -/
+unit of the shared derived tensor structure. (Stacks, Tags 08DQ and 08DM.) -/
 theorem exists_bounded_finiteFree_derived_dual_model
     (X : Scheme.{u}) (U : X.Opens) [IsAffine U.toScheme]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

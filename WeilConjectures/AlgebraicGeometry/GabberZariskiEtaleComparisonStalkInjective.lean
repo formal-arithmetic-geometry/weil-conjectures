@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.GabberZariskiEtaleLocalAgreement
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkPairRepresentatives
 
 /-! # Stalk injectivity of Gabber's comparison
-Source: Stacks Project, Tag 09ZF, first proof paragraph.
+
+## References
+
+* [Stacks, Tag 09ZF]
 -/
 
 @[expose] public section
@@ -26,25 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- A comparison satisfying the unit equation is injective on stalks.
-Source: Stacks Project, Tag 09ZF, first proof paragraph.
-Proof: the stalk of the topological inverse image at z identifies with the stalk
-of Fzar at i(z). Represent two germs on a common open W around i(z). The unit
-equation identifies their images with germs of the étale pullbacks of those
-sections. Equality of these germs gives equality on a smaller open of Z around z.
-The étale inverse image is the sheafification of the presheaf left Kan extension.
-Its unit is the identity-indexed colimit coprojection followed by sheafification.
-Local equality for sheafification provides an étale cover on which the two
-presheaf classes agree. Choose a point above z in this cover. The indexing
-category is filtered, since the étale base-change functor preserves finite
-limits. Equality in this filtered colimit is witnessed by an étale X-scheme U
-on which the original sections agree, with a point lying over i(z). The image
-W0 of U in X is open, lies in W, and contains i(z). Factor U through W0; the
-result is a surjective étale map, hence a cover. Separatedness of F for this
-cover shows that the original sections agree on W0. Their original germs are
-therefore equal, and the stalk inverse-image identification proves the claim.
-The empty Z case is vacuous; no quasi-compactness or finite cover is needed.
--/
+/-- A comparison satisfying the unit equation is injective on stalks (Stacks, Tag 09ZF). -/
 theorem gabber_zariski_etale_comparison_stalk_injective
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))

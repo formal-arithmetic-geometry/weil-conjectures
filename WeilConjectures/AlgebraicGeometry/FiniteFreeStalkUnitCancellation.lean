@@ -12,9 +12,12 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkUnitCancellationAt
 
-/-! # One unit cancellation over a scheme stalk
+/-!
+# One unit cancellation over a scheme stalk
 
-Source: Stacks Project, Tag 00MT, and, proof step 4.
+## References
+
+* Stacks Project, Tag 00MT
 -/
 
 @[expose] public section
@@ -24,29 +27,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A nonzero residue differential permits one cancellation, dropping two term ranks.
-
-Source: Stacks Project, Tag 00MT, applied once over the
-local ring of the stalk, proof step 4.
-
-Proof: Use the chosen finite free sheaf identifications to take global sections on
-Spec of the stalk. Maps between these free sheaves are matrices over the stalk,
-and pullback along its residue quotient reduces each coefficient. A nonzero
-residue differential has a nonzero coefficient, whose lift is outside the maximal
-ideal and hence is a unit. The complex shape and the support bounds force this
-map to go from degree i to degree i+1 with 0 <= i < d. Reverse grading and apply
-ChainComplex.exists_splitting_of_isUnit_entry to this coefficient, once. Its
-complement has one less basis vector in each of these two degrees and the same
-bases elsewhere. The identity summand has a contracting homotopy with the inverse
-identity as its only nonzero component. Projection to the complement and inclusion
-from it compose to the identity on the complement; their other composite differs
-from the identity by that contraction. Apply the associated-sheaf functor and
-reverse grading back to obtain the asserted homotopy equivalence. Outside the
-original support the complement agrees with the original zero terms, since both
-cancelled degrees are inside the support. The resulting bases give the displayed
-free sheaf identifications. This argument performs exactly one cancellation; it
-makes no assertion that the complementary complex has zero residue differentials.
-If d=0 or all ranks are zero, the nonzero-differential hypothesis is impossible. -/
+/-- A nonzero residue differential permits one cancellation, dropping two term ranks
+(Stacks, Tag 00MT). -/
 theorem exists_stalk_unit_cancellation {Y : Scheme.{u}} (y : Y)
     (P : CochainComplex (Spec (Y.presheaf.stalk y)).Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d) (n : ℤ → ℕ)

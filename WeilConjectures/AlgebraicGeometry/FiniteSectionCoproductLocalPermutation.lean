@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Limits
 /-!
 # Local permutations between finite coproducts of sections
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
+## References
+
+* Stacks Project, Section 03SH; SGA 4, Exposé IX, 5.1.
 -/
 
 @[expose] public section
@@ -24,22 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Two finite coproduct presentations by sections agree near each point up to a permutation.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
-
-Proof. A coproduct presentation of a scheme induces a disjoint open partition of its
-underlying space. In the fibre of `p` over `z`, the first presentation identifies the
-points with `J₁`: every point belongs to a unique sheet, and the equation `s₁ j ≫ p = 𝟙 S`
-identifies that point with `s₁ j z`. The second presentation similarly identifies this
-fibre with `J₂`. Composing these bijections gives `e`. For each `j`, take the inverse
-image under `s₁ j` of the open image of `s₂ (e j)`. It contains `z`. Intersect these
-finitely many opens to obtain `U`. On `U`, `U.ι ≫ s₁ j` factors through the open
-immersion `s₂ (e j)`. Composing this factorization with `p` shows that the factor is
-`U.ι`, since both maps are sections of `p`. Thus the displayed morphisms are equal.
-If one index set is empty and `z` exists, its coproduct presentation is impossible;
-if both are empty there is likewise no point `z`. No choice of a point is needed on
-an empty scheme, so the statement covers all empty cases. -/
+/-- Two finite coproduct presentations by sections agree near each point up to a permutation
+(Stacks, Section 03SH; SGA 4, Exposé IX, 5.1). -/
 theorem finiteSectionCoproduct_local_permutation (S P : Scheme.{u}) (p : P ⟶ S)
     (J₁ J₂ : Type u) [Finite J₁] [Finite J₂]
     (s₁ : J₁ → (S ⟶ P)) (s₂ : J₂ → (S ⟶ P))

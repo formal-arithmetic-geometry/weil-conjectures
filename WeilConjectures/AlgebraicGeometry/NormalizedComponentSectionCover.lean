@@ -15,7 +15,10 @@ import Mathlib.Topology.DiscreteSubset
 
 /-! # A normalized frame cover for prescribed component sections
 
-Source: Stacks Project, Varieties Lemma 09NE. -/
+## References
+
+* [Stacks, Tag 09NE]
+-/
 
 @[expose] public section
 
@@ -29,30 +32,11 @@ private theorem freeGenerator_empty {X : Scheme.{u}} (M : X.Modules)
   subst U
   exact isFreeGenerator_of_mem e (S := ⊥) (fun _ hx ↦ hx.elim) fun _ _ h ↦ h.elim
 
-/-- Source: Stacks Project, Varieties Lemma 09NE, first three paragraphs of the direct
-proof and final paragraph (normalizing the frames by the prescribed sections).
-
-Proof: Let T be the finite union of pairwise intersections. The reduced-cover lemma
-makes T closed and identifies the component opens off T scheme-theoretically, with a
-product bijection on structure sections on every open disjoint from T. T is discrete:
-a finite union of closed discrete subsets is discrete. Choose one open U_t for each
-point t of T, meeting T only at t. Remove every component not containing t. On each
-incident component s is nonzero in the residue-field fibre. A section of an invertible
-module with nonzero fibre is a local free generator: choose a trivialization, whose
-section coefficient has a germ outside the maximal ideal, and restrict to its basic
-open. Shrink U_t simultaneously along these finitely many component neighborhoods.
-For each incident component use the restricted s as frame m, and use f_t=1 on U_t.
-For nonincident components the preimage is empty and its unique section is a frame.
-Off T cover each component by its free-generator neighborhoods, regarded as opens of Y
-by the reduced-cover lemma. Use that component's frames and the unique empty sections
-on all other components. The structure-section bijection transfers the coefficient
-of s in its frame to a function f on Y. Index the union of the point neighborhoods
-and component neighborhoods by a type in universe max(u,v). Every distinct pair of
-members overlaps outside T: point neighborhoods have distinct distinguished points,
-and all other members avoid T. Thus for every open W contained in a distinct overlap,
-the reduced-cover section bijection applies. This proves all the asserted clauses.
-If T is empty take only component neighborhoods; if Y is empty take the empty cover.
-No transition unit, cocycle, glued module, or global section is constructed here. -/
+/-- For a finite closed cover of a reduced scheme `Y` by components `Z a` with discrete pairwise
+intersections, and invertible modules with sections `s a` nonvanishing on the overlaps, there is
+an open cover `U b` of `Y` with free generators `m a b` and functions `f b` such that
+`s a = f b • m a b` on `U b`, and sections over any open inside two distinct members are
+determined componentwise (Stacks, Tag 09NE). -/
 theorem exists_normalized_component_section_cover
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

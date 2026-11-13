@@ -13,7 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # The fixed composition counits on cochain complexes
-Source: Stacks Project, Tag 0D5S. -/
+
+## References
+
+* Stacks Project, Tag 0D5S.
+-/
 
 @[expose] public section
 universe u w
@@ -67,12 +71,8 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
   subst E
   exact ⟨hEadd, ε, hL, hK⟩
 
-/-- The fixed composition counit is invertible at any K-flat complex.
-Source: Stacks Project, Tags 06YJ and 0D5S.
-Proof: the defining derived-pullback counit is invertible on K-flat models.
-Uniqueness of left derived functors identifies it with the counit selected for
-composition. Its comparison is an isomorphism, so the fixed counit is invertible
-on the same models. -/
+/-- The fixed composition counit is invertible at any K-flat complex
+(Stacks, Tags 06YJ and 0D5S). -/
 theorem perfectHomTensorCounit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlatTensor (R := Y.sheaf) P) :
@@ -148,16 +148,14 @@ noncomputable def perfectHomTensorComplexComp {X Y Z : Scheme.{u}}
   let := perfectHomTensorAdditive (f ≫ g)
   Functor.mapHomologicalComplexCompIso (perfectHomTensorComp f g) (.up ℤ)
 
-/-- Homotopy tensor pullback sends quotient maps to quotient maps of termwise pullback.
-Source: the quotient construction; Stacks Project, Tag 0D5S. -/
+/-- Homotopy tensor pullback sends quotient maps to quotient maps of termwise pullback. -/
 theorem perfectHomTensorHomotopy_map {X Y : Scheme.{u}} (f : X ⟶ Y)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
     (m : K ⟶ L) :
     (perfectHomTensorHomotopy f).map ((HomotopyCategory.quotient _ (.up ℤ)).map m) =
       (HomotopyCategory.quotient _ (.up ℤ)).map ((perfectHomTensorComplex f).map m) := rfl
 
-/-- The homotopy comparison is the quotient of the termwise comparison.
-Source: the quotient construction; Stacks Project, Tag 0D5S. -/
+/-- The homotopy comparison is the quotient of the termwise comparison. -/
 theorem perfectHomTensorHomotopyComp_hom_app {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :
@@ -166,11 +164,7 @@ theorem perfectHomTensorHomotopyComp_hom_app {X Y Z : Scheme.{u}}
       (HomotopyCategory.quotient _ (.up ℤ)).map
         ((perfectHomTensorComplexComp f g).hom.app K) := rfl
 
-/-- The defining counit equation for the fixed derived comparison, at a homotopy model.
-Source: Stacks Project, Tag 0D5S.
-Proof: the fixed comparison is the left-derived lift of the composite counits.
-The factorization equation of this lift gives the result after evaluating at K
-and removing the identity components of functor associators. No flatness is used. -/
+/-- The defining counit equation for the fixed derived comparison, at a homotopy model. -/
 theorem perfectHomTensorCounit_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)) :
     (perfectHomComposition f g).hom.app (DerivedCategory.Qh.obj K) ≫

@@ -23,21 +23,10 @@ open CategoryTheory CategoryTheory.Limits TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- For an algebra `B` over `A` and `p ∈ Spec A`, write `f: Spec B ⟶ Spec A`. The stalk of
+/-- For an algebra `B` over `A` and `p ∈ Spec A`, write `f : Spec B ⟶ Spec A`. The stalk of
 the direct image of the structure sheaf, after tensoring with the residue field at `p`, has the
 same sections as the scheme-theoretic fibre `f⁻¹(p)`, and so has `B ⊗_A κ(p)`. Both
-identifications agree on elements of `B` and of the residue field.
-Source: Stacks Project, Morphisms, Tag 02KB, affine calculation in the proof of the lemma
-
-Proof steps from the source: (1) identify the structure sheaf on `Spec B` with `˜B`,
-push it forward along `Spec.map (algebraMap A B)`, and identify its stalk at `p` with
-the localization of `B` at the prime of `p`; (2) use `κ(p) = A_p / m_p A_p` to
-identify the stalk tensor with `B ⊗[A] κ(p)`; (3) apply the affine fibre-product
-calculation to identify the fibre with `Spec (B ⊗[A] κ(p))` and its global sections
-with that tensor product. The displayed equations record these identifications on the
-generators from `B` and `κ(p)` (using `lem-weil-pbc-spec-tilde-free-module`,
-`lem-weil-pbc-pushforward-tilde-spec`, `lem-weil-pbc-spec-tilde-stalk-localization`,
-and `lem-weil-pbc-fibre-product-affine-spectra`). -/
+identifications agree on elements of `B` and of the residue field. (Stacks, Tag 02KB.) -/
 theorem Spec.exists_ringEquiv_stalk_tensorProduct_fiber (A B : Type u) [CommRing A]
     [CommRing B] [Algebra A B] (p : Spec (CommRingCat.of A)) :
     letI φ := CommRingCat.ofHom (algebraMap A B)

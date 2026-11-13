@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.GabberH0ZariskiTopUnitEquation
 
 /-! # Local data for Zariski gluing
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
+## References
+
+* [Stacks, Tag 09ZF]
 -/
 
 @[expose] public section
@@ -32,33 +34,8 @@ private theorem sectionIso_apply_inv {A B : Type (u + 1)} (e : A ≅ B) (x : B) 
   exact ConcreteCategory.congr_hom e.inv_hom_id x
 
 /-- Restrict the pulled-back etale sheaves to opens and transport the representative
-and unit equations to these restrictions. This gives local lifts, before gluing.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-
-Proof: Put F' = h^*F and i' = pullback.snd i h. Restrict F' and (i')^*F'
-along the open-subscheme inclusions to obtain G and H; continuity of these
-inclusions makes them sheaves. Their underlying presheaves give eX and eZ.
-The preimage of an open under i' is its fibre product with Z', giving a and
-its first-projection equation. Identify the top-open object with the identity
-etale object, and the latter's pullback with the identity object on the source.
-These identifications give lift. Apply the same identifications to H and then
-the composition isomorphism for h followed by i', transported along the
-pullback square, to obtain e. Its inverse transports the pullback of t to tH.
-The defining composition comparison gives the displayed equation for e tH.
-
-Now let beta satisfy the displayed comparison-unit equation. For every a,
-take V a to be the preimage of W a under i'. Pull s along the map phi a into
-F' on W a: the fibre-product map has first projection phi a and second
-projection the open inclusion, because hphi is their commuting equation.
-Send this section through the Zariski inverse-image unit, obtaining sf a on
-V a. The assumed unit equation for beta identifies its image with the etale
-pullback. Naturality of the etale unit, hs, and unit-compatible composition
-identify that image with the restriction of tH. Preimages of the W a cover
-Z', giving the cover equation. Applying the same beta equation at the top
-open, then the composition comparison, gives the final unit equation, with
-its transport exactly pullback.condition. No injectivity or gluing is used
-here. For an empty index type hW forces X' empty, hence Z' empty, and the
-empty cover and unique empty sections give the same conclusions. -/
+and unit equations to these restrictions. This gives local lifts, before gluing
+(Stacks, Tag 09ZF). -/
 theorem gabber_h0_zariski_local_data
     {X Z U X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (q : U ⟶ X) [Etale q] (h : X' ⟶ X)

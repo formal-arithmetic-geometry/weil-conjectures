@@ -23,23 +23,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Evaluation of the free Čech complex has a degreewise tuple-block basis, and the
-basis identifications intertwine its differentials. No exactness assertion is involved.
-Source: Stacks Project, Tag 03AT, the decomposition preceding the contracting homotopy;
-Tag 03F5, first proof, for coefficients in `O(W)`.
-https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5.
-Proof: Evaluation preserves the coproduct of free representable presheaf modules. In
-simplicial degree n its basis consists of tuples of indices and maps from W to their
-fibre product over U₀. Project such a map onto its n+1 factors. Their common composite
-is a map φ: W ⟶ U₀, and the projections give an n+1-tuple of elements of S φ. Conversely,
-the limit property of the fibre product gives a unique map from any such compatible
-tuple. These operations are inverse. Extend the resulting bijection of bases linearly,
-and collect the basis elements with the same φ into a dependent finitely supported
-family. Each element has finite support in both φ and the tuples, so this gives an
-invertible linear map onto the indicated direct sum. A face map deletes the corresponding
-projection, preserves φ, and agrees with `powerSetComplexFace`. Linearity therefore
-identifies the alternating sums of face maps, with the same index and sign in each
-summand. This proves the displayed commutation identity in every degree. Empty index
-families give zero modules on both sides; no choice of a lift of φ is required. -/
+basis identifications intertwine its differentials. No exactness assertion is involved
+(Stacks, Tags 03AT and 03F5). -/
 theorem freeCechComplex_block_equiv (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)
     (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u})
     (W : X.Etale) :

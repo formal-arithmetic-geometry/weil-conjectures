@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 
 /-! # Extending a stalk factorization of a finite constant map
 
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent.
+## References
+
+Stacks Project, Tag 09BH, Proposition 59.74.1 (3).
 -/
 
 @[expose] public section
@@ -25,20 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A stalk factorization from a finite free constant module extends to an open.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent.
-
-Proof: For each standard basis vector, represent its image under l by a section of F
-on a pointed etale neighbourhood. Refine finitely many times so that all representatives
-are on one neighbourhood V and their images under phi equal the corresponding images
-under alpha. Equality of germs is witnessed after refinement. The open image U of V
-contains x. On V times_U V the two pulled back representatives have equal images in G,
-since both images come from alpha. Monicity makes them equal in F. Descent for the
-surjective etale cover V to U gives one section of F on U for each basis vector.
-The universal property of the free module gives a linear map from Λ^(Fin n) into
-these global sections. The constant-sheaf/global-sections adjunction and the constant
-pullback comparison give the desired map. Equality of its composite with phi and alpha
-is checked on the standard basis. For n=0 both maps from the zero constant sheaf are
-zero, and U=X suffices. No relations have to be checked in this free-module statement. -/
+(Stacks, Tag 09BH.) -/
 theorem exists_open_factorization_of_finite_free_constant_map
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

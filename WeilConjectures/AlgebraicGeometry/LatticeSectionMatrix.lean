@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.LatticeSheafBasic
 /-!
 # Lattice images of matrices of continuous sections
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), continuous changes of integral basis.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable (X : Scheme.{u}) (K : Type u) [Field K]
   [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K) (U : X.ProEt) (n : ℕ)
 
-/-- The embedded lattice image of a matrix of continuous rational coefficient sections.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), continuous matrices in a rational frame. -/
+/-- The embedded lattice image of a matrix of continuous rational coefficient sections. -/
 noncomputable def sectionMatrixLatticeImage (T : (Over U)ᵒᵖ)
     (g : Matrix.GeneralLinearGroup (Fin n)
       ((latticeCoefficientSheaf X K).obj.obj (op T.unop.left))) :
@@ -69,11 +70,7 @@ private theorem sectionMatrixLatticeImage_integral_mul_subset (T : (Over U)ᵒ�
   rw [hv, Matrix.mulVec_mulVec]
   rfl
 
-/-- Integral invertible changes of continuous coordinates preserve the lattice image.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), continuous integral changes of basis.
-Proof: multiply the integral coefficient vector by the integral matrix. Associativity of
-matrix action identifies the resulting rational vector. The inverse matrix gives the
-reverse inclusion, including for the empty basis. -/
+/-- Integral invertible changes of continuous coordinates preserve the lattice image. -/
 theorem sectionMatrixLatticeImage_integral_mul (T : (Over U)ᵒᵖ)
     (g : Matrix.GeneralLinearGroup (Fin n)
       ((latticeCoefficientSheaf X K).obj.obj (op T.unop.left)))
@@ -92,9 +89,7 @@ theorem sectionMatrixLatticeImage_integral_mul (T : (Over U)ᵒᵖ)
         (op T.unop.left)).hom) h) h⁻¹
   simpa only [map_inv, mul_assoc, mul_inv_cancel, mul_one] using hh
 
-/-- The section-matrix construction specializes to the existing constant lattice image.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), constant versus continuous matrices.
-Proof: the entries of a mapped constant matrix are its constant coefficient sections. -/
+/-- The section-matrix construction specializes to the existing constant lattice image. -/
 theorem sectionMatrixLatticeImage_constant (T : (Over U)ᵒᵖ)
     (g : Matrix.GeneralLinearGroup (Fin n) K) :
     sectionMatrixLatticeImage X K A U n T
@@ -103,12 +98,7 @@ theorem sectionMatrixLatticeImage_constant (T : (Over U)ᵒᵖ)
 
 omit U in
 /-- A matrix of continuous rational sections with integral pointwise values and inverse
-comes from an invertible matrix of continuous integral sections.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), integral continuous change matrices.
-Proof: each coefficient of the matrix and inverse has its values in the subring.
-Give it that subtype codomain; continuity follows from the induced topology.
-The coefficient inclusion is injective, so the inverse matrix equations descend to
-integral coefficients. The resulting integral unit maps to the given rational unit. -/
+comes from an invertible matrix of continuous integral sections. -/
 theorem coefficientMatrix_integral_of_pointwise (V : X.ProEt)
     (g : Matrix.GeneralLinearGroup (Fin n) ((latticeCoefficientSheaf X K).obj.obj (op V)))
     (hg : ∀ x : V.left,
@@ -165,11 +155,8 @@ theorem coefficientMatrix_integral_of_pointwise (V : X.ProEt)
   apply Units.ext
   exact hm
 
-/-- Pointwise equality of a continuous matrix coset to a constant coset identifies lattice images.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local constancy of embedded lattices.
-Proof: the pointwise change matrix is integral together with its inverse, so the previous
-coefficient-lifting lemma gives an invertible integral continuous matrix. Multiplication
-by it preserves the lattice image. -/
+/-- Pointwise equality of a continuous matrix coset to a constant coset identifies lattice
+images. -/
 theorem sectionMatrixLatticeImage_eq_of_pointwise_coset (T : (Over U)ᵒᵖ)
     (g : Matrix.GeneralLinearGroup (Fin n)
       ((latticeCoefficientSheaf X K).obj.obj (op T.unop.left)))

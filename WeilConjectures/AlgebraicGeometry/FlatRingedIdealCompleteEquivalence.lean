@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Flat ringed-site equivalence on locally derived complete objects
 
-Source: Stacks Project, Algebraization, Tags 099I and 0999.
+## References
+
+* Stacks Project, Tags 099I and 0999
 -/
 
 @[expose] public section
@@ -38,11 +40,7 @@ attribute [local instance 20000] ringedCompletionHasSheafCompose
 -- All computations with the chosen Hom complex use its public projection API.
 attribute [local irreducible] homComplexFunctor ringedHomUnitEvaluationIso
 
-/-- Restriction of scalars is exact on module sheaves.
-Source: Stacks Project, Algebraization, Tag 099C.
-Proof: the underlying additive sheaf is unchanged. Kernels are sectionwise kernels with
-restricted action; cokernels are sheafifications of the same additive presheaf cokernels.
-The same description applies to finite products and coproducts. -/
+/-- Restriction of scalars is exact on module sheaves (Stacks, Algebraization, Tag 099C). -/
 theorem siteRestrictScalars_exact {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     PreservesFiniteLimits
@@ -64,10 +62,8 @@ theorem siteRestrictScalars_exact {C : Type u} [SmallCategory C]
     preservesFiniteColimits_of_reflects_of_preserves F
       (SheafOfModules.toSheaf.{u} (siteModuleRings R))⟩
 
-/-- Restriction of scalars reflects isomorphisms of sheaves of modules.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
-Proof: its composite with the forgetful functor to abelian sheaves is precisely the
-forgetful functor over B, which reflects isomorphisms. -/
+/-- Restriction of scalars reflects isomorphisms of sheaves of modules
+(Stacks, Algebraization, Tag 099I). -/
 theorem siteRestrictScalars_reflectsIsomorphisms
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
@@ -79,10 +75,8 @@ theorem siteRestrictScalars_reflectsIsomorphisms
     inferInstanceAs ((SheafOfModules.toSheaf.{u} (siteModuleRings B)).ReflectsIsomorphisms)
   exact reflectsIsomorphisms_of_comp F (SheafOfModules.toSheaf.{u} (siteModuleRings R))
 
-/-- Termwise restriction preserves and reflects quasi-isomorphisms.
-Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime.
-Proof: exactness identifies the restricted cohomology maps with restriction of the
-original cohomology maps. Restriction reflects isomorphisms of these sheaves. -/
+/-- Termwise restriction preserves and reflects quasi-isomorphisms
+(Stacks, Algebraization, Tag 099I). -/
 theorem siteRestrictScalars_quasiIso_iff
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
@@ -95,9 +89,8 @@ theorem siteRestrictScalars_quasiIso_iff
   have := siteRestrictScalars_reflectsIsomorphisms φ
   exact HomologicalComplex.quasiIso_map_iff_of_preservesHomology f _
 
-/-- Derived restriction of scalars, using Mathlib's restriction of scalars and its exact
-functor localization, rather than an unspecified functor between derived categories.
-Source: Stacks Project, Algebraization, Tags 099C and 099I. -/
+/-- Derived restriction of scalars, defined from Mathlib's restriction of scalars via
+its exact functor localization (Stacks, Algebraization, Tags 099C and 099I). -/
 noncomputable def siteDerivedRestrictScalars {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]
@@ -109,12 +102,7 @@ noncomputable def siteDerivedRestrictScalars {C : Type u} [SmallCategory C]
   (SheafOfModules.restrictScalars.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapDerivedCategory
 
-/-- Derived restriction of scalars reflects isomorphisms.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
-Proof: the forgetful functor to abelian sheaves reflects isomorphisms, and its composite
-with restriction is the same forgetful functor over B. Exactness commutes restriction
-with every cohomology functor. Thus invertibility after restriction implies invertibility
-on every cohomology sheaf, which detects isomorphisms of unbounded derived objects. -/
+/-- Derived restriction of scalars reflects isomorphisms (Stacks, Algebraization, Tag 099I). -/
 theorem siteDerivedRestrictScalars_reflectsIsomorphisms
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
@@ -158,13 +146,8 @@ private theorem locallyDerivedRingedIdealComplete_of_iso
     ((Iso.refl _).prod ((ringedDerivedRestriction R U).mapIso e)))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The specified exact derived restriction preserves and reflects local completeness.
-Source: Stacks Project, Algebraization, Tag 099C.
-Proof: the extension ideal's unique local-membership description is the hypothesis of
-restrictScalars_locallyDerivedComplete_iff. Identify its image of the chosen complex
-representative with the exact derived functor using mapDerivedCategoryFactors and the
-representative isomorphism. Local completeness is invariant under these isomorphisms
-since each of its defining internal-Hom objects is functorial. -/
+/-- The specified exact derived restriction preserves and reflects local completeness
+(Stacks, Algebraization, Tag 099C). -/
 theorem siteDerivedRestrictScalars_locallyDerivedComplete_iff
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)
@@ -206,9 +189,8 @@ theorem siteDerivedRestrictScalars_locallyDerivedComplete_iff
       (locallyDerivedRingedIdealComplete_of_iso R I e.symm hM),
     fun hM ↦ locallyDerivedRingedIdealComplete_of_iso R I e (h.mpr hM)⟩
 
-/-- Restriction of scalars on the full subcategories of locally derived complete objects.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
-This is the lift of the specified exact derived restriction, with no choices of objects. -/
+/-- Restriction of scalars on the full subcategories of locally derived complete objects,
+lifting the specified exact derived restriction (Stacks, Algebraization, Tag 099I). -/
 noncomputable def siteCompleteRestrictScalars
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)
@@ -228,12 +210,8 @@ noncomputable def siteCompleteRestrictScalars
         siteDerivedRestrictScalars φ)
     (fun M ↦ (siteDerivedRestrictScalars_locallyDerivedComplete_iff φ I M.obj).mpr M.property)
 
-/-- Restriction on locally derived complete objects is conservative.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
-Proof: compose with the fully faithful inclusion into the ambient derived category.
-This composite is the ambient conservative restriction after a fully faithful inclusion,
-and hence reflects isomorphisms. Reflection by the composite implies reflection by the
-restriction functor itself. -/
+/-- Restriction on locally derived complete objects is conservative
+(Stacks, Algebraization, Tag 099I). -/
 theorem siteCompleteRestrictScalars_reflectsIsomorphisms
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)
@@ -253,13 +231,8 @@ theorem siteCompleteRestrictScalars_reflectsIsomorphisms
   exact reflectsIsomorphisms_of_comp (siteCompleteRestrictScalars φ I)
     (ObjectProperty.ι (IsLocallyDerivedRingedIdealComplete R I.module I.inclusion))
 
-/-- The categorical last step of the complete-restriction equivalence argument.
-Source: Stacks Project, Algebraization, Tag 099I, final paragraph.
-Proof: reflection of isomorphisms makes every component of beta invertible.
-Use beta as the unit and the inverse of alpha as the counit; the standard
-adjointification of an equivalence supplies the triangle identity. Its forward
-functor is the explicit complete restriction, whose ambient composite is the
-specified exact derived restriction. -/
+/-- The complete restriction is an equivalence once the unit-like and counit-like natural
+transformations are in place (Stacks, Tag 099I). -/
 theorem siteCompleteRestrictScalars_equivalence_of_inverse
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)
@@ -296,14 +269,7 @@ theorem siteCompleteRestrictScalars_equivalence_of_inverse
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An ambient coefficient-Hom construction with its augmentation comparison gives
-an equivalence on complete objects.
-Source: Stacks Project, Algebraization, Tag 099I, the last two paragraphs.
-Proof: the extended Cech reflector theorem makes the completion of every object
-complete. Transport along theta and reflect completeness by restriction to lift F
-to the complete subcategories. On a complete object the completion unit is invertible;
-composing it with theta inverse gives the R-side natural isomorphism. Lift beta to
-the B-side subcategory. Its restriction is invertible because its composite with
-theta is the completion unit. Apply the conservative equivalence assembly lemma. -/
+an equivalence on complete objects (Stacks, Algebraization, Tag 099I). -/
 theorem siteCompleteRestrictScalars_equivalence_of_completion
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)
@@ -590,36 +556,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars along a flat ring-sheaf map which is an isomorphism modulo a
 locally finitely generated ideal induces an equivalence of the locally derived complete
 full subcategories. The natural isomorphism in the conclusion identifies the equivalence
-with the specified derived restriction functor on the ambient categories.
-
-Source: Stacks Project, Algebraization, Tags 099I and 0999.
-
-Proof:
-1. Restriction of scalars is exact and conservative, since its underlying additive sheaf
-is unchanged. It therefore induces the stated derived functor. By
-`lem-weil-pbc-restriction-local-completeness`, it preserves and reflects local completeness.
-2. Choose the augmented extended Cech model `K → R[0]` from
-`lem-weil-pbc-extended-cech-completion-model`. Flatness makes termwise tensoring with `B`
-exact, giving `K_B → B[0]` and `u: K → r K_B`. On every generating slice, localization
-commutes with tensor: `(a/f^n) ⊗ b ↦ φ(a)b/φ(f)^n` with inverse
-`b/φ(f)^n ↦ (1/f^n) ⊗ b`. Finite products in this model are finite direct sums.
-Slice restriction is exact and preserves quotients;
-flatness restricts. Apply
-`lem-weil-pbc-flat-extended-cech-comparison` locally to deduce that `u` is a quasi-isomorphism.
-3. Define `F(E)` by the Hom complex from `r K_B` into the functorial K-injective replacement
-of a representative of `E`, with action `(b h)(k) = h(bk)`. This action commutes with the
-Hom differential and with restrictions. Naturality and two-out-of-three show replacement
-maps preserve quasi-isomorphisms; `lem-pur-rhom-well-defined` then makes the Hom maps
-quasi-isomorphisms. Thus the construction descends to a functor `D(R) → D(B)`.
-4. Precomposition with `u` identifies `r F(E)` with `RHom_R(K,E)`. For complete `E`, the
-completion unit identifies this with `E`, naturally. Completeness is reflected by `r`,
-so `F` also restricts to the complete subcategories.
-5. For complete `M` over `B`, send a homogeneous `m` to the cochain
-`k ↦ q(ε_B(k)m)`, zero off degree zero of `k`. This is a chain map because `ε_B d_K = 0`
-and `q` is a chain map. It is `B`-linear under the action in step 3, and natural. After
-precomposition with `u`, it is exactly the completion unit of `r M`. Hence its restriction
-is an isomorphism by step 4; conservativity of restriction makes it an isomorphism over
-`B`. These two natural isomorphisms exhibit the equivalence asserted here. -/
+with the specified derived restriction functor on the ambient categories
+(Stacks, Algebraization, Tags 099I and 0999). -/
 theorem flat_ringed_ideal_complete_equivalence
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)

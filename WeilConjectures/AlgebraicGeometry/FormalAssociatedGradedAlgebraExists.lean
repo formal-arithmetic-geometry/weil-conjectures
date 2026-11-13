@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # The associated graded ideal algebra
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Z.
+## References
+
+* [Stacks Project, Tag 087Z](https://stacks.math.columbia.edu/tag/087Z)
 -/
 
 @[expose] public section
@@ -91,26 +93,8 @@ private theorem quotient_heq_of_inclusion_eq {X : Scheme.{u}} (I : X.IdealSheafD
   subst n
   exact heq_of_eq (congrArg _ (power_injective I m U h))
 
-/-- The associated graded ideal pieces carry the multiplication induced by representatives.
-Source: Stacks Project, Lemma 087Z and Section 0EHN,
-https://stacks.math.columbia.edu/tag/087Z.
-
-Proof: On affine opens the ideal-power range formula identifies the inclusion of I^r
-with I(U)^r; the quotient projection identifies B_r with I(U)^r/I(U)^(r+1).
-Multiplication sends I(U)^m times I(U)^n into I(U)^(m+n). Changing either representative
-changes the result by I(U)^(m+n+1), so it descends to a bilinear multiplication of the
-quotients. For r=0 the power inclusion is the identity, and its quotient projection is
-the unit. On smaller affine opens these maps commute with restrictions because the
-inclusions and quotient projections do. The affine basis sheaf condition therefore
-glues the maps to all opens: lift both quotient sections locally, multiply their
-representatives, and glue the independent results. The unit and algebra laws are
-checked after further local lifting of all the sections involved, where they are the
-ring identities 1a=a, a1=a, (ab)c=a(bc), and ab=ba. The degree identifications give the
-required HEq laws. For actual sections a and b of power ideals on any open, their
-products locally lift uniquely through the monic inclusion of I^(m+n). Uniqueness
-makes these lifts glue to the section c, and the constructed multiplication gives its
-quotient class. This includes the empty open, the zero and unit ideals, and degree zero.
-No finite-generation assertion or formal module is used. -/
+/-- The associated graded ideal pieces carry the multiplication induced by representatives
+(Stacks, Tag 087Z). -/
 theorem formalAssociatedGraded_algebra_exists {X : Scheme.{u}}
     (I : X.IdealSheafData) :
     ∃ A : GradedSheafAlgebra (formalAssociatedGradedPiece I),

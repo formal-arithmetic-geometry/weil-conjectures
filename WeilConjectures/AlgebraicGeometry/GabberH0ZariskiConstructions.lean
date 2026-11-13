@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 
 /-! # Explicit Zariski restriction and section transport
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Tag 01JR.
+## References
+
+* Stacks Project, Tag 09ZF, Tag 01JR, and Sites, Tags 03CB, 03CC.
 -/
 
 @[expose] public section
@@ -24,16 +26,12 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- The canonical open-subscheme inclusion into the etale site.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The canonical open-subscheme inclusion into the etale site. -/
 noncomputable def gabberOpenEtale (X : Scheme.{u}) : X.Opens ⥤ X.Etale :=
   MorphismProperty.Comma.lift X.restrictFunctor
     (fun U ↦ (inferInstance : Etale U.ι)) (fun _ ↦ trivial) (fun _ ↦ trivial)
 
-/-- The canonical inclusion is continuous. Source: Stacks, Tags 00X6 and 00X5.
-Proof: an open covering is jointly surjective as a family of etale maps, so its
-image sieve is an etale covering. The inclusion preserves pullbacks, and the
-cover-preserving criterion therefore gives continuity. -/
+/-- The canonical inclusion is continuous. (Stacks, Tags 00X6 and 00X5) -/
 theorem gabberOpenEtale_continuous (X : Scheme.{u}) :
     (gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology := by
@@ -43,8 +41,7 @@ theorem gabberOpenEtale_continuous (X : Scheme.{u}) :
     Functor.fullyFaithfulCancelRight (Scheme.Etale.forget X) (eqToIso hj)
   exact Functor.isContinuous_of_iso he _ _
 
-/-- Restrict an etale sheaf by precomposition with the canonical inclusion.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Restrict an etale sheaf by precomposition with the canonical inclusion. -/
 noncomputable def gabberZariskiSheaf (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
     TopCat.Sheaf (Type (u + 1)) X.toTopCat :=
@@ -54,8 +51,7 @@ noncomputable def gabberZariskiSheaf (X : Scheme.{u})
   ((gabberOpenEtale X).sheafPushforwardContinuous (Type (u + 1))
     (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F
 
-/-- Identify the preimage-open inclusion with its scheme base change.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Identify the preimage-open inclusion with its scheme base change. -/
 noncomputable def gabberPreimageEtaleIso {S T : Scheme.{u}} (f : T ⟶ S) (W : S.Opens) :
     Scheme.Etale.mk (f ⁻¹ᵁ W).ι ≅
       (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk W.ι) :=
@@ -68,14 +64,13 @@ noncomputable def gabberPreimageEtaleIso {S T : Scheme.{u}} (f : T ⟶ S) (W : S
         pullbackRestrictIsoRestrict_inv_fst]
       rfl)
 
-/-- The first projection is the restricted morphism. Source: Stacks Project, Tag 01JR. -/
+/-- The first projection is the restricted morphism. -/
 @[simp]
 theorem gabberPreimageEtaleIso_fst {S T : Scheme.{u}} (f : T ⟶ S) (W : S.Opens) :
     (gabberPreimageEtaleIso f W).hom.left ≫ pullback.fst W.ι f = f ∣_ W := by
   simp [gabberPreimageEtaleIso, morphismRestrict]
 
-/-- Identify the identity etale object with the pullback of an identity.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Identify the identity etale object with the pullback of an identity. -/
 noncomputable def gabberIdentityEtaleIso {S T : Scheme.{u}} (f : T ⟶ S) :
     Scheme.Etale.mk (𝟙 T) ≅
       (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk (𝟙 S)) :=
@@ -83,23 +78,20 @@ noncomputable def gabberIdentityEtaleIso {S T : Scheme.{u}} (f : T ⟶ S) :
     change _ ≫ pullback.snd (𝟙 S) f = 𝟙 T
     exact Iso.inv_hom_id _)
 
-/-- Identify the top open with the identity etale object.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Identify the top open with the identity etale object. -/
 noncomputable def gabberTopEtaleIso (S : Scheme.{u}) :
     Scheme.Etale.mk (⊤ : S.Opens).ι ≅ Scheme.Etale.mk (𝟙 S) :=
   MorphismProperty.Over.isoMk S.topIso (by
     change (⊤ : S.Opens).ι ≫ 𝟙 S = (⊤ : S.Opens).ι
     exact Category.comp_id _)
 
-/-- Identify the top open with the pullback of the identity etale object.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Identify the top open with the pullback of the identity etale object. -/
 noncomputable def gabberTopPullbackIso {S T : Scheme.{u}} (f : T ⟶ S) :
     Scheme.Etale.mk (⊤ : T.Opens).ι ≅
       (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk (𝟙 S)) :=
   gabberTopEtaleIso T ≪≫ gabberIdentityEtaleIso f
 
-/-- Send a top-open section to the identity-pullback presentation of global sections.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Send a top-open section to the identity-pullback presentation of global sections. -/
 noncomputable def gabberZariskiLift {X X' : Scheme.{u}} (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
     (gabberZariskiSheaf X' ((Scheme.etaleSetPullback h).obj F)).obj.obj
@@ -108,8 +100,7 @@ noncomputable def gabberZariskiLift {X X' : Scheme.{u}} (h : X' ⟶ X)
       (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj (Scheme.Etale.mk (𝟙 X)))) :=
   fun s ↦ ((Scheme.etaleSetPullback h).obj F).obj.map (gabberTopPullbackIso h).inv.op s
 
-/-- The canonical global-section isomorphism for the base-changed sheaf.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The canonical global-section isomorphism for the base-changed sheaf. -/
 noncomputable def gabberZariskiSectionIso {X Z X' : Scheme.{u}}
     (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
@@ -141,8 +132,7 @@ noncomputable def gabberZariskiSectionIso {X Z X' : Scheme.{u}}
         (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj
           (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)
 
-/-- The section function of the canonical comparison isomorphism.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The section function of the canonical comparison isomorphism. -/
 noncomputable def gabberZariskiCompare {X Z X' : Scheme.{u}}
     (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
@@ -154,8 +144,7 @@ noncomputable def gabberZariskiCompare {X Z X' : Scheme.{u}}
         (Scheme.Etale.mk (𝟙 X)))) :=
   fun s ↦ (gabberZariskiSectionIso i h F).hom s
 
-/-- The pointwise Kan extensions used for inverse image exist in Type (u + 1).
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The pointwise Kan extensions used for inverse image exist in Type (u + 1). -/
 noncomputable instance gabberOpensKanExtension {S T : Scheme.{u}} (f : T ⟶ S)
     (P : S.Opensᵒᵖ ⥤ Type (u + 1)) :
     (Opens.map f.base).op.HasPointwiseLeftKanExtension P :=
@@ -163,35 +152,30 @@ noncomputable instance gabberOpensKanExtension {S T : Scheme.{u}} (f : T ⟶ S)
     (CostructuredArrow.{u, u, u, u} (Opens.map f.base).op V)
     inferInstance (small_succ.{u} _) (CostructuredArrow.proj (Opens.map f.base).op V ⋙ P)
 
-/-- The constructed Zariski inverse image along a scheme morphism.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The constructed Zariski inverse image along a scheme morphism. -/
 noncomputable def gabberZariskiPull {S T : Scheme.{u}} (f : T ⟶ S) :=
   Functor.sheafPullbackConstruction.sheafPullback (Opens.map f.base) (Type (u + 1))
     (Opens.grothendieckTopology S) (Opens.grothendieckTopology T)
 
-/-- The component of the Zariski inverse-image unit on an open.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The component of the Zariski inverse-image unit on an open. -/
 noncomputable def gabberZariskiUnit {S T : Scheme.{u}} (f : T ⟶ S)
     (G : TopCat.Sheaf (Type (u + 1)) S.toTopCat) (W : S.Opens) :=
   ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (Opens.map f.base) (Type (u + 1)) (Opens.grothendieckTopology S)
     (Opens.grothendieckTopology T)).unit.app G).hom.app (op W)
 
-/-- The Zariski restriction of the etale pullback to Xprime.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The Zariski restriction of the etale pullback to Xprime. -/
 noncomputable def gabberZariskiG {X X' : Scheme.{u}} (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :=
   gabberZariskiSheaf X' ((Scheme.etaleSetPullback h).obj F)
 
-/-- The Zariski restriction of the iterated etale pullback to Zprime.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- The Zariski restriction of the iterated etale pullback to Zprime. -/
 noncomputable def gabberZariskiH {X Z X' : Scheme.{u}} (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :=
   gabberZariskiSheaf (pullback i h) ((Scheme.etaleSetPullback (pullback.snd i h)).obj
     ((Scheme.etaleSetPullback h).obj F))
 
-/-- Transport the pullback of t through the inverse section isomorphism.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Transport the pullback of t through the inverse section isomorphism. -/
 noncomputable def gabberZariskiTargetSection {X Z X' : Scheme.{u}}
     (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
@@ -201,8 +185,7 @@ noncomputable def gabberZariskiTargetSection {X Z X' : Scheme.{u}}
   (gabberZariskiSectionIso i h F).inv
     (etaleSetDescentComparison i (pullback.fst i h) F (Scheme.Etale.mk (𝟙 X)) t)
 
-/-- The componentwise condition identifying a comparison with the two units.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph. -/
+/-- The componentwise condition identifying a comparison with the two units. -/
 def GabberZariskiUnitCompatible {X Z X' : Scheme.{u}}
     (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
@@ -217,8 +200,7 @@ def GabberZariskiUnitCompatible {X Z X' : Scheme.{u}}
           (etaleSetDescentUnit (pullback.snd i h) ((Scheme.etaleSetPullback h).obj F)
             (Scheme.Etale.mk W.ι) s)
 
-/-- Pull a representative to one open by the specified fibre-product map.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- Pull a representative to one open by the specified fibre-product map. -/
 noncomputable def gabberLocalRepresentative {X U X' : Scheme.{u}}
     (q : U ⟶ X) [Etale q] (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

@@ -25,8 +25,7 @@ attribute [local irreducible] upperStarFromPoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The standard shift on derived right tensor by the finite quotient.
-Source: derived tensor localized from total tensor. -/
+/-- The standard shift on derived right tensor by the finite quotient. -/
 abbrev tensorReductionShift (n : ℕ) :
     (DerivedNakayama.reductionFunctor l E X (n + 1)).CommShift ℤ := by
   change (tensorRight _).CommShift ℤ
@@ -280,23 +279,7 @@ private theorem normalize
 end Generic
 
 /-- The scalar cone comparison with derived tensor preserves quotient maps, the
-specified tensor unit and the signed shift. No change of coefficient category is involved.
-
-Proof: equality on profinite sections identifies d with the specified uniformizer.
-The exact coefficient sequence gives the augmentation from its two-term free
-resolution to the finite quotient in degree zero. The resolution is K-flat, so
-its total tensor with any complex computes the derived tensor. Compose the inverse
-of the standard tensor-cone interchange with this augmentation and the localization
-comparison. The interchange is natural in the input complex, hence gives a natural
-isomorphism. The quotient map is lifted on the two-term resolutions by (d,id);
-the supplied power equation is its chain-map equation. Naturality of tensor-cone
-interchange and of the augmentation proves the transition equation. The cone
-inclusion becomes the right unitor inverse followed by the degree-zero quotient
-map, which is the stated tensor unit. Shifting the two-term tensor multiplies the
-shifted input summand by (-1)^r. Thus the comparison uses the inverse of the standard
-mappingCone.shiftIso. The derived tensor shift was localized from this total-tensor
-shift; the same square therefore holds after localization. All degrees and
-unbounded input complexes are covered, including the zero complex. -/
+specified tensor unit and the signed shift. No change of coefficient category is involved. -/
 theorem principal_cone_tensor_normalization
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)

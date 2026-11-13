@@ -30,8 +30,7 @@ def ordinaryFiniteAdjunction (A : Type (u + 1)) [CommRing A]
     ordinaryFinitePullback A f ⊣ ordinaryFinitePushforward A f :=
   derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
 
-/-- The recorded module direct image retains the canonical additivity property.
-Source: additivity of the canonical unbounded direct image. -/
+/-- The recorded module direct image retains the canonical additivity property. -/
 instance ordinaryFinitePushforward_additive (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFinitePushforward A f).Additive :=
@@ -46,9 +45,7 @@ def ordinaryFiniteArrowPullback (A : Type (u + 1)) [CommRing A]
     ordinaryFiniteUnit A X ⟶ L' :=
   (ordinaryFiniteUnitPullback A f).inv ≫ (ordinaryFinitePullback A f).map d ≫ v
 
-/-- The published twisted unit is the unit of the recorded adjunction.
-
-Proof: expand the recorded adjunction, which is the canonical derived adjunction. -/
+/-- The published twisted unit is the unit of the recorded adjunction. -/
 theorem ordinaryFiniteP1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -59,9 +56,7 @@ theorem ordinaryFiniteP1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
   unfold ordinaryFiniteP1Unit ordinaryFiniteAdjunction
   rfl
 
-/-- The published Chern component is the adjunct for the recorded adjunction.
-
-Proof: expand the recorded adjunction; both sides are the same canonical adjunct. -/
+/-- The published Chern component is the adjunct for the recorded adjunction. -/
 theorem ordinaryFiniteP1ChernPushforward_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶

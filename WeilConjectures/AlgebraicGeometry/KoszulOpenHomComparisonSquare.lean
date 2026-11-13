@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.KoszulCechComparisonConstruction
 import WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainEvaluation
 
 /-! # The degree-zero restriction square for the Koszul comparison
-Source: Stacks Project, Tags 08DD and 08D1. -/
+
+## References
+
+* Stacks Project, Tags 08DD and 08D1.
+-/
 
 @[expose] public section
 
@@ -23,29 +27,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option maxHeartbeats 800000 in
 -- Transport across nested derived functors requires extra elaboration heartbeats.
 /-- The stage Hom and restricted structure-Hom identifications intertwine the canonical
-Koszul comparison with restriction and augmentation.
-Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5, and Tag 08D1.
-
-Proof: The extended Koszul tail has finite free terms and vanishes in positive degrees,
-so it is K-projective. Zeroth Hom-complex cohomology is therefore its derived Hom group.
-The affine derived equivalence and the termwise tilde/global-section counit transport
-this group to Hom(I_e,E). Compose the Hom-complex cohomology identification with the
-specified koszulCechHomObjIso to obtain the stage equivalences a. On U, Hom from the
-restricted structure object is H^0 of derived global sections by evaluation at 1.
-Transport scalars along the structure ring map from A to sections on U; forgetting the
-module structure gives the target equivalence b with the A-valued affineOpenSections.
-For a chain representative of phi, the Koszul-to-Cech cocone evaluates on the ordered
-exterior basis and divides by the product of the generators to exponent e+1. The
-specified totalization sign is exactly the sign converting the Hom differential to
-Cech totalization. The restricted augmentation admits a contracting inverse on each
-principal open; composing phi with that inverse gives the same fractions. The Cech
-resolution comparison then gives the displayed identity in H^0. The condition h says
-that psi is this inverse-augmentation composite: the augmentation is an isomorphism
-on U, since one generator is invertible locally. Both identifications and this equality
-are invariant under chain homotopies and quasi-isomorphic representatives, so transporting
-along i proves the square for all derived phi and psi. For r=0 all stage tails and
-sections on the empty open are zero; the same construction is the unique zero square.
-The argument also covers the zero ring and E=0. -/
+Koszul comparison with restriction and augmentation (Stacks, Tags 08DD, 08D1). -/
 theorem koszulOpenHom_comparison_square
     (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wMain}

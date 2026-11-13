@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 
 /-! # Vertical differential of explicit subset insertion
 
-Source: Stacks Project, Tag 08C1 and equation (20.40.0.1) (Tag 08C0).
+## References
+
+* Stacks Project, Tag 08C1 and equation (20.40.0.1) (Tag 08C0).
 -/
 
 @[expose] public section
@@ -60,24 +62,8 @@ private theorem sectionTransport_natural
 
 set_option maxHeartbeats 400000 in
 -- Elaborating both extension components and the section-transport coercions exceeds 200000.
-/-- The vertical total differential on explicit subset coordinates.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), with the total differential
-convention in `alternatingCechTotalFunctor`.
-
-Proof: Expand the finite sum defining insertion. For a subset S put p=|S|-1 and
-q=n+1-|S|. Apply Mathlib's `ι_D₂` and `d₂_eq` to its total summand inclusion.
-The latter sends the summand to (p,q+1) with sign p.negOnePow. Extension by zero
-identifies the column p with the increasing-tuple product; coefficient maps act
-componentwise on that product. Thus the map sends the single tuple supported at
-S to the same single tuple with its coefficient differentiated. Naturality of the
-three factors of principalSubsetSectionTransport (open equality transport,
-restrictAppIso inverse, and overFunctorEquiv inverse) moves that coefficient map
-before section transport. Each factor is natural in the module morphism J.d.
-Since p is nonnegative, its sign acts as (-1: A)^(|S|-1). The equation
-q+1=n+2-|S| identifies the coefficient degrees. Distribute the finite sum and
-reassemble it as insertion of the vertical coordinate function. For an empty
-index family the sum is zero; singletons have sign one. -/
+/-- The vertical total differential on explicit subset coordinates, with the total differential
+convention of `alternatingCechTotalFunctor` (Stacks, Tag 08C1). -/
 theorem principalSubsetInsertion_vertical
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :

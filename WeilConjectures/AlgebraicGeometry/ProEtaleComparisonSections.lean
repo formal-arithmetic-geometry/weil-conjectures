@@ -424,33 +424,7 @@ private theorem comparisonCocone_isColimit {X : Scheme.{u}}
 /-- The section formula for module sheaves over any fixed coefficient ring.
 The first equality is a natural isomorphism in the sheaf. The second equality says
 that the canonical unit-and-restriction cocone for every affine etale
-finite-presentation presentation is a colimit, so the identification uses the
-restriction transition maps, rather than an unspecified bijection.
-
-Proof:
-1. On an affine basis object put P(F)(U) = Gamma(U_et, F|U), where restriction is
-   scheme inverse image. Pass to a cofinal upper tail of the presentation. Apply
-   lem-weil-pbc-etale-section-continuity (respectively its sets version) to the
-   terminal etale object; the inverse-image-restriction lemmas identify its stage
-   sections with F(U_i), with their actual restriction maps.
-2. By lem-weil-pbc-ind-etale-basis it suffices to check finite basis covers.
-   Ind-etale stability presents each covering member by affine etale stages.
-   Every tuple of stages still covers, and fibre products commute with these limits.
-   Apply continuity to the members and their pairwise fibre products. Move finitely
-   many representatives and finitely many equalities to a common stage. The stage
-   sheaf equalizer supplies a unique glued section. The empty cover covers only the
-   empty scheme, whose section set is a singleton (and whose module is zero).
-3. Extend this basis sheaf to the full site. Given F -> nu_*G, compose at every
-   stage with restriction G(U_i) -> G(U). Finite presentation factors maps through
-   stages; eventual equality makes these maps independent of factorization and of
-   presentation, and proves naturality. Conversely restrict a map P(F) -> G to
-   affine etale finite-presentation objects. The affine etale site determines the
-   sheaf morphism. Constant presentations and stage representatives show that the
-   two constructions are inverse. The comparison adjunction identifies P with
-   nu^*, naturally in F and in basis objects. In modules all maps respect scalars.
-   Its unit yields exactly the displayed colimit cocone. The sets argument uses
-   the set-valued continuity and restriction lemmas with the same finite-limit
-   calculation. -/
+finite-presentation presentation is a colimit. -/
 theorem proEtaleComparisonSectionsModules {X : Scheme.{u}} [IsAffine X]
     (U : X.AffineProEt) (Λ : Type (u + 1)) [CommRing Λ] :
     ∃ e :
@@ -700,33 +674,7 @@ private theorem setComparisonCocone_isColimit {X : Scheme.{u}}
 /-- The section formula for sheaves of sets.
 The first equality is a natural isomorphism in the sheaf. The second equality says
 that the canonical unit-and-restriction cocone for every affine etale
-finite-presentation presentation is a colimit, so the identification uses the
-restriction transition maps, rather than an unspecified bijection.
-
-Proof:
-1. On an affine basis object put P(F)(U) = Gamma(U_et, F|U), where restriction is
-   scheme inverse image. Pass to a cofinal upper tail of the presentation. Apply
-   lem-weil-pbc-etale-section-continuity (respectively its sets version) to the
-   terminal etale object; the inverse-image-restriction lemmas identify its stage
-   sections with F(U_i), with their actual restriction maps.
-2. By lem-weil-pbc-ind-etale-basis it suffices to check finite basis covers.
-   Ind-etale stability presents each covering member by affine etale stages.
-   Every tuple of stages still covers, and fibre products commute with these limits.
-   Apply continuity to the members and their pairwise fibre products. Move finitely
-   many representatives and finitely many equalities to a common stage. The stage
-   sheaf equalizer supplies a unique glued section. The empty cover covers only the
-   empty scheme, whose section set is a singleton (and whose module is zero).
-3. Extend this basis sheaf to the full site. Given F -> nu_*G, compose at every
-   stage with restriction G(U_i) -> G(U). Finite presentation factors maps through
-   stages; eventual equality makes these maps independent of factorization and of
-   presentation, and proves naturality. Conversely restrict a map P(F) -> G to
-   affine etale finite-presentation objects. The affine etale site determines the
-   sheaf morphism. Constant presentations and stage representatives show that the
-   two constructions are inverse. The comparison adjunction identifies P with
-   nu^*, naturally in F and in basis objects. In modules all maps respect scalars.
-   Its unit yields exactly the displayed colimit cocone. The sets argument uses
-   the set-valued continuity and restriction lemmas with the same finite-limit
-   calculation. -/
+finite-presentation presentation is a colimit. -/
 theorem proEtaleComparisonSectionsSets {X : Scheme.{u}} [IsAffine X]
     (U : X.AffineProEt) :
     ∃ e :
@@ -777,14 +725,8 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Full faithfulness of the set-valued comparison, in its unit-normalized form.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-
-Proof: Restrict the unit to the dense affine etale subsite. At every affine etale
-object the Kan-extension unit is invertible because the inclusion is fully faithful,
-and the sheafification map is invertible by the affine section formula. Their
-composite is the comparison unit. Restriction to the dense subsite and inclusion
-of sheaves into presheaves both reflect isomorphisms. -/
+/-- Full faithfulness of the set-valued comparison, in its unit-normalized form
+(Bhatt--Scholze, Lemmas 5.1.1--5.1.2). -/
 theorem proEtaleComparisonUnitSets_isIso (X : Scheme.{u}) :
     IsIso (ProEtale.comparisonCoefficientAdjunction (Type (u + 1)) X).unit := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -866,18 +808,8 @@ private theorem setLanAffineContinuous (X : Scheme.{u})
   have hL := isColimitOfPreserves ((toProEt X).op.lan.obj G) hc'.op
   exact ⟨by exact hL.whiskerEquivalence (opOpEquivalence J).symm⟩
 
-/-- The inverse image of an etale sheaf is continuous on affine ind-etale limits.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2, with the same finite-presentation
-argument for arbitrary affine ind-etale stages.
-
-Proof: Before sheafification the inverse image is a Kan extension. An etale
-scheme is locally of finite presentation, so maps to it from a cofiltered limit
-of affine schemes factor through a stage, with equality also detected at a
-stage. Thus the representables defining the Kan extension preserve the given
-filtered colimit. The density theorem and commutation of colimits imply that
-the Kan extension does too. The affine section formula identifies this Kan
-extension with its sheafification on every affine ind-etale stage and on the
-limit; naturality identifies all restriction maps. -/
+/-- The inverse image of an etale sheaf is continuous on affine ind-etale limits
+(Bhatt--Scholze, Lemmas 5.1.1--5.1.2). -/
 theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :
     PreservesFilteredColimitsOfSize.{u, u}
@@ -912,14 +844,7 @@ theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
   exact ⟨by exact h.whiskerEquivalence (opOpEquivalence J).symm⟩
 
 /-- The comparison counit is invertible for a sheaf continuous on affine ind-etale
-presentations.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-
-Proof: Test on the dense affine ind-etale subsite. Present each basis object by
-an etale cofiltered diagram. Both the sheaf and its comparison inverse image carry
-this limit to a colimit. On finite stages the counit is inverse to the comparison
-unit, hence is invertible. The unique map between the two colimits is therefore
-invertible, and its naturality identifies it with the counit at the limit object. -/
+presentations (Bhatt--Scholze, Lemmas 5.1.1--5.1.2). -/
 theorem proEtaleComparisonCounitSets_isIso_of_continuous (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (u + 1)))
     (hF : Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt X)

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCupRealizationComplexData
 
 /-! # Cochain obligations for resolution pairings
 
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
+## References
+
+* Stacks Project, Tag 0FKU (construction before Lemma 20.31.3).
 -/
 
 @[expose] public section
@@ -84,14 +86,7 @@ private def pairingSummand {F G : X.Modules} (D : CupResolutionPairing F G)
   else 0
 
 /-- Sheaf tensor linearization and coproduct assembly provide the component maps and their
-section formula. Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-Proof: for each nonnegative bidegree, linearize D.pair on each open using the ordinary
-module tensor universal property. D.restriction makes these linear maps a presheaf morphism.
-Descend it through the sheafification adjunction, obtaining a morphism from the sheaf tensor
-to the target term. Transport along the extension isomorphisms. For a bidegree with a
-negative factor, that extended factor is zero, so use the zero morphism. In each total
-degree assemble these summand morphisms with the coproduct universal property. Its inclusion
-equation and the sheafification unit formula give the displayed section formula. -/
+section formula (Stacks, Tag 0FKU). -/
 theorem moduleCup_component_section_map_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
     ∃ l : ∀ n : ℤ, (D.left.integerComplex ⊗ D.right.integerComplex).X n ⟶
       D.target.integerComplex.X n,

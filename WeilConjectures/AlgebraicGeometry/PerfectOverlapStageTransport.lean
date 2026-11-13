@@ -25,10 +25,8 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The fixed derived transport, with its endpoints expressed by the stage functors.
-Source: Stacks Project, Tags 08DW and 0D5S. The forward stage functor is derived
-pullback along the inverse cartesian isomorphism. Rewrite these two functors
-by their proved equations and use the explicitly constructed derived transport. -/
+/-- The fixed derived transport, with its endpoints expressed by the stage functors
+(Stacks, Tags 08DW and 0D5S). -/
 @[irreducible] noncomputable def perfectOverlapStageTransport
     {X Y K C T S : Scheme.{u}}
     (g : X ⟶ Y) (f : K ⟶ Y)

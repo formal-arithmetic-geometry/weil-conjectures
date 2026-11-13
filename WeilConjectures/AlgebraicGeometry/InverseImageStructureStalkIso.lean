@@ -11,7 +11,9 @@ import WeilConjectures.Topology.InverseImageStalk
 
 /-! # The inverse-image structure map on stalks
 
-Source: Stacks Project, Tags 0098 and 0095.
+## References
+
+* Stacks Project, Tags 0098 and 0095.
 -/
 
 @[expose] public section
@@ -22,19 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse-image ring stalk is the base stalk, compatibly with the structure map.
-Source: Stacks Project, Tags 0098 and 0095.
-
-Proof: The presheaf inverse image has stalk O_{S,f(x)} (Tag 0098).
-Sheafification preserves stalks, giving a ring isomorphism to the stalk of the
-explicit inverseImageRing. Equivalently, transport the natural isomorphism of
-exists_inverseImage_stalk_iso_commRing across the unique isomorphism between
-the topological sheaf pullback and inverseImageConstruction, both left adjoint
-to the same pushforward. The germ formula identifies the image of a germ of s
-on V with the germ of the inverse-image adjunction unit applied to s on f⁻¹V.
-The adjunction counit identity defining tensorPullbackRingMap then maps this
-germ to the germ of f.c(s). This is also the defining germ formula for
-f.stalkMap x. Every base stalk element is a germ, so the two ring maps agree.
-No flatness or module hypothesis is involved; if X is empty there is no x. -/
+(Stacks, Tags 0098, 0095) -/
 theorem exists_inverseImageStructure_stalk_iso
     {X S : Scheme.{u}} (f : X ⟶ S) (x : X) :
     ∃ e : S.presheaf.stalk (f x) ≅

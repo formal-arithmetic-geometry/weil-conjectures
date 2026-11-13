@@ -77,26 +77,7 @@ private theorem finiteLisse_of_range_subset {X Y Z : Scheme.{u}}
       (Limits.pullback.fst a b) t).app
         ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E)).addCommGroupIsoToAddEquiv.toEquiv
 
-/-- Finite set-stalk lissity on each stratum implies lissity on the union of their interiors.
-
-Proof: Cover the union W of the interiors by the open subschemes V_i = interior(T_i).
-For each i form P_i = V_i x_Z T.domain i. The first projection is an immersion
-and is surjective because the image of V_i is contained in the i-th stratum.
-A surjective immersion is a closed immersion, hence a universal homeomorphism.
-Pull back the lisse restriction on T.domain i along the second projection.
-Composition of inverse images identifies the result with the restriction of
-E to P_i. Universal-homeomorphism invariance of the etale site then descends
-lissity to V_i: the site equivalence transports etale trivializations, and its
-geometric points identify the finite stalks. The comparison of set inverse image
-and underlying abelian inverse image justifies each use of the displayed set
-restriction. This fibre-product argument does not assume that the map V_i -> Z
-factors through the chosen scheme structure on the stratum.
-The trivializing etale covers on all V_i compose with the open cover of W to
-trivialize the restriction on W. Every geometric point of W lifts to a member
-of this open cover, and inverse image identifies its stalk with that finite
-stalk. Thus both local constancy and finite geometric stalks hold. When W is
-empty, the empty etale covering trivializes the sheaf and the stalk condition
-is vacuous. -/
+/-- Finite set-stalk lissity on each stratum implies lissity on the union of their interiors. -/
 theorem lisse_on_stratum_interiors
     {Z : Scheme.{u}} (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})
     (T : Stratification Z)

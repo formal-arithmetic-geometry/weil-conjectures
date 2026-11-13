@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 
 /-! # Ordinary pullback data and the derived residue tensor square
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
+## References
+
+* Bhatt–Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -53,13 +55,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
     (DerivedCategory.singleFunctor _ 0).mapIso e
 
 /-- The defining exact-pullback comparison for the restricted regular module.
-
 The ordinary comparison is restriction/pullback followed by the restricted
-inverse monoidal unit comparison. Unfolding its name recovers exactly the
-ordinary isomorphism used in `residueRestrictedRegularPullIso`.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; the fixed ordinary and
-single-object comparisons above. -/
+inverse monoidal unit comparison. -/
 theorem residueRestrictedRegularPullIso_def
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]

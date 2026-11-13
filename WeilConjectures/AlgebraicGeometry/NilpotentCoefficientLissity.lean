@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Lissity reflected by a nilpotent surjection of constant coefficients
 
-Source: Stacks Project, Cohomology on Sites, Tag 094I.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 094I.
 -/
 
 @[expose] public noncomputable section
@@ -64,13 +66,7 @@ private theorem lisse_iso {D : Type w} [SmallCategory D]
   exact ⟨M, hM, ⟨(overFunctor _ U).mapIso e ≪≫ i⟩⟩
 
 /-- A nilpotent surjection of constant coefficient rings reflects lissity of a bounded-above
-complex. Source: Stacks Project, Cohomology on Sites, Tag 094I.
-
-Proof: factor f through B/ker(f) and the canonical quotient isomorphism to R. Both
-presentations of derived scalar extension are computed by the same K-flat model.
-Scalar associativity and the quotient isomorphism transport the hypothesis to reduction
-modulo ker(f). Apply nilpotent-reduction lissity, using the nilpotence exponent of the
-kernel. The construction works for the zero ring and for the empty site. -/
+complex (Stacks, Tag 094I). -/
 theorem lisse_of_nilpotent_coefficient_surjection
     {D : Type w} [SmallCategory D] [HasPullbacks D] (T : GrothendieckTopology D)
     {B R : Type w} [CommRing B] [CommRing R] [IsNoetherianRing B]

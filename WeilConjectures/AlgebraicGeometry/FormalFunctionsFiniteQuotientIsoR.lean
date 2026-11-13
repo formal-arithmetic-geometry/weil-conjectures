@@ -22,10 +22,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
 namespace AlgebraicGeometry
 /-- The finite pullback maps are linear and factor through a quotient-system isomorphism.
-Source: Stacks Project, Tag 02OD and Tags 01F7, 01FB.
-Proof: Compose the linear map underlying each component of b with the linear
-cohomology map induced by the quotient projection. The first component formula is
-definitional; the supplied quotient-unit equation gives the finite pullback formula. -/
+(Stacks, Tags 02OD, 01F7 and 01FB.) -/
 theorem formalFunctions_finite_quotient_iso_r {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :

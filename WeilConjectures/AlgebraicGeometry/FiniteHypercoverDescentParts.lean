@@ -9,10 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 import all WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentStages
 
 /-!
-# Blueprint statements
+# Parts of finite hypercover descent
 
-lemma-weil-pbc-finite-hypercover-descent-objects, lemma-weil-pbc-finite-hypercover-descent-
-morphisms, lemma-weil-pbc-finite-hypercover-descent-equalities.
+The three parts (objects, morphisms, equalities) of descent of truncated finite split etale
+hypercovers along a cofiltered limit of schemes.
 -/
 
 @[expose] public section
@@ -20,7 +20,8 @@ universe w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- -/
+/-- Every truncated finite split etale hypercover of the limit is the base change of one at
+some stage, with surjective matching maps after any further pullback. -/
 theorem finite_hypercover_descent_objects
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -40,7 +41,8 @@ theorem finite_hypercover_descent_objects
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- -/
+/-- A morphism of the pulled-back diagrams of two truncated hypercovers at stage `i` descends
+to a morphism of the diagrams pulled back to some later stage. -/
 theorem finite_hypercover_descent_morphisms
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -195,7 +197,8 @@ theorem finite_hypercover_descent_morphisms
   simp only [Category.assoc]
   rw [hj Δ]
 
-/-- -/
+/-- Two morphisms of diagrams of truncated hypercovers at stage `i` that agree after pullback
+to the limit agree after pullback to some later stage. -/
 theorem finite_hypercover_descent_equalities
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})

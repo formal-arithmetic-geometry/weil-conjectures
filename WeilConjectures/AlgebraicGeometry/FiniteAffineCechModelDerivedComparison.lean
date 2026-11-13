@@ -16,7 +16,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-! # Derived comparison for the specified finite affine Čech model
 
-Source: Stacks Project, Tags 01XB, 01XD and 01FK.
+## References
+
+* Stacks Project, Tags 01XB, 01XD and 01FK
 -/
 
 @[expose] public section
@@ -33,26 +35,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified section complex computes derived direct image over an affine base.
 Neither properness, finite presentation nor relative flatness is required.
-Source: Stacks Project, Tags 01XB, 01XD and 01FK.
-
-Proof: separatedness over the affine base makes every nonempty finite intersection
-of members of V affine. Form the augmented alternating sheaf Čech resolution with
-terms the finite products of open pushforwards of the restrictions of F. Inserting
-a covering index on each cover member contracts the augmentation, so it is a
-quasi-isomorphism. Each intersection map to T is affine, hence its quasi-coherent
-module is direct-image acyclic by 01XB. Finite products preserve this acyclicity.
-The acyclic resolution comparison identifies its pushed complex with Rf_*F[0].
-The ordered comparison 01FK identifies the signed differential with the increasing
-order-embedding tuples in alternatingCechComplex. On the canonical affine chart
-T -> Spec Gamma(T,O), the tilde-Gamma comparison identifies every pushed term and
-every restriction with the associated section module. Restriction of scalars along
-GammaSpecIso and pullback of the resulting complex are exactly the operations in
-finiteAffineCechModel. These termwise identifications therefore give a chain
-isomorphism, whose localization composed with the acyclic-resolution comparison
-gives the asserted derived isomorphism. Localization uniqueness transports this
-comparison to the two independently supplied localizations. If r=0 the covering
-condition forces X empty; the zero resolution and zero section complex give the
-same comparison. Empty intersections and zero rings also give zero terms. -/
+(Stacks, Tags 01XB, 01XD and 01FK.) -/
 theorem finiteAffineCechModel_derivedComparison
     {X T : Scheme.{u}} (f : X ⟶ T) [IsAffine T] [IsSeparated f] [QuasiCompact f]
     (F : X.Modules) [F.IsQuasicoherent]

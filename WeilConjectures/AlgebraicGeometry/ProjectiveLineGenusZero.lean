@@ -16,8 +16,9 @@ import WeilConjectures.Compactification.Defs
 
 /-! # The projective line is a genus-zero smooth proper connected curve
 
-Source: Stacks Project, varieties.tex, Tag 0B2P, lemma-projective-space-smooth;
-curves.tex, Tag 0C6U, proposition-projective-line, (1) implies (2) and (7).
+## References
+
+* Stacks Project, Tag 0B2P (projective space is smooth) and Tag 0C6U (the projective line).
 -/
 
 @[expose] public section
@@ -29,28 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProjectiveSpace
 
 /-- The base-change projective line is a smooth proper connected curve, has genus zero,
-and has vanishing first cohomology of its structure sheaf.
-Source: Stacks Project, Tag 0B2P, lemma-projective-space-smooth, and Tag 0C6U,
-proposition-projective-line, (1) implies (2) and (7).
-
-Proof plan:
-1. Identify the two degree-zero localization charts of the integral Proj with Z[t]
-   and Z[s] by homogeneous monomial fractions. Base change
-   gives k[t] and k[s], with overlap
-   s = t inverse. They give the standard projective-line model.
-2. Each chart is affine one-space. Apply sbc-lem-affine-space-smooth and the
-   affine-local criterion of def-sbc-smooth-morphisms to obtain smoothness of
-   relative dimension one.
-3. Both polynomial charts are irreducible because their coordinate rings are domains.
-   Their overlap contains t = 1, so their union is nonempty and connected.
-   lem-sbc-smooth-fixed-dimension-over-field gives dimension one.
-4. lemma-nagata-projective-space-base-change-proper gives properness, including
-   separatedness and finite type. Together with steps
-   2 and 3 this gives the connected-curve clauses of def-sc-curves.
-5. Apply lem-sc-p1-monomial(ii) at twist zero. The two local generators of O(0)
-   have identity transition, identifying it with the structure sheaf. Transport
-   vanishing of H1 to module cohomology. By def-sc-genus (equivalently Serre
-   duality for the recorded differential-form genus), its genus is zero. -/
+and has vanishing first cohomology of its structure sheaf (Stacks, Tags 0B2P, 0C6U). -/
 theorem isConnectedCurve_smooth_proper_genus_zero (k : Type u) [Field k] [IsAlgClosed k] :
     IsConnectedCurve (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of k)) ↘ Spec (.of k)) ∧
     Smooth (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of k)) ↘ Spec (.of k)) ∧

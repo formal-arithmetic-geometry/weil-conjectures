@@ -45,12 +45,14 @@ set_option linter.privateModule false
 /-!
 # Completed integral operations on the global site and its slices
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Definition 3.5.2; Stacks Project,
-Tags 06YY and 08TC.
-
 The option is only an index for the two sites in the consumer: none is the global
 site; some U is its actual over-site. Coefficients and quotient projections on the
 latter are sectionwise restrictions. Site object and morphism sizes stay t+1 and t.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10 and Definition 3.5.2
+* Stacks Project, Tags 06YY and 08TC
 -/
 
 @[expose] public noncomputable section

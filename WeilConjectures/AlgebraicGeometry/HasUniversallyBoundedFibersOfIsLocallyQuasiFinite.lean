@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 /-!
 # Universally bounded fibres from a quasi-compact source
 
-Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4.
+## References
+
+* Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4.
 -/
 
 @[expose] public section
@@ -94,33 +96,8 @@ private theorem bounds_of_open_cover {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact (hbound i y).2
 
 /-- A locally quasi-finite morphism whose source is quasi-compact has a single nonnegative
-bound on the degrees of all its finite scheme-theoretic fibres.
-Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4.
-
-Proof outline, following the six steps of the node:
-1. Choose a finite affine open cover `Uᵢ` of `X` and affine opens `Vᵢ` of `Y` with
-   `f(Uᵢ) ⊆ Vᵢ`, using quasi-compactness and `lem-weil-pbc-affine-opens-basis`.
-2. Each restriction `Uᵢ → Vᵢ` is locally quasi-finite by
-   `lem-weil-pbc-lqf-restriction-to-opens`. It is affine, hence quasi-compact by
-   `lem-weil-pbc-affine-morphism-permanence`, and therefore quasi-finite by
-   `pqf-lem-qf-locqf-qc`.
-3. For a finite morphism `Z → Spec A`, its section ring `B` is a finite `A`-module.
-   The affine pullback section isomorphism identifies each fibre's section algebra with
-   `κ(y) ⊗[A] B`. Mathlib's `Submodule.FG.spanFinrank_baseChange_le` bounds its dimension
-   by the minimal number of generators of `B`. Transport this bound along the target's
-   affine-chart isomorphism to handle any finite morphism with affine target.
-4. Factor each quasi-finite affine restriction as an open immersion into a finite affine
-   scheme over `Vᵢ`, by `lem-weil-pbc-quasi-finite-affine-open-in-finite`. Use
-   `lem-weil-pbc-immersion-fibre-degree-one` and
-   `lem-weil-pbc-composition-fibre-degree-bound` to bound the restriction. Compose once
-   more with the open immersion `Vᵢ → Y` to bound `Uᵢ → Y` without changing residue fields.
-5. Pull the open cover back along `f.fiberι y`. The resulting opens cover the fibre.
-   Paste `isPullback_morphismRestrict` with the square defining the fibre to identify
-   each open, over `Spec κ(y)`, with the fibre of `Uᵢ → Y`. The pullback isomorphism
-   preserves finiteness and `finrankΓ`.
-6. Apply `lem-weil-pbc-finite-open-cover-degree-sum` to obtain finiteness of the fibre and
-   the bound `∑ nᵢ`. This also handles the empty cover. The sum therefore witnesses
-   `HasUniversallyBoundedFibers` as defined in `def-weil-pbc-fibre-degree-bound`. -/
+bound on the degrees of all its finite scheme-theoretic fibres
+(Stacks, Tag 03JA and Tag 03J4). -/
 theorem hasUniversallyBoundedFibers_of_isLocallyQuasiFinite
     {X Y : Scheme.{u}} (f : X ⟶ Y) [CompactSpace X]
     (hf : IsLocallyQuasiFinite f) : HasUniversallyBoundedFibers f := by

@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Higher direct image transition compatibility
 
-Source: Stacks Project, Tags 09Z1 and 03Q8, canonical comparison maps.
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8
 -/
 
 @[expose] public section
@@ -40,8 +42,7 @@ private noncomputable def fastTransition (Λ : Type (u + 1)) [CommRing Λ] {S Y 
         D+((a)^*[ModuleCat.{u + 1} Λ]).map
           ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).derivedPlus.counit.app K))
 
-/-- Naturality of the derived comparison in its complex, by naturality of the
-unit, composition comparison and counit. Source: Stacks Tag 09Z1. -/
+/-- Naturality of the derived comparison in its complex. -/
 private lemma fastTransition_naturality
     (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
@@ -355,17 +356,7 @@ private meta def congrProofs : Nat → Lean.Expr → Lean.Expr → Lean.MetaM Le
     return Lean.mkAppN ct.proof args
 
 /-- Transitions compose for the canonical pullback coefficients.
-Source: Stacks Tag 09Z1, canonical comparisons; Tag 03Q8.
-
-Proof: use the derived transition composition identity at F[0], then apply homology.
-The derived identity follows by applying the inverse h'' adjunction hom-set equivalence:
-naturality moves the first transition inside b^*, the h' counit cancels the h' unit,
-and associativity of derived pullback comparisons identifies the remaining adjunct
-with the one for b≫a. The two degree-zero comparisons compose to the ordinary pullback
-comparison, as checked degreewise on the single complex and preserved by localization.
-Thus homology gives precisely the displayed comparison. Identity morphisms give the
-unit law and zero sheaves give zero maps; no properness or degree bound is required.
--/
+(Stacks, Tags 09Z1 and 03Q8) -/
 theorem higher_direct_image_transition_core_composition
     (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' Y'' : Scheme.{u}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)

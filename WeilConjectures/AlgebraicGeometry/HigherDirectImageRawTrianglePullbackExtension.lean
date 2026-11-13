@@ -16,7 +16,9 @@ public import
 
 /-! # Raw pullback for a commutative triangle
 
-Source: Stacks Project, Tags 03Q8 and 09Z1, canonical comparison maps.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ open CategoryTheory Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The two source factors of the raw triangle map, kept as one morphism.
-Source: Stacks Project, Tags 03Q8 and 09Z1. -/
+/-- The two source factors of the raw triangle map, kept as one morphism. -/
 def rawTriangleSource
     {C D E D' E' : Type*}
     [Category C] [Category D] [Category E] [Category D'] [Category E']

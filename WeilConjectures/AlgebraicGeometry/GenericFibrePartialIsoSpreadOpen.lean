@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.GenericFibreIsoSpreadBaseOpen
 
 /-! # Spreading a partial isomorphism of generic fibres to a common open
 
-Source: Stacks Project, Tag 0559, first proof, the common-open paragraph;
-Tag 0552, the finite-generator common-localization argument;
-Tag 01ZM, morphism descent and eventual equality.
+## References
+
+* [Stacks, Tag 0559], [Stacks, Tag 0552], [Stacks, Tag 01ZM]
 -/
 
 @[expose] public section
@@ -25,27 +25,8 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- A partial isomorphism of nonempty generic fibres of finitely presented affine
-families spreads to a common open over the original integral affine base.
-
-Source: Stacks Project, Tag 0559, first proof, the common-open paragraph; Tag 0552;
-Tag 01ZM, morphism descent and eventual equality.
-Proof: Density and nonemptiness give a point in the source of the partial
-isomorphism. Choose an affine neighbourhood A inside that source. Its images
-U and T under the source inclusion and the partial isomorphism followed by
-the target inclusion are affine, since both maps are open immersions. The
-canonical image isomorphisms identify U and T over the generic residue field.
-Lift U and T to affine opens V of X and W of Y, with compatible generic-fibre
-isomorphisms, using exists_affine_open_lift_of_generic_fibre. Transport the
-isomorphism U -> T to V_eta -> W_eta. The opens V and W are still locally
-finitely presented over S. Apply exists_base_open_iso_of_generic_fibre_iso
-to descend this isomorphism to their restrictions above a base neighbourhood
-B of eta. The preimage Z of B in V has an open image O in X. Compose the
-canonical image isomorphism O -> Z with the descended isomorphism and the
-target open inclusions to obtain an open immersion i:O -> Y over S. Transport
-the original point of U to V_eta; its fibre-inclusion image maps to eta,
-and therefore belongs to Z since eta lies in B. Its image in O proves eta
-lies in the range of O -> S. This argument allows arbitrary vertical
-components and nilpotents in the special fibres. -/
+families spreads to a common open over the original integral affine base
+(Stacks, Tags 0559, 0552, 01ZM). -/
 theorem exists_open_of_generic_fibre_partial_iso
     {X Y S : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) (g : Y ⟶ S)

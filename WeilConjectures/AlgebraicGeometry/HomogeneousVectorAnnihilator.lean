@@ -9,10 +9,11 @@ module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
-# HomogeneousVectorAnnihilator
+# Annihilators of homogeneous vectors
 
-Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6.
+## References
+
+* Stacks Project, Tag 01M3 (stalk computation before Definition 01M6).
 -/
 
 @[expose] public section
@@ -28,19 +29,7 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- A homogeneous vector killed by a scalar outside a homogeneous prime is killed by
-one homogeneous scalar outside that prime.
-Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6; the homogeneous-component argument underlying injectivity.
-
-Proof:
-Decompose c into its finitely many homogeneous components c_k. Since the prime is
-homogeneous and c is outside it, some c_k is outside it. The sum of c_k • y equals
-c • y = 0. Each summand is in the graded piece of degree k+z. These degrees are
-pairwise distinct because addition by z in the integers is injective. Internality
-of the module grading therefore forces each summand to vanish. Take b=c_k.
-For y=0 any component outside the prime works; negative z and degree-zero b require
-no modification. There is no assumption that the ring or the module is a domain.
--/
+one homogeneous scalar outside that prime. (Stacks, Tag 01M3) -/
 theorem homogeneousVectorAnnihilator
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)
     (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),

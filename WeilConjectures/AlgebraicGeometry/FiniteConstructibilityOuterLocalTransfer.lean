@@ -18,14 +18,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The normalized scalar restriction carries a fixed-stratum local model from either
-outer finite coefficient term to the corresponding outer vertex of the triangle.
-
-Proof: apply normalized finite scalar restriction on the specified stratum for a
-consecutive coefficient transition. For the canonical residue map, induct on the number
-of transitions, identifying restriction along a composite with the composite exact
-derived restrictions. Finally pull the local trivializations back through the inverse
-homology isomorphisms of the two displayed outer identifications. No new stratum or
-refinement is chosen, and no condition on the other strata is used. -/
+outer finite coefficient term to the corresponding outer vertex of the triangle. -/
 theorem finite_constructibility_outer_local_transfer
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

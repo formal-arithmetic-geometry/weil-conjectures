@@ -11,10 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapSemilinear
 
 /-! Linearity of the map attached to explicit cohomology-map data.
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
+## References
 
-The proof follows the module-linearity argument for the global-sections complexes,
-transporting scalar actions through homology and the resolution comparison maps.
+* [Stacks, Cohomology of Sheaves, Remark 01FB]
 -/
 
 @[expose] public section
@@ -24,12 +23,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The map produced by explicit resolution data is linear over global sections of `Y`.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
-
-The proof constructs the induced morphism on homology in the category of modules over
-`O_Y(Y)`, using linearity of maps of sheaves, restriction of scalars along `h`, and
-naturality of the canonical homology comparison isomorphisms. -/
+/-- The map produced by explicit resolution data is linear over global sections of `Y`
+(Stacks, Tags 01F7 and 01FB). -/
 theorem moduleCohomologyFMapData_map_linear
     {X Y : Scheme.{u}} {h : X ⟶ Y}
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}

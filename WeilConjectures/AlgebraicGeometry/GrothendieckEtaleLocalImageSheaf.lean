@@ -10,8 +10,10 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckEtaleLocalImageDescent
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 
 /-! # The categorical local image is a subsheaf
-Source: Stacks Project, Tag 00WL, image subsheaves; finite affine refinements on the
-small étale site, Tag 03Q4.
+
+## References
+
+* [Stacks Project, Tags 00WL, 03Q4]
 -/
 
 @[expose] public section
@@ -26,17 +28,7 @@ variable {X : Scheme.{u}} (A : Type u') [Category.{u + 1} A] [Abelian A]
 
 /-- The presheaf obtained by extending the local image from qcqs étale objects is a sheaf.
 This statement concerns an arbitrary morphism of sheaves, with no epimorphism assumption.
-
-Source: Stacks Project, Tag 00WL, image subsheaves, and Tag 03Q4, finite affine refinements.
-Proof: test the sheaf condition on Hom(B,-) for each coefficient object B. A compatible
-family maps to one in G, so it has a unique amalgamation x in G. For every map from a qcqs
-étale object V to the object being covered, pull the covering sieve back and refine it to a
-finite affine covering of V. On each member the restriction of x is the given local map,
-so it factors through the local image. Finite-cover descent shows that x restricted to V
-factors through the local image on V. These factorizations give the defining inequalities
-for the qcqs local image. Thus x factors through this subobject and is the required
-amalgamation. Uniqueness follows from monicity of the inclusion and uniqueness in G.
-Empty objects and empty finite covering families are included by the same proof. -/
+(Stacks, Tags 00WL and 03Q4) -/
 theorem qcqsLocalImage_isSheaf
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) :
     Presheaf.IsSheaf X.smallEtaleTopology (qcqsLocalImagePresheaf p) := by

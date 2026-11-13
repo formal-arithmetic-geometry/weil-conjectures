@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMinimalComplex
 
 /-! # The local-ring homotopy normal form of a finite free complex
 
-Source:, proof step 4; Stacks Project, Tag 00MT.
+## References
+
+Stacks Project, Tag 00MT.
 -/
 
 @[expose] public section
@@ -49,25 +51,7 @@ private theorem nonempty_free_iso_of_pullback_rank {S : Scheme.{u}}
   exact ⟨e⟩
 
 /-- Residue cohomology determines the homotopy normal form over the local ring.
-
-Source:, proof step 4, and Stacks Project, Tag 00MT.
-
-Proof: Choose finite bases of the terms. Pullback to Spec of the local ring gives
-quasicoherent finite free terms, hence a bounded finite free complex of modules over
-that ring. Its scalar extension to the residue field is the residue pullback in the
-hypothesis: fromSpecResidueField factors as Spec of the residue quotient followed by
-fromSpecStalk. Reverse the integer grading to use Tag 00MT. Whenever a differential
-matrix has a unit entry, split off the two-term identity complex. Projecting away
-that summand and including the complement are inverse up to the contraction of the
-identity complex. Induct on the sum of the term ranks in degrees 0 through d; each
-cancellation decreases that sum by two and preserves support. At termination every
-entry belongs to the maximal ideal, so reduction has zero differentials. Its terms
-are therefore its cohomology. The hypothesis makes their dimensions zero off i and
-r in degree i. Dimensions of free residue modules equal their numbers of basis
-vectors, so the remaining local complex is a single rank-r free module. If i lies
-outside the support this instead forces r = 0. Compose the contractions and apply
-the associated-sheaf functor, identifying pullbacks of free sheaves with free
-sheaves. This gives the stated homotopy equivalence. No neighbourhood is asserted. -/
+(Stacks, Tag 00MT.) -/
 theorem nonempty_stalk_homotopyEquiv_single_of_residue
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

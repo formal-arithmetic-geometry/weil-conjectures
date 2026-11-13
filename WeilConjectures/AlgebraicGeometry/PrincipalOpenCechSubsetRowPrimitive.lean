@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenInjectiveSubsetExact
 
 /-! # Positive-degree exactness of a subset Čech row
 
-Source: Stacks Project, Cohomology, Tags 01EP, 01FM and 08C1.
+## References
+
+* Stacks Project, Cohomology, Tags 01EP, 01FM and 08C1.
 -/
 
 @[expose] public section
@@ -74,26 +76,8 @@ private theorem rowCast_comp (A : Type u) [CommRing A]
   subst b
   simp [rowCast_refl]
 
-/-- Positive-degree exactness of the subset Čech row, with integer transports.
-
-Source: Stacks Project, Cohomology, Tags 01EP, 01FM and 08C1 (first paragraph).
-
-Proof: Put q=n+1-k. Cast the coefficients on subsets of size k+1 to the
-fixed module J.X q and set all other coefficients to zero. Apply the cast on
-size k+2 to the assumed cocycle equation. It preserves sums and scalar signs;
-the cast commutes with restriction and with the supplied deletion cast he.
-Every deletion has size k+1, so this is a fixed-coefficient subset cocycle.
-The fixed-coefficient exactness theorem gives a primitive: full Čech acyclicity
-for the injective module comes from Tag 01EP, while the comparison to increasing
-tuples and their finite ranges comes from Tag 01FM. The latter works for any
-family of opens and has no cover hypothesis. Cast the primitive coefficients
-back on subsets of size k and extend by zero at all other cardinalities.
-On size k+1 every deletion has size k. Cast the desired equation to J.X q;
-restriction naturality and inverse casts identify it with the primitive equation.
-The cast is injective, giving the desired equation before transport.
-All casts are functorial eqToHom maps, whose identities follow by equality
-elimination and proof irrelevance. No differential of J or total complex is used.
-Empty or repeated opens, the empty index set and degrees above r-1 are included. -/
+/-- Positive-degree exactness of the subset Čech row, with integer transports
+(Stacks, Tags 01EP, 01FM and 08C1). -/
 theorem principalOpenCech_subset_row_primitive
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

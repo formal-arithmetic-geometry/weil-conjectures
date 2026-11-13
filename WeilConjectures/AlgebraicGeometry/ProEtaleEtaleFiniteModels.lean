@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 
 /-! # Descent of finite pro-etale models to an etale trivializing cover
 
-Source: Stacks Project, Tag 099Y, proof steps selecting module types and their Isom torsors.
+## References
+
+* Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -44,13 +46,8 @@ private noncomputable def constantPullbackIso
         (ModuleCat.{u + 1} Λ) (ProEt.topology Y) (ProEt.topology X)).symm.app
           ((Functor.const X.ProEtᵒᵖ).obj M)
 
-/-- A finite-model pro-etale covering admits an etale trivializing covering.
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
-Partition the base by the isomorphism types of the finite constant models, descending
-these open subsets by fpqc descent. On each open the module-Isom sheaf from its model
-to F is locally the constant automorphism sheaf. Its local sections therefore descend
-to an etale cover by the locally-classical etale-section comparison. Combining the
-open subsets and etale covers gives the claimed finite module trivializations. -/
+/-- A finite-model pro-etale covering admits an etale trivializing covering
+(Stacks, Tag 099Y). -/
 theorem etale_cover_of_proetale_finite_models
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

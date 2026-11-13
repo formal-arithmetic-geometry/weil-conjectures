@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # The restriction formula for a Koszul chain representative
 
-Source: Stacks Project, Tags 06Z0, 08DC and 08DD.
+## References
+
+* Stacks Project, Tags 06Z0, 08DC and 08DD.
 -/
 
 @[expose] public section
@@ -45,24 +47,7 @@ private theorem naturalEquiv_add
 set_option maxHeartbeats 1000000 in
 -- Nested derived functors and the affine adjunction require extra elaboration heartbeats.
 /-- The canonical comparison on an actual chain representative is restriction followed
-by inverse augmentation and evaluation at one.
-Source: Stacks Project, Equation 36.9.4.1, Tag 08DC; Tags 08D1 and 08DD.
-
-Proof: On the principal intersection indexed by J, apply the canonical affine counit
-s to the module chain map g. The Koszul-to-Cech cocone evaluates g on the ordered wedge
-and divides by the product of the f_j to exponent e+1. Contracting the localized full
-Koszul complex with a generator whose f_j is invertible shows that the same fraction
-represents restriction composed with the inverse augmentation. The totalization sign
-in the cocone is precisely the sign converting the negative tail differential into
-the alternating Cech differential. Pass this equality to degree-zero homology; hz
-identifies the cycle represented by g. The Cech-to-derived-sections map carries it to
-the corresponding derived section. Evaluation at one identifies sections with Hom
-from the restricted structure object, additively, and postcomposition by eF transports
-the target. This supplies b and the equality for every psi satisfying the displayed
-augmentation equation; invertibility is given by
-affine_perfect_koszul_principal_unit_iso at exponent e+1. Empty cover and zero ring yield
-zero groups; no exactness of
-filtered colimits, regularity, boundedness of F or injectivity is used. -/
+by inverse augmentation and evaluation at one. (Stacks, Tag 08DC.) -/
 theorem koszulChain_restriction_formula
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

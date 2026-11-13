@@ -19,10 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- One half of the quantitative torsion reflection for a fixed compatible
-algebraization. Source: Stacks Project, Tags 088A and 0888.
-Proof: use the scalar reverse maps from Remark 0888 on affine sections,
-transport them through the comparison square, and pass to inverse limits;
-then use the closed-immersion equivalence and completion reflection. -/
+algebraization. (Stacks, Tags 088A and 0888) -/
 theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

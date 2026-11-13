@@ -13,9 +13,11 @@ import WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 /-!
 # Canonical tensor pullback on the small pro-etale site
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
-Modules on Sites, Tag 03EL.
 The object universe of the site is u+1 and its morphism universe is u.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E; Modules on Sites, Tag 03EL.
 -/
 
 @[expose] public section
@@ -34,10 +36,8 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits MonoidalCategor
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Bilinearity of the existing tensor on the small site with separate Hom universe.
-Source: Stacks 03EK.
-Proof: the four identities hold for sectionwise tensor maps on pure tensors. They pass
-through module sheafification, yielding the four MonoidalPreadditive laws. -/
+/-- Bilinearity of the existing tensor on the small site with separate Hom universe
+(Stacks, Tag 03EK). -/
 @[instance] theorem proEtaleTensorPreadditive (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     @MonoidalPreadditive (proEtaleRingModules X R) _ _

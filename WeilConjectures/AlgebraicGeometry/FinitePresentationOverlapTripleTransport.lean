@@ -15,14 +15,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/--
-Transport of a triple-overlap equation from one universal family of pullbacks to
-any other family.  The proof uses the unique isomorphisms between chosen limits,
-transition naturality, and cancellation by the pseudofunctor comparison
-isomorphisms.  This is the universal-property step in the proof of the
-persistent triple-overlap equation.
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing).
--/
+/-- Transport of a triple-overlap equation from one universal family of pullbacks to
+any other family. -/
 theorem overlap_triple_transport
     {C : Type*} [Category C]
     {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}

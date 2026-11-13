@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverComplex
 
 /-! # The fixed coefficient morphism for raw pullback over W
 
-Source: Stacks Project, Tags 03Q8 and 09Z1, composition of inverse images.
+## References
+
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
 
 /-- The single-complex comparison followed by the fixed identification of restricted
-coefficients. Its explicit type keeps the constructed coefficient map folded.
-Source: Stacks Project, Tags 03Q8 and 09Z1, inverse-image composition. -/
+coefficients. (Stacks, Tags 03Q8 and 09Z1) -/
 noncomputable def higherDirectImageRawOverCoefficient
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -37,9 +39,7 @@ noncomputable def higherDirectImageRawOverCoefficient
         (Over.w f).symm).inv.app G)
 
 /-- The shared coefficient has the original formula, including its original endpoints.
-The heterogeneous equality permits transport of the endpoints by the complex equation.
-Source: Stacks Project, Tags 03Q8 and 09Z1, inverse-image composition.
-Proof: Unfold the concrete coefficient; both maps are the same composite. -/
+The heterogeneous equality permits transport of the endpoints by the complex equation. -/
 theorem higherDirectImageRawOverCoefficient_heq
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))

@@ -30,7 +30,9 @@ schemeDerivedCategory X ≌ DerivedCategory X.Modules`.
 - `AlgebraicGeometry.Scheme.isPerfect_iff_isPerfectComplex`:
   `IsPerfect X E ↔ IsPerfectComplex ((schemeDerivedCategoryEquiv X).functor.obj E)`.
 
-Source: Stacks Project, Cohomology of Sheaves, Definitions 08C4 and 08CM.
+## References
+
+* Stacks Project, Cohomology of Sheaves, Definitions 08C4 and 08CM.
 -/
 
 @[expose] public section
@@ -156,14 +158,7 @@ is perfect in the sense of `AlgebraicGeometry.Scheme.IsPerfect` (locally on an o
 restriction to the site over an open is strictly perfect) if and only if its image in
 `DerivedCategory X.Modules` is perfect in the sense of
 `AlgebraicGeometry.Scheme.Modules.IsPerfectComplex` (locally on an affine open cover, its
-restriction is a bounded complex of finite projective modules).
-
-Proof: under `Scheme.Modules.overEquiv U`, strictly perfect complexes on the site over `U`
-correspond to bounded complexes of finite projective `𝒪_U`-modules, and the restriction
-functors correspond (`restrictMapDerivedCategoryIso`). A representative on an open `U` restricts
-to a representative on an affine open `V ⊆ U` containing the given point, since restriction of
-a free module along an open immersion is free.
-Source: Stacks Project, Cohomology of Sheaves, Definitions 08C4 and 08CM. -/
+restriction is a bounded complex of finite projective modules). -/
 theorem isPerfect_iff_isPerfectComplex (E : schemeDerivedCategory X) :
     IsPerfect X E ↔
       Modules.IsPerfectComplex ((schemeDerivedCategoryEquiv.{w} X).functor.obj E) := by

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 
 /-! # Reassembly of one ordered Čech row
 
-Source: Stacks Project, Tags 08C1, 08C0, and 01FG.
+## References
+
+* Stacks Project, Tags 08C1, 08C0 and 01FG.
 -/
 
 @[expose] public section
@@ -29,19 +31,8 @@ private theorem sum_apply {M N : AddCommGrpCat.{u}} {ι : Type*}
   rw [← AddMonoidHom.finsetSum_apply]
   exact congr($(map_sum AddCommGrpCat.homAddEquiv g s) x)
 
-/-- Reassemble a family supported on one row from its tuple coordinates.
-
-Source: Stacks Project, Tags 01FM and 08C1, ordered Čech totalization.
-
-Proof: Expand subset insertion as the sum of its single-subset insertions.
-The support hypothesis kills subsets whose cardinality is not p+1.
-Increasing enumeration bijects the remaining subsets with increasing (p+1)-tuples.
-The coordinate hypothesis identifies each section-transported summand with the
-corresponding coordinate of w. The equality of total degrees identifies its
-coefficient degree with q. Proof irrelevance identifies all degree witnesses.
-The sum of the tuple singletons is w; additivity of the extension isomorphism
-and total inclusion gives the result. If p is larger than the index set,
-both tuple and supported-subset families are empty, so both sides are zero. -/
+/-- Reassemble a family supported on one row from its tuple coordinates
+(Stacks, Tags 01FM and 08C1). -/
 theorem principalSubsetRowReassembly
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ) (p : ℕ) (q : ℤ) :

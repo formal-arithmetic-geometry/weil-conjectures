@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 
 /-! # A flat module on a fixed affine-limit model descends to a later stage
 
-Source: Stacks Project, Tags 01ZR and 05LY.
+## References
+
+* Stacks Project, Tags 01ZR and 05LY
 -/
 
 @[expose] public section
@@ -144,27 +146,8 @@ private theorem exists_eventually_isFlatOver_of_limit
 
 /-- On the limit base change of a fixed finitely presented scheme, a finitely presented
 relatively flat module descends to a finitely presented relatively flat module at a
-later stage. The source model is fixed; no scheme approximation or properness is asserted.
-
-Source: Stacks Project, limits.tex, Tag 01ZR
-and Tag 05LY.
-
-Proof: Work on the directed tail of indices above i; it is cofinal, so the limit
-is unchanged. The base changes of Zi on this tail are quasi-compact and quasi-separated,
-since fi is so and every base is affine. Their transition maps are affine, as base
-changes of morphisms between affine schemes. Base change preserves the limit.
-Finite presentation of M implies quasi-coherence. Apply Tag 01ZR to obtain j above i,
-a finitely presented module N on the base change of the fixed source to Spec R_j,
-and an isomorphism of its limit tensor pullback with M. Transport relative flatness
-of M through this isomorphism, by restriction of scalars of the sectionwise linear
-isomorphisms on affine opens. Apply Tag 05LY to N, starting at j, to obtain a stage k
-above j at which its pullback is flat over Spec R_k. Take M_k to be this pullback;
-finite presentation is preserved by tensor pullback. Cartesian pasting identifies the
-iterated source base change with the direct base change from i to k. The canonical
-composition isomorphism for tensor pullback, followed by the initial comparison with M,
-gives the displayed comparison. This does not require proper support or derived objects.
-The starting index excludes an empty index set. Empty sources, zero modules and zero
-rings cause no exception; no transition map is assumed flat. -/
+later stage. The source model is fixed; no scheme approximation or properness is asserted
+(Stacks, Tags 01ZR and 05LY). -/
 theorem exists_flat_module_on_later_stage
     {I : Type u} [PartialOrder I] [IsDirectedOrder I]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

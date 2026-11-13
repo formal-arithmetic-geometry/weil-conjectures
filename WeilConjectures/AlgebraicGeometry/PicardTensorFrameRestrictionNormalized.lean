@@ -101,15 +101,7 @@ end Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 2048 in
-/-- Normalized restriction applies the global-section ring map.
-Source: Stacks Project, Tag 0096.
-Proof: Apply the direct adjunction to the composition comparison on the unit.
-Its adjunct is the composite structure map by the mate unit equation. This
-proves compatibility of the comparison with the two pinned unit isomorphisms.
-Naturality with respect to q cancels the target frame. The source unit
-compatibility cancels the source frame. The remaining morphism is the unit
-conjugate of the pullback of the normalized endomorphism. Evaluate at one;
-adjunction naturality gives the ring map applied to its original value. -/
+/-- Normalized restriction applies the global-section ring map (Stacks, Tag 0096). -/
 theorem picardTensorFrame_restriction_normalized (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU :
     w ∈ U)
     (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (q :

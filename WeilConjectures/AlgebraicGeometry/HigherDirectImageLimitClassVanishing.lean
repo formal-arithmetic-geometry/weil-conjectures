@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
-Source: Stacks Project, Tag 09Z1.
+## References
+
+* Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -25,23 +27,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- A stage class vanishing in the limit fiber vanishes at a later stage.
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, proof.
-
-Proof:
-1. Represent the given stage fiber class on an affine etale neighborhood of the
-   chosen point using the higher direct image presheaf theorem and `eK`.
-   Its image is zero as a germ. Shrink the neighborhood so that the induced
-   cohomology class on the pullback of the limit scheme is zero.
-2. Pull back the scheme and sheaf systems to this affine neighborhood. All schemes
-   are qcqs, the transitions remain affine, and the cone remains a limit. Exact
-   inverse image preserves the sheaf colimit and degree-zero complexes.
-3. Apply injectivity of the complex cohomology continuity comparison. A class of
-   a filtered colimit represented at a stage is zero exactly when it becomes zero
-   at some later stage. Thus there exist `j` and `f: i ⟶ j` killing the restricted
-   class. Naturality of the higher direct image presheaf identification and `hK`
-   identify this map with the fiber of `K.map f`. Passing back to germs proves
-   the desired vanishing. The compatibility equation `hη` is used in step 1. -/
+/-- A stage class vanishing in the limit fiber vanishes at a later stage
+(Stacks, Lemma 59.51.7, Tag 09Z1). -/
 theorem exists_higherDirectImage_limit_fiber_eq_zero {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

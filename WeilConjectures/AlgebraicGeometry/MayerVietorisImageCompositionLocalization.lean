@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisCompositionRightNormalizat
 
 /-! # Complex localization of the open composition square
 
-Source: Stacks Project, Tags 08FE and 08BV.
+## References
+
+* Stacks Project, Tags 08FE, 08BV and 0D5T.
 -/
 
 @[expose] public section
@@ -25,16 +27,8 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
-/-- Core composition identity before combining the final derived map factors.
-This is the unit-transport calculation from the open-composition normalization;
-the final functorial reassociation is handled by the theorem below.
-
-Proof: apply the open-composition unit normalization to the homotopy quotient of the
-restricted complex, transport the units through the quotient comparison isomorphisms,
-and expand the image component. Naturality and associativity identify the resulting
-four-map composite with the explicit restriction-localization chain and the inverse
-restriction comparison.
-(source: Stacks Project, Tags 08FE and 0D5T) -/
+/-- Core composition identity before combining the final derived map factors: the unit-transport
+calculation from the open-composition normalization. -/
 theorem schemeMV_image_composition_localization_core
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -58,29 +52,8 @@ theorem schemeMV_image_composition_localization_core
   have hright := schemeMV_composition_right_normalization X Y h W I
   exact hleft.trans hright.symm
 
-/-- Complex localization of the open composition square.
-Source: Stacks Tags 0D5T and 08FE; the determining unit equations in
-`schemeMVOpenComposition_unit_normalization`.
-
-Proof: apply schemeMVOpenComposition_unit_normalization to the homotopy quotient
-of the restricted complex J. Transport its units through mapHomotopyCategoryFactors
-and quotientCompQhIso, whose components are identity quotient comparisons. Expand
-schemeMVImageComponent degreewise: its sectionwise isomorphism is the open-composition
-map followed by the open direct image of the inverse underived restriction isomorphism.
-This follows from pushforwardCongr = eqToIso and the associator/whiskering formulas.
-Naturality of the open direct-image localization unit moves that inverse restriction
-isomorphism across the unit. Cancel it against the hom of the restriction isomorphism
-on the right. Naturality of the derived composition comparison moves the inverse exact
-restriction factor from QJ to derived restriction of QI on the left. Finally insert the
-hom and inverse of the exact restriction factor on Y to recognize its open-image
-localization map. The remaining four-map composite is
-schemeMVRestrictionLocalizationChain. Postcompose both sides by the open derived
-direct image of the inverse derived restriction comparison. Functoriality combines
-the final two maps on the right; the definition of schemeMVOpenComparison identifies
-the left side. This postcomposition uses no unit normalization property of that
-restriction comparison, which is the separate restriction-localization obligation.
-No K-injectivity is used here.
-Empty and full opens and identity morphisms are included by the same unit equations. -/
+/-- Complex localization of the open composition square (Stacks, Tags 0D5T and 08FE). The
+determining unit equations are those of `schemeMVOpenComposition_unit_normalization`. -/
 theorem schemeMV_image_composition_localization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -37,18 +37,7 @@ private lemma restrict_eq_trans {Y : Scheme.{u}} {U V W : Y.Opens}
   rfl
 
 /-- Finitely many equations of module maps between finite free sheaves hold near a point
-if they hold after pullback to its stalk scheme.
-
-Proof: Induct over the finite set of indices, starting with U for the empty set.
-Given a neighbourhood V where the previous maps agree, zero sources or targets
-have only one map, so keep V. Otherwise restrict the source's finite free
-isomorphism to U and apply exists_restrict_eq_of_pullback_eq with the additional
-neighbourhood V. It supplies W contained in V where the new pair of maps agrees.
-Equality for the previous pairs persists on W: the natural restriction-composition
-isomorphism identifies direct restriction to W with restriction to V followed by
-restriction to W, and the latter preserves equality. Thus the enlarged family
-agrees on W. Apply the induction to all indices. Rank zero is included in the
-single-map lemma, and an empty indexing type returns U. -/
+if they hold after pullback to its stalk scheme. -/
 theorem exists_shrink_finite_free_map_eq
     {Y : Scheme.{u}} {ι : Type v} [Finite ι] (A B : ι → Y.Modules)
     (hA : ∀ i, IsZero (A i) ∨ ∃ s : ℕ, Nonempty

@@ -34,25 +34,8 @@ private def homotopyOfNaturalIso
   rw [← ha, ← hb] at ht
   simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using ht
 
-/-- A stalk homotopy of two fixed endomorphisms spreads near the point.
-
-Proof: Choose the termwise finite bases supplied by hfree and a homotopy in hP.
-Restriction and pullback carry these bases to finite bases; over Spec O_{Y,y}
-the coefficients of its components are elements of O_{Y,y}. By hge and hle,
-only the reverse-degree components with both degrees in [0,d] can be nonzero.
-There are finitely many such components and finitely many entries in each.
-Represent their entries by structure-sheaf sections on neighbourhoods of y
-inside V, and intersect these neighbourhoods. Use the bases to make these
-sections into sheaf-module morphisms, setting all other components to zero.
-For each degree in [0,d], the matrix of a-dh-hd-b has zero germs because hP
-is a homotopy of the specified maps. The germ equality criterion gives a
-smaller neighbourhood where each entry is zero. Intersect the finitely many
-neighbourhoods once more. The resulting components satisfy Homotopy.comm;
-outside [0,d] the source terms are zero, so the equations hold automatically.
-Only reverse-degree components were retained, so Homotopy.zero also holds.
-This constructs the required homotopy after restriction. Rank zero and d=0
-cause no difficulty: empty matrices or the empty list of reverse components
-have no coefficients to lift, and only the fixed-map equations remain. -/
+/-- A stalk homotopy of two fixed endomorphisms spreads to a homotopy on a neighbourhood
+of the point. -/
 theorem exists_shrink_homotopy_P_of_stalk
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

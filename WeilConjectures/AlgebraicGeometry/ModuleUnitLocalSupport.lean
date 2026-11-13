@@ -13,7 +13,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Local finite support for one section
 
-Source: Stacks Project, Modules, Tags 01BB (first paragraph of the proof) and 01AH (2).
+## References
+
+* Stacks Project, Modules, Tags 01BB and 01AH (2).
 -/
 
 @[expose] public section
@@ -190,28 +192,8 @@ private theorem exists_unit_local_colimit_lift
   exact (hk'.symm.trans ht).trans hnat.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A single section of a restricted free module sheaf locally has finite support.
-
-Source: Stacks Project, Modules, Tags 01BB (first paragraph of the proof) and 01AH (2).
-
-Proof: The finite subsets of I, viewed as types with inclusion maps, have I as
-colimit: send i through its singleton stage, and use cocone naturality for the
-inclusion of that singleton into any finite subset containing i. The free
-functor preserves this colimit and takes its structure maps to freeMap.
-For an arbitrary filtered colimit c of module sheaves over V, form the colimit
-P of the underlying presheaves. Sheafification of P is isomorphic to c.pt;
-the canonical comparison P -> c.pt.val is the sheafification unit followed by
-this isomorphism. It is therefore locally surjective. Apply its covering image
-sieve to the section obtained by evaluating b at 1 over U, and choose a member
-W containing x. The lifted section of P over W comes from some finite stage S,
-since presheaf colimits are computed sectionwise and the module forgetful
-functor preserves filtered colimits. Restrict this stage section to all opens
-inside W and use unitHomEquiv to construct a. Cocone compatibility and the
-naturality of b show that the two morphisms agree on 1 over W. Their associated
-sections agree everywhere by restriction from this terminal open, so they are
-equal. No stalk comparison, preservation of colimits by restriction, compactness,
-or simultaneous shrinking is required. The argument also covers empty I;
-then every finite stage is empty. -/
+/-- A single section of a restricted free module sheaf locally has finite support
+(Stacks, Tags 01BB and 01AH). -/
 theorem exists_unit_local_support
     (X : Scheme.{u}) (V U : X.Opens) (hUV : U ≤ V) (I : Type u)
     (b : unit ((moduleRings X.toRingedSpace).over U) ⟶

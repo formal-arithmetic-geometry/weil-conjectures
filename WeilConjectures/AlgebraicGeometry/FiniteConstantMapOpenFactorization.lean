@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeConstantMapOpenFactorization
 
 /-! # Extending a stalk factorization of a finite constant map
 
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent.
+## References
+
+* Stacks Project, Tag 09BH, Proposition 59.74.1 (3).
 -/
 
 @[expose] public section
@@ -26,23 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A map from a finitely generated constant module sheaf that factors through a
 subsheaf at one geometric stalk factors on a Zariski neighbourhood of that point.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent.
-
-Proof: Choose finitely many generators of N. Represent the images of these generators
-under the stalk factorization by sections of F on a common pointed etale neighbourhood.
-Refine this neighbourhood until their images under phi equal the sections of G obtained
-from alpha and the corresponding constant generators. Equality of finitely many germs
-is witnessed after a common refinement. The image U of this etale neighbourhood is
-open and contains x. On its fibre product over U the two lifts of each generator have
-the same image in G, namely the pullback of alpha of that constant generator. Monicity
-of phi makes the lifts equal. Sheaf descent produces sections of F on U. Every relation
-among the generators maps to zero in G since alpha is linear; monicity makes it zero
-in F. Hence these sections define a linear map N to sections of the pullback of F.
-The constant-sheaf/global-sections adjunction gives psi, and its composite with the
-pullback of phi is the pullback of alpha, as is checked on the generators. The stalk
-of the open restriction is the original stalk. No finite presentation of N is needed:
-monicity kills all relations on the same U. For N=0 take the zero map and U=X. Neither
-X nor G is required to be irreducible, Noetherian, finite, or constant. -/
+(Stacks, Tag 09BH.) -/
 theorem exists_open_factorization_of_finite_constant_map
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

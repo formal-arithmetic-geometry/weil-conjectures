@@ -15,7 +15,10 @@ import Mathlib.Data.Finset.Order
 
 /-! # Lifting overlap maps for fixed local models
 
-Source: Stacks Project, Tags 01ZR and 05N7. -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -26,26 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Lift natural overlap maps without asserting their identity or cocycle equations.
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing), and Tag 05N7,
-map lifting and equality on intersections of refinement charts.
-
-Proof: Conjugate the restriction transitions of M by e. The pairwise overlaps
-of U are quasi-compact, by quasi-separatedness, and have finite affine covers.
-For each chart, identify the coordinate ring at the limit with the directed
-colimit of the stage rings, and identify quasi-coherent pullback with scalar
-extension. Apply the map clause of 05N7 to the conjugated comparison on each
-chart. Apply the equality clause on finite affine covers of intersections of
-these charts to make their restrictions agree. A common upper bound exists for
-this finite collection of maps and equations. Glue the chart maps on every
-pairwise overlap, and pull these glued maps back to all test schemes. The
-pullback composition comparison proves naturality. The objects are the actual
-pullbacks of N, so their local isomorphisms can be identities. At the limit the
-maps recover the conjugated transitions; compose e with the canonical iterated
-pullback comparisons to obtain the component comparison to M. This comparison
-commutes with the maps by their construction. No diagonal or triple cocycle
-equations are claimed at the finite stage. The empty cover gives empty families.
-For a preorder, apply the affine result to the partial-order quotient of the
-nonempty tail above j. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_overlap_map_lifting
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

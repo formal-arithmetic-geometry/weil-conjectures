@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.InjectiveModuleCechAugmentationZero
 
 /-! # The augmented Čech complex of an injective module
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EP, as used in Tag 01EQ.
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tags 01EP and 01EQ.
 -/
 
 @[expose] public section
@@ -29,25 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- For an open cover, restriction of global sections into the Čech complex of a
 single injective module is a quasi-isomorphism. The supplied map's degree-zero
 component is precisely the canonical restriction map, including the scalar
-identification at the whole space.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EP, and its use in the proof of Tag 01EQ.
-
-Proof: Sheaf gluing identifies the kernel of the first Čech differential with
-sections on the union of the cover, which is the whole space. Under this
-identification the augmentation is restriction, so its map on degree-zero
-cohomology is an isomorphism. An injective module is injective as a presheaf of
-modules, since sheafification is an exact left adjoint to inclusion. Applying
-Hom into it to the free Čech chain complex gives exactness in every positive
-degree, as in Stacks 01EP and 01EN. Equivalently, use injective-implies-flasque
-and flasque Čech acyclicity. These component calculations are unchanged by
-restriction of scalars to the global section ring: kernels and images are
-computed in the underlying abelian groups. The source single-term complex has
-zero positive cohomology, so the augmentation induces isomorphisms in those
-degrees as well. At degree zero its incoming differential is zero, giving the
-kernel just identified. This proves quasi-isomorphism in all degrees. For an
-empty covering the covering hypothesis forces the scheme to be empty, and
-both section and Čech complexes are zero. -/
+identification at the whole space. (Stacks, Tags 01EP, 01EQ.) -/
 theorem injectiveModuleCechAugmentation_quasiIso {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hU : iSup U = ⊤) (J : X.Modules) [Injective J]
     (ht : (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op ⊤))).hom =

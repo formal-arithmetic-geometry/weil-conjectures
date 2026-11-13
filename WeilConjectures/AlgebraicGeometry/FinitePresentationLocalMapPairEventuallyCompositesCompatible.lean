@@ -79,14 +79,8 @@ private lemma pullback_map_zero_of_comp
 
 set_option backward.defeqAttrib.useBackward true in
 /-- At a sufficiently late stage, the two composites in the pairwise square
-have a common value on every universal test. This is the overlap-defect
-construction; its proof uses quasi-compactness and finite-presentation
-vanishing on the overlap.
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-Proof: construct the overlap defect on the quasi-compact overlap, apply finite-presentation
-vanishing, and transport the resulting equality through canonical comparisons. -/
-/- Core overlap-defect eventual vanishing.
-   Proof: isolated overlap-defect construction. -/
+have a common value on every universal test. (Stacks, Tag 01ZR) -/
+/- Core overlap-defect eventual vanishing. -/
 theorem finitePresentation_local_map_pair_eventually_composites_defect_zero_core
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})
@@ -171,7 +165,7 @@ theorem finitePresentation_local_map_pair_eventually_composites_defect_zero_core
     (overlapStageMap R f hik hkm)).mpr hz
   exact pairDefectZero_of_pairCompatibility hcStage
 
-/-- -/
+/-- One pair of local maps satisfies the overlap equation at every sufficiently late stage. -/
 theorem finitePresentation_local_map_pair_eventually_composites_compatible
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

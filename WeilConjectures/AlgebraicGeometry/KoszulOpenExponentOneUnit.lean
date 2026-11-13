@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 
 /-! # The augmented exponent-one class is restriction of one
 
-Source: Stacks Project, Tags 08D1 and 08DC.
+## References
+
+* Stacks Project, Tags 08D1 and 08DC.
 -/
 
 @[expose] public section
@@ -73,34 +75,7 @@ private theorem cechAugmentation_sections_unit
       simp only [Category.assoc, Iso.inv_hom_id_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The fixed exponent-one chain class evaluates to the ordinary sections unit.
-Source: Stacks Project, Tag 08D1, the signed fraction comparison; Tag 08DC,
-equation 36.9.4.1, and its construction in Lemma 36.9.4.
-
-Proof: Let t be the augmentation of the extended exponent-one Koszul tail
-into the extended single structure complex. Postcomposition naturality of
-transposition, cycles, homology, the Koszul cocone and the derived Cech
-comparison identifies augmentation of the identity stage class with the
-class of t. In the target structure complex all nonzero degrees vanish.
-Consequently only singleton intersections contribute to its degree-zero
-Cech cycle: the Hom degree is zero, the Cech degree p is zero, and the
-coefficient degree q is zero. The sign (-1)^(pq+p(p-1)/2) is therefore +1.
-On D(f_j), the augmentation evaluated on the singleton basis vector is
-f_j times the restriction of 1. The cocone formula divides by f_j at
-exponent one, giving the restriction of 1. Cancellation is valid even if
-f_j is zero, since multiplication by f_j is invertible on its localization
-and the corresponding sections module is then zero. Thus this Cech cycle
-is the augmentation of the ordinary open-sections class of 1.
-To compare with derived sections, take a K-injective resolution of the
-structure complex. Naturality of Cech augmentation and the defining
-resolution equation of principalCechDerivedComparison identify its image
-with the ordinary-to-derived sections unit applied to that class. The
-homologyFunctorFactors iso identifies the ordinary class with the one
-constructed using extendHomologyIso and singleObjHomologySelfIso in
-derivedOpenStructureUnit. This gives exactly the displayed equality.
-For r=0 all Cech products are empty and the open is empty, so both classes
-are zero. The same argument includes the zero ring and requires no inverse
-augmentation and no evaluation equivalence or derived category on U. -/
+/-- The fixed exponent-one chain class evaluates to the ordinary sections unit. -/
 theorem koszulOpen_exponent_one_unit
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

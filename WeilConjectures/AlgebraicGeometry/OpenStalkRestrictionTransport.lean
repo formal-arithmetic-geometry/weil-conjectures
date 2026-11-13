@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionCompar
 
 /-! # Transport of open-site stalk comparisons through further restriction
 
-Source: Stacks Project, Sheaves Tag 00A0 (3), (5), and Tag 0096.
+## References
+
+* [Stacks, Sheaves, Tag 00A0]
+* [Stacks, Tag 0096]
 -/
 
 @[expose] public section
@@ -82,35 +85,7 @@ private theorem restriction_adjunction
   exact ⟨P, adj, inferInstance⟩
 
 /-- An arbitrary comparison on an intermediate open can be transported through a further
-restriction to the canonical comparison `openModuleStalkRestrictionComparison`.
-
-Source: Stacks Project, Sheaves Tag 00A0 (3), (5), `lemma-restrict`, and Tag 0096,
-`lemma-adjoint-pullback-pushforward-modules` (open-immersion pushforward).
-
-Proof: Use the slice/open-subspace equivalences. The final functor of neighbourhoods
-inside W gives the additive restriction-stalk isomorphism. Its germ formula,
-checked on a common neighbourhood for a scalar and a vector, makes it linear
-after the open-immersion stalk-ring scalar transports. The same formula proves
-naturality. These canonical isomorphisms e are
-`openModuleStalkRestrictionComparison`. The comparison c of two slice restrictions is
-the sectionwise identity; associativity of inclusions gives its naturality. The canonical
-W-to-V stalk comparison d0 satisfies the displayed law for the canonical V-to-U comparison e0:
-both sides take a section germ to that same germ on U.
-
-For an arbitrary comparison a on V, put R = restriction from U to V. Transport
-open-immersion module pushforward back to the slice sites to obtain its right
-adjoint P, with unit eta and invertible counit epsilon: R P --> Id. Define an
-automorphism b of the V-stalk functor S by the composite
-S(epsilon) inverse, e0 whiskered by P, a inverse whiskered by P, S(epsilon).
-Naturality makes b a natural automorphism. Naturality of e0 and a at eta_F,
-and the triangle identity R(eta_F) followed by epsilon_(R F) = identity, give
-b_(R F) followed by a_F = e0_F. Thus d = d0 followed by b has the required law.
-This argument applies to all module sheaves and all comparisons a: no free source,
-finite presentation, local existence of a morphism, or prescribed stalk map is
-used. If V=W the same counit calculation applies; the hypothesis x in W excludes
-empty neighbourhoods. The canonical comparisons are determined by the germ formula;
-d is adjusted to a by the explicit adjunction construction above.
--/
+restriction to the canonical comparison `openModuleStalkRestrictionComparison`. -/
 theorem exists_openStalk_restriction_transport
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :
     ∀ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)

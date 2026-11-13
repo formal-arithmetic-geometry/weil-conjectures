@@ -29,10 +29,12 @@ set_option linter.privateModule false
 /-!
 # Integral constant-model constructible heart closure
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61.
-
 The theorem states closure under ambient kernels, cokernels, and short exact extensions
 for finite constant scalar models over the pulled-back condensed ring of integers.
+
+## References
+
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1)
 -/
 
 @[expose] public section

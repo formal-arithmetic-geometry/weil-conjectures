@@ -103,26 +103,8 @@ private theorem cohomology_of_cochainComparison
   rfl
 
 /-- Homotopy endomorphisms of the ordinary quotient model are locally constant quotient
-Hom cohomology, with the formula for ordinary successor reduction. This statement
-concerns ordinary complexes only and makes no assertion about derived reductions.
-
-Source: Stacks Tags 09C5, 09C6 and 0A8H; blueprint Compatible isomorphisms.
-
-Proof: identify maps modulo homotopy with degree-zero homology of the signed Hom
-complex. Fix finite integral bases in every degree and extend these same bases to
-all ordinary quotient levels. Finite matrix evaluation identifies internal Hom
-cochains with locally constant scalar quotient cochains. Degreewise bijectivity
-uses finite support, basis coordinates and the actual cokernel projection.
-Integral scalar normalization identifies the realized differentials with their
-constant residue matrices; the signed matrix formula then proves that evaluation
-is a chain map. Locally constant module-valued functions preserve exactness:
-choose preimages of their values, so the resulting functions remain locally
-constant. Their homology comparison and the signed Hom equivalence give the
-asserted equivalence. Normalized coefficient-section naturality and composition
-of the fixed free-basis comparisons prove compatibility with actual successor
-scalar extension and balancing. Homology naturality gives the asserted formula.
-The zero complex, rank-zero terms, empty intervals and the empty scheme require
-no separate nonemptiness choices. -/
+Hom cohomology, with the formula for ordinary successor reduction
+(Stacks, Tags 09C5, 09C6 and 0A8H). -/
 theorem internalPerfectOrdinary_homCohomology
     (X : Scheme.{u}) (W : X.ProEt) (_hAffine : IsAffine W.left)
     (_hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)

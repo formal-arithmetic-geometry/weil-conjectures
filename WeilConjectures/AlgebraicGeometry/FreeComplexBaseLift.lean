@@ -12,7 +12,10 @@ public import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.Algebra.Module.Projective
 
 /-! Base-degree lifting for a free module into an exact augmentation.
-Source: literature/stacks-project/algebra.tex, Tag 00LS.
+
+## References
+
+* Stacks Project, Tag 00LS.
 -/
 
 @[expose] public section
@@ -22,9 +25,8 @@ universe u
 open CategoryTheory
 
 set_option linter.style.haveILetI false in
-/-- The degree-zero lifting step in the comparison of a free complex with a
-resolution.  This is the projectivity lifting argument for the augmentation.
-Source: Algebra, Tag 00LS, proof of lemma-compare-resolutions (1), lines 17525--17527. -/
+/-- The degree-zero lifting step in the comparison of a free complex with a resolution:
+the projectivity lifting for the augmentation. (Stacks, Tag 00LS) -/
 theorem free_complex_base_lift
     (R : Type u) [CommRing R]
     (M N : ModuleCat R) (φ : M ⟶ N)

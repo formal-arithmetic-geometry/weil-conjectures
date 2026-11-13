@@ -120,8 +120,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Witnesses for the exact module extensions in the assertion. The open adjunction and
-closed counit normalize restriction. The coefficients of every arrow are inverse images.
-Source: Stacks, Tags 09AA, 09BM, 09BN, 03DI and 03DJ. -/
+closed counit normalize restriction, and the coefficients of every arrow are inverse images.
+(Stacks, Tags 09AA, 09BM, 09BN, 03DI, 03DJ) -/
 structure LocallyClosedExtensionData where
   extension : ∀ {S X : LocallyClosedCoefficients.{u}}, LocallyClosedCoefficientImmersion S X →
     proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring
@@ -159,13 +159,12 @@ attribute [instance] LocallyClosedExtensionData.additive LocallyClosedExtensionD
 namespace LocallyClosedExtensionData
 
 /-- The actual termwise extension on the ordinary unbounded derived categories.
-Source: Stacks, Tags 015F and 05RU. -/
+(Stacks, Tags 015F, 05RU) -/
 abbrev derived (E : LocallyClosedExtensionData.{u}) {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) := (E.extension a).mapDerivedCategory
 
 /-- The same comparisons on unbounded derived categories, required to be the
-localizations of the module comparisons on every cochain complex, not arbitrary isos.
-Source: Stacks, Tags 05RU and 015F; exact-functor localization. -/
+localizations of the module comparisons on every cochain complex. (Stacks, Tags 05RU, 015F) -/
 structure DerivedCoherence (E : LocallyClosedExtensionData.{u}) where
   restriction : ∀ {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X), E.derived a ⋙ a.pull.mapDerivedCategory ≅ 𝟭 _

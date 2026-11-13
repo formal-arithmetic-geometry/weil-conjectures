@@ -10,11 +10,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # The canonical projection map for condensed module objects
 
-Stacks Project, Tags 03EL and 0943.
-
 The published module-object pullback tensor comparison is constructed on signed
 K-flat total tensors and characterized by its derived counits. Its existing
 right-adjoint mate gives the required map, without choosing a map between endpoints.
+
+## References
+
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 0943](https://stacks.math.columbia.edu/tag/0943)
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +35,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- A morphism together with its category and endpoints, used to keep the projection
-map interface compact. All fields below are filled by the existing canonical construction.
-Source: the canonical-map convention. -/
+map interface compact. -/
 structure ProjectionMorphismData where
   carrier : Type (v + 1)
   [category : Category.{v} carrier]
@@ -43,8 +45,7 @@ structure ProjectionMorphismData where
 
 attribute [instance 20000] ProjectionMorphismData.category
 
-/-- The existing canonical projection construction, together with its exact category
-and endpoints. Source: the canonical-map convention. -/
+/-- The canonical projection morphism, together with its category and endpoints. -/
 def moduleObjectProjectionData
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -59,8 +60,7 @@ def moduleObjectProjectionData
       (leftDerivedUpperStarTensor Λ f)).app K).app L }
 
 /-- The canonical projection map: the adjoint transpose of the generic K-flat
-pullback tensor comparison followed by counit tensor identity.
-Source:; Stacks 0943. -/
+pullback tensor comparison followed by counit tensor identity (Stacks, Tag 0943). -/
 def moduleObjectProjectionMap
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))

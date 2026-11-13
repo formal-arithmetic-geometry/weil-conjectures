@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.AffineInternalHomEvaluationBijective
 /-!
 # Affine sheaf-Hom is right adjoint to restriction
 
-Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine.
+## References
+
+* Stacks Project, Tag 0BUZ.
 -/
 
 @[expose] public section
@@ -30,25 +32,10 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- For an affine `f: Y ⟶ X`, internal Hom from `f_* O_Y`, with its canonical
+/-- For an affine `f : Y ⟶ X`, internal Hom from `f_* O_Y`, with its canonical
 `f_* O_Y`-action, is right adjoint to restriction of scalars. Its sections on an
-affine open are the module Hom of sections, and its counit evaluates at one.
-
-Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine;
-Modules, lemma-adjoint-tensor-restrict.
-
-Proof, step 1. For an A-module G and an O_X-module F, send
-an A-linear map psi: G -> Hom(A,F) to m -> psi(m)(1). Conversely send g to
-m -> (s -> g(s*m)), on every smaller open. These assignments commute with
-restriction and are mutually inverse, since psi(m)(s) = psi(s*m)(1).
-They are natural in G and F and give the adjunction; the identity on Hom(A,F)
-gives the counit phi -> phi(1). The A-action is precomposition by multiplication.
-Step 2.
-Since f is affine, A = f_* O_Y is quasi-coherent. On an affine open U, A|_U is
-the sheaf associated to S = O_Y(f^{-1} U). The tilde/global-sections adjunction,
-valid for every F, identifies Hom(A|_U,F|_U) with Hom_R(S,F(U)) by taking
-components at U. Thus no quasi-coherence or finite presentation of F is needed.
-Under this identification the counit is evaluation at 1 in S. -/
+affine open are the module Hom of sections, and its counit evaluates at one
+(Stacks, Tag 0BUZ). -/
 theorem sheafHom_affine_rightAdjoint
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f] :
     let A := ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous

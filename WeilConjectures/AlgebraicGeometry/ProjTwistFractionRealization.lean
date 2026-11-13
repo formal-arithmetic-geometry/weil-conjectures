@@ -12,7 +12,9 @@ public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 /-!
 # Realization of homogeneous fractions on a Proj basic open
 
-Source: Stacks Project, Tags 01MN and 01M7.
+## References
+
+* Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -22,15 +24,7 @@ open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A homogeneous shifted fraction defines a section of the twist.
-Source: Stacks Project, Definition 27.10.1, Tag 01MN.
-
-Proof: choose a homogeneous numerator y and homogeneous denominator d in powers of f
-of equal shifted degree from the definition of degreeZeroFractions. If the shifted degree
-is negative then y is zero, and use the zero section. Otherwise d avoids every point of
-D₊(f), and degreePart.mk y d defines the required section by isLocallyFraction_mk.
-Its value in every prime localization is the image of the ordinary fraction, by the
-formula for the localization map on fractions. This also covers nilpotent f. -/
+/-- A homogeneous shifted fraction defines a section of the twist (Stacks, Tag 01MN). -/
 theorem twist_fraction_realization
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A)

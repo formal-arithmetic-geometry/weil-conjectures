@@ -167,18 +167,7 @@ universe u
 namespace AlgebraicGeometry.Etale
 
 /-- The derived mate calculation identifies the open injective coefficient map with the
-ordinary base-change map on the coefficient `j_*J`. Source: Stacks Project, Tag 0F07,
-closed-open lower comparison.
-
-Proof: rewrite `Etale.baseChange` by
-`Etale.baseChange_eq_derivedBaseChangeMapPlus`, and then use the mate computation
-`Adjunction.derivedPlus_mateEquiv_app_fac` for the pullback comparison.  On the
-single complex containing `j_*J`, the exact pullback comparison is
-`mapDerivedCategoryPlusSingleFunctor 0`; composing it with the counit of
-`j^* ⊣ j_*` is the displayed final factor.  Naturality of the derived unit and
-the two adjunction triangle identities then identify the resulting mate with
-the left-hand composite.  Applying the homology functor preserves this equality.
--/
+ordinary base-change map on the coefficient `j_*J`. (Stacks, Tag 0F07) -/
 theorem open_injective_coefficient_lower_comparison_factorization
     (Λ : Type (u + 1)) [CommRing Λ]
     {Y T V W : Scheme.{u}}

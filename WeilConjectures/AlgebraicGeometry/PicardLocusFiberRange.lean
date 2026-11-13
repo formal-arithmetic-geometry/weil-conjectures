@@ -16,7 +16,9 @@ import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 /-!
 # Points of the universal Picard pullback locus
 
-Source: Stacks Project, Tag 0BDP, evaluated on residue fields.
+## References
+
+* Stacks Project, Tag 0BDP
 -/
 
 @[expose] public section
@@ -33,21 +35,7 @@ private noncomputable def tensorPullbackIsoPullback {A B : Scheme.{u}} (g : A �
     (Modules.pullbackPushforwardAdjunction g)
 
 /-- The points of an immersion representing descent of an invertible module are exactly
-its trivial-fibre locus, when the family has a section.
-
-Source: Stacks Project, Tag 0BDP and the proof of Tag 0BF4.
-
-Proof: A point s lies in the image of the immersion j precisely when the residue-field
-morphism Spec κ(s) → S factors through j: an immersion identifies the residue field at
-a point of its domain with that at its image. Evaluate hZ on this morphism. Its right side
-says L on the fibre is the pullback of a finite locally free N on Spec κ(s). Pull this
-isomorphism back along the base change of the section of f. The result
-identifies N with a pullback of the invertible module L, so N is invertible. An invertible
-module on the one-point scheme Spec κ(s) is trivial, and so is L on the fibre. Conversely, a
-trivial fibre satisfies hZ with N equal to the structure module. To compare the tensor
-pullback in hZ with Modules.pullback, use uniqueness of left adjoints to Modules.pushforward;
-transport the structure module along that natural isomorphism. These arguments prove
-both inclusions in the asserted equality. No flatness or properness is needed here. -/
+its trivial-fibre locus, when the family has a section (Stacks, Tags 0BDP and 0BF4). -/
 theorem range_eq_setOf_nonempty_pullback_fiber_iso_unit
     {P S T : Scheme.{u}} (f : P ⟶ S) (σ : S ⟶ P) (hσ : σ ≫ f = 𝟙 S)
     (L : P.Modules) [L.IsInvertible] (j : T ⟶ S) [IsImmersion j]

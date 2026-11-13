@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 /-! # Degree-zero comparison of the formal fibre systems
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OD.
+## References
+
+* Stacks Project, Tag 02OD
 -/
 
 @[expose] public section
@@ -209,17 +211,8 @@ private theorem levelIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n 
 
 -- The unchanged existential statement deliberately has the predicate True.
 set_option linter.unusedVariables false in
-/-- Degree-zero fibre cohomology is naturally the section system for the unit
-module.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OD (degree zero).
-Proof: Identify degree-zero module cohomology with sections using the canonical
-augmentation. Apply sections to the canonical isomorphism from tensor pullback of
-the unit module to the unit module, and restrict scalars to the completed local ring.
-The adjunction characterization of the structure-sheaf map makes the transition
-h-maps commute with these unit isomorphisms. The canonical augmentation square for
-cohomology h-maps then proves compatibility with section pullback. Construct the
-natural transformation with NatTrans.ofOpSequence; its components are isomorphisms,
-so it is a natural isomorphism. -/
+/-- Degree-zero fibre cohomology is naturally the section system for the unit module.
+(Stacks, Tag 02OD, degree zero.) -/
 theorem formalFunctions_degreeZero_systemIso {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) :
     ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅
           formalFibreSectionsSystem f y, True := by

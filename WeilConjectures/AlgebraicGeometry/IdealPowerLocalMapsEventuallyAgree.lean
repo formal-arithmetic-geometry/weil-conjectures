@@ -18,7 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 /-! # Eventual agreement of local ideal-power maps
 
-Source: Stacks Project, Properties, Lemmas 01PM and 01PQ, injectivity arguments.
+## References
+
+* Stacks Project, Tags 01PM and 01PQ
 -/
 
 @[expose] public section
@@ -271,26 +273,7 @@ set_option maxHeartbeats 500000 in
 -- Allow elaboration of repeated restrictions to the over-site.
 /-- Two local maps with equal evaluation agree on a sufficiently high ideal power
 on their quasi-compact overlap. No lifting or quotient construction is asserted.
-
-Source: Stacks Project, Properties, Lemma 01PM (injectivity) and Lemma 01PQ
-(finite covering argument).
-
-Proof: Restrict both maps to V intersect V' and subtract them. Cover this
-quasi-compact open by finitely many affine opens. On each, write I as a finitely
-generated ideal J=(f_1..,f_t) and F=M~. The difference is a linear map
-J^n -> M by the affine tilde/Gamma equivalence. On D(f_i), heval says that its
-value on f_i^n divided by f_i^n is zero, since one n is the unique preimage
-of the unit under the monic power inclusion. Localization therefore gives
-f_i^k_i phi(f_i^n)=0. Choose one k for all i, with n+k positive. Linearity
-shows phi(f_i^(n+k))=0. Every monomial of degree t*(n+k-1)+1 contains one
-such factor, so phi kills that power. Enlarge the degree to at least n.
-If J=0, use any positive degree at least n. Take the maximum of the degrees
-on the finite cover (and n). The equations hr and monicity of the power
-inclusions identify all r with the genuine inclusions and give their
-composition law; restriction to the maximum preserves vanishing. Sheaf
-separation now makes the two restricted maps equal on the whole overlap,
-hence on every W contained in it. An empty overlap needs no affine opens
-and the same separation argument works at degree n. -/
+(Stacks, Tags 01PM and 01PQ) -/
 theorem ideal_power_local_maps_eventually_agree
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

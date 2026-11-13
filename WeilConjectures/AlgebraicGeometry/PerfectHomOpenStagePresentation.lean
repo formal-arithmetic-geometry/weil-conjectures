@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenStageMaps
 
 /-! # Local presentations of shifted open Hom systems
 
-Source: Stacks Project, Tags 09RE, 079W, 08FE and 0D5S.
+## References
+
+* Stacks Project, Tags 09RE, 079W, 08FE and 0D5S.
 -/
 
 @[expose] public section
@@ -23,44 +25,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Restriction of a representing Hom system to one compact open, before taking
-any colimit. This supplies stage and apex equivalences and their transport equations;
-it makes no assertion about group colimits, Mayer--Vietoris families or continuity.
-
-Source: Stacks Project, perfect.tex Tag 09RE (open-local Hom comparison),
-cohomology.tex Tags 079W, 08FE and 0D5S.
-
-Proof:
-1. Put B = t inverse-image W and Z = B.toScheme, k = B.ι followed by t,
-and s' = B.ι followed by s. Since W lies in the image of t, k has image W.
-The source Y is compact (s is quasi-compact with affine target), and X is
-quasi-separated (s₀ is quasi-separated with affine target). Thus t is
-quasi-compact, B is compact, and its open inclusion is quasi-compact.
-The maps s' are locally finitely presented and qcqs by composition. Transport
-localized derived categories through the open-site equivalence.
-2. Let L be derived restriction to B. Construct P' = (L P)[-n] and Q' = L Q.
-For perfectness restrict each bounded finite-free retract model termwise to
-smaller opens: restriction preserves the unit, finite sums and retract equations.
-Shifting translates the finite bounds and preserves each term's retract. For every j
-the natural equivalences
-h.stageEquiv identify F_j with Rpi_j* Lpi_j*Q by derived adjunction and Yoneda.
-The same construction identifies d.pt with the limit direct image. Their
-stageMap and limitMap equations, evaluated at identity morphisms, determine
-all representing arrows; stageNatural and limitNatural then identify their action
-on every Hom set. No arbitrary representative object is chosen.
-3. Restrict these identifications to B using the right-derived comparison for
-open restriction and direct image (Tag 08FE). Its underived comparison is the
-sectionwise identity, and its derived comparison is pinned by the right-derived
-unit. The cartesian open restriction of each pi_j is the base-change projection
-for s'. Open adjunction and the direct-image shift comparison identify
-Hom(P, Rk_B* L F_j[n]) with Hom(L P[-n], L F_j), and derived adjunction
-identifies the latter with Hom(Lpi'_j* P', Lpi'_j* Q'). Compose these
-bijections to obtain e_j, and use the same construction at the apex for b.
-4. Naturality of the open adjunction, shift comparison and restriction/direct-image
-comparison transports h.stageMap and h.limitMap to the two displayed equations.
-The pullback composition comparisons used here are the counit-pinned ones defining
-perfectStageMap and perfectLimitMap, so these are equalities for the specified
-transport maps, not merely existence of some commuting maps. For an empty open all
-Hom groups are zero; the same adjunctions and comparisons still apply. -/
+any colimit. This supplies stage and apex equivalences and their transport equations
+(Stacks, Tags 09RE, 079W, 08FE and 0D5S). -/
 theorem perfect_hom_open_stage_presentation
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 
 /-! # Finite Tor dimension on a scheme
 
-Source: Stacks Project, Cohomology of Sheaves, Definition 20.48.1, Tag 08CG.
+## References
+
+* [Stacks Project, Tag 08CG](https://stacks.math.columbia.edu/tag/08CG)
 -/
 
 @[expose] public section
@@ -23,7 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A derived object has finite Tor dimension when one finite interval bounds the
 cohomology of its derived tensor with every module sheaf. The interval is global,
-independent of the test module. Source: Stacks Project, Definition 20.48.1 (08CG). -/
+independent of the test module. (Stacks, Tag 08CG.) -/
 def HasFiniteTorDimension (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) : Prop :=

@@ -42,25 +42,7 @@ private theorem exists_residue_rank_le {Y : Scheme.{u}}
   simpa only [hxz] using hz
 
 /-- The points where a bounded nonnegative finite free complex has residue cohomology
-concentrated in degree i with rank r form an open set.
-
-Proof: choose bases of the finite free terms. At a field-valued point write β(q) for
-cohomology dimension and ρ(q) for the rank of the outgoing differential. Rank-nullity
-gives β(q) + ρ(q) + ρ(q-1) = rank(P.X q). A maximal nonzero minor of each differential
-remains nonzero on a basic open, so differential ranks cannot decrease nearby. This
-also gives the existing upper-semicontinuity bound for β(q).
-At a point of the indicated locus choose the finitely many upper-semicontinuity
-neighbourhoods for q = 0..,d; outside this interval the terms and homology vanish.
-Thus cohomology outside i stays zero on their intersection. Also choose basic opens
-on which the four differential ranks in degrees i-2..,i+1 cannot decrease.
-The displayed rank-nullity identities in degrees i-1 and i+1, whose original β is
-zero, force each of their differential ranks to remain equal to its original value.
-The identity in degree i now forces β(i) to remain r. Finite-dimensional modules on
-the spectrum of a field are zero exactly when dimension is zero and are locally free
-of rank r exactly when dimension is r. The resulting finite intersection is an open
-neighbourhood contained in the locus. Negative degrees in this argument are handled
-by the lower support bound, including i = 0; the upper support bound handles i > d.
-No point is chosen when the scheme is empty. -/
+concentrated in degree i with rank r form an open set. -/
 theorem isOpen_finiteFree_residue_locus
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

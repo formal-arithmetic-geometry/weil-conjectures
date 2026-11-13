@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareComponent
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
+## References
+
+* Stacks Project, Tags 0DJA and 0BYJ.
 -/
 
 @[expose] public section
@@ -42,27 +44,8 @@ local instance pinnedTensorSquareCompatibilityT2Instance2 (Y : Scheme.{u}) :
 attribute [local instance] pinnedTensorSquareLeftSummandInstance3
   pinnedTensorSquareLeftSummandInstance4
 
-/-- Chain equation for the explicitly constructed pinned stalk tensor coordinates.
-
-Proof: sigma and rho are the specific chain isomorphisms constructed from the
-proved pinned stalk-total-tensor comparison, as displayed in the statement.
-The inverse source comparison gives sigma. Tensor the inverse pullback-stalk
-comparison on P with the identity on the stalk of N, then compose with the
-inverse target comparison to obtain rho. These data come from proved existence
-and canonical comparisons; the only deferred assertion here is their equation.
-Check the chain equation degreewise after every total tensor summand injection.
-The hypothesis hχ identifies the summand map with the specified module tensor
-pullback comparison. The tensorStalkIso generator equation and the
-module_pullback_tensor generator equation turn both composites on a pure tensor
-into extension of its first factor to C followed by the stalk of a on its second
-factor. The scalar-extension tensorator has the same pure-tensor formula.
-Pure tensors generate each summand; the coproduct universal property then gives
-equality in each total degree. Naturality of the stalk tensor and pullback
-comparisons makes sigma and rho chain isomorphisms, including the differential
-signs. Arbitrary direct sums, zero rings, zero factors and unbounded complexes
-are included; no derived-category morphisms or K-flatness are used.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), Tag 0BYJ and
-equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB. -/
+/-- Chain equation for the explicitly constructed pinned stalk tensor coordinates
+(Stacks, Tags 0DJA and 0BYJ). -/
 theorem pinned_tensor_pullback_stalk_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

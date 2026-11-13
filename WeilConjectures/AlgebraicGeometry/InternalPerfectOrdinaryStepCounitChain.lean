@@ -23,12 +23,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Representative-level successor counit naturality.
-
-Proof: apply `internalPerfectOrdinaryStepCounit_naturality` (naturality of the derived
-extension counit, conjugated by ordinary balancing) to the homotopy class of `g`, then
-expand the ordinary balancing step of that class as the conjugated chain map
-(`internalPerfectOrdinaryHomStep_map`). -/
+/-- Representative-level successor counit naturality. -/
 theorem internalPerfectOrdinaryStepCounit_chain
     (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)

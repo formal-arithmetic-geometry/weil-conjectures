@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Descent coherence of the explicit chart tensor-pullback comparisons
 
-Source: Stacks Project, Tags 0095 and 0096, and Mathlib descent naturality. -/
+## References
+
+* Stacks Project, Tags 0095 and 0096.
+-/
 
 @[expose] public section
 
@@ -27,28 +30,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- There is a unique isomorphism between the pulled canonical descent datum
-and the canonical datum of tensor pullback with the prescribed chart maps.
-Source: Stacks Project, Tags 0095 and 0096; Mathlib
-`DescentData.toDescentDataCompPullFunctorIso` and pseudofunctor composition.
-
-Proof: Compose toDescentDataCompPullFunctorIso with the image, under the
-canonical descent functor, of the unique left-adjoint comparison between
-ordinary pullback and tensor pullback. This gives an isomorphism between the
-two displayed descent data. Its component at a chart x is the inverse of
-isoMapOfCommSq for the chart pullback square, followed by restriction of the
-left-adjoint comparison. The formula isoMapOfCommSq_eq, followed by
-modulesPseudofunctor_mapComp'_hom_app_eq and
-modulesPseudofunctor_mapComp'_inv_app_eq, identifies the first factor with
-pullbackComp for the chart projection, pullbackCongr for its commutativity
-identity, and inverse pullbackComp for q followed by the pulled chart.
-The remaining factor is exactly the whiskered left-adjoint comparison in
-openCoverTensorPullbackComparison. Thus its hom chart components are the
-prescribed ones. Cancel each invertible hom component to obtain the prescribed
-inverse components. For uniqueness, two such isomorphisms have equal hom chart
-components, hence equal hom morphisms by descent Hom extensionality, and then
-are equal by Iso.ext. The specified chart maps determine all data uniquely. The proof
-requires no assumptions on q or the modules, and includes empty overlaps and
-zero modules. All isomorphism data are specified canonical constructions. -/
+and the canonical datum of tensor pullback with the prescribed chart maps. -/
 theorem openCoverTensorDescentComparison_existsUnique
     {X Y : Scheme.{u}} (U : X.OpenCover.{u}) (q : Y ⟶ X) (M : X.Modules) :
     let D := (Pseudofunctor.DescentData.pullFunctor modulesPseudofunctor

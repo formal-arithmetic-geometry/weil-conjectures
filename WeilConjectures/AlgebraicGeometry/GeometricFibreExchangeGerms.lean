@@ -11,7 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # The geometric fibre restriction formula for exchange
 
-Source: Stacks Project, Tag 0EYP, the canonical base change map on germs.
+## References
+
+* Stacks, Tag 0EYP
 -/
 
 @[expose] public section
@@ -105,9 +107,8 @@ noncomputable def geometricPointSourceStalkIso
   simpa only [Functor.comp_obj, Category.id_comp] using
     (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s (𝟙 _)).app P
 
-/-- The germ formula for the specified canonical source comparison, obtained by
-expanding its three factors and using the comap-unit identity. This is the
-ModuleCat version of the proof of `inverseImage_stalk_germ` (Stacks Tag 03Q1). -/
+/-- The germ formula for the specified canonical source comparison
+(compare Stacks, Tag 03Q1). -/
 private theorem sourceStalkIso_germ
     (Λ : Type (u + 1)) [CommRing Λ]
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -148,23 +149,7 @@ private theorem sourceStalkIso_germ
 actual exchange after the canonical source comparison and a target section comparison.
 This is a compatibility assertion only: it asserts no invertibility of that map or
 of exchange, and has no integral or proper hypothesis.
-
-Source: Stacks Project, Tag 0EYP, definition of the base change map, and Tags 03Q1
-and 03QO for inverse-image stalks and sections on the spectrum of a closed field.
-
-Proof: identify the source by the inverse-image stalk isomorphism. On Spec Omega,
-every pointed etale neighbourhood of the identity has a section through its marked
-point, so the terminal section germ is bijective. Apply this to the direct image
-along f', and identify its terminal sections with those on X' using the unique
-isomorphism from the pullback of the terminal object to the terminal object. Its
-inverse is the target comparison b. For a neighbourhood (V,v), the pushforward
-unit identity for base change expresses the mate as the unit for g' followed by
-the pushforward square isomorphism. Restrict along the marked point v: the two
-pullback projections are f' followed by v and g', respectively. The iterated
-pullback lift is therefore geometricFibreSectionLift. This gives exactly the
-displayed formula on every germ. All germs have such representatives, so the
-assumed formula for Theta proves the equality on every element. No bijectivity
-of Theta is used. -/
+(Stacks, Tags 0EYP, 03Q1, 03QO.) -/
 theorem geometricFibreExchange_germs
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

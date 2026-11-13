@@ -14,16 +14,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
-/-- Each chart square is cartesian when gluing identifies its inverse image.
-
-Source: Stacks Project, Tag 0AP4, chart-square verification, and Mathlib
-`IsOpenImmersion.isPullback`, the universal property of an open subscheme.
-The descended overlaps identify the inverse image of each target chart with the
-specified source open. Apply the
-Mathlib open-immersion pullback criterion to this equality, index by index.
-Empty index types give a vacuous conclusion; empty charts are covered by the
-same criterion. The inverse-image hypothesis is essential: commuting arbitrary
-local models and covering open embeddings need not arise from descended overlaps. -/
+/-- Each chart square is cartesian when gluing identifies its inverse image
+(Stacks, Tag 0AP4). -/
 theorem glued_model_chart_pullbacks
     {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)

@@ -81,13 +81,7 @@ private theorem kummer_mono_homology_zero_core
   simpa only [Linear.smul_comp, Category.id_comp, Category.assoc] using ha
 
 /-- A scalar-faithful arrow from the constant unit on a separably closed point
-is monic on zeroth homology.
-
-Proof: the constant module on a separably closed point is projective. The
-projective single-object Hom comparison detects the derived arrow on H0. Under
-the equivalence with modules, every element of the rank-one source is a scalar
-multiple of one. Scalar faithfulness therefore makes the H0 map injective,
-which is equivalent to its being monic. This includes the zero ring. -/
+is monic on zeroth homology. -/
 theorem ordinaryFiniteUnit_mono_homology_zero
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsSepClosed k]

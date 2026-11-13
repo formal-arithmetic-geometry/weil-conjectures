@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Natural affine comparison for coherent completion
 
-Source: Stacks Project, Lemmas 087W and 0881, affine identification of quotient systems.
+## References
+
+* Stacks Project, Tags 087W and 0881
 -/
 
 @[expose] public section
@@ -31,29 +33,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine formal-module realization identifies completion with adic completion
-of affine sections, naturally for every coherent module map. No exact sequence is assumed.
-
-Source: Stacks Project, Lemma 087W and the affine identification in Lemma 0881.
-
-Proof:
-1. Construct F by pushforward along U's inclusion, evaluation on U, and the actual
-ModuleCat limit. Full faithfulness of this affine section-limit functor reflects
-parallel-pair limits. Composing with every limit projection proves preservation of
-zero maps, since the section tower sends zero maps componentwise to zero.
-2. Apply the finite-level affine quotient comparison. It identifies the sections of
-rho(completion G) at level n with Gamma(G,U)/J^(n+1)Gamma(G,U), compatibly with
-transitions and coherent maps. Its equivalences are constructed from the quotient
-projections, their surjectivity, and their ideal-power kernels.
-3. Compose these equivalences with the module quotient projections. Their kernels
-are J^(n+1)Gamma(G,U), and their ranges are the whole level modules. The stable-range
-completion/limit theorem with c = 0 gives isomorphisms from adic completion to the
-limits, uniquely determined by their projection equations. Let e_G be their inverses.
-4. For naturality, apply the limit isomorphism for H and then every limit projection.
-The projection equations, the limit-map equation, and finite-level coherent-map
-naturality give the required equality. Jointly monomorphic projections finish.
-For J = 0 the system is constant; for J = A it is zero. The empty affine open and
-zero modules are covered by the same limit argument.
--/
+of affine sections, naturally for every coherent module map. No exact sequence is assumed
+(Stacks, Tags 087W and 0881). -/
 theorem formalCompletion_affine_natural_comparison
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)

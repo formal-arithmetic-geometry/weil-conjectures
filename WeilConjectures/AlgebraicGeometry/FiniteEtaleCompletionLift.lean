@@ -20,7 +20,9 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 /-!
 # Lifting to the adic completion
 
-Source: Stacks Project, Tag 0GS2, proof.
+## References
+
+* Stacks Project, Tag 0GS2
 -/
 
 @[expose] public section
@@ -31,19 +33,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Lift a closed-fibre finite étale cover to the base change over the adic completion.
-Source: Stacks Project, Tag 0GS2, proof, lines 1815–1820.
-
-Proof: Let B be the I-adic completion and J the extension of I to B. Since A is
-Noetherian, I is finitely generated. B is Noetherian and J-adically complete, and
-B/J is canonically A/I, compatibly with the maps from A. Properness is stable under
-base change. Pasting the base-change square with Spec(B/J) identifies the closed
-fibre of Y_B with Y_0. Transport V along that isomorphism and apply the complete
-Noetherian lifting theorem to Y_B over B. Pull back the resulting finite étale cover
-along the identification of closed fibres. The resulting morphism j is induced by
-B → A/I; the two projection identities follow from the pullback construction. The
-isomorphism over Y_0 follows from the lifted closed-fibre isomorphism and pasting.
-The argument also applies when I is the unit ideal: both closed fibres are empty. -/
+/-- Lift a closed-fibre finite étale cover to the base change over the adic completion
+(Stacks, Tag 0GS2). -/
 theorem exists_finiteEtale_completion_lift
     {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f]

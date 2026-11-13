@@ -184,26 +184,8 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
 
 end NativeUnit
 
-/-- The coefficient pullback comparison commutes with the exact pullback counit.
-
-Source: Stacks 07A6, 06YY; integral proper-base-change proof (1), (3),
-the restricted regular coefficient in the scalar tensor-model normalization.
-
-Proof. Express scalarTensorRegularRestriction as the exact restriction functor's
-singleFunctor comparison. Expand scalarTensorRegularPullIso, replacing each exact
-left-derived pullback by its mapDerivedCategory comparison. Naturality cancels
-the Y restriction/single comparison and the exact restriction/pullback square.
-The composition and natural-isomorphism identities for mapDerivedCategory on
-single objects leave the singleFunctor comparison for ordinary pullback,
-followed by the single image of restriction of the inverse ordinary unit.
-This is residueOrdinaryRestrictedRegularPullIso: the native and transported
-inverse units agree by expanding the scalar-extension transport, mapping the
-identity of the regular module, and applying map_id. Thus the coefficient
-comparison is F.singleFunctorCompLeftDerivedFunctorIso followed by single.mapIso e.
-Apply Functor.tensorModelCoefficientIso_counit to F and e. This gives exactly
-the displayed equality. The calculation uses only the regular coefficient
-object, exact pullback and restriction; it involves no arbitrary homotopy
-complex, scalar base-change comparison, or tensor presentation. -/
+/-- The coefficient pullback comparison commutes with the exact pullback counit
+(Stacks, Tags 07A6 and 06YY). -/
 theorem scalar_regular_pull_counit (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let F := CondensedRing.upperStar Λ f

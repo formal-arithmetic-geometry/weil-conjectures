@@ -16,10 +16,9 @@ import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 
 /-! # Generic local finite presentation
 
-Source: Stacks Project, Tags 051T and 052A. The torsion-cover and affine-cover
-constructions follow the proved helpers of `WeilConjectures.RingTheory.GenericFlatness` and
-`WeilConjectures.AlgebraicGeometry.GenericFlatness`; here the localized isomorphism also
-transports finite presentation.
+## References
+
+* Stacks, Tags 051T and 052A
 -/
 
 @[expose] public section
@@ -162,21 +161,7 @@ private theorem exists_nonempty_open_finitePresentation_restrict_affine_base {X 
 
 
 /-- A finite type quasi-compact morphism over an integral scheme is locally of finite
-presentation after restriction to a nonempty open.
-
-Source: Stacks Project, Tag 052A, finite-presentation part of the generic-flatness
-argument. Proof: choose a nonempty affine open Spec A of the base and finitely
-many affine charts Spec B_i covering its inverse image. Present each B_i as
-A[t]/I. The relation ideal over Frac(A) is finitely generated; clearing denominators
-lifts its generators to I. Quotienting by these finitely many lifted relations
-gives a finitely presented algebra C_i surjecting onto B_i with A-torsion kernel.
-Generic flatness of C_i gives a nonzero a_i for which (C_i)_{a_i} is flat, hence
-torsion free, over A_{a_i}. Thus its torsion kernel vanishes and it equals
-(B_i)_{a_i}, which is therefore finitely presented over A_{a_i}. Intersect these
-finitely many nonempty basic opens. They all contain the generic point, and local
-finite presentation on the resulting chart cover implies it for the restricted
-map. If the inverse image is empty, the empty intersection is the whole base
-chart and source locality is vacuous. Transport the open back into S. -/
+presentation after restriction to a nonempty open (Stacks, Tag 052A). -/
 theorem exists_nonempty_open_locallyOfFinitePresentation_restrict {X S : Scheme.{u}}
     [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧

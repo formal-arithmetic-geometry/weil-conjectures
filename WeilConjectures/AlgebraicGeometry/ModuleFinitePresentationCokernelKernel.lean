@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
 
 /-! # Finite type of relations for a cokernel
 
-Source: Stacks Project, Modules, Lemma 0H96.
+## References
+
+* [Stacks, Tag 0H96](https://stacks.math.columbia.edu/tag/0H96)
 -/
 
 @[expose] public section
@@ -167,18 +169,9 @@ set_option maxHeartbeats 700000 in
 -- Transport through the slice-site equivalence expands several nested module functors.
 set_option synthInstance.maxHeartbeats 200000 in
 set_option backward.isDefEq.respectTransparency false in
-/-- The relations of the quotient presentation are of finite type.
-Source: Stacks Project, Modules, Lemma 0H96, proof, lines 1440-1454.
-
-Proof: Set c = cokernel.π f and π = P.generators.π on U. The kernel of π is
-finite type since P has finitely many relations and their map onto that kernel is epi.
-The image of f restricted to U is finite type, since restriction preserves finite type
-and finite type passes to epi images. Set N = kernel (π ≫ c|U). The restriction of π
-maps N onto image(f|U): lift sections locally through the epi π; their lifts belong to N
-because c kills them. Its kernel is kernel π, computed sectionwise. This gives a short
-exact sequence from kernel π to N to image(f|U). The finite-type extension theorem gives
-the result. This argument also applies when either finite generating family is empty.
--/
+/-- The relations of the quotient presentation are of finite type: the kernel of the
+composite of the generators map of `P` with `cokernel.π f` is of finite type
+(Stacks, Tag 0H96). -/
 theorem kernel_composite_cokernel_isFiniteType
     (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
     {G H : SheafOfModules.{u} (moduleRings X)} (f : G ⟶ H) [G.IsFiniteType]

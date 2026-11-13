@@ -13,7 +13,6 @@ public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 The finite constant-sheaf identifications and the adjunction-mate calculation for a
 single continuous finite quotient. This calculation is independent of the integral
 limit and of its ring-compatible comparison.
-.
 -/
 
 @[expose] public noncomputable section

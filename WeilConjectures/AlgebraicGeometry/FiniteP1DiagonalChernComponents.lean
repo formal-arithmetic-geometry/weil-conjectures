@@ -32,7 +32,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
   projectiveLineTraceTransport
 
-/-- The short relative-Cartier proof used by diagonalImmersion_cartier. -/
+/-- The diagonal ideal of the projective line over `S` is invertible. -/
 private theorem finiteP1_diagonal_cartier (S : Scheme.{u}) :
     (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible := by
   let d := pullback.diagonal (ProjectiveLine S ↘ S)
@@ -49,15 +49,7 @@ private theorem finiteP1_diagonal_cartier (S : Scheme.{u}) :
   exact Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat p
     (J := d.ker) inferInstance inferInstance inferInstance
 
-/-- The Cartier diagonal has a supported Kummer boundary and its two Chern components.
-
-Proof: the short relative-Cartier argument of diagonalImmersion_cartier proves the
-diagonal ideal invertible over any base
-using the relative Cartier criterion for a section of the smooth projective-line
-projection. supported_cartier_boundary_existsUnique gives its actual uniquely
-normalized supported boundary. Apply ordinaryFiniteP1_diagonal_kummer_component_formula
-to this boundary and the supplied relative hyperplane class. This gives the two
-components before any splitting or trace is chosen. -/
+/-- The Cartier diagonal has a supported Kummer boundary and its two Chern components. -/
 theorem ordinaryFiniteP1_diagonal_chern_components (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

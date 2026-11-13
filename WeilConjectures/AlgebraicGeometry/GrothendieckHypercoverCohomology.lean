@@ -20,8 +20,9 @@ The indexing category keeps actual finite split hypercovers and quotients their
 refinements by simplicial homotopy. Geometric refinement makes its opposite
 filtered. The cohomology object is a colimit of the alternating cochain cohomologies.
 
-Source:, hypercover construction;
-Stacks Project, Hypercoverings, Tag 01H0.
+## References
+
+* Stacks Project, Hypercoverings, Tag 01H0.
 -/
 
 @[expose] public section
@@ -182,8 +183,8 @@ noncomputable def hypercoverCohomology (F : Sheaf X.smallEtaleTopology A) (q : �
   colimit (homotopyCohomologyDiagram A F q)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Any functor satisfying the existing hypercover universal property computes this
-concrete colimit. The proof uses only the universal property of a colimit. -/
+/-- Any functor satisfying the hypercover universal property computes this
+concrete colimit. -/
 theorem nonempty_hypercoverCohomology_iso
     (q : ℕ) (H : Sheaf X.smallEtaleTopology A ⥤ A)
     (hH : IsCohomologyColimit A q H) (F : Sheaf X.smallEtaleTopology A) :

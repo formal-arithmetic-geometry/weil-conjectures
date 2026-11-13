@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Pseudo-coherence is preserved by direct summands
 
-Source: literature/stacks-project/cohomology.tex, Tag 08CE.
+## References
+
+* [Stacks, Tag 08CE] (Cohomology of Sheaves), [Stacks, Tag 064X] (More on Algebra)
 -/
 
 @[expose] public section
@@ -106,26 +108,7 @@ private theorem summand_affine_finiteFree_model (S : Scheme.{u}) (U : S.Opens)
 
 
 /-- If a pseudo-coherent object of `D(𝒪_X)` is isomorphic to a binary biproduct,
-both summands are pseudo-coherent. Source: Stacks Project, Cohomology of Sheaves,
-Tag 08CE, with More on Algebra, Tag 064X.
-
-Proof:
-1. At each point choose the bounded-above finite-free witness from
-   `def-pur-pseudo-coherent-complex` and refine its neighbourhood to an affine open V.
-   Exact restriction preserves zero terms and finite-free terms. Its derived
-   factorization and composition comparisons transport the representing isomorphism.
-2. Lift the finite-free terms and their differentials through the fully faithful
-   affine sheafification functor. Explicit finite bases and preimages of the matrix
-   differentials construct a bounded-above finite-free module complex A.
-3. Restrict the given biproduct decomposition and apply
-   `lem-pc-affine-derived-summand-models`: the summands have module preimages C and D
-   with Q(A) ≅ C ⊞ D. The explicit model A witnesses ring pseudo-coherence of C ⊞ D.
-   Apply the last clause of `lem-pc-ring-pseudo-coherent-summand` to C and D.
-4. Sheafify their bounded-above finite-free representatives, using the comparison
-   with derived sheafification and the preimage isomorphisms. The resulting local
-   models, one for each summand at every point, witness pseudo-coherence on X.
-   This includes the empty scheme and either summand being zero.
--/
+both summands are pseudo-coherent. (Stacks, Tags 08CE, 064X) -/
 theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

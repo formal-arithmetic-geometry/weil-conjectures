@@ -33,6 +33,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 This is the prime-coefficient part of Stacks Project, Tag 0GKW.  It is separated
 from the finite-module dévissage so that the characteristic-p argument is explicit.
+
+## References
+
+* [Stacks, Tag 0GKV], [Stacks, Tag 0GKW]
 -/
 
 @[expose] public section
@@ -250,22 +254,7 @@ private theorem dimension_one_prime_homology_constructible
         (IsPullback.of_hasPullback f i) M q).symm
 
 /-- Prime coefficients for proper smooth geometrically connected relative curves.
-
-Source: Stacks Project, more-etale.tex, Tags 0GKV and 0GKW.
-
-Proof: use the clopen dimension-zero/dimension-one decomposition.  On the
-dimension-zero locus, proper plus quasi-finite is finite and finite direct image
-is exact.  On the dimension-one locus split the base into the open where `p` is
-invertible and the closed characteristic-`p` locus.  The open part is the
-prime-coefficient theorem `properSmoothCurves_prime_higherDirectImage_constructible`.
-On the closed part, proper base change, Artin--Schreier, and the Frobenius-fixed
-sections sequence reduce the assertion to the kernel of Frobenius minus identity
-on the finite locally free degree-one structure-cohomology bundle.  The
-Frobenius-linear vector-bundle constructibility theorem, finite geometric stalks,
-and the module/abelian comparison finish that branch.  The two restrictions are
-identified by exact pullback and proper base change, and the finite stratifications
-are glued.
--/
+(Stacks, Tags 0GKV, 0GKW) -/
 theorem properSmoothCurves_prime_higherDirectImage_constructible_all_char
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

@@ -11,9 +11,12 @@ import WeilConjectures.AlgebraicGeometry.KoszulCechLocalizedBoundary
 
 /-! # The differential identity for signed localized Koszul evaluation
 
-Source: Stacks Project, Tags 08D0 and 08D1.
 The degree maps are constructed using the inverse of scalar multiplication on principal
 opens. Only their compatibility with adjacent differentials remains to be proved.
+
+## References
+
+* Stacks Project, Tags 08D0 and 08D1.
 -/
 
 @[expose] public section
@@ -32,25 +35,7 @@ variable (F : CochainComplex
   (SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
 
 /-- The explicit localized degree maps commute with adjacent differentials when B
-is the ordered exterior basis transported into the extended Koszul tail.
-Source: Stacks Project, Tags 08D0 and 08D1.
-Proof: In degree n and at a nonempty subset J, put p=card(J)-1 and q=n-p.
-The Hom differential is postcomposition by d_F plus (-1)^n precomposition by the
-positive Koszul boundary, since the tail uses the negative boundary. On the ordered
-wedge, that boundary is the sum over deleting a generator, with coefficient
-(-1)^position f_j^(e+1). After restriction to D(product f_j), division by the full
-product to power e+1 cancels f_j^(e+1) and leaves the denominator of J.erase j.
-Restrictions compose and commute with d_F; inverses to scalar multiplication
-commute with these A-linear maps. The singleton case has no incoming horizontal
-term, since the tail has no augmentation term in positive cohomological degree.
-For S(p,n)=p*(n-p)+p*(p-1)/2, one has S(p,n+1)=S(p,n)+p, and
-S(p,n+1)+n-S(p-1,n) is even. These identities give the vertical sign (-1)^p and
-the horizontal alternating signs of principalCechDifferentialValue, respectively.
-Use the increasing enumeration of J to match the deletion positions with the
-number of elements less than j, and use the increasing enumeration of J.erase j
-for the remaining ordered wedge. Equality of all subset components proves the
-linear-map identity. No quasi-coherence is used. For r=0 there are no components;
-if a product is zero or nilpotent, its principal open is empty and sections are zero. -/
+is the ordered exterior basis transported into the extended Koszul tail. -/
 theorem koszulCechLocalizedDegreeMap_comm (e : ℕ)
     (B : ∀ J : {J : Finset (Fin r) // J.Nonempty},
       ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).X

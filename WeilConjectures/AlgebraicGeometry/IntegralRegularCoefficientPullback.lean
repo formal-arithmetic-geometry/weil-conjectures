@@ -163,21 +163,8 @@ private theorem coefficient_conjugation_naturality (ℓ : ℕ) [Fact ℓ.Prime]
     (continuousFunctionPushforward f (continuousIntegers ℓ E)) _ _
     (continuousChart_scheme_naturality f (continuousIntegers ℓ E)) hp
 
-/-- Continuous regular coefficients commute with the specified coefficient pullback.
-
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization, and its
-canonical inverse-image comparison.
-
-Proof: the underlying regular-module pullback is conjugation of the inverse image
-of p by the coefficient pullback isomorphism. Naturality of the inverse-image
-adjunction unit consequently commutes p with the canonical coefficient direct-image
-map. The continuous chart's scheme naturality square transports this equality to
-an equality of conjugated continuous-sheaf endomorphisms. Evaluate that square at
-the global unit section over X. Its pullback is the unit section over the pullback
-of the final site object. Naturality of the endomorphism on Y identifies its unit
-value there with restriction of its global unit value. Finally evaluate at the
-canonical section Y→X×_X Y: its two projections give f(y) and y. This is exactly
-the asserted identity. No rational cokernel or matrix hypothesis is involved. -/
+/-- Continuous regular coefficients commute with the specified coefficient pullback
+(Bhatt–Scholze, Section 6.8). -/
 theorem integralRegularCoefficient_pullback (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : Y ⟶ X)

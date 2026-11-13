@@ -18,7 +18,11 @@ import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Cohomology reductions: KernelBound
-Source: Stacks Project, Lemma 02OB. -/
+
+## References
+
+* [Stacks, Tag 02OB](https://stacks.math.columbia.edu/tag/02OB)
+-/
 
 @[expose] public section
 
@@ -28,17 +32,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Proof: form the short exact sequence 0 -> J^n F -> F -> F/J^n F -> 0,
-where J is the extended ideal. The category of scheme modules has enough injectives;
-the cohomological delta-functor identifies the kernel of reduction with the image of
-H^p(J^n F) -> H^p(F). Apply cohomology_powers_ideal_image_bound in degree p
-with target exponent zero. It bounds the image in H^p(J^0 F) by I^(n-c) times
-that module for n >= c. The transition factorization identifies the inclusion
-into F with the transition to J^0 F followed by its inclusion into F. Mapping
-this bound along the latter A-linear map gives I^(n-c) H^p(F).
-Restriction of scalars preserves exactness. Only the image estimate is used.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OB,
-part (1). -/
+/-- For a proper scheme over a Noetherian ring, the kernel of the cohomology reduction map
+to the quotient by `I^n F` is contained in `I^(n - c)` times the cohomology of `F`, for
+`n ≥ c`. (Stacks, Tag 02OB) -/
 theorem ml_cohomology_powers_ideal_kernel_bound
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f]

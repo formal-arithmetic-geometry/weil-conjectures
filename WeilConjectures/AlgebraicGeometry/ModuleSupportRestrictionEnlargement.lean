@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Restricting a supported section and enlarging its support
 
-Source: Stacks Project, Modules, proof of Tag 01BB, first paragraph, and Tag 01AH (2).
+## References
+
+* Stacks Project, Modules, proof of Tag 01BB, and Tag 01AH (2).
 -/
 
 @[expose] public section
@@ -26,26 +28,7 @@ set_option maxHeartbeats 600000 in
 -- Comparing iterated and direct restriction unfolds module pushforward functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- An existing one-section factorization stays a factorization after further
-restriction and inclusion into a larger finite support.
-
-Source: Stacks Project, Modules, proof of Tag 01BB, first paragraph, and Tag 01AH (2).
-
-Proof: Let inc: S -> T send j to the same basis index, using hST. The composite
-of freeMap inc and freeMap (T -> I) is freeMap (S -> I): precompose with every
-basis inclusion and apply iotaFree_freeMap twice, then use coproduct extensionality.
-Apply the functor overMap(Z -> W) to ha and expand its map of a composite. On
-an open contained in Z, first restricting through W, U or V evaluates the same
-original sheaf at that open. Thus the iterated overMap maps are the direct ones;
-the proof terms witnessing the inclusions are irrelevant because hom sets of
-opens are subsingletons. The restriction of the unit over W is the unit over Z,
-as in overMapUnitIso, whose components are identities. This identifies the
-restricted equality with the direct map overMap(Z -> U).map b. Finally apply
-map_comp to the basis-inclusion composite and associativity to the lifted map.
-These equalities give exactly the displayed equality, with the explicitly typed
-source obtained by restricting the unit over U. No neighbourhood or support is
-chosen here. If S or T is empty, the same coproduct calculations are vacuous;
-S subset T is the only condition on the supports. The arbitrary sheaf of rings
-R is permitted because only functorial restriction and unit/coproduct maps enter. -/
+restriction and inclusion into a larger finite support. -/
 theorem enlarge_restricted_unit_support
     (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (V U W Z : X.Opens) (hUV : U ≤ V) (hWU : W ≤ U) (hZU : Z ≤ U) (hZW : Z ≤ W)

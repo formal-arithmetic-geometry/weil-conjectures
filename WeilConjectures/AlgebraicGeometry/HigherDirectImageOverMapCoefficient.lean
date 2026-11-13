@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverCoeffici
 
 /-! # The over-W transition as a single mapped coefficient composite
 
-Source: Stacks Project, Tags 03Q8 and 09Z1, canonical transition maps.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1.
 -/
 
 @[expose] public section
@@ -183,8 +185,7 @@ private meta def coefficientStructuralExact
     goal.assign (← toEq hh)
 
 
-/-- Functoriality expands the mapped composite into the two mapped factors.
-Source: Tags 03Q8 and 09Z1. -/
+/-- Functoriality expands the mapped composite into the two mapped factors. -/
 theorem higherDirectImageOverMap_coefficient_factorization
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -207,8 +208,7 @@ theorem higherDirectImageOverMap_coefficient_factorization
         (higherDirectImageRawOverCoefficient Λ G f)) := by
   exact Functor.map_comp _ _ _
 
-/-- Endpoint coherence identifies the factorized morphism with the canonical over-map.
-Source: Tags 03Q8 and 09Z1. -/
+/-- Endpoint coherence identifies the factorized morphism with the canonical over-map. -/
 theorem higherDirectImageOverMap_coefficient_endpoint
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -245,22 +245,8 @@ theorem higherDirectImageOverMap_coefficient_endpoint
       let proof ← Lean.Meta.zetaReduce proof
       coefficientStructuralExact proof
 
-/-- Identify the homology map of the combined derived coefficient morphism with
- the canonical transition for coefficients restricted from W.
-Source: Stacks Project, Tags 03Q8 and 09Z1, the canonical transition construction.
-
-Proof: Let B₀=(B^*G)[0], A₀=(A^*G)[0], and M₀=(f^*B^*G)[0]. Write
-s:f^*B₀→M₀ for the single-complex comparison and c:M₀→A₀ for the image under
-the single functor of the inverse-image composition identification. Let R be the
-derived direct image along A→S, H degree-q homology, and l the derived triangle
-transition from the direct image of B₀ to R(f^*B₀). The left side is H(l ≫ R(s ≫ c)).
-Functoriality of R gives R(s ≫ c)=R(s) ≫ R(c). Associativity gives
-l ≫ R(s ≫ c)=(l ≫ R(s)) ≫ R(c). Functoriality of H gives
-H(l ≫ R(s ≫ c))=H(l ≫ R(s)) ≫ H(R(c)). The first factor is exactly
-higherDirectImageTransition by its definition; composing it with the second
-factor is exactly higherDirectImageOverMap by its definition. This argument
-is purely functorial and holds for every integer q, zero sheaves and identity
-arrows, without geometric finiteness assumptions. No object is chosen. -/
+/-- The homology map of the combined derived coefficient morphism is the canonical transition
+for coefficients restricted from `W`. -/
 theorem higherDirectImageOverMap_coefficient
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

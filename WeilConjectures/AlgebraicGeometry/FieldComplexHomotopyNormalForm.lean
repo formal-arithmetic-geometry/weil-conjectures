@@ -85,17 +85,9 @@ private theorem nonempty_iso_free_of_field_rank
     inferInstanceAs (IsIso (Spec R).topIso.hom)
   exact ⟨isoFreeOfRestrictIso M _ ej.some⟩
 
-/-- Field-complex splitting into the sole finite locally free cohomology.
-
-Proof: Combine negative and nonnegative vanishing to obtain vanishing in all
-integer degrees other than i. Contract the complex onto H^i(P) using
-homotopyEquiv_single_cohomology_of_field. The rank-r locally free trivializing
-cover of H^i(P) has a member containing the unique point of Spec R. That open is
-top, so its inclusion is an isomorphism; isoFreeOfRestrictIso identifies H^i(P)
-with the free sheaf of rank r. Apply the single functor to this isomorphism and
-compose its homotopy equivalence with the contraction. The negative-degree
-hypothesis is essential, as the retained counterexample to the old signature
-shows; neither boundedness nor a positive rank is needed. -/
+/-- A complex of module sheaves on a field spectrum whose cohomology vanishes outside degree
+`i`, where it is finite locally free, is homotopy equivalent to the single complex on a free
+sheaf of that rank. -/
 theorem homotopyEquiv_of_single_field_homology
     {R : CommRingCat.{u}} (hR : IsField R)
     (P : CochainComplex (Spec R).Modules ℤ)

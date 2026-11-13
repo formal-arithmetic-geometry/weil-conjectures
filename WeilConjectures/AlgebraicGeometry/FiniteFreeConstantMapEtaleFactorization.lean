@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-! # Finite free stalk lifts on an étale neighbourhood
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), finite generator lifting. -/
+
+## References
+
+Stacks Project, Tag 09BH, Proposition 59.74.1 (3). -/
 
 @[expose] public section
 
@@ -24,14 +27,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A finite free stalk map is represented by sections on one pointed neighbourhood.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), finite generator lifting.
-
-Proof: Identify the stalk of the constant sheaf with its constant value. Represent the
-images of the finitely many standard basis vectors under l by sections on pointed etale
-neighbourhoods. Cofilteredness gives a common refinement. The finite free universal
-property assembles their restrictions into t. The germ of each basis image is the
-prescribed one, hence the displayed equality holds by linearity. For n = 0 the identity
-neighbourhood and zero map suffice; the zero coefficient ring causes no exception. -/
+(Stacks, Tag 09BH.) -/
 private theorem exists_finite_free_stalk_sections
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -101,13 +97,7 @@ private theorem exists_finite_free_stalk_sections
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Equality of germs of maps from a finite free module is witnessed on one refinement.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), equality after refinement.
-
-Proof: Evaluate the germ equality on the finitely many standard basis vectors. Equality
-in the filtered colimit defining the stalk gives a pointed refinement for each vector.
-Cofilteredness gives a common refinement over V on which all these equalities hold.
-Equality on the basis implies equality of the two linear maps. For rank zero the maps
-are already equal and the identity refinement suffices. No finiteness of H is needed. -/
+(Stacks, Tag 09BH.) -/
 private theorem exists_finite_free_section_germ_equality
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -151,17 +141,7 @@ private theorem exists_finite_free_section_germ_equality
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A compatible section map assembles into a factorization on the same etale object.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), assembly of lifted generators;
-constant-sheaf adjunction, Stacks Project, Example 0H7J.
-
-Proof: Pass to the site over V, whose terminal object is the identity of V. The
-constant-sheaf/global-sections adjunction turns t into a map from the constant sheaf
-to F.over V. The displayed equality says that composing this map with phi.over V
-agrees with alpha.over V, by injectivity of that adjunction's hom equivalence.
-Transport through the equivalence between sheaves on the over site and sheaves on
-V.left. The pullback comparison for constant sheaves identifies the source with the
-pullback of the original constant sheaf. Naturality gives exactly the conclusion.
-This works for empty V, rank zero, and the zero ring; it uses no stalk hypothesis. -/
+(Stacks, Tag 09BH; constant-sheaf adjunction, Tag 0H7J.) -/
 private theorem exists_finite_free_section_factorization
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -232,22 +212,7 @@ private theorem exists_finite_free_section_factorization
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The finite free étale-local lifting step used by the open factorization theorem.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), finite generator lifting.
-
-Proof: If n = 0, take the identity etale neighbourhood and the unique zero map.
-For n > 0, write the standard basis of Λ^(Fin n).  The definition of the geometric
-stalk is a filtered colimit over pointed etale neighbourhoods, so each image under l
-is represented by a section of F on one such neighbourhood.  Cofilteredness of pointed
-etale neighbourhoods gives one common refinement for the finitely many representatives.
-The equality hl says that the two resulting germs in G agree.  Equality in the same
-filtered colimit therefore gives a further common refinement on which the equalities
-hold as sections.  The finite free universal property assembles these sections into a
-Λ-linear map from Λ^(Fin n) to sections of F on that neighbourhood.  The
-constant-sheaf/global-sections adjunction, together with the pullback comparison for
-the constant sheaf, turns this linear map into β.  Checking on the standard basis gives
-β ≫ upperStar(V.hom).map φ = upperStar(V.hom).map α.  The chosen pointed neighbourhood
-contains x, so x lies in the range of V.hom.  This argument uses no monicity of φ and
-works for the zero ring as well. -/
+(Stacks, Tag 09BH.) -/
 theorem exists_etale_factorization_of_finite_free_constant_map
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

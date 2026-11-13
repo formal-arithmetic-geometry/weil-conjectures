@@ -12,9 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 /-! # Canonical transition maps for higher direct images
 
-These are the unchanged definitions moved from the source Transition module to
-allow its continuity proof to import independent coherence and affine-continuity lemmas.
-Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8.
 -/
 
 @[expose] public section
@@ -58,13 +58,11 @@ noncomputable def Etale.higherDirectImageTransition (a : Y' ⟶ Y) (h : Y ⟶ X)
       R+((h')_*[ModuleCat.{u + 1} Λ]).map
         ((((a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F))
 
-/-- The transition map of higher direct images along a morphism `φ: U ⟶ V` of schemes over
+/-- The transition map of higher direct images along a morphism `φ : U ⟶ V` of schemes over
 `W`, for the sheaves pulled back from a fixed sheaf `G` on `W` and the structure morphisms
-composed with `k: W ⟶ S`:
-`R^q (V → S)_* (G|_V) ⟶ R^q (U → S)_* (G|_U)`. It is
+composed with `k : W ⟶ S`: `R^q (V → S)_* (G|_V) ⟶ R^q (U → S)_* (G|_U)`. It is
 `AlgebraicGeometry.Etale.higherDirectImageTransition` followed by the identification
-`φ^*(G|_V) ≅ G|_U`.
--/
+`φ^*(G|_V) ≅ G|_U`. -/
 noncomputable def Etale.higherDirectImageOverMap {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {U V : Over W}
     (φ : U ⟶ V) :

@@ -18,7 +18,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Projective cohomology finiteness over an affine base
 
-Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
+## References
+
+* Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
 -/
 
 @[expose] public section
@@ -111,21 +113,8 @@ private theorem finite_of_exact_segment {R M L Q : Type*} [CommRing R]
     apply Subtype.ext
     exact (h x).mpr hx
 
-/-- Finiteness for an explicit projective model over an arbitrary affine Noetherian scheme.
-
-Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3), and Tag 01Y6, Lemma 30.9.9.
-
-Proof: identify T with Spec Gamma(T,O) by its affine canonical isomorphism, and base
-change the specified embedding along this isomorphism. Closed pushforward of F is
-quasi-coherent and finitely presented on the Noetherian projective space, and has the
-same cohomology. On projective space, the standard coordinate affine cover bounds the
-cohomological degree. Descending induction on degree, simultaneously for all coherent
-modules, uses a surjection from a finite sum of twists with coherent kernel. The twists
-have finite cohomology by the explicit standard-cover calculation; the long exact
-sequence and Noetherian submodule finiteness give finiteness for F. All comparisons
-are natural under multiplication by sections of T, hence linear for the displayed
-restriction-of-scalars action. If N is empty, Y is empty and all groups are zero.
-No use is made of proper coherence. -/
+/-- Finiteness for an explicit projective model over an arbitrary affine Noetherian scheme
+(Stacks, Tags 01YS, 01Y6). -/
 theorem finite_H_projective_affine_independent
     {Y T : Scheme.{u}} [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (N : Type u) [Finite N] (j : Y ⟶ ℙ(N; T)) [IsClosedImmersion j]

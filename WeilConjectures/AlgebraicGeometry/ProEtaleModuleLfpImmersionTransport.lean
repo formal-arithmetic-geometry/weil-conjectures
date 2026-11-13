@@ -22,23 +22,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Local finite presentation on an immersed stratum pulls back along maps into its image.
-Source: Bhatt--Scholze, Lemma 5.4.2 (topological invariance) and Definition 6.8.10;
-Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), restriction to stratum interiors.
-
-Proof: form V = U ×_T Z. Pull the given local finite presentations on Z back to V.
-The projection V → U is a surjective immersion, hence a surjective closed immersion:
-its image is all of U, so the open part of its locally closed factorization is all of U.
-It is a universal homeomorphism. Topological invariance, computed on the affine
-ind-etale basis, transports covering presentations from V to U. Under the induced
-monoidal equivalence, the pulled
-back coefficient ring and module identify with the restrictions of R and M to U.
-Finite sums of the regular module and cokernels are preserved and reflected, so the
-presentations on the covering of V give presentations on the corresponding covering of U.
-Pullback composition and the cartesian square identify these with g^*M. Empty schemes
-use empty covering families and zero-rank presentations, so require no surjectivity
-witness beyond the stated image containment. The coefficient ring is arbitrary; no
-scheme-theoretic factorization of g through i is asserted. -/
+/-- Local finite presentation on an immersed stratum pulls back along maps into its image
+(Bhatt--Scholze, Lemma 5.4.2 and Definition 6.8.10). -/
 theorem localFinitePresentation_upperStar_of_range_subset
     {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsImmersion i] (g : U ⟶ T)
     (hgi : Set.range g ⊆ Set.range i)

@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import WeilConjectures.AlgebraicGeometry.OpenExtensionProjectionFormula
 
 /-! # Invertibility of the mixed-universe open-restriction evaluation mate
-Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
+
+## References
+
+* Stacks Project, Tags 08DJ, 08DL, 08BS and 01AK.
 -/
 
 @[expose] public section
@@ -29,8 +32,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Use the standard localization on the open scheme.
-Source: Stacks Project, Tag 05RU. -/
+/-- Use the standard localization on the open scheme. (Stacks, Tag 05RU) -/
 local instance openRestrictionMateStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -102,35 +104,7 @@ set_option maxHeartbeats 1000000 in
 -- The canonical-family predicate unfolds the recorded sheaf tensor instances.
 set_option linter.style.haveILetI false in
 /-- The mate of restricted evaluation is invertible for any strong monoidal
-structure on the exact restriction functor, with independently specified localizations.
-
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL;
-Tag 08BS and modules.tex, Tag 01AK, for exact extension by zero.
-
-Proof: let J be exact derived extension by zero, transported from the over-site
-along its equivalence with modules on U.toScheme. Localization of the ordinary
-adjunction gives J left adjoint to R, with invertible unit. Its essential image
-consists of complexes whose cohomology stalks outside U vanish. Restriction
-reflects isomorphisms between such objects, since all other stalks vanish.
-For any A on U and K on X, J(A) tensor K is supported on U: compute the tensor
-on K-flat representatives and use the acyclic outside stalks. The adjoint of
-(unit_A tensor identity); μ_R(J(A),K) is an isomorphism
-J(A tensor R(K)) -> J(A) tensor K. Indeed both objects are supported on U,
-and its restriction is identified by the adjunction identities with a composite
-of the invertible unit and the invertible tensorator. Thus it is invertible.
-For any test object A, use the adjunction, the canonical tensor-Hom bijection
-on X, this projection isomorphism, and the adjunction on the tensor target.
-Their composite is a bijection from Hom(A,R(H(K,N))) to
-Hom(A tensor R(K),R(N)). Naturality of the tensorator and tensor-Hom bijection
-identifies it with f mapped to (f tensor identity); μ_R(H(K,N),K);
-R(e_X(identity)). Currying on U identifies this bijection with
-postcomposition by the displayed mate. This is bijective for every A, so
-Yoneda makes the mate invertible. The proof only uses naturality and
-invertibility of the tensorators, so it works for every monoidal structure m.
-All adjunctions and factorization isomorphisms are induced through the specified
-localizations independently; no common morphism universe is assumed.
-For the empty open all test objects are zero and the same bijections hold;
-zero K or N gives an isomorphism between zero internal-Hom objects. -/
+structure on the exact restriction functor, with independently specified localizations. -/
 theorem openRestriction_evaluationMate_isIso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

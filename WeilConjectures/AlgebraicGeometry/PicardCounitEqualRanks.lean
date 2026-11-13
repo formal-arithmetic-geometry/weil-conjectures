@@ -19,7 +19,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Equal local ranks turn a split counit into an isomorphism
 
-Source: Stacks Project, Tag 0BDP, final paragraph, the square dual-basis matrices.
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -70,19 +72,7 @@ private theorem isIso_of_splitMono_of_fixed_rank
 
 /-- A split inclusion of the two pulled-back bundles is invertible when their ranks
 agree on neighbourhoods in the base. Neither cup product nor an adjunction is needed.
-
-Source: Stacks Project, Tag 0BDP, final paragraph, equal-size dual-basis matrices.
-
-Proof: For each base point w choose U and r from hRanks. The canonical map
-X_U to X_W is the base change of the open immersion U to W. Pullback composition
-identifies the source restricted to X_U with p_U^*(N|_U), of rank r, and the target
-with E|_X_U, also of rank r. Pulling back the retraction preserves its identity.
-At each stalk we therefore have a split injection of finite free modules of rank r.
-Identify them by any basis isomorphism. The resulting split endomorphism of a finite
-free module over a commutative ring has its one-sided inverse on both sides; this
-follows from the square-matrix determinant identity. Thus every stalk map is bijective,
-and the restricted map is invertible. The X_U cover X_W, so pullback along this open
-cover reflects isomorphisms. Rank zero and empty schemes are included. -/
+(Stacks, Tag 0BDP) -/
 theorem isIso_of_isSplitMono_of_picard_local_ranks
     {X S W : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) (j : W ⟶ S) (N : W.Modules)
     (hRanks : ∀ w : W, ∃ U : W.Opens, w ∈ U ∧ ∃ r : ℕ,

@@ -67,23 +67,7 @@ private theorem matrix_eq_zero_of_rank_zero {E : Type} [Field E]
 
 /-- A point where the continuous matrix vanishes has a vanishing open neighborhood,
 after refining the supplied free rational-cokernel cover.
-
-Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1),
-and exact geometric-field evaluation (Example 4.1.10).
-
-Proof: choose the cover supplied by the hypothesis and a free basis of the rational
-cokernel on each member, of rank q. Pull the rational cokernel presentation and this
-basis to an algebraically closed residue field at each point. Exact final-object
-evaluation preserves cokernels and finite free objects and identifies the matrix
-coefficients with their point values. Thus the evaluated matrix rank is t-q at every
-point. If all integral entries vanish at one point, their field images vanish, the
-matrix rank is zero, and q=t. It follows that every entry vanishes at every point of
-that member. The canonical continuous realization is faithful on regular module
-endomorphisms (each is multiplication by its value at 1); finite biproduct
-extensionality therefore makes the pulled-back morphism zero. Its pullback to any
-open neighborhood is zero by functoriality and the composition comparison. Take the
-whole member as neighborhood. Empty members contribute no points; rank-zero source
-or target has zero matrix directly. -/
+(Bhatt--Scholze, Section 6.8 and Example 4.1.10) -/
 theorem integralMatrix_zero_neighborhood (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (n t : ℕ) (X : Scheme.{u})

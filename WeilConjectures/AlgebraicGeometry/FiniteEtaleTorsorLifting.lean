@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTorsorUnitActionUnique
 /-!
 # Finite étale equivalences and transport of torsors
 
-Source: Stacks Project Tag 0A5G, final paragraph, and Tag 03RV.
+## References
+
+* Stacks Project, Tags 0A5G and 03RV
 -/
 
 @[expose] public section
@@ -29,26 +31,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Every inverse-image-coefficient torsor lifts under a finite étale equivalence.
-Source: Stacks Project Tag 0A5G, final paragraph, using Tags 03RV and 03Q1.
-
-Proof: Identify the inverse image of the constant abelian sheaf M with the constant
-sheaf M on Y₀. Tag 03RV represents a torsor R by a finite étale surjective scheme W.
-Essential surjectivity lifts W to a finite étale scheme P over Y. Fullness lifts all
-M-action endomorphisms; faithfulness proves the zero, addition and inverse equations.
-The simple-transitivity map from the finite disjoint union of copies of P to P ×_Y P
-is a map between finite étale schemes. Its base change is an isomorphism, so the
-pullback equivalence reflects that it is an isomorphism. The image U of P → Y is open
-(étale maps are open) and closed (finite maps are closed). Its inclusion U → Y is
-finite étale. Its base change is an isomorphism because W → Y₀ is surjective; reflection
-of isomorphisms proves U = Y. Thus P is surjective and its representable sheaf with
-this action is a torsor T. For each m in M, the displayed equation says that the
-two translation maps on the inverse-image sheaf agree after the adjunction unit
-on every T(W). The
-adjunction bijection makes these maps equal. Sections of the constant coefficient
-sheaf are locally constant, so naturality and the sheaf condition imply agreement
-for all coefficient sections. The representative isomorphism downstairs is thus
-equivariant for τ T, hence τ T is isomorphic to R. This works on an
-empty base and for the trivial group, without assuming i surjective. -/
+(Stacks, Tag 0A5G, using Tags 03RV and 03Q1.) -/
 theorem finiteEtale_lifts_torsor_transport
     [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)

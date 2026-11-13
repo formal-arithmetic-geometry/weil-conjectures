@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Realizing equivariant germs on a one-point etale scheme
 
-Source: Stacks Project, Tags 04JM and 03QW.
+## References
+
+* Stacks Project, Tags 04JM and 03QW
 -/
 
 @[expose] public section
@@ -28,9 +30,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A separable embedding lands in the embedded separable closure, even if Ω is
-transcendental over K. The relative separable closure in Ω is another separable
-closure of K, and the specified embedding of Ks induces an isomorphism onto it.
-Source: Stacks Project, Tag 03QW, finite separable residue-field factorization. -/
+transcendental over K (Stacks, Tag 03QW). -/
 private theorem factor_separable_embedding
     (K Ks Ω L : Type u) [Field K] [Field Ks] [Field Ω] [Field L]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -53,9 +53,8 @@ private theorem factor_separable_embedding
   ext x
   exact congrArg Subtype.val (e.apply_symm_apply (σA x))
 
-/-- Conjugacy of separable embeddings, with the automorphism's restriction to Ks.
-Source: Stacks Project, Tag 03QW. Factor both embeddings through Ks, extend the
-isomorphism of their images by normality, and then extend to Ω. -/
+/-- Conjugacy of separable embeddings, with the automorphism's restriction to Ks
+(Stacks, Tag 03QW). -/
 private theorem separable_embeddings_conjugate
     (K Ks Ω L : Type u) [Field K] [Field Ks] [Field Ω] [Field L]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -86,10 +85,7 @@ private theorem separable_embeddings_conjugate
   change algebraMap Ks Ω (g (σs x)) = τ (algebraMap Ks Ω (σs x)) at hτx
   rw [← hσx, ← hτx, hgx, hσ'x]
 
-/-- Geometric lifts of a one-point etale scheme are conjugate.
-Source: Stacks Project, Tags 02GL and 03QW. The residue-field point is an
-isomorphism onto the reduced one-point scheme. Etaleness makes the residue
-extension separable. Apply conjugacy of its two embeddings into Ω. -/
+/-- Geometric lifts of a one-point etale scheme are conjugate (Stacks, Tags 02GL, 03QW). -/
 private theorem onePoint_lifts_transitive
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -166,9 +162,8 @@ private theorem onePoint_lifts_transitive
   rw [← hx x', ht', Category.assoc, hx x]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A chosen lift identifies a one-point etale scheme with a finite subfield of Ks.
-Source: Stacks Project, Tags 02GL and 03QW. The residue-field point is an isomorphism,
-and its finite separable field embeds in Ks through the chosen geometric lift. -/
+/-- A chosen lift identifies a one-point etale scheme with a finite subfield of Ks
+(Stacks, Tags 02GL, 03QW). -/
 private theorem onePoint_field_model
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -264,37 +259,10 @@ private theorem onePoint_field_model
   exact congrArg (fun f : L →ₐ[K] Ω ↦ Spec.map (CommRingCat.ofHom f.toRingHom)) hσs.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
-and Tag 03QW, section-galois-action-stalks.
-
-Proof: A nonempty one-point etale K-scheme is the spectrum of a finite separable
-extension of K: apply etale_fibre_discrete_separable_points to its fibre over the
-unique point of Spec K, identify that fibre with the original scheme, and use its
-unique open singleton. Choose a lift and embed its residue field as a finite
-intermediate field L of Ks. Let A be the subfield of Omega algebraic over K.
-It is algebraically closed: a root in Omega of a polynomial over A is algebraic
-also over K, hence lies in A. Every geometric lift on an etale K-scheme factors
-uniquely through Spec A, because its residue field is finite separable over K.
-These factorizations identify the pointed-neighbourhood categories, stalk colimits,
-and germ maps for A and Omega. Every K-automorphism of Ks extends to A, then to
-Omega: fix a transcendence basis over A and extend across the algebraic closure
-of the resulting rational-function field. Every stalk element has a representative,
-so the assumed germ formula identifies rho with the canonical Galois action from
-fieldSections_stalkInvariants, under this stalk identification.
-For g fixing L choose such an extension; it fixes the chosen lift. Covariance
-of f says its value there is invariant under L.fixingSubgroup. The surjectivity
-of the invariant-section bijection gives a section with that germ. Every other
-lift corresponds to an embedding L into Ks, which extends to a K-automorphism
-of Ks and then to Omega. Apply covariance of f and the germ formula to show
-that the same section has the prescribed germ at every lift. Transport the
-section back across the one-point scheme isomorphism. No gluing over distinct
-components is asserted or used in this lemma. -/
-/- Source: Stacks Project, Tag 04JM.
-The invariant-section reconstruction
-for the selected geometric lift of a one-point etale scheme.
-The proof chooses the finite separable residue field of the unique point, applies
-`fieldSections_stalkInvariants`, and transports the resulting invariant section
-across the pointed isomorphism. -/
+/-- The invariant-section reconstruction for the selected geometric lift of a one-point etale
+scheme: an equivariant family of germs is realized by a section whose germ at the selected
+lift is the prescribed one (Stacks, Tags 04JM, 03QW). -/
+/- Invariant-section reconstruction for the selected lift. -/
 theorem onePoint_selected_lift_section
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -423,20 +391,8 @@ theorem onePoint_selected_lift_section
   exact hw.trans ((he (etaleSpec K L) (lift L) zL).symm.trans
     ((congrArg e hzL).trans (e.apply_symm_apply (f x₀))))
 
-/-- Source: Stacks Project, Tags 02GL and 03QW.
-
-Proof: The residue-field point of the reduced one-point etale scheme X is an
-isomorphism; its residue field L is separable over K. The two lifts x₀ and x
-therefore give K-embeddings of L into Ω. Every separable embedding into Ω
-factors through the specified Ks: the embedding of Ks into the relative
-separable closure of K in Ω is an isomorphism between separable closures.
-Normality of Ks/K extends the isomorphism between the images of the two
-L-embeddings to g in Gal(Ks/K). Extend g to τ on Ω using
-exists_algEquiv_extending_separableClosure; this theorem handles transcendental
-Ω by a transcendence basis. Transport through the residue-field isomorphism
-to obtain x.left = Spec(τ) ≫ x₀.left. The germ-action hypothesis identifies
-the germ at x with ρ g applied to the germ at x₀. Substitute the given equality
-at x₀, then apply covariance of f to identify the result with f x. -/
+/-- If a section has the prescribed germ at one lift of a one-point etale scheme, it has the
+prescribed germ at every lift (Stacks, Tags 02GL, 03QW). -/
 theorem onePoint_propagate_from_selected_lift
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -472,7 +428,7 @@ theorem onePoint_propagate_from_selected_lift
     _ = ρ g (f x₀) := congrArg (ρ g) hz
     _ = f x := (hf g τ hτ x₀ x hx).symm
 
-/-- -/
+/-- An equivariant family of germs on a one-point etale scheme is realized by a section. -/
 theorem field_equivariant_germ_family_section_onePoint
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

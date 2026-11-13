@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageTransitionComp
 
 /-! # Affine computation for eventual vanishing of higher direct images
 
-Source: Stacks Project, Tags 09Z1, 03Q8 and 0EZM.
+## References
+
+* Stacks Project, Tags 09Z1, 03Q8 and 0EZM.
 -/
 
 @[expose] public section
@@ -24,28 +26,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- On an affine etale object, a section killed at the limit dies at a later stage.
-Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit; Tag 03Q8;
-Tag 0EZM.
-
-Proof: Use the natural cohomology-presheaf comparison of Tag 03Q8 at each stage
-and at the limit. Locally lift the section to cohomology representatives. Naturality
-for the derived adjunction unit and coefficient maps identifies the canonical maps
-with the displayed maps. Local injectivity of sheafification refines the cover so that the
-limit representatives are zero. Refine by affine etale objects. For each member W,
-base change the scheme cone along W -> S: its stages are qcqs since their structure
-morphisms to affine W are qcqs, its transitions remain affine, and its cone remains
-limiting. Exact inverse image preserves the coefficient colimit and degree-zero
-complexes. Apply complex cohomology continuity with lower bound zero. Injectivity
-of the colimit comparison and the filtered group colimit equality criterion kill
-each representative at a later stage, hence also its sheafification image.
-Quasi-compactness of the original affine object gives a finite subcover; directedness
-moves all these witnesses to one stage. Naturality restricts its image to zero on
-every member, and sheaf separatedness makes the section zero. For p = 0 use ordinary
-sections; on the empty affine object separatedness gives zero immediately.
-Only the cohomology-group colimit comparison on W is used; no colimit of higher images
-is needed.
--/
+/-- On an affine etale object, a section killed at the limit dies at a later stage
+(Stacks, Tags 09Z1, 03Q8 and 0EZM). -/
 theorem exists_higherDirectImage_affine_computation_eq_zero {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

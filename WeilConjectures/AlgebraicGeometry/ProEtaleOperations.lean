@@ -17,9 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Ordinary derived operations with identified pro-etale coefficients
 
-Source: Weil conjectures blueprint, proper base change, definition of derived operations;
-Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules, and Cohomology on Sites,
-Sections 07A5 and 0735.
+## References
+
+* Stacks Project, Modules on Sites, and Cohomology on Sites, Sections 07A5 and 0735.
 -/
 
 @[expose] public section
@@ -30,14 +30,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Modules over an arbitrary commutative coefficient sheaf on the original small site.
-Source: Stacks, Modules on Sites. -/
+/-- Modules over an arbitrary commutative coefficient sheaf on the original small site. -/
 abbrev proEtaleRingModules (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ringedSiteModules.{u + 1} ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
-/-- The standard localization at quasi-isomorphisms, with no completion or boundedness.
-Source: Stacks, Tag 05RU. -/
+/-- The standard localization at quasi-isomorphisms, with no completion or boundedness
+(Stacks, Tag 05RU). -/
 noncomputable instance proEtaleRingModules_hasDerivedCategory (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     HasDerivedCategory (proEtaleRingModules X R) :=
@@ -95,15 +94,13 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- The ring map adjoint to the fixed identification of inverse-image coefficients.
-Source: Stacks, lemma-adjoint-push-pull-modules. -/
+/-- The ring map adjoint to the fixed identification of inverse-image coefficients. -/
 noncomputable def proEtaleRingDirectImageMap :
     R ⟶ (proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj S :=
   (proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit.app R ≫
     (proEtaleSheafDirectImage f CommRingCat.{u + 1}).map c.hom
 
-/-- Sectionwise direct image, with scalar action through the adjoint coefficient map.
-Source: Stacks, lemma-adjoint-push-pull-modules. -/
+/-- Sectionwise direct image, with scalar action through the adjoint coefficient map. -/
 noncomputable def proEtaleRingModuleDirectImage :
     proEtaleRingModules X S ⥤ proEtaleRingModules Y R :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -115,14 +112,13 @@ noncomputable def proEtaleRingModuleDirectImage :
     ⟨Functor.whiskerRight (proEtaleRingDirectImageMap f R S c).hom
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
-/-- The displayed inverse image: inverse-image module action followed by sheafified tensor
-extension along `c`. Source: Stacks, lemma-adjoint-push-pull-modules and Tag 03EK. -/
+/-- The inverse image of a module: inverse-image module action followed by sheafified tensor
+extension along `c` (Stacks, Tag 03EK). -/
 noncomputable def proEtaleRingModulePullbackObj (M : proEtaleRingModules Y R) :
     proEtaleRingModules X S :=
   SheafOfModules.changeOfRings.{u, u + 1, u + 1} c.hom ((proEtaleModuleInverseImage f R).obj M)
 
-/-- The inverse-image map followed by the sheafified map on tensors.
-Source: Stacks, Tag 03EK. -/
+/-- The inverse-image map followed by the sheafified map on tensors (Stacks, Tag 03EK). -/
 noncomputable def proEtaleRingModulePullbackMap {M N : proEtaleRingModules Y R} (a : M ⟶ N) :
     proEtaleRingModulePullbackObj f R S c M ⟶ proEtaleRingModulePullbackObj f R S c N :=
   SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} c.hom _ ((proEtaleModuleInverseImage f R).map a)
@@ -155,11 +151,7 @@ private noncomputable def proEtaleRingExtension
     (𝟙 ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj)
 
-/-- The specified tensor maps respect identities and composition.
-Source: Stacks, Tag 03EK.
-Proof: the inverse-image functor respects both operations. On each presheaf tensor,
-`id ⊗ a` respects both operations on pure tensors, which generate the tensor product.
-The sheafification functor preserves these equalities. -/
+/-- The specified tensor maps respect identities and composition. -/
 theorem proEtaleRingModulePullback_functorial :
     (∀ M : proEtaleRingModules Y R,
       proEtaleRingModulePullbackMap f R S c (𝟙 M) = 𝟙 _) ∧
@@ -174,8 +166,7 @@ theorem proEtaleRingModulePullback_functorial :
     exact ((proEtaleModuleInverseImage f R) ⋙
       proEtaleRingExtension f R S c).map_comp a b
 
-/-- The module pullback functor, with the actual sheaf tensor construction as its objects.
-Source: Stacks, lemma-adjoint-push-pull-modules. -/
+/-- The module pullback functor, with the actual sheaf tensor construction as its objects. -/
 noncomputable def proEtaleRingModulePullback :
     proEtaleRingModules Y R ⥤ proEtaleRingModules X S where
   obj := proEtaleRingModulePullbackObj f R S c
@@ -440,18 +431,8 @@ private theorem proEtaleModuleInverseImage_preservesFiniteLimits :
   change PreservesFiniteLimits (proEtaleModuleToModel A ⋙ L ⋙ proEtaleModuleFromModel B)
   infer_instance
 
-/-- Both module operations are additive, pullback is exact, and they are adjoint.
-Source: Stacks, lemma-adjoint-push-pull-modules and Tag 04JC.
-Proof: compose the model-site module adjunction, transported by the up/down module
-equivalences, with the extension/restriction adjunction. The latter sends a tensor map to
-its value on `1 ⊗ m`; module sheafification extends its inverse uniquely. The composite
-right functor agrees sectionwise with the specified direct image. Direct image is additive
-sectionwise, hence its left adjoint is additive and preserves finite colimits. For finite
-limits use the underlying-abelian comparison on the model site. Base change is representably
-flat, so abelian inverse image preserves finite limits, and the module forgetful functor
-reflects them. Transport back by the model equivalences. Finally restriction along `c` is
-an equivalence, so uniqueness of left adjoints identifies scalar extension with its inverse,
-which preserves finite limits. -/
+/-- Both module operations are additive, pullback is exact, and they are adjoint
+(Stacks, Tag 04JC). -/
 theorem proEtaleRingModuleOperations_properties :
     (proEtaleRingModulePullback f R S c).Additive ∧
     (proEtaleRingModuleDirectImage f R S c).Additive ∧
@@ -469,34 +450,29 @@ theorem proEtaleRingModuleOperations_properties :
   let := proEtaleRingModuleDirectImage_isAdditive f R S c
   exact ⟨adj.left_adjoint_additive, inferInstance, hlim, inferInstance, ⟨adj⟩⟩
 
-/-- Additivity of the specified pullback. Source: Stacks, Modules on Sites. -/
+/-- Additivity of the specified pullback. -/
 noncomputable instance proEtaleRingModulePullback_additive :
     (proEtaleRingModulePullback f R S c).Additive :=
   (proEtaleRingModuleOperations_properties f R S c).1
 
-/-- Additivity of direct image. Source: Stacks, Modules on Sites. -/
+/-- Additivity of direct image. -/
 noncomputable instance proEtaleRingModuleDirectImage_additive :
     (proEtaleRingModuleDirectImage f R S c).Additive :=
   (proEtaleRingModuleOperations_properties f R S c).2.1
 
-/-- Left exactness of pullback. Source: Stacks, Tag 04JC. -/
+/-- Left exactness of pullback (Stacks, Tag 04JC). -/
 noncomputable instance proEtaleRingModulePullback_preservesFiniteLimits :
     PreservesFiniteLimits (proEtaleRingModulePullback f R S c) :=
   (proEtaleRingModuleOperations_properties f R S c).2.2.1
 
-/-- Right exactness of pullback. Source: Stacks, Tag 04JC. -/
+/-- Right exactness of pullback (Stacks, Tag 04JC). -/
 noncomputable instance proEtaleRingModulePullback_preservesFiniteColimits :
     PreservesFiniteColimits (proEtaleRingModulePullback f R S c) :=
   (proEtaleRingModuleOperations_properties f R S c).2.2.2.1
 
 set_option backward.isDefEq.respectTransparency false in
-/-- K-injective resolutions exist in all modules over these coefficients.
-Source: Stacks, Section 07A5 and Theorem 079P.
-Proof: transport the site to `proEtaleSiteModel X`, enlarging only the Hom universe.
-Module sheaves on that small site form a Grothendieck abelian category. Transfer this
-property across the module equivalence. The source Grothendieck-category instance then
-supplies K-injective resolutions, with monomorphic quasi-isomorphisms into the replacements.
-No constructibility, torsion, completeness, or boundedness condition is imposed. -/
+/-- K-injective resolutions exist in all modules over these coefficients
+(Stacks, Section 07A5 and Theorem 079P). -/
 theorem proEtaleRingModules_hasKInjectiveResolutions (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     Abelian.HasKInjectiveResolutions (proEtaleRingModules X R) := by
@@ -512,14 +488,14 @@ theorem proEtaleRingModules_hasKInjectiveResolutions (X : Scheme.{u})
 
 attribute [instance] proEtaleRingModules_hasKInjectiveResolutions
 
-/-- Ordinary uncompleted derived inverse image, by exact termwise descent.
-Source: Stacks, Section 0735. -/
+/-- Ordinary uncompleted derived inverse image, by exact termwise descent
+(Stacks, Section 0735). -/
 noncomputable abbrev proEtaleRingDerivedPullback :
     DerivedCategory (proEtaleRingModules Y R) ⥤ DerivedCategory (proEtaleRingModules X S) :=
   (proEtaleRingModulePullback f R S c).mapDerivedCategory
 
-/-- Termwise pullback computes the derived pullback on all complexes and chain maps.
-Source: Stacks, Section 0735. -/
+/-- Termwise pullback computes the derived pullback on all complexes and chain maps
+(Stacks, Section 0735). -/
 noncomputable def proEtaleRingDerivedPullbackFactors :
     DerivedCategory.Q ⋙ proEtaleRingDerivedPullback f R S c ≅
       (proEtaleRingModulePullback f R S c).mapHomologicalComplex (ComplexShape.up ℤ) ⋙

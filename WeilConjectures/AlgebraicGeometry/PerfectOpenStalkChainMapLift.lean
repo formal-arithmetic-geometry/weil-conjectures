@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-! # Lifting a perfect stalk chain map
 
-Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2).
+## References
+
+* Stacks Project, Tags 09RE, 0BC7 and 00CR.
 -/
 
 @[expose] public section
@@ -27,21 +29,8 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- An arbitrary chain map of perfect stalk complexes lifts on an affine neighbourhood,
-in the coordinates of the canonical restriction comparison.
-Source: Stacks Project, Tag 09RE, affine proof's finite-presentation calculation;
-Tag 0BC7 (2), chain representatives, and Tag 00CR.
-
-Proof: Extend the degreewise stalk maps by
-`exists_affine_perfect_open_stalk_degreewise_lift`. The given chain map makes
-their stalks commute with the differentials, by conjugating with the comparison
-isomorphism. Apply `exists_affine_perfect_open_stalk_degreewise_shrink`, assemble
-its components with `CochainComplex.ofHom`, and cancel the intermediate
-comparison isomorphisms degreewise. The two component lemmas implement the
-finite-presentation argument: only finitely many components and differential
-defects have nonzero source, their germs have common representatives, and the
-zero defect germs vanish on a common smaller neighbourhood. Only strict
-perfectness of P is needed. No inverse or quasi-isomorphism condition is required.
-Empty source support and zero ranks use zero maps. -/
+in the coordinates of the canonical restriction comparison
+(Stacks, Tags 09RE, 0BC7 and 00CR). -/
 theorem exists_affine_perfect_open_stalk_chainMap_lift
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (P Q : CochainComplex

@@ -171,8 +171,7 @@ private theorem normalizedPushforward_action (T U : Scheme.{u}) (f : U ⟶ T)
 
 attribute [local irreducible] canonicalAbelianMap
 
-/-- The common underlying direct-image sections have the same constant scalar action.
-Source: normalized constant-section action and coefficient naturality. -/
+/-- The common underlying direct-image sections have the same constant scalar action. -/
 theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U)
     (V : T.ProEtᵒᵖ) (a : ULift.{u + 1} A)
@@ -188,8 +187,7 @@ theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
     ((normalizedPushforward_action A T U f M V a m).trans
       (fixedPushforward_action A T U f eU M V a m).symm)
 
-/-- The identity on additive direct-image sections, as an isomorphism of module sheaves.
-Source: normalized constant-section action and coefficient naturality. -/
+/-- The identity on additive direct-image sections, as an isomorphism of module sheaves. -/
 def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U) :
     (sectionEncoding A T eT.ringIso ⋙ fixedRestriction A T).obj
@@ -212,8 +210,7 @@ def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
     ext m
     rfl
 
-/-- The normalized encoding comparison for the complete direct-image functors.
-Source: normalized constant-section action and coefficient naturality. -/
+/-- The normalized encoding comparison for the complete direct-image functors. -/
 def encodingPushforwardNatIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) :
     CondensedRing.lowerStar (coefficient A) f ⋙ eT.ordinary.functor ⋙ eT.fixed.functor ≅
@@ -226,13 +223,8 @@ def encodingPushforwardNatIso (T U : Scheme.{u}) (f : U ⟶ T)
     dsimp [sectionPushforwardIso, CondensedRing.lowerStar]
     rfl)
 
-/-- Normalized finite-discrete encoding commutes with inverse image.
-Source: Stacks Tags 03D6 and 03D7.
-
-Proof: normalization identifies the scalar action with the internal action of canonical
-constant sections. Those sections commute with direct image, so the identity on sections
-is a linear natural isomorphism between the two encoded direct images. Conjugate this
-isomorphism by the encoding equivalences and use uniqueness of left adjoints. -/
+/-- Normalized finite-discrete encoding commutes with inverse image
+(Stacks, Tags 03D6 and 03D7). -/
 theorem encoding_pullback_fixed [Finite A] [DiscreteTopology A]
     {T U : Scheme.{u}} (f : U ⟶ T) (eT : Encoding A T) (eU : Encoding A U)
     (M : Internal A T) :

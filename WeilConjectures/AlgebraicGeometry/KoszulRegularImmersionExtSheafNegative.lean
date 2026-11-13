@@ -28,21 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- In negative degree both sides of the Ext-sheaf comparison are zero.
-No regularity or rank hypothesis is needed for this vanishing statement.
-
-Source: Stacks Project, Cohomology on Sites, Section 08J7 (derived sheaf Hom),
-and Duality for Schemes, Tag 0BQZ (negative degrees of the comparison).
-
-Proof: resolve the target structure sheaf by its ordinary injective resolution,
-extended by zero to integer degrees. This complex is zero in negative degrees
-and is K-injective. The representative comparison for derived internal Hom
-computes RHom by Hom-complex from the pushforward structure sheaf in degree zero.
-By homComplex_single_iso this is degreewise ordinary internal Hom into the
-resolution. Internal Hom is additive in the target, so these terms are zero in
-negative degrees. Hence its negative homology is zero. The specified locally
-ranked exterior term is definitionally zero for q < 0, and pushforward preserves
-zero objects. The unique isomorphism between these zero objects gives the result.
-This also applies to the empty source and rank zero. -/
+No regularity or rank hypothesis is needed for this vanishing statement
+(Stacks, Tag 08J7 and Tag 0BQZ). -/
 theorem koszulRegularImmersion_extSheaf_negative
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

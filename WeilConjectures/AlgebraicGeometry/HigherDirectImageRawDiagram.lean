@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
 
 /-! # The raw cohomology diagram
 
-Source: Stacks Project, Tag 09Z1, the canonical cohomology comparison maps.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
 -/
 
 @[expose] public section
@@ -43,22 +45,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 -- Expanding canonical derived inverse-image comparisons requires substantial reduction.
 /-- The explicit raw pullbacks satisfy identity and composition, independently of any
-limit, affineness, or quasi-compactness assumption.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps in lemma-relative-colimit.
-
-Proof: The derived inverse-image functor is additive, and composition with fixed
-morphisms is additive in each argument. Thus the five-factor formula preserves zero
-and addition. Expand the five factors defining raw pullback. For an identity morphism, the
-identity comparison for inverse image cancels the single-functor comparison and its
-inverse. Naturality of the shift comparison cancels its identity factors, leaving the
-original derived morphism. For composable arrows, functoriality of derived inverse image
-moves the five factors of the first pullback through those of the second. Naturality of
-the single-functor comparison cancels the adjacent inverse and direct comparisons.
-The associativity coherence of inverse-image composition identifies the resulting
-source comparison with that for the composite. Its coefficient comparison is identified
-in the same way, using the two equations defining morphisms in Over W. Compatibility of
-derived inverse image with shifts identifies the remaining shift comparison. Thus the
-five surviving factors are exactly those of the composite raw pullback. -/
+limit, affineness, or quasi-compactness assumption. (Stacks, Tag 09Z1) -/
 theorem higherDirectImageRawOverPullback_functorial
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale) :

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLocalSectionVanishing
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
-Source: Stacks Project, Tag 09Z1, affine-local injectivity step.
+## References
+
+* Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -23,30 +25,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- A section on an affine etale object killed by the limit comparison is killed at a stage.
-Source: Stacks Project, Tag 09Z1, proof on qcqs etale objects; Tag 03Q8.
-
-Proof:
-1. Write each higher direct image as the sheafification of its restricted cohomology
-   presheaf, using Tag 03Q8. The identifications are natural for the canonical maps
-   defined by derived adjunction. Thus `hK` and `hη` identify the sheaf maps with
-   the maps of those cohomology presheaves.
-2. On a qcqs etale object U, base change of D and c gives qcqs schemes, affine
-   transitions, and a limiting cone. Exact inverse image commutes with colimits,
-   compositions, and degree-zero complexes. The pulled-back sheaves therefore
-   satisfy the hypotheses of complex cohomology continuity, with lower bound zero.
-   Its comparison is exactly the canonical comparison on restricted cohomology.
-   In particular a cohomology class mapped to zero at the limit dies at a stage.
-3. For the given section on the affine V, take an etale cover on which it lifts to
-   the restricted cohomology presheaf. Since its limit image is the zero sheaf
-   section, refine the cover so the limit cohomology representatives are zero.
-   Refine again by affines. Quasi-compactness of V gives a finite subcover. Apply
-   step 2 on each affine member; directedness gives a common later stage. The
-   stage image of the original section restricts to zero on each member, so it is
-   zero by the separatedness of a sheaf. This proves the assertion.
-
-For p = 0 the same argument uses ordinary sections. For empty V its section group
-is zero. No affine or qcqs assumption on S itself is used. -/
+/-- A section on an affine etale object killed by the limit comparison is killed at a stage
+(Stacks, Tags 09Z1 and 03Q8). -/
 theorem exists_higherDirectImage_affine_section_eq_zero {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

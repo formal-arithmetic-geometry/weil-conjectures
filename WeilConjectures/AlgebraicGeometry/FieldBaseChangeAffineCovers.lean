@@ -13,7 +13,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 /-!
 # Matching affine covers under field extension
 
-Source: Stacks Project, Tags 01JR, 01JQ and 01T0.
+## References
+
+* Stacks Project, Tags 01JR, 01JQ and 01T0
 -/
 
 @[expose] public section
@@ -26,18 +28,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- A nonempty scheme locally of finite type over a field admits affine covers that
-identify scalar extension chartwise with tensor products.
-Source: Stacks Project, Tags 01JR, 01JQ and 01T0, proof paragraph 2.
-
-Proof: choose the affine basis cover of X. Each coordinate ring is a finite type
-k-algebra because the structure morphism is locally of finite type. The inverse
-images of the chart opens under the first pullback projection cover the pullback.
-Restriction of a fibre product to an open (01JR) and the fibre product of affine
-spectra (01JQ) identify these opens with Spec(A_i tensor_k K). The morphism
-Spec K → Spec k is surjective (both spectra of fields have one point). Its base
-change is surjective, so the pullback is nonempty when X is. Empty chart rings are
-permitted; no integrality, separatedness, or dimension assumption is needed.
--/
+identify scalar extension chartwise with tensor products (Stacks, Tags 01JR, 01JQ, 01T0). -/
 theorem exists_field_baseChange_affine_covers
     (k K : Type z) [Field k] [Field K] [Algebra k K]
     {X : Scheme.{z}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [Nonempty X] :

@@ -50,16 +50,8 @@ private theorem transport_left_congr {S X T : Scheme.{u}} {a : X ⟶ S}
   subst w
   rfl
 
-/-- A descended underlying morphism preserves the original descent data.
-Source: Stacks Project, Descent, Lemma 0241, verification after refinement.
-
-Proof: The two sides of the compatibility equation are morphisms over X ×_S X.
-Pull back along X' ×_S X' → X ×_S X. By the base-change equations for both data
-and the reconstruction equation for α, their pullbacks are equal by β.commutes.
-Factor the refinement as the two successive base changes of r. Each is fpqc,
-so the injectivity part of Tag 02W0, applied twice, reflects this equality.
-Evaluate the resulting equation at arbitrary test points to obtain the stated
-transport identity. No existence or uniqueness of α is used in this step. -/
+/-- A descended underlying morphism preserves the original descent data
+(Stacks, Descent, Lemma 0241). -/
 theorem fpqc_descent_morphism_compatibility
     {S X X' : Scheme.{u}} (a : X ⟶ S) (r : X' ⟶ X)
     (hr : Presieve.singleton r ∈ Scheme.fpqcPrecoverage X)

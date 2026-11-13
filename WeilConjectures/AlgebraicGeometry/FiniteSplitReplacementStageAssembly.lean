@@ -9,10 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitReplacementStage
 import WeilConjectures.AlgebraicGeometry.EtaleHypercover
 import all WeilConjectures.CategoryTheory.SiteFiniteBasisHypercoverExistence
 
-/-! Assembly of compatible finite split replacement stages.
-The underlying functor construction uses the proved tower construction in
-`WeilConjectures.CategoryTheory.SiteFiniteBasisHypercoverExistence`.
--/
+/-! Assembly of compatible finite split replacement stages. -/
 
 @[expose] public section
 universe u
@@ -99,13 +96,8 @@ private theorem refinement_congr
   subst C
   simp
 
-/-- Compatible finite replacement stages give a finite split replacement.
-Source: Stacks 0DAV, passage from compatible skeleta to a simplicial object.
-Every object and every operator is read at a stage containing its degrees.
-The compatibility equalities show that this value is independent of the stage;
-all simplicial identities and the refinement naturality are checked at a common
-finite stage. Splitting, finiteness and the matching universal property in a fixed
-degree are the corresponding properties of that finite stage. -/
+/-- Compatible finite replacement stages give a finite split replacement
+(Stacks, Tag 0DAV). -/
 theorem exists_replacement_of_stage_tower
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

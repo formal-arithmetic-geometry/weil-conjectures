@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-! # Pulling back a relation between fractions on two projective charts
 
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
+## References
+
+* Stacks Project, Constructions, Tags 01N8 and 01NK.
 -/
 
 @[expose] public section
@@ -56,23 +58,8 @@ private lemma away_top
   rw [hb, Category.assoc] at hi
   apply (cancel_epi (Scheme.ΓSpecIso _).hom).1
   simpa only [Category.assoc, Iso.hom_inv_id] using hi
-/-- A homogeneous numerator relation gives the corresponding scalar relation after pullback.
-Source: Stacks Project, Constructions, Tags 01N8 and 01NK, comparison on overlapping charts.
-
-Proof: Use the common chart D_+(ts). The two localization maps send xi/t^n
-and p/s^N to xi*s^n/(ts)^n and p*t^N/(ts)^N. Their product equals
-r*t^N/(ts)^N: cross multiplication reduces the equality to xi*p = r*t^n
-multiplied by s^n*t^N*(ts)^N. This uses no cancellation. Apply the canonical
-map from the homogeneous localization at ts to sections and pull back to
-V = g^{-1}D_+(t). This is possible because g factors through D_+(s), so V
-also lies over D_+(ts). Naturality of awayToSection and g.app identifies the
-two localization maps with the pullbacks of the t- and s-chart sections.
-The inverse s-chart isomorphism and basicOpenToSpec_app_top identify its
-map on sections with the canonical Spec map. Compose with q and apply hq;
-then restrict to V. The topIso of U identifies the resulting restriction
-with the ambient restriction to W. Applying the ring map preserves products
-and proves the displayed equality. The same calculation covers n=0, N=0,
-zero numerators, t of degree zero, nilpotents, and empty overlaps. -/
+/-- A homogeneous numerator relation gives the corresponding scalar relation after pullback
+(Stacks, Constructions, Tags 01N8 and 01NK). -/
 theorem Proj.chart_pullback_fraction_relation
     (A : Type v) [CommRing A] (𝒜 : ℕ → AddSubgroup A) [GradedRing 𝒜]
     (X : Scheme.{v}) (d : ℕ) (s : 𝒜 d) (hd : 0 < d) (U : X.Opens)

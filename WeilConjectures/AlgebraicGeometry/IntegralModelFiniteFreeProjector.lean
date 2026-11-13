@@ -17,7 +17,9 @@ import Mathlib.Tactic.NoncommRing
 /-!
 # An integral commutative model of a quotient projector
 
-Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, first matrix construction.
+## References
+
+* Stacks Project, More on Algebra, Tag 07M5.
 -/
 
 @[expose] public section
@@ -54,28 +56,7 @@ private theorem charpoly_dvd_projector_polynomial
 
 /-- A quotient projector is the reduction of the image of an element of an integral
 commutative algebra, where that element is idempotent modulo the extended ideal.
-
-Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, from the choice
-of the lifted matrix through the construction of the idempotent `ebar`.
-
-Proof: Lift the entries of `toMatrix' pbar` to a matrix `X` over `A`. Put
-`f = charpoly X` and `B = A[x]/(f)`. Monicity makes `B` finite free and integral.
-Cayley--Hamilton gives `ψ: B →ₐ[A] Mat_n(A)` sending the class `x` to `X`.
-For any idempotent matrix `M` over any commutative ring, put `S = t*1` and
-`N = C(M)` over its polynomial ring. Since `SN = NS` and `N^2 = N`, expansion
-gives `(S-N)*(1-S-N) = (t-t^2)*1`. Taking determinants shows that
-`charpoly M` divides `(t-t^2)^n`. Apply this to `M = toMatrix' pbar` and use
-base change of the characteristic polynomial. Evaluating in `B/IB`, where
-`f mod I` vanishes at the class of `x`, gives `(x-x^2)^(n+1)=0`.
-Mathlib's `isIdempotentElem_one_sub_one_sub_pow_pow` therefore makes
-`1-(1-x^(n+1))^(n+1)` idempotent modulo `IB`. Take this same polynomial in `x`
-as `y` in `B`. Reduction of `ψ y` substitutes the idempotent matrix `M` for `x`:
-both `M` and `1-M` equal each of their positive powers, so the result is `M`.
-Using `n+1` ensures positive powers also for `n=0`. All steps hold for the
-zero ring and `I=top`; no residue fields or nontriviality assumptions occur.
-The determinant calculation and polynomial repair replace the residue-field
-and Bezout arguments in the cited Stacks proof.
--/
+(Stacks, Tag 07M5) -/
 theorem exists_integral_model_finite_free_projector
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
     (pbar : Module.End (A ⧸ I) (Fin n → A ⧸ I)) (hpbar : IsIdempotentElem pbar) :

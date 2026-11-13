@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 /-!
 # Comparing a Proj twist with a prescribed glued twist
 
-Source: Stacks Project, Constructions, Tags 01MN (1), 01M7 (2),(3).
+## References
+
+* Stacks Project, Constructions: Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -30,21 +32,7 @@ namespace AlgebraicGeometry.Proj
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- For a fixed chart-compatible comparison, every module with the prescribed
-standard generators pulls back to the corresponding Proj twist.
-Source: Stacks Project, Constructions, Tags 01MN (1), 01M7 (2),(3), and, chart and overlap steps.
-
-Proof: on D₊(xᵢ), the sections of the Proj twist are the degree-d fractions,
-and multiplication by xᵢ^(-d) identifies them with the degree-zero ring.
-This works on every subopen, so xᵢ^d trivializes the restricted twist.
-For d < 0, xᵢ is invertible on this chart, so its negative powers are defined.
-The equations of C identify the standard charts and their ratio coordinates.
-Use the tensor-formula pullback to transport the local generator of L, and
-send xᵢ^d to that generator. Tensoring with a free rank-one module over the
-chart gives a free rank-one module, so the two local maps are isomorphisms.
-On the overlap x₀^d = (x₀/x₁)^d x₁^d = t^(-d) x₁^d. This is exactly T.map_g₀,
-so the two local maps agree after restriction. Glue these maps and their
-inverses using the sheaf property. Their composites restrict to identities
-on a cover, hence are identities globally. This gives the displayed iso. -/
+standard generators pulls back to the corresponding Proj twist. -/
 theorem nonempty_twist_iso_tensorPullback_of_twistData (k : Type v) [Field k]
     (d : ℤ) (C : ProjectiveLine.ProjChartIsomorphism k)
     (L : (ProjectiveLine (Spec (.of k))).Modules)

@@ -14,11 +14,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Locally classical pro-etale sheaves and etale-local sections
 
-Source: Bhatt--Scholze, Definition 5.1.3, Lemmas 5.1.1--5.1.4 and Proposition 6.8.4(6).
+The three predicates below are classical, locally classical and locally constant sheaves.
+Restriction to `U` is precomposition with the existing localization functor, which composes
+structure maps with `U.hom`. Covering families use the actual small-site topologies.
 
-The three predicates spell out the notions introduced in this node. Restriction to
-`U` is precomposition with the existing localization functor, which composes structure
-maps with `U.hom`. Covering families use the actual small-site topologies.
+## References
+
+* Bhatt--Scholze, *The pro-etale topology for schemes*, Definition 5.1.3,
+  Lemmas 5.1.1--5.1.4 and Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -30,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Restriction of set-valued sheaves to the small pro-etale site of a cover member.
-It is precomposition with the canonical structure-map composition functor.
-Source: Bhatt--Scholze, Lemma 5.1.4, restriction to a covering member. -/
+It is precomposition with the canonical structure-map composition functor. -/
 def proEtaleSetRestriction (X : Scheme.{u}) (U : X.ProEt) :
     Sheaf (ProEt.topology X) (Type (u + 1)) ⥤
       Sheaf (ProEt.topology U.left) (Type (u + 1)) :=
@@ -40,8 +42,8 @@ def proEtaleSetRestriction (X : Scheme.{u}) (U : X.ProEt) :
     (Type (u + 1)) _ (ProEt.topology U.left) (ProEt.topology X)
     (ProEt.isContinuous_overMap U.prop)
 
-/-- Classical means isomorphic to the canonical inverse image of an etale sheaf of sets.
-Source: Bhatt--Scholze, Definition 5.1.3. -/
+/-- Classical means isomorphic to the canonical inverse image of an etale sheaf of sets
+(Bhatt--Scholze, Definition 5.1.3). -/
 def IsProEtaleClassical (X : Scheme.{u}) (F : Sheaf (ProEt.topology X) (Type (u + 1))) :
     Prop :=
   ∃ G : Sheaf X.smallEtaleTopology (Type (u + 1)),
@@ -49,8 +51,8 @@ def IsProEtaleClassical (X : Scheme.{u}) (F : Sheaf (ProEt.topology X) (Type (u 
       (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).obj G)
 
 /-- Local classicality uses a pro-etale cover and the sectionwise restriction to each
-member's small pro-etale site, with no compatibility imposed on the etale presentations.
-Source: Bhatt--Scholze, Lemma 5.1.4. -/
+member's small pro-etale site, with no compatibility imposed on the etale presentations
+(Bhatt--Scholze, Lemma 5.1.4). -/
 def IsProEtaleLocallyClassical (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (u + 1))) : Prop :=
   ∃ (I : Type (u + 1)) (U : I → X.ProEt), (ProEt.topology X).CoversTop U ∧
@@ -58,8 +60,8 @@ def IsProEtaleLocallyClassical (X : Scheme.{u})
       ((proEtaleSetRestriction X (U i)).obj F)
 
 /-- Local constancy allows varying, possibly empty, sets on the members of a pro-etale
-cover. The constant sheaves are sheafifications of constant presheaves.
-Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
+cover. The constant sheaves are sheafifications of constant presheaves
+(Bhatt--Scholze, Proposition 6.8.4(6)). -/
 def IsProEtaleLocallyConstant (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (u + 1))) : Prop :=
   ∃ (I : Type (u + 1)) (U : I → X.ProEt), (ProEt.topology X).CoversTop U ∧
@@ -178,27 +180,7 @@ private theorem etale_cover_sections_of_classical (X : Scheme.{u})
 Local inhabitedness of such a sheaf can be witnessed by an etale cover. There is no
 compatibility condition on the local sections, nor a nonemptiness condition on the
 index sets or the constant value sets.
-
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4 and Proposition 6.8.4(6).
-
-Proof:
-1. The affine section formula makes the comparison unit invertible. Continuity on
-   affine ind-etale presentations makes the counit invertible, by testing it on the
-   dense affine subsite and comparing the section colimits. Local classicality
-   gives this continuity by the finite-cover equalizer argument isolated in
-   `proEtale_locallyClassical_continuity`. The inverse counit presents F as classical.
-2. Compose the constant-sheaf adjunction on the etale site with the comparison
-   adjunction. Its right adjoint is evaluation at the identity pro-etale object.
-   Uniqueness of left adjoints identifies the two constant-sheaf constructions.
-   Transport each local trivialization and apply the first conclusion.
-3. Write F as the inverse image of G. The given local sections make the map from
-   this inverse image to the inverse image of the terminal etale sheaf an epi.
-   The latter object is terminal by the constant-sheaf comparison. Full faithfulness
-   makes comparison faithful, hence reflects epimorphisms. Thus G maps epimorphically
-   to the terminal etale sheaf. Epimorphisms of sheaves of sets are locally surjective;
-   the family of all etale objects equipped with a section of G therefore covers.
-   The comparison unit transports these sections to F. This argument also handles
-   empty schemes, empty covering families, and empty constant value sets. -/
+(Bhatt--Scholze, Lemmas 5.1.1--5.1.4 and Proposition 6.8.4(6).) -/
 theorem proEtale_locallyClassical_etaleCover (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (u + 1))) :
     (IsProEtaleLocallyClassical X F → IsProEtaleClassical X F) ∧

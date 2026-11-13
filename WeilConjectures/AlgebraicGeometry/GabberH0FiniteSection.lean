@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 
 /-! # Finite-cover sections before imposing the descent equation
 
-Source: Stacks Project, Tag 09ZF, proof of lemma-gabber-h0, fourth paragraph
-through the construction of s', before comparing its two projection pullbacks.
+## References
+
+* Stacks Project, Tag 09ZF.
 -/
 
 @[expose] public section
@@ -30,38 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- A section on the closed subscheme lifts after a finite surjective cover.
-Source: Stacks Project, Tag 09ZF, proof of lemma-gabber-h0, fourth paragraph,
-through "the section t' comes from a section s'".
-
-Proof:
-1. Every nonempty closed subset T of X meets i(Z). Otherwise the pushforward
-   of the constant two-element sheaf on T has two distinct global constant
-   sections. Its stalks along i(Z) are singletons, so these sections have equal
-   restrictions to Z, contradicting hZar. Use closed-pushforward constant stalks,
-   inverse-image stalks, and determination of sections by germs.
-2. Sheafification locally represents t by elements of the presheaf inverse image.
-   Its filtered indexing colimit represents each element by a section s_j on an
-   etale X-scheme U_j, with a map V_j to U_j times_X Z, where the V_j cover Z.
-   The etale map has open image in the closed subscheme U_j times_X Z. Extend
-   that open to U_j and restrict s_j. Now V_j surjects onto U_j times_X Z;
-   the sheaf axiom identifies t there with the inverse-image unit of s_j.
-3. The union of the open images of U_j in X contains i(Z). Its closed complement
-   is empty by step 1, so the U_j cover X. Finite refinement of this etale cover
-   gives finite surjective h: X' to X and opens W_alpha covering X', each
-   mapping to some U_j over X. Pull the s_j back to sections s'_alpha of h^*F.
-4. Put Z' = Z times_X X'. Transport the pullback of t to a section t' of
-   i'^*(h^*F) by the unit-compatible composition isomorphisms. Their naturality
-   gives i'^*s'_alpha = t' on W_alpha times_X Z. The injective Zariski-to-etale
-   comparison for i' sends the Zariski unit images of s'_alpha to these sections.
-   On overlaps their images agree, so injectivity makes the Zariski sections
-   agree. Glue them on Z' to sigma; its comparison image is t' by the sheaf axiom.
-5. Apply hFinite to h and the Zariski restriction of h^*F. Its surjective unit
-   gives a global s' mapping to sigma. The comparison-unit equation gives
-   i'^*s' = t'. Express this equality in the composite inverse image to get the
-   displayed restriction equation. No equality of projection pullbacks is used.
-For empty X choose its identity cover; for i an identity choose h an identity
-and transport t along the terminal-object isomorphism. Neither case is excluded. -/
+/-- A section on the closed subscheme lifts after a finite surjective cover. (Stacks, Tag 09ZF) -/
 theorem gabber_h0_finite_section
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

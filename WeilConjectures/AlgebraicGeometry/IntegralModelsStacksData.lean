@@ -35,8 +35,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantModelStratificationTransport
 
 /-! # Coefficients and predicates for integral models
 
-Stacks Project,
-Tag 09C1.
+## References
+
+* Stacks, Tags 09C1, 09C2, 00YV, 05RU and 09A5.
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +49,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- The discrete scalar ring on the pro-etale point. Source: Stacks Tag 09C1. -/
+/-- The discrete scalar ring on the pro-etale point. -/
 abbrev discreteSheaf (A : Type u) [CommRing A] :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   (sheafCompose (coherentTopology Profinite.{u})
@@ -56,12 +57,11 @@ abbrev discreteSheaf (A : Type u) [CommRing A] :
     ((constantSheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).obj
       (CommRingCat.of (ULift.{u + 1} A)))
 
-/-- Its underlying condensed abelian ring object. Source: Stacks Tag 09C1. -/
+/-- Its underlying condensed abelian ring object. -/
 abbrev discreteObj (A : Type u) [CommRing A] :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (discreteSheaf A)
 
-/-- The commutative ring structure comes from the actual constant commutative ring sheaf.
-Source: Stacks Tag 09C1. -/
+/-- The commutative ring structure comes from the actual constant commutative ring sheaf. -/
 instance discreteObj_comm (A : Type u) [CommRing A] : IsCommMonObj (discreteObj A) :=
   Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
     (discreteSheaf A) (fun U a b ↦
@@ -81,8 +81,7 @@ def constantToContinuous (A : Type u) [CommRing A] [TopologicalSpace A]
             ((ContinuousMap.C (α := S.unop)).comp ULift.ringEquiv.toRingHom))
         naturality := fun _ _ _ ↦ RingCat.hom_ext (by ext x; rfl) }
 
-/-- A scalar homomorphism induces the actual map between discrete condensed rings.
-Source: Stacks Tag 09C1. -/
+/-- A scalar homomorphism induces the actual map between discrete condensed rings. -/
 def discreteMap {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     discreteObj A ⟶ discreteObj B :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
@@ -91,14 +90,12 @@ def discreteMap {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
         (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
           (f.comp ULift.ringEquiv.toRingHom)))))
 
-/-- The source and target ring structures are the sheafified scalar structures.
-Source: Stacks Tag 09C1. -/
+/-- The source and target ring structures are the sheafified scalar structures. -/
 instance discreteMap_mon {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     IsMonHom (discreteMap f) := inferInstanceAs (IsMonHom
       ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _))
 
-/-- Reconstruct the section-ring map of a map of internal commutative rings.
-Source: Stacks Tag 00YV. -/
+/-- Reconstruct the section-ring map of a map of internal commutative rings. -/
 def sectionMap (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -110,8 +107,7 @@ def sectionMap (X : Scheme.{u})
       ((sheafToPresheaf _ Ab.{u + 1}).mapCommMon.map (CommMon.homMk (Mon.ofHom f))))
     InternalAbelianSheafModule.commMonToRing.{u + 1}⟩
 
-/-- The section ring on the equivalent coefficient-sized small pro-etale site.
-Source: Stacks Tags 00YV and 09A5. -/
+/-- The section ring on the equivalent coefficient-sized small pro-etale site. -/
 abbrev smallRing (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :=
   ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤
@@ -120,8 +116,7 @@ abbrev smallRing (X : Scheme.{u})
       (Scheme.coefficientProEtaleModelTopology.{u, u} X) (Scheme.ProEt.topology X)).obj
     (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X) R)
 
-/-- The same reconstructed coefficient homomorphism on the small site.
-Source: Stacks Tags 00YV and 09A5. -/
+/-- The same reconstructed coefficient homomorphism on the small site. -/
 def smallMap (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -133,7 +128,7 @@ def smallMap (X : Scheme.{u})
     (sectionMap X f)
 
 /-- Sectionwise module transport to the equivalent small site. It preserves sections
-and their scalar action. Source: Stacks Tags 00YV and 09A5. -/
+and their scalar action. -/
 def smallModules (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
@@ -142,8 +137,7 @@ def smallModules (X : Scheme.{u})
     SheafOfModules.pushforward (F := AsSmall.down) (𝟙 _)
 
 /-- Transport a derived object by the sectionwise equivalence, on a localization
-representative. This is the exact transport to the identical small ringed topos.
-Source: Stacks Tags 00YV, 05RU and 09A5. -/
+representative. -/
 def smallDerivedObject (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)) :
@@ -195,15 +189,13 @@ instance scalarMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     IsMonHom (scalarMap l E X) := inferInstanceAs
       (IsMonHom ((upperStarFromPoint X).map (scalarPointMap l E)))
 
-/-- The canonical residue coefficient map on X, induced by the actual first quotient.
-Source: Stacks Tag 09C1. -/
+/-- The canonical residue coefficient map on X, induced by the actual first quotient. -/
 def residueMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
   (upperStarFromPoint X).map
     (discreteMap (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E 1)))
 
-/-- The residue map is a map of the actual pulled-back commutative ring objects.
-Source: Stacks Tag 09C1. -/
+/-- The residue map is a map of the actual pulled-back commutative ring objects. -/
 instance residueMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
     IsMonHom (residueMap l E X) := inferInstanceAs
@@ -217,10 +209,8 @@ abbrev restriction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (scalarMap l E X)).mapDerivedCategory
 
 /-- Stacks adic constructibility: local derived completeness for the kernel of the
-first residue map, constructible residue cohomology, and finite relative Tor amplitude.
-Transport to the equivalent small site is used only for the recorded local completeness
-predicate; no hypothesis on the complex is imposed by this transport.
-Source: Stacks Tag 09C1. -/
+first residue map, constructible residue cohomology, and finite relative Tor amplitude
+(Stacks, Tag 09C1). -/
 def stacksConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X] :
@@ -236,8 +226,7 @@ def stacksConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     DerivedCategory.finiteTorAmplitude _
       ((Mod.extendScalars (residueMap l E X)).leftDerivedFunctor.obj L)
 
-/-- The first-residue part of the Stacks predicate, without completeness.
-Source: Stacks Tags 09C1 and 09C2. -/
+/-- The first-residue part of the Stacks predicate, without completeness. -/
 def residueCondition (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X] :
@@ -251,8 +240,7 @@ def residueCondition (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     DerivedCategory.finiteTorAmplitude _
       ((Mod.extendScalars (residueMap l E X)).leftDerivedFunctor.obj L)
 
-/-- The residue clause is invariant under isomorphism.
-Source: Stacks Tags 09C1 and 09C2. -/
+/-- The residue clause is invariant under isomorphism. -/
 theorem residueCondition_iso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]

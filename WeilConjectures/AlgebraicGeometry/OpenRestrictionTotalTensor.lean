@@ -13,7 +13,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Open restriction of total tensor complexes
 
-Source: Stacks Project, Tag 08DX, proof of (1).
+## References
+
+* [Stacks, Tag 08DX]
 -/
 
 @[expose] public section
@@ -31,22 +33,13 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- The recorded sheaf tensor, used for total complexes. Source: Stacks, Tag 06Y7. -/
+/-- The recorded sheaf tensor, used for total complexes (Stacks, Tag 06Y7). -/
 noncomputable local instance openRestrictionTotalTensorTensor (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- Restriction commutes with the signed direct-sum total tensor of arbitrary complexes.
-Source: Stacks Project, Tag 08DX, proof of (1); Tag 01CD for the sheaf tensor comparison.
-Proof: the restriction tensor comparison identifies the tensor of restricted terms
-with restriction of the tensor in every bidegree. It is natural in both terms:
-the comparison on pure tensors commutes with restriction of either module map.
-Restriction preserves arbitrary coproducts, so summing these comparisons over
-p + q = n gives an isomorphism in each total degree n. Naturality intertwines
-both differentials; additivity intertwines the sign (-1)^p in the second one.
-The degreewise isomorphisms and their inverses thus define inverse complex maps.
-The over equivalence transports the same calculation to modules on U.toScheme.
-No boundedness is used; the empty open and zero complexes give the zero comparison. -/
+/-- Restriction commutes with the signed direct-sum total tensor of arbitrary complexes
+(Stacks, Tag 08DX). -/
 theorem openRestriction_totalTensor_iso (X : Scheme.{u}) (U : X.Opens)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     let R :=

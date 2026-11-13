@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # The increasing-tuple augmented Čech row of an injective module
 
-Source: Stacks Project, Tags 01EP and 01FM, as used in Tag 08C1.
+## References
+
+* Stacks Project, Tags 01EP, 01FM and 08C1.
 -/
 
 @[expose] public section
@@ -292,31 +294,7 @@ private theorem alternatingRow_mono {X : Scheme.{u}} {r : ℕ}
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual increasing-tuple row augmentation is a quasi-isomorphism.
 Its degree-zero component is specified, so the map is uniquely determined.
-
-Source: Stacks Project, Tags 01EP and 01FM; Tag 08C1, first paragraph.
-
-Proof: Restriction of a global section to each increasing one-tuple has zero
-Čech differential, because the two restrictions to every pair agree. Construct
-this map in nonnegative degrees with fromSingle₀Equiv. For degree zero, evaluate
-a cocycle on increasing pairs to show its singleton sections agree on pairwise
-intersections (reverse the pair when necessary). Sheaf gluing gives a section
-on the union, which is X by hU. Sheaf separatedness makes restriction injective.
-The scalar identification at the top is the identity, so this proves that the
-augmentation induces an isomorphism on degree-zero homology.
-For positive degrees, construct the full-tuple SiteCechComplex with actual finite
-intersections. Its injective Čech cohomology vanishes by Tag 01EP. Define a map
-from it to the underlying abelian alternating row by evaluating on the underlying
-function of each order embedding. Reindex strictly monotone functions as order
-embeddings; the signed face formula verifies that this is a cochain map.
-The existing Tag 01FM restriction homotopy theorem gives it a homotopy inverse,
-so its map on homology is an isomorphism and the alternating row is exact in
-positive degrees. The elementwise exactness criteria for abelian groups and
-modules agree, so forgetting scalars reflects this exactness.
-Extension by zero to integer degrees preserves quasi-isomorphisms. Identify the
-extension of the single complex with the integer single complex via extendSingleIso;
-its degree-zero formula gives exactly alternatingCechZero. All constructions also
-work for the empty cover: the empty-family gluing axiom gives zero global sections.
-The zero module case is included as well. -/
+(Stacks, Tags 01EP, 01FM, 08C1.) -/
 theorem injective_alternatingCech_row_augmentation
     (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [Injective M] :

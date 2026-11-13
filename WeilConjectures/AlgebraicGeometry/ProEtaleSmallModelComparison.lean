@@ -23,9 +23,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-! # Geometric comparison on the existing small site models
 
-Source: Stacks Project, Tags 099R, 00WX and 00X6.
-
 These are the original inclusion and geometric adjunction transported by AsSmall.
+
+## References
+
+* Stacks Project, Tags 099R, 00WX and 00X6.
 -/
 
 @[expose] public noncomputable section
@@ -34,27 +36,24 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The etale site model in a universe containing the coefficient ring.
-Source: Stacks Tags 00VC and 099R. -/
+/-- The etale site model in a universe containing the coefficient ring
+(Stacks, Tags 00VC and 099R). -/
 abbrev smallModelComparisonEtaleSite (X : Scheme.{u}) := AsSmall.{max v (u + 1)} X.Etale
 
-/-- The original etale topology transported by the model equivalence.
-Source: Stacks Tags 00VC and 099R. -/
+/-- The original etale topology transported by the model equivalence
+(Stacks, Tags 00VC and 099R). -/
 abbrev smallModelComparisonEtaleTopology (X : Scheme.{u}) :=
   (AsSmall.down : smallModelComparisonEtaleSite.{u, v} X ⥤ X.Etale).inducedTopology
     X.smallEtaleTopology
 
-/-- The original inclusion transported to the two coefficient-sized models.
-Source: Stacks Tag 099R. -/
+/-- The original inclusion transported to the two coefficient-sized models
+(Stacks, Tag 099R). -/
 abbrev smallModelComparisonInclusion (X : Scheme.{u}) :
     smallModelComparisonEtaleSite.{u, v} X ⥤ coefficientProEtaleSiteModel.{u, v} X :=
   AsSmall.down ⋙ toProEt X ⋙ AsSmall.up
 
-/-- The transported inclusion is continuous, retaining the original covers.
-Source: Stacks Tag 099R.
-Proof: AsSmall.down is continuous for the induced etale topology, toProEt is the
-existing continuous inclusion, and AsSmall.up is the existing continuous equivalence
-for the coefficient-sized pro-etale topology. Compose these three continuous functors. -/
+/-- The transported inclusion is continuous, retaining the original covers
+(Stacks, Tag 099R). -/
 @[instance]
 theorem smallModelComparisonInclusion_isContinuous (X : Scheme.{u}) :
     (smallModelComparisonInclusion.{u, v} X).IsContinuous
@@ -66,33 +65,25 @@ theorem smallModelComparisonInclusion_isContinuous (X : Scheme.{u}) :
     (smallModelComparisonEtaleTopology.{u, v} X) X.smallEtaleTopology
     (coefficientProEtaleModelTopology.{u, v} X)
 
-/-- The comparison inverse image on the existing small models.
-Source: Stacks Tag 099R. -/
+/-- The comparison inverse image on the existing small models (Stacks, Tag 099R). -/
 abbrev smallModelComparisonPullback (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafPullback
     (smallModelComparisonInclusion.{u, v} X) (Type (max v (u + 1)))
     (smallModelComparisonEtaleTopology.{u, v} X) (coefficientProEtaleModelTopology.{u, v} X)
 
-/-- The comparison direct image on the same models.
-Source: Stacks Tag 099R. -/
+/-- The comparison direct image on the same models (Stacks, Tag 099R). -/
 abbrev smallModelComparisonPushforward (X : Scheme.{u}) :=
   (smallModelComparisonInclusion.{u, v} X).sheafPushforwardContinuous (Type (max v (u + 1)))
     (smallModelComparisonEtaleTopology.{u, v} X) (coefficientProEtaleModelTopology.{u, v} X)
 
-/-- The geometric comparison on the existing small models.
-Source: Stacks Tag 099R. -/
+/-- The geometric comparison on the existing small models (Stacks, Tag 099R). -/
 abbrev smallModelProEtaleComparison (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (smallModelComparisonInclusion.{u, v} X) (Type (max v (u + 1)))
     (smallModelComparisonEtaleTopology.{u, v} X) (coefficientProEtaleModelTopology.{u, v} X)
 
-/-- Comparison remains left exact after transporting along the model equivalences.
-Source: Stacks Tags 099R and 00X6.
-Proof: the AsSmall equivalences induce equivalences on sheaves. Their conjugate of
-proEtaleSiteComparison is the displayed Kan-extension adjunction, by uniqueness of left
-adjoints to the same sectionwise direct image. Transport finite-limit preservation from
-preservesFiniteLimits_proEtaleSiteComparison through this natural isomorphism and the two
-equivalences. The transported inclusion retains all etale and pro-etale objects. -/
+/-- Comparison remains left exact after transporting along the model equivalences
+(Stacks, Tags 099R and 00X6). -/
 @[instance]
 theorem smallModelComparisonPullback_preservesFiniteLimits (X : Scheme.{u}) :
     PreservesFiniteLimits (smallModelComparisonPullback.{u, v} X) := by

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Linear Leray comparison for an acyclic direct image
 
-Source: Stacks Project, Tag 01F4 (1), Lemma 20.13.6.
+## References
+
+* Stacks Project, Tag 01F4 (1), Lemma 20.13.6.
 -/
 
 @[expose] public section
@@ -23,19 +25,7 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The degenerate Leray comparison respects scalars from any scheme below the target.
-
-Source: Stacks Project, Tag 01F4 (1), Lemma 20.13.6, and the naturality of its
-spectral sequence in coefficient-module maps (Tag 01EY).
-
-Proof: use the Leray spectral sequence for p and F. The assumed vanishing removes all
-rows except higher-direct-image degree zero; the edge gives an additive isomorphism
-between the cohomology of p_*F and F. Compare module-derived global sections with
-abelian-sheaf cohomology, using injective modules being flasque. For every section
-r of T, multiplication by f.appTop r on p_*F is the pushforward of multiplication
-by (p followed by f).appTop r on F. Naturality of the spectral sequence therefore
-makes the additive isomorphism commute with scalar multiplication. Equip it with
-this linearity to obtain the displayed linear equivalence. This uses no coherence,
-Noetherian, properness, or affine-base assumption. -/
+(Stacks, Tag 01F4 (1) and Tag 01EY) -/
 theorem nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing
     {Y X T : Scheme.{u}} (p : Y ⟶ X) (f : X ⟶ T)
     [HasInjectiveResolutions Y.Modules] (F : Y.Modules)

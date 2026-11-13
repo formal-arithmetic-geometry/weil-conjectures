@@ -18,31 +18,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Uniqueness of a finite étale trace family satisfying the three displayed properties.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE; SGA 4,
-Exposé IX, 5.1 (uniqueness from localization and the split formula).
-
-Proof. Fix two such families, a finite étale `f`, and a sheaf `F`. Transport their
-components through the restriction isomorphism to morphisms `P_F → F`, where
-`P_F(W) = F(W ×_X Y)`. For any object `W` choose a jointly surjective étale covering
-`h_a: W_a → W` such that `W_a ×_X Y → W_a` splits into finitely many clopen pieces.
-Such a covering follows from Stacks 04HN and covering base change.
-
-Apply each family's localization identity to `g_a: W_a → X` and the terminal
-object of `W_a.Etale`. Pullback pasting identifies its double fibre product with
-`W_a ×_X Y`. Apply the split formula to the pullback of `f` over `W_a`: its sections
-are exactly the transported sections of the chosen splitting. Naturality of the
-restriction isomorphism turns both formulas into the same sum of restrictions
-`F(W_a ×_X Y) → F(W_a)`. Cancel the restriction and pasting isomorphisms, which are
-invertible; the two transported trace components at `W_a` are equal.
-
-For `t ∈ P_F(W)`, naturality of each sheaf morphism in `W` now says that the two
-images of `t` have identical restrictions along every `h_a`. Separatedness of `F`
-gives equality in `F(W)`. This proves component equality for all `W` and `t`, hence
-morphism equality. Transport back through the restriction isomorphism and apply
-function extensionality in `X`, `Y`, `f`, its proofs, and `F` to obtain family equality.
-The argument does not require the naturality-in-`F` hypotheses. The empty splitting
-has zero local sum, and the empty base has zero sections by the empty-cover sheaf
-condition, so these cases are included. -/
+(Stacks, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.) -/
 theorem finiteEtaleTrace_unique :
     let A := AddCommGrpCat.{u + 1}
     let B := fun {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f) (W : X.Etale) ↦

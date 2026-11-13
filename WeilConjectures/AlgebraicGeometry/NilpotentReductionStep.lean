@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # One step of the coefficient-ideal filtration
 
-Source: Stacks Project, Cohomology on Sites, Tag 094I.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 094I.
 -/
 
 @[expose] public section
@@ -673,26 +675,8 @@ private theorem restriction_lisse_homology
   exact lisse_of_iso T B ((P.sc i).mapHomologyIso (restrictScalars (coefficientMap T f)))
     (locallyConstantFiniteTypeModules_restrictScalars_surjective T f hf _ (hP i))
 
-/-- The quotient triangle advances finite locally constant cohomology from J^n to
-J^(n+1). Source: Stacks Project, Cohomology on Sites, Tag 094I.
-
-Proof: put D = B/J^(n+1) and Q = J^n/J^(n+1). Regard the exact coefficient
-sequence 0 to Q to D to B/J^n to 0 as a sequence of D-modules. A flat K-flat
-representative of K tensors it to a distinguished triangle of D-module complexes.
-Its middle term computes the reduction modulo J^(n+1); its last term is the
-restriction of the reduction modulo J^n. Balancing identifies the first term with
-the restriction to D of the tensor of the reduction modulo J and the finite
-B/J-module Q. The ideal J annihilates Q; generators of the finite ideal J^n
-project to generators over B/J. This quotient ring is Noetherian. The reduction
-modulo J is bounded above, by a bounded-above flat
-replacement of K. Tag 094H gives finite locally constant cohomology for this tensor.
-The two quotient homomorphisms D to B/J and D to B/J^n are surjective, so the
-scalar-restriction theorem preserves their finite constant local models. Restriction
-is exact and hence commutes with cohomology. The
-previous reduction supplies the other outer term. Since D is Noetherian, the
-proved triangle-closure theorem over D gives the middle term's finite locally
-constant cohomology over D itself. This avoids descending B-module local models
-back to D-module local models. -/
+/-- The quotient triangle advances finite locally constant cohomology from `J^n` to
+`J^(n+1)` (Stacks, Tag 094I). -/
 theorem locallyConstantFiniteTypeModules_reduction_succ
     {C : Type u} [Category.{u} C] (T : Precoverage C)
     [T.HasIsos] [T.IsStableUnderComposition] [T.IsStableUnderBaseChange] [T.HasPullbacks]

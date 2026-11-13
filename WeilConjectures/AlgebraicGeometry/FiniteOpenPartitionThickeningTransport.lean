@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-! # Transporting a finite open partition across a thickening
 
-Source: Stacks Project Tag 04DF; step 2 of finite splitting closed immersion descent.
+## References
+
+* Stacks Project, Tag 04DF
 -/
 
 @[expose] public section
@@ -21,20 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Transport a finite disjoint open covering across a surjective closed immersion.
-
-Source: Stacks Project Tag 04DF; step 2 of
-`lem-weil-pbc-finite-splitting-closed-immersion-descent`.
-
-Proof: A surjective closed immersion induces a homeomorphism on points. Take
-V_j to be the image of W_j under this homeomorphism. Injectivity and
-surjectivity transport disjointness and the covering equality. The complement
-of each V_j is the union of the other opens, so V_j is also closed. Its open
-immersion into P is thus a closed immersion, hence finite. The preimage of
-V_j under p is exactly W_j. Restricting p to these opens gives a_j; it is a
-base change of p, up to the canonical open-subscheme isomorphism, hence a
-surjective closed immersion. Its inclusion equation is the restriction
-square. For n=0 the covering equality forces both spaces empty, and there
-are no component assertions. -/
+(Stacks, Tag 04DF) -/
 theorem exists_finite_open_partition_thickening_transport
     {P' P : Scheme.{u}} (p : P' ⟶ P) [IsClosedImmersion p] [Surjective p]
     (n : ℕ) (W : Fin n → P'.Opens)

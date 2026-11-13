@@ -51,7 +51,8 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralSectionProjectionNormalizati
 /-!
 # Constructibility of all integral reductions from the first
 
-md.
+Comparison of the integral coefficient presentations and the section-action functors used in
+the integral constructibility criterion.
 -/
 
 @[expose] public noncomputable section
@@ -129,18 +130,8 @@ private theorem finiteRepresentation_unique (X : Scheme.{u})
   simpa using h'
 
 /-- The projection-normalized comparison is independent of all auxiliary finite-set
-representations and limit-cone witnesses. SfbIntegralComparison retains the unit
-and all reduction equations, not just existence of an isomorphism.
-
-Proof: existence is sfb_integral_coefficient_limit. For uniqueness, the finite-label
-representation is unique: on a singleton both sheaves are terminal, and naturality
-with every singleton-to-finite-set inclusion fixes each constant label; sheafification
-then fixes the whole natural transformation. For each cone witness the composite
-j followed by its nth projection is the specified quotient on every integer, so
-changing the cone changes none of these maps. The adjunction-mate normalization
-therefore gives the same nth projection for both comparisons on every profinite
-test object and continuous integer-valued function. The adjunction and Yoneda
-identify the maps; finally the limit projections jointly distinguish them. -/
+representations and limit-cone witnesses. `SfbIntegralComparison` retains the unit
+and all reduction equations, not just existence of an isomorphism. -/
 theorem integralLimitAbComparison_existsUnique (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -201,16 +192,7 @@ private theorem integralPointMon_eq (l : ℕ) [Fact l.Prime]
     Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R)
   exact congrArg F hs
 
-/-- The coefficient presentations have the same underlying abelian sheaves.
-
-Proof: the section-ring construction keeps the additive group and restriction maps
-of the internal ring. On the point the two continuous-function constructions have
-identical sections and restrictions: the extending absolute value is the spectral
-norm, hence defines the same topology. Presheaf extensionality and proof irrelevance
-identify these sheaves, and applying the same point inverse image preserves equality.
-The completed commutative ring sheaf retains the ring data of the completed ring
-sheaf; forgetting its commutativity and multiplication keeps exactly its additive
-groups and restrictions. Sheaf extensionality gives the second equality. -/
+/-- The coefficient presentations have the same underlying abelian sheaves. -/
 theorem integralSectionAbIdentifications (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -320,15 +302,7 @@ private theorem liftSectionRingIso
 
 /-- Reconstructing section rings retains the unique projection-normalized coefficient
 comparison. After the endpoint identifications, forgetting to abelian sheaves fixes
-the entire underlying additive map.
-
-Proof: the spectral absolute value defining DerivedNakayama.integerRing is the
-spectral norm defining sfbCondensedIntegers, so the continuous-function sheaves and
-their point pullbacks agree. The chosen abelian comparison is a monoid homomorphism
-in both directions by sfb_integral_coefficient_limit. Evaluating its multiplication
-and unit identities reconstructs a commutative-ring isomorphism on sections.
-Naturality is unchanged. Forgetting to abelian sheaves is faithful, so the fixed
-underlying comparison determines this ring isomorphism uniquely. -/
+the entire underlying additive map. -/
 theorem integralSectionRingIso_existsUnique (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -382,8 +356,7 @@ def integralSectionRingIso (l : ℕ) [Fact l.Prime]
   (integralSectionRingIso_existsUnique l E X).exists.choose
 
 /-- The actual section-action functor, followed by scalar transport along the inverse
-of the specified coefficient isomorphism. Neither functor is chosen by existence.
-Source: Stacks 00YV; blueprint integral-criterion proof step 8. -/
+of the specified coefficient isomorphism. (Stacks, Tag 00YV) -/
 def integralSectionFunctor (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -436,12 +409,7 @@ private theorem restriction_isEquivalence
   (restrictionEquivalence c).isEquivalence_functor
 
 /-- The prescribed section-action comparison is an additive equivalence.
-Source: Stacks 00YV, 03DA; blueprint integral-criterion proof step 8.
-Proof: sectionModuleEquivalence is the existing exact equivalence with the same
-underlying abelian sheaves. Restriction along the inverse coefficient isomorphism
-has inverse restriction along its forward map. The unit and counit are the identity
-on sections, with the two scalar actions identified by the inverse equations.
-Both functors preserve addition on every section, so their composite is additive. -/
+(Stacks, Tags 00YV, 03DA) -/
 theorem integralSectionFunctor_properties (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :

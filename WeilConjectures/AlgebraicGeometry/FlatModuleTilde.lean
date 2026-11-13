@@ -18,7 +18,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Tensor flatness of the associated sheaf of a flat module
 
-Source: Stacks Project, Tags 01HV and 05NE.
+## References
+
+* Stacks Project, Tags 01HV and 05NE
 -/
 
 @[expose] public section
@@ -28,11 +30,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Flat stalks imply exactness of right tensoring.
-Source: Stacks Project, Tag 05NE, implication from stalk flatness to sheaf flatness.
-Use the natural stalk-tensor isomorphism to identify the stalks of a tensored short
-complex. Flat stalks preserve its exactness, and stalkwise detection gives exactness
-of the sheaf complex. Additivity then upgrades this to finite limits and colimits. -/
+/-- Flat stalks imply exactness of right tensoring (Stacks, Tag 05NE). -/
 private theorem isFlat_of_flat_stalk (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X))
     (hflat : ∀ x : X, Module.Flat (X.presheaf.stalk x)
@@ -60,19 +58,8 @@ private theorem isFlat_of_flat_stalk (X : RingedSpace.{u})
   exact ⟨T.preservesFiniteLimits_of_preservesHomology,
     T.preservesFiniteColimits_of_preservesHomology⟩
 
-/-- The associated sheaf of a flat module on an affine scheme is tensor-flat.
-Source: Stacks Project, Tags 01HV (stalks of associated sheaves) and 05NE
-(flat stalks imply flatness of a sheaf of modules).
-
-Proof: At every prime p of A, the stalk of the associated sheaf of M is M_p,
-by the stalk-localization description of associated sheaves. Localization of
-an A-flat module is flat over A_p. Tensor products of sheaves commute with
-stalks, naturally in each input. Consequently an exact short complex stays
-exact after tensoring on every stalk, and detection of exactness on stalks
-makes the tensored sheaf complex exact. The tensor functor is additive;
-Mathlib's homology-preservation criterion therefore gives preservation of
-finite limits and finite colimits. The zero module and zero ring are included;
-on the empty spectrum the stalkwise exactness test is vacuous. -/
+/-- The associated sheaf of a flat module on an affine scheme is tensor-flat
+(Stacks, Tags 01HV and 05NE). -/
 theorem isFlat_tilde (A : CommRingCat.{u}) (M : ModuleCat.{u} A)
     (hflat : Module.Flat A M) : SheafOfModules.IsFlat ((tilde.functor A).obj M) := by
   apply isFlat_of_flat_stalk (Spec A).toRingedSpace

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Finite bases for the Picard base-change stalks
 
-Source: Stacks Project, Tags 0BDP, 01C6 and 0097.
+## References
+
+* Stacks Project, Tags 0BDP, 01C6 and 0097.
 -/
 
 @[expose] public section
@@ -342,25 +344,7 @@ private noncomputable def iteratedDirectImageIso {X S T T' : Scheme.{u}}
     (Modules.pushforwardComp e.hom p).symm.app _ ≪≫
     (Modules.pushforward p).mapIso (asIso (adj.unit.app _)).symm
 
-/-- The source and target stalks are finite free, without comparing their ranks.
-Source: Stacks Project, Tags 01C6 and 0098; the local frames in the rank reduction
-of Tag 0BDP. This is the finite-freeness part of the original stalk-rank argument.
-
-Proof: apply hR to the identity of T at h(t). Use the identity law on morphisms
-and choose a trivializing open inside the resulting neighbourhood for the direct
-image of E, or for that of its dual according to hF. Taking germs of the frame
-and its coordinate projections gives a finite basis at h(t). The pullback stalk
-formula identifies P_t with extension of scalars of this module along h's stalk
-map; tensoring its basis gives a finite basis of P_t.
-For Q, apply hR to h at t. The associativity isomorphism between the iterated
-fibre product and X times_S T', together with composition of tensor pullbacks,
-identifies the iterated pulled-back F with the pullback of F along the composite
-base change. Pushforward along this isomorphism identifies Q with the direct
-image occurring in hR. Choose a trivializing open inside the resulting
-neighbourhood and take germs of its frame to obtain a finite basis of Q_t.
-The two bases can have unrelated cardinalities at this stage. No proper-image
-or fibre-rank comparison is needed. A zero-rank frame gives an empty basis;
-there is no point t when T' is empty. -/
+/-- The source and target stalks are finite free, without comparing their ranks. -/
 theorem picardRankMatch_baseChange_stalk_finite_bases {X S T : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)

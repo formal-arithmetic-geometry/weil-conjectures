@@ -18,8 +18,13 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
 
 /-! # Canonical affine section comparisons before flat base change
 
-Source: Stacks Project, Tags 02KH (affine dictionary paragraph), 01XJ, 01XK,
-01E4 and 03FD.
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
+* [Stacks Project, Tag 01XJ](https://stacks.math.columbia.edu/tag/01XJ)
+* [Stacks Project, Tag 01XK](https://stacks.math.columbia.edu/tag/01XK)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -37,46 +42,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical source and target affine comparisons, compatible with the cohomological
 pullback. This asserts no invertibility of the cohomological base-change map and needs
-no flatness of either projection. The additive comparison is existential here; it is
-not an arbitrary additive change of coordinates.
-
-Source: Stacks Project, Tag 02KH, first paragraph of the proof; Tags 01XJ, 01XK,
-01E4 and 03FD.
-
-Proof: Identify open-immersion pullback with restriction via their adjunctions. Forget
-an injective module resolution to abelian sheaves; forgotten injectives are acyclic
-for sections, so the common section complex compares derived module sections with
-Ext cohomology. Precomposition by the canonical constant-integer/free-Yoneda comparison
-fixes e0. Naturality for multiplication by sections makes this comparison A-linear.
-The augmentation and components equations in D.source identify its section complex
-with that of the original resolution I, independently of the comparison choices.
-
-The higher direct images of F are quasi-coherent because f is qcqs (01XJ). On affine
-V their positive cohomology vanishes. The cocycle-normalized Leray edge (01XK) therefore
-identifies H(U,N) with sections of P over V; on the section complex recorded in D this
-edge sends e0(x) to D.sourceClass(x), by 01E4. Tensor this A-linear identification with
-B and apply the affine tensor-pullback sections formula to P. Its unit formula gives
-a0(s tensor xi) = s times the restriction of the unit at D.sourceClass(e0 inverse xi).
-This constructs a0 as a B-linear equivalence without any flatness assumption.
-
-The affine chart square identifies U_B with the inverse image of W in the original
-cartesian square. The pullback composition isomorphisms identify N_B with the restriction
-of g'^*F there. Since f' is qcqs and g'^*F is quasi-coherent, its higher images are again
-quasi-coherent. On affine W the same vanishing and Leray edge, composed with the chart
-and module/abelian comparisons, construct b0 as a B-linear equivalence.
-
-To verify the last equality, compute the two maps on the common section complexes.
-An augmented comparison of injective resolutions represents the map defining
-moduleCohomologyFMap(D.psi); applying exact inverse image to an abelian injective
-resolution and its acyclic comparison represents the Ext pullback defining
-H.baseChangeLinear. Both represent the coefficient map induced by the pullback unit:
-D.unit_square and the pullback composition unit equations identify these maps.
-Resolution comparisons preserving augmentations are homotopic, hence induce the same
-map on cohomology. The components equations of D identify restrictions to W termwise.
-Apply the cocycle formulas for the two Leray edges, which take a cocycle to its class
-in the higher image. They give precisely the displayed last equality. All scalar
-representations commute with these maps, so b0 is B-linear. This construction includes
-empty opens, zero coefficients, and degree zero, where the edges are augmentations. -/
+no flatness of either projection. (Stacks, Tags 02KH, 01XJ, 01XK, 01E4 and 03FD.) -/
 theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f]

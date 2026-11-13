@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # A product section determined by local representatives
 
-Source: Stacks Project, Lemma 087Z and Section 0EHN.
+## References
+
+* Stacks Project, Tags 087Z and 0EHN
 -/
 
 @[expose] public section
@@ -154,26 +156,7 @@ private theorem equation_of_representatives {X : Scheme.{u}} [IsNoetherian X]
 set_option backward.isDefEq.respectTransparency false in
 /-- For two fixed sections, the local multiplication equations determine one output.
 No linear map or compatibility between different pairs of inputs is asserted.
-Source: Stacks Project, Lemma 087Z and Section 0EHN, the associated graded construction;
-https://stacks.math.columbia.edu/tag/087Z.
-
-Proof: On stalks, induct through the adjacent quotient isomorphisms of F. Reducing
-level r+1 to level n+1 is quotient by I^(n+1): iterated quotients by nested ideal
-powers agree with the quotient by the smaller power. Every transition is therefore
-a sheaf epimorphism. Locally lift a to a' in I^m and the inclusion of x to t at
-level m+n+1. If n>0, t reduces to zero at level n and thus belongs to I^n times
-that level. If n=0, use I^0 F=F. Consequently a't belongs to I^(m+n) F and has a
-unique preimage in the kernel K_(m+n); for m+n=0 use the identity inclusion.
-Changing t by I^(n+1) F changes a't by I^(m+n+1) F=0. Changing a' by I^(m+1)
-has the same effect, since t belongs to I^n F. Thus the local kernel preimages
-agree on overlaps and glue by the sheaf axiom. On any smaller open, compare its
-specified representatives with the restrictions of the original local ones;
-independence and sheaf separation give the displayed equation. For uniqueness,
-locally lift a and x around every point. Both proposed outputs have the same
-image a't under the kernel inclusion, which is injective on sections. Sheaf
-separation equates the outputs. On an empty open the cover is empty and separation
-still applies. Zero degrees, the zero ideal, the unit ideal, and zero modules need
-no exception to this argument. -/
+(Stacks, Tag 087Z and Section 0EHN.) -/
 theorem formalKernel_product_section_existsUnique {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I) (m n : ℕ) (U : X.Opens)
     (a : (formalAssociatedGradedPiece I m).val.obj (op U))

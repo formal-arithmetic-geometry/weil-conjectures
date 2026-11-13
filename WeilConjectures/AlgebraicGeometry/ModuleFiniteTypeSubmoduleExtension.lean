@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeApproximation
 /-!
 # Extension of finite-type quasi-coherent submodules
 
-Source: Stacks Project, Properties, Lemma 01PF.
+## References
+
+* [Stacks, Tag 01PF](https://stacks.math.columbia.edu/tag/01PF)
 -/
 
 @[expose] public section
@@ -36,26 +38,8 @@ set_option autoImplicit false
 set_option maxHeartbeats 600000 in
 -- Transporting generators and the image factorization need extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
-/-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme.
-
-Source: Stacks Project, Properties, Lemma 01PF.
-
-Proof:
-1. Extend the prescribed inclusion using the quasi-coherent extension theorem 01PE(3),
-   obtaining H, a map to F, and an isomorphism H restricted to U with G. The open
-   immersion is quasi-compact because U is compact and X is quasi-separated.
-2. Transport the finite local generators of G along the inverse isomorphism. Apply
-   exists_finiteType_global_approximation to H: its finite-affine-cover induction
-   uses exists_finiteType_affine_enlargement to obtain a quasi-coherent finite-type
-   E with a monomorphism to H which restricts to an isomorphism on U.
-3. Take the abelian image of the composite E to H to F. The image is quasi-coherent
-   and finite type by quasiCoherent_cokernel_image and finiteType_image_extension.
-   Over U the composite is the prescribed monomorphism preceded by an isomorphism.
-   Its restricted factorization through the image is therefore monic, and it is
-   epic because restriction preserves epimorphisms; hence it is an isomorphism.
-4. Compose its inverse with the restriction E to H and the isomorphism to G.
-   Cancel the restricted factorization through the image to prove that this
-   isomorphism commutes with the inclusions into F restricted to U. -/
+/-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme
+(Stacks, Tag 01PF). -/
 theorem exists_quasicoherent_finiteType_submodule_extension
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U : X.Opens) (hU : IsCompact (U : Set X))

@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 
 /-! # Assemble natural transitions from maps on universal pairwise overlaps
 
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing and pullback. -/
+## References
+
+* Stacks Project, Tag 01ZR (first proof, Zariski gluing and pullback). -/
 
 @[expose] public section
 
@@ -133,25 +135,8 @@ end CategoryTheory.Pseudofunctor
 
 namespace AlgebraicGeometry
 
-/-- Maps on universal overlaps and their limit squares assemble into a natural comparison.
-Source: Stacks Project, Tag 01ZR, first proof, after gluing the pairwise maps.
-
-Proof: Set T.obj a = N a. For a test scheme Y with arrows f1 and f2 to the two
-charts over the same q, use the universal map Y -> U_a ×_X U_b. Pull phi a b back
-along it, and conjugate by the pseudofunctor composition comparisons; this is
-the pseudofunctor pullHom formula. For g:Y' -> Y, the composite of g and the first universal
-map equals the universal map associated to g f1 and g f2 by the two projection
-equations. The pseudofunctor identity pullHom_pullHom proves naturality.
-Thus T is an OverlapTransitions, with the prescribed objects literally equal.
-At the limit its map on the universal overlap of U×_X Y is overlapPairPullHom.
-Use the given e as the component isomorphisms. For arbitrary test arrows into
-the limit charts, factor through their universal pairwise overlap and pull back
-the assumed square. Naturality of both transition families and of mapComp'
-makes the pulled-back square the required Comparison.comm equation. This does
-not impose any identity or cocycle equation at the original stage. Neither
-finiteness, finite presentation, quasi-coherence nor directedness is needed for
-this purely categorical assembly. Empty chart families and empty overlaps are
-covered by the same universal-property construction. -/
+/-- Maps on universal overlaps and their limit squares assemble into a natural comparison
+(Stacks, Tag 01ZR). -/
 theorem exists_overlap_pair_transitions_comparison
     {X Y : Scheme.{u}} (U : X.OpenCover.{u})
     (N : (a : U.I₀) → (U.X a).Modules) (p : Y ⟶ X)

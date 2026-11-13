@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 
 /-! # Descent of the normalized global tensor comparison
 
-Source: Stacks Project, Tag 079U.
+## References
+
+* Stacks Project, Tag 079U.
 -/
 
 @[expose] public section
@@ -222,22 +224,7 @@ private theorem tensorComparison_of_additive_monoidal
     (HomotopyCategory A (.up ℤ)) id (fun _ ↦ True)
     (Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) P))
 
-/-- Descend the tensor comparison once the derived pair is fixed.
-Source: Stacks Project, Tag 079U; uniqueness of left derived bifunctors.
-
-Proof: form the bifunctors U(A,B)=L(A tensor B) and V(A,B)=LA tensor LB.
-Their comparison counits are respectively L(mu) followed by alpha on the tensor,
-and alpha on both factors followed by mu. On two K-flat objects all these arrows
-are isomorphisms: their tensor is K-flat, alpha is invertible there, and P preserves
-K-flatness. The K-flat derivability structure therefore makes both bifunctors left
-derived bifunctors. Totalize P's inverse tensor constraint and localize it to obtain
-an isomorphism between their underived bifunctors. Uniqueness of left derived
-bifunctors yields U isomorphic to V. Naturality in each argument gives simultaneous
-tensor naturality. The defining counit equation gives exactly the normalization
-on quotient cochain objects. This works for zero objects and unbounded complexes.
-The private generic tensorComparison_of_kflat above proves the abstract descent.
-The additive monoidal specialization registers the K-flat derivability prerequisites;
-applying it to modules and sheaves gives the asserted quotient normalization. -/
+/-- Descend the tensor comparison once the derived pair is fixed (Stacks, Tag 079U). -/
 theorem globalTensorPullback_tensorDescent
     (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace))

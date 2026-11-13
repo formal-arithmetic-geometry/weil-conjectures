@@ -13,7 +13,11 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Localized-site comparisons for the concrete open-image complexes
 
-Source: Stacks Project, Tags 08BV, 08BS, and 079W.
+## References
+
+* [Stacks, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks, Tag 08BS](https://stacks.math.columbia.edu/tag/08BS)
+* [Stacks, Tag 079W](https://stacks.math.columbia.edu/tag/079W)
 -/
 
 @[expose] public section
@@ -164,36 +168,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The concrete image complexes compute any supplied right adjoints to
 localized-site restriction, compatibly with every nested restriction.
-
-Source: Stacks Project, Tag 08BV, lemma-exact-sequence-j-star, first paragraph;
-Tag 08BS, lemma-restrict-K-injective-to-open; Tag 079W, lemma-adjoint.
-
-Proof: For each open T, obtain the open-scheme derived localization in the
-prescribed Hom universe. Use the constructed K-injective open-image comparison
-and its unit identity for the derived underived adjunction. Exact derived
-composition identifies scheme restriction with localized restriction followed
-by the derived open-site equivalence. Restrict the adjunction through this
-fully faithful functor, then normalize by rightAdjointUniq for the supplied
-adjunction. The resulting comparison carries the concrete unit to the supplied
-unit. Postcomposition by G_T R_T(e) gives e_T; naturality of the unit gives
-Q(eta_T) followed by e_T equal to e followed by the T-unit at E.
-
-For an inclusion W into T, localized W-restriction of Q(eta_T) is invertible.
-Indeed the underived open direct image is fully faithful, so T-restriction of
-its unit is invertible by the left triangle and invertibility of the counit.
-Restrict further to W, use the nested-restriction isomorphism and reflection
-of isomorphisms by the open-site equivalence. Invertibility degreewise passes
-to complexes and then, by exact restriction's factorization, to the derived
-localized W-restriction. Transposing under adj W therefore permits cancellation
-of Q(eta_T) in morphisms into G_W.
-
-After this cancellation, the concrete unit-restriction identity reduces one
-side to e followed by the W-unit at E. On the other side, naturality of the
-nested-restriction comparison and the T left triangle show that the T-unit
-followed by the W-mate of the restricted T-counit is the W-unit. The transpose
-of identity is the counit, so this is precisely the required equality.
-No termwise injectivity, cover or sequence exactness is used. Empty and repeated
-opens use the same adjunction identities. -/
+(Stacks, Tags 08BV, 08BS, 079W) -/
 theorem schemeOpenModuleImageComplex_localized_comparisons
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

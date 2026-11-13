@@ -13,12 +13,14 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # ProjGradedModuleSheafGlobalSections
 
-Source: Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
-Lemma 01M7 and Lemma 01MB.
-
 The degree-zero modules are submodules with the already defined `degreeZeroFractions`
 as carriers. All choices of fraction representatives occur in the restriction formula.
 The section identifications are additive equivalences with explicit scalar compatibility.
+
+## References
+
+* Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
+  Lemmas 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -34,8 +36,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM. -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsGlobalSections (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -52,22 +54,8 @@ local notation "Rp[" x "]" => HomogeneousLocalization 𝒜 T[x]
 local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
 
-/-- GlobalSections for a graded-module chart system.
-Source: Stacks Project, Constructions, Section 01M3 before Definition 01M6;
-Lemma 01M7 and Lemma 01MB.
-
-Proof: For m in M_0 the fraction m/1 lies in every Z f. The fraction restriction
-formula with exponent zero shows that these fractions are compatible on every inclusion
-and hence on intersections D_+(fg). The standard opens cover Proj, so the sheaf property
-glues their inverse images under alpha uniquely to a global section. Unique gluing of
-zero and sums makes this an additive map gamma. Apply the same construction to degree-zero
-scalars in the structure sheaf, using fromZeroRingHom and awayToSection; uniqueness of
-gluing proves zero, one, addition and multiplication, giving eta. The chart scalar law
-shows that gamma(r • m) and eta(r) • gamma(m) agree on all charts, proving the scalar
-identity. Naturality and the chart restriction law give compatibility of restrictions.
-Any other section with these fraction restrictions agrees chartwise and hence globally.
-If Proj is empty, both sheaves have a unique global section; the same gluing proof works.
--/
+/-- Global sections for a graded-module chart system
+(Stacks, Constructions, Lemmas 01M7 and 01MB). -/
 theorem gradedModuleSheaf_globalSections
     (𝓜 : ℤ → AddSubgroup M) (_h𝓜 : DirectSum.IsInternal 𝓜)
     (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),

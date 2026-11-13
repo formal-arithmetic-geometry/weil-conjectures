@@ -21,7 +21,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Properly supported coherent tensor powers
 
-Source: Stacks Project, Tags 0CYS, 01I8 and 01XZ, applied in Tag 09ZT.
+## References
+
+* Stacks Project, Tags 0CYS, 01I8, 01XZ and 09ZT.
 -/
 
 @[expose] public section
@@ -108,21 +110,8 @@ private theorem supported_of_annihilated {X S Z : Scheme.{u}}
     inferInstance, inferInstance,
     ⟨asIso ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app F)⟩⟩
 
-/-- The tensor square and cube are in the proper-support coherent category.
-Source: Stacks Project, Tags 0CYS, 01I8 and 01XZ, for the multiplication argument of 09ZT.
-
-Proof: Since X is locally of finite type over the Noetherian ring A, it is locally
-Noetherian. A coherent G is quasi-coherent of finite type (01XZ). Choose a proper closed
-subscheme whose ideal annihilates G using 0CYS. Tensoring sections shows this ideal also
-annihilates the tensor square and cube: a(x tensor y) = (ax) tensor y, and the same formula
-holds for the cube. This statement extends from elementary tensors by linearity and
-sheafification, so it holds as a sheaf statement. Quasi-coherent tensor products remain
-quasi-coherent; on every affine open their sections are the tensor products of the
-sections of their factors (01I8). Tensor products of finite modules are finite, so the
-square and cube are of finite type by the affine criterion. Hence both are coherent by
-01XZ. The annihilating proper closed subscheme and 0CYS then show that both supports are
-proper over the base. No completion, multiplication, or unit is used. This includes the
-zero module and empty scheme without any nonempty assumption. -/
+/-- The tensor square and cube of a coherent module with proper support are coherent
+with proper support. -/
 theorem finite_structure_tensor_powers_supported
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [LocallyOfFiniteType f]

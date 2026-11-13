@@ -17,7 +17,11 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # The flat base-change map on sections
 
-Source: Stacks Project, Cohomology, Tags 02N7, 01E4 and 01FB.
+## References
+
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
 -/
 
 @[expose] public section
@@ -33,29 +37,22 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 
-/-- Flat pullback preserves finite limits, from the recorded exactness theorem.
-Source: Stacks, Tag 02N4.
--/
+/-- Flat pullback preserves finite limits. (Stacks, Tag 02N4.) -/
 instance flatBaseChangePullbackLimits {X Y : Scheme.{uBC}} (g : X ⟶ Y) [Flat g] :
     PreservesFiniteLimits (tensorPullback g) :=
   (flat_module_pullback_exact_pushforward_injective g).1.1
 
-/-- Flat pullback preserves finite colimits, from the recorded exactness theorem.
-Source: Stacks, Tag 02N4.
--/
+/-- Flat pullback preserves finite colimits. (Stacks, Tag 02N4.) -/
 instance flatBaseChangePullbackColimits {X Y : Scheme.{uBC}} (g : X ⟶ Y) [Flat g] :
     PreservesFiniteColimits (tensorPullback g) :=
   (flat_module_pullback_exact_pushforward_injective g).1.2
 
-/-- Additivity follows from preservation of finite biproducts.
-Source: Stacks, Tag 02N4.
--/
+/-- Flat pullback is additive. (Stacks, Tag 02N4.) -/
 instance flatBaseChangePullbackAdditive {X Y : Scheme.{uBC}} (g : X ⟶ Y) [Flat g] :
     (tensorPullback g).Additive := Functor.additive_of_preserves_binary_products _
 
 /-- The sectionwise comparison of the two composites of direct images in a square.
-Source: Stacks, Tag 02N7.
--/
+(Stacks, Tag 02N7.) -/
 def flatBaseChangePushforwardSquare {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S) :
     pushforward (pullback.snd g f) ⋙ pushforward f ≅
       pushforward (pullback.fst g f) ⋙ pushforward g :=
@@ -63,9 +60,8 @@ def flatBaseChangePushforwardSquare {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S
     pushforwardCongr (pullback.condition (f := g) (g := f)).symm ≪≫
       (pushforwardComp (pullback.fst g f) g).symm
 
-/-- Push the augmented lift down along f, and use the sectionwise square comparison.
-Source: Stacks, Tag 02N7.
--/
+/-- Push the augmented lift down along `f`, and use the sectionwise square comparison.
+(Stacks, Tag 02N7.) -/
 def flatBaseChangeResolutionQ {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules} (I : InjectiveResolution F)
     (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))
@@ -80,9 +76,8 @@ def flatBaseChangeResolutionQ {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ 
     (NatIso.mapHomologicalComplex (flatBaseChangePushforwardSquare f g)
       (ComplexShape.up ℕ)).hom.app J.cocomplex
 
-/-- The termwise adjoint c of q, with the canonical tensor-pullback adjunction.
-Source: Stacks, Tag 02N7.
--/
+/-- The termwise adjoint `c` of `q`, with the canonical tensor-pullback adjunction.
+(Stacks, Tag 02N7.) -/
 def flatBaseChangeResolutionC {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S) [Flat g]
     {F : X.Modules} (I : InjectiveResolution F)
     (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))
@@ -92,9 +87,8 @@ def flatBaseChangeResolutionC {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ 
   ((Classical.choose (exists_tensorPullbackAdjunction g)).mapHomologicalComplex
     (ComplexShape.up ℕ)).homEquiv _ _ |>.symm (flatBaseChangeResolutionQ f g I J t)
 
-/-- H^p(c), with exact pullback's homology comparison and the resolution comparisons.
-Source: Stacks, Tag 02N7.
--/
+/-- `H^p(c)`, with exact pullback's homology comparison and the resolution comparisons.
+(Stacks, Tag 02N7.) -/
 def flatBaseChangeResolutionBeta {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S) [Flat g]
     {F : X.Modules} (I : InjectiveResolution F)
     (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))
@@ -111,9 +105,8 @@ def flatBaseChangeResolutionBeta {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' �
       (flatBaseChangeResolutionC f g I J t) ≫
     (J.isoRightDerivedObj (pushforward (pullback.fst g f)) p).inv
 
-/-- The canonical class map into R^p f_*F, using the restricted source resolution.
-Source: Stacks, Tag 01E4.
--/
+/-- The canonical class map into `R^p f_*F`, using the restricted source resolution.
+(Stacks, Tag 01E4.) -/
 def FlatBaseChangeOpenChoices.sourceClass {X S S' : Scheme.{uBC}}
     {f : X ⟶ S} {g : S' ⟶ S} {F : X.Modules} {I : InjectiveResolution F}
     {J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)} {V : S.Opens}
@@ -122,9 +115,8 @@ def FlatBaseChangeOpenChoices.sourceClass {X S S' : Scheme.{uBC}}
     (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
     V D.source.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V
 
-/-- The canonical class map into R^p f'_*F', using the restricted target resolution.
-Source: Stacks, Tag 01E4.
--/
+/-- The canonical class map into `R^p f'_*F'`, using the restricted target resolution.
+(Stacks, Tag 01E4.) -/
 def FlatBaseChangeOpenChoices.targetClass {X S S' : Scheme.{uBC}}
     {f : X ⟶ S} {g : S' ⟶ S} {F : X.Modules} {I : InjectiveResolution F}
     {J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)} {V : S.Opens}

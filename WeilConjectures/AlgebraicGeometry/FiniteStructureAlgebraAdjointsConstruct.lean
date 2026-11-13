@@ -20,7 +20,9 @@ import Mathlib.Algebra.Category.Ring.Limits
 
 /-! # Algebra structures on algebraized finite direct images
 
-Source: Stacks Project, Tags 09ZT, 088E and 088F.
+## References
+
+* Stacks Project, Tags 09ZT, 088E and 088F.
 -/
 
 @[expose] public section
@@ -233,26 +235,8 @@ private theorem adjoint_naturality {X S Y : Scheme.{u}}
       (pushforwardComp p j).hom.app (SheafOfModules.unit Y.ringCatSheaf))
     ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.naturality e)
 
-/-- Construct the algebra structure and its adjoint algebra maps, without the transition equation.
-Source: Stacks Project, Tag 09ZT, multiplication paragraph, using 088E, 088F and 0CYS.
-
-Proof: Choose a proper closed subscheme annihilating G by 0CYS. Its ideal also annihilates
-G's tensor square and cube. Quasi-coherence and finite type make these tensor powers coherent.
-Conjugate the finite direct-image multiplications by psi and the tensor comparison. The
-canonical composition comparison is built from the same pinned adjunctions, so it preserves
-pulled-back sections and hence tensor products; the base-change algebra formula and hpsi
-make the conjugated products compatible. Full faithfulness in 088E lifts the products
-uniquely. The supporting structure-sheaf quotient is coherent with proper support. The
-reduced units factor through it because its ideal annihilates each reduced algebra; full
-faithfulness lifts this unit uniquely. Faithfulness on the tensor cube, square and G gives
-associativity, symmetry and both unit laws. These operations equip the additive sheaf of G
-with commutative ring structures preserved by restriction. Its additive sheaf condition
-implies the ring sheaf condition. The unit defines the structure morphism, producing B and
-the underlying-module isomorphism e. The adjoints of psi composed with pullback of e preserve
-multiplication and unit by the same comparisons. They are therefore algebra maps b. The
-adjunction unit and pushforward-composition comparison give the displayed section formula.
-This lemma does not claim that the b commute with transitions; that is a separate adjunction
-calculation. Empty opens, zero modules and empty schemes obey the same construction. -/
+/-- Construct the algebra structure on a compatible system of finite direct images and its
+adjoint algebra maps, without the transition equation (Stacks, Tags 09ZT, 088E, 088F, 0CYS). -/
 theorem finite_structure_algebra_adjoints_construct
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

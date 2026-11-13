@@ -39,9 +39,7 @@ noncomputable def integralOrdinaryDerivedScalar :=
     ((cartesianCoefficients_finiteFree ℓ h).2.2 Y).1
   (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)).mapDerivedCategory
 
-/-- Exact tensor and total derived tensor are canonically isomorphic.
-
-Proof: finite freeness gives exactness; apply uniqueness of total left derived functors. -/
+/-- Exact tensor and total derived tensor are canonically isomorphic. -/
 noncomputable def integralScalarExactDerivedComparison :
     (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)).leftDerivedFunctor ≅
       integralOrdinaryDerivedScalar ℓ h Y := by

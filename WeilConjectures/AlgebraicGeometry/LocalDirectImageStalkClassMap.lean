@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # Local direct-image stalks and total cohomology
 
-Source: Stacks Project, Tags 02OD and 01E4.
+## References
+
+* [Stacks, Tags 02OD and 01E4]
 -/
 
 @[expose] public section
@@ -26,14 +28,8 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-/-- The canonical cohomology-to-stalk class map, before proving it invertible.
-Source: Stacks Project, Tags 01E4 and 02OD.
-
-Use Mathlib's injective resolution of F', identify its global section complex with
-the top sections of its direct-image complex, apply the canonical section class
-map and the right-derived resolution comparison, and take the germ at y.
-Every map is an existing construction; no existence theorem for an arbitrary
-comparison equivalence supplies the data. -/
+/-- The canonical cohomology-to-stalk class map, before proving it invertible
+(Stacks, Tags 01E4 and 02OD). -/
 def localDirectImage_stalk_class {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p : ℕ) :
     (RingedSpace.moduleCohomology (pullback (Y.fromSpecStalk y) f).toRingedSpace p ⋙

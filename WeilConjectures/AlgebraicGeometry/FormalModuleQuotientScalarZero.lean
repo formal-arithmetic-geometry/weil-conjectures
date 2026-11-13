@@ -17,19 +17,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- A scalar from the nth power of the base ideal kills every section of F/J^nF.
-Source: Stacks Project, Tag 02OC, construction of the comparison maps;
-Modules, Tags 01AG and 01CB, stalks of products and quotients.
-
-Proof: At a point z, let K be the image of J_z in O_{X,z}. The germ of the
-image of a base scalar in I lies in K by the definition of the extended ideal.
-The ring map from A to O_{X,z} therefore sends I^n into K^n. Exactness of
-stalks and compatibility with tensor products identify (F/J^nF)_z with
-F_z/(K^n F_z), on which every element of K^n acts by zero. The germ of the
-claimed scalar multiple is consequently zero at every point of U. A section
-of a sheaf with all germs zero is zero, giving the result. When n = 0,
-J^0 = O_X and the multiplication image is F, so the quotient itself is zero.
-The argument also covers I = 0, the unit ideal, F = 0 and the empty scheme;
-it uses no coherence, properness or Noetherian assumption. -/
+(Stacks, Tag 02OC; Tags 01AG and 01CB.) -/
 theorem formalModuleQuotient_scalar_zero {A : Type v} [CommRing A]
     (I : Ideal A) {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     (J : X.IdealSheafData)

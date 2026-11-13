@@ -14,9 +14,12 @@ import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
-/-! # Power annihilation of a kernel-pullback projection cokernel
+/-!
+# Power annihilation of a kernel-pullback projection cokernel
 
-Source: Stacks Project, Tags 0889(1) and 0CYV(2).
+## References
+
+* Stacks Project, Tags 0889(1) and 0CYV(2)
 -/
 
 @[expose] public section
@@ -122,19 +125,7 @@ private theorem power_stalk_zero_iff {X : Scheme.{u}} (J : X.IdealSheafData)
 set_option backward.isDefEq.respectTransparency false in
 /-- Restricting a pullback projection to a kernel with power-annihilated target
 increases its cokernel annihilator by at most that power. Only the cokernel of a'
-is used; neither its kernel nor formal compatibility is needed.
-
-Source: Stacks Project, Tag 0889(1), comparison away from the adic closed subset;
-the annihilator extension argument is the one in Tag 0CYV(2).
-Proof: Work at an arbitrary stalk. Exactness of module stalks preserves the kernel
-and the pullback. Write P = F ×_H F' and E = ker(d). The cokernel of P -> F embeds
-into coker(a'), by sending the class of x to the class of a(x). Hence I^s kills it.
-The quotient P/E embeds into the target G/I^(n+1)G, so I^(n+1) kills it. In the
-cokernel C of E -> F, the image of P -> F is a quotient of P/E and is killed by
-I^(n+1); the quotient by that image is coker(P -> F), killed by I^s. Multiplying
-these annihilators kills C by I^(s+n+1). The ideal-product stalk formula and the
-zero-stalk criterion give the stated sheaf annihilation. This includes J=0 and J=1,
-zero modules and the empty scheme; it does not require finite generation. -/
+is used; neither its kernel nor formal compatibility is needed (Stacks, Tags 0889, 0CYV). -/
 theorem finiteKernelPullback_cokernel_annihilated
     {X : Scheme.{u}} (J : X.IdealSheafData)
     {F F' H G : X.Modules} (a : F ⟶ H) (a' : F' ⟶ H)

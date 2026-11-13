@@ -7,8 +7,6 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 
 /-! # Invertibility of a natural number after pullback
-
-Source: the global-functions map in the universal-base argument of the finite P1 check.
 -/
 
 @[expose] public section
@@ -21,10 +19,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A natural number invertible on the base is invertible on its inverse image.
-
-Proof: map the given unit by the global-sections ring homomorphism. Its value on
-N is N by map_natCast. Transport the resulting IsUnit proof along that equality. -/
+/-- A natural number invertible on the base is invertible on its inverse image. -/
 theorem finiteP1_unitOnPullback (N : ℕ) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hY : IsUnit (N : Γ(Y, ⊤))) : IsUnit (N : Γ(X, ⊤)) := by
   exact (map_natCast f.appTop.hom N) ▸ hY.map f.appTop.hom

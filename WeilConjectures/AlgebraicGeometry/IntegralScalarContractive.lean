@@ -12,12 +12,13 @@ import all WeilConjectures.AlgebraicGeometry.PointLanAffineEvaluation
 
 /-! # Scalar units in the integral coefficient sheaf
 
-Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
+The helpers below prove that a totally disconnected continuous coefficient ring in Type 0
+realizes the regular integral module, and also prove regular-module linearity on sections
+and the norm-one continuous reciprocal formula.
 
-The continuous-ring realization argument is generalized from the proved comparison in
-`WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` to a totally disconnected
-continuous coefficient ring in Type 0. The helpers below also prove regular-module
-linearity on sections and the norm-one continuous reciprocal formula.
+## References
+
+* Bhatt–Scholze, Section 6.8.
 -/
 
 @[expose] public section
@@ -525,22 +526,7 @@ private theorem continuousIntegralRegular_isIso (ℓ : ℕ) [Fact ℓ.Prime]
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- One minus ℓ times an endomorphism of the regular integral module is invertible.
-Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
-
-Proof: realize the pulled coefficient ring as the ring sheaf of continuous integral
-functions. The comparison sends a function on a profinite test space to its composite
-with the test projection. On a weakly contractible affine, the canonical arrow to the
-profinite space of connected components is terminal in the Kan indexing category;
-sheafification preserves its sections. Continuous functions into the integral ring
-factor through connected components, since that ring is totally disconnected. Affine
-weakly contractible covers then detect that the comparison is an isomorphism of rings.
-Transport the regular module along this ring isomorphism. On every site object its
-endomorphism is multiplication by its value a at one, by module linearity. The function
-1-ℓa has norm one, since a is integral and the norm of ℓ is less than one. Its reciprocal
-is integral and continuous, giving a unit in the continuous function ring. Multiplication
-by this unit is bijective on sections, hence is an isomorphism of sheaves and module
-objects. Conjugating back proves the assertion. Empty site objects cause no exception. -/
+/-- One minus ℓ times an endomorphism of the regular integral module is invertible. -/
 theorem integralRegular_one_sub_nsmul_isIso (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (e : R ⟶ condensedRingObj (integralCoeff ℓ E) X) [IsMonHom e] [IsIso e]

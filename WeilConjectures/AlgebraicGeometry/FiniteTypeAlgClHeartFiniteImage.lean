@@ -98,21 +98,7 @@ include ℓ k
 
 set_option linter.unusedSectionVars false in
 /-- The direct image of an algebraic-closure sheaf comes from a finite coefficient field.
-
-Source: Bhatt--Scholze, Proposition 6.8.4(3), Proposition 6.8.14,
-Remark 6.8.15 and bounded-below continuity in Section 6.3.
-
-Proof: choose the finite constructible stratification of F. Finite-rank local systems,
-their finite presentation matrices and their gluing data descend to a finite
-subextension of the algebraic closure, by 6.8.4(3). Enlarge that subextension finitely
-many times so that all strata and extension classes are defined over one E. This
-constructs a constructible E-sheaf N whose scalar extension is F. Extension to the
-algebraic closure is exact. It is the filtered colimit of the finite scalar extensions,
-and on a qcqs map bounded-below direct image commutes with this filtered colimit.
-Finite scalar extension commutes with direct image by a finite basis. Combining
-these comparisons for N[0] gives the displayed isomorphism to Rf_*(F[0]). This is
-only a scalar-change description, with no upper bound asserted for the image.
-For the zero sheaf or empty source choose the base coefficient field and N=0. -/
+(Bhatt--Scholze, Proposition 6.8.4(3), Proposition 6.8.14 and Remark 6.8.15.) -/
 theorem finiteTypeAlgClHeart_finiteImage
     (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))

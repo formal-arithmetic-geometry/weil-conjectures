@@ -21,16 +21,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- The polynomial-to-Laurent inclusion commutes with the structure maps to `Spec k`.
-
-Proof: write `u: k[t] → k[t,t⁻¹]` for the polynomial-to-Laurent map and `c_P`, `c_L`
-for the respective constant maps from `k`. The image under `u` of `c_P(a)` has coefficient
-`a` at exponent zero and zero at every other exponent, including negative exponents.
-Thus `u(c_P(a)) = c_L(a)` for every `a`, including zero. Extensionality gives
-`u ∘ c_P = c_L`. By the defining formulas for `KummerLine.inclusion` and
-`KummerLine.structureMap`, contravariant functoriality of `Spec` identifies the left
-side of the asserted equation with `Spec(u ∘ c_P)`. Substitution gives `Spec(c_L)`,
-which is the structure map of the punctured line. -/
+/-- The polynomial-to-Laurent inclusion commutes with the structure maps to `Spec k`. -/
 theorem normalizedKummerInclusion_over (k : Type u) [Field k] :
     KummerLine.inclusion k ≫ KummerLine.structureMap k false =
       KummerLine.structureMap k true := by

@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 /-!
 # Global sections and geometric connectedness
 
-Source: Stacks Project, Varieties, Lemma 0FD2.
+Reference: Stacks Project, Tag 0FD2.
 -/
 
 @[expose] public section

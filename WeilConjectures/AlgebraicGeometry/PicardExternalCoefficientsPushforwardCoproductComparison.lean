@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsPushforwardTe
 
 /-! # Affine-basis comparison for the presheaf coproduct
 
-Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth.
+## References
+
+* Stacks Project, Varieties, Tag 0BED.
 -/
 
 @[expose] public section
@@ -26,22 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- On the affine basis, the presheaf coproduct indexed by a basis of sections of F
 is naturally isomorphic to the underlying presheaf of the external direct image.
-Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, degree-zero calculation.
-
-Proof: On an affine open V of Y, identify pr2 inverse-image V with X times V.
-Restriction along the open immersion identifies the coefficients with F external
-G restricted to V, compatibly with tensor-pullback units. The affine-right external
-section comparison identifies its sections with Gamma(X,F) tensor_k G(V).
-A basis b of Gamma(X,F) identifies this tensor module with the direct sum of copies
-of G(V): send the i-th summand t to b_i tensor t. The inverse expands the first
-factor in the basis and has finite support. This is O_Y(V)-linear, since the scalar
-acts on the second factor. The pure-tensor formula of the section comparison
-commutes with restriction V' contained in V; the basis expansion also commutes
-with these maps. Presheaf module coproducts are computed pointwise, so these
-linear isomorphisms assemble into the stated isomorphism on the affine basis.
-No assertion about sections of a sheaf coproduct is made. An empty basis and
-zero G give zero modules on both sides, and the empty affine open has zero
-sections. This statement stops before sheafification and its colimit property. -/
+(Stacks, Tag 0BED) -/
 theorem exists_external_coproduct_comparison
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

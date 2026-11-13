@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
 
 /-! # Algebraic presentation of the specified pro-etale module inverse image
 
-Source: Stacks Project, Tags 00YV and 03D2.
+## References
+
+* Stacks Project, Sites, Tag 00YV; Modules on Sites, Tag 03D2.
 -/
 
 @[expose] public section
@@ -167,19 +169,7 @@ private theorem moduleSetsIdentification_naturality {X Y : Scheme.{u}} (f : X �
       ((proEtaleBaseChange f).op.obj U) z) hM.symm))
 
 /-- The specified module inverse image transports the ring and module operations along
-set inverse image.
-Source: Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2;
-the algebraic-structure step in stratum scalar extension.
-
-Proof: use the existing unit-normalized underlying-set identifications for rings and
-modules. The module adjunction unit is natural, so the module identification is natural:
-transpose its naturality square through the set adjunction and check on unit sections.
-The same method transports every operation graph. Both sides of each graph equation
-are sheaf maps out of the inverse image of its test sheaf. Their adjuncts agree because
-the ring unit preserves addition, multiplication, zero and one, and the module unit
-preserves addition, zero and the scalar action through the ring unit. Set modules to
-proEtaleModuleInverseImage itself, so the final functor equality is reflexivity.
-This argument includes empty schemes and zero rings and imposes no flatness assumption. -/
+set inverse image (Stacks, Tags 00YV and 03D2). -/
 theorem proEtaleAlgebraicInverseImage_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     ∃ I : SheafOfModules.AlgebraicInverseImage

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatRestriction
 
 /-! # Comparison square on literal restrictions
 
-Source: Stacks Project, Tags 0DJ8 and 0DJ9 (locality of the stalk comparison).
+## References
+
+* Stacks Project, Tags 0DJ8, 0DJ9 and 06YB.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -89,30 +91,7 @@ private theorem additive_comparisonIntoPullback_naturality
 
 set_option linter.unusedVariables false in
 /-- The open comparison square when the restricted representative data are supplied.
-Source: Stacks Project, Tag 0DJ8 (locality of equation-bc), Tag 0DJ9
-(source-open induction), and Tag 06YB (K-flat stalks).
-
-Proof: put p = pullback.fst g′ U.ι and q = pullback.snd g′ U.ι. The open
-immersion p has exact module restriction. Uniqueness of left adjoints identifies
-its tensor pullback with restriction, and uniqueness of left derived functors
-identifies their derived functors. Descend restrictStalkNatIso to the exact
-derived functors and then cohomology, obtaining η independently of P and K.
-Open restriction preserves K-flatness of P by the stalk criterion.
-The stalk ring maps of p and U.ι are isomorphisms. The pullback condition,
-stalkMap_comp, and restriction-stalk extension identify the original and
-restricted stalk complexes with their base-ring actions. Apply the universal
-derived base tensor functor, cohomology, and final scalar extension to obtain
-the source isomorphism. The comparison_eq and localized_eq model equations
-identify both comparisons with universal counits and adjunction transposes.
-Naturality of these maps and tensorStalkIso proves the square for the canonical
-exact-restriction identification. The derived-composition counit equation gives
-precisely β. For the supplied eQ, compare it with the canonical identification
-through a derived automorphism of the literal restricted representative. Apply
-comparisonIntoPullback_naturality and exists_comparisonSourceIso to that
-automorphism; compose its source isomorphism with the preceding one. Naturality
-of η transports the square along eP. This gives the displayed formula for every
-supplied eQ and hcQ. Invertibility of comparisonIntoPullback is never assumed.
-Empty opens have no z, and the same operations apply to zero complexes and rings. -/
+Invertibility of `comparisonIntoPullback` is never assumed. -/
 theorem exists_open_restricted_comparison_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

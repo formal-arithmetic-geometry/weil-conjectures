@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Module coefficient factorization
 
-Source: Stacks Project, Tag 01FB.
+## References
+
+* [Stacks, Tag 01FB]
 -/
 
 @[expose] public section
@@ -23,13 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Module coefficient factorization.
-
-Source: Stacks Project, Tag 01FB.
-
-Proof: Apply moduleCohomologyFMap_source_naturality to the coefficient map and the identity of
-its direct image. Evaluate the equality of additive maps on x. Composition with the identity
-leaves the coefficient map unchanged, and the identity h-map is the edge map. -/
+/-- Module coefficient factorization (Stacks, Tag 01FB). -/
 theorem moduleCohomology_coefficient_factor
     {X Y : Scheme.{u}} (f : X ⟶ Y) {N : Y.Modules} {F : X.Modules}
     (φ : N ⟶ (pushforward f).obj F) (p : ℕ)

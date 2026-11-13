@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion
 /-!
 # Field-valued points factor through immersions
 
-Source: literature/stacks-project/schemes.tex, Definitions 01IO and 01HK,
-Lemmas 01HI, 0356, and 01L7, and the discussion before Lemma 01J9.
+## References
+
+* Stacks Project, Schemes, Definitions 01IO and 01HK, Lemmas 01HI, 0356, and 01L7, and the
+  discussion before Lemma 01J9.
 -/
 
 @[expose] public section
@@ -28,18 +30,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- An immersion induces residue-field isomorphisms and uniquely lifts field-valued
-points whose image is the image of a chosen point. First factor the immersion as a
-closed immersion followed by an open immersion and compare the two residue-field maps
-using `lem-weil-pbc-residue-field-point-naturality` and
-`lem-weil-pbc-closed-immersion-residue-field-iso`; their composite is an isomorphism.
-For a field-valued point, lift uniquely through the open factor by
-`lem-weil-pbc-morphism-factors-through-open-subscheme`, then through the closed factor
-by `lem-weil-pbc-field-point-factors-through-closed-immersion`. Uniqueness follows from
-`lem-weil-pbc-open-immersion-monomorphism` and the closed-factor uniqueness. The final
-universal quantification includes the algebraically closed-field case defining geometric
-points.
-Source: Stacks Project, Schemes, Definitions 01IO and 01HK, Lemmas 01HI, 0356,
-and 01L7, and the discussion before Lemma 01J9. -/
+points whose image is the image of a chosen point. The final universal quantification
+includes the algebraically closed-field case defining geometric points. -/
 theorem fieldPoint_factorsThrough_immersion
     {Z X : Scheme.{u}} (iota : Z ⟶ X) [IsImmersion iota]
     (z : Z) :

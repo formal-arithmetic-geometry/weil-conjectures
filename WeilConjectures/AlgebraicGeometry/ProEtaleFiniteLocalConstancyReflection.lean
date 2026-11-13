@@ -17,7 +17,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Reflection of finite local constancy
 
-Source: Stacks Project, Tags 09AK and 099Y.
+## References
+
+* Stacks Project, Tags 09AK and 099Y.
 -/
 
 @[expose] public section
@@ -30,16 +32,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-/-- Finite local constancy is reflected by the etale comparison pullback.
-Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant.
-
-Proof: the given finite constant models make the pro-etale pullback lisse. The finite
-locally constant comparison descends it to a finite locally constant etale sheaf H.
-Full faithfulness lifts the isomorphism between the two comparison pullbacks to an
-isomorphism G ≅ H, and finite local constancy is invariant under isomorphism.
-This includes zero modules, the zero ring and the empty scheme; no stalk conservativity
-for arbitrary pro-etale sheaves is used.
--/
+/-- Finite local constancy is reflected by the etale comparison pullback
+(Stacks, Tag 099Y). -/
 theorem isFiniteLocallyConstantSheaf_of_comparison_finite_models
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

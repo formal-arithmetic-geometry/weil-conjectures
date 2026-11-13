@@ -28,28 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Proper perfect pushforward admits a small family of compact isomorphism tests
-whose images are compact. This statement makes no reference to a right adjoint.
-Source: Stacks Project, Tags 0A9R (first paragraph), 0B6G, 09M1, and 09IS.
-
-Proof. Work first in the K-injective derived models with small Hom sets and the
-corresponding derived models on every open. The localization equivalences transport
-coproducts, their Hom comparisons, and isomorphisms to the given models, so no choice
-of derived model changes the assertion. Take a set of representatives of the perfect
-complexes on X, including representatives of all their shifts. Noetherian schemes
-are quasi-compact and quasi-separated. Perfect compactness makes each representative
-compact. Proper perfect direct image makes its image perfect on Y; compactness on Y
-and eR then make its R-image compact.
-
-To verify detection, let a morphism induce Hom bijections from all representatives.
-The same holds from every perfect object and every shift. Complete the morphism to
-a distinguished triangle. Exactness of shifted Hom and the bijections imply that
-all Hom groups from perfect objects to its cone vanish. The objects A whose every
-shift has zero Hom to this cone form a class closed under isomorphisms, shifts,
-cones (by exactness), retracts, and coproducts (by their universal property).
-Perfect generation makes this class the whole category. In particular the cone's
-identity is zero, so the cone is zero and the original morphism is an isomorphism.
-Transporting the representatives through the localization equivalence preserves
-this detection property and both compactness assertions. -/
+whose images are compact. This statement makes no reference to a right adjoint
+(Stacks, Tags 0A9R, 0B6G, 09M1 and 09IS). -/
 theorem properPerfect_compactTests
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

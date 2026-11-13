@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.GrothendieckEtaleLocalImage
 import WeilConjectures.CategoryTheory.GrothendieckDirectedPullback
 
 /-! # Detecting zero maps on the categorical local image
-Source: Stacks Project, Tag 00WL, categorical image argument.
+
+## References
+
+* [Stacks Project, Tag 00WL]
 -/
 
 @[expose] public section
@@ -23,14 +26,7 @@ variable {X : Scheme.{u}} (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
 
 /-- Locally liftable maps detect zero on the local-image subobject, without any
-assumption that the sheaf morphism is epic.
-Source: Stacks Project, Tag 00WL, categorical image argument.
-Proof: express the local image as the small directed union of its defining subobjects.
-Pull this union back along x; AB5 says the resulting subobjects have union the source.
-For each member pull its witnessing epimorphism back to this source subobject.
-Its composite into B has the required local lifts, so the hypothesis kills it.
-Cancel that epimorphism. All subobjects in the directed union now factor through
-the kernel of g, hence the whole source does and g is zero. -/
+assumption that the sheaf morphism is epic. (Stacks, Tag 00WL) -/
 theorem eq_zero_of_factors_localImage
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G)
     (W : X.Etale) (B T : A) (x : B ⟶ G.obj.obj (op W)) (g : B ⟶ T)

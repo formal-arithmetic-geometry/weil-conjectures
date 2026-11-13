@@ -73,22 +73,7 @@ private theorem transport_cocycle_of_lift
   rw [hnab, hnbc, hz]
   exact hnac.symm
 
-/-- The cocycle law for compatible transport.
-
-Source: Stacks Project, Tags 03RV and 02W5.
-Proof: Put R = Q ×_T U ×_T U, with its three maps to U. Since Q → U and
-U → T are etale, R → T is etale. Its projection to Q is the universal point
-above the first lift. Apply e inverse to that point to obtain a section s of
-E on R. Compatibility identifies the first transport with the point obtained
-from s above the second lift, and its subsequent transport with the point
-obtained from s above the third lift. Direct transport also equals the third
-point, so these transports coincide. Given arbitrary W, x, a, b, c, the maps
-x.left, b, c have equal composites to T. The Limits.pullback universal property
-therefore gives W → R whose composites are the given maps. Apply naturality
-three times to pull back the universal equality. Functoriality of composition
-then gives the displayed equality. Proof irrelevance identifies the equalities
-of composites used as transport arguments. Empty schemes satisfy the same
-universal properties; neither surjectivity nor nonemptiness is needed. -/
+/-- The cocycle law for compatible transport (Stacks, Tags 03RV, 02W5). -/
 theorem finiteLocalModels_descentDatum_compatibility_transport_cocycle
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)

@@ -16,7 +16,10 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Open restriction comparison before residue global sections
 
-Source: Stacks Project, Tags 08DW and 0D5S.
+## References
+
+* [Stacks, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
+* [Stacks, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -218,24 +221,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The residue homology sheaf of a restriction is the tensor pullback of the original
 residue homology sheaf, before applying global sections or changing their scalars.
-Source: Stacks Project, Tags 08DW and 0D5S.
-
-Proof: exact over-site restriction followed by overEquiv is tensor pullback along
-U.ι, and its derived functor factors as the composite of the two exact derived
-functors. Compare the chosen localization of the over-site with the standard
-localization on U using uniqueness of localization and the derived universal
-property. The residue square commutes by
-Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField. The composition comparison
-for derived pullback therefore identifies restriction followed by pullback to x
-with pullback to U.ι(x) followed by pullback along Spec of the residue-field map.
-For an open immersion the residue-field map is an isomorphism. Its tensor pullback
-is an exact equivalence, so its derived functor commutes naturally with homology.
-Comparing the supplied localization on the original residue scheme with the
-standard localization on the new residue scheme gives the displayed comparison.
-These comparisons descend from K-flat representatives by their universal properties,
-so they are natural for arbitrary unbounded derived objects. No global-sections or
-module-scalar comparison is included here. The empty open has no x, and no flatness
-or perfectness hypothesis on the object is used. -/
+(Stacks, Tags 08DW, 0D5S) -/
 theorem nonempty_localizedResidueHomology_sheaf_restriction_iso (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens, HasDerivedCategory.{w}

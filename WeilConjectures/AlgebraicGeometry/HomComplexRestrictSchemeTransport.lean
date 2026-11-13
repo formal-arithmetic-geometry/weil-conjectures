@@ -16,7 +16,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Transport of Hom complexes through the open-subscheme equivalence
 
-Source: Stacks Project, Cohomology, Tag 08DL and Cohomology on Sites, Tag 0A8X. -/
+## References
+
+* Stacks Project, Tags 08DL and 0A8X
+-/
 
 @[expose] public section
 
@@ -76,16 +79,7 @@ private theorem factor_differential
 set_option backward.isDefEq.respectTransparency false in
 /-- Given the natural internal-Hom comparisons for the over-open equivalence, the
 product construction and the differential compatibility produce the Hom-complex comparison.
-
-Source: Stacks Project, Cohomology, Tag 08DL and Cohomology on Sites, Tag 0A8X.
-
-Proof: Apply `homComplex_restrict_open` and transport its componentwise product
-projections through the supplied internal-Hom isomorphisms. Preservation of products
-by the over-open equivalence gives the component isomorphisms. The naturality equation
-for the supplied comparisons identifies both summands in the Hom differential, so
-`HomologicalComplex.Hom.isoOfComponents` gives the chain isomorphism. Finally compose
-with `overFunctorEquiv U` on each complex. All constructions are valid for arbitrary
-integer-indexed complexes, including zero and empty cases. -/
+(Stacks, Tags 08DL and 0A8X) -/
 theorem homComplex_restrict_scheme_of_homIso {Y : Scheme.{u}} (U : Y.Opens)
     (L M : CochainComplex Y.Modules ℤ)
     (e : ∀ (A B : SheafOfModules.{u} (Y.ringCatSheaf.over U)),

@@ -25,25 +25,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 
-/--
-Finite discrete coefficients transport an isomorphic étale exchange to the corresponding
+/-- Finite discrete coefficients transport an isomorphic étale exchange to the corresponding
 pro-étale exchange.  The comparison identity is recorded together with invertibility of the
 exchange at `ν_X^* L`, and every retained étale-origin witness of `K` whose antecedent is
-(isomorphic to) the same `L` gives invertibility of the exchange at `K`.
-
-Proof:
-1. Since `f` is proper it is quasi-compact and quasi-separated;
-   `f'` is quasi-compact and quasi-separated by hypothesis.  So the transport lemma
-   `comparison_derivedBaseChangeMap`
-   applies to `L` and gives `T_L ∘ ν_{Y'}^*(Ex_L) = Ex^R_{ν_X^* L} ∘ S_L` with the comparison
-   isomorphisms `S_L`, `T_L`; this is the second conjunct.  As `Ex_L` is an isomorphism, so is
-   `ν_{Y'}^*(Ex_L)`, hence `Ex^R_{ν_X^* L} = T_L ∘ ν_{Y'}^*(Ex_L) ∘ S_L⁻¹` is an isomorphism.
-2. For a witness `w` of `K` with `w.complex ≅ L`, the composite `ν_X^* L ≅ ν_X^* w.complex ≅ K`
-   identifies source and target of the exchange at `ν_X^* L` with those at `K`; naturality of
-   the exchange transformation shows that the exchange at `K` is the conjugate, hence an
-   isomorphism.  The conclusion does not mention the witness, so it is unchanged when the
-   witness is replaced by an isomorphic one.
--/
+(isomorphic to) the same `L` gives invertibility of the exchange at `K`. -/
 theorem finiteOriginExchangeTransport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

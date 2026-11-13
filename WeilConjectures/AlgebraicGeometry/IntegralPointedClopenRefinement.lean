@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralPointedEtaleFiniteModel
 
 /-!
 # Pointed clopen refinements for integral morphisms
-
-Source: the conservativity argument in the proof of
 -/
 
 @[expose] public section
@@ -26,20 +24,7 @@ namespace AlgebraicGeometry.Scheme.Hom.Nbhd
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An étale neighbourhood of a point over an integral morphism is refined by a clopen
-piece of a base-changed neighbourhood of its image.
-
-Proof: Shrink the base to an affine neighbourhood. Over its strict henselisation, write the
-integral algebra as the filtered union of its finite subalgebras. Shrink the given étale
-neighbourhood at the marked point to a standard étale affine. Its finitely many presentation
-coefficients descend to one finite subalgebra. A finite algebra over a strictly henselian
-local ring is a product of strictly henselian local rings. In the factor selected by the
-marked geometric point the descended étale neighbourhood has a section through that point.
-Pull back that factor and its complementary factors to the integral algebra. The factor
-is clopen and its section gives a map to the original neighbourhood preserving the marked
-point. The idempotent defining the factor, its complement, the étale section, and their
-finitely many equations descend to a pointed étale neighbourhood of the base geometric
-point. This gives P, Q, p and a with the two displayed equalities. No surjectivity of f is
-used. If the source is empty there is no geometric point t, so this case is vacuous. -/
+piece of a base-changed neighbourhood of its image. -/
 theorem exists_pointed_clopen_refinement
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)

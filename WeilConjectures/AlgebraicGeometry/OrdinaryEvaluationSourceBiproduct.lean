@@ -13,7 +13,9 @@ public import Mathlib.Data.Int.Interval
 
 /-! # Finite source decomposition
 
-Source: Stacks Project, Tags 08DQ and 08DM.
+## References
+
+* Stacks Project, Tags 08DQ and 08DM.
 -/
 
 @[expose] public section
@@ -152,19 +154,8 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
   exact biproduct.ι_desc inclusion r
 
 
-/-- The total tensor degree is the finite biproduct of its possibly nonzero summands.
-Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`, tensor sum.
-
-Proof: the product projections of Hom(P,O[0]) identify degree q with
-Hom(P^(-q),O): all factors except r=-q have zero target and hence are zero.
-The projection followed by the degree-zero unit isomorphism is the identification.
-Consequently this dual is zero outside [-b,-a]. Tensoring preserves zero objects,
-so in total degree n all summands except p=r+n,q=-r with a<=r<=b vanish.
-The coproduct universal property discards the zero summands and reindexes the
-remaining ones by r. In an additive category a finite coproduct is a biproduct.
-Its induced isomorphism has exactly the inclusion equations below; these equations
-also determine it uniquely. If b<a, all summands vanish and the empty biproduct
-is the zero object. No boundedness assumption on F is used. -/
+/-- The total tensor degree is the finite biproduct of its possibly nonzero summands
+(Stacks, Tag 08DQ). -/
 theorem ordinaryEvaluation_source_biproduct (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ) (a b n : ℤ)
     (hbounded : ∀ r : ℤ, r < a ∨ b < r → IsZero (P.X r)) :

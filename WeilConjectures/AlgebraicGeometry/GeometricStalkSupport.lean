@@ -24,14 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Two geometric points over the same point of a scheme have simultaneously zero stalks
 for every étale sheaf of abelian groups. Consequently, the condition defining membership
-in the support of such a sheaf is independent of the geometric point chosen over that point.
-
-Proof: Embed a separable closure of the common residue field in both algebraically closed
-geometric-point fields, and factor both points through its spectrum. Pull the sheaf back to
-that spectrum. The inverse-image stalk comparison identifies the two original stalks with
-stalks of the pullback. The separable closure is strictly henselian, so both stalks of the
-pullback identify with its global sections. They are therefore simultaneously zero, and the
-definition of support by a nonzero geometric stalk gives the final assertion. -/
+in the support of such a sheaf is independent of the geometric point chosen over that point. -/
 theorem isZero_sheafFiber_iff_of_same_image {X : Scheme.{u}}
     {Ω Ω' : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω']
     (s : Spec (.of Ω) ⟶ X) (s' : Spec (.of Ω') ⟶ X)

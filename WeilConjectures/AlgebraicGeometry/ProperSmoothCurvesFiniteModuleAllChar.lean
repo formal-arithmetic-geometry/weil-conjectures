@@ -24,9 +24,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Finite constant coefficients in proper smooth curve families in every characteristic
 
-Source: Stacks Project, more-etale.tex, Tag 0GKW,
-lemma-proper-smooth-family-curves-modules; Tag 0GKV for prime coefficients and
-morphisms.tex, Tag 02G1 for the open-and-closed fibre-dimension decomposition.
+## References
+
+* [Stacks, Tag 0GKW], [Stacks, Tag 0GKV], [Stacks, Tag 02G1]
 -/
 
 @[expose] public section
@@ -42,30 +42,7 @@ namespace AlgebraicGeometry.Etale
 connected fibres of dimension at most one, every integer-degree higher direct image of a
 finite constant module over a finite commutative ring is constructible, in every
 characteristic. `GeometricallyConnected f` is equivalent to geometric connectedness of
-each residue-field fibre and includes nonemptiness of those fibres.
-
-Source: Stacks Project, more-etale.tex, Tag 0GKW,
-lemma-proper-smooth-family-curves-modules; Tag 0GKV for the prime-field case and
-morphisms.tex, Tag 02G1 for the dimension-zero/one decomposition.
-
-Proof (Stacks 0GKW: prime coefficients, then dévissage of the coefficients):
-1. For every prime `ℓ`, the derived direct image of the constant sheaf `ℤ/ℓ` has
-   constructible homology in every degree
-   (`properSmoothCurves_prime_higherDirectImage_constructible_homology_all_char`, which rests on the
-   prime-coefficient theorem lem-fd-proper-smooth-curves-prime-all-char: Stacks 0GKV on
-   the locus where `ℓ` is invertible, Artin--Schreier and the Frobenius-linear
-   vector-bundle argument on the characteristic-`ℓ` locus).
-2. Let `N` be the characteristic of `Λ` (nonzero, `Λ` being finite) and restrict scalars
-   along `ℤ/N →+* Λ`. A finite `ℤ/N`-module has a filtration with quotients `ℤ/ℓ`,
-   `ℓ ∣ N`, so the higher direct images of the restricted constant sheaf `M` are
-   constructible (`constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod`).
-   Constructibility is unchanged by restriction of scalars between finite rings
-   (`isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff`).
-3. The homology of the unbounded derived direct image is that of the bounded below one
-   (`homologyRightDerivedLowerStarSingleIsoPlus`), and over the finite ring `Λ` the two
-   constructibility predicates agree
-   (`Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`).
--/
+each residue-field fibre and includes nonemptiness of those fibres. (Stacks, Tag 0GKW) -/
 theorem properSmoothCurves_finiteModule_higherDirectImage_constructible_all_char
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

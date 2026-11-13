@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomContinuityUnion
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Continuity of Hom sets for perfect complexes in a ring-colimit system.
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation and open induction.
+
+## References
+
+* Stacks Project, Tag 09RE.
 -/
 
 @[expose] public section
@@ -28,21 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical Hom map is surjective on every cofinal tail, and two representatives
-with the same image agree on some entire later tail. These are the set-colimit
-consequences of continuity of Hom; no isomorphism descent or finite collection of
-relations is asserted here.
-Source: Stacks Project, perfect.tex, Tag 09RE, proof of lemma-descend-homomorphisms.
-
-Proof: Define `PerfectHomContinuityOn` for each open, quantifying over all
-perfect pairs and all open-immersion presentations of that open. The affine
-case is `perfect_hom_continuity_affine`; the Mayer--Vietoris induction step is
-`perfect_hom_continuity_union`. The quasi-compact and quasi-separated structure
-map to an affine scheme makes X quasi-compact and quasi-separated. Apply
-`quasiCompactOpen_induction` to these two lemmas and the compact top open.
-Finally specialize its open-local conclusion to the identity presentation of
-X and the given P and Q. The predicate includes every perfect pair, so the
-gluing lemma has access to all adjacent shifts; its two input lemmas carry the
-remaining affine comparison and exact-sequence compatibility work. -/
+with the same image agree on some entire later tail (Stacks, Tag 09RE). -/
 theorem perfect_hom_continuity
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

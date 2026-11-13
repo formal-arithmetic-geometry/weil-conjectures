@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PicardUnitComposition
 
 /-! # Composition of pulled pairings
 
-Source: Stacks Project, Tag 0095, tensor formula; Tag 0096, adjunction.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section
@@ -39,24 +41,7 @@ private theorem picardTensorCompIso_naturality
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pulling a pairing twice agrees with pulling it along the composite, after the
-specified composition comparison on each argument.
-Source: Stacks Project, Tag 0095, tensor formula; Tag 0096, adjunction.
-
-Proof: Eliminate e, making t definitionally k followed by l and the two
-object-equality comparisons identities. Expand functoriality of tensorPullback k
-on the inner pairing. The proved unit-composition identity replaces the two unit
-maps by the composition comparison at O_X followed by the composite unit map.
-The composition comparison is a natural isomorphism: whisker the comparisons
-picardTensorComparison l and picardTensorComparison k, then compose with
-ordinary pullbackComp and the inverse comparison at k followed by l. Its
-naturality at g moves the composition comparison from O_X to M tensor N.
-The tensor-composition identity then replaces the two tensorators followed by
-this comparison with the tensor of the two argument comparisons followed by
-the composite tensorator. This is exactly the requested formula. The tensor
-identity is proved by transporting ordinary pullbackComp_tensor; the unit
-identity is proved independently from pullback sections and their composition.
-No finiteness, flatness or invertibility of g is used. Zero pairings, zero
-modules, empty schemes and identity arrows satisfy these same categorical laws. -/
+specified composition comparison on each argument. -/
 theorem picardPairing_comp
     {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) (t : Z ⟶ X)
     (e : k ≫ l = t) (M N : X.Modules)

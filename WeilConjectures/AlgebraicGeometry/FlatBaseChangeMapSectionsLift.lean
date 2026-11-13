@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 
 /-! # FlatBaseChangeMapSectionsLift
 
-Source: Stacks Project, Cohomology, Tags 02N7, 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -47,10 +51,7 @@ private theorem augmentedLift {C : Type u} [Category.{v} C] [Abelian C]
 namespace AlgebraicGeometry.Scheme.Modules
 universe uBC
 /-- An augmented flat-pushforward lift exists by degreewise extension into injectives.
-Source: Stacks, Tag 02N7.
-Extend in degree zero across the monic resolution augmentation. Its composite with
- the next differential vanishes on F, so exactness allows extension in degree one.
-Repeat using exactness in each positive degree and the equation d²=0. -/
+(Stacks, Tag 02N7.) -/
 theorem flatBaseChangeResolutionLift {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S) [Flat (pullback.snd g f)]
     {F : X.Modules} (I : InjectiveResolution F)

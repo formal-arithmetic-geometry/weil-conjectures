@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 /-!
 # Acyclicity of open extensions in proper commutative squares
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B,
-`lemma-shriek-proper-and-open`, proof of case (b), specialized to open immersions.
+## References
+
+* Stacks Project, More on Etale Cohomology, Tag 0F7B.
 -/
 
 @[expose] public section
@@ -68,36 +69,7 @@ private noncomputable def proper_homology_baseChange
 
 /-- In a commutative square with open horizontal maps and proper vertical maps,
 the extension by zero of an injective etale module sheaf is acyclic for the
-right vertical direct image. No Cartesian hypothesis is required.
-
-Source: Stacks Project, Tag 0F7B, proof of case (b), injective acyclicity claim.
-
-Proof:
-1. Put F = k_! J. Finiteness of the coefficient ring gives a positive integer
-annihilating every module section. Thus the underlying abelian sheaf is torsion.
-The module/abelian derived-direct-image comparison reduces vanishing to abelian sheaves.
-2. Form V = B ×_D C. The induced map t: A → V is open. The map s: V → C is proper
-by proper base change, and s t = r is proper. Properness over a separated target makes
-t proper, and a proper immersion is closed. Hence A is a clopen component of V.
-3. Under the clopen product equivalence, t_! J corresponds naturally to (J, 0),
-by the extension-by-zero adjunction, its stalk formulas, and geometric-stalk conservativity.
-Retain the coefficient actions to obtain the module version of the equivalence.
-A monomorphism is componentwise; extend its A-component using injectivity of J and use
-the zero map on the other component. Thus t_! J is injective.
-4. The single complex t_! J in degree zero is a bounded below complex of injectives.
-It computes R s_* and stays concentrated in degree zero after applying s_*, so its
-positive higher direct images vanish. The module/abelian comparison gives the same
-abelian vanishing.
-5. Proper base change on the square defining V identifies the restriction to C of
-R^q p_* F with R^q s_* t_! J. Extension-by-zero base change supplies the coefficient
-identification. Step 4 therefore makes all geometric stalks over C zero.
-6. At a geometric point outside C, the base change of A is empty by commutativity.
-The base change of F is consequently zero, by extension-by-zero base change and the
-empty cover. Proper base change identifies the stalk of R^q p_* F with a higher
-direct image of zero, hence zero by the zero injective complex.
-7. All geometric stalks vanish. Geometric-stalk conservativity gives zero for the
-abelian higher direct image; the module/abelian comparison then gives zero for the
-module higher direct image. -/
+right vertical direct image. No Cartesian hypothesis is required. (Stacks, Tag 0F7B) -/
 theorem isZero_higherDirectImage_openImmersionLowerShriek_injective
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)

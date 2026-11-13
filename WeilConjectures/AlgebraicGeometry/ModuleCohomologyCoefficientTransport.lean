@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtCoefficientFactor
 
 /-! # Transport of coefficient naturality through the edge comparison
 
-Source: Stacks Project, Tags 01FB and 01F7.
+## References
+
+* [Stacks, Tags 01FB and 01F7]
 -/
 
 @[expose] public section
@@ -27,16 +29,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- Naturality and compatibility for the identity edge coefficient imply compatibility
-for an arbitrary coefficient morphism, on each cohomology class.
-
-Source: Stacks Project, Tags 01FB and 01F7, functoriality in coefficients.
-
-Proof: Factor the module h-map as the module cohomology map of the coefficient
-morphism followed by the edge map. Apply edge compatibility to this class, then
-coefficient naturality of E. The Ext coefficient factorization identifies the
-result with exact inverse image followed by the adjoint coefficient map. Equality
-transitivity combines these four steps. The maps E and E' need not be equivalences;
-only the displayed naturality and edge equalities are used. -/
+for an arbitrary coefficient morphism, on each cohomology class
+(Stacks, Tags 01FB and 01F7). -/
 theorem moduleCohomology_transport_coefficient
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : Y.Modules) (F : X.Modules)
     (φ : N ⟶ (pushforward f).obj F) (p : ℕ)

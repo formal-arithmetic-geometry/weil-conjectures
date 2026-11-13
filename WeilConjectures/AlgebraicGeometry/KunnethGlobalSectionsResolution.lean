@@ -11,8 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductForgetSu
 /-!
 # The Künneth map on global sections computed on K-flat representatives
 
-Source: Stacks Project, Tag 0F1E.
-
 The canonical external product `kunnethGlobalSectionsMap` is defined through adjunctions,
 the Leray isomorphisms and the constant-sheaf equivalence over a separably closed point.
 On K-flat representatives it is the localized pullback and tensor of global sections,
@@ -28,6 +26,10 @@ which are formalized yet. It belongs to the chapter of the Künneth map.
 ## Main statements
 
 - `kunnethGlobalSectionsMap_resolution`
+
+## References
+
+* Stacks Project, Tags 0F1E and 0B6C
 -/
 
 @[expose] public section
@@ -41,12 +43,8 @@ namespace AlgebraicGeometry.Etale
 /-- On K-flat representatives `P` and `Q`, the canonical Künneth map on global sections is
 the tensor localization of the totalized pullback and tensor of global sections, followed by
 the unit of the derived global sections of the exterior complex and the inverse comparison
-with the derived external product.
-
-This input is not proved in the project: it is the compatibility of the adjoint
-construction of the Künneth map (Stacks, Remark 0F1E) with its construction by pullback and
-cup product of sections (Stacks, Tag 0B6C), computed on K-flat representatives. It belongs to
-the chapter of the Künneth map. -/
+with the derived external product. This is recorded as an input (`sorry`); see the module
+docstring. -/
 theorem kunnethGlobalSectionsMap_resolution
     (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))

@@ -48,18 +48,8 @@ private theorem pi_kernel {C : Type*} [Category C] [HasZeroMorphisms C]
       using this
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The resolution augmentation identifies Cech cochains with degree-zero column homology.
-Source: Stacks Project, Tag 01EQ, the beta construction; Tag 01DZ, left exactness of sections.
-
-Proof: the resolution augmentation identifies F with the kernel of I^0 → I^1.
-For each finite intersection, sections preserve this kernel, since sections are left exact.
-Restriction of scalars preserves the underlying kernel. Taking the product over tuples
-also preserves kernels: a tuple lies in the kernel exactly when every coordinate does.
-There are no incoming boundaries in degree zero. Thus the product augmentation identifies
-Cech n-cochains of F with the zeroth homology of the column. The source is concentrated
-in degree zero and its zeroth homology is itself; the induced map is this identification.
-The choice of the chain-map proof ha has no effect, by proof irrelevance. This argument
-requires no positive-degree vanishing assumption. -/
+/-- The resolution augmentation identifies Cech cochains with degree-zero column homology
+(Stacks, Tags 01EQ and 01DZ). -/
 theorem moduleCech_resolution_column_zero {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (F : X.Modules) (I : InjectiveResolution F)
     (ha : (CategoryTheory.cechComplexFunctor U).map

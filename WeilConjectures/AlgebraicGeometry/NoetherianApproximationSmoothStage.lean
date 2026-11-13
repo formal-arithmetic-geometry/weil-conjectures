@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SmoothStageGluing
 /-!
 # Eventual smoothness in a noetherian approximation
 
-Source: Stacks Project, Tag 0C0C, limits.tex, lemma-descend-smooth.
+## References
+
+* Stacks Project, Tag 0C0C.
 -/
 
 @[expose] public section

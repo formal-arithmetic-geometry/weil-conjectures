@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCounitMo
 
 /-! # Explicit restriction-induced comparison maps
 
-Source: Stacks Project, Tags 08FE and 08BV.
+## References
+
+* [Stacks, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
 -/
 
 @[expose] public section
@@ -25,16 +28,13 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
-/-- Sectionwise direct-image/restriction comparison before deriving.
-Source: Stacks Tag 08FE. -/
+/-- Sectionwise direct-image/restriction comparison before deriving. (Stacks, Tag 08FE) -/
 abbrev schemeMVRestrictionImageIso {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens) :
     RingedSpace.moduleDirectImage h.toLRSHom.toShHom ⋙ schemeOpenRestriction Y W ≅
       schemeOpenRestriction X (h ⁻¹ᵁ W) ⋙ Scheme.Modules.pushforward (h ∣_ W) :=
   schemeMVUnderivedOpenRestriction h W
 
-/-- Pushforward commutes with restriction followed by open direct image.
-All factors are constructed sectionwise; no existence witness is selected.
-Source: Stacks Tag 08FE. -/
+/-- Pushforward commutes with restriction followed by open direct image. (Stacks, Tag 08FE) -/
 def schemeMVImageIso {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens) :
     schemeOpenModuleImage X (h ⁻¹ᵁ W) ⋙ RingedSpace.moduleDirectImage h.toLRSHom.toShHom ≅
       RingedSpace.moduleDirectImage h.toLRSHom.toShHom ⋙ schemeOpenModuleImage Y W :=
@@ -48,7 +48,7 @@ def schemeMVImageIso {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens) :
     Functor.associator _ _ _
 
 /-- Termwise sectionwise comparison followed by open restriction of the chain map.
-Source: Stacks Tags 08FE and 08BV. -/
+(Stacks, Tags 08FE, 08BV) -/
 def schemeMVImageComponent {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
@@ -80,9 +80,8 @@ def schemeMVImageComponent {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens)
         ((congrArg (fun t ↦ t ≫ (schemeOpenModuleImage Y W).map (f.f j)) hn.symm).trans
           (Category.assoc _ _ _)) }
 
-/-- The right-derived unit transported from homotopy categories to complexes.
-It is defined on every complex, without a K-injectivity assumption.
-Source: Stacks Tag 079V. -/
+/-- The right-derived unit transported from homotopy categories to complexes. It is defined
+on every complex, without a K-injectivity assumption. (Stacks, Tag 079V) -/
 def schemeMVDirectImageLocalization {X Y : Scheme.{u}} (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
@@ -100,8 +99,7 @@ def schemeMVDirectImageLocalization {X Y : Scheme.{u}} (h : X ⟶ Y)
     (schemeDerivedDirectImage h)).hom
 
 /-- Localization comparison for restriction followed by open direct image,
-including on complexes that are not K-injective.
-Source: Stacks Tags 079V and 08BV. -/
+including on complexes that are not K-injective. (Stacks, Tags 079V, 08BV) -/
 def schemeMVOpenImageLocalization (X : Scheme.{u}) (W : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]
@@ -115,7 +113,7 @@ def schemeMVOpenImageLocalization (X : Scheme.{u}) (W : X.Opens)
       ((schemeOpenRestriction X W).mapDerivedCategoryFactors.inv.app K)
 
 /-- On a K-injective complex the transported unit is the inverse computation iso.
-Source: Stacks Tag 079V. -/
+(Stacks, Tag 079V) -/
 theorem schemeMVDirectImageLocalization_app {X Y : Scheme.{u}} (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -126,7 +124,7 @@ theorem schemeMVDirectImageLocalization_app {X Y : Scheme.{u}} (h : X ⟶ Y)
   simp [schemeMVDirectImageLocalization, RingedSpace.derivedModuleDirectImageKInjectiveIso]
 
 /-- The general localization comparison agrees with the canonical comparison on
-K-injectives. Source: Stacks Tag 08BV. -/
+K-injectives. (Stacks, Tag 08BV) -/
 theorem schemeMVOpenImageLocalization_eq (X : Scheme.{u}) (W : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]
@@ -140,8 +138,7 @@ theorem schemeMVOpenImageLocalization_eq (X : Scheme.{u}) (W : X.Opens)
     RingedSpace.derivedModuleDirectImageKInjectiveIso, Functor.rightDerivedFunctorObjQIso,
     Functor.mapHomotopyCategoryFactors]
 
-/-- Naturality of the general open-image localization comparison.
-Source: Stacks Tag 08BV. -/
+/-- Naturality of the general open-image localization comparison. (Stacks, Tag 08BV) -/
 theorem schemeMVOpenImageLocalization_naturality (X : Scheme.{u}) (W : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]
@@ -165,7 +162,7 @@ theorem schemeMVOpenImageLocalization_naturality (X : Scheme.{u}) (W : X.Opens)
   rw [Functor.map_comp, Category.assoc]
 
 /-- Factorization of each explicit component into the sectionwise comparison
-and the open-image functor applied to f. Source: Stacks Tag 08FE. -/
+and the open-image functor applied to `f`. (Stacks, Tag 08FE) -/
 theorem schemeMVImageComponent_factor {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)

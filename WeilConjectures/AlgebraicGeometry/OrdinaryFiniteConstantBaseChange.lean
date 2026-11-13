@@ -80,16 +80,7 @@ private theorem mate_constant_unit
   exact a₂.unit_naturality_assoc b (R₂.map d)
 
 /-- Exchange carries the constant-object adjunction unit to the constant-object
-unit on the other side of any commutative square.
-
-Proof: the ordinary constant-sheaf pullback comparison respects composition.
-The derived single-object comparison takes this equality to the derived
-pullback square. Expand the two constant-object units as adjunction units
-followed by direct image of those comparisons. Naturality of exchange moves
-the comparison past exchange, and the mate-unit identity replaces the pulled
-unit followed by exchange by the new unit followed by the pullback square.
-The comparison square then cancels, and unit naturality gives the formula.
-No Cartesian, properness, finiteness, or nonemptiness hypothesis is needed. -/
+unit on the other side of any commutative square. -/
 theorem ordinaryFiniteConstant_baseChange (A : Type (u + 1)) [CommRing A]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {w : Y' ⟶ Y}
     (sq : CommSq v f' f w) :

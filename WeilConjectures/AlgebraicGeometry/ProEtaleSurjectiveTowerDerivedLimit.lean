@@ -17,10 +17,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 /-!
 # Derived limits of surjective towers on the small pro-etale site
 
-Source: Bhatt--Scholze, Proposition 3.1.10, Proposition 3.2.3(1), and Proposition 4.2.8;
-Stacks Project, Tags 07KC, 08TC, and 06XS.
-
-`n: ℕ` denotes positive level `n + 1`. Products and inverse limits are the existing
+`n : ℕ` denotes positive level `n + 1`. Products and inverse limits are the existing
 Mathlib constructions. The derived product is asserted to exist and the Roos assertion
 works for every choice of its limit structure, without an existence hypothesis.
 
@@ -30,6 +27,11 @@ works for every choice of its limit structure, without an existence hypothesis.
   Mathlib's sheafification structures to larger coefficient universes.
 * `proEtale_surjectiveTower_derivedLimit` states the short exact Roos sequence, its
   derived-limit triangle, and uniqueness of compatible lifts from degree-zero sheaves.
+
+## References
+
+* Bhatt--Scholze, Proposition 3.1.10, Proposition 3.2.3(1), and Proposition 4.2.8.
+* Stacks Project, Tags 07KC, 08TC, and 06XS.
 -/
 
 @[expose] public section
@@ -42,18 +44,16 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Sheafification of large abelian coefficients on the unchanged small pro-etale site.
-This is Mathlib's sheafification transported through an equivalent small model.
-Source: Stacks Project, Tags 00W1 and 03DA. -/
+/-- Sheafification of large abelian coefficients on the unchanged small pro-etale site
+(Stacks, Tags 00W1 and 03DA). -/
 noncomputable instance surjectiveTower_hasSheafify (Y : Scheme.{t}) :
     HasSheafify (Scheme.ProEt.topology Y) AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf.{u} _
   hasSheafifyEssentiallySmallSite.{t, max u (t + 1), t + 1,
     max u (t + 1) + 1, max u (t + 1)} _ _
 
-/-- Large-coefficient sheafification detects the same locally bijective maps.
-This reuses Mathlib's small-model transport without changing the original site.
-Source: Stacks Project, Tags 00W1 and 03DA. -/
+/-- Large-coefficient sheafification detects the same locally bijective maps
+(Stacks, Tags 00W1 and 03DA). -/
 noncomputable instance surjectiveTower_wEqualsLocallyBijective (Y : Scheme.{t}) :
     (Scheme.ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf.{u} _

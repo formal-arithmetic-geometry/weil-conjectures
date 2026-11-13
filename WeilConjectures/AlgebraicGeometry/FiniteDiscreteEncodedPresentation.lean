@@ -294,21 +294,8 @@ private lemma normalizedPullback_encoding (T U : Scheme.{u}) (j : U ⟶ T)
   exact finiteDiscreteCoefficient_restrictionEncoding B eR G hG T U j M
 
 /-- Transport an internal finite local presentation to an ordinary presentation
-by finite constant module sheaves, before refining the matrix to be constant.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3.
-
-Proof in words. Choose the cover and finite free cokernel presentations from hM.
-Pull the coefficient identification to each cover member. The common sectionwise
-encoding commutes with these inverse images: on the underlying additive sheaves
-this is inverse-image composition, and scalar compatibility follows from the
-single fixed coefficient identification eR. It is an equivalence, hence preserves
-finite sums and cokernels. Its image of the regular module is the constant sheaf
-of the image under G of the regular internal module in abelian groups. The equality
-hG identifies the underlying additive group of that module with ULift B, so it is
-finite. Finite sums of this module remain finite. Applying the encoding to each
-presentation therefore gives the displayed morphism f and cokernel isomorphism.
-No constancy of the matrix entries is asserted here; that is a separate geometric
-step. Empty covering families and rank-zero finite sums are included. -/
+by finite constant module sheaves, before refining the matrix to be constant
+(Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1, 5.4.3). -/
 theorem finiteDiscreteCoefficient_encoded_presentation [DiscreteTopology B] [Finite B]
     (T U : Scheme.{u}) (j : U ⟶ T) (M : FiniteDiscreteInternalModules B T)
     (hM : IsLocallyFinitelyPresented

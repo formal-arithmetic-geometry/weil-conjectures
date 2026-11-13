@@ -25,7 +25,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Canonical comparison of the stalk with local-base-change cohomology
 
-Source: Stacks Project, Tags 02OD, 02KH and 01E4.
+## References
+
+* Stacks Project, Tags 02OD, 02KH and 01E4
 -/
 
 @[expose] public section
@@ -39,7 +41,7 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 /-- Cohomology on the local base change, with the action of the local ring.
-Source: Stacks Project, Tag 02OD. -/
+(Stacks, Tag 02OD.) -/
 abbrev formalFunctionsLocalCohomology {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p : ℕ) : ModuleCat.{u} (Y.presheaf.stalk y) :=
   (RingedSpace.moduleCohomology (pullback (Y.fromSpecStalk y) f).toRingedSpace p ⋙
@@ -49,7 +51,7 @@ abbrev formalFunctionsLocalCohomology {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)
 
 /-- The local comparison sends a germ to the pullback of its representative.
-Source: Stacks Project, Tags 02KH, 01E4 and 01FB. -/
+(Stacks, Tags 02KH, 01E4 and 01FB.) -/
 def IsFormalFunctionsLocalComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p : ℕ)
     (a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]
@@ -79,19 +81,7 @@ def IsFormalFunctionsLocalComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
         ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi
 
 /-- The uncompleted stalk comparison, including the germ formula needed downstream.
-Source: Stacks Project, Tag 02OD, first half of its proof; Tags 02KH and 01E4.
-
-Proof: c: Spec O_y → Y is flat and identifies the local ring at its closed point
-with O_y. Properness implies qcqs and coherence implies quasi-coherence. Apply flat
-base change 02KH to c^*(R^p f_*F) → R^p f'_*F'. Taking closed-point stalks gives an
-isomorphism from (R^p f_*F)_y. Every open containing the closed point of Spec O_y is
-the whole spectrum, so 01E4 identifies the other stalk with H^p(X', F'). The scalar
-map is O_y → Gamma(X', O), giving the displayed linear equivalence. The section-class
-formula for the base-change map identifies its value on every germ with pullback
-of a representative on a neighbourhood V; this is exactly the predicate above.
-Independence of injective-resolution comparisons gives the formula for every I, K
-and D. These identifications apply also in degree zero and to the zero module or
-empty base change. No finite quotient or completed cohomology is involved. -/
+(Stacks, Tag 02OD, with Tags 02KH and 01E4.) -/
 theorem formalFunctions_local_stalk_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :

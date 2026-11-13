@@ -12,8 +12,10 @@ import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 /-!
 # Field-valued points factor through closed immersions
 
-Source: literature/stacks-project/schemes.tex, Schemes, Lemma Tag 0356
-(applied to `Spec K`), with Definition Tag 01HK and Lemma Tag 01L7.
+## References
+
+* Stacks Project, Schemes, Lemma Tag 0356 (applied to `Spec K`), Definition Tag 01HK and
+  Lemma Tag 01L7.
 -/
 
 @[expose] public section
@@ -24,22 +26,9 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /--
-Let `i: Z ⟶ X` be a closed immersion of schemes, let `K` be a field,
-and let `s: Spec K ⟶ X` have image point `i z`. Then there is exactly one
-morphism `s': Spec K ⟶ Z` with `s' ≫ i = s`, and its unique point maps to `z`.
-Source: Stacks Project, Schemes, Tag 0356, Definition Tag 01HK, Lemma Tag 01L7.
-
-Proof: Write `x = s(ξ) = i(z)`. By `lem-weil-pbc-morphism-from-spec-field`,
-`s = j_x ∘ Spec(φ)` for a unique residue-field map `φ: κ(x) → K`.
-The map `r: κ(x) → κ(z)` induced by `i` is an isomorphism by
-`lem-weil-pbc-closed-immersion-residue-field-iso`. Set `ψ = φ ∘ r⁻¹` and
-`s' = j_z ∘ Spec(ψ)`. Naturality
-gives `i ∘ j_z = j_x ∘ Spec(r)`. Contravariant functoriality of Spec now gives `i ∘ s' = s`, and the canonical point
-morphism sends the unique point to `z`.
-Uniqueness follows by cancellation: a closed immersion is a monomorphism
-(Stacks Tag 01L7; Mathlib's `IsPreimmersion` instance supplies `Mono i`).
-For any lift `t`, the equality `i(t(ξ)) = s(ξ) = i(z)` and injectivity on points
-of the closed immersion give `t(ξ) = z`.
+Let `i : Z ⟶ X` be a closed immersion of schemes, let `K` be a field,
+and let `s : Spec K ⟶ X` have image point `i z`. Then there is exactly one
+morphism `s' : Spec K ⟶ Z` with `s' ≫ i = s`, and its unique point maps to `z`.
 -/
 theorem field_point_factors_through_closed_immersion
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]

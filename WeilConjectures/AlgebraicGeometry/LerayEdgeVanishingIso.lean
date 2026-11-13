@@ -18,17 +18,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 /-- Vanishing of positive columns makes the constructed Leray edge invertible.
-
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
-
-Proof: the Grothendieck spectral sequence for direct image and global sections
-has only its zero column under the stated vanishing hypothesis. Its filtration
-therefore collapses, and the canonical edge component is an isomorphism for
-every coefficient module and degree. The cocycle hypothesis identifies ε with
-this canonical edge: the cycles-to-cohomology map on global sections is surjective,
-and the section of the cycle sheaf is uniquely determined by its image under
-the cycle inclusion. Thus the displayed cocycle formula determines each edge
-component on every cohomology class. -/
+(Stacks, Tag 01F4 (2)) -/
 theorem leray_edge_isIso_of_vanishing {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ε : LerayEdge X Y f) (hε : LerayEdgeCocycle f ε) :
     (∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)),

@@ -236,30 +236,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 500000 in
 -- Elaborating the transported scalar-action comparison needs additional reduction steps.
 /-- The natural set comparisons for inverse image respect scalar multiplication on
-arbitrary generalized sections.
-
-Source: Stacks Project, Tags 03D2, 03D3 and 04JC.
-
-Proof: use the small model sites. The actual ring adjunction unit presents the underlying
-inverse-image ring as set inverse image. Apply finite-product-preserving set inverse image
-to the original module action, and obtain the module action on abelian inverse image.
-An abelian map out of this action module is linear exactly when its adjunct is linear
-for the ring unit. Restrict the abelian hom equivalence to linear maps; faithfulness
-makes the lifts unique and proves naturality. This gives a module adjunction with the
-same right adjoint as actual module pullback. Its underlying unit is the abelian unit.
-Uniqueness of left adjoints, with its unit equation, gives a natural abelian comparison
-normalized on the actual module unit. Compose with the unit-normalized forgetful
-comparison to obtain set comparisons and unit presentations pr for the ring and pm for
-each module. They satisfy pm.unit(r*m)=pr.unit(r)*pm.unit(m).
-For a graph t=a*b on a test sheaf T, compare inverse image of t followed by pm.iso.inv
-with the pair of inverse images of a and b followed by pr.iso.inv, pm.iso.inv and the
-target scalar action. Maps out of set inverse image are equal when equal on source unit
-sections. On these sections the graph hypothesis and the displayed unit-linearity
-identity prove equality. Thus the equality holds on every generalized target section.
-Transport these comparisons through AsSmall up and down. Naturality of the model/actual
-inverse-image comparison on a, b and t gives the required displayed equation. Empty
-schemes and the zero coefficient ring require no separate nonemptiness hypothesis.
--/
+arbitrary generalized sections (Stacks, Tags 03D2, 03D3 and 04JC). -/
 theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (∃ (eR : (proEtaleSheafInverseImage f (Type (u + 1))).obj

@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Global-sections acyclicity of direct images of K-injective complexes
 
-Source: Stacks Project, Cohomology, Tags 0D5T and 079V.
+## References
+
+* Stacks Project, Tags 0D5T and 079V.
 -/
 
 @[expose] public section
@@ -57,19 +59,7 @@ private theorem unit_isIso_comp_of_exact
 
 /-- The direct image of a K-injective complex is acyclic for global sections followed
 by any restriction of scalars. This requires neither flatness nor preservation of
-K-injectivity by module direct image.
-Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T) and Section 20.28 (Tag 079V).
-
-Proof: The existing direct-image global-sections acyclicity theorem says that the
-unit of RΓ(Y,-) is invertible at f_*I. Restriction of scalars along φ is exact
-for every ring map. For an additive F and exact G, RF followed by RG is a right
-derived functor of F followed by G. Its composite unit at an object where the
-F unit is invertible is invertible: the G unit is invertible everywhere and RG
-preserves isomorphisms. Right-derived uniqueness supplies an invertible descent
-comparison whose unit equation transfers invertibility to the usual unit of
-R(F followed by G). Apply this with F = Γ(Y,-) and G = restriction along φ.
-No K-injectivity of f_*I is asserted. This also covers empty schemes, zero
-coefficient rings, and noninjective φ. -/
+K-injectivity by module direct image (Stacks, Tags 0D5T and 079V). -/
 theorem isIso_globalSections_restrictScalars_unit_on_directImage_kInjective
     {X Y : Scheme.{u}} {A : CommRingCat.{u}}
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

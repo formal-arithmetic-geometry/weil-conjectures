@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTri
 
 /-! # The canonical boundary in module cohomology
 
-Source: Stacks Project, Cohomology, Tags 01DZ and 0B8S.
+## References
+
+* [Stacks, Cohomology, Tags 01DZ and 0B8S]
 -/
 
 @[expose] public section
@@ -25,11 +27,8 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- The connecting map is the homology boundary of the image under derived global sections
 of the canonical triangle of a short exact sequence. It is transported to the established
-right-derived cohomology functors by the canonical single-complex comparison isomorphisms.
-The triangle is `CategoryTheory.ShortComplex.ShortExact.singleTrianglePlus`; the displayed
-expression is the right-hand side of the second conjunct of
-`CategoryTheory.rightDerived_triangle_connecting` for `v = Γ(X, -)`.
-Source: Stacks Project, Cohomology, Tags 01DZ and 0B8S. -/
+right-derived cohomology functors by the canonical single-complex comparison isomorphisms
+(Stacks, Tags 01DZ and 0B8S). -/
 noncomputable def moduleCohomologyBoundary (X : RingedSpace.{uB})
     [HasDerivedCategory.{wCB} (SheafOfModules.{uB} (moduleRings X))]
     [HasDerivedCategory.{wDB} (ModuleCat.{uB} ((moduleRings X).obj.obj (Opposite.op ⊤)))]

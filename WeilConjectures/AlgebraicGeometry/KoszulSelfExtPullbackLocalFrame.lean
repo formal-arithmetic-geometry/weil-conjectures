@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
 
 /-! # A finite free chart for self Ext after tensor pullback
 
-Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, zero-differential Hom calculation. -/
+## References
+
+* Stacks Project, Tag 0BQY, Lemma 48.15.4.
+-/
 
 @[expose] public section
 
@@ -33,37 +36,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- On a Koszul-regular affine chart, the pulled-back self Ext sheaf is free on
-increasing subsets of the given generators. This is a sheaf assertion on the chart;
-no stalk, auxiliary open restriction, or conormal dual is involved.
-
-Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, proof through the displayed
-identification of self Ext with Hom from the degree minus n Koszul term.
-
-Proof: Put A = Gamma(Y,U), I = ker(i)(U), and B = A/I. The closed immersion on
-this affine chart identifies its inverse image with Spec B over Spec A. Use
-exists_koszul_projective_resolution to obtain the actual augmented Koszul complex
-K resolving B, whose nth term is the nth exterior power of the free A-module A^m.
-Sheafify the augmentation using exists_affine_quotient_sheafified_resolution and
-reindex the nonnegative chain complex as a nonpositive cochain complex. Each term
-has the increasing exterior basis, so it is finite free, and the complex is bounded
-above. Restrict derived internal Hom to U. Apply the bounded-above finite-free Hom
-model with target the single complex of the restricted pushforward of O_Z. Its
-only term in degree n is Hom_A(K_n,B). Its differential is zero: precomposition
-with the Koszul differential has coefficients f_j, each of which annihilates B.
-Thus its nth cohomology is that term, with the dual increasing wedge basis over B.
-The coefficient maps and basis identifications commute with localization, so they
-identify the restricted self Ext sheaf with the associated sheaf of the free
-B-module indexed by n-element subsets. Ordinary tensor pullback along Spec B to
-Spec A leaves this quotient module unchanged: B tensor_A B is B, via multiplication
-and its inverse b maps to 1 tensor b. Transport across the chart and the equivalence
-with its over site to obtain the stated free sheaf frame, reindexed by ULift.
-If the supplied derived universe differs from the natural resolution universe,
-compute both Hom objects using the same K-injective resolution; the localization
-comparisons identify their cohomology with the same finite-free Hom complex.
-The degree-zero index consists of the empty subset; above m it is empty and the
-Koszul term is zero. The argument remains valid for m=0 and B=0, including an empty
-inverse-image chart. It uses regularity only on U and chooses no arbitrary object
-from an unproved existence theorem. -/
+increasing subsets of the given generators (Stacks, Tag 0BQY). This is a sheaf assertion
+on the chart; no stalk, auxiliary open restriction, or conormal dual is involved. -/
 theorem koszulRegularImmersion_self_ext_pullback_local_frame
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

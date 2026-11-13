@@ -12,9 +12,15 @@ public import WeilConjectures.CategoryTheory.RingedSectionLocalizationOfUniverse
 import Mathlib.CategoryTheory.Sites.EpiMono
 import WeilConjectures.Algebra.Homology.PrincipalKoszulQuotientTowers
 import WeilConjectures.CategoryTheory.UnitPowerCompleteness
-/-! # The principal image ideal and the covering-sieve local tests
+/-!
+# The principal image ideal and the covering-sieve local tests
 
-Source: Stacks 0999, 099B and 03DA. -/
+## References
+
+* Stacks Project, Tag 0999, <https://stacks.math.columbia.edu/tag/0999>
+* Stacks Project, Tag 099B, <https://stacks.math.columbia.edu/tag/099B>
+* Stacks Project, Tag 03DA, <https://stacks.math.columbia.edu/tag/03DA>
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,9 +40,7 @@ variable [HasDerivedCategory.{w} A]
 
 /-- Use the given derived-category instances for the same slice module categories. Composing a
 restricted commutative ring sheaf with forgetful coefficients agrees definitionally with
-restricting its ring sheaf.
-
-Source: Stacks 0999, 099B and 03DA. -/
+restricting its ring sheaf. -/
 abbrev principalLocalTestSliceDerived :
     ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))) :=

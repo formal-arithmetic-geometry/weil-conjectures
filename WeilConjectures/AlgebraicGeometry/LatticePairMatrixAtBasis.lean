@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-!
 # Continuous matrices for locally free integral lattice pairs
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local bases.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -216,18 +218,7 @@ private theorem pairVector_naturality {X : Scheme.{u}} {K : Type u} [Field K]
   exact PresheafOfModules.naturality_apply P.rationalization.hom.val g _
 
 /-- A specified finite local integral basis determines an invertible matrix in a
-rational frame, with its embedded-image formula after arbitrary restriction.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases.
-Proof: on the specified finite free neighborhood, the tensor sheafification unit
-is an isomorphism. Transport the integral section basis through scalar extension,
-P's rationalization and the rational frame. When W is nonempty, evaluation at a point
-makes the continuous-section ring nontrivial, so invariant basis number reindexes
-this rational basis by Fin n. Its coordinate equivalence gives an invertible matrix.
-Naturality identifies its restricted columns with the rationalized integral basis.
-Expanding every integral section in this basis proves the matrix-span formula in both
-directions. When W is empty, all further test objects are empty; their coefficient
-rings and free section modules are singletons, and both images are nonempty.
-Rank zero is included by the same finite-basis and finite-sum arguments. -/
+rational frame, with its embedded-image formula after arbitrary restriction. -/
 theorem integralLatticePair_matrixAtBasis (X : Scheme.{u})
     (K : Type u) [Field K] [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K)
     (L : SheafOfModules.{u + 1} (latticeModuleRing X K))

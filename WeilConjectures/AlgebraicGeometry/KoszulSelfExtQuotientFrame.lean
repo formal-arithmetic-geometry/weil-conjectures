@@ -17,7 +17,12 @@ public import Mathlib.Data.Set.PowersetCard
 import WeilConjectures.AlgebraicGeometry.KoszulExtCoefficientAffineModel
 import WeilConjectures.AlgebraicGeometry.KoszulQuotientHomologyFrame
 
-/-! # Affine zero-differential self Ext calculation -/
+/-! # Affine zero-differential self Ext calculation
+
+## References
+
+* Stacks Project, Tag 0BQY, Lemma 48.15.4.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,17 +30,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Self Ext before pullback is a finite coproduct of the quotient structure module.
-Source: Stacks Project, Tag 0BQY, Lemma 48.15.4.
-
-Proof: Resolve the quotient A/I by the augmented Koszul complex of f. Its terms
-are finite free on increasing subsets. Sheafify the resolution on U and use the
-bounded-above finite-free internal Hom comparison. Hom into A/I has zero
-differential because every f_j vanishes in A/I. Thus degree n cohomology is a
-copy of A/I for each n-element subset. The wedge coordinate maps commute with
-localization and give the asserted isomorphism on the over-U site. Compare
-arbitrary derived universes by the same K-injective model. Empty charts, m=0,
-and n>m use respectively zero rings, the empty wedge, and an empty coproduct. -/
+/-- Self Ext before pullback is a finite coproduct of the quotient structure module. -/
 theorem koszul_self_ext_quotient_frame
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Core object comparison data (without the final Hom pin).
 
-Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
+## References
+
+* Stacks Project, Tags 09RE, 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -141,9 +143,7 @@ theorem schemeComparisonFromRestrictions_HW
         (overlapSiteInverse (P ⊓ Q)).mapDerivedCategory := by
   rfl
 
-/-- The fixed pullback-composition comparison on a restricted two-step map.
-The named definition keeps the geometric equality and its derived transport
-outside the larger two-open transport record. -/
+/-- The fixed pullback-composition comparison on a restricted two-step map. -/
 noncomputable def perfectOverlapCompositeLocalIso
     {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
     (hgf : g ≫ f = gf) (W : Y₀.Opens) :
@@ -210,13 +210,7 @@ noncomputable def transportDataOfComposite
     hθV := rfl }
 
 /-- The diagram field of composite transport is the restriction diagram for the
-second map.
-Source: Stacks Project, Tags 08DW and 0D5S. The composite transport first
-constructs the restriction comparison for `g` on both inverse-image opens; its
-remaining fields add the two pullback-composition isomorphisms and the local
-object identifications. Projecting the diagram field therefore returns that
-restriction comparison. The two inclusion proofs agree by the equality
-`g ≫ f = gf`, and proof irrelevance identifies their presentations. -/
+second map (Stacks, Tags 08DW and 0D5S). -/
 theorem transportDataOfComposite_diagram
     {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
     (hgf : g ≫ f = gf) (U V : Y₀.Opens)
@@ -310,9 +304,7 @@ omit [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
   [∀ (Z : Scheme.{u}) (U : Z.Opens),
     HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] in
-/-- Restricting the two-step map to an open gives the restriction of its
-composite. This is the geometric equation used to define the transport
-isomorphism and the corresponding open-pullback cube. -/
+/-- Restricting the two-step map to an open gives the restriction of its composite. -/
 theorem perfectOverlapRestrictedComposite
     {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
     (hgf : g ≫ f = gf) (W : Y₀.Opens) :

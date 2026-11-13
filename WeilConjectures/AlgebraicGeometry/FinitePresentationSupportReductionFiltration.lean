@@ -23,7 +23,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A filtration with unresolved factors of smaller support
 
-Source: Stacks Project, Tag 01YF, proof before applying support minimality.
+## References
+
+* Stacks Project, Tag 01YF.
 -/
 
 @[expose] public section
@@ -47,22 +49,9 @@ private theorem filtration_of_isZero {X : Scheme.{u}}
   · intro j
     exact Fin.elim0 j
 
-/-- The geometric step of support induction: leave smaller-support factors unresolved.
-This does not assert integral-ideal filtrations for those factors.
-
-Source: Stacks Project, Tag 01YF (`coherent.tex`, `lemma-coherent-filter`), proof,
-reducible support, the J-adic filtration, and the generic ideal inclusion of Tag 01YE.
-
-Proof: Finite presentation on a Noetherian scheme gives coherence and closed support.
-Prove the stronger coherent integral-ideal filtration assertion by well-founded induction
-on closed support. For empty support, stalk detection makes the module zero, and the
-length-zero bottom chain works. For reducible support, split into a coherent submodule
-and cokernel with strictly smaller supports, apply induction to both, and concatenate
-using the coherent short-exact extension theorem. For irreducible nonempty support,
-sobriety supplies a generic point. The irreducible-support step uses the induction
-hypothesis on smaller supports, the J-adic reduction, and the generic ideal inclusion.
-Finally forget coherence of subobjects and nonzero/coherence conditions on ideals, and
-place every quotient in the first disjunct. The second disjunct is not needed. -/
+/-- The geometric step of support induction: a finite filtration whose factors of smaller
+support are left unresolved. This does not assert integral-ideal filtrations for those
+factors. (Stacks, Tags 01YF and 01YE) -/
 theorem exists_finitePresentation_support_reduction_filtration
     (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) [F.IsFinitePresentation] :
     ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c),

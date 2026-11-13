@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 /-!
 # Colimits and geometric stalks
 
-Source: Stacks Project, Tags 03PN and 04K1.
+Reference: Stacks Project, Tags 03PN and 04K1.
 -/
 
 @[expose] public section
@@ -27,22 +27,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Let `T` be a scheme and `s` a geometric
-point of `T`. The geometric stalk of sheaves of abelian groups on the small etale
-site of `T` commutes with arbitrary colimits. In each degree the same holds for
-complexes of abelian sheaves, whose colimits are computed termwise.
-
-The stalk functor is left adjoint to the skyscraper sheaf functor, so it
-preserves colimits (Mathlib `Point.skyscraperSheafAdjunction`). To obtain colimits
-in the source sheaf category at the indicated universe, factor the forgetful
-functor from integer modules through abelian groups: its first factor preserves
-all colimits, and its second factor preserves filtered colimits. Mathlib's affine
-etale sheafification instances then supply colimits of sheaves. Finally,
-`HomologicalComplex.preservesColimitsOfShape_of_eval`, through the instance in
-`HomologicalComplexAbelian`, gives preservation degreewise for each diagram shape.
-Source: Stacks Project, Tags 03PN and 04K1; Mathlib
-`CategoryTheory/Sites/Point/Skyscraper.lean` and
-`Algebra/Homology/HomologicalComplexAbelian.lean`. -/
+/-- The geometric stalk of sheaves of abelian groups on the small etale site of a scheme `T` at a
+geometric point `s` commutes with arbitrary colimits, also for complexes of abelian sheaves
+degreewise (Stacks, Tags 03PN and 04K1). -/
 theorem geometricStalk_preservesColimits
     {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ T) :

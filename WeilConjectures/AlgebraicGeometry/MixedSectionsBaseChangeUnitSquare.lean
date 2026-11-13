@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import WeilConjectures.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence
 
 /-! # Sections of the base-change unit square with independent universes
-Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5T.
 -/
 
 @[expose] public section
@@ -78,30 +81,9 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 /-- Taking sections of the unit description of sheaf base change gives this identity
-over the global ring of Y. No affine or quasi-coherence hypothesis is needed.
-It concerns only the canonical unit at E, and constructs no extension isomorphism.
-Source: Stacks Project, cohomology.tex, Remark 08HY and Lemma 0D5T.
-
-Proof:
-1. Expand schemeDerivedBaseChangeMap as the f'-adjunct of the pullback-composition
-comparison followed by Lg_X* of the counit of f. Apply the g-adjunction unit.
-Naturality of the units moves the composition comparison through the adjunct.
-The triangle identity for f cancels its counit with its unit. What remains is the
-unit for g_X followed by the mate of the pullback-composition comparison, namely
-the direct-image composition comparison of Tag 0D5T.
-2. Apply RΓ_Y to this equation. The normalized Leray isomorphisms for f, g, f',
-and g_X replace sections of the composed direct images with the two restrictions
-of sections on X'. On underived sheaves these isomorphisms act identically on
-sections. Equality of the two scalar actions is precisely pullback.condition;
-schemeGlobalScalarSquareIso is the corresponding identity comparison.
-3. On K-injective representatives the two composite comparisons are therefore
-identical. Their right-derived-unit equations, supplied by
-exists_mixedGlobalSectionsDirectImageIso and the derived direct-image composition
-comparison, identify them on the full derived categories by the universal property
-of right derivation. Thus the equality from step 1 becomes the displayed equality.
-The sheaf and module localizations are separate, so their universe levels can differ.
-This is an equality of maps, not an invertibility statement: E=0, identity maps,
-empty schemes, and nonflat g all satisfy it without extra assumptions. -/
+over the global ring of `Y`. No affine or quasi-coherence hypothesis is needed.
+It concerns only the canonical unit at `E`, and constructs no extension isomorphism
+(Stacks, Tags 08HY and 0D5T). -/
 theorem mixedSectionsBaseChange_unit_square
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (E : schemeDerivedCategory X) :

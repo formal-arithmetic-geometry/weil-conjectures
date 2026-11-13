@@ -39,19 +39,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Constructible modules have amplitude [-1,0], or [0,0] for field coefficients;
 bounded constructible complexes inherit the indicated cohomological interval, enlarged
 by one only in the integral case. In particular Dctf and Dbc have identical object
-predicates, hence identical full subcategories and ambient morphisms.
-
-Proof:
-1. The integral clauses come from det-def-localizing-closure-ctf-equals-bc
-(localizingClosure_ctf_equals_bc). Constructible modules have amplitude [-1,0], and bounded
-constructible complexes with cohomology in [a,b] have amplitude [a-1,b]. The object predicates
-of Dctf and Dbc are equal. That theorem combines lem-sfb-padic-constant-local-model-tor,
-lem-sfb-stratified-tor-interval-devissage and lem-sfb-cohomology-tor-interval. Its field
-clause gives amplitude [0,0] for constructible modules over E, Q_ell or Qlb.
-2. Over a field, let K be in Dbc with cohomology in [a,b]. Each H^q(K) is constructible by
-the definition in det-def-sfb-constructible-tor-amplitude, so it has amplitude [0,0] by
-step 1. lem-sfb-cohomology-tor-interval with c=d=0 then gives amplitude [a,b]. No
-completeness hypothesis is used. -/
+predicates, hence identical full subcategories and ambient morphisms. -/
 theorem integral_ctf_equals_bc (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]

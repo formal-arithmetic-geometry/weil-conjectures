@@ -111,20 +111,8 @@ private theorem closed_mapMod_isEquivalence {X Z : Scheme.{u}}
     exact isIso_of_reflects_iso _ (Mod.forget _)
   exact adj.toEquivalence.isEquivalence_functor
 
-/-- Surjective closed inverse image reflects pro-etale local finite presentation.
-Source: Bhatt--Scholze, Lemma 5.4.2, Theorem 2.3.4 and Definition 6.8.10.
-
-Proof: a surjective closed immersion is a universal homeomorphism. Topological
-invariance is computed on the affine ind-etale basis of Theorem 2.3.4. On this basis
-base change is an equivalence preserving the faithfully flat and Zariski covering
-criteria. Refine the covering presentations of p^*M to basis objects and lift them
-along this basis equivalence and its induced monoidal sheaf equivalence. The coefficient
-ring identifies with p^*R, regular modules correspond,
-and the equivalence preserves finite sums and cokernels. Thus the lifted finite matrices
-present M on the corresponding covering of U. Compatibility with the adjunction unit
-identifies the presented module with the original M, rather than an unspecified object.
-For empty U, use the empty covering and rank-zero presentations. Neither reduction of U
-nor a uniform nilpotence bound on the defining ideal is required. -/
+/-- Surjective closed inverse image reflects pro-etale local finite presentation
+(Bhatt--Scholze, Lemma 5.4.2, Theorem 2.3.4 and Definition 6.8.10). -/
 theorem localFinitePresentation_of_surjective_closed_pullback
     {U V : Scheme.{u}} (p : V ⟶ U) [IsClosedImmersion p]
     (hp : Function.Surjective p)

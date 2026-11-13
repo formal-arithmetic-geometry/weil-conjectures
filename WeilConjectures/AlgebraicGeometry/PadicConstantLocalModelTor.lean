@@ -99,12 +99,7 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalC
   {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]
   (S : D) [MonObj S] [IsCommMonObj (F.obj (G.obj S))]
 
-/-- Extending constant scalar modules along the counit is left adjoint to sections.
-
-Proof: compose the module lift of the monoidal adjunction with extension/restriction
-of scalars. The resulting restriction is along the unit followed by the image of
-its counit; the right triangle identity identifies this with restriction along the
-identity. This also applies to the zero algebra and the zero module. -/
+/-- Extending constant scalar modules along the counit is left adjoint to sections. -/
 def counitScalarAdjunction :
     F.mapMod (G.obj S) ⋙ Mod.extendScalars (adj.counitAlgHom S) ⊣ G.mapMod S := by
   let a := (adj.mapModAdjunction (G.obj S)).comp
@@ -244,12 +239,7 @@ def pointInternalScalarSections :=
   (((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence).inverse ⋙
     scalarSections.mapMod Λ
 
-/-- The finite-constant-model scalar extension is left adjoint to point scalar sections.
-
-Proof: factor scalar realization into constant sheaf, extension along the counit,
-and the point inverse image. The preceding monoidal scalar adjunction supplies the
-first two factors, and the point inverse image is an equivalence. Transport the
-composed adjunction through the canonical scalar realization factorization. -/
+/-- The finite-constant-model scalar extension is left adjoint to point scalar sections. -/
 theorem finiteConstantPointAdjunction :
     Nonempty (finiteConstantScalarExtension Λ (Spec (.of k)) ⊣
       pointInternalScalarSections Λ k) := by

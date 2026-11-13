@@ -11,9 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization
 
 /-! # Evaluation with actual models on one scheme site
-Source: Stacks Project, Tags 08DJ, 08DM and 08DQ.
+
 There is no site equivalence in this statement: Q is the one localization used
 by both ordinary models and the canonical tensor-Hom family.
+
+## References
+
+* Stacks Project, Tags 08DJ, 08DM and 08DQ.
 -/
 
 @[expose] public section
@@ -89,27 +93,7 @@ private theorem tensorModel_isIso_right (Y : Scheme.{u})
 
 set_option maxHeartbeats 400000 in
 -- The canonical sheaf tensor and Hom comparisons require extra instance-reconciliation work.
-/-- Compute derived evaluation using ordinary complexes on the same scheme site.
-Source: Stacks Project, Tags 08DJ, 08DM and 08DQ, representative calculation.
-
-Proof: resolve the degree-zero unit by the fixed functorial K-injective resolution.
-Apply hhom to its resolution map: Hom(P,eta_unit) is a quasi-isomorphism. Compose
-its inverse localization with the recorded internal-Hom factorization to identify
-the ordinary dual with RHom(K,1), including eK. The same factorization computes
-Hom(P,F), because F is already K-injective; compose with eK and eN to obtain b.
-K-flatness of the ordinary dual makes the localization tensor comparison invertible.
-Use symmetry to put that K-flat dual first, apply kFlat_derivedTensor_comparison_natIso,
-and restore the order F tensor dual. Compose with eN and the dual comparison to get a.
-For the square, replace the tensor inputs by K-flat resolutions. Use the canonical
-representative equation of schemeDerivedTensorHomEquiv with the identity of the
-derived dual. On a summand F^p tensor dual^q followed by the r-th Hom projection,
-uncurrying this identity and applying the right unitor gives the displayed ordinary
-unit-action formula if r+q=0 and zero otherwise. This is hf. The coproduct inclusions
-and product projections detect equality of the resulting chain maps. Naturality
-with the resolution maps then identifies the localized maps; cancel the localized
-Hom-resolution isomorphisms. Finally the canonical family's three-variable
-naturality transports along eK and eN. No inverse of f, finite freeness or boundedness
-is used. The same equations hold for zero complexes and the empty scheme. -/
+/-- Compute derived evaluation using ordinary complexes on the same scheme site. -/
 theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (K N : schemeDerivedCategory Y)

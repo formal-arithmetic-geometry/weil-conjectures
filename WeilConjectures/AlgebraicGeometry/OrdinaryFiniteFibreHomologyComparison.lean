@@ -34,13 +34,7 @@ private def kummer_homology_shift_iso
     (((DerivedCategory.homologyFunctor C 0).shiftIso 2 n q hq).app K)
 
 /-- The canonical comparison between sections of a homology sheaf over a
-separably closed point and shifted cohomology on the source.
-
-Construction: commute derived direct image with the shift, apply the homology
-shift comparison, commute exact sections over the separably closed point with
-homology, identify derived sections on that point, and compose derived direct
-image with derived global sections. Each factor is the library's specified
-comparison isomorphism. -/
+separably closed point and shifted cohomology on the source. -/
 def ordinaryFinitePushforward_single_shift_homology_iso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsSepClosed k]

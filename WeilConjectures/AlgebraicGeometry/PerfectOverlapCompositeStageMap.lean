@@ -27,8 +27,8 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
-/-- The site counit followed by the nested-square, local composition and stage-object maps.
-Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed. -/
+/-- The site counit followed by the nested-square, local composition and stage-object maps
+(Stacks, Tags 08DW and 0D5S). -/
 @[irreducible] noncomputable def perfectOverlapCompositeStageMapAt
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
@@ -65,8 +65,7 @@ Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructe
       (perfectOverlapStageObjectIso g pX pY b hg U V L hWL).hom.app A
 
 /-- The site counit, nested restricted-square map, local composition comparison,
-and fixed stage-object comparison, in that order. This is a real construction.
-Source: Stacks Project, Tags 08DW and 0D5S. -/
+and fixed stage-object comparison, in that order (Stacks, Tags 08DW and 0D5S). -/
 @[no_expose] noncomputable def perfectOverlapCompositeStageMap
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
@@ -107,8 +106,8 @@ Source: Stacks Project, Tags 08DW and 0D5S. -/
   · exact perfectOverlapCompositeStageMapAt f gk g hgf pX pY b hg U V U inf_le_left A
   · exact perfectOverlapCompositeStageMapAt f gk g hgf pX pY b hg U V V inf_le_right B
 
-/-- The site counit followed by the nested-square, local composition and stage-object maps.
-Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed. -/
+/-- The site counit followed by the nested-square, local composition and stage-object maps
+(Stacks, Tags 08DW and 0D5S). -/
 theorem perfectOverlapCompositeStageMap_false
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
@@ -128,8 +127,8 @@ theorem perfectOverlapCompositeStageMap_false
   intro W
   rfl
 
-/-- The site counit followed by the nested-square, local composition and stage-object maps.
-Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed. -/
+/-- The site counit followed by the nested-square, local composition and stage-object maps
+(Stacks, Tags 08DW and 0D5S). -/
 theorem perfectOverlapCompositeStageMap_true
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)

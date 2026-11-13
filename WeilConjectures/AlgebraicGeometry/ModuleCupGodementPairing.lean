@@ -30,18 +30,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Flasque augmented resolutions admit a tensor chain pairing over the augmentations.
-Source: Godement, Topologie algébrique et théorie des faisceaux, II §6,
-canonical flasque resolutions and their Alexander–Whitney product.
-Proof: form the augmented cosimplicial Godement resolution from products of stalks.
-Its augmentation is exact on stalks. The cosimplicial terms are flasque because
-restrictions forget coordinates, and its nonnegative unnormalized cochain complex
-is an exact augmented resolution. The natural stalkwise tensor maps and the
-Alexander–Whitney front/back faces give a bilinear map of total complexes. The
-cosimplicial identities prove the signed Leibniz identity, making it a cochain map.
-The degree-zero map is the ordinary tensor of coefficient sections under the
-augmentations. All negative terms are zero, and the empty-space and zero-sheaf
-cases use the same construction. -/
+/-- Flasque augmented resolutions admit a tensor chain pairing over the augmentations
+(Godement, Topologie algébrique et théorie des faisceaux, II §6). -/
 theorem moduleCup_godement_pairing (X : Scheme.{u}) (F G : X.Modules) :
     letI : MonoidalPreadditive X.Modules :=
       Classical.choice (SheafOfModules.tensorClosed X.sheaf).1

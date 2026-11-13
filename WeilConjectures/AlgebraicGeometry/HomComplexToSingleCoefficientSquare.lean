@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SignedSheafDualCoefficientMap
 
 /-! # Naturality of the Hom-to-single comparison
 
-Source: Stacks Project, Tag 0A8X, product Hom differential. -/
+## References
+
+* Stacks Project, Tag 0A8X
+-/
 
 @[expose] public section
 
@@ -41,18 +44,8 @@ private lemma isIso_dependent {D : Type*} [Category D] {A : D} {B : ℤ → D}
   exact hi
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Hom into a single sheaf is its signed internal dual complex.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, product Hom differential.
-The component formula is retained for the coefficient naturality proof.
-
-Proof: project the degree n product to its factor p=-n. All other factors have
-zero target and are zero objects. The inverse is the product lift with identity
-at p=-n and zero elsewhere. The product universal property proves both inverse
-identities. Transport the surviving target term along the canonical degree-zero
-isomorphism of the single complex. The target differential is zero; the Hom
-projection formula leaves -(-1)^n times precomposition by L.d(-(n+1),-n).
-Thus the degreewise isomorphisms commute with differentials. This works for any
-integer-indexed complex and any sheaf N, including zero sheaves and empty sites. -/
+/-- Hom into a single sheaf is its signed internal dual complex, componentwise.
+(Stacks, Tag 0A8X) -/
 private theorem homComplex_to_single_components
     (L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -131,19 +124,7 @@ private theorem homComplex_to_single_components
 
 
 /-- Hom-to-single comparison is compatible with a coefficient morphism.
-Source: Stacks Project, Tag 0A8X, product Hom construction.
-
-Proof: Choose the same product projections of the Hom bifunctor for both
-coefficient sheaves. In degree k the projection with source degree -k is an
-isomorphism, because every other factor has zero target. Compose it with
-internal Hom applied to the degree-zero single-object isomorphism. The
-projection differential formula makes these components chain isomorphisms:
-the target differential is zero and the source contribution is -(-1)^k
-precomposition. The projection formula for a map in the second variable
-says that postcomposition by the single-complex map becomes postcomposition
-by g after the degree-zero identification. Hence these two chain
-isomorphisms intertwine the maps in the displayed square. No freeness or
-boundedness is needed, including for zero coefficient sheaves. -/
+(Stacks, Tag 0A8X) -/
 theorem homComplex_to_single_coefficient_square
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

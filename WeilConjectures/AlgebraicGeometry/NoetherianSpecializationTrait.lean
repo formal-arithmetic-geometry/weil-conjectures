@@ -13,7 +13,9 @@ import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 /-!
 # Tracing a strict specialization in a locally noetherian scheme
 
-Source: Stacks Project, Tag 054F.
+## References
+
+* Stacks Project, Tag 054F.
 -/
 
 @[expose] public section
@@ -22,13 +24,8 @@ universe u
 open CategoryTheory Topology IsLocalRing
 namespace AlgebraicGeometry
 
-/-- A strict specialization is traced by the generic and closed points of a DVR.
-
-Source: Stacks Project, Tag 054F. Choose an affine neighbourhood of the special point;
-it also contains the general point. The corresponding primes form a strict inclusion.
-Apply `Ideal.exists_isDiscreteValuationRing_of_lt` to obtain a ring map whose kernel is
-the smaller prime and whose inverse image of the maximal ideal is the larger prime.
-Its spectrum map, followed by the affine chart, has the required values. -/
+/-- A strict specialization is traced by the generic and closed points of a DVR
+(Stacks, Tag 054F). -/
 theorem exists_trait_of_strict_specializes {X : Scheme.{u}} [IsLocallyNoetherian X]
     {x y : X} (hxy : y ⤳ x) (hne : y ≠ x) :
     ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : IsDiscreteValuationRing R)

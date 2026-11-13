@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Affine raw classes in the image of a stage
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* Stacks Project, Tags 09Z1 and 0EZM.
 -/
 
 @[expose] public section
@@ -34,20 +36,8 @@ attribute [local irreducible] higherDirectImageRawOverPullback
 set_option backward.isDefEq.respectTransparency true in
 /-- A raw cohomology class on an affine etale object has the same associated
 higher-image section as a raw class at one stage. This says nothing about arbitrary
-higher-image sections, sheaf colimits, or the injectivity of the comparison.
-Source: Stacks Project, Tag 09Z1, the cohomology colimit in the proof; Tag 0EZM.
-
-Proof: The existing raw complex presentation identifies the raw diagram and
-cocone with a uniformly bounded-below abelian etale complex system on the
-base-changed inverse system. Its isColimit consequence applies complex
-continuity in every integer degree. The forgetful functor from abelian groups
-to types preserves this filtered colimit, so the raw class z is the image of a
-class t at one stage. The existing raw-over pullback comparison identifies the
-section of that raw image with the section obtained from t by the canonical
-higher-image transition. Apply the limit raw-to-sheaf component to the raw
-representative equality, and compose the resulting equality with this canonical
-comparison. This proves the displayed section equality. No directed final
-reindexing, sheafification descent or separate negative-degree argument is needed. -/
+higher-image sections, sheaf colimits, or the injectivity of the comparison
+(Stacks, Tags 09Z1 and 0EZM). -/
 theorem exists_higher_image_raw_affine_image_rep
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

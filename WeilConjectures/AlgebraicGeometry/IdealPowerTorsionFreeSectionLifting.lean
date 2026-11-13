@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Lifting a section into an ideal-power-torsion-free module
 
-Source: Stacks Project, Properties, Tags 01PM and 01PQ, torsion-free case.
+## References
+
+* Stacks Project, Tags 01PM and 01PQ
 -/
 
 @[expose] public section
@@ -55,24 +57,7 @@ private theorem power_injective {X : Scheme.{u}} {I : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A section of an ideal-power-torsion-free module is evaluated by an ideal-power map.
-
-Source: Stacks Project, Properties, Tags 01PM and 01PQ.
-
-Proof: Construct the zero module as the free module on the empty type. Its zero
-map into F is monic and quasi-coherent, and htf identifies its section image
-with each ideal-power annihilator. Its cokernel projection is an isomorphism.
-Apply the affine quotient-lifting theorem with this constant annihilator system,
-and compose the local lifts with the inverse cokernel projection. Choose a finite
-affine cover and increase the local degrees with r to their maximum. Monicity
-of the recursive power inclusions, hr and hone ensure that this preserves
-values at one. On an overlap W, restrict a power section to W intersect U.
-Injectivity of the power inclusion identifies it with its scalar image times
-one, so linearity and the common evaluation show equality of the two local
-maps there. The torsion-free restriction theorem makes their values equal on W.
-Sheaf morphism descent glues the maps, and sheaf separation on the finite cover
-proves their global evaluation is s. Empty covers, empty opens and degree zero
-are included. Quasi-separatedness is retained in the signature but is unused.
-No object is constructed from an arbitrary unproved existence statement. -/
+(Stacks, Tags 01PM and 01PQ) -/
 theorem ideal_power_torsionFree_section_lifting
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

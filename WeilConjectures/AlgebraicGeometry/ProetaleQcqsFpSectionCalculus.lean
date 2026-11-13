@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Finite-presentation section calculus on the qcqs pro-etale site
 
-Source: Stacks Project, Tags 0738 (4), 0GMZ, 0GN0 and 098D.
+## References
+
+* Stacks Project, Tags 0738, 0GMZ, 0GN0 and 098D.
 -/
 
 @[expose] public section
@@ -315,26 +317,10 @@ private noncomputable def hom_section_iso
     ext x
     rfl)
 
-/-- Source: Stacks Project, Tags 0738 (4), 0GMZ, 0GN0 and 098D.
-Sections over a qcqs scheme and Hom from a locally finitely presented module commute
+/-- Sections over a qcqs scheme and Hom from a locally finitely presented module commute
 with filtered sheaf colimits. Both comparisons use the chosen colimit coprojections;
-equality of representatives is witnessed at a common stage.
-
-Proof: A covering of a qcqs object has a finite affine refinement. Mathlib supplies
-pullbacks in the pro-etale site, and their scheme pullbacks are qcqs. A sheaf colimit
-is the sheafification of the presheaf colimit, so its sections locally have stage
-representatives, and equal images are locally eventually equal. Finite covering
-refinements and filtered cocones make the latter equalities hold at one stage;
-sheaf separation proves global eventual equality. Move finitely many local section
-lifts to one stage, impose equality on the finitely many qcqs overlaps, and glue.
-This proves that section evaluation preserves the colimit, including for empty covers.
-
-For modules, internal Hom from a locally finitely presented sheaf preserves filtered
-colimits by the site-level finite-presentation theorem. Forgetting to abelian sheaves
-preserves colimits. Applying the section result at the terminal object therefore
-proves preservation for global Hom, which is naturally the sections of internal Hom.
-Mathlib's filtered-colimit representative theorem gives the two eventual-equality
-assertions with the specified coprojections. -/
+equality of representatives is witnessed at a common stage
+(Stacks, Tags 0738, 0GMZ, 0GN0 and 098D). -/
 theorem proetale_qcqs_fp_section_calculus
     (X : Scheme.{u}) (V : X.ProEt)
     [CompactSpace V.left] [QuasiSeparatedSpace V.left]

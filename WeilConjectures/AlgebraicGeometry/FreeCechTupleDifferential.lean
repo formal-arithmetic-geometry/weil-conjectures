@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 
 /-! # Differential compatibility of the free Čech tuple map
 
-Source: Stacks Project, Tags 03AT and 03F5.
+## References
+
+* Stacks Project, Tags 03AT and 03F5.
 -/
 
 @[expose] public section
@@ -65,21 +67,7 @@ private theorem tupleGenerator_face (X : Scheme.{u}) (ι : Type u) (U₀ : X.Eta
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The tuple map commutes with the alternating differential.
-Source: Stacks Project, Tags 03AT and 03F5, the direct-sum decomposition.
-Proof: Both sides are linear maps on a direct sum of free modules. Check their
-values on a generator DFinsupp.single φ (Finsupp.single x r). The tuple map sends
-this generator to r times the coproduct injection of the free generator associated
-with the compatible tuple x. The n-th differential is the sum over j in Fin (n+2)
-of (-1)^j times the j-th face. A face reindexes the indices along Fin.succAbove j
-and postcomposes the product map with the corresponding product projection.
-The equations Pi.lift_comp_π in Over U₀ identify that composite with the product map
-for the tuple with its j-th entry omitted. Thus every summand is r times the
-same generator with the same sign on both sides. The block index φ is preserved.
-The integer sign action agrees with multiplication by the corresponding power
-of -1 in O(W), including for noncommutative rings. Extend the equality by the
-Finsupp and DFinsupp universal properties. Empty families and the zero ring
-are included, since no basis element or nonzero scalar is required. -/
+/-- The tuple map commutes with the alternating differential. -/
 theorem freeCechDifferential_compatibility (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)
     (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u})
     (W : X.Etale) :

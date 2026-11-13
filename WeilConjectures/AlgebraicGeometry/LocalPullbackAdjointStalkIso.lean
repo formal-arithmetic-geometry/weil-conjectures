@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 
 /-! # Local pullback adjunction on stalks
 
-Source: Stacks Project, Tags 01J7 and 0098.
+## References
+
+* [Stacks, Tags 01J7 and 0098]
 -/
 
 @[expose] public section
@@ -27,14 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The adjoint of an invertible local tensor-pullback comparison is invertible
-on the original stalk. Source: Stacks, Tags 01J7 and 0098.
-
-Proof: At the closed point, the pullback-unit stalk followed by the direct-image
-stalk comparison is the canonical module-stalk isomorphism. The direct-image
-comparison is invertible because the local-spectrum map is inducing. Cancel this
-comparison to get invertibility of the unit on the original stalk. The adjoint
-of beta is the unit followed by the direct image of beta; both induce invertible
-stalk maps. Transport the source point by the closed-point image equality. -/
+on the original stalk (Stacks, Tags 01J7 and 0098). -/
 theorem localPullback_adjoint_stalk_isIso (Y : Scheme.{u}) (y : Y)
     (G : Y.Modules) (H : (Spec (Y.presheaf.stalk y)).Modules)
     (beta : (Scheme.Modules.tensorPullback (Y.fromSpecStalk y)).obj G ⟶ H)

@@ -238,21 +238,7 @@ open Scheme
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- The coefficient comparison commutes with direct image at the base change of the
-terminal object of the pro-etale site of Spec Z.
-Source: Bhatt--Scholze, Proposition 5.3.2; the inverse-image composition adjunction.
-
-Proof in words. Put W = proEtTerminal Spec Z and W_X = pi_X^* W. The conjugation
-unit law for constantPullbackMonoidalIso identifies the sheafification unit followed
-by finiteDiscreteSchemeRingIso on W_X with q0 followed by the unit of pi_X^*.
-Here q0 is the constant sheafification unit on Spec Z followed by constantPointIso
-and pointUpperStar applied to eR. This formula follows from unit_conjugateEquiv_symm
-and naturality of the inverse-image adjunction unit in eR. Apply
-unit_comp_map_condensedPushforwardHom at W and precompose with q0. Its right-hand
-side is the coefficient map on W_U followed by the restrictions for pullbackCongr
-(comp_toSpecZ j) and pullbackComp j (toSpecZ T). Each restriction disappears by
-naturality of a map from a constant presheaf: q(Y) = q(X) followed by restriction
-along X to Y. Applying this twice gives the displayed equality at j^* W_T.
-This uses no nonemptiness, finiteness, discreteness or nonzero-ring hypothesis. -/
+terminal object of the pro-etale site of Spec Z (Bhatt--Scholze, Proposition 5.3.2). -/
 theorem finiteDiscreteCoefficient_coefficientUnit_pushforward_terminal
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
       (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj

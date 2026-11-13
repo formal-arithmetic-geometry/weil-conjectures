@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.InternalCanonicalTensorPullRouteModel
 
 /-! # The tensor route in the common tensor model
 
-Source: Stacks 06YY, 0G7E; integral proper-base-change proof (1), (3). -/
+## References
+
+* Stacks 06YY, 0G7E.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -84,20 +87,7 @@ private theorem tensor_normalization_unique (a : Λ ⟶ Λ') [IsMonHom a]
   rw [h, ← t₀.derived.hom.naturality e.hom] at hn
   exact (cancel_epi ((D a T ⋙ V a T).map e.hom)).mp hn
 
-/-- The tensor route computes the same ordinary tensorator model.
-
-Source: Stacks 06YY, 0G7E; integral proper-base-change proof (1), (3), step 2
-of the tensor-pull normalization argument.
-
-Proof. The prescribed `ordinary_hom` fixes the ordinary tensor presentation
-uniquely. Compare `TensorNormalized` for the given presentation and for the
-canonical presentation on a K-flat cochain complex. The localization tensor
-comparison is invertible when its first factor is K-flat, and the single-tensor
-comparison is an isomorphism, so cancellation proves equality of the two
-derived hom components on these representatives. Naturality along an
-isomorphism from a K-flat representative to each arbitrary derived object
-proves equality everywhere. Rewrite by this uniqueness equality and apply
-`canonical_tensor_pull_route_model`. No flatness of the coefficient is used. -/
+/-- The tensor route computes the same ordinary tensorator model. (Stacks, Tags 06YY, 0G7E) -/
 theorem tensor_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (tY : TensorNormalization a Y)
     (hY : TensorNormalized a Y tY)

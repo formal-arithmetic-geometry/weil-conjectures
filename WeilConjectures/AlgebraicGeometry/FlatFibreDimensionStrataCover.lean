@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 
 /-! # Dense fibre opens contain component generic points
 
-Source: Stacks Project, Tag 054U.
+## References
+
+* [Stacks Project, Tag 054U](https://stacks.math.columbia.edu/tag/054U)
 -/
 
 @[expose] public section
@@ -42,18 +44,7 @@ private theorem generic_points_subset_dense_open (Y : Scheme.{u})
   have hsp : z ⤳ (y : Y) := specializes_iff_mem_closure.mpr (hOsub hyO)
   exact hsp.mem_open hopen hyW
 
-/-- Dense fibre opens contain component generic points.
-
-Source: Stacks Project, Tags 054T and 054U.
-Proof: For t in U, the fibre is isomorphic to a fibre of the restricted locally finitely presented
-morphism. It is locally of finite type over the residue field and hence locally noetherian. Fix a
-component generic point z and choose a noetherian affine open neighbourhood A of z. The
-intersection of its component with A is an irreducible component of A and has generic point z.
-There are finitely many components of A. Remove all the other components; the resulting open O
-contains z and is contained in its component, and is nonempty. The dense open W intersects O in a
-point y. Since y belongs to the closure of z, z generalizes y; openness of W forces z to lie in W.
-This proves the inclusion for every component generic point. Empty fibres have no component
-generic points. -/
+/-- Dense fibre opens contain component generic points (Stacks, Tags 054T and 054U). -/
 theorem generic_points_mem_dense_open_fibre_of_flat_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

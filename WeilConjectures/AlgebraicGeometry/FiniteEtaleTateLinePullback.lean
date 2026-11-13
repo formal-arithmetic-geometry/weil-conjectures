@@ -10,7 +10,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
 
 /-! # Generator-normalized pullback of finite Tate lines
-Source: Stacks Project, Etale Cohomology, Section 03PK. -/
+
+## References
+
+* Stacks Project, Tag 03PK
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -304,10 +308,7 @@ private lemma linePullbackMap_identity
     _ = s.hom.app X := by rw [he, Category.comp_id]
 
 /-- The Tate-line inverse-image comparison, normalized on pure tensors, with identity
-and composition compatibility. The scalar-extension adjunction carries the roots comparison
-to this map; its Hom equivalences prove invertibility. Naturality of adjunction units gives
-composition and the unit law then gives the identity.
-Source: Stacks Project, Tags 03PK and 03Q1. -/
+and composition compatibility. (Stacks, Tags 03PK and 03Q1.) -/
 theorem finiteEtaleTateLine_pullback_normalized
     (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) :
     ∃ c : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T), IsUnit (m : Γ(T, ⊤)) →

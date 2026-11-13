@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-!
 # Affine chart equivalences for internal Hom
 
-Source: Stacks Project, schemes.tex, Tag 01I7; duality.tex, Tag 0BUZ.
+## References
+
+* Stacks Project, Tag 01I7 and Tag 0BUZ.
 -/
 
 @[expose] public section
@@ -80,21 +82,8 @@ noncomputable def chartHomEquiv {X : Scheme.{u}} (M F : X.Modules)
   exact e₀.trans (e₁.trans (e₂.trans (e₃.trans e₄)))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The constructed chart equivalences preserve evaluation at the terminal open.
-
-Source: Stacks Project, schemes.tex, Tag 01I7; duality.tex, Tag 0BUZ.
-
-Proof: The fully faithful forgetful functor identifies a presheaf morphism over U with
-its sheaf morphism, keeping each component. The over-site equivalence is induced by
-Opens.overEquivalence; its functor evaluates at the image open and transports scalars
-by the structure-sheaf comparison. The natural isomorphism overFunctorEquiv identifies
-this with restriction along U.ι. Restriction along hU.isoSpec.inv again keeps the
-component at its image open. The restrictFunctorComp isomorphisms transport these
-components through the equality of composite image opens. On the terminal open the
-composite image is U. The section equivalences on source and target are precisely
-restrictAppIso followed by transport along fromSpec '' ⊤ = U. Conjugating therefore
-cancels those transports and gives the original component at Over.mk (𝟙 U).
-This argument uses no quasi-coherence; it also applies to empty opens. -/
+/-- The constructed chart equivalences preserve evaluation at the terminal open
+(Stacks, Tags 01I7 and 0BUZ). -/
 theorem internalHom_evaluation_chart_compare {X : Scheme.{u}} (M F : X.Modules)
     (U : X.Opens) (hU : IsAffineOpen U)
     (φ : (SheafOfModules.homObj M F).val.obj (op U)) :

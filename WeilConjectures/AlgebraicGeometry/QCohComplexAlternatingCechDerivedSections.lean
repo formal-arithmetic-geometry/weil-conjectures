@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQu
 
 /-! # Alternating Čech cochains compute derived sections of quasi-coherent complexes
 
-Source: Stacks, Cohomology, Lemma 08C2 and lemma-alternating-cech-complex-complex;
-Cohomology of Schemes, Lemma 01XB; Perfect, Lemma 08D2.
+## References
+
+* Stacks Project, Tags 08C2, 01XB and 08D2.
 -/
 
 @[expose] public section
@@ -58,30 +59,8 @@ private lemma sectionsDerivedUnit_iso
   simp [sectionsDerivedUnit, Functor.rightDerivedFunctorObjQIso]
 
 /-- The canonical comparison exists, every comparison is invertible, and comparisons are
-natural among complexes of quasi-coherent modules. No boundedness of F or G is assumed.
-Source: Stacks, Cohomology, lemma-alternating-cech-complex-complex, Lemma 08C2;
-Cohomology of Schemes, Lemma 01XB; Perfect, Lemma 08D2.
-
-Proof:
-1. Insertion of a cover index contracts the augmented alternating Čech complex locally.
-   The finite cover bounds the Čech direction, even for an unbounded coefficient complex.
-2. Each nonempty intersection is affine. The affine quasi-coherent derived equivalence and acyclic section comparison identify its termwise sections with
-   derived sections, naturally in the complex and restriction maps.
-3. Take a functorial K-injective resolution with injective terms. K-injective restriction to opens and the derived-functor computation show that the maps of intersection section
-   complexes are quasi-isomorphisms. Filter the Čech totals by Čech degree. Their finite
-   graded pieces are shifted products of these quasi-isomorphisms. Spectral comparison and finite filtration induction show the induced map of totals is a quasi-isomorphism.
-4. For the injective-term resolution, injective Čech acyclicity and alternating comparison make the augmented section rows exact. The finite
-   staircase chase makes the cone of the section-to-total augmentation acyclic.
-   Invert this augmentation in the derived category and compose with the map of totals.
-5. Resolution comparisons between K-injectives are unique up to homotopy. Additive
-   Čech totalization preserves homotopies; this gives the equation defining every
-   comparison, its resolution independence, and the naturality square. In particular,
-   compare any K-injective resolution with the injective-term resolution from step 3.
-   Their comparison is a homotopy equivalence, so sections and Čech totalization carry
-   it to isomorphisms after localization. Naturality transports the canonical equation
-   to every K-injective resolution, without requiring its terms to be injective. The same
-   construction gives zero total and derived sections for the empty cover or zero complex.
--/
+natural among complexes of quasi-coherent modules. No boundedness of `F` or `G` is assumed
+(Stacks, Tags 08C2, 01XB and 08D2). -/
 theorem qcoh_complex_alternating_cech_derived_sections
     (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤)
     (hAffine : ∀ (p : ℕ) (t : Fin (p + 1) → Fin r), IsAffineOpen (⨅ k, U (t k)))

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.IntegralSectionScalarModels
 
 /-! # Integral local models on one pro-etale member
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
+## References
+
+* Bhatt–Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar upperSt
   integralSectionFunctor Scheme.integralDetailedCoefficientComparison
   Scheme.proEtaleModuleInverseImage Scheme.integralConstantModule continuousScalarFunctor
 
-/-- Pullback to a member admits a finite point model, before any coefficient comparison.
-Source: finite constant local models. -/
+/-- Pullback to a member admits a finite point model, before any coefficient comparison. -/
 def sectionPointModelAlong
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (g : S ⟶ X)
@@ -43,8 +44,7 @@ def sectionPointModelAlong
       Nonempty ((CondensedRing.upperStar Λ (f ≫ g)).obj M ≅
         ((upperStarFromPoint Y).mapMod Λ).obj Q)
 
-/-- The explicit scalar model in the localized module category.
-Source: the completed scalar model. -/
+/-- The explicit scalar model in the localized module category. -/
 def integralSectionMemberModel (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (g : S ⟶ X) (U : S.ProEt)
@@ -246,25 +246,7 @@ private theorem symmNonemptyIso {C : Type*} [Category C] {M N : C}
   obtain ⟨a⟩ := h
   exact ⟨a.symm⟩
 
-/-- On a single member, the fixed section comparison preserves finite scalar models.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), scalar comparison
-in step 7 of the integral constructibility bridge.
-
-Proof: write a finite presentation of the point module as a matrix between finite sums
-of the regular module. Evaluation of continuous scalar functions at the singleton
-identifies the matrix entries with the valuation ring underlying PbcIntegralRing.
-Form the ordinary cokernel N of this matrix. Pullback from the point, the section-action
-equivalence, and restriction along the coefficient isomorphism preserve finite sums and
-cokernels. On every positive quotient the normalized coefficient comparisons send each
-entry to the same constant scalar section; joint monicity of the limit projections
-identifies the completed entries. Naturality of those projections also identifies the
-coefficient maps after inverse image along g and restriction to U. Hence the localized
-finite cokernel is the completed constant realization of N. Conversely choose a finite
-presentation of N and form its matrix cokernel of regular modules on the condensed point.
-It is finitely presented by construction. The same comparison and full faithfulness of
-the section-action and localized-site equivalences reflect the local isomorphism to
-that point model. This is one member only: no cover, stratification or Noetherianity
-occurs. Empty matrices, torsion and empty schemes are allowed. -/
+/-- On a single member, the fixed section comparison preserves finite scalar models. -/
 theorem integralSectionMemberModels (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (g : S ⟶ X) (U : S.ProEt)

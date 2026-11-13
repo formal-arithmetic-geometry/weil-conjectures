@@ -29,7 +29,7 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- An ambient object with a specified counit representing Hom(Rf!(-), K) on all finite
-ctf tests, on the small etale site. Source: Definition Representing objects, entire text. -/
+ctf tests, on the small etale site. -/
 structure FiniteRepresentingPair (ell n : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Smooth f] (c : Compactification f)
     (K : DerivedCategoryModule (ULift.{u + 1} (ZMod (ell ^ n))) Y) where
@@ -52,8 +52,7 @@ end AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.ProEtale
 
 /-- An ambient object with a specified counit representing Hom(Rf!(-), K) on every
-intrinsically constructible bounded finite-Tor test, on the small pro-etale site.
-Source: Definition Representing objects, entire text. -/
+intrinsically constructible bounded finite-Tor test, on the small pro-etale site. -/
 structure FiniteRepresentingPair (ell n : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Smooth f] (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y)

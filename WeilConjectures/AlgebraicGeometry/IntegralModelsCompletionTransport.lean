@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Complete objects in the internal integral coefficient presentation
 
-Source: Stacks Tags 099C, 099L and 099M.
+## References
+
+* Stacks, Tags 099C, 099L and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -151,20 +153,7 @@ private theorem transportCompleteEquivalence
   · exact ⟨(d.fullyFaithfulFunctor.whiskeringRight _).preimageIso δ⟩
 
 /-- The complete-object equivalence in the canonical internal coefficient presentation.
-This statement imposes neither constructibility nor a cohomological bound.
-Source: Stacks Tags 099C, 099L and 099M.
-
-Proof: use the exact section-action and small-site equivalences, with their natural
-scalar-restriction comparison, and localize them to the derived categories. The ordinary
-flatness and residue calculation supplies the finite type kernel and quotient hypothesis
-for the general flat ringed-ideal complete equivalence. The completed realization's local
-completeness predicate is identified with completeness for the extended residue ideal.
-Completeness is invariant under the chosen-representative comparison isomorphisms.
-Restrict the ambient presentation equivalences to the complete full subcategories and
-compose them with the flat ringed-ideal equivalence. Transport its inclusion isomorphism
-back by full faithfulness. The preservation and reflection theorem for scalar restriction
-gives the pointwise clause for arbitrary complexes, including zero complexes and the
-empty scheme. -/
+This statement imposes neither constructibility nor a cohomological bound. -/
 theorem completion_transport (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X] :

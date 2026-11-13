@@ -15,7 +15,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # The cohomology formula for a fixed augmented lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks, Cohomology, Tags 01FB and 01E4]
 -/
 
 @[expose] public section
@@ -28,10 +30,8 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-/-- Extend by zero, apply Mathlib's injective replacement with lower bound zero, and
-use the full extension functor to recover a natural-indexed quasi-isomorphism.
-Source: Stacks Project, Derived Categories, Tag 013K; Mathlib's
-`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`. -/
+/-- Every natural-indexed cochain complex admits a quasi-isomorphism into a complex of
+injectives (Stacks, Derived Categories, Tag 013K). -/
 private theorem augmentedLift_injective_resolution
     {C : Type*} [Category* C] [Abelian C] [EnoughInjectives C]
     (A : CochainComplex C ℕ) :
@@ -63,10 +63,8 @@ private theorem augmentedLift_injective_resolution
   exact Injective.of_iso (asIso ((L.restrictionToTruncGE' e).f n)) inferInstance
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport the integer-indexed sections theorem through extension by zero.
-The natural comparison `mapExtendFunctorNatIso` identifies application of sections
-before and after extension, and `quasiIso_extendMap_iff` reflects the result.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FB and 01EZ. -/
+/-- Transport of the integer-indexed sections theorem through extension by zero
+(Stacks, Tags 01FB and 01EZ). -/
 private theorem augmentedLift_sections_quasiIso
     {X Y : Scheme.{u}} (h : X ⟶ Y)
     (A : CochainComplex X.Modules ℕ) (K : CochainComplex Y.Modules ℕ)
@@ -112,19 +110,8 @@ private theorem augmentedLift_sections_quasiIso
       ((e.mapExtendFunctorNatIso Γ).hom.naturality l).symm
   exact (HomologicalComplex.quasiIso_extendMap_iff _ e).1 hext
 
-/-- A fixed augmented lift computes the cohomology map without changing resolutions.
-Source: Stacks Project, Cohomology, Tags 01FB and 01EZ.
-
-Proof: Extend h_*I by zero and resolve it by a quasi-isomorphism lambda into a
-bounded below injective complex; truncate back to natural indices. Take beta
-= k followed by lambda. The augmentation of k supplies the compatibility
-field of ModuleCohomologyFMapData, with the given resolutions I and J and the
-canonical section comparison a. Sections of lambda are a quasi-isomorphism
-because I is termwise injective (Tag 01EZ); hence the invertibility field holds.
-In the formula for the data's cohomology map expand beta, apply functoriality of
-homology, and cancel the homology map of sections of lambda with its inverse.
-The result is the displayed formula. Independence of resolution choices
-identifies the data's map with moduleCohomologyFMap. -/
+/-- A fixed augmented lift computes the cohomology map without changing resolutions
+(Stacks, Tags 01FB and 01EZ). -/
 theorem moduleCohomologyFMap_of_augmentedLift {X Y : Scheme.{uBC}} (h : X ⟶ Y)
     {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (pushforward h).obj F)
     (I : InjectiveResolution F) (J : InjectiveResolution G)

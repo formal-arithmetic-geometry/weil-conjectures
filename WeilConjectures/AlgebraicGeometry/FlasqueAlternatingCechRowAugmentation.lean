@@ -12,7 +12,11 @@ import WeilConjectures.Topology.Sheaves.CechFlasque
 
 /-! # The increasing-tuple augmented Čech row of a flasque module
 
-Source: Stacks Project, Tags 09SZ, 01EQ and 01FM.
+## References
+
+* [Stacks Project, Tag 09SZ](https://stacks.math.columbia.edu/tag/09SZ)
+* [Stacks Project, Tag 01EQ](https://stacks.math.columbia.edu/tag/01EQ)
+* [Stacks Project, Tag 01FM](https://stacks.math.columbia.edu/tag/01FM)
 -/
 
 @[expose] public section
@@ -106,34 +110,9 @@ private theorem flasqueAlternatingRow_positive {X : Scheme.{u}} {r : ℕ}
   exact he
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The actual increasing-tuple row augmentation is a quasi-isomorphism.
-Its degree-zero component is specified, so the map is uniquely determined.
-
-Source: Stacks Project, Tags 09SZ, 01EP and 01FM.
-
-Proof: Restriction of a global section to each increasing one-tuple has zero
-Čech differential, because the two restrictions to every pair agree. Construct
-this map in nonnegative degrees with fromSingle₀Equiv. For degree zero, evaluate
-a cocycle on increasing pairs to show its singleton sections agree on pairwise
-intersections (reverse the pair when necessary). Sheaf gluing gives a section
-on the union, which is X by hU. Sheaf separatedness makes restriction injective.
-The scalar identification at the top is the identity, so this proves that the
-augmentation induces an isomorphism on degree-zero homology.
-For positive degrees, construct the full-tuple SiteCechComplex with actual finite
-intersections. Its flasque Čech cohomology vanishes by Tag 09SZ, using the proved source-library
-flasque acyclicity theorem and an explicit isomorphism of full-tuple complexes. Define a map
-from it to the underlying abelian alternating row by evaluating on the underlying
-function of each order embedding. Reindex strictly monotone functions as order
-embeddings; the signed face formula verifies that this is a cochain map.
-The existing Tag 01FM restriction homotopy theorem gives it a homotopy inverse,
-so its map on homology is an isomorphism and the alternating row is exact in
-positive degrees. The elementwise exactness criteria for abelian groups and
-modules agree, so forgetting scalars reflects this exactness.
-Extension by zero to integer degrees preserves quasi-isomorphisms. Identify the
-extension of the single complex with the integer single complex via extendSingleIso;
-its degree-zero formula gives exactly alternatingCechZero. All constructions also
-work for the empty cover: the empty-family gluing axiom gives zero global sections.
-The zero module case is included as well. -/
+/-- The actual increasing-tuple row augmentation is a quasi-isomorphism. Its degree-zero
+component is specified, so the map is uniquely determined.
+(Stacks, Tags 09SZ, 01EP and 01FM.) -/
 theorem flasque_alternatingCech_row_augmentation
     (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [TopCat.Sheaf.IsFlasque

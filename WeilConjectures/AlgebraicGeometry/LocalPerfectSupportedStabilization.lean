@@ -18,7 +18,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Supported local perfect models after open restriction
 
-Source: Stacks Project, Tags 08CM and 09IM.
+## References
+
+* [Stacks, Tags 08CM and 09IM]
 -/
 
 @[expose] public section
@@ -38,24 +40,8 @@ set_option maxHeartbeats 600000 in
 -- Exact restriction comparisons involve several nested localized module categories.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Restrict local perfect models and their support, also after stabilization.
-Source: Stacks Project, Tag 08CM and the stabilization in Tag 09IM.
-
-Proof: At x in W, intersect its given neighbourhood O with W. Restrict the bounded
-complex K to this intersection and transport it through the equivalence between the
-localized site and the open scheme. Restriction and this equivalence carry finite free
-modules to finite free modules, preserve their retract equations, and preserve zero
-terms. The exact restriction composition comparison therefore gives a strictly perfect
-model for the restriction of R near x. Shift its local model by one; the new degree
-bounds are a-1 and b-1, and the finite free retracts are merely reindexed. The split
-biproduct triangle with first term F, middle term F plus F[1], and last term F[1]
-is distinguished. Apply perfect two-out-of-three to obtain perfectness of the middle term.
-Exactness identifies homology of the restriction with
-restriction of homology. The stalk comparison identifies its stalk at x with the ambient
-stalk at x.val, which is zero off T by hRT. Homology of a biproduct is the biproduct of
-homologies, and homology of a shift is the shifted homology; both summands thus have zero
-stalks off T. This proves both support clauses. The construction is pointwise and includes
-empty W and empty support without any choice of a point. -/
+/-- Restrict local perfect models and their support, also after stabilization
+(Stacks, Tags 08CM and 09IM). -/
 theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
     (T : Set X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

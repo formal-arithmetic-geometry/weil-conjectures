@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.OpenPinnedTargetCounitTriangle
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSourceCounitTriangle
 
 /-! # Counit comparison for one open leg
-Source: Stacks Project, Tags 08DW and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08DW and 08HY.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -64,21 +68,7 @@ variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
   [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
 
-/-- Coherence of the underived localized comparison factors.
-Source: Stacks Project, Tags 08DW and 08HY; the explicitly constructed tensor comparisons.
-Proof: expand the restriction comparison into its four factors: the inverse
-open comparison for U', the inverse target composition comparison, the source
-composition comparison along hj, and the open comparison for U. The target
-homotopy comparison is the inverse of the lift of the first two factors, so
-these cancel. The last two factors are the source comparison. For an arbitrary
-morphism f and an equality j ≫ U.ι = f, equality induction identifies the
-composition comparison along that equality with the comparison at j ≫ U.ι
-precomposed by equality transport. This induction generalizes f first, rather
-than trying to eliminate the equality of two fixed composites. Apply this at
-hj. Lifting additive functors to complexes and then to the homotopy quotient
-preserves composition, inverses, and equality transport, giving the displayed
-identity for every P. This argument uses only functor identities; it applies to
-empty and top opens and zero complexes without any extra hypothesis. -/
+/-- Coherence of the underived localized comparison factors. -/
 theorem open_pinned_tensor_comparison_coherence
     {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)

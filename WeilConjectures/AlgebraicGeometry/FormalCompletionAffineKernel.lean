@@ -17,8 +17,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The affine kernel fork of a completed short exact sequence
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0881, via Lemmas
-087W and 087X (3), and Algebra, Lemma 00MB (2).
+## References
+
+* Stacks Project, Tags 0881, 087W, 087X and 00MB
 -/
 
 @[expose] public section
@@ -32,31 +33,8 @@ namespace AlgebraicGeometry
 /-- On an affine open, the completed first arrow is a kernel of the completed second
 arrow. The restriction functor is specified by its equality after the full inclusion;
 no arbitrary replacement of the restriction functor is allowed. The conclusion asserts
-only the kernel universal property, not that the completed second arrow is epimorphic.
-
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0881, affine reduction
-and equivalence 087W; Algebra, Lemma 00MB (2).
-
-Proof:
-1. Apply formalCompletion_affine_comparison. It supplies a Noetherian ring A, an ideal J,
-a short exact module complex M with finite middle term, a zero-preserving functor F
-reflecting parallel-pair limits, and linear equivalences identifying the two mapped
-arrows with AdicCompletion.map on the arrows of M. This is the affine identification
-of Lemma 0881, using Lemma 087W and the positive-power quotient formulas.
-2. Apply Mathlib's AdicCompletion.map_injective and AdicCompletion.map_exact, using
-injectivity, exactness and surjectivity of the original module sequence. These results
-use finiteness only of its middle term.
-3. Transfer injectivity through the first two equivalences. For middle exactness,
-map a killed element through the second equivalence; the third equivalence and the
-arrow equation show it is killed by the second completion map. Lift it by completion
-exactness and pull the lift back through the first equivalence. The first arrow equation
-proves its image is the original element. The reverse inclusion follows from V.zero.
-4. Injectivity gives a monomorphism and middle exactness gives categorical exactness
-in ModuleCat A. Exact.fIsKernel makes its first arrow a limiting kernel fork. Convert
-this fork to the mapped cone and reflect its limit through F to obtain the conclusion.
-No abelian structure on finite completed modules is needed in this argument. The zero
-module, empty affine open, I = 0 and I = O_X require no exceptional cases.
--/
+only the kernel universal property, not that the completed second arrow is epimorphic
+(Stacks, Tag 0881; Tag 087W). -/
 theorem formalCompletion_affine_kernel (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) (h : (completion X I).Additive)
     (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)

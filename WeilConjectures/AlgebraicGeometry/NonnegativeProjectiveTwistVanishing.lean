@@ -258,20 +258,8 @@ end D2TwistCech
 
 namespace Scheme.Modules
 
-/-- Nonnegative twists have no positive cohomology over any commutative ring.
-Source: Stacks Project, Tag 01XT, the projective-space twist computation.
-
-Proof: The standard affine coordinate cover computes cohomology, since the twist is
-quasi-coherent and all finite intersections are affine. Identify its Cech complex with
-the Laurent-monomial complex of total degree m using the local bases of O(m).
-For each exponent vector having a nonnegative coordinate, inserting that coordinate
-contracts the positive-degree complex of allowed intersections. The only possible
-remaining positive-degree classes have all N+1 exponents strictly negative, and hence
-strictly negative total degree. This is impossible for m ≥ 0. Thus ordinary sheaf
-cohomology is zero in every positive degree; the comparison with module right-derived
-sections gives IsZero. For N=0 the same contraction applies to the one-coordinate cover
-(and projective space is affine). The zero ring also causes no exception, as every
-coefficient module and every term is zero. -/
+/-- Nonnegative twists have no positive cohomology over any commutative ring
+(Stacks, Tag 01XT). -/
 theorem isZero_moduleCohomology_projective_twist_of_nonneg
     (A : Type u) [CommRing A] (N : ℕ) (m : ℤ) (hm : 0 ≤ m)
     (q : ℕ) (hq : 0 < q) :

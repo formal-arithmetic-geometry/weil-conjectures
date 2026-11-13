@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.OpenDerivedStalkIso
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 /-! # Normalized ring and input-stalk coordinates
 
-Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
+## References
+
+* Stacks Project, Tag 0098.
 -/
 
 
@@ -205,20 +207,7 @@ private theorem tensorMap_tmul_formula
   rw [hl, hr]
 
 /-- Normalized ring and input-stalk coordinates for a source open.
-
-Proof: Let p and s be the two projections of X' times_X U. The pullback equation
-identifies g'(p z0) with U.ι(s z0). Compose this stalk congruence with the invertible
-stalk map of U.ι to obtain eA, and use p.stalkMap for eD. Use the corresponding
-point congruences in S and S' for eR and eB. Functoriality of stalkMap proves the
-two base-algebra equations. The restrictions of tensorMap to its two inclusions
-are the projection stalk maps, so their products prove the tensor-ring equation.
-Represent scalar and module germs on a common open. The inverse ring-stalk germ
-formula and germ_smul show that the inverse same-germ restriction map is linear
-into restriction of scalars along eA. It is bijective; its naturality for each
-differential gives q. Its construction gives the last, degreewise normalization.
-The empty open has no z0; zero stalk rings and the zero complex use the same maps.
-This lemma constructs no tensor-complex transport and asserts no homology square.
-Source: Stacks Project, Tag 0098, Lemma 6.26.4; Mathlib restriction-stalk germ formulas. -/
+This constructs no tensor-complex transport and asserts no homology square. -/
 theorem exists_openRestricted_stalk_coordinates
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

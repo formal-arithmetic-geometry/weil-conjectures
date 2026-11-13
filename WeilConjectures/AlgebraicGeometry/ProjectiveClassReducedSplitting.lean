@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Lifting reduced splittings in a projective class
 
-Source: Stacks Project, More on Algebra, Tag 0BCA.
+## References
+
+* Stacks Project, More on Algebra, Tag 0BCA.
 -/
 
 @[expose] public section
@@ -105,21 +107,7 @@ private theorem isIso_of_reduced_isIso
   have : Mono f := Preadditive.mono_of_isZero_kernel f hKzero
   exact isIso_of_mono_of_epi f
 
-/-- Lift a split reduced right-exact sequence for a projective class.
-
-Source: Stacks Project, More on Algebra, Tag 0BCA, final paragraph.
-
-Proof: Choose a class member T lifting the last reduced module. Lift the reduced
-projection from the middle term to T using projectivity of the middle term. It is
-surjective by the class hypothesis and splits by projectivity of T. Its kernel U
-belongs to the class by closure under summands. The composite from the first term
-into U is invertible modulo I, hence is surjective and splits. Its kernel V belongs
-to the class and has zero reduction. The zero module belongs to the class as a
-summand of the first term; apply the surjectivity hypothesis to zero -> V to get
-V = 0. Thus the composite into U is invertible and the original first map is a
-split injection. Exactness and epimorphy identify the last term with its cokernel.
-The resulting decomposition of the middle term, and the class condition, put this
-cokernel in the class. -/
+/-- Lift a split reduced right-exact sequence for a projective class (Stacks, Tag 0BCA). -/
 theorem projective_class_reduced_splitting
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

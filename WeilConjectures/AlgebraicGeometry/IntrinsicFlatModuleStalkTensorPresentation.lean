@@ -19,7 +19,9 @@ public import Mathlib.Topology.Sheaves.CommRingCat
 
 /-! # Affine sections present a quasi-coherent stalk by a tensor product
 
-Source: Stacks Project, Tags 01IA and 01HV (6), (7).
+## References
+
+* Stacks Project, Tags 01IA and 01HV.
 -/
 
 @[expose] public section
@@ -34,22 +36,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The stalk of a quasi-coherent module is extension of its affine section scalars.
-Source: Stacks Project, Tags 01IA and 01HV (6), (7).
-
-Proof: Use the ordinary section action, since the equal-open appLE of the identity
-is the identity ring homomorphism. Let S be the complement of the prime of x in
-A = O(V), and let f: G(V) -> G_x be the germ map with scalars restricted along
-A -> O_x. The affine stalk ring is the localization of A at S, so every s in S
-acts invertibly on G_x. For surjectivity, represent a stalk element by a germ on
-an open W and shrink to a basic open D(g) inside W. Quasi-coherence extends its
-section to V after multiplying by a power of g; since x is in D(g), g is in S.
-For equality, shrink equality of two germs to a basic open D(g). The difference
-of their restrictions is zero, so the affine basic-open torsion theorem kills
-their difference by a power of g. These verify all three IsLocalizedModule axioms.
-The germ scalar action gives the required scalar tower. Mathlib's
-IsLocalizedModule.isBaseChange and IsBaseChange.equiv now give the O_x-linear
-tensor equivalence. This requires no flatness, finite generation or nonzero
-assumption. Empty V has no x in V; for the zero module both sides are zero. -/
+(Stacks, Tags 01IA, 01HV) -/
 theorem affine_sections_stalk_tensor_presentation {Y : Scheme.{u}} (G : Y.Modules)
     [SheafOfModules.IsQuasicoherent.{u} G] (V : Y.affineOpens) (x : Y)
     (hx : x ∈ V.1) :

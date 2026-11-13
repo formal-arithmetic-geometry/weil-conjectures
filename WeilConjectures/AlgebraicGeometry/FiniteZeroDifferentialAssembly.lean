@@ -11,7 +11,8 @@ import Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Assembling finitely many single-degree maps
 
-Source: the finite-sum assembly in the proof of clopen rank-stratum formality.
+Maps from the single terms of a finite zero-differential complex assemble into a derived
+isomorphism.
 -/
 
 @[expose] public section
@@ -49,18 +50,7 @@ private theorem projection_homology_isIso
 /-- Maps from the single terms of a finite zero-differential complex assemble
 into a derived isomorphism if each map induces an isomorphism in its own degree
 and the target has no homology outside the finite support.
-
-Source: finite-sum assembly, step 3 of clopen rank-stratum formality; Stacks,
-Derived Categories, Tag 05RU (quasi-isomorphisms inverted).
-
-Proof: Project the complex onto each single term. Compose these projections
-in the derived category with the given maps and sum over the finite support.
-In degree n every summand except the n-th has zero homology, since its
-intermediate single complex has zero homology there. The n-th projection
-induces an isomorphism: both differentials are zero and its degree-n component
-is the identity. Thus the sum induces an isomorphism in every supported degree.
-Outside the support its source and target homology are both zero. Homology
-functors jointly detect isomorphisms in the derived category. -/
+(Stacks, Tag 05RU, quasi-isomorphisms inverted.) -/
 theorem finiteZeroDifferentialAssembly
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (P : CochainComplex C ℤ) (hd : ∀ a b, P.d a b = 0)

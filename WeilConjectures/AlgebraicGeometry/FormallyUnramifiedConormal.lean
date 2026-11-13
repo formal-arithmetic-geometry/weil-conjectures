@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.KernelTensorPullbackIsoExists
 /-!
 # Conormal sheaf of a formally unramified morphism
 
-Source: Stacks Project, More on Morphisms, Definition 04F4 (2), and Morphisms,
-Definition 01R2.
+## References
+
+* [Stacks Project, Tag 04F4](https://stacks.math.columbia.edu/tag/04F4)
+* [Stacks Project, Tag 01R2](https://stacks.math.columbia.edu/tag/01R2)
 -/
 
 @[expose] public section
@@ -27,9 +29,8 @@ open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The conormal sheaf for the chosen universal first order thickening of `h`.
-Its ideal is `i.ker`, and its square is zero by `H.1.2`; hence pulling back the ideal
-is the same conormal module as pulling back its quotient by its square.
-Source: Stacks Project, Definition 04F4 (2) and Definition 01R2. -/
+Its ideal is `i.ker`, and its square is zero by `H.1.2`
+(Stacks, Definition 04F4 (2) and Definition 01R2). -/
 noncomputable def formallyUnramifiedConormal {Z X Z' : Scheme.{u}}
     (h : Z ⟶ X) [FormallyUnramified h] (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (_H : IsUniversalFirstOrderThickening h i h') : Z.Modules :=
@@ -114,19 +115,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 compatible comparison of universal thickenings. The module isomorphism is uniquely
 determined by carrying the pullback of each ideal section to the pullback of its
 image under the scheme comparison. The restrictions to `W` put both sections on
-the same open of `Z`.
-Source: Stacks Project, Tags 04F2, 04F3, 04F4 (2) and 01R2.
-Proof: (1) Use `FormallyUnramified.exists_universalFirstOrderThickening` to obtain
-one universal thickening and the unique compatible isomorphism between any two.
-(2) Its ideal is the kernel ideal sheaf;
-first order means its square is zero, so the quotient by the square is the ideal.
-(3) Apply the tensor module pullback to that ideal.
-(4) The compatible scheme isomorphism identifies the two kernel ideal sheaves;
-functoriality of tensor pullback identifies their pullbacks on the common `Z`.
-The scheme comparison is unique by the universal property, so this identification
-is canonical and independent of the chosen thickening. Pullbacks of ideal sections
-locally generate the conormal module, so the displayed section equation determines
-the module isomorphism uniquely. -/
+the same open of `Z` (Stacks, Tags 04F2, 04F3, 04F4 (2) and 01R2). -/
 theorem formallyUnramifiedConormal_independent {Z X : Scheme.{u}}
     (h : Z ⟶ X) [FormallyUnramified h] :
     (∃ (Z' : Scheme.{u}) (i : Z ⟶ Z') (h' : Z' ⟶ X),

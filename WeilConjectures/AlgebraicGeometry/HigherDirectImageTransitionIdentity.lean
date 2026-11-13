@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
 
 /-! # Identity triangle for higher direct images
 
-Source: Stacks Project, Tag 09Z1, canonical comparison maps, and Tag 03Q8.
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8
 -/
 
 @[expose] public section
@@ -104,18 +106,7 @@ private theorem transition_id
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The transition for the identity triangle becomes the identity after identifying
-identity pullback with the original sheaf.
-Source: Stacks Project, Tag 09Z1, canonical comparisons; Tag 03Q8.
-
-Proof: Expand the transition before taking homology. The inverse-image composition
-comparison for `id ≫ h = h` is the inverse of the identity comparison whiskered by
-`h^*`. Move this comparison past the counit by naturality, and cancel the unit and
-counit of `h^* ⊣ Rh_*` by the triangle identity. The comparison between derived
-identity pullback and identity, followed by the single-functor comparison and the
-single-functor image of the sheaf identity comparison, is the identity. This follows
-by applying the defining factorization of the exact derived functor to the complex
-concentrated in degree zero. Thus the entire derived morphism is the identity.
-Apply degree-q homology, which preserves identities. -/
+identity pullback with the original sheaf. (Stacks, Tags 09Z1 and 03Q8) -/
 theorem higher_direct_image_transition_identity
     (Λ : Type (u + 1)) [CommRing Λ] {S Y : Scheme.{u}} (h : Y ⟶ S)
     (q : ℤ) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

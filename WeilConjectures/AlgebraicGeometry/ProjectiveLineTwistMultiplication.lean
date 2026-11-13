@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 /-!
 # Multiplication and coordinate loci of twists on the projective line
 
-Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
+## References
+
+* [Stacks Project, Tags 01MS, 01MU, 01MV and 01NG](https://stacks.math.columbia.edu/tag/01MS)
 -/
 
 @[expose] public section
@@ -105,22 +107,8 @@ private theorem multiplication_isIso (k : Type u) [Field k]
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Twists on `Proj k[x₀,x₁]`: multiplication is an isomorphism, tensor powers of `O(1)`
 (and of its dual in negative degree) identify coherently with the twists, and the
-nonvanishing locus of each coordinate section is its standard chart.
-
-Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
-
-Proof: The polynomial variables generate the algebra, so their basic opens cover
-by Proj.iSup_basicOpen_eq_top'. Apply Proj.isInvertible_twist to this degree-one
-cover. Obtain the pointwise multiplication morphisms from
-lem-sc-p1-twist-product-morphism. On each degree-one chart the source has free
-basis f^n tensor f^m and the target has free basis f^(n+m). The multiplication
-formula and Proj.val_twistPowSection_mul identify these bases. Thus multiplication
-is bijective on sections over all subopens of the chart, and
-Hom.isIso_of_forall_bijective_app makes it globally an isomorphism. Apply
-lem-sc-p1-twist-coherent-powers for the normalized positive and negative families.
-Finally apply lem-sc-p1-homogeneous-section-tensor-powers-locus with d=1 and
-f=X_i to identify the coordinate nonvanishing loci. No polynomial chart gluing
-or chart ring isomorphism is needed. -/
+nonvanishing locus of each coordinate section is its standard chart
+(Stacks, Tags 01MS, 01MU, 01MV and 01NG). -/
 theorem projectiveLine_twist_multiplication (k : Type u) [Field k] :
     (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).IsInvertible ∧
     ∃ μ : ∀ n m : ℤ,

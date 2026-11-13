@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionChartCompari
 
 /-! # Defining formula for the single-chart K-flat comparison
 
-Source: Stacks Project, Tags 06YT and 08DX(2).
+## References
+
+* Stacks Project, Tags 06YT and 08DX.
 -/
 
 @[expose] public section
@@ -28,16 +30,8 @@ local instance (X : Scheme.{u}) (M : X.Modules) :
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
 -- The concrete chart construction has large homology types.
-/-- The concrete chart comparison has its specified common-resolution hom.
-
-Source: Stacks Tags 06YT and 08DX(2), the specified common K-flat comparison.
-Proof in words: unfold tensorResolutionChartComparisonIso, keeping the section
-ring bundled. Its restriction functor, extended sheafified projective resolution,
-augmentation and restricted q and s are the local terms displayed here. The two
-K-flatness proofs and the quasi-isomorphism proofs coincide by proof irrelevance.
-Project the hom of the resulting isomorphism. The two sides are the same
-four-map tensorResolutionComparison construction. This is a single-chart
-identification; it asserts no naturality under a change of chart. -/
+/-- The concrete chart comparison has its specified common-resolution hom
+(Stacks, Tags 06YT and 08DX). -/
 theorem tensorResolutionChartComparisonIso_hom_eq
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent]
     (U : Y.affineOpens) (MA : ModuleCat.{u} (Γ(Y, U.1) : Type u))

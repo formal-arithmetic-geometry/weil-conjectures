@@ -19,16 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- An etale cover of a compact object admits finitely many affine pieces satisfying
-any covering-sieve condition on its source. Source: Stacks, Hypercoverings, 01GJ
-and 094K; finite affine refinement of an etale covering.
-
-Proof: Realize R by an etale covering family of E. Compose its members with e;
-these maps are etale, open, and jointly surjective onto M. Their affine opens
-still have open images covering M. Quasi-compactness selects finitely many.
-Their disjoint union N has the asserted finite affine cofan, and its map to E
-belongs to R on each constituent because R is closed under precomposition.
-Each affine piece is qcqs; its etale structure map to X has all the stated
-finiteness properties. No compactness of E is required. -/
+any covering-sieve condition on its source. (Stacks, Tags 01GJ and 094K.) -/
 theorem exists_finite_etale_sieve_cover
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (M E : X.Etale) [CompactSpace M.left] (e : E ⟶ M) (he : Surjective e.left)

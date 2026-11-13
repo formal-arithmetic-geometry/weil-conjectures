@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SectionTensorNormalizationTransport
 
 /-! # Normalized internal scalar extension and geometric pullback
 
-Source: Stacks Tags 03EK, 06YY, 0G7E and 07A6.
+## References
+
+* Stacks Tags 03EK, 06YY, 0G7E and 07A6.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,42 +30,8 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
 
 /-- Scalar extension is restricted derived tensor and commutes with geometric pullback,
-with the universal computation normalizations and the fixed section comparisons.
-
-(1),
-scalar-refined reduction comparison; Stacks Tags 03EK, 06YS, 06YY, 0G7E, 0D6D,
-07A6 and 0B65.
-
-Proof (the eight steps of the node):
-1. Use lem-pe-internal-section-tensor-comparison,
-lem-sfb-internal-section-scalar-adjunction, and the section derived pushpull and tensor
-normalizations to transport the actual operations and their universal computation maps.
-2. The ordinary extension/tensor comparison followed by symmetry sends s tensor x to
-x tensor s. Balancing gives its inverse. The single degree-zero total comparison has
-only the (n,0) summand, with no sign.
-3. On a flat-term K-flat P, compose the restricted scalar computation counit, the
-localized ordinary comparison, and the inverse tensor localization map. The counit is
-invertible by lem-pur-derived-change-of-rings; the tensor map is invertible with just
-one K-flat factor by lem-sf-ringed-derived-native-tensor. Descend through
-lem-weil-pbc-site-derived-tensor-descent.
-4. For an arbitrary complex A choose a flat-term K-flat resolution P to A using
-lem-pc-kflat-resolution. Naturality and cancellation of the derived image of this
-quasi-isomorphism prove TensorNormalized at A; tensoring the resolution need not be
-invertible.
-5. Naturality of the coefficient isomorphism pulled from the point makes the ring-map
-square commute. The internal inverse-image comparison and
-lem-sfb-kflat-scalar-comparison-normalization identify its balanced map on generators.
-6. The ordinary map is the inverse of the specified pullIso: its transpose is
-comapLowerStarIso, since units insert 1 and counits multiply. Uniqueness in
-lem-weil-pbc-conjugate-iso-unit-equation identifies this particular conjugate.
-7. Ringed pullback preserves flat-term K-flat complexes, including coefficient change
-without flatness. Descend the balanced comparison and use step 6. Naturality and
-cancellation as in step 4 give PullNormalized on all homotopy complexes.
-8. The fixed scalar and geometric section comparisons preserve the actual derived
-Hom transposes, units and counits. Their representative squares give the section-ring
-K-flat formulas for both normalized maps. Descent proves naturality and independence
-of representatives. Identity maps, zero target rings, nonflat quotients, unbounded
-complexes and empty schemes are all included. -/
+with the universal computation normalizations and the fixed section comparisons
+(Stacks, Tags 03EK, 06YS, 06YY, 0G7E, 0D6D, 07A6 and 0B65). -/
 theorem internal_scalar_pullback_normalization (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ (tX : TensorNormalization a X) (tY : TensorNormalization a Y)

@@ -25,14 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Galois transitivity on fibres is local on the original scheme.
-Source: Stacks, Tag 038A; affine reduction as in Tag 038B.
-
-Proof: choose an affine cover member containing the common projection. Both points
-lift to its base change, since the pullback of the open immersion has precisely the
-inverse image as its range. Injectivity of the open immersion gives equality of the
-lifted projections. Apply the affine transitivity theorem and use compatibility of
-the Galois action with the map of pullbacks to obtain the equality globally. -/
+/-- Galois transitivity on fibres is local on the original scheme (Stacks, Tags 038A, 038B). -/
 theorem exists_galois_map_eq_of_projection_eq
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     (X : Scheme.{u}) [X.Over (Spec (.of k))]

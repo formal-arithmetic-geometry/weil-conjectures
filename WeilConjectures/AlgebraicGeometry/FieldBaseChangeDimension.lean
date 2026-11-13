@@ -118,12 +118,8 @@ theorem topologicalKrullDim_pullback_eq_of_field {Z : Scheme.{u}} {k K : Type u}
         (pullback.snd (𝒰.f i) (pullback.fst p q)).isOpenEmbedding.isInducing.topologicalKrullDim_le
 
 /-- **Fibres over field-valued points have dimension at most that of the source.** For
-`f: X ⟶ Y` locally of finite type and `s: Spec K ⟶ Y` with `K` a field,
-`dim (X ×_Y Spec K) ≤ dim X`: `s` factors through `Spec κ(y)` for `y` its image point, so
-`X ×_Y Spec K` is the base change of the fibre `f⁻¹(y)` along `κ(y) → K`.
-
-Used for: the geometric fibres of base changes of `X`
-have dimension at most `dim X`. -/
+`f : X ⟶ Y` locally of finite type and `s : Spec K ⟶ Y` with `K` a field,
+`dim (X ×_Y Spec K) ≤ dim X`. -/
 theorem topologicalKrullDim_pullback_le {X Y : Scheme.{u}} (f : X ⟶ Y)
     [LocallyOfFiniteType f] {K : Type u} [Field K] (s : Spec (.of K) ⟶ Y) :
     topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ topologicalKrullDim X := by

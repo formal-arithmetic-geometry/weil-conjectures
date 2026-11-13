@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentFactorizatio
 
 /-! # Ordinary evaluation and one part of the differential
 
-Source: Stacks Project, Tag 08DQ, and Section 20.41.
+## References
+
+* Stacks Project, Tag 08DQ, and Section 20.41.
 -/
 
 @[expose] public section
@@ -96,19 +98,8 @@ private theorem evaluation_scaled {C : Type u} [Category.{u} C] {J : Grothendiec
   simp only [SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
 
 
-/-- Projected evaluation respects arbitrary precomposition maps and scalars.
-Source: Stacks Project, Tag 08DQ, proof of lemma-dual-perfect-complex;
-Tag 03EO, tensor-Hom adjunction.
-Proof: expand both nonzero component formulas. Naturality of tensor-Hom
-moves the source map a through currying and through the braiding and
-associator. The assumed projection identity then replaces a followed by
-the dual projection with z times the original projection and precomposition
-by f. Naturality of uncurrying in the Hom input moves f to the input of the
-outer evaluation; currying sends this to homObjMap f. Additivity moves z
-outside tensoring and currying. Output naturality composes the canonical
-transports p=s+n and s+n=r+m to the canonical transport p=r+m.
-All index equalities are proof-irrelevant. Neither complex need be bounded,
-and zero modules satisfy the same naturality equations. -/
+/-- Projected evaluation respects arbitrary precomposition maps and scalars
+(Stacks, Tags 08DQ and 03EO). -/
 theorem ordinaryEvaluation_precomposition_naturality (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (p q q' n m r s : ℤ) (hpq : p + q = n) (hpq' : p + q' = m)

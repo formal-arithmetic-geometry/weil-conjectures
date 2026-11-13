@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenIsoConormalZero
 /-!
 # Vanishing of the conormal sheaf for a flat morphism with open diagonal
 
-Source: Stacks Project, Tag 04FF, the conormal calculation.
+## References
+
+* [Stacks Project, Tag 04FF](https://stacks.math.columbia.edu/tag/04FF)
 -/
 
 @[expose] public section
@@ -28,20 +30,7 @@ namespace AlgebraicGeometry
 
 /-- The conormal sheaf of any universal first order thickening vanishes when the
 morphism is flat and its diagonal is an open immersion. No finite type assumption
-is needed in this calculation.
-Source: Stacks Project, Tag 04FF, proof, using Tags 04F9 and 04FA.
-Proof: write p and q for the projections from X ×[S] X. The open diagonal makes f
-formally unramified, and base change makes q formally unramified. Flat base change
-of a universal thickening identifies p* C_f with C_q (04F9). On the open image D
-of the diagonal, q is an isomorphism. Open restriction (04FA) identifies C_q|D
-with the conormal of this isomorphism. The identity thickening of D is universal:
-its lift of a test map is the composite with the inverse isomorphism. Uniqueness
-of universal thickenings identifies its zero ideal with the ideal of any other
-choice, so C_q|D is zero. Pull back the base-change identification along the
-diagonal. Pullback along an open immersion is restriction, and Δ ≫ p = id_X;
-composition and identity isomorphisms for tensor pullback therefore identify C_f
-with the pullback of the zero module. Pullback preserves zero objects because it
-is a left adjoint, so C_f is zero. -/
+is needed (Stacks, Tag 04FF). -/
 theorem flat_openDiagonal_conormal_isZero {X S X' : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsOpenImmersion (pullback.diagonal f)]
     (i : X ⟶ X') (s : X' ⟶ S) (H : IsUniversalFirstOrderThickening f i s) :

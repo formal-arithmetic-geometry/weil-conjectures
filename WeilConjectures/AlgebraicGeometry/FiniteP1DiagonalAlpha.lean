@@ -98,14 +98,7 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 attribute [local irreducible] projectiveLineDiagonalAlpha ordinaryFiniteUnitPullback
   derivedUpperStarLowerStarAdjunction
 
-/-- The canonical source comparison for the diagonal is an isomorphism over every base.
-
-Proof: each projection composed with the diagonal is identity. The corresponding
-composite inverse-image functor is therefore naturally isomorphic to identity,
-so its adjunction unit is invertible. Expand the two constant-object units in alpha.
-Naturality of the second unit rewrites their composite as the composite adjunction
-unit followed by direct image of the two constant-object comparison isomorphisms.
-Every factor is invertible. No compatibility choice or Noetherian hypothesis is needed. -/
+/-- The canonical source comparison for the diagonal is an isomorphism over every base. -/
 theorem isIso_projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) (a : Bool) :
     IsIso (C := DerivedCategoryModule A (ProjectiveLine S))

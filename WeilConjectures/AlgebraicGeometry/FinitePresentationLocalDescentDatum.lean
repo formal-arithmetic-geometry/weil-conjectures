@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Local finite-presentation descent data
 
-Source: Stacks Project, Limits, Tag 01ZR, first proof.
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section
@@ -38,21 +40,7 @@ private theorem nonempty_descentData_iso_of_components
       exact η.comm t f₁ f₂ hf₁ hf₂)⟩
 
 /-- Local modules and their overlap identifications descend to one finite stage.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, general case.
-
-Proof: Choose a finite affine cover of Xi. On each member, its base-change rings form
-an affine directed colimit. Apply the object clause of Tag 05N7 to descend the
-restriction of M. Choose finite affine covers of the pairwise overlaps, their
-refinement overlaps, and the triple overlaps. Apply the map clause of 05N7 to the
-comparison maps and their inverses. Apply its equality clause to the inverse
-identities, agreement on refinement overlaps, and cocycle equations. There are
-finitely many data and equations; pass to a common later stage, using directedness.
-The comparison maps glue on each overlap to isomorphisms satisfying the cocycle.
-They define the descent datum D, with finitely presented quasi-coherent components.
-After base change, the component comparisons to M respect the cocycle and therefore
-form the asserted isomorphism of descent data. This statement constructs only local
-modules and transition maps, not a global module on the stage. For empty Xi use the
-empty cover and its unique descent datum. Noetherianity is unnecessary. -/
+(Stacks, Tag 01ZR) -/
 theorem exists_finitePresentation_local_descent_datum
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

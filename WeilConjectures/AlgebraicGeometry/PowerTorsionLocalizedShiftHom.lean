@@ -107,22 +107,7 @@ private theorem localization_isZero (A : CommRingCat.{u}) (s : A)
 
 /-- A complex with element-power-torsion cohomology has no maps, in any shift,
 to a module on which that element acts bijectively. This does not assume a Cech model.
-Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
-the exact localization/restriction adjunction used in the proof.
-
-Proof: evaluate at the unique object to work with ordinary A-modules. Extension
-of scalars to A[1/s] is exact by flatness and hence its termwise functor computes
-the functor on unbounded derived categories. It commutes with cohomology. Every
-localized class vanishes by the given power annihilator, so the localized source
-is acyclic and its derived object is zero. Bijectivity of multiplication by s on
-M extends its A-action uniquely to A[1/s], with the inverse of s acting by the
-inverse linear automorphism. Restriction of scalars is exact. Localize the actual
-extension/restriction adjunction to the derived categories. Its Hom bijection
-identifies every displayed morphism with a map from a shift of the zero localized
-source. That map is zero, and the adjunction carries zero to zero. The evaluation
-equivalence transports this conclusion back to module sheaves. No boundedness,
-finite generation, uniform annihilating exponent or nonzero element is required.
--/
+(Stacks, Tag 0A6R). -/
 theorem power_torsion_localized_shift_hom
     (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]
     (T : CochainComplex (RingSiteModules A) ℤ) (s : A)

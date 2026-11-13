@@ -283,16 +283,7 @@ private theorem proper_native_nat (A : Type (u + 1)) [CommRing A] [Finite A]
   funext E
   exact proper_native_ambient A f g E
 
-/-- Proper forget-supports composition on the bounded-below etale category.
-
-Proof: The inclusion of D+ is fully faithful. Its inclusion equation identifies the
-constructed proper comparison with the published unbounded comparison after the two
-inclusion isomorphisms.
-Apply this inclusion and cancel the ordinary composite inclusion map. The compact-support
-restriction equation and properShriekComp_comp_forgetSupports_raw give the native ordinary
-compositor. Its adjunction-defined and generic derived versions agree by the inverse-image
-composition mate formula. Compatibility of generic composition with D+, followed by naturality
-of the inclusion and proper comparisons, gives the other side. Cancel the final isomorphism. -/
+/-- Proper forget-supports composition on the bounded-below etale category. -/
 theorem properLowerShriekPlusIso_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g]
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -338,9 +329,7 @@ theorem properLowerShriekPlusIso_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     (fun L ↦ proper_plus_hom A (f ≫ g) L)
     (fun L ↦ composition_plus A f g L)
     (fun L ↦ ordinary_plus_compat A f g L) (proper_native_nat A f g) K
-/-- The proper compositor equation before evaluation at an object.
-Source: the proper forget-supports composition equation above.
-Proof: natural-transformation extensionality reduces to the proved component equation. -/
+/-- The proper compositor equation before evaluation at an object. -/
 theorem properLowerShriekPlusIso_comp_nat (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g] :
     (rightDerivedLowerShriekPlusCompIso A f g).hom ≫

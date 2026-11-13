@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageCompletedCompariso
 
 /-! # Recovering the original levels after second-ideal algebraization
 
-Source: Stacks Project, Tag 088A, final paragraph.
+## References
+
+* [Stacks Project, Tag 088A]
 -/
 
 @[expose] public section
@@ -71,28 +73,7 @@ set_option backward.isDefEq.respectTransparency false in
 Here sigma is an isomorphism of doubly indexed diagrams, theta is the canonical quotient
 interchange, and the comparison square relates the maps to H. No completion equivalence
 on a thickening is assumed at this stage: that work is encoded in the supplied diagram.
-
-Source: Stacks Project, Tag 088A, final paragraph, and Tag 0889, part (1), uniqueness.
-
-Proof:
-Fix a positive I-level n. Evaluation of sigma identifies the K-completion of M_n with
-the I^n-quotient of N. Reduce beta modulo I^n and commute the two quotient operations,
-using their universal cokernel descriptions. The canonical theta and the comparison
-square identify the resulting completion map with the completion of alpha_n.
-Thus F/I^n F, the reduction of a, and this comparison form an algebraization triple
-for alpha_n completed along K. Reduction of the torsion-controlled map a has kernel
-and cokernel killed by K^(2s), by the reduction lemma in Remark 0888. The given bound
-on alpha_n makes M_n with alpha_n another torsion-controlled triple for the same map.
-Uniqueness in the torsion-controlled version of Tag 0889 gives the desired level
-isomorphism. For a transition from a later I-level to an earlier one, both composites
-have the same comparison to H and the same K-completion. Their difference lands in
-the power-torsion kernel of alpha at the target level. Exactness of completion on
-finite affine modules and stabilization of that torsion kernel detect the difference,
-so the composites agree. Hence the level isomorphisms are natural in n.
-The torsion conditions are on the actual coherent maps; completion alone would not
-control components away from V(K). All levels remain positive. The quotient comparison,
-coherent reduction bound and map-detection step are separate named intermediate theorems.
--/
+(Stacks, Tags 088A and 0889) -/
 theorem grothendieckDevissage_recoverLevels
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) (H : CoherentModules X)

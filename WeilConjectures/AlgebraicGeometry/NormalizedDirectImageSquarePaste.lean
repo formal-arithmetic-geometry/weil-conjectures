@@ -8,7 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 public import WeilConjectures.AlgebraicGeometry.NormalizedDirectImageCompUnit
 /-! # Component assembly for normalized direct-image squares
-Source: Stacks Project, Cohomology, Tag 0D5T.
+
+## References
+
+* [Stacks, Tag 0D5T]
 -/
 @[expose] public section
 noncomputable section
@@ -44,9 +47,8 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 set_option linter.all false in
-/-- Component assembly from the two comparison-unit equations and transport.
-Source: Stacks Project, Cohomology, Tag 0D5T.
--/
+/-- Component assembly from the two comparison-unit equations and transport
+(Stacks, Tag 0D5T). -/
 theorem normalizedDirectImageSquare_component
     {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)

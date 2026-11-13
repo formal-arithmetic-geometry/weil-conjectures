@@ -17,22 +17,8 @@ universe u v
 
 namespace AlgebraicGeometry
 
-/-- An fpqc covering detects openness of a subset of its base.
-
-Source: Stacks Project, Descent, Lemma Tag 03N0, proof after the set construction;
-https://stacks.math.columbia.edu/tag/03N0.
-
-Proof: Work locally on the affine open cover of S and pull back the fpqc family.
-The pullback square and continuity preserve the open inverse images. Over Spec R,
-use the quasi-compact part of the covering to apply Mathlib's
-QuasiCompactCover.exists_hom to its underlying flat cover. This gives a finite
-flat affine cover F and a refinement map to the original family. The coproduct
-map p from the members of F is flat and surjective. Its source is a finite
-coproduct of affine schemes, hence affine, so p is quasi-compact. The preimage of
-V under p is open on each coproduct summand, because each structure map factors
-through an original covering map. It is therefore open on the coproduct.
-Flat.isQuotientMap_of_surjective (Stacks Tag 02JY) now shows that V is open.
-The argument permits empty bases and empty finite refinements. -/
+/-- An fpqc covering detects openness of a subset of its base
+(Stacks, Descent, Lemma Tag 03N0). -/
 theorem isOpen_of_fpqc_preimages
     {S : Scheme.{u}} {I : Type v} {T : I → Scheme.{u}}
     (g : ∀ i, T i ⟶ S)

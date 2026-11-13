@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 
 /-! # Coherent descent through open restriction
 
-Source: Stacks Project, Tags 08EU and 08FE.
+## References
+
+* [Stacks, Tags 08EU and 08FE]
 -/
 
 @[expose] public section
@@ -165,24 +167,8 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 1600000 in
 -- Independent localization instances require extra elaboration heartbeats.
-/-- Tensor comparison and counit descend together before taking an adjunction transpose.
-Source: Stacks Project, Tag 08EU, first sentence of proof; Tag 08FE.
-Proof: construct rhoX and rhoY naturally on K-flat total tensor models, using exact
-restriction and its compatibility with tensor and totalization; descend these maps
-and their inverses to the specified small derived localizations. Open restriction is
-a localization, as is its product with itself. Conjugate the restriction of t by rhoX,
-rhoY and alpha to obtain an isomorphism between the restrictions of the two local
-bifunctors. Full faithfulness of precomposition with this product localization lifts
-it uniquely to s. Its factorization identity gives compatibility on every pair of
-global inputs. The assumed Hom-equivalence compatibility
-identifies the restricted counit of p with that of q: take the source object to be
-the direct image of B and the input morphism to be p's counit, whose p-transpose
-is the identity, and use injectivity of q's Hom equivalence.
-Combine this counit identity with the tensor naturality square. Their composite is
-the displayed identity between morphisms BEFORE transposing along q. Thus this is
-the tensor/counit step, not an assertion comparing projection mates as arrows.
-No quasi-coherence or invertibility of a projection mate is used. All localization
-counits and K-flat restriction comparisons apply unchanged when the open is empty. -/
+/-- Tensor comparison and counit descend together before taking an adjunction transpose
+(Stacks, Tags 08EU and 08FE). -/
 theorem exists_openRestriction_tensor_counit_descent
     (p : derivedPullback f ⊣ schemeDerivedDirectImage f)
     (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅

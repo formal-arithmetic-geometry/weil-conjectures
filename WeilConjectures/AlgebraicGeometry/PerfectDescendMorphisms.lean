@@ -20,12 +20,16 @@ import Mathlib.Data.Finset.Order
 /-!
 # Descent of morphisms between perfect complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE,
-used in Lemma 36.29.3, Tag 09RF.
+## Implementation details
 
 The shared coherent derived-pullback composition comparisons transport the stage map
 to the direct pullbacks of both objects. The equality clause uses a common starting stage for the
 finite list of morphisms; directedness puts any finite list of starting stages in this form.
+
+## References
+
+* Stacks Project, Derived Categories of Schemes, Lemma 36.29.2 (Tag 09RE),
+  used in Lemma 36.29.3 (Tag 09RF).
 -/
 
 @[expose] public section
@@ -36,10 +40,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The recorded canonical composition comparison along a base-change map.
-This specializes the explicit composition lift from the original derived-pullback
-counits; it introduces no new pullback functor or independently selected comparison.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE; Cohomology, Tag 0D5S. -/
+/-- The recorded canonical composition comparison along a base-change map
+(Stacks, Tags 09RE and 0D5S). -/
 noncomputable abbrev perfectDescentComparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -66,21 +68,8 @@ private theorem homMap_eq_iff
   rfl
 
 /-- Morphisms between perfect complexes descend, isomorphisms descend as isomorphisms,
-and finitely many equalities are eventually true at one common stage.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, used in Tag 09RF.
-
-Proof: `recorded_perfect_hom_continuity` isolates the affine calculation and quasi-compact-open
-induction of Tag 09RE. Apply its surjectivity clause to lift a morphism. If the morphism
-is invertible, apply the same clause to its inverse on a tail above the first lift, and
-transport the first lift to that stage. `recordedPerfectLimitMap_stage` preserves its limit image.
-Composition and identity preservation show the two composites have limit images equal
-to the identities. Apply the equality clause separately to these two relations, choose
-an upper bound of their stabilization stages, and obtain mutually inverse stage maps.
-For a finite family of equalities, apply the equality clause to each pair and take an
-upper bound of the finite set of stabilization stages and the initial stage. The empty
-family is covered too because the initial stage witnesses nonemptiness of the index set.
-Finally cancel the invertible comparison components to obtain exactly the unconjugated
-pullback equations in the statement. -/
+and finitely many equalities are eventually true at one common stage
+(Stacks, Tags 09RE and 09RF). -/
 theorem perfect_descend_morphisms
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

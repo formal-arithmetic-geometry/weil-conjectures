@@ -28,18 +28,8 @@ attribute [local instance] instHasColimitsOfSize
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
 
-/-- Finite split hypercovers compute the classical derived terminal-section functor.
-Source: Stacks Project, Hypercoverings, Tag 01H0, first proof, with the same
-argument in a Grothendieck abelian coefficient category.
-
-Proof: use the explicit comparison cocone from the section bicomplex of an
-injective resolution. Its injective-row acyclicity is proved by Gabriel--Popescu
-and the existing arbitrary-ring module result. The bottom-row colimit theorem
-makes the canonical colimit map an isomorphism. Transfer the colimit universal
-property across that isomorphism. The canonical isomorphism between evaluation
-at the chosen terminal object and evaluation at the identity object induces an
-isomorphism of right-derived functors. Transport the cocone along this latter
-isomorphism to obtain exactly the terminal-section functor in the statement. -/
+/-- Finite split hypercovers compute the classical derived terminal-section functor
+(Stacks, Tag 01H0), here for a Grothendieck abelian coefficient category. -/
 theorem isCohomologyColimit_rightDerived_sections
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (q : ℕ) :
     IsCohomologyColimit A q

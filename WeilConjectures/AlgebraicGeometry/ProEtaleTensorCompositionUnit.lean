@@ -14,12 +14,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # The explicit pro-etale tensor comparison and its adjunction units
 
-Source: Stacks Project, Modules on Sites, Tag 03D3, lemma-adjoint-push-pull-modules;
-Sites, Tag 03CB, lemma-composition-morphisms-sites; Categories, Tag 0B65.
-
 The generator formulas use the coprojections of the inverse-image colimits, followed by
 sheafification. All test objects and all indexing arrows are quantified. Thus the formulas
 specify the tensor maps before using the adjunction-unit equation to characterize them.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D3; Sites, Tag 03CB; Categories, Tag 0B65.
 -/
 
 @[expose] public noncomputable section
@@ -33,11 +34,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The local tensor generator `m ⊗ r`, indexed by `p: T ⟶ B_f U`.
-The specified module adjunction sends `m` to the sheafification of `m ⊗ 1`;
-restriction along `p`, followed by multiplication by `r`, is the general generator.
-This uses the uniquely tensor-normalized adjunction, not an arbitrary adjunction.
-Source: Stacks, Tag 03D3 and the inverse-image colimit of Sites, Tag 00VC. -/
+/-- The local tensor generator `m ⊗ r`, indexed by `p : T ⟶ B_f U`
+(Stacks, Tags 03D3 and 00VC). -/
 def proEtalePullbackTensorGenerator {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -50,9 +48,8 @@ def proEtalePullbackTensorGenerator {X Y : Scheme.{u}} (f : X ⟶ Y)
     (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op U) m))
 
 /-- The image of a local scalar in the source coefficient sheaf: apply the ring map
-adjoint to `c`, then restrict along the inverse-image index arrow. Under the canonical
-inverse-image identifications this is `c(a)`.
-Source: Stacks, Tag 03D3 and Sites, Tag 00VC. -/
+adjoint to `c`, then restrict along the inverse-image index arrow
+(Stacks, Tags 03D3 and 00VC). -/
 def proEtalePullbackTensorScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -179,35 +176,8 @@ private theorem mate_iso {C D : Type*} [Category C] [Category D]
 attribute [local irreducible] proEtaleRingModulePullback
 
 /-- The tensor formulas define inverse natural module maps, preserving the specified
-composite adjunction unit, and uniquely characterized by that unit equation.
-Source: Stacks, Tags 03D3, 03CB and 0B65; the explicit tensor calculation is the agent
-deduction recorded in the blueprint.
-
-The equality `hc_hk` only names the prescribed composite coefficient identification.
-`Over.pullbackComp.hom` goes from composite base change to iterated base change;
-its inverse is the paper's `q`. The two generator clauses are respectively
-`(m ⊗ a) ⊗ b ↦ m ⊗ c_h(a)b` and `m ⊗ b ↦ (m ⊗ 1) ⊗ b`.
-The colimit and sheafification universal properties make these clauses equivalent to
-those formulas for arbitrary local inverse-image sections: one can check maps on every
-indexing coprojection, and pure tensors generate the sectionwise tensor products.
-
-Proof:
-1. The ring inverse-image comparison is the mate of the fibre-product pushforward
-comparison. Its unit equation and naturality with the coefficient identifications give
-compatibility of the direct-image coefficient maps with composition.
-2. Apply the module pushforward comparison along the fibre-product isomorphism, followed
-by the comparison with successive pushforwards, to obtain d. Its section maps are exactly
-restriction along the specified inverse fibre-product comparison. Let t be its adjunction
-mate. The mate unit equation is the asserted composite-unit equation.
-3. Evaluate that equation on a section m. Expand the generators as scalar multiples of
-restrictions of units. The units are linear through their coefficient maps, and units and
-t commute with restrictions. Move the two scalars outside t and apply the evaluated unit
-equation. Functoriality of restrictions and multiplication of scalars give the forward
-formula for every pair of indexing arrows.
-4. Specialize the forward formula to the identity first indexing arrow and intermediate
-scalar 1. Ring maps preserve 1 and the fibre-product comparisons cancel. Apply t.inv to
-obtain the inverse formula. Finally the injectivity of the composite adjunction Hom
-correspondence proves uniqueness among all natural transformations. -/
+composite adjunction unit, and uniquely characterized by that unit equation
+(Stacks, Tags 03D3, 03CB and 0B65). -/
 theorem proEtale_tensor_composition_unit
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

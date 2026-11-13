@@ -13,7 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.PinnedSingleBaseChangeShift
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroTarget
 
 /-! # Degree-zero geometric open restriction square for pinned tensor counits
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,22 +26,7 @@ open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- Open restriction square in degree zero for the composition-pinned counits.
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-Proof: identify the inverse image of W in X' with the pullback of the restricted
-square by the universal property. Restriction preserves K-injectives because
-extension by zero is an exact left adjoint. It preserves K-flat complexes by
-extending acyclic test complexes by zero and using the tensor projection formula.
-Compute Rf and Lg on these resolutions and use exact restriction of single
-complexes to construct a. Combine the Rf' comparison with tensor restriction
-and the same single-complex identification to construct b. Transpose both
-base-change composites under the pinned derived adjunctions. Their transposes
-are tensor reassociation followed by pullback of the direct-image counit.
-The underived restriction mate identity holds termwise, including its units,
-counits and reassociations. Localize it on the chosen resolutions. Equality of
-transposes gives equality of the mates. The last single-component maps are
-precisely the composition-pinned tensor counits. Naturality in G gives one pair
-a,b for all modules. Empty opens and zero modules require no exceptions. -/
+/-- Open restriction square in degree zero for the composition-pinned counits. -/
 theorem open_pinned_single_degree_zero_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

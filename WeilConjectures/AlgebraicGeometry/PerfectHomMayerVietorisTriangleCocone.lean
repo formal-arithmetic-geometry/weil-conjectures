@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisFunctorial
 
 /-! # Coherent Mayer--Vietoris triangle cocones before forming Hom rows
 
-Source: Stacks Project, Tags 09RE and 08BW.
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -26,36 +28,10 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 
-/-- A geometric cocone of distinguished triangles in D(O_Y), obtained by pushing
-stage Mayer--Vietoris triangles to Y. Central Hom identifications are pinned to
-canonical pullback transport. The four outer column comparisons are local.
-No abelian-group row, zero-composite witness, or short-complex presentation is
-supplied by this statement.
-
-Source: Stacks Project, Tags 09RE and 08BW.
-
-Proof:
-1. The maps s and s₀ are qcqs over affine schemes. Thus Y is compact and
-   quasi-separated, and X is quasi-separated. The open immersion t is quasi-compact.
-   Pulling back U,V gives compact opens covering Y, because t has range U union V.
-2. Use perfect_hom_pushPull_cocone to construct the coherent representing cocone
-   F,d₀ of quasi-coherent derived objects on Y. Its Hom equivalences are natural in
-   every testing object, with transitions pinned to perfectStageMap and legs pinned
-   to perfectLimitMap. This construction uses adjunction and Yoneda, not continuity.
-3. Apply schemeDerived_mayerVietoris_naturality on the pulled-back cover. Its
-   adjunctions, boundary, distinguishedness and prescribed morphism components form
-   a PerfectHomMVFamily A. The proved constructors A.diagram and A.cocone give D,d;
-   identity, composition and cocone laws follow from equality of the three components.
-   Distinguishedness follows objectwise from A.distinguished and quasi-coherence.
-4. Compose the representing Hom equivalences with ULift and the zero-shift
-   isomorphism. Naturality of shiftFunctorZero transports shifted postcomposition to
-   ordinary postcomposition. The two representing equations give the required stage
-   and limit formulas, without an additional coherence assumption.
-5. Use perfect_hom_mayerVietoris_geometric_columns on this actual family and
-   representing cocone. It identifies the four outer column comparisons via open
-   adjunction, shifts, filtered set colimits and products. Arbitrary triangle cocones
-   are not eligible for this step: both their outer objects and maps must be those
-   of the geometric family. No exactness or continuity theorem is used. -/
+/-- A geometric cocone of distinguished triangles in `D(O_Y)`, obtained by pushing
+stage Mayer--Vietoris triangles to `Y`. Central Hom identifications are pinned to
+canonical pullback transport, and the four outer column comparisons are local
+(Stacks, Tags 09RE and 08BW). -/
 theorem perfect_hom_mayerVietoris_triangle_cocone
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

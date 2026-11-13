@@ -12,7 +12,9 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 /-!
 # Site axioms and limits for the qcqs pro-etale subsite
 
-Source: Stacks Project, Tags 09A1 and 098M.
+## References
+
+* Stacks Project, Tags 09A1 and 098M.
 -/
 
 @[expose] public section
@@ -70,29 +72,8 @@ private theorem qc_mem_of_le {T : Scheme.{u}} {R S : Presieve T}
 
 /-- The qcqs full subcategory is a site for finite pro-etale covers; fibre products,
 slice finite limits, and (for qcqs base) finite limits are computed in schemes.
-Adjoining finitely many arrows to a cover preserves the covering property.
-Source: Stacks Project, Tag 09A1, qcqs subsite paragraph, and Tag 098M.
-
-Proof plan:
-1. Every map between objects is weakly etale.
-   Weakly etale maps are stable under base change and composition. A map from a qcqs scheme
-   to a qcqs scheme is qcqs, and these properties persist under base change and
-   composition. Thus scheme fibre products
-   belong to the full subcategory, and their universal properties restrict to it.
-2. Isomorphism covers, finite composites of finite covers, and pullbacks of finite
-   covers are covers in the full pro-etale site. Step 1 keeps their sources qcqs.
-   This gives a pretopology with exactly the prescribed finite covering presieves,
-   and inclusion sends covers to covers. Use the pretopology axioms: the stronger
-   precoverage classes also quantify over infinite presentations of finite presieves.
-3. Over a qcqs object T, the identity is terminal. Products come from step 1.
-   The equalizer of a,b: U → V is U ×_(V ×_T V) V, using (a,b) and the diagonal.
-   These universal properties hold in schemes over T. Products and equalizers
-   construct all finite limits, including the empty limit T. If X is qcqs, X/X
-   itself is terminal, giving finite limits over X in the same way.
-4. Additional arrows are weakly etale by the between-objects lemma. The original
-   finite affine-open witnesses for the fpqc condition still cover each affine
-   open after adjoining arrows; the enlarged index set remains finite.
--/
+Adjoining finitely many arrows to a cover preserves the covering property
+(Stacks, Tags 09A1 and 098M). -/
 theorem qcqs_site_limits (X : Scheme.{u}) :
     ∃ h : HasPullbacks (Qcqs X),
     ∃ J : @Pretopology (Qcqs X) inferInstance h,

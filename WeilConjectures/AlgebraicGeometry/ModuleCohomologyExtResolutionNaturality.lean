@@ -21,9 +21,14 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Resolution-normalized module/Ext comparisons
 
+## Implementation details
+
 The comparisons below are constructed from section complexes, not selected from
 an existence assertion about natural equivalences.
-Source: Stacks Project, Tags 03FD, 01FT and 06XR.
+
+## References
+
+* [Stacks, Tags 03FD, 01FT and 06XR]
 -/
 
 @[expose] public section
@@ -153,8 +158,7 @@ private noncomputable def extHomologyMapData (X : A) {Y Z : A} {f : Y ⟶ Z}
     rw [extEquiv_postcomp X R S φ q a, Equiv.apply_symm_apply]
 
 /-- The objectwise comparison between Ext and derived Hom, constructed using the chosen
-injective resolution and an isomorphism of Hom complexes. No existence witness is chosen.
-Source: Stacks Project, Tag 06XR, Lemma 13.27.2 (injective-resolution computation). -/
+injective resolution and an isomorphism of Hom complexes (Stacks, Tag 06XR). -/
 noncomputable def extRightDerivedHomObjIso (X Y : A) (q : ℕ) :
     ((extFunctor q).obj (op X)).obj Y ≅
       ((preadditiveCoyoneda.obj (op X)).rightDerived q).obj Y := by
@@ -310,8 +314,8 @@ def siteSectionsObjIso
         (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).obj F :=
   (siteSectionsNatIso J U q).app F
 
-/-- Identify evaluated sheaf cohomology with its fixed Ext functor before specialization.
-Source: Stacks Project, Tag 06XR; this is the definition of sheaf cohomology. -/
+/-- Identify evaluated sheaf cohomology with its fixed Ext functor before specialization
+(Stacks, Tag 06XR). -/
 noncomputable def siteExtNatIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -323,8 +327,7 @@ noncomputable def siteExtNatIso
           (yoneda.obj U ⋙ AddCommGrpCat.free))) :=
   Iso.refl _
 
-/-- Use the native H functor after identifying its constant Ext source.
-Source: Stacks Project, Tag 06XR; this is the definition of `Sheaf.functorH`. -/
+/-- Use the native H functor after identifying its constant Ext source (Stacks, Tag 06XR). -/
 noncomputable def siteHNatIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -335,8 +338,7 @@ noncomputable def siteHNatIso
   Iso.refl _
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The original additive Ext source-change equivalence, packaged naturally in coefficients.
-Source: Stacks Project, Tag 06XR; functoriality of Ext in its two arguments. -/
+/-- The original additive Ext source-change equivalence, packaged naturally in coefficients. -/
 noncomputable def extSourceNatIso
     {A : Type u₁} [Category.{u} A] [Abelian A] [HasExt.{u} A]
     {M N : A} (e : M ≅ N) (q : ℕ) :
@@ -390,8 +392,8 @@ theorem forgottenInjectiveAcyclic (X : Scheme.{u})
   exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso
     (siteSectionsObjIso _ ⊤ _ (n + 1)).symm
 
-/-- Forgetting scalars in the standard derived-functor resolution comparison.
-Source: Stacks Project, Tag 03FD; exact forgetting commutes with homology. -/
+/-- Forgetting scalars in the standard derived-functor resolution comparison
+(Stacks, Tag 03FD). -/
 noncomputable def resolutionForgetObjIso
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
@@ -404,9 +406,8 @@ noncomputable def resolutionForgetObjIso
     ((((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc q).mapHomologyIso
       V).symm
 
-/-- The two ways of forming abelian section homology agree degreewise.
-This identification is checked before substituting an injective resolution.
-Source: Stacks Project, Tag 03FD, common section complex. -/
+/-- The two ways of forming abelian section homology agree degreewise
+(Stacks, Tag 03FD). -/
 noncomputable def sectionHomologyIso (X : Scheme.{u}) (q : ℕ) :
     ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
         (ComplexShape.up ℕ) ⋙
@@ -421,8 +422,7 @@ noncomputable def sectionHomologyIso (X : Scheme.{u}) (q : ℕ) :
       HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) q) :=
   Iso.refl _
 
-/-- Common-resolution comparison for exact forgetting of scalars.
-Source: Stacks Project, Tags 03FD and 015E. -/
+/-- Common-resolution comparison for exact forgetting of scalars (Stacks, Tags 03FD and 015E). -/
 noncomputable def resolutionSectionsObjIso
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
     [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
@@ -448,8 +448,8 @@ noncomputable def resolutionSectionsObjIso
   exact resolutionForgetObjIso S V I q ≪≫ s.app I.cocomplex ≪≫
     (Γ.rightDerivedObjIsoOfResolution ι hI q).symm
 
-/-- Naturality packaged before substituting concrete chosen resolutions.
-Source: Stacks Project, Tags 03FD and 015E. -/
+/-- Naturality of the common-resolution comparison for exact forgetting of scalars
+(Stacks, Tags 03FD and 015E). -/
 noncomputable def resolutionSectionsNatIso
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
     [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
@@ -528,8 +528,8 @@ noncomputable def resolutionSectionsNatIso
       _ = _ := congrArg (fun k ↦ s.hom.app I.cocomplex ≫ k) hc)
 
 
-/-- Convert a natural comparison to an additive equivalence before specializing its functors.
-Source: Stacks Project, Tags 03FD and 06XR; only categorical packaging is forgotten. -/
+/-- Convert a natural comparison to an additive equivalence before specializing its
+functors. -/
 noncomputable def moduleComparisonEquiv
     {C : Type*} [Category C] {R : Type u} [Ring R]
     {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
@@ -548,8 +548,8 @@ private theorem moduleComparisonEquiv_naturality
 
 end ExtEdgeResolution
 
-/-- The coefficient comparison as a natural isomorphism of additive functors.
-Source: Stacks Project, Tags 03FD, 015E and 06XR; the same common resolution. -/
+/-- The coefficient comparison as a natural isomorphism of additive functors
+(Stacks, Tags 03FD, 015E and 06XR). -/
 @[irreducible]
 noncomputable def moduleCohomologyExtResolutionNatIso (X : Scheme.{u}) (q : ℕ) :
     RingedSpace.moduleCohomology X.toRingedSpace q ⋙
@@ -576,29 +576,16 @@ noncomputable def moduleCohomologyExtResolutionNatIso (X : Scheme.{u}) (q : ℕ)
               ExtEdgeResolution.siteHNatIso (Opens.grothendieckTopology X) q)
 
 /-- The same resolution-normalized module/Ext comparison, read from its natural square.
-Its terminal-source map is Ext precomposition by the inverse of `terminalSourceIso`.
-Source: Stacks Project, Tags 03FD, 015E and 06XR. -/
+Its terminal-source map is Ext precomposition by the inverse of `terminalSourceIso`
+(Stacks, Tags 03FD, 015E and 06XR). -/
 @[irreducible]
 def moduleCohomologyExtResolutionEquiv (X : Scheme.{u}) (F : X.Modules) (q : ℕ) :
     ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+ H F q :=
   ExtEdgeResolution.moduleComparisonEquiv (moduleCohomologyExtResolutionNatIso X q) F
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The explicitly resolution-normalized comparisons are natural in coefficients.
-Source: Stacks Project, Tag 03FD; Tag 015E for acyclic-resolution naturality;
-Tag 06XR for Ext computed by injective resolutions.
-
-Proof: Lift the coefficient morphism to the two standard module resolutions.
-The module-derived comparison commutes with this lift by isoRightDerivedObj
-naturality. Exact forgetting commutes with homology by mapHomologyIso naturality.
-The forgotten terms are section-acyclic by 03FD, and acyclicComparison_naturality
-makes their comparison with derived abelian sections commute with the same lift.
-The Hom-complex identification fromSingleEquiv commutes with postcomposition,
-as does the section identification by the Yoneda and sheafification adjunctions.
-Consequently the explicitly constructed Ext/derived-sections comparison commutes
-with the coefficient map. Finally precomposition by terminalSourceIso commutes
-with postcomposition by associativity of Ext. Compose these squares and evaluate
-at x. These arguments apply in degree zero and to empty schemes and zero modules. -/
+/-- The explicitly resolution-normalized comparisons are natural in coefficients
+(Stacks, Tags 03FD, 015E and 06XR). -/
 theorem moduleCohomologyExtResolutionEquiv_naturality (X : Scheme.{u}) (q : ℕ)
     (F G : X.Modules) (φ : F ⟶ G)
     (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :

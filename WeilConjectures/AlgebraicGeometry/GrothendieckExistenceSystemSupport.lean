@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Proper closed support for a coherent thickening system
 
-Source: Stacks Project, Tags 088E and 088F.
+## References
+
+* [Stacks Project, Tags 088E, 088F]
 -/
 
 @[expose] public section
@@ -99,30 +101,7 @@ private theorem formalSupport_of_chow
   exact hPT (serre_of_kernel inferInstance P α hkerP hN)
 
 /-- A coherent system whose first term has proper support has one proper closed subscheme
-annihilating all its pushed-forward terms.
-Source: Stacks, Theorem 088E, proof after the first paragraph, in the form of Remark 088F.
-
-Proof:
-1. Package the input as a coherent thickening system. The dictionary provides the
-Noetherian structure on X, the corresponding coherent formal module, evaluation
-isomorphisms with each pushed term, and properness of its first support.
-2. In the formal category let P be proper scheme-theoretic support and R proper first
-support. Both are Serre classes. The zero ideal kills every formal module, by the
-affine-cover criterion for vanishing ideal products and coherence of each term.
-3. If P fails, the set of ideals killing an R-object for which P fails is nonempty.
-Noetherian ACC provides a maximal such K and a failing object T killed by K.
-4. The Chow comparison on V(K) provides N satisfying P and a map alpha:T -> N
-whose kernel is killed by J strictly larger than K. Its construction is Theorem
-088E's projective compactification, algebraization and proper pushforward argument.
-5. The kernel has R by subobject closure. If P failed for it, J would be a larger
-member of the failing set, contradicting maximality. Thus the kernel has P.
-The exact sequence kernel(alpha) -> T -> N and Serre extension/subobject closure
-imply P(T), contradicting its choice. No cokernel support assertion is needed.
-6. For each level, closed-immersion coherent equivalence realizes the formal term
-as the pushforward of a coherent module on the chosen proper closed subscheme.
-Its ideal kills this pushforward on every open. Compose its isomorphism with the
-dictionary evaluation isomorphism and transport the scalar equation to the original
-pushed thickening term using linearity and the inverse-isomorphism identity. -/
+annihilating all its pushed-forward terms. (Stacks, Theorem 088E and Remark 088F) -/
 theorem grothendieckExistence_system_support
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

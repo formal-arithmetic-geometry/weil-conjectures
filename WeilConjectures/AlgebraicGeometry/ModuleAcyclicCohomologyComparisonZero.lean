@@ -16,12 +16,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
 
-/-- Degree-zero comparison needs only the global sections hypothesis.
-Source: Stacks Project, Tags 095T and 01FA.
-
-Proof: Forgetting coefficients makes the section restriction bijective. Conjugate
-it by the canonical degree-zero cohomology/sections equivalences on X and Y.
-The degree-zero pullback formula identifies this conjugate with cohomologyMap. -/
+/-- Degree-zero comparison needs only the global sections hypothesis
+(Stacks, Tags 095T and 01FA). -/
 theorem Etale.bijective_cohomologyMap_of_module_acyclic_zero
     {X Y : Scheme.{u}} (i : Y ⟶ X) (r : ℕ)
     (hzero : ∀ G : Sheaf X.smallEtaleTopology

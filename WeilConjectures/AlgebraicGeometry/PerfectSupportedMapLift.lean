@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectSupportedStabilizedLift
 
 /-! # Lifting maps from perfect complexes with support
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 09IM, Lemma 36.13.11.
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 09IM.
 -/
 
 @[expose] public section
@@ -52,22 +54,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A map from a perfect complex on a quasi-compact open extends as a direct summand
 of a map from a global perfect complex with the prescribed closed support.
 Support is expressed by vanishing of every cohomology stalk off the closed subset.
-Restriction uses the canonical equivalence from the localized site to the open subscheme.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09IM, Lemma 36.13.11.
-
-Proof:
-1. Cover X by U and finitely many affine opens. Induction reduces to X = U ∪ V
-   with V affine; the intersections remain quasi-compact by quasi-separatedness.
-2. Apply lem-sc-affine-perfect-support-extension on V to extend the restriction of P
-   to a perfect Q supported on T ∩ V, whose restriction is (P ⊕ P[1])|_(U ∩ V).
-3. Compose with projection to P and alpha. By lem-sc-affine-perfect-map-lift, replace
-   Q by Q tensor^L I, retaining perfectness and support, to lift this map to E|_V.
-   The replacement map is an isomorphism on the overlap.
-4. Apply lem-sc-derived-open-gluing to this map on V and alpha composed with the
-   projection P ⊕ P[1] → P on U, using the overlap isomorphism and its compatibility.
-   The resulting map beta: R → E has R perfect and supported on T, since these
-   conditions are local on U ∪ V. Inclusion and projection on P ⊕ P[1] exhibit the
-   required compatible direct summand on U. -/
+(Stacks, Tag 09IM) -/
 theorem exists_perfect_supported_map_lift
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U : X.Opens) (hU : IsCompact (U : Set X))

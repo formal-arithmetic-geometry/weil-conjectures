@@ -13,7 +13,9 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Dehomogenization equivalence for weak Popescu delocalization
 
-Source: Stacks Project, proof of Tag 07F9, the final displayed isomorphism.
+## References
+
+* Stacks Project, Tag 07F9.
 -/
 
 @[expose] public section
@@ -79,28 +81,8 @@ private theorem quotientAway_ext
   apply Ideal.Quotient.algHom_ext
   exact AlgHom.ext h
 
-/-- Source: Stacks Project, proof of Tag 07F9, the isomorphism following the
-construction of B and b.
-
-Proof: Denote the right-hand quotient by D and its localization by C. Both
-localizations invert the class of x₀*w*∏sⱼ, hence x₀, w and all sⱼ are units.
-Define the polynomial map to C fixing x₀, the first n original variables and w,
-and sending each of the last m original variables Xᵢ to xᵢ*w. Expanding the
-support sum in hF gives Fⱼ(u,v*w,w) = w^(dⱼ)*fⱼ(u,v): in each monomial the
-w-exponent is the sum of the last m exponents plus its complementary exponent;
-hdegree ensures this sum is dⱼ. Thus x₀*Fⱼ maps to zero. The membership hg gives
-sⱼ₊₁*gⱼ = 0 in D and hence gⱼ = 0 in C by the unit sⱼ₊₁. This map factors
-through B and extends to B_b, since b maps to a unit.
-
-Conversely map D to B_b by fixing x₀, the first n original variables and w, and
-sending each remaining xᵢ to Xᵢ/w. The same identity gives fⱼ = w^(-dⱼ)*Fⱼ
-under this substitution. In B_b, x₀*Fⱼ = 0 and x₀ is a unit, so Fⱼ = 0.
-The map therefore descends to D and extends to C because x₀*w*∏sⱼ is a unit.
-The composites fix the coefficients and every variable: the only nontrivial
-identities are (xᵢ*w)/w = xᵢ and (Xᵢ/w)*w = Xᵢ. Polynomial and quotient
-extensionality, followed by uniqueness of maps out of each localization, show
-that these maps are inverse R-algebra maps. This also covers m=0, c=0, t=0,
-and zero localizations. No Jacobian hypothesis is needed for this isomorphism. -/
+/-- The localized quotient by the homogenized equations is `R`-algebra isomorphic to the
+localized quotient by the original equations (Stacks, Tag 07F9). -/
 theorem popescu_delocalize_dehomogenization_equiv_exists
     (R : Type u) [CommRing R]
     (n m c t : ℕ)

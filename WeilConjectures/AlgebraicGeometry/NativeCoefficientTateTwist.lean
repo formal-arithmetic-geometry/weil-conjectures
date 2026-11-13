@@ -42,10 +42,7 @@ def sfCondensedTateTwist :
 def sfCondensedTateTwistDerived (d : ℤ) :=
   (DerivedCategory.singleFunctor _ 0).obj (sfCondensedTateTwist X ell Λ phi d)
 
-/-- For condensed Qbar coefficients this is the existing upstream Tate line, literally.
-
-Proof: the first lines are the same extension of the same integral Tate module.
-Induction identifies the nonnegative powers; negative powers are internal duals of those. -/
+/-- For condensed Qbar coefficients this is the existing upstream Tate line, literally. -/
 theorem sfCondensedTateTwist_qbar (X : Scheme.{u}) (ell : ℕ) [Fact ell.Prime] (d : ℤ) :
     sfCondensedTateTwist X ell (Profinite.padicAlgClRingObj ell)
       (Profinite.padicIntRingObjToPadicAlgCl ell) d = tateTwist X ell d := by

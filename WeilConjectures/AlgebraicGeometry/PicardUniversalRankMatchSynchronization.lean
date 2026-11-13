@@ -15,8 +15,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Synchronizing rank witnesses, including empty fibres
 
-Source: Stacks Project, Tag 0BDP, the intersection of the two rank loci;
-the empty-fibre case is the adaptation in the parent rank-match construction.
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -97,27 +98,8 @@ private theorem rank_zero_of_empty_preimage {A B : Scheme.{u}} (f : A ⟶ B)
   rw [Module.rankAtStalk_eq_zero_of_subsingleton] at hh
   exact hh.symm
 
-/-- The two single-image conditions have a common local rank witness even on empty fibres.
-Source: Stacks Project, Tag 0BDP, first and third proof paragraphs, and the
-empty-fibre rank-zero clause of the parent construction.
-
-Proof: Fix a further base change h and a point t. Choose U containing t with rank r
-from the E direct-image condition, and V containing t with rank s from the dual
-condition. Let W=U intersect V. Tensor pullback composition and the canonical
-isomorphisms of iterated fibre products identify the restrictions of the two
-reference bundles with the same E on X_W. Restriction preserves fixed-rank finite
-local freeness, so E on X_W has both ranks r and s.
-
-If X_W has a point, compute the rank at its nonzero local-ring stalk: invariant
-basis number gives r=s. If X_W has no points, it is the empty scheme. Restriction
-of an ordinary pushforward to an open equals the pushforward from its inverse
-image, so both direct images restricted to W are zero. Since W contains t, its
-local-ring stalk at t is nonzero; the first zero direct image has rank r only if
-r=0, and the second has rank s only if s=0. Thus again r=s. The two restricted
-direct images and E on X_W therefore all have rank r, giving the common W witness.
-This works for every h and t. Empty test schemes have no t to check. No
-structure-sheaf unit or nonempty-fibre assumption is used.
--/
+/-- The two single-image conditions have a common local rank witness even on empty fibres
+(Stacks, Tag 0BDP). -/
 theorem picardUniversalRankMatch_of_singleRankMatch_without_unit
     {X S T : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) (g : T ⟶ S)
     (hE : PicardUniversalSingleRankMatch f E E g)

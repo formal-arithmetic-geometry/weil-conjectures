@@ -14,7 +14,10 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Affine restrictions of raw classes eventually vanish
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true in
-/-- An injective cocone comparison detects zero at a later stage.
-Source: Mathlib `IsColimit.eq_iff'`, applied to x and zero. -/
+/-- An injective cocone comparison detects zero at a later stage. -/
 private theorem exists_addCommGrp_stage_eq_zero {I : Type v} [Preorder I]
     [IsDirected I (· ≤ ·)] [Nonempty I] (K : I ⥤ AddCommGrpCat.{v + 1})
     (B : Cocone K) (hinj : Function.Injective (colimit.desc K B))
@@ -50,27 +52,7 @@ private theorem exists_addCommGrp_stage_eq_zero {I : Type v} [Preorder I]
 
 set_option backward.isDefEq.respectTransparency true in
 /-- On an affine etale test object a zero raw limit class dies at a later stage.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-
-Proof: Commute raw pullback with restriction to W by the naturality of inverse-image
-composition and the comparison with the single functor. Base change the cone to W.
-Since W is affine, its base changes with the qcqs stage schemes are qcqs; affine
-transition maps and the limit property are preserved by base change. Restrict the
-coefficient system; inverse image preserves its colimit and its coherence maps.
-Place every coefficient sheaf in degree zero. Derived adjunction for etale
-restriction identifies the raw Hom groups with cohomology on these base changes:
-the free abelian sheaf on W represents sections, and the exact left adjoint of
-restriction makes this identification compatible with pullback and coefficients.
-Apply complex cohomology continuity (Tag 0EZM) with lower bound zero. Its canonical
-colimit comparison is injective. The filtered abelian-group colimit equality
-criterion therefore gives j and i → j with zero image of the restricted class.
-The single and shift comparisons identify that image with the stated raw map.
-Naturality of raw pullback with restriction then preserves this same zero class
-on every V → W: the restrictions are precomposition, and the inverse-image
-composition and single-functor comparisons are natural transformations. Their
-naturality squares, mapped into the derived category, commute with this
-precomposition. Thus the stage j and arrow obtained above work on all further
-restrictions. Degree zero is section continuity; the empty affine object has zero group. -/
+(Stacks, Tags 09Z1 and 0EZM) -/
 theorem exists_higherDirectImage_raw_affine_restriction_eq_zero {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

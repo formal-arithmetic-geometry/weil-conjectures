@@ -12,6 +12,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual
 /-!
 # Duals of bounded finite locally constant complexes over a prime field
 
+## Implementation details
+
 The existing etale `derivedHom` is the K-injective derived internal Hom in the
 `ModuleCat` encoding. Its construction derives the homotopy-category Hom functor
 using K-injectives in `DerivedCategory.tensorHomAdjunctionQhObj`.
@@ -47,9 +49,8 @@ noncomputable def derivedHomPullbackAlongIsoComparison
 end General
 
 /-- The canonical map from the pullback of the coefficient dual to the dual of the
-pullback: transpose the pulled-back evaluation using the strong monoidal pullback
-and its unit comparison. Source:, proof step 5;
-Stacks, Sites Cohomology, Section 08J7. -/
+pullback, obtained by transposing the pulled-back evaluation using the strong monoidal
+pullback and its unit comparison (Stacks, Sites Cohomology, Section 08J7). -/
 noncomputable def finiteLisseDualPullbackComparison
     {Λ : Type (u + 1)} [CommRing Λ] {T T' : Scheme.{u}} (v : T' ⟶ T)
     (C : DerivedCategoryModule Λ T) :=
@@ -58,16 +59,7 @@ noncomputable def finiteLisseDualPullbackComparison
 
 /-- Duality for an ordinary bounded etale complex over the prime field: finite local
 constancy of cohomology is preserved, cohomology is the degree-reversed sheaf dual,
-and the canonical comparison commutes with every scheme pullback.
-
-Proof: the global vanishing bounds give `C.IsGE a` and `C.IsLE b`, and the coefficient
-ring `ULift (ZMod ℓ)` is a field. The truncation devissage of
-`isFiniteLocallyConstantSheaf_homology_coefficientDual` (exact pairings of finite locally
-constant cohomology sheaves over a field) gives finite local constancy of the dual
-cohomology and the degree-reversed sheaf-dual formula. The same devissage,
-`isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf`, proves invertibility of
-`coefficientDualComparison`, which is by definition the displayed pullback map: the
-internal-Hom comparison of the strong monoidal pullback followed by the unit comparison. -/
+and the canonical comparison commutes with every scheme pullback. -/
 theorem finiteLisseFieldDual
     (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u})
     (_hℓ : IsUnit (ℓ : Γ(T, ⊤)))

@@ -61,10 +61,16 @@ import WeilConjectures.ConstructibleSheaf.GenericConstancy
 /-!
 # Proper generic local constancy
 
+## Implementation details
+
 The private helpers adapt the proofs of finite-ring compact-support constructibility
 from LisseOpenRelativeLineConstructibility, EtaleAffineLineShriekFiniteTypeDenseOpen,
 EtaleAffineLineShriekSheafConstructible, and EtaleCompactificationConstructibility.
-They use the all-characteristic smooth-curve input (Stacks 0GKX) for finite fields.
+They use the all-characteristic smooth-curve input for finite fields.
+
+## References
+
+* [Stacks Project, Tag 0GKX](https://stacks.math.columbia.edu/tag/0GKX)
 -/
 
 @[expose] public section
@@ -1575,54 +1581,22 @@ namespace AlgebraicGeometry
 /-!
 # Generic local constancy of proper étale cohomology
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GL0,
-generic-stratum consequence for a proper morphism over an integral affine Noetherian base,
-with Tags 0GKY and 0GKZ for its proof, and `etale-cohomology.tex`, Tag 03RW, for finite
-locally constant constructible sheaves.
-
-For a proper morphism `f: X ⟶ S` to an integral affine Noetherian scheme, a constructible
+For a proper morphism `f : X ⟶ S` to an integral affine Noetherian scheme, a constructible
 sheaf `F` of modules over a finite field `A` of characteristic `ℓ` and `q ≥ 0`, some nonempty
 open of `S` carries `R^q f_* F` as a finite locally constant sheaf. No invertibility of `ℓ`
 is assumed.
+
+## References
+
+* Stacks Project, Tags 0GL0, 0GKY, 0GKZ and 03RW
 -/
 
-/-- **Generic local constancy of one proper higher direct image.** Source: Stacks Project,
-`more-etale.tex`, Tag 0GL0 (identity open compactification), with `etale-cohomology.tex`,
-Tag 03RW.
+/-- **Generic local constancy of one proper higher direct image.**
 
-Let `A` be a finite field of characteristic the prime `ℓ`, `S` an integral affine Noetherian
-scheme, `f: X ⟶ S` proper, `F` a constructible sheaf of `A`-modules on `X_ét` and `q ≥ 0`.
-Then there is a nonempty open immersion `j: U ⟶ S` such that `j^{-1} R^q f_* F`, with
-`R^q f_* F = H^q(Rf_*(F[0]))`, is finite locally constant. No invertibility of `ℓ` is assumed.
-
-Proof:
-1. For a compactification `(j, p)`, exact extension by zero and the right derived direct image
-   make `Rp_* j_!` additive and triangulated; it preserves lower cohomological bounds, and
-   complexes with constructible cohomology form a triangulated subcategory (Serre class).
-2. Over an affine base `Y` of finite type over `ℤ` and an affine open `W` of `𝔸¹_Y` with a
-   finite locally constant `L`, the finite-étale filtration theorem gives a finite étale
-   `g: T → W` of degree prime to `ℓ`; the trace identity makes `L` a retract of `g_* g^* L`,
-   and finite direct image is exact.
-3. The pieces `T_a → Y` are smooth affine curves; the constant smooth-affine-curve result
-   (Tag 0GKX, no invertibility), finite-filtration dévissage, disjoint-open extension and
-   compact-support composition give constructibility over `W`.
-4. An arbitrary open of `𝔸¹_Y` is handled by a finite affine cover, relative Mayer–Vietoris
-   and Serre closure, inducting on the cover size.
-5. For constructible `F` on `𝔸¹_Y`, a dense lisse open with finite closed complement, the
-   open–closed triangle and quasi-finite shriek constructibility give the result.
-6. Noetherian induction on closed subsets of `Y` (reduced induced structures, exact inverse
-   image, compact-support base change) gives constructibility over all of `Y`.
-7. An arbitrary affine `Y = Spec R` is the limit over finitely generated `ℤ`-subalgebras;
-   constructible-module limit descent gives the same conclusion.
-8. Truncation and bounded dévissage upgrade the result to bounded-below complexes with
-   constructible cohomology, and induction on dimension gives it for affine space.
-9. An affine open `W ⊆ X` is a finite-presentation closed subscheme of `𝔸ⁿ_S`; closed
-   immersion, quasi-finite shriek and composition give constructibility on `W`.
-10. A finite affine cover of the quasi-compact `X`, with affine intersections, Mayer–Vietoris
-    and induction on the cover size, give constructibility of `R^q f_* F`.
-11. The identity compactification identifies `Rf_!` with `Rf_*`; generic constancy of the
-    constructible `R^q f_* F` gives a dense open on which it is finite locally constant, and
-    a dense open of the integral (hence nonempty, irreducible) `S` is nonempty. -/
+For `f : X ⟶ S` proper over an integral affine Noetherian scheme and `F` a constructible sheaf
+of modules over a finite field `A` of characteristic `ℓ`, there is a nonempty open immersion
+`j : U ⟶ S` such that `j^{-1} R^q f_* F` is finite locally constant. No invertibility of `ℓ`
+is assumed (Stacks, Tags 0GL0 and 03RW). -/
 theorem proper_cohomology_generic_local_constancy
     (ℓ : ℕ) [Fact ℓ.Prime] (A : Type (u + 1)) [Field A] [Finite A] [CharP A ℓ]
     (S : Scheme.{u}) [IsAffine S] [IsIntegral S] [IsLocallyNoetherian S]

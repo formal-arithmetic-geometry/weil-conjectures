@@ -19,8 +19,10 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 /-!
 # An ample invertible module from a projective closed immersion
 
-Source: Stacks Project, Properties, Definition 01PS and Lemma 01PU; Constructions,
-Definition 01MN and Lemma 01NG.
+## References
+
+* Stacks Project, Properties: Definition 01PS and Lemma 01PU; Constructions:
+  Definition 01MN and Lemma 01NG.
 -/
 
 @[expose] public section
@@ -61,28 +63,7 @@ opens are exactly the non-vanishing loci of the twice-pulled coordinate sections
 The coordinates are `ULift (Fin (n+1))`, `P^n_ℤ` is `Proj` of the polynomial ring over
 `ULift ℤ` with its total-degree grading, `ρ` is `ProjectiveSpace.toProjInt`, the coordinate
 `T_k` is `Proj.unitToTwist (isHomogeneous_X _ k)` applied to `1`, and sections are pulled back
-by the unit of the chosen tensor-pullback adjunction.
-Source: Stacks Project, Properties, Definition 01PS and Lemma 01PU; Constructions,
-Definition 01MN and Lemma 01NG.
-
-Proof:
-1. The source instance proves the Proj twist invertible. Uniqueness of left adjoints
-   compares tensor pullback with the usual pullback, which preserves invertibility.
-   Apply this first along rho and then along the closed immersion.
-2. A morphism from the structure module is recovered from its value at one. Thus
-   `Scheme.Modules.nonvanishingLocus_eq_compl_support_zeroLocus`, followed by the source theorem
-   `Proj.compl_support_zeroLocus_unitToTwist`, identifies the nonvanishing locus of
-   each integral coordinate with its Proj basic open.
-3. Apply `Scheme.Modules.nonvanishing_tensorPullback` twice. The twice-pulled coordinate locus is
-   exactly the inverse image along i of `standardOpen`. The source's
-   `iSup_standardOpen` proves these chart preimages cover X.
-4. The source's `isAffineOpen_standardOpen` proves affineness over the affine base.
-   Closed immersions are affine morphisms, so each chart preimage is affine.
-5. A finite union of these compact affine opens is X, giving CompactSpace X. At any
-   point choose a covering chart and transport its coordinate section along the inverse
-   right unitor L ≅ L.tensorPow 1. Module isomorphisms preserve nonvanishing, so this
-   affine open and exponent one witness Scheme.Modules.IsAmple.
--/
+by the unit of the chosen tensor-pullback adjunction (Stacks, Tags 01PS, 01PU). -/
 theorem projective_closedImmersion_ample_invertible (A : Type u) [CommRing A] (n : ℕ)
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))
     (i : X ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of A))) [IsClosedImmersion i]

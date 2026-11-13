@@ -151,16 +151,7 @@ theorem effectivePointEquiv_transport {X V T : Scheme.{u}}
       _ = (effectivePointEquiv p t Z q hq (Over.mk b) s).left ≫ t :=
         (effectivePointEquiv p t Z q hq (Over.mk b) s).w.symm
 
-/-- Effective pro-etale descent represents the sheaf by the descended etale object.
-
-Proof. The pro-etale topology is subcanonical, so the lifted Yoneda presheaf `H` of `Z`
-is a sheaf. On the slice over `V` the pullback square gives `effectivePointEquiv`;
-composed with `rho` it is a natural bijection `H(W) ≃ F(W)`
-(`effectivePointEquiv_naturality`, `hnat`). For two `V`-structures `a, b` on one test
-object, `effectivePointEquiv_transport` and `hcompat` show the bijections agree, so the
-local isomorphism glues in the sheaf `sheafHom H F` over the cover `hcover`; the glued
-morphism restricts to an isomorphism, hence is one (`Sheaf.isIso_of_coversTop`). Full
-faithfulness of `Scheme.ProEt.forget X` identifies `H` with the stated lifted Hom presheaf. -/
+/-- Effective pro-etale descent represents the sheaf by the descended etale object. -/
 theorem representable_of_effective_proetale_descent {X V T : Scheme.{u}}
     (p : V ⟶ X) [WeaklyEtale p]
     (t : T ⟶ V) (Z : X.Etale) (q : T ⟶ Z.left)

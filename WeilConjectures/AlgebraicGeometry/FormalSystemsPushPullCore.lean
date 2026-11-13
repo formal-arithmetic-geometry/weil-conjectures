@@ -52,11 +52,8 @@ private theorem formalPushforward_coherent {X Y : Scheme.{u}} [IsNoetherian Y]
   exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y _).mpr
     ⟨inferInstance, inferInstance⟩
 
-/-- Core comparison and termwise annihilation needed for the formal push-pull theorem.
-Source: Stacks Project, Cohomology of Schemes, Lemma 088B and Remark 0888.
-The construction of the comparison morphism, coherence of the pushforward, and the
-uniform termwise annihilation are the affine formal-functions and completion argument
-of Lemma 088B. -/
+/-- Core comparison and termwise annihilation needed for the formal push-pull theorem
+(Stacks, Cohomology of Schemes, Lemma 088B and Remark 0888). -/
 theorem exists_formalSystemsPushPull_core {X Y : Scheme.{u}} [IsNoetherian Y]
     (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]
     (_hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl)))

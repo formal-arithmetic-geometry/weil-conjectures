@@ -119,23 +119,7 @@ private theorem components_finite_stabilizer {k : Type u} [Field k]
   exact aux _ hf Set.Subset.rfl
 
 /-- All components over a separable closure simultaneously descend to closed subsets over
-one finite intermediate field.
-
-Source: Stacks Project, Tag 04KZ (1),(2), and Tag 054R, proof.
-Proof: for each geometric component choose an affine open U of X meeting it after base
-change. The coordinate ring of U is finite type over k, so its base change is noetherian.
-The minimal prime defining the component on this chart has finitely many generators.
-Write each generator as a finite sum of tensors and adjoin their ksep coefficients for
-all components. There are finitely many coefficients, and algebraicity makes their
-intermediate field L finite over k. Every automorphism fixing L preserves each chosen
-chart and fixes the ideal generators, hence fixes the component on that chart. Its
-closure is the entire component, which is therefore fixed. Since ksep/L is algebraic,
-normal and separable, it is Galois, even if L/k is not normal.
-Descent of invariant closed subsets (Stacks Tag 038B, applied over L) supplies closed
-subsets of X_L whose full preimages are those components. The projection is surjective
-by faithful flatness of field extension. The pullback tower isomorphism identifies the
-iterated base change with X_ksep and transports the given finiteness of components.
-For empty X take the bottom field and use the vacuous component assertion. -/
+one finite intermediate field. (Stacks, Tags 04KZ and 054R.) -/
 theorem exists_finite_intermediateField_closed_component_descent {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f]
     (hfinite : (irreducibleComponents

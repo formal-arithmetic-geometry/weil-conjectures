@@ -11,7 +11,10 @@ import WeilConjectures.Topology.ModuleCohomologyTopComparison
 
 /-! # Tensor-power annihilation from zero cohomology fractions
 
-Source: Stacks Project, Cohomology of Schemes, Tags 01XR and 09MR.
+## References
+
+* [Stacks Project, Tag 01XR](https://stacks.math.columbia.edu/tag/01XR)
+* [Stacks Project, Tag 09MR](https://stacks.math.columbia.edu/tag/09MR)
 -/
 
 @[expose] public section
@@ -178,29 +181,8 @@ private theorem tensorSectionTransition_from_zero {X : Scheme.{u}} {L : X.Module
 
 /-- If the degree-zero fraction presentation is zero, each global cohomology class
 is killed by a tensor power of the section. This is only the denominator-clearing
-step; it assumes neither an affine nonvanishing open nor a localization comparison.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01XR, conclusion from the
-localization of Lemma 09MR (https://stacks.math.columbia.edu/tag/01XR).
-
-Proof: Forget the scalar action on module cohomology. Global module sections with
-scalars forgotten are sections on the top open. Forgetting scalars is exact, so it
-commutes with cohomology of an injective module resolution and gives a natural
-additive isomorphism from global module cohomology to open module cohomology at top.
-Transport xi through this isomorphism and through the map induced by the inverse
-right unitor F -> F tensor L^0, obtaining a numerator eta in degree zero.
-The hypothesis makes the fraction [0, eta] zero. The fraction presentation is the
-additive direct limit of the groups H^p(X,F tensor L^n), with transitions induced
-by mulTensorPowSection. These transitions compose because section powers multiply
-and the tensor associators and unitors satisfy coherence. Its defining relations
-are exactly the relations of cohomologyFractionRelations. In a directed colimit,
-a component representing zero becomes zero at some later index e: equivalently,
-write its relation as a finite sum of defining relations and push all terms to a
-common index, where each relation cancels. Thus the transition from degree zero
-to degree e kills eta. By the tensor coherence identities, its composite with the
-inverse right unitor is (rho F).inv followed by F tensor s^e. Naturality of the
-comparison with global module cohomology transports this equality back to the
-claimed map applied to xi. -/
+step; it assumes neither an affine nonvanishing open nor a localization comparison
+(Stacks, Tags 01XR and 09MR). -/
 theorem exists_tensorPowSection_cohomology_eq_zero_of_subsingleton_fractions
     (X : Scheme.{u}) (L F : X.Modules) (s : Γ(L, ⊤)) (p : ℕ)
     (hsub : Subsingleton (CohomologyFractionPresentation L F s p ⊤))

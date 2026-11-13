@@ -10,9 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale
 
-/-! # Representability of finite locally constant sheaves of sets
+/-!
+# Representability of finite locally constant sheaves of sets
 
-Source: Stacks Project, Tag 03RV, implication (1) to (2).
+## References
+
+* Stacks Project, Tag 03RV, implication (1) to (2)
 -/
 
 @[expose] public section
@@ -25,9 +28,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Descent constructs a finite étale scheme representing a locally constant sheaf
 of sets with finite geometric stalks. This is
-`AlgebraicGeometry.Scheme.exists_iso_uliftYoneda_of_isFiniteLocallyConstant`.
-
-Source: Stacks Project, Tag 03RV, implication (1) to (2). -/
+`AlgebraicGeometry.Scheme.exists_iso_uliftYoneda_of_isFiniteLocallyConstant`
+(Stacks, Tag 03RV). -/
 theorem finiteLocallyConstant_sets_representable
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (hloc : ∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,

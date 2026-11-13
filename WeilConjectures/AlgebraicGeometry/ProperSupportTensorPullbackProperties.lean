@@ -17,7 +17,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Base change of finitely presented relatively flat modules with proper support
 
-Source: Stacks Project, Tag 0A1H, affine reduction; Tags 01AT and 0CYM.
+## References
+
+* [Stacks, Tag 0A1H] (affine reduction), [Stacks, Tag 01AT], [Stacks, Tag 0CYM]
 -/
 
 @[expose] public section
@@ -29,19 +31,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Ordinary tensor pullback preserves the three termwise hypotheses of Tag 0A1H.
-Source: Stacks Project, Tag 0A1H, affine reduction; Tags 01AT and 0CYM.
-Proof: pull back each local finite presentation to obtain a finite presentation of
-its tensor pullback. At a point of the cartesian square, the stalk of this pullback
-is tensor extension of the original module stalk. Relative flatness is preserved
-by base change of modules and subsequent localization, giving flatness over the
-new base stalk. Since the original stalk module is finite, Nakayama's lemma shows
-that it is nonzero exactly when its tensor extension along the local ring map is
-nonzero. Consequently the support is the inverse image of the original closed
-support. Its reduced induced scheme is the reduction of the scheme-theoretic base
-change of the original reduced support. Reduction is a closed immersion; compose
-it with the proper base change of the original support morphism. This proves
-properness for precisely the closed support required by HasSupportProperOver.
-Empty supports and zero modules are included, and the base change need not be flat. -/
+Empty supports and zero modules are included, and the base change need not be flat.
+(Stacks, Tags 0A1H, 01AT, 0CYM) -/
 theorem properSupport_tensorPullback_properties
     {X S T : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (p : T ⟶ S)
     (F : X.Modules) [F.IsFinitePresentation]

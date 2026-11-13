@@ -14,12 +14,14 @@ import WeilConjectures.AlgebraicGeometry.FlatRingedCechLocalComparison
 
 /-! Quasi-isomorphism of the scalar-extended augmented model.
 
-Source: Stacks Project, Algebraization, Tags 099I and 099H.
-
 The canonical unit of termwise scalar extension is a quasi-isomorphism on a
 locally extended Čech model. On finite generating slices this follows from the
 quotient comparison, torsion of finite ordered Koszul stages, and exact filtered
 colimits. Exact slice restriction and locality of isomorphisms globalize the result.
+
+## References
+
+* Stacks Project, Tags 099I and 099H
 -/
 
 @[expose] public section
@@ -74,12 +76,7 @@ private theorem quasiIso_of_cover
   exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf (siteModuleRings R))
 
 /-- The canonical scalar-extension unit on a locally extended Čech model is a
-quasi-isomorphism. Source: Stacks Project, Algebraization, Tags 099H and 099I.
-
-Proof: restrict to finite generating slices and apply the local scalar-unit theorem,
-which uses torsion in ordered Koszul homology and exact filtered colimits. Exact
-restriction and locality of isomorphisms then conclude on every homology sheaf.
--/
+quasi-isomorphism (Stacks, Algebraization, Tags 099H and 099I). -/
 theorem flat_ringedCech_baseChange_data_quasiIso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)

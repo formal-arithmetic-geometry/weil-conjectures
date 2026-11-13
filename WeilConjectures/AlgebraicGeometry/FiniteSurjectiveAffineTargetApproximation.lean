@@ -160,32 +160,7 @@ private theorem factor_of_finitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y)
     surjective_g := hsk
     affine_W := inferInstance }⟩
 
-/-- A finite surjective map from an affine scheme admits a Noetherian affine stage.
-
-Proof (the approximation portion of Stacks Lemma 01ZT):
-1. The structure maps to Spec ℤ compose uniquely. Since X is affine it is quasi-compact
-   and separated; surjectivity makes Y quasi-compact. Finiteness implies integrality and
-   universal closedness, so separatedness descends to Y. Its closed diagonal is affine
-   and quasi-compact, hence Y is quasi-separated.
-2. Express the integral f as a directed limit of finite, finitely presented Y-schemes
-   with affine transitions. These schemes are qcqs; since their limit X is affine,
-   some stage is affine. Its map to Y is surjective since f factors through it.
-   Replace X and f by that stage to assume finite presentation.
-3. Approximate qcqs Y by schemes Y_i of finite type over ℤ with affine transitions,
-   and reindex by a nonempty directed set. Each Y_i is Noetherian and qcqs.
-4. Descend f to a finitely presented g₀: X₀ → Y₀. Restrict to the cofinal tail and
-   set X_i = X₀ ×_{Y₀} Y_i. These are qcqs with affine transitions, and their limit
-   is X, compatibly with f.
-5. Descend finiteness of f to some g_i; finite presentation supplies local finite type.
-   All later g_i are finite by base change.
-6. Descend surjectivity of f to some g_i using local finite presentation. All later
-   g_i are surjective by base change. This supplies a step implicit in Stacks' proof.
-7. Since the limit X is affine, the qcqs X_i are affine for all sufficiently large i.
-8. Choose a common upper bound of the finiteness, surjectivity and affineness
-   stages. Put Z = Y_i, W = X_i and g = g_i. Then Z is Noetherian, W is affine,
-   and g is finite and surjective. The limit projection q: Y → Z is affine because
-   all transition maps are affine. These
-   objects and properties supply the factor. No affineness of Z is used here. -/
+/-- A finite surjective map from an affine scheme admits a Noetherian affine stage. -/
 theorem exists_noetherian_affine_factor {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsFinite f] [Surjective f] [IsAffine X] :
     Nonempty (NoetherianAffineFactor f) := by

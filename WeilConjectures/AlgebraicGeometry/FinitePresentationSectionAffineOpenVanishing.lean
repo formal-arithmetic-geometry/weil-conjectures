@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SectionBaseChangeZeroPersists
 /-!
 # Descent of the vanishing of one module section
 
-Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
-Algebra, Tags 05N7 (3) and 05LI (1).
+## References
+
+* Stacks Project, Limits, Tag 01ZR; Algebra, Tags 05N7 and 05LI.
 -/
 
 @[expose] public section
@@ -31,27 +32,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- A single section that vanishes at the limit vanishes at all sufficiently late stages.
-Source: Stacks Project, Limits, Tag 01ZR (3), first proof, affine case;
-Algebra, Tags 05N7 (3) and 05LI (1).
-
-Proof: put V_j = p_j⁻¹(U). All these opens and the corresponding limit open are affine,
-since the projections are base changes of morphisms of affine schemes. Their rings
-are the filtered colimit of the stage rings: restrict to the upper tail of j, use
-Spec's preservation of limits, and commute the tensor product with the base-ring
-colimit. The affine pullback comparison identifies pullback of the section with
-1 tensor the section. Apply the already proved
-`TensorProduct.directedColimitBaseChangeElementwise` to the unit tensor of y.
-Its eventual-zero clause supplies a stage where the unit tensor is zero. The
-linear tensor map of every later ring map preserves zero and unit tensors, so
-vanishing holds at every stage above this bound. This works directly for preorder
-indices; no antisymmetrization or finite matrix construction is needed.
-The canonical pure-tensor formula identifies these tensors with the canonical
-units. For any other adjunction on the same functors, uniqueness of left adjoints
-gives a natural automorphism of the pullback functor identifying the units. Its
-component is an isomorphism, so zero is preserved and reflected. Thus the
-statement holds for the arbitrary supplied adjunctions as well.
-For the empty open the section module is zero; the same argument includes zero
-modules and a singleton index preorder. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem finitePresentation_section_affine_open_eventually_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -24,7 +24,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Abelian sheaf cohomology of injective module sheaves
 
-Source: Stacks Project, Tag 03FD, second paragraph of the proof.
+## References
+
+* Stacks Project, Tag 03FD.
 -/
 
 @[expose] public section
@@ -39,27 +41,7 @@ open Scheme Etale
 
 /-- The underlying abelian sheaf of an injective module sheaf is acyclic for H.
 This concerns an injective on its own site, without a closed immersion or torsion.
-
-Source: Stacks Project, Tag 03FD, second paragraph of the proof.
-
-Proof: regard a sheaf with values in ModuleCat as a sheaf of modules over the
-constant ring sheaf using `AlgebraicGeometry.moduleSheaf_constantRing_equivalence`. Its natural isomorphism of
-underlying-abelian forgetful functors identifies the additive sheaves, and the
-category equivalence preserves injectivity. The free module Cech complex of any
-covering is exact in positive homological degrees. Applying Hom into the injective
-module sheaf gives zero positive Cech cohomology. Forgetting coefficients does
-not change these complexes. The Cech vanishing criterion therefore gives vanishing
-of positive right-derived evaluation on every object of the small etale site (03FD).
-Evaluation at its terminal object X computes global sections. Apply the
-right-derived-functor identification
-to identify these rightDerived groups with the homology of derived global sections
-of the degree-zero single complex. The existing Ext comparison
-(lem-weil-pbc-sheafH-ext-derived-comparison) then identifies these groups with
-Sheaf.H, giving the asserted subsingleton. All abelian sheaves and groups have
-universe u+1 on X: Scheme.{u}; no replacement of X by a larger-universe scheme is
-used. This does not claim that forgetting coefficients preserves injectivity.
-The empty scheme and the zero ring also satisfy the argument.
--/
+(Stacks, Tag 03FD.) -/
 theorem Etale.subsingleton_H_underlying_of_injective_module
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

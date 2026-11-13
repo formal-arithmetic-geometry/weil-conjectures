@@ -23,9 +23,14 @@ public import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Resolution-normalized module/Ext comparisons
 
+## Implementation details
+
 The comparisons below are constructed from section complexes, not selected from
 an existence assertion about natural equivalences.
-Source: Stacks Project, Tags 03FD, 01FT and 06XR.
+
+## References
+
+* [Stacks, Tags 03FD, 01FT and 06XR]
 -/
 
 @[expose] public section
@@ -34,14 +39,13 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
-/-- Cache the sheafification proof used by the comparison on the Zariski site.
-Source: Mathlib's sheafification theorem for abelian sheaves. -/
+/-- The sheafification instance for abelian sheaves on the Zariski site, as a cached
+instance. -/
 @[instance 2000]
 theorem comparisonHasSheafify (X : Scheme.{u}) :
     HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
 
-/-- Cache the Ext-size proof used by the comparison on the Zariski site.
-Source: the Grothendieck abelian category instance for abelian sheaves. -/
+/-- The `HasExt` instance for abelian sheaves on the Zariski site, as a cached instance. -/
 @[instance 2000]
 theorem comparisonHasExt (X : Scheme.{u}) :
     HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) := inferInstance
@@ -204,8 +208,8 @@ private theorem moduleComparisonEquiv_naturality
       (L.map f) (moduleComparisonEquiv η M x) := by
   exact ConcreteCategory.congr_hom (η.hom.naturality f) x
 
-/-- Compose section comparisons before specializing the functors and the Ext source change.
-Source: Stacks Project, Tags 03FD and 06XR; the three constructed comparison maps. -/
+/-- Compose section comparisons before specializing the functors and the Ext source change
+(Stacks, Tags 03FD and 06XR). -/
 noncomputable def sectionsComparisonNatIso
     {A E : Type*} [Category A] [Category E]
     {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R} {T : A ⥤ E}

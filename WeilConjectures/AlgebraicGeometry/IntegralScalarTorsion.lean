@@ -153,17 +153,7 @@ private theorem finite_dual_tensor_homology
   exact Module.Finite.equiv S.moduleCatHomologyIso.toLinearEquiv.symm
 
 /-- The torsion in degree one of the scalar dual-tensor complex is killed by one
-uniformizer power.
-
-Proof: The scalar integer ring is a DVR, hence Noetherian. Each term of the dual
-complex embeds into the finite product of the linear Hom modules indexed by the
-bounded support of P. These modules are finite over the Noetherian ring. The dual
-is bounded above by minus the lower bound of P. In each degree the tensor totalization
-therefore has only finitely many nonzero summands, all finite. Its cycles and homology
-are finite as well. In a Noetherian module the ascending chain of kernels of powers
-of the uniformizer stabilizes. Every torsion element is killed by a power of the
-uniformizer: factor a nonzero annihilator as a unit times such a power. The stabilized
-kernel thus contains every torsion element. -/
+uniformizer power. -/
 theorem integralScalarDualTensor_torsionBound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

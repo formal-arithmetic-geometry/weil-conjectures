@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexCohomologyLimit
 
 /-! # Presenting raw module cohomology by abelian etale complexes
 
-Source: Stacks Project, Tags 09Z1, 0EZM and 03FD.
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+* [Stacks Project, Tag 0EZM](https://stacks.math.columbia.edu/tag/0EZM)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -26,7 +30,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true in
 /-- The precise hypotheses of complex continuity, as an existential proposition.
 No object or map is chosen by this definition, and no continuity conclusion is a field.
-Source: Stacks Project, Tag 0EZM, lemma-colimit-variant-complexes. -/
+(Stacks, Tag 0EZM) -/
 abbrev EtaleComplexCohomologyPresentation
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (B : Cocone H) : Prop :=
@@ -34,9 +38,7 @@ abbrev EtaleComplexCohomologyPresentation
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency true in
-/-- Complex continuity applied to a presentation. The witnesses are eliminated only
-inside this proof; no library definition selects data from an existence statement.
--/
+/-- Complex continuity applied to a presentation. -/
 theorem EtaleComplexCohomologyPresentation.isColimit
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     {H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {B : Cocone H}
@@ -54,33 +56,7 @@ set_option backward.isDefEq.respectTransparency true in
 presentation by abelian etale complexes on the base-changed inverse system.
 This theorem identifies the input to continuity; it does not assert cohomology
 continuity or any eventual equality of classes.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit, the affine-object reduction),
-Tag 0EZM (lemma-colimit-variant-complexes, the coefficient system), and Tag 03FD
-(lemma-cohomology-modules-abelian, comparison after forgetting scalars).
-
-Proof: Use the diagram of schemes D(i) times_S U and the cone c.pt times_S U, obtained
-by applying Over.map k, Over.pullback U.hom, and Over.forget U.left. Pullback preserves
-this limiting cone. Its transition maps are affine by base change. Each stage is qcqs:
-its map to affine U is qcqs by base change of D(i).hom followed by k, and composing with
-the structure map of affine U gives compactness and quasi-separatedness of the stage.
-Take F(i) to be the single complex in degree zero of the underlying abelian sheaf of
-the pullback of G along D(i) times_S U -> W. Take phi from the inverse-image composition
-isomorphism, so identity and composition hold by its unit and associativity coherence.
-The lower bound is zero. On the limit, take the constant diagram G' with value the
-single complex of the underlying abelian pullback of G. Inverse-image composition and
-forgetting scalars supply eG and its map equation hG. The identity cocone of this constant
-diagram is colimiting, since I opposite is nonempty and connected; this is L and hL.
-Take p=q and P to be exactly the derived-adjunction map displayed in hP.
-For eH and eB, free-module-sheaf adjunction identifies raw derived Hom out of the free
-sheaf of U with derived sections on the corresponding fibre product. An injective
-module resolution computes those sections after forgetting scalars, by the all-object
-abelian acyclicity in 03FD. It gives additive isomorphisms to the abelian cohomology of
-the degree-zero complexes. Derived adjunction is natural in the scheme morphism:
-expanding its unit and the pullback-composition, single-complex and shift comparisons
-gives the five factors of the fixed raw pullback. Hence hH and hB concern these exact
-maps, not an unspecified comparison. These explicit data supply the existential presentation.
-For negative q the same identification applies, with both degree-zero-complex
-cohomology groups zero. No continuity theorem is used to construct the presentation. -/
+(Stacks, Tags 09Z1, 0EZM and 03FD) -/
 theorem nonempty_higherDirectImageRaw_complex_presentation
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

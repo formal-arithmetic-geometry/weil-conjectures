@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Evaluation at one and the chain-level Koszul restriction comparison
 
-Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
+## References
+
+* Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
 -/
 
 @[expose] public section
@@ -30,33 +32,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Derived restriction and nested homology functors require extra elaboration steps.
 /-- Evaluation at one is natural and agrees with the fraction comparison on chain maps.
-The statement concerns chain maps into F; it does not identify arbitrary stage derived
-maps with Hom-complex homology, nor does it transport F to another derived object.
-Source: Stacks Project, Tag 09M1, first paragraph of the compact/perfect proof;
-Tags 08DC (Equation 36.9.4.1), 08DD (Proposition 36.9.5) and 08D1 (sign calculation).
-
-Proof: The extended tilde of A[0] is the structure sheaf in degree zero. Derived
-restriction takes it to the structure sheaf on U. Evaluation at one identifies its
-maps into any restricted E with H^0 of derived global sections on U. Restrict scalars
-along A to the ring of sections on U and use the derived sections composition iso
-and the homology comparison for restriction of scalars; these identify the underlying
-group with H^0(affineOpenSections(U).rightDerivedFunctor(E)). This constructs b.
-Evaluation commutes with postcomposition; the derived sections and homology comparisons
-are natural, giving the displayed naturality for every derived arrow.
-For t, transpose using the ordinary tilde/sections adjunction on complexes. Its Hom
-cochain evaluates on an ordered wedge indexed by J. The Koszul-to-Cech cocone restricts
-this value to D(product f_j), divides by that product to exponent e+1, and multiplies
-by (-1)^(pq+p(p-1)/2), p=card(J)-1 and q=-p. On each D(f_j), wedge multiplication
-by f_j^(-e-1) times the j-th generator contracts the full Koszul complex. It gives
-the inverse of the restricted tail augmentation. On multiple intersections the
-iterated contractions give the same wedge values divided by the product powers;
-the sign converting the Hom differential to the Cech differential is precisely the
-specified sign. Thus t composed with the inverse augmentation represents the Cech
-class of the cocone image of koszulOpenHomStageClass(t). Applying the Cech-to-derived
-sections map and H^0 proves the formula. The hypothesis on psi identifies it with
-this composite because the restricted augmentation is invertible. Homotopies change
-cycles by boundaries, so the equality holds in H^0. Empty covers yield zero Hom and
-section groups; the zero ring and F=0 require no separate nonvanishing hypothesis. -/
+The statement concerns chain maps into `F`; it does not identify arbitrary stage derived
+maps with Hom-complex homology. -/
 theorem koszulOpenHom_chain_evaluation
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

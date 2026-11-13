@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 
 /-! # Nonvanishing and local generation of an invertible module
 
-Source: Stacks Project, Modules, Lemma 01CY, proof at a stalk.
+## References
+
+* Stacks Project, Modules, Lemma 01CY.
 -/
 
 @[expose] public section
@@ -64,16 +66,7 @@ private theorem stalk_generator_bijective {X : Scheme.{u}} (M : X.Modules)
       ← PresheafOfModules.germ_smul (R := X.presheaf) M.val, ha]
 
 /-- A section of an invertible module has nonzero fibre value precisely where it is a
-local free generator.
-
-Source: Stacks Project, Modules, Lemma 01CY, proof at a stalk.
-
-Proof: choose a free generator `e` on a neighbourhood of `x`, and write `s = a • e` there.
-The induced stalk basis identifies the germ of `s` with the germ of `a` and identifies
-`𝔪_x M_x` with `𝔪_x`. Thus nonvanishing means that the germ of `a` is a unit of the local
-ring. This is equivalent to `x ∈ D(a)`. On `D(a)`, the coefficient is invertible, so `s`
-is a free generator. Conversely, if `s` is a free generator near `x`, comparison of its
-basis with `e` makes the germ of `a` a unit, so its class modulo `𝔪_x` is nonzero. -/
+local free generator (Stacks, Tag 01CY). -/
 theorem mem_nonvanishingLocus_iff_generatesAt {X : Scheme.{u}} (M : X.Modules)
     [M.IsInvertible] (s : Γ(M, ⊤)) (x : X) :
     x ∈ nonvanishingLocus M s ↔ GeneratesAt s x := by

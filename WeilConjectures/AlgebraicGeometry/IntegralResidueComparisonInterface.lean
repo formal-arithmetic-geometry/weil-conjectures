@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 
 /-! # Interface for coherent integral residue comparisons
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and associativity of derived coefficient change.
+## References
+
+* Bhatt–Scholze, Lemma 6.5.9(3).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -59,8 +61,8 @@ abbrev residueExchangeDerived
     exact leftDerivedUpperStarComp Λ f g
 
 /-- Pullback comparisons for actual derived reduction, compatible with composition.
-The data concern arbitrary schemes and morphisms, without constructibility or base change.
-Source: Bhatt--Scholze, Remark 6.8.15, and associativity of derived tensor. -/
+The data concern arbitrary schemes and morphisms, without constructibility or base change
+(Bhatt–Scholze, Remark 6.8.15). -/
 structure IntegralResiduePullComparisons where
   pull : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
     residueExchangeUpperStar (integralCoeff ℓ E) f ⋙ residueExchangeReduction ℓ E X ≅

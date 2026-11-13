@@ -92,16 +92,8 @@ private theorem zero_stage_of_cover
       simp only [Category.id_comp, Category.assoc, ← K.map_comp, ← op_comp]
       congr 2 }⟩⟩
 
-/-- Source: Stacks Project, Hypercoverings, 01GJ and 094K, degree zero.
-
-The degree-zero matching object of K is terminal over X. Thus its matching covering
-map makes K_0 surjective over X. Its affine opens have open images covering X, so
-compactness selects finitely many. Their disjoint union T is étale over X, and its
-map to K_0 gives the degree-zero refinement. Take N_0=T, with identity inclusion;
-the only surjection [0] to a retained degree is the identity, so this is a splitting.
-The finite affine pieces give finite_each_degree and the map to the terminal matching
-object is surjective. There are no nontrivial face or compatibility conditions in
-this degree, and the unique maps of [0] give the constant truncated functor. -/
+/-- A degree-zero finite replacement stage exists for any étale hypercover `K`
+(Stacks, Tags 01GJ, 094K). -/
 theorem exists_replacement_stage_zero
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K) :

@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # A linear presentation of ideal-power numerators
 
-Source: Stacks Project, Properties, Lemma 01PM, monomial construction in its proof.
+## References
+
+* Stacks Project, Tag 01PM
 -/
 
 @[expose] public section
@@ -56,25 +58,7 @@ private theorem span_generator_powers_bound
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible numerators give a surjective linear presentation of a power of the ideal.
-
-Source: Stacks Project, Properties, Lemma 01PM, paragraphs defining the exponent
-and assigning an image to each degree-d monomial; Lemma 01PQ, affine reduction.
-
-Proof: Put R=O_X(V), M=F(V), J=(g_i), and H=(g_i^k). The existing affine-power
-calculation proves that P_n is quasi-coherent and has section image J^n. We use
-the convenient, nonminimal exponent n=t*k+1. Induct on the number of generators:
-for no generators J^1=0; after adjoining g_0, the ideal inequality
-(A+B)^(k+(t*k+1)) <= A^k+B^(t*k+1), the singleton-power formula, and induction
-give J^n <= H. This uses Mathlib's sup_pow_add_le_pow_sup_pow and
-span_singleton_pow, so explicit monomial enumeration is unnecessary.
-Define E as the submodule of P_n(V) times M of pairs (b,m) satisfying
- g_i^k*m=j_n(b)*x_i for every i. Let p and q be its projections. Induction on
-membership in H shows that every r in H has such a numerator m: for r=g_l^k
-use x_l and the cross relation; extend using zero, addition, and scalar
-multiplication. Applying this to j_n(b) proves p surjective. The scalar identity
-for q is the defining equation of E. This construction works also for t=0,
-k=0, J=R, and the zero ring. The graph is an actual submodule defined by these
-linear equations; no data is chosen from an unproved existence theorem. -/
+(Stacks, Tags 01PM and 01PQ) -/
 theorem ideal_power_numerator_presentation
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] [I.IsQuasicoherent]

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # One local representative equation
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
+## References
+
+* [Stacks, Tag 09ZF]
 -/
 
 @[expose] public section
@@ -32,22 +34,8 @@ private lemma sheaf_restriction {S : Scheme.{u}}
   simp only [types_comp_apply] at hc
   exact hc.symm
 
-/-- A representative on one open gives the restriction of the transported section.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-
-Proof: The map from W to U times_X X' is pullback.lift phi W.ι hphi.
-Pull the representative s through the etale unit for h and restrict along this
-map. Apply beta's comparison-unit equation on W. Naturality of the etale unit
-moves this restriction through the unit for i' = pullback.snd i h. The two
-resulting fibre-product maps commute by hphi and pullback.condition. Use the
-unit-compatible composition comparison to identify their images with the
-pullback along Z' -> Z of the restriction of t. The assumption hs replaces
-i^*s by that restriction. Naturality of the comparison isomorphism then
-identifies the result with tH restricted to i'^{-1}W: tH was defined by the
-inverse of the top-section isomorphism. All arrows used in that isomorphism
-are the top/identity and pullbackComp identifications, so this last equality
-is functoriality, not a new choice of tH. No covering or gluing is used; for
-W empty the sheaf condition for the empty covering gives the same equality. -/
+/-- A representative on one open gives the restriction of the transported section
+(Stacks, Tag 09ZF). -/
 theorem gabber_h0_zariski_representative_equation
     {X Z U X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (q : U ⟶ X) [Etale q] (h : X' ⟶ X)

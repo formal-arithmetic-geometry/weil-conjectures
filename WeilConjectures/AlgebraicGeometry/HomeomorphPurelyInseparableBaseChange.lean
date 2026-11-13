@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebr
 /-!
 # Base change along a purely inseparable field extension
 
-Source:; Stacks Project, Tags 0BR5 and 04DF.
+## References
+
+* Stacks Project, Tags 0BR5 and 04DF.
 -/
 
 @[expose] public section
@@ -26,18 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Base change of a `k`-scheme along a purely inseparable field extension `K/k` induces
- a homeomorphism on the underlying topological spaces.
-Source: Stacks Project, Tags 0BR5 and 04DF.
-
-Proof:
-1. The map `π: Spec K ⟶ Spec k` induced by `algebraMap k K` is integral, universally injective and surjective because
-   `K/k` is purely inseparable.
-2. Such a morphism is a universal homeomorphism by Stacks, Tag 04DF. Thus every base change
-   of `π` is a homeomorphism on underlying spaces.
-3. Apply this to the structure morphism `X ↘ Spec k`.
-   By def-pc-base-change and def-pc-fibre-product, `X_K` is the pullback of this
-   structure morphism and `π`, and its canonical map to `X` is `pullback.fst`.
-   This is the projection in step 2, using symmetry of the two pullback factors. -/
+a homeomorphism on the underlying topological spaces. (Stacks, Tags 0BR5 and 04DF) -/
 theorem isHomeomorph_baseChange_of_isPurelyInseparable
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsPurelyInseparable k K]
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] :

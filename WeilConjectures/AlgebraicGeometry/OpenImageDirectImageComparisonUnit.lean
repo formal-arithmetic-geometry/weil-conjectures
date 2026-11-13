@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounit
 
 /-! # The ordinary open-image comparison and its unit
 
-Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
+## References
+
+* Stacks Project, Cohomology, Tags 08FE and 08BV.
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The ordinary open-image comparison, assembled from the fixed restriction
-and direct-image composition identifications.
-Source: Stacks Project, Tag 08FE. -/
+and direct-image composition identifications. (Stacks, Tag 08FE) -/
 @[irreducible]
 def schemeOpenImageDirectImageComparison {X Y : Scheme.{u}} (h : X ⟶ Y)
     (U : Y.Opens) :
@@ -141,18 +142,7 @@ private theorem unit_of_homotopy_counit
   exact he
 
 /-- The ordinary comparison carries the inverse-image-open unit to the open unit.
-Source: Stacks Project, Tags 08FE and 08BV.
-Proof: The existing underived open counit square is stated on homotopy
-categories. The generic unit_of_counit calculation applies the open adjunction
-Hom equivalences, counit naturality, and the two triangle identities to give
-its unit square there. Represent M by a complex concentrated in degree zero.
-The quotient formulas for mapped units and comparison isomorphisms express
-this square as equality of the images of two actual chain maps. Take a
-homotopy witnessing that equality. Both complexes have zero differentials,
-so its degree-zero equation is equality of the ordinary module maps. Finally
-expand only the five formal associator and whiskering factors constructing
-the comparison; their identity components cancel. This argument includes
-empty and full opens, identity h, and zero M without extra assumptions. -/
+(Stacks, Tags 08FE and 08BV) -/
 theorem schemeOpenImageDirectImageComparison_unit
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :

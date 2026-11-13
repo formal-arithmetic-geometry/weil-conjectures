@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # Realizing a resolution pairing in the derived category
 
-Source: Stacks Project, Section 20.31, Tags 0FKU and 0FKV.
+## References
+
+* Stacks Project, Section 20.31, Tags 0FKU and 0FKV.
 -/
 
 @[expose] public section
@@ -65,8 +67,7 @@ local instance cupRealizationDerivedMonoidal :
       (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))) :=
   inferInstance
 
-/-- Extend a nonnegative resolution to integer degrees by zero.
-Source: Stacks Project, Tag 0FKU. -/
+/-- Extend a nonnegative resolution to integer degrees by zero (Stacks, Tag 0FKU). -/
 abbrev CupAcyclicResolution.integerComplex {F : X.Modules} (D : CupAcyclicResolution F) :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ :=
   D.K.extend ComplexShape.embeddingUpNat

@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # ProEtaleModelTypePartition
 
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
+## References
+
+* Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -72,12 +74,8 @@ private theorem model_iso_on_overlap
     (Φ.over zN).sheafFiber.mapIso (sliceModelIso Λ F V N eN) ≪≫
     (Φ.over zN).sheafFiberConstantSheafIso N⟩
 
-/-- The loci of the isomorphism types of constant pro-etale local models are open.
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
-At a geometric point of a double overlap, both models identify with the same fiber,
-so they are isomorphic. For each fixed model, select the whole space on cover members
-of that type and the empty open on other members. These opens agree on overlaps and
-descend by fpqc open descent. Joint surjectivity proves that the descended opens cover. -/
+/-- The loci of the isomorphism types of constant pro-etale local models are open
+(Stacks, Tag 099Y). -/
 theorem proEtale_model_type_opens
     {X : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

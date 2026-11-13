@@ -14,11 +14,12 @@ import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeFiberTransitivity
 /-!
 # Descent of Galois-invariant closed subsets
 
-Source: Stacks Project, Varieties, Tag 038B, Lemma `lemma-closed-fixed-by-Galois`,
-and equation `equation-galois-action-base-change-kbar`.
-
 The base change is the chosen fibre product, with `pullback.fst` as its projection to `X`.
 The existing `specAlgEquivOver` and `baseChangeMap` give the contravariant Galois action.
+
+## References
+
+* [Stacks, Tag 038B]
 -/
 
 @[expose] public section
@@ -29,10 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The projection of a Galois field base change is a closed map.
-Source: Mathlib, integral morphisms and stability of universal closedness under base change.
-Proof: a Galois extension is algebraic, hence integral; its spectrum map is integral and
-universally closed, and universal closedness is preserved by base change. -/
+/-- The projection of a Galois field base change is a closed map. -/
 theorem isClosedMap_pullback_fst_of_isGalois
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] :
@@ -44,7 +42,8 @@ theorem isClosedMap_pullback_fst_of_isGalois
   exact (pullback.fst (X ↘ Spec (.of k))
     (Spec.map (CommRingCat.ofHom (algebraMap k K)))).isClosedMap
 
-/-- -/
+/-- A closed subset of the base change that is invariant under the Galois action is the
+preimage of a closed subset of `X` (Stacks, Tag 038B). -/
 theorem exists_closed_subset_of_galois_invariant
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     (X : Scheme.{u}) [X.Over (Spec (.of k))]

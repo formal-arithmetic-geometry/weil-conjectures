@@ -11,9 +11,13 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.PrincipalCechBicomplexComparison
 
-/-! # Finite-column bicomplex models for principal Čech maps
+/-!
+# Finite-column bicomplex models for principal Čech maps
 
-Source: Stacks, Tag 08D1; the finite Čech-degree filtration in Tag 08C2.
+## References
+
+* Stacks Project, Tag 08D1, <https://stacks.math.columbia.edu/tag/08D1>
+* Stacks Project, Tag 08C2, <https://stacks.math.columbia.edu/tag/08C2>
 -/
 
 @[expose] public section
@@ -24,34 +28,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A principal Čech map is a total map of bicomplexes supported in columns 0..,r-1.
+/-- A principal Čech map is a total map of bicomplexes supported in columns `0..,r-1`.
 Column quasi-isomorphisms require only the section quasi-isomorphisms on intersections.
-No quasi-coherence, K-injectivity or quasi-isomorphism assumption is made on i itself.
-Source: Stacks, Tag 08D1, and the finite Čech-degree filtration used in Tag 08C2.
-
-Proof:
-1. In column p, for 0 ≤ p < r, take the finite product of section complexes on D(f_S)
-   over subsets S of cardinality p+1. Outside that interval use the zero complex.
-   Horizontal maps are alternating sums of restrictions, with the sign determined by
-   the position of the deleted index. Vertical maps are the coefficient differentials.
-   Two deletions cancel in pairs. Restrictions commute with coefficient differentials,
-   so these are commuting double complexes K and L; apply i componentwise to obtain φ.
-2. The absent columns give the stated strict support bounds. Module categories have
-   all coproducts, so K and L have totals. Each column map is the finite product of the
-   section maps. Products of modules are exact, so the intersection hypothesis makes
-   every retained column map a quasi-isomorphism. Outside the interval the map is zero
-   between zero complexes and is also a quasi-isomorphism.
-3. In total degree n, send the summand indexed by (p,n-p) to the coordinates indexed
-   by subsets of cardinality p+1 in principalCechTerms. The inverse groups coordinates
-   by their cardinalities. Only r columns can be nonzero, so the categorical diagonal
-   coproduct and the displayed finite coordinate product agree. The total differential
-   is horizontal restriction plus (-1)^p times the vertical differential, exactly
-   principalCechDifferentialValue. Thus these degreewise identifications are chain
-   isomorphisms. The componentwise equation from principalCechFunctor_exists shows
-   that they intertwine the two maps. Compose with principalCechObjIso to obtain the
-   arrow isomorphism below. For r=0 all columns and all coordinates are zero; for r=1
-   only the singleton row occurs. Empty intersections contribute zero section modules.
-   This construction uses no boundedness in the coefficient-complex degree. -/
+No quasi-coherence, K-injectivity or quasi-isomorphism assumption is made on `i` itself
+(Stacks, Tags 08D1 and 08C2). -/
 theorem principalCech_finiteColumn_model
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (F G : CochainComplex

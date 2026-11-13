@@ -17,7 +17,14 @@ import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 /-!
 # Integral closure of a one-dimensional Noetherian domain
 
-Source: literature/stacks-project/algebra.tex, Algebra Lemma 09IG.
+## Implementation details
+
+Mathlib's Dedekind predicate permits dimension zero, so dimension one is stated
+separately.
+
+## References
+
+* Stacks Project, Algebra, Lemma 09IG.
 -/
 
 @[expose] public section
@@ -126,30 +133,7 @@ private theorem finite_residueFieldMap_of_nonzero_comap
 
 /-- The integral closure of a one-dimensional Noetherian domain in a finite field
 extension is Dedekind, and its spectrum maps surjectively with finite fibres and
-finite residue-field extensions (Stacks, Algebra Lemma 09IG).
-
-Proof (Stacks, Algebra Lemma 09IG, `lemma-integral-closure-Dedekind`):
-1. Since `A ⊆ C ⊆ L`, Krull--Akizuki gives Noetherianity of `C`.
-2. The integral injective inclusion preserves dimension, giving `dim C = 1`. The integral closure is a
-   normal domain with fraction field `L`, hence is Dedekind.
-3. Lying over for the integral injective inclusion gives surjectivity on spectra.
-4. At each nonzero prime of `A`, dimension one gives maximality, and Mathlib's
-   `IsDedekindDomain.primesOver_finite` gives finitely many primes of `C` above it.
-   Mathlib's `Ideal.eq_bot_of_comap_eq_bot` leaves only the zero ideal in the
-   fibre over zero.
-5. For a closed prime `q` of `C` above `p`, choose nonzero `a ∈ p`. A finite
-   `K`-basis of `L` embeds `C` as an `A`-submodule of a finite power of `K`.
-   The global finite-length lemma (Stacks Tag 00PF,
-   `lem-sc-finite-length-global-submodule`) gives finite length of `C/aC`.
-   The surjection `C → κ(q)` factors through `C/aC`, hence `κ(q)` is finite
-   over `A`, and therefore over `κ(p)` via the canonical residue-field map.
-   At zero, the residue fields are fraction fields; their map is conjugate to
-   the given finite extension `K → L`. The canonical stalk isomorphisms
-   identify these ideal residue-field maps with the scheme residue-field maps.
-
-Mathlib's Dedekind predicate permits dimension zero, so dimension one is stated
-separately to retain the node's convention.
--/
+finite residue-field extensions (Stacks, Algebra Lemma 09IG). -/
 theorem integralClosure_isDedekind_surjective_finite_fibres
     (A L : Type u) (K : Type v) [CommRing A] [IsDomain A] [Field K] [Field L]
     [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L]

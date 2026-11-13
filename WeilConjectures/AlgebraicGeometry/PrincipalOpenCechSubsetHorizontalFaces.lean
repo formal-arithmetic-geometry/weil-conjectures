@@ -10,9 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetRowReassembly
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaceCoordinate
 
-/-! # Ordered horizontal faces of a single principal-open subset
+/-!
+# Ordered horizontal faces of a single principal-open subset
 
-Source: Stacks Project, Tags 08C1, 08C0, and 01FG.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 08C0, <https://stacks.math.columbia.edu/tag/08C0>
+* Stacks Project, Tag 01FG, <https://stacks.math.columbia.edu/tag/01FG>
 -/
 
 @[expose] public section
@@ -25,25 +30,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance] Classical.propDecidable
 
-/-- Ordered face calculation for one supported tuple, followed by total inclusion.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1) (Tag 08C0), and
-Tag 01FG, ordered-complex differential preceding Definition 20.23.2.
-
-Proof: At a target increasing tuple t, expand alternatingCechDifferential as the
-sum of restrictions from faces obtained by deleting each position k. The supported
-source tuple vanishes unless the face has range S₀. Increasing order embeddings
-with the same range agree. Identify each target tuple with the increasing
-enumeration of its range T. The position of j in this enumeration is the number
-of elements of T smaller than j, giving the exponent in the statement.
-Presheaf functoriality and naturality of overFunctorEquiv move section transport
-past each face restriction; the open maps agree because opens form a thin category.
-The supplied degree equality identifies the source coefficient with J.X q in
-precisely the nonzero terms. Reassemble the target tuple product, apply the inverse
-extension isomorphism, and include bidegree (p+1,q) in the total. Other subset
-cardinalities have zero coefficients because their deleted subset cannot equal S₀.
-For singleton targets every deletion is empty and contributes zero. For r=0 there
-is no nonempty source subset, so the assertion is vacuous. -/
+/-- Ordered face calculation for one supported tuple, followed by total inclusion
+(Stacks, Tags 08C1, 08C0 and 01FG). -/
 theorem principalSubsetHorizontalFaces
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :

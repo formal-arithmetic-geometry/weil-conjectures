@@ -26,10 +26,7 @@ namespace CategoryTheory
 finite constant objects in successive higher degrees. A step records the rotated
 triangle `K → L → S(M)[-(a+n)] → K[1]`, where `L` has the shorter tower.
 No chain complex representing the tower, or chain representative of its boundary,
-is part of these data.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094G, the induction through
-`lemma-locally-constant`'s triangle, before the last differential is constructed. -/
+is part of these data. (Stacks, Tag 094G.) -/
 inductive FiniteConstantExtensionTower
     {B : Type u} [CommRing B]
     {A : Type z} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]

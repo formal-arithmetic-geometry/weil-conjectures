@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Fin
 /-!
 # Repleteness of the pro-étale topos
 
-Source:;
-Bhatt–Scholze, *The pro-étale topology*, Proposition 4.2.8.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology*, Proposition 4.2.8.
 -/
 
 @[expose] public section
@@ -24,25 +25,9 @@ universe u w
 
 namespace AlgebraicGeometry.Scheme
 
-/-- **Repleteness of the pro-étale topos**. For every scheme, the topos of set-valued sheaves on its
-small pro-étale site is replete: inverse sequences with epimorphic transition maps have
-epimorphic limit projections at every natural-number index.
-
-Proof:
-1. Fix an inverse sequence `F` with epimorphic adjacent maps and an index `m`.
-   By `det-pe-replete-definition` and the local-surjectivity criterion
-   `lem-weil-pbc-site-sheaf-sets-epi-locally-surjective`, it suffices to lift each
-   section `y` of `F_m` over an arbitrary site object `U` after a covering of `U`.
-2. By `ProEt.exists_isWContractibleRing_cover`, cover `U` by affines `W_i ≅ Spec D_i` with
-   each `D_i` w-contractible; `isWeaklyContractible_of_iso` makes each `W_i` weakly
-   contractible. This applies to arbitrary `U`, without quasi-compactness assumptions.
-3. Apply `det-pe-replete-on-contractible` to the original sequence and each `W_i`.
-   The map on sections of the limit projection at `m` is surjective there, so the
-   restriction of `y` lifts to a section of the limit over `W_i`.
-4. These separate lifts make the projection locally surjective, hence epimorphic by
-   `lem-weil-pbc-site-sheaf-sets-epi-locally-surjective`. No compatibility on overlaps
-   is required. Since the sequence and `m` were arbitrary, the topos is replete.
--/
+/-- **Repleteness of the pro-étale topos**. For every scheme, the topos of set-valued sheaves
+on its small pro-étale site is replete: inverse sequences with epimorphic transition maps have
+epimorphic limit projections at every natural-number index. -/
 theorem isReplete_proEtale (X : Scheme.{u}) :
     CategoryTheory.GrothendieckTopology.IsReplete.{u + 1, u, w} (ProEt.topology X) := by
   intro F hF m

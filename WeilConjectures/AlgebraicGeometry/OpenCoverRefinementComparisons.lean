@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackCompariso
 
 /-! # Explicit comparison bundle for refinement of pulled-back open charts
 
-Source: Stacks Project, Tags 0095 and 0096; canonical comparisons in
-lem-pc-open-cover-map-lift-transport.
+## References
+
+* [Stacks, Tag 0095], [Stacks, Tag 0096]
 -/
 
 @[expose] public section
@@ -24,11 +25,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The five explicit comparison isomorphisms for a chart refinement.
-This names real constructions from pullback composition, congruence and the
-existing tensor comparisons, so that proofs can share their kernel expressions.
-Source: Stacks Project, Tags 0095 and 0096; the refinement comparison step of
-lem-pc-open-cover-map-lift-transport. -/
+/-- The five explicit comparison isomorphisms for a chart refinement, built from pullback
+composition, congruence and the tensor comparisons (Stacks, Tags 0095, 0096). -/
 noncomputable def openCoverRefinementComparisons
     {X Y Z W : Scheme.{u}} (q : Y ⟶ X) (v : Z ⟶ X) (h : W ⟶ X)
     (pk : W ⟶ Y) (pl : W ⟶ Z) (wk : pk ≫ q = h) (wl : pl ≫ v = h)

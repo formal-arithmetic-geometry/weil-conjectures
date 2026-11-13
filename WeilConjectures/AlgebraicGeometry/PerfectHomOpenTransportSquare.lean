@@ -15,7 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 
 /-! # The cartesian open square commutes with pullback Hom transport
 
-Source: Stacks Project, Cohomology, Tag 0D5S; perfect.tex, Tag 09RE.
+## References
+
+* Stacks Project, Cohomology, Tag 0D5S; Tag 09RE.
 -/
 
 @[expose] public section
@@ -103,21 +105,8 @@ end TransportCalculations
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Open restriction commutes with transport along any morphism over the base.
-Source: Stacks Project, Cohomology, Tag 0D5S; perfect.tex, Tag 09RE.
-
-Proof: Substitute the supplied equations for κ. The two composites of cartesian
-arrows from B x_S T' to Y x_S T agree:
-check their first and second projections using pullback.hom_ext. Paste the
-counit-pinned composition comparisons for these arrows and their projections.
-The associativity equation of exists_derivedPullbackComposition equates the two
-pasted comparisons; naturality of sigma, the mate of the identity on the open
-right adjoint, equates their final whiskered factors. Apply both comparisons at
-M and Q. Pullback of f is natural with respect to their components. Expanding
-the two conjugated Hom maps, cancel adjacent inverse and forward components.
-The remaining composites are the two sides below. This is an identity of the
-canonical maps and does not assert bijectivity of pullback. It remains valid
-for empty opens, identity arrows and zero objects. -/
+/-- Open restriction commutes with transport along any morphism over the base
+(Stacks, Tags 0D5S and 09RE). -/
 theorem perfect_hom_open_transport_square
     {S Y : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens)
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}

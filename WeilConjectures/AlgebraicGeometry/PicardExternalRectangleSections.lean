@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The canonical external section map on a rectangle
 
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
+## References
+
+* Stacks Project, Varieties, Tag 0BED
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- Pull a section back and restrict it to an open lying above its domain.
-Source: Stacks Project, Tag 0096. -/
+/-- Pull a section back and restrict it to an open lying above its domain. -/
 def picardPullbackScalarSection
     (f : X ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (F : X.Modules)
     (U : X.Opens) (W : Y.Opens) (hWU : W ≤ a ⁻¹ᵁ U) :
@@ -38,8 +39,7 @@ def picardPullbackScalarSection
   (scalarRestriction (a ≫ f) ((tensorPullback a).obj F)
     (homOfLE hWU).op).hom.comp (scalarUnitSection f a F U)
 
-/-- Tensor the two projection pullbacks of sections, restricted to their rectangle.
-Source: Stacks Project, Tag 0BED. -/
+/-- Tensor the two projection pullbacks of sections, restricted to their rectangle. -/
 def picardExternalRectangleBilinear
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (F : X.Modules) (G : Y.Modules) :
@@ -67,8 +67,7 @@ def picardExternalRectangleBilinear
         congrArg (fun a ↦ scalarMap a W r) pullback.condition.symm]
       exact tmulSection_smul _ _ _)
 
-/-- The explicit external product map from tensor products of scalar section modules.
-Source: Stacks Project, Tag 0BED. -/
+/-- The explicit external product map from tensor products of scalar section modules. -/
 def picardExternalRectangleSectionsMap
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (F : X.Modules) (G : Y.Modules) :
@@ -86,12 +85,7 @@ def picardExternalRectangleSectionsMap
       (op (pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V)))
     (TensorProduct.lift (picardExternalRectangleBilinear f g U V F G))
 
-/-- The canonical rectangle map commutes with coefficient morphisms on the first factor.
-Source: Stacks Project, Tag 0BED.
-
-Proof: On pure tensors the left projection unit is natural in F, its restriction
-commutes with the pulled-back morphism, and tensoring sections is natural. These
-identities extend to the entire tensor product by linearity. -/
+/-- The canonical rectangle map commutes with coefficient morphisms on the first factor. -/
 theorem picardExternalRectangleSectionsMap_naturality
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) {F F' : X.Modules} (a : F ⟶ F') (G : Y.Modules) :
@@ -133,23 +127,8 @@ theorem picardExternalRectangleSectionsMap_naturality
         pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V ≤ pullback.fst f g ⁻¹ᵁ U)).op z)
       hv)).symm
 
-/-- On an affine rectangle the canonical external section map is bijective.
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; Schemes, Tags 01I4,
-01JQ, 01IA; Modules, Tag 01BG.
-
-Proof: Set A = Gamma(X,U), B = Gamma(Y,V), M = Gamma(F,U), N = Gamma(G,V).
-The rectangle is affine, with ring C = A tensor_k B, by the affine fibre-product
-formula applied to the open subschemes U and V. Affine pullback sections identify
-the two projection-pullback section modules with M tensor_A C and N tensor_B C.
-These pullbacks are quasi-coherent, so the affine tensor-sections comparison is
-bijective. The algebraic identity (M tensor_A C) tensor_C (N tensor_B C)
-is M tensor_k N: its inverse sends m tensor n to (m tensor 1) tensor (n tensor 1).
-The balancing relations and tensor induction verify both inverse identities.
-Compose this inverse with the affine pullback comparisons and the tensor-sections
-map. Their pure-tensor formulas identify the composite with the displayed canonical
-map, which therefore is bijective. Restrict scalars to k throughout. Empty opens
-have zero coordinate rings and section modules, so the identities also prove the
-claim for empty rectangles. Zero coefficients give zero on both sides. -/
+/-- On an affine rectangle the canonical external section map is bijective
+(Stacks, Tag 0BED). -/
 theorem picardExternalRectangleSectionsMap_bijective
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)

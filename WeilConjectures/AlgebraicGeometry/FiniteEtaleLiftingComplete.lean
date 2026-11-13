@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AlgebraizeFiniteOverProper
 /-!
 # Lifting finite étale covers over a complete Noetherian base
 
-Source: Stacks Project, Fundamental Groups, Tag 0GS2, essential-surjectivity proof,
-complete Noetherian case.
+## References
+
+* Stacks Project, Tag 0GS2
 -/
 
 @[expose] public section
@@ -47,28 +48,7 @@ private theorem transport_closed_fibre_iso
 
 /-- Every finite étale cover of the closed fibre of a proper scheme over an `I`-adically
 complete Noetherian ring lifts to a finite étale cover of the scheme.
-Source: Stacks Project, Tag 0GS2, complete Noetherian essential-surjectivity paragraph.
-
-Proof:
-1. Put `S_n = Spec (A / I^(n+1))` and `Y_n = Y ×_S S_n`. For `m ≤ n`, the quotient ideal
-   defining `Y_m → Y_n` is nilpotent; this is a surjective closed immersion, hence a universal
-   homeomorphism.
-2. Topological invariance lifts `V` inductively to étale schemes `V_n` over `Y_n` with
-   cartesian transition squares.
-3. Each `V_n → Y_n` is finite, since its restriction to the finite-order thickening `Y_0`
-   is finite.
-4. The morphism `V → Spec (A/I)` is proper: `Y_0` is proper by base change and `V → Y_0`
-   is finite.
-5. Algebraize the compatible finite morphisms to a finite `g: U → Y` with each restriction
-   isomorphic to `V_n`; `U` is proper over `Spec A`.
-6. `Y` is locally Noetherian and `g` is of finite type. Since all infinitesimal restrictions
-   are étale, `g` is étale on an open `W` containing the inverse image of `Y_0`.
-7. For every `u: U`, the proper image of its closure is a nonempty closed subset of
-   `Spec A`. Since `I` lies in the Jacobson radical, this image contains a maximal ideal
-   containing `I`. Thus `u` specializes to
-   a point over `Y_0`, which lies in `W`. Openness implies `u ∈ W`; hence `W = U`.
-8. Consequently `g` is finite and étale, and its restriction is isomorphic to `V` over `Y_0`.
-No additional henselian hypothesis is needed. -/
+(Stacks, Tag 0GS2.) -/
 theorem Scheme.exists_finiteEtale_lift_of_isAdicComplete
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

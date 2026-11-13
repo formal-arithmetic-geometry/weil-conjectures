@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 
 /-! # Quotients of formal systems remain adic
 
-Source: Stacks Project, Tag 088A, the systems F_n/K^e F_n.
+## References
+
+* [Stacks Project, Tag 088A](https://stacks.math.columbia.edu/tag/088A)
 -/
 
 @[expose] public section
@@ -31,17 +33,7 @@ private theorem quotientProjection_map {X : Scheme.{u}} (J : X.IdealSheafData)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Termwise K-quotients of an I-adic coherent system are I-adic.
-Source: Stacks Project, Tag 088A, construction of G_e.
-
-Proof: Each term is a coherent quotient by the coherent completion construction.
-The I-power product of the quotient is zero: precomposing its multiplication with
-the epimorphic K-quotient projection reduces this to the original I-annihilation.
-Interchange the I and K quotients using the canonical double-quotient comparison,
-then apply the K-quotient functor to the original I-adic transition isomorphism.
-The projection identity of the comparison and the original transition identity,
-after cancellation of the K-quotient projection, identify the resulting map with
-the actual transition. -/
+/-- Termwise K-quotients of an I-adic coherent system are I-adic (Stacks, Tag 088A). -/
 theorem formalSecondIdealQuotient_coherent
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) (e : ℕ) :

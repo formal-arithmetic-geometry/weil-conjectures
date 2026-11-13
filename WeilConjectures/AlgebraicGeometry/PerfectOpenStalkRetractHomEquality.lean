@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Local equality of morphisms from finite free retracts
 
-Source: Stacks Project, Tag 01CP, finite-type injectivity argument.
+## References
+
+* Stacks Project, Tags 01CP and 09RE.
 -/
 
 @[expose] public section
@@ -26,22 +28,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Maps from a restricted finite free retract to any module sheaf agree nearby
-if their maps on the open module stalk agree.
-
-Source: Stacks Project, Tag 01CP, injectivity for a finite-type source;
-Tag 09RE, finite-presentation calculation.
-
-Proof: Restrict the inclusion and projection exhibiting M as a retract to W.
-Precompose a and b with the projection from the restricted finite free sheaf.
-Their stalks agree by functoriality. Evaluate on each of its finitely many free
-basis sections. The two resulting sections of N have equal germs. The germ
-criterion gives a neighbourhood for each equality; intersect these finitely
-many neighbourhoods inside W. The two maps from the free sheaf agree there
-by their basis values. Precompose with the restricted inclusion and use the
-splitting identity to obtain equality of a and b. The equivalence between the
-slice site and the open subscheme identifies these germs with the specified
-open module stalks; restriction of scalars is faithful. No finiteness of N is
-used. For rank zero the retract is zero and both maps are uniquely zero. -/
+if their maps on the open module stalk agree (Stacks, Tags 01CP and 09RE). -/
 theorem exists_open_stalk_retract_hom_eq
     (X : Scheme.{u}) (U W : X.Opens) (hWU : W ≤ U)
     (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

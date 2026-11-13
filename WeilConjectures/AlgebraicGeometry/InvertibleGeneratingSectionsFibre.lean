@@ -15,7 +15,9 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 /-!
 # The fibre criterion for generating an invertible module
 
-Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2).
+## References
+
+* Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H.
 -/
 
 @[expose] public section
@@ -69,21 +71,7 @@ private lemma rankOne_span_iff {R M I : Type*} [CommRing R] [IsLocalRing R]
 one has nonzero residue-field value, equivalently their nonvanishing loci cover the scheme.
 The value is nonzero exactly when the germ lies outside the maximal ideal times the stalk,
 which is the definition of `nonvanishingLocus`. Compatible sections in `L.sections` are
-identified with global sections by evaluation at the terminal open `⊤`.
-
-Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2).
-
-Proof:
-1. `generating_sections_iff_stalk_span` identifies epimorphy of the free-sheaf map
-with the germs spanning each stalk.
-2. `invertible_stalk_linearEquiv` identifies each stalk with its local ring, using
-local triviality and the bijectivity of multiplication by a local free generator.
-3. Under this equivalence, the maximal ideal times the stalk corresponds to the
-maximal ideal of the ring. If every germ lies there, its span cannot contain 1.
-If one germ lies outside, its coordinate is a unit and every stalk element is a
-scalar multiple of that germ. Thus the germs span exactly when one is nonvanishing.
-4. Apply this equivalence at every point, then rewrite membership in the union to
-obtain the coverage criterion. -/
+identified with global sections by evaluation at the terminal open `⊤`. -/
 theorem invertible_generating_sections_fibre_criterion (Y : Scheme.{u}) (L : Y.Modules)
     [L.IsInvertible] (n : ℕ) (s : ULift.{u} (Fin (n + 1)) → L.sections) :
     (Epi (L.freeHomEquiv.symm s) ↔

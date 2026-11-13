@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 
 /-! # Existence of presheaf scalar extension in larger universes
 
-Source: Stacks Project, Sheaves on Spaces, Tag 0096; Mathlib's presheaf pullback construction.
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section
@@ -234,22 +236,8 @@ private noncomputable def extensionHomEquiv (N : PresheafOfModules.{max u v} R.o
 end PresheafExtension
 
 /-- Restriction from R-module presheaves to constant-ring module presheaves has a
-left adjoint, also when the modules live in a universe larger than the site.
-
-Source: Stacks Project, Sheaves on Spaces, Tag 0096; Mathlib presheaf pullback construction.
-
-Proof: for each open U, form R(U) tensor over k with the sections of the input
-presheaf. For a possibly noncommutative R(U), the right k-action is
-r · c = r α_U(c), and the left R(U)-action is left multiplication. The restriction
-maps send r tensor m to r restricted tensor m restricted. The balanced relations
-are respected because α is natural. A map out of this presheaf is determined by
-its values on 1 tensor m. Conversely a natural k-linear map to scalar restriction
-extends uniquely by r tensor m mapping to r times the image of m. These are
-inverse natural hom bijections and give the adjunction. Tensor products and
-sectionwise quotients stay in Type (max u v), since the rings and the site are
-u-small. This proves the existence without a field hypothesis, and includes the
-zero ring and empty space. The adjunction determines the extension functor up
-to unique natural isomorphism; no arbitrary algebraic object is chosen. -/
+left adjoint, also when the modules live in a universe larger than the site
+(Stacks, Tag 0096). -/
 theorem fieldScalarPresheafPullback_isRightAdjoint
     {k : Type u} [Ring k] (X : TopCat.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})

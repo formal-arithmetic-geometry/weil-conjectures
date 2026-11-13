@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCohDegree
 
 /-! # Quasi-coherent cohomology of pseudo-coherent complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08E5,
-invoked in the first sentence of the proof of Tag 08EE.
+## References
+
+* [Stacks, Tag 08E5] (Derived Categories of Schemes), [Stacks, Tag 08EE]
 -/
 
 @[expose] public section
@@ -24,17 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Every pseudo-coherent object of `D(𝒪_Y)` has quasi-coherent cohomology in every degree.
-Source: Stacks Project, Tag 08E5, invoked in the proof of Tag 08EE.
-
-Proof: By `def-pur-pseudo-coherent-complex`, each point has an open neighbourhood on which
-`E` is represented by a bounded-above complex of finite free modules. Its cohomology sheaves
-identify with the restrictions of those of `E`. The terms are quasi-coherent by
-`pqf-def-coherent`: on an affine open they are associated to finite free modules. The kernel
-of each differential is quasi-coherent by `lem-weil-pbc-quasi-coherent-module-kernel`.
-Its quotient by the preceding differential's image is quasi-coherent by
-`lem-weil-pbc-quasi-coherent-module-cokernel-image`; this quotient is the cohomology sheaf.
-Quasi-coherence is local by `pqf-def-coherent`, so every cohomology sheaf of `E` is
-quasi-coherent. This is membership in `D_QCoh(𝒪_Y)` by `def-pc-derived-category`. -/
+(Stacks, Tag 08E5) -/
 theorem schemeDerivedQCohProperty_of_isPseudoCoherent (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-!
 # A global complete intersection has the expected dimension at every point
 
-Source: literature/stacks-project/algebra.tex, Algebra, Section 00S8.
+## References
+
+* Stacks Project, Tag 00S8 and the following paragraph.
 -/
 
 @[expose] public section
@@ -26,44 +28,9 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- A nonzero quotient of a polynomial ring over a field by `t` equations whose
-spectrum has dimension `m - t` has that local dimension at every prime.
-
-Source: literature/stacks-project/algebra.tex, Algebra, Section 00S8, the paragraph
-following Definition 00S9 (lines 35834--35849), using Lemma 00OT.
-
-The conjunct `t ≤ m` in `hDim` expresses the nonnegativity forced by the
-integer equality `dim T = m - t` for a nonzero ring; it prevents natural
-subtraction from admitting presentations with more equations than variables.
-
-Proof (the five blueprint steps):
-1. Put `J = Ideal.span (Set.range f)`, `T = Q / J`, and `X = Spec T`.
-   The quotient is finite type over `k`,
-   and `Q` is Noetherian.
-   Nontriviality gives a maximal ideal, so `X` is nonempty and its dimension
-   is nonnegative.
-2. The whole spectrum is an open neighbourhood of any prime `p`. The infimum
-   defining `topologicalKrullDimAt`
-   therefore gives the upper bound `dim_p X ≤ dim X = m - t`.
-3. Write an open neighbourhood `U` of `p` as the complement of `V(I)`, and choose
-   `g ∈ I` outside `p`. The Jacobson property of the finite-type algebra
-   supplies a maximal ideal `M` containing `p` and avoiding `g`, hence in `U`.
-4. Pull `M` back to a maximal ideal `M'` of `Q`. Its localization has dimension
-   `m`.
-   Localization dimensions are heights, and the
-   Noetherian height bound for the `t` generators of `J` gives
-   `m ≤ dim T_M + t`, thus `dim T_M ≥ m - t`.
-5. Since `M ∈ U`, `dim U ≥ dim_M X`. The dimension at a closed point equals
-   that of its local ring,
-   so step 4 gives `dim U ≥ m - t`. Taking the infimum over all `U` gives
-   the lower bound at `p`; combine it with step 2.
--/
-/- Lower bound on local dimensions for a nonzero polynomial quotient by equations.
-
-Source: literature/stacks-project/algebra.tex, Algebra, Section 00S8, the paragraph
-following Definition 00S9 (lines 35834--35849), via the Jacobson closed-point argument
-and the height bound for the generators.
--/
+/-- A nonzero quotient of a polynomial ring in `m` variables over a field by `t ≤ m` equations
+has local dimension at least `m - t` at every prime (Stacks, Tag 00S8). -/
+/- Lower bound on local dimensions. -/
 theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound
     (k : Type u) [Field k] (m t : ℕ)
     (f : Fin t → MvPolynomial (Fin m) k)
@@ -104,7 +71,8 @@ theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound
   have harith : m - t ≤ m - d' + d := by omega
   exact_mod_cast harith
 
-/-- -/
+/-- A nonzero quotient of a polynomial ring in `m` variables over a field by `t` equations whose
+spectrum has dimension `m - t` (with `t ≤ m`) has local dimension `m - t` at every prime. -/
 theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq
     (k : Type u) [Field k] (m t : ℕ)
     (f : Fin t → MvPolynomial (Fin m) k)

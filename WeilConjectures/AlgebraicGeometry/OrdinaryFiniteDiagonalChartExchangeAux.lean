@@ -110,13 +110,10 @@ theorem ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap
       g.assign (← Lean.Meta.mkAppM ``eq_of_heq #[h])
     Lean.Elab.Tactic.replaceMainGoal []
 
-/-- Expand the recorded diagonal chart map and its chart transport. The resulting four factors are
+/-- Expand the recorded diagonal chart map and its chart transport into four factors:
 direct image of the adjunction unit, the direct-image composition comparison, the equality
-comparison and direct image of the shifted coefficient comparison. Expand the generic chart
-coefficient map to the same four factors. The recorded ordinary adjunction is the canonical
-derived adjunction by its defining equation, and the recorded ordinary pullback and pushforward
-are the canonical derived functors. Replacing these aliases identifies each factor; composition
-congruence gives the equality. No projective-line trace or triangle identity is used. -/
+comparison and direct image of the shifted coefficient comparison. These are the same four
+factors as in the generic chart coefficient map. -/
 theorem ordinaryFiniteDiagonalChartMap_eq_generic (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :

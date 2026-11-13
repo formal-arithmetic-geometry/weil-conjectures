@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
 /-!
 
 # The supported diagonal unit and its two triangles
-
-Source:
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import Mathlib.Topology.Connected.Clopen
 
 /-! # A reference bundle has fixed rank near a base point
 
-Source: Stacks Project, Tag 0BDP, first proof paragraph.
+## References
+
+* Stacks Project, Tag 0BDP
 -/
 
 @[expose] public section
@@ -73,22 +75,7 @@ private theorem fibre_connected {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- The universal structure-sheaf unit gives surjectivity and a neighbourhood on which
 all base changes of the reference bundle have one rank. No direct image of a second
-bundle and no derived complex occurs in this statement.
-Source: Stacks Project, Tag 0BDP, first proof paragraph.
-
-Proof: Apply the structure-sheaf unit to Spec of each residue field and take global
-sections. Its target is the field, so the fibre cannot be empty. A disconnected fibre
-has a nontrivial idempotent global function, impossible in that field. Thus f is
-surjective and its fibres are connected. Local trivializations give a locally constant
-rank function on X, constant on every fibre. Choose the rank r of the fibre over s.
-The rank-r fibre locus is clopen by picardFiberRank_clopen and contains s. Take its
-open subscheme U. Tensor pullback has rank r exactly when the images of all source
-points lie in the local rank-r locus. For a point of any X_T with T mapping to U,
-the residue-field fibre over its image contains a point mapping to the same point of X,
-by the range formula for pullback.fst. Since this fibre has rank r, that X-point lies
-in the local rank-r locus. The criterion gives the asserted condition on X_T.
-Empty T has an empty
-pullback, where every rank condition holds. The argument also applies to r=0. -/
+bundle and no derived complex occurs in this statement (Stacks, Tag 0BDP). -/
 theorem exists_picardReferenceRankNeighbourhood
     {X S : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFibreSectionsTensor
 /-!
 # Affine fibre rings over a discrete valuation ring
 
-Source: Stacks Project, Tag 055J, proof, affine fibre identifications.
+## References
+
+* [Stacks, Tag 055J]
 -/
 
 @[expose] public section
@@ -27,21 +29,8 @@ open CategoryTheory IsLocalRing
 namespace AlgebraicGeometry
 
 /-- The generic fibre over an affine open has its localization ring, compatibly with
-restriction, and the reduced closed fibre makes the uniformizer quotient reduced.
-
-Source: Stacks Project, Tag 055J, proof, the identifications of the affine fibre rings.
-Proof: Put A = Γ(X,U) and let ρ: R → A be induced by f. The affine fibre-product
-formula identifies the preimage of U in each scheme-theoretic fibre with
-Spec(κ(p) ⊗[R] A), compatibly with the map a ↦ 1 ⊗ a. For the zero prime of a DVR,
-κ(0) is its fraction field. Every nonzero r ∈ R is a unit times a power of the
-uniformizer π, so this field is R[1/π]. Base change of localization identifies
-κ(0) ⊗[R] A with A[1/ρ(π)], compatibly with A. Composing these canonical
-identifications with the spectrum global-sections isomorphism gives ε and its
-displayed equation. For the closed point, κ(m) = R/m = R/(π). Tensoring this
-quotient with A gives A/ρ(π)A. The corresponding affine fibre is an open subscheme
-of the assumed reduced closed fibre, hence its ring of sections, and therefore
-A/ρ(π)A, is reduced. No flatness, connectedness, nonemptiness or finiteness is
-needed for these ring identifications. If U is empty, all three rings are zero. -/
+restriction, and the reduced closed fibre makes the uniformizer quotient reduced
+(Stacks, Tag 055J). -/
 theorem generic_fibre_affine_ring_models {R : Type u} [CommRing R] [IsDomain R]
     [IsDiscreteValuationRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R))
     [IsReduced (f.fiber (closedPoint R))] (U : X.affineOpens)

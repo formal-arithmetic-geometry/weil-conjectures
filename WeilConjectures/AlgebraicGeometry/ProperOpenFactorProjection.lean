@@ -15,9 +15,14 @@ import all WeilConjectures.AlgebraicGeometry.SfEtaleGraphTransferTensor
 
 /-! # Projection for a proper morphism factored through an open
 
-Source: Stacks Project, Tags 0F7B, 0GL1 and 0B56.
+## Implementation details
+
 The generic coefficient calculations keep the derived-category instance certificates
 as parameters, so the kernel checks the specializations without expanding their constructions.
+
+## References
+
+* [Stacks Project, Tags 0F7B, 0GL1 and 0B56](https://stacks.math.columbia.edu/tag/0F7B)
 -/
 
 @[expose] public section
@@ -431,20 +436,8 @@ private theorem generic_factor_full
     (d.hom.app M) N]
   exact h1
 
-/-- The identity-top specialization of the proper/open projection square.
-
-Source: Stacks Project, Tags 0F7B, 0GL1 and 0B56.
-
-Proof in words. The square with arrows h', identity, u, h is Cartesian, since u
-is a monomorphism and h' u = h. Apply the proper/open tensor square to it.
-Remove extension by the identity using its canonical identity comparison. The
-open identity projection becomes the tensor of that comparison and the inverse
-of the canonical pullback identity comparison. The identity-top square pullback
-comparison followed by this pullback identity is the h',u composition comparison.
-Naturality of the proper projection and of the identity comparison then gives
-the displayed square. All these maps are the specified unit/counit maps; no
-proper projection is inverted.
--/
+/-- The identity-top specialization of the proper/open projection square
+(Stacks, Tags 0F7B, 0GL1 and 0B56). -/
 theorem properOpenFactor_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X V U : Scheme.{u}} (s : X ⟶ V) (j : V ⟶ U) (h : X ⟶ U)

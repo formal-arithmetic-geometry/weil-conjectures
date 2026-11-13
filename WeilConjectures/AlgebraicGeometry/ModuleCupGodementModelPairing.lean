@@ -25,27 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- Construct the multiplicative cosimplicial Godement model, before establishing
-flasqueness or exactness.
-Source: Stacks Project, Section 20.30, Tag 0FKR; Banerjee,
-arXiv:1004.1491, §1.1.4, pp. 15--16.
-Proof: the product of module stalk skyscrapers is the right adjoint of the
-functor taking all stalks. Its unit is the product of the germ maps. Its monad
-multiplication is the product of evaluation on the corresponding stalks.
-Define the degree n term to be the actual (n+1)-fold iterate of this product
-functor. Insert the unit at each position for the cofaces, and insert the
-monad multiplication for the codegeneracies. Naturality and the two unit and
-associativity identities prove the cosimplicial identities. These give exactly
-the coface equalities in ModuleCupGodementModel. The alternating coface complex
-has augmentation given in degree zero by the germ map, using the single-object
-and extension isomorphisms; its composite with the first differential is zero
-by the unit identities. Coordinatewise tensoring stalks gives T(F) tensor T(G)
-to T(F tensor G). This map commutes with the unit and monad multiplication:
-both sides on each coordinate are tensoring the same germs or evaluating the
-same sections. Iterating gives a cosimplicial multiplication on the three
-models. In degree zero this identity is precisely the displayed equality on
-tensor sections, transported along the extension isomorphisms. Empty schemes
-use empty products, and zero coefficient sheaves need no separate choice.
-No acyclicity or flasqueness assertion is part of this construction lemma. -/
+flasqueness or exactness (Stacks, Tag 0FKR; Banerjee, §1.1.4). -/
 theorem moduleCup_godement_model_pairing (X : Scheme.{u}) (F G : X.Modules) :
     ∃ (A B C : CosimplicialObject X.Modules)
       (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶

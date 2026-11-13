@@ -21,19 +21,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 -- Elaborating the two total tensor constructions needs additional heartbeats.
-/-- Pinned stalk tensor comparison for complexes.
-
-Proof: fix the chosen canonical module tensor-stalk isomorphisms and their
-naturality. The degreewise stalk tensor comparison preserves the total coproduct
-injections with these exact component maps. The module stalk functor is additive,
-as is seen after forgetting to abelian-group presheaves. Differential compatibility
-then follows from naturality of the component maps and preservation of the signed
-sum defining the total differential. Assemble the degree isomorphisms with
-HomologicalComplex.Hom.isoOfComponents. Its components are definitionally the
-degreewise maps, so their injection formula proves the required pinned equation.
-Arbitrary coproducts cover unbounded complexes, including zero factors.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1).
--/
+/-- Pinned stalk tensor comparison for complexes (Stacks, Tag 0DJA). -/
 theorem exists_pinned_stalk_tensor (Y : Scheme.{u}) (z : Y) :
     letI := SheafOfModules.monoidalCategory Y.sheaf
     let T := RingedSpace.moduleStalkFunctor Y.toRingedSpace z

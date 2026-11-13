@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Pseudo-coherence is closed under distinguished triangles
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CD,
-`lemma-cone-pseudo-coherent`, part (2) for every integer m.
+## References
+
+* [Stacks, Tag 08CD] (Cohomology of Sheaves)
 -/
 
 @[expose] public section
@@ -107,7 +108,7 @@ private theorem finiteFree_mappingCone (Y : Scheme.{u}) (U : Y.Opens)
 
 /-- Termwise affine sections give a K-projective module model for a bounded-above
 finite-free complex. The affine counit is an isomorphism on each finite-free term.
-Source: Stacks Project, Tag 06Z0, and the bounded-above projective criterion. -/
+(Stacks, Tag 06Z0) -/
 private theorem affine_finiteFree_module_model (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U)
     (K : CochainComplex
@@ -198,8 +199,7 @@ private theorem affine_finiteFree_module_model (X : Scheme.{u}) (U : X.Opens)
   exact (asIso ε) ≪≫ (Functor.mapHomologicalComplexIdIso D (.up ℤ)).app K
 
 /-- Full affine derived sheafification and K-projectivity lift derived arrows to
-chain maps between bounded-above finite-free sheaf complexes.
-Source: Stacks Project, Tag 06Z0; Mathlib's K-projective localization theorem. -/
+chain maps between bounded-above finite-free sheaf complexes. (Stacks, Tag 06Z0) -/
 private theorem affine_finiteFree_map_representative (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
@@ -245,29 +245,7 @@ private theorem affine_finiteFree_map_representative (X : Scheme.{u}) (U : X.Ope
   simp
 
 /-- In a distinguished triangle in `D(𝒪_Y)`, pseudo-coherence of the first and third
-objects implies pseudo-coherence of the second.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CD, part (2) for every m.
-
-Proof:
-1. Intersect the two neighbourhoods supplied by pseudo-coherence and choose an affine
-   open inside the intersection containing the given point. Restrict both models with
-   `overMap`. It preserves zero objects and finite free sheaves; its derived composition
-   isomorphism identifies the restricted models with the two restricted objects.
-2. Transport a bounded-above finite-free complex from the localized affine site to the
-   spectrum of the ring of sections. Apply global sections termwise. The affine
-   tilde/Gamma adjunction's counit is an isomorphism on finite-free terms, naturally in
-   the differentials, so sheafification recovers the complex. The sections complex is
-   bounded above and termwise projective, hence K-projective.
-3. Restrict the triangle and inverse-rotate it. Conjugate its first arrow by the models
-   of C[-1] and A. Full affine derived sheafification lifts this arrow to modules;
-   K-projectivity represents it by a chain map. Sheafify and use the factorization
-   isomorphism's naturality to obtain a chain map g: P_C[-1] → P_A representing it.
-4. Compare the cone triangle with the inverse-rotated triangle using the isomorphism
-   of their first arrows. The third component of the resulting triangle isomorphism
-   identifies B with Q(cone(g)). The cone has terms P_C^i ⊕ P_A^i: they vanish above
-   the maximum of the two upper bounds and are finite free on the disjoint union of
-   the two finite bases. This model on the affine neighbourhood proves the claim. -/
+objects implies pseudo-coherence of the second. (Stacks, Tag 08CD) -/
 theorem isPseudoCoherent_of_distinguished_triangle (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

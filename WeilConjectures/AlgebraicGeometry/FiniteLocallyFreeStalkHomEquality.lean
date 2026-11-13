@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Shrinking equality of morphisms with finite locally free source
 
-Source: Stacks Project, Tag 05GF, Lemma 10.79.2, finite relations argument.
+## References
+
+* Stacks Project, Tag 05GF
 -/
 
 @[expose] public section
@@ -76,16 +78,7 @@ private theorem exists_shrink_of_stalk_eq
   exact map_eq_of_iso e.symm heq'
 
 /-- Equality on germs of local sections gives equality on a smaller neighbourhood.
-Source: Stacks Project, Tag 05GF, Lemma 10.79.2.
-
-Proof: Intersect U with a finite free frame neighbourhood for M at x. Apply the
-given equality of germs to the finitely many frame sections on this intersection.
-For each basis vector the germ equality criterion supplies a smaller open where
-its two images agree. Intersect these finitely many opens. The restricted maps
-agree on every basis vector, so the free universal property makes them equal.
-The restriction composition isomorphism identifies these maps with direct
-restriction from U to the final open. For rank zero the source is zero and
-there are no equations to shrink. No finiteness condition on N is needed. -/
+(Stacks, Tag 05GF) -/
 theorem exists_shrink_restrict_hom_eq_of_germs
     {W : Scheme.{u}} (M N : W.Modules) [M.IsFiniteLocallyFree]
     (x : W) (U : W.Opens) (hxU : x ∈ U)

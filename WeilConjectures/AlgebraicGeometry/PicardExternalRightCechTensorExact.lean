@@ -32,16 +32,7 @@ private lemma scalar_cech_map_proj
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Affine quasi-coherent sections make the scalar right Cech sequence short exact.
-Source: Stacks Project, Varieties, Tag 0BED, coefficient diagram after
-`equation-kunneth-on-cech`, right-variable section argument.
-
-Proof: every Cech tuple intersection is affine by repeated use of the affine
-relative diagonal criterion. Sections preserve kernels, while vanishing of
-positive cohomology for the first quasi-coherent term on an affine gives
-surjectivity. Restriction of scalars to the field preserves the resulting
-short exact sequence. The finite product over tuples is therefore short exact
-in each Cech degree, and the degreewise criterion gives the claim. -/
+/-- Affine quasi-coherent sections make the scalar right Cech sequence short exact. -/
 private theorem picard_right_cech_sections_exact
     {k : Type w} [Field k] {Y : Scheme.{w}}
     (g : Y ⟶ Spec (CommRingCat.of k))
@@ -210,15 +201,7 @@ private theorem tensor_total_extension_shortExact
     rfl
 
 /-- Tensoring a scalar right Cech short exact sequence with fixed left cochains,
-then totalizing and extending by zero, remains short exact.
-Source: Stacks Project, Varieties, Tag 0BED, the tensor-total construction after
-`equation-kunneth-on-cech`.
-
-Proof: tensoring over the field is exact. In every total degree only finitely
-many bidegrees occur, so the direct sum of the degreewise short exact sequences
-is short exact. The totalization maps are these direct sums, and extension by
-zero adds zero short exact sequences in negative degrees. The degreewise
-criterion for short exact complexes finishes the argument. -/
+then totalizing and extending by zero, remains short exact. -/
 private theorem picard_right_tensor_total_shortExact
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k))
@@ -231,26 +214,8 @@ private theorem picard_right_tensor_total_shortExact
   exact tensor_total_extension_shortExact ((picardCechFunctor f U).obj F)
     (S.map (picardCechFunctor g V)) hC
 
-/-- The tensor-total Cech sequence is short exact in the right coefficient.
-Source: Stacks Project, Varieties, Tag 0BED, the coefficient diagram following
-equation-kunneth-on-cech, applied in the right variable.
-
-Proof: In Cech degree q, every tuple has q+1 entries, so its intersection
-is nonempty as a family of opens. Repeated use of the affine diagonal criterion
-makes that intersection affine. Sections of S there are short exact: sections
-preserve kernels, and quasi-coherent affine vanishing of H^1 of S.X₁ gives
-surjectivity onto sections of S.X₃. Restriction of scalars to k preserves this.
-The finite product over the tuples is therefore short exact, proving degreewise
-short exactness of the scalar Cech sequence. Fix a total degree n. Tensor each
-sequence in degree q with the fixed k-vector space of F-cochains in degree p,
-for p+q=n. All k-vector spaces are flat, so this preserves short exactness.
-The finite direct sum over these pairs remains short exact. These are exactly
-the terms and maps of picardRightTensorCechFunctor, by the natural tensor-total
-construction. Extension from natural to integer degrees keeps these terms and
-puts the zero sequence in negative degrees. Degreewise short exactness implies
-short exactness of complexes. Empty index types give empty products (zero
-modules) in every Cech degree; zero coefficients also give zero terms. Thus
-neither a cover hypothesis nor a nonemptiness assumption is needed. -/
+/-- The tensor-total Cech sequence is short exact in the right coefficient
+(Stacks, Tag 0BED). -/
 theorem picardExternal_right_cech_tensor_exact
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

@@ -16,7 +16,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 /-!
 # Finite constant values for cyclic module sheaves
 
-Source: Stacks Project, Tags 03RU and 03RW(2),(3), with cyclic coefficients.
+## References
+
+* Stacks Project, Tags 03RU and 03RW, with cyclic coefficients
 -/
 
 @[expose] public section
@@ -71,22 +73,7 @@ private noncomputable def forgetConstantValueIso {Y : Scheme.{u}}
         AddCommGrpCat.{u + 1})).app E
 
 /-- For cyclic coefficients, finite abelian local systems are exactly the module sheaves
-admitting trivializations with finite constant values.
-Source: Stacks Project, Definitions 03RU and 03RW(2),(3); the constant-stalk argument in
-lem-weil-pbc-constructible-torsion-modules-agree, proof steps 4--6.
-
-Proof: In the forward direction forget every finite module trivialization. Constants commute
-with forgetting. Lift any geometric point through the etale cover and identify its stalk
-with the finite constant value; this gives finite abelian stalks. Conversely discard empty
-members of an abelian trivializing cover. The constant abelian value on a remaining member
-is its stalk at a geometric point, hence finite and annihilated by n. Give it its canonical
-Z/n-action and lift the scalars to ULift (ZMod n). Constants commute with forgetting, and
-additive maps between cyclic modules are linear, so the abelian trivialization lifts to a
-module trivialization. These lifts supply both the LocallyConstantDatum and its finite
-values. Empty cover members must be discarded: constancy on an empty scheme implies
-neither finiteness nor annihilation of the chosen constant value. For n = 1 all modules are
-zero and the same argument applies; the empty base uses the empty cover.
--/
+admitting trivializations with finite constant values (Stacks, Tags 03RU, 03RW). -/
 theorem finite_local_cyclic_module_forget_iff {Y : Scheme.{u}}
     (n : ℕ) [NeZero n]
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n)))) :

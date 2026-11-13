@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPull
 
 /-! # The Chow comparison on a closed quotient
 
-Source: Stacks Project, Cohomology of Schemes, Theorem 088E, paragraphs 2--4.
+## References
+
+* [Stacks Project, Cohomology of Schemes, Tag 088E]
 -/
 
 @[expose] public section
@@ -36,39 +38,7 @@ namespace AlgebraicGeometry
 to a properly supported formal module whose kernel is killed
 by a strictly larger ideal. This is the geometric part of the Noetherian induction;
 it does not assume or conclude proper scheme-theoretic support for that kernel.
-
-Source: Stacks Project, Cohomology of Schemes, Theorem 088E, paragraphs 2--4.
-
-Proof:
-1. Replace X by V(K). The closed-immersion coherent-formal equivalence identifies M
-with the pushforward of a coherent formal module there, preserving first support.
-V(K) is nonempty: otherwise the system is zero and is supported on the empty proper
-subscheme, contradicting the hypothesis.
-2. Chow's lemma gives a proper modification q:Y -> V(K), an isomorphism
-on a nonempty dense open U, and an immersion e into a finite projective space.
-The immersion e is quasi-compact because Y is quasi-compact and projective space
-is quasi-separated. Set Y' := e.image and use e.toImage:Y -> Y' and e.imageι.
-The former is open and the latter closed by the scheme-image factorization for
-a quasi-compact immersion. Thus Y' is projective over A.
-Tensor pullback of the system is coherent. Nakayama identifies all its supports
-with the pullback of the first support. This support is proper over A, hence its
-image in the separated Y' is closed. Extend the system by zero to Y'; coherence
-and the adic quotient conditions hold locally on Y and the complement of that support.
-3. Projective existence algebraizes the extended system. Its support lies in Y:
-otherwise its closed complement has nonempty closed image in Spec A, which meets
-V(I) since I is in the Jacobson radical of the complete ring. Reduction modulo I
-and Nakayama contradict the support of the extended first term. Restrict to Y.
-4. Proper pushforward of this algebraization is a coherent module H on V(K).
-Its support lies in the image of a proper support on Y, so is proper. The
-scheme-theoretic support of H is proper and kills H and all its adic quotients.
-Push its completion to X; call this formal module N. Its supporting closed
-subscheme remains closed in X and proper over A.
-5. The push-pull comparison on V(K) gives alpha to the completion of H. Its formal
-kernel is killed by a positive power L^t of the ideal of V(K) minus U. This power
-is nonzero because its restriction to the nonempty U is the unit ideal. The
-inverse image J of L^t under O_X -> O_V(K) strictly contains K. Exactness of the
-closed pushforward equivalence identifies the pushed kernel with kernel alpha,
-and J kills it. This yields the asserted comparison. No induction is used here. -/
+(Stacks, Theorem 088E) -/
 theorem grothendieckExistence_chow_comparison
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

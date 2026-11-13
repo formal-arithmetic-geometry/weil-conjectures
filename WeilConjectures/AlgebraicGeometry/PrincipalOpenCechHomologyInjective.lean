@@ -13,9 +13,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechInjectiveComparison
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechInjectiveTerms
 
-/-! # injective on cohomology for the principal-open Čech augmentation
+/-!
+# Injectivity on cohomology for the principal-open Čech augmentation
 
-Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -28,36 +31,7 @@ namespace AlgebraicGeometry
 
 /-- The principal-open section-to-total augmentation is injective on cohomology.
 The source and target are specified by degree isomorphisms and the actual differential
-and augmentation formulas; no choice of unspecified Čech data occurs.
-
-Source: Stacks Project, Cohomology, Tag 08C1.
-
-Proof: Take a functorial K-injective resolution I of J with injective terms.
-The comparison J → I is a homotopy equivalence, since both complexes are K-injective.
-Sections carry its homotopies to homotopies, so the section comparison is a
-quasi-isomorphism. The coefficient comparison also gives a chain map on the
-displayed subset total: restriction naturality and the signed differential
-verify its chain-map equation. The augmentation commutes with these comparisons
-by its singleton restriction formula and its zero formula on larger subsets.
-For I, each augmented section row is exact: the sheaf axiom gives exactness and
-injectivity at the section term, and injective Čech acyclicity gives positive-degree
-exactness. Restriction to increasing tuples identifies these rows with the subset
-rows, since each subset has a unique increasing enumeration and the deletion signs
-are the corresponding positions. Only columns -1 through r-1 can occur.
-Suppose a closed section maps to the differential of a total cochain. At the
-highest Čech-degree component of that cochain, the equation says its horizontal
-differential vanishes. Row exactness supplies a horizontal preimage. Subtract the
-total differential of that preimage from the cochain without changing its total
-differential. Repeat down through the finitely many columns. At degree zero, row
-exactness identifies the resulting cochain with an augmented section. The original
-closed section is its vertical differential because the row augmentation is
-injective. Hence a section class whose image vanishes was already zero.
-Apply homology to the comparison square. The section comparison is invertible
-on homology, so its composite with the injective-term augmentation is monic.
-The other composite is the original augmentation followed by the total comparison;
-monicity of this composite implies monicity of the original augmentation.
-For r=0 the union is empty; sections and the total are zero, so the assertion holds.
-Repeated or empty principal opens do not affect row exactness or the argument. -/
+and augmentation formulas; no choice of unspecified Čech data occurs (Stacks, Tag 08C1). -/
 theorem principalOpenCech_homology_injective
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

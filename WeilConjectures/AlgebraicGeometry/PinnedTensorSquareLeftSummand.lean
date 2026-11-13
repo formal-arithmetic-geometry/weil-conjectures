@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
+## References
+
+* Stacks Project, Tags 0DJA and 0BYJ.
 -/
 
 @[expose] public section
@@ -78,29 +80,8 @@ private theorem summand_chase {C : Type*} [Category C]
 
 set_option maxHeartbeats 600000 in
 -- The component transports elaborate several nested tensor functors.
-/-- Pullback route on one tensor summand, in explicit stalk coordinates.
-
-Proof: invert the pinned source injection equation by cancelling its degree-n hom.
-Map this equation under scalar extension. Rewrite the degree-n pullback-stalk
-comparison using its specified component. Its naturality moves the sheaf tensor
-summand injection through this comparison; the restriction equation for the actual
-ring map identifies scalar extension with extension along g'.stalkMap z. Map hχ under
-the target stalk functor. The bifunctor-map summand equation moves identity tensor a
-to identity tensor a.f q. The target module tensor-stalk naturality equation then
-moves this map to identity tensor S(a)_q. The target pinned injection equation
-identifies its injection followed by e'.hom_n. The module tensor pullback/stalk
-square on P.X p and Q.X q gives δ_G followed by κ_P,p tensor κ_Q,q: represent the two
-stalk vectors by sections on a common neighborhood, use the canonical tensor-stalk
-and pullback tensor generator formulas, and check the scalar-extension tensorator
-on one tensor a pure tensor. Extension-of-scalars extensionality and tensor induction
-extend this equality to every element of this single summand. A categorical diagram
-chase combines the six equations after postcomposition with e'.hom_n, and cancels
-e'.inv_n followed by e'.hom_n to obtain the displayed formula. No coproduct
-extensionality or chain-map
-extensionality occurs here. Zero stalk rings, zero modules, and unbounded complexes
-are allowed, since the calculation is in the two modules in degrees p and q.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ; Modules, Tags 01CD
-and 01CB; Sheaves, Tag 0098. -/
+/-- Pullback route on one tensor summand, in explicit stalk coordinates
+(Stacks, Tags 0DJA and 0BYJ). -/
 theorem pinned_tensor_square_left_summand
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

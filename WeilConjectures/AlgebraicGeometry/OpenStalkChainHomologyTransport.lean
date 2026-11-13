@@ -74,23 +74,8 @@ private theorem homology_square
   simpa only [Category.assoc] using
     congrArg (fun k ↦ k ≫ (W.mapHomologyIso (E ⋙ F)).hom) hh.symm
 
-/-- An additive chain square induces the corresponding open derived stalk square.
-
-Proof: assemble the degreewise equality as an equality of additive complex maps
-and apply homologyMap. Its composition law and naturality of mapHomologyIso move
-homology past the forgetful functors. Restriction of scalars followed by forgetting
-is the same additive functor as forgetting over the new ring; the canonical
-homology comparisons agree, as follows from their universal kernel and cokernel
-identities. Expand openDerivedStalkIso and openRestrictionRepresentativeIso.
-Their derived restriction comparison factors cancel. The remaining exact-stalk
-and exact-restriction homology factors are the homology comparison of the inverse
-same-germ stalk map, by naturality of exact-functor homology. Finally apply
-comparisonStalkHomologyIso_naturality to alpha and cancel the invertible homology
-comparisons at each endpoint. This yields exactly the displayed equality.
-No tensor complex or normalized input coordinate is involved. No injectivity,
-surjectivity or nonzero condition on the complexes or their homology is used.
-Source: Stacks Project, Tags 0098 and 0D5U; Mathlib exact-functor homology
-naturality and the localization factorization of exact functors. -/
+/-- An additive chain square induces the corresponding open derived stalk square
+(Stacks, Tags 0098 and 0D5U). -/
 theorem openStalk_chain_homology_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

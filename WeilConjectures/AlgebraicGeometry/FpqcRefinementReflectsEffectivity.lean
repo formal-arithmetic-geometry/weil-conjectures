@@ -21,7 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- Canonical transport keeps the coordinate in the effective object fixed.
--- Source: Stacks Project, Tag 023V; same construction as the private helper in
+-- Canonical transport keeps the coordinate in the effective object fixed (Stacks, Tag 023V).
 -- Sheaf.AlgebraicGeometry.FiniteEtaleDescentDataExistence.
 private noncomputable def pullbackDatum {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
     (P : Over Y) : Over.DescentDatum g (Over.mk (pullback.snd P.hom g)) where
@@ -45,17 +45,8 @@ private noncomputable def pullbackDatum {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
     apply Over.OverMorphism.ext
     apply pullback.hom_ext <;> simp
 
-/-- Effectivity descends through a refinement of singleton fpqc coverings.
-Source: Stacks Project, Descent, Tag 02W3, affine-base proof, using Tag 02W0.
-
-Choose an effective object W over S for E. The canonical datum on W ×_S X has
-pullback to X' canonically identified with E through the effective pullback square.
-Full faithfulness of refinement descends this identification and its inverse to
-maps between the canonical datum and D. Faithfulness makes their composites the
-identities. The resulting isomorphism identifies V with W ×_S X and preserves
-transport; hence its projection to W witnesses effectivity of D. No assumption
-that h itself is fpqc is needed: both composite covers f and g are fpqc. The
-identity refinement and empty base cases are included. -/
+/-- Effectivity descends through a refinement of singleton fpqc coverings
+(Stacks, Descent, Tags 02W3 and 02W0). -/
 theorem fpqc_refinement_reflects_effectivity {S X X' : Scheme.{u}}
     (f : X ⟶ S) (g : X' ⟶ S) (h : X' ⟶ X)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

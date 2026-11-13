@@ -23,11 +23,7 @@ attribute [local instance 100000] ordinaryFiniteClass._proof_1 ordinaryFiniteCla
 attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
   DerivedCategory.singleFunctors
 
-/-- The cached pair of constant single-object units is the original supported-unit pair.
-
-Proof: expand the cached pair and the two supported units. Both are the same
-composite of derived single-object units, using the canonical constant-sheaf
-pullback comparison at the free rank-one coefficient module. -/
+/-- The cached pair of constant single-object units is the original supported-unit pair. -/
 theorem projectiveLineDiagonalAlpha_units (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) (a : Bool) :
     projectiveLineDiagonalAlpha A S a =

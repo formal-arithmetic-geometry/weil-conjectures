@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModelTensorPullbackStalk
 
 /-! # A commuting stalk model for Koszul coefficient reduction
 
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext. -/
+## References
+
+* Stacks Project, Tag 0BQZ.
+-/
 
 @[expose] public section
 
@@ -31,33 +34,8 @@ namespace AlgebraicGeometry
 
 /-- The finite free affine model identifies the *morphism* on Ext stalks with
 extension of scalars of the algebraic coefficient reduction. This statement does
-not assert that the algebraic coefficient reduction is an isomorphism. The cohomology degree `m`
-is independent of the sequence length `n`.
-
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, affine Koszul
-resolution and coefficient comparison.
-
-Proof: Let A=O_Y(U) and I=ker(i)(U). The quotient-spectrum description of a closed
-immersion identifies the closed preimage of U with Spec(A/I). Use the quotient
-augmentation of the finite free Koszul resolution, sheafify it, and extend from
-chain degrees to the corresponding nonpositive cochain degrees. Every exterior
-term is finite free by the standard exterior basis and terms outside 0..,n
-vanish. Restriction of derived internal Hom and the bounded finite free Hom
-model compute the two degree-m Ext objects by the sheafifications of Hom(K,A) and
-Hom(K,A/I), with the signed precomposition differential. Use the same resolution
-and the same K-injective comparison for both coefficient objects. The adjunction
-unit O_Y -> i_*O_Z is the quotient homomorphism on U, so naturality in the second
-argument gives the reduction-of-values cochain morphism, not just an object
-isomorphism. Exact associated-module sheafification commutes with cohomology.
-On stalks it is localization of these A-modules. The tensor pullback stalk is
-O_Z,z tensor over O_Y,i(z) with that localization, which by associativity of
-tensor products is O_Z,z tensor over A with the algebraic cohomology module.
-Restriction to V identifies O_V,z with O_Z,z and does not change the stalk.
-These constructions give the two additive equivalences and the displayed
-commuting equation on pure tensors, hence on all elements by additivity.
-Representatives in the supplied derived universe are compared through the
-common K-injective model; no comparison of distinct derived universes is
-assumed. The construction works for n=0 and for every point of the chart. -/
+not assert that the algebraic coefficient reduction is an isomorphism. The cohomology
+degree `m` is independent of the sequence length `n`. -/
 theorem koszulExtCoefficient_stalk_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

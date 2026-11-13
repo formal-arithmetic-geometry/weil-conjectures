@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 
 /-! # A strictly perfect model for a cone on an affine open
 
-Source: Stacks Project, Tag 08CR, second proof, mapping cone construction.
+## References
+
+* Stacks Project, Tag 08CR (second proof, mapping cone construction).
 -/
 
 @[expose] public section
@@ -63,23 +65,7 @@ private theorem strictlyPerfect_mappingCone (X : Scheme.{u}) (U : X.Opens)
     simp only [Category.id_comp, Iso.hom_inv_id]
 
 /-- On an affine open, strictly perfect models of the first two objects of a distinguished
-triangle give a strictly perfect model of its third object. Source: Stacks Project, Tag 08CR,
-second proof, cone construction.
-
-Proof: Restriction to U is exact and therefore preserves the distinguished triangle.
-Conjugate its first arrow by eA and eB, and apply perfect_affine_map_representative to
-obtain an actual chain map alpha between A and B. Its mapping cone in degree i is the
-biproduct of A in degree i+1 and B in degree i. It is zero outside the interval whose
-lower endpoint is min(aA-1,aB) and upper endpoint is max(bA-1,bB). Apply biprod.map to
-the two finite-free retract pairs; the composite is the identity by the two projection
-equations. The binary sum of the free sheaves is free on the disjoint union of their
-finite bases. Reindex that union by a finite ordinal and its universe lift to obtain
-exactly the finite free sheaf in IsStrictlyPerfect. The image under Q of the cone
-triangle is distinguished. TR3 and two out of three for morphisms of distinguished
-triangles extend eA and eB to a triangle isomorphism, since the first arrow agrees by
-the equation from perfect_affine_map_representative. The third component identifies
-the restricted third object with Q of this strictly perfect cone. The construction
-includes empty opens, zero complexes and finite-free retracts of rank zero. -/
+triangle give a strictly perfect model of its third object (Stacks, Tag 08CR). -/
 theorem perfect_affine_cone_model (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

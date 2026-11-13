@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.MixedExtensionSectionsUnit
 import WeilConjectures.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare
 
 /-! # Affine sections transport the base-change mate with independent universes
-Source: Stacks Project, Tags 0AA7, 08HY and 0D5T.
+
+## References
+
+* Stacks Project, Tags 0AA7, 08HY and 0D5T.
 -/
 
 @[expose] public section
@@ -31,33 +34,8 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 /-- Restricted derived sections intertwine the two base-change mates.
-This does not assume flatness, perfectness, or invertibility of sheaf base change.
-Only Rf_*E is required to have quasi-coherent cohomology.
-Source: Stacks Project, perfect.tex, Tag 0AA7, construction of the canonical map;
-cohomology.tex, Tags 08HY (counit description) and 0D5T (Leray).
-
-Proof:
-1. Identify each affine base with the spectrum of its global ring by isoSpec.
-   Derived direct-image composition identifies restricted RΓ_X E with RΓ_Y Rf_*E.
-   On sheaves this comparison is the identity on sections. Derive it with its
-   right-derived-unit equation, as for mixedGlobalSectionsDirectImageIso.
-2. Rf_*E is quasi-coherent. The affine derived equivalence and the tilde/pullback
-   formula on K-flat representatives identify RΓ_Y' Lg^*Rf_*E with derived
-   extension of RΓ_Y Rf_*E. Uniqueness of the left adjoint to the fixed derived
-   restriction identifies this extension with mixedGlobalExtension g, including
-   its unit. Compose with extension of the inverse comparison from step 1 to
-   obtain a. Direct-image composition gives the natural target comparison d.
-3. Transpose the displayed right-hand composite under the fixed scalar adjunction.
-   Expand sheaf base change as the mate of pullback composition and the counit
-   for f. Naturality moves m past that counit; the adjunction triangle identities
-   cancel the paired units and counits. Direct-image composition leaves RΓ_X(m)
-   followed by Leray for g_X. The identity on underived sections and the
-   right-derived-unit equation identify this with mixedGlobalSectionsDirectImageIso.
-   The scalar-square identification is the equality of the two restricted actions.
-4. The scalar adjunction Hom equivalence is injective, giving the stated equality
-   simultaneously for all L and m. These computations take place in the sheaf
-   and module localizations separately, so their universe levels need not agree.
-   Zero E or an empty base gives the same identity on zero objects. -/
+This does not assume flatness, perfectness, or invertibility of sheaf base change; only
+`Rf_*E` is required to have quasi-coherent cohomology (Stacks, Tags 0AA7, 08HY and 0D5T). -/
 theorem exists_mixedAffineSectionsBaseChangeMate
     {X Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y']
     (f : X ⟶ Y) (g : Y' ⟶ Y) (E : schemeDerivedCategory X)

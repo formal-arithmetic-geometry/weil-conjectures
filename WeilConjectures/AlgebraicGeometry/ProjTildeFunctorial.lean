@@ -13,13 +13,14 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 /-!
 # Functoriality of associated module sheaves on Proj
 
-Source: Stacks Project, Constructions, Lemma 01M7, final paragraph, and the construction
-before Definition 01M6.
-
 The three graded modules are indexed by `Fin 3`. Chart and stalk identifications are
 written as injective additive maps into the ordinary localizations with prescribed image.
 These are precisely the inclusions composed with the equivalences supplied by
 `gradedModuleSheaf_exists`; no new associated sheaf is chosen or defined here.
+
+## References
+
+* Stacks Project, Constructions: Lemma 01M7 and the construction before Definition 01M6.
 -/
 
 @[expose] public section
@@ -53,30 +54,7 @@ private theorem localized_map_smul
       simp only [mk_smul_mk, IsLocalizedModule.map_LocalizedModules, map_smul]
 
 /-- A fixed degree-preserving map extends to a morphism having the standard-open fraction
-formula. No uniqueness, functor laws, or stalk formulas are asserted here.
-Source: Stacks Project, Constructions, Lemma 01M7, final paragraph, and the construction
-before Definition 01M6.
-
-Proof:
-1. Localize the linear map at each positive homogeneous f using IsLocalizedModule.map.
-   Its formula on fractions is y/f^m ↦ phi(y)/f^m. Degree preservation sends the
-   degree-zero fractions into degree-zero fractions. The injective chart maps alpha,
-   with their prescribed ranges, therefore transport it to an additive chart map.
-2. The localized map is linear over the localized ring. The homogeneous-localization
-   inclusion and hscalar give linearity over the homogeneous chart ring. The standard
-   section isomorphism identifies that ring with all structure-sheaf sections on D₊(f),
-   so the transported chart map is linear over the full section ring.
-3. For an inclusion D₊(g) ≤ D₊(f), choose g^e = a*f by standardOpenProperties.
-   The hres formula and phi(a^m • y) = a^m • phi(y) show restriction compatibility.
-   Every ordinary localized-module element has a fraction representative, so this
-   calculation covers every section, including nonhomogeneous representatives.
-4. Positive homogeneous standard opens form a basis. Extend the compatible additive
-   chart maps by the basis morphism-extension theorem. Scalar compatibility holds on
-   this basis and hence on every open by sheaf separatedness, giving a module-sheaf map.
-   Its chart components are the transported maps, which gives the displayed formula.
-   Empty charts cause no exception: localization at a nilpotent element is the zero
-   module and the only section map is zero. No freeness or finiteness is required.
--/
+formula. No uniqueness, functor laws, or stalk formulas are asserted here. -/
 private theorem tilde_chart_map_exists
     {S : Type u} [CommRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
     (M : Fin 3 → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module S (M i)]
@@ -233,24 +211,8 @@ private theorem tilde_chart_map_exists
 
 
 /-- A degree-preserving linear map has a unique associated sheaf map, with the indicated
-fraction formulas on charts and stalks. These maps preserve composition and identities.
-Source: Stacks, Constructions, Lemma 01M7 and the construction before Definition 01M6.
-
-Proof:
-1. Localize each degree-preserving linear map with `IsLocalizedModule.map`. The prescribed
-   chart ranges and injectivity give additive chart maps with the required fraction formula;
-   Mathlib's `basicOpenIsoAway` and the scalar hypotheses make them module-linear.
-2. For standard-open inclusions, `standardOpenProperties` supplies a relation `g^e = a*f`.
-   The two restriction formulas and linearity of the graded map prove chart naturality.
-3. Positive homogeneous standard opens form a basis. Extend the compatible chart maps with
-   `TopCat.Sheaf.restrictHomEquivHom`; sheaf extensionality proves scalar compatibility on
-   every open. Basis extensionality and chart injectivity prove uniqueness, then composition
-   and identity follow from their fraction formulas.
-4. For stalks, represent a germ on a basis chart with `exists_mem_germ_eq_of_isBasis`,
-   represent its chart image by a fraction, and apply `hgerm` before and after the map.
-   `stalkFunctor_map_germ_apply` and `map_LocalizedModules` give the asserted fraction
-   formula, including arbitrary (possibly degree-zero) denominators.
--/
+fraction formulas on charts and stalks. These maps preserve composition and identities
+(Stacks, Tag 01M7). -/
 theorem tilde_functorial
     {S : Type u} [CommRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
     (M : Fin 3 → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module S (M i)]

@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 /-!
 # Residue fields at isolated points of fibres
 
-Source: Stacks Project, Morphisms, Lemmas 01TH and 01TG.
+## References
+
+* Stacks Project, Tags 01TH and 01TG
 -/
 
 @[expose] public section
@@ -25,27 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- An isolated point of a fibre of a locally finite type morphism has finite residue
-field extension. Source: Stacks Project, Morphisms, Lemma 01TH, (2) implies (1),
-and Lemma 01TG.
-
-Proof:
-1. Put `s = f x` and form `f.fiber s` with projections `p` to `X` and `pi` to
-   `Spec kappa(s)`. By lem-weil-pbc-lft-base-change, `pi` is
-   locally of finite type. The fibre homeomorphism identifies `x` with the unique
-   point `xi = f.asFiber x` over it; its singleton is open by hypothesis.
-2. Apply lem-weil-pbc-lft-over-field-isolated-point-residue-finite to this fibre
-   over `kappa(s)` and `xi`: `kappa(xi)` is finite over `kappa(s)` through `pi`.
-   By lem-weil-pbc-spec-residue-field-identification, the residue field of
-   `Spec kappa(s)` at its unique point is `kappa(s)`. The canonical map to `S`
-   induces the identity on that residue field, since its stalk map is the residue map.
-3. By lem-weil-pbc-fibre-product-point-residue-field, the residue field at `xi`
-   is the fraction field of a prime quotient of `kappa(x) tensor kappa(s)` over
-   `kappa(s)`. This tensor product is `kappa(x)`, via `a tensor b` mapping to
-   `a * f.residueFieldMap x b`. It is a field, so the prime is zero. Thus the
-   residue map induced by `p` is an isomorphism `kappa(x) -> kappa(xi)`, compatible
-   with the two actions of `kappa(s)`.
-4. Transport finite dimensionality along this `kappa(s)`-linear isomorphism:
-   the extension induced by `f` is finite. -/
+field extension (Stacks, Tags 01TH and 01TG). -/
 theorem finiteDimensional_residueField_of_isOpen_singleton_asFiber
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (x : X)
     (hx : IsOpen ({f.asFiber x} : Set (f.fiber (f x)))) :

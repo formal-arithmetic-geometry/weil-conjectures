@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Finite generation of stalks of finite type module sheaves
 
-Source: Stacks Project, Modules, Tag 01B4.
+## References
+
+* [Stacks Project, Tag 01B4](https://stacks.math.columbia.edu/tag/01B4)
 -/
 
 @[expose] public section
@@ -24,20 +26,7 @@ open CategoryTheory AlgebraicGeometry TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A finite type module sheaf has finitely generated stalks.
-
-Source: Stacks Project, Modules, Tag 01B4, finite local generating sections.
-
-Proof: Choose a finite local generating family on a neighbourhood U of x. Its
-free-sheaf map is an epimorphism, hence locally surjective on sections. Any germ
-of F at x has a representative on an open V inside U. Lift that representative
-locally through the generating epimorphism and select a member of the lifting
-cover containing x. On this member the lift in the finite free sheaf is a finite
-linear combination of its coordinate sections. Taking germs expresses the given
-germ in the span of the finitely many generator germs. Thus their finite span is
-the whole stalk, proving finite generation. If the family is empty the same
-argument says every germ vanishes, so it also covers the zero stalk. No
-Noetherian, integral, or quasi-coherent assumption is needed. -/
+/-- A finite type module sheaf has finitely generated stalks. (Stacks, Tag 01B4.) -/
 theorem finite_moduleStalk_of_isFiniteType (X : Scheme.{u}) (F : X.Modules)
     [F.IsFiniteType] (x : X) :
     Module.Finite (X.presheaf.stalk x)

@@ -95,16 +95,10 @@ private theorem unit_isIso_of_natIso
     infer_instance
   exact IsIso.of_isIso_comp_left (τ.app J) (G.rightDerivedFunctorUnit.app J)
 
-/-- Transport of the direct-image unit along the global-sections point comparison.
-Source: Stacks Project, Cohomology, Tags 079W and 0D5T; Duality, Tag 0B6I.
-
-The equivalence between module sheaves on the global-sections point and modules over
-its global ring identifies direct image along the point map with global sections.
-The comparison of right-derived functors is compatible with the units.  Conjugating
-the invertible point unit by these comparison isomorphisms therefore gives an
-invertible global-sections unit.  This is the categorical transport step in the
-proof of global-sections acyclicity.
--/
+/-- Transport of the direct-image unit along the global-sections point comparison
+(Stacks, Tags 079W, 0D5T and 0B6I). The equivalence between module sheaves on the
+global-sections point and modules over its global ring identifies direct image along the point
+map with global sections. -/
 theorem globalSections_unit_isIso_of_point_unit
     {X Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

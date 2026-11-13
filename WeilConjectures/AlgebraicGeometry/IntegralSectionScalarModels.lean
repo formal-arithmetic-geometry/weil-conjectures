@@ -12,7 +12,12 @@ import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 import all WeilConjectures.AlgebraicGeometry.IntegralSectionRegularScalars
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
-/-! # Scalar realization under the integral section comparison -/
+/-! # Scalar realization under the integral section comparison
+
+## References
+
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -103,24 +108,7 @@ private theorem scalarPresentationComparison
 end FinitePresentationComparison
 
 /-- The fixed integral section comparison sends a finitely presented ordinary scalar
-module, extended from the condensed point, to its completed constant realization.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the scalar
-comparison in the integral constructibility bridge.
-
-Proof: choose a finite presentation of N by free scalar modules. The two realizations
-preserve finite sums and cokernels: constant sheafification, extension of scalars,
-and inverse image do, and section comparison and coefficient restriction are
-equivalences. On the regular scalar module identify both values with the coefficient
-module. At every positive uniformizer quotient, the prescribed coefficient maps send
-an element to its constant section. Joint monicity of the completion projections
-identifies the resulting maps on the completed regular module. This identification
-commutes with scalar endomorphisms: evaluation of a constant function at the singleton
-returns that scalar. The ULift change sends a lifted scalar to the same element.
-Extend the regular-module comparison to the finite free terms by biproducts. Checking
-each matrix entry identifies the two presentation maps. Preservation of their
-cokernels and cokernel uniqueness give the asserted isomorphism on N. Empty matrices,
-torsion modules and empty schemes are included. -/
+module, extended from the condensed point, to its completed constant realization. -/
 theorem integralSectionScalarModels (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u})

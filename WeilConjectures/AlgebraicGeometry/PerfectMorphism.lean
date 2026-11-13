@@ -15,8 +15,9 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-! # Stalkwise finite Tor dimension of scheme morphisms
 
-Source: Stacks Project, More on Morphisms, Lemma 37.61.11, condition (3), and
-Lemma 37.61.13, Tag 0B6G.
+## References
+
+* Stacks Project, More on Morphisms, Lemma 37.61.11 and Lemma 37.61.13, Tag 0B6G.
 -/
 
 @[expose] public section
@@ -32,9 +33,7 @@ namespace AlgebraicGeometry
 /-- Every source local ring has finite Tor dimension over the target local ring,
 with scalar restriction through the actual stalk map. The bound may depend on the point,
 but must hold for every test module. For a finite type morphism over a Noetherian base,
-this is equivalent to being perfect by Stacks Lemma 37.61.11. It is not the definition
-of a perfect morphism without the pseudo-coherence hypothesis of that lemma.
-Source: Stacks Project, More on Morphisms, Lemma 37.61.11, condition (3). -/
+this is equivalent to being perfect by Stacks Lemma 37.61.11. -/
 def HasStalkwiseFiniteTorDimension {X Y : Scheme.{uTor}} (f : X ⟶ Y) : Prop :=
   ∀ x : X, ∃ n : ℕ, ∀ M : ModuleCat.{uTor} (Y.presheaf.stalk (f x)),
     ∀ i : ℕ, n < i →

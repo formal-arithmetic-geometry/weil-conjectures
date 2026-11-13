@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.LocalStalkSectionsAffineVanishing
 
 /-! # Descent of equality for local-scheme sections
 
-Source: Stacks Project, Tag 03Q6, degree zero of Lemma 59.51.5.
+## References
+
+* [Stacks, Tag 03Q6]
 -/
 
 @[expose] public section
@@ -20,22 +22,7 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
-/-- Descent of equality for local-scheme sections.
-Source: Stacks Project, Tag 03Q6, degree zero and proof steps (1)-(3).
-
-Proof: Restrict the given sections to a common affine neighbourhood A of x.
-Principal opens of A containing x are cofinal among neighbourhoods, and their
-coordinate rings have colimit O_X,x. Apply degree-zero continuity in Tag 03Q6 to
-the identity morphism of A, which is quasi-compact and quasi-separated. Equality
-after inverse image to Spec(O_X,x) descends to equality on a principal neighbourhood
-of x. Its inclusions into U and V give f and g in the opposite neighbourhood
-category and the required equality of restrictions. The maps used in continuity
-are the pullback maps given by the inverse-image unit and the local-scheme maps
-to each open. For the displayed H, use uniqueness of left adjoints to direct image:
-the natural isomorphism with standard inverse image intertwines the units. Hence
-it identifies those maps with the legs of LocalStalkSections.cocone, proving the
-assertion for the supplied adjunction. No henselian assumption is used. If either
-representative is zero the same argument applies; empty X has no x. -/
+/-- Descent of equality for local-scheme sections (Stacks, Tag 03Q6, degree zero). -/
 theorem localStalkSections_descent_equality
     {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (x : X)

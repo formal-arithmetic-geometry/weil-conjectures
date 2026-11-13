@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PicardPairingComposition
 
 /-! # Tensor and unit coherence for a pairing on a pullback square
 
-Source: Stacks Project, Tags 0095, 0096, 08HY and 0BDP.
+## References
+
+* Stacks Project, Tags 0095, 0096, 08HY and 0BDP
 -/
 
 @[expose] public section
@@ -129,35 +131,9 @@ private theorem pairing_coefficient_iso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport a pulled pairing across the square and the coefficient comparisons.
-This is a monoidal coherence statement: a and b are arbitrary maps, g is an
+This is a monoidal coherence statement: `a` and `b` are arbitrary maps, `g` is an
 arbitrary pairing satisfying the displayed pullback equation, and there is no
-base-change map or adjunction unit in the conclusion.
-Source: Stacks Project, Tags 0095 and 0096 (tensor pullback and composition),
-Tag 0BDP, evaluation formula.
-
-Proof: Write P_k for tensor pullback, δ_k for picardTensorObjIso(k).hom,
-u_k for picardTensorUnitIso(k).hom, C_A for the square comparison, and D_M
-for the coefficient comparison. Put e_W = δ_qW.inv followed by P_qW(ev)
-and u_qW, and define e_T similarly. Transport by picardTensorComparison
-to ordinary pullback. Its composition comparison sends the iterated pure
-tensor r tensor (s tensor m) to rs tensor m. This respects tensor products
-and sends the unit generator to the unit generator; these formulas extend
-to the sheafifications by the universal property. Hence composition and
-square comparisons are compatible with both δ and u. Transport back.
-
-Square tensor/unit coherence and naturality express the left side as
-δ_pT followed by C_A tensor C_B, then δ_v.inv, then P_v of
-(δ_pW.inv followed by P_pW(g) and u_pW), and finally u_v. Substitute hg:
-δ_pW.inv cancels δ_pW, leaving P_v of (a tensor b followed by e_W).
-Functoriality and tensor naturality move a tensor b through δ_v.inv.
-The resulting expression is δ_pT followed by
-(C_A followed by P_v(a)) tensor (C_B followed by P_v(b)),
-then δ_v.inv, P_v(e_W), and u_v. Coefficient tensor/unit coherence gives
-δ_v.inv followed by P_v(e_W) and u_v = (D_M tensor D_N) followed by e_T.
-Substitute and use tensorHom_comp_tensorHom to combine the two tensor
-morphisms. This is exactly the right side. No adjunction counit, base-change
-map, inverse structure unit, finiteness or flatness is used. Zero pairings
-and empty schemes obey the same functorial identities. -/
+base-change map or adjunction unit in the conclusion. -/
 theorem picardPairing_pullback_coherence
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W)
     (M N : X.Modules) (ev : M ⊗ N ⟶ SheafOfModules.unit X.ringCatSheaf)

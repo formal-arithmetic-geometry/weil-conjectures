@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Local lifting of maps from finite free constant sheaves
 
-Source: Stacks Project, Tag 093U, `lemma-kernel-finite-locally-constant`, extension paragraph.
+## References
+
+Stacks Project, Tag 093U.
 -/
 
 @[expose] public section
@@ -28,20 +30,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- A linear lift of the adjunct over an étale object yields a lift from the constant sheaf
 on that object. This statement needs neither an epimorphism nor a free module.
-
-Source: Stacks Project, Tag 093U, extension paragraph: extend the lifted generators linearly
-and obtain the morphism from the constant sheaf.
-
-Proof: Identify étale pullback with restriction along the localization functor using
-Etale.upperStarIsoLocalizationRestriction. Under this identification its sections over the
-terminal object are F(U). Apply the constant-sheaf/global-sections adjunction to b to obtain
-the required morphism r. Naturality in the target identifies the adjunct of r followed by
-f with b followed by f(U). The assumed equation identifies this with the restriction of
-the adjunct of a. Naturality in the site identifies that last adjunct with the adjunct of
-the pullback of a precomposed with the inverse constant-sheaf comparison. This comparison
-is upperStarConstantSheafIso, since it is defined by uniqueness of left adjoints to the
-same sections functor. Injectivity of the adjunction homEquiv gives the asserted equality.
-The argument applies to the zero module, empty schemes, and noncommutative rings. -/
+(Stacks, Tag 093U.) -/
 private theorem exists_constant_lift_of_sections_lift {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -148,23 +137,7 @@ private theorem exists_constant_lift_of_sections_lift {X : Scheme.{u}}
       exact (hτ (terminal.from W)).symm
 
 /-- A map from a finite free constant sheaf locally lifts along any epimorphism.
-
-Source: Stacks Project, Tag 093U, `lemma-kernel-finite-locally-constant`, extension paragraph,
-lifting the finitely many generators.
-
-Proof: By the constant-sheaf/global-sections adjunction, the given map is a linear map
-from the free module to the sections of G over the terminal etale object. Evaluate on
-the standard basis. An epimorphism of module-valued sheaves is locally surjective after
-forgetting to sets, so each of these finitely many sections lifts on a covering sieve.
-Intersect these finitely many sieves; the intersection is covering by the topology axioms.
-For each point of X choose an arrow in the intersection whose image contains that point.
-This gives a cover indexed in the universe of X. On each cover member all basis sections
-have lifts; extend them linearly and use the constant-sheaf adjunction on that member to
-obtain r. The equality after composition holds on every basis element, hence on the free
-module and, by the adjunction, on its constant sheaf. The comparison with restriction is
-precisely upperStarConstantSheafIso, natural in the free module. When n is zero no
-sections need lifting and the identity cover suffices; on an empty base use the empty cover.
-This argument needs neither a finite coefficient ring nor a constant target. -/
+(Stacks, Tag 093U.) -/
 theorem exists_finiteFreeConstant_local_lift {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

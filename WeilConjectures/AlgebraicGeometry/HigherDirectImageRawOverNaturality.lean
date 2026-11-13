@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
 
 /-! # Raw cohomology pullback and the higher-image comparison
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -52,7 +54,7 @@ noncomputable abbrev higherDirectImageRawOverComparison
 /-- Pullback of a raw cohomology class for coefficients restricted from W.
 The factors are pullback composition, the single-functor comparison, pullback
 of the class, shift comparison, and the canonical coefficient identification.
-Source: Stacks Project, Tag 09Z1, canonical cohomology comparison maps. -/
+(Stacks, Tag 09Z1) -/
 @[implicit_reducible]
 noncomputable def higherDirectImageRawOverPullback
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -76,10 +78,7 @@ private theorem evaluation_postcomp
   exact (congrArg (fun n ↦ n.app (op U) β) h).symm
 
 /-- The comparison component of raw pullback with the higher direct image map.
-Source: Stacks Project, Tags 03Q8 and 09Z1; canonical derived-Hom comparison.
-The proof expands the adjunction comparison, applies the triangle identity,
-and identifies the resulting shifted homology map with the canonical transition.
--/
+(Stacks, Tags 03Q8 and 09Z1) -/
 theorem higherDirectImageRawOverPullback_comparison
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -99,11 +98,7 @@ theorem higherDirectImageRawOverPullback_comparison
       (higherDirectImageRawOverCoefficient Λ G f) U z)).trans
     (evaluation_postcomp Λ U _ _)
 
-/-- Restriction component of raw pullback naturality.
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-The proof is the naturality of the pullback composition and single-complex
-comparison maps under restriction of the étale test object.
--/
+/-- Restriction component of raw pullback naturality. -/
 theorem higherDirectImageRawOverPullback_restriction
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -118,21 +113,7 @@ theorem higherDirectImageRawOverPullback_restriction
   apply higherDirectImageRawTrianglePullback_restriction
 
 /-- Raw pullback intertwines the fixed cohomology-presheaf comparison with the
-canonical higher-image transition. This requires no limit or qcqs assumptions.
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-
-Proof: Expand the raw class comparison as derived adjunction followed by degree-zero
-homology and evaluation at the identity generator of the free module sheaf of U.
-Expand the transition as unit, pullback composition, and counit. Naturality of the
-unit moves the class through pullback, and the triangle identity cancels the
-counit against the unit in its adjoint image. The pullback composition comparison
-on single complexes then gives the first two factors of the raw pullback. Shift
-compatibility gives its fourth factor; the last factor is the shifted coefficient
-identification. Naturality of homology and evaluation proves the equality.
-For restriction along a: T -> U, use naturality of the pullback composition
-and single-functor isomorphisms in the free sheaf of U. Functoriality moves its
-precomposition through pullback; associativity gives the second equality.
-The comparisons are the fixed constructions, not arbitrarily chosen isomorphisms. -/
+canonical higher-image transition. This requires no limit or qcqs assumptions. -/
 theorem higherDirectImageRawOverPullback_toSheaf
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

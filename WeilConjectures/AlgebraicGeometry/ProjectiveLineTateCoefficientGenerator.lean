@@ -151,16 +151,7 @@ private theorem kummer_lineHomEquiv_eq
   exact congrArg (fun z ↦ f.hom.app W z) ((kummer_root_map_apply N A hA) X W z).symm
 
 /-- The actual scalar-extended Kummer class generates the Tate-line H² once
-its roots-of-unity class is normalized to one by an additive isomorphism.
-
-Proof: choose a primitive root to identify the root sheaf with constant Z/N.
-The supplied normalization makes the corresponding constant H² class a cyclic
-generator. The finite constant-coefficient generator theorem identifies H² for
-the underlying additive group of A. A primitive root also trivializes the Tate
-line over A. Its universal property and the scalar description of endomorphisms
-of a constant rank-one module identify all coefficient maps with scalar maps.
-Consequently the scalar orbit of the actual class is surjective. Both its source
-and target have cardinality card(A), so it is bijective, including for A=0. -/
+its roots-of-unity class is normalized to one by an additive isomorphism. -/
 theorem ordinaryFiniteP1KummerClass_scalar_bijective_of_normalization
     (N : ℕ) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (k : Type u) [Field k] [IsAlgClosed k] (hNk : (N : k) ≠ 0)

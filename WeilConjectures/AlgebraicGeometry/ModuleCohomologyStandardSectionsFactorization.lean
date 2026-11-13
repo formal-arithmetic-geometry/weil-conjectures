@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 /-! # The module-to-abelian-sections part of the standard comparison
 
-Source: Stacks Project, Tags 015E and 03FD.
+## References
+
+* [Stacks, Tags 015E and 03FD]
 -/
 
 @[expose] public section
@@ -33,21 +35,8 @@ private theorem evaluate_right_factor
   simp only [Iso.trans_hom, AddCommGrpCat.comp_apply, Iso.hom_inv_id_apply]
 
 /-- The common-resolution module comparison at x equals the inverse acyclic-resolution
-comparison applied to the exact-forgetting module resolution comparison at x.
-Source: Stacks Project, Tags 015E and 03FD, first half of the standard-resolution
-calculation in `new-module-cohomology-ext-standard-resolution-formula`.
-
-Proof: Substitute the equality identifying I with the standard injective resolution
-and the defining equation of a. The component of resolutionSectionsNatIso is,
-by construction, resolutionForgetObjIso followed by sectionHomologyIso and the
-inverse acyclic-resolution comparison. sectionHomologyIso is the identity because
-both functor composites produce the same abelian section complex. Compose with
-the forward acyclic-resolution comparison and cancel its inverse. The remaining
-isomorphism is exactly a. Apply the inverse acyclic-resolution map to this
-equality at x and cancel its hom followed by inv. Proof irrelevance identifies
-the supplied QuasiIso proof
-with the one used in the construction. This applies in every degree, including
-zero, and to zero coefficients and empty schemes. -/
+comparison applied to the exact-forgetting module resolution comparison at x
+(Stacks, Tags 015E and 03FD). -/
 theorem standard_sections_factorization
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     [EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -75,11 +75,8 @@ private lemma exists_common_germs (X : Scheme.{u}) (H K : X.Modules) (x : X)
   · exact H.presheaf.germ_res_apply _ x _ s
   · exact K.presheaf.germ_res_apply _ x _ r
 
-/-- Existence of the stalkwise pairing used in the coordinate construction.
-Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16.
-The pairing sends germs represented on a common neighbourhood to the germ of the
-sectionwise tensor. Compatibility under restriction makes this well-defined, and
-bilinearity follows from bilinearity of the presheaf tensor product. -/
+/-- Existence of the stalkwise pairing used in the coordinate construction
+(Banerjee, §1.1.4). -/
 theorem moduleCup_godement_tensor_stalk_pairing_exists (X : Scheme.{u}) :
     ∃ t : ∀ (H K : X.Modules) (x : X),
       H.presheaf.stalk x → K.presheaf.stalk x → (H ⊗ K).presheaf.stalk x,

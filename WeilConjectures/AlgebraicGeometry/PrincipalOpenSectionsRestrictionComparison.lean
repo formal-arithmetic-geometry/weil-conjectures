@@ -12,7 +12,9 @@ import Mathlib.Algebra.Homology.QuasiIso
 
 /-! # Comparing basic-open sections with sections of the restricted scheme
 
-Source: Stacks Project, Tags 08D2 and 08BS; restriction of scalars for section modules.
+## References
+
+* Stacks Project, Tags 08D2 and 08BS.
 -/
 
 @[expose] public section
@@ -47,19 +49,8 @@ private noncomputable def sectionsForgetIso (A : Type u) [CommRing A] (U : (Spec
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Basic-open sections detect the same quasi-isomorphisms as global sections after
-restriction to the open subscheme. No quasi-coherence or resolution is assumed.
-Source: Stacks Project, Tags 08D2 and 08BS, sections on an open subscheme.
-
-Proof: Put U = D(g). Restriction to the localized site followed by the canonical
-module equivalence overEquiv U is ordinary open-subscheme restriction. Its global
-sections on U are the original module's sections on U, with scalars in O(U).
-The canonical ring map A to O(U) restricts this action to the action used by
-modulesSpecToSheaf and hence by affineOpenSections. The identifications are
-natural in sheaf-module morphisms, and therefore identify both section complexes
-and the map induced by i after restriction of scalars. Restriction of scalars is
-exact: it leaves the underlying additive group, kernels, images and quotients
-unchanged. Thus it preserves and reflects homology isomorphisms in every degree.
-For an empty basic open all these section modules are zero. -/
+restriction to the open subscheme. No quasi-coherence or resolution is assumed
+(Stacks, Tags 08D2 and 08BS). -/
 theorem principalOpenSections_restriction_quasiIso_iff
     (A : Type u) [CommRing A] (g : A)
     (F J : CochainComplex

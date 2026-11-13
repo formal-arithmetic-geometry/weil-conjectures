@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionCompariso
 
 /-! # Unit-scalar generators and scalar extension for the pinned tensor comparison
 
-Source: Stacks Project, Tags 0098 and 0096.
+## References
+
+* Stacks Project, Tags 0098 and 0096.
 -/
 
 @[expose] public section
@@ -112,13 +114,7 @@ private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toSch
 
 set_option maxHeartbeats 700000 in
 -- Stalk scalar transport elaborates two specified tensor-stalk components.
-/-- The unit-scalar section-germ generator equation for the pinned comparison.
-
-Expand the tensor-stalk and pinned restriction maps on a section germ. Their
-units send the germ to `1 ⊗ s`, and `restrictStalkNatIso` identifies the
-restricted germ with the ambient germ. Point transport follows by equality
-induction. The linear extension theorem handles the remaining coefficients.
-Source: Stacks Project, Tags 0098 and 0096. -/
+/-- The unit-scalar section-germ generator equation for the pinned comparison. -/
 theorem openOrdinaryTensor_pure_germ_coordinates_canonical
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -208,24 +204,7 @@ theorem openOrdinaryTensor_pure_germ_coordinates_canonical
 
 
 -- Explicit stalk and tensor module coercions require additional definitional checks.
-/-- Scalar extension of the canonical unit-scalar pinned comparison equation.
-
-Apply `openOrdinaryTensor_pure_germ_coordinates_canonical` in degree `n` to `q`,
-then multiply its equality by the canonical output stalk scalar `e c`.
-`ModuleCat.ExtendScalars.smul_tmul` and `mul_one` identify the pure tensors
-`c ⊗ q` and `e c ⊗ q` with scalar multiples of the corresponding unit tensors.
-The two tensor-stalk components and the stalk map of the inverse pinned
-restriction comparison preserve scalars by `map_smul`. The output additive
-coordinate preserves scalar multiplication over `e` by `open_coordinate_smul`:
-its overFunctorEquiv component is linear, and its restrictStalkNatIso component
-is semilinear over the inverse inclusion stalk map by the existing private
-`Scheme.restriction_stalk_smul` from `OpenModuleStalkRestrictionComparison`,
-made available to this proof through `import all`.
-`Scheme.Opens.stalkIso_inv` identifies that inverse map with the canonical
-output ring equivalence. These identities transform the scalar multiple of the
-canonical equation into the displayed arbitrary-scalar equation. No additional
-hypothesis on the coefficient, degree or stalk element is needed.
-Source: Stacks Project, Tags 0098 and 0096. -/
+/-- Scalar extension of the canonical unit-scalar pinned comparison equation. -/
 theorem openOrdinaryTensor_pure_germ_coordinates_linear_extension
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

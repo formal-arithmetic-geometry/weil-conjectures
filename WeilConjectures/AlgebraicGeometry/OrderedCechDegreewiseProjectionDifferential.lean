@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.OrderedCechModuleCoordinates
 
 /-! # Differential compatibility of degreewise signed projection
 
-Source: Stacks Project, Tags 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -78,8 +80,7 @@ private theorem signed_projection_differential (X : Scheme.{u}) {I : Type*} [Lin
   exact signedCechExtension_increasing X U F S p (fun b ↦ a b.1)
     ⟨t.1 ∘ j.succAbove, t.2.comp j.strictMono_succAbove⟩
 
-/-- The intersection model on the base open B.
-Source: Stacks 01FJ. -/
+/-- The intersection model on the base open `B` (Stacks, Tag 01FJ). -/
 private noncomputable def naturalCechSectionSite {X : Scheme.{u}} {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens) :
     SiteCechComplex (fun i : Fin r ↦ W ⟨i⟩ ⊓ B)
@@ -96,8 +97,7 @@ private noncomputable def naturalCechSectionSite {X : Scheme.{u}} {r : ℕ}
   indexMap t α := homOfLE (le_iInf fun k ↦ iInf_le _ (α k))
   indexMap_pr _ _ _ := Subsingleton.elim _ _
 
-/-- Restriction from the chosen product to the intersection model.
-Source: Stacks 01FJ. -/
+/-- Restriction from the chosen product to the intersection model (Stacks, Tag 01FJ). -/
 private noncomputable def naturalCechSectionMap {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens) (t : Fin (p + 1) → Fin r) :
     (naturalCechSectionSite W B).W p t ⟶ (∏ᶜ fun k ↦ W ⟨t k⟩) ⨯ B :=
@@ -113,8 +113,7 @@ private theorem naturalCechSectionMap_isIso {X : Scheme.{u}} {r p : ℕ}
   intro k
   exact le_inf (prod.fst ≫ Pi.π (fun l ↦ W ⟨t l⟩) k).le prod.snd.le
 
-/-- All tuple coordinates, transported by actual restriction maps.
-Source: Stacks 01FJ. -/
+/-- All tuple coordinates, transported by actual restriction maps (Stacks, Tag 01FJ). -/
 private noncomputable def naturalCechSectionCochain {X : Scheme.{u}} (M : X.Modules) {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (D : CochainComplex X.Modules ℕ)
     (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj
@@ -190,20 +189,8 @@ private theorem naturalCechSectionCochain_injective {X : Scheme.{u}} (M : X.Modu
   exact ht
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Coordinate transport identifies the given differential with the alternating face sum.
-Source: Stacks 01FJ, the Čech differential, and 01FK, restriction to ordered tuples.
-
-Proof: Compose hd with the projection to a full tuple and evaluate at B and s.
-The Mathlib Čech differential is the sum of signed coface maps. Its j-th coface,
-after projecting to t, first projects to t composed with j.succAbove and then
-restricts along the map of chosen products dropping the j-th factor, times the
-identity of B. Restrict further along naturalCechSectionMap. The resulting arrow
-from the intersection for t to the chosen product for its j-th face equals the
-composite through the face intersection, since the category of opens is thin.
-Functoriality identifies the corresponding restrictions. Additivity of restriction
-moves it through the finite sum and the integer coefficients. This gives exactly
-the defining alternating sum for naturalCechSectionSite. For an empty index set
-there are no tuples; no nonempty intersection or affine hypothesis is required. -/
+/-- Coordinate transport identifies the given differential with the alternating face sum
+(Stacks, Tags 01FJ and 01FK). -/
 private theorem naturalCechSectionCochain_differential {X : Scheme.{u}} (M : X.Modules) {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (D : CochainComplex X.Modules ℕ)
     (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj
@@ -248,31 +235,8 @@ private theorem naturalCechSectionCochain_differential {X : Scheme.{u}} (M : X.M
   rw [← M.presheaf.map_comp, ← M.presheaf.map_comp]
   congr 2
 
-/-- The degreewise signed formula commutes with the Čech differential.
-Source: Stacks 01FK, signed extension is a cochain map; 01FM, the map cπ.
-
-Proof: Forget to abelian presheaves and evaluate on an open B and a full tuple y.
-Apply hd to identify the differential of D with the usual alternating face sum.
-Explicitly its y-coordinate in degree p+1 is the sum over j: Fin (p+2) of
-(-1)^j times the restriction of the degree-p coordinate at y composed with
-j.succAbove. On B take the family i ↦ W₀ ⟨i⟩ ⊓ B and coefficient presheaf
-M.presheaf. Its tuple intersection is canonically isomorphic to the chosen
-product (product W₀(y l)) times B: both are the infimum of the same opens.
-Use these canonical restriction isomorphisms to form the sectionwise cochains;
-the face arrows and index-permutation arrows agree under them by uniqueness.
-For an injective y there is exactly one permutation making its entries increasing;
-it is Tuple.sort applied to the underlying Fin r tuple. Thus the filtered sum in
-IsOrderedCechNaturalProjection is the signed extension of the ordered restriction.
-For a noninjective y the filter is empty, so the value is zero. The product-to-
-intersection maps identify the chosen full products with the intersections; every
-restriction composite agrees by uniqueness of arrows of opens. Apply
-signedCechExtension_differential to the resulting sectionwise cochains. Its ordered
-coordinates agree with the ordered coordinates of the differential of the original
-cochain, because each face of an increasing tuple is increasing and the signed
-extension is the identity there (signedCechExtension_increasing). Therefore d(cπs)
-= cπ(ds). Use hd again and the injectivity of e followed by all product coordinates
-to conclude equality of module-sheaf morphisms. When r = 0 or the degree exceeds r,
-there are no increasing tuples and the same equality has both sides zero. -/
+/-- The degreewise signed formula commutes with the Čech differential
+(Stacks, Tags 01FK and 01FM). -/
 theorem orderedCech_degreewise_projection_comm {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)

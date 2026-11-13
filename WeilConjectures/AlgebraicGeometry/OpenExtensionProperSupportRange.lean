@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 
 /-! # The sectionwise image of extension by zero
 
-Source: Stacks Project, Tag 0F4Y.
+## References
+
+* Stacks Project, Tag 0F4Y.
 -/
 
 @[expose] public section
@@ -148,26 +150,7 @@ private theorem properSupport_stalk_outside_zero
   exact ModuleCat.isZero_of_subsingleton _
 
 /-- The canonical extension-by-zero comparison has image exactly the sections whose
-support is proper over the target.
-
-Source: Stacks Project, Tag 0F4Y, specialized to open immersions.
-
-Proof:
-On an etale object factoring through the open, its fibre-product projection to that
-object is an isomorphism. Every closed section support is therefore proper there,
-so restriction of the literal support inclusion to the open is an isomorphism.
-Compose that restriction with the counit of restriction/pushforward and invert it.
-The extension-by-zero adjunction then constructs q from the extension to the support
-sheaf. Counit naturality identifies q followed by the inclusion with the canonical
-extension-by-zero comparison.
-At a geometric point outside the open, represent a support-sheaf germ by a section.
-Its proper support has closed image in the etale neighbourhood, missing the marked
-point. Restrict to the complementary open: every geometric germ of the restricted
-section is zero, hence the section itself is zero by the zero-open theorem. The
-original support-sheaf germ is zero as well. Thus both q's source and target have zero
-stalks outside the open; inside it, restriction makes q invertible. Geometric stalk
-detection proves q is an isomorphism. Composing its bijective component on sections
-with the literal subtype inclusion proves injectivity and the stated image equality. -/
+support is proper over the target. (Stacks, Tag 0F4Y, specialized to open immersions) -/
 theorem openExtensionProperSupport_range (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale) :

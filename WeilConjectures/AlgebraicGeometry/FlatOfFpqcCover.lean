@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 /-!
 # Flatness descends along fpqc covering families
 
-Source: Stacks Project, Descent, Lemma Tag 02L2, descent direction of Definition Tag 02KO.
+## References
+
+* Stacks Project, Tags 02L2 and 02KO
 -/
 
 @[expose] public section
@@ -24,24 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Flatness descends along an fpqc covering family. Source: Stacks Project, Descent,
-Lemma Tag 02L2.
-
-1. Flatness is invariant under isomorphisms and Zariski local on both source and target:
-   the local-ring maps are identified by isomorphisms or restriction to open subschemes.
-2. Flatness is stable under base change.
-3. For a flat surjective map of affine bases, write the map as `Spec` of a ring map.
-   The ring map is flat and its map on prime
-   spectra is surjective, hence it is faithfully flat.
-4. For each affine open `U = Spec A` of the source, its inverse image is the base change
-   of `U`. It is the spectrum of the tensor product. The flat base-changed morphism therefore
-   says that this tensor product is flat over the new base ring, using the affine
-   equivalence and the tensor-product swap.
-5. Faithfully flat descent of module flatness implies that `A` is flat over the
-   original base ring. Thus each affine restriction of the original morphism is flat,
-   and source locality implies that the original morphism is flat.
-6. Steps 1, 2 and 5 verify the fpqc-local-on-the-base criterion (Tag 02KP). Apply it to the given
-   fpqc covering family and the flat second projections to conclude that `f` is flat. -/
+/-- Flatness descends along an fpqc covering family (Stacks, Descent, Tag 02L2). -/
 theorem flat_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)

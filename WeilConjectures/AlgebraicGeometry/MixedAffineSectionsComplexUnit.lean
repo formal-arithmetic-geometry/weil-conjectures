@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
 import WeilConjectures.AlgebraicGeometry.AffineSectionsUnitTransport
 
 /-! # Sections comparison on ordinary affine chart complexes
-Source: Stacks Project, Tag 06Z0.
+
+## References
+
+* Stacks Project, Tag 06Z0.
 -/
 
 @[expose] public section
@@ -29,9 +32,8 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-/-- The ordinary-to-derived sections comparison, with complex localization endpoints.
-Source: Stacks Project, Tag 06Z0. This is the right-derived unit conjugated by the
-quotient-to-homotopy factor isomorphisms. -/
+/-- The ordinary-to-derived sections comparison, with complex localization endpoints
+(Stacks, Tag 06Z0). -/
 noncomputable def mixedSectionsComplexUnit (S : Scheme.{u})
     (C : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) :
     DerivedCategory.Q.obj
@@ -47,18 +49,8 @@ noncomputable def mixedSectionsComplexUnit (S : Scheme.{u})
     (schemeDerivedGlobalSections S).map
       ((DerivedCategory.quotientCompQhIso _).hom.app C)
 
-/-- Affine chart complexes are acyclic for the unbounded sections comparison.
-Source: Stacks Project, Tag 06Z0; affineTildeDerivedSectionsUnit_isIso.
-
-Proof: Apply affineTildeDerivedSectionsUnit_isIso over the global ring of S.
-Transport its comparison along the exact restriction equivalence induced by S.toSpecΓ.
-The global sections of this restriction are the spectrum sections with their scalar
-transport along the canonical global-ring isomorphism. Naturality of the right-derived
-unit and the exact restriction comparison identify the transported map with the
-right-derived unit on the displayed complex. Conjugate by mapHomotopyCategoryFactors
-and quotientCompQhIso. These are isomorphisms, hence the displayed map is invertible.
-This applies to every unbounded complex P, including zero complexes and zero rings;
-there is no K-flatness or boundedness hypothesis. -/
+/-- Affine chart complexes are acyclic for the unbounded sections comparison: the comparison
+`mixedSectionsComplexUnit` is invertible on termwise-tilde complexes (Stacks, Tag 06Z0). -/
 theorem mixedAffineChart_sectionsComplexUnit_isIso (S : Scheme.{u}) [IsAffine S]
     [((tilde.functor Γ(S, ⊤)) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ).Additive]
     (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ) :

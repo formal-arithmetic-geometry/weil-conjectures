@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 
 /-! # Vanishing of local quotient obstructions
 
-Source: Stacks Project, Sites, Tag 04TR.
+## References
+
+* Stacks Project, Sites, Tag 04TR.
 -/
 
 @[expose] public section
@@ -113,20 +115,8 @@ private lemma mate_square_iso {W A B X : Scheme.{u}} {p : W ⟶ A} {s : W ⟶ B}
   exact isIso_baseChangeMap_of_isPullback Ab.{u + 1} h
 
 /-- A prescribed local subobject lies in the restriction of every local quotient
-kernel when the subobjects agree on overlaps.
-
-Source: Stacks Project, Sites, Tag 04TR.
-
-Proof: inverse image along each weakly etale covering arrow is restriction to the
-localized site and preserves products. It is enough to compose with each product
-projection. On U_i times_X U_j, the overlap comparison identifies the pullback of
-q_i with the pullback of q_j. The latter has zero composite with its own cokernel
-map. Weakly etale base change identifies the restriction of the pushforward of
-this local quotient with the pushforward from that overlap. Under the adjunction,
-the desired composite is exactly the zero composite just obtained, including the
-specified upperStarCompIso. Hence every component vanishes, and so does the map
-to the product. There are no components or local conditions for an empty cover.
-No global sheaf, action, factorization, or isomorphism is asserted here. -/
+kernel when the subobjects agree on overlaps (Stacks, Sites, Tag 04TR). No global
+sheaf, action, factorization, or isomorphism is asserted here. -/
 theorem localSubobjectQuotientMap_zero_of_compatible
     (X : Scheme.{u}) (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)

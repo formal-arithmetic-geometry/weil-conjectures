@@ -26,19 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Every set-indexed product functor on modules over a pro-etale ring sheaf is exact.
-`HasExactLimitsOfShape (Discrete I)` asserts right exactness of the product functor;
-its left exactness follows because it is a limit functor. Thus this says that the
-product of any family of short exact sequences is short exact, including both endpoints.
-The module universe contains the site and the indexing set.
-
-Proof: Evaluate at an affine weakly contractible object W. Evaluation commutes with
-products by det-pe-sections-limits-colimits, and det-pe-wc-sections-exact makes each
-evaluated sequence short exact. The product of these module sequences is exact:
-injectivity and equality of image and kernel are coordinatewise, and choice supplies
-a preimage in every coordinate of any tuple in the target. Therefore the product
-sequence is exact after evaluation at every such W. Apply det-pe-sections-conservative
-to detect exactness at its middle term and, using zero terms, at both endpoints.
-This is exactness of the product functor. -/
+The module universe contains the site and the indexing set. -/
 theorem products_exact (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u w (t + 1)}) (I : Type w) :
     HasExactLimitsOfShape (Discrete I) (SheafOfModules.{max u w (t + 1)} R) := by

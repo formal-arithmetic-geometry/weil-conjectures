@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.OpenOrdinaryTensorGermEquation
 
 /-! # Germ coordinates for ordinary tensor restriction
 
-Source: Stacks Project, Tags 0098, 08HY and 08DW.
+## References
+
+* Stacks Project, Tags 0098, 08HY and 08DW.
 -/
 
 @[expose] public section
@@ -31,32 +33,7 @@ set_option maxHeartbeats 500000 in
 -- The target combines two large categorical transports and needs extra elaboration budget.
 /-- Open restriction identifies the ordinary tensor stalk complexes in germ
 coordinates. This concerns only ordinary tensor complexes, not the cohomology
-of a base-derived tensor or its comparison map.
-
-Proof: use the inverse open-immersion stalk maps for the four rings. The point
-identities supplied by hj and the restriction squares identify their endpoints.
-The formula stalkMap_comp and stalkMap_congr_hom identify both base algebra
-maps and both maps from A and B into C. For the input stalk complex, use the
-natural same-germ restriction-stalk comparison, composed with overFunctorEquiv.
-It sends the germ of a restricted section to its original germ. Represent the
-scalar and the section on a common open to prove its eA-semilinearity. Apply
-this comparison in every degree; naturality for the differential makes it a
-chain isomorphism alpha. Define tau in degree n by c0 tensor q0 going to
-eC(c0) tensor alpha(q0). The A-map equation and alpha's semilinearity prove
-balancedness. The inverse uses the inverse ring and input maps. Tensor induction
-checks that these maps are inverse; naturality for the differential gives the
-chain isomorphism tau. The pullback-stalk isomorphisms send each germ tensor to
-the same germ tensor. The four factors of openPinnedTensorRestrictionIso are
-adjunction mates of pushforward composition and open restriction. Evaluating
-their units on germ tensors therefore identifies their composite with tau.
-Localizing this chain identity gives singleComplexOpenTensorRestrictionMap.
-Use the exact restriction factor and the restriction-stalk same-germ natural
-isomorphism in openDerivedAdditiveStalkIso. Naturality of the exact homology
-factors and comparisonStalkHomologyIso then gives the displayed equation.
-Empty opens have no z, while top opens, zero complexes, and zero rings use the
-same formulas. No K-flatness, Tor-independence, or derived pullback counit is used.
-Source: Stacks Project, Tag 0098, stalks of pullback; Tags 08HY and 08DW,
-exact localization and restriction. -/
+of a base-derived tensor or its comparison map. -/
 theorem exists_openOrdinaryTensor_germ_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PicardCupProductMap
 
 /-! # An invertible counit preserves perfectness of a pushed-forward pairing
 
-Source: Stacks Project, Tag 0BDP, final paragraph, the converse dual-basis calculation.
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -43,20 +45,7 @@ private theorem picardTensorObjIso_natural_right
 /-- If a pairing on X is perfect and the counit at its first factor is invertible,
 its pushforward pairing is perfect when the structure-sheaf unit is invertible.
 No finite local freeness or rank condition on the direct image is required.
-
-Source: Stacks Project, Tag 0BDP, final paragraph, converse implication.
-
-Proof: For each Y-module P, adjunction identifies maps P to p_*D with maps p^*P
-to D. Perfectness identifies the latter with maps M tensor p^*P to O_X.
-Use the invertible counit to replace M by p^*p_*M, and the tensor comparison to
-replace this tensor product by p^*(p_*M tensor P). The unit comparison and
-adjunction then identify these maps with maps p_*M tensor P to p_*p^*O_Y.
-The invertible structure-sheaf unit identifies the last target with O_Y.
-Transposition now gives maps P to dual(p_*M). This is a chain of bijections.
-Its section formula, or naturality of the tensor comparison and adjunction,
-says that it sends a to a followed by the cup transpose. Yoneda therefore makes
-the cup transpose invertible. This works for arbitrary modules P and for empty
-schemes and zero objects. -/
+(Stacks, Tag 0BDP) -/
 theorem isIso_curry_picardPushforwardPairing_of_isIso_counit
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (hO : IsIso ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app

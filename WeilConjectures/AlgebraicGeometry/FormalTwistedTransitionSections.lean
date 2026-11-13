@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # Surjectivity of twisted formal transition sections
 
-Source: Stacks Project, proof of Lemma 0885.
+## References
+
+* [Stacks Project, Tag 0885](https://stacks.math.columbia.edu/tag/0885)
 -/
 
 @[expose] public section
@@ -29,20 +31,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Vanishing of first cohomology of the twisted transition kernel makes sections
-of that transition surjective.
-
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885, the surjectivity of the displayed H^0 transition maps.
-
-Proof: The formal quotient isomorphism expresses the transition as a cokernel
-projection followed by an isomorphism, hence it is epi. Tensoring by L^d is an
-exact equivalence because L is invertible. Its kernel is consequently the tensor
-product of the original kernel with L^d. Apply the long exact sequence of derived
-global sections to the resulting short exact sequence. The connecting map out of
-H^0 of the target has zero target by the hypothesis. Exactness makes the H^0 map
-epi. Identify H^0 with global sections; epimorphisms of modules are surjective.
-Evaluation at the top open identifies global sections with compatible sections
-on all opens, and this identification commutes with the transition map.
--/
+of that transition surjective (Stacks, Tag 0885). -/
 theorem formal_twisted_transition_sections_surjective
     {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)
     (F : CoherentFormalModule X K) (L : X.Modules) [L.IsInvertible]

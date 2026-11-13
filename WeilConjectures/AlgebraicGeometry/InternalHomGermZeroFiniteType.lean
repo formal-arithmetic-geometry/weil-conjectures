@@ -16,7 +16,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Detecting the zero germ of a local morphism by finite generation
 
-Source: Stacks Project, Modules, Lemma 01CP, second paragraph.
+## References
+
+* Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section
@@ -93,20 +95,7 @@ private theorem zero_on_generators (X : RingedSpace.{u}) (F G : Modules X)
   exact congrArg SheafOfModules.Hom.val hψ
 
 /-- A local morphism from a finite type sheaf whose induced stalk map is zero
-has zero germ in internal Hom.
-
-Source: Stacks Project, Modules, Lemma 01CP, second
-paragraph (finite type case).
-
-Proof: Restrict to a neighborhood of x where F has finitely many generating
-sections. Intersect it with U. The images of these generators have zero germs
-by the hypothesis. Shrink once for each generator and intersect the finitely
-many resulting neighborhoods. All generator images are then zero sections.
-The generators still generate the restriction of F, since restriction preserves
-free sheaves and epimorphisms. Thus the restricted morphism is zero: compose
-with the free generator epimorphism and use its right cancellation property.
-Its germ, equal to the original germ, is consequently zero. If there are no
-generators the source is zero on this neighborhood and the assertion is immediate. -/
+has zero germ in internal Hom. -/
 theorem internalHom_germ_eq_zero_of_finiteType
     (X : RingedSpace.{u})
     (F G : SheafOfModules.{u}

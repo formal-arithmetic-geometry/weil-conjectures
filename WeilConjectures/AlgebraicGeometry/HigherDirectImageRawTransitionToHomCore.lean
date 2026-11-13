@@ -212,12 +212,7 @@ private theorem transitionThrough_eq
   simp only [Functor.map_comp, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/--
-The morphism-level coherence underlying the raw pullback comparison.  It is obtained by
-expanding the derived adjunction comparison, the transition map, and the shift comparison;
-naturality of the adjunction unit and the triangle identity identify the two composites.
-Source: Stacks Project, Tags 03Q8 and 09Z1.
--/
+/-- The morphism-level coherence underlying the raw pullback comparison. -/
 theorem higherDirectImageRawTransition_toHom_core
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℤ)

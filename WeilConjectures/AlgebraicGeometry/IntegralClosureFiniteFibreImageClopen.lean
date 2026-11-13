@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.QuotientFirstFactorIso
 
 /-! # The finite fibre component has a clopen image in the integral closure
 
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag 09XH
+## References
+
+* Stacks Project, More on Algebra, proof of Lemma 09XH.
 -/
 
 @[expose] public section
@@ -25,29 +27,7 @@ open AlgebraicGeometry CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The finite fibre component has a clopen image in the integral closure.
-
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag 09XH.
-
-1. For a lift of the component idempotent, identify `T` with `V(IB) ∩ D(ε)` using
-   lem-weil-pbc-spec-quotient-homeomorphism-zero-locus.
-2. The inclusion carries `IB'` into `IB`, and the image of `I` generates both ideals;
-   consequently the inverse image of `V(IB')` is `V(IB)`.
-3. The isomorphism over `U` carries the principal open piece to an open piece, showing
-   that the image of `T` is open in `V(IB')`.
-4. Finiteness of `C₁` over `A/I` gives integrality over `B'`, so the spectrum image is
-   closed by lem-weil-pbc-finite-algebra-is-integral and lem-weil-pbc-integral-spec-closed-map.
-5. Pull back along the quotient-spectrum homeomorphism and apply
-   lem-weil-pbc-spec-clopen-idempotent to obtain the unique idempotent and product factors.
-6. Injectivity over `U` shows that the inverse image of the image is precisely `T`.
-7. The two idempotents have the same basic open after pullback. Uniqueness in
-   lem-weil-pbc-spec-clopen-idempotent gives `f ε' = ε` and preservation of both factors.
-8. Use lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact to choose a lift `g` of `ε'`
-   with `D(g) ⊆ U`, by separating the closed complement of `U` from the first factor.
-9. On `D(g)` the isomorphism of locally ringed spaces identifies the section rings,
-   hence the localizations `B'_g` and `B_g`.
-10. Quotient this localization isomorphism by the corresponding ideals `(I, 1-g)`;
-    these quotient rings are the first factors, and the induced first-factor map is
-    therefore a ring isomorphism. -/
+(Stacks, Tag 09XH.) -/
 theorem integralClosure_finiteFibre_image_clopen
     {A : Type v} {B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     [Algebra.FiniteType A B] (I : Ideal A)

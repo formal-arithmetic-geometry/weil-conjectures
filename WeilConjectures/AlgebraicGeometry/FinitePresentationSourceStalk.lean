@@ -17,7 +17,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Finite presentations of module stalks
 
-Source: Stacks Project, Modules, Lemma 01CP, third paragraph.
+## References
+
+* Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section
@@ -54,21 +56,7 @@ private theorem exists_common_germ_sections (X : RingedSpace.{u}) (F : Modules X
       exact hs j
 
 /-- A finite local presentation gives a finite presentation of the source stalk,
-with basis vectors sent to germs of the local generating sections.
-
-Source: Stacks Project, Modules, Lemma 01CP, third
-paragraph, the last displayed right exact sequence; Definition 01BN.
-
-Proof: Choose a supplied finite local presentation around x from
-IsFinitePresentation.exists_quasicoherentData and its covering property.
-The local-presentation stalk theorem makes F_x finitely presented over O_x.
-Apply Module.FinitePresentation.exists_fin' to get maps a and b between
-finite powers, with b surjective and a,b exact. Represent each basis image
-b(e_i) by a germ. Induction on the finite generator count puts all these
-representatives on one common neighborhood, intersecting opens and using
-germ_res_apply at each successor step. This gives the required sections
-and basis formula. For n = 0 use the top open and the empty family; empty
-relation sets and zero stalk rings are already covered by exists_fin'. -/
+with basis vectors sent to germs of the local generating sections. -/
 theorem exists_finitePresentation_source_stalk
     (X : RingedSpace.{u})
     (F : SheafOfModules.{u}

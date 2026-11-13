@@ -17,13 +17,17 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Maps on module cohomology induced by scheme maps
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F7, 01F8, 01FA, 01FB, 01EZ.
+## Implementation details
 
 Nonnegative complexes are encoded by Mathlib's natural-number indexed complexes.
 The choices in the resolution construction are bundled below, and their existence is
 proved using injective resolutions and the global-sections quasi-isomorphism theorem.
 The map itself is the induced horizontal map followed by the inverse of the
 induced vertical map, transported through the standard resolution comparisons.
+
+## References
+
+* [Stacks, Cohomology of Sheaves, Tags 01F7, 01F8, 01FA, 01FB, 01EZ]
 -/
 
 @[expose] public section
@@ -36,10 +40,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 noncomputable section
 
-/-- Extend by zero, apply Mathlib's injective replacement with lower bound zero, and
-use the full extension functor to recover a natural-indexed quasi-isomorphism.
-Source: Stacks Project, Derived Categories, Tag 013K; Mathlib's
-`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`. -/
+/-- Every natural-indexed cochain complex admits a quasi-isomorphism into a complex of
+injectives (Stacks, Derived Categories, Tag 013K). -/
 private theorem nat_complex_injective_resolution
     {C : Type*} [Category* C] [Abelian C] [EnoughInjectives C]
     (A : CochainComplex C ℕ) :
@@ -70,10 +72,8 @@ private theorem nat_complex_injective_resolution
   have : IsIso ((L.restrictionToTruncGE' e).f n) := by infer_instance
   exact Injective.of_iso (asIso ((L.restrictionToTruncGE' e).f n)) inferInstance
 
-/-- Extend an augmentation map successively along the exact source resolution.
-At degree zero use injectivity; at each subsequent degree descend through the exact
-short complex and extend into the next injective term.
-Source: Stacks Project, Derived Categories, Tag 013P, specialized to an augmentation. -/
+/-- An augmentation map into a termwise injective complex extends along the injective
+resolution `J` (Stacks, Derived Categories, Tag 013P). -/
 private theorem lift_to_nat_injectives
     {C : Type*} [Category* C] [Abelian C] {G : C}
     (J : InjectiveResolution G) (K : CochainComplex C ℕ)
@@ -97,10 +97,8 @@ private theorem lift_to_nat_injectives
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport the integer-indexed sections theorem through extension by zero.
-The natural comparison `mapExtendFunctorNatIso` identifies application of sections
-before and after extension, and `quasiIso_extendMap_iff` reflects the result.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FB and 01EZ. -/
+/-- Transport of the integer-indexed sections theorem through extension by zero
+(Stacks, Cohomology of Sheaves, Tags 01FB and 01EZ). -/
 private theorem nat_quasiIso_globalSections_pushforward_injectives
     {X Y : Scheme.{u}} (h : X ⟶ Y)
     (A : CochainComplex X.Modules ℕ) (K : CochainComplex Y.Modules ℕ)
@@ -147,8 +145,7 @@ private theorem nat_quasiIso_globalSections_pushforward_injectives
   exact (HomologicalComplex.quasiIso_extendMap_iff _ e).1 hext
 
 /-- The canonical comparison of global sections, pinned to restriction along
-`h⁻¹(Y) = X`; naturality of a module morphism makes it a complex isomorphism.
-Source: Stacks Project, Cohomology of Sheaves, Remark 01FB. -/
+`h⁻¹(Y) = X`, as an isomorphism of complexes (Stacks, Tag 01FB). -/
 private def pushforward_sections_iso {X Y : Scheme.{u}} (h : X ⟶ Y)
     (A : CochainComplex X.Modules ℕ) :
     ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
@@ -168,9 +165,7 @@ private def pushforward_sections_iso {X Y : Scheme.{u}} (h : X ⟶ Y)
     (A.d n m)).naturality _
 
 /-- Choices for the construction of the cohomology map of an `h`-map. The comparison `a`
-is the identity on sections, using `h⁻¹(Y) = X`. The component formula pins it to this
-canonical comparison, rather than an arbitrary isomorphism.
-Source: Stacks Project, Tag 01FB. -/
+is the identity on sections, using `h⁻¹(Y) = X` (Stacks, Tag 01FB). -/
 structure ModuleCohomologyFMapData {X Y : Scheme.{u}} (h : X ⟶ Y)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (F : SheafOfModules.{u} X.ringCatSheaf)
     (φ : G ⟶ (pushforward h).obj F) where
@@ -195,24 +190,8 @@ structure ModuleCohomologyFMapData {X Y : Scheme.{u}} (h : X ⟶ Y)
       ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
         forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).map lambda))
 
-/-- The resolution choices needed for the construction exist.
-Source: Stacks Project, Tags 01FB, 01EZ.
-
-Proof: (1) Enough injectives gives resolutions I and J of F and G, respectively.
-(2) Extend h_*I by zero to integer indices and apply Mathlib's
-`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective` with lower bound
-zero. Truncate back to natural indices. Fullness of extension by zero and
-`quasiIso_extendMap_iff` give K and lambda.
-(3) The augmentation map into K is a cycle. Injectivity of K in degree zero extends
-it across the augmentation of J. Exactness of J and injectivity of each next term
-extend this map inductively, giving β and the augmentation equation.
-(4) Restriction along h⁻¹(Y) = X gives a canonical isomorphism of sections in every
-degree; naturality of the differentials makes this the complex isomorphism a.
-(5) Extend I, K and lambda by zero and apply
-`quasiIso_globalSections_pushforward_injectives`. The natural comparison
-`mapExtendFunctorNatIso` and `quasiIso_extendMap_iff` transport its conclusion back to
-natural indices. Hence Γ(Y, lambda), and its composite with a, induce isomorphisms
-on homology. The unit, restriction unit, and identity specialize the same construction. -/
+/-- The resolution choices needed for the construction of the cohomology map exist
+(Stacks, Tags 01FB and 01EZ). -/
 theorem moduleCohomologyFMapData_nonempty {X Y : Scheme.{u}} (h : X ⟶ Y)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (F : SheafOfModules.{u} X.ringCatSheaf)
     (φ : G ⟶ (pushforward h).obj F) : Nonempty (ModuleCohomologyFMapData h G F φ) := by
@@ -264,8 +243,8 @@ theorem moduleCohomologyFMapData_nonempty {X Y : Scheme.{u}} (h : X ⟶ Y)
 
 /-- The map of cohomology groups computed from a system of choices `D`:
 H(Γβ) followed by H(μ) inverse, with `μ = a ≫ Γ(Y, λ)`, transported through the
-resolution comparisons `isoRightDerivedObj` and the forgetful homology comparisons.
-Source: Stacks Project, Equation 01FA and Remark 01FB. -/
+resolution comparisons `isoRightDerivedObj` and the forgetful homology comparisons
+(Stacks, Tags 01FA and 01FB). -/
 def ModuleCohomologyFMapData.map {X Y : Scheme.{u}} {h : X ⟶ Y}
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     {φ : G ⟶ (pushforward h).obj F} (D : ModuleCohomologyFMapData h G F φ) (p : ℕ) :
@@ -290,8 +269,8 @@ def ModuleCohomologyFMapData.map {X Y : Scheme.{u}} {h : X ⟶ Y}
       (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) p).inv
 
 /-- The map of cohomology groups of an `h`-map: H(Γβ) followed by H(μ) inverse, for a
-system of choices whose existence is `moduleCohomologyFMapData_nonempty`.
-Source: Stacks Project, Equation 01FA and Remark 01FB. -/
+system of choices whose existence is `moduleCohomologyFMapData_nonempty`
+(Stacks, Tags 01FA and 01FB). -/
 def moduleCohomologyFMap {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :
@@ -300,22 +279,21 @@ def moduleCohomologyFMap {X Y : Scheme.{u}} (h : X ⟶ Y)
         ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :=
   (Classical.choice (moduleCohomologyFMapData_nonempty h G F φ)).map p
 
-/-- Pullback on module cohomology is the map of the tensor-pullback adjunction unit.
-Source: Stacks Project, Tag 01F7. -/
+/-- Pullback on module cohomology is the map of the tensor-pullback adjunction unit
+(Stacks, Tag 01F7). -/
 def moduleCohomologyPullback {X Y : Scheme.{u}} (h : X ⟶ Y)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :=
   moduleCohomologyFMap h
     ((Classical.choose (exists_tensorPullbackAdjunction h)).unit.app G) p
 
 /-- Restriction on module cohomology is the map of the restriction-adjunction unit.
-Its components are precisely restriction from V to V ∩ U.
-Source: Stacks Project, Tag 01F7; Sheaves, Tag 00A1. -/
+Its components are precisely restriction from V to V ∩ U (Stacks, Tags 01F7 and 00A1). -/
 def moduleCohomologyRestriction {Y : Scheme.{u}} (U : Y.Opens)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :=
   moduleCohomologyFMap U.ι ((restrictAdjunction U.ι).unit.app G) p
 
-/-- The edge map is the cohomology map of the identity on the direct image.
-Source: Stacks Project, Tag 01F7. -/
+/-- The edge map is the cohomology map of the identity on the direct image
+(Stacks, Tag 01F7). -/
 def moduleCohomologyEdgeMap {X Y : Scheme.{u}} (h : X ⟶ Y)
     (F : SheafOfModules.{u} X.ringCatSheaf) (p : ℕ) :=
   moduleCohomologyFMap h (𝟙 ((pushforward h).obj F)) p

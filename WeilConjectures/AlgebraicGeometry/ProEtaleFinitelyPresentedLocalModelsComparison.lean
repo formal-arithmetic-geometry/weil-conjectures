@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # Finitely presented local constant models on the pro-etale site
 
-Source: Stacks Project, Tags 09AJ and 093U.
+## References
+
+* Stacks Project, Tags 09AJ and 093U.
 -/
 
 @[expose] public section
@@ -27,8 +29,8 @@ namespace AlgebraicGeometry.Scheme
 namespace ProFiniteModels
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Finite constant models on covering sieves of a fixed-coefficient site.
-Source: Stacks Project, Tag 093U. -/
+/-- Finite constant models on covering sieves of a fixed-coefficient site
+(Stacks, Tag 093U). -/
 def fixedModels {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     (F : Sheaf J (ModuleCat.{max u v} B)) : Prop :=
@@ -129,8 +131,7 @@ private theorem constantComparison_isIso {C : Type u} [Category.{v} C]
   · change Presheaf.IsLocallySurjective J (constantComparison J B R a M).hom
     exact Presheaf.isLocallySurjective_of_isLocallySurjective_fac J hf
 
-/-- Finite local constant models are invariant under isomorphism.
-Source: Stacks Project, Tag 093U. -/
+/-- Finite local constant models are invariant under isomorphism. -/
 theorem fixedModels_of_iso {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     {F G : Sheaf J (ModuleCat.{max u v} B)} (e : F ≅ G)

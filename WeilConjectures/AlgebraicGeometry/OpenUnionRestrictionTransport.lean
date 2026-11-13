@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonDiagram
 
 /-! # Transport the restriction diagram to covering opens of an open union
 
-Source: Stacks Project, Tag 08BW, restriction to the union before applying exactness.
+## References
+
+* [Stacks, Tag 08BW]
 -/
 
 @[expose] public section
@@ -148,34 +150,8 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency true in
 /-- The local restriction diagram on an ambient union is transported to an actual
 cover of the union scheme. This statement supplies only equivalences, comparison
-isomorphisms, and compatibility of local maps; it does not assert any gluing.
-Source: Stacks Project, Tag 08BW, canonical restriction to the union; Mathlib's
-`Modules.overMapCompOverEquiv`, `overFunctorEquiv`, `restrictFunctorComp` and
-`restrictFunctorCongr` implement the change of open schemes.
-
-Proof: Put Y = (W union V).toScheme and take U and T to be the inverse images
-of W and V under the open inclusion Y into X. Inverse image preserves union,
-and its inverse image of W union V is top, so U and T cover Y. Each pulled-back
-open scheme is canonically isomorphic to the corresponding original open scheme,
-as is their intersection. Transport module sheaves through these scheme
-isomorphisms; their exact functors induce the displayed derived equivalences.
-Supply localizations in Hom universe w by derivedOpenLocalization and the
-localization transport in open_derived_localization_adjunction, applied with
-Y's given localization. For qW and qV, identify both underived restriction routes
-with restriction along W into Y and V into Y, respectively, using
-Modules.overMapCompOverEquiv, overFunctorEquiv, restrictFunctorComp and
-restrictFunctorCongr, and then derive these natural isomorphisms. The overlap
-comparison is a pasted square of the same underived isomorphisms. On a complex,
-the factorization identities for mapDerivedCategoryCompIso and
-mapDerivedCategoryNatIso show that deriving this pasted square equals pasting
-its derived comparisons; extend the identity through the localization using
-Localization.natTrans_ext. Conjugate a and b by kW and kV and take their
-preimages under the two derived equivalences. Apply the overlap equivalence to
-the desired equality, use this pasted-square identity and functoriality, and
-cancel the equivalence units and comparison inverse pairs. The remaining
-equality is exactly the displayed ambient compatibility hypothesis. The same
-argument includes empty opens, disjoint opens, and an empty union, since all
-scheme identifications and equivalence identities hold in these cases. -/
+isomorphisms, and compatibility of local maps; it does not assert any gluing
+(Stacks, Tag 08BW). -/
 theorem open_union_restriction_transport
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

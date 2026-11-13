@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 /-!
 # Local clearing of denominators for twist sections
 
-Source: Stacks Project, Section 27.8, construction preceding Lemma 27.8.4, Tag 01M7.
+## References
+
+* Stacks Project, Section 27.8, Tag 01M7.
 -/
 
 @[expose] public section
@@ -21,22 +23,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Proj
 
 /-- A twist section has a cleared representative on a principal neighborhood of each
-point of the affine chart.
-Source: Stacks Project, Section 27.8, Lemma 27.8.1 and the construction preceding
-Lemma 27.8.4, Tag 01M7, specialized to the shift A(k).
-
-Proof: transport x to D₊(f) under its canonical affine chart. The locally-fraction
-predicate gives a homogeneous fraction a/d on a neighborhood V of that point. Choose
-an open D₊(u) containing the point and contained in V, with u homogeneous. Multiply
-both a and d by u*f, giving N=a*u*f and h=d*u*f. The degree c of h is positive since
-f has degree b>0, and D₊(h) lies in V and D₊(f). In B=A_(f) put g=h^b/f^c; the chart
-identifies D₊(h) with D(g), so x lies in D(g). Put z=h^(b-1)*N/f^c in A_f. At any p
-where the canonical image of g is a unit, the image of h is a unit: the image of f
-already is, and h^b/f^c is a unit with b>0. In the prime localization this says h
-avoids the prime, hence p lies in D₊(h). The section value there is N/h, and
-(h^b/f^c)*(N/h)=h^(b-1)*N/f^c, the image of z. This is the displayed identity.
-The construction does not require a to be nonzero or k to be nonnegative. If the
-chart is empty (including nilpotent f), there is no x and the assertion is vacuous. -/
+point of the affine chart (Stacks, Tag 01M7). -/
 theorem twist_local_clearing
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

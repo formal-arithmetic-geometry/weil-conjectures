@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Open restriction compatibility of the tensor pullback unit
 
-Source: Stacks Project, Tags 0096 and 0098.
+## References
+
+* Stacks Project, Tags 0096 and 0098.
 -/
 
 @[expose] public section
@@ -311,25 +313,7 @@ private theorem stalk_unit_of_sections
 
 -- Germ conversion across the slice equivalence needs extra elaboration heartbeats.
 set_option maxRecDepth 2048 in
-/-- The pinned tensor restriction comparison preserves the pullback unit on stalks.
-
-Proof: express the inverse comparison as the inverse of its four defining factors.
-The open-pullback factor is the unique comparison of left adjoints; the identity
-`Adjunction.unit_leftAdjointUniq_hom_app` says it identifies their units.
-For each composition factor, `unit_conjugateEquiv_symm` identifies the composite
-unit with the unit for the composite morphism, followed by the pushforward
-composition comparison. The two composition comparisons cancel after transport
-along `hj`. Hence the inverse pinned comparison sends the restricted unit for
-`j` to the restriction of the unit for `k`. Apply the additive stalk functor,
-then the pushforward-stalk map. On section germs this map sends the germ of a
-unit section over W to its germ over the inverse image of W. The formulas
-`germ_restrictStalkNatIso_hom_app` identify both open restriction factors with
-the same ambient germ. Transport of the input point is exactly `hx` below.
-Every stalk element is represented by a section germ, so equality on germs
-proves the equality of additive maps. No flatness or cartesian hypothesis is
-used. Empty opens have no z; zero sheaves and identity open immersions satisfy
-the same unit identities.
-Source: Stacks Project, Tags 0096 and 0098; Mathlib adjunction mate unit identities. -/
+/-- The pinned tensor restriction comparison preserves the pullback unit on stalks. -/
 theorem openPinnedTensorRestriction_stalk_unit
     {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)

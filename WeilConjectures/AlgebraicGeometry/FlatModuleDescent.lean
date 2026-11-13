@@ -16,7 +16,15 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleDescentAffineCharts
 /-!
 # Eventual descent of flatness for finitely presented scheme modules
 
-Source: Stacks Project, Lemma 32.10.4 (Tag 05LY), with the target equal to the base.
+## Implementation details
+
+The ring functor presents the affine inverse system contravariantly. The cone supplies
+its limit projections. An affine limit is written as `IsAffine c.pt`, allowing any choice
+of its isomorphism with a spectrum.
+
+## References
+
+* [Stacks Project, Tag 05LY](https://stacks.math.columbia.edu/tag/05LY)
 -/
 
 @[expose] public section
@@ -28,24 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A finitely presented quasi-coherent module whose limit pullback is flat over the base
-is flat over every sufficiently late base.
-Source: Stacks Project, Tag 05LY.
-
-Proof:
-1. Cover the finitely presented source by finitely many affine opens. Their rings are finitely presented over
-   the stage ring, and the chart modules
-   are finitely presented (`def-sc-finitely-presented-module`, Stacks Tag 01PC).
-   Base change identifies the pulled-back charts and modules with tensor products. Limit flatness implies flatness of their sections (Tag 01U4).
-2. Apply `lem-pc-affine-flat-module-descent` to each chart with its base algebra equal to
-   the stage ring. Directedness gives a common upper bound of `i` and the finitely many
-   stages; when the affine cover is empty, take `i` itself.
-3. For every later stage, all chart modules are flat over that stage's base ring.
-   The affine-local criterion (Tag 01U4) glues these conclusions to the whole source.
-
-The ring functor presents the affine inverse system contravariantly. The cone supplies
-its limit projections. An affine limit is written as `IsAffine c.pt`, allowing any choice
-of its isomorphism with a spectrum; affine stages are quasi-compact and quasi-separated,
-and all their transition morphisms are affine. -/
+is flat over every sufficiently late base (Stacks, Tag 05LY). -/
 theorem exists_eventually_isFlatOver_of_limit
     {I : Type u} [PartialOrder I] [IsDirectedOrder I]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

@@ -103,25 +103,8 @@ private theorem native_pull_oplax
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
-/-- The ordinary balanced scalar square uses the native pullback tensorator.
-
-Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5); Stacks 06YY,
-0G7E; the ordinary tensor comparison in integral proper base change (1), (3).
-
-Proof. Apply residueOrdinaryTensorPull_homotopy for the coefficient map a.
-Its transported ordinary monoidal structure agrees with native module pullback
-on tensorators. To check this equality forget module actions and precompose with
-pullback of the balanced tensor coprojection. The native structure is the
-composite of mapMod and extension along the coefficient pullback isomorphism.
-The transported structure first combines mapMod with restriction along the
-inverse coefficient isomorphism and then transports along extendScalarsIsoComapInv.
-For both structures the resulting underlying map is the ambient sheaf pullback
-tensorator followed by the two coefficient identifications and the balanced
-tensor coprojection on X. Cancel the coprojection epimorphism and use faithfulness
-of forgetting actions. This equality in each degree identifies the induced
-homotopy tensorators; substitution in the cited ordinary homotopy square gives
-the formula. This statement involves only ordinary functors and homotopy
-complexes, with no derived scalar comparison or tensor normalization. -/
+/-- The ordinary balanced scalar square uses the native pullback tensorator
+(Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5); Stacks, Tags 06YY and 0G7E). -/
 theorem scalar_ordinary_tensor_pull_model (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :

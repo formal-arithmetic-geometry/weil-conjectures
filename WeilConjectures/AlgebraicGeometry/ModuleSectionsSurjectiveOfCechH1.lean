@@ -18,7 +18,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # Surjectivity of module sections from vanishing Čech H¹
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01EU.
+## References
+
+* [Stacks, Tag 01EU](https://stacks.math.columbia.edu/tag/01EU)
 -/
 
 @[expose] public section
@@ -52,13 +54,7 @@ private theorem module_local_lifts (X : Scheme.{u}) (S : ShortComplex X.Modules)
   rfl
 
 /-- Vanishing Čech H¹ on a cofinal system of open coverings makes sections of a
-short exact sequence of `O_X`-modules surjective.
-Source: Stacks Project, Cohomology, Tag 01EU.
-Proof: local lifts are refined to a chosen covering; their differences form a
-Čech cocycle in the kernel, which is a coboundary by the vanishing hypothesis.
-Subtracting the coboundary makes the lifts compatible, and the sheaf axiom glues
-them to a global lift. The empty open is included by the sheaf zero-section axiom.
--/
+short exact sequence of `O_X`-modules surjective (Stacks, Tag 01EU). -/
 theorem module_sections_surjective_of_cech_h1_vanishing
     (X : Scheme.{u}) (S : ShortComplex X.Modules) (hS : S.ShortExact)
     (U : Opens X)

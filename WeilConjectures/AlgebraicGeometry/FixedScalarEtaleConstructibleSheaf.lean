@@ -12,7 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-! # Constructibility under the etale scalar presentation
 
-Source: Stacks Tags 03CY, 03RW and 095E.
+## References
+
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks Project, Tag 03RW](https://stacks.math.columbia.edu/tag/03RW)
+* [Stacks Project, Tag 095E](https://stacks.math.columbia.edu/tag/095E)
 -/
 
 @[expose] public noncomputable section
@@ -160,24 +164,7 @@ private theorem coefficientConstructible_realization (X : Scheme.{u}) [IsNoether
 
 /-- The explicit scalar and small-site equivalence preserves and reflects the module
 constructibility condition. No finiteness of the underlying coefficient set is required.
-Source: Stacks Modules on Sites Tag 03CY; Etale Cohomology Tags 03RW and 095E.
-
-Proof: apply etale_noetherian_global_constructibility to the coefficient module. The
-resulting finite stratification is a stratification on the original scheme with exactly
-the same immersed domains. Restriction to each stratum commutes with the site equivalence:
-the corresponding direct images are precomposition along the same base change, and taking
-adjoint mates gives the inverse-image comparison. The scalar restriction identifies the
-underlying module-valued sheaves and their constant module models. Precomposition by the
-site equivalence sends and reflects covering sieves; the induced equivalences of slice
-sites identify the restrictions and the sheafified constant module objects. Thus the local
-finite-module condition is unchanged. On the original etale site, locally constant sheaves
-with finitely generated stalks admit local constant models with finitely generated values:
-start with a constant trivialization, use a geometric point in each nonempty member to
-identify its value with a stalk, and refine by these members. Empty members can be removed;
-on the empty scheme the empty cover suffices. Conversely a finite constant module has
-finitely generated stalks and the property is local. These two operations identify precisely
-IsConstructibleSheaf on the same stratification. The ring is Noetherian, so finite generation
-and finite presentation agree; neither argument asks that the ring be finite as a set. -/
+(Stacks, Tags 03CY, 03RW and 095E.) -/
 theorem fixedScalarEtale_constructible_sheaf (X : Scheme.{u}) [IsNoetherian X]
     (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) :

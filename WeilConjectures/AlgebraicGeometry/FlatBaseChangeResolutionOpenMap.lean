@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 
 /-! # The open cohomology map of a fixed resolution lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -23,11 +26,8 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-/-- The map of open cohomology computed directly from t on section complexes.
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-The source and target homology isomorphisms are the canonical resolution comparisons,
-forgetful homology comparisons, and the section isomorphisms pinned by D. No replacement
-complex, arbitrary witness, or unproved choice is used in this construction. -/
+/-- The map of open cohomology computed directly from `t` on section complexes.
+(Stacks, Tags 01FB and 01E4.) -/
 def flatBaseChangeResolutionOpenMap {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules}

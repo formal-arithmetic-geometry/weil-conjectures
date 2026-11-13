@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of a proper-fibre idempotent to a Noetherian model
 
-Source: Stacks Project, Tag 0G7X, general case before applying the Noetherian case.
+## References
+
+* [Stacks Project, Tag 0G7X](https://stacks.math.columbia.edu/tag/0G7X)
 -/
 
 @[expose] public section
@@ -114,15 +116,8 @@ private theorem affine_fibre_idempotent_descent
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- An idempotent on a proper fibre descends to a proper morphism over a locally
-Noetherian base, together with the commuting maps on schemes and fibres.
-Source: Stacks, Tag 0G7X, Steps 5--8. First restrict the base to an affine
-neighbourhood of s and apply proper Noetherian approximation. The residue field of s
-is the filtered colimit of the stage residue fields, so the fibre is the inverse limit
-of the stage fibres with affine transitions. Global sections commute with that limit:
-descend e to a stage, then descend its equation e * e = e to a later stage. The
-Noetherian model is that stage and the projections provide p, r and q. Commutation
-with the fibre embeddings is the defining property of the induced fibre projections.
-This statement asks for no section on a neighbourhood of s. -/
+Noetherian base, together with the commuting maps on schemes and fibres
+(Stacks, Tag 0G7X). -/
 theorem proper_fibre_idempotent_descent
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S)
     (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) :

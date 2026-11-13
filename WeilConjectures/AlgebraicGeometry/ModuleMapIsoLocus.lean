@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # The open where a module map is locally invertible
 
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3).
+## References
+
+* [Stacks, Tag 05GD](https://stacks.math.columbia.edu/tag/05GD)
 -/
 
 @[expose] public section
@@ -19,9 +21,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The union of the open subschemes on which the tensor pullback of a map is invertible.
-This construction uses every such open, and makes no choice of frames or inverse.
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3). -/
+/-- The union of the open subschemes on which the tensor pullback of a map is invertible
+(Stacks, Tag 05GD). -/
 noncomputable def moduleMapIsoLocus {W : Scheme.{u}} {M N : W.Modules} (φ : M ⟶ N) :
     W.Opens :=
   sSup {U : W.Opens | IsIso ((tensorPullback U.ι).map φ)}

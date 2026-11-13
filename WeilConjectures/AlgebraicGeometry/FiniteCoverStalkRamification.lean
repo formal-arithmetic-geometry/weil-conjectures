@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 /-!
 # Ramification indices of a finite morphism in terms of stalks
 
-Let `p: C ⟶ Y` be an affine morphism and `Y₀ ⊆ Y` an affine open, with `A = Γ(Y, Y₀)` and
+Let `p : C ⟶ Y` be an affine morphism and `Y₀ ⊆ Y` an affine open, with `A = Γ(Y, Y₀)` and
 `B = Γ(C, p⁻¹ Y₀)`. For a point `c ∈ p⁻¹ Y₀` with prime `q ⊆ B`, the ramification index
 `e(q | A)` is the length of `𝒪_{C,c} / 𝔪_{Y,p c} 𝒪_{C,c}`
 (`AlgebraicGeometry.Scheme.Hom.ramificationIdx_primeIdealOf_eq_length`). In particular it is `1`
@@ -81,7 +81,7 @@ theorem ramificationIdx_primeIdealOf_eq_one (c : C) (hc : c ∈ p ⁻¹ᵁ Y₀)
     Nat.cast_one, Module.length_eq_one_iff, isSimpleModule_iff_isCoatom, ← Ideal.isMaximal_def]
   exact maximalIdeal.isMaximal _
 
-/-- **Ramification index as the valuation of a uniformizer.** Let `p: C ⟶ Y` be an affine morphism
+/-- **Ramification index as the valuation of a uniformizer.** Let `p : C ⟶ Y` be an affine morphism
 with `Γ(C, p⁻¹ Y₀)` finite over `Γ(Y, Y₀)`, and `c ∈ p⁻¹ Y₀` a point at which `𝒪_{C,c}` is a
 discrete valuation ring. If `u` generates the maximal ideal of `𝒪_{Y,p c}`, then its image in
 `𝒪_{C,c}` is `w * ξ ^ e` with `w` a unit, `ξ` a uniformizer and `e` the ramification index of the

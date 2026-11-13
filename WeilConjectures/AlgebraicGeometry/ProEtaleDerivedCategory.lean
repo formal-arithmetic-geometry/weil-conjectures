@@ -11,6 +11,18 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Derived category of modules on the small pro-etale site
+
+## Implementation details
+
+For a scheme `Y` and a commutative ring `A`, the small pro-etale site is `Y.ProEt` with
+`ProEt.topology Y`: its objects are weakly etale schemes over `Y`, and its covers are the
+pro-etale (fpqc) covering families. The derived category is the localization of cochain
+complexes at quasi-isomorphisms (`HasDerivedCategory.standard`); as an `abbrev` it carries
+the category and triangulated structure of `DerivedCategory`.
+
+## References
+
+* Stacks Project, Tag 098K (the small site) and Tag 05RU (the derived category).
 -/
 
 @[expose] public section
@@ -21,16 +33,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- For a scheme `Y` and a commutative ring `A`,
-the small pro-etale site is `Y.ProEt` with `ProEt.topology Y`: its objects are weakly
-etale schemes over `Y`, and its covers are the pro-etale (fpqc) covering families.
-The constant ring sheaf `A_Y` is the sheafification of the constant presheaf.
-The category of sheaves of `A_Y`-modules is `SheafOfModules`; its derived category
-is the localization of cochain complexes at quasi-isomorphisms (`HasDerivedCategory.standard`);
-as an `abbrev` it carries the category and triangulated structure of `DerivedCategory`.
-
-Source:, order 662;
-Stacks Project, Tag 098K (the small site) and Tag 05RU (the derived category). -/
+/-- The derived category of sheaves of `A_Y`-modules on the small pro-etale site of `Y`,
+where `A_Y` is the constant ring sheaf (Stacks, Tags 098K and 05RU). -/
 noncomputable abbrev proEtaleDerivedCategory (Y : Scheme.{t})
     (A : Type t) [CommRing A] : Type _ :=
   @DerivedCategory

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisComparisons
 
 /-! # The short exact complex presenting direct-image Mayer--Vietoris
 
-Source: Stacks Project, Cohomology, Tag 08BV, proof before passage to the triangle.
+## References
+
+* Stacks Project, Cohomology, Tag 08BV.
 -/
 
 @[expose] public section
@@ -34,46 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- The transported restriction functors require extra elaboration heartbeats.
 /-- The injective representative gives a short exact sequence with comparisons of
-its first two arrows to the derived units and the difference of restriction maps.
-Source: Stacks Project, Cohomology, Tag 08BV, construction of the short exact sequence
-and its identification with the three derived direct-image objects.
-
-Proof:
-For each open W among U, V and their intersection, restrict I termwise. Exact
-extension by zero is left adjoint to restriction, so restriction preserves
-K-injectivity (Tag 08BS). Transport from the localized module site to the open
-subscheme using Scheme.Modules.overEquiv. Put J_W = j_W* (I|W), with the
-underived module direct image applied termwise. Set B = J_U biproduct J_V and
-C = J_(U intersection V). Define f as the pair of restriction units and g as
-the difference of the two restrictions to the intersection. Naturality of the
-sheaf restrictions makes these chain maps, and the two iterated restrictions
-agree, so f followed by g is zero. On each test open T and in degree n, the
-sequence is I^n(T) -> I^n(T intersection U) plus I^n(T intersection V) ->
-I^n(T intersection U intersection V). Since U and V cover X, uniqueness and
-existence of sheaf gluing give a zero kernel and the equalizer at the middle.
-Injectivity of I^n makes restriction to a smaller open surjective (Tag 01EA):
-lift any intersection section to T intersection U and take zero in the other
-summand. Thus the sequence is short exact on sections, hence short exact as
-sheaves and degreewise as complexes.
-Derive the restriction/direct-image adjunction, using exactness of restriction
-and K-injective resolutions for its right adjoint. Its unit on a K-injective
-representative is the localized underived restriction unit. The right-derived
-unit on the restricted K-injective complexes identifies Q(J_W) with Rj_W*(E|W),
-after composing with the exact-restriction comparison and e. The biproduct
-comparison for Q gives eB; the intersection comparison gives eC. Naturality
-of e identifies Q(f) with the pair of derived units. For Q(g), transpose each
-restriction along the derived adjunction: its transpose is the restriction of
-the U or V counit, conjugated by the canonical nested-restriction comparison.
-This is exactly schemeDerivedOpenDirectImageRestriction. Additivity and the
-biproduct comparison identify the second arrow with their difference.
-For arbitrary given adjunctions, compare each with the derived restriction
-adjunction by uniqueness of right adjoints. This gives an automorphism of each
-right-adjoint functor, carrying the canonical unit to the supplied unit. Compose
-each object comparison with that automorphism. Naturality and the unit/counit
-identities show that the adjoint restriction maps are conjugated by the same
-automorphisms, giving the two displayed identities for the supplied adjunctions.
-No connecting morphism or distinguished-triangle assertion is included here.
-The construction also works for empty opens or repeated opens. -/
+its first two arrows to the derived units and the difference of restriction maps. -/
 theorem schemeKInjective_mayerVietoris_presentation
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

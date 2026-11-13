@@ -19,7 +19,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 The projection-normalized coefficient constructions are independent of the
 stratified-perfect theorem and its geometric hypotheses.
-Source: Bhatt--Scholze, Section 6.5.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.5.
 -/
 
 @[expose] public noncomputable section
@@ -33,13 +36,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The quotient coefficient identification induced by the canonical valuation-ring lift.
 The normalization on representatives determines the equivalence uniquely. The source
-uses the recorded valuation ring lifted to the small site's coefficient universe.
-Source: blueprint coefficient conventions, order 411; Bhatt--Scholze, Section 6.5.
-Proof: ULift.down is a ring equivalence from the recorded lifted valuation ring to the
-original valuation ring. It sends the recorded lifted uniformizer to the original
-uniformizer, and hence identifies their principal ideals and every positive power.
-Descend this equivalence to the quotients and lift its target. Surjectivity of the
-quotient map proves uniqueness from the displayed representative formula. -/
+uses the recorded valuation ring lifted to the small site's coefficient universe. -/
 theorem integralCoefficientULift_exists
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -70,16 +67,14 @@ theorem integralCoefficientULift_exists
       rw [Ideal.quotientEquiv_mk]
       rfl)
 
-/-- The uniquely normalized quotient equivalence, not an arbitrary field identification.
-Source: blueprint coefficient conventions, order 411; Bhatt--Scholze, Section 6.5. -/
+/-- The uniquely normalized quotient equivalence, not an arbitrary field identification. -/
 def integralCoefficientULift
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :=
   (integralCoefficientULift_exists l E n).exists.choose
 
 /-- The finite-level coefficient isomorphism: undo the normalized functions-sheaf
-presentation, apply the quotient lift and forget commutativity.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+presentation, apply the quotient lift and forget commutativity. -/
 def integralDetailedLevelComparison
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -92,12 +87,7 @@ def integralDetailedLevelComparison
         (integralCoefficientULift l E n).toCommRingCatIso)
 
 /-- The unique completed coefficient comparison compatible with every finite projection.
-This keeps the detailed definition's actual ring and positive reduction functors.
-Source: Bhatt--Scholze, Definition 6.5.1.
-Proof: the normalized finite-level comparisons commute with transitions, as can be
-checked on residue representatives. Apply the limit universal property. Forgetting
-commutativity preserves limits, so both rings are limits of the same quotient system.
-The projection identities determine a unique isomorphism. -/
+This keeps the detailed definition's actual ring and positive reduction functors. -/
 theorem integralDetailedCoefficientComparison_exists
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
@@ -182,18 +172,13 @@ theorem integralDetailedCoefficientComparison_exists
       preservesLimitIso_hom_π]
     rfl
 
-/-- Canonical ring comparison, chosen from its unique projection normalization.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+/-- Canonical ring comparison, chosen from its unique projection normalization. -/
 def integralDetailedCoefficientComparison
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
   (integralDetailedCoefficientComparison_exists T l E).exists.choose
 
-/-- Scalar restriction along this canonical ring isomorphism is exact.
-Source: Bhatt--Scholze, Section 6.5; Stacks Tag 03DA.
-Proof: restriction changes only the scalar action. Restriction along the inverse
-is its inverse equivalence. Finite limits and colimits are unchanged on underlying
-additive sheaves, and therefore preserved. -/
+/-- Scalar restriction along this canonical ring isomorphism is exact. (Stacks, Tag 03DA.) -/
 theorem integralDetailedCoefficientRestriction_exact
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

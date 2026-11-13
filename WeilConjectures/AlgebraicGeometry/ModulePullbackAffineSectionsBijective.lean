@@ -16,7 +16,13 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Bijectivity of the affine tensor-sections map
 
-Source: Stacks Project, Schemes, Tags 01I9, 01IA, 01HV; Sheaves, Tags 0097, 00A0.
+## References
+
+* [Stacks, Tag 01I9](https://stacks.math.columbia.edu/tag/01I9)
+* [Stacks, Tag 01IA](https://stacks.math.columbia.edu/tag/01IA)
+* [Stacks, Tag 01HV](https://stacks.math.columbia.edu/tag/01HV)
+* [Stacks, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+* [Stacks, Tag 00A0](https://stacks.math.columbia.edu/tag/00A0)
 -/
 
 @[expose] public section
@@ -28,21 +34,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 -- Elaboration compares native tensor products with ModuleCat extension of scalars.
-/-- Bijectivity of an A-linear map with the canonical affine pure-tensor formula.
-Source: Stacks Project, Schemes, Tags 01I9, 01IA and 01HV; Sheaves, Tags 0097 and 00A0.
-
-Proof: restrict G along Spec A → Y, and identify its global sections with G(V).
-The affine tilde-Gamma counit and the tilde pullback comparison give the B-linear
-bijection B tensor_A Γ(G|Spec A) → Γ(ψ*G|Spec A). The chart square identifies the right
-adjoints of restriction followed by ψ-pullback and f-pullback followed by restriction.
-Uniqueness of left adjoints gives k between the two composites. On global sections,
-compose k with the restriction-sections identification over B and swap tensor factors.
-The chart-unit compatibility identifies the image of 1 tensor s with the restricted
-unit of the standard pullback of f. Finally, identify the specified tensor pullback
-with the standard pullback by uniqueness of left adjoints; its unit equation and
-naturality with restriction identify the given map with this composite on pure
-tensors. Tensor induction extends equality to every tensor, and the composite of
-bijections proves both injectivity and surjectivity. -/
+/-- Bijectivity of an `A`-linear map with the canonical affine pure-tensor formula. -/
 theorem tensorPullback_affine_sections_bijective
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens)
     (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :

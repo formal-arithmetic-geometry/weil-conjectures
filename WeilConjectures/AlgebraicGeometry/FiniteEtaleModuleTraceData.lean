@@ -15,9 +15,13 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleUnitStalkInclusion
 /-!
 # Coefficient-linear finite étale trace and its degree
 
-Source: Stacks Project, Section 03SH. We use the existing reverse adjunction
-`f_* ⊣ f^*`; its counit is the trace. On geometric stalks restriction is diagonal,
-trace is the sum, and their composite is multiplication by the fibre cardinality.
+We use the existing reverse adjunction `f_* ⊣ f^*`; its counit is the trace. On geometric
+stalks restriction is diagonal, trace is the sum, and their composite is multiplication by
+the fibre cardinality.
+
+## References
+
+* Stacks Project, Section 03SH
 -/
 
 @[expose] public section
@@ -126,19 +130,8 @@ theorem unit_app_comp_lowerStarUpperStarAdjunctionOfIsFinite_counit_app
       erw [Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card,
         hdeg _ s, ← Nat.cast_smul_eq_nsmul R]
 /-- A coefficient-linear trace whose composite with restriction is multiplication by
- the prescribed cardinality of every geometric fibre.
-
-Source: Stacks Project, Section 03SH, Definition 03SE and the following degree formula.
-
-Proof: take the counit of the existing reverse adjunction `f_* ⊣ f^*`. The ordinary
-adjunction triangle identifies restriction on each geometric stalk with the diagonal.
-The reverse-adjunction triangle and `finiteEtaleUnit_stalk_inclusion` identify the
-trace on each summand with the pullback stalk comparison. The finite pushforward
-stalk formula and orthogonality of extensions by zero give the resolution of the
-identity as the sum of projection-inclusion composites. Consequently the composite
-is the sum of one identity for each lift, hence `(d: R)` times the identity.
-Geometric stalks detect equality of sheaf morphisms. Empty fibres and the empty
-base are covered by the same calculation; no invertibility is used. -/
+the prescribed cardinality of every geometric fibre.
+(Stacks, Section 03SH, Definition 03SE.) -/
 theorem finiteEtaleModuleTraceData
     {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R]
     (f : Y ⟶ X) [IsFinite f] [Etale f]

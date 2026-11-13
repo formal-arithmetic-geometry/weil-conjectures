@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.PQFCohomology
 /-!
 # Affineness of a Noetherian finite surjective image
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YQ.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 01YQ.
 -/
 
 @[expose] public section
@@ -34,24 +36,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A Noetherian (locally Noetherian and quasi-compact) scheme receiving a finite surjective
-morphism from an affine scheme is affine. Source: Stacks Project, Lemma 01YQ.
-
-Proof:
-1. Set P(F) to H¹(X,F) = 0. The recorded cohomological delta-functor makes
-   degree-one cohomology additive and exact in the middle of a short exact sequence.
-   Hence P holds for zero and is stable under extensions.
-2. Inclusion and projection of the zeroth summand of a positive finite biproduct
-   give a retraction. Applying cohomology shows that P of the biproduct implies P(F).
-3. For an integral closed subscheme with generic point ξ, choose coherent F on Y
-   with the required pushforward support and generic annihilator. Finite pushforward
-   coherence makes G = f_*F coherent.
-   The ideal-product lemma supplies the coherent, generically full, acyclic subobject.
-4. Apply coherent devissage to obtain P for every coherent module.
-5. A finite-type ideal module is quasi-coherent: it is the kernel of the map from
-   the structure module to the closed-subscheme structure-module pushforward. It is therefore coherent on locally
-   Noetherian X. Noetherian X is compact and
-   quasi-separated, so its ideal
-   H¹ vanishing implies affineness. -/
+morphism from an affine scheme is affine. (Stacks, Tag 01YQ.) -/
 theorem isAffine_of_isFinite_surjective_of_isNoetherian
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Surjective f] [IsAffine Y]
     [IsNoetherian X] : IsAffine X :=

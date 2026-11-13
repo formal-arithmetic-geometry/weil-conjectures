@@ -13,7 +13,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # A K-flat representative for tensoring two single complexes
 
-Source: Stacks Project, Cohomology, Tags 06YH and 06YS. -/
+## References
+
+* Stacks Project, Cohomology, Tags 06YH and 06YS.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,19 +25,7 @@ universe u w
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Tensoring a K-flat resolution of A with B in degree zero computes A tensor^L B.
-Source: Stacks Project, Cohomology, Tags 06YH and 06YS.
-
-Proof: pass P to the homotopy category and use the acyclic-tensor characterization
-of categorical K-flatness. The given definition controls V tensor P; symmetry
-gives P tensor V. Thus the localized tensor counit on P is invertible. Apply the
-proved source QObjTensorSingleFunctorObjIso to compute Q(P) tensor B[0] as the
-termwise tensorRight B complex. The augmentation a is a quasi-isomorphism, so Q(a)
-and the singleFunctorIsoCompQ comparison identify Q(P) with A[0]. Tensor this
-identification with B[0], then apply the source comparison and the inverse of the
-single/total-tensor complex comparison. The result uses the fixed derived tensor
-structure, with no alternative tensor instance. Zero factors, all integer degrees,
-and unbounded P obey the same argument; no flatness condition on B is needed. -/
+/-- Tensoring a K-flat resolution of A with B in degree zero computes A tensor^L B. -/
 theorem nonempty_kFlat_single_tensor_representative
     (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

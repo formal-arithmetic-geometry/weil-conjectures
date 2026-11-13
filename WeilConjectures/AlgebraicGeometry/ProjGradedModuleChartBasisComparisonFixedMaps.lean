@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.TildePrincipalLocalizationTransport
 /-!
 # Principal-open section comparison for a graded-module chart
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
+## References
+
+* Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -31,8 +33,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM. -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsBasisComparisonFixedCore (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -47,8 +49,7 @@ local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => (Proj 𝒜).Modules
 
-/-- Common localization descriptions give linear comparisons of principal-open sections.
-Keeping the sheaves abstract avoids unfolding their constructions in the comparison proof. -/
+/-- Common localization descriptions give linear comparisons of principal-open sections. -/
 private theorem basisComparison_of_common_localizations
     (R : CommRingCat.{u}) (N : ModuleCat.{u} R)
     (X : Scheme.{u}) (e : X ≅ Spec R) (E G : X.Modules)
@@ -103,27 +104,8 @@ private theorem basisComparison_of_common_localizations
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On each principal open of a fixed chart, there is a bijective linear comparison
-extending the same additive comparison on whole-chart sections.
-
-Source: Stacks Project, Constructions, Lemmas 01M4, 01M7 and 01MB, last paragraph.
-
-Proof:
-Use alpha f and the inverse of the tilde global-section equivalence to define the
-whole-chart comparison a, transporting through the two open-immersion restriction
-identifications. For a principal open D(r), represent r as b/f^n with b homogeneous
-of degree n*deg(f), and set g=f*b of positive degree (n+1)*deg(f). The chart
-intersection formula identifies its inverse image in D_+(f) with D_+(g), since
-U f g=r^deg(f) and D(r^deg(f))=D(r). The hypothesis hcanonical identifies the
-ring restriction with the canonical localization map; htheta and hrestriction
-identify module restriction with the localization map of Z f. Thus sections of
-E on this open are the localization of Z f at r, by theta and alpha g. Sections
-of G are the same localization, by tilde.toOpen and the chart isomorphism.
-The unique comparison extending the identity on Z f is linear over the localized
-section ring and bijective by these two localization descriptions. It agrees with
-a on restrictions of whole-chart sections by htheta and hrestriction. This
-construction works independently for each open in B; no compatibility for nested
-proper opens is asserted here. For r=0, localization and the section modules on
-the empty open are zero, so the assertion still holds. -/
+extending the same additive comparison on whole-chart sections
+(Stacks, Constructions, Lemmas 01M4, 01M7 and 01MB). -/
 theorem gradedModuleChart_basisComparison_fixed_core
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])

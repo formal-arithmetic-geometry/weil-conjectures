@@ -9,8 +9,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionModuleOplaxNormalized
 
 /-! # Tensor structure of global scalar extension on module sheaves
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E;
-algebra.tex, Tag 00DK.
+## References
+
+* Stacks Project, Tags 0996, 099E and 00DK.
 -/
 
 @[expose] public noncomputable section
@@ -59,10 +60,7 @@ private noncomputable instance constantPreservesColimits
     change IsColimit (V.mapCocone c)
     exact isColimitOfPreserves V hc
 
-/-- The actual global scalar extension preserves small colimits.
-Source: Stacks Project, algebraization.tex, Tag 099E. Constant presheaves preserve
-colimits by evaluation on the one-point bottom site; the other two functors are left
-adjoints. -/
+/-- The actual global scalar extension preserves small colimits (Stacks, Tag 099E). -/
 theorem ringFamilyGlobalExtension_preservesColimits
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (I : Type) [SmallCategory I] :
@@ -75,24 +73,7 @@ theorem ringFamilyGlobalExtension_preservesColimits
 
 /-- Global-section scalar extension is strong monoidal with the prescribed multiplication
 as its inverse unit constraint. This statement concerns module sheaves, without complexes
-or localizations.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
-
-Proof: evaluate module sheaves on the one-point bottom-topology site to obtain A-modules.
-On each site object V the tensor constraint is
-(b tensor x) tensor (c tensor y) to bc tensor (x tensor y), inverse
-b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). Balancing over A and over O(V)
-makes both maps well-defined; their composites are identities on pure tensors, which
-generate the respective modules. These maps commute with restriction, since evaluation
-A to O(V) is a map of ring presheaves. They therefore give constraints for the composite
-of constant presheaves and the chosen presheaf pullback, identifying that pullback with
-sectionwise extension by uniqueness of left adjoints to restriction of scalars. Compose
-with the strong monoidal module sheafification functor. Associativity sends any triple
-tensor to the product of its three scalar coefficients; the two unit identities are
-multiplication by one, so the constraints are coherent. The inverse unit comparison is
-multiplication O tensor_A A to O; its transpose through the two adjunctions is evaluation
-of a global section. Hence it equals ringFamilyGlobalExtensionUnit as defined, rather
-than an unspecified unit isomorphism. The argument includes empty sites and zero rings. -/
+or localizations (Stacks, Tags 0996 and 099E). -/
 theorem ringFamilyGlobalExtension_module_monoidal
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) :

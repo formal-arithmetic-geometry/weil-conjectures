@@ -12,12 +12,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackCompositi
 /-!
 # The four finite-coefficient corners
 
-Source: blueprint, proper base change, four corners; Stacks Project Tags 07A7 and 099M.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourCorners`:
-  the recorded construction or statement of this node.
+  the four finite-coefficient corners of the proper base change setup.
+
+## References
+
+* Stacks Project, Tags 07A7 and 099M.
 -/
 
 @[expose] public section
@@ -36,17 +38,16 @@ attribute [instance] proEtaleRingRestrictScalars_preservesFiniteLimits
 
 variable {T : Scheme.{u}} {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S)
 
-/-- Ordinary scalar extension, with objects and maps fixed by the tensor construction.
-Source: Stacks Tag 06YY. -/
+/-- Ordinary scalar extension, with objects and maps fixed by the tensor construction
+(Stacks, Tag 06YY). -/
 noncomputable def proEtaleRingExtension : proEtaleRingModules T R ⥤ proEtaleRingModules T S :=
   reductionChange T a
 
-/-- The fixed scalar extension is additive. Source: Stacks Tag 06YY. -/
+/-- The fixed scalar extension is additive (Stacks, Tag 06YY). -/
 noncomputable instance proEtaleRingExtension_additive : (proEtaleRingExtension a).Additive :=
   reductionChangeAdditive T a
 
-/-- Reuse the published tensor-unit normalized ordinary scalar adjunction.
-Source: Stacks 03D3, 06YY. -/
+/-- The tensor-unit normalized ordinary scalar adjunction (Stacks, Tags 03D3 and 06YY). -/
 noncomputable abbrev proEtaleRingExtensionAdjunction :
     proEtaleRingExtension a ⊣ proEtaleRingRestrictScalars a := pbcScalarAdjunction a
 

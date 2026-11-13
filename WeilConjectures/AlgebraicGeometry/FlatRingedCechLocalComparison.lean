@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.RingedCechKoszulColimitIso
 
 /-! # Flat scalar comparison on a generating slice
 
-Source: Stacks Project, Algebraization, Tags 099H and 099I.
+## References
+
+* Stacks Project, Tags 099H and 099I
 -/
 
 @[expose] public section
@@ -675,22 +677,8 @@ private theorem tensor_unit_cech_quasiIso
     ((HomologicalComplex.homologyFunctor A (.up ℤ) q).mapIso α)
 
 /-- The scalar-extension unit is a quasi-isomorphism after restriction to a slice
-where the source is identified with the extended Čech complex for a generating list.
-Source: Stacks Project, Algebraization, Tags 099H and 099I.
-
-Proof: scalar extension is tensor with the restricted target ring after forgetting scalars.
-Flatness makes this functor exact. Restriction to a slice commutes with sheafification and
-with this tensor, including its unit. The given derived isomorphism therefore identifies
-the restricted unit with the tensor unit on the extended Čech complex. The generators
-present the ideal sheaf as the image of their finite free row. The quotient hypothesis
-identifies its cokernel with the corresponding cokernel over the target ring. For a finite
-Koszul stage, multiplication by each generator to the stage exponent is null-homotopic,
-using the degree-one-to-degree-zero contraction on its factor. Thus an ideal power kills
-its homology. Flat tensor and induction on that power make the tensor unit invertible on
-homology. Sequential filtered colimits are exact and preserve those units. The Koszul
-colimit is the extended Čech complex, so its tensor unit is a quasi-isomorphism. Transport
-along the given derived isomorphism proves the assertion, including the empty list case.
--/
+where the source is identified with the extended Čech complex for a generating list
+(Stacks, Algebraization, Tags 099H and 099I). -/
 theorem flat_ringedCech_local_unit_quasiIso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)

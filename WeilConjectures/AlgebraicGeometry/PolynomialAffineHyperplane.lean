@@ -21,7 +21,7 @@ This file provides
   whose inverse image under the projection `𝔸^{N+2}_k ⟶ 𝔸^{N+1}_k` forgetting `X₀` is again the
   coordinate hyperplane (`AlgebraicGeometry.comap_polyAffineProj_polyAffineHyperplane`);
 * the compactification of the coordinate `X₀`: the open immersion
-  `𝔸^{N+1}_k ⟶ ℙ¹_{𝔸^N_k}`, `x ↦ [X₀(x): 1]`, over the projection forgetting `X₀`
+  `𝔸^{N+1}_k ⟶ ℙ¹_{𝔸^N_k}`, `x ↦ [X₀(x) : 1]`, over the projection forgetting `X₀`
   (`AlgebraicGeometry.polyAffineChart`), whose image is the complement of the section at infinity
   (`AlgebraicGeometry.range_polyAffineChart`).
 

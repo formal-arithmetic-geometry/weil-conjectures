@@ -13,7 +13,9 @@ public import
 
 /-! # Raw pullback for a commutative triangle
 
-Source: Stacks Project, Tags 03Q8 and 09Z1, canonical comparison maps.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -87,10 +89,7 @@ private theorem trianglePullback_naturality
   rw [← reassoc_of% hs, ← reassoc_of% hc]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Restriction naturality of the raw pullback.
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-Proof: Naturality of restriction through each displayed pullback factor, followed by
-functoriality and associativity. -/
+/-- Restriction naturality of the raw pullback. (Stacks, Tags 03Q8 and 09Z1) -/
 theorem higherDirectImageRawTrianglePullback_restriction
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℤ)

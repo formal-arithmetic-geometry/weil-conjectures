@@ -19,20 +19,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Prime-torsion dévissage for a sheaf annihilated by one positive integer.
-Source: Stacks Project, Tag 0A4B, proof, bounded-torsion reduction, transposed to
-cohomology of qcqs schemes (https://stacks.math.columbia.edu/tag/0A4B).
-
-Proof: Let P(G) mean bijectivity of pullback in every nonnegative degree. For a
-short exact sequence with P on its outer terms, the pullback cohomology ladder
-and the five lemma give P on the middle term in positive degrees. In degree
-zero, injectivity follows by exactness and injectivity of the initial arrow;
-surjectivity follows by the four lemma on the initial four terms. Thus P is
-closed under extensions. Apply the library's prime-factor induction to P: the
-kernel-image sequence of multiplication by a prime divisor r of n has outer
-terms killed by r and n/r. The induction terminates since 0 < n/r < n. At n = 1,
-the identity is zero, so multiplication by 2 is zero and the prime hypothesis
-applies. -/
+/-- Prime-torsion dévissage: if pullback on cohomology is bijective in every degree for sheaves
+killed by a prime, then it is bijective for sheaves killed by any positive integer
+(Stacks, Tag 0A4B). -/
 theorem pullback_cohomology_bijective_of_nsmul
     {X Y : Scheme.{u}} (u : Y ⟶ X)
     [CompactSpace X] [QuasiSeparatedSpace X]

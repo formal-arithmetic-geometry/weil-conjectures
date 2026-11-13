@@ -19,7 +19,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Clopen fibre-rank and empty-fibre loci
 
-Source: Stacks Project, Tag 0BDP, first proof paragraph (rank decomposition).
+## References
+
+* Stacks Project, Tag 0BDP
 -/
 
 @[expose] public section
@@ -140,20 +142,7 @@ private theorem tensorPullback_rank_iff {X Y : Scheme.{u}} (g : Y ⟶ X)
     exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso (e.app E).symm⟩
 
 /-- The empty-fibre locus and the locus of a prescribed constant fibre rank are clopen.
-Empty fibres belong to every fixed-rank locus.
-Source: Stacks Project, Tag 0BDP, first proof paragraph; the open-and-closed rank
-argument applied without connectedness or surjectivity.
-
-Proof:
-1. Finite local freeness gives a locally constant stalk-rank function on X. Its
-   rank-r locus A and its complement B are both open and closed. Tensor pullback
-   preserves stalk rank, so E on X_s has constant rank r iff X_s avoids B.
-2. Flatness and local finite presentation make f an open map. Properness makes it
-   a closed map. Thus f(A), f(B), and f(X) are all open and closed; the images of
-   A and B may overlap, and no disjointness of their images is needed.
-3. The fixed-rank locus is S minus f(B), and the empty-fibre locus is S minus f(X).
-   These complements are clopen. For an empty fibre the rank condition is vacuous,
-   which accounts for its inclusion even when r is positive. -/
+Empty fibres belong to every fixed-rank locus (Stacks, Tag 0BDP). -/
 theorem picardFiberRank_clopen {X S : Scheme.{u}}
     (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (r : ℕ) :

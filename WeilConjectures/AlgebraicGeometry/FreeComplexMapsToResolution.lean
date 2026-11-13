@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.FreeComplexBaseLift
 import WeilConjectures.AlgebraicGeometry.FreeComplexExtendFamily
 
 /-! # A complex of free modules maps to a resolution
-Source: literature/stacks-project/algebra.tex, Tag 00LS.
+
+## References
+
+* Stacks Project, Tag 00LS.
 -/
 
 @[expose] public section
@@ -24,19 +27,8 @@ universe u v w
 
 open CategoryTheory
 
-/-- Source: Algebra, Tag 00LS, part (1), lines 17525--17535.
-A complex of free modules over `M` maps to an exact resolution of `N`.
-
-Proof in words: exactness at `N` makes `η` surjective and `F 0` is free, hence
-projective, so `φ ∘ π` lifts to `α 0` with `η ∘ α 0 = φ ∘ π`. For `α 1`, the map
-`α 0 ∘ δ 0` lands in `ker η` because `η ∘ α 0 ∘ δ 0 = φ ∘ π ∘ δ 0 = 0`; exactness at
-`N' 0` makes `d 0: N' 1 → ker η` surjective, and projectivity of `F 1` lifts it.
-Inductively, given `α 0, …, α (n+1)` satisfying the identities, `α (n+1) ∘ δ (n+1)`
-lands in `ker (d n)` since `d n ∘ α (n+1) ∘ δ (n+1) = α n ∘ δ n ∘ δ (n+1) = 0`;
-exactness at `N' (n+1)` and projectivity of `F (n+2)` give `α (n+2)`. Choosing one
-extension at each step defines the whole family recursively; only the target is
-required to be exact.
--/
+/-- A complex of free modules over `M` maps to an exact resolution of `N`.
+(Stacks, Tag 00LS) -/
 theorem free_complex_maps_to_resolution
     (R : Type u) [CommRing R]
     (M N : ModuleCat R) (φ : M ⟶ N)

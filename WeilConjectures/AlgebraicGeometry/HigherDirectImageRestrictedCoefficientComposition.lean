@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Composition of the restricted single-complex coefficient maps
 
-Source: Stacks Project, Tags 03CB and 09Z1, canonical comparison maps.
+## References
+
+* Stacks Project, Tags 03CB and 09Z1
 -/
 
 @[expose] public section
@@ -23,21 +25,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The degree-zero coefficient identification respects two restrictions.
-
-Source: Stacks Project, Tags 03CB and 09Z1; the coefficient factor of
-lem-sbc-higher-image-raw-pullback-composition-formula, step 2.
-
-Proof: Expand each coefficient map as the single-functor comparison followed by
-single of the inverse underived composition comparison. Functoriality distributes
-the outer derived inverse image over the two factors of the inner coefficient map.
-Naturality of the outer single-functor comparison moves the underived coefficient
-identification past it. Apply upperStarPlusComp_single to combine the two single
-comparisons. Associativity of upperStarComp for f.left, g.left, C.hom identifies
-the two successive underived inverse comparisons with that for (f ≫ g).left and
-C.hom; use Over.w f and Over.w g to identify their diagonal maps. Cancel the
-intermediate inverse and forward comparisons and reassociate. This is solely a
-coefficient identity: it involves no base S, test object, cohomology class, or shift.
-Identity arrows and the zero sheaf satisfy the same coherence identities. -/
+(Stacks, Tags 03CB and 09Z1) -/
 theorem higherDirectImageRestrictedCoefficient_comp
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))

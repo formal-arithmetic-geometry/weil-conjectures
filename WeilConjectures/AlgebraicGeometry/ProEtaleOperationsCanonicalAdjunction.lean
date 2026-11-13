@@ -10,8 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Canonically normalized pro-etale module adjunctions
 
-Source: Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules;
-Cohomology on Sites, Tag 07A6.
+## References
+
+* Stacks Project, Modules on Sites; Cohomology on Sites, Tag 07A6.
 -/
 
 @[expose] public section
@@ -315,15 +316,7 @@ private theorem canonicalHomEquiv_naturality_right
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The unique adjunction whose transpose is the model-site pullback transpose after
-precomposition with the tensor unit `m ↦ 1 ⊗ m` and sheafification.
-Source: Stacks, lemma-adjoint-push-pull-modules.
-Proof: precompose with the tensor sheafification unit to obtain a map from the
-inverse-image module. Transport to the small model; the equivalence on the original
-and model sites acts identically on sections. Apply the canonical module pullback
-adjunction on that model. This gives the indicated natural Hom equivalence and hence
-an adjunction. Pure tensors generate the presheaf tensor and the sheafification unit
-is universal, so the displayed formula determines the intermediate map and the Hom
-equivalence uniquely. Adjunctions are determined by their Hom equivalences. -/
+precomposition with the tensor unit `m ↦ 1 ⊗ m` and sheafification. -/
 theorem proEtaleRingModuleAdjunction_existsUnique :
     ∃! adj : proEtaleRingModulePullback f R S c ⊣ proEtaleRingModuleDirectImage f R S c,
       ∀ (M : proEtaleRingModules Y R) (N : proEtaleRingModules X S)
@@ -406,8 +399,7 @@ theorem proEtaleRingModuleAdjunction_existsUnique :
     ext m
     exact he' W m
 
-/-- The actual module adjunction, selected from its unique tensor-unit normalization.
-Source: Stacks, lemma-adjoint-push-pull-modules. -/
+/-- The actual module adjunction, selected from its unique tensor-unit normalization. -/
 noncomputable def proEtaleRingModuleAdjunction :
     proEtaleRingModulePullback f R S c ⊣ proEtaleRingModuleDirectImage f R S c :=
   Classical.choose (proEtaleRingModuleAdjunction_existsUnique f R S c)

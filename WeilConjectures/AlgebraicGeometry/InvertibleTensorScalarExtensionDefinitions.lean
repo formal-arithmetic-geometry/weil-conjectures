@@ -37,7 +37,7 @@ local notation:max "𝒯" N:arg P:arg => (siteSheafTensorRight P).obj N
 
 /-- The image of a pure scalar-extension tensor under the module sheafification unit.
 The module universe may exceed the coefficient universe, as happens for internal Hom.
-Source: Stacks, Tag 03EK. -/
+(Stacks, Tag 03EK) -/
 noncomputable def scalarExtensionSection
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
     [HasWeakSheafify J AddCommGrpCat.{max u m}]
@@ -54,9 +54,9 @@ attribute [local irreducible] changeOfRingsOfUniverses changeOfRingsHomOfUnivers
   scalarExtensionSection
   siteSheafTensorTmul siteSheafTensorRight siteSheafTensorSecondMap
 
-/-- Canonical associators and unitors for the actual sheafified tensor product.
-Each isomorphism is specified by its action on local pure tensors, rather than an
-unspecified monoidal structure. Source: Stacks, Tag 03EK. -/
+/-- Canonical associators and unitors for the actual sheafified tensor product. Each isomorphism is
+specified by its action on local pure tensors, rather than an unspecified monoidal structure.
+(Stacks, Tag 03EK) -/
 structure ScalarTensorCoherence (R : Sheaf J CommRingCat.{u}) where
   associator : ∀ (N P Q : Mod R), 𝒯 (𝒯 N P) Q ≅ 𝒯 N (𝒯 P Q)
   associator_tmul : ∀ (N P Q : Mod R) (U : Cᵒᵖ)

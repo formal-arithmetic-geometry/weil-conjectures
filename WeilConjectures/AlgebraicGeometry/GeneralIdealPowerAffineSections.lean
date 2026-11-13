@@ -14,7 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine sections of recursive powers of a quasi-coherent ideal module
 
-Source: Stacks Project, Properties, Lemma 01PQ, affine ideal powers.
+## References
+
+* [Stacks, Tag 01PQ]
 -/
 
 @[expose] public section
@@ -24,18 +26,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Recursive image powers are quasi-coherent, and their affine section ideals
-are the powers of the original affine section ideal.
-
-Source: Stacks Project, Properties, Lemma 01PQ, affine ideal powers; existing
-proved helper Modules.powers_affine_sections in CoherentSupportVanishingIdealNilpotence.
-
-Proof: For powers zero and one the claims follow from the unit module and the
-original module. For every later power, quasi-coherence of tensor products and
-images gives quasi-coherence. The affine tensor-section isomorphism and the
-image-section formula identify the new image with the product of the original
-image ideal and the preceding power. Induction gives the stated ideal power.
-The existing helper proves this for an arbitrary quasi-coherent ideal module;
-no monicity or finite-type hypothesis is required. -/
+are the powers of the original affine section ideal (Stacks, Tag 01PQ). -/
 theorem general_ideal_power_affine_sections {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [I.IsQuasicoherent] :
     ∀ n : ℕ, (idealSheafPower ι n).1.IsQuasicoherent ∧

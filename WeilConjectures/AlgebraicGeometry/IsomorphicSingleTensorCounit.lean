@@ -8,7 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
 import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation
 /-! # Pinned single tensor counits under an isomorphism
-Source: Stacks Project, Tags 08HY, 0096 and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08HY, 0096 and 0D5S.
+-/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -19,21 +23,7 @@ open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
 /-- The single tensor counit factors through pullback along a scheme isomorphism.
-Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-Proof: tensor pullback along e is an exact equivalence, with inverse direct image.
-Use the underived tensor composition comparison, the single-complex comparison
-for this exact equivalence, and the inverse of its right-derived unit to identify
-R(e)_*((e p)^*M)[0] with (p^*M)[0], naturally in M. This constructs t.
-The pinned composition c is the left-derived lift of the underived composition
-comparison. Its factorization equation on the homotopy single complex, followed
-by the single-complex identification, says that the counit of e p factors as the
-successive tensor counits of p and e. Transpose this factorization under the
-pinned adjunction for e. The derived adjunction factorization identifies that
-transpose with the canonical underived adjunction, and its unit followed by the
-image of the factorization is exactly the displayed left side. The underived
-triangle identity gives the counit for p. This proves the equation for each M;
-all factors used to construct t are natural. Exact equivalences and triangle
-identities include zero modules and empty schemes. -/
+(Stacks, Tags 08HY, 0096, 0D5S) -/
 theorem exists_isomorphic_single_tensor_counit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

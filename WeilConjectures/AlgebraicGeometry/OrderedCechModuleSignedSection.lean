@@ -13,7 +13,9 @@ import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # Signed extension as a module cochain map
 
-Source: Stacks Project, Tags 01FJ, 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FJ, 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -23,8 +25,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The full-tuple value of signed extension of ordered input coordinates.
-Source: Stacks 01FI and 01FK, the signed extension formula. -/
+/-- The full-tuple value of signed extension of ordered input coordinates
+(Stacks, Tags 01FI and 01FK). -/
 private noncomputable def orderedCechSignedSectionValue {X T : Scheme.{u}} (f : X ⟶ T)
     (M : X.Modules) {r : ℕ} (W : ULift.{u} (Fin r) → X.Opens)
     (p : ℕ) (B : T.Opens)
@@ -41,10 +43,7 @@ private noncomputable def orderedCechSignedSectionValue {X T : Scheme.{u}} (f : 
             (s (OrderEmbedding.ofStrictMono _ h))
     else 0
 
-/-- Signed extension recovers the input on increasing tuples.
-Source: Stacks 01FK.
-Proof: Only the identity permutation preserves increasing order. Its sign is one,
-and the two restriction arrows are inverse in the poset of opens. -/
+/-- Signed extension recovers the input on increasing tuples. -/
 private theorem orderedCechSignedSectionValue_increasing {X T : Scheme.{u}} (f : X ⟶ T)
     (M : X.Modules) {r : ℕ} (W : ULift.{u} (Fin r) → X.Opens)
     (p : ℕ) (B : T.Opens)
@@ -77,8 +76,7 @@ private theorem orderedCechSignedSectionValue_increasing {X T : Scheme.{u}} (f :
   · simp
 
 /-- The full-tuple specification for a graded signed extension.
-It imposes no differential equation and determines each degree map uniquely.
-Source: Stacks 01FI and 01FK. -/
+It imposes no differential equation and determines each degree map uniquely. -/
 private def IsOrderedCechSignedSection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ)
@@ -108,27 +106,7 @@ private def IsOrderedCechSignedSection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit signed-coordinate formula assembles into graded module-sheaf maps.
-No differential compatibility or vanishing in negative degrees is assumed.
-Source: Stacks 01FI and 01FK, signed extension of ordered cochains.
-
-Proof: Fix p and a base open B. For every full tuple y sum over the permutations
-whose reordered tuple is increasing, with the sign and coefficient restriction
-in orderedCechSignedSectionValue. There is one such permutation for an injective
-tuple and none for a repeated tuple. Evaluation preserves the product defining
-the usual Cech term, so its universal property gives a unique element with these
-coordinates. Apply e inverse and then the inverse extension isomorphism. This
-constructs the section map, without choosing an arbitrary existence witness.
-Additivity follows from additivity of a, restrictions and integer multiplication.
-For an inclusion B to C, apply e and each product projection: hn gives the input
-restriction, naturality of e gives the output restriction, and the two composites
-between opens agree because opens form a poset. Thus these maps are natural.
-For a local scalar b, hl pulls b back to each ordered intersection. Semilinearity
-of restriction carries it to the full tuple intersection. Integer multiplication
-commutes with this action. The output formula hlinear identifies this scalar with
-the action on D; injectivity of all coordinates proves local linearity. Use
-PresheafOfModules.homMk and the full inclusion of module sheaves to assemble the
-maps. Compose with the inverse extension isomorphism. Empty families and degrees
-with no increasing tuple give the same construction with all coordinates zero. -/
+No differential compatibility or vanishing in negative degrees is assumed. -/
 private theorem orderedCech_signedDegree_exists {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ)
@@ -318,8 +296,7 @@ private theorem filtered_signed_extension (X : Scheme.{u}) {I : Type*} [LinearOr
       simpa using congrArg σ he
     simp only [dite_eq_right hn]
 
-/-- The intersection model on the base open B.
-Source: Stacks 01FJ. -/
+/-- The intersection model on the base open `B` (Stacks, Tag 01FJ). -/
 private noncomputable def naturalCechSectionSite {X : Scheme.{u}} {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens) :
     SiteCechComplex (fun i : Fin r ↦ W ⟨i⟩ ⊓ B)
@@ -337,8 +314,7 @@ private noncomputable def naturalCechSectionSite {X : Scheme.{u}} {r : ℕ}
   indexMap t α := homOfLE (inf_le_inf (le_iInf fun k ↦ iInf_le _ (α k)) le_rfl)
   indexMap_pr _ _ _ := Subsingleton.elim _ _
 
-/-- Restriction from the chosen product to the intersection model.
-Source: Stacks 01FJ. -/
+/-- Restriction from the chosen product to the intersection model (Stacks, Tag 01FJ). -/
 private noncomputable def naturalCechSectionMap {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens) (t : Fin (p + 1) → Fin r) :
     (naturalCechSectionSite W B).W p t ⟶ (∏ᶜ fun k ↦ W ⟨t k⟩) ⨯ B :=
@@ -353,8 +329,7 @@ private theorem naturalCechSectionMap_isIso {X : Scheme.{u}} {r p : ℕ}
   exact le_inf (le_iInf fun k ↦
     (prod.fst ≫ Pi.π (fun l ↦ W ⟨t l⟩) k).le) prod.snd.le
 
-/-- All tuple coordinates, transported by actual restriction maps.
-Source: Stacks 01FJ. -/
+/-- All tuple coordinates, transported by actual restriction maps (Stacks, Tag 01FJ). -/
 private noncomputable def naturalCechSectionCochain {X : Scheme.{u}} (M : X.Modules) {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (D : CochainComplex X.Modules ℕ)
     (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj
@@ -393,20 +368,8 @@ private theorem naturalCechSectionCochain_injective {X : Scheme.{u}} (M : X.Modu
   exact ht
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Coordinate transport identifies the given differential with the alternating face sum.
-Source: Stacks 01FJ, the Čech differential, and 01FK, restriction to ordered tuples.
-
-Proof: Compose hd with the projection to a full tuple and evaluate at B and s.
-The Mathlib Čech differential is the sum of signed coface maps. Its j-th coface,
-after projecting to t, first projects to t composed with j.succAbove and then
-restricts along the map of chosen products dropping the j-th factor, times the
-identity of B. Restrict further along naturalCechSectionMap. The resulting arrow
-from the intersection for t to the chosen product for its j-th face equals the
-composite through the face intersection, since the category of opens is thin.
-Functoriality identifies the corresponding restrictions. Additivity of restriction
-moves it through the finite sum and the integer coefficients. This gives exactly
-the defining alternating sum for naturalCechSectionSite. For an empty index set
-there are no tuples; no nonempty intersection or affine hypothesis is required. -/
+/-- Coordinate transport identifies the given differential with the alternating face sum
+(Stacks, Tags 01FJ and 01FK). -/
 private theorem naturalCechSectionCochain_differential {X : Scheme.{u}} (M : X.Modules) {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (D : CochainComplex X.Modules ℕ)
     (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj
@@ -451,26 +414,7 @@ private theorem naturalCechSectionCochain_differential {X : Scheme.{u}} (M : X.M
   rw [← M.presheaf.map_comp, ← M.presheaf.map_comp]
   congr 2
 
-/-- A graded signed extension commutes with adjacent differentials.
-Source: Stacks 01FJ and 01FK, signed extension is a cochain map.
-
-Proof: Fix p and a base open B. Identify the chosen products times the inverse
-image of B with the infima of the opens W_i intersected with that inverse image.
-Apply e and all tuple projections. The full-coordinate hypothesis identifies
-q with the signed extension of the a-coordinates: for an injective tuple the
-unique increasing permutation is its sorting permutation; for repeated tuples
-all summands are zero. The identity hd, composed with each tuple projection,
-identifies D's differential with the sum of signed face restrictions. The maps
-from chosen products to intersections commute with face maps because opens form
-a poset. Apply signedCechExtension_differential to these sectionwise cochains.
-On an increasing tuple, every face is increasing, and signed extension recovers
-the original coordinate. Thus ha identifies the increasing coordinates of the
-differential with the a-coordinates of d_K. Their signed extensions agree on
-all tuples. Invert the product-intersection isomorphisms and use injectivity of
-e and of the extension isomorphism to get equality on sections. Module-sheaf
-extensionality gives the displayed equation. This argument uses neither local
-linearity hypotheses nor negative-degree vanishing, and works for empty covers,
-repeated tuples, empty intersections and zero coefficient modules. -/
+/-- A graded signed extension commutes with adjacent differentials. -/
 private theorem orderedCech_signedDegree_comm {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ)
@@ -579,25 +523,8 @@ private theorem orderedCech_signedDegree_comm {X' T' : Scheme.{u}} (f' : X' ⟶ 
   exact (has B s t).symm
 
 
-/-- Signed extension lifts ordered coordinates to a morphism of module complexes.
-Source: Stacks Project, Tags 01FJ and 01FK, signed extension of ordered cochains.
-
-Proof: Apply a to a section of K. For each all-tuple coordinate, put zero if the
-tuple has a repeated index. Otherwise sort it increasingly, take the coordinate
-at the sorted tuple and multiply by the sorting sign. Transport from the
-intersection to the chosen product of opens by the inverse of its canonical
-isomorphism, and use the inverse of e to get a section of D. Naturality of a and
-e makes this construction commute with restrictions. The local scalar formulas
-hl and hlinear make it linear over the base open's ring: restriction is semilinear,
-and integer signs commute with scalars. Injectivity of e and its coordinate maps
-verifies these claims after transporting back to all-tuple coordinates. For the
-chain equation, use ha and hd to identify both differentials with their face sums.
-The signedCechExtension_differential identity proves the result: distinct tuples
-obey the sorting-sign identity, while faces of repeated tuples cancel in pairs.
-In increasing coordinates the sorting permutation is the identity, proving the
-displayed formula. Extend to negative degrees by zero; hK makes every chain
-condition there and across -1 automatic. Empty families and zero modules are
-covered by the same formulas. -/
+/-- Signed extension lifts ordered coordinates to a morphism of module complexes
+(Stacks, Tags 01FJ and 01FK). -/
 theorem orderedCech_module_signedSection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ) (hK : K.IsStrictlyGE 0)

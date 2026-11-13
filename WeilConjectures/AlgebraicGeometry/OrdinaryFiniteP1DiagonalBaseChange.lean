@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange
 /-!
 
 # Base change of the specified projective-line trace counit
-
-Source:
 -/
 
 @[expose] public section

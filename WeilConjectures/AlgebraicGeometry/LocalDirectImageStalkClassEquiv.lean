@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassLinear
 
 /-! # Local direct-image stalks and total cohomology
 
-Source: Stacks Project, Tags 02OD and 01E4.
+## References
+
+* [Stacks, Tags 02OD and 01E4]
 -/
 
 @[expose] public section
@@ -174,26 +176,7 @@ private theorem local_resolution_class_bijective {X Y : Scheme.{u}} (f : X ⟶ Y
     (((Scheme.Modules.pushforward f').rightDerived p).obj F')
   exact hthird.comp (hsecond.comp hfirst)
 
-/-- The canonical class map is an A-linear equivalence.
-Source: Stacks Project, Tag 02OD, the local-stalk/global-cohomology identification;
-Tag 01E4, the cocycle-to-cohomology-sheaf comparison.
-
-Proof: Set A = O_{Y,y}, c: Spec A → Y, f': X' → Spec A, F' = g'^*F.
-For every neighborhood V of y, c^{-1}V is top. Thus taking the germ identifies
-Gamma(Spec A,N) with (c_*N)_y. Every open of Spec A containing its closed point
-is top, so Gamma(Spec A,-) is closed-point stalk evaluation and is exact.
-Apply this evaluation to f'_*K for the specified injective resolution K of F'.
-It commutes with homology. The sectionCohomologyTheta map on top is precisely
-this homology comparison: sheafification induces an isomorphism at the closed
-point, and the counit on the already sheaf-valued complex is an isomorphism.
-The termwise identity Gamma(Spec A,f'_*K) = Gamma(X',K), together with the
-right-derived resolution comparisons in localDirectImage_stalk_class, proves
-that this particular additive map is bijective. To check A-linearity, represent
-a scalar by a structure-sheaf germ on V; its action on the class map is the action
-on Gamma(X',K) via Gamma-Spec followed by f'.appTop, because c^{-1}V is top and
-the structure-sheaf germ square commutes. All resolution and homology maps are
-linear for that action. Equip this same bijective map with its linear structure.
-The equation in the conclusion determines e pointwise, hence uniquely. -/
+/-- The canonical class map is an A-linear equivalence (Stacks, Tags 02OD and 01E4). -/
 theorem localDirectImage_stalk_cohomology_equiv {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p : ℕ) :
     ∃ e : (RingedSpace.moduleCohomology (pullback (Y.fromSpecStalk y) f).toRingedSpace p ⋙

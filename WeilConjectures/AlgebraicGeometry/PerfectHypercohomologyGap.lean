@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # A cohomology gap for tensoring with a perfect complex
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 09M4, proof,
-spectral sequence following the choice of Tor amplitude for the dual perfect complex.
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 09M4.
 -/
 
 @[expose] public section
@@ -54,25 +55,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- A perfect object of Tor amplitude `[a,b]` tensors a cohomology gap in degrees
-`[j-b,j-a]` to vanishing in degree `j`.
-Source: Stacks Project, Tag 09M4, spectral sequence in the proof.
-
-Proof (the three steps of the node):
-1. On affine opens, represent `P` by a bounded strictly perfect complex `Q`. Its terms are flat, so it is
-   K-flat. Restriction commutes
-   with tensor and preserves K-flatness, using exact extension by zero for the latter.
-   Hence `P ⊗ᴸ L` is represented locally by the total tensor of `Q` with a representative
-   of `L`. The Tor-amplitude hypothesis gives
-   `H^p(Q ⊗ H^q(L)) = 0` whenever `p` is outside `[a,b]`.
-2. Filter the total tensor by `Q`-degree. The filtration is finite since `Q` is bounded.
-   The filtered-complex spectral sequence has
-   `E₁^{p,q} = Q^p ⊗ H^q(L)` by flatness, and its differential comes from `Q`, giving
-   `E₂^{p,q} = H^p(Q ⊗ H^q(L))`. On the diagonal `p+q=j`, this is zero outside `[a,b]`
-   by Tor amplitude; inside `[a,b]`, `q=j-p` lies in `[j-b,j-a]`, where `H^q(L)=0`.
-   Later pages are subquotients, so all limiting terms on that diagonal vanish.
-3. Convergence gives a finite filtration of the degree `j` cohomology with all graded
-   pieces zero, hence the cohomology is zero locally. The affine opens cover `X`, so
-   vanishing of this cohomology sheaf holds globally. -/
+`[j-b,j-a]` to vanishing in degree `j` (Stacks, Tag 09M4). -/
 theorem perfect_hypercohomology_gap (X : Scheme.{uG})
     [HasDerivedCategory.{wG} (SheafOfModules.{uG} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

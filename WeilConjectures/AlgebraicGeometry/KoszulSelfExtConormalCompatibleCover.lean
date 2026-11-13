@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.KoszulRegularAffineRefinement
 
 /-! # A compatible regular Koszul comparison cover
 
-Source: Stacks Project, Tag 0BQY and Tag 062I. -/
+## References
+
+* Stacks Project, Tags 0BQY and 062I.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,27 +33,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A regular immersion admits a compatible Koszul comparison on a covering
-family of neighborhoods, without gluing to an arbitrary prescribed neighborhood.
-
-Source: Stacks Project, Tag 0BQY, change of regular generators, and Tag 062I.
-
-Proof: Choose a regular affine chart around each point of V. Use its augmented
-Koszul resolution to compute derived Hom into the quotient. Its differential
-is zero because the generators vanish in the quotient. Pair the dual increasing
-wedge basis with the conormal basis to obtain the local comparison. On a common
-subopen, refine by affine subopens around each point. The two conormal bases
-have the same length over the nonzero local ring. Shrink until a substitution
-of generators is invertible modulo the ideal. Exterior powers of the substitution
-define a chain map: contraction with the generator row commutes with the
-substitution in degree one, and the derivation identity gives all degrees.
-Modulo the ideal these maps are the exterior powers of the conormal change of
-basis; dualizing gives exactly the Hom change of coordinates. Comparison
-homotopies show that different substitutions induce the same cohomology map.
-Localization preserves the contraction and pairing formulas, so the two
-comparison morphisms agree on the refinement. Sheaf separatedness gives equality
-on the whole common subopen. No global gluing is performed in this lemma.
-For an empty V choose the unique empty-indexed family. In degree zero the
-comparison is the quotient unit, and above the length both sides are zero. -/
+family of neighborhoods, without gluing to an arbitrary prescribed neighborhood
+(Stacks, Tags 0BQY, 062I). -/
 theorem koszulRegularImmersion_self_ext_conormal_compatible_cover
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

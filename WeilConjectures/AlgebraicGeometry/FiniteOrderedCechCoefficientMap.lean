@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # The coefficient map into the ordered Čech total complex
 
-Source: Stacks Project, Cohomology, Tags 01EQ and 01ET.
+## References
+
+* Stacks Project, Tags 01EQ and 01ET
 -/
 
 @[expose] public section
@@ -29,10 +31,7 @@ private theorem coefficient_closed : e.f 0 ≫ G.d 0 1 = 0 := by
   rw [e.comm]
   simp
 
-/-- The coefficient components satisfy the cochain identity.
-Source: Stacks Project, Tag 01EQ.
-Proof: the horizontal identity is functoriality of the Čech functor and the
-vertical term vanishes by the augmentation cochain identity. -/
+/-- The coefficient components satisfy the cochain identity. (Stacks, Tag 01EQ) -/
 theorem coefficient_comm (n m : ℤ) :
     (((alternatingCechModuleFunctor V).map (e.f 0)).f n ≫
       ((alternatingCechDoubleFunctor V).obj G).ιTotal (.up ℤ) n 0 n (Int.add_zero n)) ≫
@@ -85,17 +84,14 @@ theorem coefficient_comm (n m : ℤ) :
     simp
 
 /-- The coefficient augmentation into the resolution-degree-zero summands.
-Source: Stacks Project, Tag 01EQ. -/
+(Stacks, Tag 01EQ) -/
 def orderedCechCoefficientMap :
     (alternatingCechModuleFunctor V).obj F ⟶ (alternatingCechTotalFunctor V).obj G where
   f n := ((alternatingCechModuleFunctor V).map (e.f 0)).f n ≫
     ((alternatingCechDoubleFunctor V).obj G).ιTotal (.up ℤ) n 0 n (Int.add_zero n)
   comm' n m _ := coefficient_comm V e n m
 
-/-- The coefficient map commutes with maps respecting coefficient augmentations.
-Source: Stacks Project, Tag 01EQ, componentwise functoriality.
-Proof: apply the coefficient augmentation identity in every Čech degree, and
-use the naturality of each total summand inclusion. -/
+/-- The coefficient map commutes with maps respecting coefficient augmentations. -/
 theorem orderedCechCoefficientMap_naturality
     {F' : SheafOfModules.{u} (moduleRings X.toRingedSpace)}
     {G' : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}
@@ -121,10 +117,7 @@ theorem orderedCechCoefficientMap_naturality
   rw [← HomologicalComplex.comp_f, ← Functor.map_comp, h, Functor.map_comp,
     HomologicalComplex.comp_f]
 
-/-- The two coefficient augmentations agree in degree zero.
-Source: Stacks Project, Tag 01EQ.
-Proof: the global restriction map is natural for e in degree zero. Compose
-this equality with the common (0,0) inclusion into the total. -/
+/-- The two coefficient augmentations agree in degree zero. -/
 theorem orderedCechCoefficientMap_zero :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (e.f 0) ≫
       (alternatingCechAugmentationMap V G).f 0 =
@@ -166,10 +159,7 @@ theorem orderedCechCoefficientMap_zero :
   rw [← Category.assoc, hzero, Category.assoc]
   rfl
 
-/-- Totalization of a single coefficient sheaf is its Čech complex.
-Source: Stacks Project, Tag 01EQ, the resolution-degree-zero axis.
-Proof: all summands off resolution degree zero are zero. Projection onto the
-sole remaining summand in each total degree inverts its total inclusion. -/
+/-- Totalization of a single coefficient sheaf is its Čech complex. -/
 theorem orderedCechCoefficientMap_single_isIso
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
     IsIso (orderedCechCoefficientMap V

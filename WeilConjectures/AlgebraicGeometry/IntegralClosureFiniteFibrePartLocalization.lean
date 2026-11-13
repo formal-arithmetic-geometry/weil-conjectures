@@ -18,7 +18,9 @@ import Mathlib.RingTheory.ZariskisMainTheorem
 /-!
 # Integral-closure localization of a finite fibre component
 
-Source: Stacks Project, `more-algebra.tex`, Lemma 09XH.
+## References
+
+* Stacks Project, More on Algebra, Lemma 09XH.
 -/
 
 @[expose] public section
@@ -64,25 +66,7 @@ private theorem exists_isIso_neighborhood_of_awayMap_bijective
 
 /-- The finite component of a fibre of a finite-type algebra is obtained from the
 integral closure, and the two algebras agree after inverting one element.
-
-Source: Stacks Project, `more-algebra.tex`, Lemma 09XH;.
-Proof:
-1. The finite A/I-algebra C₁ makes A → B quasi-finite at each prime of
-   T = Spec C₁, by lem-weil-pbc-integral-closure-finite-fibre-quasi-finite.
-2. At each such prime affine Zariski Main gives an element of B' whose
-   localization map is an isomorphism. Their principal opens form U, containing
-   T in its inverse image, by lem-weil-pbc-integral-closure-zariski-main-away.
-3. The image of T is open in the closed fibre using the isomorphism over U,
-   and closed by finiteness. Its clopen decomposition yields ε', preservation
-   of both factors, and the first-factor isomorphism, by
-   lem-weil-pbc-integral-closure-finite-fibre-image-clopen.
-4. Separate the two closed factors and the complement of U to choose g lifting
-   ε' with D(g) contained in U. The comparison of local rings gives bijectivity
-   of the induced localization map, by lem-weil-pbc-integral-closure-finite-fibre-choose-g.
-5. The product idempotent identifies the first ideal with C₁ via q and e:
-   every c has exactly one preimage fixed by ε'. The complementary ideal maps
-   to C₂, giving precisely the requested compatible decomposition.
--/
+(Stacks, Tag 09XH.) -/
 theorem integralClosure_finiteFibrePart_localization
     (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B]
     [Algebra.FiniteType A B]

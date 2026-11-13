@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFix
 /-!
 # Principal-open section comparison for a graded-module chart
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
+## References
+
+* Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -30,8 +32,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM. -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsBasisComparisonFixed (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -48,32 +50,8 @@ local notation "ModX" => (Proj 𝒜).Modules
 
 /-- The fraction-chart descriptions give compatible linear equivalences on the principal
 open basis of a fixed affine chart. This asserts only the sectionwise comparison;
-extending these maps to a morphism of sheaves is a separate step.
-
-Source: Stacks Project, Constructions, Lemma 01MB, last paragraph,
-Lemma 01M4, (1)(e),(g),(h), and Lemma 01M7.
-
-Proof:
-Fix f of degree d>0 and write r in R[f] as a/f^n with a homogeneous of degree n*d.
-Put h=f*a of degree (n+1)*d. Under basicOpenIsoSpec the preimage of D(r) is D_+(h):
-the usual localization element is h^d/f^((n+1)*d)=r^d, and D(r^d)=D(r).
-By hU, the principal localization parameter U f h equals r^d. The supplied
-comparisons theta and thetaS therefore identify Z h and R[h] with localization
-of Z f and R[f] at r^d, hence at r (invert r by r^(d-1)/r^d).
-The identities htheta identify the localization maps with rho and rhoS;
-hcanonical identifies rhoS with the canonical ambient localization maps.
-Compose alpha on D_+(h) with this localized equivalence and the principal-open
-section equivalence tilde.toOpen. The restriction section equivalences for the
-open immersion D[f].ι and the chart isomorphism identify these groups with E(U)
-and G(U). The scalar identities hscalar and localization semilinearity make the
-composite linear over O_{D[f]}(U). For nested principal opens, hrestriction and
-the localization universal property give naturality: the two localized
-maps agree on Z f, so agree everywhere by localization uniqueness.
-Choose a principal presentation for each U in the range B. Different presentations
-have equal open sets; the preceding compatibility identifies the corresponding maps.
-This gives l and its displayed compatibility. If r=0 or f is nilpotent, the open is empty and both
-section modules are zero, so the same formulas apply. No finite-generation or
-nonempty-chart assumption is needed. -/
+extending these maps to a morphism of sheaves is a separate step
+(Stacks, Constructions, Lemmas 01MB, 01M4 and 01M7). -/
 theorem gradedModuleChart_basisComparison_fixed
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])

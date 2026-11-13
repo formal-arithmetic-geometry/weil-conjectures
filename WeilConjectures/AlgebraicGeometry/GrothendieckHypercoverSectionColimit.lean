@@ -45,25 +45,7 @@ private theorem sectionComplexFunctor_map_tail
 
 /-- The three cochain terms of a pulled-back stage hypercover are a filtered
 colimit of their canonical later-stage counterparts.
- No assertion about derived functors is used.
-
-Proof: the over category of a stage is cofiltered and its forgetful functor is
-initial, so its pulled-back cone still has the given limit. In each relevant
-degree the hypercover term is a finite coproduct of qcqs finite-presentation étale
-objects and hence is itself qcqs of finite presentation. Its base changes form
-a cartesian system with affine transitions and the stated limit. On the qcqs
-étale basis, finite-presentation descent of objects, maps and finite covers
-identifies the inverse-image presheaf with the filtered stage colimit. Pass to
-sheaves by finite-cover refinement: the sheaf condition is the finite equalizer
-of the two restriction maps to pairwise intersections. Filtered colimits in A
-commute with these finite limits by AB5, so the unit comparison on each of the
-three section objects is colimiting. The degreewise unit comparisons commute
-with all cofaces and their alternating sums. They therefore form the asserted
-short-complex diagram and cocone; the displayed isomorphisms identify its objects
-with the actual stage section terms. Inverse-image composition and pullback
-pasting identify the cocone components with tailCochainMap. At q=0 the incoming
-differential is zero and the same degree-zero term can be used twice. Empty
-étale objects have zero section objects by the empty-cover sheaf condition. -/
+No assertion about derived functors is used. -/
 theorem exists_tail_section_shortComplex_colimit
     {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)

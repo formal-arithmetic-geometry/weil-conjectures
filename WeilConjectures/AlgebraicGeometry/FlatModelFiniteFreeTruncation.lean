@@ -54,19 +54,8 @@ private theorem finiteLocallyFree_of_flat_finitePresentation {X : Scheme.{u}}
   rw [hid] at h
   exact h
 
-/-- The degree-zero cokernel of the canonical quotient truncation is finite free near t.
-Source: Stacks Project, Tags 0653 and 00NX.
-Proof: choose an affine neighbourhood of t inside U. The cokernel of Q.d (-1) 0
-is quasi-coherent and finitely presented, because both terms are finite free.
-At every stalk, the bounded flat complex C has Tor amplitude [0,d]. The bounded-above
-free complex Q is K-flat, so its quasi-isomorphism to C gives it the same Tor amplitude.
-Tag 0653 makes the degree-zero cokernel flat at each stalk. Over the chosen affine,
-the corresponding finitely presented flat module is finite projective. Tag 00NX gives
-an open neighbourhood of t on which it is finite free. Restriction is exact, so this
-restricted cokernel is the cokernel of the restricted differential. The degree-zero
-term of Mathlib's truncGE 0 is canonically isomorphic to that cokernel; transport the
-finite-free isomorphism along it. Only the open neighbourhood and rank are existential;
-the complex itself is the explicit canonical truncation, not an arbitrary witness. -/
+/-- The degree-zero cokernel of the canonical quotient truncation is finite free near t
+(Stacks, Tags 0653 and 00NX). -/
 theorem exists_local_finiteFree_truncation_zero {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

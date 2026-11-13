@@ -92,14 +92,7 @@ private theorem kummer_core_class_scalar_faithful
         CategoryTheory.Abelian.Ext.comp_zero]
 
 /-- An injective scalar orbit of a normalized cohomology class detects scalar
-annihilators of its specified derived representative.
-
-Proof: precomposing the derived representative by a scalar equals postcomposing
-its Ext class by that scalar. The exact forgetful functor preserves this identity,
-and composition with the integral generator gives the cohomology action in the
-statement. A vanishing composite therefore makes the scalar orbit equal its value
-at zero. Injectivity of the orbit forces the scalar to be zero. The argument needs
-neither finiteness nor a nonzero coefficient ring. -/
+annihilators of its specified derived representative. -/
 theorem ordinaryFiniteClass_scalar_faithful
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))

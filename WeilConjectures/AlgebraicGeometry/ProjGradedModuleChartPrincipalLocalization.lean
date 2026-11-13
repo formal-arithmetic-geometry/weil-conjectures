@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProjChartRestrictionIsLocalized
 /-!
 # Localization of sections of a graded-module chart
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
+## References
+
+* Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -29,8 +31,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM. -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsPrincipalLocalization (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -49,27 +51,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Sections of the given graded-module sheaf on each principal chart open are
 its chart module localized at the defining element, with canonical scalars and
-normalization on restrictions of whole-chart sections.
-
-Source: Stacks Project, Constructions, Lemmas 01M4 (1)(e),(h), 01M7 and 01MB,
-last paragraph.
-
-Proof:
-Identify whole-chart sections with Z f by restriction along the chart inclusion
-and alpha f; this gives b. Write r as a homogeneous fraction a/f^n with a of
-degree n*deg(f). Put g=f*a of degree (n+1)*deg(f)>0. The chart-intersection
-formula identifies the image of V in Proj with D_+(g), because U f g = r^deg(f)
-and D(r^deg(f))=D(r). Transport sections through restrictAppIso and alpha g,
-then theta f g inverse. Localization at r^deg(f) and at r have the same
-universal property, so obtain c with c(restrict(s))=b(s)/1 from hrestriction
-and htheta. For scalars, hcanonical and uniqueness of maps from S_f identify
-rhoS with the actual restriction of the structure sheaf. The chart ring on V
-is the localization of R[f] at r. The supplied t agrees with its canonical
-identification on R[f], hence on all fractions by uniqueness of localization
-maps. The scalar compatibility of alpha and theta now proves c(x*s)=t(x)*c(s).
-If r=0, V is empty and both localized modules and section modules are zero;
-if r is a unit, the same construction is the whole-chart identification.
-No comparison with tilde and no compatibility between proper opens is used. -/
+normalization on restrictions of whole-chart sections
+(Stacks, Constructions, Lemmas 01M4, 01M7 and 01MB). -/
 theorem gradedModuleChart_principalLocalization
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])

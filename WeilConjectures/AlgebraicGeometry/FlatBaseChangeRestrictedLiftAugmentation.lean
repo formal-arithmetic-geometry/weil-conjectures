@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSect
 
 /-! # Augmentation of the restricted lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -24,16 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 -- The nested restriction-adjunction calculation needs elaboration fuel.
-/-- The explicitly restricted lift preserves the augmentation.
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-Proof: Take the degree-zero component of the restriction adjunction defining
-flatBaseChangeRestrictedLift. Use naturality of each composition/congruence
-comparison to move the target augmentation through it. The target comparison's
-augmentation cancels its inverse. Substitute ht. The unit square in D identifies
-the resulting composite with the adjoint of D.psi followed by the target
-augmentation. The source comparison's augmentation identifies the restricted
-source augmentation; the bijection of the restriction adjunction then gives the
-claimed equality. This argument needs no injectivity or flatness. -/
+/-- The explicitly restricted lift preserves the augmentation. (Stacks, Tags 01FB and 01E4.) -/
 theorem flatBaseChangeRestrictedLift_augmentation {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules}

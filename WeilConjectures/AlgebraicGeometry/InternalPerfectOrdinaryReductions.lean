@@ -40,17 +40,16 @@ def internalPerfectIntegralComplex (W : Scheme.{u})
     FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W
   (F.mapHomologicalComplex (.up ℤ)).obj P
 
-/-- Termwise ordinary extension along the actual integral-to-finite quotient.
-Source: Stacks Tags 06YY and 09C6, ordinary reduction of a finite-free complex. -/
+/-- Termwise ordinary extension along the actual integral-to-finite quotient
+(Stacks, Tags 06YY and 09C6). -/
 def internalPerfectOrdinaryReduction (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) :=
   ((Mod.extendScalars (AdicCompletion.quotient l E W n)).mapHomologicalComplex (.up ℤ)).obj
     (internalPerfectIntegralComplex l E W P)
 
-/-- The ordinary balancing isomorphism for two consecutive reductions.
-It is fixed by uniqueness of left adjoints and the actual quotient factorization.
-Source: Stacks Tag 06YY, associativity of scalar extension. -/
+/-- The ordinary balancing isomorphism for two consecutive reductions
+(Stacks, Tag 06YY). -/
 def internalPerfectOrdinaryReductionStep (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) :
@@ -63,16 +62,16 @@ def internalPerfectOrdinaryReductionStep (W : Scheme.{u})
       eqToIso (by congr 1; exact AdicCompletion.quotient_transition l E W n)) (.up ℤ)).app
     (internalPerfectIntegralComplex l E W P)
 
-/-- Endomorphisms modulo chain homotopy of the ordinary quotient model.
-Source: Stacks Tags 064B and 09C6. -/
+/-- Endomorphisms modulo chain homotopy of the ordinary quotient model
+(Stacks, Tags 064B and 09C6). -/
 abbrev internalPerfectOrdinaryHom (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) :=
   (HomotopyCategory.quotient _ (.up ℤ)).obj (internalPerfectOrdinaryReduction l E W P n) ⟶
     (HomotopyCategory.quotient _ (.up ℤ)).obj (internalPerfectOrdinaryReduction l E W P n)
 
-/-- Ordinary scalar extension on homotopy classes, conjugated by balancing.
-Source: Stacks Tag 09C6, reduction of chain maps and homotopies. -/
+/-- Ordinary scalar extension on homotopy classes, conjugated by balancing
+(Stacks, Tag 09C6). -/
 def internalPerfectOrdinaryHomStep (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) (f : internalPerfectOrdinaryHom l E W P (n + 1)) :
@@ -83,10 +82,8 @@ def internalPerfectOrdinaryHomStep (W : Scheme.{u})
     ((Mod.extendScalars (AdicCompletion.transition l E W n)).mapHomotopyCategory (.up ℤ)).map f ≫
       H.map a.hom
 
-/-- The ordinary reduction step reduces a representative chain map and balances its scalars.
-Source: functoriality of the homotopy quotient.
-Proof: the induced homotopy functor sends a chain-map class to its scalar-extended class;
-the quotient functor preserves the two compositions with the balancing isomorphism. -/
+/-- The ordinary reduction step reduces a representative chain map and balances its
+scalars. -/
 theorem internalPerfectOrdinaryHomStep_map (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) (f : internalPerfectOrdinaryReduction l E W P (n + 1) ⟶

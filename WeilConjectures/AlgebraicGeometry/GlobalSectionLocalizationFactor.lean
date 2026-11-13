@@ -12,8 +12,9 @@ import all WeilConjectures.CategoryTheory.RingedLocalizationFactorRestriction
 
 /-! # Scalar extension and tensor localization factors
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E;
-algebra.tex, Tag 00DK.
+## References
+
+* Stacks Project, Tags 0996, 099E and 00DK.
 -/
 
 @[expose] public noncomputable section
@@ -99,22 +100,8 @@ private theorem globalExtension_localization
   rw [Category.assoc, htgt]
   rfl
 
-/-- Scalar extension identifies a single augmented two-term localization complex.
-Source: Stacks Project, algebraization.tex, Tag 0996; algebra.tex, Tag 00DK.
-
-Proof: transpose the fixed multiplication map through its two defining adjunctions.
-Its transpose is evaluation of sections, which commutes with multiplication by s.
-The module unit constraint therefore identifies the scalar-multiplication sequences.
-Use the already proved sheaf localization cocones, whose n-th leg sends a to a/s^(n+1).
-Scalar extension preserves their colimits, so their universal properties give the
-localization isomorphism. The successor-fraction identity at n=0 says that scalar
-multiplication followed by the first leg is the localization unit; hence this
-isomorphism commutes with the specified unit arrow. The existing generic factorArrow
-construction assembles this square into an isomorphism of the two-term complexes.
-Its degree-zero component is the fixed multiplication map and its remaining nonzero
-component is the localization isomorphism. Reverse this isomorphism and cancel it in
-the arrow-commutativity equation to obtain the displayed augmentation equality.
-Zero sections, units, zero rings and empty sites are covered by the same cocones. -/
+/-- Scalar extension identifies a single augmented two-term localization complex
+(Stacks, Tags 0996 and 00DK). -/
 theorem ringFamilyGlobalExtension_localization_factor
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

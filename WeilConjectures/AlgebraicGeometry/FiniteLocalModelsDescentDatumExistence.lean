@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoproductRepresentation
 /-!
 # Assembly of the finite etale local representatives
 
-Source: Stacks Project, Tag 03RV and Descent Tag 02W5.
+## References
+
+* Stacks Project, Tag 03RV and Descent Tag 02W5
 -/
 
 @[expose] public section
@@ -51,26 +53,8 @@ private theorem finite_sigmaMap {ι : Type u} {X Y : ι → Scheme.{u}}
     (hp i).isoPullback_hom_snd]
   infer_instance
 
-/-- The coproduct of a cover admits a finite etale representative of the restricted sheaf.
-
-Source: Stacks Project, Tag 03RV, assembly of the local representatives before descent;
-Descent Tag 02W5, gluing the local representations.
-
-Proof: Choose Q_i and its representation isomorphism from hrep by choice. The equivalence
-between the site localized at U_i and the small etale site of U_i transports each isomorphism
-back to the localized site. Let U be the coproduct of the U_i, as in Cover.sigma, and let V
-be the coproduct of the Q_i. The coproduct of their structure morphisms is a morphism V to U.
-Each U_i is an open and closed component of U, and its inverse image in V is Q_i. Thus this
-morphism is finite by target locality and etale by source locality. This gives Q in
-U.FiniteEtale. To identify the presheaves, cover any etale W over U by the inverse images of
-these disjoint components. The local representation isomorphisms identify the sections of
-E on each piece with morphisms from that piece to Q_i. The sheaf axiom for E and the gluing
-property of morphisms to a scheme glue both directions uniquely. Disjointness makes overlap
-compatibility automatic; the empty intersections use the empty-cover sheaf axiom. Uniqueness
-shows naturality and that the two maps are inverse. The site equivalence expresses the
-result in the displayed localized-site form. If the original cover is empty, U and V are
-empty; each etale W over U is empty, and the same empty-cover axiom proves the claim. No
-uniform rank bound and no finite index set are used. -/
+/-- The coproduct of a cover admits a finite etale representative of the restricted sheaf
+(Stacks, Tags 03RV, 02W5). -/
 theorem finiteLocalModels_descentDatum_exists
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (𝒰 : Cover.{u} etalePrecoverage T)

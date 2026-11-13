@@ -109,20 +109,8 @@ private theorem collapse_succ (X : Scheme.{u}) (F : X.Modules) (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Collapse compatibility for the canonical recursively generated pairing.
-Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-Proof: Induct on n. At n=0 substitute the recursion twice and p0=id; beta.multiply is exactly the
-asserted equality after functoriality simplifies T(id). For n+1 split the insertion position into
-zero and successor. Position zero uses beta.multiply on T^(n+1)F and T^(n+1)G followed by
-T(p_(n+1)); move this latter map across multiplication by multiplication naturality. At a
-successor position write each collapse as T of the lower collapse. Substitute the recursion for
-both pairing terms, move the two T(collapse) maps through beta using beta.naturality, and apply T
-to the induction hypothesis. Functoriality and associativity identify the resulting composites.
-Naturality of T and of multiplication follows directly from their product projection formulas and
-naturality of stalk evaluation. The argument uses beta.naturality and beta.multiply;
-coface compatibility alone is insufficient. The cases of an empty scheme and zero sheaves are
-covered by product
-uniqueness. -/
+/-- Collapse compatibility for the canonical recursively generated pairing
+(Banerjee, §1.1.4; Stacks, Tag 0FKR). -/
 theorem moduleCup_godement_iterate_pairings_collapse_of_canonical
     (X : Scheme.{u}) (F G : X.Modules) (β : ModuleCupGodementBeta X)
     (p : ∀ n : ℕ, moduleCup_godementIterate X F n ⊗

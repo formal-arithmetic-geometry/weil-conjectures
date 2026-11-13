@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OrderedCechDegreewiseProjectionDifferen
 
 /-! # Signed projection of module Čech cochains
 
-Source: Stacks Project, Tags 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- All-tuple coordinate, with the actual extension transport.
-Source: Stacks 01FK. -/
+/-- All-tuple coordinate, with the actual extension transport (Stacks, Tag 01FK). -/
 noncomputable def orderedCechFullCoordinate {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -44,8 +45,8 @@ noncomputable def orderedCechFullCoordinate {X' T' : Scheme.{u}} (f' : X' ⟶ T'
     (((((Modules.pushforward f').mapHomologicalComplex _).obj D).extendXIso
       ComplexShape.embeddingUpNat (i := p) rfl).hom.app B s)
 
-/-- Restrict an ordered coordinate back to an arbitrary permuted full tuple.
-Source: Stacks 01FK. -/
+/-- Restrict an ordered coordinate back to an arbitrary permuted full tuple
+(Stacks, Tag 01FK). -/
 noncomputable def orderedCechProjectionOpenMap {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens)
     (y : Fin (p + 1) → ULift.{u} (Fin r)) (σ : Equiv.Perm (Fin (p + 1)))
@@ -55,8 +56,8 @@ noncomputable def orderedCechProjectionOpenMap {X : Scheme.{u}} {r p : ℕ}
   homOfLE (le_inf (le_iInf fun l ↦
     (prod.fst ≫ Pi.π (fun k ↦ W (y k)) (σ l)).le) prod.snd.le)
 
-/-- The finite signed extension formula characterizes the projection completely.
-Source: Stacks 01FK and 01FM. -/
+/-- The finite signed extension formula characterizes the projection completely
+(Stacks, Tags 01FK and 01FM). -/
 def IsOrderedCechModuleProjection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -82,20 +83,8 @@ def IsOrderedCechModuleProjection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
                 (OrderEmbedding.ofStrictMono _ h) s)
         else 0
 
-/-- Signed extension lifts to a cochain endomorphism of module sheaves.
-Source: Stacks 01FK, signed extension; 01FM, the map cπ.
-
-Proof: Obtain the degreewise module maps and their coordinate formula from
-orderedCech_degreewise_projection_exists, whose construction uses the actual finite
-signed sum and hlinear. Apply orderedCech_degreewise_projection_comm with hd and
-assemble a morphism of D using CochainComplex.ofHom. Push it forward and extend by
-zero with HomologicalComplex.extendMap. In a natural degree, extendMap_f expresses
-its component using extendXIso, the pushed-forward degreewise map, and the inverse
-of extendXIso. Composing with the coordinate's extendXIso cancels that inverse.
-The degreewise formula on the inverse-image open is definitionally the required
-signed formula. The extension functor supplies all negative components and boundary
-equations. Empty families and degrees exceeding r have zero projection by the
-strict-increase filter. -/
+/-- Signed extension lifts to a cochain endomorphism of module sheaves
+(Stacks, Tags 01FK and 01FM). -/
 theorem orderedCech_module_projection_exists {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)

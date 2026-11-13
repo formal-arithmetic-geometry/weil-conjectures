@@ -106,7 +106,7 @@ theorem isOfCharacteristic_geometricFiber : f.geometricFiber.IsOfCharacteristic 
 
 variable [Finite k]
 
-/-- the `q`-power scheme Frobenius `Φ₀: X₀ ⟶ X₀` of a
+/-- the `q`-power scheme Frobenius `Φ₀ : X₀ ⟶ X₀` of a
 scheme over the finite field `k = 𝔽_q`, that is its absolute `q`-power Frobenius
 (`s ↦ s ^ q` on sections, the identity on points). It is a morphism over `k`
 (`AlgebraicGeometry.Scheme.Hom.modelFrobenius_comp`). -/
@@ -132,7 +132,7 @@ theorem comp_modelFrobenius {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} (φ 
   comp_iterateFrobenius _ _ _ _ _
 
 /-- the
-scheme Frobenius `Φ_X = Φ₀ × 𝟙: X ⟶ X` of the geometric fibre `X = X₀ ×_{Spec k} Spec k̄`, the
+scheme Frobenius `Φ_X = Φ₀ × 𝟙 : X ⟶ X` of the geometric fibre `X = X₀ ×_{Spec k} Spec k̄`, the
 base change to `k̄` of the `q`-power Frobenius `Φ₀` of `X₀`. It is a morphism over `k̄`; on an
 affine chart it is `a ⊗ b ↦ a ^ q ⊗ b`. -/
 def geometricFiberFrobenius : f.geometricFiber ⟶ f.geometricFiber :=
@@ -169,7 +169,7 @@ theorem geometricGaloisFrobenius_inv_comp_geometricFiberToAlgebraicClosure :
 
 variable {f} in
 /-- the base change `f = φ × 𝟙` of a morphism
-`φ: X₀ ⟶ Y₀` over `k` commutes with the scheme Frobenii, `f ≫ Φ_Y = Φ_X ≫ f`. -/
+`φ : X₀ ⟶ Y₀` over `k` commutes with the scheme Frobenii, `f ≫ Φ_Y = Φ_X ≫ f`. -/
 @[reassoc]
 theorem geometricFiberMap_comp_geometricFiberFrobenius {Y₀ : Scheme.{u}}
     {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) :
@@ -234,7 +234,7 @@ variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 /-- the absolute `q`-power
 Frobenius of the geometric fibre `X = X₀ ×_{Spec k} Spec k̄` factors as
 `Fr_X^{(q)} = Φ ≫ g_σ`, where `Φ` is the scheme Frobenius and `g_σ = g_γ⁻¹ = 𝟙 × Spec σ` the
-arithmetic Galois automorphism, `σ: z ↦ z ^ q`. -/
+arithmetic Galois automorphism, `σ : z ↦ z ^ q`. -/
 theorem iterateFrobenius_geometricFiber_eq (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k) =

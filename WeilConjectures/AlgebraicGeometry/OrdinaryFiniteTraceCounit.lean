@@ -23,10 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] derivedTensor singleFunctorObjUnitIso
 
-/-- Naturality of the ordered projection in its base coefficient.
-
-Proof: compose naturality of the two tensor symmetries with naturality of the
-adjoint-of-counit projection. Direct image preserves the resulting composition. -/
+/-- Naturality of the ordered projection in its base coefficient. -/
 theorem ordinaryFiniteProjection_naturality
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (q : X ⟶ Y)
     (L : DerivedCategoryModule A X) {K K' : DerivedCategoryModule A Y} (f : K ⟶ K') :
@@ -98,9 +95,7 @@ def ordinaryFiniteTensorTrace (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     derivedTensorRight (ModuleCat.{u + 1} A) Y B ⟶ 𝟭 (DerivedCategoryModule A Y) :=
   ordinaryDerivedTensorTrace (ModuleCat.{u + 1} A) Y τ
 
-/-- The tensor-trace component is exactly tensor with the trace and the prescribed unitor.
-
-Proof: expand the natural transformation and use preservation of composition by tensor. -/
+/-- The tensor-trace component is exactly tensor with the trace and the prescribed unitor. -/
 theorem ordinaryFiniteTensorTrace_app (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     {B : DerivedCategoryModule A Y} (τ : B ⟶ ordinaryFiniteUnit A Y)
     (K : DerivedCategoryModule A Y) :
@@ -129,9 +124,7 @@ def ordinaryFiniteTraceCounit
     NatIso.isIso_of_isIso_app _
   inv (ordinaryFiniteProjectionNatTrans A q L) ≫ ordinaryFiniteTensorTrace A Y τ
 
-/-- The trace counit satisfies the actual ordered projection equation.
-
-Proof: cancel the ordered projection with its inverse and apply the tensor-trace formula. -/
+/-- The trace counit satisfies the actual ordered projection equation. -/
 theorem ordinaryFiniteTraceCounit_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]
@@ -168,9 +161,7 @@ def ordinaryFiniteP1TraceCounit (A : Type (u + 1)) [CommRing A] [Finite A]
   ordinaryFiniteTraceCounit A (ProjectiveLine S ↘ S)
     ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) (b.inv ≫ biprod.snd)
 
-/-- The projective-line counit uses exactly the item's ordered projection and unitor.
-
-Proof: apply the general inverse-projection equation to q, its shifted line, and the trace. -/
+/-- The projective-line counit uses exactly the item's ordered projection and unitor. -/
 theorem ordinaryFiniteP1TraceCounit_projection (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S]
     (b : ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅

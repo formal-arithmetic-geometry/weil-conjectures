@@ -27,11 +27,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Componentwise surjectivity gives surjectivity on sections when the restriction maps are
-bijective. Source: Stacks Project, proetale.tex, Tag 0F4P, disjoint-union paragraph; sites.tex,
-Tags 090K, 090L.
-Proof: choose component preimages using surjectivity, assemble them by the evaluation bijection,
-and verify the result by naturality.
--/
+bijective (Stacks, Tags 0F4P, 090K and 090L). -/
 theorem weaklyContractible_of_components
     (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W))
     (hcomponents : ∀ n : ℕ, ∃ (I : Type (u + 1)) (V : I → X.ProEt)

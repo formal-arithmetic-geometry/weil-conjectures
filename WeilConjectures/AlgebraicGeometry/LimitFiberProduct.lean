@@ -13,12 +13,12 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 ## Main results
 
-- `CategoryTheory.IsPullback.isPullback_map_of_isLimit`: in any category, a limit of cartesian squares is cartesian;
-  in particular inverse limits of schemes commute with fibre products.
+- `CategoryTheory.IsPullback.isPullback_map_of_isLimit`: in any category, a limit of cartesian
+  squares is cartesian; in particular inverse limits of schemes commute with fibre products.
 - `CategoryTheory.Limits.limitPullbackIso`: the canonical comparison
   `lim (Xᵢ ×_{Sᵢ} Yᵢ) ≅ (lim Xᵢ) ×_{lim Sᵢ} (lim Yᵢ)`.
-- `AlgebraicGeometry.Scheme.exists_preimage_eq_of_isAffine`: a quasi-compact open of a cofiltered limit of affine schemes
-  descends to a quasi-compact open of some stage.
+- `AlgebraicGeometry.Scheme.exists_preimage_eq_of_isAffine`: a quasi-compact open of a
+  cofiltered limit of affine schemes descends to a quasi-compact open of some stage.
 -/
 
 @[expose] public section
@@ -62,8 +62,7 @@ namespace Limits
 variable [HasLimitsOfShape J C] [HasPullbacks C]
 
 /-- The canonical comparison `lim (Xⱼ ×_{Sⱼ} Yⱼ) ≅ (lim Xⱼ) ×_{lim Sⱼ} (lim Yⱼ)`, for natural
-transformations `f : X ⟶ S` and `g : Y ⟶ S` of diagrams `J ⥤ C`: the functor `lim` is a right
-adjoint, hence preserves fibre products (compare `lem-kun-fibre-product-limits`). -/
+transformations `f : X ⟶ S` and `g : Y ⟶ S` of diagrams `J ⥤ C`. -/
 noncomputable def limitPullbackIso {X Y S : J ⥤ C} (f : X ⟶ S) (g : Y ⟶ S) :
     limit (pullback f g) ≅ pullback (lim.map f) (lim.map g) :=
   PreservesPullback.iso lim f g

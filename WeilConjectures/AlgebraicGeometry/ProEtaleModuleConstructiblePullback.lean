@@ -15,8 +15,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Pullback of constructible module objects
 
-Source: `ConstructibleSheaf/ProEtaleModule/Def.lean` and
-`ConstructibleSheaf/Pullback.lean`; finite presentations and stratifications pull back.
+Finite presentations and stratifications pull back.
 -/
 
 @[expose] public section
@@ -203,15 +202,7 @@ end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Pullback preserves constructible module objects.
-
-Source: `ConstructibleSheaf/ProEtaleModule/Def.lean` (constructibility) and
-`ConstructibleSheaf/Pullback.lean` (pullback stratification).
-Pull back the finite stratification and, on each stratum, the pro-étale cover presenting the
-module. Inverse image preserves finite sums and cokernels and takes the regular coefficient
-module to the regular pulled-back coefficient module. Thus the pulled-back presentations
-are finite presentations. The coefficient comparison identifies these with the prescribed
-condensed coefficient modules. -/
+/-- Pullback preserves constructible module objects. -/
 theorem isConstructibleModuleObject_upperStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

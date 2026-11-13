@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-! # Cochain realization of the external cup product
 
-Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV; Varieties, Tag 0BED.
+## References
+
+* Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV
+* Stacks Project, Varieties, Tag 0BED
 -/
 
 @[expose] public section
@@ -27,8 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The tensor total complex of the two actual scalar sections models.
-Source: Stacks, Tag 0BED. -/
+/-- The tensor total complex of the two actual scalar sections models. -/
 noncomputable def picardExternalTotal
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) : CochainComplex (ModuleCat.{w} k) ℤ :=
@@ -36,8 +38,7 @@ noncomputable def picardExternalTotal
     (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)
 
 /-- Normalization of a specified cochain map on tensor cycles. This imposes only the
-external cup formula, not injectivity or surjectivity on homology.
-Source: Stacks, Tags 01FD, 07MB and 0FKV; equation 33.29.1.1 of Tag 0BED. -/
+external cup formula, not injectivity or surjectivity on homology. -/
 def IsPicardExternalCupCochain
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules)
@@ -263,31 +264,8 @@ end
 end
 
 /-- External cup admits a cochain realization between the explicitly constructed models.
-This asserts no geometric Kunneth isomorphism and needs no compactness or affine diagonal.
-Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV;
-Varieties, Tag 0BED, construction before equation 33.29.1.1.
-
-Proof: Resolve the coefficient sheaves, compute the projection pullbacks on resolution
-representatives, and use the signed tensor pairing of Tag 0FKV followed by the
-coefficient map from derived tensor to ordinary tensor. Tags 01FD and 07MB identify
-this pairing on cocycle tensors with pullback followed by cup. The scalar Ext
-comparison identifies it with the recorded externalCup operation, k-bilinearly.
-To obtain a map on the fixed sections models rather than on a Godement model,
-use the following explicit vector-space lifting argument. In each degree choose a
-complement of boundaries in cycles and a complement of cycles in the term. The
-latter complement maps isomorphically onto the next boundaries. Thus each complex
-is the direct sum of its homology representatives with zero differential and pairs
-mapped isomorphically by the differential. Projection to the homology representatives
-and inclusion of them are cochain maps inducing the identity on homology. The field
-linear tensor Kunneth map identifies homology of the tensor total with the sum of
-factor homology tensors. Define a map on that homology by the bilinear external cup
-on each summand, using picardScalarModelEquiv on all three models; include it into
-the homology representatives of the product model. Composing with projection of
-the tensor total gives the required cochain map c. Its homology map has exactly the
-specified value on every tensor cycle by the tensor Kunneth cycle formula.
-If two total cycles have the specified inclusion, monicity of iCycles identifies
-them, so the formula holds for the arbitrary z in the statement. All negative
-terms are zero, and the construction includes zero sheaves and empty schemes. -/
+This asserts no geometric Kunneth isomorphism and needs no compactness or affine diagonal
+(Stacks, Tags 01FD, 07MB, 0FKV and 0BED). -/
 theorem picardExternalCupCochain_exists
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :

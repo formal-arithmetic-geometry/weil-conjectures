@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Core object comparison data (without the final Hom pin).
 
-Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
+## References
+
+* Stacks Project, Tags 09RE, 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -135,12 +137,7 @@ theorem perfect_overlap_object_realization_core_data_at
   exact ⟨perfectOverlapCanonicalComparisonFamily R c hc i Z t j hij
     U V hcover hU hV A B hA hB E φU φV k hjk⟩
 
-/-- The prescribed overlap comparison data exists simultaneously at every stage.
-For each later index, identify the inverse-image intersection with the cartesian
-base change of `U ⊓ V`, pull back along this identification, and apply the inverse
-open-site equivalence. Restriction and derived-pullback composition comparisons
-provide the transport data and theta equations.
--/
+/-- The prescribed overlap comparison data exists simultaneously at every stage. -/
 theorem perfect_overlap_object_realization_core_data_family
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

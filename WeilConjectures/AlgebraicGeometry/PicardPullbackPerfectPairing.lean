@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Perfectness of the explicit pulled-back evaluation pairing
 
-Source: Stacks Project, Tags 0FNV and 01C8, the pulled-back dual basis.
+## References
+
+* Stacks Project, Tags 0FNV and 01C8
 -/
 
 @[expose] public section
@@ -26,19 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The evaluation pairing used in the Picard cup-product construction is perfect
-after pullback of a finite locally free module.
-
-Source: Stacks Project, Tags 0FNV and 01C8, finite free evaluation and pullback.
-
-Proof: Finite local freeness makes E dualizable. Use its canonical exact pairing
-with internal dual, whose evaluation is dualEvaluation E. The ordinary monoidal
-pullback preserves this exact pairing. Transport it through picardTensorComparison
-to the two tensor-formula pullbacks. Its evaluation is the explicit pulled-back
-evaluation with the monoidal unit comparison. Replacing that comparison by
-pullbackObjUnitIso only postcomposes evaluation by an automorphism of O_X.
-Transposition takes postcomposition to the internal-Hom functor, which preserves
-isomorphisms. Thus the explicit pairing is perfect. This includes the zero bundle
-and empty schemes without choosing any nonempty local frame. -/
+after pullback of a finite locally free module (Stacks, Tags 0FNV and 01C8). -/
 theorem isIso_curry_picardPullbackEvaluation
     {X Y : Scheme.{u}} (p : X ⟶ Y) (E : Y.Modules) [E.IsFiniteLocallyFree] :
     IsIso (curry ((picardTensorObjIso p E (dual E)).inv ≫

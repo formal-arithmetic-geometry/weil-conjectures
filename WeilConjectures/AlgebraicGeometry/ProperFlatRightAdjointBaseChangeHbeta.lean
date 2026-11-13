@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 /-! # Derived base change for proper flat morphisms
 
-Source: Stacks Project, Tag 0A1D, specialized to the structure sheaf in degree zero.
+## References
+
+* [Stacks Project, Tag 0A1D](https://stacks.math.columbia.edu/tag/0A1D), specialized to the
+  structure sheaf in degree zero.
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-/-- Naturality of the canonical mate in its derived input, from the naturality
-of the pullback composition comparisons and the adjunction Hom equivalence.
-Source: Stacks Project, Tag 08HY, the canonical derived base-change construction. -/
+/-- Naturality of the canonical mate in its derived input (Stacks, Tag 08HY). -/
 private theorem baseChange_naturality
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -91,21 +92,8 @@ private theorem baseChange_naturality
     ((schemeDerivedDirectImage f ⋙ derivedPullback g).map s)
     (γ.app F) (γ.app E) ((derivedPullback g').map s) (γ.naturality s)
 
-/-- Flat proper finite-presentation morphisms satisfy derived base change after arbitrary pullback.
-Source: Stacks Project, Derived Categories of Schemes, Tag 0A1D (Lemma 36.26.4).
-Proof: Properness implies that f is quasi-compact and quasi-separated.
-Apply relatively flat complex base change (Tag 0A1D) with G = O_X[0].
-This complex is bounded above and quasi-coherent; flatness of f makes its only
-nonzero term flat over Y. For each E, choose a K-flat representative and use
-the tensor unit isomorphism to identify E ⊗^L O_X[0] with E.
-Pullback of the structure sheaf is the structure sheaf, and O_X is intrinsically
-flat, so the derived-to-ordinary pullback comparison for G is an isomorphism.
-The theorem therefore says that the canonical map β_E, composed with the
-unit identifications and this invertible comparison, is invertible.
-Cancel these isomorphisms to obtain IsIso β_E. This holds for arbitrary,
-including unbounded, quasi-coherent E. No right adjoint is used.
-Equivalently, flatness gives Tor independence and Stacks Tag 08IB applies.
--/
+/-- Flat proper finite-presentation morphisms satisfy derived base change after arbitrary
+pullback (Stacks, Tag 0A1D). -/
 theorem proper_flat_rightAdjoint_baseChange_hβ
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

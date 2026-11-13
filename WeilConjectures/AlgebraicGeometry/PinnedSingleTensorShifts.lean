@@ -12,7 +12,11 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-! # Shift compatibility of the pinned tensor counit on singles
-Source: Stacks Project, Tags 08HY and 0D5S; Mathlib single-functor shifts. -/
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -169,8 +173,7 @@ end CategoryTheory.SingleFunctors
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The selected counit followed by the actual termwise mapped-single comparison.
-Source: Stacks Project, Tag 08HY; Mathlib mapped-single comparison. -/
+/-- The selected counit followed by the actual termwise mapped-single comparison. -/
 def pinnedSingleTensorCounit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -189,19 +192,7 @@ def pinnedSingleTensorCounit
 
 set_option maxHeartbeats 400000 in
 -- The nested family comparison must identify the shared sheaf-module category instances.
-/-- The tensor comparison is a morphism of single-functor families.
-Source: Stacks Project, Tag 08HY; the derived counit universal property and
-Mathlib's termwise mapped-single shift identity.
-Proof: whisker the pinned left-derived counit by each homotopy single functor,
-then compose with Qh applied to the termwise mapped-single comparison. Naturality
-follows from the naturality of these two factors. For the shift equation, expand
-the single shift using SingleFunctors.postcomp. Apply the counit's
-NatTrans.CommShift equation, then the termwise identity
-Functor.mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app. Naturality of
-the quotient shift comparisons moves them through the mapped-single map.
-Functor.map_comp and associativity cancel inverse quotient comparisons. This
-proves the Hom.comm equation for every triple k+i=j, including zero and negative
-integers, without exactness or flatness of tensor pullback. -/
+/-- The tensor comparison is a morphism of single-functor families (Stacks, Tag 08HY). -/
 theorem exists_pinned_single_tensor_shifts
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

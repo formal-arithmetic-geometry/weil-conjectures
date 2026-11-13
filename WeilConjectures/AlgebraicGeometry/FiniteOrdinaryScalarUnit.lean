@@ -9,7 +9,9 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-! # Finite direct image preserves ordinary scalar-extension units
 
-Source: Stacks Project, Tag 03QP, finite direct image and its finite stalk formula.
+## References
+
+* Stacks Project, Tag 03QP
 -/
 
 @[expose] public section
@@ -221,20 +223,7 @@ private theorem finiteScalarMap_unit
   rfl
 
 /-- Finite direct image carries an ordinary scalar-extension unit to an ordinary unit.
-Source: Stacks Project, Tag 03QP, together with the sheaf tensor universal property.
-
-Proof: Write E_X for sheafified sectionwise extension of scalars on X. Its adjunction
-with restriction identifies η with an isomorphism E_D F → G, by the given ordinary
-Hom bijections and uniqueness of representing objects. Take the mate of the
-restriction/direct-image comparison to obtain E_T(i_*F) → i_*(E_D F). It is invertible:
-on every geometric stalk the finite-stalk formula identifies it with extension of
-scalars commuting with a finite product of modules. Finite products are finite direct
-sums and extension of scalars preserves these. The identification is normalized on
-pure tensors, so geometric-stalk conservativity applies to the actual mate. Compose
-with i_* of the isomorphism E_D F → G. Its adjunction transpose is precisely i_*(η)
-followed by the inverse restriction comparison, by the mate unit equation. The
-ordinary scalar adjunction therefore supplies the displayed Hom bijections. This
-also covers the empty fibre and the zero coefficient rings. -/
+(Stacks, Tag 03QP) -/
 theorem finite_ordinary_scalar_unit
     (T : Scheme.{u}) {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) {D : Scheme.{u}} (i : D ⟶ T) [IsFinite i]

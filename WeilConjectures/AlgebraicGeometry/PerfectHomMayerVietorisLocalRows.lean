@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisStageRows
 public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
 
 /-! # Exact geometric rows for the perfect Hom comparison
-Source: Stacks Project, Tag 09RE, Mayer--Vietoris step, and Tag 08BW.
+
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -23,47 +26,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Construct exact rows with pinned central map and local neighboring maps.
-This construction has no continuity hypotheses and asserts no isomorphisms.
-
-Source: Stacks Project, Tag 09RE, Mayer--Vietoris induction step; Tag 08BW.
-
-Proof: Pull U,V back along the open immersion t. Their union is Y, each is
-quasi-compact, and their intersection is quasi-compact by quasi-separatedness.
-Pull this cover back to every ring stage and to the limit. Restricted pullbacks
-of P,Q are perfect by their local bounded finite locally free models and the
-localizedPullback_perfectModel_iso comparison. Their shifts are perfect by
-perfect_thick_closure. They have quasi-coherent cohomology by
-schemeDerivedQCohProperty_of_isPerfect. Use the functorial K-injective-resolution
-and short-exact-sequence boundary construction of the derived Mayer--Vietoris
-triangle for Q at each stage and at the limit; do not independently choose
-arbitrary distinguished triangles. Apply the represented homological
-functor Hom(P,-). Derived open adjunction identifies the five terms as the
-product on U,V in degree -1, the intersection in degree -1, the global Hom,
-the product on U,V in degree zero, and the intersection in degree zero.
-For every transition, the direct-image Mayer--Vietoris comparison applied to
-Lh*Q, followed by naturality for Q → Rh*Lh*Q, gives all commuting squares,
-including the boundary square. The counit-pinned derived pullback comparisons
-identify the central transitions and limit maps with perfectStageMap and
-perfectLimitMap. Explicitly, a stage arrow f is first composed with the
-adjunction unit on Q. Its adjunct is pullback of f, followed by pullback of
-that unit and the counit on the pulled-back Q. The triangle identity cancels
-the latter two factors. Conjugating the resulting pullback of f by the fixed
-composition comparisons gives exactly perfectStageMap; the same calculation
-for a cocone leg gives perfectLimitMap. On local terms the direct-image
-composition comparisons identify the units with the unit of the composite
-adjunction, so the same cancellation gives the local pinning equations.
-Take the filtered abelian-group colimit of these rows;
-filtered colimits preserve exactness and their underlying sets are the set
-colimits. The supplied H,d,ident give the same central set system, so uniqueness
-of colimits supplies a. At the limit the central Hom identification supplies b.
-Use perfect_hom_stage_colimit for the local Hom systems. The four neighboring
-comparisons have precisely PerfectHomLocalComparison presentations on U,V and
-their intersection, with the restricted perfect pairs
-(and the degree -1 shifts); the two product terms use PerfectHomLocalMap.prod.
-The adjunction and colimit identifications use PerfectHomLocalMap.equiv. This
-proves the four locality assertions, without any appeal to continuity. Empty
-opens have zero Hom groups and the same presentation and exactness argument. -/
+/-- Exact rows with pinned central map and local neighboring maps. This construction has no
+continuity hypotheses and asserts no isomorphisms (Stacks, Tags 09RE and 08BW). -/
 theorem perfect_hom_mayerVietoris_local_rows
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

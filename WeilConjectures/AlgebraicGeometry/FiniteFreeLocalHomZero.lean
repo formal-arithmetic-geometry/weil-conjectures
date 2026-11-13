@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Shrinking a finite free local map with zero germ action
 
-Source: Stacks Project, Modules, Lemma 01CP.
+## References
+
+* Stacks Project, Tag 01CP
 -/
 
 @[expose] public section
@@ -25,19 +27,7 @@ namespace AlgebraicGeometry.RingedSpace
 
 set_option linter.unusedVariables false in
 /-- A morphism from a restricted finite free sheaf which is zero on all germs
-becomes the zero morphism on a smaller neighborhood.
-
-Source: Stacks Project, Modules, Lemma 01CP,
-second paragraph applied to the finite free relation sheaf in the third paragraph.
-
-Proof: Evaluate ψ on each restricted basis section at V. The hypothesis says
-that each of these finitely many image sections has zero germ. The germ equality
-criterion supplies, for each basis index, a smaller neighborhood where that
-image section vanishes. Intersect these neighborhoods with V. Naturality gives
-zero image on the restrictions of every basis section. Restriction preserves
-free coproducts and their basis inclusions, so the coproduct universal property,
-or freeHomEquiv, implies that the restricted morphism is zero. An empty basis
-requires no intersection; the source is already the zero object. -/
+becomes the zero morphism on a smaller neighborhood. (Stacks, Tag 01CP.) -/
 theorem exists_finiteFree_local_hom_zero
     (X : RingedSpace.{u}) (G : Modules X) (x : X)
     (U V : Opens X) (hxV : x ∈ V) (i : V ⟶ U) (I : Type u) [Finite I]

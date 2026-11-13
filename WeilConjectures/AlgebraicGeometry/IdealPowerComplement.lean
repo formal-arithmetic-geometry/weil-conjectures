@@ -9,9 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
-/-! # IdealPowerComplement
+/-!
+# The open complement of the proper-stalk locus of an ideal
 
-Source: Stacks Project, Properties, Lemma 01PQ.
+## References
+
+* Stacks Project, Tag 01PQ
 -/
 
 @[expose] public section
@@ -25,18 +28,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- The complement of the proper-stalk locus is open, and every ideal power restricts
 isomorphically to the structure sheaf there. No quasi-compactness hypothesis is needed.
-
-Proof: On an affine open, quasi-coherence identifies the ideal inclusion with the
-inclusion of an ideal J of the ring of sections. Its stalk image at a prime is J localized
-at that prime, so the surjective-stalk locus is the union of D(f) for f in J. These affine
-open loci agree on intersections because they express the same stalk condition, hence
-form an open U. On U the original inclusion is an isomorphism: it is a monomorphism
-and surjective on every stalk. Multiplication by the unit ideal has image the whole
-module. Induction on the recursive idealSheafPower therefore makes each power
-inclusion an isomorphism on U, including the identity at n = 0. Restricting further to
-any W contained in U and taking sections gives the asserted bijection.
-
-Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM. -/
+(Stacks, Tag 01PQ) -/
 theorem ideal_power_complement
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

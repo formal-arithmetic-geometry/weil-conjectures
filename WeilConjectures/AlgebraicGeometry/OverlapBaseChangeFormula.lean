@@ -21,16 +21,8 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The abstract module pullback formula for base change of a pair morphism.
-Source: Stacks Project, Tag 0097, functoriality of inverse images.
-
-Proof: The two projection equations identify l with the canonical universal
-lift by the pullback universal property. Substitute that equality and expand
-overlapPairBaseChangeHom. Its exterior mapComp components are
-inverse pullback composition and pullback composition, respectively. The
-pullHom in the middle is inverse pullbackCompOfEq, pullback of φ, and
-pullbackCompOfEq, by modulesPseudofunctor_pullHom_eq_pullbackCompOfEq.
-Regroup these four exterior comparisons as the two displayed isomorphisms. -/
+/-- The abstract module pullback formula for base change of a pair morphism
+(Stacks, Tag 0097). -/
 theorem overlap_base_change_formula
     {S T A B A' B' : Scheme.{u}} (f : A ⟶ S) (g : B ⟶ S) (p : T ⟶ S)
     (v : A' ⟶ A) (w : B' ⟶ B) (f' : A' ⟶ T) (g' : B' ⟶ T)

@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Sites.Hypercover.One
 
 /-! # Degree-zero hypercover comparison
 
-Source: the sheaf equalizer argument in Stacks Project, Hypercoverings, Tag 01GV.
+## References
+
+* The sheaf equalizer argument in Stacks Project, Hypercoverings, Tag 01GV.
 -/
 
 @[expose] public section
@@ -232,17 +234,7 @@ local instance : HasColimitsOfSize.{u, u + 1} A :=
   hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit comparison cocone is colimiting in degree zero.
-Source: Stacks Project, Hypercoverings, Tag 01GV, the sheaf equalizer argument.
-
-Proof: the degree-zero and degree-one matching covers give a one-hypercover.
-The sheaf multifork is limiting, so its augmentation is a degree-zero
-quasi-isomorphism for every sheaf, with no injectivity assumption. The
-terminal-section functor preserves finite limits, hence also the initial kernel
-fork of an injective resolution. The augmentation square then makes the bottom
-inclusion a degree-zero quasi-isomorphism. The explicit comparison is therefore
-invertible on every hypercover. A cocone of isomorphisms over a connected index
-is colimiting, giving the displayed isomorphism for the actual filtered index. -/
+/-- The explicit comparison cocone is colimiting in degree zero (Stacks, Tag 01GV). -/
 theorem isIso_colimit_comparison_zero (F : Sheaf X.smallEtaleTopology A) :
     IsIso (colimit.desc (homotopyCohomologyDiagram A F 0) (comparisonCocone A F 0)) := by
   have : IsConnected (HomotopyIndex X) := IsFiltered.isConnected _

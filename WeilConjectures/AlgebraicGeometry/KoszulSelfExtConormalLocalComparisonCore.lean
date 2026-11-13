@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeCompariso
 
 /-! # Local finite-free Koszul self-Ext identifications
 
-Source: Stacks Project, Tag 0BQY and Tag 062I. -/
+## References
+
+* Stacks Project, Tags 0BQY and 062I.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -44,22 +47,8 @@ private noncomputable def restrictLocalFrame
       (Scheme.Modules.restrictFunctor _).mapIso
         (Scheme.Modules.overIsoFreeEquiv M U I e) ≪≫ Scheme.Modules.restrictFreeIso _ _)
 
-/-- Every point has a local isomorphism from dual exterior conormal to self Ext.
-
-Source: Stacks Project, Tag 0BQY (Hom of the Koszul resolution) and Tag 062I.
-
-Proof: At z choose the supplied chart U and its regular generators. The existing
-self-Ext pullback local frame identifies the target over i⁻¹U with the free sheaf
-indexed by increasing n-element subsets. The regular conormal basis and affine
-conormal frame identify i*ker(i) over i⁻¹U with the m-fold free sheaf. Apply the
-exterior local-free comparison, then overHomObjIso and homObjFreeUnitIso to identify
-its internal dual with the same subset-indexed free sheaf. Restrict both frames
-along V.ι to V.ι⁻¹(i⁻¹U), using the over-to-restricted-site equivalence, composition
-of open restriction, and restriction of free sheaves. Compose the restricted source
-frame with the inverse restricted target frame. Membership is the original chart
-membership. No generator comparison is required here. The already stated frame
-lemmas include all derived universes, n=0, n>m, and empty charts. Empty V is vacuous.
--/
+/-- Every point has a local isomorphism from dual exterior conormal to self Ext
+(Stacks, Tags 0BQY, 062I). -/
 theorem koszulRegularImmersion_self_ext_conormal_local_iso
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

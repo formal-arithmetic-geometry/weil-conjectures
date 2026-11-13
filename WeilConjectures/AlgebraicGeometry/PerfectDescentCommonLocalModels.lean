@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectDescentOpenEventualModel
 
 /-! # Two local perfect models at a common stage
 
-Source: Stacks Project, Tag 09RF, the choice of E_{U,i} and E_{V,i}.
+## References
+
+* Stacks Project, Tag 09RF (the choice of `E_{U,i}` and `E_{V,i}`).
 -/
 
 @[expose] public section
@@ -32,25 +34,8 @@ private theorem of_common_upper_bound
   exact h k hak hbk
 
 /-- Descend the two restrictions separately and move them to a common stage.
-This supplies no overlap isomorphism and no map into a derived direct image.
-Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
-
-Proof: Pull W and V back along f, and then along the projection of the limit
-base change. Restriction of E is perfect by Tag 09UA and the derived open
-restriction comparison. The presentations (f inverse W).toScheme → Xi and
-(f inverse V).toScheme → Xi have images W and V because hf says their union
-is the image of f. Apply dW and dV to these presentations and restricted objects.
-Choose a common upper bound of the resulting indices. Pull the stage models
-back to this stage; they remain perfect by Tag 09UA. The cartesian identifications
-of each restricted base change with the corresponding stage open, and coherent
-composition of derived pullbacks, give the two displayed comparison isomorphisms.
-The opens cover since inverse image preserves joins and top. They are compact:
-f has compact image W union V, hence has compact source; Xi is quasi-separated
-since s is quasi-separated and its base is affine. Thus f is quasi-compact, and
-its inverse images of W and V are compact. The stage projection to Z is affine
-as a base change of a morphism of affine schemes, so these opens remain compact.
-Empty or coincident opens cause no exception, and i ensures a nonempty index set.
--/
+This supplies no overlap isomorphism and no map into a derived direct image
+(Stacks, Tag 09RF). -/
 theorem perfect_descent_common_local_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]

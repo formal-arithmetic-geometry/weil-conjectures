@@ -31,15 +31,7 @@ private theorem range_affine_quotient
   exact hW.fromSpec_image_zeroLocus I
 
 /-- The degree sublevel locus restricted to an affine open is the zero locus of a finitely
-    generated ideal.
-
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
-
-Proof: identify the affine open with the spectrum of its coordinate ring. The closed sublevel
-locus is represented by an ideal. Express that ideal as a filtered union of finitely generated
-subideals and descend the finite locally free degree-r morphism to one such subideal. The
-universal degree criterion then shows that this subideal has the same vanishing locus.
--/
+generated ideal (Stacks, Tag 07RZ). -/
 theorem exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine
     {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite)
@@ -87,13 +79,8 @@ theorem exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine
     have heq := (hdegree _ _).1 hfreeJ hrange
     exact Nat.le_of_eq heq
 
-/-- A finitely generated ideal on an affine open has finitely many principal equations.
-
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
-
-Proof: choose a finite generating set for the ideal; membership in its zero locus is equivalent
-to avoiding every corresponding basic open.
--/
+/-- A finitely generated ideal on an affine open has finitely many principal equations
+(Stacks, Tag 07RZ). -/
 theorem exists_finite_equations_of_finitely_generated_zeroLocus
     {S : Scheme.{u}} {W : S.Opens} {I : Ideal Γ(S, W)} (hI : I.FG) :
     ∃ t : Finset Γ(S, W), ∀ s : S, s ∈ W →

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 
 /-! # Bilinear multiplication on associated graded ideal sheaves
 
-Source: Stacks Project, Lemma 087Z, the algebra in its statement; Schemes Lemmas
-01I8 and 01IC for affine tensor products and quotients.
+## References
+
+* Stacks Project, Tags 087Z, 01I8 and 01IC
 -/
 
 @[expose] public section
@@ -66,23 +67,8 @@ private theorem lift_of_affine {X : Scheme.{u}} {M N : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Multiplication descends to successive ideal-power quotients and commutes with
-restriction. No associativity, commutativity or unit law is asserted here.
-Source: Stacks Project, Lemma 087Z and Schemes Lemmas 01I8, 01IC.
-
-Proof: On an affine open U, identify the power inclusions with I(U)^r and the
-quotient projection with I(U)^r / I(U)^(r+1). For degree zero use the identity
-inclusion of the structure sheaf. Multiply representatives. The product lies in
-I(U)^(m+n); changing either representative changes it by I(U)^(m+n+1), so the
-operation is well defined and bilinear. This construction commutes with restriction
-between affine opens, since inclusions, projections and ring multiplication do.
-For an arbitrary open, lift the two quotient sections on an affine cover. On an
-affine refinement of any overlap the results agree by independence of lifts. Glue
-using the sheaf condition. The same argument proves bilinearity and restriction
-compatibility. For actual sections of the power ideals, their product belongs
-locally to the range of the (m+n)-th power inclusion. This inclusion is monic;
-hence the local lifts agree and glue to c, and the local definition of the quotient
-operation gives the displayed identity. The argument includes empty opens,
-the zero and unit ideals, and zero degrees. -/
+restriction. No associativity, commutativity or unit law is asserted here
+(Stacks, Tags 087Z, 01I8 and 01IC). -/
 theorem formalAssociatedGraded_multiplication_exists {X : Scheme.{u}}
     (I : X.IdealSheafData) :
     ∃ mu : ∀ (m n : ℕ) (U : X.Opens),

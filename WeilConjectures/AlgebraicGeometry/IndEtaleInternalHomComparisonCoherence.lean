@@ -10,10 +10,12 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Formal coherence of the etale internal-Hom comparison
 
-Source: Bhatt--Scholze, Lemma 6.3.16, with the closed monoidal mate calculus.
-
 The clauses are proved for a general coefficient category in
 `WeilConjectures.AlgebraicGeometry.IndEtaleInternalHomComparisonFormal`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.3.16.
 -/
 
 @[expose] public section
@@ -30,15 +32,7 @@ namespace Etale
 attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory ModuleCat.hasColimitsOfShape
   ModuleCat.hasColimitsOfSize CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- Composition, identity, shift, and lower-bound clauses for the canonical internal-Hom
-comparison. Monoidal naturality gives composition. For identity, cancel whiskering from
-the derived composition/unit coherence to prove that the identity isomorphism is monoidal.
-The target-shift square is the mate of the inverse tensor comparison. Combining the two
-canonical tensor-shift squares and taking mates gives the source-shift square, with the
-inverse shift determined by the shift adjunction triangle. Finally the tensor-Hom
-adjunction estimate and exact inverse image give both lower bounds.
-
-Source: Bhatt--Scholze, Lemma 6.3.16, pp. 47--48, small-etale analogue; the closed
-monoidal mate calculus proves these formal clauses without ind-etale assumptions. -/
+comparison (small-etale analogue of Bhatt--Scholze, Lemma 6.3.16). -/
 theorem indEtaleInternalHomComparison_coherence_and_bounds
     (A : Type (u + 1)) [CommRing A]
     {X U : Scheme.{u}} (f : U ⟶ X)

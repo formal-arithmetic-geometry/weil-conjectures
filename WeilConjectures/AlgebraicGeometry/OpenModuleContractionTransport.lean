@@ -13,8 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Transport of a module contraction on an open subscheme
 
-Source: Stacks Project, Tags 08DL, 08DQ and 03EO; the sectionwise
-open-site reindexing construction of `Scheme.Modules.overEquiv`.
+## References
+
+* Stacks Project, Tags 08DL, 08DQ and 03EO.
 -/
 
 @[expose] public section
@@ -422,26 +423,7 @@ attribute [local irreducible] SheafOfModules.tensorHomEquiv
 -- Preserve the established names of the nondependent forall hypotheses.
 set_option linter.unusedVariables false in
 /-- Open-site transport of contraction by an arbitrary module-valued dual input.
-Source: Stacks Project, Tags 08DL and 08DQ (restriction and evaluation),
-and Tag 03EO (tensor-Hom adjunction).
-
-Proof: on the thin localized open site, sheafify the free module on each
-representable. Sending its generator to 1 embeds it in the tensor unit, since
-representable section sets are empty or singletons and sheafification preserves
-monomorphisms. Every local section of a module is the image of the distinguished
-section of one of these subobjects. Consequently, natural transformations from
-tensoring with V to a monomorphism-preserving functor are determined at the unit:
-use naturality into the unit to compare on the subobjects, then naturality into
-an arbitrary module and extensionality on local pure tensors.
-
-Apply this to internal Hom from A, a right adjoint. Pull the target contraction
-back through the inverse tensorator and inverse e, using fullness of L.
-Naturality of e and the tensorator makes this a natural family in the output
-module. At the unit both contractions are the left unitor followed by the dual
-input; monoidal unit coherence proves their equality. The preceding determination
-by the unit gives transport for every output module. Naturality in the dual input
-and output, followed by hunit, hv and hk, gives the displayed equation.
-All local section arguments include the zero ring and empty opens. -/
+(Stacks, Tags 08DL, 08DQ and 03EO) -/
 theorem openModule_contraction_transport (X : Scheme.{u}) (U : X.Opens) :
     let L := Equivalence.functor
       (C := localEvaluationModules X U)

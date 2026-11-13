@@ -37,13 +37,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 attribute [local irreducible] spEllPointReduction spEllPointTransition
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The integral coefficient inclusion is the unique ring map over E_X -> F_X.
-
-Proof: the inclusion E -> F preserves the extending valuation, so restrict it to
-O_E -> O_F and apply continuous-function condensation and p_X^*. The square
-commutes before pullback and hence afterwards. The inclusion O_F,X -> F_X is
-monic: it is monic on profinite tests and p_X^* is left exact. Cancel it to obtain
-uniqueness. This does not choose an arbitrary scalar map. -/
+/-- The integral coefficient inclusion is the unique ring map over `E_X → F_X`. -/
 theorem spIntegersMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ}
     (h : E ≤ F) :
     ∃! φ : condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X ⟶
@@ -156,11 +150,7 @@ private theorem spEllReduction_epi (E : PadicAlgCl.FiniteIntermediateField ℓ) 
   exact (upperStarFromPoint X).map_epi _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The induced quotient inclusion is characterized by the two integral reductions.
-
-Proof: the integral ring inclusion sends ell^(n+1) to ell^(n+1), so descends to
-the finite quotients. Condense and pull back that quotient map. The quotient
-reduction is an epimorphism, so its commuting square determines the map uniquely. -/
+/-- The induced quotient inclusion is characterized by the two integral reductions. -/
 theorem spEllMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (n : ℕ) :
     ∃! φ : condensedRingObj.{u} (spEllPointRingObj ℓ E n) X ⟶
@@ -240,11 +230,7 @@ private theorem spEllMap_spec {E F : PadicAlgCl.FiniteIntermediateField ℓ}
 attribute [local irreducible] spEllMap
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The integral transition is uniquely specified on every positive quotient twist.
-
-Proof: tensor each finite quotient inclusion with the identity on the root sheaf.
-These maps commute with reduction and Kummer transition. The forgetful functor
-creates limits, so the compatible finite-level maps give a unique map of limits. -/
+/-- The integral transition is uniquely specified on every positive quotient twist. -/
 theorem spIntegralTwistMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ}
     (h : E ≤ F) :
     ∃! f : (spIntegralTwist X ℓ E).X ⟶ (spIntegralTwist X ℓ F).X,
@@ -468,12 +454,7 @@ private theorem spExtend_map_existsUnique
   apply (cancel_epi (Mod.extendπ p M)).mp
   rw [hf, Mod.extendπ_extendDescHom]
 
-/-- Localization gives the unique rational transition with the prescribed tensor formula.
-
-Proof: tensor the maps E_X -> F_X and O_E,X(1) -> O_F,X(1). The integral map is
-semilinear because its projections are tensor maps linear in the scalar factor.
-The coefficient square makes the tensor map balanced. Descend through the defining
-coequalizer of extension of scalars. Its epimorphic projection gives uniqueness. -/
+/-- Localization gives the unique rational transition with the prescribed tensor formula. -/
 theorem spRationalTwistMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ}
     (h : E ≤ F) :
     ∃! f : (spRationalTwist X ℓ E).X ⟶ (spRationalTwist X ℓ F).X,

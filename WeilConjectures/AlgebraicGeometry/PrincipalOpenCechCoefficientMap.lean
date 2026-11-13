@@ -9,9 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-/-! # PrincipalOpenCechCoefficientMap
+/-!
+# Coefficient maps on principal-open subset Čech coordinates
 
-Source: Stacks Project, Cohomology, Tag 08C1.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -36,19 +39,8 @@ private theorem coordinateMap_transport
   change _ ≫ 𝟙 _ = 𝟙 _ ≫ _
   simp
 
-/-- A separate construction step for the finite subset Čech argument.
-Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1).
-
-Proof: Define the degree-n linear map by τ, coordinatewise section evaluation of
- g in degree n+1-card(S), and τ₁ inverse. To prove the chain equation, transport
-it to coordinates using τ₁. Substitute both supplied signed differential formulas.
-The vertical terms agree by the chain equation for g. In each horizontal summand,
-naturality of modulesSpecToSheaf.map (g.f _) commutes with restriction. Equality
-induction on the supplied degree equality commutes g with the degree transport.
-Linearity distributes g across the finite sum and scalar signs. Thus the consecutive
-chain equations hold, and the homological-complex hom constructor gives b.
-Its coordinates are the prescribed ones by τ₁ inverse-hom cancellation.
-All equations are vacuous for the empty index set. -/
+/-- A separate construction step for the finite subset Čech argument: a coefficient chain
+map induces a chain map on the subset Čech coordinates (Stacks, Tag 08C1). -/
 theorem principalOpenCech_coefficient_map_exists
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

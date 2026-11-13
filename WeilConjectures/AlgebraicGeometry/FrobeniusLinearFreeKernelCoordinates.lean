@@ -16,10 +16,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality
 
 For a quasi-coherent module `E` on `S` with a finite free frame and a Frobenius-linear
 endomorphism `F` of its étale sheaf of sections, the sections over an étale `U` of the
-abelian kernel of `F - 1` are the solutions `x: Fin n → Γ(U, ⊤)` of
+abelian kernel of `F - 1` are the solutions `x : Fin n → Γ(U, ⊤)` of
 `x_i = ∑_j a_ij x_j ^ p`, naturally in `U`.
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
+## References
+
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section

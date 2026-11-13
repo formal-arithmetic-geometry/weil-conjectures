@@ -24,7 +24,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # A surjective Koszul comparison from the dual exterior conormal
 
-Source: Stacks Project, Tag 0BQY, zero-differential Hom and generator comparison. -/
+## References
+
+* Stacks Project, Tag 0BQY (zero-differential Hom and generator comparison).
+-/
 
 @[expose] public section
 
@@ -93,20 +96,8 @@ private theorem global_surjective_of_local_maps
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Compatible local Koszul comparison maps glue to a stalk-surjective comparison.
-
-Source: Stacks Project, Tag 0BQY, the local Hom computation; Modules on Sites,
-Tag 03EM, gluing linear morphisms.
-
-Proof: Obtain a neighborhood of each point and the compatible maps supplied by the
-local comparison theorem. These neighborhoods generate a covering sieve of the top
-open of V. Apply the sheaf-module morphism gluing theorem on that sieve. The resulting
-map over the top open defines a morphism of the original sheaves by evaluation on
-each open included in the top. Its restrictions are the original local maps.
-Represent a target germ near a point by a section on a neighborhood contained in
-the chosen cover member. Local section surjectivity lifts that section, and taking
-its germ proves stalk surjectivity. The empty scheme yields the empty covering
-sieve, which still covers the top open, and has no stalk conditions. -/
+/-- Compatible local Koszul comparison maps glue to a stalk-surjective comparison
+(Stacks, Tag 0BQY). -/
 theorem koszulRegularImmersion_self_ext_conormal_comparison_surjection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

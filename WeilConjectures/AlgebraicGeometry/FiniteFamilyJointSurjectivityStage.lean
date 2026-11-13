@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 /-!
 # Joint surjectivity of a finite family descends to a stage
 
-Source: Stacks Project, Limits, Tag 07RR in Situation 081D.
+## References
+
+* Stacks Project, Tag 07RR
 -/
 
 @[expose] public section
@@ -42,31 +44,7 @@ private theorem range_over_pullback {S T : Scheme.{u}} (g : T ⟶ S)
 /-- A finite family of locally finitely presented maps between finite-presentation
 models, jointly surjective after pullback to the limit, is jointly surjective at
 all sufficiently late stages. This is independent of diagrams, their comparison
-isomorphisms, and étaleness of the arrows.
-
-Source: Stacks Project, Limits, Tag 07RR in Situation 081D;
-steps 5--6 of lem-weil-pbc-etale-finite-data-descent.
-
-Proof:
-1. Form the finite coproduct W of the sources, with its induced structure morphism
-   to the stage. Construct l_b: U_b ⟶ W and g: W ⟶ V using coprojections and
-   Sigma.desc; l_b ≫ g = f_b. Finite presentation of the structure morphisms makes
-   each U_b and V qcqs. finite_coproduct_lfp_qcqs makes W qcqs and g locally of
-   finite presentation.
-2. Apply Over.pullback to l_b ≫ g = f_b. Every point lift in the hypothesis gives
-   a point lift for the pulled-back g by composition with the pulled-back l_b.
-   Apply exists_surjective_of_isLimit (07RR) to g, obtaining a surjective g at i₁.
-3. Scheme.Pullback.range_map identifies the image of each pulled-back g with the
-   inverse image of its original image under the target first projection. A point
-   of V at any later stage j maps to a point at i₁ by the canonical pullback.map;
-   their first projections agree. Surjectivity at i₁ therefore implies image
-   membership at j and a point lift y under g_j.
-4. Project y to W and use sigmaOpenCover to find a summand containing that point.
-   Apply the pullback image formula to l_b to lift y itself to the pulled-back U_b.
-   Functoriality of l_b ≫ g = f_b gives the desired family lift. This does not assume
-   that a point of a scheme pullback is determined by its two projected points.
-   For an empty family the coproduct is empty; the same argument forces eventual
-   emptiness of the target. -/
+isomorphisms, and étaleness of the arrows. (Stacks, Tag 07RR.) -/
 theorem finite_family_joint_surjectivity_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

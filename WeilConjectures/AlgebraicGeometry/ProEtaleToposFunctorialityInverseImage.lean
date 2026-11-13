@@ -51,44 +51,14 @@ noncomputable def setPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) (Type (u + 1))
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
-/-- The canonical composition comparison for set-valued inverse images.
-
- It is the conjugate of the existing
-pushforward comparison, hence is compatible with the constructed adjunctions. The direct
-image comparison in the direction of clause 5 is `(lowerStarComp (Type (u + 1)) f g).symm`.
-The underlying site comparison is the canonical pullback associativity isomorphism. -/
+/-- The canonical composition comparison for set-valued inverse images, the conjugate of the
+existing pushforward comparison. -/
 noncomputable def setPullbackComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     setPullback (f ≫ g) ≅ setPullback g ⋙ setPullback f :=
   (conjugateIsoEquiv ((setPullbackAdjunction g).comp (setPullbackAdjunction f))
     (setPullbackAdjunction (f ≫ g))).symm (lowerStarComp (Type (u + 1)) f g)
 
-/-- The geometric morphism attached to an arbitrary morphism of schemes.
-
-Proof:
-1. Base change preserves weakly étale objects and coverings by stability under base change.
-   The small sites have terminal objects and fibre products. Their universal properties show
-   that base change preserves both, hence finite limits.
-2. Restriction along base change preserves the sheaf equalizer, since it preserves covers
-   and fibre products. Compose the left Kan extension adjunction with sheafification. This is precisely
-   `setPullbackAdjunction`; the same construction in abelian groups is the recorded
-   `upperStarLowerStarAdjunction`.
-3. The adjunction gives all colimits.
-   The opposite comma category at a site object is filtered, using finite limits of the
-   source site and their preservation in step 1. Thus the Kan extension preserves finite
-   limits of sets. Inclusion of sheaves
-   preserves limits, and sheafification
-   preserves finite limits. Their composite is
-   left exact, giving the geometric morphism.
-4. Apply lem-weil-pbc-site-pullback-abelian-underlying, transporting the site presentation
-   to its larger universe when necessary. Lifting the set adjunction to abelian group
-   objects identifies the underlying sets of `upperStar AddCommGrpCat f` with set inverse
-   image, including the group operations. This is the pullback of def-sfb-finite-upper-star.
-   Finite limits give kernels and the abelian adjunction gives cokernels, so it is exact.
-5. The canonical associativity isomorphism for fibre products gives `lowerStarComp` on
-   sections, naturally in the site object and sheaf.
-   Compose adjunctions. Taking the conjugate of the
-   direct image comparison gives `setPullbackComp`, exactly as for abelian pullback. The conjugation unit equation gives the last displayed equality, proving
-   compatibility with the adjunctions and thus composition of geometric morphisms. -/
+/-- The geometric morphism attached to an arbitrary morphism of schemes. -/
 theorem toposFunctorialityInverseImage {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (PreservesFiniteLimits (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) ∧
       ∀ (V : Y.ProEt) (R : Presieve V), R ∈ Scheme.ProEt.precoverage Y V →

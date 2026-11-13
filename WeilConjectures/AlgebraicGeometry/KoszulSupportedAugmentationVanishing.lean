@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Localization.HomEquiv
 
 /-! # Supported maps are eventually killed by Koszul augmentations
 
-Source: Stacks Project, Tags 08DC, 08DD and 09IR.
+## References
+
+* Stacks Project, Tags 08DC, 08DD and 09IR.
 -/
 
 @[expose] public section
@@ -29,25 +31,7 @@ namespace AlgebraicGeometry
 -- Transporting the comparison across three chosen localization categories needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The unshifted Hom diagram of Koszul tails into a supported quasi-coherent
-object has a singleton colimit, independently of the chosen localization universes.
-Source: Stacks Project, Equation 36.9.4.1 (Tag 08DC) and Proposition 36.9.5 (Tag 08DD).
-
-Proof: Represent E by a complex K. Choose the standard derived localizations on
-Spec A, its localized sites, and the scheme of U. Transport quasi-coherence of K
-using the homology comparison isomorphisms. The given derived restriction is zero;
-mapDerivedCategoryFactors identifies it with the localized restricted complex.
-Transport this zero object along the localization equivalence on the localized site.
-Thus in the standard localizations the restriction is also zero. Apply
-`affine_perfect_open_represent_cohomology` to the standard image of K. The
-comparison target is Hom(O_U,E|_U), a singleton since E|_U is zero; restriction
-from the localized site to the scheme U is the exact equivalence
-Scheme.Modules.overEquiv U, which preserves zero. Transport the resulting colimit
-cocone along the natural equivalence of Hom diagrams induced by uniqueness of
-localization. This equivalence identifies every transition with precomposition
-by the given koszulOpenMap, by naturality of the localization comparison.
-Its cocone point remains a singleton. For r=0, every tail is zero and the open
-is empty, so the same comparison gives the singleton colimit. The zero ring,
-zero E, and vanishing or invertible entries require no additional assumptions. -/
+object has a singleton colimit, independently of the chosen localization universes. -/
 private theorem supported_hom_colimit
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}
@@ -226,28 +210,7 @@ private theorem augmentation_compatibility
 set_option backward.isDefEq.respectTransparency false in
 /-- A map from a shifted structure object into an object supported on the complement
 of the finite principal open is killed by an augmentation in the Koszul power system.
-No orthogonality hypothesis is made.
-Source: Stacks Project, Equation 36.9.4.1, Tag 08DC; Proposition 36.9.5, Tag 08DD;
-Lemma 36.15.2, Tag 09IR, reduction to an object restricting to zero.
-
-Proof: Move the shift on the source to the inverse shift on the target. This shifted
-object still has quasi-coherent cohomology and restricts to zero. Apply the canonical
-colimit comparison of `affine_perfect_open_represent_cohomology` to it. At index zero,
-precompose the given map with the augmentation. Its image in the colimit is zero:
-the comparison is restriction followed by the inverse restricted augmentation,
-and restriction of the target is zero. Equality in this filtered colimit of Hom
-sets is witnessed at some later index b. The transition maps preserve zero, and
-compatibility of the augmentations identifies the transitioned map with
-precomposition by the b-th augmentation. Move the target shift back to the source.
-For arbitrary localization universes, choose the standard localizations while applying
-the comparison theorem and transport the complexes and maps using the canonical
-localization equivalences. The derived restrictions commute with this transport
-because both are induced by the same restriction on complexes. Transport restriction
-to the scheme of the open by `Scheme.Modules.overEquiv`; that equivalence preserves
-zero. This supplies the extra localizations required by the comparison theorem
-without adding assumptions to the assertion. If r = 0, the tail complex is zero,
-so every augmentation already kills the map. The zero ring and E = 0 give zero
-Hom groups. The argument requires no regularity or nonzero hypothesis on f. -/
+No orthogonality hypothesis is made. -/
 theorem koszul_supported_augmentation_eventually_zero
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

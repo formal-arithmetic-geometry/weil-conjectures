@@ -144,17 +144,7 @@ def finiteComparisonRealization (X : Scheme.{u})
   finiteComparisonConstantRealization X B ⋙
     Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv
 
-/-- The specified coefficient transport is an exact equivalence.
-
-Proof: an internal presheaf action is precisely the sectionwise scalar action.
-Monoidal sheafification extends it uniquely to the associated constant ring sheaf.
-Restriction along constant sections is inverse: local scalar representatives and
-sheaf uniqueness recover both the action and every linear map. The unit and counit
-are the sheafification identifications on underlying abelian sheaves. Transport along
-`finiteDiscreteSchemeRingIso` has inverse transport along its inverse ring map.
-The two composite functors are inverse and retain the underlying additive sheaves,
-so preserve finite limits, finite colimits, and addition. This includes the zero ring
-and empty scheme. -/
+/-- The specified coefficient transport is an exact equivalence. -/
 theorem finiteComparisonRealization_exact (X : Scheme.{u})
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
       ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅

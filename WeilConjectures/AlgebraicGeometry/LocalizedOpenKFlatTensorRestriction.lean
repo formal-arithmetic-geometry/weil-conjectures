@@ -16,7 +16,11 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # K-flat tensor models under localized open restriction
 
-Source: Stacks Project, Tags 06YC, 01CD and 08DX.
+## References
+
+* [Stacks, Tag 06YC](https://stacks.math.columbia.edu/tag/06YC)
+* [Stacks, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
 -/
 
 @[expose] public section
@@ -129,26 +133,7 @@ private theorem localizedEquiv_totalTensor_iso (X : Scheme.{u}) (U : X.Opens)
 
 -- The localized-site tensor carrier needs additional elaboration steps.
 /-- Exact open restriction preserves K-flatness and the total tensor model.
-Source: Stacks Project, Tag 06YC for K-flat pullback, Tag 01CD for sheaf tensor
-and Tag 08DX for local derived tensor computation.
-
-Proof: identify the localized site over U with the usual open site of U.toScheme.
-The exact equivalence on module sheaves identifies restriction with pullback along
-U.ι. At every point of U the restricted stalk complex is the original stalk complex;
-thus the stalk criterion for K-flatness proves both K-flat assertions (Tag 06YC).
-The equivalence also identifies tensor products: on sections send a pure tensor
-of restricted sections to the restriction of their tensor. These maps descend
-through sheafification, and the inverse is given by the same local pure-tensor
-formula. They are natural in each factor. Restriction preserves arbitrary direct
-sums, so sum these tensor comparisons over p + q = n in each total degree n.
-Naturality commutes with the two differentials and additivity with the sign in
-the second differential; hence the degreewise comparisons give a complex
-isomorphism from the restricted total tensor to the total tensor of the
-restrictions. Apply Q and compose with the exact-functor comparison
-R.mapDerivedCategoryFactors. Transport back through the localized-site equivalence.
-The assertion uses neither local perfect models nor prescribed derived isomorphisms.
-On the empty open the stalk criterion is vacuous and all complexes are zero;
-rank-zero modules and zero complexes satisfy the same comparisons. -/
+(Stacks, Tags 06YC, 01CD, 08DX) -/
 theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]

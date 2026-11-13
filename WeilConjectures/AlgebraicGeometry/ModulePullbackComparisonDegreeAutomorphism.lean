@@ -15,8 +15,10 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 
 /-! # Changing the derived-to-ordinary comparison in any integer degree
 
-Source: Stacks Project, Tags 06YJ and 08HY; the degree-n truncation argument
-in Step 4 of `lem-pc-affine-alternating-cech-base-change-factorization`.
+## References
+
+* [Stacks, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
 -/
 
 @[expose] public section
@@ -28,8 +30,8 @@ universe u w
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- A witnessing tensor-pullback counit at the single complex in degree n.
-Source: Stacks Project, Tag 08HY. -/
+/-- A witnessing tensor-pullback counit at the single complex in degree `n`
+(Stacks, Tag 08HY). -/
 def IsModulePullbackComparisonInDegree
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -81,20 +83,8 @@ private theorem rightExact_homology_degree_isIso
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((L.sc n).mapHomologyIso F).hom
 
-/-- Every witnessing left-derived pullback comparison is invertible on degree-n homology.
-Source: Stacks Project, Tag 06YJ, and the degree-n tensor calculation in Step 1 of
-lem-pc-module-pullback-comparison-target-automorphism.
-
-Proof: Choose a flat resolution of G supported in degrees at most n, augmented to
-G[n]. Tensor pullback preserves its support. Its degree-n homology is the cokernel of
-the pulled-back differential in degrees n - 1 and n. Right exactness of tensor pullback
-identifies this cokernel with a*G. The standard left-derived counit induces precisely
-this identification. For any other witnessing counit, uniqueness of the right Kan
-extension supplies an invertible natural transformation of the derived pullback whose
-composition with the standard counit is the given counit. Evaluating at G[n] and
-applying Hn expresses the given map as a composite of isomorphisms. The final
-single-complex identification is also an isomorphism. No flatness of G is required;
-for the zero module or empty scheme the same cokernel argument applies. -/
+/-- Every witnessing left-derived pullback comparison is invertible on degree-`n` homology
+(Stacks, Tag 06YJ). -/
 private theorem modulePullbackComparison_homology_degree_isIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -220,23 +210,8 @@ private theorem modulePullback_single_isLE
       (ComplexShape.up ℤ)).symm.app P)
   exact DerivedCategory.TStructure.t.isLE_of_iso (eF ≪≫ e') n
 
-/-- Two left-derived counits on a single module differ by an automorphism of its
-ordinary pullback. There is no cover, direct image or base-change square in this lemma.
-Source: Stacks Project, Tags 06YJ and 08HY; Step 4 of the affine alternating model
-factorization proof (the truncation argument is written out here).
-
-Proof: A bounded-above flat resolution supported in degrees at most n shows that
-left-derived pullback of G[n] is in D≤n. Right exactness of tensor pullback identifies
-its degree-n homology with the ordinary pullback module. On a K-flat resolution the
-counit is invertible, and naturality along the resolution augmentation proves that
-its component at G[n] is invertible on Hn. Right Kan extension uniqueness transfers
-this fact to every witnessing counit. Maps from a D≤n object to a single module in
-degree n are determined by Hn, by t-structure orthogonality. For the two comparisons,
-compose the inverse of Hn(c₀) with Hn(c), and transport through the single-module
-homology identification to obtain the module automorphism α. Naturality of that
-identification gives equality on Hn, and the homology-map bijection gives
-c = c₀ followed by α[n]. This includes negative n, zero modules and empty schemes;
-no flatness of G is used. -/
+/-- Two left-derived counits on a single module placed in degree `n` differ by an
+automorphism of its ordinary pullback (Stacks, Tags 06YJ and 08HY). -/
 theorem modulePullbackComparison_degree_target_automorphism
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

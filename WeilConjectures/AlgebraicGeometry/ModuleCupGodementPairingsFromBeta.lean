@@ -111,15 +111,7 @@ private def iteratePairing (X : Scheme.{u}) (F G : X.Modules)
   | 0 => 𝟙 (F ⊗ G)
   | n + 1 => b _ _ ≫ moduleCup_godementMap X (iteratePairing X F G b n)
 
-/-- Recursive pairings from a compatible Godement tensor pairing.
-Source: Banerjee, arXiv:1004.1491, §1.1.4.
-Define p₀ as the identity and pₙ₊₁ as b followed by T(pₙ). At n = 0 the only
-insertion is the unit, so the claim is the unit law and T(id) = id. For the induction
-step split the insertion index into zero and successor. Index zero uses the unit law
-followed by naturality of the germ map applied to pₙ₊₁. A successor insertion is
-T of the preceding insertion; naturality of b moves those maps past b, functoriality
-combines their image with T(pₙ₊₁), the induction hypothesis applies, and functoriality
-separates the resulting composite. No multiplication law is needed. -/
+/-- Recursive pairings from a compatible Godement tensor pairing (Banerjee, §1.1.4). -/
 theorem moduleCup_godement_iterate_pairings_from_beta (X : Scheme.{u})
     (F G : X.Modules) (b : ∀ H K : X.Modules,
       moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶

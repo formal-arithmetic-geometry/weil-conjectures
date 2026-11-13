@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 
 /-! # Bounded principal neighbourhoods in a coefficient model
 
-Source: Stacks Project, Algebra, proof of Tag 00SU, first two paragraphs.
+## References
+
+* Stacks Project, Algebra, proof of Tag 00SU.
 -/
 
 @[expose] public section
@@ -31,27 +33,7 @@ namespace Algebra
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Each point upstairs lies in a principal open from the coefficient model on which all
-nonempty model fibres have dimension at most the expected dimension.
-Source: Stacks Project, Algebra, proof of Tag 00SU, first two paragraphs.
-
-Proof:
-1. Put S₀ = R₀[x]/(f₀) and S = R[x]/(f). Polynomial scalar extension and tensoring
-   a quotient give R ⊗[R₀] S₀ ≃ S since the mapped equations are f.
-   Contract q to q₀ in S₀, p in R and p₀ in R₀. The fibre-prime correspondence
-   shows that both fibres at p and p₀ are nonzero. Tensor cancellation identifies
-   the first fibre with scalar extension of the second along κ(p₀) → κ(p).
-2. The hypothesis gives c ≤ n and dimension n-c for the first fibre. The field
-   extension is faithfully flat, hence surjective on spectra. Dimension at a
-   point is preserved by field extension. Taking the supremum of local dimensions
-   therefore gives dimension n-c for the model fibre as well.
-3. The local dimension at the fibre point corresponding to q₀ is a natural number
-   d ≤ n-c: it is nonnegative since the point exists, and bounded by the finite
-   global dimension. Apply the principal fibre-dimension neighbourhood theorem
-   to the finite type algebra S₀ over R₀ at q₀ with this d. Obtain g ∉ q₀
-   whose localized nonzero fibres all have dimension ≤ d ≤ n-c.
-4. Lift g to a polynomial G over R₀ using quotient surjectivity. Its image in S
-   avoids q by contraction, and its model localization is exactly (S₀)_g.
-   If S is zero there is no q, so the statement has no nonvacuous case. -/
+nonempty model fibres have dimension at most the expected dimension (Stacks, Tag 00SU). -/
 theorem exists_coefficient_model_principal_neighborhood
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     (h : IsRelativeGlobalCompleteIntersectionPresentation f)

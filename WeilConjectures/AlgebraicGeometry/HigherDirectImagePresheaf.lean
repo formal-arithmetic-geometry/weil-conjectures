@@ -24,34 +24,28 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-! # Higher direct image as a sheafified cohomology presheaf
-Source: literature/stacks-project/cohomology.tex, Lemma 01E4.
+
+## References
+
+* Stacks Project, Cohomology, Lemma 01E4.
 -/
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 750000 in
 -- The explicit resolution and evaluation comparisons require substantial elaboration.
-/-- Stacks 01E4 with every datum tied. For an injective resolution I of F, the presheaf
-P_p is `sectionCohomologyPresheaf (f_*I) p`, V ↦ H^p(I(f⁻¹V)); theta is
+/-- Stacks 01E4 with every datum tied. For an injective resolution `I` of `F`, the presheaf
+`P_p` is `sectionCohomologyPresheaf (f_*I) p`, `V ↦ H^p(I(f⁻¹V))`, and `theta` is
 `sectionCohomologyTheta (f_*I) p` followed by the resolution comparison
-H^p(f_*I) ≅ R^p f_*F. The statement says:
-(1) the canonical comparison P_p^# → R^p f_*F is an isomorphism;
-(2) theta is universal: every map from P_p to a sheaf of modules factors uniquely
-through theta;
-(3) for each y, the map induced by theta on module stalks is an isomorphism;
-(4) the value of P_p on V is H^p(f⁻¹V, F) (open module cohomology, through the same
+`H^p(f_*I) ≅ R^p f_*F`. The statement says:
+(1) the canonical comparison `P_p^# → R^p f_*F` is an isomorphism;
+(2) `theta` is universal: every map from `P_p` to a sheaf of modules factors uniquely
+through `theta`;
+(3) for each `y`, the map induced by `theta` on module stalks is an isomorphism;
+(4) the value of `P_p` on `V` is `H^p(f⁻¹V, F)` (open module cohomology, through the same
 resolution and exact evaluation), and under these identifications the restriction
-maps of P_p are the cohomology restriction maps;
-(5) the canonical map f_*F → R^0 f_*F is an isomorphism.
-Source: literature/stacks-project/cohomology.tex, Lemma 01E4.
-
-Proof: (1) f_*I computes R^p f_*F; module sheafification is exact and commutes with
-homology, and its counit on sheaves is invertible, so the comparison is invertible.
-(2) theta is the adjoint of an isomorphism, hence universal. (3) sheafification
-preserves stalks (Sheaves 007Z), and theta factors as the sheafification unit followed
-by an isomorphism. (4) I restricted to f⁻¹V is an injective resolution (01E1), whose
-sections are I(f⁻¹V); restriction of cohomology is induced by restriction of the
-resolution (01E2), and the evaluation at V of f_*I is I(f⁻¹V). (5) f_* is left exact. -/
+maps of `P_p` are the cohomology restriction maps;
+(5) the canonical map `f_*F → R^0 f_*F` is an isomorphism. -/
 theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (I : InjectiveResolution F) (p : ℕ) :

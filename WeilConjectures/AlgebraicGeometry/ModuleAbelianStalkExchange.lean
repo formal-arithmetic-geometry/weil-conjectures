@@ -16,7 +16,9 @@ import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 
 /-! # Module and abelian stalk exchange comparison
 
-Source: Stacks Project, Tags 03FD, 0736 and 07A7.
+## References
+
+* Stacks Project, Tags 03FD, 0736 and 07A7.
 -/
 
 @[expose] public section
@@ -32,29 +34,8 @@ open Scheme Etale
 
 /-- Forgetting module coefficients commutes with the stalk of the derived exchange.
 This comparison concerns an arbitrary cartesian square and an arbitrary geometric
-point of its lower-left scheme; it does not identify either side with total-space
-cohomology and requires no strict-local hypothesis.
-
-Source: Stacks Project, Tag 03FD (module/abelian acyclic comparison), together
-with the termwise mate construction of Tag 0736 and Remark 07A7.
-
-Proof: Use the canonical derived direct-image coefficient comparison. Its
-invertibility is proved by identifying injective module sheaves with modules
-on the constant ringed site, applying injective Cech acyclicity and the Cech
-vanishing criterion to every etale object, and using the sheafification of
-higher direct images. Lift the proved canonical inverse-image comparison to
-D+ and compose edge comparisons to obtain source and target isomorphisms.
-The derived coefficient exchange compatibility identifies the maps under
-these particular isomorphisms. Naturality transports this equality through
-the exact forgetful functor's comparison with the single complex F[0]. Apply
-homology and use naturality of the exact-functor homology isomorphism to
-obtain a commuting square of abelian sheaves. Apply the abelian stalk functor
-and use the inverse of Point.sheafFiberCompIso for coefficient forgetting.
-Naturality gives a commuting square of stalk maps, whose two isomorphisms
-yield b1 and b2 as additive equivalences. Finally,
-baseChange_eq_derivedBaseChangeMapPlus identifies the module exchange with
-the map used in the statement. No preservation of injectives by forgetting
-and no exactness of the stalk functor is required. -/
+point of its lower-left scheme; it requires no strict-local hypothesis
+(Stacks, Tags 03FD, 0736 and 07A7). -/
 theorem Etale.exists_addEquiv_module_abelian_stalk_exchange
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}

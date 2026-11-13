@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
 /-!
 # Ordinary Chern realization of a normalized supported Kummer class
 
-Source: Stacks 03PL and 0A45.
+## References
+
+* [Stacks, Tags 03PL and 0A45]
 -/
 
 @[expose] public noncomputable section
@@ -33,15 +35,8 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] ordinaryFiniteClass._proof_1 ordinaryFiniteClass._proof_2
   ordinaryFiniteClass._proof_3
 
-/-- Forgetting support in the uniquely normalized class gives the ordinary divisor Chern class.
-Source: Stacks 03PL and 0A45; the unit and scalar-Chern clauses of
-`ordinary_supported_kummer`.
-
-Proof: unfold the ordinary finite-class realization. The proved unit-forgetting
-equation identifies this class with the supported integral unit and generator
-composite. The proved supported Chern realization identifies exactly that composite
-with the divisor Chern class. Compose these two equalities. Positivity and finiteness
-are retained in the public signature but are not needed for this identity. -/
+/-- Forgetting support in the uniquely normalized class gives the ordinary divisor Chern class
+(Stacks, Tags 03PL and 0A45). -/
 theorem ordinary_supported_kummer_chern (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

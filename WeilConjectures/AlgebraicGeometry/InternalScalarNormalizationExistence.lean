@@ -81,13 +81,8 @@ private theorem compute_eq_scalarCounit (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P) :=
   complex_comparison_eq (extension a T) (D a T) (scalarCounit a T) P
 
-/-- The section scalar comparison and its normalized counit equations exist.
-(1);
-Stacks Tags 03EK, 06YY, 07A6.
-Proof: use the normalized internal section scalar adjunction, transport its left-derived
-counit through the homotopy quotient, and identify its component with `compute`.
-The extension comparison is normalized on balanced local generators and the K-flat
-representative equation is the defining universal-counit square. -/
+/-- The section scalar comparison and its normalized counit equations exist
+(Stacks, Tags 03EK, 06YY and 07A6). -/
 theorem internal_section_scalar_normalization_exists (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) :
     ∃ s : SectionScalarComparison a T, SectionScalarNormalized a T s := by

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
 
 /-! # Invertibility of the non-iterated direct-image base-change map
-Source: Stacks Project, Tags 08HY and 0BDP.
+
+## References
+
+* Stacks Project, Tags 08HY and 0BDP.
 -/
 
 @[expose] public section
@@ -50,22 +53,7 @@ private theorem baseChange_isIso_of_iso_top {A B A' A'' T : Scheme.{u}}
   exact hout
 
 /-- Invertibility of the iterated cartesian base-change map implies invertibility
-of the canonical map to the non-iterated fibre product.
-
-Source: Stacks Project, Tag 08HY (canonical base change) and Tag 0BDP
-(compatibility with arbitrary change of base).
-
-Proof: Paste the pullback squares for f and j with the square for p_W and h.
-The resulting pullback cone is canonically isomorphic to X_T. The top projection
-under this isomorphism is picardBaseChangeTop f j h. Pushforward along this
-scheme isomorphism is an equivalence, with inverse pushforward along its inverse.
-Use uniqueness of left adjoints to compare the two tensor pullbacks. Taking
-adjoints of the two base-change maps identifies their defining pushforwards of
-the pullback units, by naturality of the unit and the sectionwise composition
-identifications of pushforward. Hence the non-iterated map is the iterated map
-followed by the pushforward and tensor-composition isomorphisms. Every factor is
-invertible, so the displayed map is invertible. This applies to arbitrary M,
-without finite local freeness or flatness; empty fibre products cause no change. -/
+of the canonical map to the non-iterated fibre product. (Stacks, Tags 08HY, 0BDP) -/
 theorem picardDirectImageBaseChangeMap_isIso
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules)
     (hbc : IsIso (Modules.moduleBaseChangeMap (pullback.snd f j)

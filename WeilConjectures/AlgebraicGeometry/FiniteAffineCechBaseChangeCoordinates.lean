@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteAffineCechCoefficientBaseChange
 
 /-! # Local section formulas for the pulled-back finite affine Čech model
 
-Source: Stacks Project, Tag 02KE, the affine termwise base-change calculation.
+## References
+
+* [Stacks Project, Tag 02KE](https://stacks.math.columbia.edu/tag/02KE)
 -/
 
 @[expose] public section
@@ -26,29 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option maxHeartbeats 500000 in
 -- Elaborating the nested complex functors and dependent coordinate sums needs this budget.
 /-- The pulled-back specified model has the ordered section formulas, naturally on all
-opens and linearly over their local rings. This is a termwise statement, before homology.
-Source: Stacks Project, Tag 02KE, affine Čech terms and arbitrary base change.
-
-Proof: Separatedness makes every nonempty finite intersection of the V_i affine over U.
-For each such intersection Z, the cartesian square identifies its new inverse image
-with Z times_U T'. Its morphism to T' is affine by affine base change. On any affine
-open B of T', its inverse image is affine. The affine pullback section formula identifies
-its coefficient sections with Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F).
-Restricting scalars by GammaSpecIso and pulling back along the affine chart in the
-specified model gives precisely this same module and its pure-tensor formula.
-Tensor commutes with the finite product over increasing tuples, including empty products.
-The coordinate map sends a pure tensor b tensor s to b times the pullback of s,
-restricted to the new intersection over B. This gives a bijective coordinate map on B.
-Its pure-tensor formula commutes with every
-face restriction and restriction of B, and respects all scalars in Gamma(B,O).
-The affine-open maps therefore glue, together with their inverses, to isomorphisms of
-module sheaves, giving additive equivalences on every open B, not just affine opens.
-Naturality and local linearity hold after gluing. Commutation with the signed face sums
-is checked on the affine basis using naturality of the affine pullback formula.
-Extension from natural degrees and its extendXIso identify the nonnegative terms and
-differentials of the specified integer complex. Empty intersections and r = 0 give
-zero coefficient modules and empty products, so the same formulas apply. No flatness,
-covering, usual Čech complex, or tensor-homology interchange enters this statement. -/
+opens and linearly over their local rings. This is a termwise statement, before homology
+(Stacks, Tag 02KE). -/
 theorem finiteAffineCech_baseChange_coordinates {X T : Scheme.{u}} (f : X ⟶ T)
     [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]
     (U : T.Opens) (hU : IsAffineOpen U) {r : ℕ}

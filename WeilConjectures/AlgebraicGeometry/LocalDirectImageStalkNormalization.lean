@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Local direct-image stalks and total cohomology
 
-Source: Stacks Project, Tags 02OD and 01E4.
+## References
+
+* [Stacks, Tags 02OD and 01E4]
 -/
 
 @[expose] public section
@@ -83,24 +85,8 @@ private theorem restriction_iso {Y : Scheme.{u}} (U : Y.Opens) (hU : U = ⊤)
 
 set_option maxHeartbeats 1000000 in
 -- Elaborating the nested cohomology and stalk types needs more than the default heartbeats.
-/-- Normalization of the inverse of the specified canonical class map.
-Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
-
-Proof: For V containing y, c^{-1}V is top. The pullback-square identity therefore
-identifies W = g'^{-1}(f^{-1}V) with all of X'. Restriction from X' to W is thus
-an isomorphism on module cohomology. Let eta be the unique global class restricting
-to xi. Compute its image under localDirectImage_stalk_class using the fixed
-injective resolution. Compute germ(D.targetClass p xi) using the supplied K
-and the restricted resolution D.target.resolution. The component identity of
-D.target.sections identifies the latter section-complex map with restriction
-of K; its augmentation identity identifies its degree-zero map with the
-restriction unit. Comparing the fixed resolution with K gives augmented
-comparison maps, unique up to homotopy. Their maps on homology agree. Naturality
-of evaluation, sectionCohomologyTheta, and isoRightDerivedObj then gives
-localDirectImage_stalk_class eta = germ(D.targetClass p xi). The hypothesis
-he identifies e with this class map. Applying e.symm yields eta, and restricting
-eta to W yields xi, as required. This uses only D.target, and works for every
-supplied I, K, V and D. It includes p = 0 and zero cohomology modules. -/
+/-- Normalization of the inverse of the specified canonical class map
+(Stacks, Tags 01E4, 01FB and 02OD). -/
 theorem localDirectImage_stalk_cohomology_normalization
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (F : X.Modules) (p : ℕ)
     (e : (RingedSpace.moduleCohomology (pullback (Y.fromSpecStalk y) f).toRingedSpace p ⋙

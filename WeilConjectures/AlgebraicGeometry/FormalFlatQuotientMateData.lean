@@ -22,7 +22,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Ordinary flat quotient comparisons and adjunction mates
 
-Source: Stacks Project, Tags 088B, 0887, 02KH and 02N7.
+## References
+
+* Stacks Project, Tags 088B, 0887, 02KH and 02N7
 -/
 
 @[expose] public section
@@ -51,25 +53,8 @@ private theorem exchange_projection
 
 /-- Flat base change transports an algebraization isomorphism and its adjunction mate,
 and its termwise comparison respects the quotient projections before completion of
-pushforward. No completed pushforward or comparison map kappa is involved.
-Source: Stacks Project, Tags 088B (completed-base-change paragraph), 0887 and 02KH;
-Tag 02N7 for the adjunction mate of the base-change map.
-
-Proof: Write q and p for the projections. Choose the tensor-pullback adjunction on p.
-The composition comparisons identify g* followed by p* with f* followed by q*;
-compare the supplied adjunction on f with the chosen tensor adjunction and absorb
-its invertible left-adjoint comparison in this composition isomorphism. Pull beta
-through this comparison and the completion-pullback isomorphism for F to obtain
-beta zero. The degree-zero flat base-change mate b_M:g*f_*M -> p_*q*M is natural
-in M and invertible on quasi-coherent M by 02KH. For F, use its inverse and the
-supplied equality F zero = q*F to define b:D -> g*H. Termwise b on the quotients
-of F, followed by the inverse completion-pullback comparison, defines t. Naturality
-of b at each quotient projection, and the projection normalization of completion
-pullback, prove the first displayed equation. The mate identity for b, naturality
-at beta, and the adjusted composition comparison prove the second equation.
-Naturality of the comparisons makes beta zero and t maps of whole inverse systems.
-All constructions use cokernels and adjunctions and also apply to empty schemes,
-zero modules, zero ideals and unit ideals; no faithful completion is used. -/
+pushforward. No completed pushforward or comparison map is involved.
+(Stacks, Tags 088B, 0887, 02KH and 02N7.) -/
 theorem formal_flat_quotient_mate_data
     {X Y S : Scheme.{u}} [IsNoetherian Y] [IsNoetherian S]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (g : S ⟶ Y) [Flat g]

@@ -23,19 +23,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A module is flat on a union of opens where it is finite locally free.
-
-Proof: put W = the union of the U a. Each M restricted to U a is finite locally
-free of some rank r a. Refine this cover by finite free trivializations. On each
-trivializing open, tensoring with M is a finite direct sum of the identity,
-hence preserves exact sequences. Tensor products commute with open restriction,
-so the restriction of tensoring on W is tensoring with these finite free modules.
-Exactness of a sequence of module sheaves can be checked on an open cover, or
-on stalks. Thus tensoring with M restricted to W is exact, which is IsFlat.
-Finite limits and colimits are preserved since this tensor functor is additive
-between abelian categories and exact. No common rank or finite subcover is used.
-For the empty family W is empty, the module category has only zero objects,
-and every tensor functor is exact; rank-zero modules are also covered. -/
+/-- A module is flat on a union of opens where it is finite locally free. -/
 theorem isFlat_restrict_iSup_of_finiteLocallyFree
     {T : Scheme.{u}} (M : T.Modules) {ι : Type v} (U : ι → T.Opens)
     (hU : ∀ a, ∃ r : ℕ, ((restrictFunctor (U a).ι).obj M).IsFiniteLocallyFreeOfRank r) :

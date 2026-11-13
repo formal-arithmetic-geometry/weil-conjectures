@@ -510,20 +510,7 @@ private theorem finite_normed_integral (E : Type) [NormedField E] [NormedAlgebra
     f M.obj M.property
 
 /-- All higher direct images of a constructible sheaf of `ℚ̲̄_ℓ`-modules are constructible.
-
-Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8, coefficient-reduction argument.
-
-Proof: the integral case (for the unit ball of a finite extension `E` of `ℚ_ℓ`): the sheaf is
-derived complete with constructible etale reduction. Direct image preserves derived completeness
-by commutation with derived inverse limits, and its reduction is the direct image of the
-reduction, by the projection formula for the perfect residue-field complex. Finite-coefficient
-finiteness and the reverse integral completion criterion give bounded constructible integral
-direct image, hence each of its cohomology sheaves is constructible. For rational coefficients use
-a bounded constructible integral model, the qcqs localization/direct-image comparison and exact
-scalar extension; constructibility survives this extension. Over the algebraic closure use
-finite-stage descent, direct-image comparison with scalar extension, and extension stability. No
-boundedness hypothesis on the entire direct image is the conclusion of this lemma; its consumer
-obtains a separate upper bound and uses truncation. -/
+(Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8.) -/
 theorem finiteTypeDirectImage_single_constructible
     (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))

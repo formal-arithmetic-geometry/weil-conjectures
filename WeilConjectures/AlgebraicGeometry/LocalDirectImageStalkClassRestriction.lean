@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.TargetSectionClassRestriction
 
 /-! # Restriction compatibility of the local stalk class map
 
-Source: Stacks Project, Tags 02OD and 01E4.
+## References
+
+* [Stacks, Tags 02OD and 01E4]
 -/
 
 @[expose] public section
@@ -29,13 +31,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
 /-- The canonical stalk class of a global class agrees with the class computed using
-an arbitrary supplied target resolution after restriction to the inverse-image open.
-Source: Stacks Project, Lemma 20.7.3 (Tag 01E4) and Remark 20.14.2 (Tag 01FB).
-
-Proof: The top-comparison theorem identifies the defined class with the top-open
-germ computed with the supplied resolution K. The fixed-resolution restriction
-theorem identifies that same top-open germ with the germ of D.targetClass after
-the cohomology restriction map. Transitivity combines the two equalities. -/
+an arbitrary supplied target resolution after restriction to the inverse-image open
+(Stacks, Tags 01E4 and 01FB). -/
 theorem localDirectImage_stalk_class_restriction
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (F : X.Modules) (p : ℕ)
     (I : InjectiveResolution F)

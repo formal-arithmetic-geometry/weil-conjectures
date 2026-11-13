@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomTrianglePresentedRowsExact
 
 /-! # The geometric diagram before taking the exact filtered colimit
 
-Source: Stacks Project, Tags 09RE and 08BW.
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -23,37 +25,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Simultaneous stage rows and their comparison with the limit row.
-This supplies exactness in the diagram category, not exactness of its colimit,
-and does not use an externally supplied set-valued Hom system.
-
-Source: Stacks Project, Tag 09RE, Mayer--Vietoris induction step; Tag 08BW.
-
-Proof: Pull the cover back along t and the ring-stage projections. The opens
-are quasi-compact and their intersection is quasi-compact by quasi-separatedness.
-Restrict P and Q and use localizedPullback_perfectModel_iso and the affine
-pullback comparison to retain perfectness. The preceding shifts are perfect
-by perfect_thick_closure, and their cohomology is quasi-coherent by
-schemeDerivedQCohProperty_of_isPerfect. Use the functorial K-injective
-Mayer--Vietoris construction at every stage and at the limit. Apply Hom(P,-)
-and derived open adjunction to obtain the five terms. The resulting rows are
-exact pointwise, hence exact in the functor category. For a stage transition
-apply the direct-image comparison to the pulled-back Q and then naturality
-for the unit Q to Rh*Lh*Q. This yields the commuting boundary square as well
-as the ordinary restriction squares. At the central term the pullback of the
-unit followed by the counit cancels by the triangle identity. Conjugation by
-the fixed pullback composition comparisons therefore yields perfectStageMap,
-and the same cancellation on a cocone leg yields perfectLimitMap. These maps
-form S and κ; e and b are the central adjunction identifications.
-For each neighboring term retain the restricted presenting scheme, perfect
-pair, and preceding shift when required. Use perfect_hom_stage_colimit to
-present its canonical filtered Hom system. Uniqueness of the underlying set
-colimit identifies its group-colimit comparison with PerfectHomLocalComparison.
-The two-open terms are products: filtered colimits commute with finite
-products, so their comparison is PerfectHomLocalMap.prod followed by equiv.
-The intersection terms use basic followed by equiv. These four assertions
-require no continuity. This construction includes empty opens, where the
-local Hom groups are zero. No exactness of the filtered colimit row is used. -/
+/-- Simultaneous stage rows and their comparison with the limit row
+(Stacks, Tags 09RE and 08BW). -/
 theorem perfect_hom_mayerVietoris_stage_rows
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

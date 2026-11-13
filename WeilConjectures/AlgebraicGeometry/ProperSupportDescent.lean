@@ -20,8 +20,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Descent of proper module support
 
-Source: Stacks Project, Limits of Schemes, Lemma 32.13.5 (Tag 081G), together with
-Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS).
+## References
+
+* [Stacks, Tag 081G] (Limits of Schemes, Lemma 32.13.5)
+* [Stacks, Tag 0CYS] (Cohomology of Schemes, Lemma 30.26.7)
 -/
 
 @[expose] public section
@@ -37,25 +39,7 @@ The functor `R` specifies the affine bases `S_k = Spec (R.obj k)` and their affi
 transition maps. These bases are qcqs. The cone `c` with `hc` is their inverse limit,
 and `IsAffine c.pt` expresses that the limit is `Spec R` for a ring `R`.
 The scheme and module at the limit and at a later stage are their indicated pullbacks.
-
-Source: Stacks Project, Tag 081G and Tag 0CYS.
-
-Proof:
-1. Finite presentation implies quasi-coherence and finite type. By
-   lem-weil-pbc-scheme-theoretic-support, form the closed scheme-theoretic support
-   Z_i in X_i. Its base changes to X and X_j have underlying sets equal to the
-   preimages of Supp(F_i) (Stacks 01JT). These are precisely the supports of the
-   pulled-back modules by lem-weil-pbc-support-pullback-finite-type(3).
-   The map Z_i to S_i is locally of finite type, and both schemes are qcqs:
-   S_i is affine and Z_i is closed in the finitely presented S_i-scheme X_i.
-2. The limit support is proper by hypothesis. The closed base change Z of Z_i
-   has this underlying support, so Z to S is proper by
-   lem-weil-pbc-closed-subset-proper-over-base-properties(1), Stacks 0CYL.
-3. Apply lem-weil-pbc-eventually-proper, Stacks 081F, to Z_i to S_i and the
-   directed tail of the base system. Some j >= i has Z_j to S_j proper.
-4. The underlying set of Z_j is the support of the pullback of F_i by step 1.
-   Since X_j to S_j is locally of finite type, properness of Z_j gives proper
-   support by lem-weil-pbc-closed-subset-proper-over-base-properties(1). -/
+(Stacks, Tags 081G, 0CYS) -/
 theorem exists_hasSupportProperOver_baseChange_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 
 /-! # Algebraization of a system on a fixed proper closed subscheme
 
-Source: Stacks Project, Tags 088E and 088F.
+## References
+
+* [Stacks Project, Tags 088E, 088F]
 -/
 
 @[expose] public section
@@ -36,26 +38,7 @@ namespace AlgebraicGeometry
 
 /-- Algebraization when one fixed proper closed subscheme annihilates the entire system.
 No properness assumption on the first term is needed separately.
-Source: Stacks, Theorem 088E, first paragraph, using Proposition 088C and Lemma 087T;
-Remark 088F gives the displayed thickening form.
-
-Proof:
-1. Use the thickening-systems dictionary to push the coherent terms to a coherent formal
-module for I O_X. The sectionwise annihilation hypothesis says its terms are annihilated
-by j.ker. Closed-immersion coherent-formal equivalence lifts it to a formal module on Z
-for (I O_X)|_Z, which is the ideal extended from I along j ≫ f.
-2. Since j ≫ f is proper, proper Grothendieck existence algebraizes this formal module
-by a coherent module G_Z on Z. Push G_Z forward along j. Closed-immersion coherent
-equivalence makes the resulting G coherent, and its natural completion comparison
-identifies its completion with the original formal module.
-3. Support of G is the closed image of the support of G_Z, hence a closed subset of
-j(Z). This subset is proper over A by the proper-closed-subset properties. Thus G has
-proper support over A.
-4. The dictionary's isomorphism correspondence turns the completion isomorphism into
-isomorphisms ψ_n on the thickenings. Its naturality and composition comparison give
-exactly the displayed compatibility with φ_n and the comparison c_n that the
-dictionary attaches to the adjunctions ai, aj (its unit equation is part of the
-conclusion). -/
+(Stacks, Theorem 088E, Proposition 088C, Lemma 087T and Remark 088F) -/
 theorem grothendieckExistence_supported_system
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

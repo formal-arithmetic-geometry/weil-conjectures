@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 
 /-! # Local comparison of a finite presentation and a finite free epimorphism
 
-Source: Stacks Project, Modules, Lemma 01BP(1), first paragraph of the proof.
+## References
+
+* Stacks Project, Tag 01BP
 -/
 
 @[expose] public section
@@ -189,21 +191,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Near any point, a finite presentation can be compared in both directions
-with a given finite free epimorphism.
-Source: Stacks Project, Modules, Lemma 01BP(1), first paragraph of the proof;
-kernel restriction is Modules, Section 01AF.
-
-Proof: Choose a finite presentation near x from the finite-presentation data.
-Each of the finitely many basis images of psi lifts locally through its generator
-map, since that map is epi. Each of the finitely many presentation generators
-lifts locally through psi, since psi is epi. Intersect these finitely many
-neighborhoods of x and restrict the presentation to the intersection. Restriction
-preserves finite free modules, epis, and kernels; transport the restriction of
-psi across the canonical free-module isomorphism to obtain psi'. The chosen
-lifts define alpha and beta. Both equations hold because they agree on the free
-basis. Evaluation computes kernels sectionwise, so restriction supplies the
-isomorphism of kernels in the statement. Empty basis sets need no shrinking;
-the empty space has no points to check. -/
+with a given finite free epimorphism. (Stacks, Tag 01BP) -/
 theorem finitePresentation_local_comparison
     (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X))
     [F.IsFinitePresentation] (r : ℕ)

@@ -167,24 +167,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Global sections of a fixed sheaf pulled back to affine schemes commute with directed inverse
 limits over a fixed affine base. The supplied diagram and cocone are normalized by the displayed
-unit/composition equations; no objects are chosen from an existence assertion. Source: Stacks
-Project, Etale Cohomology, Tag 09YQ, degree zero; Sites, Tag 0738(4); blueprint
-etale-cohomology-continuity, detailed proof, paragraph 2.
-
-Proof: first convert the existing abelian-group section continuity theorem to the colimit
-universal property, using stage representatives and eventual vanishing to prove bijectivity of
-the comparison from the colimit. For module coefficients, apply the exact forgetful functor to
-abelian groups, use its coinduction right adjoint to compare inverse images, and reflect colimits.
-
-For general coefficients choose a separator T and the Gabriel-Popescu adjunction L ⊣ U from
-modules over End(T) opposite. Its right adjoint is fully faithful and L is exact. Objectwise
-application of U lifts G to a module-valued sheaf M, and the counit identifies L#M with G.
-The module-valued pullback sections form a canonical diagram and colimit cocone. Exactness of L
-preserves the finite matching diagrams on the affine etale basis, so affine sections of L#F
-are L applied to sections of F. Uniqueness of left adjoints gives the coefficient/pullback
-comparison. Its unit equation and composition coherence identify every transition and leg.
-Apply the colimit-preserving L to the module cocone and transport it along these comparisons
-and the supplied e and eK. This gives the colimit property of K with its original normalization. -/
+unit/composition equations; no objects are chosen from an existence assertion.
+(Stacks, Etale Cohomology, Tag 09YQ, degree zero; Sites, Tag 0738(4)) -/
 theorem affine_globalSections_limit_isColimit_of_directed
     {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] {S : Scheme.{u}}
     [IsAffine S]

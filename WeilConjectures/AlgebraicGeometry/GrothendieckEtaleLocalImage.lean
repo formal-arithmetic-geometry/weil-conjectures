@@ -12,8 +12,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 
 /-! # The categorical local image on the small étale site
 
-Source: Stacks Project, Tag 00WL, image subsheaves. The construction with epimorphic
-sources is the categorical version for Grothendieck abelian coefficients.
+## Implementation details
+
+The construction with epimorphic sources is the categorical version for Grothendieck
+abelian coefficients.
+
+## References
+
+* [Stacks Project, Tag 00WL]
 -/
 
 @[expose] public section
@@ -28,19 +34,19 @@ variable {X : Scheme.{u}} {A : Type u'} [Category.{u + 1} A] [Abelian A]
 variable {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G)
 
 /-- A map into a sheaf value lifts through `p` on a covering sieve. No compatibility
-between the lifts is imposed. Source: Stacks Project, Tag 00WL. -/
+between the lifts is imposed. (Stacks, Tag 00WL) -/
 def LocallyLifts (W : X.Etale) {B : A} (x : B ⟶ G.obj.obj (op W)) : Prop :=
   ∃ (R : Sieve W), R ∈ X.smallEtaleTopology W ∧
     ∀ (Z : X.Etale) (f : Z ⟶ W), R f →
       ∃ l : B ⟶ F.obj.obj (op Z), l ≫ p.hom.app (op Z) = x ≫ G.obj.map f.op
 
 /-- A subobject belongs to the local image if its inclusion lifts locally after an
-epimorphism onto its source. Source: Stacks Project, Tag 00WL, categorical image argument. -/
+epimorphism onto its source. (Stacks, Tag 00WL) -/
 def LocalImageMember (W : X.Etale) (S : Subobject (G.obj.obj (op W))) : Prop :=
   ∃ (P : A) (e : P ⟶ (S : A)), Epi e ∧ LocallyLifts p W (e ≫ S.arrow)
 
 /-- The union of local-image subobjects, constructed as a supremum in the complete
-subobject lattice. Source: Stacks Project, Tag 00WL, categorical image argument. -/
+subobject lattice. (Stacks, Tag 00WL) -/
 noncomputable def localImage (W : X.Etale) : Subobject (G.obj.obj (op W)) :=
   sSup {S | LocalImageMember p W S}
 
@@ -135,8 +141,7 @@ lemma localImageMember_sup {W : X.Etale} {S T : Subobject (G.obj.obj (op W))}
   · simp [Category.assoc, hk]
 
 /-- The local-image subobjects form a small directed family. Using distinct subobjects
-avoids imposing filteredness on a category of covering maps.
-Source: Stacks Project, Tag 00WL; AB5 categorical image argument. -/
+avoids imposing filteredness on a category of covering maps. (Stacks, Tag 00WL) -/
 abbrev LocalImageIndex (W : X.Etale) :=
   Shrink.{u + 1} {S : Subobject (G.obj.obj (op W)) // LocalImageMember p W S}
 
@@ -173,7 +178,7 @@ lemma iSup_localImageFamily (W : X.Etale) :
 
 /-- Extend the local image from the qcqs basis by testing all restrictions to qcqs objects.
 It is an actual construction in the subobject lattice, independent of any existence theorem.
-Source: Stacks Project, Tag 00WL, image subsheaf argument and restriction to a basis. -/
+(Stacks, Tag 00WL) -/
 noncomputable def qcqsLocalImage (W : X.Etale) : Subobject (G.obj.obj (op W)) :=
   ⨅ (Z : X.Etale) (_ : CompactSpace Z.left) (_ : QuasiSeparatedSpace Z.left)
     (f : Z ⟶ W), (Subobject.pullback (G.obj.map f.op)).obj (localImage p Z)

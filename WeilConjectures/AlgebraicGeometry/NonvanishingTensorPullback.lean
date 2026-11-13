@@ -24,20 +24,7 @@ open CategoryTheory MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Pullback of a section of an invertible module has nonzero residue-field value exactly
-above its original nonvanishing locus.
-
-Source: Stacks Project, Sheaves Tag 0098 and Properties Section 01PR.
-
-Proof: the tensor-pullback stalk is the original stalk extended along the local ring
-map, and the canonical unit sends the germ to one tensor the original germ. Passing to
-the residue field identifies the resulting fibre with extension of the original fibre
-along the residue-field homomorphism. The kernel of the map to the fibre is the maximal
-ideal times the stalk module. Extension of a vector space along a field embedding is
-faithful: after choosing a basis, one tensor a vector is zero exactly when that vector
-is zero. Consequently the germ of the pulled-back section lies in the target maximal
-ideal times its module exactly when the original germ lies in the source maximal ideal
-times its module. Negating this equivalence is the stated criterion. No finiteness of
-the scheme is required; the empty scheme satisfies the same criterion. -/
+above its original nonvanishing locus (Stacks, Tags 0098 and 01PR). -/
 theorem nonvanishing_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (N : Y.Modules) [N.IsInvertible]
     (t : Γ(N, ⊤)) (x : X) :
     let adj := Classical.choose (exists_tensorPullbackAdjunction f)

@@ -14,7 +14,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 
 /-! # The normalized restricted scalar pullback square is the canonical tensor square
 
-Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP. -/
+## References
+
+* Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,29 +47,8 @@ private theorem modelTarget_isIso (a : Λ ⟶ Λ') [IsMonHom a]
   unfold scalarTensorPullModelTarget
   infer_instance
 
-/-- The normalized restricted scalar pullback square is the canonical tensor square.
-
-Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP;
-blueprint integral proper-base-change proof, paragraphs (1) and (3).
-
-Proof:
-1. Choose flat-term K-flat P resolving M and Q resolving the restricted regular coefficient in
-degree zero. Exact pullback preserves both. Tensoring the augmentation of Q by P is a quasi-
-isomorphism on both sites, including after pullback.
-
-2. TensorNormalized and PullNormalized identify the left side on the representatives with the
-ordinary balanced scalar/pullback square. The canonical derived tensor comparison is the
-localization of the ordinary total comparison, and the fixed section equivalence preserves these
-representatives and maps.
-
-3. Apply the ordinary and homotopy tensor square for arbitrary condensed coefficient maps.
-Equivalently both balanced maps send pulled-back x tensor s to pulled-back x tensor c(s). The
-regular coefficient is in degree zero, so no sign occurs.
-
-4. Localize the equality and cancel the representative isomorphisms. Naturality along a resolution
-of each arbitrary argument gives the desired equation. This never cancels tensoring an arbitrary
-resolution with a nonflat coefficient; only the K-flat comparisons of the first step
-are inverted. -/
+/-- The normalized restricted scalar pullback square is the canonical tensor square
+(Stacks, Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP). -/
 theorem scalar_tensor_pull_normalization (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tX : TensorNormalization a X) (tY : TensorNormalization a Y)

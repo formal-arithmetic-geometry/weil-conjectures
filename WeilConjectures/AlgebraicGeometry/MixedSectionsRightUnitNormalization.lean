@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 
 /-! # Right path of the normalized mixed Leray unit diagram
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W.
+
+## References
+
+* Stacks Project, Tags 0D5T and 0D5W.
 -/
 
 @[expose] public section
@@ -128,23 +131,8 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((schemeGlobalScalarRestriction f).map (H.rightDerivedFunctorUnit.app K)))
 
 -- The statement expands sheaf, scalar, and localization instances.
-/-- The right path becomes the iterated scalar-factor path before any unit cancellation.
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
-in lem-sc-mixed-sections-composition-kinjective.
-
-Proof: Distribute derived global sections over the final two direct-image maps in p.
-The factors e.inv and e.hom cancel because e is an isomorphism. The mixed Leray
-unit equation for f followed by g identifies the remaining path with the
-composite scalar factor followed by Sfg(unit_HX). Naturality of the scalar
-composition comparison moves unit_HX to the end. The factor identity identifies
-factor_fg followed by s(f,g) with factor_g followed by Sg(factor_f). This follows
-from mapDerivedCategoryCompIso_fach and mapDerivedCategoryNatIso_fach, applied to
-restrictScalarsComp'. On each degree the underived comparison is the identity
-on elements, so its homotopy map and its localization map are identities.
-Thus this path is b. No acyclicity or K-injectivity assumption is needed.
-For identity maps, zero complexes, and empty schemes the same equations hold;
-no nonemptiness, boundedness, flatness, or preservation of K-injectivity is used.
-The sheaf and module localization universes remain independent. -/
+/-- The right path becomes the iterated scalar-factor path before any unit cancellation
+(Stacks, Tags 0D5T and 0D5W). -/
 theorem mixedSections_right_unit_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

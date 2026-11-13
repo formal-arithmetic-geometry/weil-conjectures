@@ -13,9 +13,12 @@ public import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-! # Constant vector-space coefficients extended to the structure presheaf
 
-Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation.
 The construction is extension of scalars of a constant presheaf, followed by
 pointwise tensor with the coefficient presheaf. No choice of a basis enters it.
+
+## References
+
+* Stacks Project, Varieties, Tag 0BED.
 -/
 
 @[expose] public section
@@ -29,9 +32,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The constant ring map induced by the structure morphism.
-Source: Stacks Project, Varieties, Tag 0BED, scalar coefficients in the ordinary
-pushforward tensor formula. -/
+/-- The constant ring map induced by the structure morphism. -/
 def picardConstantRingMap (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) :
     (Functor.const Y.Opensᵒᵖ).obj (RingCat.of k) ⟶
@@ -46,8 +47,7 @@ def picardConstantRingMap (k : Type w) [Field k] (Y : Scheme.{w})
     rw [← Y.presheaf.map_comp]
     rfl
 
-/-- The constant presheaf of vector spaces as modules over the constant ring.
-Source: Stacks Project, Varieties, Tag 0BED, constant Gamma(X,F) coefficients. -/
+/-- The constant presheaf of vector spaces as modules over the constant ring. -/
 def picardConstantVector (k : Type w) [Field k] (Y : Scheme.{w}) (M : ModuleCat.{w} k) :
     _root_.PresheafOfModules ((Functor.const Y.Opensᵒᵖ).obj (RingCat.of k)) where
   obj _ := M
@@ -55,8 +55,7 @@ def picardConstantVector (k : Type w) [Field k] (Y : Scheme.{w}) (M : ModuleCat.
   map_id _ := by ext; rfl
   map_comp _ _ := by ext; rfl
 
-/-- Extend the constant vector space to O_Y, then tensor it with G, pointwise.
-Source: Stacks Project, Varieties, Tag 0BED, ordinary pushforward tensor coefficients. -/
+/-- Extend the constant vector space to O_Y, then tensor it with G, pointwise. -/
 def picardConstantSectionsTensor (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules) :
     _root_.PresheafOfModules Y.ringCatSheaf.obj :=
@@ -137,22 +136,7 @@ private def freeConstantIsColimit {C : Type w} [SmallCategory C]
     exact h.trans (ModuleCat.freeDesc_apply
       (↾fun j ↦ (t.inj j).app U (1 : R.obj U)) i).symm
 
-/-- A prescribed basis identifies the tensor coefficient presheaf with a coproduct.
-Source: Stacks Project, Varieties, Tag 0BED, the second isomorphism in the
-ordinary direct-image calculation.
-
-Proof: The constant vector presheaf sends each open to M with identity restriction.
-The basis identifies it with the coproduct of I copies of the constant k-module k:
-on sections the map sends the i-th coefficient a to a times b_i, and the inverse
-is b.repr. Constant-presheaf coproducts are pointwise, and these maps commute with
-identity restriction. Extension of scalars is the left adjoint to restriction along
-the constant ring map, so preserves this coproduct and takes the constant k-module k
-to the unit O_Y presheaf. This last identification follows by their identical
-Hom universal properties: both represent sections of the underlying presheaf.
-Tensor with G preserves coproducts, pointwise. The left unitors identify every
-O_Y tensor G summand with G. Composing these three isomorphisms gives the result.
-This uses no geometry or quasi-coherence. An empty basis is a zero vector space;
-extension and tensor preserve its initial object, so the same argument covers it. -/
+/-- A prescribed basis identifies the tensor coefficient presheaf with a coproduct. -/
 theorem exists_picard_constant_sections_tensor_basis
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)

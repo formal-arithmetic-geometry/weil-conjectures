@@ -24,8 +24,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 
 /-! # Local tensor calculations over ell-adic coefficients
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3), using locally finite free resolutions.
-(a step of)
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11(3).
 -/
 
 @[expose] public section
@@ -102,11 +103,7 @@ private theorem integral_tensor_single
 variable (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
 
 /-- The tensor of two locally finitely presented `E`-module sheaves, for a finite extension `E`
-of `ℚ_ℓ`, has no cohomology below degree -1, and its cohomology is locally finitely presented.
-Source: Bhatt--Scholze, Proposition 6.8.11(3).
-Proof: local triviality makes the first factor locally finite free, so the finite free tensor
-calculation gives the assertion (and a stronger lower bound 0).
-(a step of) -/
+of `ℚ_ℓ`, has no cohomology below degree -1, and its cohomology is locally finitely presented. -/
 theorem lfp_tensor_single_continuousMapRingObj
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -150,11 +147,7 @@ theorem lfp_tensor_single_continuousMapRingObj
   exact ⟨DerivedCategory.TStructure.t.isGE_of_ge _ (-1) 0 (by decide), hl⟩
 
 /-- The tensor of two locally finitely presented `ℚ̄_ℓ`-module sheaves has no cohomology below
-degree -1, and its cohomology is locally finitely presented.
-Source: Bhatt--Scholze, Proposition 6.8.11(3).
-Proof: local triviality makes the first factor locally finite free, so the finite free tensor
-calculation gives the assertion (and a stronger lower bound 0).
-(a step of) -/
+degree -1, and its cohomology is locally finitely presented. -/
 theorem lfp_tensor_single_padicAlgClRingObj
     (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))
@@ -172,17 +165,7 @@ theorem lfp_tensor_single_padicAlgClRingObj
 
 /-- The tensor of two locally finitely presented `𝒪_E`-module sheaves, for a finite extension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, has no cohomology below degree -1, and its cohomology is locally finitely
-presented.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), expanded using the library's
-integral locally finite free resolution.
-Proof: take the short exact two-term locally finite free resolution
-of the first factor, and tensor its distinguished triangle with the second factor.
-Both resolved terms have cohomology in degree zero and locally finite presentation.
-The rotated triangle gives the lower bound -1. The upper bound 0 is the general
-right t-exactness of derived tensor. Locally finitely presented integral module sheaves
-are closed under kernels, cokernels and extensions; hence their homology property is
-triangulated and the third term has locally finitely presented cohomology.
-(a step of) -/
+presented. -/
 theorem lfp_tensor_single_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]

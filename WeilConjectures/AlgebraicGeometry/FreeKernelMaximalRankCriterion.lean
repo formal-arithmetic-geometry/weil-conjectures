@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Maximal-rank kernels of finite free sheaf maps
 
-Source: Stacks Project, Tags 0BDL and 0EWY, the local matrix argument and the rank
-inequality for an injective free map.
+## References
+
+* Stacks Project, Tags 0BDL and 0EWY.
 -/
 
 @[expose] public section
@@ -119,25 +120,7 @@ private lemma free_mono_rank_le {X : Scheme.{u}} {r s : ℕ}
 set_option backward.isDefEq.respectTransparency false in
 /-- For a finite free domain of rank at most r, a rank-r locally free kernel
 forces the map to vanish and the domain rank to equal r unless the scheme is empty.
-This is a sheaf-theoretic criterion on a fixed scheme, with no representability
-or finite-presentation assertion.
-
-Source: Stacks Project, Tag 0BDL, local matrix calculation using Tag 0EWY;
-the strict-rank case uses the rank inequality for an injective free-module map.
-
-Proof: Trivialize the rank-r kernel on an open cover, restrict the supplied
-domain and target frames there, and take sections of its monomorphic inclusion.
-When s=r this is an injective square matrix. Tag 0EWY makes its transpose
-injective. Each coordinate of the outgoing map annihilates this inclusion,
-so is in the kernel of the transpose and is zero. Thus the map is zero on
-the cover and hence globally. If s<r, any point lies in a kernel-trivializing
-chart with nontrivial ring of global sections. The injective map on sections
-forces r <= s by the finite free-module rank inequality, a contradiction.
-Thus the scheme is empty.
-Conversely, a zero map has kernel isomorphic to its free domain, giving rank
-r when s=r. On an empty scheme every sheaf is zero and locally free of every
-rank, using the empty covering; every morphism is zero. Rank zero and the
-zero-ring charts require no exception to these arguments. -/
+(Stacks, Tags 0BDL and 0EWY) -/
 theorem finiteLocallyFree_kernel_maximalRank_iff
     (X : Scheme.{u})
     (M N : SheafOfModules.{u} X.ringCatSheaf) (d : M ⟶ N)

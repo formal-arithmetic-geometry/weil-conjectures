@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 
 /-! # Fixed endpoint comparisons for horizontal duality mates
 
-Source: Stacks Project, Tags 0D5S, 0D5T and 0ATR.
+## References
+
+* Stacks Project, Tags 0D5S, 0D5T and 0ATR
 -/
 
 @[expose] public section
@@ -111,9 +113,7 @@ def horizontalMatePushComp {X Y Z : Scheme.{u}}
     (horizontalMateComp f g)
 
 /-- Transport of the right adjoint across an isomorphism of the source schemes.
-The direct-image comparison is the conjugate of the pinned pullback comparison;
-the last comparison is right-adjoint uniqueness for the supplied adjunctions.
-Source: Stacks Project, Tags 0D5S, 0D5T and 0ATR. -/
+(Stacks, Tags 0D5S, 0D5T and 0ATR) -/
 def horizontalMateRightAdjointIso {P Q Z : Scheme.{u}}
     [CompactSpace P] [QuasiSeparatedSpace P] [CompactSpace Q] [QuasiSeparatedSpace Q]
     [CompactSpace Z] [QuasiSeparatedSpace Z]
@@ -135,7 +135,7 @@ def horizontalMateRightAdjointIso {P Q Z : Scheme.{u}}
       ((ev.symm.toAdjunction.comp adjc).ofNatIsoLeft li.symm)
 
 /-- Source endpoint comparison for the two successive pullbacks.
-Source: Stacks Project, Tag 0D5S and Tag 0ATR. -/
+(Stacks, Tags 0D5S and 0ATR) -/
 def horizontalMateSourceIso {X Y Y' Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y' ⟶ Y) (h : Z ⟶ Y') (E : schemeDerivedCategory X) :
     (derivedPullback (pullback.fst (pullback.snd f g) h)).obj
@@ -151,7 +151,7 @@ def horizontalMateSourceIso {X Y Y' Z : Scheme.{u}}
 
 /-- Target endpoint comparison, first composing the pullbacks on the input,
 then transporting the supplied right adjoints across the pullback associativity iso.
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2. -/
+(Stacks, Tag 0ATR) -/
 def horizontalMateTargetIso {X Y Y' Z : Scheme.{u}}
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']
     [CompactSpace Z] [QuasiSeparatedSpace Z]

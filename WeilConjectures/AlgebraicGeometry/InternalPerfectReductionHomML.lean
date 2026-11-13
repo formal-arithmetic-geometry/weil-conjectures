@@ -36,13 +36,13 @@ import Mathlib.CategoryTheory.CofilteredSystem
 
 /-! # Uniform stable images for internal perfect reduction Hom
 
-Source: literature/stacks-project/proetale.tex, Tag 09C5;
-current, Compatible isomorphisms,
-paragraph beginning These Hom groups can be infinite.
-
 Natural-number index n denotes the positive exponent n+1. The scalar model uses
 constant discrete scalar modules extended to continuous integral coefficients.
 The Hom transitions use the actual quotient-associativity comparisons.
+
+## References
+
+* Stacks Project, Tag 09C5.
 -/
 
 @[expose] public noncomputable section
@@ -267,33 +267,8 @@ private theorem locallyConstant_range_eq {Y : Type*} [TopologicalSpace Y]
     ext t
     exact hlift (x t)
 
-/-- Uniform stable images for the internal perfect reduction Hom tower, hence ML.
-Source: literature/stacks-project/proetale.tex, Tag 09C5; current, Compatible isomorphisms, uniform-bound paragraph.
-
-Proof:
-1. Identify the site over W with W_proet by weakly-etale localization. The DVR and
-finite-quotient lemmas identify each internal finite-coefficient module category with
-ordinary modules over the constant finite quotient ring, on arbitrary schemes.
-2. Choose bases of P. Internal-section tensor comparison and bounded-flat K-flatness
-represent its derived reductions by constant P/pi^j. Pure-tensor normalization makes
-these identifications respect quotient associativity and the actual comparisons.
-3. Weak contractibility makes sections exact. Bounded free constant complexes are
-K-projective; the K-projective derived-Hom bijection computes maps modulo homotopy.
-4. Signed finite-free evaluation identifies their Hom complexes with constant Q/pi^j.
-The formula on homogeneous tensors is lambda tensor v applied to x equals
-(-1)^(degree(v)*degree(x)) lambda(x)v. Its differential is df=d_P f-(-1)^degree(f)f d_P.
-Degree-zero cycles are chain maps and boundaries are null-homotopic maps.
-5. Exact constant sheafification and exact sections preserve cohomology and images.
-6. In bases, actual derived coefficient extension reduces each chain-map matrix entry.
-It also reduces homotopies, so this identification respects every finite reduction diagram.
-7. For N >= m >= n+e choose only one isomorphism at level N and reduce it to m and n.
-Postcomposition by those reductions identifies both Hom images with the endomorphism
-images using one common bijection at n; no independently chosen lower isomorphism is used.
-8. Apply sk-lem-integral-scalar-towers (2), q=0, to Q with the specified torsion exponent.
-Both images in H^0(Q/pi^n) equal the integral image. Exact constant sheaves and sections,
-then the common bijection, give equality of the actual Hom transition images.
-9. The witness c(n)=n+e gives the recorded Mittag-Leffler condition. No completeness
-or inverse-limit identification of K has entered the proof. -/
+/-- Uniform stable images for the internal perfect reduction Hom tower, hence the
+Mittag-Leffler condition (Stacks, Tag 09C5). -/
 theorem internalPerfectReductionHom_mittagLeffler
     (X : Scheme.{u}) (W : X.ProEt) (_hAffine : IsAffine W.left)
     (_hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)

@@ -16,7 +16,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensio
 
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
 
-Source: Stacks Project, Tags 09RE (affine case), 0BC7 (2), 00CR, and 06Z0.
+## References
+
+* Stacks Project, Tags 09RE, 0BC7, 00CR and 06Z0.
 -/
 
 @[expose] public section
@@ -115,24 +117,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- An arbitrary derived stalk morphism lifts to a chain map between strictly perfect
 models restricted to a smaller affine neighbourhood. The stalk comparison isomorphisms identify
 the derived image of that chain map with the original morphism. No invertibility of the
-original morphism or the lifted map is asserted.
-
-Source: Stacks Project, Tags 09RE (affine case), 0BC7 (2), 00CR, and 06Z0.
-
-Proof: On an affine neighbourhood of x in U, the finite-free retract terms of P and Q are
-quasi-coherent and
-correspond to finite projective modules over the ring of sections. The complexes are
-bounded. Exactness of stalks identifies the stalks of the derived comparisons with the
-prime localizations of these module complexes. The comparison isomorphisms cG, cH are
-the canonical restriction comparison followed by `perfectLocalModelStalkComparison`.
-Transport the given morphism by cG and cH. Present the prime localization as the filtered
-colimit of principal localizations outside the prime (00CR). Surjectivity of the perfect
-Hom comparison (09RE, or 0BC7 (2)) descends this morphism to one principal localization.
-Bounded projective complexes are K-projective, so its derived morphism has a chain-map
-representative. The affine correspondence transports this chain map back to the
-restricted perfect sheaf complexes; exact restriction and stalk comparisons give the
-stated equation. This uses only Hom surjectivity, not descent of an inverse or inverse
-identities. Zero ranks and zero complexes cause no exception. -/
+original morphism or the lifted map is asserted. -/
 theorem exists_affine_perfect_stalk_hom_lift
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 
 /-! # Completed comparison in the original index
 
-Source: Stacks Project, Tag 088A, final paragraph.
+## References
+
+* [Stacks Project, Tag 088A]
 -/
 
 @[expose] public section
@@ -26,24 +28,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Double quotient comparison gives an isomorphism after K-completion, natural in
 all I-levels. No torsion hypothesis is needed for this purely quotient-theoretic step.
-Source: Stacks Project, Tag 088A, final paragraph.
-
-Proof: the two iterated quotients of any module by I^(n+1) and K^(e+1) are the
-cokernel quotient by the sum of these ideal products. The universal cokernel maps
-in both directions give an interchange isomorphism characterized by the composite
-projection from that module. Cancel this composite epimorphism to check both inverse
-identities and naturality in module maps and in both indices. Apply interchange to F,
-compose with the I-reductions of beta inverse and sigma, and transpose the indices.
-This gives the asserted isomorphism Xi of K-completed diagrams indexed by I-levels.
-For the map equation, the equation delta = beta.hom followed by completed a and the
-supplied comparison square give the equation after quotienting. Naturality of the
-interchange for a reduces the remaining comparison on H to theta. The projection
-equation htheta forces the supplied theta to equal this canonical interchange, again
-by cancelling the composite quotient epimorphism. Thus Xi respects the two maps to
-the K-completion of H/I^(n+1)H at every index. Naturality follows from that of beta,
-sigma and the quotient interchange. No algebraization or choice of coherent witness
-is involved: only isomorphisms between specified quotient systems are asserted.
--/
+(Stacks, Tag 088A) -/
 theorem grothendieckDevissage_completedComparison
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) (H : CoherentModules X)

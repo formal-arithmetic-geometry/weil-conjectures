@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCechResolutionColumnPositive
 
 /-! # Acyclic intersections give quasi-isomorphisms on resolution columns
 
-Source: Stacks Project, Cohomology, Tags 01EQ and 01ET.
+## References
+
+* [Stacks, Cohomology, Tags 01EQ and 01ET]
 -/
 
 @[expose] public section
@@ -26,21 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The Cech cochain products of an injective resolution are augmented resolutions
 when positive cohomology vanishes on all the intersections. No totalization or
-quasi-coherence assumption occurs in this statement.
-Source: Stacks Project, Tags 01EQ and 01ET.
-
-Proof: evaluate the prescribed injective resolution on each finite intersection.
-Restriction preserves injectivity and exactness, so this computes cohomology on
-that open. The assumed positive-degree vanishing gives exactness in positive
-resolution degrees. Left exactness of sections identifies the degree-zero kernel
-with sections of F, and its augmentation is the evaluated I.ι.f 0. Restriction
-of scalars to the global section ring preserves the underlying exact sequence.
-For a fixed Cech degree take the product over all tuples: kernels are computed
-coordinatewise and products of surjections are surjective by choosing preimages.
-Thus the augmented product column is quasi-isomorphic to its degree-zero section
-module. The augmentation squares to zero because I.ι.f 0 does, functoriality of
-the Cech functor preserves this equality, and the transposed column maps are
-exactly the maps constructed by fromSingle₀Equiv. -/
+quasi-coherence assumption occurs in this statement (Stacks, Tags 01EQ and 01ET). -/
 theorem moduleCech_resolution_columns {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (F : X.Modules) (I : InjectiveResolution F)
     (hvan : ∀ n : ℕ, ∀ y : Fin (n + 1) → ι, ∀ p : ℕ, 0 < p →

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTe
 /-!
 # Geometric connectedness of a fibre tested on étale neighbourhoods
 
-Source: Stacks Project, More on Morphisms, Tag 03GZ.
+## References
+
+* Stacks Project, Tag 03GZ.
 -/
 
 @[expose] public section
@@ -26,23 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A fibre is geometrically connected exactly when the fibre over every étale neighbourhood
-of its base point is connected. Source: Stacks Project, More on Morphisms, Tag 03GZ.
-
-Proof:
-1. Mathlib's `isPullback_fiberToSpecResidueField_of_isPullback` identifies the
-   neighbourhood fibre as a pullback of `g.fiberToSpecResidueField s` along the
-   residue-field map. Geometric connectedness applies directly to this square;
-   no finiteness or separability of the residue extension is needed here.
-2. For the converse, apply the finite-separable test
-   `lem-weil-pbc-geometrically-connected-finite-separable-test` to `g.fiber s`.
-   For each finite separable extension `K`, the prescribed-residue-field theorem
-   `lem-weil-pbc-etale-neighbourhood-prescribed-residue-field` gives a neighbourhood
-   whose residue field is isomorphic to `K` over the base residue field.
-3. Apply `Spec` to this field isomorphism. Its compatibility identifies the bottom
-   map of the fibre pullback square with the algebra map into `K`. Transport the
-   square by `IsPullback.of_iso`, and transfer the assumed connectedness along its
-   canonical isomorphism to the chosen pullback. This verifies every finite-separable
-   test, hence gives geometric connectedness. -/
+of its base point is connected (Stacks, Tag 03GZ). -/
 theorem Scheme.Hom.geometricallyConnected_fiber_iff_connectedSpace_etale_neighbourhood
     {X S : Scheme.{u}} (g : X ⟶ S) (s : S) :
     GeometricallyConnected (g.fiberToSpecResidueField s) ↔

@@ -31,12 +31,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   leftDerivedUpperStarComp derivedUpperStarLowerStarAdjunction derivedSquareUpperStarIso
 
 /-- The ordinary constant-object unit is the adjunction unit followed by direct
-image of the constant-object pullback comparison.
-
-Proof: apply the existing supportedDerivedUnit_eq for ordinaryFiniteAdjunction.
-Unfold only this recorded adjunction wrapper; its value is the specified etale
-derived adjunction. The existing theorem already identifies the remaining
-composite with the canonical constant-object pullback comparison. -/
+image of the constant-object pullback comparison. -/
 theorem supportedDerivedUnit_eq_adjunction (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportedDerivedUnit A f =

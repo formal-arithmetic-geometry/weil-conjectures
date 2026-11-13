@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
 /-! # The source affine model and its extension unit normalization
-Source: Stacks Project, Tags 06Z0, 08DW(2) and 0AA7.
+
+## References
+
+* Stacks Project, Tags 06Z0, 08DW and 0AA7.
 -/
 
 @[expose] public section
@@ -76,21 +79,8 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 set_option maxHeartbeats 500000 in
 -- The derived unit calculation elaborates several affine carrier identifications.
-/-- The extension counit computes the affine chart source, and intertwines Hom transposes.
-Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7.
-
-Proof: The ordinary affine tilde unit identifies H(F(P)) with P termwise, so this
-complex is K-flat. Its left-derived extension counit is therefore invertible.
-Identify the fixed mixedGlobalExtension adjunction with the derived extension
-adjunction by left-adjoint uniqueness, preserving its unit. The source comparison a
-is the inverse of extension applied to mixedSectionsComplexUnit, followed by this
-counit. The affine sections comparison is invertible by the affine chart sections
-unit theorem. Apply derivedη_fac_app to extension/restriction, inserting the exact
-restriction comparison and quotient-to-homotopy factors. This proves the formula for
-the unit. Postcompose with an arbitrary complex map f and use naturality of the
-exact restriction comparison to obtain the displayed equality. It is uniform in Z
-and f and uses no pullback, Leray comparison, or ordinary comparison c. Zero rings,
-zero complexes and zero morphisms satisfy the same unit and naturality equations. -/
+/-- The extension counit computes the affine chart source, and intertwines Hom transposes
+(Stacks, Tags 06Z0, 08DW and 0AA7). -/
 theorem exists_mixedAffineSections_extension_unit_normalization
     {S T : Scheme.{u}} [IsAffine S] (g : T ⟶ S) :
     let F : ModuleCat.{u} Γ(S, ⊤) ⥤

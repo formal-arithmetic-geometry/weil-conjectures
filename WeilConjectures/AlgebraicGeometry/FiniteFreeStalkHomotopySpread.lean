@@ -23,20 +23,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A homotopy equivalence with a single free complex over a local ring spreads.
-
-Proof: Work on an affine neighbourhood of y and choose finite bases of P's terms.
-Both complexes have finite support. Under the affine quasicoherent module-sheaf
-correspondence, the given maps and the two homotopies are finite lists of matrices
-with entries in the local ring at y. Represent their finitely many entries by
-sections on neighbourhoods of y, and intersect those neighbourhoods. Chain-map
-commutativity and the two homotopy equations are finitely many entrywise equations
-of sections. Each holds in the stalk, so after shrinking around y each holds as an
-equation of sections; intersect this second finite list of neighbourhoods. All
-components outside the bounded support are the unique maps from or to zero objects,
-so there are no further equations to impose. The represented matrices now define
-chain maps and homotopies on the resulting open V, proving that the composites are
-homotopic to the identities. No residue cohomology or base change is used here. -/
+/-- A homotopy equivalence with a single free complex over a local ring spreads to a
+neighbourhood of the point. -/
 theorem exists_restrict_homotopyEquiv_single_of_stalk
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

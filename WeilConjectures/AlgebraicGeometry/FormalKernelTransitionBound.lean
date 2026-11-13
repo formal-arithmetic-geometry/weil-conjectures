@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Eventual exactness of shifted kernel quotient transitions
 
-Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
+## References
+
+* [Stacks Project, Tag 087X](https://stacks.math.columbia.edu/tag/087X)
 -/
 
 @[expose] public section
@@ -108,30 +110,7 @@ private theorem quotient_transition_kernel {R : Type u} [CommRing R]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel of each sufficiently shifted quotient transition is its ideal product.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
-
-Proof: Restrict to a finite affine cover. The affine formal-module equivalence represents
-alpha by a map f: M to N over the Noetherian completed ring. Put L = ker f.
-Artin--Rees for im f in N gives a constant a such that
-f inverse(I^t N) = L + I^(t-a) f inverse(I^a N) for t >= a.
-For l >= m+a, its image modulo I^(m+1) M is therefore the image of L.
-Choose l also >= m+c, and use hc to identify the image at m+c with this image.
-Thus the eventual kernel image in level m is L/(L intersect I^(m+1) M).
-The isomorphisms hS transport this
-identification to S_m; the equations with j and its naturality identify the transitions
-with the reductions of L. Artin--Rees for L in M supplies a bound b on each affine
-with L intersect I^(r+b) M contained in I^r L. Take the maximum on the finite cover.
-For d >= max(c,b), the level n shifted quotient is L/I^(n+1) L: the extra intersection
-L intersect I^(n+d+1) M is contained in I^(n+1) L. Its transition from n+1 to n
-is reduction, whose kernel is I^(n+1)L/I^(n+2)L, the ideal product of its source.
-The Lean proof separates the unshifted stalk presentations from their shifted
-quotient calculation. It identifies the kernel of a power-quotient reduction
-with the power times the source by Submodule.map_smul'' and quotient representatives.
-The stalk ideal-product calculation transports this equality to the sheaves.
-Exactness is local, giving the asserted short-complex exactness and zero composite.
-For I=0 these transitions are identities; for I=O_X or zero modules all terms vanish.
-The empty scheme admits bound zero. -/
+(Stacks, Tag 087X.) -/
 theorem coherentFormalModule_kernel_quotient_transition_exact_bound
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

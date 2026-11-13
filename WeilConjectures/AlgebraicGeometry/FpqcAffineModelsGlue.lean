@@ -81,27 +81,8 @@ private theorem glue_relative_pullback
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Effective affine-open models give a global pullback projection, invariant locally.
-Source: Stacks Project, Descent, Tag 02W3, general-base part of the proof, and
-Schemes, Tag 01LH.
-
-For each affine open U choose the effective model of E_U. For an inclusion of
-an affine open B into U, pull back the U-model to B. The two effective models
-over B have canonically isomorphic pullbacks to X_B, compatibly with transport:
-the compatibility equation in hlocal identifies both transports with D after
-projection to V. Full faithfulness of fpqc descent of morphisms (02W0) descends
-this isomorphism uniquely. Uniqueness proves the identity and composition laws.
-The resulting natural transformation from the diagram of models to the
-locally directed affine open cover of S is equifibered. Relative gluing (01LH)
-therefore constructs a scheme W over S. The local isomorphisms from the
-restrictions of V to W times_S X agree on intersections by uniqueness of
-morphism descent. Glue these isomorphisms and their inverses to obtain a global
-pullback square. The local projections to W glue to q. On a test scheme mapping
-to an affine open U, transport invariance of q
-follows from effectivity of E_U and the displayed compatibility equation.
-This is precisely the local invariance asserted below; global invariance is
-a separate locality argument. All constructions
-use open covers, so the argument includes empty bases and empty objects. -/
+/-- Effective affine-open models give a global pullback projection, invariant locally
+(Stacks, Descent, Tag 02W3; Schemes, Tag 01LH). -/
 theorem fpqc_affine_effective_models_glue
     {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

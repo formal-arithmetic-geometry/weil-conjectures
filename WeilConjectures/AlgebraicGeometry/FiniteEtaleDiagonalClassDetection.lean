@@ -23,10 +23,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import WeilConjectures.Tactic.TransportExact
 
-/-! # Finite etale diagonal classes detect ordinary roots-line maps
-
-Source: diagonal coefficient changes (3), positive residue and finite P1 integrals.
--/
+/-! # Finite etale diagonal classes detect ordinary roots-line maps -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -269,9 +266,7 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 
 /-- The final step of `finiteEtaleDiagonalClass_postcomp_injective`, stated without local
 definitions: the normalized diagonal integral is the integral hypothesis of
-`class_detects_from_integral_and_unit_action`. The two sides differ in spelling
-(`DerivedCategoryModule` against `DerivedCategory`, named objects against their values), and
-`transport_exact` compares them along their common structure. -/
+`class_detects_from_integral_and_unit_action`. -/
 private theorem diagonal_class_detects
     (Y : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
@@ -319,28 +314,7 @@ end
 -- The scalar and derived normalization calculations need extra elaboration.
 /-- The supported Kummer class of the relative projective-line diagonal detects
 endomorphisms of its finite etale Tate line. This statement concerns only finite
-etale coefficients; it has no reduction tower, completion or pro-etale object.
-Source: diagonal coefficient changes (3), residue one, using the arbitrary-base
-finite P1 integral normalization.
-
-Proof: choose an arbitrary-base finite P1 splitting and use uniqueness of the
-positive supported Kummer boundary to identify its diagonal class with the
-canonical class. The first-projection integral of that class is the identity.
-Local triviality of the finite Tate line identifies its endomorphisms with
-endomorphisms of the monoidal unit. Every such action is a natural
-endomorphism of the identity functor, hence commutes with all Ext classes;
-this is proved by dimension shifting through injective objects. Move the
-two scalar actions to the supported source and apply the normalized integral.
-The resulting derived equality gives equality after ordinary direct image
-by the degree-zero homology comparison. To reflect scalar equality on the
-supported source, use the two inverse-image/direct-image adjunctions of the
-first projection and the diagonal. The first inverse image is fully faithful
-by connected-fibre smooth base change; its composite with diagonal inverse
-image is the identity. The composite adjunction unit therefore makes the
-diagonal unit invertible after first direct image. Naturality of unit actions,
-followed by the invertible first-adjunction counit on its unit object, reflects
-the scalar equality. Bijectivity of unit action on a rank-one object finishes.
-This argument also includes empty schemes and the zero coefficient ring. -/
+etale coefficients; it has no reduction tower, completion or pro-etale object. -/
 theorem finiteEtaleDiagonalClass_postcomp_injective
     (Y : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

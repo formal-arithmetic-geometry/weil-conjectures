@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Degreewise signed projection of module Čech cochains
 
-Source: Stacks Project, Tags 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Full tuple coordinate before pushforward and extension.
-Source: Stacks 01FK. -/
+/-- Full tuple coordinate before pushforward and extension (Stacks, Tag 01FK). -/
 noncomputable def orderedCechNaturalCoordinate {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -40,8 +41,7 @@ noncomputable def orderedCechNaturalCoordinate {X' : Scheme.{u}}
       (Functor.whiskeringRight _ _ _).obj M.presheafModuleCat).obj
         (op (∏ᶜ fun l ↦ W₀ (z l)))) y).app (op B) s
 
-/-- The signed finite sum in one degree on an open of the source scheme.
-Source: Stacks 01FK. -/
+/-- The signed finite sum in one degree on an open of the source scheme (Stacks, Tag 01FK). -/
 noncomputable def orderedCechNaturalProjectionValue {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -64,8 +64,8 @@ noncomputable def orderedCechNaturalProjectionValue {X' : Scheme.{u}}
               (orderedCechNaturalCoordinate M W₀ D e p B (fun l ↦ ⟨(y (σ l)).down⟩) s))
     else 0
 
-/-- Coordinate condition for degreewise module maps; no differential condition is imposed.
-Source: Stacks 01FK. -/
+/-- Coordinate condition for degreewise module maps; no differential condition is imposed
+(Stacks, Tag 01FK). -/
 def IsOrderedCechNaturalProjection {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -82,24 +82,8 @@ def IsOrderedCechNaturalProjection {X' : Scheme.{u}}
       orderedCechNaturalProjectionValue M W₀ D e p B y s
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The finite signed formula assembles into degreewise module-sheaf maps.
-Source: Stacks 01FK, signed extension, and 01FM, the termwise map cπ.
-
-Proof: In degree p project to each sorted tuple using e, restrict to its ordered
-intersection, and then restrict back to the full tuple intersection, multiplying
-by the sign. Sum over permutations passing the strict-increase filter. These are
-additive natural transformations: naturality of e and coefficient restrictions
-identifies the two composites for every inclusion of opens. The product universal
-property assembles all tuple components; compose with e inverse. To check local
-linearity, apply e and every tuple projection. The hypothesis hlinear makes each
-input component semilinear over the corresponding projection to B. Semilinearity
-of the two restrictions makes each summand semilinear over the full tuple projection
-to B, since arrows between opens are unique. Integer multiplication commutes with
-this scalar action, and finite sums preserve it. Coordinate injectivity then gives
-linearity of the assembled map. Thus PresheafOfModules.homMk and the full forgetful
-functor from module sheaves lift this actual natural transformation. No differential
-compatibility is needed. If r = 0 the tuple product is empty and D.X p is zero; if
-p + 1 > r all summands are zero. Both cases give the zero map. -/
+/-- The finite signed formula assembles into degreewise module-sheaf maps
+(Stacks, Tags 01FK and 01FM). -/
 theorem orderedCech_degreewise_projection_exists {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)

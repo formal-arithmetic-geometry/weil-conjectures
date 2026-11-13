@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Algebraization after a projective modification
 
-Source: Stacks Project, Proposition 088C, last paragraph, using Tags 0200, 0887 and 0885.
+## References
+
+* [Stacks Project, Tags 088C, 0200, 0887, 0885]
 -/
 
 @[expose] public section
@@ -33,26 +35,7 @@ namespace AlgebraicGeometry
 
 /-- A coherent formal system on a proper scheme algebraizes after a proper modification
 which is an isomorphism over a dense open. Only the pulled-back system is algebraized.
-Source: Stacks Project, Proposition 088C, last paragraph, using Tags 0200, 0887 and 0885.
-
-Proof:
-1. Apply Chow's lemma to f to obtain q:Y -> X proper and surjective, an isomorphism over
-some dense open U, and an immersion of Y into projective space over Spec A with finite
-homogeneous index set. Both X and Y are Noetherian by finite type over the Noetherian base.
-The composite Y -> Spec A is proper. Since projective space is separated over Spec A,
-the immersion into it is proper, hence closed.
-2. The existing finite-coordinate theorem embeds that projective space as a closed linear
-subscheme of one indexed by ULift(Fin(n+1)), preserving its base projection. It uses a
-surjective graded polynomial-ring map with one extra coordinate sent to zero, so also
-handles an empty coordinate type. Compose Chow's closed immersion with this embedding.
-3. Formal-systems pullback (Tag 0887) makes the termwise tensor pullback of M a coherent
-formal module on Y for J.comap q. Functoriality of comap identifies this with the ideal
-extended from I along q followed by f.
-4. Apply projective existence (Tag 0885) to the closed embedding. Essential surjectivity
-gives coherent F and a completion isomorphism with the pulled-back formal module.
-Apply the full-subcategory inclusion and reverse the isomorphism. The defining inclusion
-equation of the pullback functor identifies its object with M.obj followed by tensor
-pullback, giving exactly beta. The construction uses no algebraization on X or induction. -/
+(Stacks, Proposition 088C) -/
 theorem proper_existence_projective_pullback
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

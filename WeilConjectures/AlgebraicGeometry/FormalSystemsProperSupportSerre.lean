@@ -25,7 +25,9 @@ import WeilConjectures.AlgebraicGeometry.FormalModuleSupportConstant
 /-!
 # Serre subcategories of coherent formal modules with proper support
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0CYV.
+## References
+
+* [Stacks Project, Tag 0CYV](https://stacks.math.columbia.edu/tag/0CYV)
 -/
 
 @[expose] public section
@@ -214,13 +216,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two full subcategories of coherent formal modules in Lemma 0CYV are Serre
-subcategories.  The proof uses the support and annihilator calculations from the
-node proof, together with abelianity of `CoherentFormalModule`.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0CYV.
-Proof: supports in a short exact sequence are the union of the outer supports;
-proper closed subsets and finite unions remain proper.  For the second class,
-annihilators pass to subobjects and quotients, while extensions are annihilated
-by the product ideal and the corresponding scheme-theoretic union. -/
+subcategories (Stacks, Cohomology of Schemes, Lemma 0CYV). -/
 theorem formalSystems_properSupport_serre
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsNoetherian S] [LocallyOfFiniteType f] [QuasiCompact f]

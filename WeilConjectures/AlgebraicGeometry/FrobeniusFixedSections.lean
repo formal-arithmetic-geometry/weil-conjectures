@@ -16,14 +16,15 @@ import WeilConjectures.RingTheory.ArtinSchreierKernel
 /-!
 # Frobenius-fixed global sections of arbitrary schemes
 
-Source: Stacks Project, Etale Cohomology, Tag 0A3J, `section-artin-schreier`, opening
-Artin–Schreier exact sequence; the current, automorphism paragraph.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.exists_frobeniusFixedSections_ringEquiv`: the ring of locally constant
   prime-field functions is naturally the subring of Frobenius-fixed global sections. The restriction
   clause characterizes the equivalence as gluing the constants on the open fibres.
+
+## References
+
+* Stacks Project, Etale Cohomology, Tag 0A3J.
 -/
 
 @[expose] public section
@@ -249,28 +250,7 @@ private theorem gluedHom_bijective (p : ℕ) (hp : p.Prime) (W : Scheme.{u})
 scheme on which `p` vanishes. The existential subring has exactly the carrier `e ^ p = e`, and the
 restriction clause specifies the canonical gluing map, rather than an arbitrary equivalence.
 The scalar `a.val` denotes the canonical constant `a · 1`, including in the zero section ring.
-Source: Stacks Project, Etale Cohomology, Tag 0A3J, `section-artin-schreier`,
-opening exact sequence, automorphism paragraph.
-
-Proof:
-1. The finitely many open fibres of a locally constant function are also closed and disjoint.
-   Glue their constant sections by the structure-sheaf axiom. The field calculation gives `a ^ p = a`; restriction and sheaf uniqueness show
-   that the glued section is fixed by the p-th power map, including on empty fibres.
-2. At a point, the stalk of a fixed section is a nonzero local ring in which `p = 0`, and the
-   germ is fixed by the p-th power map. The local-ring Artin–Schreier kernel gives a unique prime-field constant equal to it.
-3. Equality of germs means equality on a smaller neighbourhood, so
-   the unique pointwise constants define a locally constant function. Equality of sections from
-   equality of germs shows that it is inverse
-   to the gluing map. No reducedness assumption is used.
-4. The sections with `e ^ p = e` form a subring: Frobenius additivity is checked in each stalk,
-   which has characteristic `p`. Gluing is a ring homomorphism into it because the prime-field
-   map of each stalk is one, and germs determine sections. It is injective since `ZMod p` injects
-   into each nonzero stalk, and surjective by step 3. The constant-function formula and the
-   fibre-restriction clause follow by comparing germs. On the empty scheme both rings are
-   singleton.
-5. For a scheme morphism, the germ of a pulled-back section is the stalk map applied to the germ
-   of the section; stalk maps are unital ring maps, so
-   both sides of the naturality formula have germ `b (v x)` at `x`. Germs determine sections. -/
+(Stacks, Tag 0A3J) -/
 theorem exists_frobeniusFixedSections_ringEquiv (p : ℕ) (hp : p.Prime) :
     ∃ S : (W : Scheme.{u}) → (p : Γ(W, ⊤)) = 0 → Subring Γ(W, ⊤),
     ∃ ι : (W : Scheme.{u}) → (hW : (p : Γ(W, ⊤)) = 0) →

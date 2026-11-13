@@ -124,14 +124,7 @@ private theorem perfect_shift (X : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The explicitly restricted objects are perfect on an open subscheme, including
-all shifts. Source: Stacks Project, Tags 09UA and 08CM.
-Proof: Transport each localized module category through `Modules.overEquiv`
-to the already supplied derived category on its open scheme. This constructs
-its localization as the composite of the exact equivalence on complexes with Q.
-Exact restriction agrees with derived pullback by uniqueness of the left-derived
-functor. Derived pullback preserves perfectness. Shift the local strictly perfect
-models, translating their bounds by n and retaining each term's retract maps.
-An empty open has no points at which perfectness must be checked. -/
+all shifts (Stacks, Tags 09UA and 08CM). -/
 theorem perfect_hom_open_stage_data
     (Y : Scheme.{u})
     [∀ Z : Scheme.{u},

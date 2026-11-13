@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 
 /-! # Invertible evaluation diagonal
 
-Source: Stacks Project, Tags 08DQ and 08DM.
+## References
+
+* Stacks Project, Tags 08DQ and 08DM.
 -/
 
 @[expose] public section
@@ -82,20 +84,8 @@ private theorem dualProjection_isIso (X : Scheme.{u}) (U : X.Opens)
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 600000 in
 -- Naturality rewrites elaborate the sheaf tensor and internal Hom structures.
-/-- The diagonal component is invertible whenever its module evaluation is.
-Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`,
-termwise evaluation; Tag 08DM, degree of the dual complex.
-
-Proof: in degree -r of Hom(P,O[0]), every product factor except the r-th
-vanishes, since O[0] is zero in all other degrees. The product universal property
-therefore makes the r-th projection an isomorphism. Compose it with internal Hom
-of the single-complex degree-zero unit isomorphism. In the displayed component,
-r+(-r)=0 and (r+n)+(-r)=n. Naturality of tensor-Hom adjunction, the associator,
-the braiding and the right unitor identify this component with tensoring that
-dual projection by F^(r+n), followed by moduleDualEvaluation. The degree transport
-is the identity because its endpoints coincide. Both factors are isomorphisms:
-tensoring preserves the first and hblock supplies the second. This uses no bound
-on P or F, and also applies to zero modules and the empty open. -/
+/-- The diagonal component is invertible whenever its module evaluation is
+(Stacks, Tags 08DQ and 08DM). -/
 theorem ordinaryEvaluation_diagonal_block (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ) (n r : ℤ)
     (hblock : IsIso (SheafOfModules.moduleDualEvaluation

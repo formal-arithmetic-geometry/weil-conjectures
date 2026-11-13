@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.GenericOpenFibreDensity
 
 /-! # Generic affine chart and geometric fibre density
 
-Source: Stacks Project, Tags 0559 and 054X.
+## References
+
+* Stacks, Tags 0559 and 054X
 -/
 
 @[expose] public section
@@ -23,27 +25,7 @@ open CategoryTheory Limits Topology
 namespace AlgebraicGeometry
 
 /-- An open source subscheme with geometrically irreducible generic fibre has dense
-image in every geometric fibre after shrinking the base.
-
-Source: Stacks Project, Tag 054X and the affine-open reduction in Tag 0559.
-Proof: the generic fibre of the open subscheme is nonempty by geometric
-irreducibility. It is open in the irreducible generic fibre of X, so is dense.
-Its closed complement therefore has nowhere dense generic fibre. To prove the shrinking
-assertion of Tag 054X, reduce the base,
-then use generic
-flatness to shrink to an affine base where both X and the reduced closed complement
-Z are flat and locally finitely presented. If Z has interior in a fibre, choose a generic
-point of an irreducible component of that fibre lying in Z. Flatness of Z lifts
-this point by generalization to the generic fibre. Constancy of fibre dimension
-along this generalization for the two flat locally finitely presented morphisms (Stacks
-Lemma 37.22.10) makes the generic dimension of Z equal that of X at the lifted
-point. This contradicts the nowhere dense generic complement. Thus on this
-neighbourhood the complement is nowhere dense in every fibre. For any residue-field
-extension, the base-change projection is an open surjection, so the inverse image
-of the dense open is still dense. The displayed map is the base change of the open
-immersion from the open fibre to the full fibre and has exactly this inverse image
-as its range. Thus it has dense range, as claimed. Reduction of the base in Tag
-054X preserves fibre spaces, so nilpotents do not require extra hypotheses. -/
+image in every geometric fibre after shrinking the base (Stacks, Tag 054X). -/
 theorem exists_open_geometric_fibre_dense_of_open {X T : Scheme.{u}}
     (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]
     (W : X.Opens) (η : T) (hη : IsGenericPoint η Set.univ)

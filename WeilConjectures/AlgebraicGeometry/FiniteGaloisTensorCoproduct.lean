@@ -13,7 +13,9 @@ public import Mathlib.FieldTheory.Galois.Basic
 /-!
 # Fibre product of a finite Galois field extension
 
-Source: Stacks Project, `pione.tex`, Tag 03SF.
+## References
+
+* Stacks Project, Tag 03SF
 -/
 
 @[expose] public section
@@ -24,15 +26,10 @@ open CategoryTheory CategoryTheory.Limits TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- For a finite Galois
-extension `E/L`, a supplied algebra isomorphism sending `a ⊗ b` to `(a * q b)₍q₎`
-identifies the affine fibre product with the finite coproduct of copies of `Spec E`.
-Under the affine pullback isomorphism,
-the component maps are induced by the coordinate projections of the product ring. On the `q`-th component the first pullback
-projection is the identity and the second is `Spec q`: the tensor inclusions
-`a ↦ a ⊗ 1` and `b ↦ 1 ⊗ b` become `a ↦ a` and `b ↦ q b` after evaluation at `q`.
-The argument includes `E = L`, when the automorphism group has one element.
-Source: Stacks Project, `pione.tex`, Tags 03SF, 01I4, and 00ED. -/
+/-- For a finite Galois extension `E/L`, a supplied algebra isomorphism sending `a ⊗ b` to
+`(a * q b)₍q₎` identifies the affine fibre product with the finite coproduct of copies of
+`Spec E`, with first projection the identity and second projection `Spec q` on the `q`-th
+component (Stacks, Tags 03SF, 01I4, 00ED). -/
 theorem finiteGaloisTensorCoproduct
     (L E : Type u) [Field L] [Field E] [Algebra L E]
     [FiniteDimensional L E] [IsGalois L E]

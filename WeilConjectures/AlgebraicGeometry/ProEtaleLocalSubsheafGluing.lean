@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalSubobjectKernelEffective
 
 /-! # Descent of compatible local subobjects of an abelian sheaf
 
-Source: Stacks Project, Sites, Tag 04TR.
+## References
+
+* Stacks Project, Sites, Tag 04TR.
 -/
 
 @[expose] public section
@@ -21,16 +23,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Compatible local subobjects of an abelian sheaf descend, and the resulting
-subobject has the expected local factorization property.
-
-Source: Stacks Project, Sites, Tag 04TR.
-
-Proof: take the kernel of the map from Q to the product of the pushforwards
-of the local cokernels. Its inclusion is monic. The canonical local comparisons
-are isomorphisms by the kernel-effectivity theorem. Their commutation equations
-are the proved monoLift equations. Finally, a morphism locally factoring through
-the q_i has zero composite with every adjoint local quotient map, hence with their
-product; kernel.lift supplies its factor through the global subobject. -/
+subobject has the expected local factorization property (Stacks, Sites, Tag 04TR). -/
 theorem exists_subsheaf_of_compatible_local_monomorphisms
     (X : Scheme.{u}) (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)

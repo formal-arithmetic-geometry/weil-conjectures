@@ -16,7 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Killing the differential defects of a degreewise family
 
-Source: Stacks Project, Tags 09RE and 01CP.
+## References
+
+* Stacks Project, Tags 09RE and 01CP.
 -/
 
 @[expose] public section
@@ -68,28 +70,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A degreewise family already defined near x becomes a chain map after shrinking
 if its stalk commutes with the differentials. The second conclusion records the
-stalks of the restricted components in the original comparison coordinates.
-
-Source: Stacks Project, Tag 09RE, finite-presentation shrinking calculation, and
-Tag 01CP, injectivity of the internal-Hom stalk comparison.
-
-Proof: For each adjacent degree form the difference of g n followed by d_Q and
-of d_P followed by g (n+1). The hypothesis says its stalk is zero. Finite
-presentation of P.X n and injectivity of the internal-Hom stalk comparison say
-that this is a zero germ of a local morphism. The germ equality criterion gives
-a neighbourhood on which that morphism vanishes. Only degrees n in the bounded
-support interval of P need checking; outside it the source P.X n is zero.
-Intersect these finitely many neighbourhoods inside W and choose an affine V
-containing x. Restrict the family to V, using transitivity of overMap to regard
-its components as maps between the direct restrictions from U. This gives k
-and all adjacent chain equations. A comparison between the V stalk and the W stalk
-after restriction, transported by `exists_openStalk_restriction_transport`, composes
-with e to the canonical comparison eV. Naturality and
-restriction transitivity give the displayed conjugation formula for k. The
-comparison is natural for every complex, not just P and Q. With an empty support
-interval or rank zero the corresponding equations and maps are unique. This
-lemma extends no prescribed map: it starts with a family already defined on W.
-No perfectness hypothesis on Q is needed. -/
+stalks of the restricted components in the original comparison coordinates
+(Stacks, Tags 09RE and 01CP). -/
 theorem exists_affine_perfect_open_stalk_degreewise_shrink
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (P Q : CochainComplex

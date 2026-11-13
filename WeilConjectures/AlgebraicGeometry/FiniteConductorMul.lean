@@ -14,27 +14,16 @@ import Mathlib.RingTheory.Ideal.Maps
 
 /-! The ideal-power form of the finite conductor statement.
 
-Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
+## References
+
+* Stacks Project, Varieties, Lemma 09N2.
 -/
 @[expose] public section
 universe u v
 
 /-- If a finite intermediate subalgebra has conductor exponent `r`, every element of
 `(J(B)A)^r` multiplied by an element of `A` comes from `B`. The explicit hypothesis
-`hconductor` states the base ideal power conductor property. The proof extends it
-to the mapped ideal by span induction.
-
-Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
-
-Proof: rewrite the mapped ideal power as the map of the base ideal power. Induct on
-membership in the span defining that map. The conductor hypothesis handles a mapped
-base element; zero and sums are preserved by the algebra map. For a scalar multiple,
-absorb the scalar into the multiplier in A and commute the factors.
-
-The original statement was false without `hconductor`: r = 0 and z = 1 would force
-A to equal the image of B. This explicit conductor hypothesis is retained from the
-finite conductor theorem at the caller.
--/
+`hconductor` states the base ideal power conductor property. (Stacks, Tag 09N2.) -/
 /- STATEMENT-DISPUTED: the original statement omitted the conductor property for r.
 At r = 0 and z = 1 it would force every element of A to come from B.
 The corrected statement below makes the source's suitable-exponent condition explicit. -/

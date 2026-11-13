@@ -14,7 +14,8 @@ public import Mathlib.RingTheory.Nilpotent.Lemmas
 
 /-! # GenericProductIdempotentBound
 
-Generic finite-algebra calculation from the smooth purity blueprint.
+Generic finite-algebra calculation: after one principal localization, the coordinate idempotents
+of a generic product lie in the image of the reduced product map.
 -/
 
 @[expose] public section
@@ -63,19 +64,7 @@ private theorem clear_span_denominator
     exact (Submodule.span D S).smul_mem n hx
 
 /-- After one principal localization, every reduced generic product map compatible
-with the fixed splitting contains all the coordinate idempotents in its image.
-
-Proof: Put C = (B tensor_A R0)_red. Tensor associativity and localization
-of the nilradical identify its generic localization with the given product via e.
-For each of the finitely many coordinate idempotents, choose a numerator in C and a
-nonzero R0 denominator. Take t to be the product of these denominators. It is nonzero
-because R0 is a domain. If t divides s, every denominator divides s, hence is a unit
-in R0[1/s]. Map the chosen numerator to (B tensor_A R)_red and multiply it by the
-inverse of the image of its denominator. Its image in the generic product is exactly
-the desired coordinate idempotent. Compatibility on pure tensors, together with
-R-linearity and surjectivity of the quotient, identifies any specified f with this
-canonical map, so the construction works for every such f. For r = 0 choose t = 1;
-there is no coordinate to lift. Neither injectivity nor Noetherianity is used. -/
+with the fixed splitting contains all the coordinate idempotents in its image. -/
 theorem exists_generic_product_idempotent_bound
     (A : Type u) [CommRing A]
     (B : Type v) [CommRing B] [Algebra A B]

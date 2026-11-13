@@ -15,7 +15,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Germ comparison for an already descended local factorization
 
-Source: Stacks Project, Modules, Lemma 01CP, third paragraph.
+## References
+
+* [Stacks, Tag 01CP]
 -/
 
 @[expose] public section
@@ -27,23 +29,7 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- If a lifted local map has already descended through the restricted source
 epimorphism, the descended map induces the prescribed map on all section germs.
-There is no finite presentation or finite free source assumption, and this result
-neither constructs a generator lift nor kills relations nor constructs the descent.
-
-Source: Stacks Project, Modules, Lemma 01CP, third
-paragraph, comparing the two finite-coordinate kernels after cokernel descent.
-
-Proof: Restricting F first to U, then to V, then to W is canonically isomorphic
-to restricting F to W, with identity maps on the section carriers. The analogous
-identification for G changes θ into a morphism F|W to G|W; forget its sheaf proof
-to obtain φ in internal Hom. Given a section s on Z inside W containing x, use
-the epimorphism b and exists_local_module_epi_germ_lift to choose a representative
-t on Z' inside Z whose image has the same germ as s. The canonical stalk internal
-Hom evaluation respects that equality of germs. The factorization equation hθ,
-evaluated at Z', identifies φ applied to b(t) with ψ(t). The formula hψ identifies
-the latter's germ with χ of the germ of b(t). Use equality with the germ of s
-once more. Every step is linear and natural; no finiteness or uniqueness is used.
-For zero objects, the same epimorphism/germ argument still applies. -/
+There is no finite presentation or finite free source assumption (Stacks, Tag 01CP). -/
 theorem exists_internalHom_of_local_stalk_factorization
     (X : RingedSpace.{u}) (F G : Modules X) (x : X)
     (U V W : Opens X) (hxW : x ∈ W) (i : V ⟶ U) (j : W ⟶ V)

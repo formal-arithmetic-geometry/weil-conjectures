@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Local invertibility of the glued rationalization
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -173,18 +175,7 @@ private theorem rationalizeEmbedding_restrict_eq
     ((rationalizeEmbedding_unit a L U M e ((Over.map f).op.obj T) m).trans
       ((h T m).trans (congrArg (P.rationalization.hom.val.app T) he.symm)))
 
-/-- The scalar extension of the explicitly constructed glued embedding is invertible.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60, descent of lattices.
-Proof: over the covering object indexed by f: V → U, use the compatible-tuple
-projection to identify the glued integral module with its chosen local lattice.
-The slice tensor comparison is invertible. On tensors 1 ⊗ m, the restriction of
-the glued rationalization equals the given local rationalization: the formula for
-the sheafification unit reduces this to the proved formula for the glued embedding.
-The adjunction for scalar extension and the sheafification universal property
-then give equality on all sections. Thus each restriction of this morphism is an
-isomorphism. Apply the local criterion for isomorphisms of sheaves to the covering
-family on the slice, and reflect the resulting isomorphism to module sheaves.
-This also applies to empty covers, zero modules, and varying finite local rank. -/
+/-- The scalar extension of the explicitly constructed glued embedding is invertible. -/
 theorem gluedLatticeRationalization_isIso
     {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)

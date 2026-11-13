@@ -10,8 +10,10 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Composition of the two comparisons in a module recovery equation
 
-Source: the canonical comparison construction in
-lem-pc-open-cover-map-lift-transport (Stacks Project, Tags 0095 and 0096).
+## References
+
+* [Stacks, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
 -/
 
 @[expose] public section

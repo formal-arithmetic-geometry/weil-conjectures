@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit
 /-!
 # Ordinary etale projective-line adjunction for finite coefficients
 
-Source:; Stacks Project, Tag 03PL.
+## References
+
+* [Stacks, Tag 03PL]
 -/
 
 @[expose] public section
@@ -157,27 +159,7 @@ attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 /-- Ordinary etale projective-line duality, with the scalar-extended Kummer class,
 normalized trace and actual counit, on the entire derived categories. The chosen
 transport is fixed by its roots-of-unity and pure-tensor normalizations; the
-record's counit equation uses precisely the ordered projection map.
-Source:,
-and def-amb-p1-trace; Stacks Project, Tag 03PL.
-
-Proof: obtain the roots and pure-tensor normalized transport from
-lem-asd-etale-finite-twist-pullback. The comparison
-lem-asd-ordinary-finite-class-comparison identifies the actual integral-generator
-class map with sheaf cohomology, so the Kummer class has a unique Chern representative
-on every Noetherian projective line. Apply lem-asd-ordinary-finite-p1-kummer-maps to
-these representatives. Its specified two-component maps are invertible; use asIso,
-whose hom is exactly that map. The diagonal result
-lem-asd-ordinary-finite-p1-diagonal-unit supplies a natural unit and both component
-triangle equations for the explicitly constructed inverse-projection trace counit.
-Adjunction.mkOfUnitCounit builds the adjunction with that actual counit. Its
-normalization is the proved inverse-projection equation. The Chern trace equation
-follows by precomposing the splitting with its second injection and cancelling the
-isomorphism. Finally use the decomposition square for its first base-change equation.
-Precompose the trace square with the image of the splitting hom, cancel the inverse,
-and use biprod.lift_snd; this derives the second equation without another geometric
-assumption. The diagonal result supplies the third, actual-counit equation.
--/
+record's counit equation uses precisely the ordered projection map. -/
 theorem exists_ordinaryFiniteP1Adjunction (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
     ∃ (t : OrdinaryFiniteTwistTransport A N hA)

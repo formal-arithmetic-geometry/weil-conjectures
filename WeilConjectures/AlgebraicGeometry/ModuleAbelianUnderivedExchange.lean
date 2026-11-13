@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageC
 
 /-! # Coefficient forgetting and underived exchange
 
-Source: Stacks Project, Remark 07A7, adjunction-mate construction of exchange.
+## References
+
+* [Stacks, Remark 07A7]
 -/
 
 @[expose] public section
@@ -37,24 +39,8 @@ private theorem moduleAbelianUpperStarIso_unit
   exact (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv _ _
     |>.apply_symm_apply _
 
-/-- The fixed inverse-image mates and direct-image evaluation identities respect exchange.
-
-Source: Stacks Project, Remark 07A7, and Tags 03D2 and 03D3.
-
-Proof: First use the forward inverse-image comparisons. Apply the adjunction
-bijection for g on abelian sheaves to both sides of the asserted forward
-compatibility. The defining mate identity replaces the abelian unit followed
-by the g comparison with the forgotten module unit. The unit formula for
-baseChangeMap replaces that unit followed by exchange with f_* of the g'
-unit and the squareLowerStarIso. The latter commutes with forgetting:
-all pushforward composition isomorphisms are obtained by evaluation on
-base changes. Apply the defining mate identity for the g' comparison in
-the opposite direction. Naturality of squareLowerStarIso now identifies
-the two adjoints. Injectivity of the adjunction bijection proves forward
-compatibility. Finally compose with the inverses of the g and g' comparison
-isomorphisms to obtain the displayed equation. Direct-image coefficient
-identifications are identities, so their insertion changes no map. The
-argument applies to any commutative square, without cartesianness. -/
+/-- The fixed inverse-image mates and direct-image evaluation identities respect exchange
+(Stacks, Remark 07A7, Tags 03D2 and 03D3). The square need not be cartesian. -/
 theorem moduleAbelianUnderivedExchange_compatibility
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}

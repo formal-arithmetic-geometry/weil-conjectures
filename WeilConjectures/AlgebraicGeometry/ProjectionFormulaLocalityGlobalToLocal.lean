@@ -25,9 +25,8 @@ namespace AlgebraicGeometry
 variable {X Y : Scheme.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-/-- A global isomorphism remains an isomorphism after every open restriction.
-Source: Stacks Project, perfect.tex, Lemma 36.22.1 (Tag 08EU).
-The restriction functor preserves isomorphisms. -/
+/-- A global isomorphism remains an isomorphism after every open restriction
+(Stacks, Tag 08EU). -/
 theorem projectionFormula_global_to_local
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (E : schemeDerivedCategory X) (K : schemeDerivedCategory Y)

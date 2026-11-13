@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 
 /-! # The ordinary scalar tensor square on homotopy categories
 
-Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51;
-explicit comparison of the ordinary tensor and single-complex constructions.
+## References
+
+* Bhatt–Scholze, Remark 6.8.15 and Lemma 6.5.9(5).
 -/
 
 @[expose] public section
@@ -183,20 +184,7 @@ attribute [local irreducible] residueOrdinaryUpperStarMonoidal
 
 set_option maxHeartbeats 900000 in
 -- The degreewise calculation compares several concrete module-functor composites.
-/-- The scalar tensor square agrees with ordinary pullback's comonoidal map.
-Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51.
-
-Proof. Use the balanced coequalizer presentation of extension of scalars to
-identify restriction after extension with tensoring by the restricted regular
-module. Precompose the comparison with the coequalizer epimorphism. The two
-maps then apply pullback to the coefficient and the module, followed by their
-scalar action. Naturality of the coefficient map identifies the balancing
-relations. The inverse monoidal unit in the coefficient isomorphism cancels
-the pulled-back regular module. Faithfulness of the forgetful functor gives
-the ordinary module equality. Apply this equality in every degree of a complex;
-naturality makes it commute with the differentials. The single tensor
-comparison and its naturality then give the asserted homotopy equality.
-This uses neither derived categories nor flatness. -/
+/-- The scalar tensor square agrees with ordinary pullback's comonoidal map. -/
 theorem residueOrdinaryTensorPull_homotopy
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]

@@ -10,11 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 
 /-! # Core counit composition calculation
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
-
 This is the two-morphism counit factorization on a complex. The general
 compatibility equation additionally uses naturality at the fixed morphism
 and the associativity law for three derived pullbacks.
+
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S.
 -/
 
 @[expose] public section
@@ -90,18 +92,7 @@ variable [∀ Y : Scheme.{v},
 -- The pinned dependent counits require substantial instance elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Composition of the termwise counits on a complex.
-
-Source: Stacks Project, Tags 06YJ and 0D5S.
-
-Proof: evaluate the defining left-derived-lift equation for the pinned comparison
-at the homotopy class of P = overEquiv(U)(K). Whisker it with the quotient from
-complexes. Naturality of quotientCompQhIso and mapHomotopyCategoryFactors rewrites
-its three counits as picardTermwiseCounit. The ordinary tensor comparison becomes
-the inverse of the termwise model restriction comparison. Precompose with the
-inverse derived comparison and postcompose with the ordinary comparison to get
-the displayed equation. Only these comparisons are canceled; no counit needs to
-be invertible, so this works for zero complexes and empty schemes as well. -/
+/-- Composition of the termwise counits on a complex (Stacks, Tags 06YJ and 0D5S). -/
 theorem picard_termwise_counit_composition
     (W : Scheme.{v}) (U : W.Opens)
     (K : CochainComplex

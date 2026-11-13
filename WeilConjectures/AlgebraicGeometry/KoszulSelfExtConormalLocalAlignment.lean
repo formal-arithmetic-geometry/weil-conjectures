@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover
 import WeilConjectures.Topology.GlueSheavesOfModules
 /-! # Alignment of local Koszul identifications
 
-Source: Stacks Project, Tag 0BQY, comparison of regular generators. -/
+## References
+
+* Stacks Project, Tag 0BQY (comparison of regular generators).
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -81,27 +84,7 @@ private theorem iso_of_compatible_cover
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Local isomorphisms can be adjusted by automorphisms of the source so that
-all their components agree on overlaps.
-
-Source: Stacks Project, Tag 0BQY, change of generators in the Koszul resolution.
-
-Proof: On each regular chart use the normalized Koszul Hom coordinate map.
-On intersections refine by affine subopens around each point. The conormal
-bases over its nonzero local ring have equal length; shrink so that a generator
-substitution is invertible modulo the ideal. Empty intersections need no check.
-A substitution between the two regular generator sets induces a chain map by
-exterior powers in every degree.
-The contraction identity checks the chain equation. Modulo the immersion ideal
-its exterior powers are the conormal coordinate changes, whose duals are precisely
-the Hom coordinate changes. Resolution comparison homotopies remove the choices
-of substitutions, and localization preserves the formulas. Separatedness gives
-agreement on every smaller open. Thus normalized comparisons glue, together with
-their inverses, on each of the supplied neighborhoods. Comparing a supplied local
-isomorphism e_z with the glued normalized one c_z gives the source automorphism
-a_z = c_z followed by e_z.inv; its composite with e_z.hom is c_z.hom by the
-inverse identity. This proves the asserted overlap
-identities without assuming that arbitrary local isomorphisms already agree.
-The empty scheme imposes no conditions, and degree zero uses the quotient unit. -/
+all their components agree on overlaps (Stacks, Tag 0BQY). -/
 theorem koszulRegularImmersion_self_ext_conormal_local_alignment
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

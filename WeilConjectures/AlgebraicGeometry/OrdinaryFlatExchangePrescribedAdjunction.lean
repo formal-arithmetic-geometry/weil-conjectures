@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionIso
 
 /-! # Ordinary flat exchange with a prescribed adjunction
 
-Source: Stacks Project, Tags 02KH and 02N7.
+## References
+
+* [Stacks, Tags 02KH and 02N7]
 -/
 
 @[expose] public section
@@ -62,30 +64,8 @@ private theorem baseChange_isIso_of_iso_top {A B A' A'' T : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The prescribed composite adjunction comparison requires additional elaboration.
-/-- Ordinary flat exchange, normalized for the supplied adjunction on f.
-Source: Stacks Project, Tags 02KH (part (1), degree zero) and 02N7 (mate construction).
-
-Proof: Choose tensor-pullback adjunctions on g, q and p. The sectionwise
-pushforward-composition isomorphisms and the cartesian-square equation give an
-isomorphism q_* f_* = p_* g_*. Its conjugate under the composite adjunctions
-(g^* followed by p^*) and (f^* followed by q^*) gives c, using the supplied
-adjunction on f. Take the horizontal mate under the adjunctions on q and g to
-obtain B. Naturality follows from the unit, counit and composition comparisons.
-For the unit identity, use unit_conjugateEquiv_symm on the composite adjunctions.
-Expand their units: the f,q unit followed by the pushforward square equals the
-g,p unit followed by the pushforward of c. Take the g-adjoint of the claimed
-left side. Naturality of the g-unit moves the f-unit to the front; the defining
-adjoint equation for B turns the remaining map into f_* of the q-unit followed
-by the pushforward square. Substitute the composite-unit equation. This is the
-g-adjoint of the claimed right side, so injectivity of homEquiv proves equality.
-In degree zero the resolution-defined comparison of 02N7 is precisely this mate:
-transport through the canonical zeroth-derived-functor identifications, evaluate
-on an augmented resolution, and use its augmentation equation. Degree-zero flat
-base change (02KH) makes B invertible for every quasi-coherent M, since proper f
-is quasi-compact and quasi-separated. The definition of B uses only the chosen
-adjunctions and the pushforward comparison, so it is natural on all modules,
-including non-quasi-coherent modules. Empty schemes and zero modules require no
-separate case: the same unit and counit equations apply. -/
+/-- Ordinary flat exchange, normalized for the supplied adjunction on `f`
+(Stacks, Tags 02KH and 02N7). -/
 theorem ordinary_flat_exchange_prescribed_adjunction
     {X Y S : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : S ⟶ Y) [Flat g]
     (adj : Scheme.Modules.tensorPullback f ⊣ Scheme.Modules.pushforward f) :

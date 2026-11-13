@@ -13,13 +13,14 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackTensorIsIso
 /-!
 # Pullback of modules and tensor products
 
-Source: Stacks Project, Modules, Lemma 17.16.4 (Tag 01CD), label
-`lemma-tensor-product-pullback`.
-
 ## Main statement
 
 The tensor-formula pullback commutes naturally with tensor products and carries pure tensor
-sections to pure tensor sections, as in the source statement.
+sections to pure tensor sections.
+
+## References
+
+* [Stacks, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
 -/
 
 @[expose] public section
@@ -174,15 +175,7 @@ private theorem tensorComparison_naturality {X Y : Scheme.{v}} (f : X ⟶ Y)
 
 /-- Pullback of modules commutes with tensor products, naturally and on sections. The pullback
 `f^*u` of a section `u` over `V` is the component over `f ⁻¹ᵁ V` of the unit of the chosen
-adjunction `Classical.choose (exists_tensorPullbackAdjunction f)`.
-
-Source: Stacks Project, Modules, Lemma 17.16.4 (Tag 01CD), label
-`lemma-tensor-product-pullback`.
-Proof: construct the comparison by adjunction from the bilinear map on sections; check its
-stalks using the stalk pullback and tensor lemmas and the base-change tensor identity; detect
-isomorphisms on stalks. Naturality follows from the same adjunction and the sheaf tensor
-universal property.
--/
+adjunction `Classical.choose (exists_tensorPullbackAdjunction f)` (Stacks, Tag 01CD). -/
 theorem module_pullback_tensor {X Y : Scheme.{v}} (f : X ⟶ Y) :
     ∃ e : ∀ (M N : Y.Modules),
         (tensorPullback f).obj (M ⊗ N) ≅

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteOpenPartitionThickeningTransport
 
 /-! # Descent of finite splitting through a surjective closed immersion
 
-Source: Stacks Project Tag 04DZ and steps 2--3 of
-`lem-weil-pbc-generic-finite-noetherian-scheme-splitting`.
+## References
+
+* Stacks Project, Tag 04DZ.
 -/
 
 @[expose] public section
@@ -25,9 +26,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project Tag 04DF; step 3 of finite splitting descent.
-A finite morphism is integral. Universal injectivity descends after pulling back the
-surjective precomposition to each test square, and surjectivity cancels directly. -/
+/-- If `a ≫ g` is a universal homeomorphism, `a` is surjective and `g` is finite, then `g` is a
+universal homeomorphism (Stacks, Tag 04DF). -/
 private theorem universalHomeomorphism_of_surjective_precomp
     {A B C : Scheme.{u}} (a : A ⟶ B) (g : B ⟶ C)
     [Surjective a] [IsFinite g] [IsUniversalHomeomorphism (a ≫ g)] :
@@ -48,30 +48,9 @@ private theorem universalHomeomorphism_of_surjective_precomp
     exact congrArg a' ((a' ≫ g').injective hy)
   exact {}
 
-/-- Finite etale-local splitting into universal homeomorphisms descends through a
+/-- Finite étale-local splitting into universal homeomorphisms descends through a
 surjective closed immersion. This is a statement over a fixed open, with no
-Noetherian, density, affine, or generic-splitting assumption.
-
-Source: Stacks Project Tag 04DZ; steps 2--3 of
-`lem-weil-pbc-generic-finite-noetherian-scheme-splitting`.
-
-Proof: Restrict r to U. This is again a surjective closed immersion, and hence a
-universal homeomorphism. The equivalence of small etale sites lifts each scheme
-of the given cover and its structural map to U. The lifted maps jointly cover U:
-their base changes do, and the vertical maps are homeomorphisms on points.
-Pulling back the finite source to a lifted cover gives a surjective closed
-immersion from the old source. Transport its finite disjoint open partition
-along this homeomorphism. Each open in a finite disjoint open partition is also
-closed, so its inclusion is finite, and its map to the lifted cover is finite.
-For each transported piece, the old piece is its base change along the
-surjective closed immersion of covers. The old component map is universally
-bijective. After any base change, the vertical maps remain bijective, so the
-lifted component map is universally bijective as well. Its finiteness makes it
-integral; universal injectivity and surjectivity then make it a universal
-homeomorphism. Pullback associativity identifies these pieces with those in
-the displayed statement. An empty partition transports to an empty partition;
-an empty base admits the empty etale cover. No witness is chosen to define data
-in another declaration: the entire conclusion is propositional existence. -/
+Noetherian, density, affine, or generic-splitting assumption (Stacks, Tag 04DZ). -/
 theorem finite_splitting_descends_surjective_closedImmersion
     {X Y R : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     (r : R ⟶ Y) [IsClosedImmersion r] [Surjective r] (U : Y.Opens)

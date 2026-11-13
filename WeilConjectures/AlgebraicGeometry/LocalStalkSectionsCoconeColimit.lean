@@ -18,27 +18,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Degree-zero continuity for a cofiltered system of affine open subschemes.
-Source: Stacks Project, Tag 03Q6, degree zero of Lemma 59.51.5.
-
-Proof: Fix one stage. Its upper tail is cofinal in the cofiltered index category.
-Every stage of this tail is affine and maps to the fixed affine stage by an open
-immersion, hence by an affine morphism. The limit cone remains a limit on the tail.
-The coordinate rings form a filtered diagram, and the spectrum of their colimit
-is the scheme limit. Apply Tag 03Q6 in degree zero over the fixed affine stage,
-to the restriction of F there and the identity morphism of that stage. This gives
-an isomorphism from the colimit of stage sections to sections of the inverse image
-on c.pt. Inverse image along an open immersion is restriction, so its stage
-sections are precisely F(D_j). Identify the inverse image on the limit with H
-by uniqueness of left adjoints to the given direct image. The isomorphism
-intertwines adjunction units. The terminal-to-base-change map is the displayed
-pullback lift, so these identifications send the continuity maps to ν. Therefore
-the comparison from the colimit to the point of Cocone.mk _ ν is an isomorphism,
-which proves its colimit universal property. The coefficient universe is kept
-fixed throughout: the affine-site argument uses only the values of the supplied
-sheaves and their given adjunction, without choosing a larger coefficient category.
-Zero sheaves are included. The index is nonempty by cofilteredness; no global
-quasi-separatedness assumption on X is needed, since the fixed stage is affine. -/
+/-- Degree-zero continuity for a cofiltered system of affine open subschemes
+(Stacks, Tag 03Q6). -/
 theorem affineOpenSections_cocone_isColimit
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

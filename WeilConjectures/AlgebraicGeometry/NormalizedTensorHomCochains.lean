@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.HomTensorDifferential
 
 /-! # Normalized tensor-Hom comparison on ordinary cochains
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A90 and 0A8Z.
+## References
+
+* [Stacks, Tag 0A90], [Stacks, Tag 0A8Z]
 -/
 
 @[expose] public section
@@ -28,8 +30,8 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite
 open CochainComplex.HomComplex
 namespace AlgebraicGeometry
 
-/-- The explicitly constructed uncurrying equivalence on ordinary cochains.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose). -/
+/-- The explicitly constructed uncurrying equivalence on ordinary cochains
+(Stacks, Tag 0A90). -/
 def normalizedTensorHomCochains (X : Scheme.{u})
     (P L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (k : ℤ) :
@@ -55,13 +57,7 @@ def normalizedTensorHomCochains (X : Scheme.{u})
 
 set_option maxHeartbeats 400000 in
 -- Elaborating the composite sheaf and tensor comparisons exceeds the default heartbeat limit.
-/-- The uncurrying equivalence commutes with the ordinary cochain differential.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
-Proof: the explicit global-cochain comparisons commute with the differential.
-Between them, postcomposition by the degreewise uncurrying map commutes with
-the differential by `homTensorDegreewiseMap_comm`. Apply the global comparison
-on the left to verify the corresponding equality for its inverse, and compose
-the three equalities. -/
+/-- The uncurrying equivalence commutes with the ordinary cochain differential. -/
 theorem normalizedTensorHomCochains_comm (X : Scheme.{u})
     (P L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (k m : ℤ) (c : Cochain P (homComplex (R := X.sheaf) L I) k) :

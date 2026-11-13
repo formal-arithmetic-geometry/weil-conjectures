@@ -22,7 +22,8 @@ projective space `ℙ(n; Y)` followed by the projection) are the H-projective mo
   characterisation of projective morphisms.
 - `AlgebraicGeometry.isProper_of_isHProjective`.
 - `AlgebraicGeometry.isProper_isStableUnderBaseChange_and_comp`.
-- `AlgebraicGeometry.exists_isHProjective_compactification_of_isAffine`: an affine scheme of finite type over a field is a dense
+- `AlgebraicGeometry.exists_isHProjective_compactification_of_isAffine`: an affine scheme of
+  finite type over a field is a dense
   open subscheme of a projective scheme of the same dimension.
 -/
 
@@ -34,9 +35,9 @@ open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
-/-- **projective morphisms.** A morphism `f: X ⟶ Y` is
+/-- **projective morphisms.** A morphism `f : X ⟶ Y` is
 projective (`AlgebraicGeometry.IsHProjective`) if and only if there are a finite type `n` of
-homogeneous coordinates and a closed immersion `i: X ⟶ ℙ(n; Y)` whose composite with the
+homogeneous coordinates and a closed immersion `i : X ⟶ ℙ(n; Y)` whose composite with the
 structural projection `ℙ(n; Y) ⟶ Y` is `f`. A scheme is projective over a field `k` if its
 structure morphism is projective. -/
 theorem isHProjective_iff {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -60,12 +61,9 @@ theorem isProper_isStableUnderBaseChange_and_comp :
         (b : Y ⟶ Spec (.of k)) [IsProper a], IsProper (pullback.snd a b) :=
   ⟨inferInstance, inferInstance, fun _ _ ↦ inferInstance⟩
 
-/-- **compactification of an affine scheme.** Let
-`X` be an affine scheme of finite type over a field `K`. There is an open immersion
-`j: X ⟶ X̄` over `K` with dense image into a projective `K`-scheme `X̄`, and
-`dim X̄ = dim X`. Take an immersion `X ⟶ ℙ(n; K)` and let `X̄` be the scheme-theoretic
-closure of its image: it is a closed subscheme of `ℙ(n; K)`, the immersion factors through it as
-a dense open immersion, and the dimension of `X̄` is that of its dense open subscheme `X`. -/
+/-- **Compactification of an affine scheme.** Let `X` be an affine scheme of finite type
+over a field `K`. There is an open immersion `j : X ⟶ X̄` over `K` with dense image into a
+projective `K`-scheme `X̄`, and `dim X̄ = dim X`. -/
 theorem exists_isHProjective_compactification_of_isAffine {K : Type u} [Field K]
     {X : Scheme.{u}} [IsAffine X] (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] :
     ∃ (X' : Scheme.{u}) (a' : X' ⟶ Spec (.of K)) (j : X ⟶ X'), IsHProjective a' ∧

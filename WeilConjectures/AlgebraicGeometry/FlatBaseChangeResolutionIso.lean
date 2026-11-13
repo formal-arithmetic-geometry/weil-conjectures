@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionAffineSections
 
 /-! # Invertibility of the resolution-defined flat base-change map
 
-Source: Stacks Project, Tag 02KH, part (1).
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
 -/
 
 @[expose] public section
@@ -88,18 +90,7 @@ private theorem flatCohomologyBaseChange_bijective
 
 /-- The actual resolution-defined comparison is invertible for qcqs direct image
 of a quasi-coherent module, for every augmented comparison lift.
-Source: Stacks Project, Tag 02KH, part (1), using the map of Tag 02N7.
-
-Proof: Work locally on the two bases, reducing to a flat map of affine rings A → B.
-On a finite affine cover of the qcqs source use the Cech-to-cohomology spectral
-sequence. Intersections are quasi-compact separated, so their cohomology is computed
-by finite affine Cech covers. Base change of their sections is tensor with B and
-flat tensor commutes with cohomology. It therefore identifies the spectral sequences
-and their abutments. Quasi-coherence of the higher direct images identifies the
-result with the sheaf comparison. The comparison is the resolution-defined map:
-its augmented lift induces the unit on cocycles, as in 02N7; different augmented
-lifts are homotopic and induce the same map. Thus every displayed beta is invertible.
-The argument includes degree zero, a zero module, and an empty source. -/
+(Stacks, Tag 02KH, part (1), using the map of Tag 02N7.) -/
 theorem Scheme.Modules.flatBaseChangeResolutionBeta_isIso
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f] [Flat g] [Flat (pullback.snd g f)]

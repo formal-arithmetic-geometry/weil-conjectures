@@ -12,7 +12,9 @@ import Mathlib.Data.Fintype.Order
 /-!
 # Simultaneous descent of a finite family of scheme morphisms
 
-Source: Stacks Project, Limits 01ZM(2).
+## References
+
+* Stacks Project, Limits, Tag 01ZM.
 -/
 
 @[expose] public section
@@ -23,16 +25,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Limits 01ZM(2).
-Proof: apply `exists_pullback_hom_of_isLimit` to each member of the finite family.
-Choose a common upper bound of the resulting stages together with i, using
-nonemptiness and directedness. Pull each descended map back to this upper bound:
-compose with the pullback map induced by the transition from the common stage to
-its individual stage. The first projection formula gives the structure-map equation.
-Functoriality of pullback maps and the cone naturality equation give the equality
-with the original limit morphism. For an empty family choose i; there are no maps
-or equations to supply. This proves all assertions without choosing arbitrary
-geometric objects: the domains are the specified canonical pullbacks. -/
+/-- Finitely many morphisms from pullbacks along the limit projection to a scheme of finite
+presentation over stage `i` descend simultaneously to a single later stage
+(Stacks, Tag 01ZM (2)). -/
 theorem finite_pullback_hom_descent
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

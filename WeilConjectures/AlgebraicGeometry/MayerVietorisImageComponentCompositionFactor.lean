@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 
 /-! # Factoring the complex image component
 
-Source: Stacks Project, Tags 08FE and 0D5T.
+## References
+
+* Stacks Project, Tags 08FE and 0D5T.
 -/
 
 @[expose] public section
@@ -50,12 +52,7 @@ private theorem image_factor
   rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
   exact CategoryTheory.Category.comp_id _
 
-/-- The image isomorphism cancels with the restriction isomorphism.
-Source: Stacks Project, Tag 08FE.
-Proof: expand the associators and whiskering defining the image isomorphism.
-Equality induction identifies pushforwardCongr with eqToIso. The remaining two
-restriction factors cancel by functoriality and the inverse-hom identity.
-No cover or nonempty-open assumption is involved. -/
+/-- The image isomorphism cancels with the restriction isomorphism (Stacks, Tag 08FE). -/
 theorem schemeMVImageIso_composition_factor
     {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :

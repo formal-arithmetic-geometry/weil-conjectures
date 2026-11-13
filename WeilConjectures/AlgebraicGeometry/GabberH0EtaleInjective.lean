@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Injectivity of étale restriction from Zariski restriction
 
-Source: Stacks Project, Tag 09ZF, first two proof paragraphs.
+## References
+
+* Stacks Project, Tag 09ZF.
 -/
 
 @[expose] public section
@@ -43,21 +45,7 @@ private theorem zarEtale_continuous (X : Scheme.{u}) :
 
 
 /-- Zariski bijectivity implies injectivity of the étale unit on global sections.
-Source: Stacks Project, Tag 09ZF, first two proof paragraphs.
-
-Proof:
-1. Restrict F and its inverse image to open subschemes, obtaining Zariski sheaves.
-   The inclusion is continuous by
-   `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites`. Base changes of open
-   subschemes give the canonical isomorphisms used in the comparison theorem.
-2. Apply `lem-weil-pbc-gabber-zariski-etale-restriction-injective`. Its unit equation
-   factors the étale unit at the top open as the Zariski unit followed by its
-   injective comparison. The Zariski unit is injective by hZar.
-3. The top-open inclusion and the identity object are both terminal in X.Etale.
-   Transport the factorization along their unique isomorphism, and likewise on Z.
-   Naturality of the units identifies the transported map with the stated unit.
-   Isomorphisms induce bijections on sections, so this unit is injective.
-No quasi-compactness, quasi-separatedness, or finite base-change hypothesis is needed. -/
+(Stacks, Tag 09ZF) -/
 theorem gabber_h0_etale_injective
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (hZar :

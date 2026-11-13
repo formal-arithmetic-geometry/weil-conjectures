@@ -20,7 +20,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Affine module models with supported cohomology
 
-Source: Stacks Project, Tags 08EJ, 08EB and 06Z0.
+## References
+
+* Stacks Project, Tags 08EJ, 08EB and 06Z0.
 -/
 
 @[expose] public section
@@ -61,27 +63,7 @@ set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target
 whose cohomology is elementwise power torsion. The comparison is full and additive
 and intertwines the scalar identity of the source with restriction of global scalars.
-Source: Stacks Project, Tag 08EJ, affine paragraph; Tags 08EB and 06Z0.
-
-Proof: Compare localized-site restriction with restriction to the open subscheme U
-using open_derived_restriction_comparison. Perfectness restricts: intersect each
-strictly perfect neighbourhood with U and restrict the finite-free retractions.
-Quasi-coherence and stalkwise support restrict by the comparison theorem, including
-for the shifted target. Identify U with Spec of its section ring A using its affine
-presentation. The affine derived equivalence, followed by transport through this
-scheme isomorphism and the inverse localized-site comparison, gives F. These functors
-are fully faithful and additive. The bounded-projective criterion applied to the
-restricted perfect source gives P, its bounds, finite and projective terms, and eP.
-Choose the inverse-equivalence image M of the restricted shifted target and the
-counit isomorphism eM. Exactness identifies H^i(M) with the corresponding affine
-module of the restricted cohomology sheaf. Its localization at the restricted f is
-zero, since its stalks vanish on D(f). The localization zero criterion makes every
-cohomology element power torsion. Finally, associated sheaf, open restriction and
-scheme-isomorphism transport all act sectionwise, so multiplication by the component
-of any global scalar a at U corresponds to restriction of schemeDerivedScalar X a.
-This gives the displayed identity after composing with eP.hom. When U is empty, A is
-the zero ring and all these categories are zero; the zero models give the same data.
-No assertion about torsion of derived morphisms is used in this construction. -/
+(Stacks, Tags 08EJ, 08EB, 06Z0) -/
 theorem perfect_support_affine_module_model
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

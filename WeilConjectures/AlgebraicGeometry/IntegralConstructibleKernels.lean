@@ -18,11 +18,14 @@ import WeilConjectures.AlgebraicGeometry.LocallyFinitelyPresentedExtendScalars
 
 /-! # Kernels of integral constructible internal module objects
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1).
-
 The proof reduces to one local pivot and proves all repeated elimination and
 finite-presentation glue. It uses the existing field local-triviality theorem to control
 rational cokernels; full integral Smith invariants are not required.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.8.10 and
+  Proposition 6.8.11.
 -/
 
 open CategoryTheory Limits
@@ -730,34 +733,7 @@ private theorem integralConstructible_kernels_of_rational
     (limit.isoLimitCone ⟨k, hk⟩)
 
 /-- Kernels of maps of integral constructible internal module objects are constructible.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1).
-
-Proof:
-1. For a map between finite free integral modules whose rational cokernel is locally
-   free, use the one-pivot covering and strong induction on the number of source
-   generators. A zero matrix has its free source as kernel. For a pivot block
-   ((p,r p),(c,d)), monicity of p identifies the kernel with ker(d-r c). After
-   scalar extension p is invertible, and the cokernel is the cokernel of d-r c.
-   Thus the rational local-freeness hypothesis is inherited by the smaller matrix.
-2. If a cokernel presentation descends from a locally finitely presented module on
-   the noetherian base, extend that module to E. The existing field local-triviality
-   theorem makes it locally free. Pull back this covering and use the coefficient
-   and scalar-extension comparisons; step 1 therefore applies to the presentation.
-3. For arbitrary locally finitely presented M and N, their cokernel is locally
-   finitely presented. Choose common local presentations M=coker a and N=coker b.
-   Locally lift the free generators of M through the free presentation of N, using
-   the existing local splitting of an epimorphism onto a finite free module. If t
-   is the lift, delta=(b,t) presents coker(M -> N). Step 2 gives locally finitely
-   presented kernels of b and delta. Their natural map has cokernel
-   ker(pi_M followed by f), by exactness in the abelian module category. Taking the
-   cokernel of the map from the source relation module a then gives ker f. Generic
-   cokernel closure proves local finite presentation at both stages. This argument
-   includes torsion source and target modules.
-4. Refine the constructible stratifications of M and N. Every stratum is noetherian.
-   Apply step 3 there; inverse image preserves kernels, and the coefficient
-   pullback isomorphisms transport the result to the original restricted modules.
-   Finally transport the canonical kernel to any kernel cone. -/
+(Bhatt--Scholze, Proposition 6.8.11.) -/
 theorem integralConstructible_kernels (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] :
     ObjectProperty.IsClosedUnderKernels

@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCupCanonicalHZeroIdentific
 
 /-! # Cochain obligations for resolution pairings
 
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
+## References
+
+* Stacks Project, Tag 0FKU (construction before Lemma 20.31.3).
 -/
 
 @[expose] public section
@@ -76,15 +78,8 @@ private lemma singleTensor_component (F G : SheafOfModules.{u}
   simp only [whiskerLeft_id, id_whiskerRight, Category.comp_id, Category.id_comp, tensorHom_id]
 
 set_option linter.unusedSectionVars false in
-/-- A realization respects the coefficient augmentations before localization.
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-Proof: the source tensor of single complexes is concentrated in degree zero. In all
-other degrees both maps vanish. In degree zero, test the maps on elementary tensors
-of sections over each open. The extension/single and tensor/single isomorphisms send
-these tensors to the corresponding degree-zero summand. Apply Realizes at p=q=0,
-then augmentation_pair. Elementary tensors generate the presheaf tensor and hence
-its sheafification, so equality on these sections gives equality of sheaf morphisms.
-Degreewise extensionality gives the cochain identity. -/
+/-- A realization respects the coefficient augmentations before localization
+(Stacks, Tag 0FKU). -/
 theorem moduleCup_resolution_augmentation {F G : X.Modules} (D : CupResolutionPairing F G)
     (t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex)
     (ht : D.Realizes t) :

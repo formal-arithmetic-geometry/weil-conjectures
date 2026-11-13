@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Product coordinates for constant-coefficient base change
 
-Source:, first step, and Stacks Tag 0A5B,
-first paragraph of the proof (finite disjoint unions).
+## References
+
+* Stacks Project, Tags 0A5B and 01F7.
 -/
 
 @[expose] public section
@@ -45,25 +46,7 @@ private theorem cohomologyMap_congr {X Y : Scheme.{u}} (s t : X ⟶ Y) (h : s = 
 set_option backward.isDefEq.respectTransparency false in
 /-- The target product coordinates for finite-coproduct base change commute with
 the normalized constant-coefficient restriction maps on the source.
-Source:, first step; Stacks Tag 0A5B,
-first paragraph of the proof, and cohomology functoriality (Tag 01F7).
-
-Proof: Inverse image of the constant Z/n sheaf is canonically the constant Z/n sheaf
-on each D i. Normalize each restriction by the cohomology equivalence induced
-by that sheaf isomorphism, giving the source restriction maps in the formula.
-Base change preserves the disjoint coproduct: coprojections are clopen immersions
-whose disjoint images cover C,
-and their inverse images have those same properties after base change. Apply
-finiteCoproductCohomologyAssembly on the base change of C to its pulled-back
-coprojections. The pullback square identifies the restriction of the pulled-back
-coefficient sheaf with the pullback of the component constant sheaf, using
-upperStarComp and the constant-sheaf isomorphisms. This gives eK. Functoriality
-of cohomology pullback for the commuting square, together with naturality in
-the coefficient sheaf and coherence of the constant-sheaf identifications,
-gives the displayed equality in each coordinate. This proves no bijectivity
-of any field-extension comparison: it only diagonalizes the given map.
-The empty family gives singleton products on both sides. The construction uses
-no invertibility, and includes n=0, n=1 and q=0. -/
+(Stacks, Tags 0A5B and 01F7.) -/
 theorem finiteCoproductConstantBaseChangeSquare
     {k K : Type u} [Field k] [Field K] [Algebra k K]
     {I : Type u} [Finite I] {C : Scheme.{u}} (D : I → Scheme.{u})

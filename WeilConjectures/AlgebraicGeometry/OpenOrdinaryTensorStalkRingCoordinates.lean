@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 
 /-! # Compatible stalk ring coordinates for an open restricted pullback square
 
-Source: Stacks Project, Tag 0098, and Mathlib's open stalk-map identities.
+## References
+
+* Stacks Project, Tag 0098.
 -/
 
 @[expose] public section
@@ -46,23 +48,7 @@ private theorem stalkIso_congr
   simp [TopCat.Presheaf.stalkCongr]
 
 /-- The four stalk rings of a restricted pullback square have compatible
-coordinates in the ambient square, pinned at the input and output points.
-
-Proof: let hx be the equality (j z).val = g' z.val induced by hj. Let hs
-be the induced base-point equality and hs' the point equality for f' restricted
-to V'. Compose each open-inclusion stalk isomorphism with the corresponding
-stalkCongr to get the four ring equivalences. For f, apply the stalk-map identity
-of its restriction square, followed by stalk-map naturality along hx. For g,
-first use the point equality supplied by sq0, commute the base open stalk iso
-past that stalkCongr, and apply the restriction square for g and naturality
-along hs'. Composing stalkSpecializes proves both base-ring compatibilities.
-The square hj proves the A-to-C compatibility, and the restriction square of
-f' proves the B-to-C compatibility. The two defining restrictions of tensorMap
-identify these latter maps with the two displayed tensor algebra maps.
-The input and output normalizations follow directly from their construction.
-This uses no derived objects, flatness or nonzero-ring assumptions.
-Source: Mathlib Scheme.Opens.stalkIso, Scheme.Hom.stalkMap_comp,
-Scheme.Hom.stalkMap_congr_hom and stalkMap_congr; Stacks Project, Tag 0098. -/
+coordinates in the ambient square, pinned at the input and output points. -/
 theorem exists_openOrdinaryTensor_stalk_ring_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

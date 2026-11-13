@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 import WeilConjectures.AlgebraicGeometry.MixedSectionsCompositionCoherence
 
 /-! # Coherence of mixed sections comparisons
-Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
+
+## References
+
+* Stacks Project, Tags 08HY, 0D5T and 0D5W.
 -/
 
 @[expose] public section
@@ -132,31 +135,8 @@ private theorem mixedSections_compare_paths
 set_option backward.defeqAttrib.useBackward true in
 -- Checking canonical comparison choices expands derived-functor and sheaf instances.
 /-- Normalized Leray comparisons commute with the conjugate of the fixed pullback
-composition comparison. No pullback unit or base-change map occurs in this statement.
-Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY, with the normalized
-sections comparison of Tag 0D5W.
-
-Proof: Choose a K-injective representative J of F. Transpose the fixed left-derived
-pullback composition comparisons under the pinned derived adjunctions. Their
-left-derived counit equations and the Hom-equivalence equation of
-exists_schemeDerivedAdjunction identify their conjugate delta with the right-derived
-comparison induced by the identity underived pushforward square. Its normalization
-is the pasted right-derived-unit equation of Tag 0D5T. Precompose the displayed
-identity at Qh(J) with the pasted right-derived unit for the path p_*; f_*; Gamma_Y.
-Direct image of a K-injective complex is acyclic for further direct image and global
-sections, so this pasted unit is invertible. Substitute the characterizing equations
-of exists_mixedGlobalSectionsDirectImageIso for f, p, f-prime, and g. Naturality
-moves the units past the underived composition comparisons, and exact scalar
-restriction moves its unit through localization. Both composites now localize the
-same map on underived sections: all four Leray comparisons are identity on elements,
-and pullback.condition identifies their scalar actions. The remaining scalar
-comparison is precisely schemeGlobalScalarSquareIso, built from restriction along
-composites. Cancel the invertible pasted unit. Every derived object is isomorphic
-to Qh of a K-injective complex; naturality transports the equality to F. The sheaf
-and module localizations are used separately, so no equality of w and wA is needed.
-For F=0 the two morphisms are zero; identity squares give the composition unit law.
-Empty schemes and nonflat g require no change, as neither units of pullback nor
-invertibility of base change are asserted. -/
+composition comparison. No pullback unit or base-change map occurs in this statement
+(Stacks, Tags 0D5T, 08HY and 0D5W). -/
 theorem mixedSections_square_comparison_coherence
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (F : schemeDerivedCategory (pullback f g)) :

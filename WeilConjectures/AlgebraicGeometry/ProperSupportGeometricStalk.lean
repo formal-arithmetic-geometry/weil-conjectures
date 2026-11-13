@@ -23,8 +23,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 
 /-! # Geometric stalks of a proper-support subsheaf
 
-Source: Stacks Project, Tag 0F76, including the restriction normalization in the first
-paragraph of its proof.
+## References
+
+* [Stacks, Tag 0F76]
 -/
 
 @[expose] public section
@@ -38,10 +39,7 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- The image of the proper-support stalk map is the submodule of properly supported
-fibre sections. This is the support-image and extension-by-zero part of Stacks Project,
-Tag 0F76. The proof constructs the image submodule, identifies membership with proper
-support using base-change locality, and extends every properly supported fibre section
-by zero after shrinking to a quasi-compact open and applying compactification. -/
+fibre sections. (Stacks, Tag 0F76) -/
 theorem properSupport_geometricStalk_image
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]
@@ -126,28 +124,7 @@ set_option backward.isDefEq.respectTransparency false in
 module sheaf. On every proper-support subsheaf it induces a linear isomorphism onto
 exactly the submodule of properly supported fibre sections. The displayed factorization
 identifies its composite with the inclusion with ordinary restriction, and the germ
-formula specifies that restriction on every representative.
-Source: Stacks Project, Tag 0F76.
-
-Proof:
-1. Pull representatives to the fibre. Properness survives base change, so their supports
-remain proper; inverse-image germ compatibility identifies these with their actual supports.
-2. Extension by zero across an open subscheme preserves proper support: the proper-to-separated
-triangle makes the support closed in the larger scheme, and sheaf gluing extends by zero.
-3. Work locally on the base, then take the filtered union of quasi-compact opens of X.
-Quasi-compactness of every proper support puts both representative and fibre sections in
-some such open. Exactness of geometric stalks makes the source a union of these submodules.
-4. For X quasi-compact and Y affine, Nagata compactification gives X open in a proper scheme.
-Extend F by zero, using its unit isomorphism and zero stalks outside X.
-5. Restriction identifies the proper direct image of this extension with the given G:
-its sections have closed proper support inside X, and conversely gluing with zero extends
-any section with such support. These operations commute with restrictions and sheaf maps.
-6. The same gluing on the geometric fibre identifies global sections of the extension with
-properly supported fibre sections. Base change for extension by zero preserves this formula.
-7. Proper geometric-point exchange and the pullback-stalk comparison identify the proper
-stalk map with restriction on representatives. Steps 3--6 give the asserted isomorphism.
-A linear map shrinks support, so preserves proper support; both naturality paths restrict
-the image of the same representative, giving naturality and the displayed normalization. -/
+formula specifies that restriction on every representative. (Stacks, Tag 0F76) -/
 theorem properSupport_geometricStalk
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]

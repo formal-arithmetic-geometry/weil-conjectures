@@ -22,8 +22,8 @@ open AlgebraicGeometry TopologicalSpace AlgebraicTopology Simplicial
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- Evaluate the outer stalk coordinate to multiply the Godement monad.
-Source: Stacks, Tag 0FKR; Banerjee, §1.1.4. -/
+/-- Evaluate the outer stalk coordinate to multiply the Godement monad
+(Stacks, Tag 0FKR; Banerjee, §1.1.4). -/
 def moduleCup_godementMultiply (X : Scheme.{u}) (F : X.Modules) :
     moduleCup_godementObject X (moduleCup_godementObject X F) ⟶
       moduleCup_godementObject X F :=
@@ -34,8 +34,7 @@ def moduleCup_godementMultiply (X : Scheme.{u}) (F : X.Modules) :
           (Pi.π (fun y : X ↦ skyscraper y (F.presheaf.stalk y)) x).stalkLinearMap x ∘ₗ
           skyscraperStalkEval x ((moduleCup_godementObject X F).presheaf.stalk x))
 
-/-- Insert monad multiplication at a specified position in an iterate.
-Source: Banerjee, §1.1.4. -/
+/-- Insert monad multiplication at a specified position in an iterate. -/
 def moduleCup_godementCollapse (X : Scheme.{u}) (F : X.Modules) :
     (n : ℕ) → Fin (n + 1) →
       (moduleCup_godementIterate X F (n + 2) ⟶ moduleCup_godementIterate X F (n + 1))
@@ -45,8 +44,7 @@ def moduleCup_godementCollapse (X : Scheme.{u}) (F : X.Modules) :
     else moduleCup_godementMap X
       (moduleCup_godementCollapse X F n ⟨i.val - 1, by omega⟩)
 
-/-- The codegeneracies of a concrete Godement model are multiplication insertions.
-Source: Banerjee, §1.1.4. -/
+/-- The codegeneracies of a concrete Godement model are multiplication insertions. -/
 def ModuleCupGodementCodegeneracies (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules) : Prop :=
   ∃ h : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1),

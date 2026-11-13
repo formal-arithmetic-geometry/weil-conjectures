@@ -9,8 +9,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionTensorBaseChange
 
 /-! # The tensor expansion of a scalar-extended ordered localization complex
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d), and Tag 099E,
-final paragraph.
+## References
+
+* Stacks Project, Tags 0996, 099D(d) and 099E.
 -/
 
 @[expose] public section
@@ -64,26 +65,8 @@ private noncomputable def pointIso {A : Type u} [CommRing A]
 
 /-- A complex given by the actual ordered localization coordinates becomes the tensor
 Čech complex after scalar extension. This is an isomorphism of augmented complexes,
-without a derived-category hypothesis, a replacement complex P, or a derived comparison.
-Source: Stacks Project, algebraization.tex, Tags 0996, 099D(d), and 099E, final paragraph.
-
-Proof: put A = Gamma(O). The actual tensor localization complex over the
-one-point A-ring site has ordered coordinates by ringTensorCech_coordinates.
-Compose those coordinate equivalences with the inverses of the supplied coordinates
-to identify its degree-zero and positive terms with those of K. Lift these linear
-isomorphisms to one-point module sheaves; both negative terms are zero. Any two
-A-algebra maps out of one localization agree by its universal property, so the
-supplied face maps equal those in the tensor coordinates. The first-differential
-and alternating-differential equations therefore make the termwise isomorphisms
-commute with the differentials. The degree-zero augmentation equations identify
-the two augmentations after postcomposition with the single-complex coordinate
-isomorphism, which can be cancelled; all other target degrees are zero. Apply the
-additive scalar-extension functor to this augmented isomorphism. Compose with
-ringFamilyGlobalExtension_tensor_iso, which compares the actual tensor constructions
-over A and O, to get the displayed orientation and exactly the specified
-augmentation. No derived category, resolution or K-flat hypothesis is used.
-The ring tensor coordinates and tensor base change both include empty lists, zero
-and repeated generators, and zero rings; the reconstruction uses no exclusions. -/
+without a derived-category hypothesis, a replacement complex `P`, or a derived comparison
+(Stacks, Tags 0996, 099D and 099E). -/
 theorem ringFamilyGlobalExtension_ordered_iso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

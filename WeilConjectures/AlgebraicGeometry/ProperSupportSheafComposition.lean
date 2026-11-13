@@ -15,8 +15,10 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-!
 # Composition and base change for sections with proper support
 
-Source: Stacks Project, More on Étale Cohomology, Tags 0F4X, 0F4Y, 0F50, 0F51,
-0F55 and 0F77.
+## References
+
+* [Stacks, Tag 0F4X], [Stacks, Tag 0F4Y], [Stacks, Tag 0F50], [Stacks, Tag 0F51],
+  [Stacks, Tag 0F55], [Stacks, Tag 0F77] (More on Étale Cohomology)
 -/
 
 @[expose] public section
@@ -156,35 +158,12 @@ private theorem support_squareUpperStarIso {Λ : Type (u + 1)} [CommRing Λ]
 set_option linter.unusedVariables false in
 /-- The proper-support subsheaves form functors, with composition, proper and open
 specializations, and base change compatible with composition.
-Source: Stacks Project, Tags 0F4X, 0F4Y, 0F50, 0F51, 0F55, 0F77.
+(Stacks, Tags 0F4X, 0F4Y, 0F50, 0F51, 0F55, 0F77)
 
 The functors and inclusions are specified together: objectwise their images are exactly
 sections with the indicated closed geometric-germ support and proper reduced subscheme.
 The composition isomorphism is specified by its composite into the ordinary direct image.
-The base-change isomorphism is specified by the ordinary adjunction comparison.
-
-Proof:
-1. Use the literal submodule presheaf, sheaf and natural inclusion constructed in
-lem-cbc-proper-support-section-calculus. Its sectionwise range theorem and the
-separably-closed support criterion give exactly the first clause of the statement.
-For proper maps every closed support is proper, so its inclusion is an isomorphism.
-2. Two sectionwise injective maps of module sheaves with the same image have a unique
-compatible isomorphism: factor each map through the other using unique preimages,
-then cancel the injections to prove the inverse and naturality identities.
-3. Apply this elementary construction to the composite support inclusion and the
-inclusion for the composite map. Their images agree by
-lem-cbc-proper-support-composite-range; the ordinary direct-image compositor and
-subtype inclusions prove injectivity. This constructs c with its specified equation.
-4. Apply the same construction to the open-immersion comparison, using
-lem-cbc-open-extension-proper-support-range, to obtain its compatible isomorphism.
-5. Apply it to the restricted ordinary base-change map, using
-lem-cbc-proper-support-exchange-range, to construct e. Expanding squareUpperStarIso
-and the ordinary mate gives exactly the unit/counit formula required here.
-6. Postcompose both pasted support paths with the injective inclusion for the final
-composite. Substitute the equations specifying c and e, use naturality, and apply
-ordinary base-change mate pasting. The two composites
-agree, so injectivity cancels that inclusion and proves the final coherence. Every
-factorization is linear and natural; uniqueness determines all chosen preimages. -/
+The base-change isomorphism is specified by the ordinary adjunction comparison. -/
 theorem properSupportSheafComposition (Λ : Type (u + 1)) [CommRing Λ] :
     ∃ (L : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f],
         Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤

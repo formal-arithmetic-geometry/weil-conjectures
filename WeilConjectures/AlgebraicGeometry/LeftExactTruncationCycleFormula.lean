@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Underived lower truncation on cycle classes
 
-Source: Stacks Project, Tag 05TC, and the kernel calculation underlying Tag 08D4 (1).
+## References
+
+* Stacks Project, Tag 05TC, and the kernel calculation underlying Tag 08D4 (1).
 -/
 
 @[expose] public section
@@ -25,18 +27,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Applying a left exact functor to the good lower truncation computes its bottom
-homology, including the map on cycles.
-
-Source: Stacks Project, Tag 05TC; kernel calculation in the proof of Tag 08D4 (1).
-
-Proof: The incoming differential of K = truncGE n I is zero. Its homology is
-therefore a kernel of the outgoing differential. F preserves that kernel and
-the cokernel of the zero incoming boundary, giving H^n(FK) = F(H^n K).
-The truncation projection induces an isomorphism H^n(I) to H^n(K). Compose
-with its inverse under F. On a cycle, naturality of the homology quotient
-and uniqueness of the preserved kernel lift give the formula. This uses
-only kernel preservation, not preservation of the homology quotient of I;
-it works for zero complexes and every integer cutoff. -/
+homology, including the map on cycles. (Stacks, Tag 05TC) -/
 theorem leftExact_truncation_cycle_formula
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D]

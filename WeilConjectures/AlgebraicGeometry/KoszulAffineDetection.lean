@@ -17,8 +17,9 @@ import Mathlib.CategoryTheory.Localization.HomEquiv
 
 /-! # Koszul powers detect supported objects on an affine scheme
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 09IR, proof via
-Lemma 36.9.6 and Tag 06Z0.
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 09IR, and Tag 06Z0.
 -/
 
 @[expose] public section
@@ -160,25 +161,7 @@ private theorem koszul_triangles (A : Type u) [CommRing A] (r : ℕ) (f : Fin r 
 set_option backward.isDefEq.respectTransparency false in
 /-- Koszul powers detect an object of `D_QCoh` supported on the common zero locus.
 The Koszul complexes are sheafified termwise and placed in nonpositive cochain degrees;
-they are the bounded finite-free, hence perfect, complexes of Stacks Tag 09IR.
-Source: Stacks Project, Tag 09IR.
-
-Proof:
-1. For each map from a shift of the structure object to E, restriction to U is zero.
-   The filtered-colimit comparison for the Koszul tail system makes this map zero
-   after precomposition with some shifted augmentation. This is the separate
-   eventual-vanishing assertion, with no Koszul orthogonality assumption.
-2. Extract the triangles I_e → O_X → K_e from represent-cohomology. Shift the
-   triangle by n. Exactness of Hom(-,E) factors the map killed by I_e[n] → O_X[n]
-   through K_e[n]. The diagonal positive exponent tuple e+1 gives a subsingleton
-   Hom(K_e[n],E), so the factor and the original map are zero. The natural identity
-   comparison of the two termwise tilde functors identifies K_e with the complex
-   in the hypothesis.
-3. The extended degree-zero free module sheafifies to the structure sheaf. Thus all
-   maps from its shifts to E vanish. The affine generator criterion detects E = 0.
-   Both this criterion and the triangle extraction are applied in standard
-   localizations and transported back to the given localization universe, so no
-   extra localization assumptions are added. -/
+they are the bounded finite-free, hence perfect, complexes of Stacks Tag 09IR. -/
 theorem isZero_of_koszul_powers_orthogonal
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

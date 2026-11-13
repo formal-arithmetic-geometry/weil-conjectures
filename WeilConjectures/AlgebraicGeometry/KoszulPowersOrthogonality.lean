@@ -14,7 +14,10 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.KoszulCoordinateMulTriangle
 
 /-! # Koszul orthogonality propagates to positive powers
-Source: Stacks Project, Tag 09IR.
+
+## References
+
+* Stacks Project, Tag 09IR (proof of the orthogonality lemma) and Tag 062C.
 -/
 
 @[expose] public section
@@ -25,18 +28,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Orthogonality to every shift persists after raising the generators to positive powers.
-Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;
-Tag 062C, lemma-koszul-mult.
-
-Proof: Induct on the sum of the positive exponents minus r. The zero case has every
-exponent equal to one, so it is the hypothesis. Otherwise select a coordinate with
-exponent m+1, m positive, and use the Koszul multiplication triangle for f_i^m and
-f_i, with all other entries fixed. Its two outer Koszul objects have smaller sums.
-The long exact Hom sequence, in all integer shifts, makes the middle Hom group zero.
-Tensoring the one-variable triangle with the remaining finite free Koszul factors,
-then sheafifying and localizing, gives the required triangle for any coordinate.
-The argument also applies to an empty tuple, zero ring, or zero generators. -/
+/-- Orthogonality to every shift persists after raising the generators to positive powers
+(Stacks, Tags 09IR, 062C). -/
 theorem koszul_powers_orthogonal_of_orthogonal
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

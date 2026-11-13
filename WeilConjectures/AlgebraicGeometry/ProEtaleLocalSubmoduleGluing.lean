@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalSubsheafGluing
 /-!
 # Gluing compatible local submodules on the pro-etale site
 
-Source: Stacks Project, Sites, Tag 04TR, gluing sheaves, and Modules on Sites,
-Tag 03EL.
+## References
+
+* Stacks Project, Sites, Tag 04TR, and Modules on Sites, Tag 03EL.
 -/
 
 @[expose] public section
@@ -36,17 +37,8 @@ variable {C : Type*} [Category C] [MonoidalCategory C]
       ← whiskerLeft_comp_assoc R a, ha, whiskerLeft_comp_assoc])
 end ActionLift
 
-/-- Compatible local submodules of a fixed internal module glue.
-
-Source: Stacks Project, Sites, Tag 04TR; Modules on Sites, Tag 03EL.
-
-Proof: glue the underlying abelian subobjects using their commuting overlap
-comparisons. The local factorization property of the glued subobject lifts the
-action R tensor P to P: its local factor is the action on L_i composed with the
-local comparison and the tensor comparison of inverse image. Cancel the inclusion
-into Q to prove the unit and associativity laws. The same cancellation proves
-that each local comparison is linear. The resulting internal module, inclusion,
-and local module isomorphisms give the asserted gluing data. -/
+/-- Compatible local submodules of a fixed internal module glue
+(Stacks, Sites, Tag 04TR; Modules on Sites, Tag 03EL). -/
 theorem exists_module_of_compatible_local_monomorphisms
     (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

@@ -20,19 +20,9 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Reduced-case Noetherian induction for the generic affine property.
-Source: Stacks Project, Tags 01OZ and 01J3.
-
-The proof is decomposed into two strict subarguments: one chooses an affine open in an
-irreducible component and produces the strict closed complement, and the other appends
-the resulting reduced generic stratum to a finite stratification of that complement.
-Noetherian induction combines those two subarguments. The inductive claim is that every
-closed subset admits such a finite stratification with support exactly that subset. The
-base case is the empty closed subset, represented by the zero-index stratification. In
-the step, the generic-piece lemma supplies an integral affine open with strict closed
-complement; the induction hypothesis stratifies that complement, and the append lemma
-adds the generic piece.
--/
+/-- Reduced-case Noetherian induction for the generic affine property: every closed subset
+admits a finite reduced stratification with support exactly that subset.
+(Stacks, Tags 01OZ and 01J3.) -/
 theorem exists_reduced_stratification_of_integral_affine_generic_reduced
     (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y] [IsReduced Y]
     (P : (B : Scheme.{u}) → (B ⟶ Y) → Prop)

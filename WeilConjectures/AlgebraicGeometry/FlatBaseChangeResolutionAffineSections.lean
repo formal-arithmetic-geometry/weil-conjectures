@@ -16,8 +16,12 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 
 /-! # Affine sections of the resolution-defined flat base-change comparison
 
-Source: Stacks Project, Tags 02KH and 02N7; Tags 01E4 and 03FD for the
-higher-direct-image and module/abelian cohomology identifications.
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -33,35 +37,10 @@ attribute [local instance] Scheme.Modules.enoughInjectives
 
 set_option maxHeartbeats 500000 in
 -- Comparing the resolution and tensor cohomology interfaces needs extra elaboration steps.
-/-- On affine opens W and V with g(W) contained in V, bijectivity of the actual
+/-- On affine opens `W` and `V` with `g(W)` contained in `V`, bijectivity of the actual
 resolution comparison is exactly bijectivity of the canonical scalar-extension
-comparison for cohomology over the ring of sections of V.
-
-Source: Stacks Project, Tag 02KH, proof of Lemma 30.5.2, affine-local reduction;
-Tag 02N7 for the comparison map, Tag 01E4 for higher direct image sections,
-and Tag 03FD for agreement with abelian-sheaf cohomology.
-
-Proof: Put A = Gamma(V,O_S), B = Gamma(W,O_S'), U = f inverse V and
-N = F restricted to U. Use the canonical affine isomorphisms V = Spec A and
-W = Spec B. The square restricted to W identifies its source with
-Spec B times over Spec A with U, and its pulled-back coefficient with the
-pullback of N. For qcqs f, higher direct images of quasi-coherent modules are
-quasi-coherent. Over affine V their sections equal H^p(U,N), by the Leray
-spectral sequence for f over V and affine vanishing of quasi-coherent higher
-direct images. Over affine W the same argument identifies target sections with
-H^p(U_B,N_B). The quasi-coherent affine pullback section formula identifies
-source sections with B tensor_A H^p(U,N). Compare module-derived cohomology
-with underlying abelian-sheaf cohomology using a module injective resolution:
-forgotten injectives are acyclic for sections, so the common section complex
-computes both. These comparisons respect the pullback unit and scalar action.
-The section formula for the augmented resolution lift says its adjoint sends
-a class to its cohomological pullback. B-linearity therefore identifies its
-map on W with b tensor xi mapped to b times the pullback of xi, which is
-H.baseChange. This conjugates the two displayed maps by additive isomorphisms,
-proving the equivalence of bijectivity. No invertibility of either comparison
-is used in constructing this dictionary. The empty source, the zero module,
-and degree zero are included; no separatedness of U or affineness of its
-intersections is assumed. -/
+comparison for cohomology over the ring of sections of `V`.
+(Stacks, Tags 02KH, 02N7, 01E4 and 03FD.) -/
 theorem Scheme.Modules.flatBaseChangeResolutionBeta_affine_bijective_iff
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f] [Flat g] [Flat (pullback.snd g f)]

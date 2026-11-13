@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.PointLanFiniteProducts
 /-!
 # Affine evaluation of the point left Kan extension
 
-Source: Bhatt–Scholze, Lemma 4.2.13(1), proof; RefactorInstruction, Section 4,
-Lemma point-eval, first paragraph of proof.
+## References
+
+* Bhatt–Scholze, Lemma 4.2.13(1).
 -/
 
 @[expose] public section
@@ -28,15 +29,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Weak contractibility, expressed by sections of epimorphisms of set sheaves.
-Source: Bhatt–Scholze, Section 4.2; RefactorInstruction, Lemma point-eval. -/
+/-- Weak contractibility, expressed by sections of epimorphisms of set sheaves. -/
 def PointLanWeaklyContractible (X : Scheme.{u}) (U : X.ProEt) : Prop :=
   ∀ (F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (f : F ⟶ G),
     Epi f → Function.Surjective (f.hom.app (op U))
 
-/-- The actual connected-component quotient, with its quotient topology, bundled as profinite.
-The topological structure proofs are the recorded component-map theorem.
-Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, Lemma point-eval. -/
+/-- The actual connected-component quotient, with its quotient topology, bundled as
+profinite. -/
 def pointLanComponents (X : Scheme.{u}) (U : X.ProEt) (hU : IsAffine U.left)
     (wU : PointLanWeaklyContractible X U) : Profinite.{u} :=
   @Profinite.of (ConnectedComponents U.left) _
@@ -46,11 +45,8 @@ def pointLanComponents (X : Scheme.{u}) (U : X.ProEt) (hU : IsAffine U.left)
 
 /-- Packaging of the evaluation formula in a specified coefficient category.
 A pointwise Kan extension is supplied with its unit, rather than with a choice of colimits.
-The normalization on every Kan cocone map specifies the evaluation comparison.
-Naturality is simultaneous in coefficient sheaves and in weakly contractible affine objects.
-The last clause says exactly that the restriction cone for every finite coproduct is a
-product cone, also for an empty index type.
-Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, Lemma point-eval. -/
+Naturality is simultaneous in coefficient sheaves and in weakly contractible affine objects,
+and the restriction cone for every finite coproduct (also the empty one) is a product cone. -/
 def PointLanAffineEvaluationProperty (X : Scheme.{u}) (C : Type w) [Category.{v} C] :
     Prop :=
   ∃ b : ∀ (U : X.ProEt) (hU : IsAffine U.left) (wU : PointLanWeaklyContractible X U)
@@ -107,8 +103,8 @@ def PointLanAffineEvaluationProperty (X : Scheme.{u}) (C : Type w) [Category.{v}
       ∃ c : Cofan U, Nonempty (IsColimit c) ∧
         Nonempty (IsLimit (Fan.mk (P.obj (op c.pt)) (fun i ↦ P.map (c.inj i).op))))
 
-/-- The connected-component equivalence supplies the comparison maps and their two naturalities.
-Source: Bhatt–Scholze, Lemma 4.2.13(1), first paragraph. -/
+/-- The connected-component equivalence supplies the comparison maps and their two
+naturalities. -/
 private theorem point_lan_affine_evaluation_b (X : Scheme.{u}) :
     ∃ b : ∀ (U : X.ProEt) (hU : IsAffine U.left) (wU : PointLanWeaklyContractible X U)
       (S : Profinite.{u}),
@@ -247,24 +243,7 @@ private theorem affineEvaluation (X : Scheme.{u}) (C : Type w) [Category.{v} C] 
 /-- The point left Kan presheaf on a weakly contractible affine is evaluation on its
 profinite connected-component quotient. The identifications are canonical, natural in
 both arguments, preserve the coefficient operations, and send finite disjoint unions
-(including the empty one) to products.
-
-Source: Bhatt–Scholze, Lemma 4.2.13(1), proof, first two sentences;
-RefactorInstruction, Section 4, Lemma point-eval, proof, first paragraph.
-
-Proof:
-1. Use lem-weil-pbc-proetale-point-components-maps to obtain the profinite component
-   quotient and the natural correspondence between maps into X[S] and maps into S.
-2. For T = pi_0(U), let q correspond to the identity on T. Every map U → X[S]
-   corresponds to a unique map T → S. Thus (T,q) is terminal in the Kan index,
-   whose arrows reverse the maps of profinite targets. Its colimit is F(T): the
-   cocone maps are F(g), and compatibility forces every cocone to factor uniquely
-   through its component at (T,q). This works in all three coefficient categories.
-3. Components of a finite disjoint union form the finite coproduct of the component
-   spaces. The sheaf condition on the finite jointly surjective coproduct cover gives
-   the product cone, also for the empty family. Precomposition gives naturality in U;
-   naturality of a sheaf morphism gives naturality in F. All cocone maps and the
-   resulting isomorphisms are morphisms of the indicated coefficient category. -/
+(including the empty one) to products. -/
 theorem point_lan_affine_evaluation (X : Scheme.{u}) :
     PointLanAffineEvaluationProperty X (Type (u + 1)) ∧
     PointLanAffineEvaluationProperty X AddCommGrpCat.{u + 1} ∧

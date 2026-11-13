@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 
 /-! # A step of persistent pairwise overlap lifting
 
-Source: Stacks Project, Tag 01ZR, first proof.
+## References
+
+* Stacks Project, Tag 01ZR.
 -/
 
 @[expose] public section
@@ -32,26 +34,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Lift the conjugated map on a fixed pair at one stage, without any assertion
 about later stages.
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 05N7 (2), (3).
-
-Proof: The ambient stage is quasi-separated, so the intersection of its two
-chosen affine opens is quasi-compact. Cover this intersection at stage j by
-finitely many affine opens, and each pairwise intersection of this refinement
-by finitely many affine opens. Stage transition maps are affine, so the inverse
-images of these affine opens remain affine and cover each later overlap.
-Base change of the limit cone is a limit cone for each such affine system;
-Spec and global sections identify its coordinate ring with the directed colimit
-of the stage rings. Restrict the conjugated transition of M to these affines.
-The restricted N a and N b remain finitely presented and quasi-coherent, and
-quasi-coherent pullback is scalar extension. Tag 05N7 (2) lifts the finitely many
-maps; (3) makes their restrictions agree on the refinement intersections at a
-common later stage.
-Glue by the sheaf condition. The glued limit map is the prescribed conjugated
-transition because this is true on the affine refinement. Transport along the
-canonical iterated chart maps and pullback composition comparisons gives the
-stated square at this stage. This does not establish persistence. An empty
-overlap has its unique map; the tail above j is nonempty, and passing to its
-partial-order quotient handles a preorder. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_overlap_pair_map_at_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

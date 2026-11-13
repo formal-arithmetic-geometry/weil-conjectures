@@ -18,14 +18,17 @@ import WeilConjectures.CategoryTheory.Sites.SheafPullbackModuleFlat
 # Flat module objects under pullback from the condensed point
 
 Let `Λ` be a commutative condensed ring and `X` a scheme. The pullback
-`p_X^*: Mod_Λ ⥤ Mod_{Λ_X}` of module objects from the condensed point preserves flat objects
+`p_X^* : Mod_Λ ⥤ Mod_{Λ_X}` of module objects from the condensed point preserves flat objects
 (`AlgebraicGeometry.ProEtale.preservesFlat_mapMod_upperStarFromPoint`).
 
-Writing `p_X^* = π_X^* ∘ p^*` with `π_X: X ⟶ Spec ℤ`, both factors are inverse images of
+Writing `p_X^* = π_X^* ∘ p^*` with `π_X : X ⟶ Spec ℤ`, both factors are inverse images of
 ringed sites along continuous, representably flat functors of sites, and these preserve flat
-modules (Stacks Project, Tag 05VD).
+modules.
 
-Source: Stacks Project, Tag 05VD; HRS Section 3.
+## References
+
+* Stacks Project, Tag 05VD.
+* Hemo--Richarz--Scholbach, Section 3.
 -/
 
 @[expose] public section
@@ -40,7 +43,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The pullback of module objects from the condensed point to `(Spec ℤ)_proét` preserves flat
-objects. Source: Stacks Project, Tag 05VD. -/
+objects (Stacks, Tag 05VD). -/
 theorem preservesFlat_mapMod_pointUpperStar : (pointUpperStar.{u}.mapMod Λ).PreservesFlat := by
   have h := Functor.sheafPullbackConstruction.preservesFlat_mapModComap
     (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ.{u}) profiniteToProEt Λ
@@ -49,15 +52,8 @@ theorem preservesFlat_mapMod_pointUpperStar : (pointUpperStar.{u}.mapMod Λ).Pre
     Functor.isoWhiskerLeft _ (Mod.comapId _) ≪≫ Functor.rightUnitor _
   exact ⟨fun hM ↦ ObjectProperty.prop_of_iso _ (e.app _) (h.flat_obj hM)⟩
 
-/-- The pullback `p_X^*: Mod_Λ ⥤ Mod_{Λ_X}` of module objects from the condensed point
-preserves flat objects.
-
-Source: Stacks Project, Tag 05VD.
-
-Proof: `p_X^*` is the composite of `p^*` and `π_X^*`. On module objects this composite is
-`p^*` followed by `π_X^*` and the restriction of scalars along the identity comparison of
-coefficient rings; the first factor preserves flat objects by
-`preservesFlat_mapMod_pointUpperStar`, the second by `inverseImageModule_preservesFlat`. -/
+/-- The pullback `p_X^* : Mod_Λ ⥤ Mod_{Λ_X}` of module objects from the condensed point
+preserves flat objects (Stacks, Tag 05VD). -/
 theorem preservesFlat_mapMod_upperStarFromPoint (X : Scheme.{u}) :
     ((upperStarFromPoint X).mapMod Λ).PreservesFlat := by
   let F := pointUpperStar.{u}

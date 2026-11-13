@@ -30,7 +30,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The compact normalized signed-twist interface, retaining its public projections.
-Source: Stacks Tags 03PK and 03Q1. -/
+(Stacks, Tags 03PK and 03Q1) -/
 structure P1DecompositionTwistTransport (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) where
   roots : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsUnit (N : Γ(Y, ⊤)) →
@@ -85,7 +85,7 @@ structure P1DecompositionTwistTransport (A : Type (u + 1)) [CommRing A]
         (Scheme.finiteEtaleTateSheaf A N T hA 0)
 
 /-- Keep precisely the compact record's projections of full normalized transport.
-Source: Stacks Tags 03PK and 03Q1. -/
+(Stacks, Tags 03PK and 03Q1) -/
 def p1DecompositionTransportOfData (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : Scheme.FiniteEtaleTwistPullbackData A N hA) :
     P1DecompositionTwistTransport A N hA :=
@@ -101,7 +101,7 @@ def p1DecompositionTransportOfData (A : Type (u + 1)) [CommRing A]
 
 /-- Project the already constructed fully normalized transport into the compact
 interface, keeping each characterizing equation and making no additional choice.
-Source: Stacks Tags 03PK and 03Q1. -/
+(Stacks, Tags 03PK and 03Q1) -/
 @[irreducible]
 def p1DecompositionTwistTransport (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) :
@@ -109,8 +109,7 @@ def p1DecompositionTwistTransport (A : Type (u + 1)) [CommRing A]
   p1DecompositionTransportOfData A N hA (Scheme.finiteEtaleTwistPullbackData A N hN hA)
 
 /-- The signed twist pullback with its roots, pure-tensor and negative-evaluation
-normalizations retained in `p1DecompositionTwistTransport`.
-Source: Stacks Tags 03PK and 03Q1. -/
+normalizations retained in `p1DecompositionTwistTransport`. (Stacks, Tags 03PK and 03Q1) -/
 def p1DecompositionSheafPullback (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) (a : ℤ) :
@@ -120,7 +119,7 @@ def p1DecompositionSheafPullback (A : Type (u + 1)) [CommRing A]
     f hY ((map_natCast f.appTop.hom N) ▸ hY.map f.appTop.hom) a
 
 /-- The inverse-line product, whose hom is characterized as internal-Hom evaluation.
-Source: Stacks Tag 03PK. -/
+(Stacks, Tag 03PK) -/
 def p1DecompositionSheafProduct (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) :
@@ -128,15 +127,13 @@ def p1DecompositionSheafProduct (A : Type (u + 1)) [CommRing A]
       Scheme.finiteEtaleTateSheaf A N T hA (1 + -1) :=
   (p1DecompositionTwistTransport A N hN hA).product T hT
 
-/-- A finite signed twist placed in degree zero and shifted by an integer.
-Source: the definition K=A_S(-1)[-2]. -/
+/-- A finite signed twist placed in degree zero and shifted by an integer. -/
 abbrev p1DecompositionTwist (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (T : Scheme.{u}) (a b : ℤ) :
     DerivedCategoryModule A T :=
   (ordinaryFiniteDegreeZero A T (Scheme.finiteEtaleTateSheaf A N T hA a))⟦b⟧
 
-/-- Shift a comparison between functors, without unfolding its concrete categories.
-Source: functoriality of the shift. -/
+/-- Shift a comparison between functors, without unfolding its concrete categories. -/
 @[irreducible]
 def p1DecompositionShiftedComparison {C D C₀ D₀ : Type*}
     [Category C] [Category D] [Category C₀] [Category D₀]
@@ -149,8 +146,7 @@ def p1DecompositionShiftedComparison {C D C₀ D₀ : Type*}
     (shiftFunctor _ b).mapIso (comp.app L ≪≫ single'.mapIso e)
 
 /-- Derived inverse image of a signed shifted twist, with the canonical shift and
-degree-zero comparisons and the normalized sheaf comparison.
-Source: Stacks Tag 03Q1. -/
+degree-zero comparisons and the normalized sheaf comparison. (Stacks, Tag 03Q1) -/
 def p1DecompositionTwistPullback (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) (a b : ℤ) :
@@ -166,8 +162,7 @@ def p1DecompositionTwistPullback (A : Type (u + 1)) [CommRing A]
     (p1DecompositionSheafPullback A N hN hA f hY a) b
 
 /-- Compute the tensor of the positive line and its sheaf dual in degree zero.
-The positive line is flat by its normalized inverse-product isomorphism.
-Source: the evaluation step in the node. -/
+The positive line is flat by its normalized inverse-product isomorphism. -/
 @[irreducible]
 def p1DecompositionDegreeZeroTensor (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
@@ -182,8 +177,7 @@ def p1DecompositionDegreeZeroTensor (A : Type (u + 1)) [CommRing A]
     (ObjectProperty.flat_of_tensorIso (p1DecompositionSheafProduct A N hN hA T hT))
 
 /-- Evaluate the degree-zero dual against the positive line, using symmetry and
-then the actual internal-Hom evaluation, after the canonical flat tensor comparison.
-Source: the evaluation step in the node. -/
+then the actual internal-Hom evaluation, after the canonical flat tensor comparison. -/
 @[irreducible]
 def p1DecompositionDegreeZeroEvaluation (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
@@ -198,8 +192,7 @@ def p1DecompositionDegreeZeroEvaluation (A : Type (u + 1)) [CommRing A]
       ((ihom.ev (Scheme.finiteEtaleTateSheaf A N T hA 1)).app (ordinaryFiniteConstant A T))
 
 /-- Evaluation of A_T(-1)[-2] against A_T(1)[2]: cancel the shifts and apply
-`p1DecompositionDegreeZeroEvaluation`.
-Source: the evaluation in the defining adjoint of h. -/
+`p1DecompositionDegreeZeroEvaluation`. -/
 @[irreducible]
 def p1DecompositionEvaluation (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ProperClosedFibreApproximation
 /-!
 # Finite-type descent of a finite étale closed-fibre cover
 
-Source: Stacks Project, Tag 0GS2, proof, General case (Tags 0A0P, 01ZM, 01ZO, 07RP).
+## References
+
+* Stacks Project, Tags 0GS2, 0A0P, 01ZM, 01ZO and 07RP
 -/
 
 @[expose] public section
@@ -30,25 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A closed-fibre cover descends to a proper scheme over a finite-type integer ring.
-No henselian hypothesis or henselization is used in this statement.
-
-Source: Stacks Project, Tag 0GS2, proof, General case, before henselizing the stages.
-
-Proof:
-1. Apply proper Noetherian approximation (Tag 0A0P) with affine bases. Write their
-   rings as R_i, with maps alpha_i to A, and put K_i = alpha_i^{-1}(I).
-2. The quotient rings R_i/K_i have colimit A/I: every element has a representative
-   at some stage, and a representative is zero precisely when it lies in K_i.
-3. Spec turns this colimit into a limit. Pullbacks commute with limits, so the
-   closed fibres X_i,0 form an inverse system with limit Y_0. Their transitions
-   are affine: factor each into a closed immersion and a base change of an affine
-   transition. Each closed fibre is quasi-compact and quasi-separated by properness.
-4. V is of finite presentation (finite and étale), so Tag 01ZM descends it to a
-   finitely presented morphism at a stage. Tags 01ZO and 07RP give later stages
-   where it is finite and étale. Choose a common upper bound and base change.
-5. Use the limit projections p and q. Their first projections commute by the
-   original limit-cone relation, and their second projections commute by the
-   quotient ring maps. The descended cover pulls back to V over Y_0. -/
+No henselian hypothesis or henselization is used in this statement
+(Stacks, Tag 0GS2, General case). -/
 theorem exists_finiteEtale_finiteType_closedFibre_stage
     {A : Type u} [CommRing A] (I : Ideal A)
     {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f]

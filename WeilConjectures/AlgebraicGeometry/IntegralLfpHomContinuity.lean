@@ -31,17 +31,7 @@ noncomputable local instance hasZeroMorphisms_condensedRingObj_integralLfpHom
 set_option backward.isDefEq.respectTransparency true in
 -- Exact single-sheaf triangles carry the integral coefficient instance.
 /-- Hom continuity for a locally finitely presented integral module on the scheme itself.
-Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3) and Lemma 6.8.12.
-
-Proof. Resolve P by the two locally finite free modules F₁ and F₀ in the integral
-resolution theorem. For the fixed diagram N and its canonical colimit cocone, the
-finite free continuity theorem gives the Hom-colimit property of F₁[0] and F₀[0]
-in every integer shift. The short exact sequence F₁ → F₀ → P gives a distinguished
-single-sheaf triangle. Rotate it once, so its first and third terms are F₀[0] and
-F₁[0][1]. Shift stability and distinguished extension closure give the property
-of P[0]. Evaluate it at the requested shift n. Every comparison is the canonical
-colimit.desc on the original legs; no choice of a colimit or telescope is needed.
--/
+(Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.12) -/
 theorem integral_lfp_hom_continuity
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]

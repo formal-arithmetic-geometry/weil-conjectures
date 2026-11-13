@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 /-!
 # Clopen restriction to a proper henselian closed fibre
 
-Source: Stacks Project, Tags 0A0B (Stein connectedness) and 0CAM (clopen lifting).
+## References
+
+* Stacks Project, Tags 0A0B (Stein connectedness) and 0CAM (clopen lifting).
 -/
 
 @[expose] public section
@@ -23,25 +25,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Restriction to the closed fibre is injective and surjective on clopen subsets.
-Source: Stacks Project, Etale Cohomology, Lemma 59.91.1, Tag 0A0B.
-
-Proof: The quotient spectrum morphism is a closed immersion, and so is its base change
-`i`. The pullback range formula identifies its image `Z` with `f⁻¹(V(I))`. Stein
-connectedness for the proper henselian morphism says that `Y` is spectral and that
-`Z` meets every irreducible closed subset in a nonempty connected set.
-
-For uniqueness, if two clopens have equal inverse images but differ, one of their
-closed differences is nonempty. The closure of a point in that difference is contained
-in it and meets `Z`, contradicting equality of the inverse images.
-
-For existence, the closed embedding identifies `Y₀` homeomorphically with `Z`.
-Transport the given clopen and its complement across this homeomorphism. Each point
-closure meets `Z` in a connected set, so Tag 0CAM lifts this closed decomposition to
-a decomposition `Y = U ∐ W` into closed sets. Since `U = Wᶜ`, the set `U` is also open.
-The intersection identity for the lifted decomposition, together with injectivity
-of `i`, gives `i⁻¹(U) = V`. Empty spaces and empty pieces are included by the same
-argument; no nonemptiness of `Y` or of the prescribed clopen is required. -/
+/-- Restriction to the closed fibre is injective and surjective on clopen subsets
+(Stacks, Tag 0A0B). -/
 theorem Scheme.henselian_clopen_restriction
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
     {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)

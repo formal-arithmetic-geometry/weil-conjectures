@@ -21,7 +21,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-! # Quasi-coherent vanishing over inverse images of affine opens
 
-Source: Stacks Project, Tags 08D4 (3), 08D5 and 01F4 (2).
+## References
+
+* Stacks Project, Tags 08D4, 08D5 and 01F4.
 -/
 
 @[expose] public section
@@ -98,26 +100,8 @@ private theorem open_cohomology_restrict_iso (X : Scheme.{u}) (F : X.Modules)
     Q.mapIso (J.isoRightDerivedObj S p).symm⟩
 
 /-- Positive module cohomology vanishes on inverse images of affine opens
-when higher direct image vanishes on quasi-coherent modules.
-Source: Stacks Project, Tags 08D5, 01F4 (2), 01XJ and 01XB.
-
-Proof:
-1. Put U = f inverse-image V. The restriction F|U is quasi-coherent.
-Restriction of an injective resolution remains injective, so the cohomology
-in the conclusion computes H^p(U,F|U).
-2. The bounded-below/unbounded single-object comparison identifies
-H^p(Rf_*(F[0])) with ordinary R^p f_*F, which is zero by hacyc.
-Restrict an injective resolution of F to U. The sectionwise pushforward/restriction
-comparison identifies g_*(I|U) with (f_*I)|V, where g = f|V.
-Exact restriction on Y commutes with homology, so R^p g_*(F|U) is zero.
-All R^q g_*(F|U) are quasi-coherent by the existing isQuasicoherent_higherDirectImage
-statement (Stacks 01XJ (1)); only qcqs is needed, with no uniform support bound.
-3. Since V is affine, affine vanishing kills positive cohomology of each
-of these quasi-coherent higher direct images. The canonical Leray edge
-is consequently an isomorphism. In degree p > 0 its target is sections
-of the zero higher direct image from step 2. The source, and hence the
-stated open module cohomology, is zero. The empty affine open gives the
-zero sections complex, so is included without an extra hypothesis. -/
+when higher direct image vanishes on quasi-coherent modules
+(Stacks, Tags 08D5, 01F4, 01XJ and 01XB). -/
 theorem qcoh_acyclic_inverse_affine_open_vanishing {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Perfectness detected on open neighbourhoods
 
-Source: Stacks Project, Tag 08CM, definition-perfect.
+## References
+
+* Stacks Project, Tag 08CM.
 -/
 
 @[expose] public section
@@ -76,17 +78,8 @@ private theorem open_pullback_iso (S : Scheme.{u}) (U : S.Opens)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Perfectness is local for derived pullback along open immersions.
-Source: Stacks Project, Tag 08CM, definition-perfect; Tag 0A1H, locality sentence.
-Proof: for x choose U containing x on which the derived restriction is perfect.
-Choose a strictly perfect representative near the point of U corresponding to x.
-An open of U is an open V of S contained in U. Exact open restriction agrees with
-its left derived functor, by uniqueness of left derived functors. The equivalences
-between module sheaves on open subschemes and on localized sites identify successive
-restrictions with restriction to V. They preserve finite free modules, their retract
-maps and zero terms. Transport the local representative and its isomorphism across
-these equivalences. This gives precisely the witness at x in S.IsPerfect K.
-The empty scheme is vacuous and no uniform bound or quasi-compactness is required. -/
+/-- Perfectness is local for derived pullback along open immersions
+(Stacks, Tags 08CM and 0A1H). -/
 theorem perfect_of_open_pullbacks
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

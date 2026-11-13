@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRestrictedCoefficientC
 
 /-! # Bundled formula for composition of raw cohomology pullbacks
 
-Source: Stacks Project, Tag 09Z1, canonical comparison maps.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -43,10 +45,7 @@ private theorem restrictedCoefficient_comp
     | exact higherDirectImageRawOverCoefficient_heq Λ G _
     | exact higherDirectImageRawOverComplex_eq Λ G _
 
-/-- The explicit raw pullback formula is compositional as a function on classes.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps. The proof expands the
-five factors, applies derived inverse-image composition, upper-star associativity,
-single-functor composition, and shift compatibility. -/
+/-- The explicit raw pullback formula is compositional as a function on classes. -/
 theorem higherDirectImageRawOverPullback_function_comp
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

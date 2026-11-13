@@ -31,8 +31,9 @@ import WeilConjectures.AlgebraicGeometry.RingComplexEndomorphismSelfDual
 
 /-! # Inverse image of termwise finite free complex duals
 
-Source: Stacks Project, sites-modules.tex, remark-pullback-internal-hom;
-algebraization.tex, Tag 0A0E, finite free dual calculation.
+## References
+
+Stacks Project, Tag 0A0E; Stacks Project, Sites and Modules, Remark on pullback of internal Hom.
 -/
 
 @[expose] public section
@@ -339,36 +340,7 @@ private theorem normalizeDualComparison
 
 /-- Finite free duality commutes with ordinary module inverse image. The target of
 Hom is the ring complex in degree zero; the source need not be bounded. The
-comparison is contravariantly natural on the termwise finite free complexes.
-
-Source: Stacks Project, sites-modules.tex, remark-pullback-internal-hom and
-lemma-tensor-product-pullback; algebraization.tex, Tag 0A0E, dual calculation.
-
-Proof in words: transpose pulled-back evaluation using the inverse ordinary tensor
-comparison, and use the existing signed Hom-complex construction to obtain a
-natural chain map. Tensoring by the rank-one ring module is equivalent to the
-identity, so its tensor-Hom adjunction shows that the ordinary comparison is
-invertible for that source. Additive naturality extends this to every finite
-biproduct of copies of the ring, including the empty biproduct; reindexing a
-finite basis gives invertibility for every finite free source.
-
-In degree n, Hom(E,R[0]) has just its possibly nonzero factor Hom(E.X(-n),R).
-The projection to it is an isomorphism by the product universal property: all
-other factors have zero target. Pullback preserves zero objects and isomorphisms.
-The comparison on the surviving factor is the ordinary finite free comparison,
-so the chain map is an isomorphism. Postcompose its target with the specified j.
-Naturality in every source chain map follows from the Hom bifunctor and the
-evaluation characterization, without a choice of basis in the construction.
-
-Every endomorphism of the ring module is multiplication by its value at one.
-Commutativity implies that it is self-dual under evaluation at one, and the same
-holds for the ring complex in degree zero. Let a be the automorphism of S[0]
-obtained by composing j.inv, pullback of inverse evaluation, the constructed dual
-comparison at R[0], contravariant Hom of j.inv, and evaluation over S. Set
-u = j followed by a. Self-duality of a gives the displayed normalization by
-cancelling the evaluation and j isomorphisms. Arbitrary j, zero rings, empty sites
-and unbounded sources cause no extra products or convergence condition; no
-flatness of the coefficient map is used. -/
+comparison is contravariantly natural on the termwise finite free complexes. -/
 theorem finiteFreeComplexDualPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

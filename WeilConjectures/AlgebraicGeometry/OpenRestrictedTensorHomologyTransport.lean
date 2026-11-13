@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorChainTransport
 import WeilConjectures.AlgebraicGeometry.OpenStalkChainHomologyTransport
 /-! # Homology transport for normalized open tensor coordinates
 
-Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
+## References
+
+* Stacks Project, Tags 0098 and 0D5U.
 -/
 
 
@@ -28,27 +30,8 @@ variable [∀ Y : Scheme.{u},
 
 
 /-- The homology transport equation for normalized open tensor coordinates.
-
-Proof: The input-chain normalization is the inverse same-germ restriction map,
-and eD is the actual open projection stalk map. Evaluate tensorStalkIso and the
-adjunction mates defining openTensorRestrictionSquareIso on a pure tensor of a
-coefficient and a section germ. The assumed formula for t makes both resulting
-chain maps equal to the same restricted germ with coefficient eD(d). Every stalk
-element is a section germ and tensor induction gives equality of chain maps.
-Apply homology. The exact restrictScalars homology isomorphism accounts for the
-change of coefficient ring. Use comparisonStalkHomologyIso_naturality to move the
-localized chain restriction square across the stalk-homology comparisons. Expand
-openDerivedStalkIso into exact stalk homology, the same-germ restriction map,
-exact restriction homology, and the derived restriction comparison. Exact-functor
-homology naturality identifies these factors with openRestrictionRepresentativeIso.
-Its inverse is the first factor of openRestrictedTensorDerivedIso, so it cancels;
-the remaining factor is the localized chain square already identified. This is
-the displayed equation. No flatness, boundedness, nonzero stalk ring or resolution
-is used. Empty opens have no point, and zero complexes give zero morphisms.
-This lemma supplies only the homology equation; it constructs none of the ring,
-input-chain or tensor-chain isomorphisms.
-Source: Stacks Project, Tags 0098 and 0D5U, Section 20.32 opening paragraph;
-Mathlib exact-functor homology naturality. -/
+This supplies only the homology equation; it constructs none of the ring,
+input-chain or tensor-chain isomorphisms. -/
 theorem openRestricted_tensor_homology_transport
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

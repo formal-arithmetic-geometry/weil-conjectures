@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.PicardCanonicalBaseChange
 
 /-! # Tensor pullback square and conjugation
 
-Source: Stacks Project, Tags 0095, 0096, 0097 and 08HY.
+## References
+
+* Stacks Project, Tags 0095, 0096, 0097 and 08HY
 -/
 
 @[expose] public section
@@ -137,25 +139,8 @@ private theorem tensor_equality_app {X Y : Scheme.{u}} (k l : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The inverse conjugate of a pushforward square is the tensor pullback square.
-Source: Stacks Project, Tags 0095, 0096 and 0097 (tensor formula, adjunction,
-and composition), and
-08HY (the pushforward square used to define base change).
-
-Proof: Transport each tensor pullback to ordinary pullback by
-`picardTensorComparison`. The conjugate of each comparison is the identity,
-by uniqueness of left adjoints. Whiskering these identities and using
-`conjugateEquiv_comp` reduces each composition comparison to
-`conjugateEquiv_pullbackComp_inv`. For the middle equality comparison,
-substitute equal morphisms; its conjugate is the identity and equals the
-pushforward equality comparison, as checked on sections. Therefore the
-conjugate of the three-factor pullback square is the three-factor pushforward
-square. Apply inverse conjugation and evaluate at A. The component of the
-bundled tensor composition isomorphism is definitionally `picardTensorCompIso`.
-Substituting equal morphisms identifies the component of functor equality
-transport with object equality transport. No cartesian assumption or invertibility
-of the base-change map is used, and the calculation applies to zero modules and
-empty schemes. -/
+/-- The inverse conjugate of a pushforward square is the tensor pullback square
+(Stacks, Tags 0095, 0096, 0097 and 08HY). -/
 theorem picardTensorSquareConjugacy
     {X S T X' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ T)
     (g : T ⟶ S) (v : X' ⟶ X) (e : v ≫ f = f' ≫ g) (A : S.Modules) :

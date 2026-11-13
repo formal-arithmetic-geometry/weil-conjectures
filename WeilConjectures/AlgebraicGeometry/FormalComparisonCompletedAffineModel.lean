@@ -19,7 +19,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherent model of the affine formal comparison
 
-Source: Stacks Project, Lemma 088B, base change to the completion and algebraization.
+## References
+
+* Stacks Project, Tag 088B
 -/
 
 @[expose] public section
@@ -32,28 +34,8 @@ namespace AlgebraicGeometry
 
 /-- The affine limit comparison is conjugate, after restricting scalars, to global
 sections of a map between coherent modules over the completed affine base. That map
-is invertible away from the extended exceptional ideal. No annihilation is asserted.
-
-Source: Stacks Project, Lemma 088B, second half of its proof, through the assertion
-that the algebraized adjunction map is invertible over the complement of V(K).
-
-Proof: Restrict f, F, G, beta and the two comparison equations to the affine U.
-Put B = Gamma(U,O) and R = its J(U)-adic completion. R is Noetherian and flat over
-B, and B/J(U)^n = R/(J(U)R)^n. Base change X_U to Spec R. Flat base change identifies
-pushforward of F and of its quotients with the corresponding pullbacks. Formal
-functions and the affine formal-module equivalence identify the inverse limits
-before and after this base change, naturally on morphisms. Algebraize G over R by
-the affine equivalence, obtaining A. Pullback commutes with completion, so full
-faithfulness of completion on coherent modules proper over R lifts beta, and its
-inverse, to inverse coherent maps b and b^{-1}. Put D = f'_*F' and let c be the
-adjunction unit followed by f'_*b. Proper coherent direct image gives coherence of
-D. The quotient and adjunction equations, and uniqueness via formal functions,
-identify the limit of alpha with the sections of c under the two limit isomorphisms.
-The base change f' is an isomorphism off V(K(U)R); there the adjunction unit, and
-hence c, is invertible. This gives the asserted restriction isomorphism. If U is
-empty, R is the zero ring and both coherent modules and limits vanish. If J(U) is
-the unit ideal, its completion and all the formal terms vanish as well.
--/
+is invertible away from the extended exceptional ideal. No annihilation is asserted
+(Stacks, Tag 088B). -/
 theorem formalComparison_completed_affine_model
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

@@ -11,9 +11,12 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechColumnStep
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSingletonGluing
 
-/-! # principal-open Čech augmentation for injective terms
+/-!
+# Principal-open Čech augmentation for injective terms
 
-Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -116,28 +119,8 @@ private theorem homology_mono_of_boundary_lift
   exact ⟨x, hx⟩
 
 /-- The finite subset Čech augmentation for a complex with injective terms
-induces monomorphisms on homology, without any boundedness or K-injectivity assumption.
-
-Source: Stacks Project, Cohomology, Tag 08C1, finite exact augmented row argument.
-
-Proof: Each I.X n is injective as a sheaf of modules and hence flasque. The augmented
-Čech row for the finite cover of V is exact: sheaf separation gives injectivity at
-sections, gluing identifies the degree-zero kernel, and injective-module Čech
-acyclicity gives exactness in positive degrees. Restrict the tuple model to increasing
-tuples, using the alternating Čech comparison, and identify increasing tuples with
-finite subsets. Their deletion positions are exactly the displayed filter-cardinality
-signs. These identifications give row exactness for the formulas in the statement.
-Given a section cocycle whose augmentation is the boundary of t, start at the largest
-Čech column of t. Its horizontal differential is zero because the boundary has no
-components above column zero. Row exactness produces a horizontal primitive in the
-preceding column. Subtract its total differential from t. This preserves the total
-boundary and removes that column, changing only the preceding column. Iterate down
-through the r finite columns. At column zero, exactness identifies the remaining
-primitive as the augmentation of a section. The chain-map identity and injectivity
-of the augmented row show that the given section is its vertical boundary. Thus the
-kernel of each homology map is zero. The zero-module interpretation of sections on
-the empty open proves the r=0 case; repeated and empty opens do not change exactness.
-The proof uses injectivity of the terms, never K-injectivity of the complex. -/
+induces monomorphisms on homology, without any boundedness or K-injectivity assumption
+(Stacks, Tag 08C1). -/
 theorem principalOpenCech_homology_mono_of_injective_terms
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

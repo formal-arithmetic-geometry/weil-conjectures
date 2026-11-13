@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Descent of derived morphisms between open perfect stalks
 
-Source: Stacks Project, Tags 09RE (affine proof), 0BC7 (2), 00CR, and 06Z0.
+## References
+
+* Stacks Project, Tags 09RE, 0BC7, 00CR and 06Z0.
 -/
 
 @[expose] public section
@@ -53,26 +55,7 @@ private theorem perfect_stalk_isKProjective
 set_option backward.isDefEq.respectTransparency false in
 /-- A derived morphism between the open stalks of two strictly perfect complexes descends
 as a derived morphism on a smaller affine open, in the coordinates of the canonical
-restriction comparison. This does not choose a chain representative
-and does not involve a comparison with any global complex.
-
-Source: Stacks Project, Tag 09RE affine proof; Tag 0BC7 (2), with Tags 00CR and 06Z0.
-
-Proof: On U, finite-free retracts are quasi-coherent. Global sections identify P and Q
-with bounded complexes of finite projective modules over A = Gamma(X,U). The stalk at x
-is scalar extension to A localized at the prime corresponding to x. Present this ring
-as the filtered colimit of A_f for f outside that prime (00CR). The affine perfect Hom
-comparison is surjective by 09RE, affine proof, or 0BC7 (2). Thus the given arrow is
-represented in the derived category of A_f for one f. The basic open D(f) is affine,
-contains x, and lies in U. The affine derived equivalence (06Z0) carries this arrow to g
-between the restrictions of P and Q. Restriction does not change the stalk at x: the
-canonical comparison `openModuleStalkRestrictionComparison` gives cP and cQ.
-Naturality of scalar extension and the localization factorization identifies
-the derived stalk image of g with the transported original arrow, giving the equation.
-Only Hom surjectivity is used; neither inverse descent nor Hom injectivity is needed.
-The assumptions exclude an empty U, while zero complexes and zero ranks are allowed:
-their Hom groups are zero and the zero arrow descends on U itself. Neither affineness
-of U nor perfectness of Q is used. -/
+restriction comparison (Stacks, Tags 09RE, 0BC7, 00CR and 06Z0). -/
 theorem exists_affine_perfect_open_stalk_derived_hom_descent
     (X : Scheme.{u})
     [∀ W : X.Opens,

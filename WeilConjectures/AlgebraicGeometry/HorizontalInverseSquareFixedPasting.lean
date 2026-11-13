@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.HorizontalOrdinaryInverseFixedPasting
 
 /-! # Ordinary inverse-square pasting with the fixed upper transport
 
-Source: Stacks Project, Tags 0ATM and 0ATR.
+## References
+
+* Stacks Project, Tags 0ATM and 0ATR
 -/
 
 @[expose] public section
@@ -158,24 +160,7 @@ private theorem horizontalOrdinaryBaseComparison_eq
 /-- The pasted inverse ordinary square agrees with the rectangle inverse square,
 after changing its upper projection and base pullback by the pinned comparisons.
 This statement involves no right adjoint to the bottom direct image.
-Source: Stacks Project, Remark 20.28.5 (Tag 0ATM), and Lemma 48.5.2 (Tag 0ATR).
-
-Proof: Transpose the rectangle ordinary square and the horizontal composite under
-pullback along the outer upper projection. Expand schemeDerivedBaseChangeMap as
-its defining counit transpose. Naturality moves each composition comparison past
-the counit. Apply associativity of the pinned pullback composition family to the
-base chain h,g and to the upper projection chain. The two projection equations
-of pullbackLeftPullbackSndIso identify the resulting maps; injectivity of the
-adjunction Hom equivalence gives ordinary pasting. Invert these ordinary squares.
-The comparison of direct images along the upper scheme isomorphism is the
-conjugate of the pinned pullback comparison. Its right-adjoint comparison is
-horizontalMateRightAdjointIso: use rightAdjointUniq_hom_app_counit for the
-transported adjunction, then the equivalence triangle identities. Consequently
-its inverse ordinary square is the inverse mate of that right-adjoint comparison.
-Whiskering the inverted ordinary pasting equation with the two pullback
-comparisons gives the displayed identity. All comparisons are natural, and all
-cancellations invert only ordinary squares or the displayed isomorphisms; zero
-objects, identity morphisms and empty schemes are included. -/
+(Stacks, Tags 0ATM and 0ATR) -/
 theorem horizontal_inverse_square_fixed_pasting
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}

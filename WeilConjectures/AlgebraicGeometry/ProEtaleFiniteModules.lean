@@ -160,15 +160,7 @@ noncomputable def finiteCoefficientScalarMap :
     toSheafify (Scheme.ProEt.topology T) (finiteCoefficientPresheaf T Λ)
 
 /-- Constant scalar sections identify the coefficient sheaf with the sheafification of
-constant scalars.
-
-Proof: continuous functions to a discrete ring are locally constant. Their level sets,
-pulled back along the quotient map to connected components, are open and give an open
-cover of the scheme, hence a pro-etale cover. On each member the function is a constant
-scalar. Two constant scalars with equal restrictions are equal locally, including the
-empty object, whose empty cover is allowed. Thus the constants-to-functions map is
-locally bijective. The sheafification unit is locally bijective and these properties
-are closed under composition. This also treats the zero ring and disconnected schemes. -/
+constant scalars. -/
 theorem finiteCoefficientScalarMap_locallyBijective :
     Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) ∧
     Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) := by

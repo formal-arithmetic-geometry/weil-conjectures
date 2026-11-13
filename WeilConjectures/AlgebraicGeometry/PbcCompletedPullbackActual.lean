@@ -114,10 +114,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Completed pullback on the published completed-coefficient categories
 
-Source: Stacks proetale.tex, Tag 099N (2),(5), blueprint order 1261.
 The coefficient structure is fixed on all quotient projections. Ordinary pullback
 is its total derived sheafified tensor inverse image. Completion is characterized
 by its reflection universal property on the actual intrinsic complete subcategory.
+
+## References
+
+* Stacks Project, Tag 099N (2), (5).
 -/
 
 @[expose] public noncomputable section
@@ -134,8 +137,8 @@ variable (d : AdicCoefficientDatum A)
 abbrev pbcActualCompletedRing (T : Scheme.{u}) :=
   (adicLisseForget T).obj (pbcAdicCompletion T d)
 
-/-- The recorded coefficient structure map, after forgetting commutativity.
-Source: Stacks 099N. -/
+/-- The recorded coefficient structure map, after forgetting commutativity
+(Stacks, Tag 099N). -/
 abbrev pbcActualStructureMap : pbcActualCompletedRing d Y ⟶
     (proEtaleSheafDirectImage g RingCat.{u + 1}).obj (pbcActualCompletedRing d X) :=
   ⟨Functor.whiskerRight (completedCoefficientDirectImageMap g d).hom

@@ -14,7 +14,9 @@ import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
 /-! # Dimension formulas for the canonical polynomial fibre chart
 
-Source: Stacks Project, Tags 00RE and 00P1.
+## References
+
+* Stacks Project, Tags 00RE and 00P1.
 -/
 
 @[expose] public section
@@ -87,21 +89,8 @@ private theorem localDim_openImmersion {Y Z : Scheme.{u}} (j : Y ⟶ Z)
   exact (localDim_homeomorph j.isOpenEmbedding.toHomeomorph y).trans
     (j.isOpenEmbedding.isOpen_range.topologicalKrullDimAt_eq ⟨y, rfl⟩)
 
-/-- The fibre and its polynomial chart have the same residue transcendence degree.
-
-Source: Stacks Project, Tag 00RE, first paragraph of its proof, and Tag 00P1.
-Proof: set p = f(U.ι x), k = kappa(p), and V = (U.ι ≫ f).fiber p.
-The base-changed chart maps V quasi-finitely into polynomial n-space over k.
-The finite type k-algebra of the affine scheme V and the polynomial algebra
-are Noetherian. The dimension formula of Tag 00P1 gives finite local dimensions
-r and d and finite residue transcendence degrees at the point and its image.
-Quasi-finiteness makes the residue extension finite, so the two transcendence
-degrees coincide; write their common natural-number value as t. Polynomial
-n-space has local topological dimension n at every point. Applying the dimension
-formula there gives n = d + t. At the point of V it gives r + t. The open
-immersion of V into f.fiber p identifies their stalks and preserves local
-topological dimension, giving the displayed identities for the actual fibre.
-No flatness hypothesis is needed for these dimension formulas. -/
+/-- The fibre and its polynomial chart have the same residue transcendence degree
+(Stacks, Tags 00RE and 00P1). -/
 theorem polynomial_chart_fibre_dimensions
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     (U : X.Opens) [IsAffine U.toScheme] (n : ℕ)

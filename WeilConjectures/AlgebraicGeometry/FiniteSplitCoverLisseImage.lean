@@ -75,34 +75,10 @@ private theorem finiteStalks_finite_directImage
     PreservesProduct.iso forgetA F ≪≫ Types.productIso.{u, u + 1} (fun t ↦ forgetA.obj (F t))
   exact Finite.of_equiv _ e.toEquiv.symm
 
-/-- On an etale cover where a finite source is a disjoint union of universal
+/-- On an étale cover where a finite source is a disjoint union of universal
 homeomorphisms, the direct image of a lisse restriction is lisse on the cover.
 This is the sheaf-theoretic part of generic lisse preservation; it makes no
-integrality, Noetherian, or generic-open assumption on the base.
-
-Proof: Pull E back to the source over T. Its map to Z factors through the open
-g inverse image V, so the assumed lissity pulls back to this source and to each
-of its open components. Each
-component map to T is a universal homeomorphism. The etale-site equivalence of
-`thm-weil-pbc-universal-homeomorphism-invariance` transports the component
-sheaf's trivializing cover to T, showing that its direct image is locally
-constant. The disjoint covering by the W i identifies the full direct
-image with the product of these component direct images: evaluate on an etale
-test object and apply the sheaf condition to the pulled-back component covering.
-The identification is natural. Refine the finitely many trivializing covers by
-their fibre product. On this cover the product is constant. This is supplied by
-`lem-weil-pbc-disjoint-universal-homeomorphisms-lisse-image`. Finiteness of stalks
-is proved separately: the finite-direct-image stalk formula identifies each stalk
-with a product over the finite geometric fibre. The forgetful functor commutes
-with stalks and products; the resulting finite product of finite sets is finite.
-If n is zero, the source is empty and the underlying image is constant singleton.
-Finally apply finite base change to the cartesian square for g and p followed by
-V inclusion, and inverse-image composition to separate p from V inclusion.
-`lem-weil-pbc-etale-inverse-image-algebraic-structures` commutes the forgetful
-functor with inverse and direct image. These isomorphisms identify the lisse
-product just obtained with the displayed set sheaf. Transport its trivializing
-cover and finite stalks through that isomorphism. No descent from T is asserted
-here; that is a separate step of the argument. -/
+integrality, Noetherian, or generic-open assumption on the base. -/
 theorem isLisse_pullback_finite_directImage_of_split_cover
     {S Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g] (V : S.Opens)
     {T : Scheme.{u}} (p : T ⟶ V.toScheme) [Etale p]

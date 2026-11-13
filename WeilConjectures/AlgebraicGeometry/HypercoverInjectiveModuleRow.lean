@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Injective hypercover rows over arbitrary rings
 
-Source: Stacks Project, Hypercoverings, Tag 01GW.
+## References
+
+* Stacks Project, Tag 01GW
 -/
 
 @[expose] public section
@@ -30,8 +32,8 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 /- The scalar-extension construction of
 WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence uses only left
 modules and RingCat. Reproduce its arbitrary-ring form privately: the adopted source
-keeps its CommRing interface. Source: Stacks, Modules on Sites, Sections 093I and 03CV,
-and Sites Example 0H7J. The unit and counit below are identities on abelian sections. -/
+keeps its CommRing interface. (Stacks, Tags 093I, 03CV and 0H7J.)
+The unit and counit below are identities on abelian sections. -/
 section ConstantScalars
 
 noncomputable section
@@ -238,17 +240,7 @@ private theorem matching_local_lifting (U : FiniteSplitEtaleHypercover X)
   rw [← Category.assoc, ← ht, Category.assoc, hm']
 
 /-- An injective module sheaf has an exact augmented hypercover section complex.
-Source: Stacks Project, Hypercoverings, Tag 01GW, for free left modules.
-
-Proof: realize the sheaf as modules over the sheafified constant ring, without changing
-its underlying abelian presheaf. This equivalence preserves injectivity. Enlarge the
-hom universe of the etale site and transport its topology and module sheaves along
-ULiftHom.equiv. The matching universal property and the surjective matching maps give
-local lifts of every lower-simplex matching family. Apply the ringed-hypercover exactness
-theorem over this ring sheaf. Transport back the injective augmentation and the exactness
-in every positive degree. A single-complex augmentation with these properties is a
-quasi-isomorphism, by the degree-zero and positive-degree criteria for homology.
-No commutativity of the coefficient ring is used; free modules are left modules. -/
+(Stacks, Tag 01GW, for free left modules) -/
 theorem injective_module_row_quasiIso (U : FiniteSplitEtaleHypercover X)
     (R : Type (u + 1)) [Ring R]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) [Injective F] :

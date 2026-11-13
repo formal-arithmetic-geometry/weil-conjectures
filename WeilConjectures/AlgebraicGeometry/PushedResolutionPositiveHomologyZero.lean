@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Positive homology of a continuously pushed resolution
 
-Source: Stacks Project, Cohomology on Sites, Tag 072W, injective-resolution computation.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 072W and 0733.
 -/
 
 @[expose] public section
@@ -60,26 +62,8 @@ private theorem locallyInjective_zero_of_iso
     inferInstance
   simpa using this
 
-/-- Positive homology of the pushed injective resolution is zero.
-
-Source: Stacks Project, Cohomology on Sites, Tag 072W,
-proof; the local-vanishing hypothesis is the acyclicity condition of Tag 0733(1).
-
-Proof: use the natural injective-resolution comparison for object cohomology,
-lifting the Ext groups and section-complex homology to a common universe.
-Precomposition by i.op is exact, so its homology comparison identifies the latter
-presheaf with the homology of the presheaf complex underlying the pushed resolution.
-The equalizer sieve of two lifted sections is the equalizer sieve of their
-unlifted sections. Local injectivity of zero therefore passes through the two
-universe lifts and the comparison isomorphisms, giving local injectivity of zero
-on this presheaf homology. Sheafification sends that zero endomorphism to a
-monomorphism. Sheafification is additive, so the resulting endomorphism is zero;
-a zero monomorphism forces its source to be a zero object. Finally exact
-sheafification commutes with homology, and its counit identifies the sheafification
-of the underlying complex with the original complex of pushed sheaves. Transport
-zero-object status along these two isomorphisms. This argument requires no
-comparison augmentation and proves only positive homology vanishing. It works for
-the empty scheme and zero sheaf; degree zero is deliberately excluded. -/
+/-- Positive homology of the pushed injective resolution is zero, under the local-vanishing
+(acyclicity) hypothesis (Stacks, Tags 072W and 0733). -/
 theorem pushed_resolution_positive_homology_isZero
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

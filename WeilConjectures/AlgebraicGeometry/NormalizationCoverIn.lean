@@ -10,16 +10,15 @@ public import WeilConjectures.AlgebraicGeometry.NormalizationCover
 /-!
 # The normalization in a normal integral scheme is the normalization in its function field
 
-Let `f: P ⟶ X` be a quasi-compact quasi-separated morphism of integral schemes mapping the
+Let `f : P ⟶ X` be a quasi-compact quasi-separated morphism of integral schemes mapping the
 generic point of `P` to that of `X`, and let `L = k(P)`, an extension of `k(X)`. If `P` is
 normal, the relative normalization `f.normalization` of `X` in `P` (the relative spectrum of the
 integral closure of `𝒪_X` in `f_* 𝒪_P`) is the normalization `X.normalizationIn L` of `X` in the
-field `L` (`AlgebraicGeometry.Scheme.Hom.exists_iso_normalizationIn`): over an affine open
-`Spec B ⊆ X`, the integral closure of `B` in `Γ(P, f⁻¹ Spec B)` is the integral closure of `B`
-in `L`, because `Γ(P, f⁻¹ Spec B) ⊆ L` is integrally closed in `L`.
+field `L` (`AlgebraicGeometry.Scheme.Hom.exists_iso_normalizationIn`).
 
-Consequently the extension of a connected finite étale cover over a normal open, holds with the normalization `X^{k(P)}` of
-`def-fin-normalization-extension` (`AlgebraicGeometry.Scheme.normalizationIn_extends_cover`).
+Consequently the extension of a connected finite étale cover over a normal open holds with the
+normalization `X^{k(P)}` of `X` in the function field of `P`
+(`AlgebraicGeometry.Scheme.normalizationIn_extends_cover`).
 -/
 
 @[expose] public section
@@ -250,12 +249,10 @@ theorem isIso_normalizationInToNormalization
       infer_instance
   · rw [← Scheme.Hom.preimage_iSup, iSup_affineOpens_eq_top, Scheme.Hom.preimage_top]
 
-/-- **The relative normalization in a normal integral scheme is the normalization in its
-function field.** Let `f: P ⟶ X` be a quasi-compact quasi-separated morphism of integral
-schemes sending the generic point of `P` to that of `X`, with `P` normal, and let
-`L = k(P)` (a `k(X)`-algebra through `f`). Then the relative normalization `f.normalization` of
-`X` in `P` is isomorphic over `X` to the normalization `X^L` of `X` in `L`
-(`AlgebraicGeometry.Scheme.normalizationIn`). -/
+/-- Let `f : P ⟶ X` be a quasi-compact quasi-separated morphism of integral schemes sending the
+generic point of `P` to that of `X`, with `P` normal, and let `L = k(P)`. Then the relative
+normalization `f.normalization` of `X` in `P` is isomorphic over `X` to the normalization
+`X^L` of `X` in `L` (`AlgebraicGeometry.Scheme.normalizationIn`). -/
 theorem exists_iso_normalizationIn (hP : ∀ x : P, IsIntegrallyClosed (P.presheaf.stalk x)) :
     letI := f.functionFieldAlgebra hf
     ∃ e : f.normalization ≅ X.normalizationIn P.functionField,
@@ -267,19 +264,14 @@ theorem exists_iso_normalizationIn (hP : ∀ x : P, IsIntegrallyClosed (P.preshe
     normalizationInToNormalization_fromNormalization]
 end Scheme.Hom
 
-/-- Extending a finite cover by normalization,
-with the normalization in the function field.
+/-- Extending a finite cover by normalization, with the normalization in the function field.
 
-Let `X` be an integral scheme of finite type over a field `k`, `kV: V ⟶ X` a nonempty open
-subscheme with integrally closed local rings, and `p: P ⟶ V` a connected finite étale cover.
+Let `X` be an integral scheme of finite type over a field `k`, `kV : V ⟶ X` a nonempty open
+subscheme with integrally closed local rings, and `p : P ⟶ V` a connected finite étale cover.
 Then `P` is integral and dominates `X`, its function field `L = k(P)` is a finite extension of
-`k(X)`, and the normalization `X^L ⟶ X` of `X` in `L` (`AlgebraicGeometry.Scheme.normalizationIn`) is finite, with `X^L` normal integral, and restricts
-over `V` to the given cover: there is an open immersion `P ⟶ X^L` over `X` whose image is the
-preimage of `V`.
-
-This is `AlgebraicGeometry.Scheme.normalization_comp_of_finite_etale` for the relative
-normalization of `X` in `P`, which is `X^L` by
-`AlgebraicGeometry.Scheme.Hom.exists_iso_normalizationIn`, `P` being normal. -/
+`k(X)`, and the normalization `X^L ⟶ X` of `X` in `L` is finite, with `X^L` normal integral,
+and restricts over `V` to the given cover: there is an open immersion `P ⟶ X^L` over `X` whose
+image is the preimage of `V`. -/
 theorem Scheme.normalizationIn_extends_cover {k : Type u} [Field k] {P V X : Scheme.{u}}
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] [IsIntegral X]
     (kV : V ⟶ X) [IsOpenImmersion kV] [QuasiCompact kV] [Nonempty V]

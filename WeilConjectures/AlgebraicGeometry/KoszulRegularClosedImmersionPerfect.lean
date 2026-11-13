@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
 /-!
 # Koszul-regular closed immersions are perfect
 
-Source: Stacks Project, More on Morphisms, Lemma 37.61.7, Tag 068C.
+## References
+
+* Stacks Project, More on Morphisms, Lemma 37.61.7, Tag 068C.
 -/
 
 @[expose] public section
@@ -34,19 +36,7 @@ namespace AlgebraicGeometry
 
 /-- A closed immersion locally cut out by finite Koszul-regular sequences has a local
 Koszul resolution by finite free modules, is a perfect closed immersion, and its
-pushed-forward structure sheaf is perfect in `D(𝒪_Y)`.
-Source: Stacks Project, Tag 068C, Lemma 37.61.7.
-
-Proof: (1) On an affine open `U`, the quotient-spectrum identification of
-`def-weil-closed-immersion` identifies the restricted pushforward with the sheaf
-associated to `A/I`. (2) `def-weil-pbc-koszul-regular-sequence` gives vanishing of
-positive Koszul homology. In degree zero, the differential of
-`def-weil-pbc-koszul-complex` has image `I`, so the augmentation to `A/I` is a
-quasi-isomorphism. Exactness of sheafification preserves this quasi-isomorphism.
-(3) Exterior-power bases make the Koszul terms finite free, and terms above the
-length vanish. The resulting local strictly perfect representatives give
-`def-pc-perfect-complex`. (4) These bounded finite free quotient resolutions
-satisfy `def-sc-perfect-closed-immersion`. No Noetherian hypothesis is required. -/
+pushed-forward structure sheaf is perfect in `D(𝒪_Y)` (Stacks, Tag 068C). -/
 theorem koszulRegular_closedImmersion_perfect {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

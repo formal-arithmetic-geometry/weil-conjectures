@@ -17,10 +17,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 set_option linter.privateModule false
 
 /-!
-# Supporting results for `sk-prop-h2`
+# Supporting results for finite hypercover descent
 
-Supporting results for the blueprint unit `sk-prop-h2` of `sec-curve-estimates`, grouped from
-`FiniteHypercoverDescentParts`.
+Supporting results grouped from `FiniteHypercoverDescentParts`.
 -/
 
 @[expose] public section

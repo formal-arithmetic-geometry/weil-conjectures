@@ -16,7 +16,9 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 
 /-! # The canonical fibre stalk map of a polynomial chart
 
-Source: Stacks Project, Tag 00RH, polynomial chart and localization of its closed fibre.
+## References
+
+* Stacks Project, Tags 00RH and 00RE.
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ noncomputable section
 
 variable {X T : Scheme.{u}} (f : X ⟶ T) (U : X.Opens)
 
-/-- The inclusion of the fibre of an open subscheme into the original fibre.
-Source: the scheme-fibre pullback construction in Stacks Project, Tag 00RH. -/
+/-- The inclusion of the fibre of an open subscheme into the original fibre. -/
 def fibreInclusion (p : T) : (U.ι ≫ f).fiber p ⟶ f.fiber p :=
   (pullbackRightPullbackFstIso f (T.fromSpecResidueField p) U.ι).inv ≫
     pullback.snd U.ι (f.fiberι p)
@@ -39,19 +40,16 @@ instance (p : T) : IsOpenImmersion (fibreInclusion f U p) := by
   dsimp [fibreInclusion, Scheme.Hom.fiberι]
   infer_instance
 
-/-- The fibre inclusion commutes with the maps into the original schemes.
-Source: the defining pullback square, Stacks Project, the scheme-fibre construction in Tag 00RH. -/
+/-- The fibre inclusion commutes with the maps into the original schemes. -/
 lemma fibreInclusion_fiberι (p : T) :
     fibreInclusion f U p ≫ f.fiberι p = (U.ι ≫ f).fiberι p ≫ U.ι := by
   simp [fibreInclusion, Scheme.Hom.fiberι]
 
-/-- The point of the open fibre over `f (U.ι x)`.
-Source: the fibre homeomorphism, Stacks Project, the scheme-fibre construction in Tag 00RH. -/
+/-- The point of the open fibre over `f (U.ι x)`. -/
 def fibrePoint (x : U.toScheme) : (U.ι ≫ f).fiber (f (U.ι x)) :=
   ((U.ι ≫ f).fiberHomeo (f (U.ι x))).symm ⟨x, Scheme.Hom.comp_apply U.ι f x⟩
 
-/-- The point of the open fibre maps to the original fibre point.
-Source: the scheme-fibre inclusion in Stacks Project, Tag 00RH. -/
+/-- The point of the open fibre maps to the original fibre point. -/
 lemma fibreInclusion_asFiber (x : U.toScheme) :
     fibreInclusion f U (f (U.ι x)) (fibrePoint f U x) = f.asFiber (U.ι x) := by
   apply (f.fiberι _).isEmbedding.injective
@@ -62,8 +60,7 @@ lemma fibreInclusion_asFiber (x : U.toScheme) :
 variable (n : ℕ) (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T)
   (he : e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f)
 
-/-- Base change of the chart to the residue field of a point of the base.
-Source: the polynomial chart in the proof of Stacks Project, Tag 00RH. -/
+/-- Base change of the chart to the residue field of a point of the base. -/
 def fibreMap (p : T) :
     (U.ι ≫ f).fiber p ⟶ (AffineSpace (ULift.{u} (Fin n)) T ↘ T).fiber p :=
   (pullback.congrHom he.symm rfl).hom ≫
@@ -80,16 +77,14 @@ instance [LocallyOfFinitePresentation e] (p : T) :
   dsimp [fibreMap, Scheme.Hom.fiberι]
   infer_instance
 
-/-- The source of the canonical chart stalk map: the polynomial fibre stalk.
-Source: Stacks Project, Tag 00RH, the localization of the polynomial closed fibre. -/
+/-- The source of the canonical chart stalk map: the polynomial fibre stalk. -/
 def sourceStalk (x : U.toScheme) : CommRingCat.{u} :=
   ((AffineSpace (ULift.{u} (Fin n)) T ↘ T).fiber (f (U.ι x))).presheaf.stalk
     (fibreMap f U n e he (f (U.ι x)) (fibrePoint f U x))
 
 /-- The canonical map from the polynomial fibre stalk to the actual fibre stalk.
 The chart gives the stalk map into the open fibre stalk. The inverse of the open
-immersion's stalk isomorphism identifies this stalk with the actual fibre stalk.
-Source: Stacks Project, Tag 00RH, and its stalk localization comparison. -/
+immersion's stalk isomorphism identifies this stalk with the actual fibre stalk. -/
 def stalkMap (x : U.toScheme) : sourceStalk f U n e he x →+*
     (f.fiber (f (U.ι x))).presheaf.stalk (f.asFiber (U.ι x)) :=
   (eqToHom (congrArg (f.fiber (f (U.ι x))).presheaf.stalk
@@ -97,8 +92,7 @@ def stalkMap (x : U.toScheme) : sourceStalk f U n e he x →+*
     ((inv ((fibreInclusion f U (f (U.ι x))).stalkMap (fibrePoint f U x))).hom.comp
       ((fibreMap f U n e he (f (U.ι x))).stalkMap (fibrePoint f U x)).hom)
 
-/-- The canonical fibre stalk map is local.
-Source: locality of scheme stalk maps and of isomorphisms, Stacks Project, Tag 00RH. -/
+/-- The canonical fibre stalk map is local. -/
 instance (x : U.toScheme) : IsLocalHom (stalkMap f U n e he x) := by
   have hcast : IsLocalHom (eqToHom
       (congrArg (f.fiber (f (U.ι x))).presheaf.stalk
@@ -112,8 +106,7 @@ instance (x : U.toScheme) : IsLocalHom (stalkMap f U n e he x) := by
   exact ⟨fun a ha ↦ hmap.map_nonunit a
     (hinv.map_nonunit _ (hcast.map_nonunit _ ha))⟩
 
-/-- Quasi-finiteness survives the canonical fibre and stalk comparisons.
-Source: base change and localization of quasi-finite maps, Stacks Project, Tag 00RE. -/
+/-- Quasi-finiteness survives the canonical fibre and stalk comparisons. -/
 theorem quasiFinite_stalkMap [LocallyQuasiFinite e] (x : U.toScheme) :
     (stalkMap f U n e he x).QuasiFinite := by
   have hcast := RingHom.QuasiFinite.of_finite (RingHom.Finite.of_surjective
@@ -126,11 +119,7 @@ theorem quasiFinite_stalkMap [LocallyQuasiFinite e] (x : U.toScheme) :
   have hmap := (fibreMap f U n e he (f (U.ι x))).quasiFiniteAt (fibrePoint f U x)
   exact hcast.comp (hinv.comp hmap)
 
-/-- The polynomial fibre stalk is regular local.
-Source: polynomial regularity and localization, Stacks Project, Tag 00RE.
-Proof: affine-space base change identifies the fibre with the spectrum of the
-polynomial ring over the residue field. The stalk is its localization at a prime;
-polynomial regularity and its defining localization property give regularity. -/
+/-- The polynomial fibre stalk is regular local. -/
 theorem isRegularLocalRing_sourceStalk (x : U.toScheme) :
     IsRegularLocalRing (sourceStalk f U n e he x) := by
   let p := f (U.ι x)

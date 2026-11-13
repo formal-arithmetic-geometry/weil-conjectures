@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # Flat complex descent from a cartesian model
 
-Source: Stacks Project, Tags 0032, 01ZR, 05LY, 081G and 0CYS.
+## References
+
+* Stacks Project, Tags 0032, 01ZR, 05LY, 081G and 0CYS
 -/
 
 @[expose] public section
@@ -37,25 +39,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A bounded finitely presented base-flat complex with proper support on the limit
 of a fixed finitely presented model descends to a stage in a small filtered category.
-There is no perfect derived object in this assertion.
-
-Proof:
-1. Use a final directed poset in the filtered under-category of the fixed stage
-   (Tag 0032). The projection from that under-category is final, so restriction of
-   the ring cocone is still colimiting. All its rings are still Noetherian.
-2. Replace the given cartesian model by the canonical pullback using its unique
-   pullback isomorphism. Transport G along this scheme isomorphism, degreewise;
-   tensor pullback composition transports the differentials and their equations.
-   Boundedness, finite presentation, base-flatness and proper support are invariant
-   under this isomorphism. Spec takes the ring colimit to the affine scheme limit.
-3. Apply finite_flat_proper_support_descent to this directed system and the
-   transported complex. It supplies a stage complex and the commuting degreewise
-   comparison isomorphisms. Return its stage through the final functor. The stage
-   scheme is the base change of the fixed model, so its morphism has all three
-   finite-presentation properties. Compose the comparison with the isomorphism in
-   step 2 to recover G on the original X.
-Source: Stacks Project, Tags 0032, 01ZR, 05LY, 081G and 0CYS.
--/
+There is no perfect derived object in this assertion
+(Stacks, Tags 0032, 01ZR, 05LY, 081G, 0CYS). -/
 theorem filtered_cartesian_flat_complex_descent
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]

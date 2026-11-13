@@ -25,14 +25,8 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The explicit integral realization of a bounded finite-free complex is K-flat.
-Source: Stacks Tag 06YY.
-
-Proof: a lifted finite basis identifies every term with a finite biproduct of the
-regular integral module, the tensor unit. Tensoring with this unit is exact, and
-finite coproducts of flat objects are flat because finite coproducts are exact.
-The additive realization preserves the two strict bounds. The bounded flat-complex
-criterion gives K-flatness. Neither weak contractibility nor nonemptiness is used. -/
+/-- The explicit integral realization of a bounded finite-free complex is K-flat
+(Stacks, Tag 06YY). -/
 theorem internalPerfectIntegralComplex_kflat (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)

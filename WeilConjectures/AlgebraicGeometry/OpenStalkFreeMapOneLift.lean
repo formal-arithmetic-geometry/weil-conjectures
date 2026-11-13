@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # One finite-free open-site stalk map lifts on one neighbourhood
 
-Source: Stacks Project, Modules Tag 01CP, and Sheaves Tag 00A0 (3).
+## References
+
+* [Stacks, Tag 01CP]
+* [Stacks, Sheaves, Tag 00A0]
 -/
 
 @[expose] public section
@@ -51,28 +54,7 @@ private theorem restriction_lift_stalk
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A single finite-free stalk map lifts on one smaller open. The comparison may
-be chosen with this lift; no comparison family or further-restriction assertion is made.
-
-Source: Stacks Project, Modules Tag 01CP, the
-finite-generator part of the finite-presentation proof; Sheaves Tag 00A0 (3).
-
-Proof: Use the slice/open-subspace equivalence to regard the source and target
-as module sheaves on U.toScheme. This equivalence carries the rank-m free sheaf
-to the rank-m free structure module, since its sectionwise restriction preserves
-the unit sheaf and finite coproducts. The open-immersion stalk-ring map is an
-isomorphism, so transport t from the ambient stalk ring to the stalk ring on U.
-Apply t to the m standard basis germs and choose section representatives of their
-images in N. Intersect their finitely many neighbourhoods in U to obtain V.
-Restrict the representatives to V and extend the assignment of basis sections
-by the free sheaf universal property, obtaining k. This is also the identity-source
-case of finite-free local stalk-map lifting on the ringed space U.toScheme.
-The stalk of k agrees with t on each basis germ, hence on every vector by linearity.
-Transport k back through the slice equivalence. Take a to be the canonical
-restriction-stalk comparison, whose germ formula identifies a restricted germ
-with the original germ. The equality just proved is S(k) followed by a_N equals
- a_F followed by t; composing with a_N inverse gives the displayed formula.
-For m=0 take V=U and the unique zero-source map; no representatives are needed.
-No finiteness or quasicoherence of N is used. -/
+be chosen with this lift; no comparison family or further-restriction assertion is made. -/
 theorem exists_open_stalk_free_map_one_lift
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (m : ℕ) (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

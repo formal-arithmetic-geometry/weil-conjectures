@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 
 /-! # Transport of limit comparisons under canonical chart refinement
 
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing). -/
+## References
+
+* Stacks Project, Tag 01ZR (first proof, Zariski gluing). -/
 
 @[expose] public section
 
@@ -144,25 +146,7 @@ namespace AlgebraicGeometry
 
 /-- Refining the stage of a fixed family of overlap maps preserves its comparison
 with the restriction datum on a fixed scheme. No finiteness or coherence at the
-stage is required.
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing); the categorical
-composition calculation is Mathlib's `DescentData.pullFunctorCompIso`.
-
-Proof: For each chart use the pullback universal property to map its refinement
-at the fixed scheme L into the original chart at L. The square expressing this
-map uses p followed by r equal to p₀. Its two chart projections are uniquely
-specified, so their composites agree with the direct projections. Pull the given
-component isomorphism along this chart map. Compose on its source with the
-pseudofunctor's composition isomorphism identifying the iterated pullback through
-the later chart with pullback through the original limit chart, and on its target
-with the composition isomorphism identifying the iterated restriction of M with
-its restriction to the refined chart. These are all isomorphisms. On any test
-scheme the comparison equation follows by pulling the original comparison
-equation and using naturality of the composition isomorphisms. The associativity
-coherence equation cancels the intermediate composition comparisons, exactly as
-in `DescentData.pullFunctorCompIso`; identity comparisons handle the unchanged
-base L. Thus the constructed component isomorphisms commute with every transition.
-Empty covers have unique comparisons with vacuous component conditions. -/
+stage is required (Stacks, Tag 01ZR). -/
 theorem nonempty_overlap_comparison_refinement
     {X Y Z L : Scheme.{u}} (U : X.OpenCover.{u})
     (q₀ : Y ⟶ X) (q : Z ⟶ X) (r : Z ⟶ Y) (hr : r ≫ q₀ = q)

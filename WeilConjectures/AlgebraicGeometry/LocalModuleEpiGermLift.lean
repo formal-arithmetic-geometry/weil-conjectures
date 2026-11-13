@@ -17,7 +17,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Local representatives through an epimorphism of module sheaves
 
-Source: Stacks Project, Modules, Lemma 01CP.
+## References
+
+* [Stacks, Tag 01CP]
 -/
 
 @[expose] public section
@@ -28,20 +30,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry.RingedSpace
 
 /-- A section germ lifts through an epimorphism of module sheaves on a local site.
-This has no finite-generation or finite-presentation hypothesis.
-
-Source: Stacks Project, Modules, Lemma 01CP,
-third paragraph, right exactness on stalks of the presentation.
-
-Proof: The cokernel of f is zero because f is an epimorphism. Its underlying
-abelian sheaf cokernel is the sheafification of the sectionwise cokernel.
-Consequently f is locally surjective: for a section s over V, the open subsets
-where its restrictions lift form a covering sieve. Choose a member containing
-x, with underlying open W contained in V, and choose a section t mapping to
-the restriction of s. Naturality of germs then gives the displayed equality.
-Equivalently, apply exactness of stalks and cofinality of neighborhoods contained
-in U to obtain a preimage germ and represent it below V. There is no assertion
-of sectionwise surjectivity on V itself. -/
+This has no finite-generation or finite-presentation hypothesis (Stacks, Tag 01CP). -/
 theorem exists_local_module_epi_germ_lift
     (X : RingedSpace.{u}) (F : Modules X) (x : X) (U : Opens X)
     (A : SheafOfModules.{u} (((sheafCompose (Opens.grothendieckTopology X)

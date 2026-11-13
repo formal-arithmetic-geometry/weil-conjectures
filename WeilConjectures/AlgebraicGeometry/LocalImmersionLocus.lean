@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CompatibleImmersionGluing
 
 /-! # Gluing local immersion loci
 
-Source: Stacks Project, Tag 0BDL, final proof paragraph (gluing characterized loci).
+## References
+
+* [Stacks, Tag 0BDL]
 -/
 
 @[expose] public section
@@ -48,25 +50,7 @@ private theorem exists_factor_of_locally_factors {S W T : Scheme.{u}}
   exact hh t
 
 /-- A base-change-stable, source-local predicate represented locally by immersions
-is represented by an immersion over the entire base.
-Source: Stacks Project, Tag 0BDL, final proof paragraph, spelling out the gluing.
-
-Proof:
-1. Choose a neighbourhood U_s and its representing immersion for every s.
-   The neighbourhoods cover S. On U_s intersect U_t, the two base-changed
-   immersions represent the same predicate. Evaluate their universal properties
-   on each other to obtain inverse maps; monomorphy of immersions gives uniqueness.
-2. These unique isomorphisms satisfy the triple-overlap cocycle identity. The
-   overlaps are open in each representative, being inverse images of open
-   subschemes of S. Scheme gluing produces W and a map j:W to S. Its restriction
-   over each U_s is the original immersion, so j is an immersion by target locality.
-3. If g:T to S satisfies P, base-change stability gives P on the inverse-image
-   cover of T. The local representing criteria give factors through W. These
-   agree on overlaps by monomorphy of j and therefore glue to a global factor.
-4. Conversely, given a factor through W, restrict to the inverse-image cover of
-   T. On each member the local representing criterion gives P. Source locality
-   then gives P globally. For empty S, glue the empty family; for empty T the
-   source-locality hypothesis applied to its vacuous pointwise cover gives P. -/
+is represented by an immersion over the entire base (Stacks, Tag 0BDL). -/
 theorem exists_localImmersionLocus (S : Scheme.{u})
     (P : ∀ {T : Scheme.{u}}, (T ⟶ S) → Prop)
     (hbase : ∀ {T T' : Scheme.{u}} (g : T ⟶ S) (h : T' ⟶ T), P g → P (h ≫ g))

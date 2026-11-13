@@ -35,8 +35,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
 
-/-- The component of the existing canonical derived tensor symmetry.
-Source: Stacks Tag 06YU. -/
+/-- The component of the existing canonical derived tensor symmetry. (Stacks, Tag 06YU) -/
 def supportedTensorSwapIso (Z : Scheme.{u})
     (M N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology C)) :
     ((derivedTensor C Z).obj M).obj N ≅ ((derivedTensor C Z).obj N).obj M :=
@@ -77,8 +76,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
-/-- The specified compact-support compositor transported along an equality.
-Source: the directComparison construction in the first triangle. -/
+/-- The specified compact-support compositor transported along an equality. -/
 def properRouteCompIso {W X S : Scheme.{u}} (p : W ⟶ X) (f : X ⟶ S)
     (h : W ⟶ S) (w : p ≫ f = h) [IsProper p] [IsProper f] [IsProper h] :
     rightDerivedLowerShriek (ModuleCat.{u + 1} A) h ≅
@@ -86,8 +84,7 @@ def properRouteCompIso {W X S : Scheme.{u}} (p : W ⟶ X) (f : X ⟶ S)
         rightDerivedLowerShriek (ModuleCat.{u + 1} A) f :=
   (rightDerivedLowerShriekCongrIso A w).symm ≪≫ rightDerivedLowerShriekCompIso A p f
 
-/-- A component of the specified compact-support projection isomorphism.
-Source: the first triangle. -/
+/-- A component of the specified compact-support projection isomorphism. -/
 def properRouteProjection {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (E : DerivedCategoryModule A X) (M : DerivedCategoryModule A Y) :
     ((derivedTensor (ModuleCat.{u + 1} A) Y).obj
@@ -105,8 +102,7 @@ theorem properRouteProjection_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((projectionMap (ModuleCat.{u + 1} A) f).app E).app M := by
   rfl
 
-/-- A component of canonical proper exchange, with its original chosen map.
-Source: the first triangle. -/
+/-- A component of canonical proper exchange, with its original chosen map. -/
 def properRouteExchange {S X Y W : Scheme.{u}}
     {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
     (sq : IsPullback p q f g) [IsProper f] [IsProper q]
@@ -126,8 +122,7 @@ theorem properRouteExchange_hom {S X Y W : Scheme.{u}}
       (rightDerivedLowerShriekBaseChangeMap A sq).app E := by
   rfl
 
-/-- Inverse projection, inverse exchange and the canonical swap.
-Source: the coefficient extraction in the first triangle. -/
+/-- Inverse projection, inverse exchange and the canonical swap. -/
 def properSupportedKunnethInner {S X Y W : Scheme.{u}}
     {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
     (sq : IsPullback p q f g) [IsProper f] [IsProper q]
@@ -160,7 +155,6 @@ theorem properSupportedKunnethInner_inv {S X Y W : Scheme.{u}}
     Functor.mapIso_inv, Category.assoc]
 
 /-- The proper-support route: compositor, inner extraction, inverse projection and swap.
-Source: the first triangle.
 All data are constructed from the original maps; no Kunneth theorem is an input. -/
 def properSupportedKunnethRoute {S X Y W : Scheme.{u}}
     {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
@@ -187,8 +181,7 @@ attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
   derivedTensor rightDerivedLowerShriek properRouteProjection properRouteCompIso
   properSupportedKunnethInner supportedTensorSwapIso
 
-/-- The inverse route in component form.
-Source: the explicit route construction above. -/
+/-- The inverse route in component form. -/
 theorem properSupportedKunnethRoute_inv {S X Y W : Scheme.{u}}
     {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
     (sq : IsPullback p q f g) (h : W ⟶ S) (w : q ≫ g = h)

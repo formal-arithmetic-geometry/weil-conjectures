@@ -11,8 +11,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Evaluation components with a fixed normalized tensor comparison
 
-Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
+## References
+
+* Stacks Project, Tag 0A8X, ordinary tensor totalization.
+-/
 
 @[expose] public section
 
@@ -43,15 +45,7 @@ attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- Expanding the total-tensor map and degreewise isomorphism needs extra elaboration heartbeats.
-/-- Transport of one tensor summand followed by one Hom projection.
-Source: Stacks Project, Tag 0A8X, total tensor and Hom-complex projections.
-
-Proof: apply naturality of the total tensor map for the inverse of `d` to
-move the tensor summand across that map. The summand equation for `c`,
-postcomposed with its inverse, moves it across `c.inv`. The projection
-equation for `b F` moves the final projection to the image of the local
-projection. Functoriality combines the three local arrows. This calculation
-is valid for every `f` and does not use an evaluation formula. -/
+/-- Transport of one tensor summand followed by one Hom projection (Stacks, Tag 0A8X). -/
 theorem ordinaryEvaluation_transport_summand_projection (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :
     let L := Equivalence.functor

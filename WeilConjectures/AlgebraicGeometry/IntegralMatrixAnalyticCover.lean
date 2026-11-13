@@ -46,25 +46,7 @@ private theorem cover_of_open_neighborhoods {X : Scheme.{u}}
 
 set_option linter.unusedVariables false in
 /-- After a rational cokernel trivialization, a map between standard finite free modules
-admits analytic pivot charts.
-
-Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1);
-the continuous-function pivot argument is an agent reduction.
-
-Proof: refine the supplied cover, transport the standard finite-free bases along the
-coefficient pullback comparisons, and use the canonical comparison with continuous
-O_E-functions. Its monoid property, isomorphism and compatibility with O_E to E are
-proved in ContinuousCoefficientRealizations.
-Exact geometric-field evaluation computes the rational cokernel dimension as target
-rank minus matrix rank. The rank is therefore constant on each cover member. If the
-matrix is zero at any point, it is zero everywhere, and faithfulness of the continuous
-matrix realization gives the zero alternative. Otherwise every point has a nonzero
-entry. Choose one of maximal norm there. Intersect the finitely many open loci where
-the change in each entry has norm strictly below this positive maximum. The ultrametric
-inequality makes the chosen entry nowhere zero with constant norm on this neighborhood
-and bounds every other entry by it. Transport the bases and realization to these opens
-and compose covers. Empty members and zero source or target ranks use the zero branch.
-The conclusion only concerns continuous coefficients, not divisibility or module blocks. -/
+admits analytic pivot charts. (Bhatt--Scholze, Section 6.8) -/
 theorem integralMatrix_analytic_cover (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (n t₀ : ℕ) (X : Scheme.{u})

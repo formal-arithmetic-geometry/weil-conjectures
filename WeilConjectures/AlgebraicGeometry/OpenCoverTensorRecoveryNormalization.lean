@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 
 /-! # Normalization of one tensor recovery comparison
-Source: Stacks Project, Tags 0095 and 0096. -/
+
+## References
+
+* Stacks Project, Tags 0095 and 0096.
+-/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -132,25 +136,7 @@ private lemma mate_pullbackCongr_inv {A B : Scheme.{u}} {f g : A ⟶ B} (w : f =
 
 /-- A single recovery comparison, followed by the inverse base-chart comparison,
 is ordinary pullback along the total chart path preceded by the unique comparison
-of left adjoints for the total base map.
-Source: Stacks Project, Tags 0095 and 0096; step 1 of
-lem-pc-open-cover-tensor-comparison-coherence.
-Proof: Expand the recovery comparison as a composite of natural transformations
-and compare its composite with the inverse base-chart comparison to the proposed
-normal form before evaluating at M. Apply injectivity of the mate correspondence
-under the tensor total-map adjunction and the three ordinary chart adjunctions.
-Mates reverse composition and preserve whiskering and associators. The mate of the
-unique comparison of left adjoints is the identity. The tensor composition mate is
-pushforwardComp followed by pushforwardCongr, by its definition. For the chart
-comparisons, expand their definitions and use conjugateEquiv_pullbackComp_inv and
-the inverse mate formula for ordinary composition; equality transports give the
-corresponding pushforward transports. On sections over each open, both resulting
-composites are maps of the same module presheaf along paths between the same opens.
-These paths are equal because the category of opens is thin. Thus the mates agree;
-injectivity and evaluation at M give the required identity. The equality H supplies
-the endpoints for the ordinary total chart path.
-All constructions exist for arbitrary modules and charts, including empty charts
-and the zero module, and no invertibility of the scheme maps is required. -/
+of left adjoints for the total base map. -/
 theorem openCover_tensor_recovery_normalization
     {X Y W : Scheme.{u}} (q : Y ⟶ X) (p : W ⟶ Y) (h : W ⟶ X)
     (w : p ≫ q = h) (U : X.OpenCover.{u}) (a : U.I₀)

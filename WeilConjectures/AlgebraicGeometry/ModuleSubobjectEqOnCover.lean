@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Equality of module subsheaves checked on an open cover
 
-Source: Stacks Project, Lemma 087X, reduction to an affine open cover, and the sheaf axiom.
+## References
+
+* Stacks Project, Lemma 087X.
 -/
 
 @[expose] public section
@@ -58,20 +60,8 @@ private theorem comp_cokernel_eq_zero_on_cover {X : Scheme.{u}} {ι : Type v}
   rw [← ha]
   exact hz
 
-/-- Equal section ranges locally on a cover identify two module subobjects.
-
-Source: Stacks Project, Lemma 087X, affine-local verification of kernel image equalities.
-
-Proof: Range inclusion on W ∩ U_i makes g followed by the cokernel projection of f
-zero there: every value of g is a value of f, which the projection kills. Apply the
-separatedness part of the sheaf axiom for the cokernel to the cover (W ∩ U_i)_i.
-Naturality identifies the restricted composite with the composite on the restriction,
-so g followed by that projection is zero globally. A monomorphism in an abelian
-category is the kernel of its cokernel; Abelian.monoLift therefore factors g through f.
-This gives Subobject.mk g ≤ Subobject.mk f. Interchange f and g for the reverse
-inclusion and use antisymmetry. For an empty cover, the covering condition forces X
-empty and sheaf separatedness still applies. Neither quasi-coherence nor finiteness
-nor Noetherian hypotheses are needed. -/
+/-- Equal section ranges locally on a cover identify two module subobjects
+(Stacks, Tag 087X). -/
 theorem module_subobject_eq_on_cover {X : Scheme.{u}} {ι : Type v}
     (U : ι → X.Opens) (hU : ∀ x : X, ∃ i, x ∈ U i)
     {A B M : X.Modules} (f : A ⟶ M) (g : B ⟶ M) [Mono f] [Mono g]

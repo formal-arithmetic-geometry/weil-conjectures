@@ -11,7 +11,10 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # The explicit restriction-adjunction lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -26,10 +29,9 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 -- The nested restriction-adjunction functors require additional elaboration fuel.
 /-- Restrict a fixed lift by the restriction adjunction, after transporting the
-pushforward square through its canonical composition and congruence isomorphisms.
-Conjugate by the two specified restricted resolution comparisons. This is an
-explicit construction; no existence theorem or unproved choice supplies data.
-Source: Stacks, Tags 01FB and 01E4. -/
+pushforward square through its canonical composition and congruence isomorphisms, and
+conjugating by the two specified restricted resolution comparisons
+(Stacks, Tags 01FB and 01E4). -/
 def flatBaseChangeRestrictedLift {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules}

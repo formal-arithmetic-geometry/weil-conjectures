@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 
 /-!
-# Blueprint statements
-
-lemma-weil-pbc-finite-hypercover-descent.
+# Descent of finite split etale hypercovers along a cofiltered limit of schemes
 -/
 
 @[expose] public section
@@ -23,7 +21,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- -/
+/-- For a cofiltered limit of qcqs schemes with affine transition maps, truncated finite split
+etale hypercovers of the limit descend to a stage, morphisms of their diagrams descend
+after base change, and equal morphisms after base change become equal at some stage. -/
 theorem finite_hypercover_descent
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})

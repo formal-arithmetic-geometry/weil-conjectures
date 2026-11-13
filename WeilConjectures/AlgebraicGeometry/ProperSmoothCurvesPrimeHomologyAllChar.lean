@@ -35,17 +35,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Total derived homology version of the all-characteristic prime-coefficient theorem.
-
-Source: Stacks Project, more-etale.tex, Tags 0GKV and 0GKW.
-
-Proof: by `Etale.DerivedCategory.constructibleHomology_eq` it suffices to show, for
-every integer `q`, that the `q`-th homology sheaf of the unbounded derived direct image
-is constructible. `homologyRightDerivedLowerStarSingleIsoPlus` identifies it with the
-`q`-th homology sheaf of the bounded below derived direct image, which is a constructible
-étale module sheaf by `properSmoothCurves_prime_higherDirectImage_constructible_all_char`;
-since `ULift (ZMod p)` is finite, `isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`
-turns this into the predicate `IsConstructibleSheaf`, which is transported along the iso.
--/
+(Stacks, Tags 0GKV, 0GKW) -/
 theorem properSmoothCurves_prime_higherDirectImage_constructible_homology_all_char
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

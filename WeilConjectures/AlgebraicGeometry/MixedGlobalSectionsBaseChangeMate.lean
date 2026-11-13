@@ -11,8 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare
 
 /-! # Leray comparison and the base-change mate
-Source: Stacks Project, cohomology.tex, Remark 08HY; duality.tex, Tag 0AA8,
-lemma-more-base-change, final comparison diagrams.
+
+## References
+
+* Stacks Project, Tags 08HY and 0AA8.
 -/
 
 @[expose] public section
@@ -30,20 +32,7 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 /-- Leray transfers the base-change mate of any map between sheaf complexes.
-This statement has no internal Hom or tensor-Hom input.
-Source: Stacks Project, cohomology.tex, Remark 08HY; duality.tex, Tag 0AA8,
-lemma-more-base-change, final comparison diagrams.
-
-Proof: apply mixedSectionsBaseChange_unit_square to E and precompose with
-inverse Leray for f. Cancel the adjacent inverse and forward Leray components.
-To recover an arbitrary a, cancel postcomposition by restricted Leray for f' at E'.
-Expand the adjunction transposes as the units followed by direct image. Naturality
-of Leray for g moves the base-change component and direct image of a to restricted
-global sections. Naturality of Leray for f' moves a past that comparison.
-On the other path, naturality of Leray for g_X and of the scalar-square
-isomorphism moves a to the same final twice-restricted global-sections map.
-The unit-square equation now identifies the prefixes of these two paths.
-Functoriality and associativity give the stated equality. -/
+This statement has no internal Hom or tensor-Hom input (Stacks, Tags 08HY and 0AA8). -/
 theorem mixedGlobalSections_baseChange_mate
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (E : schemeDerivedCategory X) (E' : schemeDerivedCategory (pullback f g))

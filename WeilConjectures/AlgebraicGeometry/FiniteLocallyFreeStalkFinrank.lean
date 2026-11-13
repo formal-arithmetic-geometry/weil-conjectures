@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Stalk finrank of a finite locally free module
 
-Source: Stacks Project, Tag 01C6, Definition 17.14.1 (3), and Tag 02G1.
+## References
+
+* Stacks Project, Tags 01C6 and 02G1
 -/
 
 @[expose] public section
@@ -240,18 +242,8 @@ private noncomputable def localStalkEquiv {I : Type u} [Fintype I] [DecidableEq 
       simp_rw [LinearMap.map_smul, coordinate_basis]
       simp)
 
-/-- A finite locally free module of fixed rank has that finrank at each stalk.
-Source: Stacks Project, Tag 01C6, Definition 17.14.1 (3); the stalk calculation used
-in Tag 02G1.
-
-Proof: take an open neighbourhood U of x on which M is a direct sum of r copies
-of the structure sheaf. The coordinate projections and inclusions commute with
-restrictions. Taking their germs gives mutually inverse linear maps between M_x
-and (Fin r → O_{X,x}): the identities follow by taking germs of the coordinate
-identities on U. Finite sums commute with germs, so this also works for r = 0.
-Thus the coordinate vectors form a basis indexed by Fin r. Scheme local rings
-are nontrivial commutative rings, so the basis cardinality computes finrank.
-For the empty scheme there is no point x and the assertion is vacuous. -/
+/-- A finite locally free module of fixed rank `r` has finrank `r` at each stalk.
+(Stacks, Tags 01C6 and 02G1) -/
 theorem finiteLocallyFreeOfRank_stalk_finrank {X : Scheme.{u}} (M : X.Modules) (r : ℕ)
     [M.IsFiniteLocallyFreeOfRank r] (x : X) :
     Module.finrank (X.presheaf.stalk x)

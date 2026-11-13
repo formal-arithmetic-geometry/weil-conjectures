@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanish
 /-!
 # Direct images of injective modules are acyclic on every open
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2).
+## References
+
+* [Stacks, Tag 01EX](https://stacks.math.columbia.edu/tag/01EX)
+* [Stacks, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
 -/
 
 @[expose] public section
@@ -31,30 +34,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The direct image of an injective `𝒪_X`-module has zero positive module cohomology
 on every open `V` of the target. Equivalently it is acyclic for the module-valued
-sections functor `Γ(V,-)`. Direct image need not itself be injective, since tensor
-pullback need not be exact.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2).
-
-Proof:
-1. For any covering `(V_j)` of `V`, inverse images cover `h⁻¹(V)`. Sections of
-   `h_* I` on each finite intersection are sections of `I` on its inverse image.
-   Inverse image commutes with intersections and the restriction maps agree.
-   Thus the Cech complexes coincide, including the alternating differentials.
-2. The Cech cohomology of `I` for this covering vanishes in positive degrees by
-   lem-weil-pbc-module-injective-open-cover-cech-acyclic (Tag 01EP), so the same
-   holds for `h_* I` on every covering of every open.
-3. Apply lem-weil-pbc-module-cech-vanishing-criterion (Tag 01EV) to `h_* I` on `S`.
-   This gives the first assertion, with module cohomology as in pqf-def-cohomology.
-4. Sections over `V` are additive and left exact by sectionwise kernels. Choose an
-   injective resolution of `h_* I` using lem-weil-pbc-scheme-modules-enough-injectives
-   and def-sp-injective-resolutions. Restrict it to `V`; it remains an injective
-   resolution by lem-weil-pbc-module-open-restriction-injectives (Tag 01E1 (2)).
-   Sections of the restricted resolution on `V` equal sections of the original
-   resolution over `V`, compatibly with the differentials, by
-   lem-weil-pbc-module-restriction-open-immersion-colimits. Hence the right derived
-   sections functors agree with the cohomology in step 3 and vanish positively.
-   This is def-sp-acyclic, and includes the whole space `V = ⊤`. -/
+sections functor `Γ(V,-)` (Stacks, Tags 01EX and 01E1). -/
 theorem module_pushforward_injective_acyclic {X S : Scheme.{u}} (h : X ⟶ S)
     (I : X.Modules) [Injective I] :
     (∀ (V : S.Opens) (p : ℕ), 0 < p →

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenSectionsStructureClass
 
 /-! # Comparing derived sections on an open with ambient open sections
 
-Source: Stacks Project, Tags 08BS, 079V and 06Z0.
+## References
+
+* [Stacks, Tags 08BS, 079V and 06Z0]
 -/
 
 @[expose] public section
@@ -27,13 +29,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 noncomputable section
 
-/-- The canonical restriction isomorphism for the extended structure complex.
-Source: Stacks Project, Tag 08CX, the structure complex; Tag 06Z0, tilde of A.
-
-Construction: Extend the single complex using `extendSingleIso`, apply tilde
-and `singleMapHomologicalComplex`, then use the definitional identification
-of tilde(A) with the structure module. Apply derived restriction, its
-single-functor comparison and `sheafOfModulesEquivOverUnit`. -/
+/-- The canonical restriction isomorphism for the extended structure complex
+(Stacks, Tag 06Z0). -/
 def openStructureRestrictionIso
     (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens)
     [HasDerivedCategory.{w}
@@ -84,30 +81,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction and exact scalar restriction compare the two sections computations,
 including their canonical classes of one. This statement compares cohomology only;
-it contains no equivalence of derived Hom sets.
-Source: Stacks Project, Tag 08BS, preservation of K-injectives under open restriction;
-Tag 079V, derived global sections; Tag 06Z0, the tilde/sections adjunction.
-
-Proof: Identify the extended A[0] with the integer single complex, apply tilde,
-and use tildeSelf to identify its degree-zero sheaf with the structure module.
-Restriction and the over-equivalence take that module to the structure module
-on U. These explicit complex isomorphisms give i. For an ambient K-injective
-resolution J, open restriction preserves K-injectivity by its exact left
-adjoint extension by zero (Tag 08BS). The over-equivalence preserves it too.
-The sections of the restricted complex on all of U are the sections of J on U.
-Restrict scalars along A → Γ(U,O_U); this is exact, so commutes with homology.
-Both right-derived units are isomorphisms on these representatives. Compose
-these units, the sections identification and the homology factorization isos
-to obtain c. The constructions commute with chain maps. Full faithfulness on
-K-injectives descends this compatibility to all ambient derived morphisms.
-For the last equality, the source isomorphism takes the restricted structure
-identity to the identity of O_U[0]. Before resolution its global class of one
-is the restriction of 1 in A, namely tilde.toOpen applied to the degree-zero
-class determined by extendHomologyIso and singleObjHomologySelfIso. Naturality
-of both derived units with the ambient resolution map transports exactly this
-class to the displayed right hand side. This proves compatibility with the
-specified construction, not just with an unspecified generator. Empty U and
-the zero ring give zero modules on both sides. No quasi-coherence is used. -/
+it contains no equivalence of derived Hom sets. -/
 theorem openSections_cohomology_unit_comparison
     (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens)
     [HasDerivedCategory.{w}

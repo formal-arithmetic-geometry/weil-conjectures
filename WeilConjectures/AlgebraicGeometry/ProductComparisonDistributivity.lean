@@ -10,7 +10,10 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-! # Transport of a distributivity diagram
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
+## References
+
+* Stacks Project, Tag 03D2.
+-/
 
 @[expose] public section
 
@@ -18,21 +21,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Limits
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-
-Proof: Write P = R times (X times X). Compare its image with
-R' times (X' times X') by the inverse outer product comparison, followed
-by the image of the inverse inner product comparison, inserting p and q.
-For the map adding the last two factors, naturality of the outer product
-comparison and the assumed addition transport equation identify its composite
-with the image of prod.map id addV. For each of the two maps selecting a
-module factor, the two projection identities for the product comparison
-identify its composite with the image of the corresponding prod.lift.
-Apply F to hdist, precompose by this triple-product comparison, and postcompose
-by q.inv. The assumed addition transport equation rewrites the right side;
-q.hom followed by q.inv cancels. The two resulting composites are exactly the
-displayed distributivity diagram. The calculation uses only binary products,
-not zero, negation, or any algebraic structure on the objects. -/
+/-- Transport of a distributivity diagram along a product-preserving functor, using only
+binary products (Stacks, Tag 03D2). -/
 theorem productComparison_distributivity
     {C D : Type*} [Category C] [Category D]
     [HasBinaryProducts C] [HasBinaryProducts D]

@@ -9,12 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkFiniteMatrixLift
 
-/-! # Local representatives of positive-rank finite free stalk maps
+/-!
+# Local representatives of positive-rank finite free stalk maps
 
-We specialize the proved finite-family matrix lifting theorem to the top open
-and a singleton family. The private comparison lemma below generalizes isomorphism conjugation to
-intertwining by arbitrary natural transformations: naturality on free inclusions
-reduces the comparison to a common central scalar.
+We specialize the finite-family matrix lifting theorem to the top open and a singleton family.
 -/
 
 @[expose] public section
@@ -87,22 +85,7 @@ private lemma free_comparison_intertwines {X Z : Scheme.{u}}
 
 
 set_option maxRecDepth 2048 in
-/-- Positive-rank finite-free stalk maps admit local representatives.
-
-Proof: Restrict first to the top open V and identify the restricted standard
-free sheaves with standard free sheaves on V. Transport t by these free
-isomorphisms and the restriction-stalk comparison. Apply
-exists_finite_free_matrices_of_stalk_local to the singleton family containing
-this transported map. Transport the resulting map back to restrictions of
-the original free sheaves using restrictFunctorComp and restrictFunctorCongr.
-Naturality of the within-open stalk comparison proves the desired equation
-for the transported comparison E'. For the specified comparison E, consider
-the natural automorphism E'.symm followed by E of stalk pullback. Naturality
-on the free inclusions shows its normalized free components act on each
-summand by the same endomorphism of the unit sheaf. Unit endomorphisms act
-by multiplication by global functions, so this scalar commutes with every
-finite matrix. Thus its conjugation fixes t. Cancel E' to identify the two
-conjugations and obtain the equation for exactly the comparison in the statement. -/
+/-- Positive-rank finite-free stalk maps admit local representatives. -/
 theorem exists_local_free_stalk_map_of_nonempty
     {Y : Scheme.{u}} (r s : ℕ) (y : Y)
     (hr : Nonempty (Fin r)) (hs : Nonempty (Fin s))

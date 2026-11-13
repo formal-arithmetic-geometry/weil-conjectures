@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibili
 
 /-! # Ordinary exchange on homotopy single complexes
 
-Source: Stacks Project, Tag 08HY; functoriality of the homotopy quotient.
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -91,19 +93,7 @@ private theorem single_homotopy_exchange
     NatTrans.comp_app, Category.assoc] using hq
 
 /-- The ordinary exchange intertwines the termwise single-object identifications.
-Source: Stacks Project, Tag 08HY, ordinary mate construction.
-
-Proof: Form the natural transformation of module functors whose components are
-moduleBaseChangeMap. Apply the functors to single complexes. Postcompose both
-candidate chain maps with the single-map isomorphism for f' pushforward. A map to
-a single complex is determined in degree zero. In that degree all single-map and
-composition identifications are identities, so both maps are the ordinary
-exchange followed by pushforward of the tensor-to-ordinary p-pullback comparison.
-Cancel the postcomposed isomorphism. Apply the homotopy quotient, using its
-functoriality and the defining quotient lifts for termwise functors and their
-composition comparisons. This gives the displayed equation. No comparison of
-an unbounded derived functor is involved. Zero modules and empty schemes satisfy
-the same degree-zero calculation. -/
+(Stacks, Tag 08HY) -/
 theorem homotopySingleBaseChangeComparison
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)

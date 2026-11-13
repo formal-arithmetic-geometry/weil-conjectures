@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.GabberCriterion
 
 /-! # Gabber vanishing for absolutely algebraically closed normal domains
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma 09ZC
-(label lemma-gabber-for-absolutely-algebraically-closed).
+## References
+
+* Stacks Project, Étale Cohomology, Lemma 09ZC.
 -/
 
 @[expose] public section
@@ -31,35 +32,7 @@ namespace AlgebraicGeometry
 
 /-- Let `R` be a normal domain with separably closed fraction field.  For every closed
 subscheme `Z` of `Spec R`, the positive-degree étale cohomology of every finite constant
-abelian sheaf vanishes.
-
-Source: Stacks Project, `etale-cohomology.tex`, Lemma 09ZC
-(label lemma-gabber-for-absolutely-algebraically-closed).
-
-Proof (the five steps of the node):
-1. By `def-weil-closed-immersion` and `def-weil-affine-spectrum`, write `Z` as
-   `Spec (R/I)` over `Spec R`. The induced isomorphism of small étale sites preserves
-   coverings, the terminal object, constant sheaves, and global sections. It therefore
-   transports their derived cohomology.
-2. The stalks and function field of `Spec R` are the prime localizations and fraction
-   field. Those localizations are
-   normal domains. Thus Stacks 09Z9,
-   `sbc-lem-etale-over-normal` (2), makes every local ring strictly henselian.
-3. At a prime of `R/I` with preimage `p`, the local ring is `R_p / I R_p`.
-   By `lem-weil-pbc-strictly-henselian-quotient` (05WS), it is strictly henselian too.
-4. For `h` in `R/I`, lift it to `f` in `R`. If `f = 0`, `D(h)` is empty and all
-   abelian sheaves and their cohomology are zero. Otherwise `R_f` is a normal domain
-   with the same separably closed fraction field. Localization commutes with quotient, so `Spec ((R/I)_h)` is a closed
-   subscheme of `Spec R_f`. Stacks 09ZB,
-   `lem-weil-pbc-gabber-h1-absolutely-algebraically-closed`, gives zero `H¹` there.
-   Identify this spectrum with `D(h)` using
-   `lem-weil-pbc-principal-localization-open-immersion` and transport as in step 1.
-   Pullback preserves the constant sheaf.
-5. Apply `lem-weil-pbc-gabber-criterion` (0GY0) to `R/I` and the constant sheaf.
-   Its local rings are strictly henselian by step 3. The required restriction map
-   from `H¹(D(f+g))` has zero kernel because its source is zero by step 4.
-   All positive cohomology vanishes; step 1 transports this vanishing back to `Z`.
--/
+abelian sheaf vanishes. (Stacks, Lemma 09ZC) -/
 theorem gabber_absolutely_algebraically_closed
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     (hsep : IsSepClosed (FractionRing R))

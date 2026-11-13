@@ -17,9 +17,12 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # ProEtaleUniformModelEtaleCover
 
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
 The fixed-coefficient isomorphism sheaf is constructed directly, using a finite generating
 set of its module model to lift constant sections on a common covering sieve.
+
+## References
+
+* Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -520,28 +523,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A fixed finitely generated constant module model trivialized pro-etale locally
-is trivialized etale locally, over any discrete commutative coefficient ring.
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant; the finite
-lifting argument is extended here from finite underlying sets to finite generating sets.
-
-Proof: Isomorphisms of restrictions form a sheaf by gluing maps and their inverses
-in the sheafHom sheaves. For constant modules M,N with M finitely generated, choose
-a finite generating set s. Equality of constant maps is detected after intersecting
-the equalizer sieves for elements of s, since linear maps agreeing on s agree on M.
-For local surjectivity, intersect the image sieves for images of s. Away from the
-empty covering sieve, the constant-sheaf unit of N is injective. Its image is a
-submodule containing the images of s, hence the image of the whole linear map.
-Inverting that unit onto its image recovers a linear map M to N. Equality on constant
-sections and separatedness identify the resulting sheaf map with the given one.
-Lift an isomorphism and its inverse, and refine twice to enforce the inverse laws.
-Thus the isomorphism sheaf between constant finitely generated modules is constant.
-
-Transport the supplied scheme-pullback trivializations across weakly etale slice
-localization. The isomorphism sheaf from F to constant M is locally constant with
-value Aut(M), and is inhabited on the same cover. Apply the existing locally-classical
-etale-section theorem. Each etale-local section is a slice isomorphism; transport it
-back to the small site of the cover member. Shrink the covering index using Cover.ulift.
-The empty scheme, zero ring, zero module, and empty generating set are all included. -/
+is trivialized etale locally, over any discrete commutative coefficient ring
+(Stacks, Tag 099Y). -/
 theorem etale_cover_of_proetale_uniform_finiteType_model
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))
@@ -606,9 +589,8 @@ theorem etale_cover_of_proetale_uniform_finiteType_model
   exact fixedModel_upperStar X Λ F M T e
 
 
-/-- The finite-ring finite-model case of the finite-type model comparison.
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
-The finite underlying module is finitely generated, so apply the finite-type theorem. -/
+/-- The finite-ring finite-model case of the finite-type model comparison
+(Stacks, Tag 099Y). -/
 theorem etale_cover_of_proetale_uniform_model
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

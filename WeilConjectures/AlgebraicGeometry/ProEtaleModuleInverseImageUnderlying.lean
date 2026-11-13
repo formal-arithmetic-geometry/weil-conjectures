@@ -9,35 +9,17 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModelRingPresentation
 import WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
 /-!
 # Underlying abelian sheaf of the small-model module inverse image
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
-`sites-modules.tex`, labels `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
 -/
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
-/-- Forgetting the action on the model-site module pullback gives model-site abelian inverse image.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
-`sites-modules.tex`, labels `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
-Proof:
-1. Transport the original commutative-ring adjunction through the strict AsSmall
-   equivalences and compare its left adjoint with model-site commutative-ring pullback.
-   The uniqueness comparison respects the units. Commuting forgetting with filtered
-   left Kan extension and sheafification identifies the underlying ring sheaf with set
-   inverse image, with unit exactly `proEtaleModelRingUnit f R`.
-2. The same canonical comparison presents the actual abelian inverse image as set
-   inverse image. Product presentations allow maps to be tested on pairs and triples
-   of unit sections. Transport the source scalar action through these presentations.
-   Prove its six module laws and semilinearity of restrictions by testing on unit
-   sections, where the claims reduce to the source module laws and linearity of the
-   abelian unit. The additive carrier is the actual abelian inverse image throughout.
-3. An abelian map out of this module is linear if its adjunct is linear: test its two
-   scalar-action composites on pairs of unit sections. The reverse implication follows
-   by composing with the linear unit. Restricting the abelian hom bijection therefore
-   gives a module adjunction to pushforward restricted along the specified ring unit.
-4. Uniqueness of left adjoints compares this construction with Mathlib's module
-   pullback. Forgetting gives the displayed natural isomorphism. The argument applies
-   also to the empty scheme and the zero ring and requires no flatness of `f`. -/
+/-- Forgetting the action on the model-site module pullback gives model-site abelian inverse
+image (Stacks, Tags 03D2 and 03D3). -/
 theorem proEtaleModelModuleInverseImage_underlying {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     let A := (sheafCompose (ProEt.topology Y)

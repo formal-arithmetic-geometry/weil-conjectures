@@ -79,13 +79,9 @@ noncomputable def hypercoverPullbackCocone (f : X ⟶ Y)
         simpa only [Category.comp_id] using
           baseChangeCohomologyComponent_refinement A f F G k q r.unop.hom }
 
-/-- The pullback map determined by the cochain maps on every hypercover.
-
-For each hypercover U, compose its base-change cohomology map, the coefficient map, and the target
-colimit injection. Refinement compatibility follows from naturality of the coefficient
-transformation and of the adjunction unit, and the colimit relation. These components define a
-cocone on the homotopy quotient: quotient morphisms are represented by refinements. Take its
-colimit descent. The universal colimit equation gives the component formula. -/
+/-- The pullback map `hypercoverCohomology A F q ⟶ hypercoverCohomology A G q` determined by
+the cochain maps on every hypercover. Its components are the base-change cohomology map, the
+coefficient map, and the target colimit injection. -/
 noncomputable def hypercoverPullback (f : X ⟶ Y)
     (F : Sheaf Y.smallEtaleTopology A) (G : Sheaf X.smallEtaleTopology A)
     (k : (Etale.upperStar A f).obj F ⟶ G) (q : ℕ) :

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
 
 /-! # Transport of local recovery equations
 
-Source: Stacks Project, Tags 01ZR, 0095 and 0096. -/
+## References
+
+* Stacks Project, Tags 01ZR, 0095 and 0096
+-/
 
 @[expose] public section
 
@@ -66,29 +69,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 /-- Recovery of a global map survives a further factorization of the limit map.
 The three supplied comparisons are required to be the canonical ones.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, base change of local lifts;
-Sheaves of Modules, Tags 0095 and 0096, composition of pullback.
-
-Proof: First substitute the equalities identifying A₀, A and B with their
-tensor pullbacks. The three HEq hypotheses then become ordinary equalities of
-isomorphisms; substitute these canonicality equalities. The equation p followed
-by q equals b identifies the pullback of U₀ along b
-with its iterated pullback along q and p, by the pullback universal property. On each
-member of these identified covers, expand the displayed expression for r. Functoriality
-of ordinary pullback expands its five factors. The ordinary pullback composition
-isomorphisms combine the restrictions along the two paths to the same restriction.
-The tensor comparison is the mate of pushforward composition under the tensor
-adjunctions, and the restriction comparison uses the unique comparison between tensor
-and ordinary left adjoints to pushforward. Composition of these mates is associative:
-expanding their units and counits reduces both composites to the same pushforward
-composition by the two triangle identities. Thus the restriction comparisons cancel
-against the composition comparisons for q and p. The expression reduces to the
-original recovery equation transported along the identified covers. Substitute that
-equation. The same associativity identifies the remaining composite of e₀ and z with e,
-using their three canonicality equations, and gives the required right side. All four
-map equations have exactly the displayed source and target. No affineness, finiteness,
-or descent morphism is used. Empty covers are vacuous; zero maps and identity maps obey
-the same functoriality and triangle identities. -/
+(Stacks, Tag 01ZR, Tag 0095, Tag 0096) -/
 theorem finitePresentation_local_maps_recovery_transport
     {X₀ X₁ X₂ Z : Scheme.{u}}
     (h : X₁ ⟶ X₀) (q : X₂ ⟶ X₁) (p : Z ⟶ X₂)

@@ -12,7 +12,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-!
 # Principal-open section comparison for a graded-module chart
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
+## References
+
+* Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -28,8 +30,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM. -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsBasisComparisonFixedGenerators (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -110,22 +112,8 @@ private theorem principalOpen_chart (f : Fidx) (r : R[f]) :
   rw [hopen, Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
     ← basicOpen_mul]
 
-/-- Restrictions of whole-chart sections generate the sections on each principal open.
-
-Source: Stacks Project, Constructions, Lemma 01M7, and Schemes, Lemma 01HV.
-
-Proof:
-For a principal open D(r) of Spec R[f], write r=b/f^n with b homogeneous of
-degree n*deg(f), and put g=f*b. The chart intersection formula identifies this
-open inside D_+(f) with D_+(g), since U f g=r^deg(f). Transport sections using
-alpha f and alpha g. By hrestriction and htheta, restriction from the whole chart
-is the canonical map Z f to its localization at U f g. The compatible ring map
-is the canonical section restriction by hcanonical. Each localized module
-element is a fraction q/(U f g)^k, hence a scalar multiple of the image of q.
-Surjectivity of theta supplies this description for every section. Therefore the
-image of whole-chart restriction spans over the ring of sections on this open.
-Transport back through the chart and restriction identifications. When r=0 the
-section module is zero, and the span assertion remains valid. -/
+/-- Restrictions of whole-chart sections generate the sections on each principal open
+(Stacks, Constructions, Lemma 01M7, and Schemes, Lemma 01HV). -/
 theorem gradedModuleChart_basisComparison_fixed_generators
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])

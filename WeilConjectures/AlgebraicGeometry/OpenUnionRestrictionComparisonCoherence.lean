@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Coherence of supplied open-union restriction comparisons
 
-Source: Stacks Project Tags 08BW and 08BT; Mathlib restriction composition.
+## References
+
+* [Stacks, Tags 08BW and 08BT]
 -/
 
 @[expose] public section
@@ -32,34 +34,8 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 400000 in
 -- The four descents compare large transported derived functor expressions.
-/-- Supplied direct restriction comparisons descend to commuting overlap comparisons.
-Source: Stacks Project Tag 08BW, cohomology.tex, lemma-mayer-vietoris-hom;
-Tag 08BT, lemma-adjoint-lower-shriek-restrict.
-
-Proof: Treat each chain W intersect V into W into W union V, and W intersect V into
-V into W union V separately. Direct restriction through the inverse image of W is a
-localization: extension by zero is an exact left adjoint, its unit is invertible,
-and exact derived functoriality derives that adjunction and unit. The unit is the
-canonical restriction-of-extension map: on each stalk of the open it is the identity,
-as in the proof of nonempty_openExtensionRestrictionIso. Transport through
-Modules.overEquiv. By Localization.fullyFaithfulWhiskeringLeft, precomposition with
-this restriction is fully faithful on functor categories. The canonical nested
-restriction comparison identifies PW followed by SW with direct restriction from
-the union to the intersection. Combine that comparison with the supplied qW, qIY
-and the inverse of tU. Descend the resulting isomorphism uniquely to cW. Do the
-same for V to obtain cV, using the same qIY and eI. Threefold restriction coherence
-identifies SW(kW) followed by sW with the union-to-intersection comparison followed
-by the ambient direct comparison. Underived, both composites restrict the same
-section; cancel the overEquiv units and counits and use overFunctorMap. Derive this
-identity using mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac and
-Localization.natTrans_ext. Substitution into the defining identities for cW,cV
-gives the two equations.
-Define qI as the functor associator followed by qIY
-whiskered with L and the canonical ambient intersection restriction comparison.
-Its component is qIY(LG) followed by that ambient comparison, so the resulting
-equations are precisely the asserted equations with qI. These arguments apply to empty,
-disjoint, and repeated opens. No direct equivalences, localizations or direct comparisons
-are constructed by this statement: they are supplied as inputs. -/
+/-- Supplied direct restriction comparisons descend to commuting overlap comparisons
+(Stacks, Tags 08BW and 08BT). -/
 theorem open_union_restriction_comparison_coherence
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

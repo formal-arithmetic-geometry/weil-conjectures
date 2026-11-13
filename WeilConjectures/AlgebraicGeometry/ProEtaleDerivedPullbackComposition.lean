@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Composition of derived pro-etale module pullbacks
 
-Source: Stacks Project, sites-cohomology.tex, Lemma 0D6D.
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public section
@@ -32,7 +34,7 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
 /-- The induced identification on the composite, with no independent third choice.
-Source: Stacks, Tags 03D8 and 0D6D. -/
+(Stacks, Tags 03D8 and 0D6D.) -/
 noncomputable def proEtaleRingCompositeCoefficients
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -45,8 +47,7 @@ noncomputable def proEtaleRingCompositeCoefficients
     (proEtaleSheafInverseImage h CommRingCat.{u + 1}).mapIso c_k ≪≫ c_h
 
 /-- Section of the canonical module unit: the model-site inverse-image unit followed
-by the sheafification of `1 ⊗ m`. The model only enlarges the Hom universe.
-Source: Stacks, Tags 03D2, 03EK and 03D8. -/
+by the sheafification of `1 ⊗ m`. (Stacks, Tags 03D2, 03EK and 03D8.) -/
 noncomputable def proEtaleRingModuleUnitSection
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -69,7 +70,7 @@ noncomputable def proEtaleRingModuleUnitSection
             (Opposite.op (AsSmall.up.obj U)) m))
 
 /-- Normalization of the module adjunction by its constructed unit on every section.
-Source: Stacks, Tag 03D2. -/
+(Stacks, Tag 03D2.) -/
 def proEtaleRingModuleAdjunctionNormalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -139,28 +140,9 @@ private theorem derived_formula
   exact (Functor.mapDerivedCategoryNatIso_fac a K).symm
 
 -- Comparing the nested derived and termwise functors unfolds several sheaf transports.
-/-- The canonical composition isomorphism, including its K-flat representative formula.
-The existential adjunctions have their units fixed sectionwise by the construction;
-`d` is fixed by fibre-product pasting, `a` by conjugation, and `b` degree by degree.
-Thus these witnesses express the ordinary canonical comparison, not arbitrary isomorphisms.
-Source: Stacks, sites-cohomology.tex, Lemma 0D6D and Modules on Sites, Lemma 03D8.
-Proof: (1) On each test object the fibre-product pasting isomorphism identifies the two
-module direct images. The induced coefficient identification makes it linear. The
-module adjunctions have the displayed tensor units; form their composite using
-`def-weil-pbc-composite-adjunction`. Apply `lem-weil-pbc-conjugate-iso-unit-equation`
-to obtain `a`. In inverse-image/tensor coordinates its forward map sends `m ⊗ r` to
-`(m ⊗ 1) ⊗ r`; its inverse sends `(m ⊗ s) ⊗ r` to `m ⊗ c_h(s)r`. Balancing proves
-the inverse identities and compatibility with restrictions and morphisms.
-(2) Apply this comparison termwise to obtain `b`. All three module pullbacks are exact
-by `def-weil-pbc-proetale-operations`. Their termwise functors invert quasi-isomorphisms.
-Use `lem-weil-pbc-localization-universal-property` to descend `b`, with the stated
-factorization isomorphisms, to the unique compatible derived comparison `c`.
-(3) Use `lem-pc-kflat-resolution` to represent an input by a K-flat complex with flat
-terms. By `lem-weil-pbc-ringed-pullback-preserves-kflat`, its pullback along `k` remains
-K-flat with flat terms, so the iterated pullback computes the iterated derived functor.
-The factorization equation is exactly the class of the termwise comparison. For an
-input already K-flat with flat terms use the identity resolution. No boundedness,
-properness, or flatness of either scheme morphism enters. -/
+/-- The canonical composition isomorphism of derived pro-etale module pullbacks, including
+its K-flat representative formula. The adjunction witnesses are the canonical ones, not
+arbitrary isomorphisms. (Stacks, Tag 0D6D and Tag 03D8.) -/
 theorem proEtaleRingDerivedPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

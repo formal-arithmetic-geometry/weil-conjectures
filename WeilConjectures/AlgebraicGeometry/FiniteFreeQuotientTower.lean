@@ -17,8 +17,10 @@ set_option linter.privateModule false
 
 /-! # The basis comparison for the strict tower of quotient complexes
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03DA, 03DB and 03EK;
-Bhatt--Scholze, Lemma 3.4.12.
+## References
+
+* Stacks Project, Tags 03CY, 03DA, 03DB and 03EK
+* Bhatt--Scholze, Lemma 3.4.12
 -/
 
 @[expose] public noncomputable section

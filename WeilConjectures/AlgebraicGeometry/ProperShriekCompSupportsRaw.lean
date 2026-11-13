@@ -49,14 +49,8 @@ private theorem comparison_inv_forget {Y Z : Scheme.{u}} (q : Y ⟶ Z) [IsProper
         (HasCompactification.compactification q)).app E := by
   rw [← comparison_forget A q c E, Iso.inv_hom_id_app_assoc]
 
-/--
-The compact-support composition isomorphism for `p` and `f`, followed by the
-canonical proper comparison for `p ≫ f`, equals the ordinary composition path.
-This is the compositor calculation after the equality-congruence part has been
-removed.  It is strictly simpler than the route statement because the target
-map is the definitional composite `p ≫ f` and no extra morphism-equality
-transport is present.
--/
+/-- The compact-support composition isomorphism for `p` and `f`, followed by the
+canonical proper comparison for `p ≫ f`, equals the ordinary composition path. -/
 theorem properShriekComp_comp_forgetSupports_raw {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S)
     [IsProper p] [IsProper f] (E : DerivedCategoryModule A W) :

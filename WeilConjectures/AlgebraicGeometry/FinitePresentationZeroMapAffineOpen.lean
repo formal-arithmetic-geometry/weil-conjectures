@@ -16,8 +16,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Eventual vanishing on one affine open
 
-Source: Stacks Project, Limits, Tag 01ZR (3), first proof, affine case;
-Algebra, Tag 05N7 (3), finite-generator argument.
+## References
+
+* Stacks Project, Limits, Tag 01ZR; Algebra, Tag 05N7.
 -/
 
 @[expose] public section
@@ -31,24 +32,7 @@ namespace AlgebraicGeometry
 
 /-- Vanishing on one affine open of the fixed model holds at every sufficiently late stage.
 No quasi-compactness of the whole model is needed.
-Source: Stacks Project, Limits, Tag 01ZR (3), first proof, affine case;
-Algebra, Tag 05N7 (3), finite-generator argument.
-
-Proof: restrict to the inverse images of the affine open `U`. They are affine because
-all base changes of the affine transition maps are affine. Their coordinate rings
-form the directed colimit of the stage coordinate rings: Spec carries ring colimits
-to affine limits, the tail is cofinal, and tensoring the coordinate ring of `U`
-with the base diagram commutes with colimits. Quasi-coherence identifies the
-restrictions and their pullbacks with modules and scalar extension. The source has
-finitely many generators. For each generator its image in the target becomes zero
-under scalar extension to the limit. Present the target by a finite matrix. Lift
-vectors witnessing that these images lie in the relation image from the limit ring
-to one stage. The finitely many entries of the resulting differences become zero
-at a later common stage, by the elementwise ring-colimit equality criterion.
-The map then kills the generators, hence is zero on this affine scheme.
-A zero map stays zero after scalar extension, so it is zero at every later stage.
-The associated sheaf map is zero on every subopen `W`, as asserted. This argument
-also covers the empty affine open, zero modules, and a singleton index preorder. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem finitePresentation_zero_map_affine_open_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

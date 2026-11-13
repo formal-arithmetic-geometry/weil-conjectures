@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.RingFamilyRestriction
 
 /-! # Descent from locally equal section ideals
 
-Source: Stacks Project, algebraization.tex, Tag 099E, second and third paragraphs.
+## References
+
+* Stacks Project, Tag 099E.
 -/
 
 @[expose] public noncomputable section
@@ -1299,11 +1301,7 @@ private theorem spanTransitionEquiv_toSingle
     rw [ha.eq_zero_of_tgt (α.f n), hb.eq_zero_of_tgt (β.f n)]
     rfl
 
-/-- The canonical transition maps commute with the specified augmentations.
-Source: Stacks Project, Tag 099E, augmentation compatibility of the canonical
-identifications. The proof is obtained by evaluating the degree-zero comparison on
-unit sections and using the single-complex augmentation, with zero target components
-in every other degree. -/
+/-- The canonical transition maps commute with the specified augmentations. (Stacks, Tag 099E) -/
 private theorem ringFamily_idealDescent_augmentation
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (K : RingComplexFamily.{u})
@@ -1367,27 +1365,7 @@ attribute [-instance] commRingForgetHasSheafCompose moduleZeroObject moduleZeroM
 
 /-- Locally equal section ideals give coherent strict descent data for the sheafified
 ring-family complexes. This assertion has no ideal module, finite-type assumption,
-covering-family assumption, derived category or Čech complex.
-Source: Stacks Project, Tag 099E, the canonical identifications and their cocycle.
-
-Proof: on a common test span, restrict both presheaf complexes to the slice of the test
-object. The section ideals are equal on a restriction-stable locus which covers every
-object, by the hypothesis applied to further test spans. On that locus identify the ring
-complexes by transport along equality of their ideals. The construction
-ringFamilySheafModel_iso_of_locally_equal_ideals_with_unit gives the augmented chain isomorphism.
-Use exists_ringFamilySheafModel_restrictionIso to identify its source and target with
-restrictions of the original slice models. Its formula on sheafification-unit sections
-specifies the transition map uniquely: sheafification_hom_ext_on_locus applies on the
-same covering locus. Further restriction preserves this formula, so uniqueness gives
-naturality. On a triple common span intersect the three equality loci; transport along
-equality is transitive there, so uniqueness gives the cocycle. The chain equation is
-supplied by the chain comparisons. For augmentation, test on unit
-sections: the comparison sends a section to its transport along equality of ideals, and
-the ring-family augmentation commutes with that transport. The sheafification adjunction
-identifies these presheaf augmentations with the specified sheaf augmentations. The same
-hom-ext theorem therefore proves the augmentation equation. Evaluate the resulting chain
-isomorphisms at the terminal test object to obtain the specified linear transitions.
-Empty indexing families and empty generating lists use the same formulas. -/
+covering-family assumption, derived category or Čech complex. (Stacks, Tag 099E) -/
 theorem exists_ringFamily_idealDescentData
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

@@ -15,7 +15,9 @@ public import Mathlib.Algebra.Homology.Single
 
 /-! # The truncated Koszul system on a finite principal open
 
-Source: Stacks Project, Tags 08CX and 08DC.
+## References
+
+* Stacks Project, Tags 08CX and 08DC.
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ noncomputable section
 
 variable (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
 
-/-- The negative Koszul tail differential squares to zero. Source: Stacks, Tag 08CX.
-Proof: compose two negatives and apply `ExteriorAlgebra.koszulBoundary_comp`. -/
+/-- The negative Koszul tail differential squares to zero. -/
 theorem koszulOpenTail_square (e n : ℕ) :
     (-ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r (fun i ↦ f i ^ (e + 1))
       (n + 2))) ≫
@@ -41,8 +42,7 @@ theorem koszulOpenTail_square (e n : ℕ) :
   simpa only [Preadditive.neg_comp, Preadditive.comp_neg, neg_neg] using
     ExteriorAlgebra.koszulBoundary_comp A r (fun i ↦ f i ^ (e + 1)) (n + 1)
 
-/-- The tail `I^{-n} = K_{n+1}` with negative Koszul differential, for exponent `e+1`.
-Source: Stacks, Tag 08CX. -/
+/-- The tail `I^{-n} = K_{n+1}` with negative Koszul differential, for exponent `e+1`. -/
 def koszulOpenTail (e : ℕ) : ChainComplex (ModuleCat.{u} A) ℕ :=
   ChainComplex.of
     (fun n ↦ ModuleCat.of A (⋀[A]^(n + 1) (Fin r →₀ A)))
@@ -50,16 +50,13 @@ def koszulOpenTail (e : ℕ) : ChainComplex (ModuleCat.{u} A) ℕ :=
       (ExteriorAlgebra.koszulBoundary A r (fun i ↦ f i ^ (e + 1)) (n + 1)))
     (koszulOpenTail_square A r f e)
 
-/-- Augmentation of the negative Koszul tail to `A`, using `K_0 ≃ A`.
-Source: Stacks, Tag 08CX. -/
+/-- Augmentation of the negative Koszul tail to `A`, using `K_0 ≃ A`. -/
 def koszulOpenAugmentationComponent (e : ℕ) :
     (koszulOpenTail A r f e).X 0 ⟶ ModuleCat.of A A :=
   ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r (fun i ↦ f i ^ (e + 1)) 0) ≫
     (exteriorPower.zeroEquiv (R := A) (M := Fin r →₀ A)).toModuleIso.hom
 
-/-- The augmentation annihilates boundaries. Source: Stacks, Tag 08CX.
-Proof: the Koszul differential squares to zero; compose with the degree-zero
-exterior-power identification and use bilinearity to remove the negative sign. -/
+/-- The augmentation annihilates boundaries. -/
 theorem koszulOpenAugmentationComponent_cycle (e : ℕ) :
     (koszulOpenTail A r f e).d 1 0 ≫ koszulOpenAugmentationComponent A r f e = 0 := by
   change (-ModuleCat.ofHom
@@ -69,7 +66,7 @@ theorem koszulOpenAugmentationComponent_cycle (e : ℕ) :
   rw [Preadditive.neg_comp, ← Category.assoc,
     ExteriorAlgebra.koszulBoundary_comp, zero_comp, neg_zero]
 
-/-- The canonical chain map `I → A[0]`. Source: Stacks, Tag 08CX. -/
+/-- The canonical chain map `I → A[0]`. -/
 def koszulOpenAugmentation (e : ℕ) :
     koszulOpenTail A r f e ⟶ (ChainComplex.single₀ (ModuleCat.{u} A)).obj
       (ModuleCat.of A A) :=
@@ -77,13 +74,11 @@ def koszulOpenAugmentation (e : ℕ) :
     ⟨koszulOpenAugmentationComponent A r f e,
       koszulOpenAugmentationComponent_cycle A r f e⟩
 
-/-- The diagonal map multiplying generator `i` by `f_i^d`.
-Source: Stacks, Tag 08CX. -/
+/-- The diagonal map multiplying generator `i` by `f_i^d`. -/
 def koszulOpenDiagonal (d : ℕ) : (Fin r →₀ A) →ₗ[A] (Fin r →₀ A) :=
   Finsupp.linearCombination A (fun i ↦ Finsupp.single i (f i ^ d))
 
-/-- The component of the power-comparison map on the Koszul tail.
-Source: Stacks, Tag 08CX. -/
+/-- The component of the power-comparison map on the Koszul tail. -/
 def koszulOpenTransitionComponent (a b n : ℕ) :
     (koszulOpenTail A r f b).X n ⟶ (koszulOpenTail A r f a).X n :=
   ModuleCat.ofHom (exteriorPower.map (n := n + 1) (koszulOpenDiagonal A r f (b - a)))
@@ -131,10 +126,7 @@ private theorem koszulOpen_forms_comp (a b : ℕ) (h : a ≤ b) :
     map_smul, smul_eq_mul]
   rw [← pow_add, hexp]
 
-/-- Power comparison commutes with the differential. Source: Stacks, Tag 08CX.
-Proof: on a wedge of basis vectors the comparison multiplies by the product
-of their `f_i^(b-a)`. Each summand of the contraction formula commutes since
-`f_i^(a+1) * f_i^(b-a) = f_i^(b+1)` when `a ≤ b`. -/
+/-- Power comparison commutes with the differential. -/
 theorem koszulOpenTransitionComponent_comm (a b : ℕ) (h : a ≤ b) (n m : ℕ) :
     (koszulOpenTail A r f b).d n m ≫ koszulOpenTransitionComponent A r f a b m =
       koszulOpenTransitionComponent A r f a b n ≫ (koszulOpenTail A r f a).d n m := by
@@ -165,15 +157,13 @@ theorem koszulOpenTransitionComponent_comm (a b : ℕ) (h : a ≤ b) (n m : ℕ)
     rw [HomologicalComplex.shape _ n m hn, HomologicalComplex.shape _ n m hn,
       zero_comp, comp_zero]
 
-/-- The comparison `I_b → I_a` for exponents `b+1 ≥ a+1`.
-Source: Stacks, Tag 08CX. -/
+/-- The comparison `I_b → I_a` for exponents `b+1 ≥ a+1`. -/
 def koszulOpenTransition (a b : ℕ) (h : a ≤ b) :
     koszulOpenTail A r f b ⟶ koszulOpenTail A r f a where
   f n := koszulOpenTransitionComponent A r f a b n
   comm' n m _ := (koszulOpenTransitionComponent_comm A r f a b h n m).symm
 
-/-- Transport Mathlib's tilde functor to the project's shared sheaf-module category.
-Source: Stacks, Tag 08CX. -/
+/-- Transport Mathlib's tilde functor to the project's shared sheaf-module category. -/
 def koszulOpenTilde : ModuleCat.{u} A ⥤
     SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) where
   obj M := (tilde.functor (.of A)).obj M
@@ -182,14 +172,13 @@ def koszulOpenTilde : ModuleCat.{u} A ⥤
   map_comp g h := (tilde.functor (.of A)).map_comp g h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Additivity instance for termwise tilde. Source: Stacks, Tag 08CX. -/
+/-- Additivity instance for termwise tilde. -/
 instance koszulOpenTilde_additive : (koszulOpenTilde A).Additive := by
   constructor
   intro M N g h
   exact tilde.map_add (R := .of A) g h
 
-/-- Termwise tilde, after extending `I^{-n}` by zero to integer cochain degrees.
-Source: Stacks, Tag 08CX. -/
+/-- Termwise tilde, after extending `I^{-n}` by zero to integer cochain degrees. -/
 def koszulOpenSheafComplex (e : ℕ) :=
   ((koszulOpenTilde A).mapHomologicalComplex (ComplexShape.up ℤ)).obj
     ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat)
@@ -233,36 +222,32 @@ private theorem koszulOpenTransition_comp (a b c : ℕ) (hab : a ≤ b) (hbc : b
 variable [HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
 
-/-- The object `I_{e+1}` in `D(O_Spec A)`. Source: Stacks, Tag 08CX. -/
+/-- The object `I_{e+1}` in `D(O_Spec A)`. -/
 def koszulOpenObject (e : ℕ) : schemeDerivedCategory (Spec (.of A)) :=
   DerivedCategory.Q.obj (koszulOpenSheafComplex A r f e)
 
-/-- The structure module, represented by the extended single complex `A[0]`.
-Source: Stacks, Tag 08CX. -/
+/-- The structure module, represented by the extended single complex `A[0]`. -/
 def koszulOpenStructure : schemeDerivedCategory (Spec (.of A)) :=
   DerivedCategory.Q.obj (((koszulOpenTilde A).mapHomologicalComplex
     (ComplexShape.up ℤ)).obj
     (((ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A)).extend
       ComplexShape.embeddingDownNat))
 
-/-- The object of the full Koszul complex in cohomological degrees `[-r,0]`.
-Source: Stacks, Tag 08CX. -/
+/-- The object of the full Koszul complex in cohomological degrees `[-r,0]`. -/
 def koszulOpenKoszulObject (e : ℕ) : schemeDerivedCategory (Spec (.of A)) :=
   DerivedCategory.Q.obj (((koszulOpenTilde A).mapHomologicalComplex
     (ComplexShape.up ℤ)).obj
     ((ExteriorAlgebra.koszulComplex A r (fun i ↦ f i ^ (e + 1))).extend
       ComplexShape.embeddingDownNat))
 
-/-- Inclusion of `A` into degree zero of the Koszul complex.
-Source: Stacks, Tag 08CX. -/
+/-- Inclusion of `A` into degree zero of the Koszul complex. -/
 def koszulOpenKoszulInclusion (e : ℕ) :
     (ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A) ⟶
       ExteriorAlgebra.koszulComplex A r (fun i ↦ f i ^ (e + 1)) :=
   (ChainComplex.fromSingle₀Equiv _ _).symm
     (exteriorPower.zeroEquiv (R := A) (M := Fin r →₀ A)).toModuleIso.inv
 
-/-- The canonical second arrow `O_X → K_e` of the Koszul triangle.
-Source: Stacks, Tag 08CX. -/
+/-- The canonical second arrow `O_X → K_e` of the Koszul triangle. -/
 def koszulOpenKoszulUnit (e : ℕ) :
     koszulOpenStructure A ⟶ koszulOpenKoszulObject A r f e :=
   DerivedCategory.Q.map (((koszulOpenTilde A).mapHomologicalComplex
@@ -270,14 +255,14 @@ def koszulOpenKoszulUnit (e : ℕ) :
     (HomologicalComplex.extendMap (koszulOpenKoszulInclusion A r f e)
       ComplexShape.embeddingDownNat))
 
-/-- The canonical augmentation in the derived category. Source: Stacks, Tag 08CX. -/
+/-- The canonical augmentation in the derived category. -/
 def koszulOpenUnit (e : ℕ) : koszulOpenObject A r f e ⟶ koszulOpenStructure A :=
   DerivedCategory.Q.map (((koszulOpenTilde A).mapHomologicalComplex
     (ComplexShape.up ℤ)).map
     (HomologicalComplex.extendMap (koszulOpenAugmentation A r f e)
       ComplexShape.embeddingDownNat))
 
-/-- Derived power comparison. Source: Stacks, Tag 08CX. -/
+/-- Derived power comparison. -/
 def koszulOpenMap (a b : ℕ) (h : a ≤ b) :
     koszulOpenObject A r f b ⟶ koszulOpenObject A r f a :=
   DerivedCategory.Q.map (((koszulOpenTilde A).mapHomologicalComplex
@@ -285,16 +270,12 @@ def koszulOpenMap (a b : ℕ) (h : a ≤ b) :
     (HomologicalComplex.extendMap (koszulOpenTransition A r f a b h)
       ComplexShape.embeddingDownNat))
 
-/-- Finite union of principal opens. Source: Stacks, Tag 08CX. -/
+/-- Finite union of principal opens. -/
 def koszulOpen : (Spec (.of A)).Opens :=
   ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Power comparisons are identities at equal exponents and compose transitively.
-Source: Stacks, Tag 08CX.
-Proof: the diagonal maps multiply by `f_i^(b-a)`; for `a ≤ b ≤ c`, exponent
-addition identifies their composite with `f_i^(c-a)`. Exterior powers, extension,
-termwise tilde, and localization preserve identities and compositions. -/
+/-- Power comparisons are identities at equal exponents and compose transitively. -/
 theorem koszulOpenMap_laws :
     (∀ a : ℕ, koszulOpenMap A r f a a le_rfl = 𝟙 _) ∧
     (∀ (a b c : ℕ) (hab : a ≤ b) (hbc : b ≤ c),
@@ -309,10 +290,7 @@ theorem koszulOpenMap_laws :
     simp only [koszulOpenMap, ← Functor.map_comp, ← HomologicalComplex.extendMap_comp,
       koszulOpenTransition_comp A r f a b c hab hbc]
 
-/-- The directed Hom diagram respects identities and composition.
-Source: Stacks, Tag 08DC.
-Proof: precomposition reverses composition of the inverse-system maps;
-apply `koszulOpenMap_laws`, then associativity of derived composition. -/
+/-- The directed Hom diagram respects identities and composition. -/
 theorem koszulOpenHomDiagram_laws (E : schemeDerivedCategory (Spec (.of A))) :
     (∀ a : ℕ, (fun φ : koszulOpenObject A r f a ⟶ E ↦
       koszulOpenMap A r f a a le_rfl ≫ φ) = id) ∧
@@ -332,8 +310,7 @@ theorem koszulOpenHomDiagram_laws (E : schemeDerivedCategory (Spec (.of A))) :
       koszulOpenMap A r f b c hbc ≫ (koszulOpenMap A r f a b hab ≫ φ)
     rw [← Category.assoc, (koszulOpenMap_laws A r f).2 a b c hab hbc]
 
-/-- The directed diagram of derived Hom sets, with transition by precomposition.
-Source: Stacks, Tag 08DC. -/
+/-- The directed diagram of derived Hom sets, with transition by precomposition. -/
 def koszulOpenHomDiagram (E : schemeDerivedCategory (Spec (.of A))) : ℕ ⥤ Type w where
   obj e := koszulOpenObject A r f e ⟶ E
   map {a b} h := TypeCat.ofHom (fun φ ↦ koszulOpenMap A r f a b (leOfHom h) ≫ φ)

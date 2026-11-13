@@ -24,7 +24,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Serre vanishing for finite graded modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2).
+## References
+
+* [Stacks Project, Cohomology of Schemes, Tag 0897]
 -/
 
 @[expose] public section
@@ -40,29 +42,10 @@ namespace AlgebraicGeometry
 /-- A finite type graded quasi-coherent module over a pulled-back finite type graded
 algebra has uniformly vanishing higher cohomology after sufficiently large ample twists.
 The graded module `G = ⊕ G m` over `f ^* B~` is written, as in
-`gradedFinitenessCohomology` (Lemma 0897 (1)), through its homogeneous pieces and the
-homogeneous action maps `mu`; finite type allows generators in arbitrary degrees `d i`.
-No equality between the degree-zero algebra and the base ring, and no degree-one
-algebra generators, are assumed.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2).
-
-Proof:
-1. Forget the grading. Set X' = Spec(B) ×_Spec(A) X. Its projection pi to X is affine
-   by lem-weil-pbc-morphism-affine-schemes-affine and
-   lem-weil-pbc-affine-morphism-permanence; its map to Spec(B) is proper by
-   lem-weil-pbc-proper-fp-permanence. B and X' are Noetherian by
-   lem-weil-pbc-finite-type-algebra-noetherian and lem-weil-pbc-finite-type-over-noetherian.
-2. The associated algebra and tensor pullback identify X' with the relative spectrum. The affine module correspondence realizes G as pi_* G'. Local finite
-   generation is preserved, so G' is coherent
-   by pqf-lem-coherent-ft-locnoeth.
-3. The pullback L' = pi^* L is ample by lem-weil-pbc-pullback-ample-invertible.
-   Apply lem-weil-pbc-coherent-serre-vanishing on X' to obtain one bound d0 for all p > 0.
-4. Trivialize L locally. Both pi_*(G' tensor pi^* L^d) and G tensor L^d identify with
-   pi_* G'. Changing the local generator by a unit a changes both identifications by
-   a^d, so they glue. The same computation identifies (pi^* L)^d with pi^*(L^d).
-5. The twisted module upstairs is quasi-coherent since locally it is G'. The affine
-   cohomology comparison lem-weil-pbc-affine-morphism-cohomology-edge identifies its
-   cohomology with the cohomology downstairs. Step 3 gives the required vanishing. -/
+`gradedFinitenessCohomology`, through its homogeneous pieces and the homogeneous action
+maps `mu`; finite type allows generators in arbitrary degrees `d i`. No equality between
+the degree-zero algebra and the base ring, and no degree-one algebra generators, are
+assumed. (Stacks, Tag 0897) -/
 theorem graded_serre_vanishing
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     [IsNoetherianRing A] [Algebra.FiniteType A B]

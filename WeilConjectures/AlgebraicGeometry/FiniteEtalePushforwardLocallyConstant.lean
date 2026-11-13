@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 /-!
 # Finite etale pushforward of finite locally constant module sheaves
 
-Source: Stacks Project, Tag 095B, Lemma 59.64.3, module clause.
+## References
+
+* Stacks Project, Tag 095B
 -/
 
 @[expose] public section
@@ -89,31 +91,7 @@ private theorem finiteLocallyConstant_lowerStar_split
   exact IsFiniteLocallyConstantSheaf.of_iso q.symm
 
 /-- Direct image along a finite etale morphism preserves finite locally constant sheaves
-of modules over a finite commutative ring. The finite-local-constancy predicate agrees
-with local trivializations by finite modules by `finite_locally_constant_module_values_iff`.
-
-Proof, following Stacks 095B and the node's six steps:
-1. Finite local constancy is invariant under isomorphism and local for etale coverings:
-   transport trivializations through an isomorphism, or compose the trivializing covers
-   with the given cover.
-2. Etale restriction preserves finite local constancy: inverse image preserves local
-   constancy, and its geometric stalk is
-   the original stalk. Restriction agrees with
-   inverse image; naturality at scalar
-   multiplication makes this identification module-linear.
-3. Direct image commutes with etale localization. On each test object, cartesian-square
-   pasting identifies the two iterated fibre
-   products naturally, hence gives an isomorphism of module sheaves.
-4. A finite etale morphism splits over an etale cover into finitely many sheets, each
-   isomorphic to the base (`lem-weil-pbc-finite-etale-etale-local-split`, Stacks 04HN).
-5. On that cover, direct image is the product of restrictions to the sheets. Each restriction is finite locally
-   constant by step 2. A finite nonempty product is a finite biproduct, hence finite
-   locally constant. For no sheets it is the zero
-   sheaf, trivialized by the identity cover with the finite zero module.
-6. Apply step 3 and isomorphism invariance to obtain finite local constancy on the cover,
-   then descend by the locality in step 1.
-
-Source: Stacks Project, Tag 095B, Lemma 59.64.3, module clause and proof. -/
+of modules over a finite commutative ring. (Stacks, Tag 095B, Lemma 59.64.3.) -/
 theorem finiteLocallyConstant_lowerStar_of_finite_etale
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Etale f]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

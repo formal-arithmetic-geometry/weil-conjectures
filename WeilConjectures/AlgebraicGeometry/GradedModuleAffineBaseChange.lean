@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GradedModuleAffineBaseChangeAlgebra
 
 /-! # Realizing a finite graded module on the affine base change
 
-Source: Stacks Project, Tag 0897, proof, and Tag 01SB.
+## References
+
+* [Stacks Project, Tags 0897, 01SB]
 -/
 
 @[expose] public section
@@ -31,35 +33,7 @@ namespace AlgebraicGeometry
 /-- The underlying module of a finite graded module over the pulled-back algebra is
 an affine pushforward of a quasi-coherent module of finite type. No twisting module,
 properness or Noetherian hypothesis is required for this realization.
-
-Source: Stacks Project, Tag 0897, proof (the realization and finite-type paragraphs),
-with Tags 01SB and 01PB.
-
-Proof:
-1. Set b = Spec(A → B), Y = X ×_Spec(A) Spec(B), and pi = Y → X. The morphism pi
-   is affine by base change of an affine morphism. On an affine open Spec(R) of X,
-   its inverse image is Spec(R tensor_A B). The associated algebra and tensor pullback
-   identify pi_* O_Y with the algebra f^* B~.
-2. Form the underlying module M = direct sum_m G_m. Each G_m is quasi-coherent, so
-   M is quasi-coherent. Internalness of the grading decomposes each element of B as
-   a finite sum of homogeneous elements. Let a homogeneous b in B_k act on G_m by
-   mu m k b, followed by the inclusion of G_(m+k) in M. The additive law, composition
-   law and scalar law give a unital B-action commuting with the O_X-action; the unit
-   law follows from the scalar law at a = 1. On affine opens this extends uniquely
-   to an R tensor_A B-action. Localization compatibility glues these actions to a
-   sheaf of modules over pi_* O_Y. Its underlying O_X-module is M. By clause (1) of
-   affine_module_correspondence it is quasi-coherent over that algebra as well.
-3. The local sections s_i in hfinite, placed in their homogeneous summands, generate
-   M over pi_* O_Y. Indeed, a section of the sheaf coproduct is locally a finite sum
-   of homogeneous sections. Apply hfinite to each of the finitely many summands and
-   intersect the resulting neighbourhoods. Its span formula expresses each summand
-   as a sum of homogeneous algebra multiples of the s_i, with O_X coefficients.
-   Such coefficients belong to pi_* O_Y through the structure algebra map. Thus the
-   finite free sheaf on the s_i surjects locally, proving finite type over pi_* O_Y.
-4. Apply the inverse of affine_module_correspondence to this algebra module. It gives
-   a quasi-coherent O_Y-module F and an algebra-linear pushforward isomorphism.
-   affine_module_finite_type gives F.IsFiniteType. Restrict scalars in the isomorphism
-   to obtain the stated O_X-linear isomorphism with the coproduct of the G_m. -/
+(Stacks, Tag 0897) -/
 theorem exists_finiteType_graded_module_affine_baseChange
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     (graded : ℕ → Submodule A B)

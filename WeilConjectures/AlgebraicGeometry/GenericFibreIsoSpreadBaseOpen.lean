@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descending a whole generic-fibre isomorphism to a base open
 
-Source: Stacks Project, Tag 01ZM, morphism descent and eventual equality.
+## References
+
+* [Stacks, Tag 01ZM]
 -/
 
 @[expose] public section
@@ -83,25 +85,8 @@ private theorem nhdsCone_limit (S : Scheme.{u}) [IsIntegral S] (η : S)
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- An isomorphism of whole affine generic fibres descends after shrinking the base.
-
-Source: Stacks Project, Tag 01ZM, lemma-descend-finite-presentation, parts (2) and (3).
-Proof: Form the cofiltered diagram of affine neighbourhoods of eta. The
-spectrum of the stalk is its limit by the existing stalk-neighbourhood theorem.
-The stalk is a field since eta is generic in an integral scheme. Hence its
-residue quotient is an isomorphism, and transporting the limit gives the
-canonical cone with point Spec kappa(eta). Take the top neighbourhood as base
-stage. The fibre squares, with the second transported by e and its equation
-over kappa(eta), exhibit one common limit model for X and Y. Both finite-stage
-models are affine and locally of finite presentation, hence qcqs. Apply the
-existing exists_iso_of_isPullback theorem: it descends the two inverse maps
-by 01ZM(2), then their two inverse identities by 01ZM(3). This gives an
-isomorphism of their base changes at an affine neighbourhood U of eta.
-The canonical pullback comparisons identify these base changes with the
-open restrictions f^{-1}(U) and g^{-1}(U). Conjugate the descended isomorphism
-by those comparisons. Their projection equations give compatibility over U;
-composition with U's inclusion gives the displayed equality over S. No
-nonemptiness of either generic fibre is used, so the empty case is covered. -/
+/-- An isomorphism of whole affine generic fibres descends after shrinking the base
+(Stacks, Tag 01ZM). -/
 theorem exists_base_open_iso_of_generic_fibre_iso
     {X Y S : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) (g : Y ⟶ S)

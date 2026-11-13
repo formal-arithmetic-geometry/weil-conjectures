@@ -23,20 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Effectivity over all affine bases implies effectivity over arbitrary bases
-for a class stable under the chosen pullbacks.
-Source: Stacks Project, Descent, Tag 02W3, final general-base part of the proof.
-
-For each affine open A of S, base change f and D to A. Base-change stability of
-fpqc covers and hbase preserve the hypotheses, and hlocal gives an effective
-object W_A over A. For nested affine opens B ⊆ A, the two objects over B have
-canonically isomorphic pullbacks to X_B. Full faithfulness of fpqc descent of
-morphisms gives a unique comparison isomorphism. Uniqueness proves the identity
-and composition laws. These comparisons exhibit pullback squares, so relative
-gluing over the directed affine cover constructs W over S. The local
-identifications of W ×_S X with V agree on overlaps by the same uniqueness and
-glue to an isomorphism; transport compatibility is checked on that open cover.
-Its projection to W witnesses effectivity. No finite-coproduct or affine-source
-hypothesis is used here, and empty bases give empty gluing. -/
+for a class stable under the chosen pullbacks (Stacks, Descent, Tag 02W3). -/
 theorem fpqc_effectivity_of_affine_bases (P : MorphismProperty Scheme.{u})
     (hbase : ∀ {Y V V' : Scheme.{u}} (g : Y ⟶ V) (h : V' ⟶ V),
       P g → P (pullback.snd g h))

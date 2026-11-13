@@ -12,7 +12,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Representative coherence for exact open stalk restriction
 
-Source: Stacks Project, Tags 0098, 08DW and 015F; exact localization factorization.
+## References
+
+* [Stacks, Tags 0098, 08DW and 015F]
 -/
 
 @[expose] public section
@@ -248,22 +250,7 @@ private theorem representative_cohomology
   rfl
 
 
-/-- Exact open stalk comparison on a morphism of representatives.
-
-Proof: first apply comparisonStalkHomologyIso_naturality to a. Expand the
-comparison for the restricted representative and openDerivedAdditiveStalkIso.
-Apply mapDerivedCategoryCompIso_fac to the composites of restriction, stalk
-and forgetting scalars, and mapDerivedCategoryNatIso_fac to the same-germ
-comparison gamma. Apply mapDerivedCategoryHomologyFunctorIso_hom_app_Q to
-both forgetful functors. The localization factors cancel with their inverses,
-leaving homology of the stalk map of a followed by gamma. The naturality of
-ShortComplex.mapHomologyIso gives the displayed inverse factor at the source
-and direct factor at the target. All equalities are natural-transformation
-identities, so zero complexes and zero homology require no extra hypotheses;
-for the top open this specializes to the identity restriction comparison.
-An empty open has no point z.
-Source: Stacks Project, Tags 0098, 08DW and 015F; the exact functor factorization
-identities named above. -/
+/-- Exact open stalk comparison on a morphism of representatives. -/
 theorem openStalk_representative_coherence
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -365,23 +365,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include ℓ k
 
-/-- Integral single-sheaf case of finite-type finiteness.
-
-Source: Bhatt--Scholze, Lemmas 6.5.9 and 6.7.2, Proposition 6.8.11(3).
-
-Proof: identify the given closed unit ball with the spectral integer ring after
-universe lifting. The ring equivalence is an isometry by uniqueness of the extended
-absolute value, so postcomposition induces an isomorphism of condensed rings.
-Restriction along it preserves constructibility and identifies the degree-zero
-complexes. The internal constant-model comparison and the integral residue criterion
-make this complex complete with bounded constructible residue of finite Tor amplitude.
-Direct image preserves completeness, and its canonical residue mate is invertible.
-The finite internal-etale realization identifies the residue direct image with the
-classical finite-type etale direct image, which is bounded constructible. Over the
-residue field every module is flat, so bounded devissage also gives finite Tor
-amplitude. The converse integral residue criterion gives a bounded integral image.
-Take its upper endpoint and reflect the cohomological vanishing through the exact
-coefficient equivalence. Zero sheaves and empty schemes are included. -/
+/-- Integral single-sheaf case of finite-type finiteness: the direct image of a constructible
+sheaf with integral coefficients placed in degree zero is bounded above.
+(Bhatt--Scholze, Lemmas 6.5.9 and 6.7.2, Proposition 6.8.11(3).) -/
 theorem finiteTypeIntegralHeart_boundedAbove
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E]

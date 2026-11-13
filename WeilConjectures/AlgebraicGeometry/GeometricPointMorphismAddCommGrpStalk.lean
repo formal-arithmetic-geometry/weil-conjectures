@@ -15,17 +15,8 @@ import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismCategoryEquivalen
 open CategoryTheory Opposite Limits
 universe u v
 namespace AlgebraicGeometry.Scheme
-/-- The representative-preserving additive stalk isomorphism.
-Source: Stacks Project, Étale Cohomology, Remark 59.29.8, Tag 04FN.
-
-Proof: The category-equivalence component gives an equivalence of pointed étale
-neighbourhoods which preserves the underlying étale object. The source stalk
-diagram is therefore the target stalk diagram precomposed with the opposite of
-this equivalence. The canonical colimit comparison has the required formula on
-coprojections, and it is an isomorphism because an equivalence is final. Equality
-on every coprojection proves uniqueness by the colimit universal property.
-Every morphism with the formula equals this comparison, so it too is an
-isomorphism (and in Type its underlying function is bijective). -/
+/-- The representative-preserving additive stalk isomorphism
+(Stacks, Tag 04FN). -/
 theorem geometricPointMorphism_addCommGrp_stalk
     {S : Scheme.{u}} {k k' : Type u} [Field k] [IsAlgClosed k]
     [Field k'] [IsAlgClosed k'] (s : Spec (.of k) ⟶ S) (s' : Spec (.of k') ⟶ S)

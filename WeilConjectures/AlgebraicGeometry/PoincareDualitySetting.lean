@@ -25,7 +25,7 @@ over it.
 - `AlgebraicGeometry.PoincareDualitySetting.geometricFiber`: the base change
   `X = X₀ ×_{k₀} k` to the algebraic closure.
 - `AlgebraicGeometry.PoincareDualitySetting.structureMorphism`: the structure morphism
-  `a_X: X ⟶ Spec k`.
+  `a_X : X ⟶ Spec k`.
 
 ## Implementation notes
 
@@ -33,14 +33,16 @@ Properness of `X₀` is deliberately *not* part of the datum: the duality statem
 formulated with compact supports and do not use it. It is imposed explicitly, as an
 `[IsProper …]` instance hypothesis, exactly where `Ra_{X!} ≅ Ra_{X*}` is needed.
 
-The blueprint imposes no admissibility on `a_X`. In Lean, `Ra_{X!}` and
+No admissibility is imposed on `a_X`. In Lean, `Ra_{X!}` and
 `Ra_X^!` are only constructed for morphisms admitting a compactification, so
 `AlgebraicGeometry.HasCompactification` is carried as an instance hypothesis by the statements
 that use them rather than as a field of the datum. For `a_X` this hypothesis is redundant
 mathematically: `a_X` is separated of finite type over the quasi-compact quasi-separated
 `Spec k`, so Nagata's theorem (`AlgebraicGeometry.NagataCompactification`, which comes with an
 instance) provides a compactification once those properties of `a_X` are available as
-instances. fixes, besides the geometry, a *coefficient* datum
+instances.
+
+Besides the geometry, the setting also involves a *coefficient* datum
 `(ℓ, E, 𝒪_E, ϖ_E, Λ)` subject to `ℓ ≠ ring characteristic of k₀`. That half of the datum is
 not recorded here: the coefficient category is a type parameter of the six operations, and
 the constraint `ℓ ≠ p` is a hypothesis of the duality *theorems*, none of which is stated
@@ -62,13 +64,9 @@ namespace AlgebraicGeometry
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀]
 
-/-- The fixed setting.
-
-The geometric datum of the Poincaré duality chapter over the finite field `k₀`: a scheme `X₀`
+/-- The geometric datum of the Poincaré duality chapter over the finite field `k₀`: a scheme `X₀`
 over `k₀` which is smooth of relative dimension `d`, separated of finite type and
-geometrically connected. The algebraic closure `k` of `k₀`, along which `X₀` is base changed,
-is an argument of `PoincareDualitySetting.geometricFiber` rather than a field of the
-datum. -/
+geometrically connected. -/
 structure PoincareDualitySetting (d : ℕ) where
   /-- The model `X₀` over the finite base field `k₀`. -/
   model : Scheme.{u}
@@ -95,15 +93,7 @@ instance smooth : Smooth S.modelStructureMorphism :=
 variable (k : Type u) [Field k] [IsAlgClosed k] [Algebra k₀ k] [Algebra.IsAlgebraic k₀ k]
 
 /-- The geometric fibre `X = X₀ ×_{k₀} k` of the datum `S` over an algebraic closure `k`
-of `k₀`.
-
-That `k` is an algebraic closure of `k₀`, and not just an algebraically closed extension, is the
-hypothesis `[Algebra.IsAlgebraic k₀ k]`: without it the `k`-points of `X` would not be the
-`𝔽̄_q`-points of `X₀`. With it `k ≅ AlgebraicClosure k₀` over `k₀` (`IsAlgClosure`), so this is
-the geometric fiber `AlgebraicGeometry.Scheme.Hom.geometricFiber` of `S.modelStructureMorphism`
-used by the geometric Galois Frobenius of
-`WeilConjectures.AlgebraicGeometry.GeometricFrobenius`, up to the choice of the algebraic
-closure. -/
+of `k₀`, where `k` is an algebraic extension of `k₀`. -/
 noncomputable def geometricFiber : Scheme.{u} :=
   pullback S.modelStructureMorphism (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
 

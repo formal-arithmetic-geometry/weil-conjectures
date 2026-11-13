@@ -22,8 +22,9 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 /-!
 # Relative profinite test schemes
 
-Source: RefactorInstruction, Section 4, equations finite-XI and XS, Lemma lem:XS;
-ModuleObject/Basic.lean, module docstring, lines 38–52; Stacks Project, Tag 097D.
+## References
+
+* Stacks Project, Tag 097D.
 -/
 
 @[expose] public section
@@ -217,44 +218,8 @@ is limiting over `X`. These two clauses identify its value with the required rel
 inverse limit, with canonical comparison isomorphisms respecting all projections.
 The functor already supplies weakly etale structure maps, identity and composition laws.
 Over `Spec ℤ` the last natural isomorphism identifies it with `Spec LC(-, ℤ)`;
-`profiniteToScheme` sends a continuous map to the spectrum of precomposition.
-
-Source: RefactorInstruction, Section 4, equations finite-XI and XS, Lemma lem:XS;
-ModuleObject/Basic.lean, lines 38–52; Stacks Project, Tag 097D.
-
-Proof plan (the ten steps of the node):
-1. Use `lem-weil-pbc-profinite-limit-function-factorization` and
-   `lem-weil-pbc-profinite-clopen-basis` to express locally constant functions as the
-   filtered colimit over finite quotients, also over all finite clopen partitions.
-2. Form finite coproducts over the partitions, adjoining `X` as a least stage.
-   `lem-weil-pbc-finite-affine-coproduct-spectrum`,
-   `lem-weil-pbc-morphism-affine-schemes-affine`, and `pqf-lem-affine-local-target`
-   make the transitions affine. `lem-weil-pbc-limit-affine-transition-core` gives the limit.
-3. Use `lem-weil-pbc-limit-cone-affine-projections-opens` and
-   `lem-weil-pbc-spec-small-colimit-limit` to compute its restriction to `Spec R` as
-   `Spec LC(S,R)`. `lem-weil-pbc-scheme-morphism-gluing` proves the limit property for
-   every finite-quotient presentation, without any compactness assumption on `X`.
-4. Precomposition and `def-weil-affine-spectrum` give the local maps; glue them by
-   `lem-weil-pbc-scheme-morphism-gluing`. The ring-map identities give functoriality
-   and the functorial identification over `Spec ℤ`.
-5. Compute the tensor product formulas using finite clopen partitions, compactness and the clopen basis. Apply
-   `lem-weil-pbc-spec-small-colimit-limit` and glue to obtain products over `X`.
-6. Extend locally constant functions from a closed subspace using the clopen basis.
-   For an equalizer, characteristic functions generate the kernel of restriction.
-   The spectrum theorem and gluing give equalizers; these and products give finite limits.
-7. `lem-weil-pbc-locally-constant-prime-spectrum` identifies points as `(s,p)`.
-   `lem-weil-pbc-affine-open-stalk-localization` identifies stalks with `R_p` by
-   evaluation, with inverse given by constants. Hence the induced stalk maps are flat.
-8. Apply the finite-limit formula to the diagonal. Step 7 makes it flat, so the
-   maps are weakly etale and lie in the recorded
-   small pro-etale site.
-9. Finite jointly surjective families remain jointly surjective on the points `(s,p)`.
-   Their arrows are affine (`pqf-def-affine-morphism`, `pqf-lem-affine-local-target`,
-   and `lem-weil-pbc-morphism-affine-schemes-affine`) and flat, so their affine
-   preimages verify `def-weil-pbc-fpqc-covering`, including the empty family.
-10. Restriction gives `LC(S ⊔ T,R) = LC(S,R) × LC(T,R)`.
-    Use `lem-weil-pbc-finite-affine-coproduct-spectrum` and gluing for disjoint unions.
-    The empty space gives the zero ring and the empty scheme. -/
+`profiniteToScheme` sends a continuous map to the spectrum of precomposition
+(Stacks, Tag 097D). -/
 theorem profinite_test_object_functor (X : Scheme.{u}) :
     PreservesFiniteLimits (profiniteToProEtOf X) ∧
     (∀ (A : Type u) [Finite A],

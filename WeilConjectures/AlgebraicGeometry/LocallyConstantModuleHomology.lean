@@ -21,7 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Locally constant module-valued functions, with scalar maps acting by postcomposition.
-Source: Stacks Tag 093J; blueprint Compatible isomorphisms. -/
+(Stacks, Tag 093J) -/
 def locallyConstantModuleFunctor (T : Type v) [TopologicalSpace T]
     (R : Type r) [Ring R] : ModuleCat.{u} R ⥤ ModuleCat.{max u v} R where
   obj M := ModuleCat.of R (LocallyConstant T M)

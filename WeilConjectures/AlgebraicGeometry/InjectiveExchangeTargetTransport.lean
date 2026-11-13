@@ -14,7 +14,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Target localization and derived-unit transport
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section
@@ -42,16 +44,7 @@ private lemma assemble_transport {A B : Type*} [Category A] [Category B]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Localization of the exchange prefix on a bounded-below complex.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-exact localization comparisons.
-Proof: apply the inclusion to the two factors. Its image of the exact U
-comparison is mapDerivedCategoryFactorsh. At a quotient complex this is the
-complex comparison, since mapHomotopyCategoryFactors is the identity.
-Cancel its hom against the leading inverse. The image of the bounded-below
-localized exchange is Qh of the homotopy quotient of its complex map.
-Naturality of quotientCompQhIso identifies that map with Q of the complex
-map followed by the inverse quotient comparison on the target. -/
+/-- Localization of the exchange prefix on a bounded-below complex. -/
 private theorem exchange_localization_prefix
     {C : Type*} {B : Type*} {D : Type*} {E : Type*}
     [Category C] [Category B] [Category D] [Category E]
@@ -101,18 +94,7 @@ private theorem exchange_localization_prefix
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Transport of a target derived unit and an exact representative map.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and
-Functor.rightDerivedFunctorPlusCompatibility.
-Proof: the defining rightDerivedUnique identity identifies the included
-bounded-below F unit with the unbounded unit followed by the inverse
-compatibility. Naturality of the inverse compatibility moves this inverse
-past the map of the representative transport. Full faithfulness identifies
-the included inverse exact P comparison with its unbounded version, and
-identifies q'.inv with quotientCompQhIso.hom followed by q.inv. Expanding
-mapDerivedCategoryFactorsh at M gives the complex comparison. Insert the
-quotient comparison on P(M) to express its source as Q(P(M)). This uses only
-the unit compatibility and naturality, and does not invert the unit. -/
+/-- Transport of a target derived unit and an exact representative map. -/
 private theorem target_unit_representative_transport
     {C : Type*} {D : Type*} {E : Type*}
     [Category C] [Category D] [Category E]
@@ -217,25 +199,7 @@ private theorem target_unit_representative_transport
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Transport the localized underived exchange and target unit to unbounded categories.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph; the exact
-localization comparisons and defining unit compatibility of
-`Functor.rightDerivedFunctorPlusCompatibility`.
-
-Proof: map the bounded-below composite through the inclusion and use its
-compatibility with mapDerivedCategoryPlusFactorsh. The first factor is the
-homotopy version of the exact comparison for U and cancels against its
-complex-level inverse, because the homotopy quotient comparison is identity.
-The next factor is Q of the termwise underived exchange. The defining
-right-derived uniqueness isomorphism carries the bounded-below target unit to
-the unbounded target unit; naturality carries the following target transport
-through this isomorphism, leaving its inverse as the last factor. The inverse
-exact pullback comparison maps to the unbounded inverse comparison. Full
-faithfulness identifies the image of q'.inv with quotientCompQhIso.hom followed
-by q.inv. Insert the canonical quotient comparisons on D and its direct image
-to express these identities in the stated complex-level form. No target unit
-is inverted, so no acyclicity of the pulled-back complex is assumed. -/
+/-- Transport the localized underived exchange and target unit to unbounded categories. -/
 theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))

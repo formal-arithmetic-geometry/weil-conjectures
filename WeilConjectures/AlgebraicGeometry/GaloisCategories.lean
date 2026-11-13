@@ -27,11 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The category `FLC(Y)` of finite locally constant sheaves of finite sets on the
-small étale site of `Y`, with morphisms of sheaves.
-
-The predicate expands the definition of finite locally constant sheaf from
-`def-weil-pbc-etale-sheaves`; the full subcategory supplies exactly the sheaf
-morphisms as its arrows. -/
+small étale site of `Y`, with morphisms of sheaves. -/
 abbrev FLC (Y : Scheme.{u}) : Type (u + 2) :=
   ObjectProperty.FullSubcategory
     (IsFiniteLocallyConstantSheafOfTypes (T := Y))

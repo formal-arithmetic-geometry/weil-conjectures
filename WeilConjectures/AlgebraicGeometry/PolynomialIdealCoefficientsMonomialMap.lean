@@ -23,13 +23,8 @@ open MvPolynomial
 
 namespace MvPolynomial
 
-/-- Coefficient quotient map and induced quotient isomorphism for the coordinate ideal.
-Source: literature/stacks-project/algebra.tex, proof of Lemma Tag 07DW.
-The coefficient map is formed componentwise into the ideal quotients; finite support
-of a polynomial gives its codomain in the direct sum, monomials give surjectivity,
-and the preceding coefficient-membership criterion identifies its kernel. The
-first isomorphism theorem for modules then supplies the displayed quotient
-isomorphism, characterized by the quotient map. -/
+/-- Coefficient quotient map and induced quotient isomorphism for the coordinate ideal
+(Stacks, Tag 07DW). -/
 theorem ideal_coefficients_monomial_map
     {R : Type u} [CommRing R] (r i : ℕ) (hr : 1 ≤ r) (hir : i ≤ r)
     (g : Fin i → R) :

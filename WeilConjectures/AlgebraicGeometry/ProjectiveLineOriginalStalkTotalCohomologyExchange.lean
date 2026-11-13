@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotal
 
 /-! # Stalk exchange under compatible strict localization
 
-Source: Stacks Project, Tags 03Q9 and 095T.
+## References
+
+* Stacks Project, Tags 03Q9 and 095T.
 -/
 
 @[expose] public section
@@ -36,31 +38,8 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The original geometric-stalk exchange is pullback on total strict-local spaces.
-This comparison has no local higher-direct-image stalks in its conclusion.
-
-Source: Stacks Project, Tags 03Q9 and 03FD, and the last two paragraphs of Tag 095T.
-
-Proof: properness makes the projective-line projection qcqs. The inverse-image
-stalk formula identifies the source with the higher-direct-image stalk at sigma.
-Extending the separably closed geometric fields to Omega does not change stalks:
-finite separable extensions in pointed etale neighbourhoods already split. Apply
-03Q9 to compute that stalk by cohomology of the projective line over A. Apply it
-also to f' at the extended point of T and use the pullback universal property to
-identify its total strict-local space with the projective line over B. The
-coefficient sheaf there is the pullback of F0 along the projective-space map of
-phi, by inverse-image composition coherence and the structural square hphi.
-Use an injective module-sheaf resolution; its underlying abelian sheaves are
-acyclic by 03FD at universe u+1. This compares module cohomology with the stated
-abelian cohomology without assuming that forgetting coefficients preserves
-injectives. On every pointed neighbourhood the termwise derived exchange pulls
-sections back along its base-changed projection. The structural square and
-residue square force these projections to commute with phi, by uniqueness of
-pointed etale lifts from a strictly henselian local scheme. Therefore the same
-section map induces both sides of the displayed equality. Exact filtered
-colimits commute with homology, giving the equality in degree q. For arbitrary
-X' use the unique pullback isomorphism. Degree zero is the same restriction of
-sections; zero coefficients and purely inseparable field extensions cause no
-change. No local closed-point stalk or closed-fibre comparison is used. -/
+This comparison has no local higher-direct-image stalks in its conclusion
+(Stacks, Tags 03Q9, 03FD, 095T). -/
 theorem Etale.projectiveLine_originalStalk_totalCohomologyExchange
     (Λ : Type (u + 1)) [CommRing Λ]
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}

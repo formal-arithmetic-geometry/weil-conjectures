@@ -14,7 +14,9 @@ public import Mathlib.RingTheory.RingHom.Flat
 /-!
 # Ring data for affine charts in flatness descent
 
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
+## References
+
+* Stacks Project, Tag 04AI
 -/
 
 @[expose] public section
@@ -25,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The ring data of one affine triple in the proof of Stacks Tag 04AI. -/
+/-- The ring data of one affine triple in the flatness descent argument (Stacks, Tag 04AI). -/
 structure FlatDescentChart (J : Type u) [Preorder J] (j₀ : J) where
   rings : J ⥤ CommRingCat.{u}
   source : CommRingCat.{u}

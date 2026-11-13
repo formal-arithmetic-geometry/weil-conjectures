@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.OpenCoverTensorDescentComparisonCoheren
 
 /-! # Detecting pairwise compatibility on the base change of the overlap
 
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing. -/
+## References
+
+* [Stacks, Tag 01ZR]
+-/
 
 @[expose] public section
 
@@ -238,8 +241,7 @@ private lemma comparisonObj_components
   (Classical.choose_spec (openCoverTensorDescentComparison_existsUnique U q M).exists) a
 
 /-- The overlap defect is the difference of the two sides of the descent square
-on the universal overlap. Its source and target are actual pullbacks of modules.
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing. -/
+on the universal overlap. Its source and target are actual pullbacks of modules. -/
 noncomputable def localMapPairOverlapDefect
     {X : Scheme.{u}} (U : X.OpenCover.{u}) (F G : X.Modules)
     (r : ∀ x, (Scheme.Modules.pullback (U.f x)).obj F ⟶
@@ -263,25 +265,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pairwise compatibility after an arbitrary base change is equivalent to
-vanishing of the pulled back, explicitly constructed overlap defect.
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing;
-Mathlib pseudofunctor composition and descent naturality.
-
-Proof: Let W be the universal overlap of charts a and b, with structural map t.
-The pullback W times_X Y is canonically the overlap of the base changed charts.
-Pull back the two composites defining the defect to this scheme. Pullback
-composition, congruence along the pullback squares, and the unique comparison
-between tensor and native pullback identify them, after conjugation by their
-invertible source and target comparisons, with the two descent-square composites
-for the transported local maps. Naturality moves each local map through the
-comparisons, and the pseudofunctor associativity identity identifies the middle
-transition maps. Additivity identifies zero of the difference with equality.
-If the universal square commutes, pull it back along the unique map from any
-universal test into the overlap; descent pullHom naturality gives that test's
-square. Conversely evaluate compatibility on the universal overlap and cancel
-the invertible comparisons. No compactness, finiteness, affineness or limit is
-used. The same argument includes empty overlaps, identity base changes and zero
-modules; it uses only canonical universal lifts, never chosen existence data. -/
+vanishing of the pulled back, explicitly constructed overlap defect. -/
 theorem localMapPairOverlapDefect_baseChange_iff
     {X Y : Scheme.{u}} (U : X.OpenCover.{u}) (F G : X.Modules)
     (r₀ : ∀ x, (Scheme.Modules.pullback (U.f x)).obj F ⟶

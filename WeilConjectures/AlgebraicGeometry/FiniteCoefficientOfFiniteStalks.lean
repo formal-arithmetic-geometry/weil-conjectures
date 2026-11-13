@@ -35,22 +35,7 @@ private theorem finite_quotient_annihilator (R M : Type*) [CommRing R]
     (RingHom.kerLift_injective _)
 
 /-- The canonical sectionwise annihilator of a constructible module sheaf with finite
-stalks has finite quotient.
-
-Proof: Choose the finite module-constructible stratification. On each stratum discard
-empty members of a trivializing etale cover. Identify each remaining constant value
-with a geometric stalk, using a separably closed extension of the residue field of a
-point of the member and inverse-image/stalk compatibility; it is finite by hypothesis.
-Noetherian strata are quasi-compact, so choose finitely many cover members. Intersect
-annihilators of these finitely many finite modules. This intersection equals the ideal
-of scalars killing every section, the intersection of all section-module annihilators:
-geometric stalks detect zero scalar endomorphisms, and constant values are stalks.
-The quotient by this canonical ideal embeds into the finite
-product of their endomorphism rings, so is finite. The ideal kills all geometric stalks
-on all strata and hence the sheaf, as geometric stalks detect equality. In particular
-it kills every section, on arbitrary etale objects, not just quasi-compact ones.
-For the empty scheme use the unit ideal and empty
-stratification. For the zero sheaf the quotient can likewise be the zero ring. -/
+stalks has finite quotient. -/
 theorem finite_quotient_section_annihilator_of_finite_stalks
     (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

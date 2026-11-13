@@ -35,21 +35,8 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
 /-- A constructible internal module has a constructible ordinary module sheaf
-under the sectionwise finite-coefficient encoding.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1.
-
-Proof in words. Retain the finite stratification in the internal constructibility
-hypothesis. On each stratum, normalize the coefficient pullbacks and choose its
-finite-presentation cover. Compatibility of the fixed encoding with restriction
-and preservation of finite sums and cokernels give presentations between finite
-constant module sheaves. The rank-one module has finite carrier by hG. Lift each
-presentation map to constant etale sheaves using full faithfulness of comparison
-pullback. Their cokernel is finite locally constant by the existing etale theorem;
-exact comparison pullback gives finite local constancy of the pro-etale cokernel.
-Bind these trivialization covers with the presentation cover. The original
-stratification and these finite locally constant restrictions witness intrinsic
-constructibility. Empty schemes and covers, rank zero, and the zero ring are
-included without additional assumptions. -/
+under the sectionwise finite-coefficient encoding
+(Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1). -/
 theorem finiteDiscreteCoefficient_constructible [DiscreteTopology B] [Finite B]
     (T : Scheme.{u}) (M : FiniteDiscreteInternalModules B T)
     (hM : IsConstructibleModuleObject

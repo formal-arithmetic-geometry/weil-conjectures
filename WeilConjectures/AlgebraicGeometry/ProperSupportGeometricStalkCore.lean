@@ -1742,13 +1742,8 @@ private theorem general_fibre_section_lift
 
 /--
 The restriction map on the geometric stalk is injective on a proper-support subsheaf, and
-its range consists exactly of the properly supported fibre sections.  This is the geometric
-content of Stacks Project, Tag 0F76: represent a stalk element on a pointed étale
-neighbourhood, use the inverse-image germ formula to identify its fibre support, and use
-extension by zero after shrinking and compactifying to lift every properly supported fibre
-section.  The proof is deliberately separated from the elementary construction of the range
-submodule and its canonical isomorphism.
-Source: Stacks Project, Tag 0F76, support-image and extension-by-zero paragraphs.
+its range consists exactly of the properly supported fibre sections.
+(Stacks, Tag 0F76)
 -/
 theorem properSupport_geometricStalk_image_core
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}

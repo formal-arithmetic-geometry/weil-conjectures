@@ -79,13 +79,8 @@ private def compositeScalarCounit (a : Λ ⟶ Λ') [IsMonHom a]
         (Iso.refl (CondensedRing.upperStar Λ f ⋙ extension a X)) (.up ℤ)).hom
       DerivedCategory.Qh
 
-/-- A normalized scalar/geometric pullback comparison exists for every morphism.
-(1);
-Stacks Tags 0D6D, 0G7E, 07A6.
-Proof: compare the two composite ordinary pullback functors by the specified coefficient
-pullback isomorphism, construct both derived counits, and apply the K-flat universal
-characterization. Geometric pullback preserves K-flat complexes; cancellation of the
-counits gives exactly `PullNormalized`. -/
+/-- A normalized scalar/geometric pullback comparison exists for every morphism
+(Stacks, Tags 0D6D, 0G7E and 07A6). -/
 theorem internal_pull_normalization_exists (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X, PullNormalized a f b := by

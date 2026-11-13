@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Lifting compatible maps through the formal-functions comparison
 
-Source: Stacks Project, Lemma 088B, construction of alpha from the inverse limit of gamma.
+## References
+
+* Stacks Project, Tag 088B
 -/
 
 @[expose] public section
@@ -29,27 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Any compatible map from a coherent adic system lifts through the canonical completed
-proper pushforward comparison.
-
-Source: Stacks Project, Lemma 088B, first half of the proof, paragraphs constructing
-alpha from the inverse limit of gamma; https://stacks.math.columbia.edu/tag/088B.
-
-Proof: The canonical comparison induces an isomorphism on inverse-limit sheaves:
-on an affine basis this is the degree-zero theorem on formal functions, using the
-ideal-product and quotient section formulas. Compose lim gamma with its inverse
-to obtain beta: lim G -> lim H-completion. Reconstruction of coherent formal-system
-maps from maps of limit sheaves descends beta to alpha. The defining equation of
-alpha on limits and the inverse identities give lim(alpha kappa) = lim gamma.
-Compose this equality with each target limit projection. Naturality of the limit
-cones rewrites it as pi_G,n alpha_n kappa_n = pi_G,n gamma_n. The projections of
-a coherent formal system's limit sheaf are epic: its transitions are surjective
-on affine sections, and sequential limits of surjective module towers have
-surjective projections. Cancel pi_G,n and apply natural-transformation
-extensionality. Thus alpha kappa = gamma. The reconstruction lemma contains the
-affine quotient descent and gluing; the comparison-isomorphism lemma contains
-formal functions. No isomorphism hypothesis on gamma is used. Zero and unit ideals,
-zero sheaves and the empty scheme satisfy the same construction.
--/
+proper pushforward comparison (Stacks, Tag 088B). -/
 theorem formalCompletion_pushforward_lift {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]
     (G : CoherentFormalModule Y J) (F : CoherentModules X)

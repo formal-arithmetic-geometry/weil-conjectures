@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.HigherDirectImageResolutionNaturali
 
 /-! # The flat pullback unit on raw section cohomology
 
-Source: Stacks Project, Cohomology, Tags 02N7 and 01E4.
+## References
+
+* Stacks Project, Tags 02N7 and 01E4
 -/
 
 @[expose] public section
@@ -71,22 +73,8 @@ private theorem rawSectionClass_naturality {Y : Scheme.{uBC}}
 
 set_option maxHeartbeats 200000 in
 -- Comparing section and pushforward functor interfaces involves identity scalar restriction.
-/-- The homology mate on a fixed pair of resolution complexes acts on raw section classes.
-Source: Stacks Project, Cohomology, Tags 02N7 and 01E4.
-
-Proof: Apply the degreewise adjunction unit to a cycle of the source section complex.
-Naturality for the cycle inclusion identifies the resulting section with the unit on
-its cycle sheaf. Exactness of flat tensor pullback identifies both the cycle sheaf
-and the homology quotient with those of the pulled back complex. Naturality of the
-unit for the quotient therefore identifies the resulting raw homology class with
-the mate of the inverse exact homology comparison. The cycle formula for the
-sheafification comparison theta sends this class to its class in the homology sheaf.
-Now compose with the termwise adjoint c of q. Theta is natural for c, as follows
-from naturality of the sheafification counit and the exact homology comparison.
-The complex adjunction identity eta followed by pushforward of c equals q.
-Hence the composite class is precisely H(q) followed by theta on the target.
-This proves the displayed raw-complex identity. There are no resolution-section
-isomorphisms or derived-image isomorphisms in this statement. -/
+/-- The homology mate on a fixed pair of resolution complexes acts on raw section classes
+(Stacks, Tags 02N7 and 01E4). -/
 theorem flatBaseChangeResolution_rawMate_sections {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S) [Flat g] {F : X.Modules}
     (I : InjectiveResolution F)

@@ -46,16 +46,7 @@ private theorem compose_scalar_modulus
 -- Elaborating the fixed scalar/support maps requires a larger finite budget.
 /-- Changing coefficients and then the Kummer modulus preserves the normalized
 supported boundary, with its sectionwise coefficient and root maps.
-Source: blueprint finite reduction Step 4; Stacks 03PL and 07A6.
-Proof: first keep the larger modulus and use the normalized scalar units on the
-supported constant and root sheaves. The scalar boundary theorem gives their
-Yoneda square. For the smaller modulus, the morphism of Kummer sequences is the
-specified root projection, multiplication by M/N, and the identity on Gm.
-Naturality gives the same connecting class. The generator equation for e gives
-the same further root map; uniqueness of the relative boundary identifies its
-Ext class. Reassociate Yoneda products to compose this equality with the scalar
-square. All operations apply to arbitrary finite rings, including zero rings,
-and to empty support, without a flatness assumption on the quotient. -/
+(Stacks, Tags 03PL and 07A6.) -/
 theorem supportedKummerScalarModulus
     {R A : Type (u + 1)} [CommRing R] [Finite R] [CommRing A] [Finite A]
     (φ : R →+* A) (M N : ℕ) (hM : 0 < M) (hN : 0 < N) (hdiv : N ∣ M)

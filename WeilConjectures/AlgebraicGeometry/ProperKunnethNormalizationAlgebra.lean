@@ -6,10 +6,7 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Functor.Category
 
-/-! # The diagram calculation for proper Kunneth normalization
-
-Source: the proper forget-supports calculation in the first coordinate triangle.
--/
+/-! # The diagram calculation for proper Kunneth normalization -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -19,15 +16,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- A route calculation using the compositor, inner map, projection and tensor squares.
-
-Proof: replace the final compositor followed by comparison by its supported
-factorization. Combine the two maps inside F and use the inner-map square.
-Naturality of eta moves the comparison left through their composite. Replace
-the projection followed by comparison by the ordinary projection. Expand the
-ordinary image of the composite and use projection naturality. The tensor
-square moves the two coefficient comparisons past the outside swap. The ordinary
-factorization then identifies the remaining path with kappa. This is an equation
-in arbitrary categories, with no invertibility or nonzero-object hypothesis. -/
+This is an equation in arbitrary categories, with no invertibility or nonzero-object
+hypothesis. -/
 theorem properKunnethNormalizationAlgebra
     {D E : Type v} [Category.{u} D] [Category.{u} E]
     (F G : D ⥤ E) (eta : F ⟶ G)

@@ -27,8 +27,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A common submodule with generically vanishing cokernels
 
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH,
-`lemma-property-irreducible`, proof, generic ideal inclusion and ideal intersection.
+## References
+
+* Stacks Project, Cohomology of Schemes, Tag 01YH.
 -/
 
 @[expose] public section
@@ -90,29 +91,7 @@ private theorem cokernel_support_ssubset (X : Scheme.{u}) {K F : X.Modules}
 set_option linter.unusedVariables false in
 /-- A nonzero ideal pushforward and a coherent module of generic rank one admit
 monomorphisms from a common module, with coherent cokernels of strictly smaller support.
-No filtration is asserted here.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH,
-`lemma-property-irreducible`, proof, paragraphs beginning "Let G" and "Next, suppose".
-
-Proof: The closed subscheme W of the Noetherian X is Noetherian. Every quasi-coherent
-ideal on W is coherent, since its affine section modules are ideals in Noetherian
-rings, and closed pushforward preserves coherence. The nonzero pushforward hypothesis
-implies I is nonzero. Apply the coherent generic-point ideal inclusion to G. On the
-generic stalk it identifies G with a finite sum of copies of the generic stalk of an
-ideal J. G has dimension one over the residue field, so J is nonzero and the number
-of summands is one. Thus obtain a monomorphism i_*J into G which is an isomorphism
-near the generic point. The intersection L = I inf J is a quasi-coherent ideal. On
-any nonempty affine open both ideals contain nonzero elements, whose product is
-nonzero in the domain and belongs to L. Hence L is nonzero, and the generic stalks
-of L, I and J are the full generic field. Set K = i_*L and take its inclusion into
-i_*I and its inclusion into i_*J followed by the map into G. Both are monomorphisms.
-Their sources and targets are coherent, so their cokernels are coherent and
-finitely presented on the locally Noetherian scheme X. Exactness
-of stalks and the generic stalk identifications make both cokernels zero at the image
-of genericPoint W; outside i(W) all source and target stalks are zero. Each cokernel's
-support is therefore contained in i(W) but omits its generic point, giving strict
-inclusion. The argument also covers zero cokernels, whose supports are empty. -/
+No filtration is asserted here. (Stacks, Tag 01YH) -/
 theorem exists_integral_ideal_common_submodule (X W : Scheme.{u})
     [IsNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (G : X.Modules) (hGcoh : RingedSpace.IsCoherent X.toRingedSpace G)

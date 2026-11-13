@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Extension of the field of a geometric point
 
-Source: Stacks Project, Tags 03PN and 03Q1.
+## References
+
+* Stacks, Tags 03PN and 03Q1
 -/
 
 @[expose] public section
@@ -21,8 +23,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Precompose pointed étale lifts with a field extension. This is a map of points,
-with the direction opposite to that of the fibre functors.
-Source: Stacks Project, Tag 03PN. -/
+with the direction opposite to that of the fibre functors (Stacks, Tag 03PN). -/
 noncomputable def pointSmallEtalePrecomp
     {S : Scheme.{u}} {k l : Type u} [Field k] [IsSepClosed k]
     [Field l] [IsSepClosed l] (s : Spec (.of k) ⟶ S)
@@ -40,17 +41,7 @@ noncomputable def pointSmallEtalePrecomp
         exact (Category.assoc _ _ _).symm }
 
 /-- Enlargement of a separably closed point field induces an isomorphism on abelian
-stalks. No algebraicity of the extension is required.
-Source: Stacks Project, Tag 03PN, description of geometric stalks, and Tag 03Q1.
-
-Proof: base change an étale neighbourhood to Spec k. Every point of this fibre has
-finite separable residue field over k, hence residue field k. It is an open component
-Spec k. A lift from Spec l lands in exactly one such component and factors uniquely
-through it. Precomposition is consequently a bijection on lifts, natural in the
-neighbourhood. These bijections form an isomorphism of the point fibre functors, and
-thus of points. Applying the point sheaf-fibre functor gives the claimed isomorphism.
-The argument includes inseparable extensions, non-quasi-compact neighbourhoods,
-the zero sheaf, and arbitrary coefficient-group cardinality. -/
+stalks. No algebraicity of the extension is required (Stacks, Tags 03PN and 03Q1). -/
 theorem isIso_pointSmallEtalePrecomp_sheafFiber
     {S : Scheme.{u}} {k l : Type u} [Field k] [IsSepClosed k]
     [Field l] [IsSepClosed l] (s : Spec (.of k) ⟶ S)

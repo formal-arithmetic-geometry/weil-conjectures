@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleCokernelsExtensions
 
 /-! # Closure for integral constructible module objects
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1),(3), with the
-integral finite-presentation comparison spelled out below.
+## References
+
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1),(3).
 -/
 
 @[expose] public section
@@ -30,15 +31,9 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
   [FiniteDimensional ℚ_[ℓ] E]
 
-/-- Integral constructible module objects form a weak Serre class.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1),(3), with the
-integral finite-presentation comparison spelled out below.
-
-Proof: the coefficient-dependent kernel closure is combined with generic cokernel
-and extension closure for locally finitely presented internal module sheaves. The latter
-uses finite generator lifts and presentations, so requires no noetherianity of the
-coefficient ring. The kernel assertion retains the finite integral model comparison
-and the DVR argument. All three closures concern the same constructibility property. -/
+/-- Integral constructible module objects form a weak Serre class: they are closed under
+kernels, cokernels and extensions.
+(Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11) -/
 theorem integralConstructible_serre (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] :
     ObjectProperty.IsClosedUnderKernels

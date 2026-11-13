@@ -17,7 +17,9 @@ public import Mathlib.CategoryTheory.Sites.Sheafification
 /-!
 # Higher direct images as sheafified cohomology presheaves
 
-Source: Stacks Project, Lemma Tag 072W, and Section 21.2.
+## References
+
+* Stacks Project, Tag 072W
 -/
 
 @[expose] public section
@@ -29,32 +31,10 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- For an arbitrary scheme morphism, `R^q p_* F` is the sheafification of
-`V ↦ H^q(V ×_S X,F)`, with restriction induced by base change. Here `H^q(U,F)` is the
-`q`-th right derived functor of the abelian-sheaf evaluation `G ↦ G(U)` (as in
-lem-weil-pbc-injective-module-abelian-acyclic), and the restriction along `U' ⟶ U` is the
-derived map `NatTrans.rightDerived` of evaluation restriction, i.e. the map induced on
-`H^q` by the restriction maps `I^•(U) ⟶ I^•(U')` of an injective resolution of `F`.
-
-Source: Stacks Project, Lemma Tag 072W and Section 21.2, equation-cohomology-object-site.
-
-Proof:
-1. Choose an injective resolution `R` of `F`, using the Grothendieck property of
-abelian etale sheaves and enough injectives. Put `K = p_* R.cocomplex` and let `L`
-be its underlying complex of presheaves. `InjectiveResolution.isoRightDerivedObj`
-computes each classical right derived functor from `R`.
-2. Evaluation of `L` at `V` is evaluation of `R.cocomplex` at `V ×_S X`, including
-differentials and restriction maps, by the definition of direct image.
-3. Exact evaluation commutes with homology. Compose its homology comparison with
-`R.isoRightDerivedObj` to identify the specified derived-evaluation presheaf with
-`L.homology q`. Naturality follows from `InjectiveResolution.rightDerived_app_eq`
-and `ShortComplex.homologyMap_mapNatTrans`.
-4. Exact sheafification commutes with homology, and the counit identifies the
-sheafification of `L` with `K`. Thus the sheafification of the specified presheaf
-is `K.homology q`, hence the classical `q`-th right derived direct image.
-5. The proved source-library comparison
-`Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso` identifies this with
-homology of the total bounded-below derived pushforward of `F` in degree zero.
-No separate arbitrary K-injective resolution comparison is needed. -/
+`V ↦ H^q(V ×_S X, F)`, with restriction induced by base change. Here `H^q(U, F)` is the
+`q`-th right derived functor of the abelian-sheaf evaluation `G ↦ G(U)`, and the restriction
+along `U' ⟶ U` is the derived map `NatTrans.rightDerived` of evaluation restriction.
+(Stacks, Tag 072W) -/
 noncomputable def higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
       ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj

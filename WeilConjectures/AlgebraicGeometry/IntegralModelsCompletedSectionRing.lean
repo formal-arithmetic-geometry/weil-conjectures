@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 
 /-! # The normalized completed integral section ring
 
-Source: Stacks Tags 099C, 099L and 00YV.
+## References
+
+* Stacks, Tags 099C, 099L and 00YV.
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +26,7 @@ attribute [local irreducible] upperStarFromPoint integralSectionRingIso
   WeilConjectures.purCoefficientIso Scheme.pbcCompletedComparison
   IntegralConstantModel.pointComparison
 
-/-- Section reconstruction of the specified point comparison.
-Source: Stacks Tag 00YV and the normalized integral point identification. -/
+/-- Section reconstruction of the specified point comparison (Stacks, Tag 00YV). -/
 def pointSectionIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -44,8 +45,8 @@ def pointSectionIso (l : ℕ) [Fact l.Prime]
           hom_inv_id := by ext1; exact k.hom_inv_id
           inv_hom_id := by ext1; exact k.inv_hom_id }
 
-/-- The normalized completed coefficient ring, in continuous section coordinates.
-Source: Stacks Tags 00YV and 099L, and the normalized integral limit comparison. -/
+/-- The normalized completed coefficient ring, in continuous section coordinates
+(Stacks, Tags 00YV and 099L). -/
 def completedSectionIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :

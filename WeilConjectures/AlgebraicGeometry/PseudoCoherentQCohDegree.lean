@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! A single-degree reduction of quasi-coherent cohomology for pseudo-coherent complexes.
 
-This is the degreewise local-model argument from Stacks Project, Tag 08E5.
+## References
+
+* [Stacks, Tag 08E5]
 -/
 
 @[expose] public section
@@ -75,16 +77,7 @@ private theorem qc_local_free_homology (Y : Scheme.{u}) (U : Y.Opens)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A fixed cohomology sheaf of a pseudo-coherent derived object is quasi-coherent.
-
-Source: Stacks Project, Derived Categories of Schemes, Tag 08E5, proof of
-Lemma 36.13.5.  Around each point, pseudo-coherence supplies a bounded-above complex
-of finite free modules representing the restriction.  Its terms are quasi-coherent,
-and the kernel of each differential and the quotient by the preceding image are
-quasi-coherent by the kernel and cokernel closure results.  The local identifications
-of cohomology sheaves then glue, since quasi-coherence is local on a scheme.  This
-degreewise statement is the strictly smaller component from which the all-degrees
-property is obtained.
--/
+(Stacks, Tag 08E5) -/
 theorem schemeDerivedQCohProperty_of_isPseudoCoherent_degree
     (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

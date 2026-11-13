@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.InternalHomOverNaturality
 
 /-! # Internal Hom and open restriction on schemes
 
-Source: Stacks Project, Cohomology, Tag 08DL.
+## References
+
+* Stacks Project, Tag 08DL.
 -/
 
 @[expose] public section
@@ -23,19 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Internal Hom commutes with open restriction, compatibly with both compositions.
-Source: Stacks Project, Cohomology, Tag 08DL, ordinary internal Hom restriction.
-
-Proof: First restrict to the over-U site with `overHomObjIso`, which identifies
-local linear maps on its iterated slices. Apply the functor of `overEquiv U` and
-then `internalHom_overEquiv` to identify internal Homs on the open subscheme.
-The natural isomorphism `overFunctorEquiv U` identifies this composite restriction
-with `restrictFunctor U.ι`. Conjugate both arguments of internal Hom by its
-components, using the inverse on the source and the forward map on the target.
-The resulting composites are isomorphisms. Naturality follows by composing the
-naturality equations for `overHomObjIso`, `internalHom_overEquiv`, and
-`overFunctorEquiv`: the intermediate conjugating maps cancel. This argument
-also applies to the empty open and zero sheaves; it uses no finiteness assumptions. -/
+/-- Internal Hom commutes with open restriction, compatibly with both compositions
+(Stacks, Tag 08DL). -/
 theorem internalHom_restrict_scheme {Y : Scheme.{u}} (U : Y.Opens) :
     let F := Scheme.Modules.restrictFunctor U.ι
     ∃ s : ∀ A B : Y.Modules,

@@ -28,14 +28,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] ordinaryFiniteDegreeZero ordinaryFiniteLine ordinaryFiniteUnit
 
 /-- Given the scalar generator calculation in H2, sections of either nonzero
-homology of the shifted projective-line direct image have the cardinality of A.
-
-Proof: the canonical homology/global-cohomology comparison identifies degree zero
-homology with H2 on the projective line. The specified scalar bijection identifies
-that group with A. In degree minus two, a primitive root trivializes the Tate line.
-Connectedness of the projective line identifies its constant H0 with A. Transport
-these equivalences back through the canonical comparison. The same argument
-includes the zero coefficient ring. -/
+homology of the shifted projective-line direct image have the cardinality of A. -/
 theorem ordinaryFiniteP1_fibre_target_card
     (N : ℕ) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (k : Type u) [Field k] [IsAlgClosed k] (hNk : (N : k) ≠ 0)

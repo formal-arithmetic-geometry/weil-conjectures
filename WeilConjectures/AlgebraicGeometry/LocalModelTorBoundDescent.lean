@@ -19,12 +19,14 @@ set_option linter.privateModule false
 /-!
 # Tor bounds from bounded flat models on a finite pro-etale cover
 
-proof.md, (2) Local models; Stacks Tags 06YQ, 06YY, 07A4, 06YU.
-
 Module objects are identified with sectionwise module sheaves by the existing
 `InternalAbelianSheafModule.sectionModuleEquivalence`. Flatness below uses exactly
 `SheafOfModules.IsFlatOnSite` on that sectionwise encoding. The derived tensor and Tor
 amplitude use the internal-module encoding of the recorded Tor-amplitude dependency.
+
+## References
+
+* Stacks Project, Tags 06YQ, 06YY, 07A4 and 06YU
 -/
 
 @[expose] public section

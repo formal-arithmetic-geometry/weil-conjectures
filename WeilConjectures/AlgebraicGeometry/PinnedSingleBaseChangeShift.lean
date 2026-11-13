@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.PinnedBaseChangeMateShifts
 import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
 
 /-! # Shift covariance of the pinned single-complex base-change composite
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,8 +29,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The source functor of the base-change comparison on single complexes.
-Source: Stacks Project, Tag 08HY. -/
+/-- The source functor of the base-change comparison on single complexes. -/
 def singleDegreeBaseChangeSource
     {X S S' : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -38,8 +41,7 @@ def singleDegreeBaseChangeSource
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n ⋙
     schemeDerivedDirectImage.{u, w, w} f) ⋙ derivedPullback.{u, w} g)
 
-/-- The target functor after applying the single-complex tensor counit.
-Source: Stacks Project, Tag 08HY. -/
+/-- The target functor after applying the single-complex tensor counit. -/
 def singleDegreeBaseChangeTarget
     {X X' S' : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))]
@@ -49,9 +51,7 @@ def singleDegreeBaseChangeTarget
   ((Scheme.Modules.tensorPullback g' ⋙ DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n) ⋙ schemeDerivedDirectImage.{u, w, w} f')
 
-/-- The base-change comparison followed by the composition-pinned tensor counit.
-This uses the same composition-pinned left-derived counit as the original comparison.
-Source: Stacks Project, Tag 08HY. -/
+/-- The base-change comparison followed by the composition-pinned tensor counit. -/
 def singleDegreeBaseChangeComposite
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

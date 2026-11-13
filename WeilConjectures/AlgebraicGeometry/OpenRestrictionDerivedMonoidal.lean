@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Strong monoidal descent of open restriction
-Source: Stacks Project, Tags 06YH and 079U.
+
+## References
+
+* Stacks Project, Tags 06YH and 079U.
 -/
 
 @[expose] public section
@@ -33,33 +36,13 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Use the standard localization on the open scheme.
-Source: Stacks Project, Tag 05RU. -/
+/-- Use the standard localization on the open scheme. (Stacks, Tag 05RU) -/
 local instance openRestrictionMonoidalStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
-/-- Strong monoidal descent of exact restriction to the standard category on the open.
-
-Source: Stacks Project, cohomology.tex, Tags 06YH and 079U.
-
-Proof: identify tensor pullback along U.ι with ordinary restriction by
-uniqueness of left adjoints to pushforward. Compose with overFunctorEquiv to
-identify it with the exact over-site restriction followed by overEquiv.
-Transport finite-limit and finite-colimit preservation through this isomorphism.
-The exact tensor pullback's mapDerivedCategory is a left derived functor,
-with mapDerivedCategoryFactorsh as its invertible counit. The transported
-pullback across universes has its left-derived counit by
-exists_derivedPullbackAcrossUniverses_leftDerived. Uniqueness of left derived
-functors identifies the two. Derive the module isomorphism and use
-mapDerivedCategoryCompIso to identify the displayed composite R with this
-transported pullback. Compose the strong monoidal standard-localization
-comparisons with the standard derived pullback monoidal model, then transport
-the resulting monoidal structure along the comparison to R. All these are
-functor isomorphisms, so both unit equations, associativity, and invertibility
-are preserved. The construction uses each localization's own universe and
-applies without change to the empty open and zero complexes. -/
+/-- Strong monoidal descent of exact restriction to the standard category on the open. -/
 theorem exists_openRestriction_derivedMonoidal (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

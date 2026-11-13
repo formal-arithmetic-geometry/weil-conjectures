@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # The ordinary direct-image mate in the cartesian open square
 
-Source: Stacks Project, Cohomology, Tag 08FE, sectionwise identity in the proof.
+## References
+
+* Stacks Project, Cohomology, Tag 08FE.
 -/
 
 @[expose] public section
@@ -24,11 +26,11 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- The cartesian open inclusion. Source: Stacks Tag 08FE. -/
+/-- The cartesian open inclusion. -/
 abbrev perfectHomOpenMap {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :=
   pullback.map (B.ι ≫ s) r s r B.ι (𝟙 T) (𝟙 S) (by simp) (by simp)
 
-/-- The square is cartesian by pullback cancellation. Source: Stacks Tag 08FE. -/
+/-- The square of open inclusions is cartesian. -/
 theorem perfectHomOpenSquare {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens)
     (r : T ⟶ S) :
     IsPullback (pullback.fst (B.ι ≫ s) r) (perfectHomOpenMap s B r) B.ι
@@ -41,14 +43,13 @@ theorem perfectHomOpenSquare {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens)
     (IsPullback.of_hasPullback s r)
   simp [perfectHomOpenMap, pullback.map]
 
-/-- Base change preserves open immersions. Source: Stacks Tag 08FE, open square. -/
+/-- Base change preserves open immersions. -/
 instance perfectHomOpenMap_isOpenImmersion {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     IsOpenImmersion (perfectHomOpenMap s B r) :=
   MorphismProperty.of_isPullback (perfectHomOpenSquare s B r) inferInstance
 
-/-- The ordinary composition comparison, with its sectionwise normalization.
-Source: Stacks Tag 08FE. -/
+/-- The ordinary composition comparison, with its sectionwise normalization. -/
 def perfectHomOpenModuleComposition {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     Scheme.Modules.pushforward (perfectHomOpenMap s B r) ⋙
@@ -59,8 +60,7 @@ def perfectHomOpenModuleComposition {S Y T : Scheme.{u}}
     Scheme.Modules.pushforwardCongr (perfectHomOpenSquare s B r).w.symm ≪≫
     (Scheme.Modules.pushforwardComp _ _).symm
 
-/-- Transpose the ordinary composition comparison under the two open adjunctions.
-Source: Stacks Tag 08FE. -/
+/-- Transpose the ordinary composition comparison under the two open adjunctions. -/
 def perfectHomOpenModuleMate {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     Scheme.Modules.pushforward (pullback.fst s r) ⋙ schemeOpenRestriction Y B ⟶
@@ -111,21 +111,8 @@ private theorem isIso_open_module_mate_of_isPullback
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- The ordinary open-square mate is the sectionwise direct-image/restriction identity.
-Source: Stacks Project, Cohomology, Tag 08FE, proof of
-`lemma-restrict-direct-image-open`.
-
-Proof: The square is cartesian by cancellation of the outer pullback square
-against the projection pullback square. Thus for an open W in B, the image under b
-of pi' inverse W is pi inverse of B.ι image W, by the image/preimage formula
-for cartesian open squares. Expand the inverse mate: the open-adjunction unit,
-the sectionwise direct-image composition comparison, and the open-adjunction
-counit. At W the resulting map is restriction along the equality of these two
-opens. The structure-ring identifications agree by the square's commutativity.
-Restriction along an equality is invertible, with inverse restriction along
-the reverse equality. This gives inverse maps of modules, natural in the module
-and W. For an empty open the same formula is the unique map of zero sections;
-for the full open it is the identity formula. No derived category is used. -/
+/-- The ordinary open-square mate is the sectionwise direct-image/restriction identity
+(Stacks, Tag 08FE). -/
 theorem perfectHomOpenModuleMate_isIso {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     IsIso (perfectHomOpenModuleMate s B r) := by

@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 
 /-! # A module equipped with its local identifications
 
-Source: Stacks Project, Sites, Tag 04TR.
+## References
+
+* Stacks Project, Sites, Tag 04TR.
 -/
 
 @[expose] public section
@@ -21,9 +23,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The output of gluing local submodules, retaining the injections and local
-identifications as named fields rather than a nested dependent existential.
-
-Source: Stacks Project, Sites, Tag 04TR. -/
+identifications as named fields (Stacks, Sites, Tag 04TR). -/
 structure LocalSubmoduleGluingData
     (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
     (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)

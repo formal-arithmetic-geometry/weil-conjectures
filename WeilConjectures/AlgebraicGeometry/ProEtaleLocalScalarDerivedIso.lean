@@ -15,7 +15,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Local invariance of derived extension to constant coefficients
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E and 0E8K.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E and 0E8K.
 -/
 
 @[expose] public noncomputable section
@@ -175,26 +177,7 @@ private theorem restrictionKFlat {X Y : Scheme.{u}} (i : Y ⟶ X)
 /-- A local isomorphism over arbitrary ring sheaves induces a local isomorphism after
 unbounded derived extension to a constant ring, including its fixed scalar action.
 There is no adic, perfectness, boundedness or finiteness assumption.
-
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 0G7E
-(derived pullback and pullback of K-flat complexes), and Tag 0E8K
-(restriction of K-flat complexes).
-
-Proof: let R' and B' be the inverse images of R and the constant ring B.
-The module inverse image to R' and restriction to U are exact. Resolve each complex
-by a K-flat complex with flat terms. Inverse image and slice restriction preserve
-these properties. On these resolutions the canonical tensor comparison identifies
-restriction of B tensor_R P with B'|U tensor_(R'|U) restriction(P). It is induced
-by inverse image of pure tensors and respects balancing, differentials and the
-B action. The K-flat counits identify the corresponding derived functors; their
-naturality descends the comparison to the local derived category. Scalar extension
-therefore takes the supplied local isomorphism to an isomorphism over B'|U.
-The canonical constant-ring inverse-image comparison identifies the scalar B action
-with the action on fixed-scalar inverse image, since it carries each constant b to
-that same constant b. Forget from modules over B'|U to sheaves of B-modules.
-Exactness commutes this operation with localization. The canonical isomorphisms
-from localization representatives give exactly the two objects below. The same
-argument applies to zero rings, empty slices and unbounded complexes. -/
+(Stacks, Cohomology on Sites, Tags 06YY, 0G7E and 0E8K.) -/
 theorem proEtaleLocalScalarDerivedIso {X Y : Scheme.{u}} (i : Y ⟶ X)
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (B : Type (u + 1)) [CommRing B]

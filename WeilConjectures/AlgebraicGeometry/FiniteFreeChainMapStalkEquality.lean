@@ -34,21 +34,7 @@ private lemma restrict_eq_of_le {Y : Scheme.{u}} {U V W : Y.Opens}
   exact congrArg (fun k ↦ e.hom.app M ≫
     (restrictFunctor (Y.homOfLE hWV)).map k) h
 
-/-- Equality of two fixed chain maps at the stalk holds on a smaller open.
-
-Proof: Use the finite bases of P and their images under restriction, identified by
-restrictFunctorIsoPullback and pullbackFreeIso. The degreewise differences a.f n-b.f n
-are matrices of sections on U. Outside [0,d] their source is zero, so their components
-are zero without shrinking. Within [0,d] there are finitely many entries. The equality
-of the pulled-back chain maps says that the germs of these entries at y vanish, by
-freeMatrix_pullback and the structure-ring stalk comparison for fromSpecStalkOfMem.
-For each entry use the germ equality criterion to find an open containing y inside U
-where it is zero. Intersect these finitely many opens, obtaining W. Restriction carries
-the matrix to its restricted entries, so all component differences are zero on W.
-Extensionality of morphisms of homological complexes gives the required equality.
-The extra restriction through V merely transports the chosen bases; it imposes no
-condition on a or b. The zero complex, rank zero, d=0, and U=V are covered by the same
-argument, with an empty intersection taken to be U. -/
+/-- Equality of two fixed chain maps at the stalk holds on a smaller open. -/
 theorem exists_shrink_chainMap_eq_of_stalk
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

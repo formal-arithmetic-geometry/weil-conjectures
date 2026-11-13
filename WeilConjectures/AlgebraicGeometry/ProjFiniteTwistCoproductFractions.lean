@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ProjTwistBasicOpenFractions
 /-!
 # Basic-open fractions for finite coproducts of Proj twists
 
-Source: Stacks Project, Constructions, Tags 01M6 (3), 01M7 (2),(3), 01MN (1).
+## References
+
+* Stacks Project, Constructions, Tags 01M6, 01M7 and 01MN.
 -/
 
 @[expose] public section
@@ -79,25 +81,8 @@ private theorem coproductCoordinates_bijective {X : AlgebraicGeometry.Scheme.{v}
 
 
 /-- For any graded commutative ring, the finite coproduct of its twists is the
-associated sheaf of the finite sum of shifts, with scalar-compatible fraction maps.
-Source: Stacks Project, Constructions, Tags 01M6 (3), 01M7 (2),(3), 01MN (1).
-
-Proof: identify the sections of each twist on D₊(f) with degree-zero fractions
-of A(a i), by 01MN (1) and 01M7 (2). Finite coproducts of modules are finite
-products, and finite products of sheaves are computed on sections. Thus send
-a tuple of sections to its componentwise fractions, viewed in the localization
-of Fin r → A. Localization commutes with this finite product: choose a common
-power f^m for the finitely many denominators, multiplying the i-th numerator
-by the missing power of f. This gives an additive injection. A tuple of
-homogeneous fractions with common denominator f^m has numerator degree
-a i + m * b in component i. Conversely every tuple satisfying those degree
-conditions gives sections of each twist, proving the range equality. When r = 0,
-both sides are zero, and choose numerator zero and denominator 1.
-The scalar action is multiplication in the localization, so the fraction map
-intertwines awayToSection q with the algebra map of q. For a restriction with
-g^e = h * f, multiply a numerator y over f^m by h^m; the new denominator is
-g^(e*m), since (g^e)^m = h^m * f^m. This is the canonical localization map
-of 01M7 (3), hence agrees with the sheaf restriction on every component. -/
+associated sheaf of the finite sum of shifts, with scalar-compatible fraction maps
+(Stacks, Constructions, Tags 01M6, 01M7 and 01MN). -/
 theorem finite_twist_coproduct_fractions
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (r : ℕ) (a : Fin r → ℤ) :

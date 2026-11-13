@@ -59,16 +59,7 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- A locally finitely presented internal module on one stratum is sent by the
 sectionwise finite coefficient encoding to a finite locally constant ordinary
-module sheaf. This is the finite presentation and locally constant matrix step
-in Proposition 5.3.2 and Lemmas 5.4.1, 5.4.3 of Bhatt--Scholze.
-
-Proof in words. Choose the presentation cover from the encoded-presentation
-theorem. On each member the ordinary restriction is a cokernel between finite
-constant sheaves. Full faithfulness and exactness of etale comparison transport
-the proved etale finite locally constant cokernel theorem to this cokernel.
-Choose its finite constant trivialization cover and bind it with the presentation
-cover. Inverse-image composition identifies the resulting restrictions. The
-bound family gives the required finite locally constant witness on the stratum. -/
+module sheaf (Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1, 5.4.3). -/
 theorem finiteDiscreteCoefficient_local_piece [DiscreteTopology B] [Finite B]
     (T : Scheme.{u}) (S : Scheme.Stratification T) (a : Fin S.n)
     (M : FiniteDiscreteInternalModules B T)

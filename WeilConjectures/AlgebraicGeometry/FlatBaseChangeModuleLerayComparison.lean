@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport
 
 /-! # Affine target Leray comparison in module cohomology
 
-Source: Stacks Project, Tags 01XK, 01E4 and 01FB.
+## References
+
+* [Stacks Project, Tag 01XK](https://stacks.math.columbia.edu/tag/01XK)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
 -/
 
 @[expose] public section
@@ -62,26 +66,7 @@ set_option maxHeartbeats 800000 in
 The displayed algebra is required to be the canonical map on sections.
 Only a natural coefficient comparison on the target chart is supplied; no
 comparison on the source and no Ext pullback compatibility are assumed.
-
-Source: Stacks Project, Tag 01XK, Lemma 30.4.6; Tag 01E4, Lemma 20.7.3;
-Tag 01FB, Remark 20.14.2; the affine chart dictionary in Tag 02KH.
-
-Proof: The affine chart fibre product is the inverse image of W under f prime.
-Pullback composition identifies its coefficient with the restriction of g prime
-pullback F. The two coefficient maps from F restricted to f inverse V agree:
-apply the adjunction to the restriction-unit equation D.unit_square and the
-composition-unit equations. Functoriality of module cohomology therefore identifies
-the chart pullback with restriction to W of the map defined by D.psi.
-The base-changed morphism is qcqs and its coefficient is quasi-coherent. Its higher
-images are quasi-coherent and have vanishing positive cohomology on affine W.
-The cocycle-normalized Leray edge is consequently an isomorphism. The comparison
-with J is fixed by D.target.augmentation and D.target.components; the cocycle edge
-is sectionCohomologyTheta followed by J's right-derived comparison. Thus the edge
-of the restricted class is the restriction of D.targetClass. Compose the chart
-identification and this edge with the inverse of E at the chart coefficient.
-Naturality of E for scalar endomorphisms makes this composite B-linear. This
-constructs b and proves the formula. Empty opens, zero coefficients and p = 0
-use the same complexes. No pullback is assumed invertible or exact. -/
+(Stacks, Tags 01XK, 01E4, 01FB and 02KH.) -/
 theorem exists_flatBaseChange_module_leray_comparison
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f]

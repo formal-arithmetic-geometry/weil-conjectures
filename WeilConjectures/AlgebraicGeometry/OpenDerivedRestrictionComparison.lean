@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Comparison of the two derived restrictions to an open subscheme
 
-Source: Stacks Project, Tags 079W and 0A9A.
+## References
+
+* Stacks Project, Tags 079W and 0A9A.
 -/
 
 @[expose] public section
@@ -29,22 +31,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- Exact open restriction, expressed on the localized site or on the open subscheme,
 identifies quasi-coherent cohomology, support, shifted orthogonality and zero objects.
-Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, and Tag 0A9A,
-Lemma perfect-lemma-supported-generator, induction paragraph.
-
-Proof: Obtain the localizations from `nonempty_hasDerivedCategory_openSubscheme` and
-`nonempty_derivedOpenLocalization`, and the adjunction from
-`open_derived_localization_adjunction`. Let e be the exact canonical module equivalence
-`Modules.overEquiv U`. The composition isomorphism identifies M with L followed by the derived
-equivalence D(e). The existing quasi-coherent restriction criterion and quasi-coherence of
-restriction prove the first clause in each degree. Exactness identifies homology
-with restriction of homology; the restriction stalk isomorphism identifies the
-stalk at x with the original stalk at x.val. Transporting zero additive groups
-along this isomorphism proves support. Full faithfulness of D(e) and the canonical
-shift isomorphism identify the Hom types in the orthogonality clause, and full
-faithfulness also reflects zero objects. None of these arguments requires
-compactness, a closed support, or a detector. For the empty open the module
-categories are zero categories, so the same comparisons apply. -/
+(Stacks, Tags 079W and 0A9A) -/
 theorem open_derived_restriction_comparison
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

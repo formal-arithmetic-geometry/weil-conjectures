@@ -18,10 +18,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A fixed finite skeleton of a limit hypercover is a base change from a full
-finite split hypercover at a stage. Source: blueprint finite hypercover descent,
-followed by the split extension construction of Stacks 0DAV. Truncate the given
-hypercover, descend that finite data, and extend the descended skeleton. Forgetting
-matching and splitting choices gives the asserted isomorphism of simplicial diagrams. -/
+finite split hypercover at a stage (Stacks, Tag 0DAV). -/
 theorem exists_stage_hypercover_truncation
     {I : Type u} [SmallCategory I] [IsFiltered I] (D : Iᵒᵖ ⥤ Scheme.{u})
     [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]

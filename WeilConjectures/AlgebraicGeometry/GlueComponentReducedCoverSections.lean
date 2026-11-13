@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # Structure sections on a reduced scheme away from component intersections
 
-Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T.
+## References
+
+* Stacks Project, Varieties, Lemma 09NE (proof).
 -/
 
 @[expose] public section
@@ -24,28 +26,12 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Let `X` be a reduced scheme and `i a: Z a ⟶ X` finitely many closed immersions whose
+/-- Let `X` be a reduced scheme and `i a : Z a ⟶ X` finitely many closed immersions whose
 images cover `X`. With `T` the union of the pairwise intersections `Z a ∩ Z b`, `a ≠ b`, the
 sets `Z a \ T` are open in `X`, pairwise disjoint and cover `X \ T`, and for every open
 `V ⊆ X \ T` the restriction maps `Γ(X, V) → Γ(Z a, (i a)⁻¹ V)` together give a bijection
 onto the product over `a` (empty factors are the zero ring), so `X \ T` is the
-scheme-theoretic union of the open subschemes `Z a \ T`.
-Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T.
-
-Proof: The finite union `T` is closed. The complement of `T` together with all component
-images other than `a` is exactly `Z a \ T`, so that set is open. Disjointness and coverage
-follow from the definition of `T` and the covering hypothesis. For `V` disjoint from `T`,
-put `U a = V ∩ (Z a \ T)`. The closed immersion restricted to `U a` is surjective onto a
-reduced open subscheme, hence is an isomorphism by
-`isIso_of_isClosedImmersion_of_surjective`. Its map on sections is an isomorphism, and
-`(i a)⁻¹ U a = (i a)⁻¹ V`, giving a bijection `e a` from sections on `U a` to the required
-component sections. Naturality factors the original section map as restriction to `U a`
-followed by `e a`. Injectivity follows from sheaf separatedness. For surjectivity, pull
-back the given component sections through the bijections `e a`; these sections agree on
-all overlaps, since distinct opens have empty intersection. The sheaf gluing theorem
-produces the desired section on `V`. The same proof covers an empty index type and empty
-opens, using the unique structure-sheaf section on the empty open.
--/
+scheme-theoretic union of the open subschemes `Z a \ T`. -/
 theorem glue_component_reduced_cover_sections
     {X : Scheme.{u}} [IsReduced X] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ X) [∀ a : ι, IsClosedImmersion (i a)]

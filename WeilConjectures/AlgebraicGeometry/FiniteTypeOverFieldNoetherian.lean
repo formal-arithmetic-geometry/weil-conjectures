@@ -24,10 +24,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A scheme of finite type over a field has Noetherian underlying space.
-Proof: the field spectrum is Noetherian. Local finite type therefore gives a locally
-Noetherian source, and quasi-compactness of the structure map gives a compact source.
-Together these make the source a Noetherian scheme, hence a Noetherian space. -/
+/-- A scheme of finite type over a field has Noetherian underlying space. -/
 instance finiteTypeOverField_noetherianSpace {k : Type u} [Field k]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] :
     TopologicalSpace.NoetherianSpace X.left := by

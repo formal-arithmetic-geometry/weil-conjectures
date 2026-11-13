@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Exactness of rows presented by distinguished triangles
 
-Source: Stacks Project, Tag 08BW; Mathlib homological coyoneda and pointwise exactness.
+## References
+
+* Stacks Project, Tag 08BW.
 -/
 
 @[expose] public section
@@ -24,16 +26,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Pretriangulated
 namespace AlgebraicGeometry
 
-/-- Hom-triangle presentations imply exactness, pointwise and at the limit.
-Source: Stacks Project, Tag 08BW; Mathlib's homological coyoneda theorem.
-
-Proof: Covariant additive Hom sends distinguished triangles to exact short
-complexes. Transport exactness through each given short-complex isomorphism.
-This proves the limit row exact. For the stage row it proves exactness after
-every evaluation functor. Evaluation computes kernels and cokernels pointwise,
-so the kernel-to-cokernel composite vanishes componentwise and hence vanishes
-as a natural transformation. This is the exactness criterion in an abelian
-category. Apply it to each of the three short complexes of S. -/
+/-- Hom-triangle presentations imply exactness, pointwise and at the limit
+(Stacks, Tag 08BW). -/
 theorem perfect_hom_triangle_presented_rows_exact
     {J : Type u} [Category J]
     [∀ Z : Scheme.{u},

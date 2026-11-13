@@ -115,27 +115,7 @@ private theorem localModel_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact ⟨G.preimageIso ((α.app M).symm ≪≫ e ≪≫ α.app N)⟩
 
 /-- The two completed-ring presentations give the same finite scalar local models.
-This is a statement about ordinary module sheaves, for any adic coefficient datum.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), and the
-finite-projection construction of pbcCompletedComparison.
-
-Proof: restriction along pbcCompletedComparison and its inverse gives inverse
-module equivalences. Both round trips are identity on sections. The equivalences
-commute with inverse image to each stratum and restriction to each slice, by the
-scalar pullback adjunctions and the naturality of the coefficient isomorphism.
-By definition integralConstantModule is completedKoszulConstant followed by
-restriction along the inverse comparison, so the forward restriction cancels this
-last factor. The scalar map adicDatumScalar equals CompletedConstantReduction.base:
-all its finite projections are the same quotient maps, and maps into the limit
-are determined by these projections. Thus completedKoszulConstant is the ordinary
-completedAdicChange realization of the constant module. Apply the slice coefficient
-equivalence to every local-model isomorphism, keeping its finitely presented scalar
-module and its covering sieve. For the converse apply the inverse equivalence.
-A constructible stratification is exactly a finite locally closed stratification
-with constructibility proofs for each stratum; forgetting or restoring these
-proof fields retains every stratum scheme and immersion. This gives the two
-existential witnesses without a change of local models. Empty stratifications and
-zero scalar modules satisfy the same argument. -/
+This is a statement about ordinary module sheaves, for any adic coefficient datum. -/
 theorem completedConstantModelTransport (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : pbcModules X (pbcAdicCompletion X d)) :

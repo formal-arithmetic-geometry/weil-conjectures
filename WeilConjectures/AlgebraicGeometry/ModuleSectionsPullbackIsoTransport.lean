@@ -12,7 +12,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Module sections transported along an isomorphism
 
-Source: Stacks Project, Tags 01ZR, 0095, 0097 and 01I6.
+## References
+
+* [Stacks, Tag 01ZR](https://stacks.math.columbia.edu/tag/01ZR)
+* [Stacks, Tag 0095](https://stacks.math.columbia.edu/tag/0095)
+* [Stacks, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+* [Stacks, Tag 01I6](https://stacks.math.columbia.edu/tag/01I6)
 -/
 
 @[expose] public section
@@ -23,23 +28,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Global sections of a pulled-back module transport along a scheme isomorphism.
-Source: Stacks Project, Modules on Schemes Tags 0095, 0097 and 01I6.
-
-Proof: Composition of module pullbacks identifies the pullback along g' with
-pullback along h.hom of the module pulled back along g, using the equation hg.
-For the isomorphism h, pullback of modules is pushforward along h.inv: both are
-left adjoint to pushforward along h.hom, whose inverse is pushforward along h.inv.
-The latter pushforward has, on the full open, the same additive group of sections
-as the original module, with scalars restricted along h.inv.appTop. The full open
-is preserved by inverse image. The two section ring maps induced by h.hom and
-h.inv are inverse. Thus extension along h.hom.appTop cancels this restriction:
-on tensors the map sends b tensor m to h.inv.appTop(b) acting on m; the inverse
-sends m to 1 tensor m. The tensor relations and inverse laws follow from the two
-inverse ring-map identities. Composing with the pullback-composition comparison
-gives the asserted isomorphism. No quasi-coherence or affineness is used. Identity
-isomorphisms give the identity scalar extension; zero rings and zero modules obey
-the same tensor relations. -/
+/-- Global sections of a pulled-back module transport along a scheme isomorphism
+(Stacks, Tags 0095, 0097 and 01I6). -/
 theorem nonempty_module_sections_pullback_iso_transport
     {S X Y : Scheme.{u}} (h : Y ≅ X) (g : X ⟶ S) (g' : Y ⟶ S)
     (hg : h.hom ≫ g = g') (M : S.Modules) :

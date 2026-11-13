@@ -16,8 +16,12 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineTarget
 
 /-! # Normalized affine cohomology section dictionaries
 
-Source: Stacks Project, Tags 02KH and 02N7; Tags 01E4 and 03FD for the
-higher-direct-image and module/abelian cohomology identifications.
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
 -/
 
 @[expose] public section
@@ -35,27 +39,7 @@ attribute [local instance] Scheme.Modules.enoughInjectives
 set_option maxHeartbeats 700000 in
 -- The affine cohomology comparison elaborates substantial derived-category terms.
 /-- Normalized affine section identifications, before choosing a resolution lift.
-Source: Stacks Project, Tags 02KH (affine-local reduction), 01XJ, 01E4 and 03FD.
-
-Proof: Set U = f inverse V and N = F restricted to U. The given D identifies
-its resolutions with the restrictions of I and J to U and g' inverse U,
-preserving the augmentations and the restriction-unit square. Compute module cohomology and
-underlying abelian-sheaf cohomology on the same section complexes to obtain e.
-Use the affine chart W = Spec B and V = Spec A and the cartesian square to
-identify the coefficient on U_B with the restriction of g'^*F. The Leray edge
-maps, together with quasi-coherence of higher direct images for qcqs maps and
-affine vanishing, identify the sections of both higher direct images with
-cohomology of their inverse-image opens. The affine tensor-pullback section
-formula and e give a, with the stated pure-tensor normalization. The target
-identification gives b. Compute the pullback on the common section complexes:
-the restricted coefficient map is D.psi, so the module/abelian comparison
-intertwines its cohomology map with H.baseChangeLinear. Restriction from g^-1 V
-to W gives the last formula. Both identifications are linear: scalars act by
-multiplication on the same complexes and all comparison maps commute with it.
-The repaired target interface transports the canonical target comparison along
-the normalized source lift, using flat cohomology base-change invertibility.
-No resolution lift t or resolution-defined beta is used. Empty opens, zero
-coefficients, and degree zero are covered by the same complexes and comparison maps. -/
+(Stacks, Tags 02KH, 01XJ, 01E4 and 03FD.) -/
 theorem Scheme.Modules.exists_flatBaseChange_affine_dictionary
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [QuasiCompact f] [QuasiSeparated f] [Flat g] [Flat (pullback.snd g f)]

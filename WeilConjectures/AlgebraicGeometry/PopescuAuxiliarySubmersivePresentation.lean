@@ -13,8 +13,7 @@ public import Mathlib.RingTheory.Smooth.StandardSmooth
 The presentation is obtained by adjoining an inverse to the localization element and
 using the original equations together with the inverse relation.  The selected Jacobian
 minor is a unit by the ideal membership hypothesis, so the resulting presentation is
-submersive.  This theorem records the explicit finite variable and relation types; its
-proof is deferred to the algebraic Jacobian calculation.
+submersive.
 -/
 
 @[expose] public section
@@ -24,12 +23,7 @@ open scoped BigOperators
 open MvPolynomial
 namespace Algebra
 
-/-- Explicit finite presentation for the localized quotient.
-
-Proof: adjoin an inverse to the localization element, retain the original equations,
-and compute the selected Jacobian minor. The ideal membership hypothesis makes that
-minor a unit, so the resulting presentation is submersive.
--/
+/-- Explicit finite presentation for the localized quotient. -/
 theorem popescu_auxiliary_submersivePresentation
     (R : Type u) [CommRing R] (N c t : ℕ) (hc : c ≤ N)
     (f : Fin c → MvPolynomial (Fin N) R)

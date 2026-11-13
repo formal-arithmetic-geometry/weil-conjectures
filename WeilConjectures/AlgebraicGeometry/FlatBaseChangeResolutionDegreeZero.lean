@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestricti
 
 /-! # The ordinary map underlying resolution base change
 
-Source: Stacks Project, Tag 02N7, augmentation diagram.
+## References
+
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
 -/
 
 @[expose] public section
@@ -75,23 +77,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
 /-- The degree-zero resolution comparison agrees with ordinary base change under
-canonical zeroth-derived-functor identifications.
-Source: Stacks Project, Tag 02N7, the augmentation diagram defining the comparison.
-
-Proof: The augmentation equation for t, after applying pushforward f and the
-pushforward square, identifies the degree-zero component of Q on the augmentation
-with the pushforward of the q-unit followed by that square and the target
-augmentation. Transpose this equality under the g-adjunction. Naturality of its
-Hom equivalence identifies the degree-zero component of C on the pulled-back
-augmentation with moduleBaseChangeMap followed by the target augmentation.
-The augmentations identify the ordinary modules with the degree-zero cycles of
-the two pushed-forward resolutions, since pushforward preserves finite limits.
-Flat pullback preserves these kernels and homology. Pass the augmentation equation
-to degree-zero homology and cancel the resolution-computation isomorphisms. The
-canonical map to the zeroth right derived functor is exactly the augmentation
-followed by the cycles-to-homology map, so this gives the displayed equality.
-No quasi-coherence or properness is required. For zero modules and empty schemes
-these same kernel and augmentation identities apply. -/
+canonical zeroth-derived-functor identifications. (Stacks, Tag 02N7.) -/
 theorem flatBaseChangeResolutionBeta_degree_zero
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [Flat g]
     (F : X.Modules) (I : InjectiveResolution F)

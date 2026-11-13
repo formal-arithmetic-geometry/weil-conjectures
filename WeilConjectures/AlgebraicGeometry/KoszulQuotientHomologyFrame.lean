@@ -19,7 +19,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # The quotient-valued dual Koszul homology frame
 
-Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, quotient-valued Hom calculation. -/
+## References
+
+* Stacks Project, Tag 0BQY, Lemma 48.15.4.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -132,20 +135,8 @@ private theorem quotient_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y)
   rw [hker] at hex
   exact hex
 
-/-- The associated sheaf of quotient-valued dual Koszul homology has its wedge frame.
-Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, zero-differential Hom calculation.
-
-Proof: Every generator lies in I, so multiplication by it on A/I is zero.
-The Koszul boundary is an alternating sum with these coefficients; hence
-precomposition into A/I is zero, including the dual-complex sign. Consequently
-homology is the degree-n Hom module. Evaluation on the increasing wedge basis
-identifies that module with functions from n-element subsets to A/I. The index
-is finite, so this is the coproduct of copies of A/I as an A-module. Tilde and
-restriction along the affine spectrum isomorphism preserve coproducts. The
-quotient affine chart identifies tilde(A/I) with the restricted pushforward
-of O_Z. Restriction to U also preserves coproducts, giving the claimed frame.
-This needs no regularity: only that f generates I. For n>m the basis is empty,
-for n=0 it is the empty wedge; m=0 and the zero quotient ring are allowed. -/
+/-- The associated sheaf of quotient-valued dual Koszul homology has its wedge frame
+(Stacks, Tag 0BQY). -/
 theorem koszul_quotient_homology_frame
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens) (n m : ℕ) (f : Fin m → Γ(Y, U.1))

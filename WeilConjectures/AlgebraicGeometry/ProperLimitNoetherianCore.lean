@@ -22,11 +22,8 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Core inverse-system construction for a proper morphism.
-Source: Stacks limits.tex, Tag 0A0P, proof steps 1--8.
-The construction descends a proper finitely presented envelope, forms scheme-theoretic
-images, and verifies the two limit cones, affine transitions, proper stage maps, and
-finite-type base stages. -/
+/-- Core inverse-system construction for a proper morphism: a limit of proper morphisms
+over finite-type bases with affine transitions (Stacks, Tag 0A0P). -/
 theorem exists_proper_limit_noetherian_core
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] :
@@ -105,11 +102,8 @@ theorem exists_proper_limit_noetherian_core
       simp [πY, q, Category.assoc]
     rw [hcomm, ← Category.assoc, hw]
 
-/-- Construct proper models using the finitely generated subrings of an affine base.
-Source: Stacks limits.tex, Tag 0A0P, proof steps 1--9.
-Choose the affine Noetherian approximation before descending the proper envelope.
-Its stages remain affine after cofinal reindexing; their section rings are finite type.
-Global sections preserve the limit of affine schemes as a ring colimit. -/
+/-- Proper models over the finitely generated subrings of an affine base: the affine case of
+`exists_proper_limit_noetherian_core` (Stacks, Tag 0A0P). -/
 theorem proper_limit_noetherian_affine_clause
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] (hS : IsAffine S) :

@@ -10,9 +10,13 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetCoordinates
 
-/-! # Subset coordinates and the alternating Čech augmentation on the union
+/-!
+# Subset coordinates and the alternating Čech augmentation on the union
 
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 01FM, <https://stacks.math.columbia.edu/tag/01FM>
 -/
 
 @[expose] public section
@@ -28,36 +32,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 -- The mapped-complex section transports require extra definitional equality checks.
 /-- The displayed subset-coordinate augmentation is the increasing-tuple augmentation
 on the open union, after forgetting scalar actions. This is a chain-level coordinate
-comparison for arbitrary coefficient complexes, with no K-injectivity assumption.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM, the increasing
-index convention for alternating Čech cochains.
-
-Proof: Set V to the union of the principal opens and restrict J to V by overFunctor
-followed by overEquiv. A restricted module's sections on an open of V are its original
-sections on the corresponding open of Spec A. Forgetting the scalar actions therefore
-identifies its global sections with J(V), naturally in coefficient morphisms. Compose
-these identifications with sigma to identify K with the section complex on V.
-In total degree n, the alternating total is a coproduct over p+q=n of products indexed
-by increasing (p+1)-tuples. Only 0 <= p < r occur. Send an increasing tuple to its range
-S; its order embedding is the unique increasing enumeration of S. This identifies
-p with card S - 1 and q with n + 1 - card S. The corresponding intersection is the
-preimage in V of D(product of the f_j over S), since basic opens take products to
-intersections. Use section transport along this equality and coefficient transport
-along q = n + 1 - card S. Grouping the finite family of subset coordinates by
-cardinality is the inverse map, so these maps are degreewise additive isomorphisms.
-Deleting position k in the enumeration erases its element j, and k is exactly the
-number of elements of S smaller than j. Thus the horizontal signs and restriction
-maps agree. The vertical sign is (-1)^p = (-1)^(card S - 1), and the coefficient
-transports agree by proof irrelevance. The assumed differential equations make the
-degreewise identifications chain isomorphisms. The source differential equation
-makes the source identification a chain isomorphism as well. On singleton coordinates
-the assumed augmentation equation is restriction from V, and in higher columns it
-is zero; hence the two isomorphisms commute with the augmentations and give an arrow
-isomorphism. For r=0 both coordinate products and the tuple total are zero, while V
-is empty and the sheaf axiom makes its sections zero. Repeated principal opens cause
-no ambiguity because the indexing is by indices, and empty intersections have zero
-sections. No assertion about cohomology is used in this comparison. -/
+comparison for arbitrary coefficient complexes, with no K-injectivity assumption
+(Stacks, Tags 08C1 and 01FM). -/
 theorem principalOpenCech_subset_comparison
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

@@ -26,7 +26,9 @@ public import WeilConjectures.CategoryTheory.SheafTensor
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 
 /-! # Finite discrete internal and ordinary coefficients
-.
+
+Comparison between internal-module and ordinary-module sheaf coefficients for a finite
+discrete ring.
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +60,8 @@ abbrev Internal (T : Scheme.{u}) :=
 abbrev Ordinary (T : Scheme.{u}) :=
   realizationModules (Scheme.ProEt.topology T) (ULift.{u + 1} A)
 
-/-- The reconstructed commutative section-ring sheaf of the pulled-back coefficients.
-Source: Stacks 00YV, section-action equivalence. -/
+/-- The reconstructed commutative section-ring sheaf of the pulled-back coefficients
+(Stacks, Tag 00YV). -/
 abbrev sectionRing (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T) (condensedRingObj (coefficient A) T)
@@ -85,8 +87,8 @@ def canonicalAbelianMap (T : Scheme.{u}) :
         _ (coefficient A)).symm (pointConstants A))
 
 /-- The intrinsic-to-fixed coefficient functor restricts to constant scalar sections.
-The commutative-ring/underlying-ring constant-sheaf comparison is canonical.
-Source: blueprint proof step 3, Stacks 03CY. -/
+The commutative-ring/underlying-ring constant-sheaf comparison is canonical
+(Stacks, Tag 03CY). -/
 def fixedRestriction (T : Scheme.{u}) :
     Ordinary A T ⥤ Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A)) :=
   SheafOfModules.restrictScalars
@@ -95,8 +97,8 @@ def fixedRestriction (T : Scheme.{u}) :
         (CommRingCat.of (ULift.{u + 1} A))) ⋙
     constantRingModuleRestriction (Scheme.ProEt.topology T) (ULift.{u + 1} A)
 
-/-- Restrict the section-action equivalence along the specified coefficient isomorphism.
-Source: blueprint proof step 2, Stacks 00YV. -/
+/-- Restrict the section-action equivalence along the specified coefficient isomorphism
+(Stacks, Tag 00YV). -/
 def sectionEncoding (T : Scheme.{u})
     (c : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T) :
     Internal A T ⥤ Ordinary A T :=
@@ -109,8 +111,8 @@ def sectionEncoding (T : Scheme.{u})
 /-- The two coefficient presentations and their actual section-action functors.
 The ring isomorphism is normalized by the canonical constant-function map; the
 forward intrinsic functor is precisely section-action followed by scalar restriction.
-The fixed scalar encoding likewise restricts along the constant-sheaf unit.
-Source: blueprint proof steps 1--3, Stacks 00YV and 03CY. -/
+The fixed scalar encoding likewise restricts along the constant-sheaf unit
+(Stacks, Tags 00YV and 03CY). -/
 structure Encoding (T : Scheme.{u}) where
   ringIso : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T
   normalization : ∀ (U : T.ProEtᵒᵖ) (a : ULift.{u + 1} A),
@@ -133,8 +135,8 @@ structure Encoding (T : Scheme.{u}) where
 attribute [instance] Encoding.ordinaryAdditive Encoding.ordinaryInverseAdditive
   Encoding.fixedAdditive Encoding.fixedInverseAdditive
 
-/-- Termwise extension of the specified intrinsic equivalence to unbounded derived categories.
-Source: blueprint proof step 4, Stacks 015F. -/
+/-- Termwise extension of the specified intrinsic equivalence to unbounded derived
+categories (Stacks, Tag 015F). -/
 def Encoding.ordinaryDerived {T : Scheme.{u}} (e : Encoding A T) :
     DerivedCategory (Internal A T) ≌ Scheme.proEtaleDerivedCategory T A :=
   letI := HasDerivedCategory.standard (Ordinary A T)
@@ -441,18 +443,8 @@ private def scalarEquivalence (T : Scheme.{u})
           (S.obj.map_id V)).trans ((Category.comp_id _).trans
             (congr_app (congrArg (fun f : S ⟶ S ↦ f.hom) e.hom_inv_id) V)))
 
-/-- The normalized finite-discrete coefficient encoding exists.
-Source: blueprint coefficient identification, proof steps 1--3; Stacks Tags 00YV and 03CY.
-
-Proof: the finite clopen fibres of each continuous function give local surjectivity of
-constant functions. Equality of constants is local, using the empty cover at the empty
-space. Sheafification and inverse image give an isomorphism of abelian sheaves; their
-monoidal structures make it a ring map. The sheafification adjunction extends this map
-to the section-ring sheaf, with the required normalization. Forgetting to abelian groups
-reflects its invertibility. Transport the section-action equivalence along this ring
-isomorphism. Finally compose the constant-ring comparison with the equivalence between
-constant-ring module sheaves and fixed scalar sheaves. All maps retain the original
-additive maps, so the equivalences and their inverses are additive. -/
+/-- The normalized finite-discrete coefficient encoding exists
+(Stacks, Tags 00YV and 03CY). -/
 theorem encoding_exists [Finite A] [DiscreteTopology A] (T : Scheme.{u}) :
     Nonempty (Encoding A T) := by
   let := canonicalRingMap_isIso A T
@@ -503,8 +495,8 @@ variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
 
 
-/-- Termwise extension to fixed scalar sheaves, using the same intrinsic equivalence.
-Source: blueprint proof steps 3--4, Stacks 015F. -/
+/-- Termwise extension to fixed scalar sheaves, using the same intrinsic equivalence
+(Stacks, Tag 015F). -/
 def Encoding.fixedDerived {T : Scheme.{u}} (e : Encoding A T) :
     DerivedCategory (Internal A T) ≌
       DerivedCategory (Sheaf (Scheme.ProEt.topology T)

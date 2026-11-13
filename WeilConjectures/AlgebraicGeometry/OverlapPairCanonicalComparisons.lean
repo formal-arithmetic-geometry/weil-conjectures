@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 
 /-! # Canonical comparisons on pairwise base-change overlaps
 
-Source: Stacks Project, Tags 01ZR and 05N7. -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -86,8 +88,7 @@ noncomputable def overlapIteratedChartHom {X Y Z : Scheme.{u}} (U : X.OpenCover.
       simp only [← h, Category.assoc, Scheme.Cover.pullbackHom_map,
         Scheme.Cover.pullbackHom_map_assoc])
 
-/-- The canonical component comparison on an iterated limit chart.
-Source: Stacks Project, Tag 01ZR, first proof, successive restrictions. -/
+/-- The canonical component comparison on an iterated limit chart (Stacks, Tag 01ZR). -/
 noncomputable def overlapIteratedComparison {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (a : U.I₀) → (U.X a).Modules) (M : Z.Modules)

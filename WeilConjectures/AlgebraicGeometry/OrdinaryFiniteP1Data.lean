@@ -29,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The actual counit equation with the specified ordered projection map and trace.
-Naming this predicate keeps the normalized datum's dependent projections compact.
-Source: -/
+Naming this predicate keeps the normalized datum's dependent projections compact. -/
 def OrdinaryFiniteP1CounitNormalization (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (b : ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅
@@ -48,8 +47,7 @@ def OrdinaryFiniteP1CounitNormalization (A : Type (u + 1)) [CommRing A] (N : ℕ
 /-- The normalized projective-line decomposition and adjunction data. Every map in
 this record is constrained: the Chern class by the actual scalar Kummer boundary,
 the decomposition by its two components, and the adjunction by its actual counit.
-Trace is always `decomposition.inv ≫ biprod.snd`, not an independent chosen map.
-Source: -/
+Trace is always `decomposition.inv ≫ biprod.snd`, not an independent chosen map. -/
 structure OrdinaryFiniteP1Datum (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) where
@@ -71,8 +69,7 @@ structure OrdinaryFiniteP1Datum (A : Type (u + 1)) [CommRing A] (N : ℕ)
   counit_normalization : OrdinaryFiniteP1CounitNormalization A N hA S
     decomposition adjunction
 
-/-- The trace is projection onto the second summand of the specified decomposition.
-Source: -/
+/-- The trace is projection onto the second summand of the specified decomposition. -/
 def OrdinaryFiniteP1Datum.trace {A : Type (u + 1)} [CommRing A] {N : ℕ}
     {hA : (N : A) = 0} {t : OrdinaryFiniteTwistTransport A N hA}
     {S : Scheme.{u}} {hS : IsUnit (N : Γ(S, ⊤))}

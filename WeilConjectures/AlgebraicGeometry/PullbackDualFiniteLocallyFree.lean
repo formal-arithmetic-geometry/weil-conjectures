@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Pullback of duals of finite locally free modules
 
-Source: the finite free calculation in Stacks Project, Modules, Example 0FNV,
-and pullback of locally free modules, Lemma 01C8.
+## References
+
+* [Stacks, Tag 0FNV] (Modules, Example), [Stacks, Tag 01C8] (Modules, Lemma)
 -/
 
 @[expose] public section
@@ -25,18 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Pullback commutes with duals of finite locally free modules.
-
-Source: Stacks Project, Modules, Example 0FNV and Lemma 01C8.
-
-Proof: the evaluation pairing `M ⊗ dual M ⟶ O_X` pulls back to a pairing
-`e^*M ⊗ e^*(dual M) ⟶ O_S`, using the tensor and unit comparisons of pullback.
-Its transpose is a canonical map `e^*(dual M) ⟶ dual (e^*M)`. For each point of
-`S`, choose a neighbourhood of its image on which `M` is finite free of rank `r`.
-On the inverse image of this neighbourhood the map is the comparison
-`O_S^r ⟶ Hom(O_S^r, O_S)`, which sends each dual basis vector to its coordinate
-functional and is an isomorphism, including when `r = 0`. Thus the canonical map
-is locally an isomorphism on an open cover, hence an isomorphism of sheaves.
-Take its associated isomorphism. -/
+(Stacks, Tags 0FNV, 01C8) -/
 theorem nonempty_pullback_dual_iso_of_isFiniteLocallyFree
     {X S : Scheme.{u}} (e : S ⟶ X) (M : X.Modules) [M.IsFiniteLocallyFree] :
     Nonempty ((pullback e).obj (dual M) ≅ dual ((pullback e).obj M)) := by

@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalizat
 
 /-! # Unit-compatible coefficient isomorphism on a fixed base-change chart
 
-Source: Stacks Project, Tags 0096, 0097 and 02KH.
+## References
+
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+* [Stacks Project, Tag 0097](https://stacks.math.columbia.edu/tag/0097)
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
 -/
 
 @[expose] public section
@@ -28,30 +32,7 @@ attribute [local irreducible] pushforward pushforwardComp pushforwardCongr pushf
 set_option linter.unusedVariables false in
 -- The statement elaborates several successive module pushforwards and pullbacks.
 /-- The adjoint of the restricted tensor unit is invertible on a fixed chart.
-Source: Stacks Project, Tags 0096 and 0097, and Tag 02KH's affine-local dictionary.
-
-Proof: Write p for pullback.snd g f and t for baseChangeFst h. The equality ef
-and the restriction equations give sigma.hom followed by t and then the open
-inclusion (f inverse V).iota equal to L.iota followed by p. Compare tensorPullback p
-with ordinary pullback p by leftAdjointUniq for their adjunctions to p pushforward.
-Use restrictFunctorIsoPullback on L.iota and (f inverse V).iota, then pullbackComp
-and pullbackCongr for this equality, to identify sigma^* A with M. Since sigma
-is an isomorphism, its pullback adjunction is an equivalence, so transposing
-this coefficient isomorphism gives an isomorphism beta:A -> sigma_* M.
-
-To identify beta with the adjoint in the statement, transpose through the composite adjunction
-for restriction to (f inverse V), then t and sigma. The unit-leftAdjointUniq
-identity changes the tensor unit to the ordinary pullback unit. The composition
-adjunction unit identity changes the two successive units to the composite unit.
-On the right, D.unit_square identifies the unit followed by D.psi with the
-tensor unit followed by restriction to U. Restrict further along j. Naturality
-of the restriction unit and restrictFunctorComp replace these two restrictions
-by restriction to L; restrictFunctorCongr for j followed by U.iota=L.iota gives
-exactly c.hom. Both transposes are the same coefficient identification constructed
-above. Injectivity of the adjunction hom-equivalence identifies beta.hom with
-the explicitly displayed adjoint of b, which is therefore an isomorphism.
-This uses no affineness, scalar compatibility, cohomology or flatness. For empty
-opens and zero coefficients the same functor and adjunction identities apply. -/
+(Stacks, Tags 0096, 0097 and 02KH.) -/
 theorem isIso_flatBaseChange_chart_unit_adjoint
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     (F : X.Modules) (I : InjectiveResolution F)

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleBinaryLocalProperties
 
 /-! # Gluing a submodule with the ambient module on two opens
 
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
+## References
+
+* Stacks Project, Properties, Lemma 01PF.
 -/
 
 @[expose] public section
@@ -56,21 +58,9 @@ private theorem finiteType_of_iso
 
 
 
-/-- Glue a finite-type submodule on V to the whole module on W when its inclusion
-is an isomorphism on the overlap. No compactness or affineness is required.
-
-Source: Stacks Project, Properties, Lemma 01PF (label lemma-extend), reduction
-from a union to its affine member, gluing along the common value on the overlap.
-https://stacks.math.columbia.edu/tag/01PF.
-
-Proof: Construct G as the pullback of the direct image of Q along the restriction
-unit of H on W union V. The first projection φ is monic because direct image is a
-right adjoint and pullback preserves monomorphisms. The sectionwise pullback
-identifications make φ an isomorphism on W and identify G on V with Q. Transport
-quasi-coherence and finite type across these two isomorphisms, then apply their
-locality on the covering W,V. The concrete pullback requires no arbitrary choice
-of an existence witness, and includes empty or disjoint opens. Neither compactness
-nor affineness is used. -/
+/-- Glue a finite-type submodule on `V` to the whole module on `W` when its inclusion
+is an isomorphism on the overlap. No compactness or affineness is required
+(Stacks, Tag 01PF). -/
 theorem exists_submodule_binary_gluing
     (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent]

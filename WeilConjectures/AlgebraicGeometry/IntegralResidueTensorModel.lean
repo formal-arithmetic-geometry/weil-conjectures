@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # A common homotopy-level model for the residue tensor square
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
+## References
+
+* Bhatt–Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -41,20 +43,17 @@ local instance instBraidedCategoryDerivedCategory_sheaf :
 
 attribute [local instance] CategoryTheory.derivedTensorPresentationBraiding
 
-/-- The existing homotopy monoidal structure, with its base-category data fixed.
-Source: the homotopy tensor construction used by `tensorModelTarget` below. -/
+/-- The existing homotopy monoidal structure, with its base-category data fixed. -/
 noncomputable abbrev tensorModelHomotopyMonoidal :
     MonoidalCategory (HomotopyCategory D (.up ℤ)) :=
   inferInstance
 
-/-- The fixed coefficient concentrated in degree zero in the homotopy category.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+/-- The fixed coefficient concentrated in degree zero in the homotopy category. -/
 noncomputable abbrev tensorModelCoefficient (B : C) :=
   (HomotopyCategory.quotient C (.up ℤ)).obj
     ((HomologicalComplex.single C (.up ℤ) 0).obj B)
 
-/-- The standard comparison between the two degree-zero presentations.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+/-- The standard comparison between the two degree-zero presentations. -/
 noncomputable def tensorModelCoefficientIso (B : C) :
     (DerivedCategory.singleFunctor C 0).obj B ≅
       DerivedCategory.Qh.obj (tensorModelCoefficient B) :=
@@ -63,13 +62,7 @@ noncomputable def tensorModelCoefficientIso (B : C) :
 omit [MonoidalCategory D] [MonoidalClosed D] [MonoidalPreadditive D]
   [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D] in
 set_option backward.isDefEq.respectTransparency false in
-/-- The single-object comparison commutes with the exact-functor counit.
-
-Expand the exact single comparison, use the counit factorization through the
-map on derived categories, and apply naturality of the single/quotient comparisons.
-The inverse coefficient isomorphism is the resulting homotopy comparison.
-
-Source: Bhatt--Scholze, Remark 6.8.15; exact-functor single comparison. -/
+/-- The single-object comparison commutes with the exact-functor counit. -/
 theorem tensorModelCoefficientIso_counit (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (B : C) (B' : D)
     (e : F.obj B ≅ B') :
@@ -105,8 +98,7 @@ theorem tensorModelCoefficientIso_counit (F : C ⥤ D) [F.Additive]
     DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
 
 /-- The ordinary tensor model built from a functor on derived categories and
-its counit to the homotopy image of F. The definition uses those named data directly.
-Source: Bhatt--Scholze, Remark 6.8.15; the standard tensor/counit comparison. -/
+its counit to the homotopy image of F. The definition uses those named data directly. -/
 @[irreducible] noncomputable def tensorModelTargetWith
     (G : DerivedCategory C ⥤ DerivedCategory D)
     (γ : DerivedCategory.Qh ⋙ G ⟶
@@ -126,8 +118,7 @@ Source: Bhatt--Scholze, Remark 6.8.15; the standard tensor/counit comparison. -/
       ((F.mapHomotopyCategory (.up ℤ)).obj P)
 
 /-- Compare the derived target with the ordinary tensor after applying F.
-The final tensor factor is K-flat on the representatives used below.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+The final tensor factor is K-flat on the representatives used below. -/
 @[irreducible] noncomputable def tensorModelTarget (B : C) (P : HomotopyCategory C (.up ℤ)) :
     F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P) ⊗
         F.leftDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj B) ⟶
@@ -136,8 +127,7 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
           (F.mapHomotopyCategory (.up ℤ)).obj P) :=
   tensorModelTargetWith F F.leftDerivedFunctor F.leftDerivedFunctorCounit B P
 
-/-- The target comparison is invertible on representatives with K-flat image.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+/-- The target comparison is invertible on representatives with K-flat image. -/
 theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))
     (hP : F.kFlatMap P) : IsIso (tensorModelTarget F B P) := by
   have := isIso_μNatTrans_Qh_app_app_of_kFlat
@@ -154,8 +144,7 @@ theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))
 variable [F.IsLeftAdjoint] [F.Monoidal]
 
 /-- The common map: the tensor counit, the exact-F counit, then the ordinary
-comonoidal comparison.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+comonoidal comparison. -/
 @[irreducible] noncomputable def tensorModelMapWith
     (G : DerivedCategory C ⥤ DerivedCategory D)
     (γ : DerivedCategory.Qh ⋙ G ⟶
@@ -207,14 +196,7 @@ local instance : BraidedCategory (DerivedCategory C) :=
 local instance : BraidedCategory (DerivedCategory D) :=
   derivedTensorPresentationBraiding
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
-/-- Normalize a tensor route by its tensor/counit square and the ordinary braiding.
-
-Naturality moves the single comparison through the tensorator. The braiding equation
-moves the coefficient to the first factor. The tensor/counit square then replaces the
-comparison by the ordinary tensor map. The tensor presentation's defining equation and
-naturality of the counit give the displayed model map.
-
-Source: Bhatt--Scholze, Remark 6.8.15; the canonical derived tensor/counit equations. -/
+/-- Normalize a tensor route by its tensor/counit square and the ordinary braiding. -/
 theorem CategoryTheory.Functor.tensorModelRoute_fac (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [F.IsLeftAdjoint] [F.Monoidal]

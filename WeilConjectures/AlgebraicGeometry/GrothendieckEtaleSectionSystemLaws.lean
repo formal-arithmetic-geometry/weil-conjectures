@@ -99,16 +99,7 @@ theorem Etale.grothendieckRelativeSectionMap_id {R S : Scheme.{u}} (f : S ⟶ R)
   apply (cancel_epi a).1
   simpa only [Category.comp_id] using ha
 
-/-- The actual presheaf section system over the category of stages mapping to i.
-
-For composition, move the first pullback-pasting restriction across the second unit by presheaf
-naturality, then move the first coefficient composition isomorphism across that unit by sheaf
-naturality. Inverse-image associativity combines the two coefficient isomorphisms. The
-composite-unit equation combines the units, and pullback-pasting associativity cancels the
-remaining inverse pasting map. For identity, the unit for an identity scheme map and all other
-comparison factors are isomorphisms. Composition makes this map idempotent; cancel it to get
-identity. These laws give the diagram functor laws. Their composition formula and the cone
-equation give naturality of the cocone. -/
+/-- The actual presheaf section system over the category of stages mapping to i. -/
 noncomputable def Etale.relativeSectionDiagram
     {I : Type u} [SmallCategory I] (D : I ⥤ Scheme.{u}) (i : I)
     (F : Sheaf (D.obj i).smallEtaleTopology A) :

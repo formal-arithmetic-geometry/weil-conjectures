@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.FiniteTypeLiftNilpotent
 /-!
 # Local finite type across a finite order thickening
 
-Source: Stacks Project, More on Morphisms, Lemma 37.3.3 (Tag 09ZW), part (2).
+## References
+
+* [Stacks, Tag 09ZW](https://stacks.math.columbia.edu/tag/09ZW)
 -/
 
 @[expose] public section
@@ -97,23 +99,7 @@ private theorem finiteType_quotient_appLE_of_closed_baseChange
     (f'.appLE U V e) (q.appLE T W hwle) (p.appLE V W le_rfl) hpush.flip ha hc
 
 /-- A morphism is locally of finite type exactly when its base change along a finite order
-thickening is locally of finite type.
-Source: Stacks Project, Tag 09ZW, part (2).
-
-Proof:
-1. Local finite type passes from `f'` to its base change
-   (def-pc-base-change, lem-weil-pbc-lft-base-change; Stacks Tag 01T4).
-2. For affine opens `U' = Spec A'` and `V' = Spec B'` with `f'(V') ⊆ U'`, the
-   defining ideal `I` of `S` on `U'` is nilpotent. The inverse image of
-   `V'` in the pullback is the affine open `Spec (B'/IB')` over `Spec (A'/I)`. This follows from the affine fibre product and the tensor
-   description of the quotient by the extended ideal.
-3. If the base change is locally of finite type, each `A'/I → B'/IB'` is of finite type
-   (lem-weil-pbc-lft-affine-pairs, Stacks Tag 01T2). Lift its generators to `B'`.
-   Nakayama applied to the resulting polynomial-algebra map gives finite type of
-   `A' → B'` (lem-weil-pbc-finite-type-lift-nilpotent, Stacks Tag 00DV).
-   Applying the affine-pairs criterion again gives local finite type of `f'`.
-   The nilpotent ring lemma directly handles any finite order; the source instead
-   reduces inductively to the square-zero case before this affine argument. -/
+thickening is locally of finite type. (Stacks, Tag 09ZW) -/
 theorem locallyOfFiniteType_iff_of_finiteOrderThickening
     {S S' X' : Scheme.{u}} (i : S ⟶ S') (f' : X' ⟶ S')
     (hi : IsFiniteOrderThickening i) :

@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Independence of the top section class
 
-Source: Stacks Project, Tags 01E4 and 01FB.
+## References
+
+* [Stacks, Tags 01E4 and 01FB]
 -/
 
 @[expose] public section
@@ -127,24 +129,7 @@ private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
 
 -- The pullback and stalk types need additional elaboration heartbeats.
 /-- The defined local class map can be computed on the top open using any
-injective resolution of the pulled-back module.
-Source: Stacks Project, Lemma 20.7.3 (Tag 01E4).
-
-Proof: Let R be the fixed injective resolution in localDirectImage_stalk_class
-and let h be the first projection. Lift the identity of the pulled-back module
-from R to K by InjectiveResolution.desc. The augmentation equation gives
-naturality of isoRightDerivedObj for global sections and for pushforward h.
-The forgetful homology comparison is natural for this lift. Global sections of
-the lift agree degreewise with top sections of its direct image. Naturality of
-the exact-sheafification homology comparison and the sheafification counit makes
-sectionCohomologyComparison natural; the adjunction makes sectionCohomologyTheta
-natural. Evaluate at top and concatenate these squares. The map on homology of
-the pushed lift cancels by naturality of isoRightDerivedObj.inv, and the derived
-identity map is identity. This identifies the top class maps computed with R and
-K. Compose with the top germ and evaluate at eta. The definition of
-localDirectImage_stalk_class is exactly the first composite. No restriction to
-a smaller open is involved, and the argument works for degree zero and zero
-modules without assuming that theta is invertible on sections. -/
+injective resolution of the pulled-back module (Stacks, Tag 01E4). -/
 theorem localDirectImage_stalk_class_top_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (F : X.Modules) (p : ℕ)
     (K : InjectiveResolution

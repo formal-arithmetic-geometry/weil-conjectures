@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompat
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMaps
 
 /-! # The degree-zero finite-twist evaluation as a flat single-object pairing
-
-Source: the evaluation identification of the projective-line decomposition.
 -/
 
 @[expose] public noncomputable section
@@ -20,14 +18,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- Express the fixed degree-zero evaluation using the flat single-object pairing.
-
-Source: Stacks Tag 06YQ and the evaluation step of thm-amb-p1-decomposition.proof.md.
-
-Proof: unfold the degree-zero evaluation and its flat tensor comparison. Use the
-actual internal-Hom evaluation appearing in that definition. The positive Tate sheaf
-is the finite line. The cached single-object functor is definitionally the
-canonical degree-zero functor, and flatness proofs are irrelevant, so the two remaining
-composites coincide. This also holds for zero coefficients and empty schemes. -/
+(Stacks, Tag 06YQ.) -/
 theorem finiteTwistDegreeZeroEvaluation_pairing
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤)))

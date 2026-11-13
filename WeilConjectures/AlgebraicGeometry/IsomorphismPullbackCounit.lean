@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Exact computation of pullback along scheme isomorphisms
 
-Source: Stacks Project, Tags 0D5S and 0098.
+## References
+
+* Stacks Project, Tags 0D5S and 0098.
 -/
 
 @[expose] public section
@@ -23,13 +25,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
-/-- The pinned derived tensor-pullback counit is invertible on K-flat complexes.
-Proof: the chosen derived-pullback counit computes pullback on K-flat complexes.
-Both that counit and the pinned counit exhibit the same left-derived functor.
-The canonical left-derived comparison is therefore invertible, and its factorization
-identifies the pinned counit with a composite of two invertible morphisms.
-Source: Stacks Project, Tag 0D5S, derived pullback and its composition.
-This is the K-flat computation step of. -/
+/-- The pinned derived tensor-pullback counit is invertible on K-flat complexes. -/
 theorem counit_isIso_kFlat
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -59,21 +55,7 @@ theorem counit_isIso_kFlat
   infer_instance
 
 /-- The pinned derived tensor-pullback counit is invertible on every complex
-when the scheme morphism is invertible.
-
-Proof: The scheme isomorphism is an open immersion. Tensor pullback and open
-restriction are left adjoint to the same pushforward functor, so uniqueness of
-left adjoints identifies tensor pullback with exact restriction. It therefore
-preserves homology and quasi-isomorphisms. Take a K-flat resolution s:P→M.
-The derived-pullback construction gives an invertible counit at P; uniqueness
-of left-derived functors transfers this assertion to the pinned counit. In its
-naturality square for s, the derived image of Qh(s) and Qh of the termwise
-pullback of s are invertible, since both maps are quasi-isomorphisms. The
-counit at P is invertible too. Thus the counit at M is invertible by cancellation.
-No K-flatness or boundedness assumption on M is needed. Zero complexes and
-empty schemes satisfy the same naturality argument.
-Source: Stacks Project, Tag 0D5S, pullback composition; Tag 0098,
-stalk formula for pullback, specialized to an isomorphism. -/
+when the scheme morphism is invertible. -/
 theorem isIso_counit_of_isIso
     [d : ∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

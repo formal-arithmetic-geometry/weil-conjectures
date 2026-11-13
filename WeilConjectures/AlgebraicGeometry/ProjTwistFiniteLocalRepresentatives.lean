@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ProjTwistFiniteValues
 /-!
 # Finite localization data of twist sections
 
-Source: Stacks Project, Tags 01MN and 01M7.
+## References
+
+* Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -23,20 +25,8 @@ universe v
 open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
 
-/-- A finite principal cover carries fractions representing the section on every chart.
-Source: Stacks Project, Tag 01M7, construction preceding Definition 27.8.3 (Tag 01M6).
-
-Proof: around each point take a local homogeneous fraction for the section. Refine its
-neighborhood by a homogeneous basic open contained in D₊(f), multiplying numerator and
-denominator by its defining element and f. The new denominator h has positive degree c.
-The affine chart sends this open to the principal open of h^b/f^c in A_(f).
-Quasi-compactness extracts finitely many such opens; since they cover Spec(A_(f)), their
-chart elements span the unit ideal. In A_f localized at h^b/f^c, h is invertible, so the
-chosen fraction defines t. At every point where the chart element is invertible, the
-ordinary map A_f → A_p extends by the module localization universal property. This
-extension is linear for the A_(f)-action through A_p and sends t to the section value.
-The chart cover supplies an invertible chart element at each point. For an empty chart,
-use the empty family: A_(f) is the zero ring and there are no evaluation conditions. -/
+/-- A finite principal cover carries fractions representing the section on every chart
+(Stacks, Tag 01M7). -/
 theorem twist_finiteLocal_representatives
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

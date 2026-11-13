@@ -23,7 +23,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Open restriction and comparison of K-flat tensor homology
 
-Source: Stacks Project, Tags 06YH, 08CG and 06YB.
+## References
+
+* Stacks Project, Tags 06YH, 08CG and 06YB.
 -/
 
 @[expose] public section
@@ -205,27 +207,7 @@ private theorem site_kFlat_tensor_homology_iso
 
 /-- A roof identifying a local K-flat complex T with the restriction of Q identifies
 its tensor homology with the open restriction of the tensor homology of any global
-K-flat resolution P of Q. Source: Stacks Project, Tags 06YH, 08CG and 06YB.
-
-Proof: open restriction is exact and commutes naturally with sheaf tensor.
-The single-complex comparison therefore identifies tensor homology before and
-after restriction. It preserves K-flatness, so the
-restriction of P is a K-flat resolution of the restriction of Q. The roof s,t
-identifies that restriction with T in the derived category. Use DerivedCategory.right_fac to
-express the resulting isomorphism by a common
-roof from L to the restricted P and T. Both legs are quasi-isomorphisms, since
-localization reflects them. Take a K-flat resolution K of L. Its composites with
-the two legs are quasi-isomorphisms between K-flat complexes.
-To see why a quasi-isomorphism between K-flat complexes remains a quasi-isomorphism
-after tensoring with the arbitrary sheaf F restricted to U, first take a K-flat
-resolution B of that sheaf in degree zero. Tensoring the map with B preserves
-quasi-isomorphisms by the acyclic-cone criterion and symmetry. Tensoring B to F[0]
-with either K-flat endpoint also preserves quasi-isomorphisms. The resulting
-commutative square and two-of-three prove the claim for F[0]. Taking homology of
-the zigzag gives an isomorphism to the tensor with T. Compose it with the open
-restriction homology and total-tensor comparisons. The construction is valid for
-unbounded complexes,
-empty opens, and arbitrary coefficient sheaves; it needs no degree bounds. -/
+K-flat resolution P of Q. (Stacks, Tags 06YH, 08CG and 06YB) -/
 theorem open_kFlat_tensor_homology_comparison
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)

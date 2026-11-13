@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Injectivity of the structure-sheaf unit at a nonempty flat fibre
 
-Source: Stacks Project, Tag 0E62 (the injective part of the proper-flat criterion),
-with the flat local-ring argument in Mathlib's `epi_of_flat_of_surjective`.
+## References
+
+* [Stacks Project, Tag 0E62](https://stacks.math.columbia.edu/tag/0E62) (the injective part of
+  the proper-flat criterion)
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Flat local ring maps are faithfully flat and therefore injective.
-Source: Mathlib, `AlgebraicGeometry.epi_of_flat_of_surjective`, stalkwise argument. -/
+/-- Flat local ring maps are faithfully flat and therefore injective. -/
 private theorem flat_stalk_injective {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     (x : X) : Function.Injective (f.stalkMap x) := by
   algebraize [(f.stalkMap x).hom]
@@ -43,13 +44,7 @@ private theorem flat_stalk_injective {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 open Opposite TopologicalSpace in
-/-- The ordinary structure map is injective on the stalk at an image point.
-Source: the flat local-ring argument of Mathlib's `epi_of_flat_of_surjective`,
-combined with `TopCat.Presheaf.germ_eq` and `Scheme.Hom.germ_stalkMap_apply`.
-If two direct-image germs agree, their sections agree after restriction to a base
-neighbourhood. Their images in the local ring upstairs agree, so faithful flatness
-makes their base ring germs agree. A second restriction gives equality of the
-underlying abelian germs. -/
+/-- The ordinary structure map is injective on the stalk at an image point. -/
 private theorem structure_unit_stalk_injective {X S : Scheme.{u}} (f : X ⟶ S)
     [Flat f] (x : X) : Function.Injective
       (Scheme.Modules.Hom.stalkLinearMap
@@ -83,22 +78,8 @@ private theorem structure_unit_stalk_injective {X S : Scheme.{u}} (f : X ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Injective part of the local proper-flat structure-sheaf criterion.
-Source: Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`, localized
-at the fixed point. The shorter injectivity argument uses Mathlib's flat local-ring
-argument in `epi_of_flat_of_surjective` and the structure-sheaf adjunction comparison
-of Stacks Tags 0096 and 01CA.
-
-Proof: The fibre is nonempty: otherwise its global sections are the zero ring,
-contradicting injectivity of the assumed isomorphism from the residue field.
-Choose a point x above s. The flat local homomorphism O_{S,s} → O_{X,x} is faithfully
-flat and hence injective. Equality of germs in the ordinary direct image gives
-sections equal after restricting to a neighbourhood of s. Taking germs at x and
-using this ring injection gives equality of the input ring germs, hence of their
-underlying abelian germs. Finally, `tensorPullbackObjUnitToUnit_isIso` identifies
-the chosen adjunction unit followed by pushforward of the structure-sheaf comparison
-with the ordinary structure map. Compose an equality under the chosen unit with
-that comparison and apply the injectivity just proved. -/
+/-- Injective part of the local proper-flat structure-sheaf criterion
+(Stacks, Tag 0E62). -/
 theorem injective_structureSheafMap_stalk_of_proper_flat_fiber
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f] (s : S)

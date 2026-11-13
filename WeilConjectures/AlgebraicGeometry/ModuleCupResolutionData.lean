@@ -12,9 +12,12 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Acyclic resolution data for module cup products
 
-Source: Stacks Project, Cohomology, section-cup-product and Tag 0FKV.
 The characterization uses resolutions with a sectionwise bilinear chain pairing.
 It determines the derived cup product; Godement resolutions supply such pairings.
+
+## References
+
+* Stacks Project, Cohomology of Sheaves, Section 20.31, and Tag 0FKV.
 -/
 
 @[expose] public section
@@ -28,16 +31,15 @@ open CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- The class of a cocycle, using Mathlib's kernel description of the cycles.
-Source: Stacks, section-cup-product. -/
+/-- The class of a cocycle, using Mathlib's kernel description of the cycles. -/
 def cupCycleClass {R : Type uM} [Ring R] (K : CochainComplex (ModuleCat.{uM} R) ℕ)
     (n : ℕ) (z : (K.sc n).moduleCatLeftHomologyData.K) : K.homology n :=
   (K.sc n).homologyπ ((K.sc n).moduleCatCyclesIso.inv z)
 
 /-- A resolution that computes module cohomology, with a comparison to an injective
 resolution over the original coefficient sheaf. The global comparison must induce
-isomorphisms; this holds, in particular, for flasque resolutions.
-Source: Stacks, Tags 01DZ and 0FKV. -/
+isomorphisms; this holds, in particular, for flasque resolutions (Stacks, Tags 01DZ
+and 0FKV). -/
 structure CupAcyclicResolution {X : Scheme.{uM}} (F : X.Modules) where
   K : CochainComplex X.Modules ℕ
   augmentation : (CochainComplex.single₀ X.Modules).obj F ⟶ K
@@ -49,8 +51,8 @@ structure CupAcyclicResolution {X : Scheme.{uM}} (F : X.Modules) where
     ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
       (ComplexShape.up ℕ) |>.map comparison) n)
 
-/-- The cohomology class represented by a global cocycle in an acyclic resolution.
-Source: Stacks, Tags 01DZ and 0FKV. -/
+/-- The cohomology class represented by a global cocycle in an acyclic resolution
+(Stacks, Tags 01DZ and 0FKV). -/
 def CupAcyclicResolution.class {X : Scheme.{uM}} {F : X.Modules}
     (D : CupAcyclicResolution F) (n : ℕ)
     (z : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
@@ -67,9 +69,7 @@ def CupAcyclicResolution.class {X : Scheme.{uM}} {F : X.Modules}
 
 /-- A sectionwise O-linear chain pairing of three nonnegative acyclic resolutions,
 restricting in degree zero to the ordinary tensor of coefficient sections.
-The sign in Leibniz is the total tensor sign. No compatibility of cup products on
-cohomology is assumed in this data.
-Source: Stacks, section-cup-product and Tag 0FKV. -/
+The sign in Leibniz is the total tensor sign (Stacks, Tag 0FKV). -/
 structure CupResolutionPairing {X : Scheme.{uM}} (F G : X.Modules) where
   left : CupAcyclicResolution F
   right : CupAcyclicResolution G

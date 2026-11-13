@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 
 /-! # Composition coherence for Picard pullback comparisons
 
-Source: Stacks Project, Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 0095 and 0096.
 -/
 
 @[expose] public section
@@ -52,21 +54,7 @@ private theorem pullbackUnitIso_comp
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The unit comparison respects pullback composition.
-Source: Stacks Project, Definition 6.26.1(2), Tag 0095; Lemma 6.26.2, Tag 0096.
-
-Proof: First prove the inverse ordinary unit-composition equation. Both maps
-start at O_Z, so unit_hom_ext reduces it to evaluation at 1 on the top open.
-pullbackSection_one_eq identifies the inverse unit isomorphism at 1 with the
-pullback of 1. pullbackSection_pullbackSection identifies its image under the
-inverse composition comparison with the twice-pulled section. Naturality of
-the unit at the inverse unit comparison for l identifies the other route with
-this same section. Equality of inverse maps of isomorphisms gives the forward
-ordinary equation. Finally expand the Picard unit and composition isomorphisms.
-Naturality of picardTensorComparison k moves the unit map for l across that
-comparison. Apply the ordinary equation, then cancel the inverse and hom of
-the comparison at k followed by l. These section and adjunction identities
-include zero rings, empty schemes and identity morphisms. -/
+/-- The unit comparison respects pullback composition (Stacks, Tags 0095 and 0096). -/
 theorem picardTensorUnitIso_comp
     {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) :
     (tensorPullback k).map (picardTensorUnitIso l).hom ≫

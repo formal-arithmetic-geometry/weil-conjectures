@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisOpenCompositionRestriction
 
 /-! # Left-hand composition normalization
 
-Source: Stacks Project, Tags 08FE and 0D5T.
+## References
+
+* [Stacks, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks, Tag 0D5T](https://stacks.math.columbia.edu/tag/0D5T)
 -/
 
 @[expose] public section
@@ -30,17 +33,7 @@ set_option linter.unusedVariables false in
 set_option maxHeartbeats 500000 in
 -- The exact restriction factors require additional categorical instance conversions.
 /-- Left-hand composition normalization to the complex-composition composite.
-Source: Stacks Project, Tags 08FE, 0D5T and 079V.
-
-Proof: Apply schemeMVOpenComposition_complex_localization to the termwise restriction J.
-Naturality of the derived composition isomorphism along the inverse exact X-restriction
-factor moves this factor from the source to the restricted direct image on the right.
-Expand only the open-image localization and canonical open comparison. Postcompose the
-unit equation with open direct image of that factor and the inverse derived restriction
-comparison. Functoriality combines these three maps. This calculation involves no image
-component, no exact Y-restriction factor, and no injectivity hypothesis.
-The argument applies to arbitrary complexes, empty and full opens, and identity morphisms:
-only functoriality, naturality and inverse-isomorphism equations are used. -/
+(Stacks, Tags 08FE, 0D5T, 079V) -/
 theorem schemeMV_composition_left_normalization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

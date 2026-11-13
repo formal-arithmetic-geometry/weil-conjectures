@@ -16,11 +16,8 @@ set_option autoImplicit false
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- Section-element form of the ordinary open counit compatibility.
-Source: Stacks Project, Cohomology of Sheaves, Tags 08FE and 08BV.
-The proof expands the two comparison maps and counits on an open and an element;
-functoriality of the presheaf restriction maps and thinness of opens identify the
-resulting maps. -/
+/-- Section-element form of the ordinary open counit compatibility
+(Stacks, Tags 08FE and 08BV). -/
 theorem schemeMVOrdinaryOpenCounit_square_section_element
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace))

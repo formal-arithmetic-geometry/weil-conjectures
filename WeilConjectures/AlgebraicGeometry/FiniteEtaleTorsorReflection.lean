@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.TorsorUnitEquivarianceReflection
 /-!
 # Finite étale equivalences and transport of torsors
 
-Source: Stacks Project Tag 0A5G, final paragraph, and Tag 03RV.
+## References
+
+* Stacks Project, Tags 0A5G and 03RV
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Transport by inverse image reflects isomorphisms of finite constant torsors.
-Source: Stacks Project Tag 0A5G, final paragraph, using Tag 03RV.
-
-Proof: A torsor under the finite constant group M is étale locally the finite set M,
-so Tag 03RV represents its underlying sheaf by a finite étale scheme. Yoneda represents
-each constant action map. Inverse image of a representable is the representable of its
-base change. For each m in M, translation is a sheaf endomorphism, represented by Yoneda.
-The displayed equation for g the constant section m says its inverse image agrees
-with translation by m on τ T: after adjunction the two maps agree on every T(W),
-so the adjunction bijection makes them equal. Any section of the constant sheaf
-is locally constant; naturality and the sheaf condition extend this equality to
-all coefficient sections. Thus the equation specifies the full pulled-back action.
-An isomorphism between τ T₁ and τ T₂ is therefore an equivariant isomorphism between
-the base changes of the representatives. Fullness lifts it and its inverse; faithfulness
-lifts their inverse equations and each equivariance equation. Yoneda then gives an
-isomorphism of the original sheaf torsors. Empty schemes and the trivial group are
-included: the argument uses neither a point nor a nonempty base. -/
+(Stacks, Tag 0A5G, using Tag 03RV.) -/
 theorem finiteEtale_reflects_torsor_transport
     [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)

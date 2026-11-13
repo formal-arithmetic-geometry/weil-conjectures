@@ -32,21 +32,7 @@ private theorem transport_left_congr
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The map from the U-model's fpqc pullback to the B-model is constant on
-pairs of points with the same image in the U-model.
-Source: Stacks Project, Descent, Tag 02W3 (nested affine models), using Tag 02W0.
-
-Proof: For two points g and h of V_U with equal composites to W_U, the Cartesian
-square hp U gives equal composites to U. Let a and b be their images in X_U.
-Transport g along E U from a to b. Invariance says its image in W_U is still that
-of g, hence that of h, and its image in X_U is b. The universal property of hp U
-therefore identifies the transported point with h. Write j: X_U -> X_B and
-c: V_U -> V_B for the restriction maps. The two points a j and b j have the
-same image in B. Compatibility hcompat U and hcompat B identifies the images
-in V of their respective transports under E U and E B. Projection V_B -> V
-is a monomorphism (a base change of the open immersion B -> S), so this equality
-in V identifies c after E U-transport with E B-transport after c. Invariance
-hinv B now identifies the images of g c and h c in W_B. This proof uses only
-universal properties and monomorphisms, so includes empty opens and objects. -/
+pairs of points with the same image in the U-model (Stacks, Descent, Tags 02W3 and 02W0). -/
 theorem fpqc_affine_model_transition_reconstruction
     {X S : Scheme.{u}} (f : X ⟶ S)
     {V : Over X} (D : Over.DescentDatum f V)

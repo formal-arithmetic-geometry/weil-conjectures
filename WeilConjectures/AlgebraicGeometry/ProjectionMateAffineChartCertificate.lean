@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectionMateAffineChartTransport
 
 /-! # A local affine comparison certificate for a supplied projection mate
 
-Source: Stacks Project, Tag 08EU, affine-local reduction of the projection formula.
+## References
+
+* Stacks Project, Tag 08EU.
 -/
 
 @[expose] public section
@@ -28,39 +30,8 @@ namespace AlgebraicGeometry
 -- Eliminating the nested chart witnesses elaborates two standard localization instances.
 /-- Every affine chart supplies an affine projection mate whose invertibility implies
 invertibility of the original mate on the cohomology sheaves restricted to that chart.
-There is no affine projection-formula hypothesis in this comparison theorem.
-Source: Stacks Project, Tag 08EU, first sentence of the proof; the localization
-transport argument in lem-pc-qcqs-projection-mate-affine-descent, steps 1--3.
-
-Proof: let A be the ring of sections of V and Z the inverse-image open in X.
-Quasi-compactness of f makes Z quasi-compact; open restriction preserves
-quasi-separatedness. Identify V with Spec A by its canonical affine chart.
-Use the standard derived localizations, of morphism universe u+1, on Z and Spec A.
-Exact open restriction is a localization, with fully faithful derived right adjoint:
-on a K-injective representative the counit restricts direct image back to the same
-complex. Write RY and RX for restriction to V and its inverse image. Pullback and
-tensor commute naturally with restriction, and direct image commutes naturally with
-target restriction. Consequently Lf* takes maps inverted by RY to maps inverted by RX,
-and Rf* takes maps inverted by RX to maps inverted by RY. Localize the supplied
-adjunction p along RY and RX: its unit and counit descend by naturality, and their
-triangle identities remain true after restriction. This gives the local adjunction.
-Both bifunctors in the restriction of t factor through RY in each variable. Lift t
-and its inverse through the product localization (equivalently evaluate on the fully
-faithful right adjoints and conjugate by localization counits). Naturality with the
-localization units identifies the lifted components with the original restricted
-components, and their two inverse identities give the local natural isomorphism.
-The localized adjunction counit at RX(L) is the image of the original counit at L,
-conjugated by the direct-image and pullback comparisons. Expanding the counit formula
-for homEquiv and using naturality of the lifted t therefore identifies restriction
-of the original mate with the local mate, up to invertible source and target maps.
-Canonical equivalences
-between derived localizations and the affine chart isomorphism transport the tensor,
-pullback, direct image, q and s to the standard affine categories. Restrict M and L
-and transport them to obtain N and E; exact restriction preserves quasi-coherent
-cohomology. An invertible affine mate remains invertible under these equivalences.
-Since exact restriction commutes with cohomology, its cohomology in each degree is
-precisely the restriction of the original cohomology map, proving the implication.
-An empty chart gives zero restricted cohomology and the same construction. -/
+There is no affine projection-formula hypothesis in this comparison theorem
+(Stacks, Tag 08EU). -/
 theorem exists_projectionMate_affineChart_certificate
     (X Y : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]

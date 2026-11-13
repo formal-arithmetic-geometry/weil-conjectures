@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFo
 
 /-! # Computing the fixed comparison on arbitrary injective resolutions
 
-Source: Stacks Project, Tags 03FD and 015E.
+## References
+
+* [Stacks, Tags 03FD and 015E]
 -/
 
 @[expose] public section
@@ -39,8 +41,8 @@ abbrev abelianSections (X : Scheme.{u}) :=
   sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
     (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
 
-/-- The concrete comparison from module cohomology to the sections of a resolution.
-Source: Stacks Project, Tag 01DZ, injective-resolution computation. -/
+/-- The concrete comparison from module cohomology to the sections of a resolution
+(Stacks, Tag 01DZ). -/
 def moduleResolutionIso (X : Scheme.{u}) {F : SheafOfModules.{u} (moduleRings X.toRingedSpace)}
     (I : InjectiveResolution F) (p : ℕ) :
     (forget₂ _ AddCommGrpCat.{u}).obj
@@ -56,8 +58,8 @@ def moduleResolutionIso (X : Scheme.{u}) {F : SheafOfModules.{u} (moduleRings X.
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The Ext comparison to sections of a specified module resolution, using the
-forgotten augmentation and its canonical acyclic-resolution comparison.
-Source: Stacks Project, Tags 03FD, 015E and 06XR. -/
+forgotten augmentation and its canonical acyclic-resolution comparison
+(Stacks, Tags 03FD, 015E and 06XR). -/
 def abelianResolutionIso (X : Scheme.{u}) {F : SheafOfModules.{u} (moduleRings X.toRingedSpace)}
     (I : InjectiveResolution F) (p : ℕ) :
     AddCommGrpCat.of (H F p) ≅
@@ -177,21 +179,8 @@ private theorem standardResolution_equiv
     (moduleResolutionIso X I p) (abelianResolutionIso X I p) (by rfl) (by rfl) x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The fixed comparison can be computed on any injective module resolution.
-Source: Stacks Project, Tag 015E, naturality of acyclic-resolution comparisons;
-Tag 03FD, acyclicity of forgotten injective modules.
-
-Proof: Lift the identity from I to the standard module resolution J. Naturality
-of isoRightDerivedObj and of exact forgetting of homology makes the module
-comparison commute with the section homology of this lift. Apply
-acyclicComparison_naturality to the forgotten lift and augmentations: their
-terms are section-acyclic by forgottenInjectiveAcyclic. Its inverse comparison
-commutes with the same section homology map. Compose the two equations to
-identify moduleResolutionIso followed by inverse abelianResolutionIso for I
-and J. Evaluate the standard-resolution formula and apply the inverse-hom
-identity for abelianResolutionIso on I. No invertibility assertion for the
-section homology map is needed. The argument includes p=0, empty schemes and
-zero modules, and involves no scheme morphism or edge map. -/
+/-- The fixed comparison can be computed on any injective module resolution
+(Stacks, Tags 015E and 03FD). -/
 theorem moduleCohomologyExtResolutionEquiv_normalization
     (X : Scheme.{u}) {F : SheafOfModules.{u} (moduleRings X.toRingedSpace)}
     (I : InjectiveResolution F) (p : ℕ)

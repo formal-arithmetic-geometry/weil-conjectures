@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorNormalization
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 /-! # Module-object and ringed-topos derived comparison
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
-03D7, 03DI and 03DJ; Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
-
 ## Main definitions and statements
 
 - `ordinary_exact_flat_kflat`, `ordinary_monoidal`: the ordinary equivalence clauses.
@@ -21,6 +18,18 @@ Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
 - `tensorPullComparison`, `delta_comparison`, `mu_comparison`: specified tensor maps.
 - `composition_comparison`, `projection_comparison`: composition and the proper mate.
 - `open_homEquiv`, `openProjection_comparison`: open adjunction and its unit mate.
+
+## References
+
+* [Stacks, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
 -/
 
 @[expose] public noncomputable section
@@ -196,12 +205,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 -- Comparing the two normalized monoidal witnesses elaborates the sheaf tensor constraints.
-/-- The chosen ordinary tensor maps obey all symmetric-monoidal coherence diagrams.
-Source: Stacks 03EK.
-Proof: these are exactly the maps chosen from internal_section_tensor_comparison,
-whose proof checks the naturality, associator, unitors and symmetry on local pure
-tensors. The regular-unit comparison fixes local scalars, so the unit diagrams
-are the scalar action laws. Local generation extends each equality to the sheaf. -/
+/-- The chosen ordinary tensor maps obey all symmetric-monoidal coherence diagrams
+(Stacks, Tag 03EK). -/
 theorem ordinary_monoidal (X : Scheme.{u}) :
     (∀ (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N'),
       (equivalence Λ X).functor.map (f ⊗ₘ g) ≫
@@ -251,8 +256,8 @@ theorem ordinary_monoidal (X : Scheme.{u}) :
 
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
-/-- The actual module-object proper projection arrow, the adjoint of counit after delta.
-Source: Stacks 0B56. -/
+/-- The module-object proper projection arrow, the adjoint of the counit after delta
+(Stacks, Tag 0B56). -/
 def internalProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (internalModules Λ X)) (L : DerivedCategory (internalModules Λ Y)) :
     ((CondensedRing.derivedTensor Λ Y).obj ((internalDerivedPushforward Λ f).obj K)).obj L ⟶
@@ -264,8 +269,8 @@ def internalProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app K)).app
           ((internalDerivedPullback Λ f).obj L)))
 
-/-- The precise ringed projection mate alpha, in the dependency's uncurried interface.
-Source: Stacks 0B56. -/
+/-- The ringed projection mate `α`, in the dependency's uncurried interface
+(Stacks, Tag 0B56). -/
 def projection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (modules Λ X)) (L : DerivedCategory (modules Λ Y)) :
     (tensor Λ Y).obj ((derivedPushforward Λ f).obj K, L) ⟶
@@ -273,14 +278,8 @@ def projection {X Y : Scheme.{u}} (f : X ⟶ Y)
   derivedProjectionFormulaMate (derivedPullback Λ f) (derivedPushforward Λ f)
     (derivedAdjunction Λ f) (tensor Λ Y) (tensor Λ X) (tensorPullComparison Λ f) K L
 
-/-- Equality of the actual oplax tensor natural transformations under comparison.
-Inverting this equation identifies the actual lax maps as well.
-Source: Stacks 07A4.
-Proof: the normalized underived maps both send s tensor (m tensor n) to
-(s tensor m) tensor (1 tensor n). Apply this equality to flat-term K-flat
-representatives and totalize with the same signs. The representative square in
-tensorPullComparison_existsUnique and uniqueness of two-variable derived tensor
-in lem-weil-pbc-site-derived-tensor-descent give the equation on every pair. -/
+/-- Equality of the oplax tensor natural transformations under comparison.
+Inverting this equation identifies the lax maps as well (Stacks, Tag 07A4). -/
 theorem delta_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : DerivedCategory (internalModules Λ Y)) :
     (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫
@@ -296,14 +295,8 @@ theorem delta_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact third_conjunct (section_derived_tensor_normalization Λ f) M N
 
 -- The comparison instances contain large sheaf tensor constraints.
-/-- The module-object proper projection is the precise ringed projection mate alpha.
-This statement makes no invertibility assertion about the projection arrow.
-Source: Stacks 0B56.
-Proof: derived_homEquiv identifies the specified Hom bijection and counit, and
-delta_comparison identifies its tensor arrow. Their composite therefore has the
-same adjoint transpose, which is exactly derivedProjectionFormulaMate used in
-ringedProjectionMateExact. Naturality and unit normalization follow from the same
-identifications and the adjunction triangle identities. -/
+/-- The module-object proper projection is the ringed projection mate `α`. This statement
+makes no invertibility assertion about the projection arrow (Stacks, Tag 0B56). -/
 theorem projection_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (internalModules Λ X)) (L : DerivedCategory (internalModules Λ Y)) :
     (derivedEquivalence Λ Y).functor.map (internalProjection Λ f K L) ≫

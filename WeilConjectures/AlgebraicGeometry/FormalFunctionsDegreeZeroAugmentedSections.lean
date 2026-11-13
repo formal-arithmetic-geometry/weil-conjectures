@@ -23,7 +23,9 @@ import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # Canonical theta on augmented sections
 
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB, degree-zero formulas.
+## References
+
+* Stacks Project, Tags 01E4 and 01FB
 -/
 
 @[expose] public section
@@ -161,30 +163,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Explicit resolution comparisons require additional elaboration steps.
 /-- A canonical theta sends the fixed direct-image augmentation of a germ of a section
 of any module to the global-sections augmentation of its tensor-pullback unit image.
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB (degree zero).
-
-Proof: Choose an injective resolution I of F and a resolution J of its tensor
-pullback F'. Restrict these termwise to U = f inverse V and W = i_n inverse U.
-Restriction is exact and preserves injectives, so these give the restricted
-resolutions in FlatBaseChangeOpenChoices. Define psi by restricting the tensor
-adjunction unit and transposing under the restriction adjunction; functoriality
-of pushforward gives its unit square. No flatness of i_n is used. Identify
-sections by restrictAppIso and the inclusion-image-top equality.
-Augment the restriction of t to U by the global-sections toRightDerivedZero map,
-obtaining xi. Express this map using InjectiveResolution.toRightDerivedZero_eq.
-The augmentation and component equations of the restricted resolution identify
-the resulting zero-cycle with I's augmentation of t on U. The section class
-map takes this cycle to its homology-sheaf class by the sheafification counit;
-its composite with the inverse resolution comparison is thus the direct-image
-augmentation of t on V. Naturality of germs identifies its germ with the stalk
-augmentation applied to germ(t). Apply IsFormalFunctionsTheta to xi.
-The zero-augmentation square for the cohomology h-map of psi identifies the
-right side with the augmented restriction of the original tensor-unit image
-of t, by the unit square. The inequality hV identifies W with top. On this
-open the restriction of sections is an isomorphism, as are the degree-zero
-augmentation maps, so the degree-zero cohomology restriction is injective.
-Cancel it to get the claimed equality. Empty fibres, the zero module and t=0
-are covered by the same augmentation identities. -/
+(Stacks, Tags 01E4 and 01FB.) -/
 theorem formalFunctions_degreeZero_augmented_sections {X Y : Scheme.{u}}
     (f : X ⟶ Y) (y : Y) (F : X.Modules) (n : ℕ)
     (θ : formalFunctionsStalk f y F 0 →ₗ[Y.presheaf.stalk y]

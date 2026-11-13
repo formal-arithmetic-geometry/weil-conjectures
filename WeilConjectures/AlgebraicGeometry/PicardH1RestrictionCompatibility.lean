@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.UnitsTorsorClosedRestriction
 /-!
 # Picard restriction and first cohomology of units
 
-Source: Stacks Project, Tag 09NY, final sentence of the proof, with Tags 02UV and 09NU.
+## References
+
+* Stacks Project, Tags 09NY, 02UV and 09NU
 -/
 
 @[expose] public section
@@ -28,21 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The Hilbert-90 identification sends restriction of an invertible module to restriction
 of its cohomology class. The existential witness asserts invertibility of the tensor pullback
-and makes its Picard class typeable without imposing an additional hypothesis.
-
-Source: Stacks Project, Tag 09NY, final sentence, with Tags 02UV and 09NU.
-
-Proof:
-1. By thm-sc-hilbert-90, the class of `L` corresponds to the Zariski units torsor
-   `Isom(O_X,L)` of its local generators.
-2. A local generator `s` pulls back to `1 ⊗ s`. The identity
-   `1 ⊗ us = i♯(u)(1 ⊗ s)` identifies the pushout along `O_Xˣ → i_* O_Zˣ` with
-   `i_* Isom(O_Z,i*L)`. Clause (1) of lem-sc-torsor-h1-functoriality identifies their
-   cohomology classes (using def-pc-module-pullback).
-3. The canonical closed-immersion comparison of
-   lem-sc-cohomology-closed-immersion-pushforward and clause (2) of
-   lem-sc-torsor-h1-functoriality send this class to `Isom(O_Z,i*L)`.
-   Applying thm-sc-hilbert-90 on `Z` gives the asserted equality. -/
+(Stacks, Tag 09NY). -/
 theorem picard_h1_restriction_compatibility {Z X : Scheme.{v}} (i : Z ⟶ X)
     [IsClosedImmersion i] (L : X.Modules) [Modules.IsInvertible L] :
     ∃ h : Modules.IsInvertible ((Modules.tensorPullback i).obj L),

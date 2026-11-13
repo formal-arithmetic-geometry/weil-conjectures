@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 
 /-! # Hom sets between finite constant torsor sheaves
 
-Source: Stacks Project Tags 0A5G and 03RV.
+## References
+
+* [Stacks Project, Tag 0A5G](https://stacks.math.columbia.edu/tag/0A5G)
+* [Stacks Project, Tag 03RV](https://stacks.math.columbia.edu/tag/03RV)
 -/
 
 @[expose] public section
@@ -124,21 +127,7 @@ omit [TopologicalSpace M] [DiscreteTopology M] in
 end
 
 /-- Finite étale full faithfulness gives bijections on maps of underlying torsor sheaves.
-Source: Stacks Project Tag 0A5G, final paragraph, and Tag 03RV.
-
-Proof: Each torsor under finite constant M is finite locally constant:
-over an étale object with a section, translation identifies it with M;
-such objects cover the base by local nonemptiness of the torsor.
-At a geometric point, every germ is a constant translate of a fixed local section,
-so a surjection from M makes the stalk finite. Tag 03RV represents
-both underlying sheaves by finite étale schemes P and Q. Yoneda identifies
-their Hom set with Hom_Y(P,Q). The natural representable inverse-image
-isomorphism identifies the pulled-back Hom set with
-Hom_Y₀(P ×_Y Y₀,Q ×_Y Y₀), and identifies pullback on sheaf morphisms
-with the finite étale base-change map. The equivalence hypothesis makes
-the latter bijective. Conjugating by the representing isomorphisms gives
-the stated bijection. This argument also covers empty schemes and the
-trivial group, and uses no surjectivity assumption on i. -/
+(Stacks, Tags 0A5G and 03RV.) -/
 theorem finite_torsor_pullback_hom_bijective
     [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)

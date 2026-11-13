@@ -16,7 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Kernel transport to an open étale chart
 
-Source: Stacks Project, Tags 03DR, 03DT and 0GKU.
+## References
+
+* Stacks Project, Tags 03DR, 03DT and 0GKU.
 -/
 
 @[expose] public section
@@ -59,23 +61,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Restriction to an open étale chart transports F, its scalar law, and its kernel.
 The transported endomorphism `F'` is the conjugate of the restriction of `F` by an
 isomorphism `Φ` between the restricted étale sheaf of `E` and the étale sheaf of `G`.
-
-Source: Stacks Project, Tags 03DR (35.8.0.1), 03DT, and 0GKU, the passage to a
-trivializing open in the proof of lemma-frobenius-linear-on-vb.
-
-Proof: use etaleTensorSectionsSheaf_openIdentification to identify restriction of
-the given sheaf with the tensor-section sheaf of the ordinary module restriction.
-The unit-normalized tensor/abstract pullback comparison identifies this restriction
-with E_V; compose it with the supplied isomorphism to G and apply the tensor-section
-functor. These natural comparisons are linear over each test object's section ring,
-as their prescribed components are evaluations of module isomorphisms. Conjugate the
-restricted endomorphism by their composite to define F_V. Linearity of the comparison
-and its inverse transports the scalar-power law. Étale inverse image is site
-restriction, hence preserves kernels; universe lifting of abelian sheaves also
-preserves the sectionwise kernel universal property. Combine these comparisons with
-the kernel isomorphism induced by conjugating F-1. Identity and empty open immersions
-use the same comparisons; no characteristic, finite-rank, or affineness is required.
--/
+(Stacks, Tags 03DR, 03DT and 0GKU) -/
 theorem frobenius_linear_kernel_etale_pullback
     (p : ℕ) (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent]
     (F : (Modules.etaleTensorSectionsSheaf E) ⟶ Modules.etaleTensorSectionsSheaf E)

@@ -19,8 +19,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 /-!
 # Affine étale restriction and cohomology
 
-Source: Stacks Project, Topologies 04HR, Definitions 0219 and 021B(4), and
-Cohomology on Sites 03YU.
+## References
+
+* Stacks Project, Topologies 04HR, Definitions 0219 and 021B(4), and
+  Cohomology on Sites 03YU.
 -/
 
 @[expose] public section
@@ -44,10 +46,8 @@ private theorem fullAffineEtale_preservesPullbacks (S : Scheme.{u}) :
   exact
     inferInstanceAs (PreservesLimitsOfShape WalkingCospan P.ι)
 
-/-- Source: Stacks 04HR, 021E. Proof: affine pullbacks are preserved by the full inclusion.
-A finite jointly surjective affine cover is an etale cover in the small site. Apply
-the target sheaf condition and the preserved-pullback comparison to every such cover.
-The pretopology/coverage comparison then gives the sheaf condition for the topology. -/
+/-- A sheaf on the small étale site restricts to a sheaf for the full affine étale topology.
+(Stacks, Tags 04HR, 021E) -/
 theorem fullAffineEtaleInclusion_continuity_sheaf_condition (S : Scheme.{u}) :
     ∀ G : Sheaf S.smallEtaleTopology (Type (u + 1)),
       Presieve.IsSheaf
@@ -73,7 +73,8 @@ theorem fullAffineEtaleInclusion_continuity_sheaf_condition (S : Scheme.{u}) :
   simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
   exact hsurj x
 
-/-- Source: Stacks 04HR. -/
+/-- The inclusion of the full affine étale site into the small étale site is continuous.
+(Stacks, Tag 04HR) -/
 theorem fullAffineEtaleInclusion_isContinuous (S : Scheme.{u}) :
     (fullAffineEtaleInclusion S).IsContinuous
       (fullAffineEtaleTopology S) S.smallEtaleTopology := by
@@ -219,12 +220,8 @@ private theorem smallEtale_cover_of_surjective (S : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks 04HR, 021E and Sites 03A0. Proof: finite affine refinements identify
-the source topology with the induced topology. The dense-subsite comparison gives
-cocontinuity. Cover preservation follows from joint surjectivity, and affine pullbacks
-are preserved. Faithfulness gives local equality on identity covers; fullness gives
-local lifts on identity covers. Small affine image covers, reindexed by ULift, give
-the final covering condition. -/
+/-- The inclusion of the full affine étale site is special cocontinuous for the affine étale
+coverings and the small étale pretopology. (Stacks, Tags 04HR, 021E; Sites, Tag 03A0) -/
 theorem fullAffineEtale_special_cocontinuity (S : Scheme.{u}) :
     (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings
       (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage := by
@@ -293,10 +290,8 @@ theorem fullAffineEtale_special_cocontinuity (S : Scheme.{u}) :
     exact (congrArg (· ∈ S.smallEtalePretopology V) heq).mpr
       (smallEtale_cover_of_surjective S _ _ _ hsurj)
 
-/-- Source: Stacks 04HR. Proof: the full inclusion is a dense subsite for the finite
-affine topology, by finite affine refinement. Small affine image covers make it
-one-hypercover dense in universe u. Apply Mathlib
-`Functor.isEquivalence_of_isOneHypercoverDense` with coefficients Type u. -/
+/-- Restriction along the full affine inclusion is an equivalence on sheaves of sets.
+(Stacks, Tag 04HR) -/
 theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type u)
       (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
@@ -304,9 +299,8 @@ theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
   have := fullAffineEtale_dense_subsite S
   exact Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
 
-/-- Source: Stacks 04HR. Proof: use the same dense subsite and small affine hypercovers
-as for sets, and apply Mathlib `Functor.isEquivalence_of_isOneHypercoverDense`
-with coefficients AddCommGrpCat in universe u. -/
+/-- Restriction along the full affine inclusion is an equivalence on sheaves of abelian groups.
+(Stacks, Tag 04HR) -/
 theorem fullAffineEtale_ab_equivalence (S : Scheme.{u}) :
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
       (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
@@ -314,11 +308,8 @@ theorem fullAffineEtale_ab_equivalence (S : Scheme.{u}) :
   have := fullAffineEtale_dense_subsite S
   exact Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
 
-/-- Source: Stacks 04HR.
-Proof: combine the proved special cocontinuity and the two restriction equivalences.
-Finite affine refinements identify the finite-cover topology with the induced topology;
-affine image covers and preserved affine pullbacks give one-hypercover density.
-Mathlib's dense-subsite comparison then gives both equivalences directly. -/
+/-- The full affine inclusion is special cocontinuous, and restriction is an equivalence on
+sheaves of sets and of abelian groups. (Stacks, Tag 04HR) -/
 theorem fullAffineEtaleInclusion_special_equivalences (S : Scheme.{u}) :
     (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings
       (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage ∧
@@ -426,25 +417,8 @@ private theorem affineEtale_free_restriction (S : Scheme.{u}) (U : S.FullAffineE
   exact ⟨(E.counitIso.app Y).symm ≪≫ R.mapIso i⟩
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Cohomology on Sites, Lemma 03YU, specialized to the
-restriction equivalence of Topologies Lemma 04HR.
-
-Proof: restriction is the additive equivalence proved by
-`fullAffineEtale_ab_equivalence`. It preserves injective objects and exact sequences,
-so applying it termwise to an injective resolution gives an injective resolution
-of the restricted sheaf. Sections at U of the restricted resolution equal sections
-at its image of the original resolution, with identical differentials. The free
-abelian sheaf on the representable of U represents the sections functor, by
-sheafification, the free-abelian adjunction and Yoneda. Consequently its Ext groups
-are the cohomology of those section complexes. Taking cohomology of the identical
-complexes yields an isomorphism in each degree. A lift of a sheaf morphism between
-injective resolutions restricts to a lift, and restriction takes homotopies to
-homotopies; the induced isomorphisms are therefore natural in the sheaf and
-independent of resolutions. Choose one natural isomorphism for each degree to
-obtain the family e. No normalization in degree zero is asserted here; the proved
-comparison point below supplies that separately.
-The empty affine and zero sheaf cause no exceptions: their section complexes are
-zero. This is the remaining Ext-versus-resolution bridge for these large sites. -/
+/-- Cohomology comparison for the restriction equivalence between the small étale site and the
+full affine étale site (Stacks, Cohomology on Sites, Tag 03YU, and Topologies, Tag 04HR). -/
 theorem fullAffineEtale_cohomology_comparison_data (S : Scheme.{u})
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
@@ -488,16 +462,8 @@ theorem fullAffineEtale_cohomology_comparison_data (S : Scheme.{u})
         exact (Ext.comp_assoc _ _ _ (zero_add p) (add_zero p) (by omega)).symm)
   exact ⟨fun p => (e p).symm, trivial⟩
 
-/-- Source: Stacks 03YU, degree-zero sections identification.
-
-Proof: Ext-zero is Hom from the sheafified free representable. Sheafification,
-free-abelian adjunction and Yoneda identify it additively with sections over U.
-Restriction has exactly the same sections at U and its image. Compose these two
-identifications, naturally in the sheaf. Applying the small-site sections
-identification to this composite cancels its inverse, proving the displayed formula.
-The empty object and the zero sheaf are covered by the same adjunctions.
-
-This asserts existence of a normalized degree-zero comparison. -/
+/-- The cohomology comparison at a point has a normalized degree-zero component.
+(Stacks, Tag 03YU) -/
 theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
@@ -550,14 +516,8 @@ theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})
   change b G ((b G).symm (a G x)) = a G x
   exact AddEquiv.apply_symm_apply _ _
 
-/-- Source: Stacks 03YU, applied to the equivalence of 04HR.
-Proof: obtain degreewise natural comparisons from the comparison-data obligation.
-Independently identify Ext-zero with sections using sheafification, the free-abelian
-adjunction and Yoneda. Restriction evaluates identically on corresponding objects,
-so composing the two additive identifications gives a normalized degree-zero comparison.
-Use that comparison at zero and the supplied comparisons at positive degrees.
-The displayed normalization follows by cancelling the sections equivalence with its inverse;
-it does not assert normalization of an arbitrary comparison. -/
+/-- Objectwise cohomology comparison between the full affine étale site and the small étale
+site, with a normalized degree-zero component. (Stacks, Tags 03YU, 04HR) -/
 theorem fullAffineEtale_cohomology_comparison (S : Scheme.{u})
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
@@ -593,11 +553,8 @@ theorem fullAffineEtale_cohomology_comparison (S : Scheme.{u})
     | n + 1 => d (n + 1)
   exact ⟨e, h₀⟩
 
-/-- Source: Stacks 03YU, cohomology over the final object. Proof: the free abelian
-sheaf on the final representable and the constant integer sheaf both represent
-sections at the terminal identity etale object. The two natural Hom equivalences
-give an isomorphism of representing objects by fully faithful coyoneda. Applying
-the Ext bifunctor gives the displayed natural isomorphism in every degree. -/
+/-- The cohomology presheaf of the small étale site, evaluated at the identity étale object,
+is naturally isomorphic to `Sheaf.functorH`. (Stacks, Tag 03YU) -/
 theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
@@ -634,9 +591,9 @@ theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
   let eXZ : op X ≅ op Z := coyoneda.preimageIso e
   exact ⟨(Abelian.extFunctor p).mapIso eXZ⟩
 
-/-- Source: Stacks 03YU and 04HR. Proof: specialize the objectwise cohomology
-comparison to the affine identity object, then compose with the proved comparison
-between cohomology at the final small-site object and global Ext cohomology. -/
+/-- The cohomology presheaf of the full affine étale site, evaluated at the identity affine
+object after restriction, is naturally isomorphic to `Sheaf.functorH`.
+(Stacks, Tags 03YU, 04HR) -/
 theorem fullAffineEtale_cohomology_base_right (S : Scheme.{u}) [IsAffine S]
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
@@ -650,13 +607,8 @@ theorem fullAffineEtale_cohomology_base_right (S : Scheme.{u}) [IsAffine S]
   obtain ⟨b⟩ := fullAffineEtale_cohomology_base_left S p
   exact ⟨e p ≪≫ b⟩
 
-/-- Source: Stacks 03YU and 04HR.
-Proof: cohomology over the terminal identity etale object is global Ext cohomology,
-by the representing-object isomorphism in `fullAffineEtale_cohomology_base_left`.
-For the affine identity object, compose this isomorphism with objectwise restriction
-comparison, as proved in `fullAffineEtale_cohomology_base_right`. Pair the results.
-This statement uses the established encoding `Sheaf.functorH`; the separate bridge
-from that encoding to `Etale.cohomology` is not needed for the displayed conclusion. -/
+/-- Cohomology over an affine base is computed compatibly on the small étale site and the full
+affine étale site, via `Sheaf.functorH`. (Stacks, Tags 03YU, 04HR) -/
 theorem fullAffineEtale_cohomology_base (S : Scheme.{u}) [IsAffine S]
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :

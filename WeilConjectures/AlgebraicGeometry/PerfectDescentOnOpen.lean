@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 /-! # The open-subscheme predicate for perfect-complex descent
 
-Source: Stacks Project, Tag 09RF, induction on quasi-compact opens.
+## References
+
+* Stacks Project, Tag 09RF (induction on quasi-compact opens).
 -/
 
 @[expose] public section
@@ -24,10 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Descent holds on the open `U` if it holds for every presentation of that open by an
-open immersion into `Xi`. Quantifying over presentations allows the top open to be
-presented by the identity of `Xi`, without transporting the final theorem through
-`Xi.topIso`. All objects and pullback maps in this predicate are explicitly fixed.
-Source: Stacks Project, Tag 09RF, induction on quasi-compact opens. -/
+open immersion into `Xi`. All objects and pullback maps in this predicate are explicitly
+fixed (Stacks, Tag 09RF). -/
 def PerfectDescentOnOpen
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

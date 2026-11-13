@@ -9,9 +9,9 @@ import Mathlib.AlgebraicGeometry.LimitsOver
 
 /-! Explicit simplicial attachment and its refinement map.
 
-Source: Stacks, Hypercoverings, 0DAV and 01GJ. The epi--mono identities adapt
-`SiteHypercoverAttachmentOperators` and `SiteHypercoverAttachmentComposition`,
-using actual splitting cofans in place of formal-family component choices.
+## References
+
+* Stacks Project, Tags 0DAV and 01GJ.
 -/
 @[expose] public section
 noncomputable section
@@ -530,8 +530,7 @@ theorem attachmentMap_comp
             (by simp [attachmentTerm]) (by simp [attachmentTerm])
             (attachEnd_comp U V Q b α β)
 
-/-- The explicit new truncated functor, with all composition cases proved above.
-Source: Stacks 0DAV. -/
+/-- The explicit new truncated functor obtained by attaching `V` along `b` (Stacks, Tag 0DAV). -/
 noncomputable def attachedSimplicial (U : TruncatedFiniteSplitEtaleHypercover X n)
     (V : X.Etale)
     (Q : ReplacementBoundary U) (b : V ⟶ Q.M) :
@@ -701,8 +700,8 @@ theorem refinement_naturality {K : SimplicialObject X.Etale}
         congrArg (fun t ↦ eqToHom (by simp [attachmentTerm]) ≫ t)
           (attachEnd_refinement A V Q b g hcomp α)
 
-/-- The refinement determined by g and the old refinement on degenerate summands.
-Source: Stacks 01GJ. -/
+/-- The refinement determined by `g` and the old refinement on degenerate summands
+(Stacks, Tag 01GJ). -/
 noncomputable def attachedRefinement {K : SimplicialObject X.Etale}
     (A : FiniteSplitReplacementStage K n) (V : X.Etale)
     (Q : ReplacementBoundary A.U) (b : V ⟶ Q.M)

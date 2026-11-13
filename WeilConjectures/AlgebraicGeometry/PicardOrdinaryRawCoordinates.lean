@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Raw scalar coordinates and differential formulas
 
-Source: Stacks Project, Tags 0BF2, 01I7, 01IB and 0096.
+## References
+
+* Stacks Project, Tags 0BF2, 01I7, 01IB and 0096
 -/
 
 @[expose] public section
@@ -47,25 +49,7 @@ private lemma residueLift_appTop (W : Scheme.{v}) (w : W)
 
 /-- Affine bases give raw morphism coordinates compatible with residue restriction.
 Unlike cycle lifting, this calculation does not assume that the coefficients vanish
-at the residue point or that a scalar annihilates them.
-Source: Stacks Project, Tag 0BF2, degree-zero calculation; Tags 01I7, 01IB and 0096.
-
-Proof: Strict perfectness makes the two terms retracts of finite free sheaves,
-hence quasi-coherent. The affine tilde/Gamma equivalence on U sheafifies e0 and e1.
-Faithfulness identifies the differential in these bases with multiplication by d,
-because its map on sections is hd. Restrict these bases to V and tensor them to
-Spec κ(w). The tensor-unit comparison identifies the pulled-back source with the
-structure sheaf. Maps from that sheaf are global sections, giving additive
-coordinates c and c1 on V and b and b1 at the residue point. In the target basis,
-postcomposition
-by the differential has coordinates c(f) times d restricted to V, or b(f) times
-the evaluated vector d at the residue point. Since the target basis is injective,
-the differential formulas follow. Finally the structure-sheaf map of the residue
-lift is evaluation. Naturality of tensor pullback, the unit
-comparison and the conjugate composition comparisons in the pinned adjunction
-therefore gives hres. None of this needs V affine: the bases are sheaf bases
-restricted from U. For m=0 the target sheaf and the coordinate vector are both
-zero, so the same kernel formulas apply. -/
+at the residue point or that a scalar annihilates them (Stacks, Tag 0BF2). -/
 theorem picard_ordinary_raw_coordinates
     (W : Scheme.{v}) (w : W)
     (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)

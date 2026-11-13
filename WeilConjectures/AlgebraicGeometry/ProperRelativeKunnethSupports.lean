@@ -268,8 +268,7 @@ private meta def support_transport_local (userName : Name) : TacticM Unit :=
 
 end ProofTransport
 
-/-- Tensor of two specified isomorphisms, constructed for a general bifunctor.
-Source: the proper comparison tensor in the first coordinate calculation. -/
+/-- Tensor of two specified isomorphisms, constructed for a general bifunctor. -/
 def kunnethComparisonTensorIso {D : Type v} [Category.{u + 1} D]
     (T : D ⥤ D ⥤ D) {M M' N N' : D} (a : M ≅ M') (b : N ≅ N') :
     (T.obj M).obj N ≅ (T.obj M').obj N' :=
@@ -489,27 +488,7 @@ open Lean Meta Elab Tactic
 
 /-- One relative Kunneth route agrees with the ordinary external product under proper
 forget supports. This is a normalization of one route, for arbitrary proper factors.
-Source:, first triangle, the
-canonical pullback-counit computation; Stacks Tags 07A7, 0B56 and 0D6E.
-
-Proof: expand properSupportedKunnethRoute inverse. Replace its two forward
-compact-support projection maps by ordinary projection maps using
-projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar. The two
-symmetries commute with the proper comparisons by naturality. For the exchange,
-expand the chosen compactification into its open and proper factors. Naturality
-of the open forget-supports adjunct and the open-unit cancellation identify the
-supported exchange followed by forget supports with ordinary exchange after
-pullback of forget supports. Independence under compactification refinements
-allows the chosen compactification on the other side of the square. Expand the
-specified supported compositor: the same open/proper comparison and the composite
-counit formula identify it with the ordinary direct-image compositor. The resulting
-forward path is the ordinary projection, tensor exchange, ordered projection and
-ordinary compositor. By kunnethMap_eq_of_isPullback and tensor naturality this is
-the ordinary Kunneth map with its factors reversed and its two outside braidings.
-The braided pullback tensor comparison, or equivalently the common mixed-counit
-transpose, puts the factors back in the order E,K and yields the displayed map.
-This calculation uses no relation between E and K and compares only one route;
-it does not assert equality of the two supported coordinate extractions. -/
+(Stacks, Tags 07A7, 0B56, 0D6E) -/
 theorem properRelativeKunneth_comp_forgetSupports {S X Y W : Scheme.{u}}
     {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
     (sq : IsPullback p q f g) (h : W ⟶ S) (w : q ≫ g = h)

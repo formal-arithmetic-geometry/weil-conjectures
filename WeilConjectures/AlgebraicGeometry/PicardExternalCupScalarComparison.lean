@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalCupUnitComparison
 
 /-! # Scalar normalization of external cup products with unit coefficients
 
-Source: Stacks Project, Varieties, Tag 0BED, the pullback and cup-product maps;
-Cohomology on Sites, Tag 03FD.
+## References
+
+* Stacks Project, Varieties, Tag 0BED
+* Stacks Project, Cohomology on Sites, Tag 03FD
 -/
 
 @[expose] public section
@@ -27,31 +29,9 @@ namespace AlgebraicGeometry.Scheme
 open Modules
 
 /-- Unit-coefficient comparison carries cup products with scalar degree-zero classes
- to scalar multiples of projection pullbacks. This is a comparison of individual cup
-products, without a Kunneth or spanning assertion and without properness assumptions.
-
-Source: Stacks Project, Varieties, Tag 0BED, maps preceding
-`varieties-equation-kunneth-on-cech`; Cohomology on Sites, Tag 03FD.
-
-Proof: Apply the module-to-abelian comparison to the unit modules on X and Y. On the
-product, first identify the external coefficient module with the unit module: tensor
-pullback preserves the unit, and the tensor product of two unit modules is identified
-with the unit by the unitor. Compose its induced cohomology isomorphism with the
-module-to-abelian comparison to obtain eP. The comparison maps are computed on an
-injective module resolution by forgetting its sections complex. Forgotten injective
-modules are acyclic for abelian sections, so the acyclic-resolution comparison gives
-additive equivalences. Comparison with terminal-open Ext uses the constant-sheaf
-adjunction. Resolution maps lifting a structure-sheaf map compute both pullbacks, and
-homotopy independence identifies these maps. Likewise the tensor map of resolutions
-computes both cup products, so the coefficient identification is multiplication.
-In degree zero evaluation at 1 identifies unit-module cohomology with global sections,
-k-linearly. Compose with the inverse of each bijective structure ring map to get dX and
-dY. If b has degree zero, its section is the scalar dY b. Pulling back this section
-preserves that scalar; cup product with it is multiplication by dY b on the pulled-back
-class a. Linearity moves this scalar before pullback and yields the first formula.
-The degree-zero class from X gives the second formula in exactly the same manner; the
-cohomological sign is 1 because one degree is zero. These arguments need neither
-quasi-compactness nor separatedness, and do not assert that cup products span. -/
+to scalar multiples of projection pullbacks. This is a comparison of individual cup
+products, without a Kunneth or spanning assertion and without properness assumptions
+(Stacks, Tag 0BED; Tag 03FD). -/
 theorem picard_external_cup_scalar_comparison (k : Type u) [Field k] (X Y : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (hX : Function.Bijective (scalarMap f ⊤))

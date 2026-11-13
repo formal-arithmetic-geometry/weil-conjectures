@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Primal base change for a module pulled back from the base
 
-Source: Stacks Project, Tag 0BDP, projection-formula paragraph; Tag 01E8.
+## References
+
+* Stacks Project, Tags 0BDP and 01E8
 -/
 
 @[expose] public section
@@ -91,18 +93,8 @@ private theorem tensorPullback_finiteLocallyFree {A B : Scheme.{u}} (h : A ⟶ B
   let c := (adj h).leftAdjointUniq (Modules.pullbackPushforwardAdjunction h)
   exact SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} (c.app N).symm
 
-/-- The primal base-change map for a pulled-back finite locally free module is invertible.
-Source: Stacks Project, Tag 0BDP, projection-formula paragraph.
-Proof: The finite-locally-free unit theorem applies to N at g and to h^*N at h ≫ g;
-pullback preserves finite local freeness by uniqueness of left adjoints and the proved
-abstract-pullback instance. Pasting the pullback squares identifies the iterated
-pullback with X ×_S T'. Pushforward along that scheme isomorphism is an equivalence.
-The conjugate-adjunction unit identity transports the second unit to the iterated
-pullback. The same identity, for the two composite adjunctions of the square, gives
-h^*η_p followed by base change = η_p' followed by the pushforward of the pullback
-comparison isomorphism. The two units are invertible, so base change on p^*N is
-invertible by cancellation. Naturality then transports invertibility along e.
-This argument also covers rank zero and empty schemes. -/
+/-- The primal base-change map for a pulled-back finite locally free module is invertible
+(Stacks, Tag 0BDP). -/
 theorem picard_pullback_base_change_primal {X S T : Scheme.{u}}
     (f : X ⟶ S)
     (hO : ∀ {T' : Scheme.{u}} (g' : T' ⟶ S),

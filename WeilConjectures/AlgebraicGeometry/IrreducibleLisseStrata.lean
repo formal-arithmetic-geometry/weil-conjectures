@@ -24,24 +24,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A constructible abelian etale sheaf on a Noetherian scheme admits a finite partition
 into nonempty irreducible locally closed subschemes with finite locally constant restrictions.
-Constructibility and finite local constancy are those of `def-weil-pbc-etale-sheaves`
-(finite geometric stalks), applied to the underlying sheaf of sets.
-
-Proof:
-1. By `def-weil-pbc-etale-sheaves`, choose a finite lisse stratification and discard empty
-   parts. Each part is Noetherian by Stacks Tags 01OX, 01T5 and 01T6, so
-   `lem-weil-pbc-noetherian-finite-components` gives finitely many irreducible components.
-2. Order these components and subtract from each the union of earlier components. Each
-   difference is open in its component and contains its generic point: irreducibility
-   prevents a component from being covered by the finitely many other components. Hence
-   each difference is nonempty and irreducible. The differences are disjoint, cover the
-   original part, and are locally closed in X. Give them their reduced induced scheme
-   structures (Tag 01J4); their composite immersions into X are immersions (Tag 02V0),
-   as required by `def-weil-pbc-scheme-conventions`.
-3. Apply `lem-weil-pbc-pullback-finite-locally-constant` to the immersion of each difference
-   into its original part and that part's immersion into X. Pullback preserves finite
-   local constancy and composes, so all the resulting restrictions are lisse. Combining
-   the finitely many refinements gives the required partition. -/
+Constructibility and finite local constancy refer to the finite geometric stalks of the
+underlying sheaf of sets. -/
 theorem exists_irreducible_lisse_stratification
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

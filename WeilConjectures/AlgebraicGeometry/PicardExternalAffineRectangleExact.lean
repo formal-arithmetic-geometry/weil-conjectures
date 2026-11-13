@@ -17,7 +17,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Exactness on affine rectangles of the external coefficient
 
-Source: Stacks Project, Tag 0BED, the short exact coefficient diagram.
+## References
+
+* Stacks Project, Tag 0BED.
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The external coefficient, as a functor in the left module.
-Source: Stacks, Tag 0BED. -/
+/-- The external coefficient, as a functor in the left module. (Stacks, Tag 0BED) -/
 def picardExternalCoefficientFunctor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (G : Y.Modules) : X.Modules ⥤ (Limits.pullback f g).Modules :=
@@ -37,8 +38,7 @@ def picardExternalCoefficientFunctor
     tensorRight ((tensorPullback (pullback.snd f g)).obj G)
 
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The coefficient functor preserves zero maps.
-Source: additive adjunctions. -/
+/-- The coefficient functor preserves zero maps. -/
 instance picardExternalCoefficientFunctor_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (G : Y.Modules) : (picardExternalCoefficientFunctor f g G).PreservesZeroMorphisms := by
@@ -49,17 +49,7 @@ instance picardExternalCoefficientFunctor_zero
 
 /-- External-coefficient sections on one affine rectangle are short exact in the left
 quasi-coherent coefficient. No flatness over the structure sheaf of Y is required.
-Source: Stacks, Tag 0BED, equation-kunneth-on-cech and its coefficient diagram.
-
-Proof: For affine opens U and V, their inverse-image intersection in the fibre product
-is the affine scheme Spec (Gamma(U) tensor_k Gamma(V)). Affine pullback sections and
-tensor sections identify the external module there with Gamma(F,U) tensor_k Gamma(G,V).
-The comparisons are natural in F: the induced map of external sections is the tensor
-of the section map of F with the identity on Gamma(G,V). The affine section sequence
-of S is short exact, and tensoring over the field k preserves exactness, injectivity
-and surjectivity. Transport this sequence through the natural comparisons, then
-restrict scalars along the product structure map. Empty U or V and zero G give zero
-modules, so the same statement holds in these cases. -/
+(Stacks, Tag 0BED) -/
 theorem picardExternal_affine_rectangle_exact
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)

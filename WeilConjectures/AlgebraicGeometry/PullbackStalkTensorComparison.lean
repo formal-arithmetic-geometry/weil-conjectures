@@ -19,8 +19,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Stalk tensor coordinates for a scheme pullback comparison
 
-Source: Stacks Project, Tag 08IB, local affine tensor comparison, and Tag 0098,
-stalks of module pullback.
+## References
+
+* Stacks Project, Tags 08IB and 0098.
 -/
 
 @[expose] public section
@@ -37,39 +38,35 @@ namespace AlgebraicGeometry.PullbackStalkTensor
 
 variable {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
 
-/-- The base points of a pullback point agree. Source: Stacks, Tag 01JX.
-Proof: apply the underlying point map to `pullback.condition`. -/
+/-- The base points of a pullback point agree. -/
 theorem point_eq (z : ↥(Limits.pullback f g)) :
     f ((pullback.fst f g) z) = g ((pullback.snd f g) z) := by
   exact congrArg (fun h : Limits.pullback f g ⟶ S ↦ h z) (pullback.condition (f := f) (g := g))
 
-/-- Base stalk ring. Source: Stacks, Tag 08IB. -/
+/-- Base stalk ring. -/
 abbrev R (z : ↥(Limits.pullback f g)) := S.presheaf.stalk (f ((pullback.fst f g) z))
 
-/-- Left stalk ring. Source: Stacks, Tag 08IB. -/
+/-- Left stalk ring. -/
 abbrev A (z : ↥(Limits.pullback f g)) := X.presheaf.stalk ((pullback.fst f g) z)
 
-/-- Right stalk ring. Source: Stacks, Tag 08IB. -/
+/-- Right stalk ring. -/
 abbrev B (z : ↥(Limits.pullback f g)) := T.presheaf.stalk ((pullback.snd f g) z)
 
-/-- Pullback stalk ring. Source: Stacks, Tag 08IB. -/
+/-- Pullback stalk ring. -/
 abbrev C (z : ↥(Limits.pullback f g)) := (Limits.pullback f g).presheaf.stalk z
 
-/-- The left scalar structure is the actual scheme stalk map. Source: Stacks, Tag 08IB. -/
+/-- The left scalar structure is the actual scheme stalk map. -/
 noncomputable abbrev leftAlgebra (z : ↥(Limits.pullback f g)) : Algebra (R f g z) (A f g z) :=
   (f.stalkMap ((pullback.fst f g) z)).hom.toAlgebra
 
-/-- The right scalar structure transports the base point along the square. Source:
-Stacks, Tag 08IB. -/
+/-- The right scalar structure transports the base point along the square. -/
 noncomputable abbrev rightAlgebra (z : ↥(Limits.pullback f g)) : Algebra (R f g z) (B f g z) :=
   ((S.presheaf.stalkCongr (.of_eq (point_eq f g z))).hom ≫
     g.stalkMap ((pullback.snd f g) z)).hom.toAlgebra
 
 attribute [local instance] leftAlgebra rightAlgebra
 
-/-- The projection stalk maps agree on the base stalk. Source: Stacks, Tag 01JX.
-Proof: expand the stalk maps of both composites in the pullback square; use
-`pullback.condition` to identify these composites and transport their base point. -/
+/-- The projection stalk maps agree on the base stalk. -/
 theorem stalk_square (z : ↥(Limits.pullback f g)) :
     f.stalkMap ((pullback.fst f g) z) ≫ (pullback.fst f g).stalkMap z =
       (S.presheaf.stalkCongr (.of_eq (point_eq f g z))).hom ≫
@@ -78,53 +75,44 @@ theorem stalk_square (z : ↥(Limits.pullback f g)) :
     Scheme.Hom.stalkMap_congr_hom
       (pullback.fst f g ≫ f) (pullback.snd f g ≫ g) (pullback.condition (f := f) (g := g)) z
 
-/-- The scalar structure on the pullback stalk is the composite left stalk map.
-Source: Stacks, Tag 08IB. -/
+/-- The scalar structure on the pullback stalk is the composite left stalk map. -/
 noncomputable abbrev stalkAlgebra (z : ↥(Limits.pullback f g)) :
     Algebra (R f g z) (C f g z) :=
   (f.stalkMap ((pullback.fst f g) z) ≫ (pullback.fst f g).stalkMap z).hom.toAlgebra
 
 attribute [local instance] stalkAlgebra
 
-/-- The left projection stalk map as an algebra homomorphism. Source: Stacks,
-Tag 08IB. -/
+/-- The left projection stalk map as an algebra homomorphism. -/
 noncomputable def leftStalkHom (z : ↥(Limits.pullback f g)) :
     A f g z →ₐ[R f g z] C f g z :=
   { ((pullback.fst f g).stalkMap z).hom with commutes' := fun _ ↦ rfl }
 
-/-- The right projection respects base scalars. Source: Stacks, Tags 01JX and 08IB.
-Proof: evaluate the stalk square at a base-stalk element and reverse its equality. -/
+/-- The right projection respects base scalars. -/
 theorem rightStalkHom_commutes (z : ↥(Limits.pullback f g)) (r : R f g z) :
     ((pullback.snd f g).stalkMap z).hom (algebraMap (R f g z) (B f g z) r) =
       algebraMap (R f g z) (C f g z) r := by
   exact (congrArg (fun h ↦ h.hom r) (stalk_square f g z)).symm
 
-/-- The right projection stalk map as an algebra homomorphism. Source: Stacks,
-Tag 08IB. -/
+/-- The right projection stalk map as an algebra homomorphism. -/
 noncomputable def rightStalkHom (z : ↥(Limits.pullback f g)) :
     B f g z →ₐ[R f g z] C f g z :=
   { ((pullback.snd f g).stalkMap z).hom with
     commutes' := rightStalkHom_commutes f g z }
 
-/-- The canonical tensor-to-stalk map constructed by the tensor-product lift.
-On a pure tensor it multiplies the images under the two projection stalk maps.
-Source: Stacks, Tag 08IB. -/
+/-- The canonical tensor-to-stalk map. On a pure tensor it multiplies the images under the
+two projection stalk maps. -/
 noncomputable def tensorToStalk (z : ↥(Limits.pullback f g)) :
     A f g z ⊗[R f g z] B f g z →+* C f g z :=
   (Algebra.TensorProduct.lift (leftStalkHom f g z) (rightStalkHom f g z)
     (fun _ _ ↦ Commute.all _ _)).toRingHom
 
-/-- The pure-tensor formula for the explicit comparison. Source: Stacks, Tag 08IB.
-Proof: the tensor-product lift is defined on pure tensors by multiplication. -/
+/-- The pure-tensor formula for the explicit comparison. -/
 theorem tensorToStalk_tmul (z : ↥(Limits.pullback f g)) (a : A f g z) (b : B f g z) :
     tensorToStalk f g z (a ⊗ₜ[R f g z] b) =
       ((pullback.fst f g).stalkMap z).hom a * ((pullback.snd f g).stalkMap z).hom b := by
   rfl
 
-/-- The explicit comparison has the two prescribed restrictions.
-Source: Stacks, Tags 01JX and 08IB.
-Proof: evaluate the lift on a tensor with one factor equal to one, and apply
-preservation of one by the corresponding projection stalk map. -/
+/-- The explicit comparison has the two prescribed restrictions. -/
 theorem tensorToStalk_spec (z : ↥(Limits.pullback f g)) :
     (tensorToStalk f g z).comp
         (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
@@ -137,10 +125,7 @@ theorem tensorToStalk_spec (z : ↥(Limits.pullback f g)) :
   · ext b
     simp [tensorToStalk, leftStalkHom, rightStalkHom]
 
-/-- The restrictions uniquely characterize the explicit comparison.
-Source: Stacks, Tag 08IB.
-Proof: tensor-product ring homomorphisms agreeing on both inclusions agree on
-pure tensors, hence on all tensors by additivity. -/
+/-- The two prescribed restrictions uniquely characterize the explicit comparison. -/
 theorem tensorToStalk_unique (z : ↥(Limits.pullback f g))
     (φ : A f g z ⊗[R f g z] B f g z →+* C f g z)
     (hleft : φ.comp (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
@@ -151,10 +136,7 @@ theorem tensorToStalk_unique (z : ↥(Limits.pullback f g))
   · exact hleft.trans (tensorToStalk_spec f g z).1.symm
   · exact hright.trans (tensorToStalk_spec f g z).2.symm
 
-/-- The tensor-to-stalk ring map exists with the two prescribed restrictions.
-Source: Stacks, Tag 01JX and Tag 08IB.
-Proof: use the explicit tensor-product lift. On the left inclusion its formula
-is p(a)q(1)=p(a); on the right inclusion it is p(1)q(b)=q(b). -/
+/-- The tensor-to-stalk ring map exists with the two prescribed restrictions. -/
 theorem exists_tensorToStalk (z : ↥(Limits.pullback f g)) :
     ∃ φ : A f g z ⊗[R f g z] B f g z →+* C f g z,
       φ.comp (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
@@ -163,17 +145,15 @@ theorem exists_tensorToStalk (z : ↥(Limits.pullback f g)) :
         ((pullback.snd f g).stalkMap z).hom := by
   exact ⟨tensorToStalk f g z, tensorToStalk_spec f g z⟩
 
-/-- The pullback stalk is an algebra over the tensor of the two original stalks.
-Source: Stacks, Tag 08IB. -/
+/-- The pullback stalk is an algebra over the tensor product of the two original stalks. -/
 noncomputable abbrev tensorAlgebra (z : ↥(Limits.pullback f g)) :
     Algebra (A f g z ⊗[R f g z] B f g z) (C f g z) :=
   (tensorToStalk f g z).toAlgebra
 
 attribute [local instance] tensorAlgebra
 
-/-- Stalkwise Tor independence includes every pair over the same base point,
-not merely a selected family of points in the pullback. The transport identifies
-O_{S,f(x)} with O_{S,g(t)}. Source: Stacks, Tag 08IB. -/
+/-- Stalkwise Tor independence: it concerns every pair of points over the same base point,
+with `O_{S,f(x)}` identified with `O_{S,g(t)}` along the transport. -/
 noncomputable def IsTorIndependent : Prop :=
   ∀ (x : X) (t : T) (h : f x = g t),
     letI := (f.stalkMap x).hom.toAlgebra
@@ -183,14 +163,14 @@ noncomputable def IsTorIndependent : Prop :=
         (ModuleCat.of (S.presheaf.stalk (f x)) (X.presheaf.stalk x))).obj
           (ModuleCat.of (S.presheaf.stalk (f x)) (T.presheaf.stalk t)))
 
-/-- A representative's stalk complex. Source: Stacks, Tag 0098. -/
+/-- The stalk complex of a representative (Stacks, Tag 0098). -/
 noncomputable abbrev stalkComplex (z : ↥(Limits.pullback f g))
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :=
   ((RingedSpace.moduleStalkFunctor X.toRingedSpace
       ((pullback.fst f g) z)).mapHomologicalComplex (.up ℤ)).obj K
 
-/-- The existing algebraic model applied to a representative's stalk.
-Source: Stacks, Tags 08IB and 06Y6. -/
+/-- The algebraic cohomology model applied to a representative's stalk
+(Stacks, Tags 08IB and 06Y6). -/
 noncomputable def cohomologyModel (z : ↥(Limits.pullback f g))
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g z))
@@ -198,8 +178,8 @@ noncomputable def cohomologyModel (z : ↥(Limits.pullback f g))
   ModuleCat.baseDerivedTensorCohomologyModel (R f g z) (A f g z) (B f g z)
     (stalkComplex f g z K) (C f g z)
 
-/-- Ordinary scalar extension of a representative's stalk along the canonical
-A -> A tensor-over-R B -> C map. Source: Stacks, Tag 08IB. -/
+/-- Scalar extension of a representative's stalk along the canonical
+`A → A ⊗[R] B → C` map. -/
 noncomputable def stalkTensorComplex (z : ↥(Limits.pullback f g))
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     CochainComplex (ModuleCat.{u} (C f g z)) ℤ :=
@@ -209,17 +189,9 @@ noncomputable def stalkTensorComplex (z : ↥(Limits.pullback f g))
     (((RingedSpace.moduleStalkFunctor X.toRingedSpace
       ((pullback.fst f g) z)).mapHomologicalComplex (.up ℤ)).obj K)
 
-/-- Invertibility of the canonical stalk comparison, in K-flat coordinates.
-For every K-flat representative K of P, use its stalk Q, the existing derived
-cohomology model T_i = H^i(Q tensor-derived-over-R B), and its specified comparison
-c_i: C tensor-over-(A tensor-over-R B) T_i -> H^i(Q tensor-over-A C).
-The target is identified with the stalk of H^i(Lg_X^*P). Requiring an identification
-and invertibility after EVERY such identification is precisely invertibility of
-c_i under the canonical identification: postcomposition by an isomorphism neither
-creates nor destroys invertibility. This does not quantify over arbitrary maps
-out of T_i; c_i is fixed by the equations of BaseDerivedTensorCohomologyModel.
-K-flat representatives exist, so the universal quantification is not vacuous.
-Source: Stacks, Tags 08IB, 0098 and 06YJ. -/
+/-- Invertibility of the canonical stalk comparison, expressed on `K`-flat representatives `K`
+of `P`: the specified comparison `c_i : C ⊗[A ⊗[R] B] T_i → H^i(Q ⊗[A] C)` is invertible
+for every degree `i` (Stacks, Tags 08IB, 0098 and 06YJ). -/
 noncomputable def IsComparisonIso
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w}

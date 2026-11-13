@@ -25,18 +25,8 @@ private lemma twist_cast_val (k : Type u) [Field k] {m r : ℤ} (h : m = r)
   subst r
   rfl
 
-/-- Tensor-power isomorphisms and multiplication identities for a homogeneous section.
-Source: Stacks Project, Constructions, Tags 01MS, 01MU and 01NG; equation-multiply.
-Proof: On D_+(x_i), the twist O(m) is free with basis x_i^m for every integer m.
-Multiplication of homogeneous fractions maps the tensor of the bases to x_i^(m+r),
-so the multiplication maps are isomorphisms and agree on overlaps. Starting with
-O = O(0), iterate them to obtain a_n, and compose multiplication with id tensor a_n
-to obtain b_mn. The local coefficient of the section f is f/x_i^d, whose nth tensor
-power is (f/x_i^d)^n. The identifications therefore send the tensor-power section
-and its product with any local section of O(m) to multiplication by f^n. Equality
-on the chart cover proves both morphism identities globally. At n=0 these are the
-unit isomorphisms and multiplication by 1; for f=0 positive powers are zero.
-Negative m uses the same local basis and the fraction multiplication rule. -/
+/-- Tensor-power isomorphisms and multiplication identities for a homogeneous section
+(Stacks, Constructions, Tags 01MS, 01MU and 01NG). -/
 theorem proj_homogeneous_section_tensor_powers_data (k : Type u) [Field k]
     {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}
     (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :

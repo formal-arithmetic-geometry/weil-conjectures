@@ -22,7 +22,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Faithful elementary tensor tests for finite structure adjoints
 
-Source: Stacks Project, Tag 09ZT.
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -106,35 +108,7 @@ private theorem adjoint_test_cancel {X S Y : Scheme.{u}} (j : S ⟶ X) (p : Y �
   rw [← hv, ← hw]
   simpa only [finiteStructureAdjoint, adj, Category.assoc] using h
 
-/-- Adjoint tests on elementary tensors detect morphisms out of the square and cube.
-This concerns morphisms, not injectivity of adjoints on sections over an arbitrary open.
-Source: Stacks Project, Tags 088E and 088F, applied to the tensor powers in 09ZT.
-
-Proof: Both tensor powers are coherent and have proper support. Indeed a proper
-closed supporting subscheme annihilating G also annihilates the tensor powers;
-on affine opens finite generation is preserved by tensor products, and the
-quasi-coherent tensor comparison identifies their sections with those products.
-On the Noetherian scheme X quasi-coherence and finite type imply coherence.
-For a fixed n, the hypothesis on elementary tensors implies equality of the
-composites v followed by the nth adjoint and w followed by that adjoint. To see
-this, work first on each affine open. The affine tensor-sections map is surjective;
-tensor induction gives equality on every section of the square. For the cube use
-surjectivity of the outer tensor-sections map, then that of the inner square, and
-tensor induction twice. Cover each arbitrary open by its contained affine opens.
-Naturality of the two composites and the sheaf condition extend the equality to all opens.
-By the tensor-pullback
-adjunction, equality of these composites is equality of the pullbacks of v and w
-followed by psi_n and the pushforward composition comparison. Both comparisons
-are isomorphisms, so cancel them to get j_n^*v = j_n^*w. Faithfulness of completion
-on coherent modules with proper support now gives v = w, for both tensor powers.
-No compatibility of psi is needed, and no ring product on G is assumed. On opens
-avoiding all reductions the adjoints need not be injective on sections; the proof
-uses global morphism faithfulness instead. Zero modules and empty schemes are
-covered by the same morphism argument. For the faithfulness invocation choose the
-comparison required by grothendieck_existence independently of psi. Naturality makes
-the reductions of w a compatible family for that comparison. The unique lift property
-then equates v and w when their reductions coincide; no equality between this auxiliary
-comparison and the pinned tensorPullbackCompositionIso is asserted. -/
+/-- Adjoint tests on elementary tensors detect morphisms out of the square and cube. -/
 theorem finite_structure_tensor_tests_faithful
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

@@ -13,7 +13,10 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 
 /-! # Coherent signed finite Tate tensor powers
-Source: Stacks Project, Tag 03PK.
+
+## References
+
+* Stacks Project, Tag 03PK
 -/
 
 @[expose] public noncomputable section

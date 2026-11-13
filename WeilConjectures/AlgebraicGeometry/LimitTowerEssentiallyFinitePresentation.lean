@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.LimitTowerOverLocalSystem
 import WeilConjectures.RingTheory.LocalRingColimitEssentiallyFiniteType
 
 /-! # Limit presentation of an essentially finitely presented local tower
-Source: literature/stacks-project/algebra.tex, proof of Lemma Tag 00R7.
+
+## References
+
+* Stacks Project, Algebra, Tag 00R7, with the constructions of Tags 00QU, 00QV and 00QX.
 -/
 
 @[expose] public section
@@ -37,27 +40,7 @@ namespace RingHom
 finite presentation over `R`, with a finitely presented `S'`-module `M`. The colimits are
 colimit cocones over the directed set `Λ` (in `CommRingCat` and `AddCommGrpCat`);
 scalar-extension maps are specified on pure tensors, and the module tensors put the new
-scalar ring first (tensor symmetry matches the source).
-
-Source: Stacks Project, Algebra, proof of Tag 00R7, with the constructions of Tags 00QU,
-00QV and 00QX.
-
-Proof:
-1. (Base system.) Write `R` as a directed colimit of local rings `R_λ` essentially of
-   finite type over `ℤ` with local transition maps and local maps `π_λ: R_λ → R`.
-2. (Middle ring.) Apply
-   to this system, `T = S`, `τ = α` and the zero module: on a tail `Λ₁` get local `S_λ`,
-   local `ρ_λ`, `s_{μλ}`, `κ_λ` with `S = colim S_λ`, `S_λ` essentially of finite type over
-   `R_λ`, and the base changes `S_λ ⊗ R_μ → S_μ`, `S_λ ⊗ R → S` localizations.
-3. `S'` is essentially of finite presentation over `S` via `β`.
-4. (Top ring and module.) Apply the same node to `(S_λ)_{Λ₁}`, `T = S'`, `τ = β` and `M`:
-   on a tail `Λ₂` get `S'_λ`, `σ_λ`, `s'_{μλ}`, `κ'_λ`, modules `M_λ` with semilinear maps,
-   `S' = colim S'_λ`, `M = colim M_λ`, the `M_λ` cokernels of `t × s` matrices, and the
-   localization and module base-change clauses.
-5. (Restriction.) `Λ₂` is cofinal in `Λ` and in `Λ₁`, so `R` and `S` remain the colimits
-   over `Λ₂`.
-6. (Conclusion.) Index everything by `Λ₂`; clauses (1)–(5) are steps 2, 4 and 5.
--/
+scalar ring first. (Stacks, Tag 00R7) -/
 theorem limit_tower_essentially_finite_presentation
     {R S S' : Type u} [CommRing R] [CommRing S] [CommRing S']
     [IsLocalRing R] [IsLocalRing S] [IsLocalRing S']

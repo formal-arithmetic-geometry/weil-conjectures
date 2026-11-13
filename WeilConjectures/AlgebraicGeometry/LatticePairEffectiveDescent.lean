@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.LatticeGluedRationalizationIso
 /-!
 # Effective descent of embedded lattice pairs
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -32,20 +34,7 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- A matching family of embedded lattice classes has a global lattice representative.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60; descent of embedded lattices.
-Proof: choose integral representatives of the given local image families. On every
-common slice, compatibility identifies their image families. The image-classification
-lemma gives an intertwining integral isomorphism, unique by injectivity of the
-coefficient map. Uniqueness proves naturality of the transition maps and their
-cocycle identities. Apply effective gluing of module sheaves on the covering sieve.
-Refine the covering by the finite free basis covers of the local representatives;
-this makes the glued integral module finite locally free. The local embeddings
-into the fixed rational module agree and glue to an embedding. Its scalar extension
-restricts, by the slice tensor comparison, to each given rationalization. Their
-inverses agree on overlaps and glue to its inverse. The resulting lattice pair
-has on each covering slice precisely the prescribed image family. This argument
-allows varying rank, the zero module, and the empty covering of an empty object. -/
+/-- A matching family of embedded lattice classes has a global lattice representative. -/
 theorem exists_latticePair_of_compatible_classes
     {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)

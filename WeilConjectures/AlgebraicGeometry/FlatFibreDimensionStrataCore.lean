@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionNearZeroDimensionalSt
 
 /-! # Fibrewise dense constant dimension opens
 
-Source: Stacks Project, Tag 054T.
+## References
+
+* [Stacks Project, Tag 054T](https://stacks.math.columbia.edu/tag/054T)
 -/
 
 @[expose] public section
@@ -37,21 +39,7 @@ private theorem ringKrullDim_stalk_eq_zero_of_generic (Y : Scheme.{u})
   rw [ringKrullDim_stalk_eq_coheight, Order.IsMax.coheight_eq_zero hmax]
   rfl
 
-/-- Fibrewise dense constant dimension opens.
-
-Source: Stacks Project, Tags 054T and 054U.
-Proof: For each n, take V n to be the interior of the set of points over U with
-local topological fibre dimension n. At a component generic point z of any fibre,
-the fibre stalk has dimension zero: its closure is a maximal irreducible closed
-set, so its coheight in the specialization order is zero, and stalk dimension
-is coheight. The zero-dimensional-stalk neighbourhood theorem gives an open W
-around the image of z on which fibre dimension is some fixed n. Since W is open
-and lies in the corresponding dimension level set, it is contained in V n.
-Thus the inverse-image union contains every component generic point of the
-fibre. Generic points are dense in any sober space, so the union is dense.
-Membership in V n implies membership in the dimension level set, giving the
-second conclusion. No family of opens is chosen from an unproved existence
-theorem: V is constructed using interiors. Empty fibres satisfy density. -/
+/-- Fibrewise dense constant dimension opens (Stacks, Tags 054T and 054U). -/
 theorem exists_fibre_dimension_opens_of_flat_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :

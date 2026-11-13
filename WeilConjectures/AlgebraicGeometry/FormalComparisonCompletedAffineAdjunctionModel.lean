@@ -22,7 +22,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraization of the completed affine comparison as an adjunction
 
-Source: Stacks Project, Tag 088B, completed-base algebraization argument.
+## References
+
+* Stacks Project, Tag 088B
 -/
 
 @[expose] public section
@@ -53,29 +55,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The completed affine comparison is the section map of an algebraized adjunction.
 This supplies an algebraized source, a proper morphism and an isomorphism on its
 pullback, together with the limit comparison square. It asserts no invertibility
-of the comparison itself, either globally or on an open.
-
-Source: Stacks Project, Tag 088B, proof, from flat completion base change through
-algebraization of the formal pullback isomorphism; Tags 087W, 087X and 0883.
-
-Proof: Restrict the original data to U=Spec B, and form the base change of f along
-Spec R -> Spec B -> Y, where R is the J(U)-adic completion. Completion is flat,
-Noetherian, and has the same positive ideal-power quotients as B. Flat base change
-identifies pushforward, quotient projections and adjunction units. Since the
-quotient projections are epimorphisms, hκ specifies their comparison uniquely;
-formal functions identifies its inverse limit with an isomorphism. The equation
-hα therefore determines the completed comparison on inverse limits. Algebraize
-G over R by the affine formal-module equivalence, obtaining A₀, and pull back F
-to obtain F₀ on the proper base-changed scheme Z. Pullback commutes with formal
-completion. Full faithfulness of completion on the proper scheme Z lifts β and
-its inverse to inverse coherent maps, giving b. Proper coherent pushforward
-supplies hD. The affine limit cones and formal functions give eA₀ and eD₀;
-naturality and hα identify the limit map with the sections of the adjunction unit
-followed by p_*b. For an arbitrary supplied adjunction, first absorb the natural
-automorphism relating it to the standard adjunction into β; it remains invertible.
-The complement of the extended ideal is the inverse image of the original
-complement of K, so p is an isomorphism there by stability under base change.
-If R is zero, the spectrum is empty and the same constructions apply. -/
+of the comparison itself, either globally or on an open
+(Stacks, Tag 088B; Tags 087W, 087X and 0883). -/
 theorem formalComparison_completed_affine_adjunction_model
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

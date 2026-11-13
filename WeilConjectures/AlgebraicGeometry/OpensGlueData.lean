@@ -34,9 +34,6 @@ charts, rather than as abstract schemes with open immersions as in `Scheme.GlueD
 - `AlgebraicGeometry.Scheme.OpensGlueData.preimage_opensRange_ι`: `ι i ⁻¹ (range ι j) = V i j`.
 - `AlgebraicGeometry.Scheme.OpensGlueData.compactSpace_glued`: finitely many quasi-compact charts
   glue to a quasi-compact scheme.
-
-This is the affine gluing theorem used in the blueprint proofs of
-`lemma-nagata-finite-presentation-descends` and `def-nagata-noetherian-stage`.
 -/
 
 @[expose] public section

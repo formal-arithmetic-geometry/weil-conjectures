@@ -13,8 +13,9 @@ public import Mathlib.Logic.Small.Basic
 
 /-! # Smallness of perfect isomorphism classes on an open
 
-Source: the induction property in the proof of
-lem-pc-perfect-complexes-compact-set, using Stacks Project, Tag 08DR.
+## References
+
+* Stacks Project, Tag 08DR.
 -/
 
 @[expose] public section
@@ -27,10 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The perfect quasi-coherent derived objects on an open have `u`-small isomorphism
 classes. Quantifying over open immersions with this image avoids identifying a scheme
-with its top open subscheme. The quantification over derived-category structures lets
-the induction property be stated before choosing structures on the open subschemes.
-Source: the property `P(W)` in Step 2 of lem-pc-perfect-complexes-compact-set;
-Stacks Project, Tag 08DR. -/
+with its top open subscheme (Stacks, Tag 08DR). -/
 def PerfectComplexClassesSmallOnOpen (X : Scheme.{u}) (U : X.Opens) : Prop :=
   ∀ (Y : Scheme.{u}) (f : Y ⟶ X) [IsOpenImmersion f], f.opensRange = U →
     ∀ [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

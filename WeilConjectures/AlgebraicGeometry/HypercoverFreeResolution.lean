@@ -16,9 +16,11 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
-# Blueprint statements
+# Free resolutions from split étale hypercovers
 
-lem-weil-pbc-hypercover-free-resolution.
+The augmentation of the free abelian (or free module) sheaf on a split étale hypercover is a
+quasi-isomorphism, and sections of an injective sheaf over a hypercover are acyclic in positive
+degrees.
 -/
 
 @[expose] public section
@@ -29,7 +31,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.SplitEtaleHypercover
 
-/-- -/
+/-- The augmentation of the free abelian sheaf complex of a split étale hypercover is a
+quasi-isomorphism. -/
 theorem freeAbelian_augmentation_quasiIso
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) :
@@ -42,7 +45,9 @@ theorem freeAbelian_augmentation_quasiIso
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
   sorry
 
-/-- -/
+/-- For an injective abelian sheaf `I`, sections over the zeroth stage of a split étale hypercover
+form an exact augmented alternating coface complex: the augmentation is injective, its image is
+the kernel of `d 0 1`, and the homology vanishes in positive degrees. -/
 theorem injective_abelian_section_cohomology
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X)
@@ -60,7 +65,8 @@ theorem injective_abelian_section_cohomology
           (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
   sorry
 
-/-- -/
+/-- The augmentation of the free `R`-module sheaf complex of a split étale hypercover is a
+quasi-isomorphism. -/
 theorem freeModule_augmentation_quasiIso
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R] :
@@ -73,7 +79,9 @@ theorem freeModule_augmentation_quasiIso
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
   sorry
 
-/-- -/
+/-- For an injective sheaf `I` of `R`-modules, sections over the zeroth stage of a split étale
+hypercover form an exact augmented alternating coface complex: the augmentation is injective, its
+image is the kernel of `d 0 1`, and the homology vanishes in positive degrees. -/
 theorem injective_module_section_cohomology
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R]

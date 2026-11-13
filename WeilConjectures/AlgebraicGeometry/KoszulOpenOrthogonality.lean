@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Koszul orthogonality detects extension from an open
 
-Source: Stacks Project, Lemma 36.15.2, Tag 09IR.
+## References
+
+* Stacks Project, Lemma 36.15.2, Tag 09IR.
 -/
 
 @[expose] public section
@@ -30,28 +32,12 @@ open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- For an affine open `V = Spec A`, orthogonality to all shifts of its Koszul complex is
-exactly invertibility of the canonical derived open-restriction unit.
-Source: Stacks Project, Tag 09IR.
+exactly invertibility of the canonical derived open-restriction unit (Stacks, Tag 09IR).
 
-Proof:
-1. Form the cone `C` of the canonical map. The Koszul complex restricts to zero on the
-   complement of its zero locus: each `f i` acts null-homotopically and is a unit on `D(f i)`
-   (Tag 0663). Derived adjunction therefore
-   makes all Hom groups from its shifts to the derived pushforward zero. The triangle
-   identifies vanishing against `E` with vanishing against `C`. The unit is invertible
-   exactly when `C` is zero.
-2. The cone restricts to zero on the open. Koszul multiplication triangles (Tag 062C)
-   imply vanishing against every positive-power tuple by induction on the exponents.
-   Apply lem-pc-koszul-affine-detection to this supported cone to obtain `C = 0`.
-3. Conversely, an invertible unit identifies `E` with its derived pushforward; restriction
-   of the Koszul complex is zero, so derived adjunction gives the required Hom vanishing.
-
-`a` identifies `Spec A` with the affine open `V`. Open immersion `j` is represented by
-`U.ι`. The overlap is `a ⁻¹ᵁ U`. A right adjoint to exact derived open restriction is the
-unbounded derived direct image; `adj.unit` is the canonical map of the statement.
-The Koszul complex `K` is `ExteriorAlgebra.koszulComplex A r f` placed in cohomological
-degrees `-q` by `ComplexShape.embeddingDownNat`, sheafified termwise by `tilde.functor`
-and localized, in the form of lem-pc-koszul-affine-detection. -/
+Here `a` identifies `Spec A` with the affine open `V`, the open immersion `j` is represented
+by `U.ι`, and the overlap is `a ⁻¹ᵁ U`. The Koszul complex is
+`ExteriorAlgebra.koszulComplex A r f`, placed in cohomological degrees `-q` and sheafified
+termwise by `tilde.functor`. -/
 theorem koszul_open_orthogonality
     (X : Scheme.{u₁}) (U : X.Opens) (A : Type u₁) [CommRing A]
     (a : Spec (.of A) ⟶ X) [IsOpenImmersion a]

@@ -76,15 +76,7 @@ private noncomputable def finitePivotSplit (P : C) {n : ℕ} (j : Fin (n + 1)) :
       · simp [h, Fin.succAbove_right_injective.ne h]
 
 /-- A divisible row gives a pivot block after splitting off its selected summands.
-
-Source: the finite biproduct step in the continuous-function pivot argument for
-Bhatt--Scholze, Section 6.8, Proposition 6.8.11(1).
-
-Proof: split the selected source and target indices from their finite complements.
-The other row coefficients factor through the selected coefficient by assumption.
-Their biproduct descent is r; the remaining column and square block are obtained by
-composing the transformed map with the binary inclusions and projections. Binary
-and finite biproduct extensionality verify the four blocks. -/
+(Bhatt--Scholze, Proposition 6.8.11(1).) -/
 theorem finiteBiproduct_pivot {P : C} {n t : ℕ}
     (f : (⨁ fun _ : Fin n ↦ P) ⟶ ⨁ fun _ : Fin t ↦ P)
     (i : Fin t) (j : Fin n)

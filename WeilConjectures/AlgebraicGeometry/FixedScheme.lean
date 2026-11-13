@@ -52,8 +52,8 @@ variable {C X s : Scheme.{u}} (aX : X ⟶ s) (c₁ c₂ : C ⟶ X) (h : c₁ ≫
 
 /-- Fixed scheme of a correspondence.
 
-For `c = (c₁, c₂): C ⟶ X ×_s X`, the fixed scheme is `Fix(c) = C ×_{X ×_s X, c, Δ_X} X`, the
-scheme-theoretic intersection of the image of `c` with the diagonal `Δ_X: X ⟶ X ×_s X`. Its
+For `c = (c₁, c₂) : C ⟶ X ×_s X`, the fixed scheme is `Fix(c) = C ×_{X ×_s X, c, Δ_X} X`, the
+scheme-theoretic intersection of the image of `c` with the diagonal `Δ_X : X ⟶ X ×_s X`. Its
 first projection is `i_F = fixedSchemeι` and its second projection `d = fixedSchemeProj`, with
 `c₁ i_F = d = c₂ i_F`. -/
 def fixedScheme : Scheme.{u} :=
@@ -143,8 +143,8 @@ instance [IsSeparated aX] : IsClosedImmersion (fixedSchemeι aX c₁ c₂ h) :=
 instance [QuasiSeparated aX] : QuasiCompact (fixedSchemeι aX c₁ c₂ h) :=
   MorphismProperty.of_isPullback (isPullback_fixedScheme aX c₁ c₂ h).flip inferInstance
 
-/-- The fixed scheme `Fix(h) = Fix(𝟙, h)` of an endomorphism `h: X ⟶ X` over `s`: the scheme-theoretic equalizer of `h` and `𝟙 X`
-(`Scheme.fixedSchemeIsLimit`). -/
+/-- The fixed scheme `Fix(h) = Fix(𝟙, h)` of an endomorphism `h : X ⟶ X` over `s`:
+the scheme-theoretic equalizer of `h` and `𝟙 X` (`Scheme.fixedSchemeIsLimit`). -/
 abbrev Hom.fixedScheme (g : X ⟶ X) (hg : g ≫ aX = aX) : Scheme.{u} :=
   Scheme.fixedScheme aX (𝟙 X) g (by rw [hg, Category.id_comp])
 

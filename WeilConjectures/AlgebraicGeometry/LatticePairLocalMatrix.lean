@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.LatticePairMatrixAtBasis
 /-!
 # Continuous matrices for locally free integral lattice pairs
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local bases.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -23,13 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- An integral lattice pair has locally an invertible continuous matrix in a fixed
-rational frame, with its embedded-image formula after every restriction.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases.
-Proof: use the finite locally free presentation of the integral module. The sieve of
-objects mapping to a chosen basis object covers the identity slice object, hence its
-corresponding sieve covers V. On each such object apply the matrix-at-basis calculation.
-This uses the varying-rank definition of finite local freeness without adding a fixed
-rank hypothesis to the integral module. -/
+rational frame, with its embedded-image formula after every restriction. -/
 theorem integralLatticePair_localMatrix (X : Scheme.{u})
     (K : Type u) [Field K] [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K)
     (L : SheafOfModules.{u + 1} (latticeModuleRing X K))

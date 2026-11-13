@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 /-!
 # Basic-open fractions for a single Proj twist
 
-Source: Stacks Project, Constructions, Tags 01MN (1) and 01M7 (2),(3).
+## References
+
+* Stacks Project, Constructions: Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -26,25 +28,8 @@ open CategoryTheory Opposite LocalizedModule
 
 namespace AlgebraicGeometry.Proj
 
-/-- The locally-fraction construction of one twist has its usual homogeneous fraction chart.
-Source: Stacks Project, Constructions, Definition 27.10.1 (1), Tag 01MN, and
-Lemma 27.8.4 (2),(3), Tag 01M7.
-
-Proof: map a homogeneous fraction y/f^m of degree k to the section that at a homogeneous
-prime p in D₊(f) is the image of that fraction in the degree-k part of A_p. Equality in the
-localization implies equality of sections. Conversely a locally-fraction section on D₊(f)
-is represented on a finite basic-open cover by homogeneous fractions. Such a finite cover
-exists because D₊(f) is affine for f homogeneous of positive degree. Clear denominators on
-that cover and then clear the finitely many witnesses of equality on the overlaps. The usual
-localization gluing argument gives a single fraction with denominator a power of f; its
-numerator has degree k+m*b. Injectivity follows by the same finite covering and denominator
-clearing argument applied to a section equal to zero. Thus the inverse chart embeds sections
-in the ordinary localized module and has the displayed range. Degrees below zero have zero
-numerator by the convention A_n=0 for n<0. Multiplication of pointwise fractions identifies
-the scalar action with the homogeneous-localization algebra map. If g^e=h*f, the canonical
-localization map sends y/f^m to h^m*y/g^(e*m), and both sections have identical values at
-every prime in D₊(g), proving restriction compatibility. If f is nilpotent D₊(f) is empty
-and the localization is zero, so all assertions hold. -/
+/-- The locally-fraction construction of one twist has its usual homogeneous fraction chart
+(Stacks, Tags 01MN, 01M7). -/
 theorem single_twist_basicOpen_fractions
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] :

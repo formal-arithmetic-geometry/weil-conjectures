@@ -41,25 +41,9 @@ variable (X : Scheme.{u})
 local instance globalCounitCommRing :
     CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
   inferInstanceAs (CommRing (X.presheaf.obj (op ⊤)))
-/-- The global ringed-space counit comparison square. P is the ordinary
-pullback of the preceding global tensor theorem (the statement holds for any
-adjunction to Γ); α is its left-derived comparison. The derived adjunction here
-is induced from the ordinary adjunction and the canonical right-derived unit,
-so an unrelated adjunction with the same functors cannot be substituted.
-The derived-functor instances under postcomposition express absoluteness; for
-p they follow from K-flat and K-injective resolutions, respectively.
-Source: Stacks, Tag 0FP1, Lemma 20.28.6.
-Proof: resolve K by a K-injective I and resolve Γ(I) by a K-flat Q. Choose a
-K-flat P0 resolving Γ(K) and a map P0 → Q so the square with Γ(K) → Γ(I)
-commutes in the homotopy category, using common refinements of roofs. Apply
-ordinary pullback to that square and then the ordinary evaluation counit.
-Naturality of evaluation gives a commutative outer rectangle from p*P0 to I.
-The left edge computes Lp*(Γ(K) → RΓ(K)), the bottom edge is the induced
-derived counit, and the upper/right path is the comparison Lp* → p* followed
-by ordinary evaluation. Localizing the outer rectangle proves the equation.
-In Lean, the induced derived counit is constructed as a right-derived descent;
-its factorization equation is exactly this square, so the existing
-Adjunction.derivedε_fac_app proves it for arbitrary complexes. -/
+/-- The global ringed-space counit comparison square, for the ordinary pullback `P` and its
+left-derived comparison `α`, with the derived adjunction induced from the ordinary adjunction
+(Stacks, Tag 0FP1). -/
 theorem globalRingedSpace_derivedCounit_comparison
     (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace))

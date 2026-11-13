@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ProperSupportSectionLocality
 
 /-! # Local and linear calculus of proper-support sections
 
-Source: Stacks Project, Tags 04FR, 04FT and 0F4X.
+## References
+
+* [Stacks, Tag 04FR], [Stacks, Tag 04FT], [Stacks, Tag 0F4X]
 -/
 
 @[expose] public section
@@ -129,25 +131,7 @@ private theorem support_add
 
 /-- Proper-support sections are closed under the module operations, restriction and
 sheaf morphisms, and membership is local on the base. Their support can equivalently
-be tested at every separably closed geometric point.
-
-Source: Stacks Project, Tags 04FR, 04FT and 0F4X.
-
-Proof:
-1. Apply the zero-open theorem to the underlying abelian sheaf. Its open zero locus
-has closed complement T, and the geometric-germ criterion identifies T at every
-separably closed geometric point. Every scheme point has an algebraically closed
-geometric point above it, so this also identifies the support in SectionHasProperSupport.
-2. The zero section has empty support. A sum has support contained in the union of
-its summands' supports, and a scalar multiple has support contained in the original
-support. Closed subsets and finite unions preserve properness over the base.
-3. A restriction is pullback along the base-change map of etale objects. The germ
-formula identifies its support with the inverse image of the original support.
-Closed proper-support locality gives properness after this base change.
-4. A covering sieve contains a jointly surjective etale family. Apply the same support
-formula to this family and descend properness by closed proper-support locality.
-5. A linear sheaf morphism carries zero germs to zero, so its section has closed support
-contained in the original support. Properness passes to that closed subset. -/
+be tested at every separably closed geometric point. (Stacks, Tags 04FR, 04FT, 0F4X) -/
 theorem properSupportSectionCalculus (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] :
     (∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale),

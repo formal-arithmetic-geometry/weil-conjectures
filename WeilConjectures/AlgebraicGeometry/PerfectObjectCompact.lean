@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectTensorHomDuality
 
 /-! # Compactness of perfect complexes
 
-Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1).
+## References
+
+* Stacks Project, Tag 09M1.
 -/
 
 @[expose] public section
@@ -60,19 +62,7 @@ private theorem compact_of_homEquiv
   exact Function.Bijective.of_comp_left hbij (e (∐ E)).injective
 
 /-- Every perfect object of the quasi-coherent derived category of a quasi-compact,
-quasi-separated scheme is compact.
-Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1).
-Proof: (1) use `lem-pc-perfect-tensor-hom-duality` with the perfect dual of `P` to
-identify `Hom(P, M)` naturally with `Hom(𝒪_X, P⁻¹ ⊗ᴸ M)`; (2) use
-`lem-pc-kflat-resolution`, `lem-pc-derived-qcoh-direct-sums`,
-`lem-pc-derived-ambient-direct-sums`, and `def-pc-tensor-complex-sheaves` to show
-that tensoring by this dual commutes with set-indexed direct sums; (3) apply
-`lem-pc-ringed-spaces-derived-adjoint`,
-`lem-pc-derived-direct-image-preserves-direct-sums`, and
-`lem-pc-affine-qcoh-derived-equivalence` to the structure morphism
-`X ⟶ Spec(ℤ)`, so `Hom(𝒪_X, -)` commutes with direct sums, and conclude by
-naturality. The empty family is included.
--/
+quasi-separated scheme is compact (Stacks, Tag 09M1). -/
 theorem perfectObjectCompact (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

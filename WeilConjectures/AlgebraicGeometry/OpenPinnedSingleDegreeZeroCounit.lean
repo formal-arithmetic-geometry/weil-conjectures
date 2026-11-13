@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 import all WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
 
 /-! # Restriction of the pinned single tensor counit
-Source: Stacks Project, Tags 08DW, 08IB and 08HY. -/
+
+## References
+
+* Stacks Project, Tags 08DW, 08IB and 08HY.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,8 +26,7 @@ open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- The degree-zero counit selected by the pullback composition structure.
-Source: Stacks Project, Tag 08HY. -/
+/-- The degree-zero counit selected by the pullback composition structure. -/
 def openPinnedSingleDegreeZeroCounit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -57,20 +60,7 @@ private theorem assembleCounitSquare
 
 -- Nested derived and homotopy comparisons require additional typeclass reduction.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction of the pinned counit, before applying any direct image.
-Source: Stacks Project, Tags 08DW, 08IB and 08HY.
-Proof: compare the tensor pullback of a restricted module with restriction of its
-pullback by the underived composition comparisons and uniqueness of open pullback
-as left adjoint to pushforward. Apply the exact single-complex restriction
-comparison. On K-flat representatives the pinned left-derived counit is the
-localization of this underived tensor map. Its factorization equation, and the
-factorization equations for the pinned composition comparisons and the constructed
-open-pullback isomorphisms, identify the two paths. Thus the equality holds before
-localization and descends. The source path is exactly the constructed
-singleComplexRestrictedCoefficient with the identity coefficient map. Every factor is natural in M,
-so the target comparisons
-assemble to a natural isomorphism. The construction applies to empty opens and zero
-modules, with no flatness assumption on M. -/
+/-- Restriction of the pinned counit, before applying any direct image. -/
 theorem open_pinned_single_degree_zero_counit_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

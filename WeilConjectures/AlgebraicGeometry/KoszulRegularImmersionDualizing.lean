@@ -24,7 +24,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedHomEvaluationCounit
 
 /-! # Dualizing object of a Koszul-regular closed immersion
 
-Source: Stacks Project, Duality for Schemes, Tag 0BR0, with Tag 0BQZ.
+## References
+
+* Stacks Project, Duality for Schemes, Tag 0BR0, with Tag 0BQZ.
 -/
 
 @[expose] public section
@@ -36,23 +38,11 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The right adjoint applied to the structure sheaf is the shifted top exterior power
-of the normal sheaf, with the shift allowed to vary on the clopen rank strata.
+of the normal sheaf, with the shift allowed to vary on the clopen rank strata
+(Stacks, Tag 0BR0).
 The object `OY` is the structure sheaf in the quasi-coherent full subcategory; `hOY`
 identifies its underlying derived object. The preservation witness `hpres` defines the
-restriction of derived direct image, and `adj` says precisely that `a` is its right adjoint.
-An isomorphism of underlying objects is an isomorphism in the full subcategory.
-
-Source: Stacks, Tag 0BR0.
-Proof, following the node:
-1. A closed immersion is finite, and Z is
-Noetherian since Y is. Finite duality (lem-sc-finite-duality-derived-hom, Tags 035C,
-0AX2) identifies Ri_* a(OY) with RHom(i_* OZ, OY).
-2. The local Koszul Ext calculation (lem-sc-koszul-regular-immersion-derived-hom,
-Tag 0BQZ) identifies this with Ri_* of the shifted normal determinant. The local
-comparison is compatible with changes of generators and the i_* OZ-module action.
-3. The affine derived equivalence (lem-sc-finite-affine-derived-equivalence, Tag 0AVW)
-descends this module-compatible comparison to Z. Apply on every clopen rank stratum;
-the canonical local comparisons glue to the displayed isomorphism. -/
+restriction of derived direct image, and `adj` says precisely that `a` is its right adjoint. -/
 theorem koszulRegularImmersion_dualizing {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsNoetherian Y] [IsClosedImmersion i]
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

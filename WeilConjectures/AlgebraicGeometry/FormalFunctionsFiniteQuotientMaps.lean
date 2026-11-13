@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization
 
 /-! # Finite pullback of the local germ formula
 
-Source: Stacks Project, Tags 02OD, 01F7, 01FB and 01E4.
+## References
+
+* Stacks Project, Tags 02OD, 01F7, 01FB and 01E4
 -/
 
 @[expose] public section
@@ -34,22 +36,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 400000 in
 -- Nested cohomology restrictions and resolution comparisons need extra elaboration heartbeats.
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
-Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.
-
-Proof: Fix the prescribed finite choices D and choose an injective resolution K of F'.
-The local spectrum map and its base change are flat, so the open-choice existence
-theorem gives local choices E₀. Set E to E₀ with its source field replaced by D.source.
-The psi, target and unit_square fields do not depend on source, so E is valid and the
-germ in the local comparison formula is definitionally the germ required by Theta.
-Apply the finite-open factorization theorem to E and D, obtaining an additive map t
-with its restriction and restricted-pullback equations. Apply t to ha on this germ.
-Its restriction equation identifies the left side with restriction after canonical
-finite pullback; its restricted-pullback equation identifies the right side with the
-finite restricted h-map applied to xi. Substitute hr at a(germ) and evaluate linear-map
-composition. This is the defining Theta equality for every I, J, V, hy, D and xi. No
-surjectivity of r or equivalence property of a is needed. For zero coefficients or
-empty fibre all maps are zero; in degree zero this is composition of section pullbacks.
-There is no quotient-system isomorphism or completed module in this argument. -/
+(Stacks, Tags 02OD, 01F7, 01FB and 01E4.) -/
 theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p n : ℕ)

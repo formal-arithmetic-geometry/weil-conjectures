@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Gluing a finite presentation and its map across two opens
 
-Source: Stacks Project, Properties, Lemma 01PI, gluing paragraph.
+## References
+
+* [Stacks, Tag 01PI](https://stacks.math.columbia.edu/tag/01PI)
 -/
 
 @[expose] public section
@@ -116,26 +118,10 @@ private theorem finitePresentation_binary_local
     · exact finitePresentation_over_of_overMap X R G le_sup_left hW
   exact IsFinitePresentation.of_coversTop G U hc
 
-/-- Glue the old module on W to a finitely presented replacement on V using the
-replacement map as the overlap identification. This constructs only a module on
-W union V, with a map to the restriction of H.
-
-Source: Stacks Project, Properties, Lemma 01PI, second paragraph of the proof
-(https://stacks.math.columbia.edu/tag/01PI), and sheaf-module descent, Tag 00AK.
-
-Proof: Restrict the map j to W intersect V. It is an isomorphism by hypothesis.
-Identify its target with the restriction of H on W by the canonical iterated
-restriction isomorphisms. Glue H on W and E on V using this identification.
-For the two-open cover, all cocycle equations reduce to the inverse identities
-for the overlap isomorphism and identity maps. Sheaf-module descent produces G
-on W union V with the prescribed local identifications. The identity map to H
-on W and j on V agree on the overlap by the choice of identification, so glue
-to a map phi. Finite presentation is local and invariant under isomorphism;
-thus G is finitely presented. The restriction of phi to W is the prescribed
-identification with H on W and therefore is an isomorphism. Empty opens and
-identical opens cause no exception: the same two-open descent applies. This
-step does not construct any affine replacement and needs no compactness,
-quasi-separatedness, affineness, or quasi-coherence hypotheses. -/
+/-- Glue the old module on `W` to a finitely presented replacement on `V`, using the
+replacement map as the overlap identification. This gives a finitely presented module on
+`W ⊔ V` with a map to the restriction of `H`, which is an isomorphism on `W`
+(Stacks, Tag 01PI). -/
 theorem exists_finitePresentation_binary_gluing
     (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))

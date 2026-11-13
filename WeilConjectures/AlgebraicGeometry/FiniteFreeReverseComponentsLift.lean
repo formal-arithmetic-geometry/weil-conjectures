@@ -54,23 +54,7 @@ private theorem transport_lift
       simp only [Iso.hom_inv_id_assoc]
 
 -- Termwise restriction and pullback require additional definitional-equality checks.
-/-- Lift a family of reverse-degree maps, without any equations involving the differential.
-
-Proof: Choose finite bases for the terms of P. Restriction preserves these bases by
-restrictFunctorIsoPullback and pullbackFreeIso. Pullback to Spec O_{Y,y} preserves them
-again. Only reverse-degree pairs with both indices in [0,d] can contribute: outside
-that interval one of the two modules is zero. In these finitely many pairs, each map
-is a finite matrix over O_{Y,y}, since global sections of Spec O_{Y,y} are O_{Y,y}.
-Represent each entry by a structure-sheaf section near y inside V, and intersect the
-finitely many neighbourhoods. Define k by those matrices in the chosen restricted
-bases, and by zero at all other pairs. In particular k has reverse-degree support.
-The equality of the matrices after taking germs gives the stated component equality.
-The natural isomorphism e is obtained from restrictFunctorIsoPullback, pullbackComp,
-and the identity U.fromSpecStalkOfMem y hyU composed with Y.homOfLE hUV equals
-V.fromSpecStalkOfMem y hyV; the latter follows by cancellation of the open inclusion
-V.ι. Thus e applies to every complex on V, not merely to P. No chain equation or
-homotopy equation is asserted here. Empty matrices, d=0, and zero terms require no
-coefficients to lift and are handled by the zero maps. -/
+/-- Lift a family of reverse-degree maps, without any equations involving the differential. -/
 theorem exists_lift_reverse_components
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

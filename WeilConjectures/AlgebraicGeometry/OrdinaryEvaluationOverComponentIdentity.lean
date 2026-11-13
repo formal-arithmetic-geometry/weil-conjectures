@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverDualProjection
 
 /-! # Evaluation components with a fixed normalized tensor comparison
 
-Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
+## References
+
+* Stacks Project, Tag 0A8X, ordinary tensor totalization.
+-/
 
 @[expose] public section
 
@@ -43,44 +45,8 @@ attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
 set_option linter.unusedVariables false in
-/-- The tensor-Hom component identity after dual and output transport.
-Source: Stacks Project, Tags 08DQ and 08DL; Tag 0A8X, Hom projections.
-
-Proof: first compare `e` with the explicit sectionwise internal-Hom
-reindexing isomorphism. Their quotient is a natural automorphism alpha of
-internal Hom on the open scheme. Applying alpha to each global identity
-map defines endomorphisms z_A. Naturality in both variables gives
-alpha(f) = z_B f = f z_A for every global map f: A -> B. These
-endomorphisms are all multiplication by the same global scalar t: for an
-open V use extension by zero j_! O_V and its canonical map to O. That map
-is the identity over V, so z_(j_! O_V) is multiplication by t there, where
-t is z_O(1). Every section of A over V is a map j_! O_V -> A;
-naturality then gives z_A(x) = t*x. To obtain the same description of
-alpha on a local Hom section phi: A|V -> B|V, use its adjoint global map
-j_!(A|V) -> B and precomposition with j_!(A|V) -> A. Over V the latter is
-the identity, and the naturality square says alpha(phi) = t*phi.
-The scalar t is a unit since alpha_(O,O) is an isomorphism.
-
-Likewise the tensorator of m equals sectionwise tensor reindexing. Check
-this on local pure tensors using maps j_! O_V -> A and j_! O_V -> B.
-Their naturality squares reduce the check over V to the tensorator on
-(O,O), which is fixed by the core monoidal unit laws and the prescribed
-unit isomorphism. These extensions by zero ensure that local sections,
-rather than only global sections, are tested. Sheafified tensor sections
-are locally sums of pure tensors, so the check determines the tensorator.
-
-If r+q is nonzero, both components are zero and the additive equivalence
-and composition preserve zero. Otherwise apply hπ at the single unit,
-then naturality of Hom(P,-) for the single-unit map a. Projecting d thus
-sends a dual section phi to t times its canonical reindexing. Its inverse
-contributes t inverse. The local component evaluates y tensor phi on x
-as y*phi(x). The output comparison e contributes t, which cancels t
-inverse. The tensorator calculation and the symmetry and unit equations
-identify the parenthesizations and remove the unit factor. The degree
-identification agrees because T acts degreewise. Thus the uncurried
-maps agree on all local tensors; curry back to the displayed equation.
-No f or c is used. Zero complexes, the zero ring and empty opens satisfy
-the same identities, with zero maps on zero carriers. -/
+/-- The tensor-Hom component identity after dual and output transport
+(Stacks, Tags 08DQ, 08DL and 0A8X). -/
 theorem ordinaryEvaluation_over_component_identity (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :
     let L := Equivalence.functor

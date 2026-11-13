@@ -20,20 +20,7 @@ universe u
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Every point of the generic fibre lies in the union of the interiors of the strata.
-
-Proof: The finite source is Noetherian. Let C be an irreducible component
-containing a point x of the generic fibre, and c its generic point. Continuity
-makes g(c) specialize to the generic point of S, and that generic point specializes
-to every point of S; since S is T0, g(c) is the generic point. A finite morphism has
-discrete fibres, so c specializes to x within a discrete subspace and hence c = x.
-Every irreducible component of a Noetherian space contains a nonempty open O of the
-whole space (remove all the other finitely many components). The generic point x
-lies in O. Choose the stratum T_i containing x. Its closure
-contains C, and its coborder is open because the stratum is locally closed.
-Thus O intersect coborder(T_i) is an open neighbourhood of x contained in T_i,
-so x lies in the interior of that stratum and hence in W.
-This works without reducing Z and covers the empty generic fibre vacuously. -/
+/-- Every point of the generic fibre lies in the union of the interiors of the strata. -/
 theorem generic_fiber_subset_stratum_interiors
     (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S]
     {Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g] (T : Stratification Z) :

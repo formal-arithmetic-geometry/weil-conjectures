@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.OverlapUniversalTestCoherence
 
 /-! # Eventual identity and cocycle equations for lifted maps
 
-Source: Stacks Project, Tags 01ZR and 05N7. -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -39,29 +42,7 @@ private lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
 
 
 /-- The specific lifted natural overlap maps become coherent at a later stage.
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing, and Tag 05N7,
-eventual equality of maps.
-
-Proof: The comparison with M makes the diagonal and triple cocycle equations
-true after pullback to the limit. Test the diagonal equation on each member of
-the finite cover. Test the cocycle on the threefold fiber product of each triple
-of cover members. Each test scheme is quasi-compact and quasi-separated, because
-it is an intersection of finitely many quasi-compact opens in a quasi-separated
-scheme. Choose finite affine covers of these test schemes. The tested sources
-and targets are restrictions of the prescribed finitely presented quasi-coherent
-models. On each affine chart, use the equality clause of 05N7 to make the two
-maps equal at a later stage. A common upper bound of these finitely many stages
-makes every equation hold. Sheaf locality gives the equations on the whole test
-schemes. Pullback naturality and the universal properties of the diagonal and
-threefold fiber products give the equations on all test schemes. The transitions
-at this later stage are the canonical pullbacks of the supplied T, not newly
-chosen maps. The chart refinement map is the displayed pullback lift, so its
-composition with the original chart projection is the original projection at
-the later stage. Transport the supplied limit comparison through these
-composition isomorphisms. Naturality of the composition isomorphisms preserves
-its commutation equation. Empty covers have vacuous equations. For a preorder
-use the partial-order quotient of the nonempty tail above the supplied stage.
-This uses only eventual equality; no overlap map is lifted in this step. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_overlap_eventual_coherence
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

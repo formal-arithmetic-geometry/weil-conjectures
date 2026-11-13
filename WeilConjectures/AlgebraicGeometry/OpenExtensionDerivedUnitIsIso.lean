@@ -12,7 +12,11 @@ import WeilConjectures.Algebra.Homology.DerivedOpenShriekAdjunction
 import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-! # Invertibility of the transported derived open extension unit
-Source: Stacks Project, Tags 00A7, 08BS and 06YB. -/
+
+## References
+
+* Stacks Project, Tags 00A7, 08BS and 06YB.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,20 +36,7 @@ local instance standardDerivedOpenExtensionDerivedUnitIsIso (X : Scheme.{u}) (U 
   HasDerivedCategory.standard _
 
 /-- The unit of any left adjoint to transported derived open restriction is invertible.
-Source: Stacks Project, Sheaves Tag 00A7 (4), Modules on Sites Tag 03DI,
-and Cohomology Tags 08BS and 08BT.
-Proof: take the canonical ordinary extension-by-zero adjunction, whose unit is
-invertible by the one-summand calculation on opens contained in U. Derive that
-exact adjunction using derived_open_shriek_adjunction. The exact derived functors
-respect composition and natural isomorphisms, so the ordinary unit gives an
-isomorphism G-derived followed by restriction-derived with the identity.
-Mathlib's fullyFaithfulLOfCompIsoId then makes G-derived fully faithful. Compose
-it with the inverse derived over-site equivalence to obtain a fully faithful J₀
-left adjoint to the prescribed R. Its unit is invertible. The left-adjoint
-uniqueness isomorphism from J₀ to any J identifies the two units, so invertibility
-passes to the unit of the supplied adjunction. Empty and total opens are already
-covered by the ordinary unit theorem; the derived construction uses precisely the
-specified localization universes and the standard localization on U.toScheme. -/
+(Stacks, Tags 00A7, 03DI, 08BS and 08BT) -/
 theorem openExtension_derived_unit_isIso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

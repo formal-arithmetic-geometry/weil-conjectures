@@ -15,7 +15,10 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSu
 /-!
 # Normalization of continuous lisse coefficients
 
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.8.1 and
+  Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -144,9 +147,7 @@ private noncomputable def coefficientUnitIso
   exact ConcreteCategory.congr_hom (e.inv.hom.naturality f) s
 
 /-- Restricting scalars along an isomorphism of coefficient sheaves preserves finite local
-freeness. The same local cover and finite generating sets give the transported free
-presentations.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), identification of lattice coefficients. -/
+freeness. -/
 theorem finiteLocallyFree_restrict {C : Type (u + 1)} [Category.{u} C]
     (J : GrothendieckTopology C)
     [∀ V, HasSheafify (J.over V) AddCommGrpCat.{u + 1}]
@@ -218,19 +219,7 @@ private theorem coefficientNormalizedModule_finiteLocallyFree (l : ℕ) [Fact l.
 
 /-- The lifted `WithAbs` coefficient presentation is isomorphic to the original
 spectral-norm presentation. Its coefficient square commutes, and transporting modules
-along the rational isomorphism preserves finite local freeness.
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6).
-
-Proof: the lift algebra equivalence preserves minimal polynomials, hence the spectral
-absolute value. It gives an isometric ring equivalence from the `WithAbs` lift to E.
-The valuation rings agree under it by their characterization as absolute value at most
-one. Postcomposition with these equivalences gives isomorphisms on continuous
-functions, naturally in the test scheme, and their square commutes pointwise.
-For finite local freeness, restrict scalars along the rational isomorphism. Transport
-the module's local free generators on the original cover. On each covering slice the
-pushforward is along the identity functor and an invertible coefficient morphism, so
-it preserves colimits and identifies the unit modules. The transported generating
-sets remain finite and their free presentations remain isomorphisms. -/
+along the rational isomorphism preserves finite local freeness. -/
 theorem lisse_coefficient_normalization (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)

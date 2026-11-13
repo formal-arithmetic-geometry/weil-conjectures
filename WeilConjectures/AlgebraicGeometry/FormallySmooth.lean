@@ -13,7 +13,9 @@ public import Mathlib.AlgebraicGeometry.Over
 /-!
 # Formally smooth morphisms of schemes
 
-Source: Stacks Project, More on Morphisms, Definition 37.11.1 (Tag 02H0).
+## References
+
+* [Stacks Project, Tag 02H0](https://stacks.math.columbia.edu/tag/02H0)
 -/
 
 @[expose] public section
@@ -24,7 +26,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A morphism `f: X ⟶ S` is formally smooth
+/-- A morphism `f : X ⟶ S` is formally smooth
 if every `S`-morphism from an affine first order thickening's closed subscheme
 to `X` extends over the affine thickening. The structure map of `T` is the
 composite `i ≫ (T' ↘ S)` (Stacks Project, Tag 02H0). -/

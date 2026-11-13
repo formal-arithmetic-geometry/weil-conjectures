@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
 
 /-! # Canonical isomorphism transfer from its inverse formula
 
-Source: Stacks Project, Tags 0D5S, 0D5T and 08HY.
+## References
+
+* Stacks Project, Tags 0D5S, 0D5T and 08HY
 -/
 
 @[expose] public section
@@ -54,25 +56,7 @@ private theorem restricted_counit_map
   erw [L.map_id, Category.id_comp, Category.id_comp]
 
 /-- Identify the equivalence-unit transfer by its adjunction-unit inverse formula.
-Source: Stacks Project, Tags 0D5S, 0D5T and 08HY.
-
-Proof: Substitute k = k₀. Write L for pullback along e.hom, Rq for direct
-image along q, η for the pinned adjunction unit, U for ev.unitIso, and δ for
-the restricted conjugate d (including transport along hp). The fully faithful
-QCoh inclusions map the restricted adjunction units and counits to the ambient
-ones. Expanding conjugation into units and counits therefore shows that δ is
-exactly the transport from R(p) to R(e.hom) followed by Rq used in li.
-Consequently the constructed transfer component at D is
-δ.hom at L(D), followed by Rq applied to ri.hom at L(D), then Rq applied to
-U.inv at D. The supplied inverse component of j is Rq applied to η at D,
-followed by δ.inv at L(D). Compose j.inv with the constructed transfer:
-δ.inv and δ.hom cancel. By unit_rightAdjointUniq_hom_app, η at D followed
-by ri.hom at L(D) equals U.hom at D. Functoriality of Rq and cancellation
-of U.hom with U.inv make the composite the identity. The ambient computation
-reflects through the faithful QCoh inclusion. Precompose with j.hom and cancel
-j.hom followed by j.inv, obtaining k.app D = j.hom.app D.
-The argument uses only functorial and adjunction identities and applies also to
-identity arrows, empty schemes and zero objects. No base-change map is used. -/
+(Stacks, Tags 0D5S, 0D5T and 08HY) -/
 theorem horizontal_transfer_eq_of_inverse_formula
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {P Q Z : Scheme.{u}}

@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.KoszulSelfExtConormalLocalAlignment
 
 /-! # Compatible local Koszul comparison maps
 
-Source: Stacks Project, Tag 0BQY, zero-differential Hom and generator comparison. -/
+## References
+
+* Stacks Project, Tag 0BQY (zero-differential Hom and generator comparison).
+-/
 
 @[expose] public section
 
@@ -36,38 +39,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The Koszul Hom calculation supplies compatible local maps which are surjective
-on sections over every smaller open. The chosen neighborhoods cover V.
-
-Source: Stacks Project, Tag 0BQY, the zero-differential Hom calculation and its
-compatibility under changes of regular generators; Tag 062I for the conormal basis.
-
-Proof: On each supplied affine chart let A be its section ring, I its immersion ideal,
-and B=A/I. Sheafify the normalized augmented Koszul projective resolution of B.
-Open restriction of derived internal Hom and its bounded finite-free model identify
-self Ext with the homology of Hom(K,B). Its differentials vanish because each
-coefficient is a generator in I. The conormal basis identifies the degree-n term
-with Hom_B(wedge^n(I/I²),B). Use the inverse of this coordinate identification to
-map the dual exterior conormal to the computed cohomology. The quotient scalar
-action is the B-action, so tensor pullback of cohomology gives the same map on Z.
-At a point of an overlap the two conormal bases have equal cardinality over the
-nonzero local ring. Refine around that point so that the change of coordinates
-is invertible. For a substitution of regular generators, construct the Koszul
-chain map by exterior powers of the degree-one substitution; the contraction
-formula checks the chain equation in each degree. Modulo I this is the change of conormal
-coordinates. Applying Hom into B transposes precisely that exterior map. Thus
-the local comparison maps agree after a common refinement. Different comparison
-maps lifting the quotient identity are homotopic, so the result is independent
-of the chosen substitutions. The same formulas commute with localization.
-Refine arbitrary intersections by affine opens to check equality of the local maps
-on every smaller open by the separated sheaf axiom. Their coordinate images
-span the zero-differential Hom term. In fact the coordinate map is an isomorphism
-of finite free sheaves on each chart, so it is surjective on sections over every
-smaller open, not merely on affine sections. Choose for each point a neighborhood
-inside its inverse-image affine chart. The equality just proved gives the
-stated compatibility for any open contained in two chosen neighborhoods.
-A common K-injective resolution compares derived universes. For n=0 the map
-is the quotient unit; for n above the chart length the target is zero. Empty V
-has the empty family of neighborhoods and no local conditions. No inverse is needed here. -/
+on sections over every smaller open. The chosen neighborhoods cover `V`
+(Stacks, Tags 0BQY, 062I). -/
 theorem koszulRegularImmersion_self_ext_conormal_local_comparison
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

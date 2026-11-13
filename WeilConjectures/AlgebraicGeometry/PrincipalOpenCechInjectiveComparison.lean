@@ -13,9 +13,13 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechCoordinateMap
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
-/-! # comparison to injective terms for principal-open Čech coordinates
+/-!
+# Comparison to injective terms for principal-open Čech coordinates
 
-Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 079P, <https://stacks.math.columbia.edu/tag/079P>
 -/
 
 @[expose] public section
@@ -58,27 +62,8 @@ private theorem comparison_restriction_naturality
 
 /-- A K-injective coefficient complex admits a comparison square to the subset Čech
 augmentation of a complex with injective terms. The section comparison is a
-quasi-isomorphism; no homology assertion about either augmentation is assumed.
-
-Source: Stacks Project, Cohomology, Tag 08C1, finite Čech comparison, and Tag 079P,
-functorial K-injective resolutions.
-
-Proof: Choose a functorial K-injective resolution J → I with injective terms.
-Since J and I are K-injective, its quasi-isomorphism is a homotopy equivalence.
-Construct K₁ by applying section evaluation on V to I and changing scalars to A.
-Construct T₁ as the finite product in each displayed degree, with the stated signed
-vertical and deletion differential; d squared is zero by restriction naturality,
-anticommutation of the signed vertical and horizontal terms, and cancellation of
-pairs of deletions. The singleton restrictions define α₁. Its chain-map equation
-is restriction naturality in degree zero and the cancellation of the two singleton
-restrictions in degree one. Use the components of J → I in the σ and τ coordinates
-to define a and b; naturality and the displayed differentials make them chain maps.
-Singleton naturality gives α ≫ b = a ≫ α₁, and all other components vanish.
-Section evaluation preserves the inverse comparison and its homotopies, so a is a
-homotopy equivalence and a quasi-isomorphism. The analogous total homotopy uses
-(-1) to the Čech degree; it is not needed for the asserted one-sided transfer.
-For an empty family V is empty and both section complexes and subset products
-vanish. Repetitions and empty members leave the coordinate construction valid. -/
+quasi-isomorphism; no homology assertion about either augmentation is assumed
+(Stacks, Tags 08C1 and 079P). -/
 theorem principalOpenCech_injective_comparison
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

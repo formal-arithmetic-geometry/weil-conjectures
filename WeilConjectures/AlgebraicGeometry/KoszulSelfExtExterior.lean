@@ -21,7 +21,10 @@ import Mathlib.RingTheory.FiniteType
 
 /-! # Self-coefficient Koszul Ext and exterior powers
 
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext. -/
+## References
+
+* Stacks Project, Tag 0BQZ.
+-/
 
 @[expose] public section
 
@@ -34,31 +37,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Self-coefficient Ext on the Koszul-regular locus is the full exterior algebra
-of the conormal dual, in every nonnegative degree, without a rank hypothesis.
-
-Source: Stacks Project, Tags 0BQW and 0BQY, as used in the first paragraph of
-Tag 0BQZ, lemma-regular-immersion-ext.
-
-Proof: On an affine chart put A = O_Y(U), I = ker(i)(U), and B = A/I, and resolve
-B by the augmented finite free Koszul complex of the supplied regular sequence.
-After Hom into B all differentials vanish. The conormal basis identifies the
-degree-one contractions with Hom_B(I/I^2,B); ordered products of contractions
-identify degree n with its nth exterior power. The quotient action is the
-ordinary B-action. Sheafification is exact, and the finite free Hom comparison
-and restriction of derived internal Hom identify this with the self-coefficient
-Ext sheaf. Taking tensor pullback after cohomology leaves these B-modules
-unchanged. The affine conormal frame and the finite free internal Hom formulas
-identify the target with the specified exterior sheaf. The contraction product
-is intrinsic: degree one is the boundary identification for
-0 -> I/I² -> O_Y/I² -> i_* O_Z -> 0, and higher degrees are its alternating Yoneda
-products. A change of regular generators transforms degree one by the dual
-conormal matrix and degree n by its exterior power, so the comparisons agree.
-Localization preserves the same formulas. On arbitrary chart intersections
-refine by affine standard opens, then glue the comparisons and their inverses
-by the sheaf condition on V. No affine-intersection or quasi-separatedness
-assumption is used. A common K-injective Hom complex compares derived universes.
-The argument includes n greater than the local sequence length (both objects
-vanish), n = 0 (the empty product gives the unit), and empty V. -/
+of the conormal dual, in every nonnegative degree, without a rank hypothesis
+(Stacks, Tags 0BQW, 0BQY, 0BQZ). -/
 theorem koszulRegularImmersion_self_ext_exterior
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

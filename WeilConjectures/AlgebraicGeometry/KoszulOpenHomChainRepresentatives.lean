@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Normalized chain representatives for Koszul derived Hom
 
-Source: Stacks Project, Tags 06Z0 and 08DD.
+## References
+
+* Stacks Project, Tags 06Z0 and 08DD.
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
-/-- The class of a chain map in the module-valued Hom complex.
-Source: Stacks Project, Tag 0A8H; cycles are chain maps and boundaries are homotopies. -/
+/-- The class of a chain map in the module-valued Hom complex (Stacks, Tag 0A8H). -/
 def koszulHomChainClass {A : Type u} [CommRing A]
     {L M : CochainComplex (ModuleCat.{u} A) ℤ} (t : L ⟶ M) :
     (CochainComplex.moduleHomComplex L M).homology 0 :=
@@ -41,8 +42,7 @@ def koszulHomChainClass {A : Type u} [CommRing A]
         (CochainComplex.HomComplex.Cochain.ofHom t) = 0
       exact CochainComplex.HomComplex.δ_ofHom t⟩
 
-/-- Transpose a sheaf chain map through the ordinary affine tilde/sections adjunction.
-Source: Stacks Project, Tag 06Z0. -/
+/-- Transpose a sheaf chain map through the ordinary affine tilde/sections adjunction. -/
 def koszulOpenHomTranspose (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (F : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
@@ -55,9 +55,7 @@ def koszulOpenHomTranspose (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     ⟨fun {_ _} _ _ ↦ rfl⟩
   ((tilde.adjunction (R := .of A)).mapHomologicalComplex (.up ℤ)).homEquiv _ _ t
 
-/-- The chain-map class in the specified stage of the derived Hom diagram.
-This is constructed from the cycle, the homology projection, and the specified object iso.
-Source: Stacks Project, Tags 0A8H and 08D1. -/
+/-- The chain-map class in the specified stage of the derived Hom diagram. -/
 def koszulOpenHomStageClass (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{v} (ModuleCat.{u} A)]
     (F : CochainComplex
@@ -75,20 +73,8 @@ def koszulOpenHomStageClass (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A
       (koszulHomChainClass (koszulOpenHomTranspose A r f F e t)))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine derived equivalence agrees with ordinary transposition on chain maps.
-Source: Stacks Project, Tag 06Z0, Lemma on the affine derived equivalence.
-
-Proof: The exact tilde functor induces the affine derived equivalence. On the full
-subcategory of quasi-coherent sheaves, ordinary sections is its exact inverse:
-the unit is invertible on every module and the counit is invertible on every
-quasi-coherent sheaf. Apply these maps termwise to L and F. The termwise counit
-identifies F with tilde of its sections complex. Full faithfulness of the derived
-affine equivalence, followed by that identification, gives b. For a chain map t,
-the ordinary tilde/sections adjunction writes t as tilde of its transpose followed
-by the counit. Apply Q to this equality. The equivalence and its inverse use the
-same unit and counit, so the resulting equation is precisely the displayed one.
-No boundedness of F is used: sections is exact on the quasi-coherent subcategory.
-Zero complexes and the zero ring are included by the same unit/counit identities. -/
+/-- The affine derived equivalence agrees with ordinary transposition on chain maps
+(Stacks, Tag 06Z0). -/
 private theorem affineComplexHom_transpose
     (A : Type u) [CommRing A]
     [HasDerivedCategory.{v} (ModuleCat.{u} A)]
@@ -240,20 +226,7 @@ private noncomputable def classHomologyEquiv (A : Type u) [CommRing A]
 
 open CochainComplex.HomComplex in
 set_option backward.isDefEq.respectTransparency false in
-/-- Degree-zero module Hom homology computes maps out of a K-projective complex.
-Source: Stacks Project, Tag 0A8H (Hom complexes), and More on Algebra, Lemma 15.75.2.
-
-Proof: A degree-zero Hom cocycle is exactly a chain map, by the identity
-δ(z)=d_M z-z d_L. Degree-zero boundaries are exactly differences of homotopic
-chain maps: a degree-minus-one cochain is the family of components of the homotopy,
-and its differential is d_M h+h d_L. Thus the quotient of cycles by boundaries
-identifies with the homotopy-category Hom group. The module-valued short-complex
-homology projection is that same quotient, through moduleCatCyclesIso. Apply
-IsKProjective.Qh_map_bijective and quotientCompQhIso to identify this homotopy Hom
-group with derived maps. Take the inverse bijection to obtain c. On Q.map t the
-homotopy class is the class of t, and the quotient description gives the displayed
-normalization. These constructions work without boundedness on M and also when
-L or M is zero or A is the zero ring. -/
+/-- Degree-zero module Hom homology computes maps out of a K-projective complex. -/
 private theorem moduleHomDerived_class
     (A : Type u) [CommRing A] [HasDerivedCategory.{v} (ModuleCat.{u} A)]
     (L M : CochainComplex (ModuleCat.{u} A) ℤ) [L.IsKProjective] :
@@ -301,23 +274,8 @@ private theorem moduleHomDerived_class
   rw [← hd t, Equiv.symm_apply_apply]
   rfl
 
-/-- Normalized stage identifications and chain representability, before restriction to U.
-Source: Stacks Project, Proposition 36.9.5, Tag 08DD, the derived-Hom identification;
-Lemma 36.3.5, Tag 06Z0, and More on Algebra, Lemma 15.75.2.
-
-Proof: Let L be the extended module Koszul tail and M the top-sections complex of F.
-Each term of L is a finite free exterior power, or zero outside the negative tail.
-Thus L is bounded above with projective terms and is K-projective. Its derived maps
-into M are homotopy classes of chain maps. The affine equivalence identifies these
-with maps from Q(tilde L) into Q(F): the termwise tilde/sections counit is an iso
-because every F.X n is quasi-coherent. The ordinary adjunction on complexes takes
-a sheaf chain map t to exactly koszulOpenHomTranspose t. Degree-zero cycles of the
-module Hom complex are chain maps and boundaries are null-homotopic maps. Quotient
-by boundaries, then transport through koszulCechHomObjIso and the localization/homology
-iso. This gives a, with the displayed normalization, and also proves surjectivity of
-Q on maps from this tail to F. For r=0 the positive exterior powers are zero; both
-Hom and Hom-complex homology vanish. Zero rings and zero complexes give the same
-identification, without any nonzero or boundedness assumption on F. -/
+/-- Normalized stage identifications and chain representability, before restriction to `U`
+(Stacks, Tags 08DD, 06Z0). -/
 theorem koszulOpenHom_chain_representatives
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

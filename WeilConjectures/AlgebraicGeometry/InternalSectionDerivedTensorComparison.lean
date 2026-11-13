@@ -7,13 +7,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.InternalSectionTotalComparison
 /-! # Normalized internal-to-sectionwise derived tensor comparison
 
-Source: Stacks Project, Tags 08J9, 08JA and 08JB; blueprint module objects and
-derived tensor--Hom.
-
 ## Main definitions
 
 * `TensorComparison`: the canonical tensor comparison, normalized on K-flat models.
 * `totalComparison`: the fixed comparison of the concrete sum-total complexes.
+
+## References
+
+* Stacks Project, Tags 08J9, 08JA and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +34,8 @@ namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
 
 universe u₀ v₀ u₁ v₁ u₂ v₂ u₃ v₃
 
-/-- The same representative square, retaining heterogeneous equality at its endpoints.
-Source: Stacks 06YS, 08J9.
-This generic predicate names the complete normalization before coefficient
-specialization, including its fixed total map and representative model. -/
+/-- The representative square, retaining heterogeneous equality at its endpoints
+(Stacks, Tags 06YS and 08J9). -/
 def tensorLocalizationSquareHEq
     {C₀ : Type u₀} [Category.{v₀} C₀] {D₀ : Type u₁} [Category.{v₁} D₀]
     {C : Type u₂} [Category.{v₂} C] {D : Type u₃} [Category.{v₃} D]

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint
 
 /-! # Realizing equivariant families of geometric germs as sections
 
-Source: Stacks Project, Tags 04JM and 03QW, direct invariant-section argument.
+## References
+
+* Stacks Project, Tags 04JM and 03QW
 -/
 
 @[expose] public section
@@ -25,8 +27,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- On any base scheme, equal germs at a geometric point determine sections on an
-etale object if its lifts cover every underlying point of that object.
-Source: Stacks Project, Tag 03QW; equalizer-sieve and separatedness argument. -/
+etale object if its lifts cover every underlying point of that object
+(Stacks, Tag 03QW). -/
 private theorem section_germ_ext_of_lifts (S : Scheme.{u}) (Ω : Type u)
     [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (max (u + 1) v)))
@@ -62,26 +64,9 @@ private theorem section_germ_ext_of_lifts (S : Scheme.{u}) (Ω : Type u)
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
-and Tag 03QW, section-galois-action-stalks.
-
-Proof: By quasi-finiteness, the inverse image of the unique point of Spec K is
-discrete; that inverse image is all of X. Cover X by its singleton open subschemes.
-Each is nonempty and has exactly one point. Apply
-field_equivariant_germ_family_section_onePoint to the restriction of f along
-the inclusion of each singleton. Its covariance follows by composing the
-change-of-lift equation with that inclusion.
-To compare the resulting sections on overlaps, first prove that sections on any
-etale K-scheme are determined by their germs at lifts from Spec Omega. Indeed,
-equal germs admit a common pointed refinement on which the sections agree. Every
-scheme point admits an Omega-lift, and these refinements make the equalizer sieve
-covering. Sheaf separatedness gives equality. Apply this criterion to the two
-restrictions on any common refinement of singleton components: their germs are
-both f evaluated at the same lift of X, by germ naturality.
-The sheaf axiom glues this compatible family over the singleton cover. Every lift
-of X lifts through the covering sieve; germ naturality and the amalgamation
-equations then give the prescribed germ. If X is empty, the singleton cover is
-empty and the same sheaf axiom supplies its unique section. -/
+/-- A Galois-equivariant family of germs at a geometric point of a sheaf on the small étale
+site of `Spec K` is realized by a section over any étale `K`-scheme with one point
+(Stacks, Tags 04JM, 03QW). -/
 theorem field_equivariant_germ_family_section
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

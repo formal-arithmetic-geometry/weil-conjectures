@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.PolynomialChartStalkFlatComparison
 
 /-! # Local algebra comparison for a polynomial chart
 
-Source: Stacks Project, Tags 00RE and 00R7, in the proof of Tag 00RH.
+## References
+
+* Stacks Project, Tags 00RE, 00R7 and 00RH.
 -/
 
 @[expose] public section
@@ -74,33 +76,8 @@ private theorem fibre_dimension_zero {R S : Type u}
     infer_instance
   exact ringKrullDimZero_iff_ringKrullDim_eq_zero.mp inferInstance
 
-/-- The geometric part of the polynomial-chart criterion, without a depth assertion.
-
-Source: Stacks Project, Tags 00RE (the dimension comparison in its proof), 00R7,
-00RH, and 00P1 (the finite-type field dimension formula).
-Proof: Write A = Gamma(T), B = Gamma(U), P = A[t_1..,t_n]. The chart supplies
-an A-algebra map P to B. Let p in Spec(A) lie below x, k = kappa(p), and q be
-its prime in B tensor_A k. Put C = k[t_1..,t_n], let q' be the contraction
-of q to C, and take R = C localized at q'. Identify (B tensor_A k)_q with
-S, the displayed fibre stalk of f, using Spec tensor-product and stalk-localization
-isomorphisms and the open immersion U into X. Transport the localized chart map
-along that ring isomorphism to obtain phi: R -> S. Polynomial regularity makes
-R regular local, and finite type over k makes S Noetherian local. Quasi-finiteness
-survives base change and localization; its closed fibre is a nonzero Artinian
-local ring, so it has dimension zero. The quasi-finite local dimension inequality
-gives dim(S) <= dim(R). Both dimensions are finite; call them r and d.
-The residue extension kappa(q)/kappa(q') is finite, so both residue fields have
-the same finite transcendence degree t over k. The field dimension formula gives
-local fibre dimension r+t and polynomial dimension d+t = n. Open immersion of
-fibres preserves dimension at the point, giving the displayed topological formula.
-Finally, flatness of the original stalk map implies flatness of phi by base change
-and localization. Conversely, localize A at p. The polynomial and B stalks are
-essentially finitely presented A_p-algebras. B_x is a nonzero finite presentation
-module over itself and is A_p-flat by flatness of f. Flatness of phi is precisely
-flatness of its closed-fibre module over the polynomial closed fibre. Tag 00R7
-therefore makes B_x flat over the polynomial stalk; the same stalk isomorphisms
-identify this with flatness of e.stalkMap x. No Cohen-Macaulay or depth assertion
-is used in this comparison. -/
+/-- The geometric part of the polynomial-chart criterion, without a depth assertion
+(Stacks, Tags 00RE, 00R7, 00RH and 00P1). -/
 theorem polynomial_chart_local_algebra
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

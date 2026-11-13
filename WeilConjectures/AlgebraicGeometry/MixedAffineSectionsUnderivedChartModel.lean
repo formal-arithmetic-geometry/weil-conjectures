@@ -13,7 +13,10 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 /-! # Ordinary affine chart extension and sections comparison
-Source: Stacks Project, Tags 01I9, 0AA7 and 08DW(2).
+
+## References
+
+* Stacks Project, Tags 01I9, 0AA7 and 08DW.
 -/
 
 @[expose] public section
@@ -81,25 +84,8 @@ private theorem chart_tilde_unit_isIso (X : Scheme.{u}) [IsAffine X] :
 
 -- The affine carrier identifications require extra elaboration time.
 /-- The unit-normalized comparison between ordinary scalar extension of sections
-and sections of tensor pullback, on the canonical affine chart sheafification.
-Source: Stacks Project, Tags 01I9 and 0AA7, the affine computation in Tag 08DW(2).
-
-Proof: Put F_X = tilde followed by restriction along X.toSpecΓ. Since X is affine,
-restriction is an equivalence. Transport the tilde/sections adjunction through this
-equivalence; the right adjoint is ordinary Gamma_X, with scalars identified by
-GammaSpecIso and the identity GammaSpecIso.inv followed by X.toSpecΓ.appTop = id.
-The unit is invertible, as is the original tilde unit. Do this for S and T.
-Compose F_S ⊣ Gamma_S with tensor pullback/direct image along g. Direct image
-followed by Gamma_S is Gamma_T followed by restriction along g.appTop, identically
-on sections. Compare this composite adjunction with scalar extension/restriction
-composed with F_T ⊣ Gamma_T. Left-adjoint uniqueness gives an isomorphism from
-scalar extension followed by F_T to F_S followed by tensor pullback, with the unit
-equation. Apply Gamma_T to this isomorphism. Precompose with the inverse Gamma_S
-unit under scalar extension and the Gamma_T unit under scalar extension. The
-result is c. Naturality of the extension unit and the unit equation for
-left-adjoint uniqueness give the displayed identity. This uses the actual fixed
-tensor-pullback adjunction, so no arbitrary normalization of c is allowed. Both
-zero rings and zero modules satisfy these adjunction identities. -/
+and sections of tensor pullback, on the canonical affine chart sheafification
+(Stacks, Tags 01I9, 0AA7 and 08DW). -/
 theorem exists_mixedAffineSections_underived_chart_model
     {S T : Scheme.{u}} [IsAffine S] [IsAffine T] (g : T ⟶ S) :
     let F : ModuleCat.{u} Γ(S, ⊤) ⥤

@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.ProperPerfectTransportCompact
 
 /-! # Compactness preserved by proper perfect pushforward
 
-Source: Stacks Project, Tags 09M1 and 0B6G; first paragraph of Tag 0A9R.
+## References
+
+* [Stacks, Tag 09M1], [Stacks, Tag 0B6G], [Stacks, Tag 0A9R]
 -/
 
 @[expose] public section
@@ -34,24 +36,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Proper perfect pushforward preserves compact quasi-coherent derived objects.
-Source: Stacks Project, Tags 09M1, 0B6G, and the first paragraph of Tag 0A9R.
-
-Proof: Noetherian schemes are quasi-compact and quasi-separated. Use K-injective
-resolutions and the uniqueness of localization to work in small-Hom derived
-models on X, Y, and all their opens. These equivalences commute with homology,
-derived restriction, and derived direct image, and preserve coproducts and the
-additive Hom comparisons defining compactness. Tag 09M1 identifies the given
-compact object P with a perfect object in the small model: affine restriction
-preserves compactness by its direct-sum-preserving right adjoint, and the affine
-compact-object criterion gives local bounded finite-projective representatives.
-The stalkwise finite Tor assumption is the perfect-morphism criterion, so apply
-proper_perfect_directImage_perfect (Tag 0B6G) to that perfect object.
-Its image is perfect on Y and therefore compact by perfectObjectCompact.
-Transport back to the original models. The component eR.app P identifies the
-ambient image with (R.obj P).obj. Since the inclusion of D_QCoh is fully faithful,
-this isomorphism lifts to D_QCoh(Y); isomorphic objects have identical compactness
-comparisons under the induced additive Hom equivalences. Thus R.obj P is compact.
-No right adjoint of R, generator, or representative family is assumed. -/
+No right adjoint of `R`, generator, or representative family is assumed.
+(Stacks, Tags 09M1, 0B6G, 0A9R) -/
 theorem properPerfect_preserves_compact
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

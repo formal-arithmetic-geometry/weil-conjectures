@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrimeData
 /-!
 # Localization at a prime commutes with filtered colimits
 
-Source: Stacks Project, Algebra, proof of Lemma Tag 037D.
+## References
+
+* [Stacks Project, Tag 037D](https://stacks.math.columbia.edu/tag/037D)
 -/
 
 @[expose] public section
@@ -27,32 +29,8 @@ namespace AlgebraicGeometry
 
 
 
-/-- Stacks Project, Algebra, proof of Tag 037D.
-Localization at a prime of a filtered colimit is the colimit of the localizations
-at the contracted primes, with the canonical maps.
-
-1. Contract the prime along the coprojections. The cocone identity implies that
-   each transition map contracts the later prime to the earlier prime. Thus it
-   sends denominators outside the earlier prime outside the later prime, induces
-   the fraction map, and these maps form a functor.
-2. The coprojections likewise induce fraction maps to the localization of the
-   colimit. Their compatibility on fractions gives a cocone (the same two nodes).
-3. Lift the numerator and denominator to a common stage using
-   lem-weil-pbc-filtered-colimit-algebras-elementwise over the integers and
-   filteredness. The lifted denominator avoids the contracted prime. Hence every
-   fraction, and every finite family of fractions, comes from a common stage.
-4. For equal fractions, lift the multiplier witnessing their equality to a
-   common stage, using lem-weil-pbc-filtered-colimit-algebras-elementwise.
-   By lem-weil-pbc-filtered-colimit-rings-zero the resulting zero relation holds
-   at a later stage. The multiplier still avoids the prime, so the fractions
-   become equal there.
-5. For any cocone define its factorization on a fraction by choosing a stage
-   representative. Step 4 makes this well defined. Common-stage representatives
-   show that it respects addition, multiplication and one; step 3 gives
-   uniqueness. This is the universal property in def-weil-pbc-category-colimit.
-
-The compatibility equations on the original rings uniquely determine the
-localized maps: denominators are units, so they imply the stated fraction formulas. -/
+/-- Localization at a prime of a filtered colimit is the colimit of the localizations
+at the contracted primes, with the canonical maps (Stacks, Tag 037D). -/
 theorem filteredColimitLocalizationAtPrime
     {I : Type v} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

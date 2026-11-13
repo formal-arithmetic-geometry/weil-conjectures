@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PolynomialChartStalkFlatComparisonRever
 
 /-! Reverse flatness comparison for a polynomial chart.
 
-Source: Stacks Project, Tag 00R7 as applied in Tag 00RH.
+## References
+
+* Stacks Project, Tags 00R7 and 00RH.
 -/
 
 @[expose] public section
@@ -22,14 +24,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Flatness of the canonical closed-fibre map lifts to the chart stalk map.
-
-The proof applies the local criterion for flatness to the stalk tower. The chart
-stalk is essentially finitely presented over the base stalk, is flat over the
-base by flatness of the source, and its closed-fibre module is flat precisely
-when the canonical polynomial fibre map is flat. The fibre and stalk
-identifications transport the resulting flatness.
-Source: Stacks Project, Tag 00R7 and Tag 00RH. -/
+/-- Flatness of the canonical closed-fibre map lifts to the chart stalk map
+(Stacks, Tags 00R7 and 00RH). -/
 theorem polynomial_chart_stalk_flat_comparison_reverse
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

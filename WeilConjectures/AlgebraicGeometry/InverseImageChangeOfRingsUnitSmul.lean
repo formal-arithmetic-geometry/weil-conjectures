@@ -12,7 +12,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Scalar compatibility of the inverse-image extension unit
 
-Source: Stacks Project, Tags 008X and 03EK, inverse image and extension of scalars.
+## References
+
+* Stacks Project, Tags 008X and 03EK.
 -/
 
 @[expose] public section
@@ -42,18 +44,7 @@ private theorem map_one_tmul_smul {R S : Type u} [CommRing R] [CommRing S]
 
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
-
-Source: Stacks Project, Tags 008X and 03EK; Tag 01SB, the two tensor actions.
-
-Proof: Let eta be the additive inverse-image unit and etaR the ring unit. The canonical
-inverse-image module structure gives eta(c n) = etaR(c) eta(n), by the second conclusion
-of exists_inverseImageModuleInstances, for the instances actually used by inverseImageModule.
-In the sectionwise extension tensor product, balancing gives
-1 tensor (etaR(c) eta(n)) = t(etaR(c)) tensor eta(n). The target-ring action on the first
-factor identifies the latter with t(etaR(c)) times (1 tensor eta(n)). The sheafification
-unit is linear over the target section ring, so applying it yields the asserted equation.
-No affine, quasi-coherence or pushout hypothesis is used; the equation also holds on the
-empty open and for zero rings or zero modules. -/
+(Stacks, Tags 008X, 03EK, 01SB) -/
 theorem inverseImage_changeOfRings_unit_smul
     {X Y : TopCat.{u}} (f : X ⟶ Y) (A : Y.Sheaf CommRingCat.{u})
     (B : X.Sheaf CommRingCat.{u}) (t : TopCat.Sheaf.inverseImageRing f A ⟶ B)

@@ -12,7 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.InternalScalarRestrictionMateNormal
 
 /-! # The scalar route in the common tensor model
 
-Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3). -/
+## References
+
+* Stacks, Tags 06YY, 0G7E and 07A6.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,29 +73,8 @@ private theorem scalar_restriction_counit (a : Λ ⟶ Λ') [IsMonHom a]
 
 set_option maxHeartbeats 500000 in
 -- The counit calculation contains several nested derived functor comparisons.
-/-- The scalar route computes the ordinary balanced pullback map.
-
-Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3),
-steps 2 and 3 of the tensor-pull normalization argument.
-
-Proof. Write P as the homotopy quotient of a cochain complex. Naturality of
-`tX.derived` moves the exact pullback counit past the X tensor presentation.
-Apply `TensorNormalized` on X, then the single-tensor comparison and symmetry,
-to replace this composite by the restricted scalar computation counit and
-ordinary balanced presentation. The exact restriction/pullback comparison
-commutes with the exact computation counits. Apply `PullNormalized` to replace
-`lam.hom`, followed by the X scalar counit, by the Y scalar counit followed by
-the homotopy image of the ordinary balanced pullback comparison. The definition
-of `scalarTensorRegularPullIso` makes the coefficient map exactly restriction
-of the ordinary pullback unit. Apply `residueOrdinaryTensorPull_homotopy`, whose
-signature allows arbitrary condensed coefficient maps. It identifies the
-remaining balanced maps with ordinary pullback of the Y tensor presentation
-followed by the ordinary tensorator. Identify the transported tensorator with
-the native composite pullback tensorator by precomposing with the defining
-balanced tensor coprojections: both maps pull back the two tensor factors,
-and these coprojections are epimorphisms. Functoriality of Qh and naturality of the
-exact pullback counit now give `scalarTensorPullModelMap`. This computation
-uses no K-flatness: no tensor localization map is cancelled. -/
+/-- The scalar route computes the ordinary balanced pullback map
+(Stacks, Tags 06YY, 0G7E and 07A6). -/
 theorem scalar_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (tX : TensorNormalization a X)
     (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)

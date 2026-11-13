@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 /-! # The Ext-to-abelian-sections part of the comparison
 
-Source: Stacks Project, Tags 015E and 03FD.
+## References
+
+* [Stacks, Tags 015E and 03FD]
 -/
 
 @[expose] public section
@@ -51,19 +53,8 @@ private theorem moduleComparisonEquiv_apply_of_component
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
-/-- The fixed module-to-Ext comparison factors through abelian derived sections.
-Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
-composite in ModuleCohomologyExtResolutionNaturality.
-
-Proof: Unfold the fixed comparison and its natural isomorphism. Its constructor
-composes the common-resolution section comparison, the inverse site-section
-comparison, and the terminal Ext-source comparison. First evaluate this three-map
-composite for arbitrary functors, before specializing to the scheme. Apply that
-component formula and unfold the definition of module cohomology and the Ext-valued
-cohomology type. The inverse site component is siteSectionsObjIso.inv, and the
-terminal component is precompAddEquiv.symm. Their composite gives the asserted
-formula. This never unfolds the acyclic-resolution comparison inside the first
-factor, and includes degree zero, zero coefficients and empty schemes. -/
+/-- The fixed module-to-Ext comparison factors through abelian derived sections
+(Stacks, Tags 015E and 03FD). -/
 theorem ext_sections_factorization
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ)
     (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :

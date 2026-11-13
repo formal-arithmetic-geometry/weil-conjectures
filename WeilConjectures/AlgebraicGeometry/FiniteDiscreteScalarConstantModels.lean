@@ -502,18 +502,8 @@ private def scalarConstantEncodedIso [Finite A] [DiscreteTopology A]
     (presheafToSheaf J (ModuleCat.{u + 1} B)).mapIso
       (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by ext m; rfl))
 
-/-- Finite scalar models correspond to constant finite ordinary modules.
-Source: Stacks Tag 099Y.
-
-Proof: evaluation identifies continuous functions on the one-point profinite set with A.
-The scalar module encoding preserves regular modules, finite free sums and cokernels.
-Over a finite ring, finitely presented modules are finite; conversely finite modules are
-finitely presented because finite rings are Noetherian. The scalar coefficient map is an
-isomorphism: its composite with constant functions is the normalized coefficient map.
-Thus extension along it is inverse scalar restriction. Monoidal constant-sheaf comparison
-and module sheafification identify this model with the constant sheaf of the encoded scalar
-module. Full faithfulness and essential surjectivity transport the model in both directions.
-The argument includes the zero ring and empty schemes. -/
+/-- Finite scalar models correspond to constant finite ordinary modules
+(Stacks, Tag 099Y). -/
 theorem finite_scalar_model_iff_constant [Finite A] [DiscreteTopology A]
     (T : Scheme.{u}) (e : Encoding A T) (M : Internal A T) :
     (∃ Q : Mod Ab.{u + 1} (scalarRingObj (coefficient A)),

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Bounded coherent cohomology of perfect complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 0FXU, part (1).
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 0FXU.
 -/
 
 @[expose] public section
@@ -145,20 +147,8 @@ private theorem local_model_homology (X : Scheme.{u}) [IsLocallyNoetherian X]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A perfect complex on a Noetherian scheme has bounded coherent cohomology.
-Source: Stacks Project, Derived Categories of Schemes, Lemma
-`perfect-lemma-perfect-on-noetherian`, Tag 0FXU, part (1).
-
-Proof: choose strictly perfect neighbourhoods from `IsPerfect`. Refine them by affine
-opens and then by opens where the finite projective terms become finite free. On these
-opens the kernels and images of the matrices are finite modules over Noetherian rings;
-their quotients are finite as well. Their associated sheaves are therefore coherent,
-and exact restriction identifies them with the restrictions of the cohomology of E.
-Coherence is local, so all cohomology sheaves of E are coherent. Each bounded local
-model has zero cohomology outside its term bounds. Quasi-compactness selects a finite
-subcover; take the minimum of its lower bounds and maximum of its upper bounds.
-Outside that interval every restriction of the cohomology sheaf is zero, so the sheaf
-itself is zero. On the empty scheme all sheaves are zero; use bounds 0 and 0. -/
+/-- A perfect complex on a Noetherian scheme has bounded coherent cohomology
+(Stacks, Tag 0FXU). -/
 theorem perfect_bounded_coherent_cohomology (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

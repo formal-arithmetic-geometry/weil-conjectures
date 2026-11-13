@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismAddCommGrpStalk
 /-!
 # Morphisms of geometric points and étale stalks
 
-Source: Stacks Project, Étale Cohomology, Remark 59.29.8, Tag 04FN.
+## References
+
+* Stacks, Tag 04FN
 -/
 
 @[expose] public section
@@ -28,28 +30,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A morphism of geometric points induces the indicated equivalence of pointed étale
 neighbourhoods and the unique representative-preserving bijection on set-valued stalks;
-for abelian sheaves the representative-preserving morphism is an isomorphism.
-Source: Stacks Project, Étale Cohomology, Remark 59.29.8, Tag 04FN.
-
-Proof: (1) By lem-weil-pbc-morphism-from-spec-field, write maps from a field spectrum as
-pairs of a point and a residue-field embedding. lem-weil-pbc-residue-field-point-naturality and
-lem-weil-pbc-spec-field-point-residue-field identify `a` with `Spec α` for an injective
-field map `α: k' → k`; precomposition with `a` is injective on maps to any scheme.
-(2) Lifts to an étale `U` are residue-field embeddings over the same point of `S`, and
-precomposition replaces an embedding `φ'` by `α ∘ φ'`.
-(3) By lem-weil-pbc-etale-residue-field-extension-separable the étale residue-field
-extension is separable algebraic. Every element in the image of a lift into `k` is
-algebraic over `α(k')`, hence lies in `α(k')` since `k'` is
-algebraically closed.
-Thus each lift factors uniquely through `α`, giving bijectivity on pointed objects.
-(4) Injectivity of precomposition gives bijections on all morphisms, so the functor of
-pointed neighbourhoods is an equivalence compatible with forgetting the lift.
-(5) By def-weil-pbc-geometric-stalks the stalk is the colimit over opposite pointed
-neighbourhoods. Its universal property constructs the map with the displayed
-rule on representatives and proves uniqueness. The inverse equivalence constructs its
-inverse on representatives. For abelian sheaves, the same colimit construction is additive;
-lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered makes the colimits filtered,
-so they have the corresponding underlying sets and the map is an isomorphism. -/
+for abelian sheaves the representative-preserving morphism is an isomorphism
+(Stacks, Tag 04FN). -/
 theorem geometricPointMorphism_stalk_bijection
     {S : Scheme.{u}} {k k' : Type u} [Field k] [IsAlgClosed k]
     [Field k'] [IsAlgClosed k'] (s : Spec (.of k) ⟶ S) (s' : Spec (.of k') ⟶ S)

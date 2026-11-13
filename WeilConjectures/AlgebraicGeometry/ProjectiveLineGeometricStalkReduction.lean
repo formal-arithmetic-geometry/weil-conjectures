@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineStrictLocalModelCompariso
 /-!
 # Reduction of the geometric-stalk exchange to the strict-local exchange
 
-Source: Stacks Project, proof of Theorem 59.91.11 (Tag 095T), paragraphs 3--4;
-blueprint geometric-stalk lemma, its strict-henselization upper square.
+## References
+
+* Stacks Project, Tag 095T (proof of Theorem 59.91.11).
 -/
 
 @[expose] public section
@@ -32,41 +33,7 @@ open Scheme Etale
 /-- It suffices to identify the exchange for local maps of strictly henselian local rings.
 The premise is precisely the existing strict-local exchange statement, for every pair
 of strictly henselian bases and every degree. The conclusion applies it to the strict
-henselizations of the two arbitrary bases. This reduction must use the canonical
-restriction maps; it must not use projective-line base change or curve invariance.
-
-Source: Stacks Project, proof of Theorem 59.91.11 (Tag 095T), paragraphs 3--4,
-and the blueprint geometric-stalk lemma, proof of the upper commutative square.
-
-Proof: choose a common algebraic closure extending the field map contravariantly
-associated to iota. Form the strict henselizations A and B at the induced geometric
-points of S and T. Functoriality gives a local map A to B whose residue-field map
-agrees with iota after the residue-field embeddings. The strict-henselization stalk
-formula computes the higher-direct-image stalks as cohomology of the two strict-local
-projective lines. Equivalently, restricting the higher-direct-image sheaves to these
-strict-local bases preserves the relevant stalks: both are the same filtered colimit
-of neighbourhood cohomology. For the inverse-image source first use the natural
-inverse-image stalk identification. Identify the arbitrary pullback X' with the
-projective line over T by the universal property of the pullback.
-
-The exchange maps agree under these stalk comparisons. Indeed, represent F by an
-injective resolution and its inverse image by a comparison resolution. On each
-pointed etale neighbourhood the exchange pulls a section back along the base-changed
-neighbourhood. The strict-henselization limit projections commute with the local map
-A to B. Thus restricting this section to the target strict-local projective line
-is identical whether one first applies the exchange or first restricts to A and
-then applies the strict-local exchange. The equality survives the colimit and homology.
-Apply hLocal to A, B, their local map and the restriction of F; inverse image preserves
-torsion. Its two closed-fibre comparisons identify this strict-local
-exchange with residue-field pullback. The integral hypotheses imply that the chosen
-separably closed fields are purely inseparable algebraic extensions of the corresponding
-separable closures of the image residue fields. Topological invariance therefore
-identifies the residue closed fibres with the projective lines over k and k'.
-Compose these cohomology identifications with the stalk comparisons. Functoriality
-of pullback and compatibility of the residue-field square give exactly the displayed
-identity along iota, and composites of additive equivalences give e1 and e2.
-The construction also works in degree zero, for zero sheaves and for purely inseparable
-nontrivial residue-field extensions; it needs no smoothness or perfectness hypothesis. -/
+henselizations of the two arbitrary bases (Stacks, Tag 095T). -/
 theorem Etale.geometricStalk_projectiveLine_of_strictLocal
     (Λ : Type (u + 1)) [CommRing Λ]
     (hLocal : ∀ (A B : Type u) [CommRing A] [HenselianLocalRing A]

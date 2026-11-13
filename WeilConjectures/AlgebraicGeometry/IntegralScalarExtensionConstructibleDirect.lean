@@ -28,8 +28,8 @@ namespace AlgebraicGeometry.ProEtale
 -/
 
 /-- The direct derived extension of scalars `T(K) = S ⊗^L_R K` along the coefficient change
-`a_Y: p_Y^* 𝒪̲_E → p_Y^* 𝒪̲_L` induced by the inclusion `𝒪_E ⊆ 𝒪_L`: the left derived functor
-of `Mod.extendScalars`, as in `det-def-sfb-derived-extension-of-scalars`. -/
+`a_Y : p_Y^* 𝒪̲_E → p_Y^* 𝒪̲_L` induced by the inclusion `𝒪_E ⊆ 𝒪_L`: the left derived functor
+of `Mod.extendScalars`. -/
 noncomputable abbrev integralScalarExtension
     (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
@@ -44,17 +44,7 @@ noncomputable abbrev integralScalarExtension
     (coefficientMap (finiteCoefficientIntegersPointMap ℓ h) Y)).leftDerivedFunctor
 
 /-- Direct derived extension of scalars along `𝒪_E → 𝒪_L` sends `D_cons(Y_proét, R)` into
-`D_cons(Y_proét, S)`; no derived completeness condition is involved.
-
-Proof: `cartesianCoefficients_finiteFree`,
-which assembles the integral basis and the finite-free
-coordinates of `Res_{a_Y} S`, gives at `Y` that `Ext_{a_Y}` preserves finite limits. Then
-`boundedConstructible_leftDerivedExtendScalars_obj` with `X = Y` and `φ = a_Y` applies:
-its constructibility is exactly `boundedConstructible` and
-its derived functor is `T`; no Noetherian hypothesis.
-The statement includes empty schemes, zero complexes, identity extensions, shifts, torsion
-cohomology, and ramified finite extensions, and imposes no derived completeness condition.
--/
+`D_cons(Y_proét, S)`; no derived completeness condition is involved. -/
 theorem integralScalarExtension_constructible
     (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)

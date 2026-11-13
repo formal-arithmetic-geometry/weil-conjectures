@@ -14,9 +14,11 @@ import WeilConjectures.Algebra.Homology.AffinePerfectColimitDescent
 import WeilConjectures.AlgebraicGeometry.DerivedPullback
 import WeilConjectures.AlgebraicGeometry.PerfectComplex
 
-/-! # PerfectDescentAffineOpen
+/-! # Descent of perfect complexes on an affine open
 
-Source: Stacks Project, Tag 09RF.
+## References
+
+* Stacks Project, Tag 09RF.
 -/
 
 @[expose] public section
@@ -27,21 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Perfect complexes descend on an affine open, and on the empty open.
-Source: Stacks Project, Tag 09RF, affine case; Tag 0BC7 and Tag 08EB.
-
-Proof: An open immersion with affine image identifies its source with that affine
-subscheme. The empty open is affine as well, by isAffineOpen_bot.
-On the tail above `i`, the coordinate rings of its base changes form a filtered
-system whose colimit is the coordinate ring at `c.pt`. A perfect complex has
-quasi-coherent cohomology; Tag 08EB represents it by a bounded finite projective
-complex. Tag 0BC7 descends the finitely many terms, splittings, differentials and
-relations to a stage above `i`. Sheafify that complex. Its terms are locally direct
-summands of finite free modules, so it is perfect. They are flat, so ordinary
-pullback computes derived pullback; the scalar-extension isomorphism gives the
-required derived isomorphism. Compose it with the realization of the algebraic
-complex isomorphism and the original model comparison. The same affine proof applies
-to the empty open and to every open-immersion presentation. -/
+/-- Perfect complexes descend on an affine open, and on the empty open
+(Stacks, Tags 09RF, 0BC7 and 08EB). -/
 theorem perfect_descent_affine_open
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]

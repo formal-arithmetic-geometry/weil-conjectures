@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCupComponentChainEquation
 
 /-! # Cochain obligations for resolution pairings
 
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
+## References
+
+* Stacks Project, Tag 0FKU (construction before Lemma 20.31.3).
 -/
 
 @[expose] public section
@@ -37,8 +39,8 @@ attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetri
   cupRealizationDerivedMonoidal cupRealizationQLax
 
 /-- Component maps and the signed chain equation obtained by sheafifying the pairing.
-This is the assembly statement before packaging the components as a morphism of complexes.
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3. -/
+This is the assembly statement before packaging the components as a morphism of complexes
+(Stacks, Tag 0FKU). -/
 def CupResolutionPairing.ComponentData {F G : X.Modules} (D : CupResolutionPairing F G) :=
   ∃ l : ∀ n : ℤ, (D.left.integerComplex ⊗ D.right.integerComplex).X n ⟶
       D.target.integerComplex.X n,
@@ -55,23 +57,14 @@ def CupResolutionPairing.ComponentData {F G : X.Modules} (D : CupResolutionPairi
       l i ≫ D.target.integerComplex.d i j =
         (D.left.integerComplex ⊗ D.right.integerComplex).d i j ≫ l j)
 
-/-- The component assembly from restriction-compatible bilinear maps and Leibniz.
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-Proof: in each bidegree apply the sheaf tensor universal property to the section pairing,
-then use the coproduct universal property of the total tensor. The Leibniz identity gives
-the displayed chain equation; negative summands are zero by extension. -/
+/-- The component assembly from restriction-compatible bilinear maps and Leibniz
+(Stacks, Tag 0FKU). -/
 theorem moduleCup_component_data_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
     D.ComponentData := by
   obtain ⟨l, hl⟩ := moduleCup_component_section_map_exists D
   exact ⟨l, hl, moduleCup_component_chain_equation D l hl⟩
 
-/-- A cochain realization exists.
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-Proof: use the sheaf tensor universal property to descend the restriction-compatible
-bilinear section maps in each nonnegative bidegree. Assemble these maps on the coproduct
-terms of the total tensor. The Leibniz identity gives the differential compatibility.
-Negative-degree factors are zero, so extend those summands by zero. The coproduct
-inclusion formula is exactly the section formula in Realizes. -/
+/-- A cochain realization exists (Stacks, Tag 0FKU). -/
 theorem moduleCup_resolution_realization_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
     ∃ t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex,
       D.Realizes t := by

@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Locally linear second-sorting maps
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2.
+## References
+
+* [Stacks, Cohomology of Sheaves, Tag 01FM]
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The first-repeat sum before pushforward and extension.
-Source: Stacks 01FM, equation 20.23.6.2. -/
+/-- The first-repeat sum before pushforward and extension (Stacks, Tag 01FM). -/
 noncomputable def orderedCechSecondSortingValue {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -47,21 +48,8 @@ noncomputable def orderedCechSecondSortingValue {X' : Scheme.{u}}
     else 0
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit second-sorting formula lifts to locally linear module-sheaf maps.
-Source: Stacks 01FM, equation 20.23.6.2.
-
-Proof: Project through e in degree p+1 to every duplicated sorted tuple, restrict
-along its product map, multiply by the permutation sign and the first-repeat sign,
-and sum. Assemble the tuple outputs by the product universal property, then compose
-with e inverse in degree p. Naturality follows from functoriality of restriction
-and uniqueness of maps between opens. For local linearity, apply e and each tuple
-projection. Use hlinear on the input coordinates and semilinearity of restriction;
-the two scalar restrictions agree because the category of opens is thin. Integer
-multiples commute with local scalars and finite sums preserve linearity. Coordinate
-injectivity proves local linearity of the assembled natural transformation, which
-PresheafOfModules.homMk lifts to module sheaves. No differential hypothesis is used.
-An empty index family has no tuples, and degree zero has no first-repeat term;
-the same construction is the zero map in these cases. -/
+/-- The explicit second-sorting formula lifts to locally linear module-sheaf maps
+(Stacks, Tag 01FM). -/
 theorem orderedCech_secondSorting_degreewise_exists {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)

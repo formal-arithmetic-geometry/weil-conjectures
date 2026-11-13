@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceLocalizationSectionForm
 /-!
 # Local sum characterization of finite étale traces
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
+## References
+
+* Stacks Project, Tag 03SH
+* SGA 4, Exposé IX, 5.1
 -/
 
 @[expose] public section
@@ -80,27 +82,7 @@ private theorem localSum_section_formula {X Y : Scheme.{u}} (f : Y ⟶ X)
 set_option maxRecDepth 2048 in
 /-- Local sum characterizations identify two trace morphisms under étale localization.
 No compatibility between the choices of the two morphisms is assumed.
-Source: Stacks Project, Section 03SH, after Definition 03SE, localization property;
-SGA 4, Exposé IX, 5.1.
-
-Proof. Work at `W` over `X'`. A splitting cover of `W` for the finite étale pullback
-of `f` exists by Stacks 04HN and covering base change. The canonical pasting
-isomorphism identifies its pullback with the pullback used for `f` on the same
-objects regarded as objects of `X.Etale`. Its two projection identities identify
-the sections of each splitting: compose a section with the pasting isomorphism,
-and its projections are the identity and the same map to `Y`. Conversely use the
-inverse isomorphism to transport a splitting in the other direction.
-
-The natural restriction isomorphism `g⁻¹ F ≅ F|_X'` commutes with the restriction
-along every such section. The two local sum hypotheses therefore make the two sides
-of the desired identity the same finite sum on each member of the splitting cover.
-Naturality of the sheaf morphisms and of the restriction isomorphism shows that these
-are the restrictions of the displayed maps at `W`, including their input restricted
-to the pulled-back object. For each input section, separatedness of `F|_X'` implies
-equality of their images at `W`. Extensionality of additive group homomorphisms gives
-the asserted equality. Empty splitting covers and empty objects are covered by the
-empty-cover sheaf condition. The proof only uses the two projection identities for
-`κ`, so it applies to every isomorphism specified in the statement. -/
+(Stacks, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.) -/
 theorem finiteEtaleTrace_localization_of_localSums
     {X Y X' : Scheme.{u}} (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f)
     (g : X' ⟶ X) (hg : Etale g)

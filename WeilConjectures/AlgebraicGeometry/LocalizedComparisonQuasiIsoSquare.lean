@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtensio
 
 /-! # The localized comparison square for a quasi-isomorphism
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
+## References
+
+* [Stacks, Tag 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8)
 -/
 
 @[expose] public section
@@ -82,23 +84,7 @@ private theorem tensorStalkIso_naturality
   exact h _ (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1
 
 /-- A quasi-isomorphism induces an isomorphism on the source of the localized
-comparison, and the counit comparison square commutes.
-
-Proof: stalks and restriction of scalars are exact, so the stalk of s gives an
-isomorphism in D(R). The unique isomorphism between the two universal left-derived
-scalar-extension functors identifies their values on this isomorphism. Taking
-cohomology and conjugating by each model's cohomologyIso gives a B-linear
-isomorphism. Naturality for multiplication by a in A, expressed by
-cohomologyIso_smul, makes this isomorphism A-tensor-R-B-linear. Extend this
-isomorphism to C to obtain e. Naturality of the universal counits gives the square
-for comparison by comparison_eq. The pure-tensor specification of
-ordinaryToLocalized and localized_eq give the square for localizedComparison
-by the extension/restriction adjunction. Finally the specified components of
-tensorStalkIso commute with s, by naturality of the pullback-stalk isomorphism.
-Taking homology and composing these squares gives the displayed identity.
-Neither ordinary pullback of s nor its homology is asserted to be invertible.
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8;
-More on Algebra, Tags 06Y6 and 08IB. -/
+comparison, and the counit comparison square commutes. (Stacks, Tags 0DJ8, 06Y6, 08IB) -/
 theorem exists_localizedComparison_quasiIso_square
     (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (s : P ⟶ G) (hs : QuasiIso s) (z : X') (i : ℤ) :

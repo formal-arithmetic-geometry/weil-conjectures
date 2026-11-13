@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisDegreewise
 
 /-! # Exactness of the concrete direct-image Mayer--Vietoris complex
 
-Source: Stacks Project, Cohomology, Tag 08BV, proof of Lemma 20.33.2,
-using Tag 01EB and Tag 01EA.
+## References
+
+* Stacks Project, Cohomology, Tag 08BV, using Tag 01EB and Tag 01EA.
 -/
 
 @[expose] public section
@@ -29,30 +30,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The concrete restriction/direct-image diagram is short exact for a cover and
-an arbitrary complex with injective terms. K-injectivity is not needed here.
-Source: Stacks Project, Cohomology, Tag 08BV,
-last paragraph; Tag 01EB, first paragraph of its proof.
-
-Proof: The transported underived adjunction is the restriction/direct-image
-adjunction. On sections over a test open T its unit is restriction from T to
-T ∩ U. For W ⊆ U, the mate of the restricted counit is restriction from
-T ∩ U to T ∩ W: transpose this sectionwise restriction along the adjunction,
-where the inverse composition comparison restricts twice, the counit removes
-the repeated U-restriction, and the forward comparison identifies the result
-with restriction to W. Thus in degree n the two arrows are the pair of
-restrictions and their difference. The two opens T ∩ U and T ∩ V cover T.
-Sheaf uniqueness makes the first arrow injective. A pair killed by the
-second arrow agrees on the intersection, so sheaf gluing gives a preimage
-under the first arrow. For an intersection section, use
-injective_restriction_surjective on T ∩ U ∩ V ⊆ T ∩ U for I.X n,
-and take zero in the V component. Hence the second arrow is surjective.
-The sectionwise calculation gives the kernel universal property for the
-first arrow in presheaf modules. Since all three terms are sheaves and their
-inclusion into presheaf modules is fully faithful, this remains a kernel
-universal property for sheaves. The first arrow is monic by sectionwise
-injectivity, and the second is epic by sectionwise surjectivity. Finally apply
-HomologicalComplex.shortExact_of_degreewise_shortExact. Empty or repeated
-opens require no separate argument: the same sheaf gluing and lifting work. -/
+an arbitrary complex with injective terms. K-injectivity is not needed here. -/
 theorem schemeMayerVietorisComplex_shortExact
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

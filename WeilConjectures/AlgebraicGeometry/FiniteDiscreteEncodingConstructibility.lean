@@ -93,21 +93,8 @@ private theorem constructible_comparison [Finite A] [DiscreteTopology A]
     exact (stratified_comparison A _ eU _).trans
       (stratified_iso A _ (encoding_pullback_fixed A U.ι e eU M).some)
 
-/-- Finite local models and bounded constructibility under coefficient encoding.
-Source: blueprint coefficient-identification proof, steps 8--9; Stacks Tags 03DA and 099R.
-
-Proof: the coefficient-sections equation identifies the canonical ring maps after every
-scheme inverse image. The section-action equivalence thus commutes with these inverse
-images. A finite module over the finite ring is finitely presented. Present it by a
-finite scalar matrix: the encodings carry the matrix to exactly the same matrix, and
-preserve its cokernel. Hence they identify the corresponding constant sheaves. Apply
-these comparisons on each member of the same pro-etale covering; the inverse equivalence
-gives the converse. Applying this argument to every immersion in the same finite
-constructible stratification proves stratified constructibility in both directions.
-On schemes that are not qcqs use the same comparison on every affine open, as required
-by both definitions. Finally the termwise derived equivalence is t-exact and commutes
-with every homology functor; its inverse has the same properties. This identifies both
-boundedness and constructibility of every homology sheaf. -/
+/-- Finite local models and bounded constructibility under coefficient encoding
+(Stacks, Tags 03DA and 099R). -/
 theorem encoding_constructibility [Finite A] [DiscreteTopology A]
     (T : Scheme.{u}) (e : Encoding A T) :
     (∀ M : Internal A T,

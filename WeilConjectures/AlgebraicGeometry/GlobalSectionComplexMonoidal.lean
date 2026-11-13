@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionModuleMonoidal
 
 /-! # Tensor structure of global scalar extension on complexes
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E;
-algebra.tex, Tag 00DK.
+## References
+
+* Stacks Project, Tags 0996, 099E and 00DK.
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +24,7 @@ namespace CategoryTheory
 
 attribute [local instance] ringFamilyGlobalExtension_additive
 /-- The usual total-tensor monoidal structure, with small colimit instances cached.
-This is the existing `HomologicalComplex.monoidalCategory`, without any changed tensor data.
-Source: Stacks Project, Tags 0996 and 099E, total tensor complexes. -/
+This is the existing `HomologicalComplex.monoidalCategory` (Stacks, Tags 0996 and 099E). -/
 noncomputable abbrev smallClosedCochainMonoidal
     (D : Type w) [Category.{v} D] [Preadditive D] [HasZeroObject D]
     [MonoidalCategory D] [SymmetricCategory D] [MonoidalPreadditive D]
@@ -48,15 +48,7 @@ noncomputable abbrev smallClosedCochainMonoidal
 set_option maxHeartbeats 800000 in
 -- Comparing the canonical module and total-complex structures needs extra elaboration steps.
 /-- The scalar-extension functor on complexes is strong monoidal with its prescribed
-multiplication as the inverse unit constraint.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
-
-Proof: use the module-level normalized strong monoidal structure and the proved small
-colimit preservation. Apply the source library's additive monoidal lift to cochain
-complexes; it uses these coproducts to commute the functor with total tensors. The inverse
-of its unit comparison is the single-complex comparison followed by the single of the
-inverse module unit. Substituting the prescribed module unit gives exactly the definition
-of ringFamilyGlobalExtensionAugmentation on the identity of the degree-zero complex. -/
+multiplication as the inverse unit constraint (Stacks, Tags 0996 and 099E). -/
 theorem ringFamilyGlobalExtension_complex_monoidal
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) :

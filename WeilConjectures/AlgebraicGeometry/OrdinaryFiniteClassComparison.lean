@@ -10,8 +10,9 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
 /-!
 # The normalized class map for ordinary finite coefficients
 
-Source: the constants adjunction and the universal Ext/cohomology comparison in
-WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison.
+The class map is built from the constants adjunction and the universal Ext/cohomology
+comparison `extToSheafHOf` of
+`WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison`.
 -/
 
 @[expose] public section
@@ -84,15 +85,7 @@ private theorem integralGenerator_bijective (A : Type (u + 1)) [CommRing A]
     h ▸ (constantModuleHomEquiv A T F).bijective
   exact Function.Bijective.of_comp_left hcomp e.injective
 
-/-- The actual class map identifies derived module morphisms with sheaf cohomology.
-Source: KummerBoundaryComparison.bijective_extToSheafHOf and the constants adjunction.
-Proof: A map from the constant A-module sheaf is uniquely determined by its global value
-at one, by the constants/global-sections adjunction. The specified integral generator
-sends the integer one to this element, so precomposition with it corepresents those
-sections. On a quasi-compact quasi-separated scheme the universal delta-functor
-comparison bijective_extToSheafHOf therefore applies in every degree. Its formula is
-the specified forgetful Ext comparison. Finally compose with Ext.homEquiv.symm to
-identify Ext classes with the displayed derived-category morphisms. -/
+/-- The class map identifies derived module morphisms with sheaf cohomology. -/
 theorem ordinaryFiniteClass_bijective (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :
@@ -102,11 +95,7 @@ theorem ordinaryFiniteClass_bijective (A : Type (u + 1)) [CommRing A]
   unfold ordinaryFiniteClass
   exact h.comp Ext.homEquiv.symm.bijective
 
-/-- The actual Kummer boundary has a unique derived module representative.
-Source: the preceding normalized class comparison and the specified Chern predicate.
-Proof: surjectivity produces a representative of the fixed Kummer class. If a second
-arrow satisfies the same specification, their classes agree, so injectivity equates
-the arrows. Thus the construction chooses no unconstrained cohomology witness. -/
+/-- The Kummer boundary has a unique derived module representative. -/
 theorem existsUnique_ordinaryFiniteP1Chern (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u})
     [CompactSpace (ProjectiveLine S)] [QuasiSeparatedSpace (ProjectiveLine S)]

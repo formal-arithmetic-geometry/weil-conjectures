@@ -11,7 +11,10 @@ public import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 
 /-! # Ogoma's lemma
-Source: literature/stacks-project/smoothing.tex, Smoothing Ring Maps, Lemma Tag 07FC
+
+## References
+
+* [Stacks, Tag 07FC]
 -/
 
 @[expose] public section
@@ -20,10 +23,9 @@ universe u v
 
 open scoped Pointwise
 
-/-- Ogoma's lemma, following Stacks Project, Smoothing Ring Maps, Lemma Tag 07FC. The proof follows the five steps in the node:
-form the quotient of the two kernel submodules, show its localization vanishes,
-use finite generation over a Noetherian ring to obtain a uniform annihilator, and
-then verify the kernel equality for every positive power. -/
+/-- Ogoma's lemma (Stacks, Tag 07FC): if the kernels of `π` and `π²` on a localization of a
+finite module over a Noetherian ring agree, then there is `s ∈ S` such that the kernels of
+`s^n π` and `(s^n π)²` on `M` agree for every `n > 0`. -/
 theorem ogoma_lemma
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     {M : Type v} [AddCommGroup M] [Module A M] [Module.Finite A M]

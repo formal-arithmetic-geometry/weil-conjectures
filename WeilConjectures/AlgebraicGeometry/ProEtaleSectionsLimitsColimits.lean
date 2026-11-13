@@ -24,8 +24,7 @@ open AlgebraicGeometry
 
 namespace CategoryTheory
 
-/-- The site is small in every common module universe containing its objects and arrows.
-Source: the fixed size convention, realized by Mathlib's small-category transport. -/
+/-- The site is small in every common module universe containing its objects and arrows. -/
 private local instance pe_essentiallySmall (X : Scheme.{u})
     [UnivLE.{u + 1, v}] : EssentiallySmall.{v} X.ProEt := by
   have : Small.{v} X.ProEt := inferInstance
@@ -33,10 +32,9 @@ private local instance pe_essentiallySmall (X : Scheme.{u})
   have : LocallySmall.{v} X.ProEt := ⟨fun _ _ ↦ inferInstance⟩
   infer_instance
 
-/-- A colimit of module sheaves is the sheafification of the presheaf colimit.
-The comparison is the sheafification unit followed by an isomorphism, so is locally
-surjective on underlying sections.
-Source: Stacks Project, Tag 03DB, module-colimit construction and Tag 03CY. -/
+/-- A colimit of module sheaves is the sheafification of the presheaf colimit. The comparison
+is the sheafification unit followed by an isomorphism, so is locally surjective on underlying
+sections (Stacks, Tags 03DB and 03CY). -/
 private theorem colimit_comparison_locally_surjective
     {C : Type*} [Category C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) [HasSheafify J AddCommGrpCat.{v}]
@@ -78,11 +76,8 @@ private theorem colimit_comparison_locally_surjective
     infer_instance
   infer_instance
 
-/-- Every section of a coproduct over an affine object factors through a finite subcoproduct.
-View the coproduct as the filtered colimit of finite subcoproducts. Local representatives
-and a finite covering refinement give a common finite support. The projection onto that
-support fixes the section locally, hence globally by separatedness.
-Source: Stacks Project, Tag 0935 (2); the finite-support paragraph of the blueprint proof. -/
+/-- Every section of a coproduct over an affine object factors through a finite subcoproduct
+(Stacks, Tag 0935). -/
 private theorem pe_coproduct_section_finite_support
     (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r})
     (W : X.ProEt) [IsAffine W.left]
@@ -221,8 +216,8 @@ private theorem pe_evaluation_coproduct_isIso
     rw [IsIso.inv_hom_id_apply]
     exact ht
 
-/-- Evaluation on an affine pro-etale object preserves coproducts of section-universe size.
-Source: Stacks Project, Tag 0935 (2), and the blueprint direct-sum argument above. -/
+/-- Evaluation on an affine pro-etale object preserves coproducts of section-universe size
+(Stacks, Tag 0935). -/
 private theorem pe_evaluation_preserves_coproducts
     (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r})
     (W : X.ProEt) [IsAffine W.left] (K : Type (max (u + 1) r v)) :
@@ -234,31 +229,8 @@ private theorem pe_evaluation_preserves_coproducts
     exact PreservesCoproduct.of_iso_comparison ev H
   exact preservesColimitsOfShape_of_discrete ev
 
-/--
-
-First compute limits sectionwise in the common module universe. For coproducts, write
-the sum as the filtered colimit of its finite subsums. The comparison from the presheaf
-colimit to the sheaf colimit is the sheafification unit followed by an isomorphism.
-Local representatives and the finite covering refinement of the affine W give a common
-finite support. Projection onto that support fixes the section locally, hence globally
-by separatedness. This proves surjectivity of the coproduct comparison. For injectivity,
-represent a kernel element in a finite subsum and apply its split retraction together
-with the finite comparison isomorphism. The argument includes the empty sum.
-
-For exactness, the functor to abelian sheaves preserves epimorphisms. Such maps are
-locally surjective on underlying set sheaves. Weak contractibility gives surjectivity
-on W-sections, hence evaluation preserves epimorphisms. Its sectionwise kernels then
-give preservation of homology and finite colimits. Coproducts and coequalizers generate
-all colimits in the common universe, so evaluation preserves these colimits.
-
-To treat the independent diagram universes, use the existing arbitrary-ring theorem
-that module sheaves form a Grothendieck abelian category. Shrink only its hom types to
-the common module universe. The special adjoint functor theorem, using its generator
-and cogenerator, supplies both adjoints to evaluation on this equivalent category.
-Adjoints preserve existing limits or colimits of every size. Transport these properties
-back along the equivalence and its unit isomorphism; the evaluation functor and all its
-section maps are unchanged.
--/
+/-- Evaluation of module sheaves on a weakly contractible affine pro-etale object preserves
+limits and colimits of every size. -/
 theorem peSectionsLimitsColimits {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r})
     (W : X.ProEt) [IsAffine W.left]

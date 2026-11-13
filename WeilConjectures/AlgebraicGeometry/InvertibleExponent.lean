@@ -33,9 +33,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Purity conventions and the rank-one datum
-
-The coefficient ring `Λ` *has invertible exponent on `X`* if some positive integer `n` with
+/-- The coefficient ring `Λ` *has invertible exponent on `X`* if some positive integer `n` with
 `n • Λ = 0` becomes a unit in `Γ(X, ⊤)`. For `Λ = A_{E,n}` this is the standing hypothesis
 `ℓ` invertible on `X` of the purity chapter; it is exactly what rules out the
 Artin–Schreier counterexamples in characteristic `p`. -/

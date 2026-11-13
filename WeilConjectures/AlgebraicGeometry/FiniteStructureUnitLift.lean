@@ -21,7 +21,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Lift the unit of finite structure sheaves
 
-Source: Stacks Project, Tag 09ZT.
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -40,24 +42,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 
-/-- Lift the unit through a proper supporting quotient, and prove its left unit law.
-Source: Stacks Project, Tag 09ZT, algebra structure paragraph, expanded using 088E, 088F
-and 0CYS.
-
-Proof: Let J be an ideal sheaf annihilating G whose closed subscheme is proper over A.
-The quotient O_X/J is coherent and has proper support. After reduction, J annihilates
-p_n,* O_Yn via ψ, so the structure map to this algebra factors through the reduced
-quotient. These factorizations commute with transitions, since the base-change map
-preserves the structure map and the pinned composition comparison preserves units.
-Full faithfulness lifts the factorizations uniquely to a map O_X/J to G. Compose with
-the quotient map to define η. The adjunction unit and pushforward composition give the
-stated scalar formula. Multiplicativity of the given μ and this formula identify the
-completed left-unit composite with the identity of G; faithfulness on G proves the left
-unit law. For uniqueness, if η and η' both satisfy the left unit law, then on each open
-μ(η(1),η'(1)) equals η'(1) by the first law and η(1) by symmetry and the second law.
-Thus η(1)=η'(1); linearity gives η(r)=rη(1)=rη'(1)=η'(r). Sectionwise extensionality
-proves equality of the module morphisms. No properness of O_X itself is assumed.
-For the zero algebra or an empty scheme all maps are the unique zero maps. -/
+/-- Lift the unit through a proper supporting quotient, and prove its left unit law. -/
 theorem finite_structure_unit_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

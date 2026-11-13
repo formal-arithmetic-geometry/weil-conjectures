@@ -111,8 +111,7 @@ theorem perfectOverlapApex_overlapReturn_comp
   have hCancel := perfectOverlapApex_siteReturn_comp g pX pY b hg U V E
   exact paste_return_triangle hTri hCancel
 
-/-- The same return calculation for either restriction of the fixed overlap.
-The proof uses only the inclusion of `U ⊓ V` in the chosen open. -/
+/-- The same return calculation for either restriction of the fixed overlap. -/
 theorem perfectOverlapApex_overlapReturn_comp_for
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
@@ -150,9 +149,7 @@ theorem perfectOverlapApex_overlapReturn_comp_for
   exact paste_return_triangle hTri hCancel
 
 /-- Nested restriction followed by the site counit and its inverse comparison
-reduces to the counit on the directly restricted object. Source: Stacks
-Project, Tags 08BT and 08BV. Apply naturality of the equivalence counit to
-the nested restriction isomorphism and cancel its inverse. -/
+reduces to the counit on the directly restricted object (Stacks, Tags 08BT and 08BV). -/
 theorem perfectOverlapApex_nestedCounit_cancel_for
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
@@ -211,9 +208,7 @@ theorem perfectOverlapApex_nestedCounit_cancel_U
     U V U inf_le_left E
 
 /-- The local identification cancels across the open-site comparison and
-counit. Source: Stacks Project, Tags 08BT and 08BV. Naturality of the
-comparison moves the local isomorphism through the overlap restriction;
-naturality of the equivalence counit then cancels its inverse. -/
+counit (Stacks, Tags 08BT and 08BV). -/
 theorem perfectOverlapApex_localIso_cancel_for
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
@@ -245,10 +240,7 @@ theorem perfectOverlapApex_localIso_cancel_for
     cart.functor (LU ⋙ SP) SU ω φ
 
 /-- The site part of a canonical overlap object comparison is the comparison
-at the pulled-back local object. Source: Stacks Project, Tags 08BT and 08BV.
-First use naturality of the site counit to cancel the nested restriction
-isomorphism. Then use the local-isomorphism triangle to move `φ` through the
-open-site comparison and cancel its inverse. -/
+at the pulled-back local object (Stacks, Tags 08BT and 08BV). -/
 theorem perfectOverlapApex_siteTail_cancel_for
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)

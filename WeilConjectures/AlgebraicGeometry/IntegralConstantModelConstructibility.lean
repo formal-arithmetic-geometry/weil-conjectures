@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.IntegralSectionLocalModels
 
 /-! # Finite constant models under integral realization
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.8.10 and
+  Proposition 6.8.11.
 -/
 
 @[expose] public section
@@ -38,21 +41,7 @@ private theorem absolute_iff (l : ℕ) [Fact l.Prime]
     (Scheme.completedConstantModelTransport X (Scheme.pbcIntegralDatum l E) _)
 
 /-- The fixed section-action realization identifies finite constant local models.
-Source: Bhatt--Scholze, Definition 6.8.10, and the coefficient comparison in
-Proposition 6.8.11(3).
-
-Proof: use `integralSectionLocalModels` for the absolute-value presentation. The
-point comparison identifies that presentation with the spectral-norm presentation,
-including the scalar matrices defining finite presentations on the condensed point.
-The remaining two scalar restrictions carry these matrices to the completed
-constant realization, since their coefficient isomorphisms preserve every positive
-quotient projection and hence constant sections. Scalar extension and section-action
-are exact, so they preserve the matrix cokernels. They commute with inverse image to
-locally closed strata and restriction to slice sites. A covering family generates a
-covering sieve of the terminal object; conversely a covering sieve contains a generating
-pro-etale cover. Keep the same finite constructible stratification in both directions.
-On a Noetherian scheme the qcqs branch is the one used by the internal predicate.
-The constructions allow the empty stratification and rank-zero presentations. -/
+(Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11.) -/
 theorem constructible_iff (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]

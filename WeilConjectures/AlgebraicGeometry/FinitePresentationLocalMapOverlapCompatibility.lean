@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapRecoveryTrans
 
 /-! # Eventual overlap compatibility of local lifts
 
-Source: Stacks Project, Limits, Tag 01ZR, first proof.
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section
@@ -47,27 +49,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 The new family is explicitly the pullback of the given family, on the pullback
 of its cover. The conclusion provides a descent morphism with exactly these
 components. No new local maps are chosen.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, agreement on overlaps;
-Algebra, Tag 05N7 (3).
-
-Proof: For each pair of members of U₀, cover their intersection by finitely many
-affine opens. Quasi-separatedness makes each intersection quasi-compact. On each
-such affine the difference of the two pullbacks of r₀ becomes zero on the limit:
-the recovery equations identify both with the restriction of the same map phi,
-and ordinary pullback composition respects these restrictions. Apply the equality
-clause of finitePresentation_descent_directedColimit on the affine overlap ring
-system. There are finitely many charts and pairs, so directedness gives one later
-stage where every difference is zero. This equality is preserved by further base
-change. On that stage the overlap cover is still a cover; sheaf morphism locality
-makes the two restrictions agree on the full intersection. Any test scheme mapping
-to two cover members factors through their intersection, so further pullback gives
-the descent compatibility equation. Assemble the family as a descent-data
-morphism whose components are exactly r. The family r is the explicit conjugated pullback of
-r₀, not a new choice of maps. Composition of the canonical tensor comparisons and
-ordinary pullback composition transports the original recovery equations to the
-last equation. The pulled-back cover remains finite and affine because the stage
-transition is affine. Empty intersections impose no equations; the empty family
-and zero modules use k itself. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem finitePresentation_local_maps_eventually_compatible
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Stalks of a commuting square of open-restricted module morphisms
 
-Source: Stacks Project, Tag 0098; Mathlib open restriction and stalk germ formulas.
+## References
+
+* [Stacks, Tag 0098]
 -/
 
 @[expose] public section
@@ -131,31 +133,8 @@ private theorem restriction_unit_stalk {X Y : Scheme.{u}} (j : X ⟶ Y)
   rw [← Scheme.Modules.germ_restrictStalkNatIso_inv_app j x M hx]
   rw [TopCat.Presheaf.germ_res_assoc]
 
-/-- A commuting square of module morphisms remains commuting in open stalk coordinates.
-
-Proof: represent an element of M at k(p z0) by a section s on an open W of X.
-Evaluate h at W on s. The left side first applies a to s, then restricts it to
-p and applies c. The right side restricts s to U, applies b, and transports the
-section through the pushforward composition and congruence comparisons.
-Take the germ at z0 of this section equality. The maps of additive stalks of a,
-b, and c evaluate on section germs by stalkFunctor_map_germ_apply; each following
-stalkPushforward changes the neighborhood to its inverse image, by
-stalkPushforward_germ_apply. The inverse restriction coordinates give the germ
-of the restricted section by germ_restrictStalkNatIso_inv_app, and the restriction
-adjunction unit is section restriction by restrictAdjunction_unit_app_app.
-The pushforward composition components and congruence components are the section
-transport along pullback.condition, so their induced germ transport is precisely
-stalkCongr along hp. The preimage neighborhoods on the two routes agree by this
-same equality; germ_res identifies any smaller neighborhood used by restriction.
-Thus the germs of the evaluated section equation are exactly the two displayed
-stalk-map evaluations. Every element has a section representative, so
-stalk_hom_ext gives the asserted equality of additive maps. Empty opens have no
-z0. No flatness, cartesian base-change coefficient data, tensor construction,
-complex or nonzero-module assumption is used.
-Source: Stacks Project, Tag 0098; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean
-restrictAdjunction_unit_app_app and germ_restrictStalkNatIso_inv_app;
-Mathlib/Topology/Sheaves/Stalks.lean stalkFunctor_map_germ_apply,
-stalkPushforward_germ_apply, and germ_res_apply. -/
+/-- A commuting square of module morphisms remains commuting in open stalk coordinates
+(Stacks, Tag 0098). -/
 theorem openRestriction_stalk_square
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) (N : X'.Modules) (Z : (pullback k U.ι : Scheme.{u}).Modules)

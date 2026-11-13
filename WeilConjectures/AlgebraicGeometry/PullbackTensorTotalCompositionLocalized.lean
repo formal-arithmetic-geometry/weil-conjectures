@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorComparisonComposit
 
 /-! # Ordinary tensor pullback composition after localization
 
-Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.
+## References
+
+* Stacks Project, Tags 079U and 0D5S.
 -/
 
 @[expose] public section
@@ -59,30 +61,7 @@ variable [∀ Z : Scheme.{u},
 
 set_option maxHeartbeats 600000 in
 -- Comparing the scheme-module and sheaf-module tensor interfaces needs extra elaboration.
-/-- Localization of the ordinary tensor/composition square.
-Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.
-
-Proof: the localization tensor map is natural in both complex inputs. Apply
-this naturality to the ordinary composition mate on P and N. The two ordinary
-chain maps from f*g*Tot(P,N) to Tot((fg)*P,(fg)*N) agree on each (p,q)
-summand: transpose by the pinned adjunctions, and evaluate on pure tensor
-sections. The composite adjunction unit inserts the same successive unit
-images in both factors. Tensor universality proves the module equality, and
-joint epimorphy of total-complex summand inclusions proves the chain equality.
-More explicitly, write b_R for the chain composition mate and Tot(b_P,b_N)
-for its induced map on total tensor complexes. The chain equality is
-f*(psi.hom);theta.hom;Tot(b_P,b_N) = b_Tot;phi.hom. The mate identity
-identifies the direct adjunction unit followed by b_R with the successive
-adjunction unit, transported along pushforwardComp. Thus the transposed
-summand maps both send s tensor t to the tensor of those successive unit
-images. Pullbacks are left adjoints, so they preserve the coproducts of
-summands; the mapped inclusions are jointly epimorphic as required above.
-Naturality gives (Q(b_P) tensor Q(b_N));mu_direct =
-mu_successive;Q(Tot(b_P,b_N)). Precompose the chain equality with
-theta.inv followed by f*(psi.inv), then localize and substitute it here.
-No K-flatness is required. Identity arrows, zero complexes and empty schemes
-satisfy the same universal-property calculation.
--/
+/-- Localization of the ordinary tensor/composition square (Stacks, Tags 079U and 0D5S). -/
 theorem pullback_tensor_total_composition_localized
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)

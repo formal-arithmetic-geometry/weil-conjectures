@@ -16,8 +16,8 @@ public import Mathlib.Topology.Algebra.Ring.Ideal
 /-!
 # Derived reduction towers over integral condensed coefficients
 
-This module constructs the derived reduction tower in the first paragraph of
-`def-pe-derived-complete`.
+This module constructs the derived reduction tower of a derived complete complex over the
+integral condensed coefficients.
 
 The quotient coefficient maps are the canonical quotient maps on continuous
 integer-valued functions, pulled back along the pro-etale point map.  The

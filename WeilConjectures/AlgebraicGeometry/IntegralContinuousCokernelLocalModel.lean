@@ -17,7 +17,9 @@ import WeilConjectures.LinearAlgebra.ContinuousIntegralMatrixLocalSmith
 /-!
 # Integral continuous cokernels of locally constant scalar type
 
-Source: HRS Example 3.1; local Smith argument of the parent comparison, step 5.
+## References
+
+* HRS, Example 3.1.
 -/
 
 @[expose] public section
@@ -911,25 +913,7 @@ private theorem cokernel_model_of_local_smith
 set_option backward.isDefEq.respectTransparency.types true in
 /-- A single continuous integral presentation with locally constant full scalar cokernel
 type admits finite constant local models. There is no Noetherian hypothesis and no
-compatibility or descent assumption on a presentation cover.
-Source: HRS Example 3.1 and Theorem 6.12(2), local pivot/division argument; parent step 5.
-
-Proof: restrict to an open neighborhood on which the scalar cokernel class is fixed.
-The valuation ring is a DVR. Transport continuous integral matrix local Smith reduction
-from the original spectral-valuation ring to the WithAbs subring, using their canonical
-ring equivalence and equality of valuation and adic topologies. The fixed cokernel class
-fixes the complete Smith list, including the free rank and positive torsion exponents.
-Thus on a further open cover there are mutually inverse continuous row and column
-matrices with L F R a fixed scalar diagonal D. Multiplication by these matrices is an
-isomorphism of finite free coefficient sheaves, and the equality holds entrywise as
-continuous functions. Hence their cokernels are isomorphic. The scalar diagonal defines
-a morphism of finite free modules over the condensed ring on the point; take its
-cokernel P, which is finitely presented by construction. Pullback from the point
-preserves this cokernel and identifies its presentation with D. Extension of scalars
-along the canonical pullback comparison preserves cokernels too. These identifications
-give the required local models. Open-immersion covers are pro-etale covers. For zero
-rows or columns the diagonal is empty; empty schemes use the empty cover. No choice
-of arbitrary module data from an unproved existence assertion is required. -/
+compatibility or descent assumption on a presentation cover. (HRS, Example 3.1) -/
 theorem integral_cokernel_hasFiniteConstantLocalModel
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

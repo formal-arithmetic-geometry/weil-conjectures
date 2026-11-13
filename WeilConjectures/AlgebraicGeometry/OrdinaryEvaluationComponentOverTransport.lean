@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationComponent
 
 /-! # Evaluation components with a fixed normalized tensor comparison
 
-Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
+## References
+
+* Stacks Project, Tag 0A8X, ordinary tensor totalization.
+-/
 
 @[expose] public section
 
@@ -48,53 +50,8 @@ private theorem ordinaryTransport_congrMiddle
 
 -- These two forall hypotheses are used after `intro` in the proof below.
 set_option linter.unusedVariables false in
-/-- A fixed normalized tensor comparison transports all ordinary evaluation components.
-Source: Stacks Project, Tags 0A8X and 08DQ, the ordinary evaluation calculation;
-Tag 08DL, restriction of internal Hom.
-
-Proof: use the summand equation for c and naturality of the total tensor of d
-at (p,q) to move the target inclusion through the inverse tensor comparison.
-Use the projection equation for b(F) to move the target Hom projection through
-b(F). The middle expression is now the image of the specified local component,
-with the tensorator and the inverse of d in degree q on its source. Substitute
-the local component identity at the chosen indices. When r+q is not zero, that component
-is zero, and the additive equivalence and composition preserve zero. When
-r+q=0, use the projection equation for b at the single unit and functoriality
-of Hom(P,-) for the canonical single-unit comparison in d. Here is the required
-calculation (it is valid for the arbitrary e and m occurring in the statement).
-Write y for a local section of F.X p, x for a local section of P.X r, and
-phi for a local section of the dual in degree q=-r. The projection equation for
-b (first with M=localEvaluationUnit X U and then with M=F) says, after composing
-with the relevant ι-map, that the two sides are respectively
-
-  (m.μIso (F.X p) ((localEvaluationDual X U P).X q)).inv
-    (y ⊗ (phi ⊗ x))
-
-and the image under L of the corresponding source tensor. To see that these
-sections give the same map, check them on the usual local generators: every
-section of a tensor product is locally a sum of tensors y⊗phi⊗x, and equality
-of morphisms of sheaves of modules is local. Associativity for m rewrites the
-first display as ((y⊗phi)⊗x), while the supplied symmetry equation rewrites the
-other parenthesization as (phi⊗y)⊗x. The equation m.εIso =
-Scheme.Modules.overEquivFunctorObjUnitIso U then removes the unit factor in d,
-so both composites evaluate on a generator as the scalar action
-
-  y * phi(x).
-
-This is the dual/output cancellation, rather than an appeal to a canonical
-reindexing of e. More explicitly, apply he to the two maps represented by the
-generators x: 𝟙_ ⟶ P.X r and y: F.X p ⟶ F.X p (and to the corresponding
-unit maps). The resulting naturality squares move e across the dual projection
-and across the output projection. Their middle arrows are the two composites
-just computed, hence are equal on every local generator; cancelling the
-isomorphism components of e gives equality of the two projected maps. Thus the
-argument uses only he and the displayed unit/symmetry equations, and does not
-identify e with a canonical comparison (even its negative would satisfy he).
-The degree-equality isomorphisms agree because T acts degreewise. Curry back to
-obtain the scheme component equation. Repeat this calculation for each set of
-indices to prove the scheme evaluation predicate. No chain-map naturality of b
-is used.
-Zero complexes and the empty open have the same zero or balanced-tensor checks. -/
+/-- A fixed normalized tensor comparison transports all ordinary evaluation components
+(Stacks, Tags 0A8X, 08DQ and 08DL). -/
 theorem ordinaryEvaluation_component_over_transport (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :
     let L := Equivalence.functor

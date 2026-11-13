@@ -12,9 +12,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 # The finite presentation model system of a morphism of finite type
 
 Let `S` be a quasi-compact quasi-separated scheme and `f : X ⟶ S` a morphism locally of finite
-type with `X` quasi-compact and quasi-separated. Following the Nagata compactification
-blueprint, we make the construction of the finite presentation model system `FP(X/S)` of
-`f` explicit (Stacks Project Tags 01ZE, 01ZG and 09ZQ):
+type with `X` quasi-compact and quasi-separated. We make the construction of the finite
+presentation model system `FP(X/S)` of `f` explicit (Stacks Project Tags 01ZE, 01ZG and 09ZQ):
 
 1. Choose Noetherian approximations `X = lim X_λ` and `S = lim S_μ`
    (`AlgebraicGeometry.Scheme.noetherianBaseSystem`). A *finite-stage datum*
@@ -46,7 +45,7 @@ section ShrinkToClosed
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] [CompactSpace X]
 
 /-- **The shrinking of an immersion to a closed immersion** `Y^cl(f)`: for an immersion
-`f: X ⟶ Y` with `X` quasi-compact, a chosen quasi-compact open `W ⊆ Y` such that `f` factors
+`f : X ⟶ Y` with `X` quasi-compact, a chosen quasi-compact open `W ⊆ Y` such that `f` factors
 through a closed immersion `X ⟶ W` (selected by
 `AlgebraicGeometry.Scheme.Hom.exists_isCompact_isClosedImmersion`). -/
 noncomputable def Scheme.Hom.closedShrink : Y.Opens :=
@@ -89,9 +88,9 @@ section StageData
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
-/-- A **finite-stage datum** for a morphism `f: X ⟶ S`, relative to Noetherian approximations
+/-- A **finite-stage datum** for a morphism `f : X ⟶ S`, relative to Noetherian approximations
 `X = lim X_λ` and `S = lim S_μ`: stages `λ_X` and `λ_S`, a morphism
-`φ: X_{λ_X} ⟶ S_{λ_S}` such that `X ⟶ S ⟶ S_{λ_S}` equals `X ⟶ X_{λ_X} ⟶ S_{λ_S}`, and such
+`φ : X_{λ_X} ⟶ S_{λ_S}` such that `X ⟶ S ⟶ S_{λ_S}` equals `X ⟶ X_{λ_X} ⟶ S_{λ_S}`, and such
 that the induced comparison `X ⟶ X_{λ_X} ×_{S_{λ_S}} S` is an immersion. -/
 structure Scheme.Hom.NoetherianStageData (NX : X.NoetherianApproximation)
     (NS : S.NoetherianApproximation) where
@@ -134,7 +133,7 @@ instance : QuasiSeparated D.φ := inferInstance
 end Scheme.Hom.NoetherianStageData
 
 /-- **Existence of a finite-stage datum**: if `X` and `S` are quasi-compact and quasi-separated
-and `f: X ⟶ S` is locally of finite type, then for any Noetherian approximations of `X` and `S`
+and `f : X ⟶ S` is locally of finite type, then for any Noetherian approximations of `X` and `S`
 there is a finite-stage datum for `f`. The morphism `X ⟶ S ⟶ S_{λ_S}` descends to a stage of `X`
 since `S_{λ_S}` is of finite presentation over `ℤ` (Stacks Project Tag 01ZC), and the comparison
 with `X_{λ_X} ×_{S_{λ_S}} S` is an immersion for `λ_X` large (Stacks Project Tag 01ZE). -/
@@ -177,7 +176,7 @@ noncomputable def Scheme.Hom.noetherianStageData :
     f.NoetherianStageData X.noetherianBaseSystem S.noetherianBaseSystem :=
   Classical.choice (f.nonempty_noetherianStageData _ _)
 
-/-- **The immersion model** `Y^imm(X/S) = X_{λ_X} ×_{S_{λ_S}} S` of a morphism `f: X ⟶ S`
+/-- **The immersion model** `Y^imm(X/S) = X_{λ_X} ×_{S_{λ_S}} S` of a morphism `f : X ⟶ S`
 locally of finite type between quasi-compact quasi-separated schemes, built from the chosen
 finite-stage datum. -/
 noncomputable def Scheme.Hom.immersionModel : Scheme.{u} :=
@@ -187,7 +186,7 @@ noncomputable def Scheme.Hom.immersionModel : Scheme.{u} :=
 noncomputable def Scheme.Hom.immersionModelHom : f.immersionModel ⟶ S :=
   pullback.snd _ _
 
-/-- The immersion `i^imm: X ⟶ Y^imm(X/S)` over `S` induced by the compatibility of the
+/-- The immersion `i^imm : X ⟶ Y^imm(X/S)` over `S` induced by the compatibility of the
 finite-stage datum. -/
 noncomputable def Scheme.Hom.toImmersionModel : X ⟶ f.immersionModel :=
   pullback.lift _ f f.noetherianStageData.w
@@ -211,7 +210,7 @@ instance Scheme.Hom.quasiSeparated_immersionModelHom : QuasiSeparated f.immersio
   MorphismProperty.pullback_snd _ _ inferInstance
 
 /-- **The immersion model**: `Y^imm(X/S)` is quasi-compact, quasi-separated and locally of finite
-presentation over `S`, and `i^imm: X ⟶ Y^imm(X/S)` is an immersion over `S`. -/
+presentation over `S`, and `i^imm : X ⟶ Y^imm(X/S)` is an immersion over `S`. -/
 theorem Scheme.Hom.immersionModel_spec :
     LocallyOfFinitePresentation f.immersionModelHom ∧ QuasiCompact f.immersionModelHom ∧
       QuasiSeparated f.immersionModelHom ∧ IsImmersion f.toImmersionModel ∧
@@ -251,7 +250,7 @@ lemma Scheme.Hom.toClosedShrink_closedModelHom :
     f.toImmersionModel.toClosedShrink ≫ f.closedModelHom = f := by
   simp [Scheme.Hom.closedModelHom]
 
-/-- **The finite presentation model system** `FP(X/S)` of a morphism `f: X ⟶ S` locally of
+/-- **The finite presentation model system** `FP(X/S)` of a morphism `f : X ⟶ S` locally of
 finite type between quasi-compact quasi-separated schemes: the closed immersion
 `X ⟶ Y° = Y^cl(i^imm)` into the quasi-compact open of the immersion model, followed by the
 system of closed subschemes of `Y°` cut out by the finite type subideals of the ideal of `X`

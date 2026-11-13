@@ -50,14 +50,7 @@ private theorem inverse_comparison
     Iso.inv_hom_id_assoc] using h'.symm
 
 /-- Invertible proper exchange transports the two constant-object units in the
-inverse direction.
-
-Proof: ordinary constant-object base change gives the forward square. Compose
-its exchange component with direct image of the constant pullback isomorphism.
-This composite is invertible. Cancel it on the right and the constant pullback
-comparison on the left. The inverse of the composite is direct image of the
-inverse constant comparison followed by inverse exchange, which gives the
-formula. This uses no projective-line geometry or nonemptiness hypothesis. -/
+inverse direction. -/
 theorem constantUnit_inverseProperExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {Y Y' Z Z' : Scheme.{u}}

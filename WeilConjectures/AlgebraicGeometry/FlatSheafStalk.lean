@@ -17,7 +17,9 @@ import WeilConjectures.Topology.RingedModuleSkyscraper
 /-!
 # Stalks of flat sheaves of modules
 
-Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), flat sheaf implies flat stalks.
+## References
+
+* [Stacks Project, Tag 05NE](https://stacks.math.columbia.edu/tag/05NE)
 -/
 
 @[expose] public section
@@ -34,8 +36,7 @@ noncomputable section
 
 /- The constant-section calculation below is adapted from the private helpers of
 `WeilConjectures.Topology.SkyscraperComplexStalk`. We need its naturality for arbitrary module
-morphisms, whereas that module exposes only recovery for an individual complex.
-Source: Stacks, Tag 009A (4), and the neighbourhood-colimit description of stalks. -/
+morphisms, whereas that module exposes only recovery for an individual complex. -/
 
 /-- Send a vector to the germ of its constant global section. -/
 private noncomputable def constantGermAdd (X : RingedSpace.{u}) (x : X)
@@ -75,8 +76,7 @@ private noncomputable def constantGerm (X : RingedSpace.{u}) (x : X)
       map_add' := (constantGermAdd X x M).map_add
       map_smul' := constantGermAdd_linear X x M }
 
-/-- Germ equality detects constant values; every local section is constant on its
-subsingleton domain of membership proofs. -/
+/-- Every local section of the skyscraper module is determined by its germ. -/
 private theorem constantGerm_bijective (X : RingedSpace.{u}) (x : X)
     (M : ModuleCat.{u} (X.presheaf.stalk x)) :
     Function.Bijective (constantGerm X x M) := by
@@ -106,25 +106,8 @@ private theorem constantGerm_naturality (X : RingedSpace.{u}) (x : X)
   erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
   rfl
 
-/-- Every stalk of a flat sheaf of modules on a ringed space is flat over the stalk ring.
-Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), implication from sheaf flatness.
-
-Proof:
-1. Use Mathlib's injectivity criterion for `Module.Flat`: fix an injective linear map
-   `f: M →ₗ N` of stalk modules. The skyscraper map is monic, by pointwise injectivity
-   on sections.
-2. By `def-pc-flat-sheaf-modules`, right tensoring with `F` preserves finite limits,
-   hence preserves this monomorphism.
-3. Apply `lem-weil-pbc-module-stalk-exact` to the exact short complex with first map
-   zero and second map the tensored skyscraper map. Its stalk is exact, so the stalk
-   of the tensored map is again monic.
-4. Naturality of `lem-pc-ringed-space-module-stalk-tensor` conjugates this stalk map
-   to the tensor of the skyscraper stalk map with `F_x`.
-5. Constant sections identify the skyscraper stalk of `M` with `M`: every section on
-   a neighbourhood is constant on its subsingleton domain of membership proofs, and
-   equality of germs detects its value. Representing scalars by germs proves linearity;
-   stalk maps preserve these constant-section germs. Conjugating by these isomorphisms
-   shows that `f ⊗ id` is injective, as required. -/
+/-- Every stalk of a flat sheaf of modules on a ringed space is flat over the stalk ring
+(Stacks, Tag 05NE). -/
 theorem flat_stalk_of_isFlat (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X))
     (hF : SheafOfModules.IsFlat F) (x : X) :

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Affine bijectivity of normalized coefficient comparisons
 
-Source: Stacks Project, Tags 02KE, 01I9 and 01IA.
+## References
+
+* Stacks Project, Tags 02KE, 01I9 and 01IA
 -/
 
 @[expose] public section
@@ -32,22 +34,7 @@ set_option maxHeartbeats 500000 in
 -- The coefficient functor and section scalar structures require repeated definitional transport.
 /-- A coefficient comparison morphism with the unit formula is bijective on affine opens.
 This is a single-open statement: no tuples, face maps, or gluing are involved.
-Source: Stacks Project, Tag 02KG (Lemma 30.5.1); Tags 01I9 and 01IA.
-
-Proof: Write A = Gamma(U,O), D = Gamma(Z,O), N = Gamma(Z,F), and
-R = Gamma(B,O). The affine intersection base-change theorem shows that
-W -> T' is affine. Hence W intersect f' inverse image B is affine, and it
-is Z times_U B by the cartesian square and the stated equality for W.
-The affine pullback section formula identifies the sections of M there
-with (R tensor_A D) tensor_D N = R tensor_A N. The source is the pullback
-to B of the associated A-module N, so the same formula identifies its
-sections with R tensor_A N. Both identifications send 1 tensor s to the
-restriction of the displayed generator section. Naturality of q under
-B -> top and its linearity over Gamma(B,O) therefore identify q on every
-r tensor s with the identity under these presentations. Such pure tensors
-generate the tensor product, so q is conjugate to an additive equivalence
-and is bijective. The argument includes empty Z and empty B, with zero
-modules. It uses neither flatness nor any covering assumption. -/
+(Stacks, Tag 02KG; Tags 01I9 and 01IA.) -/
 theorem coefficientComparison_affine_bijective {X T : Scheme.{u}} (f : X ⟶ T)
     [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]
     (U : T.Opens) (hU : IsAffineOpen U)

@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitReindexing
 /-!
 # Compatibility of sums on explicitly split objects
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
+## References
+
+* Stacks Project, Tag 03SH
+* SGA 4, Exposé IX, 5.1
 -/
 
 @[expose] public section
@@ -26,31 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Sums from two explicit splittings agree after restriction along a commuting square.
 No finiteness assumption on `f` is needed: the two finite splittings are supplied.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
-
-Proof. Pull the two clopen coproducts back along `g₁` and `g₂`. Their pieces still form
-finite clopen coproducts of the common pullback `Z ×[X] Y`, and their projections to `Z`
-are isomorphisms. The pullback universal property identifies the transported sections,
-so functoriality of `F` and additivity of its restriction maps identify each restricted
-sum with the sum on the pulled-back splitting, applied to the same restricted input
-(the inputs agree because `g₁ ≫ h₁ = g₂ ≫ h₂`).
-
-To compare these splittings, intersect every piece of the first with every piece of the
-second. Through either piece's isomorphism to `Z` these intersections give clopen subsets
-of `Z`. For a point of `Z`, each sheet of one splitting meets exactly one sheet of the
-other, defining a bijection of the index sets. Since both index sets are finite, intersect
-these finitely many clopen subsets to get a neighbourhood on which this bijection is
-constant. These neighbourhoods cover `Z`. On each, corresponding sheet sections factor
-through the same intersection piece, and both invert its projection to the neighbourhood;
-thus they coincide. Reindex the finite sum by that bijection. Separatedness of `F` gives
-the asserted equality on `Z`.
-
-If the index sets have different cardinalities, no point of `Z` can exist, by the
-bijection just constructed. The empty-cover sheaf condition makes `F(Z)` the zero group,
-so equality still holds. The same argument handles either or both index sets empty.
-This is solely compatibility of already explicit local sums; it constructs no global
-section and asserts no covering or gluing theorem. -/
+(Stacks, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.) -/
 theorem finiteEtaleTrace_split_sum_compatibility {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hf : Etale f) :
     let B := MorphismProperty.Over.pullback @Etale ⊤ f ⋙ MorphismProperty.Over.map ⊤ hf

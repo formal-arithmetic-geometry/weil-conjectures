@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 /-!
 # Sections on a quasi-compact open of a locally Noetherian normal scheme
 
-Source: Stacks Project, Tags 0357 and 0358.
+## References
+
+* [Stacks, Tag 0357], [Stacks, Tag 0358], [Stacks, Tag 035L]
 -/
 
 @[expose] public section
@@ -66,21 +68,7 @@ private theorem sections_product {X : Scheme.{u}} {ι : Type v}
   exact ⟨RingEquiv.ofBijective g hg⟩
 
 /-- Sections on a quasi-compact open of a locally Noetherian normal scheme form a
-finite product of integrally closed domains.
-
-Source: Stacks Project, Tags 0357 and 0358, and Tag 035L, first paragraph of its proof.
-
-Proof: The open subscheme U is locally Noetherian, so it is locally connected. Its
-connected components are clopen. Quasi-compactness implies that their discrete quotient
-space is finite; index it by Fin n. Normality passes to each component through its open
-immersion. The theorem irreducibleSpace_of_isDomain_stalk makes each connected component
-irreducible. Domain stalks imply reducedness, so each component is integral. Its ring of
-global sections is then a domain, and isIntegrallyClosed_of_isIntegrallyClosed_stalk
-makes it integrally closed. Restriction to the disjoint open covering is injective by
-uniqueness in the sheaf axiom. Every family of sections is compatible, since different
-components have empty intersection; existence of gluing makes restriction surjective.
-The resulting ring equivalence gives the asserted finite product. If U is empty,
-n = 0 and both its section ring and the empty product are the zero ring. -/
+finite product of integrally closed domains (Stacks, Tags 0357, 0358, 035L). -/
 theorem normal_sections_finite_product {X : Scheme.{u}} [IsLocallyNoetherian X]
     (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧
       IsIntegrallyClosed (X.presheaf.stalk x))

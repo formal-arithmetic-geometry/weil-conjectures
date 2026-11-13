@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 /-!
 # Degree-one abelian cohomology of injective module sheaves
 
-Source: Stacks Project, Lemma 03FD.
+## References
+
+* Stacks Project, Lemma 03FD.
 -/
 
 @[expose] public section
@@ -26,17 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- An injective module sheaf has zero degree-one cohomology after forgetting scalars.
-
-Source: Stacks Project, Lemma 03FD, especially the second paragraph of its proof.
-
-Proof: Regard a sheaf of Λ-modules as a module over the constant ring sheaf Λ on the
-small etale site. This equivalence preserves injectivity and the underlying abelian
-sheaf. The proof of 03FD shows that every injective module sheaf is acyclic for abelian
-section cohomology: the free module Cech complex is exact, so Hom into the injective
-has zero positive cohomology; the Cech vanishing criterion applies to every cover.
-Evaluate at the terminal etale object Y. The identification of this derived section
-cohomology with Sheaf.H (Ext out of the constant integer sheaf) gives the conclusion.
-No claim that the underlying abelian sheaf is itself injective is needed. -/
+(Stacks, Tag 03FD.) -/
 theorem subsingleton_H_one_of_injective_module_sheaf
     (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :

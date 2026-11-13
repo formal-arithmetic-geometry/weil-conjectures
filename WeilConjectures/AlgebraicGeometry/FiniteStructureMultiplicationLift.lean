@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorTestsFaithful
 
 /-! # Lift multiplication of finite structure sheaves
 
-Source: Stacks Project, Tag 09ZT.
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -38,23 +40,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 
-/-- Lift multiplication, with associativity and symmetry, but without a unit or algebra sheaf.
-Source: Stacks Project, Tag 09ZT, multiplication paragraph, using 088E, 088F and 0CYS.
-
-Proof: Choose a proper closed subscheme annihilating G. Its ideal annihilates both tensor
-powers of G; quasi-coherence and finite type imply coherence of the square and cube.
-Transport the multiplication of each finite direct image through ψ and the tensor-pullback
-comparison. The canonical composition comparison preserves elementary tensor sections by
-its pinned-adjunction mate formula. The base-change multiplication formula and hψ give the
-compatibility equation. Full faithfulness of completion lifts this family uniquely to μ.
-The two associativity composites on the tensor cube and the two symmetry composites on
-the square agree after completion, where they are the ring laws of O_Yn. Faithfulness makes
-them equal on X. Evaluation on elementary section tensors gives the displayed laws.
-The pullback tensor comparison carries pulled-back elementary tensors to their tensor
-product. Evaluating the lifted multiplication under the adjunction unit and pushforward
-composition therefore gives the displayed multiplicativity of every adjoint. For uniqueness,
-that formula determines the completed multiplication on local generators of pullback;
-full faithfulness then determines μ. Zero modules and empty schemes use the same argument. -/
+/-- Lift multiplication, with associativity and symmetry, but without a unit or algebra sheaf
+(Stacks, Tags 09ZT, 088E, 088F, 0CYS). -/
 theorem finite_structure_multiplication_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

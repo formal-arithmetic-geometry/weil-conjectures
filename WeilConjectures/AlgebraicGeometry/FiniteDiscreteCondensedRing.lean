@@ -8,8 +8,12 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 
 /-! # The constant ring underlying finite discrete continuous coefficients
 
-Source: Bhatt--Scholze, Section 5.3. A continuous function into a finite discrete ring
+A continuous function into a finite discrete ring
 is constant on the members of the finite clopen covering by its fibres.
+
+## References
+
+* Bhatt--Scholze, Section 5.3
 -/
 
 @[expose] public section
@@ -81,16 +85,7 @@ private instance locallyInjective_constantToContinuousAb :
         ⟨PEmpty, inferInstance, U, incl, hι, fun i ↦ i.elim⟩
 
 /-- Continuous finite discrete coefficients are the sheafified constant ring, as ring
-objects in condensed abelian groups.
-
-Source: Bhatt--Scholze, Section 5.3.
-
-Proof. The constant-function map is locally surjective on the finite covering of each
-profinite set by the clopen fibres of a section. It is locally injective: distinct
-constants can agree only on an empty profinite set, covered by the empty family.
-Sheafification therefore inverts it. It is a map of ring presheaves, so its
-sheafification, followed by the sheafification counit, is a morphism of ring objects.
-The empty profinite set and the zero ring are included in the same argument. -/
+objects in condensed abelian groups (Bhatt--Scholze, Section 5.3). -/
 theorem finiteDiscreteCondensedRing_constant :
     ∃ e : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
         ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅

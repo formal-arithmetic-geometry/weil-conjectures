@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackCompariso
 
 /-! # Recovery of a global morphism by a prescribed local family
 
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing.
+## References
+
+* [Stacks, Tags 01ZR and 0095]
 -/
 
 @[expose] public section
@@ -21,9 +23,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Every member of the pulled-back cover recovers the restriction of the given map.
-This is the explicit comparison equation, with no maps or witnesses chosen.
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing; Tag 0095. -/
+/-- Every member of the pulled-back cover recovers the restriction of the given map. -/
 def localMapRecovery {X Y : Scheme.{u}} (p : Y ⟶ X) (U : X.OpenCover.{u})
     (F G : X.Modules)
     (δ : (Scheme.Modules.tensorPullback p).obj F ⟶

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapEquality
 
 /-! # Spreading a single stalk homotopy of a strictly perfect complex
 
-Source: Stacks Project, Tags 09RE, 0BC7 (2) and 01CP.
+## References
+
+* Stacks Project, Tags 09RE, 0BC7 and 01CP.
 -/
 
 @[expose] public section
@@ -45,17 +47,8 @@ private def restriction_comp_iso (X : Scheme.{u}) (V Z W : X.Opens)
 set_option backward.isDefEq.respectTransparency false in
 -- Nested restriction and stalk comparisons require extra definitional-equality checks.
 /-- Two fixed endomorphisms which are homotopic at the stalk become homotopic
-on an affine neighbourhood inside any prescribed smaller neighbourhood.
-Source: Stacks Project, Tag 09RE, affine case (1); Tag 0BC7 (2).
-
-Proof: Lift the reverse-degree components, without equations, inside T. The
-canonical stalk comparison identifies the stalk of their null-homotopic map with
-the null-homotopic map of the given stalk components. The input homotopy identifies
-this with the difference a-b. Shrink until these two chain maps agree, using
-bounded finite-retract stalk equality. Apply the canonical null homotopy and the
-subtraction equivalence to obtain a homotopy between a and b. Finally choose an
-affine subneighbourhood and restrict the homotopy there. Iterated slice restriction
-is definitionally identified with direct restriction. -/
+on an affine neighbourhood inside any prescribed smaller neighbourhood
+(Stacks, Tags 09RE and 0BC7). -/
 theorem exists_affine_perfect_open_stalk_homotopy_spread
     (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex

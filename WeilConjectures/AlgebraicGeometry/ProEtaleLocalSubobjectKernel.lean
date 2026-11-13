@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 
 /-! # The kernel construction for local subobjects
 
-Source: Stacks Project, Sites, Tag 04TR, expressed using kernels and pushforwards.
+## References
+
+* Stacks Project, Tag 04TR
 -/
 
 @[expose] public section

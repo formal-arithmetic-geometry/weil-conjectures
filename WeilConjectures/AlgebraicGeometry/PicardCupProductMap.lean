@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # The degree-zero cup-product morphism
 
-Source: Stacks Project, Tag 0BDP, final paragraph.
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -23,14 +25,14 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The unique comparison of the tensor-formula pullback with ordinary pullback.
-Source: Stacks Project, Tags 0095 and 0096; uniqueness of left adjoints. -/
+(Stacks, Tags 0095, 0096) -/
 noncomputable def picardTensorComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
     tensorPullback p ≅ pullback p :=
   (Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq
     (pullbackPushforwardAdjunction p)
 
 /-- The tensor comparison for the tensor-formula pullback, transported from ordinary
-pullback. Source: Stacks Project, Tag 0095, tensor formula. -/
+pullback. (Stacks, Tag 0095) -/
 noncomputable def picardTensorObjIso {X Y : Scheme.{u}} (p : X ⟶ Y) (M N : Y.Modules) :
     (tensorPullback p).obj (M ⊗ N) ≅
       (tensorPullback p).obj M ⊗ (tensorPullback p).obj N :=
@@ -39,8 +41,7 @@ noncomputable def picardTensorObjIso {X Y : Scheme.{u}} (p : X ⟶ Y) (M N : Y.M
       (((picardTensorComparison p).app M).symm ⊗ᵢ
         ((picardTensorComparison p).app N).symm)
 
-/-- The unit comparison for tensor pullback.
-Source: Stacks Project, Tag 0095, tensor formula. -/
+/-- The unit comparison for tensor pullback. (Stacks, Tag 0095) -/
 noncomputable def picardTensorUnitIso {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (tensorPullback p).obj (SheafOfModules.unit Y.ringCatSheaf) ≅
       SheafOfModules.unit X.ringCatSheaf :=
@@ -48,7 +49,7 @@ noncomputable def picardTensorUnitIso {X Y : Scheme.{u}} (p : X ⟶ Y) :
 
 /-- Push a pairing forward, using the inverse of the structure-sheaf unit.
 All maps are constructed from evaluation, the tensor comparison, and adjunction.
-Source: Stacks Project, Tag 0BDP, degree-zero cup product. -/
+(Stacks, Tag 0BDP) -/
 noncomputable def picardPushforwardPairing {X Y : Scheme.{u}} (p : X ⟶ Y)
     (hO : IsIso ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app
       (SheafOfModules.unit Y.ringCatSheaf)))
@@ -65,8 +66,7 @@ noncomputable def picardPushforwardPairing {X Y : Scheme.{u}} (p : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pulling cup product back recovers evaluation of the two counits.
-Source: Stacks Project, Tag 0BDP, products of the dual basis sections. -/
+/-- Pulling cup product back recovers evaluation of the two counits. (Stacks, Tag 0BDP) -/
 theorem picardPushforwardPairing_counit {X Y : Scheme.{u}} (p : X ⟶ Y)
     (hO : IsIso ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app
       (SheafOfModules.unit Y.ringCatSheaf)))
@@ -94,7 +94,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The transpose of the pushed-forward evaluation of E and its dual on X_W.
 This is an actual construction, requiring no finite-free frame or existence theorem
-for the desired morphism. Source: Stacks Project, Tag 0BDP, final paragraph. -/
+for the desired morphism. (Stacks, Tag 0BDP) -/
 noncomputable def picardCupProductMap {X S W : Scheme.{u}} (f : X ⟶ S)
     (E : X.Modules) (j : W ⟶ S)
     (hO : IsIso ((Classical.choose

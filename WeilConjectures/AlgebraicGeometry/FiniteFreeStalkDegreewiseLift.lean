@@ -20,21 +20,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A family of degreewise stalk maps extends, without imposing chain equations.
-
-Proof: Choose the finite free bases of every nonzero term of P and Q. Pullback
-preserves these finite free sheaves, so a component t n between nonzero terms
-is a finite matrix over the stalk ring O_{Y,y}. Only degrees in the intersection
-of [a,b] and [c,e] can have a nonzero component. Represent each of their finitely
-many entries by a structure-sheaf section on a neighbourhood of y, and intersect
-these neighbourhoods. Restrict the chosen sections and bases to this intersection U
-and define g n by the represented matrix. If either term is zero, use the unique
-map instead. The comparison stalkRestrictionComplexIso is the termwise comparison
-of restriction with pullback along the open inclusion and composition with the
-stalk map. Under it each represented section maps to its prescribed germ, giving
-the asserted component equation. Empty support intersections or rank-zero terms
-have no entries to extend; take U to be the whole scheme when the entry list is
-empty. No differential-commutativity hypothesis is assumed or concluded. -/
+/-- A family of degreewise stalk maps extends, without imposing chain equations. -/
 theorem exists_degreewise_of_stalk_local
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (a b c e : ℤ)

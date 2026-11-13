@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # Derived localizations and the adjunction for open restriction
 
-Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint.
+## References
+
+* Stacks Project, Tag 079W.
 -/
 
 @[expose] public section
@@ -28,13 +30,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The module category of an open subscheme `U` has a derived category with Hom types in
-universe `w`, transported from the localization over the open `U` of `X`.
-Source: Stacks Project, Tag 079W.
-
-Proof: form the standard derived category on `U`. The exact canonical module equivalence
-`Modules.overEquiv U` induces a derived equivalence with the given localization on the
-localized site over `U`, which transports local `w`-smallness to the standard derived
-category on `U`; `hasLocalizationOfLocallySmall` then shrinks its Hom types. -/
+universe `w`, transported from the localization over the open `U` of `X`. (Stacks, Tag 079W) -/
 theorem nonempty_hasDerivedCategory_openSubscheme
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
@@ -51,16 +47,7 @@ theorem nonempty_hasDerivedCategory_openSubscheme
     DerivedCategory.Q⟩
 
 /-- Localized restriction to an open `U` has a right adjoint on derived categories.
-No support or detector assertion is made.
-Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, used for the open
-inclusion in Tag 0A9A, Lemma perfect-lemma-supported-generator.
-
-Proof: the localized restriction functor has its explicit underived right adjoint. The
-localized module category is Grothendieck abelian by
-`grothendieckAbelian_and_functorial_kInjective_resolutions`, so it has K-injective
-resolutions. The upstream `mapDerivedCategoryRightDerivedAdjunction` derives the right
-adjoint of exact restriction and supplies the displayed adjunction. This right adjoint is
-determined up to natural isomorphism. Empty and full opens use the same construction. -/
+No support or detector assertion is made. (Stacks, Tags 079W and 0A9A) -/
 theorem open_derived_localization_adjunction
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

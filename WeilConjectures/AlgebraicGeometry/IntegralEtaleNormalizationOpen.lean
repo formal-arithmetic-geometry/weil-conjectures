@@ -21,13 +21,13 @@ provided that normalization is finite. No quasi-compactness of `E` or `f` is ass
 generic-fibre equation in the statement records the specified identification with `Spec L`
 using the canonical map from `Spec L` to the normalization.
 
-Source: Stacks Project, more-morphisms.tex, Tag 05K0, applied on affine source and target
-neighbourhoods; morphisms.tex, Tag 0AB1; separated
-uniqueness as in Tag 01RH.
-
 ## Main statements
 
 * `AlgebraicGeometry.integral_etale_normalization_open`
+
+## References
+
+* Stacks Project, Tags 05K0, 0AB1 and 01RH.
 -/
 
 
@@ -226,33 +226,11 @@ private theorem injective_of_normalization_charts
   simpa only [Scheme.Hom.comp_apply, hz₁, hz₂, Scheme.Opens.ι_apply] using hz
 
 /-- **An integral étale scheme embeds in its finite generic normalization.** Let `X` be a
-normal integral Noetherian scheme with function field `K`, `f: E ⟶ X` separated étale with
-`E` normal integral, `L / K` finite separable with `e: E ×_X Spec K ≅ Spec L` over `K`, and
-assume `ν: X^L ⟶ X` finite. Then there is an open immersion `j: E ⟶ X^L` with `j ≫ ν = f`
+normal integral Noetherian scheme with function field `K`, `f : E ⟶ X` separated étale with
+`E` normal integral, `L / K` finite separable with `e : E ×_X Spec K ≅ Spec L` over `K`, and
+assume `ν : X^L ⟶ X` finite. Then there is an open immersion `j : E ⟶ X^L` with `j ≫ ν = f`
 whose generic-fibre map is `e` followed by the canonical map `Spec L ⟶ X^L ×_X Spec K`.
-
-Source: Stacks Project, Tags 05K0, 0AB1 and 01RH.
-
-Proof:
-1. The given fibre identification gives a dominant preimmersion `q: Spec L ⟶ E`.
-   Dominance follows by flat base change of the schematically dominant generic point of `X`.
-   Its one point is the generic point of `E`, and the surjective map on stalks identifies
-   `L` with `k(E)` (a homomorphism of fields is injective).
-2. Normality of `E` makes `q.fromNormalization` an isomorphism. Apply the universal property
-   of relative normalization to the integral pullback of `X^L ⟶ X` along `f`, obtaining
-   `j: E ⟶ X^L` with `j ≫ ν = f` and the specified restriction on `Spec L`.
-3. On every nonempty affine open `U` of `E`, the map `U ⟶ X` is quasi-compact, separated,
-   locally of finite type, and locally quasi-finite. Zariski main makes its canonical map
-   into its relative normalization an open immersion.
-4. Compare this chart normalization with `X^L` using `normalizationDesc` in both directions.
-   The normalization universal property and separated uniqueness along the dominant
-   `Spec L ⟶ U` prove that the comparisons are inverse. Thus `U ⟶ X^L` is open.
-5. On the pullback of any two such chart maps, the two maps to `E` agree on `Spec L`.
-   This pullback is reduced, and the map from `Spec L` is dominant. Separated uniqueness
-   over `X` gives equality of the two maps, proving that `j` is injective.
-6. The affine cover and injectivity imply that `j` is an open immersion. The required
-   generic-fibre equation follows by equality of its two pullback projections.
--/
+(Stacks, Tags 05K0, 0AB1, 01RH) -/
 theorem integral_etale_normalization_open
     {X E : Scheme.{u}} [IsNoetherian X] [IsIntegral X]
     (hX : ∀ x : X,

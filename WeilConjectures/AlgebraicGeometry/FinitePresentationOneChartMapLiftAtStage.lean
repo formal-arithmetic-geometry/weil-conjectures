@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # A lift at one stage on one affine chart
 
-Source: Stacks Project, Limits Tag 01ZR, affine case, and Algebra Tag 05N7 (2).
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
 -/
 
 @[expose] public section
@@ -30,26 +32,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- A restricted limit morphism lifts at one stage of the affine chart system.
-Source: Stacks Project, Tag 01ZR, first proof; Tag 05N7 (2).
-
-Proof: Restrict the inverse system to the upper tail of j, and pass to its
-partial-order quotient. Pull back the selected affine chart along each transition
-and along the limit projection. All these schemes are affine: the transitions
-are base changes of morphisms between affine schemes. Their coordinate rings are
-the chart ring tensored over R(j) with the stage rings, and the limit ring is the
-corresponding filtered colimit, since tensor product preserves colimits.
-Restrict Fj and Gj to the chart. Their global sections are finitely presented;
-quasi-coherence identifies all further pullbacks with scalar extension. Under
-these identifications the restricted morphism is a map between the extensions
-of these two fixed modules. Apply the map clause of
-ModuleCat.finitePresentation_descent_directedColimit. Transport the resulting map
-back to the chart at the selected stage using the fully faithful affine module
-functor. Its commuting square gives the displayed equation: the scalar-extension
-composition and restriction comparisons are the same canonical adjunction mates
-as the two comparisons in the statement. This asserts a lift only at that stage;
-no transport to subsequent stages is included. Empty charts and zero modules
-are allowed, and j makes the upper tail nonempty even when I is not assumed
-nonempty separately. No finite cover or Noetherian hypothesis is used. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem finitePresentation_one_chart_map_lift_at_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -10,7 +10,10 @@ public import Mathlib.Algebra.Homology.CochainComplexPlus
 import WeilConjectures.Algebra.Homology.BoundedBelowAugmentation
 
 /-! # From injective row descent to bounded-below injective descent
-Source: Stacks Project, Tag 09A2, comparison with a bounded-below injective complex.
+
+## References
+
+* Stacks Project, Tag 09A2.
 -/
 
 @[expose] public section
@@ -29,13 +32,8 @@ variable (X : Scheme.{u})
 
 -- The comparison expands the evaluation, single-complex and section functors.
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact augmented section rows imply descent for a bounded-below complex.
-Source: Stacks Project, Tags 09A2 and 01GE.
-Proof: use the canonical restriction as a chain augmentation into the zeroth
-simplicial column. Naturality makes it a map of complexes. Its transposed column
-in coefficient degree n is precisely the single-sheaf row augmentation, hence is
-quasi-isomorphic by hypothesis. The bicomplex vanishes below simplicial degree zero
-and below a lower bound for J. Apply bounded-below row augmentation comparison. -/
+/-- Exact augmented section rows imply descent for a bounded-below complex
+(Stacks, Tags 09A2 and 01GE). -/
 theorem abelianHypercoverAugmentation_quasiIso_of_rows
     (J : CochainComplex.Plus (Sheaf (topology X) AddCommGrpCat.{u + 1}))
     (hrows : ∀ n : ℤ,

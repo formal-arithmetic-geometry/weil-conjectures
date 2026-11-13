@@ -13,7 +13,10 @@ import Mathlib.LinearAlgebra.Matrix.Nonsingular
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Vanishing of a bottom differential with full-rank kernel
-Source: Stacks Project, Tags 0BDL and 0EWY. -/
+
+## References
+
+Stacks Project, Tags 0BDL and 0EWY. -/
 
 @[expose] public section
 
@@ -91,19 +94,7 @@ private theorem free_zero_of_square_mono {X : Scheme.{u}} (r n : ℕ)
 
 
 /-- A finite-free bottom term and locally free bottom homology of the same rank
-force the outgoing differential to vanish.
-Source: Stacks Project, Tag 0BDL, matrix-chart proof; Tag 0EWY.
-
-Proof: The term in degree a-1 is zero, so homology in degree a is the kernel
-of d^a. Cover X by opens trivializing this locally free kernel. On each such
-open its inclusion into K^a is an injective square map of free rank-r sheaves.
-Global sections are left exact, and finite free sheaves have free sections of
-the stated ranks on every scheme, so no affine refinement is needed.
-The square injective matrix has injective transpose by Tag 0EWY. Every row
-of the matrix for d^a annihilates the kernel inclusion, and therefore is zero.
-Thus the differential is zero on the covering, hence is zero globally.
-No splitting of the kernel inclusion is asserted. At r=0 the source term is
-zero; on the empty X all module morphisms coincide. -/
+force the outgoing differential to vanish. (Stacks, Tags 0BDL and 0EWY.) -/
 theorem finiteFreeBottom_differential_zero
     (X : Scheme.{u})
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

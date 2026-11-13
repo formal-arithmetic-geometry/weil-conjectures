@@ -10,26 +10,15 @@ import WeilConjectures.AlgebraicGeometry.EtaleHypercover
 import all WeilConjectures.AlgebraicGeometry.FiniteSplitReplacementStageAssembly
 import all WeilConjectures.CategoryTheory.SiteFiniteBasisHypercoverExistence
 
-/-! Assembly of compatible finite split replacement stages.
-The proof reuses the matching and transport helpers of the unconstrained assembly
-and the generic tower construction in `SiteFiniteBasisHypercoverExistence`.
--/
+/-! Assembly of compatible finite split replacement stages. -/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-/-- Compatible finite replacement stages give a finite split replacement.
-Source: Stacks 0DAV, passage from compatible skeleta to a simplicial object.
-Every object and every operator is read at a stage containing its degrees.
-The compatibility equalities show that this value is independent of the stage;
-all simplicial identities and the refinement naturality are checked at a common
-finite stage. Splitting, finiteness and the matching universal property in a fixed
-degree are the corresponding properties of that finite stage. The object and refinement
-component in degree n are read
-at stage n, so the finite cofan and sieve membership supplied by hA n transfer
-without any change of objects or maps. -/
+/-- Compatible finite replacement stages give a finite split replacement
+(Stacks, Tag 0DAV). -/
 theorem exists_local_replacement_of_stage_tower
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

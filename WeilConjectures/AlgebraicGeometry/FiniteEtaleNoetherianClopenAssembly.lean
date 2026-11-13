@@ -20,13 +20,9 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Noetherian assembly of a generic affine-integral property.
-Source: Stacks Project, Tags 01OZ and 01J3.
-
-The reduced case is supplied by the core induction lemma. The vanishing ideal of the
-whole space gives a reduced closed subscheme with surjective underlying map, and the
-reduction transport lemma carries the resulting strata back to the original scheme.
--/
+/-- Noetherian assembly of a generic affine-integral property: a generic property on
+integral affine Noetherian immersions into `Y` yields a finite locally closed reduced
+stratification of `Y`. (Stacks, Tags 01OZ and 01J3.) -/
 theorem exists_reduced_stratification_of_integral_affine_generic
     (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y]
     (P : (B : Scheme.{u}) → (B ⟶ Y) → Prop)

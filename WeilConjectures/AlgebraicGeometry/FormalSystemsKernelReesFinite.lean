@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsKernelReesFiniteExistence
 
 /-! # Finite graded kernel module of a coherent formal system
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Z, statement and affine proof;
-Section 0EHN.
+## References
+
+* [Stacks Project, Tag 087Z](https://stacks.math.columbia.edu/tag/087Z)
+* [Stacks Project, Tag 0EHN](https://stacks.math.columbia.edu/tag/0EHN)
 -/
 
 @[expose] public section
@@ -27,27 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The sum of successive kernels is quasi-coherent and finite over the associated graded
-ideal algebra, with generators in degree zero and the action specified by local lifts.
-Source: Stacks, Lemma 087Z and Section 0EHN.
-
-Proof:
-1. Repeated reduction identifies F_l / I^r F_l with F_r. All transitions are sheaf
-surjections. Lift a kernel section locally to F_(n+m+1); it belongs to I^n F_(n+m+1).
-Multiplying by I^m lands in K_(n+m). Differences of lifts belong to I^(n+1), hence are
-killed by I^m. Differences of representatives in I^(m+1) likewise act by zero. Glue the
-resulting bilinear maps. A common lift checks associativity, the unit, and the associated
-graded algebra multiplication.
-2. On an affine open, the formal system corresponds to a finite completion module M,
-with F_r = M/I^r M. Its kernels are
-I^n M/I^(n+1) M. Kernels are quasi-coherent. Ideal products and quotients have the expected
-affine sections. Tilde preserves
-colimits, so identifies both sheaf sums with the associated sheaves of the corresponding
-algebraic direct sums, respecting the displayed operations.
-3. Finite generators of M/IM generate the associated graded module in degree zero. Tilde preserves the resulting
-surjection, giving finite degree-zero generators
-of the sheaf module over the sheaf algebra, without asserting O_X-finite type.
-4. Every point has such an affine neighbourhood. Quasi-coherence and finite generation
-are local, so the affine conclusions prove the statement globally. -/
+ideal algebra, with generators in degree zero and the action specified by local lifts
+(Stacks, Lemma 087Z and Section 0EHN). -/
 theorem formalSystems_kernel_rees_finite {X : Scheme.{ut}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I) :
     (∐ (formalKernelPiece F)).IsQuasicoherent ∧

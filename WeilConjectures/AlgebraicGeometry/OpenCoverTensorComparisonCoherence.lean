@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence
 
 /-! # Coherence of tensor pullback comparisons on refined charts
 
-Source: Stacks Project, Tags 0095 and 0096, functoriality of module pullback.
+## References
+
+* Stacks Project, Tags 0095 and 0096 (functoriality of module pullback).
 -/
 
 @[expose] public section
@@ -84,29 +86,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The restriction/composition comparison is compatible with a chart refinement.
-Source: Stacks Project, Tags 0095 and 0096; the canonical-comparison step in
-lem-pc-open-cover-map-lift-transport.
-
-Proof: For every scheme map b, let c_b be the unique comparison from its
-fixed tensor left adjoint to its ordinary pullback left adjoint. Transposing
-under the fixed adjunctions shows that tensorPullbackCompositionIso(g,b,t,w)
-is the composite of c_t, congruence from t to g ≫ b, inverse ordinary pullback
-composition, and the inverses of c_b and c_g on the two functor factors:
-both transposes are pushforwardComp(g,b) followed by pushforwardCongr(w).
-Injectivity of the adjunction conjugation gives this formula. The chart
-comparison is, by its definition, ordinary composition/congruence followed by
-the inverse of c_b on the base-map factor.
-Substitute these formulas in alpha, ck and cl from the comparison bundle.
-Functoriality moves each c_b through whiskering, and the adjacent c_b and
-c_b inverse factors cancel. The remaining assertion involves only ordinary
-pullback composition and pullback congruence. Its two paths are the reassociated
-pullbacks of the same map from Vl(a) to U(a): hz identifies the route through
-d and the chart map of Vk, hd identifies the route from Ul to U(a), and hz0
-identifies the maps to W. Apply Scheme.Modules.pseudofunctor_associativity to
-these reassociations; congruence along the stated scheme equalities identifies
-the composites, independently of their equality proof witnesses. Restore the
-cancelled comparisons and evaluate at M. This proves precisely the displayed
-identity, including identity refinements, empty charts and zero modules. -/
+(Stacks, Tags 0095 and 0096) -/
 theorem openCover_tensor_comparison_coherence
     {X Y Z W : Scheme.{u}} (q : Y ⟶ X) (v : Z ⟶ X) (h : W ⟶ X)
     (pk : W ⟶ Y) (pl : W ⟶ Z) (wk : pk ≫ q = h) (wl : pl ≫ v = h)

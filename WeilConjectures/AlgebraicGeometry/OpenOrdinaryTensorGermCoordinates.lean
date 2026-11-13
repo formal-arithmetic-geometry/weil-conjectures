@@ -27,32 +27,7 @@ set_option maxHeartbeats 900000 in
 -- Checking the two explicit scalar-extension tensor types needs additional heartbeats.
 /-- Compatible ordinary tensor coordinates, pinned to the actual open restriction map.
 
-Proof: use the inverse stalk maps of the four open inclusions, transporting
-endpoints by the point equalities coming from hj and the restriction squares.
-The stalkMap_comp and stalkMap_congr_hom identities prove the four ring-map
-compatibilities. For alpha use the additive restriction-stalk natural isomorphism,
-composed with overFunctorEquiv, in every degree. Represent a scalar and a module
-element by germs on a common open. The inverse stalk ring map sends a ring germ
-to the germ of the inverse section-ring map. The germ_smul and
-germ_restrictStalkNatIso_hom_app formulas then give alpha's semilinearity.
-Naturality for P.d proves that alpha is a chain isomorphism.
-Define tau on pure tensors by c tensor q mapping to eC(c) tensor alpha(q).
-Semilinearity and the A-to-C ring-map compatibility prove balancedness. Its
-inverse uses the inverse ring equivalence and alpha inverse; tensor induction
-proves the inverse equations. Naturality for the differential gives a chain iso.
-For the last equation, use the defining degreewise formula of tensorStalkIso.
-Expand openPinnedTensorRestrictionIso into its four adjunction comparisons.
-Their units are pinned to the pulled-back section 1 tensor s. The mate equation
-for pushforward composition and the open restriction adjunction therefore sends
-a restricted pure germ tensor to its ambient germ tensor. Compose with
-restrictStalkNatIso, whose germ formula is the same-germ map. Both sides of the
-last equation are thus equal on c tensor q, and tensor induction gives equality
-on the whole module in every degree. This is a chain-level construction; it
-asserts no compatibility with derived homology factors.
-Empty opens have no z; top opens give the identity germ maps. Zero complexes
-and zero rings obey the same formulas, without a nonzero or flatness assumption.
-Source: Stacks Project, Tags 0098 and 0096; Mathlib restrictStalkNatIso and its
-same-germ formulas; the pinned tensor pullback unit and composition comparisons. -/
+This is a chain-level statement; it asserts no compatibility with derived homology factors. -/
 theorem exists_openOrdinaryTensor_germ_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

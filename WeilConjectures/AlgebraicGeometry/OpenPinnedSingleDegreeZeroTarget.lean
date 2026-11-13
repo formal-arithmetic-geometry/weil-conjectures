@@ -13,16 +13,18 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroApex
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation
 /-! # Constructed target comparison for the degree-zero open square
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
-/-- Naturality of the canonical mate in its derived input, from the naturality
-of the pullback composition comparisons and the adjunction Hom equivalence.
-Source: Stacks Project, Tag 08HY, the canonical derived base-change construction. -/
+/-- Naturality of the canonical mate in its derived input (Stacks, Tag 08HY). -/
 private theorem baseChange_naturality
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -110,19 +112,8 @@ set_option maxHeartbeats 600000 in
 -- The remote check exhausted 200000 heartbeats at the final composition after the
 -- targeted source rewrite (22s); the original theorem used a 1000000 budget.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Construct the target comparison and prove mate compatibility from two
-independent ingredients: restriction of the pinned tensor counit and invariance
-under an isomorphic apex.
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-Proof: restrict the cartesian square using isPullback_resLE and identify its apex
-with the chosen pullback. Whisker the explicit direct-image restriction comparison
-with the single tensor source, then apply the counit restriction isomorphism to
-construct b₀. Use the bare base-change calculation on G[0]. Naturality of the
-direct-image comparison moves the tensor counit through that comparison. The
-counit restriction square identifies the restricted coefficient/counit composite. Naturality of
-the local base-change mate moves the exact single restriction identification to
-the source. Finally whisker the apex transport isomorphism and compose it with b₀.
-The apex transport identity finishes the equation. -/
+/-- The target comparison of the degree-zero open square, together with its mate
+compatibility. -/
 theorem open_pinned_single_degree_zero_target
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

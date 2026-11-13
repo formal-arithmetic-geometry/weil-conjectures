@@ -24,12 +24,13 @@ set_option linter.privateModule false
 /-!
 # Constructible pro-etale coefficients are of etale origin
 
-Source: Weil blueprint, smooth purity, `lem-sf-proetale-constructible-origin`;
-Stacks Project, Tags 09AK and 09AL.
-
 The scalar conversion below is induced by constant scalar sections and sheafification.
 It retains the recorded intrinsic constructibility predicate and the recorded category
 of finite coefficient modules. Discrete topology is fixed canonically on lifted coefficients.
+
+## References
+
+* Stacks Project, Tags 09AK and 09AL.
 -/
 
 @[expose] public section

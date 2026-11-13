@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SupportedMapAffineAttachment
 
 /-! # The finite stabilization construction for supported map lifting
 
-Source: Stacks Project, Tag 09IM, proof of Lemma 36.13.11.
+## References
+
+* Stacks Project, Tag 09IM.
 -/
 
 @[expose] public section
@@ -29,27 +31,7 @@ set_option maxHeartbeats 800000 in
 -- Elaborating the iterated derived restriction and the biproduct map equation needs this budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine-cover construction extends one finite stabilization of the given map.
-This records the actual iterated object and its first-projection map.
-Source: Stacks Project, Tag 09IM, proof of Lemma 36.13.11 and Remark 36.13.12.
-
-Proof: Choose finitely many affine opens whose union with U is X, and attach them
-one at a time. Start with S 0 and a 0 on U. At an attachment V, the intersection
-with the previously attached union is quasi-compact by quasi-separatedness.
-The complement of T on V is quasi-compact for the same reason. Apply the affine
-supported extension lemma to the current perfect object on that intersection;
-it extends that object plus its shift to a perfect object Q on V supported on T.
-Compose the overlap identification with the first projection and the current map.
-Apply affine perfect map lifting to Q; its tensor augmentation is invertible on
-the overlap, and its source remains perfect and supported on T. Glue the resulting
-map on V to the first-projection map on the previous union by derived open gluing.
-The two maps agree by the affine lifting equation. Perfectness and support are
-local, so the glued source has both properties. On U the source and map have
-changed from S k and a k to S (k+1) and a (k+1), using hS and ha. The canonical
-comparison isomorphisms for iterated restriction transport these identifications.
-Induction on the finite cover gives n, R, beta and the stated isomorphism and
-map equation. No retraction or direct-summand assertion is used in this construction.
-For an empty added cover use n=0; empty support or a zero source causes no change
-in the construction. -/
+(Stacks, Tag 09IM) -/
 theorem exists_perfect_supported_stabilized_lift
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U : X.Opens) (hU : IsCompact (U : Set X))

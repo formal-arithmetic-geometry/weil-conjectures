@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 
 /-! # Building triangle diagrams from natural Mayer--Vietoris families
 
-Source: Stacks Project, Tag 08BW.
+## References
+
+* Stacks Project, Tag 08BW.
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ variable (Y : Scheme.{u})
     HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toScheme.toRingedSpace))]
   (U V : Y.Opens)
 
-/-- The geometric triangle, with adjunctions and boundary supplied explicitly.
-Source: Stacks Project, Tag 08BW. -/
+/-- The geometric triangle, with adjunctions and boundary supplied explicitly. -/
 noncomputable def perfectHomMVTriangle
     (adjU : (schemeMVDerivedRestriction Y U) ⊣ schemeDerivedDirectImage U.ι)
     (adjV : (schemeMVDerivedRestriction Y V) ⊣ schemeDerivedDirectImage V.ι)
@@ -46,9 +47,7 @@ noncomputable def perfectHomMVTriangle
       (-(schemeDerivedOpenDirectImageRestriction Y (homOfLE inf_le_right) adjV adjUV E)))
     (δ E)
 
-/-- Data of a natural geometric Mayer--Vietoris family on quasi-coherent objects.
-The three components determine each triangle morphism uniquely.
-Source: Stacks Project, Tag 08BW. -/
+/-- Data of a natural geometric Mayer--Vietoris family on quasi-coherent objects. -/
 structure PerfectHomMVFamily where
   adjU : (schemeMVDerivedRestriction Y U) ⊣ schemeDerivedDirectImage U.ι
   adjV : (schemeMVDerivedRestriction Y V) ⊣ schemeDerivedDirectImage V.ι
@@ -75,29 +74,24 @@ structure PerfectHomMVFamily where
 namespace PerfectHomMVFamily
 variable {Y U V} (A : PerfectHomMVFamily Y U V)
 
-/-- The geometric triangle of the family, with first object exactly E.
-Source: Stacks Project, Tag 08BW. -/
+/-- The geometric triangle of the family, with first object exactly `E`. -/
 noncomputable def triangle (E : schemeDerivedCategory Y) :
     Triangle (schemeDerivedCategory Y) :=
   perfectHomMVTriangle Y U V A.adjU A.adjV A.adjUV A.boundary E
 
-/-- The unique triangle map with the three geometric components.
-The witness is unique by Triangle.hom_ext, so choosing it introduces no unpinned data.
-Source: Stacks Project, Tag 08BW. -/
+/-- The unique triangle map with the three geometric components. -/
 noncomputable def map {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : A.triangle E ⟶ A.triangle F :=
   Classical.choose (A.naturality E F hE hF φ)
 
-/-- The first component is the prescribed original morphism.
-Source: Stacks Project, Tag 08BW. -/
+/-- The first component is the prescribed original morphism. -/
 @[simp] theorem map_hom₁ {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : (A.map hE hF φ).hom₁ = φ :=
   (Classical.choose_spec (A.naturality E F hE hF φ)).1
 
-/-- The second component is the prescribed pair of restricted direct images.
-Source: Stacks Project, Tag 08BW. -/
+/-- The second component is the prescribed pair of restricted direct images. -/
 @[simp] theorem map_hom₂ {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : (A.map hE hF φ).hom₂ = biprod.map
@@ -105,8 +99,7 @@ Source: Stacks Project, Tag 08BW. -/
       ((schemeDerivedDirectImage V.ι).map ((schemeMVDerivedRestriction Y V).map φ)) :=
   (Classical.choose_spec (A.naturality E F hE hF φ)).2.1
 
-/-- The third component is the prescribed intersection restriction.
-Source: Stacks Project, Tag 08BW. -/
+/-- The third component is the prescribed intersection restriction. -/
 @[simp] theorem map_hom₃ {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : (A.map hE hF φ).hom₃ =
@@ -127,8 +120,7 @@ private theorem binary_map_comp {C : Type*} [Category C] [HasZeroMorphisms C]
   apply biprod.hom_ext <;> simp only [biprod.map_fst, biprod.map_snd,
     Category.assoc, biprod.map_fst_assoc, biprod.map_snd_assoc]
 
-/-- All three components are identities; Triangle.hom_ext gives equality.
-Source: Stacks Project, Tag 08BW. -/
+/-- The triangle map of an identity morphism is the identity. -/
 @[simp] theorem map_id (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) :
     A.map hE hE (𝟙 E) = 𝟙 (A.triangle E) := by
   apply Triangle.hom_ext
@@ -143,8 +135,7 @@ Source: Stacks Project, Tag 08BW. -/
       ((schemeMVDerivedRestriction Y (U ⊓ V)).map (𝟙 E)) = 𝟙 _
     rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
 
-/-- Each component respects composition; Triangle.hom_ext gives equality.
-Source: Stacks Project, Tag 08BW. -/
+/-- The triangle map of a composite is the composite of the triangle maps. -/
 @[simp] theorem map_comp {E F G : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (hG : schemeDerivedQCohProperty Y G) (φ : E ⟶ F) (ψ : F ⟶ G) :
@@ -157,8 +148,7 @@ Source: Stacks Project, Tag 08BW. -/
 
 variable {J : Type v} [Category J]
 
-/-- Apply the natural family to a diagram of quasi-coherent objects.
-Source: Stacks Project, Tag 08BW. -/
+/-- Apply the natural family to a diagram of quasi-coherent objects. -/
 noncomputable def diagram (F : J ⥤ schemeDerivedCategory Y)
     (hF : ∀ j, schemeDerivedQCohProperty Y (F.obj j)) :
     J ⥤ Triangle (schemeDerivedCategory Y) where
@@ -167,8 +157,7 @@ noncomputable def diagram (F : J ⥤ schemeDerivedCategory Y)
   map_id j := by rw [F.map_id, A.map_id]
   map_comp f g := by rw [F.map_comp, A.map_comp]
 
-/-- Apply the same natural family to every leg and the apex of a cocone.
-Source: Stacks Project, Tag 08BW. -/
+/-- Apply the same natural family to every leg and the apex of a cocone. -/
 noncomputable def cocone (F : J ⥤ schemeDerivedCategory Y) (d : Cocone F)
     (hF : ∀ j, schemeDerivedQCohProperty Y (F.obj j))
     (hd : schemeDerivedQCohProperty Y d.pt) : Cocone (A.diagram F hF) where

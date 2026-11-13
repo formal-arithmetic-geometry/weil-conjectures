@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 /-! # Local homogeneous generators of the algebra-module direct image
 
-Source: Stacks Project, Tag 0897, finite-type paragraph, with Tags 03DA and 01B4.
+## References
+
+* [Stacks Project, Tags 0897, 03DA, 01B4]
 -/
 
 @[expose] public section
@@ -27,26 +29,7 @@ set_option maxHeartbeats 600000 in
 -- The comparison of the two scalar actions requires additional elaboration.
 /-- The specified finite homogeneous sections generate the algebra-module direct image
 on a fixed open. This is purely a local generation statement: the morphism need not be
- affine and the module need not be quasi-coherent.
-
-Source: Stacks Project, Tag 0897, finite-type paragraph; Modules on Sites, Tag 03DA;
-Modules, Tag 01B4.
-
-Proof: Test epimorphy by comparing two algebra-linear maps p and q that agree after
-composition with the specified free map. Evaluating their free-Hom equivalence shows
-that they agree on every restricted basis section. Restriction to U is a left adjoint,
-so preserves the given coproduct. Its universal property reduces equality to equality
-on each restricted G_m, after restricting scalars from the direct-image algebra to O_X.
-For a section t of G_m on V contained in U and a point y of V, hgen gives W containing y
-where t restricts to the span of the homogeneous generators. Induct on this span.
-For a generator, d_i + (m - d_i) = m resolves the HEq; compatibility identifies its
-image with a scalar multiple of the image of s_i. The maps p and q are algebra-linear
-and agree on the image of s_i, so agree on this multiple. Linearity handles zero,
-addition and O_X-scalar multiplication. The equalizer sieve of the two images of t is
-therefore covering. Separatedness of the target sheaf gives equality on V. Coproduct
-uniqueness then gives equality of the restricted O_X-linear maps, hence of p and q.
-This proves epi. Empty generating families and empty opens are included: span induction
-and the covering condition require no nonemptiness assumption. -/
+affine and the module need not be quasi-coherent. (Stacks, Tag 0897) -/
 theorem gradedRealization_local_generators_epi
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     (graded : ℕ → Submodule A B)

@@ -303,22 +303,8 @@ private lemma coordinates_multiply (X : Scheme.{u})
   exact (he x _ _).symm
 
 
-/-- The coordinatewise Godement tensor maps obey naturality, unit and multiplication laws.
-Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-Proof: For each point x, project TH and TK onto their x skyscrapers and evaluate their
-stalks at x. Identify (TH tensor TK)_x with TH_x tensor TK_x by the canonical
-stalk tensor isomorphism. Tensor the two evaluation maps into H_x tensor K_x, then
-use the stalk tensor isomorphism into (H tensor K)_x. The skyscraper adjunction gives
-a morphism from TH tensor TK to the
-skyscraper of (H tensor K)_x; product universality assembles these into b. Naturality
-is checked after each product projection on tensors of local representatives, where
-both composites apply the two stalk maps to the same representatives. For the unit
-law these representatives are germs of sections of H and K, and both composites give
-the germ of their tensor. For multiplication, choose a common neighbourhood for the
-outer germs and inner representatives: both composites evaluate the inner x
-coordinates and tensor them. Equality on pure tensors, the stalk colimit universal
-property, the skyscraper adjunction and product extensionality prove the laws.
-The argument also applies to empty products and zero module sheaves. -/
+/-- The coordinatewise Godement tensor maps obey naturality, unit and multiplication laws
+(Banerjee, §1.1.4; Stacks, Tag 0FKR). -/
 theorem moduleCup_godement_beta_maps_exists (X : Scheme.{u}) :
     ∃ b : ∀ H K : X.Modules,
         moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶

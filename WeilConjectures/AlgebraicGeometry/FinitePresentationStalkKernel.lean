@@ -23,7 +23,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # A local finite presentation and its internal-Hom stalk kernel
 
-Source: Stacks Project, Modules, Lemma 01CP, third paragraph.
+## References
+
+* Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section
@@ -35,26 +37,7 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- A local finite presentation supplies a presentation of the source stalk and
 an injective coordinate map on the internal-Hom stalk, with the indicated kernel image.
-It does not construct or assert bijectivity of the canonical stalk-Hom map.
-
-Source: Stacks Project, Modules, Lemma 01CP, third paragraph,
-using Lemma 01CO (1) for the internal-Hom exact sequence.
-
-Proof: Choose a finite free presentation on a neighborhood U of x from
-IsFinitePresentation, with basis images s_i in F(U). Identify the stalks of the two
-free modules with tuples over O_x by taking component germs. Finite tuples have
-representatives on a common neighborhood, and equalities of their germs likewise
-hold on a common neighborhood; this proves these identifications are bijective.
-Exactness of module stalks gives maps a and b with b surjective and ker(b) = range(a).
-Apply homObj_finitePresentation_kernel to the local presentation. Identify the stalk
-of its finite product of copies of G with tuples in G_x by the same common-neighborhood
-argument. The resulting map beta is injective, and its image is the kernel of
-precomposition by a, transported through the finite free evaluation isomorphisms.
-The displayed formula for beta follows by taking germs of the sectionwise evaluation
-formula in homObj_finitePresentation_kernel. Restriction to U does not change any
-stalk at x: its neighborhoods are cofinal among those in X, and restricting internal
-Hom has the same local-morphism sections. Hence this formula holds for every W,
-using the neighborhood U intersect W and the restricted basis sections. -/
+It does not construct or assert bijectivity of the canonical stalk-Hom map. -/
 theorem exists_finitePresentation_stalk_kernel
     (X : RingedSpace.{u})
     (F G : SheafOfModules.{u}

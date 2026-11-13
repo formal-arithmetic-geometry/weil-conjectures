@@ -16,7 +16,9 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralSectionProjectionNormalizati
 
 /-! # Finite projections of the canonical integral section comparison
 
-Source: Stacks Tags 099L and 099M, integral-models proof (1)--(2).
+## References
+
+* Stacks Project, Tags 099L and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +33,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
-/-- The explicit universe instance for ordinary coefficient comparisons.
-Source: coefficient-site sheafification. -/
+/-- The explicit universe instance for ordinary coefficient comparisons. -/
 local instance projectionAbLocallyBijective (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective Ab.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
@@ -49,8 +50,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 /-- A ring comparison is normalized by its specified map on constant additive sections.
-Source: Stacks Tags 03CY and 00YV.
--/
+(Stacks, Tags 03CY, 00YV.) -/
 def DiscreteSectionRingNormalized (X : Scheme.{u}) (A : Type u) [CommRing A]
     (d : Scheme.adicLisseConstantRing X (ULift.{u + 1} A) ≅
       InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
@@ -71,8 +71,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralOperationsSiteSmall in
 /-- The ordinary normalized integral and first-residue ring comparisons, with the
 projection equations required for their canonical coefficient actions.
-Source: Stacks Tags 099L and 099M.
--/
+(Stacks, Tags 099L, 099M.) -/
 structure IntegralSectionComparisons (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) where
@@ -369,18 +368,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralOperationsSiteSmall in
 /-- The ordinary coefficient comparisons and all finite projections are uniquely normalized.
 Their data is fixed by the constant sections, before any modules or complexes are considered.
-
-Source: Stacks Tags 099L and 099M, integral-models proof (1)--(2).
-
-Proof: reconstruct the ring comparisons from the monoidal constant additive comparisons.
-Their naturality gives the ordinary first-residue square. The normalized integral section
-projection theorem identifies every projection with the specified quotient on constant
-sections; the projection equations of the two completion comparisons cancel the intermediate
-isomorphisms. This gives the displayed structure. For uniqueness, precompose each of its two
-ring isomorphisms with the constant-presheaf sheafification unit. Normalization gives identical
-maps there, so the sheafification adjunction identifies the isomorphisms. The remaining fields
-are proofs and hence agree by proof irrelevance. This includes zero rings and empty schemes.
--/
+(Stacks, Tags 099L, 099M.) -/
 theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : ∃! _comparisons : IntegralSectionComparisons l E X, True := by

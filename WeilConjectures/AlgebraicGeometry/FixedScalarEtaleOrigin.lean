@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.FixedScalarOrdinaryComparison
 
 /-! # Etale origin under fixed-scalar and small-site equivalences
 
-Source: Stacks Tags 03CY, 09A5 and 09AL; Bhatt--Scholze, Remark 6.3.2.
+## References
+
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks Project, Tag 09A5](https://stacks.math.columbia.edu/tag/09A5)
+* [Stacks Project, Tag 09AL](https://stacks.math.columbia.edu/tag/09AL)
+* Bhatt--Scholze, Remark 6.3.2
 -/
 
 @[expose] public noncomputable section
@@ -94,30 +99,7 @@ private theorem comparisonPresentation (X : Scheme.{u}) (k : Type (u + 1)) [Comm
 /-- Changing between constant-ring modules on the small models and fixed-scalar
 sheaves on the original sites preserves the etale-origin witness. This concerns an
 arbitrary residue-field complex, without integral coefficients or completeness.
-Source: Stacks Tags 03CY, 09A5 and 09AL; Bhatt--Scholze, Remark 6.3.2.
-
-Proof: On the etale site, precomposition by AsSmall.down is an exact equivalence.
-Compose it with the inverse constant-scalar restriction equivalence, just as in
-fixedScalarComplexToModel on the pro-etale site. The inverse equivalences send a
-cochain representative P of C to an etale fixed-scalar complex D. The unit and counit
-of these equivalences, and the canonical localization factorizations, identify Q(P)
-with C and Q of its comparison pullback with the model of the pullback of D.
-The ordinary comparison commutes with scalar restriction: both right adjoints are
-precomposition along the same inclusion with the same constant scalar action, so
-uniqueness of the left adjoint gives the comparison, normalized on constant sections.
-Homology commutes with these exact equivalences. Apply Noetherian global
-constructibility to each homology sheaf and retain the same immersed strata and
-trivializing covering sieves; fixed-scalar restriction identifies the finite module
-models. Thus bounds and constructibility transport in both directions.
-Over the field k, tensoring with any degree-zero module sheaf is exact, on either
-site and in either scalar presentation. Tensor homology is therefore homology
-tensored with that module. The transported cohomological bounds give the Tor
-interval by sfbFieldTensor_bounds on the original etale site, and by the same
-K-flat tensor calculation on the small etale site. Conversely the explicit bounded
-constructible clause already supplies the bounds. Compose the two localization
-comparison isomorphisms with the given origin isomorphism, using its inverse when
-necessary. This constructs both existential witnesses without any hypothesis on T.
-Empty schemes, zero complexes and arbitrary unbounded representatives are included. -/
+(Stacks, Tags 03CY, 09A5 and 09AL; Bhatt--Scholze, Remark 6.3.2.) -/
 theorem fixedScalar_etaleOrigin (X : Scheme.{u}) [IsNoetherian X]
     (k : Type (u + 1)) [Field k]
     (T : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k)) ℤ) :

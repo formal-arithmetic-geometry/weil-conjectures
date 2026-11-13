@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Natural overlap maps before imposing the cocycle
 
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing. -/
+## References
+
+* Stacks Project, Tag 01ZR
+-/
 
 @[expose] public section
 

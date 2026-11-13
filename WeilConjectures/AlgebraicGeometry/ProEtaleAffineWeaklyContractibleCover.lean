@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
 /-!
 # Affine weakly contractible covering families on the small pro-etale site
 
-Source: Stacks Project, proetale.tex, Tags 0990 and 098I; sites.tex, Tags 090L and 090K.
+## References
+
+* Stacks Project, Tags 0990, 098I, 090L and 090K.
 -/
 
 @[expose] public section
@@ -27,33 +29,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Every object of the small pro-etale site has a covering family of affine objects
-weakly contractible for sheaves on the full small site of `X`.
-Source: Stacks Project, Tags 0990, 098I, 090L and 090K.
-
-Proof:
-1. Cover `U` by arbitrary affine opens `T_j = Spec A_j`, using the affine basis of a
-   scheme. No finiteness of this cover is required.
-2. For each `A_j`, choose an infinite small cardinal bounding its size. Apply
-   lem-weil-pbc-wcontractible-ring-extension to get an ind-etale faithfully flat
-   extension `A_j → D_j` with splitting property, explicit cardinal bound, and
-   a singleton pro-etale cover `Spec D_j → T_j`.
-3. By def-weil-size-convention, closure under power sets and function sets makes
-   the cardinal bound small. The spectrum is small too.
-   Replace by representatives in the chosen skeleton, conjugating the arrows.
-4. Open immersions are etale, hence flat, and
-   have isomorphic diagonals.
-   They are weakly etale. Composition stability makes `Spec D_j → X` full-site objects.
-5. For each affine open `W` of `U`, refine its intersections with the `T_j` by
-   affine opens inside `W`. Affine quasi-compactness
-   selects finitely many. The singleton covering clause of the ring-extension lemma
-   supplies finitely many affine opens upstairs with images exactly these opens.
-   Their images cover exactly `W`, proving def-weil-pbc-proetale-covering. For empty
-   `W`, take no witnesses.
-6. The splitting property and full-site membership allow
-   lem-weil-pbc-wcontractible-affine-weakly-contractible to give surjectivity on
-   every full-site sheaf epimorphism. This proves the claim for arbitrary `U`;
-   the empty object admits the empty family.
--/
+weakly contractible for sheaves on the full small site of `X`
+(Stacks, Tags 0990, 098I, 090L and 090K). -/
 theorem exists_affine_weaklyContractible_covering_family
     (X : Scheme.{u}) (U : X.ProEt) :
     ∃ (I : Type (u + 1)) (V : I → X.ProEt) (f : ∀ i : I, V i ⟶ U),

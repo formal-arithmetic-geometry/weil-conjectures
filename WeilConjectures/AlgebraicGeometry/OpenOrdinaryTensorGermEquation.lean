@@ -38,32 +38,7 @@ attribute [local irreducible] openDerivedAdditiveStalkIso comparisonStalkHomolog
 
 set_option maxHeartbeats 1200000 in
 -- The homology comparisons involve several composed functors and localization factors.
-/-- A degreewise canonical open tensor-stalk square induces the homology square.
-
-Proof: the hypothesis is an equality in every degree of the two additive chain
-maps obtained by composing tau with tensorStalkIso, or tensorStalkIso with
-openPinnedTensorRestrictionIso inverse and the same-germ stalk comparison gamma.
-The naturality of these comparisons for differentials makes the two composites
-chain maps; HomologicalComplex.Hom.ext makes them equal. Apply homologyMap in
-degree i and its composition formula. Naturality of ShortComplex.mapHomologyIso
-moves the additive forgetful homology factors across both tensorStalkIso maps.
-Expand singleComplexOpenTensorRestrictionMap: it is localization of the inverse
-homotopy restriction comparison followed by the inverse exact restriction factor.
-Use quotientCompQhIso naturality and mapDerivedCategoryFactorsh to express this
-as localization of the termwise inverse comparison followed by the inverse
-complex restriction factor. comparisonStalkHomologyIso_naturality identifies
-its stalk cohomology map with the homology map of that stalk chain map.
-Expand openDerivedAdditiveStalkIso. The equations mapDerivedCategoryCompIso_fac
-and mapDerivedCategoryNatIso_fac cancel the intermediate exact functor factors;
-mapDerivedCategoryHomologyFunctorIso_hom_app_Q identifies the remaining homology
-factor with the additive homology map of gamma. Thus the homology of the given
-chain square is exactly the displayed equation after composing with the inverse
-comparisonStalkHomologyIso at each endpoint. All cancellation uses specified
-natural isomorphisms; no scalar coordinates or arbitrary witness are chosen.
-Zero homology groups need no cancellation of elements. Empty opens have no z,
-and top opens specialize to ordinary naturality of these same factors.
-Source: Stacks Project, Tags 08HY and 08DW (exact localization); the exact functor
-factorization equations and Mathlib homology naturality. -/
+/-- A degreewise canonical open tensor-stalk square induces the homology square. -/
 theorem openOrdinaryTensor_germ_transport_equation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProperSupportSectionLocality
 
 /-! # The image of the composite proper-support inclusion
 
-Source: Stacks Project, Tag 0F50.
+## References
+
+* [Stacks, Tag 0F50]
 -/
 
 @[expose] public section
@@ -156,20 +158,7 @@ private theorem iterated_support_iff
     fun h => ((proper_comp_support_iff _ _ T I hI).1 h).2⟩
 
 /-- The composite support inclusion has exactly the properly supported sections as image.
-
-Source: Stacks Project, Tag 0F50.
-
-Proof:
-Let T be the support of an underlying section on X_W. If it is proper over Y_W,
-its image I in Y_W is closed. The section of f_! F has support exactly I: off I its
-restriction is zero; conversely, a zero germ gives a Zariski zero neighbourhood, whose
-inverse image misses T. Thus a point of I cannot have zero germ.
-If T is proper over W, it is proper over the separated Y_W by proper-over-separated.
-The closed proper-image lemma makes I proper over W. This gives both successive
-proper-support conditions. Conversely those two conditions say that T is proper over
-Y_W and I is proper over W. The proper-preimage lemma applied to T_red -> Y_W and I
-makes the whole T_red proper over W. The ordinary direct-image compositor identifies
-these underlying sections and commutes with restriction. -/
+(Stacks, Tag 0F50) -/
 theorem properSupportComposite_range (Λ : Type (u + 1)) [CommRing Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [IsSeparated g] [LocallyOfFiniteType g]

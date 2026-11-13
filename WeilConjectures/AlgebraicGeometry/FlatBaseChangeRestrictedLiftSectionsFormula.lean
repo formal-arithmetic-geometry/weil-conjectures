@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections
 
 /-! # The section formula for the restricted lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -30,19 +33,8 @@ private theorem openSections_map {Y : Scheme.{uBC}} {M N : Y.Modules}
 
 set_option maxHeartbeats 500000 in
 -- Elaborating the nested restriction-adjunction lift needs additional fuel.
-/-- The section identity for the explicit restriction-adjunction lift.
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-Proof: Check the equality in every degree. Expand the restriction-adjunction lift
-using its counit formula. Evaluate that counit and both pushforward composition
-comparisons on the top open. These maps are restrictions along equal inverse-image
-opens. Use D.source.components and D.target.components to identify the section
-comparisons with the same restriction maps; use ha for the pushforward/global
-sections comparison. Naturality moves the resolution comparison maps across these
-restrictions, and each comparison cancels its inverse. Functoriality of presheaf
-restriction combines the remaining maps. The pullback projection identity gives
-flatBaseChangeOpenEquality, so the residual map is precisely evaluation of the
-pushforward square in flatBaseChangeResolutionQ. No augmentation equation is used.
-The proof works for any t and does not pass to homology. -/
+/-- The section identity for the explicit restriction-adjunction lift
+(Stacks, Tags 01FB and 01E4). -/
 theorem flatBaseChangeRestrictedLift_section_formula {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules}

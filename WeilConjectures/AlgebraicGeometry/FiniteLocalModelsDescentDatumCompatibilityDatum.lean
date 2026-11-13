@@ -15,10 +15,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 /-- Natural transport compatible with the local representation, before imposing cocycles.
-
-Source: Stacks Project, Tags 03RV and 02W5.
 The fields record transport of arbitrary scheme points, its naturality, and its
-identification of equal sections on the small etale site. No data is chosen here. -/
+identification of equal sections on the small etale site (Stacks, Tags 03RV, 02W5). -/
 structure FiniteLocalModelCompatibleTransport
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
@@ -52,11 +50,7 @@ private theorem finiteLocalModels_section_naturality
   have hn := ConcreteCategory.congr_hom (e.hom.naturality k.op) s
   exact congrArg (fun z ↦ z.down.left) hn.symm
 
-/-- The comparison point on the universal pair consisting of a Q-point and a lift to U.
-
-Source: Stacks Project, Tags 03RV and 02W5, evaluated at the universal Q-point.
-On R = Q times_T U, turn the projection to Q into a section of E using the
-first map to U, then represent that same section using the second map to U. -/
+/-- The comparison point on the universal pair consisting of a Q-point and a lift to U. -/
 noncomputable def finiteLocalModels_comparison
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
@@ -81,12 +75,7 @@ noncomputable def finiteLocalModels_comparison
   exact Over.homMk ((e.hom.app (op (Over.mk b'))) s).down.left
     (MorphismProperty.Over.w ((e.hom.app (op (Over.mk b'))) s).down)
 
-/-- Transport by pulling back the fixed comparison morphism, with no witness choice.
-
-Source: Stacks Project, Tags 03RV and 02W5.
-For x above a and a second lift b, the pair (x,b) maps to Q times_T U.
-Compose this map with the comparison point. The projection equation makes
-this a Q-point above b. -/
+/-- Transport by pulling back the fixed comparison morphism, with no witness choice. -/
 noncomputable def finiteLocalModels_transport
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
@@ -104,12 +93,8 @@ noncomputable def finiteLocalModels_transport
   change l ≫ CategoryTheory.Limits.pullback.snd _ _ = b
   exact CategoryTheory.Limits.pullback.lift_snd _ _ _
 
-/--
-Source: Stacks Project, Tags 03RV and 02W5.
-The fiber-product Yoneda comparison of the two pullbacks of the finite etale
-scheme defines transport for arbitrary scheme maps with equal composites.
-Pulling this comparison back along the pair of maps gives the displayed map.
--/
+/-- Existence of transport for arbitrary scheme maps with equal composites to the base,
+given by the fibre-product Yoneda comparison. -/
 theorem finiteLocalModels_transport_exists
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
@@ -121,12 +106,7 @@ theorem finiteLocalModels_transport_exists
       (Over.mk b ⟶ Over.mk Q.obj.hom)) := by
   exact ⟨finiteLocalModels_transport T E U Q e⟩
 
-/--
-Source: Stacks Project, Tags 03RV and 02W5.
-The transport is induced by pullback of the comparison on the fiber product.
-Functoriality of pullback, together with associativity of composition, proves
-the displayed naturality equation.
--/
+/-- The transport is natural in the source scheme. -/
 theorem finiteLocalModels_transport_naturality
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
@@ -147,11 +127,8 @@ theorem finiteLocalModels_transport_naturality
   apply CategoryTheory.Limits.pullback.hom_ext <;>
     simp [Category.assoc]
 
-/--
-Source: Stacks Project, Tags 03RV and 02W5.
-For an etale source, the comparison identifies the two points obtained from a
-common section under the representing isomorphism, yielding compatibility.
--/
+/-- For an etale source, the transport is compatible with the representing isomorphism: it
+identifies the two points obtained from a common section. -/
 theorem finiteLocalModels_transport_compatibility
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
@@ -210,7 +187,7 @@ theorem finiteLocalModels_transport_compatibility
     ((e.hom.app (op (Over.mk b))) s).down.left at hn
   exact hn
 
-/-- -/
+/-- There exists natural transport compatible with the local representation. -/
 theorem finiteLocalModels_descentDatum_compatibility_datum
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)

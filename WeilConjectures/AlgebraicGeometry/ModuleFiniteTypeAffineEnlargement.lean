@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Enlarging the open of finite type by one affine open
 
-Source: Stacks Project, Properties, Lemma 01PF, proof, lines 2865--2894.
+## References
+
+* [Stacks, Tag 01PF](https://stacks.math.columbia.edu/tag/01PF)
 -/
 
 @[expose] public section
@@ -31,29 +33,9 @@ set_option autoImplicit false
 set_option maxHeartbeats 500000 in
 -- Transport of local generators and restricted image factorizations needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
-/-- A quasi-coherent module finite type on W has a quasi-coherent submodule
-finite type on W union V, equal to the original on W, when V is affine.
-
-Source: Stacks Project, Properties, Lemma 01PF, proof, lines 2865--2894.
-
-Proof: The overlap W intersect V is quasi-compact by quasi-separatedness. On V,
-identify H with the associated sheaf of its module of sections. Cover the overlap
-by finitely many principal opens on which H has finitely many generators. Choose
-numerators in H(V) for these generators and let N be the submodule they generate.
-The associated sheaf of N is a finite-type quasi-coherent submodule of H on V.
-Its localization equals H on each principal open: it contains the generators,
-and the opposite inclusion follows from N being a submodule of H(V). The affine
-quasi-coherent equivalence and the sheaf property identify its restriction to the
-whole overlap with H. Glue it with H on W, using the subsheaf of H on W union V
-whose sections satisfy both local membership conditions. This subsheaf is
-quasi-coherent and finite type, both properties being local. The union is
-quasi-compact, and its inclusion into X is quasi-compact since X is
-quasi-separated. Extend the inclusion map to X by the quasi-coherent extension
-theorem 01PE(3), and take its image in H. Images are quasi-coherent, and restriction
-is exact, so this image restricts to the glued submodule on the union. It is
-therefore finite type there and its inclusion is an isomorphism on W. If the
-overlap is empty the list of generators is empty; all constructions still work.
-No quasi-compactness of X or finite type outside W union V is claimed. -/
+/-- A quasi-coherent module of finite type on `W` has a quasi-coherent submodule of
+finite type on `W ⊔ V`, equal to the original on `W`, when `V` is affine
+(Stacks, Tag 01PF). -/
 theorem exists_finiteType_affine_enlargement
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W : X.Opens) (hW : IsCompact (W : Set X)) (V : X.affineOpens)

@@ -27,18 +27,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Derived reduction of an ordinary tensor is the tensor of the two reductions
-over the residue coefficient ring, rather than over the integral coefficient ring.
-
-Proof: compute the two derived objects on K-flat representatives P and Q. Ordinary
-extension of scalars along the fixed quotient O_E -> O_E/pi_E is strong monoidal:
-(P tensor Q) tensor O_E/pi_E identifies with
-(P tensor O_E/pi_E) tensor_{O_E/pi_E} (Q tensor O_E/pi_E) by scalar associativity.
-Extension sends K-flat representatives to K-flat representatives, and the direct-sum
-total complexes have the same tensor associators. Localize this balanced comparison;
-its inverse is the inverse balanced comparison. The derived comparison is independent
-of the K-flat representatives by their quasi-isomorphism comparison. This is the
-identity-geometric-map instance of the canonical derived tensor pullback comparison.
-There is no constructibility, completeness or flatness hypothesis on M or N. -/
+over the residue coefficient ring, rather than over the integral coefficient ring. -/
 theorem integralTensorResidueComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

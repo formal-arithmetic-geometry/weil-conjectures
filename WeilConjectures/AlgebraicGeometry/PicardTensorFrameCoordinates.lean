@@ -11,7 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Explicit coordinates on tensor pullbacks of framed sheaves
 
-Source: Stacks Project, Tags 0096 and 01CA.
+## References
+
+* Stacks Project, Tags 0096 and 01CA
 -/
 
 @[expose] public section
@@ -141,18 +143,8 @@ private lemma tensorColumn_app_top {X Y : Scheme.{v}} (g : X ⟶ Y)
     Category.assoc, tensorFree_hom_projection, ← Functor.map_comp_assoc]
   exact tensorUnit_conj_app_top g (φ ≫ freeπ i)
 
-/-- Tensor pullback applies the structure-ring map to a framed column morphism.
-Source: Stacks Project, Tags 0096 and 01CA.
-
-Proof: The chosen tensor adjunction makes tensor pullback preserve coproducts.
-The free comparison is characterized on the inclusions by the pinned tensor-unit
-map. Conjugating a pulled-back endomorphism of the unit by that unit comparison
-applies s.appTop to its value at one: apply the adjunction to the conjugation
-square and evaluate its unit on one. Compose with each coordinate projection of
-the target free sheaf. Linearity says that postcomposition on a section multiplies
-its scalar by the pulled-back column entry. These equalities in all coordinates
-prove the displayed formula. No affineness or perfectness is used. When m=0,
-both sides are the unique empty vector. -/
+/-- Tensor pullback applies the structure-ring map to a framed column morphism
+(Stacks, Tags 0096 and 01CA). -/
 theorem picardTensorFrame_map {W Y T : Scheme.{v}}
     (t : T ⟶ W) (s : T ⟶ Y) {M N : Y.Modules}
     (q0 : M ≅ Modules.unit Y) (m : ℕ)

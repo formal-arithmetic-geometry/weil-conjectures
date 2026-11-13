@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!
 # Support and pullback of finite type quasi-coherent modules
 
-Source: Stacks Project, Morphisms of Schemes, Lemma 056J.
+## References
+
+* [Stacks Project, Tag 056J](https://stacks.math.columbia.edu/tag/056J)
 -/
 
 @[expose] public section
@@ -34,12 +36,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 open TopologicalSpace in
-/-- Restriction preserves finite type: pull the local generating cover back along
-`Over.forget U`; its local maps preserve colimits and the unit, hence carry each finite
-family of generators to a finite family. Source: Stacks Project, Modules, Tag 01B5,
-the locality of finite type. This generalizes the scheme-only private helper in
-`WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent` to arbitrary
-ring sheaves on spaces. -/
+/-- Restriction of a finite type module sheaf on a space to an open is finite type. -/
 private theorem finiteType_over_ringSheaf (T : Type u) [TopologicalSpace T]
     (R : Sheaf (Opens.grothendieckTopology T) RingCat.{u}) (F : SheafOfModules.{u} R)
     [F.IsFiniteType] (U : TopologicalSpace.Opens T) : (F.over U).IsFiniteType := by
@@ -149,33 +146,8 @@ private theorem residueFiber_pullback_subsingleton {X Y : Scheme.{u}} (f : Y ⟶
 
 /-- The support of a finite type quasi-coherent module is closed, is detected by its
 residue-field fibres, and pulls back to the inverse image under every scheme morphism.
-Support is the inline nonzero-stalk locus of def-weil-pbc-closed-subset-proper-over-base;
-membership in it is nonvanishing of the stalk by definition, so part (2) is stated as the
-Nakayama equivalence with the residue fibre `residueFiber F x` (κ(x) ⊗ F_x).
-Source: Stacks Project, Morphisms of Schemes, Lemma 056J.
-
-Proof:
-1. Apply lem-weil-pbc-finite-type-module-support-closed to obtain closedness.
-2. Membership in support is nonvanishing of the stalk by
-   def-weil-pbc-closed-subset-proper-over-base.
-3. Choose an affine neighbourhood of x. By the affine description in
-   lem-weil-pbc-finite-type-module-support-closed, its finite module localizes to F_x.
-   The images of a finite generating family generate this localization, hence F_x is finite.
-4. The stalk ring is local and its residue field is def-weil-residue-field. Apply
-   lem-weil-pbc-nakayama-local-generators to the empty family: F_x vanishes precisely
-   when its tensor product with the residue field vanishes. This proves both equivalences.
-5. The pullback is finite type by lem-weil-pbc-module-pullback-finite-type. Its stalk is
-   finite by lem-weil-pbc-module-stalk-pullback, Module.Finite.base_change, and the
-   stalk isomorphism, so no quasi-coherence result for the pullback is needed.
-6. For y mapping to x, extend the stalk isomorphism along the residue map. The identity
-   between the two composites of stalk and residue-field maps is
-   Scheme.residue_residueFieldMap. ModuleCat.extendScalarsComp identifies the pullback
-   residue fibre with scalar extension of the original residue fibre along the induced
-   field map.
-7. Scalar extension along a field extension reflects subsingleton modules by
-   Module.FaithfullyFlat.subsingleton_tensorProduct_iff_right.
-8. Apply the residue-fibre equivalence from step 4 to both finite stalks and use the
-   comparison in steps 6--7. Set extensionality gives the asserted inverse-image equality. -/
+Part (2) is stated as the Nakayama equivalence with the residue fibre `residueFiber F x`
+(`κ(x) ⊗ F_x`). (Stacks, Tag 056J.) -/
 theorem finiteType_module_support_pullback {X : Scheme.{u}} (F : X.Modules)
     [F.IsQuasicoherent] [F.IsFiniteType] :
     IsClosed {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧

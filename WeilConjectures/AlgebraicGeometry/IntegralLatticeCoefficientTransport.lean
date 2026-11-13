@@ -12,8 +12,11 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 /-!
 # Transport of integral lattice pairs along coefficient isomorphisms
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), invariance of lattice pairs under
-identifying the integral and rational coefficient rings.
+Invariance of lattice pairs under identifying the integral and rational coefficient rings.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -208,22 +211,7 @@ attribute [irreducible] coefficientPushforwardCancel pushforwardSheafificationIs
 
 set_option backward.isDefEq.respectTransparency true in
 /-- A commuting square of coefficient isomorphisms transports a given integral lattice pair.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), lattice pairs and their rationalizations.
-
-Proof: restrict both coefficient isomorphisms to the slice at U. Restrict the integral
-module of P along the inverse integral isomorphism, obtaining an R-module M. Local finite
-free generators transport along this isomorphism: their finite index sets are unchanged,
-and restriction on the further slices is an equivalence, so it preserves the free
-presentations. Thus M is finite locally free. On each object of the slice, the commuting
-coefficient square identifies S tensor_R M with P's rationalization restricted along the
-inverse rational isomorphism: the map sends s tensor m to eS.inv(s) tensor m. The balancing
-relation follows from the commuting square; the map with eS.hom gives its inverse.
-Both maps commute with restrictions, checked on pure tensors. Restriction along a ring
-isomorphism preserves sheafification, by the sheafification universal property and its
-inverse restriction. The tensor isomorphism therefore passes to module sheaves. Compose
-with P.rationalization and the restriction of eL to U, and cancel the inverse rational
-coefficient restrictions. This gives the required rationalization isomorphism to L.over U.
-No nonzero rank or nonempty scheme is required. -/
+(Bhatt--Scholze, Proposition 6.8.4(6)) -/
 theorem integral_lattice_pair_of_coefficient_iso {X : Scheme.{u}}
     {R S R' S' : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) (a' : R' ⟶ S') (eR : R' ≅ R) (eS : S' ≅ S)

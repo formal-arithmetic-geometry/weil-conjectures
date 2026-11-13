@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenOrdinaryTensorPureGermCoordinatesCa
 
 /-! # The pinned open restriction equation on pure germ tensors
 
-Source: Stacks Project, Tags 0098 and 0096.
+## References
+
+* Stacks Project, Tags 0098 and 0096.
 -/
 
 @[expose] public section
@@ -29,24 +31,8 @@ namespace AlgebraicGeometry
 open SingleComplexBaseChange
 /-- The pinned restriction comparison agrees with canonical stalk coordinates on pure tensors.
 
-Proof: expand tensorStalkIso using its specified tensor-pullback stalk components.
-Expand openPinnedTensorRestrictionIso into its four pinned adjunction factors.
-The tensor-pullback unit takes a section s to 1 tensor s. The unit compatibility
-for the pullback-composition mate, and then the restriction adjunction, identify
-its inverse comparison on these generators with restriction of the same section.
-The hom of restrictStalkNatIso takes a restricted section germ to the ambient
-section germ. Its input component followed by stalkCongr is precisely the input
-coordinate written below, and stalkIso is the corresponding output ring coordinate.
-Thus the displayed equation holds for c = 1 and a section germ q. Every stalk
-module element is a section germ, so this covers all q. For arbitrary c, linearity
-of the tensor-stalk and pinned comparison maps, and semilinearity of the output
-restriction coordinate with its inverse inclusion ring map, multiply this identity
-by the scalar c to obtain the displayed equation. Point transport by hj is handled
-by equality induction. This is a generator calculation only: it neither constructs
-ring equivalences nor input or tensor-complex isomorphisms. Empty opens have no z;
-zero rings, zero complexes and negative degrees require no additional hypothesis.
-Source: Stacks Project, Tags 0098 and 0096; the pinned pullback composition mate
-and Mathlib's germ_restrictStalkNatIso_hom_app formula. -/
+This is a generator calculation only: it constructs no ring equivalences or input or
+tensor-complex isomorphisms. -/
 theorem exists_openOrdinaryTensor_pure_germ_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

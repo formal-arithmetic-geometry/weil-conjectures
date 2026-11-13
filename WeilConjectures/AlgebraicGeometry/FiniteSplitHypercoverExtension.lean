@@ -13,11 +13,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-/-- A finite split étale hypercover skeleton extends to a full hypercover.
-Source: Stacks 0DAV, split hypercover induction. Regard the skeleton as a
-replacement of the terminal simplicial object. Extend it one degree at a time
-with the existing replacement-stage extension theorem. Restrict this tower to
-its diagonal stages and assemble it, retaining its prescribed truncation. -/
+/-- A finite split étale hypercover skeleton extends to a full hypercover
+(Stacks, Tag 0DAV). -/
 theorem exists_extension_of_finite_skeleton
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (r : ℕ) (U : TruncatedFiniteSplitEtaleHypercover X r) :

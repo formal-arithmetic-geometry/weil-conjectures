@@ -13,9 +13,12 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Normalized oplax data for global section scalar extension
 
-This auxiliary statement isolates the sectionwise tensor comparison and its unit
-normalization.  The main module turns invertible oplax data into a strong monoidal
-structure using the standard categorical constructor.
+This file isolates the sectionwise tensor comparison and its unit normalization.
+
+## Implementation details
+
+The main module turns invertible oplax data into a strong monoidal structure using the standard
+categorical constructor.
 -/
 
 @[expose] public noncomputable section
@@ -170,10 +173,7 @@ private theorem constantMonoidal_unit
 attribute [irreducible] constantMonoidal
 
 /-- The scalar extension has invertible oplax tensor data normalized by the fixed
-multiplication morphism.  This is the sectionwise tensor calculation used by the
-main monoidal theorem.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
--/
+multiplication morphism (Stacks, Tags 0996 and 099E). -/
 theorem ringFamilyGlobalExtension_oplax_normalized
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) :

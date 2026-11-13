@@ -28,7 +28,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Comparing an integral ideal with a module of generic rank one
 
-Source: Stacks Project, Cohomology of Schemes, Tags 01YF and 01YH.
+## References
+
+* Stacks Project, Cohomology of Schemes, Tags 01YF and 01YH.
 -/
 
 @[expose] public section
@@ -177,29 +179,9 @@ private theorem integral_factor_support_subset (X Z : Scheme.{u}) [IsNoetherian 
 -- The existential module structure is used implicitly in the finrank expression.
 set_option linter.unusedVariables false in
 /-- An ideal and a coherent module of generic rank one have a common submodule whose
- two cokernels admit integral-ideal filtrations on strictly smaller closed supports.
- The zero ideal is recorded separately. This statement involves no cohomology property.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH, proof of
-`lemma-property-irreducible`, and Tag 01YF, `lemma-coherent-filter`.
-
-Proof: Split on whether the ideal pushforward is zero. In the nonzero case,
-`exists_integral_ideal_common_submodule` supplies two monomorphisms with coherent
-cokernels supported strictly inside the integral closed image. Their canonical
-cokernel sequences are short exact in the abelian category of module sheaves.
-Apply `exists_finitePresentation_integral_filtration` to each cokernel Q and delete
-zero-ideal factors by replacing them with empty chains and using
-`finite_filtration_refinement`.
-For a factor isomorphic to j_*J with J nonzero, its generic stalk is nontrivial by
-`integral_ideal_generic_stalk` and `closedImmersion_pushforward_stalks`. If Q vanished
-at that generic point, the stalk of its subobject would vanish by injectivity, and
-the factor stalk would vanish by surjectivity of the cokernel projection. Exactness
-of the abelian-group stalk functor gives these two properties. This contradiction
-places the generic point in the support of Q. That support is closed by coherence
-and `finite_type_module_support_closed`, so every specialization of the generic
-point also belongs to it. Thus j(W') is contained in Supp Q, which is strictly
-contained in i(W); transitivity gives the required strict inclusion. The empty
-filtration supplied for a zero cokernel has no factors to check. -/
+two cokernels admit integral-ideal filtrations on strictly smaller closed supports.
+The zero ideal is recorded separately. This statement involves no cohomology property.
+(Stacks, Tags 01YH, 01YF) -/
 theorem exists_integral_ideal_comparison_filtrations (X W : Scheme.{u})
     [IsNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (G : X.Modules) (hGcoh : RingedSpace.IsCoherent X.toRingedSpace G)

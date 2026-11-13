@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorChainTransportPureO
 import WeilConjectures.AlgebraicGeometry.RestrictStalkInvSmul
 /-! # Homology transport for normalized open tensor coordinates
 
-Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
+## References
+
+* Stacks Project, Tags 0098 and 0D5U.
 -/
 
 
@@ -28,22 +30,7 @@ variable [∀ Y : Scheme.{u},
 
 
 set_option linter.unusedVariables false in
-/-- The open tensor restriction square carries a pure tensor to the same restricted germ.
-
-Proof: use the specified components of tensorStalkIso to reduce to the ordinary
-pullback-stalk isomorphism. Represent x by a section on a neighborhood of g′ z.
-The tensor-pullback adjunction unit sends that section to its tensor with 1.
-The unit identities for the two composition mates defining
-openTensorRestrictionSquareIso identify both routes on this unit with restriction
-of that same section. The inverse restrictStalkNatIso sends its germ to the germ
-of the restricted section; stalkCongr changes only the equality naming its point.
-Thus both routes agree for coefficient 1. The output restriction is semilinear
-for the actual projection stalk map, so multiplying by d gives the displayed
-formula. Every input stalk element is represented by a section germ. This proves
-all x and d without making any auxiliary coordinate choices. Empty opens have
-no z0; zero rings, zero complexes, and negative degrees need no extra assumption.
-Source: Stacks Project, Tag 0098, restriction of stalk germs; Tag 0D5U,
-restriction of modules; the unit identities of the specified composition mates. -/
+/-- The open tensor restriction square carries a pure tensor to the same restricted germ. -/
 theorem openRestricted_tensor_chain_transport_pure
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

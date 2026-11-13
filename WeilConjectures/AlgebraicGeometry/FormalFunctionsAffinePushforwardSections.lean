@@ -19,7 +19,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Formal functions on an affine open of the base
 
-Source: Stacks Project, Theorem 02OC, degree zero, and Lemma 088B.
+## References
+
+* Stacks Project, Tags 02OC and 088B
 -/
 
 @[expose] public section
@@ -33,24 +35,7 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport degree-zero formal functions to an arbitrary affine open of the base.
-Source: Stacks Project, Theorem 02OC and Lemma 088B.
-
-Proof: Write U as Spec A using its affine chart. Since Y is Noetherian, A is Noetherian.
-Base change f along U -> Y; the resulting morphism to U is proper. Restrict F to the
-inverse image of U, preserving coherence, and transport it along the affine chart.
-The restricted ideal J is the ideal sheaf of I = J(U); its pullback is the restriction
-of J.comap f. Restriction preserves ideal products, powers, and cokernels, so the
-restricted quotient system is the quotient system in globalSections_formal_functions.
-The identity Gamma(U,f_*F) = Gamma(f^(-1)U,F) supplies its module M, including the
-A-action induced by f. Apply globalSections_formal_functions to obtain theta_n and
-its canonical isomorphism. Pushforward on sections is evaluation on the inverse image,
-and evaluation preserves limits. Transport the isomorphism and both projection equations
-through these identifications. The quotient equation below is the transported theta_n
-factorization; the last equation is the transported limit projection equation.
-For J=0 this is the constant-section system; for J=1 its quotients and completion are
-zero. F=0 and the empty open also give zero modules. No coherence assumption on f_*F
-and no natural transformation kappa are needed for this transport step.
--/
+(Stacks, Theorem 02OC and Lemma 088B.) -/
 theorem formalFunctions_affine_pushforward_sections {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (F : CoherentModules X)
     (U : Y.Opens) (hU : IsAffineOpen U) :

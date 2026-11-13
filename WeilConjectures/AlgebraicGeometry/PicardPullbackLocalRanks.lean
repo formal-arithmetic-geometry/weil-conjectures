@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 
 /-! # Common local ranks for a pulled-back module
 
-Source: Stacks Project, Tags 0BDP and 01E8.
+## References
+
+* Stacks Project, Tags 0BDP and 01E8
 -/
 
 @[expose] public section
@@ -96,23 +98,7 @@ private noncomputable def presentation_baseChange {X S T : Scheme.{u}}
     (Modules.nonempty_tensorPullbackComp (pullback.snd f (h ≫ g)) h).some.app N
 
 /-- A pulled-back finite locally free module and its two direct images have one
-common finite rank locally after every change of base.
-Source: Stacks Project, Tag 0BDP, projection-formula paragraph, using Tag 01E8.
-
-Proof: For h: T' → T, form the canonical map X_{T'} → X_T by the pullback
-universal property. The composition isomorphisms of tensor pullback and the
-commutative projection squares transport e to q'^*E ≅ p'^*h^*N. Finite locally
-free modules remain finite locally free under pullback: pull back their finite
-local frames. In such frames the dual is the coordinate dual free module, and
-pullback of the dual identifies with the dual of the pullback. Thus also
-q'^*(E^dual) ≅ p'^*((h^*N)^dual). The finite-locally-free unit theorem for p',
-using hO at h ≫ g, identifies the two direct images with h^*N and its dual.
-Choose an open U containing t on which h^*N has a finite frame of size r.
-Its coordinate dual frame has the same size. Transport these frames across the
-two direct-image identifications and restrict to U. Pulling the original frame
-up to X_U gives q_U^*E a frame of size r too. These three frames give exactly
-the three displayed fixed-rank predicates. Empty T' has no point to check;
-the empty frame handles r = 0, including an empty X_U. -/
+common finite rank locally after every change of base (Stacks, Tags 0BDP and 01E8). -/
 theorem picard_pullback_local_ranks {X S T : Scheme.{u}}
     (f : X ⟶ S)
     (hO : ∀ {T' : Scheme.{u}} (g' : T' ⟶ S),

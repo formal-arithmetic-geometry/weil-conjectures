@@ -8,9 +8,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 
 /-! # Braiding compatibility for native module pullback
 
-Source: the balanced coequalizer calculation of the ordinary pullback tensorator;
-Stacks 03EL. The private calculations are the ordinary braiding helpers of the trace base change,
-specialized below to its native tensorator. -/
+## References
+
+* Stacks Project, Tag 03EL (the balanced coequalizer calculation of the ordinary pullback
+  tensorator).
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -96,19 +98,8 @@ end OrdinaryBraidingHelpers
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The native composite module pullback preserves the braiding in oplax form.
-
-Source: Stacks 03EL; the ordinary coequalizer calculations of the trace base change.
-
-Proof. Precompose the mapMod tensorator with the relative tensor coequalizer
-map. Its defining equation reduces the braided square to the ambient sheaf
-pullback's braided square. The same calculation proves that comap along a ring
-isomorphism is braided. Extension along an isomorphism is the specified monoidal
-transport of this comap, so it is braided as well. Compose these two braided
-functors to obtain the native module pullback. Precompose the resulting lax
-braided identity with the inverse tensorator to obtain the oplax identity.
-All coequalizer maps used for cancellation are epimorphisms. The argument also
-applies to zero modules and the zero coefficient ring. -/
+/-- The native composite module pullback preserves the braiding in oplax form
+(Stacks, Tag 03EL). -/
 theorem nativeUpperStar_braiding
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)

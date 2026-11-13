@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Finite-stage local module models
 
-Source: Stacks Project, Tags 01ZR and 05N7. -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -70,24 +73,7 @@ private theorem transport_chart_model
     (Scheme.Modules.pullbackCongr h₁).app M
 
 /-- Local finitely presented modules lift on a finite affine cover, without any overlap maps.
-Source: Stacks Project, Limits, Tag 01ZR, first proof; Algebra, Tag 05N7, object clause.
-
-Proof: Quasi-compactness of f over the affine base makes Xi quasi-compact. Take a finite
-subcover of its affine cover. On each chart the stage coordinate rings are base changes
-of the chart ring, and the limit chart ring is their directed colimit: first identify
-c.pt with Spec(colim R) by uniqueness of limits, then use the spectrum/tensor-product
-pullback comparison. The restriction of M is quasi-coherent and finitely presented,
-so its module of sections on this affine chart is finitely presented. Apply the object
-clause of 05N7 to obtain a finitely presented stage module, realized geometrically by
-its associated quasi-coherent sheaf. Lift its finite relation matrix, rather than
-choosing arbitrary sheaf data. Finitely many charts give finitely many stages; choose
-a common upper bound also above i, and extend scalars on all charts to that stage.
-Finite presentation survives extension of scalars; the affine module equivalence and
-pullback comparisons supply the displayed component isomorphisms. The pulled-back
-charts form a finite affine cover of Xj. For a preorder take the partial-order quotient
-of the upper tail; equivalent indices give canonically isomorphic rings. The fixed i
-makes this tail nonempty. Empty Xi uses the empty family; zero modules and zero rings
-use their zero presentations. No overlap identifications are claimed. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_local_object_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

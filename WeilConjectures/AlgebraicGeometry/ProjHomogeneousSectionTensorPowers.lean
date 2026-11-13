@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 
 /-! # Tensor powers of a homogeneous section of a polynomial Proj twist
 
-Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
+## References
+
+* Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
 -/
 
 @[expose] public section
@@ -31,22 +33,8 @@ namespace AlgebraicGeometry
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Tensor-power identifications for `O(d)` respect multiplication by any homogeneous
-polynomial, and its nonvanishing locus is its standard open.
-
-Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
-
-Proof: On each coordinate chart D_+(x_i), O(m) is free on x_i^m for every integer m.
-Multiplication of fractions gives O(m) tensor O(n) -> O(m+n), carrying the tensor
-of these bases to the corresponding basis. These maps agree on intersections and
-are isomorphisms. Iterate them to construct the displayed identifications, starting
-with O = O(0). The homogeneous section f is (f/x_i^d) x_i^d on that chart. Its tensor
-power therefore has coefficient (f/x_i^d)^n, which gives exactly f^n under both
-identifications. This proves the two morphism identities, including n=0. The fibre
-value of f is nonzero exactly where f/x_i^d is outside the prime ideal; this is
-D_+(f) intersected with the chart. Since the charts cover, the locus equality follows.
-Invertibility follows from the same local bases. For f=0 the locus is empty and the
-positive powers are zero; the zeroth identities are still the unit identities.
--/
+polynomial, and its nonvanishing locus is its standard open
+(Stacks, Constructions, Tags 01MS, 01MU, 01MV and 01NG). -/
 theorem proj_homogeneous_section_tensor_powers (k : Type u) [Field k]
     {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}
     (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :

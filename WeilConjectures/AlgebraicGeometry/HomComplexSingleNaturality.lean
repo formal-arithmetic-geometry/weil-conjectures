@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Naturality of the single-source internal Hom comparison
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+## References
+
+* Stacks Project, Tag 0A8X.
 -/
 
 @[expose] public section
@@ -152,19 +154,7 @@ private theorem single_hom_functor_iso (Y : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The single-source Hom comparison is natural in both the sheaf and the complex.
-
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, Hom-complex product
-and functoriality formulas.
-
-Proof: For each sheaf P and complex I, project the product defining Hom(P[0],I)
-to its degree-zero source factor. All other factors are zero, because P[0]^p
-is zero for p different from zero. The inverse is the product lift with this
-component and zero elsewhere. The product universal property gives both inverse
-identities. The differential formula reduces to postcomposition by d_I, as the
-source differential vanishes. Naturality in I follows from the postcomposition
-formula for the product projections. For k:Q → P, the precomposition formula for
-those same projections identifies Hom(k[0],I) with degreewise internal Hom(k,I).
-These arguments apply to unbounded I, zero P or Q, and the empty scheme. -/
+(Stacks, Tag 0A8X) -/
 theorem homComplex_single_precomposition_iso (Y : Scheme.{u})
     (P Q : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (k : Q ⟶ P)
     [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).Additive]

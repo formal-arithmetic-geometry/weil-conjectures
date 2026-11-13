@@ -43,12 +43,8 @@ local instance instHasLimitsOfSizeFiniteDiscreteCoefficientEncodingData :
     HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
   ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
 
-/-- Encode coefficient sheaves using a single sectionwise encoding and point ring.
-Source: Bhatt--Scholze, Proposition 5.3.2; the constructive constant-ring encoding.
-
-Construction. Invert the sectionwise sheafEncoding for the fixed G, then invert
-restriction of scalars along the ring isomorphism pulled back from eR at the point.
-Both functors and their equivalence structures are given by proved constructions. -/
+/-- Encode coefficient sheaves using a single sectionwise encoding and point ring
+(Bhatt--Scholze, Proposition 5.3.2). -/
 @[irreducible] noncomputable def finiteDiscreteCoefficientEquivalence (T : Scheme.{u}) :
     FiniteDiscreteProEtaleSheaves B T ≌ FiniteDiscreteInternalModules B T := by
   letI : ((ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=

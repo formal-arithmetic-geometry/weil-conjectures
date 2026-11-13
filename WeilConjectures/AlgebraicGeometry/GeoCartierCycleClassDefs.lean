@@ -13,14 +13,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 /-!
 # The cycle class of an effective Cartier divisor
 
-Stacks Project, Tag 03PL.
-
 We use the fixed-scalar sheaf presentation of ordinary pro-etale modules, canonically
-realized by `finiteCoefficientRealization` over the coefficient ring sheaf of
-`def-weil-pbc-proetale-modules`. `Ext.homEquiv` identifies every degree-two Ext class
-below with the displayed morphism from the degree-zero supported constant object to
-its finite Tate line shifted by two. No condensed or completed coefficient category occurs.
-The auxiliary definitions only spell out this class and its normalization diagrams.
+realized by `finiteCoefficientRealization` over the coefficient ring sheaf. `Ext.homEquiv`
+identifies every degree-two Ext class below with the displayed morphism from the degree-zero
+supported constant object to its finite Tate line shifted by two. No condensed or completed
+coefficient category occurs. The auxiliary definitions only spell out this class and its
+normalization diagrams.
+
+## References
+
+* Stacks, Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -35,16 +37,13 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Cache the existing smallness proof used by integral pro-etale Ext classes.
-Source: the existing Grothendieck-abelian sheaf category and its Ext instance.
-Proof: apply the library instance for Ext in this sheaf category. This names only
-its smallness proof, so it does not alter the Ext objects or their operations. -/
+/-- Cached instance for the smallness of Ext in the sheaf category used by integral
+pro-etale Ext classes. -/
 instance (priority := 10000) geoCartierIntegralExt (Z : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) := by
   infer_instance
 
-/-- Cache finite-coefficient pro-etale Ext smallness, without changing any Ext data.
-Source: the existing Grothendieck-abelian sheaf Ext instance. The proof only specializes that instance. -/
+/-- Cached instance for the smallness of finite-coefficient pro-etale Ext. -/
 instance (priority := 10000) geoCartierModuleExt
     (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)) := by
@@ -82,9 +81,7 @@ def geoCartierSourceComparison (A : Type (u + 1)) [CommRing A]
       ((comparisonUpperStarConstantSheafIso A D).app (ModuleCat.of A A)).hom
 
 /-- The direct image of the constant-sheaf comparison, typed with the Cartier constant as
-target, is invertible; instance search cannot see through geoCartierConstant itself.
-
-Proof: after unfolding the constant, it is the image of an isomorphism under a functor. -/
+target, is invertible. -/
 instance geoCartierSourceConstant_isIso (A : Type (u + 1)) [CommRing A]
     {D Z : Scheme.{u}} (i : D ⟶ Z) :
     IsIso ((lowerStar (ModuleCat.{u + 1} A) i).map

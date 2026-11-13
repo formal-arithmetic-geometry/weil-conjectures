@@ -15,8 +15,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 /-!
 # Canonical arrows for the ordinary finite projective-line calculation
 
-Source:; Stacks Project, Tags 03PL and 03FD.
-
 ## Main definitions
 
 * `OrdinaryFiniteTwistTransport`: normalized roots and coefficient-line comparisons.
@@ -24,6 +22,10 @@ Source:; Stacks Project, Tags 03PL and 03FD.
 * `ordinaryFiniteProjection`: the specified ordered projection map.
 * `ordinaryFiniteP1Right`: inverse image followed by the shifted twist.
 * `ordinaryFiniteP1Exchange`, `ordinaryFiniteP1RightBaseChange`: base-change arrows.
+
+## References
+
+* [Stacks, Tags 03PL and 03FD]
 -/
 
 @[expose] public noncomputable section
@@ -45,31 +47,27 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- Reuse the existing colimits of module sheaves once when elaborating unbounded
-derived inverse images. This is the library's colimit structure, with no new assumption.
-Source: the ordinary module derived categories in -/
+derived inverse images. This is the library's colimit structure, with no new assumption. -/
 instance ordinaryFiniteColimitsOfShapeInt (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) : HasColimitsOfShape ℤ
       (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
 
-/-- The recorded derived inverse image, with its instances elaborated once.
-Source: -/
+/-- The recorded derived inverse image, with its instances elaborated once. -/
 @[implicit_reducible]
 def ordinaryFinitePullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X :=
   (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
 
-/-- The recorded unbounded derived direct image, with its instances elaborated once.
-Source: -/
+/-- The recorded unbounded derived direct image, with its instances elaborated once. -/
 @[implicit_reducible]
 def ordinaryFinitePushforward (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategoryModule A X ⥤ DerivedCategoryModule A Y :=
   (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor
 
-/-- The existing derived tensor, with its coefficient instances elaborated once.
-Source: -/
+/-- The existing derived tensor, with its coefficient instances elaborated once. -/
 @[implicit_reducible]
 def ordinaryFiniteTensor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     DerivedCategoryModule A T ⥤ DerivedCategoryModule A T ⥤ DerivedCategoryModule A T :=
@@ -78,8 +76,7 @@ def ordinaryFiniteTensor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
 /-- Normalized inverse-image comparisons for the concrete finite twist. The root
 comparison is characterized by the inclusion into the units sheaf; the coefficient
 comparison is characterized on pure tensors. Hence these are the canonical comparisons,
-not an arbitrary system of twist isomorphisms.
-Source: Stacks, Tags 03PK and 03Q1. -/
+not an arbitrary system of twist isomorphisms. (Stacks, Tags 03PK and 03Q1) -/
 structure OrdinaryFiniteTwistTransport (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) where
   roots : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsUnit (N : Γ(Y, ⊤)) →
@@ -101,8 +98,7 @@ structure OrdinaryFiniteTwistTransport (A : Type (u + 1)) [CommRing A] (N : ℕ)
       (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _
         (roots f hY).hom).hom.app W z)
 
-/-- The exact derived single-degree comparison, with the same cached embeddings.
-Source: the exact inverse-image comparison with degree zero. -/
+/-- The exact derived single-degree comparison, with the same cached embeddings. -/
 def ordinaryFiniteSingleExactPullbackIso (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteSingleFunctor A Y ⋙
@@ -110,15 +106,13 @@ def ordinaryFiniteSingleExactPullbackIso (A : Type (u + 1)) [CommRing A]
       upperStar (ModuleCat.{u + 1} A) f ⋙ ordinaryFiniteSingleFunctor A X :=
   (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0
 
-/-- The cached comparison is the canonical exact-derived single-degree comparison.
-Source: the exact inverse-image comparison. -/
+/-- The cached comparison is the canonical exact-derived single-degree comparison. -/
 theorem ordinaryFiniteSingleExactPullbackIso_eq (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteSingleExactPullbackIso A f =
       (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0 := rfl
 
-/-- The canonical single-degree comparison, transported along the cached embeddings.
-Source: the exact inverse-image comparison with degree zero. -/
+/-- The canonical single-degree comparison, transported along the cached embeddings. -/
 def ordinaryFiniteSinglePullbackIso (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteSingleFunctor A Y ⋙ ordinaryFinitePullback A f ≅
@@ -127,8 +121,7 @@ def ordinaryFiniteSinglePullbackIso (A : Type (u + 1)) [CommRing A]
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) ≪≫
     ordinaryFiniteSingleExactPullbackIso A f
 
-/-- The canonical derived comparison on the shifted twist.
-Source: -/
+/-- The canonical derived comparison on the shifted twist. -/
 def ordinaryFiniteShiftedLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) :
@@ -141,8 +134,7 @@ def ordinaryFiniteShiftedLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (Scheme.finiteEtaleTateLine Y N A hA) (Scheme.finiteEtaleTateLine X N A hA)
     (t.line f hY) 2
 
-/-- The canonical comparison on the constant complex, with no chosen orientation.
-Source: -/
+/-- The canonical comparison on the constant complex, with no chosen orientation. -/
 def ordinaryFiniteUnitPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFinitePullback A f).obj (ordinaryFiniteUnit A Y) ≅
@@ -151,8 +143,7 @@ def ordinaryFiniteUnitPullback (A : Type (u + 1)) [CommRing A]
     (ordinaryFiniteSingleFunctor A X).mapIso
       ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).app (ModuleCat.of A A))
 
-/-- The unit comparison factors through the cached single-degree comparison.
-Source: the canonical inverse-image comparison. -/
+/-- The unit comparison factors through the cached single-degree comparison. -/
 theorem ordinaryFiniteUnitPullback_eq (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteUnitPullback A f =
@@ -161,8 +152,7 @@ theorem ordinaryFiniteUnitPullback_eq (A : Type (u + 1)) [CommRing A]
           ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).app
             (ModuleCat.of A A)) := rfl
 
-/-- The shifted-line comparison uses the cached single-degree comparison and shift.
-Source: the canonical shifted inverse-image comparison. -/
+/-- The shifted-line comparison uses the cached single-degree comparison and shift. -/
 theorem ordinaryFiniteShiftedLinePullback_eq
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) {X Y : Scheme.{u}}
@@ -176,8 +166,7 @@ theorem ordinaryFiniteShiftedLinePullback_eq
           ((ordinaryFiniteSinglePullbackIso A f).app (Scheme.finiteEtaleTateLine Y N A hA) ≪≫
             (ordinaryFiniteSingleFunctor A X).mapIso (t.line f hY)) := rfl
 
-/-- The shifted twisted unit, the first component of the projective-line decomposition.
-Source: -/
+/-- The shifted twisted unit, the first component of the projective-line decomposition. -/
 def ordinaryFiniteP1Unit (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -189,8 +178,7 @@ def ordinaryFiniteP1Unit (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map
       (ordinaryFiniteShiftedLinePullback A N hA t (ProjectiveLine S ↘ S) hS).hom
 
-/-- Push forward a degree-two Chern class using the actual inverse-image adjunction.
-Source: -/
+/-- Push forward a degree-two Chern class using the actual inverse-image adjunction. -/
 def ordinaryFiniteP1ChernPushforward (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶
@@ -203,8 +191,7 @@ def ordinaryFiniteP1ChernPushforward (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ((ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom ≫ c)
 
 /-- The ordered projection map with the base coefficient first, exactly the
-symmetry-conjugate of the adjoint-of-counit map used by the projection theorem.
-Source: -/
+symmetry-conjugate of the adjoint-of-counit map used by the projection theorem. -/
 def ordinaryFiniteProjection (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X)
     (K : DerivedCategoryModule A Y) :
@@ -218,15 +205,13 @@ def ordinaryFiniteProjection (A : Type (u + 1)) [CommRing A]
       (ordinaryFinitePushforward A f).map
         (((derivedTensorSymmetry (ModuleCat.{u + 1} A) X).hom.app L).app _)
 
-/-- Compose the recorded inverse image with tensoring by a specified source complex.
-Source: -/
+/-- Compose the recorded inverse image with tensoring by a specified source complex. -/
 def ordinaryFiniteTwistedPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (q : X ⟶ Y) (L : DerivedCategoryModule A X) :
     DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X :=
   ordinaryFinitePullback A q ⋙ derivedTensorRight (ModuleCat.{u + 1} A) X L
 
-/-- The proposed right adjoint on the entire derived category.
-Source: -/
+/-- The proposed right adjoint on the entire derived category. -/
 def ordinaryFiniteP1Right (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) :
     DerivedCategoryModule A S ⥤ DerivedCategoryModule A (ProjectiveLine S) :=
@@ -235,7 +220,7 @@ def ordinaryFiniteP1Right (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- Canonical proper exchange, expressed with the equivalent left-derived inverse images.
 The middle arrow is exactly `exactDerivedBaseChangeMap` from the recorded dependency.
-Source: Stacks, Tag 07A7. -/
+(Stacks, Tag 07A7) -/
 def ordinaryFiniteP1Exchange (A : Type (u + 1)) [CommRing A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) (M : DerivedCategoryModule A (ProjectiveLine S)) :
     (ordinaryFinitePullback A f).obj

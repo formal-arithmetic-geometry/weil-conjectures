@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteScalarRightAdjointQCoh
 
 /-! # FiniteAffineAdjointCounitComparison
 
-Source: Stacks Project, Duality for Schemes, Section 48.11.
+## References
+
+* Stacks Project, Duality for Schemes, Section 48.11
 -/
 
 @[expose] public section
@@ -85,32 +87,8 @@ private theorem pointwise_adjoint_comparison
 
 /-- The finite affine comparison of geometric and scalar right adjoints at a
 bounded-below quasi-coherent object. No identification with internal Hom or evaluation
-at one is asserted here. The boundedness of a(K) is an explicit input.
-
-Source: Stacks Project, Tag 0AX2, comparison-of-right-adjoints paragraph; Tag 0AVW.
-
-Proof:
-1. Scalar restriction is exact. On a K-injective representative, Rg_* followed by
-   scalar restriction and Rf_* are the same pushforward complex, with different
-   scalar structures. Descend this identity to the natural isomorphism c, on the
-   whole derived category, keeping the localization comparison maps.
-2. Use finite_affine_derived_equivalence to identify D_QCoh(X) with D_QCoh(A).
-   The given adjunction R ⊣ a transports to the restriction functor under this
-   equivalence; its counit is comparison.inv followed by adj.counit.
-3. The affine sheaf-Hom adjunction computes the ambient scalar right adjoint.
-   Finite pseudo-coherence and the internal-Hom quasi-coherence lemma put its value
-   on K in D+_QCoh(A); uniqueness transports this assertion to the specified rhoR.
-   Exact scalar restriction detects vanishing of cohomology. The affine cohomology
-   formula therefore makes E preserve lower bounds; its inverse is exact on
-   quasi-coherent modules and preserves them too. Thus haK bounds E(a(K)).
-4. For this fixed K, both E(a(K)) and rhoR(K) represent the same contravariant
-   functor M -> Hom(rho(M),K) on D+_QCoh(A), by the two given adjunctions and the
-   equivalence. Pointwise uniqueness of representing objects (Yoneda) gives phi,
-   transported through the Rg_* comparison. Its counit equation is the pointwise
-   right-adjoint uniqueness equation. No global preservation claim for a is needed.
-   The choice of comparison is used to transport the adjunction, so this also works
-   for arbitrary specified comparison and adjunction, including their automorphisms.
-All statements hold for the zero object and for shifts, with shifted lower bounds. -/
+at one is asserted here. The boundedness of a(K) is an explicit input
+(Stacks, Tags 0AX2, 0AVW). -/
 theorem finite_affine_adjoint_counit_comparison {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -17,11 +17,15 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 - `normalizedDVRRes` and `normalizedDVRResCompleted`: exact derived scalar restriction.
 - `NormalizedDVRTower`: finite-level objects and transitions with a coherent derived tower.
 
+## Implementation details
+
 Normalization uses the universal property of derived change of rings: composition
-with the specified transition is a Hom bijection. Under the tensor-restriction
-adjunction this says exactly that the adjoint of that transition is an isomorphism.
-It neither chooses an unrelated map nor adds an arbitrary scalar-extension functor.
-All module universes are `max u (t+1)`, retaining the small site's independent sizes.
+with the specified transition is a Hom bijection. All module universes are `max u (t+1)`,
+retaining the small site's independent sizes.
+
+## References
+
+* [Stacks, Tag 03DA]
 -/
 
 @[expose] public section
@@ -85,14 +89,8 @@ instance normalizedDVRModuleRes_additive {m n : ℕ} (h : n ≤ m) :
   unfold normalizedDVRModuleRes
   infer_instance
 
-/-- Exactness of finite-level restriction, asserted in the definition's second paragraph.
-Source: blueprint order 2131; Stacks Tag 03DA.
-Proof: restriction leaves the underlying abelian sheaf and every underlying map unchanged.
-Kernels are sectionwise kernels with the restricted scalar action. Cokernels are the
-sheafifications of sectionwise cokernels, with that same restricted action. Thus the
-kernel and cokernel comparisons are identities on underlying sheaves. The functor is
-additive, so it preserves all finite limits and finite colimits. This also applies to
-identity quotients and to the empty scheme; no flatness is required. -/
+/-- Restriction of scalars along a finite-level transition of the DVR tower preserves finite
+limits and finite colimits (Stacks, Tag 03DA). -/
 theorem normalizedDVRModuleRes_exact {m n : ℕ} (h : n ≤ m) :
     PreservesFiniteLimits (normalizedDVRModuleRes l E X h) ∧
       PreservesFiniteColimits (normalizedDVRModuleRes l E X h) := by

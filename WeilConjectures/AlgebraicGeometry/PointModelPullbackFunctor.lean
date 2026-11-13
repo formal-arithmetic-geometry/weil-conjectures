@@ -18,10 +18,7 @@ open CategoryTheory
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- The actual point pullback on modules, with its codomain category fixed.
-Source: Stacks Tag 00YV and the integral-models local-model step.
-The functor is the existing mapMod of upperStarFromPoint; both its object and morphism
-maps are those of that functor. No equivalence or preservation property is assumed here. -/
+/-- The actual point pullback on modules, with its codomain category fixed (Stacks, Tag 00YV). -/
 def pointModelPullbackFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Z : Scheme.{u}) :

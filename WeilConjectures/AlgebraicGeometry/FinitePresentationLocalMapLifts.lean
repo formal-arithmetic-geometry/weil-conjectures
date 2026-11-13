@@ -18,7 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Affine local lifts of fixed-model maps
 
-Source: Stacks Project, Limits, Tag 01ZR, first proof.
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section
@@ -33,23 +35,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Local components of a map lift on a finite affine cover at one stage.
 This statement imposes no overlap equations on the lifted components.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, affine map lifting;
-Algebra, Tag 05N7 (2).
-
-Proof: Choose a finite affine cover of Xj, using quasi-compactness over Spec Rj.
-Its inverse images at later stages and at the limit are affine. On a chart,
-quasi-coherent sheaves and pullback identify with modules and scalar extension.
-The stage coordinate rings have colimit the limit chart ring: they are tensor
-products of the fixed chart ring with the stage base rings, and tensor products
-commute with this colimit. Apply the map clause of finitePresentation_descent_directedColimit
-on each chart, passing through the partial-order quotient of the directed preorder.
-There are finitely many charts; choose a common upper bound and pull the local maps
-there. Composition comparisons transport their scalar-extension equations to the
-displayed recovery equations. The comparison e is explicitly the canonical tensor
-pullback composition comparison, so no choice of comparison is needed. No agreement
-on overlaps has been imposed. Empty charts have unique maps; an empty cover requires
-no lifts and j itself is an upper bound. The zero ring and zero modules cause no
-exception. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_local_map_lifts
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -22,7 +22,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Coherent sheaf with prescribed generic support
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YO.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 01YO.
 -/
 
 @[expose] public section
@@ -36,21 +38,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite surjective map to a locally Noetherian scheme admits a coherent module whose
 pushforward is supported on a prescribed integral closed subscheme and is annihilated at its
-generic point by the maximal ideal.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YO, lines 3479--3521.
-
-Proof:
-1. Finite implies locally finite type, so Y is locally Noetherian. Lift ξ by surjectivity
-   and take its reduced closure.
-2. Its image is exactly closure {ξ}, since a finite map is closed. Factor its reduced source through Z.
-3. Push forward its structure sheaf along the closed immersion into Y. This is coherent. Sectionwise pushforward composes.
-4. On affine neighborhoods the generic stalk is (B/q)_p. Integrality and incomparability show
-   this is the residue field of the chosen lift and therefore nonzero.
-5. The stalk action factors through the residue field of ξ, so the maximal ideal annihilates the stalk.
-6. The pushforward has closed support.
-   Closed-pushforward stalks put it inside i(Z).
-   It contains ξ by step 4, hence contains its closure and equals i(Z).
--/
+generic point by the maximal ideal. (Stacks, Tag 01YO.) -/
 theorem exists_coherent_pushforward_support_eq_range
     {X Y Z : Scheme.{u}} (f : Y ⟶ X) (i : Z ⟶ X) (ξ : X)
     [IsFinite f] [Surjective f] [IsLocallyNoetherian X]

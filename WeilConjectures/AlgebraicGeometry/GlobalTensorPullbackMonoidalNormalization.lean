@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsLaxMonoidalData
 import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackOplaxIsIso
 /-! # Tensor-counit normalization of the global pullback
 
-Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
+## References
+
+* Stacks Project, Tags 008A, 008Y, 0B6A and 0FKU.
+-/
 
 @[expose] public section
 universe u
@@ -39,20 +42,8 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
-/-- Concrete global pullback admits the tensor constraint normalized by its counit.
-Source: Stacks Tags 008A, 008Y and 0FKU.
-Proof: the inverse image and change-of-rings formula identifies P with p* after point
-evaluation. Inverse image preserves the sheaf tensor product, and extension of scalars
-has the tensor constraint multiplying the two O_X coefficients. These constraints are
-isomorphisms; their associativity and unit identities follow on local pure tensors.
-Transport this strong monoidal structure to P using the prescribed object and map
-identifications. The canonical evaluation adjunction has the asserted counit identity
-on pure tensors: both sides send (a tensor m) tensor (b tensor n) to ab times m tensor n.
-Linearity and the sheafification universal property give the identity on sheaves.
-For the given adjunction, use the unique isomorphism of left adjoints to the same
-right adjoint to transport the constraint and its unit. Its compatibility with the
-counits transports the displayed identity as well. Zero modules and the empty scheme
-satisfy the same generator identities. -/
+/-- The concrete global pullback admits the tensor constraint normalized by its counit
+(Stacks, Tags 008A, 008Y and 0FKU). -/
 theorem globalTensorPullback_monoidal_normalization
     (e : SheafOfModules.{u} (moduleRings (globalSectionsPoint X)) ≌
         ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))

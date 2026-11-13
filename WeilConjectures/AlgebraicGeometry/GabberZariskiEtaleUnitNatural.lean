@@ -11,7 +11,10 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Naturality of the restricted étale inverse-image unit
-Source: Stacks Project, Tag 09ZF, first proof paragraph.
+
+## References
+
+* [Stacks, Tag 09ZF], [Stacks, Tag 00WX]
 -/
 
 @[expose] public section
@@ -26,20 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- The étale unit, transported by the open/base-change identifications, is natural.
-Source: Stacks Project, Tag 09ZF, first proof paragraph,
-and Sites, Tag 00WX, the inverse-image adjunction.
-Proof: restrict the étale adjunction unit along the open-subscheme inclusion.
-For an inclusion of opens, the square of base-change identifications commutes:
-compose both proposed scheme morphisms with the two pullback projections.
-The first projection equality follows from `ha` and functoriality of restriction;
-the second follows because the identifications are morphisms over Z. Pullback
-uniqueness proves the square commutes. Naturality of the étale unit and of `eX`
-and `eZ` now proves naturality of the displayed component functions. These
-functions therefore form a presheaf morphism. Both presheaves are sheaves, so
-this is a morphism of sheaves to the topological direct image. Its component
-formula is the construction itself. No closedness assumption is used here.
--/
+/-- The étale unit, transported by the open/base-change identifications, is natural. -/
 theorem gabber_zariski_etale_unit_natural
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))

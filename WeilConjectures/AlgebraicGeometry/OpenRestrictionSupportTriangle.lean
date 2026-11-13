@@ -21,8 +21,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 /-! # The support triangle for restriction to an open subscheme
 
-Source: Stacks Project, Duality for Schemes, Tag 0E4G, proof of Lemma 48.4.3;
-Derived Categories of Schemes, Lemma 36.4.1 and Definition 36.6.1.
+## References
+
+* [Stacks, Duality for Schemes, Tag 0E4G]
+* [Stacks, Derived Categories of Schemes, Lemma 36.4.1 and Definition 36.6.1]
 -/
 
 @[expose] public section
@@ -39,29 +41,7 @@ namespace AlgebraicGeometry
 -- Transport between the scheme-module and sheaf-module category instances is expensive.
 /-- Complete the open-restriction unit to a distinguished triangle with quasi-coherent
 vertices. Its third vertex has cohomology supported on the closed complement and is
-bounded below whenever the first vertex is bounded below.
-Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3; Lemma 36.4.1 and
-Definition 36.6.1.
-
-Proof:
-1. Transport the open-immersion restriction/direct-image adjunction along the
-   over-site equivalence, then apply the unbounded derived-adjunction construction.
-   Direct image preserves K-injective complexes because it is right adjoint to exact
-   restriction, and its derived functor is fully faithful.
-2. Exact restriction commutes with cohomology and preserves quasi-coherence. The
-   compact open inclusion is quasi-compact, and is separated, so its derived direct
-   image preserves quasi-coherent cohomology. Apply triangulated closure of supported
-   quasi-coherent objects with support set equal to the whole scheme to complete the
-   unit to a distinguished triangle whose cone is quasi-coherent.
-3. Full faithfulness of derived direct image makes the derived counit invertible.
-   The triangle identity makes restriction of the unit invertible. Exact restriction
-   preserves distinguished triangles, so the restricted cone is zero. Commutation
-   with cohomology and the open-immersion stalk isomorphism show that every stalk of
-   every cohomology sheaf of the cone vanishes at a point of V.
-4. If K is bounded below, exact restriction preserves its lower bound. Compatibility
-   of unbounded and bounded-below right derived functors shows that its derived direct
-   image is bounded below. The bounded-below subcategory is triangulated, so the cone
-   is bounded below as well. -/
+bounded below whenever the first vertex is bounded below. -/
 theorem openRestriction_support_triangle (Y : Scheme.{u})
     [CompactSpace Y] [QuasiSeparatedSpace Y] (V : Y.Opens)
     (hV : IsCompact (V : Set Y))

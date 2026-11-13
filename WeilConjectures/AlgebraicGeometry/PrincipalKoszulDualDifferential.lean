@@ -7,9 +7,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.PrincipalKoszulDualTerms
 import all WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 
-/-! # The nonzero singleton dual differential
+/-!
+# The nonzero singleton dual differential
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E.
+## References
+
+* Stacks Project, Tag 0A0E, <https://stacks.math.columbia.edu/tag/0A0E>
 -/
 
 @[expose] public noncomputable section
@@ -181,21 +184,8 @@ private theorem dualDifferential (m : ℕ) :
   erw [← Category.assoc, ← ψ.hom.comm (-1) 0, Category.assoc, hd]
   simp only [Category.assoc]
 
-/-- The explicit rank-one dual identification respects the sole nonzero differential.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, dual positive Koszul complex.
-
-Proof: remove the right tensor unit by its chain isomorphism. Project Hom into R[0]
-to source degrees 1 and 0. The product differential formula leaves
--(-1)^(-1) times precomposition by a^(m+1), so the sign is +1. Transport the two
-rank-one terms by doubleXIso and evaluate at one. For a local scalar r, precomposing
-multiplication by a^(m+1) sends the functional with value r at one to the functional
-with value a^(m+1)r at one. This equals r a^(m+1) by commutativity. The cone differential,
-projected from its shifted source to its target, is the single chain map for the
-same scalar. Its other matrix entries vanish. Induction identifies endoPow with
-categorical powers. Conjugating these two scalar identities by the explicitly defined
-term isomorphisms gives the displayed equality. There is no regularity assumption;
-zero and invertible a and the zero ring satisfy exactly the same scalar computation. -/
+/-- The explicit rank-one dual identification respects the sole nonzero differential
+(Stacks, Tag 0A0E). -/
 theorem finiteDualTerm_nonzero_differential (m : ℕ) :
     (finiteDualTerm R a m (-1)).hom ≫
         ((ringedKoszulDualTower R 1

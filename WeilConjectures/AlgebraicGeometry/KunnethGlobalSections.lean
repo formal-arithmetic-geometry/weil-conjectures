@@ -12,9 +12,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 /-!
 # Canonical Künneth maps in module-valued global sections
 
-Source: Stacks Project, Tag 0F1E,
-unit sk-prop-sf-kunneth-ordinary.
-
 The external product is the existing `kunnethMap`, transported by the canonical
 constant-sheaf equivalence over a separably closed point and the Leray comparisons.
 All comparisons below have explicit data; no isomorphism is chosen from `Nonempty`.
@@ -24,6 +21,10 @@ All comparisons below have explicit data; no isomorphism is chosen from `Nonempt
 - `pointGlobalSectionsTensorIso`: tensor comparison for evaluation at the base point.
 - `kunnethGlobalSectionsMap`: the general-base `kunnethMap` in module-valued cohomology.
 - `constantKunnethGlobalSectionsMap`: its constant-first-factor and unit normalization.
+
+## References
+
+* Stacks Project, Tag 0F1E.
 -/
 
 @[expose] public section
@@ -37,11 +38,9 @@ namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
   {k : Type u} [Field k] [IsSepClosed k]
 
-/-- The canonical tensor comparison for global sections
-over a separably closed point. Source: Stacks Project, Tag 0F1E, read through the
-constant-sheaf equivalence. It is the tensor comparison of the derived constant functor,
-conjugated by its unit and counit and the exact-global-sections comparison.
--/
+/-- The canonical tensor comparison for global sections over a separably closed point
+(Stacks, Tag 0F1E). It is the tensor comparison of the derived constant functor,
+conjugated by its unit and counit and the exact-global-sections comparison. -/
 noncomputable def pointGlobalSectionsTensorIso
     (C D : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ))) :
@@ -70,12 +69,10 @@ noncomputable def pointGlobalSectionsTensorIso
       ((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).mapIso (e D)
   (e' (R.obj C ⊗ R.obj D)).symm ≪≫ R.mapIso i
 
-/-- The canonical external product in module-valued
-global sections. Source: Stacks Project, Tag 0F1E, canonical adjoint construction.
+/-- The canonical external product in module-valued global sections (Stacks, Tag 0F1E).
 First use the inverse Leray maps, then the canonical tensor comparison at the point,
 then apply global sections to the existing adjunction mate `kunnethMap`, and finally
-use Leray for the diagonal. No properness or boundedness is needed to define this map.
--/
+use Leray for the diagonal. No properness or boundedness is needed to define this map. -/
 noncomputable def kunnethGlobalSectionsMap
     {X Y Z : Scheme.{u}} (p : Z ⟶ X) (q : Z ⟶ Y)
     (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))

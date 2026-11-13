@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 /-!
 # Restriction of locally quasi-finite morphisms to open subschemes
 
-Source: Stacks Project, Morphisms of Schemes, Tags 01TD and 01TH (4), as invoked in
-Tag 03JA.
+## References
+
+* Stacks Project, Morphisms of Schemes, Tags 01TD and 01TH, as invoked in Tag 03JA.
 -/
 
 @[expose] public section
@@ -29,27 +30,10 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 /-- Restricting a locally quasi-finite morphism to open subschemes preserves local
 quasi-finiteness in the Stacks sense, including the finite-type requirement.
-Source: Stacks Project, Morphisms of Schemes, Tags 01TD and 01TH (4), as used in Tag 03JA.
+(Stacks, Tags 01TD, 01TH, 03JA)
 
-The open immersions are `U.ι` and `V.ι`. The canonical restriction `f.resLE V U e` satisfies
-`f.resLE V U e ≫ V.ι = U.ι ≫ f` by `resLE_comp_ι`; uniqueness follows since `V.ι` is mono.
-
-Proof:
-1. By `locallyOfFiniteType_of_isLocallyQuasiFinite`, `f` is locally of finite type;
-   Mathlib's restriction instance supplies the same property for `f.resLE V U e`.
-2. For a point `x` of `U`, `quasiFiniteAtPoint_isolated_in_fiber` gives isolation of
-   `U.ι x` in its fibre under `f`. Mathlib's `quasiFiniteAt_iff_isOpen_singleton_asFiber`
-   turns this into the stalk-map predicate `f.QuasiFiniteAt (U.ι x)`.
-3. Transfer this predicate across the two open immersions using
-   `quasiFiniteAt_comp_iff`, `resLE_comp_ι`, and
-   `quasiFiniteAt_comp_iff_of_isOpenImmersion`. The same fibre-isolation criterion,
-   now for the restricted locally finite type morphism, gives isolation at `x`.
-4. Choose an affine target neighbourhood of the image of `x` and an affine source
-   neighbourhood of `x` inside its inverse image using the affine-open basis (01IT).
-   Apply `isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber` to the restricted morphism
-   and these opens. Its finite-type and quasi-finiteness witnesses give exactly
-   `IsQuasiFiniteAtPoint (f.resLE V U e) x` by Definition 01TD.
-5. Since `x` was arbitrary, Definition 01TD gives local quasi-finiteness. -/
+The open immersions are `U.ι` and `V.ι`; the canonical restriction `f.resLE V U e`
+satisfies `f.resLE V U e ≫ V.ι = U.ι ≫ f`. -/
 theorem isLocallyQuasiFinite_resLE {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S)
     (hf : IsLocallyQuasiFinite f) (U : X.Opens) (V : S.Opens) (e : U ≤ f ⁻¹ᵁ V) :
     IsLocallyQuasiFinite (f.resLE V U e) := by

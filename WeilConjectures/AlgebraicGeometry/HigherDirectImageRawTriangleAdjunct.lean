@@ -64,15 +64,7 @@ private theorem adjunct_transition
 
 /-- Passing raw triangle pullback through the derived adjunction gives the mate
 of the pullback-composition comparison at the shifted coefficient objects.
-
-Proof: invert the pullback/single-functor comparison from upperStarPlusComp_single
-and compose it with the raw pullback formula. Naturality of the left-adjoint
-comparison moves an adjunct through this composite. Applying the inverse
-adjunction equivalence reduces the equality to naturality and the counit identity.
-This calculation precedes applying any homology functor, so it is only the
-adjunction part of the raw-transition/toHom comparison.
-Source: Stacks Project Tags 03Q8 and 09Z1; upperStarPlusComp_single and Mathlib
-Adjunction.homEquiv_naturality_left_symm. -/
+(Stacks, Tags 03Q8 and 09Z1) -/
 theorem higherDirectImageRawTrianglePullback_adjunct
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (q : ℤ)

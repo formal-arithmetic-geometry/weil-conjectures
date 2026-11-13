@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-! # Transition functions between section trivializations
 
-Source: Stacks Project, Modules, Lemma 01CY; Properties, proofs of 01PV and 01PY.
+## References
+
+* [Stacks, Tag 01CY], [Stacks, Tag 01PV], [Stacks, Tag 01PY]
 -/
 
 @[expose] public section
@@ -23,20 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 
 /-- Two nonvanishing section opens of the same invertible module intersect in a basic
-open; their transition coefficients multiply to one on the intersection.
-
-Source: Stacks Project, Modules, Lemma 01CY; Properties, proofs of Lemmas 01PV and 01PY.
-
-Proof: s trivializes M on U and t trivializes M on V by Lemma 01CY. Thus there are
-unique coefficients f in O(U) and g in O(V) with t|U = f*s|U and s|V = g*t|V.
-For a point x in U, the value of s is a nonzero basis vector of the one-dimensional
-residue fibre. The value of t is f(x) times this basis, so it is nonzero exactly when
-f(x) is nonzero. Outside U, neither U intersect V nor the basic open of f has points.
-Consequently U intersect V equals the basic open of f. Restricting both coefficient
-equations to U intersect V and substituting gives t = f*g*t. Since t trivializes M
-there, uniqueness of its coefficient gives f*g = 1. This also covers an empty
-intersection, whose section ring is the zero ring.
--/
+open; their transition coefficients multiply to one on the intersection. -/
 theorem exists_nonvanishing_transition_functions {X : Scheme.{u}} (M : X.Modules)
     [M.IsInvertible] (s t : M.val.presheaf.obj (Opposite.op ⊤))
     (U V : X.Opens) (hU : (U : Set X) = nonvanishingLocus M s)

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenExponentOneUnit
 
 /-! # Structure evaluation with a single Koszul normalization
 
-Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
+## References
+
+* Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
 -/
 
 @[expose] public section
@@ -22,26 +24,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Natural evaluation, normalized on the structure object by the exponent-one class.
-Source: Stacks Project, Tag 09M1 (evaluation at one); Tag 08DC, equation 36.9.4.1;
-Tag 08D1 (signed fraction comparison).
-
-Proof: Identify the extended tilde of A[0], after restriction and the over-equivalence,
-with the degree-zero structure sheaf on U. Apply the structure-sheaf Hom/global-sections
-comparison, restrict scalars along A to the ring of sections of U, and compare the
-composite derived functor with derived affineOpenSections. These comparisons are
-natural, so evaluation commutes with every derived postcomposition. For the one
-normalization required here, use the exponent-one tail and compose its identity class
-with its augmentation. On D(f_j), contraction sends the generator to 1/f_j and the
-augmentation multiplies by f_j, yielding 1. The higher intersection terms disappear
-in the structure complex, which is concentrated in degree zero; the surviving row has
-p=q=0 and sign +1. Thus the resulting Cech cycle is the restriction of 1. The canonical
-Cech-to-derived-sections comparison sends it to evaluation of the structure identity.
-This proves the displayed equality at the structure object, without asserting a
-normalization at any other exponent or at any tail object. For an empty cover the
-structure object and section group on U are zero, so the same equality holds; the zero
-ring is included. All localization universes are handled by their canonical comparison
-isos, not by identifying different chosen derived categories. -/
+/-- Natural evaluation, normalized on the structure object by the exponent-one class. -/
 theorem koszulOpen_structure_evaluation
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

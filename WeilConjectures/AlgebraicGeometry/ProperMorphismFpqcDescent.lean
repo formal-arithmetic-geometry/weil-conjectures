@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Proper morphisms descend along fpqc covering families
 
-Source: Stacks Project, Descent, Tag 02L1, `lemma-descending-property-proper`.
+## References
+
+* [Stacks Project, Tag 02L1](https://stacks.math.columbia.edu/tag/02L1)
 -/
 
 @[expose] public section
@@ -23,19 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Properness descends along an fpqc covering family.
-
-Source: Stacks Project, Descent, Tag 02L1, `lemma-descending-property-proper`.
-
-Proof: properness is Zariski local on the target and stable under base change.
-The source-library instance
-`isProper_descendsAlong_surjective_inf_flat_inf_quasiCompact` supplies descent
-along a single surjective flat quasi-compact morphism. Generate the fpqc covering
-sieve from the given covering presieve and apply
-`Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology` to the canonical pullback
-squares and the proper second projections. This works for arbitrary index universes;
-the generic descent theorem also handles the empty cover of the empty scheme.
--/
+/-- Properness descends along an fpqc covering family (Stacks, Tag 02L1). -/
 theorem isProper_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)

@@ -11,12 +11,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Pseudo-coherent complexes on schemes
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CB, and Derived Categories of Schemes,
-Tags 08E5 and 08E7.
-
 We use the scheme-local characterization by bounded-above complexes of finite free modules.
 Restriction is to the localized site of an open, using the same module category and derived
 category as `schemeDerivedCategory`.
+
+## References
+
+* Stacks Project, Tags 08CB, 08E5 and 08E7
 -/
 
 @[expose] public section

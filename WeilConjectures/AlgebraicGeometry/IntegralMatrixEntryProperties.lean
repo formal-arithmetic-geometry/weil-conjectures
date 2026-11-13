@@ -43,21 +43,7 @@ private lemma continuousIntegral_divides (ℓ : ℕ) [Fact ℓ.Prime]
   exact div_mul_cancel₀ _ (hp x)
 
 /-- A nowhere-zero dominating matrix entry cancels, is rationally invertible, and
-integrally divides every entry of its row.
-
-Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1);
-continuous-function pivot argument, division and cancellation step.
-
-Proof: conjugate each regular-module endomorphism by the supplied ring realization.
-Linearity on sections makes it multiplication by its value on 1; naturality makes this
-value the restriction of the global continuous function. A nowhere-zero multiplier is
-injective on every site object, hence monic as a sheaf and a module map. Over E its
-continuous reciprocal is an inverse, and coefficient comparison commutes with extension
-of scalars on regular modules. For every row entry, divide its E-valued function by the
-pivot. The quotient is continuous and has norm at most one by dominance, so it is an
-actual continuous O_E-valued function. Multiplication by this quotient is a regular
-endomorphism q; pointwise multiplication proves q followed by the pivot is the row entry.
-No rational cokernel or constant-rank hypothesis is used. -/
+integrally divides every entry of its row. (Bhatt--Scholze, Section 6.8) -/
 theorem integralMatrix_entry_properties (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})
     (e : condensedRingObj (integralCoeff ℓ E) X ⟶

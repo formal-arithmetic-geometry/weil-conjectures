@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 /-! # Compatible finite-descent sections have preimages on geometric stalks
 
-Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
+## References
+
+* Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
 -/
 
 @[expose] public section
@@ -71,25 +73,9 @@ private theorem descent_coordinate
   erw [hpre]
   exact hg U z s
 
-/-- Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
-
-Proof: Fix a geometric point x. Its lift set P along f is nonempty: choose a
-point above x and use finite geometric-point lifting with the same algebraically
-closed field. Finite-pushforward stalks identify the stalk of f_*f⁻¹G with the
-product of the inverse-image stalks indexed by P. The germ-compatible inverse-image
-bijections identify each factor with G_x, and identify the unit with the diagonal.
-The same construction for h = p₁ ≫ f identifies its stalk with the product indexed
-by P × P, using the pullback universal property. The composition-unit formula shows
-that the two comparison maps on germs act by the two projections P × P → P.
-To check this formula for arbitrary inverse-image germs, use the inverse-image
-bijection to represent them as germs of unit-pulled-back sections; on these germs
-it is exactly the composition-unit formula. Compatibility of s' therefore says all
-coordinates of its germ are equal. Choose any lift in P and take its coordinate a.
-The diagonal formula and injectivity of the finite-pushforward product map imply
-that the image of a under the stalk unit is the germ of s'. This statement stops at
-the stalk: representing a and realizing germ equality on a refinement, and proving
-the resulting sieve covers, are separate steps. If X is empty there is no geometric
-point x, so the assertion is vacuous. -/
+/-- If the two comparison pullbacks of a section `s'` over `X'` agree, then at every geometric
+point the germ of `s'` is the image under the unit of a germ of `G`.
+(Stacks, Remark 09Z3 and Lemma 09Z2.) -/
 theorem finiteSurjectiveSetDescent_compatible_germ_lifts
     {X X' : Scheme.{u}} (f : X' ⟶ X) [IsFinite f] [Surjective f]
     (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :

@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEva
 /-!
 # Geometry of the qcqs finite-cover pro-etale subsite
 
-Source: Stacks Project, Tags 09A1, 098M, 098Z, 0F4P, and Hypercoverings Tag 0DB1.
+## References
+
+* Stacks Project, Tags 09A1, 098M, 098Z, 0F4P, and Hypercoverings Tag 0DB1.
 -/
 
 @[expose] public section
@@ -26,25 +28,7 @@ set_option linter.unusedVariables false in
 /-- The qcqs finite-cover subsite has scheme fibre products and slice finite limits.
 Finite disjoint unions are qcqs, and affine for affine summands. Representable sheaves
 carry these unions to coproducts, and sections of every sheaf carry them to products,
-naturally in the sheaf, including the empty family.
-
-Source: Stacks Project, Tags 09A1 (qcqs subsite paragraph), 098M, 098Z, 0F4P,
-and Hypercoverings Tag 0DB1.
-
-Proof:
-1. Apply lem-weil-pbc-proetale-qcqs-site-limits for the finite-cover site axioms,
-   fibre products computed in schemes, preservation of fibre products and covers,
-   slice finite limits, and stability under adjoining finitely many arrows.
-   The full slice inclusion preserves these limits by the same scheme universal
-   properties. Every affine scheme is quasi-compact and quasi-separated.
-2. Apply lem-weil-pbc-proetale-subcanonical (Tag 098Z): every representable is a sheaf.
-3. Apply lem-weil-pbc-proetale-finite-coproduct-evaluation to each finite qcqs family.
-   Its scheme coproduct is qcqs and affine when the summands are affine, hence lies
-   in the full qcqs subcategory. The coproduct comparison of representable sheaves
-   is an isomorphism. Restriction on sections is bijective, naturally in the sheaf;
-   for the empty family its source is the empty scheme and its sections are unique.
-4. Combine these conclusions, retaining the common coprojections in the scheme,
-   representable-sheaf and section comparisons. -/
+naturally in the sheaf, including the empty family. -/
 theorem qcqs_finite_family_geometry (X : Scheme.{u}) :
     (∀ V : X.ProEt, IsAffine V.left →
       CompactSpace V.left ∧ QuasiSeparatedSpace V.left) ∧

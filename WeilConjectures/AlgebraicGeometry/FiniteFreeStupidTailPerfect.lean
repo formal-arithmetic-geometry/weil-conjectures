@@ -9,10 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 
-/-! # Perfectness of finite-free stupid tails
+/-!
+# Perfectness of finite-free stupid tails
 
-Source: Stacks Project, Tag 08EG, finite-free tail in the proof of Lemma 36.13.6;
-Definition 08C4.
+## References
+
+* Stacks Project, Tag 08EG (finite-free tail in the proof of Lemma 36.13.6), Definition 08C4
 -/
 
 @[expose] public section
@@ -28,17 +30,8 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- Cutting off a bounded-above finite-free sheaf complex below any integer gives a
-perfect derived object. Affineness is unnecessary for this part of the construction.
-Source: Stacks Project, Tag 08EG, bounded finite-free tail; Definition 08C4.
-
-Proof: The stupid tail is zero below r, and above the supplied upper bound by the
-termwise truncation isomorphisms. Its nonzero terms remain finite free. On the top
-open, restriction preserves zero objects and finite coproducts of the unit sheaf,
-so the restricted complex is strictly perfect with these same bounds. The derived
-restriction comparison identifies its derived image with the restricted object.
-In degrees below r use the zero-rank free sheaf and zero maps as a retract. This
-also proves the assertion for the empty scheme and when r exceeds the upper bound.
--/
+perfect derived object. Affineness is unnecessary for this part of the construction
+(Stacks, Tag 08EG). -/
 theorem finiteFree_stupidTail_isPerfect
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

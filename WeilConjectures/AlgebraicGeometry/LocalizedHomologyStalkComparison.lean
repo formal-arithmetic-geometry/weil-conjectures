@@ -14,7 +14,11 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Exact localized stalks and their derived homology comparison
 
-Source: Stacks Project, Tags 01AF and 01AG, and Tag 0098 (restriction of stalks).
+## References
+
+* [Stacks, Tag 01AF](https://stacks.math.columbia.edu/tag/01AF)
+* [Stacks, Tag 01AG](https://stacks.math.columbia.edu/tag/01AG)
+* [Stacks, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -27,7 +31,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 namespace AlgebraicGeometry
 
 /-- The additive stalk functor on the localized module site, through the canonical
-module equivalence with the open subscheme. Source: Stacks, Tag 0098. -/
+module equivalence with the open subscheme. (Stacks, Tag 0098) -/
 noncomputable def localizedModuleStalk (S : Scheme.{u}) (U : S.Opens) (s : U.toScheme) :
     SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U) ⥤ AddCommGrpCat.{u} :=
   (Scheme.Modules.overEquiv U).functor ⋙
@@ -60,15 +64,7 @@ private instance schemeStalk_preservesFiniteColimits (S : Scheme.{u}) (s : S) :
   exact comp_preservesFiniteColimits T F
 
 /-- Localized stalks are exact, and restriction preserves every derived homology stalk
-naturally in the derived object. Source: Stacks, Tags 01AF, 01AG, and 0098.
-
-Proof: Forget a module sheaf to its underlying abelian sheaf, then take its stalk.
-The first functor preserves finite limits and colimits; stalks of abelian sheaves
-are exact. Compose with the exact equivalence from the localized site to the open
-subscheme. This proves exactness of the displayed concrete functor. An exact
-restriction commutes naturally with derived homology. Follow that comparison by
-the over-site equivalence and the restriction-stalk natural isomorphism. Their
-composite is the asserted natural isomorphism in each integer degree. -/
+naturally in the derived object. (Stacks, Tags 01AF, 01AG, 0098) -/
 theorem localized_homology_stalk_comparison (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens, HasDerivedCategory.{w}

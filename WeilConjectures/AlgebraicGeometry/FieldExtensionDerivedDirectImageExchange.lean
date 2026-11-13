@@ -19,7 +19,9 @@ import Mathlib.FieldTheory.SeparablyGenerated
 
 /-! # Derived relative exchange for a torsion sheaf under field extension
 
-Source: Stacks Project, Tag 0F1C, applied to a sheaf in degree zero.
+## References
+
+* [Stacks Project, Tag 0F1C](https://stacks.math.columbia.edu/tag/0F1C)
 -/
 
 @[expose] public section
@@ -32,21 +34,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- Field extension commutes with the derived direct image of a sheaf annihilated by
 an integer invertible in the base field. This statement concerns arbitrary sheaves,
-and does not assert acyclicity of the pullback of an injective module sheaf.
-Source: Stacks Project, Lemma 59.90.1, Tag 0F1C.
-
-Proof: Because k is algebraically closed it is perfect. Every finitely generated
-intermediate field is separably generated over k by the perfect-field transcendence
-basis theorem. Thus K/k is a separable extension. Write K as the filtered colimit of
-its finitely generated smooth k-subalgebras (Tag 07BV). Construct their spectra as a
-cofiltered diagram over Spec k, and use the actual algebra inclusions for its
-transition maps and cone. Spec sends the colimit cocone to a limit cone. Each stage
-is smooth over k, and all transitions and structure maps are affine, hence qcqs.
-Apply smooth-stage exchange and affine inverse-limit continuity to this diagram
-and F in degree zero (Tag 0F09). Exact inverse image commutes with the degree-zero
-single complex. This gives the displayed isomorphism. K need not be algebraically
-closed. The zero sheaf and empty scheme give zero objects. If n = 1, F is zero;
-n = 0 is excluded by hn. -/
+and does not assert acyclicity of the pullback of an injective module sheaf
+(Stacks, Tag 0F1C). -/
 theorem nonempty_fieldExtension_derivedDirectImage_single_iso
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [Algebra k K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]

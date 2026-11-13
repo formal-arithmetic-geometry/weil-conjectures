@@ -11,8 +11,10 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Invariance of evaluation mates under a change of pullback counit
 
-Source: Stacks Project, cohomology.tex, Tags 08I3 and 08I4, evaluation-mate construction;
-Tag 06YJ, uniqueness of derived functors with their counits.
+## References
+
+* Stacks Project, Tags 08I3 and 08I4 (evaluation mate), Tag 06YJ (uniqueness of derived
+  functors with their counits).
 -/
 
 @[expose] public section
@@ -24,16 +26,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry
 
 /-- Simultaneously transporting the pullback adjunction and its tensor comparison
-leaves the internal-Hom evaluation mate unchanged.
-Source: Stacks Project, cohomology.tex, Tags 08I3, 08I4 and 06YJ.
-
-Proof: the transported Hom equivalence precomposes with the comparison iso; its
-inverse and its counit precompose with the inverse iso. Naturality of tensor-Hom
-moves the inverse iso through evaluation. Expand the transported tensor comparison.
-Its input inverse cancels the outer Hom-equivalence comparison. On the two output
-factors, the comparison cancels the inverse from evaluation and from the counit,
-respectively. Tensor composition and the iso identities leave the original mate.
-This works for identity comparisons, zero objects, and arbitrary counit twists. -/
+leaves the internal-Hom evaluation mate unchanged. -/
 theorem internalHomMate_counit_transport
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [MonoidalCategory C] [MonoidalCategory D]

@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 import all WeilConjectures.AlgebraicGeometry.OpenPinnedSourceCounitTriangle
 
 /-! # Counit comparison for one open leg
-Source: Stacks Project, Tags 08DW and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08DW and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -77,8 +81,7 @@ variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
   [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
 
-/-- Termwise comparison for restricting the target of a composite tensor pullback.
-Source: Stacks Project, Tags 08DW and 0D5S. -/
+/-- Termwise comparison for restricting the target of a composite tensor pullback. -/
 def openPinnedHomotopyTargetCompositionIso
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U' : X'.Opens) :
     (Scheme.Modules.tensorPullback (U'.ι ≫ k)).mapHomotopyCategory (.up ℤ) ≅
@@ -99,16 +102,7 @@ attribute [local implicit_reducible] DerivedCategory
 attribute [local irreducible] singleComplexOpenPullbackIso openPinnedTensorOpenIso
 
 -- The four factorization equations compare several selected localization functors.
-/-- The target-open leg of the derived counit composition calculation.
-Source: Stacks Project, Tags 08DW and 0D5S.
-Proof: naturality of the open-pullback comparison moves the counit for k
-past its component. The factorization equation of leftDerivedUnique identifies
-that comparison followed by the exact restriction factor with the counit for
-U' inclusion followed by the localized underived open tensor comparison.
-The selected composition comparison factors the successive counits through
-its composite counit. Combine these two equations and functoriality of Qh.
-This uses no source open or commuting square, and applies to every complex,
-including zero complexes and the empty open. -/
+/-- The target-open leg of the derived counit composition calculation. -/
 theorem open_pinned_target_counit_triangle
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U' : X'.Opens)
     (P : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :

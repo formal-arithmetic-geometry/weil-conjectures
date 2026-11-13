@@ -22,7 +22,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The affine restriction dictionary for formal functions
 
-Source: Stacks Project, Theorem 02OC and Lemma 088B, affine reduction.
+## References
+
+* Stacks Project, Tags 02OC and 088B
 -/
 
 @[expose] public section
@@ -75,25 +77,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The affine chart identifies the original sections and quotient system with the
 sections and quotient system of the restricted proper morphism to a spectrum.
 This is a finite-level dictionary; it asserts no completion or limit isomorphism.
-Source: Stacks Project, Theorem 02OC and Lemma 088B; Schemes, Tags 01I8 and 01IC.
-
-Proof: Let V = f^(-1)U and g = (f restricted to U) followed by U = Spec Gamma(Y,U).
-The restriction square is cartesian, so properness of f gives properness of g.
-Restriction to V preserves coherence of F. The affine ideal correspondence identifies
-J restricted to U with the ideal sheaf associated with J(U). Functoriality of comap,
-and the restriction square, then give the displayed equality of ideals on V.
-Pushforward sections over U are F sections over V. Global sections of F restricted to
-V are the same sections via the restriction top isomorphism. The affine chart formula
-for g.appTop identifies their scalar action with the original Gamma(Y,U)-action;
-this gives a. Restriction preserves ideal products and powers and preserves cokernels.
-The cokernel comparisons give the level maps b_n from the restricted quotient sections
-to the original quotient sections. Their composites with quotient projections are the
-restriction of those original projections, so these maps give the displayed equation.
-Cancel the quotient epimorphisms to check every transition square, giving b as a natural
-isomorphism. These steps use only restriction and finite-level quotients; they do not
-use the theorem on formal functions. Empty U, F=0, and zero or unit J satisfy the same
-restriction and cokernel universal properties.
--/
+(Stacks, Theorem 02OC and Lemma 088B; Tags 01I8 and 01IC.) -/
 theorem formalFunctions_affine_restriction_dictionary
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (F : CoherentModules X)

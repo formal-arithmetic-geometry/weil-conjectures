@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Scalar extension of module-valued sheaves
 
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section

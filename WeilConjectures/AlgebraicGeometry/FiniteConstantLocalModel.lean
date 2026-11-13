@@ -23,8 +23,6 @@ import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 /-!
 # Finite constant local models for condensed coefficients
 
-md`.
-
 Scalars are encoded as a ring object of abelian groups, and scalar modules as internal
 modules in abelian groups. These are precisely ordinary modules over the scalar ring.
 The constant sheaf on the profinite point is formed before inverse image to a scheme;
@@ -88,9 +86,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 abelian group is literally evaluation at *. -/
 noncomputable abbrev scalarRingObj : Ab.{u + 1} := scalarSections.obj Λ
 
-/-- The scalar ring is commutative.
-Proof: evaluation's multiplication is induced from the sheaf tensor comparison; the
-symmetry and the commutativity of Λ give commutativity on sections. -/
+/-- The scalar ring is commutative. -/
 theorem scalarRingObj_comm : IsCommMonObj (scalarRingObj Λ) := by
   let := scalarSections_laxBraided.{u}
   exact Functor.isCommMonObj_obj (F := scalarSections.{u}) (M := Λ)
@@ -118,8 +114,7 @@ noncomputable def scalarCoefficientHom (X : Scheme.{u}) :
     ((constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
       Profinite.isTerminalPUnit).counit.app Λ)
 
-/-- The scalar map preserves multiplication and unit.  Proof: the constant-sheaf adjunction is monoidal, so its counit is a
-ring morphism, and the monoidal inverse image preserves ring morphisms. -/
+/-- The scalar map preserves multiplication and unit. -/
 theorem scalarCoefficientHom_isMonHom (X : Scheme.{u}) :
     IsMonHom (scalarCoefficientHom Λ X) := by
   let _ := ‹IsCommMonObj Λ›
@@ -147,8 +142,7 @@ theorem scalarCoefficientHom_isMonHom (X : Scheme.{u}) :
 
 attribute [instance] scalarCoefficientHom_isMonHom
 
-/-- The constant scalar ring on X is commutative.  Proof: the constant presheaf functor, sheafification and inverse image are
-symmetric monoidal and transport commutative ring objects to commutative ring objects. -/
+/-- The constant scalar ring on `X` is commutative. -/
 theorem scalarConstant_comm (X : Scheme.{u}) :
     IsCommMonObj ((scalarConstant X).obj (scalarRingObj Λ)) := by
   dsimp only [scalarConstant_monoidal, scalarConstant]
@@ -428,13 +422,7 @@ private theorem pointMatrix_reconstruct {m n : ℕ}
   simpa only [Category.assoc] using Mod.one_comp_regularLift (A := Λ) _ _
 
 /-- Constant finite scalar models and finite scalar matrices are equivalent on the
-same given cover.
-Proof: the constant-sheaf adjunction and extension/restriction adjunction identify maps
-from E_U(P) to N with scalar-linear maps P → N(U). For P = R^k this identifies E_U(P)
-with Λ_U^k, preserving each scalar matrix entry. For a scalar matrix A, maps from
-E_U(coker A) to N are exactly maps from Λ_U^n killing A, so E_U(coker A) is its cokernel;
-no flatness is used. Apply a finite presentation of each P_i for the forward direction.
-Conversely take P_i to be the cokernel of the given scalar matrix over R. -/
+same given cover. -/
 theorem finiteConstantLocalModelOnCover_iff_scalarMatrix {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X) :
@@ -466,16 +454,8 @@ theorem finiteConstantLocalModelOnCover_iff_scalarMatrix {X : Scheme.{u}}
     rw [← scalarMatrix_map]
     simp only [f, E, Iso.hom_inv_id_assoc]
 
-/-- The existing finite constant local model predicate is exactly the scalar-extension
-formulation.
-Proof: a finite presentation by regular condensed modules is a finite scalar matrix,
-since maps from the regular module are maps from the integer unit, hence sections
-at the terminal profinite set. Its cokernel is extension of the corresponding
-finitely presented scalar module by the adjunction and cokernel calculation of
-Steps 1–3. Conversely present a scalar module by a finite matrix and take the
-same matrix of regular condensed modules before inverse image. Inverse image and
-extension of scalars preserve these cokernels. The same cover and its members
-are used in both directions. -/
+/-- The finite constant local model predicate is exactly the scalar-extension
+formulation. -/
 theorem finiteConstantLocalModel_iff_exists_cover {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     HasFiniteConstantLocalModel Λ X M ↔

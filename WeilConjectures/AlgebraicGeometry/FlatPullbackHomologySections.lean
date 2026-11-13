@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.FlatPullbackResolutionRawMateSections
 
 /-! # The open cohomology map of a fixed resolution lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* Stacks Project, Tags 01FB and 01E4
 -/
 
 @[expose] public section
@@ -76,20 +78,8 @@ private theorem adjoint_transport
 
 set_option maxHeartbeats 160000 in
 -- Resolution and section comparisons require comparing the composite functor interfaces.
-/-- The homology mate of q acts on resolution classes through its open cohomology map.
-Source: Stacks Project, Cohomology, Tags 02N7 and 01E4.
-
-Proof: Represent the source section-complex homology class by a cycle s. The unit
-followed by pushforward of the termwise adjoint c of q equals q, so it sends s to
-q(s). Exactness of tensor pullback identifies the homology comparison in beta with
-this cycle-class calculation. The sheafification unit theta is natural for this
-calculation, giving equality of the associated cohomology-sheaf sections. In the
-open map the inverse target resolution/section isomorphism converts H(q)(s) into
-a target cohomology class. Applying targetClass cancels that inverse and applies
-theta, followed by the inverse target derived-image comparison. The inverse source
-derived-image comparison in sourceClass likewise cancels the source comparison
-in beta by adjunction naturality. These cancellations give the displayed formula.
-This argument does not use the augmentation of t or a comparison with an h-map. -/
+/-- The homology mate of q acts on resolution classes through its open cohomology map
+(Stacks, Tags 02N7 and 01E4). -/
 theorem flatBaseChangeResolutionBeta_openMap_sections {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}

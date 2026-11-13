@@ -12,9 +12,11 @@ public import WeilConjectures.RingTheory.CoverModuleExact
 import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-!
-# Finite localization data of twist sections
+# Overlap compatibility of finite localization data of twist sections
 
-Source: Stacks Project, Tags 01MN and 01M7.
+## References
+
+* Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
@@ -23,12 +25,7 @@ universe v
 open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
 
-/-- Detection after a further principal localization.
-Source: Stacks Project, Tag 01M7, basic-open localization argument.
-Write z=a/d with d a power of f. On D₊(f*g.num), f and g.num avoid the prime,
-so g is a unit and a vanishes by the hypothesis. Basic-open localization detection
-then gives (f*g.num)^N*a=0 for some N. In A_f, cancel the units coming from f,
-d and g.den to obtain g^N*z=0. This is exactly zero in the module localization. -/
+/-- Detection after a further principal localization (Stacks, Tag 01M7). -/
 private theorem principal_localization_zero
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (f : A) (b : ℕ)
@@ -108,15 +105,7 @@ private theorem principal_localization_zero
   rw [mul_zero, HomogeneousLocalization.val_pow]
   exact hg
 
-/-- Pointwise overlap equality for two fixed chart indices.
-Source: Stacks Project, Tag 01M7, the local fraction comparison on a basic overlap.
-
-Clear powers of the two chart denominators to write d*t_i=x/1 and e*t_j=y/1.
-At each prime where g_i*g_j is invertible, scalar compatibility and the common
-section value imply F(e*x-d*y)=0. Apply principal_localization_zero to this cross
-numerator. The canonical lifts preserve x/1, y/1 and scalar multiplication;
-therefore d*e times their difference is zero. Both d and e act invertibly on the
-product localization, so their cancellation proves the asserted overlap equality. -/
+/-- Pointwise overlap equality for two fixed chart indices (Stacks, Tag 01M7). -/
 theorem twist_localOverlap_pointwise
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

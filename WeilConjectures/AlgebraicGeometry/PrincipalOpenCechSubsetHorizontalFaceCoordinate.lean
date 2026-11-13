@@ -9,9 +9,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 import Mathlib.Order.Interval.Finset.Fin
 
-/-! # One coordinate of the horizontal Čech differential
+/-!
+# One coordinate of the horizontal Čech differential
 
-Source: Stacks Project, Tags 08C1, 08C0, and 01FG.
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 08C0, <https://stacks.math.columbia.edu/tag/08C0>
+* Stacks Project, Tag 01FG, <https://stacks.math.columbia.edu/tag/01FG>
 -/
 
 @[expose] public section
@@ -252,21 +257,8 @@ private theorem transport_cast
   subst N
   rfl
 
-/-- The horizontal differential at one increasing target tuple.
-
-Source: Stacks Project, Tag 01FG, ordered-complex differential, and Tags 08C0 and 08C1.
-
-Proof: Expand the alternating differential at the increasing enumeration of S.
-Biject deleted positions with elements j of S. Deleting position j enumerates
-S.erase j, and the position equals the number of elements below j. A source
-singleton contributes only if that erased subset is S₀, since increasing
-embeddings with equal ranges agree. Naturality of overFunctorEquiv, restriction
-and the coefficient presheaf identifies the face map with restriction on the
-principal opens. The degree equality he and the cardinality assumption identify
-the coefficients; functoriality and proof irrelevance identify all transports.
-The integer sign action agrees with the action of (-1: A) to the same power.
-Summing the terms gives the displayed equality. Since S has cardinality at least
-two, each deletion is nonempty. For r=0 or r=1 no such target subset exists. -/
+/-- The horizontal differential at one increasing target tuple
+(Stacks, Tags 01FG, 08C0 and 08C1). -/
 theorem principalSubsetHorizontalFaceCoordinate
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :
