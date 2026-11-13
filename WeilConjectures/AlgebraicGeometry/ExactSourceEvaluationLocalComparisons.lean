@@ -48,7 +48,13 @@ private theorem descend_comparison_squares
     _ = (c.hom ≫ a.hom) ≫ E.map f := by
       simpa only [Category.assoc] using congrArg (fun t ↦ c.hom ≫ t) h₂
 
-set_option profiler true in
+private noncomputable def canonical_open_restriction_data (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens, HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    (K N : schemeDerivedCategory X) (U : X.Opens) :=
+  exists_canonicalEvaluation_open_restriction X U K N
+
 /-- The representative equation needs preservation of quasi-isomorphisms by Hom(P,-)
 and K-flatness of its ordinary dual, rather than finite freeness or invertibility
 of ordinary evaluation. The second complex is arbitrary.
@@ -119,7 +125,7 @@ theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
   let E := ec.mapDerivedCategory
   let R := (SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory
-  obtain ⟨c, d, hrestrict⟩ := exists_canonicalEvaluation_open_restriction X U K N
+  obtain ⟨c, d, hrestrict⟩ := canonical_open_restriction_data X K N U
   obtain ⟨aU, bU, hmodel⟩ := exists_exactSource_evaluation_open_models X U
     (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
     (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf
