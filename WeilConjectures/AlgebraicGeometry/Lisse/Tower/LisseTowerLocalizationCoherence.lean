@@ -431,6 +431,7 @@ theorem lisseTowerChainScalar_represents :
   · refine NatTrans.ext (funext fun X ↦ ?_)
     simp [lisseTowerChainScalarOrdinary]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 2000000 in
 -- Rewriting with the scalar squares compares large module sheaf types.
 /-- The two fixed pullback comparisons are compatible with the scalar squares. -/
