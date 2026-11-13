@@ -22,7 +22,6 @@ open CategoryTheory AlgebraicGeometry Opposite
 open scoped BigOperators TensorProduct
 namespace CategoryTheory
 
-set_option profiler true in
 /-- A single two-term localization factor preserves the positive ordered coordinates
 of an arbitrary nonnegative augmented complex with the tail's coordinates.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d), the induction
