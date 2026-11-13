@@ -106,6 +106,7 @@ include cB cA hε hU hκ hμ
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Paste the four model squares without unfolding localization constructions.
 /-- Paste four binary representative squares and the ordinary associativity equation.
 Source: Stacks 07A4 and 0FPT.
