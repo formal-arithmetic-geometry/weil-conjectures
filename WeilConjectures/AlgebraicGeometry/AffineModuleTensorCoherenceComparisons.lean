@@ -202,6 +202,11 @@ private theorem tensorComparisons_from_objectwise
       { app := fun F ↦ (adj₀).counit.app F
         naturality := by
           intro F F' k
+          change (tensorPullback f).map ((S).map ((R).map k)) ≫ _ = _
+          have hk : (S).map ((R).map k) = (pushforward f).map k := by
+            ext V m
+            rfl
+          rw [hk]
           exact (adj₀).counit.naturality k }
     obtain ⟨α, ha⟩ := naturalFactor (R ⋙ (S ⋙ tensorPullback f)) (R ⋙ H)
       (Functor.whiskerLeft R γ) δ hf

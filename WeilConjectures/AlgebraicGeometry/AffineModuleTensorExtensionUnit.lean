@@ -143,8 +143,10 @@ theorem affine_module_tensor_extensionUnit
       symm
       change SheafOfModules.changeOfRingsMap ε M i
         ((1 : U.sheaf.obj.obj V) ⊗ₜ[B.obj.obj V, (ε.hom.app V).hom] m) = _
-      simpa only [map_one] using
-        Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap ε M i) 1 m
+      refine (Classical.choose_spec
+        (SheafOfModules.exists_changeOfRingsMap ε M i) 1 m).trans ?_
+      simp only [map_one]
+      rfl
   let δ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ⟶ H :=
     { app := fun G ↦ ⟨q (P.obj G) ≫
         (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
