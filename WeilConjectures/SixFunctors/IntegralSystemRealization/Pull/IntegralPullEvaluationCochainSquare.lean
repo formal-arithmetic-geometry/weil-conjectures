@@ -52,6 +52,10 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
+private theorem integralPullEvaluationComplex_eq_ordinary {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (n : ℕ) : integralPullEvaluationComplex l E f n = ordinaryPullEvaluationComplex l E f n :=
+  rfl
+
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
@@ -104,7 +108,8 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
     (α' := ordinaryPullEvaluationComplex l E f n)
     (β' := ordinaryPullEvaluationComplex l E f (n + 1))
     (R := (normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ))
-    (P := P) rfl rfl ?_
+    (P := P) (integralPullEvaluationComplex_eq_ordinary l E f n)
+    (integralPullEvaluationComplex_eq_ordinary l E f (n + 1)) ?_
   have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
   run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
