@@ -89,12 +89,12 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (comapUpperStarIso a f).inv (ComplexShape.up ℤ)).app Z) :
         (D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧)).obj (DerivedCategory.Qh.obj Z) ⟶ _) := by
-  have := hasTensor₄ObjExt_mod.{u}
-  have := hasGoodTensor₁₂Tensor_mod.{u}
-  have := hasGoodTensorTensor₂₃_mod.{u}
-  have := hasColimitsOfShape_int_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
+  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ Y)
+  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ Y)
   simp only [derivedComapLeftDerivedUpperStarIso_hom_eq]
   simp only [derivedComapUpperStarIso, Iso.trans_hom,
     Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
@@ -180,13 +180,25 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
         (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) := by
-  have := hasTensor₄ObjExt_mod.{u}
-  have := hasGoodTensor₁₂Tensor_mod.{u}
-  have := hasGoodTensorTensor₂₃_mod.{u}
-  have := hasColimitsOfShape_int_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  set K := (HomotopyCategory.quotient
+  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ Y)
+  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ Y)
+  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ' Y)
+  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ' Y)
+  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ' Y)
+  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ' Y)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ' Y)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ' Y)
+  have := hasTensor₄ObjExt_mod X (condensedRingObj Λ X)
+  have := hasGoodTensor₁₂Tensor_mod X (condensedRingObj Λ X)
+  have := hasGoodTensorTensor₂₃_mod X (condensedRingObj Λ X)
+  have := hasColimitsOfShape_int_mod X (condensedRingObj Λ X)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod X (condensedRingObj Λ X)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod X (condensedRingObj Λ X)
+  let K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
   have : IsIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit) := inferInstance
@@ -267,12 +279,12 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
         (L((f)^*⟦Λ⟧).obj M) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app M) := by
-  have := hasTensor₄ObjExt_mod.{u}
-  have := hasGoodTensor₁₂Tensor_mod.{u}
-  have := hasGoodTensorTensor₂₃_mod.{u}
-  have := hasColimitsOfShape_int_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
+  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ Y)
+  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ Y)
   let P := (CochainComplex.flatResolutionFunctor _).obj (DerivedCategory.Q.objPreimage M)
   let e : DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P) ≅ M :=
     (DerivedCategory.quotientCompQhIso _).app P ≪≫
