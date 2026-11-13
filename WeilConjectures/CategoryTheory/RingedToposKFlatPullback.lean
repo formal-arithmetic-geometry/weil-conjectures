@@ -639,6 +639,8 @@ private theorem supplied_adjunction
   have hBL {M N} (a : M ⟶ N) H b :
       B' M H (I.modules.map a ≫ b) = a ≫ B' N H b :=
     faithful_mate_naturality_left (mset B) (mset RI) I.modules f.adj eI
+      (Y := (restrictScalars ((sheafCompose J
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) (Z := f.modules.obj H)
       (eP.app H) (fun M ↦ B' M H) (fun M ↦ hB M H) a b
   have hBR M {H H'} a (b : H ⟶ H') :
       B' M H' (a ≫ (restrictScalars ((sheafCompose J
