@@ -161,8 +161,6 @@ lemma unit_map_restrictOpenLowerShriekIso
     Functor.whiskerLeft_app, Iso.symm_hom, Category.assoc]
   rfl
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
 /-- The coherence of the graph isomorphisms `Lq^* ⋙ Lσ^* ≅ Dj_! ⋙ Lq_Z^* ⋙ Lσ^*` with the
