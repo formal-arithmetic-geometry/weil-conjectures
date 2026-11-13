@@ -86,9 +86,6 @@ private theorem galoisTensorRightColimit (Y : Scheme.{u})
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
     PreservesColimit F ((curriedTensor _).flip.obj M) := inferInstance
 
-attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimit
-  galoisTensorRightColimit
-
 /-- The exchange of a Galois layer is the image of the derived unit, with the comparison
 isomorphisms on either side. -/
 private lemma pullbackExchange_galoisLayerHom_app_eq_comp_unit
@@ -281,6 +278,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
               (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) ≫ φ = φ) →
         G.map (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ≫ φ = φ := by
+  letI := galoisTensorModuleColimit
+  letI := galoisTensorLeftColimit
+  letI := galoisTensorRightColimit
   obtain ⟨R, hRC, hcoinv⟩ := exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     T₀ h Ω hp (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC act hact
   have hα := pullbackExchange_galoisLayerHom_app_eq_comp_unit
@@ -354,6 +354,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
+  letI := galoisTensorModuleColimit
+  letI := galoisTensorLeftColimit
+  letI := galoisTensorRightColimit
   refine Exists.imp ?_
     (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
       T₀ N h Ω hp C hC act hact)
