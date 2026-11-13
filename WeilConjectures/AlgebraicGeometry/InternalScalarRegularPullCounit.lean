@@ -157,8 +157,9 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
-  erw [← CategoryTheory.Functor.map_comp_assoc]
-  erw [exact_unit Λ' f]
+  conv_lhs =>
+    arg 2; arg 2; arg 2
+    rw [← (V a X).map_comp_assoc, exact_unit Λ' f]
   simp only [Functor.map_comp, Category.assoc]
   have hc : (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.app
       ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ' Y))) ≫
@@ -180,7 +181,10 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
   erw [hnX]
   erw [reassoc_of% restriction_pull_single a f (Mod.regular (condensedRingObj Λ' Y))]
   simp only [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  erw [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
+  conv_lhs =>
+    arg 2
+    rw [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
+  rfl
 
 end NativeUnit
 
