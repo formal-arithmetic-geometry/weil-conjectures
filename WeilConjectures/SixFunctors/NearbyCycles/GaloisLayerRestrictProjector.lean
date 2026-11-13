@@ -182,7 +182,6 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option trace.profiler true in
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
 of `Ω/L` are invertible). Let `L ⊆ L' ⊆ Ω` with `L'/L` finite and `Lε^* C` bounded below of étale
@@ -236,9 +235,11 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
   have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange (Profinite.continuousMapRingObj T₀)) :=
     Hom.isIso_pullbackExchange_of_isIso _ _
   have hact (σ : Ω ≃ₐ[L'] Ω) (q : ℤ) :=
-    map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') (DerivedCategory.homologyFunctor _ q)
+    map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X')
+      (DerivedCategory.homologyFunctor _ q)
       (map_eq_id_of_comp_eq_comp (DerivedCategory.homologyFunctor _ q) _
-        (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' (Profinite.continuousMapRingObj T₀) σ _)
+        (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L'
+          (Profinite.continuousMapRingObj T₀) σ _)
         (map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') _
           (htriv q _ ((IntermediateField.mem_fixingSubgroup_iff L' _).2 fun x hx ↦
             σ.commutes ⟨x, hx⟩))))
@@ -247,9 +248,11 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
   have hfix (q : ℤ) := hproj (𝟙 X') q (𝟙 _) (fun σ : Ω ≃ₐ[L'] Ω ↦ σ)
     (fun M a ↦ ⟨a.liftNormal Ω, fun x ↦ a.liftNormal_commutes Ω x⟩)
     (fun σ ↦ (Category.comp_id _).trans (hact σ q))
-  have := isIso_of_split_of_homology_map_comp_eq_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') hr hfix
+  have := isIso_of_split_of_homology_map_comp_eq_id
+    (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') hr hfix
   -- composition law for `(N_{L'})_Ω ⟶ N_Ω ⟶ N_{L'}`
-  exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X')
-    (N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _ _)
+  have hcomp := N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _
+    (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)
+  exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X') hcomp
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
