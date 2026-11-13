@@ -167,6 +167,21 @@ lemma leftDerivedUpperStarTateObjectIso_square [HasInvertibleExponent Λ X]
 
 end Twist
 
+private lemma kummerBoundary_comp_baseChange
+    {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
+    (F : C ⥤ D) [F.CommShift ℤ] {K X Y : C} {K' X' Y' : D}
+    (σ : K' ⟶ F.obj K) (a : K ⟶ X⟦(1 : ℤ)⟧) (a' : K' ⟶ X'⟦(1 : ℤ)⟧)
+    (δ : X ⟶ Y⟦(1 : ℤ)⟧) (δ' : X' ⟶ Y'⟦(1 : ℤ)⟧)
+    (b : F.obj X ⟶ X') (ψ : F.obj Y ⟶ Y')
+    (hδ : F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app Y ≫ ψ⟦(1 : ℤ)⟧' = b ≫ δ')
+    (ha : σ ≫ F.map a ≫ (F.commShiftIso (1 : ℤ)).hom.app X ≫ b⟦(1 : ℤ)⟧' = a') :
+    σ ≫ F.map (a ≫ (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y)) ≫
+        (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' =
+      a' ≫ (δ'⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Y') := by
+  rw [F.map_comp, Category.assoc, Category.assoc,
+    Functor.map_shift_comp_shiftFunctorAdd'_inv, hδ,
+    (shiftFunctor D (1 : ℤ)).map_comp, Category.assoc, reassoc_of% ha]
+
 section Kummer
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasKummerClass Λ]
@@ -234,10 +249,6 @@ lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
   rw [kummerBoundary, Adjunction.homEquiv_unit]
   simp only [Category.assoc]
 
-set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
--- the composites of derived functors between the derived categories of the two bases are large
--- and their instance arguments are expensive to unify
 /-- **Base change of the Kummer boundary.** For `e : U' ⟶ U` and a global function `f` on `U`, the
 restriction of `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` to `U'` — the pullback `Le^* ∂κ(f)` read through
 `Λ_{U'} ≅ Le^* Λ_U`, the shift compatibility of `Le^*` and the restriction of supports
@@ -291,12 +302,10 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
       (L(((U'.basicOpen (e.appTop f)).ι)^*[ModuleCat.{u + 1} Λ])).map
         (leftDerivedUpperStarTateObjectIso e 1).hom)
   conv_rhs at hG1 => rw [← Category.assoc]
-  rw [kummerBoundary_eq, kummerBoundary_eq, Functor.map_comp, Category.assoc, Category.assoc,
-    Functor.map_shift_comp_shiftFunctorAdd'_inv, hG1,
-    Functor.map_comp
-      (shiftFunctor (DerivedCategory (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (1 : ℤ)),
-    Category.assoc, reassoc_of% hA, hK]
-  simp only [Category.assoc]
+  rw [hK] at hA
+  rw [kummerBoundary_eq, kummerBoundary_eq]
+  exact kummerBoundary_comp_baseChange (L((e)^*[ModuleCat.{u + 1} Λ]))
+    (leftDerivedUpperStarConstantComplexIso Λ e).inv _ _ _ _ _ _ hG1 hA
 
 /-- `AlgebraicGeometry.Etale.kummerBoundary_baseChange` for a function `f'` on `U'` equal to the
 pullback of `f`. -/
