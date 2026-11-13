@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-set_option maxHeartbeats 220000 in
+set_option maxHeartbeats 210000 in
 -- Elaborating the fixed Hom and tensor maps uses the sheaf coproduct instances.
 /-- The ordinary component equation determines the composite of explicit evaluation maps.
 This statement involves only constructed chain maps and the lax tensor comparison;
