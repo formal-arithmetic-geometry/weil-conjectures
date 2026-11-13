@@ -273,7 +273,6 @@ private theorem pullback_fibre_pushforward_equivariant {Z X : TopCat.{u}} (f : Z
   rw [hkfst]
   rfl
 
-set_option trace.profiler true in
 /-- Direct image of an extension, pulled back along restriction of constant integer
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
 The isomorphism is specified on sections by the first projection of the pullback, and it
