@@ -203,13 +203,14 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
             ((integralCompositionFiniteScalar l E L ι Y).map a) := by
   exact (integralCompositionFiniteScalarPullback l E L ι f).hom.naturality a
 
+universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆ in
 private theorem scalar_mixed_component_heq
-    {EV EV' : Type*} [iEV : Category EV] [iEV' : Category EV']
-    {EW EW' : Type*} [iEW : Category EW] [iEW' : Category EW']
-    {EZ EZ' : Type*} [iEZ : Category EZ] [iEZ' : Category EZ']
-    {LV LV' : Type*} [iLV : Category LV] [iLV' : Category LV']
-    {LW LW' : Type*} [iLW : Category LW] [iLW' : Category LW']
-    {LZ LZ' : Type*} [iLZ : Category LZ] [iLZ' : Category LZ']
+    {EV EV' : Type w₁} [iEV : Category.{v₁} EV] [iEV' : Category.{v₁} EV']
+    {EW EW' : Type w₂} [iEW : Category.{v₂} EW] [iEW' : Category.{v₂} EW']
+    {EZ EZ' : Type w₃} [iEZ : Category.{v₃} EZ] [iEZ' : Category.{v₃} EZ']
+    {LV LV' : Type w₄} [iLV : Category.{v₄} LV] [iLV' : Category.{v₄} LV']
+    {LW LW' : Type w₅} [iLW : Category.{v₅} LW] [iLW' : Category.{v₅} LW']
+    {LZ LZ' : Type w₆} [iLZ : Category.{v₆} LZ] [iLZ' : Category.{v₆} LZ']
     (eEV : EV = EV') (eiEV : HEq iEV iEV')
     (eEW : EW = EW') (eiEW : HEq iEW iEW')
     (eEZ : EZ = EZ') (eiEZ : HEq iEZ iEZ')
