@@ -218,7 +218,6 @@ private theorem balancedUnit_map (α : R ⟶ B)
   rw [ModuleCat.ExtendScalars.map_tmul] at hx
   exact hx.symm
 
-set_option profiler true in
 -- Compose the sectionwise naturality equalities without rewriting the nested sheaf terms.
 private theorem balancedMap_natural (α : R ⟶ B)
     {M M' : SheafOfModules.{u} (𝓡 B)} {N N' : SheafOfModules.{u} (𝓡 R)}
