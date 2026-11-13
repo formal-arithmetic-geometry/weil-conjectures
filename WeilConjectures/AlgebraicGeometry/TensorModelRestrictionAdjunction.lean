@@ -77,6 +77,7 @@ private theorem transport_tensor_adjunction
 
 set_option linter.style.haveILetI false in
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Canonical representative coherence requires substantial elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

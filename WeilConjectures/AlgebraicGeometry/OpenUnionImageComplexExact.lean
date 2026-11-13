@@ -64,6 +64,7 @@ private theorem schemeOpenModuleImageRestriction_epi
   exact epi_of_epi ((schemeOpenModuleAdjunction X U).unit.app M) _
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The explicit biproduct comparison requires additional elaboration steps.
 /-- The pair of restrictions from the union and the difference to the overlap
 form a short exact sequence for a complex with injective terms.
