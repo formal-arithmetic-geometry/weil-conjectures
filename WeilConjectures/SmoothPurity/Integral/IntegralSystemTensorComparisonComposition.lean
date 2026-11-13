@@ -370,11 +370,17 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
     ?_ ?_ ?_ ?_ A B
   · exact ff.faithful
   · intro P Q hP hQ
-    exact integralSystemTensorComparison_square l E f P Q hP hQ
+    have hs := integralSystemTensorComparison_square l E f P Q hP hQ
+    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
+    exact hs
   · intro P Q hP hQ
-    exact integralSystemTensorComparison_square l E h P Q hP hQ
+    have hs := integralSystemTensorComparison_square l E h P Q hP hQ
+    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
+    exact hs
   · intro P Q hP hQ
-    exact integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
+    have hs := integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
+    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
+    exact hs
   · intro P
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
