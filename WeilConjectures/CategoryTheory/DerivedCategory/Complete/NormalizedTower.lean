@@ -60,7 +60,7 @@ end
 
 /-- Factoring a map through an exact cokernel presentation and a quasi-isomorphism gives a
 quasi-isomorphism from the cokernel. -/
-lemma CochainComplex.quasiIso_cokernelDesc_of_exact_factor
+private lemma CochainComplex.quasiIso_cokernelDesc_of_exact_factor
     {𝒜 : Type*} [Category 𝒜] [Abelian 𝒜] {X Y Z T : CochainComplex 𝒜 ℤ}
     (f : X ⟶ Y) (ρ : Y ⟶ Z) (w : f ≫ ρ = 0) (hS : (ShortComplex.mk f ρ w).Exact)
     [Epi ρ] (g : Z ⟶ T) [QuasiIso g] (t : Y ⟶ T) (ht : ρ ≫ g = t)
