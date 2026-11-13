@@ -134,7 +134,7 @@ private theorem tensor_square_paste {C D : Type*} [Category C] [Category D]
   simp only [Category.assoc]
   rw [ht]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← V.map_comp_assoc, e.hom_inv_id, V.map_id, Category.id_comp]
+  rw [← V.map_comp_assoc e.hom e.inv, e.hom_inv_id, V.map_id, Category.id_comp]
 
 private theorem inverse_square_paste {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A B : C} {U V W Z : D} (sy : A ≅ B) (sx : U ≅ V)
