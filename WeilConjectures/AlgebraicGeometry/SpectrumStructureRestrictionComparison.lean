@@ -69,7 +69,8 @@ private theorem spectrumStructure_modelIso
       (HomologicalComplex.tensorUnit
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))) := by
   classical
-  intro instMonoidal instTensor
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := (SheafOfModules.tensorClosed X.sheaf).1.some
   let M := SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)
   let N := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let S := (HomologicalComplex.single M (.up ℤ) 0).obj
@@ -173,7 +174,6 @@ theorem exists_spectrum_structure_restriction_comparison
   classical
   subst V
   obtain ⟨eO, ⟨hO⟩⟩ := exists_scheme_iso_derived_restriction_square s e he U
-  intro instMonoidal instTensor T
   let V := s.hom ⁻¹ᵁ U
   let EV : SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V) ≌
       SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) := Modules.overEquiv V

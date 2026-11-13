@@ -132,6 +132,15 @@ theorem exists_scheme_iso_nested_open_finite_free_model
   classical
   let j := U.ι ≫ s.hom
   let W := j ''ᵁ V
+  -- Free modules and the derived functors share these sheafification instances.
+  let : HasSheafify ((Opens.grothendieckTopology U.toScheme.toRingedSpace).over V)
+      AddCommGrpCat.{u} := inferInstance
+  let : HasSheafify ((Opens.grothendieckTopology Y.toRingedSpace).over W)
+      AddCommGrpCat.{u} := inferInstance
+  let : ((Opens.grothendieckTopology U.toScheme.toRingedSpace).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  let : ((Opens.grothendieckTopology Y.toRingedSpace).over W).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   let a := j.isoImage V
   let EV := Modules.overEquiv V
   let EW := Modules.overEquiv W
@@ -190,7 +199,6 @@ theorem exists_scheme_iso_nested_open_finite_free_model
       Functor.preservesZeroMorphisms_of_full _
     have : G.PreservesZeroMorphisms := inferInstance
     have : R.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
-    have : GY.PreservesZeroMorphisms := inferInstance
     have : H.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
     have : L.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
     let : Abelian (SheafOfModules.{u}
@@ -199,7 +207,6 @@ theorem exists_scheme_iso_nested_open_finite_free_model
         ((moduleRings Y.toRingedSpace).over W)) := inferInstance
     have : G.Additive := Functor.additive_of_preserves_binary_products G
     have : R.Additive := Functor.additive_of_preserves_binary_products R
-    have : GY.Additive := inferInstance
     have : H.Additive := Functor.additive_of_preserves_binary_products H
     have : L.Additive := Functor.additive_of_preserves_binary_products L
     have : A.functor.Additive := inferInstance
