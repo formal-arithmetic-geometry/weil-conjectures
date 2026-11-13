@@ -64,6 +64,7 @@ private theorem sum_singleton_subsets (r : ℕ)
   · simp
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The dependent coefficient and tuple transports require extra elaboration heartbeats.
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
