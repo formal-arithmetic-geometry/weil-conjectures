@@ -101,6 +101,7 @@ theorem exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_l
     Functor.mapIso _ (lowerShriekSingleIso _ c V c' L') ≪≫
     leftDerivedExtendScalarsSingleFunctorIso ℓ E _
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the dévissage unfolds the derived categories of modules over `E_X`
 /-- Let `G₀` be a constructible `𝒪_{E,X}`-module on a scheme `X` locally of finite type over a
@@ -155,6 +156,7 @@ theorem eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField {k
   rw [← cancel_mono e.inv, zero_comp]
   exact hP n hn _
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the dévissage unfolds the derived categories of modules over `E_X`
 /-- Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`: on a noetherian scheme
