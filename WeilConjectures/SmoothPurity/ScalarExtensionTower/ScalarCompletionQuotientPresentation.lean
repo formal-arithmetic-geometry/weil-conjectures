@@ -60,7 +60,7 @@ private theorem restrictedSection_map (Y : Scheme.{u})
     (fun y ↦ ((coefficientSequenceEvaluation l E Y n).map f).val.app U y)
     (restricted_section_cancel l E Y D n U x))
 
-set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Naturality across the large coefficient-site instance expressions needs extra elaboration fuel.
 private theorem presentation_transport (Y : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E Y)
@@ -138,7 +138,7 @@ private theorem presentation_transport (Y : Scheme.{u})
       simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
       rfl
 
-set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Compose the large derived functor interfaces without unfolding their constructions.
 /-- Scalar completion induces the coherent quotient presentation of ordinary scalar change.
 Source: Stacks 06YY, 0941; scalar normalization and the tensor-unit augmentation
