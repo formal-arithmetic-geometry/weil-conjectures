@@ -50,7 +50,7 @@ private theorem homologyEvaluation_compose_roof_square
     _ = a₀.hom ≫ (g ≫ bq.hom) ≫ bp.inv := by rw [h₀]; simp only [Category.assoc]
     _ = _ := by rw [hs]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- Cycle-compatible evaluations on a small site are compatible with a quasi-isomorphism
 roof into a K-injective complex. This keeps the roof argument independent of restriction. -/
 private theorem homologyEvaluation_roof_of_cycle_pairings
@@ -117,7 +117,7 @@ private theorem homologyEvaluation_roof_of_cycle_pairings
   exact homologyEvaluation_compose_roof_square e
     g f a₀ b₀ (asIso Qmap) (asIso Pmap) bq bp h₀ hs
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
 invertibility hypothesis on the model evaluation is used.
@@ -184,8 +184,6 @@ theorem homologyEvaluation_roof_comparison (X : Scheme.{u})
             (E.homology (-n)) (K.homology 0),
         (((Scheme.Modules.restrictFunctor V.ι).map e).over W) ≫ b.hom =
           a.hom ≫ f := by
-
-  dsimp only
   intro f c hc hc'
   have : ((moduleOpenOverComplexFunctor X V W).obj J).IsKInjective := hI
   have : QuasiIso q := hq
