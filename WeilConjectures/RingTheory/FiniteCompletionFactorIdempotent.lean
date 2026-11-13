@@ -87,8 +87,28 @@ private theorem factor_idempotent
       simp only [Pi.mul_apply, Pi.single_eq_same, ht₀, mul_zero, Pi.zero_apply]
     · simp only [Pi.mul_apply, Pi.single_eq_of_ne ha, zero_mul, Pi.zero_apply]
 
+private theorem tensor_map_tmul_of_factors
+    {R A B C : Type*} [CommRing R] [CommRing A] [CommRing B] [CommRing C]
+    [Algebra R A] [Algebra R B] (F : TensorProduct R A B →+* C)
+    (f : A →+* C) (g : B →+* C)
+    (hf : ∀ a, F (TensorProduct.tmul R a 1) = f a)
+    (hg : ∀ b, F (TensorProduct.tmul R 1 b) = g b) (a : A) (b : B) :
+    F (TensorProduct.tmul R a b) = f a * g b := by
+  rw [show TensorProduct.tmul R a b =
+    TensorProduct.tmul R a 1 * TensorProduct.tmul R 1 b by
+      rw [TensorProduct.tmul_mul_tmul, mul_one, one_mul], F.map_mul, hf, hg]
+
+private theorem tensor_ringHom_ext_tmul
+    {R A B C : Type*} [CommRing R] [CommRing A] [CommRing B] [CommRing C]
+    [Algebra R A] [Algebra R B] (f g : TensorProduct R A B →+* C)
+    (h : ∀ a b, f (TensorProduct.tmul R a b) = g (TensorProduct.tmul R a b)) :
+    ∀ t, f t = g t := by
+  intro t
+  induction t using _root_.TensorProduct.inductionOn with
+  | tmul a b => exact h a b
+  | add x y hx hy => rw [f.map_add, g.map_add, hx, hy]
+
 set_option profiler true in
--- Completion coordinates and tensor-product algebra instances need extra elaboration heartbeats.
 /-- Select the finite completion factor before transferring it to the larger tensor.
 
 Source: Stacks Project, Algebra, proof of Lemma Tag 07NC, the finite-algebra product
@@ -208,24 +228,16 @@ theorem finite_completion_factor_idempotent
       E (TensorProduct.tmul R x y) q₀ = θ q₀ x *
         algebraMap (Localization.AtPrime q') (D q₀)
           (algebraMap S' (Localization.AtPrime q') y) := by
-    have he := E.commutes y
-    have hey : E (TensorProduct.tmul R (1 : Rph) y) q₀ =
-        algebraMap S' (D q₀) y := congrFun he q₀
-    rw [show TensorProduct.tmul R x y =
-      TensorProduct.tmul R x 1 * TensorProduct.tmul R 1 y by
-        rw [TensorProduct.tmul_mul_tmul, mul_one, one_mul]]
-    rw [map_mul, Pi.mul_apply, hE, hey]
-    rfl
+    exact tensor_map_tmul_of_factors
+      ((Pi.evalRingHom D q₀).comp E.toRingEquiv.toRingHom) (θ q₀)
+      (algebraMap S' (D q₀)) (fun x ↦ hE x q₀)
+      (fun y ↦ congrFun (E.commutes y) q₀) x y
   have hproj (t : T) : φ (j t) = α (E t q₀) := by
-    induction t using _root_.TensorProduct.inductionOn with
-    | tmul x y =>
-      change φ (TensorProduct.tmul R x y.1) = α (E (TensorProduct.tmul R x y) q₀)
-      rw [hφ, hEtmul, α.map_mul, hθψ, hαbase]
-    | add x y hx hy =>
-      rw [j.map_add, φ.map_add]
-      have hadd : E (x + y) q₀ = E x q₀ + E y q₀ :=
-        congrFun (E.toRingEquiv.map_add x y) q₀
-      rw [hadd, α.map_add, hx, hy]
+    apply tensor_ringHom_ext_tmul (φ.comp j)
+      (α.toRingHom.comp ((Pi.evalRingHom D q₀).comp E.toRingEquiv.toRingHom)) _ t
+    intro x y
+    change φ (TensorProduct.tmul R x y.1) = α (E (TensorProduct.tmul R x y) q₀)
+    rw [hφ, hEtmul, α.map_mul, hθψ, hαbase]
   have hunit : IsUnit (E γ q₀) := by
     rw [hEtmul, map_one, one_mul]
     exact (IsLocalization.map_units (Localization.AtPrime q')
