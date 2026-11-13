@@ -399,14 +399,9 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
       q.inv.app ((SheafOfModules.toSheaf A ⋙
         sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M) ≫
       v.map (em.inv.app ((proEtaleModuleToModel A).obj M)) := by
-    have hid := (Ls ⋙ v).map_id
-      (((SheafOfModules.toSheaf A ⋙ sheafCompose (ProEt.topology X)
-        (CategoryTheory.forget AddCommGrpCat.{u + 1})) ⋙ d).obj M)
-    have hz := congrArg (fun z ↦ ((q.inv.app _ ≫ z) ≫
-      v.map (em.inv.app ((proEtaleModuleToModel A).obj M))) ≫ 𝟙 _) hid
-    exact hz.trans ((Category.comp_id _).trans
-      (congrArg (fun k ↦ k ≫ v.map (em.inv.app ((proEtaleModuleToModel A).obj M)))
-        (Category.comp_id _)))
+    change ((q.inv.app _ ≫ (Ls ⋙ v).map (𝟙 _)) ≫
+      v.map (em.inv.app ((proEtaleModuleToModel A).obj M))) ≫ 𝟙 _ = _
+    rw [Functor.map_id, Category.comp_id, Category.comp_id]
   rw [hE]
   exact h₁.trans (hg.trans (congrArg₂ (fun (r : Bm.obj.obj (AsSmall.up.op.obj V))
       (m : Nm.val.obj (AsSmall.up.op.obj V)) ↦ r • m) h₂.symm h₃.symm))
