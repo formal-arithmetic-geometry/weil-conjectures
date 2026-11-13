@@ -145,7 +145,6 @@ variable (F : C₁ ⥤ C₂) [F.Additive] [F.OplaxMonoidal]
   (LF : DerivedCategory C₁ ⥤ DerivedCategory C₂) [LF.CommShift ℤ]
   (cL : Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ Qh) [IsIso cL] [NatTrans.CommShift cL ℤ]
 
-set_option trace.profiler true in
 open Functor in
 /-- A natural transformation `τ : LF(Qh X ⊗ᴸ -) ⟶ LF(Qh X) ⊗ᴸ LF(-)` which is compatible, on
 the homotopy category, with the comparison `F(X ⊗ -) ⟶ F(X) ⊗ F(-)`, commutes with the shifts,
@@ -199,7 +198,6 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
     Functor.whiskerRight_app, Functor.comp_obj, curriedTensor_obj_obj,
     curriedTensor_obj_map, curriedTensor_map_app, Category.assoc] using hτ M
 
-set_option trace.profiler true in
 open Functor in
 /-- A natural transformation `τ : LF(- ⊗ᴸ Qh X) ⟶ LF(-) ⊗ᴸ LF(Qh X)` which is compatible, on
 the homotopy category, with the comparison `F(- ⊗ X) ⟶ F(-) ⊗ F(X)`, commutes with the shifts,
