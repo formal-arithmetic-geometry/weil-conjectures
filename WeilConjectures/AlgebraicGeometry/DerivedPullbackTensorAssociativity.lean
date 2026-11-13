@@ -427,12 +427,6 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
     obtain ⟨adj, _⟩ := Scheme.Modules.exists_tensorPullbackAdjunction g
     exact ⟨_, ⟨adj⟩⟩
   let Fc := F.mapHomologicalComplex (.up ℤ)
-  let : Fc.Monoidal := Functor.mapCochainComplexMonoidal F
-  have hφeq (K L : CochainComplex
-      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) :
-      (φ K L).hom =
-        Functor.OplaxMonoidal.δ Fc K L := by
-    exact cochain_tensor_comparison_eq F K L (φ K L).hom (hφ K L)
   have hεiso := pullback_counit_isIso g F hF hmap ε hε
   let QX := DerivedCategory.Q
     (C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
@@ -441,10 +435,6 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
   let e (K : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) :
       (derivedPullback g).obj (QX.obj K) ⟶ QT.obj (Fc.obj K) :=
     ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
-  have he {K L : CochainComplex
-      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ} (a : K ⟶ L) :
-      (derivedPullback g).map (QX.map a) ≫ e L = e K ≫ QT.map (Fc.map a) := by
-    exact ε.naturality ((HomotopyCategory.quotient _ (.up ℤ)).map a)
   have hFE : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
   have hFp := pullback_preservesKFlat g F hFE
@@ -455,12 +445,13 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
     localization_tensor_isIso T (Fc.obj P) (Fc.obj N) (hFp N hN)
   have : IsIso (Functor.LaxMonoidal.μ QT (Fc.obj P ⊗ Fc.obj N) (Fc.obj R)) :=
     localization_tensor_isIso T (Fc.obj P ⊗ Fc.obj N) (Fc.obj R) (hFp R hR)
-  refine tensor_associativity_on_class (Q₁ := QX) (Q₂ := QT) (F := Fc) μ e (fun {_ _} a ↦ he a)
+  refine tensor_associativity_on_class (Q₁ := QX) (Q₂ := QT) (F := Fc) μ e
+    (fun {_ _} a ↦ ε.naturality ((HomotopyCategory.quotient _ (.up ℤ)).map a))
     (CochainComplex.IsKFlatTensor (R := X.sheaf)) ?_ P N R hP hN hR
     (CochainComplex.IsKFlatTensor.mapBifunctor P N hP hN)
     (CochainComplex.IsKFlatTensor.mapBifunctor N R hN hR)
   intro K L hK hL
-  rw [← hφeq K L]
+  rw [← cochain_tensor_comparison_eq F K L (φ K L).hom (hφ K L)]
   exact hμ K L hK hL
 
 
