@@ -24,7 +24,24 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+private theorem identity_resolution_homotopy {C : Type*} [Category* C] [Abelian C]
+    {K L I : CochainComplex C ℕ} (hI : ∀ n, Injective (I.X n))
+    (α : K ⟶ L) [QuasiIso α] (β γ : L ⟶ I) (h : α ≫ β = α ≫ γ) :
+    Nonempty (Homotopy β γ) := by
+  let : ∀ n, Injective (I.X n) := hI
+  let e := ComplexShape.embeddingUpNat
+  let E := e.extendFunctor C
+  have : QuasiIso (E.map α) :=
+    (HomologicalComplex.quasiIso_extendMap_iff α e).2 inferInstance
+  have he : Nonempty (Homotopy (E.map α ≫ E.map β) (E.map α ≫ E.map γ)) := by
+    rw [← E.map_comp, ← E.map_comp]
+    exact ⟨(Homotopy.ofEq h).extend e⟩
+  obtain ⟨hh⟩ := CochainComplex.homotopy_of_comp_quasiIso_of_injective
+    (I := I.extend e)
+    ⟨0, fun n hn ↦ CochainComplex.isZero_of_isStrictlyGE _ 0 n hn⟩
+    (E.map α) (E.map β) (E.map γ) he
+  exact ⟨hh.ofExtend⟩
+
 set_option profiler true in
 -- Identity pushforward and the sections functor require substantial definitional reduction.
 set_option backward.isDefEq.respectTransparency.types false in
@@ -81,23 +98,11 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
     apply HomologicalComplex.from_single_hom_ext
     simp only [HomologicalComplex.comp_f]
     rw [D.compatible]
-    dsimp [α, c]
+    dsimp only [α, c]
     rw [← Category.assoc, ← Category.assoc, InjectiveResolution.desc_commutes_zero]
     congr 1
-  let : ∀ n, Injective (D.K.X n) := D.injective
-  let e := ComplexShape.embeddingUpNat
-  let E := e.extendFunctor Z.Modules
-  have : QuasiIso (E.map D.J.ι) :=
-    (HomologicalComplex.quasiIso_extendMap_iff D.J.ι e).2 inferInstance
-  have haugE : Nonempty (Homotopy (E.map D.J.ι ≫ E.map D.β)
-      (E.map D.J.ι ≫ E.map (α ≫ c ≫ D.lambda))) := by
-    rw [← E.map_comp, ← E.map_comp]
-    exact ⟨(Homotopy.ofEq haug).extend e⟩
-  obtain ⟨hhE⟩ := CochainComplex.homotopy_of_comp_quasiIso_of_injective
-    (I := D.K.extend e)
-    ⟨0, fun n hn ↦ CochainComplex.isZero_of_isStrictlyGE _ 0 n hn⟩
-    (E.map D.J.ι) (E.map D.β) (E.map (α ≫ c ≫ D.lambda)) haugE
-  have hh : Homotopy D.β (α ≫ c ≫ D.lambda) := hhE.ofExtend
+  obtain ⟨hh⟩ := identity_resolution_homotopy D.injective D.J.ι D.β
+    (α ≫ c ≫ D.lambda) haug
   have hm := Γ.mapHomotopy hh
   change Homotopy (Γc.map D.β) (Γc.map (α ≫ c ≫ D.lambda)) at hm
   have hsec : Homotopy (Γc.map D.β) (Γc.map α ≫ D.a.hom ≫ Γc.map D.lambda) := by
