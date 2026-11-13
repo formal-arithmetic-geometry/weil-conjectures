@@ -261,6 +261,7 @@ private theorem nativeMonoidal_eq :
   unfold RingedDerivedNative.monoidal derivedMonoidal
   with_reducible_and_instances rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Checking the native closed structure against the displayed normalization is expensive.
 private theorem normalizedAdjunction_exists :
@@ -423,6 +424,7 @@ private theorem comparison_hom_eq {X Y : D J R} {x₁ x₂ : X ⟶ Y} [IsIso x�
   calc x₁ = (x₁ ≫ y₁) ≫ x₂ := by rw [h, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
     _ = x₂ := by rw [h₁, Category.id_comp]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Substituting the derived monoidal structure into both closed structures is expensive.
 private theorem normalizedAdjunction_unique
