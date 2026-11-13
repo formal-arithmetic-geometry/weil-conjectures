@@ -110,6 +110,7 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
       hΓ.δ 0 1 rfl ≫
       (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv =
         RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0 := by
+  let := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let v := RingedSpace.globalSectionsFunctor X.toRingedSpace
   let : PreservesFiniteLimits v := inferInstanceAs
     (PreservesFiniteLimits (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
@@ -124,8 +125,8 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
   simp only [NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app]
   exact h
 
-/-- The Leibniz identity on local-lift cocycles, independent of derived-category comparisons. -/
 set_option profiler true in
+/-- The Leibniz identity on local-lift cocycles, independent of derived-category comparisons. -/
 private theorem cech_cycles_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -235,8 +236,8 @@ private theorem cech_cycles_leibniz (X : Scheme.{u})
   change bf 1 * cg 1 - bf 0 * cg 0 = bf 0 * (cg 1 - cg 0) + cg 1 * (bf 1 - bf 0)
   ring
 
-/-- Transfer the cocycle identity to the canonical boundary using the natural Čech comparison. -/
 set_option profiler true in
+/-- Transfer the cocycle identity to the canonical boundary using the natural Čech comparison. -/
 private theorem canonical_boundary_leibniz (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{u + 1}
@@ -265,6 +266,7 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
             ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ f)) := by
   classical
   intro S f g
+  let := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   obtain ⟨ι, U, hU, b, c, hb, hc⟩ := common_lifts X B C p hS.epi_g f g
   obtain ⟨cmp, hcmp, hnatural⟩ := Scheme.Modules.cechH1Map_natural X U hU
   have ht : ∀ a, p.right.hom.app (op (U a)) (b a * c a) =
@@ -302,6 +304,7 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
   exact he
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
 by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
 Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
@@ -326,7 +329,6 @@ comparison. Naturality for the identity ladder makes the transported boundaries 
 the degree-zero augmentation identifies the section f with its H0 class through
  toRightDerivedZero. Thus the same identity holds for the specified boundary d.
 For I = 0 it is the zero identity; for a split extension the boundary vanishes. -/
-set_option profiler true in
 theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -365,6 +367,7 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
         ((RingedSpace.moduleCohomology X.toRingedSpace 1).map ((μ g)).asHom).hom (d.hom f) := by
   classical
   have _ := hsq
+  let := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
   let := HasDerivedCategory.standard
