@@ -155,7 +155,6 @@ attribute [local implicit_reducible] pullbackTensorReferenceTensor pullbackTenso
   StrictQuotient.SystemGood sfIntegralConstructible constructibleIntegralPullback
   pullbackTensorSequenceDerived coefficientKFlatInclusion
 
-set_option trace.profiler true in
 private theorem strict_comparison_square
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : StrictQuotient.Complex l E Y)
