@@ -167,7 +167,9 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((κ n.unop).inv.f i).val.app (op U)
           (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x)) :=
       section_cast_cancel (coefficientSequenceEvaluationAb_eq l E Y (C.X i) n.unop (op U)) _
+    run_tac do Lean.logInfo m!"after hc: {← IO.monoMsNow}"
     rw [hc]
+    run_tac do Lean.logInfo m!"after rw hc: {← IO.monoMsNow}"
     exact congrArg (fun g ↦ (g.f i).val.app (op U)
       (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))
         (κ n.unop).inv_hom_id
