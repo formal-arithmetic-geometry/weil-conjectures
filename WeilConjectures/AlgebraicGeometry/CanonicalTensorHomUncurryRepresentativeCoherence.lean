@@ -48,7 +48,6 @@ private theorem localized_uncurry_factor_of_naturality
 
 -- Apply the categorical identity calculation without rewriting the concrete sheaf instances.
 set_option backward.isDefEq.respectTransparency.types true in
-set_option profiler true in
 private theorem localized_uncurry_input (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M : CochainComplex
