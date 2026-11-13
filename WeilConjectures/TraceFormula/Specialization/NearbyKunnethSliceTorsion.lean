@@ -108,7 +108,6 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (comp_coordinate_fst hb) D E hBP
   have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
     (K := traitSliceField k') hN E hB
-  fail "PH468: exchange hypotheses elaborated"
   -- the square of Künneth maps along the changes of trait
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   refine (isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
@@ -127,6 +126,7 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
     _ _ hτM hτN hτP (𝟭 _)).2 ?_
+  fail "PH468: square elaborated"
   have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
   exact isIso_kunnethMap_of_iso 𝔽
