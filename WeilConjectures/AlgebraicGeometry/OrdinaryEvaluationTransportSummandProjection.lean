@@ -42,9 +42,7 @@ attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Expanding the total-tensor map and degreewise isomorphism needs extra elaboration heartbeats.
 /-- Transport of one tensor summand followed by one Hom projection.
 Source: Stacks Project, Tag 0A8X, total tensor and Hom-complex projections.
 (blueprint: lem-pc-ordinary-evaluation-transport-summand-projection).
@@ -137,14 +135,8 @@ theorem ordinaryEvaluation_transport_summand_projection (X : Scheme.{u}) (U : X.
       HomologicalComplex.id_f, hc', Iso.hom_inv_id_assoc]
     exact Category.comp_id _
   rw [reassoc_of% hi, hproj]
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
-    dsimp only [T, Functor.mapHomologicalComplex, curriedTensor]
-    simp only [id_whiskerRight, Category.id_comp, tensorHom_def,
-      Functor.map_comp, Category.assoc]
-    set_option backward.isDefEq.respectTransparency false in
-    set_option backward.isDefEq.respectTransparency.types false in
-      rw [L.map_comp]
-      simp only [Category.assoc]
+  simp only [curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight,
+    Category.id_comp, tensorHom_def, Functor.mapHomologicalComplex_map_f,
+    Functor.map_comp, Category.assoc]
 
 end AlgebraicGeometry
