@@ -58,7 +58,6 @@ private theorem evaluation_section_heq (W : Scheme.{u})
   have h := transport_heq (coefficientSequenceEvaluationAb_eq l E W M n U).symm x
   exact h
 
-set_option maxHeartbeats 800000 in
 set_option trace.profiler true in
 -- The section transports involve two presentations of the module underlying groups.
 private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
@@ -81,6 +80,8 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   rw [Adjunction.homEquiv_unit] at h
   have hh := congrArg (fun a ↦ a.val.app (op U)
     (coefficientEvaluationSection l E Y M n (op U) x)) h
+  simp only [Functor.comp_obj, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at hh
   have hd := (pullbackTensorSequenceDirectEvaluation_existsUnique l E f n).exists.choose_spec
     ((pullbackTensorSequenceInverse l E f).obj M) U
       ((((coefficientSequenceEvaluation l E Y n).map
@@ -105,8 +106,8 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   have hh' : HEq _ _ := heq_of_eq hh
   have hdh : HEq _ _ := hd.trans hmap
   have hdh' : HEq _ _ := hdh.trans hsection.symm
-  have hfinal := eq_of_heq (hh'.trans hdh')
-  exact hfinal
+  apply eq_of_heq
+  exact hh'.trans hdh'
 
 private theorem evaluation_complex_f {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅
