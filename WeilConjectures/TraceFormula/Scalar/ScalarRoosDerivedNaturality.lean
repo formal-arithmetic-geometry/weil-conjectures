@@ -60,7 +60,6 @@ attribute [local implicit_reducible] coefficientSequenceLimit
 attribute [local irreducible] completedDerivedScalarExtension
   completedOrdinaryScalarExtension completedScalarCounit
 
-set_option profiler true in
 -- Fraction naturality contains large but fixed coefficient-functor signatures.
 /-- A natural ordinary scalar map of whole towers is natural on derived morphisms
 once the source cochain counit becomes invertible after total limit.
@@ -170,8 +169,11 @@ theorem scalarRoosDerivedNaturality
         (integralComparisonRoosBridge l L X ρL C).inv ≫ f ≫
       (integralComparisonRoosBridge l F X ρF _).hom) hn
   simp only [Category.assoc, ← Functor.map_comp_assoc] at hn'
-  erw [Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp] at hn'
-  erw [Iso.inv_hom_id, Category.comp_id] at hn'
+  rw [(integralComparisonRoosBridge l L X ρL C).inv_hom_id,
+    CategoryTheory.Functor.map_id, Category.id_comp] at hn'
+  rw [(integralComparisonRoosBridge l F X ρF
+    (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+      (.up ℤ)).obj D)).inv_hom_id, Category.comp_id] at hn'
   simp only [Functor.map_comp, Category.assoc] at hn'
   simpa only [integralComparisonDerivedSequenceScalar, Functor.map_comp, Category.assoc]
     using hn'
