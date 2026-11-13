@@ -361,6 +361,7 @@ theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Generator calculus on both total tensors needs extra elaboration.
 attribute [local irreducible] coefficientEvaluationTensorIso
