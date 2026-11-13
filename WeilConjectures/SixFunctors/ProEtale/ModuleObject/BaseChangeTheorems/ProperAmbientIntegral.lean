@@ -48,6 +48,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the bounded constructible and the ambient exchange morphisms are unified
 /-- The base change map of the ambient derived categories of module objects over `𝒪̲_E` at a
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
