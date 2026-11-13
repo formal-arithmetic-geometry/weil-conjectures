@@ -108,7 +108,8 @@ theorem exists_condensed_coefficient_complex_presentation
                         (g ≫ (ei i).hom)) ≫
                   (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app L) =
               g ≫ DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
-  obtain ⟨a, ha⟩ := hL
+  let a := Classical.choose hL
+  have ha : L.IsGE a := Classical.choose_spec hL
   have : L.IsGE a := ha
   obtain ⟨C, hC, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE L a
   obtain ⟨N, c, hc, hN, eΩ, ei, hcomp⟩ :=
