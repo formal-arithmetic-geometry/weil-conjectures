@@ -57,6 +57,29 @@ namespace CategoryTheory.Mod
 variable {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
   {R : C} [MonObj R] [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
 
+/-- Evaluation commutes with the matrix of a composite. -/
+private lemma finFreeMatrix_map_comp {K : Type*} [Semiring K]
+    (ρ : End (regular R) →+* K) {l m n : ℕ}
+    (φ : finiteFree R l ⟶ finiteFree R m) (ψ : finiteFree R m ⟶ finiteFree R n) :
+    (finFreeMatrix (φ ≫ ψ)).map ρ = (finFreeMatrix ψ).map ρ * (finFreeMatrix φ).map ρ := by
+  rw [finFreeMatrix_comp, Matrix.map_mul]
+
+/-- Evaluation sends the matrix of the identity to the identity matrix. -/
+private lemma finFreeMatrix_map_id {K : Type*} [Semiring K]
+    (ρ : End (regular R) →+* K) (n : ℕ) :
+    (finFreeMatrix (𝟙 (finiteFree R n))).map ρ = 1 := by
+  rw [finFreeMatrix_id, Matrix.map_one _ (map_zero ρ) (map_one ρ)]
+
+/-- Entries of a product of three matrices evaluate to the product of their evaluations. -/
+private lemma finFreeEntry_matrixTriple_eval {K : Type*} [Semiring K]
+    (ρ : End (regular R) →+* K) {n : ℕ}
+    (A B D : Matrix (Fin n) (Fin n) (End (regular R))) (i j : Fin n) :
+    ρ (finFreeEntry (finFreeOfMatrix (A * B * D)) i j) =
+      (A.map ρ * B.map ρ * D.map ρ) i j := by
+  rw [← finFreeMatrix_apply, finFreeMatrix_finFreeOfMatrix]
+  exact congrFun (congrFun ((Matrix.map_mul ρ (A * B) D).trans
+    (congrArg (fun M ↦ M * D.map ρ) (Matrix.map_mul ρ A B))) i) j
+
 /-- Evaluation in a field detects the rank of finite free module objects. -/
 private lemma rank_eq_of_finiteFree_iso {K : Type*} [Field K]
     (ρ : End (regular R) →+* K) {m n : ℕ} (e : finiteFree R m ≅ finiteFree R n) :
@@ -132,9 +155,9 @@ theorem rank_eq_of_comp_eq {S V V' W : Scheme.{u}}
   apply Mod.rank_eq_of_finiteFree_iso ρ
   exact (upperStarFiniteFreeIso (Profinite.continuousMapRingObj E) a n).symm ≪≫
     (a)^*⟦Profinite.continuousMapRingObj E⟧.mapIso e ≪≫
-    ((upperStarComp (Profinite.continuousMapRingObj E) a f).app L).symm ≪≫
-    (upperStarCongr (Profinite.continuousMapRingObj E) h).app L ≪≫
-    (upperStarComp (Profinite.continuousMapRingObj E) b f').app L ≪≫
+    ((CondensedRing.upperStarComp (Profinite.continuousMapRingObj E) a f).app L).symm ≪≫
+    (CondensedRing.upperStarCongr (Profinite.continuousMapRingObj E) h).app L ≪≫
+    (CondensedRing.upperStarComp (Profinite.continuousMapRingObj E) b f').app L ≪≫
     ((b)^*⟦Profinite.continuousMapRingObj E⟧.mapIso e').symm ≪≫
     upperStarFiniteFreeIso (Profinite.continuousMapRingObj E) b n'
 
@@ -189,7 +212,6 @@ theorem exists_transitionValues {S : Scheme.{u}}
   let ρ (W : Scheme.{u}) (x : W) :=
     ((Pi.evalRingHom (fun _ : W ↦ (E : Type)) x).comp ContinuousMap.coeFnRingHom).comp
       (ev W).toRingHom
-  have hρ (W : Scheme.{u}) (x : W) (t) : ρ W x t = ev W t x := rfl
   let Mv (j k : 𝒰.I₀) (W : Scheme.{u}) (a : W ⟶ 𝒰.X j) (b : W ⟶ 𝒰.X k)
       (h : a ≫ 𝒰.f j = b ≫ 𝒰.f k) (x : W) : Matrix (Fin n) (Fin n) E.1 :=
     (Mod.finFreeMatrix (T j k W a b h)).map (ρ W x)
@@ -197,20 +219,20 @@ theorem exists_transitionValues {S : Scheme.{u}}
       (c : W ⟶ 𝒰.X l) (h : a ≫ 𝒰.f j = b ≫ 𝒰.f k) (h' : b ≫ 𝒰.f k = c ≫ 𝒰.f l)
       (h'' : a ≫ 𝒰.f j = c ≫ 𝒰.f l) (x : W) :
       Mv j k W a b h x * Mv k l W b c h' x = Mv j l W a c h'' x := by
-    simp only [Mv]
-    rw [← Matrix.map_mul, ← Mod.finFreeMatrix_comp, hTtrans]
+    exact (Mod.finFreeMatrix_map_comp (ρ W x) (T k l W b c h')
+      (T j k W a b h)).symm.trans
+        (congrArg (fun t ↦ (Mod.finFreeMatrix t).map (ρ W x))
+          (hTtrans j k l W a b c h h' h''))
   have hMv_one (k : 𝒰.I₀) (W : Scheme.{u}) (a : W ⟶ 𝒰.X k) (h : a ≫ 𝒰.f k = a ≫ 𝒰.f k)
       (x : W) : Mv k k W a a h x = 1 := by
-    simp only [Mv]
-    rw [hTself, Mod.finFreeMatrix_id, Matrix.map_one _ (map_zero _) (map_one _)]
+    exact (congrArg (fun t ↦ (Mod.finFreeMatrix t).map (ρ W x))
+      (hTself k W a h)).trans (Mod.finFreeMatrix_map_id (ρ W x) n)
   have hMv_comp (j k : 𝒰.I₀) (W W' : Scheme.{u}) (c : W' ⟶ W) (a : W ⟶ 𝒰.X j)
       (b : W ⟶ 𝒰.X k) (h : a ≫ 𝒰.f j = b ≫ 𝒰.f k) (h' : (c ≫ a) ≫ 𝒰.f j = (c ≫ b) ≫ 𝒰.f k)
       (x : W') : Mv j k W' (c ≫ a) (c ≫ b) h' x = Mv j k W a b h (c.base x) := by
-    simp only [Mv]
-    rw [hTcomp j k W W' c a b h h', Matrix.map_map]
-    refine Matrix.ext fun i i' ↦ ?_
-    simp only [Matrix.map_apply, Function.comp_apply, hρ]
-    exact hev W' W c _ x
+    refine (congrArg (fun M ↦ M.map (ρ W' x))
+      (hTcomp j k W W' c a b h h')).trans ?_
+    exact Matrix.ext fun i i' ↦ hev W' W c _ x
   have hMv_cont (j k : 𝒰.I₀) (W : Scheme.{u}) (a : W ⟶ 𝒰.X j) (b : W ⟶ 𝒰.X k)
       (h : a ≫ 𝒰.f j = b ≫ 𝒰.f k) (i i' : Fin n) : Continuous fun x ↦ Mv j k W a b h x i i' :=
     (ev W (Mod.finFreeMatrix (T j k W a b h) i i')).continuous
@@ -235,27 +257,22 @@ theorem exists_transitionValues {S : Scheme.{u}}
           (ρ P x) = ((g k (p.base x) : GL (Fin n) E.1) : Matrix (Fin n) (Fin n) E.1) ∧
         ((Mod.finFreeMatrix (G k).inv).map (restrictEnd (Profinite.continuousMapRingObj E) p)).map
           (ρ P x) = (((g k (p.base x))⁻¹ : GL (Fin n) E.1) : Matrix (Fin n) (Fin n) E.1) := by
-    rw [Matrix.map_map, Matrix.map_map, ← (hGv k (p.base x)).1, ← (hGv k (p.base x)).2]
-    refine ⟨Matrix.ext fun i i' ↦ ?_, Matrix.ext fun i i' ↦ ?_⟩ <;>
-    · simp only [Matrix.map_apply, Function.comp_apply, hρ]
-      exact hev P _ p _ x
+    exact ⟨(Matrix.ext fun i i' ↦ hev P _ p _ x).trans (hGv k (p.base x)).1,
+      (Matrix.ext fun i i' ↦ hev P _ p _ x).trans (hGv k (p.base x)).2⟩
   have hdef (j k : 𝒰.I₀) := hTdef G j k (hP j k)
-  have hmap (W : Scheme.{u}) (M : Matrix (Fin n) (Fin n)
-      (End (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E) W)))) (x : W)
-      (i i' : Fin n) : ev W (M i i') x = (M.map (ρ W x)) i i' := rfl
   have hdef' (j k : 𝒰.I₀) := And.intro
     ((hdef j k).1 fun i i' ↦ by
       refine (hint _ _ fun x ↦ ?_).imp fun s hs ↦ hs.symm
-      rw [← Mod.finFreeMatrix_apply, Mod.finFreeMatrix_finFreeOfMatrix, hmap,
-        Matrix.map_mul, Matrix.map_mul, (hGres k _ _ x).2, (hGres j _ _ x).1]
+      change ‖ρ _ x _‖ ≤ 1
+      rw [Mod.finFreeEntry_matrixTriple_eval, (hGres k _ _ x).2, (hGres j _ _ x).1]
       have key := hint₂ j k x i' i
       rw [mul_inv_rev, mul_inv_rev, inv_inv, Units.val_mul, Units.val_mul,
         ← Matrix.mul_assoc] at key
       exact key)
     ((hdef j k).2 fun i i' ↦ by
       refine (hint _ _ fun x ↦ ?_).imp fun s hs ↦ hs.symm
-      rw [← Mod.finFreeMatrix_apply, Mod.finFreeMatrix_finFreeOfMatrix, hmap,
-        Matrix.map_mul, Matrix.map_mul, (hGres j _ _ x).2, (hGres k _ _ x).1]
+      change ‖ρ _ x _‖ ≤ 1
+      rw [Mod.finFreeEntry_matrixTriple_eval, (hGres j _ _ x).2, (hGres k _ _ x).1]
       have key := hint₁ j k x i' i
       rw [Units.val_mul, Units.val_mul] at key
       exact key)
