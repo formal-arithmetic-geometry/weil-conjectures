@@ -51,6 +51,49 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+private theorem projectionMap_of_comparison
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
+    {L : D ⥤ C} {G : C ⥤ D} {L' : D' ⥤ C'} {G' : C' ⥤ D'} [G'.Monoidal]
+    (adj : L ⊣ G) (adj' : L' ⊣ G') (Q : C ⥤ C') (R : D ⥤ D')
+    [Q.LaxMonoidal] [R.LaxMonoidal]
+    (a : R ⋙ L' ≅ L ⋙ Q) (b : Q ⋙ G' ≅ G ⋙ R) (A : C) (T : D)
+    (m : G.obj A ⊗ G.obj (L.obj T) ⟶ G.obj (A ⊗ L.obj T))
+    (hu : adj'.unit.app (R.obj T) =
+      R.map (adj.unit.app T) ≫ b.inv.app (L.obj T) ≫ G'.map (a.inv.app T))
+    (hc : adj'.counit.app (Q.obj (A ⊗ L.obj T)) =
+      L'.map (b.hom.app (A ⊗ L.obj T)) ≫ a.hom.app (G.obj (A ⊗ L.obj T)) ≫
+        Q.map (adj.counit.app (A ⊗ L.obj T)))
+    (hm : Functor.LaxMonoidal.μ G' (Q.obj A) (Q.obj (L.obj T)) ≫
+      G'.map (Functor.LaxMonoidal.μ Q A (L.obj T)) ≫ b.hom.app (A ⊗ L.obj T) =
+      (b.hom.app A ⊗ₘ b.hom.app (L.obj T)) ≫
+        Functor.LaxMonoidal.μ R (G.obj A) (G.obj (L.obj T)) ≫ R.map m) :
+    (Functor.Monoidal.projectionMap adj' (Q.obj A)).app (R.obj T) ≫
+      (Q.obj A ◁ a.hom.app T) ≫ Functor.LaxMonoidal.μ Q A (L.obj T) =
+    L'.map ((b.hom.app A ▷ R.obj T) ≫ Functor.LaxMonoidal.μ R (G.obj A) T) ≫
+      a.hom.app (G.obj A ⊗ T) ≫
+        Q.map (L.map (G.obj A ◁ adj.unit.app T ≫ m) ≫
+          adj.counit.app (A ⊗ L.obj T)) := by
+  simp only [Functor.Monoidal.projectionMap, Category.assoc]
+  have hn := (adj'.counit.naturality
+    (Q.obj A ◁ a.hom.app T ≫ Functor.LaxMonoidal.μ Q A (L.obj T))).symm
+  dsimp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at hn
+  rw [hn, hc, hu]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← a.hom.naturality_assoc, ← a.hom.naturality_assoc]
+  simp only [← Functor.map_comp_assoc, Category.assoc]
+  congr 2
+  have ha : (Q.obj A ◁ a.inv.app T) ≫ (Q.obj A ◁ a.hom.app T) = 𝟙 _ := by
+    rw [← MonoidalCategory.whiskerLeft_comp, Iso.inv_hom_id_app,
+      MonoidalCategory.whiskerLeft_id]
+  simp only [MonoidalCategory.whiskerLeft_comp, Functor.map_comp, Category.assoc]
+  rw [Functor.LaxMonoidal.μ_natural_right_assoc]
+  rw [← Functor.map_comp_assoc G', ha, Functor.map_id, Category.id_comp]
+  rw [hm, MonoidalCategory.tensorHom_def, Category.assoc, whisker_exchange_assoc]
+  rw [← MonoidalCategory.whiskerLeft_comp_assoc, Iso.inv_hom_id_app,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp, whisker_exchange_assoc]
+  rw [Functor.LaxMonoidal.μ_natural_right_assoc, ← R.map_comp]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -119,17 +162,8 @@ instance preservesColimitsOfShape_weaklyEtaleLowerShriek_discrete_π (j : ℤ) :
 set_option profiler true in
 /-- The pullback of module objects is monoidal on cochain complexes. -/
 noncomputable instance monoidal_upperStar_mapHomologicalComplex :
-    ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).Monoidal := by
-  have (Z : Scheme.{u}) : HasColimitsOfSize.{0, 0}
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
-    inferInstance
-  have (Z : Scheme.{u})
-      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
-      PreservesColimitsOfSize.{0, 0} (tensorLeft M) := inferInstance
-  have (Z : Scheme.{u})
-      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
-      PreservesColimitsOfSize.{0, 0} (tensorRight M) := inferInstance
-  exact Functor.mapCochainComplexMonoidal _
+    ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).Monoidal :=
+  Functor.mapCochainComplexMonoidal _
 
 set_option profiler true in
 -- the chase unfolds the derived unit, counit and tensor comparison on complexes of module objects
