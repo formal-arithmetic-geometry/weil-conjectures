@@ -228,8 +228,6 @@ private lemma finiteSupport_and_lowerStar_kunnethMap [TopologicalSpace.Noetheria
   have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA hB hΨA hΨB hT
   exact ⟨S, hS, hR, hU⟩
 
-set_option trace.profiler true in
-set_option maxHeartbeats 1600000 in
 -- the triangle of the Künneth map has large terms
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product `P` over the
