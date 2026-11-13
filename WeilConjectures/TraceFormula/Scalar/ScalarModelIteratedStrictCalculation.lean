@@ -73,6 +73,7 @@ variable (l : ℕ) [Fact l.Prime]
   (X : Scheme.{u})
 
 set_option maxHeartbeats 1200000 in
+set_option profiler true in
 -- Elaborating the transported coefficient and derived-category instances needs extra heartbeats.
 /-- The iterated route, on one simultaneous presentation, is the localized ordinary
 scalar counits followed by the strict tensor associator and quotient augmentation.
