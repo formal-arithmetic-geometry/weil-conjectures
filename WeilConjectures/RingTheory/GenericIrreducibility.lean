@@ -688,10 +688,9 @@ lemma exists_ne_zero_dvd_C_mul_of_map_dvd {σ A K : Type*} [CommRing A] [IsDomai
   rw [map_mul, map_mul, map_C, hR', hR]
   ring
 
-set_option profiler true in
 /-- Generic irreducibility descends along a finite type extension of domains and a surjective
 algebra map whose kernel elements have powers annihilated by nonzero scalars. -/
-lemma exists_ne_zero_forall_irreducibleSpace_of_torsion_nilpotent_ker
+private lemma exists_ne_zero_forall_irreducibleSpace_of_torsion_nilpotent_ker
     {A A' C D : Type*} [CommRing A] [IsDomain A] [IsNoetherianRing A]
     [CommRing A'] [IsDomain A'] [Algebra A A'] [Algebra.FiniteType A A']
     [CommRing C] [Algebra A C] [Algebra.FiniteType A C] [CommRing D] [Algebra A' D]
@@ -755,7 +754,6 @@ lemma exists_ne_zero_forall_irreducibleSpace_of_torsion_nilpotent_ker
   exact irreducibleSpace_of_comap_surjective _
     (comap_surjective_map_tensor_of_field (k' := p'.asIdeal.ResidueField))
 
-set_option profiler true in
 /-- **Spreading out.** Let `φ : L ⊗[A] C → F` be a map to a field whose kernel is nil, such that
 `F` is birational to an (absolutely) irreducible hypersurface over the algebraically closed field
 `L ⊇ A`, as in `exists_hypersurface_of_perfectField`, where the coordinates `v` have a common
