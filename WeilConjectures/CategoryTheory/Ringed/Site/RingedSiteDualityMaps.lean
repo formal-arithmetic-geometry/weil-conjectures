@@ -1312,7 +1312,6 @@ private theorem ringedSiteTensorCoherence
     ringedSiteTensorAssociatorModel J R M t ht, ringedSiteTensorLeftUnitorModel J R M t ht,
     ringedSiteTensorRightUnitorModel J R M t ht⟩, rfl⟩
 
-set_option maxHeartbeats 800000 in
 -- The fixed derived Hom comparisons have dependent instance arguments.
 /-- Biduality is the signed ordinary map under the two specified Hom comparisons.
 Source: Stacks 0A97, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).
