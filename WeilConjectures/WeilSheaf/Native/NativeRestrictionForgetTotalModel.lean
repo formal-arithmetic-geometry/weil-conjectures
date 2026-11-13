@@ -580,6 +580,13 @@ private theorem ordinary_sheaf_restriction_tensor
 
 end OrdinarySheafRestriction
 
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- On a balanced tensor summand, the inverse ordinary total comparison is the
 pullback tensorator followed by the image of the ordinary insertion. -/
 private theorem ordinary_restriction_total_summand
@@ -612,7 +619,6 @@ private theorem ordinary_restriction_total_summand
     (R.ιTensorObj_mapCochainComplexμIso_hom_f P T p q n hpq)
   simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
   rw [hι, reassoc_of% (ordinary_sheaf_restriction_tensor k₀ l j (P.X p) (T.X q))]
-
 
 -- Keep the concrete presentation types folded while transporting the restriction fields.
 private theorem native_restriction_data
@@ -671,7 +677,7 @@ private theorem balanced_restriction_summand
     (hz : π ≫ i ≫ c = π₀ ≫ i₀) :
     π' ≫ i' ≫ c' ≫ μ = π' ≫ r ≫ G.map i ≫ G.map c := by
   rw [reassoc_of% hu, ht, reassoc_of% hr]
-  simp only [← G.map_comp, ← G.map_comp_assoc, hz]
+  simp only [← G.map_comp, hz]
 
 /-- Identity input comparisons do not change a binary functor square. -/
 private theorem binary_map_identity_square
@@ -691,6 +697,14 @@ variable (α : (ProEtale.adicUpperStar l
     (ProEtale.adicUpperStar l
       (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))))
 local notation "Lα" => Endofunctor.IsoAlgebra.mapOfNatIso α
+
+omit [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- The exact restriction-forget square is the identity on each complex. -/
 private theorem native_restriction_complex_square_hom
     (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) :
@@ -709,7 +723,6 @@ private theorem native_restriction_complex_square_hom
   erw [Category.comp_id]
   rfl
 
-set_option profiler true in
 /-- The chain comparison follows from the balanced summand equations, independently of
 any derived models. -/
 private theorem native_restriction_chain
@@ -737,18 +750,18 @@ private theorem native_restriction_chain
           (((nativeTensorTotal k₀ l U).obj RP).obj RT) ≅
         (FU.mapHomologicalComplex (.up ℤ)).obj RP ⊗
           (FU.mapHomologicalComplex (.up ℤ)).obj RT)
-      (restriction_summands : ∀ (p q n : ℤ) (hpq : p + q = n),
+      (_ : ∀ (p q n : ℤ) (hpq : p + q = n),
         FU.map ((Lα).map (nativeOpenTensorInsertion k₀ l Z P T p q n hpq)) ≫
             FU.map (tr.hom.f n) =
           FU.map (sr (P.X p) (T.X q)).hom ≫
             FU.map (nativeOpenTensorInsertion k₀ l U RP RT p q n hpq))
-      (hcZ : ∀ (p q n : ℤ) (hpq : p + q = n),
+      (_ : ∀ (p q n : ℤ) (hpq : p + q = n),
         Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
             (F.map (nativeOpenTensorInsertion k₀ l Z P T p q n hpq)).hom ≫
             (cZ.hom.f n).hom =
           Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
             (HomologicalComplex.ιTensorObj P₀ T₀ p q n hpq).hom)
-      (hcU : ∀ (p q n : ℤ) (hpq : p + q = n),
+      (_ : ∀ (p q n : ℤ) (hpq : p + q = n),
         Mod.tensorπ (RP.X p).carrier (RT.X q).carrier ≫
             (FU.map (nativeOpenTensorInsertion k₀ l U RP RT p q n hpq)).hom ≫
             (cU.hom.f n).hom =
@@ -794,8 +807,6 @@ private theorem native_restriction_chain
         (P.X p).carrier (T.X q).carrier)
     (hcZ p q n hpq)
 
-
-set_option profiler true in
 -- Project the model witnesses without eliminating into the concrete derived-category goal.
 private theorem native_restriction_goal_proof
     (hL : (Endofunctor.IsoAlgebra.mapOfNatIso α).IsLeftAdjoint) :
