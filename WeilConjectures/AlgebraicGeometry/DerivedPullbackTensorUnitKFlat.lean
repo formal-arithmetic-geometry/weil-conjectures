@@ -296,6 +296,7 @@ private theorem tensorUnit_complex_right
   rfl
 
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- The concrete sheaf tensor instances require extra elaboration heartbeats.
 /-- The explicitly constructed unit comparison satisfies both unit laws on Q(P)
