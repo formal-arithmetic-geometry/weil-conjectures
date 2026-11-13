@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
