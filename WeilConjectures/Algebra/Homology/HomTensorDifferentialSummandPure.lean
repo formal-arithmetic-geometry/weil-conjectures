@@ -37,6 +37,18 @@ private lemma map_units {A B F : Type*} [AddCommGroup A] [AddCommGroup B]
     f (e • x) = e • f x := by
   exact map_zsmul f (e : ℤ) x
 
+private lemma map_sub_units {A B F : Type*} [AddCommGroup A] [AddCommGroup B]
+    [FunLike F A B] [AddMonoidHomClass F A B] (f : F) (e : ℤˣ) (x y : A) :
+    f (x - e • y) = f x - e • f y := by
+  rw [map_sub, map_units]
+
+private lemma sub_negOnePow_swap {A : Type*} [AddCommGroup A]
+    (n p : ℤ) (x y z : A) :
+    x - (p + n).negOnePow • z - n.negOnePow • y =
+      x - n.negOnePow • y - n.negOnePow • (p.negOnePow • z) := by
+  rw [Int.negOnePow_add, mul_comm p.negOnePow n.negOnePow, mul_smul]
+  exact sub_right_comm _ _ _
+
 private lemma composite_hom_eval {A A' B B' D E : Mod}
     (a : D ⟶ E) (b : E ⟶ SheafOfModules.homObj (R := R) A B)
     (f : A' ⟶ A) (g : B ⟶ B') (U : Cᵒᵖ) (s : D.val.obj U)
@@ -236,9 +248,7 @@ private theorem curry_apply (K L M : CochainComplex Mod ℤ)
   subst r t m
   exact (homTensorDegreewiseMap_spec R K L M n).1 p q U s W x y
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- Two nested localized Hom projections require extra elaboration heartbeats.
+set_option profiler true in
 set_option synthInstance.maxSize 256 in
 /-- The iterated Hom differential agrees with the three tensor differential terms
 on one localized pure tensor.
@@ -315,8 +325,7 @@ theorem homTensorDifferential_summand_pure
     (localizedEval R (op W.unop.left) (op (Over.mk (𝟙 W.unop.left))) y).comp
       (((homTensorProjection R L M (p + n + 1) q (p + q + (n + 1))
         (by omega)).val.app (op W.unop.left)).hom.toAddMonoidHom)
-  have hx := congrArg E ho
-  erw [map_sub, map_units E n.negOnePow] at hx
+  have hx := (congrArg E ho).trans (map_sub_units E n.negOnePow _ _)
   let w1 : ((homComplex (R := R) L M).X (p + n + 1)).val.obj (op W.unop.left) :=
     (((((homTensorProjection R K (homComplex (R := R) L M)
       n (p + 1) (p + n + 1) (by omega)).val.app U).hom s).app W).hom
@@ -391,8 +400,6 @@ theorem homTensorDifferential_summand_pure
       v - n.negOnePow • w)
       (congrArg₂ (fun v w : (M.X (p + q + (n + 1))).val.obj (op W.unop.left) ↦
         v - n.negOnePow • w) hA hB) hC)
-  refine hl.trans (Eq.trans ?_ hr'.symm)
-  rw [Int.negOnePow_add, mul_comm p.negOnePow n.negOnePow, mul_smul]
-  exact sub_right_comm _ _ _
+  exact hl.trans ((sub_negOnePow_swap n p _ _ _).trans hr'.symm)
 
 end CategoryTheory

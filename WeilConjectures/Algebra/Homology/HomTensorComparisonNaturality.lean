@@ -31,9 +31,7 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
-set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
--- Matching the identity scalar restriction in counit naturality needs extra reduction.
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of the tensor comparison isomorphism.
 Source: Stacks Project, Section 03EK and Lemma 03CY.
@@ -62,12 +60,17 @@ theorem homTensorComparison_natural {A A' B B' : Mod}
     (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
   have hf := (asIso adj.counit).inv.naturality f
   have hg := (asIso adj.counit).inv.naturality g
+  let S := PresheafOfModules.sheafification
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+  change f ≫ (asIso adj.counit).inv.app A =
+    (asIso adj.counit).inv.app A' ≫ S.map f.val at hf
+  change g ≫ (asIso adj.counit).inv.app B =
+    (asIso adj.counit).inv.app B' ≫ S.map g.val at hg
   simp only [SheafOfModules.tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom,
     tensorIso_inv, Iso.app_inv, asIso_inv, Functor.Monoidal.μIso_hom, Category.assoc,
     ← Functor.LaxMonoidal.μ_natural]
-  simp only [← Category.assoc]
-  congr 1
-  rw [tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
-  congr 1
+  simp only [← Category.assoc, tensorHom_comp_tensorHom]
+  simp only [asIso_inv] at hf hg
+  exact congrArg (fun z ↦ z ≫ _) (congrArg₂ (fun a b ↦ a ⊗ₘ b) hf hg)
 
 end CategoryTheory
