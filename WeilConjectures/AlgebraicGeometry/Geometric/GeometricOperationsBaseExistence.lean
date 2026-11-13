@@ -104,7 +104,6 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-set_option trace.profiler true in
 /-- The termwise inverse/direct image construction supplies the geometric-operation data.
 The construction uses the induced coefficient tower, ordinary module adjunctions, and their
 canonical derived localizations; the normalized tensor and evaluation comparisons are part of

@@ -250,8 +250,8 @@ private theorem pull_transition
     (derivedTransition.{c, v, max c v r} J'
       G.coefficients G.coefficientTransition h)
     ?_ ?_ ?_ M
-  · exact derived_transition_fac.{c, v, max c v r} J B τ h
-  · exact derived_transition_fac.{c, v, max c v r} J'
+  · simpa only [resD, e] using derived_transition_fac.{c, v, max c v r} J B τ h
+  · simpa only [resD, e] using derived_transition_fac.{c, v, max c v r} J'
       G.coefficients G.coefficientTransition h
   · exact G.ordinaryPullTransition h
 

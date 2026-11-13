@@ -213,7 +213,9 @@ private theorem horizontal_natural
     (W' := (evaluation.{c, v, max c v r} J B τ n).obj N)
     ((transition.{c, v, max c v r} J B τ h).app M)
     ((transition.{c, v, max c v r} J B τ h).app N) (d m) (d n) (ht h) U x
-  simpa only [transition_sections_apply] using hs.symm
+  rw [← transition_sections_apply.{c, v, r} J B τ M h U x,
+    ← transition_sections_apply.{c, v, r} J B τ N h U ((d m).val.app U x)]
+  exact hs.symm
 
 include ht in
 @[irreducible] private def assemble : M ⟶ N where
