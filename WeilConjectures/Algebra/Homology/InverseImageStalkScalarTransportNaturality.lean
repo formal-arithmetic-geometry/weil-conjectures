@@ -66,6 +66,26 @@ private theorem explicitStalkMap_germ
   simp [Adjunction.comp_unit_app, TopCat.Presheaf.pullbackPushforwardAdjunction,
     TopCat.Presheaf.pullback]
 
+-- Naturality is categorical; prove it before exposing the concrete stalk module structures.
+private theorem explicitStalkMap_naturality
+    (C : Type (u + 1)) [Category.{u} C] [Limits.HasColimits.{u} C]
+    {T Z : TopCat.{u}} (f : T ⟶ Z) (x : T)
+    [HasWeakSheafify (Opens.grothendieckTopology T) C]
+    {G H : Z.Sheaf C} (a : G ⟶ H) :
+    (TopCat.Presheaf.stalkFunctor C (f x)).map a.hom ≫ explicitStalkMap C f x H =
+      explicitStalkMap C f x G ≫ (TopCat.Presheaf.stalkFunctor C x).map
+        (((TopCat.Sheaf.inverseImageConstruction f C).map a).hom) := by
+  apply TopCat.Presheaf.stalk_hom_ext
+  intro V hx
+  rw [← Category.assoc, TopCat.Presheaf.stalkFunctor_map_germ, Category.assoc,
+    explicitStalkMap_germ, ← Category.assoc, explicitStalkMap_germ, Category.assoc,
+    TopCat.Presheaf.stalkFunctor_map_germ, ← Category.assoc]
+  congr 1
+  exact congrArg (fun q ↦ q.hom.app (Opposite.op V))
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f) C (Opens.grothendieckTopology Z)
+        (Opens.grothendieckTopology T)).unit_naturality a).symm
+
 set_option backward.defeqAttrib.useBackward true in
 /-- Natural semilinear comparison for the explicitly constructed inverse image.
 Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
@@ -157,20 +177,7 @@ theorem exists_inverseImage_stalk_comparison_natural
       (Y.presheaf.map (homOfLE inf_le_left).op r)
     exact congrArg (fun r ↦ r • _) hr.symm
   · intro M N a m
-    obtain ⟨V, hx, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf m
-    change c N ((TopCat.Presheaf.stalkFunctor Ab (f x)).map
-      ((PresheafOfModules.toPresheaf _).map a.val)
-        (TopCat.Presheaf.germ M.val.presheaf V (f x) hx m)) = _
-    erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
-    erw [hc N V hx, hc M V hx]
-    dsimp only [PresheafOfModules.stalkAddMap]
-    erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
-    have hn := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (Opens.map f) Ab (Opens.grothendieckTopology Y)
-        (Opens.grothendieckTopology X)).unit_naturality
-          ((SheafOfModules.toSheaf _).map a)
-    exact congrArg (fun q ↦ TopCat.Presheaf.germ
-      (TopCat.Sheaf.inverseImageModule f Y.sheaf N).val.presheaf
-        ((Opens.map f).obj V) x hx (q.hom.app (Opposite.op V) m)) hn.symm
+    exact ConcreteCategory.congr_hom
+      (explicitStalkMap_naturality Ab f x ((SheafOfModules.toSheaf _).map a)) m
 
 end

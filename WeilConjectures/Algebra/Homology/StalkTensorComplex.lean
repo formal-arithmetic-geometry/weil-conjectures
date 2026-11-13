@@ -171,6 +171,12 @@ theorem exists_stalk_tensor_complex_iso :
   obtain ⟨φ, _, hφ⟩ := SheafOfModules.stalkTensorIso X x
   obtain ⟨e, he⟩ := exists_stalk_tensor_degree_iso X x φ
   let := stalk_additive X x
+  let : ∀ F K : CochainComplex (SheafOfModules.{u₁} O) ℤ,
+      HomologicalComplex.HasMapBifunctor F K (curriedTensor _) (.up ℤ) :=
+    fun F K ↦ inferInstance
+  let : ∀ F K : CochainComplex (ModuleCat.{u₁} (X.presheaf.stalk x)) ℤ,
+      HomologicalComplex.HasMapBifunctor F K (curriedTensor _) (.up ℤ) :=
+    fun F K ↦ inferInstance
   exact tensorComparison_iso_of_degrees (RingedSpace.moduleStalkFunctor X x) φ hφ e he
     (stalk_tensor_degree_differential X x φ hφ e he)
 

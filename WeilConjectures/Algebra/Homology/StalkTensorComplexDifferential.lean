@@ -171,6 +171,12 @@ theorem stalk_tensor_degree_differential
     (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ) (n m : ℤ) :
     (e F K n).hom ≫ (mapBifunctor ((S).obj F) ((S).obj K) (curriedTensor _)).d n m =
       ((S).obj (mapBifunctor F K (curriedTensor _))).d n m ≫ (e F K m).hom := by
+  let : ∀ F K : CochainComplex (SheafOfModules.{u₁} O) ℤ,
+      HomologicalComplex.HasMapBifunctor F K (curriedTensor _) (.up ℤ) :=
+    fun F K ↦ inferInstance
+  let : ∀ F K : CochainComplex (ModuleCat.{u₁} (X.presheaf.stalk x)) ℤ,
+      HomologicalComplex.HasMapBifunctor F K (curriedTensor _) (.up ℤ) :=
+    fun F K ↦ inferInstance
   exact tensorComparison_differential (RingedSpace.moduleStalkFunctor X x) φ hφ e he F K n m
 
 end CochainComplex
