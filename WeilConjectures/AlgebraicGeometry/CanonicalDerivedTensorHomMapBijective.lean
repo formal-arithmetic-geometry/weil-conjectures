@@ -115,7 +115,6 @@ private theorem tensorModelMap_isIso (X : Scheme.{uCD})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option trace.profiler true in
 /-- Every normalized natural uncurrying map is bijective.
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom), using
 sites-cohomology.tex, Tag 0A90 (Hom complexes).
@@ -150,6 +149,7 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     ∀ K L M, Function.Bijective (t K L M) := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  -- Cache the abelian structure used by the localization and resolution constructions.
   let : Abelian C := inferInstance
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
@@ -193,6 +193,7 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     obtain ⟨e, he⟩ := exists_normalizedHomotopyTensorHom X P L I
     have hcomm : (t (Q.obj P) (Q.obj L) (Q.obj M)) ∘ src = dst ∘ e := by
       funext v
+      -- Compare chosen representatives, then transport along the quotient equation.
       let φ : P ⟶ homComplex (R := X.sheaf) L I := v.out
       have hv : q.map φ = v := HomotopyCategory.quotient_map_out v
       have hψ_exists := ht.2 P L M hP φ
