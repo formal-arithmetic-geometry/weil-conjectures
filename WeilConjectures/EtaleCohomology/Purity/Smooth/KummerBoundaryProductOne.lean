@@ -58,7 +58,6 @@ local instance hasColimitsOfSize_rightUnitorShift : HasColimitsOfSize.{0, 0} C :
 
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
-set_option trace.profiler true in
 open TensorCommShift₂ in
 /-- The right unitor of `D(C)` commutes with the shifts at the image of a K-flat complex. -/
 lemma rightUnitor_commShift_app_kFlat (P : CochainComplex.KFlat C) (n : ℤ) :
@@ -66,10 +65,11 @@ lemma rightUnitor_commShift_app_kFlat (P : CochainComplex.KFlat C) (n : ℤ) :
         ((LKFlat C).obj P) ≫ (ρ_ ((LKFlat C).obj P)).hom⟦n⟧' =
       (ρ_ (((LKFlat C).obj P)⟦n⟧)).hom := by
   -- Reuse the tensor structures throughout the localization comparison.
+  let : MonoidalCategoryStruct (CochainComplex C ℤ) :=
+    HomologicalComplex.monoidalCategoryStruct C (.up ℤ)
   let : MonoidalCategory (CochainComplex C ℤ) := inferInstance
   let : MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
   let : MonoidalCategory (DerivedCategory C) := inferInstance
-  let : MonoidalCategoryStruct (CochainComplex C ℤ) := inferInstance
   let : MonoidalCategoryStruct (HomotopyCategory C (.up ℤ)) := inferInstance
   let : MonoidalCategoryStruct (DerivedCategory C) := inferInstance
   let a := ((CochainComplex.ιKFlat C).commShiftIso n).hom.app P
