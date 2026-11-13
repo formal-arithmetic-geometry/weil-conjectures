@@ -260,6 +260,8 @@ attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestricti
 
 -- Keep the representative scalar square at its normalized endpoints.
 include hd in
+set_option maxHeartbeats 800000 in
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Scalar action is preserved by the normalized slice tensor comparison, using the
