@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraStr
+import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsComm
 public import WeilConjectures.WeilSheaf.CohomologyProEtale
@@ -78,6 +79,29 @@ lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
           (lowerStarComp (WeilCoefficients.{u} l) _ _).inv.app M.X :=
   rfl
 
+/-- Global sections identify the Frobenius of a commuting square with its structure map. -/
+private lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
+    (hW : W ⟶ W) (hZ : Z ⟶ Z) (comm : g ≫ hW = hZ ≫ g)
+    (X : IsoAlgebra (adicLowerStar l hZ)) :
+    (IsoAlgebra.frobeniusNatTrans
+      (adicLowerStarComp l g hW ≪≫ adicLowerStarCongr l comm ≪≫
+        (adicLowerStarComp l hZ g).symm)
+      (adicGlobalSections l W) (adicGlobalSections l Z)
+      (adicLowerStarCompGlobalSectionsIso l g)
+      (adicLowerStarCompGlobalSectionsIso l hW).inv).app X =
+      (adicLowerStarCompGlobalSectionsIso l hZ).inv.app X.carrier ≫
+        (adicGlobalSections l Z).map X.str.hom := by
+  -- Use naturality and the adic coherence law without unfolding module pushforwards.
+  have hnat := (adicLowerStarCompGlobalSectionsIso l g).hom.naturality X.str.hom
+  rw [Functor.comp_map] at hnat
+  rw [IsoAlgebra.frobeniusNatTrans_app, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [hnat]
+  have h := congrArg (fun f ↦ (adicLowerStarCompGlobalSectionsIso l g).inv.app X.carrier ≫
+      f ≫ (adicGlobalSections l Z).map X.str.hom)
+    (adicLowerStarCompGlobalSectionsIso_inv_app_comm l g hW hZ g comm X.carrier)
+  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using h
+
 end ProEtale
 
 namespace WeilSheaf
@@ -86,8 +110,6 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 1600000 in
--- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
@@ -108,27 +130,14 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
           Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
   refine NatTrans.ext (funext fun X ↦ ?_)
-  have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
-    (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
-      (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
+  exact adicGlobalSections_frobeniusNatTrans_app
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
-    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
-    ((AdicSheaf.forget _).map X.str.hom)
-  simp only [IsoAlgebra.frobeniusNatTrans_app,
-    ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.comp_map, Functor.map_comp, Category.assoc]
-  simp only [Mod.forget_map, adicLowerStar_map_hom]
-  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
-  simp only [Functor.map_comp, Category.assoc] at h ⊢
-  exact h
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) X
 
 
-set_option maxHeartbeats 1600000 in
--- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 /-- **Weil cohomology from an injective resolution.** Let `I` be an injective resolution of a
 Weil sheaf `F` by pro-étale Weil sheaves. Then `Hʳ(Y ⊗ k̄, F)` is the `r`-th cohomology of the
 complex `Γ(Ȳ, I)`, and its geometric Frobenius is induced by the Frobenius
