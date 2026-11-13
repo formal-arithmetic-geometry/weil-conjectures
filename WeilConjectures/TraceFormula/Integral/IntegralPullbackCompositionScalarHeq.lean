@@ -248,6 +248,12 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let localDecl ← Lean.Meta.getLocalDeclFromUserName `hh
+    Lean.logInfo m!"TARGET TYPE: {repr target.consumeMData.getAppArgs[0]!}"
+    Lean.logInfo m!"HH LEFT TYPE: {repr localDecl.type.consumeMData.getAppArgs[0]!}"
+    Lean.logInfo m!"HH RIGHT TYPE: {repr localDecl.type.consumeMData.getAppArgs[2]!}"
   exact eq_of_heq hh
 
 end Composition
