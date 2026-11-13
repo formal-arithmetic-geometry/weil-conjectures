@@ -180,7 +180,6 @@ noncomputable def extendScalarsTensorRestrictScalarsComplexIso
       (HomologicalComplex.mapBifunctorHomologicalComplexObjObjIso
         (Sheaf.extendScalarsTensorRestrictScalarsIso X.smallEtaleTopology hφ ha) P M) (.up ℤ)
 
-set_option profiler true in
 include hφ ha in
 /-- **The projection formula for extension and restriction of scalars.** For `L ∈ D(X_ét, Λ)` and
 `N ∈ D(X_ét, Λ')`, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ N) ≅ L ⊗ᴸ Res N`: on a K-flat representative `P` of `L`

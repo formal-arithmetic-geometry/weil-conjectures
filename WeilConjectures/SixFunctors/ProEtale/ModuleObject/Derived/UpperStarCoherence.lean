@@ -356,6 +356,7 @@ lemma leftDerivedFunctorFactorIso_assoc_app
     Category.assoc] using
     NatTrans.congr_app this K
 
+omit c in
 /-- The associativity law when the comparison of the two composite functors is an equality. -/
 private lemma leftDerivedFunctorFactorIso_assoc_eq_app (hc : FGH = FGH')
     (h : ∀ M, e₁.hom.app M ≫ eFG.hom.app (H.obj M) =
