@@ -389,9 +389,9 @@ theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Equiv.apply_symm_apply]
   have htransport := counit_projection_transport
     (M.realization.hom ≫
-      whiskerLeft (S.reduction ⋙ F) (coefficientSequenceProjection l E X n) ≫
-      whiskerRight (whiskerLeft S.reduction β.hom ≫
-        whiskerRight (S.reductionEvaluation n).hom B) R) e
+      Functor.whiskerLeft (S.reduction ⋙ F) (coefficientSequenceProjection l E X n) ≫
+      Functor.whiskerRight (Functor.whiskerLeft S.reduction β.hom ≫
+        Functor.whiskerRight (S.reductionEvaluation n).hom B) R) e
   change M.realization.hom.app K ≫
       (coefficientSequenceProjection l E X n).app (F.obj (S.reduction.obj K)) ≫
       R.map bK = (integralDerivedPullback l E f).map e.inv ≫
