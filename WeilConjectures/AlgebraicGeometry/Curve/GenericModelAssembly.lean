@@ -164,9 +164,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   have hX'W : X'.ι ⁻¹ᵁ (W₀ ⊓ F₀ ⁻¹ᵁ V) = W' := by
     ext x
     exact ⟨fun h ↦ h.1, fun h ↦ ⟨h, x.2⟩⟩
-  refine ⟨T, t, htci, htsurj, hTred, ι, inferInstance, Y', ν, hνfin, hνs, D, dd, inferInstance,
-    ?_, ?_, fun a ↦ ?_⟩
-  · -- finiteness of `D` over `V`
+  have hDfin : IsFinite (dd ≫ t ≫ F') := by
     have : IsProper F' := inferInstance
     have : IsProper (dd ≫ t ≫ F') := inferInstance
     have : LocallyQuasiFinite (dd ≫ t ≫ F') := by
@@ -186,7 +184,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
           rw [hrange] at hy'
           exact hy'
     exact IsFinite.of_isProper_of_locallyQuasiFinite _
-  · -- `ν` is an isomorphism outside `D`
+  have hνiso : IsIso (ν ∣_ ⟨(Set.range dd.base)ᶜ, dd.isClosedEmbedding.isClosed_range.isOpen_compl⟩) := by
     rw [hopen]
     have hci' : IsClosedImmersion (ν' ∣_ W') := by
       obtain ⟨a', -, Ha'⟩ :=
@@ -200,7 +198,10 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     have : IsClosedImmersion (ν ∣_ (t ⁻¹ᵁ W')) := IsClosedImmersion.of_comp _ (t ∣_ W')
     have : Surjective (ν ∣_ (t ⁻¹ᵁ W')) := IsZariskiLocalAtTarget.restrict hνs _
     exact isIso_of_isClosedImmersion_of_surjective _
-  · -- the pieces
+  have hpieces : ∀ a, IsFinite (Sigma.ι Y' a ≫ ν) ∧
+      (SmoothOfRelativeDimension 1 (Sigma.ι Y' a ≫ ν ≫ t ≫ F') ∨
+      (IsFinite (Sigma.ι Y' a ≫ ν ≫ t ≫ F') ∧ Etale (Sigma.ι Y' a ≫ ν ≫ t ≫ F'))) := by
+    intro a
     have he₀ : (Sigma.ι Y' a ≫ ν) ≫ t = p' a := by
       rw [Category.assoc, hν]
       simp [ν']
@@ -219,5 +220,7 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
       exact ⟨IsFinite.of_isProper_of_locallyQuasiFinite _, this⟩
     · left
       rwa [h1] at this
+  exact ⟨T, t, htci, htsurj, hTred, ι, inferInstance, Y', ν, hνfin, hνs, D, dd, inferInstance,
+    hDfin, hνiso, hpieces⟩
 
 end AlgebraicGeometry
