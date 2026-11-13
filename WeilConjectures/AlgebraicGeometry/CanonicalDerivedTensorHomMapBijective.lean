@@ -115,9 +115,7 @@ private theorem tensorModelMap_isIso (X : Scheme.{uCD})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 set_option trace.profiler true in
--- The representative predicate elaborates the sheaf tensor and derived-category instances.
 /-- Every normalized natural uncurrying map is bijective.
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom), using
 sites-cohomology.tex, Tag 0A90 (Hom complexes).
@@ -152,6 +150,7 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     ∀ K L M, Function.Bijective (t K L M) := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  let : Abelian C := inferInstance
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf
@@ -204,19 +203,20 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
           (K₁ := P) (K₂ := L) (F := curriedTensor C) (c := .up ℤ)
         intro p r hpr
         change p + r = n at hpr
-        exact (hψ p r n hpr (by omega)).trans
-          ((uncurryComponent_eq X P L M φ p r n (by omega)).trans
-            (hψ' p r n hpr (by omega)).symm)
+        have hrp : r + p = n := (add_comm r p).trans hpr
+        exact (hψ p r n hpr hrp).trans
+          ((uncurryComponent_eq X P L M φ p r n hrp).trans
+            (hψ' p r n hpr hrp).symm)
       have hs : src (q.map φ) = Q.map φ ≫ j.inv := by
         dsimp only [src, Equiv.trans_apply, Iso.homCongr_apply]
-        rw [localizedHomEquiv_map]
-        change (𝟙 (Q.obj P)) ≫ Q.map φ ≫ j.inv = _
-        exact Category.id_comp _
+        exact (Category.id_comp _).trans
+          (congrArg (fun f ↦ f ≫ j.inv) (localizedHomEquiv_map X P _ φ))
       have hd : dst (q.map ψ) =
           pullbackTensorModelMap X P L ≫ Q.map ψ ≫ schemeHomResolutionInverse X M := by
         dsimp only [dst, Equiv.trans_apply, Iso.homCongr_apply]
-        rw [localizedHomEquiv_map]
-        rfl
+        exact congrArg
+          (fun f ↦ pullbackTensorModelMap X P L ≫ f ≫ schemeHomResolutionInverse X M)
+          (localizedHomEquiv_map X (pullbackTensorTotal X P L) I ψ)
       change t (Q.obj P) (Q.obj L) (Q.obj M) (src (q.map φ)) = dst (e (q.map φ))
       calc
         _ = t (Q.obj P) (Q.obj L) (Q.obj M) (Q.map φ ≫ j.inv) := congrArg _ hs
