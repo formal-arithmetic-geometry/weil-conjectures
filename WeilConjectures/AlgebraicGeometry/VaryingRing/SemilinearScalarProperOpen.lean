@@ -77,22 +77,10 @@ private theorem termwiseClopenUnit {I A X : Type*}
     Adjunction.whiskerRight_counit_app_app, Functor.whiskeringRight,
     Functor.comp_obj, Functor.id_obj, Functor.whiskerRight_app, NatTrans.id_app] using hn
 
-private theorem termwiseBetaUnitOfSquare {I A B C D : Type*}
-    [Category I] [Category A] [Category B] [Category C] [Category D]
-    {J : A ⥤ B} {P : B ⥤ A} {J' : C ⥤ D} {P' : D ⥤ C}
-    (a : J ⊣ P) (a' : J' ⊣ P') (F : A ⥤ C) (G : B ⥤ D)
-    (e : J ⋙ G ≅ F ⋙ J') (z : G ⋙ P' ≅ P ⋙ F)
-    (zT : (Functor.whiskeringRight I _ _).obj G ⋙
-        (Functor.whiskeringRight I _ _).obj P' ≅
-      (Functor.whiskeringRight I _ _).obj P ⋙ (Functor.whiskeringRight I _ _).obj F)
-    (hz : termwiseIso z = zT)
-    (h : ∀ M, a'.homEquiv _ _ (e.inv.app M) =
-      F.map (a.unit.app M) ≫ z.inv.app (J.obj M)) (M : I ⥤ A) :
-    (a'.whiskerRight I).homEquiv _ _ ((termwiseIso e).inv.app M) =
-      ((Functor.whiskeringRight I _ _).obj F).map ((a.whiskerRight I).unit.app M) ≫
-        zT.inv.app (((Functor.whiskeringRight I _ _).obj J).obj M) := by
-  subst zT
-  exact termwiseBetaUnit a a' F G e z h M
+private theorem compIsoInvApp_eq {A B : Type*} [Category A] [Category B]
+    {F G : A ⥤ B} (e e' : F ≅ G) (he : e = e') (M : A)
+    {N : B} (f : N ⟶ G.obj M) : f ≫ e.inv.app M = f ≫ e'.inv.app M := by
+  rw [he]
 
 private theorem clopenComparison
     {A X A' X' : Type*} [Category A] [Category X] [Category A'] [Category X']
@@ -468,16 +456,16 @@ private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (scalarTowerOpenAdj B j').homEquiv _ _ ((scalarBeta B a j' j g h sq).inv.app M) =
       (StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M) ≫
         (scalarTowerSquare B a j' j g h).inv.app ((StrictTower.towerJ B j).obj M) := by
-  have ht := termwiseBetaUnitOfSquare (I := ℕᵒᵖ)
-    (J := StrictTower.moduleJ B j) (P := StrictTower.modulePullback B j)
-    (J' := StrictTower.moduleJ B j') (P' := StrictTower.modulePullback B j')
-    (StrictTower.moduleJAdj B j) (StrictTower.moduleJAdj B j')
+  have ht := termwiseBetaUnit (StrictTower.moduleJAdj B j) (StrictTower.moduleJAdj B j')
     (StrictTower.modulePullback B a) (StrictTower.modulePullback B g)
     (StrictTower.openBetaModule B a j' j g h sq)
     (StrictTower.moduleSquareG B a j' j g h)
-    (scalarTowerSquare B a j' j g h) (scalarSquare_termwise B a j' j g h)
     (StrictTower.openBetaModule_normalized B a j' j g h sq).2 M
-  exact ht
+  exact ht.trans (compIsoInvApp_eq
+    (termwiseIso (I := ℕᵒᵖ) (StrictTower.moduleSquareG B a j' j g h))
+    (scalarTowerSquare B a j' j g h) (scalarSquare_termwise B a j' j g h)
+    ((StrictTower.towerJ B j).obj M)
+    ((StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M)))
 
 private def scalarClopen {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
