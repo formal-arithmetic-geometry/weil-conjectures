@@ -119,10 +119,7 @@ lemma leftDerivedUpperStarTensor_comp_eq :
   refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ (f ≫ g))
     (leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  apply NatTrans.ext
-  intro P
-  apply NatTrans.ext
-  intro Q
+  ext P Q
   change ((leftDerivedUpperStarTensor Λ (f ≫ g)).app (Qh.obj P)).app (Qh.obj Q) ≫
       ((leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)).app P).app Q =
     ((leftDerivedUpperStarTensorComp Λ f g).app (Qh.obj P)).app (Qh.obj Q) ≫
@@ -235,10 +232,7 @@ lemma leftDerivedUpperStarTensor_id_eq :
   refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ (𝟙 W))
     (leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  apply NatTrans.ext
-  intro P
-  apply NatTrans.ext
-  intro Q
+  ext P Q
   change ((leftDerivedUpperStarTensor Λ (𝟙 W)).app (Qh.obj P)).app (Qh.obj Q) ≫
       ((leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)).app P).app Q =
     ((leftDerivedUpperStarTensorId Λ W).app (Qh.obj P)).app (Qh.obj Q) ≫
