@@ -120,7 +120,8 @@ private theorem localization_mate_isIso (ℓ : ℕ)
         (ULift.orderIso : ULift.{v} ℕ ≃o ℕ).equivalence.functor G (P q) σ cX hd)
   have : IsIso (UY.map β) := by
     have heq : UY.map β = g ≫ κ.inv.app (LX.obj K) := by
-      simp only [g, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+      simp only [g, Category.assoc, Iso.hom_inv_id_app]
+      exact (Category.comp_id (UY.map β)).symm
     rw [heq]
     infer_instance
   exact isIso_of_reflects_iso β UY
@@ -224,7 +225,9 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact isIso_of_reflects_iso _ V
   apply localization_mate_isIso ℓ adjX adjY κ K.obj (DerivedCategory.homologyFunctor _)
   · intro M N z hz
-    exact (DerivedCategory.isIso_iff z).2 hz
+    rw [DerivedCategory.isIso_iff]
+    intro q
+    exact hz q
   · exact integralLocalization_push_homology_isColimit ℓ E f K.obj hK
   · exact integralLocalization_homology_isColimit ℓ E Y (G.obj K.obj) hGK
 
