@@ -46,9 +46,9 @@ private theorem adjunction_unit_map_augmentation
     (t : Q.obj A ⟶ B) (c : Q.obj F ⟶ F')
     (ht : Q.map i ≫ t = c ≫ i') :
     i ≫ adj.unit.app A ≫ P.map t = (adj.unit.app F ≫ P.map c) ≫ P.map i' := by
-  rw [← Category.assoc, adj.unit.naturality i]
-  change (adj.unit.app F ≫ P.map (Q.map i)) ≫ P.map t = _
-  rw [Category.assoc, ← P.map_comp, ht, P.map_comp, Category.assoc]
+  have hn : i ≫ adj.unit.app A = adj.unit.app F ≫ P.map (Q.map i) :=
+    adj.unit.naturality i
+  rw [← Category.assoc, hn, Category.assoc, ← P.map_comp, ht, P.map_comp, Category.assoc]
 
 set_option profiler true in
 /-- Pushforward identifies the global-section complexes, with the inverse given by
@@ -66,7 +66,7 @@ private theorem exists_pushforward_sections_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
         forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ≅
       ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
         forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
-          (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj K := by
+          (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj K) := by
     refine (HomologicalComplex.Hom.isoOfComponents
       (fun n ↦ (presheaf (K.X n)).mapIso
         (eqToIso (by simp) : op (f ⁻¹ᵁ (⊤ : Y.Opens)) ≅ op (⊤ : X.Opens))) ?_).symm
@@ -195,15 +195,21 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   let j := Z.homOfLE e
   let P := pushforward j
   let Q := restrictFunctor j
-  let c := (restrictFunctorComp j U.ι).symm ≪≫
+  let c : restrictFunctor U.ι ⋙ Q ≅ restrictFunctor L.ι :=
+    (restrictFunctorComp j U.ι).symm ≪≫
     restrictFunctorCongr (Z.homOfLE_ι e)
-  let t := (Q.mapHomologicalComplex (ComplexShape.up ℕ)).map R.comparison.hom ≫
+  let t : (Q.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.resolution.cocomplex ⟶
+      R'.resolution.cocomplex :=
+    (Q.mapHomologicalComplex (ComplexShape.up ℕ)).map R.comparison.hom ≫
     (NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℕ)).app I.cocomplex ≫
       R'.comparison.inv
-  let β := (NatTrans.mapHomologicalComplex (restrictAdjunction j).unit
+  let β : R.resolution.cocomplex ⟶
+      (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj R'.resolution.cocomplex :=
+    (NatTrans.mapHomologicalComplex (restrictAdjunction j).unit
     (ComplexShape.up ℕ)).app R.resolution.cocomplex ≫
       (P.mapHomologicalComplex (ComplexShape.up ℕ)).map t
-  let φ := (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫
+  let φ : (restrictFunctor U.ι).obj F ⟶ P.obj ((restrictFunctor L.ι).obj F) :=
+    (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫
     P.map (c.hom.app F)
   have ht : Q.map (R.resolution.ι.f 0) ≫ t.f 0 =
       c.hom.app F ≫ R'.resolution.ι.f 0 := by
