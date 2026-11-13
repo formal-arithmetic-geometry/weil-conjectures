@@ -187,6 +187,7 @@ private theorem boundedConstructible_nearbyCycles_residue_pullback
     _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
 
 
+set_option profiler true in
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
 an integral model `K₀` (the pullback of an integral model of `B`) such that the nearby cycles of
@@ -223,16 +224,6 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
               (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
                 (baseChangeGaloisModel hM b hb v hv).generic)).leftDerivedFunctor.obj
                   K₀.obj))) := by
-  let {J : Type} [SmallCategory J] (T : Scheme.{u})
-      (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-      (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-      (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-      PreservesColimit F (MonoidalCategory.tensorLeft P) := by infer_instance
-  let {J : Type} [SmallCategory J] (T : Scheme.{u})
-      (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-      (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-      (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-      PreservesColimit F (MonoidalCategory.tensorRight P) := by infer_instance
   have : IsNoetherian M.total := hM.isTraitModel.isNoetherian_total
   refine (exists_padicAlgCl_iso_integralModel_obj ℓ M.total B hB).elim fun E hE ↦ ?_
   refine hE.elim fun B₀ he₀ ↦ ?_
@@ -250,7 +241,7 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
   have h := boundedConstructible_nearbyCycles_residue_pullback hM b hb v hv E
     ((Mod.extendScalars (coefficientMap
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj B₀.obj)
-    hred
+    (by exact_mod_proofs hred)
   let F := L((𝟙 (baseChangeGaloisModel hM b hb v hv).generic)^*⟦
       Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧) ⋙
       (((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
