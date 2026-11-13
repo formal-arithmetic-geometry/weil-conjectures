@@ -10,6 +10,8 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerReali
 import all WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorNaturality
 import WeilConjectures.SmoothPurity.Supporting.NaturalCoherentTensorLevel
 import all WeilConjectures.TraceFormula.Coherent.CoherentQuotientOrdinaryLift
+import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerTransitionSquare
+import all WeilConjectures.SmoothPurity.ScalarExtensionTower.OrdinaryScalarTowerProof
 
 /-! # Homogeneous generators of the transported strict quotient tensor tower
 
@@ -33,8 +35,6 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 variable (l : ℕ) [Fact l.Prime]
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 600000 in
--- Evaluating the total tensor and the scalar-restriction section requires extra reduction.
 /-- Tensoring strict quotient identifications gives the specified generator formula.
 Source: Stacks 03EL, 07A4 and 0941; step 3 of
 stage3-pur-scalar-tensor-model-normalization.
@@ -86,14 +86,7 @@ theorem strictQuotientTensorGenerator (W : Scheme.{u})
             (coefficientEvaluationSection l E W (D.X r) n U y)) := by
   dsimp only
   intro n p r V x y
-  let R := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)
   let ev := (coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)
-  let res := (scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ)
-  let U := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙
-    HomologicalComplex.complexOfFunctorsToFunctorToComplex
-  let B := coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
-    (integralCoefficientCommRingSheaf l E W n)
-  let c := (tensor l E W).mapIso (a.symm.prod b.symm)
   have hκa : ev.map a.inv ≫ (pullbackTensorReductionEvaluationComplex l E W n).inv.app P =
       (κC n).hom := by
     have h := congrArg Iso.hom (ha n)
@@ -106,61 +99,34 @@ theorem strictQuotientTensorGenerator (W : Scheme.{u})
     change ev.map b.hom ≫ (κD n).hom =
       (pullbackTensorReductionEvaluationComplex l E W n).inv.app Q at h
     rw [← h, ← Category.assoc, ← ev.map_comp, b.inv_hom_id, ev.map_id, Category.id_comp]
-  have hlevel : (U.map c.hom).app (op n) ≫
-      (pullbackTensorTensorTower l E W P Q).hom.app (op n) =
-    (pullbackTensorRestrictedLevel l E W ((tensor l E W).obj (C, D)) n).hom ≫
-      res.map ((coefficientEvaluationTensorIso l E W n C D).hom ≫
-        B.map (Prod.mkHom (κC n).hom (κD n).hom)) := by
-    have htw := (pullbackTensorTensorTower_existsUnique l E W P Q).exists.choose_spec n
-    change (pullbackTensorTensorTower l E W P Q).app (op n) = _ at htw
-    rw [← Iso.app_hom, htw]
-    unfold pullbackTensorTensorTowerLevel
-    change (U.map c.hom).app (op n) ≫
-      ((pullbackTensorRestrictedLevel l E W ((tensor l E W).obj (R.obj P, R.obj Q)) n).hom ≫
-        res.map (coefficientEvaluationTensorIso l E W n (R.obj P) (R.obj Q)).hom ≫
-        res.map (B.map (Prod.mkHom
-          ((pullbackTensorReductionEvaluationComplex l E W n).inv.app P)
-          ((pullbackTensorReductionEvaluationComplex l E W n).inv.app Q)))) = _
-    have hn := (pullbackTensorRestrictionEvaluation l E W n).hom.naturality c.hom
-    change (U.map c.hom).app (op n) ≫
-        (pullbackTensorRestrictedLevel l E W ((tensor l E W).obj (R.obj P, R.obj Q)) n).hom =
-      (pullbackTensorRestrictedLevel l E W ((tensor l E W).obj (C, D)) n).hom ≫
-        res.map (ev.map c.hom) at hn
-    rw [← Category.assoc, hn]
-    simp only [Category.assoc, ← res.map_comp]
-    have he := pullbackTensorEvaluationTensor_naturality l E W n a.inv b.inv
-    change ev.map c.hom ≫
-        (coefficientEvaluationTensorIso l E W n (R.obj P) (R.obj Q)).hom =
-      (coefficientEvaluationTensorIso l E W n C D).hom ≫
-        B.map (Prod.mkHom (ev.map a.inv) (ev.map b.inv)) at he
-    rw [← Category.assoc, he]
-    simp only [Category.assoc]
-    rw [← B.map_comp]
-    have hp : Prod.mkHom (ev.map a.inv) (ev.map b.inv) ≫
-        Prod.mkHom ((pullbackTensorReductionEvaluationComplex l E W n).inv.app P)
-          ((pullbackTensorReductionEvaluationComplex l E W n).inv.app Q) =
-      Prod.mkHom (κC n).hom (κD n).hom := by
-      exact Prod.ext hκa hκb
-    rw [hp]
-  have hsection (K : Complex l E W) (i : ℤ)
-      (z : (K.X i).val.obj (op (n, V.unop))) :
-    (((pullbackTensorRestrictedLevel l E W K n).hom).f i).val.app V
-      (integralComparisonRestrictedSection l E W (K.X i) n V z) =
-      coefficientEvaluationSection l E W (K.X i) n V z := by
-    change (((eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app
-      (K.X i)).val.app V) _ = _
-    exact (restrictionEvaluation_apply l E W (K.X i) n V z).trans rfl
-  change (((U.map c.hom).app (op n) ≫
-      (pullbackTensorTensorTower l E W P Q).hom.app (op n)).f (p + r)).val.app V _ = _
-  rw [hlevel]
-  change ((B.map (Prod.mkHom (κC n).hom (κD n).hom)).f (p + r)).val.app V
-    (((coefficientEvaluationTensorIso l E W n C D).hom.f (p + r)).val.app V
-      ((((pullbackTensorRestrictedLevel l E W ((tensor l E W).obj (C, D)) n).hom).f
-        (p + r)).val.app V _)) = _
-  rw [hsection ((tensor l E W).obj (C, D)) (p + r)
-    (generator l E W C D p r (op (n, V.unop)) x y)]
-  erw [pullbackTensorEvaluationTensor_generator_cast l E W n C D p r (p + r) rfl V x y]
-  erw [CategoryTheory.ScalarHomTensor.tensor_generator_map.{u + 1, u, u}]
-  rfl
+  let f := (tensor l E W).map (Prod.mkHom a.inv b.inv)
+  have htw := (pullbackTensorTensorTower_existsUnique l E W P Q).exists.choose_spec n
+  change (pullbackTensorTensorTower l E W P Q).app (op n) = _ at htw
+  change (((pullbackTensorTensorTower l E W P Q).hom.app (op n)).f (p + r)).val.app V
+    (((((coefficientSequenceRestriction l E W).map (f.f (p + r))).app (op n)).val.app V)
+      (integralComparisonRestrictedSection l E W _ n V
+        (generator l E W C D p r (op (n, V.unop)) x y))) = _
+  rw [OrdinaryScalarTowerProof.restriction_map_section]
+  have hg := CategoryTheory.ScalarHomTensor.tensor_generator_map.{u + 1, u, u}
+    a.inv b.inv p r (p + r) rfl (op (n, V.unop)) x y
+  change (f.f (p + r)).val.app (op (n, V.unop))
+      (generator l E W C D p r (op (n, V.unop)) x y) = _ at hg
+  rw [hg, ← Iso.app_hom, htw]
+  have ht := tensorLevel_generator l E W P Q n p r (p + r) rfl V
+    ((a.inv.f p).val.app (op (n, V.unop)) x)
+    ((b.inv.f r).val.app (op (n, V.unop)) y)
+  refine ht.trans ?_
+  have hx := congrArg (fun g ↦ (g.f p).val.app V
+    (coefficientEvaluationSection l E W (C.X p) n V x)) hκa
+  have hy := congrArg (fun g ↦ (g.f r).val.app V
+    (coefficientEvaluationSection l E W (D.X r) n V y)) hκb
+  change (((pullbackTensorReductionEvaluationComplex l E W n).inv.app P).f p).val.app V
+    (coefficientEvaluationSection l E W _ n V
+      ((a.inv.f p).val.app (op (n, V.unop)) x)) = _ at hx
+  change (((pullbackTensorReductionEvaluationComplex l E W n).inv.app Q).f r).val.app V
+    (coefficientEvaluationSection l E W _ n V
+      ((b.inv.f r).val.app (op (n, V.unop)) y)) = _ at hy
+  rw [hx, hy]
+  exact finite_coefficient_generator l E W P Q n p r V _ _
 
 end WeilConjectures.ScalarExtensionTower
