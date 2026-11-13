@@ -243,7 +243,7 @@ private theorem localPieceBoundedInjectiveCocone
     exact hβvq
   exact ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩
 
-noncomputable local instance localPieceCostalkModelModuleColimits
+private theorem localPieceCostalkModelModuleColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
     (I : Type (u + 1)) [SmallCategory I] :
@@ -251,7 +251,7 @@ noncomputable local instance localPieceCostalkModelModuleColimits
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := by
   infer_instance
 
-noncomputable local instance localPieceCostalkModelComplexColimits
+private theorem localPieceCostalkModelComplexColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
     (I : Type (u + 1)) [SmallCategory I] :
@@ -305,7 +305,8 @@ theorem condensed_local_piece_costalk_model
         (v : F.obj (DerivedCategory.Q.mapCocone (colimit.cocone N)).pt ≅
           G.obj (colimit.cocone L).pt),
         ∀ s : I, F.map ((DerivedCategory.Q.mapCocone (colimit.cocone N)).ι.app s) ≫ v.hom =
-          e.hom.app s ≫ G.map ((colimit.cocone L).ι.app s) := by
+          (e.hom.app s : F.obj ((N ⋙ DerivedCategory.Q).obj s) ⟶ G.obj (L.obj s)) ≫
+            G.map ((colimit.cocone L).ι.app s) := by
   /- Proof: choose the exceptional right adjoint H₀ of exact closed pushforward and
   compose it with exact open restriction j*. Its exact left adjoint is i_*j_!.
   Their ordinary derived adjunction identifies the two shifted Hom functors.
