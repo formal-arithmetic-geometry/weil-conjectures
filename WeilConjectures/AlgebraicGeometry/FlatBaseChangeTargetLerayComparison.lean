@@ -31,9 +31,7 @@ attribute [local instance] enoughInjectives
 
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
-set_option profiler true in
-set_option maxHeartbeats 800000 in
--- The section and Ext models require explicit derived-cohomology conversions.
+set_option trace.profiler true in
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change.
@@ -122,12 +120,12 @@ theorem exists_flatBaseChange_target_leray_comparison
     f g F I J p V W hV hW eVW D rfl E' hE'
   refine ⟨b, ?_⟩
   intro xi
-  generalize hxi : e0.symm xi = x
+  let x := e0.symm xi
   have hx : E N
       (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
       = xi := by
     rw [hE _ _ c.hom x]
-    exact (congrArg e0 hxi.symm).trans (e0.apply_symm_apply xi)
+    exact e0.apply_symm_apply xi
   have hp := hmap N
     (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
   have hb' := hb x
@@ -135,6 +133,6 @@ theorem exists_flatBaseChange_target_leray_comparison
     hp.symm
   have hx' := congrArg (fun z : HOver h N p ↦
     b (H.baseChangeLinear (S := Γ(S', W)) h N p z)) hx.symm
-  exact Eq.trans hx' (Eq.trans hp' hb')
+  exact hx'.trans (hp'.trans hb')
 
 end AlgebraicGeometry.Scheme.Modules

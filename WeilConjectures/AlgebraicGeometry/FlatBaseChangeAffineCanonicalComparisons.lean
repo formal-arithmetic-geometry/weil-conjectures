@@ -31,9 +31,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Explicit homology transports need more elaboration than the default budget.
+set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical source and target affine comparisons, compatible with the cohomological
@@ -115,11 +113,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
               (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                 ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (e0.symm xi)))) := by
   classical
-  dsimp only
   let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
-  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
-  let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F
+  intro h N P Q
   let : ∀ G : S.Modules, Module Γ(S, V)
       Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
     fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
