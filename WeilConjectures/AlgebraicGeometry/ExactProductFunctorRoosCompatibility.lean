@@ -170,13 +170,13 @@ variable {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     (χ' : ∀ i : ℤ, U'.X (i + 1) ≅ P'.X (i + 1) ⊞ P'.X i)
     (k : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj U ⟶ U')
     (ψ : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P ⟶ P')
+
+private theorem compatBoundary_map
     (hd : ∀ i,
       (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.fst =
         F.map ((χ i).hom ≫ biprod.fst) ≫ ψ.f (i + 1)) ∧
       (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.snd =
         F.map ((χ i).hom ≫ biprod.snd) ≫ ψ.f i))
-
-private theorem compatBoundary_map
     (δ : P ⟶ U⟦(1 : ℤ)⟧) (δ' : P' ⟶ U'⟦(1 : ℤ)⟧)
     (hδ : ∀ i, δ.f i ≫ (U.shiftFunctorObjXIso 1 i (i + 1) rfl).hom ≫
       (χ i).hom = -biprod.inr)
@@ -189,10 +189,11 @@ private theorem compatBoundary_map
   funext i
   have hda : δ.f i ≫ (χ i).hom = -biprod.inr := by
     simpa only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
-      Iso.refl_hom, Category.id_comp] using hδ i
+      Iso.refl_hom, Category.id_comp, Category.comp_id] using hδ i
   have hdb : δ'.f i ≫ (χ' i).hom = -biprod.inr := by
     simpa only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
-      Iso.refl_hom, Category.id_comp] using hδ' i
+      Iso.refl_hom, Category.id_comp, Category.comp_id] using hδ' i
+  simp only [HomologicalComplex.comp_f, Functor.map_comp, Category.assoc]
   change (F.map (δ.f i) ≫ 𝟙 _) ≫ k.f (i + 1) = ψ.f i ≫ δ'.f i
   rw [Category.comp_id]
   apply (cancel_mono (χ' i).hom).mp
@@ -213,6 +214,11 @@ private theorem compatBoundary_map
     simp only [Functor.map_id, Category.id_comp, Category.comp_id]
 
 private theorem compatAugment_map
+    (hd : ∀ i,
+      (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.fst =
+        F.map ((χ i).hom ≫ biprod.fst) ≫ ψ.f (i + 1)) ∧
+      (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.snd =
+        F.map ((χ i).hom ≫ biprod.snd) ≫ ψ.f i))
     {V : CochainComplex A ℤ} (f : V ⟶ P)
     (f' : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj V ⟶ P')
     (b : V ⟶ U) (b' : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj V ⟶ U')
