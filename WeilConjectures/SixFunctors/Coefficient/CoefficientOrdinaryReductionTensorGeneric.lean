@@ -269,7 +269,7 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through total tensor complexes and scalar restriction.
-set_option trace.profiler true in
+set_option profiler true in
 /-- Scalar tensor comparisons characterized by the unit-section generator formula are
 natural in both complexes. Source: Stacks 03EK, 07A4. -/
 theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
@@ -310,16 +310,24 @@ theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
     apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{c, v, r} P Q k
     intro p p' hpq V x y
     apply restrictionSection_injective π _ V
-    erw [unit_comp_section, unit_comp_section, comp_section, comp_section, unit_map_section,
-      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}]
-    have h₁ := hs' p p' k hpq V ((f.f p).val.app V x) ((g.f p').val.app V y)
-    have h₂ := hs p p' k hpq V x y
-    beta_reduce at h₁ h₂
-    erw [h₁]
-    conv_rhs => erw [comp_section]
-    erw [h₂, CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r},
-      unit_map_section,
-      unit_map_section]
+    change (s'.hom.f k).val.app V
+        ((F.map (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k)).val.app V
+          (coefficientRestrictionSection π _ V ((a.unit.app _).val.app V
+            (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)))) =
+      (((coefficientTotalTensor.{r, c, v} J B).map
+        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f)
+          ((F.mapHomologicalComplex (.up ℤ)).map g))).f k).val.app V
+        ((s.hom.f k).val.app V (coefficientRestrictionSection π _ V
+          ((a.unit.app _).val.app V
+            (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))))
+    rw [unit_map_section π a
+      (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k) V,
+      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r} f g p p' k hpq V,
+      hs' p p' k hpq V, hs p p' k hpq V,
+      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}
+        ((F.mapHomologicalComplex (.up ℤ)).map f)
+        ((F.mapHomologicalComplex (.up ℤ)).map g) p p' k hpq V]
+    rw [unit_map_section π a (f.f p) V x, unit_map_section π a (g.f p') V y]
   apply HomologicalComplex.Hom.ext
   funext k
   exact key k
@@ -336,6 +344,7 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through several levels of composite functors.
+set_option profiler true in
 /-- The tensor product of two presentations of strict system complexes is again a
 presentation: its finite comparison commutes with the strict transitions.
 Source: Stacks 03EK, 07A4 and 0941. -/
