@@ -15,13 +15,15 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Artin-Rees for coherent modules on a Noetherian scheme
 
-Source: Stacks Project, Cohomology of Schemes, Tag 01YA.
-
 ## Implementation details
 
 The pullback of the two inclusions represents their sectionwise intersection. Equalities
 and inclusions of subsheaves are expressed by their images in the sections of `F` on every
 open.
+
+## References
+
+* Stacks Project, Tag 01YA
 -/
 
 @[expose] public section

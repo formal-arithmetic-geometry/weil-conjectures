@@ -25,11 +25,13 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedProperOpenPasting
 
 /-! # Normalized unbounded proper/open interchange and its base-change cube
 
-Source: Stacks Project, more-etale.tex, Tags 0F7B(b), 0F7C, 0F7D, 0F7E and 0F7F.
-
 The comparison families below use the ordinary unbounded module derived categories.
 The sheaf comparison is fixed by equality inside the common ordinary direct image;
 the derived comparison is fixed on every K-injective representative and resolution.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7E and 0F7F
 -/
 
 @[expose] public section

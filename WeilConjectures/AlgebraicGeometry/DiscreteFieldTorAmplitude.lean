@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueModelComparison
 Over the pulled-back discrete ring of a field, every internal module is flat, so every bounded
 complex has finite Tor amplitude.
 
-Source: Stacks Project, Tags 03ER, 08FC and 0651; Bhatt--Scholze, Remark 6.3.2.
+## References
+
+* Stacks Project, Tags 03ER, 08FC and 0651
+* Bhatt–Scholze, Remark 6.3.2
 -/
 
 @[expose] public noncomputable section

@@ -43,8 +43,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Completed adic coefficient datum and its strict reduction tower
 
-Source: proper base change, order 1239; Stacks Tags 099L and 099M.
-
 The site has object universe t+1 and morphism universe t. Coefficients and modules
 are in t+1. The ambient ring is the actual inverse limit of the finite constant
 quotient sheaves, not the constant sheaf associated to the original ring.
@@ -56,6 +54,10 @@ quotient sheaves, not the constant sheaf associated to the original ring.
 * `adicDatumAdjunction`: normalized derived scalar adjunction.
 * `adicDatumDerivedTower`: universal strict quotient tower.
 * `adicDatumModelTower`: its explicit K-flat computation.
+
+## References
+
+* Stacks Project, Tags 099L and 099M
 -/
 
 @[expose] public noncomputable section

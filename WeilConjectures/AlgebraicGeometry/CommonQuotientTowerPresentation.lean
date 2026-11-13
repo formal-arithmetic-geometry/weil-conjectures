@@ -10,12 +10,13 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 /-! # Presentations of towers of common quotient ring sheaves
 
-Source: Stacks Project, proetale.tex, Tag 099L, section-derived-completion-noetherian;
-sites-modules.tex, Tag 03EK, section-tensor-product.
-
 A quotient is specified by its locally surjective projection, rather than by a
 sectionwise surjection. Extension of its kernel ideal is specified by the pushout
 universal property in ring sheaves. This includes quotients whose sections lift only locally.
+
+## References
+
+* Stacks Project, Tags 099L and 03EK
 -/
 
 @[expose] public section

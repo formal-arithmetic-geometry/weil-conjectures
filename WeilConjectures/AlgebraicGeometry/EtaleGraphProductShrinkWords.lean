@@ -8,11 +8,13 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphProductAmbientPasting
 
 /-! # The mixed-neighborhood boundary in the product shrink grid
 
-Source: Stacks Project, Tags 0F7C, 0F7D and the A--F calculation of Tag 0F7J.
-
 The middle boundary is constructed from the composite graph triangle, open
 compositors, and the inverse exchange for the mixed-neighborhood inclusion.
 It does not use either the lift interchange or the final square interchange.
+
+## References
+
+* Stacks Project, Tags 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section

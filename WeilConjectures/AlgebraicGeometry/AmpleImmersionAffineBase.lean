@@ -18,13 +18,15 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso
 
 /-! # An ample module gives an immersion into projective space over an affine base
 
-Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph, and Lemma 01VT.
-
 The projective space `P_n = Proj(A[x₀,…,xₙ])` over `Spec A` is `ℙ(ULift (Fin (n + 1)); Spec A)`, the
 projective space `ℙⁿ_{Spec A}` (identified with `Proj(A[x₀,…,xₙ])` over `Spec A` by Stacks,
 Constructions, Lemma 01O3), with structure morphism `ℙ(…; Spec A) ↘ Spec A` and twisting
 module `ProjectiveSpace.twist`,
 as in `IsHProjective` and `IsVeryAmple`.
+
+## References
+
+* Stacks Project, Tags 01VS and 01VT
 -/
 
 @[expose] public section

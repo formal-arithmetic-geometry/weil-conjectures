@@ -14,7 +14,10 @@ import Mathlib.CategoryTheory.Limits.Types.Images
 /-!
 # Local perfect lifting from lisse residue complexes
 
-Source: Stacks Project, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8.
+## References
+
+* Stacks Project, Tag 09C6
+* Bhatt–Scholze, Lemma 6.6.8
 -/
 
 @[expose] public noncomputable section

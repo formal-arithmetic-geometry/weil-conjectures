@@ -10,8 +10,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 /-!
 # The canonical symmetry of the etale derived tensor product
 
-Source: Stacks Project, Tag 06YU, symmetry of the derived tensor product.
-
 The recorded existence theorem forgets the canonical map. This interface exposes the actual
 braiding descended from the signed braiding of cochain complexes, without choosing an arbitrary
 isomorphism from that existence theorem.
@@ -21,6 +19,10 @@ isomorphism from that existence theorem.
 - `CategoryTheory.DerivedMonoidal.canonicalBraidingNatIso`: the natural braiding before
   specializing to etale sheaves.
 - `AlgebraicGeometry.Etale.derivedTensorSymmetry`: its canonical etale specialization.
+
+## References
+
+* Stacks Project, Tag 06YU
 -/
 
 @[expose] public section

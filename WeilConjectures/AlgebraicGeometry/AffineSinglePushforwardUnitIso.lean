@@ -14,8 +14,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import all Mathlib.Algebra.Homology.Localization
 
 /-! # AffineSinglePushforwardUnitIso
-
-Source: Stacks Project, finite duality and affine cohomology. -/
+-/
 
 @[expose] public section
 

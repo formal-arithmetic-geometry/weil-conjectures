@@ -10,10 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.AlgebraicGeometry.CoefficientSquareCoordinateChange
 
 /-! Canonical coefficient coherence for a nested open square.
-Source: Stacks Project, Tag 0D5S.
 
 The identity follows by applying the coordinate-change theorem to the two
-pullback squares and expanding the canonical comparison components. -/
+pullback squares and expanding the canonical comparison components.
+
+## References
+
+* Stacks Project, Tag 0D5S
+-/
 
 @[expose] public section
 set_option autoImplicit false

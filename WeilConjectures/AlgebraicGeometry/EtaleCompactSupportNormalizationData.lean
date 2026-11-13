@@ -14,7 +14,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 /-!
 # Constructed graph comparisons for compact supports
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6.
+## References
+
+* SGA 4, XVII 5.2.2 and 6.2.11
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public section

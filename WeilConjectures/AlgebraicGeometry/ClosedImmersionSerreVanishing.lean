@@ -18,8 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-! # Serre vanishing for the restricted projective-space twists
 
-Source: Stacks Project, Tags 01XS, 01YS (4), and 0B5T (4).
-
 The private Čech comparison adapts the construction in
 `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections` from fields to rings.
 Its Laurent-monomial section basis already works over any commutative ring. We use the
@@ -27,6 +25,10 @@ explicit structure ring homomorphism, rather than the field-only `globalSections
 The private Serre induction likewise adapts the field proof in
 `WeilConjectures.AlgebraicGeometry.Cohomology.Serre`; the finite twist presentation and the
 cohomological degree bound already apply over Noetherian rings.
+
+## References
+
+* Stacks Project, Tags 01XS, 01YS and 0B5T
 -/
 
 @[expose] public section

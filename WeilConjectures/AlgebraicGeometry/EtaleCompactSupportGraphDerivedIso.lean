@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 /-!
 # Invertibility of the graph comparison on unbounded complexes
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 0F0C.
+## References
+
+* SGA 4, XVII 5.2.2 and 6.2.11
+* Stacks Project, Tags 03S6 and 0F0C
 -/
 
 @[expose] public section

@@ -18,7 +18,12 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeModuleStalkEquiv
 import Mathlib.LinearAlgebra.Dimension.Free
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
+/-! Generic coherent ideal lattices.
+
+## References
+
+* Stacks Project, Tag 01YE
+-/
 
 @[expose] public section
 universe w

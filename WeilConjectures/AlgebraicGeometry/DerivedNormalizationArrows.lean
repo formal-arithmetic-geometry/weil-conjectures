@@ -15,11 +15,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 
 /-! # Universal arrows for derived coefficient normalization
 
-Source: Stacks Project, Tags 06YY, 07A6 and 06Y5, derived extension and its adjunction.
-
 A normalization isomorphism can equivalently be supplied by its universal arrow to
 restriction of scalars. This encoding retains its specific arrow, and avoids choosing
 an additional model of the total derived tensor functor.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A6 and 06Y5
 -/
 
 @[expose] public section

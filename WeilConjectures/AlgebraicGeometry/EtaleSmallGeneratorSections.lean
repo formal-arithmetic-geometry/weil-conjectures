@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSmallGeneratorSectionsAux
 /-!
 # Section-size bound for the affine etale generator
 
-Source: Stacks Project, Tags 01DO and 03EW; Mathlib free-Yoneda sheaves and
-affine etale site comparison.
+## References
+
+* Stacks Project, Tags 01DO and 03EW
 -/
 
 @[expose] public section

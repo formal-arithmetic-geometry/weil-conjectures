@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAcyclic
 /-!
 # Canonical coefficient comparisons for étale inverse and direct images
 
-Source: Stacks Project, Tags 03FD and 0D6J(3); the inverse-image comparison uses
-Mathlib's uniqueness of left adjoints and the sectionwise coextension adjunction.
+## References
+
+* Stacks Project, Tags 03FD and 0D6J
 -/
 
 @[expose] public section

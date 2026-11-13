@@ -22,9 +22,6 @@ import WeilConjectures.Algebra.Homology.KFlat
 
 /-! # Coherent formal modules and completion
 
-Source: Stacks Project, Cohomology of Schemes, Section 0EHN, equation 0880,
-the paragraph before Lemma 0889, proof of Theorem 088E, and Section 0CYW, equation 088D.
-
 ## Main definitions
 * `CoherentFormalModule`: the full category of coherent adic inverse systems.
 * `completion`: the functor taking quotients by positive powers of the ideal.
@@ -33,6 +30,10 @@ the paragraph before Lemma 0889, proof of Theorem 088E, and Section 0CYW, equati
 
 The index `op n` represents level `n + 1`, so no level zero is imposed.
 Products and powers are the shared `Scheme.idealModuleProduct` and `Scheme.idealSheafPower`.
+
+## References
+
+* Stacks Project, Tags 0EHN, 0880, 0889, 088E, 0CYW and 088D
 -/
 
 @[expose] public section

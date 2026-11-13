@@ -8,7 +8,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 /-!
 # The total derived module-object pushforward and pullback
-.
 
 These are the general derived functors of the full underived composites. Naming their
 specializations once shares the structural arguments in concrete coefficient statements.

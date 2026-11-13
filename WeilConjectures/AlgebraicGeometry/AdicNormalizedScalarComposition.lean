@@ -11,10 +11,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionCompositio
 
 /-! # Normalized scalar composition and uniqueness of adjoints
 
-Source: Stacks Project, Tags 03CZ and 06YY.
-
 The private transition calculations also compare ordinary scalar insertion with the
 transpose of the reduced counit, for the explicit tensor successor square.
+
+## References
+
+* Stacks Project, Tags 03CZ and 06YY
 -/
 
 @[expose] public noncomputable section

@@ -15,13 +15,14 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 /-!
 # The alternating Čech complex computes Čech cohomology
 
-Source: Stacks Project, Cohomology of Sheaves, Section 20.23, Lemma 20.23.5
-(Tags 01FJ, 01FK, 01FM).
-
 The full Čech complex and the complex indexed by strictly increasing tuples are
 related by restriction.  The signed extension from increasing tuples and the explicit
 repeated-index homotopies of Tags 01FJ, 01FK, and 01FM show that this restriction
 induces an isomorphism on every Čech cohomology group.
+
+## References
+
+* Stacks Project, Lemma 20.23.5 (Tags 01FJ, 01FK and 01FM)
 -/
 
 @[expose] public section

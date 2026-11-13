@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.CechNervePresentationConstruction
 /-! # Geometric presentations of coefficient-site finite Čech nerves
 
 The data in this file are independent of a coefficient ring, a sheaf, and a cohomological
- degree. Source: Stacks Project, Tag 099U, the two finite-cover limit reductions.
+ degree.
+
+## References
+
+* Stacks Project, Tag 099U
 -/
 
 @[expose] public section

@@ -23,14 +23,16 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Coherent modules and adic systems on a closed subscheme
 
-Source: Stacks Project, Cohomology of Schemes, Tags 087T, 088A, 088C, and 088E.
-
 ## Main statements
 * `closedImmersion_coherent_equivalence`: pushforward identifies coherent modules with
   coherent modules annihilated by the defining ideal.
 * `closedImmersion_coherent_support`: support is the image of support.
 * `closedImmersion_coherentFormal_equivalence`: the termwise equivalence and its natural
   compatibility with completion, including the canonical quotient projections.
+
+## References
+
+* Stacks Project, Tags 087T, 088A, 088C and 088E
 -/
 
 @[expose] public section

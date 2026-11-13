@@ -14,7 +14,11 @@ import Mathlib.CategoryTheory.Sites.Coverage
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-/-! Source: Stacks Project, Sites Tag 0738(4). -/
+/-!
+## References
+
+* Stacks Project, Tag 0738
+-/
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.ConcreteCategory Opposite

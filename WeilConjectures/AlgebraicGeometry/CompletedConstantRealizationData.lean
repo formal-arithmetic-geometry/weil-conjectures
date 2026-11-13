@@ -12,11 +12,13 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUnive
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 /-! # Data for completed constant realization
 
-Source: Stacks Tags 093J--093M and 06YU.
-
 The constructions and interfaces are moved verbatim from
 `CompletedConstantFiniteComplexRealization` so that the module and complex calculations
 can be stated independently without an import cycle.
+
+## References
+
+* Stacks Project, Tags 093J–093M and 06YU
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -12,11 +12,13 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Affine derived equivalence on shifts of the unit
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 06Z0.
-
 The termwise tilde comparison identifies the image of the degree-zero free
 rank-one module with the structure sheaf. Shift compatibility then gives the
 same identification for every integer shift.
+
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

@@ -13,9 +13,10 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 /-!
 # Étale limits of smooth surfaces
 
-The local calculation of the trace formula works on schemes `Z` over a field `k` that are "a regular smooth
-surface over `k`, or an étale limit with affine transition maps of such surfaces", such as the
-strict localization of a smooth surface at a point, or an open subscheme of its blow-up.
+The local calculation of the trace formula works on schemes `Z` over a field `k` that are
+"a regular smooth surface over `k`, or an étale limit with affine transition maps of such
+surfaces", such as the strict localization of a smooth surface at a point, or an open
+subscheme of its blow-up.
 
 ## Main definitions
 

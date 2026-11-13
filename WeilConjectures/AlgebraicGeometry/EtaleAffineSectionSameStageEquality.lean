@@ -17,7 +17,11 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # Equality detection for two affine stage sections
-Source: Stacks Project, Tags 09YQ and 09XM; Mathlib affine-transition limits. -/
+
+## References
+
+* Stacks Project, Tags 09YQ and 09XM
+-/
 
 @[expose] public section
 

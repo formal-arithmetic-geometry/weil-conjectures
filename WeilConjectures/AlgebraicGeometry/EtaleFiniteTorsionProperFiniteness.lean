@@ -29,12 +29,13 @@ import WeilConjectures.AlgebraicGeometry.ProperCohomologyGenericLocalConstancy
 
 /-! # Proper finiteness for ordinary finite-field etale module sheaves
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Theorem 6.7.1,
-proper alternative, with R = A and maximal ideal zero; Stacks Project, Tags 0A3V,
-095U and 0GL0.
-
 The higher direct images use the ordinary small etale sites and the bounded below
 right derived direct image of a module sheaf placed in degree zero.
+
+## References
+
+* Bhatt–Scholze, Theorem 6.7.1
+* Stacks Project, Tags 0A3V, 095U and 0GL0
 -/
 
 @[expose] public section

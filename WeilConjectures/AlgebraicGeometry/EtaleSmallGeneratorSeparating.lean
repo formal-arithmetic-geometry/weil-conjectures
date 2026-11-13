@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSmallGenerator
 /-!
 # The affine etale generator separates sheaf maps
 
-Source: Stacks Project, Tags 01DO and 03EW; Mathlib free-Yoneda sheaves and
-affine etale site comparison.
+## References
+
+* Stacks Project, Tags 01DO and 03EW
 -/
 
 @[expose] public section

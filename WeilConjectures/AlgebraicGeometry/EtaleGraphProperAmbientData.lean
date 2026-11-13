@@ -8,11 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphPresentation
 
 /-! # The proper maps between two product-graph models
 
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, applied to the explicit
-product and supporting neighborhoods of the graph model.
-
 Every map below is a pullback lift. The two transport isomorphisms are made from
 Cartesian proper/open exchange and the canonical direct-image compositors.
+
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section

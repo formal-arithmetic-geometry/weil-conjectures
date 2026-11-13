@@ -11,11 +11,12 @@ public import WeilConjectures.SixFunctors.EtaleLocallyClosedGraphModel
 
 /-! # Proper/open/proper presentations and their specified graph maps
 
-Source: Stacks Project, Tags 0F7B--0F7F; the explicit graph formula in
-`EtaleLocallyClosedGraphModel.lean`.
-
 These definitions are moved unchanged from `EtaleGraphComparisonBaseChange` so that
 individual coherence lemmas can refer to the same maps without an import cycle.
+
+## References
+
+* Stacks Project, Tags 0F7B–0F7F
 -/
 
 @[expose] public noncomputable section

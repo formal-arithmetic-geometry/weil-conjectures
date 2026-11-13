@@ -12,15 +12,15 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 
 /-! # Module geometric stalks compute and detect unbounded cohomology
 
-Source: Stacks Project, etale-cohomology.tex, Tags 03PT(3) and 03PU;
-sites-modules.tex, Tags 03DA and 04EQ; sites-cohomology.tex, Tag 0DJJ;
-derived.tex, Tag 015F.
-
 Constant-coefficient modules use the project's module-valued sheaf encoding.
 `pointSmallEtale t |>.sheafFiber` is the pointed-neighbourhood colimit, computed
 in modules, so its scalar action and maps are the induced A-linear ones.
 The derived functor below is the existing exact-functor localization, on the full
 unbounded derived categories. All comparisons are natural isomorphisms.
+
+## References
+
+* Stacks Project, Tags 03PT, 03PU, 03DA, 04EQ, 0DJJ and 015F
 -/
 
 @[expose] public section

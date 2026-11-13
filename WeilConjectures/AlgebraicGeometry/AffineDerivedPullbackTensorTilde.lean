@@ -28,9 +28,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Affine computations of derived pullback and tensor
 
-Source: Stacks Project, Lemmas 36.3.8(2), 36.3.9(2), Tags 08DW and 08DX,
-and Lemma 36.3.6, Tag 08DV.
-
 The affine formulas are written for every K-flat resolution `P ⟶ M`.
 Thus the right sides are the concrete representatives of the module derived tensors,
 with no boundedness, flatness of the ring map, or quasi-coherence hypothesis added.
@@ -43,6 +40,10 @@ with no boundedness, flatness of the ring map, or quasi-coherence hypothesis add
 - `derivedTensor_tilde_iso`: affine tensor on any K-flat resolution of the first factor.
 - `derivedPullback_tilde_kFlat_natIso`: natural affine pullback comparison on K-flat models.
 - `derivedTensor_tilde_kFlat_natIso`: natural affine tensor comparison on K-flat models.
+
+## References
+
+* Stacks Project, Lemmas 36.3.6, 36.3.8(2) and 36.3.9(2), Tags 08DV, 08DW and 08DX
 -/
 
 @[expose] public section

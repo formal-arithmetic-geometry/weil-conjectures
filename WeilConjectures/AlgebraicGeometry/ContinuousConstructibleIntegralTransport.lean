@@ -16,7 +16,9 @@ set_option linter.privateModule false
 
 /-! # Integral models on a locally finitely presented stratum
 
-Source: Bhatt--Scholze, Lemmas 6.8.12--6.8.13 and Proposition 6.8.14(2).
+## References
+
+* Bhatt–Scholze, Lemmas 6.8.12–6.8.13 and Proposition 6.8.14(2)
 -/
 
 @[expose] public section

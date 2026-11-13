@@ -27,8 +27,6 @@ import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 /-!
 # Constructible sheaves over discrete Noetherian rings form weak Serre subcategories
 
-Source: Stacks Project, Tags 03RZ and 09B5.
-
 ## Main statements
 
 - `etale_discreteNoetherian_constructible_serre`: the etale closure clauses.
@@ -38,6 +36,10 @@ The two statements spell out zero, kernel, cokernel and extension closure in the
 categories of modules over the constant ring sheaves. No finite-ring or invertibility
 hypothesis occurs. The etale predicate uses finite generation of constant module values;
 over a Noetherian ring this is equivalent to the finite-presentation convention.
+
+## References
+
+* Stacks Project, Tags 03RZ and 09B5
 -/
 
 @[expose] public section

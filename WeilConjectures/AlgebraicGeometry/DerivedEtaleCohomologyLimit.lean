@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Derived étale cohomology over an inverse limit
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 0GIT.
+## References
+
+* Stacks Project, Tag 0GIT
 -/
 
 @[expose] public section

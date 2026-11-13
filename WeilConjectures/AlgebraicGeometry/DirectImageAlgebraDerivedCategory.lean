@@ -11,14 +11,16 @@ public import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # The direct-image algebra and its quasi-coherent derived category
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 0AVW.
-
 ## Main definitions
 
 * `directImageAlgebraSpace` is the ringed space `(Y, f_* O_X)`.
 * `toDirectImageAlgebraSpace` is its canonical morphism from `(X, O_X)`.
 * `directImageAlgebraDerivedQCohProperty` and `directImageAlgebraDerivedQCohCategory`
   specify quasi-coherent cohomology over the direct-image algebra.
+
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section

@@ -19,8 +19,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Quasi-coherent modules along an affine morphism
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-
 The algebra `B = u^* A` is specified by its tensor-product universal property: the pushout
 of `u⁻¹ O_X → O_U` and `u⁻¹ O_X → u⁻¹ A` in commutative ring sheaves. The functor `P`
 is extension of scalars from `u⁻¹ A` to `B`; `κ` identifies its underlying module with the
@@ -28,6 +26,10 @@ recorded tensor pullback. Its formula on the pullback unit fixes this identifica
 Thus the action is `(b ⊗ a)(b' ⊗ g) = bb' ⊗ ag`. The functor `H` is extension of
 scalars along the multiplication counit `ε : B → O_U`, with the target scalar first
 in the tensor notation. No alternative pullback or tensor product is defined here.
+
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

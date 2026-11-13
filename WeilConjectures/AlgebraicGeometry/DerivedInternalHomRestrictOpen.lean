@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.HomComplexRestrictOpen
 /-!
 # Derived internal Hom commutes with restriction to opens
 
-Source: literature/stacks-project/cohomology.tex, Lemma 08DL.
+## References
+
+* Stacks Project, Tag 08DL
 -/
 
 @[expose] public section

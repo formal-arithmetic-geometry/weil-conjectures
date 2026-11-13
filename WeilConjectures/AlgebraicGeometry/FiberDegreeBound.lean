@@ -11,12 +11,14 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 /-!
 # Bounds on the degrees of scheme-theoretic fibres
 
-Source: Stacks Project, Morphisms, Section 29.56 and Definition Tag 03J4.
-
 ## Main definitions
 
 * `AlgebraicGeometry.Scheme.Hom.BoundsFiberDegrees`: a bound for all fibre degrees.
 * `AlgebraicGeometry.Scheme.Hom.HasUniversallyBoundedFibers`: existence of such a bound.
+
+## References
+
+* Stacks Project, Tag 03J4
 -/
 
 @[expose] public section

@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleULiftHomology
 /-!
 # Lifting an injective resolution on the small étale site
 
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO;
-Mathlib's small affine étale site equivalence and preservation of homology by ULift.
+## References
+
+* Stacks Project, Tag 01DO
 -/
 
 @[expose] public section

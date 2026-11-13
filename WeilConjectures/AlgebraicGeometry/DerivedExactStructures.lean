@@ -17,8 +17,11 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 already proved exact shift of derivedPullback, the canonical exact tensor
 shifts, and the right-adjoint shifts from Mathlib. No compatibility with a
 supplied monoidal tensorator or comparison transformation is asserted.
-Source: derived-pullback existence (Stacks Tag 06YJ), canonical tensor exactness
-(Tag 06YH), and Mathlib.CategoryTheory.Triangulated.Adjunction. -/
+
+## References
+
+* Stacks Project, Tags 06YJ and 06YH
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u w

@@ -14,12 +14,14 @@ public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-! # Degree-zero fractions of twisted module cohomology
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, equation preceding the lemma.
-
 The underlying additive group of the degree-zero homogeneous localization has the
 presentation with generators `[n, ξ]` and relations `[n, ξ] = [n+b, s^b ξ]`.
 Only nonnegative numerator degrees enter degree-zero fractions, even though the full
 cohomology module is graded by integers. The quotient retains all torsion relations.
+
+## References
+
+* Stacks Project, Tag 09MR
 -/
 
 @[expose] public section

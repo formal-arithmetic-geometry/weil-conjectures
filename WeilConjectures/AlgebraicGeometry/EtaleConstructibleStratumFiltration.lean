@@ -24,12 +24,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
 /-! # Finite perfect-stratum devissage on the ordinary etale site
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.3.1,
-Lemmas 6.3.3 and 6.3.9, pp. 45--47; Stacks Project, Tags 09BI and 095L.
-
 Both the finite triangle tower and its replete triangulated generation formulation
 are stated. The published `immersionLowerShriek` is the exact closed direct image
 followed by exact open extension by zero, applied termwise on derived categories.
+
+## References
+
+* Bhatt–Scholze, Definition 6.3.1, Lemmas 6.3.3 and 6.3.9
+* Stacks Project, Tags 09BI and 095L
 -/
 
 @[expose] public noncomputable section

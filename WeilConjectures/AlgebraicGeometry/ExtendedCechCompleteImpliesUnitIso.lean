@@ -16,8 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ComplementaryTrunc
 
 /-! The complete-to-unit direction of the extended Cech criterion.
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-
 Proof: for one section, apply contravariant derived internal Hom to the degreewise
 split sequence O[1/s][-1] → [O → O[1/s]] → O. Vanishing on the localization makes
 precomposition by the augmentation invertible. Tensor–Hom currying and the K-flatness
@@ -26,6 +24,10 @@ For a complete object, the required vanishing holds for each member of every loc
 generating list. The augmented local description and internal-Hom restriction
 comparison identify the actual augmentation maps. Invertibility descends along the
 generating cover; composition with evaluation at one gives the specified unit.
+
+## References
+
+* Stacks Project, Tags 099B and 099F
 -/
 
 @[expose] public section

@@ -91,8 +91,8 @@ private theorem capIntoCap_unit {X : Scheme.{u}} (G : X.Modules) (W Z : X.Opens)
   ext V s
   rfl
 
-/- Insert an absent index into the finite ordered range of a tuple.
-Source: Stacks 01FM, ordered indices; 02FU, insertion. -/
+/- Insert an absent index into the finite ordered range of a tuple
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def insertTuple {r n : ℕ} (a : Fin n ↪o Fin r) (i : Fin r)
     (hi : i ∉ Set.range a) : Fin (n + 1) ↪o Fin r :=
@@ -102,8 +102,8 @@ private def insertTuple {r n : ℕ} (a : Fin n ↪o Fin r) (i : Fin r)
       RelEmbedding.coe_toEmbedding, Set.mem_range]
       using hi)
 
-/- The sign exponent is the number of tuple entries strictly before the inserted index.
-Source: Stacks 01FM, ordered signs; 02FU, insertion. -/
+/- The sign exponent is the number of tuple entries strictly before the inserted index
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def position {r n : ℕ} (a : Fin n ↪o Fin r) (i : Fin r) : ℕ :=
   (Finset.univ.filter fun j ↦ a j < i).card
@@ -175,8 +175,8 @@ private theorem position_face {r n : ℕ} (a : Fin (n + 1) ↪o Fin r) (b : Fin 
       exact hv ▸ Finset.mem_range.mp l.prop
   rw [he, Finset.card_map, Finset.card_attach, Finset.card_range]
 
-/- One signed insertion coordinate, zero if the inserted index is already present.
-Source: Stacks 02FU, increasing-tuple adaptation of 01FM. -/
+/- One signed insertion coordinate, zero if the inserted index is already present
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def coordinate {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (i : Fin r) (q : ℕ) (a : Fin (q + 1) ↪o Fin r) :
@@ -190,8 +190,8 @@ private def coordinate {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
           (alternatingCechIntersection U (insertTuple a i hi))
           (intersection_insert_le U a i hi))
 
-/- Assemble signed insertion coordinates by the finite product comparison.
-Source: Stacks 02FU, increasing-tuple adaptation of 01FM. -/
+/- Assemble signed insertion coordinates by the finite product comparison
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def map {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (i : Fin r) (q : ℕ) :
@@ -229,8 +229,8 @@ private theorem capIntoCap_map_comp {X : Scheme.{u}} (G : X.Modules)
   rw [← PresheafOfModules.map_comp_apply]
   rfl
 
-/- The coordinate of insertion followed by the differential: its signed face sum.
-Source: Stacks 02FU, ordered deletion calculation as in 01FM. -/
+/- The coordinate of insertion followed by the differential: its signed face sum
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def boundaryCoordinate {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (i : Fin r) (p : ℕ) (a : Fin (p + 2) ↪o Fin r) :
@@ -380,8 +380,8 @@ private theorem coordinate_of_face {X : Scheme.{u}} {r q : ℕ}
 end
 end CechInsertion
 
-/- For a tuple already containing the inserted index, exactly its deletion survives.
-Source: Stacks 02FU, insertion computation; increasing tuples as in 01FM.
+/- For a tuple already containing the inserted index, exactly its deletion survives
+(Stacks, Tags 01FM and 02FU).
 
 Proof: Write i=a b. Every face other than b still contains i, so its insertion
 coordinate is zero. The b face omits i; inserting it recovers a, in position b.
@@ -415,8 +415,8 @@ private theorem alternatingCechPresheaf_insertion_containing_coordinate
     rw [coordinate, dite_eq_left hmem, Limits.zero_comp, smul_zero]
   · simp
 
-/- Paired noncentral faces cancel on a tuple omitting the inserted index.
-Source: Stacks 02FU, the displayed dh+hd computation; increasing tuples as in 01FM.
+/- Paired noncentral faces cancel on a tuple omitting the inserted index
+(Stacks, Tags 01FM and 02FU).
 
 Proof: Enlarge a by inserting i in its unique position b. In d followed by
 insertion at a, the face deleting b is the restriction of the a-coordinate,

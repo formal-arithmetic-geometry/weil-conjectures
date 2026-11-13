@@ -17,12 +17,14 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Chow's lemma over a quasi-compact quasi-separated base
 
-Source: Stacks Project, Lemma Tag 0202.
-
 ## Main statements
 
 * `exists_chow_finite_type` states Chow's lemma for a separated finite type
   morphism over a quasi-compact quasi-separated scheme.
+
+## References
+
+* Stacks Project, Tag 0202
 -/
 
 @[expose] public section

@@ -16,7 +16,10 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 /-!
 # The graph comparison under geometric base change
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 07A7.
+## References
+
+* SGA 4, XVII 5.2.2 and 6.2.11
+* Stacks Project, Tags 03S6 and 07A7
 -/
 
 section

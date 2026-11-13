@@ -17,9 +17,12 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Derived tensor structure on O_X-modules
 
-Source: Stacks Project, Cohomology, Tags 06Y7, 06YH and 03EO.
 The tensor is the upstream K-flat derived monoidal construction, specialized to the
 shared category of O_X-modules, rather than an arbitrary monoidal structure.
+
+## References
+
+* Stacks Project, Tags 06Y7, 06YH and 03EO
 -/
 
 @[expose] public section

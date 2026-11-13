@@ -13,11 +13,12 @@ public import Mathlib.GroupTheory.Perm.Sign
 /-!
 # Explicit sorting and contraction operators on Čech cochains
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equations 20.23.6.1 and
-20.23.6.2.
-
 All operators are finite sums with decidable filters. No sorting permutation or
 homotopy is selected from an unproved existence theorem.
+
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

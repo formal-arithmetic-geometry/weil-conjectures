@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine perfect extension after adjoining a shift
 
-Source: literature/stacks-project/perfect.tex, Tag 08EI (Lemma 36.13.8).
+## References
+
+* Stacks Project, Tag 08EI
 -/
 
 @[expose] public section

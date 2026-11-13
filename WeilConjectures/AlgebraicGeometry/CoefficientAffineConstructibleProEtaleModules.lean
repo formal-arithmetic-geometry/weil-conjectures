@@ -12,11 +12,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Affine-local pro-etale constructibility with independent coefficient size
 
-Source: Stacks Project, proetale.tex, definition-constructible, Tag 09AJ.
-
 The published coefficient-sized site is equivalent to the original small site. Its
 objects and coverings are unchanged. Constant-scalar restriction retains the underlying
 additive sheaf and reads intrinsic constant-ring modules as fixed-scalar sheaves.
+
+## References
+
+* Stacks Project, Tag 09AJ
 -/
 
 @[expose] public noncomputable section

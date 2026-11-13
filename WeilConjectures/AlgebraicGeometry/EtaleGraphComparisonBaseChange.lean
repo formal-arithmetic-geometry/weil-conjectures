@@ -12,13 +12,13 @@ import WeilConjectures.AlgebraicGeometry.EtalePairwiseProductGraphNormalization
 
 /-! # Cocycle and base change for the specified proper/open/proper graph comparisons
 
-Source: Stacks Project, Tags 0F7C--0F7F; the product-graph formula in
-`LowerShriekComposition.lean`, lines 193--268, and the refinement formula in
-`LowerShriekIndependenceUnbounded.lean`.
-
 All maps below are constructed from the recorded graph model and canonical exchanges.
 The base-change clause is stated for arbitrary Cartesian representatives of the pulled-back
 presentations, so it includes the chosen fibre product and every isomorphic representative.
+
+## References
+
+* Stacks Project, Tags 0F7C–0F7F
 -/
 
 @[expose] public noncomputable section

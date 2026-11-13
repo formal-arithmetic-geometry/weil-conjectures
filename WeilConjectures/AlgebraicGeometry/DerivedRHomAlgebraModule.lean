@@ -16,11 +16,13 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Derived internal Hom with its algebra module structure
 
-Source: Stacks Project, Duality for Schemes, Section 48.11, Tags 0BUZ, 0BV0, 0BV1.
-
 The natural algebra action is precomposition with multiplication. The derived functor
 is the localization of termwise Hom after a functorial, degreewise injective K-injective
 resolution. Its underlying object is the shared derived internal Hom.
+
+## References
+
+* Stacks Project, Tags 0BUZ, 0BV0 and 0BV1
 -/
 
 @[expose] public section

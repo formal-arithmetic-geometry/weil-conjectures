@@ -19,12 +19,14 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Mayer--Vietoris sequence for derived Hom
 
-Source: Stacks Project, Cohomology, Tag 08BW.
-
 ## Main statements
 
 - `derived_hom_mayer_vietoris`: exactness at global and local derived Hom.
 - `derivedOpenHomRestriction`: the canonical restriction to a smaller open.
+
+## References
+
+* Stacks Project, Tag 08BW
 -/
 
 @[expose] public section

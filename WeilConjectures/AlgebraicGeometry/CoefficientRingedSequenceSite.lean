@@ -32,8 +32,6 @@ public import WeilConjectures.RingTheory.WContractibleGeometricCriterion
 
 /-! # The coefficient ringed sequence site and canonical functors
 
-Source: Stacks Project, Tags 0941, 06YY, 079P and 07A6.
-
 ## Main definitions
 
 - `coefficientSequenceTopology`: the product sequence site with vertical covers.
@@ -42,6 +40,10 @@ Source: Stacks Project, Tags 0941, 06YY, 079P and 07A6.
 - `coefficientSequenceEvaluation`: exact restriction to the nth vertical slice.
 - `coefficientSequenceLimit`: total derived limit after exact scalar restriction.
 - `coefficientSequenceProjection`: its canonical, resolution-normalized projections.
+
+## References
+
+* Stacks Project, Tags 0941, 06YY, 079P and 07A6
 -/
 
 @[expose] public section

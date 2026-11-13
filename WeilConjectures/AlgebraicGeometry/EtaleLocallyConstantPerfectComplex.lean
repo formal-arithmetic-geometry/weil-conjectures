@@ -12,11 +12,13 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Locally constant perfect complexes on the ordinary etale site
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.3.1;
-Stacks Project, Tag 09BI.
-
 The perfect coefficient object is realized by the exact constant-sheaf functor.
 Its derived functor is termwise constant sheaf on any representing complex.
+
+## References
+
+* Bhatt–Scholze, Definition 6.3.1
+* Stacks Project, Tag 09BI
 -/
 
 @[expose] public section

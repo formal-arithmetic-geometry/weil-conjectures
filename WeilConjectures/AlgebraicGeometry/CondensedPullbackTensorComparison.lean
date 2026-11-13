@@ -16,12 +16,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-!
 # Canonical tensor comparison for condensed module inverse image
 
-Source: Stacks Project, Tags 03EL and 0G7D; the totalization and K-flat descent in
-steps 3--7 of the open/closed internal-Hom calculation.
-
 The coequalizer equation determines the ordinary comparison. The equation on every
 summand of the total tensor complex then determines its unbounded derived comparison.
 The choices below are from unique, fully normalized objects, never arbitrary isomorphisms.
+
+## References
+
+* Stacks Project, Tags 03EL and 0G7D
 -/
 
 @[expose] public section

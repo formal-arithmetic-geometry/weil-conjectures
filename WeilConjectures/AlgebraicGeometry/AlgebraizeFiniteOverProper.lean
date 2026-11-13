@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeSpectrumAffineRealization
 /-!
 # Algebraization of finite schemes over thickenings of a proper scheme
 
-Source: Cohomology of Schemes, Stacks Project, Lemma 09ZT (the proof via
-Grothendieck existence, Theorem 088C and Remark 088F).
+## References
+
+* Stacks Project, Tags 09ZT, 088C and 088F
 -/
 
 @[expose] public section

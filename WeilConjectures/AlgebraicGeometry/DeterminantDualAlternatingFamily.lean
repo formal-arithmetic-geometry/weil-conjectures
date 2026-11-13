@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingFunctional
 import WeilConjectures.AlgebraicGeometry.ExteriorSheafDualExt
 
 /-! # Local alternating determinant functionals
-Source: Stacks Project, Tags 0BRT and 03CY; Mathlib exterior-power determinant pairing.
+
+## References
+
+* Stacks Project, Tags 0BRT and 03CY
 -/
 
 @[expose] public section

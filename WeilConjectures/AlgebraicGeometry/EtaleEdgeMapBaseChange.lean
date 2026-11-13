@@ -14,11 +14,13 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-!
 # Compatibility of the étale cohomology edge map with base change
 
-Source: Stacks Project, Etale Cohomology, Section 03SB, proof of Lemma 0A5D.
-
 The edge map is written as pullback on cohomology followed by the counit. In the finite
 case, its bijectivity and that of the exchange followed by the base-changed edge map give
 the two isomorphisms identifying the horizontal pullback maps.
+
+## References
+
+* Stacks Project, Tags 03SB and 0A5D
 -/
 
 @[expose] public section

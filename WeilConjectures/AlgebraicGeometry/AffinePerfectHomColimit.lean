@@ -21,12 +21,13 @@ import WeilConjectures.Algebra.Homology.AffinePerfectHomotopyDescent
 
 /-! # Affine full faithfulness for perfect complexes over a filtered colimit
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE,
-affine case.
-
 The equivalences `ident` identify a presentation `H` with the stage derived Hom sets.
 The equations `htransition` and `hcanonical` specify scalar extension on every chain-map
 representative, so neither the diagram nor its comparison map is arbitrary.
+
+## References
+
+* Stacks Project, Lemma 36.29.2 and Tag 09RE
 -/
 
 @[expose] public section

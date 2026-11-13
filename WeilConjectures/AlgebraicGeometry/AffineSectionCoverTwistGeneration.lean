@@ -15,8 +15,10 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Eventual generation from a finite affine section cover
 
-Source: EGA II, proof of Proposition 4.5.5, local-generator extension paragraphs;
-Stacks Project, Properties, Proposition 01Q3, (1) ⇒ (5).
+## References
+
+* EGA II, Proposition 4.5.5
+* Stacks Project, Tag 01Q3
 -/
 
 @[expose] public section

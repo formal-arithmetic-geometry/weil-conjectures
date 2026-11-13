@@ -10,8 +10,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Counit compatibility in equivalence coordinates
 
-Source: Mathlib.CategoryTheory.Adjunction.Mates, `conjugateEquiv_counit`;
-Stacks Project, Tag 08HY, the counit description of base change.
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section

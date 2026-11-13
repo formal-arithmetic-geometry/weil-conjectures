@@ -11,12 +11,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphComparisonProperAmbient
 
 /-! # Pairwise product-graph normalization of étale presentation comparisons
 
-Source: Stacks Project, more-etale.tex, Tags 0F7B, 0F7C, 0F7D and 0F7J;
-`LowerShriekComposition.lean`, lines 193--268, product-graph formula, extended to two
-proper/open/proper presentations.
-
 The auxiliary declarations construct the literal fibre products and the displayed lambda
 maps. Only their geometric properties and the final comparison equation are postponed.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section

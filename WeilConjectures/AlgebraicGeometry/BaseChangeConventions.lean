@@ -14,8 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!
 # Base change, fibres and induced sections
 
-Source: Stacks Project, Tags 01JX, 01K0, 0095.
-
 `(Over.pullback T.hom).obj (Over.mk f)` is `X_T` over `T`: its underlying scheme is
 `pullback f T.hom`, its structure map `pr_T` is `pullback.snd`, and its map `f_T` to `X`
 is `pullback.fst`. The functor's map is `h_T` for an `S`-morphism `h`.
@@ -28,6 +26,10 @@ induced section. Geometric points use the recorded unbundled description
 - `Scheme.Modules.moduleBaseChange`: module pullback along `g_X`.
 - `Scheme.Hom.geometricFiberAt`: the fibre over a chosen algebraic closure of `κ(t)`.
 - The remaining statements record the comparison and section clauses.
+
+## References
+
+* Stacks Project, Tags 01JX, 01K0 and 0095
 -/
 
 @[expose] public section

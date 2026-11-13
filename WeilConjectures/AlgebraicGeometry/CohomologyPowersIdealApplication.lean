@@ -17,13 +17,15 @@ import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealKernelBound
 
 /-! # Image and kernel bounds for cohomology of ideal powers
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, parts (2) and (3).
-
 Forms used (no new definition): `I^n F` is
 `Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F`, with `J` the extended
 ideal sheaf of `I` (hypothesis `hJ`); `H^q(X, -)` as an `A`-module is
 `RingedSpace.moduleCohomology` restricted along `(ΓSpecIso A).inv ≫ f.appTop`; the transition
 maps `I^k F ⟶ I^n F` are the unique maps over the inclusions into `F`, stated to exist.
+
+## References
+
+* Stacks Project, Tag 02OA
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedHomGluing
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1).
+## References
+
+* Stacks Project, Tag 08DG
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ import all Mathlib.Topology.Category.TopCat.Basic
 
 /-! # Canonical pullback of continuous coefficient sections
 
-Source: Bhatt--Scholze, Definition 6.8.1 and the paragraph before Definition 6.8.6.
+## References
+
+* Bhatt–Scholze, Definitions 6.8.1 and 6.8.6
 -/
 
 @[expose] public section

@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRefinementGraphSideTransport
 
 /-! # Normalization of a graph map along one Cartesian proper refinement
 
-Source: Stacks Project, Tags 0F7C--0F7E and the unit--open-base-change formula in
-`LowerShriekIndependenceUnbounded.lean`.
+## References
+
+* Stacks Project, Tags 0F7C–0F7E
 -/
 
 @[expose] public noncomputable section

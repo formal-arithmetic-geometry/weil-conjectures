@@ -27,8 +27,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A complex with cohomology in `[a,b]`, each cohomology module in degree zero having
-Tor amplitude in `[c,d]`, has Tor amplitude in `[a+c,b+d]`. No constructibility is assumed.
-. -/
+Tor amplitude in `[c,d]`, has Tor amplitude in `[a+c,b+d]`. No constructibility is assumed. -/
 theorem torAmplitudeIn_of_cohomology_interval
     (X : Scheme.{u}) (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     (K : DerivedCategory

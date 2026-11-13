@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Derived direct image preserves quasi-coherent cohomology
 
-Source: literature/stacks-project/perfect.tex, Tag 08D5,
-part (1).
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section

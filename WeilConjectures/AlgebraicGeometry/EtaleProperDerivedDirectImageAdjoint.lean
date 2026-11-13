@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-! # Right adjoint to proper étale derived direct image
 
-Source: SGA 4, Exp. XVIII, Theorem 3.1.4; Stacks Project, Tag 0F5Y.
+## References
+
+* SGA 4, Exp. XVIII, Theorem 3.1.4
+* Stacks Project, Tag 0F5Y
 -/
 
 @[expose] public section

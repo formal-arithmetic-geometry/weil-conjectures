@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 /-!
 # A finite-cover connectedness criterion for étale module sections
 
-Source: Stacks Project, Tags 09ZG and 09ZF, the spectral restriction lemma and
-Gabber's degree-zero criterion.
+## References
+
+* Stacks Project, Tags 09ZG and 09ZF
 -/
 
 @[expose] public section

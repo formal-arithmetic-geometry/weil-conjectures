@@ -23,7 +23,12 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
-/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
+/-! Generic coherent ideal lattices.
+
+## References
+
+* Stacks Project, Tag 01YE
+-/
 
 @[expose] public section
 universe w

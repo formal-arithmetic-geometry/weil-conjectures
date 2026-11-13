@@ -12,10 +12,12 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-! # Betti numbers of derived residue-field fibres
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.31.1, Tag 0BDI.
-
 On the one-point scheme `Spec κ(x)`, evaluation of the cohomology sheaf on the whole
 space gives its cohomology vector space. Scalars are transported along `ΓSpecIso`.
+
+## References
+
+* Stacks Project, Tag 0BDI
 -/
 
 @[expose] public section

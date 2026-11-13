@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-! # Continuity on affine presentations with a larger index
 
-Source: Bhatt--Scholze, Lemma 5.1.1, and the universe reduction in the
-continuity-map definition of classical sheaves.
+## References
+
+* Bhatt–Scholze, Lemma 5.1.1
 -/
 
 @[expose] public section

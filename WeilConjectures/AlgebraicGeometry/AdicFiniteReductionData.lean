@@ -22,12 +22,14 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 /-! # Canonical scalar maps for finite adic reductions
 
-Source: Stacks Project, proetale.tex, Tag 09C2, with Tag 09AL for compatible etale origins.
-
 The input and both reduction categories use ConstantCompletion.D on the equivalent
 coefficient-sized sites. The coefficient universe is independent of the scheme universe.
 Index n means positive exponent n+1. All scalar units and composition comparisons below
 are uniquely normalized by the ordinary scalar insertion and their K-flat computations.
+
+## References
+
+* Stacks Project, Tags 09C2 and 09AL
 -/
 
 @[expose] public noncomputable section

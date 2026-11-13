@@ -18,7 +18,9 @@ import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Buchsbaum--Eisenbud regular sequence from an exact free complex
 
-Source: literature/stacks-project/algebra.tex, Proposition Tag 00N1.
+## References
+
+* Stacks Project, Tag 00N1
 -/
 
 @[expose] public section

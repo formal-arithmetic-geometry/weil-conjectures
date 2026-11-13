@@ -11,11 +11,13 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # Composite module pullback and its specified oplax mate
 
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03EL.
-
 The left side uses the actual composite strong monoidal structure on mapMod followed
 by extension of scalars. The right side uses the direct-image structure uniquely
 normalized on local pure tensors, and the unit of the specified composite adjunction.
+
+## References
+
+* Stacks Project, Tags 03D7 and 03EL
 -/
 
 @[expose] public section

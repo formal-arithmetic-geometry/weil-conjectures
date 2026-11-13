@@ -17,14 +17,15 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Etale cohomology of limits of schemes
 
-Source: Stacks Project, Etale Cohomology, Theorem 59.51.3 (Tag 09YQ), and
-Limits, Lemma 32.2.1 (Tag 01YW).
-
 The object isomorphisms present diagrams on the varying sites as ordinary functors.
 The equations on their arrows and on the cocone legs specify the canonical comparison.
 Its being a colimit cocone says that the induced comparison from the colimit is an
 isomorphism. We use `Sheaf.H` and `cohomologyMap`, the recorded abelian-sheaf cohomology
 and pullback encoding; its comparison with K-injective cohomology is a comparison theorem.
+
+## References
+
+* Stacks Project, Tags 09YQ and 01YW
 -/
 
 @[expose] public section

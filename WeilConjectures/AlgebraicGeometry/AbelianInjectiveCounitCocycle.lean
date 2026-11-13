@@ -13,12 +13,14 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-! # The injective-resolution cocycle calculation used by the abelian counit
 
-Source: Stacks Project, Tags 01F7 and 06XR.
-
 The remaining calculation is the canonical representative computation for two
 actual abelian injective resolutions. It is separated from the parent theorem
 so that source replacement and arbitrary acyclic-resolution comparison remain
 independent arguments.
+
+## References
+
+* Stacks Project, Tags 01F7 and 06XR
 -/
 
 @[expose] public section

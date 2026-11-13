@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Constructibility with finite constant scalar models
-.
 
 A finite presentation over the condensed ring on the point is a finite matrix over
 its scalar ring: maps between copies of the regular module are global sections of

@@ -18,8 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Stratifying an etale affine cover and its overlaps
-
-Source: Stacks Project, Etale Cohomology, the stratification lemma for finite etale covers.
 -/
 
 @[expose] public section

@@ -20,7 +20,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # AffineDerivedHomEvaluationCounit
 
-Source: Stacks Project, Duality for Schemes, Section 48.11.
+## References
+
+* Stacks Project, Duality for Schemes, Section 48.11
 -/
 
 @[expose] public section

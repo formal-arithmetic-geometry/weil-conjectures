@@ -9,14 +9,16 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientHomRepresentativeEval
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 /-! # Canonical closed tensor-Hom models on a ringed site
 
-Source: Stacks Project, Tags 06YN, 07A4, 08J9 and 0A98.
-
 ## Main definitions
 
 - `CoefficientClosedStructure`: closed monoidal data for the recorded internal Hom.
 - `coefficientTotalTensor`: the actual total-complex tensor bifunctor.
 - `coefficientTensorGenerator`: the actual sheafified pure-tensor summand inclusion.
 - `CoefficientTensorModels`: natural K-flat comparison with canonical uncurrying.
+
+## References
+
+* Stacks Project, Tags 06YN, 07A4, 08J9 and 0A98
 -/
 
 @[expose] public section

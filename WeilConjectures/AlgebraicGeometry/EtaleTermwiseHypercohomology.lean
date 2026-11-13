@@ -12,10 +12,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Cartan--Eilenberg presentations of termwise étale hypercohomology
 
-Source: Stacks Project, Tags 015H, 015J and 015K.
-
 This packages witnesses of `Functor.exists_hypercohomology_firstPage`. Bidegrees are
 (filtration degree, resolution degree), so the paper's E₁^{p,q} is the term at (q,p).
+
+## References
+
+* Stacks Project, Tags 015H, 015J and 015K
 -/
 
 @[expose] public section

@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Finite-free affine model terms
 
-Source: Stacks Project, Tag 068C (finite-free resolutions), and Tag 08C4;
-Mathlib's `tildeFinsupp` and `SheafOfModules.mapFreeIso` implement the basis transport.
+## References
+
+* Stacks Project, Tags 068C and 08C4
 -/
 
 @[expose] public section

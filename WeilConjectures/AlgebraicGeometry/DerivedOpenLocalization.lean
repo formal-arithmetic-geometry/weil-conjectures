@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Derived localizations on opens in the ambient Hom universe
 
-Source: Stacks Project, Tag 08BT, and Mathlib's HasDerivedCategory convention.
+## References
+
+* Stacks Project, Tag 08BT
 -/
 
 @[expose] public section

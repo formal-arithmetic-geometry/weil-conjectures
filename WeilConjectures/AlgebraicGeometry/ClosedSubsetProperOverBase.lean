@@ -13,14 +13,14 @@ public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 /-!
 # Closed subsets and module supports proper over a base
 
-Source: Stacks Project, Cohomology of Schemes, Definition 30.26.2 (Tag 0CYM),
-condition (1) of Lemma 30.26.1 (Tag 0CYL), and the paragraph before Lemma 30.26.7
-(Tag 0CYS); Sheaves of Modules, Definition 17.5.1 (Tag 01AT).
-
 ## Main definitions
 
 * `Scheme.IsClosedSubsetProperOver`: properness of the reduced induced closed subscheme.
 * `Scheme.Modules.HasSupportProperOver`: closedness and properness of the nonzero-stalk locus.
+
+## References
+
+* Stacks Project, Tags 0CYM, 0CYL, 0CYS and 01AT
 -/
 
 @[expose] public section

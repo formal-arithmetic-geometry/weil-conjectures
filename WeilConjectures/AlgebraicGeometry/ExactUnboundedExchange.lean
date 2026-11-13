@@ -10,10 +10,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 /-!
 # Unbounded exchange for exact inverse image
 
-Source: Stacks Project, Tag 07A7.
-
 This is the adjunction-mate definition with exact inverse image descended termwise.
 It needs no tensor structure on the coefficient category and applies to abelian groups.
+
+## References
+
+* Stacks Project, Tag 07A7
 -/
 
 @[expose] public section

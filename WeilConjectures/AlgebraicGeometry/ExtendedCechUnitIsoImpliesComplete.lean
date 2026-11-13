@@ -23,8 +23,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! The unit-to-complete direction of the extended Cech criterion.
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-
 Proof: on a finite-generator slice, tensoring the extended Cech complex with the
 localization at a generator makes one two-term factor contractible. Tensor-Hom
 adjunction and the invertible completion unit therefore force derived Hom from
@@ -32,6 +30,10 @@ each generator localization to vanish. The complete-element predicate is a sheaf
 of ideals, so local generation and covering descent give the local completeness
 predicate for every section of the ideal. The fraction and sequential models
 agree by the localization comparison.
+
+## References
+
+* Stacks Project, Tags 099B and 099F
 -/
 
 @[expose] public section

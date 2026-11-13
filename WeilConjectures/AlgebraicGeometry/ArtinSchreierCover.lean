@@ -28,11 +28,13 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.Properties
 
 /-! # Artin–Schreier covers of global functions
 
-Source: Stacks Project, Tag 0A3J.
-
 The cover is constructed by base change from the polynomial quotient over the global
 functions. Its affine presentations identify it with the relative spectrum in the source.
 The empty scheme is included: the characteristic hypothesis says only that `p * 1 = 0`.
+
+## References
+
+* Stacks Project, Tag 0A3J
 -/
 
 @[expose] public section

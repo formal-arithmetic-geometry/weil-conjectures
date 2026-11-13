@@ -16,9 +16,11 @@ import WeilConjectures.CategoryTheory.RingedCechCompletionUnitIdempotence
 /-!
 # Core reflector properties for the extended Cech completion
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-
 The remaining finite localization-filtration and orthogonality argument is isolated here.
+
+## References
+
+* Stacks Project, Tags 099B and 099F
 -/
 
 @[expose] public noncomputable section

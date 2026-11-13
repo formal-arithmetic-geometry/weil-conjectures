@@ -13,13 +13,15 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-!
 # The normalized difference derivation into the diagonal conormal
 
-Source: Stacks Project, Tag 08S2.
-
 Over an open `U`, lift the difference of the projection pullbacks to the actual kernel
 over the intersection of their inverse images of `U`. Apply the tensor-pullback unit
 and restrict along the diagonal. The kernel inclusion is injective on sections, so
 its lift is unique and respects addition and restrictions. Linearity of the unit
 turns the product identity for the lifted differences into the Leibniz rule.
+
+## References
+
+* Stacks Project, Tag 08S2
 -/
 
 @[expose] public section

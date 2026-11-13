@@ -11,12 +11,14 @@ public import WeilConjectures.CategoryTheory.SiteConstantModuleFunctor
 /-!
 # Adic-lisse modules over completed constant coefficients
 
-Source: Stacks Project, proetale.tex, Tag 09BT, Definition `definition-adic`, clause (3).
-
 The index `n : ℕ` denotes exponent `n + 1`. All limits are genuine limits of sheaves.
 Linearity over completed coefficients is expressed on the quotient projections, locally
 lifting a scalar in a quotient to a section of the constant coefficient ring. This also
 works over inverse-image coefficients without commuting inverse image with infinite limits.
+
+## References
+
+* Stacks Project, Tag 09BT
 -/
 
 @[expose] public noncomputable section

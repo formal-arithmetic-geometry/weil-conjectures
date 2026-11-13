@@ -184,10 +184,12 @@ theorem etaleFiniteTwistPullback (A : Type (u + 1)) [CommRing A] (m : ℕ)
 
 /-! ## Structured normalized comparisons
 
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E.
-
 Named projections expose the same three witnesses and every law of the theorem above.
 The original declaration remains unchanged for existing consumers.
+
+## References
+
+* Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
 -/
 
 noncomputable section StructuredComparisons

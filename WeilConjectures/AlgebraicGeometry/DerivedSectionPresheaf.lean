@@ -12,12 +12,14 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-! # The unbounded derived section cohomology presheaf
 
-Source: Stacks Project, Cohomology, Tag 0D5X.
-
 Resolve on the source, then take direct image as a presheaf of modules and its
 cohomology. Evaluation on an open is exact in the presheaf category, so this is
 precisely the presheaf of cohomology of derived sections, including its restriction
 maps and its module structure. It does not take cohomology in the sheaf category.
+
+## References
+
+* Stacks Project, Tag 0D5X
 -/
 
 @[expose] public section

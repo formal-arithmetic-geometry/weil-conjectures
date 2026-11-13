@@ -14,8 +14,9 @@ public import Mathlib.CategoryTheory.Generator.Sheaf
 /-!
 # Concrete generator on the small etale site
 
-Source: Stacks Project, Tags 01DO and 03EW; Mathlib free-Yoneda sheaves and
-affine etale site comparison.
+## References
+
+* Stacks Project, Tags 01DO and 03EW
 -/
 
 @[expose] public section

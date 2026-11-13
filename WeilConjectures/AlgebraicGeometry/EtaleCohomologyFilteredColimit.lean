@@ -17,11 +17,13 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSucces
 /-!
 # Filtered colimits of etale cohomology
 
-Source: Stacks Project, Tags 03Q5, 0739 and 03FD.
-
 The image cocone has legs induced by the original coprojections. Its colimit property
 expresses that the canonical comparison map is an isomorphism, rather than merely asserting
 an unspecified isomorphism between the two cohomology objects.
+
+## References
+
+* Stacks Project, Tags 03Q5, 0739 and 03FD
 -/
 
 @[expose] public section

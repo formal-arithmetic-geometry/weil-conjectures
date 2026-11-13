@@ -10,10 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Finite type from a coherent open cover
 
-Source: Stacks Project, Modules, Definitions 01BV and 01B5.
-
 Finite local generators on the open subschemes are transported to the corresponding
 slice sites and assembled into local-generators data on the ambient scheme.
+
+## References
+
+* Stacks Project, Tags 01BV and 01B5
 -/
 
 @[expose] public section

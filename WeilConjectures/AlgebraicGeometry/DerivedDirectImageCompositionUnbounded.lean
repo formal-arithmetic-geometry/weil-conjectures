@@ -13,11 +13,12 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImageCompositio
 /-!
 # Composition of derived direct images
 
-Source: literature/stacks-project/cohomology.tex, Lemma 20.28.2 (Tag 0D5T),
-Cohomology of unbounded complexes.
-
 This module states the canonical composition comparison for the unbounded derived direct
 image of morphisms of schemes.
+
+## References
+
+* Stacks Project, Tag 0D5T
 -/
 
 @[expose] public section

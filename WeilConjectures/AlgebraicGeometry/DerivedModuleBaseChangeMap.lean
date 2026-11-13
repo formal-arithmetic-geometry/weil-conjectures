@@ -13,15 +13,16 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical base change for a module in degree zero
 
-Source: Stacks Project, Cohomology, Remark 08HY and Derived Categories of Schemes,
-Tag 0B91.
-
 ## Main definitions
 
 * `IsDerivedModulePullbackComparison`: a map is the derived-to-ordinary pullback
   comparison at a module.
 * `IsDerivedModuleBaseChangeMap`: a map is the base change with the ordinary pulled-back
   module as target.
+
+## References
+
+* Stacks Project, Tags 08HY and 0B91
 -/
 
 @[expose] public section

@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedTotalResolutionHomologySurjectiv
 /-!
 # Quasi-isomorphism from a good total resolution
 
-Source: Stacks Project, `literature/stacks-project/homology.tex`,
-Lemma 12.19.4 (Tag 09IZ), statement.
+## References
+
+* Stacks Project, Tag 09IZ
 -/
 
 @[expose] public section

@@ -13,12 +13,14 @@ import WeilConjectures.AlgebraicGeometry.FiniteFieldTowerDegreeBound
 /-!
 # Fibre degree bounds under composition
 
-Source: Stacks Project, Morphisms, Lemma Tag 03J6.
-
 ## Main statements
 
 * `AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_comp`: fibre degree bounds multiply.
 * `AlgebraicGeometry.Scheme.Hom.hasUniversallyBoundedFibers_comp`: uniform bounds compose.
+
+## References
+
+* Stacks Project, Tag 03J6
 -/
 
 @[expose] public section

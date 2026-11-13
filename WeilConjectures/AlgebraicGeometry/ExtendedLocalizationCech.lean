@@ -14,8 +14,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 /-! # Extended localization Čech complexes on ringed sites
 
-Source: Stacks Project, Tags 0913 and 099H.
-
 The construction uses the explicit cochain Koszul colimit of Tag 0913. Its degree-q
 summands are indexed by subsets of cardinality q, including the empty subset in degree
 zero. The transition on the subset I multiplies by the product of the f_i in I.
@@ -23,6 +21,10 @@ Thus its termwise colimit is the sheafification of the localization at that prod
 the differential is the alternating localization differential. Finite coproducts are
 finite products. The empty-subset transition is the identity, identifying degree zero
 canonically with the original ring sheaf. For an empty family only degree zero remains.
+
+## References
+
+* Stacks Project, Tags 0913 and 099H
 -/
 
 @[expose] public section

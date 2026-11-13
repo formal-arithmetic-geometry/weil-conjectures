@@ -11,10 +11,12 @@ import WeilConjectures.AlgebraicGeometry.CechComparisonMapNaturality
 
 /-! # Naturality of the first Čech-to-cohomology comparison
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ.
-
 The canonical comparison is characterized by the existing `IsModuleCechComparison`
 predicate, so its existence cannot be witnessed by an arbitrary natural homomorphism.
+
+## References
+
+* Stacks Project, Tag 01EQ
 -/
 
 @[expose] public section

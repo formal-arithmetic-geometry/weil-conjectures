@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
 /-! # Derived pullback/direct image adjunction for schemes
 
-Source: literature/stacks-project/cohomology.tex, Tag 079W, Cohomology Lemma
-cohomology-lemma-adjoint.
+## References
+
+* Stacks Project, Tag 079W
 -/
 
 @[expose] public section

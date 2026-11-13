@@ -17,9 +17,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Étale cohomology over a local ring as a colimit
 
-Source: Stacks Project, Étale Cohomology, Tag 09AX, proof, and Tags 03Q6 and 09YQ;
-Cohomology on Sites, Tag 03F3.
-
 The diagram is a presentation of the actual object-cohomology presheaf, with its arrows
 specified as well as its objects. The object cohomology H^q(U, F) is Ext from the
 sheafified free abelian sheaf on the representable `uliftYoneda U` (Mathlib's
@@ -29,6 +26,10 @@ AbelianHigherDirectImagePresheaf). The conclusion supplies the restriction compa
 the unique factorizations of the local-scheme morphism, and a colimit cocone whose legs
 are the pullbacks followed by inverse-image composition. `Sheaf.H` is the recorded Ext
 encoding of abelian-sheaf cohomology; its K-injective comparison is a comparison theorem.
+
+## References
+
+* Stacks Project, Tags 09AX, 03Q6, 09YQ and 03F3
 -/
 
 @[expose] public section

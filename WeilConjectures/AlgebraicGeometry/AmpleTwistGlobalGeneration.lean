@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Global generation after a sufficiently positive ample twist
 
-Source: EGA II, Proposition 4.5.5, implication ample ⇒ d); Stacks Project,
-Properties, Proposition 01Q3, (1) ⇒ (7).
+## References
+
+* EGA II, Proposition 4.5.5
+* Stacks Project, Tag 01Q3
 -/
 
 @[expose] public section

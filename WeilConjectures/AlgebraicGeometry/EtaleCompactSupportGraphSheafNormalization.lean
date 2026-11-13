@@ -10,8 +10,10 @@ import WeilConjectures.ConstructibleSheaf.EtaleMorphismDescent
 /-!
 # The graph map into the compactification sheaf
 
-Source: Stacks Project Tag 0F4L,
-and SGA 4 XVII 6.2.11.
+## References
+
+* SGA 4, XVII 6.2.11
+* Stacks Project, Tag 0F4L
 -/
 
 @[expose] public section

@@ -9,10 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleProperOpenExchangeCube
 
 /-! # Graph comparisons and proper/open interchange
 
-Source: Stacks Project, Tag 0F7J.
-
 The auxiliary records only bundle the supplied diagrams. Every arrow is built from the
 recorded graph maps, normalized proper/open exchange, and canonical compositors.
+
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

@@ -11,10 +11,12 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # The quotient tower obtained by scalar adjunction
 
-Source: Stacks Project, Tags 03CZ, 09T5, 0FND, 099M and 09C6.
-
 The transition is the transpose of the reduction of the preceding counit.
 Its action on all transposed morphisms follows from adjunction naturality.
+
+## References
+
+* Stacks Project, Tags 03CZ, 09T5, 0FND, 099M and 09C6
 -/
 
 @[expose] public noncomputable section

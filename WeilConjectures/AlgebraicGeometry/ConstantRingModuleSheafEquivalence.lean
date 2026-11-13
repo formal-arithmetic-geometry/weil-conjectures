@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # Module sheaves and modules over the constant ring sheaf
 
-Source: Stacks Project, Modules on Sites, Section 18.11, Lemma 18.11.1.
+## References
+
+* Stacks Project, Modules on Sites, Lemma 18.11.1
 -/
 
 @[expose] public section

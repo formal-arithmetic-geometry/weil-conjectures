@@ -16,11 +16,13 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Continuity of etale cohomology for systems of complexes
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.52.1, Tag 0EZM.
-
 The diagrams and their object isomorphisms below present the varying-site system on the
 limit site and its cohomology diagram. The parameter `P` is fixed by an explicit equation
 with the derived adjunction unit, so the conclusion concerns the canonical map.
+
+## References
+
+* Stacks Project, Tag 0EZM
 -/
 
 @[expose] public section

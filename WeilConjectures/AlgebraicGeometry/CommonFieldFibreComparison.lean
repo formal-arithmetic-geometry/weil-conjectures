@@ -10,8 +10,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 
 /-! # Comparing two field fibres over the same point
 
-Source: Stacks Project, Tag 055G, descent from the étale model;
-Mathlib's pullback carrier and iterated pullback isomorphisms.
+## References
+
+* Stacks Project, Tag 055G
 -/
 
 @[expose] public section

@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUn
 
 /-! # Canonical Hom representative evaluation on a ringed site
 
-Source: Stacks Project, Tags 0A8X, 0A95 and 079P.
 The evaluation uses the actual Hom-product projections, the fixed functorial
 K-injective replacement and its localization factorization.
 
@@ -25,6 +24,10 @@ K-injective replacement and its localization factorization.
 - `coefficientHomResolutionIso`: the actual localization factorization.
 - `coefficientHomResolutionInverse`: the inverse localized augmentation.
 - `coefficientHomSectionEvaluation`: componentwise evaluation into that replacement.
+
+## References
+
+* Stacks Project, Tags 0A8X, 0A95 and 079P
 -/
 
 @[expose] public section

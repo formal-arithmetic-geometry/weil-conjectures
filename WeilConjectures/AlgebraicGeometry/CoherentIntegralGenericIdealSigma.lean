@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
-/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
+/-! Generic coherent ideal lattices.
+
+## References
+
+* Stacks Project, Tag 01YE
+-/
 
 @[expose] public section
 universe w
