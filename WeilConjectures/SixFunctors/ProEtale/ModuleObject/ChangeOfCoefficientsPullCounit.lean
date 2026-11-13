@@ -83,6 +83,7 @@ lemma mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendSca
   erw [Iso.inv_hom_id_app]
   erw [Mod.id_hom', Category.id_comp, Category.id_comp]
 
+set_option profiler true in
 set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 /-- **(Pull) is the underived (Pull) modulo the counits**: on the image `Qh K` of an object of the
 homotopy category, `derivedUpperStarExtendScalarsIso a f` followed by the counits of `L(Ext_{a_Y})`
