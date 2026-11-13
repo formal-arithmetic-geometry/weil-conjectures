@@ -37,6 +37,42 @@ private theorem eqToHom_apply_symm {A B : AddCommGrpCat.{u}} (h : A = B) (x : A)
   subst B
   rfl
 
+private theorem topological_cohomology_edge_eq_of_cocycles
+    {Z X : TopCat.{u}} (f : Z ⟶ X)
+    (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))
+    (HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))
+    (hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙
+      (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))
+    (edge bottom : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p)
+    (h : ∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})
+      (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F)) (p : ℕ)
+      (s : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
+        (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ J.cocomplex.X p)
+      (hs : s ≫ J.cocomplex.d p (p + 1) = 0),
+      (edge p).app F
+          ((eqToHom (congrArg (fun Q ↦ Q.obj
+            ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
+            (J.extMk s (p + 1) rfl hs)) =
+        (bottom p).app F
+          ((eqToHom (congrArg (fun Q ↦ Q.obj
+            ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
+            (J.extMk s (p + 1) rfl hs))) : edge = bottom := by
+  funext p
+  apply NatTrans.ext
+  funext F
+  apply ConcreteCategory.hom_ext
+  intro x
+  let J := injectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F)
+  let α := (eqToHom (congrArg (fun Q ↦ Q.obj
+    ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p))) x
+  obtain ⟨s, hs, hclass⟩ := J.extMk_surjective α (p + 1) rfl
+  have input : (eqToHom (congrArg (fun Q ↦ Q.obj
+      ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
+        (J.extMk s (p + 1) rfl hs) = x := by
+    rw [hclass]
+    exact eqToHom_apply_symm _ x
+  simpa only [input] using h F J p s hs
+
 set_option profiler true in
 /-- Realize a cohomology map already characterized on resolution cocycles as the bottom
 edge of a functorial Leray spectral sequence. The induced map and its cocycle computation
@@ -177,29 +213,15 @@ theorem exists_topological_leray_bottom_realization
   refine Exists.imp (fun k ↦ ?_)
   refine And.imp_right ?_
   rintro ⟨bottom, hbottom, computation⟩
-  intro p
-  rw [← hbottom p]
-  apply NatTrans.ext
-  funext F
-  apply ConcreteCategory.hom_ext
-  intro x
-  let I := injectiveResolution F
-  let J := injectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F)
-  let α := (eqToHom (congrArg (fun Q ↦ Q.obj
-    ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p))) x
-  obtain ⟨s, hs, hclass⟩ := J.extMk_surjective α (p + 1) rfl
-  obtain ⟨φ, hφ, z, hz, hsz⟩ :=
-    exists_topological_resolution_cocycle_lift f a ha F I J p s hs
-  have input : (eqToHom (congrArg (fun Q ↦ Q.obj
-      ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
-        (J.extMk s (p + 1) rfl hs) = x := by
-    rw [hclass]
-    dsimp [α]
-    exact eqToHom_apply_symm _ x
-  have hgiven := hedge F I J φ hφ p s hs z hz hsz
-  have hcomputed := computation F I J φ hφ p s hs z hz hsz
-  rw [input] at hgiven hcomputed
-  have transported := hgiven.trans hcomputed.symm
-  exact eqToHom_apply_injective _ transported
+  have h : edge = bottom := topological_cohomology_edge_eq_of_cocycles f HX HZ hX
+    edge bottom (by
+      intro F J p s hs
+      let I := injectiveResolution F
+      obtain ⟨φ, hφ, z, hz, hsz⟩ :=
+        exists_topological_resolution_cocycle_lift f a ha F I J p s hs
+      exact eqToHom_apply_injective _
+        ((hedge F I J φ hφ p s hs z hz hsz).trans
+          (computation F I J φ hφ p s hs z hz hsz).symm))
+  exact h ▸ hbottom
 
 end CategoryTheory
