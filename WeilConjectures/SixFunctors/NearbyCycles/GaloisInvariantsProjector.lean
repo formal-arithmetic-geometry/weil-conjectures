@@ -402,8 +402,6 @@ private theorem exists_galoisLayer_retraction_projector
     (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
   exact key
 
--- matching the objects of the Galois layer with the unfolded composite of derived functors
--- (`κ`, `α`) is a large defeq check
 /-- `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant`, with the
 idempotent made explicit: `r ≫ α = κ⁻¹ ≫ Li^* Rj_* (R ≫ η) ≫ κ` for the derived unit `η` and
 `κ = NearbyCyclesModel.galoisLayerExchangeIso`. -/
@@ -511,7 +509,6 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
       L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
 
-set_option profiler true in
 /-- Construct the projector using a bounded complex of étale origin. The exchange and action
 are shared in the conclusion, so their derived functors are elaborated only once. -/
 private theorem exists_retraction_galoisLayer_projector_of_complex
@@ -564,6 +561,7 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
         ⟨σ.restrictNormal j, pullbackAction_comp_galoisLevelProjection h j σ⟩)
   have hret := exists_galoisLayer_retraction_projector (Profinite.continuousMapRingObj T₀)
     N h Ω C R hR hinv
+  -- Rebuilding the other conjuncts repeats large definitional equality checks.
   refine hret.imp fun r ↦ And.imp_right (And.imp_right ?_)
   intro hr₃ Z f' q H W φ κ S hS hφ
   obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
@@ -573,7 +571,7 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
     (fun j M ↦ hW j M) C K hc a hK e
     H hΦ (fun j ↦ hW j W) φ S hS hφ
 
-/-- Use an étale-origin complex to construct the shared-map projector. -/
+/-- Use a complex of étale origin to construct the projector. -/
 private theorem exists_retraction_galoisLayer_projector_of_etaleOrigin
     [QuasiCompact N.j] [QuasiSeparated N.j]
     (hp : ∀ L' : FiniteGaloisIntermediateField L Ω, IsUnit ((Module.finrank L L' : ℕ) : T₀))
@@ -600,7 +598,6 @@ private theorem exists_retraction_galoisLayer_projector_of_etaleOrigin
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
   exact exists_retraction_galoisLayer_projector_of_complex N h Ω T₀ hp C K a hterms e
 
--- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`,
 with a projector onto all the invariants** (torsion coefficients in which the degrees of the
 finite Galois subextensions of `Ω/L` are invertible). If `Lε^* C` is bounded below of étale
