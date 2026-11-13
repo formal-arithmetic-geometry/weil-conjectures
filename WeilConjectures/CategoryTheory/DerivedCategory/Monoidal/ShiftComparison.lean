@@ -176,8 +176,11 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
     monoidalCategoryOfMonoidalClosedBraidedCategory C₂
   let G := F.mapHomotopyCategory (.up ℤ)
   let δ : (curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G ⟶
-      G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X) :=
-    (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X
+      G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X) := by
+    have δ := (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X
+    dsimp only [postcompose₂, whiskeringLeft₂, whiskeringLeft, whiskeringRight,
+      Functor.comp_obj] at δ
+    exact δ
   have : NatTrans.CommShift δ ℤ :=
     OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_app F X
   let ρ : (Qh ⋙ LF) ⋙ (curriedTensor (DerivedCategory C₂)).obj (LF.obj (Qh.obj X)) ⟶
@@ -227,8 +230,11 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
     monoidalCategoryOfMonoidalClosedBraidedCategory C₂
   let G := F.mapHomotopyCategory (.up ℤ)
   let δ : (curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G ⟶
-      G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X) :=
-    (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).flipApp X
+      G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X) := by
+    have δ := (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).flipApp X
+    dsimp only [postcompose₂, whiskeringLeft₂, whiskeringLeft, whiskeringRight,
+      Functor.comp_obj] at δ
+    exact δ
   have : NatTrans.CommShift δ ℤ :=
     OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp F X
   let ρ : (Qh ⋙ LF) ⋙ (curriedTensor (DerivedCategory C₂)).flip.obj (LF.obj (Qh.obj X)) ⟶
