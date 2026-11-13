@@ -36,7 +36,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option profiler true in
 /-- A local map from a finite closed free source extends from an ideal lattice.
 The lattice inclusion is invertible over the given open; no injectivity of the
 extended map or generic stalk hypothesis on the target is asserted.
