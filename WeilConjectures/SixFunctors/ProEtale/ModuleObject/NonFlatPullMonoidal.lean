@@ -66,6 +66,7 @@ end CategoryTheory.Functor
 
 namespace CategoryTheory
 
+/-- Transport a counit factorization across a naturality square of isomorphisms. -/
 private lemma inv_comp_counit_of_iso_naturality {C : Type*} [Category* C]
     {A B B' D D' E Z : C} (e : A ≅ B) (d : B ≅ B') (d' : D ≅ D')
     {ε : A ⟶ Z} {m : B ⟶ D} {m' : B' ⟶ D'} {c : D ⟶ E} {c' : D' ⟶ E} {q : E ⟶ Z}
@@ -80,6 +81,7 @@ private lemma inv_comp_counit_of_iso_naturality {C : Type*} [Category* C]
 
 namespace Adjunction
 
+/-- Reverse a tensor comparison square after identifying its chosen comparison maps. -/
 private lemma comparisonCompatible_symm_of_composite_eq
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
@@ -104,8 +106,8 @@ private lemma comparisonCompatible_symm_of_composite_eq
   simp only [Iso.symm_inv, Iso.symm_hom, curriedTensor_obj_obj,
     curriedTensor_map_app, curriedTensor_obj_map]
   rw [reassoc_of% (h K M), Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
-    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app,
-    MonoidalCategory.id_tensorHom_id, Category.comp_id]
+    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
+  erw [MonoidalCategory.id_tensorHom_id, Category.comp_id]
 
 end Adjunction
 
@@ -127,7 +129,6 @@ noncomputable def leftDerivedExtendScalarsUpperStarCompIso :
       (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ ≪≫
     Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm
 
-set_option profiler true in
 /-- `L(Ext_{a_Y} ⋙ f^*_Λ') ≅ L(Ext_{a_Y}) ⋙ Lf^*_Λ'` is compatible with the counits. -/
 lemma leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit
     (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
@@ -151,7 +152,6 @@ lemma leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit
     ((leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm.app _)
     ((leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm.app _) h₁ h₂ h₃
 
-set_option profiler true in
 /-- **(Pull) is monoidal**: for an arbitrary coefficient change `a`, the derived (Pull)
 isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor comparisons of the derived
 pullbacks and of the derived extensions of scalars. -/
