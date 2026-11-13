@@ -133,7 +133,7 @@ private theorem sectionTensorMap_total_comm
     (K L : CochainComplex C ℤ) :
     let T := S.mapHomologicalComplex (ComplexShape.up ℤ)
     ∀ (a : ∀ n, (T.obj K ⊗ T.obj L).X n ⟶ S.obj ((K ⊗ L).X n))
-      (ha : ∀ (i j n : ℤ) (h : i + j = n),
+      (_ : ∀ (i j n : ℤ) (h : i + j = n),
         HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n h ≫ a n =
           μ (K.X i) (L.X j) ≫ S.map (HomologicalComplex.ιTensorObj K L i j n h))
       (n m : ℤ),

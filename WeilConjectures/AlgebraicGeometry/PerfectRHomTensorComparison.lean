@@ -212,8 +212,10 @@ theorem perfect_rhom_tensor_comparison
   have hη : η ≫ φ K.obj =
       (adj (𝟙_ (schemeDerivedCategory X)) K.obj K.obj).symm ((λ_ K.obj).hom) := by
     simp [η]
-  obtain ⟨hleft, hright⟩ := dualizable_evaluation_criterion X K.obj D.obj adj hadj
+  have htriangles := dualizable_evaluation_criterion X K.obj D.obj adj hadj
     ev φ hφ (fun N ↦ by simp only [φ, id_tensorHom]) η hη
+  have hleft := htriangles.1
+  have hright := htriangles.2
   let p : ExactPairing K.obj D.obj :=
     { evaluation' := ev
       coevaluation' := η
