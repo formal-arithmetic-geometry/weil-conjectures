@@ -369,6 +369,39 @@ private lemma pullbackExchange_galoisLayerHom_projector_factorization
     Iso.symm, Iso.app]
   exact hα
 
+/-- Express the retraction and its projector using shared exchange and action maps. -/
+private theorem exists_galoisLayer_retraction_projector
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (R : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦Λ⟧).obj
+        (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦Λ⟧).obj
+          (L((N.ε)^*⟦Λ⟧).obj C)) ⟶ L((N.ε)^*⟦Λ⟧).obj C)
+    (hR : (derivedUpperStarLowerStarAdjunction Λ
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+        (L((N.ε)^*⟦Λ⟧).obj C) ≫ R = 𝟙 _)
+    (hinv : ∀ σ : Ω ≃ₐ[L] Ω, derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C) ≫ R = R) :
+    let α := ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C
+    let ρ := fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C)
+    let κ := N.galoisLayerExchangeIso h Ω Λ C
+    ∃ r, α ≫ r = 𝟙 _ ∧
+      (∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α) ∧
+      r ≫ α = κ.inv ≫ (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+        (R ≫ (derivedUpperStarLowerStarAdjunction Λ
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+            (L((N.ε)^*⟦Λ⟧).obj C)) ≫ κ.hom := by
+  dsimp only
+  have key := exists_invariant_retraction_of_conjugate_eq (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
+    (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
+    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
+    (N.galoisLayerExchangeIso h Ω Λ C)
+    (pullbackExchange_galoisLayerHom_projector_factorization Λ N h Ω C) _ hinv
+    (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
+    (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
+    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
+  exact key
+
 -- matching the objects of the Galois layer with the unfolded composite of derived functors
 -- (`κ`, `α`) is a large defeq check
 /-- `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant`, with the
@@ -400,15 +433,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
-  have key := exists_invariant_retraction_of_conjugate_eq (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
-    (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
-    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
-    (N.galoisLayerExchangeIso h Ω Λ C)
-    (pullbackExchange_galoisLayerHom_projector_factorization Λ N h Ω C) _ hinv
-    (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
-    (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
-    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
-  exact key
+  exact exists_galoisLayer_retraction_projector Λ N h Ω C R hR hinv
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀] [IsGalois L Ω]
@@ -518,6 +543,33 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
   rw [hr₃]
   exact (map_map_conj_comp_eq_iff _ _ _ _ _).2 key
 
+/-- Use an étale-origin complex to construct the shared-map projector. -/
+private theorem exists_retraction_galoisLayer_projector_of_etaleOrigin
+    [QuasiCompact N.j] [QuasiSeparated N.j]
+    (hp : ∀ L' : FiniteGaloisIntermediateField L Ω, IsUnit ((Module.finrank L L' : ℕ) : T₀))
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X)))
+    (hC : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) N.generic
+      ((finiteCoefficientDerivedEquivalence N.generic T₀).functor.obj
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))) :
+    let Λ₀ := Profinite.continuousMapRingObj T₀
+    let α := ((N.galoisLayerHom h Ω).pullbackExchange Λ₀).app C
+    let D := ((N.galoisLayer h Ω).nearbyCycles Λ₀).obj (L((𝟙 X)^*⟦Λ₀⟧).obj C)
+    let ρ := fun σ ↦ N.galoisLayerAction Λ₀ h Ω σ (L((𝟙 X)^*⟦Λ₀⟧).obj C)
+    ∃ r, α ≫ r = 𝟙 _ ∧
+      (∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α) ∧
+      ∀ {Z : Scheme.{u}} (f' : Z ⟶ X') (q : ℤ),
+        let H := L((f')^*⟦Λ₀⟧) ⋙ DerivedCategory.homologyFunctor _ q
+        ∀ {W : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ₀ Z)}
+          (φ : H.obj D ⟶ W) {κ : Type*} (S : κ → (Ω ≃ₐ[L] Ω)),
+          (∀ (L' : FiniteGaloisIntermediateField L Ω) (a : L' ≃ₐ[L] L'),
+            ∃ k, ∀ x : L', S k x = a x) →
+          (∀ k, H.map (ρ (S k)) ≫ φ = φ) → H.map (r ≫ α) ≫ φ = φ := by
+  have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
+    (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
+  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
+  exact exists_retraction_galoisLayer_projector_of_complex N h Ω T₀ hp C K a hterms e
+
 -- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`,
 with a projector onto all the invariants** (torsion coefficients in which the degrees of the
@@ -567,9 +619,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
-  have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
-    (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
-  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
-  exact exists_retraction_galoisLayer_projector_of_complex N h Ω T₀ hp C K a hterms e
+  exact exists_retraction_galoisLayer_projector_of_etaleOrigin N h Ω T₀ hp C hC
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
