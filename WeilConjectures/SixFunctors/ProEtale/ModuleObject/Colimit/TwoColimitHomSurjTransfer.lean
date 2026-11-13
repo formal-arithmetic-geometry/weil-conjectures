@@ -40,7 +40,6 @@ namespace CategoryTheory.Mod
 
 open MonoidalCategory MonObj
 
-set_option profiler true in
 /-- The comparison of adjoint transfers for module objects, with a chosen representative
 of the transfer on the homotopy category. -/
 private lemma compIsoTransfer_derivedExtendScalars_comparison
@@ -60,7 +59,8 @@ private lemma compIsoTransfer_derivedExtendScalars_comparison
       (extendScalars j').leftDerivedFunctor)
     (hτ : ∀ M : HomotopyCategory (Mod C R) (ComplexShape.up ℤ),
       τ.hom.app (DerivedCategory.Qh.obj M) ≫ (extendScalars j).leftDerivedFunctorCounit.app M =
-        (extendScalars b).leftDerivedFunctor.map ((extendScalars a).leftDerivedFunctorCounit.app M) ≫
+        (extendScalars b).leftDerivedFunctor.map
+            ((extendScalars a).leftDerivedFunctorCounit.app M) ≫
           (extendScalars b).leftDerivedFunctorCounit.app
             (((extendScalars a).mapHomotopyCategory _).obj M) ≫
           DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso e _).hom.app M))
@@ -128,7 +128,6 @@ lemma compIsoTransfer_mapHomotopyCategory_subfieldExtendScalars (k : PadicSubfie
     (HomotopyCategory.quotient _ _).map ((subfieldExtendScalarsCocone X ℓ hE hF Y).ι.app k) :=
   Adjunction.compIsoTransfer_mapHomotopyCategory_quotient _ _ _ _ _ Y _ fun _ ↦ rfl
 
-set_option profiler true in
 /-- The adjoint transfer `D(Res_{E→k}) T^X_{F,k} (Q Y) ⟶ D(Res_{E→Ω}) T^X_{F,Ω} (Q Y)` is, modulo
 the counits and the factorizations of `D(Res)`, the image of the inclusion
 `Res_{E→k}(k_X ⊗_{F_X} Y) ⟶ Res_{E→Ω}(ℚ̄_ℓ,X ⊗_{F_X} Y)` of the colimit cocone. -/
