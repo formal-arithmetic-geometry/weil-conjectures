@@ -252,6 +252,7 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
 
+set_option profiler true in
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
 This is a finite comparison: it asserts no eventual vanishing, uses no complex P,
@@ -348,7 +349,7 @@ theorem adicResidue_koszul_coefficient_cone_comparison
               (Mod R) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
               (homOfLE h).op  := by
   have _ := hqA
-  subst J
+  cases ha
   intro O b ε hε
   obtain ⟨E, hadd, hlim, hcolim, c, q, hs, hq⟩ :=
     adicResidue_exact_coefficient_realization X (Ideal.span (Set.range a)) U
