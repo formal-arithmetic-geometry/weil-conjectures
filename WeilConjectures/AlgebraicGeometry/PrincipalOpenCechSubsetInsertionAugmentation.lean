@@ -109,7 +109,7 @@ theorem principalSubsetInsertion_augmentation
                       (R.obj (J.X n)))
                 exact (principalOpenSectionTransport A V (J.X n)).hom s) := by
   classical
-  intro hls hes n s
+  intro V D hls hes R J' U G n s
   let c : principalSubsetCoordinates A r f J n := fun S ↦
     if h : S.val.card = 1 then
       (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map
