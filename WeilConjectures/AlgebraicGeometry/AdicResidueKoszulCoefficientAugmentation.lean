@@ -112,7 +112,7 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
 
 attribute [local irreducible] completed homComplexFunctor
 
-set_option trace.profiler true in
+set_option profiler true in
 -- Elaborating the explicit chain-map components traverses the finite tensor constructions.
 /-- The coefficient augmentation exists before tensoring with any complex.
 In particular neither K-flatness nor Noetherianity is needed for this construction.
@@ -144,11 +144,10 @@ theorem adicResidue_koszul_coefficient_augmentation
       ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =
         adicResidueQuotientCoefficientUnit X J U n := by
   let O := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U
-  let b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections :=
-    fun i ↦ ringedKoszulSliceSection
-      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
-      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
-        (a i)) U
+  let b := fun i ↦ ringedKoszulSliceSection
+    (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
+    (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
+      (a i)) U
   let T := ringedKoszulDualTower O r b
   obtain ⟨d, _, hu⟩ :
       ∃ d : ∀ n : ℕ, ringedNegativeKoszul O r b n ≅ T.obj (op n),
@@ -167,13 +166,10 @@ theorem adicResidue_koszul_coefficient_augmentation
     apply (cancel_epi (t n).hom).1
     apply biproduct.hom_ext'
     intro i
-    have hs : ((ringedKoszulScalar O (b i)) ^ (n + 1)).asHom ≫
-        quotientProjection X J U n = 0 := by
-      dsimp only [O, b]
-      exact scalarPower_quotientProjection X J U (a i)
-        (ha (Ideal.subset_span (Set.mem_range_self i))) n
-    simpa only [Category.assoc, comp_zero] using
-      (congrArg (fun f ↦ f ≫ quotientProjection X J U n) (ht n i)).trans hs
+    have h := congrArg (fun f ↦ f ≫ quotientProjection X J U n) (ht n i)
+    rw [scalarPower_quotientProjection X J U (a i)
+      (ha (Ideal.subset_span (Set.mem_range_self i))) n] at h
+    simpa only [Category.assoc, comp_zero] using h
   let p (n : ℕ) : (T.obj (op n)).X 0 ⟶ adicResidueQuotientModule X J U n :=
     (d n).inv.f 0 ≫ (z n).hom ≫ quotientProjection X J U n
   have hp (n : ℕ) (i : ℤ) (hi : (ComplexShape.up ℤ).Rel i 0) :
