@@ -84,9 +84,15 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-set_option maxHeartbeats 400000 in
+private theorem adjunction_counit_factorization_triangle
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) {X Y : D} (g : L.obj (R.obj X) ⟶ Y) (a : Y ⟶ X)
+    (h : g ≫ a = adj.counit.app X) :
+    adj.homEquiv (R.obj X) Y g ≫ R.map a = 𝟙 (R.obj X) := by
+  rw [← adj.homEquiv_naturality_right, h, ← adj.homEquiv_symm_id]
+  exact Equiv.apply_symm_apply _ _
+
 set_option profiler true in
--- The adjunction identity compares two definitionally equal scalar-restricted pushforwards.
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
 performs the affine inverse calculation and the passage from affine opens to sheaves.
@@ -187,12 +193,15 @@ theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
   have htriangle : β.app ((R).obj F) ≫ (R).map (α.app F) = 𝟙 ((R).obj F) := by
     have hs : (S).map (β.app ((R).obj F) ≫ (R).map (α.app F)) =
         (S).map (𝟙 ((R).obj F)) := by
-      rw [Functor.map_comp, hcomp.2]
-      change (adj₀).homEquiv _ _ (γ.app ((R).obj F)) ≫
-        (pushforward f).map (α.app F) = 𝟙 _
-      rw [← Adjunction.homEquiv_naturality_right, hcomp.1]
-      rw [← (adj₀).homEquiv_symm_id F]
-      exact Equiv.apply_symm_apply _ _
+      calc
+        _ = (S).map (β.app ((R).obj F)) ≫ (S).map ((R).map (α.app F)) :=
+          (S).map_comp _ _
+        _ = (adj₀).homEquiv _ _ (γ.app ((R).obj F)) ≫
+            (S).map ((R).map (α.app F)) :=
+          congrArg (fun k ↦ k ≫ (S).map ((R).map (α.app F))) (hcomp.2 ((R).obj F))
+        _ = 𝟙 _ := adjunction_counit_factorization_triangle
+          (adj₀) (γ.app ((R).obj F)) (α.app F) (hcomp.1 F)
+        _ = _ := ((S).map_id _).symm
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V

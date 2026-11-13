@@ -115,9 +115,7 @@ private theorem equivalence_on_full_subcategories
         exact β.naturality f.hom)
   exact ⟨CategoryTheory.Equivalence.mk F' G' a.symm b.symm, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- The dependent tensor-functor witnesses require substantial elaboration.
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
 by restriction to the structure sheaf. The inverse is the two tensor operations in 01SB,
@@ -214,25 +212,15 @@ theorem affine_module_correspondence [IsAffineHom f] :
     apply (hqc ((R).obj F)).mpr
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
   refine ⟨hqc, hpush, ?_⟩
-  refine Exists.elim (affine_module_tensor_construction f) (fun B hB ↦ ?_)
-  refine Exists.elim hB (fun b hb ↦ ?_)
-  refine Exists.elim hb (fun t ht ↦ ?_)
-  refine Exists.elim ht (fun ε hring ↦ ?_)
-  refine Exists.elim hring.2.2.2 (fun P hP₀ ↦ ?_)
-  refine Exists.elim hP₀ (fun pobj hP₁ ↦ ?_)
-  refine Exists.elim hP₁ (fun κ hP ↦ ?_)
-  refine Exists.elim hP.2.2 (fun H hH₀ ↦ ?_)
-  refine Exists.elim hH₀ (fun hobj hH₁ ↦ ?_)
-  refine Exists.elim hH₁ (fun γ hH ↦ ?_)
-  refine Exists.elim hH.2.2.2 (fun α hβ₀ ↦ ?_)
-  refine Exists.elim hβ₀ (fun β hcomp ↦ ?_)
+  obtain ⟨B, b, t, ε, hring, hb, ht, P, pobj, κ, hPmap, hPunit,
+    H, hobj, γ, hHmap, hHunit, hHqc, α, β, hcomp⟩ := affine_module_tensor_construction f
   have hiso := affine_module_tensor_comparison_isIso f B b t ε
-    ⟨hring.1, hring.2.1, hring.2.2.1⟩ P pobj κ ⟨hP.1, hP.2.1⟩ H hobj γ
-    ⟨hH.1, hH.2.1, hH.2.2.1⟩ α β hcomp
-  have hE := equivalence_on_full_subcategories qU qA R H hpush hH.2.2.1 α β
+    ⟨hring, hb, ht⟩ P pobj κ ⟨hPmap, hPunit⟩ H hobj γ
+    ⟨hHmap, hHunit, hHqc⟩ α β hcomp
+  have hE := equivalence_on_full_subcategories qU qA R H hpush hHqc α β
     hiso.1 hiso.2
-  exact ⟨B, b, t, ε, hring.1, hring.2.1, hring.2.2.1, P, pobj, κ, hP.1, hP.2.1,
-    H, hobj, γ, hH.1, hH.2.1, hH.2.2.1, α, β, hcomp.1, hcomp.2, hiso.1, hiso.2, hE⟩
+  exact ⟨B, b, t, ε, hring, hb, ht, P, pobj, κ, hPmap, hPunit,
+    H, hobj, γ, hHmap, hHunit, hHqc, α, β, hcomp.1, hcomp.2, hiso.1, hiso.2, hE⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -158,9 +158,7 @@ private theorem openSquare_app
     eqToHom_app, Iso.trans_inv, eqToIso.inv, eqToHom_refl,
     Category.id_comp, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Matching the derived-open component formulas needs extra elaboration heartbeats.
 /-- The two paths around a commuting cube of pullback comparisons agree.
 Source: Stacks Project, cohomology.tex, Tag 0D5S; perfect.tex, Tag 0DJ9.
 (blueprint: lem-pc-t2-open-pullback-cube).
@@ -215,32 +213,32 @@ theorem singleComplexOpen_pullback_cube
     (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j
     (morphismRestrict_ι f V) (morphismRestrict_ι f' V')
     (Scheme.Hom.resLE_comp_ι g hV') hj h₀ M
-  rw [openSquare_app f V (f ⁻¹ᵁ V) (f ∣_ V) (morphismRestrict_ι f V) M,
+  simp only [openSquare_app f V (f ⁻¹ᵁ V) (f ∣_ V) (morphismRestrict_ι f V) M,
     openSquare_app g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj ((derivedPullback f).obj M),
     openSquare_app g V V' (g.resLE V V' hV') (Scheme.Hom.resLE_comp_ι g hV') M,
     openSquare_app f' V' (f' ⁻¹ᵁ V') (f' ∣_ V') (morphismRestrict_ι f' V')
       ((derivedPullback g).obj M)]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← (derivedPullback j).map_comp_assoc
+  simp only [← (derivedPullback j).map_comp_assoc
     ((singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).hom.app ((derivedPullback f).obj M))
     ((singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).inv.app ((derivedPullback f).obj M)),
     Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
-  rw [← (derivedPullback (f' ∣_ V')).map_comp_assoc
+  simp only [← (derivedPullback (f' ∣_ V')).map_comp_assoc
     ((singleComplexOpenPullbackIso S' V').hom.app ((derivedPullback g).obj M))
     ((singleComplexOpenPullbackIso S' V').inv.app ((derivedPullback g).obj M)),
     Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   have hn := q₀.naturality ((singleComplexOpenPullbackIso S V).inv.app M)
   simp only [Functor.comp_map] at hn
-  rw [← reassoc_of% hn]
+  simp only [← reassoc_of% hn]
   have hn' := (singleComplexOpenPullbackIso X' (f' ⁻¹ᵁ V')).hom.naturality (q.app M)
   simp only [Functor.comp_obj] at hn'
   dsimp only [RX']
-  rw [← hn']
+  simp only [← hn']
   have hq := squareComparison_eq f f' g g' h
   have hq₀ := squareComparison_eq (f ∣_ V) (f' ∣_ V')
     (g.resLE V V' hV') j h₀
   dsimp only [q, q₀]
-  rw [hq, hq₀]
+  simp only [hq, hq₀]
   simpa only [Category.assoc] using congrArg (fun z ↦
     (derivedPullback (f' ∣_ V')).map
         ((derivedPullback (g.resLE V V' hV')).map
