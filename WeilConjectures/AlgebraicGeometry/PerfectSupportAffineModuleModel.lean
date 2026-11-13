@@ -114,7 +114,7 @@ theorem perfect_support_affine_module_model
         ∀ a : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}),
           F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj P)) ≫ eP.hom =
             eP.hom ≫ R.map (schemeDerivedScalar X a (𝟙 E.obj)) := by
-  intro A R
+  let A := ↑(X.presheaf.obj (op U))
   let : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
     HasDerivedCategory.standard (ModuleCat.{u} A)
   -- Reuse the abelian structures throughout the derived comparisons.

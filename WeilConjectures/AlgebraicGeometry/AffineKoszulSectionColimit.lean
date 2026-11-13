@@ -238,18 +238,11 @@ theorem affine_koszul_section_colimit
   let := hK
   obtain ⟨_, hperf, _, v, hav, hva, ι, hι, hc⟩ :=
     affine_perfect_open_represent_cohomology A r f ES
-  let RS := ((SheafOfModules.overFunctor.{uX}
-      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX}
-        ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-      (D := SheafOfModules.{uX} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-      (Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
   have hp : ∀ n, IsPerfect X (F.functor.obj (koszulOpenObject A r f n)) := by
     intro n
     exact scheme_iso_derived_inverse_preserves_perfect s.symm F.symm hi _ (hperf n)
   obtain ⟨v', hav', hva', D, hD, ι', hι', hc'⟩ :=
-    transportHomColimit F G RS R β (koszulOpenStructure A) ES.obj
+    transportHomColimit F G _ R β (koszulOpenStructure A) ES.obj
       (DerivedCategory.Q.obj T) E.obj q (F.counitIso.app E.obj)
       (koszulOpenObject A r f) (koszulOpenUnit A r f) v hav hva
       (koszulOpenHomDiagram A r f ES.obj) (fun _ ↦ rfl) ι
