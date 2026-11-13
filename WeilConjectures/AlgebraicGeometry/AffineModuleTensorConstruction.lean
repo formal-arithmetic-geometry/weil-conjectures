@@ -129,9 +129,11 @@ private theorem tensorConstruction_of_pushout [IsAffineHom f]
   have hbase :=
     affine_module_tensor_baseChange (U := U) (X := X) f B b t hp
   rcases hbase with ⟨P, pobj, κ, hmapP, hunitP⟩
-  obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
+  refine ⟨P, pobj, κ, hmapP, hunitP, ?_⟩
+  have hext :=
     affine_module_tensor_extensionUnit (U := U) (X := X) f B b t ε hb P pobj κ
-  refine ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, ?_⟩
+  rcases hext with ⟨H, hobj, γ, hmapH, hunitH⟩
+  refine ⟨H, hobj, γ, hmapH, hunitH, ?_⟩
   exact affine_module_tensor_coherenceComparisons (U := U) (X := X) f B b t ε
     hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
 
