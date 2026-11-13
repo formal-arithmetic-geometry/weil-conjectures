@@ -115,9 +115,14 @@ theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   let B := (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.resolution.cocomplex
   have hB : ∀ n : ℕ, Injective (B.X n) := fun n ↦
     P.injective_obj (R.resolution.cocomplex.X n)
-  let β : I.cocomplex ⟶ B := (NatTrans.mapHomologicalComplex (restrictAdjunction U.ι).unit
-    (ComplexShape.up ℕ)).app I.cocomplex ≫
-      (P.mapHomologicalComplex (ComplexShape.up ℕ)).map R.comparison.inv
+  let η : I.cocomplex ⟶
+      (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) :=
+    { f := fun n ↦ (restrictAdjunction U.ι).unit.app (I.cocomplex.X n)
+      comm' := fun i j _ ↦ ((restrictAdjunction U.ι).unit.naturality
+        (I.cocomplex.d i j)).symm }
+  let β : I.cocomplex ⟶ B := η ≫
+    (P.mapHomologicalComplex (ComplexShape.up ℕ)).map R.comparison.inv
   have haug : (restrictFunctor U.ι).map (I.ι.f 0) ≫ R.comparison.inv.f 0 =
       R.resolution.ι.f 0 := by
     rw [← R.augmentation, Category.assoc]
@@ -186,23 +191,14 @@ theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
       ((HomologicalComplex.eval _ _ n).mapIso R.comparison)
   let := RingedSpace.globalSectionsFunctor_additive Z.toRingedSpace
   let := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace
-  let iI := (forget₂ _ AddCommGrpCat.{u}).mapIso
-    (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p) ≪≫
-      (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso
-        (forget₂ _ AddCommGrpCat.{u})).symm
-  let iR := (forget₂ _ AddCommGrpCat.{u}).mapIso
-    (R.resolution.isoRightDerivedObj
-      (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) p) ≪≫
-      (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
-        (forget₂ _ AddCommGrpCat.{u})).symm
   rw [hC]
   dsimp only [ModuleCohomologyFMapData.map, C]
   simp only [CategoryTheory.Functor.map_id, Category.comp_id]
-  change (iI.hom ≫ H.map ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map β) ≫
-      inv (H.map a.hom) ≫ iR.inv) ≫ iR.hom ≫ H.map R.sections.hom = iI.hom ≫ H.map r
-  rw [Category.assoc, Category.assoc, Category.assoc, Iso.inv_hom_id_assoc]
   have ha : inv (H.map a.hom) = H.map a.inv :=
     IsIso.inv_eq_of_hom_inv_id (by rw [← H.map_comp, Iso.hom_inv_id, H.map_id])
-  rw [ha, ← H.map_comp, ← H.map_comp, hc]
+  rw [ha]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id,
+    Category.id_comp, Iso.hom_inv_id_assoc]
+  rw [← H.map_comp, ← H.map_comp, hc]
 
 end AlgebraicGeometry.Scheme.Modules

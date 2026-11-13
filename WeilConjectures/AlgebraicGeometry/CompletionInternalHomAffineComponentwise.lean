@@ -31,6 +31,48 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry
 
+/-- Completion extends evaluation of linear maps between finite modules. -/
+private theorem exists_completion_hom_evaluation
+    {A : Type u} [CommRing A] [IsNoetherianRing A] (J : Ideal A)
+    (N M : Type u) [AddCommGroup N] [Module A N] [Module.Finite A N]
+    [AddCommGroup M] [Module A M] [Module.Finite A M] :
+    ∃ E : AdicCompletion J (N →ₗ[A] M) →ₗ[AdicCompletion J A]
+        (AdicCompletion J N →ₗ[AdicCompletion J A] AdicCompletion J M),
+      ∀ h : N →ₗ[A] M, E (AdicCompletion.of J _ h) = AdicCompletion.map J h := by
+  let B := AdicCompletion J A
+  let H := N →ₗ[A] M
+  let cH := AdicCompletion.ofTensorProductEquivOfFiniteNoetherian J H
+  let cN := AdicCompletion.ofTensorProductEquivOfFiniteNoetherian J N
+  let cM := AdicCompletion.ofTensorProductEquivOfFiniteNoetherian J M
+  let T := B ⊗[A] N →ₗ[B] B ⊗[A] M
+  let β : B ⊗[A] H →ₗ[B] T := TensorProduct.AlgebraTensorModule.lift
+    { toFun := fun b ↦ LinearMap.lsmul B T b ∘ₗ LinearMap.baseChangeHom A B N M
+      map_add' := by
+        intro b b'
+        apply LinearMap.ext
+        intro h
+        exact add_smul b b' (LinearMap.baseChangeHom A B N M h)
+      map_smul' := by
+        intro b b'
+        apply LinearMap.ext
+        intro h
+        change (b * b') • LinearMap.baseChangeHom A B N M h =
+          b • (b' • LinearMap.baseChangeHom A B N M h)
+        exact mul_smul _ _ _ }
+  have hβ (h : H) : β (1 ⊗ₜ[A] h) = LinearMap.baseChangeHom A B N M h := by
+    change (1 : B) • LinearMap.baseChangeHom A B N M h = _
+    exact one_smul B _
+  let C : T ≃ₗ[B] (AdicCompletion J N →ₗ[B] AdicCompletion J M) :=
+    LinearEquiv.arrowCongr cN cM
+  let E := C.toLinearMap ∘ₗ β ∘ₗ cH.symm.toLinearMap
+  have hEof (h : H) : E (AdicCompletion.of J H h) = AdicCompletion.map J h := by
+    change C (β (cH.symm (AdicCompletion.of J H h))) = AdicCompletion.map J h
+    rw [AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, hβ]
+    apply C.symm.injective
+    rw [LinearEquiv.symm_apply_apply]
+    exact AdicCompletion.tensor_map_id_left_eq_map J h
+  exact ⟨E, hEof⟩
+
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Construct completed evaluation and identify its individual quotient components.
@@ -145,36 +187,7 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
   let K : Hs ≃ₗ[A] H := LinearEquiv.ofBijective
     (PresheafOfModules.homObjEvalId G.obj.val F.obj.val U.val)
     (affine_internalHom_evaluation_bijective G.obj F.obj U.val U.property)
-  let cH := AdicCompletion.ofTensorProductEquivOfFiniteNoetherian J H
-  let cN := AdicCompletion.ofTensorProductEquivOfFiniteNoetherian J N
-  let cM := AdicCompletion.ofTensorProductEquivOfFiniteNoetherian J M
-  let T := B ⊗[A] N →ₗ[B] B ⊗[A] M
-  let β : B ⊗[A] H →ₗ[B] T := TensorProduct.AlgebraTensorModule.lift
-    { toFun := fun b ↦ LinearMap.lsmul B T b ∘ₗ LinearMap.baseChangeHom A B N M
-      map_add' := by
-        intro b b'
-        apply LinearMap.ext
-        intro h
-        exact add_smul b b' (LinearMap.baseChangeHom A B N M h)
-      map_smul' := by
-        intro b b'
-        apply LinearMap.ext
-        intro h
-        change (b * b') • LinearMap.baseChangeHom A B N M h =
-          b • (b' • LinearMap.baseChangeHom A B N M h)
-        exact mul_smul _ _ _ }
-  have hβ (h : H) : β (1 ⊗ₜ[A] h) = LinearMap.baseChangeHom A B N M h := by
-    change (1 : B) • LinearMap.baseChangeHom A B N M h = _
-    exact one_smul B _
-  let C : T ≃ₗ[B] (AdicCompletion J N →ₗ[B] AdicCompletion J M) :=
-    LinearEquiv.arrowCongr cN cM
-  let E := C.toLinearMap ∘ₗ β ∘ₗ cH.symm.toLinearMap
-  have hEof (h : H) : E (AdicCompletion.of J H h) = AdicCompletion.map J h := by
-    change C (β (cH.symm (AdicCompletion.of J H h))) = AdicCompletion.map J h
-    rw [AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, hβ]
-    apply C.symm.injective
-    rw [LinearEquiv.symm_apply_apply]
-    exact AdicCompletion.tensor_map_id_left_eq_map J h
+  obtain ⟨E, hEof⟩ := exists_completion_hom_evaluation J N M
   dsimp only
   intro pN pM hofN hofM hscalarN hscalarM
   obtain ⟨pH, hsurjH, hinjH, htransH, hofH, hscalarH, hlimH⟩ :=

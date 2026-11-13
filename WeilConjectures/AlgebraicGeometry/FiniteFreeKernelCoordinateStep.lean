@@ -28,6 +28,61 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+/-- A split coordinate decomposition gives the kernel an image quotient. -/
+private theorem exists_shortExact_kernel_split
+    {C : Type*} [Category C] [Abelian C] {Q P T L T' : C}
+    (inc : Q ⟶ P) (r : P ⟶ Q) (t : P ⟶ T) (s : T ⟶ P) (p : P ⟶ L)
+    (hir : inc ≫ r = 𝟙 Q) (hit : inc ≫ t = 0) (hsplit : r ≫ inc + t ≫ s = 𝟙 P)
+    (e : Abelian.image (kernel.ι p ≫ t) ≅ T') :
+    ∃ (a : kernel (inc ≫ p) ⟶ kernel p) (b : kernel p ⟶ T') (w : a ≫ b = 0),
+      (ShortComplex.mk a b w).ShortExact := by
+  let q := inc ≫ p
+  have : Mono inc := mono_of_mono_fac hir
+  let a : kernel q ⟶ kernel p := kernel.map q p inc (𝟙 _) (by simp [q])
+  let v := kernel.ι p ≫ t
+  have ha : a ≫ kernel.ι p = kernel.ι q ≫ inc := by simp [a]
+  have hav : a ≫ v = 0 := by
+    dsimp only [v]
+    rw [← Category.assoc, ha, Category.assoc, hit, comp_zero]
+  have : Mono a := by
+    have : Mono (a ≫ kernel.ι p) := by rw [ha]; infer_instance
+    exact mono_of_mono a (kernel.ι p)
+  have hkernel : IsLimit (KernelFork.ofι a hav) := by
+    apply KernelFork.IsLimit.ofι'
+    intro T k hk
+    have hrec : (k ≫ kernel.ι p ≫ r) ≫ inc = k ≫ kernel.ι p := by
+      have h := congrArg (fun f ↦ (k ≫ kernel.ι p) ≫ f) hsplit
+      have hkts : (k ≫ kernel.ι p) ≫ (t ≫ s) = 0 := by
+        calc
+          (k ≫ kernel.ι p) ≫ (t ≫ s) = (k ≫ v) ≫ s := by
+            simp only [v, Category.assoc]
+          _ = 0 := by rw [hk, zero_comp]
+      simp only [Preadditive.comp_add, Category.comp_id, hkts, add_zero] at h
+      simpa only [Category.assoc] using h
+    have hkq : (k ≫ kernel.ι p ≫ r) ≫ q = 0 := by
+      change (k ≫ kernel.ι p ≫ r) ≫ (inc ≫ p) = 0
+      rw [← Category.assoc, hrec]
+      simp
+    refine ⟨kernel.lift q (k ≫ kernel.ι p ≫ r) hkq, ?_⟩
+    apply (cancel_mono (kernel.ι p)).mp
+    simp only [Category.assoc, ha, kernel.lift_ι_assoc]
+    exact hrec
+  let b₀ := Abelian.factorThruImage v
+  have hw₀ : a ≫ b₀ = 0 := by
+    apply (cancel_mono (Abelian.image.ι v)).mp
+    simp [b₀, Category.assoc, hav]
+  have hbkernel : IsLimit (KernelFork.ofι a hw₀) :=
+    isKernelOfComp (Abelian.image.ι v) v hkernel hw₀ (Abelian.image.fac v)
+  have : Epi b₀ := inferInstanceAs (Epi (Abelian.factorThruImage v))
+  have hs₀ : (ShortComplex.mk a b₀ hw₀).ShortExact :=
+    { exact := ShortComplex.exact_of_f_is_kernel _ hbkernel }
+  have hw : a ≫ (b₀ ≫ e.hom) = 0 := by simp [← Category.assoc, hw₀]
+  refine ⟨a, b₀ ≫ e.hom, hw, ?_⟩
+  exact ShortComplex.shortExact_of_iso
+    (ShortComplex.isoMk (S₁ := ShortComplex.mk a b₀ hw₀)
+      (S₂ := ShortComplex.mk a (b₀ ≫ e.hom) hw) (Iso.refl _) (Iso.refl _) e
+      (by simp) (by simp)) hs₀
+
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
@@ -64,7 +119,6 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
         (ShortComplex.mk a b w).ShortExact := by
   classical
   let inc := SheafOfModules.freeMap (R := X.ringCatSheaf) (some : I → Option I)
-  let q := inc ≫ p
   let r : SheafOfModules.free (R := X.ringCatSheaf) (Option I) ⟶
       SheafOfModules.free I :=
     Sigma.desc (fun i ↦ match i with
@@ -100,56 +154,13 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
       simp only [r, t, SheafOfModules.ιFree, Sigma.ι_comp_desc, zero_comp, add_zero,
         Category.comp_id]
       exact SheafOfModules.ιFree_freeMap some i
-  have : Mono inc := mono_of_mono_fac hir
-  let a : kernel q ⟶ kernel p := kernel.map q p inc (𝟙 _) (by simp [q])
   let v := kernel.ι p ≫ t
-  have ha : a ≫ kernel.ι p = kernel.ι q ≫ inc := by simp [a]
-  have hav : a ≫ v = 0 := by
-    dsimp [v]
-    rw [← Category.assoc, ha, Category.assoc, hit, comp_zero]
-  have : Mono a := by
-    have : Mono (a ≫ kernel.ι p) := by rw [ha]; infer_instance
-    exact mono_of_mono a (kernel.ι p)
-  have hkernel : IsLimit (KernelFork.ofι a hav) := by
-    apply KernelFork.IsLimit.ofι'
-    intro T k hk
-    have hrec : (k ≫ kernel.ι p ≫ r) ≫ inc = k ≫ kernel.ι p := by
-      have h := congrArg (fun f ↦ (k ≫ kernel.ι p) ≫ f) hsplit
-      have hkts : (k ≫ kernel.ι p) ≫ (t ≫ s) = 0 := by
-        calc
-          (k ≫ kernel.ι p) ≫ (t ≫ s) = (k ≫ v) ≫ s := by
-            simp only [v, Category.assoc]
-          _ = 0 := by rw [hk, zero_comp]
-      simp only [Preadditive.comp_add, Category.comp_id, hkts, add_zero] at h
-      simpa only [Category.assoc] using h
-    have hkq : (k ≫ kernel.ι p ≫ r) ≫ q = 0 := by
-      change (k ≫ kernel.ι p ≫ r) ≫ (inc ≫ p) = 0
-      rw [← Category.assoc, hrec]
-      simp
-    refine ⟨kernel.lift q (k ≫ kernel.ι p ≫ r) hkq, ?_⟩
-    apply (cancel_mono (kernel.ι p)).mp
-    simp only [Category.assoc, ha, kernel.lift_ι_assoc]
-    exact hrec
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (Option I)
   have hqc := Scheme.Modules.isQuasicoherent_kernel p
   have := Scheme.Modules.isQuasicoherent_cokernel v
   have := Scheme.Modules.isQuasicoherent_kernel (cokernel.π v)
   obtain ⟨J, hJ, ⟨e⟩⟩ := quasiCoherent_submodule_ideal X (Abelian.image.ι v)
-  let b₀ := Abelian.factorThruImage v
-  have hw₀ : a ≫ b₀ = 0 := by
-    apply (cancel_mono (Abelian.image.ι v)).mp
-    simp [b₀, Category.assoc, hav]
-  have hbkernel : IsLimit (KernelFork.ofι a hw₀) :=
-    isKernelOfComp (Abelian.image.ι v) v hkernel hw₀ (Abelian.image.fac v)
-  have : Epi b₀ := inferInstanceAs (Epi (Abelian.factorThruImage v))
-  have hs₀ : (ShortComplex.mk a b₀ hw₀).ShortExact :=
-    { exact := ShortComplex.exact_of_f_is_kernel _ hbkernel }
-  have hw : a ≫ (b₀ ≫ e.hom) = 0 := by simp [← Category.assoc, hw₀]
-  refine ⟨J, hJ, a, b₀ ≫ e.hom, hw, ?_⟩
-  exact ShortComplex.shortExact_of_iso
-    (ShortComplex.isoMk (S₁ := ShortComplex.mk a b₀ hw₀)
-      (S₂ := ShortComplex.mk a (b₀ ≫ e.hom) hw) (Iso.refl _) (Iso.refl _) e
-      (by simp) (by simp)) hs₀
+  exact ⟨J, hJ, exists_shortExact_kernel_split inc r t s p hir hit hsplit e⟩
 
 end AlgebraicGeometry
