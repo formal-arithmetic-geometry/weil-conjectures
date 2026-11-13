@@ -284,6 +284,8 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
       U'.basicOpenUnit (e.appTop f) := by
     ext
     simp only [Units.coe_map, Scheme.basicOpenUnit, IsUnit.unit_spec]
+    change e₁.appTop ((U.basicOpen f).ι.appTop f) =
+      (U'.basicOpen (e.appTop f)).ι.appTop (e.appTop f)
     simpa only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] using
       congrArg (fun p ↦ p.appTop f) sq.w
   have hG1 := supportedLocalizationBoundary_baseChange Λ e
