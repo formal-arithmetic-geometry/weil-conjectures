@@ -608,11 +608,12 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧
       ∀ R : Subalgebra R₀ A, R₁ ≤ R → Flat R ((R ⊗[R₀] S₀) ⊗[S₀] M₀) := by
   classical
+  -- Elaborate the flat locus over an abstract algebra, then specialize to subalgebras.
+  let F (R : Type u) [CommRing R] [Algebra R₀ R] : Set (PrimeSpectrum (R ⊗[R₀] S₀)) :=
+    {Q | Flat R (LocalizedModule Q.asIdeal.primeCompl ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
   -- The set of primes of `A ⊗[R₀] S₀` at which `R` is flat.
   let W (R : Subalgebra R₀ A) : Set (PrimeSpectrum (A ⊗[R₀] S₀)) :=
-    {q | Flat R (LocalizedModule
-      (q.asIdeal.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom).primeCompl
-      ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
+    PrimeSpectrum.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom ⁻¹' F R
   have hcomap {R R' : Subalgebra R₀ A} (h : R ≤ R') (q : Ideal (A ⊗[R₀] S₀)) :
       (q.comap (Algebra.TensorProduct.map R'.val (AlgHom.id R₀ S₀)).toRingHom).comap
         (Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀)).toRingHom =
@@ -641,8 +642,7 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
   -- The flat locus `U` of `R₁` and its closed complement `Z = V(I)`.
   have : Algebra.FiniteType R₀ R₁ := (Subalgebra.fg_iff_finiteType _).mp hR₁
   have : IsNoetherianRing R₁ := Algebra.FiniteType.isNoetherianRing R₀ R₁
-  set U := {Q : PrimeSpectrum (R₁ ⊗[R₀] S₀) |
-      Flat R₁ (LocalizedModule Q.asIdeal.primeCompl ((R₁ ⊗[R₀] S₀) ⊗[S₀] M₀))}
+  set U := F R₁
   have hU : IsOpen U := isOpen_setOf_flat_localizedModule_baseChange (M₀ := M₀) R₁
   set Z := Uᶜ
   set I := PrimeSpectrum.vanishingIdeal Z
@@ -670,6 +670,9 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
           (Algebra.TensorProduct.map (Subalgebra.inclusion hR₁₂)
             (AlgHom.id R₀ S₀)).toRingHom :=
       RingHom.ext fun x ↦ (map_inclusion_map_inclusion hR₁₂ hR x).symm
+    change I.map (Algebra.TensorProduct.map (Subalgebra.inclusion hR₁₂)
+      (AlgHom.id R₀ S₀)).toRingHom = ⊤ at hI₂
+    change I.map ρ.toRingHom = ⊤
     rw [hcomp, ← Ideal.map_map, hI₂, Ideal.map_top]
   apply flat_of_forall_flat_localizedModule (S := R ⊗[R₀] S₀)
   intro Q _
