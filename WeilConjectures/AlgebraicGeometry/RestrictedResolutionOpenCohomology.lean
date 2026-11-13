@@ -25,9 +25,63 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
+/-- The restriction-unit calculation on a single module, independent of resolutions. -/
+private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
+    (U L : Z.Opens) (e : L ≤ U) (K : Z.Modules)
+    {D : U.toScheme.Modules} {D' : L.toScheme.Modules}
+    (v : D ⟶ (restrictFunctor U.ι).obj K)
+    (v' : D' ≅ (restrictFunctor L.ι).obj K) :
+    let j := Z.homOfLE e
+    let c := (restrictFunctorComp j U.ι).symm ≪≫
+      restrictFunctorCongr (Z.homOfLE_ι e)
+    Hom.app ((restrictAdjunction j).unit.app D) ⊤ ≫
+      Hom.app ((restrictFunctor j).map v ≫ c.hom.app K ≫ v'.inv)
+        (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) ≫
+      D'.presheaf.map (eqToHom (by simp) : (⊤ : L.toScheme.Opens) ⟶
+        j ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op ≫
+      Hom.app v'.hom ⊤ ≫ (restrictAppIso L.ι K ⊤).hom ≫
+      K.presheaf.map (eqToHom L.ι_image_top.symm).op =
+    Hom.app v ⊤ ≫ (restrictAppIso U.ι K ⊤).hom ≫
+      K.presheaf.map (eqToHom U.ι_image_top.symm).op ≫
+      K.presheaf.map (homOfLE e).op := by
+  intro j c
+  simp only [Hom.comp_app, Category.assoc]
+  have hn := (Hom.mapPresheaf (v'.inv)).naturality
+    (eqToHom (by simp) : (⊤ : L.toScheme.Opens) ⟶
+      j ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op
+  change (((restrictFunctor L.ι).obj (K)).presheaf.map _ ≫
+    Hom.app (v'.inv) ⊤) =
+    Hom.app (v'.inv) (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) ≫
+    (D').presheaf.map _ at hn
+  rw [← Category.assoc (Hom.app (v'.inv) _)
+    ((D').presheaf.map _)]
+  erw [← hn]
+  simp only [Category.assoc]
+  have hcan : Hom.app (v'.inv) ⊤ ≫
+      Hom.app (v'.hom) ⊤ = 𝟙 _ := by
+    rw [← Hom.comp_app, v'.inv_hom_id, Hom.id_app]
+  rw [← Category.assoc (Hom.app (v'.inv) ⊤)
+    (Hom.app (v'.hom) ⊤), hcan, Category.id_comp]
+  have hu := congrArg (fun f ↦ Hom.app f ⊤)
+    ((restrictAdjunction j).unit.naturality (v))
+  change Hom.app (v) ⊤ ≫
+    Hom.app ((restrictAdjunction j).unit.app
+      ((restrictFunctor U.ι).obj (K))) ⊤ =
+    Hom.app ((restrictAdjunction j).unit.app (D)) ⊤ ≫
+    Hom.app ((restrictFunctor j).map (v)) (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) at hu
+  rw [← Category.assoc (Hom.app ((restrictAdjunction j).unit.app
+    (D)) ⊤)
+    (Hom.app ((restrictFunctor j).map (v)) _), ← hu]
+  simp only [Category.assoc]
+  simp only [c, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Hom.comp_app, restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app,
+    restrictAdjunction_unit_app_app, restrictAppIso, Iso.refl_hom]
+  erw [Category.id_comp, Category.id_comp]
+  simp only [restrict_map, ← Functor.map_comp]
+  congr 1
+
 set_option backward.defeqAttrib.useBackward true in
 set_option profiler true in
--- The section calculation crosses the scheme-module and ringed-space section interfaces.
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
 section complexes, before the map to a cohomology sheaf.
 Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
@@ -155,53 +209,9 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
     intro n
     rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f,
       HomologicalComplex.comp_f, R'.components, R.components]
-    dsimp only [β, t, Γ, r]
-    change Hom.app ((restrictAdjunction j).unit.app (R.resolution.cocomplex.X n)) ⊤ ≫
-      Hom.app (Q.map (R.comparison.hom.f n) ≫ c.hom.app (I.cocomplex.X n) ≫
-        R'.comparison.inv.f n) (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) ≫
-      (R'.resolution.cocomplex.X n).presheaf.map _ ≫
-      Hom.app (R'.comparison.hom.f n) ⊤ ≫
-      (restrictAppIso L.ι (I.cocomplex.X n) ⊤).hom ≫
-      (I.cocomplex.X n).presheaf.map _ =
-      Hom.app (R.comparison.hom.f n) ⊤ ≫
-      (restrictAppIso U.ι (I.cocomplex.X n) ⊤).hom ≫
-      (I.cocomplex.X n).presheaf.map _ ≫
-      (I.cocomplex.X n).presheaf.map (homOfLE e).op
-    simp only [Hom.comp_app, Category.assoc]
-    have hn := (Hom.mapPresheaf (R'.comparison.inv.f n)).naturality
-      (eqToHom (by simp) : (⊤ : L.toScheme.Opens) ⟶
-        j ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op
-    change (((restrictFunctor L.ι).obj (I.cocomplex.X n)).presheaf.map _ ≫
-      Hom.app (R'.comparison.inv.f n) ⊤) =
-      Hom.app (R'.comparison.inv.f n) (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) ≫
-      (R'.resolution.cocomplex.X n).presheaf.map _ at hn
-    rw [← Category.assoc (Hom.app (R'.comparison.inv.f n) _)
-      ((R'.resolution.cocomplex.X n).presheaf.map _)]
-    erw [← hn]
-    simp only [Category.assoc]
-    have hcan : Hom.app (R'.comparison.inv.f n) ⊤ ≫
-        Hom.app (R'.comparison.hom.f n) ⊤ = 𝟙 _ := by
-      rw [← Hom.comp_app, ← HomologicalComplex.comp_f, Iso.inv_hom_id,
-        HomologicalComplex.id_f, Hom.id_app]
-    rw [← Category.assoc (Hom.app (R'.comparison.inv.f n) ⊤)
-      (Hom.app (R'.comparison.hom.f n) ⊤), hcan, Category.id_comp]
-    have hu := congrArg (fun f ↦ Hom.app f ⊤)
-      ((restrictAdjunction j).unit.naturality (R.comparison.hom.f n))
-    change Hom.app (R.comparison.hom.f n) ⊤ ≫
-      Hom.app ((restrictAdjunction j).unit.app
-        ((restrictFunctor U.ι).obj (I.cocomplex.X n))) ⊤ =
-      Hom.app ((restrictAdjunction j).unit.app (R.resolution.cocomplex.X n)) ⊤ ≫
-      Hom.app (Q.map (R.comparison.hom.f n)) (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) at hu
-    rw [← Category.assoc (Hom.app ((restrictAdjunction j).unit.app
-      (R.resolution.cocomplex.X n)) ⊤)
-      (Hom.app (Q.map (R.comparison.hom.f n)) _), ← hu]
-    simp only [Category.assoc]
-    simp only [c, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
-      Hom.comp_app, restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app,
-      restrictAdjunction_unit_app_app, restrictAppIso, Iso.refl_hom]
-    erw [Category.id_comp, Category.id_comp]
-    simp only [restrict_map, ← Functor.map_comp]
-    congr 1
+    rw [ha]
+    exact restrictedResolution_open_sections_component U L e (I.cocomplex.X n)
+      (R.comparison.hom.f n) ((HomologicalComplex.eval _ _ n).mapIso R'.comparison)
   let iR := (forget₂ _ AddCommGrpCat.{u}).mapIso
     (R.resolution.isoRightDerivedObj
       (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) p) ≪≫
