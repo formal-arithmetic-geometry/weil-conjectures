@@ -57,8 +57,6 @@ private theorem coefficientComparison_apply
 
 attribute [local irreducible] proEtaleRingRestrictionDirectImage
 
-set_option maxHeartbeats 400000 in
--- The dependent coefficient functors require extra elaboration heartbeats for section maps.
 /-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
 Source: Stacks 0D6E and 07A6, ordinary direct image and restriction of coefficients.
 (blueprint: lem-pbc-coefficient-direct-image-restriction-cube).
@@ -108,30 +106,10 @@ theorem coefficientDirectImageRestrictionCube
         cd.hom.app ((pbcRestrict cS.hom).obj M) =
       (pbcRestrict b.hom).map (i.inv.app M) ≫
         cp.hom.app ((pbcRestrict φX).obj M) ≫ H.map (a.hom.app M) := by
-  dsimp only
-  let χ := b.hom ≫ φY
-  let q := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).mapIso b ≪≫ cR
-  have hq : q.hom ≫ φX = DerivedScalarMate.inverseMap f χ ≫ cS.hom := by
-    dsimp only [q, χ, Iso.trans_hom, Functor.mapIso_hom, DerivedScalarMate.inverseMap]
-    rw [Category.assoc, hc, ← Category.assoc, ← Functor.map_comp]
-  let H := proEtaleRingModuleDirectImage f R₀ (DerivedScalarMate.inverseRing f R₀)
-    (Iso.refl _)
+  intro χ q hq H GS cp cz cd a d
   let J := proEtaleRingModuleDirectImage f SY (DerivedScalarMate.inverseRing f SY)
     (Iso.refl _)
   let FR := proEtaleRingModuleDirectImage f R RX cR
-  let GS := proEtaleRingModuleDirectImage f SY SX cS
-  let cp := proEtaleRingRestrictionDirectImage f R₀ R
-    (DerivedScalarMate.inverseRing f R₀) RX b.hom q.hom (Iso.refl _) cR (by simp [q])
-  let cz := proEtaleRingRestrictionDirectImage f SY SY
-    (DerivedScalarMate.inverseRing f SY) SX (𝟙 SY) cS.hom (Iso.refl _) cS (by simp)
-  let cd := proEtaleRingRestrictionDirectImage f R₀ SY
-    (DerivedScalarMate.inverseRing f R₀) (DerivedScalarMate.inverseRing f SY)
-    χ (DerivedScalarMate.inverseMap f χ) (Iso.refl _) (Iso.refl _) (by simp)
-  let a := pbcRestrictComp q.hom φX (q.hom ≫ φX) rfl ≪≫
-    (pbcRestrictComp (DerivedScalarMate.inverseMap f χ) cS.hom
-      (q.hom ≫ φX) hq.symm).symm
-  let d := pbcRestrictComp b.hom φY χ rfl ≪≫
-    (pbcRestrictComp χ (𝟙 SY) χ (by simp)).symm
   have hiApp (M : pbcModules X SX) (U : Y.ProEtᵒᵖ)
       (x : (GS.obj M).val.obj U) : (i.hom.app M).val.app U x = x := by
     exact congrFun (eq_of_heq (hi M U)) x
@@ -161,19 +139,34 @@ theorem coefficientDirectImageRestrictionCube
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro U
+  have hd (x : ((pbcRestrict φY ⋙ pbcRestrict b.hom).obj (GS.obj M)).val.obj U) :
+      (d.hom.app (GS.obj M)).val.app U x = x := by
+    simp only [d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+      restrictionComp_apply, restrictionComp_inv_apply]
+  have hcz (x : ((pbcRestrict χ).obj ((pbcRestrict (𝟙 SY)).obj (GS.obj M))).val.obj U) :
+      ((pbcRestrict χ).map (cz.hom.app M)).val.app U x = x := by
+    exact czApp M U x
+  have hi (x : ((pbcRestrict b.hom).obj ((pbcRestrict φY).obj (GS.obj M))).val.obj U) :
+      ((pbcRestrict b.hom).map (i.inv.app M)).val.app U x = x := by
+    exact hiInv M U x
+  have ha (x : (H.obj ((pbcRestrict q.hom).obj ((pbcRestrict φX).obj M))).val.obj U) :
+      (H.map (a.hom.app M)).val.app U x = x := by
+    change (a.hom.app M).val.app ((proEtaleBaseChange f).op.obj U) x = x
+    simp only [a, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+      restrictionComp_apply, restrictionComp_inv_apply]
   ext x
-  change (cd.hom.app ((pbcRestrict cS.hom).obj M)).val.app U
-      ((cz.hom.app M).val.app U
-        (((pbcRestrictComp χ (𝟙 SY) χ (by simp)).inv.app (GS.obj M)).val.app U
-          (((pbcRestrictComp b.hom φY χ rfl).hom.app (GS.obj M)).val.app U x))) =
-    ((pbcRestrictComp (DerivedScalarMate.inverseMap f χ) cS.hom
-        (q.hom ≫ φX) hq.symm).inv.app M).val.app
-      ((proEtaleBaseChange f).op.obj U)
-      (((pbcRestrictComp q.hom φX (q.hom ≫ φX) rfl).hom.app M).val.app
-        ((proEtaleBaseChange f).op.obj U)
-        ((cp.hom.app ((pbcRestrict φX).obj M)).val.app U
-          ((i.inv.app M).val.app U x)))
-  rw [restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp,
-    hiInv, cpApp, restrictionComp_apply, restrictionComp_inv_apply]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  have hl := (congrArg (fun y ↦
+      (cd.hom.app ((pbcRestrict cS.hom).obj M)).val.app U
+        (((pbcRestrict χ).map (cz.hom.app M)).val.app U y)) (hd x)).trans
+    ((congrArg (fun y ↦ (cd.hom.app ((pbcRestrict cS.hom).obj M)).val.app U y)
+      (hcz x)).trans (cdApp ((pbcRestrict cS.hom).obj M) U x))
+  have hr := (congrArg (fun y ↦ (H.map (a.hom.app M)).val.app U
+      ((cp.hom.app ((pbcRestrict φX).obj M)).val.app U y)) (hi x)).trans
+    ((congrArg (fun y ↦ (H.map (a.hom.app M)).val.app U y)
+      (cpApp ((pbcRestrict φX).obj M) U x)).trans (ha x))
+  exact hl.trans hr.symm
 
 end AlgebraicGeometry.Scheme
