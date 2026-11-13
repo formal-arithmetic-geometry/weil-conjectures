@@ -55,22 +55,6 @@ private theorem coefficientComparison_apply
   (proEtaleRingRestrictionDirectImage_existsUnique
     f RV SV RU SU aV aU cR cS hc).choose_spec.1 M U x
 
-private theorem coefficientRestriction_map_apply {T : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
-    {M N : pbcModules T S} (g : M ⟶ N) (U : T.ProEtᵒᵖ)
-    (x : ((pbcRestrict φ).obj M).val.obj U) :
-    (((pbcRestrict φ).map g).val.app U).hom x = g.val.app U x := rfl
-
-private theorem coefficientDirectImage_map_apply
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
-    {M N : pbcModules X S} (g : M ⟶ N) (U : Y.ProEtᵒᵖ)
-    (x : ((proEtaleRingModuleDirectImage f R S c).obj M).val.obj U) :
-    (((proEtaleRingModuleDirectImage f R S c).map g).val.app U).hom x =
-      g.val.app ((proEtaleBaseChange f).op.obj U) x := rfl
-
 attribute [local irreducible] proEtaleRingRestrictionDirectImage
 
 /-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
@@ -156,11 +140,14 @@ theorem coefficientDirectImageRestrictionCube
   apply PresheafOfModules.hom_ext
   intro U
   ext x
-  simp only [a, d, H, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+  dsimp only [a, d, H, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
     restrictionComp_apply, restrictionComp_inv_apply]
-  erw [coefficientRestriction_map_apply χ, coefficientRestriction_map_apply b.hom,
-    coefficientDirectImage_map_apply f R₀ (DerivedScalarMate.inverseRing f R₀) (Iso.refl _)]
+  dsimp only [pbcRestrict, proEtaleRingRestrictScalars, proEtaleRingModuleDirectImage,
+    SheafOfModules.restrictScalars, SheafOfModules.pushforward,
+    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
+    PresheafOfModules.restrictScalars, Functor.comp_map, ModuleCat.restrictScalars,
+    ModuleCat.RestrictScalars.map']
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
     restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp, hiInv, cpApp]
 
