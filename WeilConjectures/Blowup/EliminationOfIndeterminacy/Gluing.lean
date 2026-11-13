@@ -122,7 +122,6 @@ private lemma Scheme.exists_glued_hom_over {B Y Z : Scheme.{u}} {ι : Type u}
   exact (Category.assoc _ _ _).symm.trans
     ((congrArg (fun k ↦ k ≫ p) (𝒰.ι_glueMorphisms f hcompat i)).trans (hf i))
 
-set_option profiler true in
 /-- **Gluing the chart-local extensions.** Let `a i` and `b i j` be sections of the centre
 `K` over an affine open `V` satisfying the exact relations `b i j * a i' = b i' j * a i`.
 On the chart of the blow-up at `a i` the degree-one slope `b i j / a i` extends the `j`-th
