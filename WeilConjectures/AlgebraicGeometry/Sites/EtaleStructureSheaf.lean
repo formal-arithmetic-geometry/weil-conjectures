@@ -77,7 +77,7 @@ open Pseudofunctor.LocallyDiscreteOpToCat Modules
 
 variable (X : Scheme.{u})
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Étale descent for the structure sheaf.** The presheaf `V ↦ Γ(V, 𝒪_V)` is a sheaf on the
