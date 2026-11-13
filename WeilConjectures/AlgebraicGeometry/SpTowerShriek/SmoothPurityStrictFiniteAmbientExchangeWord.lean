@@ -383,7 +383,6 @@ end NativePasting
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 1100000 in
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
@@ -450,17 +449,9 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     (comparisonFinitePull l E b g n) (comparisonFinitePull l E b (pullback.fst c.g g) n)
     (comparisonFinitePull l E b h n) (comparisonFiniteOpen l E b (c.ofIsPullback sq).i n)
     (coordinates.val (c.ofIsPullback sq).g n).right N
-    (by
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hp) none
-        exactByConversion h)
-    (by
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `ho) none
-        exactByConversion h)
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+    hp ho
+  simpa only [comparisonFiniteF, comparisonLevelExchange, finiteF,
+    rightDerivedLowerShriekOfCompactification] using H
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
