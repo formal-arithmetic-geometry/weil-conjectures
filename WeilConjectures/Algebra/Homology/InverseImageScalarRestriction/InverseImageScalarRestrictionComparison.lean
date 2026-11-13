@@ -96,6 +96,7 @@ private theorem pairPreimage_snd
   exact congrArg (fun f ↦ f.hom.app W (x, y))
     (CartesianMonoidalCategory.inv_prodComparison_map_snd L X Y)
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
