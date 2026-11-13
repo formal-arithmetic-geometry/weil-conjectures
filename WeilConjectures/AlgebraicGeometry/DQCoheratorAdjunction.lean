@@ -382,9 +382,9 @@ private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
         DerivedCategory.Qh.map (CohomologyClass.toHom a) ≫
         (DerivedCategory.quotientCompQhIso C).hom.app (I⟦i⟧) ≫
         (DerivedCategory.Q.commShiftIso i).hom.app I) ≫ (DerivedCategory.Q.map f)⟦i⟧' := by
-    rw [hh, Functor.map_comp]
-    simp only [Category.assoc]
-    rw [DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
+    dsimp only [C, S]
+    simp only [hh, Functor.map_comp, Category.assoc,
+      DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
       Functor.commShiftIso_hom_naturality]
   change (sh.toAdjunction.homEquiv (DerivedCategory.Q.obj S)
     (DerivedCategory.Q.obj J)).symm
