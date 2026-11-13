@@ -225,7 +225,6 @@ private theorem transposePair_lift [F.Monoidal]
   rw [Category.assoc, CartesianMonoidalCategory.lift_map_assoc]
 
 -- Specify the mate by its equation, keeping both underlying maps abstract.
-set_option profiler true in
 private theorem mate_linear_iff
     (M0 : SheafOfModules.{u} (ringSheaf R))
     (H0 : SheafOfModules.{u} (ringSheaf RI))
@@ -294,7 +293,6 @@ attribute [local irreducible] monoidalCategory
 
 -- Work with an arbitrary bilinear target, so checking the four laws does not
 -- repeatedly unfold the target tensor construction or the transported module functor.
-set_option profiler true in
 omit [PreservesFiniteLimits F] in
 private theorem transpose_bilinear
     (M N : SheafOfModules.{u} (ringSheaf R))
@@ -343,8 +341,10 @@ private theorem transpose_bilinear
         (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t))
     simp only [hβ]
     have ht : (F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t =
-        (show (I.modules.obj M).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) +
-        (show (I.modules.obj M).val.obj W from (F.map y ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
+        (show (I.modules.obj M).val.obj W from
+          (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) +
+        (show (I.modules.obj M).val.obj W from
+          (F.map y ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
       I.moduleAdd M Z x y s hs W t
     exact (congrArg (fun v : (I.modules.obj M).val.obj W ↦
       βb W v ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) ht).trans
@@ -371,8 +371,10 @@ private theorem transpose_bilinear
         (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t))
     simp only [hβ]
     have ht : (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t =
-        (show (I.modules.obj N).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) +
-        (show (I.modules.obj N).val.obj W from (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
+        (show (I.modules.obj N).val.obj W from
+          (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) +
+        (show (I.modules.obj N).val.obj W from
+          (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
       I.moduleAdd N Z x y s hs W t
     exact (congrArg (fun v : (I.modules.obj N).val.obj W ↦
       βb W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t) v) ht).trans
@@ -398,7 +400,8 @@ private theorem transpose_bilinear
     simp only [hβ]
     have ht : (F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t =
         (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
-        (show (I.modules.obj M).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
+        (show (I.modules.obj M).val.obj W from
+          (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
       I.moduleSMul M Z a x s hs W t
     exact (congrArg (fun v : (I.modules.obj M).val.obj W ↦
       βb W v ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) ht).trans
@@ -424,7 +427,8 @@ private theorem transpose_bilinear
     simp only [hβ]
     have ht : (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t =
         (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
-        (show (I.modules.obj N).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
+        (show (I.modules.obj N).val.obj W from
+          (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
       I.moduleSMul N Z a x s hs W t
     exact (congrArg (fun v : (I.modules.obj N).val.obj W ↦
       βb W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t) v) ht).trans
@@ -512,7 +516,6 @@ private theorem transpose_bilinear
   ext W t
   exact hf W t.1 t.2
 
-set_option profiler true in
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
 Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.
