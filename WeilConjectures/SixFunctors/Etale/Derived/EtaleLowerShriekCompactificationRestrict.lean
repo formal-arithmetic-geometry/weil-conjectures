@@ -198,19 +198,9 @@ lemma compactificationEtaleGraphIso_restrictOpen
   rw [← derivedSquareUpperStarIso_hom_app_eq (ModuleCat.{u + 1} Λ)
     (c.isPullback_selfGraph_restrictOpen v).toCommSq _
       (c.selfGraph_restrictOpen_selfGraphRestrict v)] at hpre
-  have hpre' : L(((c.restrictOpen v).selfGraph)^*[ModuleCat.{u + 1} Λ]).map
-      ((derivedSquareUpperStarIso _ (c.isPullback_selfGraphRestrict v).toCommSq).hom.app
-        (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) ≫
-      (derivedSquareUpperStarIso _ (c.isPullback_selfGraph_restrictOpen v).toCommSq).hom.app
-        (L((pullback.snd c.g e)^*[ModuleCat.{u + 1} Λ]).obj
-          (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) ≫
-      L((v)^*[ModuleCat.{u + 1} Λ]).map ((leftDerivedUpperStarCompSectionIso _ c.selfGraph
-        (pullback.snd c.g e) c.selfGraph_snd).hom.app (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) =
-      (leftDerivedUpperStarCompSectionIso _ (c.restrictOpen v).selfGraph
-        (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.restrictOpen v).selfGraph_snd).hom.app
-        (L((v)^*[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) := by
-    simpa only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Functor.map_comp, Category.assoc] using hpre
+  have hpre' := hpre
+  simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.map_comp, Category.assoc] at hpre'
   -- the open immersions `j` and `v ≫ j`
   have hθ := unit_map_restrictOpenLowerShriekIso Λ c v N
   have hpost := leftDerivedUpperStarComp_triangle_coherence (ModuleCat.{u + 1} Λ)
