@@ -42,8 +42,61 @@ noncomputable local instance instMonoidalCategoryModulesOfDerivedPullbackTensorP
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
--- Elaborating the transported tensor comparison and its totalization needs extra heartbeats.
+/-- A natural tensor comparison for an additive functor preserving the required coproducts
+induces a natural comparison of total tensor complexes. -/
+private theorem exists_totalTensorComparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    [(curriedTensor C).PreservesZeroMorphisms]
+    [∀ M, ((curriedTensor C).obj M).PreservesZeroMorphisms]
+    [(curriedTensor D).PreservesZeroMorphisms]
+    [∀ M, ((curriedTensor D).obj M).PreservesZeroMorphisms]
+    [∀ P N : CochainComplex C ℤ,
+      HomologicalComplex.HasMapBifunctor P N (curriedTensor C) (.up ℤ)]
+    [∀ P N : CochainComplex D ℤ,
+      HomologicalComplex.HasMapBifunctor P N (curriedTensor D) (.up ℤ)]
+    (G : C ⥤ D) [G.Additive] [CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0} G]
+    (e : ∀ M N, G.obj (M ⊗ N) ≅ G.obj M ⊗ G.obj N)
+    (hn : ∀ (M N M' N' : C) (a : M ⟶ M') (b : N ⟶ N'),
+      G.map (a ⊗ₘ b) ≫ (e M' N').hom = (e M N).hom ≫ (G.map a ⊗ₘ G.map b)) :
+    ∃ φ : ∀ P N : CochainComplex C ℤ,
+        (G.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.mapBifunctor P N (curriedTensor C)) ≅
+          CochainComplex.mapBifunctor ((G.mapHomologicalComplex (.up ℤ)).obj P)
+            ((G.mapHomologicalComplex (.up ℤ)).obj N) (curriedTensor D),
+      (∀ (P N : CochainComplex C ℤ) (p q n : ℤ) (h : p + q = n),
+        G.map (HomologicalComplex.ιMapBifunctor P N (curriedTensor C) (.up ℤ) p q n h) ≫
+            (φ P N).hom.f n =
+          (e (P.X p) (N.X q)).hom ≫
+            HomologicalComplex.ιMapBifunctor ((G.mapHomologicalComplex (.up ℤ)).obj P)
+              ((G.mapHomologicalComplex (.up ℤ)).obj N) (curriedTensor D) (.up ℤ) p q n h) ∧
+      ∀ (P P' N N' : CochainComplex C ℤ) (a : P ⟶ P') (b : N ⟶ N'),
+        (G.mapHomologicalComplex (.up ℤ)).map
+            (HomologicalComplex.mapBifunctorMap a b (curriedTensor C) (.up ℤ)) ≫
+            (φ P' N').hom =
+          (φ P N).hom ≫ HomologicalComplex.mapBifunctorMap
+            ((G.mapHomologicalComplex (.up ℤ)).map a) ((G.mapHomologicalComplex (.up ℤ)).map b)
+            (curriedTensor D) (.up ℤ) := by
+  let τ : (Functor.postcompose₂.obj G).obj (curriedTensor C) ⟶
+      (((Functor.whiskeringLeft₂ D).obj G).obj G).obj (curriedTensor D) :=
+    { app := fun M ↦
+        { app := fun N ↦ (e M N).hom
+          naturality := by
+            intro N N' b
+            simpa using hn M N M N' (𝟙 M) b }
+      naturality := by
+        intro M M' a
+        apply NatTrans.ext
+        funext N
+        simpa using hn M N M' N a (𝟙 N) }
+  have : ∀ M N, IsIso ((τ.app M).app N) := fun M N ↦ (e M N).isIso_hom
+  let φ := fun (P N : CochainComplex C ℤ) ↦
+    asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) P N)
+  refine ⟨φ, ?_, ?_⟩
+  · intro P N p q n h
+    exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) P N p q n h
+  · intro P P' N N' a b
+    exact HomologicalComplex.mapBifunctorComparison_naturality τ (.up ℤ) a b
+
 set_option synthInstance.maxSize 256 in
 /-- (blueprint: lem-pc-derived-pullback-tensor-product) For a morphism of schemes
 `g : T ⟶ S`, derived pullback commutes with derived tensor product:
@@ -126,35 +179,8 @@ theorem derivedPullback_tensorProduct
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
                 (φ P N).hom)) := by
   classical
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
-      (derivedPullback_spec g)
-  -- The recorded object and map formulas determine the termwise functor strictly.
-  have hEq : F = Scheme.Modules.tensorPullback g :=
-    CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
-  subst F
-  let : (Scheme.Modules.tensorPullback g).Additive := hadd
-  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction g
-  let : (Scheme.Modules.tensorPullback g).IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
-  let G := Scheme.Modules.tensorPullback g
-  let e := Classical.choose (Scheme.Modules.module_pullback_tensor g)
-  have hn := (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1
-  -- Package the two-variable module comparison for the existing totalization API.
-  let τ : (Functor.postcompose₂.obj G).obj
-      (curriedTensor (SheafOfModules.{uPull} (moduleRings S.toRingedSpace))) ⟶
-      (((Functor.whiskeringLeft₂ _).obj G).obj G).obj
-        (curriedTensor (SheafOfModules.{uPull} (moduleRings T.toRingedSpace))) :=
-    { app := fun M ↦
-        { app := fun N ↦ (e M N).hom
-          naturality := by
-            intro N N' b
-            simpa using hn M N M N' (𝟙 M) b }
-      naturality := by
-        intro M M' a
-        apply NatTrans.ext
-        funext N
-        simpa using hn M N M' N a (𝟙 N) }
-  let : ∀ M N, IsIso ((τ.app M).app N) := fun M N ↦ (e M N).isIso_hom
+  let : Abelian (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) := inferInstance
   let : (curriedTensor (SheafOfModules.{uPull}
       (moduleRings S.toRingedSpace))).PreservesZeroMorphisms :=
     SheafOfModules.preservesZeroMorphisms_curriedTensor S.sheaf
@@ -167,17 +193,49 @@ theorem derivedPullback_tensorProduct
   let : ∀ M : SheafOfModules.{uPull} (moduleRings T.toRingedSpace),
       ((curriedTensor _).obj M).PreservesZeroMorphisms :=
     fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf M
-  let φ := fun (P N : CochainComplex
-      (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) ℤ) ↦
-    asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) P N)
-  refine ⟨G, hF, hmap, hadd, ε, hder, φ, ?_, ?_, ?_⟩
-  · intro P N p q n h
-    simpa only [φ, asIso_hom, HomologicalComplex.mapBifunctorComparison_f,
-      HomologicalComplex.mapBifunctorComparisonApp, τ, e, G, eqToHom_refl,
+  -- Reuse the coproduct instances for all total tensor complexes in the proof.
+  have : ∀ P N : CochainComplex
+      (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) ℤ,
+      HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
+      (SheafOfModules.{uPull} (moduleRings S.toRingedSpace))).has_colimits_of_shape _).has_colimit _
+  have : ∀ P N : CochainComplex
+      (SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) ℤ,
+      HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
+      (SheafOfModules.{uPull} (moduleRings T.toRingedSpace))).has_colimits_of_shape _).has_colimit _
+  obtain ⟨F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
+    (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec (derivedPullback_spec g))))).2.2.2
+  refine ⟨F, hF, hmap, hadd, ε, hder, ?_⟩
+  -- Keep F abstract during totalization; use its equality with tensor pullback only
+  -- to transport adjointness and the module-level tensor comparison.
+  have hEq : F = Scheme.Modules.tensorPullback g :=
+    CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
+  let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction g)
+  have : F.IsLeftAdjoint := by
+    rw [hEq]
+    exact ⟨_, ⟨adj⟩⟩
+  have : CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0} F := inferInstance
+  let e₀ := Classical.choose (Scheme.Modules.module_pullback_tensor g)
+  let e : ∀ M N, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N := fun M N ↦
+    eqToIso (hF (M ⊗ N)) ≪≫ e₀ M N ≪≫
+      (eqToIso (hF M).symm ⊗ᵢ eqToIso (hF N).symm)
+  have hn : ∀ (M N M' N' : SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
+      (a : M ⟶ M') (b : N ⟶ N'),
+      F.map (a ⊗ₘ b) ≫ (e M' N').hom = (e M N).hom ≫ (F.map a ⊗ₘ F.map b) := by
+    subst F
+    intro M N M' N' a b
+    simpa only [e, Iso.trans_hom, eqToIso.hom, tensorIso_hom, eqToHom_refl,
       tensorHom_id, MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id] using
-      HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) P N p q n h
-  · intro P P' N N' a b
-    exact HomologicalComplex.mapBifunctorComparison_naturality τ (.up ℤ) a b
+      (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1 M N M' N' a b
+  obtain ⟨φ, hφ, hnatural⟩ := exists_totalTensorComparison
+    (C := SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
+    (D := SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) F e hn
+  refine ⟨φ, ?_, hnatural, ?_⟩
+  · intro P N p q n h
+    simpa only [e, e₀, Iso.trans_hom, eqToIso.hom, tensorIso_hom,
+      Category.assoc] using hφ P N p q n h
   · intro P N hP hN
     have hflat := CochainComplex.IsKFlatTensor.mapBifunctor
       (X := S.toRingedSpace) P N hP hN
