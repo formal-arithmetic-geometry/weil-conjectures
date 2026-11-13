@@ -16,9 +16,8 @@ public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 /-!
 # Local rings of the zero locus of a function, and regular points
 
-Auxiliary results for the local chart of blueprint `det-tf-transverse-corner-constant`, where the
-zero locus `V(t)` of a function `t` with germ in `𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is shown to be a
-regular divisor near `x`.
+Auxiliary results for showing that the zero locus `V(t)` of a function `t` with germ in
+`𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is a regular divisor near `x`.
 
 - The local ring of `V(f) ⊆ Y` at `z` is `𝒪_{Y,z} ⧸ (f)`
   (`AlgebraicGeometry.Scheme.ker_stalkMap_zeroLocusSubschemeι_singleton`,
@@ -29,6 +28,10 @@ regular divisor near `x`.
   `AlgebraicGeometry.Scheme.Hom.isRegularLocalRing_stalk_of_mem_smoothLocus`).
 - A locally noetherian scheme with domain local rings has irreducible open neighbourhoods
   (`AlgebraicGeometry.Scheme.exists_mem_isPreirreducible_of_isDomain_stalk`).
+
+## References
+
+* [Stacks Project, Tag 00TV](https://stacks.math.columbia.edu/tag/00TV)
 -/
 
 @[expose] public section
@@ -52,7 +55,7 @@ theorem Scheme.ker_stalkMap_zeroLocusSubschemeι_singleton {Y : Scheme.{u}} (f :
     ← CommRingCat.hom_comp, TopCat.Presheaf.germ_res]
 
 /-- The isomorphism between the stalks of an open subscheme `U ⊆ X` and of `X` sends the germ
-of the global section of `U` attached to `s: Γ(X, U)` to the germ of `s`. -/
+of the global section of `U` attached to `s : Γ(X, U)` to the germ of `s`. -/
 theorem Scheme.Opens.stalkIso_hom_germ_topIso_inv {X : Scheme.{u}} (U : X.Opens) (s : Γ(X, U))
     (w : U) :
     (U.stalkIso w).hom (U.toScheme.presheaf.germ ⊤ w trivial (U.topIso.inv s)) =
@@ -61,7 +64,7 @@ theorem Scheme.Opens.stalkIso_hom_germ_topIso_inv {X : Scheme.{u}} (U : X.Opens)
   exact TopCat.Presheaf.germ_res_apply' _ _ _ _ _
 
 /-- The local ring at `z` of the zero locus in an open subscheme `U ⊆ X` of a function
-`s: Γ(X, U)` is the quotient `𝒪_{X,z} ⧸ (s)` of the local ring of `X`. -/
+`s : Γ(X, U)` is the quotient `𝒪_{X,z} ⧸ (s)` of the local ring of `X`. -/
 noncomputable def Scheme.Opens.stalkZeroLocusSubschemeEquiv {X : Scheme.{u}} (U : X.Opens)
     (s : Γ(X, U)) (z : U.toScheme.zeroLocusSubscheme {U.topIso.inv s}) :
     (U.toScheme.zeroLocusSubscheme {U.topIso.inv s}).presheaf.stalk z ≃+*
@@ -90,7 +93,7 @@ theorem Scheme.Opens.isRegularLocalRing_stalk_zeroLocusSubscheme_iff {X : Scheme
   rw [TopCat.Presheaf.germ_res_apply] at e
   exact ⟨fun _ ↦ .of_ringEquiv e, fun _ ↦ .of_ringEquiv e.symm⟩
 
-/-- A point `w` of an open `U ⊆ X` at which the germ of `s: Γ(X, U)` is not a unit lies on
+/-- A point `w` of an open `U ⊆ X` at which the germ of `s : Γ(X, U)` is not a unit lies on
 the zero locus of `s`. -/
 theorem Scheme.Opens.exists_zeroLocusSubschemeι_eq {X : Scheme.{u}} (U : X.Opens)
     (s : Γ(X, U)) (w : U) (hw : X.presheaf.germ U w.1 w.2 s ∈
@@ -102,7 +105,7 @@ theorem Scheme.Opens.exists_zeroLocusSubschemeι_eq {X : Scheme.{u}} (U : X.Open
   rw [U.ι_image_basicOpen_topIso_inv, X.mem_basicOpen _ _ w.2] at h
   exact (IsLocalRing.mem_maximalIdeal _).mp hw h
 
-/-- **Regular points are smooth over a perfect field** (Stacks `00TV`). Let `X` be locally of
+/-- **Regular points are smooth over a perfect field**. Let `X` be locally of
 finite type over a perfect field `K`. Every point of `X` whose local ring is regular lies in the
 smooth locus of `X ⟶ Spec K`. -/
 theorem Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing_of_perfectField {K : Type u} [Field K]

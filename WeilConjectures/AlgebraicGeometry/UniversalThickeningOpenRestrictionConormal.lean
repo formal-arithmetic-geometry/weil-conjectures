@@ -9,19 +9,27 @@ module
 public import WeilConjectures.AlgebraicGeometry.FormallyUnramifiedConormal
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKernelModule
 
+/-!
+# Conormal modules of universal thickenings under open restriction
+
+The conormal module of a formally unramified morphism, computed from its universal first
+order thickening, is compatible with restriction to opens.
+
+## References
+
+* [Stacks Project, Tag 04FA](https://stacks.math.columbia.edu/tag/04FA)
+* [Stacks Project, Tag 01R2](https://stacks.math.columbia.edu/tag/01R2)
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The conormal comparison for the open restriction data.
-
-The restriction of the kernel ideal along an open immersion identifies with the
-kernel ideal of the restricted thickening; tensor pullback composition and the
-open-immersion pullback/restriction comparison then give the displayed module
-isomorphism. Independence of the chosen universal thickening supplies the
-formally unramified witness and the displayed `HV`. -/
+/-- The conormal comparison for open restriction data: the restricted morphism `hV` is formally
+unramified with universal first order thickening `hV'`, and the restriction to `V` of the
+conormal module of `h` is isomorphic to the conormal module of `hV`. -/
 theorem universalFirstOrderThickening_open_restriction_conormal
     {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : IsUniversalFirstOrderThickening h i h')

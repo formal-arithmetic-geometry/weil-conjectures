@@ -17,7 +17,7 @@ projection): evaluating a relation `∑ gⱼ Tⱼ = 0` at the section `T = eᵢ`
 (`AlgebraicGeometry.AffineSpace.linearFunctionsBasis`). For a vector bundle given by a linear atlas
 (`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas`), this is the local freeness of rank `c` of the
 sheaf `ℰ` of fibrewise linear functions on each chart, the first step of the identification
-`E ≅ Spec_Z (Sym^• ℰ)` of `def-pur-vector-bundle-zero-section`.
+`E ≅ Spec_Z (Sym^• ℰ)`.
 -/
 
 @[expose] public section

@@ -24,7 +24,7 @@ affine open is the localization at `f`, since `Γ(ℰ, D(f)) = Γ(ℰ, U)_f` and
 commutes with localization (`AlgebraicGeometry.Scheme.Modules.coequifibered_toSymPresheaf`).
 Hence the relative spectrum `Spec_X (Sym^• ℰ) ⟶ X` is defined by relative gluing
 (`AlgebraicGeometry.Scheme.Modules.symSpec`, `AlgebraicGeometry.Scheme.Modules.symSpecProj`):
-this is the vector bundle `E = Spec_Z (Sym^• ℰ)` of `def-pur-vector-bundle-zero-section`.
+this is the vector bundle `E = Spec_Z (Sym^• ℰ)`.
 -/
 
 @[expose] public section

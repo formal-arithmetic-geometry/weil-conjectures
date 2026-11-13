@@ -13,6 +13,20 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.AlgebraicGeometry.PushedResolutionPositiveHomologyZero
+
+/-!
+# Pushed injective resolutions from the étale to the Zariski site
+
+If the higher étale cohomology presheaves of `F`, restricted to Zariski opens, are locally zero,
+then the pushforward to the Zariski site of an injective resolution of `F` is a resolution of
+the pushforward of `F`.
+
+## References
+
+* [Stacks Project, Tag 072W](https://stacks.math.columbia.edu/tag/072W)
+* [Stacks Project, Tag 0733](https://stacks.math.columbia.edu/tag/0733)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry

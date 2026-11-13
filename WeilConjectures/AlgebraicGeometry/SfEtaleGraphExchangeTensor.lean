@@ -388,22 +388,8 @@ private theorem exchange_tensor_geometric
   exact ht
 
 /-- Exchange/projection compatibility for the self-base-change square, including the
-open projection comparison, but without a graph transfer or graph unit.
-
-Proof in words. Expand projectionMapOfCompactification into the direct-image
-projection for c.g, the inverse open projection for c.i, and the compactification
-pullback composition isomorphism. Apply the already proved ordinary etale
-exchange/projection identity to the square (c.g,e,q,q_Z), at Dj_! M and K. The
-equality holds for the canonical
-counit-defined direct-image projection and the mate-defined exchange. Naturality
-of exchange moves the inverse open projection and the composition comparison
-past exchange at their target. Pullback composition is monoidal, so the tensor
-comparison and the square comparison combine into sfEtaleGraphTensorMap. Finally
-transport the two inputs and the tensor output through Le* ≅ D(e*). By the
-definition of supportExactPullbackTensorIso its transport factors cancel, leaving
-exactly the displayed equation. No graph-transfer property or adjunction unit is
-used. No invertibility of exchange is needed, so arbitrary coefficients and
-arbitrary complexes are permitted, including the zero ring and empty schemes. -/
+open projection comparison, but without a graph transfer or graph unit. It holds for
+arbitrary coefficients and arbitrary complexes. -/
 theorem sfEtaleGraphExchangeTensor
     (A : Type (u + 1)) [CommRing A]
     {V W : Scheme.{u}} (e : V ⟶ W) (c : Compactification e)

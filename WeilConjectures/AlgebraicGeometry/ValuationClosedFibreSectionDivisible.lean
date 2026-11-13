@@ -20,15 +20,12 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Dividing a section which vanishes on the closed fibre
 
-Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
-is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient
-fibre with the scheme-theoretic closed fibre. Uniqueness of adjoints compares the
-units by isomorphisms, so they have the same kernel. Apply the closed-fibre
-vanishing lemma to get a nonzero pi in the maximal ideal. The principal quotient
-kernel theorem identifies multiplication by pi with the restriction kernel.
-Represent s by O_X -> L, lift this morphism through the kernel, and evaluate the
-lift at 1 to obtain t. Evaluating the kernel factorization gives pi t = s. The
-integrality hypothesis is retained in the signature but is not used in this proof.
+A global section of an invertible module on a proper flat scheme over a valuation ring that
+vanishes on the closed fibre is divisible by a nonzero element of the maximal ideal.
+
+## Implementation details
+
+The integrality hypothesis is retained in the signature but is not used in the proof.
 
 ## References
 

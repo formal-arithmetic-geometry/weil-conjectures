@@ -17,10 +17,10 @@ import WeilConjectures.Compactification.NagataCompactification
 /-!
 # Relative Künneth theorem
 
-This is the statement node `thm-sf-kunneth-relative` from the current blueprint. The
+The relative Künneth theorem for étale cohomology with compact supports. The
 canonical comparison is the published six-factor composite
 `AlgebraicGeometry.Etale.relativeKunnethIso`; its naturality is exposed by the published
-bifunctor isomorphism `relativeKunnethNatIso`. The remaining clauses record the canonical
+bifunctor isomorphism `relativeKunnethNatIso`.  The remaining clauses record the canonical
 base-change and proper `Rf_!`/`Rf_*` comparisons and the compact-support product after
 restriction to closed subschemes.
 -/
@@ -50,7 +50,7 @@ noncomputable def leftDerivedUpperStarCompPathIso
     (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) q r (a ≫ p) h).app K
 
 /-- The pasted exchange square expressing base-change compatibility of the canonical
-relative Künneth composite. Every comparison in this definition is a published canonical
+relative Künneth composite.  Every comparison in this definition is a published canonical
 comparison; no auxiliary map is chosen. -/
 def relativeKunnethBaseChangeCompatibility
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
@@ -143,9 +143,8 @@ def relativeKunnethProperCompatibility
         kunnethMap (ModuleCat.{u + 1} Λ) (pullback.fst f g) (pullback.snd f g)
           f g (pullback.toBase f g) (by simp) (by simp) K L
 
-/-- The canonical restriction comparison for exterior products. This is the explicit
-pullback-composition/tensor comparison occurring in the proof of the published
-`nonempty_iso_leftDerivedUpperStar_externalProduct`, with no choice from `Nonempty`. -/
+/-- The canonical restriction comparison for exterior products: the derived pullback of
+`K ⊠ L` along `Z ×_B W → X ×_B Y` is the exterior product of the derived pullbacks. -/
 def relativeKunnethExteriorPullbackIso
     {Λ : Type (u + 1)} [CommRing Λ]
     {X Y B Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)

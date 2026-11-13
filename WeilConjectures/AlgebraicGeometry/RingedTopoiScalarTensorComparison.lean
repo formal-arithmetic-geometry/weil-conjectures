@@ -9,9 +9,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinea
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
-/-! # Scalar extension and the normalized tensor comparison
-
-.
+/-! # Scalar extension and the normalized tensor comparison.
 
 ## References
 
@@ -315,9 +313,7 @@ private theorem extendedTensor_hom_ext
   exact (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) hf).trans
     ((h W m n).trans (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) hg).symm)
 
-/-- Scalar extension preserves the sheaf tensor product and its normalized pairing.
-
-. -/
+/-- Scalar extension preserves the sheaf tensor product and its normalized pairing. -/
 theorem exists_scalarTensorComparison :
     ∃ e : ∀ M N : SheafOfModules.{u} (ringSheaf A),
         changeOfRings.{u, u, u} c ((monoidalCategory A).tensorObj M N) ≅

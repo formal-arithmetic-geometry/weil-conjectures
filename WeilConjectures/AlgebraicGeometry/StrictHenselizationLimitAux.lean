@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Algebraic.Basic
 /-!
 # Auxiliary lemmas on pointed étale neighbourhoods of a geometric point
 
-For a geometric point `s: Spec Ω ⟶ S` of a scheme `S` over a field `K` we record the
+For a geometric point `s : Spec Ω ⟶ S` of a scheme `S` over a field `K` we record the
 compatibility of the maps `R ⟶ 𝒪^{sh}_{S,s}` from pointed étale neighbourhoods `Spec R` with the
 `K`-structures, and show that if `s` lies over a non-closed point and `S` is locally of finite type
 over `K`, some neighbourhood carries a function whose value at `s` is transcendental over `K`.

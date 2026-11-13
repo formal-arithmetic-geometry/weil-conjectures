@@ -84,8 +84,7 @@ theorem sectionEdgeAugmentation_cycle {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Mo
     (pushforward f).map (I.cocomplex.d 0 1) ≫ l.f 1 = 0
   rw [← Functor.map_comp_assoc, I.ι_f_zero_comp_complex_d, Functor.map_zero, zero_comp]
 
-/-- The explicit lift with standard source resolution; neither an arbitrary source
-resolution nor an arbitrary augmentation lift is an argument. -/
+/-- The lift from the standard injective resolution of `f_* F` to `K` induced by `l`. -/
 def standardSectionEdgeLift {X Y : Scheme.{u}} (f : X ⟶ Y) {F : X.Modules}
     (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n))
@@ -101,7 +100,8 @@ def standardSectionExtHom {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (p : 
     (Sheaf.H.mapFunctor (invImage f) (constIso f).symm
       ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p))
 
-/-- The standard-source calculation of the inverse-image/counit Ext map. -/
+/-- The inverse-image/counit Ext map computed through the standard injective resolution of
+`f_* F`. -/
 theorem standard_abelian_ext_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n))

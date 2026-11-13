@@ -16,6 +16,19 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
+/-!
+# Injectivity of the second-page coproduct comparison
+
+For a quasi-compact quasi-separated morphism, higher direct images of cohomology sheaves of
+truncations take the coproduct inclusions of a coproduct of complexes to a monomorphism out of
+the coproduct.
+
+## References
+
+* [Stacks Project, Tag 08DZ](https://stacks.math.columbia.edu/tag/08DZ)
+* [Stacks Project, Tag 009E](https://stacks.math.columbia.edu/tag/009E)
+-/
+
 @[expose] public section
 
 universe u wX wY
@@ -144,8 +157,9 @@ private theorem td_sheaf_sum_mono (Y : Scheme.{u}) (I : Type u)
   rw [heq]
   infer_instance
 
-/-- The second-page coproduct comparison is a monomorphism.
- This is the injectivity half only.. -/
+/-- The second-page coproduct comparison is a monomorphism: for a coproduct of derived
+quasi-coherent complexes, the map from the coproduct of `R^p f_* H^r(τ^{≥a} E_i)` to
+`R^p f_* H^r(τ^{≥a} S)` is a monomorphism. -/
 theorem truncated_directImage_secondPage_coproduct_mono
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

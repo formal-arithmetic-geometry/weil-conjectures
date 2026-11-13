@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 
 ## References
 
+* [Stacks Project, Tag 01TD](https://stacks.math.columbia.edu/tag/01TD)
 * [Stacks Project, Tag 01TJ](https://stacks.math.columbia.edu/tag/01TJ)
 -/
 
@@ -28,7 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- A morphism is quasi-finite exactly when it is locally quasi-finite and
-quasi-compact, in the sense of Stacks Tag 01TD.
+quasi-compact.
 -/
 theorem isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact
     {X S : AlgebraicGeometry.Scheme.{v}} (f : X ⟶ S) :

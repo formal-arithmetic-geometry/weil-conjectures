@@ -27,9 +27,7 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 import all WeilConjectures.AlgebraicGeometry.CompletedPullbackAdjunction
 import all WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullback
 
-/-! # Tensor comparison on actual complexes of module sheaves
-
-.
+/-! # Tensor comparison on actual complexes of module sheaves.
 
 ## References
 
@@ -245,9 +243,7 @@ private theorem tensorComparisonFamily
 
 -- The two naturalities and unit calculation elaborate in one declaration.
 /-- Module inverse image commutes with total tensor, naturally in both complexes,
-and the comparison respects the inverse right unitor.
-
-. -/
+and the comparison respects the inverse right unitor. -/
 theorem ringedComplexTensorPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

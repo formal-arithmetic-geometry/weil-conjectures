@@ -10,13 +10,28 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
+/-!
+# Points of a zero-dimensional curve after base change
+
+Base change of a zero-dimensional curve between algebraically closed fields is again a
+zero-dimensional curve, with the same points, all of which are rational.
+
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
+* [Stacks Project, Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Geometric data for a zero-dimensional base change, independently of any sheaf. -/
+/-- The base change of a zero-dimensional curve over an algebraically closed field `k` to an
+algebraically closed extension `k'` is a zero-dimensional curve whose points correspond
+bijectively to those of `C`, each given by a `k'`-point. -/
 theorem zeroDimensional_baseChange_geometric_points {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)

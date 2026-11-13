@@ -49,13 +49,8 @@ private def tangentPairMap {R S : Type u} [CommRing R] [CommRing S]
 
 open Classical in
 /-- Postcomposition with a morphism over `k` induces a linear map on tangent vectors when
-its residue-field map is an isomorphism.
-
-The additive groups and modules are selected from `exists_tangentVectors_vectorSpace`.
-The target scalars are transported along the inverse residue-field isomorphism `e.symm`.
-Likewise `d` identifies the two dual-number spectra, so `d ≫ θ.val ≫ f` is precisely
-postcomposition with `f` after the residue fields have been identified.
--/
+its residue-field map is an isomorphism; the target scalars are transported along the inverse
+residue-field isomorphism. -/
 theorem exists_tangentMap_linear
     (k : Type u) [Field k] (X Y : Scheme.{u})
     (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k))

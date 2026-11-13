@@ -11,10 +11,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 
 /-! # Ordinary etale compact-support projection coherence
 
-proof.md`, paragraph 3; upstream
-`LowerShriekCompositionCoherence.lean` and `LowerShriekComposition.lean`
-.
-
 The inverse projections are those of the supplied open/proper factorizations.
 The compositor is the explicit graph comparison, not an unspecified isomorphism.
 All objects belong to the ordinary unbounded derived categories; no qc or
@@ -223,8 +219,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local instance 20000] Etale.sheafBraidedCategory
 
-/-- The inverse of the canonical compactification projection, whose invertibility
-is supplied by lem-sf-etale-ambient-adjoint-projection. -/
+/-- The inverse of the canonical compactification projection morphism. -/
 noncomputable def sfEtaleCompactProjectionInverse
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

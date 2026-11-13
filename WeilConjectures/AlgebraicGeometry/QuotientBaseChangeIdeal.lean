@@ -103,7 +103,9 @@ private lemma closedImmersion_affine_quotient {Z X : Scheme.{u}}
   rw [← Category.assoc, ← he]
   simp [t]
 
-/-- Clause (1), Stacks Tags 01JU (1), 01I4, 01JQ, 01IN.
+/-- For `f : X ⟶ Spec A` and an ideal `K`, the base change `X ×_A Spec (A/K) ⟶ X` is a closed
+immersion whose ideal sheaf is the pullback of `K`; over an affine open `U` of `X` it is the
+affine scheme `Spec (Γ(X, U)/K Γ(X, U))`.
 -/
 theorem quotientBaseChange_closedImmersion_ideal {A : Type u} [CommRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) (K : Ideal A) :
@@ -147,7 +149,8 @@ theorem quotientBaseChange_closedImmersion_ideal {A : Type u} [CommRing A]
   rw [← hku]
   exact closedImmersion_affine_quotient j U
 
-/-- Clause (2), Stacks Tag 01IN, the affine ideal calculation.
+/-- Pulling back the ideal sheaves of ideals of `A` along `f : X ⟶ Spec A` is compatible with
+products and with positive powers.
 -/
 theorem quotientBaseChange_extendedIdeal_mul_pow {A : Type u} [CommRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) :
@@ -182,7 +185,9 @@ theorem quotientBaseChange_extendedIdeal_mul_pow {A : Type u} [CommRing A]
     simp only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply]
     rw [sections K U, sections (K ^ m) U, Ideal.map_pow]
 
-/-- Clause (3), Stacks Tag 01JU (1) over Spec(A/J), and Remark 088F.
+/-- For ideals `J ≤ J'` of `A`, there is a unique transition map from the base change of
+`f : X ⟶ Spec A` to `Spec (A/J')` into that to `Spec (A/J)`; it is a closed immersion cut out by
+the pullback of `J'`, with the expected description over affine opens of `X`.
 -/
 theorem quotientBaseChange_nestedIdeals {A : Type u} [CommRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) (J J' : Ideal A) (h : J ≤ J') :
@@ -284,7 +289,9 @@ theorem quotientBaseChange_nestedIdeals {A : Type u} [CommRing A]
     rw [← Category.assoc _ _ (U.2.isoSpec.inv ≫ U.1.ι), hq]
     simpa only [Category.assoc] using heι'
 
-/-- Clause (4), Stacks Tags 01JU (1) and 01IN.
+/-- Pulling back the ideal sheaf of `L` along `f` and then along the base change
+`X ×_A Spec (A/K) ⟶ X` agrees with pulling it back along the composite, and over affine opens it
+is the extension of the ideal of sections.
 -/
 theorem quotientBaseChange_extendedIdeal_comap {A : Type u} [CommRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) (K L : Ideal A) :

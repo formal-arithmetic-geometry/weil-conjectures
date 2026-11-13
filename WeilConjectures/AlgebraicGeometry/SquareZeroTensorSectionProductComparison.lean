@@ -10,6 +10,19 @@ public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparis
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 
+/-!
+# Products of tensor-power sections along a square-zero closed immersion
+
+For a closed immersion with square-zero ideal and an invertible module `L`, the canonical
+comparison of tensor-power sections in each degree is compatible with multiplication of
+sections.
+
+## References
+
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks Project, Tag 09MS](https://stacks.math.columbia.edu/tag/09MS)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true

@@ -8,9 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import WeilConjectures.AlgebraicGeometry.RingedTopoiInverseImageTensorPairingIsIso
 
-/-! # Tensor comparison for the algebraic inverse image
-
-.
+/-! # Tensor comparison for the algebraic inverse image.
 
 ## References
 
@@ -29,9 +27,7 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   (uInv : Sheaf J (Type u) ⥤ Sheaf K (Type u))
   (I : AlgebraicInverseImage uInv R RI)
 
-/-- The specified algebraic inverse image preserves tensor products with their pairings.
-
-. -/
+/-- The specified algebraic inverse image preserves tensor products with their pairings. -/
 theorem exists_inverseImageTensorComparison
     (uPush : Sheaf K (Type u) ⥤ Sheaf J (Type u))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] :

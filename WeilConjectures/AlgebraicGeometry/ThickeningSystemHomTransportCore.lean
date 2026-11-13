@@ -8,6 +8,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
+/-!
+# Transport of homomorphisms of coherent thickening systems
+
+Componentwise conjugation identifies arrows between coherent thickening systems in the image
+of a functor `R` with families of maps compatible with the transition isomorphisms `d`.
+
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u

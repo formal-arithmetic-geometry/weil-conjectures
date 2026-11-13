@@ -315,12 +315,7 @@ theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCa
     IsIso.hom_inv_id_assoc]
 
 /-- The canonical map H^i(K_x tensor-derived-over-R B) tensor-over-(A tensor-over-R B) C
--> H^i(K'_z), expressed in given K-flat coordinates c for phi.
-It is the existing localized tensor comparison followed by the canonical
-pullback-stalk identification and the stalk of c.t. The target H^i(N_z) identifies
-canonically with H^i(K')_z through c.e' and exactness of stalks. Postcomposing by
-that identification preserves and reflects invertibility. The represents equation
-of c ensures this is the map induced by the given phi, rather than a free comparison. -/
+-> H^i(K'_z) induced by phi, expressed in given K-flat coordinates c for phi. -/
 def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
     {φ : (derivedPullback g').obj K ⟶ K'} (c : Coordinates g' K K' φ) (z : X') (i : ℤ) :=
   letI := leftAlgebra f g' z
@@ -334,10 +329,8 @@ def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'
       (((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
         (.up ℤ)).map c.t) i
 
-/-- The single-complex stalk condition (equation-bc of Tag 0DJ8 an isomorphism for
-every z and i). Invertibility of the comparison does not depend on the K-flat
-coordinates, so it is required for all of them; they exist by `nonempty_coordinates`,
-so the condition is not vacuous. No coordinate system is chosen. -/
+/-- The single-complex stalk condition: the stalk comparison map is an isomorphism for
+every point `z`, every degree `i`, and every choice of K-flat coordinates. -/
 def StalkCondition (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') : Prop :=
   ∀ (c : Coordinates g' K K' φ) (z : X') (i : ℤ),

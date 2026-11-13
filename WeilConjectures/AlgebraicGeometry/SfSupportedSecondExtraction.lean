@@ -10,9 +10,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
-/-! # Second coordinate extraction before a trace
-
-.
+/-! # Second coordinate extraction before a trace.
 -/
 
 @[expose] public noncomputable section
@@ -498,7 +496,8 @@ private theorem comparison_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc, CoordinateTrace.swap, Iso.app_inv]
 
-/-- The second-coordinate isomorphism calculation before a scalar trace is applied. -/
+/-- The identity for the second-coordinate comparison isomorphism, before a scalar trace is
+applied. -/
 theorem secondExtraction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (L : DerivedCategoryModule A Y)
     (hL : (CoordinateTrace.swap A Y L L).hom = 𝟙 _)

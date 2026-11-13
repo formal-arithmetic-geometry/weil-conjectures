@@ -120,9 +120,7 @@ private theorem kernelComparison
 
 /-- Changing the site and constant-module presentation preserves completeness of the
 termwise completed realization of any coefficient complex. There is no perfectness,
-boundedness, maximality or completeness assumption on the coefficient ring.
-
-. -/
+boundedness, maximality or completeness assumption on the coefficient ring. -/
 theorem sfbPerfectModel_completion_transport (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :

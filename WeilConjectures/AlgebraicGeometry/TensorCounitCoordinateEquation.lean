@@ -224,8 +224,7 @@ private theorem tensorCounit_resolution_transfer
   exact (reassoc_of% heq) v
 
 /-- The shared pullback counit is compatible with the localization tensor maps,
-without a K-flatness assumption on either argument. The chain comparison is
-specified on every tensor summand, so its underlying map is uniquely determined. -/
+without a K-flatness assumption on either argument. -/
 theorem tensorCounit_coordinateEquation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

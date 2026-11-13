@@ -91,8 +91,8 @@ private theorem baseChange_counit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The pinned derived adjunctions require a larger elaboration and kernel budget.
-/-- The single open-square counit calculation. There is no structure morphism `f`
-or second base-change morphism `g`, and no relative direct image to a base. -/
+/-- Compatibility of the counit with restriction along `W ≤ U` in the open base-change
+square of `U.ι` along `g'`. -/
 theorem relativeMV_open_square_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

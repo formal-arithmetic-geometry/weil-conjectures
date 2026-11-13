@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 /-!
 # Regular divisors are regular immersions of codimension one
 
-An effective Cartier centre `i: D ⟶ Z` is cut out, locally on `Z`, by a single
+An effective Cartier centre `i : D ⟶ Z` is cut out, locally on `Z`, by a single
 non-zero-divisor, so it is a regular immersion of codimension one. Two closed subschemes meeting
 transversely at a point have a regular scheme-theoretic intersection, being the spectrum of a
 field.

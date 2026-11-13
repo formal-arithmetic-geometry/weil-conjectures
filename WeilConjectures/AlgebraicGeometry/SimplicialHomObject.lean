@@ -75,7 +75,7 @@ def SimplicialHomFamily.restrict {X : Scheme.{u}}
 
 /-- The restriction morphism `Hom(S,K)_0 ⟶ Hom(A,K)_0` along a simplicial subset `A ⊆ S`:
 for a family `u` over `H` (the universal family of a representing pair for `S`) and a pair
-`(H', u')` representing the functor of `A`-families, the unique morphism `ρ: H ⟶ H'` with
+`(H', u')` representing the functor of `A`-families, the unique morphism `ρ : H ⟶ H'` with
 `u'_s ∘ ρ = u_s` for all simplices `s` of `A`, i.e. the preimage of `u.restrict A` under the
 bijection `g ↦ (u'_s ∘ g)_s` of `Functor.IsRepresentedBy`. -/
 noncomputable def simplicialHomRestriction {X : Scheme.{u}}

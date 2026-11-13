@@ -13,20 +13,27 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-! # Ambient etale adjunction and projection for a supplied compactification
 
-proof.md`, paragraph 1;
-Stacks Project, Tags 0F0G, 0GL1 and 0F5Y
-.
-
-The factorization is supplied explicitly as `Compactification f`, which does not
-require its open immersion to be quasi-compact. The categories are ordinary and
-unbounded. The inverse image appearing in the projection map is canonically the
-termwise exact inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`.
+For finite coefficients, the unbounded compact-support functor of a supplied open/proper
+factorization has a right adjoint and satisfies the projection formula.
 
 ## Main declarations
 
 * `sfEtaleAmbientAdjointProjection`: the right adjoint exists and every canonical
   projection component is invertible.
 * `sfEtaleAmbientTensorMap`: its counit transpose for any selected right adjoint.
+
+## Implementation details
+
+The factorization is supplied explicitly as `Compactification f`, which does not
+require its open immersion to be quasi-compact. The categories are ordinary and
+unbounded. The inverse image appearing in the projection map is canonically the
+termwise exact inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`.
+
+## References
+
+* [Stacks Project, Tag 0F0G](https://stacks.math.columbia.edu/tag/0F0G)
+* [Stacks Project, Tag 0GL1](https://stacks.math.columbia.edu/tag/0GL1)
+* [Stacks Project, Tag 0F5Y](https://stacks.math.columbia.edu/tag/0F5Y)
 -/
 
 @[expose] public section
@@ -41,27 +48,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The ordinary unbounded compact-support functor of a supplied open/proper
-factorization has a right adjoint, and its canonical projection map is invertible.
-proof.md`, paragraph 1;
-Stacks Project, Tags 0F0G, 0GL1 and 0F5Y
-.
-
-Proof in words:
-1. Exact open extension by zero and exact inverse image induce the unbounded
-   derived adjunction D(j_!) ⊣ D(j^*), so the open-extension functor is a left
-   adjoint.
-2. Proper derived direct image for finite coefficients is a left adjoint by
-   lem-etale-proper-derived-direct-image-adjoint. Compose these two left adjoints
-   to obtain a right adjoint for the supplied-compactification functor.
-3. The proper finite-coefficient projection map is invertible by
-   lem-etale-proper-projection-formula-finite. The canonical compactification map
-   is this component followed by mapped open tensor and inverse-image composition
-   isomorphisms.
-   Therefore each of its components is invertible.
-4. For any selected right adjoint G, specialize the projection isomorphism to
-   G(A_Y), invert it, compose with the counit tensored with K and the left unitor,
-   and transpose under the adjunction. This is sfEtaleAmbientTensorMap below.
-No Noetherian, boundedness, constructibility or quasi-compact-open hypothesis is used. -/
+factorization has a right adjoint, and its canonical projection map is invertible. -/
 theorem sfEtaleAmbientAdjointProjection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -81,13 +68,9 @@ theorem sfEtaleAmbientAdjointProjection
   rw [projectionMapOfCompactification_app_app]
   infer_instance
 
-/-- The morphism theta for a selected right adjoint G, with omega = G(A_Y).
-It is the transpose of inverse projection, followed by the counit tensored with
-K and the left unit constraint. The adjunction is data selecting the right
-adjoint whose existence is sfEtaleAmbientAdjointProjection, not an additional
-geometric hypothesis. No invertibility assertion is made about theta.
-proof.md`, paragraph 1
-. -/
+/-- The morphism `θ : G(A_Y) ⊗ f^* K ⟶ G K` for a selected right adjoint `G`: the transpose
+of the inverse projection map, followed by the counit tensored with `K` and the left
+unitor. -/
 noncomputable def sfEtaleAmbientTensorMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

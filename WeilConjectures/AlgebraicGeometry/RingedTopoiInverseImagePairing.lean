@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 
-/-! # Canonical pairing on the supplied algebraic inverse image
-
-.
+/-! # Canonical pairing on the supplied algebraic inverse image.
 
 ## References
 
@@ -419,9 +417,7 @@ theorem inverseImagePurePairing_natural
   rw [ht]
 
 /-- A canonical morphism from the tensor of inverse images to the inverse image of the
- tensor, with its normalization on every generalized pair.
-
-. -/
+ tensor, with its normalization on every generalized pair. -/
 theorem exists_inverseImageTensorPairing
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]

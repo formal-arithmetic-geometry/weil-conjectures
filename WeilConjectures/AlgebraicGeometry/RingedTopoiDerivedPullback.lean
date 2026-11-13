@@ -306,20 +306,8 @@ private theorem isKFlat_inverseImage
     ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 hk)
 
 /-- A morphism of ringed topoi admits an exact derived pullback computed on
-K-flat complexes with flat terms. The functor `uStar` is the module-sheaf
-pullback `M ↦ S ⊗_{u⁻¹R} u⁻¹M` attached to the morphism of ringed topoi.
-
-The proof first makes termwise pullback an exact functor on homotopy categories.
-It then proves that pullback preserves quasi-isomorphisms between K-flat
-complexes with flat terms, using exactness of inverse image and change of rings.
-The resolving-class left-derived-functor theorem gives `LF`, its canonical
-transformation `epsilon`, and the isomorphism on every such complex. Finally,
-for a resolution `p`, define `alpha p` as the inverse of `LF.map (Q p)` followed
-by `epsilon`. Naturality follows from the resolution square and naturality of
-`epsilon`. For resolutions p, q of the same object put C(q,p) = alpha(p) inverse
-followed by alpha(q); cancellation proves the identity and composition laws,
-and a chain map a with a followed by q = p induces exactly C(q,p).
--/
+K-flat complexes with flat terms.  The functor `uStar` is the module-sheaf
+pullback `M ↦ S ⊗_{u⁻¹R} u⁻¹M` attached to the morphism of ringed topoi. -/
 theorem ringedTopoiDerivedPullback
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}

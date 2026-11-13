@@ -31,12 +31,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical equivalence of strict-local terminal sections after forgetting module
-coefficients and interchanging the two pullback factors.
-
-The coefficient comparison, composition of inverse images, restriction along the
-pullback symmetry, and terminal/global section comparisons are all actual isomorphisms.
-The composition comparison is determined by its unit identity and fixed-sheaf uniqueness.
-No existence theorem about sections or stalks is used to choose the equivalence. -/
+coefficients and interchanging the two pullback factors. -/
 noncomputable def strictLocalModuleSectionsSetEquiv
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)

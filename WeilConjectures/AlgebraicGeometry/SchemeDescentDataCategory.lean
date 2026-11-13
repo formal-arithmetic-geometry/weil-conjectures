@@ -9,9 +9,10 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
-# Blueprint statements
+# The category of descent data for a morphism of schemes
 
-lem-galois-descent.
+For a morphism of schemes `a : X ⟶ S`, the category of schemes over `X` equipped with a descent
+datum relative to `a`, with morphisms compatible with the descent data.
 -/
 
 @[expose] public section
@@ -25,7 +26,7 @@ namespace CategoryTheory
 
 namespace Over
 
-/-- Required definitions for lem-galois-descent. -/
+/-- An object over `X` equipped with a descent datum relative to `a : X ⟶ S`. -/
 structure DescentDataCategory {S X : Scheme.{u}} (a : X ⟶ S) where
   V : Over X
   datum : DescentDatum a V
@@ -34,7 +35,7 @@ namespace DescentDataCategory
 
 variable {S X : Scheme.{u}} {a : X ⟶ S}
 
-/-- Required definitions for lem-galois-descent. -/
+/-- Morphisms of descent data: morphisms over `X` compatible with the transport maps. -/
 @[ext]
 structure Hom (A B : DescentDataCategory a) where
   hom : A.V ⟶ B.V
@@ -43,7 +44,7 @@ structure Hom (A B : DescentDataCategory a) where
     B.datum.transport f₀ f₁ h (z ≫ hom) =
       A.datum.transport f₀ f₁ h z ≫ hom
 
-/-- Required definitions for lem-galois-descent. -/
+/-- The category of descent data relative to `a`. -/
 instance : Category (DescentDataCategory a) where
   Hom := Hom
   id A :=

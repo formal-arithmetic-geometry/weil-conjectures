@@ -170,29 +170,7 @@ private lemma artinian_tests_spec_iff {R A : Type u} [CommRing R] [CommRing A]
 
 /-- A locally finite type morphism over a locally Noetherian scheme is smooth on a
 neighbourhood of `x` iff every compatible diagram at `x` lifts along each surjection
-of Artinian local rings whose kernel has module length one. The consequences
-that the kernel is a residue-field module and is square zero are not extra hypotheses.
-
-Proof, following the five steps of the blueprint node:
-1. Choose affine neighbourhoods `V = Spec R` of `f(x)` and `U = Spec A` of `x`
-   with `f(U)` contained in `V`. Local Noetherianity makes `R`
-   Noetherian, and local finite type makes `A`
-   finite type over `R`. Factor the restriction through `V`.
-2. Both test spectra have a unique point, so the test maps factor through `U`
-   and `V`. The affine spectrum correspondence
-   identifies their commutative square with a commutative square of ring maps,
-   with the maximal ideal pulling back to the prime corresponding to `x`.
-   Cancel the open inclusion using lem-weil-pbc-open-immersion-monomorphism.
-3. A lift also has image `x`, so it factors through `U`. The same correspondence
-   and cancellation identify scheme lifts with ring lifts, giving exactly the
-   test condition of lem-weil-pbc-smooth-at-prime-artinian-lifting.
-4. Restriction to open subschemes, composition with their inclusions, and
-   invariance under isomorphism
-   identify smoothness on a neighbourhood of `x` with smoothness on a
-   neighbourhood of the corresponding prime of `A`.
-5. Apply lem-weil-pbc-smooth-at-prime-artinian-lifting to the Noetherian ring `R`
-   and finite type `R`-algebra `A`; steps 2--4 identify both sides of its equivalence.
--/
+of Artinian local rings whose kernel has module length one. -/
 theorem smooth_near_iff_artinian_lifting_at_point
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     [IsLocallyNoetherian S] (x : X) :

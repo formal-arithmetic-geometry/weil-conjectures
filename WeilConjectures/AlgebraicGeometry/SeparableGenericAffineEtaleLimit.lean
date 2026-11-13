@@ -35,30 +35,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- A specified separable generic point is presented by affine étale stages.
-
-The vertex is fixed to be the specified `Spec (separableClosure F Ω)`, and the final
-equality records that its map to `S` is the canonical generic-point map.
-
-Proof (node steps):
-1. Choose an affine open `U = Spec R ⊆ S` containing the generic point. The affine
-   pointed étale neighbourhoods of the geometric generic point `Spec Ω → S` form a
-   cofiltered category, and those factoring through `U` are initial; def-weil-pbc-strict-henselization-limit
-   identifies the spectrum of the coordinate-ring colimit with the inverse limit.
-2. On the small cofiltered category `J` of these neighbourhoods, the spectrum of the
-   colimit is a limit of the forgetful diagram.
-   The directed reindexing lem-weil-pbc-cofiltered-limit-directed-reindex gives a
-   nonempty directed `I`, stages `S_i` and pointed transitions `v_ji` whose restricted
-   cone is still a limit. Each `S_i` is affine and étale over `S`, each `v_ji` is an
-   `S`-morphism between affine schemes, hence affine.
-3. By lem-weil-pbc-strict-henselization-triples at `R = Γ(U, 𝒪_U)`, the generic prime
-   `(0)` and `K = F^s`, the colimit ring `C` has a surjection `ψ: C → F^s` with
-   `𝔪_C = ker ψ = 0`, so `ψ` is the canonical identification `C ≅ F^s` and the vertex
-   is `Spec F^s`.
-4. By lem-weil-pbc-strict-henselization-point-evaluation-pointed the evaluation map
-   composed with each cone leg is the chosen geometric point of the stage, so composing
-   with `u_i` gives the original map `Spec F^s → Spec F → S`; the transition and
-   compatibility identities are those of the inverse-system cone. -/
+/-- A specified separable generic point is presented by affine étale stages: for an integral
+scheme `S`, `Spec (separableClosure F Ω)` is the limit of a directed system of affine schemes
+étale over `S` with affine transition maps, compatibly with the canonical generic-point map
+to `S`. -/
 theorem exists_separableGeneric_affineEtale_limit
     (S : Scheme.{u}) [IsIntegral S]
     (Ω : Type u) [Field Ω] [Algebra S.functionField Ω]

@@ -11,9 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 
 set_option linter.privateModule false
 
-/-! # The regular module under completed constant realization
-
-.
+/-! # The regular module under completed constant realization.
 
 ## References
 

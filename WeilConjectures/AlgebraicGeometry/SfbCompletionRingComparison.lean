@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.CoverLifting
 
-/-! # Canonical comparison of the two completed coefficient rings
-
-.
+/-! # Canonical comparison of the two completed coefficient rings.
 
 ## References
 

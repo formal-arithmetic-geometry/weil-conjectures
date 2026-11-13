@@ -799,9 +799,7 @@ private theorem exact_identity_mate
     Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
   exact (Category.comp_id _).symm
 
-/-- Exact exchange for identity direct images respects the canonical identity normalization.
-
-. -/
+/-- Exact exchange for identity direct images respects the canonical identity normalization. -/
 private theorem sfExactIdentityExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' : Scheme.{u}} (t : X' ⟶ X)
@@ -839,8 +837,7 @@ private theorem sfExactIdentityExchange
   simp only [Category.comp_id]
 
 /-- Proper direct-image compositors intertwine the exact exchange of two vertically
-pasted squares.
-. -/
+pasted squares. -/
 private theorem sfExactProperExchange_paste
     (A : Type (u + 1)) [CommRing A]
     {U U' V V' Z Z' : Scheme.{u}}
@@ -876,9 +873,7 @@ private theorem sfExactProperExchange_paste
     Functor.map_id, Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-/-- Open compositors intertwine inverse exact base change for pasted Cartesian squares.
-
-. -/
+/-- Open compositors intertwine inverse exact base change for pasted Cartesian squares. -/
 private theorem sfExactOpenExchange_paste
     (A : Type (u + 1)) [CommRing A]
     {U U' V V' Z Z' : Scheme.{u}}
@@ -924,9 +919,7 @@ private theorem sfExactOpenExchange_paste
   simp only [Category.id_comp, Category.comp_id, Iso.inv_hom_id_app_assoc]
   exact Category.comp_id _
 
-/-- Exact proper, open, and identity exchanges respect their specified compositors.
-
-. -/
+/-- Exact proper, open, and identity exchanges respect their specified compositors. -/
 theorem sfExactExchangePasting :
     (∀
     (A : Type (u + 1)) [CommRing A] [Finite A]

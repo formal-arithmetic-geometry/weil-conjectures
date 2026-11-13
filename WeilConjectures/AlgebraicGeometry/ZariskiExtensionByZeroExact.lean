@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
 # Exactness of extension by zero on the small Zariski site
 
 `U_Zar` is the localized site `(Opens.grothendieckTopology X).over U` (the opens `W ⊆ U`,
-with the coverings of `X_Zar`), and extension by zero `j_!: Ab(U_Zar) ⥤ Ab(X_Zar)` is
+with the coverings of `X_Zar`), and extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)` is
 `sheafToPresheaf ⋙ (Over.forget U).op.lan ⋙ presheafToSheaf`
 (`Functor.sheafPullbackConstruction.sheafPullback`): the left Kan extension of `F` along
 the inclusion is the presheaf `j_{p!} F` (`F(V)` for `V ⊆ U`, the empty colimit `0`
@@ -39,7 +39,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Extension by zero `j_!: Ab(U_Zar) ⥤ Ab(X_Zar)`, the sheafification of `j_{p!}`, is
+/-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)`, the sheafification of `j_{p!}`, is
 additive. -/
 @[instance]
 theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
@@ -52,7 +52,7 @@ theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
     (Over.forget U) AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U)
     (Opens.grothendieckTopology X)).left_adjoint_additive
 
-/-- Extension by zero `j_!: Ab(U_Zar) ⥤ Ab(X_Zar)` (additive by
+/-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)` (additive by
 `zariski_extensionByZero_additive`) carries every short exact sequence to a short exact
 sequence, and in particular carries monomorphisms to monomorphisms. -/
 theorem zariski_extensionByZero_exact (X : Scheme.{u}) (U : X.Opens) :

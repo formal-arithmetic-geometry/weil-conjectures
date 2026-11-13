@@ -11,9 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.ModuleCupGodementFMapModels
 
 set_option linter.privateModule false
 
-/-! # Strict maps between the prescribed Godement models
-
-.
+/-! # Strict maps between the prescribed Godement models.
 
 ## References
 

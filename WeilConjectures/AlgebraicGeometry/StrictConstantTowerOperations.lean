@@ -27,7 +27,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 /-!
 # Strict constant-coefficient tower operations
 
-The index `n: ℕ` denotes positive level `n+1`. All derived categories below localize
+The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
 
 ## References

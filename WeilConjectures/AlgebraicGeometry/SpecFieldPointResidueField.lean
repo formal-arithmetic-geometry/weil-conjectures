@@ -21,6 +21,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 
 * [Stacks Project, Tag 01J9](https://stacks.math.columbia.edu/tag/01J9)
 * [Stacks Project, Tag 00CT](https://stacks.math.columbia.edu/tag/00CT)
+* [Stacks Project, Tag 00E2](https://stacks.math.columbia.edu/tag/00E2)
 -/
 
 @[expose] public section
@@ -31,7 +32,9 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9, clause (1). -/
+/-- The residue field of `Spec R` at `p` is the residue field of `R_p`, the canonical map
+`R → κ(p)` is the germ map followed by the residue map, it has kernel `p`, and `κ(p)` is the
+fraction field of `R ⧸ p`. -/
 theorem spec_field_point_residue_field
     (R : CommRingCat.{u}) (p : PrimeSpectrum R) :
     Nonempty ((Spec R).residueField p ≅
@@ -46,7 +49,9 @@ theorem spec_field_point_residue_field
   · exact Scheme.Spec.algebraMap_residueFieldIso_inv R p
   · exact Ideal.ker_algebraMap_residueField p.asIdeal
 
-/-- Stacks, Schemes, discussion before 01J9 and its following diagram, clause (2). -/
+/-- For `x` in an affine open `U`, the residue field of `x` is the residue field of the
+corresponding prime of `Γ(X, U)`, and `X.fromSpecResidueField x` factors through `Spec Γ(X, U)`.
+-/
 theorem spec_field_point_residue_field_affine_open
     (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
     (x : X) (hx : x ∈ U) :
@@ -70,7 +75,8 @@ theorem spec_field_point_residue_field_affine_open
     rw [← Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField hU.fromSpec p]
     simp
 
-/-- Stacks, Schemes, discussion before 01J9; Algebra, 00E2 and 00CT, clause (3). -/
+/-- A ring map `ψ : R →+* K` to a field determines the point `q = ker ψ` of `Spec R` and a
+unique extension `κ(q) → K` of `ψ`. -/
 theorem spec_field_point_residue_field_map
     (R : Type u) [CommRing R] (K : Type u) [Field K] (ψ : R →+* K) :
     ∃ (q : PrimeSpectrum R)
@@ -103,7 +109,8 @@ theorem spec_field_point_residue_field_map
   · intro l' hl'
     exact Ideal.ResidueField.ringHom_ext (hl'.trans hl.symm)
 
-/-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9, final part of clause (3). -/
+/-- For a domain `R` with fraction field `K`, the point of `Spec R` given by `R → K` is the
+generic point `⊥`, and the induced residue-field map is an isomorphism. -/
 theorem spec_field_point_residue_field_generic
     (R : Type u) [CommRing R] [IsDomain R] (K : Type u) [Field K]
     [Algebra R K] [IsFractionRing R K] :

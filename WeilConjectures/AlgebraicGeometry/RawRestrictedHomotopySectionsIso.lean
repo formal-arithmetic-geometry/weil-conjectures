@@ -27,13 +27,13 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
-/-- Underived restricted sections, applied termwise below.. -/
+/-- Underived restricted sections, applied termwise below. -/
 noncomputable abbrev underivedSections {Y : Scheme.{v}} (W : Y.Etale) :
     Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1} ⥤ AddCommGrpCat.{v + 1} :=
   upperStar AddCommGrpCat.{v + 1} W.hom ⋙
     Sheaf.Γ W.left.smallEtaleTopology AddCommGrpCat.{v + 1}
 
-/-- Zeroth homology of the sections complex of a single sheaf.. -/
+/-- Zeroth homology of the sections complex of a single sheaf. -/
 noncomputable def underivedSingleIso {Y : Scheme.{v}} (W : Y.Etale)
     (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (((underivedSections W).mapHomologicalComplex (.up ℤ)).obj
@@ -44,7 +44,7 @@ noncomputable def underivedSingleIso {Y : Scheme.{v}} (W : Y.Etale)
         (underivedSections W) (.up ℤ) 0).app A) ≪≫
     HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 _
 
-/-- Evaluate a chain map at the represented identity and then pass to homology.. -/
+/-- Evaluate a chain map at the represented identity and then pass to homology. -/
 noncomputable def chainEvaluation {S Y : Scheme.{v}} (h : Y ⟶ S) (U : S.Etale)
     (I : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
     (f : (CochainComplex.singleFunctor _ 0).obj

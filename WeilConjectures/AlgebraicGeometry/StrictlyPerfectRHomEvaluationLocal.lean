@@ -28,8 +28,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The canonical tensor--RHom evaluation is invertible on an open where its first
-argument has a strictly perfect representative. There is no quasi-coherence or
-boundedness assumption on the second argument. -/
+argument has a strictly perfect representative; the second argument is arbitrary. -/
 theorem strictlyPerfect_rhom_evaluation_isIso_on_open
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

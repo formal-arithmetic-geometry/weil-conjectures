@@ -14,9 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
 
-/-! # The supported Ext representative for projective-line integral transport
-
-.
+/-! # The supported Ext representative for projective-line integral transport.
 The existing construction is separated so each file stays within the compilation limit.
 -/
 
@@ -31,9 +29,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale.SfP1Transport
 
-/-- The supported Ext representative with the ordinary functor endpoints fixed.
-
-. -/
+/-- The supported Ext representative with the ordinary functor endpoints fixed. -/
 @[irreducible]
 def supportedMap (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (S : Scheme.{u})

@@ -19,6 +19,21 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
+/-!
+# Exactness of global sections on zero-dimensional schemes
+
+On a zero-dimensional separated scheme of finite type over an algebraically closed field, the
+global sections functor on abelian étale sheaves preserves finite colimits.
+
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
+* [Stacks Project, Tag 054M](https://stacks.math.columbia.edu/tag/054M)
+* [Stacks Project, Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+-/
+
 @[expose] public section
 
 universe u
@@ -28,7 +43,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Global sections of abelian étale sheaves on a zero-dimensional finite-type scheme
- over an algebraically closed field preserve finite colimits. -/
+over an algebraically closed field preserve finite colimits. -/
 theorem zero_dimensional_global_sections_preservesFiniteColimits
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
     (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]

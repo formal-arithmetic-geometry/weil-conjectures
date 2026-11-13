@@ -25,9 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The comparison of the small ring colimit with the full affine colimit is over the base.
-
-. -/
+/-- The comparison of the small ring colimit with the full affine colimit is over the base. -/
 theorem smallStrictLocalization_toBase
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -80,9 +78,7 @@ noncomputable def smallStrictHenselizationBaseChangeMap
     (by simpa using (smallStrictLocalization_toBase y).symm) (by simp) ≫
       strictHenselizationBaseChangeMap f y j
 
-/-- Projection of the transported leg to X.
-
-. -/
+/-- Projection of the transported leg to X. -/
 @[reassoc (attr := simp)]
 theorem smallStrictHenselizationBaseChangeMap_snd
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -95,9 +91,7 @@ theorem smallStrictHenselizationBaseChangeMap_snd
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The transported leg has the original small spectrum-cone projection.
-
-. -/
+/-- The transported leg has the original small spectrum-cone projection. -/
 @[reassoc]
 theorem smallStrictHenselizationBaseChangeMap_fst
     {X Y : Scheme.{u}} (f : X ⟶ Y)

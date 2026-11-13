@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FunctorialRingComplexSheaf
 public import WeilConjectures.CategoryTheory.ModuleSheafificationRestriction
 
-/-! # Restriction of sheafified ring-family complexes
-
-.
+/-! # Restriction of sheafified ring-family complexes.
 
 ## References
 
@@ -31,9 +29,7 @@ variable (K : RingComplexFamily.{u}) (ε : RingComplexAugmentations K)
 variable (m : RingComplexMaps K) (hm : RingComplexFunctorial K ε m)
 variable (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections)
 
-/-- Restrict the given global ring sections along the functor of sites.
-
-. -/
+/-- Restrict the given global ring sections along the functor of sites. -/
 def ringFamilyRestrictedSections : Fin r →
     ((((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O).obj) ⋙
       forget CommRingCat).sections :=
@@ -41,9 +37,7 @@ def ringFamilyRestrictedSections : Fin r →
 
 set_option maxHeartbeats 400000 in
 -- The unit formula compares two composite module functors; the wall limit stays unchanged.
-/-- Ring-family complexes commute with restriction and module sheafification.
-
-. -/
+/-- Ring-family complexes commute with restriction and module sheafification. -/
 theorem exists_ringFamilySheafModel_restrictionIso :
     ∃ e : (ringFamilySheafModel
         ((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O)

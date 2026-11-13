@@ -10,13 +10,26 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal
+
+/-!
+# The closed fibre of a strict henselization
+
+The fibre of the structural map of a strict henselization over the distinguished point
+contains only the closed point.
+
+## References
+
+* [Stacks Project, Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+* [Stacks Project, Tag 04GP](https://stacks.math.columbia.edu/tag/04GP)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 set_option autoImplicit false
 /-- The strict henselization structural fibre over the distinguished point contains no
-point other than the closed point. This is the forward half of the singleton-fibre theorem. -/
+point other than the closed point. -/
 theorem strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]
     [CommRing A] [IsLocalRing A]

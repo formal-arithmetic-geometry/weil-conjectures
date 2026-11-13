@@ -106,9 +106,7 @@ private theorem comp_congr (A : Type (u + 1)) [CommRing A]
     rightDerivedLowerStarCompHom, conjugateEquiv_leftDerivedUpperStarComp_hom]
   rfl
 
-/-- The chart map uses the canonical composite-adjunction direct-image map.
-
-. -/
+/-- The chart map uses the canonical composite-adjunction direct-image map. -/
 theorem chartMap_compHom
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u})

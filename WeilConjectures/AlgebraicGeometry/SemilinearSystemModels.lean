@@ -743,10 +743,9 @@ def flatTerms (R : Sheaf J CommRingCat.{max c v r})
   ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
     (J := J) (R := R) (P.X p)
 
-/-- Representative normalization of an exact tensor comparison. The chain map is
-fixed on every total summand by the inverse ordinary comparison. Its localized
-square fixes the derived comparison on K-flat representatives, on the system
-category itself, rather than merely after evaluation. -/
+/-- Representative normalization of an exact tensor comparison: a chain map given on every
+total summand by the inverse ordinary comparison, whose localization is the derived comparison
+on K-flat representatives. -/
 structure TensorComparisonModel {C' : Type c} [Category.{v} C']
     [EssentiallySmall.{max c v r} C'] (J' : GrothendieckTopology C')
     (R : Sheaf J CommRingCat.{max c v r}) (S : Sheaf J' CommRingCat.{max c v r})
@@ -756,7 +755,7 @@ structure TensorComparisonModel {C' : Type c} [Category.{v} C']
     (T : Models.{c, v, r} J R A) (T' : Models.{c, v, r} J' S A')
     (μ : A.tensor ⋙ F.mapDerivedCategory ≅
       (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ A'.tensor) where
-  /-- Ordinary tensor preservation; its canonical formula is imposed by the caller. -/
+  /-- The comparison of ordinary tensor products. -/
   ordinary : ∀ M N : Mod.{c, v, max c v r} J R,
     F.obj (ordinaryTensor.{c, v, r} J R M N) ≅ ordinaryTensor.{c, v, r} J' S (F.obj M) (F.obj N)
   /-- The inverse ordinary comparison on every summand gives this chain map. -/
@@ -791,9 +790,8 @@ structure TensorComparisonModel {C' : Type c} [Category.{v} C']
       (Functor.mapDerivedCategoryFactors F).hom.app
         ((totalTensor.{c, v, r} J R).obj (P, Q)) = DerivedCategory.Q.map (chain P Q)
 
-/-- The section carried by a scalar-extension functor's ordinary unit. The
-object equality in the derived change-of-rings model is used explicitly, so
-this is the actual model `E`, rather than an unrelated extension functor. -/
+/-- The section of `A.model.E.obj M` carried by the ordinary scalar-extension unit, transported
+along the object equality of the change-of-rings model. -/
 def scalarExtensionSection {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -803,7 +801,7 @@ def scalarExtensionSection {C : Type c} [Category.{v} C]
   (eqToHom (A.model.obj_eq M).symm).val.app U
     (extensionUnit.{c, v, max c v r} φ M U x)
 
-/-- The ordinary scalar/tensor comparison is fixed on pure tensors. This is
+/-- The ordinary scalar/tensor comparison is fixed on pure tensors.  This is
 the change-of-rings map `(x ⊗ y) ⊗ 1 ↦ (x ⊗ 1) ⊗ (y ⊗ 1)` on every generalized
 section, with the actual sheafification unit and the chosen ordinary comparison. -/
 def ScalarTensorPure {C : Type c} [Category.{v} C]

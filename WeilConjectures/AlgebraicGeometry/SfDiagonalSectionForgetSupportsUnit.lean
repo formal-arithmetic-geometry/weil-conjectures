@@ -331,14 +331,8 @@ private theorem conjugate_identity
   have h := congrArg (fun z ↦ c.inv ≫ z) (r.inv.naturality c.hom)
   simpa only [Functor.id_map, Category.assoc, Iso.inv_hom_id_assoc] using h
 
-/-- The diagonal section normalization for the tensor unit and its identity map.
-
- Expand the selected compact-support
-compositor for `Δ` followed by either projection, apply the canonical proper
-forget-supports comparisons, and use the composition-unit identity for the
-ordinary direct-image adjunction. The two Boolean cases use `diagonal_fst` and
-`diagonal_snd`; this is the coefficient-free core of the natural statement.
-. -/
+/-- The diagonal section normalization for the tensor unit and its identity map, for either
+projection (indexed by `a : Bool`). -/
 theorem diagonalSection_forgetSupports_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] (a : Bool) :

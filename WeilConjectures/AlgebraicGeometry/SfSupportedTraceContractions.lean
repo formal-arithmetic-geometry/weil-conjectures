@@ -11,9 +11,7 @@ import WeilConjectures.AlgebraicGeometry.SfSupportedFirstExtraction
 import WeilConjectures.AlgebraicGeometry.SfSupportedSecondExtraction
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
-/-! # Compact-support coordinate contractions before inserting a diagonal
-
-.
+/-! # Compact-support coordinate contractions before inserting a diagonal.
 -/
 
 @[expose] public noncomputable section
@@ -235,7 +233,8 @@ private theorem supported_projection_trace {X Y : Scheme.{u}}
   rw [projection_iso_hom]
   exact proper_trace (ModuleCat.{u + 1} A) f M N t (ordinary_trace A f M N t)
 
-/-- Coordinate contractions for compact support, without using the diagonal class or its integrals. -/
+/-- Coordinate contractions for compact support, without using the diagonal class or its integrals.
+-/
 theorem contractions {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
     (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ) {B : DerivedCategoryModule A X}

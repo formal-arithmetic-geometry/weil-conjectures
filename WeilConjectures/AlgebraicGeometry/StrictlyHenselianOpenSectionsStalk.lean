@@ -16,6 +16,7 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 ## References
 
 * [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 092Z](https://stacks.math.columbia.edu/tag/092Z)
 -/
 
 @[expose] public section
@@ -28,10 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The pointed form of the section construction in Stacks Tag 03QO. Shrink the
-marked point to an affine Spec B, localize B at its marked prime q, and use Olivier's
-theorem (Tag 092Z) to identify B_q with R. The geometric point's ring map extends
-uniquely to B_q, so the resulting section passes through that geometric point. -/
+/-- An étale morphism to `Spec R`, with `R` strictly henselian, has a section through any
+geometric point lying over the closed point. -/
 private theorem exists_pointed_section_spec
     {R : Type u} [CommRing R] [IsStrictlyHenselianLocalRing R]
     {Ω : Type u} [Field Ω] {X : Scheme.{u}}
@@ -114,8 +113,8 @@ private theorem exists_pointed_section_spec
   · rw [← hθ, ← Spec.map_comp_assoc, hψθ, hχ, hl]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A pointed section over the open U, obtained by pulling back to U and applying
-`exists_pointed_section_spec`. This is the geometric step of Stacks Tag 03QO. -/
+/-- Every point of the geometric fibre of `X` at `s` comes from a morphism over `T` from the
+strictly henselian open `U` to `X`. -/
 private theorem strictlyHenselianOpen_pointedSection
     {T : Scheme.{u}} (U : T.Opens) {R : Type u} [CommRing R] [IsLocalRing R]
     (hR : IsStrictlyHenselianLocalRing R) (e : U.toScheme ≅ Spec (.of R))

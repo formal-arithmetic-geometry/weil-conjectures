@@ -10,6 +10,19 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSourceCounit
 import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionTargetCounit
 
+/-!
+# Base change and relative Mayer–Vietoris restriction
+
+Derived base change along a pullback square commutes with the relative restriction maps
+attached to an inclusion of opens `W ≤ U`.
+
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08BV](https://stacks.math.columbia.edu/tag/08BV)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+-/
+
 @[expose] public section
 
 universe u w

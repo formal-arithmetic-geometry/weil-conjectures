@@ -62,8 +62,8 @@ private theorem rightAdjoint_map_isIso_of_bijective
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The five Hom bijections in the proof of Stacks, Tag 0A9Q.
-The mate equation identifies their composite with postcomposition by the trace. -/
+/-- Under a projection-type isomorphism and a compatible comparison map `c`, postcomposition
+with `c` followed by `J` applied to the counit of `adj` is bijective on Hom sets. -/
 private theorem trace_bijective_of_projection
     {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D]
@@ -124,7 +124,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 900000 in
 -- Elaborating the derived tensor instances needs this budget.
-/-- For qcqs schemes and a qcqs morphism `f`, let `adj: Rf_* ⊣ a` be the restricted
+/-- For qcqs schemes and a qcqs morphism `f`, let `adj : Rf_* ⊣ a` be the restricted
 adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `Rf_* RHom_X(L, M) ⟶ RHom_Y(Rf_* L, Rf_* M)`, tied by the mate equation `hc` of
 `exists_derivedDirectImage_internalHom_comparison`.

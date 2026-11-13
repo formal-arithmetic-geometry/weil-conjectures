@@ -9,6 +9,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMap
 import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineChartDerivation
 
+/-!
+# Surjectivity of the affine comparison map for relative differentials
+
+For affine opens `U ⊆ f⁻¹ V`, a linear map from the Kähler differentials of `Γ(X, U)` over
+`Γ(S, V)` to the sections of the relative differentials over `U`, compatible with the
+differentials, is surjective.
+
+## References
+
+* [Stacks Project, Tag 01UT](https://stacks.math.columbia.edu/tag/01UT)
+-/
+
 @[expose] public section
 
 universe u
@@ -17,9 +29,8 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine comparison map is surjective by the affine calculation for relative
-differentials. Identify the affine open with a spectrum, use the canonical affine
-comparison for relative differentials, and transport its surjectivity to sections. -/
+/-- On affine opens, a map from the Kähler differentials of `Γ(X, U)` over `Γ(S, V)` to the
+sections of the relative differentials that is compatible with `d` is surjective. -/
 theorem relativeDifferentials_affine_sections_map_surjective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]

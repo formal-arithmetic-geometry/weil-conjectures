@@ -9,6 +9,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
+/-!
+# Restriction of tensor-power sections to opens
+
+Comparison isomorphisms between restrictions of tensor products and tensor powers of modules
+along open immersions, and their compatibility with powers of global sections.
+
+## References
+
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -17,10 +29,8 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The restriction tensor comparison characterized by its inverse on pure tensor sections.
-This characterization determines the inverse uniquely by the sheaf tensor universal property,
-and hence determines the isomorphism. Thus the choice here is of a uniquely specified map,
-not of arbitrary data from a mere existence statement. -/
+/-- The restriction tensor comparison along an open immersion, uniquely characterized by its
+inverse on pure tensor sections. -/
 noncomputable def openRestrictionTensorIso {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] (F G : X.Modules) :
     (F ⊗ G).restrict j ≅ F.restrict j ⊗ G.restrict j :=

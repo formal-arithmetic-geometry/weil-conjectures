@@ -34,9 +34,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For affine opens `U ≤ V` of a scheme `X` and a quasi-coherent `F`, the canonical map
 `F(V) ⊗[O(V)] O(U) → F(U)`, `m ⊗ r ↦ r • m|_U`, is a bijective linear map, linear also for
-the action of `O(U)` on the second tensor factor (written, as in
-lem-weil-pbc-module-pullback-affine-sections, by swapping to `O(U) ⊗[O(V)] F(V)`, acting on
-the left factor and swapping back). -/
+the action of `O(U)` on the second tensor factor (written by swapping to
+`O(U) ⊗[O(V)] F(V)`, acting on the left factor and swapping back). -/
 theorem quasiCoherent_affine_section_baseChange
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U V : X.affineOpens) (hUV : U.1 ≤ V.1) :

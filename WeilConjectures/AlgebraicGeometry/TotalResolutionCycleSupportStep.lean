@@ -14,6 +14,17 @@ public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
+/-!
+# Support reduction for cycles of a total complex
+
+A finitely supported cycle of the total complex of a double complex of modules can be modified
+so as to remove one specified outer column from its support.
+
+## References
+
+* [Stacks Project, Tag 09IZ](https://stacks.math.columbia.edu/tag/09IZ)
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits

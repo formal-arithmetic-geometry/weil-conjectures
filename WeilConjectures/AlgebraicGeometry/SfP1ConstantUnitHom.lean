@@ -45,9 +45,7 @@ private theorem constant_unit_hom_generic
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
     Functor.Monoidal.εIso_inv, hη, CategoryTheory.Functor.map_id, Category.id_comp]
 
-/-- The constant coefficient comparison is the native single-degree unit comparison.
-
-. -/
+/-- The constant coefficient comparison is the native single-degree unit comparison. -/
 theorem constantUnit_hom
     (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) :
     (constantUnit A T).hom = (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom := by

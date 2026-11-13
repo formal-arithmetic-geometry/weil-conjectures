@@ -10,8 +10,8 @@ import WeilConjectures.AlgebraicGeometry.SectionOplaxTotalComparison
 
 /-! # Components of the specified representative tensor comparison
 
-The component interface gives the existing qTensor arrow its canonical cochain tensor
-codomain. It changes neither the representative transformation nor its normalization.
+The components of the `qTensor` comparison, stated with the canonical cochain tensor as
+codomain, together with their naturality and normalization.
 
 ## References
 
@@ -35,57 +35,46 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 attribute [local irreducible] Functor.mapDerivedCategory tensor tensorComparison qTensor
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
-/-- The existing chosen internal localization, with its instance arguments retained.
-
-This names the pre-existing localization instance; it constructs no new localization. -/
+/-- The chosen derived category of internal modules on `T`. -/
 @[instance_reducible] instance (priority := 3000) compactInternalHasDerivedCategory
     (T : Scheme.{u}) : HasDerivedCategory.{u + 1} (internalModules Λ T) :=
   inferInstance
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
-/-- The existing category structure on the internal derived category, retained compactly.
-
-The instance is precisely the pre-existing derived category instance. -/
+/-- The category structure on the derived category of internal modules on `T`. -/
 @[instance_reducible] instance (priority := 3000) compactInternalDerivedCategory
     (T : Scheme.{u}) : Category.{u + 1} (DerivedCategory (internalModules Λ T)) :=
   inferInstance
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
-/-- The existing internal derived monoidal category with its category argument retained.
-
-The body is the existing instance; all data and coherence laws are retained. -/
+/-- The monoidal structure on the derived category of internal modules on `T`. -/
 @[instance_reducible] instance (priority := 3000) compactInternalDerivedMonoidal
     (T : Scheme.{u}) : MonoidalCategory (DerivedCategory (internalModules Λ T)) :=
   inferInstance
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
-/-- The structure data of the existing retained internal derived tensor. -/
+/-- The monoidal structure data of the derived category of internal modules on `T`. -/
 @[instance_reducible] instance (priority := 3000) compactInternalDerivedMonoidalStruct
     (T : Scheme.{u}) : MonoidalCategoryStruct (DerivedCategory (internalModules Λ T)) :=
   (compactInternalDerivedMonoidal Λ T).toMonoidalCategoryStruct
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
-/-- The existing localization functor with its retained category argument.
-
-Its object map, morphism map and functor laws are precisely those of DerivedCategory.Q. -/
+/-- The localization functor `DerivedCategory.Q` for internal modules on `T`. -/
 @[implicit_reducible] def internalLocalizationFunctor (T : Scheme.{u}) :
     CochainComplex (internalModules Λ T) ℤ ⥤ DerivedCategory (internalModules Λ T) :=
   DerivedCategory.Q
 
-/-- The existing derived section functor in the retained category instances. -/
+/-- The derived section functor from internal modules to modules on `T`. -/
 @[implicit_reducible] def derivedSectionFunctor (T : Scheme.{u}) :
     DerivedCategory (internalModules Λ T) ⥤ DerivedCategory (modules Λ T) :=
   derivedFunctor Λ T
 
-/-- The fixed internal left-derived pullback, retained directly as a functor.
-
-This is the same source functor read by internalDerivedPullback, without retaining
-its unused comparison-isomorphism argument in the computational expression. -/
+/-- The left-derived pullback functor on internal modules along `f`. -/
 @[implicit_reducible] def internalDerivedPullFunctor {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (internalModules Λ Y) ⥤ DerivedCategory (internalModules Λ X) :=
   (CondensedRing.upperStar Λ f).leftDerivedFunctor
 
-/-- The existing specified derived pullback comparison in the direct functor interface. -/
+/-- The derived pullback comparison between internal and section modules along `f`. -/
 @[irreducible] def derivedPullSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalDerivedPullFunctor Λ f ⋙ (derivedSectionFunctor Λ X) ≅
       (derivedSectionFunctor Λ Y) ⋙ derivedPullback Λ f := by
@@ -212,7 +201,7 @@ theorem derivedSectionTensorIso_naturality (T : Scheme.{u})
     curriedTensor_map_app, curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using
       (tensorComparison Λ T).hom.naturality (Prod.mkHom a b)
 
-/-- The existing qTensor component with its canonical signed-total codomain. -/
+/-- The `qTensor` component with its canonical signed-total codomain. -/
 @[irreducible] def qTensorArrow (T : Scheme.{u})
     (P Q : CochainComplex (modules Λ T) ℤ) :
     (tensor Λ T).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⟶

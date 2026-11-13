@@ -11,6 +11,22 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 
+/-!
+# Étale cohomology of zero-dimensional schemes over an algebraically closed field
+
+For a separated scheme of finite type and dimension zero over an algebraically closed field,
+degree-zero étale cohomology of a sheaf is the product of its geometric stalks.
+
+## References
+
+* [Stacks Project, Tag 00KH](https://stacks.math.columbia.edu/tag/00KH)
+* [Stacks Project, Tag 00FV](https://stacks.math.columbia.edu/tag/00FV)
+* [Stacks Project, Tag 054M](https://stacks.math.columbia.edu/tag/054M)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
+-/
+
 @[expose] public section
 
 universe u

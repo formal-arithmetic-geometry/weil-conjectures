@@ -14,6 +14,17 @@ import WeilConjectures.AlgebraicGeometry.TotalResolutionCycleFiniteSupport
 import WeilConjectures.AlgebraicGeometry.TotalResolutionCycleSupportStep
 import WeilConjectures.AlgebraicGeometry.TotalResolutionCycleSupportZero
 
+/-!
+# Cycle reduction for left half-plane total complexes
+
+For a double complex concentrated in nonpositive columns whose columnwise homology rows are exact
+far to the left, every cycle of the total complex is homologous to a cycle of column zero.
+
+## References
+
+* [Stacks Project, Tag 09IZ](https://stacks.math.columbia.edu/tag/09IZ)
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits

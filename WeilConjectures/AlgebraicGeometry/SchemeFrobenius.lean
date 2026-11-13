@@ -14,14 +14,14 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 # The scheme Frobenius and the Galois Frobenii of the geometric fiber
 
 Let `k` be a finite field with `q` elements, `X₀` a scheme over `k` with structure morphism
-`f: X₀ ⟶ Spec k`, and `X = X₀ ×_k k̄` its geometric fiber. This file constructs
+`f : X₀ ⟶ Spec k`, and `X = X₀ ×_k k̄` its geometric fiber. This file constructs
 
 * the `q ^ m`-power absolute Frobenius `Fr^{(q^m)}` of a `k`-scheme, which is a `k`-morphism
   since `c ^ q = c` on `k` (`AlgebraicGeometry.Scheme.Hom.absoluteFrobenius`);
-* the `q ^ m`-power *scheme Frobenius* `Φ^m = Φ₀^m × 𝟙: X ⟶ X`, the base change of the
+* the `q ^ m`-power *scheme Frobenius* `Φ^m = Φ₀^m × 𝟙 : X ⟶ X`, the base change of the
   absolute `q ^ m`-power Frobenius `Φ₀^m` of `X₀` (`AlgebraicGeometry.Scheme.Hom.schemeFrobenius`);
   it is a `k̄`-morphism, finite (for `X₀` locally of finite type) and radicial;
-* the *arithmetic Galois Frobenius* `g_σ = 𝟙 × Spec σ`, `σ: z ↦ z ^ q`
+* the *arithmetic Galois Frobenius* `g_σ = 𝟙 × Spec σ`, `σ : z ↦ z ^ q`
   (`AlgebraicGeometry.Scheme.Hom.arithmeticGaloisFrobenius`), the inverse of the geometric
   Galois Frobenius `g_γ = 𝟙 × Spec γ`, `γ = σ⁻¹`, which is
   `AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`.
@@ -83,9 +83,9 @@ namespace Scheme.Hom
 variable {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
 /-- The absolute `q ^ m`-power Frobenius `Fr^{(q^m)}` of a scheme `X₀` over a finite field `k`
-with `q` elements: the identity on the underlying space and `s ↦ s ^ (q ^ m)` on sections. As
-`c ^ q = c` on `k`, it is a morphism over `k` (`absoluteFrobenius_comp`); for `m = 1` it is the
-`q`-power scheme Frobenius `Φ₀` of `X₀` of blueprint `def-trf-scheme-frobenius`. -/
+with `q` elements: the identity on the underlying space and `s ↦ s ^ (q ^ m)` on sections. It
+is a morphism over `k` (`absoluteFrobenius_comp`); for `m = 1` it is the `q`-power scheme
+Frobenius `Φ₀` of `X₀`. -/
 def absoluteFrobenius (m : ℕ) : X₀ ⟶ X₀ :=
   X₀.iterateFrobenius FiniteField.ringChar_prime f.natCast_ringChar_eq_zero
     (Nat.log (ringChar k) (Nat.card k) * m)
@@ -135,7 +135,7 @@ lemma absoluteFrobenius_add (m n : ℕ) :
   rw [mul_add, iterateFrobenius_add]
 
 /-- The absolute Frobenius commutes with every morphism of schemes over `k`, or more generally
-with every morphism `g: X₀ ⟶ Y₀` to a `k`-scheme. -/
+with every morphism `g : X₀ ⟶ Y₀` to a `k`-scheme. -/
 @[reassoc]
 lemma absoluteFrobenius_naturality {Y₀ : Scheme.{u}} (g : X₀ ⟶ Y₀) (e : Y₀ ⟶ Spec (.of k))
     (m : ℕ) : (g ≫ e).absoluteFrobenius m ≫ g = g ≫ e.absoluteFrobenius m :=
@@ -179,14 +179,9 @@ instance [LocallyOfFiniteType f] (m : ℕ) : IsFinite (f.absoluteFrobenius m) :=
   rw [IsFinite.iff_isIntegralHom_and_locallyOfFiniteType]
   exact ⟨inferInstance, this⟩
 
-/-- Scheme and Galois Frobenius of the geometric fiber.
-
-Let `k` be a finite field with `q` elements, `X₀` a `k`-scheme and `X = X₀ ×_k k̄`. The
-`q ^ m`-power *scheme Frobenius* `Φ^m:= Φ₀^m × 𝟙: X ⟶ X` is the base change to `k̄` of the
-`q ^ m`-power Frobenius `Φ₀^m` of `X₀` (affine incarnation `a ⊗ b ↦ a ^ (q ^ m) ⊗ b`); it is a
-`k̄`-morphism, the `m`-fold iterate of `Φ = Φ^1` (`schemeFrobenius_eq_pow`), finite for `X₀`
-locally of finite type and radicial. The Galois automorphisms of the node are
-`g_σ = arithmeticGaloisFrobenius` and `g_γ = geometricGaloisFrobenius`. -/
+/-- The `q ^ m`-power *scheme Frobenius* `Φ^m := Φ₀^m × 𝟙 : X ⟶ X` of the geometric fiber
+`X = X₀ ×_k k̄`, the base change to `k̄` of the `q ^ m`-power Frobenius `Φ₀^m` of `X₀`
+(affinely `a ⊗ b ↦ a ^ (q ^ m) ⊗ b`). -/
 def schemeFrobenius (m : ℕ) : f.geometricFiber ⟶ f.geometricFiber :=
   geometricFiberMap (f.absoluteFrobenius m) (f.absoluteFrobenius_comp m)
 
@@ -231,7 +226,7 @@ instance [LocallyOfFiniteType f] (m : ℕ) : IsFinite (f.schemeFrobenius m) :=
 end Scheme.Hom
 
 variable (k) in
-/-- The automorphism `Spec σ` of `Spec k̄` induced by the arithmetic Frobenius `σ: z ↦ z ^ q` of
+/-- The automorphism `Spec σ` of `Spec k̄` induced by the arithmetic Frobenius `σ : z ↦ z ^ q` of
 the algebraic closure of the finite field `k` with `q` elements. -/
 def specArithmeticFrobenius : Aut (Spec (.of (AlgebraicClosure k))) :=
   letI := Fintype.ofFinite k
@@ -282,8 +277,9 @@ namespace Scheme.Hom
 variable {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
 /-- The arithmetic Galois automorphism `g_σ = 𝟙 × Spec σ` of the geometric fiber
-`X = X₀ ×_k k̄`, `σ: z ↦ z ^ q` the arithmetic Frobenius of `k̄`. It is the inverse of the geometric Galois Frobenius
-`g_γ = geometricGaloisFrobenius` (`arithmeticGaloisFrobenius_eq_inv`). -/
+`X = X₀ ×_k k̄`, `σ : z ↦ z ^ q` the arithmetic Frobenius of `k̄`. It is the inverse of the
+geometric Galois Frobenius `g_γ = geometricGaloisFrobenius`
+(`arithmeticGaloisFrobenius_eq_inv`). -/
 def arithmeticGaloisFrobenius : Aut f.geometricFiber :=
   .of <| asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
     (Scheme.specAlgebraicClosure k).hom (𝟙 X₀) (specArithmeticFrobenius k).asIso.hom
@@ -378,7 +374,7 @@ theorem absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp (m : ℕ) :
   · rw [absoluteFrobenius_geometricFiber_comp_geometricFiberToAlgebraicClosure]
     simp
 
-/-- Blueprint `prop-trf-frobenius-factorization`, second factorization:
+/-- Second factorization of the absolute Frobenius of the geometric fiber:
 `Fr^{(q^m)}_X = Φ^m ∘ g_σ^m`. -/
 theorem absoluteFrobenius_geometricFiber_eq_comp_schemeFrobenius (m : ℕ) :
     (f.geometricFiberProj ≫ f).absoluteFrobenius m =

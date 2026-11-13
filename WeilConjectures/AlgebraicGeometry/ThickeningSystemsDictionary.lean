@@ -23,7 +23,7 @@ The unit equations specify its transitions and the canonical restriction compari
 The indexing starts with X_0 = X × Spec(A/I).
 X_n is spelled `pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))`,
 j_n its `pullback.fst`, and I O_X `(Scheme.IdealSheafData.ofIdealTop (I.map
-(Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f`, as in the landed
+(Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f`, as in
 `quotientBaseChange_closedImmersion_ideal` and `grothendieck_existence`.
 
 ## References
@@ -106,40 +106,10 @@ private lemma support_proper_closed_square {Y X S₀ S : Scheme.{v}}
       infer_instance
     exact ⟨Z, hZ, IsProper.of_comp (t ≫ g) q⟩
 
-/-- The dictionary, including its naturality and proper-support restriction.
-
-Proof, in the node's twelve steps:
-1. A finite-type scheme over a Noetherian affine scheme is Noetherian (01T6).
-2. Quotient base change gives j_n closed with ideal I^(n+1)O_X; extension commutes
-with powers. Each thickening is Noetherian and its coherent modules are quasi-coherent
-of finite type (quotient-base-change-closed-immersion-ideal, coherent-ft-locnoeth).
-3. The pullback unit for a closed immersion is the quotient by its defining ideal
-(closed-immersion-unit-quotient).
-4. Push the adjoints of the comparisons forward. Ideal-power pushforward identifies
-these transitions with the required quotient isomorphisms, giving formal coherent objects.
-5. Adjunction and fully faithful closed-immersion pushforward identify compatible
-families on the two sides, hence give full faithfulness.
-6. The coherent closed-immersion equivalence lifts each formal term to its thickening.
-Lift transitions uniquely by full faithfulness, take their adjoints, and reflect
-isomorphisms after identifying the quotient by the unit. This gives essential surjectivity.
-7. Pullback preserves quasi-coherence and finite type, so restrictions are coherent.
-Uniqueness of left adjoints gives the canonical comparison isomorphisms.
-8. The j_n units identify the pushed restrictions with F/I^(n+1)F. The composite
-adjunction unit identity gives compatibility of these isomorphisms with transitions.
-9. Full faithfulness and this natural completion comparison give the stated bijections
-on morphisms and isomorphisms; naturality sends restricted v to its completion.
-10. Coherent supports are closed; the coherent closed-immersion equivalence identifies
-Supp(j_0,*F_0) with j_0(Supp F_0).
-11. Choose a closed subscheme with that support. Its map to S is proper iff its map
-to S_0 is proper: the closed immersion S_0 → S is proper and separated, so use
-composition of proper maps and properness over a separated base.
-12. Formal proper support is the level-one support. Step 11 and invariance of
-support under isomorphism restrict the equivalence to the two full subcategories.
-
-The binders i and hi specify the canonical transition maps by their two projections;
-a_i and a_j are choices of the recorded tensor-pullback adjunctions. Thus no completeness
-or separatedness assumption is used by this dictionary.
--/
+/-- The dictionary between coherent modules on `X` and formal coherent systems on the thickenings
+`X_n = X ×_A Spec(A/I^(n+1))`, including its naturality and proper-support restriction. The
+maps `i n` are the canonical transition maps, specified by their two projections, and `ai`,
+`aj` are chosen tensor-pullback adjunctions. -/
 theorem thickeningSystems_dictionary {A : Type v} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     [LocallyOfFiniteType f] [QuasiCompact f] (I : Ideal A)

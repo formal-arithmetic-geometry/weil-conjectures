@@ -296,9 +296,7 @@ private theorem genericUncurriedComplexComparison
 section NormalizedComparison
 variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-/-- The actual coefficient comparison map with explicit internal-Hom endpoints.
-
-. -/
+/-- The actual coefficient comparison map with explicit internal-Hom endpoints. -/
 noncomputable def coefficientHomObjComparisonHom
     (H : (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))ᵒᵖ ×
@@ -317,9 +315,7 @@ noncomputable def coefficientHomObjComparisonHom
         ((restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj
           X.1.unop) X.2 := i.hom.app X
 
-/-- The uncurried Hom bifunctor acts by the ordinary internal-Hom map.
-
-. -/
+/-- The uncurried Hom bifunctor acts by the ordinary internal-Hom map. -/
 theorem comparisonHomMap
     {M M' N N' : SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)} (f : M' ⟶ M) (g : N ⟶ N') :
@@ -328,9 +324,7 @@ theorem comparisonHomMap
   change homObjMap (R := R) f (𝟙 N) ≫ homObjMap (R := R) (𝟙 M') g = _
   rw [homObjMap_comp_homObjMap, Category.id_comp, Category.id_comp]
 
-/-- The actual Hom projection, from the named complex bifunctor to the native internal Hom.
-
-. -/
+/-- The actual Hom projection, from the named complex bifunctor to the native internal Hom. -/
 noncomputable def complexHomProjection
     (L M : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -386,9 +380,7 @@ private theorem complexHomProjection_map
       homComplexπ L M n p q h ≫ k)
     (comparisonHomMap (f.f p) (g.f q)).symm
 
-/-- A map in the contravariant input precomposes each product component.
-
-. -/
+/-- A map in the contravariant input precomposes each product component. -/
 theorem complexHomProjection_map_left
     {L L' M : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}
@@ -405,9 +397,7 @@ theorem complexHomProjection_map_left
 attribute [irreducible] complexHomProjection
 
 -- Checking the concrete Hom-component types needs this heartbeat budget.
-/-- Restriction of the coefficient product complex has the normalized comparison.
-
-. -/
+/-- Restriction of the coefficient product complex has the normalized comparison. -/
 theorem coefficientHomComplex_comparison
     (H : (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))ᵒᵖ ×
@@ -454,9 +444,7 @@ theorem coefficientHomComplex_comparison
 
 end NormalizedComparison
 
-/-- Separate additivity supplies the product Hom-complex extension.
-
-. -/
+/-- Separate additivity supplies the product Hom-complex extension. -/
 theorem extendProductFromSeparateAdditivity
     {A E : Type u} [Category.{v} A] [Category.{v} E]
     [Preadditive A] [Preadditive E] [HasProducts.{0} A]

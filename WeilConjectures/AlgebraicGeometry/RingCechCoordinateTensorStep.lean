@@ -9,9 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedExtendedCech
 import WeilConjectures.AlgebraicGeometry.RingCechAlgebraicConeCoordinates
 import WeilConjectures.AlgebraicGeometry.RingLocalizationTensorBlocks
 
-/-! # Adjoining one localization factor to an ordered localization complex
-
-.
+/-! # Adjoining one localization factor to an ordered localization complex.
 
 ## References
 
@@ -29,9 +27,7 @@ namespace CategoryTheory
 set_option maxHeartbeats 2500000 in
 -- The coordinate eliminations compare the chosen sheaf-tensor instance parameters.
 /-- A single two-term localization factor preserves the positive ordered coordinates
-of an arbitrary nonnegative augmented complex with the tail's coordinates.
-
-. -/
+of an arbitrary nonnegative augmented complex with the tail's coordinates. -/
 theorem ringCechCoordinates_tensor_step (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A)
     (K : CochainComplex (RingSiteModules A) ℤ) (a : K ⟶ ringComplexSingle A)

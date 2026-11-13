@@ -245,27 +245,10 @@ private theorem inclCov {X : Scheme.{u}} {A B : X.Etale} (f : A ⟶ B) :
     simpa [FormalCoproduct.incl] using hx
 
 /-- Matching objects of one-member families are their scheme-theoretic matching schemes.
-A simplicial object of `X.Etale` is exactly an augmented simplicial `X`-scheme all of whose
-terms are étale over `X`. The cones below are limiting after forgetting to `Over X`, so
-universality is tested on all schemes over `X`, rather than only the étale ones. The empty
-proper-face diagram in degree zero has the specified vertex `id_X` and its unique matching
-map is the augmentation.
-
-Proof, following the six steps of the node:
-1. The small étale category has terminal object `id_X` and scheme-theoretic pullbacks. Its inclusion into `Over X` preserves
-   these, hence finite limits.
-2. Take the matching objects in `X.Etale`. Their boundary cones are also proper-face limits.
-   Preservation gives limiting cones in `Over X`, with étale vertices and matching maps
-   whose proper-face components are precisely the simplicial operators.
-3. The singleton inclusion preserves terminal objects and pullbacks by the memberwise
-   formulas, hence finite limits by.
-4. Apply this to the matching boundary diagram. Limit uniqueness identifies the recorded
-   SR matching object with the singleton matching scheme, and identifies their matching
-   maps by their face components. In degree zero both vertices are `{id_X}`.
-5. Isomorphisms in SR are coverings. Covering permanence transports the covering condition
-   across the comparison. A singleton is covering exactly when its component is étale and
-   surjective. The component is étale since it is a morphism between étale `X`-schemes.
-6. Apply the equivalence in every degree to the definition of an SR hypercover, obtaining the final equivalence. -/
+For a simplicial object `U` of `X.Etale` there are matching schemes `M n` (with `M 0 = id_X`)
+whose cones are limiting in `Over X` and which identify the semi-representable matching maps;
+these are coverings iff the matching maps are surjective, and `U` is a semi-representable
+hypercover iff every matching map is étale and surjective. -/
 theorem sr_matching_object_one_member (X : Scheme.{u}) (U : SimplicialObject X.Etale) :
     ∃ (M : ℕ → X.Etale)
       (π : ∀ n : ℕ, (Functor.const _).obj (M n) ⟶ U.properFaceDiagram n)

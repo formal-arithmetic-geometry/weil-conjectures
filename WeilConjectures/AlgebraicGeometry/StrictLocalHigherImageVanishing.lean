@@ -12,9 +12,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Detecting higher-direct-image vanishing on strict-local pullbacks
 
- 198.
-This is the stalk-comparison part of the independent principal-open estimate needed by
-`lem-per-qe-open-residue-spectral-strip`, not the affine Lefschetz estimate itself.
+Higher direct images vanish when they vanish after pullback to the strict localizations
+at geometric points.
 
 ## References
 
@@ -32,11 +31,7 @@ open CategoryTheory Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- A higher direct image vanishes exactly when the corresponding absolute cohomology
-groups of all strict-local pullbacks vanish.
-
- 198,
-the equality of a higher-direct-image stalk with cohomology over the strict localization.
--/
+groups of all strict-local pullbacks vanish. -/
 theorem isZero_rightDerived_lowerStar_iff_strict_local_ext
     (B : Type (u + 1)) [CommRing B] {Y S : Scheme.{u}} (f : Y ⟶ S)
     [QuasiCompact f] [QuasiSeparated f]

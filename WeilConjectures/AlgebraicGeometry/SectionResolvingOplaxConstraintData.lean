@@ -16,7 +16,7 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 The generic diagram expressions below are specialized to the fixed section tensor,
 localization and resolution comparisons. They introduce no chosen maps or replacement
 operations. Vertex maps point from derived vertices to localized cochain models and
-are precisely the inverses of the C_i in the node's proof.
+are the inverses of the resolution comparisons.
 
 ## References
 
@@ -87,7 +87,7 @@ def vertex5 (P Q H : A) :=
   ((ε.app P ⊗ₘ ε.app Q) ⊗ₘ ε.app H) ≫
     leftModel r t (F.obj P) (F.obj Q) (F.obj H)
 
-/-- Exactly the pair equation and regular-unit equation in the node. -/
+/-- The pair equation and the regular-unit equation for the representatives. -/
 def RepresentativeEquations (P : ObjectProperty A) : Prop :=
   (∀ A B : P.FullSubcategory,
     μ (q.obj A.obj) (q.obj B.obj) ≫ (ε.app A.obj ⊗ₘ ε.app B.obj) ≫
@@ -368,7 +368,8 @@ abbrev InternalTensorArrow {X Y : Scheme.{u}} (f : X ⟶ Y) :=
     (((Functor.whiskeringLeft₂ _).obj (internalDerivedPullback Λ f)).obj
       (internalDerivedPullback Λ f)).obj (CondensedRing.derivedTensor Λ X)
 
-/-- The RepresentativeEquations formula for the internal and section diagrams, with gamma/theta/e. -/
+/-- The RepresentativeEquations formula for the internal and section diagrams, with gamma/theta/e.
+-/
 def Conjugation {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj
       (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶

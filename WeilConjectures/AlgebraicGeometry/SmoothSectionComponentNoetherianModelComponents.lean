@@ -27,8 +27,7 @@ open CategoryTheory Limits Topology
 namespace AlgebraicGeometry
 
 /-- In any ambient space, a component of a locally connected subspace is cut out by
-an ambient open set. This uses Mathlib's openness of connected components and the
-characterization of open sets for the induced topology. -/
+an ambient open set. -/
 private theorem exists_component_open {X : Type*} [TopologicalSpace X]
     (S : Set X) [LocallyConnectedSpace S] (x : X) :
     ∃ U : TopologicalSpace.Opens X, (U : Set X) ∩ S = connectedComponentIn S x := by

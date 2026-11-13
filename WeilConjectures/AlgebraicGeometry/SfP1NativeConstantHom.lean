@@ -19,9 +19,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   HasDerivedCategory.ofHasKInjectiveResolutions Functor.leftDerivedFunctor
   Functor.mapDerivedCategory DerivedCategory.singleFunctors upperStar
 
-/-- The single-degree constant comparison reassociates to the native constant comparison.
-
-. -/
+/-- The single-degree constant comparison reassociates to the native constant comparison. -/
 theorem nativeConstant_hom
     (B : Type uB) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

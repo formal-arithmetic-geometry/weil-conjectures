@@ -234,9 +234,7 @@ private def restrictedScalarComputation (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
 attribute [local irreducible] scalarComputation restrictedScalarComputation
 
 -- Pasting the two computations elaborates both derived tensor and scalar structures.
-/-- Conjugated normalized scalar tensor maps have the section K-flat computation equation.
-
-. -/
+/-- Conjugated normalized scalar tensor maps have the section K-flat computation equation. -/
 theorem section_tensor_conjugate_computation (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
     (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)

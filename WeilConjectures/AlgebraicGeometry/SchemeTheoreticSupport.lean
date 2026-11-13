@@ -99,24 +99,7 @@ private theorem annihilator_kernel_iff
 /-- The annihilator ideal sheaf cuts out the scheme-theoretic support of a finite type
 quasi-coherent module. Its sections on an arbitrary open are the kernel of the closed
 immersion's map on sections; the displayed equivalence identifies these with the rule
-of annihilating every section on every smaller open.
-
-Proof (the node's seven steps):
-1. The rule on arbitrary opens is an ideal, stable under restriction, and membership is
-   local by the sheaf property; hence it is an ideal sheaf.
-2. On an affine open it equals the annihilator of sections: use the principal-open basis and the quasi-coherent section base-change
-   formula, then sheaf locality.
-3. Finite type makes the affine section module finite. The annihilator localizes,
-   so the affine ideals satisfy basic-open compatibility.
-4. The compatible ideals cut out a closed subscheme with the stated quotient charts.
-5. Its kernel ideal sheaf equals the annihilator sheaf on affine opens, hence on every
-   open by sheaf locality. It is therefore quasi-coherent.
-6. The image equals the nonzero-stalk locus on affine opens by the finite-module support
-   formula,
-   hence globally because affine opens cover.
-7. Taking the smaller open equal to the given open proves annihilation. Any closed
-   immersion's ideal sheaf annihilating F is contained in this sheaf, since its sections
-   restrict to sections of that ideal on every smaller open. -/
+of annihilating every section on every smaller open. -/
 theorem schemeTheoreticSupport
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] :
     ∃ (I : X.IdealSheafData),

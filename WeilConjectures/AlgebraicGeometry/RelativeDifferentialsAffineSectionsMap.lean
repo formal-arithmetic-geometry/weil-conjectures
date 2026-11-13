@@ -8,6 +8,17 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
+/-!
+# Affine Kähler differentials and sections of relative differentials
+
+The universal derivation induces a linear map from the Kähler differentials of an affine
+ring map to the sections of the sheaf of relative differentials.
+
+## References
+
+* [Stacks Project, Tag 01UT](https://stacks.math.columbia.edu/tag/01UT)
+-/
+
 @[expose] public section
 
 universe u
@@ -19,7 +30,7 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 /-- The universal derivation gives a linear map from affine Kähler differentials to
-sections of relative differentials. The affine comparison constructs this map.
+sections of relative differentials, compatible with the derivations.
 -/
 theorem relativeDifferentials_affine_sections_map (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :

@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentOperators
 
-/-! # Composition of explicit attachment operators
-
-.
+/-! # Composition of explicit attachment operators.
 
 ## References
 
@@ -35,9 +33,7 @@ private theorem transport_attachment_equality
     eqToHom hs ≫ f ≫ eqToHom hq.symm =
       eqToHom hs ≫ g ≫ eqToHom hq.symm := by rw [h]
 
-/-- The explicitly constructed attachment operators compose contravariantly.
-
-. -/
+/-- The explicitly constructed attachment operators compose contravariantly. -/
 theorem attachmentMap_comp
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V)

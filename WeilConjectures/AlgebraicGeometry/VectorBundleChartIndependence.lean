@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {c : ℕ}
 
-/-- Local linearity pulls back along `F: T ⟶ N` lying over `g: P ⟶ Y`. -/
+/-- Local linearity pulls back along `F : T ⟶ N` lying over `g : P ⟶ Y`. -/
 lemma IsLocallyLinear.pullback {T N P Y : Scheme.{u}} (F : T ⟶ N) (q : T ⟶ P) (g : P ⟶ Y)
     (t : N ⟶ Y) (hF : F ≫ t = q ≫ g) {σ : Fin c → Γ(N, ⊤)} {s : Γ(N, ⊤)}
     (hs : IsLocallyLinear t σ s) :

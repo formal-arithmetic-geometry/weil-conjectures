@@ -88,21 +88,15 @@ variable {C X : Type c} [Category.{v} C] [Category.{v} X]
   [EssentiallySmall.{r} C] [EssentiallySmall.{r} X]
   {J : GrothendieckTopology C} {K : GrothendieckTopology X}
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
- The proof is typeclass inference.
-. -/
+/-- Cache an already inferred sheaf instance on an essentially small site. -/
 instance (priority := 100000) cachedComposeRings (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := inferInstance
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
- The proof is typeclass inference.
-. -/
+/-- Cache an already inferred sheaf instance on an essentially small site. -/
 instance (priority := 100000) cachedComposeSets (J : GrothendieckTopology C) :
     J.HasSheafCompose (CategoryTheory.forget CommRingCat.{r}) := inferInstance
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
- The proof is typeclass inference.
-. -/
+/-- Cache an already inferred sheaf instance on an essentially small site. -/
 instance (priority := 100000) cachedComposeModules (J : GrothendieckTopology C) :
     J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{r}) := inferInstance
 

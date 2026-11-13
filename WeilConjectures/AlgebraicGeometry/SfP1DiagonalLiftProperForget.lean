@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 
-/-! # The diagonal lift with fixed ordinary endpoints
-
-.
+/-! # The diagonal lift with fixed ordinary endpoints.
 -/
 
 @[expose] public section
@@ -30,9 +28,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 namespace SfP1Transport
 
 /-- The defining diagonal lift, expressed using the same canonical proper comparison
-with its ordinary endpoint fixed. The inverse coefficient comparison stays intact.
-
-. -/
+with its ordinary endpoint fixed. The inverse coefficient comparison stays intact. -/
 theorem diagonalLift_eq_ordinaryProperForget
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

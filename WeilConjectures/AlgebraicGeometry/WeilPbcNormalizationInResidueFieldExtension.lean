@@ -12,6 +12,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
+/-!
+# Normalization in a finite extension of a residue field
+
+For a finite extension `K` of the residue field at a point of a quasi-separated scheme `X`,
+the map `Spec K ⟶ X` factors through an integral morphism from an integral normal scheme whose
+generic point has residue field `K`.
+
+## References
+
+* [Stacks Project, Tag 035H](https://stacks.math.columbia.edu/tag/035H)
+* [Stacks Project, Tag 035I](https://stacks.math.columbia.edu/tag/035I)
+* [Stacks Project, Tag 035L](https://stacks.math.columbia.edu/tag/035L)
+* [Stacks Project, Tag 09Z6](https://stacks.math.columbia.edu/tag/09Z6)
+-/
+
 @[expose] public section
 
 universe u
@@ -19,11 +34,8 @@ universe u
 open CategoryTheory Limits IsLocalRing
 open AlgebraicGeometry
 
-/-- Denominator clearing in the affine stalk supplies integral numerators and denominators.
-The finite extension is integral over the residue field, which is a quotient of the stalk.
-`IsIntegral.exists_multiple_integral_of_isLocalization` clears the coefficients of a monic
-relation at the affine prime. The resulting denominator is a unit in the stalk and hence
-has nonzero image in `K`. This proves the function-field calculation used in Stacks 09Z6. -/
+/-- Every element of a finite extension `K` of the residue field is a quotient of elements
+integral over the sections on an affine open, with denominator nonzero in `K`. -/
 private theorem finite_residue_extension_integral_quotients
     (X : Scheme.{u}) (x : X) (K : Type u) [Field K]
     [Algebra (X.residueField x) K] [Module.Finite (X.residueField x) K]
@@ -97,16 +109,6 @@ private theorem finite_residue_extension_integral_quotients
 /-- For a finite extension `K` of the residue field at a point of a quasi-separated scheme `X`,
 the composite `Spec K ⟶ X` is quasi-compact and quasi-separated and factors through an integral
 morphism from an integral normal scheme whose generic point has residue field `K`.
-
- The proof first shows that
-the composite from the affine field scheme is quasi-compact and quasi-separated. It applies
-relative normalization to obtain an integral factorization with dominant map and uses
-integrality of the source to make the normalization integral. On affine opens through the
-chosen point, the coordinate ring is the integral closure of the corresponding domain in K;
-finite-extension normality gives a normal domain with fraction field K. The normalization
-normal-stalks theorem gives integrally closed domain stalks. Dominance and sobriety identify
-the image of the unique point with the generic point, and the affine residue-field
-calculation identifies its residue field with K.
 -/
 theorem normalization_in_finite_residue_field_extension
     (X : Scheme.{u}) [QuasiSeparatedSpace X] (x : X) (K : Type u) [Field K]

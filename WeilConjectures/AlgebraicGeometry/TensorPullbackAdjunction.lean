@@ -37,7 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {X Y : Scheme.{w}} (g : X ⟶ Y)
 
-/-- The canonical Hom bijection `Hom(P_g G, F) ≃ Hom(G, g_* F)` of Stacks 0096 is an
+/-- The canonical Hom bijection `Hom(P_g G, F) ≃ Hom(G, g_* F)` is an
 adjunction `tensorPullback g ⊣ pushforward g`. The adjunction is pinned to the canonical
 composite by its unit: on a section `m` of `G` over `V` it is `θ(1 ⊗ η_G(m))`, where `η` is the
 unit of the inverse-image/direct-image adjunction of abelian sheaves and `θ` is the

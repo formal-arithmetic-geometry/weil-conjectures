@@ -386,9 +386,7 @@ private theorem comparison_naturality
   exact (rightDerivedLowerShriekIsoRightDerivedLowerStar
     (ModuleCat.{u + 1} A) p).hom.naturality s
 
-/-- Exchange pasting for an arbitrary complex on the projective line.
-
-. -/
+/-- Exchange pasting for an arbitrary complex on the projective line. -/
 theorem exchangeIsoTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

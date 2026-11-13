@@ -9,9 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedExtendedCech
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import WeilConjectures.AlgebraicGeometry.RingPointTensorComparison
 
-/-! # Evaluated blocks of tensoring with one localization complex
-
-.
+/-! # Evaluated blocks of tensoring with one localization complex.
 
 ## References
 
@@ -389,9 +387,7 @@ private theorem rowZeroInclusion_aug (K : CochainComplex (RingSiteModules A) ℤ
 
 end LocalizationRows
 
-/-- Evaluation of the two nonzero rows of a localization tensor total.
-
-. -/
+/-- Evaluation of the two nonzero rows of a localization tensor total. -/
 theorem ringLocalizationTensor_blocks (A : CommRingCat.{u}) (s₀ : A)
     (K : CochainComplex (RingSiteModules A) ℤ) (a : K ⟶ ringComplexSingle A)
     (hneg : ∀ n : ℤ, n < 0 → Limits.IsZero (K.X n)) :

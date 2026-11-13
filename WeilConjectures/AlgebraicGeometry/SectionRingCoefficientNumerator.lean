@@ -9,6 +9,19 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractions
 import WeilConjectures.AlgebraicGeometry.SectionFractionRestrictionMap
+
+/-!
+# Coefficients of section-ring fractions on a trivializing open
+
+On an open where a section `s` of `L^{⊗d}` restricts to a free generator, every degree-zero
+fraction `ξ / s^n` of the section ring determines a coefficient in `Γ(X, U)`.
+
+## References
+
+* [Stacks Project, Tag 01N8](https://stacks.math.columbia.edu/tag/01N8)
+* [Stacks Project, Tag 01NK](https://stacks.math.columbia.edu/tag/01NK)
+-/
+
 @[expose] public section
 universe v
 open CategoryTheory
@@ -69,21 +82,9 @@ private theorem veroneseIso_power {X : Scheme.{v}} (L : X.Modules) [L.IsInvertib
     rfl
   exact h _ (by simp [Nat.mul_comm])
 
-/-- Existence of a coefficient function satisfying the numerator equation.
-The function is obtained by the local quotient construction of Stacks Tags 01N8 and 01NK.
-
-Write e_n for the restriction of the degree-n*d component of s^n. The section-ring
-product is the tensor product transported by tensorPowAddIso. Restriction preserves
-this product, so induction from hs, the unit generator, and IsFreeGenerator.tmulSection
-shows that each e_n is a free generator. For a numerator a of degree n*d, let r_n(a)
-be the unique scalar with r_n(a) • e_n equal to its restriction to U.
-If a/s^n = b/s^m, localization equality supplies k with
-s^k * (a*s^m - b*s^n) = 0. Restrict and use bilinearity to get
-(r_n(a) - r_m(b)) • e_(k+n+m) = 0. Injectivity of scalar multiplication
-by that free generator gives r_n(a) = r_m(b). Every fraction has such a
-representative by Away.mk_surjective, so these coefficients descend to a function.
-Its numerator equation is the defining equation of r_n(a). This also works on the
-empty open: the scalar ring and section modules there are trivial. -/
+/-- If the restriction of `s` to `U` is a free generator, there is a coefficient function on the
+degree-zero localization at `s` such that the coefficient of `ξ / s^n` times the restriction of
+`s^n` equals the restriction of `ξ` to `U`. -/
 theorem exists_sectionRing_coefficient_numerator
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

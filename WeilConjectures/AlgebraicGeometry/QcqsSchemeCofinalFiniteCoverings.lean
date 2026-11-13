@@ -16,6 +16,8 @@ public import Mathlib.Topology.Sets.OpenCover
 * [Stacks Project, Tag 01IT](https://stacks.math.columbia.edu/tag/01IT)
 * [Stacks Project, Tag 01KO](https://stacks.math.columbia.edu/tag/01KO)
 * [Stacks Project, Tag 00E8](https://stacks.math.columbia.edu/tag/00E8)
+* [Stacks Project, Tag 01BS](https://stacks.math.columbia.edu/tag/01BS)
+* [Stacks Project, Tag 009F](https://stacks.math.columbia.edu/tag/009F)
 -/
 
 @[expose] public section
@@ -25,9 +27,8 @@ universe u v
 namespace AlgebraicGeometry
 
 /-- Every open covering of a quasi-compact quasi-separated scheme has a finite affine open
-refinement with quasi-compact pairwise intersections. Thus these finite coverings are cofinal
-under refinement, as required in Stacks, Modules, Tag 01BS (3), and Sheaves, Tag 009F (4).
--/
+refinement with quasi-compact pairwise intersections; that is, such finite coverings are
+cofinal under refinement. -/
 theorem qcqs_scheme_cofinal_finite_affine_open_coverings
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {A : Type v} (V : A → X.Opens) (hV : TopologicalSpace.IsOpenCover V) :

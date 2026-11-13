@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
 ## References
 
 * [Stacks Project, Tag 06AD](https://stacks.math.columbia.edu/tag/06AD)
+* [Stacks Project, Tag 05YU](https://stacks.math.columbia.edu/tag/05YU)
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A thickening of an affine scheme is affine. The proof applies Limits,
-Proposition 05YU to the surjective universally closed closed immersion.
+/-- A thickening of an affine scheme is affine.
 -/
 theorem isAffine_of_isThickening {X X' : Scheme.{u}} (i : X ⟶ X')
     (hi : IsThickening i) [IsAffine X] : IsAffine X' := by

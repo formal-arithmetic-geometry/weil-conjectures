@@ -7,9 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.SliceModuleSheafification
 public import WeilConjectures.AlgebraicGeometry.RingedLocalizationModels
 
-/-! # Restriction of fraction sheaves and localized complexes
-
-.
+/-! # Restriction of fraction sheaves and localized complexes.
 
 ## References
 

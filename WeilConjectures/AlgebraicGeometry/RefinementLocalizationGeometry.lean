@@ -113,22 +113,11 @@ private theorem localized_factor_homeomorph
     (P := (topologically IsHomeomorph).universally)
     (isPullback_SpecMap_of_isPushout _ _ _ _ lower) hhomeo
 
-/-- Source: smooth purity blueprint, sk-prop-sf-cbc,
-lem-weil-pbc-finite-pushforward-generic-constructible, steps 4--9.
-(blueprint: lem-weil-pbc-refinement-localization-geometry)
-
-Proof: The product t of the nonzero s_j is nonzero in the domain S. Surjectivity
-of Spec(C) -> Spec(S) makes S -> C injective: an element of the kernel belongs to
-every prime ideal of S and hence is nilpotent, so is zero. The injective maps
-C -> D_j then make the images of t nonzero in every D_j. C_T and E_j are the
-localizations of C and D_j at the image of t, so the latter are domains.
-Finiteness and etaleness of C_T over T, and finiteness of E_j over C_T, follow
-by base change; the cover remains surjective by base change. Each s_j is a unit
-in T since it divides t, so C_T -> E_j is also the base change of the given
-universal homeomorphism over S[1/s_j]. Universal homeomorphisms persist under
-base change and are surjective. Finally U -> T is an isomorphism by its
-bijectivity, so the cover properties over T transport to U. No assertion about
-a reduced tensor-product splitting is used or proved here. -/
+/-- Let `S → C` be a finite étale surjective cover of a domain and `C → D j` finite injective
+maps to domains which become universal homeomorphisms over `S[1/s j]`. After localizing at
+`∏ j, s j` (via `T ≅ U`), `T ⊗[S] C` is finite étale surjective over `U`, and each
+`(T ⊗[S] C) ⊗[C] D j` is a finite domain over it with surjective universally homeomorphic
+spectrum map. -/
 theorem refinement_localization_geometry
     (S : Type u) [CommRing S] [IsDomain S]
     (C : Type u) [CommRing C] [IsDomain C] [Algebra S C]

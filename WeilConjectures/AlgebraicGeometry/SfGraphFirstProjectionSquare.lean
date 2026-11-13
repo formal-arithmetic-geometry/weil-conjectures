@@ -10,9 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.SfEtaleGraphTransferTensor
 import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 
-/-! # Projection compatibility of the first graph side
-
-.
+/-! # Projection compatibility of the first graph side.
 
 ## References
 
@@ -564,22 +562,8 @@ private theorem first_side_hom
     Functor.comp_map, Functor.comp_obj, Category.id_comp,
     Functor.map_comp, Category.assoc, sfGraphFirstPresentation]
 
-/-- Projection compatibility of the first graph side.
-
-Proof in words. Expand B1 into the inverse direct-image identity comparison, inverse composition
-for s1 followed by its retraction q1, the Cartesian proper/open exchange for
-O1 = (P x_Y C) x_C X, and the direct-image compositor over Y. The projection
-for the identity, transported by the canonical identity pullback and direct-image
-comparisons, is the identity tensor map: transpose under the identity adjunction.
-For the inverse compositor s1 q1 = id, use the proper projection composition
-identity and cancel the compositor components, without inverting a projection.
-Apply the proper/open tensor square to q1, the first supporting open, and p2,
-whiskered by Rs1. Apply the proper projection composition identity to p2 and c.g.
-Naturality moves these squares past one another. Pullback-composition coherence
-identifies the coefficient path with the comparison in sfGraphWordProjection of
-the first presentation: both are the canonical compositor for s1 b1 p1 p = f.
-This gives the displayed equality of arrows; the only extra identity-direct-image
-factor cancels with its inverse. No qc or boundedness assumption is used.
+/-- Projection compatibility of the first graph side: the side isomorphism
+`sfGraphFirstSideIso` intertwines the projection maps on both sides.
 -/
 theorem sfGraphFirstSideIso_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]

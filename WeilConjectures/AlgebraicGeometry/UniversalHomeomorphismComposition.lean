@@ -26,19 +26,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tags 04DZ and 03SI, composition coherence.
-Proof: Compose the set-valued sheaf pullback adjunctions for u and v. lowerStarComp identifies their
-composite right adjoint with the right adjoint for v ≫ u. Transport the composite adjunction along
-this isomorphism and compare the left adjoints using leftAdjointUniq, then invert to obtain the
-displayed set-valued compositor. The repaired comparison with inverse sheaf equivalences permits
-the same construction through the equivalences for u, v and v ≫ u; it provides natural
-isomorphisms, never equalities.
-Use lowerStarComp for the Type-valued and additive pushforward compositors and upperStarComp for
-the additive inverse-image compositor. The composition clause of cohomologyPullbackFunctorial
-expresses successive pullback as Sheaf.H.map of the forward compositor applied to pullback along v
-≫ u. Apply Sheaf.H.map of the inverse compositor; functoriality of Sheaf.H.map and the inverse-hom
-identity cancel these maps and give the displayed equality.
-(blueprint: thm-weil-pbc-universalHomeomorphism_composition) -/
+/-- Composition coherence for universal homeomorphisms `u` and `v`: the set-valued and additive
+pullbacks and pushforwards along `v ≫ u` are isomorphic to the composites, and the cohomology
+pullback along `v ≫ u` is the composite of the pullbacks along `u` and `v`. -/
 theorem universalHomeomorphism_composition {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     ∀ (X'' : Scheme.{u}) (v : X'' ⟶ X'), IsUniversalHomeomorphism v →

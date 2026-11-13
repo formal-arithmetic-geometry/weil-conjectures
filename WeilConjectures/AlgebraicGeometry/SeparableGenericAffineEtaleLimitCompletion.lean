@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationImage
 /-! # Canonical strict-henselization completion steps
 
 The two statements below are deliberately about the canonical reindexed
-neighbourhood system. They do not quantify over arbitrary diagrams or arbitrary
+neighbourhood system.  They do not quantify over arbitrary diagrams or arbitrary
 maps out of the specified separable closure.
 
 ## References
@@ -147,13 +147,8 @@ theorem Scheme.separableClosure_residueField_generic_eq
     exact mem_separableClosure_iff.mpr (hy'.of_equiv_equiv σ (RingEquiv.refl Ω) he)
 
 /-- Transport the canonical strict-henselization limit to the specified relative
-separable closure.
-
-The proof obtains the canonical colimit-to-residue comparison from the affine
-étale neighbourhood/triple comparison, proves that the generic strict
-henselization has zero maximal ideal, and transports the canonical inverse-limit
-cone through the resulting ring isomorphism and the directed reindexing.
--/
+separable closure: the spectrum of the separable closure of the function field is the limit of
+the reindexed affine étale neighbourhoods of the geometric generic point. -/
 theorem separableGeneric_affineEtale_limit
     (S : Scheme.{u}) [IsIntegral S]
     (Ω : Type u) [Field Ω] [Algebra S.functionField Ω]
@@ -233,13 +228,8 @@ theorem separableGeneric_affineEtale_limit
   rw [Iso.symm_hom, Iso.eq_inv_comp]
   exact congrArg (Spec.map (CommRingCat.ofHom e.toRingHom) ≫ ·) (hπcan j).symm
 
-/-- Pointedness of the canonical reindexed strict-henselization cone.
-
-The proof substitutes the canonical cone-leg equation from
-`strictHenselizationPointEvaluation_pointed`, the displayed ring comparison,
-and the structural-map equation for each canonical affine neighbourhood.
-Functoriality of the over-category supplies the final map to `S`.
--/
+/-- Pointedness of the canonical reindexed strict-henselization cone: its legs are compatible
+with the structure maps to `S` of the affine étale neighbourhoods. -/
 theorem separableGeneric_affineEtale_pointed
     (S : Scheme.{u}) [IsIntegral S]
     (Ω : Type u) [Field Ω] [Algebra S.functionField Ω]

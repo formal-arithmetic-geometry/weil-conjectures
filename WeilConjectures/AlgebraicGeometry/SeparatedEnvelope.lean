@@ -11,14 +11,14 @@ public import WeilConjectures.AlgebraicGeometry.FinitePresentationModel
 
 # The separated finite-presentation envelope as an explicit construction
 
-Stacks Project Tags 01ZH and 01ZJ are proved in
-`WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit` as existence statements. This
-file packages the selections made in the blueprint as definitions:
+The underlying existence statements are proved in
+`WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit`. This file packages the
+corresponding selections as definitions:
 
 - `AlgebraicGeometry.Scheme.separatedStage`: for a cofiltered system of qcqs schemes over `S`
   with affine transition maps whose limit is separated over `S`, a selected stage from which on
   every model is separated over `S`;
-- `AlgebraicGeometry.Scheme.Hom.separatedFPEnvelope`: for a separated morphism `f: X ⟶ S` of
+- `AlgebraicGeometry.Scheme.Hom.separatedFPEnvelope`: for a separated morphism `f : X ⟶ S` of
   finite type between qcqs schemes, the model of the finite presentation model system of
   `f` (`AlgebraicGeometry.Scheme.Hom.finitePresentationApproximation`) at the selected separated
   stage, together with the closed immersion
@@ -31,6 +31,11 @@ file packages the selections made in the blueprint as definitions:
   is separated over `S`.
 - `AlgebraicGeometry.Scheme.Hom.separatedFPEnvelope_spec`: the constructed envelope is separated
   and of finite presentation over `S`, and `X ⟶ X^fp` is a closed immersion over `S`.
+
+## References
+
+* [Stacks Project, Tag 01ZH](https://stacks.math.columbia.edu/tag/01ZH)
+* [Stacks Project, Tag 01ZJ](https://stacks.math.columbia.edu/tag/01ZJ)
 -/
 
 @[expose] public section
@@ -52,8 +57,7 @@ variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc :
 /-- **The selected separated stage**: for a
 cofiltered system `{Dᵢ}` of quasi-compact quasi-separated schemes over `S` with affine transition
 maps and quasi-compact structure morphisms whose limit is separated over `S`, a chosen index
-`α_sep` from which on every model is separated over `S`. It is selected from the existence
-statement `AlgebraicGeometry.Scheme.exists_isSeparated_app_of_isLimit`. -/
+`α_sep` from which on every model is separated over `S`. -/
 noncomputable def Scheme.separatedStage : I :=
   (Scheme.exists_isSeparated_app_of_isLimit hc t i₀).choose
 
@@ -76,8 +80,8 @@ variable {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace 
 
 variable [IsSeparated f]
 
-/-- The index of the finite presentation model system used to start the separated
-stage selection: any index works, and we choose one. -/
+/-- A chosen index of the finite presentation model system, used to start the separated
+stage selection. -/
 noncomputable def finitePresentationApproximationIndex : f.finitePresentationApproximation.I :=
   Classical.choice (IsCofiltered.nonempty (C := f.finitePresentationApproximation.I))
 
@@ -102,7 +106,7 @@ finite-presentation approximation of `f` at the selected separated stage. -/
 noncomputable def separatedFPEnvelope : Scheme.{u} :=
   f.finitePresentationApproximation.D.obj f.separatedFPEnvelopeIndex
 
-/-- The closed immersion `i^fp: X ⟶ X^fp` of the separated finite-presentation envelope. -/
+/-- The closed immersion `i^fp : X ⟶ X^fp` of the separated finite-presentation envelope. -/
 noncomputable def toSeparatedFPEnvelope : X ⟶ f.separatedFPEnvelope :=
   f.finitePresentationApproximation.π.app f.separatedFPEnvelopeIndex
 
@@ -110,8 +114,8 @@ noncomputable def toSeparatedFPEnvelope : X ⟶ f.separatedFPEnvelope :=
 noncomputable def separatedFPEnvelopeHom : f.separatedFPEnvelope ⟶ S :=
   f.finitePresentationApproximation.p.app f.separatedFPEnvelopeIndex
 
-/-- **The separated finite-presentation envelope**: the constructed morphism `X^fp ⟶ S` is separated,
-quasi-compact and locally of finite presentation, and the constructed map `X ⟶ X^fp` is a
+/-- **The separated finite-presentation envelope**: the constructed morphism `X^fp ⟶ S` is
+separated, quasi-compact and locally of finite presentation, and the constructed map `X ⟶ X^fp` is a
 closed immersion over `S`. -/
 theorem separatedFPEnvelope_spec :
     IsClosedImmersion f.toSeparatedFPEnvelope ∧

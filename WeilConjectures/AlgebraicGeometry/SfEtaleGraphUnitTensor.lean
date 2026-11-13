@@ -79,29 +79,8 @@ private theorem graph_unit_fac
   simp [compactificationEtaleUnit]
 
 /-- The graph unit respects the specified proper/open projection, in the exact
-inverse-image model. This statement concerns the graph unit before transposition;
-it neither asserts invertibility nor mentions etale sum extension.
-
-Proof in words. Write F = Rr_*Dj_!, E = D(e^*), and J = EK. The graph sigma in
-Z times_W V is clopen: it is a section of a separated proper morphism, and is an
-etale monomorphism. Restriction to the graph and its open complement identifies
-derived morphisms with pairs of morphisms, since the clopen sheaf equivalence is
-exact and descends degreewise to the unbounded derived categories. Graph transfer
-is the pair consisting of the specified restricted morphism and zero.
-Consequently transfer commutes with tensor: the transfer t at M tensor J is
-the pullback of the open tensor map composed with t_M tensor identity and the
-pullback tensor comparison. The normalization on the graph is the open adjunction
-unit and the open projection/exchange equation; on the complement both maps vanish.
-For Q = Lq^* and R = Rq_*, the counit definition of the projection pi gives
-R(tau) pi (eta_M tensor identity) = eta_(M tensor J): transpose under Q adjoint R
-and use the triangle identity. Apply R to the transfer tensor equation and use
-naturality of pi. Exchange/projection compatibility for (r,q,e,q_Z) then turns
-this equation into the displayed identity. Proper exchange is invertible because
-A is finite, hence additively torsion; cancel it. Finally insert the canonical
-Le^* to D(e^*) comparison in both tensor inputs and the tensor output. Its
-naturality and the monoidal composition comparisons give exactly the factors
-shown below. This argument also covers the zero ring, empty graph and arbitrary
-unbounded complexes; it uses no quasi-compactness of the open immersion. -/
+inverse-image model: the unit at `M ⊗ e^* K` is the unit at `M` tensored with `e^* K`,
+followed by the pullback tensor comparison and `e^*` of the projection map. -/
 theorem sfEtaleGraphUnitTensor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e] (c : Compactification e)

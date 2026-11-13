@@ -91,9 +91,7 @@ private theorem conormal_wedge_coordinate_restrict
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source and target coordinates agree under principal affine localization on
-restrictions of ideal tuples from the larger chart. The input tuple is defined on U,
-not on its principal open V. General ideal tuples on V and general affine inclusions
-are not asserted here. -/
+restrictions of ideal tuples from the larger chart `U` to its principal open `V`. -/
 theorem exists_basic_ideal_wedge_selfTor_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

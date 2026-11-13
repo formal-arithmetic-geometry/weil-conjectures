@@ -13,10 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 
 /-! # Projective-line trace adjunction over an arbitrary affine base
 
-proof.md, diagonal-kernel unit,
-both triangle identities and (G7)
-.
-
 The counit equality is written after precomposition with the canonical projection
 isomorphism. Cancelling that isomorphism gives precisely the inverse-projection
 formula. For the identity/proper factorization this is the proper counit-defined
@@ -149,53 +145,9 @@ attribute [local irreducible] derivedTensor
 
 /-- The ordinary unbounded projective-line pushforward has the shifted finite Tate
 line tensored with inverse image as right adjoint, with the specified actual counit.
-We use any affine S and the two coordinates Option (ULift (Fin 1)); these are
-the same geometric projective line as the Spec R and ULift (Fin 2) presentation.
-The identity/proper compactification realizes Rq_* and its canonical projection.
-The unit identification is made explicit by sfTensorPullbackUnitIso.
-There is no Noetherian, constructibility, boundedness or Tor-amplitude hypothesis.
-The equality for every K includes the coefficient unit: the projection map at that
-unit is the canonical unit comparison, so the counit there is t.
-
-proof.md, (G6), (G7), both triangles
-.
-
-Proof plan:
-1. Apply lem-sp-tower-p1-arbitrary-base-integrals to the arbitrary affine S.
-   Reindex its two homogeneous coordinates by Option (ULift (Fin 1)). Its trace t is
-   the second projection of the projective-line decomposition. Its base-change
-   equations, with lem-asd-etale-finite-twist-pullback, give the two coordinate
-   traces on P times_S P. The supported Kummer diagonal class from
-   lem-asd-ordinary-supported-kummer has integral one for both projections.
-2. Projective-line projections are proper by
-   lemma-nagata-projective-space-base-change-proper. The diagonal is closed by
-   lem-amb-p1-diagonal-cartier and proper by lem-weil-pbc-closed-immersion-proper.
-   Apply lem-kun-0f0g to obtain all unbounded projection isomorphisms. Tensor the
-   supported diagonal class with the first pullback of M and push forward along
-   the second projection. Inverse projection and inverse proper exchange give a
-   natural unit M -> q^*Rq_*M tensor B. Use the normalized monoidal comparisons
-   of lem-sfb-ringed-derived-monoidal-comparisons throughout. Define the proposed
-   counit by inverse ordered projection, tensoring t with the identity, and the
-   unit constraint.
-3. Apply lem-sfb-etale-coordinate-trace-contractions with f = q and d = 1;
-   lem-asd-finite-etale-twist-line supplies its line hypothesis. Its first
-   coordinate equation, naturality and the section identity of
-   lem-sfb-ringed-projection-tensor-composition reduce the first triangle to
-   tensoring M with the first diagonal integral, hence to the identity.
-4. Its second coordinate equation and the same section identity reduce the
-   second triangle to the second diagonal integral. The line self-symmetry is
-   identity after etale trivialization, and its shift by two introduces no sign.
-   No truncation of either complex is used.
-5. The natural maps u |-> G(u) eta and v |-> e F(v) are inverse by the triangles.
-   Apply lem-weil-pbc-adjunction-of-natural-bijection. The resulting adjunction
-   has the proposed e as its actual counit.
-6. Transport the right adjoint through the symmetry from q^*K tensor B to
-   B tensor q^*K. The transported counit is exactly inverse
-   proper projection followed by t tensor identity and the left unitor. The
-   identity/proper compactification of lem-sf-etale-ambient-adjoint-projection
-   gives the same projection map. At the coefficient unit the canonical
-   projection and unit constraints identify the counit with t. N = 1 forces A to be the zero ring, where the same
-   formulas hold, and the empty affine base causes no exception. -/
+Here S is any affine scheme and the projective line has the two coordinates
+Option (ULift (Fin 1)); Rq_* and its projection map come from the identity/proper
+compactification. At the coefficient unit the counit is the trace t. -/
 theorem sfAffineBaseP1TraceAdjunction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0)

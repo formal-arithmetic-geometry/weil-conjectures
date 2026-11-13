@@ -25,23 +25,9 @@ set_option autoImplicit false
 universe u v
 open scoped TensorProduct
 
-/-- Source: smooth purity blueprint, sk-prop-sf-cbc,
-lem-weil-pbc-finite-pushforward-generic-constructible, step 9.
-(blueprint: lem-weil-pbc-reduced-product-localization)
-
-Proof: C' is the localization of C at x. Therefore B tensor_R C' is the
-localization of B tensor_R C at the image of x, by the tensor associativity
-isomorphism and the universal property of localization. The nilradical of a
-localization is the extension of the nilradical: if a fraction is nilpotent,
-a power of its numerator is killed by a power of the denominator; multiplying
-the numerator by a sufficiently large denominator power gives a nilpotent
-numerator for the same fraction. The reverse inclusion is immediate.
-Consequently reduction commutes with this localization. Localize the given
-C-algebra equivalence. Localization commutes with the finite product over Fin r,
-since denominators of finitely many components have a common power. Each factor
-localization is C' tensor_C D_j. Composing these identifications gives the
-asserted C'-algebra equivalence. For r=0 both finite products are the zero ring.
-No finiteness, domain, etaleness or universal-homeomorphism hypothesis is needed. -/
+/-- If the reduction of `B ⊗[R] C` is `C`-isomorphic to a finite product `∏ j, D j`, then for a
+localization `C'` of `C` away from `x`, the reduction of `B ⊗[R] C'` is `C'`-isomorphic to
+`∏ j, C' ⊗[C] D j`. -/
 theorem reduced_product_localization
     (R : Type u) [CommRing R]
     (B : Type v) [CommRing B] [Algebra R B]

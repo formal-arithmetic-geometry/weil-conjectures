@@ -25,7 +25,7 @@ import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 
  21.
 
-The index `n: ℕ` denotes the positive level `n+1`. All systems retain their actual
+The index `n : ℕ` denotes the positive level `n+1`. All systems retain their actual
 horizontal section maps. The record below specifies the geometric morphism, its
 ordinary module adjunction, and its simultaneous K-flat derived comparison.
 
@@ -105,14 +105,8 @@ attribute [-instance] ringedToposCommRingForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompose
 
 /-- A geometric morphism with a structural ring map and the induced direct image on modules.
-
-The ring identities test every generalized element of the target topos. Left exactness
-identifies the inverse image of products and the terminal object, so these are precisely
-the identities for a morphism of ring objects. The last identity specifies addition and
-scalar multiplication on the module direct image under the sheaf adjunction. It includes
-zero by taking all three module elements zero. Thus the supplied module direct image is
-the usual induced one, up to its displayed natural identification, not an arbitrary lift.
-No exactness of the tensor module pullback or preservation of K-injectives is assumed. -/
+The ring identities say the structural map is a morphism of ring objects, and the last
+identity identifies the module direct image with the one induced by the sheaf adjunction. -/
 structure RingedToposMorphismOfUniverses
     {C : Type c} {D : Type d} [Category.{v} C] [Category.{w} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

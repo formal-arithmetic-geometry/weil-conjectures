@@ -18,9 +18,9 @@ import WeilConjectures.AlgebraicGeometry.TensorRelationSectionQuotient
 
 /-! # Change of rings between quasi-coherent algebras
 
-The quasi-coherent `𝒪_Y`-algebras are the shared form `B C: Y.CommAlgebraSheaf`
-(`= Under Y.sheaf`, def-weil-pbc-comm-algebra-sheaf) with `B.toModule.IsQuasicoherent`;
-`φ: B ⟶ C` in `Under Y.sheaf` is a morphism of `𝒪_Y`-algebras, so `C.hom = B.hom ≫ φ.right`.
+The quasi-coherent `𝒪_Y`-algebras are the shared form `B C : Y.CommAlgebraSheaf`
+(`= Under Y.sheaf`) with `B.toModule.IsQuasicoherent`;
+`φ : B ⟶ C` in `Under Y.sheaf` is a morphism of `𝒪_Y`-algebras, so `C.hom = B.hom ≫ φ.right`.
 `B`-modules are `SheafOfModules` over `(sheafCompose _ (forget₂ CommRingCat RingCat)).obj B.right`
 and their underlying `𝒪_Y`-modules are obtained by scalar restriction along `B.hom`. Change of
 rings uses the recorded sheafification construction, whose section tensor products

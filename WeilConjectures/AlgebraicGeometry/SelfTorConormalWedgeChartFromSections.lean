@@ -13,6 +13,20 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+
+/-!
+# Conormal wedge charts from affine sections
+
+For a closed immersion `i : Z ⟶ Y` and an affine open `U` of `Y`, a linear identification of
+sections of the `n`-th exterior power of the conormal module over `i⁻¹ U` with the sections of
+the tilde of the affine conormal exterior module sheafifies to an isomorphism of modules.
+
+## References
+
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 01I6](https://stacks.math.columbia.edu/tag/01I6)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -110,7 +124,9 @@ private theorem affine_model_chart_quasicoherent {Z Y : Scheme.{u}} (i : Z ⟶ Y
   exact (SheafOfModules.isQuasicoherent V.toScheme.ringCatSheaf).prop_of_iso
     r.symm (by infer_instance)
 
-/-- Sheafification of the affine conormal section calculation. -/
+/-- A linear identification `e` of sections over `i⁻¹ U` of the `n`-th exterior power of the
+conormal module with those of the tilde of the affine conormal exterior module is induced by an
+isomorphism of the restricted modules. -/
 theorem exists_selfTor_conormal_wedge_chart_from_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens)

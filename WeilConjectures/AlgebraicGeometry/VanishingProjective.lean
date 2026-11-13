@@ -37,7 +37,7 @@ namespace AlgebraicGeometry
 /-- For a coherent formal system over a proper Noetherian base, an ample twist kills
 first cohomology of every successive kernel with a single bound. The index `op k`
 represents F_(k+1). The zero case uses ker(F_1 → 0) ≅ F_1. Tensor exponents are natural
-numbers, as in the node's d-fold tensor product; the bound is an integer. -/
+numbers; the bound is an integer. -/
 theorem coherentFormalModule_kernel_twist_vanishing
     {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]

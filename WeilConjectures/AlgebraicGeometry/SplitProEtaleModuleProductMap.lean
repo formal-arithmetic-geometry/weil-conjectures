@@ -156,21 +156,7 @@ private theorem moduleProduct_from_abelian
     infer_instance
   exact isIso_of_reflects_iso qM V
 
-/-- The counit maps to the sheets of a split finite cover form an isomorphism.
-
-Proof in words. Compute inverse image along the weakly etale map g by restriction
-along the localization functor of pro-etale sites. For a test W over Y, the assumed
-coproduct decomposition, after base change to W, decomposes W times_X U into n
-open-and-closed copies of W. The counit on the j-th sheet is the restriction to
-that copy. The sheaf condition identifies sections on their disjoint union with
-the finite product of their sections: distinct overlaps are empty, and on a
-self-overlap the two restrictions agree. This also proves the empty case.
-The module maps displayed here are linear because they are composites of the
-module inverse-image comparison and the module counit. Forgetting the module
-actions identifies them with those restriction maps, using the forgetful
-inverse-image comparison, its composition coherence, and the adjunction triangle
-identities. Module forgetful functors create products and reflect isomorphisms,
-so the product map is invertible. -/
+/-- The counit maps to the sheets of a split finite cover form an isomorphism. -/
 theorem splitProEtaleModuleProductMap_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Y : Scheme.{u}} (p : U ⟶ X)

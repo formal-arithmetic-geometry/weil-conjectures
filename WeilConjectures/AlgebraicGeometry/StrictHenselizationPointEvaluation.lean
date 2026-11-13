@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The geometric points define a cocone of coordinate rings with vertex Ω.
- Its naturality is the pointed transition equation.. -/
+ Its naturality is the pointed transition equation. -/
 noncomputable def strictHenselizationPointCocone
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y) : Cocone (strictHenselizationAffineDiagram barY) where

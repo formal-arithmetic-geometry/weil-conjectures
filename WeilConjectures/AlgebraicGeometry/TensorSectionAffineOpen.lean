@@ -137,11 +137,9 @@ private theorem affine_finite_intersection {X : Scheme.{u}} {ι : Type*}
     tauto
 
 /-- The tensor section `τ = t₀ ⊗ ⋯ ⊗ tₙ` of a nonempty finite family of invertible modules
-(the landed left-associated `positiveTensorFamily` with its section
-`positiveTensorFamilySection`, def-sc-positive-tensor-family; `n` means `n + 1` factors)
-has nonvanishing locus equal to the intersection of the factor loci. If one factor locus is
-affine, so is this intersection.
--/
+(the left-associated `positiveTensorFamily` with its section `positiveTensorFamilySection`;
+`n` means `n + 1` factors) has nonvanishing locus equal to the intersection of the factor
+loci. If one factor locus is affine, so is this intersection. -/
 theorem tensor_section_affine_open {X : Scheme.{u}} (n : ℕ)
     (L : Fin (n + 1) → X.Modules) [∀ i, (L i).IsInvertible]
     (t : (i : Fin (n + 1)) → (L i).sections) :

@@ -15,6 +15,21 @@ import WeilConjectures.AlgebraicGeometry.RadicialReducedFlatGenericFibre
 import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
+/-!
+# Construction of a radicial preparation
+
+Given an affine family of finite type whose generic fibre is geometrically irreducible, this file
+constructs, over an affine neighbourhood of the generic point, a universal homeomorphism of
+integral affine bases and a reduced family with geometrically reduced generic fibre that is
+universally homeomorphic to the base change of the original family.
+
+## References
+
+* [Stacks Project, Tag 0559](https://stacks.math.columbia.edu/tag/0559)
+* [Stacks Project, Tag 051T](https://stacks.math.columbia.edu/tag/051T)
+* [Stacks Project, Tag 052A](https://stacks.math.columbia.edu/tag/052A)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Topology

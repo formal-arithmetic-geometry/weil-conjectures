@@ -29,21 +29,7 @@ universe u
 
 namespace CategoryTheory
 
-/-- Restriction of abelian sheaves to the localized site is exact.
-
-Proof, step 1: for every slice object
-`V ⟶ W`, restriction has section group `G(V)` and the original section maps.
-A covering in the slice is precisely a covering of its underlying object.
-Step 2: the sectionwise kernel of a map of abelian sheaves is a sheaf: a
-compatible family glues in the source, and its image is zero by separatedness
-of the target. Thus monomorphisms are sectionwise injective and middle exactness
-is sectionwise equality of the image and kernel; both survive restriction.
-By `lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective`, the last map of a
-short exact sequence is locally surjective. A covering `Vᵢ ⟶ V` providing lifts
-also covers `V ⟶ W` in the slice, using the composites `Vᵢ ⟶ V ⟶ W`.
-The same lemma on the slice makes the restricted last map an epimorphism.
-Hence the restricted sequence is short exact.
--/
+/-- Restriction of abelian sheaves to the localized site is exact. -/
 theorem siteRestriction_exact
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos]

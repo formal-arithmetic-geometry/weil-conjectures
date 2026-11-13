@@ -15,9 +15,21 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Universal factorization before Stein connectedness
 
+## Implementation details
+
+The relative-spectrum clause is expressed by the canonical algebra identification
+`s_* O ≅ f_* O`, obtained by pushing forward `q.c` along the integral (hence affine) map `s`.
+An affine scheme with this algebra identification is exactly the relative spectrum, by the
+anti-equivalence between affine morphisms and quasi-coherent algebras. For a flat base change,
+two Cartesian squares specify the base-changed factorization. These are identifications of
+algebras through the canonical sharp maps, rather than arbitrary isomorphisms of ring sheaves.
+
 ## References
 
 * [Stacks Project, Tag 03GY](https://stacks.math.columbia.edu/tag/03GY)
+* [Stacks Project, Tag 01S8](https://stacks.math.columbia.edu/tag/01S8)
+* [Stacks Project, Tag 01SA](https://stacks.math.columbia.edu/tag/01SA)
+* [Stacks Project, Tag 01LW](https://stacks.math.columbia.edu/tag/01LW)
 -/
 
 @[expose] public section
@@ -29,17 +41,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Universal-closed Stein factorization properties from Stacks, Tag 03GY.
-
-The structure-sheaf identity means that the canonical map `q.c` is invertible.
-The relative-spectrum clause is expressed by the canonical algebra identification
-`s_* O ≅ f_* O`: push forward `q.c` along the integral (hence affine) map `s`.
-An affine scheme with this algebra identification is exactly the relative spectrum,
-by the affine/quasi-coherent-algebra anti-equivalence (Stacks 01S8, 01SA, 01LW).
-For every flat base change, two Cartesian squares specify the base-changed factorization;
-the same canonical algebra identification asserts that its intermediate scheme is the
-relative spectrum of the new pushforward. Thus these are identifications of algebras
-through the canonical sharp maps, rather than arbitrary isomorphisms of ring sheaves. -/
+/-- Stein factorization properties for a universally closed, quasi-separated morphism to an
+affine scheme: the canonical map `q.c` is invertible, the intermediate scheme is the relative
+spectrum of `f_* O` (via the identification `s_* O ≅ f_* O`), and the same holds after every
+flat base change. -/
 theorem stein_universally_closed_factor
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [UniversallyClosed f] [QuasiSeparated f] :

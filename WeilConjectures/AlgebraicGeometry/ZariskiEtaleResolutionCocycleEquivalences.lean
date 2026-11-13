@@ -49,10 +49,8 @@ private theorem objectResolutionEquiv.{v, w, t}
 
 -- The unchanged statement includes an unused comparison map and existential names.
 set_option linter.unusedVariables false in
-/-- Intermediate cocycle-comparison component for the Zariski–étale resolution comparison.
-
-The existence of the displayed additive equivalences is the termwise sheafification,
-free-abelian, and Yoneda calculation from Stacks Project, Section 01FT. -/
+/-- Additive equivalences between the Zariski and étale resolution cocycle groups, used in the
+Zariski–étale resolution comparison. -/
 theorem zariski_etale_resolution_cocycle_equivalences
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

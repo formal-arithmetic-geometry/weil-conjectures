@@ -8,9 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleTensorScalarExtensionD
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 
 /-!
-# Binary scalar-extension comparisons
-
-.
+# Binary scalar-extension comparisons.
 
 ## References
 

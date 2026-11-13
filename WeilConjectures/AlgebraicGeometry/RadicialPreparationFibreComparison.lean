@@ -11,6 +11,20 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 import WeilConjectures.FieldTheory.CommonExtensionFields
 
+/-!
+# Fibres of radicial preparations
+
+A universal homeomorphism onto a base change of a morphism `f` preserves geometric
+irreducibility of the fibres: the fibre over `s` is geometrically irreducible if and only if
+the fibre of `f` over the image of `s` is.
+
+## References
+
+* [Stacks Project, Tag 0559](https://stacks.math.columbia.edu/tag/0559)
+* [Stacks Project, Tag 0553](https://stacks.math.columbia.edu/tag/0553)
+* [Stacks Project, Tag 04DF](https://stacks.math.columbia.edu/tag/04DF)
+-/
+
 @[expose] public section
 
 universe u

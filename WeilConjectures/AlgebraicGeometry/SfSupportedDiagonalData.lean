@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceContractions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 
-/-! # Canonical maps for compact-support diagonal integration
-
-.
+/-! # Canonical maps for compact-support diagonal integration.
 -/
 
 @[expose] public noncomputable section

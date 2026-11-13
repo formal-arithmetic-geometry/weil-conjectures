@@ -37,29 +37,9 @@ universe u v
 
 namespace AlgebraicGeometry
 
-/-- The inclusion of the Zariski site into the small étale site is a morphism of sites.
-
-Proof (the seven steps of the node):
-1. Open immersions are étale, so send an
-   open to its inclusion and an inclusion to the corresponding morphism over `X`.
-   Identities and composition are those of inclusions.
-2. The top open is terminal, and intersections are pullbacks in the poset of opens.
-3. The identity of `X` is terminal in the small étale site, and its pullbacks are
-   scheme pullbacks. Intersections
-   compute these pullbacks by `lem-weil-pbc-open-preimage-fibre-product`; uniqueness
-   of limits gives the canonical comparison isomorphisms.
-4. A jointly surjective open family remains jointly surjective and étale. Together
-   with step 3 this gives Stacks continuity.
-5. Precomposition sends sheaves to sheaves. Sheafified presheaf pullback
-   is its left adjoint,
-   hence preserves colimits.
-6. The inclusion of sheaves preserves finite limits; presheaf pullback does too,
-   by steps 2 and 3, as does
-   sheafification. Their composite is
-   the left adjoint, so it preserves finite limits.
-7. This exact left adjoint and sectionwise precomposition give the required
-   morphism of sites, inverse image, direct image and adjunction.
--/
+/-- The inclusion of the Zariski site into the small étale site is a morphism of sites: it is
+cover-preserving, continuous and preserves finite limits, and its sheaf inverse image is a
+left adjoint preserving finite limits and finite colimits. -/
 theorem zariski_to_etale_is_morphism (X : Scheme.{u}) :
     ∃ (i : X.Opens ⥤ X.Etale),
       (i ⋙ Scheme.Etale.forget X = X.restrictFunctor) ∧

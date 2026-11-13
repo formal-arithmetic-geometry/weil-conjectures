@@ -15,6 +15,19 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
+/-!
+# Termwise lifts for pushforwards of thickening systems
+
+For a system of thickenings of a noetherian scheme, the lifted adjacent transition maps of
+the pushed-forward system become invertible after tensor pullback.
+
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
+* [Stacks Project, Tag 0880](https://stacks.math.columbia.edu/tag/0880)
+-/
+
 @[expose] public section
 universe v
 open CategoryTheory Opposite

@@ -9,6 +9,20 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomComparison
 import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
+
+/-!
+# Raw module cohomology versus restricted abelian cohomology in nonnegative degrees
+
+The nonnegative-degree comparison between raw higher direct image sections of an étale sheaf of
+`Λ`-modules and restricted cohomology of its underlying abelian sheaf, natural over `Over W`.
+
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite

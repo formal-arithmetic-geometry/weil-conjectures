@@ -276,8 +276,7 @@ attribute [local irreducible] sectionScalarRestriction
 
 -- Generator comparisons elaborate both internal and section module tensor structures.
 /-- Scalar normalization and ordinary generators identify the restricted scalar
-computation after the section equivalence.
-. -/
+computation after the section equivalence. -/
 theorem section_scalar_computation_transport (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
     (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)

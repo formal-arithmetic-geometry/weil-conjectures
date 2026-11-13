@@ -40,9 +40,8 @@ def falseProjectionChartFactor
         (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS)).hom
 
 /--
-The false projection mate-pasting calculation, before the trace is applied.
-It is the chart-exchange factorization precomposed by the intermediate
-comparison, and is independent of any choice of trace morphism.
+The false projection mate-pasting identity, before the trace is applied: the composite equals
+the chart-exchange factorization precomposed by the intermediate comparison.
 -/
 theorem falseProjectionChartPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]

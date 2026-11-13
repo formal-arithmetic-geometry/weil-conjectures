@@ -13,6 +13,21 @@ public import Mathlib.CategoryTheory.Functor.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.CategoryTheory.Adjunction.Limits
 
+/-!
+# The inclusion of the Zariski site into the small étale site
+
+The functor sending an open of a scheme `X` to the corresponding open subscheme, viewed as an
+object of `X.Etale`, is cover preserving, preserves finite limits, and is continuous and
+representably flat.
+
+## References
+
+* [Stacks Project, Tag 00X6](https://stacks.math.columbia.edu/tag/00X6)
+* [Stacks Project, Tag 00X5](https://stacks.math.columbia.edu/tag/00X5)
+* [Stacks Project, Tag 02GP](https://stacks.math.columbia.edu/tag/02GP)
+* [Stacks Project, Tag 01JR](https://stacks.math.columbia.edu/tag/01JR)
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
@@ -65,30 +80,9 @@ private noncomputable def etaleImageAdjunction (X : Scheme.{u}) :
       apply (cancel_mono V.ι).mp
       exact (CategoryTheory.Over.w _).trans (CategoryTheory.Over.w _).symm }
 
-/-- Core site data for the Zariski-to-etale inclusion.
-
-Proof in words: send an open U to its open subscheme with inclusion into X,
-which is etale because open immersions are etale. Send an inclusion V <= U
-to the scheme inclusion over X. These are the objects and maps of
-X.restrictFunctor, so forgetting the etale condition gives equality of functors;
-identity and composition follow from those of restrictFunctor. A Zariski
-covering family is jointly surjective on the open subscheme it covers, and its
-arrows are etale, so its image generates an etale covering sieve. This proves
-cover preservation, including the empty cover of the empty open.
-The top open is isomorphic over X to the identity of X, hence terminal in the
-etale category. Intersections V intersect W of opens over U are their scheme
-fibre products: an open immersion pulls back to the inverse-image open (01JR).
-The etale category is a full subcategory of schemes over X closed under these
-finite limits, so the same cones are limiting there. Terminal objects and
-pullbacks generate all finite limits, giving finite-limit preservation.
-Cover preservation plus these pullback comparisons implies continuity: a
-sheaf's gluing condition for the image covers is exactly the condition for the
-original covers, as in Tag 00X6. Finally the opens have finite limits; any
-finite diagram in the category of arrows T -> i(U) has a cone obtained by
-taking its limit in opens and using preservation of this limit to induce the
-map from T. The empty diagram uses the terminal open. Thus each such comma
-category is cofiltered, which is precisely representable flatness.
-This is also Mathlib's flat_of_preservesFiniteLimits criterion. -/
+/-- Core site data for the Zariski-to-etale inclusion: there is a functor from opens of `X`
+to `X.Etale` lifting `X.restrictFunctor` which is cover preserving, preserves finite limits,
+sends `⊤` to a terminal object, and is continuous and representably flat. -/
 theorem zariski_to_etale_core (X : Scheme.{u}) :
     ∃ (i : X.Opens ⥤ X.Etale),
       (i ⋙ Scheme.Etale.forget X = X.restrictFunctor) ∧
@@ -97,7 +91,7 @@ theorem zariski_to_etale_core (X : Scheme.{u}) :
       Nonempty (IsTerminal (i.obj ⊤)) ∧
       i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology ∧
         RepresentablyFlat i := by
-  -- The open-image adjunction supplies the limit comparisons in the planned argument.
+  -- The open-image adjunction supplies the limit comparisons.
   let i := openEtaleInclusion X
   let : i.IsRightAdjoint := (etaleImageAdjunction X).isRightAdjoint
   let : PreservesFiniteLimits i := inferInstance

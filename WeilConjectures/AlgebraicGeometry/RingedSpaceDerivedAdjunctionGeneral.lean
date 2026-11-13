@@ -38,26 +38,7 @@ namespace AlgebraicGeometry.RingedSpace
 The additive functor `P` is specified on both objects and morphisms as inverse image
 followed by extension of scalars along the adjoint structure map. Its total left
 derived functor `L`, with comparison `ε`, is computed on K-flat complexes.
-The adjunction includes its natural bifunctorial Hom equivalences.
-
-Proof, following the three steps of the node:
-1. Let `ρ: g⁻¹ OY ⟶ OX` be the map adjoint to `g`'s structure-sheaf map.
-Compose the inverse-image/direct-image module adjunction
-(lem-pc-module-inverse-image-adjunction, Tags 008X/008Y) with the extension/restriction
-of scalars adjunction along `ρ` (lem-pc-module-change-of-rings-adjunction, Tag 008A).
-This identifies tensor pullback with the left adjoint of `moduleDirectImage g`;
-the latter has sections `F(g⁻¹ V)` with the scalar action through `g`'s structure map.
-2. Resolve each source complex by a K-flat complex.
-Exact inverse image preserves the resolution quasi-isomorphism. Its inverse image
-is K-flat over the inverse-image ring, by lem-pc-kflat-pullback-preservation applied
-to `(g,id)`. Apply lem-pur-derived-change-of-rings along `ρ` to compute `L` by
-termwise tensor pullback on this resolution, with comparison `ε` invertible there.
-The functor `derivedModuleDirectImage g` is computed on K-injective resolutions. Apply lem-sc-derived-adjunction-from-underived
-to the underived adjunction and these derived comparison maps. It yields the
-adjunction and the counit induced by the underived counit.
-3. The resulting adjunction's `homEquiv` gives
-`Hom(L E,F) ≃ Hom(E,Rg_* F)`, natural in both arguments. Substitution of the
-specified tensor-pullback construction gives exactly the displayed node formula. -/
+The adjunction includes its natural bifunctorial Hom equivalences. -/
 theorem derivedModulePullback_adjunction
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

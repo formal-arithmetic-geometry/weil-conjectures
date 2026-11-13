@@ -17,6 +17,20 @@ import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
+/-!
+# Second-page coproduct comparison for truncated direct images
+
+For a quasi-compact quasi-separated morphism, higher direct images of the homology of
+truncations of a coproduct of derived quasi-coherent complexes receive an epimorphism from
+the coproduct of the corresponding terms.
+
+## References
+
+* [Stacks Project, Tag 08DZ](https://stacks.math.columbia.edu/tag/08DZ)
+* [Stacks Project, Tag 07TB](https://stacks.math.columbia.edu/tag/07TB)
+* [Stacks Project, Tag 015J](https://stacks.math.columbia.edu/tag/015J)
+-/
+
 @[expose] public section
 
 universe u wX wY
@@ -98,9 +112,9 @@ private noncomputable def truncatedHomologyCofanIsColimit
       DerivedCategory.isZero_of_isGE _ a r (lt_of_not_ge h)
     exact IsColimit.ofIsZero _ ((Functor.isZero_iff _).2 (fun i ↦ hz (E i.as))) (hz S)
 
-/-- The second-page coproduct comparison is an epimorphism.
- Tag 015J identifies
-these ordinary higher images as second-page terms. This is the surjectivity half only.. -/
+/-- The second-page coproduct comparison is an epimorphism: for a coproduct `S` of derived
+quasi-coherent complexes, the map from the coproduct of the `R^p f_*` of the homology of the
+truncations to that of `S` is an epimorphism. -/
 theorem truncated_directImage_secondPage_coproduct_epi
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

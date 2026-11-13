@@ -14,8 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.SfP1SupportedExtMapData
 
 The self-product map, coefficient comparisons, supported class, and trace are
 constructed from the canonical derived functors. No integral identity is used.
-
-.
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +29,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale.SfP1Transport
 
 /-- Compose the inverse coefficient comparison with projection exchange.
-Keeping this composition abstract prevents expansion of a concrete coefficient iso.
-
-. -/
+Keeping this composition abstract prevents expansion of a concrete coefficient iso. -/
 @[irreducible]
 def middleComposite
     {C D E T : Type*} [Category C] [Category D] [Category E] [Category T]
@@ -45,8 +41,7 @@ def middleComposite
 /-- A trace transported through forget-supports and an inverse line comparison.
 
 Keeping the categorical composition polymorphic prevents repeated normalization
-of its concrete shifted coefficient objects.
-. -/
+of its concrete shifted coefficient objects. -/
 @[irreducible]
 def traceComposite
     {D E : Type*} [Category D] [Category E]
@@ -180,9 +175,7 @@ section
 
 attribute [local irreducible] ordinaryFinitePushforward
 
-/-- Transport of the supported source, before applying any Ext representative.
-
-. -/
+/-- Transport of the supported source, before applying any Ext representative. -/
 @[irreducible]
 def diagonalLift :
     (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (TraceDiagonalDatum.diagonal f)).obj
@@ -230,9 +223,7 @@ def diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
       (supportedMap A N hA S κ) ≫
     (coefficientComparison A N hA t f i hi hS).hom
 
-/-- Direct-image composition and inverse-image/direct-image cancellation along i.
-
-. -/
+/-- Direct-image composition and inverse-image/direct-image cancellation along i. -/
 @[irreducible]
 def presentationTrace (B : DerivedCategoryModule A (ProjectiveLine S)) :
     (ordinaryFinitePushforward A f).obj ((ordinaryFinitePullback A i.hom).obj B) ⟶
@@ -275,9 +266,7 @@ def trace (hS : IsUnit (N : Γ(S, ⊤)))
       ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))
     τ (constantUnit A S).hom
 
-/-- The concrete trace-diagonal datum transported across the specified isomorphism.
-
-. -/
+/-- The concrete trace-diagonal datum transported across the specified isomorphism. -/
 @[irreducible]
 def datum (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
@@ -290,9 +279,7 @@ def datum (hS : IsUnit (N : Γ(S, ⊤)))
   { trace := trace A N hA t f i hi hS τ
     diagonalClass := diagonalClass A N hA t f i hi hS κ }
 
-/-- The class field of the concrete datum is the constructed supported class.
-
-. -/
+/-- The class field of the concrete datum is the constructed supported class. -/
 theorem datum_diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
     (κ : Ext
@@ -305,9 +292,7 @@ theorem datum_diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
   unfold datum
   rfl
 
-/-- The trace field of the concrete datum is the constructed transported trace.
-
-. -/
+/-- The trace field of the concrete datum is the constructed transported trace. -/
 theorem datum_trace (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
     (κ : Ext

@@ -30,9 +30,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 attribute [local irreducible] DerivedCategory.singleFunctors upperStar lowerStar
 attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
 
-/-- The specified ordinary finite unit pullback is the native constant-sheaf comparison.
-
-. -/
+/-- The specified ordinary finite unit pullback is the native constant-sheaf comparison. -/
 theorem unitPullback_native_hom
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFiniteUnitPullback A f).hom =

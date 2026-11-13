@@ -97,9 +97,7 @@ private theorem scalarPointIso_one_tmul {A B : CommRingCat.{u}} (φ : A →+* B)
 
 /-- Scalar extension identifies two explicit ordered localization complexes for a list
 and its image. This is an augmented cochain isomorphism, with no derived-category,
-K-flatness, ideal, replacement complex, or change-of-generators assumption.
-
-. -/
+K-flatness, ideal, replacement complex, or change-of-generators assumption. -/
 theorem ringComplex_ordered_scalar_iso
     (A B : CommRingCat.{u}) (φ : A →+* B) (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (RingSiteModules A) ℤ) (a : C ⟶ ringComplexSingle A)

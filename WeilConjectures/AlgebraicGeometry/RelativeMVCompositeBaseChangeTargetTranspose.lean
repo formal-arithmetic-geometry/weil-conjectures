@@ -116,9 +116,7 @@ private theorem relativeMVOpenLift_fst {X X' : Scheme.{u}} (g' : X' ⟶ X)
     relativeMVOpenLift g' i ≫ pullback.fst g' U.ι = pullback.fst g' W.ι :=
   pullback.lift_fst _ _ _
 
-/-- The comparison is independent of which proof witnesses the projection equation.
-The named witness pins its source before applying congrArg; congruence and proof
-irrelevance identify the resulting isomorphisms. -/
+/-- The comparison is independent of which proof witnesses the projection equation. -/
 private theorem comparison_witness_eq
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

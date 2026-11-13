@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ExactFunctorDerivedUnit
 public import WeilConjectures.CategoryTheory.ExactDegreeZero
 
-/-! # The scalar-unit universal property in the exact-functor interface
-
-.
+/-! # The scalar-unit universal property in the exact-functor interface.
 
 ## References
 

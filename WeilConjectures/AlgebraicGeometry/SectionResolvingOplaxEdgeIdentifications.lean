@@ -243,12 +243,7 @@ private theorem representative_all {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /--
 Under the representative equations, the six prescribed edge squares commute
-for every triple of resolving section complexes. The proof expands the fixed
-vertices, uses naturality of the resolution comparison and of `modelTensor`,
-and applies the representative equation to the relevant binary pair; the
-source and target associator equations identify the remaining edge.
-
-.
+for every triple of resolving section complexes.
 -/
 theorem section_resolving_oplax_edge_identifications {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)

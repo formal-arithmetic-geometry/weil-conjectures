@@ -113,9 +113,7 @@ set_option synthInstance.maxSize 2048 in
 /-- A single bounded-above complex with finite locally constant cohomology has, on
 covering slices, bounded-above finite free constant models for each good lower truncation.
 The derived categories of slices use their standard localization; no choice of small
-localization or points of the site is required.
-
-. -/
+localization or points of the site is required. -/
 theorem exists_site_finiteFree_truncation_models
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks]

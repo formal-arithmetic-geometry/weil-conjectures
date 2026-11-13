@@ -19,11 +19,7 @@ open AlgebraicGeometry
 universe u
 namespace AlgebraicGeometry
 
-/-- The separated affine function-field construction yields a closed immersion of spectra.
-
-The proof constructs the pullback of the diagonal along the affine charts, identifies it
-with `Spec K`, and transports the resulting closed immersion through the affine-spectrum
-identifications. -/
+/-- The separated affine function-field construction yields a closed immersion of spectra. -/
 theorem Scheme.isClosedImmersion_specMap_tensor_functionField
     (X : Scheme.{u}) [IsIntegral X]
     [hsep : X.IsSeparated]

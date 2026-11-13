@@ -26,9 +26,7 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- The base-change equation for the splitting trace identifies the two chart
-traces with the coordinate traces of the explicitly transported trace.
-
-. -/
+traces with the coordinate traces of the explicitly transported trace. -/
 theorem traceComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)

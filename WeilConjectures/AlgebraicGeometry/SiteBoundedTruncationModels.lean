@@ -275,9 +275,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 /-- A good lower truncation of a bounded-above complex with locally constant finite
 cohomology has local bounded finite-module models, in the ring-sheaf module encoding.
-The model is a genuine module complex, including its differentials.
-
-. -/
+The model is a genuine module complex, including its differentials. -/
 theorem exists_site_bounded_truncation_models
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks]

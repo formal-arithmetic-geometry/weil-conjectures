@@ -32,8 +32,8 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
-/-- The geometric calculation of exchange for abelian sheaves, before any comparison
-with cohomology computed in a category of modules. -/
+/-- The degree-`q` exchange equivalence for an abelian étale sheaf along a local map of
+strictly henselian local rings with base change square `sq`. -/
 theorem Etale.exists_addEquiv_strictLocal_abelian_total_exchange
     {A B : Type u} [CommRing A] [HenselianLocalRing A]
     [IsSepClosed (IsLocalRing.ResidueField A)]

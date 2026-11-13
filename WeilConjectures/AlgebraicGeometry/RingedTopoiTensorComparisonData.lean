@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 /-! # Pure-tensor data for a ringed-topos tensor comparison
 
 The structure records the normalization used by Stacks Project, Tag 03EL.
-.
 
 ## References
 

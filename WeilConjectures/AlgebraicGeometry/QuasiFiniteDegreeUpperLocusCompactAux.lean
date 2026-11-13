@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- The finite-generation argument on an affine open produces a compact open whose
-carrier is the successor fibre-degree locus. -/
+/-- On an affine open `W` where the fibre degree is at least `r`, there is a compact open whose
+carrier is the intersection of `W` with the locus of fibre degree at least `r + 1`. -/
 theorem exists_compact_open_successor_degree_locus_inter_affine
     {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite)

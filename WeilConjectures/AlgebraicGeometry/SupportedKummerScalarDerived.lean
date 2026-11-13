@@ -117,9 +117,7 @@ private theorem finite_constant_flat
   exact ObjectProperty.prop_of_iso ObjectProperty.flat e.symm
     ((ModuleCat.flat_iff_flat _).2 inferInstance)
 
-/-- The normalized coefficient maps give the three derived scalar-extension units.
-
-. -/
+/-- The normalized coefficient maps give the three derived scalar-extension units. -/
 theorem supported_kummer_scalar_derived_units
     (T : Scheme.{u}) (R A : Type (u + 1)) [CommRing R] [CommRing A] (φ : R →+* A)
     {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]

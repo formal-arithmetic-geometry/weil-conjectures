@@ -8,7 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.RoosCohomologyMaps
 
 /-! # Naturality of the explicit strict Roos cohomology maps
 
-proof.md, first paragraph.
+The maps on cohomology obtained by factoring the boundary and projection of the Roos mapping
+cone are natural in the tower of complexes.
 -/
 
 @[expose] public section
@@ -191,10 +192,7 @@ end
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The maps obtained by factoring the cone boundary and projection are natural.
-
-proof.md, first paragraph;
-the expanded proof's naturality step. -/
+/-- The maps obtained by factoring the cone boundary and projection are natural. -/
 theorem roos_cohomology_naturality {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableLimits A] [HasExactLimitsOfShape (Discrete ℕ) A]
     (q : ℤ) {K L : ℕᵒᵖ ⥤ CochainComplex A ℤ} (f : K ⟶ L) :

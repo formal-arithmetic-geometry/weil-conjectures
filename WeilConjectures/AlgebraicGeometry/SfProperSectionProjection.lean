@@ -8,9 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 import WeilConjectures.AlgebraicGeometry.SfIdentityProjectionNormalization
 import WeilConjectures.AlgebraicGeometry.SfProperProjectionComposition
 
-/-! # Projection along a proper section
-
-.
+/-! # Projection along a proper section.
 
 ## References
 

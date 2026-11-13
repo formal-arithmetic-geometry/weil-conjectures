@@ -171,7 +171,8 @@ private theorem exterior_quotient_tensor
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-/-- The conormal exterior section calculation before passing to associated sheaves. -/
+/-- On an affine open `U`, the `n`-th exterior power of the sections of the pulled-back ideal
+sheaf is the base change of `conormalExteriorModule`, compatibly with wedges. -/
 theorem exists_selfTor_conormal_exterior_tensor
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

@@ -34,29 +34,7 @@ set_option autoImplicit false
 
 set_option linter.unusedVariables false in
 /-- Affine neighbourhoods are cofinal and directed, their inclusion maps form an inverse
-system with affine transitions and qcqs objects, and `Spec O_{X,x}` is its limit.
-
-Proof, following the seven steps of the node:
-1. The affine-open basis gives an affine neighbourhood
-inside any open containing `x`. Apply it to the whole space and to intersections for
-nonemptiness and directedness. The inclusion maps are open immersions and preserve
-identities and compositions.
-2. Affine schemes are qcqs; morphisms between affine
-schemes are affine.
-3. The canonical map has image the generalizations of `x`, so it factors uniquely through every
-neighbourhood. Uniqueness gives
-compatibility of these factorizations with inclusions.
-4. The stalk is the colimit of sections over affine neighbourhoods: every stalk element
-is a germ on one of these opens, and equality of germs is equality on a smaller affine
-neighbourhood.
-Define a map from the stalk to any ring cocone on germs; equality on smaller opens makes
-it well-defined. Common smaller opens show it preserves ring operations, and germs
-exhaust the stalk, giving uniqueness.
-5. Taking spectra gives a scheme limit (`lem-weil-pbc-spec-colimit-limit`, Tag 01YW).
-6. Identify each affine open with the spectrum of its sections. These identifications commute with inclusions; cancel the open immersions, which are
-monomorphisms. Transport the limit property.
-7. The germ map is the localization map under the affine stalk identification. The canonical map's affine description identifies the resulting projections
-with the unique factorizations from step 3. This gives exactly the stated universal property. -/
+system with affine transitions and qcqs objects, and `Spec O_{X,x}` is its limit. -/
 theorem fromSpecStalk_limit_affine_neighbourhoods (X : Scheme.{u}) (x : X) :
     (∀ (U : X.Opens), x ∈ U →
       ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W ≤ U) ∧

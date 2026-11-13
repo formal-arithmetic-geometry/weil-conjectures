@@ -54,22 +54,9 @@ private theorem complex_qcoh (X : Scheme.{u})
     (((DerivedCategory.homologyFunctorFactors _ n).app G) ≪≫ e).symm inferInstance
 
 /-- The single-complex base-change criterion, with G an actual complex of
-quasi-coherent modules (no boundedness is needed) and its ordinary termwise tensor pullback.
-
-Proof (the three steps of the node):
-1. Apply lem-pc-rf-single-complex-inherited-tensor-condition (Tag 0DJA(1)) to
-   K = Q(G), K' = Q(g'^*G), and the canonical left-derived counit at G.
-   The stated stalk hypothesis therefore holds for E tensor-derived Q(G),
-   with comparison to Lg'^*E tensor-derived Q(g'^*G).
-2. Apply lem-pc-rf-single-complex-qcqs-induction (Tag 0DJ9) to these two
-   tensor objects. Quasi-coherence follows from termwise quasi-coherence of
-   G, pullback preserving quasi-coherence, and derived tensor preserving it.
-   The inherited stalk condition implies invertibility of the composite.
-3. The composite is exactly the canonical base-change map: first use the
-   recorded derived base-change map, then the canonical derived tensor
-   comparison τ (pinned by its uniquely characterising predicate
-   `IsCanonicalPullbackTensorComparison`), followed by tensoring the
-   left-derived counit at G with Lg'^*E. -/
+quasi-coherent modules (no boundedness is needed) and its ordinary termwise tensor pullback:
+under the stalk condition, the canonical base-change map for `E ⊗ Q(G)`, followed by the
+canonical tensor comparison and the left-derived counit at `G`, is an isomorphism. -/
 theorem singleComplexBaseChangeCriterion
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

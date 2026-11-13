@@ -46,7 +46,8 @@ def thickeningPushforwardTransition (M : CoherentThickeningSystem T i) (n : ℕ)
       ((ai n).homEquiv _ _ (M.comparison n).hom) ≫
     (thickeningPushforwardComparison j hi n).hom.app (M.term n)
 
-/-- Naturality follows by applying the adjunction hom equivalence to compatibility. -/
+/-- The transition maps `thickeningPushforwardTransition` are natural in the thickening
+system. -/
 theorem thickeningPushforwardTransition_naturality
     {M N : CoherentThickeningSystem T i} (u : M ⟶ N) (n : ℕ) :
     thickeningPushforwardTransition j hi ai M n ≫
@@ -128,8 +129,8 @@ theorem thickeningPushforward_compatibility [∀ n, IsClosedImmersion (j n)]
   rw [Category.assoc, ← (thickeningPushforwardComparison j hi n).hom.naturality] at hn
   simpa only [Functor.comp_map, ← Category.assoc, ← Functor.map_comp] using hn
 
-/-- Full faithfulness is proved by uniquely lifting each component and detecting its
-compatibility with the adjunction hom equivalence. No object lifting is used here. -/
+/-- Termwise pushforward of thickening systems along closed immersions is full and faithful.
+-/
 theorem thickeningSystemPushforward_fullyFaithful [∀ n, IsClosedImmersion (j n)] :
     (thickeningSystemPushforward j hi ai).Full ∧
       (thickeningSystemPushforward j hi ai).Faithful := by

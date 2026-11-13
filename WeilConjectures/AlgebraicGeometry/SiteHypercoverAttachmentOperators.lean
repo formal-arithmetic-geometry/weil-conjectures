@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBase
 
-/-! # Explicit operators for split simplicial attachment
-
-.
+/-! # Explicit operators for split simplicial attachment.
 
 ## References
 

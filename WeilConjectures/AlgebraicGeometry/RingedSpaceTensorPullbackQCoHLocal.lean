@@ -11,6 +11,17 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackPresentation
 import Mathlib.CategoryTheory.Sites.Spaces
 
+/-!
+# Local quasi-coherence of tensor pullback
+
+The tensor pullback of a quasi-coherent module along a morphism of ringed spaces is
+quasi-coherent locally around every point.
+
+## References
+
+* [Stacks Project, Tag 01BG](https://stacks.math.columbia.edu/tag/01BG)
+-/
+
 @[expose] public section
 
 universe u
@@ -18,10 +29,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.RingedSpace
 
-/-- Local quasi-coherence of tensor pullback.
-
-The proof chooses affine-style presentation neighbourhoods and transports them through
-inverse image and extension of scalars; this is the local step of the standard proof. -/
+/-- Local quasi-coherence of tensor pullback: every point of `X` has an open neighbourhood on
+which the tensor pullback of a quasi-coherent module along `g` is quasi-coherent. -/
 theorem tensorModulePullback_isQuasicoherent_local
     {X Y : RingedSpace.{u}} (g : X ⟶ Y)
     (G : SheafOfModules.{u} (moduleRings Y)) (hG : G.IsQuasicoherent) (x : X) :

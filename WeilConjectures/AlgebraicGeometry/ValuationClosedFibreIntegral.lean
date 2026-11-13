@@ -12,6 +12,17 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
+/-!
+# Integrality of the closed fibre over a valuation ring
+
+For a proper, flat, finitely presented scheme over a valuation ring, integrality of the base
+change to the residue field gives integrality of the closed fibre.
+
+## References
+
+* [Stacks Project, Tag 0EX8](https://stacks.math.columbia.edu/tag/0EX8)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -19,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The integral quotient fibre over the residue field identifies with the closed fibre.
--/
+/-- If the base change to the residue field is integral, then so is the closed fibre. -/
 theorem closed_fibre_is_integral
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))

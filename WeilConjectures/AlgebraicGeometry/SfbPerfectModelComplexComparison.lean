@@ -515,9 +515,7 @@ private def completedRealizationIso (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
 
 /-- The transported actual completed complex is the scalar restriction of the normalized
 completed coefficient complex. This is a comparison of cochain complexes, independent of
-any completeness property.
-
-. -/
+any completeness property. -/
 theorem sfbPerfectModel_complex_comparison (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :

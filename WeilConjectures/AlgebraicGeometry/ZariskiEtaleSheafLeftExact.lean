@@ -13,6 +13,19 @@ public import Mathlib.Topology.Sheaves.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
+/-!
+# Left exactness of pullback from Zariski to étale sheaves
+
+The sheaf pullback along a representably flat continuous functor from the opens of a scheme to
+its small étale site preserves finite limits.
+
+## References
+
+* [Stacks Project, Tag 00X5](https://stacks.math.columbia.edu/tag/00X5)
+* [Stacks Project, Tag 00X3](https://stacks.math.columbia.edu/tag/00X3)
+* [Stacks Project, Tag 00WJ](https://stacks.math.columbia.edu/tag/00WJ)
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
@@ -21,22 +34,8 @@ universe u v
 
 namespace AlgebraicGeometry
 
-/-- Left exactness of the canonical sheaf pullback, with arbitrary coefficient universe.
-
-Proof in words: representable flatness says that the category of arrows T -> i(U)
-is cofiltered for each etale object T. Its opposite is therefore filtered. The
-left Kan extension along i.op, evaluated at T, is the colimit of the original
-presheaf over this opposite category. Finite limits of presheaves are computed
-objectwise, and filtered colimits of sets commute with finite limits. This holds
-also for sets in the larger universe max (u + 1) v: the indexing category is
-small in that universe, and the elementwise filtered-colimit proof is unchanged.
-In particular the empty finite limit is preserved because a filtered category
-is nonempty and connected. Thus this presheaf pullback preserves finite limits.
-The inclusion of sheaves into presheaves preserves limits, and sheafification
-preserves finite limits (00WJ). Their composite with the presheaf pullback is
-left adjoint to precomposition on sheaves by continuity. Uniqueness of left
-adjoints identifies this composite with i.sheafPullback, so the latter preserves
-finite limits as well. -/
+/-- Left exactness of the canonical sheaf pullback from the Zariski site to the small étale
+site along a representably flat continuous functor `i`, with arbitrary coefficient universe. -/
 theorem zariski_to_etale_sheaf_left_exact
     (X : Scheme.{u})
     (i : X.Opens ⥤ X.Etale)

@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 
-/-! # Geometric isomorphism cancellation normalizes the derived unit
-
-.
+/-! # Geometric isomorphism cancellation normalizes the derived unit.
 
 ## References
 
@@ -211,9 +209,7 @@ private theorem exact_unit_comp
     simpa only [c, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       ordinary_unit_comp A i N
 
-/-- The concrete geometric cancellation `pushPull` is inverse to the canonical derived unit.
-
-. -/
+/-- The concrete geometric cancellation `pushPull` is inverse to the canonical derived unit. -/
 theorem unit_comp_pushPull
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (i : X ≅ ProjectiveLine S)

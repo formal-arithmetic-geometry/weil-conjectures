@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.RingHomExtensionDefs
 /-! # Interfaces for augmented ring complexes and their ordered Čech models
 
 The predicates below specify data and equations; they select no witnesses.
-.
 
 ## References
 
@@ -65,7 +64,8 @@ abbrev RingComplexMaps (K : RingComplexFamily.{u}) :=
       ((K A I).X n).val.obj (op ⟨PUnit.unit⟩) →ₛₗ[φ]
         ((K B J).X n).val.obj (op ⟨PUnit.unit⟩)
 
-/-- The differential, augmentation, identity, and composition equations of Tag 099D. -/
+/-- The differential, augmentation, identity, and composition equations for the maps `m`
+between augmented ring complexes. -/
 def RingComplexFunctorial (K : RingComplexFamily.{u}) (ε : RingComplexAugmentations K)
     (m : RingComplexMaps K) : Prop :=
   (∀ (A B : CommRingCat.{u}) (φ : A →+* B)
@@ -92,9 +92,7 @@ def RingComplexFunctorial (K : RingComplexFamily.{u}) (ε : RingComplexAugmentat
 
 /-- The ordered localization complex for every finite generating list, with its
 augmentation-compatible comparison in the derived category. This predicate includes
-all coordinates and differentials, including the empty generating list.
-
-. -/
+all coordinates and differentials, including the empty generating list. -/
 def RingComplexHasCechModel (A : CommRingCat.{u})
     [HasDerivedCategory.{w} (RingSiteModules A)] (I : Ideal A)
     (K : CochainComplex (RingSiteModules A) ℤ) (ε : K ⟶ ringComplexSingle A) : Prop :=

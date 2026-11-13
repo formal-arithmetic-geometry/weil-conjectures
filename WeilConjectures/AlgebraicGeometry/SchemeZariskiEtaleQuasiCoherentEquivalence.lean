@@ -147,9 +147,7 @@ def smallEtaleModulePushforward {U T : Scheme.{u}} (a : U ⟶ T) :
   SheafOfModules.pushforward (smallEtaleModuleRingMap a)
 
 /-- The canonical ringed-site tensor pullback, left adjoint to restriction.
-It represents O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M;
-Mathlib constructs this functor by module-presheaf pullback and sheafification.
-Only the proof that the right adjoint exists is an argument. -/
+It represents O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M. -/
 def zariskiEtaleModuleExtension (X : Scheme.{u})
     (hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology)
@@ -183,8 +181,8 @@ def smallEtaleModuleAdjunction {U T : Scheme.{u}} (a : U ⟶ T)
   letI : (SheafOfModules.pushforward (smallEtaleModuleRingMap a)).IsRightAdjoint := hp
   SheafOfModules.pullbackPushforwardAdjunction (smallEtaleModuleRingMap a)
 
-/-- Proof data permitting the canonical module pullback on these presented sites.
-There is no chosen ring, module, map or functor in this structure. -/
+/-- The hypotheses needed for the canonical module pullback on these presented sites:
+continuity of the inclusion of open subschemes and a left adjoint to restriction. -/
 structure ZariskiEtaleModuleContext (X : Scheme.{u}) where
   /-- The inclusion of open subschemes is continuous. -/
   continuous : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
@@ -192,7 +190,8 @@ structure ZariskiEtaleModuleContext (X : Scheme.{u}) where
   /-- Restriction of modules admits its canonical tensor left adjoint. -/
   rightAdjoint : (@zariskiEtaleModuleRestriction X continuous).IsRightAdjoint
 
-/-- Canonical restriction, with the continuity proof supplied by the context. -/
+/-- Restriction of modules along the inclusion of open subschemes, using the continuity
+hypothesis of the context. -/
 def ZariskiEtaleModuleContext.restriction {X : Scheme.{u}} (c : ZariskiEtaleModuleContext X) :=
   @zariskiEtaleModuleRestriction X c.continuous
 

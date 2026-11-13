@@ -27,9 +27,7 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 import WeilConjectures.AlgebraicGeometry.CompletedKoszulDualTowerPullback
 import WeilConjectures.AlgebraicGeometry.RingedComplexTensorPullback
 
-/-! # Finite augmented Koszul towers under inverse image
-
-.
+/-! # Finite augmented Koszul towers under inverse image.
 
 ## References
 
@@ -49,8 +47,6 @@ namespace CategoryTheory.ConstantCompletion
 
 /-- Inverse image identifies the actual finite Koszul tensor towers and their
 coaugmentations, before taking any inverse limit or passing to derived categories.
-
-.
 -/
 theorem strictCompletedKoszulTowerPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]

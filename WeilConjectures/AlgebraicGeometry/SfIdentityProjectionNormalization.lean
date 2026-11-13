@@ -10,9 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.SfGraphFirstProjectionSquare
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
-/-! # Canonical normalization of identity projection
-
-.
+/-! # Canonical normalization of identity projection.
 
 ## References
 

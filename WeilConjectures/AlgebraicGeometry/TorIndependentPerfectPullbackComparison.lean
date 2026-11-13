@@ -117,26 +117,7 @@ private theorem kFlat_pullback_stalk_cohomology
 for a perfect object is an isomorphism at every pullback stalk in every degree.
 The comparison is expressed in K-flat coordinates by `IsComparisonIso`, using
 exactly the canonical map of `BaseDerivedTensorCohomologyModel`; invertibility
-is invariant under the identification with the actual derived pullback stalk.
-
-Proof (the node's three steps):
-1. Fix z and put R = O_{S,s}, A = O_{X,x}, B = O_{T,t}, C = O_{X',z}.
-   On an affine neighbourhood of x, perfectness gives a bounded finite-projective
-   model Q, by lem-pc-perfect-affine-bounded-projective.
-2. The hypothesis gives Tor_i^R(A,B) = 0 for i > 0. Apply
-   lem-pc-tor-independent-projective-complex-tensor to Q and the localization
-   A tensor-over-R B -> C. Its map is the model's localizedComparison.
-3. Restrict derived pullback to this neighbourhood by
-   lem-pc-affine-derived-pullback-tensor-tilde. Its strictly perfect model is
-   termwise flat, so lem-pc-flat-complex-derived-pullback computes its derived
-   pullback termwise. Apply lem-weil-pbc-module-stalk-pullback degreewise to
-   identify the target with Q tensor-over-A C. The ring map to C is a
-   localization by the affine description of the fibre product; exactness of
-   localization commutes it with
-   cohomology. These natural identifications identify the canonical map with
-   Step 2. For any other K-flat representative, a common resolution and
-   functoriality of derived tensor and pullback transport the same comparison.
-   Postcomposition with any isomorphism of target coordinates preserves IsIso. -/
+is invariant under the identification with the actual derived pullback stalk. -/
 theorem torIndependent_perfect_pullback_comparison
     {X S T : Scheme.{u₁}} (f : X ⟶ S) (g : T ⟶ S)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

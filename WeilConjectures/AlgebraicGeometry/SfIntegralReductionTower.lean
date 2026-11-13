@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 /-!
 # Canonical reduction towers without a finite-field datum
 
- 24; Stacks Tags 03EK and 06YY
-.
+ 24; Stacks Tags 03EK and 06YY.
 The index n means the positive exponent n+1. All scalar extensions are the published
 universal derived scalar extensions, with their specified K-flat comparisons.
 

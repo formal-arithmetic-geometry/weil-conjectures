@@ -407,9 +407,7 @@ private theorem ordinary_generator (a : Λ ⟶ Λ') [IsMonHom a]
     (fun x ↦ ModuleRingedComparison.sectionPureTensor Λ T M
       (E.functor.obj (B₀ a T)) U x z) hxy))
 
-/-- The internal scalar and tensor normalizations transport to section modules.
-
-. -/
+/-- The internal scalar and tensor normalizations transport to section modules. -/
 theorem section_tensor_normalized_of_normalized (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
     (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)

@@ -33,11 +33,10 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- The normalized valuation comes from the maximal-ideal adic valuation, so it is
-independent of a chosen uniformizer. The unit-times-integer-power decomposition is
-Mathlib's fraction-field form of Stacks Algebra, Tag 00PD. Applying the valuation
-identifies the exponent, and cancellation identifies the unit. The valuation subring
-characterization gives exactly the nonnegative values. -/
+/-- A discrete valuation ring has a surjective normalized valuation `v` on the units of its
+fraction field: for every uniformizer `t`, each unit `g` is uniquely `u * t ^ n` with `u` a unit
+of `R`, and then `v g = n`; moreover `v g ≥ 0` exactly when `g` comes from a nonzero element of
+`R`. -/
 private theorem normalized_dvr_valuation
     (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
     [Field K] [Algebra R K] [IsFractionRing R K] :

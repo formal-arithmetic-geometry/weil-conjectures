@@ -12,7 +12,6 @@ import all WeilConjectures.Algebra.Homology.RingHomExtensionTransport
 
 All data are constructed by the extension/restriction adjunction, rather than chosen
 from an existence assertion.
-.
 
 ## References
 
@@ -73,9 +72,7 @@ def ringComplexExtensionPresheaf {A B : CommRingCat.{u}} (φ : A →+* B) :
     intro U
     simp
 
-/-- Termwise scalar extension on the one-object ring site, with its actual morphisms.
-
-. -/
+/-- Termwise scalar extension on the one-object ring site, with its actual morphisms. -/
 def ringComplexExtension {A B : CommRingCat.{u}} (φ : A →+* B) :
     RingSiteModules A ⥤ RingSiteModules B :=
   ringComplexExtensionPresheaf φ ⋙ PresheafOfModules.sheafification

@@ -13,6 +13,17 @@ import Mathlib.CategoryTheory.Sites.LocalSite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantStalk
 
+/-!
+# Constant étale sheaves on the spectrum of an algebraically closed field
+
+The counit of the constant-sheaf adjunction on the small étale site of `Spec Ω`, for `Ω`
+algebraically closed, is an isomorphism.
+
+## References
+
+* [Stacks Project, Tag 03P5](https://stacks.math.columbia.edu/tag/03P5)
+-/
+
 @[expose] public section
 
 universe u

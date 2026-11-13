@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceCompar
 
 /-! # Naturality of the source derived-sections comparison
 
- We check precomposition on cochains,
+Compatibility of the source derived-sections comparison with precomposition on cochains,
 cocycles, their quotient, and the corresponding derived morphisms.
 
 ## References
@@ -28,11 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Naturality of the localization and derived Hom part of the source comparison.
-
-The proof is the cocycle computation: precomposition on the Hom complex descends
-through cocycles and boundaries, and the quotient and the specified derived
-representative preserve this map. -/
+/-- Naturality of the localization and derived Hom part of the source comparison. -/
 theorem sourceDerivedSections_naturality_core
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]
@@ -138,7 +134,8 @@ private theorem sourceClassDerivedHomIso_precomp_mk
   erw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
   erw [← NatTrans.naturality_assoc]
 
-/-- The cocycle calculation descends to the square on all cohomology classes. -/
+/-- The comparison `sourceClassDerivedHomIso` is natural in the source object `A`: it intertwines
+precomposition on cohomology classes with precomposition in the derived category. -/
 @[reassoc]
 private theorem sourceClassDerivedHomIso_precomp
     {C : Type (v + 2)} [Category.{v + 1} C] [Abelian C] [HasDerivedCategory.{v + 1} C]
@@ -178,11 +175,7 @@ private theorem sourceFreeSectionsComplexIso_naturality
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-/-- Naturality of evaluation of the Hom complex at the free sheaf generator.
-
-This is the degreewise Yoneda calculation: the free-sheaf evaluation sends
-precomposition by the map induced by `a` to restriction of sections, and the
-left-homology comparison is functorial. -/
+/-- Naturality of evaluation of the Hom complex at the free sheaf generator. -/
 theorem sourceDerivedSections_naturality_evaluation
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]
@@ -221,7 +214,7 @@ theorem sourceDerivedSections_naturality_evaluation
   rw [← Functor.map_comp, sourceFreeSectionsComplexIso_naturality, Functor.map_comp]
 
 /-- Composition of the localization and evaluation squares gives the displayed
-source comparison square. This is the categorical pasting step in Tags 03Q8--03Q9. -/
+source comparison square. -/
 theorem sourceDerivedSections_naturality_compose
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]

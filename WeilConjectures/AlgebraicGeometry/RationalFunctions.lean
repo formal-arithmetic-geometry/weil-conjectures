@@ -32,13 +32,13 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- The dense open subsets of a scheme, ordered by inclusion (Stacks, Tag 01RS;). -/
+/-- The dense open subsets of a scheme, ordered by inclusion. -/
 def DenseOpens (X : Scheme) := {U : X.Opens // Dense (U : Set X)}
 
 instance (X : Scheme) : PartialOrder (DenseOpens X) := inferInstanceAs
   (PartialOrder {U : X.Opens // Dense (U : Set X)})
 
-/-- The intersection of two dense opens is dense (Stacks, Tag 01RS;). -/
+/-- The intersection of two dense opens is dense. -/
 def DenseOpens.inter {X : Scheme} (U V : DenseOpens X) : DenseOpens X :=
   ⟨U.val ⊓ V.val, by
     change Dense ((U.val : Set X) ∩ (V.val : Set X))
@@ -52,14 +52,14 @@ instance (X : Scheme) : IsCofiltered (DenseOpens X) := by
       (inf_le_right : U.val ⊓ V.val ≤ V.val)⟩⟩
   infer_instance
 
-/-- The inclusion of dense opens into all opens (Stacks, Tag 01RS;). -/
+/-- The inclusion of dense opens into all opens. -/
 def denseOpensInclusion (X : Scheme) : DenseOpens X ⥤ X.Opens where
   obj U := U.val
   map f := homOfLE (leOfHom f)
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The section rings over dense opens with restriction maps (Stacks, Tag 01RV;). -/
+/-- The section rings over dense opens with restriction maps. -/
 def denseOpenSections (X : Scheme) : (DenseOpens X)ᵒᵖ ⥤ CommRingCat :=
   (denseOpensInclusion X).op ⋙ X.presheaf
 

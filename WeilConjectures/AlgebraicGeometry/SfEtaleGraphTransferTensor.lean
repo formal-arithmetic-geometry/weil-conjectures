@@ -436,9 +436,7 @@ noncomputable def sfEtaleGraphTensorMap
               (leftDerivedUpperStarIsoMapDerivedCategory
                 (ModuleCat.{u + 1} A) e).hom.app K)))
 
-/-- The graph isomorphism is monoidal after the section and open projection comparisons.
-This is the coherence calculation for pullback composition, the open projection mate, and
-exact coefficient change. -/
+/-- The graph isomorphism is monoidal after the section and open projection comparisons. -/
 private theorem sfEtaleGraphTransferTensor_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e]
@@ -530,21 +528,7 @@ private theorem sfEtaleGraphTransferTensor_normalization
     derivedTensor_map_app, derivedTensor_obj_map, derivedTensor,
     curriedTensor_obj_obj, curriedTensor_map_app, curriedTensor_obj_map] using h
 
-/-- Tensor compatibility of graph transfer, before applying the proper direct image.
-
-Proof in words. The self graph is clopen by the existing graph geometry. For a
-clopen immersion, restriction is both left and right adjoint to extension by zero.
-The counit of the first adjunction is the inverse unit of the second. Transposing
-the tensor projection comparison therefore identifies the two adjoint projection
-maps as inverses. Their unit and counit equations and naturality show that tensoring
-a transfer is the transfer of the restricted tensor map, with pullback tensor
-comparisons inserted. Normalize the graph isomorphism using monoidality of the
-section and composition comparisons, the defining open-projection unit equation,
-and associativity and identity laws for the coefficient square. Apply transfer to
-this normalization and use its naturality at both ends. All calculations use the
-specified comparisons. No clopen derived-product construction, boundedness, or
-quasi-compactness hypothesis is needed; empty schemes and the zero ring satisfy
-the same categorical equations. -/
+/-- Tensor compatibility of graph transfer, before applying the proper direct image. -/
 theorem sfEtaleGraphTransferTensor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e]

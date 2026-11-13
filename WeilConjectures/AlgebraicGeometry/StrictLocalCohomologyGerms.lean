@@ -38,7 +38,7 @@ variable {C : Type (v + 1)} [Category.{v} C]
 
 /-- The free sheaf `ℤ[W]` of abelian groups on an étale `X`-scheme `W`: the sheafification of the
 presheaf `V ↦ ℤ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
-`Ext^q(ℤ[W], F)` is the étale cohomology `H^q(W, F|_W)`.. -/
+`Ext^q(ℤ[W], F)` is the étale cohomology `H^q(W, F|_W)`. -/
 noncomputable def strictLocalFreeSheaf (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v + 1}] :
     C ⥤ Sheaf J (AddCommGrpCat.{v + 1}) :=
@@ -47,7 +47,7 @@ noncomputable def strictLocalFreeSheaf (J : GrothendieckTopology C)
 
 /-- Evaluation at the generator: for a sheaf `G` of abelian groups on `X_ét`, the natural map
 `Hom(ℤ[W], G) ⟶ G(W)` sending `f` to the image under `f` of the section of `ℤ[W]` given by
-the identity of `W`.. -/
+the identity of `W`. -/
 noncomputable def strictLocalFreeSheafSections
     (G : Sheaf J (AddCommGrpCat.{v + 1})) :
     (strictLocalFreeSheaf J).op ⋙ preadditiveYoneda.obj G ⟶
@@ -85,7 +85,7 @@ noncomputable def strictLocalFreeSheafSections
 variable [HasDerivedCategory.{v + 1} (Sheaf J AddCommGrpCat.{v + 1})]
 
 /-- For `L ∈ D⁺(X_ét)`, the map `Hom(ℤ[W][0], L) ⟶ Hom(ℤ[W], H⁰(L))` induced by the degree-`0`
-homology, natural in `W`.. -/
+homology, natural in `W`. -/
 noncomputable def strictLocalDerivedHomToHomology
     (L : DerivedCategory.Plus (Sheaf J (AddCommGrpCat.{v + 1}))) :
     (strictLocalFreeSheaf J ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙

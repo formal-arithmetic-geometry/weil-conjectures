@@ -183,7 +183,7 @@ lemma appTop_appLE_apply' {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) (U : 
 
 omit [F.IsQuasicoherent] in
 /-- A linear relation `σ₂ = ∑ t^*(βₗ) σ₁ₗ` between sections of `N` over `t⁻¹ W` pulls back along
-`F: T ⟶ N` to a linear relation over `s⁻¹ g⁻¹ W`, when `F ≫ t = s ≫ g`. -/
+`F : T ⟶ N` to a linear relation over `s⁻¹ g⁻¹ W`, when `F ≫ t = s ≫ g`. -/
 lemma appLE_relation' {c : ℕ} {T N P Y : Scheme.{u}} (F : T ⟶ N) (s : T ⟶ P) (g : P ⟶ Y)
     (t : N ⟶ Y) (hF : F ≫ t = s ≫ g) (W : Y.Opens) {U₁ U₂ : N.Opens} (hU₁ : t ⁻¹ᵁ W ≤ U₁)
     (hU₂ : t ⁻¹ᵁ W ≤ U₂) (σ₁ : Fin c → Γ(N, U₁)) (σ₂ : Γ(N, U₂)) (β : Fin c → Γ(Y, W))

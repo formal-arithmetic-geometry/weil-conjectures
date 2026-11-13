@@ -8,6 +8,18 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ObjectCohomologyResolutionCocycleEquivalence
 
+/-!
+# Naturality of cohomology classes of cocycles
+
+The cohomology class of a cocycle in a complex of abelian groups is natural with respect to
+chain maps.
+
+## References
+
+* [Stacks Project, Tag 01FT](https://stacks.math.columbia.edu/tag/01FT)
+* [Stacks Project, Tag 06XR](https://stacks.math.columbia.edu/tag/06XR)
+-/
+
 @[expose] public section
 
 universe u

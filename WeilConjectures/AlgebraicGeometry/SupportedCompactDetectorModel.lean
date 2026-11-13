@@ -25,6 +25,10 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 * [Stacks Project, Tag 0E4G](https://stacks.math.columbia.edu/tag/0E4G)
 * [Stacks Project, Tag 09SN](https://stacks.math.columbia.edu/tag/09SN)
+* [Stacks Project, Tag 09SM](https://stacks.math.columbia.edu/tag/09SM)
+* [Stacks Project, Tag 09SJ](https://stacks.math.columbia.edu/tag/09SJ)
+* [Stacks Project, Tag 08DT](https://stacks.math.columbia.edu/tag/08DT)
+* [Stacks Project, Tag 009E](https://stacks.math.columbia.edu/tag/009E)
 -/
 
 @[expose] public section
@@ -33,8 +37,7 @@ universe u w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
-/-- Full faithfulness and preservation of coproducts identify the compactness comparison
-with the comparison for the image object (Stacks Project, Tag 09SM). -/
+/-- A fully faithful additive functor preserving coproducts reflects compact objects. -/
 private theorem compact_of_fully_faithful
     {C : Type*} {D : Type*} [Category* C] [Category* D]
     [Preadditive C] [Preadditive D] [HasCoproducts.{u} C] [HasCoproducts.{u} D]
@@ -80,8 +83,8 @@ private theorem compact_of_fully_faithful
     obtain ⟨x, hx⟩ := hb.2 (b f)
     exact ⟨x, b.injective hx⟩⟩
 
-/-- Shift adjunction and full faithfulness turn vanishing detection into a singleton
-weak generating family (Stacks Project, Tags 09SJ and 09SN). -/
+/-- If `F` is fully faithful and `F.obj e` detects vanishing of objects `F.obj K` through maps
+from its shifts, then `e` alone is a triangulated generating family. -/
 private theorem singleton_generator_of_detection
     {C : Type*} {D : Type*} [Category* C] [Category* D]
     [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]
@@ -138,8 +141,8 @@ private theorem singleton_generator_of_detection
 
 namespace AlgebraicGeometry
 
-/-- Cohomology and stalk direct-sum comparisons preserve vanishing on the open set,
-including the empty family (Stacks Project, Tags 08DT and 009E). -/
+/-- Quasi-coherent complexes whose cohomology stalks vanish on `V` are closed under
+coproducts indexed by `I`, including the empty family. -/
 private theorem supported_closed_coproducts (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (V : Y.Opens) (I : Type u) :

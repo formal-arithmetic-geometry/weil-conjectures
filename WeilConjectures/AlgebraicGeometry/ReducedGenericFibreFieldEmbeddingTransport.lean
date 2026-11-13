@@ -7,6 +7,18 @@ Authors: Bin Wu
 module
 public import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
+
+/-!
+# Transport of separable generation along residue-field equivalences
+
+Separable generation of a field extension is transported across a ring equivalence of base
+fields compatible with the structure maps.
+
+## References
+
+* [Stacks Project, Tag 030O](https://stacks.math.columbia.edu/tag/030O)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u

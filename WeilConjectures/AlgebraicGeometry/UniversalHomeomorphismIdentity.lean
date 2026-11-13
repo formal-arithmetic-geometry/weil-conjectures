@@ -26,17 +26,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tags 04DZ and 03SI, identity coherence.
-Proof: For the identity scheme morphism, lowerStarId identifies the set-valued pushforward with the
-identity functor. Transport the sheaf pullback adjunction along this isomorphism and compare it
-with the identity adjunction by leftAdjointUniq. This gives the set-valued inverse-image identity
-isomorphism. Equivalently, the repaired comparison identifies it with the inverse sheaf
-equivalence, whose adjunction is compared to the same identity adjunction.
-Use lowerStarId with Type coefficients for the second isomorphism, upperStarId with additive
-coefficients for the third, and lowerStarId with additive coefficients for the fourth. The
-identity clause of cohomologyPullbackFunctorial gives exactly the displayed equality for every F,
-q and x.
-(blueprint: thm-weil-pbc-universalHomeomorphism_identity) -/
+/-- Identity coherence: for the identity morphism, the set-valued inverse image and the
+direct and inverse images of abelian sheaves are isomorphic to the identity functor, and the
+induced map on étale cohomology is the identity. -/
 theorem universalHomeomorphism_identity {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     Nonempty (Scheme.etaleSetPullback (𝟙 X) ≅ 𝟭 _) ∧

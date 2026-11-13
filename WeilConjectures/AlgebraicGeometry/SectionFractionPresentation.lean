@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The relations identifying a fraction with the same fraction after multiplying numerator
 and denominator by a power of the global section `s` (as the morphism
-`homOfGlobalSection L s: 𝒪_X ⟶ L`). -/
+`homOfGlobalSection L s : 𝒪_X ⟶ L`). -/
 noncomputable def sectionFractionRelations {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) :
     Submodule Γ(X, ⊤) (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, ⊤)) :=

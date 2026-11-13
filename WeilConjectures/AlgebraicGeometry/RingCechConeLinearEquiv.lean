@@ -11,9 +11,7 @@ public import Mathlib.Order.Fin.SuccAboveOrderIso
 public import Mathlib.Order.Fin.Tuple
 public import Mathlib.RingTheory.Localization.BaseChange
 
-/-! # The linear equivalence underlying the localization cone
-
-.
+/-! # The linear equivalence underlying the localization cone.
 -/
 
 @[expose] public noncomputable section
@@ -22,32 +20,24 @@ universe u
 open scoped BigOperators TensorProduct
 namespace CategoryTheory
 
-/-- The augmented ordered localization terms.
-
-. -/
+/-- The augmented ordered localization terms. -/
 abbrev ringCechTailTerm (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A) :
     ℕ → ModuleCat.{u} A
   | 0 => ModuleCat.of A A
   | q + 1 => ModuleCat.of A
       ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, g (t i)))
 
-/-- Shift an ordered subset past zero.
-
-. -/
+/-- Shift an ordered subset past zero. -/
 def ringCechShift {q r : ℕ} (t : Fin q ↪o Fin r) : Fin q ↪o Fin (r + 1) :=
   t.trans (Fin.succOrderEmb r)
 
-/-- Adjoin zero to an ordered subset.
-
-. -/
+/-- Adjoin zero to an ordered subset. -/
 def ringCechCons {q r : ℕ} (t : Fin q ↪o Fin r) :
     Fin (q + 1) ↪o Fin (r + 1) :=
   OrderEmbedding.ofStrictMono (Fin.cons 0 (fun i ↦ (t i).succ))
     (Fin.strictMono_cons.mpr ⟨fun _ ↦ Fin.succ_pos _, Fin.strictMono_succ.comp t.strictMono⟩)
 
-/-- Remove zero from the domain and subtract one from the remaining values.
-
-. -/
+/-- Remove zero from the domain and subtract one from the remaining values. -/
 def ringCechTailPred {q r : ℕ} (t : Fin (q + 1) ↪o Fin (r + 1)) :
     Fin q ↪o Fin r :=
   OrderEmbedding.ofStrictMono
@@ -55,9 +45,7 @@ def ringCechTailPred {q r : ℕ} (t : Fin (q + 1) ↪o Fin (r + 1)) :
       (t.strictMono (Fin.succ_pos i)))))
     (Fin.strictMono_pred_comp _ (t.strictMono.comp Fin.strictMono_succ))
 
-/-- Subtract one from every value of a subset avoiding zero.
-
-. -/
+/-- Subtract one from every value of a subset avoiding zero. -/
 def ringCechAllPred {q r : ℕ} (t : Fin (q + 1) ↪o Fin (r + 1)) (h : t 0 ≠ 0) :
     Fin (q + 1) ↪o Fin r :=
   OrderEmbedding.ofStrictMono
@@ -65,25 +53,19 @@ def ringCechAllPred {q r : ℕ} (t : Fin (q + 1) ↪o Fin (r + 1)) (h : t 0 ≠ 
       (t.monotone (Fin.zero_le i)))))
     (Fin.strictMono_pred_comp _ t.strictMono)
 
-/-- Recover a subset containing zero from its tail.
-
-. -/
+/-- Recover a subset containing zero from its tail. -/
 theorem cons_ringCechTailPred {q r : ℕ} (t : Fin (q + 1) ↪o Fin (r + 1))
     (h : t 0 = 0) : ringCechCons (ringCechTailPred t) = t := by
   ext i
   cases i using Fin.cases <;> simp [ringCechCons, ringCechTailPred, h]
 
-/-- Recover a subset avoiding zero from its predecessor.
-
-. -/
+/-- Recover a subset avoiding zero from its predecessor. -/
 theorem shift_ringCechAllPred {q r : ℕ} (t : Fin (q + 1) ↪o Fin (r + 1))
     (h : t 0 ≠ 0) : ringCechShift (ringCechAllPred t h) = t := by
   ext i
   simp [ringCechShift, ringCechAllPred]
 
-/-- Ordered nonempty subsets split according to whether they contain zero.
-
-. -/
+/-- Ordered nonempty subsets split according to whether they contain zero. -/
 def ringCechIndexEquiv (q r : ℕ) :
     ((Fin (q + 1) ↪o Fin r) ⊕ (Fin q ↪o Fin r)) ≃
       (Fin (q + 1) ↪o Fin (r + 1)) :=
@@ -114,26 +96,20 @@ def ringCechIndexEquiv (q r : ℕ) :
       · exact ⟨Sum.inr (ringCechTailPred t), cons_ringCechTailPred t h⟩
       · exact ⟨Sum.inl (ringCechAllPred t h), shift_ringCechAllPred t h⟩)
 
-/-- The canonical map between away localizations when one denominator divides another.
-
-. -/
+/-- The canonical map between away localizations when one denominator divides another. -/
 def ringCechLocMap (A : CommRingCat.{u}) (a b : A) (h : a ∣ b) :
     Localization.Away a →ₐ[A] Localization.Away b :=
   IsLocalization.Away.liftAlgHom a (f := Algebra.ofId A _)
     (IsLocalization.Away.isUnit_of_dvd (S := Localization.Away b) b h)
 
-/-- Uniqueness of maps out of an away localization.
-
-. -/
+/-- Uniqueness of maps out of an away localization. -/
 theorem ringCechLocMap_unique (A : CommRingCat.{u}) (a : A)
     {B : Type u} [CommRing B] [Algebra A B]
     (h k : Localization.Away a →ₐ[A] B) : h = k := by
   apply IsLocalization.algHom_ext (Submonoid.powers a)
   exact Subsingleton.elim _ _
 
-/-- The localization map attached to deleting a vertex.
-
-. -/
+/-- The localization map attached to deleting a vertex. -/
 def ringCechFace (A : CommRingCat.{u}) {r : ℕ} (f : Fin r → A)
     (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)) :
     Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]
@@ -142,9 +118,7 @@ def ringCechFace (A : CommRingCat.{u}) {r : ℕ} (f : Fin r → A)
     rw [Fin.prod_univ_succAbove _ j]
     exact dvd_mul_left _ _)
 
-/-- Localizing two elements successively gives localization at their product.
-
-. -/
+/-- Localizing two elements successively gives localization at their product. -/
 def ringCechTensorAway (A : CommRingCat.{u}) (a b : A) :
     (Localization.Away a ⊗[A] Localization.Away b) ≃ₐ[A]
       Localization.Away (a * b) := by
@@ -154,9 +128,7 @@ def ringCechTensorAway (A : CommRingCat.{u}) (a b : A) :
     IsLocalization.Away.mul' S T a b
   exact IsLocalization.algEquiv (Submonoid.powers (a * b)) T _
 
-/-- The coefficient of a subset containing zero.
-
-. -/
+/-- The coefficient of a subset containing zero. -/
 def ringCechHeadCoeff (A : CommRingCat.{u}) {r q : ℕ} (f : Fin (r + 1) → A)
     (t : Fin q ↪o Fin r) :
     Localization.Away (f 0 * ∏ i, f (t i).succ) ≃ₐ[A]
@@ -165,9 +137,7 @@ def ringCechHeadCoeff (A : CommRingCat.{u}) {r q : ℕ} (f : Fin (r + 1) → A)
     simp [Fin.prod_univ_succ, ringCechCons]
   rw [h]
 
-/-- Tensor coefficients at the subsets containing zero, including the augmented term.
-
-. -/
+/-- Tensor coefficients at the subsets containing zero, including the augmented term. -/
 def ringCechHeadEquiv (A : CommRingCat.{u}) (r q : ℕ) (f : Fin (r + 1) → A) :
     (Localization.Away (f 0) ⊗[A] ringCechTailTerm A r (fun i ↦ f i.succ) q) ≃ₗ[A]
       ((t : Fin q ↪o Fin r) → Localization.Away (∏ i, f (ringCechCons t i))) := by
@@ -191,9 +161,7 @@ def ringCechHeadEquiv (A : CommRingCat.{u}) (r q : ℕ) (f : Fin (r + 1) → A) 
         ((ringCechTensorAway A (f 0) (∏ i, f (t i).succ)).trans
           (ringCechHeadCoeff A f t)).toLinearEquiv))
 
-/-- Assemble two dependent products over a disjoint union.
-
-. -/
+/-- Assemble two dependent products over a disjoint union. -/
 def ringCechSumPiEquiv (A : Type u) [CommRing A] {I J : Type*}
     (V : I ⊕ J → Type u) [∀ i, AddCommGroup (V i)] [∀ i, Module A (V i)] :
     ((∀ i, V (Sum.inl i)) × (∀ j, V (Sum.inr j))) ≃ₗ[A] (∀ k, V k) where
@@ -204,9 +172,7 @@ def ringCechSumPiEquiv (A : Type u) [CommRing A] {I J : Type*}
   map_add' x y := by funext i; cases i <;> rfl
   map_smul' a x := by funext i; cases i <;> rfl
 
-/-- The explicit degreewise linear equivalence from the two blocks to full coordinates.
-
-. -/
+/-- The explicit degreewise linear equivalence from the two blocks to full coordinates. -/
 def ringCechConeEquiv (A : CommRingCat.{u}) (r q : ℕ) (f : Fin (r + 1) → A) :
     (ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1) ×
       (Localization.Away (f 0) ⊗[A] ringCechTailTerm A r (fun i ↦ f i.succ) q)) ≃ₗ[A]
@@ -220,18 +186,14 @@ def ringCechConeEquiv (A : CommRingCat.{u}) (r q : ℕ) (f : Fin (r + 1) → A) 
   let p : (∀ k, V (e k)) ≃ₗ[A] (∀ t, V t) := LinearEquiv.piCongrLeft A V e
   exact ((LinearEquiv.refl A _).prodCongr (ringCechHeadEquiv A r q f)).trans (s.trans p)
 
-/-- Evaluation after reindexing a dependent product.
-
-. -/
+/-- Evaluation after reindexing a dependent product. -/
 theorem ringCechPiCongr_apply {R : Type*} [CommRing R] {I J : Type*}
     (V : J → Type*) [∀ j, AddCommGroup (V j)] [∀ j, Module R (V j)]
     (e : I ≃ J) (x : ∀ i, V (e i)) (i : I) :
     LinearEquiv.piCongrLeft R V e x (e i) = x i := by
   exact congrFun ((LinearEquiv.piCongrLeft' R V e.symm).apply_symm_apply x) i
 
-/-- The first block evaluates at subsets avoiding zero.
-
-. -/
+/-- The first block evaluates at subsets avoiding zero. -/
 theorem ringCechConeEquiv_shift (A : CommRingCat.{u}) (r q : ℕ)
     (f : Fin (r + 1) → A)
     (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))
@@ -244,9 +206,7 @@ theorem ringCechConeEquiv_shift (A : CommRingCat.{u}) (r q : ℕ)
   rw [ringCechPiCongr_apply]
   rfl
 
-/-- The second block evaluates at subsets containing zero.
-
-. -/
+/-- The second block evaluates at subsets containing zero. -/
 theorem ringCechConeEquiv_cons (A : CommRingCat.{u}) (r q : ℕ)
     (f : Fin (r + 1) → A)
     (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))
@@ -259,18 +219,14 @@ theorem ringCechConeEquiv_cons (A : CommRingCat.{u}) (r q : ℕ)
   rw [ringCechPiCongr_apply]
   rfl
 
-/-- The map of the first localization into a coordinate containing zero.
-
-. -/
+/-- The map of the first localization into a coordinate containing zero. -/
 def ringCechHeadLeft (A : CommRingCat.{u}) {r q : ℕ} (f : Fin (r + 1) → A)
     (t : Fin q ↪o Fin r) :
     Localization.Away (f 0) →ₐ[A] Localization.Away (∏ i, f (ringCechCons t i)) :=
   (ringCechHeadCoeff A f t).toAlgHom.comp
     (ringCechLocMap A _ _ (dvd_mul_right (f 0) (∏ i, f (t i).succ)))
 
-/-- The map of the tail localization into a coordinate containing zero.
-
-. -/
+/-- The map of the tail localization into a coordinate containing zero. -/
 def ringCechHeadRight (A : CommRingCat.{u}) {r q : ℕ} (f : Fin (r + 1) → A)
     (t : Fin q ↪o Fin r) :
     Localization.Away (∏ i, f (t i).succ) →ₐ[A]
@@ -278,9 +234,7 @@ def ringCechHeadRight (A : CommRingCat.{u}) {r q : ℕ} (f : Fin (r + 1) → A)
   (ringCechHeadCoeff A f t).toAlgHom.comp
     (ringCechLocMap A _ _ (dvd_mul_left (∏ i, f (t i).succ) (f 0)))
 
-/-- The degree-zero second block is scalar multiplication followed by localization.
-
-. -/
+/-- The degree-zero second block is scalar multiplication followed by localization. -/
 theorem ringCechHeadEquiv_zero_tmul (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A) (s : Localization.Away (f 0)) (x : A)
     (t : Fin 0 ↪o Fin r) :
@@ -297,9 +251,7 @@ theorem ringCechHeadEquiv_zero_tmul (A : CommRingCat.{u}) (r : ℕ)
   exact congrArg (fun h : Localization.Away (f 0) →ₐ[A] _ ↦ h s)
     (ringCechLocMap_unique A _ e.toAlgHom (ringCechHeadLeft A f t))
 
-/-- On pure tensors, the second block multiplies the two canonical localization maps.
-
-. -/
+/-- On pure tensors, the second block multiplies the two canonical localization maps. -/
 theorem ringCechHeadEquiv_succ_tmul (A : CommRingCat.{u}) (r q : ℕ)
     (f : Fin (r + 1) → A) (s : Localization.Away (f 0))
     (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))
@@ -322,9 +274,7 @@ theorem ringCechHeadEquiv_succ_tmul (A : CommRingCat.{u}) (r q : ℕ)
   change h (s ⊗ₜ[A] (x t)) = k (s ⊗ₜ[A] (x t))
   rw [hk]
 
-/-- Deleting a nonzero vertex of an adjoined-zero subset preserves its leading zero.
-
-. -/
+/-- Deleting a nonzero vertex of an adjoined-zero subset preserves its leading zero. -/
 theorem ringCechCons_face_succ {q r : ℕ} (t : Fin (q + 1) ↪o Fin r)
     (j : Fin (q + 1)) :
     (Fin.succAboveOrderEmb j.succ).trans (ringCechCons t) =

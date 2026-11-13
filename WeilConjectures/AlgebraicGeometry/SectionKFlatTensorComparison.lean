@@ -81,8 +81,7 @@ def NativeLocalizationCondition (T : Scheme.{u})
 
 /-- The displayed representative equation, written with the inverse resolution maps.
 The internal lax map goes from the derived tensor to the localized total; the
-section qTensor has the same orientation. Thus this is the node's equation after
-multiplication by the two invertible resolution comparisons. -/
+section qTensor has the same orientation. -/
 def RepresentativeCondition (T : Scheme.{u})
     (θ : Functor.uncurry.obj (CondensedRing.derivedTensor Λ T) ⋙
         (derivedEquivalence Λ T).functor ≅

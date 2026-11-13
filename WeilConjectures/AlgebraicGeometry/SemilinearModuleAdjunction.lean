@@ -11,9 +11,7 @@ import all WeilConjectures.SecSmoothPurity.CochainInverseComparison
 import all WeilConjectures.SecSmoothPurity.CochainModuleAdjunction
 import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 
-/-! # Module adjunction with its underlying topos transpose
-
-.
+/-! # Module adjunction with its underlying topos transpose.
 
 ## References
 
@@ -36,8 +34,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 /-- The module adjunction for a specified algebraic inverse image, with the
-underlying transpose retained.
-. -/
+underlying transpose retained. -/
 theorem normalizedModuleAdjunction_exists
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u))

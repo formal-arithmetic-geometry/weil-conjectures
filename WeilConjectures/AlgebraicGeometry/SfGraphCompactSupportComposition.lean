@@ -8,13 +8,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-! # Graph-normalized unbounded compact-support composition
 
-proof.md`, paragraph 3;
-upstream `LowerShriekComposition.lean`, graph constructions in the proofs of
-`nonempty_iso_rightDerivedLowerShriekOfCompactification` and
-`nonempty_iso_rightDerivedLowerShriek_comp`
-.
+Compact support is computed through a proper map and a proper/open factorization using the
+graph constructions from the proofs of `nonempty_iso_rightDerivedLowerShriekOfCompactification`
+and `nonempty_iso_rightDerivedLowerShriek_comp`.
 
-Expose the actual graph constructions as data, without choosing an arbitrary
+## Implementation details
+
+The actual graph constructions are exposed as data, without choosing an arbitrary
 isomorphism from their existence theorems. The supplied open parts may be non-qc.
 -/
 
@@ -33,10 +33,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Compute compact support through a proper map and a proper/open factorization,
 by the two graph embeddings in the product of the proper parts and their open
-intersection. This is the construction in upstream `LowerShriekComposition.lean`,
-proof of `nonempty_iso_rightDerivedLowerShriekOfCompactification`;
-source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-. -/
+intersection. -/
 def sfGraphCompactificationComparison {X Y P U : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (π : P ⟶ Y) [IsProper π] (e : U ⟶ P)
     [IsOpenImmersion e] (h : X ⟶ U) [IsProper h] (fac : h ≫ e ≫ π = f) :

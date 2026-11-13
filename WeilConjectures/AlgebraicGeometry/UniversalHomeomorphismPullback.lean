@@ -51,27 +51,10 @@ private theorem cohomologyMap_comp_cancel {X Y Z : Scheme.{u}}
   rw [(cohomologyPullbackFunctorial f g F q).2.1 x, ← Sheaf.H.map_comp_apply]
   simp only [Iso.hom_inv_id_app, Sheaf.H.map_id_apply]
 
-/-- Source: Stacks Project, Tags 04DZ and 03SI, base-change coherence.
-Proof: Stability of universal homeomorphisms under base change makes pullback.fst g u a universal
-homeomorphism. Apply topological invariance to it: its additive upperStar is an equivalence, so
-the unit and counit of upperStarLowerStarAdjunction are isomorphisms, and cohomologyMap_bijective
-gives the asserted cohomology bijections.
-Construct set-valued inverse-image compositors by comparing composite sheaf pullback adjunctions
-using lowerStarComp and leftAdjointCompIso. Compose the compositor for pullback.snd g u followed
-by u with the inverse compositor for pullback.fst g u followed by g, identifying the total
-morphisms by pullback.condition. This gives the set-valued square isomorphism; upperStarComp gives
-the additive square isomorphism in the same way.
-For a sheaf F on X', insert the inverse counit F → u^*u_*F and apply s^*, where s = pullback.snd g
-u. Use the inverse-image square s^*u^* ≅ p^*g^*, where p = pullback.fst g u, then apply p_* and
-cancel p_*p^* by the inverse unit. This constructs p_*s^*F ≅ g^*u_*F, naturally in F, which is the
-displayed mixed square isomorphism. Every arrow is invertible by topological invariance for u and
-p. For sets the right adjoint lowerStar is an equivalence, hence both unit and counit of its
-pullback adjunction are invertible. Perform the same construction for additive sheaves.
-Apply the composition clause of cohomologyPullbackFunctorial to both paths in the pullback square.
-Apply Sheaf.H.map of the respective inverse upperStarComp to cancel each forward compositor. The
-two results are pullback along the common composite, identified by pullback.condition, so they are
-equal as asserted.
-(blueprint: thm-weil-pbc-universalHomeomorphism_pullback) -/
+/-- The base change of a universal homeomorphism `u` along any `g` is a universal homeomorphism
+whose étale pullback adjunction has invertible unit and counit and which induces bijections on
+étale cohomology. The inverse images and direct images along the pullback square commute up to
+isomorphism, and the two cohomology pullbacks along the square agree. -/
 theorem universalHomeomorphism_pullback {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     ∀ (Y : Scheme.{u}) (g : Y ⟶ X),

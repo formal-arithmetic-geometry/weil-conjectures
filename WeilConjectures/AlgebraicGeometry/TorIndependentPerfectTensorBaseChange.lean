@@ -182,25 +182,8 @@ private theorem baseChange_naturality
     ((schemeDerivedDirectImage f ⋙ derivedPullback g).map s)
     (γ.app F) (γ.app E) ((derivedPullback g').map s) (γ.naturality s)
 
-/-- Tor-independent qcqs base change over affine bases for a perfect tensor factor.
-The target is written as Rf'_* Lg_X^*(P ⊗ K). Under the canonical tensor-pullback
-isomorphism of lem-pc-derived-pullback-tensor-product (Stacks, 079U), this is exactly
-Rf'_*(Lg_X^*P ⊗ Lg_X^*K). Postcomposing the fixed base-change map with that
-isomorphism does not change IsIso.
-
-Proof (the node's four steps):
-1. Apply lem-pc-tor-independent-perfect-pullback-comparison to P: Tor independence
-   gives the stalkwise condition for the identity of Lg_X^*P.
-2. Apply lem-pc-rf-single-complex-inherited-tensor-condition, with K=P,
-   K'=Lg_X^*P, the identity comparison, and E=K, to inherit the condition for the
-   tensor product. The two factors can be exchanged by tensor symmetry.
-3. Perfect objects have quasi-coherent cohomology (08DB). By
-   lem-pc-derived-pullback-tensor-qcoh all tensor products and pullbacks concerned
-   have quasi-coherent cohomology. Apply lem-pc-rf-single-complex-qcqs-induction
-   to this comparison; qcqs of f gives invertibility of the base-change composite.
-4. Cancel the invertible tensor comparison in the direct image. Naturality of the
-   canonical base-change map and the canonical derived braiding transport
-   invertibility from K tensor P to P tensor K, giving the displayed map. -/
+/-- Tor-independent qcqs base change over affine bases for a perfect tensor factor:
+the base-change map with target `Rf'_* Lg_X^*(P ⊗ K)` is an isomorphism. -/
 theorem torIndependent_perfect_tensor_baseChange
     [∀ Y : Scheme.{uPT},
       HasDerivedCategory.{wPT} (SheafOfModules.{uPT} (moduleRings Y.toRingedSpace))]

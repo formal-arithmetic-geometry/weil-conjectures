@@ -9,6 +9,19 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.Algebra.Category.Grp.Zero
+
+/-!
+# Raw module and restricted abelian cohomology in negative degrees
+
+In negative degrees the raw module-valued higher direct image diagram and the restricted
+abelian cohomology groups both vanish, so they are naturally isomorphic.
+
+## References
+
+* [Stacks Project, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)
+* [Stacks Project, Tag 03Q8](https://stacks.math.columbia.edu/tag/03Q8)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite

@@ -159,14 +159,8 @@ theorem rawModuleScalar_derivedPullbackIso_commShift
   dsimp only [Iso.trans_hom, Iso.symm_hom]
   infer_instance
 
-/-- The unshifted coefficient-factor square follows by inverting the source-factor square
-at the identity coefficient map and cancelling the derived scalar comparison.
- Specialize the source square to
-the coefficient sheaf and identity map, use invertibility of its source
-factors, and rewrite with `Functor.map_inv` and associativity. Cancellation
-of the derived scalar comparison yields the displayed equality. This applies
-to identity arrows, zero coefficients, and arbitrary schemes in the stated
-universes. -/
+/-- The unshifted coefficient-factor square for the derived scalar comparison, obtained from the
+source-factor square at the identity coefficient map. -/
 theorem rawModuleScalar_coefficient_unshifted
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))

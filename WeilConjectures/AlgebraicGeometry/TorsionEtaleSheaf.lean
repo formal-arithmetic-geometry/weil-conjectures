@@ -57,15 +57,9 @@ theorem torsionKernelTransition_comp {T : Scheme.{u}}
   apply (cancel_mono (kernel.ι (k.val • 𝟙 F))).1
   simp only [Category.assoc, kernel.lift_ι]
 
-/-- For a sheaf `F` of abelian groups on the
-small étale site of `T`, form the filtered diagram indexed by positive natural numbers ordered
-by divisibility, whose value at `n` is `ker (n: F ⟶ F)` and whose transition maps are the
-canonical inclusions. The sheaf `F` is torsion when the canonical map from the colimit of this
-diagram to `F`, induced by the kernel inclusions, is an isomorphism (Stacks Project, Section
-0DDB). The construction follows the node proof step by step: divisibility gives the positive
-integer index category; the kernel inclusion condition gives transition maps; the identity and
-composition lemmas give a functor `D`; the kernel inclusions give a cocone `c`; and
-`colimit.desc D c` is the canonical map whose `IsIso` property defines torsion. -/
+/-- A sheaf `F` of abelian groups on the small étale site of `T` is torsion if the canonical map
+`colim_n ker (n : F ⟶ F) ⟶ F`, over positive integers ordered by divisibility, is an
+isomorphism. -/
 noncomputable def IsTorsionAbelianSheaf {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
   let D : PNat.DvdOrder ⥤ Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=

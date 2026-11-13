@@ -30,8 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Point uniqueness in the base-change fibre. The fibre-product point correspondence identifies the fibre
-over each c with Spec (κ(c) ⊗ₖ k′); the residue-field isomorphism from Nullstellensatz
+/-- Point uniqueness in the base-change fibre. The fibre-product point correspondence identifies the
+fibre over each c with Spec (κ(c) ⊗ₖ k′); the residue-field isomorphism from Nullstellensatz
 identifies this ring with k′, which has one prime. -/
 theorem zeroDimensional_baseChange_fibre_points
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']

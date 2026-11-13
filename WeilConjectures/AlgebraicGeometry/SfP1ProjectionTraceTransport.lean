@@ -27,7 +27,7 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- Inverse exchange transports an arbitrary ordinary trace through an isomorphism
-of projective lines. This uses no base-change property of that trace. -/
+of projective lines. -/
 theorem projectionTraceTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

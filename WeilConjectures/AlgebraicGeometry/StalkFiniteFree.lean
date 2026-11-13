@@ -9,6 +9,18 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import all WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+
+/-!
+# Stalks of finite locally free modules
+
+The stalks of a finite locally free module on a scheme are finite free modules over the
+local rings.
+
+## References
+
+* [Stacks Project, Tag 01C6](https://stacks.math.columbia.edu/tag/01C6)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory

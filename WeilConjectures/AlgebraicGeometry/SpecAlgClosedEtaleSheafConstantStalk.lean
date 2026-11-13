@@ -8,6 +8,17 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
+/-!
+# Constant stalks of étale sheaves on the spectrum of an algebraically closed field
+
+For an algebraically closed field `Ω`, the stalk of an étale sheaf on `Spec Ω` at the identity
+geometric point is computed by its global sections.
+
+## References
+
+* [Stacks Project, Tag 0A3H](https://stacks.math.columbia.edu/tag/0A3H)
+-/
+
 @[expose] public section
 
 universe u

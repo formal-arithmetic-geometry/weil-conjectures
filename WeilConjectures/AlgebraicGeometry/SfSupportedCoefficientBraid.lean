@@ -9,9 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
-/-! # The coefficient braid in the second coordinate extraction
-
-.
+/-! # The coefficient braid in the second coordinate extraction.
 -/
 
 @[expose] public noncomputable section
@@ -195,22 +193,8 @@ end GeneralCoefficients
 variable (A : Type (u + 1)) [CommRing A]
 
 /-- The cyclic coefficient permutation is the coordinate comparison on the full tensor,
-followed by undoing the comparison on its remaining factor. This is solely an identity
-of inverse images and tensor maps; it contains no projection formula or direct image.
-
-Proof in words: write the tensor comparisons for p1 and p2. Monoidality of the square
-comparison expresses its value on L tensor K as the tensor of its values on L and K.
-Naturality with e and e inverse therefore expresses coordinateTwisted as the tensor
-of coordinate on B and the common-base comparison on f*K, conjugated by the p1 and
-p2 tensor comparisons. In coefficientSplit the latter comparison already occurs.
-Expand cyclicShuffle and move the B comparison through the associators and symmetries
-by naturality. After these cancellations the only discrepancy is the conjugate of
-the self-braiding of the two copies of p2*B. Braidedness of f* transports hL to f*L;
-naturality with e transports it to B; braidedness of p2* transports it to p2*B.
-Consequently this self-braiding is identity. The hexagon and symmetry identities
-cancel the two crossings with p2*f*K, leaving exactly the right-hand composite.
-This argument also applies to zero objects and the zero ring: no invertibility of
-L or nonzero rank is required. -/
+followed by undoing the comparison on its remaining factor, provided the self-braiding of
+`L` is the identity. -/
 theorem coefficientBraid {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)))
     (hL : (((derivedTensorSymmetry (ModuleCat.{u + 1} A) Y).app L).app L).hom = 𝟙 _)

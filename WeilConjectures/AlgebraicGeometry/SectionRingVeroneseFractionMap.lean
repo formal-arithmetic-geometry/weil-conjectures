@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-! # The explicit map from Veronese numerator sections to homogeneous fractions
 
+## Implementation details
+
 The data are constructed from tensor-power isomorphisms, direct-sum injections and
 `HomogeneousLocalization.Away.mk`; no existence witness is used.
 
@@ -35,9 +37,7 @@ noncomputable def sectionRingVeroneseNumeratorIso
   eqToIso (congrArg L.tensorPow (by simp [Nat.mul_comm])) ≪≫
     L.tensorPowMulIso d n ≪≫ (λ_ _).symm
 
-/-- Send a homogeneous numerator to its fraction with denominator `s^n`.
- Additivity follows by adding
-fractions with the same denominator in the ambient localization. -/
+/-- Send a homogeneous numerator to its fraction with denominator `s^n`. -/
 noncomputable def sectionRingVeroneseHomogeneousFraction
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (n : ℕ) :

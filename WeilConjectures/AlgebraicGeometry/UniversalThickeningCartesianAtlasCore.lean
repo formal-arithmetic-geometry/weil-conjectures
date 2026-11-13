@@ -9,6 +9,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 import WeilConjectures.AlgebraicGeometry.UniversalThickeningOverlapGlueData
 
+/-!
+# Cartesian atlas for the universal first-order thickening
+
+Gluing local first-order thickenings of the charts of an open cover yields an ambient scheme
+covered by open immersions of the thickened charts, with compatible local maps and the
+prescribed overlaps.
+
+## References
+
+* [Stacks Project, Tag 04F3](https://stacks.math.columbia.edu/tag/04F3)
+-/
+
 @[expose] public section
 
 universe u
@@ -18,8 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Gluing the thickened charts gives a covering family of open immersions with
-compatible local maps and the prescribed source overlaps. This statement constructs
-only the ambient scheme and its charts, not the global source or structure morphisms. -/
+compatible local maps and the prescribed source overlaps. Only the ambient scheme and its
+charts are constructed, not the global source or structure morphisms. -/
 theorem universalFirstOrderThickening_cartesianAtlas_core
     {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})
     (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)

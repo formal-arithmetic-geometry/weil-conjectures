@@ -117,7 +117,7 @@ private theorem evaluation_isIso_on_injectives {S Y : Scheme.{v}}
   exact (ConcreteCategory.isIso_iff_bijective _).mpr hm
 
 /-- The evaluation at the represented identity is invertible before the explicit
-shift identification. This is the derived Yoneda and sections calculation.
+shift identification.
 -/
 theorem isIso_rawRestrictedCohomologyComparisonEvaluation {S Y : Scheme.{v}}
     (h : Y ⟶ S) (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

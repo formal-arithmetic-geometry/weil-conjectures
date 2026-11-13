@@ -1180,28 +1180,7 @@ private theorem output_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
   infer_instance
 
 /-- The actual internal derived arrow satisfies the prescribed resolving square and unit,
-with its naturality, inverse-denominator compatibility, and all three constraint diagrams.
-
-Proof, following the five assembly steps of the node.
-1. Exactness makes every epsilon invertible. The resolving qTensor is invertible,
-   hence so is input. The actual internal tensor arrow and its conjugate are
-   isomorphisms; the representative equation then makes output invertible.
-2. Apply the internal derived tensor component formula to cochain representatives.
-   Normalize the quotient tensor and apply the derived section equivalence.
-   The conjugation identities identify both endpoints and the middle total arrow.
-   Naturality of the actual conjugate extends the equation through the termwise
-   equivalence counits. Cancel the invertible binary input identification.
-3. Substitute the internal unit component identity into the unary conjugation
-   equation and cancel the comparison isomorphisms.
-4. Whisker the natural actual conjugate by the product localization, then compose
-   with the tensor of epsilon and qTensor. Naturality of this composite gives
-   actualPath naturality, even before restricting to resolving representatives.
-   Multiplying this square by the specified inverses gives inverse naturality.
-5. Instantiate the resolving constraint theorem with the actual conjugate and
-   unit. The pair and unit formulas supply its hypotheses. Convert the transported
-   tensor maps to tensor notation and normalize composition to obtain exactly the
-   two associator paths and the four unitor paths in the statement.
--/
+with its naturality, inverse-denominator compatibility, and all three constraint diagrams. -/
 theorem section_derived_representative_square {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ P Q : (KFlatSectionComparison.sectionResolving Λ Y).FullSubcategory,
       IsIso (input Λ f P.obj Q.obj) ∧ IsIso (output Λ f P.obj Q.obj) ∧

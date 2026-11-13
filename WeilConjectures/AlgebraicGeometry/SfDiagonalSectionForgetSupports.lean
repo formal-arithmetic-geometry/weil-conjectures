@@ -121,9 +121,7 @@ private theorem coefficient_naturality
 
 /-- Forget-supports identifies the compact-support diagonal section map with the
 composite of the two ordinary constant-object units, naturally in a map from
-the tensor unit to any coefficient object on the original scheme.
-
-. -/
+the tensor unit to any coefficient object on the original scheme. -/
 theorem diagonalSection_forgetSupports
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] (a : Bool)

@@ -27,8 +27,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The affine Koszul argument, including the empty scheme, detects zero objects supported
-on a closed subset when an affine cover has at most one member. -/
+/-- If `X` is covered by at most one affine open and `T` is closed with quasi-compact
+complement, there is a perfect complex `E` supported on `T` such that every complex supported
+on `T` with no nonzero maps from the shifts of `E` is zero. -/
 theorem supported_perfect_detector_affine
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

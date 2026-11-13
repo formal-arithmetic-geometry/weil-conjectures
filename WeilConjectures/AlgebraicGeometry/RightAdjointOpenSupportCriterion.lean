@@ -19,6 +19,13 @@ import WeilConjectures.AlgebraicGeometry.RightAdjointOpenSupportOfBounded
 /-!
 # Support criterion for restriction of a right adjoint to an open
 
+## Implementation details
+
+The isomorphism test uses the first arrow of equation (48.4.1.1) of the Stacks Project, namely
+the restriction of `a` applied to the unit `K → Rj_*j^*K`. The remaining two arrows in that
+equation are canonical isomorphisms, so this is exactly the test for invertibility of the
+entire canonical map to `a_V(j^*K)`.
+
 ## References
 
 * [Stacks Project, Tag 0E4G](https://stacks.math.columbia.edu/tag/0E4G)
@@ -96,13 +103,7 @@ set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 600000 in
 -- The statement repeats transported derived restriction and full-subcategory lifts.
 /-- Restriction of the right adjoint is compatible with the open square precisely when
-it preserves complexes supported on the closed complements.
-
-The isomorphism test uses the first arrow of equation (48.4.1.1), namely the
-restriction of `a` applied to the unit `K → Rj_*j^*K`. The remaining two arrows
-in that equation are canonical isomorphisms, so this is exactly the test for
-invertibility of the entire canonical map to `a_V(j^*K)`, as stated immediately
-after that equation. No choice of a map replaces the unit. -/
+it preserves complexes supported on the closed complements. -/
 theorem rightAdjoint_open_support_criterion
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

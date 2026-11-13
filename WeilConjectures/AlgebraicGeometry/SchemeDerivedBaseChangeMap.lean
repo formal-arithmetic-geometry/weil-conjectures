@@ -16,6 +16,16 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 /-!
  # The derived base-change morphism of O-modules
 
+## Implementation details
+
+The base-change map is the counit description of Stacks, Remark 08HY. It is equivalently the
+unit description of Stacks, Lemma 02N7: transpose under `Lg^* ⊣ Rg_*` the unit map followed by
+direct-image composition comparisons, which are the mates of the same derived-pullback
+composition comparisons. The functor comparisons are selected from their left-derived
+universal property, and the adjunction Hom equivalences are pinned, via
+`exists_schemeDerivedAdjunction`, to the same left-derived counits and to the recorded
+right-derived units; no independent adjunction choice is made.
+
 ## References
 
 * [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
@@ -157,19 +167,9 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
 
 
 
-/-- The canonical base-change map for a commutative square of schemes. In particular
-apply this to the chosen fibre product, or to the cartesian square obtained by
-restricting its upper row to an open W and its inverse image W'.
-
-This is the counit description of Stacks, Remark 08HY: transpose under Lf'^* ⊣ Rf'_*
-the composite Lf'^* Lg^* Rf_* E ≅ Lg'^* Lf^* Rf_* E → Lg'^* E.
-It is equivalently the unit description of Lemma 02N7 in the node: transpose under
-Lg^* ⊣ Rg_* the unit map followed by direct-image composition comparisons.
-Those comparisons are the mates of the same derived-pullback composition comparisons.
-The functor comparisons below are selected from their left-derived universal property,
-not arbitrary isomorphisms. The adjunction Hom equivalences are pinned to the same
-left-derived counits as these comparisons and to the recorded right-derived units, via
-`exists_schemeDerivedAdjunction`; no independent adjunction choice is allowed. -/
+/-- The canonical base-change map `Lg^* Rf_* E ⟶ Rf'_* Lg'^* E` for a commutative square of
+schemes: the transpose under `Lf'^* ⊣ Rf'_*` of the composite
+`Lf'^* Lg^* Rf_* E ≅ Lg'^* Lf^* Rf_* E → Lg'^* E`. -/
 def schemeDerivedBaseChangeMap
     [∀ Y : Scheme.{uBC},
       HasDerivedCategory.{wBC} (SheafOfModules.{uBC} (moduleRings Y.toRingedSpace))]

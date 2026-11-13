@@ -12,6 +12,21 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
+
+/-!
+# Exactness of pullback from the Zariski site to the small étale site
+
+Pullback of abelian sheaves along a continuous lift of open restriction from the Zariski site to
+the small étale site preserves finite limits.
+
+## References
+
+* [Stacks Project, Tag 00X5](https://stacks.math.columbia.edu/tag/00X5)
+* [Stacks Project, Tag 00X6](https://stacks.math.columbia.edu/tag/00X6)
+* [Stacks Project, Tag 09AX](https://stacks.math.columbia.edu/tag/09AX)
+* [Stacks Project, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry

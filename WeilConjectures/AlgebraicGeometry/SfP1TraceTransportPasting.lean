@@ -46,13 +46,7 @@ private theorem transport_pasting
   rw [reassoc_of% ne]
   rw [← reassoc_of% nc, hu]
 
-/-- Naturality pastes geometric exchange, a coefficient square, and a unit square.
-
-The coefficient square first moves the inverse line comparison across exchange.
-Naturality moves the arbitrary trace across pullback composition. The unit
-square finishes the calculation, and forget-supports naturality identifies the
-recorded direct-image factorization.
-. -/
+/-- Naturality pastes geometric exchange, a coefficient square, and a unit square. -/
 theorem traceTransportPasting
     {C D E W Z : Type*} [Category C] [Category D] [Category E]
     [Category W] [Category Z]

@@ -26,13 +26,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, Étale Morphisms, Lemma 41.17.2 (Tag 04HI).
-A separated morphism unramified at finitely many points over `s` admits an étale
+/-- A separated morphism unramified at finitely many points over `s` admits an étale
 neighbourhood with a clopen decomposition into closed immersions through the chosen point
 and a remainder whose fibre contains no point mapping to a listed point. The finite family
-is indexed by pairs `(i,j)` with `i: Fin n` and `j: Fin (m i)`. Opens specify their actual
-open subschemes via `Scheme.Opens.toScheme`; disjointness and covering give the disjoint
-union decomposition. No residue-field isomorphism is required of the étale neighbourhood. -/
+is indexed by pairs `(i,j)` with `i : Fin n` and `j : Fin (m i)`. -/
 theorem exists_etale_closed_immersion_decomposition_of_unramified_at_points
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (s : S)
     (n : ℕ) (x : Fin n → X) (hx : ∀ i, f.base (x i) = s)

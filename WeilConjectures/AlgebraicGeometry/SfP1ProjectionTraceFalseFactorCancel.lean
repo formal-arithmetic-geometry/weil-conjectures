@@ -43,9 +43,7 @@ def falseProjectionChartFactorInv
         ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))
 
 /--
-The chart factor and its displayed inverse cancel by the two inverse/direct-image
-cancellations. This is the cancellation step after the false-projection
-mate-pasting calculation.
+The false projection chart factor composed with its displayed inverse is the identity.
 -/
 theorem falseProjectionChartFactor_cancel
     (A : Type (u + 1)) [CommRing A] [Finite A]

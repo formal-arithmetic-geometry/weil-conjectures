@@ -32,8 +32,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The base-changed scheme is zero-dimensional and discrete. Base change preserves local quasi-finiteness and local
-Artinianness; the Artinian criterion gives discreteness and dimension at most zero. -/
+/-- The base-changed scheme is zero-dimensional and discrete. Base change preserves local
+quasi-finiteness and local Artinianness; the Artinian criterion gives discreteness and dimension at
+most zero. -/
 theorem zeroDimensional_baseChange_fibre_topology
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

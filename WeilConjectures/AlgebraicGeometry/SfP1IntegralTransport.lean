@@ -112,9 +112,7 @@ private theorem transport_composite
     _ = _ := by simp only [F.map_comp, Category.assoc]
 
 /-- Rename a projective line over its base and compare the two compact-support
-composites with the ordinary chart composites, for an arbitrary supported Ext class.
-
-. -/
+composites with the ordinary chart composites, for an arbitrary supported Ext class. -/
 theorem sfP1IntegralTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0)

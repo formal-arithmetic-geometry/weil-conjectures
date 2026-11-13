@@ -14,6 +14,20 @@ import WeilConjectures.AlgebraicGeometry.KFlatSingleTensorRepresentative
 import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorComplexProjection
 import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
 
+/-!
+# Termwise computation of self-Tor of a closed subscheme
+
+For a closed immersion `i : Z ⟶ Y` and a K-flat resolution `P` of `i_* 𝒪_Z`, the homology of
+`i_* 𝒪_Z ⊗^L i_* 𝒪_Z` is identified with the pushforward of the homology of `i^* P`.
+
+## References
+
+* [Stacks Project, Tag 06YH](https://stacks.math.columbia.edu/tag/06YH)
+* [Stacks Project, Tag 08KS](https://stacks.math.columbia.edu/tag/08KS)
+* [Stacks Project, Tag 01CB](https://stacks.math.columbia.edu/tag/01CB)
+* [Stacks Project, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -54,12 +68,9 @@ theorem exists_selfTor_projection_homology_termwise_arrow
     (T.sc k).mapHomologyIso (Scheme.Modules.pushforward i)
   exact ⟨h.hom, inferInstance⟩
 
-/-- The termwise representative form of the self-Tor projection computation.
-
-This is the derived projection-formula computation followed by comparison with the
-specified K-flat resolution and exact closed-immersion pushforward. It is separated
-from representative transport so that an arbitrary isomorphic complex can be handled
-functorially in the parent theorem..
+/-- The termwise representative form of the self-Tor projection computation: the `k`-th
+homology of `i_* 𝒪_Z ⊗^L i_* 𝒪_Z` is isomorphic to the pushforward of the `k`-th homology
+of `i^* P`.
 -/
 theorem nonempty_selfTor_projection_homology_termwise
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)

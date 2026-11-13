@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 import all WeilConjectures.AlgebraicGeometry.ShriekTensorComposition
 
-/-! # Composition coherence of proper projection maps
-
-.
+/-! # Composition coherence of proper projection maps.
 
 ## References
 

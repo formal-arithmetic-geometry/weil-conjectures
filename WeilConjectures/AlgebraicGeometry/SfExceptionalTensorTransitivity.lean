@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionCoherence
 
 /-! # Exceptional tensor maps under composition and etale restriction
 
-proof.md`, paragraph 3
-.
-
 All categories are ordinary unbounded etale module derived categories. We use
 supplied compactifications and the graph-normalized compositor, with no qc or
 Noetherian hypotheses. The exact inverse image is represented by its canonically
@@ -342,37 +339,7 @@ noncomputable def sfExceptionalTensorReassociation
         ((L(upperStar (ModuleCat.{u + 1} A) b)).obj K)).inv
 
 /-- The canonical composition identity, its specified scalar isomorphism, and the
-stated invertibility consequence.
-
-Proof plan (the eight steps of the node):
-1. Normalize compact support by the graph compositor. Its conjugate is c, so the
-   transported counit is the composite counit.
-   Write phi_f = inverse projection followed by counit tensor identity and unitor.
-2. Put M = omega_a tensor a*omega_b, s = theta_a(omega_b), d = c_A inverse s.
-   The transpose of s is phi_a(omega_b). Consequently the scalar composite
-   counit evaluated on d is epsilon_b followed after F_b(phi_a(omega_b)).
-   Both c_A and s are invertible, proving delta is invertible.
-3. Naturality of theta_a follows by transposing and counit naturality. The
-   iterated tensor map has composite transpose phi_b(K) F_b(phi_a(omega_b tensor b*K)).
-4. Projection associativity rewrites
-   phi_a(omega_b tensor b*K) as (phi_a(omega_b) tensor identity) q_a(M,b*K).
-   Naturality of q_b then combines its scalar counits.
-5. Projection/compositor coherence replaces the two inverse projections by q_h.
-   The scalar counit equality in step 2 identifies this with the transpose of
-   c_K theta_h(K) (d tensor identity). Injectivity of the composite Hom bijection
-   gives equality of the actual maps. Cancel d tensor identity to get the formula.
-   Insert precisely the pullback composition, associator and tensor comparison
-   of lem-kun-inverse-image-monoidal, as in sfExceptionalTensorReassociation.
-6. Every factor on the right is invertible if theta_b(K) is, so theta_h(K) is.
-   The tensor-invertibility hypothesis on omega_b is retained as stated, though
-   it is unnecessary under the universal hypothesis on theta_a.
-7. For separated etale a, let rho be the normalized comparison of
-   lem-sf-etale-unit-tensor-arbitrary-base. Then lambda = rho inverse c inverse,
-   and the scalar normalization identifies lambda_A inverse with the unit action
-   composed with delta.
-8. Apply rho to step 5. Naturality of the unitors cancels the omega_a unit;
-   compose with lambda_K and lambda_A tensor identity to obtain the restriction
-   equation below. No boundedness, constructibility, qc or Noetherian input occurs. -/
+stated invertibility consequence. -/
 theorem sfExceptionalTensorTransitivity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
@@ -607,37 +574,7 @@ noncomputable def sfExceptionalEtaleRestrictionComparison
     (sfExceptionalCompComparison A a b ca cb ch Ga Gb Gh adja adjb adjh).symm
 
 /-- The equality of actual etale-restricted tensor maps under the normalized
-comparison. Pullback is written on its canonically equivalent left-derived model.
-
-Proof plan (the eight steps of the node):
-1. Normalize compact support by the graph compositor. Its conjugate is c, so the
-   transported counit is the composite counit.
-   Write phi_f = inverse projection followed by counit tensor identity and unitor.
-2. Put M = omega_a tensor a*omega_b, s = theta_a(omega_b), d = c_A inverse s.
-   The transpose of s is phi_a(omega_b). Consequently the scalar composite
-   counit evaluated on d is epsilon_b followed after F_b(phi_a(omega_b)).
-   Both c_A and s are invertible, proving delta is invertible.
-3. Naturality of theta_a follows by transposing and counit naturality. The
-   iterated tensor map has composite transpose phi_b(K) F_b(phi_a(omega_b tensor b*K)).
-4. Projection associativity rewrites
-   phi_a(omega_b tensor b*K) as (phi_a(omega_b) tensor identity) q_a(M,b*K).
-   Naturality of q_b then combines its scalar counits.
-5. Projection/compositor coherence replaces the two inverse projections by q_h.
-   The scalar counit equality in step 2 identifies this with the transpose of
-   c_K theta_h(K) (d tensor identity). Injectivity of the composite Hom bijection
-   gives equality of the actual maps. Cancel d tensor identity to get the formula.
-   Insert precisely the pullback composition, associator and tensor comparison
-   of lem-kun-inverse-image-monoidal, as in sfExceptionalTensorReassociation.
-6. Every factor on the right is invertible if theta_b(K) is, so theta_h(K) is.
-   The tensor-invertibility hypothesis on omega_b is retained as stated, though
-   it is unnecessary under the universal hypothesis on theta_a.
-7. For separated etale a, let rho be the normalized comparison of
-   lem-sf-etale-unit-tensor-arbitrary-base. Then lambda = rho inverse c inverse,
-   and the scalar normalization identifies lambda_A inverse with the unit action
-   composed with delta.
-8. Apply rho to step 5. Naturality of the unitors cancels the omega_a unit;
-   compose with lambda_K and lambda_A tensor identity to obtain the restriction
-   equation below. No boundedness, constructibility, qc or Noetherian input occurs. -/
+comparison. Pullback is written on its canonically equivalent left-derived model. -/
 theorem sfExceptionalTensorEtaleRestriction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)

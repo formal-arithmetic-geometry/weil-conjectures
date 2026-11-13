@@ -29,9 +29,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 attribute [local irreducible] DerivedCategory.singleFunctors upperStar lowerStar
 attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
 
-/-- The single-degree constant comparison is the native finite constant comparison.
-
-. -/
+/-- The single-degree constant comparison is the native finite constant comparison. -/
 theorem finiteConstantComparison_hom
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).hom.app

@@ -262,15 +262,6 @@ private theorem transport_change_source
 
 /--
 The ordinary inverse-exchange trace transport for the second projection.
-
-This is the `a = true` component of
-`lem-sf-p1-projection-trace-transport`. The pasted second product square has
-both composites to the base equal, which supplies the inverse coordinate factor
-in `coordinateTrace`; the twist comparisons are determined by their roots and
-pure-scalar generators. Naturality carries the arbitrary arrow `τ` through the
-remaining exchange factors, and the constant sheaf unit comparison is preserved
-by inverse image. The argument is valid for empty bases and zero coefficient
-rings.
 -/
 theorem projectionTraceTransport_true
     (A : Type (u + 1)) [CommRing A] [Finite A]

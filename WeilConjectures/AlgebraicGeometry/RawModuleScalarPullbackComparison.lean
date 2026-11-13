@@ -49,13 +49,13 @@ noncomputable abbrev pullbackIso (Λ : Type (u + 1)) [CommRing Λ]
       moduleAbelianForget Λ Y ⋙ upperStar AddCommGrpCat.{u + 1} f :=
   (moduleAbelianUpperStarIso Λ f).symm
 
-/-- The inverse comparison on a module sheaf.. -/
+/-- The inverse comparison on a module sheaf. -/
 noncomputable abbrev pullback (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (pullbackIso Λ f).inv.app G
 
-/-- The free abelian represented sheaf of an etale object.. -/
+/-- The free abelian represented sheaf of an etale object. -/
 noncomputable abbrev freeAbelian (S : Scheme.{u}) (U : S.Etale) :=
   (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (uliftYoneda.{u + 1}.obj U ⋙ AddCommGrpCat.free)

@@ -13,9 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SfExceptionalTensorTransitivity
 
 /-! # Canonical affine-line duality over arbitrary affine bases
 
-proof.md`, paragraphs 2-3, and
-`sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md`, paragraph 1
-.
+Over an affine base on which `N` is invertible, the roots-of-unity Tate line on the affine line,
+shifted by 2, is identified with the ambient dualizing object, and the associated tensor
+comparison is invertible.
+
+## Implementation details
 
 The compactification is the actual standard affine chart of projective space.
 The right adjoint and adjunction are selected ambient data; their existence follows
@@ -170,31 +172,9 @@ private theorem tensorMap_etale_restriction
   simpa only [isIso_comp_left_iff] using hi
 
 /-- Affine-line duality identifies the concrete roots-of-unity Tate line shifted by
-2 with the ambient dualizing object, and the resulting actual tensor composite is
-invertible for every ordinary unbounded complex. The arguments G and adj select
-an ambient right adjoint, whose existence is already guaranteed; they impose no
-additional geometric or cohomological hypothesis.
-
-Proof plan:
-1. Use the standard chart j and proper projection q in sfAffineLineCompactification. Then F_p = Rq_* Dj_!.
-2. Apply lem-sf-affine-base-p1-trace-adjunction over the arbitrary affine base.
-   Its right adjoint H(K) = A_P(1)[2] tensor q^*K has the projection-normalized
-   trace counit. Compare H with the ambient G_q using det-sp-unique-right-adjoint;
-   the counit-preserving comparison gives gamma_q at the coefficient unit.
-3. Transpose theta_q composed with gamma_q tensor 1. Naturality of projection
-   identifies its transpose with the trace counit from step 2. The adjunction
-   bijection therefore identifies this composite with the right-adjoint comparison,
-   so every theta_q is invertible.
-4. The chart j is separated etale.
-   Apply lem-sf-etale-unit-tensor-arbitrary-base and the etale restriction equation
-   of lem-sf-exceptional-tensor-transitivity to j followed by q. Its
-   counit-preserving comparison intertwines the actual theta maps, proving that
-   theta_p is invertible on all unbounded K.
-5. Pull back gamma_q along j and compose with that comparison at the unit.
-   The roots-of-unity pullback of lem-asd-etale-finite-twist-pullback identifies
-   its source with the concrete A_X(1)[2], giving gamma_p. Tensoring gamma_p
-   with the identity is invertible, as is theta_p by step 4, so their actual
-   composite is invertible. No Noetherian or boundedness assumption is used. -/
+2 with the ambient dualizing object, and the resulting tensor composite is invertible for
+every unbounded complex. The arguments `G` and `adj` select an ambient right adjoint and
+impose no additional hypothesis. -/
 theorem sfAffineLineCanonicalDuality
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

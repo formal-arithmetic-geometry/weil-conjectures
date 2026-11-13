@@ -26,9 +26,7 @@ public import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 
-/-! # Self-duality of endomorphisms of the ring complex
-
-.
+/-! # Self-duality of endomorphisms of the ring complex.
 
 ## References
 
@@ -95,9 +93,7 @@ private theorem rankOneEndomorphismSelfDual
   rw [← Category.assoc h _ b, ← he]
   simp [b]
 
-/-- An endomorphism of the ring complex is its own dual under evaluation at one.
-
-. -/
+/-- An endomorphism of the ring complex is its own dual under evaluation at one. -/
 theorem ringComplexEndomorphism_selfDual
     {C : Type v} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{v})

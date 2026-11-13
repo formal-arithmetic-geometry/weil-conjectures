@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBase
 
-/-! # Splitness of a normalized simplicial attachment
-
-.
+/-! # Splitness of a normalized simplicial attachment.
 
 ## References
 
@@ -139,9 +137,7 @@ private theorem top_label_cases
     subst σ
     exact Or.inr ⟨i, hi, rfl⟩
 
-/-- The explicit top degeneracies force splitness and identify the new nondegenerates.
-
-. -/
+/-- The explicit top degeneracies force splitness and identify the new nondegenerates. -/
 theorem split_attachment_of_degeneracies
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D)

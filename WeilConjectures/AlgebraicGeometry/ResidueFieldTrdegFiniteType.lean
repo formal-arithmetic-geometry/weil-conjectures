@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ResidueFieldTrdeg
 /-!
 # Transcendence degrees of residue fields of schemes over a field
 
-Let `b: X ⟶ Spec K` be a scheme over a field. On an affine open `V ∋ y`, the transcendence degree
+Let `b : X ⟶ Spec K` be a scheme over a field. On an affine open `V ∋ y`, the transcendence degree
 `trdeg κ(y)` (over the residue field `κ(b y) ≅ K`) is `trdeg_K Γ(X, V) ⧸ 𝔭_y`
 (`AlgebraicGeometry.Scheme.Hom.trdegAt_eq_trdeg_quotient`). Consequently:
 
@@ -44,7 +44,7 @@ lemma bijective_ΓSpecIso_inv_Γevaluation (s : Spec (.of K)) :
 
 variable (b : X ⟶ Spec (.of K))
 
-/-- On an affine open `V ∋ y` of a scheme `b: X ⟶ Spec K` over a field, the transcendence degree
+/-- On an affine open `V ∋ y` of a scheme `b : X ⟶ Spec K` over a field, the transcendence degree
 of `κ(y)` is that of the quotient of `Γ(X, V)` by the prime ideal of `y`. -/
 lemma Hom.trdegAt_eq_trdeg_quotient {V : X.Opens} (hV : IsAffineOpen V) (y : X) (hy : y ∈ V) :
     letI := ((Scheme.ΓSpecIso (.of K)).inv ≫ b.appLE ⊤ V (by simp)).hom.toAlgebra

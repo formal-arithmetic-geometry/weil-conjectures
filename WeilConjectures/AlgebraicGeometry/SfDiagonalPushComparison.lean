@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 
-/-! # Direct-image comparison restricted to the diagonal
-
-.
+/-! # Direct-image comparison restricted to the diagonal.
 
 ## References
 

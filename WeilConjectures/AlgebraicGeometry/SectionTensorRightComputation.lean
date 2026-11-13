@@ -52,9 +52,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)] in
-/-- Naturality of the specified ordinary section tensor comparison.
-
-. -/
+/-- Naturality of the specified ordinary section tensor comparison. -/
 theorem section_tensor_comparison_naturality (T : Scheme.{u})
     (M M' N N' : Modules Λ T) (f : M ⟶ M') (g : N ⟶ N') :
     (ModuleRingedComparison.equivalence Λ T).functor.map (f ⊗ₘ g) ≫
@@ -64,9 +62,7 @@ theorem section_tensor_comparison_naturality (T : Scheme.{u})
           (ModuleRingedComparison.equivalence Λ T).functor.map g) :=
   (ModuleRingedComparison.ordinary_monoidal Λ T).1 M M' N N' f g
 
-/-- The ordinary section tensor comparison with a fixed right coefficient.
-
-. -/
+/-- The ordinary section tensor comparison with a fixed right coefficient. -/
 def sectionTensorRightComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     tensorRight (B₀ a T) ⋙ (ModuleRingedComparison.equivalence Λ T).functor ≅
       (ModuleRingedComparison.equivalence Λ T).functor ⋙
@@ -82,9 +78,7 @@ def sectionTensorRightComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) 
   rw [CategoryTheory.Functor.map_id, tensorHom_id, tensorHom_id] at h
   exact h
 
-/-- The fixed localization and ordinary right-tensor comparison.
-
-. -/
+/-- The fixed localization and ordinary right-tensor comparison. -/
 def sectionTensorRightLocalization (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     (ModuleRingedComparison.derivedEquivalence Λ T).functor.obj
@@ -258,8 +252,7 @@ private theorem computationPasteMapped
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
   [IsCommMonObj Λ'] in
 /-- The tensor localization comparison commutes with putting the right coefficient
-in degree zero.
-. -/
+in degree zero. -/
 theorem section_tensor_right_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     (ModuleRingedComparison.tensorComparison Λ T).hom.app (DerivedCategory.Q.obj P, B a T) ≫

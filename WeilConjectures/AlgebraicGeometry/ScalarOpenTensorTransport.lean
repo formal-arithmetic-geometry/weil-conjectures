@@ -31,7 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Pull a section over U to the whole source of a morphism whose image lies in U.
  This is the specified adjunction unit followed
-by restriction, with no choice of a section.. -/
+by restriction, with no choice of a section. -/
 def tensorPullbackOpenSection {X Y : Scheme.{w}} (a : Y ⟶ X) (M : X.Modules)
     (U : X.Opens) (hTop : ⊤ ≤ a ⁻¹ᵁ U) (s : M.val.obj (op U)) :
     ((tensorPullback a).obj M).val.obj (op ⊤) :=

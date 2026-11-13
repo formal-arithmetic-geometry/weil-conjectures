@@ -25,6 +25,8 @@ import WeilConjectures.SixFunctors.BaseChange.Square
 
 * [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 * [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+* [Stacks Project, Tag 03PN](https://stacks.math.columbia.edu/tag/03PN)
+* [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
 -/
 
 @[expose] public section
@@ -35,9 +37,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- An invertible map on sections induces an invertible closed geometric stalk map.
-This is the naturality argument of Stacks Project, Tag 03QO, followed by the
-field-extension comparison of Tags 03PN and 03Q1. -/
+/-- An invertible map on sections induces an invertible closed geometric stalk map. -/
 private theorem closedStalk_isIso_of_sections
     {A : Type u} [CommRing A] [HenselianLocalRing A]
     [IsSepClosed (IsLocalRing.ResidueField A)]

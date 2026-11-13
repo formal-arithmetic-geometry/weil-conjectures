@@ -31,7 +31,7 @@ namespace AlgebraicGeometry
 This statement concerns coordinate transport, not invertibility of the comparison.
 The two displayed isomorphisms identify its endpoints and the final equation
 identifies the actual morphism, including its given coefficient map.
- Canonical transport details expanded by C1.. -/
+ Canonical transport details expanded by C1. -/
 theorem exists_singleComplexAffineSpectrumCoordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

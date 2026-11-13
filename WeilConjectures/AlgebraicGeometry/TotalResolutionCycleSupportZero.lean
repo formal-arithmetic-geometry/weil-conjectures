@@ -11,6 +11,17 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
+/-!
+# Total cycles supported in column zero
+
+For a double complex of modules, a cycle of the total complex lying in the image of column
+zero comes from a cycle of that column.
+
+## References
+
+* [Stacks Project, Tag 09IZ](https://stacks.math.columbia.edu/tag/09IZ)
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits

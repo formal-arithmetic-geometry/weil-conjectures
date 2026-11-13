@@ -79,7 +79,8 @@ private theorem ext_iso_transport {C : Type*} [Category C] [Abelian C]
     Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀,
     Iso.hom_inv_id_app, Abelian.Ext.comp_mk₀_id] using h
 
-/-- Tensoring a degree-one scalar Ext class with a degree-zero morphism is coefficient composition. -/
+/-- Tensoring a degree-one scalar Ext class with a degree-zero morphism is coefficient composition.
+-/
 theorem scalarExtCup_mk₀ {A B : KSheaf X k}
     (a : Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) B 1)
     (v : 𝟙_ (KSheaf X k) ⟶ A) :

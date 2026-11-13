@@ -48,19 +48,9 @@ private theorem annihilator_stalkMap_injective (X : Scheme.{u}) {G F : X.Modules
     (fun U ↦ PresheafOfModules.injective_of_mono ι.val (op U)) x
   exact (ModuleCat.mono_iff_injective _).mp hm
 
-/-- The subsheaf of sections annihilated by a quasi-coherent ideal of finite type.
-
-The quasi-coherent ideal is `J: X.IdealSheafData` (quasi-coherence is built in), with
-ideal sheaf `J.toModules ⊆ 𝒪_X` via `J.toModulesι`; finite type is Mathlib's
-`SheafOfModules.IsFiniteType` of `J.toModules`. Its sections over an open `V` are
-`J.idealOfOpens V` (`range_toModulesι_app_eq_idealOfOpens`), over an affine open `J.ideal U`.
-The image of the inclusion on every open is specified by local annihilation, so `G`
-is the subsheaf in the node, rather than an arbitrary quasi-coherent submodule.
-The stalk clause uses `RingedSpace.moduleStalkFunctor`. It expresses annihilation by
-the ideal stalk through all germs of ideal sections: every element of `J_x` is such a
-germ, and its image in `𝒪_{X,x}` is the germ of the section. The stalk maps of both
-inclusions are injective.
--/
+/-- The subsheaf `G ⊆ F` of sections annihilated by a quasi-coherent ideal `J` of finite type:
+`G` is quasi-coherent, its sections are those locally annihilated by `J` (on affine opens,
+by `J.ideal U`), and its stalks are the elements of `F_x` killed by the germs of `J`. -/
 theorem sections_annihilated_by_ideal
     (X : Scheme.{u}) (J : X.IdealSheafData) [J.toModules.IsFiniteType]
     (F : X.Modules) [F.IsQuasicoherent] :

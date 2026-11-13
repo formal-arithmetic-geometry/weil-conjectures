@@ -162,10 +162,7 @@ def milnorProjection [HasExactLimitsOfShape (Discrete ℕ) A]
       (roosBoundary_exact K q).choose_spec.choose_spec.choose ≫ (roosKernelIso K q).hom
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit Roos boundary and projection form a short exact sequence.
-
-proof.md, first paragraph
-. -/
+/-- The explicit Roos boundary and projection form a short exact sequence. -/
 theorem milnor_shortExact [HasExactLimitsOfShape (Discrete ℕ) A]
     (K : ℕᵒᵖ ⥤ CochainComplex A ℤ) (q : ℤ) :
     ∃ h : milnorInclusion K q ≫ milnorProjection K q = 0,

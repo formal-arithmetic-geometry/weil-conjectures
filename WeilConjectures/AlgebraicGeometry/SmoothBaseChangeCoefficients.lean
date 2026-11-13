@@ -33,7 +33,7 @@ universe u
 namespace AlgebraicGeometry.Etale
 
 /-- The coefficient convention for smooth base change: `N` is positive, `Λ` is a finite
-commutative ring killed by `N`, and `N` is invertible on `T`. The equality `(N: Λ) = 0`
+commutative ring killed by `N`, and `N` is invertible on `T`. The equality `(N : Λ) = 0`
 is equivalent to annihilation of every element by `N`, since `Λ` is a unital ring.
 Invertibility on the scheme means that the constant global section `N` is a unit.
 The sheaf and derived categories are precisely the imported ambient-foundation categories,

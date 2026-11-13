@@ -86,11 +86,7 @@ private theorem stalk_surjective_iff_not_mem_support (X : Scheme.{u})
 /-- The stalk inclusion of a quasi-coherent ideal is injective. On an affine open it is
 surjective exactly when the ideal of sections is not contained in the prime of the point.
 Thus the set of points where the stalk ideal is proper is locally the ordinary zero locus,
-is closed, and equals the image of every closed immersion with this kernel ideal sheaf.
-Here `K: X.IdealSheafData` is the compatible affine-local encoding of a quasi-coherent
-ideal sheaf, whose actual submodule sheaf and inclusion are `K.toModules` and `K.toModulesι`.
-Surjectivity means that the image ideal is the whole stalk ring, without choosing an
-identification of the module stalk of the structure sheaf with its ring stalk. -/
+is closed, and equals the image of every closed immersion with this kernel ideal sheaf. -/
 theorem quasi_coherent_ideal_zero_set_affine (X : Scheme.{u}) (K : X.IdealSheafData) :
     (∀ x : X, Function.Injective
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom) ∧

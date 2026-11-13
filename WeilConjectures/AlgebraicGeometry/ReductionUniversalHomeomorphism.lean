@@ -32,7 +32,7 @@ universe u
 namespace AlgebraicGeometry
 
 /-- The reduction is reduced and its canonical map is a surjective closed immersion
-and a universal homeomorphism. The proof follows Stacks Lemma 054M and Lemma 01J3. -/
+and a universal homeomorphism. -/
 theorem reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism
     (X : Scheme.{u}) :
     IsReduced X.nilradical.subscheme ∧

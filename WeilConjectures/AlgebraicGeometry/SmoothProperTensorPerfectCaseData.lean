@@ -18,6 +18,18 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 import WeilConjectures.AlgebraicGeometry.SmoothProperQCohData
 import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
+
+/-!
+# Data for the perfect case of the smooth proper tensor comparison
+
+Existence of the quasi-coherent and monoidal data used by the projection comparison for a
+proper morphism of noetherian schemes.
+
+## References
+
+* [Stacks Project, Tag 0A9T](https://stacks.math.columbia.edu/tag/0A9T)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w

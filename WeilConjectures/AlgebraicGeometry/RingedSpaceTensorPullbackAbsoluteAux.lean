@@ -19,6 +19,20 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
+/-!
+# Left derived functor of the tensor pullback of ringed spaces
+
+The tensor pullback of sheaves of modules along a morphism of ringed spaces has a left derived
+functor, constructed by resolving with K-flat complexes.
+
+## References
+
+* [Stacks Project, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks Project, Tag 079W](https://stacks.math.columbia.edu/tag/079W)
+* [Stacks Project, Tag 06XN](https://stacks.math.columbia.edu/tag/06XN)
+* [Stacks Project, Tag 05SE](https://stacks.math.columbia.edu/tag/05SE)
+-/
+
 @[expose] public section
 
 universe u wX wY
@@ -150,10 +164,7 @@ private theorem leftDerived_absolute_of_resolving
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The K-flat resolving-class construction supplies the derived comparison for the
-concrete tensor pullback. The proof follows Tags 06YJ, 079W and 06XN: resolve by
-K-flat complexes, use preservation of quasi-isomorphisms under inverse image and
-change of rings, and apply `leftDerived_from_resolvingClass` to the resulting
-functor. -/
+concrete tensor pullback. -/
 theorem exists_tensorPullback_leftDerived
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]
@@ -277,8 +288,7 @@ theorem exists_tensorPullback_leftDerived
 
 /-- Absoluteness of a K-flat derived comparison: the right Kan extension over the
 cofinal K-flat resolution category is essentially constant, hence every postcomposition
-functor preserves its comparison. This is the absolute-resolution argument of
-Stacks Tags 06XN and 05SE. -/
+functor preserves its comparison. -/
 theorem leftDerived_tensorPullback_absolute
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

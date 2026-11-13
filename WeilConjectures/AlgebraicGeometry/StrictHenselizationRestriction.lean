@@ -21,11 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 /-!
 # Canonical restriction to a strict henselization
 
-The germ restriction `r_G: G_s ⟶ Γ(S_(s), g⁻¹G)` is characterised by its components at the
+The germ restriction `r_G : G_s ⟶ Γ(S_(s), g⁻¹G)` is characterised by its components at the
 representative affine pointed neighbourhoods (the unit of `g⁻¹ ⊣ g_*` followed by restriction
 along the section `S_(s) ⟶ V ×_S S_(s)` given by the limit leg); it exists and is unique
 (`existsUnique_strictHenselizationStalkRestriction`). The canonical restriction
-`ρ^q: (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is `r ≫ strictHenselizationCohomologyComparison`
+`ρ^q : (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is `r ≫ strictHenselizationCohomologyComparison`
 for that unique `r`.
 
 ## References
@@ -94,7 +94,7 @@ noncomputable def strictHenselizationSectionRestriction
           (Scheme.strictLocalization s))
         (Scheme.Etale.mk (𝟙 (Scheme.strictLocalization s))) Over.mkIdTerminal)).inv.app _
 
-/-- The germ restriction `r: F_s ⟶ Γ(S_(s), g⁻¹F)`: its composite with the germ map of every
+/-- The germ restriction `r : F_s ⟶ Γ(S_(s), g⁻¹F)`: its composite with the germ map of every
 representative affine pointed neighbourhood is `strictHenselizationSectionRestriction`. -/
 def IsStrictHenselizationStalkRestriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -267,7 +267,7 @@ noncomputable def strictHenselizationLerayHomologyIso
 inverse image with cohomology, apply the derived base-change mate `g⁻¹ Rf_* ⟶ Rf'_* p⁻¹`
 (the mate of the pullback-square comparison under the derived adjunctions), then the exact
 global sections and Leray isomorphism. The canonical restriction
-`ρ^q: (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` of the node is `r ≫` this map, for the unique
+`ρ^q : (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is `r ≫` this map, for the unique
 `r` with `IsStrictHenselizationStalkRestriction s (R^q f_* F) r`. -/
 noncomputable def strictHenselizationCohomologyComparison
     {X : Scheme.{v}} (f : X ⟶ S)

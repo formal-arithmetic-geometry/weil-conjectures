@@ -394,7 +394,7 @@ theorem serreSectionActionLaws :
   exact ⟨one_smul_law k G, mul_smul_law k G, smul_add_law k G,
     add_smul_law k G, homogeneous_single k G⟩
 
-/-- The module structure on the explicit direct sum, using only the named action-law proof. -/
+/-- The `k[x₀, x₁]`-module structure on the explicit direct sum of Serre section pieces. -/
 noncomputable instance serreSectionSumModule :
     Module (MvPolynomial (Fin 2) k) (serreSectionSum k G) where
   one_smul := (serreSectionActionLaws k G).1

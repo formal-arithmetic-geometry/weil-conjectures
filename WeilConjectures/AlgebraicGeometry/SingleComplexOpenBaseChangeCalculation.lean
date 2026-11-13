@@ -135,8 +135,7 @@ private theorem baseChange_homEquiv
 attribute [local irreducible] CategoryTheory.Adjunction.homEquiv
 
 /-- Compatibility of the pinned base-change arrow with the explicitly constructed
-open comparisons. All comparison data are already constructed; this statement
-is only the remaining mate calculation, with no existence claim. -/
+open comparisons. -/
 theorem singleComplexOpen_baseChange_calculation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

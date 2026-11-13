@@ -48,17 +48,8 @@ noncomputable def sectionRingVeroneseFractionCanonicalMap
     (sectionRingVeroneseFractionMap X L d s)
     (sectionRingVeroneseFractionMap_kernel X L d s).le
 
-/-- The canonical Veronese fraction map is bijective.
-
-The map descends the explicit numerator-to-fraction map through the section-fraction
-relations. Its kernel is precisely the relation subgroup, which gives injectivity
-of the descended map. Surjectivity follows from the surjectivity of the numerator
-map. On a fraction generator the quotient lift evaluates to the numerator map;
-its summand formula and the tensor-power cancellation identity give exactly `ξ/s^n`.
-The construction and proof also apply when `d=0`, `n=0`, or `s` is zero or nilpotent.
-The quotient-lift computation is retained explicitly below.
-The proof uses the kernel equality directly, so no inverse choice is introduced.
--/
+/-- The canonical Veronese fraction map is bijective, and it sends the section fraction
+`ξ/s^n` to the corresponding element `ξ/s^n` of the homogeneous localization. -/
 theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :

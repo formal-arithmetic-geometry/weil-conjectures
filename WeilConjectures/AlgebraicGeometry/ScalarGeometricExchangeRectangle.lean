@@ -12,13 +12,13 @@ import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 
 /-! # Scalar extension and geometric exchange
 
-proof.md, (2),
-coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47
-.
+Compatibility of scalar extension of coefficients with geometric pullback and pushforward.
+
+## Implementation details
 
 All functors are the existing ordinary unbounded internal-module derived functors.
 The balancing maps are specified by their universal computation-counit normalization.
-The direct-image maps are their actual mates, without an invertibility assumption.
+The direct-image maps are their actual mates.
 
 ## References
 

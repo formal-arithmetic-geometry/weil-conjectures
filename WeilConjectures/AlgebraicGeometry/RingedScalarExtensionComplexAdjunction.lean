@@ -8,9 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Mathlib.CategoryTheory.Adjunction.Additive
 
-/-! # Termwise scalar extension of ringed-site complexes
-
-.
+/-! # Termwise scalar extension of ringed-site complexes.
 
 ## References
 
@@ -27,18 +25,14 @@ namespace CategoryTheory
 attribute [local irreducible] SheafOfModules.RingedTensor.tensorAdjunction
   SheafOfModules.RingedTensor.tensorFunctor Adjunction.mapHomologicalComplex
 
-/-- Scalar extension is additive, by its adjunction to restriction of scalars.
-
-. -/
+/-- Scalar extension is additive, by its adjunction to restriction of scalars. -/
 instance scalarExtension_additive
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (SheafOfModules.RingedTensor.tensorFunctor φ).Additive :=
   (SheafOfModules.RingedTensor.tensorAdjunction φ).left_adjoint_additive
 
-/-- The termwise scalar-extension adjunction on complexes.
-
-. -/
+/-- The termwise scalar-extension adjunction on complexes. -/
 @[irreducible] noncomputable def ringedScalarExtensionComplexAdjunction
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :

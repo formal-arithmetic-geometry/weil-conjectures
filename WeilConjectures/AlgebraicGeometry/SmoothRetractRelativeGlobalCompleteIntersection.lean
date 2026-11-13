@@ -90,16 +90,8 @@ private noncomputable def reindexCotangentEquiv
           using DFunLike.congr_fun h x }
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Algebra, Lemma 07CF.
-(blueprint: lem-weil-pbc-conormal-free-presentation-basis)
-
-Proof. Form the generators attached to the surjective polynomial map. Identify their
-cotangent module with the kernel cotangent module, transporting freeness through the
-quotient equivalence to S. Apply Mathlib's Huber lemma to obtain a presentation whose
-relations form a conormal basis. Reindex its finite variable and relation types by Fin.
-The polynomial renaming equivalence transports the conormal basis. Finally identify S
-with the quotient by its presentation kernel, replace that kernel by the span of the
-relations, and transport the coefficients and basis through the quotient equivalence.
+/-- A finitely presented algebra with a polynomial presentation whose conormal module is free
+admits a finite presentation by relations whose classes form a basis of the conormal module.
 -/
 private theorem finite_conormal_basis_presentation
     (R : Type u) [CommRing R] (S : Type v) [CommRing S] [Algebra R S]
@@ -161,20 +153,8 @@ private theorem finite_conormal_basis_presentation
   obtain ⟨ψQ, bQ, hQ⟩ := result
   exact ⟨_, _, P'.relation, ψQ, bQ, fun j ↦ hQ j _⟩
 
-/-- Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CG, and the
-split conormal sequence in the proof of Lemma 07CH.
-(blueprint: lem-weil-pbc-smooth-retract-relative-global-complete-intersection)
-
-Proof. The conormal sequence of the polynomial quotient splits because the quotient
-is smooth. Its middle term has rank n, and the given equation basis makes its left
-term free of rank c. Tensoring this split sequence with any residue field shows that
-c is at most n and that the differential fibre has rank n-c. For a nonempty fibre
-over a prime of R, smoothness and differentials commute with base change. Thus at
-every prime of this fibre the differential fibre has rank n-c. The dimension theorem
-for a smooth finite type algebra over a field identifies this rank with dimension at
-the point. Dimension is the supremum of dimensions at points; because this fibre is
-nontrivial its spectrum is nonempty, and the constant supremum is n-c. Empty fibres
-impose no condition, so the same argument includes the zero ring.
+/-- A smooth quotient of a polynomial ring in `n` variables by `c` relations whose classes
+form a conormal basis is a relative global complete intersection presentation.
 -/
 private theorem smooth_conormal_basis_fibre_dimension
     {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)
@@ -206,7 +186,8 @@ private theorem smooth_conormal_basis_fibre_dimension
   rw [topologicalKrullDim_eq_iSup_topologicalKrullDimAt]
   simp only [(hpoint _).2, ciSup_const]
 
-/-- A smooth algebra is a retract of a relative global complete intersection that is smooth over it.
+/-- A smooth algebra is a retract of a relative global complete intersection that is smooth
+over it.
 -/
 theorem smooth_retract_relative_global_complete_intersection
     (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [Smooth R A] :

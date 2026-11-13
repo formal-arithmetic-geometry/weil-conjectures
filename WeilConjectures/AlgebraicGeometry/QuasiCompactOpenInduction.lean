@@ -27,20 +27,9 @@ open TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, Cohomology of Schemes, Lemma 08DR: induction for quasi-compact opens.
-
-First handle separated quasi-compact opens using finite affine covers. Induct on their size. The empty
-open is affine. Adjoin the last affine V to the union U of the preceding charts.
-Each chart's intersection with V is affine by
-`lem-weil-pbc-separated-affine-open-intersection`. Thus both U and U ∩ V have
-shorter covers and satisfy P by induction. Their separatedness follows from open
-immersions and composition. Apply the gluing hypothesis.
-
-For any quasi-compact open W, induct on a finite affine cover in the same way.
-Quasi-separatedness makes U ∩ V quasi-compact. It is separated as an
-open of affine V. Apply
-`lem-sc-invert-s-cohomology-separated-induction` to it, the induction hypothesis
-to U, and the affine hypothesis to V, then glue. Finally take W = X. -/
+/-- Induction for quasi-compact opens of a quasi-compact quasi-separated scheme: a property
+holding for affine opens and stable under the union `U ⊔ V` of a quasi-compact open `U` and an
+affine open `V` (given it holds on `U`, `V`, `U ⊓ V`) holds for every quasi-compact open. -/
 theorem quasiCompactOpen_induction (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (P : X.Opens → Prop)
     (h_affine : ∀ U : X.Opens, IsAffineOpen U → P U)

@@ -9,6 +9,19 @@ module
 public import WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforward
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
+/-!
+# Assembling pushforwards of thickening systems
+
+Termwise identifications of the pushforward of a coherent thickening system with a coherent
+formal module, compatible with the transition maps, assemble to an isomorphism of inverse
+systems.
+
+## References
+
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+* [Stacks Project, Tag 0880](https://stacks.math.columbia.edu/tag/0880)
+-/
+
 @[expose] public section
 universe v
 open CategoryTheory Opposite
@@ -17,8 +30,7 @@ noncomputable section
 set_option autoImplicit false
 
 /-- Adjacent compatibility of termwise pushforward identifications assembles to an
-isomorphism of inverse systems. The construction uses `NatTrans.ofOpSequence` and
-its componentwise inverse identities. -/
+isomorphism of inverse systems. -/
 theorem thickeningSystemPushforward_assemble
     {X : Scheme.{v}} [IsNoetherian X] {T : ℕ → Scheme.{v}}
     {i : ∀ n, T n ⟶ T (n + 1)}

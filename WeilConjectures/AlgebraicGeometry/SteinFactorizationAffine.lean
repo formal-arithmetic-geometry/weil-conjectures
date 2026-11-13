@@ -30,38 +30,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- For a proper `f`, put `B = Γ(X, ⊤)`. The canonical Stein factorization has first map
-`X.toSpecΓ` and second map `f.steinFactorizationBase`. Its ring map is integral, its first
-map is proper with geometrically connected fibres, and each ordinary fibre and topological
-inverse image of a point is connected (thus nonempty). The underlying fibre maps
-homeomorphically onto that inverse image by `Scheme.Hom.fiberHomeo`, with underlying map
-`Scheme.Hom.fiberι`, as recorded in the scheme-fibre definition (Tag 01K1).
-
-Proof route of the node:
-1. Apply the universal factorization lemma (Tag 03GY),
-   `lem-weil-pbc-stein-universally-closed-factor`, to the proper morphism. It identifies the
-   intermediate affine scheme with `Spec B`, gives integrality of the second map, and gives
-   universal closedness, quasi-compactness, quasi-separatedness and surjectivity of the first
-   map, together with its structure-sheaf pushforward being the structure sheaf.
-2. Separated cancellation and permanence of finite
-   type make the first map separated and finite type.
-   Together with universal closedness this gives properness.
-3. Over the affine base, integrality of the second map is integrality of `A → B`; equivalently
-   use `lem-weil-pbc-stein-integral-global-sections` and the affine global-sections isomorphism.
-4. Replace the base by `Spec B`. The etale criterion (Tag 03GZ),
-   `lem-weil-pbc-stein-geometric-fibre-etale-criterion`, reduces geometric connectedness to
-   connectedness after affine etale base change. Properness survives base change, and flat
-   base change of global sections (`lem-weil-pbc-stein-flat-base-change-global-sections`,
-   Tag 02KH) keeps global sections equal to the new base ring.
-5. Apply `lem-weil-pbc-stein-normalized-fibre-idempotent`: the node's formal-functions route
-   identifies the completed local ring with the inverse limit of sections on infinitesimal
-   neighbourhoods. A nontrivial fibre idempotent would lift to a nontrivial idempotent in a
-   local completed ring, a contradiction; surjectivity gives nonemptiness. This proves
-   geometric connectedness. The current Tag 03H2 instead uses Tag 0G7X to lift a fibre
-   idempotent after principal localization; it then comes from the residue field and is trivial.
-6. The fibre homeomorphism of `def-pc-scheme-fibre` (Tag 01K1) transfers connectedness and
-   nonemptiness to the inverse-image subspace, using `def-weil-connected-scheme`.
--/
+/-- For a proper `f` over `Spec A`, put `B = Γ(X, ⊤)`. The ring map `A → B` is integral, the
+map `X.toSpecΓ : X ⟶ Spec B` is proper with geometrically connected fibres, and each fibre and
+each topological inverse image of a point of `Spec B` is connected (thus nonempty). -/
 theorem Scheme.Hom.steinFactorization_affine {A : Type u} [CommRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] :
     ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom.IsIntegral ∧

@@ -32,29 +32,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.IdealSheafData
 
-/-- Stacks Project, Tags 01J3 and 01J4.
-
-The vanishing ideal is the quasi-coherent sheaf of sections vanishing at the points of `T`.
-On each affine open its ideal is the unique radical ideal with the specified zero locus;
-localization on basic opens expresses equality with the associated ideal sheaf. Its closed
-subscheme is reduced, has image `T`, and is unique up to a unique isomorphism over `X`.
-
-Proof, following the nine steps of the node:
-1. Evaluation is germ followed by the residue map; its kernels
-   form ideals compatible with restriction. Pointwise vanishing is local, hence a sheaf.
-2. On an affine open the closed set is the zero locus of a unique radical ideal, by
-   lem-weil-pbc-affine-open-spec-points and lem-weil-pbc-zero-locus-eq-iff-radical-eq.
-3. Evaluation vanishes exactly at the corresponding prime, so the ideal is the intersection
-   of those primes, hence the radical ideal of step 2.
-4. On a basic open the same condition gives the localization of this ideal.
-5. The ideal sheaf and the associated module agree on the basis of basic opens, hence
-   agree as subsheaves; thus the ideal sheaf is quasi-coherent.
-6. The quasi-coherent ideal cuts out a closed immersion, locally the quotient spectrum,
-   whose image is the given zero locus.
-7. Quotients by radical ideals are reduced; reducedness is affine-local.
-8. For another reduced closed immersion, its affine kernel ideals are radical with the
-   same zero loci, hence equal. Equality on the affine basis gives equality of ideal sheaves.
-9. Equal ideal sheaves give a unique isomorphism over the ambient scheme. -/
+/-- The vanishing ideal is the quasi-coherent sheaf of sections vanishing at the points of `T`.
+On each affine open its ideal is the unique radical ideal with the specified zero locus, and it
+localizes on basic opens. Its closed subscheme is reduced, has image `T`, and is unique up to a
+unique isomorphism over `X`. -/
 theorem reduced_induced_closed_subscheme (X : Scheme.{u}) (T : TopologicalSpace.Closeds X) :
     (∀ (U : X.Opens) (f : Γ(X, U)),
       f ∈ (vanishingIdeal T).idealOfOpens U ↔

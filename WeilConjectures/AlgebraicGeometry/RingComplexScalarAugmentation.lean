@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension
 
-/-! # The canonical augmentation after scalar extension
-
-.
+/-! # The canonical augmentation after scalar extension.
 
 ## References
 

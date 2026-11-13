@@ -37,8 +37,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
   CategoryTheory.Functor.rightDerivedFunctor
 
 /-- The total derived inverse image, with coefficient parameters kept generic.
-This is definitionally `L(upperStar A v)`.
-. -/
+This is definitionally `L(upperStar A v)`. -/
 noncomputable abbrev smoothCompactPullback
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -985,9 +984,7 @@ attribute [local instance] isIso_projectionMap_of_finite in
 attribute [local instance] isIso_rightDerivedLowerShriekBaseChangeMap in
 /-- The relative compact dual of a finite local system has bounded constructible compact
 image. Ordinary direct image is its coefficient dual, compatibly with the actual exchange.
-This assertion makes no generic shrinking and asserts no local constancy of a direct image.
-
-. -/
+This assertion makes no generic shrinking and asserts no local constancy of a direct image. -/
 theorem exists_smooth_compact_dual_model
     (k : Type u) [Field k] (S : Scheme.{u})
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]

@@ -147,8 +147,7 @@ instance comparisonStalkAdditive (Y : Scheme.{u}) (y : Y) :
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-/-- Exactness of the module stalk functor, from the shared stalk exactness theorem.
--/
+/-- The module stalk functor preserves homology. -/
 instance comparisonStalkHomology (Y : Scheme.{u}) (y : Y) :
     (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).PreservesHomology := by
   apply Functor.preservesHomology_of_map_exact
@@ -156,12 +155,12 @@ instance comparisonStalkHomology (Y : Scheme.{u}) (y : Y) :
   exact ((RingedSpace.module_stalk_exact Y.toRingedSpace T.f).2.2.2.2
     T.X₃ T.f T.g T.zero).mp hT y
 
-/-- (blueprint: lem-pc-stalk-comparison-source-transport) -/
+/-- The module stalk functor preserves finite limits. -/
 instance comparisonStalkLimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteLimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteLimits_of_preservesHomology _
 
-/-- (blueprint: lem-pc-stalk-comparison-source-transport) -/
+/-- The module stalk functor preserves finite colimits. -/
 instance comparisonStalkColimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteColimits_of_preservesHomology _

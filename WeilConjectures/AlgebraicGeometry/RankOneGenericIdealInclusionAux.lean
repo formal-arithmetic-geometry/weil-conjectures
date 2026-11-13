@@ -15,6 +15,19 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.LinearAlgebra.Dimension.Free
 
+/-!
+# Generic stalks of closed pushforwards of the structure module
+
+For a closed immersion `i : W ⟶ X` with `W` integral, the stalk of the pushforward of the
+structure module at the generic point of `W` is identified with any compatible rank-one
+residue-field line.
+
+## References
+
+* [Stacks Project, Tag 01YH](https://stacks.math.columbia.edu/tag/01YH)
+* [Stacks Project, Tag 01YE](https://stacks.math.columbia.edu/tag/01YE)
+-/
+
 @[expose] public section
 
 universe u

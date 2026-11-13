@@ -12,6 +12,19 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
+/-!
+# Open restriction of tensor-power section fractions
+
+On an open subscheme, the canonical numerator comparisons for tensor powers of a module `L`
+with a global section `s` intertwine the transition morphisms given by multiplication by
+powers of `s`.
+
+## References
+
+* [Stacks Project, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks Project, Tag 01PW](https://stacks.math.columbia.edu/tag/01PW)
+-/
+
 @[expose] public section
 
 set_option autoImplicit false

@@ -16,17 +16,17 @@ import WeilConjectures.AlgebraicGeometry.PullbackDualFiniteLocallyFree
 /-!
 # Cotangent and tangent sheaves of a morphism of schemes
 
-For a morphism of schemes `f: X ⟶ S`, the sheaf of relative differentials `Ω¹_{X/S}` is the
+For a morphism of schemes `f : X ⟶ S`, the sheaf of relative differentials `Ω¹_{X/S}` is the
 sheafification of the presheaf `U ↦ Ω_{𝒪_X(U) / (f⁻¹𝒪_S)(U)}` of Kähler differentials of `𝒪_X`
 relative to the pullback `f⁻¹𝒪_S` of the structure sheaf of the base. It comes with the universal
-relative derivation `d: 𝒪_X → Ω¹_{X/S}`. The *tangent sheaf* is its dual
+relative derivation `d : 𝒪_X → Ω¹_{X/S}`. The *tangent sheaf* is its dual
 
 $$
 T_{X/S} = \mathcal{H}om_{\mathcal O_X}(\Omega^1_{X/S}, \mathcal O_X),
 $$
 
 the sheaf of relative vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. For a section
-`e: S ⟶ X` of `f`, the *tangent sheaf along `e`* is
+`e : S ⟶ X` of `f`, the *tangent sheaf along `e`* is
 
 $$
 \mathcal{H}om_{\mathcal O_S}(e^*\Omega^1_{X/S}, \mathcal O_S),
@@ -36,31 +36,28 @@ the sheaf of relative tangent vectors at the points of the section. When `f` is 
 is locally free and this is `e^* T_{X/S}`. For the identity section of a group scheme this is the
 Lie algebra sheaf, see `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie`.
 
-Mathlib has sheaves of modules on schemes with their pullbacks and pushforwards, and Kähler
-differentials of a morphism of presheaves of commutative rings on one site, but not the cotangent
-sheaf of a morphism of schemes; it is constructed here. The dual sheaf `ℋom_{𝒪_X}(M, 𝒪_X)` is
-`AlgebraicGeometry.Scheme.Modules.dual` of `WeilConjectures.AlgebraicGeometry.Modules.Dual`.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.unitModule`, `AlgebraicGeometry.Scheme.Modules.unitSmul`: the
   structure sheaf as a sheaf of modules, and multiplication by a global section on it; they give
   the `Γ(X, ⊤)`-module structure on the morphisms `M ⟶ 𝒪_X`, the global sections of the dual.
 - `AlgebraicGeometry.Scheme.Hom.cotangentPresheaf`, `AlgebraicGeometry.Scheme.Hom.cotangentSheaf`:
-  the presheaf and the sheaf `Ω¹_{X/S}` of relative differentials of `f: X ⟶ S`.
+  the presheaf and the sheaf `Ω¹_{X/S}` of relative differentials of `f : X ⟶ S`.
 - `AlgebraicGeometry.Scheme.Hom.tangentSheaf`: the tangent sheaf `T_{X/S} = ℋom(Ω¹_{X/S}, 𝒪_X)`.
 - `AlgebraicGeometry.Scheme.Hom.tangentSheafAlong`: the tangent sheaf `ℋom(e^*Ω¹_{X/S}, 𝒪_S)`
-  along a section `e: S ⟶ X`.
+  along a section `e : S ⟶ X`.
 
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Hom.tangentSheafAlong_iso_pullback_tangentSheaf`: for smooth `f`,
   the tangent sheaf along a section is the pullback of the tangent sheaf.
 
-## Blueprint
+## Implementation details
 
-- `def-wf-lie-algebra-derivation`: the tangent space of a point as the dual of the cotangent space
-  `𝔪_x/𝔪_x²`.
+Mathlib has sheaves of modules on schemes with their pullbacks and pushforwards, and Kähler
+differentials of a morphism of presheaves of commutative rings on one site, but not the cotangent
+sheaf of a morphism of schemes; it is constructed here. The dual sheaf `ℋom_{𝒪_X}(M, 𝒪_X)` is
+`AlgebraicGeometry.Scheme.Modules.dual` of `WeilConjectures.AlgebraicGeometry.Modules.Dual`.
 
 ## References
 
@@ -174,33 +171,33 @@ namespace Hom
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
-/-- The morphism `f⁻¹𝒪_S ⟶ 𝒪_X` of presheaves of rings on `X` underlying `f: X ⟶ S`: the
-adjoint of `f^♯: 𝒪_S ⟶ f_*𝒪_X`. -/
+/-- The morphism `f⁻¹𝒪_S ⟶ 𝒪_X` of presheaves of rings on `X` underlying `f : X ⟶ S`: the
+adjoint of `f^♯ : 𝒪_S ⟶ f_*𝒪_X`. -/
 noncomputable def pullbackPresheafHom :
     (TopCat.Presheaf.pullback CommRingCat.{u} f.base).obj S.presheaf ⟶ X.presheaf :=
   ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u} f.base).homEquiv _ _).symm f.c
 
-/-- The presheaf of relative differentials of `f: X ⟶ S`: over `U` the Kähler differentials of
+/-- The presheaf of relative differentials of `f : X ⟶ S`: over `U` the Kähler differentials of
 `𝒪_X(U)` relative to `(f⁻¹𝒪_S)(U)`. -/
 noncomputable def cotangentPresheaf : X.PresheafOfModules :=
   PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials' f.pullbackPresheafHom
 
-/-- The universal relative derivation `d: 𝒪_X → Ω` into the presheaf of relative differentials. -/
+/-- The universal relative derivation `d : 𝒪_X → Ω` into the presheaf of relative differentials. -/
 noncomputable def cotangentPresheafDerivation :
     f.cotangentPresheaf.Derivation' f.pullbackPresheafHom :=
   PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation' f.pullbackPresheafHom
 
-/-- The sheaf `Ω¹_{X/S}` of relative differentials of `f: X ⟶ S`: the sheafification of the
+/-- The sheaf `Ω¹_{X/S}` of relative differentials of `f : X ⟶ S`: the sheafification of the
 presheaf of relative Kähler differentials. -/
 noncomputable def cotangentSheaf : X.Modules :=
   (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj f.cotangentPresheaf
 
-/-- The tangent sheaf `T_{X/S} = ℋom_{𝒪_X}(Ω¹_{X/S}, 𝒪_X)` of `f: X ⟶ S`: the sheaf of relative
+/-- The tangent sheaf `T_{X/S} = ℋom_{𝒪_X}(Ω¹_{X/S}, 𝒪_X)` of `f : X ⟶ S`: the sheaf of relative
 vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. -/
 noncomputable def tangentSheaf : X.Modules :=
   Modules.dual f.cotangentSheaf
 
-/-- The tangent sheaf of `f: X ⟶ S` along a section `e: S ⟶ X`: the dual
+/-- The tangent sheaf of `f : X ⟶ S` along a section `e : S ⟶ X`: the dual
 `ℋom_{𝒪_S}(e^*Ω¹_{X/S}, 𝒪_S)` of the pullback of the cotangent sheaf, the sheaf of relative
 tangent vectors at the points of `e`. For the identity section of a group scheme this is the Lie
 algebra sheaf. -/
@@ -208,12 +205,7 @@ noncomputable def tangentSheafAlong (e : S ⟶ X) : S.Modules :=
   Modules.dual ((Modules.pullback e).obj f.cotangentSheaf)
 
 /-- For a smooth morphism `f` the cotangent sheaf is locally free, so the tangent sheaf along a
-section `e` is the pullback `e^*T_{X/S}` of the tangent sheaf.
-
- The cotangent sheaf is definitionally the
-library's relative differential sheaf, which is finite locally free for a smooth morphism.
-The dual pairing of a finite locally free module is preserved by the monoidal pullback
-functor; uniqueness of left duals gives the claimed isomorphism. -/
+section `e` is the pullback `e^*T_{X/S}` of the tangent sheaf. -/
 theorem tangentSheafAlong_iso_pullback_tangentSheaf [Smooth f] (e : S ⟶ X) (he : e ≫ f = 𝟙 S) :
     Nonempty (f.tangentSheafAlong e ≅ (Modules.pullback e).obj f.tangentSheaf) := by
   have _ := he

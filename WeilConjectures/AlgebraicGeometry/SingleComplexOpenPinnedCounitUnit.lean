@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedAdjunctio
 
 /-! # Shared normalization of the pinned derived counit
 
-The calculation is shared by open counit compatibility and unit-square normalization..
+The calculation is shared by open counit compatibility and unit-square normalization.
 
 ## References
 

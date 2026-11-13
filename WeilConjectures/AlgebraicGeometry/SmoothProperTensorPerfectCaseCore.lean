@@ -19,6 +19,19 @@ import WeilConjectures.AlgebraicGeometry.PerfectTensorHomDuality
 import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 import WeilConjectures.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison
 import Mathlib.CategoryTheory.Yoneda
+
+/-!
+# The tensor comparison for perfect complexes along a proper morphism
+
+For a proper morphism `f : X ⟶ Y` of Noetherian schemes and a right adjoint `c` of `Rf_*` on
+quasi-coherent derived categories, the comparison `Lf^* K ⊗ c(𝒪) ⟶ c(K)` is an isomorphism
+for every perfect complex `K`.
+
+## References
+
+* [Stacks Project, Tag 0A9T](https://stacks.math.columbia.edu/tag/0A9T)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -41,7 +54,8 @@ private theorem projection_isIso
   rw [← hp]
   infer_instance
 
-/-- Intermediate perfect comparison clause. -/
+/-- For perfect `K`, the projection-formula map for `K` is an isomorphism with the specified
+inverse, and the induced comparison `Lf^* K ⊗ c(𝒪) ⟶ c(K)` is an isomorphism. -/
 theorem smoothProper_tensor_perfect_case_core
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

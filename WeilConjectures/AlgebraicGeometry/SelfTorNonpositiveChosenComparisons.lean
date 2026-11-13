@@ -46,8 +46,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Nonpositive flat resolutions have affine coordinates compatible with one
-augmented quotient-resolution lift on each basic inclusion. Compatibility with
-arbitrary supplied lifts is a separate algebraic homotopy argument. -/
+augmented quotient-resolution lift on each basic inclusion. -/
 theorem exists_selfTor_nonpositive_chosen_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]

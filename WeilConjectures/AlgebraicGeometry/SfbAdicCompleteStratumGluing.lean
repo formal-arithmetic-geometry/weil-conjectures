@@ -58,9 +58,7 @@ private theorem normalizedComplete_iso
 
 /-- Completeness is detected by local isomorphisms to complete objects on a finite
 stratification. The comparison objects may vary with the covering arrow. They need
-not be perfect, bounded or constructible.
-
-. -/
+not be perfect, bounded or constructible. -/
 theorem sfbAdicComplete_of_stratum_local_iso (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (s : Stratification X)

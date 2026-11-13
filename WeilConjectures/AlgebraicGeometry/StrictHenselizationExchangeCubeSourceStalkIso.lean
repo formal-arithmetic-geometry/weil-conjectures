@@ -13,6 +13,19 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource
 
+/-!
+# Invertibility of the source stalk comparison of the strict-henselization exchange cube
+
+For a cartesian square with quasi-compact quasi-separated `f` and compatible strict henselian
+local rings at geometric points, the stalk comparison on the source face of the exchange cube
+is an isomorphism.
+
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Limits
@@ -21,7 +34,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 set_option linter.unusedVariables false in
-/-- Component theorem: the source strict-local cube stalk comparison is invertible. -/
+/-- The source strict-local cube stalk comparison is invertible. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}

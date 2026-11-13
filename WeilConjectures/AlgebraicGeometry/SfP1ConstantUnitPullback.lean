@@ -60,9 +60,7 @@ private theorem native_unit_compat
     (leftDerivedUpperStarUnitIso B f).hom
     (leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp B f)
 
-/-- Inverse image preserves the specified constant-unit comparison.
-
-. -/
+/-- Inverse image preserves the specified constant-unit comparison. -/
 theorem constantUnit_pullback
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

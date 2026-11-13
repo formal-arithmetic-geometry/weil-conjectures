@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.VectorBundleLinearFunctions
 /-!
 # Locally linear functions and the independence of the chart
 
-For `q: T ⟶ P` and functions `σ₁, …, σ_c` on `T`, a function `s` on `T` is *locally linear* in
+For `q : T ⟶ P` and functions `σ₁, …, σ_c` on `T`, a function `s` on `T` is *locally linear* in
 the `σₗ` (`AlgebraicGeometry.Scheme.Hom.IsLocallyLinear`) if locally on `P` it is a combination
 `∑ q^*(aₗ) σₗ`. These functions form a `Γ(P, ⊤)`-submodule
 (`AlgebraicGeometry.Scheme.Hom.locallyLinearSubmodule`). For a linear atlas of a vector bundle,

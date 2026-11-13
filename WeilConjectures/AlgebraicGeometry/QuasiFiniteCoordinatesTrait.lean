@@ -19,14 +19,14 @@ public import WeilConjectures.TraceFormula.Specialization.Trait
 
 # Quasi-finite coordinates over a trait
 
-Let `f: X ⟶ T` be flat and locally of finite presentation, and let `x` be a point of `X` with
+Let `f : X ⟶ T` be flat and locally of finite presentation, and let `x` be a point of `X` with
 local fibre dimension `q = dim_x X_{f(x)}`. If `η ⤳ f x` is a generalization of `f x`, then the
 fibre `X_η` has dimension at least `q`, and so has the base change of `X` along any flat
 field-valued point `Spec K ⟶ T` with image `η` (for instance the geometric generic point of a
 trait). Together with the quasi-finite coordinates `exists_quasiFinite_affineSpace_chart`, this
-gives the full statement of blueprint `lemma-quasi-finite-coordinates` for a flat scheme of
+gives quasi-finite coordinates for a flat scheme of
 finite type over the trait `S = Spec k'⟦t⟧`: `q ≤ dim X_η̄`, and there are an open
-neighbourhood `V` of `x` and quasi-finite coordinates `b: V ⟶ 𝔸^q_S`, so that `dim V_η̄ ≤ q`.
+neighbourhood `V` of `x` and quasi-finite coordinates `b : V ⟶ 𝔸^q_S`, so that `dim V_η̄ ≤ q`.
 
 ## Main results
 
@@ -34,8 +34,13 @@ neighbourhood `V` of `x` and quasi-finite coordinates `b: V ⟶ 𝔸^q_S`, so th
   `f x` lifts to a generalization of `x` whose fibre has local dimension at least `dim_x X_{f x}`.
 - `AlgebraicGeometry.topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback`:
   `dim_x X_{f x} ≤ dim (X ×_T Spec K)` for a flat point `Spec K ⟶ T` generalizing `f x`.
-- `AlgebraicGeometry.exists_quasiFinite_affineSpace_chart_trait`: the statement of the blueprint
-  lemma over the trait `Spec k'⟦t⟧` and its geometric generic point.
+- `AlgebraicGeometry.exists_quasiFinite_affineSpace_chart_trait`: quasi-finite coordinates
+  over the trait `Spec k'⟦t⟧` and its geometric generic point.
+
+## References
+
+* [Stacks Project, Tag 00OT](https://stacks.math.columbia.edu/tag/00OT)
+* [Stacks Project, Tag 054U](https://stacks.math.columbia.edu/tag/054U)
 -/
 
 @[expose] public section
@@ -72,7 +77,7 @@ theorem mem_genericPoints_iff_forall_specializes [QuasiSober A] {a : A} :
       isClosed_closure)
 
 attribute [local instance] specializationOrder in
-/-- A surjective generalizing map `f: A ⟶ B` of quasi-sober `T₀` spaces satisfies
+/-- A surjective generalizing map `f : A ⟶ B` of quasi-sober `T₀` spaces satisfies
 `dim B ≤ dim A`: a chain of specializations in `B` lifts to `A`, starting from its closed end. -/
 theorem topologicalKrullDim_le_of_generalizingMap [QuasiSober A] [T0Space A] [QuasiSober B]
     [T0Space B] {f : A → B} (hf : GeneralizingMap f) (hsurj : Function.Surjective f) :
@@ -108,7 +113,7 @@ section FieldDimension
 
 /-- In the spectrum of a finitely generated algebra over a field, every point `x` is a
 specialization of the generic point `ξ` of an irreducible component with
-`dim_x ≤ dim_ξ`: take a component through `x` of dimension `dim_x` (Stacks 00OT). -/
+`dim_x ≤ dim_ξ`. -/
 theorem exists_mem_genericPoints_specializes_topologicalKrullDimAt_le_of_finiteType
     {k S : Type u} [Field k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S]
     (x : Spec (.of S)) :
@@ -188,11 +193,9 @@ private theorem exists_specializes_fiberι_topologicalKrullDimAt_le [Flat f]
   exact ⟨x', by rwa [f.fiberι_asFiber], hx',
     (fibre_dimension_eq_of_specializes_component_restrict f ⊤ ξ x' trivial hx'ξ hζ).ge⟩
 
-/-- **Generalizing the local fibre dimension** (Stacks 054U): for `f: X ⟶ T` flat and locally
+/-- **Generalizing the local fibre dimension**: for `f : X ⟶ T` flat and locally
 of finite presentation, a point `x` of `X`, and a generalization `η ⤳ f x`, there is a
-generalization `x' ⤳ x` over `η` with `dim_x X_{f x} ≤ dim_{x'} X_η`. Take a component of the
-fibre through `x` of dimension `dim_x X_{f x}`, lift its generic point along the generalizing map
-`f` and use the constancy of the fibre dimension along such generalizations. -/
+generalization `x' ⤳ x` over `η` with `dim_x X_{f x} ≤ dim_{x'} X_η`. -/
 theorem exists_specializes_topologicalKrullDimAt_asFiber_le [Flat f]
     [LocallyOfFinitePresentation f] (x : X) {η : T} (hη : η ⤳ f x) :
     ∃ x' : X, x' ⤳ x ∧ f x' = η ∧
@@ -206,7 +209,7 @@ theorem exists_specializes_topologicalKrullDimAt_asFiber_le [Flat f]
   refine ⟨x', hx'ζ.trans ?_, hx', hdim.trans hdim'⟩
   simpa using hζx.map (f.fiberι (f x)).continuous
 
-/-- For `f: X ⟶ T` flat and locally of finite presentation and a generalization `η ⤳ f x`, the
+/-- For `f : X ⟶ T` flat and locally of finite presentation and a generalization `η ⤳ f x`, the
 fibre `X_η` has dimension at least `dim_x X_{f x}`. -/
 theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_fiber [Flat f]
     [LocallyOfFinitePresentation f] (x : X) {η : T} (hη : η ⤳ f x) :
@@ -214,8 +217,8 @@ theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_fiber [Flat f]
   obtain ⟨x', -, rfl, hdim⟩ := exists_specializes_topologicalKrullDimAt_asFiber_le f x hη
   exact hdim.trans ((iInf₂_le ⊤ trivial).trans (topologicalKrullDim_subspace_le _ Set.univ))
 
-/-- The fibre `X_η` of `f: X ⟶ T` has dimension at most that of the base change of `X` along a
-flat field-valued point `g: Spec K ⟶ T` with image `η`: the projection to `X` is generalizing
+/-- The fibre `X_η` of `f : X ⟶ T` has dimension at most that of the base change of `X` along a
+flat field-valued point `g : Spec K ⟶ T` with image `η`: the projection to `X` is generalizing
 with image `f⁻¹{η}`. -/
 theorem topologicalKrullDim_fiber_le_topologicalKrullDim_pullback {K : Type u} [Field K]
     (g : Spec (.of K) ⟶ T) [Flat g] (z : Spec (.of K)) :
@@ -242,9 +245,9 @@ theorem topologicalKrullDim_fiber_le_topologicalKrullDim_pullback {K : Type u} [
     obtain ⟨p, hp, -⟩ := Scheme.Pullback.exists_preimage_pullback _ z hw
     exact ⟨p, hinj ((hφ p).trans hp)⟩
 
-/-- **Lower bound for the dimension of a flat field-valued base change**: for `f: X ⟶ T` flat and locally of finite
-presentation, a point `x` of `X` and a flat field-valued point `g: Spec K ⟶ T` whose image
-generalizes `f x` (for instance the geometric generic point of a trait), the local fibre
+/-- **Lower bound for the dimension of a flat field-valued base change**: for `f : X ⟶ T` flat and
+locally of finite presentation, a point `x` of `X` and a flat field-valued point `g : Spec K ⟶ T`
+whose image generalizes `f x` (for instance the geometric generic point of a trait), the local fibre
 dimension `dim_x X_{f x}` is at most `dim (X ×_T Spec K)`. -/
 theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback [Flat f]
     [LocallyOfFinitePresentation f] (x : X) {K : Type u} [Field K] (g : Spec (.of K) ⟶ T)
@@ -283,9 +286,9 @@ theorem traitGenericPoint_specializes (z : Spec (.of (traitGenericField k'))) (y
 
 variable {k'} {X : Scheme.{u}} (f : X ⟶ trait k') [Flat f] [LocallyOfFiniteType f]
 
-/-- **Fibre dimension and the geometric generic fibre**: for `X` flat and locally of finite type over the
-trait `S = Spec k'⟦t⟧` and a point `x` of `X`, `dim_x X_{f x} ≤ dim X_η̄`, where `X_η̄` is the base
-change of `X` to the geometric generic point `Spec Ω ⟶ S`. -/
+/-- **Fibre dimension and the geometric generic fibre**: for `X` flat and locally of finite type
+over the trait `S = Spec k'⟦t⟧` and a point `x` of `X`, `dim_x X_{f x} ≤ dim X_η̄`, where `X_η̄` is
+the base change of `X` to the geometric generic point `Spec Ω ⟶ S`. -/
 theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback_traitGenericPoint
     (x : X) :
     topologicalKrullDimAt (f.asFiber x) ≤
@@ -297,7 +300,7 @@ theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback_traitGener
 /-- **Quasi-finite coordinates over the trait**:
 let `X` be flat and locally of finite type over the trait `S = Spec k'⟦t⟧`, `x` a point of `X`
 and `q = dim_x X_{f x}` the local dimension of its fibre. Then `q ≤ dim X_η̄`, and there are an
-open neighbourhood `V` of `x` and a locally quasi-finite morphism `b: V ⟶ 𝔸^q_S` over `S`;
+open neighbourhood `V` of `x` and a locally quasi-finite morphism `b : V ⟶ 𝔸^q_S` over `S`;
 in particular `dim V_η̄ ≤ q`. Here `X_η̄` and `V_η̄` are the base changes to the geometric generic
 point `Spec Ω ⟶ S`. -/
 theorem exists_quasiFinite_affineSpace_chart_trait (x : X) :

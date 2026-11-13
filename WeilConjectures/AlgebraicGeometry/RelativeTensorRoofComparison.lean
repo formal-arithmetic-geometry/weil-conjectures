@@ -158,13 +158,8 @@ private theorem flat_retract (Y : Scheme.{u})
 
 
 -- Tensor comparison transports through complex and derived module equivalences.
-/-- The open restriction of the derived tensor is computed by the ordinary total tensor.
-
-The finite-free retract terms of a strictly perfect complex are flat and bounded, hence
-K-flat. Exact open restriction and the K-flat derived tensor comparison identify the
-restricted derived tensor with the ordinary total tensor. The compatibility with the
-localized open site is transported through the canonical module equivalence.
--/
+/-- The open restriction of the derived tensor with a strictly perfect complex is computed by
+the ordinary total tensor. -/
 private theorem strictPerfect_openTensor_comparison
     {X : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

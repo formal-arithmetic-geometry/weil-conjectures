@@ -360,10 +360,7 @@ private theorem rawOpenIso_restriction {X T : Scheme.{u}}
 
 
 /-- Derived sections of the restricted coefficient sheaf agree with raw section
-cohomology, preserving restriction and the action of every function on the base open.
-
- This is the untwisted part of the proof of
-`sectionCohomology_unit_comparisons`.. -/
+cohomology, preserving restriction and the action of every function on the base open. -/
 theorem sectionCohomology_untwisted_comparisons {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F)
     (q : ℕ) (W V : T.Opens) (hV : V ≤ W) :

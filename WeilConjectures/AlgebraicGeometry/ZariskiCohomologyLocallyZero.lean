@@ -168,12 +168,9 @@ private theorem exact_sheaf_section_locally_boundary {X : Scheme.{u}}
     _ = S.X₂.obj.map f.op s := by rw [hnat, hk]
 
 -- Cohomology uses the Ext localization instance for Zariski sheaves.
-/-- Positive-degree cohomology classes on a scheme are locally zero.
-
- The cohomology groups and their
-restriction maps are rendered by Mathlib's cohomology presheaf; an injective resolution
-is included as the resolution used to compute the groups.
-The assertion is the four-step proof in the node.
+/-- Positive-degree cohomology classes on a scheme are locally zero: every point has an open
+neighbourhood to which the class restricts to zero. The cohomology groups and their restriction
+maps are those of Mathlib's cohomology presheaf.
 -/
 theorem zariski_cohomology_class_locally_zero {X : Scheme.{u}}
     [HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]

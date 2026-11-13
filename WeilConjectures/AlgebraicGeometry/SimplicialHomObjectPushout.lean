@@ -120,8 +120,8 @@ private lemma representedFamily_exists {X : Scheme.{u₁}}
 
 set_option linter.unusedVariables false in
 /-- Hom objects turn admissible simplicial pushouts into pullbacks.
-The representing pairs are arbitrary fixed choices from def-weil-pbc-simplicial-hom-object;
-the equations specify their unique induced morphisms, without another Hom-object definition. -/
+The representing pairs are arbitrary fixed choices of simplicial Hom objects, and the
+equations specify their unique induced morphisms. -/
 theorem simplicialHomObject_pushout_isPullback {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)}
     {A B C D : SSet.{t₁}} [A.Finite] [B.Finite] [C.Finite] [D.Finite]

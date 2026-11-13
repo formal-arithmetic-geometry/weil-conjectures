@@ -412,9 +412,7 @@ set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 256 in
 /-- Local finite free models of the two relevant good truncations compute a fixed
 degree of the original K-flat tensor. The comparison needs neither Noetherianity nor
-local constancy hypotheses: the models are given.
-
-. -/
+local constancy hypotheses: the models are given. -/
 theorem site_tensor_local_model_comparison
     (J : GrothendieckTopology C) (B : Type u) [CommRing B]
     (P Q : CochainComplex (SheafOfModules.{u} (𝓡(J, B))) ℤ)

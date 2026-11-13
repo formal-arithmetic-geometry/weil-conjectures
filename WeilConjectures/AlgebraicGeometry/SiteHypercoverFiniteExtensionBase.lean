@@ -62,7 +62,7 @@ def labelIndex (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)
     (q : Fin (n + 1)) (a : Labels K q.val) : (term K q).I :=
   (operator K a.2.1.val).f a.2.2.val
 
-/-- The explicit split condition of the node: bijective index normalization and
+/-- The split condition: bijective index normalization and
 isomorphisms on every normalized component. -/
 def IsSplit (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) : Prop :=
   (∀ q : Fin (n + 1), Function.Bijective (labelIndex K q)) ∧
@@ -70,7 +70,7 @@ def IsSplit (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) : Prop :=
       IsIso ((operator K a.2.1.val).φ a.2.2.val)
 
 /-- Compatible boundary projections, indexed by all lower simplices. Restriction to
-codimension-one faces and their pairwise overlaps gives the node's finite boundary diagram;
+codimension-one faces and their pairwise overlaps gives the finite boundary diagram;
 conversely, every lower simplex factors through a face, uniquely up to those overlaps.
 In dimension one this is just two projections with no compatibility equations. -/
 structure BoundaryCone (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)

@@ -11,7 +11,6 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 /-! # The ring complex as a concrete Godement mapping fibre
 
 The complex is constructed from global sections on the open complement of the ideal.
-.
 
 ## References
 
@@ -151,9 +150,7 @@ def ringComplexGodementRestriction (A : CommRingCat.{u}) (I : Ideal A) :
   HomologicalComplex.mkHomFromSingle (ringComplexGodementFirst A I)
     (ringComplexGodementFirst_closed A I)
 
-/-- The actual ring complex: the mapping fibre of restriction to Godement sections.
-
-. -/
+/-- The actual ring complex: the mapping fibre of restriction to Godement sections. -/
 def ringComplexGodement (A : CommRingCat.{u}) (I : Ideal A) :
     CochainComplex (RingSiteModules A) ℤ :=
   (CochainComplex.mappingCone.triangle (ringComplexGodementRestriction A I)).invRotate.obj₁

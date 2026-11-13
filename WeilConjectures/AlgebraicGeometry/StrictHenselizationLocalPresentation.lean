@@ -31,10 +31,10 @@ namespace AlgebraicGeometry.Scheme
 
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- In an affine open chart `i: Spec R ⟶ S` through which the geometric point factors as
+/-- In an affine open chart `i : Spec R ⟶ S` through which the geometric point factors as
 `xR ≫ i`, the strict henselization of `S` at `xR ≫ i` is an algebraic strict henselization of
 `R` localized at the image `xR(*)` of the geometric point, compatibly with a ring map
-`b: R ⟶ 𝒪^{sh}` whose spectrum followed by `i` is the structure morphism. -/
+`b : R ⟶ 𝒪^{sh}` whose spectrum followed by `i` is the structure morphism. -/
 theorem strictHenselization_chart_isStrictHenselization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]

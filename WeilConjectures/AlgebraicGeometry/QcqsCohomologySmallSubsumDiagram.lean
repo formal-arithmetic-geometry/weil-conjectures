@@ -54,10 +54,7 @@ private theorem small_coproduct_support
 
 open Classical in
 /-- A given, possibly large coproduct of module sheaves has a small directed presentation
-by finite biproducts of its summands, with the original inclusions as component maps.
-
- The universe reduction is the smallness argument in
-`lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives`.. -/
+by finite biproducts of its summands, with the original inclusions as component maps. -/
 theorem exists_small_finiteSubsum_diagram (X : Scheme.{u}) (I : Type v)
     (F : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (S : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ι : ∀ i : I, F i ⟶ S)

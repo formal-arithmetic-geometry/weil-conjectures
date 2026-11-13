@@ -113,9 +113,7 @@ private theorem nonvanishing_of_local_smul {X : Scheme.{v}} (M : X.Modules)
   exact Submodule.smul_mem _ _ ha
 
 /-- If a point lies in the inverse image of a homogeneous basic open, the section is
-nonvanishing there. The proof uses the fraction identity with a section already known
-to be nonvanishing at the point; in the residue-field fibre, a nonzero numerator cannot
-be a multiple of a vanishing denominator. -/
+nonvanishing there. -/
 theorem sectionRing_proj_mem_basicOpen_forward (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (f : X ⟶ Proj (sectionRingGrade L))
     (hformula : ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d),

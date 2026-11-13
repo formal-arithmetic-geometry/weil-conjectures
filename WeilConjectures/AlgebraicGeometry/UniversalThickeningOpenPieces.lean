@@ -49,7 +49,7 @@ private theorem firstOrder_restrict {T T' : Scheme.{u}} (i : T ⟶ T')
 
 /-- Restriction of a first order thickening, restriction of a universal thickening to
 opens of source and base, and enlargement of an open base containing the image.
-In the first clause, for any structure morphism `b: T' ⟶ X`, the restricted structure
+In the first clause, for any structure morphism `b : T' ⟶ X`, the restricted structure
 morphism is `W'.ι ≫ b`; the source is over `X` by composition. The equality on affine
 opens expresses restriction of the defining ideal sheaf, in Mathlib's ideal-sheaf data. -/
 theorem universalFirstOrderThickening_open_pieces {Z X : Scheme.{u}} (h : Z ⟶ X) :

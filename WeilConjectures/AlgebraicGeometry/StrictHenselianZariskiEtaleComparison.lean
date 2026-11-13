@@ -31,16 +31,10 @@ open AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 /-- The comparison from Zariski to étale cohomology is an isomorphism when all
-local rings of the scheme are strictly henselian.
-
-The functor `i` is the inclusion of the small Zariski site into the small étale
-site. Its continuous direct image is `ε_* F`; `c` is the pullback followed by
-its counit, and is the identity in degree zero.
-`hi_inclusion` identifies the underlying open subschemes. The three clauses of `hfstar`
-are the defining characterization of cohomology pullback in
-`CategoryTheory.siteCohomology_pullback`: naturality, compatibility with the connecting
-homomorphisms of short exact sequences, and evaluation of the adjunction unit in degree
-zero. Thus `fstar` is the canonical pullback, and `hc` fixes the comparison itself. -/
+local rings of the scheme are strictly henselian. Here `i` is the inclusion of the small
+Zariski site into the small étale site, `hfstar` characterizes `fstar` as the cohomology
+pullback (naturality, compatibility with connecting maps, and the unit in degree zero), and
+`c` is that pullback followed by the counit of `ε_*`. -/
 theorem strictHenselian_zariski_etale_comparison
     {X : Scheme.{u + 1}}
     (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x))

@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPrope
 
 /-! # The residue identification of the coordinate-ring strict henselization
 
-This is clause (1) of `lem-weil-pbc-strict-henselization-functoriality` for the
+This identifies the residue field of the
 coordinate-ring model `Scheme.strictHenselizationRing` of the strict henselization,
 whose canonical maps are the legs of `Scheme.strictHenselizationCone` and the structural
 map `Scheme.strictHenselizationStructuralMap`. The pointed residue map is transported from

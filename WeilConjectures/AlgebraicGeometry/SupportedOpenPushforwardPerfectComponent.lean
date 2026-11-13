@@ -13,12 +13,26 @@ import WeilConjectures.AlgebraicGeometry.SupportedOpenPushforwardComplementZero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
+/-!
+# Perfectness of supported open pushforwards
+
+The derived pushforward along an open immersion of a perfect complex with cohomology supported
+in a closed subset of the ambient scheme is again perfect.
+
+## References
+
+* [Stacks Project, Tag 08DP](https://stacks.math.columbia.edu/tag/08DP)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08CM](https://stacks.math.columbia.edu/tag/08CM)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- The perfectness obligation for a supported open pushforward. -/
+/-- The derived pushforward along an open immersion `U ⟶ X` of a perfect complex whose
+cohomology is supported in a closed subset `T ⊆ U` of `X` is perfect. -/
 theorem supported_open_pushforward_perfect (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

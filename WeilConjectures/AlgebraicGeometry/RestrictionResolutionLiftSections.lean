@@ -120,8 +120,7 @@ private lemma raw_lift_sections {X Y : Scheme.{uBC}} (p : Y ⟶ X)
 
 -- The nested complex functors and their restriction adjunction need extra elaboration fuel.
 /-- Evaluate a restriction-adjunction lift on sections, with arbitrary resolutions
-and their prescribed restriction comparisons. This calculation involves one scheme
-map only, and no base-change square or equality between composite inverse images. -/
+and their prescribed restriction comparisons. -/
 theorem restrictionResolutionLift_sections {X Y : Scheme.{uBC}}
     (p : Y ⟶ X) {M : X.Modules} {N : Y.Modules}
     (I : InjectiveResolution M) (J : InjectiveResolution N)

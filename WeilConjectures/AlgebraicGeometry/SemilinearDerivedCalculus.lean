@@ -579,7 +579,7 @@ structure Data where
   scalarTensor : ∀ {m n : ℕ} (h : n ≤ m),
     (levelClosed m).tensor ⋙ (scalar h).T ≅
       ((scalar h).T.prod (scalar h).T) ⋙ (levelClosed n).tensor
-  /-- Scalar/tensor comparison on K-flat representatives. Its counit square
+  /-- Scalar/tensor comparison on K-flat representatives.  Its counit square
   uses the actual derived change-of-rings model, and its ordinary comparison is
   fixed on pure tensors. -/
   scalarTensorModel : ∀ {m n : ℕ} (h : n ≤ m),

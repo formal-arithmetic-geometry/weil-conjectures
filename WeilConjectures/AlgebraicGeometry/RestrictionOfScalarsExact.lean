@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAdjunc
 /-!
 # Exactness of restriction from finite to completed integral coefficients
 
-The index `n: ℕ` denotes the positive exponent `n + 1`, following the coefficient
+The index `n : ℕ` denotes the positive exponent `n + 1`, following the coefficient
 construction. Exactness of an additive functor between abelian categories is expressed
 by preservation of finite limits and finite colimits.
 

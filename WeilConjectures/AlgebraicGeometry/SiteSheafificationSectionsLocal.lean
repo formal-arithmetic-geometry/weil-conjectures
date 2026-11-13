@@ -110,15 +110,10 @@ private theorem local_descent
       ht Y h hh]
   exact hG.isSheafFor_of_mem_precoverage hS y hy
 
-/-- Local representability and descent for sheafification on a site.
-
-The unit is locally surjective by the image-subsheaf argument above. Extract a
-precoverage cover and representatives from each covering image sieve. Local
-injectivity of the unit gives local equality of representatives on every overlap.
-Conversely, local agreement gives compatibility in the sheaf by separatedness;
-the sheaf condition then glues uniquely. Finally, local injectivity and the
-precoverage criterion give local equality of any sections with equal images.
-The value universe includes both site universes, as required for the plus construction.
+/-- Local representability and descent for sheafification on a site: every section of the
+sheafification is locally the image of locally compatible sections of `F`, locally compatible
+families of sections of `F` glue uniquely to a section of the sheafification, and sections of
+`F` with equal images are locally equal.
 -/
 theorem sheafification_sections_local
     {C : Type u} [Category.{w} C]

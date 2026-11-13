@@ -7,7 +7,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 import WeilConjectures.AlgebraicGeometry.CartierReductionData
 
-/-! # SupportedCartierBoundaryExistence -/
+/-! # Existence of the supported Cartier boundary
+
+For an effective Cartier divisor `i : D ⟶ T` on a scheme where `N` is invertible, the normalized
+relative boundary class in `Ext²(i_* A, A_T(1))` exists and is unique.
+
+## References
+
+* [Stacks Project, Tag 03PL](https://stacks.math.columbia.edu/tag/03PL)
+* [Stacks Project, Tag 0A45](https://stacks.math.columbia.edu/tag/0A45)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -16,9 +25,8 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The normalized relative boundary exists and determines its Ext representative.
-proof.md, paragraphs 1--4;
-Stacks 03PL and 0A45. -/
+/-- The normalized relative boundary exists and determines its Ext representative: there is
+a unique degree-2 Ext class satisfying `SupportedKummerBoundary`. -/
 theorem supported_cartier_boundary_existsUnique (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

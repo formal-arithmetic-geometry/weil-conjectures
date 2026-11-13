@@ -8,9 +8,7 @@ public import Mathlib.RingTheory.Ideal.Span
 public import WeilConjectures.CategoryTheory.RingedIdealGenerators
 import WeilConjectures.AlgebraicGeometry.FiniteGeneratorsLocalSpan
 
-/-! # Equality of section ideals on common slice refinements
-
-.
+/-! # Equality of section ideals on common slice refinements.
 
 ## References
 
@@ -84,9 +82,7 @@ private theorem exists_cover_mem_span_generatingList
   exact Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨e i, rfl⟩)
 
 /-- Two finite lists generating one ideal sheaf generate equal section ideals locally
-on every common test span. The cover lies on the original site, without fibre products.
-
-. -/
+on every common test span. The cover lies on the original site, without fibre products. -/
 theorem exists_cover_generatingLists_ideal_eq
     (U : C) (r : ℕ) (f : Fin r → O.obj.obj (op U))
     (hf : IsRingedIdealGeneratingList O I ι U r f)

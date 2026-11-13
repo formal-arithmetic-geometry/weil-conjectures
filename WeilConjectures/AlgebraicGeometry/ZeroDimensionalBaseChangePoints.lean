@@ -36,14 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A zero-dimensional finite-type scheme over an algebraically closed field has the
-same finite discrete set of points after extension of the ground field.
-
-The proof first obtains finiteness and discreteness from the Artinian zero-dimensional
-case, then identifies each residue field with the algebraically closed base field by
-Nullstellensatz. The point description of a fibre product identifies each fibre of the
-projection with `Spec k'`; its unique point gives bijectivity. Dimension zero and
-local Artinianness after field extension make the source of the projection discrete, so
-this bijection is a homeomorphism. -/
+same finite discrete set of points after extension of the ground field. -/
 theorem zeroDimensional_baseChange_points
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

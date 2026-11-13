@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.NoetherianApproximationSmoothStage
 * [Stacks Project, Tag 055Q](https://stacks.math.columbia.edu/tag/055Q)
 * [Stacks Project, Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
 * [Stacks Project, Tag 0C0C](https://stacks.math.columbia.edu/tag/0C0C)
+* [Stacks Project, Tag 055P](https://stacks.math.columbia.edu/tag/055P)
 -/
 
 @[expose] public section
@@ -27,9 +28,8 @@ open CategoryTheory Topology
 
 namespace AlgebraicGeometry
 
-/-- Descend the smooth morphism first, then lift its descended section into a
-later pullback. The section argument follows the already proved
-`exists_noetherian_model_with_section` (Stacks Tags 01ZM and 055P). -/
+/-- A smooth qcqs morphism to an affine scheme with a section is the base change of a smooth
+qcqs morphism with a compatible section over a noetherian scheme. -/
 private theorem exists_smooth_noetherian_model_with_section {X S : Scheme.{u}}
     [IsAffine S] (f : X ⟶ S) [Smooth f] [QuasiCompact f] [QuasiSeparated f]
     (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :

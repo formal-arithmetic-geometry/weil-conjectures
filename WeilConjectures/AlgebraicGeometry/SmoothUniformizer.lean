@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ZeroLocusSubschemeRegular
 /-!
 # Smooth uniformizers at codimension one regular points
 
-Let `X` be locally of finite type over a perfect field `k` and `x: X` a point whose local ring
+Let `X` be locally of finite type over a perfect field `k` and `x : X` a point whose local ring
 `𝒪_{X,x}` is a discrete valuation ring. Then there are an open neighbourhood `W₀ ∋ x` and a
 smooth morphism `W₀ ⟶ 𝔸¹_k` such that the pullback of the coordinate is a uniformizer of
 `𝒪_{X,x}` (`AlgebraicGeometry.exists_smooth_polyAffine_irreducible_germ`).
@@ -43,7 +43,7 @@ defines a morphism to `𝔸¹_k` smooth at `x`, and one restricts to its (open) 
 open IsLocalRing KaehlerDifferential TensorProduct
 
 /-- Let `M` be a projective module over a local ring `R` and `v ∈ M` with `v ∉ 𝔪 M`. Then some
-linear form `ℓ: M → R` takes the value `1` at `v`. -/
+linear form `ℓ : M → R` takes the value `1` at `v`. -/
 theorem Module.Projective.exists_linearMap_apply_eq_one {R M : Type*} [CommRing R]
     [IsLocalRing R] [AddCommGroup M] [Module R M] [Module.Projective R M] {v : M}
     (hv : v ∉ maximalIdeal R • (⊤ : Submodule R M)) : ∃ ℓ : M →ₗ[R] R, ℓ v = 1 := by
@@ -131,7 +131,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- For a morphism `g: Y ⟶ Spec R`, the ring map `R → 𝒪_{Y,y}` induced by `g` factors as the
+/-- For a morphism `g : Y ⟶ Spec R`, the ring map `R → 𝒪_{Y,y}` induced by `g` factors as the
 localization `R → 𝒪_{Spec R, g y}` followed by the stalk map of `g` at `y`. -/
 theorem Scheme.Hom.ΓSpecIso_inv_appTop_germ {Y : Scheme.{u}} {R : CommRingCat.{u}}
     (g : Y ⟶ Spec R) (y : Y) :
@@ -142,7 +142,7 @@ theorem Scheme.Hom.ΓSpecIso_inv_appTop_germ {Y : Scheme.{u}} {R : CommRingCat.{
   rw [h, Category.assoc, Scheme.Hom.germ_stalkMap]
   rfl
 
-/-- A morphism `g: Y ⟶ Spec R`, locally of finite presentation, is smooth at `y` if and only if
+/-- A morphism `g : Y ⟶ Spec R`, locally of finite presentation, is smooth at `y` if and only if
 the induced ring map `R → 𝒪_{Y,y}` is formally smooth. -/
 theorem Scheme.Hom.mem_smoothLocus_iff_formallySmooth {Y : Scheme.{u}} {R : CommRingCat.{u}}
     (g : Y ⟶ Spec R) [LocallyOfFinitePresentation g] (y : Y) :
@@ -161,7 +161,7 @@ theorem Scheme.Hom.mem_smoothLocus_iff_formallySmooth {Y : Scheme.{u}} {R : Comm
     .of_isLocalization (g y).asIdeal.primeCompl
   exact Algebra.FormallySmooth.iff_restrictScalars.symm
 
-/-- A morphism `g: Y ⟶ Spec R` locally of finite type: the induced ring map `R → 𝒪_{Y,y}` is
+/-- A morphism `g : Y ⟶ Spec R` locally of finite type: the induced ring map `R → 𝒪_{Y,y}` is
 essentially of finite type. -/
 theorem Scheme.Hom.essFiniteType_ΓSpecIso_inv_appTop_germ {Y : Scheme.{u}}
     {R : CommRingCat.{u}} (g : Y ⟶ Spec R) [LocallyOfFiniteType g] (y : Y) :
@@ -170,7 +170,7 @@ theorem Scheme.Hom.essFiniteType_ΓSpecIso_inv_appTop_germ {Y : Scheme.{u}}
   exact .comp (Algebra.EssFiniteType.of_isLocalization _ (g y).asIdeal.primeCompl)
     (LocallyOfFiniteType.stalkMap g y)
 
-/-- A morphism `f: Y ⟶ Spec R` is the composite of `Y ⟶ Spec Γ(Y, ⊤)` and the spectrum of the
+/-- A morphism `f : Y ⟶ Spec R` is the composite of `Y ⟶ Spec Γ(Y, ⊤)` and the spectrum of the
 ring map `R → Γ(Y, ⊤)` induced by `f`. -/
 theorem Scheme.toSpecΓ_SpecMap_ΓSpecIso_inv_appTop {Y : Scheme.{u}} {R : CommRingCat.{u}}
     (f : Y ⟶ Spec R) : Y.toSpecΓ ≫ Spec.map ((Scheme.ΓSpecIso R).inv ≫ f.appTop) = f := by
@@ -254,7 +254,7 @@ instance (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] (V : X.left.Opens
     inferInstanceAs (IsLocallyNoetherian (Spec (.of (MvPolynomial (Fin N) k))))
   exact LocallyOfFinitePresentation.iff_locallyOfFiniteType.mpr ‹_›
 
-/-- The morphism `overRestrictToPolyAffine X V s: V ⟶ 𝔸ᴺ_k` is smooth at `x ∈ V` if and only if
+/-- The morphism `overRestrictToPolyAffine X V s : V ⟶ 𝔸ᴺ_k` is smooth at `x ∈ V` if and only if
 the ring map `k[X₀, …, X_{N-1}] → 𝒪_{X,x}`, `Xᵢ ↦ (sᵢ)ₓ`, is formally smooth. -/
 theorem mem_smoothLocus_overRestrictToPolyAffine_iff (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] (V : X.left.Opens) {N : ℕ} (s : Fin N → Γ(X.left, V))
@@ -275,7 +275,7 @@ theorem mem_smoothLocus_overRestrictToPolyAffine_iff (X : Over (Spec (.of k)))
     exact overRestrictToPolyAffine_germ X V s x hx
   exact iff_of_eq (congrArg (fun φ ↦ (CommRingCat.Hom.hom φ).FormallySmooth) h)
 
-/-- Let `X` be locally of finite type over a perfect field `k` and `x: X` a point whose local ring
+/-- Let `X` be locally of finite type over a perfect field `k` and `x : X` a point whose local ring
 is a discrete valuation ring with uniformizer `ϖ`. Then the ring map `k[X₀] → 𝒪_{X,x}`,
 `X₀ ↦ ϖ`, is formally smooth. -/
 theorem formallySmooth_eval₂Hom_stalk_of_irreducible [PerfectField k] (X : Over (Spec (.of k)))
@@ -309,13 +309,9 @@ theorem formallySmooth_eval₂Hom_stalk_of_irreducible [PerfectField k] (X : Ove
     (by rw [hX]; exact hϖ.not_isUnit) (by rw [hX]; exact hm2)
 
 /-- **Smooth uniformizers.** Let `X` be locally of finite type over a perfect field `k` and
-`x: X` a point whose local ring is a discrete valuation ring. Then there are an open
-neighbourhood `W₀` of `x` and a smooth morphism `f₀: W₀ ⟶ 𝔸¹_k` over `k` such that the pullback
-of the coordinate is a uniformizer of `𝒪_{X,x}`.
-
-Any `s` with irreducible germ `sₓ` works: `k[X₀] → 𝒪_{X,x}`, `X₀ ↦ sₓ`, is formally smooth
-(`formallySmooth_eval₂Hom_stalk_of_irreducible`), so `s: V ⟶ 𝔸¹_k` is smooth at `x`, and one
-restricts to its smooth locus. -/
+`x : X` a point whose local ring is a discrete valuation ring. Then there are an open
+neighbourhood `W₀` of `x` and a smooth morphism `f₀ : W₀ ⟶ 𝔸¹_k` over `k` such that the pullback
+of the coordinate is a uniformizer of `𝒪_{X,x}`. -/
 theorem exists_smooth_polyAffine_irreducible_germ [PerfectField k] (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] (x : X.left) [IsDomain (X.left.presheaf.stalk x)]
     [IsDiscreteValuationRing (X.left.presheaf.stalk x)] :

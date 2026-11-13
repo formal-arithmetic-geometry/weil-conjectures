@@ -21,6 +21,25 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
+/-!
+# Local comparisons for supported open pushforward
+
+Derived restriction to an open, derived direct image along an open immersion and its left
+adjoint preserve cohomological support, and the supported comparison maps between left and
+right direct images are invertible after restriction to the open and to the complement of
+the support.
+
+## References
+
+* [Stacks Project, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
+* [Stacks Project, Tag 06Z0](https://stacks.math.columbia.edu/tag/06Z0)
+* [Stacks Project, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
+* [Stacks Project, Tag 08FE](https://stacks.math.columbia.edu/tag/08FE)
+* [Stacks Project, Tag 08DF](https://stacks.math.columbia.edu/tag/08DF)
+* [Stacks Project, Tag 08BS](https://stacks.math.columbia.edu/tag/08BS)
+* [Stacks Project, Tag 00A7](https://stacks.math.columbia.edu/tag/00A7)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -31,9 +50,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Exact derived restriction has the original homology stalk at each point of the open.
-Combine exact restriction/homology comparison with the over-site equivalence and
-`Scheme.Modules.restrictStalkNatIso`. -/
+/-- Exact derived restriction has the original homology stalk at each point of the open. -/
 private noncomputable def restrictionHomologyStalkIso.{z}
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -55,9 +72,7 @@ private noncomputable def restrictionHomologyStalkIso.{z}
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Vanishing after open restriction implies vanishing of homology stalks on that open.
-Apply homology and the additive stalk functor to the zero object, then use the stalk
-comparison. -/
+/-- Vanishing after open restriction implies vanishing of homology stalks on that open. -/
 private theorem stalk_zero_of_restriction_zero.{z}
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -80,10 +95,7 @@ private theorem stalk_zero_of_restriction_zero.{z}
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Open base change propagates cohomological support through derived direct image.
-Restriction to the inverse image of the open complement of T is zero by supported
-restriction. Open base change identifies restriction of the direct image with the
-direct image of that zero object. Its homology stalks on the complement vanish. -/
+/-- Open base change propagates cohomological support through derived direct image. -/
 private theorem direct_image_support
     {Y X : Scheme.{u}} (f : Y ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -127,7 +139,7 @@ private theorem direct_image_support
   intro n x hx
   exact stalk_zero_of_restriction_zero X O _ hout n ⟨x, hx⟩
 
-/-- Derived direct image for an open immersion is fully faithful (Tag 08FE). -/
+/-- Derived direct image for an open immersion is fully faithful. -/
 private noncomputable def open_direct_image_fullyFaithful
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -213,8 +225,7 @@ theorem supported_open_pushforward_local_comparisons_first (X : Scheme.{u}) (U :
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Any left adjoint of derived open restriction preserves cohomological support.
-Identify it with exact extension by zero and compute the interior and exterior stalks. -/
+/-- Any left adjoint of derived open restriction preserves cohomological support. -/
 private theorem left_adjoint_support
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -329,7 +340,7 @@ theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U 
     exact IsZero.isIso hz hz' _
 
 /-- The two supported comparison maps are invertible after restriction to U
-and to V = X minus T; this states local comparisons, not global invertibility. -/
+and to `V = X \ T`. -/
 theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)

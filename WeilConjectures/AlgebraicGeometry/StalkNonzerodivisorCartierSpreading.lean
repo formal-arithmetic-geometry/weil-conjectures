@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Spreading a stalk nonzerodivisor generator to a Cartier equation
 
-The two statements are the ring assertion and the scheme assertion of the node.
+The file proves a ring-theoretic statement and its scheme-theoretic counterpart.
 The ideal stalk in the latter is expressed by extending the ideal on an affine
 neighbourhood along the canonical germ homomorphism. This is the stalk ideal inside
 the structure-sheaf stalk, independently of the chosen affine neighbourhood.
@@ -34,8 +34,7 @@ universe u
 
 namespace Ideal
 
-/-- Clear the ideal generators and the kernel of the localization map simultaneously.
-This is the finite-denominator argument of Stacks Tags 0AG8 and 061L. -/
+/-- Clear the ideal generators and the kernel of the localization map simultaneously. -/
 private theorem exists_clearing_of_regular_generator
     {A S : Type u} [CommRing A] [IsNoetherianRing A]
     (P : Ideal A) [P.IsPrime] [CommRing S] [Algebra A S]

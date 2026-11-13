@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingCechConeLinearEquiv
 import WeilConjectures.AlgebraicGeometry.RingCechConeDifferential
 
-/-! # Ordered localization coordinates for an algebraic two-row cone
-
-.
+/-! # Ordered localization coordinates for an algebraic two-row cone.
 
 ## References
 
@@ -24,9 +22,7 @@ namespace CategoryTheory
 
 /-- The algebraic cone of localization has the full ordered-subset coordinates.
 This statement involves only modules, linear maps and localizations; it does not
-involve a site, a sheaf tensor product or a totalization.
-
-. -/
+involve a site, a sheaf tensor product or a totalization. -/
 theorem ringCechAlgebraicCone_coordinates (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A)
     (d : ∀ n : ℕ, ringCechTailTerm A r (fun i ↦ f i.succ) n →ₗ[A]

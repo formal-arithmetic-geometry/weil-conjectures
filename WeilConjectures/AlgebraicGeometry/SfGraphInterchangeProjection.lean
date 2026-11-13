@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SfGraphProjectionData
 import all WeilConjectures.AlgebraicGeometry.CompactificationProjectionComposition
 import all WeilConjectures.AlgebraicGeometry.SfGraphCompactSupportCompositionBaseChange
 
-/-! # Projection compatibility of one proper/open interchange
-
-.
+/-! # Projection compatibility of one proper/open interchange.
 
 ## References
 
@@ -158,8 +156,6 @@ private theorem interchange_prefix_transport_split
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A Cartesian proper/open interchange preserves successive projection maps.
-
-.
 -/
 theorem sfGraphInterchange_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]

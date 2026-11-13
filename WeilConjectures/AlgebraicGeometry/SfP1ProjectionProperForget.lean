@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 
-/-! # Projection comparison with fixed ordinary endpoints
-
-.
+/-! # Projection comparison with fixed ordinary endpoints.
 -/
 
 @[expose] public section
@@ -48,9 +46,7 @@ private theorem projectionComparison_whole
   rfl
 
 /-- The defining projection comparison, using the canonical proper comparison with
-its ordinary endpoint fixed before whiskering, evaluated at any coefficient object.
-
-. -/
+its ordinary endpoint fixed before whiskering, evaluated at any coefficient object. -/
 theorem projectionComparison_eq_ordinaryProperForget
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

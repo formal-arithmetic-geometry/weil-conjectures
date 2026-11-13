@@ -52,7 +52,7 @@ noncomputable def rawAffineComplexPullback (p : ℤ) {X Y : Scheme.{v}} (f : X �
           ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryFactors.hom.app K))
 
 /-- Cohomology of a sheaf restricted to the etale scheme `U ×_S Y`, in degree zero
-as a complex. No raw derived-Hom group occurs in this definition.. -/
+as a complex. No raw derived-Hom group occurs in this definition. -/
 noncomputable def rawAffineRestrictedCohomology {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     AddCommGrpCat.{v + 1} :=
@@ -60,14 +60,14 @@ noncomputable def rawAffineRestrictedCohomology {S Y : Scheme.{v}} (h : Y ⟶ S)
     (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj
       ((upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)).obj F)))
 
-/-- The map between the restricted schemes induced by a triangle over `S`.. -/
+/-- The map between the restricted schemes induced by a triangle over `S`. -/
 noncomputable def rawAffineRestrictedMap {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :
     Limits.pullback U.hom h' ⟶ Limits.pullback U.hom h :=
   Limits.pullback.map U.hom h' U.hom h (𝟙 _) a (𝟙 _) (by simp) (by simpa using w.symm)
 
 /-- Restriction of a coefficient map to the pullback triangle, with both inverse-image
-composition comparisons written explicitly.. -/
+composition comparisons written explicitly. -/
 noncomputable def rawAffineRestrictedCoefficient {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -85,7 +85,7 @@ noncomputable def rawAffineRestrictedCoefficient {S Y Y' : Scheme.{v}} (a : Y' �
       (upperStar AddCommGrpCat.{v + 1} r').map φ
 
 /-- Canonical restricted-cohomology map: derived pullback followed by the restricted
-coefficient map. This definition uses neither continuity nor raw derived Hom.. -/
+coefficient map. This definition uses neither continuity nor raw derived Hom. -/
 noncomputable def rawAffineRestrictedCohomologyMap {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

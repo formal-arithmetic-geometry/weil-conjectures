@@ -98,9 +98,7 @@ private theorem compact_prefix
   simp only [Category.assoc]
 
 /-- Proper exchange and forget-supports carry the compact-support diagonal section
-unit to the ordinary section unit, under an isomorphism over the base.
-
-. -/
+unit to the ordinary section unit, under an isomorphism over the base. -/
 theorem sectionComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

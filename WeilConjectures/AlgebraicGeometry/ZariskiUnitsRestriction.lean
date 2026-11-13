@@ -38,9 +38,7 @@ noncomputable def unitsSheafToPushforward {Z X : Scheme.{u}} (i : Z ⟶ X) :
 
 /-- The canonical comparison `H^p(X, i_* O_Zˣ) → H^p(Z, O_Zˣ)`: apply exact inverse
 image to the Ext class, identify inverse image of the constant integer sheaf with the
-constant integer sheaf, then apply the counit `i⁻¹ i_* O_Zˣ → O_Zˣ`. For a closed immersion
-this is the inverse of the canonical cohomology identification of Tag 02UV, obtained by
-applying the exact pushforward to an injective resolution. -/
+constant integer sheaf, then apply the counit `i⁻¹ i_* O_Zˣ → O_Zˣ`. -/
 noncomputable def unitsPushforwardCohomologyComparison {Z X : Scheme.{u}} (i : Z ⟶ X)
     (p : ℕ) :
     Sheaf.H (((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u}

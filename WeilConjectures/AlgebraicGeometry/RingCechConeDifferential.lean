@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.RingCechConeLinearEquiv
 
-/-! # Differential of the algebraic localization cone
-
-.
+/-! # Differential of the algebraic localization cone.
 -/
 
 @[expose] public noncomputable section
@@ -17,9 +15,7 @@ universe u
 open scoped BigOperators TensorProduct
 namespace CategoryTheory
 
-/-- The canonical augmented alternating localization differential.
-
-. -/
+/-- The canonical augmented alternating localization differential. -/
 def ringCechDifferential (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A) :
     ∀ n : ℕ, ringCechTailTerm A r g n →ₗ[A] ringCechTailTerm A r g (n + 1)
   | 0 => LinearMap.pi (fun _ ↦ (Algebra.ofId A _).toLinearMap)
@@ -27,9 +23,7 @@ def ringCechDifferential (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A) :
       ((ringCechFace A g q t j).toLinearMap.comp
         (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))))
 
-/-- Evaluation of the positive-degree canonical differential.
-
-. -/
+/-- Evaluation of the positive-degree canonical differential. -/
 theorem ringCechDifferential_succ (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A)
     (q : ℕ) (x : ringCechTailTerm A r g (q + 1)) (t : Fin (q + 2) ↪o Fin r) :
     ringCechDifferential A r g (q + 1) x t =
@@ -312,9 +306,7 @@ theorem ringCechConeEquiv_d (A : CommRingCat.{u}) (r q : ℕ)
   rw [← map_add, ← map_add]
   simp only [Prod.mk_add_mk, add_zero, zero_add]
 
-/-- The degree-zero map is the full diagonal localization.
-
-. -/
+/-- The degree-zero map is the full diagonal localization. -/
 theorem ringCechConeEquiv_d_zero (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A) (x : A) :
     ringCechConeEquiv A r 0 f

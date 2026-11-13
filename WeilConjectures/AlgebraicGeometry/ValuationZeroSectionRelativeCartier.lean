@@ -40,7 +40,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The zero scheme of a section whose restriction to the integral closed fibre is nonzero is
-relative effective Cartier over a valuation base (Stacks, Tags 0EX8 and 062Y).
+relative effective Cartier over a valuation base.
 Module pullback is `tensorPullback`; the restriction of `s` to the
 fibre `X₀ = f.fiber x₀` is the unit of its canonical adjunction applied to `s`. -/
 theorem valuation_zero_section_relative_cartier

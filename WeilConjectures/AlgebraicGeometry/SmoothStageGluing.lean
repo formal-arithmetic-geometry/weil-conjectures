@@ -9,6 +9,17 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
+/-!
+# Smoothness at a finite stage from a smooth model
+
+In a Noetherian approximation, a smooth finite-stage model of a pullback morphism, up to
+isomorphism over the stage, makes the pullback morphism smooth at that stage.
+
+## References
+
+* [Stacks Project, Tag 0C0C](https://stacks.math.columbia.edu/tag/0C0C)
+-/
+
 @[expose] public section
 
 universe u
@@ -17,10 +28,10 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The gluing part of eventual smoothness. A smooth finite-stage model `q` of the
-pullback morphism, i.e. a smooth `q: Z ⟶ N.D.obj j.left` together with a comparison
-isomorphism `e: Z ≅ pullback p (N.D.map j.hom)` over `N.D.obj j.left`, makes the pullback
-morphism itself smooth at that stage, since smoothness is invariant under isomorphism. -/
+/-- The gluing part of eventual smoothness.  A smooth finite-stage model `q` of the
+pullback morphism, i.e. a smooth `q : Z ⟶ N.D.obj j.left` together with a comparison
+isomorphism `e : Z ≅ pullback p (N.D.map j.hom)` over `N.D.obj j.left`, makes the pullback
+morphism itself smooth at that stage. -/
 theorem Scheme.NoetherianApproximation.smooth_stage_of_affine_models
     {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}
     {Y : Scheme.{u}} (p : Y ⟶ N.D.obj i)

@@ -14,14 +14,28 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.DerivedTensorUnitCompact
 public import Mathlib.AlgebraicGeometry.Noetherian
+
+/-!
+# Quasi-coherence data for proper noetherian morphisms
+
+For a proper morphism of noetherian schemes, derived direct image, the derived tensor unit and
+tensor products with derived pullbacks preserve quasi-coherent complexes.
+
+## References
+
+* [Stacks Project, Tag 08D5](https://stacks.math.columbia.edu/tag/08D5)
+* [Stacks Project, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
+* [Stacks Project, Tag 08DX](https://stacks.math.columbia.edu/tag/08DX)
+* [Stacks Project, Tag 09M1](https://stacks.math.columbia.edu/tag/09M1)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
-/-- The quasi-coherent direct-image, unit, and tensor data for a proper noetherian morphism.
-Sources: Stacks Project, Tags 08D5, 08DW, 08DX and 09M1. -/
+/-- The quasi-coherent direct-image, unit, and tensor data for a proper noetherian morphism. -/
 theorem smoothProper_qcoh_data
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

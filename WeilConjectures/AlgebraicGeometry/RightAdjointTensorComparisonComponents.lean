@@ -10,6 +10,19 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+
+/-!
+# Components of the right-adjoint tensor comparison
+
+For a proper morphism of Noetherian schemes, the projection-formula family induces a natural
+transformation from `Lf^* (-) ⊗ c(𝒪)` to the right adjoint `c` of `Rf_*` on quasi-coherent
+derived categories, with prescribed components.
+
+## References
+
+* [Stacks Project, Tag 0A9U](https://stacks.math.columbia.edu/tag/0A9U)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w

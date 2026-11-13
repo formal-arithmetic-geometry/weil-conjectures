@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 /-! # Canonical directed affine stages at a separable generic point
 
 This module records the reindexed system coming from the affine pointed
-neighbourhoods of the geometric generic point. The index, diagram, and maps are
+neighbourhoods of the geometric generic point.  The index, diagram, and maps are
 required to be the canonical ones, rather than arbitrary affine étale systems.
 
 ## References
@@ -41,15 +41,8 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- The canonical affine pointed-neighbourhood system, reindexed by a directed
-poset. The displayed equations identify every field with the corresponding
+poset.  The displayed equations identify every field with the corresponding
 canonical map in the strict-henselization diagram.
-
-The proof first applies the directed-reindexing theorem to the opposite of the
-small affine pointed-neighbourhood category. It then transports the affine
-stage maps, the transition maps, and the canonical cone legs along that
-reindexing. The affine and étale assertions are inherited from the affine
-pointed-neighbourhood objects, and the displayed equations are the defining
-equations of the strict-henselization cone and its structural maps.
 -/
 theorem exists_separableGeneric_affineEtale_stages
     (S : Scheme.{u}) [IsIntegral S]

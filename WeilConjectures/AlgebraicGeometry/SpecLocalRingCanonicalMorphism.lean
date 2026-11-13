@@ -47,12 +47,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The natural localization map is an isomorphism, and every affine neighborhood gives
- the same canonical morphism.
-Proof (node steps 1 and 2): choose an affine neighborhood using affine-opens-basis.
-The affine-open-stalk-localization lemma identifies the germ map with localization at
-its prime. Compose its spectrum map with the affine open immersion. Compare two choices
-on an affine neighborhood inside their intersection; restrictions commute with germs
-and with the affine-open spectrum maps. Thus the composites agree. -/
+ the same canonical morphism. -/
 theorem fromSpecStalk_affine_description (Y : Scheme.{u}) (y : Y)
     (V : Y.Opens) (hV : IsAffineOpen V) (hy : y ∈ V) :
     (∃ e : Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal ≃+* Y.presheaf.stalk y,
@@ -75,15 +70,7 @@ theorem fromSpecStalk_affine_description (Y : Scheme.{u}) (y : Y)
 
 /-- The closed point maps to `y`; the image is its generalizations, every neighborhood
 pulls back to the whole spectrum, all stalk maps are isomorphisms, the closed stalk map
-is the identity after the canonical identifications, and the morphism is flat.
-
-Proof (node steps 3--6): localization prime correspondence gives the image and closed
-point. Generalizations belong to every neighborhood. Factor each stalk map through
-an affine open immersion and the spectrum of a localization; both maps are isomorphisms
-by affine-open-stalk-localization and localization-prime-residue-field-iso. At the
-closed point, germ compatibility shows the normalized stalk map is the identity,
-first on affine germs, then on fractions. This identifies the pair in 01J6 as `(y,id)`.
-Finally isomorphisms of rings are flat, so the stalkwise criterion gives flatness. -/
+is the identity after the canonical identifications, and the morphism is flat. -/
 theorem fromSpecStalk_local_properties (Y : Scheme.{u}) (y : Y) :
     (Y.fromSpecStalk y) (closedPoint (Y.presheaf.stalk y)) = y ∧
     Set.range (Y.fromSpecStalk y) = {x : Y | x ⤳ y} ∧
@@ -149,15 +136,8 @@ theorem fromSpecStalk_local_properties (Y : Scheme.{u}) (y : Y) :
     exact RingHom.Flat.of_bijective (ConcreteCategory.bijective_of_isIso _)
 
 /-- The map on germs induced by the canonical tensor-pullback unit is an isomorphism
-at the closed point. The source point is written as `c(y')`, equal to `y` by the
-preceding statement, to avoid noncanonical casts. Restricting scalars along the closed
-stalk map expresses the target as an `O_{Y,y}`-module.
-
-Proof (node step 7): module-stalk-pullback identifies the target with extension of
-scalars along the closed stalk map and the unit on germs with `s_y ⊗ 1`. The ring map
-is the identity under the closed-stalk identification (step 5). Hence the tensor map
-has inverse `m ⊗ b ↦ b m`. Composing gives the claimed module isomorphism and its germ
-formula; every stalk element is a germ by module-stalk. -/
+at the closed point. The source point is the image of the closed point (which equals `y`), and
+the target is viewed as an `O_{Y,y}`-module by restricting scalars along the closed stalk map. -/
 theorem fromSpecStalk_module_stalk (Y : Scheme.{u}) (y : Y) (G : Y.Modules) :
     ∃ e :
       (RingedSpace.moduleStalkFunctor Y.toRingedSpace
@@ -198,12 +178,7 @@ theorem fromSpecStalk_module_stalk (Y : Scheme.{u}) (y : Y) (G : Y.Modules) :
 
 /-- For every proper ideal, the local-ring correspondence sends the quotient map to
 its spectrum map followed by the canonical morphism; the spectrum map is a closed
-immersion.
-Proof (node step 8): a proper ideal lies in the maximal ideal, so the quotient is local
-and its quotient map is local. The spectrum of a surjection is a closed immersion.
-It sends the quotient closed point to the original closed point. Stalk-map-composition
-and compatibility of spectrum stalk maps with germs identify the normalized stalk map
-of the composite with the quotient map. Apply the bijection morphism-from-spec-local-ring. -/
+immersion. -/
 theorem fromSpecStalk_quotient_factorization (Y : Scheme.{u}) (y : Y)
     (J : Ideal (Y.presheaf.stalk y)) (hJ : J ≠ ⊤) :
     ∃ (hlocal : IsLocalRing ((Y.presheaf.stalk y) ⧸ J))

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleGraphProjectionArbitraryBase
 
 /-! # Normalized etale exceptional duality over arbitrary bases
 
-proof.md`, paragraphs 2-3
-.
-
 The normalization is the mate of the constructed graph comparison, with the exact
 sum/evaluation adjunction. Tensor domains are transported explicitly from left-derived
 pullback to termwise exact pullback. No quasi-compactness hypothesis is imposed.
@@ -157,35 +154,10 @@ private theorem exactTensorUnit
     curriedTensor_map_app, tensorHom_def',
     Category.assoc] using h
 
-/-- Canonical etale exceptional duality, including its evaluation-counit normalization
-and the equality of the actual tensor mate with the unit action. The adjunction argument
-selects any right adjoint furnished by `sfEtaleAmbientAdjointProjection`.
-proof.md`, paragraphs 2-3
-.
-
-Proof plan:
-1. Exact etale sum extension is left adjoint to exact inverse image. Apply the
-   sum/evaluation adjunction termwise, then descend its unit, counit and triangles
-   through homotopy localization to the entire unbounded derived categories. Transport the canonical strong
-   monoidal structure of derived pullback to exact inverse image, retaining its unit
-   comparison.
-2. The specified graph comparison a from sum extension S to compact support F is
-   invertible. Its adjunction conjugate
-   rho is therefore invertible. The mate formula says ev S(rho) = a_G followed by
-   the compact-support counit. This fixes the normalization uniquely. Its coefficient-unit component followed by
-   the pullback-unit identification is eta, hence eta is invertible.
-3. Transpose rho_K theta_K under S adjoint to E. Naturality of a and the defining
-   transpose of theta give inverse projection followed by the compact-support
-   counit at A_W and the unitor.
-   The graph/projection square replaces this by kappa followed by the evaluation
-   counit at A_W and the unitor.
-4. Naturality and the counit equation for the unit-adjunct tensor action rewrite
-   this as the evaluation adjunct of E(lambda) mu^{-1} (rho_A tensor 1). The monoidal left-unit law identifies it
-   with the adjunct of lambda (eta tensor 1). Injectivity of the adjunction
-   bijection gives the stated equality.
-5. The equality expresses theta as a composite of invertible maps; thus theta is
-   invertible. The argument uses neither quasi-compactness nor boundedness.
-   An arbitrary open immersion has the required factorization through id_W. -/
+/-- Canonical étale exceptional duality for a separated étale morphism `e` and any right adjoint
+`G` of compactly supported pushforward: the comparison `e^* ⟶ G` is invertible with its
+evaluation-counit normalization, the tensor mate equals the unit action, the unit is
+invertible, and the ambient tensor maps are invertible. -/
 theorem sfEtaleUnitTensorArbitraryBase
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e] (c : Compactification e)

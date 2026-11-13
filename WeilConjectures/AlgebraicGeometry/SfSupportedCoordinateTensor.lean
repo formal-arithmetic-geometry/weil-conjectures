@@ -10,9 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
-/-! # Tensor compatibility of the common-coordinate comparison
-
-.
+/-! # Tensor compatibility of the common-coordinate comparison.
 -/
 
 @[expose] public noncomputable section

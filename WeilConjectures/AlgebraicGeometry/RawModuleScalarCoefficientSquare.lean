@@ -101,7 +101,8 @@ private theorem coefficient_unshifted
             (Over.w f).symm).inv.app _) := by
   exact rawModuleScalar_coefficient_unshifted Λ G A B f
 
-/-- (blueprint: lem-sbc-raw-scalar-coefficient-square) -/
+/-- The shifted coefficient factors of the scalar and abelian derived pullbacks along a morphism
+`f : A ⟶ B` over `W` form a commutative square with the derived pullback comparison. -/
 theorem rawModuleScalar_coefficient_square
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

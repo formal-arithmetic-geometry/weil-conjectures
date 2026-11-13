@@ -10,9 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionForward
 
-/-! # Projection compatibility of the fixed graph compositor
-
-.
+/-! # Projection compatibility of the fixed graph compositor.
 -/
 
 @[expose] public section
@@ -124,9 +122,7 @@ private meta partial def graphProjectionCongrHEq (a b : Expr) : MetaM Expr := do
       right arguments {(b.getAppArgs.map fun x ↦ x.getAppFn)}"
   return ← mkHEqRefl a
 
-/-- The explicitly constructed graph compositor preserves the projection maps.
-
-. -/
+/-- The explicitly constructed graph compositor preserves the projection maps. -/
 theorem sfGraphCompactSupportCompIso_projection
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

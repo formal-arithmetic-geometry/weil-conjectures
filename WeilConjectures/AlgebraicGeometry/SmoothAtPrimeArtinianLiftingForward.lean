@@ -12,6 +12,18 @@ public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.Basic
 import Mathlib.RingTheory.Artinian.Ring
 
+/-!
+# Smoothness near a prime implies Artinian lifting
+
+A finite type ring map which is smooth on an open neighbourhood of a prime `q` satisfies the
+infinitesimal lifting property for small extensions of Artinian local rings at `q`.
+
+## References
+
+* [Stacks Project, Tag 02HT](https://stacks.math.columbia.edu/tag/02HT)
+* [Stacks Project, Tag 02HS](https://stacks.math.columbia.edu/tag/02HS)
+-/
+
 @[expose] public section
 
 universe u v
@@ -20,21 +32,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Proof in words, with step numbers inherited from the parent plan:
-1. Principal opens form a basis of Spec A. The localization
-   map identifies Spec A_g with D(g). Smoothness is unchanged by that isomorphism and by restriction. Thus an open smooth neighbourhood
-   exists iff some g outside q makes R -> A_g smooth.
-2. The kernel I of the surjection B' -> B is proper because B is nonzero. It lies
-   in the maximal ideal of B'. The Jacobson radical of an Artinian ring is nilpotent;
-   in a local ring it is the maximal ideal, so I is nilpotent. This argument works for
-   every such surjection, without needing the length-one assumption.
-3. Given the smooth A_g and a diagram, a(g) is a unit because its preimage maximal
-   ideal is q. Factor a through A_g. Regard the resulting map and B' -> B as maps
-   of R-algebras using the compatibility in the diagram. Smoothness implies formal
-   smoothness, so Mathlib's `Algebra.FormallySmooth.liftOfSurjective` lifts the map
-   A_g -> B through the nilpotent kernel. Compose with A -> A_g to obtain a'; the
-   lifting identity and the algebra-homomorphism identity give both required equations.
--/
+/-- If `Spec A → Spec R` is smooth on an open neighbourhood of `q`, then every map `A → B`
+to an Artinian local ring with maximal ideal pulling back to `q` lifts along each small
+extension `B' → B` of Artinian local `R`-algebras (kernel of length one). -/
 theorem smooth_on_open_artinian_lifting_forward
     {R A : Type u} [CommRing R] [CommRing A] [IsNoetherianRing R]
     (φ₀ : R →+* A) (hfinite : φ₀.FiniteType) (q : Ideal A) [q.IsPrime] :

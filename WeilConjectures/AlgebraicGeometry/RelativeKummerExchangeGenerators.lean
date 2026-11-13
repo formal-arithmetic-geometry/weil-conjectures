@@ -15,12 +15,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 /-!
 # Exchange on normalized global generators
 
-proof.md, Step 3; Stacks Tags 0736 and 072W
-.
-
 Global classes are derived morphisms out of the constant free rank-one module sheaf.
 Sections are sheaf morphisms out of that same sheaf, equivalently their value on 1.
 All comparisons below are the canonical single, constant, shift and adjunction comparisons.
+
+## References
+
+* [Stacks Project, Tag 0736](https://stacks.math.columbia.edu/tag/0736)
+* [Stacks Project, Tag 072W](https://stacks.math.columbia.edu/tag/072W)
 -/
 
 @[expose] public section

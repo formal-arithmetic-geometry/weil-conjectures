@@ -25,6 +25,7 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalExchangeCompatibility
 * [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
 * [Stacks Project, Tag 03Q1](https://stacks.math.columbia.edu/tag/03Q1)
 * [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
+* [Stacks Project, Tag 0EYP](https://stacks.math.columbia.edu/tag/0EYP)
 -/
 
 @[expose] public section
@@ -35,8 +36,8 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The compatible marked maps give a ring cocone and hence a map to its spectrum.
-The colimit coprojection formula gives the pointed limit-leg equations (Stacks Tag 04HX). -/
+/-- A geometric point `s` of `Y` lifts to the strict localization at `s`, compatibly with the
+marked points of all strict henselization neighbourhoods. -/
 private theorem pointedStrictHenselizationLift
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) :
@@ -88,9 +89,7 @@ private theorem pointedStrictHenselizationLift
   exact (N.obj j).2.w
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical exchange map has the unit/pointed-lift formula on every germ.
-This is the representative calculation from GeometricFibreExchangeGerms (Tag 0EYP),
-with no assumed comparison map: the map being evaluated is exchange itself. -/
+/-- The canonical exchange map has the unit/pointed-lift formula on every germ. -/
 private theorem fibreExchangeSectionComparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

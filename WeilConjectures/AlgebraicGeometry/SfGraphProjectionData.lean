@@ -15,9 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
-/-! # Projection maps on proper/open/proper graph words
-
-.
+/-! # Projection maps on proper/open/proper graph words.
 
 ## References
 

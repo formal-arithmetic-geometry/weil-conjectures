@@ -13,11 +13,11 @@ public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
 /-!
 # Étale charts adapted to a closed section of a smooth morphism
 
-Let `g: V ⟶ B` be smooth of relative dimension `c` with a closed section `s: B ⟶ V`. Near
+Let `g : V ⟶ B` be smooth of relative dimension `c` with a closed section `s : B ⟶ V`. Near
 every point `s(b)` there are étale coordinates `x₁, …, x_c` on `V` over `B` in which `s` is the
 origin: an affine open `W ∋ b` of `B`, an affine open `U ∋ s(b)` of `V` over `W`, and functions
 `f₁, …, f_c` on `U` generating the ideal of `s(B) ∩ U` and forming a weakly regular sequence,
-such that `v = (g, f): U ⟶ 𝔸^c_W` is étale.
+such that `v = (g, f) : U ⟶ 𝔸^c_W` is étale.
 
 ## Main statements
 
@@ -33,13 +33,11 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Blueprint `lem-pur-dnc-section-geometry` (2), the coordinates.
-
-**Étale charts along a closed section.** Let `g: V ⟶ B` be smooth of relative dimension `c`
+/-- **Étale charts along a closed section.** Let `g : V ⟶ B` be smooth of relative dimension `c`
 with a closed section `s`. Every point `b` of `B` has an affine open neighbourhood `W`, and
 `s(b)` an affine open neighbourhood `U ⊆ g⁻¹ W` with `s⁻¹ U = W`, together with functions
 `f₁, …, f_c` on `U` generating the ideal of `s(B) ∩ U` and forming a weakly regular sequence,
-and an étale morphism `v: U ⟶ 𝔸^c_W` over `W` whose fibre coordinates pull back to the `fᵢ`. -/
+and an étale morphism `v : U ⟶ 𝔸^c_W` over `W` whose fibre coordinates pull back to the `fᵢ`. -/
 theorem exists_etale_affineSpace_of_section {V B : Scheme.{u}} (c : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension c g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     (b : B) :

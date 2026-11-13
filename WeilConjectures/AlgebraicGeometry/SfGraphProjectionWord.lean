@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 The coefficient category stays a parameter throughout the calculation, so the map
 and its factorization share their derived-category structures.
-.
 
 ## References
 

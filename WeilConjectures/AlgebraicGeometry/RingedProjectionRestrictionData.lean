@@ -89,9 +89,9 @@ instance derivedOver (R : Sheaf J CommRingCat.{u + 1}) (V : C) :
 instance derivedOverModules (R : Sheaf J RingCat.{u + 1}) (V : C) :
     HasDerivedCategory (SheafOfModules.{u + 1} (R.over V)) := HasDerivedCategory.standard _
 
-/-- Proof data for the actual module operations associated to a continuous ringed site map.
-The only ring map is the displayed coefficient map. The adjunction, exact pullback and
-K-injective direct image are then fixed constructions. -/
+/-- The module operations associated to a continuous ringed site map: a coefficient ring map
+whose module pushforward is a right adjoint with exact additive pullback, together with
+K-injective resolutions on the target. -/
 structure Operation (F : C ⥤ D) (R : Sheaf J CommRingCat.{u + 1})
     (S : Sheaf K CommRingCat.{u + 1}) where
   [continuous : F.IsContinuous J K]

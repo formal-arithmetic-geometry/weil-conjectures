@@ -52,7 +52,8 @@ private theorem scalar_pushforward_tensor (t : Y ⟶ X) (A B : KSheaf Y k) :
     (Opens.map t.base) (ModuleCat.{w} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y) A B U
 
-/-- Perform the monoidal adjunction calculation with abstract coefficient sheaves. -/
+/-- The scalar pullback tensor comparison for abstract coefficient sheaves, obtained from the
+monoidal structure of the scalar inverse-image/pushforward adjunction. -/
 private theorem scalar_tensor_comparison_of_adjoints (t : Y ⟶ X)
     {A B H : KSheaf X k} {C D I J : KSheaf Y k}
     (a : A ⊗ B ⟶ H) (b : (scalarInverseImage t).obj H ⟶ I) (c : I ⟶ J)

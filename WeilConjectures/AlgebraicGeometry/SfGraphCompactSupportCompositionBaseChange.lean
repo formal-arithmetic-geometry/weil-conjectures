@@ -1140,9 +1140,7 @@ private theorem change_pullback_compositor
   apply (cancel_mono (G'.map (F'.map (u.hom.app M)))).1
   simpa only [Category.assoc] using hh
 
-/-- The graph compositor commutes with compact-support exchange for pasted squares.
-
-. -/
+/-- The graph compositor commutes with compact-support exchange for pasted squares. -/
 theorem sfGraphCompactSupportCompIso_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z X' Y' Z' : Scheme.{u}}

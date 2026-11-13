@@ -16,9 +16,8 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 
 /-! # Cohomology sheaves of internal Hom out of a pseudo-coherent complex
 
-The degreewise calculation behind the quasi-coherence clause of the pseudo-coherent
-internal-Hom lemma: locally, each cohomology sheaf of the Hom complex is computed by a
-truncation of a bounded-above finite free model (Stacks Project, Tag 0A6H, clause (1)).
+For `K` pseudo-coherent and `L` bounded below with quasi-coherent cohomology, each cohomology
+sheaf of the derived internal Hom `RHom(K, L)` is quasi-coherent.
 
 ## References
 
@@ -133,7 +132,8 @@ private theorem homComplex_trunc_homology_isIso
     hmid (show Mono (f.f ((ComplexShape.up ℤ).next n)) from inferInstance)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The degreewise quasi-coherence calculation for RHom from a pseudo-coherent complex. -/
+/-- For `K` pseudo-coherent and `L` bounded below with quasi-coherent cohomology, each
+cohomology sheaf of `RHom(K, L)` is quasi-coherent. -/
 theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

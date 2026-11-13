@@ -48,9 +48,7 @@ theorem totalInternalOplax_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
 @[reducible] def totalSectionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CochainComplex (modules Λ Y) ℤ ⥤ CochainComplex (modules Λ X) ℤ :=
   retainedCochainFunctor (pullback Λ f)
-/-- The unchanged canonical monoidal structure on the retained termwise pullback.
-
-This is the existing monoidal structure, expressed in the retained functor interface. -/
+/-- The canonical monoidal structure on the termwise pullback. -/
 instance totalSectionPullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (totalSectionPull Λ f).Monoidal := by
   change ((pullback Λ f).mapHomologicalComplex (.up ℤ)).Monoidal
@@ -60,9 +58,7 @@ instance totalSectionPullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
 @[reducible] def totalSectionEquivalence (X : Scheme.{u}) :
     CochainComplex (internalModules Λ X) ℤ ⥤ CochainComplex (modules Λ X) ℤ :=
   cochainSectionEquivalence Λ X
-/-- The specified total comparison, with its cochain tensor type recorded explicitly.
-
-This is the existing uniquely normalized comparison, with no new choice of data. -/
+/-- The specified total comparison, with its cochain tensor type recorded explicitly. -/
 @[irreducible] def totalTensorComparison (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     (totalSectionEquivalence Λ X).obj (P ⊗ Q) ≅
@@ -76,9 +72,8 @@ This is the existing uniquely normalized comparison, with no new choice of data.
       (totalSectionPull Λ f).obj ((totalSectionEquivalence Λ Y).obj P) :=
   (NatIso.mapHomologicalComplex (pullComparison Λ f) (.up ℤ)).app P
 
-/-- The total of the actual internal adjunction-mate oplax map. Its inverse is the
-summed lax map. The existing mapBifunctorComparison uses the canonical left-adjoint
-coproduct comparison, and is the forward map of mapCochainComplexμIso.symm. -/
+/-- The total of the actual internal adjunction-mate oplax map, with inverse the summed
+lax map. -/
 @[irreducible] def actualInternalTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
     (totalInternalPull Λ f).obj (P ⊗ Q) ≅
@@ -131,9 +126,8 @@ theorem actualInternalTotalIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
       HomologicalComplex.mapBifunctorComparison_naturality
         (Functor.OplaxMonoidal.δNatTrans (CondensedRing.upperStar Λ f)) (.up ℤ) a b
 
-/-- The signed total of the specified ringed adjunction-mate tensor map. Its inverse
-is the sum of the ordinary inverse maps, the construction used by the ringed
-cochain comparison of lem-pur-cochain-pullback-tensor-coherence. -/
+/-- The signed total of the specified ringed adjunction-mate tensor map, with inverse the
+sum of the ordinary inverse maps. -/
 @[irreducible] def sectionTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (totalSectionPull Λ f).obj (P ⊗ Q) ≅
@@ -168,9 +162,7 @@ theorem sectionConjugation_inv_hom_id :
     Category.id_comp, Iso.hom_inv_id_assoc, ← G.map_comp_assoc, Iso.inv_hom_id,
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_assoc, Iso.inv_hom_id]
 
-/-- The same five-factor isomorphism with its two maps stored explicitly.
-
-. -/
+/-- The same five-factor isomorphism with its two maps stored explicitly. -/
 def sectionConjugationIso : F.obj y ≅ t where
   hom := F.map p.inv ≫ r.inv ≫ G.map i.hom ≫ c.hom ≫ e.hom
   inv := e.inv ≫ c.inv ≫ G.map i.inv ≫ r.hom ≫ F.map p.hom

@@ -192,9 +192,7 @@ private theorem relativeTensorPullback_ordinary_homology
 
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
-identity computes the underlying homology of derived tensor with derived pullback.
-This is only the representative calculation: no replacement of the restricted first
-complex by an arbitrary K-flat resolution is asserted here. -/
+identity computes the underlying homology of derived tensor with derived pullback. -/
 theorem relativeTensorPullback_kFlat_model
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

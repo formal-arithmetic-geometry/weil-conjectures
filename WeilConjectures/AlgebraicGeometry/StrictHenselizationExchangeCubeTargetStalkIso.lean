@@ -13,6 +13,18 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
 import WeilConjectures.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk
 
+/-!
+# Target stalk comparison of the strict-henselization exchange cube
+
+For a qcqs morphism and a cartesian square, the comparison of stalks at the target of the
+strict-local exchange cube is an isomorphism.
+
+## References
+
+* [Stacks Project, Tag 03Q9](https://stacks.math.columbia.edu/tag/03Q9)
+* [Stacks Project, Tag 03QO](https://stacks.math.columbia.edu/tag/03QO)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Limits
@@ -21,7 +33,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 set_option linter.unusedVariables false in
-/-- Component theorem: the target strict-local cube stalk comparison is invertible. -/
+/-- The target strict-local cube stalk comparison is invertible. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_target_stalkComparison
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}

@@ -23,9 +23,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A tensor comparison descends uniquely when restriction to representatives is fully
-faithful and the comparison maps are invertible on representatives and their tensors.
-
-. -/
+faithful and the comparison maps are invertible on representatives and their tensors. -/
 theorem tensorComparisonDescent
     {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]
     {D : Type u₃} [Category.{v₃} D] {E : Type u₄} [Category.{v₄} E]

@@ -88,9 +88,9 @@ private theorem affine_closedImmersion_quotient {X Y : Scheme.{u}} (i : X ⟶ Y)
 over a Noetherian scheme is a Koszul-regular immersion of codimension `d`, its
 pushed-forward structure sheaf in degree zero is perfect, and the diagonal is proper.
 The Koszul-regular clause is the affine quotient-presentation hypothesis of
-`lem-sc-koszul-regular-closed-immersion-perfect` (`koszulRegular_closedImmersion_perfect`):
-every point of `X ×_S X` has an affine open neighbourhood `U` whose ideal `I` of the
-diagonal is spanned by a Koszul-regular sequence, with `Δ⁻¹(U) ≅ Spec(Γ(U)/I)` over `U`;
+`koszulRegular_closedImmersion_perfect`: every point of `X ×_S X` has an affine open
+neighbourhood `U` whose ideal `I` of the diagonal is spanned by a Koszul-regular sequence,
+with `Δ⁻¹(U) ≅ Spec(Γ(U)/I)` over `U`;
 codimension `d` means the sequence has length `d` unless `U` misses the diagonal
 (`I = ⊤`). -/
 theorem smooth_diagonal_koszul_regular_perfect_proper {X S : Scheme.{u}}

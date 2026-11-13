@@ -53,11 +53,8 @@ private theorem cancel_representative_tail
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The representative identity after cancelling the open-restriction factorization.
-
-This is the mate calculation before composing with the inverse factorization
-isomorphism. It is strictly weaker than the displayed representative identity,
-and is isolated so that the remaining categorical cancellation is explicit. -/
+/-- The representative identity for the open pullback counit, postcomposed with the
+open-restriction factorization isomorphism. -/
 theorem singleComplexOpen_pullback_counit_representative_postcomp
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -112,8 +109,7 @@ theorem singleComplexOpen_pullback_counit_representative_postcomp
 
 set_option cleanup.letToHave false in
 /-- The pullback-composition route, after the direct-image unit, is the localization
-of the sectionwise counit. This calculation does not use the derived open direct-image
-comparison: it compares the explicit pullback factors with the underived adjunction. -/
+of the sectionwise counit. -/
 theorem singleComplexOpen_pullback_counit_representative
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

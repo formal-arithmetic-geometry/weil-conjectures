@@ -9,9 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
-/-! # Section calculus for the ringed-topos tensor comparison
-
-.
+/-! # Section calculus for the ringed-topos tensor comparison.
 
 ## References
 

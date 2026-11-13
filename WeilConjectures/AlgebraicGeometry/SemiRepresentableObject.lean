@@ -11,9 +11,10 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 
 /-!
-# Blueprint statements
+# Semi-representable objects and hypercovers on the small étale site
 
-lem-weil-pbc-hypercover-refinement.
+Formal coproducts of étale `X`-schemes, their points, coverings, matching objects of simplicial
+objects, and semi-representable hypercovers, used for refining hypercovers.
 -/
 
 @[expose] public section
@@ -25,23 +26,25 @@ open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Formal coproducts of étale `X`-schemes have finite limits. -/
 noncomputable instance semiRepresentableHasFiniteLimits (X : Scheme.{u}) :
     HasFiniteLimits (FormalCoproduct.{w} X.Etale) :=
   hasFiniteLimits_of_hasTerminal_and_pullbacks
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- The `T`-valued points of a formal coproduct `L` of étale `X`-schemes: morphisms from the
+representable formal coproduct on `T` to `L`. -/
 abbrev semiRepresentablePoints {X : Scheme.{u}} (T : X.Etale)
     (L : FormalCoproduct.{w} X.Etale) :=
   (FormalCoproduct.incl X.Etale).obj T ⟶ L
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Postcomposition with a morphism `L ⟶ L'` on `T`-valued points. -/
 def semiRepresentablePointsMap {X : Scheme.{u}} (T : X.Etale)
     {L L' : FormalCoproduct.{w} X.Etale} (f : L ⟶ L') :
     semiRepresentablePoints T L → semiRepresentablePoints T L' :=
   fun t => t ≫ f
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- A morphism of formal coproducts of étale `X`-schemes is a covering if, over each component
+of the target, the components of the source lying over it form an étale covering family. -/
 def IsSemiRepresentableCovering {X : Scheme.{u}}
     {U V : FormalCoproduct.{w} X.Etale} (f : U ⟶ V) : Prop :=
   ∀ j : V.I,
@@ -49,7 +52,8 @@ def IsSemiRepresentableCovering {X : Scheme.{u}}
       (fun i => f.φ i.val ≫ eqToHom (congrArg V.obj i.property)) ∈
         X.smallEtaleTopology (V.obj j)
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- The boundary multiequalizers defining matching objects exist in formal coproducts of étale
+`X`-schemes. -/
 instance semiRepresentableHasMultiequalizer {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (n : ℕ) :
     HasMultiequalizer (SimplicialObject.matchingBoundaryIndex K n) := by
@@ -63,7 +67,9 @@ instance semiRepresentableHasMultiequalizer {X : Scheme.{u}}
     inferInstanceAs (DecidableEq {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
   infer_instance
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- The matching object `M_n(K)` of a simplicial object in formal coproducts of étale
+`X`-schemes: the terminal object for `n = 0`, `K_0 × K_0` for `n = 1`, and the boundary
+multiequalizer otherwise. -/
 noncomputable def semiRepresentableMatchingObject {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) :
     ℕ → FormalCoproduct.{w} X.Etale
@@ -71,7 +77,8 @@ noncomputable def semiRepresentableMatchingObject {X : Scheme.{u}}
   | 1 => ∏ᶜ fun _ : Fin 2 => K _⦋0⦌
   | n + 2 => multiequalizer (SimplicialObject.matchingBoundaryIndex K n)
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- The matching map `K_n ⟶ M_n(K)` of a simplicial object in formal coproducts of étale
+`X`-schemes, induced by the face maps. -/
 noncomputable def semiRepresentableMatchingMap {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) :
     (n : ℕ) → K _⦋n⦌ ⟶ semiRepresentableMatchingObject K n
@@ -95,7 +102,8 @@ noncomputable def semiRepresentableMatchingMap {X : Scheme.{u}}
           rw [← hb] at this
           exact this)
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- A semi-representable hypercover of `X`: a simplicial object in formal coproducts of étale
+`X`-schemes whose matching maps are all coverings. -/
 def IsSemiRepresentableHypercover {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) : Prop :=
   ∀ n : ℕ, IsSemiRepresentableCovering (semiRepresentableMatchingMap K n)

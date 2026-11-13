@@ -12,9 +12,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 
 set_option linter.privateModule false
 
-/-! # Ringed-topos derived pullback with independent site universes
-
-.
+/-! # Ringed-topos derived pullback with independent site universes.
 
 This generalizes the existing interface to sites small relative to the coefficient
 universe, keeping their object and morphism universes independent. The original

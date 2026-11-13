@@ -66,9 +66,7 @@ private noncomputable def unitStalkToRing (Y : Scheme.{u}) (y : Y) :
       Y.presheaf.germ U y hy r * Y.presheaf.germ U y hy m'
     exact map_mul (Y.presheaf.germ U y hy).hom r m'
 
-/-- The tensor unit is ample on a compact affine scheme. The proof unfolds `IsAmple`,
-chooses the global section `1` in tensor power one, and identifies its nonvanishing locus
-with the top open using the stalk germ of `1`. -/
+/-- The tensor unit is ample on a compact affine scheme. -/
 private theorem isAmple_tensorUnit_of_affine (Y : Scheme.{u}) [CompactSpace Y]
     (h_aff : IsAffine Y) : IsAmple Y (𝟙_ Y.Modules) := by
   have : IsAffine Y := h_aff

@@ -8,7 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonData
 
 /-! # Uniqueness of the normalized tensor-pullback unit
 
-.
+An isomorphism between the pullback of the unit module and the unit module, normalized by
+compatibility with the right unitors through a tensor comparison, is unique.
 
 ## References
 
@@ -33,11 +34,8 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 open scoped ChangeOfRings
 
 set_option linter.unusedVariables false in
-/--
-The proof cancels the tensor comparison and uses the tensor universal property to identify maps.
-
-.
-Proof in words: cancel the tensor comparison and apply the tensor universal property. -/
+/-- Two isomorphisms `L(𝒪) ≅ 𝒪` that are both compatible with the right unitors through the
+tensor comparison `k` are equal. -/
 theorem canonicalRingedTensorComparison_unit_unique
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

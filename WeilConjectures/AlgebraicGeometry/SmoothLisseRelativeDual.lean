@@ -27,8 +27,7 @@ open Scheme _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory in
 attribute [local instance 20000] Etale.sheafBraidedCategory in
-/-- Dualizability in the derived monoidal structure, at generic coefficients.
-. -/
+/-- Dualizability in the derived monoidal structure, at generic coefficients. -/
 def smoothRelativeDualizable
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -36,8 +35,7 @@ def smoothRelativeDualizable
     (X : Scheme.{u}) (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   IsDualizable N
 
-/-- The explicitly constructed relative internal dual.
-. -/
+/-- The explicitly constructed relative internal dual. -/
 @[irreducible]
 noncomputable def smoothRelativeDual
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
@@ -72,9 +70,7 @@ attribute [local instance 2000] ModuleCat.hasColimitsOfShape
   ModuleCat.hasColimitsOfSize in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- Relative dual of a finite local system over any finite field, against an invertible
-finite-Tor coefficient.
-
-. -/
+finite-Tor coefficient. -/
 theorem finiteLisseRelativeDual
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hfield : IsField Λ) (X : Scheme.{u})
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

@@ -65,8 +65,8 @@ theorem torsionControlledGraphFst_mono
   · simpa only [torsionControlledGraphFst, Category.assoc, zero_comp] using hz
   · simpa only [torsionControlledGraphSnd, Category.assoc, zero_comp] using hzsecond
 
-/-- The first projection is invertible: surjectivity is the affine finite-graph
-lemma, and injectivity is the separating-quotient argument above. -/
+/-- Under the separation hypothesis `hsep`, the first projection `torsionControlledGraphFst`
+of the finite graph is an isomorphism. -/
 theorem torsionControlledGraphFst_isIso
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

@@ -39,8 +39,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Source derived Hom, neighbourhood restriction, and the sections map of the mate
 computed on a specified bounded-below complex of injectives. The intermediate groups
-are homology of actual termwise sections, not stage hypercohomology. At the limit
-only the canonical map to derived sections is used; it need not be invertible. -/
+are homology of actual termwise sections. -/
 theorem exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

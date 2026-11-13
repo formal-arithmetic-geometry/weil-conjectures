@@ -35,7 +35,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A first order thickening `i: Z ⟶ Z'` over `X` is universal for `h: Z ⟶ X`
+/-- A first order thickening `i : Z ⟶ Z'` over `X` is universal for `h : Z ⟶ X`
 if every morphism from a first order thickening `T ⟶ T'` over `X` into `Z`
 extends uniquely to a morphism `T' ⟶ Z'` over `X`. Neither source scheme is
 required to be affine. Existence of such a thickening is not assumed. -/

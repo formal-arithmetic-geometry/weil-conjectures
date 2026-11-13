@@ -25,12 +25,12 @@ universe u
 open CategoryTheory CochainComplex HomComplex Limits Opposite
 namespace AlgebraicGeometry.SheafPullbackResolution
 
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- The constant sheaf of integers on the small étale site of `X`. -/
 noncomputable abbrev ZSheaf (X : Scheme.{u}) :=
   (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ))
 
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- Morphisms from the constant integer sheaf to `F` correspond to global sections of `F`. -/
 noncomputable def sectionsEquiv (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (ZSheaf X ⟶ F) ≃+ (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj F :=
@@ -38,7 +38,8 @@ noncomputable def sectionsEquiv (X : Scheme.{u})
     (AddCommGrpCat.uliftZMultiplesAddEquiv _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- The Hom complex from the constant integer sheaf in degree `0` to `K` is isomorphic to the
+complex of global sections of `K`. -/
 noncomputable def complexSectionsIso (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
     HomComplex ((CochainComplex.singleFunctor _ 0).obj (ZSheaf X)) K ≅
@@ -58,7 +59,8 @@ noncomputable def complexSectionsIso (X : Scheme.{u})
         simpa [HomComplex, Cochain.δ_fromSingleMk,
           Cochain.fromSingleEquiv_fromSingleMk] using! h.symm)
 
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- Cohomology classes of maps from the constant integer sheaf to `K` in degree `n` are the
+`n`-th cohomology of the complex of global sections of `K`. -/
 noncomputable def classSectionsIso (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (n : ℤ) :
     AddCommGrpCat.of
@@ -68,12 +70,8 @@ noncomputable def classSectionsIso (X : Scheme.{u})
   (leftHomologyData _ K n).homologyIso.symm ≪≫
     (HomologicalComplex.homologyFunctor _ _ n).mapIso (complexSectionsIso X K)
 
-/-- The canonical comparison of Ext cohomology with sections of the chosen resolution.
-
-The Ext/resolution equivalence sends an Ext class to its cocycle in the chosen resolution.
-Evaluation at 1 identifies Hom from the constant integer sheaf with global sections in
-each degree. This is a chain isomorphism, hence induces the displayed homology isomorphism.
-All data are explicit; no arbitrary comparison is chosen from an existence theorem. -/
+/-- The canonical isomorphism between `H^q(X, G)` and the `q`-th cohomology of the global
+sections of the chosen injective resolution of `G`. -/
 noncomputable def extSectionsIso (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     (Sheaf.functorH.{u + 1} X.smallEtaleTopology q).obj G ≅

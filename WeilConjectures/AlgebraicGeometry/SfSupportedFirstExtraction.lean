@@ -9,9 +9,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleKunnethTensorSymmetry
 import WeilConjectures.AlgebraicGeometry.ProperRelativeKunnethSupports
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
 
-/-! # First coordinate extraction before a trace
-
-.
+/-! # First coordinate extraction before a trace.
 -/
 
 @[expose] public noncomputable section

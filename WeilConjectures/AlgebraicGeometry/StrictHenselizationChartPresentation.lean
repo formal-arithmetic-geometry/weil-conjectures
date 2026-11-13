@@ -15,16 +15,18 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizatio
 /-!
 # The geometric strict henselization through an affine chart
 
-Let `i: Spec R ⟶ S` be an open immersion and `xR: Spec Ω ⟶ Spec R` a geometric point with `Ω`
+Let `i : Spec R ⟶ S` be an open immersion and `xR : Spec Ω ⟶ Spec R` a geometric point with `Ω`
 algebraically closed. The strict henselization of `S` at `xR ≫ i` is the ring-theoretic strict
 henselization (`Algebra.IsStrictHenselization`) of the local ring `R_q` of `R` at the image `q`
-of `xR`, compatibly with a ring map `ρ: R ⟶ 𝒪^{sh}_{S, xR ≫ i}` such that `Spec ρ ≫ i` is the
-structure map of the strict localization (Stacks, Tag 04HX).
+of `xR`, compatibly with a ring map `ρ : R ⟶ 𝒪^{sh}_{S, xR ≫ i}` such that `Spec ρ ≫ i` is the
+structure map of the strict localization.
 
 This is the chart version of
-`AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation`; the proof is that of the
-private chart lemma of `WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation`,
-made available here for a non-affine `S`.
+`AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation`, for a non-affine `S`.
+
+## References
+
+* [Stacks Project, Tag 04HX](https://stacks.math.columbia.edu/tag/04HX)
 -/
 
 @[expose] public section
@@ -35,10 +37,10 @@ namespace AlgebraicGeometry.Scheme
 
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- **The strict henselization through an affine chart** (Stacks, Tag 04HX). For an open
-immersion `i: Spec R ⟶ S` and a geometric point `xR: Spec Ω ⟶ Spec R` with `Ω` algebraically
+/-- **The strict henselization through an affine chart**. For an open
+immersion `i : Spec R ⟶ S` and a geometric point `xR : Spec Ω ⟶ Spec R` with `Ω` algebraically
 closed, there are a prime `q` of `R`, a separable closure `K` of the residue field of `R_q` and
-a ring map `ρ: R ⟶ 𝒪^{sh}_{S, xR ≫ i}` with `Spec ρ ≫ i` the structure map of the strict
+a ring map `ρ : R ⟶ 𝒪^{sh}_{S, xR ≫ i}` with `Spec ρ ≫ i` the structure map of the strict
 localization, such that `𝒪^{sh}_{S, xR ≫ i}` is the strict henselization of `R_q` with respect
 to `K`, compatibly with `ρ`; the prime `q` is the image of `xR`. -/
 theorem strictHenselizationRing_chart_presentation

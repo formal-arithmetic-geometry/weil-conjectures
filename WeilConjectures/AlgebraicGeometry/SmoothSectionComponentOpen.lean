@@ -29,7 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- For a smooth, quasi-compact, quasi-separated morphism with a section, the union of
-fibre connected components meeting the section is open (Stacks 055R, using 055Q). -/
+fibre connected components meeting the section is open. -/
 theorem Smooth.isOpen_section_component {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
     IsOpen {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))} := by

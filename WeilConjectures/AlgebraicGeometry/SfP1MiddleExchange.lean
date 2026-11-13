@@ -126,9 +126,7 @@ private theorem middleComposite_factor
 
 attribute [local semireducible] middleComparison projectionExchange
 
-/-- The middle false comparison is the coefficient transport followed by exchange pasting.
-
-. -/
+/-- The middle false comparison is the coefficient transport followed by exchange pasting. -/
 theorem middle_exchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

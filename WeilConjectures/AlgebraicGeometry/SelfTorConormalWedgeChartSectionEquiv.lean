@@ -11,12 +11,29 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
 import WeilConjectures.AlgebraicGeometry.SelfTorConormalExteriorSectionModel
+
+/-!
+# Affine sections of the conormal wedge chart
+
+For a closed immersion `i : Z ⟶ Y` and an affine open `U` of `Y`, the sections over `i⁻¹ U` of
+the `n`-th exterior power of the conormal sheaf are identified with those of the affine
+conormal exterior model, compatibly with wedges of ideal sections.
+
+## References
+
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
+* [Stacks Project, Tag 01I6](https://stacks.math.columbia.edu/tag/01I6)
+* [Stacks Project, Tag 0096](https://stacks.math.columbia.edu/tag/0096)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
-/-- The affine section calculation underlying the conormal wedge chart. -/
+/-- Over an affine open `U` of `Y`, the sections over `i⁻¹ U` of the `n`-th exterior power of the
+conormal sheaf are linearly equivalent to those of the affine conormal exterior model, compatibly
+with wedges of ideal sections. -/
 theorem exists_selfTor_conormal_wedge_chart_section_equiv
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

@@ -10,13 +10,26 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
+
+/-!
+# The closed point of a strict henselization
+
+The closed point of an affine presentation of the strict henselization at a geometric point maps
+to the image of that geometric point.
+
+## References
+
+* [Stacks Project, Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+* [Stacks Project, Tag 04GP](https://stacks.math.columbia.edu/tag/04GP)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 set_option autoImplicit false
 /-- The closed point of an affine presentation of a strict henselization maps to the
-selected geometric point. This is the backward half of the singleton-fibre theorem. -/
+selected geometric point. -/
 theorem strictHenselizationStructuralMap_closedPoint_eq
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]
     [CommRing A] [IsLocalRing A]

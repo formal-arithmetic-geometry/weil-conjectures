@@ -10,6 +10,20 @@ public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreMapCore
+
+/-!
+# Field embedding for the reduced generic fibre: affine core
+
+The affine core construction of a scheme-theoretically dominant map from `Spec E` into the
+generic fibre of the reduced base change `(Z ×_S S')_red → S'`, where `E` is a common extension
+of `L` and of a finite purely inseparable extension `k'` of the residue field.
+
+## References
+
+* [Stacks Project, Tag 0559](https://stacks.math.columbia.edu/tag/0559)
+* [Stacks Project, Tag 030R](https://stacks.math.columbia.edu/tag/030R)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u

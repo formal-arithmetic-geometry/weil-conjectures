@@ -106,9 +106,7 @@ private theorem trace_tail_natural
   rw [hg]
   exact trace_tail_paste F G H hc hm he (η.hom.naturality j.inv) ht hu
 
-/-- The false projection chart tail equals the transported coordinate trace.
-
-. -/
+/-- The false projection chart tail equals the transported coordinate trace. -/
 theorem falseProjectionChartTail
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

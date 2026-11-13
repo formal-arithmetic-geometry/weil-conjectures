@@ -30,8 +30,8 @@ open CategoryTheory Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Universe transport of the spectral restriction bijection to the Zariski inverse-image unit.
-The proof follows the ULift/order-isomorphism transport in the blueprint. -/
+/-- For a closed immersion into a qcqs scheme meeting every point closure in a connected set,
+the unit of the Zariski inverse-image adjunction is bijective on global sections. -/
 theorem zariski_restriction_universe_transport
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

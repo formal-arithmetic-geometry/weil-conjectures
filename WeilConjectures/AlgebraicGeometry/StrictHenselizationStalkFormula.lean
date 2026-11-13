@@ -34,25 +34,14 @@ namespace AlgebraicGeometry.Etale
 
 /-- Stalks of higher direct images are étale cohomology over the strict henselization.
 
-For a torsion sheaf `F` (torsion in the local-section sense, `Sheaf.IsTorsion`) the canonical
-restriction `(R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is an isomorphism; it is
+For a torsion sheaf `F` (`Sheaf.IsTorsion`) the canonical restriction
+`(R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is an isomorphism; it is
 `r ≫ strictHenselizationCohomologyComparison s f F q` for the germ restriction `r`, pinned by
-`IsStrictHenselizationStalkRestriction` (unique by
-`existsUnique_strictHenselizationStalkRestriction`).
+`IsStrictHenselizationStalkRestriction`.
 
 For `K ∈ D⁺(X_et)` with torsion cohomology sheaves, the canonical map
-`(Rf_* K)_s ⟶ RΓ(X ×_S S_(s), p⁻¹K)` is an isomorphism in `D⁺(Ab)`; as the stalk is exact,
-this is stated degreewise: in every degree `n` the canonical map
-`H^n(Rf_* K)_s ⟶ H^n(X ×_S S_(s), p⁻¹K)` (the germ restriction `r`, then the inverse image
-commuted with cohomology, the derived base-change mate `g⁻¹ Rf_* ⟶ Rf'_* p⁻¹`, and the exact
-global sections and Leray isomorphism `strictHenselizationLerayHomologyIso`, i.e. the
-construction of `strictHenselizationCohomologyComparison` applied to `K`) is an isomorphism.
-
-The proof uses the sheafified higher-direct-image formula, geometric stalks and their
-sheafification invariance, cofinal affine pointed neighborhoods, the strict-henselization
-limit and fibre-product limit, and étale cohomology continuity. For the derived clause it
-uses the bounded-below injective representative and the general continuity comparison;
-the restriction maps induce the canonical comparison on cohomology in every degree.
+`H^n(Rf_* K)_s ⟶ H^n(X ×_S S_(s), p⁻¹K)` (the construction of
+`strictHenselizationCohomologyComparison` applied to `K`) is an isomorphism in every degree `n`.
 -/
 theorem strictHenselizationStalkFormula
     {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]

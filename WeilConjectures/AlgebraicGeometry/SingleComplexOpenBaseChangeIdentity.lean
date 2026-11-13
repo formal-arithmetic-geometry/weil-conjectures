@@ -27,9 +27,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The restriction calculation for the bare base-change arrow (identity
-coefficient). The direct-image comparison is natural on all target coefficients;
-no stalk condition, target coefficient K', or arbitrary coefficient map is assumed. -/
+/-- Restriction to opens `V`, `V'` of the bare base-change arrow for the pullback square
+`sq` (identity coefficient). -/
 theorem singleComplexOpen_baseChange_identity
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

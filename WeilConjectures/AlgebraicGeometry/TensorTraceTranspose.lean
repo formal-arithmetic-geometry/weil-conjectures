@@ -224,9 +224,8 @@ noncomputable def tensorTraceRealization
     inferInstanceAs (finiteCoefficientIntrinsicRealization T P.Ring).Additive
   (finiteCoefficientIntrinsicRealization T P.Ring).asEquivalence.mapDerivedCategory
 
-/-- Exactly the two projection-invertibility assumptions of the node, in canonical
-fixed-scalar coordinates. The dualizing object is the unit-normalized comparison
-model already used by the recorded cohomological-smoothness definition. -/
+/-- The two projection-invertibility assumptions, in canonical fixed-scalar coordinates, with
+the unit-normalized comparison model as dualizing object. -/
 noncomputable def tensorTraceProjectionDomain
     (P : WeilConjectures.PurityFiniteSetting.{u}) {V S : Scheme.{u}}
     (f : V ⟶ S) (c : Compactification f)
@@ -240,10 +239,8 @@ noncomputable def tensorTraceProjectionDomain
       (comparedDualizing P f)).app ((tensorTraceRealization P S).inverse.obj K))
 
 /-- Tensoring a trace transpose agrees with the exceptional transpose of coefficient
-integration, in the canonical comparison coordinates of def-pur-co-smoothness.
-Here L and K are the original intrinsic pro-etale objects; eL and eK retain arbitrary
-etale representatives. No smoothness, orientation, invertibility of the transpose,
-or finite Tor amplitude of L is imposed. -/
+integration, in the canonical comparison coordinates. Here `L` and `K` are intrinsic
+pro-étale objects and `eL`, `eK` are étale representatives. -/
 theorem tensorTraceTranspose
     (P : WeilConjectures.PurityFiniteSetting.{u}) {V S : Scheme.{u}}
     [V.Over (Spec (.of P.field.k))] [S.Over (Spec (.of P.field.k))]

@@ -8,9 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 import WeilConjectures.AlgebraicGeometry.SfDiagonalPushComparison
 import WeilConjectures.AlgebraicGeometry.SfProperSectionProjection
 
-/-! # Projection naturality for insertion of a supported diagonal class
-
-.
+/-! # Projection naturality for insertion of a supported diagonal class.
 -/
 
 @[expose] public noncomputable section

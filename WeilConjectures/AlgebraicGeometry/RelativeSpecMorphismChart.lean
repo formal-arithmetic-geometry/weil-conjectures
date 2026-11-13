@@ -8,6 +8,20 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+
+/-!
+# Local charts of morphisms under the relative spectrum
+
+For the anti-equivalence between affine schemes over `S` and quasi-coherent sheaves of
+commutative `𝒪_S`-algebras, morphisms are compatible with the canonical section maps over
+affine opens of `S`.
+
+## References
+
+* [Stacks Project, Tag 01SA](https://stacks.math.columbia.edu/tag/01SA)
+* [Stacks Project, Tag 01LX](https://stacks.math.columbia.edu/tag/01LX)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Opposite TopologicalSpace

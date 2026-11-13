@@ -6,6 +6,20 @@ Authors: Bin Wu
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.AlgebraicGeometry.ExactFunctorDerivedUnit
+
+/-!
+# Ext groups along a derived unit
+
+For an exact functor `U` and a morphism `η : F ⟶ U P` with the derived unit property, composing
+with `η` after applying `U` gives a bijection `Ext^n(P, Q) ≃ Ext^n(F, U Q)`.
+
+## References
+
+* [Stacks Project, Tag 0152](https://stacks.math.columbia.edu/tag/0152)
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks Project, Tag 0GLZ](https://stacks.math.columbia.edu/tag/0GLZ)
+-/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -13,8 +27,8 @@ universe uC uB vC vB wC wB hC hB
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace CategoryTheory.Abelian
 
-/-- For exact additive U:A→B, η:F→UP with the unbounded derived unit property, Q in A and n≥0, the map Ext^n(P,Q)→Ext^n(F,UQ) sending c to
-mk0(η) composed with U(c) is bijective. -/
+/-- For an exact additive functor `U : C ⥤ B` and `η : F ⟶ U P` with the derived unit property,
+the map `Ext^n(P, Q) → Ext^n(F, U Q)` sending `c` to `mk₀ η` composed with `U c` is bijective. -/
 theorem scalar_unit_ext_bijective
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasExt.{wC} C]
     [HasDerivedCategory.{hC} C]

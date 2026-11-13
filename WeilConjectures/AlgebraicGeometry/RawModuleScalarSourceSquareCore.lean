@@ -8,12 +8,10 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! Generic derived source-square calculation used by the scalar source square..
+/-! Generic derived source-square identity for single complexes.
 
-The theorem is the generic part of the single-complex argument: it packages
-the compatibility of the three derived composition comparisons with arbitrary
-source maps. The concrete scalar theorem supplies the source equation and
-instantiates this statement.
+The theorem states the compatibility of the three derived composition comparisons with
+arbitrary source maps satisfying a source equation.
 -/
 
 @[expose] public section
@@ -138,7 +136,8 @@ private lemma plus_single_natIso {G H : C ⥤ D} [G.Additive] [H.Additive]
   exact derived_single_natIso e n X
 
 
-/-- Generic single-complex source-square calculation. -/
+/-- Given source maps satisfying the equation `hs`, the induced square of derived
+single-complex comparisons in `DerivedCategory.Plus` commutes. -/
 theorem plus_single_source_square_core
     (M : C ⥤ D) (V' : D ⥤ B) (V : C ⥤ E) (H : E ⥤ B)
     [M.Additive] [V'.Additive] [V.Additive] [H.Additive]

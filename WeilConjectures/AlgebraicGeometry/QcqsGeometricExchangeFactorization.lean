@@ -38,9 +38,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Global sections to the identity geometric stalk on the spectrum of a closed field.
-This is the global-section identification followed by the identity-neighbourhood germ.
-
-. -/
+This is the global-section identification followed by the identity-neighbourhood germ. -/
 noncomputable def geometricPointGlobalGerm
     (Λ : Type (u + 1)) [CommRing Λ] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

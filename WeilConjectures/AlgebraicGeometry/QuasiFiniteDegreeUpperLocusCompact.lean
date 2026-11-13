@@ -26,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- On an affine open in the degree-at-least-r locus, the degree-at-least-(r+1)
-locus is quasi-compact. The closed sublevel locus and the universal degree-r
-criterion are explicit hypotheses, so this is only the descent step of the argument. -/
+locus is quasi-compact, given that the degree-at-most-r locus is closed and the universal
+degree-r criterion holds. -/
 theorem isCompact_successor_degree_locus_inter_affine {X S : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite)
     (r : ℕ) (W : S.Opens) (hW : IsAffineOpen W)

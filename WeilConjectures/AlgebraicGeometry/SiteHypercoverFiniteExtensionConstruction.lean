@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBase
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentComposition
 
-/-! # Operators for one split simplicial attachment
-
-.
+/-! # Operators for one split simplicial attachment.
 
 ## References
 
@@ -28,9 +26,7 @@ namespace CategoryTheory.FormalSplitAttachment
 
 variable {D : Type u} [Category.{v} D] {n : ℕ}
 
-/-- Realize the prescribed lower faces and normalized top degeneracies as a functor.
-
-. -/
+/-- Realize the prescribed lower faces and normalized top degeneracies as a functor. -/
 theorem exists_attachment_operators
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) :

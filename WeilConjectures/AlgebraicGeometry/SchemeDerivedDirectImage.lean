@@ -38,7 +38,7 @@ variable {X S : Scheme.{u}}
   [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
   [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
 
-/-- The unbounded derived direct image `Rf_*: D(𝒪_X) ⥤ D(𝒪_S)` is the ringed-space
+/-- The unbounded derived direct image `Rf_* : D(𝒪_X) ⥤ D(𝒪_S)` is the ringed-space
 construction for the underlying ringed-space morphism. Its K-injective computation is
 supplied by `RingedSpace.derivedModuleDirectImage_computed_by_resolution`. -/
 abbrev schemeDerivedDirectImage (f : X ⟶ S) :

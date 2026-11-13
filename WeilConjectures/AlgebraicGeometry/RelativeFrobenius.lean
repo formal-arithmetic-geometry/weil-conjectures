@@ -15,15 +15,15 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Compositio
 /-!
 # The relative Frobenius
 
-Let `f: X ⟶ Y` be a morphism and `Φ_X`, `Φ_Y` endomorphisms of `X`, `Y` with
-`Φ_X ≫ f = f ≫ Φ_Y`. Put `X' = Y ×_{Φ_Y, Y, f} X`, with projections `f': X' ⟶ Y` and
-`p: X' ⟶ X`. The *relative Frobenius* is `r = (f, Φ_X): X ⟶ X'`; it satisfies `r ≫ p = Φ_X`
+Let `f : X ⟶ Y` be a morphism and `Φ_X`, `Φ_Y` endomorphisms of `X`, `Y` with
+`Φ_X ≫ f = f ≫ Φ_Y`. Put `X' = Y ×_{Φ_Y, Y, f} X`, with projections `f' : X' ⟶ Y` and
+`p : X' ⟶ X`. The *relative Frobenius* is `r = (f, Φ_X) : X ⟶ X'`; it satisfies `r ≫ p = Φ_X`
 and `r ≫ f' = f`.
 
-For a morphism `f₀: X₀ ⟶ Y₀` of schemes over a finite field `k₀ = 𝔽_q` with base change `f`,
+For a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite field `k₀ = 𝔽_q` with base change `f`,
 and `Φ` the base changes of the `q`-power Frobenii, the `m`-th iterates `Φ^m` commute with `f`
 and the relative Frobenius `r_m = (f, Φ_X ^ m)` is the base change of the relative
-`q ^ m`-power Frobenius `F_{X₀/Y₀} = (f₀, F_{X₀} ^ m): X₀ ⟶ Y₀ ×_{F_{Y₀} ^ m, Y₀, f₀} X₀`.
+`q ^ m`-power Frobenius `F_{X₀/Y₀} = (f₀, F_{X₀} ^ m) : X₀ ⟶ Y₀ ×_{F_{Y₀} ^ m, Y₀, f₀} X₀`.
 
 ## Main definitions
 
@@ -58,14 +58,14 @@ section General
 
 variable {C : Type u} [Category.{v} C] {X Y : C}
 
-/-- The *relative Frobenius* `r = (f, Φ_X): X ⟶ X'` of a morphism `f: X ⟶ Y` compatible with
+/-- The *relative Frobenius* `r = (f, Φ_X) : X ⟶ X'` of a morphism `f : X ⟶ Y` compatible with
 endomorphisms `Φ_X`, `Φ_Y` (`Φ_X ≫ f = f ≫ Φ_Y`), where `X' = Y ×_{Φ_Y, Y, f} X`:
 
 ```
-     X' ──f'──→ Y r ≫ p = Φ_X
-     │ │ r ≫ f' = f
-    p│ │Φ_Y
-     ↓ ↓
+     X' ──f'──→ Y           r ≫ p = Φ_X
+     │          │           r ≫ f' = f
+    p│          │Φ_Y
+     ↓          ↓
      X ───f───→ Y
 ```
 
@@ -94,8 +94,8 @@ section BaseChange
 variable {S s₀ X₀ Y₀ X Y : Scheme.{u}} {gX : X₀ ⟶ S} {gY : Y₀ ⟶ S} {σ : s₀ ⟶ S}
   {pX : X ⟶ X₀} {aX : X ⟶ s₀} {pY : Y ⟶ Y₀} {aY : Y ⟶ s₀} {f₀ : X₀ ⟶ Y₀} {f : X ⟶ Y}
 
-/-- Let `f: X ⟶ Y` be the base change of `f₀: X₀ ⟶ Y₀`, and let `Φ_X`, `Φ_Y` be base changes
-of endomorphisms `F_X`, `F_Y` of `X₀`, `Y₀` along `σ: s₀ ⟶ S`. If `F_X ≫ f₀ = f₀ ≫ F_Y`, then
+/-- Let `f : X ⟶ Y` be the base change of `f₀ : X₀ ⟶ Y₀`, and let `Φ_X`, `Φ_Y` be base changes
+of endomorphisms `F_X`, `F_Y` of `X₀`, `Y₀` along `σ : s₀ ⟶ S`. If `F_X ≫ f₀ = f₀ ≫ F_Y`, then
 `Φ_X ≫ f = f ≫ Φ_Y`. -/
 lemma comp_eq_comp_of_isPullback (hY : IsPullback pY aY gY σ) {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀}
     (h₀ : FX ≫ f₀ = f₀ ≫ FY) {ΦX : X ⟶ X} {ΦY : Y ⟶ Y} (hΦXa : ΦX ≫ aX = aX)
@@ -106,7 +106,7 @@ lemma comp_eq_comp_of_isPullback (hY : IsPullback pY aY gY σ) {FX : X₀ ⟶ X�
   · rw [Category.assoc, Category.assoc, hΦYa, hfa, hΦXa]
 
 /-- The fibre product `X' = Y ×_{Φ_Y, Y, f} X` commutes with base change: if `f`, `Φ_Y` are
-the base changes of `f₀: X₀ ⟶ Y₀` and of `F_Y: Y₀ ⟶ Y₀` along `σ: s₀ ⟶ S`, then
+the base changes of `f₀ : X₀ ⟶ Y₀` and of `F_Y : Y₀ ⟶ Y₀` along `σ : s₀ ⟶ S`, then
 `X' = X₀' ×_S s₀` for `X₀' = Y₀ ×_{F_Y, Y₀, f₀} X₀`. -/
 lemma isPullback_pullbackMap (hX : IsPullback pX aX gX σ) (hfp : f ≫ pY = pX ≫ f₀)
     {ΦY : Y ⟶ Y} {FY : Y₀ ⟶ Y₀} (hΦY : IsPullback ΦY pY pY FY) :
@@ -140,7 +140,7 @@ variable {k : Type u} [Field k] [Finite k] {s₀ X₀ Y₀ X Y : Scheme.{u}}
   {aX : X ⟶ s₀} {pY : Y ⟶ Y₀} {aY : Y ⟶ s₀} {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀} {ΦX : X ⟶ X}
   {ΦY : Y ⟶ Y} {f₀ : X₀ ⟶ Y₀} {f : X ⟶ Y}
 
-/-- For the base change `f: X ⟶ Y` of a morphism `f₀: X₀ ⟶ Y₀` of schemes over a finite
+/-- For the base change `f : X ⟶ Y` of a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite
 field `k`, and the base changes `Φ_X = F_X ×_k 𝟙`, `Φ_Y = F_Y ×_k 𝟙` of the `#k`-power
 Frobenii, `Φ_X ^ m ≫ f = f ≫ Φ_Y ^ m` for every `m`: the absolute Frobenius commutes with every
 morphism of `𝔽_p`-schemes. Hence the relative Frobenius `r_m = (f, Φ_X ^ m)` is defined. -/
@@ -162,14 +162,13 @@ theorem isPullback_frobenius_pow_of_isFrobenius (hY : IsPullback pY aY gY σ)
   rw [End.asHom_pow_comp_of_comp_eq hΦYa m, End.asHom_pow_comp_of_comp_eq (hFY.comp_eq gY) m]
   exact hY.flip
 
-/-- **The relative Frobenius factorization.** Let `f: X ⟶ Y` be the base change along
-`σ: s₀ ⟶ Spec k` of a morphism `f₀: X₀ ⟶ Y₀` of schemes over a finite field `k`, and let
+/-- **The relative Frobenius factorization.** Let `f : X ⟶ Y` be the base change along
+`σ : s₀ ⟶ Spec k` of a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite field `k`, and let
 `Φ_X = F_X ×_k 𝟙`, `Φ_Y = F_Y ×_k 𝟙` be the base changes of their `#k`-power Frobenii. Put
 `Q = #k ^ m`. Then `F_X ^ m`, `F_Y ^ m` are the `Q`-power Frobenii of `X₀`, `Y₀`, the fibre
 product `X'_m = Y ×_{Φ_Y ^ m, Y, f} X` is the base change `X₀^{(Q)} ×_k s₀` of
 `X₀^{(Q)} = Y₀ ×_{F_Y ^ m, Y₀, f₀} X₀`, and `r_m = (f, Φ_X ^ m)` is the base change of the
-relative `Q`-power Frobenius `F_{X₀/Y₀} = (f₀, F_X ^ m)`. The identities `p_m ∘ r_m = Φ_X ^ m`
-and `f'_m ∘ r_m = f` are `relativeFrobenius_snd` and `relativeFrobenius_fst`. -/
+relative `Q`-power Frobenius `F_{X₀/Y₀} = (f₀, F_X ^ m)`. -/
 theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ)
     (hY : IsPullback pY aY gY σ) (hFX : FX.IsFrobenius (Nat.card k))
     (hFY : FY.IsFrobenius (Nat.card k)) (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY)
@@ -192,7 +191,7 @@ theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ
 
 end Model
 
-/-- The relative Frobenius of an affine morphism. Let `g: R ⟶ S` be a ring map and `φ_R`, `φ_S`
+/-- The relative Frobenius of an affine morphism. Let `g : R ⟶ S` be a ring map and `φ_R`, `φ_S`
 ring endomorphisms with `φ_R ≫ g = g ≫ φ_S` (for instance the `Q`-power maps `a ↦ a ^ Q` of
 `𝔽_p`-algebras). Under the identification of `Spec R ×_{Spec φ_R, Spec R, Spec g} Spec S` with
 `Spec (R ⊗_{φ_R, R} S)`, the relative Frobenius of `Spec g` is `Spec` of the map
@@ -233,8 +232,8 @@ instance isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (ΦX : X ⟶ X
 /-- **Relative Frobenius.** Let `X = X₀ ×_{Spec k} s` and `Y = Y₀ ×_{Spec k} s` be base changes
 of schemes `X₀`, `Y₀` locally of finite type over a finite field `k`, and let `Φ_X`, `Φ_Y` be
 the base changes `F ×_{Spec k} 𝟙_s` of their `#k`-power Frobenius morphisms. For a morphism
-`f: X ⟶ Y` with `Φ_X ^ m ≫ f = f ≫ Φ_Y ^ m`, the relative Frobenius
-`r_m = (f, Φ_X ^ m): X ⟶ Y ×_{Φ_Y ^ m, Y, f} X` is finite and a universal homeomorphism. -/
+`f : X ⟶ Y` with `Φ_X ^ m ≫ f = f ≫ Φ_Y ^ m`, the relative Frobenius
+`r_m = (f, Φ_X ^ m) : X ⟶ Y ×_{Φ_Y ^ m, Y, f} X` is finite and a universal homeomorphism. -/
 theorem isFinite_and_isUniversalHomeomorphism_relativeFrobenius {k : Type u} [Field k]
     [Finite k] {s X₀ Y₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {g₀ : Y₀ ⟶ Spec (.of k)}
     [LocallyOfFiniteType f₀] [LocallyOfFiniteType g₀] {σ : s ⟶ Spec (.of k)} {aX : X ⟶ s}
@@ -270,7 +269,7 @@ theorem isPullback_left_pullback (f : X ⟶ Y) (ΦY : Y ⟶ Y) :
     IsPullback (pullback.fst ΦY f).left (pullback.snd ΦY f).left ΦY.left f.left :=
   (IsPullback.of_hasPullback ΦY f).map (Over.forget S)
 
-/-- The projection `p: X' ⟶ X` is finite if `Φ_Y` is, being a base change of it. -/
+/-- The projection `p : X' ⟶ X` is finite if `Φ_Y` is, being a base change of it. -/
 instance isFinite_pullback_snd_left (f : X ⟶ Y) (ΦY : Y ⟶ Y) [IsFinite ΦY.left] :
     IsFinite (pullback.snd ΦY f).left :=
   MorphismProperty.of_isPullback (isPullback_left_pullback f ΦY) inferInstance

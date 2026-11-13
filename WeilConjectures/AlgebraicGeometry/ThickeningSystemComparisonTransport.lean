@@ -9,6 +9,18 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
+/-!
+# Transport of compatible families along thickening comparisons
+
+For a system of closed thickenings of a scheme, different choices of comparison isomorphisms
+between iterated tensor pullbacks give equivalent types of compatible families of morphisms.
+
+## References
+
+* [Stacks Project, Tag 087T](https://stacks.math.columbia.edu/tag/087T)
+* [Stacks Project, Tag 088F](https://stacks.math.columbia.edu/tag/088F)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u

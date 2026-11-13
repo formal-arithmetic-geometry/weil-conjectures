@@ -9,6 +9,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.AlgebraicGeometry.CoefficientSquarePasting
 
+/-!
+# Relative Mayer--Vietoris units and base change
+
+Base change of schemes commutes with the relative unit of the derived adjunction attached to
+the restriction to an open subscheme.
+
+## References
+
+* [Stacks Project, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks Project, Tag 08HZ](https://stacks.math.columbia.edu/tag/08HZ)
+-/
+
 @[expose] public section
 
 universe u w

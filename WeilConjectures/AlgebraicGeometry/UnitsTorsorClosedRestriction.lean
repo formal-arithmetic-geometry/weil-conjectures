@@ -77,7 +77,7 @@ torsor to the class of the original torsor.
 
 Edge cases: for i = identity this is invariance under the identity comparison. If Z is
 empty, both Q and its direct image are trivial torsors, so both classes are zero.
-No surjectivity of O_X^* to i_* O_Z^* is needed.. -/
+No surjectivity of O_X^* to i_* O_Z^* is needed. -/
 theorem unitsTorsor_closed_restriction_class {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (Q : Sheaf.Torsor Z.unitsSheaf) :
     unitsPushforwardCohomologyComparison i 1

@@ -35,7 +35,9 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-/-- The section argument, with the sheaf objects replaced by their modules of sections. -/
+/-- Module-level form: if `q` is a cokernel of `d`, where `d` imposes the `A`-balancing
+relations on `M ⊗[R] N`, then `M ⊗[A] N` is additively isomorphic to `Q`, compatibly with
+`q ∘ s`. -/
 private theorem sectionQuotientAux
     {R A M N S F Q : Type u} [CommRing R] [CommRing A]
     [AddCommGroup M] [AddCommGroup N] [AddCommGroup S] [AddCommGroup F]

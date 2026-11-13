@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
 /-!
 # Locally quasi-finite morphisms do not raise dimension
 
-For a locally quasi-finite morphism of schemes `f: V ⟶ X` (for instance an étale morphism) we
+For a locally quasi-finite morphism of schemes `f : V ⟶ X` (for instance an étale morphism) we
 show `dim V ≤ dim X`: the fibres of `f` are discrete, so `f` maps a strict chain of
 specializations to a strict chain of specializations.
 -/
@@ -37,7 +37,7 @@ instance (priority := 900) Etale.locallyQuasiFinite {V X : Scheme.{u}} (f : V �
   exact (inferInstance : Algebra.QuasiFinite Γ(X, U) Γ(V, W))
 
 /-- **A locally quasi-finite morphism does not raise dimension**: `dim V ≤ dim X` for a locally
-quasi-finite morphism `f: V ⟶ X`. -/
+quasi-finite morphism `f : V ⟶ X`. -/
 theorem topologicalKrullDim_le_of_locallyQuasiFinite {V X : Scheme.{u}} (f : V ⟶ X)
     [LocallyQuasiFinite f] : topologicalKrullDim V ≤ topologicalKrullDim X := by
   let g : TopologicalSpace.IrreducibleCloseds V → TopologicalSpace.IrreducibleCloseds X :=

@@ -29,7 +29,7 @@ namespace AlgebraicGeometry
 
 /-- Every point in the closure of the image of a quasi-compact immersion is the centre
 of a valuative commutative square. The square carries a valuation ring `sq.R`, its
-fraction field `sq.K`, a map `sq.i₂: Spec sq.R ⟶ S`, and a map `sq.i₁: Spec sq.K ⟶ Z`.
+fraction field `sq.K`, a map `sq.i₂ : Spec sq.R ⟶ S`, and a map `sq.i₁ : Spec sq.K ⟶ Z`.
 Its commutativity says that the generic restriction of `sq.i₂` equals `sq.i₁ ≫ j`. -/
 theorem exists_valuativeCommSq_of_mem_closure_range
     {Z S : Scheme.{u}} (j : Z ⟶ S) [QuasiCompact j] [IsImmersion j]
