@@ -731,6 +731,10 @@ private theorem native_restriction_chain
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
   dsimp only [nativeOpenTensorInsertion] at restriction_summands hcZ hcU
   dsimp only [RP, RT, Functor.mapHomologicalComplex_obj_X] at hcU
+  apply (cancel_mono (R.mapCochainComplexμIso P₀ T₀).hom).1
+  change _ = ((R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫
+    (R.mapCochainComplexμIso P₀ T₀).inv) ≫ (R.mapCochainComplexμIso P₀ T₀).hom
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   ext n : 1
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
   apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
@@ -746,29 +750,9 @@ private theorem native_restriction_chain
   conv_lhs =>
     arg 1
     rw [hs]
-  apply (cancel_mono ((R.mapCochainComplexμIso P₀ T₀).hom.f n)).1
-  simp only [Category.assoc]
-  conv_rhs =>
-    arg 1
-    change R.map (F.map (HomologicalComplex.ιMapBifunctor P T
-      (nativeTensorBifunctor k₀ l Z).flip (.up ℤ) p q n hpq))
-  conv_rhs =>
-    arg 2
-    arg 2
-    arg 1
-    change (R.mapCochainComplexμIso P₀ T₀).inv.f n
-  have hcancel := congrArg
-    (fun f : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶
-      (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ↦ f.f n)
-    (Iso.inv_hom_id (R.mapCochainComplexμIso P₀ T₀))
-  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hcancel
-  conv_rhs =>
-    arg 2
-    arg 2
-    rw [hcancel]
-  conv_rhs =>
-    arg 2
-    erw [Category.comp_id]
+  change r.hom ≫ _ =
+    R.map (F.map (HomologicalComplex.ιMapBifunctor P T
+      (nativeTensorBifunctor k₀ l Z).flip (.up ℤ) p q n hpq)) ≫ R.map (cZ.hom.f n)
   apply (cancel_epi r.inv).1
   conv_lhs => rw [Iso.inv_hom_id_assoc]
   apply Mod.tensorLeft_obj_hom_ext
