@@ -219,7 +219,6 @@ private def cancelScalarTransport {X : Scheme.{u}}
     ext x
     rfl
 
-set_option profiler true in
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A] :
@@ -249,13 +248,6 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
     exact (ProEtaleTensorComparison.moduleId_exists R M).exists
   choose d hd using hd
   let e (M : proEtaleRingModules X R) := T.mapIso (d M) ≪≫ cancelScalarTransport c M
-  have he_unit (M : proEtaleRingModules X R) (V : X.ProEt) (s : M.val.obj (op V)) :
-      (e M).hom.val.app (op ((proEtaleBaseChange (𝟙 X)).obj V))
-        (ProEtaleTensorComparison.inverseSection (𝟙 X) M V s) =
-      M.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V).op s :=
-    hd M V s
-  -- Subsequent section calculations use only the normalization of this isomorphism.
-  clear_value e
   have he (M : proEtaleRingModules X R) (U : X.ProEt) (m : M.val.obj (op U)) :
       (e M).inv.val.app (op U) m = proEtaleIdentityModuleCoprojection X A M U m := by
     have : IsIso ((e M).hom.val.app (op U)) :=
@@ -273,15 +265,13 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
             ((e M).hom.val.app (op ((proEtaleBaseChange (𝟙 X)).obj U)) z) :=
           PresheafOfModules.naturality_apply (e M).hom.val (p.inv.app U).op z
         _ = M.val.map (p.inv.app U).op (M.val.map (p.hom.app U).op m) :=
-          congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (he_unit M U m)
+          congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (hd M U m)
         _ = M.val.map ((p.hom.app U).op ≫ (p.inv.app U).op) m :=
           ConcreteCategory.congr_hom (M.val.map_comp (p.hom.app U).op
             (p.inv.app U).op).symm m
         _ = m := by
-          have hp : (p.hom.app U).op ≫ (p.inv.app U).op = 𝟙 (op U) :=
-            congrArg Quiver.Hom.op (p.inv_hom_id_app U)
-          exact (congrArg (fun k : op U ⟶ op U ↦ M.val.map k m) hp).trans
-            (ConcreteCategory.congr_hom (M.val.map_id (op U)) m)
+          rw [← op_comp, p.inv_hom_id_app]
+          exact ConcreteCategory.congr_hom (M.val.map_id (op U)) m
     exact hi.trans hnorm.symm
   let eM : I ⋙ T ≅ 𝟭 _ := (NatIso.ofComponents (fun M ↦ (e M).symm) (by
     intro M N f
