@@ -69,7 +69,6 @@ private theorem total_map_eq {A : Type*} [Category A] [CategoryTheory.Abelian A]
   simp [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex,
     HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
 
-set_option profiler true in
 -- Keep the four comparison endpoints explicit through the degreewise calculation.
 /-- The hom-oriented total tensor square commutes.
 
