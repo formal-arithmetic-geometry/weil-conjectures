@@ -23,6 +23,14 @@ universe d t u
 open CategoryTheory CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
+private theorem reduction_iso_inv_section_of_hom_section
+    {C : Type*} [Category C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {P Q : CochainComplex (SheafOfModules.{u} R) ℤ} (e : P ≅ Q)
+    (k : ℤ) (U : Cᵒᵖ) (x : (P.X k).val.obj U) (y : (Q.X k).val.obj U)
+    (h : (e.hom.f k).val.app U x = y) : (e.inv.f k).val.app U y = x := by
+  rw [← h]
+  exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
+
 private theorem nativeScalarTensorStrength_transpose
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
     (T : C × C ⥤ C) (S : D × D ⥤ D) {F : C ⥤ D} {U : D ⥤ C}
@@ -164,11 +172,28 @@ private theorem nativeIso_representative
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Iso.hom_inv_id_app_assoc]
   all_goals rfl
 
+private theorem nativeReductionPair_eq_generator
+    (Y : AlgebraicGeometry.Scheme.{t})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)}]
+    [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)}]
+    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ) (i j : ℤ)
+    (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    totalPair.{t, u} Y R P Q i j U x y = coefficientTensorGenerator.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
+  simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
+    CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  rfl
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-set_option maxHeartbeats 1600000 in
+private theorem reductionExtension_eq_scalarExtension (n : ℕ) :
+    integralReductionChangeOfRings l E Y D hl n = scalarReductionExtension l E Y n := rfl
+
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem normalizedBeta_eq (n : ℕ)
@@ -192,20 +217,22 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  dsimp only [reductionExtension_eq_scalarExtension] at beta hbeta ⊢
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at beta hbeta ⊢
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
-    have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
-      (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
-      (asIso beta).hom_inv_id
-    change ((inv beta).f (i + j)).val.app U
-      ((beta.f (i + j)).val.app U _) = _ at hh
-    rw [hbeta] at hh
-    with_unfolding_all exact hh
+    have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
+      (hbeta i j U x y)
+    simp only [nativeReductionPair_eq_generator] at hh
+    dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
+      coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
+    dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hh ⊢
+    exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
