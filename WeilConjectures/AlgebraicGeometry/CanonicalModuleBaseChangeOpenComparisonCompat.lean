@@ -77,7 +77,8 @@ theorem restricted_base_change_compatibility
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G
     let E0 := (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj H
-      ∀ (c0 : (derivedPullback (pullback.fst fA gA)).obj E0 ⟶
+    let R := (schemeOpenRestriction S' W).mapDerivedCategory
+    ∀ (c0 : (derivedPullback (pullback.fst fA gA)).obj E0 ⟶
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj
             ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H))

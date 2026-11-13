@@ -83,7 +83,8 @@ theorem canonicalModuleBaseChange_iso_comparison_ab
       let gA := eT.inv ≫ g ≫ eS.hom
       let E := (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G
-          ∃ a : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ≅
+      let T := schemeDerivedDirectImage eT.inv
+      ∃ a : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ≅
             T.obj ((derivedPullback gA).obj ((schemeDerivedDirectImage fA).obj E)),
         ∃ b : (schemeDerivedDirectImage f').obj
               ((DerivedCategory.singleFunctor
