@@ -185,7 +185,7 @@ private theorem scalarAssociatorCoordinate
     (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
     (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)
     (x : (P.X i).val.obj U) :
-    (((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
+    ((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
         (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫
         (completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
         (CochainComplex.mappingCocone.fst
