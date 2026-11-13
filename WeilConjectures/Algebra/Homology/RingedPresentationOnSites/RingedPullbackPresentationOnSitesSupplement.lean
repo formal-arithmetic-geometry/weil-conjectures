@@ -416,8 +416,84 @@ private theorem h4_supplied_operations
   · simpa only [u, Equiv.apply_symm_apply] using
       (binary_mate_iff f.adj (msmul B (f.modules.obj H)) (msmul A H) f.ringMap u u).mp hs
 
-set_option maxHeartbeats 600000 in
--- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
+private theorem supplied_linear_iff
+    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
+    [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    (f : RingedToposMorphismOfUniverses (C := C) (D := D) (J := J) (K := K) (base A) (base B))
+    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI)
+    (c : RI ⟶ A)
+    (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      I.ringUnderlying.inv ≫ f.ringMap)
+    (M : SheafOfModules.{u} (base B)) (H : SheafOfModules.{u} (base A))
+    (α : (mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) :
+    (∃ a : I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
+      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H, (mset RI).map a = α) ↔
+      ∃ b : M ⟶ f.modules.obj H, (mset B).map b =
+        mateIsoEquiv f.adj (I.moduleUnderlying.app M) (f.underlying.app H) α := by
+  let _ := f.leftExact
+  let _ : PreservesLimits f.direct := f.adj.rightAdjoint_preservesLimits
+  let eR := I.ringUnderlying.symm
+  let eI := I.moduleUnderlying
+  let eP := f.underlying
+  have hec : eR.inv ≫ (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      f.ringMap := by
+    rw [hc]
+    simp only [eR, Iso.symm_inv, Iso.hom_inv_id_assoc]
+  let E : ∀ M H, ((mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) ≃
+      ((mset B).obj M ⟶ (mset B).obj (f.modules.obj H)) :=
+    fun M H ↦ mateIsoEquiv f.adj (eI.app M) (eP.app H)
+  have hLA : f.inverse.map (madd B M) =
+      prodComparison f.inverse ((mset B).obj M) ((mset B).obj M) ≫
+        prod.map (eI.inv.app M) (eI.inv.app M) ≫ madd RI (I.modules.obj M) ≫
+          eI.hom.app M := by
+    apply (cancel_mono (eI.inv.app M)).mp
+    simp only [Category.assoc, Iso.hom_inv_id_app]
+    exact binary_of_graph f.inverse (eI.inv.app M) (eI.inv.app M) (eI.inv.app M)
+      (madd B M) (madd RI (I.modules.obj M))
+      (fun U x y ↦ @Add.add (M.val.obj U) inferInstance x y)
+      (fun U x y ↦ @Add.add ((I.modules.obj M).val.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+      (fun T x y z hz U t ↦ I.moduleAdd M T x y z hz U t)
+  have hLS : f.inverse.map (msmul B M) =
+      prodComparison f.inverse (rset B) ((mset B).obj M) ≫
+        prod.map eR.inv (eI.inv.app M) ≫ msmul RI (I.modules.obj M) ≫ eI.hom.app M := by
+    apply (cancel_mono (eI.inv.app M)).mp
+    simp only [Category.assoc, Iso.hom_inv_id_app]
+    exact binary_of_graph f.inverse eR.inv (eI.inv.app M) (eI.inv.app M)
+      (msmul B M) (msmul RI (I.modules.obj M))
+      (fun U x y ↦ @SMul.smul (B.obj.obj U) (M.val.obj U) inferInstance x y)
+      (fun U x y ↦ @SMul.smul (RI.obj.obj U) ((I.modules.obj M).val.obj U)
+        inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+      (fun T a x z hz U t ↦ I.moduleSMul M T a x z hz U t)
+  have hRightAdd := (h4_supplied_operations f H).1
+  have hRightSmul := (h4_supplied_operations f H).2
+  rw [← hec] at hRightSmul
+  have hm : f.adj.homEquiv _ _ (eI.inv.app M ≫ α) = E M H α ≫ eP.hom.app H :=
+    mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) α
+  have hAdd := binary_mate_iso_iff f.adj (eI.app M) (eI.app M) (eI.app M)
+    (eP.hom.app H) (eP.hom.app H) (eP.app H) (madd B M)
+    (madd RI (I.modules.obj M)) (madd A H) (madd B (f.modules.obj H))
+    hLA hRightAdd α α α (E M H α) (E M H α) (E M H α) hm hm hm
+  have hSmul := binary_mate_iso_iff f.adj eR (eI.app M) (eI.app M)
+    (f.adj.homEquiv _ _ (eR.inv ≫ (sheafCompose J
+      (CategoryTheory.forget CommRingCat.{u})).map c))
+    (eP.hom.app H) (eP.app H) (msmul B M) (msmul RI (I.modules.obj M))
+    (msmul A H) (msmul B (f.modules.obj H)) hLS hRightSmul
+    ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c) α α
+    (𝟙 (rset B)) (E M H α) (E M H α)
+    (by exact (Category.id_comp _).symm) hm hm
+  have hSame := linear_iff (𝟙 B) M (f.modules.obj H)
+    (madd B M) (madd B (f.modules.obj H)) (msmul B M) (msmul B (f.modules.obj H))
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (E M H α)
+  exact (linear_iff c (I.modules.obj M) H (madd RI (I.modules.obj M)) (madd A H)
+    (msmul RI (I.modules.obj M)) (msmul A H)
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) α).trans
+      ((and_congr hAdd hSmul).trans hSame.symm)
+
 private theorem supplied_adjunction
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
@@ -431,70 +507,16 @@ private theorem supplied_adjunction
     (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
       I.ringUnderlying.inv ≫ f.ringMap) :
     Nonempty (I.modules ⋙ CoefficientOrdinaryProof.tensorFunctor.{u, uC, vC} c ⊣ f.modules) := by
-  let _ := f.leftExact
-  let _ : PreservesLimits f.direct := f.adj.rightAdjoint_preservesLimits
-  let eR := I.ringUnderlying.symm
   let eI := I.moduleUnderlying
   let eP := f.underlying
-  have hec : eR.inv ≫ (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
-      f.ringMap := by
-    rw [hc]
-    simp only [eR, Iso.symm_inv, Iso.hom_inv_id_assoc]
   let E : ∀ M H, ((mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) ≃
       ((mset B).obj M ⟶ (mset B).obj (f.modules.obj H)) :=
     fun M H ↦ mateIsoEquiv f.adj (eI.app M) (eP.app H)
   have hImage M H (α : (mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) :
       (∃ a : I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H, (mset RI).map a = α) ↔
-        ∃ b : M ⟶ f.modules.obj H, (mset B).map b = E M H α := by
-    have hLA : f.inverse.map (madd B M) =
-        prodComparison f.inverse ((mset B).obj M) ((mset B).obj M) ≫
-          prod.map (eI.inv.app M) (eI.inv.app M) ≫ madd RI (I.modules.obj M) ≫
-            eI.hom.app M := by
-      apply (cancel_mono (eI.inv.app M)).mp
-      simp only [Category.assoc, Iso.hom_inv_id_app]
-      exact binary_of_graph f.inverse (eI.inv.app M) (eI.inv.app M) (eI.inv.app M)
-        (madd B M) (madd RI (I.modules.obj M))
-        (fun U x y ↦ @Add.add (M.val.obj U) inferInstance x y)
-        (fun U x y ↦ @Add.add ((I.modules.obj M).val.obj U) inferInstance x y)
-        (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-        (fun T x y z hz U t ↦ I.moduleAdd M T x y z hz U t)
-    have hLS : f.inverse.map (msmul B M) =
-        prodComparison f.inverse (rset B) ((mset B).obj M) ≫
-          prod.map eR.inv (eI.inv.app M) ≫ msmul RI (I.modules.obj M) ≫ eI.hom.app M := by
-      apply (cancel_mono (eI.inv.app M)).mp
-      simp only [Category.assoc, Iso.hom_inv_id_app]
-      exact binary_of_graph f.inverse eR.inv (eI.inv.app M) (eI.inv.app M)
-        (msmul B M) (msmul RI (I.modules.obj M))
-        (fun U x y ↦ @SMul.smul (B.obj.obj U) (M.val.obj U) inferInstance x y)
-        (fun U x y ↦ @SMul.smul (RI.obj.obj U) ((I.modules.obj M).val.obj U)
-          inferInstance x y)
-        (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-        (fun T a x z hz U t ↦ I.moduleSMul M T a x z hz U t)
-    have hRightAdd := (h4_supplied_operations f H).1
-    have hRightSmul := (h4_supplied_operations f H).2
-    rw [← hec] at hRightSmul
-    have hm : f.adj.homEquiv _ _ (eI.inv.app M ≫ α) = E M H α ≫ eP.hom.app H :=
-      mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) α
-    have hAdd := binary_mate_iso_iff f.adj (eI.app M) (eI.app M) (eI.app M)
-      (eP.hom.app H) (eP.hom.app H) (eP.app H) (madd B M)
-      (madd RI (I.modules.obj M)) (madd A H) (madd B (f.modules.obj H))
-      hLA hRightAdd α α α (E M H α) (E M H α) (E M H α) hm hm hm
-    have hSmul := binary_mate_iso_iff f.adj eR (eI.app M) (eI.app M)
-      (f.adj.homEquiv _ _ (eR.inv ≫ (sheafCompose J
-        (CategoryTheory.forget CommRingCat.{u})).map c))
-      (eP.hom.app H) (eP.app H) (msmul B M) (msmul RI (I.modules.obj M))
-      (msmul A H) (msmul B (f.modules.obj H)) hLS hRightSmul
-      ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c) α α
-      (𝟙 (rset B)) (E M H α) (E M H α)
-      (by exact (Category.id_comp _).symm) hm hm
-    have hSame := linear_iff (𝟙 B) M (f.modules.obj H)
-      (madd B M) (madd B (f.modules.obj H)) (msmul B M) (msmul B (f.modules.obj H))
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (E M H α)
-    exact (linear_iff c (I.modules.obj M) H (madd RI (I.modules.obj M)) (madd A H)
-      (msmul RI (I.modules.obj M)) (msmul A H)
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) α).trans
-        ((and_congr hAdd hSmul).trans hSame.symm)
+        ∃ b : M ⟶ f.modules.obj H, (mset B).map b = E M H α :=
+    supplied_linear_iff f RI I c hc M H α
   let B' : ∀ M H, (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
       (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) ≃ (M ⟶ f.modules.obj H) :=
     fun M H ↦ restrictHomEquiv (mset RI) (mset B) (E M H) (hImage M H)
