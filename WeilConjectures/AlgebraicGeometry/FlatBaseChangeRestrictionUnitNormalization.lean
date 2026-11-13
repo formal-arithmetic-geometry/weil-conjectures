@@ -112,13 +112,13 @@ theorem restriction_chart_unit_normalization
     ((pullbackPushforwardAdjunction t).homEquiv _ _
       ((pullbackPushforwardAdjunction σ.hom).homEquiv _ _
         ((adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm)).hom.app F))) = _ at hu
-  erw [hu]
+  rewrite (transparency := .default) [hu]
   simp only [b, Adjunction.homEquiv_unit]
   simp only [Iso.app_inv, Iso.hom_inv_id_app_assoc]
   simp only [adj₂, Adjunction.comp_unit_app, Iso.symm_hom]
   apply (cancel_mono (rightIso.hom.app M)).mp
   simp only [Category.assoc]
-  simp only [Iso.inv_hom_id_app, Category.comp_id]
+  rewrite (transparency := .default) [Iso.inv_hom_id_app, Category.comp_id]
   apply hom_ext
   intro B
   simp only [Hom.comp_app, pushforward_map_app, Functor.map_comp, rightIso,
@@ -130,10 +130,10 @@ theorem restriction_chart_unit_normalization
   have hs := congrArg (fun z ↦ Hom.app z B) square
   simp only [Hom.comp_app, pushforward_map_app, pushforwardComp_hom_app_app,
     pushforwardCongr_hom_app_app] at hs
-  erw [Category.comp_id] at hs
-  erw [Category.id_comp] at hs
-  repeat' erw [Category.id_comp]
-  repeat' erw [Category.comp_id]
+  rewrite (transparency := .default) [Category.comp_id] at hs
+  rewrite (transparency := .default) [Category.id_comp] at hs
+  repeat' rewrite (transparency := .default) [Category.id_comp]
+  repeat' rewrite (transparency := .default) [Category.comp_id]
   simp only [r, c, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Hom.comp_app,
     pushforward_map_app, restrictAdjunction_unit_app_app,
     restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app]
@@ -149,7 +149,10 @@ theorem restriction_chart_unit_normalization
   dsimp only [M] at *
   simp only [restrict_map]
   dsimp only [G] at hh ⊢
-  simp only [Category.assoc, ← Functor.map_comp] at hh ⊢
+  repeat' rewrite (transparency := .default) [Category.assoc] at hh
+  repeat' rewrite (transparency := .default) [Category.assoc]
+  repeat' rewrite (transparency := .default) [← Functor.map_comp] at hh
+  repeat' rewrite (transparency := .default) [← Functor.map_comp]
   convert hh.symm using 1
 
 end AlgebraicGeometry.Scheme.Modules

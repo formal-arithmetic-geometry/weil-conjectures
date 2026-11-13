@@ -147,22 +147,6 @@ theorem resolutionSectionClass_open_restriction
     unfold resolutionSectionClass
     simp only [Category.assoc]
     rewrite [← hn]
-    have hrmap :
-        ((NatTrans.mapHomologicalComplex
-          (Functor.whiskerLeft (SheafOfModules.forget X.ringCatSheaf ⋙
-            PresheafOfModules.toPresheaf X.ringCatSheaf.obj)
-            ((CategoryTheory.evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).map
-              (homOfLE (f.preimage_mono eWV)).op))
-          (ComplexShape.up ℕ)).app I.cocomplex) =
-        ((NatTrans.mapHomologicalComplex
-          (Functor.whiskerLeft (SheafOfModules.forget S.ringCatSheaf ⋙
-            PresheafOfModules.toPresheaf S.ringCatSheaf.obj)
-            ((CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).map
-              (homOfLE eWV).op))
-          (ComplexShape.up ℕ)).app K) := by
-      ext n
-      rfl
-    rewrite [hrmap] at hr
     have hr' := congrArg (fun q ↦ q ≫
       (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
         (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso
