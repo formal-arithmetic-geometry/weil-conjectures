@@ -240,7 +240,7 @@ end Restriction
 
 /-- The derived pullback used in the finite-support criterion. Naming the functor shares the
 inferred graded tensor instances across its occurrences. -/
-noncomputable abbrev finiteSupportUpperStar
+private noncomputable abbrev finiteSupportUpperStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
@@ -250,7 +250,7 @@ noncomputable abbrev finiteSupportUpperStar
 
 /-- A morphism of bounded constructible complexes is invertible away from finitely many closed
 points if it is invertible over the generic points of local coordinates detecting closed points. -/
-lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Prime]
+private lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Prime]
     {k : Type u} [Field k] (Y : Over (Spec (.of k)))
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
     {A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
@@ -289,7 +289,7 @@ lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Pri
       ((finiteSupportUpperStar (Profinite.padicAlgClRingObj ℓ) U.ι).map_distinguished _ hT)) hf
 
 /-- Invertibility after derived pullback is preserved by a further factorization. -/
-lemma isIso_upperStar_map_of_factorization
+private lemma isIso_upperStar_map_of_factorization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {W V Y : Scheme.{u}} {p : W ⟶ Y} {q : V ⟶ Y} (hl : ∃ l : W ⟶ V, l ≫ q = p)
     {A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -330,7 +330,7 @@ lemma isTraitModelOver_restrictOpen_productOpen
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Coordinates of product charts detect closed points and make the Künneth map invertible
 on their generic fibres, assuming the slicing formula in smaller chart dimension. -/
-lemma exists_coordinates_isIso_kunnethMap_of_slice
+private lemma exists_coordinates_isIso_kunnethMap_of_slice
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
     [TopologicalSpace.NoetherianSpace Z]
