@@ -67,8 +67,8 @@ private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X �
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  exact cochain_comp_eq_comp_comp_of_components _ _ _ _ _
-    (integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P)
+  apply cochain_comp_eq_comp_comp_of_components
+  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
