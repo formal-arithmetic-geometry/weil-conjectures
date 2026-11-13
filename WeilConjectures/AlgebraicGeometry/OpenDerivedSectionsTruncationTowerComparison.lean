@@ -78,7 +78,7 @@ private lemma exactFunctor_truncation_comparison
   have : s.IsGE ((t.truncGE b₂ ⋙ R).obj E) b₂ :=
     F.isGE_mapDerivedCategory_obj ((t.truncGE b₂).obj E) b₂
   have : s.IsGE ((t.truncGE b₂ ⋙ R).obj E) b₁ := s.isGE_of_ge _ _ b₂ h
-  apply s.from_truncGE_obj_ext
+  apply s.from_truncGE_obj_ext (Y := (t.truncGE b₂ ⋙ R).obj E)
   rw [← Category.assoc, s.π_natTransTruncGEOfLE_app, hc,
     ← Category.assoc, hc, ← R.map_comp, t.π_natTransTruncGEOfLE_app]
 
