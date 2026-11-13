@@ -125,7 +125,7 @@ omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
   [U.PreservesKInjectiveComplexes]
 include cB cA
 
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The localization square compares two independently presented derived tensor models.
 /-- Symmetry on a pair of flat-term K-flat representatives.
 There are no unit or associativity assertions, and the arguments are fixed
