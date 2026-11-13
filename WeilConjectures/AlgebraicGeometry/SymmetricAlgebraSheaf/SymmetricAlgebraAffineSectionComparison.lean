@@ -291,14 +291,17 @@ theorem exists_affineSectionComparison {X : Scheme.{u}}
           calc
             g V'.unop (restriction F k
                 (r • restriction F (homOfLE (hW.fromSpec_image_le V.unop.1)).op a)) =
-                g V'.unop (X.presheaf.map k r •
+                g V'.unop ((show Γ(X, hW.fromSpec ''ᵁ V'.unop.1) from X.presheaf.map k r) •
                   restriction F (homOfLE (hW.fromSpec_image_le V'.unop.1)).op a) :=
               congrArg (g V'.unop) ((restriction_smul F k r _).trans
-                (congrArg (fun z ↦ X.presheaf.map k r • z) hr))
+                (congrArg (fun z ↦
+                  (show Γ(X, hW.fromSpec ''ᵁ V'.unop.1) from X.presheaf.map k r) • z) hr))
             _ = (hW.fromSpec.appIso V'.unop.1).hom (X.presheaf.map k r) •
                 (show Γ(T, V'.unop.1) from tilde.toOpen A V'.unop.1 a) := hg V'.unop _ a
-            _ = (Spec Γ(X, W)).presheaf.map i ((hW.fromSpec.appIso V.unop.1).hom r) •
-                T.presheaf.map i (tilde.toOpen A V.unop.1 a) :=
+            _ = (show Γ(Spec Γ(X, W), V'.unop.1) from
+                  (Spec Γ(X, W)).presheaf.map i ((hW.fromSpec.appIso V.unop.1).hom r)) •
+                (show Γ(T, V'.unop.1) from
+                  T.presheaf.map i (tilde.toOpen A V.unop.1 a)) :=
               congrArg₂ (fun (s : Γ(Spec Γ(X, W), V'.unop.1)) (z : Γ(T, V'.unop.1)) ↦
                 s • z) hs ht.symm
             _ = T.presheaf.map i ((hW.fromSpec.appIso V.unop.1).hom r •
