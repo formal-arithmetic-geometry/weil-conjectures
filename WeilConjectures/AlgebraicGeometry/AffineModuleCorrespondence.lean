@@ -115,7 +115,7 @@ private theorem equivalence_on_full_subcategories
         exact β.naturality f.hom)
   exact ⟨CategoryTheory.Equivalence.mk F' G' a.symm b.symm, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
 by restriction to the structure sheaf. The inverse is the two tensor operations in 01SB,
@@ -201,15 +201,21 @@ theorem affine_module_correspondence [IsAffineHom f] :
               Nonempty (E.functor ⋙ (qA).ι ≅ (qU).ι ⋙ R) ∧
               Nonempty (E.inverse ⋙ (qU).ι ≅ (qA).ι ⋙ H) := by
   classical
-  have hqc (G : SheafOfModules.{u} (𝓡 A)) :
-      G.IsQuasicoherent ↔ ((S).obj G).IsQuasicoherent := by
+  let RA := 𝓡 A
+  let Rf : U.Modules ⥤ SheafOfModules.{u} RA := R
+  let Sf : SheafOfModules.{u} RA ⥤ X.Modules := S
+  let pU := qU
+  let pA := qA
+  let pX := SheafOfModules.isQuasicoherent X.ringCatSheaf
+  have hqc (G : SheafOfModules.{u} RA) :
+      pA G ↔ pX (Sf.obj G) := by
     exact quasiCoherent_iff_restrictScalars X (Under.mk ρ)
       ((affine_morphism_relative_spec X).1 f inferInstance) G
-  have hpush (F : U.Modules) (hF : F.IsQuasicoherent) :
-      ((R).obj F).IsQuasicoherent := by
+  have hpush (F : U.Modules) (hF : pU F) :
+      pA (Rf.obj F) := by
     let := hF
     let := IsSeparated.of_isAffineHom f
-    apply (hqc ((R).obj F)).mpr
+    apply (hqc (Rf.obj F)).mpr
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
   refine ⟨hqc, hpush, ?_⟩
   refine Exists.elim (affine_module_tensor_construction f) (fun B hB ↦ ?_)
@@ -240,7 +246,7 @@ theorem affine_module_correspondence [IsAffineHom f] :
     ⟨hring.1, hring.2.1, hring.2.2.1⟩ P pobj κ ⟨hP.1, hP.2.1⟩ H hobj γ
     ⟨hH.1, hH.2.1, hH.2.2.1⟩ α β hcomp
   refine ⟨hiso.1, hiso.2, ?_⟩
-  exact equivalence_on_full_subcategories qU qA R H hpush hH.2.2.1 α β hiso.1 hiso.2
+  exact equivalence_on_full_subcategories pU pA Rf H hpush hH.2.2.1 α β hiso.1 hiso.2
 
 end
 end AlgebraicGeometry.Scheme.Modules
