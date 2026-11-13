@@ -112,7 +112,6 @@ private theorem prime_unit (W : Scheme.{u})
   rw [map_natCast]
   with_unfolding_all exact isUnit_of_invertible (l : W.residueField w)
 
-set_option maxHeartbeats 400000 in
 -- The calculation combines three naturality squares in the system derived category.
 /-- Scalar extension of tensor substitution is computed by the normalized strict sigma.
 Source: Stacks 07A4 and 0941; the tensor step of scalar route coordinates.
@@ -146,7 +145,7 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
         (scalarSubstitution l E L ι S A β) (scalarSubstitution l E L ι S B γ) := by
   let SE := pullbackTensorCalculus l E W
   let SL := pullbackTensorCalculus l L W
-  let ρE := (ambientRoos l E W SE).some
+  obtain ⟨ρE⟩ := ambientRoos l E W SE
   let TE : ScalarExtensionTower.TensorModel l E W SE ρE :=
     ⟨ScalarExtensionTower.tensorModelRealization l E W SE,
       ScalarExtensionTower.tensorModelRealization_normalized l E W SE ρE⟩
@@ -157,10 +156,9 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
     S TE TL (prime_unit l W) M N
     ((constructibleIntegralTensor l E W).obj (M, N)).property.1
   have hn := (ScalarExtensionTower.derivedSigma_existsUnique l E L ι W SE SL).exists.choose_spec
-  with_unfolding_all
-    change ScalarExtensionTower.DerivedSigmaModel l E L ι W SE SL
-      (ScalarExtensionTower.derivedSigma l E L ι W SE SL) at hn
-  rcases hn A B hA hB with ⟨_, _, hnorm⟩
+  change ScalarExtensionTower.DerivedSigmaModel l E L ι W SE SL
+    (ScalarExtensionTower.derivedSigma l E L ι W SE SL) at hn
+  obtain ⟨_, _, hnorm⟩ := hn A B hA hB
   let FE := integralComparisonDerivedSequenceScalar l E L ι W
   let LE := coefficientSequenceLimit l E W
   let LL := coefficientSequenceLimit l L W
@@ -205,14 +203,14 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
     change reduction l E
       ((pullbackTensorIntegralTensorModel l E W).hom.app (M.obj, N.obj) ≫
         LE.map (T.map (Prod.mkHom a b)) ≫ LE.map e.inv) = _
-    rw [← LE.map_comp, reduction_post]
+    rewrite [← LE.map_comp, reduction_post]
     dsimp only [ScalarExtensionTower.tensorReduction, TE]
-    rw [fixed_tensor]
+    rewrite [fixed_tensor]
     unfold reduction
     simp only [Category.assoc]
     rfl
   conv_lhs => unfold scalarSubstitution
-  rw [hred]
+  rewrite [hred]
   change (S.realization.hom.app _ ≫ LL.map _) ≫ LL.map _ = _
   change (S.realization.hom.app _ ≫ LL.map
     (FE.map (ScalarExtensionTower.tensorReduction l E W SE ρE TE M.obj N.obj ≫
@@ -220,17 +218,17 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       (integralComparisonSequenceScalarModel l E L ι W).ε.app
         (StrictQuotient.total l E A B))) ≫ LL.map _ = _
   simp only [FE.map_comp, Category.assoc, ← LL.map_comp]
-  rw [hnorm', reassoc_of% hnat]
+  rewrite [hnorm', reassoc_of% hnat]
   have hpost := congrArg (fun k ↦ k ≫ LL.map
     (U.map (Prod.mkHom (FE.map a) (FE.map b)) ≫
       U.map (Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B)) ≫ d.inv)) hlim.symm
   simp only [Functor.map_comp, Category.assoc] at hpost ⊢
-  erw [hpost]
+  erewrite [hpost]
   unfold tensorSubstitution
-  rw [scalar_reduction, scalar_reduction]
+  rewrite [scalar_reduction, scalar_reduction]
   dsimp only [TL]
-  rw [fixed_tensor]
+  rewrite [fixed_tensor]
   have hp : Prod.mkHom
         (ScalarExtensionTower.scalarReduction l E L ι W SE SL ρ S M.obj ≫ FE.map a ≫
           (integralComparisonSequenceScalarModel l E L ι W).ε.app A)
@@ -242,7 +240,7 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       Prod.mkHom (FE.map a) (FE.map b) ≫
       Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B) := rfl
-  erw [hp]
+  erewrite [hp]
   simp only [Functor.map_comp, Category.assoc]
   rfl
 
