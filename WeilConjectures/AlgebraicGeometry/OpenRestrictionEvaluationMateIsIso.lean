@@ -100,7 +100,6 @@ private theorem mate_isIso_of_projection
   rw [heq]
   exact b.bijective
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- The canonical-family predicate unfolds the recorded sheaf tensor instances.
 set_option linter.style.haveILetI false in
