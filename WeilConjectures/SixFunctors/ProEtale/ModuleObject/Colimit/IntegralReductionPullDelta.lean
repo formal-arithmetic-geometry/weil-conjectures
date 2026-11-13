@@ -94,7 +94,7 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
               (ComplexShape.up ℤ)).inv.app K) :
         (L(Mod.extendScalars (coefficientMap a Y)) ⋙ L((f)^*⟦Λ'⟧)).obj
           (DerivedCategory.Qh.obj K) ⟶ _) := by
-  exact inv_comp_of_comparison DerivedCategory.Qh
+  simpa only [Category.assoc] using inv_comp_of_comparison DerivedCategory.Qh
     ((derivedUpperStarExtendScalarsIso a f).app (DerivedCategory.Qh.obj K))
     ((Functor.mapHomotopyCategoryCompIso
       (Iso.refl ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X))) (.up ℤ)).app K)
@@ -175,7 +175,7 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExten
     (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
+  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at hB l1 l2 i1' ⊢
   simp only [Functor.map_comp, Category.assoc] at l2 ⊢
   simp only [reassoc_of% hB, ← reassoc_of% l1, l2, reassoc_of% i1']
@@ -299,7 +299,7 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   simp only [← nδ,
     Mod.derivedExtendScalarsTriangleδ_app_Qh_obj_of_shortExact k wY hY P hS]
   have d2 := Mod.derivedExtendScalarsTriangleδ_app_Qh_obj_of_shortExact k wX hX _ hS'
-  simp only [d2]
+  erw [d2]
   have Φ :=
     derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExtendScalarsIso_inv
       a f ((HomotopyCategory.quotient _ _).obj P)
