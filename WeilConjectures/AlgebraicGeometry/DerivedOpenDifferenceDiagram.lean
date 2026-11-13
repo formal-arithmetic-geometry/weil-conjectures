@@ -100,6 +100,8 @@ private theorem isIso_lift_from_second
   rw [heq] at ht
   exact IsIso.of_isIso_comp_left (F.map (biprod.braiding Q P).hom) _
 
+/-- The difference construction depends only on additive adjunctions and invertible cross mates.
+Keeping the biproduct calculation abstract avoids unfolding the derived restriction functors. -/
 private theorem difference_diagram_of_adjunctions
     {C C₁ C₂ C₁₂ : Type*}
     [Category C] [Category C₁] [Category C₂] [Category C₁₂]
@@ -164,8 +166,7 @@ private theorem difference_diagram_of_adjunctions
       ← rV.map_comp_assoc, biprod.inr_fst, biprod.inr_snd,
       Functor.map_zero, zero_comp, comp_zero, zero_sub]
     rw [rV.map_id, Category.id_comp]
-  have hdU : (biprod.inl : jU.obj A ⟶ E) ≫ d =
-      f ≫ jW.map c.hom := by
+  have hdU : (biprod.inl : jU.obj A ⟶ E) ≫ d = f ≫ jW.map c.hom := by
     rw [← adjW.homEquiv_naturality_left, hU]
     simpa only [Category.assoc, f] using
       adjW.homEquiv_naturality_right (eU.inv.app _ ≫ sU.map εU) c.hom
@@ -182,11 +183,9 @@ private theorem difference_diagram_of_adjunctions
     infer_instance
   · exact ((adjW.homEquiv E (sV.obj B)).symm_apply_apply t).symm
 
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option trace.profiler true in
 /-- The difference arrow has split normal form on each of the two opens.
 The middle and last objects are the explicit direct-image sum and overlap image.
 This constructs their maps, not a glued object.
