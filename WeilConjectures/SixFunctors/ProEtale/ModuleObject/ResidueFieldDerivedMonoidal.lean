@@ -109,7 +109,16 @@ theorem exists_comparisonCompatible_residueFieldDerivedUpperStarIso :
     CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison
       (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f,
     ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison]
-  exact (Functor.comparisonCompatible_leftDerivedFunctorCompNatIso_of_tensorComparison _ _ _ _
-    _ _ _ _ _ (tensorCompatible_residueFieldModuleSheafUpperStarIso ℓ E f).inv).ofIso _ _
+  have h := Functor.comparisonCompatible_leftDerivedFunctorCompNatIso_of_tensorComparison
+    (f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧
+    (Functor.OplaxMonoidal.δNatTrans _)
+    (residueFieldModuleSheaf X ℓ E) (residueFieldModuleSheafTensorIso X ℓ E).hom
+    (residueFieldModuleSheaf Y ℓ E) (residueFieldModuleSheafTensorIso Y ℓ E).hom
+    (f)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]
+    (Functor.OplaxMonoidal.δNatTrans _)
+    (residueFieldModuleSheafUpperStarIso ℓ E f).symm
+    (tensorCompatible_residueFieldModuleSheafUpperStarIso ℓ E f).inv
+  exact h.ofIso (residueFieldModuleSheaf X ℓ E).leftDerivedFunctorIsoMapDerivedCategory
+    (residueFieldModuleSheaf Y ℓ E).leftDerivedFunctorIsoMapDerivedCategory
 
 end AlgebraicGeometry.ProEtale
