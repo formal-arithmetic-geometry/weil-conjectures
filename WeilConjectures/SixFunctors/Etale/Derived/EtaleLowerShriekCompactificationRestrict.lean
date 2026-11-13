@@ -198,9 +198,6 @@ lemma compactificationEtaleGraphIso_restrictOpen
   rw [← derivedSquareUpperStarIso_hom_app_eq (ModuleCat.{u + 1} Λ)
     (c.isPullback_selfGraph_restrictOpen v).toCommSq _
       (c.selfGraph_restrictOpen_selfGraphRestrict v)] at hpre
-  have hpre' := hpre
-  simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.map_comp, Category.assoc] at hpre'
   -- the open immersions `j` and `v ≫ j`
   have hθ := unit_map_restrictOpenLowerShriekIso Λ c v N
   have hpost := leftDerivedUpperStarComp_triangle_coherence (ModuleCat.{u + 1} Λ)
@@ -218,7 +215,7 @@ lemma compactificationEtaleGraphIso_restrictOpen
   dsimp at hnat hsec
   simp only [compactificationEtaleGraphIso_hom_app]
   simp only [Functor.map_comp, Category.assoc]
-  simp only [reassoc_of% hpre']
+  rw [← hpre, ← Functor.map_comp_assoc]
   simp only [hpost]
   simp only [← hnat]
   simp only [reassoc_of% hθ]
