@@ -29,7 +29,6 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option profiler true in
 /-- An arbitrary isomorphism beta from the local pullback of G to the local higher
  direct image transports the stalk of G to total cohomology. If its adjoint sends
  a section s to the canonical class of xi, the transported germ restricts to xi.
