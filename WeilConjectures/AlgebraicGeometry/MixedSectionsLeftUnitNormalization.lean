@@ -153,6 +153,39 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
+-- Normalize the entire composition path before pasting the Leray comparisons.
+private theorem mixedSections_composition_path
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
+    let Df := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+    let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
+    let Dfg := RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom
+    let HZ := RingedSpace.globalSectionsFunctor Z.toRingedSpace
+    let e := schemeNormalizedDirectImageCompIso f g
+    HZ.rightDerivedFunctorUnit.app ((Dfg.mapHomotopyCategory (.up ℤ)).obj K) ≫
+        HZ.rightDerivedFunctor.map (Dfg.rightDerivedFunctorUnit.app K) ≫
+        HZ.rightDerivedFunctor.map (e.inv.app (DerivedCategory.Qh.obj K)) =
+      HZ.rightDerivedFunctorUnit.app
+          ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
+        HZ.rightDerivedFunctor.map
+          (Dg.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
+        HZ.rightDerivedFunctor.map (Dg.rightDerivedFunctor.map
+          (Df.rightDerivedFunctorUnit.app K)) := by
+  intro Df Dg Dfg HZ e
+  have he := (Classical.choose_spec
+    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
+      X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› X)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Y)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
+      f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
+  rw [← HZ.rightDerivedFunctor.map_comp]
+  erw [he]
+  simp only [Functor.map_comp]
+
 set_option profiler true in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
@@ -201,16 +234,7 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
-  have he := (Classical.choose_spec
-    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
-      X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› X)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Y)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
-      f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
+  have he := mixedSections_composition_path f g K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
   have hn := (mixedGlobalSectionsDirectImageIso g).hom.naturality
     (Df.rightDerivedFunctorUnit.app K)
@@ -224,10 +248,8 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
     dsimp only [p]
-    simp only [Category.assoc]
-    rw [← (schemeDerivedGlobalSections Z).map_comp_assoc]
     erw [he]
-    simp only [Functor.map_comp, Category.assoc]
+    simp only [Category.assoc]
     erw [hn]
     simpa only [Category.assoc] using congrArg
       (fun z ↦ z ≫ (schemeGlobalScalarRestriction g).map
