@@ -185,7 +185,7 @@ private theorem square_of_functions {A B P Q : Type r}
   rw [← ha, ← hb]
   exact (hs x).symm
 
-set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Normalization checks the scalar-restriction identifications for both component maps.
 private theorem horizontal_natural
     (ht : ∀ {m n : ℕ} (h : n ≤ m),
