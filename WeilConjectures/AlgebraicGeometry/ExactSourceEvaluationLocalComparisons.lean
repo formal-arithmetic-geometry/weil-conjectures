@@ -48,12 +48,18 @@ private theorem descend_comparison_squares
     _ = (c.hom ≫ a.hom) ≫ E.map f := by
       simpa only [Category.assoc] using congrArg (fun t ↦ c.hom ≫ t) h₂
 
-private noncomputable def canonical_open_restriction_data (X : Scheme.{u})
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-    [∀ U : X.Opens, HasDerivedCategory.{w}
-      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
-    (K N : schemeDerivedCategory X) (U : X.Opens) :=
-  exists_canonicalEvaluation_open_restriction X U K N
+private theorem descend_comparison_squares_of_exists
+    {C D : Type*} [Category* C] [Category* D]
+    (E : C ⥤ D) [E.Full] [E.Faithful]
+    {S T S' T' : C} {A B : D} (g : S ⟶ T) (f : S' ⟶ T') (h : A ⟶ B)
+    (h₁ : ∃ c : E.obj S ≅ A, ∃ d : E.obj T ≅ B,
+      E.map g ≫ d.hom = c.hom ≫ h)
+    (h₂ : ∃ a : A ≅ E.obj S', ∃ b : B ≅ E.obj T',
+      h ≫ b.hom = a.hom ≫ E.map f) :
+    ∃ a' : S ≅ S', ∃ b' : T ≅ T', g ≫ b'.hom = a'.hom ≫ f := by
+  obtain ⟨c, d, hc⟩ := h₁
+  obtain ⟨a, b, ha⟩ := h₂
+  exact descend_comparison_squares E g f c d a b h hc ha
 
 /-- The representative equation needs preservation of quasi-isomorphisms by Hom(P,-)
 and K-flatness of its ordinary dual, rather than finite freeness or invertibility
@@ -125,10 +131,10 @@ theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
   let E := ec.mapDerivedCategory
   let R := (SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory
-  obtain ⟨c, d, hrestrict⟩ := canonical_open_restriction_data X K N U
-  obtain ⟨aU, bU, hmodel⟩ := exists_exactSource_evaluation_open_models X U
-    (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
-    (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf
-  exact descend_comparison_squares E _ _ c d aU bU _ hrestrict hmodel
+  refine descend_comparison_squares_of_exists E _ _ _ ?_ ?_
+  · exact exists_canonicalEvaluation_open_restriction X U K N
+  · exact exists_exactSource_evaluation_open_models X U
+      (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
+      (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf
 
 end AlgebraicGeometry
