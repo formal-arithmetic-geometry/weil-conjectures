@@ -187,7 +187,6 @@ private lemma comp_pullback_snd_eq_genericGeomPoint {A R : CommRingCat.{u}}
     simp only [Category.assoc]
     rw [← pullback.condition_assoc, hhalg, reassoc_of% hfst, ← Spec.map_comp, hε]
 
-set_option profiler true in
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
@@ -262,7 +261,6 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       (specMap_commutes_of_ringHom _ _ _ hrσc)
   · exact specMap_commutes_of_ringHom _ _ _ htfc
 
-set_option profiler true in
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected (C ↘ Spec (.of K))] in
@@ -346,7 +344,8 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     exact comp_pullback_snd_eq_genericGeomPoint j hW.fromSpec _ (CommRingCat.ofHom ε)
       (CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom)
       (CommRingCat.ofHom (algebraMap Γ(C, c.W) Ω)) h hhproj hhalg _ e'.hom hfst hgen
-      (CommRingCat.hom_ext (RingHom.ext (Ideal.inertiaInvariantsToField C.functionField Q).commutes))
+      (CommRingCat.hom_ext (RingHom.ext
+        (Ideal.inertiaInvariantsToField C.functionField Q).commutes))
       (CommRingCat.hom_ext (RingHom.ext hε))
   -- the Galois group of `Ω / K'` is the inertia group
   have hmem (σ : Gal(Ω/C.functionField)) : σ ∈ Q.inertia Gal(Ω/C.functionField) ↔
