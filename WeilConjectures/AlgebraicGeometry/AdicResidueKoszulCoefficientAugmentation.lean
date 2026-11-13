@@ -144,11 +144,13 @@ private theorem ringedKoszulDualTower_quotient_augmentation
     (q : ∀ n, SheafOfModules.unit (siteModuleRings O) ⟶ Q n)
     (hq : ∀ n, q (n + 1) ≫ s n = q n)
     (hscalar : ∀ n i, ((ringedKoszulScalar O (b i)) ^ (n + 1)).asHom ≫ q n = 0) :
-    ∃ ε : ringedKoszulDualTower O r b ⟶ Functor.ofOpSequence (fun n ↦
-        (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (s n)),
+    ∃ ε : ringedKoszulDualTower O r b ⟶ Functor.ofOpSequence
+        (X := fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (Q n))
+        (fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (s n)),
       ∀ n : ℕ, ringedKoszulDualUnit O r b n ≫ ε.app (op n) =
         (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (q n) := by
-  let F := Functor.ofOpSequence (fun n ↦
+  let F := Functor.ofOpSequence (X := fun n ↦
+    (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (Q n)) (fun n ↦
     (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (s n))
   let T := ringedKoszulDualTower O r b
   obtain ⟨d, _, hu⟩ :
@@ -265,7 +267,7 @@ theorem adicResidue_koszul_coefficient_augmentation
     (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
       (a i)) U
-  refine ringedKoszulDualTower_quotient_augmentation O r b
+  refine @ringedKoszulDualTower_quotient_augmentation _ _ _ _ O r b
     (adicResidueQuotientModule X J U) (adicResidueQuotientModuleStep X J U)
     (quotientProjection X J U) (quotientProjection_step X J U) ?_
   intro n i
