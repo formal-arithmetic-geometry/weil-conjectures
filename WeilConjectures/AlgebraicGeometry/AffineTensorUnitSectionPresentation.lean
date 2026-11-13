@@ -190,7 +190,6 @@ private theorem scalar_tensor_presentation
       change q (_ - _) = 0
       rw [map_sub, hrel, sub_self]
 
-set_option profiler true in
 /-- Affine sections of the two tensor operations are the quotient of the first tensor
 product by the diagonal-action relations. The map on unit tensors is canonical.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and key algebra observation.

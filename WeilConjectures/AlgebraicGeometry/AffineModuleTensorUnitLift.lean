@@ -72,6 +72,19 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
+private theorem tensor_changeOfRings_adjunct
+    (Y : TopCat.{u}) (B C : Y.Sheaf CommRingCat.{u}) (φ : B ⟶ C)
+    (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 C))
+    (k : SheafOfModules.changeOfRings.{u, u, u} φ M ⟶ N) :
+    ∃ q : M ⟶ (SheafOfModules.restrictScalars (𝓻 φ)).obj N,
+      ∀ (W : (Opens Y)ᵒᵖ) (m : M.val.obj W),
+        q.val.app W m = k.val.app W
+          (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C).obj)).unit.app
+            (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M)).app W
+              ((1 : C.obj.obj W) ⊗ₜ[B.obj.obj W,(φ.hom.app W).hom] m)) := by
+  obtain ⟨E, hE, adj, he⟩ := SheafOfModules.exists_changeOfRingsAdjunction Y B C φ
+  exact ⟨adj.homEquiv M N (eqToHom (hE M) ≫ k), he M N k⟩
+
 set_option profiler true in
 /-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
@@ -142,36 +155,20 @@ theorem affine_module_tensor_unitLift
   have _ := hb
   intro G
   -- The second extension unit is B-linear and agrees with γ after κ.
-  have hexε :=
-    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat B U.sheaf ε
-  let Eε := hexε.choose
-  let heε := hexε.choose_spec.choose
-  let adjε := hexε.choose_spec.choose_spec.choose
-  have hε := hexε.choose_spec.choose_spec.choose_spec
-  let z : P.obj G ⟶ (SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G) :=
-    adjε.homEquiv (P.obj G) (H.obj G)
-      (eqToHom (heε (P.obj G)) ≫ eqToHom (hobj G).symm)
+  obtain ⟨z, hz₀⟩ := tensor_changeOfRings_adjunct U.toTopCat B U.sheaf ε
+    (P.obj G) (H.obj G) (eqToHom (hobj G).symm)
   have hz (W : (Opens U)ᵒᵖ) (p : (P.obj G).val.obj W) :
       z.val.app W p = (γ.app G).val.app W ((κ.hom.app G).val.app W p) := by
-    have hz₀ := hε (P.obj G) (H.obj G) (eqToHom (hobj G).symm) W p
-    change z.val.app W p = _ at hz₀
-    refine hz₀.trans ((congrArg ((eqToHom (hobj G).symm).val.app W)
+    refine (hz₀ W p).trans ((congrArg ((eqToHom (hobj G).symm).val.app W)
       (hH.2 G W p).symm).trans ?_)
     change ((eqToHom (hobj G) ≫ eqToHom (hobj G).symm).val.app W)
       ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = _
     simp only [eqToHom_trans, eqToHom_refl]
     rfl
   -- Composing the two tensor units gives an IA-linear map.
-  have hext :=
-    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
-  let Et := hext.choose
-  let het := hext.choose_spec.choose
-  let adjt := hext.choose_spec.choose_spec.choose
-  have hunit := hext.choose_spec.choose_spec.choose_spec
-  let q : I G ⟶ (SheafOfModules.restrictScalars (𝓻 t)).obj
-      ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G)) :=
-    adjt.homEquiv (I G) ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))
-      (eqToHom (het (I G)) ≫ eqToHom (pobj G).symm ≫ z)
+  obtain ⟨q, hunit⟩ := tensor_changeOfRings_adjunct U.toTopCat IA B t (I G)
+    ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))
+    (eqToHom (pobj G).symm ≫ z)
   let adjAb := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)
   let d := (adj₀).homEquiv ((S).obj G) (H.obj G) (γ.app G)
@@ -180,11 +177,8 @@ theorem affine_module_tensor_unitLift
       d.val.app V g = q.val.app ((Opens.map f.base).op.obj V)
         ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g) := by
     let W := (Opens.map f.base).op.obj V
-    have hq₀ := hunit (I G)
-      ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))
-      (eqToHom (pobj G).symm ≫ z) W
+    have hq₀ := hunit W
       ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)
-    change q.val.app W _ = _ at hq₀
     symm
     refine hq₀.trans ((congrArg ((eqToHom (pobj G).symm ≫ z).val.app W)
       (hP.2 G V g).symm).trans ?_)
