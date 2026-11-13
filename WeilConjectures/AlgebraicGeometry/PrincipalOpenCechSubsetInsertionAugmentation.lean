@@ -76,6 +76,7 @@ private theorem principalSubsetInsertion_hom_apply
         principalSubsetInsertOne A r f J n S).hom from
     map_sum (AddCommGrpCat.homAddEquiv.toAddMonoidHom) _ _]
   rw [AddMonoidHom.finsetSum_apply]
+  change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
 
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
