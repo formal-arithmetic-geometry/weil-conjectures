@@ -166,8 +166,6 @@ private theorem scalarInverseCoordinate
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the transported coefficient and derived-category instances needs extra heartbeats.
 /-- Tensor associativity identifies the scalar change of a quotient augmentation
 with the direct augmentation. This is entirely a statement about strict chain
 maps, before localization or insertion of a derived counit.
