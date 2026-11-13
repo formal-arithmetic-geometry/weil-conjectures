@@ -336,6 +336,7 @@ private theorem composite_complex_epsilon
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Elaborate the nested quotient-to-derived transports before cancelling their isomorphisms.
 private theorem square_condition_transport
     (s : RingedTensorSquare Y X Y' X' f g h k)
