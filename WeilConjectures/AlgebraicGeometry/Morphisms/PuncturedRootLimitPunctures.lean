@@ -73,6 +73,7 @@ theorem punctured_root_colimit_continuity
           ∃ d : V.toScheme ≅ D.obj j,
             d.hom ≫ t.app j = V.ι ≫ q ≫ Spec.map (a.app (Opposite.op j)) := by
   classical
+  dsimp only
   have : IsConnected I := IsCofiltered.isConnected I
   let A₀ := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C f)
   let N₀ := Spec (CommRingCat.of A₀)

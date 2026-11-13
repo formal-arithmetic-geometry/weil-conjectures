@@ -174,6 +174,139 @@ private theorem smooth_trait_affine_generic_open_over
   exact ⟨β, IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _⟩
 
 
+private theorem smooth_trait_normalization_divisor_chart
+    (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
+    [Field K] [Algebra A K] [IsFractionRing A K]
+    {L : Scheme.{u}} (d : L ⟶ Spec (CommRingCat.of A)) [Smooth d]
+    (G : Type (u + 1)) [Group G] [Finite G] (hGA : IsUnit (Nat.card G : A))
+    (W : GaloisCover G
+      (pullback d (Spec.map (CommRingCat.ofHom (algebraMap A K)))))
+    (x : L) (hx : d x = IsLocalRing.closedPoint A) :
+    letI : IsFinite W.π := W.isFinite
+    let b := Spec.map (CommRingCat.ofHom (algebraMap A K))
+    let p := W.π ≫ pullback.fst d b
+    ∃ (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R) (ρ : A →+* R) (ϖ : A),
+      Etale φ ∧ φ y = x ∧ IsLocalRing.maximalIdeal A = Ideal.span {ϖ} ∧
+      φ ≫ d = Spec.map (CommRingCat.ofHom ρ) ∧ ρ ϖ ∈ y.asIdeal ∧
+      ∃ (m : ℕ) (e : Fin m → ℕ), (∀ k, 0 < e k) ∧
+        ∃ α : pullback p.fromNormalization φ ≅ Spec (CommRingCat.of (∀ k : Fin m,
+            AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C (ρ ϖ)))),
+          α.hom ≫ Spec.map (CommRingCat.ofHom
+            (algebraMap R (∀ k : Fin m,
+              AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C (ρ ϖ))))) =
+            pullback.snd p.fromNormalization φ := by
+  classical
+  let : IsFinite W.π := W.isFinite
+  dsimp only
+  let b := Spec.map (CommRingCat.ofHom (algebraMap A K))
+  let p := W.π ≫ pullback.fst d b
+  obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible A
+  have hchart := smooth_trait_affine_generic_open_over A K
+      ϖ hϖ d x
+  dsimp only at hchart
+  obtain ⟨R, φ, y, hφ, hy, ar, hsm, hφd, γ₀, hγ₀⟩ := hchart
+  let : Algebra A R := ar
+  have : Algebra.Smooth A R := hsm
+  obtain ⟨hR, hf, hRf⟩ := smooth_trait_regular_quotient A R ϖ hϖ
+  have : IsRegularRing R := hR
+  have : IsRegularRing (R ⧸ Ideal.span {algebraMap A R ϖ}) := hRf
+  have hRy : algebraMap A R ϖ ∈ y.asIdeal := by
+    have hdy : (Spec.map (CommRingCat.ofHom
+        (algebraMap A R))) y =
+        IsLocalRing.closedPoint A := by
+      rw [← hφd, Scheme.Hom.comp_apply]
+      change d (φ y) = _
+      rw [hy, hx]
+    have hmem : ϖ ∈ IsLocalRing.maximalIdeal A := by
+      rw [hϖ.maximalIdeal_eq]
+      exact Ideal.mem_span_singleton_self ϖ
+    change ϖ ∈ (PrimeSpectrum.comap (algebraMap A R) y).asIdeal
+    rw [show PrimeSpectrum.comap (algebraMap A R) y =
+      IsLocalRing.closedPoint A from hdy]
+    exact hmem
+  have hGR : IsUnit (Nat.card G : R) := by
+    simpa only [map_natCast] using hGA.map (algebraMap A R)
+  obtain ⟨T, χ, z, hχ, hz, m, e, he, hT, hg, hTg, γ, hγ⟩ :=
+    GaloisCover.regular_divisor_prescribed_punctured_root_chart
+      (pullback.fst d b) G W R φ (algebraMap A R ϖ)
+      hGR hf γ₀ hγ₀ y
+  let ρ := (Spec.preimage χ).hom.comp (algebraMap A R)
+  let f : T := ρ ϖ
+  have : Etale φ := hφ
+  have : Etale χ := hχ
+  let φ' := χ ≫ φ
+  have hφ'd : φ' ≫ d = Spec.map (CommRingCat.ofHom ρ) := by
+    dsimp only [φ', ρ]
+    rw [Category.assoc, hφd]
+    calc
+      χ ≫ Spec.map (CommRingCat.ofHom (algebraMap A R)) =
+          Spec.map (Spec.preimage χ) ≫
+            Spec.map (CommRingCat.ofHom (algebraMap A R)) := by
+        rw [Spec.map_preimage]
+      _ = _ := by rw [← Spec.map_comp]; rfl
+  have hρ : ρ ϖ ∈ z.asIdeal := by
+    change (Spec.preimage χ).hom (algebraMap A R ϖ) ∈ z.asIdeal
+    change algebraMap A R ϖ ∈
+      (PrimeSpectrum.comap (Spec.preimage χ).hom z).asIdeal
+    have hz' : PrimeSpectrum.comap (Spec.preimage χ).hom z = y := by
+      change (Spec.map (Spec.preimage χ)) z = y
+      rw [Spec.map_preimage]
+      exact hz
+    rw [hz']
+    exact hRy
+  have : IsRegularRing T := hT
+  have : IsRegularRing (T ⧸ Ideal.span {f}) := hTg
+  let B := ∀ k : Fin m,
+    AdjoinRoot ((Polynomial.X : Polynomial T) ^ e k - Polynomial.C f)
+  let N := Spec (CommRingCat.of B)
+  let r := Spec.map (CommRingCat.ofHom (algebraMap T B))
+  let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap T B f)
+  have hnormal : ∀ z : N, IsDomain (N.presheaf.stalk z) ∧
+      IsIntegrallyClosed (N.presheaf.stalk z) :=
+    regular_divisor_root_model_normal T m f hg e he
+  have hV : Dense (V : Set N) := by
+    have (k : Fin m) : Module.Free T
+        (AdjoinRoot ((Polynomial.X : Polynomial T) ^ e k - Polynomial.C f)) :=
+      (Polynomial.monic_X_pow_sub_C f (he k).1.ne').free_adjoinRoot
+    have hfB : IsSMulRegular B (algebraMap T B f) := hg.of_flat
+    have hr : IsRegular (algebraMap T B f) :=
+      (Commute.isRegular_iff (fun b ↦ Commute.all _ b)).mpr
+        (isLeftRegular_iff.mpr hfB)
+    have hinj : Function.Injective
+        (algebraMap B (Localization.Away (algebraMap T B f))) :=
+      IsLocalization.injective (M := Submonoid.powers (algebraMap T B f))
+        (Localization.Away (algebraMap T B f)) (by
+        rintro v ⟨l, rfl⟩
+        exact (hr.pow l).mem_nonZeroDivisors)
+    change Dense (↑(PrimeSpectrum.basicOpen (algebraMap T B f)) : Set (PrimeSpectrum B))
+    rw [← PrimeSpectrum.localization_away_comap_range
+      (Localization.Away (algebraMap T B f)) (algebraMap T B f)]
+    apply (PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical _).mpr
+    rw [(RingHom.injective_iff_ker_eq_bot _).mp hinj]
+    exact bot_le
+  let (k : Fin m) : Module.Finite T
+      (AdjoinRoot ((Polynomial.X : Polynomial T) ^ e k - Polynomial.C f)) :=
+    (Polynomial.monic_X_pow_sub_C f (he k).1.ne').finite_adjoinRoot
+  have : Module.Finite T B := inferInstance
+  have : IsFinite r := by
+    rw [IsFinite.SpecMap_iff]
+    exact RingHom.finite_algebraMap.mpr inferInstance
+  let : IsLocallyNoetherian L := LocallyOfFiniteType.isLocallyNoetherian d
+  let : IsLocallyNoetherian (Spec T) := LocallyOfFiniteType.isLocallyNoetherian φ'
+  let : IsLocallyNoetherian N := LocallyOfFiniteType.isLocallyNoetherian r
+  obtain ⟨δ, hδ⟩ := normalization_iso_of_dense_open_model
+    (pullback.snd p φ') r hnormal V hV γ hγ
+  let α₀ := (asIso (p.normalizationPullback φ')).symm ≪≫ δ
+  have hα₀ : α₀.hom ≫ r = pullback.snd p.fromNormalization φ' := by
+    dsimp only [α₀, Iso.trans_hom, Iso.symm_hom]
+    rw [Category.assoc, hδ]
+    exact (IsIso.inv_comp_eq (p.normalizationPullback φ')).mpr
+      (Hom.normalizationPullback_snd p φ').symm
+  refine ⟨T, φ', z, ρ, ϖ, inferInstance, ?_, hϖ.maximalIdeal_eq, hφ'd, hρ,
+    m, e, fun k ↦ (he k).1, α₀, hα₀⟩
+  dsimp only [φ']
+  rw [Scheme.Hom.comp_apply, hz, hy]
+
 /-- A tame affine chart using the pullback of an actual trait uniformizer.
 
 Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH.
@@ -254,125 +387,24 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
   let b := Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField))
   let p := W.π ≫ pullback.fst d b
   have hβ' : β.hom ≫ p.fromNormalization = n := hβ
-  obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible (S.presheaf.stalk s)
   have hGA : IsUnit (Nat.card G : S.presheaf.stalk s) := by
-    simpa using hG.map (S.presheaf.Γgerm s).hom
-  have hchart := smooth_trait_affine_generic_open_over (S.presheaf.stalk s) S.functionField
-      ϖ hϖ d (n x)
+    simpa only [map_natCast] using hG.map (S.presheaf.Γgerm s).hom
+  have hnx : d (n x) = IsLocalRing.closedPoint (S.presheaf.stalk s) := by
+    rw [hx]
+    change (pullback.lift (a ≫ σ) (𝟙 _) _ ≫ pullback.snd c a) _ = _
+    rw [pullback.lift_snd]
+    rfl
+  have hchart := smooth_trait_normalization_divisor_chart
+    (S.presheaf.stalk s) S.functionField d G hGA W (n x) hnx
   dsimp only at hchart
-  obtain ⟨R, φ, y, hφ, hy, ar, hsm, hφd, γ₀, hγ₀⟩ := hchart
-  let : Algebra (S.presheaf.stalk s) R := ar
-  have : Algebra.Smooth (S.presheaf.stalk s) R := hsm
-  obtain ⟨hR, hf, hRf⟩ := smooth_trait_regular_quotient (S.presheaf.stalk s) R ϖ hϖ
-  have : IsRegularRing R := hR
-  have : IsRegularRing (R ⧸ Ideal.span {algebraMap (S.presheaf.stalk s) R ϖ}) := hRf
-  have hRy : algebraMap (S.presheaf.stalk s) R ϖ ∈ y.asIdeal := by
-    have hdy : (Spec.map (CommRingCat.ofHom
-        (algebraMap (S.presheaf.stalk s) R))) y =
-        IsLocalRing.closedPoint (S.presheaf.stalk s) := by
-      rw [← hφd, Scheme.Hom.comp_apply]
-      change d (φ y) = _
-      rw [hy]
-      rw [hx]
-      change (pullback.lift (a ≫ σ) (𝟙 _) _ ≫ pullback.snd c a) _ = _
-      rw [pullback.lift_snd]
-      rfl
-    have hmem : ϖ ∈ IsLocalRing.maximalIdeal (S.presheaf.stalk s) := by
-      rw [hϖ.maximalIdeal_eq]
-      exact Ideal.mem_span_singleton_self ϖ
-    change ϖ ∈ (PrimeSpectrum.comap (algebraMap (S.presheaf.stalk s) R) y).asIdeal
-    rw [show PrimeSpectrum.comap (algebraMap (S.presheaf.stalk s) R) y =
-      IsLocalRing.closedPoint (S.presheaf.stalk s) from hdy]
-    exact hmem
-  have hGR : IsUnit (Nat.card G : R) := by
-    simpa only [map_natCast] using hGA.map (algebraMap (S.presheaf.stalk s) R)
-  obtain ⟨T, χ, z, hχ, hz, m, e, he, hT, hg, hTg, γ, hγ⟩ :=
-    GaloisCover.regular_divisor_prescribed_punctured_root_chart
-      (pullback.fst d b) G W R φ (algebraMap (S.presheaf.stalk s) R ϖ)
-      hGR hf γ₀ hγ₀ y
-  let ρ := (Spec.preimage χ).hom.comp (algebraMap (S.presheaf.stalk s) R)
-  let f : T := ρ ϖ
-  have : Etale φ := hφ
-  have : Etale χ := hχ
-  let φ' := χ ≫ φ
-  have hφ'd : φ' ≫ d = Spec.map (CommRingCat.ofHom ρ) := by
-    dsimp only [φ', ρ]
-    rw [Category.assoc, hφd]
-    calc
-      χ ≫ Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) R)) =
-          Spec.map (Spec.preimage χ) ≫
-            Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) R)) := by
-        rw [Spec.map_preimage]
-      _ = _ := by rw [← Spec.map_comp]; rfl
-  have hρ : ρ ϖ ∈ z.asIdeal := by
-    change (Spec.preimage χ).hom (algebraMap (S.presheaf.stalk s) R ϖ) ∈ z.asIdeal
-    change algebraMap (S.presheaf.stalk s) R ϖ ∈
-      (PrimeSpectrum.comap (Spec.preimage χ).hom z).asIdeal
-    have hz' : PrimeSpectrum.comap (Spec.preimage χ).hom z = y := by
-      change (Spec.map (Spec.preimage χ)) z = y
-      rw [Spec.map_preimage]
-      exact hz
-    rw [hz']
-    exact hRy
-  have : IsRegularRing T := hT
-  have : IsRegularRing (T ⧸ Ideal.span {f}) := hTg
-  let B := ∀ k : Fin m,
-    AdjoinRoot ((Polynomial.X : Polynomial T) ^ e k - Polynomial.C f)
-  let N := Spec (CommRingCat.of B)
-  let r := Spec.map (CommRingCat.ofHom (algebraMap T B))
-  let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap T B f)
-  have hnormal : ∀ z : N, IsDomain (N.presheaf.stalk z) ∧
-      IsIntegrallyClosed (N.presheaf.stalk z) :=
-    regular_divisor_root_model_normal T m f hg e he
-  have hV : Dense (V : Set N) := by
-    have (k : Fin m) : Module.Free T
-        (AdjoinRoot ((Polynomial.X : Polynomial T) ^ e k - Polynomial.C f)) :=
-      (Polynomial.monic_X_pow_sub_C f (he k).1.ne').free_adjoinRoot
-    have hfB : IsSMulRegular B (algebraMap T B f) := hg.of_flat
-    have hr : IsRegular (algebraMap T B f) :=
-      (Commute.isRegular_iff (fun b ↦ Commute.all _ b)).mpr
-        (isLeftRegular_iff.mpr hfB)
-    have hinj : Function.Injective
-        (algebraMap B (Localization.Away (algebraMap T B f))) :=
-      IsLocalization.injective (M := Submonoid.powers (algebraMap T B f))
-        (Localization.Away (algebraMap T B f)) (by
-        rintro v ⟨l, rfl⟩
-        exact (hr.pow l).mem_nonZeroDivisors)
-    change Dense (↑(PrimeSpectrum.basicOpen (algebraMap T B f)) : Set (PrimeSpectrum B))
-    rw [← PrimeSpectrum.localization_away_comap_range
-      (Localization.Away (algebraMap T B f)) (algebraMap T B f)]
-    apply (PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical _).mpr
-    rw [(RingHom.injective_iff_ker_eq_bot _).mp hinj]
-    exact bot_le
-  let (k : Fin m) : Module.Finite T
-      (AdjoinRoot ((Polynomial.X : Polynomial T) ^ e k - Polynomial.C f)) :=
-    (Polynomial.monic_X_pow_sub_C f (he k).1.ne').finite_adjoinRoot
-  have : Module.Finite T B := inferInstance
-  have : IsFinite r := by
-    rw [IsFinite.SpecMap_iff]
-    exact RingHom.finite_algebraMap.mpr inferInstance
-  let : IsLocallyNoetherian (pullback c a) := LocallyOfFiniteType.isLocallyNoetherian d
-  let : IsLocallyNoetherian (Spec T) := LocallyOfFiniteType.isLocallyNoetherian φ'
-  let : IsLocallyNoetherian N := LocallyOfFiniteType.isLocallyNoetherian r
-  obtain ⟨δ, hδ⟩ := normalization_iso_of_dense_open_model
-    (pullback.snd p φ') r hnormal V hV γ hγ
-  let α₀ := (asIso (p.normalizationPullback φ')).symm ≪≫ δ
-  have hα₀ : α₀.hom ≫ r = pullback.snd p.fromNormalization φ' := by
-    dsimp only [α₀, Iso.trans_hom, Iso.symm_hom]
-    rw [Category.assoc, hδ]
-    apply (cancel_epi (p.normalizationPullback φ')).mp
-    rw [← Category.assoc, asIso_inv, IsIso.hom_inv_id, Category.id_comp,
-      Hom.normalizationPullback_snd]
-  let E : pullback n φ' ≅ pullback p.fromNormalization φ' :=
-    asIso (pullback.map n φ' p.fromNormalization φ' β.hom (𝟙 _) (𝟙 _)
-      (by simpa using hβ'.symm) (by simp))
-  refine ⟨T, φ', z, ρ, ϖ, inferInstance, ?_, hϖ.maximalIdeal_eq, hφ'd, hρ,
-    m, e, fun k ↦ (he k).1, E ≪≫ α₀, ?_⟩
-  · dsimp only [φ']
-    rw [Scheme.Hom.comp_apply, hz, hy]
-  · change (E.hom ≫ α₀.hom) ≫ r = pullback.snd n φ'
-    rw [Category.assoc, hα₀]
-    simp only [E, asIso_hom, pullback.map, pullback.lift_snd, Category.comp_id]
+  obtain ⟨R, φ, y, ρ, ϖ, hφ, hy, hϖ, hφd, hρ, m, e, he, α₀, hα₀⟩ := hchart
+  let E : pullback n φ ≅ pullback p.fromNormalization φ :=
+    asIso (pullback.map n φ p.fromNormalization φ β.hom (𝟙 _) (𝟙 _)
+      (by simpa only [Category.comp_id] using hβ'.symm) (by simp))
+  refine ⟨R, φ, y, ρ, ϖ, hφ, hy, hϖ, hφd, hρ, m, e, he, E ≪≫ α₀, ?_⟩
+  change (E.hom ≫ α₀.hom) ≫ _ = pullback.snd n φ
+  rw [Category.assoc, hα₀]
+  simp only [E, asIso_hom, pullback.map, pullback.lift_snd, Category.comp_id]
 
 
 end AlgebraicGeometry.Scheme
