@@ -91,13 +91,6 @@ private theorem normalizedTensorComposite
   rw [reassoc_of% hr, ← H.map_comp, hq]
   exact hf
 
-private theorem normalizedTensorComposite_transport
-    {𝒜 : Type*} [Category 𝒜] {A B C D E F : 𝒜}
-    {a a' : A ⟶ B} {b : B ⟶ C} {c : C ⟶ D} {d : D ⟶ E} {e : E ⟶ F}
-    {f : A ⟶ F} (ha : a = a') (h : a' ≫ b ≫ c ≫ d ≫ e = f) :
-    FiveStepEquation a b c d e f :=
-  heq_of_eq ((congrArg (fun k ↦ k ≫ b ≫ c ≫ d ≫ e) ha).trans h)
-
 private theorem normalizedTensorComparisonSquare
     {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] (F G : 𝒞 ⥤ 𝒟)
     (δ : F ⟶ G) {A B C D : 𝒞} {Z : 𝒟}
@@ -140,7 +133,6 @@ private theorem tensorModelRealization_hom (W : Scheme.{u})
 
 attribute [local irreducible] tensorModelRealization pullbackTensorReferenceTensorModel
 
-set_option profiler true in
 -- The normalization composes several derived-category naturality equations.
 /-- The constructed tensor realization has the prescribed strict quotient formula
 and Roos equation on every pair of whole-system coherent presentations.
@@ -253,22 +245,6 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
       (congrArg Iso.hom (roosBridge_eq l E W ρ
         ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))).symm)
   have hfinal := normalizedTensorComposite L H
-    (A₀ := T.systemClosed.tensor.obj
-      (T.reduction.obj (DerivedCategory.Q.obj P.obj),
-        T.reduction.obj (DerivedCategory.Q.obj Q.obj)))
-    (A₁ := S.systemClosed.tensor.obj
-      (S.reduction.obj (DerivedCategory.Q.obj P.obj),
-        S.reduction.obj (DerivedCategory.Q.obj Q.obj)))
-    (A₂ := S.systemClosed.tensor.obj (DerivedCategory.Q.obj C, DerivedCategory.Q.obj D))
-    (A₃ := DerivedCategory.Q.obj ((tensor l E W).obj (C, D)))
-    (B₀ := T.systemClosed.tensor.obj
-      (DerivedCategory.Q.obj (R.obj P.obj), DerivedCategory.Q.obj (R.obj Q.obj)))
-    (B₁ := DerivedCategory.Q.obj ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))
-    (Y₀ := U.obj ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))
-    (Y₁ := U.obj ((tensor l E W).obj (C, D)))
-    (Y₂ := (integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj))
-    (I := (integralCompletedTensor l E W).obj
-      (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
     ((pullbackTensorIntegralTensorModel l E W).hom.app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
     (T.systemClosed.tensor.map
