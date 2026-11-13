@@ -32,7 +32,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace SheafOfModules
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
 -- Comparing the two restriction presentations in the naturality square needs extra reduction.
 set_option backward.isDefEq.respectTransparency false in
 /-- If `F` is flat on a ringed site, tensoring by its restriction to a slice preserves
@@ -118,14 +117,9 @@ theorem isFlat_over_preservesFiniteLimits
       simp only [Functor.comp_map, Functor.prod_map, MonoidalCategory.tensor_map,
         CategoryTheory.Functor.map_id] at h₂
       erw [MonoidalCategory.tensorHom_id, MonoidalCategory.tensorHom_id] at h₂
-      rw [← Category.assoc, ← Category.assoc, h₁]
-      simp only [Category.assoc]
-      congr 1
-      erw [← Category.assoc, h₂, Category.assoc]
-      congr 1
-      erw [Iso.eq_inv_comp, ← Category.assoc, ← h₃, Category.assoc,
-        Iso.hom_inv_id, Category.comp_id]
-      rfl)
+      simpa only [Category.assoc] using
+        ((CommSq.mk h₁).vert_comp
+          ((CommSq.mk h₂).vert_comp (CommSq.mk h₃).vert_inv)).w)
   have hex : ∀ S : ShortComplex (SheafOfModules.{u} (A.over U)),
       S.Exact → (S.map TU).Exact := by
     intro S hS
