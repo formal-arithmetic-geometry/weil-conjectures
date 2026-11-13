@@ -134,7 +134,6 @@ private theorem single_naturality_of_normalized_unit
 
 attribute [local irreducible] completed homComplexFunctor
 
-set_option profiler true in
 /-- Quotient maps annihilating the Koszul powers give a normalized augmentation
 of the dual tower. -/
 private theorem ringedKoszulDualTower_quotient_augmentation
@@ -232,7 +231,6 @@ private theorem ringedKoszulDualTower_quotient_augmentation
       (hunit_naturality n) (hnorm n) (hnorm (n + 1)) (hq n)
   exact ⟨NatTrans.ofOpSequence e hstep, hnorm⟩
 
-set_option trace.profiler true in
 /-- The coefficient augmentation exists before tensoring with any complex.
 In particular neither K-flatness nor Noetherianity is needed for this construction.
 
