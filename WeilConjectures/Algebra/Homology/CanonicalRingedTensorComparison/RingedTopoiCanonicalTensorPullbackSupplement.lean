@@ -399,6 +399,31 @@ private theorem tensorPullbackTotal_naturality
   rw [tensorHom_def, Category.assoc]
   rfl
 
+private noncomputable def tensorPullbackTotalNatIso
+    {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
+    {B : Type u'} [Category.{v'} B] [Abelian B] [MonoidalCategory B]
+    [MonoidalPreadditive A] [MonoidalPreadditive B]
+    [HasCoproducts.{0} A] [HasCoproducts.{0} B]
+    (L : A ⥤ B) [L.Additive]
+    (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
+    (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
+      L.map (f ⊗ₘ g) ≫ (e X' Y').hom =
+        (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
+    (V : B ⥤ A) (am : L ⊣ V) :
+    let F := L.mapHomologicalComplex (.up ℤ)
+    let tA := Functor.uncurry.obj ((curriedTensor A).map₂HomologicalComplex
+      (.up ℤ) (.up ℤ) (.up ℤ))
+    let tB := Functor.uncurry.obj ((curriedTensor B).map₂HomologicalComplex
+      (.up ℤ) (.up ℤ) (.up ℤ))
+    (F.prod F) ⋙ tB ≅ tA ⋙ F := by
+  refine NatIso.ofComponents (fun X ↦
+    @asIso _ _ _ _ (tensorPullbackTotal L e he X.1 X.2)
+      (tensorPullbackTotal_isIso L e he V am X.1 X.2)) ?_
+  intro X Y f
+  simp only [asIso_hom, Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
+    Functor.map₂HomologicalComplex, tensorMap_factor]
+  exact tensorPullbackTotal_naturality L e he f.1 f.2
+
 end CanonicalTensorPullbackProof
 
 set_option synthInstance.maxSize 2048 in
@@ -540,10 +565,11 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
   have hF : ∀ P, PR P → PS (F.obj P) := by
     intro P hp
     exact (hPS _).2 (hpres P ((hPR _).1 hp).1 ((hPR _).1 hp).2)
-  obtain ⟨LF', ε', hLF', hdata⟩ :=
-    ringedTopoiDerivedPullback uInv uPush adj I c uStar hobj hmap
-  have hε' := hdata.2.2.1
-  clear hdata
+  have hder := ringedTopoiDerivedPullback uInv uPush adj I c uStar hobj hmap
+  let LF' := hder.choose
+  let ε' := hder.choose_spec.choose
+  have hLF' := hder.choose_spec.choose_spec.1
+  have hε' := hder.choose_spec.choose_spec.2.2.2.1
   have := hLF
   have := hLF'
   let e := Functor.leftDerivedNatIso LF' LF ε' epsilon
@@ -576,23 +602,12 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
         (siteSheafTensorRightIso R (Q.X n)).symm (hqf n))
     exact he _ ht.1 (fun n ↦ (exactFunctor _ _).prop_of_iso
       (siteSheafTensorRightIso R _) (ht.2.1 n))
-  let b0 : (F.prod F) ⋙ tS ≅ tR ⋙ F := NatIso.ofComponents
-    (fun X ↦ k.totalIso R S RI uInv I c uStar hobj V am X.1 X.2)
-    (by
-      intro X Y f
-      let := monoidalCategory R
-      let := monoidalCategory S
-      let := ringedTensorPreadditive R
-      let := ringedTensorPreadditive S
-      simp only [CanonicalRingedTensorComparison.totalIso, asIso_hom]
-      dsimp only [F, tR, tS, Functor.comp_map, Functor.prod_map,
-        CanonicalRingedTensorComparison.total]
-      simp only [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex,
-        CanonicalTensorPullbackProof.tensorMap_factor]
-      exact
-        (CanonicalTensorPullbackProof.tensorPullbackTotal_naturality
-          uStar k.mu k.naturality (P := X.1) (P' := Y.1) (Q := X.2) (Q' := Y.2)
-          f.1 f.2))
+  let b0 : (F.prod F) ⋙ tS ≅ tR ⋙ F := by
+    let := monoidalCategory R
+    let := monoidalCategory S
+    let := ringedTensorPreadditive R
+    let := ringedTensorPreadditive S
+    exact CanonicalTensorPullbackProof.tensorPullbackTotalNatIso uStar k.mu k.naturality V am
   let b := b0.symm
   let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ PR X.as
   have hres : ∀ X : HomotopyCategory A (.up ℤ),
@@ -610,7 +625,7 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
       (D := DerivedCategory A) (DerivedCategory B)
       (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
       (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh PR H (fun _ ↦ Iff.rfl) hres
-  obtain ⟨ff⟩ := hff
+  let ff := hff.some
   let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ (DerivedCategory B)).mapIso
     (NatIso.prod (Functor.isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso A))
       (Functor.isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso A))))
@@ -635,7 +650,9 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
     refine ⟨hF P hp, hF Q hq, ?_⟩
     simpa only [heps, hb] using ha P Q hp hq
   · intro ha P Q hp hq
-    simpa only [heps, hb] using (ha P Q hp hq).choose_spec.choose_spec
+    set_option backward.isDefEq.respectTransparency true in
+      have hh := (ha P Q hp hq).choose_spec.choose_spec
+    simpa only [heps, hb] using hh
 
 set_option synthInstance.maxSize 2048 in
 -- Keep both tensor representative interfaces explicit.

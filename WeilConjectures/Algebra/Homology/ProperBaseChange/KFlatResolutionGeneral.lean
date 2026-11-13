@@ -180,16 +180,12 @@ namespace SheafOfModules
 
 private lemma tensorComparison_naturality_right_kfg
     {P S : Type*} [Category* P] [Category* S] [MonoidalCategory P] [MonoidalCategory S]
-    (F : P ⥤ S) [F.Monoidal] (G : S ⥤ P) (ε : G ⋙ F ≅ 𝟭 S)
-    (A : S) {T T' : S} (f : T ⟶ T') :
-    A ◁ f ≫ ((ε.app A ⊗ᵢ ε.app T').symm ≪≫
-        Functor.Monoidal.μIso F (G.obj A) (G.obj T')).hom =
-      ((ε.app A ⊗ᵢ ε.app T).symm ≪≫
-        Functor.Monoidal.μIso F (G.obj A) (G.obj T)).hom ≫ F.map (G.obj A ◁ G.map f) := by
-  have h := ε.inv.naturality f
-  change f ≫ ε.inv.app T' = ε.inv.app T ≫ F.map (G.map f) at h
-  simp only [Iso.trans_hom, Iso.symm_hom, tensorIso_inv, Iso.app_inv,
-    Functor.Monoidal.μIso_hom, Category.assoc, ← Functor.LaxMonoidal.μ_natural_right]
+    (F : P ⥤ S) [F.LaxMonoidal] {A T T' : S} {M N N' : P}
+    (a : A ⟶ F.obj M) (b : T ⟶ F.obj N) (b' : T' ⟶ F.obj N')
+    (f : T ⟶ T') (g : N ⟶ N') (h : f ≫ b' = b ≫ F.map g) :
+    A ◁ f ≫ (a ⊗ₘ b') ≫ Functor.LaxMonoidal.μ F M N' =
+      (a ⊗ₘ b) ≫ Functor.LaxMonoidal.μ F M N ≫ F.map (M ◁ g) := by
+  rw [← Functor.LaxMonoidal.μ_natural_right]
   simp only [← Category.assoc, whiskerLeft_comp_tensorHom, tensorHom_comp_whiskerLeft, h]
 
 -- The underlying sheaf of rings of the sheaf of commutative rings `R`.
@@ -213,8 +209,12 @@ private lemma whiskerLeft_tensorObjIsoSheafification_hom_kfg (A : SheafOfModules
     {T T' : SheafOfModules.{max u v} 𝓡} (f : T ⟶ T') :
     A ◁ f ≫ (tensorObjIsoSheafification A T').hom =
       (tensorObjIsoSheafification A T).hom ≫ (𝓢).map (A.val ◁ f.val) := by
-  exact tensorComparison_naturality_right_kfg (𝓢) (forget 𝓡)
-    (asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit) A f
+  let ε := asIso (PresheafOfModules.sheafificationAdjunction.{max u v} (𝟙 (𝓡).obj)).counit
+  have h : f ≫ ε.inv.app T' = ε.inv.app T ≫ (𝓢).map f.val := ε.inv.naturality f
+  simp only [tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom, tensorIso_inv,
+    Iso.app_inv, Functor.Monoidal.μIso_hom, Category.assoc]
+  exact tensorComparison_naturality_right_kfg (𝓢) (M := A.val) (N := T.val) (N' := T'.val)
+    (ε.inv.app A) (ε.inv.app T) (ε.inv.app T') f f.val h
 
 /-- **The tensor-hom adjunction for sheaves of modules**: morphisms `A ⊗ T ⟶ N` correspond to
 morphisms `T ⟶ homObj A N`. A morphism `A ⊗ T ⟶ N` is a morphism `a(A ⊗ T) ⟶ N` out of the

@@ -23,8 +23,14 @@ private lemma map_homCongr_naturality_hcs
     {A A' B B' : K} (t : A' ⟶ A) (s : B ⟶ B') (f : q.obj A ⟶ q.obj B) :
     Iso.homCongr (c.app A') (c.app B') (F.map (q.map t ≫ f ≫ q.map s)) =
       Q.map t ≫ Iso.homCongr (c.app A) (c.app B) (F.map f) ≫ Q.map s := by
-  simp only [Iso.homCongr_apply, Functor.map_comp, Category.assoc]
-  rw [c.hom.naturality s, ← c.inv.naturality_assoc t]
+  have hs : F.map (q.map s) ≫ c.hom.app B' = c.hom.app B ≫ Q.map s :=
+    c.hom.naturality s
+  have ht : Q.map t ≫ c.inv.app A = c.inv.app A' ≫ F.map (q.map t) :=
+    c.inv.naturality t
+  simp only [Iso.homCongr_apply, Iso.app_inv, Iso.app_hom, Functor.map_comp, Category.assoc]
+  rw [hs]
+  simpa only [Category.assoc] using
+    congrArg (fun z ↦ z ≫ F.map f ≫ c.hom.app B ≫ Q.map s) ht.symm
 
 set_option trace.profiler true in
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.
