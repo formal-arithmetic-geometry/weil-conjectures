@@ -80,10 +80,12 @@ private theorem closedRestriction_tensorHomEquiv_comp (X : Scheme.{u})
     A A' K K N N a (𝟙 K) (𝟙 N) f
   change schemeDerivedTensorHomEquiv X A' K N
     (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-      X.sheaf).map (𝟙 (op K, N))) = _ at hn
+      X.sheaf).map (𝟙 (op K, N))) =
+    (a ⊗ₘ 𝟙 K) ≫ schemeDerivedTensorHomEquiv X A K N f ≫ 𝟙 N at hn
   simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using hn
 
 set_option trace.profiler true in
+set_option linter.style.haveILetI false in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.
 
 Source: Stacks Project, cohomology.tex, Tags 06YH, 08DJ and 08DL.
@@ -135,19 +137,10 @@ theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})
           (Functor.Monoidal.μIso R A K).hom ≫
             R.map (schemeDerivedTensorHomEquiv X A K N ξ) := by
   classical
-  dsimp only
-  let E := (Equivalence.functor
-    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-    (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-    (Scheme.Modules.overEquiv U)).mapDerivedCategory
-  let R := (SheafOfModules.overFunctor.{u}
-    (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E
-  let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.sheaf
-  let HU := derivedInternalHom
-    (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf
+  intro E R H HU
   let e := schemeDerivedTensorHomEquiv X
   let eU := schemeDerivedTensorHomEquiv U.toScheme
-  obtain ⟨m⟩ := exists_openRestriction_derivedMonoidal X U
+  obtain ⟨m⟩ : Nonempty R.Monoidal := exists_openRestriction_derivedMonoidal X U
   let : R.Monoidal := m
   let c := fun K N ↦ (eU (R.obj (H.obj (op K, N))) (R.obj K) (R.obj N)).symm
     ((Functor.Monoidal.μIso R (H.obj (op K, N)) K).hom ≫
