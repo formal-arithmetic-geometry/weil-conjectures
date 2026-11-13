@@ -334,20 +334,24 @@ private theorem composite_complex_epsilon
   simp only [Category.id_comp, Category.comp_id]
 
 private theorem square_transport_cancel_iff
-    {C : Type*} [Category C] {A B A' B' D E D' E' : C}
-    {i : A ⟶ A'} [Epi i] {j : B ⟶ B'} {q : D ⟶ D'} [Mono q] {r : E ⟶ E'}
-    {t : A ⟶ B} {t' : A' ⟶ B'} {a : B' ⟶ D} {b : A' ⟶ E}
-    {c : B ⟶ D'} {d : A ⟶ E'} {m : E ⟶ D} {n : E' ⟶ D'}
-    (hc : c = j ≫ a ≫ q) (hd : d = i ≫ b ≫ r)
-    (ht : i ≫ t' = t ≫ j) (hm : m ≫ q = r ≫ n) :
-    (t ≫ c = d ≫ n) ↔ (t' ≫ a = b ≫ m) := by
-  simp only [hc, hd, Category.assoc, ← reassoc_of% ht, ← hm]
-  rw [cancel_epi]
-  simp only [← Category.assoc, cancel_mono]
+    {C : Type*} [Category C] {A A' B B' D D' E : C}
+    {i : A ⟶ A'} [Epi i] {j : B ⟶ B'} {q : D ⟶ D'} [Mono q]
+    {t : A ⟶ B} {t' : A' ⟶ B'} {a : B' ⟶ D} {b : A' ⟶ E} {n : E ⟶ D}
+    (ht : i ≫ t' = t ≫ j) :
+    (t ≫ j ≫ a ≫ q = i ≫ b ≫ n ≫ q) ↔ (t' ≫ a = b ≫ n) := by
+  constructor
+  · intro h
+    apply (cancel_mono q).1
+    apply (cancel_epi i).1
+    simpa only [Category.assoc, ← ht] using h
+  · intro h
+    rw [← ht]
+    simp only [Category.assoc]
+    rw [h]
+
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
 private theorem square_condition_transport
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (theta : g.left ⋙ k.left ≅ f.left ⋙ h.left)
@@ -366,11 +370,8 @@ private theorem square_condition_transport
       (edge_composite_epsilon g k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
         DerivedCategory.Qh.map ((square_homotopy_comparison s).hom.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-  -- Cancel the comparison isomorphisms in an abstract diagram before specializing to complexes.
-  exact square_transport_cancel_iff
-    (composite_complex_epsilon f h P) (composite_complex_epsilon g k P)
-    (theta.hom.naturality ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
-    (DerivedCategory.quotientCompQhIso_hom_naturality (s.complexComparison.hom.app P))
+  apply square_transport_cancel_iff
+  exact theta.hom.naturality ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
