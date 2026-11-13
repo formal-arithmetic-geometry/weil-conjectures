@@ -106,9 +106,9 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
   dsimp only [eta] at hres
   have hrO := hres O
   dsimp only [O] at hrO
-  convert hc using 1
-  · simp only [hF, Functor.map_comp, Category.assoc, hres F, Category.comp_id]
-  · trace_state
+  convert hc using 1 <;>
+    simp only [hF, hO, Functor.map_comp, Category.assoc, hres F, Category.comp_id]
+  all_goals
     simp only [hO, Functor.map_comp, Category.assoc]
     rw [reassoc_of% hrO]
 
