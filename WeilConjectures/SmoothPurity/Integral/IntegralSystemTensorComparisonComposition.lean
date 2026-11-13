@@ -373,24 +373,38 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
     have hs := integralSystemTensorComparison_square l E f P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
     dsimp only [Functor.comp_obj, Functor.prod_obj] at hs ⊢
-    exact hs
+    run_tac
+      let hs ← Lean.Elab.Tactic.getFVarId `hs
+      let actual ← Lean.Meta.inferType (.fvar hs)
+      let expected ← Lean.Elab.Tactic.getMainTarget
+      let rec differences (fuel : Nat) (a b : Lean.Expr) : List String :=
+        if a == b then [] else
+        match fuel, a, b with
+        | 0, _, _ => ["depth limit"]
+        | n + 1, .app f x, .app g y => differences n f g ++ differences n x y
+        | n + 1, .forallE _ a x _, .forallE _ b y _ =>
+          differences n a b ++ differences n x y
+        | _, _, _ => [s!"actual: {repr a}\nexpected: {repr b}"]
+      for d in ((differences 128 actual expected).eraseDups.take 12) do
+        Lean.logInfo d
+    with_reducible exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E h P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
     dsimp only [Functor.comp_obj, Functor.prod_obj] at hs ⊢
-    exact hs
+    with_reducible exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
     dsimp only [Functor.comp_obj, Functor.prod_obj] at hs ⊢
-    exact hs
+    with_reducible exact hs
   · intro P
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
       Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
     rfl
   · dsimp only [Functor.comp_obj, Functor.prod_obj] at hm ⊢
-    exact hm
+    with_reducible exact hm
   · intro P _
     infer_instance
   · intro P _
