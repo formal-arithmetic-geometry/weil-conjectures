@@ -178,7 +178,7 @@ private lemma kummerBoundary_comp_baseChange
     σ ≫ F.map (a ≫ (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y)) ≫
         (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' =
       a' ≫ (δ'⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Y') := by
-  rw [F.map_comp, Category.assoc, Category.assoc,
+  rw [F.map_comp, Category.assoc,
     Functor.map_shift_comp_shiftFunctorAdd'_inv, hδ,
     (shiftFunctor D (1 : ℤ)).map_comp, Category.assoc, reassoc_of% ha]
 
@@ -249,6 +249,7 @@ lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
   rw [kummerBoundary, Adjunction.homEquiv_unit]
   simp only [Category.assoc]
 
+set_option trace.profiler true in
 /-- **Base change of the Kummer boundary.** For `e : U' ⟶ U` and a global function `f` on `U`, the
 restriction of `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` to `U'` — the pullback `Le^* ∂κ(f)` read through
 `Λ_{U'} ≅ Le^* Λ_U`, the shift compatibility of `Le^*` and the restriction of supports
@@ -283,9 +284,8 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
       U'.basicOpenUnit (e.appTop f) := by
     ext
     simp only [Units.coe_map, Scheme.basicOpenUnit, IsUnit.unit_spec]
-    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← sq.w, Scheme.Hom.comp_appTop,
-      CommRingCat.comp_apply]
-    rfl
+    simpa only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] using
+      congrArg (fun p ↦ p.appTop f) sq.w
   have hG1 := supportedLocalizationBoundary_baseChange Λ e
     (U.zeroLocusSubschemeι {f}) (U.basicOpen f).ι (U'.zeroLocusSubschemeι {e.appTop f})
     (U'.basicOpen (e.appTop f)).ι g e₁ (range_zeroLocusSubschemeι_singleton f)
