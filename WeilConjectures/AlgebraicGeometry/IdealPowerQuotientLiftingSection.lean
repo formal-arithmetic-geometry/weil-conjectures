@@ -43,7 +43,6 @@ private theorem over_app_eq {X : Scheme.{u}} {M N : X.Modules}
     (f : M ⟶ N) {V : X.Opens} (W : X.Opens) (hWV : W ≤ V) :
     (f.over V).val.app (op (Over.mk (homOfLE hWV))) = f.val.app (op W) := rfl
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
@@ -176,12 +175,13 @@ theorem ideal_power_quotient_local_lifting_section
       (show l V V' ≤ Finset.univ.sup (fun p : S × S ↦ l p.1 p.2) from
         Finset.le_sup (f := fun p : S × S ↦ l p.1 p.2)
           (Finset.mem_univ (V, V'))).trans (le_max_right _ _)
-    have he := congrArg (fun f ↦ f.val.app (op W))
-      (rcomp n (l V V') m (hnl V V') hlm)
+    have he : (r (l V V') m hlm).val.app (op W) ≫
+        (r n (l V V') (hnl V V')).val.app (op W) = (r n m hnm).val.app (op W) :=
+      congrArg (fun f ↦ f.val.app (op W)) (rcomp n (l V V') m (hnl V V') hlm)
     dsimp only [β]
-    rw [over_comp_over_app, over_comp_over_app]
+    rw [over_comp_over_app (r n m hnm) (α V) (q n m hnm) W hWV,
+      over_comp_over_app (r n m hnm) (α V') (q n m hnm) W hWV']
     rw [← he]
-    simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app]
     rw [Category.assoc, Category.assoc]
     rw [← Category.assoc ((r n (l V V') (hnl V V')).val.app (op W)),
       hl V V' W hWV hWV', Category.assoc]
