@@ -451,7 +451,6 @@ lemma leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso (f : X ⟶ Y) (g :
     leftDerivedUpperStarComp Λ f g = Functor.leftDerivedFunctorFactorIso (upperStarComp Λ f g) :=
   rfl
 
-set_option profiler true in
 /-- **Associativity** of the composition isomorphisms of the derived pullbacks of module
 objects: the two ways of identifying `L(f ≫ g ≫ h)^*` with `Lh^* ⋙ Lg^* ⋙ Lf^*` agree. -/
 lemma leftDerivedUpperStarComp_assoc_app (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)
