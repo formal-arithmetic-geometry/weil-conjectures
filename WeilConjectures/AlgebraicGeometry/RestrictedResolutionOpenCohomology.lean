@@ -142,7 +142,6 @@ private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
   congr 1
 
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
 section complexes, before the map to a cohomology sheaf.
 Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
