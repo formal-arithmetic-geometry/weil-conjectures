@@ -105,7 +105,7 @@ lemma exists_retraction_of_eq_comp_map_comp_of_invariant_eq {C D E : Type*} [Cat
     rw [← F₂.map_comp_assoc, ← F₁.map_comp, ← Category.assoc (u σ), hinv]
 
 /-- Transport an invariant retraction along isomorphisms, retaining its projector formula. -/
-lemma exists_invariant_retraction_of_conjugate_eq {C D : Type*} [Category C] [Category D]
+private lemma exists_invariant_retraction_of_conjugate_eq {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (R : T ⟶ A) (η : A ⟶ T)
     (hR : η ≫ R = 𝟙 A) (i : P ≅ F.obj A) (κ : F.obj T ≅ Q)
     (hα : α = i.hom ≫ F.map η ≫ κ.hom) {ι : Type*} (u : ι → (T ⟶ T))
@@ -324,6 +324,25 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Reuse tensor existence proofs while elaborating composites of derived functors.
+private theorem projector_hasTensor₄ObjExt (S : Scheme.{u})
+    (R : Sheaf (ProEt.topology S) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    ∀ P Q R₁ S₁ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) R),
+      GradedObject.HasTensor₄ObjExt P Q R₁ S₁ := by
+  infer_instance
+
+private theorem projector_hasGoodTensor₁₂Tensor (S : Scheme.{u})
+    (R : Sheaf (ProEt.topology S) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    ∀ P Q R₁ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) R),
+      GradedObject.HasGoodTensor₁₂Tensor P Q R₁ := by
+  infer_instance
+
+private theorem projector_hasGoodTensorTensor₂₃ (S : Scheme.{u})
+    (R : Sheaf (ProEt.topology S) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    ∀ P Q R₁ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) R),
+      GradedObject.HasGoodTensorTensor₂₃ P Q R₁ := by
+  infer_instance
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
@@ -360,6 +379,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have := projector_hasTensor₄ObjExt.{u}
+  have := projector_hasGoodTensor₁₂Tensor.{u}
+  have := projector_hasGoodTensorTensor₂₃.{u}
   have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
@@ -458,6 +480,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
+  have := projector_hasTensor₄ObjExt.{u}
+  have := projector_hasGoodTensor₁₂Tensor.{u}
+  have := projector_hasGoodTensorTensor₂₃.{u}
   have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
     (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
