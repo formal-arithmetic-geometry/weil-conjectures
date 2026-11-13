@@ -291,14 +291,10 @@ theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
           (eqToIso (sequencePullback_eq l E f)) (.up ℤ)).symm := by
     exact mapComplex_eqToIso_symm (sequencePullback_eq l E f)
   unfold generatorNorm at hs
+  specialize hs P Q p q k hpq (n, V) x y
   rw [hbridge] at hs
   dsimp [pullBridge, rI, rP] at hs ⊢
   dsimp only [Functor.mapIso, Iso.trans, Iso.symm, Iso.prod] at hs ⊢
-  convert hs P Q p q k hpq (n, V) x y using 1 <;>
-    simp [sequenceDirect, pullbackTensorSequenceDirect,
-    pullbackTensorSequenceAdjunction, pullbackTensorSequenceInverse,
-    IntegralCoherence.PullbackComparison.tensor, pullBridge,
-    Iso.symm_hom, NatIso.mapHomologicalComplex_hom_app_f]
-    <;> try rfl
+  exact hs
 
 end WeilConjectures.CompletedQuotient
