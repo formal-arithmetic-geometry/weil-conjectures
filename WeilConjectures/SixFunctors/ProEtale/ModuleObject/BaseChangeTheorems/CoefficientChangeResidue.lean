@@ -171,10 +171,9 @@ lemma pullbackSquareComparison_hom_app_hom_lift
       (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
     subst h
     rfl
-  have h := congrArg (fun φ ↦ φ.hom)
-    (boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K)
-  simp only [ObjectProperty.FullSubcategory.comp_hom, hinv f' g,
-    boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K, e] at h
-  exact h.trans (pullbackSquareComparison_hom_app Λ _ K.obj).symm
+  rw [boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K,
+    pullbackSquareComparison_hom_app Λ _ K.obj]
+  exact congrArg₂ (· ≫ ·) (hinv f' g) (congrArg₂ (· ≫ ·) (e _)
+    (boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
