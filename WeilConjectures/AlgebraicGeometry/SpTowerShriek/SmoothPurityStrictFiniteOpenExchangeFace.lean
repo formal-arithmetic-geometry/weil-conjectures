@@ -650,7 +650,9 @@ private theorem open_exchange_inverse (b : Base l E)
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
+        exactByConversion h)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
