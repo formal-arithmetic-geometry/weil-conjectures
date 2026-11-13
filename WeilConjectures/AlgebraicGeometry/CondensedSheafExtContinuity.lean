@@ -50,6 +50,7 @@ local instance localInst_CondensedSheafExtContinuity_2
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborating the derived-module cocone needs extra typeclass and definitional equality work.
 /-- Derived Hom from a constructible condensed `E`-module sheaf commutes with a small
 filtered colimit of complexes with a common termwise lower bound, in every integer shift.
