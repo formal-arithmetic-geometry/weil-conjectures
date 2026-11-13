@@ -118,6 +118,10 @@ private theorem gluing_of_difference
   exact compatible_of_difference rU rV rW sU sV eU eV c f d pU pV k
     (Pretriangulated.comp_distTriang_mor_zero₁₂ T ht') hdiff
 
+set_option backward.isDefEq.respectTransparency false in
+set_option synthInstance.maxSize 2048 in
+set_option synthInstance.maxHeartbeats 400000 in
+-- Additivity of the three-fold composite restriction functors exceeds the default size.
 set_option trace.profiler true in
 /-- Objects of the derived category glue across a two-open cover with their prescribed
 transition, without an assertion about morphisms into another object.
