@@ -78,8 +78,6 @@ private theorem completion_limit_transport_eval {A : Type uS} [CommRing A] (I : 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
--- Comparing scalar actions on restricted cohomology modules needs extra elaboration.
 private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p : ℕ)
     (θ : ∀ n : ℕ, formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]
@@ -98,6 +96,7 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
   apply Concrete.limit_ext (formalFibreCohomologySystem f y F p)
   intro j
   obtain ⟨n⟩ := j
+  -- Choose representatives only in the component being tested.
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (AdicCompletion.evalₐ I (n + 1) r)
   obtain ⟨z, hz⟩ := Submodule.Quotient.mk_surjective
     (I ^ (n + 1) • (⊤ : Submodule (Y.presheaf.stalk y) (formalFunctionsStalk f y F p)))
@@ -110,6 +109,7 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
       AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x = _
     rw [← ha, ← hz]
     rfl
+  -- Select the completed-ring action on the underlying cohomology group.
   let smul := @SMul.smul (AdicCompletion I (Y.presheaf.stalk y))
     (formalFibreCohomology f y F p n) inferInstance
   have hs : a • θ n z = smul r (θ n z) := by
@@ -131,8 +131,6 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
--- Transport through limits and restriction of scalars needs extra elaboration.
 /-- The canonical maps theta_n : M → H^p(X_n, F_n) are compatible with the transitions,
 kill m^(n+1) M, and induce an isomorphism over the completed local ring from the
 completion of M to the inverse limit, whose composite with M → M^ is (theta_n)_n.
