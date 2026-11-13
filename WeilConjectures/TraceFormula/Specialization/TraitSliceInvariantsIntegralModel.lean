@@ -140,6 +140,37 @@ noncomputable def baseChangeGaloisModelPullbackIso
           (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
+private theorem boundedConstructible_nearbyCycles_residue_pullback
+    [IsSeparated p] [IsSepClosed K] [Fact (ringChar k' ≠ ℓ)]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (B : DerivedCategory (Mod (Sheaf (ProEt.topology M.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) M.total)))
+    (hB : boundedConstructible _ B) :
+    boundedConstructible
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))
+        (baseChangeSpecial b v).left)
+      (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
+        (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
+          (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
+            (traitGenericField k') (traitGenericField K))).nearbyCycles
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))).obj
+        (L((𝟙 (baseChangeGaloisModel hM b hb v hv).generic)^*⟦Profinite.continuousMapRingObj.{u}
+          (integersResidueField ℓ E.1)⟧).obj
+          (L(((baseChangeGaloisModel hM b hb v hv).j)^*⟦Profinite.continuousMapRingObj.{u}
+            (integersResidueField ℓ E.1)⟧).obj
+            (L(((baseChangeHom hM b hb v hv).total)^*⟦Profinite.continuousMapRingObj.{u}
+              (integersResidueField ℓ E.1)⟧).obj B)))) := by
+  refine (exists_prime_ne_dvd_of_natCast_eq_zero k'
+    (Fact.out : ringChar k' ≠ ℓ)).elim fun p hp' ↦ ?_
+  have hp := hp'.1
+  have hpℓ := hp'.2.1
+  have hpk := hp'.2.2
+  have : Fact p.Prime := ⟨hp⟩
+  have := hasInvertibleExponent_integersResidueField (k' := k') E
+  exact boundedConstructible_nearbyCycles_galoisLayer_baseChangeGaloisModel_of_finite hM b hb
+    v hv (integersResidueField ℓ E.1) hpk (isUnit_natCast_integersResidueField E.1 hp hpℓ)
+    _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB)
+
 private theorem boundedConstructible_nearbyCycles_integralModel_pullback
     [IsSeparated p] [IsSepClosed K] [Fact (ringChar k' ≠ ℓ)]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -172,22 +203,12 @@ private theorem boundedConstructible_nearbyCycles_integralModel_pullback
       (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
       PreservesColimit F (MonoidalCategory.tensorRight P) := by infer_instance
   have : IsNoetherian M.total := hM.isTraitModel.isNoetherian_total
-  refine (exists_prime_ne_dvd_of_natCast_eq_zero k'
-    (Fact.out : ringChar k' ≠ ℓ)).elim fun p hp' ↦ ?_
-  have hp := hp'.1
-  have hpℓ := hp'.2.1
-  have hpk := hp'.2.2
-  have : Fact p.Prime := ⟨hp⟩
-  have := hasInvertibleExponent_integersResidueField (k' := k') E
   have hred := boundedConstructible_derivedExtendScalars_residueField M.total ℓ E.1 B₀.obj
     B₀.property
-  have h := boundedConstructible_nearbyCycles_galoisLayer_baseChangeGaloisModel_of_finite hM b hb
-    v hv (integersResidueField ℓ E.1) hpk (isUnit_natCast_integersResidueField E.1 hp hpℓ)
-    (L(((baseChangeHom hM b hb v hv).total)^*⟦Profinite.continuousMapRingObj.{u}
-      (integersResidueField ℓ E.1)⟧).obj ((Mod.extendScalars (coefficientMap
-        (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj
-          B₀.obj))
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ (by exact_mod_proofs hred))
+  have h := boundedConstructible_nearbyCycles_residue_pullback hM b hb v hv E
+    ((Mod.extendScalars (coefficientMap
+      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj B₀.obj)
+    (by exact_mod_proofs hred)
   refine (boundedConstructible _).prop_of_iso
     (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
       (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
