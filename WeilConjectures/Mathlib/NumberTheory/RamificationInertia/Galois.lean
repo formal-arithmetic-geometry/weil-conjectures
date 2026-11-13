@@ -112,12 +112,14 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   have : x ∈ RingHom.ker ψ.toRingHom := hx
   rwa [hker, Ideal.mem_bot] at this
 
+omit [IsDedekindDomain R] [IsFractionRing R K] in
 private lemma inertia_comap_integralClosureMap_le_fixingSubgroup
     {T : Type*} [CommRing T] [Algebra R T] (ψ : T →ₐ[R] Ω)
     (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal]
     (M : IntermediateField K Ω) [Normal K M] (hM : adjoin K (Set.range ψ) ≤ M)
     (hI : ∀ σ ∈ Q.inertia Gal(Ω/K), ∀ x, σ (ψ x) = ψ x) :
-    (Q.comap (integralClosureMap ((M.val.restrictScalars R).comp (integralClosure R M).val))).inertia
+    (Q.comap (integralClosureMap
+      ((M.val.restrictScalars R).comp (integralClosure R M).val))).inertia
       Gal(M/K) ≤ fixingSubgroup Gal(M/K) (restrict hM : Set M) := by
   let TM := integralClosure R M
   let iTB : TM →+* integralClosure R Ω :=
@@ -150,7 +152,6 @@ private lemma inertia_comap_integralClosureMap_le_fixingSubgroup
   change (τ x : Ω) = x
   rw [← hτ'M, ← hσM _ x.2, h1]
 
-set_option profiler true in
 private lemma ramificationIdx_comap_integralClosureMap_eq_one_of_normal
     {T : Type*} [CommRing T] [IsDedekindDomain T] [Algebra R T]
     [Module.Finite R T] [Module.IsTorsionFree R T]
