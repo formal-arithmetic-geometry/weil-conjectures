@@ -230,7 +230,8 @@ noncomputable def descentMap :
 set_option profiler true in
 /-- The descent map is the difference of its two halves. -/
 lemma descentMap_eq : descentMap (l := l) f γ = descentMapFst f γ - descentMapSnd f := by
-  unfold descentMap
+  apply Mod.hom_ext
+  ext T x
   rfl
 
 /-- The map `T ×_X (W ×_X W) ⟶ T ×_X W` induced by the first projection. -/
