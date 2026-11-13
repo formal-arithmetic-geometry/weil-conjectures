@@ -29,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 700000 in
 set_option trace.profiler true in
--- Elaborating the nested kernel universal property and image transports needs a larger budget.
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
 with a quasi-coherent ideal quotient.
 
@@ -132,10 +130,8 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
     apply (cancel_mono (kernel.ι p)).mp
     simp only [Category.assoc, ha, kernel.lift_ι_assoc]
     exact hrec
-  have : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=
-    SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
-  have : (SheafOfModules.free (R := X.ringCatSheaf) (Option I)).IsQuasicoherent :=
-    SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (Option I)
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (Option I)
   have hqc := Scheme.Modules.isQuasicoherent_kernel p
   have := Scheme.Modules.isQuasicoherent_cokernel v
   have := Scheme.Modules.isQuasicoherent_kernel (cokernel.π v)
@@ -146,6 +142,7 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
     simp [b₀, Category.assoc, hav]
   have hbkernel : IsLimit (KernelFork.ofι a hw₀) :=
     isKernelOfComp (Abelian.image.ι v) v hkernel hw₀ (Abelian.image.fac v)
+  have : Epi b₀ := inferInstanceAs (Epi (Abelian.factorThruImage v))
   have hs₀ : (ShortComplex.mk a b₀ hw₀).ShortExact :=
     { exact := ShortComplex.exact_of_f_is_kernel _ hbkernel }
   have hw : a ≫ (b₀ ≫ e.hom) = 0 := by simp [← Category.assoc, hw₀]

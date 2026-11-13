@@ -63,9 +63,7 @@ private theorem restriction_component {Z : Scheme.{u}} (U : Z.Opens)
   rw [← M.presheaf.map_comp, ← M.presheaf.map_comp]
   congr 1
 
-set_option maxHeartbeats 700000 in
 set_option trace.profiler true in
--- Resolution comparison unfolds the scheme module and ringed-space section interfaces.
 /-- Restriction on module cohomology is computed by the restriction of sections of a
 fixed resolution, followed by the pinned identification of the restricted resolution.
 This is a statement about homology of section complexes, before the map to a homology sheaf.
@@ -117,7 +115,7 @@ theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   let B := (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.resolution.cocomplex
   have hB : ∀ n : ℕ, Injective (B.X n) := fun n ↦
     P.injective_obj (R.resolution.cocomplex.X n)
-  let β := (NatTrans.mapHomologicalComplex (restrictAdjunction U.ι).unit
+  let β : I.cocomplex ⟶ B := (NatTrans.mapHomologicalComplex (restrictAdjunction U.ι).unit
     (ComplexShape.up ℕ)).app I.cocomplex ≫
       (P.mapHomologicalComplex (ComplexShape.up ℕ)).map R.comparison.inv
   have haug : (restrictFunctor U.ι).map (I.ι.f 0) ≫ R.comparison.inv.f 0 =

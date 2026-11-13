@@ -32,9 +32,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 set_option trace.profiler true in
--- Two nested tensor inductions elaborate the sheaf scalar actions at each quotient.
 /-- Construct completed evaluation and identify its individual quotient components.
 This does not identify equality with an arbitrary compatible family of morphisms and
 makes no assertion about an externally supplied map epsilon.
@@ -129,20 +127,20 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
   have : IsNoetherianRing A := IsLocallyNoetherian.component_noetherian U
   have hGfinite := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
     X G.obj).mp G.property
-  have : G.obj.IsQuasicoherent := hGfinite.1
-  have : G.obj.IsFiniteType := hGfinite.2
+  have := hGfinite.1
+  have := hGfinite.2
   have : Module.Finite A N := Scheme.Modules.finite_sections_of_finiteType G.obj U.property
   have hFfinite := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
     X F.obj).mp F.property
-  have : F.obj.IsQuasicoherent := hFfinite.1
-  have : F.obj.IsFiniteType := hFfinite.2
+  have := hFfinite.1
+  have := hFfinite.2
   have : Module.Finite A M := Scheme.Modules.finite_sections_of_finiteType F.obj U.property
   have : Module.Finite A H := inferInstance
   have hH := Scheme.Modules.isCoherent_homObj X F.obj G.obj F.property G.property
   have hHfinite := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
     X Hobj).mp hH
-  have : Hobj.IsQuasicoherent := hHfinite.1
-  have : Hobj.IsFiniteType := hHfinite.2
+  have := hHfinite.1
+  have := hHfinite.2
   have : Module.Finite A Hs := Scheme.Modules.finite_sections_of_finiteType Hobj U.property
   let K : Hs ≃ₗ[A] H := LinearEquiv.ofBijective
     (PresheafOfModules.homObjEvalId G.obj.val F.obj.val U.val)
@@ -153,7 +151,11 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
   let T := B ⊗[A] N →ₗ[B] B ⊗[A] M
   let β : B ⊗[A] H →ₗ[B] T := TensorProduct.AlgebraTensorModule.lift
     { toFun := fun b ↦ LinearMap.lsmul B T b ∘ₗ LinearMap.baseChangeHom A B N M
-      map_add' := by intro b b'; ext h; simp
+      map_add' := by
+        intro b b'
+        apply LinearMap.ext
+        intro h
+        exact add_smul b b' (LinearMap.baseChangeHom A B N M h)
       map_smul' := by
         intro b b'
         apply LinearMap.ext
@@ -248,7 +250,7 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
     exact hcomponent (R.symm s) n x
   · intro n
     have hcoh := (formalCompletionSystem_coherent I G).1 n.unop
-    have : (formalModuleQuotient I (n.unop + 1) G.obj).IsQuasicoherent :=
+    have :=
       ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp hcoh).1
     exact (affine_internalHom_evaluation_bijective _ _ U.val U.property).1
 
