@@ -11,6 +11,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
+attribute [local instance 2000] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod
+  hasGoodTensorTensor₂₃_mod hasColimitsOfShape_int_mod
+  preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 /-!
 
 # The projector onto the invariants of nearby cycles, after a tensor product
