@@ -338,9 +338,35 @@ theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScal
         (coefficientUnitCycle.{u} (Scheme.ProEt.topology W)
           (integralCoefficientCommRingSheaf l E W n)) := by
   apply cyclesMap_comp_apply_eq_of_components
-  rw [coefficientUnitCycle_iCycles, coefficientUnitCycle_iCycles]
+  erw [coefficientUnitCycle_iCycles]
+  rw [coefficientUnitCycle_iCycles]
   exact (coefficientScalarSectionsChainMap_unit l E W D n).trans
     (coefficientFiniteUnitComparison_unit l E W D n).symm
+
+private theorem unitClass_eq_of_scalar_model
+    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    (F : A ⥤ C) (G : B ⥤ C) (R : B ⥤ A) (H : C ⥤ AddCommGrpCat.{u})
+    (α : R ⋙ F ⟶ G) {X K : A} {Y I V : B} {P Q : C}
+    (η : X ⟶ R.obj Y) (p : Y ≅ I) (v : X ⟶ K) (r : K ⟶ R.obj I) (w : V ⟶ I)
+    (a : P ⟶ F.obj K) (b : Q ⟶ G.obj I) (f : P ⟶ Q)
+    (x : H.obj (F.obj X)) (y : H.obj (G.obj V)) (z : H.obj P) (z' : H.obj Q)
+    (hu : η ≫ R.map p.hom = v ≫ r)
+    (hm : a ≫ F.map r ≫ α.app I = f ≫ b)
+    (ha : H.map (F.map v) x = H.map a z)
+    (hb : H.map (G.map w) y = H.map b z')
+    (hz : H.map f z = z') :
+    H.map (F.map η ≫ α.app Y) x = H.map (G.map (w ≫ p.inv)) y := by
+  have key : H.map (G.map p.hom) (H.map (F.map η ≫ α.app Y) x) =
+      H.map (G.map w) y := by
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, Category.assoc,
+      ← α.naturality, Functor.comp_map, ← Category.assoc, ← F.map_comp, hu,
+      F.map_comp, Category.assoc, Functor.map_comp, ConcreteCategory.comp_apply, ha, hb]
+    have hm' := ConcreteCategory.congr_hom (congrArg H.map hm) z
+    simp only [Functor.map_comp, ConcreteCategory.comp_apply] at hm' ⊢
+    exact hm'.trans (congrArg (H.map b) hz)
+  have e1 := ((G ⋙ H).mapIso p).hom_inv_id_apply
+  rw [G.map_comp, H.map_comp, ConcreteCategory.comp_apply, ← key]
+  exact (e1 _).symm
 
 set_option profiler true in
 -- The unit-class computation chains several localized section comparisons.
@@ -375,7 +401,6 @@ theorem coefficientFiniteAdjunction_unit_unitClass
     (completedIntegralCommRingSheafUnrestricted l E W)
   let I := ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj UA
   let pU := coefficientFiniteReductionModel l E W UA hUA n
-  have hss := (D.scalarSections n).hom.naturality pU.hom
   have hu := coefficientFiniteAdjunction_unit_reductionModel l E W UA hUA n
   have hu' : (coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj UA) ≫
       (coefficientFiniteDerivedRestriction l E W n).map pU.hom =
@@ -400,46 +425,16 @@ theorem coefficientFiniteAdjunction_unit_unitClass
       (coefficientUnitCycle.{u} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W)))
   rw [coefficientFiniteUnitComparison_cycles] at hnat
-  have key : (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-      (HasDerivedCategory.standard _) 0).map ((coefficientFiniteSections l E W n).map pU.hom)
-      ((@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-      (HasDerivedCategory.standard _) 0).map
-        ((coefficientIntegralSections l E W).map
-            ((coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj UA)) ≫
-          (D.scalarSections n).hom.app ((coefficientFiniteDerivedExtension l E W n).obj
-            (DerivedCategory.Q.obj UA)))
-        (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W))) =
-      (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-        (HasDerivedCategory.standard _) 0).map
-        ((coefficientFiniteSections l E W n).map
-          (DerivedCategory.Q.map (coefficientFiniteUnitComparison l E W D n)))
-        (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n)) := by
-    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, Category.assoc, ← hss,
-      Functor.comp_map, ← Category.assoc, ← Functor.map_comp, hu',
-      (coefficientIntegralSections l E W).map_comp, Category.assoc, Functor.map_comp,
-      ConcreteCategory.comp_apply]
-    erw [hA, hB]
-    have hm' := ConcreteCategory.congr_hom (congrArg
-      (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-        (HasDerivedCategory.standard _) 0).map hm)
-    simp only [Functor.map_comp, ConcreteCategory.comp_apply] at hm' hnat ⊢
-    refine (hm' _).trans ?_
-    exact congrArg
-      ((@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-        (HasDerivedCategory.standard _) 0).map
-          (coefficientSiteSectionsComparison.{u, t + 1, t} (Scheme.ProEt.topology W)
-            (integralCoefficientCommRingSheaf l E W n) I)) hnat
-  have e1 := ((coefficientFiniteSections l E W n ⋙
+  exact unitClass_eq_of_scalar_model
+    (coefficientIntegralSections l E W) (coefficientFiniteSections l E W n)
+    (coefficientFiniteDerivedRestriction l E W n)
     (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-      (HasDerivedCategory.standard _) 0)).mapIso pU).hom_inv_id_apply
-  rw [(coefficientFiniteSections l E W n).map_comp,
-    (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
-      (HasDerivedCategory.standard _) 0).map_comp
-      ((coefficientFiniteSections l E W n).map
-        (DerivedCategory.Q.map (coefficientFiniteUnitComparison l E W D n))),
-    ConcreteCategory.comp_apply, ← key]
-  exact (e1 _).symm
+      (HasDerivedCategory.standard _) 0)
+    (D.scalarSections n).hom
+    ((coefficientFiniteAdjunction l E W n).unit.app (DerivedCategory.Q.obj UA)) pU
+    (DerivedCategory.Q.map (coefficientIntegralUnitComplexUnit l E W n))
+    ((scalarReductionRestriction l E W n).mapDerivedCategoryFactors.inv.app I)
+    (DerivedCategory.Q.map (coefficientFiniteUnitComparison l E W D n))
+    _ _ _ _ _ _ _ hu' hm hA hB hnat
 
 end WeilConjectures
