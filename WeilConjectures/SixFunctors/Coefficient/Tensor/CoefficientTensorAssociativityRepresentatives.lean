@@ -105,7 +105,6 @@ include cB cA hε hU hκ hμ
 
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
 -- Paste the four model squares without unfolding localization constructions.
 /-- Paste four binary representative squares and the ordinary associativity equation.
@@ -148,7 +147,7 @@ theorem coefficientTensorAssociativityOnRepresentatives
       (α_ (F.obj (DerivedCategory.Q.obj P))
         (F.obj (DerivedCategory.Q.obj Q))
         (F.obj (DerivedCategory.Q.obj N))).hom
-  erw [id_tensorHom, tensorHom_id]
+  simp only [id_tensorHom, tensorHom_id]
   let V := K
   let := hε P hP fP
   let := hε Q hQ fQ
@@ -189,10 +188,10 @@ theorem coefficientTensorAssociativityOnRepresentatives
           (Y := (A.obj (V.obj P, V.obj Q), V.obj N))
           (chain.hom.app (P, Q), 𝟙 (V.obj N)) ≫ aA.hom := by
     exact hκ P Q N aB aA haB haA
-  rw [show cB.tensorIso PQ N (Or.inr hN) = TB.iso J R SB PQ N hPQ hN from
+  simp only [show cB.tensorIso PQ N (Or.inr hN) = TB.iso J R SB PQ N hPQ hN from
       cB.tensorIso_both PQ N hPQ hN,
     cB.tensorIso_both P QN hP hQN] at heB
-  rw [show cA.tensorIso (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inr hUN) =
+  simp only [show cA.tensorIso (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inr hUN) =
       TA.iso J' R' SA _ _ hAPQ hUN from cA.tensorIso_both _ _ hAPQ hUN,
     cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN] at heA
   let bPQ := TB.iso J R SB P Q hP hQ
@@ -240,17 +239,17 @@ theorem coefficientTensorAssociativityOnRepresentatives
   have hnL := cA.tensorIso_naturality (V.obj PQ) (V.obj N)
     (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inl hUPQ) (Or.inl hAPQ)
     (chain.hom.app (P, Q)) (𝟙 (V.obj N))
-  rw [cA.tensorIso_both _ _ hUPQ hUN, cA.tensorIso_both _ _ hAPQ hUN] at hnL
+  simp only [cA.tensorIso_both _ _ hUPQ hUN, cA.tensorIso_both _ _ hAPQ hUN] at hnL
   have hnR := cA.tensorIso_naturality (V.obj P) (V.obj QN)
     (V.obj P) (A.obj (V.obj Q, V.obj N)) (Or.inl hUP) (Or.inl hUP)
     (𝟙 (V.obj P)) (chain.hom.app (Q, N))
-  rw [cA.tensorIso_both _ _ hUP hUQN, cA.tensorIso_both _ _ hUP hAQN] at hnR
+  simp only [cA.tensorIso_both _ _ hUP hUQN, cA.tensorIso_both _ _ hUP hAQN] at hnR
   simp only [CoefficientClosedStructure.tensor, tensor_obj, tensor_map,
     DerivedCategory.Q.map_id] at hnL
-  erw [tensorHom_id] at hnL
+  simp only [tensorHom_id] at hnL
   simp only [CoefficientClosedStructure.tensor, tensor_obj, tensor_map,
     DerivedCategory.Q.map_id] at hnR
-  erw [id_tensorHom] at hnR
+  simp only [id_tensorHom] at hnR
   have hL₀ := left_square F μ bPQ.hom bL.hom
     (e.app P) (e.app Q) (e.app N) (e.app PQ)
     (e.app (B.obj (PQ, N))) (tPQ ≫ aPQ.hom) (tL ≫ aL₀.hom) hmPQ hmL
