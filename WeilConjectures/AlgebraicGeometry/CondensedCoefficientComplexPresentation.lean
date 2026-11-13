@@ -92,7 +92,9 @@ theorem exists_condensed_coefficient_complex_presentation
   refine heC.elim fun e ↦ ?_
   refine (exists_condensed_coefficient_complex_model X ℓ E F C H he hf).elim fun N hN ↦ ?_
   refine hN.elim fun c hc ↦ ?_
-  rcases hc with ⟨hc, hN, hrest⟩
+  have hN := hc.2.1
+  have hrest := hc.2.2
+  have hc := hc.1
   refine hrest.elim fun eΩ hrest ↦ ?_
   refine hrest.elim fun ei hcomp ↦ ?_
   have hbound : ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r) := by
