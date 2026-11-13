@@ -122,6 +122,9 @@ theorem inverseImageRegularExtension
               (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
               (Opens.grothendieckTopology T)).unit.app A).hom.app V a) := by
   classical
+  have : HasWeakSheafify (Opens.grothendieckTopology T) AddCommGrpCat.{u} := inferInstance
+  have : (Opens.grothendieckTopology T).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    inferInstance
   let R := 𝓡 A
   let S := 𝓡 B
   let C := TopCat.Sheaf.inverseImageRing g A
