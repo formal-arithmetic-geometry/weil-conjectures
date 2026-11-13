@@ -43,6 +43,20 @@ private theorem map_product_lift
   intro n
   rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_comp_π, Pi.lift_comp_π]
 
+private theorem derivedLimitTriangle_map_product_lift
+    {C D : Type*} [Category C] [Category D] [HasZeroObject D] [HasShift D ℤ]
+    [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (G : C ⥤ D) {K : ℕ → C} [HasProduct K] [HasProduct (fun n => G.obj (K n))]
+    {A : C} (p : ∀ n, A ⟶ K n)
+    (e : G.obj (∏ᶜ K) ≅ ∏ᶜ (fun n => G.obj (K n)))
+    (he : ∀ n, e.hom ≫ Pi.π _ n = G.map (Pi.π K n))
+    (f : ∀ n, G.obj (K (n + 1)) ⟶ G.obj (K n))
+    (δ : (∏ᶜ (fun n => G.obj (K n))) ⟶ (G.obj A)⟦(1 : ℤ)⟧)
+    (h : IsDerivedLimitTriangle f (G.obj A) (G.map (Pi.lift p) ≫ e.hom) δ) :
+    IsDerivedLimitTriangle f (G.obj A) (Pi.lift (fun n => G.map (p n))) δ := by
+  rw [← map_product_lift G p e he]
+  exact h
+
 private theorem transport_roos_triangle
     {C : Type wC} [Category.{wA} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -86,8 +100,6 @@ private theorem transport_roos_triangle
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- Transport between the two module-category presentations needs additional elaboration.
 /-- Derived abelian sections reconstruct the lower tail from its canonical lower
 truncations. This is only the reconstruction step, with no homology conclusion.
 Source: Stacks Project, Tag 0D64 (lemma-is-limit-dimension), Tag 071B
@@ -168,14 +180,8 @@ theorem affineBasisLowerTail_sections_reconstruction
     (R.obj E) ⟨0, B, hB, hvan⟩
   obtain ⟨c, hc, h⟩ := Scheme.rightDerivedFunctor_isDerivedLimitTriangle V.toScheme H
     f (R.obj E) p δ hδ
-  have hp := map_product_lift H.rightDerivedFunctor
-    (fun n : ℕ => (s.truncGEπ (-(n : ℤ))).app (R.obj E)) c hc
-  have h' : IsDerivedLimitTriangle (fun n => H.rightDerivedFunctor.map (f n))
-      (H.rightDerivedFunctor.obj (R.obj E))
-      (Pi.lift (fun n => H.rightDerivedFunctor.map
-        ((s.truncGEπ (-(n : ℤ))).app (R.obj E))))
-      (c.inv ≫ H.rightDerivedFunctor.map δ ≫
-        (H.rightDerivedFunctor.commShiftIso (1 : ℤ)).hom.app (R.obj E)) := hp ▸ h
+  have h' := derivedLimitTriangle_map_product_lift H.rightDerivedFunctor
+    (fun n : ℕ => (s.truncGEπ (-(n : ℤ))).app (R.obj E)) c hc _ _ h
   obtain ⟨e, en, hπ, hf⟩ := openDerivedSections_truncationTower_comparison X V E
   exact transport_roos_triangle
     (fun n => H.rightDerivedFunctor.map (f n))
