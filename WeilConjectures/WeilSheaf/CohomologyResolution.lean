@@ -79,7 +79,6 @@ lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
           (lowerStarComp (WeilCoefficients.{u} l) _ _).inv.app M.X :=
   rfl
 
-set_option profiler true in
 /-- Global sections identify the Frobenius of a commuting square with its structure map. -/
 private lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
     (hW : W ⟶ W) (hZ : Z ⟶ Z) (comm : g ≫ hW = hZ ≫ g)
@@ -111,7 +110,6 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option profiler true in
 omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
@@ -140,7 +138,6 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) X
 
 
-set_option profiler true in
 /-- **Weil cohomology from an injective resolution.** Let `I` be an injective resolution of a
 Weil sheaf `F` by pro-étale Weil sheaves. Then `Hʳ(Y ⊗ k̄, F)` is the `r`-th cohomology of the
 complex `Γ(Ȳ, I)`, and its geometric Frobenius is induced by the Frobenius
