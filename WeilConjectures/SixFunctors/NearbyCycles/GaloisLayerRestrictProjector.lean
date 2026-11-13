@@ -171,7 +171,6 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option trace.profiler true in
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
 of `Ω/L` are invertible). Let `L ⊆ L' ⊆ Ω` with `L'/L` finite and `Lε^* C` bounded below of étale
@@ -195,6 +194,12 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
       (Profinite.continuousMapRingObj T₀)).app
         (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
   let Λ₀ := Profinite.continuousMapRingObj T₀
+  have (Y : Scheme.{u}) (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ₀ Y)) :
+      PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft M) := inferInstance
+  have (Y : Scheme.{u}) (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ₀ Y)) :
+      PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight M) := inferInstance
   let F := L((𝟙 X)^*⟦Λ₀⟧)
   let F' := L((𝟙 X')^*⟦Λ₀⟧)
   let C₁ := F.obj C
@@ -225,22 +230,17 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
       (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L')))) hC)
   obtain ⟨r, hr, -, hproj⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector
-      (N.galoisLayer h L') (pullback.snd _ _) Ω T₀ hp₁
-      (C₁) hC₁
+      (N.galoisLayer h L') (pullback.snd _ _) Ω T₀ hp₁ C₁ hC₁
   -- the identification `(N_{L'})_Ω ≅ N_Ω` has an invertible exchange intertwining the actions
-  have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange
-      Λ₀) :=
+  have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange Λ₀) :=
     Hom.isIso_pullbackExchange_of_isIso _ _
   have hact (σ : Ω ≃ₐ[L'] Ω) (q : ℤ) :
       (DerivedCategory.homologyFunctor _ q).map
-        (F'.map
-          ((N.galoisLayer h L').galoisLayerAction Λ₀
-            (pullback.snd _ _) Ω σ (F.obj
-              (C₁)))) = 𝟙 _ := by
+        (F'.map ((N.galoisLayer h L').galoisLayerAction Λ₀
+          (pullback.snd _ _) Ω σ (F.obj C₁))) = 𝟙 _ := by
     refine map_map_eq_id_of_iso_id (leftDerivedUpperStarId _ X') _ ?_
     refine map_eq_id_of_comp_eq_comp _ _
-      (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' _ σ
-        (C₁)) ?_
+      (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' _ σ C₁) ?_
     refine map_map_eq_id_of_iso_id (leftDerivedUpperStarId _ X') _ ?_
     exact htriv q _ ((IntermediateField.mem_fixingSubgroup_iff L' _).2 fun x hx ↦
       σ.commutes ⟨x, hx⟩)
@@ -250,14 +250,12 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     (fun M a ↦ ⟨a.liftNormal Ω, fun x ↦ a.liftNormal_commutes Ω x⟩)
     (fun σ ↦ (Category.comp_id _).trans (hact σ q))
   have : IsIso ((((N.galoisLayer h L').galoisLayerHom (pullback.snd _ _) Ω).pullbackExchange
-      Λ₀).app
-        (C₁)) :=
+      Λ₀).app C₁) :=
     (NatIso.isIso_map_iff (leftDerivedUpperStarId _ X') _).1 ((DerivedCategory.isIso_iff _ _).2
-      fun q ↦ isIso_map_of_comp_eq_id (F' ⋙
-        DerivedCategory.homologyFunctor _ q) hr ((Category.comp_id _).symm.trans (hfix q)))
+      fun q ↦ isIso_map_of_comp_eq_id (F' ⋙ DerivedCategory.homologyFunctor _ q)
+        hr ((Category.comp_id _).symm.trans (hfix q)))
   -- composition law for `(N_{L'})_Ω ⟶ N_Ω ⟶ N_{L'}`
   exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X')
-    (N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _
-      (C₁))
+    (N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _ C₁)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
