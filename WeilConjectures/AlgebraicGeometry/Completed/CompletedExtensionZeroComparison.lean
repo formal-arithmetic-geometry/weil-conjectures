@@ -1075,7 +1075,6 @@ private theorem openSliceAdjunction_homEquiv_apply {U T : Scheme.{t}}
   rw [PresheafOfModules.map_id]
   rfl
 
-set_option profiler true in
 open Classical in
 /-- The extension/restriction adjunction is fixed by the direct-sum generator formula.
 Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -1103,6 +1102,7 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
   let a :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
+  -- Compare restriction on sections to avoid unfolding the whole composite functor.
   let er : (SheafOfModules.overFunctor S W ⋙
       SheafOfModules.pushforward.{t + 1}
         (F := ProEt.sliceFrom T W)
