@@ -24,6 +24,38 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
+/-- Transpose a comparison of composite left adjoints using its unit square. -/
+private theorem chart_double_transpose_of_unit
+    {C D E B : Type*} [Category C] [Category D] [Category E] [Category B]
+    {L₀ L₀' : C ⥤ D} {R₀ : D ⥤ C} {L₁ : D ⥤ E} {R₁ : E ⥤ D}
+    {L₂ : E ⥤ B} {R₂ : B ⥤ E} {L₃ : C ⥤ B} {R₃ : B ⥤ C}
+    (a₀ : L₀ ⊣ R₀) (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (a₃ : L₃ ⊣ R₃)
+    (i : L₀ ≅ L₀') (ρ : R₂ ⋙ R₁ ⋙ R₀ ≅ R₃) (X : C)
+    (b : L₀'.obj X ⟶ R₁.obj (R₂.obj (L₃.obj X)))
+    (h : a₃.unit.app X =
+      a₀.homEquiv _ _ (i.hom.app X ≫ b) ≫ ρ.hom.app (L₃.obj X)) :
+    a₂.homEquiv _ _
+      ((L₂.mapIso (L₁.mapIso (i.symm.app X)) ≪≫
+        ((a₀.comp (a₁.comp a₂)).leftAdjointUniq (a₃.ofNatIsoRight ρ.symm)).app X).hom) =
+      (a₁.homEquiv _ _).symm b := by
+  apply (a₁.homEquiv _ _).injective
+  rw [Equiv.apply_symm_apply]
+  apply (cancel_epi (i.hom.app X)).mp
+  apply (a₀.homEquiv _ _).injective
+  have hu := (a₀.comp (a₁.comp a₂)).homEquiv_leftAdjointUniq_hom_app
+    (a₃.ofNatIsoRight ρ.symm) X
+  simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Iso.symm_hom] at hu
+  rw [← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left]
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
+    Iso.symm_hom, ← Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+  simp only [Adjunction.comp_homEquiv] at hu
+  rw [hu]
+  apply (cancel_mono (ρ.hom.app (L₃.obj X))).mp
+  simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using h
+
+set_option trace.profiler true in
 /-- The unit square pins the double transpose to the canonical pullback comparison.
 Source: Stacks Project, Sheaves, Tags 0096 and 0097, adjunction and composition.
 (blueprint: lem-pc-restriction-chart-unit-normalization)
@@ -94,31 +126,11 @@ theorem restriction_chart_unit_normalization
     (pullbackPushforwardAdjunction σ.hom).homEquiv _ _ k.hom =
       ((pullbackPushforwardAdjunction t).homEquiv _ _).symm b := by
   intro N G M c r b e rightIso adj₁ adj₂ k
-  apply ((pullbackPushforwardAdjunction t).homEquiv _ _).injective
-  rw [Equiv.apply_symm_apply]
-  apply (cancel_epi ((restrictFunctorIsoPullback a).hom.app F)).mp
-  apply ((restrictAdjunction a).homEquiv _ _).injective
-  have hu := adj₁.homEquiv_leftAdjointUniq_hom_app
-    (adj₂.ofNatIsoRight rightIso.symm) F
-  simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
-    Functor.whiskerLeft_app] at hu
-  rw [← Adjunction.homEquiv_naturality_left,
-    ← Adjunction.homEquiv_naturality_left]
-  simp only [k, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
-    Iso.symm_hom, ← Category.assoc, ← Functor.map_comp,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [adj₁, Adjunction.comp_homEquiv] at hu
-  change (restrictAdjunction a).homEquiv _ _
-    ((pullbackPushforwardAdjunction t).homEquiv _ _
-      ((pullbackPushforwardAdjunction σ.hom).homEquiv _ _
-        ((adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm)).hom.app F))) = _ at hu
-  rewrite (transparency := .default) [hu]
-  simp only [b, Adjunction.homEquiv_unit]
-  simp only [Iso.app_inv, Iso.hom_inv_id_app_assoc]
-  simp only [adj₂, Adjunction.comp_unit_app, Iso.symm_hom]
-  apply (cancel_mono (rightIso.hom.app M)).mp
-  simp only [Category.assoc]
-  rewrite (transparency := .default) [Iso.inv_hom_id_app, Category.comp_id]
+  apply chart_double_transpose_of_unit (restrictAdjunction a)
+    (pullbackPushforwardAdjunction t) (pullbackPushforwardAdjunction σ.hom)
+    adj₂ (restrictFunctorIsoPullback a) rightIso F b
+  simp only [b, Adjunction.homEquiv_unit, Iso.app_inv, Iso.hom_inv_id_app_assoc,
+    adj₂, Adjunction.comp_unit_app, Category.assoc]
   apply hom_ext
   intro B
   simp only [Hom.comp_app, pushforward_map_app, Functor.map_comp, rightIso,

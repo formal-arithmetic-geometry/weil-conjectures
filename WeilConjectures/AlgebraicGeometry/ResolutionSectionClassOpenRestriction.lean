@@ -140,6 +140,8 @@ theorem resolutionSectionClass_open_restriction
     (f.preimage_mono eWV) R R' p
   have hn := sectionClass_open_restriction K V W eWV p
   dsimp only at hn
+  let := RingedSpace.globalSectionsFunctor_additive (f ⁻¹ᵁ V).toScheme.toRingedSpace
+  let := RingedSpace.globalSectionsFunctor_additive (f ⁻¹ᵁ W).toScheme.toRingedSpace
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let aV := (forget₂ _ AddCommGrpCat.{u}).map
     (R.resolution.isoRightDerivedObj
