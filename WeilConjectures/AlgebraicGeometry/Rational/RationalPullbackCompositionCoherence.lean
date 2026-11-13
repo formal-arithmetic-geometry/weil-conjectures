@@ -92,8 +92,6 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-set_option trace.profiler true in
--- Tensor-generator coordinates unfold nested inverse-image and scalar-extension sections.
 /-- The composition equation with all specified ordinary, completed and raw maps.
 The module formula uses generators on base-changed charts; sheafification and balancing
 extend it to local tensors. Derived normalization fixes the ambient comparison itself.
@@ -154,6 +152,7 @@ def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
       (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
       (e'' * rationalCoherenceScalar l E h ah.rationalCoefficient
         ((proEtaleBaseChange g).obj V) e')
+      -- The semilinear view exposes the target carrier without unfolding chart rings.
       (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
         ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
           (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m))) ∧
