@@ -47,6 +47,7 @@ noncomputable abbrev smallClosedCochainMonoidal
   exact HomologicalComplex.monoidalCategory D (.up ℤ)
 
 -- Comparing the canonical module and total-complex structures needs extra elaboration steps.
+set_option profiler true in
 /-- The scalar-extension functor on complexes is strong monoidal with its prescribed
 multiplication as the inverse unit constraint.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
