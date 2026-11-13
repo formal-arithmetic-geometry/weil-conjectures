@@ -66,8 +66,6 @@ theorem schemeDerivedTensorHomEquiv_naturality (Y : Scheme.{u})
     (Classical.choose_spec (exists_canonicalDerivedTensorHom Y)).1
       K K' L L' M M' a b c g
 
-set_option maxHeartbeats 500000 in
--- The representative predicate needs extra heartbeats for the sheaf tensor instances.
 private theorem uncurry_representative (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (A P M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
@@ -102,7 +100,8 @@ private theorem uncurry_representative (Y : Scheme.{u})
     have h' : q + p = n := by change p + q = n at h; omega
     exact (hψ p q n h h').trans
       (schemeTensorHomUncurry_component Y B P M (b ≫ φ) p q n h h').symm
-  rw [he] at hc
+  have hc' := hc.trans (congrArg (fun ψ ↦ pullbackTensorModelMap Y B P ≫
+    DerivedCategory.Q.map ψ ≫ schemeHomResolutionInverse Y M) he)
   have hl := schemeTensorHomUncurry_localized_evaluation Y A B P P M M
     b (𝟙 _) (𝟙 _) φ
   have hidH := (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).map_id
@@ -117,10 +116,8 @@ private theorem uncurry_representative (Y : Scheme.{u})
   erw [Category.comp_id, CategoryTheory.Functor.map_id,
     CategoryTheory.Functor.map_id, Category.comp_id] at hl
   simp only [← Functor.map_comp, ← Category.assoc] at hn
-  change schemeDerivedTensorHomEquiv Y _ _ _ _ = _ at hc
-  rw [hc] at hn
-  rw [hl] at hn
-  exact (cancel_epi (DerivedCategory.Q.map b ⊗ₘ 𝟙 (DerivedCategory.Q.obj P))).1 hn.symm
+  exact (cancel_epi (DerivedCategory.Q.map b ⊗ₘ 𝟙 (DerivedCategory.Q.obj P))).1
+    (hn.symm.trans (hc'.trans hl))
 
 private theorem evaluation_transport {C : Type*} [Category* C] [MonoidalCategory C]
     {A V P T N K : C} (a : A ≅ N) (b : P ≅ K)
@@ -136,8 +133,6 @@ private theorem evaluation_transport {C : Type*} [Category* C] [MonoidalCategory
   simp only [Category.assoc]
   simp only [Iso.inv_hom_id, Category.comp_id]
 
-set_option maxHeartbeats 600000 in
--- Elaborating the fixed Hom and tensor comparison maps needs extra heartbeats.
 /-- Localizing the componentwise ordinary evaluation gives its uncurried derived map.
 No Hom-exactness, K-flatness, or invertibility of the comparison maps is asserted.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ; representative calculation.
@@ -223,10 +218,14 @@ theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})
     exact hO
   change schemeDerivedTensorHomEquiv Y _ _ _ _ = _
   simp only [Category.assoc] at hn
-  rw [hn, hF']
   simp only [Category.id_comp] at hd
-  rw [hd, hO']
-  simpa only [Category.assoc] using evaluation_transport eN eK
+  have hleft := congrArg (fun t ↦
+    (((eN.inv ▷ DerivedCategory.Q.obj V) ≫ pullbackTensorModelMap Y F V) ⊗ₘ eK.inv) ≫
+      t ≫ eN.hom) hF'
+  have hright := congrArg (fun t ↦
+    (α_ N (DerivedCategory.Q.obj V) K).hom ≫ N ◁ t ≫ (ρ_ N).hom)
+      (hd.trans (congrArg (fun t ↦ (𝟙 (DerivedCategory.Q.obj V) ⊗ₘ eK.inv) ≫ t ≫ z) hO'))
+  have ht := evaluation_transport eN eK
     (pullbackTensorModelMap Y F V)
     (pullbackTensorModelMap Y (pullbackTensorTotal Y F V) P ≫
       DerivedCategory.Q.map
@@ -235,5 +234,7 @@ theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})
     (pullbackTensorModelMap Y V P ≫
       DerivedCategory.Q.map (schemeTensorHomUncurry Y V P O phiO) ≫
       schemeHomResolutionInverse Y O ≫ z) hc
+  refine hn.trans (hleft.trans (Eq.trans ?_ hright.symm))
+  simpa only [Category.assoc] using ht
 
 end AlgebraicGeometry
