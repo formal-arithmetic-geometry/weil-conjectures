@@ -57,7 +57,8 @@ private theorem comap_delta {R S : C} [MonObj R] [MonObj S]
   rw [hδ, ← h, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id, Mod.id_hom',
     Category.comp_id]
 
-set_option profiler true in
+set_option synthInstance.maxHeartbeats 100000 in
+-- Relative tensor functor instances require this local elaboration budget.
 private theorem mapModComp_monoidal (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
     [F.Braided] [G.Braided] [H.Braided]
     [F.PreservesEpimorphisms] [G.PreservesEpimorphisms]
@@ -97,7 +98,8 @@ private theorem mapModComp_monoidal (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
       ((Mod.comap (Functor.compAlgHom F G τ R)).obj ((H.mapMod R).obj M))
       ((Mod.comap (Functor.compAlgHom F G τ R)).obj ((H.mapMod R).obj N))) ht.symm
 
-set_option profiler true in
+set_option synthInstance.maxHeartbeats 100000 in
+-- Tensor instances for both restrictions need this local elaboration budget.
 private theorem comap_unit_monoidal [MonoidalClosed C] [HasEqualizers C]
     {R S : C} [MonObj R] [MonObj S]
     [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] :
@@ -126,7 +128,8 @@ private theorem extend_comap_monoidal [MonoidalClosed C] [HasEqualizers C]
     Functor.Monoidal.natTransIsMonoidal_of_transport (Mod.extendScalarsIsoComapInv φ).symm
   exact inferInstanceAs (NatTrans.IsMonoidal (Mod.extendScalarsIsoComapInv φ).symm.inv)
 
-set_option profiler true in
+set_option synthInstance.maxHeartbeats 100000 in
+-- Composition monoidal instances require this local elaboration budget.
 private theorem mapModCompExtend_monoidal [MonoidalClosed E] [HasEqualizers E]
     (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
     [F.Braided] [G.Braided] [H.Braided]
