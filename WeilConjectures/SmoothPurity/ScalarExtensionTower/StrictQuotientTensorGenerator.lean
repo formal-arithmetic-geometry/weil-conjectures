@@ -33,8 +33,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 variable (l : ℕ) [Fact l.Prime]
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 600000 in
--- Evaluating the total tensor and the scalar-restriction section requires extra reduction.
+set_option trace.profiler true in
 /-- Tensoring strict quotient identifications gives the specified generator formula.
 Source: Stacks 03EL, 07A4 and 0941; step 3 of
 stage3-pur-scalar-tensor-model-normalization.
