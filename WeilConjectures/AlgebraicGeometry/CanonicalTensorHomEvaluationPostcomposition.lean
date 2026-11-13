@@ -48,6 +48,7 @@ private theorem tensor_naturality {C : Type*} [Category* C] [MonoidalCategory C]
   rw [← Category.assoc, ← comp_whiskerRight, h, comp_whiskerRight, Category.assoc, k]
   exact (Category.assoc _ _ _).symm
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the fixed sheaf tensor and localization instances needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency.types true in
