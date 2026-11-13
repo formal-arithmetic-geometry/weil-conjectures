@@ -49,9 +49,7 @@ local instance localInst_CondensedSheafExtContinuity_2
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Elaborating the derived-module cocone needs extra typeclass and definitional equality work.
 /-- Derived Hom from a constructible condensed `E`-module sheaf commutes with a small
 filtered colimit of complexes with a common termwise lower bound, in every integer shift.
 Source: upstream ModuleObject/Colimit/TwoColimit.lean, Sorried input (Hom), sheaf base case;
@@ -174,15 +172,7 @@ theorem isIso_constructible_condensed_sheaf_hom_colimit
   let c := DerivedCategory.Q.mapCocone (colimit.cocone N)
   have hP : condensedConstructiblePiece T ℓ E ≤ homColimitProperty D c :=
     condensed_local_piece_hom_continuity T ℓ E N hN
-  have h : ∀ r : ℕ, (condensedConstructiblePiece T ℓ E).extensionProductIter r ≤
-      homColimitProperty D c := by
-    intro r
-    induction r with
-    | zero => exact hP
-    | succ r ih =>
-      rw [ObjectProperty.extensionProductIter_succ]
-      rintro K ⟨A, B, f, g, k, hdist, hA, hB⟩
-      exact homColimitProperty_extensions D c _ hdist (hP _ hA) (ih _ hB)
-  exact h r _ hr n
+  exact (condensedConstructiblePiece T ℓ E).extensionProductIter_le_of_isTriangulatedClosed₂
+    hP r _ hr n
 
 end AlgebraicGeometry.ProEtale
