@@ -44,6 +44,21 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
+private theorem tensor_bijective_of_tmul
+    {R M N P Q : Type*} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N]
+    [Module R M] [Module R N] [AddCommMonoid P] [AddCommMonoid Q]
+    (f : TensorProduct R M N →+ P) (e : P ≃+ Q) (l : TensorProduct R M N ≃+ Q)
+    (h : ∀ m n, e (f (TensorProduct.tmul R m n)) = l (TensorProduct.tmul R m n)) :
+    Function.Bijective f := by
+  have hcomp : ∀ z, e (f z) = l z := by
+    intro z
+    induction z using TensorProduct.inductionOn with
+    | zero => simp only [map_zero]
+    | tmul m n => exact h m n
+    | add x y hx hy => simp only [map_add, hx, hy]
+  apply (e.bijective.of_comp_iff' f).1
+  simpa only [Function.comp_def, hcomp] using l.bijective
+
 set_option trace.profiler true in
 -- Comparing scalar restrictions unfolds several dependent section module instances.
 set_option backward.isDefEq.respectTransparency false in
@@ -108,18 +123,10 @@ theorem quasiCoherent_algebra_changeOfRings (Y : Scheme.{u})
     (hrel W) (hS.2 W hW) (hF.2 W hW) hsections.2.1 hsections.2.2.1
   let η := ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app
     (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W)
-  have hcomp : ∀ z, e.hom.val.app (op W) (η z) = l z := by
-    intro z
-    induction z using TensorProduct.inductionOn with
-    | tmul c p => exact (he W c p).trans (hl c p).symm
-    | add x y hx hy => simp only [map_add, hx, hy]
-  have hbij : Function.Bijective (fun z ↦ e.hom.val.app (op W) (η z)) := by
-    simpa only [hcomp] using l.bijective
-  have heBij : Function.Bijective (e.hom.val.app (op W)) :=
-    (appLinearEquivOfIso e W).bijective
-  exact ⟨fun x y h ↦ hbij.1 (congrArg (e.hom.val.app (op W)) h),
-    fun y ↦ by
-      obtain ⟨x, hx⟩ := hbij.2 (e.hom.val.app (op W) y)
-      exact ⟨x, heBij.1 hx⟩⟩
+  let : Module (B.right.obj.obj (op W)) (C.right.obj.obj (op W)) :=
+    Module.compHom _ (φ.right.hom.app (op W)).hom
+  exact tensor_bijective_of_tmul (R := B.right.obj.obj (op W))
+    η.hom.toAddMonoidHom (appLinearEquivOfIso e W).toAddEquiv l
+    (fun c p ↦ (he W c p).trans (hl c p).symm)
 
 end AlgebraicGeometry.Scheme.Modules

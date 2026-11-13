@@ -25,6 +25,21 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem counit_square_of_unit
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (a : L ⊣ R) {A B E H : C} {W Z : D}
+    (t₁ : A ⟶ B) (t₂ : B ⟶ E) (d : E ⟶ R.obj Z)
+    (q : A ⟶ H) (u : H ⟶ R.obj W) (v : W ⟶ Z) (p : L.obj H ⟶ W)
+    (hu : t₁ ≫ t₂ ≫ d = q ≫ u ≫ R.map v)
+    (hp : L.map u ≫ a.counit.app W = p) :
+    L.map (t₁ ≫ t₂) ≫ (L.map d ≫ a.counit.app Z) = L.map q ≫ p ≫ v := by
+  rw [← L.map_comp_assoc, Category.assoc, hu, L.map_comp, L.map_comp]
+  simp only [Category.assoc]
+  have hn := a.counit.naturality v
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  rw [hn]
+  rw [← Category.assoc (L.map u), hp]
+
 /-- The canonical pullback comparison across a commuting square of open inclusions.
 Source: Stacks Project, Tag 0D5S, applied to the constructed open pullback comparisons.
 (blueprint: def-pc-t2-open-pullback-square-iso). -/
@@ -53,20 +68,6 @@ noncomputable def singleComplexOpenPullbackSquareIso
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.mapIso_hom,
     eqToIso.hom, eqToHom_app, Category.assoc] using d.hom.naturality v
-
-private theorem counit_square_of_unit
-    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
-    (a : L ⊣ R) {A B E H : C} {W Z : D}
-    (t₁ : A ⟶ B) (t₂ : B ⟶ E) (d : E ⟶ R.obj Z)
-    (q : A ⟶ H) (u : H ⟶ R.obj W) (v : W ⟶ Z) (p : L.obj H ⟶ W)
-    (hu : t₁ ≫ t₂ ≫ d = q ≫ u ≫ R.map v)
-    (hp : L.map u ≫ a.counit.app W = p) :
-    L.map (t₁ ≫ t₂) ≫ (L.map d ≫ a.counit.app Z) = L.map q ≫ p ≫ v := by
-  rw [← L.map_comp_assoc, Category.assoc, hu, L.map_comp, L.map_comp]
-  simp only [Category.assoc]
-  rw [a.counit.naturality]
-  simp only [Functor.id_map]
-  rw [← Category.assoc (L.map u), hp]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
