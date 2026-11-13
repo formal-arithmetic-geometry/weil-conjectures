@@ -317,16 +317,32 @@ theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)
   let q := modelSetPullbackIso f
   let d := (modelSetEquivalence X).inverse
   let v := (modelSetEquivalence Y).functor
+  let L := SheafOfModules.pullback φ
+  let Ls := sheafPullback (proEtaleModelBaseChange f) (Type (u + 1))
+    (proEtaleModelTopology X) (proEtaleModelTopology Y)
+  let p := Functor.isoWhiskerLeft (proEtaleModuleToModel A ⋙ L) (fromModelForgetSetIso Y B)
   let e₀ := Functor.isoWhiskerLeft (proEtaleModuleToModel A)
     (Functor.isoWhiskerRight em v)
+  let t₀ := Functor.isoWhiskerRight (toModelForgetSetIso X A) (Ls ⋙ v)
   let eM : proEtaleModuleInverseImage f R ⋙ SheafOfModules.toSheaf B ⋙
       sheafCompose (ProEt.topology Y) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ≅
         (SheafOfModules.toSheaf A ⋙
           sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) ⋙
             proEtaleSheafInverseImage f (Type (u + 1)) :=
-    e₀ ≪≫ Functor.isoWhiskerLeft
-    (SheafOfModules.toSheaf A ⋙
-      sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) q
+    NatIso.ofComponents (fun M ↦
+      v.mapIso (em.app ((proEtaleModuleToModel A).obj M)) ≪≫
+        q.app ((SheafOfModules.toSheaf A ⋙
+          sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M))
+      (by
+        intro M N g
+        have h := (p ≪≫ e₀ ≪≫ t₀ ≪≫ Functor.isoWhiskerLeft
+          (SheafOfModules.toSheaf A ⋙
+            sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1}))
+          q).hom.naturality g
+        simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+          Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+          p, e₀, t₀, toModelForgetSetIso, fromModelForgetSetIso, NatIso.ofComponents_hom_app,
+          Iso.refl_hom, Functor.map_id, Category.id_comp, Category.comp_id] using h)
   let r₀ := v.mapIso pr.iso
   let eR : (proEtaleSheafInverseImage f (Type (u + 1))).obj
       ((sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj R) ≅
