@@ -209,21 +209,30 @@ theorem derivedPullback_tensorProduct
   -- The recorded object and map formulas determine the termwise functor strictly.
   have hEq : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
-  subst F
-  let : (Scheme.Modules.tensorPullback g).Additive := hadd
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction g
-  let : (Scheme.Modules.tensorPullback g).IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
-  let G := Scheme.Modules.tensorPullback g
-  have : CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0} G := inferInstance
-  let e := Classical.choose (Scheme.Modules.module_pullback_tensor g)
-  have hn := (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1
+  have : F.IsLeftAdjoint := by
+    rw [hEq]
+    exact ⟨_, ⟨adj⟩⟩
+  have : CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0} F := inferInstance
+  let e₀ := Classical.choose (Scheme.Modules.module_pullback_tensor g)
+  let e : ∀ M N, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N := fun M N ↦
+    eqToIso (hF (M ⊗ N)) ≪≫ e₀ M N ≪≫
+      (eqToIso (hF M).symm ⊗ᵢ eqToIso (hF N).symm)
+  have hn : ∀ (M N M' N' : SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
+      (a : M ⟶ M') (b : N ⟶ N'),
+      F.map (a ⊗ₘ b) ≫ (e M' N').hom = (e M N).hom ≫ (F.map a ⊗ₘ F.map b) := by
+    subst F
+    intro M N M' N' a b
+    simpa only [e, Iso.trans_hom, eqToIso.hom, tensorIso_hom, eqToHom_refl,
+      tensorHom_id, Category.id_comp, Category.comp_id] using
+      (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1 M N M' N' a b
   obtain ⟨φ, hφ, hnatural⟩ := exists_totalTensorComparison
     (C := SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
-    (D := SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) G e hn
-  refine ⟨G, hF, hmap, hadd, ε, hder, φ, ?_, hnatural, ?_⟩
+    (D := SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) F e hn
+  refine ⟨F, hF, hmap, hadd, ε, hder, φ, ?_, hnatural, ?_⟩
   · intro P N p q n h
-    simpa only [eqToHom_refl, tensorHom_id, MonoidalCategory.id_whiskerRight,
-      Category.id_comp, Category.comp_id] using hφ P N p q n h
+    simpa only [e, e₀, Iso.trans_hom, eqToIso.hom, tensorIso_hom,
+      Category.assoc] using hφ P N p q n h
   · intro P N hP hN
     have hflat := CochainComplex.IsKFlatTensor.mapBifunctor
       (X := S.toRingedSpace) P N hP hN
