@@ -94,9 +94,6 @@ private theorem ordinaryPullback_Q_iso {T X : Scheme.{u}} (g : T ⟶ X)
     (DerivedCategory.quotientCompQhIso _).app _ ≪≫
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex η (.up ℤ)).app P)⟩
 
-set_option maxHeartbeats 400000 in
--- The comparison elaborates several equivalences of module and derived categories,
--- with independent localization universes and nondefinitionally equal composite functors.
 /-- A specified local strictly perfect model computes derived pullback on its inverse-image
 open. This only identifies the derived object; preservation of strict perfectness of the
 ordinary pulled complex is a separate, elementary argument.
@@ -140,6 +137,19 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
         (((Scheme.Modules.localizedPullback g U).mapHomologicalComplex (.up ℤ)).obj K)) := by
   let V := g ⁻¹ᵁ U
   let f := g.resLE U V le_rfl
+  -- Reuse sheafification on the localized sites throughout the comparisons below.
+  have hsX : HasSheafify ((Opens.grothendieckTopology X).over U)
+      AddCommGrpCat.{u} := inferInstance
+  have : HasWeakSheafify ((Opens.grothendieckTopology X).over U)
+      AddCommGrpCat.{u} := hsX.isRightAdjoint
+  have : ((Opens.grothendieckTopology X).over U).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have hsT : HasSheafify ((Opens.grothendieckTopology T).over V)
+      AddCommGrpCat.{u} := inferInstance
+  have : HasWeakSheafify ((Opens.grothendieckTopology T).over V)
+      AddCommGrpCat.{u} := hsT.isRightAdjoint
+  have : ((Opens.grothendieckTopology T).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
   let := HasDerivedCategory.standard
@@ -156,10 +166,12 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
   let RX := SheafOfModules.overFunctor.{u} (moduleRings T.toRingedSpace) V
   let RY := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let F := Scheme.Modules.localizedPullback g U
+  have : A.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_isLeftAdjoint A
   have : A.Additive := Functor.additive_of_preserves_binary_products _
   have : B.PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_isLeftAdjoint B
   have : B.Additive := Functor.additive_of_preserves_binary_products _
+  have : C.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_isLeftAdjoint C
   have : C.Additive := Functor.additive_of_preserves_binary_products _
   have : (Scheme.Modules.pullback f).Additive := Scheme.Modules.instAdditivePullback f
   have : (A ⋙ Scheme.Modules.pullback f).Additive := inferInstance
