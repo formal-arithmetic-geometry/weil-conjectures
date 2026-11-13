@@ -420,7 +420,9 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
         simp only [Ψ₁, Adjunction.comp_homEquiv
           (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p)
           (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU), Equiv.trans_apply]
-        rw [← Adjunction.homEquiv_naturality_right, Category.assoc, h1]
+        simp only [← Adjunction.homEquiv_naturality_right, Category.assoc]
+        exact congrArg ((derivedUpperStarLowerStarAdjunction
+          (ModuleCat.{u + 1} Λ) p).homEquiv _ _) h1
       rw [← Category.assoc, h2, Adjunction.homEquiv_comp_conjugateEquiv_app]
       congr 1
       simp only [Bι, κU, hunit, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
