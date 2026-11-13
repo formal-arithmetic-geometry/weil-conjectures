@@ -127,6 +127,41 @@ private theorem fiber_product_bijective
   rw [← hE]
   exact E.bijective
 
+/-- A coordinate of a product decomposition has an idempotent kernel annihilator. -/
+private theorem fiber_projection_of_product_equiv
+    {X Y ι : Type*} [CommRing X] [CommRing Y]
+    {K : ι → Type*} [∀ i, CommRing (K i)] (j : ι)
+    (T : X ≃+* ((i : ι) → K i)) (Q : K j ≃+* Y) (φ : X →+* Y)
+    (hcoord : ∀ z, Q (T z j) = φ z) :
+    ∃ e : X, IsIdempotentElem e ∧ φ e = 1 ∧
+      Function.Surjective φ ∧ ∀ x, φ x = 0 → e * x = 0 := by
+  classical
+  let ε : (i : ι) → K i := Pi.single j 1
+  refine ⟨T.symm ε, ?_, ?_, ?_, ?_⟩
+  · apply T.injective
+    change T (T.symm ε * T.symm ε) = T (T.symm ε)
+    simp only [map_mul, T.apply_symm_apply]
+    funext i
+    by_cases h : i = j
+    · subst i
+      simp [ε]
+    · simp [ε, Pi.single_eq_of_ne h]
+  · rw [← hcoord, T.apply_symm_apply]
+    simp [ε]
+  · intro z
+    refine ⟨T.symm (Pi.single j (Q.symm z)), ?_⟩
+    rw [← hcoord, T.apply_symm_apply]
+    simp
+  · intro x hx
+    have hxj : T x j = 0 := Q.injective (by rw [hcoord, hx, map_zero])
+    apply T.injective
+    simp only [map_mul, T.apply_symm_apply, map_zero]
+    funext i
+    by_cases h : i = j
+    · subst i
+      simp [ε, hxj]
+    · simp [ε, Pi.single_eq_of_ne h]
+
 set_option profiler true in
 /-- The canonical map of fibres is a surjective projection with idempotent kernel annihilator.
 
@@ -233,32 +268,8 @@ theorem pair_henselization_fiber_projection
   let Q := Algebra.TensorProduct.comm B C q.ResidueField
   have hcoord (z : p.asIdeal.Fiber C) : Q (T z q₀) = φ z := by
     induction z using TensorProduct.inductionOn with
-    | tmul x y => rw [hT]; exact (hφ x y).symm
+    | tmul x y => exact (congrArg Q (hT x y)).trans (hφ x y).symm
     | add x y hx hy => simp [map_add, hx, hy]
-  let ε : (r : F) → C ⊗[B] r.1.asIdeal.ResidueField := Pi.single q₀ 1
-  refine ⟨T.symm ε, ?_, ?_, ?_, ?_⟩
-  · apply T.injective
-    change T (T.symm ε * T.symm ε) = T (T.symm ε)
-    simp only [map_mul, T.apply_symm_apply]
-    funext r
-    by_cases h : r = q₀
-    · subst r
-      simp [ε]
-    · simp [ε, Pi.single_eq_of_ne h]
-  · rw [← hcoord, T.apply_symm_apply]
-    simp [ε]
-  · intro z
-    refine ⟨T.symm (Pi.single q₀ (Q.symm z)), ?_⟩
-    rw [← hcoord, T.apply_symm_apply]
-    simp
-  · intro x hx
-    have hxq : T x q₀ = 0 := Q.injective (by rw [hcoord, hx, map_zero])
-    apply T.injective
-    simp only [map_mul, T.apply_symm_apply, map_zero]
-    funext r
-    by_cases h : r = q₀
-    · subst r
-      simp [ε, hxq]
-    · simp [ε, Pi.single_eq_of_ne h]
+  exact fiber_projection_of_product_equiv q₀ T Q.toRingEquiv φ hcoord
 
 end RingTheory
