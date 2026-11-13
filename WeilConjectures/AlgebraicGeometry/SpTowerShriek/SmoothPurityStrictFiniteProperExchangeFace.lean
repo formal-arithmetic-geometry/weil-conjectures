@@ -144,31 +144,23 @@ private meta partial def conversionCongruence
       try
         let aa := a.getAppArgs
         let bb := b.getAppArgs
-        -- Keep the common prefix fixed instead of generating equality arguments
-        -- and dependent transports for parameters that are already identical.
-        let mut prefix := 0
-        if a.getAppFn == b.getAppFn then
-          while prefix < aa.size && aa[prefix]! == bb[prefix]! do
-            prefix := prefix + 1
-        let head := Lean.mkAppN a.getAppFn (aa.extract 0 prefix)
-        let arity := aa.size - prefix
-        let key := (head, arity)
+        let key := (a.getAppFn, aa.size)
         let ct ← match (← congrCache.get).get? key with
           | some ct => pure ct
           | none => do
-            let ct ← if head.hasFVar then
-                Lean.Meta.mkHCongrWithArity head arity
+            let ct ← if a.getAppFn.hasFVar then
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
               else Lean.Meta.withLCtx {} {} <|
-                Lean.Meta.mkHCongrWithArity head arity
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
             let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
               (kind? := `_finiteCongruence)
             let ct := { ct with proof := proof }
             congrCache.modify fun m => m.insert key ct
             pure ct
         let mut args := #[]
-        for i in [prefix:aa.size] do
+        for i in [:aa.size] do
           let h ← conversionCongruence cache congrCache aa[i]! bb[i]!
-          let h ← if ct.argKinds[i - prefix]! == .eq then conversionToEq h else pure h
+          let h ← if ct.argKinds[i]! == .eq then conversionToEq h else pure h
           args := args ++ #[aa[i]!, bb[i]!, h]
         let h := Lean.mkAppN ct.proof args
         return ← if (← Lean.Meta.inferType h).isHEq then pure h else conversionOfEq h
@@ -390,20 +382,11 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
     (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
     θ θ' (derivedBaseChangeMap B sq.toCommSq)
-    (by
-      have HN := native_base_change_mate (R l E n) sq.toCommSq
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
-        exactByConversion h)
+    (by exact native_base_change_mate (R l E n) sq.toCommSq)
     (by
       intro M
-      have HC := strictFinitePullbackSquareCoherence l E b sq n M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h)
+      exact strictFinitePullbackSquareCoherence l E b sq n M)
     N (coordinates.property f n) (coordinates.property f' n)
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+  exact H
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
