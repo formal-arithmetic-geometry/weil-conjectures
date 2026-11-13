@@ -69,7 +69,6 @@ private theorem factor_restricted_free_map
     (fun i ↦ (ha i).trans (F.map_comp (ιFree (R := R.over U) i) l))
 
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
 private theorem exists_finite_support_of_unit_support
     (X : Scheme.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (V U : X.Opens) (hUV : U ≤ V)

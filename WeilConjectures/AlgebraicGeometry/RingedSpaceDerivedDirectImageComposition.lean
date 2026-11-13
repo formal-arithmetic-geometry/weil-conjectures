@@ -106,7 +106,6 @@ private theorem moduleDirectImage_comp_eq {X Y Z : RingedSpace.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     moduleDirectImage (f ≫ g) = moduleDirectImage f ⋙ moduleDirectImage g := rfl
 
-set_option profiler true in
 /-- Derived direct images compose canonically. The inverse of the comparison is
 characterized by compatibility with the right-derived units: its composite with the
 unit for `(g ∘ f)_*` is the composite of the units for `g_*` and `f_*`. The underived

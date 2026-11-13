@@ -26,19 +26,21 @@ namespace AlgebraicGeometry.Scheme.Modules
 private theorem restrict_unit_factorization
     (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (V U W Z : X.Opens) (hUV : U ≤ V) (hWU : W ≤ U) (hZU : Z ≤ U) (hZW : Z ≤ W)
-    {M N : SheafOfModules.{u} (R.over V)} (q : M ⟶ N)
-    (b : unit (R.over U) ⟶ (overMap R (homOfLE hUV)).obj N)
+    {M N P : SheafOfModules.{u} (R.over V)}
+    (p : M ⟶ N) (q : N ⟶ P) (r : M ⟶ P) (hpq : p ≫ q = r)
+    (b : unit (R.over U) ⟶ (overMap R (homOfLE hUV)).obj P)
     (a : unit (R.over W) ⟶ (overMap R (homOfLE (hWU.trans hUV))).obj M)
-    (ha : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map q =
+    (ha : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map r =
       (overMap R (homOfLE hWU)).map b) :
-    (overMap R (homOfLE hZW)).map a ≫
+    ((overMap R (homOfLE hZW)).map a ≫
+        (overMap R (homOfLE (hZU.trans hUV))).map p) ≫
         (overMap R (homOfLE (hZU.trans hUV))).map q =
       (overMap R (homOfLE hZU)).map b := by
-  exact ((overMap R (homOfLE hZW)).map_comp a
-    ((overMap R (homOfLE (hWU.trans hUV))).map q)).symm.trans
-      (congrArg ((overMap R (homOfLE hZW)).map) ha)
+  rw [Category.assoc, ← Functor.map_comp, hpq]
+  ext T t
+  exact congrArg
+    (fun k ↦ k.val.app (Opposite.op ((Over.map (homOfLE hZW)).obj T.unop)) t) ha
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- An existing one-section factorization stays a factorization after further
 restriction and inclusion into a larger finite support.
@@ -88,8 +90,9 @@ theorem enlarge_restricted_unit_support
       (isColimitFreeCofan (R := R.over V) S)
     intro i
     simp only [freeCofan_inj, ιFree_freeMap_assoc, ιFree_freeMap]
-  rw [Category.assoc, ← Functor.map_comp, hfree]
   exact restrict_unit_factorization X R V U W Z hUV hWU hZU hZW
-    (freeMap (R := R.over V) ((↑) : S → I)) b a ha
+    (freeMap (R := R.over V) (fun j : S ↦ (⟨j.val, hST j.property⟩ : T)))
+    (freeMap (R := R.over V) ((↑) : T → I))
+    (freeMap (R := R.over V) ((↑) : S → I)) hfree b a ha
 
 end AlgebraicGeometry.Scheme.Modules
