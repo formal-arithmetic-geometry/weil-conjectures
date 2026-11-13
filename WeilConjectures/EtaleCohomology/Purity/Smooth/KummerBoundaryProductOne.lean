@@ -65,6 +65,7 @@ lemma rightUnitor_commShift_app_kFlat (P : CochainComplex.KFlat C) (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app
         ((LKFlat C).obj P) ≫ (ρ_ ((LKFlat C).obj P)).hom⟦n⟧' =
       (ρ_ (((LKFlat C).obj P)⟦n⟧)).hom := by
+  have : HasCoproducts.{0} C := inferInstance
   -- Reuse the tensor structures throughout the localization comparison.
   let : MonoidalCategoryStruct (CochainComplex C ℤ) :=
     HomologicalComplex.monoidalCategoryStruct C (.up ℤ)
