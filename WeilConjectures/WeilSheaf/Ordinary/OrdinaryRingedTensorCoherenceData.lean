@@ -28,6 +28,17 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (H : Functor.uncurry.obj (ordinaryIhomBifunctor l Y) ⋙ E.functor ≅
     E.functor.op.prod E.functor ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
+-- Share the concrete instance terms across the tensor equations and structure fields.
+private abbrev ordinaryRingedSourceCochainMonoidal :
+    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
+  Mod.monoidalCategoryCochainComplex
+
+private abbrev ordinaryRingedTargetCochainMonoidal :
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
+  inferInstance
+
+attribute [local instance] ordinaryRingedSourceCochainMonoidal ordinaryRingedTargetCochainMonoidal
+
 /-- A binary comparison fixed uniquely by its tensor--Hom mate.
 Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
 structure OrdinaryRingedTensorUnderivedData where
@@ -49,10 +60,6 @@ structure OrdinaryRingedTensorUnderivedData where
             (E.functor.map f ≫ H.hom.app (op P, I))
 
 set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option maxHeartbeats 1200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- A normalized comparison on the existing ordinary and ringed cochain tensors.
@@ -90,10 +97,6 @@ structure OrdinaryRingedTensorChainComparison
         (α_ (G.obj P) (G.obj Q) (G.obj N)).hom
 
 set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option maxHeartbeats 1200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
 /-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
 The normalization equations fix every tensorator uniquely. The first clause retains
 symmetry relative to the actual ordinary balanced tensor. This is a property of
