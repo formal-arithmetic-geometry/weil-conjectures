@@ -140,18 +140,22 @@ private theorem finiteType_of_cover (M : SheafOfModules.{u} R) {I : Type v}
     infer_instance⟩
   exact finiteType_of_data q
 
--- Work over an arbitrary site and ring sheaf when transporting local properties.
--- This keeps the iterated-slice instances independent of the scheme's structure sheaf.
-private theorem localProperties_over_of_overMap {A B : C} (f : A ⟶ B)
+-- Keep the ring sheaf abstract during iterated-slice transport, and perform
+-- the cover argument separately so the slice instances need not be reconstructed.
+set_option profiler true in
+private theorem localProperties_over_of_overMap
+    (X : TopCat.{u}) (R : Sheaf (_root_.Opens.grothendieckTopology X) RingCat.{u})
+    {A B : TopologicalSpace.Opens X} (f : A ⟶ B)
     (M : SheafOfModules.{u} (R.over B))
     (hq : ((overMap R f).obj M).IsQuasicoherent)
     (hf : ((overMap R f).obj M).IsFiniteType) :
     (M.over (Over.mk f)).IsQuasicoherent ∧ (M.over (Over.mk f)).IsFiniteType := by
+  let J := _root_.Opens.grothendieckTopology X
   have := hq
   have := hf
-  let E := Over.iteratedSliceEquiv (Over.mk (f : A ⟶ B))
+  let E := Over.iteratedSliceEquiv (Over.mk f)
   have : E.inverse.IsDenseSubsite (J.over A)
-      ((J.over (B)).over (Over.mk (f : A ⟶ B))) := by
+      ((J.over B).over (Over.mk f)) := by
     refine { functorPushforward_mem_iff := ?_ }
     intro T S
     simp only [E, GrothendieckTopology.mem_over_iff, Sieve.overEquiv,
@@ -160,32 +164,32 @@ private theorem localProperties_over_of_overMap {A B : C} (f : A ⟶ B)
     rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
     rfl
   have : E.functor.IsContinuous
-      ((J.over (B)).over (Over.mk (f : A ⟶ B))) (J.over A) := by
+      ((J.over B).over (Over.mk f)) (J.over A) := by
     infer_instance
   have : E.functor.IsCocontinuous
-      ((J.over (B)).over (Over.mk (f : A ⟶ B))) (J.over A) := by
+      ((J.over B).over (Over.mk f)) (J.over A) := by
     infer_instance
-  have (T : Over (Over.mk (f : A ⟶ B))) :
+  have (T : Over (Over.mk f)) :
       (Over.post (X := T) E.functor).IsContinuous
-        (((J.over (B)).over (Over.mk (f : A ⟶ B))).over T)
+        (((J.over B).over (Over.mk f)).over T)
         ((J.over A).over (E.functor.obj T)) := by
     apply Functor.isContinuous_of_coverPreserving
       (compatiblePreservingOfFlat _ _) _
     exact (Functor.IsDenseSubsite.coverPreserving
-      ((J.over (B)).over (Over.mk (f : A ⟶ B)))
+      ((J.over B).over (Over.mk f))
       (J.over A) E.functor).overPost T
-  let S := (R.over (B)).over (Over.mk (f : A ⟶ B))
+  let S := (R.over B).over (Over.mk f)
   let φ : S ⟶ (E.functor.sheafPushforwardContinuous RingCat
-      ((J.over (B)).over (Over.mk (f : A ⟶ B))) (J.over A)).obj
+      ((J.over B).over (Over.mk f)) (J.over A)).obj
         (R.over A) := 𝟙 _
-  let e : (SheafOfModules.pushforward φ).obj ((overMap R (f)).obj M) ≅
-      M.over (Over.mk (f : A ⟶ B)) :=
+  let e : (SheafOfModules.pushforward φ).obj ((overMap R f).obj M) ≅
+      M.over (Over.mk f) :=
     (SheafOfModules.fullyFaithfulForget _).preimageIso
       (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _))
   have hqc := isQuasicoherent_pushforward_of_isLeftAdjoint E.functor φ
-    (Iso.refl _) (M := (overMap R (f)).obj M)
+    (Iso.refl _) (M := (overMap R f).obj M)
   have hft := finiteType_pushforward_leftAdjoint E.functor φ
-    (Iso.refl _) (M := (overMap R (f)).obj M)
+    (Iso.refl _) (M := (overMap R f).obj M)
   exact ⟨(isQuasicoherent S).prop_of_iso e hqc,
     finiteType_of_iso (R := S) e⟩
 
@@ -255,8 +259,8 @@ theorem module_binary_local_properties
   have hp (b : ULift.{u} Bool) : (G.over (U b)).IsQuasicoherent ∧ (G.over (U b)).IsFiniteType := by
     rcases b with ⟨b⟩
     cases b
-    · exact localProperties_over_of_overMap (R := R) (homOfLE le_sup_right) G hV.1 hV.2
-    · exact localProperties_over_of_overMap (R := R) (homOfLE le_sup_left) G hW.1 hW.2
+    · exact localProperties_over_of_overMap X.toTopCat R (homOfLE le_sup_right) G hV.1 hV.2
+    · exact localProperties_over_of_overMap X.toTopCat R (homOfLE le_sup_left) G hW.1 hW.2
   have (b : ULift.{u} Bool) : (G.over (U b)).IsQuasicoherent := (hp b).1
   have (b : ULift.{u} Bool) : (G.over (U b)).IsFiniteType := (hp b).2
   exact ⟨IsQuasicoherent.of_coversTop G U hc, finiteType_of_cover G U hc⟩

@@ -53,7 +53,6 @@ private theorem bijective_of_restrict_germ
   exact hb
 
 -- Identifying the slice-site restriction with the subspace presheaf unfolds colimit instances.
-set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
