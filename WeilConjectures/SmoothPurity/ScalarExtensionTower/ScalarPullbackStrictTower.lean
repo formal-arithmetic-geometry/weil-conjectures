@@ -140,8 +140,7 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
   intro i
   dsimp only [NatTrans.comp_app, HomologicalComplex.comp_f,
     Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  with_unfolding_all
-    apply scalar_pullback_hom_ext l E L ι f n.unop n.unop
+  apply scalar_pullback_hom_ext l E L ι f n.unop n.unop
       (scalarFiniteRingMap l E L ι X n.unop) (scalarProjectionRingSquare l E L ι X n.unop)
       (P.obj.X i)
       ((integralOperationsLevelPullback l L f n.unop).obj
