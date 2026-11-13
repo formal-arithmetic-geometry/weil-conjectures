@@ -62,11 +62,12 @@ private theorem sectionTransport_natural
 private theorem alternatingCechTermsMap_single {X : Scheme.{u}} {r : ℕ}
     (U : Fin r → X.Opens)
     {P Q : X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))}
-    (γ : P ⟶ Q) (p : ℕ) (t : Fin (p + 1) ↪o Fin r)
+    (γ : P ⟶ Q) (p : ℕ) [DecidableEq (Fin (p + 1) ↪o Fin r)]
+    (t : Fin (p + 1) ↪o Fin r)
     (x : P.obj (op (alternatingCechIntersection U t))) :
     (alternatingCechTermsMap U γ p).hom (Pi.single t x) =
-      Pi.single t ((γ.app (op (alternatingCechIntersection U t))).hom x) := by
-  classical
+      Pi.single (M := fun t ↦ Q.obj (op (alternatingCechIntersection U t))) t
+        ((γ.app (op (alternatingCechIntersection U t))).hom x) := by
   funext t'
   change (γ.app (op (alternatingCechIntersection U t'))).hom
     ((Pi.single (M := fun t ↦ P.obj (op (alternatingCechIntersection U t))) t x) t') = _
