@@ -21,6 +21,16 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
+attribute [local irreducible]
+  CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory
+  CategoryTheory.Functor.CommShift.ofIso CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory
+  finiteCoefficientDerivedHomEquiv finiteCoefficientDerivedAlgClHomEquiv
+  finiteCoefficientDerivedRestriction finiteCoefficientDerivedFromAlgCl
+  finiteCoefficientDerivedAdjunction finiteCoefficientDerivedAlgClAdjunction
+  derivedExtendScalarsCompIso derivedExtendScalarsSubfield
+  derivedExtendScalarsToPadicAlgCl
+
 private lemma transport_hom_equiv
     (X : Scheme) (ℓ : ℕ) [Fact ℓ.Prime]
     (E F G : FiniteIntermediateField ℓ) (he : E ≤ G) (hf : F ≤ G)
