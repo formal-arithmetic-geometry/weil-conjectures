@@ -97,10 +97,28 @@ private theorem exact_hom_of_retract {C : Type u} [SmallCategory C]
       simp [i, r, SE, SheafOfModules.homObjMap_comp_homObjMap, hιπ]
   exact ⟨hz, shortExact_of_retraction i r hir hB⟩
 
+private theorem exact_hom_of_finiteFree_retract {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u})
+    (E : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    (hE : ∃ m : ℕ,
+      ∃ (ι : E ⟶ SheafOfModules.free
+          (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m)))
+        (π : SheafOfModules.free
+          (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))
+          ⟶ E), ι ≫ π = 𝟙 E)
+    (S : ShortComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (hS : S.ShortExact) :
+    ∃ hz : SheafOfModules.homObjMap (R := R) (𝟙 E) S.f ≫
+        SheafOfModules.homObjMap (R := R) (𝟙 E) S.g = 0,
+      (ShortComplex.mk _ _ hz).ShortExact := by
+  obtain ⟨m, ι, π, hιπ⟩ := hE
+  obtain ⟨hz, hfree, _⟩ := SheafOfModules.finiteFreeInternalHomExact
+    (R := R) m _ (Iso.refl _) S hS
+  exact exact_hom_of_retract R E _ ι π hιπ S hz hfree
+
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
 set_option profiler true in
 -- The finite-free retractions use the localized and internal-Hom carrier presentations.
 private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
@@ -112,16 +130,22 @@ private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
   apply quasiIso_homComplex_map_of_bounded_exact_terms
     ((Opens.grothendieckTopology X).over U) (X.sheaf.over U) P hP.1 _ η
   intro n S hS
-  obtain ⟨m, ι, π, hιπ⟩ := hP.2 n
-  obtain ⟨hz, hfree, _⟩ := SheafOfModules.finiteFreeInternalHomExact
-    (R := X.sheaf.over U) m _ (Iso.refl _) S hS
-  exact exact_hom_of_retract (X.sheaf.over U) (P.X n) _ ι π hιπ S hz hfree
+  exact exact_hom_of_finiteFree_retract (X.sheaf.over U) (P.X n) (hP.2 n) S hS
 
+private theorem exists_comparisons_of_isos {C : Type*} [Category C]
+    {A B T T' H H' : C} (g : A ⟶ B) (f : T ⟶ H) (f' : T' ⟶ H') (h : H ⟶ H')
+    [IsIso f] [IsIso f'] [IsIso h] (a : A ≅ T') (b : B ≅ H')
+    (hab : g ≫ b.hom = a.hom ≫ f') :
+    ∃ a : A ≅ T, ∃ b : B ≅ H, g ≫ b.hom = a.hom ≫ f := by
+  refine ⟨a ≪≫ asIso f' ≪≫ (asIso h).symm ≪≫ (asIso f).symm,
+    b ≪≫ (asIso h).symm, ?_⟩
+  dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
+  rw [← Category.assoc, hab]
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 700000 in
 set_option profiler true in
 -- The resolution comparisons use several equivalent carrier presentations.
 /-- Given representatives and an ordinary evaluation chain map, there are compatible
@@ -206,13 +230,6 @@ theorem exists_strictlyPerfect_evaluation_comparisons (X : Scheme.{u})
   let eI := _eN ≪≫ asIso (Q.map η)
   obtain ⟨aI, bI, habI⟩ := exists_strictlyPerfect_kInjective_evaluation_comparisons
     X K N U P I hstrict eK eI fI hfI
-  refine ⟨aI ≪≫ asIso (Q.map fI) ≪≫ (asIso (Q.map h)).symm ≪≫
-      (asIso (Q.map f)).symm, bI ≪≫ (asIso (Q.map h)).symm, ?_⟩
-  dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
-  rw [← Category.assoc, habI]
-  simp only [Category.assoc]
-  change aI.hom ≫ Q.map fI ≫ inv (Q.map h) =
-    aI.hom ≫ Q.map fI ≫ inv (Q.map h) ≫ inv (Q.map f) ≫ Q.map f
-  simp only [IsIso.inv_hom_id, Category.comp_id]
+  exact exists_comparisons_of_isos _ (Q.map f) (Q.map fI) (Q.map h) aI bI habI
 
 end AlgebraicGeometry
