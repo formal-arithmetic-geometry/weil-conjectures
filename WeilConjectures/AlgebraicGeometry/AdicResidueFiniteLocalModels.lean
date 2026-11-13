@@ -42,7 +42,6 @@ private theorem adicResidue_complete_of_iso
       ((Iso.refl _).op.prod
         ((ringedDerivedRestriction.{w, w + 1, w + 1} B U).mapIso e)))
 
-set_option maxHeartbeats 500000 in
 set_option trace.profiler true in
 -- Comparing the two termwise constant presentations unfolds their sheafification maps.
 private theorem adicResidue_constant_complete
@@ -77,7 +76,7 @@ private theorem adicResidue_constant_complete
         SheafOfModules.restrictScalars (CategoryTheory.constantModuleHomRingIso T A).inv ≅
         commutativeSiteConstantModuleFunctor T A :=
       AdicPerfectModel.constantPresentationIso (J := T) (A := A)
-    let β := Functor.isoWhiskerRight α
+    let β := (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight α
       (CategoryTheory.ConstantCompletion.change
         (CategoryTheory.ConstantCompletion.coefficientMap T A J))
     let γ := (NatIso.mapHomologicalComplex β (.up ℤ)).app P
