@@ -100,7 +100,7 @@ theorem restricted_base_change_compatibility
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
        := by
   classical
-  dsimp only
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   intro c0 hc0
   let U := f ⁻¹ᵁ V
   let fA := f ∣_ V

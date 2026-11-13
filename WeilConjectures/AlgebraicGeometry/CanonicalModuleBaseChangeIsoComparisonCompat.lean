@@ -101,7 +101,7 @@ theorem canonicalModuleBaseChange_iso_comparison_ab
                 pullback.condition E ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
        := by
   classical
-  dsimp only
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let fA := f ≫ eS.hom
   let gA := eT.inv ≫ g ≫ eS.hom
   let p := pullback.fst fA gA
