@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition on a single open `U` controls the restriction to `W ∩ U`
 of a kernel initially defined on `W`. This comparison requires neither an open
@@ -73,10 +72,10 @@ theorem coherent_kernel_intersection_finiteType
     inferInstance
   have : ((Opens.grothendieckTopology U).over V).WEqualsLocallyBijective
       AddCommGrpCat.{u} := inferInstance
-  have : ∀ B : Over Z,
+  have hSheafZ : ∀ B : Over Z,
       HasSheafify (((Opens.grothendieckTopology X).over Z).over B) AddCommGrpCat.{u} :=
     inferInstance
-  have : ∀ B : Over Z,
+  have hLocalZ : ∀ B : Over Z,
       (((Opens.grothendieckTopology X).over Z).over B).WEqualsLocallyBijective
         AddCommGrpCat.{u} := inferInstance
   let i : Z ⟶ W := homOfLE (by rw [hZ]; exact inf_le_left)
@@ -133,6 +132,13 @@ theorem coherent_kernel_intersection_finiteType
     E.inverse.mapIso ek.symm ≪≫ E.unitIso.symm.app (A.obj (kernel f))
   have : (A.obj (kernel f)).IsFiniteType := finiteType_of_iso (R := X.ringCatSheaf.over Z) ek'
   let D : Over W := Over.mk i
+  -- Match the slice equivalence's presentation when reusing the instances over Z.
+  have : ∀ B : Over D.left,
+      HasSheafify (((Opens.grothendieckTopology X).over D.left).over B) AddCommGrpCat.{u} :=
+    hSheafZ
+  have : ∀ B : Over D.left,
+      (((Opens.grothendieckTopology X).over D.left).over B).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := hLocalZ
   have : ∀ B : Over D,
       HasSheafify ((((Opens.grothendieckTopology X).over W).over D).over B)
         AddCommGrpCat.{u} := inferInstance
@@ -166,7 +172,6 @@ theorem coherent_kernel_intersection_finiteType
     subst Z'
     congr 1
   have hD : D = Over.mk (homOfLE (inf_le_left : W ⊓ U ≤ W)) := mk_eq Z hZ i
-  rw [← hD]
-  exact hfinal
+  exact hD ▸ hfinal
 
 end AlgebraicGeometry
