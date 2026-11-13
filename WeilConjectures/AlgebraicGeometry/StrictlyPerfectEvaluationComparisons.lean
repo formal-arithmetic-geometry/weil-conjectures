@@ -112,9 +112,11 @@ private theorem exact_hom_of_finiteFree_retract {C : Type u} [SmallCategory C]
         SheafOfModules.homObjMap (R := R) (𝟙 E) S.g = 0,
       (ShortComplex.mk _ _ hz).ShortExact := by
   obtain ⟨m, ι, π, hιπ⟩ := hE
+  let B := SheafOfModules.free
+    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))
   obtain ⟨hz, hfree, _⟩ := SheafOfModules.finiteFreeInternalHomExact
-    (R := R) m _ (Iso.refl _) S hS
-  exact exact_hom_of_retract R E _ ι π hιπ S hz hfree
+    (R := R) m B (Iso.refl B) S hS
+  exact exact_hom_of_retract R E B ι π hιπ S hz hfree
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -134,9 +136,10 @@ private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
 
 private theorem exists_comparisons_of_isos {C : Type*} [Category C]
     {A B T T' H H' : C} (g : A ⟶ B) (f : T ⟶ H) (f' : T' ⟶ H') (h : H ⟶ H')
-    [IsIso f] [IsIso f'] [IsIso h] (a : A ≅ T') (b : B ≅ H')
-    (hab : g ≫ b.hom = a.hom ≫ f') :
+    [IsIso f] [IsIso f'] [IsIso h]
+    (hab : ∃ a : A ≅ T', ∃ b : B ≅ H', g ≫ b.hom = a.hom ≫ f') :
     ∃ a : A ≅ T, ∃ b : B ≅ H, g ≫ b.hom = a.hom ≫ f := by
+  obtain ⟨a, b, hab⟩ := hab
   refine ⟨a ≪≫ asIso f' ≪≫ (asIso h).symm ≪≫ (asIso f).symm,
     b ≪≫ (asIso h).symm, ?_⟩
   dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
@@ -228,8 +231,8 @@ theorem exists_strictlyPerfect_evaluation_comparisons (X : Scheme.{u})
   have : QuasiIso h := strictlyPerfect_hom_quasiIso X U P hstrict η
   have : IsIso (Q.map h) := inferInstance
   let eI := _eN ≪≫ asIso (Q.map η)
-  obtain ⟨aI, bI, habI⟩ := exists_strictlyPerfect_kInjective_evaluation_comparisons
-    X K N U P I hstrict eK eI fI hfI
-  exact exists_comparisons_of_isos _ (Q.map f) (Q.map fI) (Q.map h) aI bI habI
+  exact exists_comparisons_of_isos _ (Q.map f) (Q.map fI) (Q.map h)
+    (exists_strictlyPerfect_kInjective_evaluation_comparisons
+      X K N U P I hstrict eK eI fI hfI)
 
 end AlgebraicGeometry
