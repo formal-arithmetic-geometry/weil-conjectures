@@ -31,30 +31,6 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
--- Prove linearity before specializing to quotient rings, so elaboration does not
--- repeatedly unfold the coefficient tower while constructing the section maps.
-private def brownCoherenceGenericRestriction (W : Scheme.{u})
-    (A B : CommRingCat.{u + 1}) (f : A ⟶ B) :
-    SheafOfModules.restrictScalars.{u + 1}
-        ((sheafCompose W.smallEtaleTopology
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-          ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).map f)) ⋙
-      Etale.SystemProjection.constantModule W A ≅
-    Etale.SystemProjection.constantModule W B ⋙
-      Sheaf.restrictScalars W.smallEtaleTopology f.hom := by
-  refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
-    (NatIso.ofComponents (fun U ↦ ModuleCat.isoMk (Iso.refl _) (fun a ↦ ?_)) ?_)) ?_
-  · ext x
-    have hn := congrArg (fun g ↦ g.app U a)
-      (toSheafify_naturality W.smallEtaleTopology ((Functor.const W.Etaleᵒᵖ).map f))
-    exact congrArg (fun b ↦ b • (show M.val.obj U from x)) hn
-  · intro U V f
-    ext x
-    rfl
-  · intro M N f
-    ext U x
-    rfl
-
 -- The mate equation is categorical; checking it here avoids unfolding the concrete
 -- derived adjunctions when checking the realization theorem.
 private theorem brownCoherenceInverseMate
@@ -69,13 +45,75 @@ private theorem brownCoherenceInverseMate
 
 variable (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
 
-set_option profiler true in
+set_option maxHeartbeats 2000000 in
+-- Checking section identities unfolds the two constant-scalar restriction constructions.
 private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     coefficientRestriction (J := W.smallEtaleTopology) O t h ⋙
       strictEtaleBrownConstant O t W n ≅
     strictEtaleBrownConstant O t W m ⋙
-      Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h) :=
-  brownCoherenceGenericRestriction W _ _ (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))
+      Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h) := by
+  refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
+    (NatIso.ofComponents (fun U ↦ ?_) ?_)) ?_
+  · exact ModuleCat.isoMk (Iso.refl _) (fun a ↦ by
+      ext x
+      change ((M.val.obj U).smul
+          ((toSheafify W.smallEtaleTopology
+            ((Functor.const W.Etaleᵒᵖ).obj
+              (CommRingCat.of (strictEtaleBrownRing O t m)))).app U
+                (strictEtaleBrownRingMap O t h a))).asHom.hom x =
+        ((M.val.obj U).smul
+          ((coefficientQuotientMap (J := W.smallEtaleTopology) O t h).hom.app U
+            ((toSheafify W.smallEtaleTopology
+              ((Functor.const W.Etaleᵒᵖ).obj
+                (CommRingCat.of (strictEtaleBrownRing O t n)))).app U a))).asHom.hom x
+      have hu := congrArg (fun f ↦ f.app U a)
+        (toSheafify_naturality W.smallEtaleTopology
+          ((Functor.const W.Etaleᵒᵖ).map
+            (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))))
+      exact congrArg (fun r ↦ ((M.val.obj U).smul r).asHom.hom x) hu)
+  · intro U V f
+    ext x
+    rfl
+  · intro M N f
+    ext U x
+    rfl
+
+set_option profiler true in
+private theorem brownCoherenceRestrictionSections {m n : ℕ} (h : m ≤ n)
+    (M : strictEtaleLevel W O t m) (U : W.Etaleᵒᵖ) (x : M.val.obj U) :
+    HEq (((ordinaryRestrictionIso O t W h).hom.app M).hom.app U x) x := by
+  exact HEq.rfl
+
+set_option profiler true in
+private theorem brownCoherenceDerivedRestriction
+    (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P)
+    {m n : ℕ} (h : m ≤ n) :
+    ∃ δ : (P.scalar h).restriction ⋙ R.derived n ≅ R.derived m ⋙
+        Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h),
+      ∀ K : CochainComplex (strictEtaleLevel W O t m) ℤ,
+        δ.hom.app (DerivedCategory.Q.obj K) ≫
+          (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+            (strictEtaleBrownRingMap O t h)).map ((R.factors m).hom.app K) ≫
+          (Sheaf.restrictScalars W.smallEtaleTopology
+            (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
+              (((strictEtaleBrownConstant O t W m).mapHomologicalComplex (.up ℤ)).obj K) =
+        (R.derived n).map ((P.scalar h).restrictionFactors.hom.app K) ≫
+          (R.factors n).hom.app
+            (((coefficientRestriction (J := W.smallEtaleTopology) O t h).mapHomologicalComplex
+              (.up ℤ)).obj K) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex (ordinaryRestrictionIso O t W h) (.up ℤ)).hom.app K) := by
+  let := R.ordinaryAdditive
+  exact exists_derivedSquare_independentUniverses
+    (coefficientRestriction (J := W.smallEtaleTopology) O t h)
+    (strictEtaleBrownConstant O t W m) (strictEtaleBrownConstant O t W n)
+    (Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
+    (P.scalar h).restriction (R.derived m) (R.derived n)
+    (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
+    (P.scalar h).restrictionFactors (R.factors m) (R.factors n)
+    (Sheaf.restrictScalars W.smallEtaleTopology
+      (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
+    (ordinaryRestrictionIso O t W h)
 
 set_option profiler true in
 -- The normalization transports adjunctions between two concrete derived-category universes.
@@ -97,16 +135,7 @@ theorem etaleBrownLevelRealizationCoherence_exists
     Nonempty (StrictEtaleBrownRealization O t W P) := by
   let := R.ordinaryAdditive
   let := R.equivalence
-  have hd {m n : ℕ} (h : m ≤ n) := exists_derivedSquare_independentUniverses
-    (coefficientRestriction (J := W.smallEtaleTopology) O t h)
-    (strictEtaleBrownConstant O t W m) (strictEtaleBrownConstant O t W n)
-    (Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
-    (P.scalar h).restriction (R.derived m) (R.derived n)
-    (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
-    (P.scalar h).restrictionFactors (R.factors m) (R.factors n)
-    (Sheaf.restrictScalars W.smallEtaleTopology
-      (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
-    (ordinaryRestrictionIso O t W h)
+  have hd {m n : ℕ} (h : m ≤ n) := brownCoherenceDerivedRestriction O t W P R h
   choose restriction hrestriction using @hd
   have hs {m n : ℕ} (h : m ≤ n) := brownCoherenceInverseMate (P.scalar h).derivedAdj
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
@@ -125,8 +154,7 @@ theorem etaleBrownLevelRealizationCoherence_exists
       (U : W.Etaleᵒᵖ) (x : M.val.obj U),
       HEq (((ordinaryRestrictionIso O t W h).hom.app M).hom.app U x) x) ∧ _
   refine ⟨?_, ?_, ?_⟩
-  · intro m n h M U x
-    exact HEq.rfl
+  · exact fun h M U x ↦ brownCoherenceRestrictionSections O t W h M U x
   · exact hrestriction
   · exact hscalar
 
