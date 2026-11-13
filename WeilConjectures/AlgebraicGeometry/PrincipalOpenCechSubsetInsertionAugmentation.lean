@@ -109,7 +109,6 @@ theorem principalSubsetInsertion_augmentation
                       (R.obj (J.X n)))
                 exact (principalOpenSectionTransport A V (J.X n)).hom s) := by
   classical
-  dsimp only
   intro hls hes n s
   let c : principalSubsetCoordinates A r f J n := fun S ↦
     if h : S.val.card = 1 then
