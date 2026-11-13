@@ -208,9 +208,10 @@ private theorem scalarShift
         Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom]
       dsimp only [r, Iso.refl_hom, NatTrans.id_app, Iso.refl_inv,
         Functor.associator_hom_app, Functor.associator_inv_app]
-      simp only [Category.id_comp (obj := pbcAmbientStage l Ω T L),
-        Category.comp_id (obj := pbcAmbientStage l Ω T L),
-        Category.assoc (obj := pbcAmbientStage l Ω T L)]
+      simp only [Category.id_comp, Category.comp_id, Category.assoc]
+      repeat erw [Category.id_comp]
+      repeat erw [Category.comp_id]
+      repeat erw [Category.assoc]
       have hl := hlift h P hP
       let z := ((b h).hom.app K).hom ≫ aL.hom.app ((U l Ω T h).obj K) ≫
         dL.map t ≫ f
