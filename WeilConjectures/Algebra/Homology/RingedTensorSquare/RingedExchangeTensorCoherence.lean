@@ -347,7 +347,6 @@ private theorem square_transport_cancel_iff
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
 private theorem square_condition_transport
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (theta : g.left ⋙ k.left ≅ f.left ⋙ h.left)
