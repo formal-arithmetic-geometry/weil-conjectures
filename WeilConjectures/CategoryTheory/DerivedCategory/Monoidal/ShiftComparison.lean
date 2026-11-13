@@ -124,6 +124,10 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
       LF.map ((tensorLeftCounit X).app M) ≫ cL.app (X ⊗ M) ≫
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X).app M)) :
     NatTrans.CommShift τ ℤ := by
+  let : MonoidalCategory (DerivedCategory C₁) :=
+    monoidalCategoryOfMonoidalClosedBraidedCategory C₁
+  let : MonoidalCategory (DerivedCategory C₂) :=
+    monoidalCategoryOfMonoidalClosedBraidedCategory C₂
   let G := F.mapHomotopyCategory (.up ℤ)
   let c₂ : Qh ⋙ ((curriedTensor (DerivedCategory C₁)).obj (Qh.obj X) ⋙ LF) ⟶
       ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G) ⋙ Qh :=
@@ -181,6 +185,10 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
       LF.map ((tensorRightCounit X).app M) ≫ cL.app (M ⊗ X) ≫
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app M).app X)) :
     NatTrans.CommShift τ ℤ := by
+  let : MonoidalCategory (DerivedCategory C₁) :=
+    monoidalCategoryOfMonoidalClosedBraidedCategory C₁
+  let : MonoidalCategory (DerivedCategory C₂) :=
+    monoidalCategoryOfMonoidalClosedBraidedCategory C₂
   let G := F.mapHomotopyCategory (.up ℤ)
   let c₂ : Qh ⋙ ((curriedTensor (DerivedCategory C₁)).flip.obj (Qh.obj X) ⋙ LF) ⟶
       ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G) ⋙ Qh :=
