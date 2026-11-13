@@ -402,7 +402,7 @@ lemma Etale.leftDerivedUpperStarComp_conj_comp {W P Y Z : Scheme.{u}} (f : W ⟶
 
 set_option profiler true in
 /-- The comparison with degree-zero sheaves transports conjugation along a composite pullback. -/
-lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
+private lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
     (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂)
     {K M : DerivedCategory (Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {F G : Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -451,8 +451,8 @@ lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
   rw [Functor.map_comp, Functor.map_comp, h₁ F, hg', h₂]
   simp only [Functor.comp_map] at nK nM
   have M₁ : (s g₂).hom.app F ≫ (DerivedCategory.singleFunctor _ 0).map φ ≫
-      (s g₂).inv.app G = (L(g₂^*[ModuleCat.{u + 1} Λ])).map k ≫ δ ≫
-        (L(g₂^*[ModuleCat.{u + 1} Λ])).map m := by
+      (s g₂).inv.app G = (L((g₂)^*[ModuleCat.{u + 1} Λ])).map k ≫ δ ≫
+        (L((g₂)^*[ModuleCat.{u + 1} Λ])).map m := by
     rw [hφ]
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
       Category.comp_id]
@@ -462,7 +462,6 @@ lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
   rw [reassoc_of% M₂, ← reassoc_of% nK, reassoc_of% nM]
 
 set_option profiler true in
--- the gluing manipulates long composites of derived and sheaf-level isomorphisms
 theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
     {K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -480,12 +479,6 @@ theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
     ∃ γ : K ⟶ M, ∀ j, (L((e j)^*[ModuleCat.{u + 1} Λ])).map γ = δ j := by
   let s := fun {Y Z : Scheme.{u}} (g : Y ⟶ Z) ↦
     ((g)^*[ModuleCat.{u + 1} Λ]).singleFunctorCompLeftDerivedFunctorIso
-  have hs : ∀ {Y Z : Scheme.{u}} (g : Y ⟶ Z)
-      {A B : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-      (f : A ⟶ B),
-      (L((g)^*[ModuleCat.{u + 1} Λ])).map ((DerivedCategory.singleFunctor _ 0).map f) =
-        (s g).hom.app A ≫ (DerivedCategory.singleFunctor _ 0).map ((g)^*[_].map f) ≫
-          (s g).inv.app B := fun {Y Z} g {A B} f ↦ (NatIso.naturality_2 (s g) f).symm
   let φ := fun j ↦ (DerivedCategory.singleFunctor (Sheaf (V j).smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0).preimage ((s (e j)).inv.app F ≫ (L((e j)^*[_])).map eK.inv ≫ δ j ≫
       (L((e j)^*[_])).map eM.hom ≫ (s (e j)).hom.app G)
@@ -498,20 +491,10 @@ theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
   obtain ⟨φ', hφ'⟩ := Etale.exists_hom_of_upperStar e he hcov' F G φ (by
     intro j k W a b w ha hb _ _ _
     apply (DerivedCategory.singleFunctor _ 0).map_injective
-    have key : ∀ (i : ι) (c : W ⟶ V i) (hc : w = c ≫ e i),
-        (DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).hom.app F ≫
-          (c)^*[ModuleCat.{u + 1} Λ].map (φ i) ≫
-            (Etale.upperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).inv.app G) =
-        (s w).inv.app F ≫ (L((w)^*[ModuleCat.{u + 1} Λ])).map eK.inv ≫
-          ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).hom.app K ≫
-            (L((c)^*[ModuleCat.{u + 1} Λ])).map (δ i) ≫
-            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).inv.app M) ≫
-          (L((w)^*[ModuleCat.{u + 1} Λ])).map eM.hom ≫ (s w).hom.app G := by
-      intro i c hc
-      exact Etale.leftDerivedUpperStarComp_map_conj c (e i) w hc eK.inv eM.hom
-        (δ i) (φ i) (hφ i)
-    rw [key j a ha, key k b hb]
+    rw [Etale.leftDerivedUpperStarComp_map_conj a (e j) w ha eK.inv eM.hom
+      (δ j) (φ j) (hφ j),
+      Etale.leftDerivedUpperStarComp_map_conj b (e k) w hb eK.inv eM.hom
+        (δ k) (φ k) (hφ k)]
     have hab : a ≫ e j = b ≫ e k := ha.symm.trans hb
     let ℓ := pullback.lift a b hab
     have T₁ := Etale.leftDerivedUpperStarComp_conj_comp ℓ (pullback.fst (e j) (e k)) (e j) a
@@ -530,6 +513,8 @@ theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
       rw [T₁, T₂, H]
     rw [hτ])
   refine ⟨eK.hom ≫ (DerivedCategory.singleFunctor _ 0).map φ' ≫ eM.inv, fun j ↦ ?_⟩
+  have hs := (NatIso.naturality_2 (s (e j)) φ').symm
+  dsimp only [Functor.comp_map] at hs
   rw [Functor.map_comp, Functor.map_comp, hs, hφ' j, hφ j]
   simp [← Functor.map_comp_assoc]
 
