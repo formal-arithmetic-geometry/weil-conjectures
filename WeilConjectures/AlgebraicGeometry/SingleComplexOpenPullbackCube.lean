@@ -158,7 +158,6 @@ private theorem openSquare_app
     eqToHom_app, Iso.trans_inv, eqToIso.inv, eqToHom_refl,
     Category.id_comp, Category.assoc]
 
-set_option profiler true in
 /-- The two paths around a commuting cube of pullback comparisons agree.
 Source: Stacks Project, cohomology.tex, Tag 0D5S; perfect.tex, Tag 0DJ9.
 (blueprint: lem-pc-t2-open-pullback-cube).

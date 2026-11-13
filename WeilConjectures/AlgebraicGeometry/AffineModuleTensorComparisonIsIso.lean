@@ -84,14 +84,6 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-private theorem adjunction_counit_factorization_triangle
-    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {G : D ⥤ C}
-    (adj : L ⊣ G) {X Y : D} (g : L.obj (G.obj X) ⟶ Y) (a : Y ⟶ X)
-    (h : g ≫ a = adj.counit.app X) :
-    adj.homEquiv (G.obj X) Y g ≫ G.map a = 𝟙 (G.obj X) := by
-  rw [← adj.homEquiv_naturality_right, h, ← adj.homEquiv_symm_id]
-  exact Equiv.apply_symm_apply _ _
-
 set_option profiler true in
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
@@ -195,22 +187,16 @@ theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
   have hHF : ((Rf ⋙ H).obj F).IsQuasicoherent := hH.2.2 (Rf.obj F) hRF
   have htriangle : β.app (Rf.obj F) ≫ Rf.map (α.app F) = 𝟙 (Rf.obj F) := by
-    have hs : Sf.map (β.app (Rf.obj F) ≫ Rf.map (α.app F)) =
-        Sf.map (𝟙 (Rf.obj F)) := by
-      calc
-        _ = Sf.map (β.app (Rf.obj F)) ≫ Sf.map (Rf.map (α.app F)) :=
-          Sf.map_comp _ _
-        _ = adj.homEquiv _ _ (γ.app (Rf.obj F)) ≫
-            Sf.map (Rf.map (α.app F)) :=
-          congrArg (fun k ↦ k ≫ Sf.map (Rf.map (α.app F))) (hcomp.2 (Rf.obj F))
-        _ = 𝟙 _ := adjunction_counit_factorization_triangle
-          adj (γ.app (Rf.obj F)) (α.app F) (hcomp.1 F)
-        _ = _ := (Sf.map_id _).symm
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
-    ext g
-    exact congrArg (fun q ↦ q.val.app V g) hs
+    ext m
+    have hb := congrArg (fun k ↦ k.val.app V m) (hcomp.2 (Rf.obj F))
+    simp only [Adjunction.homEquiv_unit] at hb
+    have ha := congrArg (fun k ↦ k.val.app (fV V)
+      ((adj.unit.app (Sf.obj (Rf.obj F))).val.app V m)) (hcomp.1 F)
+    have ht := congrArg (fun k ↦ k.val.app V m) (adj.right_triangle_components F)
+    exact (congrArg (fun n ↦ (α.app F).val.app (fV V) n) hb).trans (ha.trans ht)
   have := hβ (Rf.obj F) hRF
   have : IsIso (β.app (Rf.obj F) ≫ Rf.map (α.app F)) := by
     rw [htriangle]
