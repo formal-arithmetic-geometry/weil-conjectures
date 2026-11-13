@@ -221,8 +221,10 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
       (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (integralComparisonSystemComposition l L h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  exact NatTrans.congr_app
+  have mixed := NatTrans.congr_app
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at mixed
+  exact mixed
 
 private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
@@ -309,8 +311,19 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
     (integralCompositionFiniteScalar l E L ι Z) CE
   have eE' := congrArg (integralCompositionFiniteScalar l E L ι Z).map eE
-  have paste := scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
-  exact paste
+  apply scalar_composition_paste_mapped
+  · exact N1
+  · exact IIIk'
+  · exact IIIh
+  · exact Ng
+  · exact Np
+  · exact CE'
+  · exact mix
+  · exact eE'
+  · exact eL
+  · exact IIIhk
+  · exact Na
+  · exact CL
 
 end SystemScalar
 
