@@ -220,14 +220,19 @@ private theorem scalarOrdinaryCoefficients
       pbcActualStructureMap g dE ≫ (proEtaleSheafDirectImage g RingCat.{u + 1}).map
         (pbcActualCoefficientRingMap X (χ X)))
     (M : pbcModules Y (pbcAdicCompletion Y dE)) :
-      (pbcActualModulePull g dG).map ((Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ Y))
-      (pbcScalarAdjunction (ψ Y)) (pbcScalarAdjunction (χ Y))
-      (pbcRestrictComp (φ Y) (ψ Y) (χ Y) (w Y))).hom.app M) ≫ (pbcActualScalarOrdinaryPullIso g dE dG (χ Y) (χ X) sEG).hom.app M =
-        (pbcActualScalarOrdinaryPullIso g dF dG (ψ Y) (ψ X) sFG).hom.app ((pbcExtend (φ Y)).obj M) ≫
-          (pbcExtend (ψ X)).map ((pbcActualScalarOrdinaryPullIso g dE dF (φ Y) (φ X) sEF).hom.app M) ≫
-          (Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ X))
-      (pbcScalarAdjunction (ψ X)) (pbcScalarAdjunction (χ X))
-      (pbcRestrictComp (φ X) (ψ X) (χ X) (w X))).hom.app ((pbcActualModulePull g dE).obj M) := by
+    (pbcActualModulePull g dG).map
+        ((Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ Y))
+          (pbcScalarAdjunction (ψ Y)) (pbcScalarAdjunction (χ Y))
+          (pbcRestrictComp (φ Y) (ψ Y) (χ Y) (w Y))).hom.app M) ≫
+      (pbcActualScalarOrdinaryPullIso g dE dG (χ Y) (χ X) sEG).hom.app M =
+    (pbcActualScalarOrdinaryPullIso g dF dG (ψ Y) (ψ X) sFG).hom.app
+        ((pbcExtend (φ Y)).obj M) ≫
+      (pbcExtend (ψ X)).map
+        ((pbcActualScalarOrdinaryPullIso g dE dF (φ Y) (φ X) sEF).hom.app M) ≫
+      (Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ X))
+        (pbcScalarAdjunction (ψ X)) (pbcScalarAdjunction (χ X))
+        (pbcRestrictComp (φ X) (ψ X) (χ X) (w X))).hom.app
+          ((pbcActualModulePull g dE).obj M) := by
   let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
   let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
@@ -432,21 +437,10 @@ private theorem scalarDerivedCoefficients
       (complexCounit (pbcExtend (χ X)) (pbcDerivedExtend (χ X)) (pbcExtensionCounit (χ X)))
       χEF.hom χFG.hom aY.symm aX.symm aY₁.symm aX₁.symm
       cEF.hom cFG.hom cEG.hom P
-      (by with_unfolding_all simpa only [χEF, cEF, LE, LF, pbcActualScalarDerivedPullIso,
-        Category.assoc, scalarComplexCounit_app, NatTrans.comp_app, whiskerLeft_app,
-        whiskerRight_app, pbcComplexCounit, pbcActualPullComplexCounit] using nEF)
-      (by with_unfolding_all simpa only [χFG, cFG, LF, LG,
-        pbcActualScalarDerivedPullIso, EY,
-        Category.assoc, scalarComplexCounit_app, NatTrans.comp_app, whiskerLeft_app,
-        whiskerRight_app, pbcComplexCounit, pbcActualPullComplexCounit] using nFG)
-      (by with_unfolding_all simpa only [aY₁, aY₀, rY, EY, Category.assoc,
-        Functor.mapIso_inv, Iso.app_inv,
-        Iso.symm_hom, scalarComplexCounit_app, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
-        pbcComplexCounit, pbcActualPullComplexCounit] using nY')
-      (by with_unfolding_all simpa only [aX, aX₁, aX₀, rX, LE, PE,
-        Category.assoc, Iso.symm_inv,
-        scalarComplexCounit_app, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
-        pbcComplexCounit, pbcActualPullComplexCounit] using nX) hw.symm
+      (by with_unfolding_all simpa only [Category.assoc] using nEF)
+      (by with_unfolding_all simpa only [Category.assoc] using nFG)
+      (by with_unfolding_all simpa only [Category.assoc] using nY')
+      (by with_unfolding_all simpa only [Category.assoc] using nX) hw.symm
     simpa only [v, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
         isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
         Functor.associator_hom_app, Functor.associator_inv_app,
