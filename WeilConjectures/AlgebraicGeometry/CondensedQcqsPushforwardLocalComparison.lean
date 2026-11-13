@@ -117,21 +117,22 @@ noncomputable local instance
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj Λ X)) := inferInstance
 
-private local instance condensedComplexHasColimit
+private noncomputable def condensedTruncatedColimitCocone
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] (X : Scheme.{u})
     {I : Type (u + 1)} [SmallCategory I]
     (D : I ⥤ CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
-        (condensedRingObj Λ X)) ℤ) : HasColimit D := by
-  have : HasColimitsOfShape I
-      (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
-        (condensedRingObj Λ X)) := inferInstance
-  exact HasColimitsOfShape.has_colimit D
+        (condensedRingObj Λ X)) ℤ) (a : ℤ) :
+    Cocone (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor _) := by
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+    (condensedRingObj Λ X)
+  letI : HasColimitsOfShape I A := inferInstance
+  letI : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
+  exact colimit.cocone _
 
 set_option backward.isDefEq.respectTransparency false in
 -- The proof compares explicit composed cocones in internal module categories.
-set_option profiler true in
 set_option synthInstance.maxSize 4096 in
 /-- The canonical pushforward continuity comparison is invertible after evaluation
 at one affine weakly contractible target object.
@@ -175,8 +176,7 @@ theorem condensed_qcqs_pushforward_local_comparison
           DerivedCategory.homologyFunctor _ q).mapCocone
           ((Cocone.precompose (Functor.whiskerLeft D
             ((ComplexShape.embeddingUpIntGE a).πTruncGENatTrans _))).obj
-              (colimit.cocone
-                (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor _)))))).hom.app
+              (condensedTruncatedColimitCocone Λ X D a)))).hom.app
                   (op V)) := by
   let A := Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
     (condensedRingObj Λ X)
