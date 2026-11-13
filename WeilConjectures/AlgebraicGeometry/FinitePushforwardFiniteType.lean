@@ -30,6 +30,7 @@ set_option maxHeartbeats 600000 in
 -- Transport of generators through iterated slice sites needs more elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
+set_option profiler true in
 /-- A finite direct image preserves quasi-coherent modules of finite type on arbitrary
 schemes. Source: Stacks Project, Tag 01Y6, finite morphism case, and Tag 01LC.
 (blueprint: lem-pc-f3-finite-pushforward-finite-type)
