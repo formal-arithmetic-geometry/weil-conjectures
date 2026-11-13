@@ -57,13 +57,15 @@ private theorem reduction_tensorComparison_transport
     {T T' : C × C ⥤ C} {S S' : D × D ⥤ D} (F : C ⥤ D)
     (e : T ≅ T') (f : S ≅ S') (mu : T ⋙ F ≅ F.prod F ⋙ S)
     {A X Z : C} {P Q : D} (r : A ⟶ T.obj (X, Z))
+    {r' : A ⟶ T'.obj (X, Z)} (hr : r' = r ≫ e.hom.app (X, Z))
     (x : F.obj X ⟶ P) (y : F.obj Z ⟶ Q) :
-    F.map (r ≫ e.hom.app (X, Z)) ≫
+    F.map r' ≫
         (Functor.isoWhiskerRight e.symm F ≪≫ mu ≪≫
           Functor.isoWhiskerLeft (F.prod F) f).hom.app (X, Z) ≫
         S'.map (Prod.mkHom x y) =
       (F.map r ≫ mu.hom.app (X, Z) ≫ S.map (Prod.mkHom x y)) ≫
         f.hom.app (P, Q) := by
+  rw [hr]
   dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.prod_obj]
@@ -385,11 +387,7 @@ private theorem nativeReductionMonoidal
       change (TR.iso J R AR P Q hP hQ) = _ at hTR'
       change (TS.iso J S AS _ _ hEP hEQ) = _ at hTS'
       change _ = (RingedDerivedNative.tensorIso J R P Q (Or.inl hP)).hom at hrepR
-      have hcr : (TR.iso J R AR P Q hP hQ).hom =
-          a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫
-            e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) := by
-        rw [hTR']
-        exact hrepR.symm
+      have hcr := (congrArg Iso.hom hTR').trans hrepR.symm
       have heps (A : CochainComplex (scalarReductionSource l E Y) ℤ)
           (hA : A.IsKFlatIndependentCoefficients) :
           D'.ε.app A = reductionCounit l E Y D hl n A :=
@@ -400,29 +398,23 @@ private theorem nativeReductionMonoidal
       trace "PH805: counits rewritten"
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
-      let cS := (TS.iso J S AS _ _ hEP hEQ).hom
       trace "PH805: target comparison"
-      have hcs : cS = m.target.representative.hom.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫
-          f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
-        dsimp only [cS]
-        rw [hTS']
-        exact hrepS.symm
+      have hcs := (congrArg Iso.hom hTS').trans hrepS.symm
       trace "PH805: target comparison proved"
       have hcan := reduction_map_inverse_cancel hbκ DerivedCategory.Q
       trace "PH805: cancellation proved"
       have hr := m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩)
       trace "PH805: transport square"
       dsimp only [D', finiteCochainModel, reductionExtension_eq_scalarExtension,
-        cS, J, R, S, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
+        J, R, S, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
         ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj] at hnorm hcan hcs hr
       have hn := by
         with_unfolding_all
           exact reduction_normalized_comparison hcs hnorm hcan hr
       trace "PH805: normalization transported"
-      rw [hcr]
       with_unfolding_all
         exact (reduction_tensorComparison_transport F e f m.mu
-          (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) εP εQ).trans hn)
+          (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) hcr εP εQ).trans hn)
   trace "PH805: resulting tensorator"
   refine ⟨core, ?_⟩
   intro X Z
