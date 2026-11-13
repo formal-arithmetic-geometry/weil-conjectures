@@ -510,29 +510,50 @@ theorem tensorPresentation_transition
         ((CP.X p).val.presheaf.map (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0)
         ((CQ.X p').val.presheaf.map (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0))) _
       ?_ ?_ ?_
-    · have hs := hsm p p' k hpq V x y
-      beta_reduce at hs
-      erw [trans_symm_inv_section, hs, mapIso_prod_inv_generator, ← hx0, ← hy0,
-        ← hevTm p p' k hpq V x0 y0, iso_hom_inv_section]
-    · rw [hτ, generator_presheaf_restrict]
+    · refine (congrArg ((evTm.inv.f k).val.app V) ?_).trans
+        (iso_hom_inv_section evTm k V _)
+      refine (congrArg
+        ((((coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm)).inv.f k).val.app V)
+        (hsm p p' k hpq V x y)).trans ?_
+      refine (mapIso_prod_inv_generator κPm κQm p p' k hpq V _ _).trans ?_
+      exact (congrArg₂ (coefficientTensorGenerator.{r, c, v} J Bm
+        ((evm.mapHomologicalComplex (.up ℤ)).obj CP)
+        ((evm.mapHomologicalComplex (.up ℤ)).obj CQ) p p' k hpq V)
+        hx0.symm hy0.symm).trans (hevTm p p' k hpq V x0 y0).symm
+    · exact (hτ _ V _).trans (congrArg (σn _ V)
+        (generator_presheaf_restrict R CP CQ p p' k hpq
+          (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0 y0))
     · have hxn : (κPn.hom.f p).val.app V (σn (CP.X p) V ((CP.X p).val.presheaf.map
           (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0)) =
           coefficientRestrictionSection pn (En.obj (P.X p)) V
             ((an.unit.app (P.X p)).val.app V x) := by
-        erw [← hτ (CP.X p) V x0, ← restrict_map_section, ← comp_section, hP p, comp_section, hx0,
-          iso_inv_hom_section]
-        exact hq (P.X p) V x
+        have hcomp := congrArg (fun f ↦ coefficientRestrictionSection q _ V
+          (f.val.app V (σm (CP.X p) V x0))) (hP p)
+        have hx := (congrArg ((κPm.hom.f p).val.app V) hx0).trans
+          (iso_inv_hom_section κPm p V _)
+        exact (congrArg ((κPn.hom.f p).val.app V) (hτ (CP.X p) V x0).symm).trans
+          (hcomp.trans ((congrArg (fun z ↦ coefficientRestrictionSection q _ V
+            ((quot.app (P.X p)).val.app V z)) hx).trans (hq (P.X p) V x)))
       have hyn : (κQn.hom.f p').val.app V (σn (CQ.X p') V ((CQ.X p').val.presheaf.map
           (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0)) =
           coefficientRestrictionSection pn (En.obj (Q.X p')) V
             ((an.unit.app (Q.X p')).val.app V y) := by
-        erw [← hτ (CQ.X p') V y0, ← restrict_map_section, ← comp_section, hQ p', comp_section,
-          hy0, iso_inv_hom_section]
-        exact hq (Q.X p') V y
-      have hs' := hsn p p' k hpq V x y
-      beta_reduce at hs'
-      erw [trans_symm_hom_section, hevTn, mapIso_prod_hom_generator, hxn, hyn, ← hs',
-        iso_hom_inv_section]
+        have hcomp := congrArg (fun f ↦ coefficientRestrictionSection q _ V
+          (f.val.app V (σm (CQ.X p') V y0))) (hQ p')
+        have hy := (congrArg ((κQm.hom.f p').val.app V) hy0).trans
+          (iso_inv_hom_section κQm p' V _)
+        exact (congrArg ((κQn.hom.f p').val.app V) (hτ (CQ.X p') V y0).symm).trans
+          (hcomp.trans ((congrArg (fun z ↦ coefficientRestrictionSection q _ V
+            ((quot.app (Q.X p')).val.app V z)) hy).trans (hq (Q.X p') V y)))
+      refine (congrArg ((sn.inv.f k).val.app V) ?_).trans (iso_hom_inv_section sn k V _)
+      refine (congrArg
+        ((((coefficientTotalTensor.{r, c, v} J Bn).mapIso (κPn.prod κQn)).hom.f k).val.app V)
+        (hevTn p p' k hpq V _ _)).trans ?_
+      refine (mapIso_prod_hom_generator κPn κQn p p' k hpq V _ _).trans ?_
+      exact (congrArg₂ (coefficientTensorGenerator.{r, c, v} J Bn
+        ((En.mapHomologicalComplex (.up ℤ)).obj P)
+        ((En.mapHomologicalComplex (.up ℤ)).obj Q) p p' k hpq V)
+        hxn hyn).trans (hsn p p' k hpq V x y).symm
   refine (Iso.inv_comp_eq _).1 ?_
   apply HomologicalComplex.Hom.ext
   funext k
