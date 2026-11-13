@@ -51,6 +51,13 @@ private theorem section_cast_cancel {A B : AddCommGrpCat.{u + 1}} (h : A = B) (x
   subst h
   rfl
 
+private theorem strict_pullback_evaluation_section (Y : Scheme.{u})
+    (M : coefficientSequenceModules l E Y) (n : ℕ) (U : Y.ProEtᵒᵖ)
+    (x : ((coefficientSequenceEvaluation l E Y n).obj M).val.obj U) :
+    coefficientEvaluationSection l E Y M n U
+      (integralComparisonSequenceSection l E Y M n U x) = x := by
+  exact section_cast_cancel _ _
+
 set_option profiler true in
 -- The strict square contains several nested sheaf scalar-change functors.
 /-- The strict scalar/pullback quotient square on every level and transition.
@@ -140,7 +147,6 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
   intro i
   dsimp only [NatTrans.comp_app, HomologicalComplex.comp_f,
     Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  run_tac do Lean.logInfo m!"before extensionality: {← IO.monoMsNow}"
   with_unfolding_all
     apply scalar_pullback_hom_ext l E L ι f n.unop n.unop
       (scalarFiniteRingMap l E L ι X n.unop) (scalarProjectionRingSquare l E L ι X n.unop)
@@ -148,49 +154,39 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((integralOperationsLevelPullback l L f n.unop).obj
         ((unrestrictedIntegralReductionFunctor l L Y n.unop).obj
           ((integralOrdinaryScalar l E L ι Y).obj (P.obj.X i))))
-  run_tac do Lean.logInfo m!"after extensionality: {← IO.monoMsNow}"
   intro U x
-  run_tac do Lean.logInfo m!"before z: {← IO.monoMsNow}"
   let z := integralComparisonSequenceSection l E Y (C.X i) n.unop (op U)
     (((κ n.unop).inv.f i).val.app (op U)
       (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))
-  run_tac do Lean.logInfo m!"before w: {← IO.monoMsNow}"
   let w := integralComparisonRestrictedSection l E X
     ((integralComparisonSequencePullback l E f).obj (C.X i)) n.unop
     (op ((Scheme.proEtaleBaseChange f).obj U))
     (integralComparisonSequenceGenerator l E f (C.X i) n.unop U z)
-  run_tac do Lean.logInfo m!"before hz: {← IO.monoMsNow}"
   have hz : ((κ n.unop).hom.f i).val.app (op U)
       (coefficientEvaluationSection l E Y (C.X i) n.unop (op U) z) =
       unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x := by
     have hc : coefficientEvaluationSection l E Y (C.X i) n.unop (op U) z =
         (((κ n.unop).inv.f i).val.app (op U)
           (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x)) :=
-      section_cast_cancel (coefficientSequenceEvaluationAb_eq l E Y (C.X i) n.unop (op U)) _
-    run_tac do Lean.logInfo m!"after hc: {← IO.monoMsNow}"
+      strict_pullback_evaluation_section l E Y (C.X i) n.unop (op U) _
     rw [hc]
-    run_tac do Lean.logInfo m!"after rw hc: {← IO.monoMsNow}"
     exact congrArg (fun g ↦ (g.f i).val.app (op U)
       (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))
         (κ n.unop).inv_hom_id
-  run_tac do Lean.logInfo m!"after hz: {← IO.monoMsNow}"
   have hqEw : ((qE.hom.app n).f i).val.app _ w =
       integralOperationsPullbackGenerator l E f n.unop _ U
         (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x) :=
     (hqE n.unop i U z).trans
       (congrArg (integralOperationsPullbackGenerator l E f n.unop _ U) hz)
-  run_tac do Lean.logInfo m!"after hqEw: {← IO.monoMsNow}"
   have hqEinv : ((qE.inv.app n).f i).val.app _
       (integralOperationsPullbackGenerator l E f n.unop _ U
         (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x)) = w := by
     have hi := congrArg (fun g ↦ ((g.app n).f i).val.app _ w) qE.hom_inv_id
     have hj := congrArg (fun y ↦ ((qE.inv.app n).f i).val.app _ y) hqEw.symm
     with_unfolding_all exact hj.trans hi
-  run_tac do Lean.logInfo m!"after hqEinv: {← IO.monoMsNow}"
   have hlevel := (scalarPullbackTower_existsUnique l E L ι f).exists.choose_spec P.obj n.unop
   have hnorm := (scalarPullbackLevel_existsUnique l E L ι f n.unop).exists.choose_spec
     P.obj i U x
-  run_tac do Lean.logInfo m!"after normalization: {← IO.monoMsNow}"
   with_unfolding_all
     change ((q.hom.app n).f i).val.app _
       (((τ.app n).f i).val.app _
