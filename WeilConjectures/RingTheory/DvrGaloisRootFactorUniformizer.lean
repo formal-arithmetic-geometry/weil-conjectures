@@ -41,7 +41,6 @@ private theorem maximalIdeal_eq_span_of_unramified
   rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := R), ht,
     Ideal.map_span, Set.image_singleton]
 
-set_option trace.profiler true in
 /-- The root generates the maximal ideal of an integral-closure local factor.
 
 Source: Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
@@ -106,6 +105,7 @@ theorem dvr_galois_root_factor_uniformizer
   let := hQ
   have hroot :=
     AlgebraicGeometry.Scheme.dvr_uniformizer_root_algebra B pi hpi n hnpos
+  -- Project the instances without dependent elimination over the tensor/localization goal.
   have hdomA := hroot.choose
   have hdvrA := hroot.choose_spec.choose
   have hmaxA := hroot.choose_spec.choose_spec

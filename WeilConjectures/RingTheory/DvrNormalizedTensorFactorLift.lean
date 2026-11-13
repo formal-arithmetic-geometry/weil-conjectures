@@ -62,7 +62,6 @@ private theorem tensor_quotient_lift_surjective
     obtain ⟨y', hy'⟩ := hy
     exact ⟨x' + y', by rw [map_add, hx', hy', map_add]⟩
 
-set_option trace.profiler true in
 private theorem tensor_factor_baseChange_embedding
     {B A A₁ E F : Type u}
     [CommRing B] [CommRing A] [IsDomain A] [CommRing A₁] [IsDomain A₁]
@@ -162,7 +161,6 @@ private theorem tensor_factor_baseChange_embedding
 
 -- Preserve the existing, internally unused `hQ` binder in the public statement.
 set_option linter.unusedVariables false in
-set_option trace.profiler true in
 /-- A closed prime of a normalized tensor factor lifts after finite DVR base change.
 
 Source: Stacks Project, Tag 09EM (remark-setup), Tag 032L and lying over.
