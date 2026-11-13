@@ -140,6 +140,7 @@ private theorem evaluated_counit_adjunct (W : Scheme.{u})
   rw [← hn, Category.assoc, Adjunction.homEquiv_naturality_left,
     T.counit_projection]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- reason for change: the derived-category transport and Roos projection assembly
 -- requires more heartbeats while remaining below the delivery time limit.
