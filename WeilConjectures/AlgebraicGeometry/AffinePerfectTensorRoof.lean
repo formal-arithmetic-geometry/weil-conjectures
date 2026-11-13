@@ -32,7 +32,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
@@ -76,8 +77,7 @@ private theorem affinePerfectTensorRoof_aux
         ∃ (γ : B ⟶ E'.obj) (bU : R.obj B ≅ R.obj A),
           bU.hom = R.map β ∧ α = bU.inv ≫ R.map γ := by
   classical
-  let := SheafOfModules.monoidalCategory X.sheaf
-  let := (SheafOfModules.tensorClosed X.sheaf).1.some
+  intro monoidal monoidalPreadditive
   let H := (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf).obj (Opposite.op A, E'.obj)
   have hH : schemeDerivedQCohProperty X H :=
