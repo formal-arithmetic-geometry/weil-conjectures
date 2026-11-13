@@ -96,6 +96,82 @@ private lemma terminalEvaluation_map_eq_res {C : Type*} [Category C]
   rw [he]
   exact Sheaf.ΓRes_map F f.op
 
+-- Evaluate pullback on sections at the identity objects, independently of the
+-- comparison between two iterated pullbacks.
+private theorem globalSectionsUpperStarMap_identity_evaluation
+    {T Y : Scheme.{u}} (f : T ⟶ Y)
+    (FV : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (theta : Scheme.Etale.mk (𝟙 T) ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk (𝟙 Y))) :
+    globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f FV ≫
+      (Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology AddCommGrpCat.{u + 1}
+        (MorphismProperty.Over.mkIdTerminal (P := @Etale) T)).hom.app
+          ((upperStar AddCommGrpCat.{u + 1} f).obj FV) =
+    (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}
+      (MorphismProperty.Over.mkIdTerminal (P := @Etale) Y)).hom.app FV ≫
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app FV).hom.app
+          (op (Scheme.Etale.mk (𝟙 Y))) ≫
+            ((upperStar AddCommGrpCat.{u + 1} f).obj FV).obj.map theta.op := by
+  let A := AddCommGrpCat.{u + 1}
+  let wU : T.Etale := Scheme.Etale.mk (𝟙 T)
+  let wV : Y.Etale := Scheme.Etale.mk (𝟙 Y)
+  let K := (upperStar A f).obj FV
+  let tU := Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology A
+    (MorphismProperty.Over.mkIdTerminal (P := @Etale) T)
+  let tV := Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology A
+    (MorphismProperty.Over.mkIdTerminal (P := @Etale) Y)
+  change globalSectionsUpperStarMap A f FV ≫ tU.hom.app K =
+    tV.hom.app FV ≫ ((upperStarLowerStarAdjunction A f).unit.app FV).hom.app (op wV) ≫
+      K.obj.map theta.op
+  let a : wV ⟶ ⊤_ Y.Etale := terminal.from _
+  let c : wU ⟶ ⊤_ T.Etale := terminal.from _
+  have hEvalU : tU.hom.app K = K.ΓRes (op wU) := by
+    have h := terminalEvaluation_map_eq_res _ _
+      (MorphismProperty.Over.mkIdTerminal (P := @Etale) T) K (𝟙 wU)
+    rw [op_id] at h
+    erw [K.obj.map_id, Category.comp_id] at h
+    exact h
+  have hEvalV : tV.hom.app FV = FV.ΓRes (op wV) := by
+    have h := terminalEvaluation_map_eq_res _ _
+      (MorphismProperty.Over.mkIdTerminal (P := @Etale) Y) FV (𝟙 wV)
+    rw [op_id] at h
+    erw [FV.obj.map_id, Category.comp_id] at h
+    exact h
+  have hEvalTerm : (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app K =
+      K.ΓRes (op (⊤_ T.Etale)) := by
+    simpa using terminalEvaluation_map_eq_res _ _ terminalIsTerminal K
+      (𝟙 (⊤_ T.Etale))
+  have hEvalTermV : (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app FV =
+      FV.ΓRes (op (⊤_ Y.Etale)) := by
+    simpa using terminalEvaluation_map_eq_res _ _ terminalIsTerminal FV
+      (𝟙 (⊤_ Y.Etale))
+  have hG : (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app K ≫
+      K.ΓRes (op wU) = K.obj.map c.op := by
+    erw [← Sheaf.ΓRes_map K c.op, ← hEvalTerm]
+    simp only [Iso.inv_hom_id_app_assoc]
+  have hterm : c ≫ (PreservesTerminal.iso f.Etale).inv =
+      theta ≫ (MorphismProperty.Over.pullback @Etale ⊤ f).map a := by
+    exact (terminalIsTerminal.isTerminalObj f.Etale).hom_ext _ _
+  simp only [globalSectionsUpperStarMap, hEvalU, hEvalV, Category.assoc]
+  erw [hEvalTermV]
+  change FV.ΓRes (op (⊤_ Y.Etale)) ≫
+    ((upperStarLowerStarAdjunction A f).unit.app FV).hom.app _ ≫
+    K.obj.map (PreservesTerminal.iso f.Etale).inv.op ≫
+    (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app K ≫
+    K.ΓRes (op wU) = _
+  erw [hG]
+  have hmaps : K.obj.map (PreservesTerminal.iso f.Etale).inv.op ≫ K.obj.map c.op =
+      K.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map a).op ≫
+        K.obj.map theta.op := by
+    rw [← Functor.map_comp, ← op_comp, hterm, op_comp, Functor.map_comp]
+  erw [hmaps]
+  have hn := ((upperStarLowerStarAdjunction A f).unit.app FV).hom.naturality a.op
+  change FV.obj.map a.op ≫ _ = _ ≫
+    K.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map a).op at hn
+  erw [← reassoc_of% hn]
+  erw [← Sheaf.ΓRes_map FV a.op]
+  rfl
+
 set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -221,57 +297,7 @@ theorem objectSections_naturality {X : Scheme.{v}} {U V : X.Etale}
     ((lowerStar A b.left).obj K).obj.map delta.op ≫ K.obj.map theta.op at hc
   erw [← ((upperStarLowerStarAdjunction A b.left).unit.app FV).hom.naturality_assoc,
     reassoc_of% hδ', reassoc_of% hγ'] at hc
-  have ht : globalSectionsUpperStarMap A b.left FV ≫ tU.hom.app K =
-      tV.hom.app FV ≫ ((upperStarLowerStarAdjunction A b.left).unit.app FV).hom.app (op wV) ≫
-        K.obj.map theta.op := by
-    let a : wV ⟶ ⊤_ V.left.Etale := terminal.from _
-    let c : wU ⟶ ⊤_ U.left.Etale := terminal.from _
-    have hEvalU : tU.hom.app K = K.ΓRes (op wU) := by
-      have h := terminalEvaluation_map_eq_res _ _
-        (MorphismProperty.Over.mkIdTerminal (P := @Etale) U.left) K (𝟙 wU)
-      rw [op_id] at h
-      erw [K.obj.map_id, Category.comp_id] at h
-      exact h
-    have hEvalV : tV.hom.app FV = FV.ΓRes (op wV) := by
-      have h := terminalEvaluation_map_eq_res _ _
-        (MorphismProperty.Over.mkIdTerminal (P := @Etale) V.left) FV (𝟙 wV)
-      rw [op_id] at h
-      erw [FV.obj.map_id, Category.comp_id] at h
-      exact h
-    have hEvalTerm : (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app K =
-        K.ΓRes (op (⊤_ U.left.Etale)) := by
-      simpa using terminalEvaluation_map_eq_res _ _ terminalIsTerminal K
-        (𝟙 (⊤_ U.left.Etale))
-    have hEvalTermV : (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app FV =
-        FV.ΓRes (op (⊤_ V.left.Etale)) := by
-      simpa using terminalEvaluation_map_eq_res _ _ terminalIsTerminal FV
-        (𝟙 (⊤_ V.left.Etale))
-    have hG : (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app K ≫
-        K.ΓRes (op wU) = K.obj.map c.op := by
-      erw [← Sheaf.ΓRes_map K c.op, ← hEvalTerm]
-      simp only [Iso.inv_hom_id_app_assoc]
-    have hterm : c ≫ (PreservesTerminal.iso b.left.Etale).inv =
-        theta ≫ (MorphismProperty.Over.pullback @Etale ⊤ b.left).map a := by
-      exact (terminalIsTerminal.isTerminalObj b.left.Etale).hom_ext _ _
-    simp only [globalSectionsUpperStarMap, hEvalU, hEvalV, Category.assoc]
-    erw [hEvalTermV]
-    change FV.ΓRes (op (⊤_ V.left.Etale)) ≫
-      ((upperStarLowerStarAdjunction A b.left).unit.app FV).hom.app _ ≫
-      K.obj.map (PreservesTerminal.iso b.left.Etale).inv.op ≫
-      (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app K ≫
-      K.ΓRes (op wU) = _
-    erw [hG]
-    have hmaps : K.obj.map (PreservesTerminal.iso b.left.Etale).inv.op ≫ K.obj.map c.op =
-        K.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ b.left).map a).op ≫
-          K.obj.map theta.op := by
-      rw [← Functor.map_comp, ← op_comp, hterm, op_comp, Functor.map_comp]
-    erw [hmaps]
-    have hn := ((upperStarLowerStarAdjunction A b.left).unit.app FV).hom.naturality a.op
-    change FV.obj.map a.op ≫ _ = _ ≫
-      K.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ b.left).map a).op at hn
-    erw [← reassoc_of% hn]
-    erw [← Sheaf.ΓRes_map FV a.op]
-    rfl
+  have ht := globalSectionsUpperStarMap_identity_evaluation b.left FV theta
   let c := (upperStarComp A b.left V.hom U.hom b.w.symm).hom.app F
   have hn := tU.inv.naturality c
   change c.hom.app (op wU) ≫ tU.inv.app K =
