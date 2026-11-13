@@ -318,7 +318,6 @@ private lemma torsorDescentData_hom {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf
           (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)) ≫
         (unitDescentData V).hom q f₁ f₂ hf₁ hf₂ := rfl
 
-set_option profiler true in
 private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
     {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
     (M : modulesPseudofunctor.obj (.mk (op X)))
@@ -334,7 +333,8 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
         (f₁ := (V i₁).hom) (f₂ := (V i₁).hom) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
   have hc := φ.comm q f₁ f₂ hf₁ hf₂
   rw [torsorDescentData_hom] at hc
-  refine pullHom_twisted_comm (F := modulesPseudofunctor) (O := Modules.unitObj X) (M := M)
+  refine pullHom_twisted_comm (F := modulesPseudofunctor) (S := X) (Y := Y)
+    (V := fun i ↦ (V i).left) (O := Modules.unitObj X) (M := M)
     (fun i ↦ (V i).hom) (i₁ := i₁) (i₂ := i₂) q f₁ f₂ hf₁ hf₂ (φ.hom i₁) (φ.hom i₂)
     (smulMor (Y := Y) ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj
       ((modulesPseudofunctor.map (V i₁).hom.op.toLoc).toFunctor.obj (Modules.unitObj X)))
@@ -365,7 +365,6 @@ private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
 
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
 
-set_option profiler true in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Every `𝔾ₘ`-torsor is the torsor of trivialisations of an invertible module.** The descent
