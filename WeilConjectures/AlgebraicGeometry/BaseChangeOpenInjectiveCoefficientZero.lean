@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeTargetCoefficientNaturality
 
 /-! # Open injective coefficient comparison
 
-Source: Stacks Project, Tag 0F07, closed–open part of the proof.
+## References
+
+* Stacks Project, Tag 0F07
 -/
 
 @[expose] public section

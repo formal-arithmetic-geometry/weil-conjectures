@@ -24,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Injectivity can be tested on extensions into objectwise small sheaves.
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO;
-small affine site construction in Mathlib.AlgebraicGeometry.Sites.AffineEtale. -/
+/-- Injectivity can be tested on extensions into objectwise small sheaves (Stacks, Tag 01DO). -/
 theorem etale_injective_of_small_extensions (X : Scheme.{u})
     (T : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hT : ∀ {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}},

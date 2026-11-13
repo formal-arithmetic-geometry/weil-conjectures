@@ -22,8 +22,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Injective middle term: the Čech local-lift cocycle is the connecting class
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ (proof via the double complex and
-the maps `β` and `α⁻¹`) with Lemma 01EP, and the local-lift paragraph of Lemma 0B8S.
+## References
+
+* Stacks Project, Tags 01EQ, 01EP and 0B8S
 -/
 
 @[expose] public section
@@ -165,15 +166,11 @@ private theorem local_lift_cocycle (X : Scheme.{u})
   rw [hi, ← hf, hfa, hb]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Let `0 → A → I → Q → 0` be a short exact
-sequence `S` of `O_X`-modules on a scheme `X` with `I = S.X₂` injective, `U` an open covering,
-`q` a global section of `Q` and `x i ∈ I(U i)` lifts of `q|_{U i}`. Then the differences
-`x_{i₁}|_{U_{i₀} ∩ U_{i₁}} - x_{i₀}|_{U_{i₀} ∩ U_{i₁}}` are the images of the components of a
-Čech `1`-cocycle `z` with values in `A` (unique, as `A → I` is injective on sections), and the
-canonical comparison map `c_A : Ȟ¹(U, A) → H¹(X, A)` (any `c` with `IsModuleCechComparison`)
-sends the class of `z` to the connecting class `∂(q)` of `S`, where `∂` is
-`RingedSpace.moduleCohomologyBoundary` and `q` is read in `H⁰(X, Q)` through
-`toRightDerivedZero` (Stacks, Cohomology of Sheaves, Lemmas 01EQ, 01EP, 0B8S). -/
+/-- For a short exact sequence `0 → A → I → Q → 0` of `O_X`-modules with `I` injective, an
+open covering `U`, a global section `q` of `Q` and local lifts `x i ∈ I(U i)` of `q|_{U i}`,
+the differences of the lifts form a Čech `1`-cocycle `z` with values in `A`, and the Čech
+comparison map sends the class of `z` to the connecting class `∂(q)`
+(Stacks, Tags 01EQ, 01EP and 0B8S). -/
 theorem boundary_cech_injective_middle (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

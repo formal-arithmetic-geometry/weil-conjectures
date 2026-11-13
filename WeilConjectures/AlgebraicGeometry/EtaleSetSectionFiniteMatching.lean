@@ -19,8 +19,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction, using
-section eventual equality on qcqs objects. -/
+/-- Finitely many sections that match on overlaps in the limit match at some stage (Stacks, Tags
+03Q4 and 09YQ). -/
 theorem etaleSetSection_finite_matching
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

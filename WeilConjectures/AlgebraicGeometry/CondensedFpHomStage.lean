@@ -11,8 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
 
 /-!
 # Filtered Hom factorization for finitely presented internal module sheaves
-
-Source: the finite-presentation Hom argument in archived `TwoColimit.lean`.
 -/
 
 @[expose] public section
@@ -97,10 +95,7 @@ private lemma free_hom_eventual_eq (n : ℕ) {i : I}
   simpa only [Category.assoc] using congrArg (· ≫ D.map (v k)) (ht k)
 
 /-- A map from a globally finitely presented internal module on a qcqs scheme
-factors through a stage of every filtered colimit of internal modules.
-
-Source: the Hom finite-presentation argument in the archived `TwoColimit.lean`;
-qcqs section continuity is `proetale_qcqs_fp_section_calculus`. -/
+factors through a stage of every filtered colimit of internal modules. -/
 theorem condensed_fp_hom_stage (P : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
     (hP : Mod.IsFinitelyPresented R P) (a : P ⟶ c.pt) :
     ∃ (i : I) (b : P ⟶ D.obj i), b ≫ c.ι.app i = a := by

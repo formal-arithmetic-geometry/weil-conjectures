@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtalePullbackArrowComparison
 /-!
 # Eventual lifting of arrows between affine étale models
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -25,7 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Limits 01ZM(2), and Étale Cohomology 0EYL. -/
+/-- Finitely many arrows between affine étale objects over the limit descend to a finite stage
+of a qcqs inverse system (Stacks, Tags 01ZM and 0EYL). -/
 theorem affineEtale_model_arrows
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

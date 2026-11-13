@@ -20,8 +20,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A scalar telescope of an object on which the scalar is invertible has an
-invertible zeroth colimit leg.
-Source: universal property of the localization telescope. -/
+invertible zeroth colimit leg. -/
 theorem integralLocalization_zero_isIso (ℓ : ℕ)
     {C : Type*} [Category C] [Preadditive C] (K : C) [IsIso (ℓ • 𝟙 K)]
     (c : Cocone (Mod.smulSequence K ℓ)) (hc : IsColimit c)
@@ -47,8 +46,7 @@ theorem integralLocalization_zero_isIso (ℓ : ℕ)
         exact Category.id_comp _) n
 
 /-- Restriction followed by extension of integral coefficients has counit an
-isomorphism on every rational module.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization at ℓ. -/
+isomorphism on every rational module (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralScalarCounit_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

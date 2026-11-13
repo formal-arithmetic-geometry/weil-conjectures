@@ -23,10 +23,7 @@ namespace AlgebraicGeometry
 
 set_option maxHeartbeats 500000 in
 -- Both transported mate laws unfold the pinned sheaf adjunctions in this calculation.
-/-- Tensor composition mates satisfy both unit laws on the homotopy category.
-Source: Mathlib.CategoryTheory.Adjunction.CompositionIso,
-`Adjunction.leftAdjointCompIso_comp_id` and `Adjunction.leftAdjointCompIso_id_comp`;
-Stacks Project, Cohomology, Tag 0D5S, Lemma 20.27.2. -/
+/-- Tensor composition mates satisfy both unit laws on the homotopy category (Stacks, Tag 0D5S). -/
 private theorem tensorPullback_homotopy_unit
     (a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive)
     {X Y : Scheme.{u₁}} (f : X ⟶ Y)
@@ -166,11 +163,8 @@ private theorem tensorPullback_homotopy_unit
     rfl
 
 
-/-- The two unit comparisons agree on a K-flat representative, for identity
-isomorphisms normalized by the tensor identity mate.
-Source: Stacks Project, Cohomology, Tag 0D5S, Lemma 20.27.2;
-Mathlib `Adjunction.leftAdjointCompIso_comp_id` and
-`Adjunction.leftAdjointCompIso_id_comp`. -/
+/-- The two unit comparisons agree on a K-flat representative, for identity isomorphisms
+normalized by the tensor identity mate (Stacks, Tag 0D5S). -/
 theorem derivedPullbackComposition_unit_kflat
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

@@ -27,8 +27,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV and its preceding
-quadruple/sextuple descriptions; uniqueness of adjoints as in Example 00X2. -/
+/-- If the étale inverse image `f⁻¹` preserves finite limits, it lifts to abelian sheaves, as a
+left adjoint to the pushforward compatible with the forgetful functors (Stacks, Tags 00YV and
+00X2). -/
 theorem etaleInverseImageAbelianLift (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

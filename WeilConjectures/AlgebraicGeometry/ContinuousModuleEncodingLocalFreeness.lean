@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Sites.CoversTop.Basic
 
 /-! # Local freeness under continuous module encodings
 
-Source: Stacks Project, Modules on Sites, Tags 03DM and 03DO.
+## References
+
+* Stacks Project, Tags 03DM and 03DO
 -/
 
 @[expose] public section
@@ -25,9 +27,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The continuous module encoding preserves and reflects local finite freeness.
-Source: Stacks Project, Modules on Sites, Tags 03DM and 03DO;
-Bhatt--Scholze, Section 6.8. -/
+/-- The continuous module encoding preserves and reflects local finite freeness (Stacks, Tags
+03DM and 03DO; Bhatt–Scholze, Section 6.8). -/
 theorem continuousRing_locallyFree_iff
     (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]
@@ -115,11 +116,7 @@ theorem continuousRing_locallyFree_iff
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Local finite freeness transports to the normalized rational encoding.
-Source: Stacks Project, Tag 03DM.
-
-Apply the continuous-ring criterion, then restrict along the coefficient
-isomorphism supplied by lisseFieldSheaf_eq. -/
+/-- Local finite freeness transports to the normalized rational encoding (Stacks, Tag 03DM). -/
 theorem continuousField_locallyFree
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
@@ -142,12 +139,7 @@ theorem continuousField_locallyFree
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
         (eqToIso (lisseFieldSheaf_eq ℓ E X))) _
 
-/-- A finite locally free integral module has locally free inverse encoding.
-Source: Stacks Project, Tag 03DM.
-
-First transport the given module along the inverse integral coefficient
-isomorphism. Apply the counit of the continuous-ring encoding, then the reverse
-direction of continuousRing_locallyFree_iff. -/
+/-- A finite locally free integral module has locally free inverse encoding (Stacks, Tag 03DM). -/
 theorem continuousInteger_inverse_locallyFree
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

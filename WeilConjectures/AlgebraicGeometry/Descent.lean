@@ -377,23 +377,12 @@ theorem exists_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme
 end Scheme.IdealSheafData
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- **Fpqc descent for finite locally free closed subschemes.** Let `f : X ⟶ T` be a morphism
-of schemes, let `{g i : T i ⟶ T}` be an fpqc covering and let `p i : X i ⟶ X`,
-`q i : X i ⟶ T i` exhibit `X i` as the base change `X ×_T T i`:
-
-```
-   X' i ──── p i ────▶ X
-     │                 │
-   q i                 f
-     │                 │
-     ▼                 ▼
-   T' i ──── g i ────▶ T
-```
-
-Given closed subschemes `Z i ⊆ X i`, described by ideal sheaves `I i`, which are finite
-locally free of degree `d` over `T i` and whose pullbacks agree over `X i ×_X X j`, there
-is a unique closed subscheme `Z ⊆ X` with `Z ×_T T i = Z i`, and `Z` is finite locally
-free of degree `d` over `T`. -/
+/-- **Fpqc descent for finite locally free closed subschemes.** Let `f : X ⟶ T` be a morphism of
+schemes, `{g i : T i ⟶ T}` an fpqc covering, and `X i = X ×_T T i` the base changes with
+projections `p i : X i ⟶ X`, `q i : X i ⟶ T i`. Given closed subschemes `Z i ⊆ X i`, finite
+locally free of degree `d` over `T i`, whose pullbacks agree over `X i ×_X X j`, there is a
+unique closed subscheme `Z ⊆ X` with `Z ×_T T i = Z i`, and `Z` is finite locally free of degree
+`d` over `T`. -/
 theorem isSheaf_fpqc_finiteLocallyFreeSubscheme (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     {X : Scheme.{u}} (f : X ⟶ T) (d : ℕ)
     {X' : ι → Scheme.{u}} (p : ∀ i, X' i ⟶ X) (q : ∀ i, X' i ⟶ T' i)

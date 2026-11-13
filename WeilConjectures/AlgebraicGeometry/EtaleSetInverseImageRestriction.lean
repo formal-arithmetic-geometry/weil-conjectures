@@ -24,12 +24,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 03S2 and 00XZ.
-Restriction is the existing `Etale.localizationRestriction`: on `V → U` its value is
-`G(V → U → X)`, with the maps of `G`. It is a sheaf and is naturally isomorphic to
-set-valued inverse image. The isomorphism sends a section pulled back by the unit to
-restriction along `W ×_X U → W`. Evaluating at `U → U` gives the asserted isomorphism
-`(j⁻¹G)(U) ≅ G(U)`. -/
+/-- For an étale morphism `j`, the set-valued inverse image `j⁻¹` is naturally isomorphic to
+`Etale.localizationRestriction`, compatibly with the unit; in particular `(j⁻¹G)(U) ≅ G(U)`
+(Stacks, Tags 03S2 and 00XZ). -/
 theorem etaleSetInverseImageRestriction {X U : Scheme.{u}} (j : U ⟶ X) [Etale j] :
     ∃ ρ : Scheme.etaleSetPullback j ≅
       Etale.localizationRestriction (Type (u + 1)) j inferInstance,

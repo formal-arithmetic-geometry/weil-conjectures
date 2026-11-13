@@ -2390,10 +2390,9 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The forward graph map commutes with the specified compact-support exchange at a
-geometric point over an arbitrary scheme. This is equality of unbounded derived
-transformations; neither scheme needs to be Noetherian or quasi-compact.
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6, 07A7, 0E46 and 0E47. -/
+/-- The forward graph map commutes with the specified compact-support exchange at a geometric
+point over an arbitrary scheme. This is an equality of unbounded derived transformations (SGA 4,
+XVII 5.2.2 and 6.2.11; Stacks, Tags 03S6, 07A7, 0E46 and 0E47). -/
 theorem compactSupportGraphDerivedComparison_geometric_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]

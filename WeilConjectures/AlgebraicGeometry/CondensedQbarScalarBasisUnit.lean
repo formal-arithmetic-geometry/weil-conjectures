@@ -32,9 +32,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
-/-- Coherent coefficient sections whose scalar actions decompose the derived extension unit.
-Source: Compatibility.lean, scalar-action calculation, and FiniteSubextension.lean, the
-finite-field-valued section model. -/
+/-- Coherent coefficient sections whose scalar actions decompose the derived extension unit. -/
 theorem exists_condensedQbar_scalar_basis_unit :
     ∃ (I : Type (u + 1))
       (b : ∀ Z : Scheme.{u}, I →

@@ -24,10 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XM.
-There is a unique open in the domain of an étale object on which two sections agree,
-characterized by their restrictions along every scheme morphism. Restriction along
-`a` is the inverse-image adjunction unit followed by restriction along `(a, id)`. -/
+/-- There is a unique open in the domain of an étale object on which two sections agree,
+characterized by their restrictions along every scheme morphism (Stacks, Tag 09XM). -/
 theorem existsUnique_etaleSections_equal_open (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (V : S.Etale) (s t : F.obj.obj (op V)) :

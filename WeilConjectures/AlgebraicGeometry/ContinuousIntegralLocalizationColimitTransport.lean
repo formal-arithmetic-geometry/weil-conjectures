@@ -28,8 +28,8 @@ private noncomputable def sequenceComparison
     simp [F.map_nsmul]
 
 omit [Fact ℓ.Prime] in
-/-- Transport colimits from a strict complex telescope along its localization-unit model.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- Transport colimits from a strict complex telescope along its localization-unit model
+(Bhatt–Scholze, Lemma 6.8.2). -/
 theorem localizationCocone_isColimit_of_model
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
     [HasColimitsOfShape (ULift.{x} ℕ) A]

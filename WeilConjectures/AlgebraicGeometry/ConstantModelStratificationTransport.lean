@@ -39,7 +39,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Forget only constructibility proofs, retaining every partition and immersion field. -/
+/-- Forget the constructibility of the strata of a stratification. -/
 def Stratification.toFiniteLocallyClosed {T : Scheme.{u}} (S : Stratification T) :
     FiniteLocallyClosedStratification T where
   n := S.n
@@ -52,7 +52,7 @@ def Stratification.toFiniteLocallyClosed {T : Scheme.{u}} (S : Stratification T)
   isImmersion := S.isImmersion
   range_immersion := S.range_immersion
 
-/-- Adjoin the separate constructibility proofs without choosing new stratum schemes. -/
+/-- Add constructibility of the strata to a finite locally closed stratification. -/
 def FiniteLocallyClosedStratification.withConstructibleStrata {T : Scheme.{u}}
     (S : FiniteLocallyClosedStratification T)
     (c : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) : Stratification T where

@@ -12,8 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Transposed entries for sheafified dual basis maps
 
-Source: Stacks Project, schemes.tex, Tag 01HV, functoriality of localization;
-Mathlib LinearAlgebra/Dual/Basis.lean, Basis.dualBasis_repr.
+## References
+
+* Stacks Project, Tag 01HV
 -/
 
 @[expose] public section
@@ -150,9 +151,8 @@ private lemma free_component {R : CommRingCat.{u}} {X : Scheme.{u}}
   simp only [Functor.map_comp, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Sheafification and restriction preserve the transposed entries of a dual map.
-Source: Stacks Project, schemes.tex, Tag 01HV(4)-(5) and functoriality;
-Basis.dualBasis_repr in Mathlib.LinearAlgebra.Dual.Basis. -/
+/-- Sheafification and restriction preserve the transposed entries of a dual map
+(Stacks, Tag 01HV). -/
 theorem affineBasisDualMatrix_component {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) {I J : Type u} [Finite I] [Finite J]
     [DecidableEq I] [DecidableEq J]

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ImmersionConstantResidueSquare
 
 /-! # Residue comparisons for the specified completed immersion pullback
 
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R.
+## References
+
+* Stacks Project, Tags 03A0, 03CY, 06YY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -89,8 +91,8 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
   ConstantScalarRestriction.ringGrothendieck ConstantScalarRestriction.fixedGrothendieck
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
-/-- The fixed completed-model residue comparison, isolated from the etale comparison clause.
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8. -/
+/-- The fixed completed-model residue comparison, isolated from the etale comparison clause
+(Stacks, Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_residueComparison_fixed
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

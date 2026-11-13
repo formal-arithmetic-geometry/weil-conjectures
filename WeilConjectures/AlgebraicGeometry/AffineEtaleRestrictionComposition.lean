@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 09YQ, Topologies 04HR;
-Sites 03CB and 03CC. -/
+/-- Compatibility of the affine étale inverse images with composition of affine morphisms
+(Stacks, Tags 09YQ, 04HR, 03CB and 03CC). -/
 theorem affineEtale_inverseImage_restriction_composition
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

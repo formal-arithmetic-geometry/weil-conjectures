@@ -17,8 +17,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Maps of scalar telescopes are determined by the zeroth leg when the target
-has invertible multiplication by the scalar.
-Source: universal property of the localization telescope, Bhatt--Scholze 6.8.2. -/
+has invertible multiplication by the scalar (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralLocalization_coconeLegs (ℓ : ℕ)
     {C : Type u} [Category.{v} C] [Preadditive C]
     {K : C} (c d : Cocone (Mod.smulSequence K ℓ))

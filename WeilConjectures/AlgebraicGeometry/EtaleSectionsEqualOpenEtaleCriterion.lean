@@ -46,8 +46,8 @@ private theorem canonicalSection_eq_iff {S T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XM,
-with Tag 03S2 identifying inverse image along an étale map with restriction. -/
+/-- There is an open `E` such that an étale morphism into `Q` factors through `E` if and only if
+the two sections have equal restrictions along it (Stacks, Tags 09XM and 03S2). -/
 theorem exists_etaleSections_equal_open_etale_criterion
     (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Q : S.Etale) (s t : F.obj.obj (op Q)) :

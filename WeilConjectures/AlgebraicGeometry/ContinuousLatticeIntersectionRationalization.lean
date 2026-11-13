@@ -21,8 +21,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The canonical intersection recovers the original rational module after scalar extension.
-Source: Bhatt--Scholze, Lemma 6.8.13; localization and qcqs pushforward continuity. -/
+/-- The canonical intersection recovers the original rational module after scalar extension
+(Bhatt–Scholze, Lemma 6.8.13). -/
 theorem continuousLatticeIntersectionRationalization_isIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

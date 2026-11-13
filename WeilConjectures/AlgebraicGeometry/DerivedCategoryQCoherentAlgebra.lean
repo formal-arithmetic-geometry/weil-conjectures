@@ -48,9 +48,8 @@ abbrev sheafAlgebraDerivedCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))
 
 /-- A sheaf of `B`-modules is a quasi-coherent `B`-module when its underlying `𝒪_Y`-module
-(restriction of scalars along the structure morphism `𝒪_Y → B`) is quasi-coherent.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2. -/
+(restriction of scalars along the structure morphism `𝒪_Y → B`) is quasi-coherent. (Stacks, Tags
+0BV0 and 0AX2). -/
 def sheafAlgebraModuleIsQuasiCoherent (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (_hB : B.toModule.IsQuasicoherent)
     (M : SheafOfModules.{u}
@@ -61,9 +60,8 @@ def sheafAlgebraModuleIsQuasiCoherent (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
       B.hom)).obj M).IsQuasicoherent
 
 /-- An object `K` of `D(B)` lies in `D⁺_QCoh(B)`: its cohomology sheaves vanish below some
-integer `n`, and every cohomology sheaf is a quasi-coherent `B`-module.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2. -/
+integer `n`, and every cohomology sheaf is a quasi-coherent `B`-module. (Stacks, Tags 0BV0 and
+0AX2). -/
 def sheafAlgebraDerivedQCohProperty (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u}
@@ -81,9 +79,7 @@ def sheafAlgebraDerivedQCohProperty (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
             ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj
               B.right)) m).obj K)
 
-/-- The full subcategory `D⁺_QCoh(B)` of `D(B)`.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2. -/
+/-- The full subcategory `D⁺_QCoh(B)` of `D(B)`. (Stacks, Tags 0BV0 and 0AX2). -/
 abbrev sheafAlgebraDerivedQCohCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u}

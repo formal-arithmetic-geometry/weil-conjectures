@@ -32,7 +32,9 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Constant module adjunction on a slice and the unit identity for mates
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK.
+## References
+
+* Stacks Project, Tags 03CY and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -324,7 +326,7 @@ variable {B D E : Type*} [Category* B] [Category* D] [Category* E]
   {F₀ : B ⥤ D} {R₀ : D ⥤ B} {F₁ : B ⥤ E} {R₁ : E ⥤ B} {C₀ : E ⥤ D}
   (a₀ : F₀ ⊣ R₀) (a₁ : F₁ ⊣ R₁) (θ : F₁ ⋙ C₀ ≅ F₀)
 
-/-- The mate of inverse balancing. Source: adjunction unit/counit identities. -/
+/-- The mate of inverse balancing. -/
 def balancingMate : R₁ ⟶ C₀ ⋙ R₀ where
   app N := a₀.unit.app (R₁.obj N) ≫
     R₀.map (θ.inv.app (R₁.obj N) ≫ C₀.map (a₁.counit.app N))
@@ -338,7 +340,7 @@ def balancingMate : R₁ ⟶ C₀ ⋙ R₀ where
     simp only [Functor.comp_map, ← C₀.map_comp]
     rw [a₁.counit_naturality]
 
-/-- A balancing mate intertwines the units. Source: adjunction unit/counit identities. -/
+/-- A balancing mate intertwines the units. -/
 theorem balancingMate_unit (M : B) :
     a₀.unit.app M = a₁.unit.app M ≫
       (balancingMate a₀ a₁ θ).app (F₁.obj M) ≫ R₀.map (θ.hom.app M) := by

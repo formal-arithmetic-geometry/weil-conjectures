@@ -28,8 +28,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Inclusion of compactly supported sheaf sections into direct image.
-Source: SGA 4 XVII 6.2.11. -/
+/-- Inclusion of compactly supported sheaf sections into direct image (SGA 4, XVII 6.2.11). -/
 noncomputable def compactificationSheafToDirectImage
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} {f : U ⟶ X}
     (c : Compactification f) :
@@ -53,9 +52,8 @@ noncomputable def exactEtaleSumExchange
     Functor.mapDerivedCategoryNatIso (asIso (etaleLowerShriekBaseChangeMap A g f)).symm ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The proper exchange followed by inverse open-extension exchange, using exact derived
-inverse image. The transport from `L(g^*)` is the canonical exact-functor comparison.
-Source: SGA 4 XVII 5.2.2. -/
+/-- The proper exchange followed by inverse open-extension exchange, using exact derived inverse
+image (SGA 4, XVII 5.2.2). -/
 noncomputable def exactCompactSupportExchange
     (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
     {f : U ⟶ X} (c : Compactification f) (g : X' ⟶ X) :
@@ -140,9 +138,8 @@ theorem normalizationHomotopyTransformation_app
     NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp, Category.comp_id]
 
-/-- A termwise sheaf comparison followed by the total-right-derived comparison.
-This is a map on homotopy representatives, with no boundedness condition.
-Source: SGA 4 XVII 6.2.11. -/
+/-- A termwise sheaf comparison followed by the total-right-derived comparison, as a map on
+homotopy representatives with no boundedness condition (SGA 4, XVII 6.2.11). -/
 noncomputable def compactSupportComparisonOnHomotopy
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
     (c : Compactification f)

@@ -49,7 +49,8 @@ private theorem pullback_fiber_small {S T : Scheme.{u}} (f : T ⟶ S)
   let := ulift_fiber_small (pointSmallEtale (s ≫ f)) G
   exact small_of_injective (e.app _).toEquiv.injective
 
-/-- Source: Stacks Project, Étale Cohomology, 03Q1(3), 03PU and 03PT. -/
+/-- The sections of the étale inverse image of a `u`-small sheaf, viewed in the larger universe,
+form a `u`-small type (Stacks, Tags 03Q1, 03PU and 03PT). -/
 theorem etale_setPullback_small {S T : Scheme.{u}} (f : T ⟶ S)
     (G : Sheaf S.smallEtaleTopology (Type u)) (B : T.Etale) :
     Small.{u} ((((etaleSetPullback f).obj

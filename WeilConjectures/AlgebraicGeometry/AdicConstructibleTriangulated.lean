@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # The bounded constructible residue locus is triangulated
 
-Source: Bhatt--Scholze, the residue condition and the observation following Definition 6.5.1.
+## References
+
+* Bhatt--Scholze, Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +32,8 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Bounded constructible etale origin with finite Tor amplitude of the residue.
-Source: Bhatt--Scholze, Definition 6.5.1, condition on the first derived reduction. -/
+/-- Bounded constructible etale origin with finite Tor amplitude of the residue
+(Bhatt--Scholze, Definition 6.5.1). -/
 def SfbConstructibleResidue (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
@@ -119,8 +121,7 @@ private theorem etaleOrigin_triangulated (X : Scheme.{u}) (k : Type (u + 1)) [Fi
   infer_instance
 
 /-- The bounded constructible residue condition is invariant under isomorphisms
-and triangulated. Completeness is a separate vanishing condition.
-Source: Bhatt--Scholze, Definition 6.5.1, observation following the definition. -/
+and triangulated (Bhatt--Scholze, Definition 6.5.1). -/
 theorem adicConstructible_residueTriangulated (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A]
     (I : Ideal A) (hI : I.IsMaximal) :

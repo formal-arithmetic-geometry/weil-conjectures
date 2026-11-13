@@ -88,8 +88,7 @@ theorem cartierEtaleModuleSheafify (A : Type (u + 1)) [CommRing A] (Z : Scheme.{
 theorem cartierProModuleSheafify (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) := inferInstance
 
-/-- Small Ext for the etale coefficient category.
-Source: Grothendieck sheaf categories. -/
+/-- Small Ext for the etale coefficient category. -/
 theorem cartierEtaleAbHasExt (Z : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
 

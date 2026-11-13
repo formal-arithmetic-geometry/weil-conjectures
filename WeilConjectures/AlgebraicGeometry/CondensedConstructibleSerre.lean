@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpLocalTriviality
 /-!
 # Serre closure for constructible condensed field module sheaves
 
-Source: upstream `ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean`, Sorried input;
-Bhatt--Scholze, Section 6.8, Lemma 6.8.7 and Corollary 6.8.9.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.7 and Corollary 6.8.9
 
 The coefficients are pulled back from condensed abelian groups. Algebraic-closure sections
 have image in a single finite intermediate field, as in `Profinite.padicAlgClRingObj`.
@@ -912,9 +913,7 @@ private lemma algcl_lf (ℓ : ℕ) [Fact ℓ.Prime]
   exact free_of_comap (inv φ) h
 
 /-- Kernels, cokernels and extensions of constructible modules over the finite intermediate field
-coefficient sheaf are constructible.
-Source: upstream ProEtaleModule/DerivedCategory.lean, Sorried input; Bhatt--Scholze 6.8.7,
-6.8.9. -/
+coefficient sheaf are constructible (Bhatt--Scholze, 6.8.7 and 6.8.9). -/
 theorem isConstructibleModuleObject_serre_padicSubfield
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
@@ -934,9 +933,7 @@ theorem isConstructibleModuleObject_serre_padicSubfield
     (Profinite.continuousMapRingObj E.val) (finite_lf ℓ E) T
 
 /-- Kernels, cokernels and extensions of constructible modules over the bounded-image
-algebraic-closure coefficient sheaf are constructible.
-Source: upstream ProEtaleModule/DerivedCategory.lean, Sorried input; Bhatt--Scholze 6.8.7,
-6.8.9. -/
+algebraic-closure coefficient sheaf are constructible (Bhatt--Scholze, 6.8.7 and 6.8.9). -/
 theorem isConstructibleModuleObject_serre_padicAlgCl
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})

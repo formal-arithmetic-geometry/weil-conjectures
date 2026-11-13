@@ -102,7 +102,9 @@ private noncomputable def cartesianEtaleIso
     · simp only [Category.assoc, IsPullback.isoPullback_hom_snd,
         Scheme.Hom.etale_map_left_comp_snd, MorphismProperty.Over.w])
 
-/-- Source: Stacks Project, Topologies 04HR and Étale Cohomology 03Q1(2). -/
+/-- A continuous functor between full affine étale sites that is given by base change along
+an affine morphism has a finite-limit-preserving left adjoint on sheaves
+(Stacks, Tags 04HR and 03Q1). -/
 theorem affineEtale_cartesian_sheafAdjunction
     {S T : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]
     (F : S.FullAffineEtale ⥤ T.FullAffineEtale)

@@ -15,8 +15,9 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # The fixed Ext-to-sections comparison on resolution cocycles
 
-Source: Stacks Project, Tags 015E and 06XR; Mathlib's injective-resolution
-Ext comparison and the explicit Hom-complex homology construction.
+## References
+
+* Stacks Project, Tags 015E and 06XR
 -/
 
 @[expose] public section
@@ -63,11 +64,7 @@ theorem acyclic_comparison_of_injective
       ((F.mapHomologicalComplex (.up ℕ)).map φ) p)).inv = _
   rw [Iso.hom_inv_id, Category.comp_id]
 
-/-- A chain map computes a map whenever both computations agree on cycle representatives.
-The homology projection is surjective. Lift the chosen homology element, use
-injectivity of the source comparison to recover its cohomology representative,
-and apply naturality of the homology projection to the chain map.
-Source: Mathlib, HomologicalComplex.homologyπ_naturality. -/
+/-- A chain map computes a map whenever both computations agree on cycle representatives. -/
 theorem homology_transfer_of_cycle_representatives
     {E E' : Type*} (K B : CochainComplex AddCommGrpCat.{u} ℕ) (t : K ⟶ B) (p : ℕ)
     (e : E → K.homology p) (he : Function.Injective e)
@@ -381,8 +378,8 @@ private theorem canonical_derived_functor_iso_cocycle
 attribute [local irreducible] siteSectionsObjIso
 attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
 
-/-- The prescribed site-sections comparison sends an Ext cocycle to its section class.
-Source: Stacks Project, Tag 06XR; Mathlib, InjectiveResolution.extEquivCohomologyClass_extMk. -/
+/-- The prescribed site-sections comparison sends an Ext cocycle to its section class
+(Stacks, Tag 06XR). -/
 theorem canonical_site_sections_cocycle
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]

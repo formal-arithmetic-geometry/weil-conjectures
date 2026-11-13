@@ -40,9 +40,9 @@ private def upperTailEquivalence {I : Type u} [Preorder I] (i₀ : I) :
   counitIso := NatIso.ofComponents
     (fun i ↦ Over.isoMk (Iso.refl i.left))
 
-/-- Source: Stacks Project, Limits, Lemma 01ZN in Situation 081D.
-An affine base change to the inverse limit is affine at some stage above the chosen index.
-The structure morphism of `X₀` is `f₀ ≫ h`, so `f₀` is a morphism over the chosen base. -/
+/-- An affine base change to the inverse limit is affine at some stage above the chosen index;
+here the structure morphism of `X₀` is `f₀ ≫ h`, so `f₀` is a morphism over the chosen base
+(Stacks, Tag 01ZN). -/
 theorem exists_isAffineHom_baseChange_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

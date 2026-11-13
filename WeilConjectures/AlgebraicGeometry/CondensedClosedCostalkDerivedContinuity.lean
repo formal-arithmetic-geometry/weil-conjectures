@@ -189,9 +189,8 @@ private noncomputable def localizationTriangleFunctor
   map_id K := by ext <;> simp [Triangle.mk]
   map_comp k l := by ext <;> simp
 
-/-- Colimits of complexes with a common strict lower bound retain that bound.
-Source: the degreewise colimit construction for homological complexes, used in
-Hemo--Richarz--Scholbach, Lemma 5.3(2). -/
+/-- Colimits of complexes with a common strict lower bound retain that bound
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem colimit_isStrictlyGE
     {C : Type*} [Category* C] [Abelian C]
     {I : Type*} [Category I] [HasColimitsOfShape I C]
@@ -252,9 +251,8 @@ set_option maxHeartbeats 400000 in
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
-/-- Derived closed costalks commute with uniformly bounded-below filtered colimits.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), final paragraph, using (3.4)
-and Lemma 5.3(1). -/
+/-- Derived closed costalks commute with uniformly bounded-below filtered colimits
+(Hemo--Richarz--Scholbach, Lemma 5.3). -/
 theorem condensed_closed_costalk_derived_continuity
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

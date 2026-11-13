@@ -19,7 +19,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Sites 03CB and 03CC. -/
+/-- The base change functors on full affine étale sites compose, compatibly with the
+identifications `t` with étale base change (Stacks, Tags 03CB and 03CC). -/
 theorem affineEtale_restriction_composition_gamma
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

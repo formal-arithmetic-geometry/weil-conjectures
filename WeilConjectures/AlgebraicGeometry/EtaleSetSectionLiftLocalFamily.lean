@@ -23,8 +23,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Étale Cohomology Tag 09YQ, finite affine-cover
-reduction, using Sites Tag 09YN. -/
+/-- A section over an étale object in the limit is locally, on a finite affine cover, the
+pullback of a section from a stage (Stacks, Tags 09YQ and 09YN). -/
 theorem etaleSetSectionLift_local_family
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

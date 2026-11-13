@@ -28,10 +28,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- For a quasi-compact and quasi-separated morphism of schemes, derived direct image
-preserves the full subcategory of complexes with quasi-coherent cohomology.
-Source: literature/stacks-project/perfect.tex, Tag 08D5,
-part (1). -/
+/-- For a quasi-compact and quasi-separated morphism of schemes, derived direct image preserves
+the full subcategory of complexes with quasi-coherent cohomology (Stacks, Tag 08D5). -/
 theorem schemeDerivedDirectImage_preserves_QCoh
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

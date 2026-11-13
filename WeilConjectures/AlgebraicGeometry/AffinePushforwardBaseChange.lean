@@ -26,8 +26,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Affine pushforward and arbitrary base change
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02KG; the algebra and composition
-clauses are the affine-local consequences specified by the DAG node.
+## References
+
+* Stacks Project, Tag 02KG
 -/
 
 @[expose] public section
@@ -156,12 +157,8 @@ theorem affinePushforward_baseChange_affine_formula
   simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
 
 
-/-- For the structure sheaf the base change isomorphism respects multiplication and unit.
-Multiplications are specified on all tensor sections, so they are the canonical sheaf
-multiplications, rather than unspecified algebra structures. The tensor comparison is the
-one of module_pullback_tensor, and epsilon is the landed tensorPullbackObjUnitToUnit
-(the adjoint of the structure ring map); gamma is beta for O_X followed by f'_* of epsilon.
-Source: Lemma 02KG, affine formula for M = B; node clause (2). -/
+/-- For the structure sheaf the base change isomorphism respects multiplication and unit
+(Stacks, Tag 02KG). -/
 theorem affinePushforward_baseChange_algebra {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f] :

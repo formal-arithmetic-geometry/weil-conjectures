@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Concrete maps for relative Mayer--Vietoris base change
 
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9.
+## References
+
+* Stacks Project, Tags 08BV, 08HY and 0DJ9
 -/
 
 @[expose] public section
@@ -56,8 +58,7 @@ of `Adjunction.leftAdjointUniq` (Stacks, Tags 08DW and 079W). -/
     derivedPullback U.ι ≅ (schemeOpenRestriction X U).mapDerivedCategory :=
   (mvDerivedPullbackAdjunction U.ι).leftAdjointUniq (mvOpenRestrictionAdjunction X U)
 
-/-- The open comparison respects the adjunction unit by construction.
-Source: Stacks Project, Tag 079W; Mathlib `Adjunction.unit_leftAdjointUniq_hom_app`. -/
+/-- The open comparison respects the adjunction unit by construction (Stacks, Tag 079W). -/
 private theorem mvOpenPullbackIso_unit (X : Scheme.{u}) (U : X.Opens)
     (K : schemeDerivedCategory X) :
     (mvDerivedPullbackAdjunction U.ι).unit.app K ≫
@@ -67,8 +68,7 @@ private theorem mvOpenPullbackIso_unit (X : Scheme.{u}) (U : X.Opens)
   exact Adjunction.unit_leftAdjointUniq_hom_app
     (mvDerivedPullbackAdjunction U.ι) (mvOpenRestrictionAdjunction X U) K
 
-/-- The same comparison respects the adjunction counit.
-Source: Stacks Project, Tag 079W; Mathlib `Adjunction.leftAdjointUniq_hom_app_counit`. -/
+/-- The same comparison respects the adjunction counit (Stacks, Tag 079W). -/
 private theorem mvOpenPullbackIso_counit (X : Scheme.{u}) (U : X.Opens)
     (K : schemeDerivedCategory U.toScheme) :
     (mvOpenPullbackIso X U).hom.app ((schemeDerivedDirectImage U.ι).obj K) ≫

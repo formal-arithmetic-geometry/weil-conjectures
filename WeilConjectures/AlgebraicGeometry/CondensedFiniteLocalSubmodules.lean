@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedFiniteFamilyHomDescent
 
 /-!
 # Descending compatible local submodules to one finite coefficient field
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph.
 -/
 
 @[expose] public section
@@ -36,9 +34,7 @@ private lemma iso_of_overlap_maps
       Iso.inv_hom_id, Category.comp_id, Category.id_comp]
 
 /-- After a finite enlargement, the adjoints of the local model isomorphisms
-are compatible embeddings into the restriction of the given module.
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph. -/
+are compatible embeddings into the restriction of the given module. -/
 theorem exists_finiteCoefficient_compatible_local_monomorphisms
     (T X : Scheme.{u}) [QuasiSeparatedSpace X]
     (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]

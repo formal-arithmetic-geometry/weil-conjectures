@@ -59,7 +59,8 @@ private noncomputable def negOp (T : Scheme.{u})
         intro x
         exact (map_neg (G.obj.map k).hom (show G.obj.obj W from x)).symm }
 
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV. -/
+/-- Compatibility of the abelian lift of the étale inverse image with the abelian group
+operations (Stacks, Tag 00YV). -/
 theorem etaleInverseImageAbelianLift_operations (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

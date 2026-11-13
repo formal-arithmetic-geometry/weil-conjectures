@@ -120,10 +120,7 @@ attribute [local irreducible] CondensedRing.upperStarComp
   CondensedRing.upperStarLowerStarAdjunction
 
 /-- Direct image along a surjective closed immersion preserves local finite presentation
-for a coefficient ring pulled back from condensed abelian groups.
-
-Source: Stacks Project Tags 09AA and 09AH, empty-complement localization; the support
-argument in `ModuleObject/Colimit/TwoColimit.lean`. -/
+for a coefficient ring pulled back from condensed abelian groups (Stacks, Tags 09AA and 09AH). -/
 theorem lfp_lowerStar_of_surjective_closed
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)

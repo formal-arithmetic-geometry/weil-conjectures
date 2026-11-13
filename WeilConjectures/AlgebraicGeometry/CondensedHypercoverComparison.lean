@@ -115,9 +115,8 @@ private theorem compare_via_resolution_naturality
 -- Internal module categories require deeper colimit and derived-category instance search.
 set_option synthInstance.maxSize 4096 in
 /-- On bounded-below complexes, the cohomology of pushforward evaluated at a weakly
-contractible object is naturally the homology of its inverse-image hypercover total.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), hypercover computation, and Stacks
-Project, Tags 09A2 and 0946. -/
+contractible object is naturally the homology of its inverse-image hypercover total
+(Hemo–Richarz–Scholbach, Lemma 5.3(1); Stacks, Tags 09A2 and 0946). -/
 theorem condensedHypercover_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

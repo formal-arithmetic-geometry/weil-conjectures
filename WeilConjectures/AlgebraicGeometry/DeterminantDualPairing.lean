@@ -25,10 +25,8 @@ namespace AlgebraicGeometry
 open Scheme.Modules (wedge)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The determinant of evaluation defines a morphism of exterior sheaves, in every degree
-and without any local freeness assumption.
-Source: Stacks Project, Tag 0BRT, determinant pairing; Mathlib
-`exteriorPower.pairingDual_ιMulti_ιMulti`. -/
+/-- The determinant of evaluation defines a morphism of exterior sheaves, in every degree and
+without any local freeness assumption (Stacks, Tag 0BRT). -/
 theorem exterior_dual_pairing_exists (X : Scheme.{u}) (M : X.Modules) (n : ℕ) :
     ∃ f :
     (Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n) ⟶

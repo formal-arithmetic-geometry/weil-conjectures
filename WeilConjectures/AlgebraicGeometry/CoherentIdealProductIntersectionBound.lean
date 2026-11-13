@@ -19,7 +19,9 @@ import Mathlib.RingTheory.Filtration
 
 /-! # A uniform ideal-product intersection bound
 
-Source: Stacks Project, Tag 01YA, the inclusion clause of coherent Artin-Rees.
+## References
+
+* Stacks Project, Tag 01YA
 -/
 
 @[expose] public section
@@ -29,9 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A sufficiently high ideal multiple intersects a quasi-coherent submodule
-only inside a prescribed ideal multiple of that submodule.
-
-Source: Stacks Project, Tag 01YA, inclusion clause of Artin-Rees. -/
+only inside a prescribed ideal multiple of that submodule (Stacks, Tag 01YA). -/
 theorem coherent_ideal_product_intersection_bound
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (H T : X.Modules) (hH : RingedSpace.IsCoherent X.toRingedSpace H)

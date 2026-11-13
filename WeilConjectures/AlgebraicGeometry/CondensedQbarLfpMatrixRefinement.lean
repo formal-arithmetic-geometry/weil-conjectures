@@ -416,10 +416,8 @@ open CondensedQbarMatrixRefinement
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
-/-- A finite presentation on one pro-etale object admits a finite-free refinement.
-
-Source: RefactorInstruction.tex, Section 4, finite-matrix refinement;
-Bhatt--Scholze, Definition 6.8.3. -/
+/-- A finite presentation on one pro-etale object admits a finite-free refinement (Bhatt–Scholze,
+Definition 6.8.3). -/
 theorem exists_condensedQbar_finiteFree_refinement
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

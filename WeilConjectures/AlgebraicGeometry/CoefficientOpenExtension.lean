@@ -9,7 +9,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Extension by zero on coefficient-sized sites
 
-Source: Stacks Project, Tags 03DI and 09AF.
+## References
+
+* Stacks Project, Tags 03DI and 09AF
 -/
 
 @[expose] public noncomputable section
@@ -110,12 +112,8 @@ def coefficientOpenEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     (Scheme.smallModelComparisonEtaleTopology.{u, v} U)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
 
-/-- Comparison commutes with open extension by zero in the coefficient universe.
-Source: Stacks Project, Tag 09AF.
-
-The two right adjoints are restriction along equal composites of site functors.
-Their identity natural isomorphism has a conjugate between the composite left
-adjoints. All functors are constructed by Kan extension and sheafification. -/
+/-- Comparison commutes with open extension by zero in the coefficient universe
+(Stacks, Tag 09AF). -/
 def coefficientOpenExtensionComparisonIso (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     coefficientOpenEtaleExtension.{u, v} A j ⋙

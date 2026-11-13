@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 
 /-! # Canonical ring coordinates for affine spectrum replacement
 
-Source: Stacks Project, Tags 0098 and 0096.
+## References
+
+* Stacks Project, Tags 0098 and 0096
 -/
 
 @[expose] public section
@@ -32,8 +34,7 @@ private theorem stalkCongr_eqToHom (Y : Scheme.{u}) (y y' : Y) (h : y = y') :
   subst y'
   simp [TopCat.Presheaf.stalkCongr]
 
-/-- The actual affine-spectrum stalk ring map, with its source point transported.
-Source: Stacks Project, Tag 0098; Mathlib `isoSpec_inv_naturality`. -/
+/-- The affine-spectrum stalk ring map, with its source point transported (Stacks, Tag 0098). -/
 @[irreducible]
 noncomputable def canonicalSpectrumStalkEquiv
     (Y : Scheme.{u}) [IsAffine Y] (y : Y) (y0 : Spec Γ(Y, ⊤))

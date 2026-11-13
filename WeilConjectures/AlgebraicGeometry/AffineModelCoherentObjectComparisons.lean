@@ -22,7 +22,11 @@ import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonCoherence
 import WeilConjectures.AlgebraicGeometry.PerfectHomComparisonTriangle
 
 /-! # Coherent affine object comparisons
-Source: Stacks Project, Tags 09RE, 06Y1 and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 09RE, 06Y1 and 0D5S
+-/
 
 @[expose] public section
 universe u v w
@@ -31,7 +35,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Termwise tilde on module complexes, with its zero-map proof fixed once. -/
+/-- Termwise tilde on module complexes. -/
 noncomputable abbrev affineModelTildeComplex (A : CommRingCat.{u}) :
     CochainComplex (ModuleCat.{u} A) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) ℤ :=
@@ -53,8 +57,7 @@ noncomputable def affineModelLocalizedTilde (A : CommRingCat.{u}) (X : Scheme.{u
   map_id M := by simp
   map_comp f g := by simp
 
-/-- The map equation of the localized tilde functor, without unfolding its functor record.
-Source: the explicit localized tilde construction. -/
+/-- The map equation of the localized tilde functor. -/
 theorem affineModelLocalizedTilde_map (A : CommRingCat.{u}) (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -64,8 +67,8 @@ theorem affineModelLocalizedTilde_map (A : CommRingCat.{u}) (X : Scheme.{u})
       d.functor.map (DerivedCategory.Q.map ((affineModelTildeComplex A).map f)) := by
   rfl
 
-/-- The two scalar-extended models, with labels retained when they coincide.
-Source: Mathlib's induced category; Stacks, Tag 09RE. -/
+/-- The two scalar-extended models, with labels retained when they coincide
+(Stacks, Tag 09RE). -/
 noncomputable abbrev affineModelScalarPair {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) (E K : CochainComplex (ModuleCat.{u} A) ℤ) (q : Bool) :
     CochainComplex (ModuleCat.{u} B) ℤ :=
@@ -132,8 +135,7 @@ noncomputable abbrev affineModelLimitArrow {I : Type u} [Preorder I]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Naturality transports a conjugated map through coherent object comparisons.
-Source: naturality and inverse cancellation in Mathlib's category API. -/
+/-- Naturality transports a conjugated map through coherent object comparisons. -/
 private theorem affineModel_conjugation
     {C D B : Type*} [Category C] [Category D] [Category B]
     (H : C ⥤ D) (G : C ⥤ B) (L : D ⥤ B) (δ : G ≅ H ⋙ L)
@@ -177,8 +179,7 @@ private theorem scalarExtensionHom_assoc
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Apply naturality and inverse cancellation to scalar reassociation.
-Source: Stacks, Tag 09RE, with Mathlib's naturality and scalar-extension APIs. -/
+/-- Naturality and inverse cancellation for scalar reassociation (Stacks, Tag 09RE). -/
 private theorem affineModel_scalarConjugation
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (hc : h = g.comp f)

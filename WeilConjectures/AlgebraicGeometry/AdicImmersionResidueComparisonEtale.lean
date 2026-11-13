@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Residue comparisons for the specified completed immersion pullback
 
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R.
+## References
+
+* Stacks Project, Tags 03A0, 03CY, 06YY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +208,8 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
   ConstantScalarRestriction.ringGrothendieck ConstantScalarRestriction.fixedGrothendieck
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
-/-- The etale-origin residue comparison, isolated from the fixed completed-model clause.
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8. -/
+/-- The etale-origin residue comparison, isolated from the fixed completed-model clause
+(Stacks, Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_residueComparison_etale
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

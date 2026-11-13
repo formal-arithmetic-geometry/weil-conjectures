@@ -265,12 +265,7 @@ private lemma tensorComp_complex_fac
     CategoryTheory.Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
     Iso.trans_hom, Iso.app_hom, CategoryTheory.Functor.map_comp, Category.assoc] using hh
 
-/-- Exact localization preserves the coefficient tensor-comparison mate.
-
-Source: `Adjunction.mapDerivedCategoryAdjunction_unit_app_fac`,
-`Functor.mapDerivedCategoryCompIso_fac`, and `Functor.mapDerivedCategoryNatIso_fac`;
-the derived comparison definitions in the coefficient construction of archived
-`ModuleObject/Colimit/TwoColimit.lean`. -/
+/-- Exact localization preserves the coefficient tensor-comparison mate. -/
 theorem coefficientComplex_derived_mate_transport
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)

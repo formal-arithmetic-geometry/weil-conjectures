@@ -146,8 +146,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
 /-- Extension by zero of a locally finitely presented condensed field module has
-filtered derived Hom continuity on uniformly bounded below complexes.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), locally free and costalk steps. -/
+filtered derived Hom continuity on uniformly bounded below complexes (Hemo–Richarz–Scholbach,
+Lemma 5.3(2)). -/
 theorem condensed_local_piece_hom_continuity
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

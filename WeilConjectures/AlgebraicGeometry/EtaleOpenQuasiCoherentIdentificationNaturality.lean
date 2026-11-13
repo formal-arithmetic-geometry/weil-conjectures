@@ -32,10 +32,8 @@ open Scheme.Modules
 
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-/-- Associativity of normalized left-adjoint composition, specialized to scheme
-pushforwards. Source: Stacks 03DR, functoriality in equation-quasi-coherent-presheaf;
-Mathlib `Adjunction.leftAdjointCompIso_assoc`. Pushforward coherence is sectionwise
-identity, independently of the chosen left adjoints. -/
+/-- Associativity of normalized left-adjoint composition, specialized to scheme pushforwards
+(Stacks, Tag 03DR). -/
 private theorem composition_associativity
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)

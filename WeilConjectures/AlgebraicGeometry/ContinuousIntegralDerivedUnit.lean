@@ -36,8 +36,8 @@ private theorem transported_unit
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The levelwise extension unit agrees with the specified derived extension unit.
-Source: Bhatt--Scholze, Lemma 6.8.2; exact-functor derived adjunction compatibility. -/
+/-- The levelwise extension unit agrees with the specified derived extension unit (Bhatt–Scholze,
+Lemma 6.8.2). -/
 theorem integralScalar_derivedUnit_complex (X : Scheme.{u})
     (C : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) ℤ) :

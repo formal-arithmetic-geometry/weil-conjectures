@@ -34,10 +34,8 @@ noncomputable local instance (X : RingedSpace.{u}) (U : Opens X)
   inferInstanceAs (Category.{w}
     (DerivedCategory (SheafOfModules.{u} ((moduleRings X).over U))))
 
-/-- Restriction of derived internal Hom to an open agrees canonically with the
-internal Hom of the restricted objects.
-
-Source: literature/stacks-project/cohomology.tex, Lemma 08DL. -/
+/-- Restriction of derived internal Hom to an open agrees canonically with the internal Hom of
+the restricted objects (Stacks, Tag 08DL). -/
 theorem derivedInternalHom_restrict_open
     (X : RingedSpace.{u}) (U : Opens X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

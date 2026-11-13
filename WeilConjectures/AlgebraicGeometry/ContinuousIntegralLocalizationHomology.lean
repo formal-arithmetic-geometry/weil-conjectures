@@ -21,8 +21,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- Cohomology carries the localization-unit telescope of a bounded-below integral
-complex to a colimit.
-Source: Bhatt--Scholze, Lemma 6.8.2, and exactness of filtered colimits of module sheaves. -/
+complex to a colimit (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralLocalization_homology_isColimit (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)))

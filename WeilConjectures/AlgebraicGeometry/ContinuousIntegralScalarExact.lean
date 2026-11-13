@@ -18,6 +18,10 @@ sequential colimit `colim(𝒪̲_E --ℓ--> 𝒪̲_E --ℓ--> ⋯)` along the ma
 (`isColimitCoefficientMapSmulSequenceCocone`). The base `Mod.smulSequence` API then gives
 `E_X ⊗_{𝒪_{E,X}} M = colim(M --ℓ--> M --ℓ--> ⋯)` (`isColimitIntegralExtendScalarsCocone`) and the
 exactness of `E_X ⊗_{𝒪_{E,X}} -` (`integralScalarExtension_exact`).
+
+## References
+
+* Bhatt–Scholze, Lemma 6.8.2
 -/
 
 @[expose] public section
@@ -35,8 +39,7 @@ private lemma ell_ne_zero : (ℓ : E) ≠ 0 := by
   have h : (ℓ : ℚ_[ℓ]) ≠ 0 := by exact_mod_cast (Fact.out : ℓ.Prime).ne_zero
   simpa only [map_natCast, map_zero] using (algebraMap ℚ_[ℓ] E).injective.ne h
 
-/-- The map `c_k = ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲`, where `φ` is the inclusion `integralScalarMap`.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- The map `c_k = ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲`, where `φ` is the inclusion `integralScalarMap`. -/
 noncomputable def integralScalarMapInvPow (k : ℕ) :
     integralCoeff.{u} ℓ E ⟶ Profinite.continuousMapRingObj E :=
   integralScalarMap ℓ E ≫ Profinite.continuousMapRingObjMulLeft E ((ℓ : E)⁻¹ ^ k)
@@ -106,8 +109,7 @@ private lemma upperStarFromPoint_additive (X : Scheme.{u}) : (upperStarFromPoint
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
   exact Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
 
-/-- The map `p_X^*(ℓ⁻ᵏ φ) : 𝒪_{E,X} ⟶ E_X` on `X_proét`.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- The map `p_X^*(ℓ⁻ᵏ φ) : 𝒪_{E,X} ⟶ E_X` on `X_proét`. -/
 noncomputable abbrev coefficientMapInvPow (X : Scheme.{u}) (k : ℕ) :
     condensedRingObj (integralCoeff.{u} ℓ E) X ⟶
       condensedRingObj (Profinite.continuousMapRingObj E) X :=
@@ -126,8 +128,7 @@ lemma nsmul_coefficientMapInvPow_succ (X : Scheme.{u}) (k : ℕ) :
 /-- **`E_X = colim(𝒪_{E,X} --ℓ--> 𝒪_{E,X} --ℓ--> ⋯)`**, along the maps `p_X^*(ℓ⁻ᵏ φ)`: the
 image of `isColimitIntegralCoeffSmulSequenceCocone` under the additive left adjoint `p_X^*`
 (`Mod.isColimitSmulSequenceCoconeMap`). This is base
-`isColimitPadicIntegersToPadicSubfieldSmulSequenceCocone` for a general normed `E`.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+`isColimitPadicIntegersToPadicSubfieldSmulSequenceCocone` for a general normed `E`. -/
 noncomputable def isColimitCoefficientMapSmulSequenceCocone (X : Scheme.{u}) :
     IsColimit (Mod.smulSequenceCocone ℓ (coefficientMapInvPow ℓ E X)
       (nsmul_coefficientMapInvPow_succ ℓ E X)) := by
@@ -144,8 +145,7 @@ noncomputable def isColimitCoefficientMapSmulSequenceCocone (X : Scheme.{u}) :
 
 /-- **`E_X ⊗_{𝒪_{E,X}} M = colim(M --ℓ--> M --ℓ--> ⋯)`** for every `𝒪_{E,X}`-module `M`
 (base `Mod.isColimitExtendScalarsCocone`). This is base
-`isColimitPadicIntegersExtendScalarsCocone` for a general normed `E`.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+`isColimitPadicIntegersExtendScalarsCocone` for a general normed `E`. -/
 noncomputable def isColimitIntegralExtendScalarsCocone (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) :

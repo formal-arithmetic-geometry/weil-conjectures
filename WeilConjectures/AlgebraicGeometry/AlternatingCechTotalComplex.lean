@@ -14,8 +14,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Alternating Čech total complexes on finite open families
 
-Source: Stacks Project, Cohomology, Section on Čech cohomology of unbounded complexes.
-
 Čech degree is first. The total differential is d₁ + (-1)^p d₂.
 All data are explicit; only identities needed by the constructions are postponed.
 
@@ -40,13 +38,11 @@ noncomputable section
 
 variable {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
 
-/-- The intersection belonging to an increasing tuple.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The intersection belonging to an increasing tuple. -/
 def alternatingCechIntersection {p : ℕ} (t : Fin (p + 1) ↪o Fin r) : X.Opens :=
   ⨅ k, U (t k)
 
-/-- Deleting one entry enlarges the intersection.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Deleting one entry enlarges the intersection. -/
 theorem alternatingCechIntersection_face_le (p : ℕ)
     (t : Fin (p + 2) ↪o Fin r) (j : Fin (p + 2)) :
     alternatingCechIntersection U t ≤
@@ -56,15 +52,13 @@ theorem alternatingCechIntersection_face_le (p : ℕ)
 variable
   (G : X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
 
-/-- Products of sections over strictly increasing tuples.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Products of sections over strictly increasing tuples. -/
 def alternatingCechTerms (p : ℕ) :
     ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
   ModuleCat.of _ (∀ t : Fin (p + 1) ↪o Fin r,
     G.obj (op (alternatingCechIntersection U t)))
 
-/-- The signed sum of face restrictions; linear maps specify its actual data.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The signed sum of face restrictions; linear maps specify its actual data. -/
 def alternatingCechDifferential (p : ℕ) :
     alternatingCechTerms U G p ⟶ alternatingCechTerms U G (p + 1) :=
   ModuleCat.ofHom (LinearMap.pi fun t ↦
@@ -85,8 +79,7 @@ private theorem alternatingCechDifferential_apply (p : ℕ)
   simp only [LinearMap.sum_apply, LinearMap.smul_apply, LinearMap.comp_apply]
   rfl
 
-/-- The alternating face differential squares to zero.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The alternating face differential squares to zero. -/
 theorem alternatingCechDifferential_square (p : ℕ) :
     alternatingCechDifferential U G p ≫ alternatingCechDifferential U G (p + 1) = 0 := by
   classical
@@ -176,8 +169,7 @@ theorem alternatingCechDifferential_square (p : ℕ) :
               ((Fin.succAboveOrderEmb i.succ).trans t)))
       exact hrestriction _ _ _ _ ht
 
-/-- The nonnegative alternating Čech complex of a presheaf of global-ring modules.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The nonnegative alternating Čech complex of a presheaf of global-ring modules. -/
 def alternatingCechComplex :
     CochainComplex (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℕ :=
   CochainComplex.of (alternatingCechTerms U G) (alternatingCechDifferential U G)
@@ -186,15 +178,13 @@ def alternatingCechComplex :
 variable {G}
   {H K : X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))}
 
-/-- A morphism of presheaves acts componentwise on cochains.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- A morphism of presheaves acts componentwise on cochains. -/
 def alternatingCechTermsMap (g : G ⟶ H) (p : ℕ) :
     alternatingCechTerms U G p ⟶ alternatingCechTerms U H p :=
   ModuleCat.ofHom (LinearMap.pi fun t ↦
     (g.app (op (alternatingCechIntersection U t))).hom.comp (LinearMap.proj t))
 
-/-- Componentwise maps commute with the signed face differential.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Componentwise maps commute with the signed face differential. -/
 theorem alternatingCechTermsMap_comm (g : G ⟶ H) (p : ℕ) :
     alternatingCechTermsMap U g p ≫ (alternatingCechComplex U H).d p (p + 1) =
       (alternatingCechComplex U G).d p (p + 1) ≫ alternatingCechTermsMap U g (p + 1) := by
@@ -222,30 +212,26 @@ theorem alternatingCechTermsMap_comm (g : G ⟶ H) (p : ℕ) :
   exact congrArg (fun f ↦ f.hom (s ((Fin.succAboveOrderEmb j).trans t)))
     (g.naturality (homOfLE (alternatingCechIntersection_face_le U p t j)).op).symm
 
-/-- The induced cochain map.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The induced cochain map. -/
 def alternatingCechComplexMap (g : G ⟶ H) :
     alternatingCechComplex U G ⟶ alternatingCechComplex U H :=
   CochainComplex.ofHom (fun p ↦ alternatingCechTermsMap U g p)
     (alternatingCechTermsMap_comm U g)
 
-/-- Identity morphisms act as identity cochain maps.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Identity morphisms act as identity cochain maps. -/
 theorem alternatingCechComplexMap_id :
     alternatingCechComplexMap U (𝟙 G) = 𝟙 (alternatingCechComplex U G) := by
   ext p s
   rfl
 
-/-- Composition is componentwise composition.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Composition is componentwise composition. -/
 theorem alternatingCechComplexMap_comp (g : G ⟶ H) (h : H ⟶ K) :
     alternatingCechComplexMap U (g ≫ h) =
       alternatingCechComplexMap U g ≫ alternatingCechComplexMap U h := by
   ext p s
   rfl
 
-/-- Alternating Čech cochains as a functor of the presheaf.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Alternating Čech cochains as a functor of the presheaf. -/
 def alternatingCechComplexFunctor :
     (X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ⥤
       CochainComplex (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℕ where
@@ -254,8 +240,7 @@ def alternatingCechComplexFunctor :
   map_id := fun G ↦ alternatingCechComplexMap_id U (G := G)
   map_comp := fun g h ↦ alternatingCechComplexMap_comp U g h
 
-/-- The alternating Čech functor is additive.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The alternating Čech functor is additive. -/
 theorem alternatingCechComplexFunctor_additive :
     (alternatingCechComplexFunctor U).Additive := by
   constructor
@@ -265,24 +250,21 @@ theorem alternatingCechComplexFunctor_additive :
 
 attribute [instance] alternatingCechComplexFunctor_additive
 
-/-- The presheaf of Γ(X,O_X)-modules underlying an O_X-module.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The presheaf of Γ(X,O_X)-modules underlying an O_X-module. -/
 def alternatingCechModulePresheaf :
     SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       (X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) :=
   SheafOfModules.forget (moduleRings X.toRingedSpace) ⋙
     PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op
 
-/-- The integer Čech complex, extended by zero in negative Čech degree.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The integer Čech complex, extended by zero in negative Čech degree. -/
 def alternatingCechModuleFunctor :
     SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       CochainComplex (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℤ :=
   alternatingCechModulePresheaf (X := X) ⋙ alternatingCechComplexFunctor U ⋙
     ComplexShape.embeddingUpNat.extendFunctor _
 
-/-- The integer module Čech functor is additive.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The integer module Čech functor is additive. -/
 theorem alternatingCechModuleFunctor_additive :
     (alternatingCechModuleFunctor U).Additive := by
   have : (PresheafOfModules.forgetToPresheafModuleCat
@@ -296,8 +278,7 @@ theorem alternatingCechModuleFunctor_additive :
 
 attribute [instance] alternatingCechModuleFunctor_additive
 
-/-- The double complex functor with Čech degree first and coefficient degree second.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The double complex functor with Čech degree first and coefficient degree second. -/
 def alternatingCechDoubleFunctor :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ⥤
       HomologicalComplex₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
@@ -305,8 +286,7 @@ def alternatingCechDoubleFunctor :
   (alternatingCechModuleFunctor U).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
     HomologicalComplex₂.flipFunctor _ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
 
-/-- The total complex functor, with differential d₁ + (-1)^p d₂.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- The total complex functor, with differential d₁ + (-1)^p d₂. -/
 def alternatingCechTotalFunctor :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ⥤
       CochainComplex (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℤ :=
@@ -314,8 +294,7 @@ def alternatingCechTotalFunctor :
     HomologicalComplex₂.totalFunctor _ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
       (ComplexShape.up ℤ)
 
-/-- Alternating Čech totalization is additive in the coefficient complex.
-Source: Stacks, Cohomology, alternating Čech complexes of unbounded complexes. -/
+/-- Alternating Čech totalization is additive in the coefficient complex. -/
 theorem alternatingCechTotalFunctor_additive :
     (alternatingCechTotalFunctor U).Additive := by
   have : (HomologicalComplex₂.flipFunctor
@@ -349,8 +328,7 @@ attribute [instance] alternatingCechTotalFunctor_additive
 
 variable (F : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
 
-/-- Restriction from the top open set to the zero Čech row of a presheaf.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech. -/
+/-- Restriction from the top open set to the zero Čech row of a presheaf. -/
 def alternatingCechPresheafZero
     (P : X.Opensᵒᵖ ⥤ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) :
     P.obj (op ⊤) ⟶ (alternatingCechComplex U P).X 0 :=

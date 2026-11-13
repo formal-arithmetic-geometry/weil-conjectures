@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.PinnedBaseChangeMateShifts
 import WeilConjectures.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
 
 /-! Canonical compatibility for relative Mayer--Vietoris.
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9. -/
+
+## References
+
+* Stacks Project, Tags 08BV, 08HY and 0DJ9
+-/
 
 @[expose] public section
 universe u w
@@ -26,8 +30,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The pinned base-change comparison is natural and shift-compatible, with the
 right-derived direct-image shifts and their unique adjoint pullback shifts.
-This assertion has no cover, SES or connecting morphism.
-Source: Stacks Tag 08HY, counit construction; Mathlib Shift.Adjunction. -/
+This assertion has no cover, SES or connecting morphism (Stacks, Tag 08HY). -/
 theorem mvCanonicalBaseChange_shift
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

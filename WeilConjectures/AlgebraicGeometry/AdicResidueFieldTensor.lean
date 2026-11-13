@@ -12,7 +12,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Exact field tensor and cohomological bounds
 
-Source: Bhatt--Scholze, Remark 6.3.2.
+## References
+
+* Bhatt--Scholze, Remark 6.3.2
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +47,8 @@ private theorem sfbFieldTensor_exact (X : Scheme.{u}) (k : Type (u + 1)) [Field 
       (sheafificationAdjunction X.smallEtaleTopology (ModuleCat.{u + 1} k))
   exact ⟨hlim, inferInstance⟩
 
-/-- Tensor with a degree-zero sheaf over a field preserves a cohomological interval.
-Source: Bhatt--Scholze, Remark 6.3.2; exact tensor over a field. -/
+/-- Tensor with a degree-zero sheaf over a field preserves a cohomological interval
+(Bhatt--Scholze, Remark 6.3.2). -/
 theorem sfbFieldTensor_bounds (X : Scheme.{u}) (k : Type (u + 1)) [Field k]
     (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ)
     (a b : ℤ) (h : ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) :

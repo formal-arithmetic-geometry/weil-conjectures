@@ -134,8 +134,7 @@ theorem geometry : Geometry s t := by
   · simp [v₁]
   · simp [v₂]
 
-/-- The product presentation with exactly the constructed maps; only its proofs use geometry
-(Stacks, Tag 0F7J). -/
+/-- The product presentation with exactly the constructed maps (Stacks, Tag 0F7J). -/
 def presentation : EtaleGraphPresentation f where
   U := U s t
   P := P s t
@@ -264,10 +263,8 @@ private theorem comparisonFromOpen_productGraphLambda
       simp only [etaleProductGraphLambda, l, r, H, Iso.trans_assoc]
     _ = etaleGraphComparisonFromOpen A c t := by rw [hl, hr]
 
-/-- The specified pairwise graph comparison is lambda₂⁻¹ lambda₁.
-Source: Stacks Tags 0F7B, 0F7C, 0F7D and 0F7J; the explicit product-graph comparison in
-`LowerShriekComposition.lean`, lines 193--268, extended to two proper/open/proper
-presentations. -/
+/-- The specified pairwise graph comparison is `lambda₂⁻¹ lambda₁` (Stacks, Tags 0F7B, 0F7C,
+0F7D and 0F7J). -/
 theorem etalePairwiseProductGraphNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

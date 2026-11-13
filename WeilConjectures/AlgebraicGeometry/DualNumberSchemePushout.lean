@@ -57,12 +57,10 @@ private lemma localSpec_injective (X : Scheme.{u}) (R : CommRingCat.{u}) [IsLoca
   simpa using hf
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Stacks Project, Tag 0B2B (finite-copy extension of its two-copy pushout calculation).
-
-The algebra `TrivSqZeroExt K (Fin n → K)` has basis the constant `1` and the `n` coordinate
-infinitesimals, all products of infinitesimals being zero. The map induced by
-`TrivSqZeroExt.map (LinearMap.proj i)` keeps the `i`th infinitesimal coefficient and kills the
-others. The common point is induced by `TrivSqZeroExt.fstHom K K K`. -/
+/-- Extension of `n` morphisms from `Spec K[ε]` agreeing at the common point to a morphism from
+`Spec (K ⊕ K^n)` with all products of infinitesimals zero. Here `TrivSqZeroExt.map
+(LinearMap.proj i)` keeps the `i`th infinitesimal coefficient and the common point is induced by
+`TrivSqZeroExt.fstHom K K K` (Stacks, Tag 0B2B). -/
 theorem existsUnique_dualNumberScheme_extension
     (K : Type u) [Field K] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u})
     (θ : Fin n → (Spec (.of (DualNumber K)) ⟶ X))

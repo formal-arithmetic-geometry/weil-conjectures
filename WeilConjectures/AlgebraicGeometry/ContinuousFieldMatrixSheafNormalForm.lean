@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 /-!
 # Lifting a specified continuous matrix factorization to module sheaves
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the Gaussian elimination step
-of the accompanying rank/descent argument.
+## References
+
+* Hemo–Richarz–Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -533,9 +534,8 @@ private lemma freeMatrix_pullback {E : Type u} [NormedField E]
   rw [← Functor.map_comp_assoc, ← Functor.map_comp]
   exact endFun_pullback g hg e _
 
-/-- Lift an explicit continuous matrix block factorization along an open immersion.
-Source: steps 6--7 of the rank/descent argument accompanying Hemo--Richarz--Scholbach,
-Example 3.1. -/
+/-- Lift an explicit continuous matrix block factorization along an open immersion
+(Hemo–Richarz–Scholbach, Example 3.1). -/
 theorem continuousField_matrix_sheaf_normalForm
     (E : Type u) [NormedField E] {V W : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R]

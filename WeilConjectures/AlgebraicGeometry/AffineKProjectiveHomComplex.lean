@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Linear.Basic
 
 /-! # Affine K-projective Hom-complex representatives
 
-Source: Stacks Project, Tag 06Z0; Mathlib's K-projectivity and Hom-complex quotient.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section
@@ -45,8 +47,8 @@ set_option maxHeartbeats 1500000 in
 -- Elaborating the three additive equivalences crosses two derived-category universes.
 set_option backward.isDefEq.respectTransparency false in
 /-- For any module target complex, affine derived arrows out of a K-projective module
-complex are its linear Hom-complex cohomology, with chain representatives and naturality.
-Source: Stacks Project, Tag 06Z0; Mathlib HomComplexCohomology and KProjective. -/
+complex are its linear Hom-complex cohomology, with chain representatives and naturality
+(Stacks, Tag 06Z0). -/
 theorem affineKProjective_homComplex (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

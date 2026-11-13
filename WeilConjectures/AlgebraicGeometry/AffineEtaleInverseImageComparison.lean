@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionComposition
 /-!
 # Comparison of inverse images on the full and affine étale sites
 
-Source: Stacks Project, Étale Cohomology 09YQ, Topologies 04HR.
+## References
+
+* Stacks Project, Tags 09YQ and 04HR
 -/
 
 @[expose] public section
@@ -27,11 +29,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks 09YQ, using 04HR.
-The functors `U` are base change, specified by their identifications `t` with small-site
-base change. `L` and `a` are the affine-site inverse images and their adjunctions.
-The comparisons `e` preserve units. The composition comparisons `c` and `d` are specified
-by their unit equations; `gamma` is the canonical iterated-base-change identification. -/
+/-- The affine étale inverse images, with their adjunctions and comparison isomorphisms with
+small-site inverse images, exist compatibly with units and composition
+(Stacks, Tags 09YQ and 04HR). -/
 theorem exists_affineEtale_inverseImage_comparison :
     ∃ (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

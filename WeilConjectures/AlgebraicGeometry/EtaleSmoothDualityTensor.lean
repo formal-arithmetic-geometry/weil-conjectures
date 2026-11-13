@@ -168,14 +168,11 @@ private lemma affineLineSmoothDuality : AffineLineSmoothDuality Λ := by
   exact (ambientTensorMap_compactification Λ p c K) ▸ this
 
 include d in
-/-- Smooth cohomological duality without a chosen orientation.
-
-Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`
-be a finite ring whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is
-a locally constant sheaf `L` of free rank-one `Λ`-modules: `L` is locally constant, every stalk
-of `L` at a geometric point is free of rank one, and `ω_f ≅ L[2d]`. For every complex `K` on `Y`,
-the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`) is an isomorphism. -/
+/-- Smooth cohomological duality without a chosen orientation. Let `f : X ⟶ Y` be smooth,
+separated, compactifiable and of pure relative dimension `d`, let `Λ` be a finite ring whose
+exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is a locally constant
+sheaf `L` of free rank-one `Λ`-modules, and for every complex `K` on `Y` the canonical map `ω_f
+⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_finite :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),

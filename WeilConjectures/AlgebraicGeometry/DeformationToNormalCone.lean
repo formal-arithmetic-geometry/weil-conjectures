@@ -426,25 +426,11 @@ lemma normalConeZeroSection_comp_normalConeToDeformationSpace :
 
 end Construction
 
-/-- The deformation to the normal cone of a closed section `s` of a morphism `g : V ⟶ B` smooth of
-pure relative dimension `d`, as data: the deformation space `𝒟_s V`, a morphism
-`g̃ : 𝒟_s V ⟶ 𝔸¹_B` smooth of relative dimension `d`, a section `s̃` of `g̃`, and the
-identification of the two fibres:
-
-```
-  V ---ι₁---> 𝒟_s V <---ι₀--- N_s          B ---s---> V
-  |             |              |           |          |
-  g             g̃             π_N          ‖          g
-  v             v              v           v          v
-  B ---i₁---> 𝔸¹_B <---i₀---- B           B ---𝟙----> B
-```
-
-both squares cartesian, with `ι₁` carrying `s` to `s̃` and `ι₀` carrying `0_N` to `s̃`. Away
-from `t = 0` the deformation is trivial: `g̃⁻¹(𝔾_{m,B}) ≅ V ×_B 𝔾_{m,B}` over the punctured
-line `𝔾_{m,B} ⊆ 𝔸¹_B`, with `s̃` corresponding to `s × 1`. Étale-locally on `B` the deformation
-has coordinates (`exists_etale_coordinates`). Existence of the datum with `N` the normal cone
-of `s` (`AlgebraicGeometry.Scheme.Hom.normalConeData`) is
-`AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
+/-- The deformation to the normal cone of a closed section `s` of a morphism `g : V ⟶ B` smooth
+of pure relative dimension `d`, as data: the deformation space `𝒟_s V`, a smooth morphism
+`g̃ : 𝒟_s V ⟶ 𝔸¹_B` of relative dimension `d`, a section `s̃` of `g̃`, and the identification
+of the fibres over `1` and `0` with `V` and the normal cone `N`, by two cartesian squares.
+It is trivial away from `t = 0` and has étale-local coordinates. -/
 -- TODO(unify): purity conventions
 structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
     (N : NormalConeData d s) where
@@ -496,13 +482,10 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
       pullback g (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B),
     σ ≫ pullback.fst _ _ = (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s ∧
       σ ≫ pullback.snd _ _ = 𝟙 _ ∧ σ ≫ generic = puncturedLine.ι ≫ sect
-  /-- Étale-local coordinates on the deformation. There are a
-  separated surjective étale `v : B' ⟶ B` and, writing `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` for its base change
-  and `𝒟' = 𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` for the base change of the deformation, a quasi-compact
-  open `j : W ⟶ 𝒟'` containing the base-changed section `σ` together with a quasi-compact
-  étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Here `c` is the
-  chart `u_i = x_i / t` of the deformation of the standard pair `(𝔸^d_{B'} → B', 0)`, which is
-  `𝔸^d_{B'} ×_{B'} 𝔸¹_{B'}`, for étale coordinates `x₁, …, x_d` of `(g, s)` over `B'`. -/
+  /-- Étale-local coordinates on the deformation, given by a separated surjective étale cover
+  `B' ⟶ B` and a quasi-compact étale chart `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` on a quasi-compact open
+  `W` of the base change of the deformation, carrying the base-changed section to the zero
+  section. -/
   exists_etale_coordinates : ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
       (j : W ⟶ pullback proj (AffineSpace.map (ULift.{u} (Fin 1)) v))
       (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))

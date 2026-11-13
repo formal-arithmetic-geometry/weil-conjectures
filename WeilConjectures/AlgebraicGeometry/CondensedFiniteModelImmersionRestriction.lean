@@ -26,10 +26,7 @@ attribute [local irreducible] CondensedRing.upperStarComp CondensedRing.pullIso
 
 /-- A locally finitely presented model over condensed coefficients on an immersed subscheme
 induces a locally finitely presented model along every morphism with image in that
-subscheme.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, open-stratum support step; Stacks
-Project Tags 09AA and 09AH. -/
+subscheme (Stacks, Tags 09AA and 09AH). -/
 theorem finite_model_on_immersion_range
     (Λ Ω : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [MonObj Ω] [IsCommMonObj Λ] [IsCommMonObj Ω]

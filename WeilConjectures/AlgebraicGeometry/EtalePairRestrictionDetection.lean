@@ -21,7 +21,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tags 03Q4 and 09YQ, fibre-product overlap reduction. -/
+/-- For two étale morphisms into a qcqs étale object there is a qcqs fibre-product-like étale
+object detecting equality of sections after any base change (Stacks, Tags 03Q4 and 09YQ). -/
 theorem etale_pair_restriction_detection
     {S : Scheme.{u}} (W U V : S.Etale)
     [QuasiCompact W.hom] [QuasiSeparated W.hom]

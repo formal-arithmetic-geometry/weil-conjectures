@@ -14,8 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Slice comparisons for the fixed completed immersion model
 
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication;
-Lemma 6.5.8 and Remark 6.5.10. Stacks Project, Tags 03A0, 03CY, 099L and 099R.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.8 and Remark 6.5.10
+* Stacks Project, Tags 03A0, 03CY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -133,11 +135,8 @@ private theorem completedConstantIso {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersi
 
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
-/-- Slice normalization for the specified completed inverse image, uniformly in the complex.
-The same equivalence compares all completed constant models; neither completeness nor a
-residue presentation is assumed.
-
-Source: Stacks Tags 03A0, 03CY, 03DJ, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8. -/
+/-- Slice normalization for the specified completed inverse image, uniformly in the complex
+(Stacks, Tags 03A0, 03CY, 03DJ, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_sliceComparisons
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

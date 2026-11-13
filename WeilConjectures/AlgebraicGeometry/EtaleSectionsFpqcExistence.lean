@@ -22,7 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XN, existence argument. -/
+/-- Compatible sections along an fpqc covering come from a section over the base (Stacks, Tag
+09XN). -/
 theorem exists_etaleSection_of_fpqc_cover
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

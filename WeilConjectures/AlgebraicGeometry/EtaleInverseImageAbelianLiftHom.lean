@@ -20,7 +20,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV. -/
+/-- Compatibility of the abelian lift of the étale inverse image with the forgetful functors on
+morphisms (Stacks, Tag 00YV). -/
 theorem etaleInverseImageAbelianLift_hom (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

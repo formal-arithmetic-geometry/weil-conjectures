@@ -125,11 +125,10 @@ private theorem powerCofan_isColimit {C : Type*} [Category C] [HasFiniteLimits C
         rw [Pi.lift_comp_π_assoc]
     exact ⟨(Cofan.isColimitEquivOfEquiv E.symm (powerCofan A c (n + 1))).symm hd.some⟩
 
-/-- Source: Stacks Project, Schemes, Tags 01JB and 01JC and Section 26.17.
-Products in `Over X` are iterated fibre products over `X`. The canonical isomorphisms
-are oriented from the coproduct of indexed fibre products to the fibre product of the
-coproduct. Their component equations specify the canonical map, and the final equations
-specify compatibility with every omitted-factor projection. -/
+/-- Products in `Over X` of the pieces of a finite coproduct are iterated fibre products over
+`X`: the canonical isomorphisms go from the coproduct of indexed fibre products to the fibre
+product of the coproduct, compatibly with the coproduct inclusions and every omitted-factor
+projection (Stacks, Tags 01JB and 01JC). -/
 theorem etale_fibre_product_coproduct (X : Scheme.{u}) (I : Type v) [Finite I]
     (U : I → Scheme.{u}) (u : ∀ i : I, U i ⟶ X) :
     let A : I → Over X := fun i => Over.mk (u i)

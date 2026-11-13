@@ -138,11 +138,8 @@ private theorem concrete_refinement_projection_boundary
   simpa only [unboundedFormalism, rightDerivedLowerStarIdIso,
     openImmersionLowerShriekLowerStarExchangeIso, asIso_hom] using h
 
-/-- The first transported side is the specified refinement map; the second removes R(1)_*.
-
-Source: Stacks Tags 0F7C--0F7E, projection pasting; the normalized refinement map in
-`LowerShriekIndependenceUnbounded.lean` and its open-unit normalization in
-`OpenImmersionLowerShriekProjectionBaseChange.lean`. -/
+/-- The first transported side is the specified refinement map; the second removes `R(1)_*`
+(Stacks, Tags 0F7C--0F7E). -/
 theorem etaleRefinementGraphSideTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s r : Compactification f)

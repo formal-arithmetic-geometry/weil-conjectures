@@ -26,7 +26,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.CartesianMonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Proposition 00YV, ring paragraph; Section 00YR, sextuples. -/
+/-- Comparison of the ring-valued direct image of étale sheaves with the direct image of the
+underlying set-valued sheaves (Stacks, Tags 00YV and 00YR). -/
 theorem etaleRingDirectImageComparison (U V : Scheme.{u}) (f : U ⟶ V)
     (FU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1} ⥤
       CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))))

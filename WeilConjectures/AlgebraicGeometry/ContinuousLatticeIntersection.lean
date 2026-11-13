@@ -16,7 +16,9 @@ The inverse image of the pushed-forward lattice image under the adjunction unit
 is a genuine categorical pullback. Over a split finite cover it is the intersection
 of the sheet lattices, so its construction requires no choices of splittings.
 
-Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent of integral structures.
+## References
+
+* Bhatt–Scholze, Lemma 6.8.13
 -/
 
 @[expose] public section
@@ -30,19 +32,16 @@ namespace CategoryTheory.Limits
 
 variable {C : Type*} [Category C] [Abelian C] {A B D : C}
 
-/-- The inverse image of the image of `g` under `f`.
-Source: the categorical image and pullback universal properties. -/
+/-- The inverse image of the image of `g` under `f`. -/
 noncomputable def imagePullback (f : A ⟶ D) (g : B ⟶ D) : C :=
   pullback f (image.ι g)
 
-/-- The inclusion of the inverse image of an image.
-Source: the pullback universal property. -/
+/-- The inclusion of the inverse image of an image. -/
 noncomputable def imagePullbackι (f : A ⟶ D) (g : B ⟶ D) : imagePullback f g ⟶ A :=
   pullback.fst _ _
 
 /-- Exact functors send the inclusion of this inverse image to an isomorphism
-whenever they invert the map whose image was taken.
-Source: exactness of images and the pullback universal property. -/
+whenever they invert the map whose image was taken. -/
 theorem imagePullbackι_map_isIso {D' : Type*} [Category D'] [Abelian D']
     (F : C ⥤ D') [PreservesFiniteLimits F]
     (f : A ⟶ D) (g : B ⟶ D) [IsIso (F.map g)] :
@@ -54,8 +53,7 @@ theorem imagePullbackι_map_isIso {D' : Type*} [Category D'] [Abelian D']
   have : IsIso (F.map (image.ι g)) := isIso_of_mono_of_epi _
   exact ((IsPullback.of_hasPullback f (image.ι g)).map F).isIso_fst_of_isIso
 
-/-- Exact inverse image transports the canonical image-pullback itself.
-Source: preservation of images and pullbacks by exact functors. -/
+/-- Exact inverse image transports the canonical image-pullback itself. -/
 noncomputable def imagePullbackMapIso {D' : Type*} [Category D'] [Abelian D']
     (F : C ⥤ D') [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (f : A ⟶ D) (g : B ⟶ D) :
@@ -67,8 +65,7 @@ noncomputable def imagePullbackMapIso {D' : Type*} [Category D'] [Abelian D']
   exact PreservesPullback.iso F f (image.ι g) ≪≫ asIso h
 
 /-- Changing all objects and maps by commuting isomorphisms transports the
-canonical image-pullback.
-Source: functoriality of images and pullbacks. -/
+canonical image-pullback. -/
 noncomputable def imagePullbackCongr {A' B' D' : C}
     (f : A ⟶ D) (g : B ⟶ D) (f' : A' ⟶ D') (g' : B' ⟶ D')
     (eA : A ≅ A') (eB : B ≅ B') (eD : D ≅ D')
@@ -82,8 +79,7 @@ noncomputable def imagePullbackCongr {A' B' D' : C}
   exact asIso h
 
 /-- The intersection of two subobjects is the kernel of one subobject's map to
-the other's quotient.
-Source: the normal-monomorphism property in an abelian category. -/
+the other's quotient. -/
 noncomputable def imagePullbackIsoKernel (f : A ⟶ D) [Mono f]
     (g : B ⟶ D) [Mono g] : imagePullback f g ≅ kernel (g ≫ cokernel.π f) := by
   have : Mono (factorThruImage g) := mono_of_mono_fac (image.fac g)
@@ -117,8 +113,7 @@ end CategoryTheory.Limits
 namespace CategoryTheory.Adjunction
 
 /-- Transposing a pushed integral embedding is coefficient-change pushforward
-followed by the pushed rational map.
-Source: the counit equation for the mates correspondence. -/
+followed by the pushed rational map. -/
 theorem pushHomOfComapIso_homEquiv
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {LX : A ⥤ B} {UX : B ⥤ A} {LY : C ⥤ D} {UY : D ⥤ C}
@@ -154,16 +149,14 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (e : (Mod.extendScalars (coefficientMap a U)).obj M ≅
     (upperStar S p).obj P)
 
-/-- The supplied lattice maps to the restricted rational module by `m ↦ e(1 ⊗ m)`.
-Source: Bhatt--Scholze, Lemma 6.8.13, integral structures on a finite cover. -/
+/-- The supplied lattice maps to the restricted rational module by `m ↦ e(1 ⊗ m)`. -/
 noncomputable def latticeIntegralEmbedding :
     M ⟶ (Mod.comap (coefficientMap a U)).obj
       ((upperStar S p).obj P) :=
   (Mod.extendRestrictAdjunction (coefficientMap a U)).homEquiv
     M ((upperStar S p).obj P) e.hom
 
-/-- Push forward the lattice embedding and use the canonical change-of-scalars comparison.
-Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent. -/
+/-- Push forward the lattice embedding and use the canonical change-of-scalars comparison. -/
 noncomputable def latticePushedEmbedding :
     (lowerStar R p).obj M ⟶
       (Mod.comap (coefficientMap a X)).obj
@@ -173,8 +166,7 @@ noncomputable def latticePushedEmbedding :
     (comapLowerStarIso a p).inv.app
       ((upperStar S p).obj P)
 
-/-- The rational adjunction unit, viewed as an integral-linear map.
-Source: the inverse-image/direct-image adjunction in Bhatt--Scholze, Section 4. -/
+/-- The rational adjunction unit, viewed as an integral-linear map (Bhatt–Scholze, Section 4). -/
 noncomputable def latticeIntersectionUnit :
     (Mod.comap (coefficientMap a X)).obj P ⟶
       (Mod.comap (coefficientMap a X)).obj
@@ -184,16 +176,14 @@ noncomputable def latticeIntersectionUnit :
     ((upperStarLowerStarAdjunction S p).unit.app P)
 
 /-- Pull back the image of the pushed lattice under the rational adjunction unit.
-This constructs the module itself without selecting a witness of an existence theorem.
-Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent, using intersections. -/
+This constructs the module itself without selecting a witness of an existence theorem. -/
 noncomputable def latticeIntersection :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj R X) :=
   imagePullback (latticeIntersectionUnit a X P p)
     (latticePushedEmbedding a X P p M e)
 
-/-- The canonical inclusion of the intersection in the rational module.
-Source: the pullback construction of the finite-sheet lattice intersection. -/
+/-- The canonical inclusion of the intersection in the rational module. -/
 noncomputable def latticeIntersectionι :
     latticeIntersection a X P p M e ⟶
       (Mod.comap (coefficientMap a X)).obj P :=
@@ -201,16 +191,15 @@ noncomputable def latticeIntersectionι :
     unfold latticeIntersection
     exact imagePullbackι _ _
 
-/-- The canonical scalar extension map from the intersection to the original module.
-Source: the tensor universal property in Bhatt--Scholze, Lemma 6.8.13. -/
+/-- The canonical scalar extension map from the intersection to the original module
+(Bhatt–Scholze, Lemma 6.8.13). -/
 noncomputable def latticeIntersectionRationalization :
     (Mod.extendScalars (coefficientMap a X)).obj
       (latticeIntersection a X P p M e) ⟶ P :=
   ((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv _ _).symm
     (latticeIntersectionι a X P p M e)
 
-/-- The canonical map out of the pushed lattice is the coefficient-change mate.
-Source: the mates correspondence for extension and restriction of scalars. -/
+/-- The canonical map out of the pushed lattice is the coefficient-change mate. -/
 theorem latticePushedEmbedding_rationalization :
     (Mod.extendScalars (coefficientMap a X)).map (latticePushedEmbedding a X P p M e) ≫
         (Mod.extendRestrictAdjunction (coefficientMap a X)).counit.app
@@ -222,8 +211,7 @@ theorem latticePushedEmbedding_rationalization :
     (comapLowerStarIso a p) M ((upperStar S p).obj P) e.hom
 
 /-- Invertibility of coefficient-change pushforward implies invertibility of the
-extended pushed lattice map, provided the rational localization counit is invertible.
-Source: the counit equation for the mates correspondence. -/
+extended pushed lattice map, provided the rational localization counit is invertible. -/
 theorem latticePushedEmbedding_map_isIso
     [IsIso ((pushHom a p).app M)]
     [IsIso ((Mod.extendRestrictAdjunction (coefficientMap a X)).counit.app
@@ -240,8 +228,7 @@ theorem latticePushedEmbedding_map_isIso
     ((Mod.extendRestrictAdjunction (coefficientMap a X)).counit.app _)
 
 /-- If scalar extension inverts the pushed lattice map and its restriction counit,
-it identifies the canonical intersection with the rational module.
-Source: exactness of localization and the pullback universal property. -/
+it identifies the canonical intersection with the rational module. -/
 theorem latticeIntersectionRationalization_isIso_of_map_isIso
     [PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
     [IsIso ((Mod.extendScalars (coefficientMap a X)).map

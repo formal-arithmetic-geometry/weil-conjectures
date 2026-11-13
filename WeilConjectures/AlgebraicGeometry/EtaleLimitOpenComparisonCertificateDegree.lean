@@ -25,10 +25,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 
-/-- The canonical cocone on inverse-image opens has a stage-comparison certificate.
-
-Source: Stacks Project, Tag 09YQ, coherent-system construction; the open-limit
-construction in Mathlib.AlgebraicGeometry.AffineTransitionLimit. -/
+/-- The canonical cocone on inverse-image opens has a stage-comparison certificate (Stacks, Tag
+09YQ). -/
 theorem etale_limit_open_comparison_certificate_degree
     (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

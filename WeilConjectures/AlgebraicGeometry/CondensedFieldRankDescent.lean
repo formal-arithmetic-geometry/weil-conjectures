@@ -14,8 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-!
 # Locally constant ranks descended through flat covers
 
-Source: the rank/descent argument, steps 4--5, accompanying Hemo--Richarz--Scholbach,
-Example 3.1.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -47,9 +48,8 @@ private lemma closed_of_specializes_iff {Y : Type*} [TopologicalSpace Y]
     isClosed_of_mem_irreducibleComponents C hC.1
 
 /-- Fibre-compatible specialization-invariant functions on a flat cover have locally
-constant descent on a topologically noetherian scheme.
-Source: the rank/descent argument, steps 4--5, accompanying Hemo--Richarz--Scholbach,
-Example 3.1. -/
+constant descent on a topologically noetherian scheme
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem exists_locallyConstant_descent_of_specializes
     {X : Scheme.{u}} [NoetherianSpace X] {I : Type v} (V : I → Scheme.{u})
     (f : ∀ i, V i ⟶ X) (hf : ∀ i, Flat (f i))

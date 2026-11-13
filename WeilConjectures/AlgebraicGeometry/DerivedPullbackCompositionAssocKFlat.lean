@@ -21,9 +21,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
-/-- The two triple-composition paths have equal components on a K-flat complex.
-Source: Stacks Project, Cohomology, Tag 0D5S, Lemma 20.27.2;
-Mathlib `Adjunction.leftAdjointCompIso_assoc`. -/
+/-- The two triple-composition paths have equal components on a K-flat complex (Stacks, Tag
+0D5S). -/
 theorem derivedPullbackComposition_assoc_kflat
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

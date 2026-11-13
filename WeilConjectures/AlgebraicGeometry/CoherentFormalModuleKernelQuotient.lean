@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelQuotientAdicB
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelQuotientInclusionBound
 
 /-! # Quotient coherent formal kernels after enlarging the bound
-Source: Stacks Project, Lemma 087X, claims (b)--(c).
+
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -21,11 +24,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Quotient coherent formal-module system associated to stabilized kernel images.
-
-Source: Stacks Project, Lemma 087X, claim (c) and the eventual kernel calculation,
-under the stabilized-image equality supplied by claims (a)--(b).
-The bound is enlarged to satisfy the Artin--Rees condition for the kernel in the source. -/
+/-- Quotient coherent formal-module system associated to stabilized kernel images
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

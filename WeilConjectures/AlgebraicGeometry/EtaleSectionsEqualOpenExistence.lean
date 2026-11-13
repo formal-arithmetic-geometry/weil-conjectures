@@ -37,8 +37,8 @@ private theorem global_sections_eq_of_germs (T : Scheme.{u})
   rw [hz]
   exact h Ω y
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XM, existence argument.
-There is an open on which the two sections agree with the stated universal property. -/
+/-- There is an open on which the two sections agree, with the universal property of the
+agreement open (Stacks, Tag 09XM). -/
 theorem exists_etaleSections_equal_open (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (V : S.Etale) (s t : F.obj.obj (op V)) :

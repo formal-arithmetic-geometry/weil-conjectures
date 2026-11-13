@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 /-!
 # Base change on the full affine étale sites
 
-Source: Stacks Project, Étale Cohomology, Lemma 0EYL and Topologies, Lemma 04HR.
+## References
+
+* Stacks Project, Tags 0EYL and 04HR
 -/
 
 @[expose] public section
@@ -39,9 +41,8 @@ theorem affineEtaleBaseChange_isAffine {T T' : Scheme.{u}} (h : T' ⟶ T)
   change IsAffine (pullback U.obj.hom h)
   exact AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1 U.obj.hom h
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR.
-The ordinary étale base-change functor restricted to the full affine subcategories.
-Its objects are `U ×_T T' → T'`; its arrows are the ordinary base-change arrows. -/
+/-- The étale base-change functor restricted to the full affine subcategories
+(Stacks, Tags 0EYL and 04HR). -/
 noncomputable def affineEtaleBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] : T.FullAffineEtale ⥤ T'.FullAffineEtale :=
   ObjectProperty.lift (fun U : T'.Etale ↦ IsAffine U.left)
@@ -50,7 +51,8 @@ noncomputable def affineEtaleBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
 
 end Scheme
 
-/-- Source: Stacks Project, Topologies 04HR and 0217, Sites 00WV. -/
+/-- Étale base change along an affine morphism sends coverings to coverings
+(Stacks, Tags 04HR, 0217 and 00WV). -/
 private theorem affineEtaleBaseChange_cover_pullback_continuous {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] :
     (∀ (X : T.FullAffineEtale) (R : Presieve X),
@@ -135,9 +137,8 @@ private theorem affineEtaleBaseChange_cover_pullback_continuous {T T' : Scheme.{
 
 -- The existential continuity witness is used only through instance synthesis.
 set_option linter.unusedVariables false in
-/--
-Source: Stacks Project, Étale Cohomology, Lemma 0EYL, and Topologies,
-Lemma 04HR; Sites 00WV, 00WX, 00X1; Étale Cohomology 03Q1(2). -/
+/-- Base change along an affine morphism is a continuous functor of the full affine étale sites
+(Stacks, Tags 0EYL, 04HR, 00WV, 00WX, 00X1 and 03Q1). -/
 theorem affineEtaleSiteBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] :
     (∀ (X : T.FullAffineEtale) (R : Presieve X),

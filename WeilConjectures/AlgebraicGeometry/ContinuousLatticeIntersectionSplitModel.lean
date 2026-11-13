@@ -24,8 +24,8 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- On a compact splitting refinement, the global intersection is the inverse
-image of the rational diagonal inside the rationalized sum of the sheet lattices.
-Source: Bhatt--Scholze, Lemma 6.8.13; agent finite-sheet variant. -/
+image of the rational diagonal inside the rationalized sum of the sheet lattices (Bhatt–Scholze,
+Lemma 6.8.13). -/
 theorem continuousLatticeIntersection_splitModel
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

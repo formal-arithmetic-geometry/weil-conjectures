@@ -136,9 +136,8 @@ private theorem small_dense_extension_essentiallySmall
     Iso.hom_inv_id, G.map_id, Category.id_comp] at hi'
   exact hi'
 
-/-- The section type of the concrete generator is a quotient of a u-small type.
-Source: Stacks Project, Tags 00W1 and 01DO; Mathlib's concrete plus construction
-and dense-subsite comparison. -/
+/-- The section type of the concrete generator is a quotient of a `u`-small type (Stacks, Tags
+00W1 and 01DO). -/
 theorem etaleSmallGenerator_sections_surjective (X : Scheme.{u}) (U : X.Etaleᵒᵖ) :
     ∃ α : Type u, ∃ f : α → ((etaleSmallGenerator X).obj.obj U),
       Function.Surjective f := by

@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Simultaneous descent of affine étale objects
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -103,8 +105,8 @@ private theorem affineEtale_single_model
   exact ⟨k, Xi, isPullbackLift D c (homOfLE hk).op hr',
     isPullback_isPullbackLift (homOfLE hk).op hr'⟩
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Limits 01ZM,
-01YZ, 01Z6 and 07RP. -/
+/-- Finitely many affine étale objects over the limit of a qcqs inverse system have models at
+a common finite stage (Stacks, Tags 0EYL, 01ZM, 01YZ, 01Z6 and 07RP). -/
 theorem affineEtale_common_models
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

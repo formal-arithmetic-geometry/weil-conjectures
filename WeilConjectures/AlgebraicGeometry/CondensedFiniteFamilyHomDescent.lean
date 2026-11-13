@@ -13,8 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.CondensedOverlapFactorTranspose
 
 /-!
 # One-way finite coefficient factorization on a finite family of qcqs schemes
-
-Source: archived ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph.
 -/
 
 @[expose] public section
@@ -531,9 +529,7 @@ private lemma spanFactor (src dst : LocalData T X f ℓ E M)
 end Spans
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Finite-stage comparison maps in both directions on all pairwise pullbacks.
-
-Source: archived `TwoColimit.lean`, (Obj) overlap descent paragraph. -/
+/-- Finite-stage comparison maps in both directions on all pairwise pullbacks. -/
 theorem exists_finiteCoefficient_family_hom_factorizations
     (T X : Scheme.{u}) (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

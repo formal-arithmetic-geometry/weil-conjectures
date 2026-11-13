@@ -83,8 +83,7 @@ variable {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
 abbrev constantComplex (R : Type w) [CommRing R] :=
   (commutativeSiteConstantModuleFunctor J R).mapHomologicalComplex (.up ℤ)
 
-/-- The complex B tensor_A P, before localization.
-Source: Bhatt--Scholze 6.6.11. -/
+/-- The complex `B ⊗_A P`, before localization (Bhatt--Scholze, Proposition 6.6.11). -/
 abbrev model (P : CochainComplex (ModuleCat.{w} A) ℤ) :=
   ((ConstantCompletion.change (ConstantCompletion.coefficientMap J A I)).mapHomologicalComplex
     (.up ℤ)).obj ((constantComplex J A).obj P)
@@ -163,9 +162,8 @@ def IsSliceResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ) (U : C)
 
 variable {J}
 
-/-- The complete assertion on a site or a slice, retaining the canonical chain comparison.
-This uses the existing local internal-Hom completeness predicate and universal derived counit.
-Source: Bhatt--Scholze 6.6.11; Stacks 093J, 093M, 099Q and 06YY. -/
+/-- The complete assertion on a site or a slice, retaining the canonical chain comparison
+(Bhatt--Scholze, Proposition 6.6.11; Stacks, Tags 093J, 093M, 099Q and 06YY). -/
 def HasCompleteResidueCalculation
     {B k : Sheaf J CommRingCat.{w}} (π : B ⟶ k)
     (M : ConstantCompletion.Cx B) (V : ConstantCompletion.Cx k)

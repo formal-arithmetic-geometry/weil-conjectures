@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AdicPerfectModelsResidueHomology
 
 /-! # Completeness, bounds and etale residue origin from perfect local models
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.3
 -/
 
 @[expose] public noncomputable section
@@ -60,9 +62,8 @@ private theorem bounded_residueOrigin (X : Scheme.{u})
   · exact hc
 
 /-- Stratified perfect models give global completeness and bounds, and bounded
-constructible etale origin of the residue. The Tor condition is deliberately separate:
-it follows from field-valued tensor exactness.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3. -/
+constructible etale origin of the residue (Bhatt--Scholze, Proposition 6.6.11 and
+Lemma 6.5.3). -/
 theorem adicPerfectModels_residueOrigin (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

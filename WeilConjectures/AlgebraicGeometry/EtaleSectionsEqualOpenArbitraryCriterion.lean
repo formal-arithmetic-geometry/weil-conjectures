@@ -114,7 +114,8 @@ private theorem range_iff_factors {X T : Scheme.{u}} (E : X.Opens) (a : T ⟶ X)
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XM, and Tag 03S2. -/
+/-- A criterion for an open `E` to be the agreement open of two sections, tested along arbitrary
+scheme morphisms (Stacks, Tags 09XM and 03S2). -/
 theorem etaleSections_equal_open_arbitrary_criterion
     (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Q : S.Etale) (s t : F.obj.obj (op Q)) (E : Q.left.Opens)

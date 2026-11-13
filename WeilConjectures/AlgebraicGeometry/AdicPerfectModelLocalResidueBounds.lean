@@ -14,8 +14,10 @@ import Mathlib.Algebra.Module.Projective
 
 /-! # The residue interval on one perfect-model chart
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication;
-Stacks Project, Tags 03EL, 06YY and 0E8K.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
+* Stacks Project, Tags 03EL, 06YY and 0E8K
 -/
 
 @[expose] public noncomputable section
@@ -158,11 +160,8 @@ private def residueHomologyIso (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (F.mapDerivedCategoryHomologyFunctorIso q).symm.app (L.obj K))
 
 /-- The residue of a complex with a specified perfect model on one covering slice
-has that model's interval on the same slice. This is a local calculation, with
-no stratification, covering hypothesis, compactness or global boundedness assertion.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Project,
-Tags 03EL, 06YY and 0E8K. -/
+has that model's interval on the same slice (Bhatt--Scholze, Proposition 6.6.11;
+Stacks, Tags 03EL, 06YY and 0E8K). -/
 theorem adicPerfectModel_localResidueBounds {X S : Scheme.{u}} (i : S ⟶ X)
     [IsImmersion i] {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal)

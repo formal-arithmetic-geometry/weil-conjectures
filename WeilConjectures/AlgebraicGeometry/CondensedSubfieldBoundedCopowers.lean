@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 
 /-! # Bounded-below copowers for finite condensed coefficient fields
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1),
-and coproducts as filtered colimits of finite subcoproducts.
+## References
+
+* Hemo–Richarz–Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -115,8 +116,8 @@ noncomputable local instance (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u 
 
 -- The explicit colimit and truncation transports elaborate in several large module categories.
 set_option backward.isDefEq.respectTransparency false in
-/-- Derived direct image commutes with copowers of one bounded-below complex.
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1). -/
+/-- Derived direct image commutes with copowers of one bounded-below complex
+(Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem condensedSubfield_bounded_copower_comparison
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

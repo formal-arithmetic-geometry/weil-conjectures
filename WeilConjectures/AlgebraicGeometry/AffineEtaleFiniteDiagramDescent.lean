@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows
 /-!
 # Finite affine étale diagram descent
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -24,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Limits 01ZM,
-01YZ, 01Z6, and 07RP. -/
+/-- A finite diagram of affine étale objects over the limit of a qcqs inverse system descends
+to a finite stage (Stacks, Tags 0EYL, 01ZM, 01YZ, 01Z6 and 07RP). -/
 theorem affineEtale_finite_diagram_descent
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

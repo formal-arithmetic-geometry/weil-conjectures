@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousFieldPresentationNormalForm
 /-!
 # Local freeness of cokernels of continuous matrices of locally constant rank
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the Gaussian elimination step
-of the accompanying rank/descent argument.
+## References
+
+* Hemo–Richarz–Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -26,9 +27,8 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A finite presentation matrix of locally constant pointwise rank has locally free
-cokernel over continuous field-valued coefficients, with no noetherian hypothesis.
-Source: the rank/descent argument, steps 6--7, accompanying Hemo--Richarz--Scholbach,
-Example 3.1. -/
+cokernel over continuous field-valued coefficients, with no noetherian hypothesis
+(Hemo–Richarz–Scholbach, Example 3.1). -/
 theorem exists_finiteFree_cover_cokernel_of_locallyConstant_rank
     (E : Type u) [NormedField E] (V : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R]

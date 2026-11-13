@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.CondensedFieldRegularModuleScalars
 /-!
 # Compatible evaluation functors for two lifts of a scheme point
 
-Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
+* Bhatt--Scholze, Example 4.2.11
 -/
 
 @[expose] public section
@@ -26,9 +28,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Compatible geometric evaluation, independent of any chosen module or presentation.
-Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11. -/
+/-- Compatible geometric evaluation, independent of any chosen module or presentation
+(Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11). -/
 theorem exists_condensedField_compatible_evaluations
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X V W : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]

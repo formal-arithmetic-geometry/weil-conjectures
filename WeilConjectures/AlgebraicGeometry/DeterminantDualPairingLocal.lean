@@ -25,10 +25,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 open Scheme.Modules (wedge)
 
-/-- A determinant-formula morphism is bijective on sections below an open on which M
-is finite free, in every exterior degree.
-Source: Stacks Project, Tag 0BRT, determinant pairing; Mathlib
-`exteriorPower.basis_coord` and the finite dual basis. -/
+/-- A determinant-formula morphism is bijective on sections below an open on which `M` is finite
+free, in every exterior degree (Stacks, Tag 0BRT). -/
 theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (f : Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n ⟶
       Scheme.Modules.dual (Scheme.Modules.exteriorPower M n))

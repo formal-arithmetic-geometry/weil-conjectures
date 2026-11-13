@@ -24,9 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Every section group of the concrete etale generator is small in the scheme universe.
-Source: Stacks Project, Tag 01DO, its sheafified free representables, and the small
-model of the affine etale site in Mathlib.AlgebraicGeometry.Sites.AffineEtale. -/
+/-- Every section group of the concrete etale generator is small in the scheme universe (Stacks,
+Tag 01DO). -/
 theorem etaleSmallGenerator_sections_small (X : Scheme.{u}) (U : X.Etaleᵒᵖ) :
     Small.{u} ((etaleSmallGenerator X).obj.obj U) := by
   obtain ⟨α, f, hf⟩ := etaleSmallGenerator_sections_surjective X U

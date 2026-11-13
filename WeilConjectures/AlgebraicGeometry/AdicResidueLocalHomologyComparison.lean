@@ -17,7 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Residue homology of a specified local completed model
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -212,11 +214,8 @@ private def modelGlobalResidueIso (X : Scheme.{u})
             (AdicPerfectModel.algebraicResidue I P)))
 
 /-- A specified local completed-model isomorphism identifies the derived residue on that
-localized stratum with the constant algebraic residue complex. This is only a local
-calculation; it asserts neither constructibility nor etale descent nor finiteness.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.3.13;
-Stacks Tags 093M, 099Q and 09AK. -/
+localized stratum with the constant algebraic residue complex (Bhatt--Scholze,
+Proposition 6.6.11 and Lemma 6.3.13; Stacks, Tags 093M, 099Q and 09AK). -/
 theorem adicResidue_localModelComparison
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]

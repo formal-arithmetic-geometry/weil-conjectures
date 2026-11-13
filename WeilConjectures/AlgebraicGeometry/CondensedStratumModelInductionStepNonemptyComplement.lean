@@ -18,9 +18,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The closed complement of a nonempty open piece has strictly smaller support.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split. -/
+/-- The closed complement of a nonempty open piece has strictly smaller support. -/
 theorem exists_strict_closed_complement_support
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (D : TopologicalSpace.Closeds T)

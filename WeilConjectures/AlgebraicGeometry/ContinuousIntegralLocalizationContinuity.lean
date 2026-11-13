@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The qcqs derived pushforward carries the localization-unit telescope to a colimit
-on each cohomology sheaf.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2. -/
+on each cohomology sheaf (Hemo–Richarz–Scholbach, Lemma 5.3(1); Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralLocalization_push_homology_isColimit {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

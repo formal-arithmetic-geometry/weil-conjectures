@@ -23,9 +23,7 @@ namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact derived composition agrees with the two single comparisons.
-Source: Mathlib `mapDerivedCategoryCompIso_fac` and naturality of
-`mapDerivedCategoryFactors`; the final complex equality is checked in degree zero. -/
+/-- Exact derived composition agrees with the two single comparisons. -/
 private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category E]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
@@ -42,9 +40,7 @@ private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category 
   exact (F.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app
     H X 0).symm
 
-/-- A derived natural isomorphism agrees with its coefficient map on a single object.
-Source: `mapDerivedCategoryNatIso_fac` and the definition of
-`mapDerivedCategorySingleFunctor`; check the resulting complex map in degree zero. -/
+/-- A derived natural isomorphism agrees with its coefficient map on a single object. -/
 private theorem single_nat {C D : Type*} [Category C] [Category D]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C]
     [HasDerivedCategory D]
@@ -115,9 +111,7 @@ private theorem single_square {C D D' E : Type*}
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The single-object degree-zero right-derived comparison is natural.
-Source: naturality of `rightDerivedFunctorPlusCompatibility`,
-`homologyRightDerivedFunctorPlusObjSingleFunctorIso`, and `rightDerivedZeroIsoSelf`. -/
+/-- The single-object degree-zero right-derived comparison is natural. -/
 private theorem zero_single_naturality {C D : Type*} [Category C] [Category D]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C]
     [HasDerivedCategory D]

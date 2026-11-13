@@ -120,10 +120,7 @@ end CategoryTheory.Mod
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
-/-- Ordinary tensor transitivity transposes to the explicit coefficient inclusion.
-
-Source: `Mod.extendScalarsComp`, `Mod.extendScalarsIsoOfEq`, and the Hom paragraph
-of archived `ModuleObject/Colimit/TwoColimit.lean`. -/
+/-- Ordinary tensor transitivity transposes to the explicit coefficient inclusion. -/
 theorem coefficientComplexToAlgCl_underived_compatibility
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)

@@ -215,8 +215,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
   [FiniteDimensional ℚ_[ℓ] E]
 set_option backward.isDefEq.respectTransparency false in
-/-- Multiplying a rational derived morphism by a power of ℓ gives an integral morphism.
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2). -/
+/-- Multiplying a rational derived morphism by a power of ℓ gives an integral morphism
+(Bhatt–Scholze, Lemma 6.8.12 and Proposition 6.8.14(2)). -/
 theorem continuousConstructible_clear_denominators (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (A B : integralConstructible ℓ E X)

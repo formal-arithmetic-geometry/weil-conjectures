@@ -26,11 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The coproduct of free abelian representable sheaves on a u-small affine etale model,
-transported to the full etale site. It is a concrete construction, with no choice from
-an unproved existence assertion.
-Source: Stacks Project, Tags 01DO and 03EW; Mathlib's free-Yoneda construction and
-comparison equivalences for dense subsites. -/
+/-- The coproduct of free abelian representable sheaves on a `u`-small affine etale model,
+transported to the full etale site (Stacks, Tags 01DO and 03EW). -/
 noncomputable def etaleSmallGenerator (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} := by
   let C := SmallModel.{u} X.AffineEtale

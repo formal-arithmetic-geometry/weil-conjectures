@@ -40,9 +40,8 @@ private lemma chartMate_homEquiv {W X Y : Scheme.{u}} (f : Y ⟶ X)
   rw [← hn]
   rfl
 
-/-- The canonical continuous coefficient chart commutes with scheme direct image.
-
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization. -/
+/-- The canonical continuous coefficient chart commutes with scheme direct image (Bhatt–Scholze,
+Section 6.8). -/
 theorem continuousChart_scheme_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O] :
     condensedPushforwardHom (Profinite.continuousMapRingObj O) f ≫

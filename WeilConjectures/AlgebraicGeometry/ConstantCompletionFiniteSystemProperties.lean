@@ -7,9 +7,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionFiniteSystemModules
 import WeilConjectures.AlgebraicGeometry.ConstantCompletionFiniteSystemFlatAndReduction
 /-! Flatness and reduction data for the finite constant completion tower.
-Source: Stacks Project, Tags 093M and 0912.
 The module structures in this statement are the canonical quotient-section module
-structures induced by sheafification of the constant quotient presheaves. -/
+structures induced by sheafification of the constant quotient presheaves.
+
+## References
+
+* Stacks Project, Tags 093M and 0912
+-/
 @[expose] public noncomputable section
 set_option linter.style.haveILetI false
 set_option linter.style.longLine false
@@ -27,8 +31,8 @@ presheaf. -/
   (((toSheafify J
     ((Functor.const Cᵒᵖ).obj (CommRingCat.of (A ⧸ I ^ (n + 1))))).app U).hom).toModule
 
-/--
-Source: Stacks Project, Tags 093M and 0912. -/
+/-- The finite system of constant quotient sections has compatible scalar towers, flat terms,
+surjective transitions and the tensor reduction identification (Stacks, Tags 093M and 0912). -/
 theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1))

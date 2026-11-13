@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.AffineModelComparisonData
 public import WeilConjectures.AlgebraicGeometry.AffineModelCoherentObjectComparisons
 
 /-! # Constructor interface for affine comparison data
-Source: the explicit comparison-data formula, Stacks Project, Tag 09RE. -/
+
+## References
+
+* Stacks Project, Tag 09RE
+-/
 
 @[expose] public section
 universe u w
@@ -19,8 +23,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Constructor API for the original comparison predicate, with canonical functor maps.
-Source: the explicit defining formula of affineModelComparisonData. -/
+/-- Constructor for the comparison predicate `affineModelComparisonData`, with canonical
+functor maps. -/
 theorem affineModelComparisonData_of_hom_equations
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

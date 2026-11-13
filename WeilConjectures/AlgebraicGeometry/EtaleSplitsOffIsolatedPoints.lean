@@ -123,9 +123,9 @@ private theorem disjoint_finite_pieces_after_shrinking
     exact ⟨(hpersist i).1, (hv' i).1, (hv' i).2.1,
       (hv' i).2.2.1, (hv' i).2.2.2.1⟩
 
-/-- Source: Stacks Project, More on Morphisms, Tag 02LN.
-A separated locally finite type morphism splits off finite disjoint open pieces through any
-finite family of distinct isolated fibre points after an elementary étale base change. -/
+/-- A separated locally finite type morphism splits off finite disjoint open pieces through any
+finite family of distinct isolated fibre points after an elementary étale base change (Stacks,
+Tag 02LN). -/
 theorem exists_etale_splits_off_isolated_points
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsSeparated f]
     (s : S) (n : ℕ) (x : Fin n → X) (h_distinct : Function.Injective x)

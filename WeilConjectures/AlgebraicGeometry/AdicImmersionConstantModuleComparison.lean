@@ -17,7 +17,10 @@ import all WeilConjectures.SixFunctors.GeometricInverseImageConstantModule
 
 /-! # Completed constant modules under the normalized immersion pullback
 
-Source: Stacks Tags 03D2, 03EL and 099L; Bhatt--Scholze Lemma 6.5.8.
+## References
+
+* Stacks Project, Tags 03D2, 03EL and 099L
+* Bhatt--Scholze, Lemma 6.5.8
 -/
 
 @[expose] public noncomputable section
@@ -336,9 +339,8 @@ private theorem transported_scalars
 
 end ConstantModules
 
-/-- Constant modules commute with the normalized completed immersion pullback.
-
-Source: Stacks Tags 03D2, 03EL and 099L; Bhatt--Scholze Lemma 6.5.8. -/
+/-- Constant modules commute with the normalized completed immersion pullback
+(Stacks, Tags 03D2, 03EL and 099L; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_constantModuleComparison
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :

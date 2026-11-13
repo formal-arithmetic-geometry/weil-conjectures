@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Adic constructibility and stratified perfect models
 
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -127,8 +129,8 @@ private theorem sfbComplete_triangulated (X : Scheme.{u})
   exact ⟨inferInstance, inferInstance⟩
 
 /-- Adic constructibility is equivalent to stratified perfect local models; these objects
-are bounded and form a full triangulated subcategory.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11. -/
+are bounded and form a full triangulated subcategory
+(Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11). -/
 theorem adic_stratified_perfect (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (_hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

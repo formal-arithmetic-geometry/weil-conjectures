@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruc
 public import WeilConjectures.AlgebraicGeometry.GeometricFieldProEtaleEvaluation
 
 /-! # Normalization of geometric coefficient coordinates on the singleton
-
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.
 -/
 
 @[expose] public section
@@ -100,9 +98,7 @@ private theorem point_coefficient_value (ℓ : ℕ) [Fact ℓ.Prime]
   erw [← hu]
   congr 1
 /-- The chosen coefficient coordinates agree with the point-adjunction unit on the
-singleton profinite test object.
-
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers. -/
+singleton profinite test object. -/
 theorem condensedQbar_field_point_coefficient_value (ℓ : ℕ) [Fact ℓ.Prime]
     (K : Type u) [Field K] [IsAlgClosed K]
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ

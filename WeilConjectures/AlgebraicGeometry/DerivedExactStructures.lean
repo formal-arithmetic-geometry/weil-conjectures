@@ -37,8 +37,8 @@ theorem qc_triangulated (X : Scheme.{u})
   rw [← he]
   exact supported_qcoh_isTriangulated X Set.univ
 
-/-- Separate exact shifts for the pullback-tensor lift and the specified right adjoint.
-Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction. -/
+/-- Separate exact shifts for the pullback-tensor lift and the specified right adjoint (Stacks,
+Tags 06YJ and 06YH). -/
 theorem rightAdjointTensor_exactStructures
     {Z Y : Scheme.{u}} (f : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -85,8 +85,8 @@ theorem rightAdjointTensor_exactStructures
   let : c.IsTriangulated := adj.isTriangulated_rightAdjoint
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
-/-- Separate exact shifts for the two functors in the projection comparison.
-Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction. -/
+/-- Separate exact shifts for the two functors in the projection comparison (Stacks, Tags 06YJ
+and 06YH). -/
 theorem projection_exactStructures
     {Z Y : Scheme.{u}} (f : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

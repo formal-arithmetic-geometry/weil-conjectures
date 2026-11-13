@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Bounding an intersection with a coherent multiplication kernel
 
-Source: Stacks Project, Tag 01YA, applied to a quasi-coherent kernel.
+## References
+
+* Stacks Project, Tag 01YA
 -/
 
 @[expose] public section
@@ -28,9 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A high ideal multiple of a coherent source intersects its kernel only inside
-any prescribed ideal multiple of the kernel.
-Source: Stacks Project, Tag 01YA, the inclusion clause of Artin-Rees, as applied
-in Tag 01YB to the kernel of tensor multiplication. -/
+any prescribed ideal multiple of the kernel (Stacks, Tags 01YA and 01YB). -/
 theorem coherent_kernel_ideal_intersection_bound
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (F H : X.Modules) (μ : F ⟶ H)

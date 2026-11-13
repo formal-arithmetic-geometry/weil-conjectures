@@ -15,7 +15,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Underlying quasi-coherence of algebra-module kernels
 
-Source: EGA I, Proposition 9.6.1; Stacks Project, Schemes, Lemma 01IC.
+## References
+
+* EGA I, Proposition 9.6.1
+* Stacks Project, Tag 01IC
 -/
 
 @[expose] public section
@@ -89,8 +92,8 @@ private theorem quasiCoherent_slice_iff_open {S : Scheme.{u}} (U : S.Opens)
     exact (SheafOfModules.isQuasicoherent (S.ringCatSheaf.over U)).prop_of_iso
       ((overEquiv U).unitIso.app M).symm hback
 
-/-- The underlying kernel of a map from a free algebra-module sheaf is quasi-coherent.
-Source: EGA I, Proposition 9.6.1; Stacks Project, Schemes, Lemma 01IC and Section 01LA(5). -/
+/-- The underlying kernel of a map from a free algebra-module sheaf is quasi-coherent
+(EGA I, Proposition 9.6.1; Stacks, Tags 01IC and 01LA). -/
 theorem affine_algebraModule_kernel_isQuasicoherent
     (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (U : S.Opens)
     (M : SheafOfModules.{u}

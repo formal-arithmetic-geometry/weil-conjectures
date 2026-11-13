@@ -19,7 +19,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 /-!
 # The sectionwise pushforward continuity comparison
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1).
+## References
+
+* Hemo–Richarz–Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -122,9 +124,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for internal module objects needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 /-- The canonical pushforward continuity comparison is invertible after evaluation
-at one affine weakly contractible target object.
-
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), sectionwise hypercover calculation. -/
+at one affine weakly contractible target object (Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem condensed_qcqs_pushforward_local_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

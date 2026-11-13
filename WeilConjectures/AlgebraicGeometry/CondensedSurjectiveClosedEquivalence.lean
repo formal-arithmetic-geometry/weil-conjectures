@@ -19,10 +19,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Pullback on condensed module objects along a surjective closed immersion is an
- equivalence.
-
-Source: Stacks Project Tags 09AA and 09AH, empty-complement case; the module adjunction
-lift in `CondensedOpenClosedRecollement.lean`. -/
+ equivalence (Stacks, Tags 09AA and 09AH). -/
 theorem condensedSurjectiveClosedPullback_isEquivalence
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)

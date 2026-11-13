@@ -20,7 +20,9 @@ import Mathlib.RingTheory.Filtration
 
 /-! # Stabilized-image construction for a formal kernel
 
-Source: Stacks Project, Lemma 087X, claims (a)--(c) and the Artin--Rees calculation.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section
@@ -31,12 +33,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Stabilized images yield the coherent quotient system and its inclusion. The kernels
-of the inclusion components vanish after transitioning by the same uniform bound.
-This statement makes no assertion about the universal factorization property.
-
-Source: Stacks Project, Lemma 087X, claims (a)--(c), with the uniqueness calculation
-expanded from its Artin--Rees bound. -/
+/-- Stabilized images yield the coherent quotient system and its inclusion, whose kernels
+vanish after transitioning by a uniform bound (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_construction {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I)
     (α : F ⟶ H) :

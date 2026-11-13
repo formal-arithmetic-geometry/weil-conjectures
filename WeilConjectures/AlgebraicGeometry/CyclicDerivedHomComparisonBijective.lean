@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.CyclicDerivedHomComparisonMap
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 
 /-! # Bijectivity of free-representable cohomology comparison
-Source: Stacks Project, Tags 03Q8 and 072W, and the free-sheaf adjunction. -/
+
+## References
+
+* Stacks Project, Tags 03Q8 and 072W
+-/
 
 @[expose] public section
 universe u
@@ -190,11 +194,8 @@ private lemma generatorHom_bijective {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Eta
   rw [he]
   exact (comparisonHomEquiv h W F).bijective
 
-/-- The explicit universal-section map computes the cohomology of the fibre product.
-
-Source: Stacks Project, Tags 03Q8 and 072W; the free-sheaf/étale-extension-by-zero
-argument of `WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/FreeSheaf.lean`.
--/
+/-- The explicit universal-section map computes the cohomology of the fibre product (Stacks, Tags
+03Q8 and 072W). -/
 theorem abelianRepresentableCohomologyMap_bijective {X Y : Scheme.{u}}
     (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
     (q : ℕ) (W : X.Etale) :

@@ -98,8 +98,7 @@ private theorem point_nsmul_isIso :
   exact isIso_of_reflects_iso _
     (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
-/-- Multiplication by ℓ is invertible on every continuous E-module.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- Multiplication by ℓ is invertible on every continuous E-module (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem module_nsmul_isIso (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X)) :
@@ -124,8 +123,8 @@ theorem module_nsmul_isIso (X : Scheme.{u})
     exact isIso_of_reflects_iso _ (Mod.forget R)
   exact nsmul_isIso_of_unit ℓ (by assumption) M
 
-/-- Multiplication by ℓ is invertible on every derived continuous E-module.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- Multiplication by ℓ is invertible on every derived continuous E-module (Bhatt–Scholze, Lemma
+6.8.2). -/
 theorem derived_nsmul_isIso (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))) :

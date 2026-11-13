@@ -20,12 +20,8 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- Every normalized affine degree comparison has a two-sided inverse.
-Source: Stacks Project, Tag 03P2, affine calculation; Tags 01I9 and 01IA.
-
-Compare tensor pullback with Mathlib pullback by uniqueness of the left
-adjoint to the same pushforward, respecting their units. This transports
-quasi-coherence of U*F from the Mathlib pullback theorem. -/
+/-- Every normalized affine degree comparison has a two-sided inverse (Stacks, Tags 03P2, 01I9
+and 01IA). -/
 theorem exists_singletonTensorDegreeComparison_inverse
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

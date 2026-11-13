@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Restrict a hom equivalence to morphisms seen by faithful forgetful functors.
-Source: Stacks Project, Tag 03D3, restriction and naturality step;
-Mathlib `Adjunction.mkOfHomEquiv` and its unit/counit formulas. -/
+/-- Restrict a hom equivalence to morphisms seen by faithful forgetful functors (Stacks, Tag
+03D3). -/
 private theorem adjunctionOfLinearLifts
     {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
     (L : C ⥤ D) (R : D ⥤ C) (La : A ⥤ B) (Ra : B ⥤ A)

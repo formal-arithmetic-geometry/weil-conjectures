@@ -16,8 +16,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 /-!
 # Independence of the corank of a local presentation
 
-Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -134,9 +135,8 @@ private lemma matrix_of_regular_endomorphisms
     f ≫ biproduct.π (fun _ : Fin n ↦ Mod.regular R) i)
 
 /-- Two finite presentations of the same pulled-back module have equal coranks over
-points with the same image. No noetherian hypothesis is needed here.
-Source: the rank/descent argument, step 3, accompanying Hemo--Richarz--Scholbach,
-Example 3.1; Bhatt--Scholze, Example 4.2.11. -/
+points with the same image (Hemo--Richarz--Scholbach, Example 3.1;
+Bhatt--Scholze, Example 4.2.11). -/
 theorem condensedField_presentation_corank_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X : Scheme.{u})

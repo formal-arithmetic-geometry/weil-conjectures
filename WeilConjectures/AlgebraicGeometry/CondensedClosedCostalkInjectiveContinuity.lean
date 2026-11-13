@@ -26,9 +26,7 @@ noncomputable local instance closedCostalkInjectiveContinuityHasZeroMorphisms
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) := inferInstance
 
-/-- The K-injective comparison for a right derived functor is natural.
-Source: the right-derived unit and quotient comparison isomorphisms in
-`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective`. -/
+/-- The K-injective comparison for a right derived functor is natural. -/
 theorem rightDerivedObjQIso_naturality
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
@@ -125,9 +123,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimit inference needs a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- A closed exceptional inverse image preserves a filtered quasi-colimit cocone
-of injective complexes with a common lower bound.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), closed costalk step, using (3.4)
-and Lemma 5.3(1). -/
+of injective complexes with a common lower bound (Hemo--Richarz--Scholbach, Lemma 5.3). -/
 theorem condensed_closed_costalk_injective_continuity
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

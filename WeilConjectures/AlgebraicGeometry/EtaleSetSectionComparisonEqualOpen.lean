@@ -20,8 +20,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XM, applied to the pulled-back sheaf on the
-étale object `V ×[R] S`; Sites Tags 03CB and 03CC for composition of inverse images. -/
+/-- The agreement open of two pulled-back sections is compatible with the section comparison
+maps (Stacks, Tags 09XM, 03CB and 03CC). -/
 theorem etaleSetSectionComparison_equal_open
     {R S : Scheme.{u}} (f : S ⟶ R)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (V : R.Etale)

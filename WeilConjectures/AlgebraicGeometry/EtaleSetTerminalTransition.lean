@@ -82,7 +82,8 @@ private lemma terminalRestriction_unit
         simp [d, e, MorphismProperty.Over.mapPullbackAdj]
         rfl
 
-/-- Source: Stacks Project, Tag 03S2 and Sites Tags 03CB and 03CC. -/
+/-- The terminal restriction isomorphisms are compatible with restriction along `f : V ⟶ U`
+(Stacks, Tags 03S2, 03CB and 03CC). -/
 theorem etaleSetTerminalTransition
     {R : Scheme.{u}} (H : Sheaf R.smallEtaleTopology (Type (u + 1)))
     (U V W : R.Etale) (f : V ⟶ U) (q : U ⟶ W) (r : V ⟶ W)

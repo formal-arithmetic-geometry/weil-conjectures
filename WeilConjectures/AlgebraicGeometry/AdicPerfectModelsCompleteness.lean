@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.SfbPerfectModelCompletionTransport
 
 /-! # Completeness from stratified perfect models
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Stratified completed perfect models are locally derived complete.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.5.8. -/
+/-- Stratified completed perfect models are locally derived complete
+(Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8). -/
 theorem adicPerfectModels_completeness (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

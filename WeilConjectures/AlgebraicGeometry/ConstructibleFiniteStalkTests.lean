@@ -33,8 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Local constancy is invariant under isomorphism: use the same trivializing cover
-and transport constancy after restriction.
-Source: Mathlib `Sheaf.isConstant_congr`. -/
+and transport constancy after restriction. -/
 private theorem locallyConstant_of_iso {T : Scheme.{u}}
     {F G : Sheaf T.smallEtaleTopology (Type (u + 1))} (e : F ≅ G)
     (hF : IsLocallyConstantEtaleSheafOfSets F) :
@@ -46,9 +45,7 @@ private theorem locallyConstant_of_iso {T : Scheme.{u}}
     ((T.smallEtaleTopology.overPullback (Type (u + 1))
       (𝒰.etalePrecoverageToEtale i)).mapIso e)
 
-/-- The geometric point at the image of an immersion lifts to the specified source point.
-Source: `Scheme.exists_comp_eq_of_mem_range`, using surjectivity on stalks;
-injectivity of the immersion identifies the image of the lift. -/
+/-- The geometric point at the image of an immersion lifts to the specified source point. -/
 private theorem geometricPoint_lift {T X : Scheme.{u}} (f : T ⟶ X) [IsImmersion f]
     (y : T) : ∃ s : Spec (.of (AlgebraicClosure (X.residueField (f y)))) ⟶ T,
       s ≫ f = X.algClosurePoint (f y) ∧ s default = y := by

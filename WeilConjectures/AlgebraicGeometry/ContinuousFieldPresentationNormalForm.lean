@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm
 /-!
 # Local freeness of cokernels of continuous matrices of locally constant rank
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the Gaussian elimination step
-of the accompanying rank/descent argument.
+## References
+
+* Hemo–Richarz–Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -26,9 +27,8 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A continuous finite presentation of locally constant rank is locally an identity
-block and a zero block, up to isomorphisms of its source and target.
-Source: the rank/descent argument, steps 6--7, accompanying Hemo--Richarz--Scholbach,
-Example 3.1. -/
+block and a zero block, up to isomorphisms of its source and target (Hemo–Richarz–Scholbach,
+Example 3.1). -/
 theorem exists_cover_continuousField_presentation_normalForm
     (E : Type u) [NormedField E] (V : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R]

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CyclicDerivedHomComparisonNaturality
 /-!
 # Comparing free-representable derived Hom with cyclic cohomology
 
-Source: Stacks Project, Tag 03Q8, and the free-representable interpretation of sections.
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section
@@ -28,11 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Free-representable derived Hom computes cohomology on the fibre product, and geometric
-restriction to zero forces the corresponding presheaf restriction to zero.
-
-Source: Stacks Project, Tag 03Q8, the restricted cohomology presheaf; the free-sheaf
-adjunction argument in
-`WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/FreeSheaf.lean`. -/
+restriction to zero forces the corresponding presheaf restriction to zero (Stacks, Tag 03Q8). -/
 theorem exists_cyclicDerivedHom_cohomology_comparison {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) :
     let P := (uliftYoneda.{u + 1} ⋙

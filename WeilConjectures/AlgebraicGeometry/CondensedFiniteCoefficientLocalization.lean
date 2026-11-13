@@ -191,10 +191,7 @@ private theorem localizationModelTriangle
   · exact singleIsoTrans (CondensedRing.openModelIso a j P N eP) eOpen
   · exact singleIsoTrans (CondensedRing.closedModelIso b j k hjk Q N eQ) eClosed
 
-/-- Localization with the prescribed finite-coefficient images as its outer objects.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support induction; condensed open/closed
-recollement and change of coefficients. -/
+/-- Localization with the prescribed finite-coefficient images as its outer objects. -/
 theorem exists_finiteCoefficient_localization_triangle
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime]

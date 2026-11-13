@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # A compact open model for transported overlap restriction
 
-Source: Stacks Project, Tag 09IM, overlap setup; explicit open-range comparison.
+## References
+
+* Stacks Project, Tag 09IM
 -/
 
 @[expose] public section
@@ -28,9 +30,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Transported overlap restriction is ordinary compact-open restriction followed by
-an equivalence. No perfect object or morphism lifting is asserted.
-Source: Stacks Project, Tag 09IM, overlap setup. The comparison below is an explicit
-construction from the exact restriction and equivalence APIs of Mathlib. -/
+an equivalence (Stacks, Tag 09IM). -/
 theorem exists_compact_overlap_restriction_model
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V)

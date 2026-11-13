@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 /-!
 # Constructible finite stratifications of flat quasi-finite morphisms
 
-Source: Stacks Project, More on Morphisms, Tags 07RY and 07RZ, using the bounded
-closed degree filtration and quasi-compactness of its successive differences.
+## References
+
+* Stacks Project, Tags 07RY and 07RZ
 -/
 
 @[expose] public section
@@ -33,8 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Realize a locally closed set by the vanishing-ideal closed subscheme of an open
-subscheme. Source: Stacks Project, Schemes, Tag 01J3; Mathlib's `vanishingIdeal` and
-`range_subschemeι`. -/
+subscheme (Stacks, Tag 01J3). -/
 private theorem exists_immersion_of_locallyClosed {X : Scheme.{u}} {s : Set X}
     (hs : IsLocallyClosed s) :
     ∃ (T : Scheme.{u}) (g : T ⟶ X), IsImmersion g ∧ Set.range g = s := by

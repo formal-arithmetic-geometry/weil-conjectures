@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 
 /-! # SES boundaries and adjunction-compatible shifts for relative Mayer--Vietoris
 
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9.
+## References
+
+* Stacks Project, Tags 08BV, 08HY and 0DJ9
 -/
 
 @[expose] public section
@@ -53,8 +55,7 @@ def mvCanonicalBoundary (X : Scheme.{u}) (U V W : X.Opens)
         (fun _ ↦ inferInstance)) ≫ (schemeMVResolutionIso X K).hom⟦(1 : ℤ)⟧'
 
 /-- Pullback shifts are the unique mates of the right-derived direct-image shifts
-under exactly the adjunction used by the base-change map.
-Source: Stacks Tags 079W and 08HY; Mathlib Shift.Adjunction. -/
+under exactly the adjunction used by the base-change map (Stacks, Tags 079W and 08HY). -/
 @[instance_reducible] def mvCanonicalPullbackShift {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (derivedPullback g).CommShift ℤ :=
   (mvDerivedPullbackAdjunction g).leftAdjointCommShift ℤ

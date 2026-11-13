@@ -20,8 +20,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- A qcqs pushforward on condensed module sheaves preserves filtered colimits.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), in degree zero. -/
+/-- A qcqs pushforward on condensed module sheaves preserves filtered colimits
+(Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem lowerStar_preservesFilteredColimit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

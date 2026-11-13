@@ -24,8 +24,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- On compact covering schemes the canonical intersection has a rational
-finite-matrix kernel presentation.
-Source: Bhatt--Scholze, Lemma 6.8.13; the intersection argument is an agent variant. -/
+finite-matrix kernel presentation (Bhatt–Scholze, Lemma 6.8.13). -/
 theorem continuousLatticeIntersection_rationalModel
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

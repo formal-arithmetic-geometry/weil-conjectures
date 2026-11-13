@@ -103,8 +103,8 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local instance] Mod.isGrothendieckAbelian
 
 /-- Tensoring with a module trivialized as finite free by a pro-etale cover is left
-exact.  It is already right exact because it is left adjoint to internal Hom.
-Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2). -/
+exact.  It is already right exact because it is left adjoint to internal Hom (Stacks, Tag 08JJ;
+Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem condensed_locally_free_tensor_preservesFiniteLimits {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)

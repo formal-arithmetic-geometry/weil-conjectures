@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 /-! # Finite coefficient models are closed under extensions
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, Hom and object-descent
-arguments. The Hom argument does not use object descent. We use it independently
-of the two-colimit theorem to descend the boundary map of a short exact sequence.
 -/
 @[expose] public section
 universe u wC wD wE vC vD vE uC uD uE
@@ -161,8 +158,7 @@ private lemma boundary_identification
 
 attribute [local irreducible] derivedExtendScalarsCompIso
 
-/-- Finite constructible coefficient models are closed under distinguished extensions.
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, Hom and object descent. -/
+/-- Finite constructible coefficient models are closed under distinguished extensions. -/
 theorem exists_finiteCoefficient_model_of_triangle
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime]

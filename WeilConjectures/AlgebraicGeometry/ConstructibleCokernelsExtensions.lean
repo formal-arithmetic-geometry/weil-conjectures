@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 
 /-! # Cokernels and extensions of constructible internal module sheaves
-
-Source: finite presentation and local generator lifting.
 -/
 
 @[expose] public section
@@ -327,8 +325,7 @@ private lemma constructible_of_iso {X : Scheme.{u}}
   exact ⟨S, fun a => lfp_of_iso (hS a)
     (((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).mapMod R).mapIso e)⟩
 
-/-- Constructibility by local finite presentations is closed under cokernels and extensions.
-Source: finite presentations and local lifting of finitely many generators. -/
+/-- Constructibility by local finite presentations is closed under cokernels and extensions. -/
 theorem constructible_cokernels_extensions (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R) ∧

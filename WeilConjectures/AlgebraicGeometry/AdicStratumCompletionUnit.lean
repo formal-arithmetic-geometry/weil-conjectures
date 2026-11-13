@@ -572,9 +572,7 @@ variable {X : Scheme.{u}} (s : FiniteLocallyClosedStratification X)
   (F : ∀ α : Fin s.n, ConstantCompletion.InverseImageData (inverse (s.immersion α)))
   (A : Type (u + 1)) [CommRing A] (I : Ideal A)
 
-/-- Restriction along the actual immersion realizing one stratum. The finite-limit
-structure comes from that immersion, so it is not an extra hypothesis on a stratum.
-Source: Bhatt--Scholze, Lemma 6.5.8. -/
+/-- Restriction along the immersion realizing one stratum (Bhatt--Scholze, Lemma 6.5.8). -/
 def stratumPull (α : Fin s.n) :
     ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology X) A I) ⥤
       ConstantCompletion.D
@@ -582,9 +580,9 @@ def stratumPull (α : Fin s.n) :
   haveI := s.isImmersion α
   completedPull (F α) (direct (s.immersion α)) (adjunction (s.immersion α)) A I
 
-/-- The composite of stratum inverse image and the actual localization at a site object,
-with coefficient change given by the canonical finite-projection comparison.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Tag 00XZ. -/
+/-- The composite of stratum inverse image and localization at a site object, with
+coefficient change given by the canonical finite-projection comparison
+(Bhatt--Scholze, Proposition 6.6.11; Stacks, Tag 00XZ). -/
 def stratumSlicePull (α : Fin s.n) (U : proEtaleSiteModel (s.domain α)) :
     ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology X) A I) ⥤
       ConstantCompletion.D

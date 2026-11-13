@@ -11,7 +11,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Bounded cohomology over a constant field has the same Tor bound
 
-Source: Stacks Tags 03ER, 08FC, 08G0 and 08G1; Bhatt--Scholze Remark 6.3.2.
+## References
+
+* Stacks Project, Tags 03ER, 08FC, 08G0 and 08G1
+* Bhatt--Scholze, Remark 6.3.2
 -/
 
 @[expose] public noncomputable section
@@ -22,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Over a constant field sheaf every module is flat, so a bounded object has the same
-Tor interval. Source: Stacks Tags 03ER, 08FC, 08G0 and 08G1; Bhatt--Scholze Remark 6.3.2. -/
+Tor interval (Stacks, Tags 03ER, 08FC, 08G0 and 08G1; Bhatt--Scholze, Remark 6.3.2). -/
 theorem coefficientFieldTorBounds {C : Type w} [SmallCategory C]
     (J : GrothendieckTopology C) (k : Type w) [Field k]
     (K : ConstantCompletion.D (ConstantCompletion.constant J k))

@@ -27,10 +27,7 @@ namespace AlgebraicGeometry.ProEtale
 namespace CondensedRing
 
 /-- Extension by zero along a quasi-compact open immersion and direct image along its
-complementary closed immersion preserve constructibility, for any condensed ring.
-
-Source: upstream `ConstructibleSheaf/OpenClosed.lean`, stratification concatenation;
-`ModuleObject/Colimit/TwoColimit.lean`, open/closed object descent. -/
+complementary closed immersion preserve constructibility, for any condensed ring. -/
 theorem constructible_open_closed_images
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}

@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Topologies 04HR, Sites 00WX and 00X1;
-Étale Cohomology 09YQ. -/
+/-- The affine étale inverse images are compatible with the units of the small-site inverse
+images (Stacks, Tags 04HR, 00WX, 00X1 and 09YQ). -/
 theorem affineEtale_inverseImage_restriction_unit
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

@@ -27,8 +27,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousFieldCokernelLocalFree
 /-!
 # Local triviality over continuous p-adic field coefficients
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the agent rank/descent argument
-recorded in.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -137,8 +138,8 @@ private lemma free_pullback_comp_iff {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y �
   exact ⟨fun h ↦ free_of_iso (free_comap φ h) i.symm,
     fun h ↦ free_of_comap φ (free_of_iso h i)⟩
 
-/-- Local finite presentations over continuous field coefficients are locally finite free.
-Source: Hemo--Richarz--Scholbach, Example 3.1, with the agent rank/descent argument. -/
+/-- Local finite presentations over continuous field coefficients are locally finite free
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem exists_finiteFree_cover_of_condensedField_lfp
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -209,9 +210,8 @@ theorem exists_finiteFree_cover_of_condensedField_lfp
   rcases ij with ⟨i, j⟩
   exact (free_pullback_comp_iff ((D i).f j) (C.f i) P).mpr (hD i j)
 
-/-- The local triviality assertion applies on every noetherian locally closed stratum.
-Source: the concluding application in the agent rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1. -/
+/-- The local triviality assertion applies on every noetherian locally closed stratum
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem exists_finiteFree_cover_on_condensedField_strata
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

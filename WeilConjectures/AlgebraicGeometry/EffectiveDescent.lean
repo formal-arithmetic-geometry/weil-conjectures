@@ -121,12 +121,11 @@ theorem existsUnique_hom_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] 
   exact hu _ hψ₀.symm
 
 /-- **The descended scheme is a group scheme.** Let `p : X ⟶ Y` be faithfully flat and
-quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with descended
-scheme `V₀` and projection `qV`, and let `V` carry a group scheme structure whose multiplication
-and unit are compatible with `D`. Then `V₀` carries a unique group scheme structure over `Y`
-whose base change is the given one, in the sense that `qV` maps products of points of `V` to
-products of points of `V₀`.
-products of points of `V₀`. -/
+quasi-compact, `V` a scheme over `X` with an effective descent datum `D`, descended scheme `V₀`
+and projection `qV`, and let `V` carry a group scheme structure whose multiplication and unit
+are compatible with `D`. Then `V₀` carries a unique group scheme structure over `Y` whose base
+change is the given one, in the sense that `qV` maps products of points of `V` to products of
+points of `V₀`. -/
 theorem existsUnique_grpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
     [GrpObj V] (D : Over.DescentDatum p V) {V₀ : Over Y} (qV : V.left ⟶ V₀.left)
     (hqV : IsPullback qV V.hom V₀.hom p)
@@ -154,13 +153,10 @@ theorem existsUnique_grpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact 
   exact ⟨G, hG, fun G' hG' ↦ GrpObj.ext_of_mul_eq
     (mul_eq_of_descendPoint_mul hqV G'.toMonObj G.toMonObj hG' hG)⟩
 
-/-- **The descended scheme is a commutative group scheme.** Let `p : X ⟶ Y` be faithfully flat
-and quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with
-descended scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure
-whose multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group
-scheme structure over `Y` whose base change is the given one: `qV` maps products of points of `V`
-to products of points of `V₀`. Such a structure is unique by
-`existsUnique_grpObj_of_isPullback`. -/
+/-- **The descended scheme is a commutative group scheme.** In the setting of
+`existsUnique_grpObj_of_isPullback`, if `V` carries a commutative group scheme structure
+compatible with `D`, then `V₀` carries a commutative group scheme structure over `Y` whose base
+change is the given one: `qV` maps products of points of `V` to products of points of `V₀`. -/
 theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
     [CommGrpObj V] (D : Over.DescentDatum p V) {V₀ : Over Y} (qV : V.left ⟶ V₀.left)
     (hqV : IsPullback qV V.hom V₀.hom p)

@@ -23,7 +23,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Sites 03CB and 03CC, Categories 0B65. -/
+/-- The composition isomorphisms of the affine étale base change functors induce compatible
+mates on sheaf inverse images (Stacks, Tags 03CB, 03CC and 0B65). -/
 theorem affineEtale_restriction_composition_mates
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

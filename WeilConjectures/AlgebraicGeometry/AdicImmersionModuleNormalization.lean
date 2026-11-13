@@ -16,7 +16,9 @@ import all WeilConjectures.CategoryTheory.Sites.GeometricInverseImageExact
 
 /-! # Module-level normalization of immersion and slice restriction
 
-Source: Stacks Tags 00YY, 03D2, 03DJ and 099L.
+## References
+
+* Stacks Project, Tags 00YY, 03D2, 03DJ and 099L
 -/
 
 @[expose] public noncomputable section
@@ -384,9 +386,8 @@ instance sfbImmersionCompletedPullModules_colimits {X S : Scheme.{u}}
 
 attribute [local instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- The comparison of the two module inverse images, before passing to complexes.
-
-Source: Stacks Tags 00YY, 03D2, 03DJ and 099L; Bhatt--Scholze Lemma 6.5.8. -/
+/-- The comparison of the two module inverse images, before passing to complexes
+(Stacks, Tags 00YY, 03D2, 03DJ and 099L; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_moduleNormalization
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) (U : S.ProEt) :

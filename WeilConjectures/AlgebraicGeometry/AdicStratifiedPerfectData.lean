@@ -37,7 +37,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 /-!
 # Definitions for adic constructibility and stratified perfect models
 
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
 
 The coefficients are arbitrary complete Noetherian local rings. No finiteness of their
 residue fields or perfectness of their quotient modules over the original ring is assumed.
@@ -67,8 +69,8 @@ open scoped ZeroObject
 namespace AlgebraicGeometry.Scheme
 
 /-- Read modules over the constant ring sheaf as fixed-scalar module-valued sheaves,
-by restricting along the constant section map, retaining the underlying additive sheaf.
-Source: Stacks Tag 093I; Bhatt--Scholze, Definition 6.3.1. -/
+by restricting along the constant section map
+(Stacks, Tag 093I; Bhatt--Scholze, Definition 6.3.1). -/
 def sfbFixedScalarRestriction (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
     proEtaleRingModules X (adicLisseConstantRing X k) ⥤
       Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) where
@@ -93,11 +95,8 @@ instance sfbFixedScalarRestriction_additive (X : Scheme.{u}) (k : Type (u + 1))
     [CommRing k] : (sfbFixedScalarRestriction X k).Additive where
   map_add := by intros; ext U x; rfl
 
-/-- Tensor a complex of etale module sheaves termwise with a degree-zero module sheaf.
-In the application the coefficient ring is a residue field. Every module sheaf is flat,
-by the exact conservative geometric stalk functors, so this computes the derived tensor
-for every representative complex, including unbounded representatives.
-Source: Bhatt--Scholze, Remark 6.3.2. -/
+/-- Tensor a complex of etale module sheaves termwise with a degree-zero module sheaf
+(Bhatt--Scholze, Remark 6.3.2). -/
 def sfbEtaleTensorDegreeZero (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k]
     (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ)
     (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) :
@@ -106,8 +105,7 @@ def sfbEtaleTensorDegreeZero (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k]
   ((MonoidalCategory.tensorRight N).mapHomologicalComplex (.up ℤ)).obj C
 
 /-- The residue reduction, read in fixed-scalar sheaves using the canonical constant
-sections. The projection is to exponent one, written `0+1`, so the coefficient is A/I.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+sections, with coefficient `A/I` (Bhatt--Scholze, Definition 6.5.1). -/
 def sfbResidueComplex (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
     CochainComplex
@@ -136,11 +134,9 @@ def IsSfbAdicComplete (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Idea
     (ConstantCompletion.Q _ |>.obj
       ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage K)))
 
-/-- Condition (a), using the recorded global constructibility predicate. On a Noetherian
-scheme this is exactly the affine-local notion as well. Module finiteness means finite
- generation, hence finite presentation over the residue field, never finite underlying sets.
-The last clause explicitly tests every degree-zero module sheaf for finite Tor amplitude.
-Source: Bhatt--Scholze, Definitions 6.3.1 and 6.5.1, Remark 6.3.2. -/
+/-- Condition (a): constructible etale residue cohomology with finitely presented module
+stalks, and finite Tor amplitude against every degree-zero module sheaf
+(Bhatt--Scholze, Definitions 6.3.1 and 6.5.1, Remark 6.3.2). -/
 def IsSfbAdicConstructible (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
   IsSfbAdicComplete X I K ∧
@@ -157,9 +153,8 @@ def IsSfbAdicConstructible (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I :
           (q : ℤ), (q < a ∨ b < q) →
             IsZero ((sfbEtaleTensorDegreeZero X (A ⧸ I ^ (0 + 1)) C N).homology q)
 
-/-- The termwise completed realization of an actual coefficient complex. The constant
-module functor and scalar extension are the existing sheafification/tensor constructions.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+/-- The termwise completed realization of an actual coefficient complex
+(Bhatt--Scholze, Proposition 6.6.11). -/
 def sfbCompletedModel (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :
     DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)) :=
@@ -167,11 +162,8 @@ def sfbCompletedModel (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Idea
     (((completedAdicChange X (CompletedConstantReduction.base X I)).mapHomologicalComplex
       (.up ℤ)).obj ((CompletedConstantReduction.constantComplex X A).obj P))
 
-/-- Restrict to a stratum, retaining the true inverse-image coefficient ring, and then to
-one object of its pro-etale site. For immersions the coefficient identification with the
-completion on the stratum is the canonical limit comparison, as in the recorded immersion
-limit-preservation lemma.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+/-- Restrict to a stratum, retaining the inverse-image coefficient ring, and then to
+one object of its pro-etale site (Bhatt--Scholze, Proposition 6.6.11). -/
 def sfbLocalRestriction {X S : Scheme.{u}} (i : S ⟶ X)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (U : S.ProEt)
     (K : DerivedCategory (proEtaleRingModules X R)) :=
@@ -184,8 +176,8 @@ def sfbLocalRestriction {X S : Scheme.{u}} (i : S ⟶ X)
       ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _)).obj K)
 
 /-- Condition (b): finite constructible locally closed strata, pro-etale covering sieves,
-and bounded finite-projective coefficient complexes realizing K there.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+and bounded finite-projective coefficient complexes realizing K there
+(Bhatt--Scholze, Proposition 6.6.11). -/
 def IsSfbStratifiedPerfect (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
   letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)

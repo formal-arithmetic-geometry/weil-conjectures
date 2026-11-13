@@ -32,9 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Derived categories exist on all open subschemes of a Noetherian scheme.
-Source: Grothendieck abelianity of sheaves of modules on a small ringed site
-and `HasDerivedCategory.ofIsGrothendieckAbelian`. -/
+/-- Derived categories exist on all open subschemes of a Noetherian scheme. -/
 theorem noetherian_open_derived_categories_exists (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     Nonempty (∀ U : X.Opens,

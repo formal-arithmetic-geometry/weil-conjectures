@@ -21,8 +21,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The ordinary scalar-extension/pushforward comparison is invertible for a qcqs map.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2. -/
+/-- The ordinary scalar-extension/pushforward comparison is invertible for a qcqs map
+(Hemo–Richarz–Scholbach, Lemma 5.3(1); Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralScalarUnderivedPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

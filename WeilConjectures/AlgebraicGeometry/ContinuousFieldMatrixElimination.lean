@@ -50,8 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {E : Type u} [NormedField E] {T : Type v} [TopologicalSpace T]
 
-/-- Evaluation of continuous field-valued functions.
-Source: pointwise ring operations on continuous functions. -/
+/-- Evaluation of continuous field-valued functions. -/
 abbrev continuousFieldEval (t : T) : C(T, E) →+* E :=
   (ContinuousMap.evalAlgHom ℤ E t).toRingHom
 
@@ -70,9 +69,7 @@ noncomputable abbrev sumComplEquiv {r : ℕ} (ρ : Fin r → κ) (hρ : Function
 
 /-- Pulled back to a neighbourhood of a point, a matrix of continuous functions
 of constant rank `r` is equivalent to the matrix `[[1, 0], [0, 0]]` with an `r × r` identity
-block.
-Source: the Gaussian elimination step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1. -/
+block (Hemo–Richarz–Scholbach, Example 3.1). -/
 lemma continuousField_exists_isOpen_eq_mul (M : Matrix κ ι (C(T, E))) (r : ℕ)
     (hr : ∀ t, (M.map (continuousFieldEval t)).rank = r) (t₀ : T) :
     ∃ (U : Set T) (ρ : Fin r → κ) (γ : Fin r → ι) (hρ : Function.Injective ρ)

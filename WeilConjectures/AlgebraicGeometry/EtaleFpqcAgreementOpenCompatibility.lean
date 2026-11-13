@@ -19,8 +19,8 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XN, paragraph
-beginning "Let V", using Tag 09XM and composition units in Tags 03CB and 03CC. -/
+/-- The agreement opens of the pulled-back sections along an fpqc family are compatible with the
+pullbacks to the overlaps (Stacks, Tags 09XN, 09XM, 03CB and 03CC). -/
 theorem etaleFpqcAgreementOpens_compatible
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))

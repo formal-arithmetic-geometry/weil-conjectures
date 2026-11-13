@@ -23,10 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 03Q1 (3).
-The unique map from the inverse-image stalk to the image-point stalk sends every germ of
-a unit-pulled-back section to its original germ and is bijective. The pointed neighbourhood
-on the source is the fibre product, with lift given by `pullback.lift`. -/
+/-- The unique map from the inverse-image stalk to the image-point stalk sends every germ of a
+unit-pulled-back section to its original germ and is bijective (Stacks, Tag 03Q1). -/
 theorem etaleSetInverseImageStalkGerm (S T : Scheme.{u}) (e : T ⟶ S)
     (G : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ T) :

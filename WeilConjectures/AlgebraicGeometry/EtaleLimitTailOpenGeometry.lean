@@ -34,8 +34,7 @@ private def tailOverEquivalence {I : Type u} [Preorder I] (i₀ : I) :
   unitIso := NatIso.ofComponents (fun j ↦ eqToIso (by rfl))
   counitIso := NatIso.ofComponents (fun j ↦ Over.isoMk (Iso.refl _))
 
-/-- The explicit tail-open cone is limiting.
-Source: Mathlib `isLimitOpensCone`; Stacks Project, Tag 09YQ. -/
+/-- The explicit tail-open cone is limiting (Stacks, Tag 09YQ). -/
 private theorem tailOpenCone_isLimit {I : Type u} [Preorder I]
     [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -71,8 +70,8 @@ private theorem tailOpenCone_isLimit {I : Type u} [Preorder I]
       exact congrArg (fun f ↦ f ≫ c.π.app (op j.unop.val)) hi.symm)
   exact ⟨((IsLimit.postcomposeHomEquiv q _).symm h).ofIsoLimit r⟩
 
-/-- Restricted transition maps are affine base changes of the original transitions.
-Source: Stacks Project, Tag 09YQ; Mathlib stability of affine maps under base change. -/
+/-- Restricted transition maps are affine base changes of the original transitions (Stacks, Tag
+09YQ). -/
 private theorem tailOpenDiagram_affine {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
     [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]
@@ -127,8 +126,8 @@ private theorem tailOpenDiagram_geometry
     exact ⟨(D.obj (op i₀)).isoOfEq heq ≪≫ e.hom.preimageIso _ ≪≫
       Scheme.Opens.isoOfLE hWO⟩
 
-/-- The explicit tail-open diagram retains the geometric hypotheses of a system.
-Source: Stacks Project, Tag 09YQ, restriction to opens; Mathlib `isLimitOpensCone`. -/
+/-- The explicit tail-open diagram retains the geometric hypotheses of a system (Stacks, Tag
+09YQ). -/
 theorem etale_limit_tail_open_geometry
     (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

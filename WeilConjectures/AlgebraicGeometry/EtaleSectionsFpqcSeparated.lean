@@ -49,7 +49,8 @@ private theorem sectionPullback_eq_iff {S T : Scheme.{u}}
   subst e
   rfl
 
-/-- Source: Stacks Project, Tag 09XN, uniqueness, and Tag 03S2, identity restriction. -/
+/-- Two sections of an étale sheaf over the base with equal pullbacks along an fpqc covering are
+equal (Stacks, Tags 09XN and 03S2). -/
 theorem etaleSections_eq_of_fpqc_pullbacks
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

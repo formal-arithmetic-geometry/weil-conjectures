@@ -42,10 +42,9 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 
-/-- A bounded constructible finite-Tor complex has a finite constructible
-stratification and a triangle tower with shifted perfect local-system quotients.
-Source: Bhatt--Scholze, Definition 6.3.1 and Lemma 6.3.3, pp. 45--46;
-Stacks Project, Tags 09BI, 095L, 09Y5 and 005L. -/
+/-- A bounded constructible finite-Tor complex has a finite constructible stratification and a
+triangle tower with shifted perfect local-system quotients (Bhatt--Scholze, Definition 6.3.1 and
+Lemma 6.3.3; Stacks, Tags 09BI, 095L, 09Y5 and 005L). -/
 theorem exists_etaleConstructibleStratumFiltration
     (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] (K : DerivedCategoryModule A X)

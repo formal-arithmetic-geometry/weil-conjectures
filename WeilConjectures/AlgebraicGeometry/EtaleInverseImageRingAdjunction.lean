@@ -26,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV, ring paragraph;
-Section 00YR, rings as sextuples. -/
+/-- If the étale inverse image `f⁻¹` preserves finite limits, it lifts to sheaves of rings as a
+left adjoint to the pushforward (Stacks, Tags 00YV and 00YR). -/
 theorem etaleInverseImageRingAdjunction (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

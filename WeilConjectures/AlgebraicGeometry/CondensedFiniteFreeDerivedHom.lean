@@ -23,8 +23,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Shifted additive Hom on strict complexes with condensed coefficients.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), canonical Hom comparison. -/
+/-- Shifted additive Hom on strict complexes with condensed coefficients
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 noncomputable abbrev condensedShiftedHom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -36,8 +36,8 @@ noncomputable abbrev condensedShiftedHom
         Ab.{u + 1} :=
   DerivedCategory.Q ⋙ shiftFunctor _ n ⋙ preadditiveCoyoneda.obj (op K)
 
-/-- Derived Hom from a locally finite free module is derived sections of its exact dual tensor.
-Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2), evaluation step. -/
+/-- Derived Hom from a locally finite free module is derived sections of its exact dual tensor
+(Stacks, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem condensed_finite_free_derived_hom
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

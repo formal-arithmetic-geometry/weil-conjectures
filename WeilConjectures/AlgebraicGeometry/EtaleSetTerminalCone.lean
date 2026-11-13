@@ -342,8 +342,8 @@ private lemma terminal_transport_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 03S2 and Sites Tags 03CB and 03CC;
-the canonical comparison calculation in the degree-zero route of Tag 09YQ. -/
+/-- The terminal sections of the inverse image form a cone compatible with the unit and
+restriction maps (Stacks, Tags 03S2, 03CB, 03CC and 09YQ). -/
 theorem etaleSetTerminalCone
     {R T : Scheme.{u}} (H : Sheaf R.smallEtaleTopology (Type (u + 1)))
     (U W : R.Etale) (q : U ⟶ W) (p : T ⟶ R) (t : T ⟶ U.left) (t₀ : T ⟶ W.left)

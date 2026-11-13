@@ -23,8 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09YQ, affine-site argument using Tags 0EYL,
-04HR and 09YN. -/
+/-- The cocone of stagewise sections of `G` over an étale object, along an affine-transition
+limit of qcqs schemes, is a colimit cocone (Stacks, Tag 09YQ). -/
 theorem etaleStageSectionCocone_isColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

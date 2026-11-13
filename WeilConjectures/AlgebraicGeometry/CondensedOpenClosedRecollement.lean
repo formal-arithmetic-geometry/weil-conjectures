@@ -110,8 +110,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 /-!
 # Recollement with arbitrary condensed coefficients
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, (3.3), (3.4),
-Lemma 3.4 and the proof of Lemma 5.3(2); Stacks, Tags 09AH, 09BM, 09AA, 09BN.
+## References
+
+* Stacks Project, Tags 09AH, 09BM, 09AA and 09BN
 -/
 
 @[expose] public section
@@ -644,9 +645,8 @@ private theorem rightDerivedPlus_isGE
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- Elaborating the nested adjunction and instance witnesses requires a larger heartbeat budget.
-/-- Open-closed recollement on ordinary bounded below derived categories.
-Source: Hemo--Richarz--Scholbach, (3.3), (3.4), Lemma 3.4 and Lemma 5.3(2);
-Stacks, Tags 09AH, 09BM, 09AA, 09BN. -/
+/-- Open-closed recollement on ordinary bounded below derived categories (Stacks, Tags 09AH,
+09BM, 09AA and 09BN). -/
 theorem condensed_open_closed_recollement
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}

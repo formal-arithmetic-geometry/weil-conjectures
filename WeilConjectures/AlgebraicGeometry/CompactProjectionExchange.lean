@@ -138,12 +138,10 @@ noncomputable def compactProjectionMapCoeffFirst {X Y : Scheme.{u}} (f : X ⟶ Y
 attribute [local irreducible] compactProjectionMapCoeffFirst
 
 /-- **Compact-support projection maps commute with etale exchange.** For a cartesian square
-`g' ≫ f = f' ≫ g` (`v = g`, `v_X = g'`) with `f` and `f'` compactifiable, finite commutative
-coefficients and arbitrary unbounded `M ∈ D(X_et, Λ)`, `Q ∈ D(Y_et, Λ)`,
-`b_{Lf^*Q ⊗ M} ∘ Lg^*(Π_{f,Q,M}) = Π_{f',Lg^*Q,Lg'^*M} ∘ (1 ⊗ b_M)`, after the tensor
-comparison `Lg^*(Q ⊗ Rf_!M) ⟶ Lg^*Q ⊗ Lg^*Rf_!M` on the source and the tensor comparison
-followed by `Lg'^*Lf^*Q ≅ Lf'^*Lg^*Q` on the target.
-Here `b` is `rightDerivedLowerShriekBaseChangeMap` (Stacks, Tags 0E48, 0GL1 and 03S6). -/
+`g' ≫ f = f' ≫ g` with `f` and `f'` compactifiable and finite commutative coefficients, the
+projection maps `Π` satisfy
+`b ∘ Lg^*(Π_{f,Q,M}) = Π_{f',Lg^*Q,Lg'^*M} ∘ (1 ⊗ b_M)` up to the tensor comparisons, where
+`b` is `rightDerivedLowerShriekBaseChangeMap` (Stacks, Tags 0E48, 0GL1 and 03S6). -/
 theorem compactProjectionMapCoeffFirst_baseChangeMap
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     [HasCompactification f] [HasCompactification f'] [QuasiCompact f']

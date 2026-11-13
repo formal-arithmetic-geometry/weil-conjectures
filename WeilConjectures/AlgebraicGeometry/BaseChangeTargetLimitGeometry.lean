@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Geometry of the base-changed scheme limit
 
-Source: Stacks Project Tag 09Z1; Mathlib `AffineTransitionLimit`.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -24,10 +26,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Base change of a qcqs inverse system over an affine scheme satisfies the
-geometric hypotheses for continuity of higher direct images.
-
-Source: Stacks Project Tag 09Z1 (base-changed inverse systems), and Mathlib
-`AffineTransitionLimit`, lemma `isAffineHom_π_app`. -/
+geometric hypotheses for continuity of higher direct images (Stacks, Tag 09Z1). -/
 theorem baseChange_target_limit_geometry {X S T : Scheme.{u}} [IsAffine S]
     (p : X ⟶ S) (g : T ⟶ S) {I : Type u} [Category.{u} I] [IsCofiltered I]
     (D : I ⥤ Over T)

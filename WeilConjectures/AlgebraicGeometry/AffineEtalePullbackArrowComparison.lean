@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineEtaleSiteBaseChange
 /-!
 # Comparison of arrows on canonical affine étale pullbacks
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -23,7 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL; Limits 01ZM(2). -/
+/-- Comparison of arrows between pullbacks of affine étale objects along an affine morphism
+and arrows at a finite stage (Stacks, Tags 0EYL and 01ZM). -/
 theorem affineEtale_pullback_arrow_comparison
     {S T L : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]
     (p : L ⟶ T) (r : L ⟶ S) (hr : p ≫ f = r)

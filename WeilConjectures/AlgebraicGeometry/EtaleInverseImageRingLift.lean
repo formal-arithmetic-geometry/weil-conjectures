@@ -97,8 +97,8 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
 -- The exposed operation formulas require repeated reduction of the étale sheaf functors.
 set_option backward.isDefEq.respectTransparency false in
 
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV and its preceding
-quadruple/sextuple descriptions. -/
+/-- If the étale inverse image `f⁻¹` preserves finite limits, it lifts to sheaves of rings,
+compatibly with the forgetful functors (Stacks, Tag 00YV). -/
 theorem etaleInverseImageRingLift (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

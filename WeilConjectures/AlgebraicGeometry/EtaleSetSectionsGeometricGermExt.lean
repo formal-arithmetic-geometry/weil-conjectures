@@ -22,7 +22,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Étale Cohomology, Theorem 03PU (injectivity criterion). -/
+/-- Two sections of an étale sheaf with equal germs at every geometric point are equal (Stacks,
+Tag 03PU). -/
 theorem etaleSetSection_ext_of_geometric_germs
     (X : Scheme.{u}) (G : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (U : X.Etale) (a b : G.obj.obj (op U))

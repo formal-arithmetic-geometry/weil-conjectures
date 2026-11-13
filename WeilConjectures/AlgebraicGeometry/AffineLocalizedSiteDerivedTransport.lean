@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Localization.LocalizerMorphism
 
 /-! # Transport of derived sheaves to an affine localized site
 
-Source: Stacks Project, Tag 06Z0, and restriction along an isomorphism of ringed spaces.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section
@@ -21,9 +23,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Restriction along the affine spectrum isomorphism and the over-site equivalence
-induce an equivalence of derived sheaf categories, compatible with termwise tilde.
-Source: Stacks Project, Tag 06Z0, affine identification, and Mathlib's overEquiv and
-restrictFunctorComp. -/
+induce an equivalence of derived sheaf categories, compatible with termwise tilde
+(Stacks, Tag 06Z0). -/
 theorem affine_localized_site_derived_transport (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U)
     [HasDerivedCategory.{wS} (SheafOfModules.{u}

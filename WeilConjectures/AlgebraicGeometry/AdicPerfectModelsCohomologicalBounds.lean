@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleTorLocalGlobal
 
 /-! # Bounds from stratified perfect models
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -300,8 +302,8 @@ private theorem residueModels_bounds (X : Scheme.{u}) [IsNoetherian X]
     apply F.map_injective
     simpa using hz.eq_of_src (F.map (𝟙 M)) (F.map 0)
 
-/-- The object and its canonical residue have globally bounded cohomology.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3. -/
+/-- The object and its canonical residue have globally bounded cohomology
+(Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.3). -/
 theorem adicPerfectModels_cohomologicalBounds (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

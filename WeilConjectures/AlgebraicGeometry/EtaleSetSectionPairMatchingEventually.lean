@@ -21,7 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction. -/
+/-- Two sections that match on an overlap in the limit match on the overlap at some stage
+(Stacks, Tags 03Q4 and 09YQ). -/
 theorem etaleSetSection_pair_matching_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

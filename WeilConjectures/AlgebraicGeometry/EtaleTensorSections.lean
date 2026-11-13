@@ -67,8 +67,7 @@ def etaleTensorSectionsRestriction {X : Scheme.{u}} (F : X.Modules)
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The identity case of normalized left-adjoint composition.
-Source: Stacks, Tag 03DR; Mathlib `Adjunction.leftAdjointCompIso_comp_id`. -/
+/-- The identity case of normalized left-adjoint composition (Stacks, Tag 03DR). -/
 private theorem identityComparison
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -203,8 +202,7 @@ private theorem sectionsUnit_comp
   erw [Category.comp_id] at hu
   exact hu.symm
 
-/-- Associativity of the normalized comparison maps.
-Source: Stacks, Tag 03DR; Mathlib `Adjunction.leftAdjointCompIso_assoc`. -/
+/-- Associativity of the normalized comparison maps (Stacks, Tag 03DR). -/
 private theorem compOfAdjunction_assoc
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)

@@ -48,11 +48,7 @@ noncomputable def etaleMayerVietorisCanonicalBoundary {X : Scheme.{u}}
     (((etaleSectionShortComplex_resolution_shortExact U V hcover F I).δ
       q (q + 1) rfl).hom.comp (c.openEquiv (U ⊓ V) q).symm.toAddMonoidHom)
 
-/-- The section short complex with its intersection named explicitly.
-Source: Stacks Project, Tag 0A50, restriction pair and difference of restrictions.
-
-The terms are constructed directly on U, V and W; equality transport of a
-cohomology group is not used. The intersection equality supplies the inclusion proofs. -/
+/-- The section short complex with its intersection named explicitly (Stacks, Tag 0A50). -/
 noncomputable def etaleSectionShortComplexOn {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
@@ -89,12 +85,8 @@ theorem etaleSectionShortComplexOn_shortExact {X : Scheme.{u}}
   subst W
   exact etaleSectionShortComplex_resolution_shortExact U V hcover F I
 
-/-- The boundary with a specified intersection open, constructed without data transport.
-Source: Stacks Project, Tag 0A50, section-complex boundary construction.
-
-Use the section complex constructed directly on W and the normalized comparison
-c.openEquiv W. Its boundary has the prescribed domain from the outset. Only the
-proofs of inclusions and short exactness use the intersection equality. -/
+/-- The boundary with a specified intersection open, constructed without data transport (Stacks,
+Tag 0A50). -/
 noncomputable def etaleMayerVietorisBoundaryOn {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
@@ -104,32 +96,21 @@ noncomputable def etaleMayerVietorisBoundaryOn {X : Scheme.{u}}
     (((etaleSectionShortComplexOn_shortExact U V W hW hcover F I).δ
       q (q + 1) rfl).hom.comp (c.openEquiv W q).symm.toAddMonoidHom)
 
-/-- The fixed injective resolution behind the boundary API.
-Source: Stacks Project, Tag 0A50, injective-resolution construction.
-
-This is the library's chosen injective resolution, exposed through a small typed
-constant so that boundary uses do not elaborate its instance construction again. -/
+/-- The fixed injective resolution behind the boundary API (Stacks, Tag 0A50). -/
 @[irreducible] noncomputable def etaleMayerVietorisFixedResolution {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : InjectiveResolution F :=
   injectiveResolution F
 
-/-- The fixed comparison is determined by its values on all representing cocycles.
-Source: Stacks Project, Tags 0A50 and 03F3, normalized resolution comparison.
-
-The normalization determines the equivalences on every homology class. This
-choice therefore fixes no unspecified data; it is the prescribed normalized comparison. -/
+/-- The fixed comparison, determined by its values on all representing cocycles (Stacks, Tags
+0A50 and 03F3). -/
 @[irreducible] noncomputable def etaleMayerVietorisFixedComparison {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     ResolutionSectionCanonicalComparison F (etaleMayerVietorisFixedResolution F) :=
   Classical.choice (exists_resolutionSection_canonical_comparison F
     (etaleMayerVietorisFixedResolution F))
 
-/-- Boundary with canonical resolution choices hidden behind a small typed interface.
-Source: Stacks Project, Tag 0A50, injective-resolution construction.
-
-The resolution is the chosen injective resolution. The normalized comparison is
-uniquely determined on cocycles, so choosing it does not choose unspecified data.
-The boundary is the explicit section-complex homology boundary above. -/
+/-- Boundary with canonical resolution choices hidden behind a small typed interface (Stacks,
+Tag 0A50). -/
 @[irreducible] noncomputable def etaleMayerVietorisFixedBoundary {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :

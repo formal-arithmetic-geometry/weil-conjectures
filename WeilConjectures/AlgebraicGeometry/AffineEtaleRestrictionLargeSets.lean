@@ -17,7 +17,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Topologies 04HR and Sites 03A0. -/
+/-- Restriction from étale sheaves of large sets on `S` to sheaves on the full affine étale site
+is an equivalence (Stacks, Tags 04HR and 03A0). -/
 theorem fullAffineEtale_large_sets_equivalence (S : Scheme.{u}) :
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type (u + 1))
       (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by

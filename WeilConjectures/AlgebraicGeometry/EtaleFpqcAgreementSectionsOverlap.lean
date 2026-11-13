@@ -120,8 +120,8 @@ private theorem secTo_cast {S Z : Scheme.{u}}
   subst g
   rfl
 
-/-- Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC for the inverse-image composition units. -/
+/-- On overlaps, the agreement sections of an fpqc family of compatible sections agree if and
+only if their images agree (Stacks, Tags 09XN, 03CB and 03CC). -/
 theorem etaleFpqcAgreementSections_overlap_eq_iff
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))

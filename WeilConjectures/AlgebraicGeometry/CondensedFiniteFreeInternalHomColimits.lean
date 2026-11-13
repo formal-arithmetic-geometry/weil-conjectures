@@ -328,8 +328,8 @@ namespace AlgebraicGeometry.ProEtale
 open CategoryTheory Limits
 attribute [local instance] Mod.isGrothendieckAbelian
 
-/-- Internal Hom from a pro-etale locally finite free module preserves small colimits.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), finite locally free calculation. -/
+/-- Internal Hom from a pro-etale locally finite free module preserves small colimits
+(Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem condensed_locally_free_ihom_preservesColimits {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)

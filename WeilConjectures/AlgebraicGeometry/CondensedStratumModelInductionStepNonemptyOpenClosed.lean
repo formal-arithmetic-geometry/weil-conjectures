@@ -26,9 +26,7 @@ set_option linter.style.haveILetI false
 /- The two interfaces below isolate the geometric localization and algebraic
   extension-class descent parts of the support induction argument. -/
 
-/-- Open/closed localization data for the nonempty support step.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split. -/
+/-- Open/closed localization data for the nonempty support step. -/
 theorem exists_nonempty_support_open_closed_models
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

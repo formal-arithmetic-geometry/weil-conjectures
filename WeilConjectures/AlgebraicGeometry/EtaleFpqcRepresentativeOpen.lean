@@ -26,8 +26,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XN, paragraphs beginning "Let V" and
-"By construction", and Tag 09XM, the largest agreement-open universal property. -/
+/-- Compatible sections along an fpqc family descend to a representative open, the largest open
+on which they agree (Stacks, Tags 09XN and 09XM). -/
 theorem etaleFpqcSections_descend_representative_open
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

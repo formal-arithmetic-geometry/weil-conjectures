@@ -50,8 +50,8 @@ private theorem sectionPullback_eq_iff {S T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 03S2, inverse image along an étale map is
-restriction; Sites Tags 00XZ, 03CB and 03CC, localization and composition units. -/
+/-- Two sections have equal images under the cartesian adjunction unit if and only if their
+pullbacks agree (Stacks, Tags 03S2, 00XZ, 03CB and 03CC). -/
 theorem etaleSetCartesianUnit_eq_iff
     {S T : Scheme.{u}} (h : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (Q : S.Etale) (A : T.Etale)

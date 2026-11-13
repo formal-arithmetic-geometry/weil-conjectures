@@ -86,7 +86,8 @@ private theorem exists_iso_preserving_frame_relations
           ((isGlueValue_glueHom_app hU hm hc' x).symm hm he) }
   exact ⟨φ, fun _ x ↦ isGlueValue_glueHom_app hU he hc x⟩
 
-/-- Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE, final assertion. -/
+/-- Sections of invertible modules on the components `Z a` of a reduced scheme, agreeing on the
+discrete pairwise intersections, glue to a section on `Y` (Stacks, Tag 09NE). -/
 theorem existsGluedSection
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

@@ -47,8 +47,8 @@ private theorem isColimit_of_truncated_comparison
 
 set_option backward.isDefEq.respectTransparency true in
 -- Elaborating the exact dual tensor and derived sections requires extra heartbeats.
-/-- Continuity for a pro-etale locally finite free internal module.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), locally free calculation. -/
+/-- Continuity for a pro-etale locally finite free internal module (Hemo–Richarz–Scholbach, Lemma
+5.3(2)). -/
 theorem condensed_finite_free_hom_continuity
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

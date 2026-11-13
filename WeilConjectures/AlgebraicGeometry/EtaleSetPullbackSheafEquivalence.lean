@@ -21,7 +21,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tag 04DZ, inverse-image/topos equivalence. -/
+/-- For a universal homeomorphism, the étale set-valued pullback is the inverse of the sheaf
+equivalence (Stacks, Tag 04DZ). -/
 theorem etaleSetPullback_eq_sheafEquivalence {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     Nonempty ((sheafEquivalence (Type (u + 1)) u).symm.functor ≅

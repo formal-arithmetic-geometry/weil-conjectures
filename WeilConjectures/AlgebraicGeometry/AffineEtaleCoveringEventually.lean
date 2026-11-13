@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Eventual covering for a finite affine étale family
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -92,8 +94,8 @@ private theorem constructible_baseChange_eventually
     rw [Scheme.Hom.comp_apply] at heq
     exact heq ▸ hx
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Limits 07RR,
-05F4, and 01YZ; Morphisms 054K. -/
+/-- Coverings of the limit by affine étale objects descend to coverings at a finite stage of a
+qcqs inverse system (Stacks, Tags 0EYL, 07RR, 05F4, 01YZ and 054K). -/
 theorem affineEtale_covering_eventually
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

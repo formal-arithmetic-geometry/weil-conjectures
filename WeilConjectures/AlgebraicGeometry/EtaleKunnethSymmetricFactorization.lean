@@ -41,8 +41,7 @@ section ProjectionNaturality
 
 attribute [local irreducible] derivedTensor
 
-/-- Naturality in the outside coefficient of the ordinary projection map.
-Source: the projection factor in the first coordinate triangle. -/
+/-- Naturality in the outside coefficient of the ordinary projection map. -/
 @[reassoc]
 theorem kunnethProjection_naturality_right {X Y : Scheme.{u}} (f : X ⟶ Y)
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
@@ -62,8 +61,7 @@ theorem kunnethProjection_naturality_right {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end ProjectionNaturality
 
-/-- The ordinary Kunneth map in the symmetric projection/exchange normal form.
-Source: the common-counit calculation in the first coordinate triangle. -/
+/-- The ordinary Kunneth map in the symmetric projection/exchange normal form. -/
 theorem kunnethMap_symmetricFactorization {S X Y W : Scheme.{u}}
     (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (h : W ⟶ S)
     (hp : p ≫ f = h) (hq : q ≫ g = h)

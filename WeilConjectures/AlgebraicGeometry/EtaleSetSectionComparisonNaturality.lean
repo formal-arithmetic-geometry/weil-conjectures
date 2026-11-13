@@ -17,7 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites Tags 03CB and 03CC, inverse-image units and composition. -/
+/-- The section comparison maps are natural in the étale object (Stacks, Tags 03CB and 03CC). -/
 theorem etaleSetSectionComparison_naturality
     {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1)))

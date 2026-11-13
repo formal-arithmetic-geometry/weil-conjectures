@@ -14,7 +14,9 @@ public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-! # The explicit quotient of affine residue cycles by residue boundaries
 
-Source: Stacks Project, Section 12.13, Tag 010V; Mathlib's additive quotient API.
+## References
+
+* Stacks Project, Tag 010V
 -/
 
 @[expose] public section
@@ -76,9 +78,8 @@ def affineResidueCycleClass
     affineResidueCycles W U p K →+ affineResidueCycleHomology W U p K :=
   QuotientAddGroup.mk' (affineResidueBoundaries W U p K)
 
-/-- The residue cycle-class map is onto and its kernel is precisely incoming boundaries.
-Source: Mathlib `QuotientAddGroup.mk'_surjective` and `QuotientAddGroup.eq_zero_iff`;
-Stacks Project, Section 12.13, Tag 010V (homology as cycles modulo boundaries). -/
+/-- The residue cycle-class map is onto and its kernel is precisely incoming boundaries
+(Stacks, Tag 010V). -/
 theorem affineResidueCycleClass_surjective_kernel
     (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) :
@@ -150,8 +151,7 @@ def affineResidueCycleHomologyMap
       rw [← LinearMap.comp_apply, affineResidueComponent_comm, LinearMap.comp_apply, hy]
       rfl)
 
-/-- Chain maps commute with the cycle-class projections, including nonzero boundaries.
-Source: Stacks Project, Section 12.13, Tag 010V; Mathlib `QuotientAddGroup.lift_mk`. -/
+/-- Chain maps commute with the cycle-class projections (Stacks, Tag 010V). -/
 theorem affineResidueCycleHomologyMap_class
     {K C : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ}

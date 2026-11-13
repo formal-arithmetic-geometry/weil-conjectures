@@ -34,8 +34,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 
 /-! # Joint conservativity on stratum covering slices
 
-Source: Bhatt--Scholze, Remark 6.5.10 and Proposition 6.6.11; Stacks Project,
-Tags 09AH and 05RU.
+## References
+
+* Bhatt--Scholze, Remark 6.5.10 and Proposition 6.6.11
+* Stacks Project, Tags 09AH and 05RU
 -/
 
 @[expose] public section
@@ -262,10 +264,8 @@ private theorem strataModules_detectZero
   exact hzN.eq_of_src _ _
 
 /-- Exact algebraic inverse images followed by covering slice restrictions jointly
-reflect isomorphisms in the unbounded derived category.
-
-Source: Bhatt--Scholze, Remark 6.5.10 and Proposition 6.6.11; Stacks Project,
-Tags 09AH and 05RU. -/
+reflect isomorphisms in the unbounded derived category (Bhatt--Scholze, Remark 6.5.10
+and Proposition 6.6.11; Stacks, Tags 09AH and 05RU). -/
 theorem adicStratumCoverConservativity
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] (I : Ideal A)

@@ -21,10 +21,8 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- An ambient derived morphism is invertible if it is invertible on an open
-neighbourhood of every point. No quasi-coherence or boundedness assumption is needed.
-Source: Stacks Project, duality.tex, Tag 0AAB (locality), and the cohomology criterion
-for derived isomorphisms in Mathlib, `DerivedCategory.isIso_iff`. -/
+/-- An ambient derived morphism is invertible if it is invertible on an open neighbourhood of
+every point. No quasi-coherence or boundedness assumption is needed (Stacks, Tag 0AAB). -/
 theorem schemeDerived_isIso_of_openRestriction
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

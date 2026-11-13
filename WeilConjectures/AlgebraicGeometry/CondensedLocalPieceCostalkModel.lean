@@ -250,8 +250,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
-assumption on P.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), costalk and adjunction steps. -/
+assumption on P (Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem condensed_local_piece_costalk_model
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

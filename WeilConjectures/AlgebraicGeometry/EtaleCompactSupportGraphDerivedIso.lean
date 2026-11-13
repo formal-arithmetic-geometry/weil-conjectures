@@ -26,9 +26,9 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The specified graph map is invertible after unbounded derived descent for a
-quasi-compact separated etale morphism over an arbitrary scheme.
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6 and 0F0C. -/
+/-- The specified graph map is invertible after unbounded derived descent for a quasi-compact
+separated etale morphism over an arbitrary scheme (SGA 4, XVII 5.2.2 and 6.2.11; Stacks, Tags
+03S6 and 0F0C). -/
 theorem isIso_compactSupportGraphDerivedComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
@@ -71,8 +71,7 @@ theorem isIso_compactSupportGraphDerivedComparison
     exact (isIso_comp_right_iff _ _).mp hc
   exact NatIso.isIso_of_isIso_app _
 
-/-- The inverse of the explicitly constructed derived graph map.
-Source: SGA 4 XVII 6.2.11. -/
+/-- The inverse of the explicitly constructed derived graph map (SGA 4, XVII 6.2.11). -/
 noncomputable def canonicalEtaleCompactSupportComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]

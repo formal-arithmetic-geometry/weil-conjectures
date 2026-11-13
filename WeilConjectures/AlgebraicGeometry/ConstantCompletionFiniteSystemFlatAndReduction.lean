@@ -11,17 +11,22 @@ import WeilConjectures.AlgebraicGeometry.ConstantCompletionFlatAndQuotientsQuoti
 
 /-! The non-elementary flatness and tensor-reduction part of the finite constant
 completion tower.
-Source: Stacks Project, Tags 093M and 0912.
 The proof shows that taking sections of a constant sheaf is an exact functor of the
-coefficient module, so it commutes with tensoring by finitely presented modules. -/
+coefficient module, so it commutes with tensoring by finitely presented modules.
+
+## References
+
+* Stacks Project, Tags 093M and 0912
+-/
 @[expose] public noncomputable section
 open CategoryTheory CategoryTheory.Limits Opposite
 universe u
 namespace CategoryTheory.ConstantCompletion
 variable {C : Type u} [SmallCategory C]
 
-/--
-Source: Stacks Project, Tags 093M and 0912. -/
+/-- Terms of the finite system of constant quotient sections are flat over the quotient rings;
+tensoring with `A ⧸ I^(n+1)` takes the `m`-th term to the `min m n`-th term
+(Stacks, Tags 093M and 0912). -/
 theorem finiteSystem_flat_and_reduction (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     [∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1))

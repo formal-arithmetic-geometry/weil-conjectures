@@ -26,9 +26,8 @@ noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedGlobalGermUnitFac
     : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
-/-- Formal unit compatibility for a germ following two Leray comparisons.
-The functors remain abstract so reduction does not unfold the small-etale constructions.
-Source: the unit formulas for the library's bounded below derived comparisons. -/
+/-- Formal unit compatibility for a germ following two Leray comparisons. The functors remain
+abstract. -/
 private theorem derived_unit_germ_fac
     {C D E A : Type*} [Category C] [Category D] [Category E] [Category A]
     [Abelian C] [Abelian D] [Abelian E] [Abelian A]

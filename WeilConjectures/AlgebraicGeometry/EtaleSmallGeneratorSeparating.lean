@@ -34,8 +34,8 @@ private theorem integer_isSeparator :
     (AddMonoidHom.mk' (fun y ↦ y • x) fun y z ↦ by simp only [add_smul])) 1
   simpa using h
 
-/-- The constructed affine free-Yoneda coproduct separates all large-valued etale sheaves.
-Source: Stacks Project, Tag 03EW (3), and Mathlib.CategoryTheory.Generator.Sheaf. -/
+/-- The constructed affine free-Yoneda coproduct separates all large-valued etale sheaves
+(Stacks, Tag 03EW). -/
 theorem etaleSmallGenerator_isSeparator (X : Scheme.{u}) :
     IsSeparator (etaleSmallGenerator X) := by
   let C := SmallModel.{u} X.AffineEtale

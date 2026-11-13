@@ -45,8 +45,7 @@ private theorem integralScalarMap_mono (ℓ : ℕ) [Fact ℓ.Prime]
   have : Mono (φ ≫ eE) := by rw [he]; infer_instance
   exact mono_of_mono φ eE
 
-/-- The scalar-localization unit is injective on each standard finite free integral module.
-Source: injectivity of O_E to E and naturality of the extension unit. -/
+/-- The scalar-localization unit is injective on each standard finite free integral module. -/
 theorem integralFiniteFree_unit_mono (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) (n : ℕ) :
@@ -94,8 +93,8 @@ private theorem integralRational_pow_nsmul_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     infer_instance
 
 /-- The kernel of the integral adjoint of a surjective rational finite matrix
-has a model as the kernel of an integral matrix with surjective rationalization.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization. -/
+has a model as the kernel of an integral matrix with surjective rationalization (Bhatt–Scholze,
+Section 6.8). -/
 theorem integralFiniteFree_kernel_model (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) [CompactSpace X] (n m : ℕ)

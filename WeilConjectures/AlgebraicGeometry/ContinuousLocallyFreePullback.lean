@@ -12,7 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 /-! # Restriction of scalars of locally free internal modules
 
 `ProEtale.IsLocallyFree` is preserved by restriction along an invertible coefficient map.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tag 03DO.
+
+## References
+
+* Bhatt–Scholze, Section 6.8
+* Stacks Project, Tag 03DO
 -/
 
 @[expose] public section
@@ -24,11 +28,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Restriction along an invertible coefficient map preserves local finite freeness.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-
-Use the same cover. On each member apply the existing free_comap and
-free_of_iso to the mapModComapIso comparison. -/
+/-- Restriction along an invertible coefficient map preserves local finite freeness
+(Bhatt–Scholze, Section 6.8; Stacks, Tag 03DO). -/
 lemma IsLocallyFree.comap {X : Scheme.{u}}
     {R T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj T]
     (φ : R ⟶ T) [IsMonHom φ] [IsIso φ]

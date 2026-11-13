@@ -30,8 +30,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The canonical shift and degree-zero comparison for the positive Tate line.
-Source: det-sp-p1-trace, clause 3. -/
+/-- The canonical shift and degree-zero comparison for the positive Tate line. -/
 @[irreducible]
 def cartierShiftSingleIso {C : Type uC} [Category.{vC} C] [Abelian C]
     [HasDerivedCategory.{wC} C] {D : Type uD} [Category.{vD} D] [Abelian D]

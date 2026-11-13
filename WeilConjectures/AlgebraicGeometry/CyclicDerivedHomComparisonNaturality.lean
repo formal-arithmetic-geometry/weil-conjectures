@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.AbelianRepresentableCohomologyMapNatura
 import WeilConjectures.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility
 
 /-! # Naturality of cyclic free-representable cohomology comparison
-Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf. -/
+
+## References
+
+* Stacks Project, Tag 03Q8
+-/
 
 @[expose] public section
 universe u
@@ -19,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The explicit comparison commutes with geometric restriction after identifying
-pulled-back constant coefficients with constant coefficients.
-
-Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf, and naturality
-of the free-sheaf adjunction in `HigherDirectImage/FreeSheaf.lean`. -/
+pulled-back constant coefficients with constant coefficients (Stacks, Tag 03Q8). -/
 theorem cyclicRepresentableCohomologyMap_naturality {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) :
     let P := (uliftYoneda.{u + 1} ⋙

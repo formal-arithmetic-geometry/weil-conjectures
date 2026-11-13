@@ -25,9 +25,9 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The graph map from a compactification to its Cartesian proper refinement is the
-specified refinement map, followed by restoration of the initial identity direct image.
-Source: Stacks Tags 0F7C--0F7E; `LowerShriekIndependenceUnbounded.lean`, refinement map. -/
+/-- The graph map from a compactification to its Cartesian proper refinement is the specified
+refinement map, followed by restoration of the initial identity direct image (Stacks, Tags
+0F7C--0F7E). -/
 theorem etaleGraphFromOpen_refinement
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s r : Compactification f)

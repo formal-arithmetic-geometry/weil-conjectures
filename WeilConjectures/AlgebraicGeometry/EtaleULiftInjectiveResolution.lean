@@ -31,11 +31,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option autoImplicit false
 
-/-- An injective resolution can be lifted to the larger coefficient universe, and
-its evaluation complexes are the lifts of the original evaluation complexes.
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO
-(https://stacks.math.columbia.edu/tag/01DO); Mathlib
-`AffineEtale.sheafEquiv` and `AddCommGrpCat.uliftFunctor`. -/
+/-- An injective resolution can be lifted to the larger coefficient universe, and its evaluation
+complexes are the lifts of the original evaluation complexes (Stacks, Tag 01DO). -/
 theorem exists_etale_ulift_injectiveResolution
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
     (R : InjectiveResolution F) :

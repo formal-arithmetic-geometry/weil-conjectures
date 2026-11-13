@@ -65,8 +65,7 @@ private theorem pushforward_tower
     exact ⟨_, _, _, _, _, h, pushforward_piece Λ i A hA, ih B hB⟩
 
 /-- A constructible sheaf is a finite distinguished extension of locally finitely
-presented pieces.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), noetherian induction. -/
+presented pieces (Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem exists_condensedLocallyClosed_extension_tower
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

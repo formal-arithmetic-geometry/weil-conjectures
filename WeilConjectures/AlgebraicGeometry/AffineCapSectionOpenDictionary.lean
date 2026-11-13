@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Affine dictionary for an invertible module and its section
 
-Source: literature/stacks-project/schemes.tex, Schemes, Lemmas 01IA and 01IB,
-together with Modules, Lemma 01CY.
+## References
+
+* Stacks Project, Tags 01IA, 01IB and 01CY
 -/
 
 @[expose] public section
@@ -62,10 +63,8 @@ private theorem invertible_global_sections
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine dictionary for an invertible module and a section of it.
-
-Source: literature/stacks-project/schemes.tex, Schemes, Lemmas 01IA and 01IB,
-together with Modules, Lemma 01CY. -/
+/-- The affine dictionary for an invertible module and a section of it
+(Stacks, Tags 01IA, 01IB and 01CY). -/
 theorem affine_cap_section_open_dictionary
     {R : Type u} [CommRing R]
     (M : (Spec (.of R)).Modules) [M.IsInvertible]

@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalSubmoduleGluing
 
 /-!
 # Gluing local finite coefficient models after enlarging the field
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph,
-overlap and gluing steps.
 -/
 
 @[expose] public section
@@ -213,10 +210,8 @@ private lemma exists_scalar_model_of_compatible_local_monomorphisms
   have : IsIso t := module_isIso_of_cover t U hlocal
   exact ⟨P, (fun i ↦ ⟨eP i⟩), ⟨asIso t⟩⟩
 
-/-- Finite affine local coefficient models glue after one finite enlargement.
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
-Stacks Tags 04TR, 04TQ and 03EL. -/
+/-- Finite affine local coefficient models glue after one finite enlargement (Stacks, Tags 04TR,
+04TQ and 03EL). -/
 theorem exists_finiteCoefficient_gluing_of_local_models
     (T X : Scheme.{u}) [QuasiSeparatedSpace X]
     (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]

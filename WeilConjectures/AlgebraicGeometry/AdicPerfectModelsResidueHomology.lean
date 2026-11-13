@@ -13,7 +13,9 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Constructible etale origin of individual residue cohomology sheaves
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -375,10 +377,8 @@ private theorem etaleOrigin_of_stratifiedModels (X : Scheme.{u}) [IsNoetherian X
     constructible_of_coefficientModel X A G.obj G.property,
     ⟨(es.app G.obj).symm ≪≫ R.mapIso eg ≪≫ he⟩⟩
 
-/-- Each residue cohomology sheaf has a constructible etale antecedent.
-This is a statement about sheaves; it does not descend a derived object.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.3.13;
-Stacks Tags 09AJ and 09AK. -/
+/-- Each residue cohomology sheaf has a constructible etale antecedent
+(Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.13; Stacks, Tags 09AJ and 09AK). -/
 theorem adicPerfectModels_residueHomology (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

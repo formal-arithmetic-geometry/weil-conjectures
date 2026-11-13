@@ -22,9 +22,7 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Exterior powers commute with the internal dual in top degree.
-Source: Stacks Project, Tag 0BRT, determinant pairing; Mathlib
-`exteriorPower.pairingDual` on each trivializing open. -/
+/-- Exterior powers commute with the internal dual in top degree (Stacks, Tag 0BRT). -/
 theorem exteriorSheaf_dual_iso (X : Scheme.{u}) (M : X.Modules) (d : ℕ)
     (hfree : M.IsFiniteLocallyFreeOfRank d) :
     Nonempty ((Scheme.Modules.exteriorPower

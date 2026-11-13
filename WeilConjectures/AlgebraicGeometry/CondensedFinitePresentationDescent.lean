@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Descent of a constructible condensed module to finite coefficients
-
-Source: upstream master, SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean,
-module docstring, (Obj) descent paragraph.
 -/
 
 @[expose] public section
@@ -29,9 +26,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A constructible module over the finite-subextension-valued condensed algebraic closure
-has a constructible model over one finite coefficient field.
-Source: upstream master, SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean,
-module docstring, (Obj) descent paragraph. -/
+has a constructible model over one finite coefficient field. -/
 theorem exists_constructible_finiteCoefficient_model
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

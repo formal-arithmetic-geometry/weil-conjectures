@@ -149,14 +149,12 @@ lemma regularCoefficient_comp (X : Scheme.{u})
   exact continuousRegular_apply X O h (op (Scheme.ProEt.mk (𝟙 X)))
     (g.hom.hom.app (op (Scheme.ProEt.mk (𝟙 X))) (ULift.up 1)) x
 
-/-- The identity regular endomorphism has constant coefficient one.
-Source: evaluation of the identity on the unit section. -/
+/-- The identity regular endomorphism has constant coefficient one. -/
 lemma regularCoefficient_id (X : Scheme.{u})
     (O : Type) [CommRing O] [TopologicalSpace O] [IsTopologicalRing O] :
     regularCoefficient X O (𝟙 (Mod.regular (continuousAbRing X O))) = 1 := rfl
 
-/-- A continuous nowhere-zero field multiplier has a continuous inverse.
-Source: continuous reciprocal and the universal property of the regular module. -/
+/-- A continuous nowhere-zero field multiplier has a continuous inverse. -/
 lemma continuousRegular_field_isIso (X : Scheme.{u})
     (K : Type) [Field K] [TopologicalSpace K] [IsTopologicalRing K] [ContinuousInv₀ K]
     (g : Mod.regular (continuousAbRing X K) ⟶ Mod.regular (continuousAbRing X K))

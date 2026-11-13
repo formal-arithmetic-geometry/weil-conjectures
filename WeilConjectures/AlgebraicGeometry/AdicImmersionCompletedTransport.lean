@@ -10,8 +10,10 @@ import WeilConjectures.AlgebraicGeometry.AdicImmersionSliceComparison
 
 /-! # Completed restriction and residue comparison for an immersion
 
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication;
-Lemma 6.5.8 and Remark 6.5.10. Stacks Project, Tags 03A0, 03CY, 099L and 099R.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.8 and Remark 6.5.10
+* Stacks Project, Tags 03A0, 03CY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -42,12 +44,8 @@ attribute [local instance 40000] fixedAbelian
 
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
-/-- Completed inverse image with its normalized residue and slice comparisons.
-The etale residue is the explicit transported complex, with no boundedness or local
-constancy assumptions. Neither a perfect complex nor a covering is chosen.
-
-Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 03A0, 03CY,
-099L and 099R. -/
+/-- Completed inverse image with its normalized residue and slice comparisons
+(Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks, Tags 03A0, 03CY, 099L and 099R). -/
 theorem sfbAdicImmersion_completedTransport
     (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S]
     (i : S ⟶ X) [IsImmersion i]

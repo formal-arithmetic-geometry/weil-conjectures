@@ -45,8 +45,7 @@ structure EtaleGraphPresentation {X Y : Scheme.{u}} (f : X ⟶ Y) where
 attribute [instance] EtaleGraphPresentation.properA EtaleGraphPresentation.openE
   EtaleGraphPresentation.properP
 
-/-- An open-then-proper factorization is the presentation with identity first factor.
-Source: `LowerShriekComposition.lean`, graph-model source. -/
+/-- An open-then-proper factorization is the presentation with identity first factor. -/
 def EtaleGraphPresentation.ofCompactification {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) : EtaleGraphPresentation f where
   U := X
@@ -56,25 +55,22 @@ def EtaleGraphPresentation.ofCompactification {X Y : Scheme.{u}} {f : X ⟶ Y}
   p := c.g
   fac := by simpa using c.comm.symm
 
-/-- The actual ordinary unbounded functor `Rp_* De_! Ra_*` attached to a presentation.
-Source: `LowerShriekComposition.lean`, target of the graph comparison. -/
+/-- The ordinary unbounded functor `Rp_* De_! Ra_*` attached to a presentation. -/
 def EtaleGraphPresentation.functor (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f) :
     DerivedCategoryModule A X ⥤ DerivedCategoryModule A Y :=
   R((t.a)_*[ModuleCat.{u + 1} A]) ⋙ D((t.e)_!open[ModuleCat.{u + 1} A]) ⋙
     R((t.p)_*[ModuleCat.{u + 1} A])
 
-/-- Remove the identity proper direct image in an open-then-proper presentation.
-Source: `LowerShriekComposition.lean`, `rightDerivedLowerStarIdIso`. -/
+/-- Remove the identity proper direct image in an open-then-proper presentation. -/
 def etaleGraphOpenNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (EtaleGraphPresentation.ofCompactification c).functor A ≅
       rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c :=
   Functor.isoWhiskerRight (rightDerivedLowerStarIdIso A X) _ ≪≫ Functor.leftUnitor _
 
-/-- The specified `B_{t,c}`: use the graph theorem only for its properness proofs and
-then evaluate its explicit `B₁`, intersection `B₁₂`, and inverse `B₂` composite. No
-endpoint isomorphism is chosen. Source: `EtaleLocallyClosedGraphModel.lean`, graph formula. -/
+/-- The specified comparison `B_{t,c}`, built from the explicit `B₁`, the intersection `B₁₂` and
+the inverse `B₂`; no endpoint isomorphism is chosen. -/
 def etaleGraphComparisonFromOpen (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (t : EtaleGraphPresentation f) :
@@ -105,8 +101,7 @@ structure EtaleGraphPresentation.BaseChange
   eSquare : IsPullback u t'.e t.e w
   pSquare : IsPullback w t'.p t.p b
 
-/-- The Cartesian representatives for the base change of an open-then-proper presentation.
-Source: `Compactification.BaseChange`, the two constituent pullback squares. -/
+/-- The Cartesian representatives for the base change of an open-then-proper presentation. -/
 def EtaleGraphPresentation.ofCompactificationBaseChange
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {v : X' ⟶ X} {b : Y' ⟶ Y} (c : Compactification f) (sq : IsPullback v f' f b) :

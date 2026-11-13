@@ -106,9 +106,7 @@ private lemma comapUpperStarIso_inv_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 -- Normalization uses the module adjunctions and scalar extension uniqueness.
 /-- The canonical restriction/pullback comparison is the inverse mate of the
-restriction/pushforward comparison for one scheme map.
-Source: Bhatt--Scholze, Remark 6.8.15, and the explicit constructions in
-`ModuleObject.ChangeOfCoefficients` and `ModuleObject.UpperLowerStar.Defs`. -/
+restriction/pushforward comparison for one scheme map (Bhatt--Scholze, Remark 6.8.15). -/
 theorem comapUpperStarIso_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     mateEquiv (upperStarLowerStarAdjunction Λ' f) (upperStarLowerStarAdjunction Λ f)
       (TwoSquare.mk _ _ _ _ (comapUpperStarIso a f).inv) =

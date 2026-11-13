@@ -19,11 +19,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 03S2, paragraph following Definition 03S3.
-Evaluate the étale inverse-image/restriction isomorphism at the identity object,
-and identify the identity followed by the structure map with the structure map.
-Invert this restriction isomorphism to send a section of `H` on `U` to the
-terminal sections of its inverse image on `U`. -/
+/-- The isomorphism sending a section of `H` on `U` to the terminal sections of its inverse
+image on `U`, the inverse of the étale inverse-image/restriction isomorphism at the identity
+object (Stacks, Tag 03S2). -/
 noncomputable def etaleSetTerminalRestriction
     {R : Scheme.{u}} (H : Sheaf R.smallEtaleTopology (Type (u + 1))) (U : R.Etale) :
     H.obj.obj (op U) ≅

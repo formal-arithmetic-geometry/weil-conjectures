@@ -25,8 +25,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- A strict complex representative together with the specified scalar-telescope
 colimit comparison. This record keeps its category abstract so that projections do
-not unfold the construction of continuous coefficient rings.
-Source: good truncation and the localization telescope of Bhatt--Scholze 6.8.2. -/
+not unfold the construction of continuous coefficient rings (Bhatt–Scholze, Lemma 6.8.2). -/
 structure IntegralLocalizationComplexModel
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
     [HasColimitsOfShape (ULift.{x} ℕ) A]
@@ -44,8 +43,8 @@ structure IntegralLocalizationComplexModel
       comparison.hom = representative.inv ≫ c.ι.app n.down
 
 /-- A bounded-below integral derived object admits a strict telescope model of its
-scalar-extension unit. Only coefficient algebra is asserted here; no pushforward occurs.
-Source: Bhatt--Scholze, Lemma 6.8.2; Hemo--Richarz--Scholbach, Lemma 5.3(1). -/
+scalar-extension unit. Only coefficient algebra is asserted here; no pushforward occurs
+(Bhatt–Scholze, Lemma 6.8.2; Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem exists_integralLocalization_complex_model (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)))

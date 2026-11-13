@@ -25,8 +25,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 09YQ and 09XM; the compact closed-complement
-argument in Mathlib `AlgebraicGeometry.exists_map_eq_top`. -/
+/-- Two sections of `G` over an étale object that agree in the limit already agree at some stage
+of an affine-transition limit of qcqs schemes (Stacks, Tags 09YQ and 09XM). -/
 theorem etaleAffineSection_sameStageEquality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

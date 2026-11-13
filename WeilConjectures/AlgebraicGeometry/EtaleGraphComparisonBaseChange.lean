@@ -97,10 +97,8 @@ private theorem whiskered_quotient_exchange
     ((Functor.whiskeringLeft _ _ _).obj Q) es et es' et' a b c hs ht
 
 /-- Independence, open normalization, identity, cocycle, arbitrary base change (also for
-inverses), and common-refinement normalization of the specified graph comparisons.
-
-Source: Stacks Project, Tags 0F7C--0F7F; `LowerShriekComposition.lean`, lines 193--268;
-`LowerShriekIndependenceUnbounded.lean`, refinement comparison and common-refinement iso. -/
+inverses), and common-refinement normalization of the specified graph comparisons (Stacks, Tags
+0F7C--0F7F). -/
 theorem etaleGraphComparisonBaseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :

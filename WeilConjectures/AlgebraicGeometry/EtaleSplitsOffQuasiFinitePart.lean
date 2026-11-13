@@ -122,11 +122,10 @@ private theorem exists_openImmersion_fiber_of_elementary
   refine ⟨l ≫ h, inferInstance, ?_⟩
   simp [l, h, a, b, p, q, Scheme.Hom.fiberι, Category.assoc]
 
-/-- Stacks Project, Tag 02LP.
-A separated locally finite type morphism whose fibre has finitely many isolated points
+/-- A separated locally finite type morphism whose fibre has finitely many isolated points
 admits an elementary étale neighbourhood on which a finite clopen part splits off and the
-remaining fibre has no isolated points. If the original fibre is finite, the remaining
-fibre is empty. -/
+remaining fibre has no isolated points; if the original fibre is finite, the remaining fibre is
+empty (Stacks, Tag 02LP). -/
 theorem exists_etale_splits_off_quasiFinitePart
     {X S : Scheme.{v}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsSeparated f] (s : S)
     (hfinite : Set.Finite {x : f.fiber s | IsOpen ({x} : Set (f.fiber s))}) :

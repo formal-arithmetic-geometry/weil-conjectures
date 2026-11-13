@@ -27,9 +27,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Extend the augmentation to a complex of injectives using successive exact images.
-Source: Stacks Tag 01F7, Remark 20.14.2; the construction follows the proved private
-helper in EtaleMayerVietorisSectionComparison and Mathlib's injective-resolution descent. -/
+/-- Extend the augmentation to a complex of injectives using successive exact images (Stacks,
+Tag 01F7). -/
 private theorem exists_lift_to_injective_complex
     {C : Type*} [Category* C] [Abelian C] {G : C} (I : InjectiveResolution G)
     (L : CochainComplex C ℕ) [∀ n, Injective (L.X n)]

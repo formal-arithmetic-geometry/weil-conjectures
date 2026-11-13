@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.SfbCompletionNormalization
 
 /-! # The fixed completed immersion pullback
 
-Source: Stacks Tags 03A0, 03CY, 099L and 099R.
+## References
+
+* Stacks Project, Tags 03A0, 03CY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +32,8 @@ def sfbImmersionAlgebra {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] :
     (SfbAdicRestriction.inverse i) (SfbAdicRestriction.direct i)
     (SfbAdicRestriction.adjunction i))
 
-/-- The completed inverse image of the explicitly normalized localization representative.
-Source: Bhatt--Scholze, Lemma 6.5.8. -/
+/-- The completed inverse image of the explicitly normalized localization representative
+(Bhatt--Scholze, Lemma 6.5.8). -/
 def sfbImmersionCompletedModel {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :

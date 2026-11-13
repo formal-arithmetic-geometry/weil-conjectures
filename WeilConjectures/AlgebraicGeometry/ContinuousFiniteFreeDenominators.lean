@@ -23,8 +23,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A rational regular-module endomorphism on a compact scheme has one integral
-numerator after multiplication by a power of ℓ.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization. -/
+numerator after multiplication by a power of ℓ (Bhatt–Scholze, Section 6.8). -/
 theorem integralRegular_clear_denominators (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) [CompactSpace X]
@@ -163,8 +162,7 @@ private theorem finiteBiproduct_clear_denominators
   simpa only [Category.assoc, Preadditive.nsmul_comp, Preadditive.comp_nsmul, q] using heq
 
 /-- Every map between rationalizations of standard finite free integral modules
-on a compact scheme has an integral numerator.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization. -/
+on a compact scheme has an integral numerator (Bhatt–Scholze, Section 6.8). -/
 theorem integralFiniteFree_clear_denominators (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) [CompactSpace X] (n m : ℕ)

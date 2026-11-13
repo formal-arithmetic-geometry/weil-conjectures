@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.AffinePullbackModelComparisonsIs
 
 /-! # Pullback unit on affine sections models
 
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
+## References
+
+* Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7
 -/
 
 @[expose] public section
@@ -307,9 +309,7 @@ private theorem pinned_unit_fac
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- Before cancelling comparisons, the normalized derived pullback unit agrees with
-its ordinary model. This identity holds for every complex, without K-flatness.
-Source: Stacks Project, perfect.tex, Tag 0AA7, normalized derived unit calculation;
-Mathlib CategoryTheory.Adjunction.derivedη_fac_app. -/
+its ordinary model, for every complex (Stacks, Tag 0AA7). -/
 theorem affinePullbackSections_unit_uncancelled
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

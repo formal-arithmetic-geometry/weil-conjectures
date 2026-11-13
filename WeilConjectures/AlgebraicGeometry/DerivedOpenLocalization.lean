@@ -25,10 +25,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- An ambient derived localization with Hom universe w supplies such localizations on
-all opens. This is a size statement, not a new hypothesis on the scheme.
-Source: Stacks Project, Tag 08BT (exact extension-by-zero/restriction adjunction),
-and Mathlib.Algebra.Homology.DerivedCategory.Basic, HasDerivedCategory.standard. -/
+/-- An ambient derived localization with Hom universe `w` supplies such localizations on all
+opens (Stacks, Tag 08BT). -/
 theorem nonempty_derivedOpenLocalization (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     Nonempty (∀ U : X.Opens,

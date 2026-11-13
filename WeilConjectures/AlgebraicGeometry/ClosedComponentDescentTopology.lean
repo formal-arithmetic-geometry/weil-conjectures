@@ -17,10 +17,8 @@ open Topology
 namespace AlgebraicGeometry
 
 /-- If finitely many upstairs components descend to closed subsets under a continuous
-surjection, inverse images of downstairs components are upstairs components.
-
-Source: the maximality argument following finite descent in Stacks Project, Tag 054R;
-the finite closed-cover criterion is Mathlib's `isIrreducible_iff_sUnion_isClosed`. -/
+surjection, inverse images of downstairs components are upstairs components
+(Stacks, Tag 054R). -/
 theorem component_preimages_of_closed_descent {Y : Type u} {Z : Type v}
     [TopologicalSpace Y] [TopologicalSpace Z] (p : Y → Z)
     (hp : Continuous p) (hsurj : Function.Surjective p)

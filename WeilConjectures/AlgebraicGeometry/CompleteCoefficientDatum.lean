@@ -62,8 +62,8 @@ structure CompleteCoefficientDatum (Λ : Type t) [CommRing Λ] where
   quotientTorsion : ∀ x : Λ ⧸ ideal, ∃ m : ℕ, 0 < m ∧ m • x = 0
   quotientPerfect : ∀ n : ℕ, 1 ≤ n → adicQuotientPerfect Λ ideal n
 
-/-- The quotient map for two powers of the ideal, sending the class of x to the class of x.
-, construction step 2. -/
+/-- The quotient map `Λ ⧸ I ^ b →+* Λ ⧸ I ^ a` for `a ≤ b`, sending the class of `x` to the
+class of `x`. -/
 noncomputable def adicQuotientMap {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
     (b a : ℕ) (hab : a ≤ b) : Λ ⧸ I ^ b →+* Λ ⧸ I ^ a :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right hab)

@@ -28,8 +28,8 @@ namespace AlgebraicGeometry.ProEtale
 set_option backward.isDefEq.respectTransparency true in
 -- Recollement carries several nested exact-functor instance witnesses.
 /-- A constructible sheaf is a single locally closed piece, or an extension by a
-constructible sheaf supported on a proper closed subscheme.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), open/closed induction step. -/
+constructible sheaf supported on a proper closed subscheme (Hemo–Richarz–Scholbach, Lemma
+5.3(2)). -/
 theorem condensed_locallyClosed_one_step
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

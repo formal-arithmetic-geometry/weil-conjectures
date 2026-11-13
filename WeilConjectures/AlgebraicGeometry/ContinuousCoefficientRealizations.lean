@@ -25,8 +25,8 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- Compose a profinite coefficient function with the canonical profinite test projection.
-Source: the continuous coefficient realization of Bhatt--Scholze, Section 6.8. -/
+/-- Compose a profinite coefficient function with the canonical profinite test projection
+(Bhatt–Scholze, Section 6.8). -/
 noncomputable def chartComparisonAdjoint (X : Scheme.{u}) (E : Type)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] : Profinite.continuousMapRingObj E ⟶
       (pointLowerStar.obj ((lowerStar AddCommGrpCat.{u + 1} (toSpecZ X)).obj
@@ -48,8 +48,8 @@ noncomputable def chartComparisonAdjoint (X : Scheme.{u}) (E : Type)
        simp only [ContinuousMap.comp_assoc]
        erw [profiniteTestProjection_natural] }⟩
 
-/-- The actual adjoint comparison from condensed to continuous ring coefficients.
-Source: Bhatt--Scholze, Section 6.8, coefficient realization. -/
+/-- The actual adjoint comparison from condensed to continuous ring coefficients (Bhatt–Scholze,
+Section 6.8). -/
 noncomputable def chartComparison (X : Scheme.{u}) (E : Type)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     condensedRingObj (Profinite.continuousMapRingObj E) X ⟶
@@ -116,9 +116,8 @@ instance chartComparison_isMonHom (X : Scheme.{u}) (E : Type)
   change IsMonHom g.hom
   exact g.isMonHom_hom
 
-/-- The canonical continuous coefficient realization commutes with continuous ring maps.
-
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization. -/
+/-- The canonical continuous coefficient realization commutes with continuous ring maps
+(Bhatt–Scholze, Section 6.8). -/
 lemma chartComparison_naturality (X : Scheme.{u})
     (E F : Type) [TopologicalSpace E] [Ring E] [IsTopologicalRing E]
     [TopologicalSpace F] [Ring F] [IsTopologicalRing F]

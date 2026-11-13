@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Int
 
 /-! # Restriction of continuous module encodings
 
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites.
+## References
+
+* Bhatt–Scholze, Section 6.8
 -/
 
 @[expose] public section
@@ -25,8 +27,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
-/-- Restriction of a continuous-function coefficient ring is identity on sections.
-Source: Bhatt--Scholze, Section 6.8. -/
+/-- Restriction of a continuous-function coefficient ring is identity on sections (Bhatt–Scholze,
+Section 6.8). -/
 noncomputable def continuousRestrictionMap
     {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] :
@@ -36,8 +38,8 @@ noncomputable def continuousRestrictionMap
   { app := fun _ ↦ 𝟙 _
     naturality := fun _ _ _ ↦ rfl }
 
-/-- Encoding canonical inverse image agrees with restriction of the sectionwise module.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tags 03EK and 03EL. -/
+/-- Encoding canonical inverse image agrees with restriction of the sectionwise module
+(Bhatt–Scholze, Section 6.8; Stacks, Tags 03EK and 03EL). -/
 theorem continuousRing_module_restriction
     (X Y : Scheme.{u}) (f : Y ⟶ X) [WeaklyEtale f]
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
@@ -231,8 +233,8 @@ private theorem field_restriction_transport
       en ≪≫ (PresheafOfModules.pushforward j').mapIso
         ((SheafOfModules.forget _).mapIso eFX.symm)⟩
 
-/-- The rational encoding commutes with the etale restriction used in a lattice.
-Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
+/-- The rational encoding commutes with the etale restriction used in a lattice (Bhatt–Scholze,
+Proposition 6.8.4(6)). -/
 theorem continuousField_module_restriction
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

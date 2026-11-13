@@ -10,7 +10,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Eventual equality of maps from larger affine étale limits
 
-Source: Stacks Project, Tags 01ZC and 099S.
+## References
+
+* Stacks Project, Tags 01ZC and 099S
 -/
 
 @[expose] public section
@@ -155,11 +157,7 @@ private theorem etale_equality_complement {S T Z : Scheme.{u}} [IsAffine Z]
     rw [← hg, Category.assoc, Category.assoc, he]
 
 /-- Equality of two maps from one affine étale stage to an affine étale target
-is witnessed after a refinement of that stage, for the larger index universe.
-
-Source: Stacks Project, limits.tex, Proposition 32.6.1 (Tag 01ZC), injectivity
-in (1) implies (3); compare Mathlib's
-`Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType`. -/
+is witnessed after a refinement of that stage, for the larger index universe (Stacks, Tag 01ZC). -/
 theorem affineEtale_largeLimit_eventualEquality {X : Scheme.{u}}
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)

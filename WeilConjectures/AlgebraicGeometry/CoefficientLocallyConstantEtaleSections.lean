@@ -9,7 +9,10 @@ import WeilConjectures.AlgebraicGeometry.CoefficientLocallyConstantCounit
 
 /-! # Etale-local sections of coefficient-sized locally constant set sheaves
 
-Source: Bhatt--Scholze, Lemma 5.1.4; Stacks Project, Tags 099T and 099Y.
+## References
+
+* Bhatt--Scholze, Lemma 5.1.4
+* Stacks Project, Tags 099T and 099Y
 -/
 
 @[expose] public section
@@ -33,10 +36,7 @@ private theorem inhabited_lan_source
   exact ⟨j.left.unop, ⟨j.hom.unop⟩, ⟨x⟩⟩
 
 /-- Joint local inhabitedness of a family of locally constant set sheaves can be
-witnessed by etale objects. The values and the family may be coefficient-sized.
-
-Source: Bhatt--Scholze, Lemma 5.1.4; Stacks Project, Tag 099T, and the discrete
-Isom-sheaf argument in Tag 099Y. -/
+witnessed by etale objects (Bhatt--Scholze, Lemma 5.1.4; Stacks, Tags 099T and 099Y). -/
 theorem coefficientLocallyConstant_etaleSections (X : Scheme.{u})
     (K : Type (max v (u + 1)))
     (H : K → Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

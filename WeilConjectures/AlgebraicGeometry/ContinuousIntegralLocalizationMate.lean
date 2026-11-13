@@ -18,8 +18,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A morphism between localization telescopes is determined by its zeroth leg if
 multiplication by ℓ is invertible at its target. In particular, if a functor sends both
-cocones to colimits, it sends that morphism to an isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2, universal property of localization. -/
+cocones to colimits, it sends that morphism to an isomorphism (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralLocalization_cocone_map_isIso (ℓ : ℕ)
     {C : Type u} [Category.{v} C] [Preadditive C]
     {K : C} (c d : Cocone (Mod.smulSequence K ℓ))

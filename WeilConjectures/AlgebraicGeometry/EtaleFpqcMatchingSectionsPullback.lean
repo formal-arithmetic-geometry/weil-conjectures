@@ -165,8 +165,8 @@ private theorem sectionCompare_comp {S Y W Z : Scheme.{u}} (g : Y ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC for composition units. -/
+/-- The matching sections of an fpqc family of compatible sections are compatible with pullback
+(Stacks, Tags 09XN, 03CB and 03CC). -/
 theorem etaleFpqcMatchingSections_pullback
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))

@@ -59,8 +59,8 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
        ext x
        exact (G.obj.map f).hom.map_one |>.symm }⟩
 
-/-- Source: Stacks Project, Tags 00YV and 03D2, identification of transported
-ring operations by uniqueness of the lifted adjoint. -/
+/-- The ring operations on the lifted étale inverse image are identified with the transported
+ones, by uniqueness of the lifted adjoint (Stacks, Tags 00YV and 03D2). -/
 theorem etaleInverseImageRingComparisonOperations (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Tensor calculus for constant quotient sections
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK; Tag 09C6.
+## References
+
+* Stacks Project, Tags 03CY, 03EK and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -120,10 +122,7 @@ private theorem sectionOver_eq (U : C) (M : Mod R) (V : (Over U)ᵒᵖ)
 attribute [irreducible] sectionRes sectionOver sectionUnder
 end SectionCarriers
 
-/-- The tensor/ideal-power quotient equivalence commutes with module maps.
-
-Source: Stacks Project, Modules on Sites, section-tensor-product, Tag 03EK,
-ordinary tensor functoriality; Mathlib's `TensorProduct.quotTensorEquivQuotSMul`. -/
+/-- The tensor/ideal-power quotient equivalence commutes with module maps (Stacks, Tag 03EK). -/
 theorem adicPerfectTensorQuotient_naturality
     {A : Type w} [CommRing A] (I : Ideal A) (n : ℕ)
     {M N : ModuleCat.{w} A} (f : M ⟶ N)

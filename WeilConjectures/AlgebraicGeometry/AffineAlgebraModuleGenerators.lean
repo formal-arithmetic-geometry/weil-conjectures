@@ -14,8 +14,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Global generators of algebra modules on an affine open
 
-Source: Stacks Project, Morphisms, Lemma 0H88, proof, second paragraph;
-EGA I, Proposition 9.6.1.
+## References
+
+* Stacks Project, Tag 0H88
+* EGA I, Proposition 9.6.1
 -/
 
 @[expose] public section
@@ -91,8 +93,8 @@ private theorem nonempty_generatingSections_affine_slice (S : Scheme.{u})
     (U.sheafOfModulesEquivOverInverseUnit S.ringCatSheaf).symm
   exact ⟨H.ofEpi ((overEquiv U).unitIso.app M).inv⟩
 
-/-- Global generation is the first half of the affine algebra-module presentation.
-Source: Stacks Project, Morphisms, Lemma 0H88, second paragraph; EGA I, Proposition 9.6.1. -/
+/-- Global generation is the first half of the affine algebra-module presentation
+(Stacks, Tag 0H88; EGA I, Proposition 9.6.1). -/
 theorem nonempty_affine_algebraModule_generatingSections
     (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (U : S.Opens) (hU : IsAffineOpen U)
     (M : SheafOfModules.{u}

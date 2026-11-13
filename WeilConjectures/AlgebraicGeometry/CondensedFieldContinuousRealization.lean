@@ -30,8 +30,9 @@ import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 /-!
 # Local triviality over continuous p-adic field coefficients
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the agent rank/descent argument
-recorded in.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -88,8 +89,8 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Projection |X[S]| → S, using Spec LC(S,Z) = S × Spec Z and base change.
-Source: Hemo--Richarz--Scholbach, Example 3.1. -/
+/-- Projection `|X[S]| → S`, using `Spec LC(S,Z) = S × Spec Z` and base change
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 noncomputable def profiniteTestProjection (X : Scheme.{u}) (S : Profinite.{u}) :
     C(((profiniteToProEtOf X).obj S).left, S) :=
   (ContinuousMap.fst.comp
@@ -453,8 +454,8 @@ private lemma comparison_basis_isIso (X : Scheme.{u}) (E : Type u) [NormedField 
   change IsIso ((e.hom.app Λ).hom.app (Opposite.op U) ≫ f.hom.app (Opposite.op U))
   infer_instance
 
-/-- The continuous-function comparison for any totally disconnected normed field is unique.
-Source: Hemo--Richarz--Scholbach, Example 3.1. -/
+/-- The continuous-function comparison for any totally disconnected normed field is unique
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] (X : Scheme.{u}) :
     ∃! e : Mon.mk (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ≅
@@ -485,9 +486,8 @@ theorem existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected
   cases f with
   | up f => exact (he' S.unop f).trans (comparison_eq X E S.unop f).symm
 
-/-- The canonical continuous-function realization for totally disconnected normed fields.
-Source: Hemo--Richarz--Scholbach, Example 3.1.
-The preceding theorem determines the isomorphism uniquely by its adjoint test equations. -/
+/-- The canonical continuous-function realization for totally disconnected normed fields
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 noncomputable def condensedFieldContinuousMapIso
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] (X : Scheme.{u}) :
     Mon.mk (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ≅
@@ -496,8 +496,8 @@ noncomputable def condensedFieldContinuousMapIso
           (continuousCoefficientRingSheaf X E)) :=
   (existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected E X).exists.choose
 
-/-- The canonical realization sends a profinite test function to its pullback.
-Source: Hemo--Richarz--Scholbach, Example 3.1. -/
+/-- The canonical realization sends a profinite test function to its pullback
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem condensedFieldContinuousMapIso_test
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] (X : Scheme.{u})
     (S : Profinite.{u}) (f : C(S, E)) :
@@ -507,8 +507,8 @@ theorem condensedFieldContinuousMapIso_test
           (ULift.up f) = ULift.up (f.comp (profiniteTestProjection X S)) :=
   (existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected E X).exists.choose_spec S f
 
-/-- The condensed coefficient ring is the ring sheaf of continuous functions on site objects.
-Source: Hemo--Richarz--Scholbach, Example 3.1. -/
+/-- The condensed coefficient ring is the ring sheaf of continuous functions on site objects
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem existsUnique_condensedFieldContinuousMapIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

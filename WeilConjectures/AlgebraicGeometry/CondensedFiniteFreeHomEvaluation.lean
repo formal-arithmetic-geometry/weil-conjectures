@@ -23,8 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- Derived maps from P[0] are derived sections of internal Hom from P.
-Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2), evaluation. -/
+/-- Derived maps from P[0] are derived sections of internal Hom from P (Stacks, Tag 08JJ;
+Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem condensed_finite_free_hom_evaluation
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

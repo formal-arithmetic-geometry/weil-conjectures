@@ -284,9 +284,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
-/-- An ordinary scalar-unit copower for an exact extension descends to derived objects.
-Source: Compatibility.lean, `isIso_derivedBasisUnitDesc` and
-`isIso_leftDerivedBasisUnitDesc`, with coproducts replacing finite biproducts. -/
+/-- An ordinary scalar-unit copower for an exact extension descends to derived objects. -/
 theorem condensedQbar_scalar_basis_unit_of_sections
     (I : Type (u + 1))
     (b : ∀ Z : Scheme.{u}, I →

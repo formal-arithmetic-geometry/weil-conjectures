@@ -42,7 +42,8 @@ abbrev graphS₁ := locallyClosedGraphS₁ H.a H.e H.p c.i c.g (H.graphEquation 
 /-- The second proper graph in the fixed product (Stacks, Tag 0F7J). -/
 abbrev graphS₂ := locallyClosedGraphS₂ H.a H.e H.p c.i c.g (H.graphEquation c)
 
-/-- The properness proof supplied by the graph model, with no choice of arrow (Stacks, Tag 0F7B). -/
+/-- The properness proof supplied by the graph model, with no choice of arrow (Stacks, Tag
+0F7B). -/
 instance graphS₁_proper : IsProper (H.graphS₁ c) := by
   have he : H.graphS₁ c ≫ pullback.snd (pullback.snd H.p c.g) c.i = 𝟙 X := by
     dsimp only [graphS₁, locallyClosedGraphS₁]
@@ -52,7 +53,8 @@ instance graphS₁_proper : IsProper (H.graphS₁ c) := by
     infer_instance
   exact IsProper.of_comp _ (pullback.snd (pullback.snd H.p c.g) c.i)
 
-/-- The properness proof supplied by the graph model, with no choice of arrow (Stacks, Tag 0F7B). -/
+/-- The properness proof supplied by the graph model, with no choice of arrow (Stacks, Tag
+0F7B). -/
 instance graphS₂_proper : IsProper (H.graphS₂ c) := by
   have he : H.graphS₂ c ≫ pullback.snd (pullback.fst H.p c.g) H.e = H.a := by
     dsimp only [graphS₂, locallyClosedGraphS₂]

@@ -49,8 +49,8 @@ theorem flat_of_discreteField (X : Scheme.{u}) [IsNoetherian X] (A : Type u) [Fi
   exact (ObjectProperty.flat_iff_preservesFiniteLimits M).mpr
     (preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm)
 
-/-- Over the pulled-back discrete ring of a field, a bounded complex has finite Tor amplitude.
-Source: Stacks Project, Tags 0651 and 08FC; Bhatt--Scholze, Remark 6.3.2. -/
+/-- Over the pulled-back discrete ring of a field, a bounded complex has finite Tor amplitude
+(Stacks, Tags 0651 and 08FC; Bhatt--Scholze, Remark 6.3.2). -/
 theorem finiteTorAmplitude_of_discreteField (X : Scheme.{u}) [IsNoetherian X]
     (A : Type u) [Field A]
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

@@ -79,8 +79,7 @@ instance properAmbientProduct_proper : IsProper (s.properAmbientProduct c t pr h
     inferInstance
 
 omit [IsProper pr] in
-/-- The product map commutes with the proper maps to the base.
-Source: the first pullback projection equation. -/
+/-- The product map commutes with the proper maps to the base. -/
 theorem properAmbientProduct_base :
     s.properAmbientProduct c t pr hp ≫ (pullback.fst s.p c.g ≫ s.p) =
       pullback.fst t.p c.g ≫ t.p := by
@@ -96,8 +95,7 @@ def properAmbientFirst :
         exact pullback.condition)
 
 omit [IsProper pr] in
-/-- The first supporting neighborhood square is Cartesian.
-Source: pull back the proper product map along the open from the compactification. -/
+/-- The first supporting neighborhood square is Cartesian. -/
 theorem properAmbientFirst_isPullback :
     IsPullback (s.properAmbientFirst c t pr hp) (pullback.fst _ _)
       (pullback.fst _ _) (s.properAmbientProduct c t pr hp) := by
@@ -118,8 +116,7 @@ def properAmbientSecond :
       rw [← Category.assoc, pullback.condition, Category.assoc, ← sq.w])
 
 omit [IsProper pr] in
-/-- The second supporting neighborhood square is Cartesian.
-Source: paste the two defining neighborhood squares with the supplied Cartesian open square. -/
+/-- The second supporting neighborhood square is Cartesian. -/
 theorem properAmbientSecond_isPullback :
     IsPullback (s.properAmbientSecond c t pr q sq hp) (pullback.fst _ _)
       (pullback.fst _ _) (s.properAmbientProduct c t pr hp) := by
@@ -133,8 +130,7 @@ theorem properAmbientSecond_isPullback :
 
 include sq hz in
 omit [IsProper pr] in
-/-- The first graph lift commutes with the first neighborhood map.
-Source: compare both pullback projections, using the ambient square and `hz`. -/
+/-- The first graph lift commutes with the first neighborhood map. -/
 theorem properAmbientFirst_graph :
     locallyClosedGraphS₁ t.a t.e t.p c.i c.g
         ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) ≫
@@ -154,8 +150,7 @@ theorem properAmbientFirst_graph :
 
 include hz in
 omit [IsProper pr] in
-/-- The second graph lift commutes with the second neighborhood map.
-Source: compare both pullback projections and use `t.a ≫ q = s.a`. -/
+/-- The second graph lift commutes with the second neighborhood map. -/
 theorem properAmbientSecond_graph :
     locallyClosedGraphS₂ t.a t.e t.p c.i c.g
         ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) ≫

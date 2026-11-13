@@ -21,7 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites Tags 03CB and 03CC, and Étale Cohomology Tag 09YQ. -/
+/-- The section comparison maps satisfy the identity and composition laws (Stacks, Tags 03CB,
+03CC and 09YQ). -/
 theorem etaleSetSectionComparisonLaws
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)

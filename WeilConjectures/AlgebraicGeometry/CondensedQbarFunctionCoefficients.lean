@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- Geometric fiber data, separating the constructed functors from their naturality proofs. -/
+/-- Geometric fiber data: the fiber functors with their additivity and colimit properties. -/
 structure CondensedQbarFiberData (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) where
   /-- Geometric evaluation, after choosing an algebraic closure above the point. -/
   fiber (U : X.ProEt) (x : U.left) :
@@ -39,7 +39,7 @@ structure CondensedQbarFiberData (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) w
     (fiber U x).obj (Mod.regular
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) U.left)) ≃ₗ[PadicAlgCl ℓ] PadicAlgCl ℓ
 
-/-- The fiber data are actual algebraic-closure pullbacks and terminal evaluations. -/
+/-- The canonical fiber data given by algebraic-closure pullbacks and terminal evaluations. -/
 @[irreducible] noncomputable def condensedQbarCanonicalFiberData
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : CondensedQbarFiberData ℓ X where
   fiber U x := CondensedQbarGeometricEvaluation.fiber ℓ U.left x
@@ -47,8 +47,7 @@ structure CondensedQbarFiberData (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) w
   fiber_colimits _ _ := inferInstance
   fiber_regular U x := CondensedQbarGeometricEvaluation.fiberRegularCoordinates ℓ U.left x
 
-/-- The remaining naturality and basis properties of the explicitly constructed
-coefficient action and geometric fibers. All data have already been constructed. -/
+/-- The naturality and basis properties of the coefficient action and geometric fibers. -/
 structure CondensedQbarCoefficientProperties (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (d : CondensedQbarFiberData ℓ X) : Prop where
   /-- On the affine weakly contractible basis every scalar endomorphism is a function. -/
@@ -125,8 +124,7 @@ structure CondensedQbarFunctionCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (X : Sc
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) U.hom ⋙ fiber U x ≅
         CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) V.hom ⋙ fiber V y)
 
-/-- Assemble coefficient properties over abstract fiber data, so dependent type
-comparisons do not unfold the geometric construction in downstream presentation proofs. -/
+/-- Assemble coefficient functions from abstract fiber data and the coefficient properties. -/
 noncomputable def CondensedQbarFunctionCoefficients.ofData
     {ℓ : ℕ} [Fact ℓ.Prime] {X : Scheme.{u}} (d : CondensedQbarFiberData ℓ X)
     (p : CondensedQbarCoefficientProperties ℓ X d) : CondensedQbarFunctionCoefficients ℓ X where
@@ -139,8 +137,7 @@ noncomputable def CondensedQbarFunctionCoefficients.ofData
   fiber_scalar := p.fiber_scalar
   fiber_compare := p.fiber_compare
 
-/-- The scalar action is constructed, by sheafifying multiplication and transporting
-through the explicit filtered-colimit ring realization. -/
+/-- The scalar action of the finite-extension-valued functions on the regular module. -/
 noncomputable abbrev CondensedQbarFunctionCoefficients.scalar
     {ℓ : ℕ} [Fact ℓ.Prime] {X : Scheme.{u}}
     (_q : CondensedQbarFunctionCoefficients ℓ X) (U : X.ProEt) :

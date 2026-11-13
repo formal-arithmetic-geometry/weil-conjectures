@@ -30,15 +30,12 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
-/-- The canonical right-adjoint base-change morphism `Lg_X^* a(K) ⟶ a'(Lg^* K)` of a
-cartesian square of quasi-compact and quasi-separated schemes `X' = X ×_Y Y'`, with
-`g_X = pullback.fst f g : X' ⟶ X` and `f' = pullback.snd f g : X' ⟶ Y'`.
-
-`a` and `a'` are right adjoints (`adjf`, `adjf'`) of the derived direct images `Rf_*`,
-`Rf'_*` restricted to the quasi-coherent derived categories, and `β : Lg^* Rf_* ⟶ Rf'_* Lg_X^*`
-is the base-change transformation `schemeDerivedBaseChangeMap`, assumed to be an isomorphism
-(`hβ`). The map is computed directly as the mate of `β⁻¹` under `adjf` and `adjf'`.
-(Stacks, Tag 0AA8) -/
+/-- The canonical right-adjoint base-change morphism `Lg_X^* a(K) ⟶ a'(Lg^* K)` of a cartesian
+square of quasi-compact and quasi-separated schemes `X' = X ×_Y Y'`, with `g_X = pullback.fst f
+g : X' ⟶ X` and `f' = pullback.snd f g : X' ⟶ Y'`. Here `a` and `a'` are the right adjoints
+(`adjf`, `adjf'`) of the derived direct images `Rf_*`, `Rf'_*` on quasi-coherent derived
+categories, and `β : Lg^* Rf_* ⟶ Rf'_* Lg_X^*` is the base-change isomorphism (`hβ`). The map is
+the mate of `β⁻¹` (Stacks, Tag 0AA8). -/
 noncomputable def dualityEquationBaseChangeMap
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

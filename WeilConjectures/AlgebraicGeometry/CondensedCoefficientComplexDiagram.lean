@@ -137,8 +137,7 @@ noncomputable def coefficientComplexMap {E F G G' : FiniteIntermediateField ℓ}
       (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ hf h)
       (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ he h)) (.up ℤ)).app C
 
-/-- The canonical coefficient diagram, with actual termwise scalar inclusions as maps.
-Source: the coefficient-algebra construction of the archived `TwoColimit.lean`. -/
+/-- The canonical coefficient diagram, with termwise scalar inclusions as maps. -/
 noncomputable def coefficientComplexDiagram {E F : FiniteIntermediateField ℓ}
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ)
@@ -202,8 +201,7 @@ noncomputable def coefficientComplexToAlgCl {E F G : FiniteIntermediateField ℓ
       (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ hf)
       (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ he)) (.up ℤ)).app C
 
-/-- The canonical coefficient cocone, with the actual algebraic-closure complex as vertex.
-Source: archived `TwoColimit.lean`, coefficient-algebra construction. -/
+/-- The canonical coefficient cocone, with the algebraic-closure complex as vertex. -/
 noncomputable def coefficientComplexCocone {E F : FiniteIntermediateField ℓ}
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ)
@@ -229,8 +227,7 @@ noncomputable def coefficientComplexCocone {E F : FiniteIntermediateField ℓ}
           Mod.extendπ_mixedScalarMap]
         rw [← comp_whiskerRight_assoc, padicSubfieldRingObjMap_comp_toPadicAlgCl] }
 
-/-- Ordinary coefficient tensor transitivity, before localization.
-Source: uniqueness of the scalar-extension adjoints. -/
+/-- Ordinary coefficient tensor transitivity, before localization. -/
 noncomputable def coefficientTensorIso {E G : FiniteIntermediateField ℓ} (h : E ≤ G) :=
   (Mod.extendScalarsComp (padicSubfieldRingObjMap X ℓ h)
     (padicSubfieldRingObjToPadicAlgCl X ℓ G)).symm ≪≫

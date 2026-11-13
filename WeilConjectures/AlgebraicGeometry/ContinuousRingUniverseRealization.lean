@@ -35,8 +35,8 @@ attribute [local instance] Profinite.continuousMapRingObjOfUniverseMonObj
 
 namespace AlgebraicGeometry.ProEtale.ContinuousRingUniverse
 
-/-- Naturality of the projection from a profinite test scheme.
-Source: HRS Example 3.1; the canonical test projection. -/
+/-- Naturality of the projection from a profinite test scheme (Hemo–Richarz–Scholbach, Example
+3.1). -/
 theorem testProjection_natural (X : Scheme.{u}) {S T : Profinite.{u}} (f : S ⟶ T) :
     (profiniteTestProjection X T).comp ((profiniteToProEtOf X).map f).left.base.hom =
       f.hom.hom.comp (profiniteTestProjection X S) := by

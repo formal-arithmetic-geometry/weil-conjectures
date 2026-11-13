@@ -35,8 +35,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Evaluation of a finite-extension-valued continuous function at a point.
-Source: RefactorInstruction.tex, Section 4, evaluation of coefficient functions. -/
+/-- Evaluation of a finite-extension-valued continuous function at a point. -/
 noncomputable def condensedQbarFunctionEval
     {ℓ : ℕ} [Fact ℓ.Prime] {T : Type u} [TopologicalSpace T] (t : T) :
     PadicAlgCl.finiteIntermediateFieldValued ℓ T →+* PadicAlgCl ℓ where
@@ -47,8 +46,7 @@ noncomputable def condensedQbarFunctionEval
   map_add' _ _ := rfl
 
 /-- Restriction of bounded continuous functions along a continuous map.
-The same finite extension contains all values after restriction.
-Source: RefactorInstruction.tex, Section 4, restriction of coefficient functions. -/
+The same finite extension contains all values after restriction. -/
 noncomputable def condensedQbarFunctionComp
     {ℓ : ℕ} [Fact ℓ.Prime] {T : Type u} [TopologicalSpace T]
     {T' : Type v} [TopologicalSpace T'] (g : C(T', T)) :
@@ -236,10 +234,7 @@ private theorem matrix_quotient_equiv_of_finrank_eq
 
 /-- A fixed presentation has matrices of bounded continuous functions on a refinement,
 whose evaluated linear cokernels agree on fibres of the original base, and whose
-open restrictions present the module.
-
-Source: RefactorInstruction.tex, Section 4, coefficient realization and geometric-fibre
-comparison, steps 1--3 of the finite-matrix refinement argument. -/
+open restrictions present the module. -/
 theorem exists_condensedQbar_compatible_function_presentations
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

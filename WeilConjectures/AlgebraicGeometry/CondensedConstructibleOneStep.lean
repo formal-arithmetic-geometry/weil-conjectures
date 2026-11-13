@@ -264,8 +264,8 @@ private theorem generic_constructible_one_step
     exact piece_of_lfp_open_module Λ T V _ hV
 
 /-- A constructible sheaf is a single locally closed piece, or an extension by a
-constructible sheaf supported on a proper closed subscheme.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), open/closed induction step. -/
+constructible sheaf supported on a proper closed subscheme
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem condensed_constructible_one_step
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

@@ -36,10 +36,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The constant section with value `a` of the pulled-back condensed Qbar coefficient.
-This applies the existing monoidal inverse image to the existing constant global
-section and evaluates the resulting tensor-unit morphism at the integer generator.
-Source: the degree-zero normalization of the affine-line cohomology lemma. -/
+/-- The constant section with value `a` of the pulled-back condensed Qbar coefficient. -/
 def condensedQbarConstantSection (X : Scheme.{v}) (ℓ : ℕ) [Fact ℓ.Prime]
     (a : PadicAlgCl ℓ) :
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X).obj.obj

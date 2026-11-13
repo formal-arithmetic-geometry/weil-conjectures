@@ -23,8 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 03Q1 (3), inverse-image stalk comparison;
-Tag 03PU, sections determined by geometric germs; Tag 09XN, fpqc uniqueness. -/
+/-- The adjunction units along an fpqc covering are jointly injective on sections of an étale
+sheaf (Stacks, Tags 03Q1, 03PU and 09XN). -/
 theorem etaleFpqcUnits_jointly_injective
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

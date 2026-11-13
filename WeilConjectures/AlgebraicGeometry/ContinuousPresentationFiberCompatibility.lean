@@ -609,9 +609,8 @@ private theorem condensedField_geometric_evaluation_scalars
   intro f
   simpa only [coefficientValue, continuousCoefficientValue] using geometric_scalar_value E Ω p a z f
 
-/-- Compatible geometric evaluation, independent of any chosen module or presentation.
-Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11. -/
+/-- Compatible geometric evaluation, independent of any chosen module or presentation
+(Hemo–Richarz–Scholbach, Example 3.1; Bhatt–Scholze, Example 4.2.11). -/
 private theorem exists_condensedField_compatible_evaluations
     (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
@@ -761,7 +760,7 @@ private noncomputable def cokernelCoordinates
   rw [← hf, LinearMap.range_comp, LinearMap.range_comp,
     LinearMap.range_eq_top.2 a.symm.surjective, Submodule.map_top]
 
-/-- Underlying module inverse image along a scheme map. Source: HRS Example 3.1. -/
+/-- Underlying module inverse image along a scheme map (Hemo–Richarz–Scholbach, Example 3.1). -/
 noncomputable def pulledMod (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] {X Y : Scheme.{u}} (p : Y ⟶ X)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (baseCoeff T X)) :=

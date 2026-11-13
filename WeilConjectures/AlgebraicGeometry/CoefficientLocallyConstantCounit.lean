@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
 /-! # Classicality of coefficient-sized locally constant set sheaves
 
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4.
+## References
+
+* Bhatt--Scholze, Lemmas 5.1.1--5.1.4
 -/
 
 @[expose] public section
@@ -41,9 +43,7 @@ private noncomputable def colimitEvaluationComparison
     exact (f.naturality (c.ι.app j)).symm
 
 /-- A set-valued left Kan extension preserves a colimit if the representables in
-its defining image preserve that colimit.
-Source: the density theorem for presheaves and commutation of colimits, applied to
-the finite-presentation argument in Bhatt--Scholze, Lemma 5.1.1. -/
+its defining image preserve that colimit (Bhatt--Scholze, Lemma 5.1.1). -/
 private theorem lan_preserves_colimit_of_representables
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     (B : C ⥤ D) (G : Cᵒᵖ ⥤ Type (max v (u + 1)))
@@ -248,8 +248,8 @@ private theorem setComparisonUnit_isIso (X : Scheme.{u})
 -- comparison direct image, and evaluate the resulting isomorphism at the terminal
 -- object. The comparison unit there is invertible.
 
-/-- Full faithfulness of the set-valued comparison, in its unit-normalized form.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2. -/
+/-- Full faithfulness of the set-valued comparison, in its unit-normalized form
+(Bhatt--Scholze, Lemmas 5.1.1--5.1.2). -/
 private theorem proEtaleComparisonUnitSets_isIso (X : Scheme.{u}) :
     IsIso (comparison.{u, v} X).unit := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -332,9 +332,8 @@ private theorem setLanAffineContinuous (X : Scheme.{u})
   have hL := isColimitOfPreserves ((toProEt X).op.lan.obj G) hc'.op
   exact ⟨by exact hL.whiskerEquivalence (opOpEquivalence J).symm⟩
 
-/-- The inverse image of an etale sheaf is continuous on affine ind-etale limits.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2, with the same finite-presentation
-argument for arbitrary affine ind-etale stages. -/
+/-- The inverse image of an etale sheaf is continuous on affine ind-etale limits
+(Bhatt--Scholze, Lemmas 5.1.1--5.1.2). -/
 private theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (Type (max v (u + 1)))) :
     PreservesFilteredColimitsOfSize.{u, u}
@@ -369,8 +368,7 @@ private theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
   exact ⟨by exact h.whiskerEquivalence (opOpEquivalence J).symm⟩
 
 /-- The comparison counit is invertible for a sheaf continuous on affine ind-etale
-presentations.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2. -/
+presentations (Bhatt--Scholze, Lemmas 5.1.1--5.1.2). -/
 private theorem proEtaleComparisonCounitSets_isIso_of_continuous (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (max v (u + 1))))
     (hF : Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt X)
@@ -957,8 +955,8 @@ private theorem affineClassicalCover (X : Scheme.{u})
     exact eR ≪≫ (restriction (U i).left Zg).mapIso e ≪≫
       (classicalRestrictionIso (U i).left Zg).app G
 
-/-- Local etale presentations imply continuity on affine ind-etale presentations.
-Source: Bhatt--Scholze, Lemma 5.1.4, using the continuity criterion of Lemma 5.1.2. -/
+/-- Local etale presentations imply continuity on affine ind-etale presentations
+(Bhatt--Scholze, Lemmas 5.1.2 and 5.1.4). -/
 private theorem proEtale_locallyClassical_continuity (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (max v (u + 1))))
     (I : Type (max v (u + 1))) (U : I → X.ProEt) (hU : (ProEt.topology X).CoversTop U)
@@ -1144,9 +1142,7 @@ end AlgebraicGeometry.Scheme.CoefficientClassical
 namespace AlgebraicGeometry.ProEtale
 
 /-- The comparison counit is invertible for a locally constant set sheaf, in the
-coefficient universe, on the existing small site models.
-
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4, p. 34. -/
+coefficient universe, on the small site models (Bhatt--Scholze, Lemmas 5.1.1--5.1.4). -/
 theorem coefficientLocallyConstant_counit_isIso (X : Scheme.{u})
     (H : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)
       (Type (max v (u + 1))))

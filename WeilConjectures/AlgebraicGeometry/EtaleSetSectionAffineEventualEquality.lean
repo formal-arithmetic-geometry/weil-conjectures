@@ -22,8 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09YQ, affine case of the degree-zero argument using
-Tags 0EYL, 04HR and 09YN. -/
+/-- Two sections over an affine étale object that agree in the limit already agree at some stage
+(Stacks, Tags 09YQ, 0EYL, 04HR and 09YN). -/
 theorem etaleSetSectionAffineEventualEquality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

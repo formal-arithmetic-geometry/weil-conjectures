@@ -35,9 +35,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, More on Algebra, Tag 0BCA.
-
-Lifting of complexes along reduction modulo `I`, for a class of projective modules. -/
+/-- Lifting of complexes along reduction modulo `I`, for a class of projective modules
+(Stacks, Tag 0BCA). -/
 theorem complex_lift_class_projective
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

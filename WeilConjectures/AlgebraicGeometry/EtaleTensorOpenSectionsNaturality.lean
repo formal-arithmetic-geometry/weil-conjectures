@@ -25,9 +25,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 noncomputable section
 
-/-- The canonical tensor-to-restriction comparison on the whole open subscheme.
-Source: Stacks, Tags 0095 and 0096; uniqueness of left adjoints and
-Mathlib `restrictAppIso`. -/
+/-- The canonical tensor-to-restriction comparison on the whole open subscheme (Stacks, Tags
+0095 and 0096). -/
 def tensorOpenSectionIso (X : Scheme.{u}) (F : X.Modules) (U : X.Opens) :
     Γ((tensorPullback U.ι).obj F, ⊤) ≅ Γ(F, U) :=
   ((CategoryTheory.evaluation _ AddCommGrpCat).obj (op ⊤)).mapIso
@@ -277,8 +276,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The constructed comparisons commute with the unit-normalized tensor restrictions
 (Stacks, Tags 03DR, 0095 and 0096). -/
-/- Core comparison compatibility after expanding the constructed isomorphisms.
-Source: Stacks, Tag 03DR, equation (35.8.0.1).
+/- Core comparison compatibility after expanding the constructed isomorphisms (Stacks, Tag 03DR).
 -/
 theorem etaleTensorOpenSectionIso_component_core
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)

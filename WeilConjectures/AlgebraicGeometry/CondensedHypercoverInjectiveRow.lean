@@ -55,9 +55,8 @@ private theorem singleAugmentation_quasiIso
 
 -- Transport through two module equivalences needs explicit sectionwise type comparison.
 set_option backward.isDefEq.respectTransparency false in
-/-- The augmented alternating section row of an injective internal module is exact.
-Source: Stacks Project, Tags 09A2, 01GE and 01GW; Hemo--Richarz--Scholbach,
-Lemma 5.3(1), the hypercover calculation. -/
+/-- The augmented alternating section row of an injective internal module is exact (Stacks, Tags
+09A2, 01GE and 01GW; Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem condensedHypercoverInjectiveRow
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

@@ -24,8 +24,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tag 03Q4, finite affine-cover reduction, with Tags 01IT
-and 00VL for affine covers and sheaf separatedness. -/
+/-- A qcqs étale object over a qcqs scheme is covered by finitely many affine qcqs étale objects
+which detect equality of sections after any base change (Stacks, Tags 03Q4, 01IT and 00VL). -/
 theorem etale_finite_affine_restriction_detection
     {S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]
     (W : S.Etale) [QuasiCompact W.hom] [QuasiSeparated W.hom] :

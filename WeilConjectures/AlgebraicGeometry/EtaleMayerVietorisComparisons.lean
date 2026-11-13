@@ -18,7 +18,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Cohomology on Sites, Tag 03F3 (2). -/
+/-- Comparison isomorphisms between right derived functors of sections and étale cohomology over
+`X`, `U`, `V` and `U ∩ V` (Stacks, Tag 03F3). -/
 theorem etale_mayerVietoris_comparisons (X : Scheme.{u}) (U V : X.Opens) :
     Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
         (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n ≅

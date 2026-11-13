@@ -19,11 +19,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites, Tags 03CB and 03CC.
-Evaluate the inverse-image composition isomorphism at the terminal object, transport
-along the triangle equality, and then use the second projection from the pullback
-of an identity. This projection is an isomorphism because its first defining map
-is an identity. No morphism in the triangle needs to be étale. -/
+/-- The isomorphism between terminal sections of the inverse image along `k = t ≫ e` and of the
+composite of inverse images, via the inverse-image composition isomorphism. No morphism in the
+triangle needs to be étale (Stacks, Tags 03CB and 03CC). -/
 noncomputable def etaleSetTerminalTransport
     {R S T : Scheme.{u}} (e : S ⟶ R) (t : T ⟶ S) (k : T ⟶ R)
     (hk : t ≫ e = k) (H : Sheaf R.smallEtaleTopology (Type (u + 1))) :

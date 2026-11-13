@@ -244,8 +244,7 @@ private theorem adjoint_coordinate_equation
     asIso_inv, IsIso.hom_inv_id_assoc]
   exact adj.unit.naturality b.hom
 
-/-- The counit formula identifies the adjoint with the given invertible map.
-Source: `Adjunction.homEquiv_counit`. Rewrite by the counit formula and the supplied equality. -/
+/-- The counit formula identifies the adjoint with the given invertible map. -/
 private theorem adjoint_isIso_of_rationalization
     {C D : Type*} [Category* C] [Category* D]
     (F : C ⥤ D) (G : D ⥤ C) (adj : F ⊣ G)
@@ -256,8 +255,8 @@ private theorem adjoint_isIso_of_rationalization
   rw [Adjunction.homEquiv_counit, h]
   infer_instance
 
-/-- Local trivializations of the two canonical maps attached to a finite etale cover.
-Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph; agent finite-sheet variant. -/
+/-- Local trivializations of the two canonical maps attached to a finite etale cover
+(Bhatt–Scholze, Lemma 6.8.13). -/
 theorem continuousLatticeIntersection_splitData
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

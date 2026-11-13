@@ -26,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The Čech functor preserves zero morphisms, also for larger coefficients.
-Source: the degree maps are products of zero morphisms. -/
+/-- The Čech functor preserves zero morphisms, also for larger coefficients. -/
 instance etaleOpenCech_preservesZeroMorphisms (X : Scheme.{u})
     {ι : Type u} (U : ι → X.Opens) :
     (cechComplexFunctor (A := AddCommGrpCat.{u + 1}) U).PreservesZeroMorphisms where

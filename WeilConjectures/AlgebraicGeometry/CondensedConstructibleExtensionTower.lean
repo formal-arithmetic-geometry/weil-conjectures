@@ -63,8 +63,8 @@ private theorem pushforward_tower
     have h := F.map_distinguished _ hdist
     exact ⟨_, _, _, _, _, h, pushforward_piece ℓ E i A hA, ih B hB⟩
 
-/-- A constructible sheaf is a finite distinguished extension of its locally free pieces.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), noetherian induction. -/
+/-- A constructible sheaf is a finite distinguished extension of its locally free pieces
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem exists_condensedConstructible_extension_tower
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

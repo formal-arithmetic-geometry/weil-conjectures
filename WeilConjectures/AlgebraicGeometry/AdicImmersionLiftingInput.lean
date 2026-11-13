@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ConstantFieldResidueTensorBounds
 
 /-! # Immersion transport of lisse residue lifting inputs
 
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication;
-Lemma 6.5.8 and Remark 6.5.10. Stacks Project, Tags 03A0, 03CY, 099L and 099R.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.8 and Remark 6.5.10
+* Stacks Project, Tags 03A0, 03CY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -53,12 +55,9 @@ abbrev sfbAdicImmersionSliceCategory {X S : Scheme.{u}} (i : S ⟶ X)
     ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj (adicLisseCompletedRing X I))
   @DerivedCategory (SheafOfModules.{u + 1} (R.over U)) _ _ (HasDerivedCategory.standard _)
 
-/-- A lisse restriction of the residue supplies the input to the existing perfect-lifting
-lemma, together with its slice comparisons. This statement constructs no perfect complex
-and no covering sieve. Its output remains an arbitrary complete complex with lisse residue.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication; Lemma 6.5.8 and
-Remark 6.5.10; Stacks Tags 03A0, 03CY, 099L and 099R. -/
+/-- A lisse restriction of the residue supplies the input to the perfect-lifting lemma,
+together with its slice comparisons (Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.8 and
+Remark 6.5.10; Stacks, Tags 03A0, 03CY, 099L and 099R). -/
 theorem sfbAdicImmersion_liftingInput
     (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S]
     (i : S ⟶ X) [IsImmersion i]

@@ -59,7 +59,8 @@ private theorem transportSectionOperations.{v, w} {C : Type v} [Category C]
   exact ops
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Proposition 00YV, ring paragraph; Section 00YR, sextuples. -/
+/-- The ring operations of the ring-valued direct image of étale sheaves are given by those of
+the underlying set-valued direct image (Stacks, Tags 00YV and 00YR). -/
 theorem etaleRingDirectImageOperations (U V : Scheme.{u}) (f : U ⟶ V)
     (FU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1} ⥤
       CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))))
