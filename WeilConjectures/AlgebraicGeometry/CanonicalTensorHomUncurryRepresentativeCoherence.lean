@@ -29,6 +29,7 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 700000 in
 -- Explicit functor identity rewrites elaborate through the sheaf and localization instances.
 set_option backward.isDefEq.respectTransparency.types true in
+set_option profiler true in
 private theorem localized_uncurry_input (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M : CochainComplex
