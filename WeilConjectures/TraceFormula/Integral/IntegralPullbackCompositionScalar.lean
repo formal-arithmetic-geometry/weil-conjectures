@@ -84,6 +84,12 @@ private theorem scalar_composition_paste
   rw [reassoc_of% N1, IIIk', reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
     reassoc_of% CE', mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
 
+private theorem finiteSystemDerivedPullback_eq_integralComparison {X Y : Scheme.{u}}
+    (f : X ⟶ Y) :
+    finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f =
+      integralComparisonDerivedSequencePullback l E f := by
+  rfl
+
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
 /-- Scalar extension carries the integral pullback compositor at E to the one at L.
@@ -151,10 +157,10 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
         ((integralSystemReduction l E V).obj K))
   dsimp only [Functor.comp_map, Functor.comp_obj, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Ng Np mix Na
+  simp only [← finiteSystemDerivedPullback_eq_integralComparison] at Ng mix
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  exact scalar_composition_paste (integralComparisonDerivedSequencePullback l L h)
-    (integralComparisonDerivedSequenceScalar l E L ι Z)
+  exact scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
     N1 IIIk IIIh Ng Np CE mix eE eL IIIhk Na CL
 
 end SystemScalar
