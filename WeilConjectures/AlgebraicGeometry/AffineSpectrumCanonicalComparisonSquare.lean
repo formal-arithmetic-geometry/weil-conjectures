@@ -46,8 +46,6 @@ private theorem comparisonIntoPullback_eq
           (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
   simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
 
-set_option maxHeartbeats 1100000 in
--- The comparison expands several nested stalk and localization functors.
 /-- The comparison square for the termwise spectrum pullback with its canonical counit.
 
 Proof: isoSpec naturality and stalkMap_comp identify the four stalk rings and
@@ -124,8 +122,12 @@ theorem exists_affineSpectrum_canonicalComparison_square
   let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))
     AddCommGrpCat.{u}
   let T := isoPullbackStalkCohomologyIso X'.isoSpec.inv z0 i
-  obtain ⟨l, hl⟩ := exists_affineSpectrum_ordinaryComparison_square
+  have hs := exists_affineSpectrum_ordinaryComparison_square
     f f' g g' sq sq0 z0 i P
+  let l := hs.choose
+  have hl := hs.choose_spec
+  -- Simplify the comparison equation without changing the predicate used to choose l.
+  change l.hom ≫ _ = _ at hl
   refine ⟨l, ?_⟩
   have hn := T.hom.naturality
     (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
@@ -150,6 +152,6 @@ theorem exists_affineSpectrum_canonicalComparison_square
   simp only [comparisonIntoPullback_eq, Functor.map_comp, Category.assoc,
     eqToIso_refl, Iso.trans_hom, Iso.refl_hom, Iso.app_hom, Iso.symm_hom,
     Category.id_comp, c0, d0, b, a0, P0, T, F, F0, H0, z] at hh ⊢
-  convert hh using 1 <;> rfl
+  exact hh
 
 end AlgebraicGeometry.SingleComplexBaseChange
