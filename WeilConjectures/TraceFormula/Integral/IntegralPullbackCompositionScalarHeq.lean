@@ -197,7 +197,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
-  have hh := derivedCompositor_heq
+  apply eq_of_heq
+  exact derivedCompositor_heq
     (F := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) k)
     (F' := integralComparisonSequencePullback l E k)
     (G := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) h)
@@ -214,33 +215,30 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      rfl)
+      exact HEq.rfl)
     (finiteSystemComposition_heq_integralComparison l E h k)
-  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  apply eq_of_heq
-  exact hh
 
 end Composition
 
