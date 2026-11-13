@@ -419,10 +419,11 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
             ((L((jU)^*[ModuleCat.{u + 1} Λ])).map θp.hom ≫ θj.hom ≫ κU) := by
         simp only [Ψ₁, Adjunction.comp_homEquiv
           (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p)
-          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU), Equiv.trans_apply]
+          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU)]
         simp only [← Adjunction.homEquiv_naturality_right, Category.assoc]
-        exact congrArg ((derivedUpperStarLowerStarAdjunction
-          (ModuleCat.{u + 1} Λ) p).homEquiv _ _) h1
+        simpa only [← Adjunction.homEquiv_naturality_right] using
+          congrArg ((derivedUpperStarLowerStarAdjunction
+            (ModuleCat.{u + 1} Λ) p).homEquiv _ _) h1
       rw [← Category.assoc, h2, Adjunction.homEquiv_comp_conjugateEquiv_app]
       congr 1
       simp only [Bι, κU, hunit, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
@@ -443,8 +444,8 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     have h := Rp.commShiftIso_hom_naturality w (1 : ℤ)
     have hw' : Rp.map (w⟦(1 : ℤ)⟧') = (Rp.commShiftIso (1 : ℤ)).hom.app _ ≫
         (Rp.map w)⟦(1 : ℤ)⟧' ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ := by
-      rw [← Category.assoc, ← h]
-      simp
+      simp only [← Category.assoc, ← h]
+      simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
     have := isIso_homology_zero_map_shift_of_isIso_shiftMap T.mor₃ hδ
     have hm₃ : (Rp.map w)⟦(1 : ℤ)⟧' = T.mor₃⟦(1 : ℤ)⟧' ≫
         ((Rp.commShiftIso (1 : ℤ)).inv.app _)⟦(1 : ℤ)⟧' := by
