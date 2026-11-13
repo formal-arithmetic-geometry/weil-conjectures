@@ -254,7 +254,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
+  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [K, Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
@@ -262,9 +262,9 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
       (ComplexShape.up ℤ)).unit.app K)
   dsimp only [K, Functor.comp_obj, Functor.comp_map, Functor.id_obj] at r5 e1
-  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
+  simp only [← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
-  rw [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
+  simp only [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**: for `M ∈ D(Y_proét, Λ)`, the
 pullback of the unit `M ⟶ Res (Ext M)`, followed by the commutation `ι` of `Res` with `Lf^*`, is
