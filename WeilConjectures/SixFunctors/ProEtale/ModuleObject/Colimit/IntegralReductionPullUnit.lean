@@ -165,7 +165,6 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   simp only [Mod.comp_hom'] at h
   exact h
 
-set_option trace.profiler true in
 /-- The unit compatibility after the counit comparison, without a K-flatness assumption. -/
 private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh_counit
     (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
@@ -225,9 +224,10 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
     (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
+  -- Focus on the identity map to avoid rebuilding the whole comparison equation.
   conv_lhs at i1' =>
     arg 2; arg 2; arg 2
-    rw (transparency := .default) [Functor.map_id]
+    rw (transparency := .default) [CategoryTheory.Functor.map_id]
   simp only [Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
@@ -269,7 +269,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
   have : IsIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit) := inferInstance
-  let c := (L((f)^*⟦Λ'⟧)).mapIso
+  let c := L((f)^*⟦Λ'⟧).mapIso
       (asIso ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)) ≪≫
     (asIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit)).app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≪≫
