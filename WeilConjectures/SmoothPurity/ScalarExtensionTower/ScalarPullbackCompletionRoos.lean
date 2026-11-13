@@ -69,7 +69,6 @@ private theorem bridge_naturality (F : Type u) [Field F] [Algebra ℚ_[l] F]
     Functor.isoWhiskerLeft U ρF.comparison
   with_unfolding_all exact b.hom.naturality g
 
-set_option profiler true in
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
 Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
