@@ -149,8 +149,9 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (finiteSystemDerivedComposition_eq_integralComparison l L h k)
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  exact scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
+  have paste := scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
     N1 IIIk IIIh Ng Np CE mix eE eL IIIhk Na CL
+  exact paste
 
 end SystemScalar
 
