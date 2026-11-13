@@ -87,22 +87,33 @@ private theorem factor_idempotent
       simp only [Pi.mul_apply, Pi.single_eq_same, ht₀, mul_zero, Pi.zero_apply]
     · simp only [Pi.mul_apply, Pi.single_eq_of_ne ha, zero_mul, Pi.zero_apply]
 
-private theorem factor_idempotent_of_tensor
+private theorem tensor_factor_idempotent
     {R A B C : Type*} {ι : Type*} {D : ι → Type*}
     [CommRing R] [CommRing A] [CommRing B] [CommRing C] [∀ i, CommRing (D i)]
     [Algebra R A] [Algebra R B]
-    (E : TensorProduct R A B ≃+* (∀ i, D i)) (i : ι) (α : D i ≃+* C)
-    (F : TensorProduct R A B →+* C)
-    (hleft : ∀ x, F (TensorProduct.tmul R x 1) = α (E (TensorProduct.tmul R x 1) i))
-    (hright : ∀ y, F (TensorProduct.tmul R 1 y) = α (E (TensorProduct.tmul R 1 y) i))
-    (γ : TensorProduct R A B) (hunit : IsUnit (E γ i)) :
-    ∃ e v : TensorProduct R A B, IsIdempotentElem e ∧ v * γ = e ∧ F e = 1 ∧
+    (E : TensorProduct R A B ≃+* (∀ i, D i)) (i : ι) [Algebra B (D i)]
+    (α : D i ≃+* C) (F : TensorProduct R A B →+* C)
+    (θ : A →+* D i) (ψ : A →+* C) (f : B →+* C)
+    (hleft : ∀ x, E (TensorProduct.tmul R x 1) i = θ x)
+    (hright : ∀ y, E (TensorProduct.tmul R 1 y) i = algebraMap B (D i) y)
+    (hθψ : ∀ x, α (θ x) = ψ x) (hα : ∀ y, α (algebraMap B (D i) y) = f y)
+    (hF : ∀ x y, F (TensorProduct.tmul R x y) = ψ x * f y)
+    (g : B) (hunit : IsUnit (algebraMap B (D i) g)) :
+    ∃ e v : TensorProduct R A B, IsIdempotentElem e ∧
+      v * TensorProduct.tmul R 1 g = e ∧ F e = 1 ∧
       Function.Surjective F ∧ (∀ t, F t = 0 → e * t = 0) := by
-  have hF : F = α.toRingHom.comp ((Pi.evalRingHom D i).comp E.toRingHom) := by
-    apply TensorProduct.ringHom_ext (R := R) (A := A) (B := B)
-    · exact RingHom.ext hleft
-    · exact RingHom.ext hright
-  exact factor_idempotent E i α F (fun t ↦ DFunLike.congr_fun hF t) γ hunit
+  have hEtmul (x : A) (y : B) :
+      E (TensorProduct.tmul R x y) i = θ x * algebraMap B (D i) y := by
+    rw [show TensorProduct.tmul R x y =
+      TensorProduct.tmul R x 1 * TensorProduct.tmul R 1 y by
+        rw [TensorProduct.tmul_mul_tmul, mul_one, one_mul]]
+    rw [E.map_mul, Pi.mul_apply, hleft, hright]
+  have hproj (t : TensorProduct R A B) : F t = α (E t i) := by
+    induction t using _root_.TensorProduct.inductionOn with
+    | tmul x y => rw [hF, hEtmul, α.map_mul, hθψ, hα]
+    | add x y hx hy => rw [F.map_add, E.map_add, Pi.add_apply, α.map_add, hx, hy]
+  apply factor_idempotent E i α F hproj (TensorProduct.tmul R 1 g)
+  rwa [hright]
 
 set_option profiler true in
 /-- Select the finite completion factor before transferring it to the larger tensor.
@@ -187,8 +198,6 @@ theorem finite_completion_factor_idempotent
   let D := fun a : p.primesOver S' ↦
     AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime a.1))
       (Localization.AtPrime a.1)
-  let : ∀ a, Algebra S' (D a) := fun a ↦ inferInstance
-  let : Algebra S' (D q₀) := inferInstance
   let := TensorProduct.rightAlgebra (R := R) (A := Rph) (B := S')
   obtain ⟨_, E, θ, hθ, hE⟩ :=
     AdicCompletion.completion_finite_extension_decomposition R S' p
@@ -222,20 +231,11 @@ theorem finite_completion_factor_idempotent
     rw [AdicCompletion.evalₐ_of]
     congr 1
     exact Localization.localRingHom_to_map q' q.asIdeal S'.val.toRingHom rfl y
-  have hunit : IsUnit (E γ q₀) := by
-    have hey : E γ q₀ = algebraMap S' (D q₀) g := congrFun (E.commutes g) q₀
-    rw [hey]
-    exact (IsLocalization.map_units (Localization.AtPrime q')
-      (⟨g, hg⟩ : q'.primeCompl)).map (algebraMap (Localization.AtPrime q') (D q₀))
-  apply factor_idempotent_of_tensor E.toRingEquiv q₀ α (φ.comp j) _ _ γ hunit
-  · intro x
-    change φ (TensorProduct.tmul R x 1) = α (E (TensorProduct.tmul R x 1) q₀)
-    rw [hφ, map_one, map_one, mul_one, hE, hθψ]
-  · intro y
-    change φ (TensorProduct.tmul R 1 y.1) = α (E (TensorProduct.tmul R 1 y) q₀)
-    have hey : E (TensorProduct.tmul R (1 : Rph) y) q₀ =
-        algebraMap S' (D q₀) y := congrFun (E.commutes y) q₀
-    rw [hφ, map_one, one_mul, hey]
-    exact (hαbase y).symm
+  apply tensor_factor_idempotent E.toRingEquiv q₀ α (φ.comp j) (θ q₀) ψ
+    ((algebraMap Sq Sqh).comp ((algebraMap S Sq).comp S'.val.toRingHom))
+    (fun x ↦ hE x q₀) (fun y ↦ congrFun (E.commutes y) q₀) hθψ hαbase
+    (fun x y ↦ hφ x y.1) g
+  exact (IsLocalization.map_units (Localization.AtPrime q')
+    (⟨g, hg⟩ : q'.primeCompl)).map (algebraMap (Localization.AtPrime q') (D q₀))
 
 end Algebra

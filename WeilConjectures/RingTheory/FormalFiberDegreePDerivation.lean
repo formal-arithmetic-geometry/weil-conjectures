@@ -59,6 +59,15 @@ private theorem field_not_cohen (k : Type u) [Field k] (p : ℕ) :
   let := hdvr
   exact IsDiscreteValuationRing.not_isField k (Field.toIsField k)
 
+private theorem powerSeries_field_regular_complete (k : Type u) [Field k] (n : ℕ) :
+    IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) k))
+      (MvPowerSeries (Fin n) k) ∧ IsRegularLocalRing (MvPowerSeries (Fin n) k) := by
+  obtain hbase := power_series_field_cohen_regular_complete (Λ := k) n
+    (Or.inl (Field.toIsField k))
+  rcases hbase with ⟨_, _, _, _, _, _, _, hcomplete, hregular, _⟩ | ⟨p, hp, _⟩
+  · exact ⟨hcomplete, hregular⟩
+  · exact False.elim (field_not_cohen k p hp)
+
 private theorem exists_derivation_isUnit_of_finite_model
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsIntegrallyClosed A]
     (q : Ideal A) [q.IsPrime] (M : Type u) [Field M]
@@ -187,30 +196,23 @@ theorem exists_derivation_isUnit_tmul_formalFiber
     rw [div_pow, hx]
     change (c : M) / (s : M) ^ p = a
     rw [hc, mul_div_cancel_left₀ _ (pow_ne_zero _ hs)]
-  obtain hbase := power_series_field_cohen_regular_complete (Λ := k) n
-    (Or.inl (Field.toIsField k))
-  rcases hbase with ⟨_, hnoeth, hdomain, hlocal, _, e, _, hcomplete, hregular, _⟩ | hcohen
-  · let := hnoeth
-    let := hdomain
-    let := hlocal
-    let := hcomplete
-    let := hregular
-    let : IsRegularRing (MvPowerSeries (Fin n) k) :=
-      (IsRegularLocalRing.localization_at_prime_and_isRegularRing
-        (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) k))).2
-    let : IsRegularRing A := inferInstance
-    let : IsIntegrallyClosed A := IsIntegrallyClosed.of_localization_maximal
-      fun r _ _ ↦ (IsRegularRing.isNormalRing A r).2
-    let : Algebra (MvPowerSeries (Fin n) k) B :=
-      ((algebraMap A B).comp (algebraMap (MvPowerSeries (Fin n) k) A)).toAlgebra
-    let : IsScalarTower (MvPowerSeries (Fin n) k) A B :=
-      IsScalarTower.of_algebraMap_eq fun x ↦ rfl
-    let : Algebra.FiniteType (MvPowerSeries (Fin n) k) B :=
-      Algebra.FiniteType.trans (inferInstance : Algebra.FiniteType
-        (MvPowerSeries (Fin n) k) A) (inferInstance : Algebra.FiniteType A B)
-    exact exists_derivation_isUnit_of_finite_model A q M B p
-      (MvPowerSeries (Fin n) k) a c s hc hcn
-  · obtain ⟨r, hr, _⟩ := hcohen
-    exact False.elim (field_not_cohen k r hr)
+  obtain ⟨hcomplete, hregular⟩ := powerSeries_field_regular_complete k n
+  let := hcomplete
+  let := hregular
+  let : IsRegularRing (MvPowerSeries (Fin n) k) :=
+    (IsRegularLocalRing.localization_at_prime_and_isRegularRing
+      (IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) k))).2
+  let : IsRegularRing A := inferInstance
+  let : IsIntegrallyClosed A := IsIntegrallyClosed.of_localization_maximal
+    fun r _ _ ↦ (IsRegularRing.isNormalRing A r).2
+  let : Algebra (MvPowerSeries (Fin n) k) B :=
+    ((algebraMap A B).comp (algebraMap (MvPowerSeries (Fin n) k) A)).toAlgebra
+  let : IsScalarTower (MvPowerSeries (Fin n) k) A B :=
+    IsScalarTower.of_algebraMap_eq fun x ↦ rfl
+  let : Algebra.FiniteType (MvPowerSeries (Fin n) k) B :=
+    Algebra.FiniteType.trans (inferInstance : Algebra.FiniteType
+      (MvPowerSeries (Fin n) k) A) (inferInstance : Algebra.FiniteType A B)
+  exact exists_derivation_isUnit_of_finite_model A q M B p
+    (MvPowerSeries (Fin n) k) a c s hc hcn
 
 end MvPowerSeries
