@@ -120,6 +120,7 @@ private theorem internalHom_shortExact_of_finiteFree_retract
         SheafOfModules.homObjMap_id]) hF
 
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- finite bounded-filtration elaboration
 /-- On an affine open, the ordinary Hom complex from a strictly perfect complex represents
 its derived internal Hom. For every functorial K-injective replacement `η : 𝟭 ⟶ I`, the
