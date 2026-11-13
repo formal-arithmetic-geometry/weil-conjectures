@@ -246,8 +246,14 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
         IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
   obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
+      (ℓ := ℓ) (k' := k') (X := X) (Y := Y) (Z := Z) (X' := X') (Y' := Y') (Z' := Z')
+      (M := M) (N := N) (P := P) (f₁ := f₁) (f₁' := f₁') (f₂ := f₂) (f₂' := f₂')
+      (qM := qM) (gM := gM) (qN := qN) (gN := gN) (φ₁ := φ₁) (φ₂ := φ₂)
       hM hN hpb hP hgen hm hm' hslice heM heN hA hB
-  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA
+  have hR := isIso_lowerStar_kunnethMap (ℓ := ℓ) (k' := k') (X := X) (Y := Y) (Z := Z)
+      (X' := X') (Y' := Y') (Z' := Z') (M := M) (N := N) (P := P) (f₁ := f₁)
+      (f₁' := f₁') (f₂ := f₂) (f₂' := f₂') (qM := qM) (gM := gM) (qN := qN) (gN := gN)
+      (φ₁ := φ₁) (φ₂ := φ₂) hM hN hpb hP hgen heM heN hA
       hB hΨA hΨB hT
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle (kunnethMap (Profinite.padicAlgClRingObj ℓ)
       φ₁ φ₂ A B)
