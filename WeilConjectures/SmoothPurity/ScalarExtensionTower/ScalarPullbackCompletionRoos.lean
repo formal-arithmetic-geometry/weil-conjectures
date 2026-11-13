@@ -86,7 +86,7 @@ private theorem scalarRoos_composite_naturality
           Functor.whiskerLeft C₁ (NatTrans.mapHomologicalComplex α (.up ℤ)) ≫ b ≫ c ≫ d) := by
   rw [reassoc_of% (scalarRoos_functor_naturality F G α C₁),
     reassoc_of% (scalarRoosNaturality F a)]
-  simp only [integralOperationsRoosMap_comp, Category.assoc]
+  simp only [integralOperationsRoosMap_comp]
 
 private theorem map_coordinate_composite
     {𝒜 ℬ 𝒞 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞]
@@ -124,7 +124,7 @@ private theorem completion_roos_composite
   rw [← reassoc_of% (α.naturality γ), hγ]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hc, reassoc_of% hf]
-  simp only [Category.assoc, ← Q.map_comp, hk]
+  simp only [← Q.map_comp, hk]
 
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
@@ -384,6 +384,7 @@ theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
     (integralOperationsRoosMap τ) (integralOperationsRoosMap q.hom)
     (scalarPullbackChain l E L ι f P.obj) hγ hcounit hfac
     (by simpa only [Category.assoc] using hchain)
-  simpa only [NatTrans.comp_app, Functor.comp_map, Category.assoc] using h
+  simp only [NatTrans.comp_app, Functor.comp_map, Category.assoc] at h
+  exact h
 
 end WeilConjectures.ScalarExtensionTower
