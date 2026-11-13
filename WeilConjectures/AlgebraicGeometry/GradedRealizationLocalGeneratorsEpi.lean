@@ -24,6 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- The comparison of the two scalar actions requires additional elaboration.
 /-- The specified finite homogeneous sections generate the algebra-module direct image

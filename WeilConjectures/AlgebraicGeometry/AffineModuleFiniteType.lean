@@ -117,6 +117,7 @@ set_option hygiene false in
 local notation "PUSH" => SheafOfModules.pushforward.{u} (F := Opens.map f.base)
   (S := AR) (R := U.ringCatSheaf) (𝟙 AR)
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The explicit finite-free section calculation needs extra elaboration heartbeats.
 /-- On one affine open, finite global generators of the direct image over its

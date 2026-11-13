@@ -26,6 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
 set_option backward.defeqAttrib.useBackward true in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The section calculation crosses the scheme-module and ringed-space section interfaces.
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
