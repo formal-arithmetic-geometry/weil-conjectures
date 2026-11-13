@@ -152,7 +152,6 @@ private theorem mixedTensorRepresentative_transport
   exact (hc L h).trans ((SY.tr_map h d).symm.trans
     (congrArg (SY.tr h) (hc H le_rfl).symm))
 
-set_option profiler true in
 /--
 At the level of the finite coefficient stage, the mixed scalar square and the
 naturality of the tensor comparison identify the representative at an extension
