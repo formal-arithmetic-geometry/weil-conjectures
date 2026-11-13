@@ -120,9 +120,7 @@ lemma derivedComapLowerStarIso_inv_app_Qh
   erw [reassoc_of% hQ]
   erw [Iso.hom_inv_id_app_assoc]
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- Rewriting inside derived-category composites requires unfolding homotopy category objects.
 /-- The derived (Push) on the image of a complex `I`, through the units of the right derived
 pushforwards and the counits of the derived extensions of scalars, is the underived (Push). -/
 lemma derivedPushHom_app_Qh_fac
@@ -192,9 +190,7 @@ section Integral
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}}
   (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- Producing the bounded below injective resolution of `K` is slow to elaborate.
 /-- **(Push) for `𝒪_E ⟶ E` on bounded below objects**: for a quasi-compact quasi-separated `f`
 and a bounded below `K ∈ D(𝒪_{E,X})`, the comparison `E_Y ⊗ᴸ Rf_* K ⟶ Rf_*(E_X ⊗ᴸ K)` is an
 isomorphism. -/
@@ -202,12 +198,15 @@ theorem isIso_derivedPushHom_app_padicIntegers_of_isGE
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [K.IsGE n] :
     IsIso ((derivedPushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f).app K) := by
-  obtain ⟨T, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isGE n
-  obtain ⟨I, i, _, hI, _⟩ :=
-    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  -- Bind the existence proofs before eliminating them, to avoid abstracting over the large goal.
+  have hK := K.exists_iso_Q_obj_of_isGE n
+  obtain ⟨T, _, ⟨e⟩⟩ := hK
+  have hT := CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  obtain ⟨I, i, _, hI, _⟩ := hT
   have : I.IsKInjective := CochainComplex.isKInjective_of_injective I n
   rw [NatTrans.isIso_app_iff_of_iso _
     (e ≪≫ asIso (Q.map i) ≪≫ ((quotientCompQhIso _).app I).symm)]
+  dsimp only [Functor.comp_obj]
   have h := derivedPushHom_app_Qh_fac (padicIntegersRingObjToContinuousMapRingObj ℓ E) f I
   have : ∀ k, IsIso (((NatTrans.mapHomologicalComplex
       (pushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f) (ComplexShape.up ℤ)).app I).f
@@ -237,7 +236,9 @@ theorem isIso_derivedPushHom_app_padicIntegers_of_isGE
       rightAcyclic_lowerStar_of_rightAcyclic_forget _ f
         (rightAcyclic_lowerStar_extendScalars_of_injective ℓ E f (I.X k))
   have := IsIso.of_isIso_fac_left h
-  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+  have := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+  -- Compare the instance arguments without unfolding the derived functors.
+  with_reducible exact this
 
 end Integral
 
