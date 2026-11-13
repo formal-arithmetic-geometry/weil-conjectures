@@ -147,12 +147,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
--- Elaborate the two site tensors through their comparison APIs.
--- The independently chosen site tensors require large definitional equalities.
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborate the two site tensors through their comparison APIs.
-set_option maxHeartbeats 1200000 in
--- The independently chosen site tensors require large definitional equalities.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
