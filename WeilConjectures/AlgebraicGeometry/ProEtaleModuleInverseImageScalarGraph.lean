@@ -229,6 +229,8 @@ private noncomputable def fromModelForgetSetIso (X : Scheme.{u})
   exact Functor.isoWhiskerLeft (modelSetEquivalence X).inverse
     (Functor.isoWhiskerRight q (modelSetEquivalence Y).functor)
 
+/-- Transport an underlying-set comparison from the small models, together with its
+inverse-component formula, while keeping the module functor abstract. -/
 private theorem scalarGraph_modelComparison {X Y : Scheme.{u}}
     (A : Sheaf (ProEt.topology X) RingCat.{u + 1})
     (B : Sheaf (ProEt.topology Y) RingCat.{u + 1})
@@ -290,7 +292,6 @@ private theorem scalarGraph_naturality
 -- are rewritten explicitly. This intentionally uses the simplified goal in the next step.
 set_option linter.flexible false in
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
 /-- The natural set comparisons for inverse image respect scalar multiplication on
 arbitrary generalized sections.
 
