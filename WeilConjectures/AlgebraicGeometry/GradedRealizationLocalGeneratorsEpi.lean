@@ -183,13 +183,8 @@ theorem gradedRealization_local_generators_epi
     congr 1
     have hi := PresheafOfModules.naturality_apply (iota (d i)).val
       (homOfLE (hWV.trans V.hom.le)).op (s i)
-    have hb := hbasis i (op W')
-    change p.val.app (op W') (M.val.map
-      (homOfLE (hWV.trans V.hom.le)).op _) =
-      q.val.app (op W') (M.val.map
-        (homOfLE (hWV.trans V.hom.le)).op _) at hb
-    erw [← hi] at hb
-    exact hb
+    exact (congrArg (p.val.app (op W')) hi).trans
+      ((hbasis i (op W')).trans (congrArg (q.val.app (op W')) hi).symm)
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro V
