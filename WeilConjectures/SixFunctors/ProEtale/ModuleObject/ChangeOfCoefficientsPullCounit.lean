@@ -158,7 +158,8 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
     CategoryTheory.Functor.map_id, Category.comp_id] at t8
   have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8
   simp only [Functor.map_comp] at t9
-  simp only [leftDerivedUpperStarIso, reassoc_of% t9,
+  dsimp only [leftDerivedUpperStarIso, upperStar]
+  simp only [reassoc_of% t9,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app]
   simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   have t10 :=
