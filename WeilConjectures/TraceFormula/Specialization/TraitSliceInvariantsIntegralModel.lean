@@ -66,7 +66,7 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
     (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         Z)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
-            (L((w)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀) ≅
+            (L((w)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) ≅
       L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B :=
   (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       Z)).leftDerivedFunctor.mapIso
