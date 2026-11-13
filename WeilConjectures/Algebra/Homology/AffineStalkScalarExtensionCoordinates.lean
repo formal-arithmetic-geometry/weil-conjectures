@@ -79,6 +79,42 @@ private theorem stalkExtensionIso_naturality
   exact congrArg (fun z ↦ TopCat.Presheaf.germ (moduleStructurePresheaf A V).presheaf
     ⊤ p trivial z) h'.symm
 
+/-- The localization equivalence commutes with maps of modules. -/
+private theorem stalkLocalizationIso_naturality
+    (A : Type u) [CommRing A] (p : PrimeSpectrum A)
+    {U V : ModuleCat.{u} A} (a : U ⟶ V)
+    (x : LocalizedModule p.asIdeal.primeCompl U) :
+    (IsLocalizedModule.iso p.asIdeal.primeCompl (StructureSheaf.toStalkₗ A V p))
+        (LocalizedModule.map p.asIdeal.primeCompl a.hom x) =
+      (RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).map
+        ((tilde.functor (.of A)).map a)
+        ((IsLocalizedModule.iso p.asIdeal.primeCompl (StructureSheaf.toStalkₗ A U p)) x) := by
+  let s := RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p
+  let TB := tilde.functor (.of A)
+  let Rs := ModuleCat.restrictScalars (StructureSheaf.toStalk A p).hom
+  let t : U →ₗ[A] (Rs.obj (s.obj (TB.obj U))) := StructureSheaf.toStalkₗ A U p
+  let t' : V →ₗ[A] (Rs.obj (s.obj (TB.obj V))) := StructureSheaf.toStalkₗ A V p
+  have : IsLocalizedModule p.asIdeal.primeCompl t :=
+    inferInstanceAs (IsLocalizedModule p.asIdeal.primeCompl (StructureSheaf.toStalkₗ A U p))
+  have : IsLocalizedModule p.asIdeal.primeCompl t' :=
+    inferInstanceAs (IsLocalizedModule p.asIdeal.primeCompl (StructureSheaf.toStalkₗ A V p))
+  have hmap : (Rs.map (s.map (TB.map a))).hom =
+      IsLocalizedModule.map p.asIdeal.primeCompl t t' a.hom := by
+    apply IsLocalizedModule.ext p.asIdeal.primeCompl t (IsLocalizedModule.map_units t')
+    ext y
+    have hn := congrArg (fun k ↦ k
+      ((1 : (Spec.structureSheaf A).presheaf.stalk p)
+        ⊗ₜ[A, (StructureSheaf.toStalk A p).hom] y))
+      (stalkExtensionIso_naturality A p a)
+    simp only [ModuleCat.comp_apply, ModuleCat.ExtendScalars.map_tmul] at hn
+    rw [stalkExtensionIso_one A p V (a y), stalkExtensionIso_one A p U y] at hn
+    exact hn.symm.trans
+      (IsLocalizedModule.map_apply p.asIdeal.primeCompl t t' a.hom y).symm
+  have hloc := congrArg (fun z ↦ z x)
+    (IsLocalizedModule.map_iso_commute p.asIdeal.primeCompl t t' a.hom)
+  rw [← hmap] at hloc
+  exact hloc.symm
+
 private theorem homology_pi_map
     {B E : Type*} [Category B] [Category E]
     [HasZeroMorphisms B] [HasZeroMorphisms E]
@@ -128,11 +164,39 @@ private theorem homology_comp_iso
       rfl
     _ = _ := h₃.symm
 
+/-- Naturality of homology followed by the inverses for a composite exact functor. -/
+private theorem homology_composite_naturality
+    {B E H : Type*} [Category B] [Category E] [Category H]
+    [Abelian B] [Abelian E] [Abelian H]
+    (S : ShortComplex B) [S.HasHomology]
+    (F : B ⥤ H) [F.PreservesZeroMorphisms] [F.PreservesHomology]
+    (T : B ⥤ E) [T.PreservesZeroMorphisms] [T.PreservesHomology]
+    (G : E ⥤ H) [G.PreservesZeroMorphisms] [G.PreservesHomology]
+    [PreservesFiniteLimits (T ⋙ G)] [PreservesFiniteColimits (T ⋙ G)]
+    (θ : F ≅ T ⋙ G) :
+    θ.hom.app S.homology ≫ G.map (S.mapHomologyIso T).inv ≫
+        ((S.map T).mapHomologyIso G).inv =
+      (S.mapHomologyIso F).inv ≫ ShortComplex.homologyMap (S.mapNatTrans θ.hom) := by
+  have hcomp := homology_comp_iso S T G
+  have htail : (S.mapHomologyIso (T ⋙ G)).hom ≫
+      G.map (S.mapHomologyIso T).inv ≫ ((S.map T).mapHomologyIso G).inv = 𝟙 _ := by
+    calc
+      _ = ((S.map T).mapHomologyIso G).hom ≫
+          (G.map (S.mapHomologyIso T).hom ≫ G.map (S.mapHomologyIso T).inv) ≫
+          ((S.map T).mapHomologyIso G).inv := by
+        rw [← hcomp]
+        simp only [Category.assoc]
+      _ = _ := by
+        rw [← G.map_comp, Iso.hom_inv_id, G.map_id]
+        simp only [Category.id_comp, Iso.hom_inv_id]
+        rfl
+  rw [θ.hom.app_homology S]
+  simp only [Category.assoc]
+  rw [htail, Category.comp_id]
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 600000 in
--- Comparing the three exact homology constructions entails several large instance transports.
 /-- Exact affine stalk homology in scalar-extension coordinates, natural for every
 module map into ordinary cohomology. Source: Stacks Project, Tags 01I9 and 01AG.
 (blueprint: lem-pc-affine-stalk-scalar-extension-coordinates).
@@ -225,22 +289,7 @@ theorem exists_affineStalkScalarExtensionCoordinates
     have : IsLocalizedModule p.asIdeal.primeCompl t' :=
       inferInstanceAs (IsLocalizedModule p.asIdeal.primeCompl
         (StructureSheaf.toStalkₗ A (C.homology i) p))
-    have hmap : (Rs.map (s.map (TB.map a))).hom =
-        IsLocalizedModule.map p.asIdeal.primeCompl t t' a.hom := by
-      apply IsLocalizedModule.ext p.asIdeal.primeCompl t (IsLocalizedModule.map_units t')
-      ext y
-      have hn := congrArg (fun k ↦ k
-        ((1 : (Spec.structureSheaf A).presheaf.stalk p)
-          ⊗ₜ[A, (StructureSheaf.toStalk A p).hom] y))
-        (stalkExtensionIso_naturality A p a)
-      simp only [ModuleCat.comp_apply, ModuleCat.ExtendScalars.map_tmul] at hn
-      rw [stalkExtensionIso_one A p (C.homology i) (a y),
-        stalkExtensionIso_one A p U y] at hn
-      exact hn.symm.trans
-        (IsLocalizedModule.map_apply p.asIdeal.primeCompl t t' a.hom y).symm
-    have hloc := congrArg (fun z ↦ z x)
-      (IsLocalizedModule.map_iso_commute p.asIdeal.primeCompl t t' a.hom)
-    rw [← hmap] at hloc
+    have hloc := stalkLocalizationIso_naturality A p a x
     have hn := congrArg (fun k ↦ k (e U x)) (θ.hom.naturality a)
     change (θ.app (C.homology i)).hom (F.map a (e U x)) =
       s.map (TB.map a) ((θ.app U).hom (e U x)) at hn
@@ -250,36 +299,12 @@ theorem exists_affineStalkScalarExtensionCoordinates
     rw [hsource] at hn
     have hnum : (IsLocalizedModule.iso p.asIdeal.primeCompl t')
         (LocalizedModule.map p.asIdeal.primeCompl a.hom x) =
-      (θ.app (C.homology i)).hom (F.map a (e U x)) := hloc.symm.trans hn.symm
-    have hθ := (θ.hom.app_homology (C.sc i))
-    have hcomp := homology_comp_iso (C.sc i) TB s
-    have hχ : HomologicalComplex.homologyMap χ.hom i =
-        ShortComplex.homologyMap ((C.sc i).mapNatTrans θ.hom) := rfl
-    have htail : ((C.sc i).mapHomologyIso (TB ⋙ s)).hom ≫
-        s.map ((C.sc i).mapHomologyIso TB).inv ≫
-        (((C.sc i).map TB).mapHomologyIso s).inv = 𝟙 _ := by
-      calc
-        _ = (((C.sc i).map TB).mapHomologyIso s).hom ≫
-            (s.map ((C.sc i).mapHomologyIso TB).hom ≫
-              s.map ((C.sc i).mapHomologyIso TB).inv) ≫
-            (((C.sc i).map TB).mapHomologyIso s).inv := by
-          rw [← hcomp]
-          simp only [Category.assoc]
-        _ = _ := by
-          rw [← s.map_comp, Iso.hom_inv_id]
-          rw [s.map_id]
-          simp only [Category.id_comp, Iso.hom_inv_id]
-          rfl
+      (θ.app (C.homology i)).hom (F.map a (e U x)) := hloc.trans hn.symm
     have hH : (θ.app (C.homology i)).hom ≫
         s.map ((C.sc i).mapHomologyIso TB).inv ≫
         ((((TB.mapHomologicalComplex (.up ℤ)).obj C).sc i).mapHomologyIso s).inv =
-      ((C.sc i).mapHomologyIso F).inv ≫ HomologicalComplex.homologyMap χ.hom i := by
-      rw [hχ]
-      change θ.hom.app (C.sc i).homology ≫ _ ≫
-        (((C.sc i).map TB).mapHomologyIso s).inv = _
-      rw [hθ]
-      simp only [Category.assoc]
-      rw [htail, Category.comp_id]
+      ((C.sc i).mapHomologyIso F).inv ≫ HomologicalComplex.homologyMap χ.hom i :=
+      homology_composite_naturality (C.sc i) F TB s θ
     have hz : ∀ y : LocalizedModule p.asIdeal.primeCompl (C.homology i),
         affineTildeHomologyLocalization A C p i y =
           ((((TB.mapHomologicalComplex (.up ℤ)).obj C).sc i).mapHomologyIso s).inv
