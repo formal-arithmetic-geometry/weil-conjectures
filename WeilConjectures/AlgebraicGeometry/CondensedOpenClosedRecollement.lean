@@ -643,9 +643,7 @@ private theorem rightDerivedPlus_isGE
   exact F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE K a hq
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Elaborating the nested adjunction and instance witnesses requires a larger heartbeat budget.
+set_option trace.profiler true in
 /-- Open-closed recollement on ordinary bounded below derived categories.
 Source: Hemo--Richarz--Scholbach, (3.3), (3.4), Lemma 3.4 and Lemma 5.3(2);
 Stacks, Tags 09AH, 09BM, 09AA, 09BN
