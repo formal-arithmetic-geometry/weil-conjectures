@@ -209,6 +209,51 @@ private lemma pullHom_glueCocRHS_preimage (a b d : ι) :
     (r₃ := fun a b d ↦ resTo r hr (le_refl (U a ⊓ U b ⊓ U d)))
     (h₁₃ := resTo_p₁₃ U r hr) (hr₃₁ := resTo_p₁' U r hr) (hr₃₃ := resTo_p₃' U r hr) a b d
 
+/-- Glue finite presentation modules and identify their pullback from compatible local isomorphisms. -/
+private lemma exists_isFinitePresentation_pullback_iso_of_glue (hU : ⨆ a, U a = ⊤)
+    (hN : ∀ a, (N a).IsFinitePresentation)
+    (hself : DescentData'.GlueSelf (H := H) (preimageDiag U g) (preimageDiag_p₁ U g)
+      (preimageDiag_p₂ U g))
+    (hcoc : DescentData'.GlueCocycle (preimageChosenPullback₃ U g) H)
+    (ℱ : Z'.Modules)
+    (ε : ∀ a, (modulesPseudofunctor.map (μ' a).op.toLoc).toFunctor.obj (N a) ≅
+      (modulesPseudofunctor.map (g' ⁻¹ᵁ U a).ι.op.toLoc).toFunctor.obj ℱ)
+    (hε : ∀ a b, pullHom (H a b) (resTo r hr (le_refl (U a ⊓ U b)))
+      ((preimageChosenPullback U g' a b).p₁ ≫ μ' a)
+      ((preimageChosenPullback U g' a b).p₂ ≫ μ' b)
+      (by rw [reassoc_of% (resTo_p₁ U r hr a b), hμ])
+      (by rw [reassoc_of% (resTo_p₂ U r hr a b), hμ]) =
+        DescentData'.isoGlueHom (preimageChosenPullback U g') ε a b) :
+    ∃ 𝒢 : Z.Modules, 𝒢.IsFinitePresentation ∧ Nonempty ((pullback r).obj 𝒢 ≅ ℱ) := by
+  have hsup : ⨆ a, (g ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hU,
+      Scheme.Hom.preimage_top]
+  have hsup' : ⨆ a, (g' ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hU,
+      Scheme.Hom.preimage_top]
+  obtain ⟨𝒢, -, ⟨e⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology
+    (fun a ↦ (g ⁻¹ᵁ U a).ι) (ofArrows_mem_fpqcTopology_of_isOpenImmersion _ hsup)
+    (DescentData'.ofGlue (preimageChosenPullback₃ U g) μ N H hself hcoc).descentData
+    (fun a ↦ by
+      have := hN a
+      change ((pullback (μ a)).obj (N a)).IsQuasicoherent
+      infer_instance)
+  have h𝒢 : (𝒢 : Z.Modules).IsFinitePresentation := by
+    refine isFinitePresentation_of_isOpenImmersion _ (fun a ↦ (g ⁻¹ᵁ U a).ι) hsup fun a ↦ ?_
+    have := hN a
+    have ea : (pullback (g ⁻¹ᵁ U a).ι).obj (𝒢 : Z.Modules) ≅ (pullback (μ a)).obj (N a) :=
+      { hom := e.hom.hom a
+        inv := e.inv.hom a
+        hom_inv_id := by rw [← DescentData.comp_hom, e.hom_inv_id]; rfl
+        inv_hom_id := by rw [← DescentData.comp_hom, e.inv_hom_id]; rfl }
+    exact isFinitePresentation_of_iso ea.symm
+  obtain ⟨φ⟩ := DescentData'.nonempty_map_iso_of_ofGlue e (preimageChosenPullback U g')
+    (fun M N ↦ bijective_toDescentData_map_of_isOpenImmersion _ hsup' M N) r
+    (fun a ↦ resTo r hr (le_refl (U a))) (fun a ↦ resTo_ι _ _ _)
+    (fun a b ↦ resTo r hr (le_refl (U a ⊓ U b)))
+    (resTo_p₁ U r hr) (resTo_p₂ U r hr) μ' hμ ℱ ε hε
+  exact ⟨𝒢, h𝒢, ⟨φ⟩⟩
+
 end PreimagePullGlue
 
 end Scheme.Modules
@@ -421,33 +466,7 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     rw [← pullHom_glueCocLHS_preimage U (D.map v₂.left) hv₂ hμ₂₁ H₁,
       ← pullHom_glueCocRHS_preimage U (D.map v₂.left) hv₂ hμ₂₁ H₁]
     exact pullHom_eq_pullHom_of_factorization _ _ _ hres.symm _ _ _ _ h
-  -- Step 7: the descent datum at `k₂` is effective.
-  have hsup₂ : ⨆ a : s, (g₂ ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
-    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hUtop,
-      Scheme.Hom.preimage_top]
-  have hsupL : ⨆ a : s, (gL ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
-    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hUtop,
-      Scheme.Hom.preimage_top]
-  obtain ⟨𝒢, -, ⟨e₂⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology
-    (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) (ofArrows_mem_fpqcTopology_of_isOpenImmersion _ hsup₂)
-    (DescentData'.ofGlue (preimageChosenPullback₃ U g₂) μ₂ N H₂ hself₂ hcoc₂).descentData
-    (fun a ↦ by
-      have := hN a
-      change ((Modules.pullback (μ₂ a)).obj (N a)).IsQuasicoherent
-      infer_instance)
-  -- Step 8: the glued module is of finite presentation.
-  have h𝒢 : (𝒢 : (D.obj k₂.left).Modules).IsFinitePresentation := by
-    refine isFinitePresentation_of_isOpenImmersion _ (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) hsup₂
-      fun a ↦ ?_
-    have := hN a
-    have e₂a : (Modules.pullback (g₂ ⁻¹ᵁ U a).ι).obj (𝒢 : (D.obj k₂.left).Modules) ≅
-        (Modules.pullback (μ₂ a)).obj (N a) :=
-      { hom := e₂.hom.hom a
-        inv := e₂.inv.hom a
-        hom_inv_id := by rw [← DescentData.comp_hom, e₂.hom_inv_id]; rfl
-        inv_hom_id := by rw [← DescentData.comp_hom, e₂.inv_hom_id]; rfl }
-    exact isFinitePresentation_of_iso e₂a.symm
-  -- Step 9: the pullback of the glued module to the limit is `ℱ`.
+  -- The descended gluing data are effective and recover `ℱ` after pullback.
   have hμL₂ (a : s) : resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a)) ≫ μ₂ a = μL a :=
     resTo_resTo _ _ _ _ (c.w _) _ _ _ _
   have hε (a b : s) : pullHom (H₂ a b)
@@ -459,11 +478,8 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     refine Eq.trans ?_ h
     simp only [H₂, DescentData'.pullGlue, pullHom_pullHom]
     exact pullHom_congr_left _ (resTo_resTo _ _ _ _ (c.w v₂.left) _ _ _ _) _ _ _ _
-  obtain ⟨φ⟩ := DescentData'.nonempty_map_iso_of_ofGlue e₂ (preimageChosenPullback U gL)
-    (fun M N ↦ bijective_toDescentData_map_of_isOpenImmersion _ hsupL M N) (c.π.app k₂.left)
-    (fun a ↦ resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a))) (fun a ↦ resTo_ι _ _ _)
-    (fun a b ↦ resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a ⊓ U b)))
-    (resTo_p₁ U _ (c.w k₂.hom)) (resTo_p₂ U _ (c.w k₂.hom)) μL hμL₂ ℱ ε hε
-  exact ⟨k₂.left, 𝒢, h𝒢, ⟨φ⟩⟩
+  obtain ⟨𝒢, h𝒢, e𝒢⟩ := exists_isFinitePresentation_pullback_iso_of_glue U
+    (c.π.app k₂.left) (c.w k₂.hom) hμL₂ H₂ hUtop hN hself₂ hcoc₂ ℱ ε hε
+  exact ⟨k₂.left, 𝒢, h𝒢, e𝒢⟩
 
 end AlgebraicGeometry

@@ -134,6 +134,7 @@ theorem exists_pieceFunctor_obj_hom (t : GeometricFiber f y)
       ← Category.assoc hW₁.fromSpec, ← Category.assoc _ _ ζ, hSpec, hζ,
       ← ch.pieceEmb_comp_snd f hY₀ hy A' φ' hφ' e t A'' φ'' hφ'',
       ← Category.assoc, hiso₁]
+    rfl
   -- the point `(u, t)` of the piece goes to `v`
   have hpiecePt : (s.piecePt t).left =
       Spec.map (CommRingCat.ofHom (ch.piecePoint₂ f hY₀ hy A' φ' hφ' e hval t A'' φ'' hφ'').1) ≫
