@@ -157,7 +157,6 @@ private theorem pasted_adjunction_unit_fac
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- Successive tensor pullbacks and their derived functors have compatible
 adjunctions; the left comparison is invertible on K-flat complexes.
 Source: Stacks Project, Cohomology, lemma-adjoint (079W),
