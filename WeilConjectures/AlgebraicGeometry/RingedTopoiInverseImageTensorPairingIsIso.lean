@@ -224,11 +224,73 @@ private theorem transposePair_lift [F.Monoidal]
   rw [← Category.assoc, ← Category.assoc, imageLift]
   rw [Category.assoc, CartesianMonoidalCategory.lift_map_assoc]
 
+private theorem mate_linear_iff
+    (M0 : SheafOfModules.{u} (ringSheaf R))
+    (H0 : SheafOfModules.{u} (ringSheaf RI))
+    (P0 : SheafOfModules.{u} (ringSheaf R))
+    (e : (RingedTensor.underlying R).obj P0 ≅ V.obj ((RingedTensor.underlying RI).obj H0))
+    (hadd : madd R P0 ≫ e.hom = prod.map e.hom e.hom ≫
+      inv (prodComparison V ((RingedTensor.underlying RI).obj H0)
+        ((RingedTensor.underlying RI).obj H0)) ≫ V.map (madd RI H0))
+    (hsmul : msmul R P0 ≫ e.hom =
+      prod.map (adj.homEquiv _ _ I.ringUnderlying.hom) e.hom ≫
+        inv (prodComparison V (rset RI) ((RingedTensor.underlying RI).obj H0)) ≫
+          V.map (msmul RI H0))
+    (α : (RingedTensor.underlying RI).obj (I.modules.obj M0) ⟶
+      (RingedTensor.underlying RI).obj H0)
+    (α' : (RingedTensor.underlying R).obj M0 ⟶ (RingedTensor.underlying R).obj P0)
+    (hm : adj.homEquiv _ _ (I.moduleUnderlying.inv.app M0 ≫ α) = α' ≫ e.hom) :
+    (∃ a : I.modules.obj M0 ⟶ H0, (RingedTensor.underlying RI).map a = α) ↔
+      ∃ b : M0 ⟶ P0, (RingedTensor.underlying R).map b = α' := by
+  let eR := I.ringUnderlying.symm
+  let eI := I.moduleUnderlying
+  have hLA : F.map (madd R M0) =
+      prodComparison F ((RingedTensor.underlying R).obj M0)
+        ((RingedTensor.underlying R).obj M0) ≫
+        prod.map (eI.inv.app M0) (eI.inv.app M0) ≫
+          madd RI (I.modules.obj M0) ≫ eI.hom.app M0 := by
+    apply (cancel_mono (eI.inv.app M0)).mp
+    simp only [Category.assoc, Iso.hom_inv_id_app]
+    exact binary_of_graph F (eI.inv.app M0) (eI.inv.app M0) (eI.inv.app M0)
+      (madd R M0) (madd RI (I.modules.obj M0))
+      (fun U x y ↦ @Add.add (M0.val.obj U) inferInstance x y)
+      (fun U x y ↦ @Add.add ((I.modules.obj M0).val.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+      (fun T x y z hz U t ↦ I.moduleAdd M0 T x y z hz U t)
+  have hLS : F.map (msmul R M0) =
+      prodComparison F (rset R) ((RingedTensor.underlying R).obj M0) ≫
+        prod.map eR.inv (eI.inv.app M0) ≫
+          msmul RI (I.modules.obj M0) ≫ eI.hom.app M0 := by
+    apply (cancel_mono (eI.inv.app M0)).mp
+    simp only [Category.assoc, Iso.hom_inv_id_app]
+    exact binary_of_graph F eR.inv (eI.inv.app M0) (eI.inv.app M0)
+      (msmul R M0) (msmul RI (I.modules.obj M0))
+      (fun U x y ↦ @SMul.smul (R.obj.obj U) (M0.val.obj U) inferInstance x y)
+      (fun U x y ↦ @SMul.smul (RI.obj.obj U) ((I.modules.obj M0).val.obj U)
+        inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+      (fun T a x z hz U t ↦ I.moduleSMul M0 T a x z hz U t)
+  have hAdd := binary_mate_iso_iff adj (eI.app M0) (eI.app M0) (eI.app M0)
+    e.hom e.hom e (madd R M0)
+    (madd RI (I.modules.obj M0)) (madd RI H0) (madd R P0)
+    hLA hadd α α α α' α' α' hm hm hm
+  have hSmul := binary_mate_iso_iff adj eR (eI.app M0) (eI.app M0)
+    (adj.homEquiv _ _ eR.inv) e.hom e
+    (msmul R M0) (msmul RI (I.modules.obj M0)) (msmul RI H0) (msmul R P0)
+    hLS hsmul (𝟙 (rset RI)) α α (𝟙 (rset R))
+    α' α' (by simp) hm hm
+  have hSame := linear_iff (𝟙 R) M0 P0
+    (madd R M0) (madd R P0) (msmul R M0) (msmul R P0)
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) α'
+  exact (linear_iff (𝟙 RI) (I.modules.obj M0) H0 (madd RI (I.modules.obj M0))
+    (madd RI H0) (msmul RI (I.modules.obj M0)) (msmul RI H0)
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) α).trans
+      ((and_congr hAdd hSmul).trans hSame.symm)
+
 -- Keep the tensor construction folded while checking its universal property.
 attribute [local irreducible] monoidalCategory
 
-set_option profiler true in
-set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
 Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.
@@ -296,7 +358,6 @@ theorem inverseImageTensorPairing_isIso
         (eP.hom.app H) hk₁ hk₂
       rw [he]
       rfl
-  let eR := I.ringUnderlying.symm
   let eI := I.moduleUnderlying
   obtain ⟨E, hE⟩ : ∃ E : ∀ M0 H0,
       ((RingedTensor.underlying RI).obj (I.modules.obj M0) ⟶
@@ -307,50 +368,10 @@ theorem inverseImageTensorPairing_isIso
       (RingedTensor.underlying RI).obj H0) :
       (∃ a : I.modules.obj M0 ⟶ H0, (RingedTensor.underlying RI).map a = α) ↔
         ∃ b : M0 ⟶ P.obj H0, (RingedTensor.underlying R).map b = E M0 H0 α := by
-    have hLA : F.map (madd R M0) =
-        prodComparison F ((RingedTensor.underlying R).obj M0)
-          ((RingedTensor.underlying R).obj M0) ≫
-          prod.map (eI.inv.app M0) (eI.inv.app M0) ≫
-            madd RI (I.modules.obj M0) ≫ eI.hom.app M0 := by
-      apply (cancel_mono (eI.inv.app M0)).mp
-      simp only [Category.assoc, Iso.hom_inv_id_app]
-      exact binary_of_graph F (eI.inv.app M0) (eI.inv.app M0) (eI.inv.app M0)
-        (madd R M0) (madd RI (I.modules.obj M0))
-        (fun U x y ↦ @Add.add (M0.val.obj U) inferInstance x y)
-        (fun U x y ↦ @Add.add ((I.modules.obj M0).val.obj U) inferInstance x y)
-        (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-        (fun T x y z hz U t ↦ I.moduleAdd M0 T x y z hz U t)
-    have hLS : F.map (msmul R M0) =
-        prodComparison F (rset R) ((RingedTensor.underlying R).obj M0) ≫
-          prod.map eR.inv (eI.inv.app M0) ≫
-            msmul RI (I.modules.obj M0) ≫ eI.hom.app M0 := by
-      apply (cancel_mono (eI.inv.app M0)).mp
-      simp only [Category.assoc, Iso.hom_inv_id_app]
-      exact binary_of_graph F eR.inv (eI.inv.app M0) (eI.inv.app M0)
-        (msmul R M0) (msmul RI (I.modules.obj M0))
-        (fun U x y ↦ @SMul.smul (R.obj.obj U) (M0.val.obj U) inferInstance x y)
-        (fun U x y ↦ @SMul.smul (RI.obj.obj U) ((I.modules.obj M0).val.obj U)
-          inferInstance x y)
-        (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-        (fun T a x z hz U t ↦ I.moduleSMul M0 T a x z hz U t)
-    have hm : adj.homEquiv _ _ (eI.inv.app M0 ≫ α) = E M0 H0 α ≫ eP.hom.app H0 :=
-      by rw [hE]; exact mateIsoEquiv_equation adj (eI.app M0) (eP.app H0) α
-    have hAdd := binary_mate_iso_iff adj (eI.app M0) (eI.app M0) (eI.app M0)
-      (eP.hom.app H0) (eP.hom.app H0) (eP.app H0) (madd R M0)
-      (madd RI (I.modules.obj M0)) (madd RI H0) (madd R (P.obj H0))
-      hLA (hOps H0).1 α α α (E M0 H0 α) (E M0 H0 α) (E M0 H0 α) hm hm hm
-    have hSmul := binary_mate_iso_iff adj eR (eI.app M0) (eI.app M0)
-      (adj.homEquiv _ _ eR.inv) (eP.hom.app H0) (eP.app H0)
-      (msmul R M0) (msmul RI (I.modules.obj M0)) (msmul RI H0) (msmul R (P.obj H0))
-      hLS (hOps H0).2 (𝟙 (rset RI)) α α (𝟙 (rset R))
-      (E M0 H0 α) (E M0 H0 α) (by simp) hm hm
-    have hSame := linear_iff (𝟙 R) M0 (P.obj H0)
-      (madd R M0) (madd R (P.obj H0)) (msmul R M0) (msmul R (P.obj H0))
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (E M0 H0 α)
-    exact (linear_iff (𝟙 RI) (I.modules.obj M0) H0 (madd RI (I.modules.obj M0))
-      (madd RI H0) (msmul RI (I.modules.obj M0)) (msmul RI H0)
-      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) α).trans
-        ((and_congr hAdd hSmul).trans hSame.symm)
+    apply mate_linear_iff R RI F V adj I M0 H0 (P.obj H0) (eP.app H0)
+      (hOps H0).1 (hOps H0).2 α (E M0 H0 α)
+    rw [hE]
+    exact mateIsoEquiv_equation adj (eI.app M0) (eP.app H0) α
   let : F.Monoidal := by
     set_option backward.isDefEq.respectTransparency false in
       exact (Functor.Braided.ofChosenFiniteProducts F).toMonoidal
