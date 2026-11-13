@@ -203,6 +203,31 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
             ((integralCompositionFiniteScalar l E L ι Y).map a) := by
   exact (integralCompositionFiniteScalarPullback l E L ι f).hom.naturality a
 
+private theorem integralCompositionSequence_mixed
+    {V W Z : Scheme.{u}}
+    [∀ v : V, Invertible (l : V.residueField v)]
+    [∀ w : W, Invertible (l : W.residueField w)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    (h : Z ⟶ W) (k : W ⟶ V)
+    (M : coefficientSequenceDerived l E V) :
+    (integralComparisonDerivedSequenceScalar l E L ι Z).map
+        ((integralComparisonSystemComposition l E h k).hom.app M) ≫
+      (integralComparisonSystemScalarPullback l E L ι h).hom.app
+        ((integralComparisonDerivedSequencePullback l E k).obj M) ≫
+      (integralComparisonDerivedSequencePullback l L h).map
+          ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
+      (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
+        (integralComparisonSystemComposition l L h k).hom.app
+          ((integralComparisonDerivedSequenceScalar l E L ι V).obj M) := by
+  exact NatTrans.congr_app
+    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
+
+private theorem integralCompositionPullback_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f :
+      coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X) =
+        integralComparisonDerivedSequencePullback l E f := by
+  rfl
+
 set_option profiler true in
 private theorem integralComparisonSystemScalarPullback_finite_mixed
     {V W Z : Scheme.{u}}
@@ -210,7 +235,7 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
     [∀ w : W, Invertible (l : W.residueField w)]
     [∀ z : Z, Invertible (l : Z.residueField z)]
     (h : Z ⟶ W) (k : W ⟶ V)
-    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
+    (M : coefficientSequenceDerived l E V) :
     (integralCompositionFiniteScalar l E L ι Z).map
         ((integralComparisonSystemComposition l E h k).hom.app M) ≫
       (integralCompositionFiniteScalarPullback l E L ι h).hom.app
@@ -222,10 +247,9 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
       (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (integralComparisonSystemComposition l L h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  convert NatTrans.congr_app
-    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M using 3
-  all_goals trace_state
-  all_goals rfl
+  have mixed := integralCompositionSequence_mixed l E L ι h k M
+  simp only [← integralCompositionPullback_eq] at mixed
+  exact mixed
 
 private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
