@@ -300,7 +300,7 @@ private theorem normalized_forget_comparison_apply
   simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
   have hc : cH.hom (cH.inv y) = y :=
     congrArg (fun k : E ⟶ E ↦ k.hom y) cH.inv_hom_id
-  rw [hc]
+  erw [hc]
   exact congrArg b₀.hom h
 
 private theorem mapped_single_homology_inv
@@ -372,7 +372,6 @@ private theorem section_iso_one (A : Type u) [CommRing A]
 
 
 set_option backward.defeqAttrib.useBackward true in
-set_option trace.profiler true in
 /-- The restricted ordinary class of one agrees with the tilde/sections unit class.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and its restriction to U.
 (blueprint: lem-sc-open-sections-ordinary-structure-class).
@@ -468,14 +467,19 @@ theorem openComparison_ordinary_structure_class (A : Type u) [CommRing A]
       (tilde.toOpen_map_app (e₀.inv.f 0) U) (1 : A)
     rw [hs, he₁, hl]
     exact hn
-  have h := normalized_forget_comparison_apply a b e₀ z η (1 : B) (1 : A) hdegree
+  have h := normalized_forget_comparison_apply (R := B) (S := A)
+    (X := X) (Y := Y) (Z := L) (M := ModuleCat.of B B)
+    (N := (affineOpenSections A U).obj O) (E := ModuleCat.of A A)
+    a b e₀ z η (1 : B) (1 : A) hdegree
   have hj : j = (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso e₀ ≪≫
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of A A) :=
     extension_single_homology A
-  change (((HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso a ≪≫
-      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)).inv
-        (1 : B)) = _ at h
-  erw [mapped_single_homology_inv S e, ← hj] at h
+  have ha : ((HomologicalComplex.homologyFunctor (ModuleCat.{u} B) (.up ℤ) 0).mapIso a ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)).inv =
+        ε.inv ≫ HomologicalComplex.homologyMap
+          ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 :=
+    mapped_single_homology_inv S e
+  erw [ha, ← hj] at h
   exact h
 
 end
