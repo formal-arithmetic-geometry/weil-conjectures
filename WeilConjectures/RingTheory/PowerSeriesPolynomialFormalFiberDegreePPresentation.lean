@@ -33,7 +33,7 @@ universe u
 
 namespace MvPowerSeries
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- A degree-p final step in a purely inseparable extension presents the extended formal
 fibre as a binomial hypersurface over the preceding fibre. A derivation of that fibre
 sends its constant coefficient to a unit.
@@ -86,8 +86,9 @@ theorem formalFiber_polynomial_degreePPresentation
       Nonempty ((Polynomial R ⧸
         Ideal.span ({Polynomial.X ^ p - Polynomial.C f} : Set (Polynomial R))) ≃+* T) := by
   intro A K C R T
-  obtain ⟨a, ha⟩ := hpow
-  obtain ⟨D, hD⟩ := exists_derivation_isUnit_tmul_formalFiber k p n m q L M z hz a ha hdeg
+  refine hpow.elim fun a ha ↦ ?_
+  refine (exists_derivation_isUnit_tmul_formalFiber k p n m q L M z hz a ha hdeg).elim
+    fun D hD ↦ ?_
   have hiso := nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct K L M ((⊥ : Ideal A).Fiber C)
     p z hz a ha hdeg
   exact ⟨Algebra.TensorProduct.includeLeftRingHom a, D, hD, hiso⟩
