@@ -112,7 +112,6 @@ lemma leftDerivedUpperStarTensorComp_app_app
   rw [MonoidalCategory.tensorHom_def]
   rfl
 
-set_option profiler true in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_comp_eq :
     leftDerivedUpperStarTensor Λ (f ≫ g) = leftDerivedUpperStarTensorComp Λ f g := by
@@ -183,7 +182,6 @@ lemma leftDerivedUpperStarTensorId_app_app
   rw [MonoidalCategory.tensorHom_def]
   rfl
 
-set_option profiler true in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_id_aux
     (A B : CochainComplex
@@ -209,13 +207,9 @@ lemma leftDerivedUpperStarTensor_id_aux
     have : IsIso ((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
           (HomotopyCategory.quotient _ (.up ℤ)).obj B)) :=
-      ⟨(NatTrans.mapHomotopyCategory (upperStarId Λ W).inv (.up ℤ)).app _, by
-        rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
-          NatTrans.mapHomotopyCategory_id]
-        rfl, by
-        rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
-          NatTrans.mapHomotopyCategory_id]
-        rfl⟩
+      inferInstanceAs (IsIso ((NatIso.mapHomotopyCategory (upperStarId Λ W) (.up ℤ)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
+          (HomotopyCategory.quotient _ (.up ℤ)).obj B)).hom)
     infer_instance
   exact derivedId_tensor_aux (𝟙 W)^*⟦Λ⟧.leftDerivedFunctorCounit (leftDerivedUpperStarId Λ W)
     ((HomotopyCategory.quotient _ _).obj A) ((HomotopyCategory.quotient _ _).obj B)
@@ -225,7 +219,6 @@ lemma leftDerivedUpperStarTensor_id_aux
     (Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj (upperStarId Λ W))
     (quotient_map_upperStarTensorComplexHom_id Λ W A B)
 
-set_option profiler true in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_id_eq :
     leftDerivedUpperStarTensor Λ (𝟙 W) = leftDerivedUpperStarTensorId Λ W := by
