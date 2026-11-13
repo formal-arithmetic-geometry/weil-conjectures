@@ -39,7 +39,6 @@ private theorem homology_scalar_comm
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
 -- The comparisons involve several nested evaluation and homology functors.
 set_option backward.isDefEq.respectTransparency false in
@@ -131,7 +130,10 @@ theorem ModuleCohomologyFMapData.map_semilinear
   refine ⟨{ (fadd.hom) with map_smul' := ?_ }, ?_⟩
   · intro r x
     change i (inv m (b (j (r • x)))) = h.appTop.hom r • i (inv m (b (j x)))
-    rw [j.hom.map_smul, b.hom.map_smul, hmi, i.hom.map_smul]
+    exact (congrArg (fun y ↦ i (inv m (b y))) (j.hom.map_smul r x)).trans
+      ((congrArg (fun y ↦ i (inv m y)) (b.hom.map_smul r (j x))).trans
+        ((congrArg (fun y ↦ i y) (hmi r (b (j x)))).trans
+          (i.hom.map_smul (h.appTop.hom r) (inv m (b (j x))))))
   · intro x
     exact congrArg (fun f ↦ f x) hfadd
 

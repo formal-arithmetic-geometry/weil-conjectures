@@ -93,7 +93,18 @@ private theorem sectionCohomologyTheta_naturality
     (SheafOfModules.forget Y.ringCatSheaf)
     (PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)) g p
 
-set_option maxHeartbeats 500000 in
+-- Compose the four naturality squares with abstract objects and morphisms.
+private theorem naturality_chain_four {C : Type*} [Category* C]
+    {A₀ A₁ A₂ A₃ A₄ B₀ B₁ B₂ B₃ B₄ : C}
+    {a₁ : A₀ ⟶ A₁} {a₂ : A₁ ⟶ A₂} {a₃ : A₂ ⟶ A₃} {a₄ : A₃ ⟶ A₄}
+    {b₁ : B₀ ⟶ B₁} {b₂ : B₁ ⟶ B₂} {b₃ : B₂ ⟶ B₃} {b₄ : B₃ ⟶ B₄}
+    {g₀ : A₀ ⟶ B₀} {g₁ : A₁ ⟶ B₁} {g₂ : A₂ ⟶ B₂}
+    {g₃ : A₃ ⟶ B₃} {g₄ : A₄ ⟶ B₄}
+    (h₁ : g₀ ≫ b₁ = a₁ ≫ g₁) (h₂ : g₁ ≫ b₂ = a₂ ≫ g₂)
+    (h₃ : g₂ ≫ b₃ = a₃ ≫ g₃) (h₄ : g₃ ≫ b₄ = a₄ ≫ g₄) :
+    g₀ ≫ b₁ ≫ b₂ ≫ b₃ ≫ b₄ = a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ g₄ := by
+  rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃, h₄]
+
 set_option profiler true in
 -- The naturality squares compare several termwise composite functors.
 /-- The canonical resolution-section map commutes with coefficient maps.
@@ -136,29 +147,13 @@ theorem higherDirectImage_resolution_naturality
     ((HomologicalComplex.shortComplexFunctor _ (.up ℕ) p).map
       ((U.mapHomologicalComplex (.up ℕ)).map
         ((D.mapHomologicalComplex (.up ℕ)).map g))) E
-  let LI := (U.mapHomologicalComplex (.up ℕ)).obj
-    ((D.mapHomologicalComplex (.up ℕ)).obj I.cocomplex)
-  let LJ := (U.mapHomologicalComplex (.up ℕ)).obj
-    ((D.mapHomologicalComplex (.up ℕ)).obj J.cocomplex)
-  change HomologicalComplex.homologyMap
-      ((A.mapHomologicalComplex (.up ℕ)).map g) p ≫
-        ((LJ.sc p).mapHomologyIso E).hom =
-      ((LI.sc p).mapHomologyIso E).hom ≫
-        E.map (HomologicalComplex.homologyMap
-          ((U.mapHomologicalComplex (.up ℕ)).map
-            ((D.mapHomologicalComplex (.up ℕ)).map g)) p) at hE
   have hθ := sectionCohomologyTheta_naturality
     ((D.mapHomologicalComplex (.up ℕ)).map g) p
   have hθE := congrArg E.map hθ
   have hDE := congrArg (U ⋙ E).map hD
-  simp only [Functor.map_comp, E, Functor.comp_map] at hθE hDE
+  simp only [Functor.map_comp, Functor.comp_map] at hθE hDE
   dsimp only [higherDirectImageResolutionSectionMap]
-  change (A.rightDerived p).map a ≫ _ = _
   simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
-  rw [reassoc_of% hA]
-  erw [reassoc_of% hE]
-  erw [reassoc_of% hθE]
-  erw [← hDE]
-  rfl
+  exact naturality_chain_four hA hE hθE hDE.symm
 
 end AlgebraicGeometry
