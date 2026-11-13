@@ -122,11 +122,26 @@ private theorem braided_descent (L : C ⥤ D) [L.Braided] (W : MorphismProperty 
   intro X Y
   exact congrArg (fun k ↦ (k.app X).app Y) hab
 
+private theorem normalizedCoreMonoidalOfLocalization
+    (L : C ⥤ D) [L.Braided] (W : MorphismProperty C)
+    [L.IsLocalization W] [W.ContainsIdentities]
+    (F : D ⥤ E) (G : C ⥤ E) [G.Braided]
+    (h : L ⋙ F ≅ G) (e : 𝟙_ E ≅ F.obj (𝟙_ D)) :
+    ∃ m : F.CoreMonoidal, m.εIso = e ∧
+      ∀ A B : D, F.map (β_ A B).hom ≫ (m.μIso B A).inv =
+        (m.μIso A B).inv ≫ (β_ (F.obj A) (F.obj B)).hom := by
+  let : Localization.Lifting L W G F := ⟨h⟩
+  let : F.Monoidal := Localization.Monoidal.functorMonoidalOfComp L W F G
+  let : h.hom.IsMonoidal := Localization.Monoidal.lifting_isMonoidal L W F G
+  let : (L ⋙ F).LaxBraided := Functor.LaxBraided.ofNatIso h.symm
+  let : F.Braided :=
+    { toMonoidal := (inferInstance : F.Monoidal)
+      braided := braided_descent L W F (Functor.LaxBraided.braided (F := L ⋙ F)) }
+  exact normalize F e
+
 end Descent
 
 set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
--- Monoidal localization and its coefficient instances require extra elaboration heartbeats.
 /-- The open-site equivalence has a symmetric core monoidal structure with its prescribed unit.
 Source: Stacks Project, Tag 01CD, tensor transport along an equivalence of ringed sites.
 
@@ -188,29 +203,11 @@ private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens
         exact ModuleCat.MonoidalCategory.tensor_ext fun _ _ ↦ rfl }
   let : (P ⋙ S).Braided := inferInstance
   obtain ⟨h⟩ := exists_localizedOpen_sheafification_iso X U
-  let : Localization.Lifting L W (P ⋙ S) E := ⟨h⟩
-  let : E.Monoidal := Localization.Monoidal.functorMonoidalOfComp L W E (P ⋙ S)
-  let : h.hom.IsMonoidal := Localization.Monoidal.lifting_isMonoidal L W E (P ⋙ S)
-  have hb := braided_descent L W E (by
-    intro A B
-    change Functor.LaxMonoidal.μ (L ⋙ E) A B ≫ (L ⋙ E).map (β_ A B).hom =
-      (β_ ((L ⋙ E).obj A) ((L ⋙ E).obj B)).hom ≫
-        Functor.LaxMonoidal.μ (L ⋙ E) B A
-    have hm (A B) := NatTrans.IsMonoidal.tensor (τ := h.hom) A B
-    apply (cancel_mono (h.hom.app (B ⊗ A))).1
-    simp only [Category.assoc]
-    rw [h.hom.naturality, ← Category.assoc, hm A B]
-    simp only [Category.assoc]
-    rw [hm B A, Functor.LaxBraided.braided, braiding_naturality_assoc])
-  let : E.Braided :=
-    { toMonoidal := (inferInstance : E.Monoidal)
-      braided := hb }
-  exact normalize E (Scheme.Modules.overEquivFunctorObjUnitIso U)
+  exact normalizedCoreMonoidalOfLocalization L W E (P ⋙ S) h
+    (Scheme.Modules.overEquivFunctorObjUnitIso U)
 
 
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
--- Elaborating two nested bicomplex comparisons requires additional heartbeats.
 /-- The open-site tensor comparison has the prescribed unit, symmetry and total summands.
 Source: Stacks Project, Tag 0A8X, tensor totalization; Mathlib `overEquiv`.
 (blueprint: lem-pc-ordinary-evaluation-tensor-summands).
@@ -261,39 +258,12 @@ theorem exists_ordinaryEvaluation_tensor_summands (X : Scheme.{u}) (U : X.Opens)
   refine ⟨m, hm, hs, ?_⟩
   intro P F
   let K := localEvaluationDual X U P
-  let B := (((curriedTensor
-    (localEvaluationModules X U)).mapBifunctorHomologicalComplex
-      (.up ℤ) (.up ℤ)).obj F).obj K
-  have : R.PreservesTotalComplex B (.up ℤ) := fun _ ↦ inferInstance
-  let e₁ := (HomologicalComplex₂.mapTotalIso R B (.up ℤ)).symm
   let : R.OplaxMonoidal := m.toOplaxMonoidal
-  let e₂ :
-      (((R.mapHomologicalComplex (.up ℤ)).mapHomologicalComplex (.up ℤ)).obj B) ≅
-        (((curriedTensor (SheafOfModules.{u}
-          (moduleRings U.toScheme.toRingedSpace))).mapBifunctorHomologicalComplex
-            (.up ℤ) (.up ℤ)).obj ((R.mapHomologicalComplex (.up ℤ)).obj F)).obj
-              ((R.mapHomologicalComplex (.up ℤ)).obj K) :=
-    HomologicalComplex.Hom.isoOfComponents
-      (fun p ↦ HomologicalComplex.Hom.isoOfComponents (fun q ↦ (m.μIso (F.X p) (K.X q)).symm)
-        (by
-          intro q q' hq
-          change (m.μIso (F.X p) (K.X q)).inv ≫ R.obj (F.X p) ◁ R.map (K.d q q') =
-            R.map (F.X p ◁ K.d q q') ≫ (m.μIso (F.X p) (K.X q')).inv
-          exact Functor.OplaxMonoidal.δ_natural_right R (F.X p) (K.d q q')))
-      (by
-        intro p p' hp
-        apply HomologicalComplex.Hom.ext
-        funext q
-        change (m.μIso (F.X p) (K.X q)).inv ≫ R.map (F.d p p') ▷ R.obj (K.X q) =
-          R.map (F.d p p' ▷ K.X q) ≫ (m.μIso (F.X p') (K.X q)).inv
-        exact Functor.OplaxMonoidal.δ_natural_left R (F.d p p') (K.X q))
-  refine ⟨e₁ ≪≫ HomologicalComplex₂.total.mapIso e₂ (.up ℤ), ?_⟩
+  have (A B : localEvaluationModules X U) :
+      IsIso (Functor.OplaxMonoidal.δ R A B) := (m.μIso A B).isIso_inv
+  let τ := Functor.OplaxMonoidal.δNatTrans R
+  refine ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) F K), ?_⟩
   intro p q n h
-  change R.map (B.ιTotal (.up ℤ) p q n h) ≫
-    ((HomologicalComplex₂.mapTotalXIso R B (.up ℤ) n).inv ≫
-      (HomologicalComplex₂.total.map e₂.hom (.up ℤ)).f n) = _
-  rw [← Category.assoc, HomologicalComplex₂.map_ι_mapTotalXIso_inv]
-  rw [HomologicalComplex₂.ιTotal_map]
-  rfl
+  exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) F K p q n h
 
 end AlgebraicGeometry
