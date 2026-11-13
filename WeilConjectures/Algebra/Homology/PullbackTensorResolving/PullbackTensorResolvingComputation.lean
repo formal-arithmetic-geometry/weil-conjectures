@@ -362,9 +362,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}}
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- The derived-change-of-rings comparison needs more time after the upstream bump.
 /-- The prescribed complex-level derived-pullback counit is invertible on every
 flat-term K-flat complex, with independent site and coefficient universes.
 Source: Stacks 06YY and 0G7E
@@ -388,6 +386,8 @@ theorem pullback_resolving_computation
     (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) :
     IsIso (epsilon.app P) := by
   classical
+  have : J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := inferInstance
+  have : K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := inferInstance
   let := f.finiteLimits
   obtain ⟨eps, hLF, heps⟩ :=
     CategoryTheory.exists_homotopy_leftDerived_comparison f.L L epsilon hL
