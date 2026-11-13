@@ -124,7 +124,6 @@ private theorem rhomGlobalSectionsOfComparison
   change E P' (F.map f x) = (f.1.unop ≫ E P x) ≫ f.2 at hz'
   simpa only [Category.assoc] using hz'
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxHeartbeats 40000 in
 -- Additive Hom inference traverses the derived and sheaf categories in each repeated binder.
