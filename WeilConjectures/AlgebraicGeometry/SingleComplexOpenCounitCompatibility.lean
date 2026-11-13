@@ -71,8 +71,6 @@ noncomputable def singleComplexOpenPullbackSquareIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
--- The representative calculation elaborates several derived functor comparisons.
 /-- The sectionwise direct-image comparison is the mate of the open pullback square.
 Source: Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.
 (blueprint: lem-pc-t2-open-counit-compatibility).

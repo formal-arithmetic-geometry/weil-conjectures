@@ -53,14 +53,11 @@ private theorem tensor_bijective_of_tmul
   have hcomp : ∀ z, e (f z) = l z := by
     intro z
     induction z using TensorProduct.inductionOn with
-    | zero => simp only [map_zero]
     | tmul m n => exact h m n
     | add x y hx hy => simp only [map_add, hx, hy]
   apply (e.bijective.of_comp_iff' f).1
   simpa only [Function.comp_def, hcomp] using l.bijective
 
-set_option trace.profiler true in
--- Comparing scalar restrictions unfolds several dependent section module instances.
 set_option backward.isDefEq.respectTransparency false in
 /-- Change of rings between quasi-coherent algebras preserves quasi-coherence of the
 underlying structure-sheaf module, and the sheafification map is bijective on affine opens.
@@ -106,6 +103,7 @@ theorem quasiCoherent_algebra_changeOfRings (Y : Scheme.{u})
   classical
   let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
   let S := tensorObj C.toModule P₀
+  -- Reuse the colimit instances in these hypotheses when registering quasi-coherence.
   have := hB
   have := hC
   have := hP
