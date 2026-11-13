@@ -90,8 +90,10 @@ theorem inverseImageRegularExtension
               (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
               (Opens.grothendieckTopology T)).unit.app A).hom.app V a) := by
   classical
+  let R := 𝓡 A
+  let S := 𝓡 B
   let C := TopCat.Sheaf.inverseImageRing g A
-  let η : (𝓡 A) ⟶ ((Opens.map g).sheafPushforwardContinuous RingCat.{u}
+  let η : R ⟶ ((Opens.map g).sheafPushforwardContinuous RingCat.{u}
       (Opens.grothendieckTopology T') (Opens.grothendieckTopology T)).obj (𝓡 C) :=
     (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map
       ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -99,22 +101,22 @@ theorem inverseImageRegularExtension
         (Opens.grothendieckTopology T)).unit.app A)
   let Q := pushforward.{u} (F := Opens.map g) η
   let L := restrictScalars ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map t)
-  let M := unit (𝓡 A)
+  let M := unit R
   let I := TopCat.Sheaf.inverseImageModule g A M
   let F := changeOfRings.{u, u, u} t I
   obtain ⟨E, hE, adj, hadj⟩ := exists_changeOfRingsAdjunction T C B t
   obtain ⟨φ, hφ, _, hnφ⟩ := moduleInverseImageAdjunction g A
-  let se (N : SheafOfModules.{u} (𝓡 B)) : N.sections ≃ (Q.obj (L.obj N)).sections :=
+  let se (N : SheafOfModules.{u} S) : N.sections ≃ (Q.obj (L.obj N)).sections :=
     Equiv.ofBijective ((Opens.map g).op.sectionsPrecomp)
       (Functor.bijective_sectionsPrecomp (Opens.map g).op
         (N.val.presheaf ⋙ CategoryTheory.forget AddCommGrpCat.{u}))
-  let q (N : SheafOfModules.{u} (𝓡 B)) : (F ⟶ N) ≃ (M ⟶ Q.obj (L.obj N)) :=
+  let q (N : SheafOfModules.{u} S) : (F ⟶ N) ≃ (M ⟶ Q.obj (L.obj N)) :=
     (Iso.homCongr (eqToIso (hE I)).symm (Iso.refl N)).trans
       ((adj.homEquiv I N).trans (φ M (L.obj N)))
-  have hq (N : SheafOfModules.{u} (𝓡 B)) (a : F ⟶ N)
+  have hq (N : SheafOfModules.{u} S) (a : F ⟶ N)
       (V : (Opens T')ᵒᵖ) (x : A.obj.obj V) :
       (q N a).val.app V x = a.val.app ((Opens.map g).op.obj V)
-        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
+        (((PresheafOfModules.sheafificationAdjunction (𝟙 S.obj)).unit.app
           (changeOfRingsPresheaf.{u, u, u} t I)).app ((Opens.map g).op.obj V)
             ((1 : B.obj.obj ((Opens.map g).op.obj V)) ⊗ₜ[
               C.obj.obj ((Opens.map g).op.obj V),
@@ -122,26 +124,26 @@ theorem inverseImageRegularExtension
               (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
                 (Opens.map g) AddCommGrpCat.{u} (Opens.grothendieckTopology T')
                 (Opens.grothendieckTopology T)).unit.app
-                  ((toSheaf (𝓡 A)).obj M)).hom.app V x))) := by
+                  ((toSheaf R).obj M)).hom.app V x))) := by
     dsimp only [q, Equiv.trans_apply]
     rw [hφ]
     exact hadj I N a _ _
-  have hnq (N N' : SheafOfModules.{u} (𝓡 B)) (a : F ⟶ N) (b : N ⟶ N') :
+  have hnq (N N' : SheafOfModules.{u} S) (a : F ⟶ N) (b : N ⟶ N') :
       q N' (a ≫ b) = q N a ≫ Q.map (L.map b) := by
     change φ M (L.obj N') (adj.homEquiv I N' (eqToHom (hE I) ≫ (a ≫ b))) =
       φ M (L.obj N) (adj.homEquiv I N (eqToHom (hE I) ≫ a)) ≫ Q.map (L.map b)
     rw [← Category.assoc, adj.homEquiv_naturality_right]
     exact hnφ M (L.obj N) (L.obj N') _ (L.map b)
-  let eqv (N : SheafOfModules.{u} (𝓡 B)) : (F ⟶ N) ≃ (unit (𝓡 B) ⟶ N) :=
+  let eqv (N : SheafOfModules.{u} S) : (F ⟶ N) ≃ (unit S ⟶ N) :=
     (q N).trans ((Q.obj (L.obj N)).unitHomEquiv.trans
       ((se N).symm.trans N.unitHomEquiv.symm))
-  have heqv (N : SheafOfModules.{u} (𝓡 B)) (a : F ⟶ N) :
+  have heqv (N : SheafOfModules.{u} S) (a : F ⟶ N) :
       se N (N.unitHomEquiv (eqv N a)) =
         (Q.obj (L.obj N)).unitHomEquiv (q N a) := by
     exact (congrArg (se N) (N.unitHomEquiv.apply_symm_apply
       ((se N).symm ((Q.obj (L.obj N)).unitHomEquiv (q N a))))).trans
         ((se N).apply_symm_apply _)
-  have hn (N N' : SheafOfModules.{u} (𝓡 B)) (a : F ⟶ N) (b : N ⟶ N') :
+  have hn (N N' : SheafOfModules.{u} S) (a : F ⟶ N) (b : N ⟶ N') :
       eqv N' (a ≫ b) = eqv N a ≫ b := by
     apply N'.unitHomEquiv.injective
     apply (se N').injective
@@ -150,20 +152,20 @@ theorem inverseImageRegularExtension
     apply PresheafOfModules.sections_ext
     intro V
     exact congrArg (fun z ↦ b.val.app ((Opens.map g).op.obj V) (z.val V)) hs.symm
-  let e := isoOfHomEquiv F (unit (𝓡 B)) eqv hn
+  let e := isoOfHomEquiv F (unit S) eqv hn
   refine ⟨e, ?_⟩
   intro V a
-  have h := (eqv (unit (𝓡 B))).apply_symm_apply (𝟙 (unit (𝓡 B)))
-  change eqv (unit (𝓡 B)) e.hom = 𝟙 _ at h
+  have h := (eqv (unit S)).apply_symm_apply (𝟙 (unit S))
+  change eqv (unit S) e.hom = 𝟙 _ at h
   have hs := congrArg
-    (fun z ↦ se (unit (𝓡 B)) ((unit (𝓡 B)).unitHomEquiv z)) h
+    (fun z ↦ se (unit S) ((unit S).unitHomEquiv z)) h
   rw [heqv] at hs
   have hv := congrArg (fun z ↦ z.val V) hs
-  change (q (unit (𝓡 B)) e.hom).val.app V (1 : A.obj.obj V) =
+  change (q (unit S) e.hom).val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
   rw [← hq]
   rw [show a = a • (1 : A.obj.obj V) by exact (mul_one a).symm]
-  rw [(q (unit (𝓡 B)) e.hom).val.app V |>.hom.map_smul, hv]
+  rw [(q (unit S) e.hom).val.app V |>.hom.map_smul, hv]
   change (t.hom.app ((Opens.map g).op.obj V)).hom
     (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
