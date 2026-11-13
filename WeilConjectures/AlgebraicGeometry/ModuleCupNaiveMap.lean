@@ -144,9 +144,10 @@ theorem moduleCup_naiveMap_comm
     rw [← Category.assoc, CochainComplex.ιTensorObj_d _ _ i j n m hij hnm]
     rw [Preadditive.add_comp, Linear.units_smul_comp]
     simp only [Category.assoc]
-    rw [naiveMapComponent_summand X K L (i + 1) j m (by omega),
-      naiveMapComponent_summand X K L i (j + 1) m (by omega)]
-    conv_rhs => rw [← Category.assoc, naiveMapComponent_summand X K L i j n hij]
+    rw [moduleCup_naiveMapComponent, HomologicalComplex.ι_mapBifunctorDesc,
+      moduleCup_naiveMapComponent, HomologicalComplex.ι_mapBifunctorDesc]
+    conv_rhs => rw [← Category.assoc, moduleCup_naiveMapComponent,
+      HomologicalComplex.ι_mapBifunctorDesc]
     rw [Category.assoc, ← S.map_comp, CochainComplex.ιTensorObj_d K L i j n m hij hnm]
     simp only [Functor.map_add, Functor.map_units_smul, Functor.map_comp,
       Preadditive.comp_add, Linear.comp_units_smul]
