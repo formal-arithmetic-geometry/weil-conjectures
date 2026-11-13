@@ -105,7 +105,7 @@ private theorem unit_square_of_composition
   conv_rhs =>
     rhs
     rhs
-    rw [cQ.hom.naturality (Q.map (θj.hom.app M))]
+    erw [cQ.hom.naturality (Q.map (θj.hom.app M))]
   have hQ := congrArg (fun v ↦ v ≫ Ha.map (Q.map (θj.hom.app M))) hcQ
   simpa only [Category.assoc, Functor.map_comp] using hQ.symm
 
