@@ -270,6 +270,56 @@ private theorem scalar_unit_section_surjective (V : Cᵒᵖ) :
 
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
+-- Abstract the localization data so normalization does not reduce its construction.
+private def ScalarSliceTensorModelFor
+    (r₀ : DerivedCategory (RingedTensorModules.{c, v, r} J R) ⥤
+      DerivedCategory (RingedTensorModules.{max c v, v, r} (J.over U) (R.over U)))
+    (α : DerivedCategory.Q ⋙ r₀ ≅
+      ringedSliceComplexRestriction.{c, v, r} J R U ⋙ DerivedCategory.Q)
+    (d₀ : RingedSliceEvaluationComparisons
+      (derivedInternalHomOfUniverses.{c, v, r, w} J R)
+      (derivedInternalHomOfUniverses.{max c v, v, r, w'} (J.over U) (R.over U))
+      r₀ S SU (RingedSliceFlatRestriction.{c, v, r} J R U)) : Prop :=
+  ∀ (P Q : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v
+    r} RingCat.{max c v r})).obj R)) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q)
+    (fP : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r} (J := J) (R := R) (P.X
+      n))
+    (fQ : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r} (J := J) (R := R) (Q.X
+      n)),
+    ∃ γ : (ringedSliceComplexRestriction.{c, v, r} J R U).obj
+        ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) ≅
+      (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).obj
+        ((ringedSliceComplexRestriction.{c, v, r} J R U).obj P,
+          (ringedSliceComplexRestriction.{c, v, r} J R U).obj Q),
+      (∀ (p q k : ℤ) (h : p + q = k) (V : Over U)
+        (x : (P.X p).val.obj (op V.left)) (y : (Q.X q).val.obj (op V.left)),
+        (γ.hom.f k).val.app (op V)
+          (coefficientTensorGenerator.{r, c, v} J R P Q p q k h (op V.left) x y) =
+        coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
+          ((ringedSliceComplexRestriction.{c, v, r} J R U).obj P)
+          ((ringedSliceComplexRestriction.{c, v, r} J R U).obj Q) p q k h (op V) x y) ∧
+      (r₀).map
+          (T.iso J R S P Q hP hQ).hom ≫
+        (d₀.rho (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫
+        SU.tensor.map
+          (X := ((r₀).obj (DerivedCategory.Q.obj
+            P), (r₀).obj (DerivedCategory.Q.obj
+            Q)))
+          (Y := (DerivedCategory.Q.obj ((ringedSliceComplexRestriction.{c, v, r} J R U).obj P),
+            DerivedCategory.Q.obj ((ringedSliceComplexRestriction.{c, v, r} J R U).obj Q)))
+          ((α).hom.app P,
+            (α).hom.app Q) =
+      (α).hom.app
+        ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) ≫
+        DerivedCategory.Q.map γ.hom ≫
+        (TU.iso (J.over U) (R.over U) SU
+          ((ringedSliceComplexRestriction.{c, v, r} J R U).obj P)
+          ((ringedSliceComplexRestriction.{c, v, r} J R U).obj Q)
+          (d₀.kflat P hP fP).1 (d₀.kflat Q hQ fQ).1).hom
+
+
 private theorem scalar_chain_square
     (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) :
     let F := ringedSliceComplexRestriction.{c, v, r} J R U
@@ -306,6 +356,7 @@ private theorem scalar_chain_square
   intro F O OU e γ hi β hβ βU hβU
   let B := ((sheafCompose J
     (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
+  let := (ringedOverFunctor_exactGeneral.{c, v, max c v r, max c v r} B U).1
   apply (cancel_epi γ.inv).mp
   simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
   apply total_hom_ext.{max c v, v, r} (J.over U) (R.over U)
@@ -357,6 +408,30 @@ theorem ringedSlice_scalar_unit :
           SU.tensor.map (X := (r.obj N, OU))
             (Y := (r.obj N, SU.monoidal.tensorUnit)) (𝟙 (r.obj N), KU.unitIso.inv) ≫
               (SU.monoidal.rightUnitor (r.obj N)).hom := by
+  suffices h : ∀
+      (r₀ : DerivedCategory (RingedTensorModules.{c, v, r} J R) ⥤
+        DerivedCategory (RingedTensorModules.{max c v, v, r} (J.over U) (R.over U)))
+      (α₀ : DerivedCategory.Q ⋙ r₀ ≅
+        ringedSliceComplexRestriction.{c, v, r} J R U ⋙ DerivedCategory.Q)
+      (d₀ : RingedSliceEvaluationComparisons
+        (derivedInternalHomOfUniverses.{c, v, r, w} J R)
+        (derivedInternalHomOfUniverses.{max c v, v, r, w'} (J.over U) (R.over U))
+        r₀ S SU (RingedSliceFlatRestriction.{c, v, r} J R U)),
+      ScalarSliceTensorModelFor J R U S T SU TU r₀ α₀ d₀ →
+    let O := DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R)
+    let OU := DerivedCategory.Q.obj
+      (ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U))
+    ∃ o : r₀.obj O ≅ OU, ∀ N,
+      r₀.map (S.tensor.map (X := (N, O)) (Y := (N, S.monoidal.tensorUnit))
+        (𝟙 N, K.unitIso.inv) ≫ (S.monoidal.rightUnitor N).hom) =
+        (d₀.rho N O).hom ≫ SU.tensor.map
+          (X := (r₀.obj N, r₀.obj O)) (Y := (r₀.obj N, OU)) (𝟙 (r₀.obj N), o.hom) ≫
+          SU.tensor.map (X := (r₀.obj N, OU))
+            (Y := (r₀.obj N, SU.monoidal.tensorUnit)) (𝟙 (r₀.obj N), KU.unitIso.inv) ≫
+              (SU.monoidal.rightUnitor (r₀.obj N)).hom by
+    exact h (ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U)
+      (ringedSliceLocalizationIso.{c, v, r, w, w'} J R U) d hd.1
+  intro r₀ α₀ d₀ hmodel
   let F := ringedSliceComplexRestriction.{c, v, r} J R U
   let O := ringedTensorUnitComplex.{c, v, r} J R
   let OU := ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U)
@@ -367,9 +442,9 @@ theorem ringedSlice_scalar_unit :
     (HomologicalComplex.singleMapHomologicalComplex
       (SheafOfModules.overFunctor.{max c v r} B U) (.up ℤ) (0 : ℤ)).app
         (SheafOfModules.unit B)
-  let o := (ringedSliceLocalizationIso.{c, v, r, w, w'} J R U).app O ≪≫
+  let o := α₀.app O ≪≫
     DerivedCategory.Q.mapIso e
-  let r := ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U
+  let r := r₀
   have base (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
       (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
       (fP : ∀ n, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
@@ -378,7 +453,7 @@ theorem ringedSlice_scalar_unit :
           (Y := (DerivedCategory.Q.obj P, S.monoidal.tensorUnit))
           (𝟙 _, K.unitIso.inv) ≫
             (S.monoidal.rightUnitor (DerivedCategory.Q.obj P)).hom) =
-        (d.rho (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj O)).hom ≫
+        (d₀.rho (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj O)).hom ≫
           SU.tensor.map (X := (r.obj (DerivedCategory.Q.obj P), r.obj (DerivedCategory.Q.obj O)))
             (Y := (r.obj (DerivedCategory.Q.obj P), DerivedCategory.Q.obj OU))
             (𝟙 _, o.hom) ≫ SU.tensor.map
@@ -386,10 +461,10 @@ theorem ringedSlice_scalar_unit :
               (Y := (r.obj (DerivedCategory.Q.obj P), SU.monoidal.tensorUnit))
               (𝟙 _, KU.unitIso.inv) ≫
                 (SU.monoidal.rightUnitor (r.obj (DerivedCategory.Q.obj P))).hom := by
-    rcases hd.1 P O hP (unit_kflat.{c, v, r} J R) fP (unit_flat.{c, v, r} J R) with
+    rcases hmodel P O hP (unit_kflat.{c, v, r} J R) fP (unit_flat.{c, v, r} J R) with
       ⟨γ, hγ, hρ⟩
     rcases K.rightUnitor_model P hP with ⟨β, hβ, heβ⟩
-    rcases KU.rightUnitor_model (F.obj P) (d.kflat P hP fP).1 with ⟨βU, hβU, heβU⟩
+    rcases KU.rightUnitor_model (F.obj P) (d₀.kflat P hP fP).1 with ⟨βU, hβU, heβU⟩
     rw [K.tensorIso_both P O hP (unit_kflat.{c, v, r} J R)] at heβ
     have hchain : F.map β.hom = γ.hom ≫
         (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
@@ -410,12 +485,7 @@ theorem ringedSlice_scalar_unit :
       · intro k V b x
         set_option backward.isDefEq.respectTransparency.types false in
         set_option backward.isDefEq.respectTransparency false in
-         change b • x = (βU.hom.f k).val.app V
-          ((((coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
-            (𝟙 (F.obj P), e.hom)).f k).val.app V
-              (coefficientTensorGenerator.{r, max c v, v} (J.over U) (R.over U)
-                (F.obj P) (F.obj O) k 0 k (Int.add_zero k) V x
-                (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b)))
+         change b • x = _
         rewrite [tensorGenerator_map]
         simp only [HomologicalComplex.id_f, SheafOfModules.id_val,
           PresheafOfModules.id_app, ModuleCat.id_apply]
@@ -427,15 +497,15 @@ theorem ringedSlice_scalar_unit :
         set_option backward.isDefEq.respectTransparency.types false in
         set_option backward.isDefEq.respectTransparency false in
          rfl
-    let α := ringedSliceLocalizationIso.{c, v, r, w, w'} J R U
-    have hPU := (d.kflat P hP fP).1
+    let α := α₀
+    have hPU := (d₀.kflat P hP fP).1
     have hOU := unit_kflat.{max c v, v, r} (J.over U) (R.over U)
     rw [KU.tensorIso_both _ _ hPU hOU] at heβU
     let c := α.app ((coefficientTotalTensor.{r, c, v} J R).obj (P, O)) ≪≫
       DerivedCategory.Q.mapIso γ ≪≫ DerivedCategory.Q.mapIso
         ((coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).mapIso
           ((Iso.refl (F.obj P)).prod e))
-    apply scalar_of_models S SU d _ _ _ _ _ _
+    apply scalar_of_models S SU d₀ _ _ _ _ _ _
       (T.iso J R S P O hP (unit_kflat.{c, v, r} J R))
       (TU.iso (J.over U) (R.over U) SU (F.obj P) OU hPU hOU)
       (α.app P) o c K.unitIso KU.unitIso
@@ -450,7 +520,7 @@ theorem ringedSlice_scalar_unit :
         conv at hn =>
           rhs
           arg 1
-          rw [KU.tensorIso_both (F.obj P) (F.obj O) hPU (d.kflat O
+          rw [KU.tensorIso_both (F.obj P) (F.obj O) hPU (d₀.kflat O
             (unit_kflat.{c, v, r} J R) (unit_flat.{c, v, r} J R)).1]
         simp only [Functor.map_id] at hn
         dsimp only [c, o, Iso.trans_hom, Functor.mapIso_hom]
@@ -496,7 +566,7 @@ theorem ringedSlice_scalar_unit :
   have : IsIso (DerivedCategory.Q.map f) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hf
   let eP := asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso N
-  apply scalar_of_iso S SU d _ _ K.unitIso KU.unitIso o eP
+  apply scalar_of_iso S SU d₀ _ _ K.unitIso KU.unitIso o eP
   apply base P hP
   intro n
   exact (exactFunctor _ _).prop_of_iso
