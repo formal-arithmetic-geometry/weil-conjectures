@@ -170,6 +170,22 @@ private theorem associativity_transport
       simp only [Category.assoc]
       rfl
 
+private theorem tensor_associativity_of_whiskers
+    {B : Type b} [Category.{vb} B] [MonoidalCategory B]
+    {A : Type a} [Category.{va} A] [MonoidalCategory A]
+    (F : B ⥤ A)
+    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
+    (X Y Z : B)
+    (h : F.map (α_ X Y Z).hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
+        (F.obj X ◁ μ.hom.app (Y, Z)) =
+      μ.hom.app (X ⊗ Y, Z) ≫ (μ.hom.app (X, Y) ▷ F.obj Z) ≫
+        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom) :
+    F.map (α_ X Y Z).hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
+        (𝟙 (F.obj X) ⊗ₘ μ.hom.app (Y, Z)) =
+      μ.hom.app (X ⊗ Y, Z) ≫ (μ.hom.app (X, Y) ⊗ₘ 𝟙 (F.obj Z)) ≫
+        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom := by
+  simpa only [id_tensorHom, tensorHom_id] using h
+
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max c v r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
@@ -307,18 +323,8 @@ theorem ringed_forget_tensor_associator_representatives
           (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))).hom := by
   let := SB.monoidal
   let := SA.monoidal
-  change U.mapDerivedCategory.map (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
-      (DerivedCategory.Q.obj N)).hom ≫
-      μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q ⊗ DerivedCategory.Q.obj N) ≫
-      (𝟙 (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)) ⊗ₘ
-        μ.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N)) =
-    μ.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N) ≫
-      (μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⊗ₘ
-        𝟙 (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))) ≫
-      (α_ (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
-        (U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q))
-        (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))).hom
-  erw [id_tensorHom, tensorHom_id]
+  apply tensor_associativity_of_whiskers U.mapDerivedCategory μ
+    (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj N)
   let V := U.mapHomologicalComplex (.up ℤ)
   let B := coefficientTotalTensor.{r, c, v} J R
   let A := coefficientTotalTensor.{s, d, vd} J' R'
